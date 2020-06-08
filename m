@@ -2,82 +2,85 @@ Return-Path: <SRS0=2oDP=7V=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4B3F4C433DF
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 16:01:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 483F4C433E0
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 16:01:24 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1EADB206A4
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 16:01:19 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 17BB7206C3
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 16:01:24 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="Z6b9xR/6"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1EADB206A4
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="XMVNPDP+"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 17BB7206C3
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jiKCz-0003em-Bj; Mon, 08 Jun 2020 16:01:09 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jiKD4-0003hR-UI; Mon, 08 Jun 2020 16:01:14 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=8Blr=7V=redhat.com=philmd@srs-us1.protection.inumbo.net>)
- id 1jiKCx-0003eU-Ns
- for xen-devel@lists.xenproject.org; Mon, 08 Jun 2020 16:01:07 +0000
-X-Inumbo-ID: 404037ca-a9a1-11ea-b292-12813bfff9fa
-Received: from us-smtp-1.mimecast.com (unknown [205.139.110.61])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id 404037ca-a9a1-11ea-b292-12813bfff9fa;
- Mon, 08 Jun 2020 16:01:02 +0000 (UTC)
+ id 1jiKD4-0003h2-6w
+ for xen-devel@lists.xenproject.org; Mon, 08 Jun 2020 16:01:14 +0000
+X-Inumbo-ID: 46eafbaa-a9a1-11ea-96fb-bc764e2007e4
+Received: from us-smtp-delivery-1.mimecast.com (unknown [207.211.31.81])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+ id 46eafbaa-a9a1-11ea-96fb-bc764e2007e4;
+ Mon, 08 Jun 2020 16:01:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1591632061;
+ s=mimecast20190719; t=1591632073;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=r7PHbUODraiyYDfGeXtIeVn3Evhw0HgQCb8r2diF6v0=;
- b=Z6b9xR/6zTQzT8aJLK7HAeUlBDApfrpo4e9rBnTyxltheE/qgHc2cc1v8czIAtMAUDvpNt
- cQLqFn8LtRuTzC8qR1CYMc7vPEIFpJRW65zEgz5m2avS3yswR9QG7LZkdsmTkUAfRaAzM8
- ub5PD25MLbssQokfM8L3IQEpauT4e4o=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-142-TdMg-M7XNCifG-owD_E9lg-1; Mon, 08 Jun 2020 12:00:49 -0400
-X-MC-Unique: TdMg-M7XNCifG-owD_E9lg-1
-Received: by mail-wr1-f70.google.com with SMTP id p9so7360166wrx.10
- for <xen-devel@lists.xenproject.org>; Mon, 08 Jun 2020 09:00:49 -0700 (PDT)
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=O7Ly94SWL+SMdJ3uuRJWrIP/iOhgME/DwBVu03IUalo=;
+ b=XMVNPDP+pwORdzbIBc7g/MDKo1KzzqHVDxTrWAO/+n/C3cNnvWDiRULUhkcM0RmtWv6/fF
+ aJXJH75uEqSv2idrGZXb4Hx1eB4HRWReQ4Yk45AsZdg9uPUimYivqHzYtcsZVV4wmLDaMX
+ nubEISQNHbruLjAuWhMVsTrilAwVXgM=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-231-vSu2zWhsOSmHhzMJ7I1Hkg-1; Mon, 08 Jun 2020 12:01:11 -0400
+X-MC-Unique: vSu2zWhsOSmHhzMJ7I1Hkg-1
+Received: by mail-wm1-f69.google.com with SMTP id p24so11166wmc.1
+ for <xen-devel@lists.xenproject.org>; Mon, 08 Jun 2020 09:01:11 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=r7PHbUODraiyYDfGeXtIeVn3Evhw0HgQCb8r2diF6v0=;
- b=FMiXfFipkQ6PtUynE8RdFDM2abwa8Z6J2ZRk/LCulU8Yoqn1MCXQKS0u0k5GS3UKc8
- LnJjEAyLH4FTu2Gu8Z7HnVsCCO+k50e+ukO+E/D1GC1nm7K6HwJwpjddWP91T3nUAIp+
- mUb4aSl+L4CI3UyWMkZWYbfa+TudL44iO6Jd3ru+/+HLojtWoH024VxBhrcXKPTvBzGX
- cyKK0gpaZoK03tw7XIC3a8Rc9PZ7PInnmxjoMIkSc43fsYHuFxP1d2BFj7O0CtdwLhcz
- yL9yaEhGSQiMmiEnogdGI3NcD53diBqLjDXf1lSE5V/ynh2pDDwgeN1BcCnvVIUWtJdz
- s4HA==
-X-Gm-Message-State: AOAM532Rud1XM/nTGMhXzOJzBjsxcpoHOhG35pTKsG0iDdzHKbYCG7Zr
- XIXHFA0kmedQ1yLCuHC6y6qsvAlBxbUtG9q00W7araFWwHLMintY6ayPafN+KVcwku9pjAzjVjh
- A5q3fS+puiDGvXPNsVEZdC0elq0U=
-X-Received: by 2002:a5d:69cb:: with SMTP id s11mr24291797wrw.91.1591632048381; 
- Mon, 08 Jun 2020 09:00:48 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJwMtorKuHBb+MRvZ6tBeip6kyiiVi39BDg4R5E8m4jpXwbcp5IXslWyCaizAHQ0jAbG9qrLqg==
-X-Received: by 2002:a5d:69cb:: with SMTP id s11mr24291746wrw.91.1591632048080; 
- Mon, 08 Jun 2020 09:00:48 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=O7Ly94SWL+SMdJ3uuRJWrIP/iOhgME/DwBVu03IUalo=;
+ b=fAB/rMZxqiXWk1IisYOMRE21fZKko0S95HVwIS0pCcVAwByXaAp0pSWybgoe5JulbT
+ mFE9oqxCV/MEz9jxMNZUXCItq6/vMs5OkpWQNRRRxdk4ZqmUC4remXNv5cxfy2/eSDdX
+ oMQrQ0dUPwaR/x4PrN8i+VudpFgQR8WGkTbmVNOp/7F7hhKL6Jzo3QMD6gYlPh1uPE65
+ JYggDG45xg9tuCic72VAbIWnVPNSirucvGVPRJlwuZOyhjPNvz+w2x6YokGrUD7cBCJU
+ iMq5YqiA04ET4pWIJGPpSwI2s98//y2/YVtcY5gxzs1ON0xylg5/GLBsO+LaXFoRjjke
+ imiw==
+X-Gm-Message-State: AOAM533LbWRu/2p1Z9YW+Ehzzdm2djfznLmdyVz/jdh7kEeCo99TAa+q
+ G/ttdOq8NXlZuJI5jsm6lfFJdzmJ4iQEdasRj5F4YJ48ywh9feWklOOpUP/POpKAcVzKBylzlFd
+ OQ28Lt+R1lFr+WEsx7WKxx4txTVA=
+X-Received: by 2002:a5d:6acf:: with SMTP id u15mr25749793wrw.277.1591632070227; 
+ Mon, 08 Jun 2020 09:01:10 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzcPzEmUfH07HRp9H1Y3tf4BoKsOaXn7cpLkhpXaJ1S6O0iNu0DeeV5KKJL41RODtirsARieQ==
+X-Received: by 2002:a5d:6acf:: with SMTP id u15mr25749771wrw.277.1591632069976; 
+ Mon, 08 Jun 2020 09:01:09 -0700 (PDT)
 Received: from localhost.localdomain
  (181.red-88-10-103.dynamicip.rima-tde.net. [88.10.103.181])
- by smtp.gmail.com with ESMTPSA id o15sm175107wrv.48.2020.06.08.09.00.46
+ by smtp.gmail.com with ESMTPSA id e12sm163622wro.52.2020.06.08.09.01.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jun 2020 09:00:47 -0700 (PDT)
+ Mon, 08 Jun 2020 09:01:09 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
 To: qemu-devel@nongnu.org
-Subject: [RFC PATCH 00/35] hw/qdev: Warn when using pre-qdev/QOM devices
-Date: Mon,  8 Jun 2020 18:00:09 +0200
-Message-Id: <20200608160044.15531-1-philmd@redhat.com>
+Subject: [RFC PATCH 04/35] hw/arm/pxa2xx: Emit warning when old code is used
+Date: Mon,  8 Jun 2020 18:00:13 +0200
+Message-Id: <20200608160044.15531-5-philmd@redhat.com>
 X-Mailer: git-send-email 2.21.3
+In-Reply-To: <20200608160044.15531-1-philmd@redhat.com>
+References: <20200608160044.15531-1-philmd@redhat.com>
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
@@ -120,109 +123,78 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Based on today's IRC chat, this is a trivial RFC series
-to anotate pre-qdev/QOM devices so developers using them
-without knowing they are not QOM'ified yet can realize
-it and convert them if they have time.
+This code hasn't been QOM'ified yet. Warn the user.
 
-qdev/QOM devices are introspectable, so easier to test
-or even fuzz.
+Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+---
+ hw/arm/pxa2xx.c          | 3 +++
+ hw/display/pxa2xx_lcd.c  | 3 +++
+ hw/input/pxa2xx_keypad.c | 3 +++
+ 3 files changed, 9 insertions(+)
 
-Philippe Mathieu-Daudé (35):
-  qom/object: Update documentation
-  hw/core/qdev: Add qdev_warn_deprecated_function_used() helper
-  hw/arm/omap: Emit warning when old code is used
-  hw/arm/pxa2xx: Emit warning when old code is used
-  hw/arm/nseries: Emit warning when old code is used
-  hw/timer/arm_timer: Emit warning when old code is used
-  hw/char/parallel: Emit warning when old code is used
-  hw/display/blizzard: Emit warning when old code is used
-  hw/display/ramfb: Emit warning when old code is used
-  hw/display/tc6393xb: Emit warning when old code is used
-  hw/display/vga-isa-mm: Emit warning when old code is used
-  hw/dma/etraxfs_dma: Emit warning when old code is used
-  hw/dma/soc_dma: Emit warning when old code is used
-  hw/i386/pc: Emit warning when old code is used
-  hw/i386/xen/xen-hvm: Emit warning when old code is used
-  hw/input/lasips2: Emit warning when old code is used
-  hw/input/pckbd: Emit warning when old code is used
-  hw/input/ps2: Emit warning when old code is used
-  hw/input/tsc2005: Emit warning when old code is used
-  hw/intc/i8259: Emit warning when old code is used
-  hw/lm32/lm32_hwsetup: Emit warning when old code is used
-  hw/m68k/mcf520x: Emit warning when old code is used
-  hw/misc/applesmc: Emit warning when old code is used
-  hw/misc/cbus: Emit warning when old code is used
-  hw/nvram/eeprom93xx: Emit warning when old code is used
-  hw/openrisc/cputimer: Emit warning when old code is used
-  hw/ppc/ppc: Emit warning when old code is used
-  hw/ppc/ppc4xx: Emit warning when old code is used
-  hw/ppc/ppc_booke: Emit warning when old code is used
-  hw/ppc/virtex_ml507: Emit warning when old code is used
-  hw/sh4: Emit warning when old code is used
-  hw/riscv: Emit warning when old code is used
-  hw/timer/slavio_timer: Emit warning when old code is used
-  hw/usb/hcd-musb: Emit warning when old code is used
-  hw/xtensa/xtfpga: Emit warning when old code is used
-
- configure                    |  8 ++++++++
- hw/lm32/lm32_hwsetup.h       |  3 +++
- include/hw/qdev-deprecated.h | 26 ++++++++++++++++++++++++++
- include/qom/object.h         |  6 +++---
- hw/arm/nseries.c             |  2 ++
- hw/arm/omap1.c               |  6 ++++++
- hw/arm/pxa2xx.c              |  3 +++
- hw/char/omap_uart.c          |  5 +++++
- hw/char/parallel.c           |  3 +++
- hw/char/sh_serial.c          |  3 +++
- hw/core/qdev.c               |  8 ++++++++
- hw/display/blizzard.c        |  3 +++
- hw/display/pxa2xx_lcd.c      |  3 +++
- hw/display/ramfb.c           |  3 +++
- hw/display/tc6393xb.c        |  3 +++
- hw/display/vga-isa-mm.c      |  5 +++++
- hw/display/vga.c             |  3 +++
- hw/dma/etraxfs_dma.c         |  4 +++-
- hw/dma/soc_dma.c             |  3 +++
- hw/i386/pc.c                 |  3 +++
- hw/i386/xen/xen-hvm.c        |  4 +++-
- hw/input/lasips2.c           |  4 +++-
- hw/input/pckbd.c             |  4 +++-
- hw/input/ps2.c               |  6 +++++-
- hw/input/pxa2xx_keypad.c     |  3 +++
- hw/input/tsc2005.c           |  3 +++
- hw/intc/i8259.c              |  3 +++
- hw/intc/sh_intc.c            |  3 +++
- hw/m68k/mcf5206.c            |  5 +++++
- hw/m68k/mcf5208.c            |  3 +++
- hw/misc/applesmc.c           |  3 +++
- hw/misc/cbus.c               |  3 +++
- hw/misc/omap_gpmc.c          |  3 +++
- hw/misc/omap_l4.c            |  3 +++
- hw/misc/omap_sdrc.c          |  3 +++
- hw/nvram/eeprom93xx.c        |  3 +++
- hw/openrisc/cputimer.c       |  3 +++
- hw/ppc/ppc.c                 |  3 +++
- hw/ppc/ppc405_boards.c       |  5 +++++
- hw/ppc/ppc405_uc.c           | 21 +++++++++++++++++++++
- hw/ppc/ppc4xx_devs.c         |  7 +++++++
- hw/ppc/ppc_booke.c           |  4 +++-
- hw/ppc/virtex_ml507.c        |  4 +++-
- hw/riscv/riscv_htif.c        |  4 ++++
- hw/riscv/sifive_uart.c       |  4 ++++
- hw/sd/omap_mmc.c             |  5 +++++
- hw/sh4/r2d.c                 |  3 +++
- hw/sh4/sh7750.c              |  4 ++++
- hw/ssi/omap_spi.c            |  3 +++
- hw/timer/arm_timer.c         |  3 +++
- hw/timer/omap_synctimer.c    |  4 ++++
- hw/timer/sh_timer.c          |  5 +++++
- hw/timer/slavio_timer.c      |  3 +++
- hw/usb/hcd-musb.c            |  3 +++
- hw/xtensa/xtfpga.c           |  3 +++
- 55 files changed, 240 insertions(+), 10 deletions(-)
- create mode 100644 include/hw/qdev-deprecated.h
-
+diff --git a/hw/arm/pxa2xx.c b/hw/arm/pxa2xx.c
+index e649f8930c..483003d161 100644
+--- a/hw/arm/pxa2xx.c
++++ b/hw/arm/pxa2xx.c
+@@ -27,6 +27,7 @@
+ #include "sysemu/qtest.h"
+ #include "qemu/cutils.h"
+ #include "qemu/log.h"
++#include "hw/qdev-deprecated.h"
+ 
+ static struct {
+     hwaddr io_base;
+@@ -1768,6 +1769,8 @@ static PXA2xxI2SState *pxa2xx_i2s_init(MemoryRegion *sysmem,
+ {
+     PXA2xxI2SState *s = g_new0(PXA2xxI2SState, 1);
+ 
++    qdev_warn_deprecated_function_used();
++
+     s->irq = irq;
+     s->rx_dma = rx_dma;
+     s->tx_dma = tx_dma;
+diff --git a/hw/display/pxa2xx_lcd.c b/hw/display/pxa2xx_lcd.c
+index ff90104b80..cf6241ff21 100644
+--- a/hw/display/pxa2xx_lcd.c
++++ b/hw/display/pxa2xx_lcd.c
+@@ -20,6 +20,7 @@
+ /* FIXME: For graphic_rotate. Should probably be done in common code.  */
+ #include "sysemu/sysemu.h"
+ #include "framebuffer.h"
++#include "hw/qdev-deprecated.h"
+ 
+ struct DMAChannel {
+     uint32_t branch;
+@@ -1011,6 +1012,8 @@ PXA2xxLCDState *pxa2xx_lcdc_init(MemoryRegion *sysmem,
+     PXA2xxLCDState *s;
+     DisplaySurface *surface;
+ 
++    qdev_warn_deprecated_function_used();
++
+     s = (PXA2xxLCDState *) g_malloc0(sizeof(PXA2xxLCDState));
+     s->invalidated = 1;
+     s->irq = irq;
+diff --git a/hw/input/pxa2xx_keypad.c b/hw/input/pxa2xx_keypad.c
+index 62aa6f6b15..6de1e9e4bb 100644
+--- a/hw/input/pxa2xx_keypad.c
++++ b/hw/input/pxa2xx_keypad.c
+@@ -17,6 +17,7 @@
+ #include "migration/vmstate.h"
+ #include "hw/arm/pxa.h"
+ #include "ui/console.h"
++#include "hw/qdev-deprecated.h"
+ 
+ /*
+  * Keypad
+@@ -316,6 +317,8 @@ PXA2xxKeyPadState *pxa27x_keypad_init(MemoryRegion *sysmem,
+ {
+     PXA2xxKeyPadState *s;
+ 
++    qdev_warn_deprecated_function_used();
++
+     s = (PXA2xxKeyPadState *) g_malloc0(sizeof(PXA2xxKeyPadState));
+     s->irq = irq;
+ 
 -- 
 2.21.3
 
