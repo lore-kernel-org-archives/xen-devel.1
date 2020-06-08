@@ -2,60 +2,60 @@ Return-Path: <SRS0=2oDP=7V=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-8.3 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 143D8C433DF
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 22:55:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4795BC433E1
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 23:07:20 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DD053206D5
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 22:55:54 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 1ADD420885
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 23:07:20 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="vxd2TBIS"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DD053206D5
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="IAKP9+uy"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1ADD420885
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jiQgB-00027c-Ca; Mon, 08 Jun 2020 22:55:43 +0000
+	id 1jiQr6-00034T-EE; Mon, 08 Jun 2020 23:07:00 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=yn46=7V=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1jiQg9-00027Q-DH
- for xen-devel@lists.xenproject.org; Mon, 08 Jun 2020 22:55:41 +0000
-X-Inumbo-ID: 2cf23418-a9db-11ea-b2c4-12813bfff9fa
+ id 1jiQr6-00034O-1L
+ for xen-devel@lists.xenproject.org; Mon, 08 Jun 2020 23:07:00 +0000
+X-Inumbo-ID: c16e39e2-a9dc-11ea-b2c4-12813bfff9fa
 Received: from mail.kernel.org (unknown [198.145.29.99])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 2cf23418-a9db-11ea-b2c4-12813bfff9fa;
- Mon, 08 Jun 2020 22:55:40 +0000 (UTC)
+ id c16e39e2-a9dc-11ea-b2c4-12813bfff9fa;
+ Mon, 08 Jun 2020 23:06:59 +0000 (UTC)
 Received: from localhost (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id DE7B8206D5;
- Mon,  8 Jun 2020 22:55:39 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 6C48520820;
+ Mon,  8 Jun 2020 23:06:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1591656940;
- bh=lmj78NsywzOH58ADrFq/+/zw3NLJPj16X1Kl9wTzZlA=;
+ s=default; t=1591657618;
+ bh=9kgiWfc80bQ1pFTP10CoDvlD9i3E2sMoZB2p3Vvgd/g=;
  h=Date:From:To:cc:Subject:In-Reply-To:References:From;
- b=vxd2TBISH8H0Cfr4Y2boYussvZELUi1dGQYCN0391gCqf+M+zEHTxMJ3eiBCXwo/m
- Qcaay/hGXQIgfxgQfJp6K0fsW1H0JquhtId6jMP4h7XA9wKQlvbZd8pIDvL8CaAR+0
- VU9uq18isLanuFMVY8NzMiP+1IEas3OaCgSqXiUI=
-Date: Mon, 8 Jun 2020 15:55:39 -0700 (PDT)
+ b=IAKP9+uyhx+Mw+/ttmtWvmUV5DWr7Hx4rynsr/VlhWY7naVEcoN2oD/N3/5SjrSVB
+ EmHPS5CiBaqDmNLIqVqDyRmUgYL0/hy7nAFMhxlSh1iB+5l18sVCmDe/ECVJA17l06
+ HJUi2skFlwTFsob6tOCCspquwIIueUlnqfhHl8Bo=
+Date: Mon, 8 Jun 2020 16:06:57 -0700 (PDT)
 From: Stefano Stabellini <sstabellini@kernel.org>
 X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
 To: Christoph Hellwig <hch@infradead.org>
-Subject: Re: [PATCH v2 03/11] swiotlb-xen: add struct device* parameter to
- xen_phys_to_bus
-In-Reply-To: <20200608070507.GB15742@infradead.org>
-Message-ID: <alpine.DEB.2.21.2006081539550.2815@sstabellini-ThinkPad-T480s>
+Subject: Re: [PATCH v2 08/11] swiotlb-xen: introduce phys_to_dma/dma_to_phys
+ translations
+In-Reply-To: <20200608070850.GD15742@infradead.org>
+Message-ID: <alpine.DEB.2.21.2006081558400.2815@sstabellini-ThinkPad-T480s>
 References: <alpine.DEB.2.21.2006031506590.6774@sstabellini-ThinkPad-T480s>
- <20200603222247.11681-3-sstabellini@kernel.org>
- <20200608070507.GB15742@infradead.org>
+ <20200603222247.11681-8-sstabellini@kernel.org>
+ <20200608070850.GD15742@infradead.org>
 User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
@@ -77,19 +77,78 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 On Mon, 8 Jun 2020, Christoph Hellwig wrote:
-> On Wed, Jun 03, 2020 at 03:22:39PM -0700, Stefano Stabellini wrote:
+> On Wed, Jun 03, 2020 at 03:22:44PM -0700, Stefano Stabellini wrote:
 > > From: Stefano Stabellini <stefano.stabellini@xilinx.com>
 > > 
-> > The parameter is unused in this patch.
-> > No functional changes.
+> > With some devices physical addresses are different than dma addresses.
+> > To be able to deal with these cases, we need to call phys_to_dma on
+> > physical addresses (including machine addresses in Xen terminology)
+> > before returning them from xen_swiotlb_alloc_coherent and
+> > xen_swiotlb_map_page.
+> > 
+> > We also need to convert dma addresses back to physical addresses using
+> > dma_to_phys in xen_swiotlb_free_coherent and xen_swiotlb_unmap_page if
+> > we want to do any operations on them.
+> > 
+> > Call dma_to_phys in is_xen_swiotlb_buffer.
+> > Call phys_to_dma in xen_phys_to_bus.
+> > Call dma_to_phys in xen_bus_to_phys.
+> > 
+> > Everything is taken care of by these changes except for
+> > xen_swiotlb_alloc_coherent and xen_swiotlb_free_coherent, which need a
+> > few explicit phys_to_dma/dma_to_phys calls.
+> > 
+> > Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
+> > Tested-by: Corey Minyard <cminyard@mvista.com>
+> > Tested-by: Roman Shaposhnik <roman@zededa.com>
+> > ---
+> > Changes in v2:
+> > - improve commit message
+> > ---
+> >  drivers/xen/swiotlb-xen.c | 22 ++++++++++++----------
+> >  1 file changed, 12 insertions(+), 10 deletions(-)
+> > 
+> > diff --git a/drivers/xen/swiotlb-xen.c b/drivers/xen/swiotlb-xen.c
+> > index 0a6cb67f0fc4..60ef07440905 100644
+> > --- a/drivers/xen/swiotlb-xen.c
+> > +++ b/drivers/xen/swiotlb-xen.c
+> > @@ -64,16 +64,16 @@ static inline dma_addr_t xen_phys_to_bus(struct device *dev, phys_addr_t paddr)
+> >  
+> >  	dma |= paddr & ~XEN_PAGE_MASK;
+> >  
+> > -	return dma;
+> > +	return phys_to_dma(dev, dma);
 > 
-> This looks weird.  I'm pretty sure you are going to use it later, but
-> why not just add the argument when it actually is used?
+> So looking at this function:
+> 
+> The dma name for something passed to phys_to_dma is really
+> weird.
 
-It is just a matter of taste. Xen reviewers tend to ask for splitting
-patches into small chunks, especially large verbose non-functional
-changes like renaming or adding parameters. It is supposed to make it
-easier to review, to make it easier not to get distracted by
-renaming/non-functional changes while looking at the important changes.
-As a contributor, I am happy either way.
+Yeah, that is true, I am not sure why I chose that confusing name. I'll
+rename it.
+
+
+> The fact that the comments says don't use XEN_PFN_PHYS
+> beause of the type mismatch while nothing but swiotlb-xen is the only
+> user of XEN_PFN_PHYS is also weird.  I think XEN_PFN_PHYS needs to move
+> to swiotlb-xen first, then use a hardcoded u64 for the size, and the
+> split the function into a phys_to_xen_phys (or so) function where
+> the result gets passed to phys_to_dma.
+
+I understand what you are suggesting about having something like:
+
+    xen_phys_to_dma(...)
+    {
+        phys_addr_t phys = xen_phys_to_bus(dev, paddr)
+        return phys_to_dma(phys);
+    }
+
+I thought about it myself. I'll do it.
+
+But I don't think I understood the comment about XEN_PFN_PHYS.
+
+
+> Similar for the reverse direction.
+
+OK
 
