@@ -2,88 +2,62 @@ Return-Path: <SRS0=2oDP=7V=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
-	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-0.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 18EAAC433E1
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 06:57:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A3002C433DF
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 07:04:55 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DDF3F206A4
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 06:57:28 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 71744206A4
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 07:04:55 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="RmkY//iz"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DDF3F206A4
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="K6P/0nS7"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 71744206A4
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jiBiX-00075K-LP; Mon, 08 Jun 2020 06:57:09 +0000
+	id 1jiBpg-00083W-E8; Mon, 08 Jun 2020 07:04:32 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=9p0X=7V=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
- id 1jiBiW-00075F-0D
- for xen-devel@lists.xenproject.org; Mon, 08 Jun 2020 06:57:08 +0000
-X-Inumbo-ID: 441a3388-a955-11ea-96fb-bc764e2007e4
-Received: from mail-ed1-x541.google.com (unknown [2a00:1450:4864:20::541])
+ <SRS0=Ohtu=7V=bombadil.srs.infradead.org=batv+c8e86b2099343dd9fc1e+6133+infradead.org+hch@srs-us1.protection.inumbo.net>)
+ id 1jiBpf-00082n-2K
+ for xen-devel@lists.xenproject.org; Mon, 08 Jun 2020 07:04:31 +0000
+X-Inumbo-ID: 4429b7bc-a956-11ea-96fb-bc764e2007e4
+Received: from bombadil.infradead.org (unknown [2607:7c80:54:e::133])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 441a3388-a955-11ea-96fb-bc764e2007e4;
- Mon, 08 Jun 2020 06:57:07 +0000 (UTC)
-Received: by mail-ed1-x541.google.com with SMTP id q13so12484682edi.3
- for <xen-devel@lists.xenproject.org>; Sun, 07 Jun 2020 23:57:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:reply-to:to:cc:references:in-reply-to:subject:date:message-id
- :mime-version:content-transfer-encoding:content-language
- :thread-index; bh=7K9fVA8fnBITxOEn7HyaE9CzhB49ZAxRiYx5HD9McHY=;
- b=RmkY//izegF54FzYu1u/rApVmEdvNDeh3joGb1JiAWI9IO8lr/R/63wvRYuu13/XNW
- pmzQtLesVUnb/Vf28wzUlmOvhtWEmQtn/3nJdhhKlTzdlU/yL77B9whRva669G1OUXcZ
- nM0Zode9onRj/4pFJde6oFf67DNbqu14cGcrW12xuVD0kImKF1s33EMZOZQCbMsrXQ10
- wb8NQHiGeR3amTRbsK1iCK2gKtGhAtfMsaNdtBMRan7NeezmV9JuBcSnCupfURCFrJaf
- WPsO6oVelONM1mssYlXvPO4b+LvhzafM+ohSL0O7Xu3S7AajcsbeZozry/Z5D9OBnNhe
- xQbQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:reply-to:to:cc:references:in-reply-to
- :subject:date:message-id:mime-version:content-transfer-encoding
- :content-language:thread-index;
- bh=7K9fVA8fnBITxOEn7HyaE9CzhB49ZAxRiYx5HD9McHY=;
- b=lc41+F+yn6MxjMGOnctEU4RFEl4qmaCbYQQDOJKjxc8WSh64Qs0BWw42X0O4aZXhy0
- gEkpFy5IBuslS8zcdjxZFGrSNRANSkfSK8urThCsvrWaN5hisuVL+Jwg5ugkSLv6Vb0w
- AAaq6QV8t0LXL2Ws8m81g+XUYmkWQtwc9tpId8WpsPfuCEFM56xEUwdf4fxEo/vYxVnt
- oEu1Fk7c9XjjeVNFITI5Qy4CRNWmTMhwMDRF/Cim8jjlm4AbObpOzvcW3IEJYnGz+i/K
- RhxMnIB0kQBnPlnTgCd+sL91SKoARULY263HyCx4G7Sr7X6Ahk7+ONDsI12bplwUrOjC
- c5mg==
-X-Gm-Message-State: AOAM532EZEefRVOVXD0yuUqXn/HdQQ2fgakiL7wyxmGySfPfawNjgesi
- zYtKtYrxGFQoSeyM2CX/Uvw=
-X-Google-Smtp-Source: ABdhPJxtQA7+v4NGtIDpi6p+3NRJ9oJydGUDfXD3OPH4BSekI6f5bTK6a4mc1BOfVer6wxdwzyyD1g==
-X-Received: by 2002:a05:6402:1d29:: with SMTP id
- dh9mr20534849edb.269.1591599426452; 
- Sun, 07 Jun 2020 23:57:06 -0700 (PDT)
-Received: from CBGR90WXYV0 ([54.239.6.186])
- by smtp.gmail.com with ESMTPSA id g61sm11601934ede.96.2020.06.07.23.57.05
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Sun, 07 Jun 2020 23:57:05 -0700 (PDT)
-From: Paul Durrant <xadimgnik@gmail.com>
-X-Google-Original-From: "Paul Durrant" <paul@xen.org>
-To: "'Julien Grall'" <julien@xen.org>,
-	<xen-devel@lists.xenproject.org>
-References: <20200607155154.15928-1-julien@xen.org>
-In-Reply-To: <20200607155154.15928-1-julien@xen.org>
-Subject: RE: [PATCH for-4.14] xen/arm: mm: Access a PT entry before the table
- is unmapped
-Date: Mon, 8 Jun 2020 07:57:04 +0100
-Message-ID: <001801d63d62$053ecf20$0fbc6d60$@xen.org>
+ id 4429b7bc-a956-11ea-96fb-bc764e2007e4;
+ Mon, 08 Jun 2020 07:04:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=kOgcUHX0zNsLgrzKIZZVZ5HbxzYUV6u6MWDbb+56ot4=; b=K6P/0nS7ZwAPQ6b6LI1ZuIGzyy
+ ZsIOCpn8sIKiwGcRm/viCmJMlJo1qAUGgZGwQiu6PxEL0xZYhDh1APKzKZmtiFiyds86D/Jy++Q2J
+ obCYjtQP8fFufQa0NW/FUBuBr3eplMnoM1YyDMB+VqppJJ1pxfKZDFUc9V0Ma4EfL2d64Ok5cSzLv
+ ymfhxvD2A20eHhIay4/PnULLqqE3bh19DaICVqjssKuxl4nIN0T2TBnA9p+u+TRd1jQoNtzOmbmOD
+ o2F1k1ZEvu/MlL9t7pjju9m0J/YJoZBe5fIonIAs2eTO+qHFoWilwSzMI/oWm6SCU77ywPLyTbth7
+ +jNXKQNg==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
+ Hat Linux)) id 1jiBpL-0000kv-Rr; Mon, 08 Jun 2020 07:04:11 +0000
+Date: Mon, 8 Jun 2020 00:04:11 -0700
+From: Christoph Hellwig <hch@infradead.org>
+To: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH v2 01/11] swiotlb-xen: use vmalloc_to_page on vmalloc
+ virt addresses
+Message-ID: <20200608070411.GA15742@infradead.org>
+References: <alpine.DEB.2.21.2006031506590.6774@sstabellini-ThinkPad-T480s>
+ <20200603222247.11681-1-sstabellini@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain;
-	charset="US-ASCII"
-Content-Transfer-Encoding: 7bit
-X-Mailer: Microsoft Outlook 16.0
-Content-Language: en-gb
-Thread-Index: AQHJdNA9DFLPMohWTRTVE9LH4GQ7qKjn2eig
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20200603222247.11681-1-sstabellini@kernel.org>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ bombadil.infradead.org. See http://www.infradead.org/rpr.html
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -94,81 +68,28 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Reply-To: paul@xen.org
-Cc: 'Julien Grall' <jgrall@amazon.com>,
- 'Stefano Stabellini' <sstabellini@kernel.org>,
- 'Volodymyr Babchuk' <Volodymyr_Babchuk@epam.com>
+Cc: jgross@suse.com, tamas@tklengyel.com, konrad.wilk@oracle.com,
+ roman@zededa.com, linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org,
+ boris.ostrovsky@oracle.com, Stefano Stabellini <stefano.stabellini@xilinx.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-> -----Original Message-----
-> From: Julien Grall <julien@xen.org>
-> Sent: 07 June 2020 16:52
-> To: xen-devel@lists.xenproject.org
-> Cc: paul@xen.org; Julien Grall <jgrall@amazon.com>; Stefano Stabellini <sstabellini@kernel.org>;
-> Julien Grall <julien@xen.org>; Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-> Subject: [PATCH for-4.14] xen/arm: mm: Access a PT entry before the table is unmapped
-> 
-> From: Julien Grall <jgrall@amazon.com>
-> 
-> xen_pt_next_level() will retrieve the MFN from the entry right after the
-> page-table has been unmapped.
-> 
-> After calling xen_unmap_table(), there is no guarantee the mapping will
-> still be valid. Depending on the implementation, this may result to a
-> data abort in Xen.
-> 
-> Re-order the code to retrieve the MFN before the table is unmapped.
-> 
-> Fixes: 53abb9a1dcd9 ("xen/arm: mm: Rework Xen page-tables walk during update")
-> Signed-off-by: Julien Grall <jgrall@amazon.com>
-> 
+Well, this isn't just RPi4, but basically any ARM or ARM64 system
+with non-coherent DMA (which is most of them).
 
-Release-acked-by: Paul Durrant <paul@xen.org>
+> +	struct page *pg;
 
-> ---
-> 
-> I spotted this issue while reworking how page-tables are mapped on Arm64
-> during early boot. However the problem should be already there on Arm32.
-> 
-> I am actually quite amazed we haven't seen any crash on Arm32 because
-> there is no direct map. So the mapping will not exist after calling
-> xen_unmap_table().
-> 
-> I suspect this works because unmap_domain_page() doesn't flush the
-> TLBs. So the TLB still likely have the entry cached (joy!).
-> 
-> This patch is a candidate for Xen 4.14 and should also be backported.
-> ---
->  xen/arch/arm/mm.c | 5 ++++-
->  1 file changed, 4 insertions(+), 1 deletion(-)
-> 
-> diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
-> index 1b14f4934570..9e2ff7c8005d 100644
-> --- a/xen/arch/arm/mm.c
-> +++ b/xen/arch/arm/mm.c
-> @@ -1036,6 +1036,7 @@ static int xen_pt_next_level(bool read_only, unsigned int level,
->  {
->      lpae_t *entry;
->      int ret;
-> +    mfn_t mfn;
-> 
->      entry = *table + offset;
-> 
-> @@ -1053,8 +1054,10 @@ static int xen_pt_next_level(bool read_only, unsigned int level,
->      if ( lpae_is_mapping(*entry, level) )
->          return XEN_TABLE_SUPER_PAGE;
-> 
-> +    mfn = lpae_get_mfn(*entry);
-> +
->      xen_unmap_table(*table);
-> -    *table = xen_map_table(lpae_get_mfn(*entry));
-> +    *table = xen_map_table(mfn);
-> 
->      return XEN_TABLE_NORMAL_PAGE;
->  }
-> --
-> 2.17.1
+Please spell out page.
 
+>  
+>  	if (hwdev && hwdev->coherent_dma_mask)
+>  		dma_mask = hwdev->coherent_dma_mask;
+> @@ -346,9 +347,11 @@ xen_swiotlb_free_coherent(struct device *hwdev, size_t size, void *vaddr,
+>  	/* Convert the size to actually allocated. */
+>  	size = 1UL << (order + XEN_PAGE_SHIFT);
+>  
+> +	pg = is_vmalloc_addr(vaddr) ? vmalloc_to_page(vaddr) :
+> +				      virt_to_page(vaddr);
 
+Please use plain old if/else to make this more readable.
 
