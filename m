@@ -7,78 +7,77 @@ X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C808C433E0
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 16:02:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 879CBC433DF
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 16:02:21 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 10E18206A4
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 16:02:14 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 5929E206A4
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 16:02:21 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="SNg3Vw1w"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 10E18206A4
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="FstAH5Dz"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5929E206A4
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jiKDs-0004B7-LE; Mon, 08 Jun 2020 16:02:04 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jiKDz-0004GK-UC; Mon, 08 Jun 2020 16:02:11 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=8Blr=7V=redhat.com=philmd@srs-us1.protection.inumbo.net>)
- id 1jiKDr-0004AK-Ku
- for xen-devel@lists.xenproject.org; Mon, 08 Jun 2020 16:02:03 +0000
-X-Inumbo-ID: 648e11a6-a9a1-11ea-b292-12813bfff9fa
+ id 1jiKDy-0004FG-B1
+ for xen-devel@lists.xenproject.org; Mon, 08 Jun 2020 16:02:10 +0000
+X-Inumbo-ID: 68a82808-a9a1-11ea-9b55-bc764e2007e4
 Received: from us-smtp-delivery-1.mimecast.com (unknown [205.139.110.61])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id 648e11a6-a9a1-11ea-b292-12813bfff9fa;
- Mon, 08 Jun 2020 16:02:03 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+ id 68a82808-a9a1-11ea-9b55-bc764e2007e4;
+ Mon, 08 Jun 2020 16:02:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1591632122;
+ s=mimecast20190719; t=1591632129;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=JPFQ0bX3Ul9NeHHcjGis7Hob0YUuGxD/aHEXimgfPe0=;
- b=SNg3Vw1wOv3e531S7bQvEPa0ySxt/QmIxqGPmHm/U1zxU1WjNFWluxou2WsblLYn2lyaBM
- tWW3Vjg0Ms+1vtmiSD1HfOBfIBEXNjXKjrV04oUxlAqtQaMwUvew9W0ltKOY5mwQYPF0DX
- w8mMKJPlge1H2E7RMOkn/Rn4IoSse68=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-42-l8Bl9tn2MCqI9ozdZXHAHQ-1; Mon, 08 Jun 2020 12:01:16 -0400
-X-MC-Unique: l8Bl9tn2MCqI9ozdZXHAHQ-1
-Received: by mail-wr1-f71.google.com with SMTP id c14so7301677wrw.11
- for <xen-devel@lists.xenproject.org>; Mon, 08 Jun 2020 09:01:16 -0700 (PDT)
+ bh=swd27F6/1+WGmnfSzwg22l5POZg58LkwHV81fIkNGaQ=;
+ b=FstAH5DzUckULHIdThFTTCVGLMNQq15alAlW3hM6uGHmUhc92odcT1RedTTk4iyV6NYp0X
+ QkdabGfWI4RvkDlSEr8ZMxGGSlqx4xZigzmeBgmfLl2zlHM/u/9LScZSlR7ExlG10K1wTW
+ FHHhPlI2u8Uq1k4txdSaFwsh+1J8w3E=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-376-S4pWr-85NjG2Ds4FfRrF6w-1; Mon, 08 Jun 2020 12:02:08 -0400
+X-MC-Unique: S4pWr-85NjG2Ds4FfRrF6w-1
+Received: by mail-wm1-f69.google.com with SMTP id j128so6684wmj.6
+ for <xen-devel@lists.xenproject.org>; Mon, 08 Jun 2020 09:02:07 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=JPFQ0bX3Ul9NeHHcjGis7Hob0YUuGxD/aHEXimgfPe0=;
- b=JHuZ41yMKsrE7iToceMc9W8Sx1VA4Yhzp7GST67+JuTT8b8fg8j9SQCH5R54zbcgO4
- Yi9M9QzQVmMfXkpGK9iJP4I4Hc8u0HgtKRsVJtJN2GjmwTUgpIcug4W8K9srpmwgRBkn
- LwWvbRnBa5CC/oMxWE2YqjslQTCnLl+p18pP5Fp85kppjVgVf8n1TkR020pfKbLgI/cF
- RZXNx6T35Uvh8qFSv200cBLYpb/7mnG9Br1jDQy0KqvdO8Ql4P6v9cgCtV0AECdjZVwz
- 6lvcqKIJRcUxtCxuLZIGVFd35feupXj6/B+SmKjVkeFj8hHACK0GUoackEOjycuip20K
- 1PWQ==
-X-Gm-Message-State: AOAM5322JTqBec5Ssuo3B6IIWMS1HWbMWe4JvSYL0N5058hZnPhV8Zju
- eCh/yXIM0J1WOPkpA3oFd9o6FEnjYLKF3rYVliznpULAPj+hzeh2pza0dhsABPSS6kBYTW+sEpI
- 9yyKQpB8+itw4giaEg//xfC5l5oQ=
-X-Received: by 2002:a1c:63c2:: with SMTP id x185mr71332wmb.68.1591632075683;
- Mon, 08 Jun 2020 09:01:15 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJwHSTbXCqkGc9kOsbxhlXHtghZhPx9xWZVb7ZeU/GWo7Q7cDZTZJUQ93U+AAUtsWNU3dUVBvg==
-X-Received: by 2002:a1c:63c2:: with SMTP id x185mr71295wmb.68.1591632075484;
- Mon, 08 Jun 2020 09:01:15 -0700 (PDT)
+ bh=swd27F6/1+WGmnfSzwg22l5POZg58LkwHV81fIkNGaQ=;
+ b=E81JLIStopXH1hzW6Svk99WyAwEp0rs66f7wPoBBJn1p9iThaLK7f2O6UsqbYY/b7u
+ 4pPDlNqCF44MBTKbo8NdLcjuacYsWgwSV/XIV4Wt3OYcRx0fFLhyKl7AaOz6wP6jjEQz
+ 7JdflL52IHEC1YIYF/hEGDEoh+BK8rfG27+ZFVkk3hG1vUIT3qGczoV/sJU0wTPrE1jy
+ 2jhgL6EfnM1os5m2cvMiCTiUP0pU8g9Kzod8ruEJgemmRjwkwMbrc6xdLk/3a3yYNu+S
+ 6UF/uwTydYw8z9u7xdv3hj/+O/PpyUpXe8E85StSNU2meBaV+LjLrRjZZW1lFdtciFKy
+ XRcA==
+X-Gm-Message-State: AOAM531UFThT6jK5QZFqMPt3mFMtxgAIeSKg8VkxU4VGZQJMKrsfqwvL
+ OoZBjYyYTKBemVS69OmvjWmzJ4ALjo38UtCc79EVi1191de3ygR5OM7pdkY4DMPEd6nkiCkTGOC
+ F983tbwRpBiTj1tL/aPSdhAksOUw=
+X-Received: by 2002:a1c:cc0d:: with SMTP id h13mr58663wmb.168.1591632126777;
+ Mon, 08 Jun 2020 09:02:06 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJwD9AlGEl1YrzMFzzhVE1vb4kbCf4YFVdSir7m67DLKARx2zMO0OlXdHqSCrgQOgDPIF6US1w==
+X-Received: by 2002:a1c:cc0d:: with SMTP id h13mr58578wmb.168.1591632126013;
+ Mon, 08 Jun 2020 09:02:06 -0700 (PDT)
 Received: from localhost.localdomain
  (181.red-88-10-103.dynamicip.rima-tde.net. [88.10.103.181])
- by smtp.gmail.com with ESMTPSA id h12sm145322wro.80.2020.06.08.09.01.13
+ by smtp.gmail.com with ESMTPSA id z206sm13115wmg.30.2020.06.08.09.02.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jun 2020 09:01:14 -0700 (PDT)
+ Mon, 08 Jun 2020 09:02:05 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
 To: qemu-devel@nongnu.org
-Subject: [RFC PATCH 05/35] hw/arm/nseries: Emit warning when old code is used
-Date: Mon,  8 Jun 2020 18:00:14 +0200
-Message-Id: <20200608160044.15531-6-philmd@redhat.com>
+Subject: [RFC PATCH 14/35] hw/i386/pc: Emit warning when old code is used
+Date: Mon,  8 Jun 2020 18:00:23 +0200
+Message-Id: <20200608160044.15531-15-philmd@redhat.com>
 X-Mailer: git-send-email 2.21.3
 In-Reply-To: <20200608160044.15531-1-philmd@redhat.com>
 References: <20200608160044.15531-1-philmd@redhat.com>
@@ -128,29 +127,30 @@ This code hasn't been QOM'ified yet. Warn the user.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
 ---
- hw/arm/nseries.c | 2 ++
- 1 file changed, 2 insertions(+)
+ hw/i386/pc.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/hw/arm/nseries.c b/hw/arm/nseries.c
-index eae800b5c1..bd0c3f39a9 100644
---- a/hw/arm/nseries.c
-+++ b/hw/arm/nseries.c
-@@ -44,6 +44,7 @@
- #include "hw/sysbus.h"
- #include "qemu/log.h"
- #include "exec/address-spaces.h"
+diff --git a/hw/i386/pc.c b/hw/i386/pc.c
+index 2128f3d6fe..c71809fd28 100644
+--- a/hw/i386/pc.c
++++ b/hw/i386/pc.c
+@@ -94,6 +94,7 @@
+ #include "vmport.h"
+ #include "fw_cfg.h"
+ #include "trace.h"
 +#include "hw/qdev-deprecated.h"
  
- /* Nokia N8x0 support */
- struct n800_s {
-@@ -703,6 +704,7 @@ static void *mipid_init(void)
+ GlobalProperty pc_compat_5_0[] = {};
+ const size_t pc_compat_5_0_len = G_N_ELEMENTS(pc_compat_5_0);
+@@ -348,6 +349,8 @@ GSIState *pc_gsi_create(qemu_irq **irqs, bool pci_enabled)
  {
-     struct mipid_s *s = (struct mipid_s *) g_malloc0(sizeof(*s));
+     GSIState *s;
  
 +    qdev_warn_deprecated_function_used();
-     s->id = 0x838f03;
-     mipid_reset(s);
- 
++
+     s = g_new0(GSIState, 1);
+     if (kvm_ioapic_in_kernel()) {
+         kvm_pc_setup_irq_routing(pci_enabled);
 -- 
 2.21.3
 
