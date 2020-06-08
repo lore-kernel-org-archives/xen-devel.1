@@ -7,78 +7,78 @@ X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 29B7DC433E0
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 16:02:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 58EA9C433DF
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 16:02:50 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EEEA2206C3
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 16:02:45 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 2E409206C3
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 16:02:50 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="OSP+kVLe"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EEEA2206C3
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="LyUR2Lmt"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2E409206C3
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jiKEO-0004cB-Le; Mon, 08 Jun 2020 16:02:36 +0000
+	id 1jiKES-0004gF-Vz; Mon, 08 Jun 2020 16:02:40 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=8Blr=7V=redhat.com=philmd@srs-us1.protection.inumbo.net>)
- id 1jiKEN-0004bV-Q1
- for xen-devel@lists.xenproject.org; Mon, 08 Jun 2020 16:02:35 +0000
-X-Inumbo-ID: 779caeec-a9a1-11ea-b292-12813bfff9fa
-Received: from us-smtp-delivery-1.mimecast.com (unknown [207.211.31.120])
+ id 1jiKER-0004ep-G4
+ for xen-devel@lists.xenproject.org; Mon, 08 Jun 2020 16:02:39 +0000
+X-Inumbo-ID: 79b4496b-a9a1-11ea-b292-12813bfff9fa
+Received: from us-smtp-1.mimecast.com (unknown [205.139.110.61])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id 779caeec-a9a1-11ea-b292-12813bfff9fa;
- Mon, 08 Jun 2020 16:02:35 +0000 (UTC)
+ id 79b4496b-a9a1-11ea-b292-12813bfff9fa;
+ Mon, 08 Jun 2020 16:02:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1591632154;
+ s=mimecast20190719; t=1591632159;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=WCNM8bx54yBBH5o9OGeaVnQ5KO/kQFXlsHgIbovX6w0=;
- b=OSP+kVLeIhqukfrvtEtsMVywZKXWRhzo95azkYUBDgNofS3KrnVOoAXpLsyuTz8agIcqca
- tnYw9n8/ecymqMUxmKxAusqsuDLbO48qqHTHv9nKxR24C9fz7kCPl0e2jTufYah1EzE/8d
- CZ6q7kEbbAuXPx+i6dq1kLaPIOTc94k=
+ bh=3WzkinKDRWpQmIIO97X+MugaJnDZKw0ffp1ti6/ctwc=;
+ b=LyUR2LmtYlw+ksuhAT1yGgjrce4DSADfuhbGMGOHDtEkdN6UUVnUgtCLGui9aFzIopFHVj
+ 8XSkUEjyqzP+fgdE4g/gh7UFVeBQgX/mMzdgzAdEMqkMkhxw9fKulm4lwWY4bxcqIIgXM7
+ TVbYv5yctCIpqUWC+n+CayuEhXDhKE4=
 Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
  [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-215-GZscxDwhPtCzJ98VSVFCMA-1; Mon, 08 Jun 2020 12:02:31 -0400
-X-MC-Unique: GZscxDwhPtCzJ98VSVFCMA-1
-Received: by mail-wr1-f71.google.com with SMTP id s7so7360667wrm.16
- for <xen-devel@lists.xenproject.org>; Mon, 08 Jun 2020 09:02:30 -0700 (PDT)
+ us-mta-260-4BxmoRxxP92FzDGoP6qjuw-1; Mon, 08 Jun 2020 12:02:37 -0400
+X-MC-Unique: 4BxmoRxxP92FzDGoP6qjuw-1
+Received: by mail-wr1-f71.google.com with SMTP id s17so7305839wrt.7
+ for <xen-devel@lists.xenproject.org>; Mon, 08 Jun 2020 09:02:36 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=WCNM8bx54yBBH5o9OGeaVnQ5KO/kQFXlsHgIbovX6w0=;
- b=hnLe+SOYxOxkTQo0lF9i5hc+8NxIWDUbFPvmYCEo+yWUE9C9Bvvim1dr2XzMXGsS6w
- IH7wrB2sjvfsnsXjBMqmu2lRb9SNzgP6kvfHCVVfX8EKksJkUUrjh0yLGMmDPZUSEqax
- YW4f+Y7zErVvKTzGjXAiYuWCyVAR19uzTS5IoStZcu6jD47DHoPmDaBPEBWWI13UtI5r
- qX1jMAVQWoKXDxHgQNe/6zYlY1bgB7EwyD4PTgsvwr/pJIJSjt2ukK7kPfHL9p7wppml
- AHt1nnFj2lznfOyb/er63MDDUICxGFoGvvwYYh+ckosPPpy0m0xhoSvRBNNOJuHHBsQP
- LGcQ==
-X-Gm-Message-State: AOAM530JkTwFrCHihvtkDTqp74LkzlgtPJkG6sVPpCGZ4U0aIEYe9SEd
- xpbnArGoFaU0BYDfg0k0imHnoX4NZuU1wYj9A1+BMqRA8eIjn1hBSvCB2VFIiuwKN8TKaxQw5/Z
- q0ghoWHIbe/85TYfOiO9pQ3pM2q8=
-X-Received: by 2002:adf:e592:: with SMTP id l18mr25927551wrm.175.1591632150057; 
- Mon, 08 Jun 2020 09:02:30 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJzHbdh31UUEH4xek22DEL2omJfknmcGPt3J3CvVWH4WiiSsovdS3jiUsnUw+9yn+Qkjdrssug==
-X-Received: by 2002:adf:e592:: with SMTP id l18mr25927507wrm.175.1591632149848; 
- Mon, 08 Jun 2020 09:02:29 -0700 (PDT)
+ bh=3WzkinKDRWpQmIIO97X+MugaJnDZKw0ffp1ti6/ctwc=;
+ b=S8ZTdyOXVLHsWxdLWAV/Jild1kGQ5ez+HKszzKNTREG5nTJc3bUULgmwRO3j4ISock
+ H3MgV75gYIR4i1ETQlWWqKPaeF4MsxtXHUTH3gQpdAH4bHblyJKz+reNkuNSq7rwUAQz
+ 4JMQFrjZ6aSTmYdFYT62pxiv4m/MSDMkCvRiGEsa9ToHWseD8lhpEONiIy7k7vTedbGj
+ bsQFE2gDmezTVttzEntTnk/9eqPbXgx04qha66A7zr6lHlhXlKM7t3yAPTRcDspjTXSL
+ bWL8bAMGb+d+cQuZ+CFQCxdiSuQ3wT4M6zo8dCy+UhxM6NgIy+7tAYAuhFTDcTsKhP7x
+ hlGg==
+X-Gm-Message-State: AOAM532MRUKE+OOKf5QztQ4jFMM7fQLVc9ip4zR1tfbOksoEuwpDJ+hO
+ Mr11g2jR5sX1SwBHIxh8B7YaK16J5ssQApuEWpHq7WoGgqn88eL01kPFtV3wkyOcL+5s+X2KTgE
+ Bq/Xc6qeJ1jWiaqqRzlcddzY79CU=
+X-Received: by 2002:a5d:6391:: with SMTP id p17mr25853421wru.118.1591632155838; 
+ Mon, 08 Jun 2020 09:02:35 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzDmwNfyaecxfbcj81e+/jUBcU6vumJ01a4QLGsVfaCgs3E8cqqhTSmTr88Achkag+c/jFzSw==
+X-Received: by 2002:a5d:6391:: with SMTP id p17mr25853379wru.118.1591632155624; 
+ Mon, 08 Jun 2020 09:02:35 -0700 (PDT)
 Received: from localhost.localdomain
  (181.red-88-10-103.dynamicip.rima-tde.net. [88.10.103.181])
- by smtp.gmail.com with ESMTPSA id c6sm144638wro.92.2020.06.08.09.02.27
+ by smtp.gmail.com with ESMTPSA id o10sm183753wrj.37.2020.06.08.09.02.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jun 2020 09:02:29 -0700 (PDT)
+ Mon, 08 Jun 2020 09:02:34 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
 To: qemu-devel@nongnu.org
-Subject: [RFC PATCH 18/35] hw/input/ps2: Emit warning when old code is used
-Date: Mon,  8 Jun 2020 18:00:27 +0200
-Message-Id: <20200608160044.15531-19-philmd@redhat.com>
+Subject: [RFC PATCH 19/35] hw/input/tsc2005: Emit warning when old code is used
+Date: Mon,  8 Jun 2020 18:00:28 +0200
+Message-Id: <20200608160044.15531-20-philmd@redhat.com>
 X-Mailer: git-send-email 2.21.3
 In-Reply-To: <20200608160044.15531-1-philmd@redhat.com>
 References: <20200608160044.15531-1-philmd@redhat.com>
@@ -128,40 +128,30 @@ This code hasn't been QOM'ified yet. Warn the user.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
 ---
- hw/input/ps2.c | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ hw/input/tsc2005.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/hw/input/ps2.c b/hw/input/ps2.c
-index f8746d2f52..0d84061cae 100644
---- a/hw/input/ps2.c
-+++ b/hw/input/ps2.c
-@@ -30,7 +30,7 @@
- #include "ui/input.h"
- #include "sysemu/reset.h"
- #include "sysemu/runstate.h"
--
-+#include "hw/qdev-deprecated.h"
+diff --git a/hw/input/tsc2005.c b/hw/input/tsc2005.c
+index 55d61cc843..1f97b82379 100644
+--- a/hw/input/tsc2005.c
++++ b/hw/input/tsc2005.c
+@@ -27,6 +27,7 @@
+ #include "hw/irq.h"
+ #include "migration/vmstate.h"
  #include "trace.h"
++#include "hw/qdev-deprecated.h"
  
- /* debug PC keyboard */
-@@ -1136,6 +1136,8 @@ void *ps2_kbd_init(void (*update_irq)(void *, int), void *update_arg)
+ #define TSC_CUT_RESOLUTION(value, p)	((value) >> (16 - (p ? 12 : 10)))
+ 
+@@ -489,6 +490,8 @@ void *tsc2005_init(qemu_irq pintdav)
  {
-     PS2KbdState *s = (PS2KbdState *)g_malloc0(sizeof(PS2KbdState));
+     TSC2005State *s;
  
 +    qdev_warn_deprecated_function_used();
 +
-     trace_ps2_kbd_init(s);
-     s->common.update_irq = update_irq;
-     s->common.update_arg = update_arg;
-@@ -1158,6 +1160,8 @@ void *ps2_mouse_init(void (*update_irq)(void *, int), void *update_arg)
- {
-     PS2MouseState *s = (PS2MouseState *)g_malloc0(sizeof(PS2MouseState));
- 
-+    qdev_warn_deprecated_function_used();
-+
-     trace_ps2_mouse_init(s);
-     s->common.update_irq = update_irq;
-     s->common.update_arg = update_arg;
+     s = (TSC2005State *)
+             g_malloc0(sizeof(TSC2005State));
+     s->x = 400;
 -- 
 2.21.3
 
