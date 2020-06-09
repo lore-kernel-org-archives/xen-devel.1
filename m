@@ -2,45 +2,46 @@ Return-Path: <SRS0=4XJi=7W=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5ACBAC433DF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 62E8FC433E2
 	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2020 14:49:09 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 37E2E2072F
+	by mail.kernel.org (Postfix) with ESMTPS id 403BC2078D
 	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2020 14:49:09 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 37E2E2072F
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 403BC2078D
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jifYe-0007Yb-1W; Tue, 09 Jun 2020 14:48:56 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jifYi-0007aF-HM; Tue, 09 Jun 2020 14:49:00 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=QMey=7W=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1jifYd-0007YR-3M
- for xen-devel@lists.xenproject.org; Tue, 09 Jun 2020 14:48:55 +0000
-X-Inumbo-ID: 56d7a418-aa60-11ea-b32b-12813bfff9fa
+ id 1jifYi-0007YS-5U
+ for xen-devel@lists.xenproject.org; Tue, 09 Jun 2020 14:49:00 +0000
+X-Inumbo-ID: 56d787b2-aa60-11ea-b7bb-bc764e2007e4
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 56d7a418-aa60-11ea-b32b-12813bfff9fa;
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 56d787b2-aa60-11ea-b7bb-bc764e2007e4;
  Tue, 09 Jun 2020 14:48:54 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id CFEC0AD75;
+ by mx2.suse.de (Postfix) with ESMTP id DD42FAD85;
  Tue,  9 Jun 2020 14:48:56 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH for-4.14 0/2] tools: two minor fixes for libxenhypfs
-Date: Tue,  9 Jun 2020 16:48:48 +0200
-Message-Id: <20200609144850.28619-1-jgross@suse.com>
+Subject: [PATCH for-4.14 1/2] tools: fix error path of xenhypfs_open()
+Date: Tue,  9 Jun 2020 16:48:49 +0200
+Message-Id: <20200609144850.28619-2-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20200609144850.28619-1-jgross@suse.com>
+References: <20200609144850.28619-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
@@ -53,24 +54,34 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Juergen Gross <jgross@suse.com>, Ian Jackson <ian.jackson@eu.citrix.com>,
- Wei Liu <wl@xen.org>, paul@xen.org
+Cc: Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wl@xen.org>, paul@xen.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Two fixes for libxenhypfs:
+In case of an error in xenhypfs_open() the error path will cause a
+segmentation fault due to a wrong sequence of closing calls.
 
-- xenhypfs terminating with segfault when hypervisor doesn't have
-  hypfs support
-- wrong error reporting in case for access errors with xenhypfs
+Reported-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ tools/libs/hypfs/core.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Juergen Gross (2):
-  tools: fix error path of xenhypfs_open()
-  tools: fix setting of errno in xenhypfs_read_raw()
-
- tools/libs/hypfs/core.c | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
-
+diff --git a/tools/libs/hypfs/core.c b/tools/libs/hypfs/core.c
+index c91e165705..fc23b02586 100644
+--- a/tools/libs/hypfs/core.c
++++ b/tools/libs/hypfs/core.c
+@@ -74,8 +74,8 @@ xenhypfs_handle *xenhypfs_open(xentoollog_logger *logger,
+     return fshdl;
+ 
+ err:
+-    xtl_logger_destroy(fshdl->logger_tofree);
+     xencall_close(fshdl->xcall);
++    xtl_logger_destroy(fshdl->logger_tofree);
+     free(fshdl);
+     return NULL;
+ }
 -- 
 2.26.2
 
