@@ -2,60 +2,65 @@ Return-Path: <SRS0=4XJi=7W=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 01DFDC433E0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 77224C433E1
 	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2020 16:29:53 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C282120774
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2020 16:29:52 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 4AC1920774
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2020 16:29:53 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="x5heI+/O"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C282120774
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="0C7PLJdU"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4AC1920774
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jih7x-0001AA-5o; Tue, 09 Jun 2020 16:29:29 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jih80-0001AN-DN; Tue, 09 Jun 2020 16:29:32 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=h0up=7W=xen.org=paul@srs-us1.protection.inumbo.net>)
- id 1jih7v-00019z-R6
- for xen-devel@lists.xenproject.org; Tue, 09 Jun 2020 16:29:27 +0000
-X-Inumbo-ID: 62d5c4da-aa6e-11ea-b7bb-bc764e2007e4
+ id 1jih7y-0001AG-NQ
+ for xen-devel@lists.xenproject.org; Tue, 09 Jun 2020 16:29:30 +0000
+X-Inumbo-ID: 63a4ea08-aa6e-11ea-b33d-12813bfff9fa
 Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 62d5c4da-aa6e-11ea-b7bb-bc764e2007e4;
- Tue, 09 Jun 2020 16:29:27 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 63a4ea08-aa6e-11ea-b33d-12813bfff9fa;
+ Tue, 09 Jun 2020 16:29:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
- MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
+ Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=FxzKaqjwqHv+BWtl18dHoTgwvh6fvBsKBrSkPMFtPTU=; b=x5heI+/OXIZeaoQjNx9ahJVdA7
- kKedph6R+iOhV4bySY2aL2hCMIOktUmG4n5YhKjkwb1to5P/oQHdWQfiH5t0A0PILk5pA/0ar3l8C
- Xh4Xkrd96aOI6wBFd3nC7sYjPJjtTvJnvAeGuiFj+fuuYDDXOfE9JCqcjp7QWrBznQIY=;
+ bh=StNDX8utJEcCGoq3Fv0On8l7NyjDJ1rRRdFjlc8H5Oo=; b=0C7PLJdUmzmJaKbfJwcqULq5hN
+ zJqDO23MbXjEblVW024d5sOB3JvqaECqi/c6lwv/fZmHELhhWqdMu5C/EEBmeCnlsQAQuBLlkk4UW
+ NKTUCUAfs/vvbwE3MGYgP7+jtZmKJ8NHdv1Uk4RdQzQwRppelxyHeoW7dxS0M6Bzx43M=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1jih7u-0003Vt-O1; Tue, 09 Jun 2020 16:29:26 +0000
+ id 1jih7v-0003Vx-M7; Tue, 09 Jun 2020 16:29:27 +0000
 Received: from [54.239.6.185] (helo=CBG-R90WXYV0.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1jih7u-0003N4-Dx; Tue, 09 Jun 2020 16:29:26 +0000
+ id 1jih7v-0003N4-Bj; Tue, 09 Jun 2020 16:29:27 +0000
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH-for-4.14 0/2] CHANGELOG additions
-Date: Tue,  9 Jun 2020 17:29:20 +0100
-Message-Id: <20200609162922.14679-1-paul@xen.org>
+Subject: [PATCH-for-4.14 1/2] CHANGELOG: add 'domid_policy' and domid
+ preservation on migrate
+Date: Tue,  9 Jun 2020 17:29:21 +0100
+Message-Id: <20200609162922.14679-2-paul@xen.org>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200609162922.14679-1-paul@xen.org>
+References: <20200609162922.14679-1-paul@xen.org>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,19 +71,33 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Paul Durrant <pdurrant@amazon.com>
+Cc: Community Manager <community.manager@xenproject.org>,
+ Paul Durrant <pdurrant@amazon.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Paul Durrant <pdurrant@amazon.com>
 
-Paul Durrant (2):
-  CHANGELOG: add 'domid_policy' and domid preservation on migrate
-  CHANGELOG: add revised kdd handshake (supporting Windows 7, 8, and 10)
+Signed-off-by: Paul Durrant <pdurrant@amazon.com>
+---
+Cc: Community Manager <community.manager@xenproject.org>
+---
+ CHANGELOG.md | 2 ++
+ 1 file changed, 2 insertions(+)
 
- CHANGELOG.md | 3 +++
- 1 file changed, 3 insertions(+)
-
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 8786c51cb4..cb1566ea5b 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -18,6 +18,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
+  - Initial support to run on Hyper-V.
+  - Initial hypervisor file system (hypfs) support.
+  - libxl support for running qemu-xen device model in a linux stubdomain.
++ - New 'domid_policy', allowing domain-ids to be randomly chosen.
++ - Option to preserve domain-id across migrate or save+restore.
+ 
+ ## [4.13.0](https://xenbits.xen.org/gitweb/?p=xen.git;a=shortlog;h=RELEASE-4.13.0) - 2019-12-17
+ 
 -- 
 2.17.1
 
