@@ -7,86 +7,85 @@ X-Spam-Status: No, score=-8.1 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 289B0C433DF
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2020 11:10:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BD659C433E0
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2020 11:11:20 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EFE57207ED
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2020 11:10:56 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 8DC7E207ED
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2020 11:11:20 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="GaEw5OKb"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EFE57207ED
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="MKUqEEYx"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8DC7E207ED
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jic9Y-0003Sx-8L; Tue, 09 Jun 2020 11:10:48 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jic9v-0003aY-IK; Tue, 09 Jun 2020 11:11:11 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=HrVd=7W=redhat.com=pbonzini@srs-us1.protection.inumbo.net>)
- id 1jic9X-0003SF-1d
- for xen-devel@lists.xenproject.org; Tue, 09 Jun 2020 11:10:47 +0000
-X-Inumbo-ID: de26ac94-aa41-11ea-b30b-12813bfff9fa
-Received: from us-smtp-1.mimecast.com (unknown [207.211.31.120])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id de26ac94-aa41-11ea-b30b-12813bfff9fa;
- Tue, 09 Jun 2020 11:10:46 +0000 (UTC)
+ id 1jic9u-0003aD-Bz
+ for xen-devel@lists.xenproject.org; Tue, 09 Jun 2020 11:11:10 +0000
+X-Inumbo-ID: eba243f6-aa41-11ea-bb8b-bc764e2007e4
+Received: from us-smtp-delivery-1.mimecast.com (unknown [207.211.31.81])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+ id eba243f6-aa41-11ea-bb8b-bc764e2007e4;
+ Tue, 09 Jun 2020 11:11:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1591701046;
+ s=mimecast20190719; t=1591701069;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=TysuOc5GXylf1UUaen/G81fkeOnuEfcp2+jvnmZ+bCw=;
- b=GaEw5OKblin3Wfa203BH+/tlsxjxq/fqyNohbanzKGVp1hrWOCvG5Lfp30KG+rIPuKwC9R
- wkCzWoR/zk9nTeAbRNakJ3xgpwEqtai9jxFkaC4DljG79wI4wySR9HpwT5+wMlxumwm7Xp
- jpeaXaXcdJ9lPJhRt6Ujse0i2f00/As=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-151-CeCzEunOOqqNq2mTzVpXkQ-1; Tue, 09 Jun 2020 07:10:43 -0400
-X-MC-Unique: CeCzEunOOqqNq2mTzVpXkQ-1
-Received: by mail-wm1-f69.google.com with SMTP id p24so608557wmc.1
- for <xen-devel@lists.xenproject.org>; Tue, 09 Jun 2020 04:10:43 -0700 (PDT)
+ bh=gC6WEmr69REgLn2lsRvv9NiGoR/bD5T6HVmJ4ITPF7o=;
+ b=MKUqEEYxr+tXS/WnVImsNVkESZCN52rzgnGVVqCOo47TU9mBwPU7xgPtfJqSU2yicTt/c0
+ kqm3UXwsk6R1nlldv+2Yuc8xZHoR2WQvCO8yBXP2Xfa60juhVkINNCJTJM+V+9qUIcS1bM
+ ejboYQ2UZdp6GUZ9WV8DPfS1HSPgFR8=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-215-6MuKb7McOoqNWT9cb6qmdQ-1; Tue, 09 Jun 2020 07:11:07 -0400
+X-MC-Unique: 6MuKb7McOoqNWT9cb6qmdQ-1
+Received: by mail-wr1-f72.google.com with SMTP id h6so8531339wrx.4
+ for <xen-devel@lists.xenproject.org>; Tue, 09 Jun 2020 04:11:07 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=TysuOc5GXylf1UUaen/G81fkeOnuEfcp2+jvnmZ+bCw=;
- b=LFi3p2ytY3rxNMkSJOD4XqQTSIdOpdoIKS3baFZdoL+HF2zz8lIrV9gSFSE+5ovqqV
- lUejEZlYQ/2eKahcue031pwCY067k/xIel9f8CtSzARoxafxuKRmGsHYiaU901Zwiux8
- Ye0hmRvbVupy7SsC9lzKAdk1QWTxAUtKcHFFvgpIGe6CVdBHi8HWPj5Pc5V2qQXAQxBl
- 5AZncOI0xaZXqbpTZ86LRYz32350Ve3XgAr0v4bsKAn7SIiBq2GYt3hooPrKRgOANqsV
- oN7gVW07PeVVDiYnJm7EonRIqO60/l8Z+bm/rB75uFLUB2/hwBquOsGgWXd0s5wOGuEf
- p9EA==
-X-Gm-Message-State: AOAM531MovhQ/viLbilx3Jqs914394ieQlA3KtyOHSvG+gwo1BgmrpTo
- x/Q02QSdfblhh99gX+ALwDps8/Bi+1wobxiM8du7dwVi523Uohn35RHK2gUCKjyyyFdDWZiy4Mj
- vHQjaCOrS2cn48OWVFoaeUGIqss4=
-X-Received: by 2002:a7b:cb91:: with SMTP id m17mr3627182wmi.126.1591701042664; 
- Tue, 09 Jun 2020 04:10:42 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJzYXhhkklLh5/jP4wI4AWv8kJypOFv0T2ku7XSwlUIkFk2HE1PSObyt3ACvqwUvh1wPJYEGWA==
-X-Received: by 2002:a7b:cb91:: with SMTP id m17mr3627155wmi.126.1591701042347; 
- Tue, 09 Jun 2020 04:10:42 -0700 (PDT)
+ bh=gC6WEmr69REgLn2lsRvv9NiGoR/bD5T6HVmJ4ITPF7o=;
+ b=pS+EKW5D/HmT4rMBx+JPap0FbXZ+BcNkIqjnie/B9RMx2PzBDgdKA27T+bAy2CIGcI
+ 32PNwHlSZQQQj+bZjEDj5eleXlQMu75FUwxym500jjiVvqAcgmNM82NWBlv/FKTbR77h
+ qiGZaTzJ4OwcOaikU3reeDebJWwNsjHIn5ntjqaskCjFrvAD5hSjj/f6V8J4F8r4MR12
+ jtDVlERx8ylXI15cllHXLfn12kxFy+lAAZZR7Xe1ZgXObbv9hkSb7rHUTuDAp6ikx6ct
+ vOi2/hYYnGWZcAZdkjPfkqYrzZsKvjPAuRj5wkJtq52xPwjTq0g8RJGV2ylsLgepoQ5M
+ tvkg==
+X-Gm-Message-State: AOAM533bTs7/gDaugS7o3idVJ599Zgj9TLk6zb9RmVROdMgm7OTDPlRf
+ lvPuA3VwI1YjDO/xE6dC2vrJu/5TXk/e2HIkE6qalw2Vm9DvLu53HF0N23nZ4K+h5a0BfYQKe3Z
+ /L91+WI+T9kpDxrl2bLt+19GOb6A=
+X-Received: by 2002:a5d:628c:: with SMTP id k12mr3812471wru.211.1591701066333; 
+ Tue, 09 Jun 2020 04:11:06 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJyY3Up1ym4TzRU1NS9l49R/XWUODvDMW5M2cEwgU3BofYT4BEs0ckiayOWBTvyLMfPr7vv94w==
+X-Received: by 2002:a5d:628c:: with SMTP id k12mr3812427wru.211.1591701066086; 
+ Tue, 09 Jun 2020 04:11:06 -0700 (PDT)
 Received: from [192.168.178.58] ([151.21.172.168])
- by smtp.gmail.com with ESMTPSA id q1sm2521908wmc.15.2020.06.09.04.10.40
+ by smtp.gmail.com with ESMTPSA id r12sm3176227wrc.22.2020.06.09.04.11.04
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 09 Jun 2020 04:10:41 -0700 (PDT)
-Subject: Re: [RFC PATCH 20/35] hw/intc/i8259: Emit warning when old code is
- used
+ Tue, 09 Jun 2020 04:11:05 -0700 (PDT)
+Subject: Re: [RFC PATCH 21/35] hw/lm32/lm32_hwsetup: Emit warning when old
+ code is used
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
  qemu-devel@nongnu.org
 References: <20200608160044.15531-1-philmd@redhat.com>
- <20200608160044.15531-21-philmd@redhat.com>
+ <20200608160044.15531-22-philmd@redhat.com>
 From: Paolo Bonzini <pbonzini@redhat.com>
-Message-ID: <71b5e461-88f6-eab2-f46a-e8aa4783debd@redhat.com>
-Date: Tue, 9 Jun 2020 13:10:39 +0200
+Message-ID: <3e036ca7-753b-55fb-3a19-7d50f5b6fd19@redhat.com>
+Date: Tue, 9 Jun 2020 13:11:03 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.6.0
 MIME-Version: 1.0
-In-Reply-To: <20200608160044.15531-21-philmd@redhat.com>
+In-Reply-To: <20200608160044.15531-22-philmd@redhat.com>
 Content-Language: en-US
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
@@ -132,33 +131,33 @@ On 08/06/20 18:00, Philippe Mathieu-Daudé wrote:
 > 
 > Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
 > ---
->  hw/intc/i8259.c | 3 +++
+>  hw/lm32/lm32_hwsetup.h | 3 +++
 >  1 file changed, 3 insertions(+)
 > 
-> diff --git a/hw/intc/i8259.c b/hw/intc/i8259.c
-> index 51b27f6a34..9d9609cdab 100644
-> --- a/hw/intc/i8259.c
-> +++ b/hw/intc/i8259.c
-> @@ -30,6 +30,7 @@
->  #include "qemu/log.h"
->  #include "hw/isa/i8259_internal.h"
->  #include "trace.h"
+> diff --git a/hw/lm32/lm32_hwsetup.h b/hw/lm32/lm32_hwsetup.h
+> index de94de177a..f4a4d8fe4b 100644
+> --- a/hw/lm32/lm32_hwsetup.h
+> +++ b/hw/lm32/lm32_hwsetup.h
+> @@ -27,6 +27,7 @@
+>  
+>  #include "qemu/cutils.h"
+>  #include "hw/loader.h"
 > +#include "hw/qdev-deprecated.h"
 >  
->  /* debug PIC */
->  //#define DEBUG_PIC
-> @@ -414,6 +415,8 @@ qemu_irq *i8259_init(ISABus *bus, qemu_irq parent_irq)
->      ISADevice *isadev;
->      int i;
+>  typedef struct {
+>      void *data;
+> @@ -57,6 +58,8 @@ static inline HWSetup *hwsetup_init(void)
+>  {
+>      HWSetup *hw;
 >  
 > +    qdev_warn_deprecated_function_used();
 > +
->      irq_set = g_new0(qemu_irq, ISA_NUM_IRQS);
->  
->      isadev = i8259_init_chip(TYPE_I8259, bus, true);
+>      hw = g_malloc(sizeof(HWSetup));
+>      hw->data = g_malloc0(TARGET_PAGE_SIZE);
+>      hw->ptr = hw->data;
 > 
 
-This one is okay too.
+This one is okay.
 
 Paolo
 
