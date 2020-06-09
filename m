@@ -2,62 +2,70 @@ Return-Path: <SRS0=4XJi=7W=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-2.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_SANE_2 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9E2EEC433E2
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2020 13:27:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EDCD7C433E0
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2020 13:32:45 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7CAC220774
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2020 13:27:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7CAC220774
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id 2F7AE2074B
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2020 13:32:45 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=aepfle.de header.i=@aepfle.de header.b="cKJZST/S"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2F7AE2074B
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jieHH-0008WE-5O; Tue, 09 Jun 2020 13:26:55 +0000
+	id 1jieMY-0000uU-Ph; Tue, 09 Jun 2020 13:32:22 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=/ij5=7W=citrix.com=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1jieHF-0008W9-9Q
- for xen-devel@lists.xenproject.org; Tue, 09 Jun 2020 13:26:53 +0000
-X-Inumbo-ID: e136ae30-aa54-11ea-b31f-12813bfff9fa
-Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=LdGU=7W=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1jieMX-0000uP-03
+ for xen-devel@lists.xenproject.org; Tue, 09 Jun 2020 13:32:21 +0000
+X-Inumbo-ID: a3ba859f-aa55-11ea-b321-12813bfff9fa
+Received: from mo4-p01-ob.smtp.rzone.de (unknown [81.169.146.167])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id e136ae30-aa54-11ea-b31f-12813bfff9fa;
- Tue, 09 Jun 2020 13:26:52 +0000 (UTC)
-Authentication-Results: esa3.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: LCT9xGyJWNUMkOsK8scVAC77zhZRyjblAyL9jMY2o4zI81gawD1L3V8kTms5PFmbSoN/SsSdFv
- 96jyIzKnoMJEhHaPebl5vxcOgN2TDgW+jP9tIFBwmYpS35s81jnLMFWOi1oGl/NePHdD8VMjbi
- 40KhR7dCPaILve+pVezZpIIGckKIcTaBd2VxJB5GraGllQ0DPFv9moWmdstYmb8PwgmgTqFJCx
- roHV+Huc0lI9zDLT+A0nIJ0nLNrGOTtinCTPSNsexzBW0KihuOT+o8+bnRy6shJ07KJMudWBEX
- 5Fg=
-X-SBRS: 2.7
-X-MesageID: 19573899
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,492,1583211600"; d="scan'208";a="19573899"
-From: Ian Jackson <ian.jackson@citrix.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-Message-ID: <24287.36374.917457.787627@mariner.uk.xensource.com>
-Date: Tue, 9 Jun 2020 14:26:46 +0100
-To: Olaf Hering <olaf@aepfle.de>
+ id a3ba859f-aa55-11ea-b321-12813bfff9fa;
+ Tue, 09 Jun 2020 13:32:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1591709538;
+ s=strato-dkim-0002; d=aepfle.de;
+ h=References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:
+ X-RZG-CLASS-ID:X-RZG-AUTH:From:Subject:Sender;
+ bh=EIPVp1UjZQBZIv2MTxF6ag3w3xk7J65OYCsPIblT4P4=;
+ b=cKJZST/SpHH64GtfeXX3JGC8IitV2OEbSJPlBCJF+4+CSsDtQGff3TRfinORaqDOUI
+ PwOl6G1epfMeRjGKNLwDIc+X0Wio9kIbUuF08l57QWsRYPvDmX0NHQgChRFdTjk2qmfK
+ do09JbyepYESPye1RLbpK+qXtp19rDBhyUOEBKzLLsISiRXsjoXfBBfYt/+AfD8x0Dyc
+ a91fhffkKH3dLpfZ8Q45OnTH5rqcIfIOiXp5+mA+wzls9NJMVleVf83+oPtIRMndZQ6r
+ bFFAXqcCwrlYdAqY2t8VbzYXzA/7P6A0cbvHapOp/Pn98Jhq0IUFfTr9Pi67Yau+lR99
+ cWKQ==
+X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QED/SSGq+wjGiUC4AUztn93FPS2dyuYMxg4g=="
+X-RZG-CLASS-ID: mo00
+Received: from sender by smtp.strato.de (RZmta 46.9.2 DYNA|AUTH)
+ with ESMTPSA id I09bd2w59DWEKyU
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
+ (Client did not present a certificate);
+ Tue, 9 Jun 2020 15:32:14 +0200 (CEST)
+Date: Tue, 9 Jun 2020 15:32:12 +0200
+From: Olaf Hering <olaf@aepfle.de>
+To: Ian Jackson <ian.jackson@citrix.com>
 Subject: Re: [PATCH v1] kdd: remove zero-length arrays
-In-Reply-To: <20200609152233.039cfc86.olaf@aepfle.de>
+Message-ID: <20200609153212.3b6d7e3d.olaf@aepfle.de>
+In-Reply-To: <24287.36374.917457.787627@mariner.uk.xensource.com>
 References: <20200608203849.18341-1-olaf@aepfle.de>
  <005001d63e3b$c85059f0$58f10dd0$@xen.org>
  <20200609121549.GA90841@deinos.phlegethon.org>
  <20200609152233.039cfc86.olaf@aepfle.de>
-X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
+ <24287.36374.917457.787627@mariner.uk.xensource.com>
+X-Mailer: Claws Mail 2020.06.03 (GTK+ 2.24.32; x86_64-suse-linux-gnu)
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ boundary="Sig_/T7jqiNx=3yOVd/E7gFPf/w8"; protocol="application/pgp-signature"
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,33 +82,40 @@ Cc: xen-devel@lists.xenproject.org, Tim Deegan <tim@xen.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Olaf Hering writes ("Re: [PATCH v1] kdd: remove zero-length arrays"):
-> Am Tue, 9 Jun 2020 13:15:49 +0100
-> schrieb Tim Deegan <tim@xen.org>:
-> 
-> > Olaf, can you try dropping the 'payload' field from the header and replacing the payload[0] in pkt with payload[] ?
-> 
-> In file included from kdd.c:53:
-> kdd.h:325:17: error: flexible array member in union
->   325 |         uint8_t payload[];
-...
->          kdd_stc stc;
-> -        uint8_t payload[0];
-> +        uint8_t payload[];
->      };
->  } PACKED kdd_pkt;
+--Sig_/T7jqiNx=3yOVd/E7gFPf/w8
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
 
-Try
+Am Tue, 9 Jun 2020 14:26:46 +0100
+schrieb Ian Jackson <ian.jackson@citrix.com>:
 
->          kdd_stc stc;
-> -        uint8_t payload[0];
->      };
-  +    uint8_t payload[];
->  } PACKED kdd_pkt;
+>   +    uint8_t payload[];
 
-?
+This compiles, but will access memory behind the union{};, which is most li=
+kely not what the intention is.
 
-(I haven't read the surrounding code...)
+Olaf
 
-Ian.
+--Sig_/T7jqiNx=3yOVd/E7gFPf/w8
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEE97o7Um30LT3B+5b/86SN7mm1DoAFAl7fj1wACgkQ86SN7mm1
+DoBMbg/+Kl51VOKYH+iub+INbzuCr55LUTKr6mZitlfHqVfaMhdSORpio3pwFLrN
+kD/a70taF9it2Y3C2RBOZzz58Idx3cpKfY8cff2ZdPkHztymG/U7Ax3e2zgzidjg
+5gtfqF1MaOkCjmTKcAwtj3d2fdv0+wJ/jfLPXkYH50mu3hRZNayNeeOmmAELmH0L
+vo3OfQIxPR1o/z8528PuvcqGm+xVesyVwvpJow4zKuxAD0PJJkq+dPFj779dPXrF
+e99U6AYny2s25T2+LfW8Wo8c4QQj4xfLpMHfxgC7J4Rtmso+0y/zNyce1WPaJDa9
+zY7M+dToEJJMEEZHl8KZEqULsqD4Mgi7aMyuts05QOcpmqQgA7v589qUJ5ie/Anm
+jPUCyDocI5hiWiOcz85YVqfgD1ARkSBcMXDQiGyS70zjClbQbFh/aqYWqwN0JHWL
+yG1cOOiWSsF7uxu77H3lVoSjIgkE+7GLF67HE7De5wI2OC3kv/hiqyXIpJy3nUnT
+xrNMxCFKl6JtGzLKC2owHdP27PM1FN+7Yu8ovKEBRdschknFhvr91mJFqJNUWsVN
+XylFm4vG3HHDAJpMF9yxBg1laxmsjt4DBm2XzMwOWtLQ9rnqEJWKgtSbnunrFpCw
+vrYeWkw2Jerd5C1RCIlnvRUIM2Gq8MQpV84Da8mm0effz33qLKY=
+=whqZ
+-----END PGP SIGNATURE-----
+
+--Sig_/T7jqiNx=3yOVd/E7gFPf/w8--
 
