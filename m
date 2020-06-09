@@ -2,70 +2,86 @@ Return-Path: <SRS0=4XJi=7W=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-0.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
+	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DEE39C433E0
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2020 16:45:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1FD36C433E0
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2020 16:56:29 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B65AB20737
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2020 16:45:57 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B65AB20737
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id E16A12074B
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2020 16:56:28 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="SAqnV5iZ"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E16A12074B
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jihNj-0003Fs-QX; Tue, 09 Jun 2020 16:45:47 +0000
+	id 1jihXn-0004Ew-6F; Tue, 09 Jun 2020 16:56:11 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=K0Bv=7W=citrix.com=george.dunlap@srs-us1.protection.inumbo.net>)
- id 1jihNi-0003Fk-FX
- for xen-devel@lists.xenproject.org; Tue, 09 Jun 2020 16:45:46 +0000
-X-Inumbo-ID: a9fd6ec4-aa70-11ea-8496-bc764e2007e4
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+ <SRS0=kazQ=7W=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
+ id 1jihXm-0004Ep-Ht
+ for xen-devel@lists.xenproject.org; Tue, 09 Jun 2020 16:56:10 +0000
+X-Inumbo-ID: 1dfe69d0-aa72-11ea-bca7-bc764e2007e4
+Received: from mail-wr1-x42a.google.com (unknown [2a00:1450:4864:20::42a])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id a9fd6ec4-aa70-11ea-8496-bc764e2007e4;
- Tue, 09 Jun 2020 16:45:45 +0000 (UTC)
-Authentication-Results: esa5.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: QKamtPoNHOhBhJ7Xo2Nx/xIPBY9nfLZqxVb32amsg7DUOtIdBBMlUJqfqge9tUs8P4OxVrhnmL
- EOCt3wKO6cLzuiTDe7CJkg6pVa5Ptn03Wo/T5fliWsNuRdotNZY1iQQ0o1OgKME2Vpx7S5BjT+
- JI2qfZpS8N7WbyK1ndMDToa9Q04TtpeMDV5XQIqY9FacbfblgiKDi9rK4A9TG+HSYFYoExvUk2
- VsD+0OOE3F1dB+bp7TEHcZ4pQ3zGsqXEpoJvMHe7b52IMPgFE/KIDS9V3XyCpTM2FGKbD0nzxm
- eY8=
-X-SBRS: 2.7
-X-MesageID: 19841376
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,492,1583211600"; d="scan'208";a="19841376"
-From: George Dunlap <George.Dunlap@citrix.com>
-To: Paul Durrant <paul@xen.org>
-Subject: Re: [PATCH-for-4.14 1/2] CHANGELOG: add 'domid_policy' and domid
- preservation on migrate
-Thread-Topic: [PATCH-for-4.14 1/2] CHANGELOG: add 'domid_policy' and domid
- preservation on migrate
-Thread-Index: AQHWPnsm5KVtEHlQbU2q3x4wLSCVdqjQXFYA
-Date: Tue, 9 Jun 2020 16:45:41 +0000
-Message-ID: <12AA7966-F395-4624-85DA-9D443B1269FC@citrix.com>
-References: <20200609162922.14679-1-paul@xen.org>
- <20200609162922.14679-2-paul@xen.org>
-In-Reply-To: <20200609162922.14679-2-paul@xen.org>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-mailer: Apple Mail (2.3608.80.23.2.2)
-x-ms-exchange-messagesentrepresentingtype: 1
-x-ms-exchange-transport-fromentityheader: Hosted
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <76998D5DEB5D544C91A3BEE14BA7A508@citrix.com>
-Content-Transfer-Encoding: quoted-printable
+ id 1dfe69d0-aa72-11ea-bca7-bc764e2007e4;
+ Tue, 09 Jun 2020 16:56:09 +0000 (UTC)
+Received: by mail-wr1-x42a.google.com with SMTP id p5so22099945wrw.9
+ for <xen-devel@lists.xenproject.org>; Tue, 09 Jun 2020 09:56:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:reply-to:to:cc:references:in-reply-to:subject:date:message-id
+ :mime-version:content-transfer-encoding:content-language
+ :thread-index; bh=+jVS7nVhGMmjR2wZd6JnAyCPYfj4Qx6JkWv06lXyIXU=;
+ b=SAqnV5iZiBHXALRNyS2MYrJxxysK7xa+3roh7XPXvDQZ2dYxbkOw9q5Px07Wou2ne5
+ 5gg/AANUVLKTx7eG0qqR4AEm/GzrCnzSQExXKv1EhARIs4hvK1NhFxwGRxJU3Ien8Wld
+ BzlXMo0GVL4uRCV+xgcNS0BQFJ5ZEt1UmzJ9JzPb/9Z2g13kuilfnOKWo25EuytQXejS
+ 0Kq9cLXX08hNDUb7iQ1Saabj2CZZLCiaodfJhYx4/ISLMJN7B6Yz1T3+AW6hWjhwyGHm
+ Ipnr7p1ipLtiGUPBBMXabJASIZPROsrZLXYw0egN0GA1NDUMVZvjBuq7BYI9snNAW70o
+ ESXA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:reply-to:to:cc:references:in-reply-to
+ :subject:date:message-id:mime-version:content-transfer-encoding
+ :content-language:thread-index;
+ bh=+jVS7nVhGMmjR2wZd6JnAyCPYfj4Qx6JkWv06lXyIXU=;
+ b=jioy0ri3VaohMk9cHaEsX10RWvoo3Zb/lEz3rU7mzXpQnxUbqlT6eVxZ4wcwlxkNUs
+ ABvmULsIjLmguCLZdgqwy+XAzqrMdAVO7mDZDsUkRjRzlbSxCvUuRhGlZ21wZDWWhkTP
+ xjiN5Aa81olSAScnsd5G3Eenn02/PULbqE/h5Y3QHk4uQI9YP4EK0fh/b2rSNbI3Up+L
+ yycylq+EnGMpB6M7HwL4PlSFvo2UniYlwyXG5jQ7TITO5gL+c+jdPHSqj+2xY3pzBYUM
+ vQwAiAOMQ90oGa79bAg9jpKJy91L+e7Zy8ZB/406RxgcI0lgcTOyqHkB2aoHAUadcHc2
+ XAWw==
+X-Gm-Message-State: AOAM5331wKNQAzZE+b4XpweRSjjSX2DKPSo6cgfcrqUZIuwf39LRJtr7
+ /7R3+Yv1N8JUu+a5oKjCf54=
+X-Google-Smtp-Source: ABdhPJw6q+vyrWjd1QpjmsIjW8fT1b4UmM2He3Oq8ali+vtJ9/uAng0/xGkJliIz2BVoXMZkL2vC9A==
+X-Received: by 2002:adf:b348:: with SMTP id k8mr6033250wrd.157.1591721769098; 
+ Tue, 09 Jun 2020 09:56:09 -0700 (PDT)
+Received: from CBGR90WXYV0 ([54.239.6.186])
+ by smtp.gmail.com with ESMTPSA id r5sm4234675wrq.0.2020.06.09.09.56.07
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Tue, 09 Jun 2020 09:56:08 -0700 (PDT)
+From: Paul Durrant <xadimgnik@gmail.com>
+X-Google-Original-From: "Paul Durrant" <paul@xen.org>
+To: "'George Dunlap'" <George.Dunlap@citrix.com>,
+ "'Xen-devel'" <xen-devel@lists.xenproject.org>
+References: <B965FD5D-549B-48E2-A05A-1E4D405F624A@citrix.com>
+In-Reply-To: <B965FD5D-549B-48E2-A05A-1E4D405F624A@citrix.com>
+Subject: RE: [TESTDAY] xl restore gives an error too soon after xl save
+Date: Tue, 9 Jun 2020 17:56:06 +0100
+Message-ID: <00d601d63e7e$df2eb570$9d8c2050$@xen.org>
 MIME-Version: 1.0
+Content-Type: text/plain;
+	charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+X-Mailer: Microsoft Outlook 16.0
+Content-Language: en-gb
+Thread-Index: AQLRonHjt2w8GfsetSvzpyHiuZLogqbZtxow
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,21 +92,65 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Community Manager <community.manager@xenproject.org>,
- Xen-devel <xen-devel@lists.xenproject.org>, Paul Durrant <pdurrant@amazon.com>
+Reply-To: paul@xen.org
+Cc: 'Anthony Perard' <anthony.perard@citrix.com>,
+ 'Ian Jackson' <Ian.Jackson@citrix.com>, 'Wei Liu' <wl@xen.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
+> -----Original Message-----
+> From: George Dunlap <George.Dunlap@citrix.com>
+> Sent: 09 June 2020 17:45
+> To: Xen-devel <xen-devel@lists.xenproject.org>
+> Cc: Paul Durrant <paul@xen.org>; Ian Jackson <Ian.Jackson@citrix.com>; Wei Liu <wl@xen.org>; Anthony
+> Perard <anthony.perard@citrix.com>
+> Subject: [TESTDAY] xl restore gives an error too soon after xl save
+> 
+> Somewhat surprising that if you save with -D, you get mysterious error messages for the next so-many
+> seconds:
+> 
+> root@immortal:/images# xl save -D c6-01 /images/tmp/c6-01.save
+> Saving to /images/tmp/c6-01.save new xl format (info 0x3/0x0/950)
+> xc: info: Saving domain 19505, type x86 PV
+> xc: Frames: 524288/524288  100%
+> xc: End of stream: 0/0    0%
+> root@immortal:/images# xl restore tmp/c6-01.save
+> Loading new save file tmp/c6-01.save (new xl fmt info 0x3/0x0/950)
+>  Savefile contains xl domain config in JSON format
+> Parsing config from <saved>
+> libxl: error: libxl_create.c:692:libxl__domain_make: Domain 19505:domain id recently used: No such
+> file or directory
+> libxl: error: libxl_create.c:1233:initiate_domain_create: Domain 19505:cannot make domain: -3
+> libxl: error: libxl_domain.c:1182:libxl__destroy_domid: Domain 19505:Non-existant domain
+> libxl: error: libxl_domain.c:1136:domain_destroy_callback: Domain 19505:Unable to destroy guest
+> libxl: error: libxl_domain.c:1063:domain_destroy_cb: Domain 19505:Destruction of domain failed
+> root@immortal:/images# xl restore tmp/c6-01.save
+> Loading new save file tmp/c6-01.save (new xl fmt info 0x3/0x0/950)
+>  Savefile contains xl domain config in JSON format
+> Parsing config from <saved>
+> libxl: error: libxl_create.c:692:libxl__domain_make: Domain 19505:domain id recently used: No such
+> file or directory
+> libxl: error: libxl_create.c:1233:initiate_domain_create: Domain 19505:cannot make domain: -3
+> libxl: error: libxl_domain.c:1182:libxl__destroy_domid: Domain 19505:Non-existant domain
+> libxl: error: libxl_domain.c:1136:domain_destroy_callback: Domain 19505:Unable to destroy guest
+> libxl: error: libxl_domain.c:1063:domain_destroy_cb: Domain 19505:Destruction of domain failed
+> 
+> [A few minutes pass]
+> 
 
+Yes, this is because it is not 'safe' to re-create the domain with the same domid until it is deemed not 'recently used'. This
+should indeed be documented.
 
-> On Jun 9, 2020, at 5:29 PM, Paul Durrant <paul@xen.org> wrote:
->=20
-> From: Paul Durrant <pdurrant@amazon.com>
->=20
-> Signed-off-by: Paul Durrant <pdurrant@amazon.com>
+  Paul
 
-Both patches:
-
-Acked-by: George Dunlap <george.dunlap@citrix.com>
+> root@immortal:/images# xl restore tmp/c6-01.save
+> Loading new save file tmp/c6-01.save (new xl fmt info 0x3/0x0/950)
+>  Savefile contains xl domain config in JSON format
+> Parsing config from <saved>
+> xc: info: Found x86 PV domain from Xen 4.14
+> xc: info: Restoring domain
+> xc: info: Restore successful
+> xc: info: XenStore: mfn 0xbe8d2, dom 0, evt 1
+> xc: info: Console: mfn 0xbe8d1, dom 0, evt 2
 
 
