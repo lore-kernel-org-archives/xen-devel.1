@@ -2,73 +2,65 @@ Return-Path: <SRS0=4XJi=7W=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-2.3 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 31B38C433DF
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2020 21:28:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BBF95C433E1
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2020 21:51:10 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id F00AE2072F
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2020 21:28:51 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 79A3020737
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2020 21:51:10 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="M8zYli4x"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F00AE2072F
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="FYWiwtT8"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 79A3020737
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jilnQ-00050c-7Q; Tue, 09 Jun 2020 21:28:36 +0000
+	id 1jim94-0007T0-Fu; Tue, 09 Jun 2020 21:50:58 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=aKNw=7W=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
- id 1jilnO-00050X-PG
- for xen-devel@lists.xenproject.org; Tue, 09 Jun 2020 21:28:34 +0000
-X-Inumbo-ID: 2afb8e4e-aa98-11ea-bb8b-bc764e2007e4
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+ <SRS0=aF9f=7W=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1jim93-0007Sv-2D
+ for xen-devel@lists.xenproject.org; Tue, 09 Jun 2020 21:50:57 +0000
+X-Inumbo-ID: 4c410ebe-aa9b-11ea-b7bb-bc764e2007e4
+Received: from mail.kernel.org (unknown [198.145.29.99])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 2afb8e4e-aa98-11ea-bb8b-bc764e2007e4;
- Tue, 09 Jun 2020 21:28:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
- Content-Transfer-Encoding:Content-Type:Message-ID:To:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=c0QE2h7otWjbjfSGz51mFLitMlrPmgCmo2cMZwties4=; b=M8zYli4xqpmA4hQlZYb3odQh9
- t9+1AD61l6ikGFDA11g8DV+zCUrdzbIPhpPeUTCtbtSTRg92Z4dTDQrzGN/KKn0StgdE8LNVbMQWb
- 9VJ41XE4xiLJZVROfx95tK/MveGur4m7SWc3dR/jGfRZFevSwY9NFf3jy6CTVyqFgaQMI=;
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1jilnL-0001Uf-SL; Tue, 09 Jun 2020 21:28:31 +0000
-Received: from [172.16.144.3] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1jilnL-0003It-KG; Tue, 09 Jun 2020 21:28:31 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.89) (envelope-from <osstest-admin@xenproject.org>)
- id 1jilnL-0000OM-Jg; Tue, 09 Jun 2020 21:28:31 +0000
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-150950-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+ id 4c410ebe-aa9b-11ea-b7bb-bc764e2007e4;
+ Tue, 09 Jun 2020 21:50:56 +0000 (UTC)
+Received: from localhost (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id CA7DA206D5;
+ Tue,  9 Jun 2020 21:50:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1591739456;
+ bh=XTv0AfIhSGBAVmR///EPvXgZuQrSzUx+9M9fNndpuWk=;
+ h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+ b=FYWiwtT8vtIEdZWsACy6EuABQDJ0EERJh8aI4qNJOssQy+ay6qAz2Fpj54hAfTRYk
+ Pqi/iPfoRC8DmBrdNc7Q9R2XGnptCIOoQyHTgvCUxRcDfsz2ZOHMHOmtRMmZehUJLU
+ tRk1KzKwczMBaTpRMv5gKpCGKc9zkgacd3vmwPxo=
+Date: Tue, 9 Jun 2020 14:50:55 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
+To: Christoph Hellwig <hch@infradead.org>
+Subject: Re: [PATCH v2 10/11] xen/arm: introduce phys/dma translations in
+ xen_dma_sync_for_*
+In-Reply-To: <20200609053949.GA26473@infradead.org>
+Message-ID: <alpine.DEB.2.21.2006091326380.2815@sstabellini-ThinkPad-T480s>
+References: <alpine.DEB.2.21.2006031506590.6774@sstabellini-ThinkPad-T480s>
+ <20200603222247.11681-10-sstabellini@kernel.org>
+ <20200608071221.GF15742@infradead.org>
+ <alpine.DEB.2.21.2006081614530.2815@sstabellini-ThinkPad-T480s>
+ <20200609053802.GB3015@infradead.org>
+ <20200609053949.GA26473@infradead.org>
+User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 150950: tolerable all pass - PUSHED
-X-Osstest-Failures: xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
- xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
- xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
- xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
- xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This: xen=6a49b9a7920c82015381740905582b666160d955
-X-Osstest-Versions-That: xen=058023b343d4e366864831db46e9b438e9e3a178
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Tue, 09 Jun 2020 21:28:31 +0000
+Content-Type: text/plain; charset=US-ASCII
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,63 +71,42 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
+Cc: jgross@suse.com, Stefano Stabellini <sstabellini@kernel.org>,
+ konrad.wilk@oracle.com, roman@zededa.com, linux-kernel@vger.kernel.org,
+ tamas@tklengyel.com, xen-devel@lists.xenproject.org,
+ boris.ostrovsky@oracle.com, Stefano Stabellini <stefano.stabellini@xilinx.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-flight 150950 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/150950/
+On Mon, 8 Jun 2020, Christoph Hellwig wrote:
+> On Mon, Jun 08, 2020 at 10:38:02PM -0700, Christoph Hellwig wrote:
+> > On Mon, Jun 08, 2020 at 05:38:28PM -0700, Stefano Stabellini wrote:
+> > > Yeah, the pfn_valid check is a bit weird by definition because we are
+> > > using it to understand whether the address belong to us or to another
+> > > VM. To do the pfn_valid check we need to translate the dma address into
+> > > something the CPU understands, hence, the dma_to_phys call.
+> > > 
+> > > Why can't we use the already-provided paddr? Because paddr has been
+> > > translated twice:
+> > > 1) from dma to maybe-foreign phys address (could be ours, or another VM)
+> > > 2) from maybe-foreign address to local (using our local mapping of the foreign page)
+> > > 
+> > > In fact, it would be clearer if we had all three addresses as parameters
+> > > of xen_dma_sync_for_cpu: the dma address, the maybe-foreign physical
+> > > address (we tend to call it xenbus address, baddr), the local physical
+> > > address. Something like:
+> > 
+> > I think instead we should move the arch_sync_dma_for_{device,cpu}
+> > calls from xen_dma_sync_for_{device,cpu} into the callers, as they
+> > are provided by the generic dma-noncoherent.h and optimized out for
+> > coherent architectures like x86.  Then the swiotlb-xen.c code only
+> > need to call dma_cache_maint as the interface (which would have to
+> > grow a better name), which should then only need a single kind of
+> > address.
+> 
+> ... actually I'd keep the xen_dma_sync_for_{device,cpu} names for the
+> low-level interface, just move the arch_sync_dma_for_{device,cpu}
+> calls up.
 
-Failures :-/ but no regressions.
-
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
-
-version targeted for testing:
- xen                  6a49b9a7920c82015381740905582b666160d955
-baseline version:
- xen                  058023b343d4e366864831db46e9b438e9e3a178
-
-Last test of basis   150939  2020-06-09 17:00:49 Z    0 days
-Testing same since   150950  2020-06-09 19:00:58 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Wei Liu <wl@xen.org>
-
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-libvirt                                     pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/xen.git
-   058023b343..6a49b9a792  6a49b9a7920c82015381740905582b666160d955 -> smoke
+I can do that.
 
