@@ -2,90 +2,64 @@ Return-Path: <SRS0=4XJi=7W=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
-	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ECD71C433E0
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2020 15:58:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 068C5C433DF
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2020 16:29:53 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BDA7B2072F
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2020 15:58:53 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id C28402078C
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2020 16:29:52 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ljK+SUc4"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BDA7B2072F
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="Y7AjTfYl"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C28402078C
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jige5-0006OD-Jm; Tue, 09 Jun 2020 15:58:37 +0000
+	id 1jih81-0001Af-LE; Tue, 09 Jun 2020 16:29:33 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=dTuU=7W=gmail.com=codewiz2280@srs-us1.protection.inumbo.net>)
- id 1jige4-0006O8-71
- for xen-devel@lists.xenproject.org; Tue, 09 Jun 2020 15:58:36 +0000
-X-Inumbo-ID: 12fbacda-aa6a-11ea-bb8b-bc764e2007e4
-Received: from mail-ej1-x641.google.com (unknown [2a00:1450:4864:20::641])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=h0up=7W=xen.org=paul@srs-us1.protection.inumbo.net>)
+ id 1jih80-00019z-Ke
+ for xen-devel@lists.xenproject.org; Tue, 09 Jun 2020 16:29:32 +0000
+X-Inumbo-ID: 64b1e3b0-aa6e-11ea-bca7-bc764e2007e4
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 12fbacda-aa6a-11ea-bb8b-bc764e2007e4;
- Tue, 09 Jun 2020 15:58:35 +0000 (UTC)
-Received: by mail-ej1-x641.google.com with SMTP id n24so22972182ejd.0
- for <xen-devel@lists.xenproject.org>; Tue, 09 Jun 2020 08:58:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=zbJp1IWgUH+VQ3z/5e5brV6qZNHhJIyjJ89HzS4+g2c=;
- b=ljK+SUc4DoMD1Sc6xR8WXmbSK25X6EQPiWkzE1LoCnWsqaooFV7Ue/wQwvI2IisTjp
- +Mrf0amFwoCYRhyxjNwEcMVAyzXI9LsMQ3h/9Nl28uKo48ov5+PBpBEEDPpTkthw00Ql
- wihMWMClTQgGCvnkZHCQg5gZ71MtL2TlVJe77vAxh8zCCmqf7Mq/BS0mzBex9X4TIoJ9
- buRhVZhFWb9T5cSt7MC/Z+B4kb+8B4gAlDLE7QrY/kqj7uI3AfjGNlaYYatpGe+7T389
- hJItrysX0+MvYkQEVz9QtUP3yWZEs7WnZmkaPZdb6D1CJa9Yzwr9lZqqJyQE5zw/pnoI
- w4UA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=zbJp1IWgUH+VQ3z/5e5brV6qZNHhJIyjJ89HzS4+g2c=;
- b=VqBCpWkENu19id+C2C5Rb8GssW2JsmkCKPyJcCfzeA52tQ5AtLJh/GPaUCLkaKXcco
- 0GlL+2fKxS/6cPWzsTOrMbP0Wzs/uw8WxRoewwuTnU8RSYFurdDShqJlZbhsfMDAvLU4
- NWcOzTjy9ZwLGFEv6F4pwYRk4YzaRY1d9Rp7S6CM7RQQnUvKkD9J2jADMon7EPlDlc3B
- b6KxQZcUz15HCVRdfANCPgeK6dBQbVNXh1Ml+vu5XlxUjxw4ANDnuj1N8BOim4DPxe6h
- /6EP6PW36cbtuOMFI/ozxO3wz+SdbPUg8shXLNztluQqQdjr9hNelS90c9WcGmYC2K2x
- dBpA==
-X-Gm-Message-State: AOAM530m0s3aI1WwR21CoAMPqkC2SNTp7Gyac64fFddz2DtVlQ+CvrTs
- 62ON9rzNxXTXG7bXZMsgoiMbK39b+FuS42vfXmA=
-X-Google-Smtp-Source: ABdhPJzAMb5BIQMYiTuFT/I3iN4kafpFGOxbbPoBWi2FsA2/oP3wEvVKLacbG9TuC/7JkJEZexCs1GAn8HFunOsfw3A=
-X-Received: by 2002:a17:906:5785:: with SMTP id
- k5mr25551813ejq.494.1591718314562; 
- Tue, 09 Jun 2020 08:58:34 -0700 (PDT)
-MIME-Version: 1.0
-References: <CALYbLDiNtHZusupf8=yhKtw1EA7HjMP3o3+WGdv9Omv9v8yVHg@mail.gmail.com>
- <CALYbLDjNptWfVMGjw801y6f0zu40b2pzBnLS+w2Zx5eVStCUYQ@mail.gmail.com>
- <da23ecc8-60f0-8a26-58d5-ea692dcf0102@xen.org>
- <CALYbLDhpwbHTrjDaNmfW81m5Fqt6HbfqoqbGDH1qUxxJtMBmEA@mail.gmail.com>
- <8C6A23AE-6C2B-411F-ACAD-F5574211E8ED@arm.com>
- <CALYbLDiOX0JW_=6AgAb+m5q++3WvQtivJRy+ePrp5pJXd7T9Vg@mail.gmail.com>
- <14244e49-e1ac-a29d-bbd9-bd4c202bf186@xen.org>
- <CALYbLDjCdDvwja1VoahJmnrKDfKyw7DNhYBBcmJv70QDA4+6Ag@mail.gmail.com>
- <77006AAF-BC3B-4C6E-BDFC-577CF87DE64E@arm.com>
- <CALYbLDheT8jWSAqJJZvvjzWGvygJaJ6UG7ejgpLLYeQB-tCsJA@mail.gmail.com>
- <CALYbLDjZu-YzqZPjCk785=4hpd3BRsoXeotd3ygESD_Ezm63Yg@mail.gmail.com>
- <99E77330-049F-4471-ABF9-13F9AB4E95B5@arm.com>
- <CALYbLDizxgaXJzhNVeKVZ6q-Hbttm1T+ZPP7f-1PDvi49VFOjA@mail.gmail.com>
- <alpine.DEB.2.21.2006080911500.2815@sstabellini-ThinkPad-T480s>
- <CALYbLDh8F0JuGmRY0C1Nhp_b4FP041KMa14pOmyoSBtHcz=A2A@mail.gmail.com>
- <363A05E0-61C6-4AE4-9C84-EEAC466989D8@arm.com>
- <b28cbead-c7ce-7848-4e21-109a022e64da@xen.org>
-In-Reply-To: <b28cbead-c7ce-7848-4e21-109a022e64da@xen.org>
-From: CodeWiz2280 <codewiz2280@gmail.com>
-Date: Tue, 9 Jun 2020 11:58:21 -0400
-Message-ID: <CALYbLDguWyVifXiCSGO8TdkvGO95YnYrLxXqnS5P_EBwk53O0w@mail.gmail.com>
-Subject: Re: Keystone Issue
-To: Julien Grall <julien@xen.org>
-Content-Type: text/plain; charset="UTF-8"
+ id 64b1e3b0-aa6e-11ea-bca7-bc764e2007e4;
+ Tue, 09 Jun 2020 16:29:30 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
+ Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=CFfR8OPlKnnlTFL8namRQAlsqp9E0KgFPJ1Ttff1kYg=; b=Y7AjTfYl+205kCb99lwmI4Xsl8
+ uWp62PQZ2antftiVrdy37WpIvELgo5pE/YXhKxcDTGfTsx75hLIwraA+v6f5ARJnOnSqitkWBzOf4
+ O0h2ykRrfquM6Yol5LmiOmIT5uWwlm2NhxNAdV8xOZcZ67ExyMGw9pvuM2zgV2U3h9+Y=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <paul@xen.org>)
+ id 1jih7w-0003W1-MX; Tue, 09 Jun 2020 16:29:28 +0000
+Received: from [54.239.6.185] (helo=CBG-R90WXYV0.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+ (envelope-from <paul@xen.org>)
+ id 1jih7w-0003N4-Bh; Tue, 09 Jun 2020 16:29:28 +0000
+From: Paul Durrant <paul@xen.org>
+To: xen-devel@lists.xenproject.org
+Subject: [PATCH-for-4.14 2/2] CHANGELOG: add revised kdd handshake (supporting
+ Windows 7, 8, and 10)
+Date: Tue,  9 Jun 2020 17:29:22 +0100
+Message-Id: <20200609162922.14679-3-paul@xen.org>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200609162922.14679-1-paul@xen.org>
+References: <20200609162922.14679-1-paul@xen.org>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -96,64 +70,33 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, nd <nd@arm.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Bertrand Marquis <Bertrand.Marquis@arm.com>
+Cc: Community Manager <community.manager@xenproject.org>,
+ Paul Durrant <pdurrant@amazon.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Tue, Jun 9, 2020 at 11:47 AM Julien Grall <julien@xen.org> wrote:
->
->
->
-> On 09/06/2020 16:28, Bertrand Marquis wrote:
-> > Hi,
-> >
-> >> On 9 Jun 2020, at 15:33, CodeWiz2280 <codewiz2280@gmail.com> wrote:
-> >>
-> >> There does appear to be a secondary (CIC) controller that can forward
-> >> events to the GIC-400 and EDMA controllers for the keystone 2 family.
-> >> Admittedly, i'm not sure how it is being used with regards to the
-> >> peripherals.  I only see mention of the GIC-400 parent for the devices
-> >> in the device tree.  Maybe Bertrand has a better idea on whether any
-> >> peripherals go through the CIC first?  I see that gic_interrupt ()
-> >> fires once in Xen, which calls doIRQ to push out the virtual interrupt
-> >> to the dom0 kernel.  The dom0 kernel then handles the interrupt and
-> >> returns, but gic_interrupt() never fires again in Xen.
-> >
-> > I do not remember of any CIC but the behaviour definitely look like an interrupt acknowledge problem.
-> >
-> > Could you try the following:
-> > --- a/xen/arch/arm/gic-v2.c
-> > +++ b/xen/arch/arm/gic-v2.c
-> > @@ -667,6 +667,9 @@ static void gicv2_guest_irq_end(struct irq_desc *desc)
-> >       /* Lower the priority of the IRQ */
-> >       gicv2_eoi_irq(desc);
-> >       /* Deactivation happens in maintenance interrupt / via GICV */
-> > +
-> > +    /* Test for Keystone2 */
-> > +    gicv2_dir_irq(desc);
-> >   }
-> >
-> > I think the problem I had was related to the vgic not deactivating properly the interrupt.
->
-This seemed to help with the edge triggered interrupts, e.g. UART
+From: Paul Durrant <pdurrant@amazon.com>
 
-> Are you suggesting the guest EOI is not properly forwarded to the
-> hardware when LR.HW is set? If so, this could possibly be workaround in
-> Xen by raising a maintenance interrupt every time a guest EOI an interrupt.
->
-> > This might make the interrupt fire indefinitely !!
->
-> Most likely with level interrupt ;).
->
-This is what's happening with the Ethernet driver which is level
-triggered.  I had to temporarily disable it
-to check the patch with the UART driver, otherwise the system would
-hang processing the interrupt
-repeatedly.
-> Cheers,
->
-> --
-> Julien Grall
+Signed-off-by: Paul Durrant <pdurrant@amazon.com>
+--
+Cc: Community Manager <community.manager@xenproject.org>
+---
+ CHANGELOG.md | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index cb1566ea5b..43fd260156 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -20,6 +20,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
+  - libxl support for running qemu-xen device model in a linux stubdomain.
+  - New 'domid_policy', allowing domain-ids to be randomly chosen.
+  - Option to preserve domain-id across migrate or save+restore.
++ - Support in kdd for initial KD protocol handshake for Win 7, 8 and 10 (64 bit).
+ 
+ ## [4.13.0](https://xenbits.xen.org/gitweb/?p=xen.git;a=shortlog;h=RELEASE-4.13.0) - 2019-12-17
+ 
+-- 
+2.17.1
+
 
