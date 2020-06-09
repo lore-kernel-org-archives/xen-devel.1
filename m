@@ -2,51 +2,96 @@ Return-Path: <SRS0=4XJi=7W=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-8.1 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 87C88C433DF
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2020 10:42:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 378D5C433E0
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2020 11:03:42 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 59A54207C3
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2020 10:42:14 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 59A54207C3
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 0284C2078D
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2020 11:03:41 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="Hjw0DGqk"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0284C2078D
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jibhe-00009b-3j; Tue, 09 Jun 2020 10:41:58 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=yKpO=7W=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jibhc-00009V-FV
- for xen-devel@lists.xenproject.org; Tue, 09 Jun 2020 10:41:56 +0000
-X-Inumbo-ID: d66ab7f6-aa3d-11ea-bca7-bc764e2007e4
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id d66ab7f6-aa3d-11ea-bca7-bc764e2007e4;
- Tue, 09 Jun 2020 10:41:56 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 653B6AAC6;
- Tue,  9 Jun 2020 10:41:58 +0000 (UTC)
-Subject: Re: [PATCH for-4.14] docs: Minor build improvements
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-References: <20200608171556.27847-1-andrew.cooper3@citrix.com>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <75b41942-3281-39ba-fa46-4a55667989f8@suse.com>
-Date: Tue, 9 Jun 2020 12:41:55 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.1
+	id 1jic2P-00021u-0k; Tue, 09 Jun 2020 11:03:25 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=HrVd=7W=redhat.com=pbonzini@srs-us1.protection.inumbo.net>)
+ id 1jic2M-00021p-MC
+ for xen-devel@lists.xenproject.org; Tue, 09 Jun 2020 11:03:23 +0000
+X-Inumbo-ID: d4a80a7e-aa40-11ea-b305-12813bfff9fa
+Received: from us-smtp-1.mimecast.com (unknown [207.211.31.120])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id d4a80a7e-aa40-11ea-b305-12813bfff9fa;
+ Tue, 09 Jun 2020 11:03:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1591700600;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=AGuN3wM4I0BralfErs2ulp7k2NU1Mw2uS1iHN1MhyPM=;
+ b=Hjw0DGqkKb/riXWMqn+f9iplwRDu8qEiXr7tpDYWrz02YwUD/zijRZCAqP1N92rrJUB+kl
+ jn8Wtq6GG7URPz7yUT6gXDc8W5qSrIgBM2cSnJ0GY1dkng60ODEfUZ004HlPKCnOQFhyDy
+ ZNG8Ih1pRxY1PZVTRR/xYk7/HNB6jyU=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-21-Nfe3kRG0MHirhwfX67968A-1; Tue, 09 Jun 2020 07:03:18 -0400
+X-MC-Unique: Nfe3kRG0MHirhwfX67968A-1
+Received: by mail-wm1-f69.google.com with SMTP id a7so524313wmf.1
+ for <xen-devel@lists.xenproject.org>; Tue, 09 Jun 2020 04:03:18 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=AGuN3wM4I0BralfErs2ulp7k2NU1Mw2uS1iHN1MhyPM=;
+ b=DPMWdvI0C4RrtafYTgijSlJxCflB+AbVfAfW4jQpkrMvoVh1RWLLm9g5WvGsXUy4wU
+ H++7ALuoMgGw6pcbR2ovQGm/jfgkCv7lLIruVMSmR9epNjoMFwAhmRCkS1qOyg5mjQjl
+ QG0kJvO/F176cp6rUXR4u0S6lhyUkvIbksF7Dxgz1ebBw34mwy9E4tYdyKUxf5AsVlV2
+ C01dhP+dZiEP3Xuc2oGszETeC3eSXoq9PpqRtPW4eSFrxYZDd4G2An5QZMvU1i6riINb
+ hn6IavbTwhupCoo2DuzJ7sdXO06wvj3yzHduDS/HG1YiTG6vr53MIMeA0C8svO26Pjee
+ QqMg==
+X-Gm-Message-State: AOAM530GpsZZasY63vrKK75gahrbDyw1rC9FLyIavBuEnA1cniYXQXH4
+ jKDiNmSiWz33drUBle7xaAZRCO18g+xSVPqRhZFm2Betc+Wz7HYh1uNfrBdXyAlvLDULo+ABkf2
+ DgdAYyaOPncMbtfa39azXKa6adgY=
+X-Received: by 2002:adf:fdcd:: with SMTP id i13mr3615806wrs.190.1591700597529; 
+ Tue, 09 Jun 2020 04:03:17 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxDvLBQJgRiWZcWe2u7EwQcm+tdrRwDV7JS7cSYFfquo5pnCwJjyQFwLMFNNTExDMlkFTA1qg==
+X-Received: by 2002:adf:fdcd:: with SMTP id i13mr3615759wrs.190.1591700597265; 
+ Tue, 09 Jun 2020 04:03:17 -0700 (PDT)
+Received: from [192.168.178.58] ([151.21.172.168])
+ by smtp.gmail.com with ESMTPSA id u3sm2969549wrw.89.2020.06.09.04.03.15
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 09 Jun 2020 04:03:16 -0700 (PDT)
+Subject: Re: [RFC PATCH 33/35] hw/timer/slavio_timer: Emit warning when old
+ code is used
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
+ qemu-devel@nongnu.org
+References: <20200608160044.15531-1-philmd@redhat.com>
+ <20200608160044.15531-34-philmd@redhat.com>
+From: Paolo Bonzini <pbonzini@redhat.com>
+Message-ID: <0bc0385a-9738-a9ea-d3c9-115955d5e8e6@redhat.com>
+Date: Tue, 9 Jun 2020 13:03:14 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.6.0
 MIME-Version: 1.0
-In-Reply-To: <20200608171556.27847-1-andrew.cooper3@citrix.com>
-Content-Type: text/plain; charset=utf-8
+In-Reply-To: <20200608160044.15531-34-philmd@redhat.com>
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,24 +102,64 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Wei Liu <wl@xen.org>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
- George Dunlap <George.Dunlap@eu.citrix.com>,
- Ian Jackson <ian.jackson@citrix.com>,
- Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Max Filippov <jcmvbkbc@gmail.com>, Alistair Francis <Alistair.Francis@wdc.com>,
+ Gerd Hoffmann <kraxel@redhat.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Paul Durrant <paul@xen.org>,
+ Magnus Damm <magnus.damm@gmail.com>, Markus Armbruster <armbru@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Anthony Perard <anthony.perard@citrix.com>,
+ =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?= <marcandre.lureau@redhat.com>,
+ David Gibson <david@gibson.dropbear.id.au>,
+ Andrzej Zaborowski <balrogg@gmail.com>, Eduardo Habkost <ehabkost@redhat.com>,
+ Alistair Francis <alistair@alistair23.me>, qemu-arm@nongnu.org,
+ xen-devel@lists.xenproject.org, qemu-riscv@nongnu.org,
+ Stafford Horne <shorne@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Richard Henderson <rth@twiddle.net>,
+ "Daniel P . Berrange" <berrange@redhat.com>, Thomas Huth <huth@tuxfamily.org>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Michael Walle <michael@walle.cc>, qemu-ppc@nongnu.org,
+ Aurelien Jarno <aurelien@aurel32.net>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 08.06.2020 19:15, Andrew Cooper wrote:
-> Don't use "set -x" for the figs rule.  It doesn't take effect in the recursive
-> make environment.
-
-I'd rather view this as an unintended debugging leftover.
-
-> Turn the HTML manpage comments into makefile comments, not shell comments.
-> This saves 3x shell invocations per manpage.
+On 08/06/20 18:00, Philippe Mathieu-Daudé wrote:
+> This code hasn't been QOM'ified yet. Warn the user.
 > 
-> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+> ---
+>  hw/timer/slavio_timer.c | 3 +++
+>  1 file changed, 3 insertions(+)
+> 
+> diff --git a/hw/timer/slavio_timer.c b/hw/timer/slavio_timer.c
+> index 4c5d65e391..16f21669bf 100644
+> --- a/hw/timer/slavio_timer.c
+> +++ b/hw/timer/slavio_timer.c
+> @@ -31,6 +31,7 @@
+>  #include "migration/vmstate.h"
+>  #include "trace.h"
+>  #include "qemu/module.h"
+> +#include "hw/qdev-deprecated.h"
+>  
+>  /*
+>   * Registers of hardware timer in sun4m.
+> @@ -392,6 +393,8 @@ static void slavio_timer_init(Object *obj)
+>      unsigned int i;
+>      TimerContext *tc;
+>  
+> +    qdev_warn_deprecated_function_used();
+> +
+>      for (i = 0; i <= MAX_CPUS; i++) {
+>          uint64_t size;
+>          char timer_name[20];
+> 
 
-Acked-by: Jan Beulich <jbeulich@suse.com>
+This one is okay.
+
+Paolo
+
 
