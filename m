@@ -1,60 +1,89 @@
 Return-Path: <SRS0=4XJi=7W=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-X-Spam-Level: **
-X-Spam-Status: No, score=2.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,MAILING_LIST_MULTI,SPF_HELO_NONE,
+X-Spam-Level: 
+X-Spam-Status: No, score=-3.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
+	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
 	SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4CB7DC433E0
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2020 11:10:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9D229C433E0
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2020 11:10:56 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 10695207ED
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2020 11:10:35 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 693F5207ED
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2020 11:10:56 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=recoil.org header.i=@recoil.org header.b="f6lSShSP"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 10695207ED
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=recoil.org
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="In07grGz"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 693F5207ED
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jic94-0003Lg-7v; Tue, 09 Jun 2020 11:10:18 +0000
+	id 1jic9W-0003SG-W2; Tue, 09 Jun 2020 11:10:46 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=eRw/=7W=recoil.org=anil@srs-us1.protection.inumbo.net>)
- id 1jic92-0003Ky-Tv
- for xen-devel@lists.xenproject.org; Tue, 09 Jun 2020 11:10:16 +0000
-X-Inumbo-ID: c7e79196-aa41-11ea-bb8b-bc764e2007e4
-Received: from honk.recoil.org (unknown [2604:1380:2001:1300::3])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=kazQ=7W=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
+ id 1jic9W-0003Rx-BQ
+ for xen-devel@lists.xenproject.org; Tue, 09 Jun 2020 11:10:46 +0000
+X-Inumbo-ID: dd633b2e-aa41-11ea-bb8b-bc764e2007e4
+Received: from mail-ej1-x633.google.com (unknown [2a00:1450:4864:20::633])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id c7e79196-aa41-11ea-bb8b-bc764e2007e4;
- Tue, 09 Jun 2020 11:10:09 +0000 (UTC)
-Received: from [IPv6:2a02:390:81d4::e5a2:aa13:2826:18e8] (unknown
- [IPv6:2a02:390:81d4:0:e5a2:aa13:2826:18e8])
- by honk.recoil.org (Postfix) with ESMTPSA id A86393C0189;
- Tue,  9 Jun 2020 10:50:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=recoil.org;
- s=selector1; t=1591699841;
- bh=TR8w4REWHYr5hfE0wj/02gw9m0ryu0Z1r9I3BSO9ZMs=;
- h=From:Subject:Date:In-Reply-To:Cc:To:References:From;
- b=f6lSShSP3s+IZmHoHFm+A2Z12+X+dqbZxtCVZFbjWX44UG8qdagW4B6D6RfqKiOAa
- kX3qcyNmMRnyvLF75X8ifsOpUpKKq04gmy2LEt01ER/Oj9lRyBVmZx4EwNRWY95uI+
- cKqr/ixcJGyZZHFzU2vRHFHUtZXijXrRarx8HAbI=
-From: Anil Madhavapeddy <anil@recoil.org>
-Message-Id: <B13ACF6F-11B5-4E5C-AF94-CD5DE401B1DB@recoil.org>
-Content-Type: multipart/alternative;
- boundary="Apple-Mail=_A71BAFB1-63AF-4E1D-953C-5E8D0B4A25A2"
-Mime-Version: 1.0 (Mac OS X Mail 12.4 \(3445.104.11\))
-Subject: Re: XENMAPSPACE_grant_table vs. GNTTABOP_setup_table
-Date: Tue, 9 Jun 2020 11:50:39 +0100
-In-Reply-To: <3c7269b9-bf3f-5359-6ce2-049f935c8e84@citrix.com>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-References: <20200609094425.GB9734@nodbug.lucina.net>
- <3c7269b9-bf3f-5359-6ce2-049f935c8e84@citrix.com>
-X-Mailer: Apple Mail (2.3445.104.11)
+ id dd633b2e-aa41-11ea-bb8b-bc764e2007e4;
+ Tue, 09 Jun 2020 11:10:45 +0000 (UTC)
+Received: by mail-ej1-x633.google.com with SMTP id p20so1908203ejd.13
+ for <xen-devel@lists.xenproject.org>; Tue, 09 Jun 2020 04:10:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:reply-to:to:cc:references:in-reply-to:subject:date:message-id
+ :mime-version:content-transfer-encoding:content-language
+ :thread-index; bh=zx5AoOosdYlTaKv0p9tnq8rrFBNsFIGLT11EWzMH0hs=;
+ b=In07grGzbm2tPRPQC0ggbJijnmPBoC3gseWy1O4SLsFP67kMXzjKZtcGxKXldlVrIY
+ X5t2Cdjfw9IhkCSWVzbmNOFwOwj11dIzYiK8IaLQFRCVGF5TdKd6pTCii8nTzze1z+Ov
+ DcF2p67nql3jsubUv0sEjRD2g37JWkvwITaayrO7YkeIt0bENkkLWbmSaquGUladq21F
+ 0LwW5cpfCYjwn1qMEs6OAgfOipjVAFdtP4aoSyG6DU/1YXpYQKT78IIoDkPPUeQBpS3M
+ AX/7ugXvrb3LphlvGWSOYMPIW4jcS0+Gs6hJ/ImYV/UAiv4zXPtRSgeF7AGmeW6hqy4c
+ GtvQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:reply-to:to:cc:references:in-reply-to
+ :subject:date:message-id:mime-version:content-transfer-encoding
+ :content-language:thread-index;
+ bh=zx5AoOosdYlTaKv0p9tnq8rrFBNsFIGLT11EWzMH0hs=;
+ b=dSCtDUR+g6x19b2u3jEXXqaX0nWeBqqDt6S5oe1MIADOYcGV+kRIvXx+F9sUMWxn8Y
+ c828jiEMlU0YKvIP5/rP20ndLKIiLXyw6z9KkkCuheP3IUUo9ja7WHgD4K/sHdJi2u9P
+ 9alNqg87NIlpqNcY3xwAmWFaKW5WfM//dWy1AispKdg6UGoqhF/8LdZHzkfkbyOo9IWC
+ I6IbRqBTze21jcxPwClSTmMkbIoOInQo5YfAVqFr3cWzbjO+nHjfZbUUAnz7LXTtebDO
+ sLuVeod3oiFUWr/LLmkinY8rGQYdR02X0U9Ifx9EsukuONIM3cATIW0SwKCBQdB+nSGS
+ ut/A==
+X-Gm-Message-State: AOAM532qw8x7fx2coQPOVr2eWx9uzjaH5MTwNFj4g943EUncjcf+07gh
+ eO4Mo6kyAxsP62193JJ4CtI=
+X-Google-Smtp-Source: ABdhPJzAHpkfbVB+lonYQyWOAoyZX7OhmsN7nZ8PtPKcAyhhLkvDUvqQxa8LnHLziiMJlKSKmswyog==
+X-Received: by 2002:a17:906:d111:: with SMTP id
+ b17mr24709296ejz.267.1591701044854; 
+ Tue, 09 Jun 2020 04:10:44 -0700 (PDT)
+Received: from CBGR90WXYV0 ([54.239.6.185])
+ by smtp.gmail.com with ESMTPSA id o8sm12776936ejx.84.2020.06.09.04.10.43
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Tue, 09 Jun 2020 04:10:44 -0700 (PDT)
+From: Paul Durrant <xadimgnik@gmail.com>
+X-Google-Original-From: "Paul Durrant" <paul@xen.org>
+To: "'Jan Beulich'" <jbeulich@suse.com>,
+ "'Andrew Cooper'" <andrew.cooper3@citrix.com>
+References: <20200608171556.27847-1-andrew.cooper3@citrix.com>
+ <75b41942-3281-39ba-fa46-4a55667989f8@suse.com>
+In-Reply-To: <75b41942-3281-39ba-fa46-4a55667989f8@suse.com>
+Subject: RE: [PATCH for-4.14] docs: Minor build improvements
+Date: Tue, 9 Jun 2020 12:10:42 +0100
+Message-ID: <007a01d63e4e$9e85d330$db917990$@xen.org>
+MIME-Version: 1.0
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: Microsoft Outlook 16.0
+Content-Language: en-gb
+Thread-Index: AQJEU+WnBi/4ky7HWNu3kNbmli1y/gFex+JAp+j/FHA=
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,381 +94,41 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: xen-devel@lists.xenproject.org, Martin Lucina <martin@lucina.net>,
- mirageos-devel@lists.xenproject.org
+Reply-To: paul@xen.org
+Cc: 'Stefano Stabellini' <sstabellini@kernel.org>,
+ 'Julien Grall' <julien@xen.org>, 'Wei Liu' <wl@xen.org>,
+ 'Konrad Rzeszutek Wilk' <konrad.wilk@oracle.com>,
+ 'George Dunlap' <George.Dunlap@eu.citrix.com>,
+ 'Xen-devel' <xen-devel@lists.xenproject.org>,
+ 'Ian Jackson' <ian.jackson@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 
---Apple-Mail=_A71BAFB1-63AF-4E1D-953C-5E8D0B4A25A2
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
 
-On 9 Jun 2020, at 11:22, Andrew Cooper <andrew.cooper3@citrix.com> =
-wrote:
->=20
-> On 09/06/2020 10:44, Martin Lucina wrote:
->> Hi,
->>=20
->> I've been making progress on bootstrapping a new, PVHv2 only, Xen =
-platform
->> stack for MirageOS [1]. The basics are now functional and I have =
-started to
->> re-implement the grant table code.
->>=20
->> After studying both the Mini-OS and Linux implementations some, I =
-don't
->> understand the difference between using XENMAPSPACE_grant_table vs.
->> GNTTABOP_setup_table to set up the initial grant table mapping for =
-the
->> guest.
->>=20
->> Are these calls just newer and older ways of accomplishing the same =
-thing?
->> The Linux driver seems to use both in various conditions, whereas =
-Mini-OS
->> uses the former on ARM and the latter on x86.
->>=20
->> If these are functionally equivalent, then for my purposes I'd rather =
-use
->> XENMAPSPACE_setup_table, since IIUC this lets me map the grant table =
-at an
->> address of my choosing rather than GNTTABOP_setup_table which at =
-least on
->> x86_64 appears to be returning PFNs at the top of the address space.
->>=20
->> Any advice much appreciated,
->=20
-> There is a little bit of history here...
->=20
-> GNTTABOP_setup_table was the original PV way of doing things (specify
-> size as an input, get a list of frames as an output to map), and
-> XENMAPSPACE_grant_table was the original HVM way of doing things (as
-> mapping is the other way around - I specify a GFN which I'd like to =
-turn
-> into a grant table mapping).
->=20
-> When grant v2 came along, it was only XENMAPSPACE_grant_table updated =
-to
-> be compatible.  i.e. you have to use XENMAPSPACE_grant_table to map =
-the
-> status frames even if you used GNTTABOP_setup_table previously.
->=20
-> It is a mistake that GNTTABOP_setup_table was usable in HVM guests to
-> being with.  Returning -1 is necessary to avoid an information leak =
-(the
-> physical address of the frames making up the grant table) which an HVM
-> guest shouldn't, and has no use knowing.
->=20
-> An with that note, ARM is extra special because the grant API is
-> specified to use host physical addresses rather than guest physical =
-(at
-> least for dom0, for reasons of there generally not being an IOMMU),
-> which is why it does use the old PV way.
+> -----Original Message-----
+> From: Xen-devel <xen-devel-bounces@lists.xenproject.org> On Behalf Of Jan Beulich
+> Sent: 09 June 2020 11:42
+> To: Andrew Cooper <andrew.cooper3@citrix.com>
+> Cc: Stefano Stabellini <sstabellini@kernel.org>; Julien Grall <julien@xen.org>; Wei Liu <wl@xen.org>;
+> Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>; George Dunlap <George.Dunlap@eu.citrix.com>; Ian
+> Jackson <ian.jackson@citrix.com>; Xen-devel <xen-devel@lists.xenproject.org>
+> Subject: Re: [PATCH for-4.14] docs: Minor build improvements
+> 
+> On 08.06.2020 19:15, Andrew Cooper wrote:
+> > Don't use "set -x" for the figs rule.  It doesn't take effect in the recursive
+> > make environment.
+> 
+> I'd rather view this as an unintended debugging leftover.
+> 
+> > Turn the HTML manpage comments into makefile comments, not shell comments.
+> > This saves 3x shell invocations per manpage.
+> >
+> > Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+> 
+> Acked-by: Jan Beulich <jbeulich@suse.com>
 
-Thanks, that makes sense. It doesn't seem too much of a mess from the =
-guest
-perspective to use just XENMAPSPACE_grant_table exclusively then.  With
-Martin's work, the MirageOS Xen backend should just use the latest and =
-greatest
-APIs, with no backwards compatibility to older Xen versions required.
+Release-acked-by: Paul Durrant <paul@xen.org>
 
-I'm still a little confused about ARM though -- is there an equivalent =
-of
-XENMAPSPACE_grant_table there? It sounds like we can't leave the
-GNTTABOP macros behind entirely...
 
-regards,
-Anil=
-
---Apple-Mail=_A71BAFB1-63AF-4E1D-953C-5E8D0B4A25A2
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/html;
-	charset=us-ascii
-
-<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; =
-charset=3Dus-ascii"></head><body style=3D"word-wrap: break-word; =
--webkit-nbsp-mode: space; line-break: after-white-space;" class=3D"">On =
-9 Jun 2020, at 11:22, Andrew Cooper &lt;<a =
-href=3D"mailto:andrew.cooper3@citrix.com" =
-class=3D"">andrew.cooper3@citrix.com</a>&gt; wrote:<br =
-class=3D""><div><blockquote type=3D"cite" class=3D""><br =
-class=3D"Apple-interchange-newline"><div class=3D""><span =
-style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
-font-size: 11px; font-style: normal; font-variant-caps: normal; =
-font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none; float: none; display: inline !important;" class=3D"">On 09/06/2020 =
-10:44, Martin Lucina wrote:</span><br style=3D"caret-color: rgb(0, 0, =
-0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
-font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-text-decoration: none;" class=3D""><blockquote type=3D"cite" =
-style=3D"font-family: Menlo-Regular; font-size: 11px; font-style: =
-normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
-normal; orphans: auto; text-align: start; text-indent: 0px; =
-text-transform: none; white-space: normal; widows: auto; word-spacing: =
-0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; =
-text-decoration: none;" class=3D"">Hi,<br class=3D""><br class=3D"">I've =
-been making progress on bootstrapping a new, PVHv2 only, Xen platform<br =
-class=3D"">stack for MirageOS [1]. The basics are now functional and I =
-have started to<br class=3D"">re-implement the grant table code.<br =
-class=3D""><br class=3D"">After studying both the Mini-OS and Linux =
-implementations some, I don't<br class=3D"">understand the difference =
-between using XENMAPSPACE_grant_table vs.<br =
-class=3D"">GNTTABOP_setup_table to set up the initial grant table =
-mapping for the<br class=3D"">guest.<br class=3D""><br class=3D"">Are =
-these calls just newer and older ways of accomplishing the same =
-thing?<br class=3D"">The Linux driver seems to use both in various =
-conditions, whereas Mini-OS<br class=3D"">uses the former on ARM and the =
-latter on x86.<br class=3D""><br class=3D"">If these are functionally =
-equivalent, then for my purposes I'd rather use<br =
-class=3D"">XENMAPSPACE_setup_table, since IIUC this lets me map the =
-grant table at an<br class=3D"">address of my choosing rather than =
-GNTTABOP_setup_table which at least on<br class=3D"">x86_64 appears to =
-be returning PFNs at the top of the address space.<br class=3D""><br =
-class=3D"">Any advice much appreciated,<br class=3D""></blockquote><br =
-style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
-font-size: 11px; font-style: normal; font-variant-caps: normal; =
-font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none; float: none; display: inline !important;" class=3D"">There is a =
-little bit of history here...</span><br style=3D"caret-color: rgb(0, 0, =
-0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
-font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-text-decoration: none;" class=3D""><br style=3D"caret-color: rgb(0, 0, =
-0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
-font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-text-decoration: none;" class=3D""><span style=3D"caret-color: rgb(0, 0, =
-0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
-font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-text-decoration: none; float: none; display: inline !important;" =
-class=3D"">GNTTABOP_setup_table was the original PV way of doing things =
-(specify</span><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none; float: none; display: inline !important;" class=3D"">size as an =
-input, get a list of frames as an output to map), and</span><br =
-style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
-font-size: 11px; font-style: normal; font-variant-caps: normal; =
-font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none; float: none; display: inline !important;" =
-class=3D"">XENMAPSPACE_grant_table was the original HVM way of doing =
-things (as</span><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none; float: none; display: inline !important;" class=3D"">mapping is =
-the other way around - I specify a GFN which I'd like to turn</span><br =
-style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
-font-size: 11px; font-style: normal; font-variant-caps: normal; =
-font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none; float: none; display: inline !important;" class=3D"">into a grant =
-table mapping).</span><br style=3D"caret-color: rgb(0, 0, 0); =
-font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
-font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-text-decoration: none;" class=3D""><br style=3D"caret-color: rgb(0, 0, =
-0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
-font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-text-decoration: none;" class=3D""><span style=3D"caret-color: rgb(0, 0, =
-0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
-font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-text-decoration: none; float: none; display: inline !important;" =
-class=3D"">When grant v2 came along, it was only XENMAPSPACE_grant_table =
-updated to</span><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none; float: none; display: inline !important;" class=3D"">be =
-compatible.&nbsp; i.e. you have to use XENMAPSPACE_grant_table to map =
-the</span><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none; float: none; display: inline !important;" class=3D"">status frames =
-even if you used GNTTABOP_setup_table previously.</span><br =
-style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
-font-size: 11px; font-style: normal; font-variant-caps: normal; =
-font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none; float: none; display: inline !important;" class=3D"">It is a =
-mistake that GNTTABOP_setup_table was usable in HVM guests to</span><br =
-style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
-font-size: 11px; font-style: normal; font-variant-caps: normal; =
-font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none; float: none; display: inline !important;" class=3D"">being =
-with.&nbsp; Returning -1 is necessary to avoid an information leak =
-(the</span><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none; float: none; display: inline !important;" class=3D"">physical =
-address of the frames making up the grant table) which an HVM</span><br =
-style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
-font-size: 11px; font-style: normal; font-variant-caps: normal; =
-font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none; float: none; display: inline !important;" class=3D"">guest =
-shouldn't, and has no use knowing.</span><br style=3D"caret-color: =
-rgb(0, 0, 0); font-family: Menlo-Regular; font-size: 11px; font-style: =
-normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
-normal; text-align: start; text-indent: 0px; text-transform: none; =
-white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-text-decoration: none;" class=3D""><br style=3D"caret-color: rgb(0, 0, =
-0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
-font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-text-decoration: none;" class=3D""><span style=3D"caret-color: rgb(0, 0, =
-0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
-font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-text-decoration: none; float: none; display: inline !important;" =
-class=3D"">An with that note, ARM is extra special because the grant API =
-is</span><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none; float: none; display: inline !important;" class=3D"">specified to =
-use host physical addresses rather than guest physical (at</span><br =
-style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
-font-size: 11px; font-style: normal; font-variant-caps: normal; =
-font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none; float: none; display: inline !important;" class=3D"">least for =
-dom0, for reasons of there generally not being an IOMMU),</span><br =
-style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
-font-size: 11px; font-style: normal; font-variant-caps: normal; =
-font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none; float: none; display: inline !important;" class=3D"">which is why =
-it does use the old PV way.</span><br style=3D"caret-color: rgb(0, 0, =
-0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
-font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-text-decoration: none;" class=3D""></div></blockquote><br =
-class=3D""></div>Thanks, that makes sense. It doesn't seem too much of a =
-mess from the guest<div class=3D"">perspective to use just =
-XENMAPSPACE_grant_table exclusively then. &nbsp;With</div><div =
-class=3D"">Martin's work, the MirageOS Xen backend should just use the =
-latest and greatest</div><div class=3D"">APIs, with no backwards =
-compatibility to older Xen versions required.</div><div class=3D""><br =
-class=3D""></div><div class=3D"">I'm still a little confused about ARM =
-though -- is there an equivalent of</div><div =
-class=3D"">XENMAPSPACE_grant_table there? It sounds like we can't leave =
-the</div><div class=3D"">GNTTABOP macros behind entirely...</div><div =
-class=3D""><br class=3D""></div><div class=3D"">regards,</div><div =
-class=3D"">Anil</div></body></html>=
-
---Apple-Mail=_A71BAFB1-63AF-4E1D-953C-5E8D0B4A25A2--
 
