@@ -2,54 +2,56 @@ Return-Path: <SRS0=OG7A=7X=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 247CBC433E0
-	for <xen-devel@archiver.kernel.org>; Wed, 10 Jun 2020 11:51:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 360A0C433E1
+	for <xen-devel@archiver.kernel.org>; Wed, 10 Jun 2020 11:51:51 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id F21CB2072E
-	for <xen-devel@archiver.kernel.org>; Wed, 10 Jun 2020 11:51:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F21CB2072E
+	by mail.kernel.org (Postfix) with ESMTPS id 109E12072E
+	for <xen-devel@archiver.kernel.org>; Wed, 10 Jun 2020 11:51:51 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 109E12072E
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jizGV-000899-TQ; Wed, 10 Jun 2020 11:51:31 +0000
+	id 1jizGg-0008BO-Ch; Wed, 10 Jun 2020 11:51:42 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=VUV0=7X=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1jizGV-000894-6y
- for xen-devel@lists.xenproject.org; Wed, 10 Jun 2020 11:51:31 +0000
-X-Inumbo-ID: b9087e7c-ab10-11ea-bb8b-bc764e2007e4
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+ id 1jizGf-000894-5e
+ for xen-devel@lists.xenproject.org; Wed, 10 Jun 2020 11:51:41 +0000
+X-Inumbo-ID: bc778184-ab10-11ea-bb8b-bc764e2007e4
+Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b9087e7c-ab10-11ea-bb8b-bc764e2007e4;
- Wed, 10 Jun 2020 11:51:30 +0000 (UTC)
-Authentication-Results: esa5.hc3370-68.iphmx.com;
+ id bc778184-ab10-11ea-bb8b-bc764e2007e4;
+ Wed, 10 Jun 2020 11:51:36 +0000 (UTC)
+Authentication-Results: esa2.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: zyLzOg9ydrdn0dJqs8dyKEpfPc+S21qCZ+0o6D50510o/5EcECpCCGeXcha8dPI4Y3E+hpBWHK
- jBGoC+3wrl7kFcWmdRSICWTgQGEEsbMYXgvIqVnpa+gRRJ4XZVf0Ip+ag+l/MH4r70+QtUIcAM
- fhpmP67Xr6NjOovJgPv2aa95VyOxlwRzJ34JGPxBzTDNvtz+weOb/GXSzQCmH1D1wPXfe3TOM8
- CSWWP448HRBWbfVtk3dBlBRbP9XMjwkwk1pWl8K/qP3piyqvKVtT/5Xbc668tQc7JzDuoK9Sh1
- z6I=
+IronPort-SDR: c+5iYyULtN6MmJAxB9TxPcrmkNfHgal4+8BuiEm2tC/wgr23aYplq31C8WJQeoJGHLZ79omQiN
+ 4c93Rc4dAIIFaFZI5z033JpEuZYVvJqTPBCWCpqo3Y8LLdAdnIfHNo8raGIH3UP37MyHfgMsyP
+ /W1Qxzl7m2NDU+4OWCLrKacObIhQzktx3CP5RoPZObW3YMNftQXuDQqmpIVoZMH+ZCl0++NLgF
+ gdgm048dekes7sP8cnvKn9Q3AKo6PPVjSZ+LZDgYc36gWERsfy87X/EAIqa1CCBdB+8vntcn/c
+ rjI=
 X-SBRS: 2.7
-X-MesageID: 19915504
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 19690637
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,495,1583211600"; d="scan'208";a="19915504"
+X-IronPort-AV: E=Sophos;i="5.73,495,1583211600"; d="scan'208";a="19690637"
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-Subject: [PATCH for-4.14 0/2] x86/passthrough: fixes for PVH dom0 edge
- triggered interrupts
-Date: Wed, 10 Jun 2020 13:51:01 +0200
-Message-ID: <20200610115103.7592-1-roger.pau@citrix.com>
+Subject: [PATCH for-4.14 2/2] x86/passthrough: introduce a flag for GSIs not
+ requiring an EOI or unmask
+Date: Wed, 10 Jun 2020 13:51:03 +0200
+Message-ID: <20200610115103.7592-3-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20200610115103.7592-1-roger.pau@citrix.com>
+References: <20200610115103.7592-1-roger.pau@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
@@ -69,26 +71,79 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Hello,
+There's no need to setup a timer for GSIs that are edge triggered,
+since those don't require any EIO or unmask, and hence couldn't block
+other interrupts.
 
-Small series with two bugfixes to correctly handle edge triggered
-interrupts on PVH dom0.
+Note this is only used by PVH dom0, that can setup the passthrough of
+edge triggered interrupts from the vIO-APIC. One example of such kind
+of interrupt that can be used by a PVH dom0 would be the RTC timer.
 
-for-4.14 reasoning: fixes are isolated to PVH dom0 specific passthrough
-code (IDENTITY_GSI kind of bindings), and hence shouldn't affect
-passthrough to HVM domUs. Without these fixes the RTC timer won't work
-correctly on a PVH dom0 because it's edge triggered (GSI 8).
-
-Roger Pau Monne (2):
-  x86/passthrough: do not assert edge triggered GSIs for PVH dom0
-  x86/passthrough: introduce a flag for GSIs not requiring an EOI or
-    unmask
-
- xen/arch/x86/hvm/irq.c        | 13 ++++++++-----
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
  xen/drivers/passthrough/io.c  | 14 +++++++++++++-
  xen/include/asm-x86/hvm/irq.h |  2 ++
- 3 files changed, 23 insertions(+), 6 deletions(-)
+ 2 files changed, 15 insertions(+), 1 deletion(-)
 
+diff --git a/xen/drivers/passthrough/io.c b/xen/drivers/passthrough/io.c
+index b292e79382..be1d5b1434 100644
+--- a/xen/drivers/passthrough/io.c
++++ b/xen/drivers/passthrough/io.c
+@@ -138,7 +138,8 @@ static void pt_pirq_softirq_reset(struct hvm_pirq_dpci *pirq_dpci)
+ 
+ bool pt_irq_need_timer(uint32_t flags)
+ {
+-    return !(flags & (HVM_IRQ_DPCI_GUEST_MSI | HVM_IRQ_DPCI_TRANSLATE));
++    return !(flags & (HVM_IRQ_DPCI_GUEST_MSI | HVM_IRQ_DPCI_TRANSLATE |
++                      HVM_IRQ_DPCI_NO_EOI));
+ }
+ 
+ static int pt_irq_guest_eoi(struct domain *d, struct hvm_pirq_dpci *pirq_dpci,
+@@ -558,6 +559,12 @@ int pt_irq_create_bind(
+                      */
+                     ASSERT(!mask);
+                     share = trigger_mode;
++                    if ( !trigger_mode )
++                        /*
++                         * Edge IO-APIC interrupt, no EOI or unmask to perform
++                         * and hence no timer needed.
++                         */
++                        pirq_dpci->flags |= HVM_IRQ_DPCI_NO_EOI;
+                 }
+             }
+ 
+@@ -920,6 +927,11 @@ static void hvm_dirq_assist(struct domain *d, struct hvm_pirq_dpci *pirq_dpci)
+         if ( pirq_dpci->flags & HVM_IRQ_DPCI_IDENTITY_GSI )
+         {
+             hvm_gsi_assert(d, pirq->pirq);
++            if ( pirq_dpci->flags & HVM_IRQ_DPCI_NO_EOI )
++            {
++                spin_unlock(&d->event_lock);
++                return;
++            }
+             pirq_dpci->pending++;
+         }
+ 
+diff --git a/xen/include/asm-x86/hvm/irq.h b/xen/include/asm-x86/hvm/irq.h
+index d306cfeade..532880d497 100644
+--- a/xen/include/asm-x86/hvm/irq.h
++++ b/xen/include/asm-x86/hvm/irq.h
+@@ -121,6 +121,7 @@ struct dev_intx_gsi_link {
+ #define _HVM_IRQ_DPCI_GUEST_PCI_SHIFT           4
+ #define _HVM_IRQ_DPCI_GUEST_MSI_SHIFT           5
+ #define _HVM_IRQ_DPCI_IDENTITY_GSI_SHIFT        6
++#define _HVM_IRQ_DPCI_NO_EOI_SHIFT              7
+ #define _HVM_IRQ_DPCI_TRANSLATE_SHIFT          15
+ #define HVM_IRQ_DPCI_MACH_PCI        (1u << _HVM_IRQ_DPCI_MACH_PCI_SHIFT)
+ #define HVM_IRQ_DPCI_MACH_MSI        (1u << _HVM_IRQ_DPCI_MACH_MSI_SHIFT)
+@@ -129,6 +130,7 @@ struct dev_intx_gsi_link {
+ #define HVM_IRQ_DPCI_GUEST_PCI       (1u << _HVM_IRQ_DPCI_GUEST_PCI_SHIFT)
+ #define HVM_IRQ_DPCI_GUEST_MSI       (1u << _HVM_IRQ_DPCI_GUEST_MSI_SHIFT)
+ #define HVM_IRQ_DPCI_IDENTITY_GSI    (1u << _HVM_IRQ_DPCI_IDENTITY_GSI_SHIFT)
++#define HVM_IRQ_DPCI_NO_EOI          (1u << _HVM_IRQ_DPCI_NO_EOI_SHIFT)
+ #define HVM_IRQ_DPCI_TRANSLATE       (1u << _HVM_IRQ_DPCI_TRANSLATE_SHIFT)
+ 
+ struct hvm_gmsi_info {
 -- 
 2.26.2
 
