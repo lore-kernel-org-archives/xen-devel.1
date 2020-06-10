@@ -2,61 +2,61 @@ Return-Path: <SRS0=OG7A=7X=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-0.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8E534C433DF
-	for <xen-devel@archiver.kernel.org>; Wed, 10 Jun 2020 12:41:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 310C5C433E0
+	for <xen-devel@archiver.kernel.org>; Wed, 10 Jun 2020 12:47:19 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 676782072E
-	for <xen-devel@archiver.kernel.org>; Wed, 10 Jun 2020 12:41:06 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 676782072E
+	by mail.kernel.org (Postfix) with ESMTPS id 070562072E
+	for <xen-devel@archiver.kernel.org>; Wed, 10 Jun 2020 12:47:19 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 070562072E
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jj02J-0004Wo-7r; Wed, 10 Jun 2020 12:40:55 +0000
+	id 1jj088-0004lR-Td; Wed, 10 Jun 2020 12:46:56 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=VUV0=7X=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1jj02I-0004We-8f
- for xen-devel@lists.xenproject.org; Wed, 10 Jun 2020 12:40:54 +0000
-X-Inumbo-ID: 9f2abe1e-ab17-11ea-8496-bc764e2007e4
-Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
+ id 1jj087-0004lM-CJ
+ for xen-devel@lists.xenproject.org; Wed, 10 Jun 2020 12:46:55 +0000
+X-Inumbo-ID: 7525f4b6-ab18-11ea-bca7-bc764e2007e4
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9f2abe1e-ab17-11ea-8496-bc764e2007e4;
- Wed, 10 Jun 2020 12:40:53 +0000 (UTC)
-Authentication-Results: esa2.hc3370-68.iphmx.com;
+ id 7525f4b6-ab18-11ea-bca7-bc764e2007e4;
+ Wed, 10 Jun 2020 12:46:52 +0000 (UTC)
+Authentication-Results: esa1.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: nNU+aj6yplQrqlTAqeK4CfMv+rI/KyzFg+pXfgzkQnX5EWIp934YHUa4GCOE003PI7fC5sz7dx
- Fe+eHPRYZd7cTGWfITkTezmZf67kvYbCl24OzIKFYI324xS3lIshY/m3FpjQ7axbalgFGbvcCi
- khmYnTYAAWOx/T910Fnfmcx0D9OPpX1Y6bOCqxmkivZy9KuCFuvItBb2DETWE0yb9DrG1nkQvG
- eA3Yva/xaoPSOy5Ha+tkCAcp4CR6OJnTRWIFPcxmb0DiPl5AEFLGvORS+OREGzMTBmT2JJ+x8n
- pQU=
+IronPort-SDR: IOxINSA+UxuA5GreV127XwoCoD48f/pHDw4nhs5FlCzjJN+fnZRg3DoGI9fIinbZ0GU26qw81a
+ C7mvgSlkpKBHHA5o0UQ4SsJlTFNDAj1PLegxtAZURnbW7jPVRWhf/Xs9y0sPQzEgybBfPP3FGP
+ 98vHRjvsXTcqm+Ii6stmcB6WMRK/sSatu9+5An6pxvLipjD845Sf18LS4e2TUJq21jaUUvURIY
+ AbMAmMEmDU9w2geST+3rETiXtX9JBmUPrYWbxrRBBbtSPgKWET8+4n2A1B6F0h7UIxEN9/XZro
+ 2bs=
 X-SBRS: 2.7
-X-MesageID: 19695224
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-MesageID: 19976294
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,496,1583211600"; d="scan'208";a="19695224"
-Date: Wed, 10 Jun 2020 14:40:43 +0200
+X-IronPort-AV: E=Sophos;i="5.73,496,1583211600"; d="scan'208";a="19976294"
+Date: Wed, 10 Jun 2020 14:46:45 +0200
 From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: <paul@xen.org>
-Subject: Re: [PATCH for-4.14 1/2] x86/passthrough: do not assert edge
- triggered GSIs for PVH dom0
-Message-ID: <20200610124043.GA4920@Air-de-Roger>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH for-4.14 2/2] x86/passthrough: introduce a flag for GSIs
+ not requiring an EOI or unmask
+Message-ID: <20200610124645.GB4920@Air-de-Roger>
 References: <20200610115103.7592-1-roger.pau@citrix.com>
- <20200610115103.7592-2-roger.pau@citrix.com>
- <00e301d63f23$63c83a00$2b58ae00$@xen.org>
+ <20200610115103.7592-3-roger.pau@citrix.com>
+ <c70eef2d-d780-6d76-decb-e921cf6a570c@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <00e301d63f23$63c83a00$2b58ae00$@xen.org>
+In-Reply-To: <c70eef2d-d780-6d76-decb-e921cf6a570c@citrix.com>
 X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
  AMSPEX02CL02.citrite.net (10.69.22.126)
 X-BeenThere: xen-devel@lists.xenproject.org
@@ -69,63 +69,39 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: xen-devel@lists.xenproject.org, 'Wei Liu' <wl@xen.org>,
- 'Jan Beulich' <jbeulich@suse.com>, 'Andrew Cooper' <andrew.cooper3@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wl@xen.org>,
+ Jan Beulich <jbeulich@suse.com>, paul@xen.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Wed, Jun 10, 2020 at 01:33:46PM +0100, Paul Durrant wrote:
-> > -----Original Message-----
-> > From: Roger Pau Monne <roger.pau@citrix.com>
-> > Sent: 10 June 2020 12:51
-> > To: xen-devel@lists.xenproject.org
-> > Cc: paul@xen.org; Roger Pau Monne <roger.pau@citrix.com>; Jan Beulich <jbeulich@suse.com>; Andrew
-> > Cooper <andrew.cooper3@citrix.com>; Wei Liu <wl@xen.org>
-> > Subject: [PATCH for-4.14 1/2] x86/passthrough: do not assert edge triggered GSIs for PVH dom0
-> > 
-> > Edge triggered interrupts do not assert the line, so the handling done
-> > in Xen should also avoid asserting it. Asserting the line prevents
-> > further edge triggered interrupts on the same vIO-APIC pin from being
-> > delivered, since the line is not de-asserted.
-> > 
-> > One case of such kind of interrupt is the RTC timer, which is edge
-> > triggered and available to a PVH dom0. Note this should not affect
-> > domUs, as it only modifies the behavior of IDENTITY_GSI kind of passed
-> > through interrupts.
-> > 
-> > Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-> > ---
-> >  xen/arch/x86/hvm/irq.c | 13 ++++++++-----
-> >  1 file changed, 8 insertions(+), 5 deletions(-)
-> > 
-> > diff --git a/xen/arch/x86/hvm/irq.c b/xen/arch/x86/hvm/irq.c
-> > index 9c8adbc495..9a56543c1b 100644
-> > --- a/xen/arch/x86/hvm/irq.c
-> > +++ b/xen/arch/x86/hvm/irq.c
-> > @@ -169,9 +169,10 @@ void hvm_pci_intx_deassert(
-> > 
-> >  void hvm_gsi_assert(struct domain *d, unsigned int gsi)
-> >  {
-> > +    int level = vioapic_get_trigger_mode(d, gsi);
-> >      struct hvm_irq *hvm_irq = hvm_domain_irq(d);
-> > 
-> > -    if ( gsi >= hvm_irq->nr_gsis )
-> > +    if ( gsi >= hvm_irq->nr_gsis || level < 0 )
-> >      {
-> >          ASSERT_UNREACHABLE();
-> >          return;
-> > @@ -186,9 +187,10 @@ void hvm_gsi_assert(struct domain *d, unsigned int gsi)
-> >       * to know if the GSI is pending or not.
-> >       */
-> >      spin_lock(&d->arch.hvm.irq_lock);
-> > -    if ( !hvm_irq->gsi_assert_count[gsi] )
-> > +    if ( !level || !hvm_irq->gsi_assert_count[gsi] )
+On Wed, Jun 10, 2020 at 01:37:15PM +0100, Andrew Cooper wrote:
+> On 10/06/2020 12:51, Roger Pau Monne wrote:
+> > @@ -920,6 +927,11 @@ static void hvm_dirq_assist(struct domain *d, struct hvm_pirq_dpci *pirq_dpci)
+> >          if ( pirq_dpci->flags & HVM_IRQ_DPCI_IDENTITY_GSI )
+> >          {
+> >              hvm_gsi_assert(d, pirq->pirq);
+> > +            if ( pirq_dpci->flags & HVM_IRQ_DPCI_NO_EOI )
+> > +            {
+> > +                spin_unlock(&d->event_lock);
+> > +                return;
+> > +            }
 > 
-> We have definitions of VIOAPIC_EDGE_TRIG and VIOAPIC_LEVEL_TRIG. It seems odd not to use them here.
+> Urgh.  Could I possibly talk you into fixing hvm_dirq_assist() to have a
+> "goto out;" and a single unlock path ?  (How far are you expecting this
+> to be backported?)
 
-Urg, completely forgot about those. I think there are many places
-where the triggering is treated as a boolean. I will rename the local
-variable to 'trig' and compare against VIOAPIC_EDGE_TRIG.
+I was very tempted to go that way but didn't want to introduce more
+churn. Since you agree I will do so.
+
+> I'm also totally unconvinced that the atomic test_and_clear() needs to
+> be done with the event lock held (it should either be non-atomic, or the
+> locking should be inside the if() condition), but that is probably not a
+> can of worms wanting opening right now...
+
+There's some reasoning about all this in 104072fc1c7e6ed. I also think
+naming it masked is confusing, since the underlying interrupt might
+not be masked. Anyway, this seems like something I don't really want
+to get into now, as it seems quite fragile.
 
 Thanks, Roger.
 
