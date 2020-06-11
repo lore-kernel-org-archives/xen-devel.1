@@ -2,53 +2,71 @@ Return-Path: <SRS0=JrVi=7Y=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-0.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
+	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 029B3C433E0
-	for <xen-devel@archiver.kernel.org>; Thu, 11 Jun 2020 12:32:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BBC78C433DF
+	for <xen-devel@archiver.kernel.org>; Thu, 11 Jun 2020 12:36:56 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CB5B62072F
-	for <xen-devel@archiver.kernel.org>; Thu, 11 Jun 2020 12:32:07 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CB5B62072F
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=canonical.com
+	by mail.kernel.org (Postfix) with ESMTPS id 7C86120747
+	for <xen-devel@archiver.kernel.org>; Thu, 11 Jun 2020 12:36:56 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="mTrFArQg"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7C86120747
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jjMN0-0004JB-N5; Thu, 11 Jun 2020 12:31:46 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jjMRo-0004Tt-99; Thu, 11 Jun 2020 12:36:44 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=lpkM=7Y=canonical.com=colin.king@srs-us1.protection.inumbo.net>)
- id 1jjMMz-0004J6-DO
- for xen-devel@lists.xenproject.org; Thu, 11 Jun 2020 12:31:45 +0000
-X-Inumbo-ID: 8254edb4-abdf-11ea-b516-12813bfff9fa
-Received: from youngberry.canonical.com (unknown [91.189.89.112])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 8254edb4-abdf-11ea-b516-12813bfff9fa;
- Thu, 11 Jun 2020 12:31:44 +0000 (UTC)
-Received: from 1.general.cking.uk.vpn ([10.172.193.212] helo=localhost)
- by youngberry.canonical.com with esmtpsa
- (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.86_2)
- (envelope-from <colin.king@canonical.com>)
- id 1jjMMo-0005qP-MA; Thu, 11 Jun 2020 12:31:34 +0000
-From: Colin King <colin.king@canonical.com>
-To: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
- Bjorn Helgaas <bhelgaas@google.com>, Thomas Gleixner <tglx@linutronix.de>,
- Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
- x86@kernel.org, "H . Peter Anvin" <hpa@zytor.com>,
- xen-devel@lists.xenproject.org, linux-pci@vger.kernel.org
-Subject: [PATCH] xen: remove redundant initialization of variable irq
-Date: Thu, 11 Jun 2020 13:31:34 +0100
-Message-Id: <20200611123134.922395-1-colin.king@canonical.com>
-X-Mailer: git-send-email 2.27.0.rc0
+ <SRS0=MzHD=7Y=gmail.com=jandryuk@srs-us1.protection.inumbo.net>)
+ id 1jjMRm-0004Tn-O8
+ for xen-devel@lists.xenproject.org; Thu, 11 Jun 2020 12:36:42 +0000
+X-Inumbo-ID: 339b8696-abe0-11ea-bb8b-bc764e2007e4
+Received: from mail-lf1-x141.google.com (unknown [2a00:1450:4864:20::141])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 339b8696-abe0-11ea-bb8b-bc764e2007e4;
+ Thu, 11 Jun 2020 12:36:42 +0000 (UTC)
+Received: by mail-lf1-x141.google.com with SMTP id h188so3416893lfd.7
+ for <xen-devel@lists.xenproject.org>; Thu, 11 Jun 2020 05:36:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to:cc;
+ bh=f9lcP7INmNDNWV+9/EdFziyLoY0jERPcqBsPG2jPz4k=;
+ b=mTrFArQgTEK5TxijkWGetMewTWdUyWeluJseQAcwBmtVxnl+mNYMbfuWll6Cov6Gi5
+ Ei1my7QqaQkbHT7+Y0If0S5Ij27srhh5ZZoI5ttRjc6i9H3H0F5TYKB2OW/30cPsmpGG
+ glmEds4AgUilSW5OD8CLJfRnpJEiRPjuHiqsxOrXppKgz+d8e4MnqBX8mOD1HCRIptQ0
+ 092c9LgDmbV0hgyPHHwxhRosSLfuu+4LDIs9tbZHJFxbD6T+IHzIaQfWP72aopqaiii1
+ anWJGDLe3VmSiO0cHBHbbdU6+5GhFrwUVzXcsO84gV17hiL0SbYSe6CVsqGbo0P87IsK
+ q5TQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
+ bh=f9lcP7INmNDNWV+9/EdFziyLoY0jERPcqBsPG2jPz4k=;
+ b=D8uFS0j+sMuz2X+NtrVr9/ER3VoHEb6hpyJTUkmFvsfJZcXL1EPPNtkh56aF2D1zUi
+ xTeV1LvqvPGoKku9xhCPO0BA/Czsy7XDDuQm9WVekt5BnFKCQwEU5c6hmzknL0FLYI0r
+ hWQnVvuSHE0WhRqTZq9oqZGNrrqdXdvygoDl8KhsJmY2/sQPAoX3gW6eLQGC28+jb8ss
+ GkwQlTZgVku3tpdETpmgIFGENSLhXPWERHP5u4FBTzwLvXetaOdsvEB1PoVfDU7K3qNY
+ wbIpbdDl2IHv3TNAnazfde2RbeQgxxuSbYWpnQ1axZ7qbq1zjJeWK5WvBZAtKYEcOqKH
+ jD8g==
+X-Gm-Message-State: AOAM5312WIXetpqbi5ySiD2b51idQO8UL+rqgjQTE/s3UbZ5so210bzD
+ IeMDqklvQJJuNeeXlogzbqUkpIHrK6TiBT0lfdA=
+X-Google-Smtp-Source: ABdhPJxicqV7kqXyXip+N1tdyoE/Q0gwZiwZ/cAEedHNLI18xbdZTUosbdm8Gzpp7sEXBzCFSH+boSZmWd6i7Vt1b40=
+X-Received: by 2002:a05:6512:31d1:: with SMTP id
+ j17mr3967177lfe.148.1591879001060; 
+ Thu, 11 Jun 2020 05:36:41 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+From: Jason Andryuk <jandryuk@gmail.com>
+Date: Thu, 11 Jun 2020 08:36:29 -0400
+Message-ID: <CAKf6xpvu6rMbBpxWUdDZ-W3ZL+6TTNad3tx6bwtieNkhjXeF6w@mail.gmail.com>
+Subject: Seabios Xen TPM check
+To: seabios@seabios.org
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,36 +77,25 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: kernel-janitors@vger.kernel.org, linux-kernel@vger.kernel.org
+Cc: xen-devel <xen-devel@lists.xenproject.org>, Quan Xu <quan.xu@intel.com>,
+ Stefan Berger <stefanb@linux.vnet.ibm.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: Colin Ian King <colin.king@canonical.com>
+Hi,
 
-The variable irq is being initialized with a value that is never read
-and it is being updated later with a new value.  The initialization is
-redundant and can be removed.
+SeaBIOS commit 67643955c746 (make SeaBios compatible with Xen vTPM.)
+made tpm_start() exit before calling tpm_startup().  The commit
+message has no explanation why this change was made.  Does anyone
+remember why it was made?
 
-Addresses-Coverity: ("Unused value")
-Signed-off-by: Colin Ian King <colin.king@canonical.com>
----
- arch/x86/pci/xen.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+The code today means SeaBIOS will not populate PCRs when running on
+Xen.  If I revert the patch, SeaBIOS populates PCRs as one would
+expect.  This is with a QEMU-emulated TPM backed by swtpm in TPM 1.2
+mode (qemu & swtpm running in a linux stubdom).
 
-diff --git a/arch/x86/pci/xen.c b/arch/x86/pci/xen.c
-index e3f1ca316068..9f9aad42ccff 100644
---- a/arch/x86/pci/xen.c
-+++ b/arch/x86/pci/xen.c
-@@ -62,7 +62,7 @@ static int xen_pcifront_enable_irq(struct pci_dev *dev)
- #ifdef CONFIG_ACPI
- static int xen_register_pirq(u32 gsi, int triggering, bool set_pirq)
- {
--	int rc, pirq = -1, irq = -1;
-+	int rc, pirq = -1, irq;
- 	struct physdev_map_pirq map_irq;
- 	int shareable = 0;
- 	char *name;
--- 
-2.27.0.rc0
+Any insight is appreciated.
 
+Thanks,
+Jason
 
