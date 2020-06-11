@@ -2,78 +2,75 @@ Return-Path: <SRS0=JrVi=7Y=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
+X-Spam-Status: No, score=-3.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
 	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=3.4.0
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 598B8C433E0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6141FC433E2
 	for <xen-devel@archiver.kernel.org>; Thu, 11 Jun 2020 03:30:43 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1856A2075F
+	by mail.kernel.org (Postfix) with ESMTPS id 2E234207F9
 	for <xen-devel@archiver.kernel.org>; Thu, 11 Jun 2020 03:30:43 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="f1IGQWYC"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1856A2075F
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="i+VgovDk"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2E234207F9
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jjDvB-0007yd-AA; Thu, 11 Jun 2020 03:30:29 +0000
+	id 1jjDv1-0007xi-M9; Thu, 11 Jun 2020 03:30:19 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=MzHD=7Y=gmail.com=jandryuk@srs-us1.protection.inumbo.net>)
- id 1jjDv9-0007xd-RQ
- for xen-devel@lists.xenproject.org; Thu, 11 Jun 2020 03:30:27 +0000
-X-Inumbo-ID: e335d77a-ab93-11ea-8496-bc764e2007e4
-Received: from mail-qt1-x844.google.com (unknown [2607:f8b0:4864:20::844])
+ id 1jjDuz-0007xd-VV
+ for xen-devel@lists.xenproject.org; Thu, 11 Jun 2020 03:30:18 +0000
+X-Inumbo-ID: deb0e65e-ab93-11ea-b7bb-bc764e2007e4
+Received: from mail-qt1-x842.google.com (unknown [2607:f8b0:4864:20::842])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id e335d77a-ab93-11ea-8496-bc764e2007e4;
- Thu, 11 Jun 2020 03:30:24 +0000 (UTC)
-Received: by mail-qt1-x844.google.com with SMTP id i16so3600419qtr.7
- for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2020 20:30:24 -0700 (PDT)
+ id deb0e65e-ab93-11ea-b7bb-bc764e2007e4;
+ Thu, 11 Jun 2020 03:30:17 +0000 (UTC)
+Received: by mail-qt1-x842.google.com with SMTP id j32so3581374qte.10
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Jun 2020 20:30:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=Xuj1oyeuSUlKPQJS2nl7hDTURFrye9RvexdzOTb7cJ0=;
- b=f1IGQWYC+vrigx8yJ2oxfZQUfd/70HCG0opTR9Qbko8LYtBPE3qe73aJ3ukY3/+3fG
- DYUS2JEoIEQErVe2yUc3Jjj21GRTeOLSB7FIViB46I8bnKGImeSrIJjat9Jpk9N6piue
- 1KVClOUQpySylxyMPEMfEfC0fiHRNb6SXhgK17a//Dy96tdgKphWyIkLzrCuV62eD/V6
- Qt3Xqell8qsazRLSJinS29uOw3vHXMvbn59s+BBI/xppkkn6KkjTPuurf6EBTctdPa+n
- bqvX7vmONfTndckCrJV2dhHM2+ppGkZtWVoJJU+VNXSShsHv/ND55G0LLA+OJsOuH49C
- Gmyw==
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=Q8ajjPfNfXlfaUIObFCSSsRlFcGxHZregYc1KnoZkdc=;
+ b=i+VgovDkfnd3LziCf0T4rcJ1hWApwbSLh0MfmvJcOzLB4Bgdcb+uPGtT0Eg/pnizet
+ 7AJcwyHds+zaVoARrwjx5aG2szCcid542NLO+g5jM6P+bTgHavq5LzmXN+z8uX1tNs43
+ +YM3DFDWocC1subzOxgnD6h+GN8Ryboqp8KKacly1lMaYoVuySVmaAVepvS3hwGBgMG2
+ kOVHh68jNx3iS3OTKuDhESHsz1B2Jovfk2SEtzRXsD2PpBVq22+9mqAbuaLrHMDeSGSZ
+ SJV2keiUoo+la+xwFGP4dLudBNSctcJP4aGPXegNWCJyzi2b4LkwrK4sVC7gWEmWzFgu
+ URNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=Xuj1oyeuSUlKPQJS2nl7hDTURFrye9RvexdzOTb7cJ0=;
- b=qN3z3vTEiFiTQ394YlKfFc+HRac1/qe/JukOrQmOUQho5fsZtrp/4t+HdPVZfPfaqc
- BAKYdey98UWSO8WByFxZKJFI1fubXVwXPmtHZipSq1txtGPLylTsM/ha3nbdQ51CQYTK
- RqESlDpjBLL78Ix3Nw8MLxMU36DHR+B6E8e4SKMLefJMyYHRskPCezYIdDNce6uv/vYy
- B5cYfsHGiOo/cZSQQ8XJkhsNq37vU7VTbbyCfG4SuqaNoeiSwPfVXjX97BTLhpv5Cdcm
- PEsf7jUI/xexO7pYXTHc3hhH5RF+BIuTTwv2prApL7yWsMEnVeSkn9oiW8CnzBSuKnMb
- D8gg==
-X-Gm-Message-State: AOAM530Qeo0P0P/CtdbsVL1+sN5oZmhvmObXUnGNKdKKVB3lFIk59eSb
- S59jWdufPADOhEj7DL6k43nj6elz
-X-Google-Smtp-Source: ABdhPJwO3IQ1jhD/t3O/3FRk4P3EWIPbIG10rbuhK9cU3ErZSxtylF1zUqqetUppzSAXRBSUKv+EtA==
-X-Received: by 2002:ac8:22e5:: with SMTP id g34mr6742379qta.227.1591846224351; 
- Wed, 10 Jun 2020 20:30:24 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=Q8ajjPfNfXlfaUIObFCSSsRlFcGxHZregYc1KnoZkdc=;
+ b=RWIf3dpajvHOVZol8JqibrRyVGKp/hRAVIXfdGvGCBVj2fYzh1BSsGItyn0pVE/sq5
+ QY6/j+gg+dVLSRrnpW9L+hgXokyzydtu/Bm2TVAKdzfhJ7HEPyfMbM+dMx0OOS3mOUhB
+ gdE2gjDq0x9tUfBepvelagqCY2IkZedNh6qkSQ1v66GX3RlifvUeouWr7baH8A3HXKKu
+ nwcBKk4IBHvrT+hW3U2veiTYI9cl4BbB6Cg2GLB6lHL+PeL8n1C5A0fz5O4eW1yA5HkC
+ yw/qBd6LlsdSyszP6c5qGJMxQj0yk96z/yFy4XyMtd+/4/6MnoAmwprmlcb35xpPDxAL
+ Vg7A==
+X-Gm-Message-State: AOAM530S4Y4baurwDOrRXYEoBprDCRvAv4LujxaBISgC+qGFEw0YzHyE
+ uFvtjrMnFrktwrSEwnZj2aLLbyu0
+X-Google-Smtp-Source: ABdhPJwNq26gIu0+54W7Z2GYJT9hIjdtpKfesEulzEowTtm7uhlhG/NQWxK07dRBg7/YOJIYEgIraQ==
+X-Received: by 2002:aed:35fa:: with SMTP id d55mr6440367qte.385.1591846216558; 
+ Wed, 10 Jun 2020 20:30:16 -0700 (PDT)
 Received: from shine.lan ([2001:470:8:67e:dd4d:2b5c:f471:f332])
- by smtp.gmail.com with ESMTPSA id v3sm1164078qkh.130.2020.06.10.20.30.23
+ by smtp.gmail.com with ESMTPSA id v3sm1164078qkh.130.2020.06.10.20.30.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Jun 2020 20:30:23 -0700 (PDT)
+ Wed, 10 Jun 2020 20:30:15 -0700 (PDT)
 From: Jason Andryuk <jandryuk@gmail.com>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH v2 02/10] vchan-socket-proxy: Move perror() into listen_socket
-Date: Wed, 10 Jun 2020 23:29:28 -0400
-Message-Id: <20200611032936.350657-3-jandryuk@gmail.com>
+Subject: [PATCH v2 00/10]  Coverity fixes for vchan-socket-proxy
+Date: Wed, 10 Jun 2020 23:29:26 -0400
+Message-Id: <20200611032936.350657-1-jandryuk@gmail.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20200611032936.350657-1-jandryuk@gmail.com>
-References: <20200611032936.350657-1-jandryuk@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
@@ -91,55 +88,29 @@ Cc: Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wl@xen.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-The use of perror on the return from listen_socket can produce
-misleading results like:
-UNIX socket path "/tmp/aa....aa" too long (156 >= 108)
-listen socket: Success
+This series addresses some Coverity reports.  To handle closing FDs, a
+state struct is introduced to track FDs closed in both main() and
+data_loop().
 
-errno is reset by subsequent system & library calls, so it may be
-inaccurate by the time listen_socket returns.  Call perror immediately
-after failing system calls to print the proper message.
+v2 changes "Ensure UNIX path NUL terminated" to avoid a warning with
+gcc-10.  Also, "Move perror() into listen_socket" and "Move perror()
+into connect_socket" are new.
 
-Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
----
- tools/libvchan/vchan-socket-proxy.c | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+Jason Andryuk (10):
+  vchan-socket-proxy: Ensure UNIX path NUL terminated
+  vchan-socket-proxy: Move perror() into listen_socket
+  vchan-socket-proxy: Move perror() into connect_socket
+  vchan-socket-proxy: Check xs_watch return value
+  vchan-socket-proxy: Unify main return value
+  vchan-socket-proxy: Use a struct to store state
+  vchan-socket-proxy: Switch data_loop() to take state
+  vchan-socket-proxy: Set closed FDs to -1
+  vchan-socket-proxy: Cleanup resources on exit
+  vchan-socket-proxy: Handle closing shared input/output_fd
 
-diff --git a/tools/libvchan/vchan-socket-proxy.c b/tools/libvchan/vchan-socket-proxy.c
-index 6ae1d84143..4edc3a44f5 100644
---- a/tools/libvchan/vchan-socket-proxy.c
-+++ b/tools/libvchan/vchan-socket-proxy.c
-@@ -188,16 +188,20 @@ static int listen_socket(const char *path_or_fd) {
- 
-     /* if not a number, assume a socket path */
-     fd = socket(AF_UNIX, SOCK_STREAM, 0);
--    if (fd == -1)
-+    if (fd == -1) {
-+        perror("socket");
-         return -1;
-+    }
- 
-     addr.sun_family = AF_UNIX;
-     strcpy(addr.sun_path, path_or_fd);
-     if (bind(fd, (const struct sockaddr *)&addr, sizeof(addr)) == -1) {
-+        perror("bind");
-         close(fd);
-         return -1;
-     }
-     if (listen(fd, 5) != 0) {
-+        perror("listen");
-         close(fd);
-         return -1;
-     }
-@@ -419,7 +423,7 @@ int main(int argc, char **argv)
-         } else {
-             socket_fd = listen_socket(socket_path);
-             if (socket_fd == -1) {
--                perror("listen socket");
-+                fprintf(stderr, "listen socket failed\n");
-                 return 1;
-             }
-         }
+ tools/libvchan/vchan-socket-proxy.c | 183 ++++++++++++++++++----------
+ 1 file changed, 119 insertions(+), 64 deletions(-)
+
 -- 
 2.25.1
 
