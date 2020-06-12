@@ -6,50 +6,48 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 73DD3C433DF
-	for <xen-devel@archiver.kernel.org>; Fri, 12 Jun 2020 15:57:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3585BC433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 12 Jun 2020 15:57:43 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 50AFC207F7
-	for <xen-devel@archiver.kernel.org>; Fri, 12 Jun 2020 15:57:40 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 50AFC207F7
+	by mail.kernel.org (Postfix) with ESMTPS id 145BC207F7
+	for <xen-devel@archiver.kernel.org>; Fri, 12 Jun 2020 15:57:42 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 145BC207F7
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jjm3e-0006RM-5z; Fri, 12 Jun 2020 15:57:30 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jjm3h-0006Tn-Fb; Fri, 12 Jun 2020 15:57:33 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5h37=7Z=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1jjm3c-0006K0-3i
- for xen-devel@lists.xenproject.org; Fri, 12 Jun 2020 15:57:28 +0000
-X-Inumbo-ID: 64878f00-acc5-11ea-b5e3-12813bfff9fa
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 64878f00-acc5-11ea-b5e3-12813bfff9fa;
- Fri, 12 Jun 2020 15:57:18 +0000 (UTC)
-Authentication-Results: esa1.hc3370-68.iphmx.com;
+ id 1jjm3g-0006Lr-3G
+ for xen-devel@lists.xenproject.org; Fri, 12 Jun 2020 15:57:32 +0000
+X-Inumbo-ID: 6a382f84-acc5-11ea-bb8b-bc764e2007e4
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 6a382f84-acc5-11ea-bb8b-bc764e2007e4;
+ Fri, 12 Jun 2020 15:57:28 +0000 (UTC)
+Authentication-Results: esa4.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: eRFtV+V4WhEVoVjHDyCMwnWyvoCyKAzxQJKaFS42Ybaa5AaK/TbaSitMe4MGEUWWVFlyq8X3S2
- f3+EWI/Ns2FNkYx30rBE4krpVQyHehlYT6KJQKkGHr+4PVrfFz8oyU+OUlDW60iE2BLyBDcfSE
- B+L2Qe935SRk+mUjCIp9SCOOZIHERNKdjx+g32oADaAl4TqkDG+68q6P6SJxyWUdn7BW3xHCZ8
- 4yH5ysQPR3jylPczxBDa0cNVkMigf/nMSpg5E3cG3Kw+3C37tcK2PE52UEHn1QyOFSHBc8t/5l
- XZM=
+IronPort-SDR: nk10nRa/UyvEBV7y95MSrL+xvq0BM4oOMyFXxhDkS9COEmbBEEVgBpmDzpoDGprQ6qVnQJMxYY
+ cdUWfwWeyEOknClS0zJXDeJAzX56V9SNb1bAzIY5rfyY9cQPkTd2aCcG5iXeR3h4MGJKkDX/RZ
+ 0oaEMHruPAp2CU86Sx0lGU+UmTq18Z7ngvJzl6ZVwphRqHagPxu6Y0tjkAK+t0ErfuBFmZvxX8
+ fPjqdMhEY53CPyxatGglmG0Owi38yqd5+pIyGEiCb78J5koTs2qVW8lL1K3u3uexy8P/X3YCkK
+ lpA=
 X-SBRS: 2.7
-X-MesageID: 20213502
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 20688223
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,503,1583211600"; d="scan'208";a="20213502"
+X-IronPort-AV: E=Sophos;i="5.73,503,1583211600"; d="scan'208";a="20688223"
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-Subject: [PATCH for-4.14 4/8] x86/vpt: only try to resume timers belonging to
- enabled devices
-Date: Fri, 12 Jun 2020 17:56:36 +0200
-Message-ID: <20200612155640.4101-5-roger.pau@citrix.com>
+Subject: [PATCH for-4.14 8/8] x86/hvm: enable emulated PIT for PVH dom0
+Date: Fri, 12 Jun 2020 17:56:40 +0200
+Message-ID: <20200612155640.4101-9-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200612155640.4101-1-roger.pau@citrix.com>
 References: <20200612155640.4101-1-roger.pau@citrix.com>
@@ -72,51 +70,114 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Check whether the emulated device is actually enabled before trying to
-resume the associated timers.
+Some video BIOS require a PIT in order to work properly, hence classic
+PV dom0 gets partial access to the physical PIT as long as it's not in
+use by Xen.
 
-Thankfully all those structures are zeroed at initialization, and
-since the devices are not enabled they are never populated, which
-triggers the pt->vcpu check at the beginning of pt_resume forcing an
-exit from the function.
+Since PVH dom0 is built on top of HVM support, there's already an
+emulated PIT implementation available for use. Tweak the emulated PIT
+code so it injects interrupts directly into the vIO-APIC if the legacy
+PIC (i8259) is disabled. Make sure the GSI used matches the ISA IRQ 0
+in the likely case there's an interrupt overwrite in the MADT ACPI
+table.
 
-While there limit the scope of i and make it unsigned.
+Finally prevent the passthrough of the GSI that belongs to the PIT,
+since interrupts will be generated by the emulated PIT instead of the
+physical one.
 
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
- xen/arch/x86/hvm/vpt.c | 17 +++++++++++------
- 1 file changed, 11 insertions(+), 6 deletions(-)
+ xen/arch/x86/domain.c      |  5 +++--
+ xen/arch/x86/emul-i8254.c  | 12 +++++++++---
+ xen/arch/x86/hvm/vioapic.c |  9 ++++++++-
+ 3 files changed, 20 insertions(+), 6 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/vpt.c b/xen/arch/x86/hvm/vpt.c
-index 47f2c2aa64..62c87867c5 100644
---- a/xen/arch/x86/hvm/vpt.c
-+++ b/xen/arch/x86/hvm/vpt.c
-@@ -636,14 +636,19 @@ static void pt_resume(struct periodic_time *pt)
- 
- void pt_may_unmask_irq(struct domain *d, struct periodic_time *vlapic_pt)
- {
--    int i;
--
-     if ( d )
+diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
+index fee6c3931a..dc0b4c2284 100644
+--- a/xen/arch/x86/domain.c
++++ b/xen/arch/x86/domain.c
+@@ -512,7 +512,8 @@ static bool emulation_flags_ok(const struct domain *d, uint32_t emflags)
+     if ( is_hvm_domain(d) )
      {
--        pt_resume(&d->arch.vpit.pt0);
--        pt_resume(&d->arch.hvm.pl_time->vrtc.pt);
--        for ( i = 0; i < HPET_TIMER_NUM; i++ )
--            pt_resume(&d->arch.hvm.pl_time->vhpet.pt[i]);
-+        if ( has_vpit(d) )
-+            pt_resume(&d->arch.vpit.pt0);
-+        if ( has_vrtc(d) )
-+            pt_resume(&d->arch.hvm.pl_time->vrtc.pt);
-+        if ( has_vhpet(d) )
-+        {
-+            unsigned int i;
-+
-+            for ( i = 0; i < HPET_TIMER_NUM; i++ )
-+                pt_resume(&d->arch.hvm.pl_time->vhpet.pt[i]);
-+        }
+         if ( is_hardware_domain(d) &&
+-             emflags != (X86_EMU_VPCI | X86_EMU_LAPIC | X86_EMU_IOAPIC) )
++             emflags != (X86_EMU_VPCI | X86_EMU_LAPIC | X86_EMU_IOAPIC |
++                         X86_EMU_PIT) )
+             return false;
+         if ( !is_hardware_domain(d) &&
+              emflags != (X86_EMU_ALL & ~X86_EMU_VPCI) &&
+@@ -578,7 +579,7 @@ int arch_domain_create(struct domain *d,
+ 
+     emflags = config->arch.emulation_flags;
+ 
+-    if ( is_hardware_domain(d) && is_pv_domain(d) )
++    if ( is_hardware_domain(d) )
+         emflags |= XEN_X86_EMU_PIT;
+ 
+     if ( emflags & ~XEN_X86_EMU_ALL )
+diff --git a/xen/arch/x86/emul-i8254.c b/xen/arch/x86/emul-i8254.c
+index 73be4188ad..5aef0fe852 100644
+--- a/xen/arch/x86/emul-i8254.c
++++ b/xen/arch/x86/emul-i8254.c
+@@ -168,6 +168,7 @@ static void pit_load_count(PITState *pit, int channel, int val)
+     u32 period;
+     struct hvm_hw_pit_channel *s = &pit->hw.channels[channel];
+     struct vcpu *v = vpit_vcpu(pit);
++    const struct domain *d = v ? v->domain : NULL;
+ 
+     ASSERT(spin_is_locked(&pit->lock));
+ 
+@@ -190,14 +191,18 @@ static void pit_load_count(PITState *pit, int channel, int val)
+     case 3:
+         /* Periodic timer. */
+         TRACE_2D(TRC_HVM_EMUL_PIT_START_TIMER, period, period);
+-        create_periodic_time(v, &pit->pt0, period, period, 0, pit_time_fired, 
++        create_periodic_time(v, &pit->pt0, period, period,
++                             has_vpic(d) ? 0 : hvm_isa_irq_to_gsi(d, 0),
++                             pit_time_fired,
+                              &pit->count_load_time[channel], false);
+         break;
+     case 1:
+     case 4:
+         /* One-shot timer. */
+         TRACE_2D(TRC_HVM_EMUL_PIT_START_TIMER, period, 0);
+-        create_periodic_time(v, &pit->pt0, period, 0, 0, pit_time_fired,
++        create_periodic_time(v, &pit->pt0, period, 0,
++                             has_vpic(d) ? 0 : hvm_isa_irq_to_gsi(d, 0),
++                             pit_time_fired,
+                              &pit->count_load_time[channel], false);
+         break;
+     default:
+@@ -455,7 +460,8 @@ void pit_reset(struct domain *d)
+     {
+         TRACE_0D(TRC_HVM_EMUL_PIT_STOP_TIMER);
+         destroy_periodic_time(&pit->pt0);
+-        pit->pt0.source = PTSRC_isa;
++        ASSERT(has_vpic(d) || has_vioapic(d));
++        pit->pt0.source = has_vpic(d) ? PTSRC_isa : PTSRC_ioapic;
      }
  
-     if ( vlapic_pt )
+     spin_lock(&pit->lock);
+diff --git a/xen/arch/x86/hvm/vioapic.c b/xen/arch/x86/hvm/vioapic.c
+index 34bec715b7..8b95e4412f 100644
+--- a/xen/arch/x86/hvm/vioapic.c
++++ b/xen/arch/x86/hvm/vioapic.c
+@@ -268,7 +268,14 @@ static void vioapic_write_redirent(
+ 
+     spin_unlock(&d->arch.hvm.irq_lock);
+ 
+-    if ( is_hardware_domain(d) && unmasked )
++    if ( is_hardware_domain(d) && unmasked &&
++         /*
++          * A PVH dom0 can have an emulated PIT that should respect any
++          * interrupt overwrites found in the ACPI MADT table, so we need to
++          * check to which GSI the ISA IRQ 0 is mapped in order to prevent
++          * identity mapping it.
++          */
++         (!has_vpit(d) || gsi != hvm_isa_irq_to_gsi(d, 0)) )
+     {
+         /*
+          * NB: don't call vioapic_hwdom_map_gsi while holding hvm.irq_lock
 -- 
 2.26.2
 
