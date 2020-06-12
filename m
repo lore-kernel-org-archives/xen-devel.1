@@ -2,61 +2,60 @@ Return-Path: <SRS0=NwDn=7Z=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DF2FCC433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 12 Jun 2020 15:54:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 25CAEC433DF
+	for <xen-devel@archiver.kernel.org>; Fri, 12 Jun 2020 15:57:29 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B667F207F7
-	for <xen-devel@archiver.kernel.org>; Fri, 12 Jun 2020 15:54:37 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B667F207F7
+	by mail.kernel.org (Postfix) with ESMTPS id F1770207F7
+	for <xen-devel@archiver.kernel.org>; Fri, 12 Jun 2020 15:57:28 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F1770207F7
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jjm0V-0006B3-I6; Fri, 12 Jun 2020 15:54:15 +0000
+	id 1jjm3O-0006K5-96; Fri, 12 Jun 2020 15:57:14 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=dChH=7Z=citrix.com=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1jjm0U-0006Ay-E7
- for xen-devel@lists.xenproject.org; Fri, 12 Jun 2020 15:54:14 +0000
-X-Inumbo-ID: f5bc216a-acc4-11ea-b5e3-12813bfff9fa
+ <SRS0=5h37=7Z=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1jjm3N-0006K0-4q
+ for xen-devel@lists.xenproject.org; Fri, 12 Jun 2020 15:57:13 +0000
+X-Inumbo-ID: 60389534-acc5-11ea-b5e3-12813bfff9fa
 Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id f5bc216a-acc4-11ea-b5e3-12813bfff9fa;
- Fri, 12 Jun 2020 15:54:13 +0000 (UTC)
+ id 60389534-acc5-11ea-b5e3-12813bfff9fa;
+ Fri, 12 Jun 2020 15:57:12 +0000 (UTC)
 Authentication-Results: esa1.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: YXrMwguBL+IgQnqDk0+ehaEcLNp0LZ5jt6xVp6hqo/xaZkWeBYdSSRXt/sg9Cj5K2Ld/6dJBR5
- bMJeVWmatGTDj1Z46cEchT8IgwEQ2WR5MRCBckvvzN9B1LJRNdabRNQf+vrO4ry3ukIkfZV5HN
- ENcKRN/ELT1HOmWZc+GC0i0SOKDMegIY+iGW4DI/Ri04AsUaGGWnwyGXGzClpsTt3RuaQmf0nz
- zJCPkdLTex5/1QDAheQMzcdgiZw1GTtnx7zYXsDG3Me2tKVmZ2DFxEqAmtNg65P4VRnOk3g7Zy
- aO4=
+IronPort-SDR: tJYIR2S3Ocd5uXt8pWAoShrj2UMDT+WR9oxPAsF9CJqVNZYh0HUpjT7joDzDm7OYui4jLzBkIr
+ 5i/INQSZZUgypeKxultSdhU11yxeTufQkknSiDM8gRz0szZ4pLgdA/v1SqCCgOwEer3uslnldD
+ cKbpI2joK5PNzfo2XsCh1ndozWh2TtA+sa6dVcqVkaMxrMQYCAWrOQntbkwGoEOe1goRKcu19Z
+ YCT6b2yJtr/jCEUIBEK3H+yQZ3+X/1Xoe31c6xUGRIeUZkrxQPXyqESLrG6ywIwmQEuCOhjz4W
+ Cis=
 X-SBRS: 2.7
-X-MesageID: 20213136
+X-MesageID: 20213493
 X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,503,1583211600"; d="scan'208";a="20213136"
-From: Ian Jackson <ian.jackson@citrix.com>
+X-IronPort-AV: E=Sophos;i="5.73,503,1583211600"; d="scan'208";a="20213493"
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: <xen-devel@lists.xenproject.org>
+Subject: [PATCH for-4.14 1/8] x86/hvm: fix vIO-APIC build without
+ IRQ0_SPECIAL_ROUTING
+Date: Fri, 12 Jun 2020 17:56:33 +0200
+Message-ID: <20200612155640.4101-2-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20200612155640.4101-1-roger.pau@citrix.com>
+References: <20200612155640.4101-1-roger.pau@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-Message-ID: <24291.42247.159206.867256@mariner.uk.xensource.com>
-Date: Fri, 12 Jun 2020 16:53:43 +0100
-To: "paul@xen.org" <paul@xen.org>
-Subject: RE: [PATCH for-4.14] tools/libxc: Drop config_transformed parameter
- from xc_cpuid_set()
-In-Reply-To: <000301d640a9$743c5510$5cb4ff30$@xen.org>
-References: <20200612105519.18728-1-andrew.cooper3@citrix.com>
- <000301d640a9$743c5510$5cb4ff30$@xen.org>
-X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,35 +66,40 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Andrew Cooper <Andrew.Cooper3@citrix.com>, 'Wei Liu' <wl@xen.org>,
- 'Xen-devel' <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Roger Pau Monne <roger.pau@citrix.com>, Wei Liu <wl@xen.org>,
+ Jan Beulich <jbeulich@suse.com>, paul@xen.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Paul Durrant writes ("RE: [PATCH for-4.14] tools/libxc: Drop config_transformed parameter from xc_cpuid_set()"):
-> > -----Original Message-----
-> > From: Andrew Cooper <andrew.cooper3@citrix.com>
-> > Sent: 12 June 2020 11:55
-> > To: Xen-devel <xen-devel@lists.xenproject.org>
-> > Cc: Andrew Cooper <andrew.cooper3@citrix.com>; Ian Jackson <Ian.Jackson@citrix.com>; Wei Liu
-> > <wl@xen.org>; Paul Durrant <paul@xen.org>
-> > Subject: [PATCH for-4.14] tools/libxc: Drop config_transformed parameter from xc_cpuid_set()
-> > 
-> > libxl is now the sole caller of xc_cpuid_set().  The config_transformed output
-> > is ignored, and this patch trivially highlights the resulting memory leak.
-> > 
-> > "transformed" config is now properly forwarded on migrate as part of the
-> > general VM state, so delete the transformation logic completely, rather than
-> > trying to adjust just libxl to avoid leaking memory.
-> > 
-> > Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-> 
-> Reviewed-by: Paul Durrant <paul@xen.org>
-> Release-acked-by: Paul Durrant <paul@xen.org>
+pit_channel0_enabled needs to be guarded with IRQ0_SPECIAL_ROUTING
+since it's only used when the special handling of ISA IRQ 0 is enabled.
 
-Reviewed-by: Ian Jackson <ian.jackson@eu.citrix.com>
+No functional change.
 
-I will commit this in a moment.
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+ xen/arch/x86/hvm/vioapic.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Ian.
+diff --git a/xen/arch/x86/hvm/vioapic.c b/xen/arch/x86/hvm/vioapic.c
+index b87facb0e0..bd41036137 100644
+--- a/xen/arch/x86/hvm/vioapic.c
++++ b/xen/arch/x86/hvm/vioapic.c
+@@ -391,10 +391,12 @@ static void ioapic_inj_irq(
+     vlapic_set_irq(target, vector, trig_mode);
+ }
+ 
++#ifdef IRQ0_SPECIAL_ROUTING
+ static inline int pit_channel0_enabled(void)
+ {
+     return pt_active(&current->domain->arch.vpit.pt0);
+ }
++#endif
+ 
+ static void vioapic_deliver(struct hvm_vioapic *vioapic, unsigned int pin)
+ {
+-- 
+2.26.2
+
 
