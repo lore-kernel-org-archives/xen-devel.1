@@ -2,88 +2,62 @@ Return-Path: <SRS0=NwDn=7Z=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
-	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5B6B2C433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 12 Jun 2020 17:14:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BEA74C433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 12 Jun 2020 17:16:19 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2CB5E20885
-	for <xen-devel@archiver.kernel.org>; Fri, 12 Jun 2020 17:14:31 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="b8AHygjv"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2CB5E20885
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id 9C5422067B
+	for <xen-devel@archiver.kernel.org>; Fri, 12 Jun 2020 17:16:19 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9C5422067B
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jjnFg-0006Lb-GP; Fri, 12 Jun 2020 17:14:00 +0000
+	id 1jjnHk-0006RU-TA; Fri, 12 Jun 2020 17:16:08 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=d5ow=7Z=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
- id 1jjnFf-0006LW-P5
- for xen-devel@lists.xenproject.org; Fri, 12 Jun 2020 17:13:59 +0000
-X-Inumbo-ID: 1a545758-acd0-11ea-b7bb-bc764e2007e4
-Received: from mail-wr1-x443.google.com (unknown [2a00:1450:4864:20::443])
+ <SRS0=CBv9=7Z=citrix.com=igor.druzhinin@srs-us1.protection.inumbo.net>)
+ id 1jjnHj-0006RO-SY
+ for xen-devel@lists.xenproject.org; Fri, 12 Jun 2020 17:16:07 +0000
+X-Inumbo-ID: 669f4442-acd0-11ea-bca7-bc764e2007e4
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 1a545758-acd0-11ea-b7bb-bc764e2007e4;
- Fri, 12 Jun 2020 17:13:58 +0000 (UTC)
-Received: by mail-wr1-x443.google.com with SMTP id r7so10510883wro.1
- for <xen-devel@lists.xenproject.org>; Fri, 12 Jun 2020 10:13:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:reply-to:to:cc:references:in-reply-to:subject:date:message-id
- :mime-version:content-transfer-encoding:content-language
- :thread-index; bh=y8Dar2G/LSH5ykpeI+KYX7dYa1DvwTbGtEFoooB9eCU=;
- b=b8AHygjvK8u5WFrWN1NnCF/M2uzPN7kDgiDojV0WFUuLvfxk6Zv7TTTqpGlJDJxHYR
- d/Pom8yVYS0pUemlDrJsS6aEgsjhu25MNqiAxqKX9zgJ/bJWt1cPqyIxY/+hq6/nk+cl
- rzH/tAzBpvlVqKNJjunvHGQCPJor/K2Vhzu8VloG3RXcr8FzwUoNYqePoewQXMGr5bgn
- GqQy8GAoTEGHZIsZ63XfFjO4qcwJQRRKwiNvLq550zHM3iDqPcdiuzYm3HnsXVyn+Dwl
- Li1lq3cIS0LchMZopmqIEnWSS4i7+gF8sfpo1TLaHfB7r2C73kAkja6+P9Fyql+wR2/J
- onfg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:reply-to:to:cc:references:in-reply-to
- :subject:date:message-id:mime-version:content-transfer-encoding
- :content-language:thread-index;
- bh=y8Dar2G/LSH5ykpeI+KYX7dYa1DvwTbGtEFoooB9eCU=;
- b=N4W49Sjhh96BB3vH5aVDpZEQzjFiKxkNPNY3jkNWBrVOqBqQ9c19av25lI4QA2Ve/o
- DCwqYKu1fNPLCRf9szHjObyz8m3XpV1cknvvRbllXjx1jgq9d50Ge9AMcyffdXgYeFjz
- eaO2Pa+6krvogbL5/D58I5/06s4QTideNOFSbYfkhtD09kZDDt7uRA7D2dN3XSYsaP/K
- xmkiTybilO5URwAUeAfLYPAWf9WTAt9DSP5okyLeksP9s+mgyoGKSswOiugElg7zwkrF
- MO7xOXFVScJ2sI1K0YHQ2klVI+JlFl5m343oML2F57G2Oqg0+GE9nU+9ZJ7BQpBZATCg
- Cerg==
-X-Gm-Message-State: AOAM532gjJRDXu+6UKrDIpx7N1I1FiQnHsWJHRo0TW0qI2/A1wgNXiPL
- 4QCMHvem8jJHlH4WdJhVr60=
-X-Google-Smtp-Source: ABdhPJzW2VniIlb4uF+Oca6CLspz0t1eiC7rqwDxT16+O3r86gOe6EbQ9EkaARkhdaes3TAx6taRTg==
-X-Received: by 2002:adf:a1d3:: with SMTP id v19mr15824086wrv.245.1591982037976; 
- Fri, 12 Jun 2020 10:13:57 -0700 (PDT)
-Received: from CBGR90WXYV0 (54-240-197-226.amazon.com. [54.240.197.226])
- by smtp.gmail.com with ESMTPSA id i15sm4071381wre.93.2020.06.12.10.13.56
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Fri, 12 Jun 2020 10:13:57 -0700 (PDT)
-From: Paul Durrant <xadimgnik@gmail.com>
-X-Google-Original-From: "Paul Durrant" <paul@xen.org>
-To: "'Ian Jackson'" <ian.jackson@citrix.com>,
- "'Igor Druzhinin'" <igor.druzhinin@citrix.com>
+ id 669f4442-acd0-11ea-bca7-bc764e2007e4;
+ Fri, 12 Jun 2020 17:16:06 +0000 (UTC)
+Authentication-Results: esa1.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none
+IronPort-SDR: iqxVyR9EOYYFT21DnuJVlUWciVkeM5Z58f1TjKPndd02Sq6Dl6ViiDO0KBpQoiokfaewEbQsxr
+ 5prBjsSJZ4un1gVmaY5yoKhMcX13xfwW27WUbDpLYjZNQqLrR/hbvJ1N3gH0Lip2VM0yaRurHs
+ SZ15ygy7NJKEalSTHOPNZzKMSw1UDHBzDOzNcSHUxRZfmbQ84gramepvz/WN0QkZlbQYRl4QiQ
+ 9SJUYb8d0ANpNpZkNKtaVD02Ex1FODPgKOO1vdiSkIReJvgbdnlIJDCYlkRuHXGdFbnlYFD/k1
+ JyA=
+X-SBRS: 2.7
+X-MesageID: 20220997
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.73,504,1583211600"; d="scan'208";a="20220997"
+Subject: Re: [XEN PATCH for-4.14] tools/xen-ucode: fix error code propagation
+ of microcode load operation
+To: Ian Jackson <ian.jackson@citrix.com>
 References: <1591980255-18811-1-git-send-email-igor.druzhinin@citrix.com>
  <24291.45845.782250.165305@mariner.uk.xensource.com>
-In-Reply-To: <24291.45845.782250.165305@mariner.uk.xensource.com>
-Subject: RE: [XEN PATCH for-4.14] tools/xen-ucode: fix error code propagation
- of microcode load operation
-Date: Fri, 12 Jun 2020 18:13:56 +0100
-Message-ID: <001001d640dc$db8704d0$92950e70$@xen.org>
+From: Igor Druzhinin <igor.druzhinin@citrix.com>
+Message-ID: <2d885485-c00f-9938-33fc-1f20d084b259@citrix.com>
+Date: Fri, 12 Jun 2020 18:16:01 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.0
 MIME-Version: 1.0
-Content-Type: text/plain;
-	charset="us-ascii"
+In-Reply-To: <24291.45845.782250.165305@mariner.uk.xensource.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-X-Mailer: Microsoft Outlook 16.0
-Content-Language: en-gb
-Thread-Index: AQH7H4mqvQMhnY7UKzse1ry3GwMkWwKOiXlJqHcE95A=
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -94,46 +68,37 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Reply-To: paul@xen.org
-Cc: xen-devel@lists.xenproject.org, 'Paul Durrant' <xadimgnik@gmail.com>,
- wl@xen.org, 'Andrew Cooper' <Andrew.Cooper3@citrix.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Paul Durrant <xadimgnik@gmail.com>, "wl@xen.org" <wl@xen.org>, Andrew
+ Cooper <Andrew.Cooper3@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-> -----Original Message-----
-> From: Ian Jackson <ian.jackson@citrix.com>
-> Sent: 12 June 2020 17:54
-> To: Igor Druzhinin <igor.druzhinin@citrix.com>
-> Cc: xen-devel@lists.xenproject.org; Andrew Cooper <Andrew.Cooper3@citrix.com>; wl@xen.org; Paul
-> Durrant <xadimgnik@gmail.com>
-> Subject: Re: [XEN PATCH for-4.14] tools/xen-ucode: fix error code propagation of microcode load
-> operation
-> 
-> Igor Druzhinin writes ("[PATCH] tools/xen-ucode: fix error code propagation of microcode load
-> operation"):
-> > Otherwise it's impossible to know the reason for a fault or blob rejection
-> > inside the automation.
+On 12/06/2020 17:53, Ian Jackson wrote:
+> Igor Druzhinin writes ("[PATCH] tools/xen-ucode: fix error code propagation of microcode load operation"):
+>> Otherwise it's impossible to know the reason for a fault or blob rejection
+>> inside the automation.
 > ...
-> >          fprintf(stderr, "Failed to update microcode. (err: %s)\n",
-> >                  strerror(errno));
+>>          fprintf(stderr, "Failed to update microcode. (err: %s)\n",
+>>                  strerror(errno));
 > 
 > This part is fine.
 > 
-> > +        ret = errno;
-> >      xc_interface_close(xch);
+>> +        ret = errno;
+>>      xc_interface_close(xch);
 > ...
-> >      }
-> >      close(fd);
-> >
-> > -    return 0;
-> > +    return ret;
+>>      }
+>>      close(fd);
+>>  
+>> -    return 0;
+>> +    return ret;
 > 
 > Unfortunately I don't think this is right.  errno might not fit into a
 > return value.
 
-I don't understand this part. Why would errno not fit? 
+errno codes that Xen return are all lower than 127. It fits perfectly fine.
 
->  Returning nonzero on microcode loading error would
+> Returning nonzero on microcode loading error would
 > definitely be right, but ...
 > 
 > ... oh I have just read the rest of this file.
@@ -141,25 +106,18 @@ I don't understand this part. Why would errno not fit?
 > I think what is missing here is simply `return errno' (and the braces)
 > There is no need to call xc_interface_close, or munmap, if we are
 > about to exit.
-> 
+
+Probably but that is identical to what was suggested.
+Cleaning resource is just a nice thing to do although unnecessary.
+Can change to just "return errno" if that's what you'd prefer.
+
 > I think fixing the lost error return is 4.14 material, so I have
 > added that to the subject line.
 > 
 > Paul, would you Release-ack a patch that replaced every `return errno'
-> with (say) exit(12) ?
+> with (say) exit(12) ? 
 
-Why 12?
+That would again conceal real return code from automation.
 
->  Otherwise, fixing this program not to try to
-> fit errno into an exit status is future work.  Also I notice that the
-> program exits 0 if invoked wrongly.  Unhelpful!  I would want to fix
-> that too.
-
-Agreed that is unhelpful. I'm happy in principle to release-ack something replacing the returns with exits.
-
-  Paul
-
-> 
-> Ian.
-
+Igor
 
