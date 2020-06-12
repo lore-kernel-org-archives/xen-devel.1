@@ -2,47 +2,53 @@ Return-Path: <SRS0=NwDn=7Z=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3651BC433DF
-	for <xen-devel@archiver.kernel.org>; Fri, 12 Jun 2020 05:38:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C2855C433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 12 Jun 2020 07:04:23 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0F4F820836
-	for <xen-devel@archiver.kernel.org>; Fri, 12 Jun 2020 05:38:21 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0F4F820836
+	by mail.kernel.org (Postfix) with ESMTPS id 9BF92207ED
+	for <xen-devel@archiver.kernel.org>; Fri, 12 Jun 2020 07:04:23 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9BF92207ED
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jjcO0-00023m-Ad; Fri, 12 Jun 2020 05:37:52 +0000
+	id 1jjdjD-0000ug-DW; Fri, 12 Jun 2020 07:03:51 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=liIz=7Z=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1jjcNy-00023h-Vl
- for xen-devel@lists.xenproject.org; Fri, 12 Jun 2020 05:37:51 +0000
-X-Inumbo-ID: da172b18-ac6e-11ea-b5a2-12813bfff9fa
+ id 1jjdjC-0000ub-Ga
+ for xen-devel@lists.xenproject.org; Fri, 12 Jun 2020 07:03:50 +0000
+X-Inumbo-ID: dcb3ac3c-ac7a-11ea-b5a8-12813bfff9fa
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id da172b18-ac6e-11ea-b5a2-12813bfff9fa;
- Fri, 12 Jun 2020 05:37:49 +0000 (UTC)
+ id dcb3ac3c-ac7a-11ea-b5a8-12813bfff9fa;
+ Fri, 12 Jun 2020 07:03:48 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 6BA98AF19;
- Fri, 12 Jun 2020 05:37:52 +0000 (UTC)
-From: Juergen Gross <jgross@suse.com>
-To: torvalds@linux-foundation.org
-Subject: [GIT PULL] xen: branch for v5.8-rc1
-Date: Fri, 12 Jun 2020 07:37:47 +0200
-Message-Id: <20200612053747.13750-1-jgross@suse.com>
-X-Mailer: git-send-email 2.26.2
+ by mx2.suse.de (Postfix) with ESMTP id CD914AB76;
+ Fri, 12 Jun 2020 07:03:50 +0000 (UTC)
+Subject: Re: [PATCH for-4.14] tools: fix error path of xendevicemodel_open()
+To: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+References: <20200610114004.30023-1-andrew.cooper3@citrix.com>
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Message-ID: <4a5edcf7-06b3-55d9-3ae1-5165ca63faa9@suse.com>
+Date: Fri, 12 Jun 2020 09:03:46 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20200610114004.30023-1-andrew.cooper3@citrix.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -53,71 +59,32 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: xen-devel@lists.xenproject.org, boris.ostrovsky@oracle.com,
- linux-kernel@vger.kernel.org
+Cc: Ian Jackson <Ian.Jackson@citrix.com>, Wei Liu <wl@xen.org>,
+ Paul Durrant <paul@xen.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Linus,
+On 10.06.20 13:40, Andrew Cooper wrote:
+> c/s 6902cb00e03 "tools/libxendevicemodel: extract functions and add a compat
+> layer" introduced calls to both xencall_open() and osdep_xendevicemodel_open()
+> but failed to fix up the error path.
+> 
+> c/s f68c7c618a3 "libs/devicemodel: free xencall handle in error path in
+> _open()" fixed up the xencall_open() aspect of the error path (missing the
+> osdep_xendevicemodel_open() aspect), but positioned the xencall_close()
+> incorrectly, creating the same pattern proved to be problematic by c/s
+> 30a72f02870 "tools: fix error path of xenhypfs_open()".
+> 
+> Reposition xtl_logger_destroy(), and introduce the missing
+> osdep_xendevicemodel_close().
+> 
+> Fixes: 6902cb00e03 ("tools/libxendevicemodel: extract functions and add a compat layer")
+> Fixes: f68c7c618a3 ("libs/devicemodel: free xencall handle in error path in _open()")
+> Backport: 4.9+
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
-Please git pull the following tag:
+Reviewed-by: Juergen Gross <jgross@suse.com>
 
- git://git.kernel.org/pub/scm/linux/kernel/git/xen/tip.git for-linus-5.8b-rc1-tag
-
-xen: branch for v5.8-rc1
-
-It contains the following patches:
-
-- several smaller cleanups
-
-- a fix for a Xen guest regression with CPU offlining
-
-- a small fix in the xen pvcalls backend driver
-
-- an update of MAINTAINERS
-
-
-Thanks.
 
 Juergen
-
- MAINTAINERS                                 |  4 +--
- drivers/pci/xen-pcifront.c                  | 27 ++++++--------
- drivers/xen/Kconfig                         |  4 +++
- drivers/xen/cpu_hotplug.c                   |  8 ++---
- drivers/xen/platform-pci.c                  |  2 +-
- drivers/xen/pvcalls-back.c                  |  5 +--
- drivers/xen/xen-pciback/conf_space.c        | 16 ++++-----
- drivers/xen/xen-pciback/conf_space_header.c | 44 ++++++++---------------
- drivers/xen/xen-pciback/conf_space_quirks.c |  6 ++--
- drivers/xen/xen-pciback/pci_stub.c          | 38 +++++++++-----------
- drivers/xen/xen-pciback/pciback.h           |  2 --
- drivers/xen/xen-pciback/pciback_ops.c       | 55 +++++++++--------------------
- drivers/xen/xen-pciback/vpci.c              | 10 +++---
- drivers/xen/xenbus/xenbus_probe.c           | 11 +++---
- 14 files changed, 90 insertions(+), 142 deletions(-)
-
-Bjorn Helgaas (2):
-      xen-pciback: Use dev_printk() when possible
-      xenbus: Use dev_printk() when possible
-
-Boris Ostrovsky (2):
-      xen/cpuhotplug: Fix initial CPU offlining for PV(H) guests
-      xen/pci: Get rid of verbose_request and use dev_dbg() instead
-
-Deep Shah (1):
-      MAINTAINERS: Update PARAVIRT_OPS_INTERFACE and VMWARE_HYPERVISOR_INTERFACE
-
-Juergen Gross (1):
-      xen/pvcalls-back: test for errors when calling backend_connect()
-
-Rikard Falkeborn (1):
-      xen-platform: Constify dev_pm_ops
-
-Roger Pau Monne (2):
-      xen: expand BALLOON_MEMORY_HOTPLUG description
-      xen: enable BALLOON_MEMORY_HOTPLUG by default
-
-YueHaibing (1):
-      xen/pvcalls: Make pvcalls_back_global static
 
