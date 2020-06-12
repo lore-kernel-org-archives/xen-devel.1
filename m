@@ -2,68 +2,70 @@ Return-Path: <SRS0=NwDn=7Z=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=3.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-6.8 required=3.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D3D20C433E1
-	for <xen-devel@archiver.kernel.org>; Fri, 12 Jun 2020 00:23:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C0A7C433DF
+	for <xen-devel@archiver.kernel.org>; Fri, 12 Jun 2020 00:23:23 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A70B520835
-	for <xen-devel@archiver.kernel.org>; Fri, 12 Jun 2020 00:23:19 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 3C97520835
+	for <xen-devel@archiver.kernel.org>; Fri, 12 Jun 2020 00:23:23 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=epam.com header.i=@epam.com header.b="pJVt1+Bg"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A70B520835
+	dkim=pass (2048-bit key) header.d=epam.com header.i=@epam.com header.b="CJZu8c2V"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3C97520835
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=epam.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jjXT0-0007MK-PB; Fri, 12 Jun 2020 00:22:42 +0000
+	id 1jjXTK-0007QC-3c; Fri, 12 Jun 2020 00:23:02 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=r1CT=7Z=epam.com=volodymyr_babchuk@srs-us1.protection.inumbo.net>)
- id 1jjXSz-0007MF-B7
- for xen-devel@lists.xenproject.org; Fri, 12 Jun 2020 00:22:41 +0000
-X-Inumbo-ID: d1dd3dc4-ac42-11ea-b594-12813bfff9fa
+ id 1jjXTJ-0007MF-7C
+ for xen-devel@lists.xenproject.org; Fri, 12 Jun 2020 00:23:01 +0000
+X-Inumbo-ID: d4c65386-ac42-11ea-b594-12813bfff9fa
 Received: from EUR04-VI1-obe.outbound.protection.outlook.com (unknown
- [40.107.8.89]) by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id d1dd3dc4-ac42-11ea-b594-12813bfff9fa;
- Fri, 12 Jun 2020 00:22:39 +0000 (UTC)
+ [40.107.8.49]) by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id d4c65386-ac42-11ea-b594-12813bfff9fa;
+ Fri, 12 Jun 2020 00:22:42 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=P2oScPt5XwaGY8m7MiYF+9LVJjQiFNMBR0Zy3DwC7SRdQD2t31fbrjjp5kevnCONTZnzA7laXtUHJtqSE1OrlOOG7J8oODaCrA0y1wV/d2g74R6NV2H7ie2NuSfPiwmySo92HOxvq1pMPuoUv36OJn9hZeKkFZIt6qbXuk21RJyH4ez8q2y0ehaxIszumz20Vw1GiyCSY9cOvzSfCP+tfgeqJ15hqcqM0pvwHBo1qx8C8qWoFEshVCMLLaqpX33d74O7jDa82KvCj5BnfcN6DQ+2kD/Eljza52HBKIt3kR5K29ahjnUJIgVN+j6Zj/6nWgB3Xz2TLmzsv2vL151IQA==
+ b=Vnqa+hG5vBpP5PV2b7uIX+OWR91yp8O1vutZIGwzUvcUs722S8ipAWzMIpFsJmotvH+VFtOPsUmoFf8Xqndg7H8DHVLphgcWtrBSKfk0w9KLiLC25TxfWJ+drA6xbTcFev06X7LY3OjYvxQz7ht3FdfbcU5W7DJP9Cj6sV6jlsUncLVCZ2W9WriY5ny65zoMW1rSxOZwaKWKUL7yAm2E5o7WvXq+Eh+f/eaSo0h/ZM/NFTQ1zjSYdMKh+VdW0mYunXOAsUJhgbesV5UYk/S1u9Pu9H2OJ1VoQ+XEz6yb/ghAIsqsYjreJm5qH3iR82LCFWYfz/jaLCBW5v8CcroKZw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=mrWui09u+5cIgvpHZOOFv3CDq05Q0coOiwBD2KZRCAg=;
- b=N3iAARi5JebKkoJfrDmi2uNgsj1IrRE1dmZOmekiqPb+z1ZEyqbwlCOBrPzHRN/Ti91SXUwHq+EFID9S/ziO3HwxooJq1HtGnFTAHyVwDr+HZJZ/jLEogKQ19qV4CTJyHbpWXImTP9jGgyPsSAa2o0Pt/zuw57Jw05cpH0chIMMSo/oKgERlmUD2TpBV+CeX3BA+kYvO2+wImqC/nS/zDfQPJFnJTuvmqrEsLE0ZvPEEofCM+ITQLpiir6SpoRn7F8z63vx4/qqeBaLCiBFHx4zuFbmf4Qaj5XfwrUec+c26Nl4kJg2IwMbFhWHQeQEIR+4zDFrk+nRDFfchGqJRyw==
+ bh=rPxSP0GQhjiILc2BkcY4EKDjsGfYhx91tgpTPBpzd0E=;
+ b=f3HvGdIATHStrX5gc1XIHNo09QVKiguk+5YXsR0WR2do7f8MP2HrbpeoKTb59yZ8JFIFJUO423CvOGX9/k4wB7P9jR6bS4Y09tNw/5ZAr0bV4BGVWfJzSFj/zbGjNvjHqiclsZ+zju5USHPmpR0uzvHgqHAt7HYlTie/Fbg/JrnVq6iTz79y8rZI7rB/UqbR0Fdw5gHUbLXlcdYew+H5Sp3tOBJGwVwsMApAXwjYNsPYfwy8sCQym67y9qoBias/UOntIqaD7J8gTUMZ79w14ABHV4BF2z2hAZFJIM8U0pTdt1IbTZr0hk3Numd7uz8Mknv96SQtdY7bKqgaCFc+0w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=mrWui09u+5cIgvpHZOOFv3CDq05Q0coOiwBD2KZRCAg=;
- b=pJVt1+Bg8+yp6+cmDu0pvx40pqo13/6R4KSINhXgHgpTfabRTXgaj24TA7MHHB/KvsUNW9SQSe3WuuXa6rMGFLq54xk15PU87jSDvu0P37XqUlebVuSqzPVWpDCI1bl20w7iIXa9AThn0XY0aM6FEEWRb1Tr+XALp5OW94NvOhNR1BGpcsHnYSLKu73SqJnn5x97b8rNF3oBnB5ijr6oXPdPaFl22dE+1+O9I8XnmigHzI3RQDc5KkMHaYYcPDQpsKMWELBbURgmMAbnqF4RdgOGe1V75ynFhimJPzoaGFtz/0ge3Aeb8vKtXzPbnYX5gcHjMfaxPs21ie7Q2/yLUw==
+ bh=rPxSP0GQhjiILc2BkcY4EKDjsGfYhx91tgpTPBpzd0E=;
+ b=CJZu8c2VGLi4KiNmikSF9I77XgmqSKXjcnOFNqsk+6NWA1oYdyULczjbrNgIX62/fx5VXiWuY6BYj3sOim7sf4g8do1JYvmUl1/cf0R39aU4GUnTHCTkhzhJ/rz/xgiCJshxBWzPYzHooWXPv70PQLBR64Pg+p/80omFWn6ooY++vMFXAS362wODCKTKd0fB0LO/dNWIjKAdJeDMJN3gF0Wx68qk08Yao1tByz6DNvPe3mysp2qgyb6ADLVvct8jyqFV+ZXpe6FAsX7m9iZ8m5HzD8Gzf35qgxLXJHddbRfphpVWv9Y8kTn0Sj2oycJSmIT7gOT4npdApJG0tEkrwA==
 Received: from VI1PR0302MB3407.eurprd03.prod.outlook.com
  (2603:10a6:803:23::18) by VI1PR0302MB2654.eurprd03.prod.outlook.com
  (2603:10a6:800:e0::11) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3088.22; Fri, 12 Jun
- 2020 00:22:36 +0000
+ 2020 00:22:37 +0000
 Received: from VI1PR0302MB3407.eurprd03.prod.outlook.com
  ([fe80::a01e:c0b1:7174:4c75]) by VI1PR0302MB3407.eurprd03.prod.outlook.com
  ([fe80::a01e:c0b1:7174:4c75%5]) with mapi id 15.20.3088.018; Fri, 12 Jun 2020
- 00:22:36 +0000
+ 00:22:37 +0000
 From: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Subject: [RFC PATCH v1 0/6] Fair scheduling
-Thread-Topic: [RFC PATCH v1 0/6] Fair scheduling
-Thread-Index: AQHWQE+S5leDZ35sk0y6s2xYl7vsow==
-Date: Fri, 12 Jun 2020 00:22:35 +0000
-Message-ID: <20200612002205.174295-1-volodymyr_babchuk@epam.com>
+Subject: [RFC PATCH v1 4/6] xentop: collect IRQ and HYP time statistics.
+Thread-Topic: [RFC PATCH v1 4/6] xentop: collect IRQ and HYP time statistics.
+Thread-Index: AQHWQE+Tib/gTK49mk6bUudd1VvXZg==
+Date: Fri, 12 Jun 2020 00:22:37 +0000
+Message-ID: <20200612002205.174295-5-volodymyr_babchuk@epam.com>
+References: <20200612002205.174295-1-volodymyr_babchuk@epam.com>
+In-Reply-To: <20200612002205.174295-1-volodymyr_babchuk@epam.com>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -73,31 +75,31 @@ authentication-results: lists.xenproject.org; dkim=none (message not signed)
  header.from=epam.com;
 x-originating-ip: [176.36.48.175]
 x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: a6a8effd-d698-4e8e-51e5-08d80e66b525
+x-ms-office365-filtering-correlation-id: 23a7788d-bd81-4360-1a38-08d80e66b618
 x-ms-traffictypediagnostic: VI1PR0302MB2654:
 x-ms-exchange-transport-forked: True
-x-microsoft-antispam-prvs: <VI1PR0302MB2654A8455DD32B8873A84D37E6810@VI1PR0302MB2654.eurprd03.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:9508;
+x-microsoft-antispam-prvs: <VI1PR0302MB2654AF1F47C33DA096A310CEE6810@VI1PR0302MB2654.eurprd03.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:185;
 x-forefront-prvs: 0432A04947
 x-ms-exchange-senderadcheck: 1
 x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: sdsyCNTH72n9uR9BtfcdpARXH2HVEBGjaVgMHoq+j8FgitrYyTP94IHS/DNnYaq0f6iHVB1f4ec2yHqyVPP3XO4gsUA5ePO4smDFtCd8ORwXK2I7CMWzUGBls+ZFMwlRtBsfWHpCq4pkualS89ZDF8VOOO6Sk2SpZqnHcyYYAqxRgeZZ7LYktSj6Kel4WivDliGED2pluVSDS9NK3ciScLTs9wufZS7cy7S5X/dWvZsS4skclVeh8pRZa5uVqjkDg/C3q36lSBA1D0L7sfskDcEWpM3/g1eoH2bhLeTCjtPvE4YEgUA3iVKgg+GL6BwdvHr+E4eDFr4jQOE+pTj4yoUI0ZlPPAC0Yku6fZ5RNNS5ho3uCPX91MDgI2R2qXH9w6ahNB0lkxW3wPumPTx3KQ==
+x-microsoft-antispam-message-info: +WG4zCDKubqHVW8Wsa/b4Nt1wx9y59jcWALTg2ZV2P3zyhTI9J3GWnPGbDsCXruFJ50Sb9VsowieBaQdC7AKQEfGgyINj2aAUmpo3Pjs//BoB1UWKfmVOcDBOT7l/6gPhkyV/MKKkM6COFnuv/Xyj2rAwJJGn4yNA/P1vHsBr7q4UBj3zPLWJFAypWpQQWTrmiFxz1V1Ze2XiLeRIxZ8Zq+t57GNe7FphI7zB6mrV6D6470uLI81u5ArfEa3ZzAl4vSgMRvwTPHOAtGytJuKbjnq6ZP+UPtac1hzF1SPNvvi0Ew3gYfPZJcSbYiF8Hpe5TDZPO6ORkI3IDJoftW96A==
 x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:VI1PR0302MB3407.eurprd03.prod.outlook.com; PTR:; CAT:NONE;
  SFTY:;
- SFS:(4636009)(376002)(396003)(366004)(39860400002)(136003)(346002)(66446008)(966005)(64756008)(478600001)(66946007)(66556008)(76116006)(66476007)(26005)(91956017)(36756003)(8676002)(86362001)(55236004)(186003)(8936002)(4326008)(6506007)(7416002)(54906003)(6512007)(2906002)(6486002)(316002)(5660300002)(83380400001)(6916009)(71200400001)(1076003)(2616005);
+ SFS:(4636009)(376002)(396003)(366004)(39860400002)(136003)(346002)(66446008)(64756008)(478600001)(66946007)(66556008)(76116006)(66476007)(26005)(91956017)(36756003)(8676002)(86362001)(55236004)(186003)(8936002)(4326008)(6506007)(54906003)(6512007)(2906002)(6486002)(316002)(5660300002)(83380400001)(6916009)(71200400001)(1076003)(2616005);
  DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata: nMrvNiwBMYFs+Yra8qvuEnvpQFNwUTqUMB5yIADK7DlJs6Jc5DyDf/J3j8B/jgMB0oTIytyO41THHHVjDKWc8Sl7Do7V47LeIrrH7Kc5sN0q+ASTsvQEOx3my/3j8cR2mtOTby9CBR5FNBU+XQNdSVpRhdRVmexGp9yJYqCnEvtg5C32BOhSIhVuN6HW8sEivq5OLL539+803OP/AI8fJChNhn/rJAOiI/ZgEfzASZNFb2Vm6ijnVm4uhx94UCmM82OHQ7iNLPQwa8XHNm7PvSMac2uGKQ+TE6WHPlhVkMV+zUBCcamTvovHeRUXyMvZu9/tYqDt9SVRq9lmBlbFVm+i6gNRYC3e5bk6qcIcA4b84ZfW3BxSIgW8Jhou59aGhd2NcRvLn/3L6YCJ9/6+GzIrNDCNZdwoyLPjrBw9Y0It4RpywaSPMLLsbRCI0KXnvv773smjmCSm4yNyO5vxwMmcDbKqGwvczToVPgSPnWI=
+x-ms-exchange-antispam-messagedata: 0QYbbdXA4WK1wngTahjcoICVN1QSbFF3wx/kayfpEoemoIHHwaHVfVcDez3KBF/XxTOhCJFEtmK8N3IdQ5D0h+I24NIyV9BRMsnPD7QxhlYfOCdOvAuL9HZRCh8tvFM6PhVF5Y0iih2HLOD56GzMaUYzaWBDY6/q9WBlL7+xb5IORnGWb8PC8OV+tP1aZBGRTxsMVNoi2TUh8mnGG4zuzpnh5KvbTAFsFzbhXAyq/CPMbTkhYE4g47//gs2mjChYUurusFmXO0+pf4n/lEqVwRe36NEwgqbfKYvZzO4b3s8KuwHJUGcSeBWQS8yXalKrAC8V4jXoDZLJrxiEnJnUkWOaEAMzDlPzKjUuXQgqBRfpwgV4gg/9mA74CtvLWesmKv0P/hG9DUVtIBXKY27m5+F8hfK/A1us2bhKUTM6Una2yIBdgr/cYE6zCUYlerpOHXQy8fW+Cvr1j1A/+7Yjhn8T78ghHAUZt5P4siIZ2xk=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a6a8effd-d698-4e8e-51e5-08d80e66b525
-X-MS-Exchange-CrossTenant-originalarrivaltime: 12 Jun 2020 00:22:36.0100 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 23a7788d-bd81-4360-1a38-08d80e66b618
+X-MS-Exchange-CrossTenant-originalarrivaltime: 12 Jun 2020 00:22:37.2004 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 2bgeTHoKzXiG9OEvH2xASuSqbtxwdOapmy6UaZ+5tQuL118Nr4Dt5xMw+6fSi9O8qjKupn7DPWKEP6vfD752yHUz/ewN/kAxKgVg4Bj2L2w=
+X-MS-Exchange-CrossTenant-userprincipalname: oUl+MaUevMcx4U4o4FvHJXKlzBRK1w6bNGAYD9sp1vGyIupugNLr2PZ6qmJk6wLxf2bTn4MjtG6wDs+fg6i0ZQCf4QYOv4InTbK9VnQ5iKM=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR0302MB2654
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -114,72 +116,117 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
  Ian Jackson <ian.jackson@eu.citrix.com>,
  George Dunlap <george.dunlap@citrix.com>, Dario Faggioli <dfaggioli@suse.com>,
  Jan Beulich <jbeulich@suse.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- =?iso-8859-1?Q?Roger_Pau_Monn=E9?= <roger.pau@citrix.com>
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-There was number of discussions about fair scheduling, including latest
-one at [1].
+As scheduler code now collects time spent in IRQ handlers and in
+do_softirq(), we can present those values to userspace tools like
+xentop, so system administrator can see how system behaves.
 
-In a nutshell, schedulers don't know when pCPU is doing guest-related
-work or when it is busy with something else, like running
-tasklets. All time spent between two calls to schedule() is being
-charged to active vCPU, which can be unfair in some cases.
+We are updating counters only in sched_get_time_correction() function
+to minimize number of taken spinlocks. As atomic_t is 32 bit wide, it
+is not enough to store time with nanosecond precision. So we need to
+use 64 bit variables and protect them with spinlock.
 
-Andrii Anisov tried to overcome this by counting time spent in
-different "modes". But his approach was "entry.S-centric". He tried to
-guess correct trap reason as early as possible. This was arm-specific
-and quite intrusive. On other hand, it theoretically provided more
-precise results.
+Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+---
+ xen/common/sched/core.c     | 17 +++++++++++++++++
+ xen/common/sysctl.c         |  1 +
+ xen/include/public/sysctl.h |  4 +++-
+ xen/include/xen/sched.h     |  2 ++
+ 4 files changed, 23 insertions(+), 1 deletion(-)
 
-As a result of that discussion with Dario at [1], we came to
-conclusion that for in the first approximation we should not charge
-guests for time spent in do_IRQ() and in do_softirq().
-
-This patch series does exactly this. It separately collects time for
-IRQ handling and for internal hypervisor tasks. Actually, this
-separation is not needed for making scheduling decisions, but it can
-prove more information to system administrators.
-
-This is minimal implementation, so it supports only x86 and credit2
-scheduler. I chose x86 over ARM because more people can try this
-patches. This series provide tracing and xentop support as well, to
-ease up experimenting.
-
-I'm open to all suggestions, especially for naming things :)
-
-Those patches also can be pulled from my GH account at [2]
-
-[1] https://lists.xenproject.org/archives/html/xen-devel/2020-06/msg00092.h=
-tml
-[2] https://github.com/lorc/xen/tree/fair_sched_rfc_v1
-
-Volodymyr Babchuk (6):
-  sched: track time spent in IRQ handler
-  sched: track time spent in hypervisor tasks
-  sched, credit2: improve scheduler fairness
-  xentop: collect IRQ and HYP time statistics.
-  tools: xentop: show time spent in IRQ and HYP states.
-  trace: add fair scheduling trace events
-
- tools/xenstat/libxenstat/src/xenstat.c      |  12 +++
- tools/xenstat/libxenstat/src/xenstat.h      |   6 ++
- tools/xenstat/libxenstat/src/xenstat_priv.h |   2 +
- tools/xenstat/xentop/xentop.c               |  54 ++++++++--
- tools/xentrace/xenalyze.c                   |  37 +++++++
- xen/arch/arm/irq.c                          |   2 +
- xen/arch/x86/irq.c                          |   2 +
- xen/common/sched/core.c                     | 110 ++++++++++++++++++++
- xen/common/sched/credit2.c                  |   2 +-
- xen/common/sched/private.h                  |  10 ++
- xen/common/softirq.c                        |   2 +
- xen/common/sysctl.c                         |   1 +
- xen/include/public/sysctl.h                 |   4 +-
- xen/include/public/trace.h                  |   5 +
- xen/include/xen/sched.h                     |  29 ++++++
- 15 files changed, 265 insertions(+), 13 deletions(-)
-
+diff --git a/xen/common/sched/core.c b/xen/common/sched/core.c
+index a7294ff5c3..ee6b1d9161 100644
+--- a/xen/common/sched/core.c
++++ b/xen/common/sched/core.c
+@@ -95,6 +95,10 @@ static struct scheduler __read_mostly ops;
+=20
+ static bool scheduler_active;
+=20
++static DEFINE_SPINLOCK(sched_stat_lock);
++s_time_t sched_stat_irq_time;
++s_time_t sched_stat_hyp_time;
++
+ static void sched_set_affinity(
+     struct sched_unit *unit, const cpumask_t *hard, const cpumask_t *soft)=
+;
+=20
+@@ -994,9 +998,22 @@ s_time_t sched_get_time_correction(struct sched_unit *=
+u)
+             break;
+     }
+=20
++    spin_lock_irqsave(&sched_stat_lock, flags);
++    sched_stat_irq_time +=3D irq;
++    sched_stat_hyp_time +=3D hyp;
++    spin_unlock_irqrestore(&sched_stat_lock, flags);
++
+     return irq + hyp;
+ }
+=20
++void sched_get_time_stats(uint64_t *irq_time, uint64_t *hyp_time)
++{
++    unsigned long flags;
++
++    spin_lock_irqsave(&sched_stat_lock, flags);
++    *irq_time =3D sched_stat_irq_time;
++    *hyp_time =3D sched_stat_hyp_time;
++    spin_unlock_irqrestore(&sched_stat_lock, flags);
+ }
+=20
+ /*
+diff --git a/xen/common/sysctl.c b/xen/common/sysctl.c
+index 1c6a817476..00683bc93f 100644
+--- a/xen/common/sysctl.c
++++ b/xen/common/sysctl.c
+@@ -270,6 +270,7 @@ long do_sysctl(XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_s=
+ysctl)
+         pi->scrub_pages =3D 0;
+         pi->cpu_khz =3D cpu_khz;
+         pi->max_mfn =3D get_upper_mfn_bound();
++        sched_get_time_stats(&pi->irq_time, &pi->hyp_time);
+         arch_do_physinfo(pi);
+         if ( iommu_enabled )
+         {
+diff --git a/xen/include/public/sysctl.h b/xen/include/public/sysctl.h
+index 3a08c512e8..f320144d40 100644
+--- a/xen/include/public/sysctl.h
++++ b/xen/include/public/sysctl.h
+@@ -35,7 +35,7 @@
+ #include "domctl.h"
+ #include "physdev.h"
+=20
+-#define XEN_SYSCTL_INTERFACE_VERSION 0x00000013
++#define XEN_SYSCTL_INTERFACE_VERSION 0x00000014
+=20
+ /*
+  * Read console content from Xen buffer ring.
+@@ -118,6 +118,8 @@ struct xen_sysctl_physinfo {
+     uint64_aligned_t scrub_pages;
+     uint64_aligned_t outstanding_pages;
+     uint64_aligned_t max_mfn; /* Largest possible MFN on this host */
++    uint64_aligned_t irq_time;
++    uint64_aligned_t hyp_time;
+     uint32_t hw_cap[8];
+ };
+=20
+diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
+index 51dc7c4551..869d4efbd6 100644
+--- a/xen/include/xen/sched.h
++++ b/xen/include/xen/sched.h
+@@ -717,6 +717,8 @@ void vcpu_end_irq_handler(void);
+ void vcpu_begin_hyp_task(struct vcpu *v);
+ void vcpu_end_hyp_task(struct vcpu *v);
+=20
++void sched_get_time_stats(uint64_t *irq_time, uint64_t *hyp_time);
++
+ /*
+  * Force synchronisation of given VCPU's state. If it is currently desched=
+uled,
+  * this call will ensure that all its state is committed to memory and tha=
+t
 --=20
 2.27.0
 
