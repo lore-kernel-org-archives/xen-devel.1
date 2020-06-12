@@ -2,78 +2,64 @@ Return-Path: <SRS0=NwDn=7Z=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-8.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E1106C433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 12 Jun 2020 09:23:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3DA14C433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 12 Jun 2020 09:54:06 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A25AE2068E
-	for <xen-devel@archiver.kernel.org>; Fri, 12 Jun 2020 09:23:57 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="BsjCPgKs"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A25AE2068E
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id F3A752081A
+	for <xen-devel@archiver.kernel.org>; Fri, 12 Jun 2020 09:54:05 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F3A752081A
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jjfub-00056q-5U; Fri, 12 Jun 2020 09:23:45 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=Kdnc=7Z=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1jjfua-00056l-Ep
- for xen-devel@lists.xenproject.org; Fri, 12 Jun 2020 09:23:44 +0000
-X-Inumbo-ID: 694c4bc8-ac8e-11ea-b7bb-bc764e2007e4
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 694c4bc8-ac8e-11ea-b7bb-bc764e2007e4;
- Fri, 12 Jun 2020 09:23:44 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=uvZCzwaqZgPntnmUnlhdv8YsVulwsIzCx9fgPNtiPZc=; b=BsjCPgKsurIfejLFhqsGviNsvN
- h9waYojxxCmbRhYANy4yYq9SafXa6HZVoYoL3vzNGv2RGYYLi555F5ZTfQrINaYHBb6dIbkhyPYdf
- 1ZNL78bYZHXni7XAyLevvamfNVfKr2KeVoFVtA+K5X8p8fXHsmc9elbo5rVX5k4XEWO4=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1jjfuY-0005fH-8A; Fri, 12 Jun 2020 09:23:42 +0000
-Received: from [54.239.6.185] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1jjfuY-0003Kv-0Y; Fri, 12 Jun 2020 09:23:42 +0000
-Subject: Re: Kexec and libxenctlr.so
-To: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>,
- Julien Grall <jgrall@amazon.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Anthony Perard <anthony.perard@citrix.com>, "wl@xen.org" <wl@xen.org>,
- daniel.kiper@oracle.com
-References: <7a88218d-981e-6583-15a5-3fcaffb05294@amazon.com>
- <261293b1-f4c9-e41d-0c76-cd47fe5c0dc2@suse.com>
- <5602eebf-c149-17f7-37c9-b263ff290509@xen.org>
- <ffd017a7-8278-85ee-81fa-9dad147eb0e5@suse.com>
- <6fa3067c-2c71-bb8e-eab8-30f44782d002@xen.org>
- <6c662ac7-ee10-1ac1-5b9f-df9a02d00d5c@suse.com>
- <ae721247-ef18-b044-7a5b-fba6313d5f99@xen.org>
- <ae231e90-46da-31f3-81cb-560b92211022@suse.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <659d1348-56d9-0de7-960f-212a39596302@xen.org>
-Date: Fri, 12 Jun 2020 10:23:39 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
- Gecko/20100101 Thunderbird/68.9.0
+	id 1jjgNc-0007aw-Uw; Fri, 12 Jun 2020 09:53:44 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=4JN/=7Z=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1jjgNb-0007aA-9l
+ for xen-devel@lists.xenproject.org; Fri, 12 Jun 2020 09:53:43 +0000
+X-Inumbo-ID: 98b3d8be-ac92-11ea-b5b0-12813bfff9fa
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 98b3d8be-ac92-11ea-b5b0-12813bfff9fa;
+ Fri, 12 Jun 2020 09:53:42 +0000 (UTC)
+Authentication-Results: esa4.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none
+IronPort-SDR: VA5PqxmCpZsnA/rl8fUrRRvX420SqoeFC2oU1F/cBAy8d1F+lNya0RWBjF85hpF9JAU1J8d79O
+ cqtYtRFM9MazDYRncU3JFBupSUlAMuGZkn/B7aboA88dL6r0XiG7oNJ9ZU5/eSIyzkaQH3sLMo
+ 64gJlZtjXuikbs05MWYRkvAOKDgxTu98PRbPjgY3mXHf4UgQvhnVUmfpX9ehhsSvodw1VOAGWr
+ yfFbWPDogms/AE0wZSWJMwzY9b6LbDkLEb8vpEbvHNCTXcroQ00CJfkA5TX1nBD3U+uFqtnYQ0
+ /AE=
+X-SBRS: 2.7
+X-MesageID: 20656360
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.73,502,1583211600"; d="scan'208";a="20656360"
+Subject: Re: [PATCH for-4.14] tools: fix error path of xendevicemodel_open()
+To: <paul@xen.org>, 'Xen-devel' <xen-devel@lists.xenproject.org>
+References: <20200610114004.30023-1-andrew.cooper3@citrix.com>
+ <010401d6408a$2c57bba0$850732e0$@xen.org>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Message-ID: <765b4fed-60d3-9c4a-d6b7-bcd9893c525b@citrix.com>
+Date: Fri, 12 Jun 2020 10:53:37 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
 MIME-Version: 1.0
-In-Reply-To: <ae231e90-46da-31f3-81cb-560b92211022@suse.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
+In-Reply-To: <010401d6408a$2c57bba0$850732e0$@xen.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
 Content-Language: en-GB
-Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
+ AMSPEX02CL02.citrite.net (10.69.22.126)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,26 +70,85 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>,
- "ian.jackson@eu.citrix.com" <ian.jackson@eu.citrix.com>,
- "paul@xen.org" <paul@xen.org>
+Cc: 'Juergen Gross' <jgross@suse.com>, 'Ian Jackson' <Ian.Jackson@citrix.com>,
+ 'Wei Liu' <wl@xen.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
+On 12/06/2020 08:22, Paul Durrant wrote:
+>> -----Original Message-----
+>> From: Andrew Cooper <andrew.cooper3@citrix.com>
+>> Sent: 10 June 2020 12:40
+>> To: Xen-devel <xen-devel@lists.xenproject.org>
+>> Cc: Andrew Cooper <andrew.cooper3@citrix.com>; Ian Jackson <Ian.Jackson@citrix.com>; Wei Liu
+>> <wl@xen.org>; Juergen Gross <jgross@suse.com>; Paul Durrant <paul@xen.org>
+>> Subject: [PATCH for-4.14] tools: fix error path of xendevicemodel_open()
+>>
+>> c/s 6902cb00e03 "tools/libxendevicemodel: extract functions and add a compat
+>> layer" introduced calls to both xencall_open() and osdep_xendevicemodel_open()
+>> but failed to fix up the error path.
+>>
+>> c/s f68c7c618a3 "libs/devicemodel: free xencall handle in error path in
+>> _open()" fixed up the xencall_open() aspect of the error path (missing the
+>> osdep_xendevicemodel_open() aspect), but positioned the xencall_close()
+>> incorrectly, creating the same pattern proved to be problematic by c/s
+>> 30a72f02870 "tools: fix error path of xenhypfs_open()".
+>>
+>> Reposition xtl_logger_destroy(), and introduce the missing
+>> osdep_xendevicemodel_close().
+>>
+>> Fixes: 6902cb00e03 ("tools/libxendevicemodel: extract functions and add a compat layer")
+>> Fixes: f68c7c618a3 ("libs/devicemodel: free xencall handle in error path in _open()")
+>> Backport: 4.9+
+>> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+>> ---
+>> CC: Ian Jackson <Ian.Jackson@citrix.com>
+>> CC: Wei Liu <wl@xen.org>
+>> CC: Juergen Gross <jgross@suse.com>
+>> CC: Paul Durrant <paul@xen.org>
+>>
+>> RFC - this is still broken.
+>>
+> I'm slightly confused. Do you want this in 4.14 in this form or are you expecting to update it?
 
+In this form, it is an improvement over before.
 
-On 12/06/2020 10:18, Jürgen Groß wrote:
-> I just wanted to point out that in case you need a new stable interface
-> between kexec and the hypervisor you could consider using hypfs for that
-> purpose instead of introducing a new hypercall.
+There is still the crash described below which needs some form of
+figuring out and fixing.
 
-I am not looking to introduce a new interface with the hypervisor. 
-Instead I am looking to have a stable library that can be used by Kexec.
+~Andrew
 
-The underlying communication with the hypervisor doesn't need to be stable.
+>
+>   Paul
+>
+>> Failure to create the logger will still hit the NULL deference, in all of the
+>> stable libs, not just devicemodel.
+>>
+>> Also, unless I'd triple checked the history, I was about to reintroduce the
+>> deadlock from c/s 9976f3874d4, because it totally counterintuitive wrong to
+>> expect setup and teardown in opposite orders.
+>> ---
+>>  tools/libs/devicemodel/core.c | 3 ++-
+>>  1 file changed, 2 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/tools/libs/devicemodel/core.c b/tools/libs/devicemodel/core.c
+>> index db501d9e80..4d4063956d 100644
+>> --- a/tools/libs/devicemodel/core.c
+>> +++ b/tools/libs/devicemodel/core.c
+>> @@ -67,9 +67,10 @@ xendevicemodel_handle *xendevicemodel_open(xentoollog_logger *logger,
+>>      return dmod;
+>>
+>>  err:
+>> -    xtl_logger_destroy(dmod->logger_tofree);
+>> +    osdep_xendevicemodel_close(dmod);
+>>      xentoolcore__deregister_active_handle(&dmod->tc_ah);
+>>      xencall_close(dmod->xcall);
+>> +    xtl_logger_destroy(dmod->logger_tofree);
+>>      free(dmod);
+>>      return NULL;
+>>  }
+>> --
+>> 2.11.0
+>
 
-Cheers,
-
--- 
-Julien Grall
 
