@@ -1,81 +1,69 @@
-Return-Path: <SRS0=NwDn=7Z=lists.xenproject.org=xen-devel-bounces@kernel.org>
+Return-Path: <SRS0=bInu=72=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
-	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-2.3 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 88376C433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 12 Jun 2020 22:55:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 05740C433E0
+	for <xen-devel@archiver.kernel.org>; Sat, 13 Jun 2020 00:24:54 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5243F2078A
-	for <xen-devel@archiver.kernel.org>; Fri, 12 Jun 2020 22:55:45 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id C36B020739
+	for <xen-devel@archiver.kernel.org>; Sat, 13 Jun 2020 00:24:53 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ZC8ITsYj"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5243F2078A
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="GVUruxbB"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C36B020739
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jjsZu-00011d-QY; Fri, 12 Jun 2020 22:55:14 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jjtyJ-0000LV-Km; Sat, 13 Jun 2020 00:24:31 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=CO7z=7Z=gmail.com=julien.grall.oss@srs-us1.protection.inumbo.net>)
- id 1jjsZt-00011Y-8W
- for xen-devel@lists.xenproject.org; Fri, 12 Jun 2020 22:55:13 +0000
-X-Inumbo-ID: c57dc22a-acff-11ea-b7bb-bc764e2007e4
-Received: from mail-wr1-x443.google.com (unknown [2a00:1450:4864:20::443])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id c57dc22a-acff-11ea-b7bb-bc764e2007e4;
- Fri, 12 Jun 2020 22:55:12 +0000 (UTC)
-Received: by mail-wr1-x443.google.com with SMTP id r7so11555232wro.1
- for <xen-devel@lists.xenproject.org>; Fri, 12 Jun 2020 15:55:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=dy1aaxvtcuz3mnfTAC2yz+cvULYV+C1JJaaRRKPziOQ=;
- b=ZC8ITsYj/qpLOUiQqonDHkkHEX628REBBL1p5zXMaqWhFiJqX3MjIQVz85ObEOGb4X
- FJfUep/LzfTIvw23OesoS1Rq4lLgEY2yCL5SvTY+uduuXuosGeis6j300Z8j/0gSY4yz
- hjFLsQB6KH8l+0Iu/vnxtWtG4rg7QQU164F2WQvMFWoIBov9zASMifQKssJziG8jj+ky
- 6VQLh+XpHMj9GJdGTJU5aSGzL185afYoIOL9IkgdzjEEQW7Dwcj6OBk5nuuV996R6xld
- IqtE96tyx0/sNll7NL9PJjOwSJCT74HQ1mq+F39uYlrV0cRtpM0tWoPHxFtqVqQs5sGn
- sMLQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=dy1aaxvtcuz3mnfTAC2yz+cvULYV+C1JJaaRRKPziOQ=;
- b=gWdfhIZV4nYibbJuZ2DN2KuK1QNGBmCYKmyh4Sk58O4/uIVUnwVyjsQJqOke/io+tu
- zDJS/QsFUpx3QeT1V2kRhWVfqaksYiwzTNcO47jAUSoto/IxqVj50s8tJKdXNQ9RGlF3
- /O1iMRnBZRwZyrcUSYGjscROINfcIaLTBOQQi0OhoqY15vRoxzUo7e+PtM+IHjxCoZA0
- soGcv58mUIo3U/IWX+gjnZy3cCvNPw+LwOShyLQ8m/35FTwj7xsiMlc4EAbJcJTlFwMg
- OyHO92qp+V4Q/iTf+B4Qh9ks8jsEPxE2g069NDCIGouSTg1JE7lftiboOXyeae8BGAZT
- pHTQ==
-X-Gm-Message-State: AOAM532kF8ByjkI+3Zwhvo3xaaaZxwERgqKOI8ua7YTbaHGQLETjHThI
- 16RhJlYl4opQZOypw0EDQSkV1e5z+ZlJfi7avro=
-X-Google-Smtp-Source: ABdhPJzI8DPRPPsqQXLiJSeicdIJBq0mgLRlQ5KlW7ZQvZayvtkIWn18k9v9fgDzt13Qkl/gwG/kzcu3UEZ+fQp2ZlU=
-X-Received: by 2002:adf:f790:: with SMTP id q16mr17657632wrp.399.1592002511356; 
- Fri, 12 Jun 2020 15:55:11 -0700 (PDT)
+ <SRS0=M5F9=72=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1jjtyI-0000LQ-H1
+ for xen-devel@lists.xenproject.org; Sat, 13 Jun 2020 00:24:30 +0000
+X-Inumbo-ID: 3f0e6386-ad0c-11ea-b62a-12813bfff9fa
+Received: from mail.kernel.org (unknown [198.145.29.99])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 3f0e6386-ad0c-11ea-b62a-12813bfff9fa;
+ Sat, 13 Jun 2020 00:24:30 +0000 (UTC)
+Received: from localhost (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 1265220739;
+ Sat, 13 Jun 2020 00:24:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1592007869;
+ bh=hhAXpZ9T/WtwESP/EZN2wTcknQmo1c2sAeZm+M29/gI=;
+ h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+ b=GVUruxbBC8ODbFP2uQ33+k4D0fUwsvJwHfChTLs92dBToyemjrSdxZknhYax0lLcW
+ gbPzzqtWJEwWNMiXd6JiNa9EDtBex+lbcu3BAWOn9kklkrLYIvrwx791mk7ugLJ61G
+ +iv5Dk+FcdwJZllilXbL0IGTBD0WmtdeEK3ahJUo=
+Date: Fri, 12 Jun 2020 17:24:28 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
+To: Bertrand Marquis <Bertrand.Marquis@arm.com>
+Subject: Re: [PATCH 1/2] xen/arm: Convert runstate address during hypcall
+In-Reply-To: <48F66B8F-3AEF-4E54-A572-C246F5A7C117@arm.com>
+Message-ID: <alpine.DEB.2.21.2006120944460.2815@sstabellini-ThinkPad-T480s>
+References: <cover.1591806713.git.bertrand.marquis@arm.com>
+ <8b450dddb2c855225c97741dce66453a80b9add2.1591806713.git.bertrand.marquis@arm.com>
+ <alpine.DEB.2.21.2006111055360.2815@sstabellini-ThinkPad-T480s>
+ <CAJ=z9a3u7ztgSmJbhjVATrfJEBBVkHbZei6ydBQeV8nzdDFA3Q@mail.gmail.com>
+ <alpine.DEB.2.21.2006111143530.2815@sstabellini-ThinkPad-T480s>
+ <74475748-e884-1e6e-633d-bf67d5ed32fe@xen.org>
+ <alpine.DEB.2.21.2006111250180.2815@sstabellini-ThinkPad-T480s>
+ <48F66B8F-3AEF-4E54-A572-C246F5A7C117@arm.com>
+User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
-References: <20200612002205.174295-1-volodymyr_babchuk@epam.com>
- <20200612002205.174295-2-volodymyr_babchuk@epam.com>
- <0ce0bbf8-fd15-e87b-727c-56dd7c09cdcb@suse.com>
- <7ec7b6568afb3df41f8407015c198b1ccb341c5b.camel@epam.com>
- <fcedf156-4ed6-c56a-482d-df2f867f7b3e@xen.org>
- <5bd54018f5e045816d25f686124395a1f27a2122.camel@epam.com>
- <51fce146-f2bd-6098-bef9-2fd925ec7f96@xen.org>
- <0fc7034d696bbc601ccf2bd563ef9fb435499eea.camel@suse.com>
-In-Reply-To: <0fc7034d696bbc601ccf2bd563ef9fb435499eea.camel@suse.com>
-From: Julien Grall <julien.grall.oss@gmail.com>
-Date: Fri, 12 Jun 2020 23:54:59 +0100
-Message-ID: <CAJ=z9a2efn4jvfdjavaE-mkF0nRj5XijcBJX1b+RokcQuBjjsA@mail.gmail.com>
-Subject: Re: [RFC PATCH v1 1/6] sched: track time spent in IRQ handler
-To: Dario Faggioli <dfaggioli@suse.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/mixed; BOUNDARY="8323329-993750421-1591980292=:2815"
+Content-ID: <alpine.DEB.2.21.2006120945070.2815@sstabellini-ThinkPad-T480s>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,46 +74,111 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: "jgross@suse.com" <jgross@suse.com>,
- "sstabellini@kernel.org" <sstabellini@kernel.org>, "wl@xen.org" <wl@xen.org>,
- "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>,
- "ian.jackson@eu.citrix.com" <ian.jackson@eu.citrix.com>,
- "george.dunlap@citrix.com" <george.dunlap@citrix.com>,
- "jbeulich@suse.com" <jbeulich@suse.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- "roger.pau@citrix.com" <roger.pau@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
+ Jan Beulich <jbeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>,
+ nd <nd@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Julien Grall <julien.grall.oss@gmail.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Fri, 12 Jun 2020 at 21:08, Dario Faggioli <dfaggioli@suse.com> wrote:
->
-> On Fri, 2020-06-12 at 13:21 +0100, Julien Grall wrote:
-> > On 12/06/2020 12:33, Volodymyr Babchuk wrote:
-> > > On Fri, 2020-06-12 at 12:29 +0100, Julien Grall wrote:
-> > > > > Basically, this value holds time span between calls to
-> > > > > schedule(). This
-> > > > > variable gets zeroed out every time scheduler requests for time
-> > > > > adjustment value. So, it should not depend on total VM run
-> > > > > time.
-> > > > This is assuming that the scheduler will be called. With the NULL
-> > > > scheduler in place, there is a fair chance this may never be
-> > > > called.
-> > > >
-> >
-> Yeah, this is a good point. I mean, I wouldn't be sure about "never",
-> as even there, we'd probably have softirqs, tasklets, etc... And I
-> still have to look at these patches in more details to figure out
-> properly whether they'd help for this.
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
 
-Unlike x86, Xen doesn't prod another pCPU consistently. :) This was
-already discussed in multiple threads in the past (see [1] which not
-resolved yet).
+--8323329-993750421-1591980292=:2815
+Content-Type: text/plain; CHARSET=UTF-8
+Content-Transfer-Encoding: 8BIT
+Content-ID: <alpine.DEB.2.21.2006120945071.2815@sstabellini-ThinkPad-T480s>
 
-So yes, I am pretty confident I can recreate a case where the
-scheduling function may never be called on Arm :).
+On Fri, 12 Jun 2020, Bertrand Marquis wrote:
+> > On 12 Jun 2020, at 02:09, Stefano Stabellini <sstabellini@kernel.org> wrote:
+> > 
+> > On Thu, 11 Jun 2020, Julien Grall wrote:
+> >> Hi Stefano,
+> >> 
+> >> On 11/06/2020 19:50, Stefano Stabellini wrote:
+> >>> On Thu, 11 Jun 2020, Julien Grall wrote:
+> >>>>>> +        return -EINVAL;
+> >>>>>>      }
+> >>>>>> 
+> >>>>>> -    __copy_to_guest(runstate_guest(v), &runstate, 1);
+> >>>>>> +    v->arch.runstate_guest.page = page;
+> >>>>>> +    v->arch.runstate_guest.offset = offset;
+> >>>>>> +
+> >>>>>> +    spin_unlock(&v->arch.runstate_guest.lock);
+> >>>>>> +
+> >>>>>> +    return 0;
+> >>>>>> +}
+> >>>>>> +
+> >>>>>> +
+> >>>>>> +/* Update per-VCPU guest runstate shared memory area (if registered).
+> >>>>>> */
+> >>>>>> +static void update_runstate_area(struct vcpu *v)
+> >>>>>> +{
+> >>>>>> +    struct vcpu_runstate_info *guest_runstate;
+> >>>>>> +    void *p;
+> >>>>>> +
+> >>>>>> +    spin_lock(&v->arch.runstate_guest.lock);
+> >>>>>> 
+> >>>>>> -    if ( guest_handle )
+> >>>>>> +    if ( v->arch.runstate_guest.page )
+> >>>>>>      {
+> >>>>>> -        runstate.state_entry_time &= ~XEN_RUNSTATE_UPDATE;
+> >>>>>> +        p = __map_domain_page(v->arch.runstate_guest.page);
+> >>>>>> +        guest_runstate = p + v->arch.runstate_guest.offset;
+> >>>>>> +
+> >>>>>> +        if ( VM_ASSIST(v->domain, runstate_update_flag) )
+> >>>>>> +        {
+> >>>>>> +            v->runstate.state_entry_time |= XEN_RUNSTATE_UPDATE;
+> >>>>>> +            guest_runstate->state_entry_time |= XEN_RUNSTATE_UPDATE;
+> >>>>> 
+> >>>>> I think that this write to guest_runstate should use write_atomic or
+> >>>>> another atomic write operation.
+> >>>> 
+> >>>> I thought about suggesting the same, but  guest_copy_* helpers may not
+> >>>> do a single memory write to state_entry_time.
+> >>>> What are you trying to prevent with the write_atomic()?
+> >>> 
+> >>> I am thinking that without using an atomic write, it would be (at least
+> >>> theoretically) possible for a guest to see a partial write to
+> >>> state_entry_time, which is not good. 
+> >> 
+> >> It is already the case with existing implementation as Xen may write byte by
+> >> byte. So are you suggesting the existing code is also buggy?
+> > 
+> > Writing byte by byte is a different case. That is OK. In that case, the
+> > guest could see the state after 3 bytes written and it would be fine and
+> > consistent. If this hadn't been the case, then yes, the existing code
+> > would also be buggy.
+> > 
+> > So if we did the write with a memcpy, it would be fine, no need for
+> > atomics:
+> > 
+> >  memcpy(&guest_runstate->state_entry_time,
+> >         &v->runstate.state_entry_time,
+> >         XXX);
+> > 
+> > 
+> > The |= case is different: GCC could implement it in any way it likes,
+> > including going through a zero-write to any of the bytes in the word, or
+> > doing an addition then a subtraction. GCC doesn't make any guarantees.
+> > If we want guarantees we need to use atomics.
+> 
+> Wouldn’t that require all accesses to state_entry_time to use also atomic operations ?
+> In this case we could not propagate the changes to a guest without changing the interface itself.
+> 
+> As the copy time needs to be protected, the write barriers are there to make sure that during the copy the bit is set and that when we unset it, the copy is done.
+> I added for this purpose a barrier after the memcpy to make sure that when/if we unset the bit the copy has already been done.
 
-Cheers,
+As you say, we have a flag to mark a transitiong period, the flag is
+XEN_RUNSTATE_UPDATE. So, I think it is OK if we don't use atomics during
+the transitioning period. But we need to make sure to use atomics for the
+update of the XEN_RUNSTATE_UPDATE flag itself.
 
-[1] 315740e1-3591-0e11-923a-718e06c36445@arm.com
+Does it make sense? Or maybe I misunderstood some of the things you
+wrote?
+--8323329-993750421-1591980292=:2815--
 
