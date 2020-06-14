@@ -2,77 +2,81 @@ Return-Path: <SRS0=IUS7=73=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
+X-Spam-Status: No, score=-9.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
 	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 59BB9C433E1
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 55398C433E0
 	for <xen-devel@archiver.kernel.org>; Sun, 14 Jun 2020 22:12:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 218552067B
+	by mail.kernel.org (Postfix) with ESMTPS id 219312071A
 	for <xen-devel@archiver.kernel.org>; Sun, 14 Jun 2020 22:12:38 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="L1VerG+D"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 218552067B
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="adGPkbzd"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 219312071A
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jkarM-00009w-GN; Sun, 14 Jun 2020 22:12:12 +0000
+	id 1jkarX-0000BP-1L; Sun, 14 Jun 2020 22:12:23 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=UtKD=73=gmail.com=gorbak25@srs-us1.protection.inumbo.net>)
- id 1jkarL-00009r-OD
- for xen-devel@lists.xenproject.org; Sun, 14 Jun 2020 22:12:11 +0000
-X-Inumbo-ID: 17dec9f0-ae8c-11ea-8496-bc764e2007e4
-Received: from mail-ej1-x642.google.com (unknown [2a00:1450:4864:20::642])
+ id 1jkarV-00009r-Mu
+ for xen-devel@lists.xenproject.org; Sun, 14 Jun 2020 22:12:21 +0000
+X-Inumbo-ID: 1a644538-ae8c-11ea-bb8b-bc764e2007e4
+Received: from mail-ej1-x644.google.com (unknown [2a00:1450:4864:20::644])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 17dec9f0-ae8c-11ea-8496-bc764e2007e4;
- Sun, 14 Jun 2020 22:12:11 +0000 (UTC)
-Received: by mail-ej1-x642.google.com with SMTP id mb16so15382679ejb.4
- for <xen-devel@lists.xenproject.org>; Sun, 14 Jun 2020 15:12:11 -0700 (PDT)
+ id 1a644538-ae8c-11ea-bb8b-bc764e2007e4;
+ Sun, 14 Jun 2020 22:12:15 +0000 (UTC)
+Received: by mail-ej1-x644.google.com with SMTP id mb16so15382762ejb.4
+ for <xen-devel@lists.xenproject.org>; Sun, 14 Jun 2020 15:12:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=t7J+vBnr5qW0YqDWMwMgwG/Ldp8mMdAgk7lsL5Cc8KQ=;
- b=L1VerG+DAo+zLQDiLJsKgrMb/5MmrJDCWpZpmflYixnse0YsI5GbLqL1+vtDofLlwV
- FXuC8JmKPu1XAEHWk9uuengbfJDrCy6E18aNc16jIzYNJLeJa/HsZzuYv0rpRl2FPiWh
- KjYWdCgpbhD9vDp/xIHfVLCBpGHwHMFwEvkYcTv/t+zyVVAIPY3QY/Ddp8MpLeVScslT
- e9Yblpka8SmCTzMW/q/Z9B4t10cdMAz+4Grq63oz7vUNyaW43STf9vGgK0VvV60BqnP5
- CK5wsBNGz01vJDlAL8lOKMtWmXWu96hn0g2XxrMkCiNTeWroVBLiA6KLVLx+nwy5u1SB
- vWIA==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=K9vVjeVfBAmD5toSQvhwolJYZoUXP1UxEwduLBU73+A=;
+ b=adGPkbzd1pDFW3MMUjjil8woWTnpy+IswqfHTBgRpgUbyY0AVHlMEKG1ayjzQFjxGz
+ 5G3gUp4An2Nvf5+xtlvUBunXcYc2WLQX42O7pVQmwJH/zJWgWgTIEr54qGeS/VuALz1Q
+ 9wUpKwpddrfCgGMAKXevlA9ZRN+cEoWSsfsAwIBmt5lrAV/7cEXZ7u4de4sv1XjYr3HV
+ FbEAYtti7lgeykcE0PlstCDtmD++QZDXkd+CQYw1hpNja4QvDqV5OIyA3PjeVLUtNQPE
+ 1DNv4GtjP2YW3QlKlZDr/H5zzlG4vL6HpcWB4eHWUmFvZsSHBKFGFLXqAbmu10LaxikN
+ gzYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=t7J+vBnr5qW0YqDWMwMgwG/Ldp8mMdAgk7lsL5Cc8KQ=;
- b=DmKBQoZSxfqRxZnwgodrZQ1MXKa7IhfLXU6ysiyT5pEVUZ0atSt3sFvonR/Lw5Wfes
- shb3Jn/X1wW6d+bCZZhKzqi/DKwaoB+5DQ8Ga/PCfZwiZ3A0FxQdOIKfPqeVcEv+iies
- jSe1Pf78z4QYIYKztROe/Y2FwzSYLESsf03AbXZlMPPdzSAPqMBhME5aXd1+0eq1WsjC
- AO+WwIc8z9L10TWUZ1q7cVoVabnSTBh8Mq/UybMsUBIURnAYRppWrePBqAfXoW21nv5h
- 3r3fSQG/OTz7RV74FESNgpOZiZo4lpX0IZjxZJeFM0NRg6H9/lZVUSDi6/8Vr+32Mj53
- aNZg==
-X-Gm-Message-State: AOAM531wmHctbNd0aY/tbvcxrItRYtHxIXpeNDM/pC325hhnFHFrEJcp
- blj9yPauKSYusoIE1GH9WrxnBga7QPvTLQ==
-X-Google-Smtp-Source: ABdhPJxCisGBa7uuX9xs30Kf/32tkoMOjxd0hCAn7Ith9LY2zPfToaisRP4aWH2JR2DMw+aNK1ynsw==
-X-Received: by 2002:a17:906:aad8:: with SMTP id
- kt24mr22651804ejb.527.1592172730202; 
- Sun, 14 Jun 2020 15:12:10 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=K9vVjeVfBAmD5toSQvhwolJYZoUXP1UxEwduLBU73+A=;
+ b=ZGrwSYmnc1eJpEuYifzTk2Zr+TCDrYgbQ8Ksw8Ovw/xtywTrV5E/Wca15mbX7fUhpw
+ WKR6UIpVlF0wPeL4JgC8gnVhH0xu96LbGApKVmK6neZ4IKpa725gSEoSqiyoOU9wKAoU
+ MmVOcQSpK+O9k1WKK0mgK4wHJUJFfON+1wsp1GlhRrLADbRusoV1pedZSVq6S5CeLrcu
+ bad4mf/MKCj/YfRHbSB4Q6Kr+s3lPqQorETM4CMWRhZlUnXl/qXJi3E7gU7oNS4Ujywi
+ CxLaOlDniuBwFWIIhUkz6Jz/lmLCYR6c19URmPVgIIXu/oQ6XkTERChxLfM/bQ5RS2/p
+ vjQA==
+X-Gm-Message-State: AOAM530pQpzJp4BTzGOw2Agh8W/T5+s2tT5OCbArFRK7PWJrOnLu//QI
+ DsVA8qfluWAVVKV4UzIQgplNQtlLC4QrdQ==
+X-Google-Smtp-Source: ABdhPJxxMqGxxS/Bt2pPFAmezto6oZ1Tkhi9T994RozWfo95KLi4xIcCkyj/iEhidE91AhWez433ig==
+X-Received: by 2002:a17:906:b1c3:: with SMTP id
+ bv3mr23526685ejb.292.1592172734456; 
+ Sun, 14 Jun 2020 15:12:14 -0700 (PDT)
 Received: from localhost.localdomain (public-gprs354212.centertel.pl.
  [37.47.14.229])
- by smtp.gmail.com with ESMTPSA id o13sm7772828ejb.46.2020.06.14.15.12.08
+ by smtp.gmail.com with ESMTPSA id o13sm7772828ejb.46.2020.06.14.15.12.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 14 Jun 2020 15:12:09 -0700 (PDT)
+ Sun, 14 Jun 2020 15:12:13 -0700 (PDT)
 From: Grzegorz Uriasz <gorbak25@gmail.com>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH 0/3] IGD Passthrough fixes for linux based stubdomains
-Date: Sun, 14 Jun 2020 22:12:00 +0000
-Message-Id: <cover.1592171394.git.gorbak25@gmail.com>
+Subject: [PATCH 2/3] tools/libxl: Grant permission for mapping opregions to
+ the target domain
+Date: Sun, 14 Jun 2020 22:12:02 +0000
+Message-Id: <18bebc4af48b83d71b3247082434b958be84b841.1592171394.git.gorbak25@gmail.com>
 X-Mailer: git-send-email 2.27.0
+In-Reply-To: <cover.1592171394.git.gorbak25@gmail.com>
+References: <cover.1592171394.git.gorbak25@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
@@ -92,29 +96,76 @@ Cc: Wei Liu <wl@xen.org>, jakub@bartmin.ski,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Hi,
+IGD VGA devices require a special opregion MMIO region which functions as
+an extra BAR in the PCI configuration space. Right now qemu is assigning those
+permissions - this is failing inside a linux based stubdomain as the
+stubdomain is not privileged. This patch grants the permissions for
+opregions in libxl instead of qemu. Granting permissions in qemu may be removed
+when this patch get's merged - for now linux based stubdomains which use IGD's
+need to patch qemu and include this patch in xen for IGD passthrough to work.
 
-The included patches are a small subset of a bigger patch set spanning few 
-projects aiming to isolate the GPU in Qubes OS to a dedicated security domain.
-I'm doing this together with 3 colleagues as part of our Bachelors thesis.
+Signed-off-by: Grzegorz Uriasz <gorbak25@gmail.com>
+---
+ tools/libxl/libxl_pci.c | 46 ++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 45 insertions(+), 1 deletion(-)
 
-Right now qemu assumes it runs in dom0 so it may grant access to
-required memory regions and ioports to the target domain for the IGD to work. 
-This is no longer the case with linux based stubdomains as the stubdom is 
-not privileged. Moving some logic from qemu to libxl is necessary for 
-some features to work inside a stubdomain. The included patches were tested
-on a few laptops(together with the linked qemu patchset) and they work
-fine.
-
-Grzegorz Uriasz (3):
-  tools/libxl: Grant VGA IO port permission for stubdom/target domain
-  tools/libxl: Grant permission for mapping opregions to the target
-    domain
-  tools/libxl: Directly map VBIOS to stubdomain
-
- tools/libxl/libxl_pci.c | 153 +++++++++++++++++++++++++++++++++-------
- 1 file changed, 127 insertions(+), 26 deletions(-)
-
+diff --git a/tools/libxl/libxl_pci.c b/tools/libxl/libxl_pci.c
+index 436190f790..48b1d8073b 100644
+--- a/tools/libxl/libxl_pci.c
++++ b/tools/libxl/libxl_pci.c
+@@ -2497,7 +2497,51 @@ static int libxl__grant_legacy_vga_permissions(libxl__gc *gc, const uint32_t dom
+ }
+ 
+ static int libxl__grant_igd_opregion_permission(libxl__gc *gc, const uint32_t domid) {
+-    return 0;
++    char* sysfs_path;
++    FILE* f;
++    uint32_t igd_host_opregion;
++    int ret = 0;
++    uint32_t stubdom_domid = libxl_get_stubdom_id(CTX, domid);
++
++    sysfs_path = GCSPRINTF(SYSFS_PCI_DEV"/"PCI_BDF"/config", 0, 0, 2, 0);
++    f = fopen(sysfs_path, "r");
++    if (!f) {
++        LOGED(ERROR, domid, "Unable to access IGD config space");
++        return ERROR_FAIL;
++    }
++
++    ret = fseek(f, 0xfc, SEEK_SET);
++    if (ret < 0) {
++        LOGED(ERROR, domid, "Unable to lseek in PCI config space");
++        goto out;
++    }
++
++    ret = fread((void*)&igd_host_opregion, 4, 1, f);
++    if (ret < 0) {
++        LOGED(ERROR, domid, "Unable to read opregion register");
++        goto out;
++    }
++
++    ret = xc_domain_iomem_permission(CTX->xch, stubdom_domid,
++                                     (unsigned long)(igd_host_opregion >> XC_PAGE_SHIFT), 0x3, 1);
++    if (ret < 0) {
++        LOGED(ERROR, domid,
++              "failed to give stubdom%d access to %"PRIx32" opregions for igd passthrough", stubdom_domid, igd_host_opregion);
++        goto out;
++    }
++
++    ret = xc_domain_iomem_permission(CTX->xch, domid,
++                                     (unsigned long)(igd_host_opregion >> XC_PAGE_SHIFT), 0x3, 1);
++    if (ret < 0) {
++        LOGED(ERROR, domid,
++              "failed to give dom%d access to %"PRIx32" opregions for igd passthrough", domid, igd_host_opregion);
++        goto out;
++    }
++
++    out:
++    if(f)
++        fclose(f);
++    return ret;
+ }
+ 
+ int libxl__grant_vga_iomem_permission(libxl__gc *gc, const uint32_t domid,
 -- 
 2.27.0
 
