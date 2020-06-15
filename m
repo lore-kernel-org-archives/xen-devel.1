@@ -6,49 +6,48 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3541FC433E1
-	for <xen-devel@archiver.kernel.org>; Mon, 15 Jun 2020 14:16:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4743FC433DF
+	for <xen-devel@archiver.kernel.org>; Mon, 15 Jun 2020 14:16:14 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 13CD620644
-	for <xen-devel@archiver.kernel.org>; Mon, 15 Jun 2020 14:16:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 13CD620644
+	by mail.kernel.org (Postfix) with ESMTPS id 24D6420644
+	for <xen-devel@archiver.kernel.org>; Mon, 15 Jun 2020 14:16:14 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 24D6420644
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jkptz-0007qj-L6; Mon, 15 Jun 2020 14:15:55 +0000
+	id 1jkpu8-0007uK-Qi; Mon, 15 Jun 2020 14:16:04 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=OSTQ=74=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1jkpty-0007qe-9F
- for xen-devel@lists.xenproject.org; Mon, 15 Jun 2020 14:15:54 +0000
-X-Inumbo-ID: b8871778-af12-11ea-bca7-bc764e2007e4
+ id 1jkpu8-0007qe-5t
+ for xen-devel@lists.xenproject.org; Mon, 15 Jun 2020 14:16:04 +0000
+X-Inumbo-ID: b92196c2-af12-11ea-bb8b-bc764e2007e4
 Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b8871778-af12-11ea-bca7-bc764e2007e4;
- Mon, 15 Jun 2020 14:15:53 +0000 (UTC)
+ id b92196c2-af12-11ea-bb8b-bc764e2007e4;
+ Mon, 15 Jun 2020 14:15:54 +0000 (UTC)
 Authentication-Results: esa3.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: VXRaQHLY4k7JjwaoxKNDHqKX0pr/aBzrF1Bbk363BgZ0pD1EnDAEaIUav89syhYzpOix2wEk6T
- fbU6En0io1tAXmylQSQ1n1Z/dSlK5n3ib3bJC1WrvAXEk5HMhUXXPrQnqrOQjEHLfcZ1JceZf3
- ivBl5mCl4VuS5CVq+yoJ6j/iurALy7wXY9Yg13AqRvJPkDO+7A6Q15dkywCGG52h96VIhJXoWd
- r8I/n+eQT9C380AaKmhNNHTKMBa/TU5+FSxvGuADahUtSZoovtv4aEwA/kFkqo1lu1sNkL4WRM
- YAg=
+IronPort-SDR: mIjdbp5dwfK4SNh/gtIzQUviUFY1+aoEexNg9HA4wjQnxRIKigFWSgQALaJLKqpjAvgXbq0T9X
+ zOmMSjph7GeFokY7BEcVNQDr+sC8YDCXZ5Dc/yO+h0c1ql9vgHwMwU9CjD/Z1u62LisAAIt7TS
+ E5PVQLCSyuqiE0xGXtCIjWpjf10/vGP5jdltHz0YM42JO5+4PHRZ3/L8tLkFosOYZyjp4cRMUo
+ Dj/jt+/3GDPsJELVvtcuBPV3Vs1Tk5U9a4ICmtra0D/r33ukOBV8Ose34QxYYqJWg9LV4N7xPx
+ AAM=
 X-SBRS: 2.7
-X-MesageID: 20064836
+X-MesageID: 20064838
 X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,514,1583211600"; d="scan'208";a="20064836"
+X-IronPort-AV: E=Sophos;i="5.73,514,1583211600"; d="scan'208";a="20064838"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-Subject: [PATCH 6/9] x86/gen-cpuid: Distinguish default vs max in feature
- annotations
-Date: Mon, 15 Jun 2020 15:15:29 +0100
-Message-ID: <20200615141532.1927-7-andrew.cooper3@citrix.com>
+Subject: [PATCH 9/9] x86/spec-ctrl: Hide RDRAND by default on IvyBridge
+Date: Mon, 15 Jun 2020 15:15:32 +0100
+Message-ID: <20200615141532.1927-10-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20200615141532.1927-1-andrew.cooper3@citrix.com>
 References: <20200615141532.1927-1-andrew.cooper3@citrix.com>
@@ -72,57 +71,137 @@ Cc: Wei Liu <wl@xen.org>, Paul Durrant <paul@xen.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-The toolstack logic can now correctly distinguish a clean boot from a
-migrate/restore.
+To combat the absence of mitigating microcode, arrange to hide RDRAND by
+default on IvyBridge hardware.
 
-Allow lowercase a/s/h to be used to annotate a non-default feature.
+Adjust the default feature derivation to hide RDRAND on IvyBridge client
+parts, unless `cpuid=rdrand` is explicitly provided.
 
-Due to the emulator work prepared earlier in 4.14, this now allows VMs to
-explicity opt in to the TSXLDTRK, MOVDIR{I,64B} and SERIALIZE instructions via
-their xl.cfg file, rather than getting them as a matter of default.
+Adjust the restore path in xc_cpuid_apply_policy() to not hide RDRAND from VMs
+which migrated from pre-4.14.
+
+In all cases, individual guests can continue using RDRAND if explicitly
+enabled in their config files.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
+CC: Ian Jackson <Ian.Jackson@citrix.com>
+CC: Wei Liu <wl@xen.org>
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Wei Liu <wl@xen.org>
 CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Ian Jackson <Ian.Jackson@citrix.com>
-CC: Wei Liu <wl@xen.org>
 CC: Paul Durrant <paul@xen.org>
 ---
- xen/tools/gen-cpuid.py | 18 +++++++-----------
- 1 file changed, 7 insertions(+), 11 deletions(-)
+ docs/misc/xen-command-line.pandoc           | 20 +++++++++++++++-----
+ tools/libxc/xc_cpuid_x86.c                  |  3 +++
+ xen/arch/x86/cpuid.c                        | 21 +++++++++++++++++++++
+ xen/include/public/arch-x86/cpufeatureset.h |  2 +-
+ 4 files changed, 40 insertions(+), 6 deletions(-)
 
-diff --git a/xen/tools/gen-cpuid.py b/xen/tools/gen-cpuid.py
-index 037954cfb8..ffd9529fdf 100755
---- a/xen/tools/gen-cpuid.py
-+++ b/xen/tools/gen-cpuid.py
-@@ -130,17 +130,13 @@ def crunch_numbers(state):
-                  MTRR, PGE, MCA, CMOV, PAT, PSE36, MMX, FXSR)
-     state.common_1d = common_1d
+diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
+index fde749c669..c8ebfaf813 100644
+--- a/docs/misc/xen-command-line.pandoc
++++ b/docs/misc/xen-command-line.pandoc
+@@ -512,11 +512,21 @@ The Speculation Control hardware features `srbds-ctrl`, `md-clear`, `ibrsb`,
+ `stibp`, `ibpb`, `l1d-flush` and `ssbd` are used by default if available and
+ applicable.  They can all be ignored.
  
--    state.pv_def = state.raw['A']
--    state.hvm_shadow_def = state.pv_def | state.raw['S']
--    state.hvm_hap_def = state.hvm_shadow_def | state.raw['H']
--
--    # TODO: Ignore def/max split until the toolstack migration logic is fixed
--    state.pv_max = state.pv_def
--    state.hvm_shadow_max = state.hvm_shadow_def
--    state.hvm_hap_max = state.hvm_hap_def
--    # state.pv_max =                                state.raw['A'] | state.raw['a']
--    # state.hvm_shadow_max = state.pv_max         | state.raw['S'] | state.raw['s']
--    # state.hvm_hap_max =    state.hvm_shadow_max | state.raw['H'] | state.raw['h']
-+    state.pv_def =                                state.raw['A']
-+    state.hvm_shadow_def = state.pv_def         | state.raw['S']
-+    state.hvm_hap_def =    state.hvm_shadow_def | state.raw['H']
+-`rdrand` and `rdseed` can be ignored, as a mitigation to XSA-320 /
+-CVE-2020-0543.  The RDRAND feature is disabled by default on certain AMD
+-systems, due to possible malfunctions after ACPI S3 suspend/resume.  `rdrand`
+-may be used in its positive form to override Xen's default behaviour on these
+-systems, and make the feature fully usable.
++`rdrand` and `rdseed` have multiple interactions.
 +
-+    state.pv_max =                                state.raw['A'] | state.raw['a']
-+    state.hvm_shadow_max = state.pv_max         | state.raw['S'] | state.raw['s']
-+    state.hvm_hap_max =    state.hvm_shadow_max | state.raw['H'] | state.raw['h']
++*   For Special Register Buffer Data Sampling (SRBDS, XSA-320, CVE-2020-0543),
++    RDRAND and RDSEED can be ignored.
++
++    Due to the absence microcode to address SRBDS on IvyBridge hardware, the
++    RDRAND feature is hidden by default for guests, unless `rdrand` is used in
++    its positive form.  Irrespective of the default setting here, VMs can use
++    RDRAND if explicitly enabled in guest config file, and VMs already using
++    RDRAND can migrate in.
++
++*   The RDRAND feature is disabled by default on AMD Fam15/16 systems, due to
++    possible malfunctions after ACPI S3 suspend/resume.  `rdrand` may be used
++    in its positive form to override Xen's default behaviour on these systems,
++    and make the feature fully usable.
  
-     #
-     # Feature dependency information.
+ ### cpuid_mask_cpu
+ > `= fam_0f_rev_[cdefg] | fam_10_rev_[bc] | fam_11_rev_b`
+diff --git a/tools/libxc/xc_cpuid_x86.c b/tools/libxc/xc_cpuid_x86.c
+index 5649913e69..877a5601f3 100644
+--- a/tools/libxc/xc_cpuid_x86.c
++++ b/tools/libxc/xc_cpuid_x86.c
+@@ -503,6 +503,9 @@ int xc_cpuid_apply_policy(xc_interface *xch, uint32_t domid, bool restore,
+      */
+     if ( restore )
+     {
++        if ( test_bit(X86_FEATURE_RDRAND, host_featureset) && !p->basic.rdrand )
++            p->basic.rdrand = true;
++
+         if ( di.hvm )
+         {
+             p->feat.mpx = test_bit(X86_FEATURE_MPX, host_featureset);
+diff --git a/xen/arch/x86/cpuid.c b/xen/arch/x86/cpuid.c
+index f2fc0aa895..6a4a787b68 100644
+--- a/xen/arch/x86/cpuid.c
++++ b/xen/arch/x86/cpuid.c
+@@ -340,6 +340,25 @@ static void __init calculate_host_policy(void)
+     }
+ }
+ 
++static void __init guest_common_default_feature_adjustments(uint32_t *fs)
++{
++    /*
++     * IvyBridge client parts suffer from leakage of RDRAND data due to SRBDS
++     * (XSA-320 / CVE-2020-0543), and won't be receiving microcode to
++     * compensate.
++     *
++     * Mitigate by hiding RDRAND from guests by default, unless explicitly
++     * overridden on the Xen command line (cpuid=rdrand).  Irrespective of the
++     * default setting, guests can use RDRAND if explicitly enabled
++     * (cpuid="host,rdrand=1") in the VM's config file, and VMs which were
++     * previously using RDRAND can migrate in.
++     */
++    if ( boot_cpu_data.x86_vendor == X86_VENDOR_INTEL &&
++         boot_cpu_data.x86 == 6 && boot_cpu_data.x86_model == 0x3a &&
++         cpu_has_rdrand && !is_forced_cpu_cap(X86_FEATURE_RDRAND) )
++        __clear_bit(X86_FEATURE_RDRAND, fs);
++}
++
+ static void __init guest_common_feature_adjustments(uint32_t *fs)
+ {
+     /* Unconditionally claim to be able to set the hypervisor bit. */
+@@ -403,6 +422,7 @@ static void __init calculate_pv_def_policy(void)
+         pv_featureset[i] &= pv_def_featuremask[i];
+ 
+     guest_common_feature_adjustments(pv_featureset);
++    guest_common_default_feature_adjustments(pv_featureset);
+ 
+     sanitise_featureset(pv_featureset);
+     cpuid_featureset_to_policy(pv_featureset, p);
+@@ -485,6 +505,7 @@ static void __init calculate_hvm_def_policy(void)
+         hvm_featureset[i] &= hvm_featuremask[i];
+ 
+     guest_common_feature_adjustments(hvm_featureset);
++    guest_common_default_feature_adjustments(hvm_featureset);
+ 
+     sanitise_featureset(hvm_featureset);
+     cpuid_featureset_to_policy(hvm_featureset, p);
+diff --git a/xen/include/public/arch-x86/cpufeatureset.h b/xen/include/public/arch-x86/cpufeatureset.h
+index af1b8a96a6..fe7492a225 100644
+--- a/xen/include/public/arch-x86/cpufeatureset.h
++++ b/xen/include/public/arch-x86/cpufeatureset.h
+@@ -149,7 +149,7 @@ XEN_CPUFEATURE(XSAVE,         1*32+26) /*A  XSAVE/XRSTOR/XSETBV/XGETBV */
+ XEN_CPUFEATURE(OSXSAVE,       1*32+27) /*!  OSXSAVE */
+ XEN_CPUFEATURE(AVX,           1*32+28) /*A  Advanced Vector Extensions */
+ XEN_CPUFEATURE(F16C,          1*32+29) /*A  Half-precision convert instruction */
+-XEN_CPUFEATURE(RDRAND,        1*32+30) /*A  Digital Random Number Generator */
++XEN_CPUFEATURE(RDRAND,        1*32+30) /*!A Digital Random Number Generator */
+ XEN_CPUFEATURE(HYPERVISOR,    1*32+31) /*!A Running under some hypervisor */
+ 
+ /* AMD-defined CPU features, CPUID level 0x80000001.edx, word 2 */
 -- 
 2.11.0
 
