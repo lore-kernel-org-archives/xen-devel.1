@@ -2,67 +2,59 @@ Return-Path: <SRS0=hCD3=74=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E573C433E0
-	for <xen-devel@archiver.kernel.org>; Mon, 15 Jun 2020 14:10:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 65B0DC433DF
+	for <xen-devel@archiver.kernel.org>; Mon, 15 Jun 2020 14:16:10 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4A4E2207D3
-	for <xen-devel@archiver.kernel.org>; Mon, 15 Jun 2020 14:10:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4A4E2207D3
+	by mail.kernel.org (Postfix) with ESMTPS id 448A420644
+	for <xen-devel@archiver.kernel.org>; Mon, 15 Jun 2020 14:16:10 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 448A420644
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jkpo8-0006x7-VQ; Mon, 15 Jun 2020 14:09:52 +0000
+	id 1jkpu4-0007sF-8o; Mon, 15 Jun 2020 14:16:00 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=OSTQ=74=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1jkpo8-0006wu-1e
- for xen-devel@lists.xenproject.org; Mon, 15 Jun 2020 14:09:52 +0000
-X-Inumbo-ID: e08fa592-af11-11ea-b7bb-bc764e2007e4
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ id 1jkpu3-0007qe-5V
+ for xen-devel@lists.xenproject.org; Mon, 15 Jun 2020 14:15:59 +0000
+X-Inumbo-ID: b9508c70-af12-11ea-bca7-bc764e2007e4
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id e08fa592-af11-11ea-b7bb-bc764e2007e4;
- Mon, 15 Jun 2020 14:09:50 +0000 (UTC)
-Authentication-Results: esa6.hc3370-68.iphmx.com;
+ id b9508c70-af12-11ea-bca7-bc764e2007e4;
+ Mon, 15 Jun 2020 14:15:54 +0000 (UTC)
+Authentication-Results: esa3.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: 40QYEQMnH06bZqtcGpCUHOoUd7xprwS42/gkbBBMAILWJBQxcsZ4ryY196SZADlxSZoe8k7/e5
- DeM50SZaOYWrS6jSIiyXZFX3IKnd3DO7O+8SxCMFvZwirNgq0THj+KcV8KvKQe7GEYQUJcETR3
- xMIwLATFniWs57iOD4krN8ZGRdubDu0zHJEOt0IQFxD/0k8rRh0uh2XyukvJnNlciHF7H0j1eR
- hP6YSzZarEWINiTbA1l7n9uYrwU3BUf55oHtHZvNWykHBsNzb7jVmrvqQBHxKW4DhxIjfiQRxf
- +yg=
+IronPort-SDR: A04GakzAv8qhrDMfu5/dxLlX0prS/Tx3wC3kejqOajtC++rwD9oS+SnvHudkC83u52g3DzSgfK
+ TV4xr+pPX6QLzEvL6PvEecxK9IVuJvWM5gavfu1BY4YBVv788HXRmdJZjKwQxcXuI4hFAZEhhn
+ OhmE/WvawQRTrWmdKTYl4c3S7Bxa9sRIyejEPhoK7RMm6rbmttT01M3UrL2UAzmSWTLbh4QgFh
+ 0UjeNYb3NLqj63Q/8JIiPnq0UfM1Q9LNUS0FEQHlW5+48GZcHH7NpTG4oVyXlXBp5IqdZx7eGk
+ wlE=
 X-SBRS: 2.7
-X-MesageID: 20409564
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 20064837
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,514,1583211600"; d="scan'208";a="20409564"
-Subject: Re: [PATCH] tools/libxengnttab: correct size of allocated memory
-To: Ian Jackson <ian.jackson@citrix.com>, "paul@xen.org" <paul@xen.org>
-References: <20200520083501.31704-1-jgross@suse.com>
- <24261.17303.413916.29534@mariner.uk.xensource.com>
- <20200520155621.GN54375@Air-de-Roger>
- <05eac1e1-63a3-1d03-9f91-d0ffdcc44f23@suse.com>
- <00f701d64009$c2c10000$48430000$@xen.org>
- <24295.32909.686801.47956@mariner.uk.xensource.com>
+X-IronPort-AV: E=Sophos;i="5.73,514,1583211600"; d="scan'208";a="20064837"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-Message-ID: <c420759a-9fab-1542-ef6b-bff558a6dd05@citrix.com>
-Date: Mon, 15 Jun 2020 15:09:26 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Subject: [PATCH 2/9] tests/cpu-policy: Confirm that CPUID serialisation is
+ sorted
+Date: Mon, 15 Jun 2020 15:15:25 +0100
+Message-ID: <20200615141532.1927-3-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20200615141532.1927-1-andrew.cooper3@citrix.com>
+References: <20200615141532.1927-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-In-Reply-To: <24295.32909.686801.47956@mariner.uk.xensource.com>
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-Content-Language: en-GB
-X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
- AMSPEX02CL02.citrite.net (10.69.22.126)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,46 +65,116 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: =?UTF-8?B?J0rDvHJnZW4gR3Jvw58n?= <jgross@suse.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- 'Wei Liu' <wl@xen.org>, Roger Pau Monne <roger.pau@citrix.com>
+Cc: Wei Liu <wl@xen.org>, Paul Durrant <paul@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <JBeulich@suse.com>,
+ Ian Jackson <Ian.Jackson@citrix.com>,
+ =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 15/06/2020 15:07, Ian Jackson wrote:
-> Paul Durrant writes ("RE: [PATCH] tools/libxengnttab: correct size of allocated memory"):
->>> -----Original Message-----
->>> From: Xen-devel <xen-devel-bounces@lists.xenproject.org> On Behalf Of Jürgen Groß
->>> Sent: 11 June 2020 16:26
->>> To: Roger Pau Monné <roger.pau@citrix.com>; Ian Jackson <ian.jackson@citrix.com>
->>> Cc: xen-devel@lists.xenproject.org; Wei Liu <wl@xen.org>
->>> Subject: Re: [PATCH] tools/libxengnttab: correct size of allocated memory
->>>
->>> On 20.05.20 17:56, Roger Pau Monné wrote:
->>>> On Wed, May 20, 2020 at 03:49:59PM +0100, Ian Jackson wrote:
->>>>> Juergen Gross writes ("[PATCH] tools/libxengnttab: correct size of allocated memory"):
->>>>>> The size of the memory allocated for the IOCTL_GNTDEV_MAP_GRANT_REF
->>>>>> ioctl() parameters is calculated wrong, which results in too much
->>>>>> memory allocated.
->>>>> Added Roger to CC.
->>>>>
->>>>> Firstly,
->>>>>
->>>>> Reviewed-by: Ian Jackson <ian.jackson@eu.citrix.com>
->>>> For the FreeBSD bits:
->>>>
->>>> Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
->>> Any reason the patch didn't go in yet?
->>>
->> I'd be quite happy for this to go in now, consider it
->>
->> Release-acked-by: Paul Durrant <paul@xen.org>
-> Thanks.  I tried to apply this but it doesn't seem to apply to
-> staging.  Jürgen, would you care to rebase/resend ?
+The existing x86_cpuid_copy_to_buffer() does produce sorted results, and we're
+about to start relying on this.  Extend the unit tests.
 
-I already committed it, seeing as it was fully acked.
+As test_cpuid_serialise_success() is a fairly limited set of synthetic
+examples right now, introduce test_cpuid_current() to operate on the full
+policy for the current CPU.
 
-https://xenbits.xen.org/gitweb/?p=xen.git;a=commitdiff;h=aad20e538d7ba0e36f5ed8d2bebb74096e3a6d7f
+Tweak the fail() macro to allow for simplified control flow.
 
-~Andrew
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Wei Liu <wl@xen.org>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Ian Jackson <Ian.Jackson@citrix.com>
+CC: Wei Liu <wl@xen.org>
+CC: Paul Durrant <paul@xen.org>
+---
+ tools/tests/cpu-policy/test-cpu-policy.c | 49 +++++++++++++++++++++++++++++++-
+ 1 file changed, 48 insertions(+), 1 deletion(-)
+
+diff --git a/tools/tests/cpu-policy/test-cpu-policy.c b/tools/tests/cpu-policy/test-cpu-policy.c
+index fe8cdf6ea9..7ba9707236 100644
+--- a/tools/tests/cpu-policy/test-cpu-policy.c
++++ b/tools/tests/cpu-policy/test-cpu-policy.c
+@@ -16,7 +16,7 @@ static unsigned int nr_failures;
+ #define fail(fmt, ...)                          \
+ ({                                              \
+     nr_failures++;                              \
+-    printf(fmt, ##__VA_ARGS__);                 \
++    (void)printf(fmt, ##__VA_ARGS__);           \
+ })
+ 
+ #define memdup(ptr)                             \
+@@ -66,6 +66,45 @@ static void test_vendor_identification(void)
+     }
+ }
+ 
++static bool leaves_are_sorted(const xen_cpuid_leaf_t *leaves, unsigned int nr)
++{
++    for ( unsigned int i = 1; i < nr; ++i )
++    {
++        /* leaf index went backwards => not sorted. */
++        if ( leaves[i - 1].leaf > leaves[i].leaf )
++            return false;
++
++        /* leaf index went forwards => ok */
++        if ( leaves[i - 1].leaf < leaves[i].leaf )
++            continue;
++
++        /* leave index the same, subleaf didn't increase => not sorted. */
++        if ( leaves[i - 1].subleaf >= leaves[i].subleaf )
++            return false;
++    }
++
++    return true;
++}
++
++static void test_cpuid_current(void)
++{
++    struct cpuid_policy p;
++    xen_cpuid_leaf_t leaves[CPUID_MAX_SERIALISED_LEAVES];
++    unsigned int nr = ARRAY_SIZE(leaves);
++    int rc;
++
++    printf("Testing CPUID on current CPU\n");
++
++    x86_cpuid_policy_fill_native(&p);
++
++    rc = x86_cpuid_copy_to_buffer(&p, leaves, &nr);
++    if ( rc != 0 )
++        return fail("  Serialise, expected rc 0, got %d\n", rc);
++
++    if ( !leaves_are_sorted(leaves, nr) )
++        return fail("  Leaves not sorted\n");
++}
++
+ static void test_cpuid_serialise_success(void)
+ {
+     static const struct test {
+@@ -178,6 +217,13 @@ static void test_cpuid_serialise_success(void)
+             goto test_done;
+         }
+ 
++        if ( !leaves_are_sorted(leaves, nr) )
++        {
++            fail("  Test %s, leaves not sorted\n",
++                 t->name);
++            goto test_done;
++        }
++
+     test_done:
+         free(leaves);
+     }
+@@ -613,6 +659,7 @@ int main(int argc, char **argv)
+ 
+     test_vendor_identification();
+ 
++    test_cpuid_current();
+     test_cpuid_serialise_success();
+     test_cpuid_deserialise_failure();
+     test_cpuid_out_of_range_clearing();
+-- 
+2.11.0
+
 
