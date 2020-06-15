@@ -6,49 +6,49 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A5CFDC433DF
-	for <xen-devel@archiver.kernel.org>; Mon, 15 Jun 2020 14:16:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 55657C433E2
+	for <xen-devel@archiver.kernel.org>; Mon, 15 Jun 2020 14:16:26 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7BC1920644
-	for <xen-devel@archiver.kernel.org>; Mon, 15 Jun 2020 14:16:24 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7BC1920644
+	by mail.kernel.org (Postfix) with ESMTPS id 2B31A20644
+	for <xen-devel@archiver.kernel.org>; Mon, 15 Jun 2020 14:16:26 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2B31A20644
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jkpuI-00081k-Qm; Mon, 15 Jun 2020 14:16:14 +0000
+	id 1jkpuE-0007yW-GW; Mon, 15 Jun 2020 14:16:10 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=OSTQ=74=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1jkpuI-0007qe-5u
- for xen-devel@lists.xenproject.org; Mon, 15 Jun 2020 14:16:14 +0000
-X-Inumbo-ID: b9e8f80c-af12-11ea-bb8b-bc764e2007e4
+ id 1jkpuD-0007qe-5j
+ for xen-devel@lists.xenproject.org; Mon, 15 Jun 2020 14:16:09 +0000
+X-Inumbo-ID: b9b798b6-af12-11ea-bca7-bc764e2007e4
 Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b9e8f80c-af12-11ea-bb8b-bc764e2007e4;
- Mon, 15 Jun 2020 14:15:55 +0000 (UTC)
+ id b9b798b6-af12-11ea-bca7-bc764e2007e4;
+ Mon, 15 Jun 2020 14:15:54 +0000 (UTC)
 Authentication-Results: esa3.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: UDaqbc4TbHeYODtc+HkmveLoGbw/Tno3hC+KDZcJ96XhD748wssAHbyq/SyAnFuaZFPhHX+vxB
- bf1cOvEcp0XrYwqCjk25x88wV+9yrTrLLVnlEusbDIxnZ4PpdUg3a+Z87VhFRZFkHFN6X0fQXZ
- YOh1W6DRzAxgseB+FrUBfXJJ6zSxXo8A1nqKicOdIjaC0SInshwv1/D2pHwHSRMXxnEMCLs7Kj
- hkSjdhOwRY/mg9PzaAnrJ9vWkzMzIdWiK9nyKAvWl0IulfEsBIVT4PZwFNMarlVr63uUEv1R2Y
- SOY=
+IronPort-SDR: 2lfisGOrd28c2GHAkOxBetBR4iUWm8SYG26l+LvzWyEiWbJePzyrFu8YSqnIWQt7VhZpV3f5Qp
+ 6cjLb0bru0DW2nnuPoOXWqO51adVrVcHkWN+V7Xlhe+IKMP/fG4iqhytYUN2pHXdJZWxupvQz2
+ z5nialtJnULBif0S2RTGHZ371kp4MjU9O2tYVeL10Y5wL+ThjK0qtlG4iOi7djdwfUhg5bjPJs
+ mOyd4IKjyS2zx5bwiugaVrKwZziG+BbpkxDscjSl7739tiSqCVnLTg+bin7TgXutUSZAqJrQmQ
+ mF4=
 X-SBRS: 2.7
-X-MesageID: 20064840
+X-MesageID: 20064839
 X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,514,1583211600"; d="scan'208";a="20064840"
+X-IronPort-AV: E=Sophos;i="5.73,514,1583211600"; d="scan'208";a="20064839"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-Subject: [PATCH 1/9] tools/libx[cl]: Introduce struct xc_xend_cpuid for
- xc_cpuid_set()
-Date: Mon, 15 Jun 2020 15:15:24 +0100
-Message-ID: <20200615141532.1927-2-andrew.cooper3@citrix.com>
+Subject: [PATCH 5/9] tools/libx[cl]: Plumb bool restore down into
+ xc_cpuid_apply_policy()
+Date: Mon, 15 Jun 2020 15:15:28 +0100
+Message-ID: <20200615141532.1927-6-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20200615141532.1927-1-andrew.cooper3@citrix.com>
 References: <20200615141532.1927-1-andrew.cooper3@citrix.com>
@@ -72,21 +72,14 @@ Cc: Wei Liu <wl@xen.org>, Paul Durrant <paul@xen.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-In order to combine the functionality of xc_cpuid_set() with
-xc_cpuid_apply_policy(), arrange to pass the data in a single contained
-struct, rather than two arrays.
+In order to safely disable some features by default, without breaking
+migration from 4.13 or older, the CPUID logic needs to distinguish the two
+cases.
 
-libxl__cpuid_policy is the ideal structure to use, but that would introduce a
-reverse dependency between libxc and libxl.  Introduce xc_xend_cpuid (with a
-transparent union to provide more useful names for the inputs), and use this
-structure in libxl.
+Plumb a restore boolean down from the two callers of libxl__cpuid_legacy() all
+the way down into xc_cpuid_apply_policy().
 
-The public API has libxl_cpuid_policy as an opaque type referencing
-libxl__cpuid_policy.  Drop the inappropriate comment about its internals, and
-use xc_xend_cpuid as a differently named opaque backing object.  Users of both
-libxl and libxc are not permitted to look at the internals.
-
-No change in behaviour.
+No functional change.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -96,220 +89,132 @@ CC: Jan Beulich <JBeulich@suse.com>
 CC: Wei Liu <wl@xen.org>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Paul Durrant <paul@xen.org>
+
+Ideally, I'd have started the brand new CPUID/MSR interface for the boot path
+before cleaning up the legacy path, but that's far too much work to squeeze
+into 4.14 at this point.  The restore boolean will do for now, and will
+disappear eventually.
 ---
- tools/libxc/include/xenctrl.h | 30 ++++++++++++++++++++++++++++--
- tools/libxc/xc_cpuid_x86.c    | 39 +++++++++++----------------------------
- tools/libxl/libxl.h           |  8 ++++----
- tools/libxl/libxl_cpuid.c     |  7 +++----
- tools/libxl/libxl_internal.h  | 10 ----------
- 5 files changed, 46 insertions(+), 48 deletions(-)
+ tools/libxc/include/xenctrl.h | 7 ++++++-
+ tools/libxc/xc_cpuid_x86.c    | 2 +-
+ tools/libxl/libxl_cpuid.c     | 4 ++--
+ tools/libxl/libxl_create.c    | 2 +-
+ tools/libxl/libxl_dom.c       | 2 +-
+ tools/libxl/libxl_internal.h  | 2 +-
+ tools/libxl/libxl_nocpuid.c   | 2 +-
+ 7 files changed, 13 insertions(+), 8 deletions(-)
 
 diff --git a/tools/libxc/include/xenctrl.h b/tools/libxc/include/xenctrl.h
-index 113ddd935d..178144e8e2 100644
+index 5f0978e0e5..634be88ac1 100644
 --- a/tools/libxc/include/xenctrl.h
 +++ b/tools/libxc/include/xenctrl.h
-@@ -1792,10 +1792,36 @@ int xc_domain_debug_control(xc_interface *xch,
-                             uint32_t vcpu);
- 
- #if defined(__i386__) || defined(__x86_64__)
-+
-+/*
-+ * CPUID policy data, expressed in the legacy XEND format.
-+ *
-+ * Policy is an array of strings, 32 chars long:
-+ *   policy[0] = eax
-+ *   policy[1] = ebx
-+ *   policy[2] = ecx
-+ *   policy[3] = edx
-+ *
-+ * The format of the string is the following:
-+ *   '1' -> force to 1
-+ *   '0' -> force to 0
-+ *   'x' -> we don't care (use default)
-+ *   'k' -> pass through host value
-+ *   's' -> legacy alias for 'k'
-+ */
-+struct xc_xend_cpuid {
-+    union {
-+        struct {
-+            uint32_t leaf, subleaf;
-+        };
-+        uint32_t input[2];
-+    };
-+    char *policy[4];
-+};
-+
- int xc_cpuid_set(xc_interface *xch,
-                  uint32_t domid,
--                 const unsigned int *input,
--                 const char **config);
-+                 const struct xc_xend_cpuid *xend);
- 
+@@ -1822,13 +1822,18 @@ struct xc_xend_cpuid {
  /*
   * Make adjustments to the CPUID settings for a domain.
+  *
++ * This path is used in two cases.  First, for fresh boots of the domain, and
++ * secondly for migrate-in/restore of pre-4.14 guests (where CPUID data was
++ * missing from the stream).  The @restore parameter distinguishes these
++ * cases, and the generated policy must be compatible with a 4.13.
++ *
+  * Either pass a full new @featureset (and @nr_features), or adjust individual
+  * features (@pae).
+  *
+  * Then (optionally) apply legacy XEND overrides (@xend) to the result.
+  */
+ int xc_cpuid_apply_policy(xc_interface *xch,
+-                          uint32_t domid,
++                          uint32_t domid, bool restore,
+                           const uint32_t *featureset,
+                           unsigned int nr_features, bool pae,
+                           const struct xc_xend_cpuid *xend);
 diff --git a/tools/libxc/xc_cpuid_x86.c b/tools/libxc/xc_cpuid_x86.c
-index b42edd6457..edc2ad9b47 100644
+index 26a7b94dcf..e017abffce 100644
 --- a/tools/libxc/xc_cpuid_x86.c
 +++ b/tools/libxc/xc_cpuid_x86.c
-@@ -259,27 +259,8 @@ int xc_set_domain_cpu_policy(xc_interface *xch, uint32_t domid,
-     return ret;
+@@ -425,7 +425,7 @@ static int xc_cpuid_xend_policy(
+     return rc;
  }
  
--/*
-- * Configure a single input with the informatiom from config.
-- *
-- * Config is an array of strings:
-- *   config[0] = eax
-- *   config[1] = ebx
-- *   config[2] = ecx
-- *   config[3] = edx
-- *
-- * The format of the string is the following:
-- *   '1' -> force to 1
-- *   '0' -> force to 0
-- *   'x' -> we don't care (use default)
-- *   'k' -> pass through host value
-- *   's' -> legacy alias for 'k'
-- *
-- * In all cases, the returned string consists of just '0' and '1'.
-- */
- int xc_cpuid_set(
--    xc_interface *xch, uint32_t domid, const unsigned int *input,
--    const char **config)
-+    xc_interface *xch, uint32_t domid, const struct xc_xend_cpuid *xend)
- {
-     int rc;
-     unsigned int i, j, regs[4] = {}, polregs[4] = {};
-@@ -324,7 +305,8 @@ int xc_cpuid_set(
-         goto fail;
-     }
-     for ( i = 0; i < policy_leaves; ++i )
--        if ( leaves[i].leaf == input[0] && leaves[i].subleaf == input[1] )
-+        if ( leaves[i].leaf == xend->leaf &&
-+             leaves[i].subleaf == xend->subleaf )
-         {
-             polregs[0] = leaves[i].a;
-             polregs[1] = leaves[i].b;
-@@ -345,7 +327,8 @@ int xc_cpuid_set(
-         goto fail;
-     }
-     for ( i = 0; i < policy_leaves; ++i )
--        if ( leaves[i].leaf == input[0] && leaves[i].subleaf == input[1] )
-+        if ( leaves[i].leaf == xend->leaf &&
-+             leaves[i].subleaf == xend->subleaf )
-         {
-             regs[0] = leaves[i].a;
-             regs[1] = leaves[i].b;
-@@ -356,7 +339,7 @@ int xc_cpuid_set(
- 
-     for ( i = 0; i < 4; i++ )
-     {
--        if ( config[i] == NULL )
-+        if ( xend->policy[i] == NULL )
-         {
-             regs[i] = polregs[i];
-             continue;
-@@ -375,14 +358,14 @@ int xc_cpuid_set(
-             unsigned char polval = !!((polregs[i] & (1U << (31 - j))));
- 
-             rc = -EINVAL;
--            if ( !strchr("10xks", config[i][j]) )
-+            if ( !strchr("10xks", xend->policy[i][j]) )
-                 goto fail;
- 
--            if ( config[i][j] == '1' )
-+            if ( xend->policy[i][j] == '1' )
-                 val = 1;
--            else if ( config[i][j] == '0' )
-+            else if ( xend->policy[i][j] == '0' )
-                 val = 0;
--            else if ( config[i][j] == 'x' )
-+            else if ( xend->policy[i][j] == 'x' )
-                 val = polval;
- 
-             if ( val )
-@@ -393,7 +376,7 @@ int xc_cpuid_set(
-     }
- 
-     /* Feed the transformed leaf back up to Xen. */
--    leaves[0] = (xen_cpuid_leaf_t){ input[0], input[1],
-+    leaves[0] = (xen_cpuid_leaf_t){ xend->leaf, xend->subleaf,
-                                     regs[0], regs[1], regs[2], regs[3] };
-     rc = xc_set_domain_cpu_policy(xch, domid, 1, leaves, 0, NULL,
-                                   &err_leaf, &err_subleaf, &err_msr);
-diff --git a/tools/libxl/libxl.h b/tools/libxl/libxl.h
-index 71709dc585..1cd6c38e83 100644
---- a/tools/libxl/libxl.h
-+++ b/tools/libxl/libxl.h
-@@ -1310,11 +1310,11 @@ typedef struct {
- void libxl_bitmap_init(libxl_bitmap *map);
- void libxl_bitmap_dispose(libxl_bitmap *map);
- 
--/* libxl_cpuid_policy_list is a dynamic array storing CPUID policies
-- * for multiple leafs. It is terminated with an entry holding
-- * XEN_CPUID_INPUT_UNUSED in input[0]
-+/*
-+ * libxl_cpuid_policy is opaque in the libxl ABI.  Users of both libxl and
-+ * libxc may not make assumptions about xc_xend_cpuid.
-  */
--typedef struct libxl__cpuid_policy libxl_cpuid_policy;
-+typedef struct xc_xend_cpuid libxl_cpuid_policy;
- typedef libxl_cpuid_policy * libxl_cpuid_policy_list;
- void libxl_cpuid_dispose(libxl_cpuid_policy_list *cpuid_list);
- int libxl_cpuid_policy_list_length(const libxl_cpuid_policy_list *l);
+-int xc_cpuid_apply_policy(xc_interface *xch, uint32_t domid,
++int xc_cpuid_apply_policy(xc_interface *xch, uint32_t domid, bool restore,
+                           const uint32_t *featureset, unsigned int nr_features,
+                           bool pae,
+                           const struct xc_xend_cpuid *xend)
 diff --git a/tools/libxl/libxl_cpuid.c b/tools/libxl/libxl_cpuid.c
-index 796ec4f2d9..e001cbcd4f 100644
+index edfcf315ca..db2f12d115 100644
 --- a/tools/libxl/libxl_cpuid.c
 +++ b/tools/libxl/libxl_cpuid.c
-@@ -288,7 +288,7 @@ int libxl_cpuid_parse_config(libxl_cpuid_policy_list *cpuid, const char* str)
-     char *sep, *val, *endptr;
-     int i;
-     const struct cpuid_flags *flag;
--    struct libxl__cpuid_policy *entry;
-+    struct xc_xend_cpuid *entry;
-     unsigned long num;
-     char flags[33], *resstr;
+@@ -416,7 +416,7 @@ int libxl_cpuid_parse_config_xend(libxl_cpuid_policy_list *cpuid,
+     return 0;
+ }
  
-@@ -366,7 +366,7 @@ int libxl_cpuid_parse_config_xend(libxl_cpuid_policy_list *cpuid,
-     char *endptr;
-     unsigned long value;
-     uint32_t leaf, subleaf = XEN_CPUID_INPUT_UNUSED;
--    struct libxl__cpuid_policy *entry;
-+    struct xc_xend_cpuid *entry;
+-void libxl__cpuid_legacy(libxl_ctx *ctx, uint32_t domid,
++void libxl__cpuid_legacy(libxl_ctx *ctx, uint32_t domid, bool restore,
+                          libxl_domain_build_info *info)
+ {
+     bool pae = true;
+@@ -434,7 +434,7 @@ void libxl__cpuid_legacy(libxl_ctx *ctx, uint32_t domid,
+     if (info->type == LIBXL_DOMAIN_TYPE_HVM)
+         pae = libxl_defbool_val(info->u.hvm.pae);
  
-     /* parse the leaf number */
-     value = strtoul(str, &endptr, 0);
-@@ -442,8 +442,7 @@ void libxl__cpuid_legacy(libxl_ctx *ctx, uint32_t domid,
-         return;
- 
-     for (i = 0; cpuid[i].input[0] != XEN_CPUID_INPUT_UNUSED; i++)
--        xc_cpuid_set(ctx->xch, domid, cpuid[i].input,
--                     (const char**)cpuid[i].policy);
-+        xc_cpuid_set(ctx->xch, domid, &cpuid[i]);
+-    xc_cpuid_apply_policy(ctx->xch, domid, NULL, 0, pae, info->cpuid);
++    xc_cpuid_apply_policy(ctx->xch, domid, restore, NULL, 0, pae, info->cpuid);
  }
  
  static const char *input_names[2] = { "leaf", "subleaf" };
+diff --git a/tools/libxl/libxl_create.c b/tools/libxl/libxl_create.c
+index 75862dc6ed..2814818e34 100644
+--- a/tools/libxl/libxl_create.c
++++ b/tools/libxl/libxl_create.c
+@@ -1447,7 +1447,7 @@ int libxl__srm_callout_callback_static_data_done(unsigned int missing,
+      * stream doesn't contain any CPUID data.
+      */
+     if (missing & XGR_SDD_MISSING_CPUID)
+-        libxl__cpuid_legacy(ctx, dcs->guest_domid, info);
++        libxl__cpuid_legacy(ctx, dcs->guest_domid, true, info);
+ 
+     return 0;
+ }
+diff --git a/tools/libxl/libxl_dom.c b/tools/libxl/libxl_dom.c
+index dd1aff89a3..f8661e90d4 100644
+--- a/tools/libxl/libxl_dom.c
++++ b/tools/libxl/libxl_dom.c
+@@ -391,7 +391,7 @@ int libxl__build_pre(libxl__gc *gc, uint32_t domid,
+      * being migrated-in/restored have CPUID handled during the
+      * static_data_done() callback. */
+     if (!state->restore)
+-        libxl__cpuid_legacy(ctx, domid, info);
++        libxl__cpuid_legacy(ctx, domid, false, info);
+ 
+     return rc;
+ }
 diff --git a/tools/libxl/libxl_internal.h b/tools/libxl/libxl_internal.h
-index c7ece066c4..79c2bf5f5e 100644
+index 79c2bf5f5e..94a23179d3 100644
 --- a/tools/libxl/libxl_internal.h
 +++ b/tools/libxl/libxl_internal.h
-@@ -2056,16 +2056,6 @@ typedef yajl_gen_status (*libxl__gen_json_callback)(yajl_gen hand, void *);
+@@ -2056,7 +2056,7 @@ typedef yajl_gen_status (*libxl__gen_json_callback)(yajl_gen hand, void *);
  _hidden char *libxl__object_to_json(libxl_ctx *ctx, const char *type,
                                      libxl__gen_json_callback gen, void *p);
  
--  /* holds the CPUID response for a single CPUID leaf
--   * input contains the value of the EAX and ECX register,
--   * and each policy string contains a filter to apply to
--   * the host given values for that particular leaf.
--   */
--struct libxl__cpuid_policy {
--    uint32_t input[2];
--    char *policy[4];
--};
--
- _hidden void libxl__cpuid_legacy(libxl_ctx *ctx, uint32_t domid,
+-_hidden void libxl__cpuid_legacy(libxl_ctx *ctx, uint32_t domid,
++_hidden void libxl__cpuid_legacy(libxl_ctx *ctx, uint32_t domid, bool retore,
                                   libxl_domain_build_info *info);
  
+ /* Calls poll() again - useful to check whether a signaled condition
+diff --git a/tools/libxl/libxl_nocpuid.c b/tools/libxl/libxl_nocpuid.c
+index 3f30e148be..f47336565b 100644
+--- a/tools/libxl/libxl_nocpuid.c
++++ b/tools/libxl/libxl_nocpuid.c
+@@ -34,7 +34,7 @@ int libxl_cpuid_parse_config_xend(libxl_cpuid_policy_list *cpuid,
+     return 0;
+ }
+ 
+-void libxl__cpuid_legacy(libxl_ctx *ctx, uint32_t domid,
++void libxl__cpuid_legacy(libxl_ctx *ctx, uint32_t domid, bool restore,
+                          libxl_domain_build_info *info)
+ {
+ }
 -- 
 2.11.0
 
