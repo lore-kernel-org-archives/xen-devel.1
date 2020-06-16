@@ -2,68 +2,57 @@ Return-Path: <SRS0=3Xfx=75=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 28F9EC433E0
-	for <xen-devel@archiver.kernel.org>; Tue, 16 Jun 2020 15:13:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AA986C433DF
+	for <xen-devel@archiver.kernel.org>; Tue, 16 Jun 2020 15:13:27 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 088DF207C3
-	for <xen-devel@archiver.kernel.org>; Tue, 16 Jun 2020 15:13:13 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 088DF207C3
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id 8CFF6207C3
+	for <xen-devel@archiver.kernel.org>; Tue, 16 Jun 2020 15:13:27 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8CFF6207C3
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jlDGo-000862-Sm; Tue, 16 Jun 2020 15:13:02 +0000
+	id 1jlDH5-00089D-5L; Tue, 16 Jun 2020 15:13:19 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=JWw4=75=citrix.com=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1jlDGo-00085w-9y
- for xen-devel@lists.xenproject.org; Tue, 16 Jun 2020 15:13:02 +0000
-X-Inumbo-ID: de536fca-afe3-11ea-8496-bc764e2007e4
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=LuhO=75=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1jlDH3-000891-Ky
+ for xen-devel@lists.xenproject.org; Tue, 16 Jun 2020 15:13:17 +0000
+X-Inumbo-ID: e797b046-afe3-11ea-bca7-bc764e2007e4
+Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id de536fca-afe3-11ea-8496-bc764e2007e4;
- Tue, 16 Jun 2020 15:13:01 +0000 (UTC)
-Authentication-Results: esa6.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: G/ua9LN3ZDI39gmrIIaOyrreoRSGCiAsik8BKqfRXz+lTQuxBWiB+DolOHt+TxMoc7TcebbbVq
- s4twHHI0M9QCAkTb7fczPyg+ILCK4hoD9btL5Q5OtXN7hK4MjN+bga104z0HJ6uNvS81wFI0DZ
- 6jaTj4i8dR2H3wZbTNiXA1cSB8ZAqKBvVQtPPSj6IDldLw+a7s/TxV17O39YZybU1//CCebyV1
- yTTRAqtLaCKdhQ8O/cjUlJUDzexwd3x0TY6zTvDtGSaO1x0hcq7GQld/yxo8B7lvXgdtTECq8t
- zmU=
-X-SBRS: 2.7
-X-MesageID: 20522948
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,518,1583211600"; d="scan'208";a="20522948"
-From: Ian Jackson <ian.jackson@citrix.com>
+ id e797b046-afe3-11ea-bca7-bc764e2007e4;
+ Tue, 16 Jun 2020 15:13:17 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id EF7A5B1A2;
+ Tue, 16 Jun 2020 15:13:19 +0000 (UTC)
+Subject: Re: [PATCH 1/1] x86/acpi: Use FADT flags to determine the PMTMR width
+To: Grzegorz Uriasz <gorbak25@gmail.com>
+References: <cover.1592142369.git.gorbak25@gmail.com>
+ <dba39869b788f7f9d937fac48f0476a0443925f0.1592142369.git.gorbak25@gmail.com>
+ <6b921b43-03f6-448c-297e-8c8f041eea2a@suse.com>
+ <20200616103204.GN735@Air-de-Roger>
+ <e6356183-cabe-1c54-dc6d-04365d4650a7@suse.com>
+ <20200616145951.GP735@Air-de-Roger>
+ <3b02a2c4-1991-b7c3-1b5e-e388221fda19@gmail.com>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <b5bf2588-8ca7-8f66-43ca-911b5ebbbf1e@suse.com>
+Date: Tue, 16 Jun 2020 17:13:16 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.9.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
+In-Reply-To: <3b02a2c4-1991-b7c3-1b5e-e388221fda19@gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-Message-ID: <24296.57720.98604.298669@mariner.uk.xensource.com>
-Date: Tue, 16 Jun 2020 16:12:56 +0100
-To: Jan Beulich <jbeulich@suse.com>
-Subject: Re: Xen 4.10 breakage with buster (was Re: [xen-4.10-testing test]
- 151033: regressions - trouble: blocked/fail/pass/starved) [and 1 more
- messages]
-In-Reply-To: <107f8a65-4b2d-7417-3625-73bc543bcc48@suse.com>
-References: <osstest-151033-mainreport@xen.org>
- <24291.43673.301735.439410@mariner.uk.xensource.com>
- <24291.45488.423085.940252@mariner.uk.xensource.com>
- <3c68a609-a069-f7e1-3c99-291da372df96@suse.com>
- <becfad2d-01fd-2559-7fb4-837a9d71eb42@citrix.com>
- <24295.31551.406528.629952@mariner.uk.xensource.com>
- <3849058f-32db-2294-6aa6-c8f829571f4b@suse.com>
- <24295.32975.664225.928516@mariner.uk.xensource.com>
- <107f8a65-4b2d-7417-3625-73bc543bcc48@suse.com>
-X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,32 +63,18 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Wei Liu <wl@xen.org>, Andrew Cooper <Andrew.Cooper3@citrix.com>, George
- Dunlap <George.Dunlap@citrix.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: artur@puzio.waw.pl, Wei Liu <wl@xen.org>, jakub@bartmin.ski,
+ Andrew Cooper <andrew.cooper3@citrix.com>, marmarek@invisiblethingslab.com,
+ j.nowak26@student.uw.edu.pl, xen-devel@lists.xenproject.org,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Jan Beulich writes ("Re: Xen 4.10 breakage with buster (was Re: [xen-4.10-testing test] 151033: regressions - trouble: blocked/fail/pass/starved) [and 1 more messages]"):
-> Right - which will then enable 4.10's -prev build to work, which
-> will in turn allow 4.11's -prev builds to work, and then the same
-> for 4.12. I.e. osstest will continue to be quite busy for the
-> next several days.
+On 16.06.2020 17:10, Grzegorz Uriasz wrote:
+> I'm wondering why support for 32 bit acpi pm timers was introduced to xen.
 
-Yes.
+The handling of the timer wrapping is less overhead is a wider timer can
+be used.
 
-> Instead of building -prev anew each time, wouldn't it make sense
-> to store and re-use the most recent "prev" tree's build? This
-> ought to avoid this sort of cascade dependencies in particular
-> when upgrading the test platform underneath. There's no reason
-> to fail a flight just because the N-1 tree doesn't build anymore.
-
-Well.  In principle, yes.  Fairly recently osstest got machinery to do
-that kind of anointed build outputs.  It's not entirely trivial, and
-this kind of thing happens about once every two years.  We're noticing
-two such cases in a row because we put off the osstest stretch upgrade
-and are now doing the buster one early.
-
-Ian.
+Jan
 
