@@ -2,62 +2,65 @@ Return-Path: <SRS0=3Xfx=75=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9E9DDC433DF
-	for <xen-devel@archiver.kernel.org>; Tue, 16 Jun 2020 17:59:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 00FF1C433E1
+	for <xen-devel@archiver.kernel.org>; Tue, 16 Jun 2020 17:59:56 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6B49020776
+	by mail.kernel.org (Postfix) with ESMTPS id CE13F20776
 	for <xen-devel@archiver.kernel.org>; Tue, 16 Jun 2020 17:59:55 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="tVQhtFig"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6B49020776
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="0VaU6bUc"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CE13F20776
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jlFrq-0007UJ-2p; Tue, 16 Jun 2020 17:59:26 +0000
+	id 1jlFry-0007V7-LR; Tue, 16 Jun 2020 17:59:34 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=QOm8=75=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1jlFro-0007Ta-6d
- for xen-devel@lists.xenproject.org; Tue, 16 Jun 2020 17:59:24 +0000
-X-Inumbo-ID: 1c2ca34a-affb-11ea-b923-12813bfff9fa
+ id 1jlFry-0007Ta-0c
+ for xen-devel@lists.xenproject.org; Tue, 16 Jun 2020 17:59:34 +0000
+X-Inumbo-ID: 1d8b603c-affb-11ea-b923-12813bfff9fa
 Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 1c2ca34a-affb-11ea-b923-12813bfff9fa;
- Tue, 16 Jun 2020 17:59:23 +0000 (UTC)
+ id 1d8b603c-affb-11ea-b923-12813bfff9fa;
+ Tue, 16 Jun 2020 17:59:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
- MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
+ Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wGfJn96R3ZlVVuYZ9IwqkUyeFMh4LTwYfmmbem1Z51E=; b=tVQhtFigcnMutcLTi5GeqlfvhN
- YL1zs1vJkFKer+dmngOqbZboQXhLIaVontpJE1+6VKxw7YK92lwiNNslLANTETeQ1eqofTOH93M6B
- NbulPRnmaGeto2t4j8dxlwFYS1s+Dz5nqsTIvSJg8fBNr2QilNJMndRN5qP8DOYbr5Rc=;
+ bh=12y0VkXW+AgZVDIaCYlRD6wnppSAnpuFa9zY5Bz1Ye8=; b=0VaU6bUclTEw9ILq+fnMYdWFTN
+ eHShCyoKH1HTBGkqadzPFyTgqYX3XBLsPKf/vY+9GDYKw8muoszOea5YkWDy488ILUqCDji90THrx
+ zzgDX90mGPotO49+WpRL+y3wI/eq0xRHm6RQ1efh+OXM5E5MT1BR3+xjBbForhrLZcMs=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1jlFri-0003kY-8n; Tue, 16 Jun 2020 17:59:18 +0000
+ id 1jlFrl-0003ki-0g; Tue, 16 Jun 2020 17:59:21 +0000
 Received: from 54-240-197-227.amazon.com ([54.240.197.227]
  helo=ufe34d9ed68d054.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1jlFrh-00036w-Uo; Tue, 16 Jun 2020 17:59:18 +0000
+ id 1jlFrk-00036w-NU; Tue, 16 Jun 2020 17:59:20 +0000
 From: Julien Grall <julien@xen.org>
 To: security@xenproject.org
-Subject: [PATCH 0/2] xen/arm: Mitigate straight-line speculation
-Date: Tue, 16 Jun 2020 18:59:11 +0100
-Message-Id: <20200616175913.7368-1-julien@xen.org>
+Subject: [PATCH 2/2] xen/arm: Mitigate straight-line speculation for SMC call
+Date: Tue, 16 Jun 2020 18:59:13 +0100
+Message-Id: <20200616175913.7368-3-julien@xen.org>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200616175913.7368-1-julien@xen.org>
+References: <20200616175913.7368-1-julien@xen.org>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,47 +79,105 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Julien Grall <jgrall@amazon.com>
 
-Hi all,
+SMC call will update some of registers (typically only x0) depending on
+the arguments provided.
 
-Arm recently released a whitepaper about a new category of speculation.
-(see [1] and [2]). In short, a processor may be able to speculate past
-some of the unconditional control flow instructions (e.g eret, smc, br).
+Some CPUs can speculate past a SMC instruction and potentially perform
+speculative access to emrmoy using the pre-call values before executing
+the SMC.
 
-In some of the cases, the registers will contain values controlled by
-the guest. While there is no known gadget afterwards, we still want to
-prevent any leakage in the future.
+There is no known gadget available after the SMC call today. However
+some of the registers may contain values from the guest and are expected
+to be updated by the SMC call.
 
-The mitigation is planned in two parts:
-   1) Arm provided patches for both GCC and LLVM to add speculation barrier
-   and remove problematic code sequence.
-   2) Inspection of assembly code and call to higher level (e.g smc in our case).
+In order to harden the code, it would be better to prevent straight-line
+speculation from an SMC. Architecturally executing the speculation
+barrier after every SMC can be rather expensive (particularly on core
+not SB). Therefore we want to mitigate it diferrently:
 
-I am still waiting on more input for 1), so this series only address 2)
-for the moment.
+    * For arm_smccc_1_0_smc, we can avoid a speculation barrier right
+    after the SMC instruction and instead rely on the one after eret.
+    * For arm_smccc_1_1_smc, we can place a B instruction after the SMC
+    instruction to skip the barrier.
 
-Note that the ERET instruction was already addressed as part of XSA-312.
+Note that arm_smccc_1_0_smc version on arm32 is just an alias to
+arm_smccc_1_1_smc.
 
-The patch series is directly sent on the mailing list as the
-security team has been aware of the issues after the whitepaper was
-publicly released.
+Note that no speculation barrier has been added after the SMC
+instruction in arm64/entry.S. This is fine because the call is not
+expected to modify any registers. So straight-line speculation doesn't
+matter.
 
-Cheers,
+Signed-off-by: Julien Grall <jgrall@amazon.com>
 
-[1] https://developer.arm.com/support/arm-security-updates/speculative-processor-vulnerability
-[2] https://developer.arm.com/support/arm-security-updates/speculative-processor-vulnerability/downloads/straight-line-speculation
+---
 
-Julien Grall (2):
-  xen/arm: entry: Place a speculation barrier following an ret
-    instruction
-  xen/arm: Mitigate straight-line speculation for SMC call
-
- xen/arch/arm/arm32/entry.S   |  1 +
- xen/arch/arm/arm64/entry.S   |  2 ++
+Note this hasn't been vetted by Arm but they are using the same
+sort of mitigation for blr. So I am quite confident this could do the
+trick.
+---
  xen/arch/arm/arm64/smc.S     |  1 +
  xen/include/asm-arm/smccc.h  | 13 +++++++++++++
  xen/include/asm-arm/system.h |  8 ++++++++
- 5 files changed, 25 insertions(+)
+ 3 files changed, 22 insertions(+)
 
+diff --git a/xen/arch/arm/arm64/smc.S b/xen/arch/arm/arm64/smc.S
+index b0752be57e8f..e0a3106dd7ec 100644
+--- a/xen/arch/arm/arm64/smc.S
++++ b/xen/arch/arm/arm64/smc.S
+@@ -30,3 +30,4 @@ ENTRY(__arm_smccc_1_0_smc)
+         stp     x2, x3, [x4, #SMCCC_RES_a2]
+ 1:
+         ret
++        sb
+diff --git a/xen/include/asm-arm/smccc.h b/xen/include/asm-arm/smccc.h
+index 9d94beb3df2d..8650224923b1 100644
+--- a/xen/include/asm-arm/smccc.h
++++ b/xen/include/asm-arm/smccc.h
+@@ -200,11 +200,24 @@ struct arm_smccc_res {
+  * We have an output list that is not necessarily used, and GCC feels
+  * entitled to optimise the whole sequence away. "volatile" is what
+  * makes it stick.
++ *
++ * Some of the SMC callers are passing directly values that are
++ * controlled by the guest. To mitigate against straight-line
++ * speculation, a speculation barrier is required. As it may be
++ * expensive to architecturally execute the speculation barrier, we are
++ * using a B instruction to architecturally skip it.
++ *
++ * Note that the speculation barrier is technically not necessary as the
++ * B instruction should already block straight-line speculation. But
++ * better be safe than sorry ;).
+  */
+ #define arm_smccc_1_1_smc(...)                                  \
+     do {                                                        \
+         __declare_args(__count_args(__VA_ARGS__), __VA_ARGS__); \
+         asm volatile("smc #0\n"                                 \
++                     "b 1f\n"                                   \
++                     ASM_SB                                     \
++                     "1:\n"                                     \
+                      __constraints(__count_args(__VA_ARGS__))); \
+         if ( ___res )                                           \
+         *___res = (typeof(*___res)){r0, r1, r2, r3};            \
+diff --git a/xen/include/asm-arm/system.h b/xen/include/asm-arm/system.h
+index 65d5c8e423d7..e33ff4e0fc39 100644
+--- a/xen/include/asm-arm/system.h
++++ b/xen/include/asm-arm/system.h
+@@ -33,6 +33,14 @@
+ #define smp_mb__before_atomic()    smp_mb()
+ #define smp_mb__after_atomic()     smp_mb()
+ 
++/*
++ * Speculative barrier
++ * XXX: Add support for the 'sb' instruction
++ */
++#define ASM_SB "dsb nsh \n isb \n"
++
++#define sb()    asm volatile(ASM_SB)
++
+ /*
+  * This is used to ensure the compiler did actually allocate the register we
+  * asked it for some inline assembly sequences.  Apparently we can't trust
 -- 
 2.17.1
 
