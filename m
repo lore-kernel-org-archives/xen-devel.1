@@ -6,46 +6,47 @@ X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4F692C433DF
-	for <xen-devel@archiver.kernel.org>; Tue, 16 Jun 2020 06:11:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B885CC433DF
+	for <xen-devel@archiver.kernel.org>; Tue, 16 Jun 2020 06:28:18 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 249FE2074D
-	for <xen-devel@archiver.kernel.org>; Tue, 16 Jun 2020 06:11:49 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 249FE2074D
+	by mail.kernel.org (Postfix) with ESMTPS id 8E346206DB
+	for <xen-devel@archiver.kernel.org>; Tue, 16 Jun 2020 06:28:18 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8E346206DB
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jl4oV-0001RN-4h; Tue, 16 Jun 2020 06:11:15 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jl54e-0002Pw-Jm; Tue, 16 Jun 2020 06:27:56 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=LuhO=75=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jl4oT-0001RI-Qe
- for xen-devel@lists.xenproject.org; Tue, 16 Jun 2020 06:11:13 +0000
-X-Inumbo-ID: 2da20916-af98-11ea-8496-bc764e2007e4
+ id 1jl54d-0002Pr-QY
+ for xen-devel@lists.xenproject.org; Tue, 16 Jun 2020 06:27:55 +0000
+X-Inumbo-ID: 82e495e0-af9a-11ea-b884-12813bfff9fa
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 2da20916-af98-11ea-8496-bc764e2007e4;
- Tue, 16 Jun 2020 06:11:13 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 82e495e0-af9a-11ea-b884-12813bfff9fa;
+ Tue, 16 Jun 2020 06:27:55 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id B745AAC85;
- Tue, 16 Jun 2020 06:11:15 +0000 (UTC)
-Subject: Re: [PATCH for-4.14 v2 1/2] x86/passthrough: do not assert edge
- triggered GSIs for PVH dom0
+ by mx2.suse.de (Postfix) with ESMTP id D1878AC85;
+ Tue, 16 Jun 2020 06:27:57 +0000 (UTC)
+Subject: Re: [PATCH for-4.14 v2 2/2] x86/passthrough: introduce a flag for
+ GSIs not requiring an EOI or unmask
 To: Roger Pau Monne <roger.pau@citrix.com>
 References: <20200610142923.9074-1-roger.pau@citrix.com>
- <20200610142923.9074-2-roger.pau@citrix.com>
+ <20200610142923.9074-3-roger.pau@citrix.com>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <b3bd8641-4cf9-d432-145a-d19bb852ffdc@suse.com>
-Date: Tue, 16 Jun 2020 08:11:12 +0200
+Message-ID: <1ccfdfdf-695e-00ce-7d49-401b1f4bb015@suse.com>
+Date: Tue, 16 Jun 2020 08:27:54 +0200
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
 MIME-Version: 1.0
-In-Reply-To: <20200610142923.9074-2-roger.pau@citrix.com>
+In-Reply-To: <20200610142923.9074-3-roger.pau@citrix.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -65,40 +66,35 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 On 10.06.2020 16:29, Roger Pau Monne wrote:
-> @@ -186,9 +187,10 @@ void hvm_gsi_assert(struct domain *d, unsigned int gsi)
->       * to know if the GSI is pending or not.
->       */
->      spin_lock(&d->arch.hvm.irq_lock);
-> -    if ( !hvm_irq->gsi_assert_count[gsi] )
-> +    if ( trig == VIOAPIC_EDGE_TRIG || !hvm_irq->gsi_assert_count[gsi] )
->      {
-> -        hvm_irq->gsi_assert_count[gsi] = 1;
-> +        if ( trig == VIOAPIC_LEVEL_TRIG )
-> +            hvm_irq->gsi_assert_count[gsi] = 1;
+> @@ -558,6 +559,12 @@ int pt_irq_create_bind(
+>                       */
+>                      ASSERT(!mask);
+>                      share = trigger_mode;
+> +                    if ( trigger_mode == VIOAPIC_EDGE_TRIG )
+> +                        /*
+> +                         * Edge IO-APIC interrupt, no EOI or unmask to perform
+> +                         * and hence no timer needed.
+> +                         */
+> +                        pirq_dpci->flags |= HVM_IRQ_DPCI_NO_EOI;
 
-Btw, along the lines of how you do things here, I think ...
+Is this really limited to edge triggered IO-APIC interrupts?
+MSI ones are effectively edge triggered too, aren't they?
+Along the lines of irq_acktype() maskable MSI may then also
+not need any such arrangements? The pirq_guest_eoi() ->
+desc_guest_eoi() path looks to confirm this.
 
-> @@ -196,11 +198,12 @@ void hvm_gsi_assert(struct domain *d, unsigned int gsi)
->  
->  void hvm_gsi_deassert(struct domain *d, unsigned int gsi)
->  {
-> +    int trig = vioapic_get_trigger_mode(d, gsi);
->      struct hvm_irq *hvm_irq = hvm_domain_irq(d);
->  
-> -    if ( gsi >= hvm_irq->nr_gsis )
-> +    if ( trig <= VIOAPIC_EDGE_TRIG || gsi >= hvm_irq->nr_gsis )
+> @@ -920,6 +923,8 @@ static void hvm_dirq_assist(struct domain *d, struct hvm_pirq_dpci *pirq_dpci)
+>          if ( pirq_dpci->flags & HVM_IRQ_DPCI_IDENTITY_GSI )
+>          {
+>              hvm_gsi_assert(d, pirq->pirq);
+> +            if ( pirq_dpci->flags & HVM_IRQ_DPCI_NO_EOI )
+> +                goto out;
 
-... this would better have been "trig != VIOAPIC_LEVEL_TRIG", to
-avoid the code being dependent upon the actual values of both
-VIOAPIC_*_TRIG constants.
+Immediately ahead of this there's a similar piece of code
+dealing with PCI INTx. They're commonly level triggered, but
+I don't think there's a strict need for this to be the case.
+At least hvm_pci_intx_assert() -> assert_gsi() ->
+vioapic_irq_positive_edge() also cover the edge triggered one.
 
 Jan
-
-> -        ASSERT_UNREACHABLE();
-> +        ASSERT(trig == VIOAPIC_EDGE_TRIG && gsi < hvm_irq->nr_gsis);
->          return;
->      }
->  
-> 
-
 
