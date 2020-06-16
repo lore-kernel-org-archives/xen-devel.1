@@ -2,66 +2,94 @@ Return-Path: <SRS0=3Xfx=75=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-0.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
+	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AB18BC433E0
-	for <xen-devel@archiver.kernel.org>; Tue, 16 Jun 2020 17:59:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 29828C433E0
+	for <xen-devel@archiver.kernel.org>; Tue, 16 Jun 2020 18:14:34 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 83C32207C4
-	for <xen-devel@archiver.kernel.org>; Tue, 16 Jun 2020 17:59:55 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id EBF1C2080D
+	for <xen-devel@archiver.kernel.org>; Tue, 16 Jun 2020 18:14:33 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="pfedFbfk"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 83C32207C4
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="n/GveDtd"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EBF1C2080D
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jlFru-0007Ug-Bt; Tue, 16 Jun 2020 17:59:30 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=QOm8=75=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1jlFrt-0007Ta-0W
- for xen-devel@lists.xenproject.org; Tue, 16 Jun 2020 17:59:29 +0000
-X-Inumbo-ID: 1c087dbd-affb-11ea-b923-12813bfff9fa
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 1c087dbd-affb-11ea-b923-12813bfff9fa;
- Tue, 16 Jun 2020 17:59:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
- Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=W4Ily84UCBoYBbX+TgbLDPbYSt958UYp94RRwD0IRi4=; b=pfedFbfkmM6wYWHAroxsXB8U1v
- xtuP6mMvmNW6IpScKo7PEFQYLuCgrQDuWUM+fq9gN+DzJuK8fL7jszH5GXayggAYsQl62oBuWYzN+
- +xdnM6o9q2bULSdXdEiXTrKPngJRRv7TWkHShDZuzuD866Epv9bqBhxvA2ztrw7hHgbY=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1jlFrj-0003ka-KK; Tue, 16 Jun 2020 17:59:19 +0000
-Received: from 54-240-197-227.amazon.com ([54.240.197.227]
- helo=ufe34d9ed68d054.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1jlFrj-00036w-B3; Tue, 16 Jun 2020 17:59:19 +0000
-From: Julien Grall <julien@xen.org>
-To: security@xenproject.org
-Subject: [PATCH 1/2] xen/arm: entry: Place a speculation barrier following an
- ret instruction
-Date: Tue, 16 Jun 2020 18:59:12 +0100
-Message-Id: <20200616175913.7368-2-julien@xen.org>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200616175913.7368-1-julien@xen.org>
-References: <20200616175913.7368-1-julien@xen.org>
+	id 1jlG63-0000wU-5N; Tue, 16 Jun 2020 18:14:07 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=ddVf=75=gmail.com=codewiz2280@srs-us1.protection.inumbo.net>)
+ id 1jlG61-0000wP-Vk
+ for xen-devel@lists.xenproject.org; Tue, 16 Jun 2020 18:14:06 +0000
+X-Inumbo-ID: 298a3dca-affd-11ea-bb8b-bc764e2007e4
+Received: from mail-ej1-x641.google.com (unknown [2a00:1450:4864:20::641])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 298a3dca-affd-11ea-bb8b-bc764e2007e4;
+ Tue, 16 Jun 2020 18:14:05 +0000 (UTC)
+Received: by mail-ej1-x641.google.com with SMTP id q19so22623033eja.7
+ for <xen-devel@lists.xenproject.org>; Tue, 16 Jun 2020 11:14:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=BmjCZtF1kgQ7PeaIEx8/UxbYmvWysAGr4o2NegH2AmY=;
+ b=n/GveDtdtOhjYSOp7LF79tbS7jWdCSCfEyPFmO5XLwB3GwNMeqmr4a1zdqYMfir3Ui
+ VUylr1ts4L2rpSiBfNm52HzQ+PazA6BJAGzvT/zAHimNN1SQYdp6BdAuC8gkJpB+Zaoe
+ sgvXQFCFz8lYZo4lEzqL80Q4HVzcxeBza32xExymMNmDsVf0P7JTLkNHjYrI1HFowb8k
+ PN5vSz7Ik/i/iI/n1gXZgNuMucGHzMzb2oUGHrJPof30nOYVRM0XI6yiEM6nK08JRGuc
+ k/mVFgisHys2ZZa744fDzwUi4CW5LYfpCCeOb61DEUmffrczXhIHNMzXLf1afePmbnw0
+ JIyQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=BmjCZtF1kgQ7PeaIEx8/UxbYmvWysAGr4o2NegH2AmY=;
+ b=tr26rRjK940XXF2IQXm/0kseOfVEa2XOqp6Ftv1/vHRJPTvBMN8XdcczdKTyt/3dEP
+ I0UttWOEUVIxBTIoTgCeeOm/rdnZTWmydZnjhfTeTXl2pOQyxNDpR73cYoXudcmMgyVg
+ 2tjdFDNL9WebxfWlm9zHsBTlTwKtN6nu9ayrkO9kePykz6DiXNYwktBgN6rV7nZll6YB
+ zAA7yk9Hf7F+y9pmHxMtCFiriX4m0K94ba26iWX59xxww+CkOtzQz25kp+dUR/JAx77D
+ qzzkYZCuGXiXow83ofCE1AUKJeURstuFMe20eDql84SrAyJ8Xrb29T8jtKLdSQPQMzDd
+ RMoQ==
+X-Gm-Message-State: AOAM530z/qIf4/252J63vcU3Qf3JrfJeKI2f0xHZIVukD+IHaFDVK17o
+ 54rYp+DKre18069mBWVHcDMaMVrsubSmeQVIHLg=
+X-Google-Smtp-Source: ABdhPJxkOnz6lRTtovRk+ANFmtyCHd/dTqvRSqcCw2W9M4fCozGArZY86RTCbUZ8nS9dvWdDL+XbVVwp+0jYTsfbM3w=
+X-Received: by 2002:a17:906:5f93:: with SMTP id
+ a19mr3877092eju.10.1592331244326; 
+ Tue, 16 Jun 2020 11:14:04 -0700 (PDT)
+MIME-Version: 1.0
+References: <CALYbLDiNtHZusupf8=yhKtw1EA7HjMP3o3+WGdv9Omv9v8yVHg@mail.gmail.com>
+ <CALYbLDhpwbHTrjDaNmfW81m5Fqt6HbfqoqbGDH1qUxxJtMBmEA@mail.gmail.com>
+ <8C6A23AE-6C2B-411F-ACAD-F5574211E8ED@arm.com>
+ <CALYbLDiOX0JW_=6AgAb+m5q++3WvQtivJRy+ePrp5pJXd7T9Vg@mail.gmail.com>
+ <14244e49-e1ac-a29d-bbd9-bd4c202bf186@xen.org>
+ <CALYbLDjCdDvwja1VoahJmnrKDfKyw7DNhYBBcmJv70QDA4+6Ag@mail.gmail.com>
+ <77006AAF-BC3B-4C6E-BDFC-577CF87DE64E@arm.com>
+ <CALYbLDheT8jWSAqJJZvvjzWGvygJaJ6UG7ejgpLLYeQB-tCsJA@mail.gmail.com>
+ <CALYbLDjZu-YzqZPjCk785=4hpd3BRsoXeotd3ygESD_Ezm63Yg@mail.gmail.com>
+ <99E77330-049F-4471-ABF9-13F9AB4E95B5@arm.com>
+ <CALYbLDizxgaXJzhNVeKVZ6q-Hbttm1T+ZPP7f-1PDvi49VFOjA@mail.gmail.com>
+ <alpine.DEB.2.21.2006080911500.2815@sstabellini-ThinkPad-T480s>
+ <CALYbLDh8F0JuGmRY0C1Nhp_b4FP041KMa14pOmyoSBtHcz=A2A@mail.gmail.com>
+ <363A05E0-61C6-4AE4-9C84-EEAC466989D8@arm.com>
+ <b28cbead-c7ce-7848-4e21-109a022e64da@xen.org>
+ <03607739-A4FF-486A-899A-F5F36870225A@arm.com>
+ <2ec6255c-9d28-92e7-bd0a-59edb9fc078a@xen.org>
+ <6033f9cecbf10f50f4a713ce52105426@kernel.org>
+ <CAJ=z9a1k606A+sA467eY8iPuHnptMUFzxEFithpe=JKHogjt0g@mail.gmail.com>
+ <CALYbLDjF8_eoNB_pSfbD73LkC3Ppyxpi0MxHgtS5y_wc-TVfzQ@mail.gmail.com>
+ <4bab90465acfddae5868ce2311bd9889@kernel.org>
+In-Reply-To: <4bab90465acfddae5868ce2311bd9889@kernel.org>
+From: CodeWiz2280 <codewiz2280@gmail.com>
+Date: Tue, 16 Jun 2020 14:13:51 -0400
+Message-ID: <CALYbLDjNF5s2SXkunjJNv4x9jQAcDfoMBWp3WFHBkjnNdfT3Sg@mail.gmail.com>
+Subject: Re: Keystone Issue
+To: Marc Zyngier <maz@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,78 +100,56 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: sstabellini@kernel.org, paul@xen.org, Andre.Przywara@arm.com,
- Julien Grall <jgrall@amazon.com>, Bertrand.Marquis@arm.com,
- xen-devel@lists.xenproject.org, Volodymyr_Babchuk@epam.com
+Cc: xen-devel <xen-devel@lists.xenproject.org>, nd <nd@arm.com>,
+ Bertrand Marquis <Bertrand.Marquis@arm.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Julien Grall <julien.grall.oss@gmail.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: Julien Grall <jgrall@amazon.com>
+On Tue, Jun 16, 2020 at 4:11 AM Marc Zyngier <maz@kernel.org> wrote:
+>
+> On 2020-06-15 20:14, CodeWiz2280 wrote:
+>
+> [...]
+>
+> > Also, the latest linux kernel still has the X-Gene storm distributor
+> > address as "0x78010000" in the device tree, which is what the Xen code
+> > considers a match with the old firmware.  What were the addresses for
+> > the device tree supposed to be changed to?
+>
+> We usually don't care, as the GIC address is provided by the bootloader,
+> whether via DT or ACPI (this is certainly what happens on Mustang).
+> Whatever is still in the kernel tree is just as dead as the platform it
+> describes.
+>
+> > Is my understanding
+> > correct that there is a different base address required to access the
+> > "non-secure" region instead of the "secure" 0x78010000 region?  I'm
+> > trying to see if there are corresponding different addresses for the
+> > keystone K2E, but haven't found them yet in the manuals.
+>
+> There is no such address. Think of the NS bit as an *address space*
+> identifier.
+>
+> The only reason XGene presents the NS part of the GIC at a different
+> address is because XGene is broken enough not to have EL3, hence no
+> secure mode. To wire the GIC (and other standard ARM IPs) to the core,
+> the designers simply used the CPU NS signal as an address bit.
+>
+> On your platform, the NS bit does exist. I strongly suppose that it
+> isn't wired to the GIC. Please talk to your SoC vendor for whether iot
+> is possible to work around this.
+>
+I do have a question about this out to TI, but at least this method
+gives me something to work with in the meantime.  I was just looking
+to confirm that there wouldn't be any other undesirable side effects
+with Dom0 or DomU when using it.  Was there an actual FPGA for the
+X-Gene that needed to be updated which controlled the GIC access?  Or
+by firmware do you mean the boot loader (e.g. uboot).  Thanks for the
+support so far to all.
 
-Some CPUs can speculate past a RET instruction and potentially perform
-speculative accesses to memory before processing the return.
-
-There is no known gadget available after the RET instruction today.
-However some of the registers (such as in check_pending_guest_serror())
-may contain a value provided the guest.
-
-In order to harden the code, it would be better to add a speculation
-barrier after each RET instruction. The performance is meant to be
-negligeable as the speculation barrier is not meant to be archicturally
-executed.
-
-Note that on arm32, the ldmia instruction will act as a return from the
-function __context_switch(). While the whitepaper doesn't suggest it is
-possible to speculate after the instruction, add preventively a
-speculation barrier after it as well.
-
-This is part of the work to mitigate straight-line speculation.
-
-Signed-off-by: Julien Grall <jgrall@amazon.com>
-
----
-
-I am still unsure whether we preventively should add a speculation barrier
-preventively after all the RET instructions in arm*/lib/. The smc call be
-taken care in a follow-up patch.
----
- xen/arch/arm/arm32/entry.S | 1 +
- xen/arch/arm/arm64/entry.S | 2 ++
- 2 files changed, 3 insertions(+)
-
-diff --git a/xen/arch/arm/arm32/entry.S b/xen/arch/arm/arm32/entry.S
-index b228d44b190c..bd54fc43558b 100644
---- a/xen/arch/arm/arm32/entry.S
-+++ b/xen/arch/arm/arm32/entry.S
-@@ -442,6 +442,7 @@ ENTRY(__context_switch)
- 
-         add     r4, r1, #VCPU_arch_saved_context
-         ldmia   r4, {r4 - sl, fp, sp, pc}       /* Load registers and return */
-+        sb
- 
- /*
-  * Local variables:
-diff --git a/xen/arch/arm/arm64/entry.S b/xen/arch/arm/arm64/entry.S
-index 175ea2981e72..b37d8fe09dc2 100644
---- a/xen/arch/arm/arm64/entry.S
-+++ b/xen/arch/arm/arm64/entry.S
-@@ -522,6 +522,7 @@ abort_guest_exit_end:
-         cset    x19, ne
- 
-         ret
-+        sb
- ENDPROC(check_pending_guest_serror)
- 
- /*
-@@ -583,6 +584,7 @@ ENTRY(__context_switch)
-         ldr     lr, [x8]
-         mov     sp, x9
-         ret
-+        sb
- 
- /*
-  * Local variables:
--- 
-2.17.1
-
+>          M.
+> --
+> Jazz is not dead. It just smells funny...
 
