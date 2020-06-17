@@ -4,69 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-6.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.0
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0A769C433DF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 96745C433E0
 	for <xen-devel@archiver.kernel.org>; Wed, 17 Jun 2020 12:29:26 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CFD2720CC7
-	for <xen-devel@archiver.kernel.org>; Wed, 17 Jun 2020 12:29:25 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 6AAB120CC7
+	for <xen-devel@archiver.kernel.org>; Wed, 17 Jun 2020 12:29:26 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="L2pGyrMs"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CFD2720CC7
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="BSg/OGnV"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6AAB120CC7
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jlXBt-00070b-B4; Wed, 17 Jun 2020 12:29:17 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jlXBs-00070K-3b; Wed, 17 Jun 2020 12:29:16 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=UiE7=76=redhat.com=kraxel@srs-us1.protection.inumbo.net>)
- id 1jlXBr-00070F-W2
- for xen-devel@lists.xenproject.org; Wed, 17 Jun 2020 12:29:16 +0000
-X-Inumbo-ID: 2826993a-b096-11ea-8496-bc764e2007e4
+ id 1jlXBr-00070A-E0
+ for xen-devel@lists.xenproject.org; Wed, 17 Jun 2020 12:29:15 +0000
+X-Inumbo-ID: 27ec9168-b096-11ea-b9d6-12813bfff9fa
 Received: from us-smtp-1.mimecast.com (unknown [205.139.110.120])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id 2826993a-b096-11ea-8496-bc764e2007e4;
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id 27ec9168-b096-11ea-b9d6-12813bfff9fa;
  Wed, 17 Jun 2020 12:29:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1592396955;
+ s=mimecast20190719; t=1592396954;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=zb2O4LSZD2edy8bGwjrUcS/0sbskbMKnSoDc3GN7pZo=;
- b=L2pGyrMsf3p95xbE9KH3T3jhVNMsik0HSHZuDHhONqkZhAaGQq3onZE5apd6HRpUQYfBBk
- 0jRoZ0aXtThVZRk0X5NeeEMvmOGsJy7hPoQDjp3/Be67nabdc06/2w9LHqOcUXTLngRgiV
- NwWFZlCW231584FXOvWsF7CPCAJ9upc=
+ bh=wUr9c1FJi7A1aTjG8v2DGsv6CTJYWqCn2CZCN7xc4cw=;
+ b=BSg/OGnVFfzojhq5jt/hE4vfcjEikuNGZQ0Y+b6w955oH8E4MEW6dudDgnKyNX6YB7RnaF
+ e6EuJmatv2gjCvvO7NRL6pSpkWn17KS8ZFnRzskUf4YreVY4kr5+UkuwV3OH5GXiD7xvFY
+ Yj1M5MizUeRfR0ekJnGMsw2UuJ7WxkE=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-164-_dMmP07cP0WQCOcEEX7-_A-1; Wed, 17 Jun 2020 08:29:13 -0400
-X-MC-Unique: _dMmP07cP0WQCOcEEX7-_A-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
+ us-mta-312-SRuNPBTVOlyeotJDUcrfYQ-1; Wed, 17 Jun 2020 08:29:13 -0400
+X-MC-Unique: SRuNPBTVOlyeotJDUcrfYQ-1
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+ [10.5.11.11])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id EAE79134D5;
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id A2D94107B472;
  Wed, 17 Jun 2020 12:29:11 +0000 (UTC)
 Received: from sirius.home.kraxel.org (ovpn-112-67.ams2.redhat.com
  [10.36.112.67])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 5291F5D9D3;
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 5782379302;
  Wed, 17 Jun 2020 12:29:03 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id A32FE1750C; Wed, 17 Jun 2020 14:29:01 +0200 (CEST)
+ id C7C0A9D8F; Wed, 17 Jun 2020 14:29:01 +0200 (CEST)
 From: Gerd Hoffmann <kraxel@redhat.com>
 To: qemu-devel@nongnu.org
-Subject: [PULL 1/4] microvm: use 3G split unconditionally
-Date: Wed, 17 Jun 2020 14:28:58 +0200
-Message-Id: <20200617122901.13327-2-kraxel@redhat.com>
+Subject: [PULL 4/4] microvm: move virtio base to 0xfeb00000
+Date: Wed, 17 Jun 2020 14:29:01 +0200
+Message-Id: <20200617122901.13327-5-kraxel@redhat.com>
 In-Reply-To: <20200617122901.13327-1-kraxel@redhat.com>
 References: <20200617122901.13327-1-kraxel@redhat.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
@@ -92,52 +94,33 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Looks like the logic was copied over from q35.
-
-q35 does this for backward compatibility, there is no reason to do this
-on microvm though.  Also microvm doesn't need much mmio space, 1G is
-more than enough.  Using an mmio window smaller than 1G is bad for
-gigabyte alignment and hugepages though.  So split @ 3G unconditionally.
+Place virtio-mmio devices near the other mmio regions,
+next ioapic is at @ 0xfec00000.
 
 Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+Reviewed-by: Michael S. Tsirkin <mst@redhat.com>
 Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
 Reviewed-by: Igor Mammedov <imammedo@redhat.com>
+Reviewed-by: Paul Durrant <paul@xen.org>
 Acked-by: Paolo Bonzini <pbonzini@redhat.com>
-Reviewed-by: Michael S. Tsirkin <mst@redhat.com>
-Message-id: 20200529073957.8018-2-kraxel@redhat.com
+Message-id: 20200529073957.8018-5-kraxel@redhat.com
 ---
- hw/i386/microvm.c | 16 +---------------
- 1 file changed, 1 insertion(+), 15 deletions(-)
+ include/hw/i386/microvm.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/hw/i386/microvm.c b/hw/i386/microvm.c
-index 937db10ae6a5..44f940813b07 100644
---- a/hw/i386/microvm.c
-+++ b/hw/i386/microvm.c
-@@ -170,23 +170,9 @@ static void microvm_memory_init(MicrovmMachineState *mms)
-     MemoryRegion *ram_below_4g, *ram_above_4g;
-     MemoryRegion *system_memory = get_system_memory();
-     FWCfgState *fw_cfg;
--    ram_addr_t lowmem;
-+    ram_addr_t lowmem = 0xc0000000; /* 3G */
-     int i;
+diff --git a/include/hw/i386/microvm.h b/include/hw/i386/microvm.h
+index ba68d1f22bb3..fd34b78e0d2a 100644
+--- a/include/hw/i386/microvm.h
++++ b/include/hw/i386/microvm.h
+@@ -26,7 +26,7 @@
+ #include "hw/i386/x86.h"
  
--    /*
--     * Check whether RAM fits below 4G (leaving 1/2 GByte for IO memory
--     * and 256 Mbytes for PCI Express Enhanced Configuration Access Mapping
--     * also known as MMCFG).
--     * If it doesn't, we need to split it in chunks below and above 4G.
--     * In any case, try to make sure that guest addresses aligned at
--     * 1G boundaries get mapped to host addresses aligned at 1G boundaries.
--     */
--    if (machine->ram_size >= 0xb0000000) {
--        lowmem = 0x80000000;
--    } else {
--        lowmem = 0xb0000000;
--    }
--
-     /*
-      * Handle the machine opt max-ram-below-4g.  It is basically doing
-      * min(qemu limit, user limit).
+ /* Platform virtio definitions */
+-#define VIRTIO_MMIO_BASE      0xc0000000
++#define VIRTIO_MMIO_BASE      0xfeb00000
+ #define VIRTIO_IRQ_BASE       5
+ #define VIRTIO_NUM_TRANSPORTS 8
+ #define VIRTIO_CMDLINE_MAXLEN 64
 -- 
 2.18.4
 
