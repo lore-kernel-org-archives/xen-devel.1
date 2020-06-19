@@ -2,66 +2,62 @@ Return-Path: <SRS0=ng2r=AA=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 49EF8C433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 19 Jun 2020 13:27:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 599BBC433DF
+	for <xen-devel@archiver.kernel.org>; Fri, 19 Jun 2020 13:29:14 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 23D7F20771
-	for <xen-devel@archiver.kernel.org>; Fri, 19 Jun 2020 13:27:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 23D7F20771
+	by mail.kernel.org (Postfix) with ESMTPS id 32F0D207FC
+	for <xen-devel@archiver.kernel.org>; Fri, 19 Jun 2020 13:29:14 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 32F0D207FC
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jmH2a-0000nj-Es; Fri, 19 Jun 2020 13:26:44 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jmH4p-0000vK-Sd; Fri, 19 Jun 2020 13:29:03 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ezQq=AA=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1jmH2Z-0000ne-5k
- for xen-devel@lists.xenproject.org; Fri, 19 Jun 2020 13:26:43 +0000
-X-Inumbo-ID: 830223c4-b230-11ea-bb81-12813bfff9fa
-Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 830223c4-b230-11ea-bb81-12813bfff9fa;
- Fri, 19 Jun 2020 13:26:42 +0000 (UTC)
-Authentication-Results: esa2.hc3370-68.iphmx.com;
+ id 1jmH4o-0000vF-Nl
+ for xen-devel@lists.xenproject.org; Fri, 19 Jun 2020 13:29:02 +0000
+X-Inumbo-ID: d6205d3c-b230-11ea-b7bb-bc764e2007e4
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id d6205d3c-b230-11ea-b7bb-bc764e2007e4;
+ Fri, 19 Jun 2020 13:29:01 +0000 (UTC)
+Authentication-Results: esa6.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: +5taL90pSMM1Y4K2q2iQcjiklfgmDetB8Q5UeYJus7vndKpTNNbucnXkStBDhwwfi95O5F6JF3
- VpF3Z/AEjR2mL9wZtAiKpvSl603BoiVxiyoWZnTvQEXUvbRdoK0Z67WidrgYkoOBcOgmmSkkBc
- S/gVNp1S4zd6BEeKdt473Sv4lY0/Mrimd1omR/+hOBHw29yC0sY644jzXBmypqO3d4b6ee1XZT
- 1jJbYDPbjwWvD3WOF/Ph0iEtRNS+Q3YjAgr1a+W55tF3Sg4bumhR/HsVpgVXVOHMvFa9xMzh6l
- 3nQ=
+IronPort-SDR: pLU/hlGo7Oq7gTSVlXPjoEOWkvHOyHO5R+EV8dws81gr5+18S3Od+/LcaTrmn816kWm3qcD/2R
+ mylw4vFh7kSsLe31EpNVNGACoIi0cfh/mMqhgkyHfOziidCFI70uPYUFfaqBrW9pju84R4BXNP
+ LoVBInbpEhBTsub7dkVF+pAntjxYU6Z412x5N5TYHK+fXDiiDo4koFeK9ij9jFqjT/2JJy8h9Y
+ nxhtw/d0pr62sS3UYbZKaIGvD97eDDXa1q+lZYAHm7VSLdKFim/tNsw+cdBuab0fsWnllqjChK
+ ljc=
 X-SBRS: 2.7
-X-MesageID: 20481370
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-MesageID: 20817032
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.75,255,1589256000"; d="scan'208";a="20481370"
+X-IronPort-AV: E=Sophos;i="5.75,255,1589256000"; d="scan'208";a="20817032"
 Subject: Re: [PATCH for-4.14] x86/msr: Disallow access to Processor Trace MSRs
-To: =?UTF-8?Q?Micha=c5=82_Leszczy=c5=84ski?= <michal.leszczynski@cert.pl>,
- "Jan Beulich" <jbeulich@suse.com>
+To: Jan Beulich <jbeulich@suse.com>
 References: <20200619115823.22243-1-andrew.cooper3@citrix.com>
- <1417373854.10164826.1592568614663.JavaMail.zimbra@cert.pl>
- <d6c7f9f8-9c9e-9648-1c51-43db38cb0b00@suse.com>
- <893375527.10199950.1592571477991.JavaMail.zimbra@cert.pl>
+ <32440578-e346-85cc-abad-1aa5694f0ab2@suse.com>
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-Message-ID: <0d520017-23b2-9f91-fe5b-160cc46866fa@citrix.com>
-Date: Fri, 19 Jun 2020 14:26:37 +0100
+Message-ID: <855c1668-3f91-c084-70d5-76f3e171f074@citrix.com>
+Date: Fri, 19 Jun 2020 14:28:43 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.0
 MIME-Version: 1.0
-In-Reply-To: <893375527.10199950.1592571477991.JavaMail.zimbra@cert.pl>
+In-Reply-To: <32440578-e346-85cc-abad-1aa5694f0ab2@suse.com>
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 Content-Language: en-GB
-X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
+X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
  AMSPEX02CL02.citrite.net (10.69.22.126)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -73,59 +69,35 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>, Paul Durrant <paul@xen.org>,
+Cc: =?UTF-8?Q?Micha=c5=82_Leszczy=c5=84ski?= <michal.leszczynski@cert.pl>,
+ Xen-devel <xen-devel@lists.xenproject.org>, Paul Durrant <paul@xen.org>,
  Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 19/06/2020 13:57, Michał Leszczyński wrote:
-> ----- 19 cze 2020 o 14:49, Jan Beulich jbeulich@suse.com napisał(a):
->
->> On 19.06.2020 14:10, Michał Leszczyński wrote:
->>> ----- 19 cze 2020 o 13:58, Andrew Cooper andrew.cooper3@citrix.com napisał(a):
->>>
->>>> We do not expose the feature to guests, so should disallow access to the
->>>> respective MSRs.
->>>>
->>>> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
->>>> ---
->>>> CC: Jan Beulich <JBeulich@suse.com>
->>>> CC: Wei Liu <wl@xen.org>
->>>> CC: Roger Pau Monné <roger.pau@citrix.com>
->>>> CC: Paul Durrant <paul@xen.org>
->>>> CC: Michał Leszczyński <michal.leszczynski@cert.pl>
->>>>
->>>> Paul: For 4.14.  This needs backporting to older trees as well.
->>>>
->>>> Michał: CC'ing, just to keep you in the loop.  Xen has some dubious default
->>>> MSR semantics which we're still in the middle of untangling in a backwards
->>>> compatible way.  Patches like this will eventually not be necessary, but they
->>>> are for now.
->>>
->>> As for external IPT monitoring, it would be best if the VM would think
->>> that IPT is simply not supported at all by the underlying hypervisor.
->> This is already the case, isn't it? Yet not reporting a feature may
->> not keep a guest from trying to access the respective MSRs.
->>
->> Jan
->
-> Okay, understood :)
+On 19/06/2020 13:48, Jan Beulich wrote:
+> On 19.06.2020 13:58, Andrew Cooper wrote:
+>> --- a/xen/arch/x86/msr.c
+>> +++ b/xen/arch/x86/msr.c
+>> @@ -168,6 +168,12 @@ int guest_rdmsr(struct vcpu *v, uint32_t msr, uint64_t *val)
+>>      case MSR_TSX_FORCE_ABORT:
+>>      case MSR_TSX_CTRL:
+>>      case MSR_MCU_OPT_CTRL:
+>> +    case MSR_RTIT_OUTPUT_BASE:
+>> +    case MSR_RTIT_OUTPUT_MASK:
+>> +    case MSR_RTIT_CTL:
+>> +    case MSR_RTIT_STATUS:
+>> +    case MSR_RTIT_CR3_MATCH:
+>> +    case MSR_RTIT_ADDR_A(0) ... MSR_RTIT_ADDR_B(3):
+> The respective CPUID field is 3 bits wide, so wouldn't it be better
+> to cover the full possible range (0...6 afaict)?
 
-Hiding bits in CPUID doesn't magically make the feature disappear out of
-the pipeline.
+Last time I tried, you objected to me covering MSR ranges which weren't
+defined.
 
-Some things we can effectively disable (using suitable intercepts to
-audit changes to control registers), but for most instruction groups,
-its trivial to discover if the pipeline supports them, via fault analysis.
-
-Despite the software manuals being clear on the matter, not all code
-checks CPUID properly before poking features.  If anything in your VM
-does do this, then it is likely to crash on migrate, so wherever
-possible, block access at all levels, not just in CPUID.
-
-(Windows DRM/Anti-cheat systems seem to have a particular knack for
-finding features we haven't disabled properly, and architectural corner
-cases we don't cope with correctly.)
+If you want to extend the range like that, it ought to be
+MSR_RTIT_OUTPUT_BASE ... MSR_RTIT_ADDR_B(7) to cover the entire area
+which seems to be exclusively for PT.
 
 ~Andrew
 
