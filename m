@@ -2,78 +2,64 @@ Return-Path: <SRS0=syuX=AE=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.8 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
-	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.5 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1A162C433E0
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Jun 2020 11:50:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EBF7AC433DF
+	for <xen-devel@archiver.kernel.org>; Tue, 23 Jun 2020 11:55:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E216420738
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Jun 2020 11:50:14 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="MppwvfZJ"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E216420738
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id C6D3C20738
+	for <xen-devel@archiver.kernel.org>; Tue, 23 Jun 2020 11:55:00 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C6D3C20738
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jnhRC-0002gB-5U; Tue, 23 Jun 2020 11:50:02 +0000
+	id 1jnhVm-0003Q5-Ov; Tue, 23 Jun 2020 11:54:46 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=WqpJ=AE=gmail.com=jrdr.linux@srs-us1.protection.inumbo.net>)
- id 1jnhRA-0002bp-Ux
- for xen-devel@lists.xenproject.org; Tue, 23 Jun 2020 11:50:00 +0000
-X-Inumbo-ID: a9f5b1b6-b547-11ea-b7bb-bc764e2007e4
-Received: from mail-pj1-x1041.google.com (unknown [2607:f8b0:4864:20::1041])
+ <SRS0=b0dP=AE=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1jnhVl-0003Q0-MN
+ for xen-devel@lists.xenproject.org; Tue, 23 Jun 2020 11:54:45 +0000
+X-Inumbo-ID: 54144e50-b548-11ea-b7bb-bc764e2007e4
+Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id a9f5b1b6-b547-11ea-b7bb-bc764e2007e4;
- Tue, 23 Jun 2020 11:49:59 +0000 (UTC)
-Received: by mail-pj1-x1041.google.com with SMTP id d6so1446806pjs.3
- for <xen-devel@lists.xenproject.org>; Tue, 23 Jun 2020 04:49:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id;
- bh=70/IVEhJ02HvpdsdNd9PlWVOivEwQQMsYQTKyuJVw5w=;
- b=MppwvfZJn8ecf5EIZhuRbEQ8l3NLLdTBNC06snahwn8RnuLn37zTW3Xh1tgQBJu5Vt
- zZyxaozNnvbmbkJvjzRixuvhZtfr9BzypqeE7l/aJ6+mEpn+h5IJNmHFc6l0ee/FvwOI
- Bl7TfpCpdRUnxhNvJmSg5FqkwoCFnVEYKOMeoe4LE1sLzSHyQqXCwHUCpL38FDtoPAOh
- E0mzT9Toou2nx99Ka5OdaBLolD3f2E9ypbp04kqP1nUuCWYyUKkhv/38fkxmjhwbUb0b
- pvjqBWy8ekO5F4RnkOQutCDq2i7behQUQ7VGXx3Sx0N6fwI8lTypVzf2fMihGCmML3cx
- 47wg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id;
- bh=70/IVEhJ02HvpdsdNd9PlWVOivEwQQMsYQTKyuJVw5w=;
- b=J+OHUp7IyDZbKqYyd7/zV0K6b0Eb5ghxUys34xYxZ3Mw6rfaKQKxBDwzxr2OJrfVXO
- xH/5pg9tPV7fOTRuXc3p4I2p/a9/W4agGVdJ8K3dZFnIfu98EgjjVEesPKwFXlMHmsM+
- IBOQ/giSNSKL9bWoQWtFofB9ZdTUic9qD5wjmIXmTDA1Nu/9JExjG2hyRQB9HI+AHdi/
- dlLoS/czqykqI9XkCM0rmU1YBogmz23/iYEu8Ed2TH5S5W3JqRCF3IpxqZYhAgqsdyu3
- x2RBk4p2MqzbM4Lyw4AaffZgM3Yw4qrQaGnLmxVhWSi340EvjU9tiWCSWPuzRVUU78R+
- ajmg==
-X-Gm-Message-State: AOAM530ZGceG59eUPVe2DZ90JQmHn8BxK7kDq/AGm/UOfZ+BTujuwwc7
- dQ4E2OBGFY/1MWiAeO+KjDA=
-X-Google-Smtp-Source: ABdhPJyStVCImaOd+pzTqmM89EzcHfoa9xSYUzHKMG+nb3a6hRmdLRowoxq6o0VzoGGzLOSJsnRG7w==
-X-Received: by 2002:a17:902:8b8a:: with SMTP id
- ay10mr10745807plb.235.1592912997980; 
- Tue, 23 Jun 2020 04:49:57 -0700 (PDT)
-Received: from jordon-HP-15-Notebook-PC.domain.name ([122.179.62.127])
- by smtp.gmail.com with ESMTPSA id cm13sm2290720pjb.5.2020.06.23.04.49.55
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Tue, 23 Jun 2020 04:49:57 -0700 (PDT)
-From: Souptick Joarder <jrdr.linux@gmail.com>
-To: jgross@suse.com,
-	boris.ostrovsky@oracle.com,
-	sstabellini@kernel.org
-Subject: [RFC PATCH v2] xen/privcmd: Convert get_user_pages*() to
- pin_user_pages*()
-Date: Tue, 23 Jun 2020 17:28:19 +0530
-Message-Id: <1592913499-15558-1-git-send-email-jrdr.linux@gmail.com>
-X-Mailer: git-send-email 1.9.1
+ id 54144e50-b548-11ea-b7bb-bc764e2007e4;
+ Tue, 23 Jun 2020 11:54:44 +0000 (UTC)
+Authentication-Results: esa5.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none
+IronPort-SDR: XLlSU3pQl/MYc3+tBCe+j5CH+37hOvj+Tqpn0x2eRM8qQ0rwGEFzaTcTLB2PJYWqIygcJMa4mW
+ y46DI6dvgeGSbdwqsyBVkDADzqDAR9ZqruxlE9MTuGKhD6zVQzY5MLiXWpF4slRHFRp62p+0/u
+ C2WnuFXbn9Pcydrl9QSQ/+2eCKazZLFdujFzFa3n3eynK8ggPBiNOeYMhsChGgaXHZ6X9A3jA6
+ a3LWoeiwa4g+CIFuUid2SXLvVjAr5oVqj0rJNm6SPsT863Y+f8DAKIuislEkl3YjqLCxJ4bU59
+ VhA=
+X-SBRS: 2.7
+X-MesageID: 20927654
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.75,271,1589256000"; d="scan'208";a="20927654"
+Subject: Re: [PATCH v3 4/7] x86/vmx: add do_vmtrace_op
+To: =?UTF-8?Q?Micha=c5=82_Leszczy=c5=84ski?= <michal.leszczynski@cert.pl>,
+ <xen-devel@lists.xenproject.org>
+References: <1617453791.11443328.1592849168658.JavaMail.zimbra@cert.pl>
+ <97440747.11443782.1592849498089.JavaMail.zimbra@cert.pl>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Message-ID: <250cd39e-aa51-5397-93f9-b863e4f51269@citrix.com>
+Date: Tue, 23 Jun 2020 12:54:38 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
+MIME-Version: 1.0
+In-Reply-To: <97440747.11443782.1592849498089.JavaMail.zimbra@cert.pl>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Content-Language: en-GB
+X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
+ AMSPEX02CL02.citrite.net (10.69.22.126)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,120 +70,182 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org,
- John Hubbard <jhubbard@nvidia.com>, Souptick Joarder <jrdr.linux@gmail.com>
+Cc: Kevin Tian <kevin.tian@intel.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Julien
+ Grall <julien@xen.org>, Jun
+ Nakajima <jun.nakajima@intel.com>, Wei Liu <wl@xen.org>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, "Kang, Luwei" <luwei.kang@intel.com>,
+ Jan Beulich <jbeulich@suse.com>, Tamas K Lengyel <tamas.lengyel@intel.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-In 2019, we introduced pin_user_pages*() and now we are converting
-get_user_pages*() to the new API as appropriate. [1] & [2] could
-be referred for more information. This is case 5 as per document [1].
+On 22/06/2020 19:11, Michał Leszczyński wrote:
+> diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
+> index 5bb47583b3..5899df52c3 100644
+> --- a/xen/arch/x86/hvm/hvm.c
+> +++ b/xen/arch/x86/hvm/hvm.c
+> @@ -58,6 +58,7 @@
+>  #include <asm/monitor.h>
+>  #include <asm/hvm/emulate.h>
+>  #include <asm/hvm/hvm.h>
+> +#include <asm/hvm/vmx/vmx.h>
 
-As discussed, pages need to be marked as dirty before unpinned it.
+You cannot include this header file, because...
 
-Previously, if lock_pages() end up partially mapping pages, it used
-to return -ERRNO due to which unlock_pages() have to go through
-each pages[i] till *nr_pages* to validate them. This can be avoided
-by passing correct number partially mapped pages & -ERRNO separately
-while returning from lock_pages() due to error.
-With this fix unlock_pages() doesn't need to validate pages[i] till
-*nr_pages* for error scenario.
+>  #include <asm/hvm/vpt.h>
+>  #include <asm/hvm/support.h>
+>  #include <asm/hvm/cacheattr.h>
+> @@ -606,6 +607,57 @@ static int hvm_print_line(
+>      return X86EMUL_OKAY;
+>  }
+>  
+> +static int vmtrace_alloc_buffers(struct vcpu *v, uint64_t size)
+> +{
+> +    struct page_info *pg;
+> +    struct pt_state *pt;
+> +
+> +    if ( size < PAGE_SIZE || size > GB(4) || (size & (size - 1)) )
+> +    {
+> +        /*
+> +         * We don't accept trace buffer size smaller than single page
+> +         * and the upper bound is defined as 4GB in the specification.
+> +         * The buffer size must be also a power of 2.
+> +         */
+> +        return -EINVAL;
+> +    }
+> +
+> +    if ( vmx_add_host_load_msr(v, MSR_RTIT_CTL, 0) )
+> +        return -EFAULT;
 
-[1] Documentation/core-api/pin_user_pages.rst
+... this will explode on AMD hardware, as will ...
 
-[2] "Explicit pinning of user-space pages":
-        https://lwn.net/Articles/807108/
+> +
+> +    pg = alloc_domheap_pages(v->domain, get_order_from_bytes(size),
+> +                             MEMF_no_refcount);
+> +
+> +    if ( !pg )
+> +        return -ENOMEM;
+> +
+> +    pt = xzalloc(struct pt_state);
+> +
+> +    if ( !pt )
+> +        return -ENOMEM;
+> +
+> +    pt->output_base = page_to_maddr(pg);
+> +    pt->output_mask.raw = size - 1;
+> +
+> +    v->arch.hvm.vmx.pt_state = pt;
 
-Signed-off-by: Souptick Joarder <jrdr.linux@gmail.com>
-Cc: John Hubbard <jhubbard@nvidia.com>
-Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
----
- drivers/xen/privcmd.c | 34 +++++++++++++++++++---------------
- 1 file changed, 19 insertions(+), 15 deletions(-)
+... this.  Both by reaching into the wrong half of the vmx/svm union. 
+(Also for the acquire resource in mm.c)
 
-diff --git a/drivers/xen/privcmd.c b/drivers/xen/privcmd.c
-index a250d11..013d23b 100644
---- a/drivers/xen/privcmd.c
-+++ b/drivers/xen/privcmd.c
-@@ -580,25 +580,30 @@ static long privcmd_ioctl_mmap_batch(
- 
- static int lock_pages(
- 	struct privcmd_dm_op_buf kbufs[], unsigned int num,
--	struct page *pages[], unsigned int nr_pages)
-+	struct page *pages[], unsigned int nr_pages, int *errno)
- {
- 	unsigned int i;
-+	int pinned = 0, rc = 0;
- 
- 	for (i = 0; i < num; i++) {
- 		unsigned int requested;
--		int pinned;
- 
-+		rc += pinned;
- 		requested = DIV_ROUND_UP(
- 			offset_in_page(kbufs[i].uptr) + kbufs[i].size,
- 			PAGE_SIZE);
--		if (requested > nr_pages)
--			return -ENOSPC;
-+		if (requested > nr_pages) {
-+			*errno = -ENOSPC;
-+			return rc;
-+		}
- 
--		pinned = get_user_pages_fast(
-+		pinned = pin_user_pages_fast(
- 			(unsigned long) kbufs[i].uptr,
- 			requested, FOLL_WRITE, pages);
--		if (pinned < 0)
--			return pinned;
-+		if (pinned < 0) {
-+			*errno = pinned;
-+			return rc;
-+		}
- 
- 		nr_pages -= pinned;
- 		pages += pinned;
-@@ -609,15 +614,10 @@ static int lock_pages(
- 
- static void unlock_pages(struct page *pages[], unsigned int nr_pages)
- {
--	unsigned int i;
--
- 	if (!pages)
- 		return;
- 
--	for (i = 0; i < nr_pages; i++) {
--		if (pages[i])
--			put_page(pages[i]);
--	}
-+	unpin_user_pages_dirty_lock(pages, nr_pages, 1);
- }
- 
- static long privcmd_ioctl_dm_op(struct file *file, void __user *udata)
-@@ -630,6 +630,7 @@ static long privcmd_ioctl_dm_op(struct file *file, void __user *udata)
- 	struct xen_dm_op_buf *xbufs = NULL;
- 	unsigned int i;
- 	long rc;
-+	int errno = 0;
- 
- 	if (copy_from_user(&kdata, udata, sizeof(kdata)))
- 		return -EFAULT;
-@@ -683,9 +684,12 @@ static long privcmd_ioctl_dm_op(struct file *file, void __user *udata)
- 		goto out;
- 	}
- 
--	rc = lock_pages(kbufs, kdata.num, pages, nr_pages);
--	if (rc)
-+	rc = lock_pages(kbufs, kdata.num, pages, nr_pages, &errno);
-+	if (errno < 0) {
-+		nr_pages = rc;
-+		rc = errno;
- 		goto out;
-+	}
- 
- 	for (i = 0; i < kdata.num; i++) {
- 		set_xen_guest_handle(xbufs[i].h, kbufs[i].uptr);
--- 
-1.9.1
+> @@ -5101,6 +5265,10 @@ long do_hvm_op(unsigned long op, XEN_GUEST_HANDLE_PARAM(void) arg)
+>          rc = current->hcall_compat ? compat_altp2m_op(arg) : do_altp2m_op(arg);
+>          break;
+>  
+> +    case HVMOP_vmtrace:
+> +        rc = do_vmtrace_op(arg);
+> +        break;
 
+In my feedback on v1, I specifically recommended domctl, because hvmop
+is incompatible with a future expansion to PV guests.
+
+> diff --git a/xen/include/public/domctl.h b/xen/include/public/domctl.h
+> index 59bdc28c89..054892befe 100644
+> --- a/xen/include/public/domctl.h
+> +++ b/xen/include/public/domctl.h
+> @@ -92,6 +92,7 @@ struct xen_domctl_createdomain {
+>      uint32_t max_evtchn_port;
+>      int32_t max_grant_frames;
+>      int32_t max_maptrack_frames;
+> +    uint64_t vmtrace_pt_size;
+
+For now, we have very limited space (128 bytes total) for this
+structure.  This will change in the future with the tools ABI changes,
+but uint64_t is total overkill.
+
+Julien/Stefano: For ARM CoreSight, are the trace buffers required to be
+a power of two size, and/or is this a reasonable implementation
+restriction you'd be willing to live with?
+
+If so, we can get away with a uint8_t vmtrace_order, using 0 for
+"nothing", 1 for 8k, 2 for 16k etc.  (This does rule out allocating a 4k
+buffer, but shifting the number scheme to be order-1 is a no-go
+complexity wise, and the only other alternative is an explicit CDF flag
+for vmtrace).
+
+> diff --git a/xen/include/public/hvm/params.h b/xen/include/public/hvm/params.h
+> index 0a91bfa749..22f6185e01 100644
+> --- a/xen/include/public/hvm/params.h
+> +++ b/xen/include/public/hvm/params.h
+> @@ -300,6 +300,6 @@
+>  #define XEN_HVM_MCA_CAP_LMCE   (xen_mk_ullong(1) << 0)
+>  #define XEN_HVM_MCA_CAP_MASK   XEN_HVM_MCA_CAP_LMCE
+>  
+> -#define HVM_NR_PARAMS 39
+> +#define HVM_NR_PARAMS 40
+
+This hunk is now stale, and can be dropped.
+
+>  
+>  #endif /* __XEN_PUBLIC_HVM_PARAMS_H__ */
+> diff --git a/xen/include/public/memory.h b/xen/include/public/memory.h
+> index dbd35305df..f823c784c3 100644
+> --- a/xen/include/public/memory.h
+> +++ b/xen/include/public/memory.h
+> @@ -620,6 +620,7 @@ struct xen_mem_acquire_resource {
+>  
+>  #define XENMEM_resource_ioreq_server 0
+>  #define XENMEM_resource_grant_table 1
+> +#define XENMEM_resource_vmtrace_buf 2
+>  
+>      /*
+>       * IN - a type-specific resource identifier, which must be zero
+> diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
+> index ac53519d7f..48f0a61bbd 100644
+> --- a/xen/include/xen/sched.h
+> +++ b/xen/include/xen/sched.h
+> @@ -457,6 +457,10 @@ struct domain
+>      unsigned    pbuf_idx;
+>      spinlock_t  pbuf_lock;
+>  
+> +    /* Used by vmtrace features */
+> +    spinlock_t  vmtrace_lock;
+> +    uint64_t    vmtrace_pt_size;
+
+Overall, the moving parts of this series needs to split out into rather
+more patches.
+
+First, in patch 3, the hvm_funcs.pt_supported isn't the place for that
+to live.  You want a global "bool vmtrace_supported" in common/domain.c
+which vmx_init_vmcs_config() sets, and the ARM code can set in the
+future when CoreSight is added.
+
+Next, you want a patch in isolation which adds vmtrace_pt_size (or
+whatever it ends up being) to createdomain, where all
+allocation/deallocation logic lives in common/domain.c.  The spinlock
+(if its needed, but I don't think it is) wants initialising early in
+domain_create(), alongside d->pbuf_lock, and you also need an extra
+clause in sanitise_domain_config() which rejects a vmtrace setting if
+vmtrace isn't supported.  You'll need to put the struct page_info *
+pointer to the memory allocation in struct vcpu, and adjust the vcpu
+create/destroy logic appropriately.
+
+Next, you want a patch doing the acquire resource logic for userspace to
+map the buffers.
+
+Next, you want a patch to introduce a domctl with the various runtime
+enable/disable settings which were in an hvmop here.
+
+Next, you want a patch to do the VMX plumbing, both at create, and runtime.
+
+This ought to lay the logic out in a way which is extendable to x86 PV
+guests and ARM CoreSight, and oughtn't to explode when creating guests
+on non-Intel hardware.
+
+Thanks,
+
+~Andrew
 
