@@ -2,52 +2,52 @@ Return-Path: <SRS0=syuX=AE=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.5 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-2.5 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4436AC433DF
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Jun 2020 15:02:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C4966C433DF
+	for <xen-devel@archiver.kernel.org>; Tue, 23 Jun 2020 15:05:08 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 03D7F20723
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Jun 2020 15:02:35 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 03D7F20723
+	by mail.kernel.org (Postfix) with ESMTPS id 9B76320723
+	for <xen-devel@archiver.kernel.org>; Tue, 23 Jun 2020 15:05:08 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9B76320723
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jnkR5-00044O-VW; Tue, 23 Jun 2020 15:02:07 +0000
+	id 1jnkTq-0004DY-JE; Tue, 23 Jun 2020 15:04:58 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=O2Jt=AE=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jnkR5-00044J-B3
- for xen-devel@lists.xenproject.org; Tue, 23 Jun 2020 15:02:07 +0000
-X-Inumbo-ID: 80a41418-b562-11ea-bca7-bc764e2007e4
+ id 1jnkTp-0004DS-Gl
+ for xen-devel@lists.xenproject.org; Tue, 23 Jun 2020 15:04:57 +0000
+X-Inumbo-ID: e5b54f20-b562-11ea-bca7-bc764e2007e4
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 80a41418-b562-11ea-bca7-bc764e2007e4;
- Tue, 23 Jun 2020 15:02:06 +0000 (UTC)
+ id e5b54f20-b562-11ea-bca7-bc764e2007e4;
+ Tue, 23 Jun 2020 15:04:55 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 05B5AAC12;
- Tue, 23 Jun 2020 15:02:05 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 9D609AE0E;
+ Tue, 23 Jun 2020 15:04:54 +0000 (UTC)
 Subject: Re: [PATCH for-4.14] mm: fix public declaration of struct
  xen_mem_acquire_resource
 To: Roger Pau Monne <roger.pau@citrix.com>
 References: <20200623135246.66170-1-roger.pau@citrix.com>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <50e25ef7-e7a7-d2c1-5f78-ce32cae35f38@suse.com>
-Date: Tue, 23 Jun 2020 17:02:04 +0200
+Message-ID: <044c278b-e0df-e389-b21a-66c7307997c4@suse.com>
+Date: Tue, 23 Jun 2020 17:04:53 +0200
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
 MIME-Version: 1.0
 In-Reply-To: <20200623135246.66170-1-roger.pau@citrix.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,62 +71,18 @@ On 23.06.2020 15:52, Roger Pau Monne wrote:
 > hypervisor or the toolstack only. This is wrong as the hypercall is
 > already being used by the Linux kernel at least, and as such needs to
 > be public.
-> 
-> Also switch the usage of uint64_aligned_t to plain uint64_t, as
-> uint64_aligned_t is only to be used by the toolstack. Note that the
-> layout of the structure will be the same, as the field is already
-> naturally aligned to a 8 byte boundary.
 
-I'm afraid it's more complicated, and hence ...
+Actually - how does this work for the Linux kernel, seeing
 
-> No functional change expected.
+    rc = rcu_lock_remote_domain_by_id(xmar.domid, &d);
+    if ( rc )
+        return rc;
 
-... this doesn't hold: As I notice only now the struct also wrongly
-(if it was meant to be a tools-only interface) failed to use
-XEN_GUEST_HANDLE_64(), which would in principle have been a problem
-for 32-bit callers (passing garbage in the upper half of a handle).
-It's not an actual problem because, unlike would typically be the
-case for tools-only interfaces, there is compat translation for this
-struct.
+    rc = xsm_domain_resource_map(XSM_DM_PRIV, d);
+    if ( rc )
+        goto out;
 
-With this, however, the problem of your change becomes noticeable:
-The structure's alignment for 32-bit x86, and with it the structure's
-sizeof(), both change. You should be able to see this by comparing
-xen/common/compat/memory.c's disassembly before and after your
-change - the number of bytes to copy by the respective
-copy_from_guest() ought to have changed.
-
-The question now is whether we're willing to accept such a (marginal)
-incompatibility. The chance of a 32-bit guest actually running into
-it shouldn't be very high, but with the right placement of an
-instance of the struct at the end of a page it would be possible to
-observe afaict.
-
-Or whether we go the alternative route and pad the struct suitably
-for 32-bit.
-
-> Fixes: 3f8f12281dd20 ('x86/mm: add HYPERVISOR_memory_op to acquire guest resources')
-> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-> ---
-> Would be good to get this fixed before the release in order to avoid
-> shipping bogus headers. Should also be backported.
-
-This was already part of 4.13, as you imply by requesting a backport.
-Hence the bogus header had already been shipped.
-
-> --- a/xen/include/public/memory.h
-> +++ b/xen/include/public/memory.h
-> @@ -607,6 +607,8 @@ struct xen_reserved_device_memory_map {
->  typedef struct xen_reserved_device_memory_map xen_reserved_device_memory_map_t;
->  DEFINE_XEN_GUEST_HANDLE(xen_reserved_device_memory_map_t);
->  
-> +#endif /* defined(__XEN__) || defined(__XEN_TOOLS__) */
-> +
->  /*
->   * Get the pages for a particular guest resource, so that they can be
->   * mapped directly by a tools domain.
-
-This comment is now stale.
+in the function?
 
 Jan
 
