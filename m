@@ -1,74 +1,74 @@
 Return-Path: <SRS0=syuX=AE=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-X-Spam-Level: *
-X-Spam-Status: No, score=1.6 required=3.0 tests=DATE_IN_FUTURE_03_06,
-	DKIM_ADSP_CUSTOM_MED,DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Level: 
+X-Spam-Status: No, score=-0.8 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
+	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C87E0C433DF
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Jun 2020 03:36:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 99D5CC433DF
+	for <xen-devel@archiver.kernel.org>; Tue, 23 Jun 2020 03:41:20 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9413120780
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Jun 2020 03:36:45 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 6A14A206C1
+	for <xen-devel@archiver.kernel.org>; Tue, 23 Jun 2020 03:41:20 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Y8mu6Abx"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9413120780
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="nkO5PKTH"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6A14A206C1
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jnZjF-0006Zt-2f; Tue, 23 Jun 2020 03:36:09 +0000
+	id 1jnZo5-0007Tl-MF; Tue, 23 Jun 2020 03:41:09 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=eVA3=AE=gmail.com=tamas.k.lengyel@srs-us1.protection.inumbo.net>)
- id 1jnZjE-0006Zo-DQ
- for xen-devel@lists.xenproject.org; Tue, 23 Jun 2020 03:36:08 +0000
-X-Inumbo-ID: ac143746-b502-11ea-bb8b-bc764e2007e4
-Received: from mail-wr1-x434.google.com (unknown [2a00:1450:4864:20::434])
+ <SRS0=u3ot=AE=gmail.com=jandryuk@srs-us1.protection.inumbo.net>)
+ id 1jnZo4-0007Td-OB
+ for xen-devel@lists.xenproject.org; Tue, 23 Jun 2020 03:41:08 +0000
+X-Inumbo-ID: 5f25dfb0-b503-11ea-b7bb-bc764e2007e4
+Received: from mail-lj1-x22f.google.com (unknown [2a00:1450:4864:20::22f])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id ac143746-b502-11ea-bb8b-bc764e2007e4;
- Tue, 23 Jun 2020 03:36:07 +0000 (UTC)
-Received: by mail-wr1-x434.google.com with SMTP id h5so18962220wrc.7
- for <xen-devel@lists.xenproject.org>; Mon, 22 Jun 2020 20:36:07 -0700 (PDT)
+ id 5f25dfb0-b503-11ea-b7bb-bc764e2007e4;
+ Tue, 23 Jun 2020 03:41:08 +0000 (UTC)
+Received: by mail-lj1-x22f.google.com with SMTP id i27so21708972ljb.12
+ for <xen-devel@lists.xenproject.org>; Mon, 22 Jun 2020 20:41:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=D4wqSIKGFsCHRVPBqjkiTbY/zH06jC+fIhRvgpJIiRU=;
- b=Y8mu6Abx12+ismB6uSJQcWNz1U4KObb1fv+ZO/HCEIUMDU0tFskFQ/uZP+ppekSRqD
- e5DLnGx4+7C1QE1E8NsiSCcXKhlgJNqVyBcHJ7M74Q+J07azDm7BhGXAK4S7SM2nksH0
- jc3TYfPhHiXOeVEtepLo6MmhstAlAdTTzmYT9hy/KLfvnCsnGqaMXD2aAM7snsV/A0xm
- zIKnLAgRCwjZQWo/EWMLyASOV5a4tsKW/f3EaB8K8M/hCxMN3AH3S1BDbSik2advqosK
- amMmR8jjNIYjq02IFLc7TWS6Coj5GqXIAvf11Lx/+xuX1aX2d09LhVcoTzjCl7BF+ika
- XtFA==
+ :cc; bh=g780v6WnLYQ1QZQRWq+6mQKK2XsAf/u1xfSFw0Z6JFs=;
+ b=nkO5PKTHb8KutOobp7Hgg+WgOCYi/XoTF9/3Vxe5VfF8NFti+41Pbu/33yI+D8AQsq
+ Ky9jOYjaj1wJff8Skb2LVhjnLwjyOwRsnOUvotHAXYRKjTCiHmIX9wn4jCAksbtjIdTI
+ 58vdQCHRAVYOmMvccfsH9inZ2nczLKA7q2rbGBJXGFqkrkecCToCo25wfPFefpORLBl6
+ JS3sRSuX6u/92iF1QgVsQwiWvLFpR5rX4wdzG/TcZ8fL2fKLgyEkNx5UrTPAYTC00oNx
+ Iede+FD2k91tVb53kUAVjYO9dajw6a5TtNiTIfbLa8tBAMCeQE+vMbS567v9CzUXNNtX
+ MnDQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=D4wqSIKGFsCHRVPBqjkiTbY/zH06jC+fIhRvgpJIiRU=;
- b=okUfmo5Weq3v5aEeCIx62s9hKUTO9TjPh/d/7i011l8JA5mLhCp49eXgHLx1ttzKnD
- 998UkZev+I75SS52OPlcvcVT/4/gp58GGW5/tpINSluQ7jMbaQg/J8YtfbPA8K+EBw1f
- QKiC6pq0pgyrxYf+wPtZTag0BxY0TJZad3OEQXaM5dmS3q471H1lUXQ6i13Bs6gWH+bc
- muREyQlQtkwe1GR/GCviHeuz2l55frejg4w3QrI6hy1LdIKxDjyksvi0ONB+07T0n5Fd
- WaTiBKxC4jolfGtUcRS7vrcXZyiITfQuizniW+NI2/BMcuf4bNpIJS8mhuIm2n1T/DhA
- GPSQ==
-X-Gm-Message-State: AOAM531QIoSCRYT6bOi0IAJGTvXq87F9Y62kQE8aHUUW5VIMNLgN1IsM
- xQhCfbrTd7HsMbiBiKo243QCiOfpDADYoIdEfh4=
-X-Google-Smtp-Source: ABdhPJwq3+OdYkvL8iKBnT/liMA1JSKAnZ1WjN/qvc31cItfopI06QHOwwj2CnuqmdMz6dWbG8NJWERAd7BnTSj0BWU=
-X-Received: by 2002:adf:e648:: with SMTP id b8mr23262509wrn.386.1592883366619; 
- Mon, 22 Jun 2020 20:36:06 -0700 (PDT)
+ bh=g780v6WnLYQ1QZQRWq+6mQKK2XsAf/u1xfSFw0Z6JFs=;
+ b=TUWhsb1wWE9ar0UMk2RVImiIwhQAkgtAa6pu2TIcexxCuTdm5FMaeKvfAssCMNNIAN
+ HAIegPf11wn4IumY43Xo/u3C9DO3ZsZY8qO5wVLPnUfvZ3EK+ivDyqXBd2wF6+Kd07W7
+ gU4nRjLTKOvmofO02RDvrF8TYhEcqjoaROXJ/5D/zQ2qkRMAPEby9FKbcMV3zLBW6mRf
+ gxk07IseXPp3EZnnnrpiRqC3dYm8ut4v61n1QUJAj2/yH/aD5BykL3iFdlSrs8kb2y4c
+ vx0ecIIdAkj3oFE0dqtC3ZUwGGp8TrvuW5HHiCxXHFcLYtSFm9Cnt4eOnkqNV9DDijgx
+ NzrA==
+X-Gm-Message-State: AOAM531WlQ6QrmXmk5wD6w8elED04BHqy5ToxUzSgWgxqDlnpJnXXEF7
+ zDF/GDBRB06Q4BzX6tdFl7TiNR/buSZAeyALYSE=
+X-Google-Smtp-Source: ABdhPJyBZV5fmqperXCFj6v08Ebo6e6nCRkDfnitOFhxpl87pM0Cj79N1j1ptSWGuTMvlschI12cqgk9yx9AUkKiFyY=
+X-Received: by 2002:a2e:9141:: with SMTP id q1mr9666796ljg.196.1592883666790; 
+ Mon, 22 Jun 2020 20:41:06 -0700 (PDT)
 MIME-Version: 1.0
-References: <1617453791.11443328.1592849168658.JavaMail.zimbra@cert.pl>
- <1786138246.11444015.1592849576272.JavaMail.zimbra@cert.pl>
-In-Reply-To: <1786138246.11444015.1592849576272.JavaMail.zimbra@cert.pl>
-From: Tamas K Lengyel <tamas.k.lengyel@gmail.com>
-Date: Tue, 23 Jun 2020 03:35:30 -0600
-Message-ID: <CABfawh=uHn1dF5jXc1FpymOLESEJ7tfpxr6SZBrHJMuqeMwsqg@mail.gmail.com>
-Subject: Re: [PATCH v3 7/7] tools/proctrace: add proctrace tool
-To: =?UTF-8?B?TWljaGHFgiBMZXN6Y3p5xYRza2k=?= <michal.leszczynski@cert.pl>
+References: <CAKf6xpuSD3NC2bLPQN75e2pR8asu9Ey1xTGxTNeCR_1MGsnPOg@mail.gmail.com>
+ <ac4dfe3b-7981-49bb-25a2-08578da150d5@ilande.co.uk>
+In-Reply-To: <ac4dfe3b-7981-49bb-25a2-08578da150d5@ilande.co.uk>
+From: Jason Andryuk <jandryuk@gmail.com>
+Date: Mon, 22 Jun 2020 23:40:55 -0400
+Message-ID: <CAKf6xpvs6mNowsiAzbfQGLGp0aY0zKgUD=DVpSorWHycm--J8g@mail.gmail.com>
+Subject: Re: sysbus failed assert for xen_sysdev
+To: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -80,43 +80,93 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wl@xen.org>,
- Tamas K Lengyel <tamas.lengyel@intel.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>, "Kang, Luwei" <luwei.kang@intel.com>
+Cc: Anthony PERARD <anthony.perard@citrix.com>,
+ xen-devel <xen-devel@lists.xenproject.org>, Paul Durrant <paul@xen.org>,
+ QEMU <qemu-devel@nongnu.org>, Markus Armbruster <armbru@redhat.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-> +    rc = xenforeignmemory_unmap_resource(fmem, fres);
-> +
-> +    if (rc) {
-> +        fprintf(stderr, "Failed to unmap resource\n");
-> +        return 1;
-> +    }
-> +
-> +    rc = xc_vmtrace_pt_disable(xc, domid, vcpu_id);
-> +
-> +    if (rc) {
-> +        fprintf(stderr, "Failed to call xc_vmtrace_pt_disable\n");
-> +        return 1;
-> +    }
-
-Looks like you are missing an xc_interface_close here.
-
-> +
-> +    return 0;
-> +}
-> +
-> +/*
-> + * Local variables:
-> + * mode: C
-> + * c-file-style: "BSD"
-> + * c-basic-offset: 4
-> + * tab-width: 4
-> + * indent-tabs-mode: nil
-> + * End:
-> + */
-> --
-> 2.20.1
+On Mon, Jun 22, 2020 at 5:17 PM Mark Cave-Ayland
+<mark.cave-ayland@ilande.co.uk> wrote:
 >
+> On 22/06/2020 21:33, Jason Andryuk wrote:
 >
+> > Hi,
+> >
+> > Running qemu devel for a Xen VM is failing an assert after the recent
+> > "qdev: Rework how we plug into the parent bus" sysbus changes.
+> >
+> > qemu-system-i386: hw/core/qdev.c:102: qdev_set_parent_bus: Assertion
+> > `dc->bus_type && object_dynamic_cast(OBJECT(bus), dc->bus_type)'
+> > failed.
+> >
+> > dc->bus_type is "xen-sysbus" and it's the
+> > `object_dynamic_cast(OBJECT(bus), dc->bus_type)` portion that fails
+> > the assert.  bus seems to be "main-system-bus", I think:
+> > (gdb) p *bus
+> > $3 = {obj = {class = 0x55555636d780, free = 0x7ffff7c40db0 <g_free>,
+> > properties = 0x5555563f7180, ref = 3, parent = 0x5555563fe980}, parent
+> > = 0x0, name = 0x5555563fec60 "main-system-bus", ...
+> >
+> > The call comes from hw/xen/xen-legacy-backend.c:706
+> > sysbus_realize_and_unref(SYS_BUS_DEVICE(xen_sysdev), &error_fatal);
+> >
+> > Any pointers on what needs to be fixed?
+>
+> Hi Jason,
+>
+> My understanding is that the assert() is telling you that you're plugging a
+> TYPE_SYS_BUS_DEVICE into a bus that isn't derived from TYPE_SYSTEM_BUS. A quick look
+> at the file in question suggests that you could try changing the parent class of
+> TYPE_XENSYSBUS from TYPE_BUS to TYPE_SYSTEM_BUS to see if that helps?
+
+Hi, Mark.
+
+Thanks, but unfortunately changing xensysbus_info .parent does not
+stop the assert.  But it kinda pointed me in the right direction.
+
+xen-sysdev overrode the bus_type which was breaking sysbus_realize.
+So drop that:
+
+--- a/hw/xen/xen-legacy-backend.c
++++ b/hw/xen/xen-legacy-backend.c
+@@ -824,7 +825,7 @@ static void xen_sysdev_class_init(ObjectClass
+*klass, void *data)
+     DeviceClass *dc = DEVICE_CLASS(klass);
+
+     device_class_set_props(dc, xen_sysdev_properties);
+-    dc->bus_type = TYPE_XENSYSBUS;
++    //dc->bus_type = TYPE_XENSYSBUS;
+ }
+
+ static const TypeInfo xensysdev_info = {
+
+Then I had a different instance of the failed assert trying to attach
+xen-console-0 to xen-sysbus.  So I made this change:
+--- a/hw/xen/xen-legacy-backend.c
++++ b/hw/xen/xen-legacy-backend.c
+@@ -789,6 +789,7 @@ static void xendev_class_init(ObjectClass *klass,
+void *data)
+     set_bit(DEVICE_CATEGORY_MISC, dc->categories);
+     /* xen-backend devices can be plugged/unplugged dynamically */
+     dc->user_creatable = true;
++    dc->bus_type = TYPE_XENSYSBUS;
+ }
+
+ static const TypeInfo xendev_type_info = {
+
+Then it gets farther... until
+qemu-system-i386: hw/core/qdev.c:439: qdev_assert_realized_properly:
+Assertion `dev->realized' failed.
+
+dev->id is NULL. The failing device is:
+(gdb) p *dev.parent_obj.class.type
+$12 = {name = 0x555556207770 "cfi.pflash01",
+
+Is that right?
+
+I'm going to have to take a break from this now.
+
+Regards,
+Jason
 
