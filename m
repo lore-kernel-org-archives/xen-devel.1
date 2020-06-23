@@ -2,87 +2,77 @@ Return-Path: <SRS0=syuX=AE=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.8 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
+X-Spam-Status: No, score=-9.8 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
 	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 585DEC433DF
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Jun 2020 11:47:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4F66FC433E1
+	for <xen-devel@archiver.kernel.org>; Tue, 23 Jun 2020 11:47:30 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2432920738
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Jun 2020 11:47:00 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 248E620724
+	for <xen-devel@archiver.kernel.org>; Tue, 23 Jun 2020 11:47:30 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="MsCHTOex"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2432920738
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="O0f174T9"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 248E620724
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jnhO6-0002Kf-Aq; Tue, 23 Jun 2020 11:46:50 +0000
+	id 1jnhOX-0002Oe-NR; Tue, 23 Jun 2020 11:47:17 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=8LJ6=AE=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
- id 1jnhO4-0002KA-O6
- for xen-devel@lists.xenproject.org; Tue, 23 Jun 2020 11:46:48 +0000
-X-Inumbo-ID: 357e1652-b547-11ea-bca7-bc764e2007e4
-Received: from mail-wr1-x42d.google.com (unknown [2a00:1450:4864:20::42d])
+ <SRS0=WqpJ=AE=gmail.com=jrdr.linux@srs-us1.protection.inumbo.net>)
+ id 1jnhOW-0002OM-48
+ for xen-devel@lists.xenproject.org; Tue, 23 Jun 2020 11:47:16 +0000
+X-Inumbo-ID: 487d17bc-b547-11ea-bb8b-bc764e2007e4
+Received: from mail-pg1-x541.google.com (unknown [2607:f8b0:4864:20::541])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 357e1652-b547-11ea-bca7-bc764e2007e4;
- Tue, 23 Jun 2020 11:46:43 +0000 (UTC)
-Received: by mail-wr1-x42d.google.com with SMTP id s10so231442wrw.12
- for <xen-devel@lists.xenproject.org>; Tue, 23 Jun 2020 04:46:43 -0700 (PDT)
+ id 487d17bc-b547-11ea-bb8b-bc764e2007e4;
+ Tue, 23 Jun 2020 11:47:15 +0000 (UTC)
+Received: by mail-pg1-x541.google.com with SMTP id e9so9744503pgo.9
+ for <xen-devel@lists.xenproject.org>; Tue, 23 Jun 2020 04:47:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:reply-to:to:cc:references:in-reply-to:subject:date:message-id
- :mime-version:content-transfer-encoding:content-language
- :thread-index; bh=nsQo9i+/CJZ1DjKvgOB2w05FjU4Aq8s2SwHPXUXQPgg=;
- b=MsCHTOexjRjW5Ra2id6IrAIs6x9apeOs3pvM6wBIOHmz9Bgvyb8N1EPeY/+7fpJEXd
- VgUKeiIytfAdKBBWU5C4gcQM8aSsV/8eSah2xD9oH8APwTceIVf5ivgk/gU7jvTn74u3
- 6YLi7ONi+eYQqTneyarVhpL+pWjT50sCSN7gaurewdm/2rEzLVKt+kgAk7rBnGG5imW2
- 703G9g5mp5bvUzLgSQxUElSefDOkrwYmMFapCRIKwFK6275ZUIQc6KACxJRODgQ3Jsgi
- /gOAEmvB8xiOa+DMAvvHDQTfMnua06XyOrlJ1tpgG6v6161+dDDIcxPIX2q2IBziY7rn
- 43vw==
+ h=from:to:cc:subject:date:message-id;
+ bh=pDMz4GEEd1HrNqab3SFEgh4HTzshHqZlUT8h2DVo/0o=;
+ b=O0f174T9zxECMIrMcBnJlVgKJZ6AF1eadIxgibscZl51LZvB8RJvrqMkRvOifJ1CI8
+ /NW27eFVBws4khf4Q2qK+/MggUcJwyAOfD1inExGIsaCdqPgaVcQI/lpgDRKhxW6DZ4c
+ vHpAdYOFKt4Tw7nffVPHnQteL/omtnCI9D+PU6xJ/l+qW4gpxQVfVzLKgBp51y/iJeLb
+ BhsNyPZiZimDHSuuF9JYkugBfFBkWTtmpsgF/s45n0Xfpkd5lBZaZNND2x/AZ06mD0dl
+ fYUJBBGM0VrP/I2mSStcI2uddjS2oYMSuuaGhwQ3LJS5m1Stcz2Fnc79koTI+ITuoj4q
+ Wxow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:reply-to:to:cc:references:in-reply-to
- :subject:date:message-id:mime-version:content-transfer-encoding
- :content-language:thread-index;
- bh=nsQo9i+/CJZ1DjKvgOB2w05FjU4Aq8s2SwHPXUXQPgg=;
- b=swS8vrCJBEeHp1digdDBsMW0/aF/c6IdcSkDYhkHF7DKE03rKF01KNa06EFmeaUFI1
- J4sP0YyWUDPOfBje1hiM1JMBny4GXNCQFPc3UchSJO7YVibHGnX1SbFvmjAoo38HMvEf
- 7qmyPrg/cJqCt/t+NtTBbQYJaE8mJsiAiQM4gU+3KEc/5Jrlkpnyc738oZav8slqmSkl
- asa1k7KD2kMAiDVLAD0SN+B1Fq7alKqp0KIcY1q1Ktmz3VhhghHUGrCGjxU2j7XlykFg
- 7hHVgtH0wLkzYnmS2tvqwJi3FDdeQ6uagUhC+AsZmYGa7rTDoWa7sU8rzkySIGxFJln6
- wpHQ==
-X-Gm-Message-State: AOAM533vAt07221bt9omDbocQ/dCW74wWXU7yUJpmZW2mkTIT9eLpvSy
- d7mVtSpH2lEsDtxhvCA7aY4=
-X-Google-Smtp-Source: ABdhPJzTJS7wzmG6kPQJ4+HLB04YWNFkLOXYkMd9lBnpM99UXIyjh8ly/AKBuLK5LYE1wp27n2CoFw==
-X-Received: by 2002:adf:d1a9:: with SMTP id w9mr22003597wrc.344.1592912802849; 
- Tue, 23 Jun 2020 04:46:42 -0700 (PDT)
-Received: from CBGR90WXYV0 (54-240-197-224.amazon.com. [54.240.197.224])
- by smtp.gmail.com with ESMTPSA id z9sm3373507wmi.7.2020.06.23.04.46.41
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=pDMz4GEEd1HrNqab3SFEgh4HTzshHqZlUT8h2DVo/0o=;
+ b=cj7tJ4skwdXFygLBfTvfkTPsZhYKFBCcH/JwEDrco61WKzz4GBHYcbE2Zk7MQ6v8Pt
+ 5+PfwV6MftWI7qr71OPqzP56Ri9+29vfuI4eRNLhuL5f7naEypoADWY0xG7yBgizMINl
+ 7sbka+GcUwjdA/wnFN+3DDeoelY6+zgjObEPnkMZ1Kv7mCokV37ExOyFZzlAKCWyTGeK
+ cq4kYuqIPJAxFrpPLeKbQ0rIMQQgB+1r+ljOH2OAKMR8gTYoNCuQXAneTfiZOaRxvoFj
+ O6o6cVyefBRxmj8YMHzCEgPwxUPOOFzUICVDhq1V777IrCFPn0GHLglSLAXfcdqPj8u3
+ OMYQ==
+X-Gm-Message-State: AOAM5317kgP2REZN+LiRAwrU4nCbquT7xewX2UF8zSyBslX4i1HFQ8Yx
+ eWS2vCzT1A0Upd3Hn7/tYAM=
+X-Google-Smtp-Source: ABdhPJyoqH2qE0gyMJuzujXPkfwbJMIuJEyJhbRiulWkylIrNAE8lewKA/I7Fqiq7o7Uu7FIu8YohA==
+X-Received: by 2002:a63:6643:: with SMTP id a64mr14118116pgc.246.1592912834633; 
+ Tue, 23 Jun 2020 04:47:14 -0700 (PDT)
+Received: from jordon-HP-15-Notebook-PC.domain.name ([122.179.62.127])
+ by smtp.gmail.com with ESMTPSA id w203sm6828258pfc.128.2020.06.23.04.47.11
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Tue, 23 Jun 2020 04:46:42 -0700 (PDT)
-From: Paul Durrant <xadimgnik@gmail.com>
-X-Google-Original-From: "Paul Durrant" <paul@xen.org>
-To: "'Markus Armbruster'" <armbru@redhat.com>,
- "'Jason Andryuk'" <jandryuk@gmail.com>
-References: <CAKf6xpuSD3NC2bLPQN75e2pR8asu9Ey1xTGxTNeCR_1MGsnPOg@mail.gmail.com>	<ac4dfe3b-7981-49bb-25a2-08578da150d5@ilande.co.uk>	<CAKf6xpvs6mNowsiAzbfQGLGp0aY0zKgUD=DVpSorWHycm--J8g@mail.gmail.com>
- <87k0zykwdl.fsf@dusky.pond.sub.org>
-In-Reply-To: <87k0zykwdl.fsf@dusky.pond.sub.org>
-Subject: RE: sysbus failed assert for xen_sysdev
-Date: Tue, 23 Jun 2020 12:46:41 +0100
-Message-ID: <000001d64953$f67a1f00$e36e5d00$@xen.org>
-MIME-Version: 1.0
-Content-Type: text/plain;
-	charset="US-ASCII"
-Content-Transfer-Encoding: 7bit
-X-Mailer: Microsoft Outlook 16.0
-Content-Language: en-gb
-Thread-Index: AQIJfv1jP4fCJU6d0eNUL65zTb1lhAKJjZPCAZLY/IEByWeHd6hQeooA
+ Tue, 23 Jun 2020 04:47:13 -0700 (PDT)
+From: Souptick Joarder <jrdr.linux@gmail.com>
+To: jgross@suse.com,
+	boris.ostrovsky@oracle.com,
+	sstabellini@kernel.org
+Subject: [RFC PATCH v2] xen/privcmd: Convert get_user_pages*() to
+ pin_user_pages*()
+Date: Tue, 23 Jun 2020 17:25:28 +0530
+Message-Id: <1592913328-15486-1-git-send-email-jrdr.linux@gmail.com>
+X-Mailer: git-send-email 1.9.1
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -93,215 +83,116 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Reply-To: paul@xen.org
-Cc: 'Anthony PERARD' <anthony.perard@citrix.com>,
- 'xen-devel' <xen-devel@lists.xenproject.org>,
- 'Mark Cave-Ayland' <mark.cave-ayland@ilande.co.uk>,
- 'QEMU' <qemu-devel@nongnu.org>
+Cc: xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org,
+ John Hubbard <jhubbard@nvidia.com>, Souptick Joarder <jrdr.linux@gmail.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-> -----Original Message-----
-> From: Markus Armbruster <armbru@redhat.com>
-> Sent: 23 June 2020 09:41
-> To: Jason Andryuk <jandryuk@gmail.com>
-> Cc: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>; Anthony PERARD <anthony.perard@citrix.com>; xen-
-> devel <xen-devel@lists.xenproject.org>; Paul Durrant <paul@xen.org>; QEMU <qemu-devel@nongnu.org>
-> Subject: Re: sysbus failed assert for xen_sysdev
-> 
-> Jason Andryuk <jandryuk@gmail.com> writes:
-> 
-> > On Mon, Jun 22, 2020 at 5:17 PM Mark Cave-Ayland
-> > <mark.cave-ayland@ilande.co.uk> wrote:
-> >>
-> >> On 22/06/2020 21:33, Jason Andryuk wrote:
-> >>
-> >> > Hi,
-> >> >
-> >> > Running qemu devel for a Xen VM is failing an assert after the recent
-> >> > "qdev: Rework how we plug into the parent bus" sysbus changes.
-> >> >
-> >> > qemu-system-i386: hw/core/qdev.c:102: qdev_set_parent_bus: Assertion
-> >> > `dc->bus_type && object_dynamic_cast(OBJECT(bus), dc->bus_type)'
-> >> > failed.
-> >> >
-> >> > dc->bus_type is "xen-sysbus" and it's the
-> >> > `object_dynamic_cast(OBJECT(bus), dc->bus_type)` portion that fails
-> >> > the assert.  bus seems to be "main-system-bus", I think:
-> >> > (gdb) p *bus
-> >> > $3 = {obj = {class = 0x55555636d780, free = 0x7ffff7c40db0 <g_free>,
-> >> > properties = 0x5555563f7180, ref = 3, parent = 0x5555563fe980}, parent
-> >> > = 0x0, name = 0x5555563fec60 "main-system-bus", ...
-> >> >
-> >> > The call comes from hw/xen/xen-legacy-backend.c:706
-> >> > sysbus_realize_and_unref(SYS_BUS_DEVICE(xen_sysdev), &error_fatal);
-> >> >
-> >> > Any pointers on what needs to be fixed?
-> >>
-> >> Hi Jason,
-> >>
-> >> My understanding is that the assert() is telling you that you're plugging a
-> >> TYPE_SYS_BUS_DEVICE into a bus that isn't derived from TYPE_SYSTEM_BUS.
-> >> TYPE_SYS_BUS_DEVICE into a bus that isn't derived from TYPE_SYSTEM_BUS. A quick look
-> 
-> Correct.  Let's review the assertion:
-> 
->     assert(dc->bus_type && object_dynamic_cast(OBJECT(bus), dc->bus_type));
-> 
-> Context: we're supposted to plug @dev into @bus, and @dc is @dev's
-> DeviceClass.
-> 
-> The assertion checks that
-> 
-> 1. @dev plugs into a bus: dc->bus_type
-> 
-> 2. @bus is an instance of the type of bus @dev plugs into:
->    object_dynamic_cast(OBJECT(bus), dc->bus_type)
-> 
-> >> at the file in question suggests that you could try changing the parent class of
-> >> TYPE_XENSYSBUS from TYPE_BUS to TYPE_SYSTEM_BUS to see if that helps?
-> >
-> > Hi, Mark.
-> >
-> > Thanks, but unfortunately changing xensysbus_info .parent does not
-> > stop the assert.  But it kinda pointed me in the right direction.
-> >
-> > xen-sysdev overrode the bus_type which was breaking sysbus_realize.
-> > So drop that:
-> >
-> > --- a/hw/xen/xen-legacy-backend.c
-> > +++ b/hw/xen/xen-legacy-backend.c
-> > @@ -824,7 +825,7 @@ static void xen_sysdev_class_init(ObjectClass
-> > *klass, void *data)
-> >      DeviceClass *dc = DEVICE_CLASS(klass);
-> >
-> >      device_class_set_props(dc, xen_sysdev_properties);
-> > -    dc->bus_type = TYPE_XENSYSBUS;
-> > +    //dc->bus_type = TYPE_XENSYSBUS;
-> >  }
-> 
-> Uff!
-> 
-> Let me explain how things are supposed to work.
-> 
-> Say we have FOO bus (QOM type TYPE_FOO_BUS), with FOO devices plugging
-> into it (abstract QOM type TYPE_FOO_DEVICE).  One of them is SOME_FOO
-> (concrete QOM type TYPE_SOME_FOO).  Code ties them together like this:
-> 
->     static const TypeInfo pci_bus_info = {
->         .name = TYPE_PCI_BUS,
->         .parent = TYPE_BUS,
->         ...
->     };
-> 
->     static const TypeInfo foo_device_info = {
->         .name = TYPE_FOO_DEVICE,
->         .parent = TYPE_DEVICE,
->         .abstract = true,
->         .class_init = foo_device_class_init,
->         ...
->     };
-> 
->     static void foo_device_class_init(ObjectClass *oc, void *data)
->     {
->         DeviceClass *dc = DEVICE_CLASS(oc);
-> 
->         dc->bus_type = TYPE_FOO_BUS;
->         ...
->     }
-> 
->     static const TypeInfo some_foo_info = {
->         .name = TYPE_SOME_FOO,
->         .parent = TYPE_FOO_DEVICE,
->         ...
->     };
-> 
-> When you plug an instance of TYPE_SOME_FOO into a bus, the assertion
-> checks that the bus is an instance of TYPE_FOO_BUS.
-> 
-> Note that subtypes of TYPE_FOO_DEVICE do not mess with dc->bus_type!
-> 
-> TYPE_XENSYSDEV does mess with it:
-> 
->     static void xen_sysdev_class_init(ObjectClass *klass, void *data)
->     {
->         DeviceClass *dc = DEVICE_CLASS(klass);
-> 
->         device_class_set_props(dc, xen_sysdev_properties);
->         dc->bus_type = TYPE_XENSYSBUS;
->     }
-> 
->     static const TypeInfo xensysdev_info = {
->         .name          = TYPE_XENSYSDEV,
->         .parent        = TYPE_SYS_BUS_DEVICE,
->         .instance_size = sizeof(SysBusDevice),
->         .class_init    = xen_sysdev_class_init,
->     };
-> 
-> On the one hand, xensysdev_info.parent claims TYPE_XENSYSDEV is a
-> TYPE_SYS_BUS_DEVICE (and therefore should plug into a TYPE_SYSTEM_BUS).
-> On the other hand, its dc->bus_type is a TYPE_XENSYSBUS, which is *not*
-> a subtype of TYPE_SYSTEM_BUS:
-> 
->     static const TypeInfo xensysbus_info = {
->         .name       = TYPE_XENSYSBUS,
-> --->    .parent     = TYPE_BUS,
->         .class_init = xen_sysbus_class_init,
->         .interfaces = (InterfaceInfo[]) {
->             { TYPE_HOTPLUG_HANDLER },
->             { }
->         }
->     };
-> 
-> This is an inconsistent mess.
-> 
-> Are TYPE_XENSYSDEV and TYPE_XENSYSBUS related to TYPE_SYS_BUS_DEVICE and
-> TYPE_SYSTEM_BUS?
-> 
-> If no, then xensysbus_info.parent should not be TYPE_SYS_BUS_DEVICE, and
-> you must not pass instances of one kind to functions expecting the other
-> kind.
-> 
-> If yes, how?  If the former are specializations of the latter, consider
-> making the former subtypes of the latter.  Both of them.  Then a
-> TYPE_XENSYSDEV device can plug into a TYPE_XENSYSBUS bus, but not into a
-> TYPE_SYSTEM_BUS bus.
-> 
-> A TYPE_SYS_BUS_DEVICE could still plug into TYPE_XENSYSBUS, because the
-> latter is also an instance of TYPE_SYSTEM_BUS.
-> 
-> Questions?
-> 
-> >
-> >  static const TypeInfo xensysdev_info = {
-> >
-> > Then I had a different instance of the failed assert trying to attach
-> > xen-console-0 to xen-sysbus.  So I made this change:
-> > --- a/hw/xen/xen-legacy-backend.c
-> > +++ b/hw/xen/xen-legacy-backend.c
-> > @@ -789,6 +789,7 @@ static void xendev_class_init(ObjectClass *klass,
-> > void *data)
-> >      set_bit(DEVICE_CATEGORY_MISC, dc->categories);
-> >      /* xen-backend devices can be plugged/unplugged dynamically */
-> >      dc->user_creatable = true;
-> > +    dc->bus_type = TYPE_XENSYSBUS;
-> >  }
-> >
-> >  static const TypeInfo xendev_type_info = {
-> >
-> > Then it gets farther... until
-> > qemu-system-i386: hw/core/qdev.c:439: qdev_assert_realized_properly:
-> > Assertion `dev->realized' failed.
-> >
-> > dev->id is NULL. The failing device is:
-> > (gdb) p *dev.parent_obj.class.type
-> > $12 = {name = 0x555556207770 "cfi.pflash01",
-> >
+In 2019, we introduced pin_user_pages*() and now we are converting
+get_user_pages*() to the new API as appropriate. [1] & [2] could
+be referred for more information. This is case 5 as per document [1].
 
-Having commented out the call to xen_be_init() entirely (and xen_bus_init() for good measure) I also get this assertion failure, so
-I don't think is related.
+As discussed, pages need to be marked as dirty before unpinned it.
 
-  Paul
+Previously, if lock_pages() end up partially mapping pages, it used
+to return -ERRNO due to which unlock_pages() have to go through
+each pages[i] till *nr_pages* to validate them. This can be avoided
+by passing correct number partially mapped pages & -ERRNO separately
+while returning from lock_pages() due to error.
+With this fix unlock_pages() doesn't need to validate pages[i] till
+*nr_pages* for error scenario.
 
+[1] Documentation/core-api/pin_user_pages.rst
+
+[2] "Explicit pinning of user-space pages":
+        https://lwn.net/Articles/807108/
+
+Signed-off-by: Souptick Joarder <jrdr.linux@gmail.com>
+Cc: John Hubbard <jhubbard@nvidia.com>
+Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+---
+ drivers/xen/privcmd.c | 33 +++++++++++++++++++--------------
+ 1 file changed, 19 insertions(+), 14 deletions(-)
+
+diff --git a/drivers/xen/privcmd.c b/drivers/xen/privcmd.c
+index a250d11..eea90cd 100644
+--- a/drivers/xen/privcmd.c
++++ b/drivers/xen/privcmd.c
+@@ -580,25 +580,30 @@ static long privcmd_ioctl_mmap_batch(
+ 
+ static int lock_pages(
+ 	struct privcmd_dm_op_buf kbufs[], unsigned int num,
+-	struct page *pages[], unsigned int nr_pages)
++	struct page *pages[], unsigned int nr_pages, int *errno)
+ {
+ 	unsigned int i;
++	int pinned = 0, rc = 0;
+ 
+ 	for (i = 0; i < num; i++) {
+ 		unsigned int requested;
+-		int pinned;
+ 
++		rc += pinned;
+ 		requested = DIV_ROUND_UP(
+ 			offset_in_page(kbufs[i].uptr) + kbufs[i].size,
+ 			PAGE_SIZE);
+-		if (requested > nr_pages)
+-			return -ENOSPC;
++		if (requested > nr_pages) {
++			*errno = -ENOSPC;
++			return rc;
++		}
+ 
+-		pinned = get_user_pages_fast(
++		pinned = pin_user_pages_fast(
+ 			(unsigned long) kbufs[i].uptr,
+ 			requested, FOLL_WRITE, pages);
+-		if (pinned < 0)
+-			return pinned;
++		if (pinned < 0) {
++			*errno = pinned;
++			return rc;
++		}
+ 
+ 		nr_pages -= pinned;
+ 		pages += pinned;
+@@ -613,11 +618,7 @@ static void unlock_pages(struct page *pages[], unsigned int nr_pages)
+ 
+ 	if (!pages)
+ 		return;
+-
+-	for (i = 0; i < nr_pages; i++) {
+-		if (pages[i])
+-			put_page(pages[i]);
+-	}
++	unpin_user_pages_dirty_lock(pages, nr_pages, 1);
+ }
+ 
+ static long privcmd_ioctl_dm_op(struct file *file, void __user *udata)
+@@ -630,6 +631,7 @@ static long privcmd_ioctl_dm_op(struct file *file, void __user *udata)
+ 	struct xen_dm_op_buf *xbufs = NULL;
+ 	unsigned int i;
+ 	long rc;
++	int errno = 0;
+ 
+ 	if (copy_from_user(&kdata, udata, sizeof(kdata)))
+ 		return -EFAULT;
+@@ -683,9 +685,12 @@ static long privcmd_ioctl_dm_op(struct file *file, void __user *udata)
+ 		goto out;
+ 	}
+ 
+-	rc = lock_pages(kbufs, kdata.num, pages, nr_pages);
+-	if (rc)
++	rc = lock_pages(kbufs, kdata.num, pages, nr_pages, &errno);
++	if (errno < 0) {
++		nr_pages = rc;
++		rc = errno;
+ 		goto out;
++	}
+ 
+ 	for (i = 0; i < kdata.num; i++) {
+ 		set_xen_guest_handle(xbufs[i].h, kbufs[i].uptr);
+-- 
+1.9.1
 
 
