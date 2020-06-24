@@ -7,81 +7,90 @@ X-Spam-Status: No, score=-0.8 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4DD4DC433DF
-	for <xen-devel@archiver.kernel.org>; Wed, 24 Jun 2020 12:53:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A1B03C433DF
+	for <xen-devel@archiver.kernel.org>; Wed, 24 Jun 2020 12:53:50 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1FC4920663
-	for <xen-devel@archiver.kernel.org>; Wed, 24 Jun 2020 12:53:33 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 6CF9E20663
+	for <xen-devel@archiver.kernel.org>; Wed, 24 Jun 2020 12:53:50 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="kEUHQYow"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1FC4920663
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Ifpt5u8E"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6CF9E20663
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jo4tz-00023p-Bd; Wed, 24 Jun 2020 12:53:19 +0000
+	id 1jo4uL-00027o-KD; Wed, 24 Jun 2020 12:53:41 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=4VPr=AF=gmail.com=tamas.k.lengyel@srs-us1.protection.inumbo.net>)
- id 1jo4tx-00023Y-RV
- for xen-devel@lists.xenproject.org; Wed, 24 Jun 2020 12:53:17 +0000
-X-Inumbo-ID: ac0a6550-b619-11ea-8496-bc764e2007e4
-Received: from mail-wr1-x441.google.com (unknown [2a00:1450:4864:20::441])
+ <SRS0=8Mms=AF=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
+ id 1jo4uK-00027e-F4
+ for xen-devel@lists.xenproject.org; Wed, 24 Jun 2020 12:53:40 +0000
+X-Inumbo-ID: b995b67a-b619-11ea-bb8b-bc764e2007e4
+Received: from mail-ej1-x644.google.com (unknown [2a00:1450:4864:20::644])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id ac0a6550-b619-11ea-8496-bc764e2007e4;
- Wed, 24 Jun 2020 12:53:17 +0000 (UTC)
-Received: by mail-wr1-x441.google.com with SMTP id a6so2181660wrm.4
- for <xen-devel@lists.xenproject.org>; Wed, 24 Jun 2020 05:53:16 -0700 (PDT)
+ id b995b67a-b619-11ea-bb8b-bc764e2007e4;
+ Wed, 24 Jun 2020 12:53:39 +0000 (UTC)
+Received: by mail-ej1-x644.google.com with SMTP id q19so2325041eja.7
+ for <xen-devel@lists.xenproject.org>; Wed, 24 Jun 2020 05:53:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=erJri2IUc1afPi5W9caFzfb9aRxEdZUWLTxuf4CtQkw=;
- b=kEUHQYow9kKir4HNF8IYSdtmgawte+egcY3TevRLt1W/9f9rrlbKAuEhMpzgtUklKO
- DGC0qmKdq3dT+tREc6lic0R1NtJa+8OD3qSZKYD9fMRkTudBMyrK5gRJmMIC9hLozvTm
- fgR8b/diZSY99jyd+wOtcv67SzODaao6f1gnQG6R5FoWfMu4ef8TsHi5h9ODUQq7jzcA
- p10YfbDUvD5kBsD0gab+G9btUhqYFwzp2n003WfMZK2g9qjMqvJ4l57Cehsj1Jcl+CZ/
- +OOMnUXN67jxbSs2TPLqXLDuX/RmslTRaxUXnfYEybH+6o9FUiN66VUer6k8hjs8JJQ7
- 1tTQ==
+ h=from:reply-to:to:cc:references:in-reply-to:subject:date:message-id
+ :mime-version:content-transfer-encoding:content-language
+ :thread-index; bh=vyVAL48RnupCHLHRT6ZRkkhf9C+oMNXsUB9p67p/yAI=;
+ b=Ifpt5u8EnUwIyONleLlEdx3xjRDuRDA3X9pGVyAKX970WS1NHchXayju+QhtlBkK8Y
+ wa5L4gPtnjboPQcX3Wqj6N5EV+xbaIauZFmS7Z4ZTjs7B7TiPHXffE7x/h5HHEonJkF6
+ yl+EUPyzMbsj+H8ibCExZF6ma5BVdpTciSKu2QxAlFVqq4LXxrLUvfSxsMwV4JKWBNii
+ KEOLEz8LkKxVdZPoL3CTbYySnTGtWpOqeUgGJRL8C1tnLoj8Nvan2l/1/p5T/cmGSECI
+ qrBSmLCaoTT17sq/3TlfE9z4iwtfVU1uBeS+1SXg4P/zxvekIICsCKkAVFApc3onp42O
+ 8Ghw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=erJri2IUc1afPi5W9caFzfb9aRxEdZUWLTxuf4CtQkw=;
- b=Ix78L036PrujqQrIS9wEPi/YH7tXAopFpguVURXVLqUru0LaFMRQaTY0W5XzIYomOF
- 2eB+rw/Qppuo2uLBinIiVWJI0Yc4fonioBiU7uLsIEbCuKClNr2NlqGW+cg67rjzQjKu
- mznIYOUwMduWJNE66dHmtPrYh+rgNthmye75wa1uuafXyB6u1GHc9KX3i75UcW7wH6O9
- Sy9VY2oou/KH5wpqdCcT2RtOpmHACT/13ImjvQMAUpRzZOml2RpysS++SU8yCzCLZotU
- 66i2hCQCBPfrx93FW6IboKFJEc7qeN7aBtlMFV3unV11Q9mTXlLmTc9nwfN/JINiz/dm
- fiaw==
-X-Gm-Message-State: AOAM5307IxvXMh/N9eHpxQ8kb8BtnLJwdJlT+80BcT3124iGTA4eotdK
- StcgztmJ0k9zBIVYrDUNT5myfV66zK/g1VcqvU4=
-X-Google-Smtp-Source: ABdhPJyYZjpyarrBmuEOQEoSXgv0/j0u4MKq4eiYYARiftGnLceMfY2jZQwxLUpHIEM0C69qzqVH7XMR5hNIOccpnTg=
-X-Received: by 2002:a5d:44d1:: with SMTP id z17mr26139887wrr.259.1593003195949; 
- Wed, 24 Jun 2020 05:53:15 -0700 (PDT)
+ h=x-gm-message-state:from:reply-to:to:cc:references:in-reply-to
+ :subject:date:message-id:mime-version:content-transfer-encoding
+ :content-language:thread-index;
+ bh=vyVAL48RnupCHLHRT6ZRkkhf9C+oMNXsUB9p67p/yAI=;
+ b=cXaCTv4AWZyZuEqxyKsHLKhTI6HNxYGWuoEDaKyEF0e6kzi9jcy/k/XvuiIa/uXFHJ
+ FVgflrmFp1BLgDeYA7LZ2jZdh3nP/O4OdGiUFwchKYeB95XDrkU/oqdcswWNM8kO+Ek4
+ 4SYPtYovxUxjCdsuoyCCyoTu05UDdLNytxUfbRyd2/qarD5oDdfn85lymZyhsVe5xHZ4
+ PDYkS8v0xkpipW0kvkmwT3vxBX8IAuaIIuyGnk+6hL+V/V8DLMW8xqhd+08pBRmu0Mmo
+ JVhU3S0GS04z6n/wFVdFbMXNLzlkkL55mExXKCHfNKz6HHC2LPs4ZPjLAurbMR9TRzki
+ 8oPQ==
+X-Gm-Message-State: AOAM533gDGhVaUJBWtL67Nke3qoxtir8WKUgbhg+C0TOpoX3ibvdAjyo
+ 5CHYtJu1pP1l/Hq6E5xF8cg=
+X-Google-Smtp-Source: ABdhPJzq8f1yFiZgimYjAXlmWVdkv9I+EoR2QaHjKoznGfRot8xlkTiizL3Znd2qxyYiucraoJzOIQ==
+X-Received: by 2002:a17:906:8392:: with SMTP id
+ p18mr15846296ejx.24.1593003218882; 
+ Wed, 24 Jun 2020 05:53:38 -0700 (PDT)
+Received: from CBGR90WXYV0 (54-240-197-236.amazon.com. [54.240.197.236])
+ by smtp.gmail.com with ESMTPSA id q3sm16667175eds.0.2020.06.24.05.53.37
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Wed, 24 Jun 2020 05:53:38 -0700 (PDT)
+From: Paul Durrant <xadimgnik@gmail.com>
+X-Google-Original-From: "Paul Durrant" <paul@xen.org>
+To: "'Jan Beulich'" <jbeulich@suse.com>,
+	"'Julien Grall'" <julien@xen.org>
+References: <20200623135246.66170-1-roger.pau@citrix.com>
+ <044c278b-e0df-e389-b21a-66c7307997c4@suse.com>
+ <20200623173150.GV735@Air-de-Roger>
+ <3ea0ff91-8e5c-701c-ee31-4140b247f3c9@suse.com>
+ <4651b23b-ca82-a478-debd-c20cdcd3facd@xen.org>
+ <ccd01544-04f7-8e34-dfdc-ccf373db3996@suse.com>
+ <6195142d-6fa3-474d-3070-f43105742e79@xen.org>
+ <5193dc6d-0a4c-4e1b-d089-9ba359c19e3e@suse.com>
+In-Reply-To: <5193dc6d-0a4c-4e1b-d089-9ba359c19e3e@suse.com>
+Subject: RE: [PATCH for-4.14] mm: fix public declaration of struct
+ xen_mem_acquire_resource
+Date: Wed, 24 Jun 2020 13:53:37 +0100
+Message-ID: <000b01d64a26$7aacb580$70062080$@xen.org>
 MIME-Version: 1.0
-References: <122238637.9820857.1592523264685.JavaMail.zimbra@cert.pl>
- <1005194077.9820950.1592523663199.JavaMail.zimbra@cert.pl>
- <4e040500-0532-2231-f5b7-c61e97a0a0c5@suse.com>
- <800738193.11403725.1592836530558.JavaMail.zimbra@cert.pl>
- <87576264-e7df-2590-f141-351d76baac7a@suse.com>
- <1130937743.11428389.1592841763323.JavaMail.zimbra@cert.pl>
- <5b7dd58f-2dc1-32bc-3add-d896631734a4@suse.com>
- <901046162.11470361.1592874264410.JavaMail.zimbra@cert.pl>
- <32b7234b-dc64-a0ea-2c5c-448bcec44c34@suse.com>
- <bfa3d028-58de-eb99-fcff-dfc4cf1b93f1@citrix.com>
- <afb85b23-40d4-c054-a246-2741b7ce4208@suse.com>
- <daef0e13-eb49-fa79-30e3-67b49fb57b71@citrix.com>
-In-Reply-To: <daef0e13-eb49-fa79-30e3-67b49fb57b71@citrix.com>
-From: Tamas K Lengyel <tamas.k.lengyel@gmail.com>
-Date: Wed, 24 Jun 2020 06:52:39 -0600
-Message-ID: <CABfawh=uri_X1aGseJqfsWN9DyB_3mycPwbQwOaLPjB5xX4hnA@mail.gmail.com>
-Subject: Re: [PATCH v2 4/7] x86/vmx: add do_vmtrace_op
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain;
+	charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+X-Mailer: Microsoft Outlook 16.0
+Content-Language: en-gb
+Thread-Index: AQJU5g6mkfXrDLlGsNt841F72IbClgGrea6PAfx/VmoCRJsRMgEBRCcgApo72pAB5Qr3iwGBPLtyp4MNv4A=
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -92,142 +101,107 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Kevin Tian <kevin.tian@intel.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Jun Nakajima <jun.nakajima@intel.com>, Wei Liu <wl@xen.org>,
- =?UTF-8?B?TWljaGHFgiBMZXN6Y3p5xYRza2k=?= <michal.leszczynski@cert.pl>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, "Kang, Luwei" <luwei.kang@intel.com>,
- Jan Beulich <jbeulich@suse.com>, Xen-devel <xen-devel@lists.xenproject.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+Reply-To: paul@xen.org
+Cc: 'Stefano Stabellini' <sstabellini@kernel.org>, 'Wei Liu' <wl@xen.org>,
+ 'Andrew Cooper' <andrew.cooper3@citrix.com>,
+ 'Ian Jackson' <ian.jackson@eu.citrix.com>,
+ 'George Dunlap' <george.dunlap@citrix.com>, xen-devel@lists.xenproject.org,
+ =?UTF-8?Q?'Roger_Pau_Monn=C3=A9'?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Wed, Jun 24, 2020 at 6:40 AM Andrew Cooper <andrew.cooper3@citrix.com> w=
-rote:
->
-> On 24/06/2020 11:03, Jan Beulich wrote:
-> > On 23.06.2020 19:24, Andrew Cooper wrote:
-> >> On 23/06/2020 09:51, Jan Beulich wrote:
-> >>> On 23.06.2020 03:04, Micha=C5=82 Leszczy=C5=84ski wrote:
-> >>>> ----- 22 cze 2020 o 18:16, Jan Beulich jbeulich@suse.com napisa=C5=
-=82(a):
-> >>>>
-> >>>>> On 22.06.2020 18:02, Micha=C5=82 Leszczy=C5=84ski wrote:
-> >>>>>> ----- 22 cze 2020 o 17:22, Jan Beulich jbeulich@suse.com napisa=C5=
-=82(a):
-> >>>>>>> On 22.06.2020 16:35, Micha=C5=82 Leszczy=C5=84ski wrote:
-> >>>>>>>> ----- 22 cze 2020 o 15:25, Jan Beulich jbeulich@suse.com napisa=
-=C5=82(a):
-> >>>>>>>>> Is any of what you do in this switch() actually legitimate with=
-out
-> >>>>>>>>> hvm_set_vmtrace_pt_size() having got called for the guest? From
-> >>>>>>>>> remarks elsewhere I imply you expect the param that you current=
-ly
-> >>>>>>>>> use to be set upon domain creation time, but at the very least =
-the
-> >>>>>>>>> potentially big buffer should imo not get allocated up front, b=
-ut
-> >>>>>>>>> only when tracing is to actually be enabled.
-> >>>>>>>> Wait... so you want to allocate these buffers in runtime?
-> >>>>>>>> Previously we were talking that there is too much runtime logic
-> >>>>>>>> and these enable/disable hypercalls should be stripped to absolu=
-te
-> >>>>>>>> minimum.
-> >>>>>>> Basic arrangements can be made at domain creation time. I don't
-> >>>>>>> think though that it would be a good use of memory if you
-> >>>>>>> allocated perhaps many gigabytes of memory just for possibly
-> >>>>>>> wanting to enable tracing on a guest.
-> >>>>>>>
-> >>>>>> From our previous conversations I thought that you want to have
-> >>>>>> as much logic moved to the domain creation as possible.
+> -----Original Message-----
+> From: Jan Beulich <jbeulich@suse.com>
+> Sent: 24 June 2020 13:52
+> To: Julien Grall <julien@xen.org>
+> Cc: Roger Pau Monn=C3=A9 <roger.pau@citrix.com>; =
+xen-devel@lists.xenproject.org; paul@xen.org; Andrew
+> Cooper <andrew.cooper3@citrix.com>; George Dunlap =
+<george.dunlap@citrix.com>; Ian Jackson
+> <ian.jackson@eu.citrix.com>; Stefano Stabellini =
+<sstabellini@kernel.org>; Wei Liu <wl@xen.org>
+> Subject: Re: [PATCH for-4.14] mm: fix public declaration of struct =
+xen_mem_acquire_resource
+>=20
+> On 24.06.2020 14:47, Julien Grall wrote:
+> > Hi,
+> >
+> > On 24/06/2020 13:08, Jan Beulich wrote:
+> >> On 24.06.2020 12:52, Julien Grall wrote:
+> >>> Hi Jan,
+> >>>
+> >>> On 24/06/2020 11:05, Jan Beulich wrote:
+> >>>> On 23.06.2020 19:32, Roger Pau Monn=C3=A9 wrote:
+> >>>>> On Tue, Jun 23, 2020 at 05:04:53PM +0200, Jan Beulich wrote:
+> >>>>>> On 23.06.2020 15:52, Roger Pau Monne wrote:
+> >>>>>>> XENMEM_acquire_resource and it's related structure is =
+currently inside
+> >>>>>>> a __XEN__ or __XEN_TOOLS__ guarded section to limit it's scope =
+to the
+> >>>>>>> hypervisor or the toolstack only. This is wrong as the =
+hypercall is
+> >>>>>>> already being used by the Linux kernel at least, and as such =
+needs to
+> >>>>>>> be public.
 > >>>>>>
-> >>>>>> Thus, a parameter "vmtrace_pt_size" was introduced. By default it'=
-s
-> >>>>>> zero (=3D disabled), if you set it to a non-zero value, then trace=
- buffers
-> >>>>>> of given size will be allocated for the domain and you have possib=
-ility
-> >>>>>> to use ipt_enable/ipt_disable at any moment.
+> >>>>>> Actually - how does this work for the Linux kernel, seeing
 > >>>>>>
-> >>>>>> This way the runtime logic is as thin as possible. I assume user k=
-nows
-> >>>>>> in advance whether he/she would want to use external monitoring wi=
-th IPT
-> >>>>>> or not.
-> >>>>> Andrew - I think you requested movement to domain_create(). Could
-> >>>>> you clarify if indeed you mean to also allocate the big buffers
-> >>>>> this early?
-> >>>> I would like to recall what Andrew wrote few days ago:
+> >>>>>>       rc =3D rcu_lock_remote_domain_by_id(xmar.domid, &d);
+> >>>>>>       if ( rc )
+> >>>>>>           return rc;
+> >>>>>>
+> >>>>>>       rc =3D xsm_domain_resource_map(XSM_DM_PRIV, d);
+> >>>>>>       if ( rc )
+> >>>>>>           goto out;
+> >>>>>>
+> >>>>>> in the function?
+> >>>>>
+> >>>>> It's my understanding (I haven't tried to use that hypercall yet =
+on
+> >>>>> FreeBSD, so I cannot say I've tested it), that xmar.domid is the
+> >>>>> remote domain, which the functions locks and then uses
+> >>>>> xsm_domain_resource_map to check whether the current domain has
+> >>>>> permissions to do privileged operations against it.
 > >>>>
-> >>>> ----- 16 cze 2020 o 22:16, Andrew Cooper andrew.cooper3@citrix.com w=
-rote:
-> >>>>> Xen has traditionally opted for a "and turn this extra thing on
-> >>>>> dynamically" model, but this has caused no end of security issues a=
-nd
-> >>>>> broken corner cases.
-> >>>>>
-> >>>>> You can see this still existing in the difference between
-> >>>>> XEN_DOMCTL_createdomain and XEN_DOMCTL_max_vcpus, (the latter being
-> >>>>> required to chose the number of vcpus for the domain) and we're mak=
-ing
-> >>>>> good progress undoing this particular wart (before 4.13, it was
-> >>>>> concerning easy to get Xen to fall over a NULL d->vcpu[] pointer by
-> >>>>> issuing other hypercalls between these two).
-> >>>>>
-> >>>>> There is a lot of settings which should be immutable for the lifeti=
-me of
-> >>>>> the domain, and external monitoring looks like another one of these=
-.
-> >>>>> Specifying it at createdomain time allows for far better runtime
-> >>>>> behaviour (you are no longer in a situation where the first time yo=
-u try
-> >>>>> to turn tracing on, you end up with -ENOMEM because another VM boot=
-ed in
-> >>>>> the meantime and used the remaining memory), and it makes for rathe=
-r
-> >>>>> more simple code in Xen itself (at runtime, you can rely on it havi=
-ng
-> >>>>> been set up properly, because a failure setting up will have killed=
- the
-> >>>>> domain already).
-> >>>>>
-> >>>>> ...
-> >>>>>
-> >>>>> ~Andrew
-> >>>> according to this quote I've moved buffer allocation to the create_d=
-omain,
-> >>>> the updated version was already sent to the list as patch v3.
-> >>> I'd still like to see an explicit confirmation by him that this
-> >>> use of memory is indeed what he has intended. There are much smaller
-> >>> amounts of memory which we allocate on demand, just to avoid
-> >>> allocating some without then ever using it.
-> >> PT is a debug/diagnostic tool.  Its not something you'd run in
-> >> production against a production VM.
-> > Well, the suggested use with introspection made me assume differently.
-> > If this is (now and forever) truly debug/diag only, so be it then.
->
-> At the end of the day, it is a fine grain profiling tool, meaning that
-> it is not used in the common case.
->
-> The usecase presented is for fuzzing, using the execution trace
-> generated by the CPU, rather than the current scheme which allegedly
-> involves shuffling breakpoints around.
+> >>>> Yes, but that's a tool stack operation, not something the kernel
+> >>>> would do all by itself. The kernel would only ever pass =
+DOMID_SELF
+> >>>> (or the actual local domain ID), I would think.
+> >>>
+> >>> You can't issue that hypercall directly from userspace because you =
+need
+> >>> to map the page in the physical address space of the toolstack =
+domain.
+> >>>
+> >>> So the kernel has to act as the proxy for the hypercall. This is
+> >>> implemented as mmap() in Linux.
+> >>
+> >> Oh, and there's no generic wrapping available here, unlike for
+> >> dmop.
+> >
+> > It is not clear to me the sort of generic wrapping you are referring =
+to.
+> > Are you referring to a stable interface for an application?
+> >
+> >> Makes me wonder whether, for this purpose, there should
+> >> be (have been) a new dmop with identical functionality, to
+> >> allow such funneling.
+> >
+> > I am not sure how using DMOP will allow us to implement it fully in
+> > userspace. Do you mind expanding it?
+>=20
+> dmop was designed so that a kernel proxying requests wouldn't need
+> updating for every new request added to the interface. If the
+> request here was made through a new dmop, the kernel would never
+> have had a need to know of an interface structure that's of no
+> interest to it, but only to the tool stack.
 
-That's indeed the usecase we are looking to use it for. But there is
-also some experimental malware analysis scenarios it is targeted for
-which is what I believe the CERT folks are mostly interested in, like
-https://www.vmray.com/cyber-security-blog/back-to-the-past-using-intels-pro=
-cessor-trace-for-enhanced-analysis.
-I could also imagine this to be useful for IDS/IPS solutions like what
-Bitdefender is building but I'm just speculating since the overhead
-might be prohibitive for that use-case. I would consider all these
-scenarios experimental at this point and absolutely not something to
-enable by default. If someone presents a need for this to be supported
-on production VMs that require turning it on/off at runtime not
-knowing whether the feature will be used when the domain is created we
-can certainly revisit the topic. But I don't expect that to happen any
-time soon, if at all.
+How would the pages get mapped into process address space if the kernel =
+doesn't know what's being done?
 
-Tamas
+  Paul
+
+>=20
+> Jan
+
 
