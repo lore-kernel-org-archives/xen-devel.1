@@ -2,63 +2,84 @@ Return-Path: <SRS0=ZzRU=AG=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.8 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
+	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 60BB2C433E0
-	for <xen-devel@archiver.kernel.org>; Thu, 25 Jun 2020 07:05:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 39012C433E0
+	for <xen-devel@archiver.kernel.org>; Thu, 25 Jun 2020 07:27:56 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 386BE20578
-	for <xen-devel@archiver.kernel.org>; Thu, 25 Jun 2020 07:05:43 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 386BE20578
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id EF3A8206C3
+	for <xen-devel@archiver.kernel.org>; Thu, 25 Jun 2020 07:27:55 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="a7UwVx7W"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EF3A8206C3
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1joLwy-0004Ks-Nl; Thu, 25 Jun 2020 07:05:32 +0000
+	id 1joMIJ-00063u-Hp; Thu, 25 Jun 2020 07:27:35 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=Bi8a=AG=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1joLwx-0004Kk-FG
- for xen-devel@lists.xenproject.org; Thu, 25 Jun 2020 07:05:31 +0000
-X-Inumbo-ID: 41291116-b6b2-11ea-b7bb-bc764e2007e4
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ (envelope-from <SRS0=HW/K=AG=gmail.com=persaur@srs-us1.protection.inumbo.net>)
+ id 1joMII-00063p-P8
+ for xen-devel@lists.xenproject.org; Thu, 25 Jun 2020 07:27:34 +0000
+X-Inumbo-ID: 5638fa82-b6b5-11ea-8496-bc764e2007e4
+Received: from mail-qt1-x843.google.com (unknown [2607:f8b0:4864:20::843])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 41291116-b6b2-11ea-b7bb-bc764e2007e4;
- Thu, 25 Jun 2020 07:05:30 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 766B7AF23;
- Thu, 25 Jun 2020 07:05:29 +0000 (UTC)
-Subject: Re: [XEN RFC for-4.14] Re: use of "stat -"
-To: Jason Andryuk <jandryuk@gmail.com>, Ian Jackson <ian.jackson@citrix.com>
-References: <3bfd6384-fcaf-c74a-e560-a35aafa06a43@suse.com>
- <20200512141947.yqx4gmbvqs4grx5g@liuwe-devbox-debian-v2.j3c5onc20sse1dnehy4noqpfcg.zx.internal.cloudapp.net>
- <fa507eab-547a-c0fb-9620-825aba5f55b2@suse.com>
- <4b90b635-84bb-e827-d52e-dfe1ebdb4e4d@citrix.com>
- <814db557-4f6a-020d-9f71-4ee3724981e3@suse.com>
- <CAKf6xps0XDRTUJsbE1zHpn=h98yTN+Y1DzaNpVGzhhJGVccRRw@mail.gmail.com>
- <20200512195005.GA96154@mattapan.m5p.com>
- <049e0022-f9c1-6dc9-3360-d25d88eeb97f@citrix.com>
- <20200512225458.GA1530@mattapan.m5p.com>
- <24253.9543.974853.499775@mariner.uk.xensource.com>
- <0b449d5a-9629-8e41-5354-b985a063eba4@suse.com>
- <24307.32018.502303.817846@mariner.uk.xensource.com>
- <CAKf6xpvLrXkBR6okFQ9u=9GfN-h_XHeLtwQV9pBRRAFXmbwVsQ@mail.gmail.com>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <6cd9c568-84b9-8304-d56f-99d628d945a1@suse.com>
-Date: Thu, 25 Jun 2020 09:05:31 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.9.0
-MIME-Version: 1.0
-In-Reply-To: <CAKf6xpvLrXkBR6okFQ9u=9GfN-h_XHeLtwQV9pBRRAFXmbwVsQ@mail.gmail.com>
+ id 5638fa82-b6b5-11ea-8496-bc764e2007e4;
+ Thu, 25 Jun 2020 07:27:34 +0000 (UTC)
+Received: by mail-qt1-x843.google.com with SMTP id d27so3901141qtg.4
+ for <xen-devel@lists.xenproject.org>; Thu, 25 Jun 2020 00:27:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=content-transfer-encoding:from:mime-version:subject:date:message-id
+ :references:cc:in-reply-to:to;
+ bh=eEZh0tTaT8zh5LL7N/hn9RvEV8NMH79zD1VRD/2Jbbw=;
+ b=a7UwVx7WYGVzQyi5Hhk8M4DYU2kStSPTaeFf3iil0fkV5B6MyjeeVVYX9BlmbojEcc
+ n/aRI0cHRhjpxZS1EagCkhDj2uS5ZisK6k/xg3ineSMdK6o6ScqR89yOTpVEpauhhOBd
+ KGwpSIsEn2IBrXEPM5dEAGt4eMvX9GSh+XxdMHh3AW7fpQLZU0REmV3+TkNSkKWIgnN0
+ VB8QID3QcpuC3OkdD+2KhC/c2Fb9G425sqltJ/Tdm+faX/cNnKDshgTiGnjwlDSh0hoT
+ DQbNndO7UlcrSvp+uK4D0QqnaV/4Wp0ye+9CTcKat7lRL+Lv8cFxcgF3PTG7EQuXgO/J
+ g1rQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:content-transfer-encoding:from:mime-version
+ :subject:date:message-id:references:cc:in-reply-to:to;
+ bh=eEZh0tTaT8zh5LL7N/hn9RvEV8NMH79zD1VRD/2Jbbw=;
+ b=aeq/sRyIaTydk7pCy4/jW8Pe1cxAcmgDR3RGkABkiBwQY70bN8g+ZEAt4BkhtSYgBS
+ 3MDmLWvXxJ7Rye7TNOrplTpGgyb44EQixcwAPidBMd1yK7HXgpPKu+/joraEE1g7ozCH
+ mdt6RMVlHDa/t7s/Uj5oMI9d3+Rv1mruZB1FLN+0qnHzBWok3oLkb5Swq8X5AAqPyP9N
+ d0Jrf4eIrWlaRTrJ4oNHTwhW8YFxgOZHJbH1ikgycNfqf6KlkSSXqprhZEXDYfWTNLLS
+ jMXyEjI/UCL8lYJ+v9zdsrq+H1TsV30uhvKv1W9YyT8dO5ujMsPvzqEpk9wZ9YOS69Hl
+ zEyA==
+X-Gm-Message-State: AOAM5330cIxUkvdzFUfnoN+YVATbLNb9dmuejo2jhRvfHGzo7AxGVNO+
+ aqkwYUYH3f198wZA4aTWpmY=
+X-Google-Smtp-Source: ABdhPJyJyAn/vGNlypE6poVXGWQBftOZ9JkatcsvllRbhBckUmpXv1zurNoWnMAGiQzC/suVNhrBHA==
+X-Received: by 2002:ac8:8a4:: with SMTP id v33mr21911252qth.392.1593070053657; 
+ Thu, 25 Jun 2020 00:27:33 -0700 (PDT)
+Received: from ?IPv6:2607:fb90:e854:3fa:dec:cecd:b019:e1d1?
+ ([2607:fb90:e854:3fa:dec:cecd:b019:e1d1])
+ by smtp.gmail.com with ESMTPSA id n63sm5326271qkn.104.2020.06.25.00.27.32
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 25 Jun 2020 00:27:32 -0700 (PDT)
 Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+From: Rich Persaud <persaur@gmail.com>
+Mime-Version: 1.0 (1.0)
+Subject: Re: [XEN RFC for-4.14] Re: use of "stat -"
+Date: Thu, 25 Jun 2020 03:27:31 -0400
+Message-Id: <D79E1F1A-AB75-40F4-A6B3-AF985E6458BB@gmail.com>
+References: <CAKf6xpvLrXkBR6okFQ9u=9GfN-h_XHeLtwQV9pBRRAFXmbwVsQ@mail.gmail.com>
+In-Reply-To: <CAKf6xpvLrXkBR6okFQ9u=9GfN-h_XHeLtwQV9pBRRAFXmbwVsQ@mail.gmail.com>
+To: Jason Andryuk <jandryuk@gmail.com>, Ian Jackson <ian.jackson@citrix.com>,
+ =?utf-8?Q?Marek_Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>, 
+ Jan Beulich <JBeulich@suse.com>
+X-Mailer: iPhone Mail (17F75)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,38 +90,42 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Andrew Cooper <Andrew.Cooper3@citrix.com>,
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Wei Liu <wl@xen.org>, Elliott Mitchell <ehem+xen@m5p.com>,
+ Elliott Mitchell <ehem+xen@m5p.com>, Wei Liu <wl@xen.org>,
  Paul Durrant <paul@xen.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 25.06.2020 04:37, Jason Andryuk wrote:
-> On Wed, Jun 24, 2020 at 12:19 PM Ian Jackson <ian.jackson@citrix.com> wrote:
->>
+On Jun 24, 2020, at 22:39, Jason Andryuk <jandryuk@gmail.com> wrote:
+>=20
+> =EF=BB=BFOn Wed, Jun 24, 2020 at 12:19 PM Ian Jackson <ian.jackson@citrix.=
+com> wrote:
+>>=20
 >> Jan Beulich writes ("Re: use of "stat -""):
->>> [CAUTION - EXTERNAL EMAIL] DO NOT reply, click links, or open attachments unless you have verified the sender and know the content is safe.
->>> On 14.05.2020 13:02, Ian Jackson wrote:
->>>> I've read this thread.  Jan, I'm sorry that this causes you
->>>> inconvenience.  I'm hoping it won't come down to a choice between
->>>> supporting people who want to ship a dom0 without perl, and people who
->>>> want a dom0 using more-than-a-decade-old coreutils.
->>>>
->>>> Jan, can you tell me what the output is of this on your ancient
->>>> system:
->>>>
->>>>   $ rm -f t
->>>>   $ >t
->>>>   $ exec 3<t
->>>>   $ stat -L -c '%F %i' /dev/stdin <&3
->>>>   regular empty file 393549
->>>>   $ rm t
->>>>   $ stat -L -c '%F %i' /dev/stdin <&3
->>>>   regular empty file 393549
->>>>   $ strace -ou stat -L -c '%F %i' /dev/stdin <&3
->>>>   $
->>>
+>>> [CAUTION - EXTERNAL EMAIL] DO NOT reply, click links, or open attachment=
+s unless you have verified the sender and know the content is safe.
+>>>> On 14.05.2020 13:02, Ian Jackson wrote:
+>>>>> I've read this thread.  Jan, I'm sorry that this causes you
+>>>>> inconvenience.  I'm hoping it won't come down to a choice between
+>>>>> supporting people who want to ship a dom0 without perl, and people who=
+
+>>>>> want a dom0 using more-than-a-decade-old coreutils.
+>>>>>=20
+>>>>> Jan, can you tell me what the output is of this on your ancient
+>>>>> system:
+>>>>>=20
+>>>>>  $ rm -f t
+>>>>>  $ >t
+>>>>>  $ exec 3<t
+>>>>>  $ stat -L -c '%F %i' /dev/stdin <&3
+>>>>>  regular empty file 393549
+>>>>>  $ rm t
+>>>>>  $ stat -L -c '%F %i' /dev/stdin <&3
+>>>>>  regular empty file 393549
+>>>>>  $ strace -ou stat -L -c '%F %i' /dev/stdin <&3
+>>>>>  $
+>>>=20
 >>> $ rm -f t
 >>> $ >t
 >>> $ exec 3<t
@@ -111,44 +136,43 @@ On 25.06.2020 04:37, Jason Andryuk wrote:
 >>> regular empty file 3380369
 >>> $ strace -ou stat -L -c '%F %i' /dev/stdin <&3
 >>> regular empty file 3380369
->>>
+>>>=20
 >>>> Also, the contents of the file "u" afterwards, please.
->>>
+>>>=20
 >>> Attached.
->>
+>>=20
 >> Thanks.
->>
+>>=20
 >> I think this means that `stat -' can be replaced by `stat /dev/stdin'.
->>
+>>=20
 >> This script is only run on Linux where /dev/stdin has existed
 >> basically forever.  The strace output shows
->>   stat("/dev/stdin", {st_mode=S_IFREG|0644, st_size=0, ...}) = 0
+>>  stat("/dev/stdin", {st_mode=3DS_IFREG|0644, st_size=3D0, ...}) =3D 0
 >> and the transcript shows that your stat(1) behaves as I hope.
->>
+>>=20
 >> Jan, will you send a patch ?  It is best if someone else but me writes
 >> it and tests it because then I am a "clean" reviewer.
-
-I was about to, when I saw this reply from Jason.
-
+>>=20
 >> Paul, supposing I review such a patch and say it is low risk, and we
 >> commit it by Friday, can it have a release-ack ?
-> 
+>=20
 > I was going to just write a patch to replace - with /dev/stdin and ask
 > Jan to test it.  When I opened the script, this comment was staring at
 > me:
->         # We can't just stat /dev/stdin or /proc/self/fd/$_lockfd or
->         # use bash's test -ef because those all go through what is
->         # actually a synthetic symlink in /proc and we aren't
->         # guaranteed that our stat(2) won't lose the race with an
->         # rm(1) between reading the synthetic link and traversing the
->         # file system to find the inum.
-> 
+>        # We can't just stat /dev/stdin or /proc/self/fd/$_lockfd or
+>        # use bash's test -ef because those all go through what is
+>        # actually a synthetic symlink in /proc and we aren't
+>        # guaranteed that our stat(2) won't lose the race with an
+>        # rm(1) between reading the synthetic link and traversing the
+>        # file system to find the inum.
+>=20
 > On my system:
 > $ ls -l /dev/stdin
 > lrwxrwxrwx 1 root root 15 Jun 24 21:13 /dev/stdin -> /proc/self/fd/0
 > $ ls -l /proc/self/fd/0 0<lockfile
-> lrwx------ 1 jason jason 64 Jun 24 21:26 /proc/self/fd/0 -> /home/jason/lockfile
-> 
+> lrwx------ 1 jason jason 64 Jun 24 21:26 /proc/self/fd/0 -> /home/jason/lo=
+ckfile
+>=20
 > stat /dev/stdin will work around the lack of `stat -` support, but it
 > doesn't address the race in the comment.  Is the comment valid?  How
 > would we prove there is no race for /dev/stdin?  And as a refresher,
@@ -156,9 +180,18 @@ I was about to, when I saw this reply from Jason.
 > no race since `stat /proc/self/fd/0` isn't a symlink lookup but just
 > accessing the already open fd via the proc special file? i.e.
 > equivalent to fstat.
+>=20
+> I've mentioned it before, but maybe we should just use the Qubes
+> patch.  It leaves the lockfile even when no-one is holding the lock,
+> but it simplifies the code and sidesteps the issues we are discussing
+> here.
+> https://github.com/QubesOS/qubes-vmm-xen/blob/xen-4.13/patch-tools-hotplug=
+-drop-perl-usage-in-locking-mechanism.patch
 
-Looking at vfs_statx() in the kernel, I can't see any provisions to
-get at the data without traversing the specified path.
+Is there any practical downside to the Qubes patch, which is already deploye=
+d on production systems?  The complexity of other approaches has been reflec=
+ted in code and prior discussion.  If needed, the comments in the Qubes patc=
+h could be expanded, when merging that well-tested code into 4.14.
 
-Jan
+Rich=
 
