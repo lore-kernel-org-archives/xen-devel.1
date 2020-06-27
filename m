@@ -2,61 +2,65 @@ Return-Path: <SRS0=bI9w=AI=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.8 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A9159C433DF
-	for <xen-devel@archiver.kernel.org>; Sat, 27 Jun 2020 09:55:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4002FC433E1
+	for <xen-devel@archiver.kernel.org>; Sat, 27 Jun 2020 09:55:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6E3EB2088E
-	for <xen-devel@archiver.kernel.org>; Sat, 27 Jun 2020 09:55:56 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 10F522088E
+	for <xen-devel@archiver.kernel.org>; Sat, 27 Jun 2020 09:55:57 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="Dm0XF7tj"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6E3EB2088E
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="aFNlYAfD"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 10F522088E
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jp7Yh-00071n-GH; Sat, 27 Jun 2020 09:55:39 +0000
+	id 1jp7Yn-00072Q-06; Sat, 27 Jun 2020 09:55:45 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=M84L=AI=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1jp7Yg-00071i-CN
- for xen-devel@lists.xenproject.org; Sat, 27 Jun 2020 09:55:38 +0000
-X-Inumbo-ID: 5a2dc89a-b85c-11ea-bca7-bc764e2007e4
+ id 1jp7Yl-00071i-7W
+ for xen-devel@lists.xenproject.org; Sat, 27 Jun 2020 09:55:43 +0000
+X-Inumbo-ID: 5b952b42-b85c-11ea-bca7-bc764e2007e4
 Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 5a2dc89a-b85c-11ea-bca7-bc764e2007e4;
- Sat, 27 Jun 2020 09:55:37 +0000 (UTC)
+ id 5b952b42-b85c-11ea-bca7-bc764e2007e4;
+ Sat, 27 Jun 2020 09:55:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
- MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
+ Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=eTlQ0etwk8SLmWkjWs4iLvynA1H72wix6KqE6Ac6qr8=; b=Dm0XF7tjXr7hMvKpm71zQ1WMNx
- DNVy4MC2aLk57DJXpi7pST+WTNCpHi5MYgVBay6rqUSOE9lvuae/cBNLwqfyrMj64Nssa08IZcaWh
- kFuCGaKVIH5oCOjBRmcYQt54xt7TnUEg8C9P+IrzC1r5wWR7obc9SyRE0eJjH11oTIzo=;
+ bh=ToWAhOBizK7AhT+LuF1MG0+z4Ou3oX83o1ykrw66Sw8=; b=aFNlYAfDwg9xx6gyCp3FpqEA1c
+ /BkSNm2k9jy+KiZ58TVbt8HJ43i2+l8Ktp14blO3XovY8HAPgKRdE+usRG0n5gChvHCuaY3RdxpJw
+ xmOiW8j+/LhmrmYkyzumzSrSMYfE9flTbAm9+1/3E5F3bcDfhUKhsOoyRaLF2tzpgBmw=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1jp7Ye-0005pG-Pv; Sat, 27 Jun 2020 09:55:36 +0000
+ id 1jp7Yh-0005pb-EW; Sat, 27 Jun 2020 09:55:39 +0000
 Received: from 54-240-197-227.amazon.com ([54.240.197.227]
  helo=ufe34d9ed68d054.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1jp7Ye-00017R-Eb; Sat, 27 Jun 2020 09:55:36 +0000
+ id 1jp7Yh-00017R-55; Sat, 27 Jun 2020 09:55:39 +0000
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH v4 for-4.14 0/2] pvcalls: Reconciliate the spec and the
-Date: Sat, 27 Jun 2020 10:55:31 +0100
-Message-Id: <20200627095533.14145-1-julien@xen.org>
+Subject: [PATCH v4 for-4.14 2/2] pvcalls: Document correctly and explicitely
+ the padding for all arches
+Date: Sat, 27 Jun 2020 10:55:33 +0100
+Message-Id: <20200627095533.14145-3-julien@xen.org>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200627095533.14145-1-julien@xen.org>
+References: <20200627095533.14145-1-julien@xen.org>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,28 +81,119 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Julien Grall <jgrall@amazon.com>
 
-Hi all,
+The specification of pvcalls suggests there is padding for 32-bit x86
+at the end of most the structure. However, they are not described in
+in the public header.
 
-This is v4 to try to reconciliate the pvcalls spec and the header. The
-series gain an extra patch (#1) to make clear the header is just a
-reference.
+Because of that all the structures would be 32-bit aligned and not
+64-bit aligned for 32-bit x86.
 
-This series is candidate for 4.14 to avoid continuing to ship wrong
-header even they are just a reference.
+For all the other architectures supported (Arm and 64-bit x86), the
+structure are aligned to 64-bit because they contain uint64_t field.
+Therefore all the structures contain implicit padding.
 
-For all the changes see in each patch.
+Given the specification is authoriitative, the padding will the same for
+the all architectures. The potential breakage of compatibility is ought
+to be fine as pvcalls is still a tech preview.
 
-Best regards,
+As an aside, the padding sadly cannot be mandated to be 0 as they are
+already present. So it is not going to be possible to use the padding
+for extending a command in the future.
 
+Signed-off-by: Julien Grall <jgrall@amazon.com>
 
-Julien Grall (2):
-  pvcalls: Clearly spell out that the header is just a reference
-  pvcalls: Document correctly and explicitely the padding for all arches
+---
+    This wants to be included in Xen 4.14 to avoid more users to rely on
+    wrong public headers.
 
+    Changes in v4:
+        - Revert back to v1 for the patch and expand the commit message
+
+    Changes in v3:
+        - Use __i386__ rather than CONFIG_X86_32
+
+    Changes in v2:
+        - It is not possible to use the same padding for 32-bit x86 and
+        all the other supported architectures.
+---
  docs/misc/pvcalls.pandoc        | 8 --------
- xen/include/public/io/pvcalls.h | 7 +++++++
- 2 files changed, 7 insertions(+), 8 deletions(-)
+ xen/include/public/io/pvcalls.h | 4 ++++
+ 2 files changed, 4 insertions(+), 8 deletions(-)
 
+diff --git a/docs/misc/pvcalls.pandoc b/docs/misc/pvcalls.pandoc
+index 665dad556c39..971cd8f4b122 100644
+--- a/docs/misc/pvcalls.pandoc
++++ b/docs/misc/pvcalls.pandoc
+@@ -246,9 +246,7 @@ The format is defined as follows:
+     			uint32_t domain;
+     			uint32_t type;
+     			uint32_t protocol;
+-    			#ifdef CONFIG_X86_32
+     			uint8_t pad[4];
+-    			#endif
+     		} socket;
+     		struct xen_pvcalls_connect {
+     			uint64_t id;
+@@ -257,16 +255,12 @@ The format is defined as follows:
+     			uint32_t flags;
+     			grant_ref_t ref;
+     			uint32_t evtchn;
+-    			#ifdef CONFIG_X86_32
+     			uint8_t pad[4];
+-    			#endif
+     		} connect;
+     		struct xen_pvcalls_release {
+     			uint64_t id;
+     			uint8_t reuse;
+-    			#ifdef CONFIG_X86_32
+     			uint8_t pad[7];
+-    			#endif
+     		} release;
+     		struct xen_pvcalls_bind {
+     			uint64_t id;
+@@ -276,9 +270,7 @@ The format is defined as follows:
+     		struct xen_pvcalls_listen {
+     			uint64_t id;
+     			uint32_t backlog;
+-    			#ifdef CONFIG_X86_32
+     			uint8_t pad[4];
+-    			#endif
+     		} listen;
+     		struct xen_pvcalls_accept {
+     			uint64_t id;
+diff --git a/xen/include/public/io/pvcalls.h b/xen/include/public/io/pvcalls.h
+index 905880735dda..6da6b5533a10 100644
+--- a/xen/include/public/io/pvcalls.h
++++ b/xen/include/public/io/pvcalls.h
+@@ -68,6 +68,7 @@ struct xen_pvcalls_request {
+             uint32_t domain;
+             uint32_t type;
+             uint32_t protocol;
++            uint8_t pad[4];
+         } socket;
+         struct xen_pvcalls_connect {
+             uint64_t id;
+@@ -76,10 +77,12 @@ struct xen_pvcalls_request {
+             uint32_t flags;
+             grant_ref_t ref;
+             uint32_t evtchn;
++            uint8_t pad[4];
+         } connect;
+         struct xen_pvcalls_release {
+             uint64_t id;
+             uint8_t reuse;
++            uint8_t pad[7];
+         } release;
+         struct xen_pvcalls_bind {
+             uint64_t id;
+@@ -89,6 +92,7 @@ struct xen_pvcalls_request {
+         struct xen_pvcalls_listen {
+             uint64_t id;
+             uint32_t backlog;
++            uint8_t pad[4];
+         } listen;
+         struct xen_pvcalls_accept {
+             uint64_t id;
 -- 
 2.17.1
 
