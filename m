@@ -2,59 +2,68 @@ Return-Path: <SRS0=/qc5=AK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.3 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-0.8 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3A0DDC433E0
-	for <xen-devel@archiver.kernel.org>; Mon, 29 Jun 2020 17:32:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BD15BC433E0
+	for <xen-devel@archiver.kernel.org>; Mon, 29 Jun 2020 17:46:10 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id F2B1E255C8
-	for <xen-devel@archiver.kernel.org>; Mon, 29 Jun 2020 17:32:14 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 8B439255C6
+	for <xen-devel@archiver.kernel.org>; Mon, 29 Jun 2020 17:46:10 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="f8qUjanz"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F2B1E255C8
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="IE0VLPZm"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8B439255C6
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jpxd7-0003FN-Jb; Mon, 29 Jun 2020 17:31:41 +0000
+	id 1jpxqo-0004Bs-Su; Mon, 29 Jun 2020 17:45:50 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=LUBK=AK=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1jpxd5-0003FI-Pr
- for xen-devel@lists.xenproject.org; Mon, 29 Jun 2020 17:31:39 +0000
-X-Inumbo-ID: 632c20f8-ba2e-11ea-b7bb-bc764e2007e4
-Received: from mail.kernel.org (unknown [198.145.29.99])
+ <SRS0=D7I7=AK=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
+ id 1jpxqn-0004BW-Pq
+ for xen-devel@lists.xenproject.org; Mon, 29 Jun 2020 17:45:49 +0000
+X-Inumbo-ID: 5b435a80-ba30-11ea-b7bb-bc764e2007e4
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 632c20f8-ba2e-11ea-b7bb-bc764e2007e4;
- Mon, 29 Jun 2020 17:31:38 +0000 (UTC)
-Received: from localhost (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 973D423A9E;
- Mon, 29 Jun 2020 17:31:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1593451898;
- bh=pZLE0/dEHdwtp1oF+MjAXEqXTqNgCVHIaSv2gtI5f9s=;
- h=Date:From:To:cc:Subject:In-Reply-To:References:From;
- b=f8qUjanzM6fLEdaY60FSVA2CwIpF7kO3WkjuSqnlYh2jAqvKu+o1wsZn6UNERVwIF
- d5ckFCxNes91ngGOaJMu6uCEBfCbVaipt8RQGri9T2gF+zuWrwVtmqNzy7jmm4wNgB
- LkU2C0N/4opuiae+izYpmAUFEmj7mr1ZBpWbIpd4=
-Date: Mon, 29 Jun 2020 10:31:37 -0700 (PDT)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
-To: Xiaofei Tan <tanxiaofei@huawei.com>
-Subject: Re: [PATCH] arm/xen: remove the unused macro GRANT_TABLE_PHYSADDR
-In-Reply-To: <1593305826-28279-1-git-send-email-tanxiaofei@huawei.com>
-Message-ID: <alpine.DEB.2.21.2006291031050.8121@sstabellini-ThinkPad-T480s>
-References: <1593305826-28279-1-git-send-email-tanxiaofei@huawei.com>
-User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
+ id 5b435a80-ba30-11ea-b7bb-bc764e2007e4;
+ Mon, 29 Jun 2020 17:45:44 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+ Content-Transfer-Encoding:Content-Type:Message-ID:To:Sender:Reply-To:Cc:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=kI+dr4nXpJzzq1M641ow/vAnN/4S/42KIdrN09v8UnU=; b=IE0VLPZmbnM93wJj+75WF56U4
+ MeySuRYTCPBW8acD7IjhPqcq1Dr7Q6Wtv+Do5Y0b+yZRKf3k2cUueNYzTcV9jtaKOlzwcLKW864kw
+ 86SgyOFPUZiWpFpJDFAYmBaZEhUoeHSCHea1uItHmfH1Iez4o6NmxWorMprdzlKhMy3Qo=;
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1jpxqh-0000io-Ks; Mon, 29 Jun 2020 17:45:43 +0000
+Received: from [172.16.144.3] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1jpxqh-0003b8-88; Mon, 29 Jun 2020 17:45:43 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.89) (envelope-from <osstest-admin@xenproject.org>)
+ id 1jpxqh-0001po-7Y; Mon, 29 Jun 2020 17:45:43 +0000
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-151451-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Subject: [ovmf test] 151451: all pass - PUSHED
+X-Osstest-Versions-This: ovmf=0f01cec52f4794777feb067e4fa0bfcedfdc124e
+X-Osstest-Versions-That: ovmf=0060e0a694f3f249c3ec081b0e61287c36f64ebb
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Mon, 29 Jun 2020 17:45:43 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,43 +74,57 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: jgross@suse.com, sstabellini@kernel.org, linux-kernel@vger.kernel.org,
- linuxarm@huawei.com, linux@armlinux.org.uk, xen-devel@lists.xenproject.org,
- boris.ostrovsky@oracle.com, linux-arm-kernel@lists.infradead.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Sun, 28 Jun 2020, Xiaofei Tan wrote:
-> Fix the following sparse warning:
-> 
-> arch/arm64/xen/../../arm/xen/enlighten.c:244: warning: macro
-> "GRANT_TABLE_PHYSADDR" is not used [-Wunused-macros]
-> 
-> It is an isolated macro, and should be removed when its last user
-> was deleted in the following commit 3cf4095d7446 ("arm/xen: Use
-> xen_xlate_map_ballooned_pages to setup grant table")
-> 
-> Signed-off-by: Xiaofei Tan <tanxiaofei@huawei.com>
+flight 151451 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/151451/
 
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+Perfect :-)
+All tests in this flight passed as required
+version targeted for testing:
+ ovmf                 0f01cec52f4794777feb067e4fa0bfcedfdc124e
+baseline version:
+ ovmf                 0060e0a694f3f249c3ec081b0e61287c36f64ebb
 
-> ---
->  arch/arm/xen/enlighten.c | 1 -
->  1 file changed, 1 deletion(-)
-> 
-> diff --git a/arch/arm/xen/enlighten.c b/arch/arm/xen/enlighten.c
-> index fd4e1ce1..e93145d 100644
-> --- a/arch/arm/xen/enlighten.c
-> +++ b/arch/arm/xen/enlighten.c
-> @@ -241,7 +241,6 @@ static int __init fdt_find_hyper_node(unsigned long node, const char *uname,
->   * see Documentation/devicetree/bindings/arm/xen.txt for the
->   * documentation of the Xen Device Tree format.
->   */
-> -#define GRANT_TABLE_PHYSADDR 0
->  void __init xen_early_init(void)
->  {
->  	of_scan_flat_dt(fdt_find_hyper_node, NULL);
-> -- 
-> 2.7.4
-> 
+Last test of basis   151444  2020-06-29 02:39:29 Z    0 days
+Testing same since   151451  2020-06-29 10:12:21 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Zhichao Gao <zhichao.gao@intel.com>
+
+jobs:
+ build-amd64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
+   0060e0a694..0f01cec52f  0f01cec52f4794777feb067e4fa0bfcedfdc124e -> xen-tested-master
 
