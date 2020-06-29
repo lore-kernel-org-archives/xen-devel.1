@@ -2,87 +2,54 @@ Return-Path: <SRS0=/qc5=AK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
-	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-2.5 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EFBF1C433E0
-	for <xen-devel@archiver.kernel.org>; Mon, 29 Jun 2020 08:26:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B032BC433E0
+	for <xen-devel@archiver.kernel.org>; Mon, 29 Jun 2020 08:28:49 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B92C623359
-	for <xen-devel@archiver.kernel.org>; Mon, 29 Jun 2020 08:26:02 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="tT/0o2b1"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B92C623359
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id 8599A23359
+	for <xen-devel@archiver.kernel.org>; Mon, 29 Jun 2020 08:28:49 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8599A23359
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jpp6u-00051F-0C; Mon, 29 Jun 2020 08:25:52 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Xxse=AK=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
- id 1jpp6s-000519-Bn
- for xen-devel@lists.xenproject.org; Mon, 29 Jun 2020 08:25:50 +0000
-X-Inumbo-ID: 233d1aa2-b9e2-11ea-b7bb-bc764e2007e4
-Received: from mail-wm1-x32c.google.com (unknown [2a00:1450:4864:20::32c])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 233d1aa2-b9e2-11ea-b7bb-bc764e2007e4;
- Mon, 29 Jun 2020 08:25:49 +0000 (UTC)
-Received: by mail-wm1-x32c.google.com with SMTP id g10so1782847wmc.1
- for <xen-devel@lists.xenproject.org>; Mon, 29 Jun 2020 01:25:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:reply-to:to:cc:references:in-reply-to:subject:date:message-id
- :mime-version:content-transfer-encoding:content-language
- :thread-index; bh=AuJlaHKuyVu7EKYDjhJnZAYNsBzoL+I5XdtiyNwUB54=;
- b=tT/0o2b122Uo6c7myzyj7sFTEQtQ9rgp2F3Gdh6jdtfmPqpsLWalsGD0lwq8Si2sRI
- CPFHU6qDBg9Trc2OlwlH9/0tvFaaWxiaVNljQPj/+dJqUd/1MLBLZSpLmlkYrIgs5YQx
- l1EHVglLSWu91VcQCtG3sv03Gmh9yWUTznEyMM4wxakUoigdG9yCUE2Gzl//KuAukovd
- vj/VYfDBdiBepDg2KD7Xd1Mp983rlIFQMikUZlUVBsP5ms0VvDJhjM6bJJ2aI1CArr8K
- TXOv9Y7Ozjr6olxG4zD+r4IFKUkLqmgmeW39pA1JR4N3Mo7YQCEMRpTqBkxuBXA/Srnd
- 1Xmg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:reply-to:to:cc:references:in-reply-to
- :subject:date:message-id:mime-version:content-transfer-encoding
- :content-language:thread-index;
- bh=AuJlaHKuyVu7EKYDjhJnZAYNsBzoL+I5XdtiyNwUB54=;
- b=e3yU/N6L+0KYxe2n3wcpVVWmiNkJRC+SFsxZN6IxFus2lYoCTune3CuNPtLXFViyEr
- C8qEvXhETUbw9tU68iESy7WI+1+hELvY/ZepzYxU9lpiLsLthlLz12hz/tnNd9bd/Ey5
- kj4f8PdrKbZAqVOZXN2CXgVdZ5l05IYnSR6Jic4ZkLsEX+FkwKMBvRLumyNjsaQ3s+d0
- bPbqTxlWe9JR8opHvCCC+QN/0outEa5ee7Gl8On3JwQwClJ0TMAF+i76ExnfVowb6yNB
- YfGfC0az4IfIrG/QsutQGOjlgi6mnxkwvRp8zi0dX2vj84CHhQCLKsX+Okh6cJ0ofZds
- x/1Q==
-X-Gm-Message-State: AOAM530Bi79A7ujI+f6bUZdzVkT7SSoJalgVNl+eRBBzInAi4g5wVxEX
- GJ130+KkMFV9JLXO3/x+kBM=
-X-Google-Smtp-Source: ABdhPJyg1kTuazyv0gYP9JVDRkJR66fclJil4yhXsDYiTCoujxLiWZnlwxNtnXGyZDr1BBxwQ+EKgw==
-X-Received: by 2002:a1c:a304:: with SMTP id m4mr16536385wme.49.1593419148990; 
- Mon, 29 Jun 2020 01:25:48 -0700 (PDT)
-Received: from CBGR90WXYV0 (54-240-197-225.amazon.com. [54.240.197.225])
- by smtp.gmail.com with ESMTPSA id g14sm14625647wrm.93.2020.06.29.01.25.48
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 29 Jun 2020 01:25:48 -0700 (PDT)
-From: Paul Durrant <xadimgnik@gmail.com>
-X-Google-Original-From: "Paul Durrant" <paul@xen.org>
-To: "'Jan Beulich'" <jbeulich@suse.com>,
- "'Andrew Cooper'" <andrew.cooper3@citrix.com>
-References: <20200626170221.28534-1-andrew.cooper3@citrix.com>
- <9822c557-655b-67cb-c513-60039dbe0d8d@suse.com>
-In-Reply-To: <9822c557-655b-67cb-c513-60039dbe0d8d@suse.com>
-Subject: RE: [PATCH] xsm: Drop trailing whitespace from build scripts
-Date: Mon, 29 Jun 2020 09:25:47 +0100
-Message-ID: <000601d64dee$e47b2840$ad7178c0$@xen.org>
+	id 1jpp9W-00059f-Dt; Mon, 29 Jun 2020 08:28:34 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=8hvW=AK=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1jpp9V-00059Z-2q
+ for xen-devel@lists.xenproject.org; Mon, 29 Jun 2020 08:28:33 +0000
+X-Inumbo-ID: 8379dac2-b9e2-11ea-853f-12813bfff9fa
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 8379dac2-b9e2-11ea-853f-12813bfff9fa;
+ Mon, 29 Jun 2020 08:28:31 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 55437AC9F;
+ Mon, 29 Jun 2020 08:28:30 +0000 (UTC)
+Subject: Re: [PATCH v4 for-4.14 2/2] pvcalls: Document correctly and
+ explicitely the padding for all arches
+To: Julien Grall <julien@xen.org>
+References: <20200627095533.14145-1-julien@xen.org>
+ <20200627095533.14145-3-julien@xen.org>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <9fc81bbe-6c30-e848-ceae-1356ec30a8f8@suse.com>
+Date: Mon, 29 Jun 2020 10:28:29 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.9.0
 MIME-Version: 1.0
-Content-Type: text/plain;
-	charset="utf-8"
+In-Reply-To: <20200627095533.14145-3-julien@xen.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-X-Mailer: Microsoft Outlook 16.0
-Content-Language: en-gb
-Thread-Index: AQIxqs/FMOzqZHKIY0/vJ+L/6kqMnQGJHYPCqCw+/UA=
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -93,35 +60,47 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Reply-To: paul@xen.org
-Cc: 'Xen-devel' <xen-devel@lists.xenproject.org>,
- 'Daniel De Graaf' <dgdegra@tycho.nsa.gov>
+Cc: Juergen Gross <jgross@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ paul@xen.org, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Julien Grall <jgrall@amazon.com>, Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xenproject.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-> -----Original Message-----
-> From: Xen-devel <xen-devel-bounces@lists.xenproject.org> On Behalf Of Jan Beulich
-> Sent: 29 June 2020 09:22
-> To: Andrew Cooper <andrew.cooper3@citrix.com>
-> Cc: Xen-devel <xen-devel@lists.xenproject.org>; Daniel De Graaf <dgdegra@tycho.nsa.gov>
-> Subject: Re: [PATCH] xsm: Drop trailing whitespace from build scripts
+On 27.06.2020 11:55, Julien Grall wrote:
+> From: Julien Grall <jgrall@amazon.com>
 > 
-> On 26.06.2020 19:02, Andrew Cooper wrote:
-> > Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-> > ---
-> > CC: Daniel De Graaf <dgdegra@tycho.nsa.gov>
+> The specification of pvcalls suggests there is padding for 32-bit x86
+> at the end of most the structure. However, they are not described in
+> in the public header.
 > 
-> Since we've not heard anything from Daniel in quite a while, just
-> in case:
-> Acked-by: Jan Beulich <jbeulich@suse.com>
+> Because of that all the structures would be 32-bit aligned and not
+> 64-bit aligned for 32-bit x86.
+
+The added padding doesn't change the alignment. It's sizeof() which
+gets corrected this way.
+
+> For all the other architectures supported (Arm and 64-bit x86), the
+> structure are aligned to 64-bit because they contain uint64_t field.
+> Therefore all the structures contain implicit padding.
 > 
+> Given the specification is authoriitative, the padding will the same for
 
-This is pretty trivial cleanup so, if you want to put it in 4.14 consider it...
+Nit: ... will be the same ...
 
-Release-acked-by: Paul Durrant <paul@xen.org>
+> the all architectures. The potential breakage of compatibility is ought
 
+Nit: Drop "is".
+
+> to be fine as pvcalls is still a tech preview.
 > 
-> Jan
+> As an aside, the padding sadly cannot be mandated to be 0 as they are
+> already present. So it is not going to be possible to use the padding
+> for extending a command in the future.
 
+Why is the other adjustment fine to make due to still being tech
+preview, but this one wouldn't be for the same reason?
 
+Jan
 
