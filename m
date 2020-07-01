@@ -2,59 +2,61 @@ Return-Path: <SRS0=Sbf7=AM=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.0 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-7.0 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 67BDAC433DF
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Jul 2020 09:10:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 71054C433E0
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Jul 2020 09:50:20 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 426272077D
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Jul 2020 09:10:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 426272077D
+	by mail.kernel.org (Postfix) with ESMTPS id 47F3C2073E
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Jul 2020 09:50:20 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 47F3C2073E
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jqYlL-0003sd-0K; Wed, 01 Jul 2020 09:10:39 +0000
+	id 1jqZNC-0006TH-8p; Wed, 01 Jul 2020 09:49:46 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=eXJY=AM=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1jqYlJ-0003sY-Qy
- for xen-devel@lists.xenproject.org; Wed, 01 Jul 2020 09:10:37 +0000
-X-Inumbo-ID: b9a37574-bb7a-11ea-8496-bc764e2007e4
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ <SRS0=w4aC=AM=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1jqZNB-0006TC-FE
+ for xen-devel@lists.xenproject.org; Wed, 01 Jul 2020 09:49:45 +0000
+X-Inumbo-ID: 30e13f90-bb80-11ea-b7bb-bc764e2007e4
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b9a37574-bb7a-11ea-8496-bc764e2007e4;
- Wed, 01 Jul 2020 09:10:37 +0000 (UTC)
-Authentication-Results: esa6.hc3370-68.iphmx.com;
+ id 30e13f90-bb80-11ea-b7bb-bc764e2007e4;
+ Wed, 01 Jul 2020 09:49:44 +0000 (UTC)
+Authentication-Results: esa1.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: 11Kw2xoQRVL7WqilHuFkwhtyXZdyrzkrO9PEu8args1R1Vh7pOTeVnDou8nwpb16a6fhSiw3c9
- WlLn3YeMG5GgizWYT44ZurqCtoQRgSNZCsecYuEnkGcRItvKIJGrdGCJNwCv+zrk1+AefS3Usz
- PPlsClfpbO5yL3vDelgTzziBeRyHktAqeT1Rki/2XBulSPIzhVvBfGSTnN6BdiQ8J6bgllYFTk
- iyJCNuIL2cB4B7kES2t3hajJigArvcDNiswFiVu3ZMPW5wAAVFIJO9+zUHfba6QEuHQH7MnI3u
- nUc=
+IronPort-SDR: 8NjfsZi9mpxIgJgtsrk9zDhCrFEyJe8Ljy5xso3uZS9HpODYUo1U9AlaoS3FgRi6gFPUO52Q6V
+ IJ1UQwZg3ENv/ss6jlLgmJ1ovuu3RwZ5IyMikQ84n+LO6xb33IjSjsJncBVhvLWhr3V090XViI
+ XErI8005NLcLSD2pBq8lDsP9Vl8jqOLGPMufwrdpW06Dd9QfI6OutmVceEf9zk7arrSg9pcu1v
+ YsEuPd8yVbmYTkO4UQ3Y1ahH2pJswdjSMdQLqsqeIXyU2RB48/A8s8HIaqNv+rABHgd346JClF
+ FCM=
 X-SBRS: 2.7
-X-MesageID: 21712682
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 21688457
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.75,299,1589256000"; d="scan'208";a="21712682"
-Date: Wed, 1 Jul 2020 10:10:31 +0100
-From: Anthony PERARD <anthony.perard@citrix.com>
-To: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
-Subject: Re: [XEN PATCH] hvmloader: Fix reading ACPI PM1 CNT value
-Message-ID: <20200701091031.GC2030@perard.uk.xensource.com>
-References: <20200630170913.123646-1-anthony.perard@citrix.com>
- <20200701075257.GM735@Air-de-Roger>
+X-IronPort-AV: E=Sophos;i="5.75,299,1589256000"; d="scan'208";a="21688457"
+Date: Wed, 1 Jul 2020 11:49:35 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: =?utf-8?Q?Micha=C5=82_Leszczy=C5=84ski?= <michal.leszczynski@cert.pl>
+Subject: Re: [PATCH v4 02/10] x86/vmx: add IPT cpu feature
+Message-ID: <20200701094935.GO735@Air-de-Roger>
+References: <cover.1593519420.git.michal.leszczynski@cert.pl>
+ <7302dbfcd07dfaad9e50bb772673e588fcc4de67.1593519420.git.michal.leszczynski@cert.pl>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="iso-8859-1"
+Content-Type: text/plain; charset="utf-8"
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20200701075257.GM735@Air-de-Roger>
+In-Reply-To: <7302dbfcd07dfaad9e50bb772673e588fcc4de67.1593519420.git.michal.leszczynski@cert.pl>
+X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
+ AMSPEX02CL02.citrite.net (10.69.22.126)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,44 +67,80 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>,
- Wei Liu <wl@xen.org>, Jan Beulich <jbeulich@suse.com>, Andrew
- Cooper <andrew.cooper3@citrix.com>
+Cc: Julien Grall <julien@xen.org>, Kevin Tian <kevin.tian@intel.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, tamas.lengyel@intel.com,
+ Jun Nakajima <jun.nakajima@intel.com>, Wei Liu <wl@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, luwei.kang@intel.com,
+ Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xenproject.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Wed, Jul 01, 2020 at 09:52:57AM +0200, Roger Pau Monn� wrote:
-> On Tue, Jun 30, 2020 at 06:09:13PM +0100, Anthony PERARD wrote:
-> > In order to get the CNT value from QEMU, we were supposed to read a
-> > word, according to the implementation in QEMU. But it has been lax and
-> > allowed to read a single byte. This has changed with commit
-> > 5d971f9e6725 ("memory: Revert "memory: accept mismatching sizes in
-> > memory_region_access_valid"") and result in hvmloader crashing on
-> > the BUG_ON.
+On Tue, Jun 30, 2020 at 02:33:45PM +0200, Michał Leszczyński wrote:
+> From: Michal Leszczynski <michal.leszczynski@cert.pl>
 > 
-> This is a bug on the QEMU side, the ACPI spec states: "Accesses to PM1
-> control registers are accessed through byte and word accesses.".
-> That's on section 4.8.3.2.1 PM1 Control Registers of my copy of the
-> ACPI spec (6.2A).
+> Check if Intel Processor Trace feature is supported by current
+> processor. Define vmtrace_supported global variable.
+> 
+> Signed-off-by: Michal Leszczynski <michal.leszczynski@cert.pl>
+> ---
+>  xen/arch/x86/hvm/vmx/vmcs.c                 | 7 ++++++-
+>  xen/common/domain.c                         | 2 ++
+>  xen/include/asm-x86/cpufeature.h            | 1 +
+>  xen/include/asm-x86/hvm/vmx/vmcs.h          | 1 +
+>  xen/include/public/arch-x86/cpufeatureset.h | 1 +
+>  xen/include/xen/domain.h                    | 2 ++
+>  6 files changed, 13 insertions(+), 1 deletion(-)
+> 
+> diff --git a/xen/arch/x86/hvm/vmx/vmcs.c b/xen/arch/x86/hvm/vmx/vmcs.c
+> index ca94c2bedc..b73d824357 100644
+> --- a/xen/arch/x86/hvm/vmx/vmcs.c
+> +++ b/xen/arch/x86/hvm/vmx/vmcs.c
+> @@ -291,6 +291,12 @@ static int vmx_init_vmcs_config(void)
+>          _vmx_cpu_based_exec_control &=
+>              ~(CPU_BASED_CR8_LOAD_EXITING | CPU_BASED_CR8_STORE_EXITING);
+>  
+> +    rdmsrl(MSR_IA32_VMX_MISC, _vmx_misc_cap);
+> +
+> +    /* Check whether IPT is supported in VMX operation. */
+> +    vmtrace_supported = cpu_has_ipt &&
+> +                        (_vmx_misc_cap & VMX_MISC_PT_SUPPORTED);
 
-I guess we can ignore this patch then, and I should write a patch for
-QEMU instead.
+This function gets called for every CPU that's brought up, so you need
+to set it on the BSP, and then check that the APs also support the
+feature or else fail to bring them up AFAICT. If not you could end up
+with a non working system.
 
-> I'm fine with this if such bogus behavior has made it's way into a
-> release version of QEMU, but it needs to state it's a workaround for a
-> QEMU bug, not a bug in hvmloader.
+I agree it's very unlikely to boot on a system with such differences
+between CPUs, but better be safe than sorry.
 
-It hasn't, but might.
+> +
+>      if ( _vmx_cpu_based_exec_control & CPU_BASED_ACTIVATE_SECONDARY_CONTROLS )
+>      {
+>          min = 0;
+> @@ -305,7 +311,6 @@ static int vmx_init_vmcs_config(void)
+>                 SECONDARY_EXEC_ENABLE_VIRT_EXCEPTIONS |
+>                 SECONDARY_EXEC_XSAVES |
+>                 SECONDARY_EXEC_TSC_SCALING);
+> -        rdmsrl(MSR_IA32_VMX_MISC, _vmx_misc_cap);
+>          if ( _vmx_misc_cap & VMX_MISC_VMWRITE_ALL )
+>              opt |= SECONDARY_EXEC_ENABLE_VMCS_SHADOWING;
+>          if ( opt_vpid_enabled )
+> diff --git a/xen/common/domain.c b/xen/common/domain.c
+> index 7cc9526139..0a33e0dfd6 100644
+> --- a/xen/common/domain.c
+> +++ b/xen/common/domain.c
+> @@ -82,6 +82,8 @@ struct vcpu *idle_vcpu[NR_CPUS] __read_mostly;
+>  
+>  vcpu_info_t dummy_vcpu_info;
+>  
+> +bool_t vmtrace_supported;
 
-> IMO the QEMU change should be reverted.
+Plain bool, and I think it wants to be __read_mostly.
 
-The change can't be reverted, it is to fix a CVE and isn't related to
-ACPI. But we can fix the emulator.
+I'm also unsure whether this is the best place to put such variable,
+since there are no users introduced on this patch it's hard to tell.
 
-> Thanks, Roger.
-
-Thanks,
-
--- 
-Anthony PERARD
+Thanks, Roger.
 
