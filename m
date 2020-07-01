@@ -2,93 +2,75 @@ Return-Path: <SRS0=Sbf7=AM=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.8 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
-	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+X-Spam-Status: No, score=-10.1 required=3.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham autolearn_force=no
-	version=3.4.0
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EFEDAC433E1
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Jul 2020 07:04:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8B200C433E0
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Jul 2020 07:19:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id ADD1920722
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Jul 2020 07:04:27 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 54B25206BE
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Jul 2020 07:19:39 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="UAoPm0YK"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org ADD1920722
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="SWcZvAHv"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 54B25206BE
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jqWmh-0000gb-H7; Wed, 01 Jul 2020 07:03:55 +0000
+	id 1jqX1l-0001fA-9u; Wed, 01 Jul 2020 07:19:29 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=3SYL=AM=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
- id 1jqWmg-0000gV-C0
- for xen-devel@lists.xenproject.org; Wed, 01 Jul 2020 07:03:54 +0000
-X-Inumbo-ID: 04ef213e-bb69-11ea-bca7-bc764e2007e4
-Received: from mail-ed1-x544.google.com (unknown [2a00:1450:4864:20::544])
+ <SRS0=QDW7=AM=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
+ id 1jqX1k-0001f0-9R
+ for xen-devel@lists.xenproject.org; Wed, 01 Jul 2020 07:19:28 +0000
+X-Inumbo-ID: 323dc5c6-bb6b-11ea-bb8b-bc764e2007e4
+Received: from mail-lj1-x244.google.com (unknown [2a00:1450:4864:20::244])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 04ef213e-bb69-11ea-bca7-bc764e2007e4;
- Wed, 01 Jul 2020 07:03:52 +0000 (UTC)
-Received: by mail-ed1-x544.google.com with SMTP id by13so8737129edb.11
- for <xen-devel@lists.xenproject.org>; Wed, 01 Jul 2020 00:03:52 -0700 (PDT)
+ id 323dc5c6-bb6b-11ea-bb8b-bc764e2007e4;
+ Wed, 01 Jul 2020 07:19:27 +0000 (UTC)
+Received: by mail-lj1-x244.google.com with SMTP id h22so18537886lji.9
+ for <xen-devel@lists.xenproject.org>; Wed, 01 Jul 2020 00:19:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:reply-to:to:cc:references:in-reply-to:subject:date:message-id
- :mime-version:content-transfer-encoding:thread-index
- :content-language;
- bh=6eNZuzFNJ6OxbyFGv/sTyrbXRJOgNAq4o3gC0+HLpag=;
- b=UAoPm0YKD/s7r6iPfz/T0PuEhqOaM4+nyi4tMmyeXBtD9suQ2kjadh3JuiLeOe4eHP
- cyhesJE195NEHpLjShWKGowwJ2vFh9NDRWQgUT0BOvk7KdBczKx8k+qTYqp0X9p0Z0K4
- 0FnjU6d71yidlpIGI+FHodFAj4jEQR75u/8Sa1hZPgcvfRPmZ3YEOhFwlJCbVJiyLhD8
- DR5ywCRQB021jF6sxzXcVOBKC4sn6d3B50DgGWdNU1ppEIvCEKWFrfDD9AtLaSCZREJM
- hwZsxh+Wgg2SJEPcE2oYiNXvfs9b3wvVtt2+uqVAeJ6XDju0Kpexs3neZwdAbxVEPuom
- zsAw==
+ h=from:to:cc:subject:date:message-id;
+ bh=Dzidh0Nswx9r0je/a6UkI0vRAjpCHlIaVow9ZwgeZoY=;
+ b=SWcZvAHvHllVZRCfxUBGg8Rg05tjPl8Woq7ZnTkpvLRnA9jgCokK28s9asoUU5Vx9e
+ LZlwGaVsrofdhr+9PSjihfd2v8d2poYKcjtVKmlxHhq+ca0DtYiBIMC0TU+fQ4ypRT02
+ zcZmv9nyU7Zvdk4RS1cC8WiuKG8foMbNnbHlC6c0cjxcaclMWcRpwsaPBhYkDVi8M+2Y
+ 72e06QiAThuTKvxMEWlJXdbyTZotjIFun2iY9eAibIXNNoNsaTDK0cLnkYYDqJJdAtSh
+ 8BTdoBfZo1zdJ4AFrfHCR7pMiT/m3dK2d34dfOxHekoyKMCjRV2aUtRMGS/BZRP766WX
+ ErOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:reply-to:to:cc:references:in-reply-to
- :subject:date:message-id:mime-version:content-transfer-encoding
- :thread-index:content-language;
- bh=6eNZuzFNJ6OxbyFGv/sTyrbXRJOgNAq4o3gC0+HLpag=;
- b=oD3bevQ6xTAS2lz0wbSIhO8aqJKMNYL4dsNQcbR3l9jZHfZscAHTLyl0ujZydBed92
- iXpvpQidickJywYFUeCUpis4GRXYcTQtcRoEt1REL42+Q1cmD7kJ7WvIq4ZDPA5RHGKn
- hw3Jt7EKRnnDnewvJA+aWVkr+1GZ8p979w5HHLtVVFtQVdd+JWLAb2bdx9rt2BiAxEdV
- 3Oa4aoAW1VC+qzgQOLKDDUw0Vj1xJVAdaZ/7yB6C4iudlM14uSpcMSoO4PyXD27+8345
- Wsri+ognYbV78t7tRB+2eu21a35Lau7ClVRfvR14IjIz8JfFuxtiBCPtlfl44gaVjRZm
- IeJQ==
-X-Gm-Message-State: AOAM533REPFIZ1OwgqAshvuEJxNCYACN1I1/TZeR9c4N1n+Kvw47LgHF
- FIdoG2IbULpv1mRwcYpPrCs=
-X-Google-Smtp-Source: ABdhPJz4LIGFdOnkn9jdZqEhUBlzB6LaMc2aOiaq72jXKhCB/fO/5680G+Tj706S1ohuE+kvZnnySA==
-X-Received: by 2002:a05:6402:1ca6:: with SMTP id
- cz6mr9805142edb.171.1593587031355; 
- Wed, 01 Jul 2020 00:03:51 -0700 (PDT)
-Received: from CBGR90WXYV0 (54-240-197-238.amazon.com. [54.240.197.238])
- by smtp.gmail.com with ESMTPSA id z1sm3961362eji.92.2020.07.01.00.03.49
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Wed, 01 Jul 2020 00:03:50 -0700 (PDT)
-From: Paul Durrant <xadimgnik@gmail.com>
-X-Google-Original-From: "Paul Durrant" <paul@xen.org>
-To: =?utf-8?Q?'Philippe_Mathieu-Daud=C3=A9'?= <philmd@redhat.com>,
- <xen-devel@lists.xenproject.org>, <qemu-devel@nongnu.org>
-References: <20200624121841.17971-1-paul@xen.org>
- <20200624121841.17971-3-paul@xen.org>
- <33e594dd-dbfa-7c57-1cf5-0852e8fc8e1d@redhat.com>
- <000701d64ef5$6568f660$303ae320$@xen.org>
- <9e591254-d215-d5af-38d2-fd5b65f84a43@redhat.com>
-In-Reply-To: <9e591254-d215-d5af-38d2-fd5b65f84a43@redhat.com>
-Subject: RE: [PATCH 2/2] xen: cleanup unrealized flash devices
-Date: Wed, 1 Jul 2020 08:03:49 +0100
-Message-ID: <000801d64f75$c604f570$520ee050$@xen.org>
-MIME-Version: 1.0
-Content-Type: text/plain;
-	charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQJSqy6H9p+wwq7WTKLIQgTsJ4xkIwGyH0+lAvluRd8CNjldPAM3wS46p6jIZ4A=
-Content-Language: en-gb
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=Dzidh0Nswx9r0je/a6UkI0vRAjpCHlIaVow9ZwgeZoY=;
+ b=GRFaxKkf0l/qYXsFsdrvY8QQg1AotkeHFKARbDHP2uBbwLl7hDkD4eJpLbv5q8famS
+ F6v01pPSbl7iHHErFBvhVxRH5qZG6ld1tRaXQC3idON776fr150VaQFv+Dx5IRkNFw9o
+ mAEFt8HkiWXEvit1gWpvIDfV29DtZQPVQLQxT5GFNcSrDUxWrftk7JwdwO51sk6MLoCa
+ e7suuGdeGxA7cOczssFenUjV9JN+dAjM9vjOTkr0Jr/OcKiY6yyOLR4zYPmdFJqD6nXl
+ BJomkPmV6sZ6IbYskjykn645ukZpC4M/vA6X4wGjJmQCDHx0L8X7iYpMqKtjuDT8/pa4
+ tqiw==
+X-Gm-Message-State: AOAM533CrxfJeq/8MbNkH0HtzlOGUmy4Y3qdec1QzpX2RBBWtXwKyKwH
+ /xsyJ9mxoc9Wf929yNABs7OAXSpEhQs=
+X-Google-Smtp-Source: ABdhPJzHeP5UUKvdKY9UVyzftvsX49OGMGlY57Lr8VA82TTNT1JkFN1xWJw8Jcb1mGcoT2PMhv+p2A==
+X-Received: by 2002:a2e:a494:: with SMTP id h20mr7376403lji.435.1593587965653; 
+ Wed, 01 Jul 2020 00:19:25 -0700 (PDT)
+Received: from a2klaptop.localdomain ([185.199.97.5])
+ by smtp.gmail.com with ESMTPSA id z11sm1501163ljh.115.2020.07.01.00.19.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 01 Jul 2020 00:19:24 -0700 (PDT)
+From: Oleksandr Andrushchenko <andr2000@gmail.com>
+To: xen-devel@lists.xenproject.org, jgross@suse.com, ian.jackson@eu.citrix.com,
+ wl@xen.org
+Subject: [PATCH v2] xen/displif: Protocol version 2
+Date: Wed,  1 Jul 2020 10:19:23 +0300
+Message-Id: <20200701071923.18883-1-andr2000@gmail.com>
+X-Mailer: git-send-email 2.17.1
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -99,206 +81,220 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Reply-To: paul@xen.org
-Cc: 'Eduardo Habkost' <ehabkost@redhat.com>,
- 'Jason Andryuk' <jandryuk@gmail.com>, 'Paul Durrant' <pdurrant@amazon.com>,
- "'Michael S. Tsirkin'" <mst@redhat.com>, 'Paolo Bonzini' <pbonzini@redhat.com>,
- 'Richard Henderson' <rth@twiddle.net>
+Cc: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-> -----Original Message-----
-> From: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
-> Sent: 30 June 2020 18:27
-> To: paul@xen.org; xen-devel@lists.xenproject.org; =
-qemu-devel@nongnu.org
-> Cc: 'Eduardo Habkost' <ehabkost@redhat.com>; 'Michael S. Tsirkin' =
-<mst@redhat.com>; 'Paul Durrant'
-> <pdurrant@amazon.com>; 'Jason Andryuk' <jandryuk@gmail.com>; 'Paolo =
-Bonzini' <pbonzini@redhat.com>;
-> 'Richard Henderson' <rth@twiddle.net>
-> Subject: Re: [PATCH 2/2] xen: cleanup unrealized flash devices
->=20
-> On 6/30/20 5:44 PM, Paul Durrant wrote:
-> >> -----Original Message-----
-> >> From: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
-> >> Sent: 30 June 2020 16:26
-> >> To: Paul Durrant <paul@xen.org>; xen-devel@lists.xenproject.org; =
-qemu-devel@nongnu.org
-> >> Cc: Eduardo Habkost <ehabkost@redhat.com>; Michael S. Tsirkin =
-<mst@redhat.com>; Paul Durrant
-> >> <pdurrant@amazon.com>; Jason Andryuk <jandryuk@gmail.com>; Paolo =
-Bonzini <pbonzini@redhat.com>;
-> >> Richard Henderson <rth@twiddle.net>
-> >> Subject: Re: [PATCH 2/2] xen: cleanup unrealized flash devices
-> >>
-> >> On 6/24/20 2:18 PM, Paul Durrant wrote:
-> >>> From: Paul Durrant <pdurrant@amazon.com>
-> >>>
-> >>> The generic pc_machine_initfn() calls pc_system_flash_create() =
-which creates
-> >>> 'system.flash0' and 'system.flash1' devices. These devices are =
-then realized
-> >>> by pc_system_flash_map() which is called from =
-pc_system_firmware_init() which
-> >>> itself is called via pc_memory_init(). The latter however is not =
-called when
-> >>> xen_enable() is true and hence the following assertion fails:
-> >>>
-> >>> qemu-system-i386: hw/core/qdev.c:439: =
-qdev_assert_realized_properly:
-> >>> Assertion `dev->realized' failed
-> >>>
-> >>> These flash devices are unneeded when using Xen so this patch =
-avoids the
-> >>> assertion by simply removing them using =
-pc_system_flash_cleanup_unused().
-> >>>
-> >>> Reported-by: Jason Andryuk <jandryuk@gmail.com>
-> >>> Fixes: ebc29e1beab0 ("pc: Support firmware configuration with =
--blockdev")
-> >>> Signed-off-by: Paul Durrant <pdurrant@amazon.com>
-> >>> Tested-by: Jason Andryuk <jandryuk@gmail.com>
-> >>> ---
-> >>> Cc: Paolo Bonzini <pbonzini@redhat.com>
-> >>> Cc: Richard Henderson <rth@twiddle.net>
-> >>> Cc: Eduardo Habkost <ehabkost@redhat.com>
-> >>> Cc: "Michael S. Tsirkin" <mst@redhat.com>
-> >>> Cc: Marcel Apfelbaum <marcel.apfelbaum@gmail.com>
-> >>> ---
-> >>>  hw/i386/pc_piix.c    | 9 ++++++---
-> >>>  hw/i386/pc_sysfw.c   | 2 +-
-> >>>  include/hw/i386/pc.h | 1 +
-> >>>  3 files changed, 8 insertions(+), 4 deletions(-)
-> >>>
-> >>> diff --git a/hw/i386/pc_piix.c b/hw/i386/pc_piix.c
-> >>> index 1497d0e4ae..977d40afb8 100644
-> >>> --- a/hw/i386/pc_piix.c
-> >>> +++ b/hw/i386/pc_piix.c
-> >>> @@ -186,9 +186,12 @@ static void pc_init1(MachineState *machine,
-> >>>      if (!xen_enabled()) {
-> >>>          pc_memory_init(pcms, system_memory,
-> >>>                         rom_memory, &ram_memory);
-> >>> -    } else if (machine->kernel_filename !=3D NULL) {
-> >>> -        /* For xen HVM direct kernel boot, load linux here */
-> >>> -        xen_load_linux(pcms);
-> >>> +    } else {
-> >>> +        pc_system_flash_cleanup_unused(pcms);
-> >>
-> >> TIL pc_system_flash_cleanup_unused().
-> >>
-> >> What about restricting at the source?
-> >>
-> >
-> > And leave the devices in place? They are not relevant for Xen, so =
-why not clean up?
->=20
-> No, I meant to not create them in the first place, instead of
-> create+destroy.
->=20
-> Anyway what you did works, so I don't have any problem.
+From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 
-IIUC Jason originally tried restricting creation but encountered a =
-problem because xen_enabled() would always return false at that point, =
-because machine creation occurs before accelerators are initialized.
+1. Add protocol version as an integer
 
-  Paul
+Version string, which is in fact an integer, is hard to handle in the
+code that supports different protocol versions. To simplify that
+also add the version as an integer.
 
->=20
-> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
->=20
-> >
-> >   Paul
-> >
-> >> -- >8 --
-> >> --- a/hw/i386/pc.c
-> >> +++ b/hw/i386/pc.c
-> >> @@ -1004,24 +1004,26 @@ void pc_memory_init(PCMachineState *pcms,
-> >>                                      &machine->device_memory->mr);
-> >>      }
-> >>
-> >> -    /* Initialize PC system firmware */
-> >> -    pc_system_firmware_init(pcms, rom_memory);
-> >> -
-> >> -    option_rom_mr =3D g_malloc(sizeof(*option_rom_mr));
-> >> -    memory_region_init_ram(option_rom_mr, NULL, "pc.rom", =
-PC_ROM_SIZE,
-> >> -                           &error_fatal);
-> >> -    if (pcmc->pci_enabled) {
-> >> -        memory_region_set_readonly(option_rom_mr, true);
-> >> -    }
-> >> -    memory_region_add_subregion_overlap(rom_memory,
-> >> -                                        PC_ROM_MIN_VGA,
-> >> -                                        option_rom_mr,
-> >> -                                        1);
-> >> -
-> >>      fw_cfg =3D fw_cfg_arch_create(machine,
-> >>                                  x86ms->boot_cpus, =
-x86ms->apic_id_limit);
-> >>
-> >> -    rom_set_fw(fw_cfg);
-> >> +    /* Initialize PC system firmware */
-> >> +    if (!xen_enabled()) {
-> >> +        pc_system_firmware_init(pcms, rom_memory);
-> >> +
-> >> +        option_rom_mr =3D g_malloc(sizeof(*option_rom_mr));
-> >> +        memory_region_init_ram(option_rom_mr, NULL, "pc.rom", =
-PC_ROM_SIZE,
-> >> +                               &error_fatal);
-> >> +        if (pcmc->pci_enabled) {
-> >> +            memory_region_set_readonly(option_rom_mr, true);
-> >> +        }
-> >> +        memory_region_add_subregion_overlap(rom_memory,
-> >> +                                            PC_ROM_MIN_VGA,
-> >> +                                            option_rom_mr,
-> >> +                                            1);
-> >> +
-> >> +        rom_set_fw(fw_cfg);
-> >> +    }
-> >>
-> >>      if (pcmc->has_reserved_memory && machine->device_memory->base) =
-{
-> >>          uint64_t *val =3D g_malloc(sizeof(*val));
-> >> ---
-> >>
-> >>> +        if (machine->kernel_filename !=3D NULL) {
-> >>> +            /* For xen HVM direct kernel boot, load linux here */
-> >>> +            xen_load_linux(pcms);
-> >>> +        }
-> >>>      }
-> >>>
-> >>>      gsi_state =3D pc_gsi_create(&x86ms->gsi, pcmc->pci_enabled);
-> >>> diff --git a/hw/i386/pc_sysfw.c b/hw/i386/pc_sysfw.c
-> >>> index ec2a3b3e7e..0ff47a4b59 100644
-> >>> --- a/hw/i386/pc_sysfw.c
-> >>> +++ b/hw/i386/pc_sysfw.c
-> >>> @@ -108,7 +108,7 @@ void pc_system_flash_create(PCMachineState =
-*pcms)
-> >>>      }
-> >>>  }
-> >>>
-> >>> -static void pc_system_flash_cleanup_unused(PCMachineState *pcms)
-> >>> +void pc_system_flash_cleanup_unused(PCMachineState *pcms)
-> >>>  {
-> >>>      char *prop_name;
-> >>>      int i;
-> >>> diff --git a/include/hw/i386/pc.h b/include/hw/i386/pc.h
-> >>> index e6135c34d6..497f2b7ab7 100644
-> >>> --- a/include/hw/i386/pc.h
-> >>> +++ b/include/hw/i386/pc.h
-> >>> @@ -187,6 +187,7 @@ int cmos_get_fd_drive_type(FloppyDriveType =
-fd0);
-> >>>
-> >>>  /* pc_sysfw.c */
-> >>>  void pc_system_flash_create(PCMachineState *pcms);
-> >>> +void pc_system_flash_cleanup_unused(PCMachineState *pcms);
-> >>>  void pc_system_firmware_init(PCMachineState *pcms, MemoryRegion =
-*rom_memory);
-> >>>
-> >>>  /* acpi-build.c */
-> >>>
-> >
-> >
+2. Pass buffer offset with XENDISPL_OP_DBUF_CREATE
 
+There are cases when display data buffer is created with non-zero
+offset to the data start. Handle such cases and provide that offset
+while creating a display buffer.
+
+3. Add XENDISPL_OP_GET_EDID command
+
+Add an optional request for reading Extended Display Identification
+Data (EDID) structure which allows better configuration of the
+display connectors over the configuration set in XenStore.
+With this change connectors may have multiple resolutions defined
+with respect to detailed timing definitions and additional properties
+normally provided by displays.
+
+If this request is not supported by the backend then visible area
+is defined by the relevant XenStore's "resolution" property.
+
+If backend provides extended display identification data (EDID) with
+XENDISPL_OP_GET_EDID request then EDID values must take precedence
+over the resolutions defined in XenStore.
+
+4. Bump protocol version to 2.
+
+Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+---
+ xen/include/public/io/displif.h | 91 +++++++++++++++++++++++++++++++--
+ 1 file changed, 88 insertions(+), 3 deletions(-)
+
+diff --git a/xen/include/public/io/displif.h b/xen/include/public/io/displif.h
+index cc5de9cb1f35..0055895510f7 100644
+--- a/xen/include/public/io/displif.h
++++ b/xen/include/public/io/displif.h
+@@ -38,7 +38,8 @@
+  *                           Protocol version
+  ******************************************************************************
+  */
+-#define XENDISPL_PROTOCOL_VERSION     "1"
++#define XENDISPL_PROTOCOL_VERSION     "2"
++#define XENDISPL_PROTOCOL_VERSION_INT  2
+ 
+ /*
+  ******************************************************************************
+@@ -202,6 +203,9 @@
+  *      Width and height of the connector in pixels separated by
+  *      XENDISPL_RESOLUTION_SEPARATOR. This defines visible area of the
+  *      display.
++ *      If backend provides extended display identification data (EDID) with
++ *      XENDISPL_OP_GET_EDID request then EDID values must take precedence
++ *      over the resolutions defined here.
+  *
+  *------------------ Connector Request Transport Parameters -------------------
+  *
+@@ -349,6 +353,8 @@
+ #define XENDISPL_OP_FB_DETACH         0x13
+ #define XENDISPL_OP_SET_CONFIG        0x14
+ #define XENDISPL_OP_PG_FLIP           0x15
++/* The below command is available in protocol version 2 and above. */
++#define XENDISPL_OP_GET_EDID          0x16
+ 
+ /*
+  ******************************************************************************
+@@ -377,6 +383,10 @@
+ #define XENDISPL_FIELD_BE_ALLOC       "be-alloc"
+ #define XENDISPL_FIELD_UNIQUE_ID      "unique-id"
+ 
++#define XENDISPL_EDID_BLOCK_SIZE      128
++#define XENDISPL_EDID_BLOCK_COUNT     256
++#define XENDISPL_EDID_MAX_SIZE        (XENDISPL_EDID_BLOCK_SIZE * XENDISPL_EDID_BLOCK_COUNT)
++
+ /*
+  ******************************************************************************
+  *                          STATUS RETURN CODES
+@@ -451,7 +461,9 @@
+  * +----------------+----------------+----------------+----------------+
+  * |                           gref_directory                          | 40
+  * +----------------+----------------+----------------+----------------+
+- * |                             reserved                              | 44
++ * |                             data_ofs                              | 44
++ * +----------------+----------------+----------------+----------------+
++ * |                             reserved                              | 48
+  * +----------------+----------------+----------------+----------------+
+  * |/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/|
+  * +----------------+----------------+----------------+----------------+
+@@ -494,6 +506,7 @@
+  *   buffer size (buffer_sz) exceeds what can be addressed by this single page,
+  *   then reference to the next page must be supplied (see gref_dir_next_page
+  *   below)
++ * data_ofs - uint32_t, offset of the data in the buffer, octets
+  */
+ 
+ #define XENDISPL_DBUF_FLG_REQ_ALLOC       (1 << 0)
+@@ -506,6 +519,7 @@ struct xendispl_dbuf_create_req {
+     uint32_t buffer_sz;
+     uint32_t flags;
+     grant_ref_t gref_directory;
++    uint32_t data_ofs;
+ };
+ 
+ /*
+@@ -731,6 +745,44 @@ struct xendispl_page_flip_req {
+     uint64_t fb_cookie;
+ };
+ 
++/*
++ * Request EDID - request EDID describing current connector:
++ *         0                1                 2               3        octet
++ * +----------------+----------------+----------------+----------------+
++ * |               id                | _OP_GET_EDID   |   reserved     | 4
++ * +----------------+----------------+----------------+----------------+
++ * |                             buffer_sz                             | 8
++ * +----------------+----------------+----------------+----------------+
++ * |                          gref_directory                           | 12
++ * +----------------+----------------+----------------+----------------+
++ * |                             reserved                              | 16
++ * +----------------+----------------+----------------+----------------+
++ * |/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/|
++ * +----------------+----------------+----------------+----------------+
++ * |                             reserved                              | 64
++ * +----------------+----------------+----------------+----------------+
++ *
++ * Notes:
++ *   - This command is not available in protocol version 1 and should be
++ *     ignored.
++ *   - This request is optional and if not supported then visible area
++ *     is defined by the relevant XenStore's "resolution" property.
++ *   - Shared buffer, allocated for EDID storage, must not be less then
++ *     XENDISPL_EDID_MAX_SIZE octets.
++ *
++ * buffer_sz - uint32_t, buffer size to be allocated, octets
++ * gref_directory - grant_ref_t, a reference to the first shared page
++ *   describing EDID buffer references. See XENDISPL_OP_DBUF_CREATE for
++ *   grant page directory structure (struct xendispl_page_directory).
++ *
++ * See response format for this request.
++ */
++
++struct xendispl_get_edid_req {
++    uint32_t buffer_sz;
++    grant_ref_t gref_directory;
++};
++
+ /*
+  *---------------------------------- Responses --------------------------------
+  *
+@@ -753,6 +805,35 @@ struct xendispl_page_flip_req {
+  * id - uint16_t, private guest value, echoed from request
+  * status - int32_t, response status, zero on success and -XEN_EXX on failure
+  *
++ *
++ * Get EDID response - response for XENDISPL_OP_GET_EDID:
++ *         0                1                 2               3        octet
++ * +----------------+----------------+----------------+----------------+
++ * |               id                |    operation   |    reserved    | 4
++ * +----------------+----------------+----------------+----------------+
++ * |                              status                               | 8
++ * +----------------+----------------+----------------+----------------+
++ * |                             edid_sz                               | 12
++ * +----------------+----------------+----------------+----------------+
++ * |                             reserved                              | 16
++ * +----------------+----------------+----------------+----------------+
++ * |/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/|
++ * +----------------+----------------+----------------+----------------+
++ * |                             reserved                              | 64
++ * +----------------+----------------+----------------+----------------+
++ *
++ * Notes:
++ *   - This response is not available in protocol version 1 and should be
++ *     ignored.
++ *
++ * edid_sz - uint32_t, size of the EDID, octets
++ */
++
++struct xendispl_get_edid_resp {
++    uint32_t edid_sz;
++};
++
++/*
+  *----------------------------------- Events ----------------------------------
+  *
+  * Events are sent via a shared page allocated by the front and propagated by
+@@ -804,6 +885,7 @@ struct xendispl_req {
+         struct xendispl_fb_detach_req fb_detach;
+         struct xendispl_set_config_req set_config;
+         struct xendispl_page_flip_req pg_flip;
++        struct xendispl_get_edid_req get_edid;
+         uint8_t reserved[56];
+     } op;
+ };
+@@ -813,7 +895,10 @@ struct xendispl_resp {
+     uint8_t operation;
+     uint8_t reserved;
+     int32_t status;
+-    uint8_t reserved1[56];
++    union {
++        struct xendispl_get_edid_resp get_edid;
++        uint8_t reserved1[56];
++    } op;
+ };
+ 
+ struct xendispl_evt {
+-- 
+2.17.1
 
 
