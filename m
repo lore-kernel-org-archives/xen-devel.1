@@ -2,52 +2,62 @@ Return-Path: <SRS0=Sbf7=AM=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.5 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.0 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B4A01C433E0
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Jul 2020 10:47:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E985C433DF
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Jul 2020 10:47:16 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 92F6F20722
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Jul 2020 10:47:00 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 92F6F20722
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 0B98520747
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Jul 2020 10:47:16 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0B98520747
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jqaGL-0004EF-Jr; Wed, 01 Jul 2020 10:46:45 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=T2yc=AM=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1jqaGJ-0004Dz-Pn
- for xen-devel@lists.xenproject.org; Wed, 01 Jul 2020 10:46:43 +0000
-X-Inumbo-ID: 267023de-bb88-11ea-b7bb-bc764e2007e4
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 267023de-bb88-11ea-b7bb-bc764e2007e4;
- Wed, 01 Jul 2020 10:46:42 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 084D7AD04;
- Wed,  1 Jul 2020 10:46:42 +0000 (UTC)
-Subject: Re: [PATCH v2] xen/displif: Protocol version 2
-To: Oleksandr Andrushchenko <andr2000@gmail.com>,
- xen-devel@lists.xenproject.org, ian.jackson@eu.citrix.com, wl@xen.org
-References: <20200701071923.18883-1-andr2000@gmail.com>
-From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Message-ID: <dffd127d-c5a1-4c77-baa8-f1d931145bc4@suse.com>
-Date: Wed, 1 Jul 2020 12:46:41 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.9.0
+	id 1jqaGe-0004G5-SY; Wed, 01 Jul 2020 10:47:04 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=w4aC=AM=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1jqaGe-0004Ft-0A
+ for xen-devel@lists.xenproject.org; Wed, 01 Jul 2020 10:47:04 +0000
+X-Inumbo-ID: 31f05314-bb88-11ea-86ed-12813bfff9fa
+Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 31f05314-bb88-11ea-86ed-12813bfff9fa;
+ Wed, 01 Jul 2020 10:47:02 +0000 (UTC)
+Authentication-Results: esa2.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none
+IronPort-SDR: pG4jg7OvnbFWBidfhZRN6IQe++xQtUxLfnDM5g1uod1gtreVBDUy1fN30pnH06DbRHqfLDTBSQ
+ bNoJh8OWc+bZptyU13fjSWqzam++ZHRhocNDMUc8c1YKWdDK/m1m6FiOOlr3saLyAe4mBhgeyR
+ bDhNEQMDMGDLk6oPh/6D3m8aGiRGZF7DC76fnqeXDwxPYcjCehOSF5fw2YerpVuyEGmDp3Vvkx
+ cmb1aqk6bhzh2JYqz1BA2hwRaod8Y4U/qyJBkBdqvjGdLSsMxrQtIMUnt1RQe+I5KpA5aq9K9D
+ AW0=
+X-SBRS: 2.7
+X-MesageID: 21388112
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.75,299,1589256000"; d="scan'208";a="21388112"
+Date: Wed, 1 Jul 2020 12:46:51 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: =?utf-8?Q?Micha=C5=82_Leszczy=C5=84ski?= <michal.leszczynski@cert.pl>
+Subject: Re: [PATCH v4 06/10] memory: batch processing in acquire_resource()
+Message-ID: <20200701104651.GS735@Air-de-Roger>
+References: <cover.1593519420.git.michal.leszczynski@cert.pl>
+ <a317b169e3710a481bb4be066d9b878f27b3e66c.1593519420.git.michal.leszczynski@cert.pl>
 MIME-Version: 1.0
-In-Reply-To: <20200701071923.18883-1-andr2000@gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <a317b169e3710a481bb4be066d9b878f27b3e66c.1593519420.git.michal.leszczynski@cert.pl>
+X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
+ AMSPEX02CL02.citrite.net (10.69.22.126)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,47 +68,83 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+Cc: Julien Grall <julien@xen.org>, Stefano
+ Stabellini <sstabellini@kernel.org>, tamas.lengyel@intel.com,
+ Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, luwei.kang@intel.com, Jan
+ Beulich <jbeulich@suse.com>, xen-devel@lists.xenproject.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 01.07.20 09:19, Oleksandr Andrushchenko wrote:
-> From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+On Tue, Jun 30, 2020 at 02:33:49PM +0200, Michał Leszczyński wrote:
+> From: Michal Leszczynski <michal.leszczynski@cert.pl>
 > 
-> 1. Add protocol version as an integer
-> 
-> Version string, which is in fact an integer, is hard to handle in the
-> code that supports different protocol versions. To simplify that
-> also add the version as an integer.
-> 
-> 2. Pass buffer offset with XENDISPL_OP_DBUF_CREATE
-> 
-> There are cases when display data buffer is created with non-zero
-> offset to the data start. Handle such cases and provide that offset
-> while creating a display buffer.
-> 
-> 3. Add XENDISPL_OP_GET_EDID command
-> 
-> Add an optional request for reading Extended Display Identification
-> Data (EDID) structure which allows better configuration of the
-> display connectors over the configuration set in XenStore.
-> With this change connectors may have multiple resolutions defined
-> with respect to detailed timing definitions and additional properties
-> normally provided by displays.
-> 
-> If this request is not supported by the backend then visible area
-> is defined by the relevant XenStore's "resolution" property.
-> 
-> If backend provides extended display identification data (EDID) with
-> XENDISPL_OP_GET_EDID request then EDID values must take precedence
-> over the resolutions defined in XenStore.
-> 
-> 4. Bump protocol version to 2.
-> 
-> Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+> Allow to acquire large resources by allowing acquire_resource()
+> to process items in batches, using hypercall continuation.
 
-Reviewed-by: Juergen Gross <jgross@suse.com>
+This patch should be the first of thew series IMO, since it can go in
+independently of the rest, as it's a general improvement to
+XENMEM_acquire_resource.
 
+> Signed-off-by: Michal Leszczynski <michal.leszczynski@cert.pl>
+> ---
+>  xen/common/memory.c | 32 +++++++++++++++++++++++++++++---
+>  1 file changed, 29 insertions(+), 3 deletions(-)
+> 
+> diff --git a/xen/common/memory.c b/xen/common/memory.c
+> index 714077c1e5..3ab06581a2 100644
+> --- a/xen/common/memory.c
+> +++ b/xen/common/memory.c
+> @@ -1046,10 +1046,12 @@ static int acquire_grant_table(struct domain *d, unsigned int id,
+>  }
+>  
+>  static int acquire_resource(
+> -    XEN_GUEST_HANDLE_PARAM(xen_mem_acquire_resource_t) arg)
+> +    XEN_GUEST_HANDLE_PARAM(xen_mem_acquire_resource_t) arg,
+> +    unsigned long *start_extent)
+>  {
+>      struct domain *d, *currd = current->domain;
+>      xen_mem_acquire_resource_t xmar;
+> +    uint32_t total_frames;
+>      /*
+>       * The mfn_list and gfn_list (below) arrays are ok on stack for the
+>       * moment since they are small, but if they need to grow in future
+> @@ -1077,8 +1079,17 @@ static int acquire_resource(
+>          return 0;
+>      }
+>  
+> +    total_frames = xmar.nr_frames;
+> +
+> +    if ( *start_extent )
+> +    {
+> +        xmar.frame += *start_extent;
+> +        xmar.nr_frames -= *start_extent;
+> +        guest_handle_add_offset(xmar.frame_list, *start_extent);
+> +    }
+> +
+>      if ( xmar.nr_frames > ARRAY_SIZE(mfn_list) )
+> -        return -E2BIG;
+> +        xmar.nr_frames = ARRAY_SIZE(mfn_list);
+>  
+>      rc = rcu_lock_remote_domain_by_id(xmar.domid, &d);
+>      if ( rc )
+> @@ -1135,6 +1146,14 @@ static int acquire_resource(
+>          }
+>      }
+>  
+> +    if ( !rc )
+> +    {
+> +        *start_extent += xmar.nr_frames;
+> +
+> +        if ( *start_extent != total_frames )
+> +            rc = -ERESTART;
+> +    }
 
-Juergen
+I think you should add some kind of loop here, processing just 32
+frames and preempting might be too low. You generally want to loop
+doing batches of 32 entries until hypercall_preempt_check() returns
+true.
+
+Thanks, Roger.
 
