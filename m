@@ -2,73 +2,91 @@ Return-Path: <SRS0=nVJm=AN=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.3 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-8.6 required=3.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3F684C433E0
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Jul 2020 17:35:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5535BC433E0
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Jul 2020 18:22:16 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 135202084C
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Jul 2020 17:35:15 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 18B322084C
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Jul 2020 18:22:15 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="o5xV1fcf"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 135202084C
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	dkim=pass (1024-bit key) header.d=amazon.com header.i=@amazon.com header.b="cfr5zgdq"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 18B322084C
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=amazon.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jr36s-0000xw-Be; Thu, 02 Jul 2020 17:34:54 +0000
+	id 1jr3qN-000573-Il; Thu, 02 Jul 2020 18:21:55 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=gpFn=AN=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1jr36r-0000xr-8L
- for xen-devel@lists.xenproject.org; Thu, 02 Jul 2020 17:34:53 +0000
-X-Inumbo-ID: 560e87e0-bc8a-11ea-bca7-bc764e2007e4
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=PV0h=AN=amazon.com=prvs=445caddfd=anchalag@srs-us1.protection.inumbo.net>)
+ id 1jr3qL-00056y-S2
+ for xen-devel@lists.xenproject.org; Thu, 02 Jul 2020 18:21:53 +0000
+X-Inumbo-ID: e70d7dae-bc90-11ea-b7bb-bc764e2007e4
+Received: from smtp-fw-33001.amazon.com (unknown [207.171.190.10])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 560e87e0-bc8a-11ea-bca7-bc764e2007e4;
- Thu, 02 Jul 2020 17:34:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Q26iJJNm1J2GxnnFPGVie/uZdpJ0fBopyLEBAH0PjRI=; b=o5xV1fcf5oYACBK+NfLOGn/sMa
- x9rMVWXMxMu5hJrduzSpfe2EZPqhI3pOQ6HoqJlAS8jLJV1GYleTl5Ltw8dH/VzRehecaLiKpnTGF
- q8LedVTch6SCPlN9rGmJzhFSt/6PP3TRJcUQGB/Z3VXUbQsaK9qhabe5C/Vg01bmyCOE=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1jr36p-0007Ao-M7; Thu, 02 Jul 2020 17:34:51 +0000
-Received: from 54-240-197-238.amazon.com ([54.240.197.238]
- helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1jr36p-0002P1-2Z; Thu, 02 Jul 2020 17:34:51 +0000
-Subject: Re: Kexec and libxenctlr.so
-To: Wei Liu <wl@xen.org>, Julien Grall <jgrall@amazon.com>
-References: <7a88218d-981e-6583-15a5-3fcaffb05294@amazon.com>
- <20200626110812.hxeoomagamkdceu7@liuwe-devbox-debian-v2>
-From: Julien Grall <julien@xen.org>
-Message-ID: <aa5ad259-5848-e8c4-61e8-6649bb65ece5@xen.org>
-Date: Thu, 2 Jul 2020 18:34:48 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
- Gecko/20100101 Thunderbird/68.10.0
+ id e70d7dae-bc90-11ea-b7bb-bc764e2007e4;
+ Thu, 02 Jul 2020 18:21:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
+ t=1593714113; x=1625250113;
+ h=date:from:to:subject:message-id:references:mime-version:
+ in-reply-to; bh=uoroRGLFE2Atyc2JGE05NLscaVRKKsCZnOJvewnD1q4=;
+ b=cfr5zgdq7Ft7MAHGkskXajztclg+fGj0slKdLNLluKkmOzUYYOX4IKrl
+ bw1lfhRIMBG25w5OTvBTvS251rg6SB4FWCEtW+LMqYDN0X/LRX8VQBbIN
+ 9427OFi+ocY2nfg0RE0Au/6mkvxWbLXX5/mU41YNN32zRF6jgU642GuiK A=;
+IronPort-SDR: 2zEetQQdV5iJipJrTQmkyojCF1liNQ2rvC5FD4pMA/MiHYFXS2EHBC9fKUXHHRnbe8spyb4jXz
+ T4wH3OzVpZxQ==
+X-IronPort-AV: E=Sophos;i="5.75,305,1589241600"; d="scan'208";a="55693041"
+Received: from sea32-co-svc-lb4-vlan3.sea.corp.amazon.com (HELO
+ email-inbound-relay-2a-119b4f96.us-west-2.amazon.com) ([10.47.23.38])
+ by smtp-border-fw-out-33001.sea14.amazon.com with ESMTP;
+ 02 Jul 2020 18:21:50 +0000
+Received: from EX13MTAUWA001.ant.amazon.com
+ (pdx4-ws-svc-p6-lb7-vlan2.pdx.amazon.com [10.170.41.162])
+ by email-inbound-relay-2a-119b4f96.us-west-2.amazon.com (Postfix) with ESMTPS
+ id BA4BA1A102E; Thu,  2 Jul 2020 18:21:48 +0000 (UTC)
+Received: from EX13D10UWA003.ant.amazon.com (10.43.160.248) by
+ EX13MTAUWA001.ant.amazon.com (10.43.160.58) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Thu, 2 Jul 2020 18:21:43 +0000
+Received: from EX13MTAUWA001.ant.amazon.com (10.43.160.58) by
+ EX13D10UWA003.ant.amazon.com (10.43.160.248) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Thu, 2 Jul 2020 18:21:36 +0000
+Received: from dev-dsk-anchalag-2a-9c2d1d96.us-west-2.amazon.com
+ (172.22.96.68) by mail-relay.amazon.com (10.43.160.118) with Microsoft SMTP
+ Server id 15.0.1497.2 via Frontend Transport; Thu, 2 Jul 2020 18:21:36 +0000
+Received: by dev-dsk-anchalag-2a-9c2d1d96.us-west-2.amazon.com (Postfix,
+ from userid 4335130)
+ id 8A9B940844; Thu,  2 Jul 2020 18:21:36 +0000 (UTC)
+Date: Thu, 2 Jul 2020 18:21:36 +0000
+From: Anchal Agarwal <anchalag@amazon.com>
+To: <tglx@linutronix.de>, <mingo@redhat.com>, <bp@alien8.de>, <hpa@zytor.com>, 
+ <x86@kernel.org>, <boris.ostrovsky@oracle.com>, <jgross@suse.com>,
+ <linux-pm@vger.kernel.org>, <linux-mm@kvack.org>, <kamatam@amazon.com>,
+ <sstabellini@kernel.org>, <konrad.wilk@oracle.com>, <roger.pau@citrix.com>,
+ <axboe@kernel.dk>, <davem@davemloft.net>, <rjw@rjwysocki.net>,
+ <len.brown@intel.com>, <pavel@ucw.cz>, <peterz@infradead.org>,
+ <eduval@amazon.com>, <sblbir@amazon.com>, <anchalag@amazon.com>,
+ <xen-devel@lists.xenproject.org>, <vkuznets@redhat.com>,
+ <netdev@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+ <dwmw@amazon.co.uk>, <benh@kernel.crashing.org>
+Subject: [PATCH v2 01/11] xen/manage: keep track of the on-going suspend mode
+Message-ID: <20200702182136.GA3511@dev-dsk-anchalag-2a-9c2d1d96.us-west-2.amazon.com>
+References: <cover.1593665947.git.anchalag@amazon.com>
 MIME-Version: 1.0
-In-Reply-To: <20200626110812.hxeoomagamkdceu7@liuwe-devbox-debian-v2>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <cover.1593665947.git.anchalag@amazon.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Precedence: Bulk
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
-Precedence: list
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -76,145 +94,152 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: "paul@xen.org" <paul@xen.org>,
- "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>,
- daniel.kiper@oracle.com,
- "ian.jackson@eu.citrix.com" <ian.jackson@eu.citrix.com>,
- Anthony Perard <anthony.perard@citrix.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Hi Wei,
+From: Munehisa Kamata <kamatam@amazon.com>
 
-On 26/06/2020 12:08, Wei Liu wrote:
-> On Thu, Jun 11, 2020 at 03:57:37PM +0100, Julien Grall wrote:
->> Hi all,
->>
->> kexec-tools has an option to load dynamically libxenctlr.so (not .so.4.x)
->> (see [1]).
->>
->> Given that the library has never been considered stable, it is probably a
->> disaster that is waiting to happen.
->>
->> Looking at the tree kexec is using the follow libxc functions:
->>     - xc_kexec_get_range()
->>     - xc_kexec_load()
->>     - xc_kexec_unload()
->>     - xc_kexec_status()
->>     - xc_kexec_exec()
->>     - xc_version()
->>     - xc_interface_open()
->>     - xc_interface_close()
->>     - xc_get_max_cpus()
->>     - xc_get_machine_memory_map()
->>
->> I think it is uncontroversial that we want a new stable library for all the
->> xc_kexec_* functions (maybe libxenexec)?
-> 
-> That sounds fine to me.
-> 
-> Looking at the list of functions, all the xc_kexec_* ones are probably
-> already rather stable.
+Guest hibernation is different from xen suspend/resume/live migration.
+Xen save/restore does not use pm_ops as is needed by guest hibernation.
+Hibernation in guest follows ACPI path and is guest inititated , the
+hibernation image is saved within guest as compared to later modes
+which are xen toolstack assisted and image creation/storage is in
+control of hypervisor/host machine.
+To differentiate between Xen suspend and PM hibernation, keep track
+of the on-going suspend mode by mainly using a new PM notifier.
+Introduce simple functions which help to know the on-going suspend mode
+so that other Xen-related code can behave differently according to the
+current suspend mode.
+Since Xen suspend doesn't have corresponding PM event, its main logic
+is modfied to acquire pm_mutex and set the current mode.
 
-That's my understanding as well.
+Though, acquirng pm_mutex is still right thing to do, we may
+see deadlock if PM hibernation is interrupted by Xen suspend.
+PM hibernation depends on xenwatch thread to process xenbus state
+transactions, but the thread will sleep to wait pm_mutex which is
+already held by PM hibernation context in the scenario. Xen shutdown
+code may need some changes to avoid the issue.
 
-Although, we may want to rethink some of the hypercalls (such as 
-KEXEC_cmd_kexec_get_range) in the future as they have different layout 
-between 32-bit and 64-bit. Thanksfully this wasn't exposed outside of 
-libxc, so it shouldn't be an issue to have a stable library.
+[Anchal Agarwal: Changelog]:
+ RFC v1->v2: Code refactoring
+ v1->v2:     Remove unused functions for PM SUSPEND/PM hibernation
 
-> 
-> For xc_interface_open / close, they are perhaps used only to obtain an
-> xc handle such that it can be used to make hypercalls. You new kexec
-> library is going to expose its own handle with a xencall handle wrapped
-> inside, so you can do away with an xc handle.
+Signed-off-by: Anchal Agarwal <anchalag@amazon.com>
+Signed-off-by: Munehisa Kamata <kamatam@amazon.com>
+---
+ drivers/xen/manage.c  | 60 +++++++++++++++++++++++++++++++++++++++++++
+ include/xen/xen-ops.h |  1 +
+ 2 files changed, 61 insertions(+)
 
-I have already a PoC for the new library. I had to tweak a bit the list 
-of helpers as some use hypercalls arguments directly. Below, the 
-proposed interface:
-
-/* Callers who don't care don't need to #include <xentoollog.h> */
-struct xentoollog_logger;
-
-typedef struct xenkexec_handle xenkexec_handle;
-
-typedef struct xenkexec_segments xenkexec_segments;
-
-xenkexec_handle *xenkexec_open(struct xentoollog_logger *logger,
-                                unsigned int open_flags);
-int xenkexec_close(xenkexec_handle *khdl);
-
-int xenkexec_exec(xenkexec_handle *khdl, int type);
-int xenkexec_get_range(xenkexec_handle *khdl, int range, int nr,
-                        uint64_t *size, uint64_t *start);
-int xenkexec_load(xenkexec_handle *khdl, uint8_t type, uint16_t arch,
-                   uint64_t entry_maddr, uint32_t nr_segments,
-                   xenkexec_segments *segments);
-int xenkexec_unload(xenkexec_handle *khdl, int type);
-int xenkexec_status(xenkexec_handle *khdl, int type);
-
-xenkexec_segments *xenkexec_allocate_segments(xenkexec_handle *khdl,
-                                               unsigned int nr);
-void xenkexec_free_segments(xenkexec_handle *khdl, xenkexec_segments *segs);
-
-int xenkexec_update_segment(xenkexec_handle *khdl, xenkexec_segments *segs,
-                             unsigned int idx, void *buffer, size_t 
-buffer_size,
-                             uint64_t dest_maddr, size_t dest_size);
-
-
-> 
->>
->> However I am not entirely sure where to put the others.
->>
->> I am thinking to introduce libxensysctl for xc_get_max_cpus() as it is a
->> XEN_SYSCTL. We could possibly include xc_get_machine_memory_map() (despite
->> it is a XENMEM_).
->>
-> 
-> Introducing an libxensysctl before we stabilise sysctl interface seems
-> wrong to me. We can bury the call inside libxenkexec itself for the time
-> being.
-
-That would work for me.
-
-> 
->> For xc_version(), I am thinking to extend libxentoolcore to also include
->> "stable xen API".
->>
-> 
-> If you can do without an xc handle, do you still need to call
-> xc_version?
-
-Looking at kexec, xc_version() is used by crashdump to determine which 
-architecture is used by Xen (in this case 32-bit x86 vs 64-bit x86).
-
-The was introcuded by commit:
-
-commit cdbc9b011fe43407908632d842e3a39e495e48d9
-Author: Ian Campbell <ian.campbell@xensource.com>
-Date:   Fri Mar 16 10:10:24 2007 +0000
-
-     Set crash dump ELF header e_machine field based on underlying 
-hypervisor architecture.
-
-     This is necessary when running Xen with a 64 bit hypervisor and 32 bit
-     domain 0 since the CPU crash notes will be 64 bit.
-
-     Detecting the hypervisor archiecture requires libxenctrl and 
-therefore this
-     support is optional and disabled by default.
-
-     Signed-off-by: Ian Campbell <ian.campbell@xensource.com>
-     Acked-by: Magnus Damm <magnus@valinux.co.jp>
-     Signed-off-by: Simon Horman <horms@verge.net.au>
-
-As we drop support for 32-bit Xen quite a long time ago, we may be able 
-to remove the call to xc_version().
-
-Cheers,
-
+diff --git a/drivers/xen/manage.c b/drivers/xen/manage.c
+index cd046684e0d1..69833fd6cfd1 100644
+--- a/drivers/xen/manage.c
++++ b/drivers/xen/manage.c
+@@ -14,6 +14,7 @@
+ #include <linux/freezer.h>
+ #include <linux/syscore_ops.h>
+ #include <linux/export.h>
++#include <linux/suspend.h>
+ 
+ #include <xen/xen.h>
+ #include <xen/xenbus.h>
+@@ -40,6 +41,20 @@ enum shutdown_state {
+ /* Ignore multiple shutdown requests. */
+ static enum shutdown_state shutting_down = SHUTDOWN_INVALID;
+ 
++enum suspend_modes {
++	NO_SUSPEND = 0,
++	XEN_SUSPEND,
++	PM_HIBERNATION,
++};
++
++/* Protected by pm_mutex */
++static enum suspend_modes suspend_mode = NO_SUSPEND;
++
++bool xen_is_xen_suspend(void)
++{
++	return suspend_mode == XEN_SUSPEND;
++}
++
+ struct suspend_info {
+ 	int cancelled;
+ };
+@@ -99,6 +114,10 @@ static void do_suspend(void)
+ 	int err;
+ 	struct suspend_info si;
+ 
++	lock_system_sleep();
++
++	suspend_mode = XEN_SUSPEND;
++
+ 	shutting_down = SHUTDOWN_SUSPEND;
+ 
+ 	err = freeze_processes();
+@@ -162,6 +181,10 @@ static void do_suspend(void)
+ 	thaw_processes();
+ out:
+ 	shutting_down = SHUTDOWN_INVALID;
++
++	suspend_mode = NO_SUSPEND;
++
++	unlock_system_sleep();
+ }
+ #endif	/* CONFIG_HIBERNATE_CALLBACKS */
+ 
+@@ -387,3 +410,40 @@ int xen_setup_shutdown_event(void)
+ EXPORT_SYMBOL_GPL(xen_setup_shutdown_event);
+ 
+ subsys_initcall(xen_setup_shutdown_event);
++
++static int xen_pm_notifier(struct notifier_block *notifier,
++			unsigned long pm_event, void *unused)
++{
++	switch (pm_event) {
++	case PM_SUSPEND_PREPARE:
++	case PM_HIBERNATION_PREPARE:
++	case PM_RESTORE_PREPARE:
++		suspend_mode = PM_HIBERNATION;
++		break;
++	case PM_POST_SUSPEND:
++	case PM_POST_RESTORE:
++	case PM_POST_HIBERNATION:
++		/* Set back to the default */
++		suspend_mode = NO_SUSPEND;
++		break;
++	default:
++		pr_warn("Receive unknown PM event 0x%lx\n", pm_event);
++		return -EINVAL;
++	}
++
++	return 0;
++};
++
++static struct notifier_block xen_pm_notifier_block = {
++	.notifier_call = xen_pm_notifier
++};
++
++static int xen_setup_pm_notifier(void)
++{
++	if (!xen_hvm_domain())
++		return -ENODEV;
++
++	return register_pm_notifier(&xen_pm_notifier_block);
++}
++
++subsys_initcall(xen_setup_pm_notifier);
+diff --git a/include/xen/xen-ops.h b/include/xen/xen-ops.h
+index 39a5580f8feb..2521d6a306cd 100644
+--- a/include/xen/xen-ops.h
++++ b/include/xen/xen-ops.h
+@@ -40,6 +40,7 @@ u64 xen_steal_clock(int cpu);
+ 
+ int xen_setup_shutdown_event(void);
+ 
++bool xen_is_xen_suspend(void);
+ extern unsigned long *xen_contiguous_bitmap;
+ 
+ #if defined(CONFIG_XEN_PV) || defined(CONFIG_ARM) || defined(CONFIG_ARM64)
 -- 
-Julien Grall
+2.20.1
+
 
