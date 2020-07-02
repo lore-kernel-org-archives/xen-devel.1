@@ -7,64 +7,64 @@ X-Spam-Status: No, score=-8.6 required=3.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ED517C433DF
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Jul 2020 18:23:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1AE16C433DF
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Jul 2020 18:23:34 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B704F20870
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Jul 2020 18:23:10 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id E4ABB20870
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Jul 2020 18:23:33 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=amazon.com header.i=@amazon.com header.b="NdsRZ2sn"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B704F20870
+	dkim=pass (1024-bit key) header.d=amazon.com header.i=@amazon.com header.b="vCQNhmqE"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E4ABB20870
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=amazon.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jr3rP-0005Oh-Ej; Thu, 02 Jul 2020 18:22:59 +0000
+	id 1jr3ro-0005Zm-On; Thu, 02 Jul 2020 18:23:24 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=PV0h=AN=amazon.com=prvs=445caddfd=anchalag@srs-us1.protection.inumbo.net>)
- id 1jr3rN-0005Lf-Ow
- for xen-devel@lists.xenproject.org; Thu, 02 Jul 2020 18:22:57 +0000
-X-Inumbo-ID: 0d5f7e8a-bc91-11ea-b7bb-bc764e2007e4
-Received: from smtp-fw-9102.amazon.com (unknown [207.171.184.29])
+ id 1jr3rm-0005ZE-VZ
+ for xen-devel@lists.xenproject.org; Thu, 02 Jul 2020 18:23:22 +0000
+X-Inumbo-ID: 1caaf9c8-bc91-11ea-bca7-bc764e2007e4
+Received: from smtp-fw-6002.amazon.com (unknown [52.95.49.90])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 0d5f7e8a-bc91-11ea-b7bb-bc764e2007e4;
- Thu, 02 Jul 2020 18:22:57 +0000 (UTC)
+ id 1caaf9c8-bc91-11ea-bca7-bc764e2007e4;
+ Thu, 02 Jul 2020 18:23:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
- t=1593714177; x=1625250177;
+ t=1593714202; x=1625250202;
  h=date:from:to:subject:message-id:references:mime-version:
- in-reply-to; bh=RVQKYtcRWwNWuZmUzS3zKOFxRzkR229MYD6OqjQdblg=;
- b=NdsRZ2snflyOIiQBbCjZKak10ZUwltWSELv0tuqOotP7kx2aMnxD4Jy7
- CJzocvYTg6PMw3OWcQkAqQRIje778szTn3joTxV04qhael74DvVAjIYOd
- GSeHpsvLapQOYzov7dAkDzJY8s9TX3daU2RxWQg7VpDrDAzFnnzF5ugzW k=;
-IronPort-SDR: CD+xWM+1+cIX2syWOyjPqbem2nqHCuYhZtRY9gc6NlNk+D4GhT+VRWopNGaFDnmYCsyAzUKHdD
- NlhAuEexncvg==
-X-IronPort-AV: E=Sophos;i="5.75,305,1589241600"; d="scan'208";a="56964654"
-Received: from sea32-co-svc-lb4-vlan3.sea.corp.amazon.com (HELO
- email-inbound-relay-1a-807d4a99.us-east-1.amazon.com) ([10.47.23.38])
- by smtp-border-fw-out-9102.sea19.amazon.com with ESMTP;
- 02 Jul 2020 18:22:54 +0000
-Received: from EX13MTAUEB002.ant.amazon.com
- (iad55-ws-svc-p15-lb9-vlan2.iad.amazon.com [10.40.159.162])
- by email-inbound-relay-1a-807d4a99.us-east-1.amazon.com (Postfix) with ESMTPS
- id 67EEAA2423; Thu,  2 Jul 2020 18:22:47 +0000 (UTC)
-Received: from EX13D08UEB002.ant.amazon.com (10.43.60.107) by
- EX13MTAUEB002.ant.amazon.com (10.43.60.12) with Microsoft SMTP Server (TLS)
- id 15.0.1497.2; Thu, 2 Jul 2020 18:22:29 +0000
-Received: from EX13MTAUEB002.ant.amazon.com (10.43.60.12) by
- EX13D08UEB002.ant.amazon.com (10.43.60.107) with Microsoft SMTP Server (TLS)
- id 15.0.1497.2; Thu, 2 Jul 2020 18:22:29 +0000
+ in-reply-to; bh=I7turOllMrL/CNEMBFGxOPTAV9RKwwcOD5Qzsp0RMCI=;
+ b=vCQNhmqEzpWBiFjhA17o+7y6jSRGt0hV8h93YfSdFmwmTL7uGwTB3li2
+ WqRsJOVaS5mmHL5FBKt/3PAjm2H7e/eklFheXYrlJwWuB1POXO7BXTWcE
+ SUDV3yj1DX3w216jPDUzXevn+HCtxqoXZ6Tce287X5Fyln5TibTNer3eL E=;
+IronPort-SDR: gtZOu0dMiB3ehEJQSAxthJy8slH3FlYoulPxQjoZIUWyHzAH9qA9TfOTryU3wg6sLJrulv+kzq
+ yxHeXV2LgO7A==
+X-IronPort-AV: E=Sophos;i="5.75,305,1589241600"; d="scan'208";a="39736466"
+Received: from iad12-co-svc-p1-lb1-vlan3.amazon.com (HELO
+ email-inbound-relay-2c-4e7c8266.us-west-2.amazon.com) ([10.43.8.6])
+ by smtp-border-fw-out-6002.iad6.amazon.com with ESMTP;
+ 02 Jul 2020 18:23:16 +0000
+Received: from EX13MTAUEE002.ant.amazon.com
+ (pdx4-ws-svc-p6-lb7-vlan2.pdx.amazon.com [10.170.41.162])
+ by email-inbound-relay-2c-4e7c8266.us-west-2.amazon.com (Postfix) with ESMTPS
+ id A0D51A2540; Thu,  2 Jul 2020 18:23:14 +0000 (UTC)
+Received: from EX13D08UEE002.ant.amazon.com (10.43.62.92) by
+ EX13MTAUEE002.ant.amazon.com (10.43.62.24) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Thu, 2 Jul 2020 18:22:51 +0000
+Received: from EX13MTAUEE002.ant.amazon.com (10.43.62.24) by
+ EX13D08UEE002.ant.amazon.com (10.43.62.92) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Thu, 2 Jul 2020 18:22:51 +0000
 Received: from dev-dsk-anchalag-2a-9c2d1d96.us-west-2.amazon.com
- (172.22.96.68) by mail-relay.amazon.com (10.43.60.234) with Microsoft SMTP
- Server id 15.0.1497.2 via Frontend Transport; Thu, 2 Jul 2020 18:22:28 +0000
+ (172.22.96.68) by mail-relay.amazon.com (10.43.62.224) with Microsoft SMTP
+ Server id 15.0.1497.2 via Frontend Transport; Thu, 2 Jul 2020 18:22:51 +0000
 Received: by dev-dsk-anchalag-2a-9c2d1d96.us-west-2.amazon.com (Postfix,
  from userid 4335130)
- id B17DF40844; Thu,  2 Jul 2020 18:22:28 +0000 (UTC)
-Date: Thu, 2 Jul 2020 18:22:28 +0000
+ id 651F840844; Thu,  2 Jul 2020 18:22:51 +0000 (UTC)
+Date: Thu, 2 Jul 2020 18:22:51 +0000
 From: Anchal Agarwal <anchalag@amazon.com>
 To: <tglx@linutronix.de>, <mingo@redhat.com>, <bp@alien8.de>, <hpa@zytor.com>, 
  <x86@kernel.org>, <boris.ostrovsky@oracle.com>, <jgross@suse.com>,
@@ -76,9 +76,9 @@ To: <tglx@linutronix.de>, <mingo@redhat.com>, <bp@alien8.de>, <hpa@zytor.com>,
  <xen-devel@lists.xenproject.org>, <vkuznets@redhat.com>,
  <netdev@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
  <dwmw@amazon.co.uk>, <benh@kernel.crashing.org>
-Subject: [PATCH v2 06/11] xen-blkfront: add callbacks for PM suspend and
+Subject: [PATCH v2 08/11] x86/xen: save and restore steal clock during PM
  hibernation
-Message-ID: <20200702182228.GA3586@dev-dsk-anchalag-2a-9c2d1d96.us-west-2.amazon.com>
+Message-ID: <20200702182251.GA3606@dev-dsk-anchalag-2a-9c2d1d96.us-west-2.amazon.com>
 References: <cover.1593665947.git.anchalag@amazon.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
@@ -98,283 +98,61 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: Munehisa Kamata <kamatam@amazon.com>
+Save/restore steal times in syscore suspend/resume during PM
+hibernation. Commit '5e25f5db6abb9: ("xen/time: do not
+decrease steal time after live migration on xen")' fixes xen
+guest steal time handling during migration. A similar issue is seen
+during PM hibernation.
+Currently, steal time accounting code in scheduler expects steal clock
+callback to provide monotonically increasing value. If the accounting
+code receives a smaller value than previous one, it uses a negative
+value to calculate steal time and results in incorrectly updated idle
+and steal time accounting. This breaks userspace tools which read
+/proc/stat.
 
-S4 power transisiton states are much different than xen
-suspend/resume. Former is visible to the guest and frontend drivers should
-be aware of the state transistions and should be able to take appropriate
-actions when needed. In transition to S4 we need to make sure that at least
-all the in-flight blkif requests get completed, since they probably contain
-bits of the guest's memory image and that's not going to get saved any
-other way. Hence, re-issuing of in-flight requests as in case of xen resume
-will not work here. This is in contrast to xen-suspend where we need to
-freeze with as little processing as possible to avoid dirtying RAM late in
-the migration cycle and we know that in-flight data can wait.
+top - 08:05:35 up  2:12,  3 users,  load average: 0.00, 0.07, 0.23
+Tasks:  80 total,   1 running,  79 sleeping,   0 stopped,   0 zombie
+Cpu(s):  0.0%us,  0.0%sy,  0.0%ni,30100.0%id,  0.0%wa,  0.0%hi, 0.0%si,-1253874204672.0%st
 
-Add freeze, thaw and restore callbacks for PM suspend and hibernation
-support. All frontend drivers that needs to use PM_HIBERNATION/PM_SUSPEND
-events, need to implement these xenbus_driver callbacks. The freeze handler
-stops block-layer queue and disconnect the frontend from the backend while
-freeing ring_info and associated resources. Before disconnecting from the
-backend, we need to prevent any new IO from being queued and wait for
-existing IO to complete. Freeze/unfreeze of the queues will guarantee
-that there are no requests in use on the shared ring. However, for sanity
-we should check state of the ring before disconnecting to make sure that
-there are no outstanding requests to be processed on the ring.
-The restore handler re-allocates ring_info, unquiesces and unfreezes the
-queue and re-connect to the backend, so that rest of the kernel can
-continue to use the block device transparently.
+This can actually happen when a Xen PVHVM guest gets restored from
+hibernation, because such a restored guest is just a fresh domain from
+Xen perspective and the time information in runstate info starts over
+from scratch.
 
-Note:For older backends,if a backend doesn't have commit'12ea729645ace'
-xen/blkback: unmap all persistent grants when frontend gets disconnected,
-the frontend may see massive amount of grant table warning when freeing
-resources.
-[   36.852659] deferring g.e. 0xf9 (pfn 0xffffffffffffffff)
-[   36.855089] xen:grant_table: WARNING:e.g. 0x112 still in use!
-
-In this case, persistent grants would need to be disabled.
-
-[Anchal Agarwal: Changelog]:
-RFC v1->v2: Removed timeout per request before disconnect during
-	    blkfront freeze.
-	    Added queue freeze/quiesce to the blkfront_freeze
-	    Code cleanup
-RFC v2->v3: None
-RFC v3->v1: Code cleanup, Refractoring
-    v1->v2: * remove err variable in blkfront_freeze
-            * BugFix: error handling if rings are still busy
-              after queue freeze/quiesce and returnign driver to
-              connected state
-            * add TODO if blkback fails to disconnect on freeze
-            * Code formatting
+Changelog:
+v1->v2: Removed patches that introduced new function calls for saving/restoring
+        sched clock offset and using existing ones that are used during LM
 
 Signed-off-by: Anchal Agarwal <anchalag@amazon.com>
-Signed-off-by: Munehisa Kamata <kamatam@amazon.com>
 ---
- drivers/block/xen-blkfront.c | 122 +++++++++++++++++++++++++++++++++--
- 1 file changed, 118 insertions(+), 4 deletions(-)
+ arch/x86/xen/suspend.c | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/block/xen-blkfront.c b/drivers/block/xen-blkfront.c
-index 3b889ea950c2..9e3ed1b9f509 100644
---- a/drivers/block/xen-blkfront.c
-+++ b/drivers/block/xen-blkfront.c
-@@ -48,6 +48,8 @@
- #include <linux/list.h>
- #include <linux/workqueue.h>
- #include <linux/sched/mm.h>
-+#include <linux/completion.h>
-+#include <linux/delay.h>
+diff --git a/arch/x86/xen/suspend.c b/arch/x86/xen/suspend.c
+index e8c924e93fc5..10cd14326472 100644
+--- a/arch/x86/xen/suspend.c
++++ b/arch/x86/xen/suspend.c
+@@ -94,10 +94,9 @@ static int xen_syscore_suspend(void)
+ 	int ret;
  
- #include <xen/xen.h>
- #include <xen/xenbus.h>
-@@ -80,6 +82,8 @@ enum blkif_state {
- 	BLKIF_STATE_DISCONNECTED,
- 	BLKIF_STATE_CONNECTED,
- 	BLKIF_STATE_SUSPENDED,
-+	BLKIF_STATE_FREEZING,
-+	BLKIF_STATE_FROZEN,
- };
+ 	gnttab_suspend();
+-
++	xen_manage_runstate_time(-1);
+ 	xrfp.domid = DOMID_SELF;
+ 	xrfp.gpfn = __pa(HYPERVISOR_shared_info) >> PAGE_SHIFT;
+-
+ 	ret = HYPERVISOR_memory_op(XENMEM_remove_from_physmap, &xrfp);
+ 	if (!ret)
+ 		HYPERVISOR_shared_info = &xen_dummy_shared_info;
+@@ -111,7 +110,7 @@ static void xen_syscore_resume(void)
+ 	xen_hvm_map_shared_info();
  
- struct grant {
-@@ -219,6 +223,7 @@ struct blkfront_info
- 	struct list_head requests;
- 	struct bio_list bio_list;
- 	struct list_head info_list;
-+	struct completion wait_backend_disconnected;
- };
- 
- static unsigned int nr_minors;
-@@ -1005,6 +1010,7 @@ static int xlvbd_init_blk_queue(struct gendisk *gd, u16 sector_size,
- 	info->sector_size = sector_size;
- 	info->physical_sector_size = physical_sector_size;
- 	blkif_set_queue_limits(info);
-+	init_completion(&info->wait_backend_disconnected);
- 
- 	return 0;
- }
-@@ -1353,6 +1359,8 @@ static void blkif_free(struct blkfront_info *info, int suspend)
- 	unsigned int i;
- 	struct blkfront_ring_info *rinfo;
- 
-+	if (info->connected == BLKIF_STATE_FREEZING)
-+		goto free_rings;
- 	/* Prevent new requests being issued until we fix things up. */
- 	info->connected = suspend ?
- 		BLKIF_STATE_SUSPENDED : BLKIF_STATE_DISCONNECTED;
-@@ -1360,6 +1368,7 @@ static void blkif_free(struct blkfront_info *info, int suspend)
- 	if (info->rq)
- 		blk_mq_stop_hw_queues(info->rq);
- 
-+free_rings:
- 	for_each_rinfo(info, rinfo, i)
- 		blkif_free_ring(rinfo);
- 
-@@ -1563,8 +1572,10 @@ static irqreturn_t blkif_interrupt(int irq, void *dev_id)
- 	struct blkfront_ring_info *rinfo = (struct blkfront_ring_info *)dev_id;
- 	struct blkfront_info *info = rinfo->dev_info;
- 
--	if (unlikely(info->connected != BLKIF_STATE_CONNECTED))
-+	if (unlikely(info->connected != BLKIF_STATE_CONNECTED &&
-+			info->connected != BLKIF_STATE_FREEZING)) {
- 		return IRQ_HANDLED;
-+	}
- 
- 	spin_lock_irqsave(&rinfo->ring_lock, flags);
-  again:
-@@ -2026,6 +2037,7 @@ static int blkif_recover(struct blkfront_info *info)
- 	struct bio *bio;
- 	unsigned int segs;
- 	struct blkfront_ring_info *rinfo;
-+	bool frozen = info->connected == BLKIF_STATE_FROZEN;
- 
- 	blkfront_gather_backend_features(info);
- 	/* Reset limits changed by blk_mq_update_nr_hw_queues(). */
-@@ -2048,6 +2060,9 @@ static int blkif_recover(struct blkfront_info *info)
- 		kick_pending_request_queues(rinfo);
- 	}
- 
-+	if (frozen)
-+		return 0;
-+
- 	list_for_each_entry_safe(req, n, &info->requests, queuelist) {
- 		/* Requeue pending requests (flush or discard) */
- 		list_del_init(&req->queuelist);
-@@ -2364,6 +2379,7 @@ static void blkfront_connect(struct blkfront_info *info)
- 
- 		return;
- 	case BLKIF_STATE_SUSPENDED:
-+	case BLKIF_STATE_FROZEN:
- 		/*
- 		 * If we are recovering from suspension, we need to wait
- 		 * for the backend to announce it's features before
-@@ -2481,12 +2497,37 @@ static void blkback_changed(struct xenbus_device *dev,
- 		break;
- 
- 	case XenbusStateClosed:
--		if (dev->state == XenbusStateClosed)
-+		if (dev->state == XenbusStateClosed) {
-+			if (info->connected == BLKIF_STATE_FREEZING) {
-+				blkif_free(info, 0);
-+				info->connected = BLKIF_STATE_FROZEN;
-+				complete(&info->wait_backend_disconnected);
-+			}
- 			break;
-+		}
-+		/*
-+		 * We receive backend's Closed again while thawing
-+		 * or restoring and it causes thawing or restoring to fail.
-+		 * During blkfront_restore, backend is still in Closed state
-+		 * and we receive backend as closed here while frontend's
-+		 * dev->state is set to XenBusStateInitialized.
-+		 * Ignore such unexpected state regardless of the backend's
-+		 * state.
-+		 */
-+		if (info->connected == BLKIF_STATE_FROZEN) {
-+			dev_dbg(&dev->dev, "Thawing/Restoring, ignore the backend's Closed state: %s",
-+				dev->nodename);
-+			break;
-+		}
-+
- 		/* fall through */
- 	case XenbusStateClosing:
--		if (info)
--			blkfront_closing(info);
-+		if (info) {
-+			if (info->connected == BLKIF_STATE_FREEZING)
-+				xenbus_frontend_closed(dev);
-+			else
-+				blkfront_closing(info);
-+		}
- 		break;
- 	}
- }
-@@ -2630,6 +2671,76 @@ static void blkif_release(struct gendisk *disk, fmode_t mode)
- 	mutex_unlock(&blkfront_mutex);
+ 	pvclock_resume();
+-
++	xen_manage_runstate_time(0);
+ 	gnttab_resume();
  }
  
-+static int blkfront_freeze(struct xenbus_device *dev)
-+{
-+	unsigned int i;
-+	struct blkfront_info *info = dev_get_drvdata(&dev->dev);
-+	struct blkfront_ring_info *rinfo;
-+	/* This would be reasonable timeout as used in xenbus_dev_shutdown() */
-+	unsigned int timeout = 5 * HZ;
-+	unsigned long flags;
-+
-+	info->connected = BLKIF_STATE_FREEZING;
-+
-+	blk_mq_freeze_queue(info->rq);
-+	blk_mq_quiesce_queue(info->rq);
-+
-+	for_each_rinfo(info, rinfo, i) {
-+		/* No more gnttab callback work. */
-+		gnttab_cancel_free_callback(&rinfo->callback);
-+		/* Flush gnttab callback work. Must be done with no locks held. */
-+		flush_work(&rinfo->work);
-+	}
-+
-+	for_each_rinfo(info, rinfo, i) {
-+		spin_lock_irqsave(&rinfo->ring_lock, flags);
-+		if (RING_FULL(&rinfo->ring) ||
-+			RING_HAS_UNCONSUMED_RESPONSES(&rinfo->ring)) {
-+			spin_unlock_irqrestore(&rinfo->ring_lock, flags);
-+			xenbus_dev_error(dev, -EBUSY, "Hibernation Failed. The ring is still busy");
-+			info->connected = BLKIF_STATE_CONNECTED;
-+			blk_mq_unquiesce_queue(info->rq);
-+			blk_mq_unfreeze_queue(info->rq);
-+			return -EBUSY;
-+		}
-+		spin_unlock_irqrestore(&rinfo->ring_lock, flags);
-+	}
-+	/* Kick the backend to disconnect */
-+	xenbus_switch_state(dev, XenbusStateClosing);
-+
-+	/*
-+	 * We don't want to move forward before the frontend is diconnected
-+	 * from the backend cleanly.
-+	 * TODO:Handle timeout by falling back to the normal
-+	 * disconnect path and just wait for the backend to close before
-+	 * reconnecting. Bring the system back to its original state by
-+	 * failing hibernation gracefully.
-+	 */
-+	timeout = wait_for_completion_timeout(&info->wait_backend_disconnected,
-+						timeout);
-+	if (!timeout) {
-+		xenbus_dev_error(dev, -EBUSY, "Freezing timed out;"
-+			"the device may become inconsistent state");
-+		return -EBUSY;
-+	}
-+
-+	return 0;
-+}
-+
-+static int blkfront_restore(struct xenbus_device *dev)
-+{
-+	struct blkfront_info *info = dev_get_drvdata(&dev->dev);
-+	int err;
-+
-+	err = talk_to_blkback(dev, info);
-+	if (!err) {
-+		blk_mq_update_nr_hw_queues(&info->tag_set, info->nr_rings);
-+		blk_mq_unquiesce_queue(info->rq);
-+		blk_mq_unfreeze_queue(info->rq);
-+	}
-+	return err;
-+}
-+
- static const struct block_device_operations xlvbd_block_fops =
- {
- 	.owner = THIS_MODULE,
-@@ -2653,6 +2764,9 @@ static struct xenbus_driver blkfront_driver = {
- 	.resume = blkfront_resume,
- 	.otherend_changed = blkback_changed,
- 	.is_ready = blkfront_is_ready,
-+	.freeze = blkfront_freeze,
-+	.thaw = blkfront_restore,
-+	.restore = blkfront_restore
- };
- 
- static void purge_persistent_grants(struct blkfront_info *info)
 -- 
 2.20.1
 
