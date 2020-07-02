@@ -1,75 +1,87 @@
-Return-Path: <SRS0=Sbf7=AM=lists.xenproject.org=xen-devel-bounces@kernel.org>
+Return-Path: <SRS0=nVJm=AN=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.8 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.8 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2C145C433E0
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Jul 2020 23:25:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3EA0AC433E0
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Jul 2020 03:56:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EC4C020672
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Jul 2020 23:25:24 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 062BC2083E
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Jul 2020 03:56:03 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="u/Ye1Pzo"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EC4C020672
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="XHFkZAkp"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 062BC2083E
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jqm6B-0004CY-R0; Wed, 01 Jul 2020 23:25:03 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=r09v=AM=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
- id 1jqm6A-0004CT-RP
- for xen-devel@lists.xenproject.org; Wed, 01 Jul 2020 23:25:02 +0000
-X-Inumbo-ID: 15607fca-bbf2-11ea-8793-12813bfff9fa
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 15607fca-bbf2-11ea-8793-12813bfff9fa;
- Wed, 01 Jul 2020 23:25:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
- Content-Transfer-Encoding:Content-Type:Message-ID:To:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=e96kX2bS/U9XnKBGQl+L2deaIkCfVS8yh+/49ORlU+k=; b=u/Ye1PzoJHf9RaLhPJlJDJwTt
- zZpJxQ0RqFLpxrJZE7LpnggQBfRlVOUL18LGDM4fCFZDa9dloloRKAB+TQAsVrAnEpx4OGOq71h/P
- +O+VezwWDvcB1Lfd+1bcT4nNHslYuJU9wgsl3YhJX5LGwG7VisOutQKQhdYs5LyP872mQ=;
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1jqm68-00060P-06; Wed, 01 Jul 2020 23:25:00 +0000
-Received: from [172.16.144.3] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1jqm67-0004I7-Lc; Wed, 01 Jul 2020 23:24:59 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.89) (envelope-from <osstest-admin@xenproject.org>)
- id 1jqm67-0004Lo-L5; Wed, 01 Jul 2020 23:24:59 +0000
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-151515-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+	id 1jqqJt-0004qg-0n; Thu, 02 Jul 2020 03:55:29 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=wviA=AN=redhat.com=armbru@srs-us1.protection.inumbo.net>)
+ id 1jqqJs-0004qb-Cb
+ for xen-devel@lists.xenproject.org; Thu, 02 Jul 2020 03:55:28 +0000
+X-Inumbo-ID: dd30e074-bc17-11ea-bca7-bc764e2007e4
+Received: from us-smtp-delivery-1.mimecast.com (unknown [205.139.110.61])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+ id dd30e074-bc17-11ea-bca7-bc764e2007e4;
+ Thu, 02 Jul 2020 03:55:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1593662126;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=kmn5R5crZf3r748cF/7g0FhkHnoY7WFTkWnSXgnl0xM=;
+ b=XHFkZAkpi/JEZGizroWtqzFmPFp4ZuAgpAWZDMRlktbQK1UXKQCHsiqLdWOQpA00LeOcSp
+ XXbRUiOIagluDGUo+SOJ0Z0dzdKCoJA/q8GO/ZaIIlo0QaF2YNqUnT5VNV5H7GH6hfEC6y
+ LNH6xgQhMmK4N6k2X8+yzkVJ+hn2/4c=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-512-vQ6EYvkyNXOqhjKkymAqsw-1; Wed, 01 Jul 2020 23:55:24 -0400
+X-MC-Unique: vQ6EYvkyNXOqhjKkymAqsw-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 995158015F7;
+ Thu,  2 Jul 2020 03:55:22 +0000 (UTC)
+Received: from blackfin.pond.sub.org (ovpn-112-143.ams2.redhat.com
+ [10.36.112.143])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 35CC479243;
+ Thu,  2 Jul 2020 03:55:19 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+ id 9937511384A6; Thu,  2 Jul 2020 05:55:17 +0200 (CEST)
+From: Markus Armbruster <armbru@redhat.com>
+To: Jason Andryuk <jandryuk@gmail.com>
+Subject: Re: [PATCH 2/2] xen: cleanup unrealized flash devices
+References: <20200624121841.17971-1-paul@xen.org>
+ <20200624121841.17971-3-paul@xen.org>
+ <33e594dd-dbfa-7c57-1cf5-0852e8fc8e1d@redhat.com>
+ <000701d64ef5$6568f660$303ae320$@xen.org>
+ <9e591254-d215-d5af-38d2-fd5b65f84a43@redhat.com>
+ <000801d64f75$c604f570$520ee050$@xen.org>
+ <CAKf6xpvNTVqK263pdSARyoWnzP8g9SRoSqvhnLLwyYadjR1ChQ@mail.gmail.com>
+Date: Thu, 02 Jul 2020 05:55:17 +0200
+In-Reply-To: <CAKf6xpvNTVqK263pdSARyoWnzP8g9SRoSqvhnLLwyYadjR1ChQ@mail.gmail.com>
+ (Jason Andryuk's message of "Wed, 1 Jul 2020 08:25:40 -0400")
+Message-ID: <87o8oy8tay.fsf@dusky.pond.sub.org>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/26.3 (gnu/linux)
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 151515: tolerable all pass - PUSHED
-X-Osstest-Failures: xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
- xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
- xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
- xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
- xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This: xen=0dbed3ad3366734fd23ee3fd1f9989c8c96b6052
-X-Osstest-Versions-That: xen=3b7dab93f2401b08c673244c9ae0f92e08bd03ba
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Wed, 01 Jul 2020 23:24:59 +0000
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=armbru@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,63 +92,138 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
+Cc: Eduardo Habkost <ehabkost@redhat.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Paul Durrant <pdurrant@amazon.com>,
+ Paul Durrant <paul@xen.org>, QEMU <qemu-devel@nongnu.org>,
+ xen-devel <xen-devel@lists.xenproject.org>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
+ Richard Henderson <rth@twiddle.net>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-flight 151515 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/151515/
+Jason Andryuk <jandryuk@gmail.com> writes:
 
-Failures :-/ but no regressions.
+> On Wed, Jul 1, 2020 at 3:03 AM Paul Durrant <xadimgnik@gmail.com> wrote:
+>>
+>> > -----Original Message-----
+>> > From: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
+>> > Sent: 30 June 2020 18:27
+>> > To: paul@xen.org; xen-devel@lists.xenproject.org; qemu-devel@nongnu.or=
+g
+>> > Cc: 'Eduardo Habkost' <ehabkost@redhat.com>; 'Michael S. Tsirkin' <mst=
+@redhat.com>; 'Paul Durrant'
+>> > <pdurrant@amazon.com>; 'Jason Andryuk' <jandryuk@gmail.com>; 'Paolo Bo=
+nzini' <pbonzini@redhat.com>;
+>> > 'Richard Henderson' <rth@twiddle.net>
+>> > Subject: Re: [PATCH 2/2] xen: cleanup unrealized flash devices
+>> >
+>> > On 6/30/20 5:44 PM, Paul Durrant wrote:
+>> > >> -----Original Message-----
+>> > >> From: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
+>> > >> Sent: 30 June 2020 16:26
+>> > >> To: Paul Durrant <paul@xen.org>; xen-devel@lists.xenproject.org; qe=
+mu-devel@nongnu.org
+>> > >> Cc: Eduardo Habkost <ehabkost@redhat.com>; Michael S. Tsirkin <mst@=
+redhat.com>; Paul Durrant
+>> > >> <pdurrant@amazon.com>; Jason Andryuk <jandryuk@gmail.com>; Paolo Bo=
+nzini <pbonzini@redhat.com>;
+>> > >> Richard Henderson <rth@twiddle.net>
+>> > >> Subject: Re: [PATCH 2/2] xen: cleanup unrealized flash devices
+>> > >>
+>> > >> On 6/24/20 2:18 PM, Paul Durrant wrote:
+>> > >>> From: Paul Durrant <pdurrant@amazon.com>
+>> > >>>
+>> > >>> The generic pc_machine_initfn() calls pc_system_flash_create() whi=
+ch creates
+>> > >>> 'system.flash0' and 'system.flash1' devices. These devices are the=
+n realized
+>> > >>> by pc_system_flash_map() which is called from pc_system_firmware_i=
+nit() which
+>> > >>> itself is called via pc_memory_init(). The latter however is not c=
+alled when
+>> > >>> xen_enable() is true and hence the following assertion fails:
+>> > >>>
+>> > >>> qemu-system-i386: hw/core/qdev.c:439: qdev_assert_realized_properl=
+y:
+>> > >>> Assertion `dev->realized' failed
+>> > >>>
+>> > >>> These flash devices are unneeded when using Xen so this patch avoi=
+ds the
+>> > >>> assertion by simply removing them using pc_system_flash_cleanup_un=
+used().
+>> > >>>
+>> > >>> Reported-by: Jason Andryuk <jandryuk@gmail.com>
+>> > >>> Fixes: ebc29e1beab0 ("pc: Support firmware configuration with -blo=
+ckdev")
+>> > >>> Signed-off-by: Paul Durrant <pdurrant@amazon.com>
+>> > >>> Tested-by: Jason Andryuk <jandryuk@gmail.com>
+>> > >>> ---
+>> > >>> Cc: Paolo Bonzini <pbonzini@redhat.com>
+>> > >>> Cc: Richard Henderson <rth@twiddle.net>
+>> > >>> Cc: Eduardo Habkost <ehabkost@redhat.com>
+>> > >>> Cc: "Michael S. Tsirkin" <mst@redhat.com>
+>> > >>> Cc: Marcel Apfelbaum <marcel.apfelbaum@gmail.com>
+>> > >>> ---
+>> > >>>  hw/i386/pc_piix.c    | 9 ++++++---
+>> > >>>  hw/i386/pc_sysfw.c   | 2 +-
+>> > >>>  include/hw/i386/pc.h | 1 +
+>> > >>>  3 files changed, 8 insertions(+), 4 deletions(-)
+>> > >>>
+>> > >>> diff --git a/hw/i386/pc_piix.c b/hw/i386/pc_piix.c
+>> > >>> index 1497d0e4ae..977d40afb8 100644
+>> > >>> --- a/hw/i386/pc_piix.c
+>> > >>> +++ b/hw/i386/pc_piix.c
+>> > >>> @@ -186,9 +186,12 @@ static void pc_init1(MachineState *machine,
+>> > >>>      if (!xen_enabled()) {
+>> > >>>          pc_memory_init(pcms, system_memory,
+>> > >>>                         rom_memory, &ram_memory);
+>> > >>> -    } else if (machine->kernel_filename !=3D NULL) {
+>> > >>> -        /* For xen HVM direct kernel boot, load linux here */
+>> > >>> -        xen_load_linux(pcms);
+>> > >>> +    } else {
+>> > >>> +        pc_system_flash_cleanup_unused(pcms);
+>> > >>
+>> > >> TIL pc_system_flash_cleanup_unused().
+>> > >>
+>> > >> What about restricting at the source?
+>> > >>
+>> > >
+>> > > And leave the devices in place? They are not relevant for Xen, so wh=
+y not clean up?
+>> >
+>> > No, I meant to not create them in the first place, instead of
+>> > create+destroy.
+>> >
+>> > Anyway what you did works, so I don't have any problem.
+>>
+>> IIUC Jason originally tried restricting creation but encountered a probl=
+em because xen_enabled() would always return false at that point, because m=
+achine creation occurs before accelerators are initialized.
+>
+> Correct.  Quoting my previous email:
+> """
+> Removing the call to pc_system_flash_create() from pc_machine_initfn()
+> lets QEMU startup and run a Xen HVM again.  xen_enabled() doesn't work
+> there since accelerators have not been initialized yes, I guess?
+> """
+>
+> If you want to remove the creation in the first place, then I have two
+> questions.  Why does pc_system_flash_create()/pc_pflash_create() get
+> called so early creating the pflash devices?  Why aren't they just
+> created as needed in pc_system_flash_map()?
 
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+commit ebc29e1beab02646702c8cb9a1d29b68f72ad503
 
-version targeted for testing:
- xen                  0dbed3ad3366734fd23ee3fd1f9989c8c96b6052
-baseline version:
- xen                  3b7dab93f2401b08c673244c9ae0f92e08bd03ba
+    pc: Support firmware configuration with -blockdev
 
-Last test of basis   151511  2020-07-01 17:01:00 Z    0 days
-Testing same since   151515  2020-07-01 21:04:44 Z    0 days    1 attempts
+    [...]
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Stefano Stabellini <stefano.stabellini@xilinx.com>
-  Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+    Properties need to be created in .instance_init() methods.  For PC
+    machines, that's pc_machine_initfn().  To make alias properties work,
+    we need to create the onboard flash devices there, too.  [...]
 
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-libvirt                                     pass    
+For context, read the entire commit message.  If you have questions
+then, don't hesitate to ask them here.
 
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/xen.git
-   3b7dab93f2..0dbed3ad33  0dbed3ad3366734fd23ee3fd1f9989c8c96b6052 -> smoke
 
