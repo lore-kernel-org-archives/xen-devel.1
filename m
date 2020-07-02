@@ -7,64 +7,65 @@ X-Spam-Status: No, score=-8.6 required=3.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 90238C433DF
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Jul 2020 18:22:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1A47BC433E3
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Jul 2020 18:23:03 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5F08D20870
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Jul 2020 18:22:57 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id DC6E32084C
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Jul 2020 18:23:02 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=amazon.com header.i=@amazon.com header.b="lNWLO/Z1"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5F08D20870
+	dkim=pass (1024-bit key) header.d=amazon.com header.i=@amazon.com header.b="VX/bvOfb"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DC6E32084C
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=amazon.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jr3rC-0005IW-Pb; Thu, 02 Jul 2020 18:22:46 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jr3rI-0005L0-5I; Thu, 02 Jul 2020 18:22:52 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=PV0h=AN=amazon.com=prvs=445caddfd=anchalag@srs-us1.protection.inumbo.net>)
- id 1jr3rA-0005I2-Vz
- for xen-devel@lists.xenproject.org; Thu, 02 Jul 2020 18:22:45 +0000
-X-Inumbo-ID: 05db32a8-bc91-11ea-bb8b-bc764e2007e4
-Received: from smtp-fw-6001.amazon.com (unknown [52.95.48.154])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 05db32a8-bc91-11ea-bb8b-bc764e2007e4;
- Thu, 02 Jul 2020 18:22:44 +0000 (UTC)
+ id 1jr3rH-0005Kj-Dl
+ for xen-devel@lists.xenproject.org; Thu, 02 Jul 2020 18:22:51 +0000
+X-Inumbo-ID: 09425372-bc91-11ea-8887-12813bfff9fa
+Received: from smtp-fw-9101.amazon.com (unknown [207.171.184.25])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 09425372-bc91-11ea-8887-12813bfff9fa;
+ Thu, 02 Jul 2020 18:22:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
- t=1593714165; x=1625250165;
+ t=1593714170; x=1625250170;
  h=date:from:to:subject:message-id:references:mime-version:
- in-reply-to; bh=6WYhS9fhcjlT02XaftcCbDh+6PPkxfzixjjo5vFo6xY=;
- b=lNWLO/Z15mnPjoTbYcBU7rtwPxvziCpLO4bQHU2RKBfECOyVnudfeRCU
- N663oWBDuc1CJsTVTug7SiToXyR5/V5djI/kyU70BTFiiVqD57gQOicJf
- Frw+MXRob8aCr8q6QYD1iUs/odSItdjpQ9jurql/yxlkE3Ng34rQxJoZa w=;
-IronPort-SDR: 6WL2v6GoZKshQ2w15CQNvN73wC/gCz8xAZ14lB2bb634i0tTkR52VltZYVndpTfW348uMqq0Op
- 8xCq/KYQWdeg==
-X-IronPort-AV: E=Sophos;i="5.75,305,1589241600"; d="scan'208";a="41164983"
-Received: from iad12-co-svc-p1-lb1-vlan3.amazon.com (HELO
- email-inbound-relay-1e-97fdccfd.us-east-1.amazon.com) ([10.43.8.6])
- by smtp-border-fw-out-6001.iad6.amazon.com with ESMTP;
- 02 Jul 2020 18:22:44 +0000
-Received: from EX13MTAUEB002.ant.amazon.com
- (iad55-ws-svc-p15-lb9-vlan3.iad.amazon.com [10.40.159.166])
- by email-inbound-relay-1e-97fdccfd.us-east-1.amazon.com (Postfix) with ESMTPS
- id 4673DA181E; Thu,  2 Jul 2020 18:22:42 +0000 (UTC)
-Received: from EX13D08UEB002.ant.amazon.com (10.43.60.107) by
- EX13MTAUEB002.ant.amazon.com (10.43.60.12) with Microsoft SMTP Server (TLS)
- id 15.0.1497.2; Thu, 2 Jul 2020 18:22:17 +0000
-Received: from EX13MTAUEA002.ant.amazon.com (10.43.61.77) by
- EX13D08UEB002.ant.amazon.com (10.43.60.107) with Microsoft SMTP Server (TLS)
- id 15.0.1497.2; Thu, 2 Jul 2020 18:22:17 +0000
+ in-reply-to; bh=06XpXsbm4nGxufy5odK5fTjKd20Tk+xFUtGFnfbSPzI=;
+ b=VX/bvOfbKagtaL40wqHSFwR8yT7u2TXTQd6kmhKrJsSoSha4CWsNHzhj
+ oEJPA73A3HWv+QmpHEeqRciLRdVsnXo6YktcfuKG/oFMbBAs3mX5UHVtP
+ ufcwDNz1U4ct/G0XXzJCDnwl0NcHxuemYqHWPlUs7IDyzzeF4Ej6X5hjs k=;
+IronPort-SDR: 0gwnU9r137fbenaSVqPItFyNKfUucpkmlvUo+1SwnrFmuaEm55bBT1oVwuTzRuYtHWnEFiJ/b7
+ VGVubhW9JJLw==
+X-IronPort-AV: E=Sophos;i="5.75,305,1589241600"; d="scan'208";a="48737187"
+Received: from sea32-co-svc-lb4-vlan3.sea.corp.amazon.com (HELO
+ email-inbound-relay-2a-90c42d1d.us-west-2.amazon.com) ([10.47.23.38])
+ by smtp-border-fw-out-9101.sea19.amazon.com with ESMTP;
+ 02 Jul 2020 18:22:47 +0000
+Received: from EX13MTAUWB001.ant.amazon.com
+ (pdx4-ws-svc-p6-lb7-vlan3.pdx.amazon.com [10.170.41.166])
+ by email-inbound-relay-2a-90c42d1d.us-west-2.amazon.com (Postfix) with ESMTPS
+ id EE3B7A20BE; Thu,  2 Jul 2020 18:22:45 +0000 (UTC)
+Received: from EX13D07UWB001.ant.amazon.com (10.43.161.238) by
+ EX13MTAUWB001.ant.amazon.com (10.43.161.249) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Thu, 2 Jul 2020 18:22:40 +0000
+Received: from EX13MTAUWB001.ant.amazon.com (10.43.161.207) by
+ EX13D07UWB001.ant.amazon.com (10.43.161.238) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Thu, 2 Jul 2020 18:22:40 +0000
 Received: from dev-dsk-anchalag-2a-9c2d1d96.us-west-2.amazon.com
- (172.22.96.68) by mail-relay.amazon.com (10.43.61.169) with Microsoft SMTP
- Server id 15.0.1497.2 via Frontend Transport; Thu, 2 Jul 2020 18:22:17 +0000
+ (172.22.96.68) by mail-relay.amazon.com (10.43.161.249) with Microsoft SMTP
+ Server id 15.0.1497.2 via Frontend Transport; Thu, 2 Jul 2020 18:22:40 +0000
 Received: by dev-dsk-anchalag-2a-9c2d1d96.us-west-2.amazon.com (Postfix,
  from userid 4335130)
- id 2738540844; Thu,  2 Jul 2020 18:22:17 +0000 (UTC)
-Date: Thu, 2 Jul 2020 18:22:17 +0000
+ id 4A9E540844; Thu,  2 Jul 2020 18:22:40 +0000 (UTC)
+Date: Thu, 2 Jul 2020 18:22:40 +0000
 From: Anchal Agarwal <anchalag@amazon.com>
 To: <tglx@linutronix.de>, <mingo@redhat.com>, <bp@alien8.de>, <hpa@zytor.com>, 
  <x86@kernel.org>, <boris.ostrovsky@oracle.com>, <jgross@suse.com>,
@@ -76,9 +77,9 @@ To: <tglx@linutronix.de>, <mingo@redhat.com>, <bp@alien8.de>, <hpa@zytor.com>,
  <xen-devel@lists.xenproject.org>, <vkuznets@redhat.com>,
  <netdev@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
  <dwmw@amazon.co.uk>, <benh@kernel.crashing.org>
-Subject: [PATCH v2 05/11] genirq: Shutdown irq chips in suspend/resume during
+Subject: [PATCH v2 07/11] xen-netfront: add callbacks for PM suspend and
  hibernation
-Message-ID: <20200702182217.GA3577@dev-dsk-anchalag-2a-9c2d1d96.us-west-2.amazon.com>
+Message-ID: <20200702182240.GA3596@dev-dsk-anchalag-2a-9c2d1d96.us-west-2.amazon.com>
 References: <cover.1593665947.git.anchalag@amazon.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
@@ -98,166 +99,209 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: Thomas Gleixner <tglx@linutronix.de>
+From: Munehisa Kamata <kamatam@amazon.com>
 
-Many legacy device drivers do not implement power management (PM)
-functions which means that interrupts requested by these drivers stay
-in active state when the kernel is hibernated.
+Add freeze, thaw and restore callbacks for PM suspend and hibernation
+support. The freeze handler simply disconnects the frotnend from the
+backend and frees resources associated with queues after disabling the
+net_device from the system. The restore handler just changes the
+frontend state and let the xenbus handler to re-allocate the resources
+and re-connect to the backend. This can be performed transparently to
+the rest of the system. The handlers are used for both PM suspend and
+hibernation so that we can keep the existing suspend/resume callbacks
+for Xen suspend without modification. Freezing netfront devices is
+normally expected to finish within a few hundred milliseconds, but it
+can rarely take more than 5 seconds and hit the hard coded timeout,
+it would depend on backend state which may be congested and/or have
+complex configuration. While it's rare case, longer default timeout
+seems a bit more reasonable here to avoid hitting the timeout.
+Also, make it configurable via module parameter so that we can cover
+broader setups than what we know currently.
 
-This does not matter on bare metal and on most hypervisors because the
-interrupt is restored on resume without any noticeable side effects as
-it stays connected to the same physical or virtual interrupt line.
-
-The XEN interrupt mechanism is different as it maintains a mapping
-between the Linux interrupt number and a XEN event channel. If the
-interrupt stays active on hibernation this mapping is preserved but
-there is unfortunately no guarantee that on resume the same event
-channels are reassigned to these devices. This can result in event
-channel conflicts which prevent the affected devices from being
-restored correctly.
-
-One way to solve this would be to add the necessary power management
-functions to all affected legacy device drivers, but that's a
-questionable effort which does not provide any benefits on non-XEN
-environments.
-
-The least intrusive and most efficient solution is to provide a
-mechanism which allows the core interrupt code to tear down these
-interrupts on hibernation and bring them back up again on resume. This
-allows the XEN event channel mechanism to assign an arbitrary event
-channel on resume without affecting the functionality of these
-devices.
-
-Fortunately all these device interrupts are handled by a dedicated XEN
-interrupt chip so the chip can be marked that all interrupts connected
-to it are handled this way. This is pretty much in line with the other
-interrupt chip specific quirks, e.g. IRQCHIP_MASK_ON_SUSPEND.
-
-Add a new quirk flag IRQCHIP_SHUTDOWN_ON_SUSPEND and add support for
-it the core interrupt suspend/resume paths.
-
-Changelog:
-RFCv2-RFCv3: Incorporated tglx@'s patch to work with xen code
-v1->v2: Corrected the author's name to tglx@
+[Anchal Agarwal: Changelog]:
+RFCv1->RFCv2: Variable name fix and checkpatch.pl fixes]
 
 Signed-off-by: Anchal Agarwal <anchalag@amazon.com>
-Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+Signed-off-by: Munehisa Kamata <kamatam@amazon.com>
 ---
- drivers/xen/events/events_base.c |  1 +
- include/linux/irq.h              |  2 ++
- kernel/irq/chip.c                |  2 +-
- kernel/irq/internals.h           |  1 +
- kernel/irq/pm.c                  | 31 ++++++++++++++++++++++---------
- 5 files changed, 27 insertions(+), 10 deletions(-)
+ drivers/net/xen-netfront.c | 98 +++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 97 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/xen/events/events_base.c b/drivers/xen/events/events_base.c
-index 140c7bf33a98..958dea2a4916 100644
---- a/drivers/xen/events/events_base.c
-+++ b/drivers/xen/events/events_base.c
-@@ -1611,6 +1611,7 @@ static struct irq_chip xen_pirq_chip __read_mostly = {
- 	.irq_set_affinity	= set_affinity_irq,
+diff --git a/drivers/net/xen-netfront.c b/drivers/net/xen-netfront.c
+index 482c6c8b0fb7..65edcdd6e05f 100644
+--- a/drivers/net/xen-netfront.c
++++ b/drivers/net/xen-netfront.c
+@@ -43,6 +43,7 @@
+ #include <linux/moduleparam.h>
+ #include <linux/mm.h>
+ #include <linux/slab.h>
++#include <linux/completion.h>
+ #include <net/ip.h>
  
- 	.irq_retrigger		= retrigger_dynirq,
-+	.flags                  = IRQCHIP_SHUTDOWN_ON_SUSPEND,
+ #include <xen/xen.h>
+@@ -56,6 +57,12 @@
+ #include <xen/interface/memory.h>
+ #include <xen/interface/grant_table.h>
+ 
++enum netif_freeze_state {
++	NETIF_FREEZE_STATE_UNFROZEN,
++	NETIF_FREEZE_STATE_FREEZING,
++	NETIF_FREEZE_STATE_FROZEN,
++};
++
+ /* Module parameters */
+ #define MAX_QUEUES_DEFAULT 8
+ static unsigned int xennet_max_queues;
+@@ -63,6 +70,12 @@ module_param_named(max_queues, xennet_max_queues, uint, 0644);
+ MODULE_PARM_DESC(max_queues,
+ 		 "Maximum number of queues per virtual interface");
+ 
++static unsigned int netfront_freeze_timeout_secs = 10;
++module_param_named(freeze_timeout_secs,
++		   netfront_freeze_timeout_secs, uint, 0644);
++MODULE_PARM_DESC(freeze_timeout_secs,
++		 "timeout when freezing netfront device in seconds");
++
+ static const struct ethtool_ops xennet_ethtool_ops;
+ 
+ struct netfront_cb {
+@@ -160,6 +173,10 @@ struct netfront_info {
+ 	struct netfront_stats __percpu *tx_stats;
+ 
+ 	atomic_t rx_gso_checksum_fixup;
++
++	int freeze_state;
++
++	struct completion wait_backend_disconnected;
  };
  
- static struct irq_chip xen_percpu_chip __read_mostly = {
-diff --git a/include/linux/irq.h b/include/linux/irq.h
-index 8d5bc2c237d7..94cb8c994d06 100644
---- a/include/linux/irq.h
-+++ b/include/linux/irq.h
-@@ -542,6 +542,7 @@ struct irq_chip {
-  * IRQCHIP_EOI_THREADED:	Chip requires eoi() on unmask in threaded mode
-  * IRQCHIP_SUPPORTS_LEVEL_MSI	Chip can provide two doorbells for Level MSIs
-  * IRQCHIP_SUPPORTS_NMI:	Chip can deliver NMIs, only for root irqchips
-+ * IRQCHIP_SHUTDOWN_ON_SUSPEND: Shutdown non wake irqs in the suspend path
-  */
- enum {
- 	IRQCHIP_SET_TYPE_MASKED		= (1 <<  0),
-@@ -553,6 +554,7 @@ enum {
- 	IRQCHIP_EOI_THREADED		= (1 <<  6),
- 	IRQCHIP_SUPPORTS_LEVEL_MSI	= (1 <<  7),
- 	IRQCHIP_SUPPORTS_NMI		= (1 <<  8),
-+	IRQCHIP_SHUTDOWN_ON_SUSPEND     = (1 <<  9),
- };
- 
- #include <linux/irqdesc.h>
-diff --git a/kernel/irq/chip.c b/kernel/irq/chip.c
-index 41e7e37a0928..fd59489ff14b 100644
---- a/kernel/irq/chip.c
-+++ b/kernel/irq/chip.c
-@@ -233,7 +233,7 @@ __irq_startup_managed(struct irq_desc *desc, struct cpumask *aff, bool force)
+ struct netfront_rx_info {
+@@ -721,6 +738,21 @@ static int xennet_close(struct net_device *dev)
+ 	return 0;
  }
- #endif
  
--static int __irq_startup(struct irq_desc *desc)
-+int __irq_startup(struct irq_desc *desc)
++static int xennet_disable_interrupts(struct net_device *dev)
++{
++	struct netfront_info *np = netdev_priv(dev);
++	unsigned int num_queues = dev->real_num_tx_queues;
++	unsigned int queue_index;
++	struct netfront_queue *queue;
++
++	for (queue_index = 0; queue_index < num_queues; ++queue_index) {
++		queue = &np->queues[queue_index];
++		disable_irq(queue->tx_irq);
++		disable_irq(queue->rx_irq);
++	}
++	return 0;
++}
++
+ static void xennet_move_rx_slot(struct netfront_queue *queue, struct sk_buff *skb,
+ 				grant_ref_t ref)
  {
- 	struct irq_data *d = irq_desc_get_irq_data(desc);
- 	int ret = 0;
-diff --git a/kernel/irq/internals.h b/kernel/irq/internals.h
-index 7db284b10ac9..b6fca5eacff7 100644
---- a/kernel/irq/internals.h
-+++ b/kernel/irq/internals.h
-@@ -80,6 +80,7 @@ extern void __enable_irq(struct irq_desc *desc);
- extern int irq_activate(struct irq_desc *desc);
- extern int irq_activate_and_startup(struct irq_desc *desc, bool resend);
- extern int irq_startup(struct irq_desc *desc, bool resend, bool force);
-+extern int __irq_startup(struct irq_desc *desc);
+@@ -1301,6 +1333,8 @@ static struct net_device *xennet_create_dev(struct xenbus_device *dev)
  
- extern void irq_shutdown(struct irq_desc *desc);
- extern void irq_shutdown_and_deactivate(struct irq_desc *desc);
-diff --git a/kernel/irq/pm.c b/kernel/irq/pm.c
-index 8f557fa1f4fe..dc48a25f1756 100644
---- a/kernel/irq/pm.c
-+++ b/kernel/irq/pm.c
-@@ -85,16 +85,25 @@ static bool suspend_device_irq(struct irq_desc *desc)
+ 	np->queues = NULL;
+ 
++	init_completion(&np->wait_backend_disconnected);
++
+ 	err = -ENOMEM;
+ 	np->rx_stats = netdev_alloc_pcpu_stats(struct netfront_stats);
+ 	if (np->rx_stats == NULL)
+@@ -1794,6 +1828,50 @@ static int xennet_create_queues(struct netfront_info *info,
+ 	return 0;
+ }
+ 
++static int netfront_freeze(struct xenbus_device *dev)
++{
++	struct netfront_info *info = dev_get_drvdata(&dev->dev);
++	unsigned long timeout = netfront_freeze_timeout_secs * HZ;
++	int err = 0;
++
++	xennet_disable_interrupts(info->netdev);
++
++	netif_device_detach(info->netdev);
++
++	info->freeze_state = NETIF_FREEZE_STATE_FREEZING;
++
++	/* Kick the backend to disconnect */
++	xenbus_switch_state(dev, XenbusStateClosing);
++
++	/* We don't want to move forward before the frontend is diconnected
++	 * from the backend cleanly.
++	 */
++	timeout = wait_for_completion_timeout(&info->wait_backend_disconnected,
++					      timeout);
++	if (!timeout) {
++		err = -EBUSY;
++		xenbus_dev_error(dev, err, "Freezing timed out;"
++				 "the device may become inconsistent state");
++		return err;
++	}
++
++	/* Tear down queues */
++	xennet_disconnect_backend(info);
++	xennet_destroy_queues(info);
++
++	info->freeze_state = NETIF_FREEZE_STATE_FROZEN;
++
++	return err;
++}
++
++static int netfront_restore(struct xenbus_device *dev)
++{
++	/* Kick the backend to re-connect */
++	xenbus_switch_state(dev, XenbusStateInitialising);
++
++	return 0;
++}
++
+ /* Common code used when first setting up, and when resuming. */
+ static int talk_to_netback(struct xenbus_device *dev,
+ 			   struct netfront_info *info)
+@@ -1999,6 +2077,8 @@ static int xennet_connect(struct net_device *dev)
+ 		spin_unlock_bh(&queue->rx_lock);
  	}
  
- 	desc->istate |= IRQS_SUSPENDED;
--	__disable_irq(desc);
--
- 	/*
--	 * Hardware which has no wakeup source configuration facility
--	 * requires that the non wakeup interrupts are masked at the
--	 * chip level. The chip implementation indicates that with
--	 * IRQCHIP_MASK_ON_SUSPEND.
-+	 * Some irq chips (e.g. XEN PIRQ) require a full shutdown on suspend
-+	 * as some of the legacy drivers(e.g. floppy) do nothing during the
-+	 * suspend path
- 	 */
--	if (irq_desc_get_chip(desc)->flags & IRQCHIP_MASK_ON_SUSPEND)
--		mask_irq(desc);
-+	if (irq_desc_get_chip(desc)->flags & IRQCHIP_SHUTDOWN_ON_SUSPEND) {
-+		irq_shutdown(desc);
-+	} else {
-+		__disable_irq(desc);
++	np->freeze_state = NETIF_FREEZE_STATE_UNFROZEN;
 +
-+	       /*
-+		* Hardware which has no wakeup source configuration facility
-+		* requires that the non wakeup interrupts are masked at the
-+		* chip level. The chip implementation indicates that with
-+		* IRQCHIP_MASK_ON_SUSPEND.
+ 	return 0;
+ }
+ 
+@@ -2036,10 +2116,23 @@ static void netback_changed(struct xenbus_device *dev,
+ 		break;
+ 
+ 	case XenbusStateClosed:
+-		if (dev->state == XenbusStateClosed)
++		if (dev->state == XenbusStateClosed) {
++		     /* dpm context is waiting for the backend */
++			if (np->freeze_state == NETIF_FREEZE_STATE_FREEZING)
++				complete(&np->wait_backend_disconnected);
+ 			break;
++		}
++
+ 		/* Fall through - Missed the backend's CLOSING state. */
+ 	case XenbusStateClosing:
++	       /* We may see unexpected Closed or Closing from the backend.
++		* Just ignore it not to prevent the frontend from being
++		* re-connected in the case of PM suspend or hibernation.
 +		*/
-+		if (irq_desc_get_chip(desc)->flags & IRQCHIP_MASK_ON_SUSPEND)
-+			mask_irq(desc);
-+	}
- 	return true;
- }
++		if (np->freeze_state == NETIF_FREEZE_STATE_FROZEN &&
++		    dev->state == XenbusStateInitialising) {
++			break;
++		}
+ 		xenbus_frontend_closed(dev);
+ 		break;
+ 	}
+@@ -2186,6 +2279,9 @@ static struct xenbus_driver netfront_driver = {
+ 	.probe = netfront_probe,
+ 	.remove = xennet_remove,
+ 	.resume = netfront_resume,
++	.freeze = netfront_freeze,
++	.thaw	= netfront_restore,
++	.restore = netfront_restore,
+ 	.otherend_changed = netback_changed,
+ };
  
-@@ -152,7 +161,11 @@ static void resume_irq(struct irq_desc *desc)
- 	irq_state_set_masked(desc);
- resume:
- 	desc->istate &= ~IRQS_SUSPENDED;
--	__enable_irq(desc);
-+
-+	if (irq_desc_get_chip(desc)->flags & IRQCHIP_SHUTDOWN_ON_SUSPEND)
-+		__irq_startup(desc);
-+	else
-+		__enable_irq(desc);
- }
- 
- static void resume_irqs(bool want_early)
 -- 
 2.20.1
 
