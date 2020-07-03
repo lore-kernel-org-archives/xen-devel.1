@@ -2,55 +2,76 @@ Return-Path: <SRS0=DZRD=AO=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.5 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-2.3 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8602AC433DF
-	for <xen-devel@archiver.kernel.org>; Fri,  3 Jul 2020 05:15:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E9708C433DF
+	for <xen-devel@archiver.kernel.org>; Fri,  3 Jul 2020 07:58:49 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5DBB120772
-	for <xen-devel@archiver.kernel.org>; Fri,  3 Jul 2020 05:15:49 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5DBB120772
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id A17D2206BE
+	for <xen-devel@archiver.kernel.org>; Fri,  3 Jul 2020 07:58:49 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="WDzZ2nhG"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A17D2206BE
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jrE2u-0002z2-Dl; Fri, 03 Jul 2020 05:15:32 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jrGaJ-0007Wv-OB; Fri, 03 Jul 2020 07:58:11 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=CbuU=AO=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1jrE2s-0002yx-PU
- for xen-devel@lists.xenproject.org; Fri, 03 Jul 2020 05:15:30 +0000
-X-Inumbo-ID: 3617d24a-bcec-11ea-891d-12813bfff9fa
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 3617d24a-bcec-11ea-891d-12813bfff9fa;
- Fri, 03 Jul 2020 05:15:30 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 33B3FB03E;
- Fri,  3 Jul 2020 05:15:29 +0000 (UTC)
-Subject: Re: [PATCH v2 1/4] x86/xen: remove 32-bit Xen PV guest support
-To: Boris Ostrovsky <boris.ostrovsky@oracle.com>,
- xen-devel@lists.xenproject.org, x86@kernel.org, linux-kernel@vger.kernel.org
-References: <20200701110650.16172-1-jgross@suse.com>
- <20200701110650.16172-2-jgross@suse.com>
- <6d0b517a-6c53-61d3-117b-40e33e013037@oracle.com>
-From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Message-ID: <96159aed-9fdb-9fcb-a1b1-7c6c2c47e6a1@suse.com>
-Date: Fri, 3 Jul 2020 07:15:27 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.9.0
+ (envelope-from <SRS0=Kpvw=AO=xen.org=julien@srs-us1.protection.inumbo.net>)
+ id 1jrGaI-0007Wq-Ke
+ for xen-devel@lists.xenproject.org; Fri, 03 Jul 2020 07:58:10 +0000
+X-Inumbo-ID: efdd61e8-bd02-11ea-bca7-bc764e2007e4
+Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id efdd61e8-bd02-11ea-bca7-bc764e2007e4;
+ Fri, 03 Jul 2020 07:58:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=y831c3SyaYAviC2e5WYtZjpRaHUueP+RBPpzoR37b8I=; b=WDzZ2nhG96liyYN8lPXOKggYBH
+ LGwv7KLXO8TN7b3HAHwMm7rzCqFHs9UUFlDR7g1BA1yrzHMcbPEZ3+8are/MLK5gNx4mDD2pmMTrC
+ Txk4e/fSTlK1PeZzUgbMweCxrBGl64FFob0VJYwZSZ5ifb53utXixLggvElw3uHlCcbU=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1jrGaC-00012e-RV; Fri, 03 Jul 2020 07:58:04 +0000
+Received: from 54-240-197-234.amazon.com ([54.240.197.234]
+ helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1jrGaC-0005im-Ij; Fri, 03 Jul 2020 07:58:04 +0000
+Subject: Re: [PATCH v4 02/10] x86/vmx: add IPT cpu feature
+To: =?UTF-8?Q?Micha=c5=82_Leszczy=c5=84ski?= <michal.leszczynski@cert.pl>
+References: <cover.1593519420.git.michal.leszczynski@cert.pl>
+ <3fa0c3e7-9243-b1bb-d6ad-a3bd21437782@xen.org>
+ <0e02a9b5-ba7a-43a2-3369-a4410f216ddb@suse.com>
+ <9a3f4d58-e5ad-c7a1-6c5f-42aa92101ca1@xen.org>
+ <d0165fc3-fb05-2e49-eff3-e45a674b00e1@suse.com>
+ <7f915146-6566-e5a7-14d2-cb2319838562@xen.org>
+ <7ac383c2-0264-cc75-a85b-13c1fdfb0bd6@suse.com>
+ <dadeeedd-a9e1-d5f4-4754-8da3f065fd44@xen.org>
+ <187614050.18497785.1593721708078.JavaMail.zimbra@cert.pl>
+From: Julien Grall <julien@xen.org>
+Message-ID: <2e01fca9-efcd-7d09-355f-29245bbc8721@xen.org>
+Date: Fri, 3 Jul 2020 08:58:01 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
+ Gecko/20100101 Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <6d0b517a-6c53-61d3-117b-40e33e013037@oracle.com>
+In-Reply-To: <187614050.18497785.1593721708078.JavaMail.zimbra@cert.pl>
 Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Language: en-GB
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,83 +82,76 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Ingo Molnar <mingo@redhat.com>,
- Borislav Petkov <bp@alien8.de>, Andy Lutomirski <luto@kernel.org>,
- "H. Peter Anvin" <hpa@zytor.com>, Thomas Gleixner <tglx@linutronix.de>
+Cc: Kevin Tian <kevin.tian@intel.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ tamas lengyel <tamas.lengyel@intel.com>, Jan Beulich <jbeulich@suse.com>,
+ Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>,
+ Jun Nakajima <jun.nakajima@intel.com>, xen-devel@lists.xenproject.org,
+ luwei kang <luwei.kang@intel.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 03.07.20 00:59, Boris Ostrovsky wrote:
-> On 7/1/20 7:06 AM, Juergen Gross wrote:
->> Xen is requiring 64-bit machines today and since Xen 4.14 it can be
->> built without 32-bit PV guest support. There is no need to carry the
->> burden of 32-bit PV guest support in the kernel any longer, as new
->> guests can be either HVM or PVH, or they can use a 64 bit kernel.
+Hi,
+
+On 02/07/2020 21:28, Michał Leszczyński wrote:
+> ----- 2 lip 2020 o 16:31, Julien Grall julien@xen.org napisał(a):
+> 
+>> On 02/07/2020 15:17, Jan Beulich wrote:
+>>> On 02.07.2020 16:14, Julien Grall wrote:
+>>>> On 02/07/2020 14:30, Jan Beulich wrote:
+>>>>> On 02.07.2020 11:57, Julien Grall wrote:
+>>>>>> On 02/07/2020 10:18, Jan Beulich wrote:
+>>>>>>> On 02.07.2020 10:54, Julien Grall wrote:
+>>>>>>>> On 02/07/2020 09:50, Jan Beulich wrote:
+>>>>>>>>> On 02.07.2020 10:42, Julien Grall wrote:
+>>>>>>>>>> On 02/07/2020 09:29, Jan Beulich wrote:
+>>>>>> Another way to do it, would be the toolstack to do the mapping. At which
+>>>>>> point, you still need an hypercall to do the mapping (probably the
+>>>>>> hypercall acquire).
+>>>>>
+>>>>> There may not be any mapping to do in such a contrived, fixed-range
+>>>>> environment. This scenario was specifically to demonstrate that the
+>>>>> way the mapping gets done may be arch-specific (here: a no-op)
+>>>>> despite the allocation not being so.
+>>>> You are arguing on extreme cases which I don't think is really helpful
+>>>> here. Yes if you want to map at a fixed address in a guest you may not
+>>>> need the acquire hypercall. But in most of the other cases (see has for
+>>>> the tools) you will need it.
+>>>>
+>>>> So what's the problem with requesting to have the acquire hypercall
+>>>> implemented in common code?
+>>>
+>>> Didn't we start out by you asking that there be as little common code
+>>> as possible for the time being?
 >>
->> Remove the 32-bit Xen PV support from the kernel.
+>> Well as I said I am not in favor of having the allocation in common
+>> code, but if you want to keep it then you also want to implement
+>> map/unmap in the common code ([1], [2]).
 >>
->> Signed-off-by: Juergen Gross <jgross@suse.com>
->> ---
->>   arch/x86/entry/entry_32.S      | 109 +----------
->>   arch/x86/include/asm/proto.h   |   2 +-
->>   arch/x86/include/asm/segment.h |   2 +-
->>   arch/x86/kernel/head_32.S      |  31 ---
->>   arch/x86/xen/Kconfig           |   3 +-
->>   arch/x86/xen/Makefile          |   3 +-
->>   arch/x86/xen/apic.c            |  17 --
->>   arch/x86/xen/enlighten_pv.c    |  48 +----
+>>> I have no issue with putting the
+>>> acquire implementation there ...
+>> This was definitely not clear given how you argued with extreme cases...
+>>
+>> Cheers,
+>>
+>> [1] <9a3f4d58-e5ad-c7a1-6c5f-42aa92101ca1@xen.org>
+>> [2] <cf41855b-9e5e-13f2-9ab0-04b98f8b3cdd@xen.org>
+>>
+>> --
+>> Julien Grall
 > 
 > 
-> Should we drop PageHighMem() test in set_aliased_prot()?
+> Guys,
 > 
-> 
-> (And there are few other places where is is used, in mmu_pv.c)
+> could you express your final decision on this topic?
 
-Yes, will drop those.
+Can you move the acquire implementation from x86 to common code?
 
-> 
-> 
-> 
->> @@ -555,13 +547,8 @@ static void xen_load_tls(struct thread_struct *t, unsigned int cpu)
->>   	 * exception between the new %fs descriptor being loaded and
->>   	 * %fs being effectively cleared at __switch_to().
->>   	 */
->> -	if (paravirt_get_lazy_mode() == PARAVIRT_LAZY_CPU) {
->> -#ifdef CONFIG_X86_32
->> -		lazy_load_gs(0);
->> -#else
-> 
-> 
-> I think this also needs an adjustment to the preceding comment.
+Cheers,
 
-Yes.
-
-> 
-> 
->>   
->> -#ifdef CONFIG_X86_PAE
->> -static void xen_set_pte_atomic(pte_t *ptep, pte_t pte)
->> -{
->> -	trace_xen_mmu_set_pte_atomic(ptep, pte);
->> -	__xen_set_pte(ptep, pte);
-> 
-> 
-> Probably not for this series but I wonder whether __xen_set_pte() should
-> continue to use hypercall now that we are 64-bit only.
-
-As Andrew wrote already the hypercall will be cheaper.
-
-I'll adjust the comment, though.
-
-> 
-> 
->> @@ -654,14 +621,12 @@ static int __xen_pgd_walk(struct mm_struct *mm, pgd_t *pgd,
-> 
-> 
-> Comment above should be updated.
-
-Yes.
-
-
-Juergen
+-- 
+Julien Grall
 
