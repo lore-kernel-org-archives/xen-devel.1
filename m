@@ -7,71 +7,71 @@ X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 185CDC433E1
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E708BC433DF
 	for <xen-devel@archiver.kernel.org>; Sat,  4 Jul 2020 14:56:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E01C521852
-	for <xen-devel@archiver.kernel.org>; Sat,  4 Jul 2020 14:56:39 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id B9E3221852
+	for <xen-devel@archiver.kernel.org>; Sat,  4 Jul 2020 14:56:40 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="XuFU4CBE"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E01C521852
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=amsat.org
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="mKjsT3NY"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B9E3221852
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=amsat.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jrjah-0004uv-2i; Sat, 04 Jul 2020 14:56:31 +0000
+	id 1jrjag-0004tr-PA; Sat, 04 Jul 2020 14:56:30 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hHao=AP=gmail.com=philippe.mathieu.daude@srs-us1.protection.inumbo.net>)
- id 1jrjVQ-0003ES-Rb
- for xen-devel@lists.xenproject.org; Sat, 04 Jul 2020 14:51:04 +0000
-X-Inumbo-ID: ad8de00c-be05-11ea-bca7-bc764e2007e4
-Received: from mail-wr1-x442.google.com (unknown [2a00:1450:4864:20::442])
+ id 1jrjVf-0003ES-SR
+ for xen-devel@lists.xenproject.org; Sat, 04 Jul 2020 14:51:19 +0000
+X-Inumbo-ID: b13882c0-be05-11ea-8496-bc764e2007e4
+Received: from mail-wm1-x344.google.com (unknown [2a00:1450:4864:20::344])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id ad8de00c-be05-11ea-bca7-bc764e2007e4;
- Sat, 04 Jul 2020 14:50:18 +0000 (UTC)
-Received: by mail-wr1-x442.google.com with SMTP id z2so13505031wrp.2
- for <xen-devel@lists.xenproject.org>; Sat, 04 Jul 2020 07:50:18 -0700 (PDT)
+ id b13882c0-be05-11ea-8496-bc764e2007e4;
+ Sat, 04 Jul 2020 14:50:25 +0000 (UTC)
+Received: by mail-wm1-x344.google.com with SMTP id o2so37045098wmh.2
+ for <xen-devel@lists.xenproject.org>; Sat, 04 Jul 2020 07:50:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=F2y1uml1RkFfNsOb+m2iyzdDwj1uXo3NnuLQTrqdA9s=;
- b=XuFU4CBE8JCcfpdI/mR5sE2jyMeyBckQOwPMTtzwJf8CjscRTofonY09HxmwJm00NE
- hgXaGKtjBGKgBEytwuJ+1LT1UMvcBupnCU5041RZtHT4vwcBWQo/M/+GghnU6sLvVTLF
- Y0OX5yURCQg13pYSivq8FFPYj7wg8wOD1j0jENHOgxaRTzOtllVlw7cjPNFn2IWH1BIq
- Sm6KuoljtLR0LbF6gX5rfDBtKX6CprkJZYeXQzCIGgZcLZdQ6vORkbiRnRe5hvsbF/uS
- OWFgKWrvnxxqFL1fM5rMPeqOvIkLQG0cFB/v/CHa/YpQquR2m9B6/D1fPzqQ7wWU0wd9
- 8j+w==
+ bh=dSp90TZcMkhYVN1myg6NdGD6Nbq0gZQK2ClNXRKzwCU=;
+ b=mKjsT3NYlThJ+LvUmtlSMZy5vL935vqJl78XXQCOfn95V8qATFdthcq6p9KJZvenD6
+ DffdeGJvs+v064CCp2bsGhza6HQ140vH4JRai4A3w+oS3o1wIspj2Cju5MMVDflqztas
+ XqxwrLwqtwKNKEg6aekNLR2FAcywQVHY/ZPzG6wsvXMQx0+h11VfEUR7kqHBPv3peOBX
+ gfriguM3HSKDBd5gYz5iWvxaoezeQw/GUCx443CDTct4IA4h1LI8tVQdQU/ugz11KIv+
+ BiB3KOhE8U5/19gm2x+V5J/zs6cl0vA9D1NhrqwmqhZr47fh9n3rf96aJTJhrioPyh+C
+ odGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=F2y1uml1RkFfNsOb+m2iyzdDwj1uXo3NnuLQTrqdA9s=;
- b=H/G7fkqj0E3OCviW9kEBbWZdxAr5nwASou7X2g/Hfk+J8LIjzErTqtdIR9EZ4w2sVv
- PAMOOmkMhcyJIzpJYqbsNNa1KdMY7mYkdxO8Jf22guUgkz/FprHaMOeHyHG/ovQ8QLVe
- RnUCnVPNRt6AFI9oYuBFiwWOWFlASNomhFdvxAG0GAcJQxKgQyW9PBmSwQBj4XWZj9mI
- zl1E30xKWdyn8qS9iJgM1KDv1YuGvmlKQqPBrDSrGZSRu7pAMhA0McdmHOUx64+615nT
- KQQw+N3pNDITS2CWIDXetMJD0eqm/wgC+UbrwlwDbt65k4gNZgm4nXSFyTCH1GAzgbim
- zPWw==
-X-Gm-Message-State: AOAM532/JnBDwUIaUrD2E0p1JxILIccKHN+e5nbylYeSaXBGT0x9lxIO
- RnVVGipftxcsKshHnCYibSg=
-X-Google-Smtp-Source: ABdhPJyq/7eRAGeHxJJ4O+Zutc0Mt3EntxvTem4i1yYIv/0yUmC2RdRBoUXQL+VySe0UhHY6Lv3gOQ==
-X-Received: by 2002:a5d:6a01:: with SMTP id m1mr43778986wru.115.1593874218068; 
- Sat, 04 Jul 2020 07:50:18 -0700 (PDT)
+ bh=dSp90TZcMkhYVN1myg6NdGD6Nbq0gZQK2ClNXRKzwCU=;
+ b=TjEoeeww3uHlTl4SqPgds9lkfPdr9lA99tKeTbKV1xd7kTKos/CR6V6QPImASTalgP
+ mUVrvpoxQZ1tbAt7AfuOhsNQtYQSSMEbVyG1daSbOMrQJgcuUuborwuhlJCQUGYFFLJ+
+ ee8he9ruVrtEagavUesNFujBBbFEvZM8Q00iTmyXSIPOF6j5ZZ3GBXqHuY1t8sdunFWh
+ nINCntwptk8+RC+CT3KvHLSHATXYWo1F9yjZWQ1hVHEueJX5cy2dM3t012D+TlW6YgLx
+ p98NDjZCKKlmx4H4IVFllIk+N8hfpPjUI1BvNrr243NdkZ2Eoz7xwg3nLglNY4wtLcCH
+ qZMA==
+X-Gm-Message-State: AOAM530//WZ5nEDIk2F6F5xrdTLW7GWTZoPxU4QnUOdZ9roSjflskDyE
+ AA4sqFjUmTD0lrKqeq2DPrQ=
+X-Google-Smtp-Source: ABdhPJzvKUoOtrkVjzZQp6DwlQyiHYdZ94BKN5ozpyFIsmy9iEQycoO+prQidokC2C86DctB5wk5ig==
+X-Received: by 2002:a1c:18e:: with SMTP id 136mr10977710wmb.93.1593874224206; 
+ Sat, 04 Jul 2020 07:50:24 -0700 (PDT)
 Received: from localhost.localdomain (1.red-83-51-162.dynamicip.rima-tde.net.
  [83.51.162.1])
- by smtp.gmail.com with ESMTPSA id r10sm17135019wrm.17.2020.07.04.07.50.16
+ by smtp.gmail.com with ESMTPSA id r10sm17135019wrm.17.2020.07.04.07.50.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 04 Jul 2020 07:50:17 -0700 (PDT)
+ Sat, 04 Jul 2020 07:50:23 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
 To: qemu-devel@nongnu.org,
 	BALATON Zoltan <balaton@eik.bme.hu>
-Subject: [PATCH 15/26] hw/usb: Add new 'usb-quirks.h' local header
-Date: Sat,  4 Jul 2020 16:49:32 +0200
-Message-Id: <20200704144943.18292-16-f4bug@amsat.org>
+Subject: [PATCH 18/26] hw/usb/bus: Add usb_get_port_path()
+Date: Sat,  4 Jul 2020 16:49:35 +0200
+Message-Id: <20200704144943.18292-19-f4bug@amsat.org>
 X-Mailer: git-send-email 2.21.3
 In-Reply-To: <20200704144943.18292-1-f4bug@amsat.org>
 References: <20200704144943.18292-1-f4bug@amsat.org>
@@ -121,96 +121,74 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Only redirect.c consumes the quirks API. Reduce the big "hw/usb.h"
-header by moving the quirks related declaration into their own
-header. As nothing out of hw/usb/ requires it, keep it local.
+Refactor usb_get_full_dev_path() to take a 'want_full_path'
+argument, and add usb_get_port_path() which returns a short
+path.
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- hw/usb/usb-quirks.h | 27 +++++++++++++++++++++++++++
- include/hw/usb.h    | 11 -----------
- hw/usb/quirks.c     |  1 +
- hw/usb/redirect.c   |  1 +
- 4 files changed, 29 insertions(+), 11 deletions(-)
- create mode 100644 hw/usb/usb-quirks.h
+ include/hw/usb.h | 10 ++++++++++
+ hw/usb/bus.c     | 18 +++++++++++++-----
+ 2 files changed, 23 insertions(+), 5 deletions(-)
 
-diff --git a/hw/usb/usb-quirks.h b/hw/usb/usb-quirks.h
-new file mode 100644
-index 0000000000..542889efc4
---- /dev/null
-+++ b/hw/usb/usb-quirks.h
-@@ -0,0 +1,27 @@
-+/*
-+ * USB quirk handling
-+ *
-+ * Copyright (c) 2012 Red Hat, Inc.
-+ *
-+ * Red Hat Authors:
-+ * Hans de Goede <hdegoede@redhat.com>
-+ *
-+ * This program is free software; you can redistribute it and/or modify
-+ * it under the terms of the GNU General Public License as published by
-+ * the Free Software Foundation; either version 2 of the License, or
-+ * (at your option) any later version.
-+ */
-+
-+#ifndef HW_USB_QUIRKS_H
-+#define HW_USB_QUIRKS_H
-+
-+/* In bulk endpoints are streaming data sources (iow behave like isoc eps) */
-+#define USB_QUIRK_BUFFER_BULK_IN        0x01
-+/* Bulk pkts in FTDI format, need special handling when combining packets */
-+#define USB_QUIRK_IS_FTDI               0x02
-+
-+int usb_get_quirks(uint16_t vendor_id, uint16_t product_id,
-+                   uint8_t interface_class, uint8_t interface_subclass,
-+                   uint8_t interface_protocol);
-+
-+#endif
 diff --git a/include/hw/usb.h b/include/hw/usb.h
-index 18f1349bdc..8c3bc920ff 100644
+index 8c3bc920ff..7ea502d421 100644
 --- a/include/hw/usb.h
 +++ b/include/hw/usb.h
-@@ -549,15 +549,4 @@ int usb_device_alloc_streams(USBDevice *dev, USBEndpoint **eps, int nr_eps,
-                              int streams);
- void usb_device_free_streams(USBDevice *dev, USBEndpoint **eps, int nr_eps);
+@@ -506,6 +506,16 @@ void usb_port_location(USBPort *downstream, USBPort *upstream, int portnr);
+ void usb_unregister_port(USBBus *bus, USBPort *port);
+ void usb_claim_port(USBDevice *dev, Error **errp);
+ void usb_release_port(USBDevice *dev);
++/**
++ * usb_get_port_path:
++ * @dev: the USB device
++ *
++ * The returned data must be released with g_free()
++ * when no longer required.
++ *
++ * Returns: a dynamically allocated pathname.
++ */
++char *usb_get_port_path(USBDevice *dev);
+ void usb_device_attach(USBDevice *dev, Error **errp);
+ int usb_device_detach(USBDevice *dev);
+ void usb_check_attach(USBDevice *dev, Error **errp);
+diff --git a/hw/usb/bus.c b/hw/usb/bus.c
+index fad8194bf5..518e5b94ed 100644
+--- a/hw/usb/bus.c
++++ b/hw/usb/bus.c
+@@ -577,12 +577,10 @@ static void usb_bus_dev_print(Monitor *mon, DeviceState *qdev, int indent)
+                    dev->attached ? ", attached" : "");
+ }
  
--/* quirks.c */
+-static char *usb_get_full_dev_path(DeviceState *qdev)
++static char *usb_get_dev_path(USBDevice *dev, bool want_full_path)
+ {
+-    USBDevice *dev = USB_DEVICE(qdev);
 -
--/* In bulk endpoints are streaming data sources (iow behave like isoc eps) */
--#define USB_QUIRK_BUFFER_BULK_IN	0x01
--/* Bulk pkts in FTDI format, need special handling when combining packets */
--#define USB_QUIRK_IS_FTDI		0x02
--
--int usb_get_quirks(uint16_t vendor_id, uint16_t product_id,
--                   uint8_t interface_class, uint8_t interface_subclass,
--                   uint8_t interface_protocol);
--
- #endif
-diff --git a/hw/usb/quirks.c b/hw/usb/quirks.c
-index 655b36f2d5..b0d0f87e35 100644
---- a/hw/usb/quirks.c
-+++ b/hw/usb/quirks.c
-@@ -15,6 +15,7 @@
- #include "qemu/osdep.h"
- #include "quirks.inc.c"
- #include "hw/usb.h"
-+#include "usb-quirks.h"
+-    if (dev->flags & (1 << USB_DEV_FLAG_FULL_PATH)) {
+-        DeviceState *hcd = qdev->parent_bus->parent;
++    if (want_full_path && (dev->flags & (1 << USB_DEV_FLAG_FULL_PATH))) {
++        DeviceState *hcd = DEVICE(dev)->parent_bus->parent;
+         char *id = qdev_get_dev_path(hcd);
  
- static bool usb_id_match(const struct usb_device_id *ids,
-                          uint16_t vendor_id, uint16_t product_id,
-diff --git a/hw/usb/redirect.c b/hw/usb/redirect.c
-index 417a60a2e6..4c5925a039 100644
---- a/hw/usb/redirect.c
-+++ b/hw/usb/redirect.c
-@@ -45,6 +45,7 @@
- #include "hw/usb.h"
- #include "migration/qemu-file-types.h"
- #include "migration/vmstate.h"
-+#include "usb-quirks.h"
+         if (id) {
+@@ -594,6 +592,16 @@ static char *usb_get_full_dev_path(DeviceState *qdev)
+     return g_strdup(dev->port->path);
+ }
  
- /* ERROR is defined below. Remove any previous definition. */
- #undef ERROR
++static char *usb_get_full_dev_path(DeviceState *qdev)
++{
++    return usb_get_dev_path(USB_DEVICE(qdev), true);
++}
++
++char *usb_get_port_path(USBDevice *dev)
++{
++    return usb_get_dev_path(dev, false);
++}
++
+ static char *usb_get_fw_dev_path(DeviceState *qdev)
+ {
+     USBDevice *dev = USB_DEVICE(qdev);
 -- 
 2.21.3
 
