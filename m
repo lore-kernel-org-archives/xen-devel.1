@@ -7,71 +7,71 @@ X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D48F0C433E0
-	for <xen-devel@archiver.kernel.org>; Sat,  4 Jul 2020 14:50:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C66EC433E0
+	for <xen-devel@archiver.kernel.org>; Sat,  4 Jul 2020 14:50:28 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A713C2070C
-	for <xen-devel@archiver.kernel.org>; Sat,  4 Jul 2020 14:50:24 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 0DDF12070C
+	for <xen-devel@archiver.kernel.org>; Sat,  4 Jul 2020 14:50:28 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="LCSMbVvH"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A713C2070C
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=amsat.org
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="oe96UZf2"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0DDF12070C
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=amsat.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jrjUJ-0003F0-Us; Sat, 04 Jul 2020 14:49:55 +0000
+	id 1jrjUe-0003xr-1K; Sat, 04 Jul 2020 14:50:16 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hHao=AP=gmail.com=philippe.mathieu.daude@srs-us1.protection.inumbo.net>)
- id 1jrjUI-0003ES-OV
- for xen-devel@lists.xenproject.org; Sat, 04 Jul 2020 14:49:54 +0000
-X-Inumbo-ID: 9cb3dfd4-be05-11ea-8496-bc764e2007e4
-Received: from mail-wr1-x444.google.com (unknown [2a00:1450:4864:20::444])
+ id 1jrjUc-0003ES-PD
+ for xen-devel@lists.xenproject.org; Sat, 04 Jul 2020 14:50:14 +0000
+X-Inumbo-ID: a1811856-be05-11ea-8496-bc764e2007e4
+Received: from mail-wr1-x442.google.com (unknown [2a00:1450:4864:20::442])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9cb3dfd4-be05-11ea-8496-bc764e2007e4;
- Sat, 04 Jul 2020 14:49:50 +0000 (UTC)
-Received: by mail-wr1-x444.google.com with SMTP id f18so27701613wrs.0
- for <xen-devel@lists.xenproject.org>; Sat, 04 Jul 2020 07:49:50 -0700 (PDT)
+ id a1811856-be05-11ea-8496-bc764e2007e4;
+ Sat, 04 Jul 2020 14:49:58 +0000 (UTC)
+Received: by mail-wr1-x442.google.com with SMTP id f2so7792457wrp.7
+ for <xen-devel@lists.xenproject.org>; Sat, 04 Jul 2020 07:49:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=1LONYHTd7jeNrmu8RfEJNRKaqa+4/OTfMiA08MmDC4w=;
- b=LCSMbVvH8N0ZbcZUYZvlwl0/LtuSzor2alX6qtutU+9ODMj8+C2lynOKjaqj8fXnEI
- Up7WQjLdb8bh14eYdbzmWq0pniHymCkqwLxs7uZhzz+SQeCK8ybk5MN0Zyhj8Eee+SQj
- wRrntXxiS8ThEJ3VSHHvZJ08OGnA1vj0opel3/dZthPvXbGAIhhQVqi63UTc46zKMF8g
- WrVDYhnL59CSHsALtHCZR8uG2+fDNJPpG55w+1h1DIiM4zmD5wiPD6EKOmnxiehzG+GO
- tiIAW62Y9YFjeqMNBorgEysK6Wv7zhm124e0UVH2qXSktIEDr+5rtVe5ZIRMCgW9yetf
- 3gAA==
+ bh=7pFkSbRRQbCuRBQa/wHlCeQOONUZFK/RPfYxuVN6mNY=;
+ b=oe96UZf2PvTeWCGOzNPdJjjjwq8e7uWWti9W08FMinN7P58qMXJzwG4jf7BQqAlIXy
+ 6nHLswC2ubCB3a5BJuyeZJgNcIKrAIDo4ARzHOGDOs8dG3JjWPLZh+xe/GSdKhL1zZpq
+ 8BYgKvBkBIAl/g+8RWgLQjeAv3/zhyETI0aJxVBr/gw0rUcBfnedTHwEViIUPNIXNva6
+ 03JOGnSszEoF4cvdF3lLiUVfjtrvuQh3LEc873Fecq0vjBpXttzot5/ZB9ZEJEQG430J
+ 9YLB5PV5soEOhpr3WG8RhSY1eKgOIEVX6mRUL3RwbaUehHrdq/CwhlxSp1fhDKJcCsc/
+ pq5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=1LONYHTd7jeNrmu8RfEJNRKaqa+4/OTfMiA08MmDC4w=;
- b=rvpxhDr4dbszXwU+bgnQmd5GzmoFtIfpYWbDOK8hKp/T9nX0bqBZIovWjqN6Vu1uwT
- 8hAoaFi3tDWktCu5kzDTUt/aDT+E+bvdQalU9BSby6de/IARYlSaBleLx3C9OICkW+ju
- R4GrEiIqoZA3lCxAEEYgtQSOWSKqUkN6SajSVgRrwga+tluhXsQaBhYbRicJurxjpDwN
- R4cyotqNZEhc5WPY+z9hTct3owW6AXLZwNjRWmBmzT+lcXQQj7rsepuFn9O3lfX9BoLN
- V1+m5XzXd0OAFifHzFnhXd0mS+OBz7Lvh2GlOHBCAvcJtjEXir2C4MqhOzESVat0wYfv
- E1tw==
-X-Gm-Message-State: AOAM53120zcCvWEDdWObFzL/2hklERl8Mzf14khsrYnYOnHnz1OKr3AR
- +SXNaHGUPr7FX+4jU/pteVc=
-X-Google-Smtp-Source: ABdhPJyhL9pSuntp8VeiIjIT6N9OP48blUH4lL3NMOGJ+4E4luyAkGU/9nzb7bgsn2yWXLxxbe616w==
-X-Received: by 2002:adf:f54b:: with SMTP id j11mr41454017wrp.206.1593874189885; 
- Sat, 04 Jul 2020 07:49:49 -0700 (PDT)
+ bh=7pFkSbRRQbCuRBQa/wHlCeQOONUZFK/RPfYxuVN6mNY=;
+ b=G3iciyn7RQ8poATp+XoZi/LGasfXagXvrMp83LJoggQKPv5/2nWah3EsboJqty8Ey3
+ Llbi9QyB3V9/Xuv+OXgLDbtpwJ9OAYFi2nUercF+38gEo8qLrcypuano9wCpcQw6ZskX
+ TtB+YE6oGcNNzrZ7XnAOobI5XMxnbMB3XQDgoQWRyv6ic4qP6vPrx9HTHPgpsHOcNmgu
+ OCJvopcsNv1Kst/fPpWPdIOrOjNE0NJVXKVakIA88yV8KuWjjpksJdg7ocvvMhJRAPJe
+ JEYLUWoxeoXM7/ZFyAkaq7sM1tjQIkRgtVMrqEWN5zJa04rq4deZ3l8fnhibqQq8uFxi
+ rRTA==
+X-Gm-Message-State: AOAM5317t1vYaqpZiEKllene4TYWqqc/7jTOab5nUgYtIKfizhIEb/+c
+ WLs0NuYB9RkclxvMy8nwYZ0=
+X-Google-Smtp-Source: ABdhPJyIsvEkdmFv/CEzZPKYJCez2abF31l4aHFgnR6C3Ee2RRBQ8QQm9RtLdC3SuJbJy3WxELYEqQ==
+X-Received: by 2002:adf:f08b:: with SMTP id n11mr40029476wro.312.1593874197889; 
+ Sat, 04 Jul 2020 07:49:57 -0700 (PDT)
 Received: from localhost.localdomain (1.red-83-51-162.dynamicip.rima-tde.net.
  [83.51.162.1])
- by smtp.gmail.com with ESMTPSA id r10sm17135019wrm.17.2020.07.04.07.49.48
+ by smtp.gmail.com with ESMTPSA id r10sm17135019wrm.17.2020.07.04.07.49.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 04 Jul 2020 07:49:49 -0700 (PDT)
+ Sat, 04 Jul 2020 07:49:57 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
 To: qemu-devel@nongnu.org,
 	BALATON Zoltan <balaton@eik.bme.hu>
-Subject: [PATCH 01/26] hw/arm/sbsa-ref: Remove unused 'hw/usb.h' header
-Date: Sat,  4 Jul 2020 16:49:18 +0200
-Message-Id: <20200704144943.18292-2-f4bug@amsat.org>
+Subject: [PATCH 05/26] hw/usb/desc: Add missing header
+Date: Sat,  4 Jul 2020 16:49:22 +0200
+Message-Id: <20200704144943.18292-6-f4bug@amsat.org>
 X-Mailer: git-send-email 2.21.3
 In-Reply-To: <20200704144943.18292-1-f4bug@amsat.org>
 References: <20200704144943.18292-1-f4bug@amsat.org>
@@ -121,26 +121,26 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This file doesn't access anything from "hw/usb.h", remove its
-inclusion.
+This header uses the USBPacket and USBDevice types which are
+forward declared in "hw/usb.h".
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- hw/arm/sbsa-ref.c | 1 -
- 1 file changed, 1 deletion(-)
+ hw/usb/desc.h | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/hw/arm/sbsa-ref.c b/hw/arm/sbsa-ref.c
-index e40c868a82..021e7c1b8b 100644
---- a/hw/arm/sbsa-ref.c
-+++ b/hw/arm/sbsa-ref.c
-@@ -38,7 +38,6 @@
- #include "hw/loader.h"
- #include "hw/pci-host/gpex.h"
- #include "hw/qdev-properties.h"
--#include "hw/usb.h"
- #include "hw/char/pl011.h"
- #include "net/net.h"
+diff --git a/hw/usb/desc.h b/hw/usb/desc.h
+index 4d81c68e0e..92594fbe29 100644
+--- a/hw/usb/desc.h
++++ b/hw/usb/desc.h
+@@ -2,6 +2,7 @@
+ #define QEMU_HW_USB_DESC_H
  
+ #include <wchar.h>
++#include "hw/usb.h"
+ 
+ /* binary representation */
+ typedef struct USBDescriptor {
 -- 
 2.21.3
 
