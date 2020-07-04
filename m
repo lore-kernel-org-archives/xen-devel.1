@@ -7,71 +7,73 @@ X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AC4FDC433E2
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CE2DAC433E3
 	for <xen-devel@archiver.kernel.org>; Sat,  4 Jul 2020 14:57:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7B5572158C
+	by mail.kernel.org (Postfix) with ESMTPS id 9DCA72168B
 	for <xen-devel@archiver.kernel.org>; Sat,  4 Jul 2020 14:57:00 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="aB1S25DG"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7B5572158C
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=amsat.org
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="kGjxAbMk"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9DCA72168B
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=amsat.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jrjb0-0005FP-Eo; Sat, 04 Jul 2020 14:56:50 +0000
+	id 1jrjb1-0005Ga-29; Sat, 04 Jul 2020 14:56:51 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hHao=AP=gmail.com=philippe.mathieu.daude@srs-us1.protection.inumbo.net>)
- id 1jrjW9-0003ES-TV
- for xen-devel@lists.xenproject.org; Sat, 04 Jul 2020 14:51:49 +0000
-X-Inumbo-ID: b7e5f6b6-be05-11ea-bb8b-bc764e2007e4
+ id 1jrjVL-0003ES-RK
+ for xen-devel@lists.xenproject.org; Sat, 04 Jul 2020 14:50:59 +0000
+X-Inumbo-ID: ac624880-be05-11ea-b7bb-bc764e2007e4
 Received: from mail-wm1-x343.google.com (unknown [2a00:1450:4864:20::343])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b7e5f6b6-be05-11ea-bb8b-bc764e2007e4;
- Sat, 04 Jul 2020 14:50:36 +0000 (UTC)
-Received: by mail-wm1-x343.google.com with SMTP id f18so37074799wml.3
- for <xen-devel@lists.xenproject.org>; Sat, 04 Jul 2020 07:50:36 -0700 (PDT)
+ id ac624880-be05-11ea-b7bb-bc764e2007e4;
+ Sat, 04 Jul 2020 14:50:16 +0000 (UTC)
+Received: by mail-wm1-x343.google.com with SMTP id a6so24089448wmm.0
+ for <xen-devel@lists.xenproject.org>; Sat, 04 Jul 2020 07:50:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=f29/MIGKjiVCXNbXb7QXhmc4KA4eor+Mhn/A2jA2iWs=;
- b=aB1S25DGnSIIYyLepd0/DAdWudVgoTXK9tCwzyeK195D7VcOpmizNyVX6hZ+Hw2qEs
- azVFVrdxwL3VuODlB4q4QqZfMjPTxFOKhd3QaNoTlI3BCwrwaIJCdaN/9hDuogPt7S1W
- uMkSVz50tiyCDufVzR9ruwvMAD7Cy57YADj/X/TkNbbAOo6IdzPigDU6+Qt9UnoF1S0U
- 2gQlMm3UZYz9RaiNodxR9aWaZAJ7LbmPd+BGW5Mh8hxVh31zMr93bGQmvMf+wmWascsB
- JSWvSnk5sXCB2K4BvDiMtrGexuQVS2ZsqDG1irobpKigzLZqPl++eLsBBaNhhanPYtWu
- xagQ==
+ bh=xjjAqG2L8PiyECLv8vWl/nPN8wdvqzFPKnLDYj57EWU=;
+ b=kGjxAbMk0Y+V1ZM0jG8F7zrUJeEpbEY2rUuWHyvQnUy2BC4TEa4D9G84sW8qU3Tnyi
+ hXyLAakl5TAVaESh9mwcqIkW9kPRuFhF1CPBo0iqa9EzqOeUO8dcJwyom69eu1X7is1K
+ GI/h4RCMamXhRltfPP+anRNrC4T3Xl/b+bRd7v5Nxqs6IBSrpiZ+NfMzkc3fyOz+zG/O
+ qhZVj0cz4AUqg4attnXMbE/OWUZmlqtkxjHzNmmPiDdGXYHh9wyMp7La7dx/LG+WG1y0
+ 7hKot5Tx+EVBqxTjnBKGlFKxDUcrNR10Wub/RcuZ75CfRChXgIvTj2rJ1blM2eTTB1qV
+ uPjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=f29/MIGKjiVCXNbXb7QXhmc4KA4eor+Mhn/A2jA2iWs=;
- b=ZrLw5pKI1K2QyUF3y1QYnTWMGaMl3YYSs0uGnYqk7ICHLP1N/S1iClT1m+5RXxDmLE
- 0Cdv7T2DUTx6yu5s6yiKUOELT+tVs6uIJGY3SMqAs8X+w8uKMoO3H06FbSvlLULmNvY2
- h7QeQkmeB4YQX0wY92+tNckdCSjmrHDXbtfcPS+ztM4pV1Ez1f9Gsp8e6mIZDVrdd+Zk
- HzU2pJ+KqUvkOGgbJec94wwLajalt/IrnpcjgLPtknWOReOvQ93VMJjlfY3kWIitoI9B
- h4Y2MoAjbjOIs8oBwLhqwSldnG7uMSwonDoxRu2SqeSY60oletBWLXIkoVFGUww2QbTS
- yopQ==
-X-Gm-Message-State: AOAM532ap1oG4PoQdGme4cMYWtuN8Fgqpk3L4CSv2tCyRJMyiZ9TGqgi
- HpAUdwIDLfdoGursw4pzuSE=
-X-Google-Smtp-Source: ABdhPJzXh5fqsqOLbUyvdsrfc19bAAQd0SyMWAd0LLQtMbMkVi1HDhynYNEmZjRrZ57ugrqA88FVFA==
-X-Received: by 2002:a1c:2183:: with SMTP id h125mr43989795wmh.83.1593874235357; 
- Sat, 04 Jul 2020 07:50:35 -0700 (PDT)
+ bh=xjjAqG2L8PiyECLv8vWl/nPN8wdvqzFPKnLDYj57EWU=;
+ b=BlEDOZDvk569CRF8HkryQBb3ozQUYjdhSCo6rKJ6kMBMm7L1/UNLQ3zgLsN8yRZ3T/
+ kL1m6TzdYWrT82sJ/hMsknvX/xKfGwzUC+Q3eQRZNFNilV+0ROaTSX4aFbXJbaHllV1l
+ R+qUPyIcoCr3Y7bKIdbkogVCZ8I7S+9ly1cg6R4ruYH0nobsJP9Pf0EZcp+/kgLdoMTV
+ F8Rh5R2EIw9i+ygLyR0Q5bluiapZYBr1ldXfAPKVTmvQn8BTg7Jj0rUnv8i6gCRsrK/7
+ xzox/EFaxJ7FmySljFiPfE2VZBrJCNc4Qc0xeMNl/rAJJQSSuYcdZfEkxzoI2lrv38Z7
+ BNoA==
+X-Gm-Message-State: AOAM530kn5302bEYPm21F+PWkMpv261nQ5npHk7/b61Qtg3qpR0zv4ei
+ dX20Gxsgiu+LycCAVXrQk78=
+X-Google-Smtp-Source: ABdhPJyylaQ90oaFVpyNttGYGyUpJwJRvbiuNFcOgPIhMsiwGOGXapRLVUD2ADJD/bSRm2sJT5Aq2g==
+X-Received: by 2002:a1c:6788:: with SMTP id
+ b130mr42706142wmc.100.1593874216169; 
+ Sat, 04 Jul 2020 07:50:16 -0700 (PDT)
 Received: from localhost.localdomain (1.red-83-51-162.dynamicip.rima-tde.net.
  [83.51.162.1])
- by smtp.gmail.com with ESMTPSA id r10sm17135019wrm.17.2020.07.04.07.50.33
+ by smtp.gmail.com with ESMTPSA id r10sm17135019wrm.17.2020.07.04.07.50.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 04 Jul 2020 07:50:34 -0700 (PDT)
+ Sat, 04 Jul 2020 07:50:15 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
 To: qemu-devel@nongnu.org,
 	BALATON Zoltan <balaton@eik.bme.hu>
-Subject: [PATCH 23/26] hw/usb/usb-hcd: Use EHCI type definitions
-Date: Sat,  4 Jul 2020 16:49:40 +0200
-Message-Id: <20200704144943.18292-24-f4bug@amsat.org>
+Subject: [PATCH 14/26] hw/usb/quirks: Rename included source with '.inc.c'
+ suffix
+Date: Sat,  4 Jul 2020 16:49:31 +0200
+Message-Id: <20200704144943.18292-15-f4bug@amsat.org>
 X-Mailer: git-send-email 2.21.3
 In-Reply-To: <20200704144943.18292-1-f4bug@amsat.org>
 References: <20200704144943.18292-1-f4bug@amsat.org>
@@ -121,198 +123,54 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Various machine/board/soc models create EHCI device instances
-with the generic QDEV API, and don't need to access USB internals.
+This file is not a header, but contains source code which is
+included and compiled once. We use the '.inc.c' suffix in few
+other cases in the repository. Follow the same convention with
+this file.
 
-Simplify header inclusions by moving the QOM type names into a
-simple header, with no need to include other "hw/usb" headers.
-
-Suggested-by: BALATON Zoltan <balaton@eik.bme.hu>
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- hw/usb/hcd-ehci.h         | 11 +----------
- include/hw/usb/chipidea.h |  2 +-
- include/hw/usb/usb-hcd.h  | 11 +++++++++++
- hw/arm/allwinner-h3.c     |  1 -
- hw/arm/exynos4210.c       |  2 +-
- hw/arm/sbsa-ref.c         |  3 ++-
- hw/arm/xilinx_zynq.c      |  2 +-
- hw/ppc/sam460ex.c         |  1 -
- hw/usb/chipidea.c         |  1 +
- hw/usb/hcd-ehci-sysbus.c  |  1 +
- 10 files changed, 19 insertions(+), 16 deletions(-)
+ hw/usb/quirks.c                   | 2 +-
+ hw/usb/{quirks.h => quirks.inc.c} | 5 -----
+ 2 files changed, 1 insertion(+), 6 deletions(-)
+ rename hw/usb/{quirks.h => quirks.inc.c} (99%)
 
-diff --git a/hw/usb/hcd-ehci.h b/hw/usb/hcd-ehci.h
-index 337b3ad05c..da70767409 100644
---- a/hw/usb/hcd-ehci.h
-+++ b/hw/usb/hcd-ehci.h
-@@ -23,6 +23,7 @@
- #include "hw/pci/pci.h"
- #include "hw/sysbus.h"
- #include "usb-internal.h"
-+#include "hw/usb/usb-hcd.h"
- 
- #define CAPA_SIZE        0x10
- 
-@@ -316,7 +317,6 @@ void usb_ehci_realize(EHCIState *s, DeviceState *dev, Error **errp);
- void usb_ehci_unrealize(EHCIState *s, DeviceState *dev);
- void ehci_reset(void *opaque);
- 
--#define TYPE_PCI_EHCI "pci-ehci-usb"
- #define PCI_EHCI(obj) OBJECT_CHECK(EHCIPCIState, (obj), TYPE_PCI_EHCI)
- 
- typedef struct EHCIPCIState {
-@@ -327,15 +327,6 @@ typedef struct EHCIPCIState {
-     EHCIState ehci;
- } EHCIPCIState;
- 
--
--#define TYPE_SYS_BUS_EHCI "sysbus-ehci-usb"
--#define TYPE_PLATFORM_EHCI "platform-ehci-usb"
--#define TYPE_EXYNOS4210_EHCI "exynos4210-ehci-usb"
--#define TYPE_AW_H3_EHCI "aw-h3-ehci-usb"
--#define TYPE_TEGRA2_EHCI "tegra2-ehci-usb"
--#define TYPE_PPC4xx_EHCI "ppc4xx-ehci-usb"
--#define TYPE_FUSBH200_EHCI "fusbh200-ehci-usb"
--
- #define SYS_BUS_EHCI(obj) \
-     OBJECT_CHECK(EHCISysBusState, (obj), TYPE_SYS_BUS_EHCI)
- #define SYS_BUS_EHCI_CLASS(class) \
-diff --git a/include/hw/usb/chipidea.h b/include/hw/usb/chipidea.h
-index 1ec2e9dbda..28f46291de 100644
---- a/include/hw/usb/chipidea.h
-+++ b/include/hw/usb/chipidea.h
-@@ -2,6 +2,7 @@
- #define CHIPIDEA_H
- 
- #include "hw/usb/hcd-ehci.h"
-+#include "hw/usb/usb-hcd.h"
- 
- typedef struct ChipideaState {
-     /*< private >*/
-@@ -10,7 +11,6 @@ typedef struct ChipideaState {
-     MemoryRegion iomem[3];
- } ChipideaState;
- 
--#define TYPE_CHIPIDEA "usb-chipidea"
- #define CHIPIDEA(obj) OBJECT_CHECK(ChipideaState, (obj), TYPE_CHIPIDEA)
- 
- #endif /* CHIPIDEA_H */
-diff --git a/include/hw/usb/usb-hcd.h b/include/hw/usb/usb-hcd.h
-index 21fdfaf22d..74af3a4533 100644
---- a/include/hw/usb/usb-hcd.h
-+++ b/include/hw/usb/usb-hcd.h
-@@ -13,4 +13,15 @@
- #define TYPE_SYSBUS_OHCI            "sysbus-ohci"
- #define TYPE_PCI_OHCI               "pci-ohci"
- 
-+/* EHCI */
-+#define TYPE_SYS_BUS_EHCI           "sysbus-ehci-usb"
-+#define TYPE_PCI_EHCI               "pci-ehci-usb"
-+#define TYPE_PLATFORM_EHCI          "platform-ehci-usb"
-+#define TYPE_EXYNOS4210_EHCI        "exynos4210-ehci-usb"
-+#define TYPE_AW_H3_EHCI             "aw-h3-ehci-usb"
-+#define TYPE_TEGRA2_EHCI            "tegra2-ehci-usb"
-+#define TYPE_PPC4xx_EHCI            "ppc4xx-ehci-usb"
-+#define TYPE_FUSBH200_EHCI          "fusbh200-ehci-usb"
-+#define TYPE_CHIPIDEA               "usb-chipidea"
-+
- #endif
-diff --git a/hw/arm/allwinner-h3.c b/hw/arm/allwinner-h3.c
-index d1d90ffa79..8b7adddc27 100644
---- a/hw/arm/allwinner-h3.c
-+++ b/hw/arm/allwinner-h3.c
-@@ -29,7 +29,6 @@
- #include "hw/char/serial.h"
- #include "hw/misc/unimp.h"
- #include "hw/usb/usb-hcd.h"
--#include "hw/usb/hcd-ehci.h"
- #include "hw/loader.h"
- #include "sysemu/sysemu.h"
- #include "hw/arm/allwinner-h3.h"
-diff --git a/hw/arm/exynos4210.c b/hw/arm/exynos4210.c
-index fa639806ec..692fb02159 100644
---- a/hw/arm/exynos4210.c
-+++ b/hw/arm/exynos4210.c
-@@ -35,7 +35,7 @@
- #include "hw/qdev-properties.h"
- #include "hw/arm/exynos4210.h"
- #include "hw/sd/sdhci.h"
--#include "hw/usb/hcd-ehci.h"
-+#include "hw/usb/usb-hcd.h"
- 
- #define EXYNOS4210_CHIPID_ADDR         0x10000000
- 
-diff --git a/hw/arm/sbsa-ref.c b/hw/arm/sbsa-ref.c
-index 021e7c1b8b..4e4c338ae9 100644
---- a/hw/arm/sbsa-ref.c
-+++ b/hw/arm/sbsa-ref.c
-@@ -38,6 +38,7 @@
- #include "hw/loader.h"
- #include "hw/pci-host/gpex.h"
- #include "hw/qdev-properties.h"
-+#include "hw/usb/usb-hcd.h"
- #include "hw/char/pl011.h"
- #include "net/net.h"
- 
-@@ -485,7 +486,7 @@ static void create_ehci(const SBSAMachineState *sms)
-     hwaddr base = sbsa_ref_memmap[SBSA_EHCI].base;
-     int irq = sbsa_ref_irqmap[SBSA_EHCI];
- 
--    sysbus_create_simple("platform-ehci-usb", base,
-+    sysbus_create_simple(TYPE_PLATFORM_EHCI, base,
-                          qdev_get_gpio_in(sms->gic, irq));
- }
- 
-diff --git a/hw/arm/xilinx_zynq.c b/hw/arm/xilinx_zynq.c
-index ed970273f3..9ccdc03095 100644
---- a/hw/arm/xilinx_zynq.c
-+++ b/hw/arm/xilinx_zynq.c
-@@ -29,7 +29,7 @@
- #include "hw/loader.h"
- #include "hw/misc/zynq-xadc.h"
- #include "hw/ssi/ssi.h"
--#include "hw/usb/chipidea.h"
-+#include "hw/usb/usb-hcd.h"
- #include "qemu/error-report.h"
- #include "hw/sd/sdhci.h"
- #include "hw/char/cadence_uart.h"
-diff --git a/hw/ppc/sam460ex.c b/hw/ppc/sam460ex.c
-index ac60d17a86..3f7cf0d1ae 100644
---- a/hw/ppc/sam460ex.c
-+++ b/hw/ppc/sam460ex.c
-@@ -37,7 +37,6 @@
- #include "hw/i2c/smbus_eeprom.h"
- #include "hw/usb/usb.h"
- #include "hw/usb/usb-hcd.h"
--#include "hw/usb/hcd-ehci.h"
- #include "hw/ppc/fdt.h"
- #include "hw/qdev-properties.h"
- #include "hw/pci/pci.h"
-diff --git a/hw/usb/chipidea.c b/hw/usb/chipidea.c
-index 3dcd22ccba..e81f63295e 100644
---- a/hw/usb/chipidea.c
-+++ b/hw/usb/chipidea.c
-@@ -11,6 +11,7 @@
+diff --git a/hw/usb/quirks.c b/hw/usb/quirks.c
+index 23ea7a23ea..655b36f2d5 100644
+--- a/hw/usb/quirks.c
++++ b/hw/usb/quirks.c
+@@ -13,7 +13,7 @@
+  */
  
  #include "qemu/osdep.h"
- #include "hw/usb/hcd-ehci.h"
-+#include "hw/usb/usb-hcd.h"
- #include "hw/usb/chipidea.h"
- #include "qemu/log.h"
- #include "qemu/module.h"
-diff --git a/hw/usb/hcd-ehci-sysbus.c b/hw/usb/hcd-ehci-sysbus.c
-index 3730736540..b7debc1934 100644
---- a/hw/usb/hcd-ehci-sysbus.c
-+++ b/hw/usb/hcd-ehci-sysbus.c
-@@ -18,6 +18,7 @@
- #include "qemu/osdep.h"
- #include "hw/qdev-properties.h"
- #include "hw/usb/hcd-ehci.h"
-+#include "hw/usb/usb-hcd.h"
- #include "migration/vmstate.h"
- #include "qemu/module.h"
+-#include "quirks.h"
++#include "quirks.inc.c"
+ #include "hw/usb.h"
  
+ static bool usb_id_match(const struct usb_device_id *ids,
+diff --git a/hw/usb/quirks.h b/hw/usb/quirks.inc.c
+similarity index 99%
+rename from hw/usb/quirks.h
+rename to hw/usb/quirks.inc.c
+index 50ef2f9c2e..004b228aba 100644
+--- a/hw/usb/quirks.h
++++ b/hw/usb/quirks.inc.c
+@@ -12,9 +12,6 @@
+  * (at your option) any later version.
+  */
+ 
+-#ifndef HW_USB_QUIRKS_H
+-#define HW_USB_QUIRKS_H
+-
+ /* 1 on 1 copy of linux/drivers/usb/serial/ftdi_sio_ids.h */
+ #include "quirks-ftdi-ids.h"
+ /* 1 on 1 copy of linux/drivers/usb/serial/pl2303.h */
+@@ -915,5 +912,3 @@ static const struct usb_device_id usbredir_ftdi_serial_ids[] = {
+ 
+ #undef USB_DEVICE
+ #undef USB_DEVICE_AND_INTERFACE_INFO
+-
+-#endif
 -- 
 2.21.3
 
