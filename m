@@ -2,77 +2,76 @@ Return-Path: <SRS0=Z3FV=AP=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=unavailable
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 51B28C433DF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AC4FDC433E2
 	for <xen-devel@archiver.kernel.org>; Sat,  4 Jul 2020 14:57:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2152A2158C
+	by mail.kernel.org (Postfix) with ESMTPS id 7B5572158C
 	for <xen-devel@archiver.kernel.org>; Sat,  4 Jul 2020 14:57:00 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="AP5+c+c6"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2152A2158C
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=amsat.org
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="aB1S25DG"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7B5572158C
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=amsat.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jrjb1-0005HU-Ij; Sat, 04 Jul 2020 14:56:51 +0000
+	id 1jrjb0-0005FP-Eo; Sat, 04 Jul 2020 14:56:50 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hHao=AP=gmail.com=philippe.mathieu.daude@srs-us1.protection.inumbo.net>)
- id 1jrjV1-0003ES-QB
- for xen-devel@lists.xenproject.org; Sat, 04 Jul 2020 14:50:39 +0000
-X-Inumbo-ID: a78974d2-be05-11ea-b7bb-bc764e2007e4
-Received: from mail-wm1-x330.google.com (unknown [2a00:1450:4864:20::330])
+ id 1jrjW9-0003ES-TV
+ for xen-devel@lists.xenproject.org; Sat, 04 Jul 2020 14:51:49 +0000
+X-Inumbo-ID: b7e5f6b6-be05-11ea-bb8b-bc764e2007e4
+Received: from mail-wm1-x343.google.com (unknown [2a00:1450:4864:20::343])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id a78974d2-be05-11ea-b7bb-bc764e2007e4;
- Sat, 04 Jul 2020 14:50:08 +0000 (UTC)
-Received: by mail-wm1-x330.google.com with SMTP id j18so34715268wmi.3
- for <xen-devel@lists.xenproject.org>; Sat, 04 Jul 2020 07:50:08 -0700 (PDT)
+ id b7e5f6b6-be05-11ea-bb8b-bc764e2007e4;
+ Sat, 04 Jul 2020 14:50:36 +0000 (UTC)
+Received: by mail-wm1-x343.google.com with SMTP id f18so37074799wml.3
+ for <xen-devel@lists.xenproject.org>; Sat, 04 Jul 2020 07:50:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=CVXjF5m55kSlusAor5YG6lDc3XbyrrRebQzgpXEfhAM=;
- b=AP5+c+c62PoQXfTA/LtPm4Xh/2BhHY+f3Lrq+ywLKxnRs/teD8SlK4rBeR1W21QVVg
- MX5/zdYcr6MAV0tTj6y2JwWtreM0kI/3HLVXeM5Km0zk4LkxkDr+JUBRTgKPd4JDTNTQ
- qN+mtEml6SPGpVvDH0gvcL2DaAmIUkHFVWrvjkbOj7nMpqfWvSbHnLG867tnERkfPaEt
- R2NVOPlavAmVmA4nXJZ+9rKOMoryjsy3gDMvjOfRq/6T+kmZOAFOqpsdRHndZbJgqOt0
- X2QNL+czgbdip7AR/uSYj4AY75akrcM9UFux62yHvkIZB1h62OgvTkd3vwzX7RVlkGWT
- qEKg==
+ bh=f29/MIGKjiVCXNbXb7QXhmc4KA4eor+Mhn/A2jA2iWs=;
+ b=aB1S25DGnSIIYyLepd0/DAdWudVgoTXK9tCwzyeK195D7VcOpmizNyVX6hZ+Hw2qEs
+ azVFVrdxwL3VuODlB4q4QqZfMjPTxFOKhd3QaNoTlI3BCwrwaIJCdaN/9hDuogPt7S1W
+ uMkSVz50tiyCDufVzR9ruwvMAD7Cy57YADj/X/TkNbbAOo6IdzPigDU6+Qt9UnoF1S0U
+ 2gQlMm3UZYz9RaiNodxR9aWaZAJ7LbmPd+BGW5Mh8hxVh31zMr93bGQmvMf+wmWascsB
+ JSWvSnk5sXCB2K4BvDiMtrGexuQVS2ZsqDG1irobpKigzLZqPl++eLsBBaNhhanPYtWu
+ xagQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=CVXjF5m55kSlusAor5YG6lDc3XbyrrRebQzgpXEfhAM=;
- b=lhRpyZUIAEbEPAHb/Nraug1SZ3LRVUHjXHNvI723mGVchXoIGW8irweJuOft/pw8TD
- DKKKCFturVMwwEbHO3DgN9ShNGtSIj/Vzb21wMUDzWEk1EfvDs/KW4JjAbUd8o/dv0F3
- fqZ2vITH6vBldGkiWW5BDLs/nXuwLZpJmbzPk8P9Q6eN7S/QUVt/fxB8uBa/Lskiba+0
- YJ6t2SNrpIgPSOgmRQ/gkcHmwamazUyWsUte5cART1KbcGgt2NClCwt/E5iLjKRL9AuQ
- QlWyAOE/TnmBUqI9cM72lf8XYJsWf67sMhO51lLrvy34OcsUeJrWa/thu2xPbFj4YEgx
- I6vQ==
-X-Gm-Message-State: AOAM533jGOYSyEKbNpsL9nB3hEIOUZP7hQ5Bh8cq5kBCZPenxoB8e03F
- ysb5Dnqwmvap+rmDLyUJ8y8=
-X-Google-Smtp-Source: ABdhPJymro0ZDYhdB5ObnYkjPPmmHwp/a0dtBWYIDo1/eOyMgDUzyUYBTppKmDKb9G4hobFLnzrm0w==
-X-Received: by 2002:a1c:18e:: with SMTP id 136mr10977102wmb.93.1593874208054; 
- Sat, 04 Jul 2020 07:50:08 -0700 (PDT)
+ bh=f29/MIGKjiVCXNbXb7QXhmc4KA4eor+Mhn/A2jA2iWs=;
+ b=ZrLw5pKI1K2QyUF3y1QYnTWMGaMl3YYSs0uGnYqk7ICHLP1N/S1iClT1m+5RXxDmLE
+ 0Cdv7T2DUTx6yu5s6yiKUOELT+tVs6uIJGY3SMqAs8X+w8uKMoO3H06FbSvlLULmNvY2
+ h7QeQkmeB4YQX0wY92+tNckdCSjmrHDXbtfcPS+ztM4pV1Ez1f9Gsp8e6mIZDVrdd+Zk
+ HzU2pJ+KqUvkOGgbJec94wwLajalt/IrnpcjgLPtknWOReOvQ93VMJjlfY3kWIitoI9B
+ h4Y2MoAjbjOIs8oBwLhqwSldnG7uMSwonDoxRu2SqeSY60oletBWLXIkoVFGUww2QbTS
+ yopQ==
+X-Gm-Message-State: AOAM532ap1oG4PoQdGme4cMYWtuN8Fgqpk3L4CSv2tCyRJMyiZ9TGqgi
+ HpAUdwIDLfdoGursw4pzuSE=
+X-Google-Smtp-Source: ABdhPJzXh5fqsqOLbUyvdsrfc19bAAQd0SyMWAd0LLQtMbMkVi1HDhynYNEmZjRrZ57ugrqA88FVFA==
+X-Received: by 2002:a1c:2183:: with SMTP id h125mr43989795wmh.83.1593874235357; 
+ Sat, 04 Jul 2020 07:50:35 -0700 (PDT)
 Received: from localhost.localdomain (1.red-83-51-162.dynamicip.rima-tde.net.
  [83.51.162.1])
- by smtp.gmail.com with ESMTPSA id r10sm17135019wrm.17.2020.07.04.07.50.06
+ by smtp.gmail.com with ESMTPSA id r10sm17135019wrm.17.2020.07.04.07.50.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 04 Jul 2020 07:50:07 -0700 (PDT)
+ Sat, 04 Jul 2020 07:50:34 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
 To: qemu-devel@nongnu.org,
 	BALATON Zoltan <balaton@eik.bme.hu>
-Subject: [PATCH 10/26] hw/usb/hcd-ehci: Move few definitions from header to
- source
-Date: Sat,  4 Jul 2020 16:49:27 +0200
-Message-Id: <20200704144943.18292-11-f4bug@amsat.org>
+Subject: [PATCH 23/26] hw/usb/usb-hcd: Use EHCI type definitions
+Date: Sat,  4 Jul 2020 16:49:40 +0200
+Message-Id: <20200704144943.18292-24-f4bug@amsat.org>
 X-Mailer: git-send-email 2.21.3
 In-Reply-To: <20200704144943.18292-1-f4bug@amsat.org>
 References: <20200704144943.18292-1-f4bug@amsat.org>
@@ -122,59 +121,198 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Move definitions only useful for hcd-ehci.c to this source file.
+Various machine/board/soc models create EHCI device instances
+with the generic QDEV API, and don't need to access USB internals.
 
+Simplify header inclusions by moving the QOM type names into a
+simple header, with no need to include other "hw/usb" headers.
+
+Suggested-by: BALATON Zoltan <balaton@eik.bme.hu>
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- hw/usb/hcd-ehci.h | 11 -----------
- hw/usb/hcd-ehci.c | 12 ++++++++++++
- 2 files changed, 12 insertions(+), 11 deletions(-)
+ hw/usb/hcd-ehci.h         | 11 +----------
+ include/hw/usb/chipidea.h |  2 +-
+ include/hw/usb/usb-hcd.h  | 11 +++++++++++
+ hw/arm/allwinner-h3.c     |  1 -
+ hw/arm/exynos4210.c       |  2 +-
+ hw/arm/sbsa-ref.c         |  3 ++-
+ hw/arm/xilinx_zynq.c      |  2 +-
+ hw/ppc/sam460ex.c         |  1 -
+ hw/usb/chipidea.c         |  1 +
+ hw/usb/hcd-ehci-sysbus.c  |  1 +
+ 10 files changed, 19 insertions(+), 16 deletions(-)
 
 diff --git a/hw/usb/hcd-ehci.h b/hw/usb/hcd-ehci.h
-index 57b38cfc05..4577f5e31d 100644
+index 337b3ad05c..da70767409 100644
 --- a/hw/usb/hcd-ehci.h
 +++ b/hw/usb/hcd-ehci.h
-@@ -24,17 +24,6 @@
+@@ -23,6 +23,7 @@
  #include "hw/pci/pci.h"
  #include "hw/sysbus.h"
+ #include "usb-internal.h"
++#include "hw/usb/usb-hcd.h"
  
--#ifndef EHCI_DEBUG
--#define EHCI_DEBUG   0
--#endif
--
--#if EHCI_DEBUG
--#define DPRINTF printf
--#else
--#define DPRINTF(...)
--#endif
--
--#define MMIO_SIZE        0x1000
  #define CAPA_SIZE        0x10
  
- #define NB_PORTS         6        /* Max. Number of downstream ports */
-diff --git a/hw/usb/hcd-ehci.c b/hw/usb/hcd-ehci.c
-index 256fb91e0c..a0beee527c 100644
---- a/hw/usb/hcd-ehci.c
-+++ b/hw/usb/hcd-ehci.c
-@@ -36,6 +36,18 @@
- #include "qemu/error-report.h"
- #include "sysemu/runstate.h"
+@@ -316,7 +317,6 @@ void usb_ehci_realize(EHCIState *s, DeviceState *dev, Error **errp);
+ void usb_ehci_unrealize(EHCIState *s, DeviceState *dev);
+ void ehci_reset(void *opaque);
  
-+#ifndef EHCI_DEBUG
-+#define EHCI_DEBUG   0
-+#endif
+-#define TYPE_PCI_EHCI "pci-ehci-usb"
+ #define PCI_EHCI(obj) OBJECT_CHECK(EHCIPCIState, (obj), TYPE_PCI_EHCI)
+ 
+ typedef struct EHCIPCIState {
+@@ -327,15 +327,6 @@ typedef struct EHCIPCIState {
+     EHCIState ehci;
+ } EHCIPCIState;
+ 
+-
+-#define TYPE_SYS_BUS_EHCI "sysbus-ehci-usb"
+-#define TYPE_PLATFORM_EHCI "platform-ehci-usb"
+-#define TYPE_EXYNOS4210_EHCI "exynos4210-ehci-usb"
+-#define TYPE_AW_H3_EHCI "aw-h3-ehci-usb"
+-#define TYPE_TEGRA2_EHCI "tegra2-ehci-usb"
+-#define TYPE_PPC4xx_EHCI "ppc4xx-ehci-usb"
+-#define TYPE_FUSBH200_EHCI "fusbh200-ehci-usb"
+-
+ #define SYS_BUS_EHCI(obj) \
+     OBJECT_CHECK(EHCISysBusState, (obj), TYPE_SYS_BUS_EHCI)
+ #define SYS_BUS_EHCI_CLASS(class) \
+diff --git a/include/hw/usb/chipidea.h b/include/hw/usb/chipidea.h
+index 1ec2e9dbda..28f46291de 100644
+--- a/include/hw/usb/chipidea.h
++++ b/include/hw/usb/chipidea.h
+@@ -2,6 +2,7 @@
+ #define CHIPIDEA_H
+ 
+ #include "hw/usb/hcd-ehci.h"
++#include "hw/usb/usb-hcd.h"
+ 
+ typedef struct ChipideaState {
+     /*< private >*/
+@@ -10,7 +11,6 @@ typedef struct ChipideaState {
+     MemoryRegion iomem[3];
+ } ChipideaState;
+ 
+-#define TYPE_CHIPIDEA "usb-chipidea"
+ #define CHIPIDEA(obj) OBJECT_CHECK(ChipideaState, (obj), TYPE_CHIPIDEA)
+ 
+ #endif /* CHIPIDEA_H */
+diff --git a/include/hw/usb/usb-hcd.h b/include/hw/usb/usb-hcd.h
+index 21fdfaf22d..74af3a4533 100644
+--- a/include/hw/usb/usb-hcd.h
++++ b/include/hw/usb/usb-hcd.h
+@@ -13,4 +13,15 @@
+ #define TYPE_SYSBUS_OHCI            "sysbus-ohci"
+ #define TYPE_PCI_OHCI               "pci-ohci"
+ 
++/* EHCI */
++#define TYPE_SYS_BUS_EHCI           "sysbus-ehci-usb"
++#define TYPE_PCI_EHCI               "pci-ehci-usb"
++#define TYPE_PLATFORM_EHCI          "platform-ehci-usb"
++#define TYPE_EXYNOS4210_EHCI        "exynos4210-ehci-usb"
++#define TYPE_AW_H3_EHCI             "aw-h3-ehci-usb"
++#define TYPE_TEGRA2_EHCI            "tegra2-ehci-usb"
++#define TYPE_PPC4xx_EHCI            "ppc4xx-ehci-usb"
++#define TYPE_FUSBH200_EHCI          "fusbh200-ehci-usb"
++#define TYPE_CHIPIDEA               "usb-chipidea"
 +
-+#if EHCI_DEBUG
-+#define DPRINTF printf
-+#else
-+#define DPRINTF(...)
-+#endif
-+
-+#define MMIO_SIZE        0x1000
-+
- #define FRAME_TIMER_FREQ 1000
- #define FRAME_TIMER_NS   (NANOSECONDS_PER_SECOND / FRAME_TIMER_FREQ)
- #define UFRAME_TIMER_NS  (FRAME_TIMER_NS / 8)
+ #endif
+diff --git a/hw/arm/allwinner-h3.c b/hw/arm/allwinner-h3.c
+index d1d90ffa79..8b7adddc27 100644
+--- a/hw/arm/allwinner-h3.c
++++ b/hw/arm/allwinner-h3.c
+@@ -29,7 +29,6 @@
+ #include "hw/char/serial.h"
+ #include "hw/misc/unimp.h"
+ #include "hw/usb/usb-hcd.h"
+-#include "hw/usb/hcd-ehci.h"
+ #include "hw/loader.h"
+ #include "sysemu/sysemu.h"
+ #include "hw/arm/allwinner-h3.h"
+diff --git a/hw/arm/exynos4210.c b/hw/arm/exynos4210.c
+index fa639806ec..692fb02159 100644
+--- a/hw/arm/exynos4210.c
++++ b/hw/arm/exynos4210.c
+@@ -35,7 +35,7 @@
+ #include "hw/qdev-properties.h"
+ #include "hw/arm/exynos4210.h"
+ #include "hw/sd/sdhci.h"
+-#include "hw/usb/hcd-ehci.h"
++#include "hw/usb/usb-hcd.h"
+ 
+ #define EXYNOS4210_CHIPID_ADDR         0x10000000
+ 
+diff --git a/hw/arm/sbsa-ref.c b/hw/arm/sbsa-ref.c
+index 021e7c1b8b..4e4c338ae9 100644
+--- a/hw/arm/sbsa-ref.c
++++ b/hw/arm/sbsa-ref.c
+@@ -38,6 +38,7 @@
+ #include "hw/loader.h"
+ #include "hw/pci-host/gpex.h"
+ #include "hw/qdev-properties.h"
++#include "hw/usb/usb-hcd.h"
+ #include "hw/char/pl011.h"
+ #include "net/net.h"
+ 
+@@ -485,7 +486,7 @@ static void create_ehci(const SBSAMachineState *sms)
+     hwaddr base = sbsa_ref_memmap[SBSA_EHCI].base;
+     int irq = sbsa_ref_irqmap[SBSA_EHCI];
+ 
+-    sysbus_create_simple("platform-ehci-usb", base,
++    sysbus_create_simple(TYPE_PLATFORM_EHCI, base,
+                          qdev_get_gpio_in(sms->gic, irq));
+ }
+ 
+diff --git a/hw/arm/xilinx_zynq.c b/hw/arm/xilinx_zynq.c
+index ed970273f3..9ccdc03095 100644
+--- a/hw/arm/xilinx_zynq.c
++++ b/hw/arm/xilinx_zynq.c
+@@ -29,7 +29,7 @@
+ #include "hw/loader.h"
+ #include "hw/misc/zynq-xadc.h"
+ #include "hw/ssi/ssi.h"
+-#include "hw/usb/chipidea.h"
++#include "hw/usb/usb-hcd.h"
+ #include "qemu/error-report.h"
+ #include "hw/sd/sdhci.h"
+ #include "hw/char/cadence_uart.h"
+diff --git a/hw/ppc/sam460ex.c b/hw/ppc/sam460ex.c
+index ac60d17a86..3f7cf0d1ae 100644
+--- a/hw/ppc/sam460ex.c
++++ b/hw/ppc/sam460ex.c
+@@ -37,7 +37,6 @@
+ #include "hw/i2c/smbus_eeprom.h"
+ #include "hw/usb/usb.h"
+ #include "hw/usb/usb-hcd.h"
+-#include "hw/usb/hcd-ehci.h"
+ #include "hw/ppc/fdt.h"
+ #include "hw/qdev-properties.h"
+ #include "hw/pci/pci.h"
+diff --git a/hw/usb/chipidea.c b/hw/usb/chipidea.c
+index 3dcd22ccba..e81f63295e 100644
+--- a/hw/usb/chipidea.c
++++ b/hw/usb/chipidea.c
+@@ -11,6 +11,7 @@
+ 
+ #include "qemu/osdep.h"
+ #include "hw/usb/hcd-ehci.h"
++#include "hw/usb/usb-hcd.h"
+ #include "hw/usb/chipidea.h"
+ #include "qemu/log.h"
+ #include "qemu/module.h"
+diff --git a/hw/usb/hcd-ehci-sysbus.c b/hw/usb/hcd-ehci-sysbus.c
+index 3730736540..b7debc1934 100644
+--- a/hw/usb/hcd-ehci-sysbus.c
++++ b/hw/usb/hcd-ehci-sysbus.c
+@@ -18,6 +18,7 @@
+ #include "qemu/osdep.h"
+ #include "hw/qdev-properties.h"
+ #include "hw/usb/hcd-ehci.h"
++#include "hw/usb/usb-hcd.h"
+ #include "migration/vmstate.h"
+ #include "qemu/module.h"
+ 
 -- 
 2.21.3
 
