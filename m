@@ -7,72 +7,71 @@ X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A1DCDC433E1
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F218DC433DF
 	for <xen-devel@archiver.kernel.org>; Sat,  4 Jul 2020 14:56:53 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 766D02158C
+	by mail.kernel.org (Postfix) with ESMTPS id C4CE22158C
 	for <xen-devel@archiver.kernel.org>; Sat,  4 Jul 2020 14:56:53 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="oKjMAbLQ"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 766D02158C
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=amsat.org
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="IB9L+DJ6"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C4CE22158C
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=amsat.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jrjau-00055S-2o; Sat, 04 Jul 2020 14:56:44 +0000
+	id 1jrjat-00054s-PA; Sat, 04 Jul 2020 14:56:43 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hHao=AP=gmail.com=philippe.mathieu.daude@srs-us1.protection.inumbo.net>)
- id 1jrjVV-0003ES-S5
- for xen-devel@lists.xenproject.org; Sat, 04 Jul 2020 14:51:09 +0000
-X-Inumbo-ID: aebbc98a-be05-11ea-b7bb-bc764e2007e4
-Received: from mail-wm1-x344.google.com (unknown [2a00:1450:4864:20::344])
+ id 1jrjVG-0003ES-R1
+ for xen-devel@lists.xenproject.org; Sat, 04 Jul 2020 14:50:54 +0000
+X-Inumbo-ID: ab2286ec-be05-11ea-8496-bc764e2007e4
+Received: from mail-wm1-x342.google.com (unknown [2a00:1450:4864:20::342])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id aebbc98a-be05-11ea-b7bb-bc764e2007e4;
- Sat, 04 Jul 2020 14:50:20 +0000 (UTC)
-Received: by mail-wm1-x344.google.com with SMTP id w3so24606974wmi.4
- for <xen-devel@lists.xenproject.org>; Sat, 04 Jul 2020 07:50:20 -0700 (PDT)
+ id ab2286ec-be05-11ea-8496-bc764e2007e4;
+ Sat, 04 Jul 2020 14:50:14 +0000 (UTC)
+Received: by mail-wm1-x342.google.com with SMTP id o2so37044911wmh.2
+ for <xen-devel@lists.xenproject.org>; Sat, 04 Jul 2020 07:50:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=LwCcRU3ITBZcN/p8m4Tvly+Gfq57t4rX34Kk3Uzziqs=;
- b=oKjMAbLQ2Nbdo7AVZTEMo5rKzXNXebbxS2YHgA5kZDA2Z2+DxgsuBaop4Nf7YP0t9g
- 825K7Sz5l6DRKW2FWV64F6Y8PFEbfBZ/8mNGGq8q8I/v/XzgiVoT/c6cLtJ4Wq4+y8s/
- ZyQu3ZX70MOw0YMf2jRU84FoSuY8lwe6rfsONGi0EvhvcQH4agyx8WdTlthVPz7oUMLd
- 7gZ2JkRsngTeq9VmBw6iuSdlXJYxQF7UzAOPFbD80qjvobuW2TUKX0fMm3Fjk3Rm4noB
- rWoSeUrHYZkkLtcx+JFqgKhA77mwlMll57o/tAzzPnbS9XSESKlGwrsNVmP1tPkGSkA/
- JlFg==
+ bh=k+8FH1LHVyWY5lxn8kaV6RhN5WT6vNL6Csn+tWtGqIU=;
+ b=IB9L+DJ6fMSlRh6JnfVIyjRfs3r2+cKnkCMh6AOc0lm/+BaC+pa5gw3hPPcon8hyCC
+ TQRh9Dsuy4N9iNSa+sDAo59Wb9OBUTJhWrGiQYUiHaJcD2YjCqcZFlX3q6wvN0kzv12y
+ zjRWD0O+C14SgaG835wapqV4fOHwaoE+lia4hfdbd5Zyk+XJzdC2t6DGiCxQ8vTcnZgX
+ 354/5VYBjRfY9uD1tT+MK47AGBcB3P1p8J9RpLbDsqF2ri9rbyNs8LgFGF8k/fGIcKWy
+ wmxNBkxWFAH/E/5EdZfvMLkUm0kbfAlZiV+UjR0G1MRggb5dB2nI2Req9hTae4hUmE3t
+ glLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=LwCcRU3ITBZcN/p8m4Tvly+Gfq57t4rX34Kk3Uzziqs=;
- b=Eh+6h058r+uOg2DywExGmoYyVrZlZ7+afOmZn0HxjUWbUzJ9BQ3nVptpCONutwHUbr
- N6dprYgypafELQGImKgW/WpwpiQRUWFUN+m4MqKnt2ZnE1dfMELbaA4pDcxbKYlCLxlt
- 7GhPlQoXw5QnLqjO3dKIym3s4On00GzF045osVhUtyf+hm2ynS5FPF4Q58fCMGro7whq
- tH3CDTTol9oZdEHyqYsryjHFw0bKY5XPtQtsmgS68QxK3NIxbu5tFsaBaW5vJXcWEEjo
- EzM9KkmMuSEmMSixrt187zqa9XM33c6YmdJzhbNhsZp6Wfi4qAskMAZzsoFepreKIqSN
- w/Nw==
-X-Gm-Message-State: AOAM53249mpe4B+m6mJKPNk73OAgEYMKJwMswanzTHf4qdHrveqjNDmg
- wY6Y73EtGCOa37PkRFR6YyM=
-X-Google-Smtp-Source: ABdhPJxv37a8GSHu9gIk53qyLIpPiec4lNJ044JwM140Yq2vwztlBB8+hQI1sx3Og8exNtb1rbIDuw==
-X-Received: by 2002:a1c:b686:: with SMTP id
- g128mr43033346wmf.145.1593874220071; 
- Sat, 04 Jul 2020 07:50:20 -0700 (PDT)
+ bh=k+8FH1LHVyWY5lxn8kaV6RhN5WT6vNL6Csn+tWtGqIU=;
+ b=MZIH5rHd4EJdp9pxTlRTLiGYMdF3qeb5auU+xu5I6gTmaLxMaIEjrabPIdqwTpwNOS
+ n5c3ZVqsoKeeg4NjxLypxvRUUvroOna4ee6yGyTjfCqAgz60lcScih58bnyDg/uTJJWw
+ +HSE9RnO57qHwLE0pwexr6X7Pu/aWNU5kxPHMKiYHmkiHRVwKjAM/aoon3dpPFFc0/5w
+ VfnDhnU3feWr3NCp5TifbjFf+g7oQq8tyIKcX3d38t3Yf7Q7fpmA4+kXhbOfwbMTQX9a
+ v1BTBaJ4Ba+Cuzn+eY8rfVH4jeYOtrBpMAicDkgsbWqX3h4j2LfWK1+TMJQr7HKQOQ21
+ X4Fw==
+X-Gm-Message-State: AOAM533F+nZPJraafRbz67xt8oPF8p9kdUiBrVwg9P83EopqRWezICiC
+ USWTu41fj7QqNHwoW0Kpf6c=
+X-Google-Smtp-Source: ABdhPJzNTGufYfLMeOUgBhGaylb5O5upKi84ytezyRjwfpHgpubMO2vfpa3tyGQAl3MlqZSVzS+XTQ==
+X-Received: by 2002:a1c:48:: with SMTP id 69mr43033872wma.32.1593874214066;
+ Sat, 04 Jul 2020 07:50:14 -0700 (PDT)
 Received: from localhost.localdomain (1.red-83-51-162.dynamicip.rima-tde.net.
  [83.51.162.1])
- by smtp.gmail.com with ESMTPSA id r10sm17135019wrm.17.2020.07.04.07.50.18
+ by smtp.gmail.com with ESMTPSA id r10sm17135019wrm.17.2020.07.04.07.50.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 04 Jul 2020 07:50:19 -0700 (PDT)
+ Sat, 04 Jul 2020 07:50:13 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
 To: qemu-devel@nongnu.org,
 	BALATON Zoltan <balaton@eik.bme.hu>
-Subject: [PATCH 16/26] hw/usb/bus: Simplify usb_get_dev_path()
-Date: Sat,  4 Jul 2020 16:49:33 +0200
-Message-Id: <20200704144943.18292-17-f4bug@amsat.org>
+Subject: [PATCH 13/26] hw/usb/desc: Reduce some declarations scope
+Date: Sat,  4 Jul 2020 16:49:30 +0200
+Message-Id: <20200704144943.18292-14-f4bug@amsat.org>
 X-Mailer: git-send-email 2.21.3
 In-Reply-To: <20200704144943.18292-1-f4bug@amsat.org>
 References: <20200704144943.18292-1-f4bug@amsat.org>
@@ -122,46 +121,77 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Simplify usb_get_dev_path() a bit.
+USBDescString is forward-declared. Only bus.c uses the
+usb_device_get_product_desc() and usb_device_get_usb_desc()
+function. Move all that to the "desc.h" header to reduce
+the big "hw/usb.h" header a bit.
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- hw/usb/bus.c | 19 +++++++++----------
- 1 file changed, 9 insertions(+), 10 deletions(-)
+ hw/usb/desc.h    | 10 ++++++++++
+ include/hw/usb.h | 10 ----------
+ hw/usb/bus.c     |  1 +
+ 3 files changed, 11 insertions(+), 10 deletions(-)
 
+diff --git a/hw/usb/desc.h b/hw/usb/desc.h
+index 92594fbe29..4bf6966c4b 100644
+--- a/hw/usb/desc.h
++++ b/hw/usb/desc.h
+@@ -242,4 +242,14 @@ int usb_desc_get_descriptor(USBDevice *dev, USBPacket *p,
+ int usb_desc_handle_control(USBDevice *dev, USBPacket *p,
+         int request, int value, int index, int length, uint8_t *data);
+ 
++const char *usb_device_get_product_desc(USBDevice *dev);
++
++const USBDesc *usb_device_get_usb_desc(USBDevice *dev);
++
++struct USBDescString {
++    uint8_t index;
++    char *str;
++    QLIST_ENTRY(USBDescString) next;
++};
++
+ #endif /* QEMU_HW_USB_DESC_H */
+diff --git a/include/hw/usb.h b/include/hw/usb.h
+index 15b2ef300a..18f1349bdc 100644
+--- a/include/hw/usb.h
++++ b/include/hw/usb.h
+@@ -192,12 +192,6 @@ typedef struct USBDescOther USBDescOther;
+ typedef struct USBDescString USBDescString;
+ typedef struct USBDescMSOS USBDescMSOS;
+ 
+-struct USBDescString {
+-    uint8_t index;
+-    char *str;
+-    QLIST_ENTRY(USBDescString) next;
+-};
+-
+ #define USB_MAX_ENDPOINTS  15
+ #define USB_MAX_INTERFACES 16
+ 
+@@ -555,10 +549,6 @@ int usb_device_alloc_streams(USBDevice *dev, USBEndpoint **eps, int nr_eps,
+                              int streams);
+ void usb_device_free_streams(USBDevice *dev, USBEndpoint **eps, int nr_eps);
+ 
+-const char *usb_device_get_product_desc(USBDevice *dev);
+-
+-const USBDesc *usb_device_get_usb_desc(USBDevice *dev);
+-
+ /* quirks.c */
+ 
+ /* In bulk endpoints are streaming data sources (iow behave like isoc eps) */
 diff --git a/hw/usb/bus.c b/hw/usb/bus.c
-index 111c3af7c1..f8901e822c 100644
+index 957559b18d..111c3af7c1 100644
 --- a/hw/usb/bus.c
 +++ b/hw/usb/bus.c
-@@ -580,19 +580,18 @@ static void usb_bus_dev_print(Monitor *mon, DeviceState *qdev, int indent)
- static char *usb_get_dev_path(DeviceState *qdev)
- {
-     USBDevice *dev = USB_DEVICE(qdev);
--    DeviceState *hcd = qdev->parent_bus->parent;
--    char *id = NULL;
+@@ -9,6 +9,7 @@
+ #include "monitor/monitor.h"
+ #include "trace.h"
+ #include "qemu/cutils.h"
++#include "desc.h"
  
-     if (dev->flags & (1 << USB_DEV_FLAG_FULL_PATH)) {
--        id = qdev_get_dev_path(hcd);
--    }
--    if (id) {
--        char *ret = g_strdup_printf("%s/%s", id, dev->port->path);
--        g_free(id);
--        return ret;
--    } else {
--        return g_strdup(dev->port->path);
-+        DeviceState *hcd = qdev->parent_bus->parent;
-+        char *id = qdev_get_dev_path(hcd);
-+
-+        if (id) {
-+            char *ret = g_strdup_printf("%s/%s", id, dev->port->path);
-+            g_free(id);
-+            return ret;
-+        }
-     }
-+    return g_strdup(dev->port->path);
- }
+ static void usb_bus_dev_print(Monitor *mon, DeviceState *qdev, int indent);
  
- static char *usb_get_fw_dev_path(DeviceState *qdev)
 -- 
 2.21.3
 
