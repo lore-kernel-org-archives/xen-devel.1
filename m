@@ -7,71 +7,71 @@ X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F218DC433DF
-	for <xen-devel@archiver.kernel.org>; Sat,  4 Jul 2020 14:56:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 86972C433E2
+	for <xen-devel@archiver.kernel.org>; Sat,  4 Jul 2020 14:56:54 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C4CE22158C
-	for <xen-devel@archiver.kernel.org>; Sat,  4 Jul 2020 14:56:53 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 5A98F2158C
+	for <xen-devel@archiver.kernel.org>; Sat,  4 Jul 2020 14:56:54 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="IB9L+DJ6"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C4CE22158C
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=amsat.org
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="lEaSbT81"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5A98F2158C
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=amsat.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jrjat-00054s-PA; Sat, 04 Jul 2020 14:56:43 +0000
+	id 1jrjat-00053z-59; Sat, 04 Jul 2020 14:56:43 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hHao=AP=gmail.com=philippe.mathieu.daude@srs-us1.protection.inumbo.net>)
- id 1jrjVG-0003ES-R1
- for xen-devel@lists.xenproject.org; Sat, 04 Jul 2020 14:50:54 +0000
-X-Inumbo-ID: ab2286ec-be05-11ea-8496-bc764e2007e4
-Received: from mail-wm1-x342.google.com (unknown [2a00:1450:4864:20::342])
+ id 1jrjWE-0003ES-TR
+ for xen-devel@lists.xenproject.org; Sat, 04 Jul 2020 14:51:54 +0000
+X-Inumbo-ID: b927570e-be05-11ea-8496-bc764e2007e4
+Received: from mail-wm1-x343.google.com (unknown [2a00:1450:4864:20::343])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id ab2286ec-be05-11ea-8496-bc764e2007e4;
- Sat, 04 Jul 2020 14:50:14 +0000 (UTC)
-Received: by mail-wm1-x342.google.com with SMTP id o2so37044911wmh.2
- for <xen-devel@lists.xenproject.org>; Sat, 04 Jul 2020 07:50:14 -0700 (PDT)
+ id b927570e-be05-11ea-8496-bc764e2007e4;
+ Sat, 04 Jul 2020 14:50:38 +0000 (UTC)
+Received: by mail-wm1-x343.google.com with SMTP id q15so34722183wmj.2
+ for <xen-devel@lists.xenproject.org>; Sat, 04 Jul 2020 07:50:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=k+8FH1LHVyWY5lxn8kaV6RhN5WT6vNL6Csn+tWtGqIU=;
- b=IB9L+DJ6fMSlRh6JnfVIyjRfs3r2+cKnkCMh6AOc0lm/+BaC+pa5gw3hPPcon8hyCC
- TQRh9Dsuy4N9iNSa+sDAo59Wb9OBUTJhWrGiQYUiHaJcD2YjCqcZFlX3q6wvN0kzv12y
- zjRWD0O+C14SgaG835wapqV4fOHwaoE+lia4hfdbd5Zyk+XJzdC2t6DGiCxQ8vTcnZgX
- 354/5VYBjRfY9uD1tT+MK47AGBcB3P1p8J9RpLbDsqF2ri9rbyNs8LgFGF8k/fGIcKWy
- wmxNBkxWFAH/E/5EdZfvMLkUm0kbfAlZiV+UjR0G1MRggb5dB2nI2Req9hTae4hUmE3t
- glLw==
+ bh=ELz2xQrwO3as8Wxs/Kn8jW0b/kVDPOkqqjBqSxetIoY=;
+ b=lEaSbT813203f5Q/sN2DPPZEN+/cTb3ulD0Tsc1K7UiiJmuIHRljgZA5E6zal6HQzd
+ SJ1xW7NtSAKTID6CskQvsrLb7LQCq+tEKlaGrkyTbnWVNZv0iqk/rWKNzeml32LvPYt7
+ wgIMupaZdxlJI/+kIl0Ql/RW5EIXIoUpP0EIn+bP7T+ouYR5fkNExvJnsPSciKAgerQW
+ WrzFOrM8q18cFGilFsVCB9yObwLMcIHNnP0LEH05SNx5uCwKd2r1O7S/Hqo/VTdOad/w
+ ZbUVITTYcFraCPIbBmWczqxqNUrrLd09DJk+rTPqpM+lJ6rRdSpbb8Vxn63LhDrjM5CZ
+ kfxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=k+8FH1LHVyWY5lxn8kaV6RhN5WT6vNL6Csn+tWtGqIU=;
- b=MZIH5rHd4EJdp9pxTlRTLiGYMdF3qeb5auU+xu5I6gTmaLxMaIEjrabPIdqwTpwNOS
- n5c3ZVqsoKeeg4NjxLypxvRUUvroOna4ee6yGyTjfCqAgz60lcScih58bnyDg/uTJJWw
- +HSE9RnO57qHwLE0pwexr6X7Pu/aWNU5kxPHMKiYHmkiHRVwKjAM/aoon3dpPFFc0/5w
- VfnDhnU3feWr3NCp5TifbjFf+g7oQq8tyIKcX3d38t3Yf7Q7fpmA4+kXhbOfwbMTQX9a
- v1BTBaJ4Ba+Cuzn+eY8rfVH4jeYOtrBpMAicDkgsbWqX3h4j2LfWK1+TMJQr7HKQOQ21
- X4Fw==
-X-Gm-Message-State: AOAM533F+nZPJraafRbz67xt8oPF8p9kdUiBrVwg9P83EopqRWezICiC
- USWTu41fj7QqNHwoW0Kpf6c=
-X-Google-Smtp-Source: ABdhPJzNTGufYfLMeOUgBhGaylb5O5upKi84ytezyRjwfpHgpubMO2vfpa3tyGQAl3MlqZSVzS+XTQ==
-X-Received: by 2002:a1c:48:: with SMTP id 69mr43033872wma.32.1593874214066;
- Sat, 04 Jul 2020 07:50:14 -0700 (PDT)
+ bh=ELz2xQrwO3as8Wxs/Kn8jW0b/kVDPOkqqjBqSxetIoY=;
+ b=ByzWdM8Doy738hoQVijAtSlJOmuZGqOyla+9JYJL7GSr2UiM1e0hHA/mBDQFYeMo7Y
+ zkRHS/m0UQ8GR3/ZbEgFVa3fubx6qlxUj46XREacrmNtrdZktPMR7HtLoFgWhv12z3lN
+ 2CVqLied2slRty60CXAqGPwfQJY9jM39VjPUXoROJufmQteS2zSrkkVNyQMtp8ENNVEB
+ +wGy/tyXlJT479B2sNmNbv3xyYdYdfdV2j8zRb2KLGLIl63l7x0Gor/Zlewa7SMyx552
+ hXeOO854XoRDXeskVo/rLXq4ltfK3zXe7SCfwxeTmVGPz8VCo3HnSano0RdSL7rvoOex
+ OV2w==
+X-Gm-Message-State: AOAM530iiWjrdqygYS4rqUu9H2KYblqRa67bzYGT/6/gax+Qhx6j9gyB
+ 4Z1SkTlFNHDfCGiEiXV22Yk=
+X-Google-Smtp-Source: ABdhPJxszZnIT3VKXO6NXhl+YZ/Tp7y4xXuOBdXFlI7NLcqcetxqVubOW7Z948642pU/bk7Dmf0M6w==
+X-Received: by 2002:a1c:e355:: with SMTP id a82mr42855621wmh.165.1593874237478; 
+ Sat, 04 Jul 2020 07:50:37 -0700 (PDT)
 Received: from localhost.localdomain (1.red-83-51-162.dynamicip.rima-tde.net.
  [83.51.162.1])
- by smtp.gmail.com with ESMTPSA id r10sm17135019wrm.17.2020.07.04.07.50.12
+ by smtp.gmail.com with ESMTPSA id r10sm17135019wrm.17.2020.07.04.07.50.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 04 Jul 2020 07:50:13 -0700 (PDT)
+ Sat, 04 Jul 2020 07:50:36 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
 To: qemu-devel@nongnu.org,
 	BALATON Zoltan <balaton@eik.bme.hu>
-Subject: [PATCH 13/26] hw/usb/desc: Reduce some declarations scope
-Date: Sat,  4 Jul 2020 16:49:30 +0200
-Message-Id: <20200704144943.18292-14-f4bug@amsat.org>
+Subject: [PATCH 24/26] hw/usb/usb-hcd: Use UHCI type definitions
+Date: Sat,  4 Jul 2020 16:49:41 +0200
+Message-Id: <20200704144943.18292-25-f4bug@amsat.org>
 X-Mailer: git-send-email 2.21.3
 In-Reply-To: <20200704144943.18292-1-f4bug@amsat.org>
 References: <20200704144943.18292-1-f4bug@amsat.org>
@@ -121,77 +121,223 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-USBDescString is forward-declared. Only bus.c uses the
-usb_device_get_product_desc() and usb_device_get_usb_desc()
-function. Move all that to the "desc.h" header to reduce
-the big "hw/usb.h" header a bit.
+Various machine/board/soc models create UHCI device instances
+with the generic QDEV API, and don't need to access USB internals.
 
+Simplify header inclusions by moving the QOM type names into a
+simple header, with no need to include other "hw/usb" headers.
+
+Suggested-by: BALATON Zoltan <balaton@eik.bme.hu>
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- hw/usb/desc.h    | 10 ++++++++++
- include/hw/usb.h | 10 ----------
- hw/usb/bus.c     |  1 +
- 3 files changed, 11 insertions(+), 10 deletions(-)
+ include/hw/usb/usb-hcd.h |  6 ++++++
+ hw/i386/pc_piix.c        |  3 ++-
+ hw/i386/pc_q35.c         | 13 +++++++------
+ hw/isa/piix4.c           |  3 ++-
+ hw/mips/fuloong2e.c      |  5 +++--
+ hw/usb/hcd-uhci.c        | 19 ++++++++++---------
+ 6 files changed, 30 insertions(+), 19 deletions(-)
 
-diff --git a/hw/usb/desc.h b/hw/usb/desc.h
-index 92594fbe29..4bf6966c4b 100644
---- a/hw/usb/desc.h
-+++ b/hw/usb/desc.h
-@@ -242,4 +242,14 @@ int usb_desc_get_descriptor(USBDevice *dev, USBPacket *p,
- int usb_desc_handle_control(USBDevice *dev, USBPacket *p,
-         int request, int value, int index, int length, uint8_t *data);
+diff --git a/include/hw/usb/usb-hcd.h b/include/hw/usb/usb-hcd.h
+index 74af3a4533..c9d0a88984 100644
+--- a/include/hw/usb/usb-hcd.h
++++ b/include/hw/usb/usb-hcd.h
+@@ -24,4 +24,10 @@
+ #define TYPE_FUSBH200_EHCI          "fusbh200-ehci-usb"
+ #define TYPE_CHIPIDEA               "usb-chipidea"
  
-+const char *usb_device_get_product_desc(USBDevice *dev);
++/* UHCI */
++#define TYPE_PIIX3_USB_UHCI         "piix3-usb-uhci"
++#define TYPE_PIIX4_USB_UHCI         "piix4-usb-uhci"
++#define TYPE_VT82C686B_USB_UHCI     "vt82c686b-usb-uhci"
++#define TYPE_ICH9_USB_UHCI(n)       "ich9-usb-uhci" #n
 +
-+const USBDesc *usb_device_get_usb_desc(USBDevice *dev);
-+
-+struct USBDescString {
-+    uint8_t index;
-+    char *str;
-+    QLIST_ENTRY(USBDescString) next;
-+};
-+
- #endif /* QEMU_HW_USB_DESC_H */
-diff --git a/include/hw/usb.h b/include/hw/usb.h
-index 15b2ef300a..18f1349bdc 100644
---- a/include/hw/usb.h
-+++ b/include/hw/usb.h
-@@ -192,12 +192,6 @@ typedef struct USBDescOther USBDescOther;
- typedef struct USBDescString USBDescString;
- typedef struct USBDescMSOS USBDescMSOS;
+ #endif
+diff --git a/hw/i386/pc_piix.c b/hw/i386/pc_piix.c
+index 4d1de7cfab..0024c346c6 100644
+--- a/hw/i386/pc_piix.c
++++ b/hw/i386/pc_piix.c
+@@ -37,6 +37,7 @@
+ #include "hw/pci/pci.h"
+ #include "hw/pci/pci_ids.h"
+ #include "hw/usb/usb.h"
++#include "hw/usb/usb-hcd.h"
+ #include "net/net.h"
+ #include "hw/ide/pci.h"
+ #include "hw/irq.h"
+@@ -275,7 +276,7 @@ static void pc_init1(MachineState *machine,
+ #endif
  
--struct USBDescString {
--    uint8_t index;
--    char *str;
--    QLIST_ENTRY(USBDescString) next;
--};
--
- #define USB_MAX_ENDPOINTS  15
- #define USB_MAX_INTERFACES 16
+     if (pcmc->pci_enabled && machine_usb(machine)) {
+-        pci_create_simple(pci_bus, piix3_devfn + 2, "piix3-usb-uhci");
++        pci_create_simple(pci_bus, piix3_devfn + 2, TYPE_PIIX3_USB_UHCI);
+     }
  
-@@ -555,10 +549,6 @@ int usb_device_alloc_streams(USBDevice *dev, USBEndpoint **eps, int nr_eps,
-                              int streams);
- void usb_device_free_streams(USBDevice *dev, USBEndpoint **eps, int nr_eps);
+     if (pcmc->pci_enabled && x86_machine_is_acpi_enabled(X86_MACHINE(pcms))) {
+diff --git a/hw/i386/pc_q35.c b/hw/i386/pc_q35.c
+index b985f5bea1..a80527e6ed 100644
+--- a/hw/i386/pc_q35.c
++++ b/hw/i386/pc_q35.c
+@@ -51,6 +51,7 @@
+ #include "hw/ide/pci.h"
+ #include "hw/ide/ahci.h"
+ #include "hw/usb/usb.h"
++#include "hw/usb/usb-hcd.h"
+ #include "qapi/error.h"
+ #include "qemu/error-report.h"
+ #include "sysemu/numa.h"
+@@ -68,15 +69,15 @@ struct ehci_companions {
+ };
  
--const char *usb_device_get_product_desc(USBDevice *dev);
--
--const USBDesc *usb_device_get_usb_desc(USBDevice *dev);
--
- /* quirks.c */
+ static const struct ehci_companions ich9_1d[] = {
+-    { .name = "ich9-usb-uhci1", .func = 0, .port = 0 },
+-    { .name = "ich9-usb-uhci2", .func = 1, .port = 2 },
+-    { .name = "ich9-usb-uhci3", .func = 2, .port = 4 },
++    { .name = TYPE_ICH9_USB_UHCI(1), .func = 0, .port = 0 },
++    { .name = TYPE_ICH9_USB_UHCI(2), .func = 1, .port = 2 },
++    { .name = TYPE_ICH9_USB_UHCI(3), .func = 2, .port = 4 },
+ };
  
- /* In bulk endpoints are streaming data sources (iow behave like isoc eps) */
-diff --git a/hw/usb/bus.c b/hw/usb/bus.c
-index 957559b18d..111c3af7c1 100644
---- a/hw/usb/bus.c
-+++ b/hw/usb/bus.c
-@@ -9,6 +9,7 @@
- #include "monitor/monitor.h"
- #include "trace.h"
- #include "qemu/cutils.h"
-+#include "desc.h"
+ static const struct ehci_companions ich9_1a[] = {
+-    { .name = "ich9-usb-uhci4", .func = 0, .port = 0 },
+-    { .name = "ich9-usb-uhci5", .func = 1, .port = 2 },
+-    { .name = "ich9-usb-uhci6", .func = 2, .port = 4 },
++    { .name = TYPE_ICH9_USB_UHCI(4), .func = 0, .port = 0 },
++    { .name = TYPE_ICH9_USB_UHCI(5), .func = 1, .port = 2 },
++    { .name = TYPE_ICH9_USB_UHCI(6), .func = 2, .port = 4 },
+ };
  
- static void usb_bus_dev_print(Monitor *mon, DeviceState *qdev, int indent);
+ static int ehci_create_ich9_with_companions(PCIBus *bus, int slot)
+diff --git a/hw/isa/piix4.c b/hw/isa/piix4.c
+index f634bcb2d1..e11e5fae21 100644
+--- a/hw/isa/piix4.c
++++ b/hw/isa/piix4.c
+@@ -29,6 +29,7 @@
+ #include "hw/southbridge/piix.h"
+ #include "hw/pci/pci.h"
+ #include "hw/isa/isa.h"
++#include "hw/usb/usb-hcd.h"
+ #include "hw/sysbus.h"
+ #include "hw/intc/i8259.h"
+ #include "hw/dma/i8257.h"
+@@ -255,7 +256,7 @@ DeviceState *piix4_create(PCIBus *pci_bus, ISABus **isa_bus, I2CBus **smbus)
+     pci = pci_create_simple(pci_bus, devfn + 1, "piix4-ide");
+     pci_ide_create_devs(pci);
  
+-    pci_create_simple(pci_bus, devfn + 2, "piix4-usb-uhci");
++    pci_create_simple(pci_bus, devfn + 2, TYPE_PIIX4_USB_UHCI);
+     if (smbus) {
+         *smbus = piix4_pm_init(pci_bus, devfn + 3, 0x1100,
+                                isa_get_irq(NULL, 9), NULL, 0, NULL);
+diff --git a/hw/mips/fuloong2e.c b/hw/mips/fuloong2e.c
+index 8ca31e5162..b6d33dd2cd 100644
+--- a/hw/mips/fuloong2e.c
++++ b/hw/mips/fuloong2e.c
+@@ -33,6 +33,7 @@
+ #include "hw/mips/mips.h"
+ #include "hw/mips/cpudevs.h"
+ #include "hw/pci/pci.h"
++#include "hw/usb/usb-hcd.h"
+ #include "qemu/log.h"
+ #include "hw/loader.h"
+ #include "hw/ide/pci.h"
+@@ -258,8 +259,8 @@ static void vt82c686b_southbridge_init(PCIBus *pci_bus, int slot, qemu_irq intc,
+     dev = pci_create_simple(pci_bus, PCI_DEVFN(slot, 1), "via-ide");
+     pci_ide_create_devs(dev);
+ 
+-    pci_create_simple(pci_bus, PCI_DEVFN(slot, 2), "vt82c686b-usb-uhci");
+-    pci_create_simple(pci_bus, PCI_DEVFN(slot, 3), "vt82c686b-usb-uhci");
++    pci_create_simple(pci_bus, PCI_DEVFN(slot, 2), TYPE_VT82C686B_USB_UHCI);
++    pci_create_simple(pci_bus, PCI_DEVFN(slot, 3), TYPE_VT82C686B_USB_UHCI);
+ 
+     *i2c_bus = vt82c686b_pm_init(pci_bus, PCI_DEVFN(slot, 4), 0xeee1, NULL);
+ 
+diff --git a/hw/usb/hcd-uhci.c b/hw/usb/hcd-uhci.c
+index 1d4dd33b6c..da078dc3fa 100644
+--- a/hw/usb/hcd-uhci.c
++++ b/hw/usb/hcd-uhci.c
+@@ -39,6 +39,7 @@
+ #include "qemu/main-loop.h"
+ #include "qemu/module.h"
+ #include "usb-internal.h"
++#include "hw/usb/usb-hcd.h"
+ 
+ #define FRAME_TIMER_FREQ 1000
+ 
+@@ -1358,21 +1359,21 @@ static void uhci_data_class_init(ObjectClass *klass, void *data)
+ 
+ static UHCIInfo uhci_info[] = {
+     {
+-        .name       = "piix3-usb-uhci",
++        .name      = TYPE_PIIX3_USB_UHCI,
+         .vendor_id = PCI_VENDOR_ID_INTEL,
+         .device_id = PCI_DEVICE_ID_INTEL_82371SB_2,
+         .revision  = 0x01,
+         .irq_pin   = 3,
+         .unplug    = true,
+     },{
+-        .name      = "piix4-usb-uhci",
++        .name      = TYPE_PIIX4_USB_UHCI,
+         .vendor_id = PCI_VENDOR_ID_INTEL,
+         .device_id = PCI_DEVICE_ID_INTEL_82371AB_2,
+         .revision  = 0x01,
+         .irq_pin   = 3,
+         .unplug    = true,
+     },{
+-        .name      = "vt82c686b-usb-uhci",
++        .name      = TYPE_VT82C686B_USB_UHCI,
+         .vendor_id = PCI_VENDOR_ID_VIA,
+         .device_id = PCI_DEVICE_ID_VIA_UHCI,
+         .revision  = 0x01,
+@@ -1380,42 +1381,42 @@ static UHCIInfo uhci_info[] = {
+         .realize   = usb_uhci_vt82c686b_realize,
+         .unplug    = true,
+     },{
+-        .name      = "ich9-usb-uhci1", /* 00:1d.0 */
++        .name      = TYPE_ICH9_USB_UHCI(1), /* 00:1d.0 */
+         .vendor_id = PCI_VENDOR_ID_INTEL,
+         .device_id = PCI_DEVICE_ID_INTEL_82801I_UHCI1,
+         .revision  = 0x03,
+         .irq_pin   = 0,
+         .unplug    = false,
+     },{
+-        .name      = "ich9-usb-uhci2", /* 00:1d.1 */
++        .name      = TYPE_ICH9_USB_UHCI(2), /* 00:1d.1 */
+         .vendor_id = PCI_VENDOR_ID_INTEL,
+         .device_id = PCI_DEVICE_ID_INTEL_82801I_UHCI2,
+         .revision  = 0x03,
+         .irq_pin   = 1,
+         .unplug    = false,
+     },{
+-        .name      = "ich9-usb-uhci3", /* 00:1d.2 */
++        .name      = TYPE_ICH9_USB_UHCI(3), /* 00:1d.2 */
+         .vendor_id = PCI_VENDOR_ID_INTEL,
+         .device_id = PCI_DEVICE_ID_INTEL_82801I_UHCI3,
+         .revision  = 0x03,
+         .irq_pin   = 2,
+         .unplug    = false,
+     },{
+-        .name      = "ich9-usb-uhci4", /* 00:1a.0 */
++        .name      = TYPE_ICH9_USB_UHCI(4), /* 00:1a.0 */
+         .vendor_id = PCI_VENDOR_ID_INTEL,
+         .device_id = PCI_DEVICE_ID_INTEL_82801I_UHCI4,
+         .revision  = 0x03,
+         .irq_pin   = 0,
+         .unplug    = false,
+     },{
+-        .name      = "ich9-usb-uhci5", /* 00:1a.1 */
++        .name      = TYPE_ICH9_USB_UHCI(5), /* 00:1a.1 */
+         .vendor_id = PCI_VENDOR_ID_INTEL,
+         .device_id = PCI_DEVICE_ID_INTEL_82801I_UHCI5,
+         .revision  = 0x03,
+         .irq_pin   = 1,
+         .unplug    = false,
+     },{
+-        .name      = "ich9-usb-uhci6", /* 00:1a.2 */
++        .name      = TYPE_ICH9_USB_UHCI(6), /* 00:1a.2 */
+         .vendor_id = PCI_VENDOR_ID_INTEL,
+         .device_id = PCI_DEVICE_ID_INTEL_82801I_UHCI6,
+         .revision  = 0x03,
 -- 
 2.21.3
 
