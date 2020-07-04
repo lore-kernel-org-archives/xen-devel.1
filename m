@@ -2,79 +2,77 @@ Return-Path: <SRS0=Z3FV=AP=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7F2B0C433E2
-	for <xen-devel@archiver.kernel.org>; Sat,  4 Jul 2020 14:50:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4E046C433DF
+	for <xen-devel@archiver.kernel.org>; Sat,  4 Jul 2020 14:50:24 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 51521208FE
-	for <xen-devel@archiver.kernel.org>; Sat,  4 Jul 2020 14:50:23 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 1D9D22070C
+	for <xen-devel@archiver.kernel.org>; Sat,  4 Jul 2020 14:50:24 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="gQJg1+Wh"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 51521208FE
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="VfCW80ig"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1D9D22070C
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=amsat.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jrjUY-0003w0-O0; Sat, 04 Jul 2020 14:50:10 +0000
+	id 1jrjUF-0003EX-J1; Sat, 04 Jul 2020 14:49:51 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hHao=AP=gmail.com=philippe.mathieu.daude@srs-us1.protection.inumbo.net>)
- id 1jrjUX-0003ES-P6
- for xen-devel@lists.xenproject.org; Sat, 04 Jul 2020 14:50:09 +0000
-X-Inumbo-ID: a0583856-be05-11ea-b7bb-bc764e2007e4
-Received: from mail-wr1-x441.google.com (unknown [2a00:1450:4864:20::441])
+ id 1jrjUD-0003ES-Sv
+ for xen-devel@lists.xenproject.org; Sat, 04 Jul 2020 14:49:50 +0000
+X-Inumbo-ID: 9b9576f8-be05-11ea-b7bb-bc764e2007e4
+Received: from mail-wm1-x336.google.com (unknown [2a00:1450:4864:20::336])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id a0583856-be05-11ea-b7bb-bc764e2007e4;
- Sat, 04 Jul 2020 14:49:56 +0000 (UTC)
-Received: by mail-wr1-x441.google.com with SMTP id q5so35745347wru.6
- for <xen-devel@lists.xenproject.org>; Sat, 04 Jul 2020 07:49:56 -0700 (PDT)
+ id 9b9576f8-be05-11ea-b7bb-bc764e2007e4;
+ Sat, 04 Jul 2020 14:49:48 +0000 (UTC)
+Received: by mail-wm1-x336.google.com with SMTP id j18so34714752wmi.3
+ for <xen-devel@lists.xenproject.org>; Sat, 04 Jul 2020 07:49:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=Oswm/m1DAWqBYNXr2uTrm9A1MHSMTs1YgVZvoQJC8bI=;
- b=gQJg1+Wh58x4r1H2OG452+zx84IaV+E1T+M1C2BaKGGeGjGLijbGT/5fa47rZbH8+0
- wx3oFF6OQ4YShJqliLGLwkPIB5oJdoms+e1FUh9KOzyP0OaQJPWoQRUIivVmvk/OIni+
- pIzj1GiWmXLxj18zi7ZWsi1d3bC0/vHZhYuKuqhtZGYCTA6vwHL3QyRfwCu4wrFZiM4w
- nFj0qm+tx7V6fzx/zRQcGItYIzadZOv9ExIOm820D40RuWqtW4US5zoVgHElBrDFWXJU
- AbeBG/uIbXymxcCdns7Thwq8fUZU4bxlC2yWqkCy++/qfZTE6Jfr1HmDinGWpjPF9fWy
- Rs2A==
+ h=sender:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=8Sd8UrNpAT6Q827DPYJ71GYz3qN5ijhu3T6adNwNx58=;
+ b=VfCW80igCu05TRu6Kp/hRp0wwLcO25D00t+NwoIV0c8ix6mcQko2qSVKfN1H7cmL4H
+ Vxhy0na0A3ZdoSWK98SpIoSITxwO50uXAKNvBj0H9USSoEJkOYekcVtX7qA8oey7Zq0C
+ 1gT9pIxDTb1SouD3jSFCjmRxh176pRqgb9NK+POT5ThziR0p2IFJM7o0Quc2x81CpA+g
+ ifW/7fKRhTgTGZolZ71YooHseLeyWaonfI/a9QW1+3iYMgESDtL3KwrJ6MbXAJJc5tVN
+ WBh2g+7GmdCH0HZbUKAJrDSTZ0YLZDtsbFuAgkRinU6RkXxKmgHpBNku6nt5HiABtxt8
+ vQ8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
- :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=Oswm/m1DAWqBYNXr2uTrm9A1MHSMTs1YgVZvoQJC8bI=;
- b=aGJnS5c6zOcu5hbRbQWdzrVZ8XL7rqvgyex1qGcPxeCaXhlBt/ISVyV0o+WEMcPO5z
- oWgScbSk6WOw+98tLtCCIIF4e4sq+mwdMOOs7z5xmGIA1tTxQZ22K/VQDLSXbiIbv7+p
- x5cxs2SGN+eLllA0rxQmJR/T+Qy/0dSDBFdVYk/whO+KYkjVaN0VLQRVO1U6YrM5QDER
- BHUdJmF5H7hGbSfL3u1OXt14vJO1kt1KJQofRCfGFeGeWMUTEGHqZcxZZokW0Cv35/U1
- ficfSzBy2zb3aYHCKFHFgrqVTG+jOw94oJe8gdVYlVZtXLCvG4kMxPCZttWfesGDcSRY
- fwog==
-X-Gm-Message-State: AOAM533C/b666Oo3B2eG9Uhc/YbapWM4MH/7y3LYlC7lvRl9KIrHlvV6
- Q836nAAlyWHN/4wTGamz7ks=
-X-Google-Smtp-Source: ABdhPJwNyiTXMTeB3cC7VryyLyGzYsyh9YLCpLFWWlt+IfdrZqIJno2o/CWRvBISeVrXF/zuyPa+Cw==
-X-Received: by 2002:adf:9561:: with SMTP id 88mr11042389wrs.240.1593874195987; 
- Sat, 04 Jul 2020 07:49:55 -0700 (PDT)
+ :mime-version:content-transfer-encoding;
+ bh=8Sd8UrNpAT6Q827DPYJ71GYz3qN5ijhu3T6adNwNx58=;
+ b=jMYCbb/2GYBb9LldY+odyXedBq6fxYycZVlpcGWrBwR5UUdaodGin/YuGv4qOt5ZgF
+ eLwfC9z6t47dInGO8fYyaH0iGVGGc+RLKmFY7CtMR7gUb0GfJUCUazZNV+dtjYEgysGI
+ h/IqyX2bRkrymU72AWpq4QvcqqsRwmYMwWKtnK7jEKRewEVW4iO6dl/3NCiF7BZpZ8DC
+ ilKmX54ZLTPBCNMbhRbBzAi/MT7JzdqubAz5C7MYWeaM2OEgs5yX0iEWwFWrrtxl4pxz
+ nknL6KWiBJAiJ206YBHUBW6UbrjDRuuzCAzsBAxawjUpudmjUe0sGsArP3ubcRQbg2VA
+ 5+sg==
+X-Gm-Message-State: AOAM533YB1EAL02KTI8iidA5w8z/OcU091uSjOEdVTtzljmVGRjqvp3K
+ 9qsHAL2uSsVjesURiodUEuQ=
+X-Google-Smtp-Source: ABdhPJyVXTn8bDCpfeNaz82C2B4sWvaeuwMMI0440OjK/Jj8KTAg5BtYB+Q0yPcpdr0q523zbyeuCw==
+X-Received: by 2002:a1c:28c4:: with SMTP id o187mr27108566wmo.62.1593874187874; 
+ Sat, 04 Jul 2020 07:49:47 -0700 (PDT)
 Received: from localhost.localdomain (1.red-83-51-162.dynamicip.rima-tde.net.
  [83.51.162.1])
- by smtp.gmail.com with ESMTPSA id r10sm17135019wrm.17.2020.07.04.07.49.54
+ by smtp.gmail.com with ESMTPSA id r10sm17135019wrm.17.2020.07.04.07.49.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 04 Jul 2020 07:49:55 -0700 (PDT)
+ Sat, 04 Jul 2020 07:49:46 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
 To: qemu-devel@nongnu.org,
 	BALATON Zoltan <balaton@eik.bme.hu>
-Subject: [PATCH 04/26] hw/usb: Reduce 'exec/memory.h' inclusion
-Date: Sat,  4 Jul 2020 16:49:21 +0200
-Message-Id: <20200704144943.18292-5-f4bug@amsat.org>
+Subject: [PATCH 00/26] hw/usb: Give it love,
+ reduce 'hw/usb.h' inclusion out of hw/usb/
+Date: Sat,  4 Jul 2020 16:49:17 +0200
+Message-Id: <20200704144943.18292-1-f4bug@amsat.org>
 X-Mailer: git-send-email 2.21.3
-In-Reply-To: <20200704144943.18292-1-f4bug@amsat.org>
-References: <20200704144943.18292-1-f4bug@amsat.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Type: text/plain; charset="utf-8"
@@ -121,40 +119,135 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-"exec/memory.h" is only required by "hw/usb/hcd-musb.h".
-Include it there directly.
+Hi,
 
-Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
----
- include/hw/usb.h          | 1 -
- include/hw/usb/hcd-musb.h | 2 ++
- 2 files changed, 2 insertions(+), 1 deletion(-)
+This is the second time I try to replace a magic typename string
+by a constant, and Zoltan warns me this is counter productive as
+"hw/usb.h" pulls in an insane amount of code.
 
-diff --git a/include/hw/usb.h b/include/hw/usb.h
-index 4f04a1a879..15b2ef300a 100644
---- a/include/hw/usb.h
-+++ b/include/hw/usb.h
-@@ -25,7 +25,6 @@
-  * THE SOFTWARE.
-  */
- 
--#include "exec/memory.h"
- #include "hw/qdev-core.h"
- #include "qemu/iov.h"
- #include "qemu/queue.h"
-diff --git a/include/hw/usb/hcd-musb.h b/include/hw/usb/hcd-musb.h
-index c874b9f292..ec3ee5c4b0 100644
---- a/include/hw/usb/hcd-musb.h
-+++ b/include/hw/usb/hcd-musb.h
-@@ -13,6 +13,8 @@
- #ifndef HW_USB_MUSB_H
- #define HW_USB_MUSB_H
- 
-+#include "exec/memory.h"
-+
- enum musb_irq_source_e {
-     musb_irq_suspend = 0,
-     musb_irq_resume,
+Time to give the usb subsystem some love and move forward.
+
+This series can be decomposed as follow:
+
+ 1-2:    preliminary machine cleanups (arm/ppc)
+ 3-13:   usb related headers cleanups
+ 14-15:  usb quirks cleanup
+ 16-18:  refactor usb_get_dev_path() to add usb_get_port_path()
+ 19:     let spapr use usb_get_port_path() to make USBDevice opaque
+ 20:     extract the public USB API (for machine/board/soc)
+ 21:     make the older "usb.h" internal to hw/usb/
+ 22-25:  use TYPENAME definitions
+ 26:     cover dwc2 in MAINTAINERS
+
+Please review.
+
+Phil.
+
+Philippe Mathieu-Daudé (26):
+  hw/arm/sbsa-ref: Remove unused 'hw/usb.h' header
+  hw/ppc/sam460ex: Add missing 'hw/pci/pci.h' header
+  hw/usb: Remove unused VM_USB_HUB_SIZE definition
+  hw/usb: Reduce 'exec/memory.h' inclusion
+  hw/usb/desc: Add missing header
+  hw/usb/hcd-dwc2: Remove unnecessary includes
+  hw/usb/hcd-dwc2: Restrict some headers to source
+  hw/usb/hcd-dwc2: Restrict 'dwc2-regs.h' scope
+  hw/usb/hcd-ehci: Remove unnecessary include
+  hw/usb/hcd-ehci: Move few definitions from header to source
+  hw/usb/hcd-xhci: Add missing header
+  hw/usb/hcd-musb: Restrict header scope
+  hw/usb/desc: Reduce some declarations scope
+  hw/usb/quirks: Rename included source with '.inc.c' suffix
+  hw/usb: Add new 'usb-quirks.h' local header
+  hw/usb/bus: Simplify usb_get_dev_path()
+  hw/usb/bus: Rename usb_get_dev_path() as usb_get_full_dev_path()
+  hw/usb/bus: Add usb_get_port_path()
+  hw/ppc/spapr: Use usb_get_port_path()
+  hw/usb: Introduce "hw/usb/usb.h" public API
+  hw/usb: Move internal API to local 'usb-internal.h' header
+  hw/usb/usb-hcd: Use OHCI type definitions
+  hw/usb/usb-hcd: Use EHCI type definitions
+  hw/usb/usb-hcd: Use UHCI type definitions
+  hw/usb/usb-hcd: Use XHCI type definitions
+  MAINTAINERS: Cover dwc-hsotg (dwc2) USB host controller emulation
+
+ hw/usb/desc.h                             | 11 +++++
+ {include/hw => hw}/usb/dwc2-regs.h        |  0
+ hw/usb/hcd-dwc2.h                         |  5 +-
+ hw/usb/hcd-ehci.h                         | 24 +---------
+ {include/hw => hw}/usb/hcd-musb.h         |  2 +
+ hw/usb/hcd-ohci.h                         |  4 +-
+ hw/usb/hcd-xhci.h                         |  4 +-
+ include/hw/usb.h => hw/usb/usb-internal.h | 50 ++-----------------
+ hw/usb/usb-quirks.h                       | 27 +++++++++++
+ include/hw/usb/chipidea.h                 |  2 +-
+ include/hw/usb/usb-hcd.h                  | 36 ++++++++++++++
+ include/hw/usb/usb.h                      | 58 +++++++++++++++++++++++
+ chardev/baum.c                            |  2 +-
+ hw/arm/allwinner-a10.c                    |  2 +-
+ hw/arm/allwinner-h3.c                     | 10 ++--
+ hw/arm/exynos4210.c                       |  2 +-
+ hw/arm/pxa2xx.c                           |  3 +-
+ hw/arm/realview.c                         |  3 +-
+ hw/arm/sbsa-ref.c                         |  4 +-
+ hw/arm/versatilepb.c                      |  3 +-
+ hw/arm/xilinx_zynq.c                      |  2 +-
+ hw/display/sm501.c                        |  3 +-
+ hw/i386/pc.c                              |  2 +-
+ hw/i386/pc_piix.c                         |  5 +-
+ hw/i386/pc_q35.c                          | 15 +++---
+ hw/isa/piix4.c                            |  3 +-
+ hw/mips/fuloong2e.c                       |  5 +-
+ hw/ppc/mac_newworld.c                     |  5 +-
+ hw/ppc/mac_oldworld.c                     |  3 +-
+ hw/ppc/sam460ex.c                         |  6 ++-
+ hw/ppc/spapr.c                            | 13 +++--
+ hw/sh4/r2d.c                              |  2 +-
+ hw/usb/bus.c                              | 40 +++++++++-------
+ hw/usb/chipidea.c                         |  1 +
+ hw/usb/combined-packet.c                  |  2 +-
+ hw/usb/core.c                             |  2 +-
+ hw/usb/desc-msos.c                        |  2 +-
+ hw/usb/desc.c                             |  3 +-
+ hw/usb/dev-audio.c                        |  2 +-
+ hw/usb/dev-hid.c                          |  2 +-
+ hw/usb/dev-hub.c                          |  2 +-
+ hw/usb/dev-mtp.c                          |  2 +-
+ hw/usb/dev-network.c                      |  2 +-
+ hw/usb/dev-serial.c                       |  2 +-
+ hw/usb/dev-smartcard-reader.c             |  2 +-
+ hw/usb/dev-storage.c                      |  2 +-
+ hw/usb/dev-uas.c                          |  2 +-
+ hw/usb/dev-wacom.c                        |  2 +-
+ hw/usb/hcd-dwc2.c                         |  8 ++--
+ hw/usb/hcd-ehci-sysbus.c                  |  1 +
+ hw/usb/hcd-ehci.c                         | 13 ++++-
+ hw/usb/hcd-musb.c                         |  4 +-
+ hw/usb/hcd-ohci-pci.c                     |  4 +-
+ hw/usb/hcd-ohci.c                         |  1 -
+ hw/usb/hcd-uhci.c                         | 21 ++++----
+ hw/usb/hcd-xhci-nec.c                     |  3 +-
+ hw/usb/hcd-xhci.c                         |  2 +-
+ hw/usb/host-libusb.c                      |  2 +-
+ hw/usb/host-stub.c                        |  2 +-
+ hw/usb/libhw.c                            |  2 +-
+ hw/usb/quirks.c                           |  5 +-
+ hw/usb/{quirks.h => quirks.inc.c}         |  5 --
+ hw/usb/redirect.c                         |  3 +-
+ hw/usb/tusb6010.c                         |  4 +-
+ hw/usb/xen-usb.c                          |  2 +-
+ monitor/misc.c                            |  2 +-
+ softmmu/vl.c                              |  2 +-
+ MAINTAINERS                               |  7 ++-
+ 68 files changed, 294 insertions(+), 185 deletions(-)
+ rename {include/hw => hw}/usb/dwc2-regs.h (100%)
+ rename {include/hw => hw}/usb/hcd-musb.h (98%)
+ rename include/hw/usb.h => hw/usb/usb-internal.h (92%)
+ create mode 100644 hw/usb/usb-quirks.h
+ create mode 100644 include/hw/usb/usb-hcd.h
+ create mode 100644 include/hw/usb/usb.h
+ rename hw/usb/{quirks.h => quirks.inc.c} (99%)
+
 -- 
 2.21.3
 
