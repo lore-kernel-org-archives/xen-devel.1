@@ -6,77 +6,77 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D1D57C433E0
-	for <xen-devel@archiver.kernel.org>; Sun,  5 Jul 2020 18:56:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CE534C433E0
+	for <xen-devel@archiver.kernel.org>; Sun,  5 Jul 2020 18:56:36 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B135B2073E
-	for <xen-devel@archiver.kernel.org>; Sun,  5 Jul 2020 18:56:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B135B2073E
+	by mail.kernel.org (Postfix) with ESMTPS id AD2552073E
+	for <xen-devel@archiver.kernel.org>; Sun,  5 Jul 2020 18:56:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AD2552073E
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=cert.pl
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1js9oL-0005mp-IV; Sun, 05 Jul 2020 18:56:21 +0000
+	id 1js9oR-0005qK-6f; Sun, 05 Jul 2020 18:56:27 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=NZHG=AQ=cert.pl=michal.leszczynski@srs-us1.protection.inumbo.net>)
- id 1js9oK-0005mD-IN
- for xen-devel@lists.xenproject.org; Sun, 05 Jul 2020 18:56:20 +0000
-X-Inumbo-ID: 35a11d89-bef1-11ea-8c04-12813bfff9fa
+ id 1js9oP-0005mD-Gu
+ for xen-devel@lists.xenproject.org; Sun, 05 Jul 2020 18:56:25 +0000
+X-Inumbo-ID: 37249a22-bef1-11ea-8c04-12813bfff9fa
 Received: from bagnar.nask.net.pl (unknown [195.187.242.196])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 35a11d89-bef1-11ea-8c04-12813bfff9fa;
- Sun, 05 Jul 2020 18:56:19 +0000 (UTC)
+ id 37249a22-bef1-11ea-8c04-12813bfff9fa;
+ Sun, 05 Jul 2020 18:56:21 +0000 (UTC)
 Received: from bagnar.nask.net.pl (unknown [172.16.9.10])
- by bagnar.nask.net.pl (Postfix) with ESMTP id 97F0EA2022;
- Sun,  5 Jul 2020 20:56:16 +0200 (CEST)
+ by bagnar.nask.net.pl (Postfix) with ESMTP id 3A8DBA2037;
+ Sun,  5 Jul 2020 20:56:19 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by bagnar.nask.net.pl (Postfix) with ESMTP id 95673A2026;
- Sun,  5 Jul 2020 20:56:15 +0200 (CEST)
+ by bagnar.nask.net.pl (Postfix) with ESMTP id 4FF6FA20C9;
+ Sun,  5 Jul 2020 20:56:16 +0200 (CEST)
 X-Amavis-Alert: BAD HEADER SECTION, Duplicate header field: "References"
 Received: from bagnar.nask.net.pl ([127.0.0.1])
  by localhost (bagnar.nask.net.pl [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id c23W13ESr3r9; Sun,  5 Jul 2020 20:56:14 +0200 (CEST)
+ with ESMTP id B_BcBFl6ja6D; Sun,  5 Jul 2020 20:56:15 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by bagnar.nask.net.pl (Postfix) with ESMTP id 7FDC7A2052;
- Sun,  5 Jul 2020 20:56:14 +0200 (CEST)
+ by bagnar.nask.net.pl (Postfix) with ESMTP id 305A0A2022;
+ Sun,  5 Jul 2020 20:56:15 +0200 (CEST)
 X-Virus-Scanned: amavisd-new at bagnar.nask.net.pl
 X-Amavis-Alert: BAD HEADER SECTION, Duplicate header field: "References"
 Received: from bagnar.nask.net.pl ([127.0.0.1])
  by localhost (bagnar.nask.net.pl [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id isgh7PHF9bSH; Sun,  5 Jul 2020 20:56:14 +0200 (CEST)
+ with ESMTP id k5rmcILqT4aJ; Sun,  5 Jul 2020 20:56:15 +0200 (CEST)
 Received: from belindir.nask.net.pl (belindir-ext.nask.net.pl
  [195.187.242.210])
- by bagnar.nask.net.pl (Postfix) with ESMTP id C27ACA2022;
- Sun,  5 Jul 2020 20:56:13 +0200 (CEST)
+ by bagnar.nask.net.pl (Postfix) with ESMTP id 1E197A203D;
+ Sun,  5 Jul 2020 20:56:14 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by belindir.nask.net.pl (Postfix) with ESMTP id 29CF622C3D;
+ by belindir.nask.net.pl (Postfix) with ESMTP id 5A35022C20;
  Sun,  5 Jul 2020 20:55:19 +0200 (CEST)
 X-Amavis-Alert: BAD HEADER SECTION, Duplicate header field: "References"
 Received: from belindir.nask.net.pl ([127.0.0.1])
  by localhost (belindir.nask.net.pl [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id CrPYSZmT-5fP; Sun,  5 Jul 2020 20:55:13 +0200 (CEST)
+ with ESMTP id iL-0WfZ8YBhL; Sun,  5 Jul 2020 20:55:13 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by belindir.nask.net.pl (Postfix) with ESMTP id 3B5CF22C06;
+ by belindir.nask.net.pl (Postfix) with ESMTP id 6ADBF22C0B;
  Sun,  5 Jul 2020 20:55:08 +0200 (CEST)
-X-Quarantine-ID: <Rz3LuF7Dh33H>
+X-Quarantine-ID: <NHfE5Sz6ftCE>
 X-Virus-Scanned: amavisd-new at belindir.nask.net.pl
 X-Amavis-Alert: BAD HEADER SECTION, Duplicate header field: "References"
 Received: from belindir.nask.net.pl ([127.0.0.1])
  by localhost (belindir.nask.net.pl [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id Rz3LuF7Dh33H; Sun,  5 Jul 2020 20:55:08 +0200 (CEST)
+ with ESMTP id NHfE5Sz6ftCE; Sun,  5 Jul 2020 20:55:08 +0200 (CEST)
 Received: from mq-desktop.cert.pl (unknown [195.187.238.217])
- by belindir.nask.net.pl (Postfix) with ESMTPSA id 0D31A2295A;
+ by belindir.nask.net.pl (Postfix) with ESMTPSA id 3CB5622C0C;
  Sun,  5 Jul 2020 20:55:08 +0200 (CEST)
 From: =?UTF-8?q?Micha=C5=82=20Leszczy=C5=84ski?= <michal.leszczynski@cert.pl>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH v5 05/11] tools/libxl: add vmtrace_pt_size parameter
-Date: Sun,  5 Jul 2020 20:54:58 +0200
-Message-Id: <f7e3c91789a7763b997918b6ebb987be670f9ce5.1593974333.git.michal.leszczynski@cert.pl>
+Subject: [PATCH v5 07/11] x86/vmx: implement IPT in VMX
+Date: Sun,  5 Jul 2020 20:55:00 +0200
+Message-Id: <c7a1a2c492b6bf667d89aaa22502a026c655efe4.1593974333.git.michal.leszczynski@cert.pl>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1593974333.git.michal.leszczynski@cert.pl>
 References: <cover.1593974333.git.michal.leszczynski@cert.pl>
@@ -92,161 +92,233 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: luwei.kang@intel.com, Wei Liu <wl@xen.org>,
+Cc: Kevin Tian <kevin.tian@intel.com>, luwei.kang@intel.com,
+ Jun Nakajima <jun.nakajima@intel.com>, Wei Liu <wl@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
  Michal Leszczynski <michal.leszczynski@cert.pl>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>,
- Anthony PERARD <anthony.perard@citrix.com>, tamas.lengyel@intel.com
+ Jan Beulich <jbeulich@suse.com>, tamas.lengyel@intel.com,
+ =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Michal Leszczynski <michal.leszczynski@cert.pl>
 
-Allow to specify the size of per-vCPU trace buffer upon
-domain creation. This is zero by default (meaning: not enabled).
+Use Intel Processor Trace feature to provide vmtrace_pt_*
+interface for HVM/VMX.
 
 Signed-off-by: Michal Leszczynski <michal.leszczynski@cert.pl>
 ---
- docs/man/xl.cfg.5.pod.in             | 11 +++++++++++
- tools/golang/xenlight/helpers.gen.go |  2 ++
- tools/golang/xenlight/types.gen.go   |  1 +
- tools/libxl/libxl.h                  |  8 ++++++++
- tools/libxl/libxl_create.c           |  1 +
- tools/libxl/libxl_types.idl          |  2 ++
- tools/xl/xl_parse.c                  | 22 ++++++++++++++++++++++
- 7 files changed, 47 insertions(+)
+ xen/arch/x86/hvm/vmx/vmx.c         | 109 +++++++++++++++++++++++++++++
+ xen/include/asm-x86/hvm/vmx/vmcs.h |   3 +
+ xen/include/asm-x86/hvm/vmx/vmx.h  |  14 ++++
+ 3 files changed, 126 insertions(+)
 
-diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
-index 0532739c1f..670759f6bd 100644
---- a/docs/man/xl.cfg.5.pod.in
-+++ b/docs/man/xl.cfg.5.pod.in
-@@ -278,6 +278,17 @@ memory=8096 will report significantly less memory available for use
- than a system with maxmem=8096 memory=8096 due to the memory overhead
- of having to track the unused pages.
- 
-+=item B<processor_trace_buffer_size=BYTES>
-+
-+Specifies the size of processor trace buffer that would be allocated
-+for each vCPU belonging to this domain. Disabled (i.e.
-+B<processor_trace_buffer_size=0> by default. This must be set to
-+non-zero value in order to be able to use processor tracing features
-+with this domain.
-+
-+B<NOTE>: The size value must be between 4 kB and 4 GB and it must
-+be also a power of 2.
-+
- =back
- 
- =head3 Guest Virtual NUMA Configuration
-diff --git a/tools/golang/xenlight/helpers.gen.go b/tools/golang/xenlight/helpers.gen.go
-index 152c7e8e6b..bfc37b69c8 100644
---- a/tools/golang/xenlight/helpers.gen.go
-+++ b/tools/golang/xenlight/helpers.gen.go
-@@ -1117,6 +1117,7 @@ return fmt.Errorf("invalid union key '%v'", x.Type)}
- x.ArchArm.GicVersion = GicVersion(xc.arch_arm.gic_version)
- x.ArchArm.Vuart = VuartType(xc.arch_arm.vuart)
- x.Altp2M = Altp2MMode(xc.altp2m)
-+x.VmtracePtOrder = int(xc.vmtrace_pt_order)
- 
-  return nil}
- 
-@@ -1592,6 +1593,7 @@ return fmt.Errorf("invalid union key '%v'", x.Type)}
- xc.arch_arm.gic_version = C.libxl_gic_version(x.ArchArm.GicVersion)
- xc.arch_arm.vuart = C.libxl_vuart_type(x.ArchArm.Vuart)
- xc.altp2m = C.libxl_altp2m_mode(x.Altp2M)
-+xc.vmtrace_pt_order = C.int(x.VmtracePtOrder)
- 
-  return nil
-  }
-diff --git a/tools/golang/xenlight/types.gen.go b/tools/golang/xenlight/types.gen.go
-index 663c1e86b4..f9b07ac862 100644
---- a/tools/golang/xenlight/types.gen.go
-+++ b/tools/golang/xenlight/types.gen.go
-@@ -516,6 +516,7 @@ GicVersion GicVersion
- Vuart VuartType
- }
- Altp2M Altp2MMode
-+VmtracePtOrder int
+diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
+index cc6d4ece22..4eded2ef84 100644
+--- a/xen/arch/x86/hvm/vmx/vmx.c
++++ b/xen/arch/x86/hvm/vmx/vmx.c
+@@ -428,6 +428,56 @@ static void vmx_domain_relinquish_resources(struct domain *d)
+     vmx_free_vlapic_mapping(d);
  }
  
- type domainBuildInfoTypeUnion interface {
-diff --git a/tools/libxl/libxl.h b/tools/libxl/libxl.h
-index 1cd6c38e83..4abb521756 100644
---- a/tools/libxl/libxl.h
-+++ b/tools/libxl/libxl.h
-@@ -438,6 +438,14 @@
-  */
- #define LIBXL_HAVE_CREATEINFO_PASSTHROUGH 1
++static int vmx_init_pt(struct vcpu *v)
++{
++    int rc;
++    uint64_t size = v->domain->vmtrace_pt_size;
++
++    v->arch.hvm.vmx.ipt_state = xzalloc(struct ipt_state);
++
++    if ( !v->arch.hvm.vmx.ipt_state )
++        return -ENOMEM;
++
++    if ( !v->vmtrace.pt_buf || !size )
++        return -EINVAL;
++
++    /*
++     * We don't accept trace buffer size smaller than single page
++     * and the upper bound is defined as 4GB in the specification.
++     * The buffer size must be also a power of 2.
++     */
++    if ( size < PAGE_SIZE || size > GB(4) || (size & (size - 1)) )
++        return -EINVAL;
++
++    v->arch.hvm.vmx.ipt_state->output_base =
++        page_to_maddr(v->vmtrace.pt_buf);
++    v->arch.hvm.vmx.ipt_state->output_mask.raw = size - 1;
++
++    rc = vmx_add_host_load_msr(v, MSR_RTIT_CTL, 0);
++
++    if ( rc )
++        return rc;
++
++    rc = vmx_add_guest_msr(v, MSR_RTIT_CTL,
++                              RTIT_CTL_TRACE_EN | RTIT_CTL_OS |
++                              RTIT_CTL_USR | RTIT_CTL_BRANCH_EN);
++
++    if ( rc )
++        return rc;
++
++    return 0;
++}
++
++static int vmx_destroy_pt(struct vcpu* v)
++{
++    if ( v->arch.hvm.vmx.ipt_state )
++        xfree(v->arch.hvm.vmx.ipt_state);
++
++    v->arch.hvm.vmx.ipt_state = NULL;
++    return 0;
++}
++
++
+ static int vmx_vcpu_initialise(struct vcpu *v)
+ {
+     int rc;
+@@ -471,6 +521,14 @@ static int vmx_vcpu_initialise(struct vcpu *v)
  
-+/*
-+ * LIBXL_HAVE_VMTRACE_PT_ORDER indicates that
-+ * libxl_domain_create_info has a vmtrace_pt_order parameter, which
-+ * allows to enable pre-allocation of processor tracing buffers
-+ * with the given order of size.
-+ */
-+#define LIBXL_HAVE_VMTRACE_PT_ORDER 1
-+
- /*
-  * libxl ABI compatibility
-  *
-diff --git a/tools/libxl/libxl_create.c b/tools/libxl/libxl_create.c
-index 2814818e34..82b595161a 100644
---- a/tools/libxl/libxl_create.c
-+++ b/tools/libxl/libxl_create.c
-@@ -608,6 +608,7 @@ int libxl__domain_make(libxl__gc *gc, libxl_domain_config *d_config,
-             .max_evtchn_port = b_info->event_channels,
-             .max_grant_frames = b_info->max_grant_frames,
-             .max_maptrack_frames = b_info->max_maptrack_frames,
-+            .vmtrace_pt_order = b_info->vmtrace_pt_order,
-         };
+     vmx_install_vlapic_mapping(v);
  
-         if (info->type != LIBXL_DOMAIN_TYPE_PV) {
-diff --git a/tools/libxl/libxl_types.idl b/tools/libxl/libxl_types.idl
-index 9d3f05f399..1c5dd43e4d 100644
---- a/tools/libxl/libxl_types.idl
-+++ b/tools/libxl/libxl_types.idl
-@@ -645,6 +645,8 @@ libxl_domain_build_info = Struct("domain_build_info",[
-     # supported by x86 HVM and ARM support is planned.
-     ("altp2m", libxl_altp2m_mode),
- 
-+    ("vmtrace_pt_order", integer),
++    if ( v->domain->vmtrace_pt_size )
++    {
++        rc = vmx_init_pt(v);
 +
-     ], dir=DIR_IN,
-        copy_deprecated_fn="libxl__domain_build_info_copy_deprecated",
- )
-diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
-index 61b4ef7b7e..279f7c14d3 100644
---- a/tools/xl/xl_parse.c
-+++ b/tools/xl/xl_parse.c
-@@ -1861,6 +1861,28 @@ void parse_config_data(const char *config_source,
-         }
-     }
- 
-+    if (!xlu_cfg_get_long(config, "processor_trace_buffer_size", &l, 1) && l) {
-+        int32_t shift = 0;
-+
-+        if (l & (l - 1))
-+        {
-+            fprintf(stderr, "ERROR: processor_trace_buffer_size "
-+			    "- must be a power of 2\n");
-+            exit(1);
-+        }
-+
-+        while (l >>= 1) ++shift;
-+
-+        if (shift <= XEN_PAGE_SHIFT)
-+        {
-+            fprintf(stderr, "ERROR: processor_trace_buffer_size "
-+			    "- value is too small\n");
-+            exit(1);
-+        }
-+
-+        b_info->vmtrace_pt_order = shift - XEN_PAGE_SHIFT;
++        if ( rc )
++            return rc;
 +    }
 +
-     if (!xlu_cfg_get_list(config, "ioports", &ioports, &num_ioports, 0)) {
-         b_info->num_ioports = num_ioports;
-         b_info->ioports = calloc(num_ioports, sizeof(*b_info->ioports));
+     return 0;
+ }
+ 
+@@ -483,6 +541,7 @@ static void vmx_vcpu_destroy(struct vcpu *v)
+      * prior to vmx_domain_destroy so we need to disable PML for each vcpu
+      * separately here.
+      */
++    vmx_destroy_pt(v);
+     vmx_vcpu_disable_pml(v);
+     vmx_destroy_vmcs(v);
+     passive_domain_destroy(v);
+@@ -513,6 +572,18 @@ static void vmx_save_guest_msrs(struct vcpu *v)
+      * be updated at any time via SWAPGS, which we cannot trap.
+      */
+     v->arch.hvm.vmx.shadow_gs = rdgsshadow();
++
++    if ( unlikely(v->arch.hvm.vmx.ipt_state &&
++                  v->arch.hvm.vmx.ipt_state->active) )
++    {
++        uint64_t rtit_ctl;
++        rdmsrl(MSR_RTIT_CTL, rtit_ctl);
++        BUG_ON(rtit_ctl & RTIT_CTL_TRACE_EN);
++
++        rdmsrl(MSR_RTIT_STATUS, v->arch.hvm.vmx.ipt_state->status);
++        rdmsrl(MSR_RTIT_OUTPUT_MASK,
++               v->arch.hvm.vmx.ipt_state->output_mask.raw);
++    }
+ }
+ 
+ static void vmx_restore_guest_msrs(struct vcpu *v)
+@@ -524,6 +595,17 @@ static void vmx_restore_guest_msrs(struct vcpu *v)
+ 
+     if ( cpu_has_msr_tsc_aux )
+         wrmsr_tsc_aux(v->arch.msrs->tsc_aux);
++
++    if ( unlikely(v->arch.hvm.vmx.ipt_state &&
++                  v->arch.hvm.vmx.ipt_state->active) )
++    {
++        wrmsrl(MSR_RTIT_OUTPUT_BASE,
++               v->arch.hvm.vmx.ipt_state->output_base);
++        wrmsrl(MSR_RTIT_OUTPUT_MASK,
++               v->arch.hvm.vmx.ipt_state->output_mask.raw);
++        wrmsrl(MSR_RTIT_STATUS,
++               v->arch.hvm.vmx.ipt_state->status);
++    }
+ }
+ 
+ void vmx_update_cpu_exec_control(struct vcpu *v)
+@@ -2240,6 +2322,24 @@ static bool vmx_get_pending_event(struct vcpu *v, struct x86_event *info)
+     return true;
+ }
+ 
++static int vmx_control_pt(struct vcpu *v, bool enable)
++{
++    if ( !v->arch.hvm.vmx.ipt_state )
++        return -EINVAL;
++
++    v->arch.hvm.vmx.ipt_state->active = enable;
++    return 0;
++}
++
++static int vmx_get_pt_offset(struct vcpu *v, uint64_t *offset)
++{
++    if ( !v->arch.hvm.vmx.ipt_state )
++        return -EINVAL;
++
++    *offset = v->arch.hvm.vmx.ipt_state->output_mask.offset;
++    return 0;
++}
++
+ static struct hvm_function_table __initdata vmx_function_table = {
+     .name                 = "VMX",
+     .cpu_up_prepare       = vmx_cpu_up_prepare,
+@@ -2295,6 +2395,8 @@ static struct hvm_function_table __initdata vmx_function_table = {
+     .altp2m_vcpu_update_vmfunc_ve = vmx_vcpu_update_vmfunc_ve,
+     .altp2m_vcpu_emulate_ve = vmx_vcpu_emulate_ve,
+     .altp2m_vcpu_emulate_vmfunc = vmx_vcpu_emulate_vmfunc,
++    .vmtrace_control_pt = vmx_control_pt,
++    .vmtrace_get_pt_offset = vmx_get_pt_offset,
+     .tsc_scaling = {
+         .max_ratio = VMX_TSC_MULTIPLIER_MAX,
+     },
+@@ -3674,6 +3776,13 @@ void vmx_vmexit_handler(struct cpu_user_regs *regs)
+ 
+     hvm_invalidate_regs_fields(regs);
+ 
++    if ( unlikely(v->arch.hvm.vmx.ipt_state &&
++                  v->arch.hvm.vmx.ipt_state->active) )
++    {
++        rdmsrl(MSR_RTIT_OUTPUT_MASK,
++               v->arch.hvm.vmx.ipt_state->output_mask.raw);
++    }
++
+     if ( paging_mode_hap(v->domain) )
+     {
+         /*
+diff --git a/xen/include/asm-x86/hvm/vmx/vmcs.h b/xen/include/asm-x86/hvm/vmx/vmcs.h
+index 6153ba6769..65971fa6ad 100644
+--- a/xen/include/asm-x86/hvm/vmx/vmcs.h
++++ b/xen/include/asm-x86/hvm/vmx/vmcs.h
+@@ -186,6 +186,9 @@ struct vmx_vcpu {
+      * pCPU and wakeup the related vCPU.
+      */
+     struct pi_blocking_vcpu pi_blocking;
++
++    /* State of processor trace feature */
++    struct ipt_state      *ipt_state;
+ };
+ 
+ int vmx_create_vmcs(struct vcpu *v);
+diff --git a/xen/include/asm-x86/hvm/vmx/vmx.h b/xen/include/asm-x86/hvm/vmx/vmx.h
+index 111ccd7e61..8d7c67e43d 100644
+--- a/xen/include/asm-x86/hvm/vmx/vmx.h
++++ b/xen/include/asm-x86/hvm/vmx/vmx.h
+@@ -689,4 +689,18 @@ typedef union ldt_or_tr_instr_info {
+     };
+ } ldt_or_tr_instr_info_t;
+ 
++/* Processor Trace state per vCPU */
++struct ipt_state {
++    bool active;
++    uint64_t status;
++    uint64_t output_base;
++    union {
++        uint64_t raw;
++        struct {
++            uint32_t size;
++            uint32_t offset;
++        };
++    } output_mask;
++};
++
+ #endif /* __ASM_X86_HVM_VMX_VMX_H__ */
 -- 
 2.17.1
 
