@@ -6,84 +6,82 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 48F34C433DF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D1D57C433E0
 	for <xen-devel@archiver.kernel.org>; Sun,  5 Jul 2020 18:56:32 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 25B702073E
+	by mail.kernel.org (Postfix) with ESMTPS id B135B2073E
 	for <xen-devel@archiver.kernel.org>; Sun,  5 Jul 2020 18:56:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 25B702073E
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B135B2073E
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=cert.pl
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1js9oL-0005mX-9L; Sun, 05 Jul 2020 18:56:21 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1js9oL-0005mp-IV; Sun, 05 Jul 2020 18:56:21 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=NZHG=AQ=cert.pl=michal.leszczynski@srs-us1.protection.inumbo.net>)
- id 1js9oK-0005m2-00
+ id 1js9oK-0005mD-IN
  for xen-devel@lists.xenproject.org; Sun, 05 Jul 2020 18:56:20 +0000
-X-Inumbo-ID: 359cef92-bef1-11ea-b7bb-bc764e2007e4
+X-Inumbo-ID: 35a11d89-bef1-11ea-8c04-12813bfff9fa
 Received: from bagnar.nask.net.pl (unknown [195.187.242.196])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 359cef92-bef1-11ea-b7bb-bc764e2007e4;
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 35a11d89-bef1-11ea-8c04-12813bfff9fa;
  Sun, 05 Jul 2020 18:56:19 +0000 (UTC)
 Received: from bagnar.nask.net.pl (unknown [172.16.9.10])
- by bagnar.nask.net.pl (Postfix) with ESMTP id 2CEB8A20CD;
- Sun,  5 Jul 2020 20:56:17 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
- by bagnar.nask.net.pl (Postfix) with ESMTP id 02E85A20C3;
+ by bagnar.nask.net.pl (Postfix) with ESMTP id 97F0EA2022;
  Sun,  5 Jul 2020 20:56:16 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+ by bagnar.nask.net.pl (Postfix) with ESMTP id 95673A2026;
+ Sun,  5 Jul 2020 20:56:15 +0200 (CEST)
 X-Amavis-Alert: BAD HEADER SECTION, Duplicate header field: "References"
 Received: from bagnar.nask.net.pl ([127.0.0.1])
  by localhost (bagnar.nask.net.pl [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id 1I7hzOnL4bmA; Sun,  5 Jul 2020 20:56:15 +0200 (CEST)
+ with ESMTP id c23W13ESr3r9; Sun,  5 Jul 2020 20:56:14 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by bagnar.nask.net.pl (Postfix) with ESMTP id D1F3EA209C;
+ by bagnar.nask.net.pl (Postfix) with ESMTP id 7FDC7A2052;
  Sun,  5 Jul 2020 20:56:14 +0200 (CEST)
 X-Virus-Scanned: amavisd-new at bagnar.nask.net.pl
 X-Amavis-Alert: BAD HEADER SECTION, Duplicate header field: "References"
 Received: from bagnar.nask.net.pl ([127.0.0.1])
  by localhost (bagnar.nask.net.pl [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id vSDx68SufYYS; Sun,  5 Jul 2020 20:56:14 +0200 (CEST)
+ with ESMTP id isgh7PHF9bSH; Sun,  5 Jul 2020 20:56:14 +0200 (CEST)
 Received: from belindir.nask.net.pl (belindir-ext.nask.net.pl
  [195.187.242.210])
- by bagnar.nask.net.pl (Postfix) with ESMTP id 1C8C7A2037;
- Sun,  5 Jul 2020 20:56:14 +0200 (CEST)
+ by bagnar.nask.net.pl (Postfix) with ESMTP id C27ACA2022;
+ Sun,  5 Jul 2020 20:56:13 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by belindir.nask.net.pl (Postfix) with ESMTP id 7365222C24;
+ by belindir.nask.net.pl (Postfix) with ESMTP id 29CF622C3D;
  Sun,  5 Jul 2020 20:55:19 +0200 (CEST)
 X-Amavis-Alert: BAD HEADER SECTION, Duplicate header field: "References"
 Received: from belindir.nask.net.pl ([127.0.0.1])
  by localhost (belindir.nask.net.pl [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id 2s-5pUYlNWXw; Sun,  5 Jul 2020 20:55:13 +0200 (CEST)
+ with ESMTP id CrPYSZmT-5fP; Sun,  5 Jul 2020 20:55:13 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by belindir.nask.net.pl (Postfix) with ESMTP id B371B22C22;
+ by belindir.nask.net.pl (Postfix) with ESMTP id 3B5CF22C06;
  Sun,  5 Jul 2020 20:55:08 +0200 (CEST)
-X-Quarantine-ID: <cnal_8Z5apTk>
+X-Quarantine-ID: <Rz3LuF7Dh33H>
 X-Virus-Scanned: amavisd-new at belindir.nask.net.pl
 X-Amavis-Alert: BAD HEADER SECTION, Duplicate header field: "References"
 Received: from belindir.nask.net.pl ([127.0.0.1])
  by localhost (belindir.nask.net.pl [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id cnal_8Z5apTk; Sun,  5 Jul 2020 20:55:08 +0200 (CEST)
+ with ESMTP id Rz3LuF7Dh33H; Sun,  5 Jul 2020 20:55:08 +0200 (CEST)
 Received: from mq-desktop.cert.pl (unknown [195.187.238.217])
- by belindir.nask.net.pl (Postfix) with ESMTPSA id 8764A22C24;
+ by belindir.nask.net.pl (Postfix) with ESMTPSA id 0D31A2295A;
  Sun,  5 Jul 2020 20:55:08 +0200 (CEST)
 From: =?UTF-8?q?Micha=C5=82=20Leszczy=C5=84ski?= <michal.leszczynski@cert.pl>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH v5 11/11] tools/proctrace: add proctrace tool
-Date: Sun,  5 Jul 2020 20:55:04 +0200
-Message-Id: <e0ac5422825ce307470256aab1652336d5179a9a.1593974333.git.michal.leszczynski@cert.pl>
+Subject: [PATCH v5 05/11] tools/libxl: add vmtrace_pt_size parameter
+Date: Sun,  5 Jul 2020 20:54:58 +0200
+Message-Id: <f7e3c91789a7763b997918b6ebb987be670f9ce5.1593974333.git.michal.leszczynski@cert.pl>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1593974333.git.michal.leszczynski@cert.pl>
 References: <cover.1593974333.git.michal.leszczynski@cert.pl>
-MIME-Version: 1.0
 In-Reply-To: <cover.1593974333.git.michal.leszczynski@cert.pl>
 References: <cover.1593974333.git.michal.leszczynski@cert.pl>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -94,254 +92,162 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: luwei.kang@intel.com, Michal Leszczynski <michal.leszczynski@cert.pl>,
- tamas.lengyel@intel.com, Ian Jackson <ian.jackson@eu.citrix.com>,
- Wei Liu <wl@xen.org>
+Cc: luwei.kang@intel.com, Wei Liu <wl@xen.org>,
+ Michal Leszczynski <michal.leszczynski@cert.pl>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>,
+ Anthony PERARD <anthony.perard@citrix.com>, tamas.lengyel@intel.com
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Michal Leszczynski <michal.leszczynski@cert.pl>
 
-Add an demonstration tool that uses xc_vmtrace_* calls in order
-to manage external IPT monitoring for DomU.
+Allow to specify the size of per-vCPU trace buffer upon
+domain creation. This is zero by default (meaning: not enabled).
 
 Signed-off-by: Michal Leszczynski <michal.leszczynski@cert.pl>
 ---
- tools/proctrace/Makefile    |  48 +++++++++++
- tools/proctrace/proctrace.c | 163 ++++++++++++++++++++++++++++++++++++
- 2 files changed, 211 insertions(+)
- create mode 100644 tools/proctrace/Makefile
- create mode 100644 tools/proctrace/proctrace.c
+ docs/man/xl.cfg.5.pod.in             | 11 +++++++++++
+ tools/golang/xenlight/helpers.gen.go |  2 ++
+ tools/golang/xenlight/types.gen.go   |  1 +
+ tools/libxl/libxl.h                  |  8 ++++++++
+ tools/libxl/libxl_create.c           |  1 +
+ tools/libxl/libxl_types.idl          |  2 ++
+ tools/xl/xl_parse.c                  | 22 ++++++++++++++++++++++
+ 7 files changed, 47 insertions(+)
 
-diff --git a/tools/proctrace/Makefile b/tools/proctrace/Makefile
-new file mode 100644
-index 0000000000..2983c477fe
---- /dev/null
-+++ b/tools/proctrace/Makefile
-@@ -0,0 +1,48 @@
-+# Copyright (C) CERT Polska - NASK PIB
-+# Author: Micha=C5=82 Leszczy=C5=84ski <michal.leszczynski@cert.pl>
-+#
-+# This program is free software; you can redistribute it and/or modify
-+# it under the terms of the GNU General Public License as published by
-+# the Free Software Foundation; under version 2 of the License.
-+#
-+# This program is distributed in the hope that it will be useful,
-+# but WITHOUT ANY WARRANTY; without even the implied warranty of
-+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+# GNU General Public License for more details.
+diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
+index 0532739c1f..670759f6bd 100644
+--- a/docs/man/xl.cfg.5.pod.in
++++ b/docs/man/xl.cfg.5.pod.in
+@@ -278,6 +278,17 @@ memory=8096 will report significantly less memory available for use
+ than a system with maxmem=8096 memory=8096 due to the memory overhead
+ of having to track the unused pages.
+ 
++=item B<processor_trace_buffer_size=BYTES>
 +
-+XEN_ROOT=3D$(CURDIR)/../..
-+include $(XEN_ROOT)/tools/Rules.mk
++Specifies the size of processor trace buffer that would be allocated
++for each vCPU belonging to this domain. Disabled (i.e.
++B<processor_trace_buffer_size=0> by default. This must be set to
++non-zero value in order to be able to use processor tracing features
++with this domain.
 +
-+CFLAGS  +=3D -Werror
-+CFLAGS  +=3D $(CFLAGS_libxenevtchn)
-+CFLAGS  +=3D $(CFLAGS_libxenctrl)
-+LDLIBS  +=3D $(LDLIBS_libxenctrl)
-+LDLIBS  +=3D $(LDLIBS_libxenevtchn)
-+LDLIBS  +=3D $(LDLIBS_libxenforeignmemory)
++B<NOTE>: The size value must be between 4 kB and 4 GB and it must
++be also a power of 2.
 +
-+.PHONY: all
-+all: build
-+
-+.PHONY: build
-+build: proctrace
-+
-+.PHONY: install
-+install: build
-+	$(INSTALL_DIR) $(DESTDIR)$(sbindir)
-+	$(INSTALL_PROG) proctrace $(DESTDIR)$(sbindir)/proctrace
-+
-+.PHONY: uninstall
-+uninstall:
-+	rm -f $(DESTDIR)$(sbindir)/proctrace
-+
-+.PHONY: clean
-+clean:
-+	$(RM) -f $(DEPS_RM)
-+
-+.PHONY: distclean
-+distclean: clean
-+
-+iptlive: iptlive.o Makefile
-+	$(CC) $(LDFLAGS) $< -o $@ $(LDLIBS) $(APPEND_LDFLAGS)
-+
-+-include $(DEPS_INCLUDE)
-diff --git a/tools/proctrace/proctrace.c b/tools/proctrace/proctrace.c
-new file mode 100644
-index 0000000000..22bf91db8d
---- /dev/null
-+++ b/tools/proctrace/proctrace.c
-@@ -0,0 +1,163 @@
-+/***********************************************************************=
-*******
-+ * tools/proctrace.c
-+ *
-+ * Demonstrative tool for collecting Intel Processor Trace data from Xen=
-.
-+ *  Could be used to externally monitor a given vCPU in given DomU.
-+ *
-+ * Copyright (C) 2020 by CERT Polska - NASK PIB
-+ *
-+ * Authors: Micha=C5=82 Leszczy=C5=84ski, michal.leszczynski@cert.pl
-+ * Date:    June, 2020
-+ *
-+ *  This program is free software; you can redistribute it and/or modify
-+ *  it under the terms of the GNU General Public License as published by
-+ *  the Free Software Foundation; under version 2 of the License.
-+ *
-+ *  This program is distributed in the hope that it will be useful,
-+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ *  GNU General Public License for more details.
-+ *
-+ *  You should have received a copy of the GNU General Public License
-+ *  along with this program; If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#include <stdlib.h>
-+#include <stdio.h>
-+#include <sys/mman.h>
-+#include <signal.h>
-+
-+#include <xenctrl.h>
-+#include <xen/xen.h>
-+#include <xenforeignmemory.h>
-+
-+#define BUF_SIZE (16384 * XC_PAGE_SIZE)
-+
-+volatile int interrupted =3D 0;
-+
-+void term_handler(int signum) {
-+    interrupted =3D 1;
-+}
-+
-+int main(int argc, char* argv[]) {
-+    xc_interface *xc;
-+    uint32_t domid;
-+    uint32_t vcpu_id;
-+
-+    int rc =3D -1;
-+    uint8_t *buf =3D NULL;
-+    uint64_t last_offset =3D 0;
-+
-+    xenforeignmemory_handle *fmem;
-+    xenforeignmemory_resource_handle *fres;
-+
-+    if (signal(SIGINT, term_handler) =3D=3D SIG_ERR)
-+    {
-+        fprintf(stderr, "Failed to register signal handler\n");
-+        return 1;
-+    }
-+
-+    if (argc !=3D 3) {
-+        fprintf(stderr, "Usage: %s <domid> <vcpu_id>\n", argv[0]);
-+        fprintf(stderr, "It's recommended to redirect this"
-+                        "program's output to file\n");
-+        fprintf(stderr, "or to pipe it's output to xxd or other program.=
-\n");
-+        return 1;
-+    }
-+
-+    domid =3D atoi(argv[1]);
-+    vcpu_id =3D atoi(argv[2]);
-+
-+    xc =3D xc_interface_open(0, 0, 0);
-+
-+    fmem =3D xenforeignmemory_open(0, 0);
-+
-+    if (!xc) {
-+        fprintf(stderr, "Failed to open xc interface\n");
-+        return 1;
-+    }
-+
-+    rc =3D xc_vmtrace_pt_enable(xc, domid, vcpu_id);
-+
-+    if (rc) {
-+        fprintf(stderr, "Failed to call xc_vmtrace_pt_enable\n");
-+        return 1;
-+    }
-+
-+    fres =3D xenforeignmemory_map_resource(
-+        fmem, domid, XENMEM_resource_vmtrace_buf,
-+        /* vcpu: */ vcpu_id,
-+        /* frame: */ 0,
-+        /* num_frames: */ BUF_SIZE >> XC_PAGE_SHIFT,
-+        (void **)&buf,
-+        PROT_READ, 0);
-+
-+    if (!buf) {
-+        fprintf(stderr, "Failed to map trace buffer\n");
-+        return 1;
-+    }
-+
-+    while (!interrupted) {
-+        uint64_t offset;
-+        rc =3D xc_vmtrace_pt_get_offset(xc, domid, vcpu_id, &offset);
-+
-+        if (rc) {
-+            fprintf(stderr, "Failed to call xc_vmtrace_pt_get_offset\n")=
-;
-+            return 1;
-+        }
-+
-+        if (offset > last_offset)
-+        {
-+            fwrite(buf + last_offset, offset - last_offset, 1, stdout);
-+        }
-+        else if (offset < last_offset)
-+        {
-+            // buffer wrapped
-+            fwrite(buf + last_offset, BUF_SIZE - last_offset, 1, stdout)=
-;
-+            fwrite(buf, offset, 1, stdout);
-+        }
-+
-+        last_offset =3D offset;
-+        usleep(1000 * 100);
-+    }
-+
-+    rc =3D xenforeignmemory_unmap_resource(fmem, fres);
-+
-+    if (rc) {
-+        fprintf(stderr, "Failed to unmap resource\n");
-+        return 1;
-+    }
-+
-+    rc =3D xenforeignmemory_close(fmem);
-+
-+    if (rc) {
-+        fprintf(stderr, "Failed to close fmem\n");
-+        return 1;
-+    }
-+
-+    rc =3D xc_vmtrace_pt_disable(xc, domid, vcpu_id);
-+
-+    if (rc) {
-+        fprintf(stderr, "Failed to call xc_vmtrace_pt_disable\n");
-+        return 1;
-+    }
-+
-+    rc =3D xc_interface_close(xc);
-+
-+    if (rc) {
-+        fprintf(stderr, "Failed to close xc interface\n");
-+        return 1;
-+    }
-+
-+    return 0;
-+}
-+
+ =back
+ 
+ =head3 Guest Virtual NUMA Configuration
+diff --git a/tools/golang/xenlight/helpers.gen.go b/tools/golang/xenlight/helpers.gen.go
+index 152c7e8e6b..bfc37b69c8 100644
+--- a/tools/golang/xenlight/helpers.gen.go
++++ b/tools/golang/xenlight/helpers.gen.go
+@@ -1117,6 +1117,7 @@ return fmt.Errorf("invalid union key '%v'", x.Type)}
+ x.ArchArm.GicVersion = GicVersion(xc.arch_arm.gic_version)
+ x.ArchArm.Vuart = VuartType(xc.arch_arm.vuart)
+ x.Altp2M = Altp2MMode(xc.altp2m)
++x.VmtracePtOrder = int(xc.vmtrace_pt_order)
+ 
+  return nil}
+ 
+@@ -1592,6 +1593,7 @@ return fmt.Errorf("invalid union key '%v'", x.Type)}
+ xc.arch_arm.gic_version = C.libxl_gic_version(x.ArchArm.GicVersion)
+ xc.arch_arm.vuart = C.libxl_vuart_type(x.ArchArm.Vuart)
+ xc.altp2m = C.libxl_altp2m_mode(x.Altp2M)
++xc.vmtrace_pt_order = C.int(x.VmtracePtOrder)
+ 
+  return nil
+  }
+diff --git a/tools/golang/xenlight/types.gen.go b/tools/golang/xenlight/types.gen.go
+index 663c1e86b4..f9b07ac862 100644
+--- a/tools/golang/xenlight/types.gen.go
++++ b/tools/golang/xenlight/types.gen.go
+@@ -516,6 +516,7 @@ GicVersion GicVersion
+ Vuart VuartType
+ }
+ Altp2M Altp2MMode
++VmtracePtOrder int
+ }
+ 
+ type domainBuildInfoTypeUnion interface {
+diff --git a/tools/libxl/libxl.h b/tools/libxl/libxl.h
+index 1cd6c38e83..4abb521756 100644
+--- a/tools/libxl/libxl.h
++++ b/tools/libxl/libxl.h
+@@ -438,6 +438,14 @@
+  */
+ #define LIBXL_HAVE_CREATEINFO_PASSTHROUGH 1
+ 
 +/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * tab-width: 4
-+ * indent-tabs-mode: nil
-+ * End:
++ * LIBXL_HAVE_VMTRACE_PT_ORDER indicates that
++ * libxl_domain_create_info has a vmtrace_pt_order parameter, which
++ * allows to enable pre-allocation of processor tracing buffers
++ * with the given order of size.
 + */
---=20
++#define LIBXL_HAVE_VMTRACE_PT_ORDER 1
++
+ /*
+  * libxl ABI compatibility
+  *
+diff --git a/tools/libxl/libxl_create.c b/tools/libxl/libxl_create.c
+index 2814818e34..82b595161a 100644
+--- a/tools/libxl/libxl_create.c
++++ b/tools/libxl/libxl_create.c
+@@ -608,6 +608,7 @@ int libxl__domain_make(libxl__gc *gc, libxl_domain_config *d_config,
+             .max_evtchn_port = b_info->event_channels,
+             .max_grant_frames = b_info->max_grant_frames,
+             .max_maptrack_frames = b_info->max_maptrack_frames,
++            .vmtrace_pt_order = b_info->vmtrace_pt_order,
+         };
+ 
+         if (info->type != LIBXL_DOMAIN_TYPE_PV) {
+diff --git a/tools/libxl/libxl_types.idl b/tools/libxl/libxl_types.idl
+index 9d3f05f399..1c5dd43e4d 100644
+--- a/tools/libxl/libxl_types.idl
++++ b/tools/libxl/libxl_types.idl
+@@ -645,6 +645,8 @@ libxl_domain_build_info = Struct("domain_build_info",[
+     # supported by x86 HVM and ARM support is planned.
+     ("altp2m", libxl_altp2m_mode),
+ 
++    ("vmtrace_pt_order", integer),
++
+     ], dir=DIR_IN,
+        copy_deprecated_fn="libxl__domain_build_info_copy_deprecated",
+ )
+diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
+index 61b4ef7b7e..279f7c14d3 100644
+--- a/tools/xl/xl_parse.c
++++ b/tools/xl/xl_parse.c
+@@ -1861,6 +1861,28 @@ void parse_config_data(const char *config_source,
+         }
+     }
+ 
++    if (!xlu_cfg_get_long(config, "processor_trace_buffer_size", &l, 1) && l) {
++        int32_t shift = 0;
++
++        if (l & (l - 1))
++        {
++            fprintf(stderr, "ERROR: processor_trace_buffer_size "
++			    "- must be a power of 2\n");
++            exit(1);
++        }
++
++        while (l >>= 1) ++shift;
++
++        if (shift <= XEN_PAGE_SHIFT)
++        {
++            fprintf(stderr, "ERROR: processor_trace_buffer_size "
++			    "- value is too small\n");
++            exit(1);
++        }
++
++        b_info->vmtrace_pt_order = shift - XEN_PAGE_SHIFT;
++    }
++
+     if (!xlu_cfg_get_list(config, "ioports", &ioports, &num_ioports, 0)) {
+         b_info->num_ioports = num_ioports;
+         b_info->ioports = calloc(num_ioports, sizeof(*b_info->ioports));
+-- 
 2.17.1
 
 
