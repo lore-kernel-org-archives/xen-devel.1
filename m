@@ -5,73 +5,74 @@ X-Spam-Level:
 X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
 	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5BDACC433E1
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Jul 2020 18:08:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1CA20C433E2
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Jul 2020 18:08:29 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 35D3020720
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Jul 2020 18:08:26 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id EB3CD20720
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Jul 2020 18:08:28 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="FREEGuCx"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 35D3020720
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="jEACz1Ru"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EB3CD20720
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jsVXB-0003WV-Ag; Mon, 06 Jul 2020 18:08:05 +0000
+	id 1jsVXN-0003Zp-Sj; Mon, 06 Jul 2020 18:08:17 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=g8At=AR=gmail.com=jrdr.linux@srs-us1.protection.inumbo.net>)
- id 1jsVXA-0003W5-9P
- for xen-devel@lists.xenproject.org; Mon, 06 Jul 2020 18:08:04 +0000
-X-Inumbo-ID: a24d1442-bfb3-11ea-b7bb-bc764e2007e4
-Received: from mail-pj1-x1042.google.com (unknown [2607:f8b0:4864:20::1042])
+ id 1jsVXN-0003Zb-6o
+ for xen-devel@lists.xenproject.org; Mon, 06 Jul 2020 18:08:17 +0000
+X-Inumbo-ID: aa2eb68e-bfb3-11ea-b7bb-bc764e2007e4
+Received: from mail-pg1-x544.google.com (unknown [2607:f8b0:4864:20::544])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id a24d1442-bfb3-11ea-b7bb-bc764e2007e4;
- Mon, 06 Jul 2020 18:08:03 +0000 (UTC)
-Received: by mail-pj1-x1042.google.com with SMTP id cv18so42353pjb.1
- for <xen-devel@lists.xenproject.org>; Mon, 06 Jul 2020 11:08:03 -0700 (PDT)
+ id aa2eb68e-bfb3-11ea-b7bb-bc764e2007e4;
+ Mon, 06 Jul 2020 18:08:16 +0000 (UTC)
+Received: by mail-pg1-x544.google.com with SMTP id p3so18743013pgh.3
+ for <xen-devel@lists.xenproject.org>; Mon, 06 Jul 2020 11:08:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=mBXFHkH5TzG6LqeVLyEATGFp3OINlEiEkwTG6DKP5gc=;
- b=FREEGuCxU2Zl2/sBJH058EpPMS4GiGXU/dTLgSmQEKbeNdyxgdzwv6AAMNmM25OGkN
- wHBZkctV9M8/clpVivrB7YRq+baoOE5bJDhR17Lw9dkYo23TMg+x1b8gyTP83jcBRsUn
- 3SNWA8P3JttgJfmavqXK/qcf7fBcuz/PfiCLo7HOo3VIdWpaL4z8nf/hygxZQJjiflk+
- qPQPmXDwdqqBEwSL55lx+ZvGU5tvKjsYuSs334PaBtvBgBObRn//cpQIispeu/2WLEAh
- iKi3Ceg4sZjdH2QCP/1xYDV+sGiKJrKHFlkCfJNO/GbDEUNaHfr68A7APrHx0fubgBoX
- ag7A==
+ bh=ljWc7ncVT9pbFQys6lUrJ2oby+afUmM7eFZjxIhMARg=;
+ b=jEACz1RudmH76IjHbdFlmoPGUPJKFxQCq2v9MrfJJA8KB3hgvmPKoJ6dh7OSUm81N/
+ tl3W9rYACLLYLqhNvYdQec8GTl2ejOttzQ58EI02HItGcnKiiC5/2aB5g66OCIZC/E1u
+ /mQOQRtDqM/vypg2TSJ4IrsIMarYUK8d/G66KFBDESnUPDZbWua4S7CX2i+MFnWN6+gm
+ TAl9dt7TTOtSu6v1DhRGv8HYoLhUJhndqmVklEGZWSNyfwLROdQQHvcrbP7ORlKCEii6
+ 54YlItX98evWB9sVh7JTXi0t4Ki9jcwLstQgwmyBLwwyw2nX7hSrmTmI1pu9DpWmC1n2
+ Kljg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=mBXFHkH5TzG6LqeVLyEATGFp3OINlEiEkwTG6DKP5gc=;
- b=f4LpsQACeisrZZfqzLbIU+/3bIejRcnLwqdJ7C8D+I2hFZ2ZHTam+BvQNGXDHrMRK5
- J3qDLVTB9FXanWpECDjSWOvy+zbjg6nBfJibZXxB+F9B1jnNTnaclYIBTbDQnRvruR67
- c0Q0GjNKqveZVoW4z0wpbRbRlchve+96RSHp4QYuZNvFph3vST4Jdpo1mRqb4Ww9QyBS
- XqNqmv/E74jF8ZU7FlnOiufJxcNZllk5wcyoQEh/rkjWqCIsg/WkmQs/OlcrOtH/B2Is
- Uv1kdqwiSPWcemKTyv3FP6l0YYIcqu//9HNu0pXmmazt8VV6ItuIHPHJpgvuOAaNqNqc
- 8Bdw==
-X-Gm-Message-State: AOAM530g1UgAiR9Dg90jMWBcG5f1Jp0wppbkB+TYvwCOMh0BbCeYA/mP
- sOh+SjIFuzpicnppQoDezwU=
-X-Google-Smtp-Source: ABdhPJzfrg4kfMMYzI0FM6dp3y6GDVRu7C/vmGzXICthTgrs/634fOSnQFK49BpoDjYsRBctgws2Eg==
-X-Received: by 2002:a17:90a:aa83:: with SMTP id l3mr399709pjq.73.1594058882791; 
- Mon, 06 Jul 2020 11:08:02 -0700 (PDT)
+ bh=ljWc7ncVT9pbFQys6lUrJ2oby+afUmM7eFZjxIhMARg=;
+ b=saViBWNFaphorBvdoiHFUe3Ac16LdrNg+0eCsKxgWYqjK77cfHe4UkD2Oz3hfnEagJ
+ 0IOF/B3vpeoLM+J8PbUXC97chCG4v39z1gswj6EGLxSBM6W2F5eLCJ2HozwYDa8vg/xe
+ Ol8a1psvY+84/QINX/B4+tpS/ZC7u7q7b2G3XEelvL+tbk1cUukyyRG16Tw7uWxXas7P
+ dP/1FchQw+0RJeFJEyWAXtAfng8g0ya+Y0aAIXqorYKfebaaZ+FIwhqfOr8aMpMym1lJ
+ ZXiGQsspn5ixfoueKlPMbwurwYUOb3BUJIkmeSVQIF/ZplkgpT9HHkixnNi9AWGfJgV7
+ QX/Q==
+X-Gm-Message-State: AOAM532b+0docCwtZ3yfCmv92gfgShWV7bnxxib0gnIXomslAc2qxPf1
+ c3QdlEyMbVzuGFvI9kcXSGI=
+X-Google-Smtp-Source: ABdhPJxIo6PQngVuGXtLZOqfdIq2vAywCi8VVu0pPrqJTL0U3sjfe2jLu94RvE7iZvdk15XpRbmE0w==
+X-Received: by 2002:a65:5682:: with SMTP id v2mr41106431pgs.231.1594058895951; 
+ Mon, 06 Jul 2020 11:08:15 -0700 (PDT)
 Received: from jordon-HP-15-Notebook-PC.domain.name ([122.171.43.125])
- by smtp.gmail.com with ESMTPSA id 199sm20425544pgc.79.2020.07.06.11.07.59
+ by smtp.gmail.com with ESMTPSA id 199sm20425544pgc.79.2020.07.06.11.08.13
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 06 Jul 2020 11:08:02 -0700 (PDT)
+ Mon, 06 Jul 2020 11:08:15 -0700 (PDT)
 From: Souptick Joarder <jrdr.linux@gmail.com>
 To: boris.ostrovsky@oracle.com,
 	jgross@suse.com,
 	sstabellini@kernel.org
-Subject: [PATCH v2 1/3] xen/privcmd: Corrected error handling path
-Date: Mon,  6 Jul 2020 23:46:10 +0530
-Message-Id: <1594059372-15563-2-git-send-email-jrdr.linux@gmail.com>
+Subject: [PATCH v2 3/3] xen/privcmd: Convert get_user_pages*() to
+ pin_user_pages*()
+Date: Mon,  6 Jul 2020 23:46:12 +0530
+Message-Id: <1594059372-15563-4-git-send-email-jrdr.linux@gmail.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1594059372-15563-1-git-send-email-jrdr.linux@gmail.com>
 References: <1594059372-15563-1-git-send-email-jrdr.linux@gmail.com>
@@ -91,102 +92,51 @@ Cc: xen-devel@lists.xenproject.org, Paul Durrant <xadimgnik@gmail.com>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Previously, if lock_pages() end up partially mapping pages, it used
-to return -ERRNO due to which unlock_pages() have to go through
-each pages[i] till *nr_pages* to validate them. This can be avoided
-by passing correct number of partially mapped pages & -ERRNO separately,
-while returning from lock_pages() due to error.
+In 2019, we introduced pin_user_pages*() and now we are converting
+get_user_pages*() to the new API as appropriate. [1] & [2] could
+be referred for more information. This is case 5 as per document [1].
 
-With this fix unlock_pages() doesn't need to validate pages[i] till
-*nr_pages* for error scenario and few condition checks can be ignored.
+[1] Documentation/core-api/pin_user_pages.rst
+
+[2] "Explicit pinning of user-space pages":
+        https://lwn.net/Articles/807108/
 
 Signed-off-by: Souptick Joarder <jrdr.linux@gmail.com>
 Cc: John Hubbard <jhubbard@nvidia.com>
 Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
 Cc: Paul Durrant <xadimgnik@gmail.com>
 ---
- drivers/xen/privcmd.c | 31 +++++++++++++++----------------
- 1 file changed, 15 insertions(+), 16 deletions(-)
+ drivers/xen/privcmd.c | 10 ++--------
+ 1 file changed, 2 insertions(+), 8 deletions(-)
 
 diff --git a/drivers/xen/privcmd.c b/drivers/xen/privcmd.c
-index a250d11..33677ea 100644
+index f6c1543..5c5cd24 100644
 --- a/drivers/xen/privcmd.c
 +++ b/drivers/xen/privcmd.c
-@@ -580,13 +580,13 @@ static long privcmd_ioctl_mmap_batch(
- 
- static int lock_pages(
- 	struct privcmd_dm_op_buf kbufs[], unsigned int num,
--	struct page *pages[], unsigned int nr_pages)
-+	struct page *pages[], unsigned int nr_pages, unsigned int *pinned)
- {
- 	unsigned int i;
-+	int page_count = 0;
- 
- 	for (i = 0; i < num; i++) {
- 		unsigned int requested;
--		int pinned;
- 
- 		requested = DIV_ROUND_UP(
- 			offset_in_page(kbufs[i].uptr) + kbufs[i].size,
-@@ -594,14 +594,15 @@ static int lock_pages(
+@@ -594,7 +594,7 @@ static int lock_pages(
  		if (requested > nr_pages)
  			return -ENOSPC;
  
--		pinned = get_user_pages_fast(
-+		page_count = get_user_pages_fast(
+-		page_count = get_user_pages_fast(
++		page_count = pin_user_pages_fast(
  			(unsigned long) kbufs[i].uptr,
  			requested, FOLL_WRITE, pages);
--		if (pinned < 0)
--			return pinned;
-+		if (page_count < 0)
-+			return page_count;
+ 		if (page_count < 0)
+@@ -610,13 +610,7 @@ static int lock_pages(
  
--		nr_pages -= pinned;
--		pages += pinned;
-+		*pinned += page_count;
-+		nr_pages -= page_count;
-+		pages += page_count;
- 	}
- 
- 	return 0;
-@@ -611,13 +612,8 @@ static void unlock_pages(struct page *pages[], unsigned int nr_pages)
+ static void unlock_pages(struct page *pages[], unsigned int nr_pages)
  {
- 	unsigned int i;
- 
--	if (!pages)
--		return;
+-	unsigned int i;
 -
 -	for (i = 0; i < nr_pages; i++) {
--		if (pages[i])
--			put_page(pages[i]);
+-		if (!PageDirty(pages[i]))
+-			set_page_dirty_lock(pages[i]);
+-		put_page(pages[i]);
 -	}
-+	for (i = 0; i < nr_pages; i++)
-+		put_page(pages[i]);
++	unpin_user_pages_dirty_lock(pages, nr_pages, true);
  }
  
  static long privcmd_ioctl_dm_op(struct file *file, void __user *udata)
-@@ -630,6 +626,7 @@ static long privcmd_ioctl_dm_op(struct file *file, void __user *udata)
- 	struct xen_dm_op_buf *xbufs = NULL;
- 	unsigned int i;
- 	long rc;
-+	unsigned int pinned = 0;
- 
- 	if (copy_from_user(&kdata, udata, sizeof(kdata)))
- 		return -EFAULT;
-@@ -683,9 +680,11 @@ static long privcmd_ioctl_dm_op(struct file *file, void __user *udata)
- 		goto out;
- 	}
- 
--	rc = lock_pages(kbufs, kdata.num, pages, nr_pages);
--	if (rc)
-+	rc = lock_pages(kbufs, kdata.num, pages, nr_pages, &pinned);
-+	if (rc < 0) {
-+		nr_pages = pinned;
- 		goto out;
-+	}
- 
- 	for (i = 0; i < kdata.num; i++) {
- 		set_xen_guest_handle(xbufs[i].h, kbufs[i].uptr);
 -- 
 1.9.1
 
