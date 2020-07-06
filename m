@@ -7,68 +7,68 @@ X-Spam-Status: No, score=-6.5 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
 	SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9168CC433E0
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Jul 2020 17:07:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CCD2DC433DF
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Jul 2020 17:08:42 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5F65C21582
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Jul 2020 17:07:52 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 9B01B21582
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Jul 2020 17:08:42 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="iqkaVDc+"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5F65C21582
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="DCtHRVbf"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9B01B21582
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jsUal-0006D7-Ga; Mon, 06 Jul 2020 17:07:43 +0000
+	id 1jsUbW-0006JG-QX; Mon, 06 Jul 2020 17:08:30 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hiqY=AR=gmail.com=alistair23@srs-us1.protection.inumbo.net>)
- id 1jsUaj-0006Cx-TH
- for xen-devel@lists.xenproject.org; Mon, 06 Jul 2020 17:07:41 +0000
-X-Inumbo-ID: 338f3dee-bfab-11ea-bb8b-bc764e2007e4
-Received: from mail-io1-xd43.google.com (unknown [2607:f8b0:4864:20::d43])
+ id 1jsUbV-0006J7-0k
+ for xen-devel@lists.xenproject.org; Mon, 06 Jul 2020 17:08:29 +0000
+X-Inumbo-ID: 4f9cddca-bfab-11ea-bb8b-bc764e2007e4
+Received: from mail-il1-x144.google.com (unknown [2607:f8b0:4864:20::144])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 338f3dee-bfab-11ea-bb8b-bc764e2007e4;
- Mon, 06 Jul 2020 17:07:41 +0000 (UTC)
-Received: by mail-io1-xd43.google.com with SMTP id q74so16558443iod.1
- for <xen-devel@lists.xenproject.org>; Mon, 06 Jul 2020 10:07:41 -0700 (PDT)
+ id 4f9cddca-bfab-11ea-bb8b-bc764e2007e4;
+ Mon, 06 Jul 2020 17:08:28 +0000 (UTC)
+Received: by mail-il1-x144.google.com with SMTP id r12so26334875ilh.4
+ for <xen-devel@lists.xenproject.org>; Mon, 06 Jul 2020 10:08:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
  :cc:content-transfer-encoding;
- bh=dBgIVLKA0exdXkprZM6w2CG1AHicJslD0tUu5CxlPMg=;
- b=iqkaVDc+Prmll7W77QI2rjsviIcN5ukUeuzuaQ0p2o0zCEfPG0UufK2FbcqQBNBIWA
- guTgtEdhEKGxejAPHA9tMZmUDN3oLd7C2F0fKRP3owIBf/3tZ11gV8WrZd1M/ig0wQ6V
- kMYCtvlGTOSJe6qG/h8lVqrP3vA+s8CU5gCDC1Wp0auG8Myfi+4wBJ7sve4nUfxtUQa8
- WHp/NFGJDmm4uIEFnPQD7R6ve34GdwcRK7lZxMbn/Dt8nvSuLcJnM1PTi7aYL2e3L8UN
- MvCrzRJl874oVwv+GY8to2rSNjmgWVf0WumbR206I4OuAAVCHdu/C1OKKjCgdQQZOSva
- 47bQ==
+ bh=aJ+NMNUyWOSeU76/wZH/xOla8z/F8BGLKK6NO+daT7c=;
+ b=DCtHRVbfbNdZdHrkno7Pg0sSHF/TO28JTJSsk4CQyuv3rpTGwPimzgtRdeipMmeYC8
+ aUYtMHdn8ZYb548p0TC5sD7ZpYCJiiGQvNkmx5Fh+Y1+2AWdNXgyTbZF5g/nSA0CaFXC
+ xiRGdWCgbqjAb5Jb4EW+JexNsAlDtpzx8H6+qoa4BE4MW1vaDJzHgM4Qc/aMXC3ErDa+
+ xscFDbu167g1VZgMknCoWSYpzxdRsorPrRCP5QF0sWCErssL7NXmx5bWwMfBYg4XsY6P
+ iFeF9TqxPGvbOg5sN22Y7ZvG9cGuDvhz6MRZPNAzvoxaV4xjYoy11GgiUBRGvz6pcpCz
+ OlkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc:content-transfer-encoding;
- bh=dBgIVLKA0exdXkprZM6w2CG1AHicJslD0tUu5CxlPMg=;
- b=mIha8bW/bb1IQhS1fHi5QCHsw/oxYmR4XWFSrXNHl40B3z2KLo2Ujk9CfTNoclGRNh
- 4KXD6j9PM/ramTjHdPkzNw1mt2XZ6LBK6h2uhPUVT7sFqw139r2vR6fybOacMFV6XKlR
- FW/4FzOQkkoyKqv7wpThLBedbJ6+vvQLNPeIKmLsc46C7WIgdNvaLucy8OV0LP7yVhGY
- bj5OV4OZig5KI8B2QwJMOsnYospzuSbg9bKCS/8b//yjLifqmaXThmW6/xc249iAkLbL
- LNUUwV1bv8t35pnjgAMGyDRcWjmgVfy5rqXC6TrIpK7YaodktioDWlDyWZM+OPml4kPo
- CJxw==
-X-Gm-Message-State: AOAM532tU1gE55liICQymgxswaoLbzsZ6lDqCe2u1PdODjwVKyTtbQHa
- GDK/NeWUQyOcgaKW5xyaJpE3BWCediMJs3CVKoM=
-X-Google-Smtp-Source: ABdhPJyw0KmkpT0wW3UGWOxj20T8QI719PAjvFEtTo4fBjXY/b+McPswSyw7q1t1bQm3ES8jp++ekpGyo8FkQ/2mlOY=
-X-Received: by 2002:a02:1a06:: with SMTP id 6mr55797272jai.8.1594055261111;
- Mon, 06 Jul 2020 10:07:41 -0700 (PDT)
+ bh=aJ+NMNUyWOSeU76/wZH/xOla8z/F8BGLKK6NO+daT7c=;
+ b=cio/iDavFzDTP3UQLIxEkoBIKZ/7bt2jOHiEPrIBP2UmHRG8SENCtLcbQMu2TCeB34
+ AnkP7hI+MhMlzB3+owM49MW8VmWz5edOSJ8flnLRWISThNQH3Bb9boPhSAveiBAcsB6l
+ XQMSk9W0omZCl4OjypAI4GH8VG5mxyQUcYzEmBMmkOrlmPwi7yCNAeWtaMVQhqSsMg9B
+ 6zimV2xw1HkMODoPCzgGVkxYb+6TJWUu/MamvTX4GfEbdHCnlrazZNaIxJrO6sORycaW
+ NOEw9yzRnMCaPUxQeqEaQBVPrpzdm+Wmc9ooAu0SMvOVWe176RinvZ4hedxe1/A1Vbth
+ aITw==
+X-Gm-Message-State: AOAM530jPdt7yeDSg4PEtZg5l72/i8YP90pDqq9gni1yedP3n0+2y+R6
+ LQsL8UXrT+tcnnx60ft1Q0HTz8LXkg8LOt+CxvU=
+X-Google-Smtp-Source: ABdhPJztbbycqoucR5VA9L3J/eqZEps73vsP7bMZlYGOF7l5+CP/IDu5wRU4G+LaN3QoYCbBFL9miKesApB55IKBhTM=
+X-Received: by 2002:a92:c213:: with SMTP id j19mr31628274ilo.40.1594055308108; 
+ Mon, 06 Jul 2020 10:08:28 -0700 (PDT)
 MIME-Version: 1.0
 References: <20200704144943.18292-1-f4bug@amsat.org>
- <20200704144943.18292-12-f4bug@amsat.org>
-In-Reply-To: <20200704144943.18292-12-f4bug@amsat.org>
+ <20200704144943.18292-13-f4bug@amsat.org>
+In-Reply-To: <20200704144943.18292-13-f4bug@amsat.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 6 Jul 2020 09:57:54 -0700
-Message-ID: <CAKmqyKMYzHasyz0-Fx5tbpzr2_369n7wxkmtSVubCOxPH1BrDQ@mail.gmail.com>
-Subject: Re: [PATCH 11/26] hw/usb/hcd-xhci: Add missing header
+Date: Mon, 6 Jul 2020 09:58:41 -0700
+Message-ID: <CAKmqyKP1PJVHc=At4EM_60NZrdkokwOW9iwvqTHBoaYShWLUYg@mail.gmail.com>
+Subject: Re: [PATCH 12/26] hw/usb/hcd-musb: Restrict header scope
 To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -113,11 +113,12 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Sat, Jul 4, 2020 at 7:54 AM Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org=
+On Sat, Jul 4, 2020 at 7:56 AM Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org=
 > wrote:
 >
-> This header uses the USBPort type which is forward declared
-> by "hw/usb.h".
+> "hcd-musb.h" is only required by USB device implementions.
+> As we keep these implementations in the hw/usb/ directory,
+> move the header there.
 >
 > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
 
@@ -126,22 +127,48 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  hw/usb/hcd-xhci.h | 2 ++
->  1 file changed, 2 insertions(+)
+>  {include/hw =3D> hw}/usb/hcd-musb.h | 0
+>  hw/usb/hcd-musb.c                 | 2 +-
+>  hw/usb/tusb6010.c                 | 2 +-
+>  3 files changed, 2 insertions(+), 2 deletions(-)
+>  rename {include/hw =3D> hw}/usb/hcd-musb.h (100%)
 >
-> diff --git a/hw/usb/hcd-xhci.h b/hw/usb/hcd-xhci.h
-> index 946af51fc2..8edbdc2c3e 100644
-> --- a/hw/usb/hcd-xhci.h
-> +++ b/hw/usb/hcd-xhci.h
-> @@ -22,6 +22,8 @@
->  #ifndef HW_USB_HCD_XHCI_H
->  #define HW_USB_HCD_XHCI_H
+> diff --git a/include/hw/usb/hcd-musb.h b/hw/usb/hcd-musb.h
+> similarity index 100%
+> rename from include/hw/usb/hcd-musb.h
+> rename to hw/usb/hcd-musb.h
+> diff --git a/hw/usb/hcd-musb.c b/hw/usb/hcd-musb.c
+> index 85f5ff5bd4..b8d8766a4a 100644
+> --- a/hw/usb/hcd-musb.c
+> +++ b/hw/usb/hcd-musb.c
+> @@ -23,9 +23,9 @@
+>  #include "qemu/osdep.h"
+>  #include "qemu/timer.h"
+>  #include "hw/usb.h"
+> -#include "hw/usb/hcd-musb.h"
+>  #include "hw/irq.h"
+>  #include "hw/hw.h"
+> +#include "hcd-musb.h"
 >
-> +#include "hw/usb.h"
-> +
->  #define TYPE_XHCI "base-xhci"
->  #define TYPE_NEC_XHCI "nec-usb-xhci"
->  #define TYPE_QEMU_XHCI "qemu-xhci"
+>  /* Common USB registers */
+>  #define MUSB_HDRC_FADDR                0x00    /* 8-bit */
+> diff --git a/hw/usb/tusb6010.c b/hw/usb/tusb6010.c
+> index 27eb28d3e4..9f9b81b09d 100644
+> --- a/hw/usb/tusb6010.c
+> +++ b/hw/usb/tusb6010.c
+> @@ -23,11 +23,11 @@
+>  #include "qemu/module.h"
+>  #include "qemu/timer.h"
+>  #include "hw/usb.h"
+> -#include "hw/usb/hcd-musb.h"
+>  #include "hw/arm/omap.h"
+>  #include "hw/hw.h"
+>  #include "hw/irq.h"
+>  #include "hw/sysbus.h"
+> +#include "hcd-musb.h"
+>
+>  #define TYPE_TUSB6010 "tusb6010"
+>  #define TUSB(obj) OBJECT_CHECK(TUSBState, (obj), TYPE_TUSB6010)
 > --
 > 2.21.3
 >
