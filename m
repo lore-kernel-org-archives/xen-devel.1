@@ -2,79 +2,86 @@ Return-Path: <SRS0=v0bc=AS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3960AC433E0
-	for <xen-devel@archiver.kernel.org>; Tue,  7 Jul 2020 19:40:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6994FC433E1
+	for <xen-devel@archiver.kernel.org>; Tue,  7 Jul 2020 19:41:15 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 17F46206BE
-	for <xen-devel@archiver.kernel.org>; Tue,  7 Jul 2020 19:40:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 17F46206BE
+	by mail.kernel.org (Postfix) with ESMTPS id 4A1F0206BE
+	for <xen-devel@archiver.kernel.org>; Tue,  7 Jul 2020 19:41:15 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4A1F0206BE
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=cert.pl
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jstSO-0007ep-0f; Tue, 07 Jul 2020 19:40:44 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jstSj-0007oG-Ja; Tue, 07 Jul 2020 19:41:05 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=CHg+=AS=cert.pl=michal.leszczynski@srs-us1.protection.inumbo.net>)
- id 1jstSM-0007ao-VY
- for xen-devel@lists.xenproject.org; Tue, 07 Jul 2020 19:40:42 +0000
-X-Inumbo-ID: b7fb4044-c089-11ea-bb8b-bc764e2007e4
+ id 1jstSj-0007no-23
+ for xen-devel@lists.xenproject.org; Tue, 07 Jul 2020 19:41:05 +0000
+X-Inumbo-ID: c98e3e7e-c089-11ea-8de3-12813bfff9fa
 Received: from bagnar.nask.net.pl (unknown [195.187.242.196])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b7fb4044-c089-11ea-bb8b-bc764e2007e4;
- Tue, 07 Jul 2020 19:40:32 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id c98e3e7e-c089-11ea-8de3-12813bfff9fa;
+ Tue, 07 Jul 2020 19:41:02 +0000 (UTC)
 Received: from bagnar.nask.net.pl (unknown [172.16.9.10])
- by bagnar.nask.net.pl (Postfix) with ESMTP id 45DD5A2657;
- Tue,  7 Jul 2020 21:40:31 +0200 (CEST)
+ by bagnar.nask.net.pl (Postfix) with ESMTP id E789EA26AF;
+ Tue,  7 Jul 2020 21:41:00 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by bagnar.nask.net.pl (Postfix) with ESMTP id 2DAB7A261F;
- Tue,  7 Jul 2020 21:40:30 +0200 (CEST)
+ by bagnar.nask.net.pl (Postfix) with ESMTP id E4FA5A2675;
+ Tue,  7 Jul 2020 21:40:59 +0200 (CEST)
+X-Amavis-Alert: BAD HEADER SECTION, Duplicate header field: "References"
 Received: from bagnar.nask.net.pl ([127.0.0.1])
  by localhost (bagnar.nask.net.pl [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id A7sP2nFKaCHb; Tue,  7 Jul 2020 21:40:29 +0200 (CEST)
+ with ESMTP id tpwVciS3kWfD; Tue,  7 Jul 2020 21:40:59 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by bagnar.nask.net.pl (Postfix) with ESMTP id 76ADDA265A;
- Tue,  7 Jul 2020 21:40:29 +0200 (CEST)
+ by bagnar.nask.net.pl (Postfix) with ESMTP id 79919A26A3;
+ Tue,  7 Jul 2020 21:40:59 +0200 (CEST)
 X-Virus-Scanned: amavisd-new at bagnar.nask.net.pl
+X-Amavis-Alert: BAD HEADER SECTION, Duplicate header field: "References"
 Received: from bagnar.nask.net.pl ([127.0.0.1])
  by localhost (bagnar.nask.net.pl [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id S1odB7LY9wkz; Tue,  7 Jul 2020 21:40:29 +0200 (CEST)
+ with ESMTP id R9EPWexH40j8; Tue,  7 Jul 2020 21:40:59 +0200 (CEST)
 Received: from belindir.nask.net.pl (belindir-ext.nask.net.pl
  [195.187.242.210])
- by bagnar.nask.net.pl (Postfix) with ESMTP id 3E4C7A2646;
- Tue,  7 Jul 2020 21:40:29 +0200 (CEST)
+ by bagnar.nask.net.pl (Postfix) with ESMTP id 4FFA3A261F;
+ Tue,  7 Jul 2020 21:40:59 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by belindir.nask.net.pl (Postfix) with ESMTP id 192B622466;
- Tue,  7 Jul 2020 21:39:59 +0200 (CEST)
+ by belindir.nask.net.pl (Postfix) with ESMTP id BEE562247F;
+ Tue,  7 Jul 2020 21:40:04 +0200 (CEST)
+X-Amavis-Alert: BAD HEADER SECTION, Duplicate header field: "References"
 Received: from belindir.nask.net.pl ([127.0.0.1])
  by localhost (belindir.nask.net.pl [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id ziXmPpBNaCej; Tue,  7 Jul 2020 21:39:53 +0200 (CEST)
+ with ESMTP id fYEdaYTL948b; Tue,  7 Jul 2020 21:39:59 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by belindir.nask.net.pl (Postfix) with ESMTP id 4AA252230B;
- Tue,  7 Jul 2020 21:39:53 +0200 (CEST)
+ by belindir.nask.net.pl (Postfix) with ESMTP id 0B00922456;
+ Tue,  7 Jul 2020 21:39:54 +0200 (CEST)
+X-Quarantine-ID: <hw4v3GfJxCBR>
 X-Virus-Scanned: amavisd-new at belindir.nask.net.pl
+X-Amavis-Alert: BAD HEADER SECTION, Duplicate header field: "References"
 Received: from belindir.nask.net.pl ([127.0.0.1])
  by localhost (belindir.nask.net.pl [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id Gzc46ntvovfp; Tue,  7 Jul 2020 21:39:53 +0200 (CEST)
+ with ESMTP id hw4v3GfJxCBR; Tue,  7 Jul 2020 21:39:53 +0200 (CEST)
 Received: from mq-desktop.cert.pl (unknown [195.187.238.217])
- by belindir.nask.net.pl (Postfix) with ESMTPSA id 13D8C21B7E;
+ by belindir.nask.net.pl (Postfix) with ESMTPSA id CD26022303;
  Tue,  7 Jul 2020 21:39:53 +0200 (CEST)
 From: =?UTF-8?q?Micha=C5=82=20Leszczy=C5=84ski?= <michal.leszczynski@cert.pl>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH v6 00/11] Implement support for external IPT monitoring
-Date: Tue,  7 Jul 2020 21:39:39 +0200
-Message-Id: <cover.1594150543.git.michal.leszczynski@cert.pl>
+Subject: [PATCH v6 08/11] x86/mm: add vmtrace_buf resource type
+Date: Tue,  7 Jul 2020 21:39:47 +0200
+Message-Id: <2129d21e7ef7e960951a8baafab01d9392dff8f3.1594150543.git.michal.leszczynski@cert.pl>
 X-Mailer: git-send-email 2.17.1
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <cover.1594150543.git.michal.leszczynski@cert.pl>
+References: <cover.1594150543.git.michal.leszczynski@cert.pl>
+In-Reply-To: <cover.1594150543.git.michal.leszczynski@cert.pl>
+References: <cover.1594150543.git.michal.leszczynski@cert.pl>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -85,135 +92,89 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Julien Grall <julien@xen.org>, Kevin Tian <kevin.tian@intel.com>,
- Stefano Stabellini <sstabellini@kernel.org>, luwei.kang@intel.com,
- Jun Nakajima <jun.nakajima@intel.com>, Wei Liu <wl@xen.org>,
+Cc: Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ luwei.kang@intel.com, Wei Liu <wl@xen.org>,
  Andrew Cooper <andrew.cooper3@citrix.com>,
+ Michal Leszczynski <michal.leszczynski@cert.pl>,
  Ian Jackson <ian.jackson@eu.citrix.com>,
  George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
- Anthony PERARD <anthony.perard@citrix.com>, tamas.lengyel@intel.com,
- =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+ tamas.lengyel@intel.com
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Intel Processor Trace is an architectural extension available in modern I=
-ntel=20
-family CPUs. It allows recording the detailed trace of activity while the=
-=20
-processor executes the code. One might use the recorded trace to reconstr=
-uct=20
-the code flow. It means, to find out the executed code paths, determine=20
-branches taken, and so forth.
+From: Michal Leszczynski <michal.leszczynski@cert.pl>
 
-The abovementioned feature is described in Intel(R) 64 and IA-32 Architec=
-tures=20
-Software Developer's Manual Volume 3C: System Programming Guide, Part 3,=20
-Chapter 36: "Intel Processor Trace."
+Allow to map processor trace buffer using
+acquire_resource().
 
-This patch series implements an interface that Dom0 could use in order to=
-=20
-enable IPT for particular vCPUs in DomU, allowing for external monitoring=
-. Such=20
-a feature has numerous applications like malware monitoring, fuzzing, or=20
-performance testing.
+Signed-off-by: Michal Leszczynski <michal.leszczynski@cert.pl>
+---
+ xen/common/memory.c         | 31 +++++++++++++++++++++++++++++++
+ xen/include/public/memory.h |  1 +
+ 2 files changed, 32 insertions(+)
 
-Also thanks to Tamas K Lengyel for a few preliminary hints before
-first version of this patch was submitted to xen-devel.
-
-Changed since v1:
-  * MSR_RTIT_CTL is managed using MSR load lists
-  * other PT-related MSRs are modified only when vCPU goes out of context
-  * trace buffer is now acquired as a resource
-  * added vmtrace_pt_size parameter in xl.cfg, the size of trace buffer
-    must be specified in the moment of domain creation
-  * trace buffers are allocated on domain creation, destructed on
-    domain destruction
-  * HVMOP_vmtrace_ipt_enable/disable is limited to enabling/disabling PT
-    these calls don't manage buffer memory anymore
-  * lifted 32 MFN/GFN array limit when acquiring resources
-  * minor code style changes according to review
-
-Changed since v2:
-  * trace buffer is now allocated on domain creation (in v2 it was
-    allocated when hvm param was set)
-  * restored 32-item limit in mfn/gfn arrays in acquire_resource
-    and instead implemented hypercall continuations
-  * code changes according to Jan's and Roger's review
-
-Changed since v3:
-  * vmtrace HVMOPs are not implemented as DOMCTLs
-  * patches splitted up according to Andrew's comments
-  * code changes according to v3 review on the mailing list
-
-Changed since v4:
-  * rebased to commit be63d9d4
-  * fixed dependencies between patches
-    (earlier patches don't reference further patches)
-  * introduced preemption check in acquire_resource
-  * moved buffer allocation to common code
-  * splitted some patches according to code review
-  * minor fixes according to code review
-
-Changed since v5:
-  * trace buffer size is now dynamically determined by the proctrace
-    tool
-  * trace buffer size variable is uniformly defined as uint32_t
-    processor_trace_buf_kb in hypervisor, toolstack and ABI
-  * buffer pages are not freed explicitly but reference count is
-    now used instead
-  * minor fixes according to code review
-
-This patch series is available on GitHub:
-https://github.com/icedevml/xen/tree/ipt-patch-v6
-
-
-Michal Leszczynski (11):
-  memory: batch processing in acquire_resource()
-  x86/vmx: add Intel PT MSR definitions
-  x86/vmx: add IPT cpu feature
-  common: add vmtrace_pt_size domain parameter
-  tools/libxl: add vmtrace_pt_size parameter
-  x86/hvm: processor trace interface in HVM
-  x86/vmx: implement IPT in VMX
-  x86/mm: add vmtrace_buf resource type
-  x86/domctl: add XEN_DOMCTL_vmtrace_op
-  tools/libxc: add xc_vmtrace_* functions
-  tools/proctrace: add proctrace tool
-
- docs/man/xl.cfg.5.pod.in                    |  13 ++
- tools/golang/xenlight/helpers.gen.go        |   2 +
- tools/golang/xenlight/types.gen.go          |   1 +
- tools/libxc/Makefile                        |   1 +
- tools/libxc/include/xenctrl.h               |  40 +++++
- tools/libxc/xc_vmtrace.c                    |  87 ++++++++++
- tools/libxl/libxl.h                         |   8 +
- tools/libxl/libxl_create.c                  |   1 +
- tools/libxl/libxl_types.idl                 |   4 +
- tools/proctrace/Makefile                    |  45 +++++
- tools/proctrace/proctrace.c                 | 179 ++++++++++++++++++++
- tools/xl/xl_parse.c                         |  22 +++
- xen/arch/x86/domain.c                       |  27 +++
- xen/arch/x86/domctl.c                       |  50 ++++++
- xen/arch/x86/hvm/vmx/vmcs.c                 |  15 +-
- xen/arch/x86/hvm/vmx/vmx.c                  | 110 ++++++++++++
- xen/common/domain.c                         |  46 +++++
- xen/common/memory.c                         |  80 ++++++++-
- xen/include/asm-x86/cpufeature.h            |   1 +
- xen/include/asm-x86/hvm/hvm.h               |  20 +++
- xen/include/asm-x86/hvm/vmx/vmcs.h          |   4 +
- xen/include/asm-x86/hvm/vmx/vmx.h           |  14 ++
- xen/include/asm-x86/msr-index.h             |  24 +++
- xen/include/public/arch-x86/cpufeatureset.h |   1 +
- xen/include/public/domctl.h                 |  29 ++++
- xen/include/public/memory.h                 |   1 +
- xen/include/xen/domain.h                    |   2 +
- xen/include/xen/sched.h                     |   7 +
- 28 files changed, 828 insertions(+), 6 deletions(-)
- create mode 100644 tools/libxc/xc_vmtrace.c
- create mode 100644 tools/proctrace/Makefile
- create mode 100644 tools/proctrace/proctrace.c
-
---=20
+diff --git a/xen/common/memory.c b/xen/common/memory.c
+index eb42f883df..c0a22eb60f 100644
+--- a/xen/common/memory.c
++++ b/xen/common/memory.c
+@@ -1007,6 +1007,32 @@ static long xatp_permission_check(struct domain *d, unsigned int space)
+     return xsm_add_to_physmap(XSM_TARGET, current->domain, d);
+ }
+ 
++static int acquire_vmtrace_buf(struct domain *d, unsigned int id,
++                               uint64_t frame,
++                               uint64_t nr_frames,
++                               xen_pfn_t mfn_list[])
++{
++    mfn_t mfn;
++    unsigned int i;
++    uint64_t size;
++    struct vcpu *v = domain_vcpu(d, id);
++
++    if ( !v || !v->vmtrace.pt_buf )
++        return -EINVAL;
++
++    mfn = page_to_mfn(v->vmtrace.pt_buf);
++    size = v->domain->processor_trace_buf_kb * KB(1);
++
++    if ( (frame > (size >> PAGE_SHIFT)) ||
++         (nr_frames > ((size >> PAGE_SHIFT) - frame)) )
++        return -EINVAL;
++
++    for ( i = 0; i < nr_frames; i++ )
++        mfn_list[i] = mfn_x(mfn_add(mfn, frame + i));
++
++    return 0;
++}
++
+ static int acquire_grant_table(struct domain *d, unsigned int id,
+                                unsigned long frame,
+                                unsigned int nr_frames,
+@@ -1117,6 +1143,11 @@ static int acquire_resource(
+                                  mfn_list);
+         break;
+ 
++    case XENMEM_resource_vmtrace_buf:
++        rc = acquire_vmtrace_buf(d, xmar.id, xmar.frame, xmar.nr_frames,
++                                 mfn_list);
++        break;
++
+     default:
+         rc = arch_acquire_resource(d, xmar.type, xmar.id, xmar.frame,
+                                    xmar.nr_frames, mfn_list);
+diff --git a/xen/include/public/memory.h b/xen/include/public/memory.h
+index 21057ed78e..f4c905a10e 100644
+--- a/xen/include/public/memory.h
++++ b/xen/include/public/memory.h
+@@ -625,6 +625,7 @@ struct xen_mem_acquire_resource {
+ 
+ #define XENMEM_resource_ioreq_server 0
+ #define XENMEM_resource_grant_table 1
++#define XENMEM_resource_vmtrace_buf 2
+ 
+     /*
+      * IN - a type-specific resource identifier, which must be zero
+-- 
 2.17.1
 
 
