@@ -2,86 +2,79 @@ Return-Path: <SRS0=v0bc=AS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D8CEC433E0
-	for <xen-devel@archiver.kernel.org>; Tue,  7 Jul 2020 19:41:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BF516C433E0
+	for <xen-devel@archiver.kernel.org>; Tue,  7 Jul 2020 19:44:33 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2C437206BE
-	for <xen-devel@archiver.kernel.org>; Tue,  7 Jul 2020 19:41:34 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2C437206BE
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=cert.pl
+	by mail.kernel.org (Postfix) with ESMTPS id 9282C206BE
+	for <xen-devel@archiver.kernel.org>; Tue,  7 Jul 2020 19:44:33 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="SK0gdn0I"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9282C206BE
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jstSz-00082p-GW; Tue, 07 Jul 2020 19:41:21 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=CHg+=AS=cert.pl=michal.leszczynski@srs-us1.protection.inumbo.net>)
- id 1jstSy-0007no-16
- for xen-devel@lists.xenproject.org; Tue, 07 Jul 2020 19:41:20 +0000
-X-Inumbo-ID: c9c1d00f-c089-11ea-8de3-12813bfff9fa
-Received: from bagnar.nask.net.pl (unknown [195.187.242.196])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id c9c1d00f-c089-11ea-8de3-12813bfff9fa;
- Tue, 07 Jul 2020 19:41:02 +0000 (UTC)
-Received: from bagnar.nask.net.pl (unknown [172.16.9.10])
- by bagnar.nask.net.pl (Postfix) with ESMTP id 9D8B7A26B9;
- Tue,  7 Jul 2020 21:41:01 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
- by bagnar.nask.net.pl (Postfix) with ESMTP id 9461AA26BD;
- Tue,  7 Jul 2020 21:41:00 +0200 (CEST)
-X-Amavis-Alert: BAD HEADER SECTION, Duplicate header field: "References"
-Received: from bagnar.nask.net.pl ([127.0.0.1])
- by localhost (bagnar.nask.net.pl [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id AHbW4AukT979; Tue,  7 Jul 2020 21:40:59 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
- by bagnar.nask.net.pl (Postfix) with ESMTP id A0EAEA2691;
- Tue,  7 Jul 2020 21:40:59 +0200 (CEST)
-X-Virus-Scanned: amavisd-new at bagnar.nask.net.pl
-X-Amavis-Alert: BAD HEADER SECTION, Duplicate header field: "References"
-Received: from bagnar.nask.net.pl ([127.0.0.1])
- by localhost (bagnar.nask.net.pl [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id ciAltz9WSXP5; Tue,  7 Jul 2020 21:40:59 +0200 (CEST)
-Received: from belindir.nask.net.pl (belindir-ext.nask.net.pl
- [195.187.242.210])
- by bagnar.nask.net.pl (Postfix) with ESMTP id 7CD8CA26A8;
- Tue,  7 Jul 2020 21:40:59 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
- by belindir.nask.net.pl (Postfix) with ESMTP id 68EDD2242F;
- Tue,  7 Jul 2020 21:40:05 +0200 (CEST)
-X-Amavis-Alert: BAD HEADER SECTION, Duplicate header field: "References"
-Received: from belindir.nask.net.pl ([127.0.0.1])
- by localhost (belindir.nask.net.pl [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id XSkxh8RtH51F; Tue,  7 Jul 2020 21:39:59 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
- by belindir.nask.net.pl (Postfix) with ESMTP id 367FC22426;
- Tue,  7 Jul 2020 21:39:54 +0200 (CEST)
-X-Quarantine-ID: <R1Vij3rUE1XP>
-X-Virus-Scanned: amavisd-new at belindir.nask.net.pl
-X-Amavis-Alert: BAD HEADER SECTION, Duplicate header field: "References"
-Received: from belindir.nask.net.pl ([127.0.0.1])
- by localhost (belindir.nask.net.pl [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id R1Vij3rUE1XP; Tue,  7 Jul 2020 21:39:54 +0200 (CEST)
-Received: from mq-desktop.cert.pl (unknown [195.187.238.217])
- by belindir.nask.net.pl (Postfix) with ESMTPSA id F013422450;
- Tue,  7 Jul 2020 21:39:53 +0200 (CEST)
-From: =?UTF-8?q?Micha=C5=82=20Leszczy=C5=84ski?= <michal.leszczynski@cert.pl>
-To: xen-devel@lists.xenproject.org
-Subject: [PATCH v6 10/11] tools/libxc: add xc_vmtrace_* functions
-Date: Tue,  7 Jul 2020 21:39:49 +0200
-Message-Id: <476203bca92f1fb0e8de2be2bcfb88695a5688f8.1594150543.git.michal.leszczynski@cert.pl>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <cover.1594150543.git.michal.leszczynski@cert.pl>
-References: <cover.1594150543.git.michal.leszczynski@cert.pl>
-In-Reply-To: <cover.1594150543.git.michal.leszczynski@cert.pl>
-References: <cover.1594150543.git.michal.leszczynski@cert.pl>
+	id 1jstVq-0000JF-0z; Tue, 07 Jul 2020 19:44:18 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=Om5Q=AS=redhat.com=eblake@srs-us1.protection.inumbo.net>)
+ id 1jstVo-0000J2-Sp
+ for xen-devel@lists.xenproject.org; Tue, 07 Jul 2020 19:44:16 +0000
+X-Inumbo-ID: 3d3ea318-c08a-11ea-bca7-bc764e2007e4
+Received: from us-smtp-1.mimecast.com (unknown [207.211.31.120])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+ id 3d3ea318-c08a-11ea-bca7-bc764e2007e4;
+ Tue, 07 Jul 2020 19:44:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1594151054;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=ZfMfperoI6IR1+/lO21emHFoYMQUVo5XjIjuDXPGCjc=;
+ b=SK0gdn0IFQQlFTzvjUrrzEw03W8s3EGInuk83Y7lk6/QVgUVxWKv4L+sQeLkAKwv5C/qLY
+ 8CTsKIRLoQqPPBg0H8NuLW7Hz0OKVt49mnr8e+s9OheaRBfu/vBiDsnCFwdxGy0gaRYXYT
+ y4N3KzuWLgV8n8vpJthLXDrFzFSDtD4=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-309-FVu01SLLMvS_nSwA9aNUZw-1; Tue, 07 Jul 2020 15:44:11 -0400
+X-MC-Unique: FVu01SLLMvS_nSwA9aNUZw-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+ [10.5.11.14])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 3B9458015FA;
+ Tue,  7 Jul 2020 19:44:09 +0000 (UTC)
+Received: from [10.3.115.46] (ovpn-115-46.phx2.redhat.com [10.3.115.46])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 3B4715D9DC;
+ Tue,  7 Jul 2020 19:43:55 +0000 (UTC)
+Subject: Re: [PATCH v12 7/8] nbd: Use ERRP_AUTO_PROPAGATE()
+To: Markus Armbruster <armbru@redhat.com>, qemu-devel@nongnu.org
+References: <20200707165037.1026246-1-armbru@redhat.com>
+ <20200707165037.1026246-8-armbru@redhat.com>
+From: Eric Blake <eblake@redhat.com>
+Organization: Red Hat, Inc.
+Message-ID: <88ceae2e-eb02-de34-9210-354423bab4a4@redhat.com>
+Date: Tue, 7 Jul 2020 14:43:54 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.9.0
+MIME-Version: 1.0
+In-Reply-To: <20200707165037.1026246-8-armbru@redhat.com>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=eblake@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -92,181 +85,59 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: luwei.kang@intel.com, Michal Leszczynski <michal.leszczynski@cert.pl>,
- tamas.lengyel@intel.com, Ian Jackson <ian.jackson@eu.citrix.com>,
- Wei Liu <wl@xen.org>
+Cc: Kevin Wolf <kwolf@redhat.com>, vsementsov@virtuozzo.com,
+ qemu-block@nongnu.org, Paul Durrant <paul@xen.org>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
+ Christian Schoenebeck <qemu_oss@crudebyte.com>,
+ Michael Roth <mdroth@linux.vnet.ibm.com>, groug@kaod.org,
+ Stefano Stabellini <sstabellini@kernel.org>, Gerd Hoffmann <kraxel@redhat.com>,
+ Stefan Hajnoczi <stefanha@redhat.com>,
+ Anthony Perard <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org,
+ Max Reitz <mreitz@redhat.com>, Laszlo Ersek <lersek@redhat.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: Michal Leszczynski <michal.leszczynski@cert.pl>
+On 7/7/20 11:50 AM, Markus Armbruster wrote:
+> From: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
+> 
+> If we want to add some info to errp (by error_prepend() or
+> error_append_hint()), we must use the ERRP_AUTO_PROPAGATE macro.
+> Otherwise, this info will not be added when errp == &error_fatal
+> (the program will exit prior to the error_append_hint() or
+> error_prepend() call).  Fix such cases.
+> 
+> If we want to check error after errp-function call, we need to
+> introduce local_err and then propagate it to errp. Instead, use
+> ERRP_AUTO_PROPAGATE macro, benefits are:
+> 1. No need of explicit error_propagate call
+> 2. No need of explicit local_err variable: use errp directly
+> 3. ERRP_AUTO_PROPAGATE leaves errp as is if it's not NULL or
+>     &error_fatal, this means that we don't break error_abort
+>     (we'll abort on error_set, not on error_propagate)
+> 
+> This commit is generated by command
+> 
+>      sed -n '/^Network Block Device (NBD)$/,/^$/{s/^F: //p}' \
+>          MAINTAINERS | \
+>      xargs git ls-files | grep '\.[hc]$' | \
+>      xargs spatch \
+>          --sp-file scripts/coccinelle/auto-propagated-errp.cocci \
+>          --macro-file scripts/cocci-macro-file.h \
+>          --in-place --no-show-diff --max-width 80
+> 
+> Reported-by: Kevin Wolf <kwolf@redhat.com>
+> Reported-by: Greg Kurz <groug@kaod.org>
+> Signed-off-by: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
+> Reviewed-by: Markus Armbruster <armbru@redhat.com>
+> [Commit message tweaked]
+> Signed-off-by: Markus Armbruster <armbru@redhat.com>
+> ---
 
-Add functions in libxc that use the new XEN_DOMCTL_vmtrace interface.
+Reviewed-by: Eric Blake <eblake@redhat.com>
 
-Signed-off-by: Michal Leszczynski <michal.leszczynski@cert.pl>
----
- tools/libxc/Makefile          |  1 +
- tools/libxc/include/xenctrl.h | 40 ++++++++++++++++
- tools/libxc/xc_vmtrace.c      | 87 +++++++++++++++++++++++++++++++++++
- 3 files changed, 128 insertions(+)
- create mode 100644 tools/libxc/xc_vmtrace.c
-
-diff --git a/tools/libxc/Makefile b/tools/libxc/Makefile
-index fae5969a73..605e44501d 100644
---- a/tools/libxc/Makefile
-+++ b/tools/libxc/Makefile
-@@ -27,6 +27,7 @@ CTRL_SRCS-y       += xc_csched2.c
- CTRL_SRCS-y       += xc_arinc653.c
- CTRL_SRCS-y       += xc_rt.c
- CTRL_SRCS-y       += xc_tbuf.c
-+CTRL_SRCS-y       += xc_vmtrace.c
- CTRL_SRCS-y       += xc_pm.c
- CTRL_SRCS-y       += xc_cpu_hotplug.c
- CTRL_SRCS-y       += xc_resume.c
-diff --git a/tools/libxc/include/xenctrl.h b/tools/libxc/include/xenctrl.h
-index 4c89b7294c..491b2c3236 100644
---- a/tools/libxc/include/xenctrl.h
-+++ b/tools/libxc/include/xenctrl.h
-@@ -1585,6 +1585,46 @@ int xc_tbuf_set_cpu_mask(xc_interface *xch, xc_cpumap_t mask);
- 
- int xc_tbuf_set_evt_mask(xc_interface *xch, uint32_t mask);
- 
-+/**
-+ * Enable processor trace for given vCPU in given DomU.
-+ * Allocate the trace ringbuffer with given size.
-+ *
-+ * @parm xch a handle to an open hypervisor interface
-+ * @parm domid domain identifier
-+ * @parm vcpu vcpu identifier
-+ * @return 0 on success, -1 on failure
-+ */
-+int xc_vmtrace_pt_enable(xc_interface *xch, uint32_t domid,
-+                         uint32_t vcpu);
-+
-+/**
-+ * Disable processor trace for given vCPU in given DomU.
-+ * Deallocate the trace ringbuffer.
-+ *
-+ * @parm xch a handle to an open hypervisor interface
-+ * @parm domid domain identifier
-+ * @parm vcpu vcpu identifier
-+ * @return 0 on success, -1 on failure
-+ */
-+int xc_vmtrace_pt_disable(xc_interface *xch, uint32_t domid,
-+                          uint32_t vcpu);
-+
-+/**
-+ * Get current offset inside the trace ringbuffer.
-+ * This allows to determine how much data was written into the buffer.
-+ * Once buffer overflows, the offset will reset to 0 and the previous
-+ * data will be overriden.
-+ *
-+ * @parm xch a handle to an open hypervisor interface
-+ * @parm domid domain identifier
-+ * @parm vcpu vcpu identifier
-+ * @parm offset current offset inside trace buffer will be written there
-+ * @parm size the total size of the trace buffer (in bytes)
-+ * @return 0 on success, -1 on failure
-+ */
-+int xc_vmtrace_pt_get_offset(xc_interface *xch, uint32_t domid,
-+                             uint32_t vcpu, uint64_t *offset, uint64_t *size);
-+
- int xc_domctl(xc_interface *xch, struct xen_domctl *domctl);
- int xc_sysctl(xc_interface *xch, struct xen_sysctl *sysctl);
- 
-diff --git a/tools/libxc/xc_vmtrace.c b/tools/libxc/xc_vmtrace.c
-new file mode 100644
-index 0000000000..ee034da8d3
---- /dev/null
-+++ b/tools/libxc/xc_vmtrace.c
-@@ -0,0 +1,87 @@
-+/******************************************************************************
-+ * xc_vmtrace.c
-+ *
-+ * API for manipulating hardware tracing features
-+ *
-+ * Copyright (c) 2020, Michal Leszczynski
-+ *
-+ * Copyright 2020 CERT Polska. All rights reserved.
-+ * Use is subject to license terms.
-+ *
-+ * This library is free software; you can redistribute it and/or
-+ * modify it under the terms of the GNU Lesser General Public
-+ * License as published by the Free Software Foundation;
-+ * version 2.1 of the License.
-+ *
-+ * This library is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-+ * Lesser General Public License for more details.
-+ *
-+ * You should have received a copy of the GNU Lesser General Public
-+ * License along with this library; If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#include "xc_private.h"
-+#include <xen/trace.h>
-+
-+int xc_vmtrace_pt_enable(
-+        xc_interface *xch, uint32_t domid, uint32_t vcpu)
-+{
-+    DECLARE_DOMCTL;
-+    int rc;
-+
-+    domctl.cmd = XEN_DOMCTL_vmtrace_op;
-+    domctl.domain = domid;
-+    domctl.u.vmtrace_op.cmd = XEN_DOMCTL_vmtrace_pt_enable;
-+    domctl.u.vmtrace_op.vcpu = vcpu;
-+    domctl.u.vmtrace_op.pad1 = 0;
-+    domctl.u.vmtrace_op.pad2 = 0;
-+
-+    rc = do_domctl(xch, &domctl);
-+    return rc;
-+}
-+
-+int xc_vmtrace_pt_get_offset(
-+        xc_interface *xch, uint32_t domid, uint32_t vcpu,
-+        uint64_t *offset, uint64_t *size)
-+{
-+    DECLARE_DOMCTL;
-+    int rc;
-+
-+    domctl.cmd = XEN_DOMCTL_vmtrace_op;
-+    domctl.domain = domid;
-+    domctl.u.vmtrace_op.cmd = XEN_DOMCTL_vmtrace_pt_get_offset;
-+    domctl.u.vmtrace_op.vcpu = vcpu;
-+    domctl.u.vmtrace_op.pad1 = 0;
-+    domctl.u.vmtrace_op.pad2 = 0;
-+
-+    rc = do_domctl(xch, &domctl);
-+    if ( !rc )
-+    {
-+        if (offset)
-+            *offset = domctl.u.vmtrace_op.offset;
-+
-+        if (size)
-+            *size = domctl.u.vmtrace_op.size;
-+    }
-+
-+    return rc;
-+}
-+
-+int xc_vmtrace_pt_disable(xc_interface *xch, uint32_t domid, uint32_t vcpu)
-+{
-+    DECLARE_DOMCTL;
-+    int rc;
-+
-+    domctl.cmd = XEN_DOMCTL_vmtrace_op;
-+    domctl.domain = domid;
-+    domctl.u.vmtrace_op.cmd = XEN_DOMCTL_vmtrace_pt_disable;
-+    domctl.u.vmtrace_op.vcpu = vcpu;
-+    domctl.u.vmtrace_op.pad1 = 0;
-+    domctl.u.vmtrace_op.pad2 = 0;
-+
-+    rc = do_domctl(xch, &domctl);
-+    return rc;
-+}
-+
 -- 
-2.17.1
+Eric Blake, Principal Software Engineer
+Red Hat, Inc.           +1-919-301-3226
+Virtualization:  qemu.org | libvirt.org
 
 
