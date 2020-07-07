@@ -7,72 +7,73 @@ X-Spam-Status: No, score=-6.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B166C433DF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8005FC433E1
 	for <xen-devel@archiver.kernel.org>; Tue,  7 Jul 2020 16:51:15 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 477AF2073E
+	by mail.kernel.org (Postfix) with ESMTPS id 475E22065D
 	for <xen-devel@archiver.kernel.org>; Tue,  7 Jul 2020 16:51:15 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="aSBpSdGN"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 477AF2073E
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="IdDMDYb/"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 475E22065D
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jsqo4-0000EH-Q3; Tue, 07 Jul 2020 16:50:56 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jsqo9-0000FB-Fm; Tue, 07 Jul 2020 16:51:01 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Gwtg=AS=redhat.com=armbru@srs-us1.protection.inumbo.net>)
- id 1jsqo3-0000Dr-5M
- for xen-devel@lists.xenproject.org; Tue, 07 Jul 2020 16:50:55 +0000
-X-Inumbo-ID: 04f59fd8-c072-11ea-b7bb-bc764e2007e4
-Received: from us-smtp-1.mimecast.com (unknown [207.211.31.81])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id 04f59fd8-c072-11ea-b7bb-bc764e2007e4;
- Tue, 07 Jul 2020 16:50:53 +0000 (UTC)
+ id 1jsqo8-0000Ey-IF
+ for xen-devel@lists.xenproject.org; Tue, 07 Jul 2020 16:51:00 +0000
+X-Inumbo-ID: 07f329a9-c072-11ea-8dc2-12813bfff9fa
+Received: from us-smtp-1.mimecast.com (unknown [205.139.110.61])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id 07f329a9-c072-11ea-8dc2-12813bfff9fa;
+ Tue, 07 Jul 2020 16:50:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1594140652;
+ s=mimecast20190719; t=1594140659;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=kTc4yRwO5a9XF+O06cElX+INNSFMrjGg1hnzHUx6ZOU=;
- b=aSBpSdGNECTHeybyoEgiQ9+/I91OHNtf7c59WTpSt6Bzl5c++iQf9oGyHQJPoWNEunc2vX
- qPSEqxOziyB8zC7Y/W4OPJsZ0QCbAnK52gqeug6MuEmSRy370spUUI20msi6EvDVBYcS2W
- d9dRNFzq5cNOhHON+TwAElysIA0XCNE=
+ bh=GtSQ9ltFDy+ZS6gTE2EcxmbrVjKJQ192ZTarFddQmh4=;
+ b=IdDMDYb/dEoY+IcSojtJq4x9TvwqizZgjdmay49JAj2Ox5uivpsDaZhhlUlMIHHRQEq0XB
+ kt2zhOLsOW4NViO3QKYTB9Hcb46uvSixtEPxtRw3X2PFSgIQoZHxzgowVMtPLwkynGqHMp
+ oNc0tsGch4HuRRSQl/HK1WxdHvaj59o=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-205-8gbxd39nN9aA_Cw08BWDdA-1; Tue, 07 Jul 2020 12:50:50 -0400
-X-MC-Unique: 8gbxd39nN9aA_Cw08BWDdA-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
+ us-mta-450-0UWQII4DOdu_QowMQ0wkdA-1; Tue, 07 Jul 2020 12:50:55 -0400
+X-MC-Unique: 0UWQII4DOdu_QowMQ0wkdA-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+ [10.5.11.16])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id B71BD1005510;
- Tue,  7 Jul 2020 16:50:48 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 39B2E80183C;
+ Tue,  7 Jul 2020 16:50:54 +0000 (UTC)
 Received: from blackfin.pond.sub.org (ovpn-112-143.ams2.redhat.com
  [10.36.112.143])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 98A2A5D9C9;
- Tue,  7 Jul 2020 16:50:42 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 8D5415C1D0;
+ Tue,  7 Jul 2020 16:50:48 +0000 (UTC)
 Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 25B3611328A3; Tue,  7 Jul 2020 18:50:37 +0200 (CEST)
+ id 3102611326F0; Tue,  7 Jul 2020 18:50:37 +0200 (CEST)
 From: Markus Armbruster <armbru@redhat.com>
 To: qemu-devel@nongnu.org
-Subject: [PATCH v12 3/8] sd: Use ERRP_AUTO_PROPAGATE()
-Date: Tue,  7 Jul 2020 18:50:32 +0200
-Message-Id: <20200707165037.1026246-4-armbru@redhat.com>
+Subject: [PATCH v12 6/8] virtio-9p: Use ERRP_AUTO_PROPAGATE()
+Date: Tue,  7 Jul 2020 18:50:35 +0200
+Message-Id: <20200707165037.1026246-7-armbru@redhat.com>
 In-Reply-To: <20200707165037.1026246-1-armbru@redhat.com>
 References: <20200707165037.1026246-1-armbru@redhat.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=armbru@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -114,8 +115,7 @@ ERRP_AUTO_PROPAGATE macro, benefits are:
 
 This commit is generated by command
 
-    sed -n '/^SD (Secure Card)$/,/^$/{s/^F: //p}' \
-        MAINTAINERS | \
+    sed -n '/^virtio-9p$/,/^$/{s/^F: //p}' MAINTAINERS | \
     xargs git ls-files | grep '\.[hc]$' | \
     xargs spatch \
         --sp-file scripts/coccinelle/auto-propagated-errp.cocci \
@@ -125,137 +125,69 @@ This commit is generated by command
 Reported-by: Kevin Wolf <kwolf@redhat.com>
 Reported-by: Greg Kurz <groug@kaod.org>
 Signed-off-by: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+Acked-by: Greg Kurz <groug@kaod.org>
+Reviewed-by: Christian Schoenebeck <qemu_oss@crudebyte.com>
 [Commit message tweaked]
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 ---
- hw/sd/sdhci-pci.c |  7 +++----
- hw/sd/sdhci.c     | 21 +++++++++------------
- hw/sd/ssi-sd.c    | 10 +++++-----
- 3 files changed, 17 insertions(+), 21 deletions(-)
+ hw/9pfs/9p-local.c | 12 +++++-------
+ hw/9pfs/9p.c       |  1 +
+ 2 files changed, 6 insertions(+), 7 deletions(-)
 
-diff --git a/hw/sd/sdhci-pci.c b/hw/sd/sdhci-pci.c
-index 4f5977d487..38ec572fc6 100644
---- a/hw/sd/sdhci-pci.c
-+++ b/hw/sd/sdhci-pci.c
-@@ -29,13 +29,12 @@ static Property sdhci_pci_properties[] = {
+diff --git a/hw/9pfs/9p-local.c b/hw/9pfs/9p-local.c
+index 54e012e5b4..0361e0c0b4 100644
+--- a/hw/9pfs/9p-local.c
++++ b/hw/9pfs/9p-local.c
+@@ -1479,10 +1479,10 @@ static void error_append_security_model_hint(Error *const *errp)
  
- static void sdhci_pci_realize(PCIDevice *dev, Error **errp)
+ static int local_parse_opts(QemuOpts *opts, FsDriverEntry *fse, Error **errp)
  {
 +    ERRP_AUTO_PROPAGATE();
-     SDHCIState *s = PCI_SDHCI(dev);
+     const char *sec_model = qemu_opt_get(opts, "security_model");
+     const char *path = qemu_opt_get(opts, "path");
+     const char *multidevs = qemu_opt_get(opts, "multidevs");
 -    Error *local_err = NULL;
  
-     sdhci_initfn(s);
--    sdhci_common_realize(s, &local_err);
--    if (local_err) {
--        error_propagate(errp, local_err);
-+    sdhci_common_realize(s, errp);
-+    if (*errp) {
-         return;
-     }
- 
-diff --git a/hw/sd/sdhci.c b/hw/sd/sdhci.c
-index eb2be6529e..be1928784d 100644
---- a/hw/sd/sdhci.c
-+++ b/hw/sd/sdhci.c
-@@ -1288,7 +1288,7 @@ static const MemoryRegionOps sdhci_mmio_ops = {
- 
- static void sdhci_init_readonly_registers(SDHCIState *s, Error **errp)
- {
--    Error *local_err = NULL;
-+    ERRP_AUTO_PROPAGATE();
- 
-     switch (s->sd_spec_version) {
-     case 2 ... 3:
-@@ -1299,9 +1299,8 @@ static void sdhci_init_readonly_registers(SDHCIState *s, Error **errp)
-     }
-     s->version = (SDHC_HCVER_VENDOR << 8) | (s->sd_spec_version - 1);
- 
--    sdhci_check_capareg(s, &local_err);
--    if (local_err) {
--        error_propagate(errp, local_err);
-+    sdhci_check_capareg(s, errp);
-+    if (*errp) {
-         return;
-     }
- }
-@@ -1332,11 +1331,10 @@ void sdhci_uninitfn(SDHCIState *s)
- 
- void sdhci_common_realize(SDHCIState *s, Error **errp)
- {
--    Error *local_err = NULL;
-+    ERRP_AUTO_PROPAGATE();
- 
--    sdhci_init_readonly_registers(s, &local_err);
--    if (local_err) {
--        error_propagate(errp, local_err);
-+    sdhci_init_readonly_registers(s, errp);
-+    if (*errp) {
-         return;
-     }
-     s->buf_maxsz = sdhci_get_fifolen(s);
-@@ -1456,13 +1454,12 @@ static void sdhci_sysbus_finalize(Object *obj)
- 
- static void sdhci_sysbus_realize(DeviceState *dev, Error **errp)
- {
-+    ERRP_AUTO_PROPAGATE();
-     SDHCIState *s = SYSBUS_SDHCI(dev);
-     SysBusDevice *sbd = SYS_BUS_DEVICE(dev);
--    Error *local_err = NULL;
- 
--    sdhci_common_realize(s, &local_err);
--    if (local_err) {
--        error_propagate(errp, local_err);
-+    sdhci_common_realize(s, errp);
-+    if (*errp) {
-         return;
-     }
- 
-diff --git a/hw/sd/ssi-sd.c b/hw/sd/ssi-sd.c
-index 3717b2e721..adb7fa9c24 100644
---- a/hw/sd/ssi-sd.c
-+++ b/hw/sd/ssi-sd.c
-@@ -241,10 +241,10 @@ static const VMStateDescription vmstate_ssi_sd = {
- 
- static void ssi_sd_realize(SSISlave *d, Error **errp)
- {
-+    ERRP_AUTO_PROPAGATE();
-     ssi_sd_state *s = SSI_SD(d);
-     DeviceState *carddev;
-     DriveInfo *dinfo;
--    Error *err = NULL;
- 
-     qbus_create_inplace(&s->sdbus, sizeof(s->sdbus), TYPE_SD_BUS,
-                         DEVICE(d), "sd-bus");
-@@ -255,23 +255,23 @@ static void ssi_sd_realize(SSISlave *d, Error **errp)
-     carddev = qdev_new(TYPE_SD_CARD);
-     if (dinfo) {
-         if (!qdev_prop_set_drive_err(carddev, "drive",
--                                     blk_by_legacy_dinfo(dinfo), &err)) {
-+                                     blk_by_legacy_dinfo(dinfo), errp)) {
-             goto fail;
+     if (!sec_model) {
+         error_setg(errp, "security_model property not set");
+@@ -1516,11 +1516,10 @@ static int local_parse_opts(QemuOpts *opts, FsDriverEntry *fse, Error **errp)
+             fse->export_flags &= ~V9FS_FORBID_MULTIDEVS;
+             fse->export_flags &= ~V9FS_REMAP_INODES;
+         } else {
+-            error_setg(&local_err, "invalid multidevs property '%s'",
++            error_setg(errp, "invalid multidevs property '%s'",
+                        multidevs);
+-            error_append_hint(&local_err, "Valid options are: multidevs="
++            error_append_hint(errp, "Valid options are: multidevs="
+                               "[remap|forbid|warn]\n");
+-            error_propagate(errp, local_err);
+             return -1;
          }
      }
- 
--    if (!object_property_set_bool(OBJECT(carddev), "spi", true, &err)) {
-+    if (!object_property_set_bool(OBJECT(carddev), "spi", true, errp)) {
-         goto fail;
+@@ -1530,9 +1529,8 @@ static int local_parse_opts(QemuOpts *opts, FsDriverEntry *fse, Error **errp)
+         return -1;
      }
  
--    if (!qdev_realize_and_unref(carddev, BUS(&s->sdbus), &err)) {
-+    if (!qdev_realize_and_unref(carddev, BUS(&s->sdbus), errp)) {
-         goto fail;
+-    if (fsdev_throttle_parse_opts(opts, &fse->fst, &local_err)) {
+-        error_propagate_prepend(errp, local_err,
+-                                "invalid throttle configuration: ");
++    if (fsdev_throttle_parse_opts(opts, &fse->fst, errp)) {
++        error_prepend(errp, "invalid throttle configuration: ");
+         return -1;
      }
  
-     return;
- 
- fail:
--    error_propagate_prepend(errp, err, "failed to init SD card: ");
-+    error_prepend(errp, "failed to init SD card: ");
- }
- 
- static void ssi_sd_reset(DeviceState *dev)
+diff --git a/hw/9pfs/9p.c b/hw/9pfs/9p.c
+index 9755fba9a9..bdb1360482 100644
+--- a/hw/9pfs/9p.c
++++ b/hw/9pfs/9p.c
+@@ -4011,6 +4011,7 @@ void pdu_submit(V9fsPDU *pdu, P9MsgHeader *hdr)
+ int v9fs_device_realize_common(V9fsState *s, const V9fsTransport *t,
+                                Error **errp)
+ {
++    ERRP_AUTO_PROPAGATE();
+     int i, len;
+     struct stat stat;
+     FsDriverEntry *fse;
 -- 
 2.26.2
 
