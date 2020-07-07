@@ -6,65 +6,69 @@ X-Spam-Status: No, score=-0.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 27154C433E0
-	for <xen-devel@archiver.kernel.org>; Tue,  7 Jul 2020 15:47:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4861BC433E0
+	for <xen-devel@archiver.kernel.org>; Tue,  7 Jul 2020 16:14:48 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E81AD20578
-	for <xen-devel@archiver.kernel.org>; Tue,  7 Jul 2020 15:47:54 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 14A1120674
+	for <xen-devel@archiver.kernel.org>; Tue,  7 Jul 2020 16:14:47 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="KDoEaV3j"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E81AD20578
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="aHQhTvv3"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 14A1120674
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jspoW-0002GV-6l; Tue, 07 Jul 2020 15:47:20 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jsqEf-0005IP-58; Tue, 07 Jul 2020 16:14:21 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=F44P=AS=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
- id 1jspoV-0002GQ-4G
- for xen-devel@lists.xenproject.org; Tue, 07 Jul 2020 15:47:19 +0000
-X-Inumbo-ID: 22ad42b5-c069-11ea-8da1-12813bfff9fa
+ id 1jsqEe-0005IK-24
+ for xen-devel@lists.xenproject.org; Tue, 07 Jul 2020 16:14:20 +0000
+X-Inumbo-ID: e9084906-c06c-11ea-b7bb-bc764e2007e4
 Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 22ad42b5-c069-11ea-8da1-12813bfff9fa;
- Tue, 07 Jul 2020 15:47:18 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id e9084906-c06c-11ea-b7bb-bc764e2007e4;
+ Tue, 07 Jul 2020 16:14:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
  Content-Transfer-Encoding:Content-Type:Message-ID:To:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
  List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=2zJ7n0NS19MmPMjNWvUtF9lPx7+C/LUeb4wjFeKH2jM=; b=KDoEaV3jXMudM8SnhdVnlj1F1
- 3jxCuh97qm49xBo5VYLqV9FctskFDHB9gZvXv/z81cgoWiS2Arqp/ootNrGZ1RgUwNU+N/1j0NecP
- zBYBPaqiSUAXdph7AwPUImjSHjszNf83fq79JpGrVUHrPemt+Uw0brOes3WUUorU58l58=;
+ bh=TUvLCzlIo1+jrPDGuZ38DVR5NogCU3sLhSaDLtfe+EI=; b=aHQhTvv33PK6rIh4gz35Q6/eq
+ wYkb/MX4hpwnYwnNEpvltve6cM2nTH/67zsJbKvTMWxmguM9TYYdBDpfntcC6UWgeKYVP/bGCjPQV
+ 0SvjblCFiQ7Gpn8ZRJJJGI2FgiMAGy4UwFSofeMMpee6StZtRxRa6BC1djUA0SzlXyLU0=;
 Received: from host146.205.237.98.conversent.net ([205.237.98.146]
  helo=infra.test-lab.xenproject.org)
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1jspoU-0006rD-48; Tue, 07 Jul 2020 15:47:18 +0000
+ id 1jsqEc-0007so-Gc; Tue, 07 Jul 2020 16:14:18 +0000
 Received: from [172.16.144.3] (helo=osstest.test-lab.xenproject.org)
  by infra.test-lab.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1jspoT-0004AT-Sy; Tue, 07 Jul 2020 15:47:17 +0000
+ id 1jsqEc-0004zT-4p; Tue, 07 Jul 2020 16:14:18 +0000
 Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
  4.89) (envelope-from <osstest-admin@xenproject.org>)
- id 1jspoT-0007Xl-Rx; Tue, 07 Jul 2020 15:47:17 +0000
+ id 1jsqEc-0004Ci-2u; Tue, 07 Jul 2020 16:14:18 +0000
 To: xen-devel@lists.xenproject.org,
     osstest-admin@xenproject.org
-Message-ID: <osstest-151707-mainreport@xen.org>
+Message-ID: <osstest-151711-mainreport@xen.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Subject: [xtf test] 151707: all pass - PUSHED
-X-Osstest-Versions-This: xtf=2dd14fbcf9d03fdc300491939aeac75d3eb9e05f
-X-Osstest-Versions-That: xtf=2a8859e87761a0efc119778e094f203dc2ea487a
+Subject: [xen-unstable-smoke test] 151711: tolerable all pass - PUSHED
+X-Osstest-Failures: xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+ xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+ xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+ xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+ xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This: xen=3fdc211b01b29f252166937238efe02d15cb5780
+X-Osstest-Versions-That: xen=f97f99c8d88ebc108f6adc3ba74e87d53ba57c70
 From: osstest service owner <osstest-admin@xenproject.org>
-Date: Tue, 07 Jul 2020 15:47:17 +0000
+Date: Tue, 07 Jul 2020 16:14:18 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -78,32 +82,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-flight 151707 xtf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/151707/
+flight 151711 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/151711/
 
-Perfect :-)
-All tests in this flight passed as required
+Failures :-/ but no regressions.
+
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+
 version targeted for testing:
- xtf                  2dd14fbcf9d03fdc300491939aeac75d3eb9e05f
+ xen                  3fdc211b01b29f252166937238efe02d15cb5780
 baseline version:
- xtf                  2a8859e87761a0efc119778e094f203dc2ea487a
+ xen                  f97f99c8d88ebc108f6adc3ba74e87d53ba57c70
 
-Last test of basis   150870  2020-06-05 20:09:44 Z   31 days
-Testing same since   151707  2020-07-07 10:39:37 Z    0 days    1 attempts
+Last test of basis   151687  2020-07-06 19:01:28 Z    0 days
+Testing same since   151711  2020-07-07 13:13:16 Z    0 days    1 attempts
 
 ------------------------------------------------------------
 People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
+  Jan Beulich <jbeulich@suse.com>
+  Julien Grall <jgrall@amazon.com>
+  Roger Pau Monné <roger.pau@citrix.com>
 
 jobs:
- build-amd64-xtf                                              pass    
+ build-arm64-xsm                                              pass    
  build-amd64                                                  pass    
- build-amd64-pvops                                            pass    
- test-xtf-amd64-amd64-1                                       pass    
- test-xtf-amd64-amd64-2                                       pass    
- test-xtf-amd64-amd64-3                                       pass    
- test-xtf-amd64-amd64-4                                       pass    
- test-xtf-amd64-amd64-5                                       pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-libvirt                                     pass    
 
 
 ------------------------------------------------------------
@@ -124,6 +137,6 @@ Test harness code can be found at
 
 Pushing revision :
 
-To xenbits.xen.org:/home/xen/git/xtf.git
-   2a8859e..2dd14fb  2dd14fbcf9d03fdc300491939aeac75d3eb9e05f -> xen-tested-master
+To xenbits.xen.org:/home/xen/git/xen.git
+   f97f99c8d8..3fdc211b01  3fdc211b01b29f252166937238efe02d15cb5780 -> smoke
 
