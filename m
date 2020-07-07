@@ -4,48 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-8.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1ABE9C433E1
-	for <xen-devel@archiver.kernel.org>; Tue,  7 Jul 2020 09:35:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 19B2BC433DF
+	for <xen-devel@archiver.kernel.org>; Tue,  7 Jul 2020 09:39:08 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EB993206CD
-	for <xen-devel@archiver.kernel.org>; Tue,  7 Jul 2020 09:35:35 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EB993206CD
+	by mail.kernel.org (Postfix) with ESMTPS id EBEC0206CD
+	for <xen-devel@archiver.kernel.org>; Tue,  7 Jul 2020 09:39:07 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EBEC0206CD
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jsk0X-0007Uk-8l; Tue, 07 Jul 2020 09:35:21 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jsk42-0007kQ-1I; Tue, 07 Jul 2020 09:38:58 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=E+9W=AS=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1jsk0W-0007Uf-Er
- for xen-devel@lists.xenproject.org; Tue, 07 Jul 2020 09:35:20 +0000
-X-Inumbo-ID: 2c261174-c035-11ea-8496-bc764e2007e4
+ id 1jsk40-0007kL-LA
+ for xen-devel@lists.xenproject.org; Tue, 07 Jul 2020 09:38:56 +0000
+X-Inumbo-ID: acfe9118-c035-11ea-8d3d-12813bfff9fa
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 2c261174-c035-11ea-8496-bc764e2007e4;
- Tue, 07 Jul 2020 09:35:20 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id acfe9118-c035-11ea-8d3d-12813bfff9fa;
+ Tue, 07 Jul 2020 09:38:56 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 7046AAC52;
- Tue,  7 Jul 2020 09:35:19 +0000 (UTC)
-Subject: Re: [PATCH v2 1/3] xen/privcmd: Corrected error handling path
+ by mx2.suse.de (Postfix) with ESMTP id B7BE1AB3D;
+ Tue,  7 Jul 2020 09:38:55 +0000 (UTC)
+Subject: Re: [PATCH v2 2/3] xen/privcmd: Mark pages as dirty
 To: Souptick Joarder <jrdr.linux@gmail.com>, boris.ostrovsky@oracle.com,
  sstabellini@kernel.org
 References: <1594059372-15563-1-git-send-email-jrdr.linux@gmail.com>
- <1594059372-15563-2-git-send-email-jrdr.linux@gmail.com>
+ <1594059372-15563-3-git-send-email-jrdr.linux@gmail.com>
 From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Message-ID: <4bafb184-6f07-2582-3d0f-86fb53dd30dc@suse.com>
-Date: Tue, 7 Jul 2020 11:35:18 +0200
+Message-ID: <8fdd8c77-27dd-2847-7929-b5d3098b1b45@suse.com>
+Date: Tue, 7 Jul 2020 11:38:53 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
 MIME-Version: 1.0
-In-Reply-To: <1594059372-15563-2-git-send-email-jrdr.linux@gmail.com>
+In-Reply-To: <1594059372-15563-3-git-send-email-jrdr.linux@gmail.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -65,50 +67,41 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 On 06.07.20 20:16, Souptick Joarder wrote:
-> Previously, if lock_pages() end up partially mapping pages, it used
-> to return -ERRNO due to which unlock_pages() have to go through
-> each pages[i] till *nr_pages* to validate them. This can be avoided
-> by passing correct number of partially mapped pages & -ERRNO separately,
-> while returning from lock_pages() due to error.
-> 
-> With this fix unlock_pages() doesn't need to validate pages[i] till
-> *nr_pages* for error scenario and few condition checks can be ignored.
+> pages need to be marked as dirty before unpinned it in
+> unlock_pages() which was oversight. This is fixed now.
 > 
 > Signed-off-by: Souptick Joarder <jrdr.linux@gmail.com>
+> Suggested-by: John Hubbard <jhubbard@nvidia.com>
 > Cc: John Hubbard <jhubbard@nvidia.com>
 > Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
 > Cc: Paul Durrant <xadimgnik@gmail.com>
 > ---
->   drivers/xen/privcmd.c | 31 +++++++++++++++----------------
->   1 file changed, 15 insertions(+), 16 deletions(-)
+>   drivers/xen/privcmd.c | 5 ++++-
+>   1 file changed, 4 insertions(+), 1 deletion(-)
 > 
 > diff --git a/drivers/xen/privcmd.c b/drivers/xen/privcmd.c
-> index a250d11..33677ea 100644
+> index 33677ea..f6c1543 100644
 > --- a/drivers/xen/privcmd.c
 > +++ b/drivers/xen/privcmd.c
-> @@ -580,13 +580,13 @@ static long privcmd_ioctl_mmap_batch(
->   
->   static int lock_pages(
->   	struct privcmd_dm_op_buf kbufs[], unsigned int num,
-> -	struct page *pages[], unsigned int nr_pages)
-> +	struct page *pages[], unsigned int nr_pages, unsigned int *pinned)
+> @@ -612,8 +612,11 @@ static void unlock_pages(struct page *pages[], unsigned int nr_pages)
 >   {
 >   	unsigned int i;
-> +	int page_count = 0;
-
-Initial value shouldn't be needed, and ...
-
 >   
->   	for (i = 0; i < num; i++) {
->   		unsigned int requested;
-> -		int pinned;
+> -	for (i = 0; i < nr_pages; i++)
+> +	for (i = 0; i < nr_pages; i++) {
+> +		if (!PageDirty(pages[i]))
+> +			set_page_dirty_lock(pages[i]);
 
-... you could move the declaration here.
+With put_page() directly following I think you should be able to use
+set_page_dirty() instead, as there is obviously a reference to the page
+existing.
 
-With that done you can add my
-
-Reviewed-by: Juergen Gross <jgross@suse.com>
-
+>   		put_page(pages[i]);
+> +	}
+>   }
+>   
+>   static long privcmd_ioctl_dm_op(struct file *file, void __user *udata)
+> 
 
 Juergen
 
