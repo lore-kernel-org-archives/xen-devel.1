@@ -2,77 +2,79 @@ Return-Path: <SRS0=G/Cc=AT=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.5 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
-	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+X-Spam-Status: No, score=-0.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
 	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6FAA6C433E0
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Jul 2020 13:21:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CA150C433E0
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Jul 2020 13:22:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 40CF420720
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Jul 2020 13:21:18 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 9A59120720
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Jul 2020 13:22:00 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="n4/LIKVJ"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 40CF420720
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="B9R4XfU+"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9A59120720
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jtA0X-0007UF-M5; Wed, 08 Jul 2020 13:21:05 +0000
+	id 1jtA1E-0007Xo-VT; Wed, 08 Jul 2020 13:21:48 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=sx7s=AT=gmail.com=alistair23@srs-us1.protection.inumbo.net>)
- id 1jtA0W-0007UA-A5
- for xen-devel@lists.xenproject.org; Wed, 08 Jul 2020 13:21:04 +0000
-X-Inumbo-ID: df9a59ca-c11d-11ea-bb8b-bc764e2007e4
-Received: from mail-io1-xd2e.google.com (unknown [2607:f8b0:4864:20::d2e])
+ <SRS0=M5eT=AT=citrix.com=george.dunlap@srs-us1.protection.inumbo.net>)
+ id 1jtA1D-0007Xf-Kx
+ for xen-devel@lists.xenproject.org; Wed, 08 Jul 2020 13:21:47 +0000
+X-Inumbo-ID: f8e1a078-c11d-11ea-bb8b-bc764e2007e4
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id df9a59ca-c11d-11ea-bb8b-bc764e2007e4;
- Wed, 08 Jul 2020 13:21:03 +0000 (UTC)
-Received: by mail-io1-xd2e.google.com with SMTP id l1so4979983ioh.5
- for <xen-devel@lists.xenproject.org>; Wed, 08 Jul 2020 06:21:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=el09H0U7lna7w0VKAPojZ6lb1UMQcOdSFaycVKQzoT4=;
- b=n4/LIKVJIbbiYWHP3HF5WJZjRsL8vzat4uIwgZbXkvqaCgRSyf7ZEfIuByGXNhy+jh
- 3XIou23lW5FaMpYxZZINSgBypG5Dl8YEIADuV2FKTBO6MCAgLJSAzeyMqUfZQgfxxOcV
- 0LAL1jBygbjmJxEPIv/4fesxE5BZiSsZkpKjhASn+NPW3sh4/KuPepchuMPiY223NbGb
- ygoICg1FDuYpigWHU94hnGr+3ptTMCtRJMJWt1isyiuyBLOowDCZqONBZT2RIuEGXi+5
- 9tP+4enLNipDjRJvt5BUrlniwkLRfgHr7hJaMbX1jHKR54mmsTbhUR0lmB5VbHdxPWym
- qhNw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=el09H0U7lna7w0VKAPojZ6lb1UMQcOdSFaycVKQzoT4=;
- b=lKWyAD5UIAFlEcdy8hYMOrvglSvCWB7X4M7+CrTAIYTeelfNY5J0iZBC7sh+HCyZb+
- +y7opesN6YDDZVTQTOFvdDu9DuZzUJAgFOlS5mR3BeEANscv4BJ9+HNsJ5k285AkZnIS
- xqKwD5qMrjuaW0PzHW1rRYxJlZ6XkZ5daAfo+B1Wb5gQXP/WFVFR0YvKfYq2YMZWoi3X
- /7+6xZbBHBxZqlW3L8KSuPd3OUJctW9Tkc8gbMov7BckBiUqyAznGN/wrDYKxuUx7Lnz
- dQuaq1A4NTR9vKfY92GfuwWoDld6KepYBWArecZRyLTHpGNKalIjXg8CrhaFDOzeEJ4U
- 5ghA==
-X-Gm-Message-State: AOAM533WDr14IBye1+iyoegbPVDpyri9PGZElEXIDL3kToJJSJMFtsWM
- 8MI42Bf9UBSNzL3lY2Q00s0pqn0+Fj8o4D30D5s=
-X-Google-Smtp-Source: ABdhPJydVMch3lmCTd03PLZjeyKB3p6GcgVtB1SuyB6p7MElZVVeHSD/5You4P5Cn2d8KCHts0sJcegDCGCfD/c8n5I=
-X-Received: by 2002:a05:6638:dd3:: with SMTP id
- m19mr67790322jaj.106.1594214463549; 
- Wed, 08 Jul 2020 06:21:03 -0700 (PDT)
-MIME-Version: 1.0
+ id f8e1a078-c11d-11ea-bb8b-bc764e2007e4;
+ Wed, 08 Jul 2020 13:21:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1594214506;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-id:content-transfer-encoding: mime-version;
+ bh=JCcOhaQmMrJFhQ/6grXhm1QtDc+5GV1eZ41vFeKYK7I=;
+ b=B9R4XfU+ie7zd3xxZW7Qxu5kO7qm2VD52m1xbvZ8BMkEwt8RA9Flsudu
+ XWMDX2ntDOITgtDBEjxzu3Sn6RpOSEUphxGttTQusJvh2DNpHlB22f7UU
+ 3Z2XAaR1KNoCQPaiG4a7g1gBQNHtryoKBot7oQfNAvt/4vdIkQNdNZOBT 0=;
+Authentication-Results: esa4.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none
+IronPort-SDR: jd3rbUJL1tKUz3NzmWij23SQeQTbyv6J0FDVy5SgqGlaK/yeY9pcBPimvdQ17anr02D/YdwfXk
+ 1XX3ipCF1a7kA8FrxetvzcLksHI/vyq7UEDGJMsSSkjOn6nIPk8HpmxdS6WcR+CP/R4YAZftCi
+ SOr0rPXwalvTBE4zHC3k0bJTykqz9SksOCV8CRP/dsSrVNaaSt/TU0c1ndjqQyaHBW+SVzeNbR
+ TQFJgUaiKmMkLNdvFaZt8qUA7h0tb43+bGMQN6MuIHqzPUxsvcUDU+cxWXDmIPtzDo7cQIf/yw
+ mmU=
+X-SBRS: 2.7
+X-MesageID: 22698887
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.75,327,1589256000"; d="scan'208";a="22698887"
+From: George Dunlap <George.Dunlap@citrix.com>
+To: Alistair Francis <alistair23@gmail.com>
+Subject: Re: Xen and RISC-V Design Session
+Thread-Topic: Xen and RISC-V Design Session
+Thread-Index: AQHWVSlaXbsHlooEqk+f8JPClsuwY6j9hqiAgAAC7gA=
+Date: Wed, 8 Jul 2020 13:21:42 +0000
+Message-ID: <6CE81465-9F87-486F-A3CC-08857C9C4332@citrix.com>
 References: <CAKmqyKPFMGtDLzc2RiEZR6KCcbPL6wumm+V5SNdxNf7fAowcBQ@mail.gmail.com>
  <20200708131150.GD7191@Air-de-Roger>
-In-Reply-To: <20200708131150.GD7191@Air-de-Roger>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 8 Jul 2020 06:11:13 -0700
-Message-ID: <CAKmqyKOhW=YJ-WW28v-Ddt5yDDfVfCJKwijfsXo0oWAcvfrg2w@mail.gmail.com>
-Subject: Re: Xen and RISC-V Design Session
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ <CAKmqyKOhW=YJ-WW28v-Ddt5yDDfVfCJKwijfsXo0oWAcvfrg2w@mail.gmail.com>
+In-Reply-To: <CAKmqyKOhW=YJ-WW28v-Ddt5yDDfVfCJKwijfsXo0oWAcvfrg2w@mail.gmail.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-mailer: Apple Mail (2.3608.80.23.2.2)
+x-ms-exchange-messagesentrepresentingtype: 1
+x-ms-exchange-transport-fromentityheader: Hosted
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <2053D2EF33E67944AB0C0423E3C99717@citrix.com>
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,38 +85,28 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: George Dunlap <george.dunlap@eu.citrix.com>,
- "open list:X86" <xen-devel@lists.xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+ Andrew Cooper <Andrew.Cooper3@citrix.com>,
+ George Dunlap <George.Dunlap@citrix.com>,
  Bobby Eshleman <bobby.eshleman@starlab.io>,
- Andrew Cooper <andrew.cooper3@citrix.com>
+ "open list:X86" <xen-devel@lists.xenproject.org>,
+ Roger Pau Monne <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Wed, Jul 8, 2020 at 6:11 AM Roger Pau Monn=C3=A9 <roger.pau@citrix.com> =
-wrote:
->
-> Adding George in case he can help with the session placement.
->
-> On Wed, Jul 08, 2020 at 05:55:06AM -0700, Alistair Francis wrote:
-> > Hey,
-> >
-> > I'm not sure if there is a better way to suggest a design session but
-> > can we have a Xen on RISC-V discussion tomorrow at the Xen Design
-> > Summit?
->
-> I think that would be interesting!
->
-> > Preferably in a later slot as the early slots are very early for me.
->
-> You have to register it at: https://design-sessions.xenproject.org/
-
-Thanks!
-
-I don't have a verification code unfortunately. Is it possible to get one?
-
-Alistair
-
->
-> Roger.
+DQoNCj4gT24gSnVsIDgsIDIwMjAsIGF0IDI6MTEgUE0sIEFsaXN0YWlyIEZyYW5jaXMgPGFsaXN0
+YWlyMjNAZ21haWwuY29tPiB3cm90ZToNCj4gDQo+IE9uIFdlZCwgSnVsIDgsIDIwMjAgYXQgNjox
+MSBBTSBSb2dlciBQYXUgTW9ubsOpIDxyb2dlci5wYXVAY2l0cml4LmNvbT4gd3JvdGU6DQo+PiAN
+Cj4+IEFkZGluZyBHZW9yZ2UgaW4gY2FzZSBoZSBjYW4gaGVscCB3aXRoIHRoZSBzZXNzaW9uIHBs
+YWNlbWVudC4NCj4+IA0KPj4gT24gV2VkLCBKdWwgMDgsIDIwMjAgYXQgMDU6NTU6MDZBTSAtMDcw
+MCwgQWxpc3RhaXIgRnJhbmNpcyB3cm90ZToNCj4+PiBIZXksDQo+Pj4gDQo+Pj4gSSdtIG5vdCBz
+dXJlIGlmIHRoZXJlIGlzIGEgYmV0dGVyIHdheSB0byBzdWdnZXN0IGEgZGVzaWduIHNlc3Npb24g
+YnV0DQo+Pj4gY2FuIHdlIGhhdmUgYSBYZW4gb24gUklTQy1WIGRpc2N1c3Npb24gdG9tb3Jyb3cg
+YXQgdGhlIFhlbiBEZXNpZ24NCj4+PiBTdW1taXQ/DQo+PiANCj4+IEkgdGhpbmsgdGhhdCB3b3Vs
+ZCBiZSBpbnRlcmVzdGluZyENCj4+IA0KPj4+IFByZWZlcmFibHkgaW4gYSBsYXRlciBzbG90IGFz
+IHRoZSBlYXJseSBzbG90cyBhcmUgdmVyeSBlYXJseSBmb3IgbWUuDQo+PiANCj4+IFlvdSBoYXZl
+IHRvIHJlZ2lzdGVyIGl0IGF0OiBodHRwczovL2Rlc2lnbi1zZXNzaW9ucy54ZW5wcm9qZWN0Lm9y
+Zy8NCj4gDQo+IFRoYW5rcyENCj4gDQo+IEkgZG9uJ3QgaGF2ZSBhIHZlcmlmaWNhdGlvbiBjb2Rl
+IHVuZm9ydHVuYXRlbHkuIElzIGl0IHBvc3NpYmxlIHRvIGdldCBvbmU/DQoNClZpcnR1YWxQYW5k
+YTIwMjANCg0KQ2hlZXJzLA0KIC1HZW9yZ2U=
 
