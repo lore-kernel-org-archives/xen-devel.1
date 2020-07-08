@@ -2,65 +2,64 @@ Return-Path: <SRS0=G/Cc=AT=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.5 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
-	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+X-Spam-Status: No, score=-0.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
 	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B1C00C433E0
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Jul 2020 15:13:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9DA30C433E0
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Jul 2020 15:20:48 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 804B2206DF
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Jul 2020 15:13:17 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 66540206E2
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Jul 2020 15:20:48 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="JGYXQbkz"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 804B2206DF
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="OKclBi3E"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 66540206E2
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jtBkw-0008Vy-Gm; Wed, 08 Jul 2020 15:13:06 +0000
+	id 1jtBs6-0000wC-E8; Wed, 08 Jul 2020 15:20:30 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=sx7s=AT=gmail.com=alistair23@srs-us1.protection.inumbo.net>)
- id 1jtBku-0008V8-U9
- for xen-devel@lists.xenproject.org; Wed, 08 Jul 2020 15:13:05 +0000
-X-Inumbo-ID: 8561223a-c12d-11ea-bca7-bc764e2007e4
-Received: from mail-io1-xd2b.google.com (unknown [2607:f8b0:4864:20::d2b])
+ <SRS0=M5eT=AT=citrix.com=george.dunlap@srs-us1.protection.inumbo.net>)
+ id 1jtBs5-0000w7-HO
+ for xen-devel@lists.xenproject.org; Wed, 08 Jul 2020 15:20:29 +0000
+X-Inumbo-ID: 8dd6996c-c12e-11ea-bca7-bc764e2007e4
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 8561223a-c12d-11ea-bca7-bc764e2007e4;
- Wed, 08 Jul 2020 15:13:04 +0000 (UTC)
-Received: by mail-io1-xd2b.google.com with SMTP id i4so47316994iov.11
- for <xen-devel@lists.xenproject.org>; Wed, 08 Jul 2020 08:13:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=xJ675J9bOACbo4EfI5RqubkWGD/0vf/sAuCPPSuqTY4=;
- b=JGYXQbkzxsX7+RxzoeG+dRD0Om4RkBNx/3ge5VfkP7Z+Su73PKgnkkmlCPAoacFAa3
- dHwi2L67aSQ+eMOoRAhAwiz6iYXjMUl8dxTMl4NdAWYaaA6zTGSimRTyaByXOA/Ns9Ms
- 9o1OQDtMRI4SIGpFsz0Z6WwOTS6ZE7eotCPofyaIsKli2vP6cvNad+An29ybbHRkdhdg
- kjTH6NIgOlS7OUAUYa0QK7/yYngdR9NFClzBam5Nn2u67R6U6RYfUViOL8zRyqwM/Lqz
- JFn/1P4aS9Yj46ObJDZMY73RZjm97soWVEKRCFKNqIi52ZgvdpY0yib0YJVewh7RRCXg
- hbYQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=xJ675J9bOACbo4EfI5RqubkWGD/0vf/sAuCPPSuqTY4=;
- b=QY8T4TECOHLOUaVQBXdseHH+PU+rVRyp90p586FJtT1UIlnlUCLpNo4wzaydf0D6Y1
- AVeNDmTC68GcDolRDcv/vb9byRty6j1pbmpPSQcuZY3WoqBp0ouvs1FOg8A0WofzACc8
- N8di7SIwQWKWKCE/KAOAJG2a05GUISOHkL0295NhOSFHb7VN+xj2d0c/94VSS8d9tU3x
- WSyn+0lJEz5hXO6cYTcc+dIo8fXdNrzzKHgMHkw0CYr0z9LzX7m3q2m/n32hPKmTkvdo
- aFzW9SGwTyh/CslmtdkgRyqGkaqop3Ks/Vni9x4kdMs1EZk3zOLrcXxD5aBWJ5URz0nw
- TRRw==
-X-Gm-Message-State: AOAM532GZtGxu3uuXf+l9zJSgOMTkmqbvEy4i12T7rnMVD3vAFLGO3Lw
- U/74fc/5bMS1znBH9o+rBqHu5sqxTjF7FSEetcQ=
-X-Google-Smtp-Source: ABdhPJz3+czMgC71M/Ii9yPW4uFjNbnq8Z9aQ/gKITu9QPcH06eYUuPz96o4w6exyK89HcpfjSe3XMiAgV/N1WErBDI=
-X-Received: by 2002:a02:5b83:: with SMTP id g125mr66655393jab.91.1594221184028; 
- Wed, 08 Jul 2020 08:13:04 -0700 (PDT)
-MIME-Version: 1.0
+ id 8dd6996c-c12e-11ea-bca7-bc764e2007e4;
+ Wed, 08 Jul 2020 15:20:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1594221629;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-id:content-transfer-encoding: mime-version;
+ bh=WOMsddn/zKhCKzuqg9/VGFYaJcm5n1MgYlbeStwmZGQ=;
+ b=OKclBi3EuBwAu6UOOL39kvr01I0JyoP8OeE9Wcsw0a2W+BwZqKLw43uH
+ gczfyUat0F6UdwCRvq119f4ZpLiww7vg/rWqiRzO6DFJ6ro28FjvvnuUH
+ 4vmugCI0T+AY3Gm1v/WkH0CtZkIk9PGylcErmSCx4rTWz1sjzht8kYdco A=;
+Authentication-Results: esa3.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none
+IronPort-SDR: dFflYsRtA7q9fKlOSOu0X5bDHLayLWBAvbc9MkLQ3JoQics1HN8weY/ugGSxziABis9d+W4tdo
+ k2O83Th9LZv8UcOFVX5utVAfSEqElW+9Ciys3M8mJRKjmOJ62NZ2JFyti/ESpq7oLhnS3LG9w8
+ D2Bk6RxeSJuy7Isfbt2o3Y2WnvZzCc0/67BR6LfN19dOeGK9jcCh/8SKOYzy4NSPL7t7KtEmiW
+ 1kY+4/tN6+OopX7XOwnOltdnxB8rRlYoIJ0rN1vKZpo9qrNQyC+0z1oUy/aa5pFqepnRyJ/GNE
+ 6So=
+X-SBRS: 2.7
+X-MesageID: 21880057
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.75,327,1589256000"; d="scan'208";a="21880057"
+From: George Dunlap <George.Dunlap@citrix.com>
+To: Alistair Francis <alistair23@gmail.com>
+Subject: Re: Xen and RISC-V Design Session
+Thread-Topic: Xen and RISC-V Design Session
+Thread-Index: AQHWVSlaXbsHlooEqk+f8JPClsuwY6j9hqiAgAAC7gD///++gIAAFI0AgAAKF4D///38AIAABMwA
+Date: Wed, 8 Jul 2020 15:20:24 +0000
+Message-ID: <CD72753B-2DFF-45CF-9E4C-B4AEE6813FF0@citrix.com>
 References: <CAKmqyKPFMGtDLzc2RiEZR6KCcbPL6wumm+V5SNdxNf7fAowcBQ@mail.gmail.com>
  <20200708131150.GD7191@Air-de-Roger>
  <CAKmqyKOhW=YJ-WW28v-Ddt5yDDfVfCJKwijfsXo0oWAcvfrg2w@mail.gmail.com>
@@ -68,13 +67,19 @@ References: <CAKmqyKPFMGtDLzc2RiEZR6KCcbPL6wumm+V5SNdxNf7fAowcBQ@mail.gmail.com>
  <CAKmqyKP5j7tQLZ8ka=CoN93X87a1LQhnMTxSeYfFo0jviMzP-w@mail.gmail.com>
  <20200708143420.GA8562@piano>
  <alpine.DEB.2.21.2007080808420.4124@sstabellini-ThinkPad-T480s>
-In-Reply-To: <alpine.DEB.2.21.2007080808420.4124@sstabellini-ThinkPad-T480s>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 8 Jul 2020 08:03:14 -0700
-Message-ID: <CAKmqyKPrQKyz8HY00pGnS-mM8Dr5P-m69sziCJ-K8yiFoza08Q@mail.gmail.com>
-Subject: Re: Xen and RISC-V Design Session
-To: Stefano Stabellini <sstabellini@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+ <CAKmqyKPrQKyz8HY00pGnS-mM8Dr5P-m69sziCJ-K8yiFoza08Q@mail.gmail.com>
+In-Reply-To: <CAKmqyKPrQKyz8HY00pGnS-mM8Dr5P-m69sziCJ-K8yiFoza08Q@mail.gmail.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-mailer: Apple Mail (2.3608.80.23.2.2)
+x-ms-exchange-messagesentrepresentingtype: 1
+x-ms-exchange-transport-fromentityheader: Hosted
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <6F18A0A7D3A6B94589A800FB88BCEB1B@citrix.com>
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,36 +91,45 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Cc: Bobby Eshleman <bobbyeshleman@gmail.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
  Andrew Cooper <Andrew.Cooper3@citrix.com>,
- George Dunlap <George.Dunlap@citrix.com>,
  Bobby Eshleman <bobby.eshleman@starlab.io>,
  "open list:X86" <xen-devel@lists.xenproject.org>,
  Roger Pau Monne <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Wed, Jul 8, 2020 at 8:10 AM Stefano Stabellini
-<sstabellini@kernel.org> wrote:
->
-> On Wed, 8 Jul 2020, Bobby Eshleman wrote:
-> > On Wed, Jul 08, 2020 at 06:20:47AM -0700, Alistair Francis wrote:
-> > >
-> > > Thanks! Just submitted the proposal.
-> > >
-> > > It would be really great to have Bobby attend (on CC) as he has been
-> > > working on it. I'm not sure what timezone he is in though.
-> > >
-> >
-> > Hey Alistair,
-> >
-> > I am on the west coast in the USA, so some of the later slots would work best
-> > for me too.
->
-> I'd love to attend this session. Realistically we have two sessions
-> tomorrow we could use, the 7:15AM and the 8:30AM California time, we
-> could use one for FuSa and the other for RISC-V.
+OK, I made that restriction; the resulting schedule seems OK to me.  :-)
 
-Either of those work for me.
+ -George
 
-Alistair
+> On Jul 8, 2020, at 4:03 PM, Alistair Francis <alistair23@gmail.com> wrote=
+:
+>=20
+> On Wed, Jul 8, 2020 at 8:10 AM Stefano Stabellini
+> <sstabellini@kernel.org> wrote:
+>>=20
+>> On Wed, 8 Jul 2020, Bobby Eshleman wrote:
+>>> On Wed, Jul 08, 2020 at 06:20:47AM -0700, Alistair Francis wrote:
+>>>>=20
+>>>> Thanks! Just submitted the proposal.
+>>>>=20
+>>>> It would be really great to have Bobby attend (on CC) as he has been
+>>>> working on it. I'm not sure what timezone he is in though.
+>>>>=20
+>>>=20
+>>> Hey Alistair,
+>>>=20
+>>> I am on the west coast in the USA, so some of the later slots would wor=
+k best
+>>> for me too.
+>>=20
+>> I'd love to attend this session. Realistically we have two sessions
+>> tomorrow we could use, the 7:15AM and the 8:30AM California time, we
+>> could use one for FuSa and the other for RISC-V.
+>=20
+> Either of those work for me.
+>=20
+> Alistair
+
 
