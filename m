@@ -2,79 +2,70 @@ Return-Path: <SRS0=G/Cc=AT=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.5 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
-	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+X-Spam-Status: No, score=-0.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
 	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 37B27C433E0
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Jul 2020 13:31:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D0696C433E0
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Jul 2020 13:32:28 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EE74520720
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Jul 2020 13:31:05 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 9FCD720720
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Jul 2020 13:32:28 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ZMXH1PRl"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EE74520720
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="Kzi1T70d"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9FCD720720
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jtA9m-0008Tm-T2; Wed, 08 Jul 2020 13:30:38 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jtABL-00008k-9x; Wed, 08 Jul 2020 13:32:15 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=sx7s=AT=gmail.com=alistair23@srs-us1.protection.inumbo.net>)
- id 1jtA9l-0008Th-TF
- for xen-devel@lists.xenproject.org; Wed, 08 Jul 2020 13:30:37 +0000
-X-Inumbo-ID: 355f1322-c11f-11ea-bb8b-bc764e2007e4
-Received: from mail-io1-xd36.google.com (unknown [2607:f8b0:4864:20::d36])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 355f1322-c11f-11ea-bb8b-bc764e2007e4;
- Wed, 08 Jul 2020 13:30:37 +0000 (UTC)
-Received: by mail-io1-xd36.google.com with SMTP id q8so46970721iow.7
- for <xen-devel@lists.xenproject.org>; Wed, 08 Jul 2020 06:30:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=1qooX1rDuH5ISVhDXxteHHMQjGTfb4o9k5ecOHl4zFE=;
- b=ZMXH1PRlMtMlNvTzH2+g584oOYSzwektF8zD0v3vYgal2ybjsDL1+T7tQ8XH0xioyd
- NbMV90qsjd4BLjJeasRjRP4apfvwdx2/E58Os+sG4LsguVvEBJOi2EgYd0hhdD/KKFq0
- 5howubC8KnFkivmJRHHUjdryXgAfmR+/dnNtOSXZKQfiGnz3cRAvsul+Xrp9/btarFGP
- dyC767EAnOCYCBtqxXPw2SjhGKvQIytyjt8QRuvhQB4tLqkKdvSgw6WhrbOoBf664Rn5
- WTq5IzNI9bm3/XECa8fMkhauYBWMfaQE2xPZUfMyoiA2xCI2qoxC/CwsmcYP4qo9OjoA
- 2kDw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=1qooX1rDuH5ISVhDXxteHHMQjGTfb4o9k5ecOHl4zFE=;
- b=WJ577WWztevn7DWLYC06EO5VY1ajN2PavIQa2DkicQMuvdGcGc4slz+lbuoFLcpYmo
- BxRzih/sCZ41uRB6SLp/n8LTzWn1xOC06mEmKUa5nXmMC9rUMU3rh+1ws71wL+IlcAvS
- IIWw7f4oRLC0TOe8awrc4qevSBXL6+WK3CCbeRIm1jEn6MADtLzXJg5awzOnIVLeqbzO
- nw4suZM4i2WpcGT7yJVpd8715pKGaakShy4lo3LF3iC7Ikke1FVt9mzsWcKf5Xs9uRfg
- GONg77xMqbKfcLOVf5vzfNfycifj86OZUw+uWYxCnO9klGQQk/pbW0WkuDx8W9TvH/BU
- An7A==
-X-Gm-Message-State: AOAM533s6jSCtQ2fontsGxLHt9dEtiACRazwk6zBsEc/Xts9XFC0GvQj
- oGVzl7xu9FItmgTT0smZp4MtlNXQRgK8wc7MHBc=
-X-Google-Smtp-Source: ABdhPJw2bFr/j9pXgEUhk/KNCENpWt1tVaZINsxgi9B0uU2285XUZUK6MIhg5/1C7yF4hi0YcfFQJ8Wz42IC1lys7hQ=
-X-Received: by 2002:a6b:8dd1:: with SMTP id
- p200mr37059144iod.118.1594215036696; 
- Wed, 08 Jul 2020 06:30:36 -0700 (PDT)
+ <SRS0=65hh=AT=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1jtABK-00008c-0y
+ for xen-devel@lists.xenproject.org; Wed, 08 Jul 2020 13:32:14 +0000
+X-Inumbo-ID: 6e1a8980-c11f-11ea-8e38-12813bfff9fa
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 6e1a8980-c11f-11ea-8e38-12813bfff9fa;
+ Wed, 08 Jul 2020 13:32:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1594215133;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=HtZuI3CdV67mITIBl5roTEp3sCpytQ+TQBB1qswd7/A=;
+ b=Kzi1T70d9S+OuoAdSs+2XIRceO3j0DcD4OlOEONPkY/wcCdQbcPpKmjv
+ M7xDfU8HyQOQmtEGEEtS1B4rPj0c6lCvvDvKpcrrbwpEIWF2t9YIRn7r/
+ NzX+tfcRVvxah0QZx1zw/NWYnhnzR0xhCCc4nDyVx95MhBI/AzP+Kab9z U=;
+Authentication-Results: esa3.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none
+IronPort-SDR: bqgUmpPKJkm1N4Qd6szRWO97fo3vYR1GrX4nBemd9OaCzJzp+YxJazmJ2Ygqbtl3mNA6ioEesY
+ uU891TXo8rqc6kw+8BxYMxsqI3PgyQSIvLRVf8Ijb8dBypPr1Ruqauj6kJpGmDhcO3NN2A8id/
+ 2yA/kp2DJSeyKGXoTH68EfKYbI6Xyi/Lw3RnM+IZ4iWWV3Y+hEDFfs/3HngX84ap/HrfNGiYwy
+ DaCDUnbKs2WgGMwJas/1eD3W15gtWpaURXRUOTVc/jq8jkVRbx4cVQ4w2m/RPcV/+82kYHPBUF
+ nUI=
+X-SBRS: 2.7
+X-MesageID: 21866724
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.75,327,1589256000"; d="scan'208";a="21866724"
+Date: Wed, 8 Jul 2020 15:32:05 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Bertrand Marquis <Bertrand.Marquis@arm.com>
+Subject: Re: PCI passthrough on arm Design Session MoM
+Message-ID: <20200708133205.GE7191@Air-de-Roger>
+References: <4E0A40D3-2979-4A91-9376-C2B19B9F582E@arm.com>
 MIME-Version: 1.0
-References: <CAKmqyKPFMGtDLzc2RiEZR6KCcbPL6wumm+V5SNdxNf7fAowcBQ@mail.gmail.com>
- <20200708131150.GD7191@Air-de-Roger>
- <CAKmqyKOhW=YJ-WW28v-Ddt5yDDfVfCJKwijfsXo0oWAcvfrg2w@mail.gmail.com>
- <6CE81465-9F87-486F-A3CC-08857C9C4332@citrix.com>
-In-Reply-To: <6CE81465-9F87-486F-A3CC-08857C9C4332@citrix.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 8 Jul 2020 06:20:47 -0700
-Message-ID: <CAKmqyKP5j7tQLZ8ka=CoN93X87a1LQhnMTxSeYfFo0jviMzP-w@mail.gmail.com>
-Subject: Re: Xen and RISC-V Design Session
-To: George Dunlap <George.Dunlap@citrix.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+In-Reply-To: <4E0A40D3-2979-4A91-9376-C2B19B9F582E@arm.com>
+X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
+ AMSPEX02CL02.citrite.net (10.69.22.126)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -85,55 +76,73 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: "open list:X86" <xen-devel@lists.xenproject.org>,
- Andrew Cooper <Andrew.Cooper3@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Bobby Eshleman <bobby.eshleman@starlab.io>,
- Roger Pau Monne <roger.pau@citrix.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>, nd <nd@arm.com>,
+ Rahul Singh <Rahul.Singh@arm.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Wed, Jul 8, 2020 at 6:21 AM George Dunlap <George.Dunlap@citrix.com> wro=
-te:
->
->
->
-> > On Jul 8, 2020, at 2:11 PM, Alistair Francis <alistair23@gmail.com> wro=
-te:
-> >
-> > On Wed, Jul 8, 2020 at 6:11 AM Roger Pau Monn=C3=A9 <roger.pau@citrix.c=
-om> wrote:
-> >>
-> >> Adding George in case he can help with the session placement.
-> >>
-> >> On Wed, Jul 08, 2020 at 05:55:06AM -0700, Alistair Francis wrote:
-> >>> Hey,
-> >>>
-> >>> I'm not sure if there is a better way to suggest a design session but
-> >>> can we have a Xen on RISC-V discussion tomorrow at the Xen Design
-> >>> Summit?
-> >>
-> >> I think that would be interesting!
-> >>
-> >>> Preferably in a later slot as the early slots are very early for me.
-> >>
-> >> You have to register it at: https://design-sessions.xenproject.org/
-> >
-> > Thanks!
-> >
-> > I don't have a verification code unfortunately. Is it possible to get o=
-ne?
->
-> VirtualPanda2020
+On Wed, Jul 08, 2020 at 12:55:36PM +0000, Bertrand Marquis wrote:
+> Hi,
+> 
+> Here are the notes we took during the design session around PCI devices passthrough on Arm.
+> Feel free to comment or add anything :-)
+> 
+> Bertrand
+> 
+> PCI devices passthrough on Arm Design Session
+> ======================================
+> 
+> Date: 7/7/2020
+> 
+> - X86 VPCI support  is for the PVH guest .
 
-Thanks! Just submitted the proposal.
+Current vPCI is only for PVH dom0. We need to decide what to do for
+PVH domUs, whether we want to use vPCI or xenpt from Paul:
 
-It would be really great to have Bobby attend (on CC) as he has been
-working on it. I'm not sure what timezone he is in though.
+http://xenbits.xen.org/gitweb/?p=people/pauldu/xenpt.git;a=summary
 
-Alistair
+Or something else. I think this decision also needs to take into
+account Arm.
 
->
-> Cheers,
->  -George
+> - X86 PCI devices discovery code should be checked and maybe used on Arm as it is not very complex
+> 	- Remark from Julien: This might not work in number of cases
+> - Sanitation of each the PCI access for each guest in XEN is required
+> - MSI trap is not required for gicv3 but it required for gicv2m
+> 	- We do not plan to support non ITS GIC
+> - Check possibility to add some specifications in EBBR for PCI enumeration (address assignment part)
+> - PCI enumeration support should not depend on DOM0 for safety reasons
+> - PCI enumeration could be done in several places
+> 	- DTB, with some entries giving values to be applied by Xen
+> 	- In XEN (complex, not wanted out of devices discovery)
+> 	- In Firmware and then xen device discovery
+> - As per Julien it is difficult to tell the XEN on which segment PCI device is present
+> 	- Current test implementation is done on Juno where there is only one segment
+> 	- This should be investigated with an other hardware in the next months
+
+I'm not sure the segments used by Xen need to match the segments used
+by the guest. This is just an abstract value assigned from the OS (or
+Xen) in order to differentiate different MMCFG (ECAM) regions, and
+whether such numbers match doesn't seem relevant to me, as at the end
+Xen will trap ECAM accesses and map such accesses to the Xen assigned
+segments.
+
+Segments matching between the OS and Xen is only relevant when PCI
+information needs to be conveyed between the OS and Xen using some
+kind of hypercall, but I think you want to avoid using such side-band
+communication channels anyway?
+
+> - Julien mentioned that clocks issues will be complex to solve and most hardware are not following the ECAM standard
+> - Julien mentioned that Linux and Xen could do the enumeration in a different way, making it complex to have linux doing an enumeration after Xen
+> - We should push the code we have ASAP on the mailing list for a review and discussion on the design
+> 	- Arm will try to do that before end of July
+
+I will be happy to give it a look and provide feedback.
+
+For such complex pieces of work I would recommend to first send some
+kind of document to the mailing list in order to make sure the
+direction taken is accepted by the community, and we can also provide
+feedback or point to existing components that can be helpful :). If
+you have code done already that's also fine, feel free to send it.
+
+Thanks, Roger.
 
