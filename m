@@ -2,51 +2,70 @@ Return-Path: <SRS0=8vBC=AU=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
+X-Spam-Status: No, score=-0.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
 	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A26F5C433DF
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Jul 2020 09:22:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 929ACC433E0
+	for <xen-devel@archiver.kernel.org>; Thu,  9 Jul 2020 09:35:34 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7E56C206A1
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Jul 2020 09:22:31 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7E56C206A1
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 588C9206C3
+	for <xen-devel@archiver.kernel.org>; Thu,  9 Jul 2020 09:35:34 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="akaCTK/u"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 588C9206C3
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jtSl3-0000ho-25; Thu, 09 Jul 2020 09:22:21 +0000
+	id 1jtSxV-0001cx-82; Thu, 09 Jul 2020 09:35:13 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=qFbs=AU=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jtSl1-0000hj-Je
- for xen-devel@lists.xenproject.org; Thu, 09 Jul 2020 09:22:19 +0000
-X-Inumbo-ID: af794ab4-c1c5-11ea-bb8b-bc764e2007e4
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=sAgz=AU=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1jtSxT-0001cs-Br
+ for xen-devel@lists.xenproject.org; Thu, 09 Jul 2020 09:35:11 +0000
+X-Inumbo-ID: 7b270966-c1c7-11ea-8496-bc764e2007e4
+Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id af794ab4-c1c5-11ea-bb8b-bc764e2007e4;
- Thu, 09 Jul 2020 09:22:19 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id D7896ADE5;
- Thu,  9 Jul 2020 09:22:17 +0000 (UTC)
+ id 7b270966-c1c7-11ea-8496-bc764e2007e4;
+ Thu, 09 Jul 2020 09:35:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1594287310;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:content-transfer-encoding:in-reply-to;
+ bh=gqMCyMr9A6fAlEZaEvpq/W0eCaBGhGhpO8X4MLxTtp0=;
+ b=akaCTK/udqsczFGOLS7YtPKJc1W/TlmjeUXf6QnFEDV3to8cS+yXFNXA
+ eB6Gvw3i4DrVGzMiZFrbUYTN0psvN/aCaN67VkRuc3LSJkcX6x+njy5iw
+ EfiORaofF85jZWImKwq7ofmqMov5P6fJ95L5lstQS89HL4gv9v4eNV7wP 0=;
+Authentication-Results: esa2.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none
+IronPort-SDR: xcFvwX9mLqd7rZFTNTw/Ng0DWImv0Jfo1s53jxr/IKq3ViG0Xh/62gx2BFJUy46sk9Ih0weSci
+ I9KlqXGrEpRufggJK+NNrGigg1InEv6h2jELrmbeKOdK3JlyR88vQdriHkbCic98U6g9ap8CqR
+ /u9LzyIk7HockGinLfDvpjPBfLYiDCHVsIDcnyGYeOiG76f9EtryuYw5wdphQ+NqC61jGrQfHw
+ kryzwTTiX0xbo9/IG1XmKSfMq2r7+Q4KXYUFiAJ9cxyOBBegd6fwmsFHAR3/RN2o6ktc9EIWzR
+ D10=
+X-SBRS: 2.7
+X-MesageID: 21956476
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.75,331,1589256000"; d="scan'208";a="21956476"
+Date: Thu, 9 Jul 2020 11:34:54 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: =?utf-8?B?SsO8cmdlbiBHcm/Dnw==?= <jg@pfupf.net>
 Subject: Re: Followup of yesterday's design session "refactoring the REST"
-To: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jg@pfupf.net>
+Message-ID: <20200709093454.GF7191@Air-de-Roger>
 References: <a578fb24-cc6a-b3bd-b83d-3f7b9b1302cf@pfupf.net>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <f0367a9e-fdfb-1bf6-d569-f380349f9dd8@suse.com>
-Date: Thu, 9 Jul 2020 11:22:20 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <a578fb24-cc6a-b3bd-b83d-3f7b9b1302cf@pfupf.net>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <a578fb24-cc6a-b3bd-b83d-3f7b9b1302cf@pfupf.net>
+X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
+ AMSPEX02CL02.citrite.net (10.69.22.126)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,7 +80,7 @@ Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 09.07.2020 07:56, Jürgen Groß wrote:
+On Thu, Jul 09, 2020 at 07:56:58AM +0200, Jürgen Groß wrote:
 > Yesterday's design session at Xen Developer Summit "Hypervisor Team: .."
 > had one topic regarding whether we should find specific maintainers of
 > all the files currently assigned to "THE REST" in order to lower the
@@ -89,7 +108,10 @@ On 09.07.2020 07:56, Jürgen Groß wrote:
 > - some files in xen/tools/
 > 
 > I have attached the file list.
-> 
+
+Thanks! I still have to go over the list in more detail, just some
+comments below.
+
 > So the basic idea to have a "hypervisor REST" and a "tools REST"
 > wouldn't make a huge difference, if we don't assign docs/ to "tools
 > REST".
@@ -97,25 +119,24 @@ On 09.07.2020 07:56, Jürgen Groß wrote:
 > So I think it would make sense to:
 > 
 > - look through the docs/ and xen/include/ files whether some of those
->    can be assigned to a component already having dedicated maintainers
+>   can be assigned to a component already having dedicated maintainers
 > 
 > - try to find maintainers for the other files, especially those in
->    xen/common/ and xen/drivers/ (including the related include files, of
->    course)
+>   xen/common/ and xen/drivers/ (including the related include files, of
+>   course)
 
-At least for files in xen/common/ I think it was really intentional
-that they - as core hypervisor files - fall under THE REST. We could
-of course have a "Core Hypervisor" (or so) group, which would already
-...
+I think it's important that xen/common files (specially the ones
+containing interfaces exposed to guests) have at least one maintainer
+from each supported architecture (Arm and x86 ATM), plus whatever
+common code maintainers we want to have. It's sometimes easy (at least
+for me) to forget about other arches or make wrong assumptions about
+them when modifying common code.
 
-> - if any of the REST maintainers doesn't want to receive mails for a
->    group of the remaining REST files split the REST maintainers/files up
->    accordingly
+Drivers could also benefit from something similar IMO, where common
+code has a shared group of maintainers, for example IOMMU should
+ideally have a mix of maintainers from the current implementations
+(Arm/Intel/AMD) plus again whatever common code maintainers we want
+to have.
 
-... allow moving some into this direction.
-
-For files under xen/drivers/ not currently covered by other entries it
-may indeed be (more) feasible to find individual maintainers.
-
-Jan
+Roger.
 
