@@ -4,57 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable
-	autolearn_force=no version=3.4.0
+	SPF_PASS,USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ABA44C433EB
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Jul 2020 22:34:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EB0E7C433E8
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Jul 2020 22:34:44 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7DA9F206F4
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Jul 2020 22:34:45 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id BEEDE206F4
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Jul 2020 22:34:44 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="xBZEktMj"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7DA9F206F4
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="phL1a1Hm"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BEEDE206F4
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ju1bF-0005wj-1j; Fri, 10 Jul 2020 22:34:33 +0000
+	id 1ju1bF-0005wr-96; Fri, 10 Jul 2020 22:34:33 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=idFW=AV=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1ju1bD-0005wR-Tn
- for xen-devel@lists.xenproject.org; Fri, 10 Jul 2020 22:34:31 +0000
-X-Inumbo-ID: 847b9d42-c2fd-11ea-903c-12813bfff9fa
+ id 1ju1bE-0005wR-8W
+ for xen-devel@lists.xenproject.org; Fri, 10 Jul 2020 22:34:32 +0000
+X-Inumbo-ID: 8451828d-c2fd-11ea-903c-12813bfff9fa
 Received: from mail.kernel.org (unknown [198.145.29.99])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 847b9d42-c2fd-11ea-903c-12813bfff9fa;
- Fri, 10 Jul 2020 22:34:29 +0000 (UTC)
+ id 8451828d-c2fd-11ea-903c-12813bfff9fa;
+ Fri, 10 Jul 2020 22:34:31 +0000 (UTC)
 Received: from sstabellini-ThinkPad-T480s.hsd1.ca.comcast.net
  (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id D0AB420720;
- Fri, 10 Jul 2020 22:34:28 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 75FCA207BB;
+ Fri, 10 Jul 2020 22:34:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1594420469;
- bh=N98sE0T1Wenp2xz8bU/9CGFuY0Q14hRpLDV1a8rPTfI=;
+ s=default; t=1594420470;
+ bh=HgiPdFTfQq90v0qFVQCJWX2B++kBNShoCcFtOr7ILuk=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=xBZEktMj9lnVDi/7jRtBJyqzvM+VU07KDo+xAU1ggFMejrQ8eI7uVu68ssBJqz8/v
- jU0AhafpNHvkm+ms4tzTwIRAUwK4dasKLn3QWRlddk04NZE7OFbCS72Z+GL8Q0gOKr
- Bp3wgOG/f+MMbp/16nLGwlEHAFA3ZaldiMRJ5hP8=
+ b=phL1a1HmIcF5IqHsARIBc9mSooTg4t/lbu/szXY/+4PhXlbLh/EXV1Y82x/OI9S9m
+ PfJ0zM3h9v6KPmNL9qpxrZIycqVE+0H2/vQDY6n6j7N2e+o1NfgbR3z1M9k+3NlkQ+
+ bhq96IoKnNBDNwDZZLRkhAXx4YUDXm9SKmyqiY3E=
 From: Stefano Stabellini <sstabellini@kernel.org>
 To: jgross@suse.com,
 	boris.ostrovsky@oracle.com,
 	konrad.wilk@oracle.com
-Subject: [PATCH v3 01/11] swiotlb-xen: use vmalloc_to_page on vmalloc virt
- addresses
-Date: Fri, 10 Jul 2020 15:34:17 -0700
-Message-Id: <20200710223427.6897-1-sstabellini@kernel.org>
+Subject: [PATCH v3 03/11] swiotlb-xen: add struct device * parameter to
+ xen_phys_to_bus
+Date: Fri, 10 Jul 2020 15:34:19 -0700
+Message-Id: <20200710223427.6897-3-sstabellini@kernel.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <alpine.DEB.2.21.2007101521290.4124@sstabellini-ThinkPad-T480s>
 References: <alpine.DEB.2.21.2007101521290.4124@sstabellini-ThinkPad-T480s>
@@ -74,62 +73,84 @@ Cc: hch@infradead.org, xen-devel@lists.xenproject.org, sstabellini@kernel.org,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+From: Stefano Stabellini <stefano.stabellini@xilinx.com>
 
-xen_alloc_coherent_pages might return pages for which virt_to_phys and
-virt_to_page don't work, e.g. ioremap'ed pages.
+No functional changes. The parameter is unused in this patch but will be
+used by next patches.
 
-So in xen_swiotlb_free_coherent we can't assume that virt_to_page works.
-Instead add a is_vmalloc_addr check and use vmalloc_to_page on vmalloc
-virt addresses.
-
-This patch fixes the following crash at boot on RPi4 (the underlying
-issue is not RPi4 specific):
-https://marc.info/?l=xen-devel&m=158862573216800
-
-Signed-off-by: Boris Ostrovsky <boris.ostrovsky@oracle.com>
 Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
 Reviewed-by: Boris Ostrovsky <boris.ostrovsky@oracle.com>
 Tested-by: Corey Minyard <cminyard@mvista.com>
 Tested-by: Roman Shaposhnik <roman@zededa.com>
 ---
 Changes in v3:
-- style improvements
-
-Changes in v2:
-- update commit message
+- add whitespace in title
+- improve commit message
 ---
- drivers/xen/swiotlb-xen.c | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+ drivers/xen/swiotlb-xen.c | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
 diff --git a/drivers/xen/swiotlb-xen.c b/drivers/xen/swiotlb-xen.c
-index b6d27762c6f8..5fbadd07819b 100644
+index 89a775948a02..dbe710a59bf2 100644
 --- a/drivers/xen/swiotlb-xen.c
 +++ b/drivers/xen/swiotlb-xen.c
-@@ -335,6 +335,7 @@ xen_swiotlb_free_coherent(struct device *hwdev, size_t size, void *vaddr,
- 	int order = get_order(size);
- 	phys_addr_t phys;
- 	u64 dma_mask = DMA_BIT_MASK(32);
-+	struct page *page;
+@@ -57,7 +57,7 @@ static unsigned long xen_io_tlb_nslabs;
+  * can be 32bit when dma_addr_t is 64bit leading to a loss in
+  * information if the shift is done before casting to 64bit.
+  */
+-static inline dma_addr_t xen_phys_to_bus(phys_addr_t paddr)
++static inline dma_addr_t xen_phys_to_bus(struct device *dev, phys_addr_t paddr)
+ {
+ 	unsigned long bfn = pfn_to_bfn(XEN_PFN_DOWN(paddr));
+ 	dma_addr_t dma = (dma_addr_t)bfn << XEN_PAGE_SHIFT;
+@@ -78,9 +78,9 @@ static inline phys_addr_t xen_bus_to_phys(dma_addr_t baddr)
+ 	return paddr;
+ }
  
- 	if (hwdev && hwdev->coherent_dma_mask)
- 		dma_mask = hwdev->coherent_dma_mask;
-@@ -346,9 +347,14 @@ xen_swiotlb_free_coherent(struct device *hwdev, size_t size, void *vaddr,
- 	/* Convert the size to actually allocated. */
- 	size = 1UL << (order + XEN_PAGE_SHIFT);
+-static inline dma_addr_t xen_virt_to_bus(void *address)
++static inline dma_addr_t xen_virt_to_bus(struct device *dev, void *address)
+ {
+-	return xen_phys_to_bus(virt_to_phys(address));
++	return xen_phys_to_bus(dev, virt_to_phys(address));
+ }
  
-+	if (is_vmalloc_addr(vaddr))
-+		page = vmalloc_to_page(vaddr);
-+	else
-+		page = virt_to_page(vaddr);
-+
- 	if (!WARN_ON((dev_addr + size - 1 > dma_mask) ||
- 		     range_straddles_page_boundary(phys, size)) &&
--	    TestClearPageXenRemapped(virt_to_page(vaddr)))
-+	    TestClearPageXenRemapped(page))
- 		xen_destroy_contiguous_region(phys, order);
+ static inline int range_straddles_page_boundary(phys_addr_t p, size_t size)
+@@ -309,7 +309,7 @@ xen_swiotlb_alloc_coherent(struct device *hwdev, size_t size,
+ 	 * Do not use virt_to_phys(ret) because on ARM it doesn't correspond
+ 	 * to *dma_handle. */
+ 	phys = *dma_handle;
+-	dev_addr = xen_phys_to_bus(phys);
++	dev_addr = xen_phys_to_bus(hwdev, phys);
+ 	if (((dev_addr + size - 1 <= dma_mask)) &&
+ 	    !range_straddles_page_boundary(phys, size))
+ 		*dma_handle = dev_addr;
+@@ -370,7 +370,7 @@ static dma_addr_t xen_swiotlb_map_page(struct device *dev, struct page *page,
+ 				unsigned long attrs)
+ {
+ 	phys_addr_t map, phys = page_to_phys(page) + offset;
+-	dma_addr_t dev_addr = xen_phys_to_bus(phys);
++	dma_addr_t dev_addr = xen_phys_to_bus(dev, phys);
  
- 	xen_free_coherent_pages(hwdev, size, vaddr, (dma_addr_t)phys, attrs);
+ 	BUG_ON(dir == DMA_NONE);
+ 	/*
+@@ -395,7 +395,7 @@ static dma_addr_t xen_swiotlb_map_page(struct device *dev, struct page *page,
+ 		return DMA_MAPPING_ERROR;
+ 
+ 	phys = map;
+-	dev_addr = xen_phys_to_bus(map);
++	dev_addr = xen_phys_to_bus(dev, map);
+ 
+ 	/*
+ 	 * Ensure that the address returned is DMA'ble
+@@ -539,7 +539,7 @@ xen_swiotlb_sync_sg_for_device(struct device *dev, struct scatterlist *sgl,
+ static int
+ xen_swiotlb_dma_supported(struct device *hwdev, u64 mask)
+ {
+-	return xen_virt_to_bus(xen_io_tlb_end - 1) <= mask;
++	return xen_virt_to_bus(hwdev, xen_io_tlb_end - 1) <= mask;
+ }
+ 
+ const struct dma_map_ops xen_swiotlb_dma_ops = {
 -- 
 2.17.1
 
