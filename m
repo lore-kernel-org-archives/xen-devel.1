@@ -2,72 +2,72 @@ Return-Path: <SRS0=aF8x=AZ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A287DC433E0
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Jul 2020 14:32:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ACAD7C433E0
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Jul 2020 14:32:59 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 700D022515
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Jul 2020 14:32:18 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 79F0722515
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Jul 2020 14:32:59 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="gXto9f/l"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 700D022515
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="N3pQLoom"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 79F0722515
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jvLyZ-0003nV-RU; Tue, 14 Jul 2020 14:32:07 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jvLzG-0003t4-50; Tue, 14 Jul 2020 14:32:50 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=CaI7=AZ=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1jvLyY-0003nH-Mb
- for xen-devel@lists.xenproject.org; Tue, 14 Jul 2020 14:32:06 +0000
-X-Inumbo-ID: ca3e2690-c5de-11ea-bb8b-bc764e2007e4
+ id 1jvLzE-0003sp-QL
+ for xen-devel@lists.xenproject.org; Tue, 14 Jul 2020 14:32:48 +0000
+X-Inumbo-ID: e35c7dc0-c5de-11ea-931c-12813bfff9fa
 Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id ca3e2690-c5de-11ea-bb8b-bc764e2007e4;
- Tue, 14 Jul 2020 14:32:06 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id e35c7dc0-c5de-11ea-931c-12813bfff9fa;
+ Tue, 14 Jul 2020 14:32:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1594737125;
+ d=citrix.com; s=securemail; t=1594737167;
  h=date:from:to:cc:subject:message-id:references:
  mime-version:content-transfer-encoding:in-reply-to;
- bh=itH0grY7MffT3KoiW6iaLuvAdbO+5SArD63hAEr6TxE=;
- b=gXto9f/lmICFWo/C3I15YMe+5u09NQR/6I/R9pCnhTv+eJIiv4HhGUoD
- I2pYLWaobF1ThC/PBhAHux92VjldrkbV2csnbYWvjQEhDAmfYWID2kxNl
- Wb/ErNbmYYl/h7iCzGfFebJqI80NknZSfgTl2fB1cG/jgW3EotQHFE0TQ Q=;
+ bh=W+4mPB3k7E9WEQwkaLmFSNqFF5GBBRz9I004eyGpiao=;
+ b=N3pQLoomMYgOjUC6ALF3R3hQjG6n4ehqzxnKj0tJzm5FAXcGcOkXG29G
+ Ayg2yVlybZ36rjBgQ0gRroq6DFC96HtmR09QKfjOUvb+7Rsn9d2/Ov18B
+ j6HsvrPp9pmuyQZtGGXmcWTsWcLsZyxG/Hxjp3TcNy48A0U4KE93sxfFH g=;
 Authentication-Results: esa6.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: l8GoQ23qy4S7V7XESdJ18zy/KiZNdFpDs5A2qjD1RZE1PXg9JqtiWwHqLD9TJuDKEI4zFYjUvh
- OugjLDZO+RsyLsVBu61su+PkptPNFpSCnC2YSK0d8GI6e6IvKaQtEAwvtfSaDGICi+xgmz8lyN
- /w3LIMIRe5rKuf+vDmf/0X7U1wQJXVUgylRFLbtLUBtxgfoOKXmWP2h0QWBImH3BopUWdFiFLX
- incJZEybQeDu3um0C58UrAGDmlw95mwy4DUyrVOWPheerc+8xvqOzbe8XM2PMuTbd1K9U0NDwp
- TXY=
+IronPort-SDR: e9W0yGQB1TiwM2wn+v7JH3noqdCbU1DSvWWsyO2sIODaC0rR+Zfj0+962f6JwP/OImmHvA6ue6
+ uaVci7yMfrSY48s2Q6LBQTt15I7HxUr/Nxvip2iHzFQQWZ/1Lz+kCpUMOUr1Iq206yqCIJ6Vn9
+ AQciIStJH4ogvOR8mhZ5LoG/qVSehW2OeF/Wau2C2ofEndxMd1aDUoXSoENiN8yj5Cn9/nH4IW
+ rJP/ViMjN84N/Cb9QYpX1k25sXj4kni+B0KifBwA5RkIcIJm2ud/mIbamb5R79EOK1KUs8xRED
+ TKw=
 X-SBRS: 2.7
-X-MesageID: 22673717
+X-MesageID: 22673810
 X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.75,350,1589256000"; d="scan'208";a="22673717"
-Date: Tue, 14 Jul 2020 16:31:57 +0200
+X-IronPort-AV: E=Sophos;i="5.75,350,1589256000"; d="scan'208";a="22673810"
+Date: Tue, 14 Jul 2020 16:32:38 +0200
 From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
 To: Jan Beulich <jbeulich@suse.com>
 Subject: Re: [PATCH v2 3/7] x86/mce: bring hypercall subop compat checking in
  sync again
-Message-ID: <20200714143157.GM7191@Air-de-Roger>
+Message-ID: <20200714143238.GN7191@Air-de-Roger>
 References: <bb6a96c6-b6b1-76ff-f9db-10bec0fb4ab1@suse.com>
  <5d53a2e3-716c-2213-96e5-9d37371c482c@suse.com>
- <20200714111900.GI7191@Air-de-Roger>
- <f82edef5-ee75-b24c-0a24-03ed38486882@suse.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <f82edef5-ee75-b24c-0a24-03ed38486882@suse.com>
+In-Reply-To: <5d53a2e3-716c-2213-96e5-9d37371c482c@suse.com>
 X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
  AMSPEX02CL02.citrite.net (10.69.22.126)
 X-BeenThere: xen-devel@lists.xenproject.org
@@ -87,22 +87,14 @@ Cc: George Dunlap <George.Dunlap@eu.citrix.com>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Tue, Jul 14, 2020 at 01:47:11PM +0200, Jan Beulich wrote:
-> On 14.07.2020 13:19, Roger Pau Monné wrote:
-> > On Wed, Jul 01, 2020 at 12:26:54PM +0200, Jan Beulich wrote:
-> >> Use a typedef in struct xen_mc also for the two subops "manually"
-> >> translated in the handler, just for consistency. No functional
-> >> change.
-> > 
-> > I'm slightly puzzled by the fact that mc_fetch is marked as needs
-> > checking while mc_physcpuinfo is marked as needs translation,
-> > shouldn't both be marked as needing translation? (since both need to
-> > handle a guest pointer using XEN_GUEST_HANDLE)
+On Wed, Jul 01, 2020 at 12:26:54PM +0200, Jan Beulich wrote:
+> Use a typedef in struct xen_mc also for the two subops "manually"
+> translated in the handler, just for consistency. No functional
+> change.
 > 
-> I guess I'm confused - I see an exclamation mark on both respective
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-No, I was the one confused, you are right that both are marked as need
-translation.
+Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
 
-Roger.
+Thanks.
 
