@@ -2,52 +2,87 @@ Return-Path: <SRS0=L/tO=A2=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.5 required=3.0 tests=BAYES_00,
+X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_ADSP_CUSTOM_MED,
+	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
-	version=3.4.0
+	SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 466AAC433E8
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Jul 2020 10:04:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 29A33C433E0
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Jul 2020 10:01:29 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 25D44206F5
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Jul 2020 10:04:26 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 25D44206F5
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id EE41E2064C
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Jul 2020 10:01:28 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="MLKen9Da"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EE41E2064C
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jveGv-00064x-6N; Wed, 15 Jul 2020 10:04:17 +0000
+	id 1jveE3-0005hD-Pt; Wed, 15 Jul 2020 10:01:19 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=9G22=A2=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jveGt-000641-AL
- for xen-devel@lists.xenproject.org; Wed, 15 Jul 2020 10:04:15 +0000
-X-Inumbo-ID: 89790662-c682-11ea-8496-bc764e2007e4
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=hlgd=A2=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
+ id 1jveE2-0005gz-0v
+ for xen-devel@lists.xenproject.org; Wed, 15 Jul 2020 10:01:18 +0000
+X-Inumbo-ID: 1fd2f6f0-c682-11ea-b7bb-bc764e2007e4
+Received: from mail-wr1-x431.google.com (unknown [2a00:1450:4864:20::431])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 89790662-c682-11ea-8496-bc764e2007e4;
- Wed, 15 Jul 2020 10:04:14 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 2205FAFB0;
- Wed, 15 Jul 2020 10:04:17 +0000 (UTC)
-Subject: [PATCH 2/2] VT-d: use clear_page() in alloc_pgtable_maddr()
-From: Jan Beulich <jbeulich@suse.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <2ad1607d-0909-f1cc-83bf-2546b28a9128@suse.com>
-Message-ID: <14f8b940-252f-9837-8958-5e76e1c3f06f@suse.com>
-Date: Wed, 15 Jul 2020 12:04:15 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ id 1fd2f6f0-c682-11ea-b7bb-bc764e2007e4;
+ Wed, 15 Jul 2020 10:01:17 +0000 (UTC)
+Received: by mail-wr1-x431.google.com with SMTP id s10so1769753wrw.12
+ for <xen-devel@lists.xenproject.org>; Wed, 15 Jul 2020 03:01:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:reply-to:to:cc:references:in-reply-to:subject:date:message-id
+ :mime-version:content-transfer-encoding:content-language
+ :thread-index; bh=OwSFL/9dqqsJtoE5Gx51FwuHDO2G9G77qcT4DW0dgpg=;
+ b=MLKen9Dac7+Ln1LjTnQMH+tPeLZHYjNknvrLP8DBOlG59lwI+iKSaOEeHzStjH6uIr
+ 9htLYOvlZNg8GY57/rod4ipcBLlIgLd4MZXyAIeq9unrX38LSA6bziN/tD8yrLM/HL0x
+ x+QIHJXR/vqiKrBSW0yN+oiipieYW1Yc6+PZafe7RJU9fjHwt1jCMlAwunnqklehosE9
+ XNgFpWtz/cSIAvBWJXJ4q0g/Mp9kPLknPFcdYVJVNMPjZa5CQoK8r3IoXDPaeZRHOe56
+ A9ZUElZfHo8LRXpq/jtvxexEPtNhIYWrWUPV2MhY26+eW0KwyXsBbaqlDWs5yXeNl3R5
+ CEHw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:reply-to:to:cc:references:in-reply-to
+ :subject:date:message-id:mime-version:content-transfer-encoding
+ :content-language:thread-index;
+ bh=OwSFL/9dqqsJtoE5Gx51FwuHDO2G9G77qcT4DW0dgpg=;
+ b=NHHBDd4+NNiLW2l05tteuugXoQpeykMklbzSt98oUY3OMSAxZPcW56CkMFZKR0Hi1v
+ cgkHkt+qmtVwGkc/UWbB8939nD+yR9BS/q1UTGC44pd2WqkoU/6ZnV/cpOldNDiFKCbS
+ 4Xz+1BrGfkBTO6EaLzugb+KVYtsO/rDRbKJu5oN9eeToxDlDt4s0cSg7hiLiV8LH04NI
+ yB0/jraYJ5jcx/CtDQe5UpbCaOJ7zAf+GZwLJvmqIb9YY5zM5+fdOZdpcO3wcgLala3L
+ c5l5Gyw06+oT/UfcXPc83/vx9otowRmHzkL1yF0uHkKZBvnPBqkATG418er0nwjm6ROB
+ ocqQ==
+X-Gm-Message-State: AOAM5332hZCaq6M0BgOXmLJV4D7TLT6xTcCl70Z6ZK5nB2kD1+cfBQSN
+ Ffqa6m1UuwvuvGj6ke7H1/U=
+X-Google-Smtp-Source: ABdhPJxNtGMHGj2Xx7RiUug5Xg5H3HALDE+w+pKGBXCw7MOOs9FxtMgWMtesm52FzQLuJim0UVnyWg==
+X-Received: by 2002:adf:eec2:: with SMTP id a2mr10369846wrp.127.1594807276683; 
+ Wed, 15 Jul 2020 03:01:16 -0700 (PDT)
+Received: from CBGR90WXYV0 (54-240-197-235.amazon.com. [54.240.197.235])
+ by smtp.gmail.com with ESMTPSA id u2sm2468011wml.16.2020.07.15.03.01.15
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Wed, 15 Jul 2020 03:01:16 -0700 (PDT)
+From: Paul Durrant <xadimgnik@gmail.com>
+X-Google-Original-From: "Paul Durrant" <paul@xen.org>
+To: "'Jan Beulich'" <jbeulich@suse.com>,
+	<xen-devel@lists.xenproject.org>
+References: <416ac9b1-93d1-81a2-be19-d58d509fdfec@suse.com>
+ <59f26856-d23d-bb69-0403-39e77acbf85c@suse.com>
+In-Reply-To: <59f26856-d23d-bb69-0403-39e77acbf85c@suse.com>
+Subject: RE: [PATCH v2 1/2] x86: restore pv_rtc_handler() invocation
+Date: Wed, 15 Jul 2020 11:01:15 +0100
+Message-ID: <001301d65a8e$e10e1260$a32a3720$@xen.org>
 MIME-Version: 1.0
-In-Reply-To: <2ad1607d-0909-f1cc-83bf-2546b28a9128@suse.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailer: Microsoft Outlook 16.0
+Content-Language: en-gb
+Thread-Index: AQH810IKdkrzCSlAezDylIfWz5DUNADle+uqqLRCwlA=
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,36 +93,49 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Kevin Tian <kevin.tian@intel.com>
+Reply-To: paul@xen.org
+Cc: 'Andrew Cooper' <andrew.cooper3@citrix.com>, 'Wei Liu' <wl@xen.org>,
+ =?utf-8?Q?'Roger_Pau_Monn=C3=A9'?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-For full pages this is (meant to be) more efficient. Also change the
-type and reduce the scope of the involved local variable.
+> -----Original Message-----
+> From: Jan Beulich <jbeulich@suse.com>
+> Sent: 15 July 2020 10:47
+> To: xen-devel@lists.xenproject.org
+> Cc: Andrew Cooper <andrew.cooper3@citrix.com>; Paul Durrant =
+<paul@xen.org>; Wei Liu <wl@xen.org>;
+> Roger Pau Monn=C3=A9 <roger.pau@citrix.com>
+> Subject: [PATCH v2 1/2] x86: restore pv_rtc_handler() invocation
+>=20
+> This was lost when making the logic accessible to PVH Dom0.
+>=20
+> Fixes: 835d8d69d96a ("x86/rtc: provide mediated access to RTC for PVH =
+dom0")
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+>=20
+> --- a/xen/arch/x86/time.c
+> +++ b/xen/arch/x86/time.c
+> @@ -1160,6 +1160,10 @@ void rtc_guest_write(unsigned int port,
+>      case RTC_PORT(1):
+>          if ( !ioports_access_permitted(currd, RTC_PORT(0), =
+RTC_PORT(1)) )
+>              break;
+> +
+> +        if ( pv_rtc_handler )
+> +            pv_rtc_handler(currd->arch.cmos_idx & 0x7f, data);
+> +
 
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
+This appears to be semantically slightly different to the old code in =
+that it is only done for a write to RC_PORT(1), whereas it would have =
+been done on a write to either RTC_POR(0) or RTC_PORT(1) before. Is that =
+of any concern?
 
---- a/xen/drivers/passthrough/vtd/iommu.c
-+++ b/xen/drivers/passthrough/vtd/iommu.c
-@@ -199,7 +199,6 @@ static void sync_cache(const void *addr,
- uint64_t alloc_pgtable_maddr(unsigned long npages, nodeid_t node)
- {
-     struct page_info *pg, *cur_pg;
--    u64 *vaddr;
-     unsigned int i;
- 
-     pg = alloc_domheap_pages(NULL, get_order_from_pages(npages),
-@@ -210,8 +209,9 @@ uint64_t alloc_pgtable_maddr(unsigned lo
-     cur_pg = pg;
-     for ( i = 0; i < npages; i++ )
-     {
--        vaddr = __map_domain_page(cur_pg);
--        memset(vaddr, 0, PAGE_SIZE);
-+        void *vaddr = __map_domain_page(cur_pg);
-+
-+        clear_page(vaddr);
- 
-         if ( (iommu_ops.init ? &iommu_ops : &vtd_ops)->sync_cache )
-             sync_cache(vaddr, PAGE_SIZE);
+  Paul
+
+>          spin_lock_irqsave(&rtc_lock, flags);
+>          outb(currd->arch.cmos_idx & 0x7f, RTC_PORT(0));
+>          outb(data, RTC_PORT(1));
+
 
 
