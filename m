@@ -7,67 +7,65 @@ X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E7647C433F7
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Jul 2020 08:35:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A55BBC433E0
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Jul 2020 08:43:51 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BAF502067D
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Jul 2020 08:35:10 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 7837520663
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Jul 2020 08:43:51 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="c3vSpRcr"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BAF502067D
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="fsgq+Pqw"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7837520663
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jvcsS-00059a-Em; Wed, 15 Jul 2020 08:34:56 +0000
+	id 1jvd0s-00067Z-IU; Wed, 15 Jul 2020 08:43:38 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=osgb=A2=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1jvcsQ-00059V-Vt
- for xen-devel@lists.xenproject.org; Wed, 15 Jul 2020 08:34:55 +0000
-X-Inumbo-ID: 0d0e30c2-c676-11ea-bb8b-bc764e2007e4
-Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ id 1jvd0q-00067S-Kd
+ for xen-devel@lists.xenproject.org; Wed, 15 Jul 2020 08:43:36 +0000
+X-Inumbo-ID: 450ad31c-c677-11ea-bb8b-bc764e2007e4
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 0d0e30c2-c676-11ea-bb8b-bc764e2007e4;
- Wed, 15 Jul 2020 08:34:54 +0000 (UTC)
+ id 450ad31c-c677-11ea-bb8b-bc764e2007e4;
+ Wed, 15 Jul 2020 08:43:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1594802093;
+ d=citrix.com; s=securemail; t=1594802615;
  h=date:from:to:cc:subject:message-id:references:
  mime-version:content-transfer-encoding:in-reply-to;
- bh=m1zYlnWCGeigBRLopOjVVCPrIjQTIp4NpqO1z7cdwF4=;
- b=c3vSpRcrchH2MGhfiZvcH1S4LCkmxE+Qbx9C2m6wBm8O7tsHgSgwf0ND
- PqqL1rLTujN1lDWNTi7kn/k5gYbHd9PKjl6i7Pde6lbyxwwHClnrQbBAL
- FfdyEqCv5RXcQxplegZzobFLImJYHHk5QWhELHGK8/ZVN/Oaeh1VwOON6 s=;
-Authentication-Results: esa4.hc3370-68.iphmx.com;
+ bh=LtIovrDRKRVQOx6LezTe8u0WyCRzFKL+6oJm1gZCxU0=;
+ b=fsgq+PqwrldIJ8oOfRPrzUX66l9vbAsADJQ208PA0WeEfxLgfjWxihtP
+ weCC9Z6r0MBib7MV73EujBYK1/G6HuyiTcvuSKR382fTYGRZuNpHGIivX
+ 3e2lx+PjGubpB9bwQ73ShRVTUMFostofH0Xz9sKEkfPiSdRczPpMwukvA A=;
+Authentication-Results: esa3.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: gpXS6aAanqMBJpS65vS253WVzDpztu8kXwN+gYoGnX3JitLB9lQLZIAmPz9YOoJl+lLComVGv+
- M3xnMFQ02IPwTh0t0mTFCQ1WyMTahyxo3RRaLc65CzY2oSxsA5Pua4Mk4yfqB4+HQgSm9Qx0Gx
- kZo6sK/nfXiEIo4bocXLeI0xhV5s2Yx5CcwJceYJVJ3PyvEDhwGNk62muZfiJ4v2qQvfbeOisG
- hYRFWZ1WKOHo+kA8OsJ0LbmMwEwomlsBUfu1TmG7roxGHND7eOH6Aocxz/JtsuVoMIbZe/dMiq
- 6bE=
+IronPort-SDR: 6gD07dbHdMmGsBeraAY5oSVSybiFjz4OED5sAvK0ArctRRDcgo/R5JaboNEOi0zNP8XgSRZt+6
+ S9IN2PIMYvgcY0mxOkkoMwqTvrVS9AVvOxLfKXRvrF58MTIwROtPzgIy8SNoGGYm+oH1EwiqVv
+ Z1Zz9er2TP7gCUXrODa63in3hKS+fK+rw0Woy7DOxTUe/DbwpmpNT+7vbNJcyneGDJYjo7pyLZ
+ euhxalbUYHx2vKzPIPkCUlVmtz51AhZbiMHBl7z4jcg9OZ5OnBkmLCCTOYBk0+c1/WwdcDRuWq
+ Htw=
 X-SBRS: 2.7
-X-MesageID: 23256205
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-MesageID: 22408004
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.75,354,1589256000"; d="scan'208";a="23256205"
-Date: Wed, 15 Jul 2020 10:34:41 +0200
+X-IronPort-AV: E=Sophos;i="5.75,354,1589256000"; d="scan'208";a="22408004"
+Date: Wed, 15 Jul 2020 10:43:25 +0200
 From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
 To: Jan Beulich <jbeulich@suse.com>
-Subject: Re: [PATCH v2 5/7] x86: generalize padding field handling
-Message-ID: <20200715083441.GR7191@Air-de-Roger>
+Subject: Re: [PATCH v2 1/7] x86: fix compat header generation
+Message-ID: <20200715084325.GT7191@Air-de-Roger>
 References: <bb6a96c6-b6b1-76ff-f9db-10bec0fb4ab1@suse.com>
- <83274416-2812-53c9-f8cb-23ebdf73782e@suse.com>
- <20200714142948.GK7191@Air-de-Roger>
- <a319e308-9cf3-52dc-1883-fe749e3c5629@suse.com>
+ <a8139d0e-f332-b877-dea8-3ce8a6869285@suse.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <a319e308-9cf3-52dc-1883-fe749e3c5629@suse.com>
+In-Reply-To: <a8139d0e-f332-b877-dea8-3ce8a6869285@suse.com>
 X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
  AMSPEX02CL02.citrite.net (10.69.22.126)
 X-BeenThere: xen-devel@lists.xenproject.org
@@ -89,92 +87,51 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Wed, Jul 15, 2020 at 08:36:10AM +0200, Jan Beulich wrote:
-> On 14.07.2020 16:29, Roger Pau Monné wrote:
-> > On Wed, Jul 01, 2020 at 12:27:37PM +0200, Jan Beulich wrote:
-> >> The original intention was to ignore padding fields, but the pattern
-> >> matched only ones whose names started with an underscore. Also match
-> >> fields whose names are in line with the C spec by not having a leading
-> >> underscore. (Note that the leading ^ in the sed regexps was pointless
-> >> and hence get dropped.)
-> >>
-> >> This requires adjusting some vNUMA macros, to avoid triggering
-> >> "enumeration value ... not handled in switch" warnings, which - due to
-> >> -Werror - would cause the build to fail. (I have to admit that I find
-> >> these padding fields odd, when translation of the containing structure
-> >> is needed anyway.)
-> >>
-> >> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-> > 
-> > Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+On Wed, Jul 01, 2020 at 12:25:15PM +0200, Jan Beulich wrote:
+> As was pointed out by 0e2e54966af5 ("mm: fix public declaration of
+> struct xen_mem_acquire_resource"), we're not currently handling structs
+> correctly that have uint64_aligned_t fields. #pragma pack(4) suppresses
+> the necessary alignment even if the type did properly survive (which
+> it also didn't) in the process of generating the headers. Overall,
+> with the above mentioned change applied, there's only a latent issue
+> here afaict, i.e. no other of our interface structs is currently
+> affected.
 > 
-> Thanks.
+> As a result it is clear that using #pragma pack(4) is not an option.
+> Drop all uses from compat header generation. Make sure
+> {,u}int64_aligned_t actually survives, such that explicitly aligned
+> fields will remain aligned. Arrange for {,u}int64_t to be transformed
+> into a type that's 64 bits wide and 4-byte aligned, by utilizing that
+> in typedef-s the "aligned" attribute can be used to reduce alignment.
+> Additionally, for the cases where native structures get re-used,
+> enforce suitable alignment via typedef-s (which allow alignment to be
+> reduced).
 > 
-> >> ---
-> >> While for translation macros skipping padding fields pretty surely is a
-> >> reasonable thing to do, we may want to consider not ignoring them when
-> >> generating checking macros.
+> This use of typedef-s makes necessary changes to CHECK_*() macro
+> generation: Previously get-fields.sh relied on finding struct/union
+> keywords when other compound types were used. We now need to use the
+> typedef-s (guaranteeing suitable alignment) now, and hence the script
+> has to recognize those cases, too. (Unfortunately there are a few
+> special cases to be dealt with, but this is really not much different
+> from e.g. the pre-existing compat_domain_handle_t special case.)
 > 
-> (note this remark, towards your question at the end)
+> This need to use typedef-s is certainly somewhat fragile going forward,
+> as in similar future cases it is imperative to also use typedef-s, or
+> else the CHECK_*() macros won't check what they're supposed to check. I
+> don't currently see any means to avoid this fragility, though.
 > 
-> >> --- a/xen/common/compat/memory.c
-> >> +++ b/xen/common/compat/memory.c
-> >> @@ -354,10 +354,13 @@ int compat_memory_op(unsigned int cmd, X
-> >>                  return -EFAULT;
-> >>  
-> >>  #define XLAT_vnuma_topology_info_HNDL_vdistance_h(_d_, _s_)		\
-> >> +            case XLAT_vnuma_topology_info_vdistance_pad:                \
-> >>              guest_from_compat_handle((_d_)->vdistance.h, (_s_)->vdistance.h)
-> >>  #define XLAT_vnuma_topology_info_HNDL_vcpu_to_vnode_h(_d_, _s_)		\
-> >> +            case XLAT_vnuma_topology_info_vcpu_to_vnode_pad:            \
-> >>              guest_from_compat_handle((_d_)->vcpu_to_vnode.h, (_s_)->vcpu_to_vnode.h)
-> >>  #define XLAT_vnuma_topology_info_HNDL_vmemrange_h(_d_, _s_)		\
-> >> +            case XLAT_vnuma_topology_info_vmemrange_pad:                \
-> >>              guest_from_compat_handle((_d_)->vmemrange.h, (_s_)->vmemrange.h)
-> > 
-> > I find this quite ugly, would it be better to just handle them with a
-> > default case in the XLAT_ macros?
+> There's one change to generated code according to my observations: In
+> arch_compat_vcpu_op() the runstate area "area" variable would previously
+> have been put in a just 4-byte aligned stack slot (despite being 8 bytes
+> in size), whereas now it gets put in an 8-byte aligned location.
 > 
-> Default cases explicitly do not get added to be able to spot missing
-> case labels, as most compilers will warn about such when the controlling
-> expression is of enum type.
+> There also results some curious inconsistency in struct xen_mc from
+> these changes - I intend to clean this up later on. Otherwise unrelated
+> code would also need adjustment right here.
+> 
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-As you say on the comment above, ignoring those for translation
-macros would be better, and would avoid the ugliness of having to add
-the _pad cases here.
+Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
 
-> > AFAICT it will also set (_d_)->vmemrange.h twice?
-> 
-> I'm not seeing it (and if it was, I'd then also wonder why not for the
-> other two handles above). This is the generated macro:
-> 
-> #define XLAT_vnuma_topology_info(_d_, _s_) do { \
->     (_d_)->domid = (_s_)->domid; \
->     (_d_)->nr_vnodes = (_s_)->nr_vnodes; \
->     (_d_)->nr_vcpus = (_s_)->nr_vcpus; \
->     (_d_)->nr_vmemranges = (_s_)->nr_vmemranges; \
->     switch (vdistance) { \
->     case XLAT_vnuma_topology_info_vdistance_h: \
->         XLAT_vnuma_topology_info_HNDL_vdistance_h(_d_, _s_); \
->         break; \
->     } \
->     switch (vcpu_to_vnode) { \
->     case XLAT_vnuma_topology_info_vcpu_to_vnode_h: \
->         XLAT_vnuma_topology_info_HNDL_vcpu_to_vnode_h(_d_, _s_); \
->         break; \
->     } \
->     switch (vmemrange) { \
->     case XLAT_vnuma_topology_info_vmemrange_h: \
->         XLAT_vnuma_topology_info_HNDL_vmemrange_h(_d_, _s_); \
->         break; \
->     } \
-> } while (0)
-> 
-> Am I overlooking any further aspect?
-
-No, vdistance, vcpu_to_vnode and vmemrange are set by the caller, so
-the enums will never have the _pad value, and hence the assignation
-will be done only once, you are right.
-
-Thanks, Roger.
+Thanks.
 
