@@ -2,53 +2,88 @@ Return-Path: <SRS0=L/tO=A2=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.5 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_ADSP_CUSTOM_MED,
+	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
+	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1538AC433E2
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Jul 2020 12:45:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 70344C433E5
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Jul 2020 12:47:36 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E352F20578
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Jul 2020 12:45:46 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E352F20578
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 3A2C920578
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Jul 2020 12:47:36 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="FDJhsQOf"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3A2C920578
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jvgn1-00062o-Sl; Wed, 15 Jul 2020 12:45:35 +0000
+	id 1jvgoo-00069Y-8i; Wed, 15 Jul 2020 12:47:26 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=9G22=A2=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jvgn1-00062j-Hf
- for xen-devel@lists.xenproject.org; Wed, 15 Jul 2020 12:45:35 +0000
-X-Inumbo-ID: 136bcf60-c699-11ea-bca7-bc764e2007e4
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=hlgd=A2=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
+ id 1jvgom-00069S-MQ
+ for xen-devel@lists.xenproject.org; Wed, 15 Jul 2020 12:47:24 +0000
+X-Inumbo-ID: 54532aa0-c699-11ea-b7bb-bc764e2007e4
+Received: from mail-wr1-x431.google.com (unknown [2a00:1450:4864:20::431])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 136bcf60-c699-11ea-bca7-bc764e2007e4;
- Wed, 15 Jul 2020 12:45:35 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 8554FACBF;
- Wed, 15 Jul 2020 12:45:37 +0000 (UTC)
-Subject: Re: [PATCH 1/3] x86/HVM: fold hvm_io_assist() into its only caller
-To: paul@xen.org
+ id 54532aa0-c699-11ea-b7bb-bc764e2007e4;
+ Wed, 15 Jul 2020 12:47:24 +0000 (UTC)
+Received: by mail-wr1-x431.google.com with SMTP id s10so2469845wrw.12
+ for <xen-devel@lists.xenproject.org>; Wed, 15 Jul 2020 05:47:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:reply-to:to:cc:references:in-reply-to:subject:date:message-id
+ :mime-version:content-transfer-encoding:content-language
+ :thread-index; bh=jd6m2q6vOnBbmSoWegGfAYIc9ZfcnWxkCBUtaO9NLGM=;
+ b=FDJhsQOfJTOFIM16Km2rKodkYgOXe3gmOGmAp+yR4ytOgoO60ia7ClRxC6KvpdcSZc
+ qpf6z3wVC9G8oDX50aGH/lKaB5OHd17BcmQFb759YCV7HGCEY9l7v4KcRXyXXNzD1p43
+ MHWXAb1juzHL0JY90yiFgKUNFWnUdULiiR5iKez73vN2q9sEIxNQ6gc8CqJOyNJXTKO6
+ dR/VPpSQ6hpsZNfxsCbZNw+LkbmB5/EyssyAaHvjO4dNM61H37UddRdl+mEBze5CMnQt
+ AvBZ5lSjGrQWQJW7r/AxcsS1HneY4ACK3CzyfDk+yUHnS9BW+VWoHb1qb56Zdi04xSQ/
+ 8VRQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:reply-to:to:cc:references:in-reply-to
+ :subject:date:message-id:mime-version:content-transfer-encoding
+ :content-language:thread-index;
+ bh=jd6m2q6vOnBbmSoWegGfAYIc9ZfcnWxkCBUtaO9NLGM=;
+ b=BT4DB8zU39R6sAHmNnwMGej8N83/vLpsCsutpzZefYNEf+zFmGKCpx8+p7O6Y//oai
+ 8CBw/0n0NV+QpSTQyAW20lP0IHan8Zdt+kqYpmL22b3YcyHP3juIsgjqQVwiLmht0Xlz
+ A1NHnWPXPxeEpIcHuaE6Jx+JBYNw55Vlr1jd9gXzl6jUR0Q3CJ1BjsaxwpTnYb8EbVnn
+ uWKrPqLbFb3W5LCA7x7Tf6HXfq0VJAuI2v4BpzxWA7XBwSHGQ+ICbVDj5iFonk1xbore
+ nYfhK7FJO6cQyxcqD4NceXu/S/D21EXcucKC83Uv5CKyB0G4eK1Z5kEF3+gQyFglaDx4
+ ymMg==
+X-Gm-Message-State: AOAM531huzy/UsiRIDwCbk9OJNalfoKn3jOQtv8RUpi7kyFPW366qLlB
+ eA/gF9qPB3BCjrc5y/d8PPg=
+X-Google-Smtp-Source: ABdhPJw+cT/sbT7KdwQNMFxiOcBSRoLjeEn/IY1LmgdRTPcfsuReM6+22yFMugUHa67AnleGPNm09g==
+X-Received: by 2002:a05:6000:11cc:: with SMTP id
+ i12mr11072680wrx.224.1594817243165; 
+ Wed, 15 Jul 2020 05:47:23 -0700 (PDT)
+Received: from CBGR90WXYV0 (54-240-197-235.amazon.com. [54.240.197.235])
+ by smtp.gmail.com with ESMTPSA id c7sm3517527wrq.58.2020.07.15.05.47.22
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Wed, 15 Jul 2020 05:47:22 -0700 (PDT)
+From: Paul Durrant <xadimgnik@gmail.com>
+X-Google-Original-From: "Paul Durrant" <paul@xen.org>
+To: "'Jan Beulich'" <jbeulich@suse.com>,
+	<xen-devel@lists.xenproject.org>
 References: <42270be7-43d6-ba53-3896-e20b5d7e3de0@suse.com>
- <94d683d7-302b-f0c2-0108-3f6d76b8df9b@suse.com>
- <001901d65aa5$27c03560$7740a020$@xen.org>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <ec74b9ba-dbc5-7ab4-0f65-6119bc49c333@suse.com>
-Date: Wed, 15 Jul 2020 14:45:34 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ <872c2d16-f49a-41fd-68ae-f1e0ee14c7d8@suse.com>
+In-Reply-To: <872c2d16-f49a-41fd-68ae-f1e0ee14c7d8@suse.com>
+Subject: RE: [PATCH 2/3] x86/HVM: re-work hvm_wait_for_io() a little
+Date: Wed, 15 Jul 2020 13:47:21 +0100
+Message-ID: <001b01d65aa6$15710e10$40532a30$@xen.org>
 MIME-Version: 1.0
-In-Reply-To: <001901d65aa5$27c03560$7740a020$@xen.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailer: Microsoft Outlook 16.0
+Content-Language: en-gb
+Thread-Index: AQKAf3+muaXr7mwqqHZG6k9bSD0TwwHovSMLp6UFpSA=
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,43 +94,105 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: xen-devel@lists.xenproject.org,
- =?UTF-8?B?J1JvZ2VyIFBhdSBNb25uw6kn?= <roger.pau@citrix.com>,
- 'Wei Liu' <wl@xen.org>, 'Andrew Cooper' <andrew.cooper3@citrix.com>
+Reply-To: paul@xen.org
+Cc: 'Andrew Cooper' <andrew.cooper3@citrix.com>, 'Wei Liu' <wl@xen.org>,
+ =?utf-8?Q?'Roger_Pau_Monn=C3=A9'?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 15.07.2020 14:40, Paul Durrant wrote:
->> From: Jan Beulich <jbeulich@suse.com>
->> Sent: 15 July 2020 13:04
->>
->>  static bool hvm_wait_for_io(struct hvm_ioreq_vcpu *sv, ioreq_t *p)
->>  {
->>      unsigned int prev_state = STATE_IOREQ_NONE;
->> +    uint64_t data = ~0;
->>
->> -    while ( sv->pending )
->> -    {
->> +    do {
->>          unsigned int state = p->state;
-> 
-> I guess this is beneficial from the point of view of restricting cope and...
-> 
->>
->>          smp_rmb();
->> @@ -132,7 +121,6 @@ static bool hvm_wait_for_io(struct hvm_i
->>               * emulator is dying and it races with an I/O being
->>               * requested.
->>               */
->> -            hvm_io_assist(sv, ~0ul);
->>              break;
-> 
-> ...(as you say) allowing this early break, but a forward jump to an 'out' label would be more consistent with other code. It works though so...
+> -----Original Message-----
+> From: Jan Beulich <jbeulich@suse.com>
+> Sent: 15 July 2020 13:04
+> To: xen-devel@lists.xenproject.org
+> Cc: Andrew Cooper <andrew.cooper3@citrix.com>; Roger Pau Monn=C3=A9 =
+<roger.pau@citrix.com>; Wei Liu
+> <wl@xen.org>; Paul Durrant <paul@xen.org>
+> Subject: [PATCH 2/3] x86/HVM: re-work hvm_wait_for_io() a little
+>=20
+> Convert the function's main loop to a more ordinary one, without goto
+> and without initial steps not needing to be inside a loop at all.
+>=20
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+>=20
+> --- a/xen/arch/x86/hvm/ioreq.c
+> +++ b/xen/arch/x86/hvm/ioreq.c
+> @@ -106,24 +106,17 @@ bool hvm_io_pending(struct vcpu *v)
+>  static bool hvm_wait_for_io(struct hvm_ioreq_vcpu *sv, ioreq_t *p)
+>  {
+>      unsigned int prev_state =3D STATE_IOREQ_NONE;
+> +    unsigned int state =3D p->state;
+>      uint64_t data =3D ~0;
+>=20
+> -    do {
+> -        unsigned int state =3D p->state;
 
-Since this gets restructured by subsequent patches I thought I'd
-avoid the introduction of a disliked by me "goto".
 
-> Reviewed-by: Paul Durrant <paul@xen.org>
+Oh, you lose the loop here anyway so the conversion in patch #1 was only =
+transient.
 
-Thanks, Jan
+> -
+> -        smp_rmb();
+> -
+> -    recheck:
+> -        if ( unlikely(state =3D=3D STATE_IOREQ_NONE) )
+> -        {
+> -            /*
+> -             * The only reason we should see this case is when an
+> -             * emulator is dying and it races with an I/O being
+> -             * requested.
+> -             */
+> -            break;
+> -        }
+> +    smp_rmb();
+>=20
+> +    /*
+> +     * The only reason we should see this condition be false is when =
+an
+> +     * emulator dying races with I/O being requested.
+> +     */
+> +    while ( likely(state !=3D STATE_IOREQ_NONE) )
+> +    {
+>          if ( unlikely(state < prev_state) )
+>          {
+>              gdprintk(XENLOG_ERR, "Weird HVM ioreq state transition %u =
+-> %u\n",
+> @@ -139,20 +132,24 @@ static bool hvm_wait_for_io(struct hvm_i
+>              p->state =3D STATE_IOREQ_NONE;
+>              data =3D p->data;
+>              break;
+> +
+
+Possibly mention the style fix-up in the comment comment.
+
+>          case STATE_IOREQ_READY:  /* IOREQ_{READY,INPROCESS} -> =
+IORESP_READY */
+>          case STATE_IOREQ_INPROCESS:
+>              wait_on_xen_event_channel(sv->ioreq_evtchn,
+>                                        ({ state =3D p->state;
+>                                           smp_rmb();
+>                                           state !=3D prev_state; }));
+> -            goto recheck;
+> +            continue;
+> +
+
+You could just break out of the switch now, I guess. Anyway...
+
+Reviewed-by: Paul Durrant <paul@xen.org>
+
+>          default:
+>              gdprintk(XENLOG_ERR, "Weird HVM iorequest state %u\n", =
+state);
+>              sv->pending =3D false;
+>              domain_crash(sv->vcpu->domain);
+>              return false; /* bail */
+>          }
+> -    } while ( false );
+> +
+> +        break;
+> +    }
+>=20
+>      p =3D &sv->vcpu->arch.hvm.hvm_io.io_req;
+>      if ( hvm_ioreq_needs_completion(p) )
+
+
 
