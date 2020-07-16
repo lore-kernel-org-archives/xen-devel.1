@@ -2,54 +2,76 @@ Return-Path: <SRS0=APZ7=A3=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.5 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=unavailable
+X-Spam-Status: No, score=-1.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	PDS_TONAME_EQ_TOLOCAL_SHORT,SPF_HELO_NONE,SPF_PASS autolearn=no
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DF28AC433E7
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Jul 2020 11:49:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5065EC433E3
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Jul 2020 11:54:54 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B4FA220657
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Jul 2020 11:49:07 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B4FA220657
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 1C4D720739
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Jul 2020 11:54:53 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="XgTbwsrK"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1C4D720739
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jw2Ng-00054s-Ae; Thu, 16 Jul 2020 11:48:52 +0000
+	id 1jw2TG-0005um-3z; Thu, 16 Jul 2020 11:54:38 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=dhnJ=A3=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jw2Ne-00054n-UQ
- for xen-devel@lists.xenproject.org; Thu, 16 Jul 2020 11:48:50 +0000
-X-Inumbo-ID: 506b140e-c75a-11ea-b7bb-bc764e2007e4
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=AXgs=A3=citrix.com=george.dunlap@srs-us1.protection.inumbo.net>)
+ id 1jw2TE-0005uh-BC
+ for xen-devel@lists.xenproject.org; Thu, 16 Jul 2020 11:54:36 +0000
+X-Inumbo-ID: 1e16853c-c75b-11ea-bb8b-bc764e2007e4
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 506b140e-c75a-11ea-b7bb-bc764e2007e4;
- Thu, 16 Jul 2020 11:48:50 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 47592B931;
- Thu, 16 Jul 2020 11:48:53 +0000 (UTC)
-Subject: Re: [PATCH 1/2] common: map_vcpu_info() cosmetics
-To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-References: <fef45e49-bcb4-dc11-8f7f-b2f5e4bf1a73@suse.com>
- <2a0341c7-3836-a8c0-9516-b6a08e2720ec@suse.com>
- <20200716114128.GO7191@Air-de-Roger>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <03a4d446-c26b-f171-57fd-a1eb13dad6c0@suse.com>
-Date: Thu, 16 Jul 2020 13:48:51 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
-MIME-Version: 1.0
-In-Reply-To: <20200716114128.GO7191@Air-de-Roger>
-Content-Type: text/plain; charset=utf-8
+ id 1e16853c-c75b-11ea-bb8b-bc764e2007e4;
+ Thu, 16 Jul 2020 11:54:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1594900476;
+ h=from:to:subject:date:message-id:content-id:
+ content-transfer-encoding:mime-version;
+ bh=VZ84eSJHuEXHFeY9Oq583Sd5WV44pROfefSm7ED9P8A=;
+ b=XgTbwsrKHz5B6LGpy9pnsVegECm1jCXR6WIH0j98/HWu7e7ln2Mcnsud
+ 8EpcOqsjYclJqT1r0O872ryfJ/q1B0t6/zaOavaNWA+uXQ1o94xcw06rA
+ wLK03hGXPJYf624QxwvkiX4oiMUALXaSfhAnVn7MEzNiTGs8xHWCwijeZ c=;
+Authentication-Results: esa1.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none
+IronPort-SDR: hSgwiYzQK5sUKsr3JM2ioRs/WbQFPbZnxLG0eJv7z/VL7K3V6ARoMpsUojGK8WYQDHJfBHFlB0
+ n4NEItZ7txnZDnLmmzmbj7tnzO2Nmri7w5QPmtjDKwOmBvAZJTnS7xWvfhtAZTYL7XHZITDU5o
+ CUKe2jNgqJNQaY6fn1VPwojEQgUlly+4bvRoJ+Pk+hFwvPjqzBlaRJV/Z+6G1dw+Um/F0Ti6SE
+ oH6NFjbjcZ0jii00awptbm1YaZEJJxg3CY3+/aAoI1KlV50TaKCkfUj1jxvfcJLkRXeDDcQu9V
+ at8=
+X-SBRS: 2.7
+X-MesageID: 22835307
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.75,359,1589256000"; d="scan'208";a="22835307"
+From: George Dunlap <George.Dunlap@citrix.com>
+To: xen-devel <xen-devel@lists.xenproject.org>
+Subject: Saved notes for design sessions
+Thread-Topic: Saved notes for design sessions
+Thread-Index: AQHWW2fcrzg6m88NVUmqDHsRdn6IYw==
+Date: Thu, 16 Jul 2020 11:54:29 +0000
+Message-ID: <8D97F48E-1948-4C1D-965F-0B42797516DD@citrix.com>
+Accept-Language: en-GB, en-US
 Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-mailer: Apple Mail (2.3608.80.23.2.2)
+x-ms-exchange-messagesentrepresentingtype: 1
+x-ms-exchange-transport-fromentityheader: Hosted
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <2E51A99BF8E6A140922844A77786B437@citrix.com>
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,37 +82,24 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Wei Liu <wl@xen.org>, George Dunlap <George.Dunlap@eu.citrix.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Ian Jackson <ian.jackson@citrix.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 16.07.2020 13:41, Roger Pau Monné wrote:
-> On Wed, Jul 15, 2020 at 12:15:10PM +0200, Jan Beulich wrote:
->> Use ENXIO instead of EINVAL to cover the two cases of the address not
->> satisfying the requirements. This will make an issue here better stand
->> out at the call site.
-> 
-> Not sure whether I would use EFAULT instead of ENXIO, as the
-> description of it is 'bad address' which seems more inline with the
-> error that we are trying to report.
+Hey all,
 
-The address isn't bad in the sense of causing a fault, it's just
-that we elect to not allow it. Hence I don't think EFAULT is
-suitable. I'm open to replacement suggestions for ENXIO, though.
+PDFs of the saved shared notes for the design sessions can be found in this=
+ zipfile:
 
->> Also add a missing compat-mode related size check: If the sizes
->> differed, other code in the function would need changing. Accompany this
->> by a change to the initial sizeof() expression, tying it to the type of
->> the variable we're actually after (matching e.g. the alignof() added by
->> XSA-327).
->>
->> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-> 
-> Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+https://cryptpad.fr/file/#/2/file/LoJZpSq+vHKNoisVqdsPj3Z9/
 
-Thanks, Jan
+The files are labeled with the start/end time and the room in which they we=
+re held; that should help you find out the notes which are pertinent to you=
+.
+
+Please remember to post a summary of your design session to xen-devel for p=
+osterity.
+
+Thanks!
+
+ -George=
 
