@@ -2,73 +2,54 @@ Return-Path: <SRS0=APZ7=A3=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-8.5 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=unavailable
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 86B9CC433DF
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Jul 2020 11:41:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DF28AC433E7
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Jul 2020 11:49:07 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 521F120657
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Jul 2020 11:41:59 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="Sutngue4"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 521F120657
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id B4FA220657
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Jul 2020 11:49:07 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B4FA220657
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jw2Gh-0004s1-Jw; Thu, 16 Jul 2020 11:41:39 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=oOKz=A3=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1jw2Gg-0004rw-E9
- for xen-devel@lists.xenproject.org; Thu, 16 Jul 2020 11:41:38 +0000
-X-Inumbo-ID: 4e9453ee-c759-11ea-94a5-12813bfff9fa
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 4e9453ee-c759-11ea-94a5-12813bfff9fa;
- Thu, 16 Jul 2020 11:41:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1594899697;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:content-transfer-encoding:in-reply-to;
- bh=GSo6+S84yGEpCHdoBUFu/eMIj/LXkStHwfl7+iH6gHY=;
- b=Sutngue4IPHv792Wv6IJb3tfopSatQ9fxv2o7NbJq5VjOC2iFVjAunp7
- QyRKnNf3Q04A7Wb4Cc8k5ea1gyRvAxlESAQx0HAfqm79HDTMAqbSUjIci
- VHPWI0hyNQmQi4+FsUyQJu4MQutF3kJ/Y2pshWEq0hmhs9YXQOD0af5gW k=;
-Authentication-Results: esa5.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: 3H88suKxwGm3a3+3NSWMAjkXsT76LRHv8f00wQwjNoQo9p19eU9K7XOKR4D07zkZjnwcxJengj
- Kyin4DMI18exrzbdZFMEdDiRnjx5Rvr29rK6p4TGVl43+RiROPqCTbCzHudTJc15+d1WN3PSpu
- GZHmTvO4wB5BK+LZYjBBqin62vDCpJn/wdPEZZ3WuGBK6VBYc/AWL1HkO581/BKscCcfaVqGkL
- BsMCRQrGZGMxFIG0VTv9cf7DMUAMzbsWgaEqqWzjXgbXTL6V+iOdGd0Z6onulpwc8d68ZdnxWk
- Dm8=
-X-SBRS: 2.7
-X-MesageID: 22712951
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.75,359,1589256000"; d="scan'208";a="22712951"
-Date: Thu, 16 Jul 2020 13:41:28 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Jan Beulich <jbeulich@suse.com>
+	id 1jw2Ng-00054s-Ae; Thu, 16 Jul 2020 11:48:52 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=dhnJ=A3=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1jw2Ne-00054n-UQ
+ for xen-devel@lists.xenproject.org; Thu, 16 Jul 2020 11:48:50 +0000
+X-Inumbo-ID: 506b140e-c75a-11ea-b7bb-bc764e2007e4
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 506b140e-c75a-11ea-b7bb-bc764e2007e4;
+ Thu, 16 Jul 2020 11:48:50 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 47592B931;
+ Thu, 16 Jul 2020 11:48:53 +0000 (UTC)
 Subject: Re: [PATCH 1/2] common: map_vcpu_info() cosmetics
-Message-ID: <20200716114128.GO7191@Air-de-Roger>
+To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 References: <fef45e49-bcb4-dc11-8f7f-b2f5e4bf1a73@suse.com>
  <2a0341c7-3836-a8c0-9516-b6a08e2720ec@suse.com>
+ <20200716114128.GO7191@Air-de-Roger>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <03a4d446-c26b-f171-57fd-a1eb13dad6c0@suse.com>
+Date: Thu, 16 Jul 2020 13:48:51 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
+In-Reply-To: <20200716114128.GO7191@Air-de-Roger>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <2a0341c7-3836-a8c0-9516-b6a08e2720ec@suse.com>
-X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
- AMSPEX02CL02.citrite.net (10.69.22.126)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -87,24 +68,29 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Wed, Jul 15, 2020 at 12:15:10PM +0200, Jan Beulich wrote:
-> Use ENXIO instead of EINVAL to cover the two cases of the address not
-> satisfying the requirements. This will make an issue here better stand
-> out at the call site.
-
-Not sure whether I would use EFAULT instead of ENXIO, as the
-description of it is 'bad address' which seems more inline with the
-error that we are trying to report.
-
-> Also add a missing compat-mode related size check: If the sizes
-> differed, other code in the function would need changing. Accompany this
-> by a change to the initial sizeof() expression, tying it to the type of
-> the variable we're actually after (matching e.g. the alignof() added by
-> XSA-327).
+On 16.07.2020 13:41, Roger Pau Monné wrote:
+> On Wed, Jul 15, 2020 at 12:15:10PM +0200, Jan Beulich wrote:
+>> Use ENXIO instead of EINVAL to cover the two cases of the address not
+>> satisfying the requirements. This will make an issue here better stand
+>> out at the call site.
 > 
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> Not sure whether I would use EFAULT instead of ENXIO, as the
+> description of it is 'bad address' which seems more inline with the
+> error that we are trying to report.
 
-Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+The address isn't bad in the sense of causing a fault, it's just
+that we elect to not allow it. Hence I don't think EFAULT is
+suitable. I'm open to replacement suggestions for ENXIO, though.
 
-Thanks.
+>> Also add a missing compat-mode related size check: If the sizes
+>> differed, other code in the function would need changing. Accompany this
+>> by a change to the initial sizeof() expression, tying it to the type of
+>> the variable we're actually after (matching e.g. the alignof() added by
+>> XSA-327).
+>>
+>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> 
+> Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+
+Thanks, Jan
 
