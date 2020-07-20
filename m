@@ -2,69 +2,67 @@ Return-Path: <SRS0=X+fC=A7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ADB73C433E0
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2020 08:25:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 47818C433E1
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2020 08:39:30 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 77C1C21775
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2020 08:25:58 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 1491A2176B
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2020 08:39:30 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="HxyrxGPk"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 77C1C21775
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="VYrjWjRs"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1491A2176B
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jxR7G-0006cj-TB; Mon, 20 Jul 2020 08:25:42 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jxRKH-0007g7-Db; Mon, 20 Jul 2020 08:39:09 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=TdB1=A7=citrix.com=christian.lindig@srs-us1.protection.inumbo.net>)
- id 1jxR7F-0006ce-H2
- for xen-devel@lists.xen.org; Mon, 20 Jul 2020 08:25:41 +0000
-X-Inumbo-ID: 98637124-ca62-11ea-98f0-12813bfff9fa
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 98637124-ca62-11ea-98f0-12813bfff9fa;
- Mon, 20 Jul 2020 08:25:40 +0000 (UTC)
+ id 1jxRKF-0007g2-Ph
+ for xen-devel@lists.xen.org; Mon, 20 Jul 2020 08:39:07 +0000
+X-Inumbo-ID: 78daeed4-ca64-11ea-b7bb-bc764e2007e4
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 78daeed4-ca64-11ea-b7bb-bc764e2007e4;
+ Mon, 20 Jul 2020 08:39:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1595233541;
+ d=citrix.com; s=securemail; t=1595234348;
  h=from:to:cc:subject:date:message-id:references:
  in-reply-to:content-transfer-encoding:mime-version;
- bh=49QGHBHrZRjI696+RtSO5XA7ajoUpU7QjWNgVJCHooY=;
- b=HxyrxGPk4R7HlrBYu3byoyLpP+icu39O+U1JwEmye/yE2w8e8ddYWiR1
- sPVjaTbXE3X+r9JXPRHLc0wVw66GFNsLhaLL5Gk8jRod7j4jfIo5gFoaB
- IwJcwKfq0IcJ+50fVn68BglmmTdw3W7aUUuAWVaQbLAWdbFxTbh3Kjgjw w=;
-Authentication-Results: esa1.hc3370-68.iphmx.com;
+ bh=ZJ2relG/T/voq29vQ/pBa6hwLPIx7xF5qelCiLq7CkA=;
+ b=VYrjWjRseTwKSHutgOHKltHPs/qJ4kGWvtY3WQzIRiO/1SNMqiBEzq4a
+ RyspP8+iizRhynfVJgHAHLP8W093V/7j6XD5wwFn1gp90XGWUzGx+1ekS
+ 8L0aRQzr504S7lya2om8uG2sP5Yfkjf336aBuSFDyleGryYAZjaOSLOfK E=;
+Authentication-Results: esa3.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: 75N3jJDKQ8VkZh15pqalXUltCYUKJFpfnL5iGz9RbtVQTXvKU1gvTf8kH9NZFGoIZ8lqAJg7Ko
- Yl8e7cd7riFRjQPBk1JV4TFoKMUtgZXVyU0mlMF6qOTEmGzr4Mo1pNnbKRUikfNbYf5Ad+SuHk
- 0iOYp51nbh45vWYKTofsH6jPYMoDYX5hxpqMt7BAxQoMdMaHBoZxs2Qs+meUC/d4FhhfwRuDf6
- iohbT20W+ivBQU/ND69IsqDUeZ3zrfgvRCSpwb4gTqaarFC4fvLTc8QEmKD6N/3M7YQJSpLiom
- QhQ=
+IronPort-SDR: YCz2V4wlFImdGbXhZA4JfiqRPt2c6cTIQAlD3kvWFtF9ReQGom9KCXD8j41if8SK4OKG8v9s13
+ SbD1QOp2y7SV2K8D0OHzS7QfdwtZAaXYnYtOIwODV1O+bDZDyWhTDR6c7zohjwCeYplLmAeXvt
+ lL+SC8hx9N+TK5N2J2A4fAnnCSpAO8q/zo8CPwRBplv413oFX357zJl+xvOWHcpxk9LrzbAHAC
+ 9xl1/wSEDQ1mGMpiNgd3vDbw7oe0wiRuzt1OI7Raw/pJZYSr5pUMfpYaJAuJ0Ud6A1oN8iYi9t
+ yFI=
 X-SBRS: 2.7
-X-MesageID: 23056332
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 22733367
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.75,374,1589256000"; d="scan'208";a="23056332"
+X-IronPort-AV: E=Sophos;i="5.75,374,1589256000"; d="scan'208";a="22733367"
 From: Christian Lindig <christian.lindig@citrix.com>
 To: Elliott Mitchell <ehem+xen@m5p.com>, "xen-devel@lists.xen.org"
  <xen-devel@lists.xen.org>
-Subject: Re: [PATCH 1/2] Partially revert "Cross-compilation fixes."
-Thread-Topic: [PATCH 1/2] Partially revert "Cross-compilation fixes."
-Thread-Index: AQHWXLPw2WXAlvhnbky26RJ8a7SJFqkQJQKp
-Date: Mon, 20 Jul 2020 08:25:36 +0000
-Message-ID: <1595233536312.59307@citrix.com>
-References: <20200718033121.GA88869@mattapan.m5p.com>
-In-Reply-To: <20200718033121.GA88869@mattapan.m5p.com>
+Subject: Re: [PATCH 2/2] tools/ocaml: Default to useful build output
+Thread-Topic: [PATCH 2/2] tools/ocaml: Default to useful build output
+Thread-Index: AQHWXLQfZqk/9n2Ez0iUq9XU56BN2qkQJXHN
+Date: Mon, 20 Jul 2020 08:38:40 +0000
+Message-ID: <1595234320493.39632@citrix.com>
+References: <20200718033242.GB88869@mattapan.m5p.com>
+In-Reply-To: <20200718033242.GB88869@mattapan.m5p.com>
 Accept-Language: en-GB, en-US
 Content-Language: en-GB
 X-MS-Has-Attach: 
@@ -83,56 +81,27 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Ian Jackson <Ian.Jackson@citrix.com>, "wl@xen.org" <wl@xen.org>,
- "dave@recoil.org" <dave@recoil.org>
+Cc: Ian Jackson <Ian.Jackson@citrix.com>, Edwin Torok <edvin.torok@citrix.com>,
+ "wl@xen.org" <wl@xen.org>, "dave@recoil.org" <dave@recoil.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 =0A=
-________________________________________=0A=
-From: Elliott Mitchell <ehem+xen@m5p.com>=0A=
-Sent: 18 July 2020 04:31=0A=
-To: xen-devel@lists.xen.org=0A=
-Cc: Ian Jackson; wl@xen.org; Christian Lindig; dave@recoil.org=0A=
-Subject: [PATCH 1/2] Partially revert "Cross-compilation fixes."=0A=
 =0A=
-This partially reverts commit 16504669c5cbb8b195d20412aadc838da5c428f7.=0A=
+> Time for a bit of controversy.=0A=
 =0A=
-Signed-off-by: Elliott Mitchell <ehem+xen@m5p.com>=0A=
----=0A=
-Doesn't look like much of 16504669c5cbb8b195d20412aadc838da5c428f7=0A=
-actually remains due to passage of time.=0A=
+OCaml outside Xen has moved to a different model of building based on dune =
+which is fast, declarative and reliable. The OCaml xenstore is stagnating b=
+ecause nobody with OCaml experience wants to touch it anymore. It would be =
+beneficial for the health of the OCaml xenstore to split it out such that i=
+t could be worked on independently. You might argue that Make is still appr=
+opriate for building OCaml projects but the OCaml community has moved throu=
+gh several build systems, starting from Make, and learned the hard way that=
+ this is not an easy problem. After years of more-or-less successful build =
+system the consensus is that dune is right one and it has resulted in combi=
+nation with the Opam package manager the ecosystem to flourish. Alternative=
+ly, it would be possible to move OCaml xenstore to dune within the Xen tree=
+ but it would create a dependency on it.=0A=
 =0A=
-Of the 3, both Python and pygrub appear to mostly be building just fine=0A=
-cross-compiling.  The OCAML portion is being troublesome, this is going=0A=
-to cause bug reports elsewhere soon.  The OCAML portion though can=0A=
-already be disabled by setting OCAML_TOOLS=3Dn and shouldn't have this=0A=
-extra form of disabling.=0A=
----=0A=
- tools/Makefile | 3 ---=0A=
- 1 file changed, 3 deletions(-)=0A=
-=0A=
-diff --git a/tools/Makefile b/tools/Makefile=0A=
-index 7b1f6c4d28..930a533724 100644=0A=
---- a/tools/Makefile=0A=
-+++ b/tools/Makefile=0A=
-@@ -40,12 +40,9 @@ SUBDIRS-$(CONFIG_X86) +=3D debugger/gdbsx=0A=
- SUBDIRS-$(CONFIG_X86) +=3D debugger/kdd=0A=
- SUBDIRS-$(CONFIG_TESTS) +=3D tests=0A=
-=0A=
--# These don't cross-compile=0A=
--ifeq ($(XEN_COMPILE_ARCH),$(XEN_TARGET_ARCH))=0A=
- SUBDIRS-y +=3D python=0A=
- SUBDIRS-y +=3D pygrub=0A=
- SUBDIRS-$(OCAML_TOOLS) +=3D ocaml=0A=
--endif=0A=
-=0A=
- ifeq ($(CONFIG_RUMP),y)=0A=
- SUBDIRS-y :=3D libs libxc xenstore=0A=
---=0A=
-2.20.1=0A=
-=0A=
--- =0A=
-Acked-by: Christian Lindig <christian.lindig@citrix.com>=0A=
-=0A=
+-- C=0A=
 
