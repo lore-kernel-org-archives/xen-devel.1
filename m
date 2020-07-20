@@ -2,73 +2,77 @@ Return-Path: <SRS0=X+fC=A7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.3 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A46BDC43446
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2020 13:24:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3F22BC433E1
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2020 13:45:28 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 77F9920729
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2020 13:24:31 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 0DEB422B4D
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2020 13:45:27 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="4hTuOG9W"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 77F9920729
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="LkgaOjcL"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0DEB422B4D
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jxVmG-000191-5f; Mon, 20 Jul 2020 13:24:20 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jxW6M-0002ua-Kj; Mon, 20 Jul 2020 13:45:06 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=wjZm=A7=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
- id 1jxVmE-00018v-V1
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2020 13:24:18 +0000
-X-Inumbo-ID: 50057cf4-ca8c-11ea-848e-bc764e2007e4
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 50057cf4-ca8c-11ea-848e-bc764e2007e4;
- Mon, 20 Jul 2020 13:24:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
- Content-Transfer-Encoding:Content-Type:Message-ID:To:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Q/xJWot8dH7yudlJSL5d+YcAy/hTlrUXhilxlbQTqU8=; b=4hTuOG9WJq8zyof+jS8W5fVQr
- xT//tY23ia9RcCUb9SaBgfXZQY4Tq5laEvEjWo2Jy093dYlw1m0LzPDzqDam2NWLhUlvuaMx+qkwU
- RbB0Al8SUwmdqNmPvhFhIxCYTZ6IvCdB3FX/z/kyM93cghSp+8/pm8oPRLNul/zRrar5Y=;
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1jxVmD-0006YF-31; Mon, 20 Jul 2020 13:24:17 +0000
-Received: from [172.16.144.3] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1jxVmC-000360-EN; Mon, 20 Jul 2020 13:24:16 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.89) (envelope-from <osstest-admin@xenproject.org>)
- id 1jxVmC-0005DX-Di; Mon, 20 Jul 2020 13:24:16 +0000
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-152041-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+ <SRS0=gz2F=A7=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1jxW6L-0002uB-Jn
+ for xen-devel@lists.xen.org; Mon, 20 Jul 2020 13:45:05 +0000
+X-Inumbo-ID: 2ff209ac-ca8f-11ea-9fa7-12813bfff9fa
+Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 2ff209ac-ca8f-11ea-9fa7-12813bfff9fa;
+ Mon, 20 Jul 2020 13:44:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1595252693;
+ h=subject:to:cc:references:from:message-id:date:
+ mime-version:in-reply-to:content-transfer-encoding;
+ bh=OuiEP3D65JBIDm2R1AzKgKM4VFlaTnShCJIfjbHA2Dg=;
+ b=LkgaOjcLyiChOPc4jVy8esxPqsRJmHJ7LKxIsxxh6DKd1II1cn6kUVdA
+ kC4xN0czVrluqNGZd/1URpkMpnVY5PzcYplqL62qyKR+osQVFVTDLh/+S
+ RRGFO5WK8KoQnczx1Yb6uqX1lKmsDBa6rrPrndOAQ7pYwPAc/Jtk9TSX/ Q=;
+Authentication-Results: esa5.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none
+IronPort-SDR: sNyUv7VO9pjGKXyswLM1TpeV6PWBf4YBhqlfyQbFFMeziSp3EwpWsVcfqABUCpw1FTCaHzUAiw
+ ij+9alrRXwiPyLEBu6RgqkIuhM2WIGLbZSOWCqIIbO68a5oGUBt368oGDD0ovD2gTxmpgexUKM
+ IxtU0mpQjgJv2B64F5+kc99RKPJavAYpwe3+EpvVgVOYKPcCJjIYnxqg0a86mOx6MBgv01FDqk
+ pSc2vBe4DWoIs8K1Aw7NS9AJkkc8+b9OvYFvBzQr6fG4PvAmAMDLFn1LLnSNvZarYUi58i0etn
+ H6c=
+X-SBRS: 2.7
+X-MesageID: 22950362
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.75,375,1589256000"; d="scan'208";a="22950362"
+Subject: Re: [oss-security] Xen Security Advisory 329 v2 - Linux ioperm bitmap
+ context switching issues
+To: Mauro Matteo Cascella <mcascell@redhat.com>,
+ <oss-security@lists.openwall.com>
+References: <E1jw3ms-0006i6-Se@xenbits.xenproject.org>
+ <CAA8xKjVib9UERsMrAy3nNdVssNxLciXTmmhmXqq1gvhO16URew@mail.gmail.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Message-ID: <57e20b43-53cb-acc6-2634-4fc3b29e2312@citrix.com>
+Date: Mon, 20 Jul 2020 14:44:48 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 152041: tolerable all pass - PUSHED
-X-Osstest-Failures: xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
- xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
- xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
- xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
- xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This: xen=8c4532f19d6925538fb0c938f7de9a97da8c5c3b
-X-Osstest-Versions-That: xen=fb024b779336a0f73b3aee885b2ce082e812881f
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Mon, 20 Jul 2020 13:24:16 +0000
+In-Reply-To: <CAA8xKjVib9UERsMrAy3nNdVssNxLciXTmmhmXqq1gvhO16URew@mail.gmail.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Content-Language: en-GB
+X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
+ AMSPEX02CL02.citrite.net (10.69.22.126)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,63 +83,121 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
+Cc: xen-users@lists.xen.org, xen-announce@lists.xen.org,
+ "Xen.org security team" <security-team-members@xen.org>,
+ xen-devel@lists.xen.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-flight 152041 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/152041/
+/sigh - it seems that stuff like this doesn't get done when I'm on holiday.
 
-Failures :-/ but no regressions.
+I'll get one sorted.
 
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+~Andrew
 
-version targeted for testing:
- xen                  8c4532f19d6925538fb0c938f7de9a97da8c5c3b
-baseline version:
- xen                  fb024b779336a0f73b3aee885b2ce082e812881f
+On 17/07/2020 08:54, Mauro Matteo Cascella wrote:
+> Hello,
+>
+> Will a CVE be assigned to this flaw?
+>
+> Thanks,
+>
+> On Thu, Jul 16, 2020 at 3:21 PM Xen.org security team
+<security@xen.org <mailto:security@xen.org>> wrote:
+>
+>                     Xen Security Advisory XSA-329
+>                               version 2
+>
+>              Linux ioperm bitmap context switching issues
+>
+> UPDATES IN VERSION 2
+> ====================
+>
+> Public release.
+>
+> ISSUE DESCRIPTION
+> =================
+>
+> Linux 5.5 overhauled the internal state handling for the iopl() and
+> ioperm()
+> system calls.  Unfortunately, one aspect on context switch wasn't wired up
+> correctly for the Xen PVOps case.
+>
+> IMPACT
+> ======
+>
+> IO port permissions don't get rescinded when context switching to an
+> unprivileged task.  Therefore, all userspace can use the IO ports
+> granted to
+> the most recently scheduled task with IO port permissions.
+>
+> VULNERABLE SYSTEMS
+> ==================
+>
+> Only x86 guests are vulnerable.
+>
+> All versions of Linux from 5.5 are potentially vulnerable.
+>
+> Linux is only vulnerable when running as x86 PV guest.  Linux is not
+> vulnerable when running as an x86 HVM/PVH guests.
+>
+> The vulnerability can only be exploited in domains which have been granted
+> access to IO ports by Xen.  This is typically only the hardware
+> domain, and
+> guests configured with PCI Passthrough.
+>
+> MITIGATION
+> ==========
+>
+> Running only HVM/PVH guests avoids the vulnerability.
+>
+> CREDITS
+> =======
+>
+> This issue was discovered by Andy Lutomirski.
+>
+> RESOLUTION
+> ==========
+>
+> Applying the appropriate attached patch resolves this issue.
+>
+> xsa329.patch           Linux 5.5 and later
+>
+> $ sha256sum xsa329*
+> cdb5ac9bfd21192b5965e8ec0a1c4fcf12d0a94a962a8158cd27810e6aa362f0 
+> xsa329.patch
+> $
+>
+> DEPLOYMENT DURING EMBARGO
+> =========================
+>
+> Deployment of the patches and/or mitigations described above (or
+> others which are substantially similar) is permitted during the
+> embargo, even on public-facing systems with untrusted guest users and
+> administrators.
+>
+> But: Distribution of updated software is prohibited (except to other
+> members of the predisclosure list).
+>
+> Predisclosure list members who wish to deploy significantly different
+> patches and/or mitigations, please contact the Xen Project Security
+> Team.
+>
+>
+> (Note: this during-embargo deployment notice is retained in
+> post-embargo publicly released Xen Project advisories, even though it
+> is then no longer applicable.  This is to enable the community to have
+> oversight of the Xen Project Security Team's decisionmaking.)
+>
+> For more information about permissible uses of embargoed information,
+> consult the Xen Project community's agreed Security Policy:
+>   http://www.xenproject.org/security-policy.html
+>
+>
+>
+> --
+> Mauro Matteo Cascella, Red Hat Product Security
+> 6F78 E20B 5935 928C F0A8  1A9D 4E55 23B8 BB34 10B0
 
-Last test of basis   151970  2020-07-17 16:00:26 Z    2 days
-Testing same since   152041  2020-07-20 11:00:34 Z    0 days    1 attempts
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Michal Leszczynski <michal.leszczynski@cert.pl>
-
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-libvirt                                     pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/xen.git
-   fb024b7793..8c4532f19d  8c4532f19d6925538fb0c938f7de9a97da8c5c3b -> smoke
 
