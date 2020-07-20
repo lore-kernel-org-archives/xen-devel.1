@@ -2,62 +2,57 @@ Return-Path: <SRS0=X+fC=A7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=unavailable autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-8.5 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=unavailable
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8FCF4C433DF
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2020 17:37:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9F43FC433E2
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2020 17:37:47 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 64C8E20702
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2020 17:37:08 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="p+qpisSl"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 64C8E20702
+	by mail.kernel.org (Postfix) with ESMTPS id 821B320702
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2020 17:37:47 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 821B320702
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jxZiW-0007ZA-Sa; Mon, 20 Jul 2020 17:36:44 +0000
+	id 1jxZjN-0007br-6X; Mon, 20 Jul 2020 17:37:37 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=Eely=A7=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1jxZiW-0007Z5-97
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2020 17:36:44 +0000
-X-Inumbo-ID: 93c6e14e-caaf-11ea-84ac-bc764e2007e4
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+ (envelope-from <SRS0=dhL3=A7=xen.org=tim@srs-us1.protection.inumbo.net>)
+ id 1jxZjM-0007bi-89
+ for xen-devel@lists.xenproject.org; Mon, 20 Jul 2020 17:37:36 +0000
+X-Inumbo-ID: b228c418-caaf-11ea-84ac-bc764e2007e4
+Received: from deinos.phlegethon.org (unknown [2001:41d0:8:b1d7::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 93c6e14e-caaf-11ea-84ac-bc764e2007e4;
- Mon, 20 Jul 2020 17:36:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
- MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=xTT211vu9tMK586W15vIDXiAhMSFIMbKUszxNIgH8mo=; b=p+qpisSlQLSIjGsF/xirQ/iTdk
- b6gnMD+m4WvNXvR9H27RH/FNZEdF2DnsTh+D19GiZZQ93Eevh4CPrM8VQWlXqAZ/dZgZGeA1YBIOa
- Ex6Ssmf5gEkOcG97iRAAOaUdwqUSztjyQwPpKopHErG6g8PdvUEBFJVSi0GfAWg7eWYM=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1jxZiV-0003zT-4o; Mon, 20 Jul 2020 17:36:43 +0000
-Received: from 54-240-197-227.amazon.com ([54.240.197.227]
- helo=ufe34d9ed68d054.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1jxZiU-000568-OL; Mon, 20 Jul 2020 17:36:43 +0000
-From: Julien Grall <julien@xen.org>
-To: xen-devel@lists.xenproject.org
-Subject: [PATCH] SUPPORT.md: Spell correctly Experimental
-Date: Mon, 20 Jul 2020 18:36:35 +0100
-Message-Id: <20200720173635.1571-1-julien@xen.org>
-X-Mailer: git-send-email 2.17.1
+ id b228c418-caaf-11ea-84ac-bc764e2007e4;
+ Mon, 20 Jul 2020 17:37:35 +0000 (UTC)
+Received: from tjd by deinos.phlegethon.org with local (Exim 4.92.3 (FreeBSD))
+ (envelope-from <tim@xen.org>)
+ id 1jxZjJ-000ILK-Oo; Mon, 20 Jul 2020 17:37:33 +0000
+Date: Mon, 20 Jul 2020 18:37:33 +0100
+From: Tim Deegan <tim@xen.org>
+To: Jan Beulich <jbeulich@suse.com>
+Subject: Re: [PATCH 5/5] x86/shadow: l3table[] and gl3e[] are HVM only
+Message-ID: <20200720173733.GA70485@deinos.phlegethon.org>
+References: <a4dc8db4-0388-a922-838e-42c6f4635639@suse.com>
+ <a3b9b496-e860-e657-2afc-c0658871fa3f@suse.com>
+ <20200718182037.GA48915@deinos.phlegethon.org>
+ <1baa0d50-86a4-b0ba-d43a-ad0c0446b54b@suse.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+In-Reply-To: <1baa0d50-86a4-b0ba-d43a-ad0c0446b54b@suse.com>
+User-Agent: Mutt/1.11.1 (2018-12-01)
+X-SA-Known-Good: Yes
+X-SA-Exim-Connect-IP: <locally generated>
+X-SA-Exim-Mail-From: tim@xen.org
+X-SA-Exim-Scanned: No (on deinos.phlegethon.org);
+ SAEximRunCond expanded to false
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,41 +63,42 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Wei Liu <wl@xen.org>, paul@xen.org, Andrew Cooper <andrew.cooper3@citrix.com>,
- Julien Grall <jgrall@amazon.com>, Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>
+Cc: George Dunlap <George.Dunlap@eu.citrix.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>,
+ Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: Julien Grall <jgrall@amazon.com>
+At 10:55 +0200 on 20 Jul (1595242521), Jan Beulich wrote:
+> On 18.07.2020 20:20, Tim Deegan wrote:
+> > At 12:00 +0200 on 15 Jul (1594814409), Jan Beulich wrote:
+> >> ... by the very fact that they're 3-level specific, while PV always gets
+> >> run in 4-level mode. This requires adding some seemingly redundant
+> >> #ifdef-s - some of them will be possible to drop again once 2- and
+> >> 3-level guest code doesn't get built anymore in !HVM configs, but I'm
+> >> afraid there's still quite a bit of disentangling work to be done to
+> >> make this possible.
+> >>
+> >> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> > 
+> > Looks good.  It seems like the new code for '3-level non-HVM' in
+> > guest-walks ought to have some sort of assert-unreachable in them too
+> > - or is there a reason to to?
+> 
+> You mean this piece of code
+> 
+> +#elif !defined(CONFIG_HVM)
+> +    (void)root_gfn;
+> +    memset(gw, 0, sizeof(*gw));
+> +    return false;
+> +#else /* PAE */
+> 
+> If so - sure, ASSERT_UNREACHABLE() could be added there. It simply
+> didn't occur to me. I take it your ack for the entire series holds
+> here with this addition.
 
-Signed-off-by: Julien Grall <jgrall@amazon.com>
----
- SUPPORT.md | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Yes, it does.  Thanks!
 
-diff --git a/SUPPORT.md b/SUPPORT.md
-index b81d36eea541..1479055c450d 100644
---- a/SUPPORT.md
-+++ b/SUPPORT.md
-@@ -249,13 +249,13 @@ to boot with memory < maxmem.
- 
- Allow sharing of identical pages between guests
- 
--    Status, x86 HVM: Expermental
-+    Status, x86 HVM: Experimental
- 
- ### Memory Paging
- 
- Allow pages belonging to guests to be paged to disk
- 
--    Status, x86 HVM: Experimenal
-+    Status, x86 HVM: Experimental
- 
- ### Alternative p2m
- 
--- 
-2.17.1
-
+Tim.
 
