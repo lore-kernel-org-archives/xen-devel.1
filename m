@@ -2,54 +2,77 @@ Return-Path: <SRS0=X+fC=A7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.5 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=unavailable
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C63EC433E0
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2020 08:17:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 34170C433E2
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2020 08:26:18 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D44CC2080D
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2020 08:17:57 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D44CC2080D
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 0182A22482
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Jul 2020 08:26:17 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="VCSNM1eL"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0182A22482
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jxQzS-0005jY-29; Mon, 20 Jul 2020 08:17:38 +0000
+	id 1jxR7f-0006ec-5m; Mon, 20 Jul 2020 08:26:07 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=WIjz=A7=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jxQzR-0005jT-AX
- for xen-devel@lists.xenproject.org; Mon, 20 Jul 2020 08:17:37 +0000
-X-Inumbo-ID: 77fde9b0-ca61-11ea-98f0-12813bfff9fa
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=TdB1=A7=citrix.com=christian.lindig@srs-us1.protection.inumbo.net>)
+ id 1jxR7d-0006eR-Fb
+ for xen-devel@lists.xen.org; Mon, 20 Jul 2020 08:26:05 +0000
+X-Inumbo-ID: a60c8a4a-ca62-11ea-98f0-12813bfff9fa
+Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 77fde9b0-ca61-11ea-98f0-12813bfff9fa;
- Mon, 20 Jul 2020 08:17:36 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id EB186ADC1;
- Mon, 20 Jul 2020 08:17:41 +0000 (UTC)
-Subject: Re: [PATCH 4/8] Arm: prune #include-s needed by domain.h
-To: Julien Grall <julien@xen.org>
-References: <3375cacd-d3b7-9f06-44a7-4b684b6a77d6@suse.com>
- <150525bb-1c48-c331-3212-eff18bc4c13d@suse.com>
- <d836dc7f-017b-5048-02de-d1cb291fbc3b@xen.org>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <931149db-2daf-6d72-0330-c938b5084eb6@suse.com>
-Date: Mon, 20 Jul 2020 10:17:34 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ id a60c8a4a-ca62-11ea-98f0-12813bfff9fa;
+ Mon, 20 Jul 2020 08:26:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1595233563;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-transfer-encoding:mime-version;
+ bh=guNi4ozQsd81IcNwzgCs24VYy4hVc9xWBLSEsepPGAw=;
+ b=VCSNM1eLchfnWRzSpjaWeGW3K9YmHcz1qMeDhYJO24h7N1fOfEdTfYUv
+ 1w/3slnbhgNu6uSU/VXhp0IebDdsuvYdFb3FauLVumHKND6ajYlTt0pP9
+ 94fW2NwYyeYf6aQHXsi8Y+uQ+qYdjTqCIZ3qiz+nf2UbpNCTuIRd3OoUM A=;
+Authentication-Results: esa5.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none
+IronPort-SDR: Su7dpSSVRAR/UfzOeBg1WbNzJuw6nJzBsmnvhCxsuU+bizGeoACTzsP1bpNb89Ofx72pMP+hi1
+ qdpg+WDo2DOuk0KaFWALa6yn6PMvCfx79q53+1Go7AOyLFn/uqCedGCIRYpS6gTlzpaUpngz13
+ tOPpa6g3cj99fVH9L432HMrH80+3m6xJL3WSK8LZJ0KOHzTsZ6fQNZ+51nKixpc2KAKKwyb9nq
+ 6y1osa5XAGimHlsL/rh8doiAlY1zolagx4jfW9q8xoYx4IQuqk5c0DXmsjEFJQQOgn9Mcx31Ct
+ IkI=
+X-SBRS: 2.7
+X-MesageID: 22925651
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.75,374,1589256000"; d="scan'208";a="22925651"
+From: Christian Lindig <christian.lindig@citrix.com>
+To: Elliott Mitchell <ehem+xen@m5p.com>, "xen-devel@lists.xen.org"
+ <xen-devel@lists.xen.org>
+Subject: Re: [PATCH 2/2] tools/ocaml: Default to useful build output
+Thread-Topic: [PATCH 2/2] tools/ocaml: Default to useful build output
+Thread-Index: AQHWXLQfZqk/9n2Ez0iUq9XU56BN2qkQJVSq
+Date: Mon, 20 Jul 2020 08:25:59 +0000
+Message-ID: <1595233559536.460@citrix.com>
+References: <20200718033242.GB88869@mattapan.m5p.com>
+In-Reply-To: <20200718033242.GB88869@mattapan.m5p.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-GB
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-In-Reply-To: <d836dc7f-017b-5048-02de-d1cb291fbc3b@xen.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,50 +83,76 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>
+Cc: Ian Jackson <Ian.Jackson@citrix.com>, "wl@xen.org" <wl@xen.org>,
+ "dave@recoil.org" <dave@recoil.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 17.07.2020 16:44, Julien Grall wrote:
-> On 15/07/2020 11:39, Jan Beulich wrote:
->> --- a/xen/include/asm-arm/domain.h
->> +++ b/xen/include/asm-arm/domain.h
->> @@ -2,7 +2,7 @@
->>   #define __ASM_DOMAIN_H__
->>   
->>   #include <xen/cache.h>
->> -#include <xen/sched.h>
->> +#include <xen/timer.h>
->>   #include <asm/page.h>
->>   #include <asm/p2m.h>
->>   #include <asm/vfp.h>
->> @@ -11,8 +11,6 @@
->>   #include <asm/vgic.h>
->>   #include <asm/vpl011.h>
->>   #include <public/hvm/params.h>
->> -#include <xen/serial.h>
-> 
-> While we don't need the rbtree.h, we technically need serial.h for using 
-> vuart_info.
-
-The only reference to it is
-
-        const struct vuart_info     *info;
-
-which doesn't require a definition nor even a forward declaration
-of struct vuart_info. It should just be source files instantiating
-a struct or de-referencing pointers to one that actually need to
-see the full declaration. The only source file doing so (vuart.c)
-already includes xen/serial.h. (In fact, it being just a single
-source file doing so, the struct definition could [and imo should]
-be moved there. The type can be entirely opaque to the rest of the
-code base, as - over time - we've been doing for other structs.)
-
-> I would rather prefer if headers are not implicitly included whenever it 
-> is possible.
-
-I agree with this principle, where it applies.
-
-Jan
+=0A=
+________________________________________=0A=
+From: Elliott Mitchell <ehem+xen@m5p.com>=0A=
+Sent: 18 July 2020 04:32=0A=
+To: xen-devel@lists.xen.org=0A=
+Cc: Ian Jackson; wl@xen.org; Christian Lindig; dave@recoil.org=0A=
+Subject: [PATCH 2/2] tools/ocaml: Default to useful build output=0A=
+=0A=
+While hiding details of build output looks pretty to some, defaulting to=0A=
+doing so deviates from the rest of Xen.  Switch the OCAML tools to match=0A=
+everything else.=0A=
+=0A=
+Signed-off-by: Elliott Mitchell <ehem+xen@m5p.com>=0A=
+---=0A=
+=0A=
+Time for a bit of controversy.=0A=
+=0A=
+Presently the OCAML tools build mismatches the rest of the Xen build.=0A=
+My choice is to default to verbose output.  While some may like beauty=0A=
+in their build output, function is far more important.=0A=
+=0A=
+If someone wants to take on the task of making Xen's build output=0A=
+consistently beatiful, invite them to do so.  Then call the police and=0A=
+tell them you're being robbed.=0A=
+---=0A=
+ tools/ocaml/Makefile.rules | 19 +++++++++++--------=0A=
+ 1 file changed, 11 insertions(+), 8 deletions(-)=0A=
+=0A=
+diff --git a/tools/ocaml/Makefile.rules b/tools/ocaml/Makefile.rules=0A=
+index a893c42b43..abfbc64ce0 100644=0A=
+--- a/tools/ocaml/Makefile.rules=0A=
++++ b/tools/ocaml/Makefile.rules=0A=
+@@ -1,17 +1,20 @@=0A=
+ ifdef V=0A=
+-  ifeq ("$(origin V)", "command line")=0A=
+-    BUILD_VERBOSE =3D $(V)=0A=
+-  endif=0A=
++       ifeq ("$(origin V)", "command line")=0A=
++               BUILD_VERBOSE =3D $(V)=0A=
++       endif=0A=
++else=0A=
++       V :=3D 1=0A=
++       BUILD_VERBOSE :=3D 1=0A=
+ endif=0A=
+ ifndef BUILD_VERBOSE=0A=
+-  BUILD_VERBOSE =3D 0=0A=
++       BUILD_VERBOSE :=3D 0=0A=
+ endif=0A=
+ ifeq ($(BUILD_VERBOSE),1)=0A=
+-  E =3D @true=0A=
+-  Q =3D=0A=
++       E :=3D @true=0A=
++       Q :=3D=0A=
+ else=0A=
+-  E =3D @echo=0A=
+-  Q =3D @=0A=
++       E :=3D @echo=0A=
++       Q :=3D @=0A=
+ endif=0A=
+=0A=
+ .NOTPARALLEL:=0A=
+--=0A=
+2.20.1=0A=
+=0A=
+-- =0A=
+Acked-by: Christian Lindig <christian.lindig@citrix.com>=0A=
+=0A=
 
