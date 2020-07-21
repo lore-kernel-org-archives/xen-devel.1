@@ -2,79 +2,90 @@ Return-Path: <SRS0=Ywvf=BA=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_ADSP_CUSTOM_MED,
+	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 194D5C433DF
-	for <xen-devel@archiver.kernel.org>; Tue, 21 Jul 2020 08:30:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 50A1EC433E2
+	for <xen-devel@archiver.kernel.org>; Tue, 21 Jul 2020 09:23:58 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CAE5520714
-	for <xen-devel@archiver.kernel.org>; Tue, 21 Jul 2020 08:30:56 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 1D6CA20657
+	for <xen-devel@archiver.kernel.org>; Tue, 21 Jul 2020 09:23:58 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="NMatKYSK"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CAE5520714
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="JDklvqbu"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1D6CA20657
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jxnfV-0002ab-01; Tue, 21 Jul 2020 08:30:33 +0000
+	id 1jxoUz-0006y6-I8; Tue, 21 Jul 2020 09:23:45 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=gK6X=BA=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1jxnfT-0002aW-LR
- for xen-devel@lists.xenproject.org; Tue, 21 Jul 2020 08:30:31 +0000
-X-Inumbo-ID: 6f5ac2e4-cb2c-11ea-84f6-bc764e2007e4
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
+ <SRS0=JDR4=BA=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
+ id 1jxoUy-0006y1-Fa
+ for xen-devel@lists.xenproject.org; Tue, 21 Jul 2020 09:23:44 +0000
+X-Inumbo-ID: def41234-cb33-11ea-84fc-bc764e2007e4
+Received: from mail-wr1-x431.google.com (unknown [2a00:1450:4864:20::431])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 6f5ac2e4-cb2c-11ea-84f6-bc764e2007e4;
- Tue, 21 Jul 2020 08:30:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1595320230;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:content-transfer-encoding:in-reply-to;
- bh=BzY2QweQF/rQiDbWv7Jn9Mmq9ZfmwWs8Ov87vMZGyUU=;
- b=NMatKYSKM8Qv9ope82+19TQxsi+Vc+EtzyekOsRyuuE1K49xkzQRo3VU
- 6425hCIOVRGhPLvvY0tTQmQoBdj4wXeYpRDpr3J54zTz4T2HYonILqKyQ
- tlYfe5Nh9nNQ0Kw+kNG+nJ/GVs/dXG/P4DxP6DhKffsMY0F/99KD19ZbK E=;
-Authentication-Results: esa1.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: x0OiNrk4e0Kv/geF7/GsMS3ajUnY+7gsSFFEXbjmHoWrn0Lxe6gtvxgEn0GR/cqaG+YYQcjcmB
- y9cXZDaFN18y2oIa9h8b9NAh7AkUkC7xN6pUY0g7UBLeXlTrlJ4gdZ2eS3wMmI4P/wL7ISLp8w
- /rH69WDGB4HRSyD8Mi1RPaLwy67UwO/DxY+phNhaDtpaI/XDgb+g5Z7PhX+c3q5qRqoauEaBxR
- Eblv/h6LWWnHOFZ3YXG0BABZ9rg/RT1Z7xPJGXBV02waTGeDtwxItb0TozFEIVA2hEWlnwbpcU
- zt4=
-X-SBRS: 2.7
-X-MesageID: 23153757
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.75,378,1589256000"; d="scan'208";a="23153757"
-Date: Tue, 21 Jul 2020 10:30:18 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Anchal Agarwal <anchalag@amazon.com>, <marmarek@invisiblethingslab.com>
-Subject: Re: [PATCH v2 01/11] xen/manage: keep track of the on-going suspend
- mode
-Message-ID: <20200721083018.GM7191@Air-de-Roger>
-References: <cover.1593665947.git.anchalag@amazon.com>
- <20200702182136.GA3511@dev-dsk-anchalag-2a-9c2d1d96.us-west-2.amazon.com>
- <50298859-0d0e-6eb0-029b-30df2a4ecd63@oracle.com>
- <20200715204943.GB17938@dev-dsk-anchalag-2a-9c2d1d96.us-west-2.amazon.com>
- <0ca3c501-e69a-d2c9-a24c-f83afd4bdb8c@oracle.com>
- <20200717191009.GA3387@dev-dsk-anchalag-2a-9c2d1d96.us-west-2.amazon.com>
- <5464f384-d4b4-73f0-d39e-60ba9800d804@oracle.com>
- <20200720093705.GG7191@Air-de-Roger>
- <20200721001736.GB19610@dev-dsk-anchalag-2a-9c2d1d96.us-west-2.amazon.com>
+ id def41234-cb33-11ea-84fc-bc764e2007e4;
+ Tue, 21 Jul 2020 09:23:43 +0000 (UTC)
+Received: by mail-wr1-x431.google.com with SMTP id a14so5608858wra.5
+ for <xen-devel@lists.xenproject.org>; Tue, 21 Jul 2020 02:23:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:reply-to:to:cc:references:in-reply-to:subject:date:message-id
+ :mime-version:content-transfer-encoding:thread-index
+ :content-language;
+ bh=OlvW3xbvdzsZzjeUiLqigemg/exIGFMp6fI8py9pDoo=;
+ b=JDklvqbu+podRlAKOwhFEiEbjDzEuGdWWqmNfkzs18dCNwBDINGWZ4wh2zHjuu9z5b
+ raJDAXsNskWbXC9Ol4fQkmOyMUsvQ7mRDHbXJRBnhxF39gDIbWJAhJc2E8Eaz5ApDyNC
+ /ZX6W/xwGVT9Qu1VpvyqatME8d/140wQo34hXX8uyEgmjJKuR0oiisr0Twup8i8XwNrm
+ 55L6CKNNx3h3ZFNQMneezgMhb7Wf304G/Y+oRli2rWcIq6SyEg+nJTZfPYB7xsj84POS
+ z0uCa8pxYnPQ7o14SVT1TqNV2EJSkaiHcwES2qFWaRI5QKuSoA+Xh25gBNDLy3ZSw4UX
+ bIlA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:reply-to:to:cc:references:in-reply-to
+ :subject:date:message-id:mime-version:content-transfer-encoding
+ :thread-index:content-language;
+ bh=OlvW3xbvdzsZzjeUiLqigemg/exIGFMp6fI8py9pDoo=;
+ b=XgAXthWCF55/eRP+obo202iYE5va761eDuJKSizTIWIKLu+IwCXQI2eSBavWhSFqQT
+ 5RlbsQHF4ifwqov5N4tObTRhRjxPisH66xA641SKExx69fuj68LrnPtRHrbd3eEPGqS5
+ qrUXTGXZZREwlhdGHpLnqEONCfEXMdHS7wVS3nSEpMIathQkc0vhGekqy9uPqtOBJwk9
+ AWenMkEXJXq87t8u0KJfurUwONVaSEYhtdfa6p3Uln9yIG9+/Tvxk98hhf1uVPB+ezpe
+ OTG6YiuEovnyp3hctRT3iRxLv0M5kYWzmu/YDIXB6jQig/wndknkAXzT0A8oQnN0qatB
+ JMJw==
+X-Gm-Message-State: AOAM5336T5NOTqdBaW+qmGEMEeRoW6/jbXubU04ARpnrA/qXCQdwD3cU
+ k57/q2tdFpl4w0LUDoh+oTE=
+X-Google-Smtp-Source: ABdhPJy1FccZoSGC4ujMAJaT39575N9yzIHrqVgvTrIYj0R8L/2sI6m2+F//D7j7iLXOIuNWgCXcVQ==
+X-Received: by 2002:adf:f449:: with SMTP id f9mr1556571wrp.416.1595323422924; 
+ Tue, 21 Jul 2020 02:23:42 -0700 (PDT)
+Received: from CBGR90WXYV0 (54-240-197-235.amazon.com. [54.240.197.235])
+ by smtp.gmail.com with ESMTPSA id k126sm2734171wmf.3.2020.07.21.02.23.41
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Tue, 21 Jul 2020 02:23:42 -0700 (PDT)
+From: Paul Durrant <xadimgnik@gmail.com>
+X-Google-Original-From: "Paul Durrant" <paul@xen.org>
+To: "'Andrew Cooper'" <andrew.cooper3@citrix.com>,
+ "'Nick Rosbrook'" <rosbrookn@gmail.com>, <xen-devel@lists.xenproject.org>
+References: <d406ae82e0cdde2dc33a92d2685ffb77bacab7ee.1595289055.git.rosbrookn@ainfosec.com>
+ <003901d65f2e$6faab0c0$4f001240$@xen.org>
+ <66dc2e79-e899-1d94-c0f2-d834b55cd859@citrix.com>
+In-Reply-To: <66dc2e79-e899-1d94-c0f2-d834b55cd859@citrix.com>
+Subject: RE: [PATCH for-4.14] golang/xenlight: fix code generation for python
+ 2.6
+Date: Tue, 21 Jul 2020 10:23:41 +0100
+Message-ID: <004001d65f40$a0348330$e09d8990$@xen.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20200721001736.GB19610@dev-dsk-anchalag-2a-9c2d1d96.us-west-2.amazon.com>
-X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
- AMSPEX02CL02.citrite.net (10.69.22.126)
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: Microsoft Outlook 16.0
+Thread-Index: AQJO5yDcExPNZQbG/t5S46VRX2lP6wJ2S7dHAu7JLWan9YorIA==
+Content-Language: en-gb
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -85,93 +96,59 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: eduval@amazon.com, len.brown@intel.com, peterz@infradead.org,
- benh@kernel.crashing.org, x86@kernel.org, linux-mm@kvack.org, pavel@ucw.cz,
- hpa@zytor.com, tglx@linutronix.de, sstabellini@kernel.org, kamatam@amazon.com,
- mingo@redhat.com, xen-devel@lists.xenproject.org, sblbir@amazon.com,
- axboe@kernel.dk, konrad.wilk@oracle.com, bp@alien8.de,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>, jgross@suse.com,
- netdev@vger.kernel.org, linux-pm@vger.kernel.org, rjw@rjwysocki.net,
- linux-kernel@vger.kernel.org, vkuznets@redhat.com, davem@davemloft.net,
- dwmw@amazon.co.uk
+Reply-To: paul@xen.org
+Cc: 'Nick Rosbrook' <rosbrookn@ainfosec.com>,
+ 'Ian Jackson' <ian.jackson@eu.citrix.com>,
+ 'George Dunlap' <george.dunlap@citrix.com>, 'Wei Liu' <wl@xen.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Marek: I'm adding you in case you could be able to give this a try and
-make sure it doesn't break suspend for dom0.
+> -----Original Message-----
+> From: Andrew Cooper <andrew.cooper3@citrix.com>
+> Sent: 21 July 2020 10:21
+> To: paul@xen.org; 'Nick Rosbrook' <rosbrookn@gmail.com>; xen-devel@lists.xenproject.org
+> Cc: 'Nick Rosbrook' <rosbrookn@ainfosec.com>; 'Ian Jackson' <ian.jackson@eu.citrix.com>; 'George
+> Dunlap' <george.dunlap@citrix.com>; 'Wei Liu' <wl@xen.org>
+> Subject: Re: [PATCH for-4.14] golang/xenlight: fix code generation for python 2.6
+> 
+> On 21/07/2020 08:13, Paul Durrant wrote:
+> >> -----Original Message-----
+> >> From: Nick Rosbrook <rosbrookn@gmail.com>
+> >> Sent: 21 July 2020 00:55
+> >> To: xen-devel@lists.xenproject.org
+> >> Cc: paul@xen.org; Nick Rosbrook <rosbrookn@ainfosec.com>; George Dunlap <george.dunlap@citrix.com>;
+> >> Ian Jackson <ian.jackson@eu.citrix.com>; Wei Liu <wl@xen.org>
+> >> Subject: [PATCH for-4.14] golang/xenlight: fix code generation for python 2.6
+> >>
+> >> Before python 2.7, str.format() calls required that the format fields
+> >> were explicitly enumerated, e.g.:
+> >>
+> >>   '{0} {1}'.format(foo, bar)
+> >>
+> >>   vs.
+> >>
+> >>   '{} {}'.format(foo, bar)
+> >>
+> >> Currently, gengotypes.py uses the latter pattern everywhere, which means
+> >> the Go bindings do not build on python 2.6. Use the 2.6 syntax for
+> >> format() in order to support python 2.6 for now.
+> >>
+> >> Signed-off-by: Nick Rosbrook <rosbrookn@ainfosec.com>
+> > I'm afraid this is too late for 4.14 now. We are in hard freeze, so only minor docs changes or
+> critical bug fixes are being taken at
+> > this point.
+> 
+> This is Reported-by me, and breaking gitlab CI on the master and 4.14
+> branches (because apparently noone else cares to look at the results...)
+> 
+> The alternative is to pull support for CentOS 6 from the 4.14 release,
+> which would best be done by a commit taking out the C6 containers from CI.
+> 
 
-On Tue, Jul 21, 2020 at 12:17:36AM +0000, Anchal Agarwal wrote:
-> On Mon, Jul 20, 2020 at 11:37:05AM +0200, Roger Pau Monné wrote:
-> > CAUTION: This email originated from outside of the organization. Do not click links or open attachments unless you can confirm the sender and know the content is safe.
-> > 
-> > 
-> > 
-> > On Sat, Jul 18, 2020 at 09:47:04PM -0400, Boris Ostrovsky wrote:
-> > > (Roger, question for you at the very end)
-> > >
-> > > On 7/17/20 3:10 PM, Anchal Agarwal wrote:
-> > > > On Wed, Jul 15, 2020 at 05:18:08PM -0400, Boris Ostrovsky wrote:
-> > > >> CAUTION: This email originated from outside of the organization. Do not click links or open attachments unless you can confirm the sender and know the content is safe.
-> > > >>
-> > > >>
-> > > >>
-> > > >> On 7/15/20 4:49 PM, Anchal Agarwal wrote:
-> > > >>> On Mon, Jul 13, 2020 at 11:52:01AM -0400, Boris Ostrovsky wrote:
-> > > >>>> CAUTION: This email originated from outside of the organization. Do not click links or open attachments unless you can confirm the sender and know the content is safe.
-> > > >>>>
-> > > >>>>
-> > > >>>>
-> > > >>>> On 7/2/20 2:21 PM, Anchal Agarwal wrote:
-> > > >>>> And PVH dom0.
-> > > >>> That's another good use case to make it work with however, I still
-> > > >>> think that should be tested/worked upon separately as the feature itself
-> > > >>> (PVH Dom0) is very new.
-> > > >>
-> > > >> Same question here --- will this break PVH dom0?
-> > > >>
-> > > > I haven't tested it as a part of this series. Is that a blocker here?
-> > >
-> > >
-> > > I suspect dom0 will not do well now as far as hibernation goes, in which
-> > > case you are not breaking anything.
-> > >
-> > >
-> > > Roger?
-> > 
-> > I sadly don't have any box ATM that supports hibernation where I
-> > could test it. We have hibernation support for PV dom0, so while I
-> > haven't done anything specific to support or test hibernation on PVH
-> > dom0 I would at least aim to not make this any worse, and hence the
-> > check should at least also fail for a PVH dom0?
-> > 
-> > if (!xen_hvm_domain() || xen_initial_domain())
-> >     return -ENODEV;
-> > 
-> > Ie: none of this should be applied to a PVH dom0, as it doesn't have
-> > PV devices and hence should follow the bare metal device suspend.
-> >
-> So from what I understand you meant for any guest running on pvh dom0 should not 
-> hibernate if hibernation is triggered from within the guest or should they?
+At this late stage I'd rather we did that.
 
-Er no to both I think. What I meant is that a PVH dom0 should be able
-to properly suspend, and we should make sure this work doesn't make
-this any harder (or breaks it if it's currently working).
+  Paul
 
-Or at least that's how I understood the question raised by Boris.
+> ~Andrew
 
-You are adding code to the generic suspend path that's also used by dom0
-in order to perform bare metal suspension. This is fine now for a PV
-dom0 because the code is gated on xen_hvm_domain, but you should also
-take into account that a PVH dom0 is considered a HVM domain, and
-hence will get the notifier registered.
-
-> > Also I would contact the QubesOS guys, they rely heavily on the
-> > suspend feature for dom0, and that's something not currently tested by
-> > osstest so any breakages there go unnoticed.
-> > 
-> Was this for me or Boris? If its the former then I have no idea how to?
-
-I've now added Marek.
-
-Roger.
 
