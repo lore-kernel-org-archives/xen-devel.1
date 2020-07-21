@@ -7,40 +7,40 @@ X-Spam-Status: No, score=-13.0 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8091FC433E1
-	for <xen-devel@archiver.kernel.org>; Tue, 21 Jul 2020 18:42:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A23F9C433E8
+	for <xen-devel@archiver.kernel.org>; Tue, 21 Jul 2020 18:43:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5F09B20717
-	for <xen-devel@archiver.kernel.org>; Tue, 21 Jul 2020 18:42:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5F09B20717
+	by mail.kernel.org (Postfix) with ESMTPS id 7D9DF20717
+	for <xen-devel@archiver.kernel.org>; Tue, 21 Jul 2020 18:43:00 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7D9DF20717
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jxxDb-0001yT-0S; Tue, 21 Jul 2020 18:42:23 +0000
+	id 1jxxE4-0002AF-H7; Tue, 21 Jul 2020 18:42:52 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=8efX=BA=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1jxxDZ-0001xV-Lz
- for xen-devel@lists.xenproject.org; Tue, 21 Jul 2020 18:42:21 +0000
-X-Inumbo-ID: e7aef92c-cb81-11ea-85a2-bc764e2007e4
+ id 1jxxE3-0001xV-NL
+ for xen-devel@lists.xenproject.org; Tue, 21 Jul 2020 18:42:51 +0000
+X-Inumbo-ID: e8d90019-cb81-11ea-85a2-bc764e2007e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id e7aef92c-cb81-11ea-85a2-bc764e2007e4;
- Tue, 21 Jul 2020 18:42:19 +0000 (UTC)
+ id e8d90019-cb81-11ea-85a2-bc764e2007e4;
+ Tue, 21 Jul 2020 18:42:21 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1jxxDW-0001u7-8s; Tue, 21 Jul 2020 19:42:18 +0100
+ id 1jxxDZ-0001u7-0G; Tue, 21 Jul 2020 19:42:21 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH 01/14] sg-report-flight: Add a comment re same-flight
- search narrowing
-Date: Tue, 21 Jul 2020 19:41:52 +0100
-Message-Id: <20200721184205.15232-2-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 07/14] sg-report-flight: Use the job row from the
+ intitial query
+Date: Tue, 21 Jul 2020 19:41:58 +0100
+Message-Id: <20200721184205.15232-8-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200721184205.15232-1-ian.jackson@eu.citrix.com>
 References: <20200721184205.15232-1-ian.jackson@eu.citrix.com>
@@ -60,52 +60,59 @@ Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-In afe851ca1771e5da6395b596afa69e509dbbc278
-  sg-report-flight: When justifying, disregard out-of-flight build jobs
-we narrowed sg-report-flight's search algorith.
+$jcheckq is redundant: we looked this up right at the start.
 
-An extensive justification is in the commit message.  I think much of
-this information belongs in-tree, so c&p it (with slight edits) here.
-
-No code change.
+This is not expected to speed things up very much, but it makes things
+somewhat cleaner and clearer.
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- sg-report-flight | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
+ sg-report-flight | 11 +++--------
+ 1 file changed, 3 insertions(+), 8 deletions(-)
 
 diff --git a/sg-report-flight b/sg-report-flight
-index 6c481f6f..927ea37d 100755
+index b8d948da..bcb0d427 100755
 --- a/sg-report-flight
 +++ b/sg-report-flight
-@@ -242,9 +242,27 @@ END
+@@ -160,10 +160,6 @@ sub findaflight ($$$$$) {
+         return undef;
+     }
+ 
+-    my $jcheckq= db_prepare(<<END);
+-        SELECT status FROM jobs WHERE flight=? AND job=?
+-END
+-
+     my $checkq= db_prepare(<<END);
+         SELECT status FROM steps WHERE flight=? AND job=? AND testid=?
+                                    AND status!='skip'
+@@ -263,7 +259,7 @@ $runvars_conds
+             ORDER BY flight DESC
+             LIMIT 1000
+       )
+-      SELECT *
++      SELECT flight, jobs.status
+         FROM sub
+ $flightsq_jobs_join
+        WHERE (1=1)
+@@ -304,7 +300,7 @@ END
+                 WHERE flight=?
+ END
+ 
+-    while (my ($tflight) = $flightsq->fetchrow_array) {
++    while (my ($tflight, $tjstatus) = $flightsq->fetchrow_array) {
+ 	# Recurse from the starting flight looking for relevant build
  	# jobs.  We start with all jobs in $tflight, and for each job
  	# we also process any other jobs it refers to in *buildjob runvars.
- 	#
-+	# The real thing we want to check that the build jobs *in the
-+	# same flight as the justifying job* used the right revisions.
-+	# Build jobs from other flights were either (i) build jobs for
-+	# components not being targed for testing by this branch, but
-+	# which were necessary for the justifying job and for which we
-+	# decided to reuse another build job (in which case we don't
-+	# really care what versions they used, even if underlying it
-+	# all there might be a different version of a tree we are
-+	# actually interested in (ii) the kind of continuous update
-+	# thing seen with freebsdbuildjob.
-+	#
-+	# (This is rather different to cs-bisection-step, which is
-+	# less focused on changes in a particular set of trees.)
-+	#
-+	# So we limit the scope of our recursive descent into build
-+	# jobs, to jobs in the same flight.
-+	#
- 	# We don't actually use a recursive algorithm because that
- 	# would involve recursive use of the same sql query object;
- 	# hence the @binfos_todo queue.
-+
- 	my @binfos_todo;
- 	my $binfos_queue = sub {
- 	    my ($inflight,$q,$why) = @_;
+@@ -407,8 +403,7 @@ END
+             $checkq->execute($tflight, $job, $testid);
+             ($chkst) = $checkq->fetchrow_array();
+ 	    if (!defined $chkst) {
+-		$jcheckq->execute($tflight, $job);
+-		my ($jchkst) = $jcheckq->fetchrow_array();
++		my $jchkst = $tflight->{status};
+ 		$chkst = $jchkst if $jchkst eq 'starved';
+ 	    }
+         }
 -- 
 2.20.1
 
