@@ -7,40 +7,40 @@ X-Spam-Status: No, score=-13.0 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E50D8C433EA
-	for <xen-devel@archiver.kernel.org>; Tue, 21 Jul 2020 18:43:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6200CC433E1
+	for <xen-devel@archiver.kernel.org>; Tue, 21 Jul 2020 19:07:06 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BD1CD20717
-	for <xen-devel@archiver.kernel.org>; Tue, 21 Jul 2020 18:43:14 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BD1CD20717
+	by mail.kernel.org (Postfix) with ESMTPS id 3AD592068F
+	for <xen-devel@archiver.kernel.org>; Tue, 21 Jul 2020 19:07:06 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3AD592068F
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jxxEE-0002Ih-EB; Tue, 21 Jul 2020 18:43:02 +0000
+	id 1jxxbB-0004aY-He; Tue, 21 Jul 2020 19:06:45 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=8efX=BA=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1jxxED-0001xV-Nj
- for xen-devel@lists.xenproject.org; Tue, 21 Jul 2020 18:43:01 +0000
-X-Inumbo-ID: e9bcdb94-cb81-11ea-85a2-bc764e2007e4
+ id 1jxxbA-0004aT-LH
+ for xen-devel@lists.xenproject.org; Tue, 21 Jul 2020 19:06:44 +0000
+X-Inumbo-ID: 50ae2986-cb85-11ea-85a6-bc764e2007e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id e9bcdb94-cb81-11ea-85a2-bc764e2007e4;
- Tue, 21 Jul 2020 18:42:22 +0000 (UTC)
+ id 50ae2986-cb85-11ea-85a6-bc764e2007e4;
+ Tue, 21 Jul 2020 19:06:43 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1jxxDZ-0001u7-MD; Tue, 21 Jul 2020 19:42:21 +0100
+ id 1jxxDZ-0001u7-UT; Tue, 21 Jul 2020 19:42:22 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH 09/14] duration_estimator: Ignore truncated jobs
- unless we know the step
-Date: Tue, 21 Jul 2020 19:42:00 +0100
-Message-Id: <20200721184205.15232-10-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 10/14] duration_estimator: Introduce some _qtxt
+ variables
+Date: Tue, 21 Jul 2020 19:42:01 +0100
+Message-Id: <20200721184205.15232-11-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200721184205.15232-1-ian.jackson@eu.citrix.com>
 References: <20200721184205.15232-1-ian.jackson@eu.citrix.com>
@@ -60,47 +60,44 @@ Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-If we are looking for a particular step then we will ignore jobs
-without that step, so any job which was truncated before it will be
-ignored.
-
-Otherwise we are looking for the whole job duration and a truncated
-job is not a good representative.
-
-This is a bugfix (to duration estimation), not a performance
-improvement like the preceding and subsequent changes.
+No functional change.
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- Osstest/Executive.pm | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+ Osstest/Executive.pm | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
 diff --git a/Osstest/Executive.pm b/Osstest/Executive.pm
-index c272e9f2..3cd37c14 100644
+index 3cd37c14..c966a1be 100644
 --- a/Osstest/Executive.pm
 +++ b/Osstest/Executive.pm
-@@ -1142,6 +1142,10 @@ sub duration_estimator ($$;$$) {
-     # estimated (and only jobs which contained that step will be
-     # considered).
- 
-+    my $or_status_truncated = '';
-+    if ($will_uptoincl_testid) {
-+	$or_status_truncated = "OR j.status='truncated'!";
-+    }
-     my $recentflights_q= $dbh_tests->prepare(<<END);
+@@ -1146,7 +1146,7 @@ sub duration_estimator ($$;$$) {
+     if ($will_uptoincl_testid) {
+ 	$or_status_truncated = "OR j.status='truncated'!";
+     }
+-    my $recentflights_q= $dbh_tests->prepare(<<END);
++    my $recentflights_qtxt= <<END;
              SELECT f.flight AS flight,
  		   f.started AS started,
-@@ -1156,8 +1160,8 @@ sub duration_estimator ($$;$$) {
-                       AND  f.branch=?
-                       AND  j.job=?
-                       AND  r.val=?
--		      AND  (j.status='pass' OR j.status='fail' OR
--                            j.status='truncated')
-+		      AND  (j.status='pass' OR j.status='fail'
-+                           $or_status_truncated)
-                       AND  f.started IS NOT NULL
-                       AND  f.started >= ?
+                    j.status AS status
+@@ -1167,7 +1167,7 @@ sub duration_estimator ($$;$$) {
                   ORDER BY f.started DESC
+ END
+ 
+-    my $duration_anyref_q= $dbh_tests->prepare(<<END);
++    my $duration_anyref_qtxt= <<END;
+             SELECT f.flight AS flight,
+                    max(s.finished) AS max_finished
+ 		      FROM steps s JOIN flights f
+@@ -1212,6 +1212,8 @@ END_UPTOINCL
+                 AS duration
+ END_ALWAYS
+ 	
++    my $recentflights_q= $dbh_tests->prepare($recentflights_qtxt);
++    my $duration_anyref_q= $dbh_tests->prepare($duration_anyref_qtxt);
+     my $duration_duration_q = $dbh_tests->prepare($duration_duration_qtxt);
+ 
+     return sub {
 -- 
 2.20.1
 
