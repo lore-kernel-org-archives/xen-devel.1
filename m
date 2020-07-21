@@ -7,40 +7,39 @@ X-Spam-Status: No, score=-13.0 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E17B2C433E6
-	for <xen-devel@archiver.kernel.org>; Tue, 21 Jul 2020 18:42:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DF996C433E3
+	for <xen-devel@archiver.kernel.org>; Tue, 21 Jul 2020 18:42:43 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BA4A320717
-	for <xen-devel@archiver.kernel.org>; Tue, 21 Jul 2020 18:42:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BA4A320717
+	by mail.kernel.org (Postfix) with ESMTPS id B9F5220717
+	for <xen-devel@archiver.kernel.org>; Tue, 21 Jul 2020 18:42:43 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B9F5220717
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jxxDz-00026f-4m; Tue, 21 Jul 2020 18:42:47 +0000
+	id 1jxxDk-00020c-VM; Tue, 21 Jul 2020 18:42:32 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=8efX=BA=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1jxxDy-0001xV-N5
- for xen-devel@lists.xenproject.org; Tue, 21 Jul 2020 18:42:46 +0000
-X-Inumbo-ID: e926bf38-cb81-11ea-85a2-bc764e2007e4
+ id 1jxxDj-0001xV-MS
+ for xen-devel@lists.xenproject.org; Tue, 21 Jul 2020 18:42:31 +0000
+X-Inumbo-ID: e7f1f129-cb81-11ea-85a2-bc764e2007e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id e926bf38-cb81-11ea-85a2-bc764e2007e4;
- Tue, 21 Jul 2020 18:42:21 +0000 (UTC)
+ id e7f1f129-cb81-11ea-85a2-bc764e2007e4;
+ Tue, 21 Jul 2020 18:42:20 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1jxxDY-0001u7-Nz; Tue, 21 Jul 2020 19:42:20 +0100
+ id 1jxxDX-0001u7-TP; Tue, 21 Jul 2020 19:42:19 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH 06/14] sg-report-flight: Use WITH clause to use index
- for $anypassq
-Date: Tue, 21 Jul 2020 19:41:57 +0100
-Message-Id: <20200721184205.15232-7-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 03/14] schema: Provide indices for sg-report-flight
+Date: Tue, 21 Jul 2020 19:41:54 +0100
+Message-Id: <20200721184205.15232-4-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200721184205.15232-1-ian.jackson@eu.citrix.com>
 References: <20200721184205.15232-1-ian.jackson@eu.citrix.com>
@@ -61,91 +60,83 @@ Cc: Ian Jackson <ian.jackson@eu.citrix.com>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Perf: runtime of my test case now ~11s
+These indexes allow very fast lookup of "relevant" flights eg when
+trying to justify failures.
 
-Example query before (from the Perl DBI trace):
+In my ad-hoc test case, these indices (along with the subsequent
+changes to sg-report-flight and Executive.pm, reduce the runtime of
+sg-report-flight from 2-3ks (unacceptably long!) to as little as
+5-7s seconds - a speedup of about 500x.
 
-        SELECT * FROM flights JOIN steps USING (flight)
-            WHERE (branch='xen-unstable')
-              AND job=? and testid=? and status='pass'
-              AND ( (TRUE AND flight <= 151903) AND (blessing='real') )
-            LIMIT 1
+(Getting the database snapshot may take a while first, but deploying
+this code should help with that too by reducing long-running
+transactions.  Quoted perf timings are from snapshot acquisition.)
 
-After:
+Without these new indexes there may be a performance change from the
+query changes.  I haven't benchmarked this so I am setting the schema
+updates to be Preparatory/Needed (ie, "Schema first" as
+schema/README.updates has it), to say that the index should be created
+before the new code is deployed.
 
-        WITH s AS
-        (
-        SELECT * FROM steps
-         WHERE job=? and testid=? and status='pass'
-        )
-        SELECT * FROM flights JOIN s USING (flight)
-            WHERE (branch='xen-unstable')
-              AND ( (TRUE AND flight <= 151903) AND (blessing='real') )
-            LIMIT 1
+Testing: I have tested this series by creating experimental indices
+"trial_..." in the actual production instance.  (Transactional DDL was
+very helpful with this.)  I have verified with \d that schema update
+instructions in this commit generate indexes which are equivalent to
+the trial indices.
 
-In both cases with bind vars:
-
-   "test-amd64-i386-xl-pvshim"
-   "guest-start"
-
-Diff to the query:
-
--        SELECT * FROM flights JOIN steps USING (flight)
-+        WITH s AS
-+        (
-+        SELECT * FROM steps
-+         WHERE job=? and testid=? and status='pass'
-+        )
-+        SELECT * FROM flights JOIN s USING (flight)
-             WHERE (branch='xen-unstable')
--              AND job=? and testid=? and status='pass'
-               AND ( (TRUE AND flight <= 151903) AND (blessing='real') )
-             LIMIT 1
+Deployment: AFter these schema updates are applied, the trial indices
+are redundant duplicates and should be deleted.
 
 CC: George Dunlap <George.Dunlap@citrix.com>
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- schema/steps-job-index.sql |  2 +-
- sg-report-flight           | 14 ++++++++++++--
- 2 files changed, 13 insertions(+), 3 deletions(-)
+ schema/runvars-built-index.sql    | 7 +++++++
+ schema/runvars-revision-index.sql | 7 +++++++
+ schema/steps-job-index.sql        | 7 +++++++
+ 3 files changed, 21 insertions(+)
+ create mode 100644 schema/runvars-built-index.sql
+ create mode 100644 schema/runvars-revision-index.sql
+ create mode 100644 schema/steps-job-index.sql
 
+diff --git a/schema/runvars-built-index.sql b/schema/runvars-built-index.sql
+new file mode 100644
+index 00000000..94f85ed8
+--- /dev/null
++++ b/schema/runvars-built-index.sql
+@@ -0,0 +1,7 @@
++-- ##OSSTEST## 007 Preparatory
++--
++-- This index helps sg-report-flight find relevant flights.
++
++CREATE INDEX runvars_built_revision_idx
++    ON runvars (val)
++ WHERE name LIKE 'built_revision_%';
+diff --git a/schema/runvars-revision-index.sql b/schema/runvars-revision-index.sql
+new file mode 100644
+index 00000000..a2e3be13
+--- /dev/null
++++ b/schema/runvars-revision-index.sql
+@@ -0,0 +1,7 @@
++-- ##OSSTEST## 008 Preparatory
++--
++-- This index helps Executive::report__find_test find relevant flights.
++
++CREATE INDEX runvars_revision_idx
++    ON runvars (val)
++ WHERE name LIKE 'revision_%';
 diff --git a/schema/steps-job-index.sql b/schema/steps-job-index.sql
-index 07dc5a30..2c33af72 100644
---- a/schema/steps-job-index.sql
+new file mode 100644
+index 00000000..07dc5a30
+--- /dev/null
 +++ b/schema/steps-job-index.sql
-@@ -1,4 +1,4 @@
---- ##OSSTEST## 006 Preparatory
-+-- ##OSSTEST## 006 Needed
- --
- -- This index helps sg-report-flight find if a test ever passed.
- 
-diff --git a/sg-report-flight b/sg-report-flight
-index b5398573..b8d948da 100755
---- a/sg-report-flight
-+++ b/sg-report-flight
-@@ -849,10 +849,20 @@ sub justifyfailures ($;$) {
- 
-     my @failures= values %{ $fi->{Failures} };
- 
-+    # In psql 9.6 this WITH clause makes postgresql do the steps query
-+    # first.  This is good because if this test never passed we can
-+    # determine that really quickly using the new index, without
-+    # having to scan the flights table.  (If the test passed we will
-+    # probably not have to look at many flights to find one, so in
-+    # that case this is not much worse.)
-     my $anypassq= <<END;
--        SELECT * FROM flights JOIN steps USING (flight)
-+        WITH s AS
-+        (
-+        SELECT * FROM steps
-+         WHERE job=? and testid=? and status='pass'
-+        )
-+        SELECT * FROM flights JOIN s USING (flight)
-             WHERE $branches_cond_q
--              AND job=? and testid=? and status='pass'
-               AND $blessingscond
-             LIMIT 1
- END
+@@ -0,0 +1,7 @@
++-- ##OSSTEST## 006 Preparatory
++--
++-- This index helps sg-report-flight find if a test ever passed.
++
++CREATE INDEX steps_job_testid_status_idx
++    ON steps (job, testid, status);
++
 -- 
 2.20.1
 
