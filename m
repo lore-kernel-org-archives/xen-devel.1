@@ -2,74 +2,76 @@ Return-Path: <SRS0=Ywvf=BA=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.3 required=3.0 tests=BAYES_00,DKIM_INVALID,
+X-Spam-Status: No, score=-5.3 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=unavailable autolearn_force=no version=3.4.0
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1AC66C433E5
-	for <xen-devel@archiver.kernel.org>; Tue, 21 Jul 2020 12:27:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AD35AC433E1
+	for <xen-devel@archiver.kernel.org>; Tue, 21 Jul 2020 12:32:13 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E21902080D
-	for <xen-devel@archiver.kernel.org>; Tue, 21 Jul 2020 12:27:00 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 7AE7C2073A
+	for <xen-devel@archiver.kernel.org>; Tue, 21 Jul 2020 12:32:13 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="XJPKZebm"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E21902080D
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="5AJSDYVV"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7AE7C2073A
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jxrLz-00005o-3b; Tue, 21 Jul 2020 12:26:39 +0000
+	id 1jxrR4-00017X-Fx; Tue, 21 Jul 2020 12:31:54 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=bQ5W=BA=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1jxrLx-00005i-K6
- for xen-devel@lists.xenproject.org; Tue, 21 Jul 2020 12:26:37 +0000
-X-Inumbo-ID: 6b6e5238-cb4d-11ea-850b-bc764e2007e4
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=8Oq7=BA=xen.org=julien@srs-us1.protection.inumbo.net>)
+ id 1jxrR2-00017S-OJ
+ for xen-devel@lists.xenproject.org; Tue, 21 Jul 2020 12:31:52 +0000
+X-Inumbo-ID: 27787102-cb4e-11ea-850b-bc764e2007e4
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 6b6e5238-cb4d-11ea-850b-bc764e2007e4;
- Tue, 21 Jul 2020 12:26:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1595334396;
- h=subject:to:cc:references:from:message-id:date:
- mime-version:in-reply-to:content-transfer-encoding;
- bh=+bTnkqjqrHPNyCrpDXVqs8mLvK7TcjZqSh+/Vw4wTqA=;
- b=XJPKZebmX9juLlohGLWNRVB2K0gO7OeQykHacLyds0Fl5+CJP/CeWnvq
- I1WbXkhRoXBaHdj1I0XIVXTxPWHon8Ggg7IOCCZW2nrOFWEBdPJelq5EA
- RWQR7auoyb2cmU3IXaxJnogr8oZK1FPfrJdYDToF9yW1kUkRuHvTB/WCs k=;
-Authentication-Results: esa6.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: j4o6ulCCUFkkjEKHlstF7yy7CzgW0jl0cxriiYjKjK7oj52QcFB1qgv9nW/ABvuml/d3fr16OI
- BhyCn0f18lldNLoyskFBr072jEA2mFaGiykhobLnRVXBWaRXNtzETIZIUafmsWf1ECNq3L6hYX
- 9jq7o51ZrfvcfynwXnSbM4+lZ1UPlQHe1rCJ6aHzDfknaAwf2vf0vS9MkGjSk1k6M1dFze0sML
- mYD9P8IwECnvEaEW46Mq2YTVbWEbcDWrQsPV/IjI5d1HVvOFCL5SHHyc8PaGvG1ES4m/apFsga
- Itw=
-X-SBRS: 2.7
-X-MesageID: 23162858
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.75,378,1589256000"; d="scan'208";a="23162858"
-Subject: Re: [PATCH] tools/xen-cpuid: use dashes consistently in feature names
-To: Wei Liu <wl@xen.org>, Jan Beulich <jbeulich@suse.com>
-References: <2bd92eaf-a29d-3fbf-e505-af118937cdda@suse.com>
- <20200721121600.vdglmcv3m74qfnhw@liuwe-devbox-debian-v2>
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Message-ID: <1c9369f4-1e89-ce44-dd39-94548b134ad0@citrix.com>
-Date: Tue, 21 Jul 2020 13:26:10 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ id 27787102-cb4e-11ea-850b-bc764e2007e4;
+ Tue, 21 Jul 2020 12:31:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=pThINDEi4USEYZjLqHdBiARtlHIpPF8j4miktMKagvs=; b=5AJSDYVVkPu49P5yJVRd1Whxoq
+ SA3vOwrUhaDlkA1tq298ipQSNBfNYBZIqGft4ENptT/QSEQd9vmtpPDCgDHBowbqPX/udx+COXCLn
+ YjkLykQoFnMlhm2jT/rcrHa1NXrFBUkLKdTB2tdlEUPMQY8Q3q0XgWhNF1z6J/azV+6E=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1jxrR0-0005q8-Kr; Tue, 21 Jul 2020 12:31:50 +0000
+Received: from 54-240-197-232.amazon.com ([54.240.197.232]
+ helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1jxrR0-0005gj-AE; Tue, 21 Jul 2020 12:31:50 +0000
+Subject: Re: Virtio in Xen on Arm (based on IOREQ concept)
+To: Stefano Stabellini <sstabellini@kernel.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+References: <CAPD2p-nthLq5NaU32u8pVaa-ub=a9-LOPenupntTYdS-cu31jQ@mail.gmail.com>
+ <20200717150039.GV7191@Air-de-Roger>
+ <8f4e0c0d-b3d4-9dd3-ce20-639539321968@gmail.com>
+ <20200720091722.GF7191@Air-de-Roger>
+ <10eaec62-2c48-52ae-d113-1681c87e3d59@xen.org>
+ <20200720102023.GH7191@Air-de-Roger>
+ <alpine.DEB.2.21.2007201322060.32544@sstabellini-ThinkPad-T480s>
+From: Julien Grall <julien@xen.org>
+Message-ID: <390f3a67-5ca5-d9bd-f13a-2c5920bad45a@xen.org>
+Date: Tue, 21 Jul 2020 13:31:48 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
+ Gecko/20100101 Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20200721121600.vdglmcv3m74qfnhw@liuwe-devbox-debian-v2>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
+In-Reply-To: <alpine.DEB.2.21.2007201322060.32544@sstabellini-ThinkPad-T480s>
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-GB
-X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
- AMSPEX02CL02.citrite.net (10.69.22.126)
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,18 +82,89 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Cc: Oleksandr Andrushchenko <andr2000@gmail.com>,
+ Bertrand Marquis <Bertrand.Marquis@arm.com>, Oleksandr <olekstysh@gmail.com>,
+ xen-devel <xen-devel@lists.xenproject.org>, alex.bennee@linaro.org,
+ Artem Mygaiev <joculator@gmail.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 21/07/2020 13:16, Wei Liu wrote:
-> On Tue, Jul 21, 2020 at 02:04:59PM +0200, Jan Beulich wrote:
->> We've grown to a mix of dashes and underscores - switch to consistent
->> naming in the hope that future additions will play by this.
->>
->> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-> Acked-by: Wei Liu <wl@xen.org>
+Hi Stefano,
 
-Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
+On 20/07/2020 21:37, Stefano Stabellini wrote:
+> On Mon, 20 Jul 2020, Roger Pau Monné wrote:
+>> On Mon, Jul 20, 2020 at 10:40:40AM +0100, Julien Grall wrote:
+>>>
+>>>
+>>> On 20/07/2020 10:17, Roger Pau Monné wrote:
+>>>> On Fri, Jul 17, 2020 at 09:34:14PM +0300, Oleksandr wrote:
+>>>>> On 17.07.20 18:00, Roger Pau Monné wrote:
+>>>>>> On Fri, Jul 17, 2020 at 05:11:02PM +0300, Oleksandr Tyshchenko wrote:
+>>>>>> Do you have any plans to try to upstream a modification to the VirtIO
+>>>>>> spec so that grants (ie: abstract references to memory addresses) can
+>>>>>> be used on the VirtIO ring?
+>>>>>
+>>>>> But VirtIO spec hasn't been modified as well as VirtIO infrastructure in the
+>>>>> guest. Nothing to upsteam)
+>>>>
+>>>> OK, so there's no intention to add grants (or a similar interface) to
+>>>> the spec?
+>>>>
+>>>> I understand that you want to support unmodified VirtIO frontends, but
+>>>> I also think that long term frontends could negotiate with backends on
+>>>> the usage of grants in the shared ring, like any other VirtIO feature
+>>>> negotiated between the frontend and the backend.
+>>>>
+>>>> This of course needs to be on the spec first before we can start
+>>>> implementing it, and hence my question whether a modification to the
+>>>> spec in order to add grants has been considered.
+>>> The problem is not really the specification but the adoption in the
+>>> ecosystem. A protocol based on grant-tables would mostly only be used by Xen
+>>> therefore:
+>>>     - It may be difficult to convince a proprietary OS vendor to invest
+>>> resource on implementing the protocol
+>>>     - It would be more difficult to move in/out of Xen ecosystem.
+>>>
+>>> Both, may slow the adoption of Xen in some areas.
+>>
+>> Right, just to be clear my suggestion wasn't to force the usage of
+>> grants, but whether adding something along this lines was in the
+>> roadmap, see below.
+>>
+>>> If one is interested in security, then it would be better to work with the
+>>> other interested parties. I think it would be possible to use a virtual
+>>> IOMMU for this purpose.
+>>
+>> Yes, I've also heard rumors about using the (I assume VirtIO) IOMMU in
+>> order to protect what backends can map. This seems like a fine idea,
+>> and would allow us to gain the lost security without having to do the
+>> whole work ourselves.
+>>
+>> Do you know if there's anything published about this? I'm curious
+>> about how and where in the system the VirtIO IOMMU is/should be
+>> implemented.
+> 
+> Not yet (as far as I know), but we have just started some discussons on
+> this topic within Linaro.
+> 
+> 
+> You should also be aware that there is another proposal based on
+> pre-shared-memory and memcpys to solve the virtio security issue:
+> 
+> https://marc.info/?l=linux-kernel&m=158807398403549
+> 
+> It would be certainly slower than the "virtio IOMMU" solution but it
+> would take far less time to develop and could work as a short-term
+> stop-gap.
+
+I don't think I agree with this blank statement. In the case of "virtio 
+IOMMU", you would need to potentially map/unmap pages every request 
+which would result to a lot of back and forth to the hypervisor.
+
+So it may turn out that pre-shared-memory may be faster on some setup.
+
+Cheers,
+
+-- 
+Julien Grall
 
