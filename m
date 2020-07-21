@@ -7,46 +7,64 @@ X-Spam-Status: No, score=-8.5 required=3.0 tests=BAYES_00,
 	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=unavailable
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D5294C433DF
-	for <xen-devel@archiver.kernel.org>; Tue, 21 Jul 2020 12:05:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4AAE9C433E1
+	for <xen-devel@archiver.kernel.org>; Tue, 21 Jul 2020 12:16:25 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AE6BE2065D
-	for <xen-devel@archiver.kernel.org>; Tue, 21 Jul 2020 12:05:24 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AE6BE2065D
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 2018221702
+	for <xen-devel@archiver.kernel.org>; Tue, 21 Jul 2020 12:16:24 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2018221702
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jxr15-0006Dc-AB; Tue, 21 Jul 2020 12:05:03 +0000
+	id 1jxrBm-0007Jt-2x; Tue, 21 Jul 2020 12:16:06 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=CrlD=BA=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jxr14-0006DX-IE
- for xen-devel@lists.xenproject.org; Tue, 21 Jul 2020 12:05:02 +0000
-X-Inumbo-ID: 66e35fae-cb4a-11ea-a0a5-12813bfff9fa
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=UXjz=BA=gmail.com=wei.liu.xen@srs-us1.protection.inumbo.net>)
+ id 1jxrBk-0007Jo-T8
+ for xen-devel@lists.xenproject.org; Tue, 21 Jul 2020 12:16:04 +0000
+X-Inumbo-ID: f0f54991-cb4b-11ea-a0ab-12813bfff9fa
+Received: from mail-wr1-f65.google.com (unknown [209.85.221.65])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 66e35fae-cb4a-11ea-a0a5-12813bfff9fa;
- Tue, 21 Jul 2020 12:05:00 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id AF104B118;
- Tue, 21 Jul 2020 12:05:06 +0000 (UTC)
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-From: Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH] tools/xen-cpuid: use dashes consistently in feature names
-Message-ID: <2bd92eaf-a29d-3fbf-e505-af118937cdda@suse.com>
-Date: Tue, 21 Jul 2020 14:04:59 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ id f0f54991-cb4b-11ea-a0ab-12813bfff9fa;
+ Tue, 21 Jul 2020 12:16:02 +0000 (UTC)
+Received: by mail-wr1-f65.google.com with SMTP id 88so10699442wrh.3
+ for <xen-devel@lists.xenproject.org>; Tue, 21 Jul 2020 05:16:02 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=qKIoboWBkto8IvigdE+OP1JMbIIchmAvhLpreVrtlpM=;
+ b=dsJAAs1e7PsCn8kEdn2SOtMnCY+VwfZXgYJp0lxcYr5pt+gfNWoZqFUi3hSvSXJ80L
+ gERN8UcxEbYmA3rSgxuUXXiiYxKlLSGzPUJJV/UgKsa4TVvNLk+MGaK2gBL0KQ/42+mS
+ rJKPuDOf+vdZlG7RK/y7rY7ApKXXTjIhKaPLzc+29tzL5nMi+X+g3l1AhJTxXrIeGzLs
+ Mm1y+91nWPjKIR/DRgMRgmqqu2XYyBm8YXb98quILWVlOEKuPy9BiRqR9gtGarUE4WjP
+ pVxOW2sALD7H1hxuBQsKF/7EhhEaxc/O9STEhIkwC4TVk6TEeddQwf3wYH2A4uwklLgM
+ FKfA==
+X-Gm-Message-State: AOAM530ceCYT1wItpb3TYuuD4cGofngmsXb5pMd/1hD6MprS3dRdZQIV
+ etEaig23XqPxXxmXu6qknrk=
+X-Google-Smtp-Source: ABdhPJwZda6uAmwqdM1t1VxXAXTRW6NtUBm0eIZwU1D8TmAj6HqCmdfqU8TRn+jAeA9JraDZdHeOSw==
+X-Received: by 2002:adf:de8d:: with SMTP id w13mr25877177wrl.129.1595333761872; 
+ Tue, 21 Jul 2020 05:16:01 -0700 (PDT)
+Received: from liuwe-devbox-debian-v2 ([51.145.34.42])
+ by smtp.gmail.com with ESMTPSA id v5sm3044835wmh.12.2020.07.21.05.16.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 21 Jul 2020 05:16:01 -0700 (PDT)
+Date: Tue, 21 Jul 2020 12:16:00 +0000
+From: Wei Liu <wl@xen.org>
+To: Jan Beulich <jbeulich@suse.com>
+Subject: Re: [PATCH] tools/xen-cpuid: use dashes consistently in feature names
+Message-ID: <20200721121600.vdglmcv3m74qfnhw@liuwe-devbox-debian-v2>
+References: <2bd92eaf-a29d-3fbf-e505-af118937cdda@suse.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <2bd92eaf-a29d-3fbf-e505-af118937cdda@suse.com>
+User-Agent: NeoMutt/20180716
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,102 +75,17 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>, Wei Liu <wl@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-We've grown to a mix of dashes and underscores - switch to consistent
-naming in the hope that future additions will play by this.
+On Tue, Jul 21, 2020 at 02:04:59PM +0200, Jan Beulich wrote:
+> We've grown to a mix of dashes and underscores - switch to consistent
+> naming in the hope that future additions will play by this.
+> 
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
-
---- a/tools/misc/xen-cpuid.c
-+++ b/tools/misc/xen-cpuid.c
-@@ -75,7 +75,7 @@ static const char *const str_e1d[32] =
- 
- static const char *const str_e1c[32] =
- {
--    [ 0] = "lahf_lm",    [ 1] = "cmp",
-+    [ 0] = "lahf-lm",    [ 1] = "cmp",
-     [ 2] = "svm",        [ 3] = "extapic",
-     [ 4] = "cr8d",       [ 5] = "lzcnt",
-     [ 6] = "sse4a",      [ 7] = "msse",
-@@ -86,10 +86,10 @@ static const char *const str_e1c[32] =
-     [16] = "fma4",       [17] = "tce",
-     /* [18] */           [19] = "nodeid",
-     /* [20] */           [21] = "tbm",
--    [22] = "topoext",    [23] = "perfctr_core",
--    [24] = "perfctr_nb", /* [25] */
-+    [22] = "topoext",    [23] = "perfctr-core",
-+    [24] = "perfctr-nb", /* [25] */
-     [26] = "dbx",        [27] = "perftsc",
--    [28] = "pcx_l2i",    [29] = "monitorx",
-+    [28] = "pcx-l2i",    [29] = "monitorx",
- };
- 
- static const char *const str_7b0[32] =
-@@ -97,7 +97,7 @@ static const char *const str_7b0[32] =
-     [ 0] = "fsgsbase", [ 1] = "tsc-adj",
-     [ 2] = "sgx",      [ 3] = "bmi1",
-     [ 4] = "hle",      [ 5] = "avx2",
--    [ 6] = "fdp_exn",  [ 7] = "smep",
-+    [ 6] = "fdp-exn",  [ 7] = "smep",
-     [ 8] = "bmi2",     [ 9] = "erms",
-     [10] = "invpcid",  [11] = "rtm",
-     [12] = "pqm",      [13] = "depfpp",
-@@ -120,21 +120,21 @@ static const char *const str_Da1[32] =
- 
- static const char *const str_7c0[32] =
- {
--    [ 0] = "prefetchwt1",      [ 1] = "avx512_vbmi",
-+    [ 0] = "prefetchwt1",      [ 1] = "avx512-vbmi",
-     [ 2] = "umip",             [ 3] = "pku",
-     [ 4] = "ospke",            [ 5] = "waitpkg",
--    [ 6] = "avx512_vbmi2",     [ 7] = "cet-ss",
-+    [ 6] = "avx512-vbmi2",     [ 7] = "cet-ss",
-     [ 8] = "gfni",             [ 9] = "vaes",
--    [10] = "vpclmulqdq",       [11] = "avx512_vnni",
--    [12] = "avx512_bitalg",
--    [14] = "avx512_vpopcntdq",
-+    [10] = "vpclmulqdq",       [11] = "avx512-vnni",
-+    [12] = "avx512-bitalg",
-+    [14] = "avx512-vpopcntdq",
-     [16] = "tsxldtrk",
- 
-     [22] = "rdpid",
-     /* 24 */                   [25] = "cldemote",
-     /* 26 */                   [27] = "movdiri",
-     [28] = "movdir64b",
--    [30] = "sgx_lc",
-+    [30] = "sgx-lc",
- };
- 
- static const char *const str_e7d[32] =
-@@ -157,7 +157,7 @@ static const char *const str_e8b[32] =
- 
- static const char *const str_7d0[32] =
- {
--    [ 2] = "avx512_4vnniw", [ 3] = "avx512_4fmaps",
-+    [ 2] = "avx512-4vnniw", [ 3] = "avx512-4fmaps",
-     [ 4] = "fsrm",
- 
-     [ 8] = "avx512-vp2intersect", [ 9] = "srbds-ctrl",
-@@ -169,13 +169,13 @@ static const char *const str_7d0[32] =
-     [20] = "cet-ibt",
- 
-     [26] = "ibrsb",         [27] = "stibp",
--    [28] = "l1d_flush",     [29] = "arch_caps",
--    [30] = "core_caps",     [31] = "ssbd",
-+    [28] = "l1d-flush",     [29] = "arch-caps",
-+    [30] = "core-caps",     [31] = "ssbd",
- };
- 
- static const char *const str_7a1[32] =
- {
--    /* 4 */                 [ 5] = "avx512_bf16",
-+    /* 4 */                 [ 5] = "avx512-bf16",
- };
- 
- static const struct {
+Acked-by: Wei Liu <wl@xen.org>
 
