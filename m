@@ -2,77 +2,78 @@ Return-Path: <SRS0=exI2=BB=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.3 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C0707C433DF
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Jul 2020 11:17:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DD4EBC433E3
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Jul 2020 11:33:34 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8D1D6206F5
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Jul 2020 11:17:59 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id AD0FC20771
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Jul 2020 11:33:34 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="fOF1mCZ1"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8D1D6206F5
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="CpZ1ySfV"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AD0FC20771
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jyCke-0007d8-Pq; Wed, 22 Jul 2020 11:17:32 +0000
+	id 1jyCzl-0000tp-8z; Wed, 22 Jul 2020 11:33:09 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=u0rb=BB=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1jyCkc-0007d3-TF
- for xen-devel@lists.xenproject.org; Wed, 22 Jul 2020 11:17:30 +0000
-X-Inumbo-ID: ee805b84-cc0c-11ea-8631-bc764e2007e4
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=0IpC=BB=citrix.com=george.dunlap@srs-us1.protection.inumbo.net>)
+ id 1jyCzk-0000tk-JU
+ for xen-devel@lists.xenproject.org; Wed, 22 Jul 2020 11:33:08 +0000
+X-Inumbo-ID: 1c4a5a41-cc0f-11ea-8634-bc764e2007e4
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id ee805b84-cc0c-11ea-8631-bc764e2007e4;
- Wed, 22 Jul 2020 11:17:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=OolPR9fxPy209fVnQYEahm8Kor0kPOiihLICyEuQJeQ=; b=fOF1mCZ10HvrVMbkQu/9B/r3RZ
- i91y2VX5I8Idrv1fRhVVsWjlICgLjLVsrO+hanvSnE9nDFRtRL6ySRp7Wp65a+srQjMxcIrLJyVbX
- Kwrkd9n6GPOB3SoVLZCrLeghwjZH7Lh1+cxbxtXahqdHkjjdxFStbmhHyOO1tOUBRE3s=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1jyCka-0004ij-T9; Wed, 22 Jul 2020 11:17:28 +0000
-Received: from 54-240-197-239.amazon.com ([54.240.197.239]
- helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1jyCka-0000BF-Kr; Wed, 22 Jul 2020 11:17:28 +0000
-Subject: Re: Virtio in Xen on Arm (based on IOREQ concept)
-To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-References: <CAPD2p-nthLq5NaU32u8pVaa-ub=a9-LOPenupntTYdS-cu31jQ@mail.gmail.com>
- <20200717150039.GV7191@Air-de-Roger>
- <8f4e0c0d-b3d4-9dd3-ce20-639539321968@gmail.com>
- <3dcab37d-0d60-f1cc-1d59-b5497f0fa95f@xen.org>
- <b6cf0931-c31e-b03b-3995-688536de391a@gmail.com>
- <05acce61-5b29-76f7-5664-3438361caf82@xen.org>
- <20200722082115.GR7191@Air-de-Roger>
- <f3c54a7e-4352-7591-73c2-14215bd3ad34@xen.org>
- <20200722111012.GX7191@Air-de-Roger>
-From: Julien Grall <julien@xen.org>
-Message-ID: <d28f7cff-53dc-6a63-c681-16bd90b50436@xen.org>
-Date: Wed, 22 Jul 2020 12:17:26 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
- Gecko/20100101 Thunderbird/68.10.0
+ id 1c4a5a41-cc0f-11ea-8634-bc764e2007e4;
+ Wed, 22 Jul 2020 11:33:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1595417586;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-id:content-transfer-encoding: mime-version;
+ bh=FdaxwzmkB9ZWieOTZghY6131G37CtVZDjeBxVrfYhS8=;
+ b=CpZ1ySfVM/MW7nMEcVx1NiOrzGCpvqEnMROny7WvtcHGWyqsPWB3W7Fd
+ isoUDkJF/qnOQKxSFCHaSxlaMzXYxd3hIRidAjzIsqGOBlkjdfwTBuNc3
+ alICthH+HvlJZXS7E66iWNIoZ1sG6ATamVxaeu+NJLin7ng9xNwdRgtJm s=;
+Authentication-Results: esa6.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none
+IronPort-SDR: ekTm3/qI8RXzXk83yaDTej46M1xn2o1cIDzjOc1HhXzYYKn/nKIpOPh88J/6vdcHLRscNVwtll
+ VZ50KyIw7ZRUDsFZBtRIhAcRP6y4JdDeNQP4JZUym2FVrVXlQjuow6qHxxGH/fVkIhm2tsBHlz
+ ZDvE4+HLW0hpjoPHvDGO/MesC3YlCD6sWYUv1DBFY2YatFGt1LyTD057xV29c6T/2PMKnN6k3F
+ JVfaHY4YlNaBM/qIdvdIiRrLMmOSXfFVf3sLIgzQ06Ni4AdNTHgdQ3mhl1ISfwJ7yNdPfrsN9K
+ ob0=
+X-SBRS: 2.7
+X-MesageID: 23256595
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.75,381,1589256000"; d="scan'208";a="23256595"
+From: George Dunlap <George.Dunlap@citrix.com>
+To: Ian Jackson <Ian.Jackson@citrix.com>
+Subject: Re: [OSSTEST PATCH 08/14] Executive: Use index for report__find_test
+Thread-Topic: [OSSTEST PATCH 08/14] Executive: Use index for report__find_test
+Thread-Index: AQHWX46tfAvUjKxsQUGNt2ymzIKIvqkTVxGA
+Date: Wed, 22 Jul 2020 11:33:01 +0000
+Message-ID: <3ACBEEA3-C17D-48AE-8AE5-52C9D92C8C46@citrix.com>
+References: <20200721184205.15232-1-ian.jackson@eu.citrix.com>
+ <20200721184205.15232-9-ian.jackson@eu.citrix.com>
+In-Reply-To: <20200721184205.15232-9-ian.jackson@eu.citrix.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-mailer: Apple Mail (2.3608.80.23.2.2)
+x-ms-exchange-messagesentrepresentingtype: 1
+x-ms-exchange-transport-fromentityheader: Hosted
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <7C790B3B5B6FE44D862957E0A5F42FD0@citrix.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-In-Reply-To: <20200722111012.GX7191@Air-de-Roger>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,56 +84,78 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
- Oleksandr Andrushchenko <andr2000@gmail.com>,
- Bertrand Marquis <Bertrand.Marquis@arm.com>, Oleksandr <olekstysh@gmail.com>,
- xen-devel <xen-devel@lists.xenproject.org>,
- Artem Mygaiev <joculator@gmail.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-
-
-On 22/07/2020 12:10, Roger Pau Monné wrote:
-> On Wed, Jul 22, 2020 at 11:47:18AM +0100, Julien Grall wrote:
->>>
->>> You can still use the map-on-fault behaviour as above, but I would
->>> recommend that you try to limit the number of hypercalls issued.
->>> Having to issue a single hypercall for each page fault it's going to
->>> be slow, so I would instead use mmap batch to map the hole range in
->>> unpopulated physical memory and then the OS fault handler just needs to
->>> fill the page tables with the corresponding address.
->> IIUC your proposal, you are assuming that you will have enough free space in
->> the physical address space to map the foreign mapping.
->>
->> However that amount of free space is not unlimited and may be quite small
->> (see above). It would be fairly easy to exhaust it given that a userspace
->> application can map many times the same guest physical address.
->>
->> So I still think we need to be able to allow Linux to swap a foreign page
->> with another page.
-> 
-> Right, but you will have to be careful to make sure physical addresses
-> are not swapped while being used for IO with devices, as in that case
-> you won't get a recoverable fault. This is safe now because physical
-> mappings created by privcmd are never swapped out, but if you go the
-> route you propose you will have to figure a way to correctly populate
-> physical ranges used for IO with devices, even when the CPU hasn't
-> accessed them.
-> 
-> Relying solely on CPU page faults to populate them will not be enough,
-> as the CPU won't necessarily access all the pages that would be send
-> to devices for IO.
-
-The problem you described here doesn't seem to be specific to foreign 
-mapping. So I would really be surprised if Linux doesn't already have 
-generic mechanism to deal with this.
-
-Hence why I suggested before to deal with foreign mapping the same way 
-as Linux would do with user memory.
-
-Cheers,
-
--- 
-Julien Grall
+DQoNCj4gT24gSnVsIDIxLCAyMDIwLCBhdCA3OjQxIFBNLCBJYW4gSmFja3NvbiA8aWFuLmphY2tz
+b25AZXUuY2l0cml4LmNvbT4gd3JvdGU6DQo+IA0KPiBBZnRlciB3ZSByZWZhY3RvciB0aGlzIHF1
+ZXJ5IHRoZW4gd2UgY2FuIGVuYWJsZSB0aGUgaW5kZXggdXNlLg0KPiAoQm90aCBvZiB0aGVzZSB0
+aGluZ3MgdG9nZXRoZXIgaW4gdGhpcyBjb21taXQgYmVjYXVzZSBJIGhhdmVuJ3QgcGVyZg0KPiB0
+ZXN0ZWQgdGhlIHZlcnNpb24gd2l0aCBqdXN0IHRoZSByZWZhY3RvcmluZy4pDQo+IA0KPiAoV2Ug
+aGF2ZSBwcm92aWRlZCBhbiBpbmRleCB0aGF0IGNhbiBhbnN3ZXIgdGhpcyBxdWVzdGlvbiByZWFs
+bHkNCj4gcXVpY2tseSBpZiBhIHZlcnNpb24gaXMgc3BlY2lmaWVkLiAgQnV0IHRoZSBxdWVyeSBw
+bGFubmVyIGNvdWxkbid0IHNlZQ0KPiB0aGF0IGJlY2F1c2UgaXQgd29ya3Mgd2l0aG91dCBzZWVp
+bmcgdGhlIGJpbmQgdmFyaWFibGVzLCBzbyBkb2Vzbid0DQo+IGtub3cgdGhhdCB0aGUgdmFsdWUg
+b2YgbmFtZSBpcyBnb2luZyB0byBiZSBzdWl0YWJsZSBmb3IgdGhpcyBpbmRleC4pDQo+IA0KPiAq
+IENvbnZlcnQgdGhlIHR3byBFWElTVFMgc3VicXVlcmllcyBpbnRvIEpPSU4vQU5EIHdpdGggYSBE
+SVNUSU5DVA0KPiAgY2xhdXNlIG5hbWluZyB0aGUgZmllbGRzIG9uIGZsaWdodHMsIHNvIGFzIHRv
+IHJlcGxpY2F0ZSB0aGUgcHJldmlvdXMNCj4gIHJlc3VsdCByb3dzLiAgVGhlbiBkbyAkc2VsZWN0
+aW9uIGZpZWxkIGxhc3QuICBUaGUgc3VicXVlcnkgaXMgYQ0KPiAgY29udmVuaWVudCB3YXkgdG8g
+bGV0IHRoaXMgZG8gdGhlIHByZXZpb3VzIHRoaW5nIGZvciBhbGwgdGhlIHZhbHVlcw0KPiAgb2Yg
+JHNlbGVjdGlvbiAoaW5jbHVkaW5nLCBub3RhYmx5LCAqKS4NCj4gDQo+ICogQWRkIHRoZSBhZGRp
+dGlvbmFsIEFORCBjbGF1c2UgZm9yIHIubmFtZSwgd2hpY2ggaGFzIG5vIGxvZ2ljYWwNCj4gIGVm
+ZmVjdCBnaXZlbiB0aGUgYWN0dWFsIHZhbHVlcyBvZiBuYW1lLCBlbmFibGluZyB0aGUgcXVlcnkg
+cGxhbm5lcg0KPiAgdG8gdXNlIHRoaXMgaW5kZXguDQo+IA0KPiBQZXJmOiBJbiBteSB0ZXN0IGNh
+c2UgdGhlIHNnLXJlcG9ydC1mbGlnaHQgcnVudGltZSBpcyBub3cgfjhzLiAgSSBhbQ0KPiByZWFz
+b25hYmx5IGNvbmZpZGVudCB0aGF0IHRoaXMgd2lsbCBub3QgbWFrZSBvdGhlciB1c2UgY2FzZXMg
+b2YgdGhpcw0KPiBjb2RlIHdvcnNlLg0KPiANCj4gUGVyZjogcnVudGltZSBvZiBteSB0ZXN0IGNh
+c2Ugbm93IH4xMXMNCj4gDQo+IEV4YW1wbGUgcXVlcnkgYmVmb3JlIChmcm9tIHRoZSBQZXJsIERC
+SSB0cmFjZSk6DQo+IA0KPiAgICAgICAgU0VMRUNUICoNCj4gICAgICAgICBGUk9NIGZsaWdodHMg
+Zg0KPiAgICAgICAgV0hFUkUNCj4gICAgICAgICAgICAgICAgRVhJU1RTICgNCj4gICAgICAgICAg
+ICAgICAgICAgU0VMRUNUIDENCj4gICAgICAgICAgICAgICAgICAgIEZST00gcnVudmFycyByDQo+
+ICAgICAgICAgICAgICAgICAgIFdIRVJFIG5hbWU9Pw0KPiAgICAgICAgICAgICAgICAgICAgIEFO
+RCB2YWw9Pw0KPiAgICAgICAgICAgICAgICAgICAgIEFORCByLmZsaWdodD1mLmZsaWdodA0KPiAg
+ICAgICAgICAgICAgICAgICAgIEFORCAoICAgICAgKENBU0UNCj4gICAgICAgV0hFTiAoci5qb2Ip
+IExJS0UgJ2J1aWxkLSUtcHJldicgVEhFTiAneHByZXYnDQo+ICAgICAgIFdIRU4gKChyLmpvYikg
+TElLRSAnYnVpbGQtJS1mcmVlYnNkJw0KPiAgICAgICAgICAgICBBTkQgJ3gnID0gJ2ZyZWVic2Ri
+dWlsZGpvYicpIFRIRU4gJ0RJU0NBUkQnDQo+ICAgICAgIEVMU0UgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICcnDQo+ICAgICAgIEVORCkNCj4gPSAnJykNCj4gICAgICAgICAg
+ICAgICAgICkNCj4gICAgICAgICAgQU5EICggKFRSVUUgQU5EIGZsaWdodCA8PSAxNTE5MDMpIEFO
+RCAoYmxlc3Npbmc9J3JlYWwnKSApDQo+ICAgICAgICAgIEFORCAoYnJhbmNoPT8pDQo+ICAgICAg
+ICBPUkRFUiBCWSBmbGlnaHQgREVTQw0KPiAgICAgICAgTElNSVQgMQ0KDQpTbyB0aGlzIHNheXM6
+DQoNCkdldCBtZSBhbGwgdGhlIGNvbHVtbnMNCmZvciB0aGUgaGlnaGVzdC1udW1iZXJlZCBmbGln
+aHQNCldoZXJlOg0KICBUaGVyZSBpcyBhdCBsZWFzdCBvbmUgcnVudmFyIGZvciB0aGF0IGZsaWdo
+dCBoYXMgdGhlIHNwZWNpZmllZCAkbmFtZSBhbmQgJHZhbHVlDQogIEFuZCB0aGUgam9iIGlzICpu
+b3QqIGxpa2UgYnVpbGQtJS1wcmV2IG9yIGJ1aWxkLSUtZnJlZWJzZA0KICBUaGUgZmxpZ2h0IG51
+bWJlciAoPykgaXMgPD0gMTUxOTAzLCBhbmQgYmxlc3NpbmcgPSByZWFsDQogIEZvciB0aGUgc3Bl
+Y2lmaWVkICRicmFuY2gNCg0KV2hhdOKAmXMgdGhlIOKAnFRSVUUgYW5kIGZsaWdodCA8PSAxNTE5
+MDPigJ0gZm9yPw0KDQo+IA0KPiBBZnRlcjoNCj4gDQo+ICAgICAgICBTRUxFQ1QgKg0KPiAgICAg
+ICAgICBGUk9NICggU0VMRUNUIERJU1RJTkNUDQo+ICAgICAgICAgICAgICAgICAgICAgIGZsaWdo
+dCwgc3RhcnRlZCwgYmxlc3NpbmcsIGJyYW5jaCwgaW50ZW5kZWQNCj4gICAgICAgICAgICAgICAg
+IEZST00gZmxpZ2h0cyBmDQo+ICAgICAgICAgICAgICAgICAgICBKT0lOIHJ1bnZhcnMgciBVU0lO
+RyAoZmxpZ2h0KQ0KPiAgICAgICAgICAgICAgICAgICBXSEVSRSBuYW1lPT8NCj4gICAgICAgICAg
+ICAgICAgICAgICBBTkQgbmFtZSBMSUtFICdyZXZpc2lvbl8lJw0KPiAgICAgICAgICAgICAgICAg
+ICAgIEFORCB2YWw9Pw0KPiAgICAgICAgICAgICAgICAgICAgIEFORCByLmZsaWdodD1mLmZsaWdo
+dA0KPiAgICAgICAgICAgICAgICAgICAgIEFORCAoICAgICAgKENBU0UNCj4gICAgICAgV0hFTiAo
+ci5qb2IpIExJS0UgJ2J1aWxkLSUtcHJldicgVEhFTiAneHByZXYnDQo+ICAgICAgIFdIRU4gKChy
+LmpvYikgTElLRSAnYnVpbGQtJS1mcmVlYnNkJw0KPiAgICAgICAgICAgICBBTkQgJ3gnID0gJ2Zy
+ZWVic2RidWlsZGpvYicpIFRIRU4gJ0RJU0NBUkQnDQo+ICAgICAgIEVMU0UgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICcnDQo+ICAgICAgIEVORCkNCj4gPSAnJykNCj4gICAg
+ICAgICAgQU5EICggKFRSVUUgQU5EIGZsaWdodCA8PSAxNTE5MDMpIEFORCAoYmxlc3Npbmc9J3Jl
+YWwnKSApDQo+ICAgICAgICAgIEFORCAoYnJhbmNoPT8pDQo+ICkgQVMgc3ViIFdIRVJFIFRSVUUN
+Cj4gICAgICAgIE9SREVSIEJZIGZsaWdodCBERVNDDQo+ICAgICAgICBMSU1JVCAxDQoNCkFuZCB0
+aGlzIHNheXMgKGVmZmVjdGl2ZWx5KQ0KDQpHZXQgbWUgPGZsaWdodCwgc3RhcnRlZCwgYmxlc3Np
+bmcsIGJyYW5jaCwgaW50ZW5kZWQ+DQpGcm9tIHRoZSBoaWdoZXN0LW51bWJlcmVkIGZsaWdodA0K
+V2hlcmUNCiAgVGhhdCBmbGlnaHQgaGFzIGEgcnVudmFyIHdpdGggc3BlY2lmaWVkIG5hbWUgYW5k
+IHZhbHVlDQogIFRoZSBqb2IgKmRvZXNu4oCZdCogbG9vayBsaWtlIOKAnGJ1aWxkLSUtcHJlduKA
+nSBvciDigJxidWlsZC0lLWZyZWVic2TigJ0NCiAgZmxpZ2h0ICYgYmxlc3NpbmcgYXMgYXBwcm9w
+cmlhdGUNCiAgYnJhbmNoIGFzIHNwZWNpZmllZC4NCiAgDQpJc27igJl0IHRoZSByLmZsaWdodCA9
+IGYuZmxpZ2h0IHJlZHVuZGFudCBpZiB3ZeKAmXJlIGpvaW5pbmcgb24gZmxpZ2h0Pw0KDQpBbHNv
+LCBpbiBzcGl0ZSBvZiB0aGUgcGFyYWdyYXBoIGF0dGVtcHRpbmcgdG8gZXhwbGFpbiBpdCwgSeKA
+mW0gYWZyYWlkIEkgZG9u4oCZdCB1bmRlcnN0YW5kIHdoYXQgdGhlIOKAnEFTIHN1YiBXSEVSRSBU
+UlVF4oCdIGlzIGZvci4NCg0KQnV0IGl0IGxvb2tzIGxpa2UgdGhlIG5ldyBxdWVyeSBzaG91bGQg
+ZG8gdGhlIHNhbWUgdGhpbmcgYXMgdGhlIG9sZCBxdWVyeSwgYXNzdW1pbmcgdGhhdCB0aGUgY29s
+dW1ucyBmcm9tIHRoZSBzdWJxdWVyeSBhcmUgYWxsIHRoZSBjb2x1bW5zIHRoYXQgeW91IG5lZWQg
+aW4gdGhlIGNvcnJlY3Qgb3JkZXIuDQoNCiAtR2VvcmdlDQoNCg==
 
