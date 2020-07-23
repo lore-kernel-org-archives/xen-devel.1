@@ -2,53 +2,76 @@ Return-Path: <SRS0=8jzL=BC=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.5 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-13.0 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C86FC433E0
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2020 15:49:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 10FF4C433E4
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2020 16:00:59 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DA965206D8
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2020 15:49:31 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DA965206D8
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id D126220771
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2020 16:00:58 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="MjwGafP2"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D126220771
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jydTB-0006CL-S0; Thu, 23 Jul 2020 15:49:17 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=9kJt=BC=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jydTA-0006CA-RG
- for xen-devel@lists.xenproject.org; Thu, 23 Jul 2020 15:49:16 +0000
-X-Inumbo-ID: 0efb4d0d-ccfc-11ea-a2c7-12813bfff9fa
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 0efb4d0d-ccfc-11ea-a2c7-12813bfff9fa;
- Thu, 23 Jul 2020 15:49:16 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 502EBAC83;
- Thu, 23 Jul 2020 15:49:23 +0000 (UTC)
-Subject: [PATCH v3 3/8] x86/mce: bring hypercall subop compat checking in sync
- again
-From: Jan Beulich <jbeulich@suse.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <adb0fe93-c251-b84a-a357-936029af0e9c@suse.com>
-Message-ID: <dfad8cb1-e8a2-11ca-70f3-2342f9a04c12@suse.com>
-Date: Thu, 23 Jul 2020 17:49:16 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
+	id 1jydeB-0000X2-F6; Thu, 23 Jul 2020 16:00:39 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=xWck=BC=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1jydeA-0000Wx-KM
+ for xen-devel@lists.xenproject.org; Thu, 23 Jul 2020 16:00:38 +0000
+X-Inumbo-ID: a599aa29-ccfd-11ea-873e-bc764e2007e4
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id a599aa29-ccfd-11ea-873e-bc764e2007e4;
+ Thu, 23 Jul 2020 16:00:37 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1595520036;
+ h=subject:to:cc:references:from:message-id:date:
+ mime-version:in-reply-to:content-transfer-encoding;
+ bh=CUBcWDqMi6J0iPnXI5g8xtGAcA/gPUjYeEizeNxjR9U=;
+ b=MjwGafP2/OZudzC2runZ4vW0rthoymczFkqEA9EHkAV9ugWRx+xzZLnT
+ 4vTKuUkQiCk8QKuE9VRSKR5JmxMbk8mMLisennZ33KeCwG5mpQSy6bNev
+ FMIgnJmO8CyklaWgqBBtIrAcjPk68gO02Um5gpoTuULwyT5s2piNAHIfy M=;
+Authentication-Results: esa6.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none
+IronPort-SDR: xwhDdYuWlOcdmIa3e8tGYl1S09NqyRiXNeYFP7dk3c7IBOvqtPBOz2WkIrQliKapKQcTUAZw1H
+ H1j/WMMYfRYgnvluBV8qtj/WU4gRIICYk7IBoPjT5FKfI/314DRZCeR94r7QbLI+BtS7hitl4I
+ MT1q0+PPtpjQ33Z33B5jWdcziIOEuVD57spAaYX1+hQPylFrBxBhiO9hRkj/hRI9wt0JmpWOeh
+ U/qcK3sAFcvWzkfIXAHfk8byOAOJHcZbm4LPErwPldUule1DuSJr/GvWZBxTZcUAvYxLUiCgM1
+ SdY=
+X-SBRS: 2.7
+X-MesageID: 23384890
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.75,387,1589256000"; d="scan'208";a="23384890"
+Subject: Re: [PATCH] x86/S3: put data segment registers into known state upon
+ resume
+To: Jan Beulich <jbeulich@suse.com>
+References: <3cad2798-1a01-7d5e-ea55-ddb9ba6388d9@suse.com>
+ <6343ad61-246f-fefd-cd12-d260807e82f0@citrix.com>
+ <c726cdc7-271b-0ea7-4056-8ab86686282e@suse.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Message-ID: <e61e34c4-38dd-d201-8035-ead79a7595c2@citrix.com>
+Date: Thu, 23 Jul 2020 17:00:32 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <adb0fe93-c251-b84a-a357-936029af0e9c@suse.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+In-Reply-To: <c726cdc7-271b-0ea7-4056-8ab86686282e@suse.com>
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
+Content-Language: en-GB
+X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
+ AMSPEX02CL02.citrite.net (10.69.22.126)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,63 +82,77 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "M.
+ Vefa Bicakci" <m.v.b@runbox.com>, Wei Liu <wl@xen.org>,
  =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Use a typedef in struct xen_mc also for the two subops "manually"
-translated in the handler, just for consistency. No functional
-change.
+On 23/07/2020 16:19, Jan Beulich wrote:
+> On 23.07.2020 16:40, Andrew Cooper wrote:
+>> On 20/07/2020 16:20, Jan Beulich wrote:
+>>> wakeup_32 sets %ds and %es to BOOT_DS, while leaving %fs at what
+>>> wakeup_start did set it to, and %gs at whatever BIOS did load into it.
+>>> All of this may end up confusing the first load_segments() to run on
+>>> the BSP after resume, in particular allowing a non-nul selector value
+>>> to be left in %fs.
+>>>
+>>> Alongside %ss, also put all other data segment registers into the same
+>>> state that the boot and CPU bringup paths put them in.
+>>>
+>>> Reported-by: M. Vefa Bicakci <m.v.b@runbox.com>
+>>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+>>>
+>>> --- a/xen/arch/x86/acpi/wakeup_prot.S
+>>> +++ b/xen/arch/x86/acpi/wakeup_prot.S
+>>> @@ -52,6 +52,16 @@ ENTRY(s3_resume)
+>>>          mov     %eax, %ss
+>>>          mov     saved_rsp(%rip), %rsp
+>>>  
+>>> +        /*
+>>> +         * Also put other segment registers into known state, like would
+>>> +         * be done on the boot path. This is in particular necessary for
+>>> +         * the first load_segments() to work as intended.
+>>> +         */
+>> I don't think the comment is helpful, not least because it refers to a
+>> broken behaviour in load_segemnts() which is soon going to change anyway.
+> Well, I can drop it. I merely thought I'd be nice and comment my
+> code once in a while (and the comment could be dropped / adjusted
+> when load_segments() changes)...
+>
+>> We've literally just loaded the GDT, at which point reloading all
+>> segments *is* the expected thing to do.
+> In a way, unless some/all are assumed to already hold a nul selector.
+>
+>> I'd recommend that the diff be simply:
+>>
+>> diff --git a/xen/arch/x86/acpi/wakeup_prot.S
+>> b/xen/arch/x86/acpi/wakeup_prot.S
+>> index dcc7e2327d..a2c41c4f3f 100644
+>> --- a/xen/arch/x86/acpi/wakeup_prot.S
+>> +++ b/xen/arch/x86/acpi/wakeup_prot.S
+>> @@ -49,6 +49,10 @@ ENTRY(s3_resume)
+>>          mov     %rax, %cr0
+>>  
+>>          mov     $__HYPERVISOR_DS64, %eax
+>> +        mov     %eax, %ds
+>> +        mov     %eax, %es
+>> +        mov     %eax, %fs
+>> +        mov     %eax, %gs
+>>          mov     %eax, %ss
+>>          mov     saved_rsp(%rip), %rsp
+> So I had specifically elected to not put the addition there, to make
+> sure the stack would get established first. But seeing both Roger
+> and you ask me to do otherwise - well, so be it then.
 
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
-Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+There is no IDT.  Any fault is will be triple, irrespective of the exact
+code layout.
 
---- a/xen/arch/x86/cpu/mcheck/mce.c
-+++ b/xen/arch/x86/cpu/mcheck/mce.c
-@@ -1307,16 +1307,16 @@ CHECK_mcinfo_common;
- 
- CHECK_FIELD_(struct, mc_fetch, flags);
- CHECK_FIELD_(struct, mc_fetch, fetch_id);
--# define CHECK_compat_mc_fetch       struct mc_fetch
-+# define CHECK_mc_fetch              struct mc_fetch
- 
- CHECK_FIELD_(struct, mc_physcpuinfo, ncpus);
--# define CHECK_compat_mc_physcpuinfo struct mc_physcpuinfo
-+# define CHECK_mc_physcpuinfo        struct mc_physcpuinfo
- 
- # define xen_ctl_bitmap              xenctl_bitmap
- 
- CHECK_mc;
--# undef CHECK_compat_mc_fetch
--# undef CHECK_compat_mc_physcpuinfo
-+# undef CHECK_mc_fetch
-+# undef CHECK_mc_physcpuinfo
- # undef xen_ctl_bitmap
- 
- # define xen_mc_info                 mc_info
---- a/xen/include/public/arch-x86/xen-mca.h
-+++ b/xen/include/public/arch-x86/xen-mca.h
-@@ -391,6 +391,7 @@ struct xen_mc_physcpuinfo {
-     /* OUT */
-     XEN_GUEST_HANDLE(xen_mc_logical_cpu_t) info;
- };
-+typedef struct xen_mc_physcpuinfo xen_mc_physcpuinfo_t;
- 
- #define XEN_MC_msrinject    4
- #define MC_MSRINJ_MAXMSRS       8
-@@ -436,9 +437,9 @@ struct xen_mc {
-     uint32_t cmd;
-     uint32_t interface_version; /* XEN_MCA_INTERFACE_VERSION */
-     union {
--        struct xen_mc_fetch        mc_fetch;
-+        xen_mc_fetch_t             mc_fetch;
-         xen_mc_notifydomain_t      mc_notifydomain;
--        struct xen_mc_physcpuinfo  mc_physcpuinfo;
-+        xen_mc_physcpuinfo_t       mc_physcpuinfo;
-         xen_mc_msrinject_t         mc_msrinject;
-         xen_mc_mceinject_t         mc_mceinject;
- #if defined(__XEN__) || defined(__XEN_TOOLS__)
+This sequence actually matches what we have in __high_start().
 
+I don't think it is wise to write code which presumes that
+__HYPERVISOR_DS64 is 0 (it happens to be, but could easily be 0xe010 as
+well), or that the trampoline has fixed behaviours for the segments.
+
+~Andrew
 
