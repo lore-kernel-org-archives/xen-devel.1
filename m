@@ -2,78 +2,72 @@ Return-Path: <SRS0=8jzL=BC=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.0 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DFCCEC433E5
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2020 13:25:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 24A95C433E0
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2020 13:22:44 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AF55C2064B
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2020 13:25:27 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id E2DFA2065D
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2020 13:22:43 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="Onrf+/q5"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AF55C2064B
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="ledAvmMe"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E2DFA2065D
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jybDi-0008E6-Sc; Thu, 23 Jul 2020 13:25:10 +0000
+	id 1jybB9-0007zk-52; Thu, 23 Jul 2020 13:22:31 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=0L1b=BC=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1jybDh-0008E1-0v
- for xen-devel@lists.xenproject.org; Thu, 23 Jul 2020 13:25:09 +0000
-X-Inumbo-ID: ed2cbddc-cce7-11ea-a298-12813bfff9fa
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=1OPV=BC=xen.org=julien@srs-us1.protection.inumbo.net>)
+ id 1jybB7-0007za-H6
+ for xen-devel@lists.xenproject.org; Thu, 23 Jul 2020 13:22:29 +0000
+X-Inumbo-ID: 8df58aec-cce7-11ea-a294-12813bfff9fa
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id ed2cbddc-cce7-11ea-a298-12813bfff9fa;
- Thu, 23 Jul 2020 13:25:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1595510708;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:content-transfer-encoding:in-reply-to;
- bh=dzkYPQkWuIKszRErK34RX+I5IJu4n5MB+23a1TyFK1Y=;
- b=Onrf+/q5zTnntN63mSbfYdZnPqrHs9ILyVOrctgAUM9m5tGW9dL7TfkX
- XOFoRmDmYHtjsDBanIDBn2U4GAnQp6yVdPMvdCdo/jSwWnnl/q9gK9ffq
- cd+s4g41hLWlgG2RDjuoukYtM6rAN2Nd6sPgKlWEjL3NHmHgM0gMJP8fQ c=;
-Authentication-Results: esa6.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: hOa7QLdLG4sGCBb98EKi9ESS5BawhFC2ZRJ0t8z3qRtPr7/JcAaRwVCUiMx00yVY9q0BWMMc2y
- EJEFrR8DRLeTbZ9tUl45BDZ1uoYV5ZPgB8LRI6IwwELn49a3nlLty4Rp24orrUEL3/2aJm7k5Q
- WYibHeAaC5zq9npx9jp5FYOwEgVlCDgV+u7runjA/wYjj4USyiKg8nf5WGLr2jIWGQtUnHdwsw
- 97ItFod9fnwcAPjpR5w6SWIxIUTOqf/nAHW+7RRkAzap0rBugUku0pYuG/dyjD1E13qenKgqKQ
- HFs=
-X-SBRS: 2.7
-X-MesageID: 23366682
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.75,386,1589256000"; d="scan'208";a="23366682"
-Date: Thu, 23 Jul 2020 15:25:00 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: David Hildenbrand <david@redhat.com>
-Subject: Re: [PATCH 3/3] memory: introduce an option to force onlining of
- hotplug memory
-Message-ID: <20200723132500.GF7191@Air-de-Roger>
-References: <20200723084523.42109-1-roger.pau@citrix.com>
- <20200723084523.42109-4-roger.pau@citrix.com>
- <21490d49-b2cf-a398-0609-8010bdb0b004@redhat.com>
- <20200723122300.GD7191@Air-de-Roger>
- <404ea76f-c3d8-dbc5-432d-08d84a17f2d7@suse.com>
- <20200723130831.GE7191@Air-de-Roger>
- <0e04b526-924d-aa51-cc2e-2c7561ce3df2@redhat.com>
+ id 8df58aec-cce7-11ea-a294-12813bfff9fa;
+ Thu, 23 Jul 2020 13:22:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=zFAxGj7t0naFq8V00wiOTIEgSTg9FjQdClBP/9y0MLA=; b=ledAvmMe5HcHyt7CasvjnvTK/o
+ VMHBNaqvcyBPNGlq/d0ou4c00X2b1pUrx9IoZ3vq9D52WBGiWGh8n6eV9h/POTPpq0G0nFSYFyGzu
+ lPdQSy5m3+JilZDdfwQOq76uqvNgrzRU5YkXeB9HXHd1w4qmWMIxZSkIwBJk4l5OGRsU=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1jybB4-0008Ca-Mi; Thu, 23 Jul 2020 13:22:26 +0000
+Received: from 54-240-197-238.amazon.com ([54.240.197.238]
+ helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1jybB4-0007JB-F3; Thu, 23 Jul 2020 13:22:26 +0000
+Subject: Re: [PATCH] xen/x86: irq: Avoid a TOCTOU race in
+ pirq_spin_lock_irq_desc()
+To: Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
+References: <20200722165300.22655-1-julien@xen.org>
+ <c9863243-0b5e-521f-80b8-bc5673f895a6@suse.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <5bd56ef4-8bf5-3308-b7db-71e41ac45918@xen.org>
+Date: Thu, 23 Jul 2020 14:22:22 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
+ Gecko/20100101 Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <0e04b526-924d-aa51-cc2e-2c7561ce3df2@redhat.com>
-X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
- AMSPEX02CL02.citrite.net (10.69.22.126)
+In-Reply-To: <c9863243-0b5e-521f-80b8-bc5673f895a6@suse.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,111 +78,88 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: =?utf-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>,
- Stefano Stabellini <sstabellini@kernel.org>, linux-kernel@vger.kernel.org,
- linux-mm@kvack.org, xen-devel@lists.xenproject.org,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>,
- Andrew Morton <akpm@linux-foundation.org>
+Cc: xen-devel@lists.xenproject.org, Julien Grall <jgrall@amazon.com>,
+ Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Thu, Jul 23, 2020 at 03:14:31PM +0200, David Hildenbrand wrote:
-> On 23.07.20 15:08, Roger Pau Monné wrote:
-> > On Thu, Jul 23, 2020 at 02:28:13PM +0200, Jürgen Groß wrote:
-> >> On 23.07.20 14:23, Roger Pau Monné wrote:
-> >>> On Thu, Jul 23, 2020 at 01:37:03PM +0200, David Hildenbrand wrote:
-> >>>> On 23.07.20 10:45, Roger Pau Monne wrote:
-> >>>>> Add an extra option to add_memory_resource that overrides the memory
-> >>>>> hotplug online behavior in order to force onlining of memory from
-> >>>>> add_memory_resource unconditionally.
-> >>>>>
-> >>>>> This is required for the Xen balloon driver, that must run the
-> >>>>> online page callback in order to correctly process the newly added
-> >>>>> memory region, note this is an unpopulated region that is used by Linux
-> >>>>> to either hotplug RAM or to map foreign pages from other domains, and
-> >>>>> hence memory hotplug when running on Xen can be used even without the
-> >>>>> user explicitly requesting it, as part of the normal operations of the
-> >>>>> OS when attempting to map memory from a different domain.
-> >>>>>
-> >>>>> Setting a different default value of memhp_default_online_type when
-> >>>>> attaching the balloon driver is not a robust solution, as the user (or
-> >>>>> distro init scripts) could still change it and thus break the Xen
-> >>>>> balloon driver.
-> >>>>
-> >>>> I think we discussed this a couple of times before (even triggered by my
-> >>>> request), and this is responsibility of user space to configure. Usually
-> >>>> distros have udev rules to online memory automatically. Especially, user
-> >>>> space should eb able to configure *how* to online memory.
-> >>>
-> >>> Note (as per the commit message) that in the specific case I'm
-> >>> referring to the memory hotplugged by the Xen balloon driver will be
-> >>> an unpopulated range to be used internally by certain Xen subsystems,
-> >>> like the xen-blkback or the privcmd drivers. The addition of such
-> >>> blocks of (unpopulated) memory can happen without the user explicitly
-> >>> requesting it, and hence not even aware such hotplug process is taking
-> >>> place. To be clear: no actual RAM will be added to the system.
-> >>>
-> >>> Failure to online such blocks using the Xen specific online handler
-> >>> (which does not handle back the memory to the allocator in any way)
-> >>> will result in the system getting stuck and malfunctioning.
-> >>>
-> >>>> It's the admin/distro responsibility to configure this properly. In case
-> >>>> this doesn't happen (or as you say, users change it), bad luck.
-> >>>>
-> >>>> E.g., virtio-mem takes care to not add more memory in case it is not
-> >>>> getting onlined. I remember hyper-v has similar code to at least wait a
-> >>>> bit for memory to get onlined.
-> >>>
-> >>> I don't think VirtIO or Hyper-V use the hotplug system in the same way
-> >>> as Xen, as said this is done to add unpopulated memory regions that
-> >>> will be used to map foreign memory (from other domains) by Xen drivers
-> >>> on the system.
-> >>>
-> >>> Maybe this should somehow use a different mechanism to hotplug such
-> >>> empty memory blocks? I don't mind doing this differently, but I would
-> >>> need some pointers. Allowing user-space to change a (seemingly
-> >>> unrelated) parameter and as a result produce failures on Xen drivers
-> >>> is not an acceptable solution IMO.
-> >>
-> >> Maybe we can use the same approach as Xen PV-domains: pre-allocate a
-> >> region in the memory map to be used for mapping foreign pages. For the
-> >> kernel it will look like pre-ballooned memory, so it will create struct
-> >> page for the region (which is what we are after), but it won't give the
-> >> memory to the allocator.
-> > 
-> > IMO using something similar to memory hotplug would give us more
-> > flexibility, and TBH the logic is already there in the balloon driver.
-> > It seems quite wasteful to allocate such region(s) beforehand for all
-> > domains, even when most of them won't end up using foreign mappings at
-> > all.
+Hi Jan,
+
+On 23/07/2020 12:23, Jan Beulich wrote:
+> On 22.07.2020 18:53, Julien Grall wrote:
+>> --- a/xen/arch/x86/irq.c
+>> +++ b/xen/arch/x86/irq.c
+>> @@ -1187,7 +1187,7 @@ struct irq_desc *pirq_spin_lock_irq_desc(
+>>   
+>>       for ( ; ; )
+>>       {
+>> -        int irq = pirq->arch.irq;
+>> +        int irq = read_atomic(&pirq->arch.irq);
 > 
-> I do wonder why these issues you describe start to pop up now, literally
-> years after this stuff has been implemented - or am I missing something
-> important?
+> There we go - I'd be fine this way, but I'm pretty sure Andrew
+> would want this to be ACCESS_ONCE(). So I guess now is the time
+> to settle which one to prefer in new code (or which criteria
+> there are to prefer one over the other).
 
-We are (very slowly) implementing support to switch to a PVH dom0
-(something similar to a fully emulated guest as dom0), and that kind
-of guest no longer has a pre-allocated memory region for mappings,
-likely because we mostly use the native path when dealing with
-memory, and such reservation was done by the PV specific setup path
-that deals with the memory map.
+I would prefer if we have a single way to force the compiler to do a 
+single access (read/write).
 
-> > 
-> > Anyway, I'm going to take a look at how to do that, I guess it's going
-> > to involve playing with the memory map and reserving some space.
-> > 
-> > I suggest we should remove the Xen balloon hotplug logic, as it's not
-> > working properly and we don't have a plan to fix it.
-> 
-> Which exact hotplug logic are you referring to?
+The existing implementation of ACCESS_ONCE() can only work on scalar 
+type. The implementation is based on a Linux, although we have an extra 
+check. Looking through the Linux history, it looks like it is not 
+possible to make ACCESS_ONCE() work with non-scalar types:
 
-There are some sections in the Xen balloon driver protected with
-CONFIG_XEN_BALLOON_MEMORY_HOTPLUG.
+     ACCESS_ONCE does not work reliably on non-scalar types. For
+     example gcc 4.6 and 4.7 might remove the volatile tag for such
+     accesses during the SRA (scalar replacement of aggregates) step
+     https://gcc.gnu.org/bugzilla/show_bug.cgi?id=58145)
 
-When xen_hotplug_unpopulated is enabled but the default policy for
-memory hotplug is to not online the added blocks certain operations
-like alloc_xenballooned_pages would block forever waiting for the
-hotplugged memory to be onlined in order to be usable.
+I understand that our implementation of read_atomic(), write_atomic() 
+would lead to less optimized code. So maybe we want to import 
+READ_ONCE() and WRITE_ONCE() from Linux?
 
-Thanks, Roger.
+As a side note, I have seen suggestion only (see [1]) which suggest that 
+they those helpers wouldn't be portable:
+
+"One relatively unimportant misunderstanding is due to the fact that the 
+standard only talks about accesses to volatile objects. It does not talk 
+about accesses via volatile qualified pointers. Some programmers believe 
+that using a pointer-to-volatile should be handled as though it pointed 
+to a volatile object. That is not guaranteed by the standard and is 
+therefore not portable. However, this is relatively unimportant because 
+gcc does in fact treat a pointer-to-volatile as though it pointed to a 
+volatile object."
+
+I would assume that the use is OK on CLang and GCC given that Linux has 
+been using it.
+
+
+> And this is of course besides the fact that I think we have many
+> more instances where guaranteeing a single access would be
+> needed, if we're afraid of the described permitted compiler
+> behavior. Which then makes me wonder if this is really something
+> we should fix one by one, rather than by at least larger scope
+> audits (in order to not suggest "throughout the code base").
+
+It depends how much the contributor can invest on chasing the rest of 
+the issues. The larger the scope is, the less likely you will find 
+someone that has bandwith to allocate for fixing it completely.
+
+If the scope is "a field", then I think it is a reasonable suggesting.
+
+In this case, I had a look at arch.irq and wasn't able to spot other 
+potential issue.
+
+> As a minor remark, unless you've observed problematic behavior,
+> would you mind adding "potential" or "theoretical" to the title?
+
+I am not aware of any issues with compiler so far. So I can add 
+"potential" in the title.
+
+Cheers,
+
+[1] https://www.airs.com/blog/archives/154
+
+-- 
+Julien Grall
 
