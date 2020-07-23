@@ -4,70 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-7.0 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 24A95C433E0
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2020 13:22:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8AAE7C433E3
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2020 13:28:17 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E2DFA2065D
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2020 13:22:43 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 4D5AC20709
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2020 13:28:17 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="ledAvmMe"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E2DFA2065D
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="EVVwTLz2"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4D5AC20709
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jybB9-0007zk-52; Thu, 23 Jul 2020 13:22:31 +0000
+	id 1jybGS-0008P6-Ft; Thu, 23 Jul 2020 13:28:00 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=1OPV=BC=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1jybB7-0007za-H6
- for xen-devel@lists.xenproject.org; Thu, 23 Jul 2020 13:22:29 +0000
-X-Inumbo-ID: 8df58aec-cce7-11ea-a294-12813bfff9fa
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=xWck=BC=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1jybGR-0008OF-Jo
+ for xen-devel@lists.xenproject.org; Thu, 23 Jul 2020 13:27:59 +0000
+X-Inumbo-ID: 52a8f55f-cce8-11ea-a298-12813bfff9fa
+Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 8df58aec-cce7-11ea-a294-12813bfff9fa;
- Thu, 23 Jul 2020 13:22:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=zFAxGj7t0naFq8V00wiOTIEgSTg9FjQdClBP/9y0MLA=; b=ledAvmMe5HcHyt7CasvjnvTK/o
- VMHBNaqvcyBPNGlq/d0ou4c00X2b1pUrx9IoZ3vq9D52WBGiWGh8n6eV9h/POTPpq0G0nFSYFyGzu
- lPdQSy5m3+JilZDdfwQOq76uqvNgrzRU5YkXeB9HXHd1w4qmWMIxZSkIwBJk4l5OGRsU=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1jybB4-0008Ca-Mi; Thu, 23 Jul 2020 13:22:26 +0000
-Received: from 54-240-197-238.amazon.com ([54.240.197.238]
- helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1jybB4-0007JB-F3; Thu, 23 Jul 2020 13:22:26 +0000
-Subject: Re: [PATCH] xen/x86: irq: Avoid a TOCTOU race in
- pirq_spin_lock_irq_desc()
-To: Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
-References: <20200722165300.22655-1-julien@xen.org>
- <c9863243-0b5e-521f-80b8-bc5673f895a6@suse.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <5bd56ef4-8bf5-3308-b7db-71e41ac45918@xen.org>
-Date: Thu, 23 Jul 2020 14:22:22 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
- Gecko/20100101 Thunderbird/68.10.0
+ id 52a8f55f-cce8-11ea-a298-12813bfff9fa;
+ Thu, 23 Jul 2020 13:27:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1595510878;
+ h=subject:to:cc:references:from:message-id:date:
+ mime-version:in-reply-to:content-transfer-encoding;
+ bh=s7t2QUOLs1qt8WqvBpHUm61e9CeK8KZQNhK9/ZwC1us=;
+ b=EVVwTLz2+LEpET7smVxlKNYZpktsGCWY2c/5vu61KLMt7quWCB7eOOWa
+ IjKa/MD1T+Ai3lHJz2x26rcu/jokJ1MjRS9ec81W+DWX75Fus3QZ0RzZ0
+ RxC0ciP5WEB6My+q82p/gQmLh9on0eV3P+Pv2W+olimhfr1SlxZHpeCtc w=;
+Authentication-Results: esa2.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none
+IronPort-SDR: bDWa+yTMtrngYt6gmlpTivdst9fYiE9wb+rwX3W/ksRkHxrd0FvN54g1Ahk29Gbyp1ZLAIbyuN
+ 6lwdkWQpLX2KTl/2j3takemDVB4/Pm6Kwj1DvmDcIqyBQ+i0/W5s/majNPt1Kj2q2MNbfC2191
+ zbVNLA84DnF1a2Po46ZB1zyRGxoM+L6VgV1ItBq26atLywcXy6d2VFJTUWvGFPHyCKSRz2yLmz
+ FVcnyR+8+gi5UPao1+LRQ/UcG521vUSPfErLvmuqEPf2+bZ21iGOXuZPePy97ZJ2SPfQtfYrgK
+ Igs=
+X-SBRS: 2.7
+X-MesageID: 23055499
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.75,386,1589256000"; d="scan'208";a="23055499"
+Subject: Re: [PATCH] x86/vmce: Dispatch vmce_{rd,wr}msr() from
+ guest_{rd,wr}msr()
+To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+References: <20200722101809.8389-1-andrew.cooper3@citrix.com>
+ <20200723100727.GA7191@Air-de-Roger>
+ <ccc153a5-cf65-c483-43ea-d6b864366e06@citrix.com>
+ <20200723113025.GC7191@Air-de-Roger>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Message-ID: <1250cb45-5539-cb45-52eb-b2cb1477c48d@citrix.com>
+Date: Thu, 23 Jul 2020 14:27:53 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <c9863243-0b5e-521f-80b8-bc5673f895a6@suse.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
+In-Reply-To: <20200723113025.GC7191@Air-de-Roger>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
+ AMSPEX02CL02.citrite.net (10.69.22.126)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -78,88 +84,69 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: xen-devel@lists.xenproject.org, Julien Grall <jgrall@amazon.com>,
- Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wl@xen.org>,
+ Jan Beulich <JBeulich@suse.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Hi Jan,
+On 23/07/2020 12:30, Roger Pau Monné wrote:
+> On Thu, Jul 23, 2020 at 12:00:53PM +0100, Andrew Cooper wrote:
+>> On 23/07/2020 11:07, Roger Pau Monné wrote:
+>>> On Wed, Jul 22, 2020 at 11:18:09AM +0100, Andrew Cooper wrote:
+>>>> +    case MSR_IA32_MCG_CAP     ... MSR_IA32_MCG_CTL:      /* 0x179 -> 0x17b */
+>>>> +    case MSR_IA32_MCx_CTL2(0) ... MSR_IA32_MCx_CTL2(31): /* 0x280 -> 0x29f */
+>>>> +    case MSR_IA32_MCx_CTL(0)  ... MSR_IA32_MCx_MISC(31): /* 0x400 -> 0x47f */
+>>> Where do you get the ranges from 0 to 31? It seems like the count
+>>> field in the CAP register is 8 bits, which could allow for up to 256
+>>> banks?
+>>>
+>>> I'm quite sure this would then overlap with other MSRs?
+>> Irritatingly, nothing I can find actually states an upper architectural
+>> limit.
+>>
+>> SDM Vol4, Table 2-2 which enumerates the Architectural MSRs.
+>>
+>> 0x280 thru 0x29f are explicitly reserved MCx_CTL2, which is a limit of
+>> 32 banks.  There are gaps after this in the architectural table, but
+>> IceLake has PRMRR_BASE_0 at 0x2a0.
+>>
+>> The main bank of MCx_{CTL,STATUS,ADDR,MISC} start at 0x400 and are
+>> listed in the table up to 0x473, which is a limit of 29 banks.  The
+>> Model specific table for SandyBridge fills in the remaining 3 banks up
+>> to MSR 0x47f, which is the previous limit of 32 banks.  (These MSRs have
+>> package scope rather than core/thread scope, but they are still
+>> enumerated architecturally so I'm not sure why they are in the model
+>> specific tables.)
+>>
+>> More importantly however, the VMX MSR range starts at 0x480, immediately
+>> above bank 31, which puts an architectural hard limit on the number of
+>> banks.
+> Yes, realized about the VMX MSRs starting at 0x480, which limits the
+> number of banks. Maybe a small comment about the fact that albeit the
+> count in the CAP register could go up to 256 32 is the actual limit
+> due to how MSRs are arranged?
 
-On 23/07/2020 12:23, Jan Beulich wrote:
-> On 22.07.2020 18:53, Julien Grall wrote:
->> --- a/xen/arch/x86/irq.c
->> +++ b/xen/arch/x86/irq.c
->> @@ -1187,7 +1187,7 @@ struct irq_desc *pirq_spin_lock_irq_desc(
->>   
->>       for ( ; ; )
->>       {
->> -        int irq = pirq->arch.irq;
->> +        int irq = read_atomic(&pirq->arch.irq);
-> 
-> There we go - I'd be fine this way, but I'm pretty sure Andrew
-> would want this to be ACCESS_ONCE(). So I guess now is the time
-> to settle which one to prefer in new code (or which criteria
-> there are to prefer one over the other).
+Ok.  I've added:
 
-I would prefer if we have a single way to force the compiler to do a 
-single access (read/write).
+The bank limit of 32 isn't stated anywhere I can locate, but is a
+consequence
+of the MSR layout described in SDM Volume 4.
 
-The existing implementation of ACCESS_ONCE() can only work on scalar 
-type. The implementation is based on a Linux, although we have an extra 
-check. Looking through the Linux history, it looks like it is not 
-possible to make ACCESS_ONCE() work with non-scalar types:
+as another paragraph to the commit message.
 
-     ACCESS_ONCE does not work reliably on non-scalar types. For
-     example gcc 4.6 and 4.7 might remove the volatile tag for such
-     accesses during the SRA (scalar replacement of aggregates) step
-     https://gcc.gnu.org/bugzilla/show_bug.cgi?id=58145)
+> Note there's also GUEST_MC_BANK_NUM which is the actual implementation
+> limit in Xen AFAICT, maybe using it here would be clearer? (and limit
+> the ranges forwarded to vmce_rdmsr)
 
-I understand that our implementation of read_atomic(), write_atomic() 
-would lead to less optimized code. So maybe we want to import 
-READ_ONCE() and WRITE_ONCE() from Linux?
+First, there is a note saying that older versions of Xen advertised more
+than 2 banks to guests (and therefore we might see such a guest migrated
+in), and second, capturing all MSRs is a bug I'm specifically fixing
+with this change, and was called out in the commit message.
 
-As a side note, I have seen suggestion only (see [1]) which suggest that 
-they those helpers wouldn't be portable:
+These MSRs, even beyond the banks implemented by the guest, are still
+MCE banks, and need handling appropriately as "out of range banks",
+which isn't necessarily the same as falling into the general default MSR
+path.
 
-"One relatively unimportant misunderstanding is due to the fact that the 
-standard only talks about accesses to volatile objects. It does not talk 
-about accesses via volatile qualified pointers. Some programmers believe 
-that using a pointer-to-volatile should be handled as though it pointed 
-to a volatile object. That is not guaranteed by the standard and is 
-therefore not portable. However, this is relatively unimportant because 
-gcc does in fact treat a pointer-to-volatile as though it pointed to a 
-volatile object."
-
-I would assume that the use is OK on CLang and GCC given that Linux has 
-been using it.
-
-
-> And this is of course besides the fact that I think we have many
-> more instances where guaranteeing a single access would be
-> needed, if we're afraid of the described permitted compiler
-> behavior. Which then makes me wonder if this is really something
-> we should fix one by one, rather than by at least larger scope
-> audits (in order to not suggest "throughout the code base").
-
-It depends how much the contributor can invest on chasing the rest of 
-the issues. The larger the scope is, the less likely you will find 
-someone that has bandwith to allocate for fixing it completely.
-
-If the scope is "a field", then I think it is a reasonable suggesting.
-
-In this case, I had a look at arch.irq and wasn't able to spot other 
-potential issue.
-
-> As a minor remark, unless you've observed problematic behavior,
-> would you mind adding "potential" or "theoretical" to the title?
-
-I am not aware of any issues with compiler so far. So I can add 
-"potential" in the title.
-
-Cheers,
-
-[1] https://www.airs.com/blog/archives/154
-
--- 
-Julien Grall
+~Andrew
 
