@@ -2,70 +2,66 @@ Return-Path: <SRS0=8jzL=BC=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-10.0 required=3.0 tests=BAYES_00,DKIM_INVALID,
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=unavailable
-	autolearn_force=no version=3.4.0
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CC798C433DF
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2020 18:04:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 33C5DC433E0
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2020 18:27:08 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9904920737
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2020 18:04:51 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id E827B20792
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2020 18:27:07 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="zmz0n+a8"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9904920737
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="OHJFG2Id"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E827B20792
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jyfa0-0003YP-RV; Thu, 23 Jul 2020 18:04:28 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=1OPV=BC=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1jyfZz-0003YJ-Bq
- for xen-devel@lists.xenproject.org; Thu, 23 Jul 2020 18:04:27 +0000
-X-Inumbo-ID: f17a3b90-cd0e-11ea-a2f7-12813bfff9fa
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id f17a3b90-cd0e-11ea-a2f7-12813bfff9fa;
- Thu, 23 Jul 2020 18:04:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=cJf61rxVLo+ii9E89SGksnPeWHNEfiL+W8w2zdwell0=; b=zmz0n+a8FrfRaio3PWidp7ujEj
- 4ddBq97a6+QlkwjpV+pqk0tMnQolld77OrWwRggDIElyESVdJFoaeG0lyF61pDEOfwIec/rNiJLFW
- GeCHb8iSGdC473uvWQ+deGly6mo7jRNioMyuGZDQoLd2AZ7lMRFoQeKlafBi/eeHzEtM=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1jyfZx-0006Oz-11; Thu, 23 Jul 2020 18:04:25 +0000
-Received: from 54-240-197-238.amazon.com ([54.240.197.238]
- helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1jyfZw-0004iw-MB; Thu, 23 Jul 2020 18:04:24 +0000
-Subject: Re: Porting Xen to Jetson Nano
-To: Srinivas Bangalore <srini@yujala.com>, xen-devel@lists.xenproject.org,
- Christopher Clark <christopher.w.clark@gmail.com>
-References: <002801d66051$90fe2300$b2fa6900$@yujala.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <9736680b-1c81-652b-552b-4103341bad50@xen.org>
-Date: Thu, 23 Jul 2020 19:04:23 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
- Gecko/20100101 Thunderbird/68.10.0
+	id 1jyfvk-0005W7-Ta; Thu, 23 Jul 2020 18:26:56 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=xWck=BC=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1jyfvk-0005W1-60
+ for xen-devel@lists.xenproject.org; Thu, 23 Jul 2020 18:26:56 +0000
+X-Inumbo-ID: 153a8c80-cd12-11ea-876c-bc764e2007e4
+Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 153a8c80-cd12-11ea-876c-bc764e2007e4;
+ Thu, 23 Jul 2020 18:26:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1595528814;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=U2+CiKFwpvLxh4d4IMieke3JfjjRWJo1j+sz6ZqIRBQ=;
+ b=OHJFG2IdBBse5EnsfH2vLIoCxgPazZWr9VM9brC+EcLgFRmp5OSA1j2a
+ 4rIpERm5FbV5xNETHV2zMvN31HCsze6sXI0diYGBpY8ajznCNrACwFD9K
+ Im0wgNCXwha1IsjlI+i3GfrTsRXTOjnt1fglb0FWFeohUCiXTLgU0iQcx E=;
+Authentication-Results: esa2.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none
+IronPort-SDR: huDvZPas59Cux8i69MV9rDin8lFZkNRXN/fcYdCLfJNG6dTzbtnmBbZXSyObCLxPGbU6sz0uqR
+ DrnU3jqSjlqgTzHUwuuDVm4Ime9uq6gqGSRXCSShg1CySsJe3aDnCNLzzJBKf89svGttKGIWEG
+ Rkxwq+zlgFSeWJ57k5ksdgCjz+W6uazB+b9o5A7ryYNW+pBsD0fw7uJdKtO4nbNGsU8wPCFUqS
+ CNdtugG1M36GOiWc+1QLMR1Wa2qzDLVvB6otzOI9GZCdA5CgzFWD7GTkdTx6Gnpk9ndvrhy5vT
+ zzg=
+X-SBRS: 2.7
+X-MesageID: 23086844
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.75,387,1589256000"; d="scan'208";a="23086844"
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Subject: [PATCH] x86/pv: Make the PV default WRMSR path match the HVM default
+Date: Thu, 23 Jul 2020 19:26:26 +0100
+Message-ID: <20200723182626.7500-1-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.11.0
 MIME-Version: 1.0
-In-Reply-To: <002801d66051$90fe2300$b2fa6900$@yujala.com>
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Language: en-GB
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -77,202 +73,47 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
+ Jan Beulich <JBeulich@suse.com>,
+ =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 22/07/2020 18:57, Srinivas Bangalore wrote:
-> Dear Xen experts,
+The current HVM default for writes to unknown MSRs is to inject #GP if the MSR
+is unreadable, and discard writes otherwise. While this behaviour isn't great,
+the PV default is even worse, because it swallows writes even to non-readable
+MSRs.  i.e. A PV guest doesn't even get a #GP fault for a write to a totally
+bogus index.
 
-Hello,
+Update PV to make it consistent with HVM, which will simplify the task of
+making other improvements to the default MSR behaviour.
 
-> Would greatly appreciate some hints on how to move forward with this one…
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Wei Liu <wl@xen.org>
+CC: Roger Pau MonnÃ© <roger.pau@citrix.com>
+---
+ xen/arch/x86/pv/emul-priv-op.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
- From your first set of original log:
-
- > Xen version 4.8.5 (srinivas@) (aarch64-linux-gnu-gcc
- > (Ubuntu/Linaro 7.5.0-3ubuntu1~18.04) 7.5.0) debug=n  Sun Jul 19 07:44:00
- > PDT 2020
-
-I would recommend to compile Xen with debug enabled (CONFIG_DEBUG=y) as 
-it may provide you more information of what's happening.
-
-Also, aside the Tegra series. Do you have any other patches on top?
-
-[...]
-
-> (XEN) BANK[0] 0x000000a0000000-0x000000c0000000 (512MB)
-> 
-> (XEN) Grant table range: 0x000000fec00000-0x000000fec60000
-> 
-> (XEN) Loading zImage from 00000000e1000000 to 
-> 00000000a0080000-00000000a223c808
-> 
-> (XEN) Allocating PPI 16 for event channel interrupt
-> 
-> (XEN) Loading dom0 DTB to 0x00000000a8000000-0x00000000a803435c
-
-[...]
-
-> 
-> (XEN) *** Dumping CPU0 guest state (d0v0): ***
-> 
-> (XEN) ----[ Xen-4.8.5  arm64  debug=n   Tainted:  C   ]----
-> 
-> (XEN) CPU:    0
-> 
-> (XEN) PC:     00000000a0080000
-
-PC is pointing to the entry point of your kernel...
-
-> 
-> (XEN) LR:     0000000000000000
-> 
-> (XEN) SP_EL0: 0000000000000000
-> 
-> (XEN) SP_EL1: 0000000000000000
-> 
-> (XEN) CPSR:   000001c5 MODE:64-bit EL1h (Guest Kernel, handler)
-> 
-> (XEN)      X0: 00000000a8000000  X1: 0000000000000000  X2: 0000000000000000
-> 
-> (XEN)      X3: 0000000000000000  X4: 0000000000000000  X5: 0000000000000000
-> 
-> (XEN)      X6: 0000000000000000  X7: 0000000000000000  X8: 0000000000000000
-> 
-> (XEN)      X9: 0000000000000000 X10: 0000000000000000 X11: 0000000000000000
-> 
-> (XEN)     X12: 0000000000000000 X13: 0000000000000000 X14: 0000000000000000
-> 
-> (XEN)     X15: 0000000000000000 X16: 0000000000000000 X17: 0000000000000000
-> 
-> (XEN)     X18: 0000000000000000 X19: 0000000000000000 X20: 0000000000000000
-> 
-> (XEN)     X21: 0000000000000000 X22: 0000000000000000 X23: 0000000000000000
-> 
-> (XEN)     X24: 0000000000000000 X25: 0000000000000000 X26: 0000000000000000
-> 
-> (XEN)     X27: 0000000000000000 X28: 0000000000000000  FP: 0000000000000000
-> 
-> (XEN)
-> 
-> (XEN)    ELR_EL1: 0000000000000000
-> 
-> (XEN)    ESR_EL1: 00000000
-> 
-> (XEN)    FAR_EL1: 0000000000000000
-> 
-> (XEN)
-> 
-> (XEN)  SCTLR_EL1: 00c50838
-> 
-> (XEN)    TCR_EL1: 00000000
-> 
-> (XEN)  TTBR0_EL1: 0000000000000000
-> 
-> (XEN)  TTBR1_EL1: 0000000000000000
-> 
-> (XEN)
-> 
-> (XEN)   VTCR_EL2: 80043594
-> 
-> (XEN)  VTTBR_EL2: 000100017f0f9000
-> 
-> (XEN)
-> 
-> (XEN)  SCTLR_EL2: 30cd183d
-> 
-> (XEN)    HCR_EL2: 000000008038663f
-> 
-> (XEN)  TTBR0_EL2: 00000000fecfc000
-> 
-> (XEN)
-> 
-> (XEN)    ESR_EL2: 8200000d
-
-... it looks like we are receiving a trap in EL2 because it can't 
-execute the instruction. This is a bit odd as the p2m (stage-2 
-page-tables) should be configured to allow execution. It would be useful 
-if you can dump the p2m walk here. This following patch should do the 
-job (not compiled test):
-
-diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
-index d578a5c598dd..af1834cdf735 100644
---- a/xen/arch/arm/traps.c
-+++ b/xen/arch/arm/traps.c
-@@ -2489,9 +2489,14 @@ static void do_trap_instr_abort_guest(struct 
-cpu_user_regs *regs,
-           */
-          rc = gva_to_ipa(gva, &gpa, GV2M_READ);
-          if ( rc == -EFAULT )
-+        {
-+            printk("Unable to translate 0x%lx\n", gva);
-              return; /* Try again */
-+        }
-      }
-
-+    dump_p2m_walk(current->domain, gpa);
+diff --git a/xen/arch/x86/pv/emul-priv-op.c b/xen/arch/x86/pv/emul-priv-op.c
+index f14552cb4b..efeb2a727e 100644
+--- a/xen/arch/x86/pv/emul-priv-op.c
++++ b/xen/arch/x86/pv/emul-priv-op.c
+@@ -1113,7 +1113,10 @@ static int write_msr(unsigned int reg, uint64_t val,
+         }
+         /* fall through */
+     default:
+-        if ( (rdmsr_safe(reg, temp) != 0) || (val != temp) )
++        if ( rdmsr_safe(reg, temp) )
++            break;
 +
-      switch ( fsc )
-      {
-      case FSC_FLT_PERM:
-
-
-> 
-> (XEN)  HPFAR_EL2: 0000000000000000
-> 
-> (XEN)    FAR_EL2: 00000000a0080000
-> 
-> (XEN)
-> 
-> (XEN) Guest stack trace from sp=0:
-> 
-> (XEN)   Failed to convert stack to physical address
-
-[...]
-
-> It seems the DOM0 kernel did not get added to the task list….
-
- From a look at the dump, dom0 vCPU0 has been scheduled and running on 
-pCPU0.
-
-> 
-> Boot args for Xen and Dom0 are here:
-> (XEN) Checking for initrd in /chosen
-> 
-> (XEN) linux,initrd limits invalid: 0000000084100000 >= 0000000084100000
-> 
-> (XEN) RAM: 0000000080000000 - 00000000fedfffff
-> 
-> (XEN) RAM: 0000000100000000 - 000000017f1fffff
-> 
-> (XEN)
-> 
-> (XEN) MODULE[0]: 00000000fc7f8000 - 00000000fc82d000 Device Tree
-> 
-> (XEN) MODULE[1]: 00000000e1000000 - 00000000e31bc808 Kernel       
-> console=hvc0 earlyprintk=xen earlycon=xen rootfstype=ext4 rw rootwait 
-> root=/dev/mmcblk0p1 rdinit=/sbin/init
-
-You want to use earlycon=xenboot here.
-
-> 
-> (XEN)  RESVD[0]: 0000000080000000 - 0000000080020000
-> 
-> (XEN)  RESVD[1]: 00000000e3500000 - 00000000e3535000
-> 
-> (XEN)  RESVD[2]: 00000000fc7f8000 - 00000000fc82d000
-> 
-> (XEN)
-> 
-> (XEN) Command line: console=dtuart earlyprintk=xen 
-> earlycon=uart8250,mmio32,0x70006000 sync_console dom0_mem=512M 
-> log_lvl=all guest_loglvl=all console_to_ring
-
-FWIW, earlyprintk and earlycon are not understood by Xen. They are only 
-useful for Dom0.
-
-Best regards,
-
++        if ( val != temp )
+     invalid:
+             gdprintk(XENLOG_WARNING,
+                      "Domain attempted WRMSR %08x from 0x%016"PRIx64" to 0x%016"PRIx64"\n",
 -- 
-Julien Grall
+2.11.0
+
 
