@@ -2,74 +2,62 @@ Return-Path: <SRS0=8jzL=BC=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-11.3 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 478D5C433DF
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2020 18:25:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 28637C433E0
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2020 20:44:45 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0F70B20792
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2020 18:25:14 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id E75782065E
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2020 20:44:44 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="wmOhdBXq"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0F70B20792
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="ubCdb9Hj"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E75782065E
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jyfta-0005Pq-Ff; Thu, 23 Jul 2020 18:24:42 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jyi4V-0001AX-5E; Thu, 23 Jul 2020 20:44:07 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=h/wE=BC=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
- id 1jyftY-0005PR-AB
- for xen-devel@lists.xenproject.org; Thu, 23 Jul 2020 18:24:40 +0000
-X-Inumbo-ID: c22575b4-cd11-11ea-a2fa-12813bfff9fa
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id c22575b4-cd11-11ea-a2fa-12813bfff9fa;
- Thu, 23 Jul 2020 18:24:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
- Content-Transfer-Encoding:Content-Type:Message-ID:To:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=dqTNTsFkhzbPlk/CLyi1a4JqpBs+MYCM5RcgM3e3NzM=; b=wmOhdBXqoK3ZhcpL5LfavPHnw
- aBSlfxVesq9OzwFC9sC5N7NxzaM95spNUeWzBj3aAbQtRlGreIfkb7J6/WRvsZd1um10KE/1sv2Xk
- 4cdsXq3w0xbj+WH+ks+FzhPICQe6MhPvNNXrDJcDPHwcr5DBtrveOyVGR3wSgoIJQ6qAg=;
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1jyftR-0006o4-Jc; Thu, 23 Jul 2020 18:24:33 +0000
-Received: from [172.16.144.3] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1jyftR-0003TB-9B; Thu, 23 Jul 2020 18:24:33 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.89) (envelope-from <osstest-admin@xenproject.org>)
- id 1jyftR-0004Xn-7L; Thu, 23 Jul 2020 18:24:33 +0000
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-152152-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+ <SRS0=lw2b=BC=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1jyi4T-0001AS-Nu
+ for xen-devel@lists.xenproject.org; Thu, 23 Jul 2020 20:44:05 +0000
+X-Inumbo-ID: 3f3f1920-cd25-11ea-8782-bc764e2007e4
+Received: from mail.kernel.org (unknown [198.145.29.99])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 3f3f1920-cd25-11ea-8782-bc764e2007e4;
+ Thu, 23 Jul 2020 20:44:05 +0000 (UTC)
+Received: from localhost (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id EC07F2065E;
+ Thu, 23 Jul 2020 20:44:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1595537044;
+ bh=OpWpCb8rL/SmrzCCJV8ZKI0dEkRstb/48b6TMagit3Q=;
+ h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+ b=ubCdb9HjBGjSX5kqp1zt3yREs3ZLGJz/1/+vCTnJq+m8ORwToFwpTi08c3QiMcCOl
+ RLdNybg8yu6selCwVaOkoBETtIufE8uKwdrIS0CSX5WZWjh9W5a/gHCBp794S0PXAJ
+ hQ/7hQfoS5NjKkASChBVvzBs42jtpnZ98wxqrfew=
+Date: Thu, 23 Jul 2020 13:44:03 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
+To: Rahul Singh <rahul.singh@arm.com>
+Subject: Re: [RFC PATCH v1 2/4] xen/arm: Discovering PCI devices and add the
+ PCI devices in XEN.
+In-Reply-To: <666df0147054dda8af13ae74a89be44c69984295.1595511416.git.rahul.singh@arm.com>
+Message-ID: <alpine.DEB.2.21.2007231337140.17562@sstabellini-ThinkPad-T480s>
+References: <cover.1595511416.git.rahul.singh@arm.com>
+ <666df0147054dda8af13ae74a89be44c69984295.1595511416.git.rahul.singh@arm.com>
+User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 152152: tolerable all pass - PUSHED
-X-Osstest-Failures: xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
- xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
- xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
- xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
- xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This: xen=8a7bf75eb5bba4046c1aa278330a371545a6ecbd
-X-Osstest-Versions-That: xen=ffe4f0fe17b5288e0c19955cd1ba589e6db1b0fe
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Thu, 23 Jul 2020 18:24:33 +0000
+Content-Type: text/plain; charset=US-ASCII
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,62 +68,92 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ andrew.cooper3@citrix.com, Bertrand.Marquis@arm.com, jbeulich@suse.com,
+ xen-devel@lists.xenproject.org, nd@arm.com,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, roger.pau@citrix.com
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-flight 152152 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/152152/
+On Thu, 23 Jul 2020, Rahul Singh wrote:
+> Hardware domain is in charge of doing the PCI enumeration and will
+> discover the PCI devices and then will communicate to XEN via hyper
+> call PHYSDEVOP_pci_device_add to add the PCI devices in XEN.
+> 
+> Change-Id: Ie87e19741689503b4b62da911c8dc2ee318584ac
 
-Failures :-/ but no regressions.
-
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
-
-version targeted for testing:
- xen                  8a7bf75eb5bba4046c1aa278330a371545a6ecbd
-baseline version:
- xen                  ffe4f0fe17b5288e0c19955cd1ba589e6db1b0fe
-
-Last test of basis   152142  2020-07-23 10:00:30 Z    0 days
-Testing same since   152152  2020-07-23 15:00:30 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-libvirt                                     pass    
+Same question about Change-Id
 
 
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
+> Signed-off-by: Rahul Singh <rahul.singh@arm.com>
+> ---
+>  xen/arch/arm/physdev.c | 42 +++++++++++++++++++++++++++++++++++++++---
+>  1 file changed, 39 insertions(+), 3 deletions(-)
+> 
+> diff --git a/xen/arch/arm/physdev.c b/xen/arch/arm/physdev.c
+> index e91355fe22..274720f98a 100644
+> --- a/xen/arch/arm/physdev.c
+> +++ b/xen/arch/arm/physdev.c
+> @@ -9,12 +9,48 @@
+>  #include <xen/errno.h>
+>  #include <xen/sched.h>
+>  #include <asm/hypercall.h>
+> -
+> +#include <xen/guest_access.h>
+> +#include <xsm/xsm.h>
+>  
+>  int do_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
+>  {
+> -    gdprintk(XENLOG_DEBUG, "PHYSDEVOP cmd=%d: not implemented\n", cmd);
+> -    return -ENOSYS;
+> +    int ret = 0;
+> +
+> +    switch ( cmd )
+> +    {
+> +#ifdef CONFIG_HAS_PCI
+> +        case PHYSDEVOP_pci_device_add:
+> +            {
+> +                struct physdev_pci_device_add add;
+> +                struct pci_dev_info pdev_info;
+> +                nodeid_t node = NUMA_NO_NODE;
+> +
+> +                ret = -EFAULT;
+> +                if ( copy_from_guest(&add, arg, 1) != 0 )
+> +                    break;
+> +
+> +                pdev_info.is_extfn = !!(add.flags & XEN_PCI_DEV_EXTFN);
+> +                if ( add.flags & XEN_PCI_DEV_VIRTFN )
+> +                {
+> +                    pdev_info.is_virtfn = 1;
+> +                    pdev_info.physfn.bus = add.physfn.bus;
+> +                    pdev_info.physfn.devfn = add.physfn.devfn;
+> +                }
+> +                else
+> +                    pdev_info.is_virtfn = 0;
+> +
+> +                ret = pci_add_device(add.seg, add.bus, add.devfn,
+> +                                &pdev_info, node);
+> +
+> +                break;
+> +            }
+> +#endif
+> +        default:
+> +            gdprintk(XENLOG_DEBUG, "PHYSDEVOP cmd=%d: not implemented\n", cmd);
+> +            ret = -ENOSYS;
+> +    }
 
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
+I think we should make the implementation common between arm and x86 by
+creating xen/common/physdev.c:do_physdev_op as a shared entry point for
+PHYSDEVOP hypercalls implementations. See for instance:
 
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+xen/common/sysctl.c:do_sysctl
 
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+and
+
+xen/arch/arm/sysctl.c:arch_do_sysctl
+xen/arch/x86/sysctl.c:arch_do_sysctl
 
 
-Pushing revision :
+Jan, Andrew, Roger, any opinions?
 
-To xenbits.xen.org:/home/xen/git/xen.git
-   ffe4f0fe17..8a7bf75eb5  8a7bf75eb5bba4046c1aa278330a371545a6ecbd -> smoke
 
