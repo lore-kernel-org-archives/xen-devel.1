@@ -7,61 +7,63 @@ X-Spam-Status: No, score=-7.0 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C6C58C433E3
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2020 11:37:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0471FC433E8
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2020 11:52:27 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 970142080D
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2020 11:37:36 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id CA38520684
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2020 11:52:26 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="VE/Rrow1"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 970142080D
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="dTUzxvGa"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CA38520684
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jyZXF-0005t4-UU; Thu, 23 Jul 2020 11:37:13 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jyZlj-0007dX-E2; Thu, 23 Jul 2020 11:52:11 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=64jQ=BC=redhat.com=david@srs-us1.protection.inumbo.net>)
- id 1jyZXE-0005sz-0y
- for xen-devel@lists.xenproject.org; Thu, 23 Jul 2020 11:37:12 +0000
-X-Inumbo-ID: d814ea1e-ccd8-11ea-86f7-bc764e2007e4
-Received: from us-smtp-delivery-1.mimecast.com (unknown [207.211.31.81])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id d814ea1e-ccd8-11ea-86f7-bc764e2007e4;
- Thu, 23 Jul 2020 11:37:09 +0000 (UTC)
+ id 1jyZli-0007dS-9i
+ for xen-devel@lists.xenproject.org; Thu, 23 Jul 2020 11:52:10 +0000
+X-Inumbo-ID: f01c7eb8-ccda-11ea-a284-12813bfff9fa
+Received: from us-smtp-delivery-1.mimecast.com (unknown [205.139.110.61])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id f01c7eb8-ccda-11ea-a284-12813bfff9fa;
+ Thu, 23 Jul 2020 11:52:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1595504229;
+ s=mimecast20190719; t=1595505128;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=cut4QnIcrkt41QqkMvdydzME5f2nRZ3+Ar1gb+kat8E=;
- b=VE/Rrow1Aa7Y8kr8VXn/frvPWpTL1TnI3kuusYXwz1M7X9/K3A4PGGxLAMrcsKcAaGgDdE
- tSEKRH3G+84cEUrlsAaJzyQvmvP7WNtFVao54OKswPX2gp7IdEzqvVF/1VxEEQY0WMQHmq
- n/s/4mvUbjcECXkPSZNwxvVy6iXMlao=
+ bh=CIXSVu9nQP+8PDb0hzoMQSS9r8hDzc01kzYIvCbHTjQ=;
+ b=dTUzxvGaXVwF4idwYU5Fs7LGI0/pFVwmH0jVGGXSzcFrUvlCZJLibJJ+h4lTWqCYodANXV
+ YjpuyPzMjiY1qpqA8eluTZdQ7gsz+ZcWfAWDBqcGduTddR5bTqZMduMUqHViHIim3UL4CW
+ 9NQPsTIdDCwCHOlPbruk3E5IHX8oIs4=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-125-87lMikxXOdSzORwwInr4Ag-1; Thu, 23 Jul 2020 07:37:07 -0400
-X-MC-Unique: 87lMikxXOdSzORwwInr4Ag-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
+ us-mta-442-wWfQow7ePFKPEJa9Ohw43Q-1; Thu, 23 Jul 2020 07:52:06 -0400
+X-MC-Unique: wWfQow7ePFKPEJa9Ohw43Q-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+ [10.5.11.16])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id EA5A380BCA4;
- Thu, 23 Jul 2020 11:37:05 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 5A4961009440;
+ Thu, 23 Jul 2020 11:52:05 +0000 (UTC)
 Received: from [10.36.114.90] (ovpn-114-90.ams2.redhat.com [10.36.114.90])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 233F65D9D3;
- Thu, 23 Jul 2020 11:37:03 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 71FFB5C1BD;
+ Thu, 23 Jul 2020 11:52:03 +0000 (UTC)
 Subject: Re: [PATCH 3/3] memory: introduce an option to force onlining of
  hotplug memory
+From: David Hildenbrand <david@redhat.com>
 To: Roger Pau Monne <roger.pau@citrix.com>, linux-kernel@vger.kernel.org
 References: <20200723084523.42109-1-roger.pau@citrix.com>
  <20200723084523.42109-4-roger.pau@citrix.com>
-From: David Hildenbrand <david@redhat.com>
+ <21490d49-b2cf-a398-0609-8010bdb0b004@redhat.com>
 Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
  mQINBFXLn5EBEAC+zYvAFJxCBY9Tr1xZgcESmxVNI/0ffzE/ZQOiHJl6mGkmA1R7/uUpiCjJ
  dBrn+lhhOYjjNefFQou6478faXE6o2AhmebqT4KiQoUQFV4R7y1KMEKoSyy8hQaK1umALTdL
@@ -107,16 +109,16 @@ Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
  jPrnvUsUUsjRoRNJjKKA/REq+sAnhkNPPZ/NNMjaZ5b8Tovi8C0tmxiCHaQYqj7G2rgnT0kt
  WNyWQQ==
 Organization: Red Hat GmbH
-Message-ID: <21490d49-b2cf-a398-0609-8010bdb0b004@redhat.com>
-Date: Thu, 23 Jul 2020 13:37:03 +0200
+Message-ID: <18f3987f-d2ca-409b-951d-20381d96e3a8@redhat.com>
+Date: Thu, 23 Jul 2020 13:52:02 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
 MIME-Version: 1.0
-In-Reply-To: <20200723084523.42109-4-roger.pau@citrix.com>
+In-Reply-To: <21490d49-b2cf-a398-0609-8010bdb0b004@redhat.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+Content-Transfer-Encoding: 7bit
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -134,37 +136,80 @@ Cc: Juergen Gross <jgross@suse.com>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 23.07.20 10:45, Roger Pau Monne wrote:
-> Add an extra option to add_memory_resource that overrides the memory
-> hotplug online behavior in order to force onlining of memory from
-> add_memory_resource unconditionally.
+On 23.07.20 13:37, David Hildenbrand wrote:
+> On 23.07.20 10:45, Roger Pau Monne wrote:
+>> Add an extra option to add_memory_resource that overrides the memory
+>> hotplug online behavior in order to force onlining of memory from
+>> add_memory_resource unconditionally.
+>>
+>> This is required for the Xen balloon driver, that must run the
+>> online page callback in order to correctly process the newly added
+>> memory region, note this is an unpopulated region that is used by Linux
+>> to either hotplug RAM or to map foreign pages from other domains, and
+>> hence memory hotplug when running on Xen can be used even without the
+>> user explicitly requesting it, as part of the normal operations of the
+>> OS when attempting to map memory from a different domain.
+>>
+>> Setting a different default value of memhp_default_online_type when
+>> attaching the balloon driver is not a robust solution, as the user (or
+>> distro init scripts) could still change it and thus break the Xen
+>> balloon driver.
 > 
-> This is required for the Xen balloon driver, that must run the
-> online page callback in order to correctly process the newly added
-> memory region, note this is an unpopulated region that is used by Linux
-> to either hotplug RAM or to map foreign pages from other domains, and
-> hence memory hotplug when running on Xen can be used even without the
-> user explicitly requesting it, as part of the normal operations of the
-> OS when attempting to map memory from a different domain.
+> I think we discussed this a couple of times before (even triggered by my
+> request), and this is responsibility of user space to configure. Usually
+> distros have udev rules to online memory automatically. Especially, user
+> space should eb able to configure *how* to online memory.
 > 
-> Setting a different default value of memhp_default_online_type when
-> attaching the balloon driver is not a robust solution, as the user (or
-> distro init scripts) could still change it and thus break the Xen
-> balloon driver.
+> It's the admin/distro responsibility to configure this properly. In case
+> this doesn't happen (or as you say, users change it), bad luck.
+> 
+> E.g., virtio-mem takes care to not add more memory in case it is not
+> getting onlined. I remember hyper-v has similar code to at least wait a
+> bit for memory to get onlined.
+> 
+> Nacked-by: David Hildenbrand <david@redhat.com>
+> 
 
-I think we discussed this a couple of times before (even triggered by my
-request), and this is responsibility of user space to configure. Usually
-distros have udev rules to online memory automatically. Especially, user
-space should eb able to configure *how* to online memory.
+Oh, BTW, I removed that "online" parameter in
 
-It's the admin/distro responsibility to configure this properly. In case
-this doesn't happen (or as you say, users change it), bad luck.
+commit f29d8e9c0191a2a02500945db505e5c89159c3f4
+Author: David Hildenbrand <david@redhat.com>
+Date:   Fri Dec 28 00:35:36 2018 -0800
 
-E.g., virtio-mem takes care to not add more memory in case it is not
-getting onlined. I remember hyper-v has similar code to at least wait a
-bit for memory to get onlined.
+    mm/memory_hotplug: drop "online" parameter from add_memory_resource()
+    
+    Userspace should always be in charge of how to online memory and if memory
+    should be onlined automatically in the kernel.  Let's drop the parameter
+    to overwrite this - XEN passes memhp_auto_online, just like add_memory(),
+    so we can directly use that instead internally.
 
-Nacked-by: David Hildenbrand <david@redhat.com>
+
+Xen was passing "memhp_auto_online" since
+
+commit 703fc13a3f6615e29ce3eb862275d7b58a5d03ba
+Author: Vitaly Kuznetsov <vkuznets@redhat.com>
+Date:   Tue Mar 15 14:56:52 2016 -0700
+
+    xen_balloon: support memory auto onlining policy
+    
+    Add support for the newly added kernel memory auto onlining policy to
+    Xen ballon driver.
+
+
+And before that I assume XEN was completely relying on udev rules to handle it. Parameter was introduced in
+
+commit 31bc3858ea3ebcc3157b3f5f0e624c5962f5a7a6
+Author: Vitaly Kuznetsov <vkuznets@redhat.com>
+Date:   Tue Mar 15 14:56:48 2016 -0700
+
+    memory-hotplug: add automatic onlining policy for the newly added memory
+    
+    Currently, all newly added memory blocks remain in 'offline' state
+    unless someone onlines them, some linux distributions carry special udev
+    rules like:
+    
+      SUBSYSTEM=="memory", ACTION=="add", ATTR{state}=="offline", ATTR{state}="online"
+
 
 -- 
 Thanks,
