@@ -2,72 +2,53 @@ Return-Path: <SRS0=8jzL=BC=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-7.2 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3CBC7C433E1
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2020 11:22:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 47399C433E1
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2020 11:23:45 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0E1E620709
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2020 11:22:37 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="RbZBx0GY"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0E1E620709
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id 209ED20709
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2020 11:23:45 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 209ED20709
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jyZIs-0004Lu-9M; Thu, 23 Jul 2020 11:22:22 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=0L1b=BC=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1jyZIr-0004LO-AS
- for xen-devel@lists.xenproject.org; Thu, 23 Jul 2020 11:22:21 +0000
-X-Inumbo-ID: c58a3a90-ccd6-11ea-86ef-bc764e2007e4
-Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id c58a3a90-ccd6-11ea-86ef-bc764e2007e4;
- Thu, 23 Jul 2020 11:22:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1595503340;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:content-transfer-encoding:in-reply-to;
- bh=XMCaNp2k6EeuVt7pt+FtqxDkl3YZlIt2Q1ItqH2ww4g=;
- b=RbZBx0GY5yacPl2kdsjTV+XA/3ki2FbnvghoLhMFQXPT7LAhVHi48avY
- Z2rptiotcFvIXofhhoBMpcCN5E6DMYw47p8biVcr96k2tT4FPGqTzvpln
- MIX8wfCDV9DIaIl/i8m4BHnOZ3PzvODayVKuYM/rUYBHdQrqN8Lba4fcY A=;
-Authentication-Results: esa4.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: uM54ZEpV6NCrdOd4ejUXQ+6xfuOc/7tuvAbjurWE2maj1DZkXTZIvFA2aZBGqDgVe87KT4DAXL
- 0tbwioETkhdXmqJeKUc9pVUmJo8NCpCaRhE8lAV50xNHBzhkIeRYRpupbDgrkuHCxR07R0Eccm
- 9FG3K20vAaUTOu954/sROvEmhLY5w/zTCzLXRpZaDETa+3kVK9K4bWukR/WShEgCrGPxl0bJ8p
- sNtGbSJlfkIC/U2Si8n8/MYjgmqV1Bb8p+g3eJDp5uSsgdjt8NBuyxPSOjzP4tOItJKDoyYL0x
- aMQ=
-X-SBRS: 2.7
-X-MesageID: 23889141
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.75,386,1589256000"; d="scan'208";a="23889141"
-Date: Thu, 23 Jul 2020 13:22:13 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH] x86/msr: Unify the real {rd,wr}msr() paths in
- guest_{rd,wr}msr()
-Message-ID: <20200723112213.GB7191@Air-de-Roger>
-References: <20200722105529.12177-1-andrew.cooper3@citrix.com>
+	id 1jyZK0-0004UE-NK; Thu, 23 Jul 2020 11:23:32 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=9kJt=BC=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1jyZJz-0004Sx-3A
+ for xen-devel@lists.xenproject.org; Thu, 23 Jul 2020 11:23:31 +0000
+X-Inumbo-ID: eb0046b6-ccd6-11ea-a27f-12813bfff9fa
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id eb0046b6-ccd6-11ea-a27f-12813bfff9fa;
+ Thu, 23 Jul 2020 11:23:23 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 2CCDDABCF;
+ Thu, 23 Jul 2020 11:23:30 +0000 (UTC)
+Subject: Re: [PATCH] xen/x86: irq: Avoid a TOCTOU race in
+ pirq_spin_lock_irq_desc()
+To: Julien Grall <julien@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>
+References: <20200722165300.22655-1-julien@xen.org>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <c9863243-0b5e-521f-80b8-bc5673f895a6@suse.com>
+Date: Thu, 23 Jul 2020 13:23:24 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20200722105529.12177-1-andrew.cooper3@citrix.com>
-X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
- AMSPEX02CL02.citrite.net (10.69.22.126)
+In-Reply-To: <20200722165300.22655-1-julien@xen.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -78,32 +59,35 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wl@xen.org>,
- Jan Beulich <JBeulich@suse.com>
+Cc: xen-devel@lists.xenproject.org, Julien Grall <jgrall@amazon.com>,
+ Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Wed, Jul 22, 2020 at 11:55:29AM +0100, Andrew Cooper wrote:
-> Both the read and write side have commonalities which can be abstracted away.
-> This also allows for additional safety in release builds, and slightly more
-> helpful diagnostics in debug builds.
-> 
-> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+On 22.07.2020 18:53, Julien Grall wrote:
+> --- a/xen/arch/x86/irq.c
+> +++ b/xen/arch/x86/irq.c
+> @@ -1187,7 +1187,7 @@ struct irq_desc *pirq_spin_lock_irq_desc(
+>  
+>      for ( ; ; )
+>      {
+> -        int irq = pirq->arch.irq;
+> +        int irq = read_atomic(&pirq->arch.irq);
 
-Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+There we go - I'd be fine this way, but I'm pretty sure Andrew
+would want this to be ACCESS_ONCE(). So I guess now is the time
+to settle which one to prefer in new code (or which criteria
+there are to prefer one over the other).
 
-> ---
-> CC: Jan Beulich <JBeulich@suse.com>
-> CC: Wei Liu <wl@xen.org>
-> CC: Roger Pau Monné <roger.pau@citrix.com>
-> 
-> I'm not a massive fan of the global scope want_rdmsr_safe boolean, but I can't
-> think of a reasonable way to fix it without starting to use other
-> flexibiltiies offered to us by C99.  (And to preempt the other question, an
-> extra set of braces makes extremely confusing to read logic.)
+And this is of course besides the fact that I think we have many
+more instances where guaranteeing a single access would be
+needed, if we're afraid of the described permitted compiler
+behavior. Which then makes me wonder if this is really something
+we should fix one by one, rather than by at least larger scope
+audits (in order to not suggest "throughout the code base").
 
-The logic could be moved to a helper that takes a expected_safe or
-some such parameter, but I think I prefer this approach.
+As a minor remark, unless you've observed problematic behavior,
+would you mind adding "potential" or "theoretical" to the title?
 
-Thanks, Roger.
+Jan
 
