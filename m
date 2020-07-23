@@ -7,49 +7,48 @@ X-Spam-Status: No, score=-13.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MSGID_FROM_MTA_HEADER,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,UNPARSEABLE_RELAY,
 	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BF750C433EB
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2020 15:41:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B7AB6C433F1
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2020 15:41:07 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7E90A22B40
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2020 15:41:05 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 7D93220759
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Jul 2020 15:41:07 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=armh.onmicrosoft.com header.i=@armh.onmicrosoft.com header.b="IKRZM17c";
-	dkim=pass (1024-bit key) header.d=armh.onmicrosoft.com header.i=@armh.onmicrosoft.com header.b="IKRZM17c"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7E90A22B40
+	dkim=pass (1024-bit key) header.d=armh.onmicrosoft.com header.i=@armh.onmicrosoft.com header.b="WE/koDoM";
+	dkim=pass (1024-bit key) header.d=armh.onmicrosoft.com header.i=@armh.onmicrosoft.com header.b="WE/koDoM"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7D93220759
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jydKx-00056V-Lf; Thu, 23 Jul 2020 15:40:47 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jydL2-00057X-5I; Thu, 23 Jul 2020 15:40:52 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=dJck=BC=arm.com=rahul.singh@srs-us1.protection.inumbo.net>)
- id 1jydKw-00056J-8u
- for xen-devel@lists.xenproject.org; Thu, 23 Jul 2020 15:40:46 +0000
-X-Inumbo-ID: de83a166-ccfa-11ea-a2c5-12813bfff9fa
-Received: from EUR02-HE1-obe.outbound.protection.outlook.com (unknown
- [40.107.1.80]) by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id de83a166-ccfa-11ea-a2c5-12813bfff9fa;
- Thu, 23 Jul 2020 15:40:44 +0000 (UTC)
+ id 1jydL0-00056E-Gk
+ for xen-devel@lists.xenproject.org; Thu, 23 Jul 2020 15:40:50 +0000
+X-Inumbo-ID: dd90bb18-ccfa-11ea-873e-bc764e2007e4
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com (unknown
+ [40.107.21.56]) by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id dd90bb18-ccfa-11ea-873e-bc764e2007e4;
+ Thu, 23 Jul 2020 15:40:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com; 
  s=selector2-armh-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=DkaWWEiIcI3MklJyY5OREQ/S5Dx+rNCL9jY/oAp4P4A=;
- b=IKRZM17c7fNeNJ3E6n1oIfvf2aAQA6xzvLsXDKwu7qwb9rsMBmu3hNGBJXkwmC+DbpK8GWz420kEZ7TChr8unf5A+fDVOp02Tm+o+WzKMDoAamHQZ4N9+7TgC4LMjXR+Hzpwyutjns45JRn2VRk2w35uZkcvfsp+7wkDpazUI3o=
-Received: from DB8PR06CA0018.eurprd06.prod.outlook.com (2603:10a6:10:100::31)
- by DB6PR0802MB2245.eurprd08.prod.outlook.com (2603:10a6:4:84::8) with
+ bh=7Ig21FGJcaMYflDSUeuWkPVGyi1CGLYgrcJFV+ngOUE=;
+ b=WE/koDoMYxR79CrdgfSWygikzr0sKfoO//pOmcNrIR0XL9dPT71qs8xLBU+Ax3EfwjxRQoCVZVVSo0kYd4Iq+SRmGmWIDv6H0Z+ZuowzZ2IVMTV9k633D3wMhJL7i1pSGo64HlkAOQBZfAz4jonVxSsqsgUgqbLk7RBksbezNms=
+Received: from AM5PR04CA0014.eurprd04.prod.outlook.com (2603:10a6:206:1::27)
+ by VI1PR0802MB2256.eurprd08.prod.outlook.com (2603:10a6:800:9e::7) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3195.17; Thu, 23 Jul
- 2020 15:40:41 +0000
-Received: from DB5EUR03FT017.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:10:100:cafe::a1) by DB8PR06CA0018.outlook.office365.com
- (2603:10a6:10:100::31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3216.22 via Frontend
- Transport; Thu, 23 Jul 2020 15:40:41 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3216.24; Thu, 23 Jul
+ 2020 15:40:40 +0000
+Received: from AM5EUR03FT053.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:206:1:cafe::c3) by AM5PR04CA0014.outlook.office365.com
+ (2603:10a6:206:1::27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3216.20 via Frontend
+ Transport; Thu, 23 Jul 2020 15:40:40 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
  smtp.mailfrom=arm.com; lists.xenproject.org; dkim=pass (signature was
  verified) header.d=armh.onmicrosoft.com;lists.xenproject.org;
@@ -58,38 +57,38 @@ Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
  63.35.35.123 as permitted sender) receiver=protection.outlook.com;
  client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
 Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- DB5EUR03FT017.mail.protection.outlook.com (10.152.20.114) with
+ AM5EUR03FT053.mail.protection.outlook.com (10.152.16.210) with
  Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3216.10 via Frontend Transport; Thu, 23 Jul 2020 15:40:41 +0000
-Received: ("Tessian outbound 8f45de5545d6:v62");
- Thu, 23 Jul 2020 15:40:41 +0000
+ 15.20.3216.10 via Frontend Transport; Thu, 23 Jul 2020 15:40:40 +0000
+Received: ("Tessian outbound c83312565ef4:v62");
+ Thu, 23 Jul 2020 15:40:40 +0000
 X-CheckRecipientChecked: true
-X-CR-MTA-CID: 0afc5ea6deeedb69
+X-CR-MTA-CID: 3fa9bceec7b6ce00
 X-CR-MTA-TID: 64aa7808
-Received: from a28b84a73466.1
+Received: from ad811b610fbf.2
  by 64aa7808-outbound-1.mta.getcheckrecipient.com id
- 629A4F73-8B5C-4DF7-9894-DC8F479DA64D.1; 
- Thu, 23 Jul 2020 15:40:35 +0000
+ 04FA8CF8-6D49-4C38-93A8-8B180895957A.1; 
+ Thu, 23 Jul 2020 15:40:34 +0000
 Received: from EUR01-DB5-obe.outbound.protection.outlook.com
- by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id a28b84a73466.1
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id ad811b610fbf.2
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
- Thu, 23 Jul 2020 15:40:35 +0000
+ Thu, 23 Jul 2020 15:40:34 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Vzj44P8ENkdYkCx1Bc2O+ZadrHl3gMkiVWgJe37d5Sb4ORZAcM0HSHnQAwWS+7iFQgqpZIl44sA+twJJ8BvAkT8Y4xvgie1qEzb/44710XPA2e1Zm2yw68qyqBKrKqEjEs0Rkk7Se2WzVjqKF/nlRkmme3xY5YTbRG/iO0+hSxHqV9NpCrTQRkZNMtCbZ585qXmGwRlXH8RHCfv2MoaZtOCSBjWtpgiY6Z1hyHr1kUCYbXavQm1Sg29GbVXNy2IuQXKy7HhQgJrEfcImXEgXmO2nS3/iOTBod0ZOf8hIQ5T37f60v7fNKSRAkN1ZA+jTz4FGPLM6MABL8UiTIPb4Gg==
+ b=h60RQ8yHONI/PAgVn2nug5PWcCqo+xRnrNDK+r8cFczVo5fVYYcP7q+EhyJCtoZTd3d5p4qn009BgO12GDQMmL0rX3lt3o++8wkChVLuidoEluXvLmDatAx+vbUKqCXb7BIM7dpuweK6uXNjvOZNkybdeSUl0Nn3QVGgVBYRG96AzPqMrOUgKo9Kg+lrZUa+1rryFJkDoSOtOQt0OgXzeNf/S6JCW39YnEYsqlhUXp25vnupYqN8yaNJMboylwtdDjjJFiP+ETaGPkeOq0KqclucsF8szJS76PX0tJumoq2oJ4oFiH3/3Apjzt5V879NElw4B0AWTRqQlyfvZETGYQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=DkaWWEiIcI3MklJyY5OREQ/S5Dx+rNCL9jY/oAp4P4A=;
- b=IuEpAT2IimnNbyUYJ3NPAykMquopVgljYBJAycTGAXWoSsbrkeN/bhmbFXriJCCXOSio1tCwaAus9feDLlI9ICE9p+q7SnQ1WCo5tc56Dd1uz35oGPDaN/uN2Zs7kV6y6S8o7Hw0KiYsOkAd4sF+//KdkNgIeWV2s3BIZEE7sP8VaRrY03C+G1eutZDRFiDwEwdX5oH619n6VlWo52+7OHEFWIYRu3bTmRLTQtRSBqinooSYnIiUZfkkz987iCui0Jv8vYkGIJzjP2PxO0cD8l5YRfLAV7hUPsYVxE+82PdQe8XVHZTOvaaZma2AyoieeDpzWwr7Fbv3MbyyVOQu8w==
+ bh=7Ig21FGJcaMYflDSUeuWkPVGyi1CGLYgrcJFV+ngOUE=;
+ b=BqdFd6ap7yNCzuu/z9jm00cGZcA/1V2KA9ojNYaDo56kGNk0+UULXkOa+z4MtWZBf9L9l4XuLB+AnlJ4JFzVd/AE11zlc/fOZjqMr7xWqivTZcakIjymx7XLhqTQQLrVqYXXQIGFRxdS4hHtE5pJ0+0+zZVSdwyu/QTh7py3A5000dAtmskTS/62qt3Ut/AJGnXmfr5ZcyVk/fsUhDeSMUAIuZLM7aYLk9zJQDYGIKXMk8ifBmtESXZlQKhU8JOve2PS7W+1g2fdcM8bMa7MOnUaSuVGP+994jYswJH3rZNBEyab3n100NiuwXYZdh1rbkS9bipVTI2Q2GWGCao76w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
  header.d=arm.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com; 
  s=selector2-armh-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=DkaWWEiIcI3MklJyY5OREQ/S5Dx+rNCL9jY/oAp4P4A=;
- b=IKRZM17c7fNeNJ3E6n1oIfvf2aAQA6xzvLsXDKwu7qwb9rsMBmu3hNGBJXkwmC+DbpK8GWz420kEZ7TChr8unf5A+fDVOp02Tm+o+WzKMDoAamHQZ4N9+7TgC4LMjXR+Hzpwyutjns45JRn2VRk2w35uZkcvfsp+7wkDpazUI3o=
+ bh=7Ig21FGJcaMYflDSUeuWkPVGyi1CGLYgrcJFV+ngOUE=;
+ b=WE/koDoMYxR79CrdgfSWygikzr0sKfoO//pOmcNrIR0XL9dPT71qs8xLBU+Ax3EfwjxRQoCVZVVSo0kYd4Iq+SRmGmWIDv6H0Z+ZuowzZ2IVMTV9k633D3wMhJL7i1pSGo64HlkAOQBZfAz4jonVxSsqsgUgqbLk7RBksbezNms=
 Authentication-Results-Original: lists.xenproject.org; dkim=none (message not
  signed) header.d=none; lists.xenproject.org;
  dmarc=none action=none header.from=arm.com;
@@ -97,20 +96,22 @@ Received: from AM6PR08MB3560.eurprd08.prod.outlook.com (2603:10a6:20b:4c::19)
  by AM6PR08MB4439.eurprd08.prod.outlook.com (2603:10a6:20b:be::14)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3216.24; Thu, 23 Jul
- 2020 15:40:34 +0000
+ 2020 15:40:33 +0000
 Received: from AM6PR08MB3560.eurprd08.prod.outlook.com
  ([fe80::e891:3b33:766:cad5]) by AM6PR08MB3560.eurprd08.prod.outlook.com
  ([fe80::e891:3b33:766:cad5%6]) with mapi id 15.20.3216.021; Thu, 23 Jul 2020
- 15:40:34 +0000
+ 15:40:32 +0000
 From: Rahul Singh <rahul.singh@arm.com>
 To: xen-devel@lists.xenproject.org
-Subject: [RFC PATCH v1 4/4] arm/libxl: Emulated PCI device tree node in libxl
-Date: Thu, 23 Jul 2020 16:40:24 +0100
-Message-Id: <23346b24762467bd246b91b05f7b0fc1719282f6.1595511416.git.rahul.singh@arm.com>
+Subject: [RFC PATCH v1 1/4] arm/pci: PCI setup and PCI host bridge discovery
+ within XEN on ARM.
+Date: Thu, 23 Jul 2020 16:40:21 +0100
+Message-Id: <64ebd4ef614b36a5844c52426a4a6a4a23b1f087.1595511416.git.rahul.singh@arm.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1595511416.git.rahul.singh@arm.com>
 References: <cover.1595511416.git.rahul.singh@arm.com>
-Content-Type: text/plain
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-ClientProxiedBy: LO2P265CA0300.GBRP265.PROD.OUTLOOK.COM
  (2603:10a6:600:a5::24) To AM6PR08MB3560.eurprd08.prod.outlook.com
  (2603:10a6:20b:4c::19)
@@ -119,52 +120,52 @@ X-MS-Exchange-MessageSentRepresentingType: 1
 Received: from localhost.localdomain (217.140.106.54) by
  LO2P265CA0300.GBRP265.PROD.OUTLOOK.COM (2603:10a6:600:a5::24) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3216.20 via Frontend Transport; Thu, 23 Jul 2020 15:40:33 +0000
+ 15.20.3216.20 via Frontend Transport; Thu, 23 Jul 2020 15:40:32 +0000
 X-Mailer: git-send-email 2.17.1
 X-Originating-IP: [217.140.106.54]
 X-MS-PublicTrafficType: Email
 X-MS-Office365-Filtering-HT: Tenant
-X-MS-Office365-Filtering-Correlation-Id: 171f2c16-d7e3-46a6-55b0-08d82f1ec15f
-X-MS-TrafficTypeDiagnostic: AM6PR08MB4439:|DB6PR0802MB2245:
+X-MS-Office365-Filtering-Correlation-Id: f18fe8ae-df6b-481b-e097-08d82f1ec0b4
+X-MS-TrafficTypeDiagnostic: AM6PR08MB4439:|VI1PR0802MB2256:
 X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <DB6PR0802MB2245F92CF439C5EE22CB83A7FC760@DB6PR0802MB2245.eurprd08.prod.outlook.com>
+X-Microsoft-Antispam-PRVS: <VI1PR0802MB2256033731EDA72EF87EBB71FC760@VI1PR0802MB2256.eurprd08.prod.outlook.com>
 x-checkrecipientrouted: true
 NoDisclaimer: true
-X-MS-Oob-TLC-OOBClassifiers: OLM:8882;OLM:8882;
+X-MS-Oob-TLC-OOBClassifiers: OLM:3383;OLM:3383;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam-Untrusted: BCL:0;
-X-Microsoft-Antispam-Message-Info-Original: I6pVXL5VHbkxS9luoZl0deZTqx1tYLyNqe7oANXwLkTBEPiAMacVZlKVmiXZRXRRUImjx/mMxTYEGhnMlx5CYA14GqPmXNIiDxhiEvrWc1QRKZlceizh0MzCn8nSn2vkAa5W8TpTPgmUk9Qmxoa3FElfOn2ukTqVHKExxfEKgQy51YlSLG7AMHCFl6n3VCxwSfnOoRKzk5xzwNoCNKXSx0i4ToSFXaFcsTqCQvXHPbRMDGWw8Vy4QsdAoBqYDhTF8N49J13wDiinUUSX7tRQKhCdSD/JCKrTY5Uvd596fIuONHBtMENS1w72bpAReA7iFvNrNoKp8iBwivAXHZBBEuv57yurNhcdP/bSYH0NUteFwsxrMrffKJi5XjZNioeG/qd+3fWqu8zbF7cz72sdiAwtipKhbHzP/9pXVWbap6g=
+X-Microsoft-Antispam-Message-Info-Original: q4OnUcQirivsHUj4PMJQLjan/DGV9xSaWQBwsvkimyiVSPHp7lSBiucO8yBcFHA1sJnEfOEHFFNL+Vozu6JHsjyI4BmjDPV8/f07WF+iwXPKPY6M6sKn7HaXuuuPcQuUfHQuboRPOCKB4aNYBvml4kvNsJIFbNnawHBEob9kCKcKXjSbL3ASGWCV3FPeKsYTQb73ZfYlUUKQAHXkaRremIIXkwoBe682W8xo+nne7a/66C4q+eRegcRJH0KeA2EwCsL89RgmAc+nl7I3eaX0sMoqweSpx1XVkGcJkEeFdUUIRhS2d7s8maHa7KkE0EARgGJSaV4Ue1YUO9wPWTVIJ0z19cyOsqreIFpq2V2TZN9CJ9AaJO3NoPqJmYwFAaoAS0nUjfyt7wwS6RY0iPpsfsV0tQ4kWXQKt8xsfPQiKZzkmSiZheiAJfgQzPXytpdlcqjSzuZy94cshjOYp8XSOvXYV8zC0blUZ3WT0Tpz4hM=
 X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
  SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:AM6PR08MB3560.eurprd08.prod.outlook.com;
  PTR:; CAT:NONE; SFTY:;
- SFS:(4636009)(136003)(366004)(39860400002)(376002)(346002)(396003)(8676002)(26005)(6512007)(2616005)(316002)(54906003)(6666004)(6506007)(66946007)(4326008)(6486002)(956004)(36756003)(86362001)(6916009)(44832011)(8936002)(186003)(16526019)(478600001)(69590400007)(5660300002)(52116002)(83380400001)(66556008)(66476007)(2906002)(136400200001);
+ SFS:(4636009)(136003)(366004)(39860400002)(376002)(346002)(396003)(8676002)(26005)(6512007)(2616005)(316002)(54906003)(6666004)(6506007)(66946007)(4326008)(6486002)(956004)(36756003)(86362001)(30864003)(6916009)(44832011)(8936002)(186003)(16526019)(478600001)(5660300002)(52116002)(83380400001)(66556008)(66476007)(2906002)(2004002)(136400200001);
  DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData: b8k+/EHco7QtKNmMcz24c8SZ8AXyJeoJzkI1JA5izQu2n9wmk6F+SlSzJktP2QMysXXezr+i2nq+rV//SiG4AqvMIrCTrzfOuoiP6usd0QFILoY4Yz8D8H5DjEbl2uYT+JnzMFva3/hxDfSgiLPVy40NLBCWcA8we+s4Q6WoDHeoHIPAoum3u/ZjnDOo1SM1l74V/rUfaYda2+9iOhHFG8KaB4wq5eaOTKWZ8qImp3D2wwuE2XbyvpkzQgRZZziJ61TejXMHUNsmZ7TMciCdUC2Tb7XGpo3Kq9YV8+/HwYu0h0ebmE0t/uRMtTv/wlNk/EJwH5QLI/quD5uEfQK0QmEAZTIEFrPmLCWm9tAzL4Ov368CNtPVyfPU+cPcTW/wStrOOCQzmq9TjXgMOSvxHarMvxLbY3u1dpFbfqgnbOWes4i+2vpUAoVYsYAYr/FXamo2inqskYZOT85EdTKQoKOp6uujAUU8rVoRT5EfVfi5VwhreoS+KubBvDBric/e
+X-MS-Exchange-AntiSpam-MessageData: rVIcaR9ussPehTx01moTc/TbtgWLlGAUvxdG4vPhJ3tUURj+7yeneD3YBHRHpdBMf5NOOTEHuokUCQVhq1wPbgH+rXrnbrKAWmfHI4e9geQZZZBFWV+A+Gzx5hwLcQTmq8t8Mpm37/VUszcBUx8N/cHGiqb+z1IO3KY9f+qPNIkd0v0srXWN69o6QZyP2af4YPazKl6Tmqw27geRGHwv7m0SKxPKtAAeBDMLN6R6lkS2FjTI2W/SnwqvsdCFFdnDqemBkgtyPfQHVXBP3ZmmWs/jMURuY+/AFsxtICnr9Kn+mTkC1VPbRYZep3n8zjeuD5d9IGuRq7XpdoC1Z2BDUPseJQU/bGsvgJU7SpBSqJokSVYrPqVKl8GUFR0Nh8O4+qCJ7UBZY3tyyn0HB4+karq7b+UgtqFD0bKUrbBv8p1DJOw/7uo9GA39XgjHaIH/CgDCi1NNwUaDrUHRYdXr2Sv0g+HQmuhM9GQil0umWRFq7IVYLWCtlBaALyy34LWU
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM6PR08MB4439
 Original-Authentication-Results: lists.xenproject.org;
  dkim=none (message not signed)
  header.d=none;lists.xenproject.org; dmarc=none action=none
  header.from=arm.com;
 X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped: DB5EUR03FT017.eop-EUR03.prod.protection.outlook.com
-X-MS-Office365-Filtering-Correlation-Id-Prvs: c19e5cea-9d04-40bc-6357-08d82f1ebd1f
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: AM5EUR03FT053.eop-EUR03.prod.protection.outlook.com
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 3d62723e-38e2-4302-c5ff-08d82f1ebc33
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: suexNXHd03d65BclGREEECEzmCwd+6l5EXN9pyQgDIYFq/lKYKGdzHPtXOFXLUnGbPex30q3KqWhcv39UTN01BGw+A1EX193r/8Pd11+/9pRV5hWbo2XmVcb4ktJGTWo+Z+JdCpb7M9MqGvyP9PT43eJiqpnFTh+TV2R0hAICz3R3JkxXMfRY7NGqD/UWu+kx02iC4eeIdlF2E/SiNU5sq8VAw1DnPwQ8ib9CIzI62wiV0gJHxGRGqfSSuV4G4MMrQXj1bepFTxloFTprmegoL9xfu8V+lzr7+ipBr8tiF0recGkaiZQFDH9iSkvAh0wQDyNNb3cMIsMQCYDRgcE+fBElfYf6jcFZI3LsZpvhkjXVVcpUXlANZEmIk8+9Re6pF9gVxB8t+cFHXgJIB34MuRFyY1ZoksJAdpWJuSy4Wi5Id4Tg21KDnyJWZzdRP1PPFf/1+TSFGhOZhWuKPKEYQ==
+X-Microsoft-Antispam-Message-Info: D2kKBe2HC86OKa6ch1MavynG/PTUlZgwNpshYyJEaG9D3YGMSxZvDH7hKUns9znglbaQ1NXx4KmROlhHKu9F5vdZ9EpyWSbEGHs3ZMiKcHqXL2J/iaBSIEHEU05p0Ok36hvvjdLrxWvnMBRrbO32TwxlI2WOOsNCwwnBz8pIIWpwnyzbHIben7aXq6gRxGs/rix6tvtBrvr67pDrEscnnbXjNa2BXA1V9iBJnv8xXUj3NVg2mV3+FeEkD9opukAo5660d+PF2ziRCpfzyR9oyjJkir/dTM7mLGVtJax3jt/qoNYqrL5W4p1JxbcAhgp6pksguHePX/QHSCb0BQ4Q2zj/barL/zlGhpxJuSwKkD+bWl5N13zWmDI6O9fQ2EgsL3A4BFDaDxYtzwhD13DpKNV0zeeegQaTb1zJmqPdjHmW7UxhjFNBy1cGx0dDRkbETGq+VQ5HrsZNdPIJp158q7Jjl/UuTVLAzg5VaoiBdypVzqURbY1iF/jbp56VIg8u0mFaVqMNekJ/Vxb6Udak27GXdZzsCVWUdcygbeQ1Ayo=
 X-Forefront-Antispam-Report: CIP:63.35.35.123; CTRY:IE; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:64aa7808-outbound-1.mta.getcheckrecipient.com;
  PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com; CAT:NONE; SFTY:;
- SFS:(4636009)(39860400002)(136003)(396003)(376002)(346002)(46966005)(70586007)(70206006)(6512007)(4326008)(69590400007)(44832011)(6506007)(8676002)(478600001)(6666004)(83380400001)(36756003)(107886003)(336012)(47076004)(6916009)(82740400003)(26005)(2906002)(356005)(6486002)(16526019)(82310400002)(186003)(5660300002)(8936002)(316002)(86362001)(956004)(54906003)(81166007)(2616005)(136400200001);
+ SFS:(4636009)(396003)(39860400002)(376002)(346002)(136003)(46966005)(2906002)(6666004)(6916009)(8936002)(82310400002)(6486002)(16526019)(186003)(86362001)(81166007)(356005)(83380400001)(107886003)(26005)(4326008)(36756003)(8676002)(47076004)(6512007)(82740400003)(336012)(6506007)(956004)(2616005)(44832011)(478600001)(70586007)(70206006)(30864003)(316002)(36906005)(5660300002)(54906003)(2004002)(136400200001);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jul 2020 15:40:41.2520 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 171f2c16-d7e3-46a6-55b0-08d82f1ec15f
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jul 2020 15:40:40.0769 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: f18fe8ae-df6b-481b-e097-08d82f1ec0b4
 X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d; Ip=[63.35.35.123];
  Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
-X-MS-Exchange-CrossTenant-AuthSource: DB5EUR03FT017.eop-EUR03.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: AM5EUR03FT053.eop-EUR03.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB6PR0802MB2245
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR0802MB2256
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -175,341 +176,796 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: rahul.singh@arm.com, Julien Grall <julien@xen.org>, Wei Liu <wl@xen.org>,
- Ian Jackson <ian.jackson@eu.citrix.com>, Bertrand.Marquis@arm.com,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony.perard@citrix.com>, nd@arm.com,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Cc: rahul.singh@arm.com, Julien Grall <julien@xen.org>,
+ Bertrand.Marquis@arm.com, Stefano Stabellini <sstabellini@kernel.org>,
+ nd@arm.com, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-libxl will create an emulated PCI device tree node in the
-device tree to enable the guest OS to discover the virtual
-PCI during guest boot.
+XEN during boot will read the PCI device tree node “reg” property
+and will map the PCI config space to the XEN memory.
 
-We introduced the new config option [vpci="ecam"] for guests.
-When this config option is enabled in a guest configuration,
-a PCI device tree node will be created in the guest device tree.
+XEN will read the “linux, pci-domain” property from the device tree
+node and configure the host bridge segment number accordingly.
 
-A new area has been reserved in the arm guest physical map at
-which the VPCI bus is declared in the device tree (reg and ranges
-parameters of the node).
+As of now "pci-host-ecam-generic" compatible board is supported.
 
-Change-Id: I47d39cbe8184de2226f174644df9790ecc610ccd
+Change-Id: If32f7748b7dc89dd37114dc502943222a2a36c49
 Signed-off-by: Rahul Singh <rahul.singh@arm.com>
 ---
- tools/libxl/libxl_arm.c       | 200 ++++++++++++++++++++++++++++++++++
- tools/libxl/libxl_types.idl   |   6 +
- tools/xl/xl_parse.c           |   7 ++
- xen/include/public/arch-arm.h |  28 +++++
- 4 files changed, 241 insertions(+)
+ xen/arch/arm/Kconfig                |   7 +
+ xen/arch/arm/Makefile               |   1 +
+ xen/arch/arm/pci/Makefile           |   4 +
+ xen/arch/arm/pci/pci-access.c       | 101 ++++++++++++++
+ xen/arch/arm/pci/pci-host-common.c  | 198 ++++++++++++++++++++++++++++
+ xen/arch/arm/pci/pci-host-generic.c | 131 ++++++++++++++++++
+ xen/arch/arm/pci/pci.c              | 112 ++++++++++++++++
+ xen/arch/arm/setup.c                |   2 +
+ xen/include/asm-arm/device.h        |   7 +-
+ xen/include/asm-arm/pci.h           |  97 +++++++++++++-
+ 10 files changed, 654 insertions(+), 6 deletions(-)
+ create mode 100644 xen/arch/arm/pci/Makefile
+ create mode 100644 xen/arch/arm/pci/pci-access.c
+ create mode 100644 xen/arch/arm/pci/pci-host-common.c
+ create mode 100644 xen/arch/arm/pci/pci-host-generic.c
+ create mode 100644 xen/arch/arm/pci/pci.c
 
-diff --git a/tools/libxl/libxl_arm.c b/tools/libxl/libxl_arm.c
-index 34f8a29056..84568e9dc9 100644
---- a/tools/libxl/libxl_arm.c
-+++ b/tools/libxl/libxl_arm.c
-@@ -268,6 +268,130 @@ static int fdt_property_regs(libxl__gc *gc, void *fdt,
-     return fdt_property(fdt, "reg", regs, sizeof(regs));
- }
+diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+index 2777388265..ee13339ae9 100644
+--- a/xen/arch/arm/Kconfig
++++ b/xen/arch/arm/Kconfig
+@@ -31,6 +31,13 @@ menu "Architecture Features"
  
-+static int fdt_property_vpci_bus_range(libxl__gc *gc, void *fdt,
-+        unsigned num_cells, ...)
-+{
-+    uint32_t bus_range[num_cells];
-+    be32 *cells = &bus_range[0];
-+    int i;
-+    va_list ap;
-+    uint32_t arg;
-+
-+    va_start(ap, num_cells);
-+    for (i = 0 ; i < num_cells; i++) {
-+        arg = va_arg(ap, uint32_t);
-+        set_cell(&cells, 1, arg);
-+    }
-+    va_end(ap);
-+
-+    return fdt_property(fdt, "bus-range", bus_range, sizeof(bus_range));
-+}
-+
-+static int fdt_property_vpci_interrupt_map_mask(libxl__gc *gc, void *fdt,
-+        unsigned num_cells, ...)
-+{
-+    uint32_t interrupt_map_mask[num_cells];
-+    be32 *cells = &interrupt_map_mask[0];
-+    int i;
-+    va_list ap;
-+    uint32_t arg;
-+
-+    va_start(ap, num_cells);
-+    for (i = 0 ; i < num_cells; i++) {
-+        arg = va_arg(ap, uint32_t);
-+        set_cell(&cells, 1, arg);
-+    }
-+    va_end(ap);
-+
-+    return fdt_property(fdt, "interrupt-map-mask", interrupt_map_mask,
-+                                sizeof(interrupt_map_mask));
-+}
-+
-+static int fdt_property_vpci_ranges(libxl__gc *gc, void *fdt,
-+        unsigned vpci_addr_cells,
-+        unsigned cpu_addr_cells,
-+        unsigned vpci_size_cells,
-+        unsigned num_regs, ...)
-+{
-+    uint32_t regs[num_regs*(vpci_addr_cells+cpu_addr_cells+vpci_size_cells)];
-+    be32 *cells = &regs[0];
-+    int i;
-+    va_list ap;
-+    uint64_t arg;
-+
-+    va_start(ap, num_regs);
-+    for (i = 0 ; i < num_regs; i++) {
-+        /* Set the memory bit field */
-+        arg = va_arg(ap, uint64_t);
-+        set_cell(&cells, 1, arg);
-+
-+        /* Set the vpci bus address */
-+        arg = vpci_addr_cells ? va_arg(ap, uint64_t) : 0;
-+        set_cell(&cells, 2 , arg);
-+
-+        /* Set the cpu bus address where vpci address is mapped */
-+        arg = cpu_addr_cells ? va_arg(ap, uint64_t) : 0;
-+        set_cell(&cells, cpu_addr_cells, arg);
-+
-+        /* Set the vpci size requested */
-+        arg = vpci_size_cells ? va_arg(ap, uint64_t) : 0;
-+        set_cell(&cells, vpci_size_cells,arg);
-+    }
-+    va_end(ap);
-+
-+    return fdt_property(fdt, "ranges", regs, sizeof(regs));
-+}
-+
-+static int fdt_property_vpci_interrupt_map(libxl__gc *gc, void *fdt,
-+        unsigned child_unit_addr_cells,
-+        unsigned child_interrupt_specifier_cells,
-+        unsigned parent_unit_addr_cells,
-+        unsigned parent_interrupt_specifier_cells,
-+        unsigned num_regs, ...)
-+{
-+    uint32_t interrupt_map[num_regs * (child_unit_addr_cells +
-+            child_interrupt_specifier_cells + parent_unit_addr_cells
-+            + parent_interrupt_specifier_cells + 1)];
-+    be32 *cells = &interrupt_map[0];
-+    int i,j;
-+    va_list ap;
-+    uint64_t arg;
-+
-+    va_start(ap, num_regs);
-+    for (i = 0 ; i < num_regs; i++) {
-+        /* Set the child unit address*/
-+        for (j = 0 ; j < child_unit_addr_cells; j++) {
-+            arg = va_arg(ap, uint32_t);
-+            set_cell(&cells, 1 , arg);
-+        }
-+
-+        /* Set the child interrupt specifier*/
-+        for (j = 0 ; j < child_interrupt_specifier_cells ; j++) {
-+            arg = va_arg(ap, uint32_t);
-+            set_cell(&cells, 1 , arg);
-+        }
-+
-+        /* Set the interrupt-parent*/
-+        set_cell(&cells, 1 , GUEST_PHANDLE_GIC);
-+
-+        /* Set the parent unit address*/
-+        for (j = 0 ; j < parent_unit_addr_cells; j++) {
-+            arg = va_arg(ap, uint32_t);
-+            set_cell(&cells, 1 , arg);
-+        }
-+
-+        /* Set the parent interrupt specifier*/
-+        for (j = 0 ; j < parent_interrupt_specifier_cells; j++) {
-+            arg = va_arg(ap, uint32_t);
-+            set_cell(&cells, 1 , arg);
-+        }
-+    }
-+    va_end(ap);
-+
-+    return fdt_property(fdt, "interrupt-map", interrupt_map,
-+                                sizeof(interrupt_map));
-+}
-+
- static int make_root_properties(libxl__gc *gc,
-                                 const libxl_version_info *vers,
-                                 void *fdt)
-@@ -659,6 +783,79 @@ static int make_vpl011_uart_node(libxl__gc *gc, void *fdt,
-     return 0;
- }
+ source "arch/Kconfig"
  
-+static int make_vpci_node(libxl__gc *gc, void *fdt,
-+        const struct arch_info *ainfo,
-+        struct xc_dom_image *dom)
++config ARM_PCI
++	bool "PCI Passthrough Support"
++	depends on ARM_64
++	---help---
++
++	  PCI passthrough support for Xen on ARM64.
++
+ config ACPI
+ 	bool "ACPI (Advanced Configuration and Power Interface) Support" if EXPERT
+ 	depends on ARM_64
+diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
+index 7e82b2178c..345cb83eed 100644
+--- a/xen/arch/arm/Makefile
++++ b/xen/arch/arm/Makefile
+@@ -6,6 +6,7 @@ ifneq ($(CONFIG_NO_PLAT),y)
+ obj-y += platforms/
+ endif
+ obj-$(CONFIG_TEE) += tee/
++obj-$(CONFIG_ARM_PCI) += pci/
+ 
+ obj-$(CONFIG_HAS_ALTERNATIVE) += alternative.o
+ obj-y += bootfdt.init.o
+diff --git a/xen/arch/arm/pci/Makefile b/xen/arch/arm/pci/Makefile
+new file mode 100644
+index 0000000000..358508b787
+--- /dev/null
++++ b/xen/arch/arm/pci/Makefile
+@@ -0,0 +1,4 @@
++obj-y += pci.o
++obj-y += pci-host-generic.o
++obj-y += pci-host-common.o
++obj-y += pci-access.o
+diff --git a/xen/arch/arm/pci/pci-access.c b/xen/arch/arm/pci/pci-access.c
+new file mode 100644
+index 0000000000..c53ef58336
+--- /dev/null
++++ b/xen/arch/arm/pci/pci-access.c
+@@ -0,0 +1,101 @@
++/*
++ * Copyright (C) 2020 Arm Ltd.
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License version 2 as
++ * published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#include <xen/init.h>
++#include <xen/pci.h>
++#include <asm/pci.h>
++#include <xen/rwlock.h>
++
++static uint32_t pci_config_read(pci_sbdf_t sbdf, unsigned int reg,
++                            unsigned int len)
 +{
-+    int res;
-+    const uint64_t vpci_ecam_base = GUEST_VPCI_ECAM_BASE;
-+    const uint64_t vpci_ecam_size = GUEST_VPCI_ECAM_SIZE;
-+    const char *name = GCSPRINTF("pcie@%"PRIx64, vpci_ecam_base);
++    int rc;
++    uint32_t val = GENMASK(0, len * 8);
 +
-+    res = fdt_begin_node(fdt, name);
-+    if (res) return res;
++    struct pci_host_bridge *bridge = pci_find_host_bridge(sbdf.seg, sbdf.bus);
 +
-+    res = fdt_property_compat(gc, fdt, 1, "pci-host-ecam-generic");
-+    if (res) return res;
++    if ( unlikely(!bridge) )
++    {
++        printk(XENLOG_ERR "Unable to find bridge for "PRI_pci"\n",
++                sbdf.seg, sbdf.bus, sbdf.dev, sbdf.fn);
++        return val;
++    }
 +
-+    res = fdt_property_string(fdt, "device_type", "pci");
-+    if (res) return res;
++    if ( unlikely(!bridge->ops->read) )
++        return val;
 +
-+    res = fdt_property_regs(gc, fdt, GUEST_ROOT_ADDRESS_CELLS,
-+            GUEST_ROOT_SIZE_CELLS, 1, vpci_ecam_base, vpci_ecam_size);
-+    if (res) return res;
++    rc = bridge->ops->read(bridge, (uint32_t) sbdf.sbdf, reg, len, &val);
++    if ( rc )
++        printk(XENLOG_ERR "Failed to read reg %#x len %u for "PRI_pci"\n",
++                reg, len, sbdf.seg, sbdf.bus, sbdf.dev, sbdf.fn);
 +
-+    res = fdt_property_vpci_bus_range(gc, fdt, 2, 0,255);
-+    if (res) return res;
++    return val;
++}
 +
-+    res = fdt_property_cell(fdt, "linux,pci-domain", 0);
-+    if (res) return res;
++static void pci_config_write(pci_sbdf_t sbdf, unsigned int reg,
++        unsigned int len, uint32_t val)
++{
++    int rc;
++    struct pci_host_bridge *bridge = pci_find_host_bridge(sbdf.seg, sbdf.bus);
 +
-+    res = fdt_property_cell(fdt, "#address-cells", 3);
-+    if (res) return res;
++    if ( unlikely(!bridge) )
++    {
++        printk(XENLOG_ERR "Unable to find bridge for "PRI_pci"\n",
++                sbdf.seg, sbdf.bus, sbdf.dev, sbdf.fn);
++        return;
++    }
 +
-+    res = fdt_property_cell(fdt, "#size-cells", 2);
-+    if (res) return res;
++    if ( unlikely(!bridge->ops->write) )
++        return;
 +
-+    res = fdt_property_cell(fdt, "#interrupt-cells", 1);
-+    if (res) return res;
++    rc = bridge->ops->write(bridge, (uint32_t) sbdf.sbdf, reg, len, val);
++    if ( rc )
++        printk(XENLOG_ERR "Failed to write reg %#x len %u for "PRI_pci"\n",
++                reg, len, sbdf.seg, sbdf.bus, sbdf.dev, sbdf.fn);
++}
 +
-+    res = fdt_property_string(fdt, "status", "okay");
-+    if (res) return res;
++/*
++ * Wrappers for all PCI configuration access functions.
++ */
 +
-+    res = fdt_property_vpci_ranges(gc, fdt, GUEST_PCI_ADDRESS_CELLS,
-+        GUEST_ROOT_ADDRESS_CELLS, GUEST_PCI_SIZE_CELLS,
-+        3,
-+        GUEST_VPCI_ADDR_TYPE_MEM, GUEST_VPCI_MEM_PCI_ADDR,
-+        GUEST_VPCI_MEM_CPU_ADDR, GUEST_VPCI_MEM_SIZE,
-+        GUEST_VPCI_ADDR_TYPE_PREFETCH_MEM, GUEST_VPCI_PREFETCH_MEM_PCI_ADDR,
-+        GUEST_VPCI_PREFETCH_MEM_CPU_ADDR, GUEST_VPCI_PREFETCH_MEM_SIZE,
-+        GUEST_VPCI_ADDR_TYPE_IO, GUEST_VPCI_IO_PCI_ADDR,
-+        GUEST_VPCI_IO_CPU_ADDR, GUEST_VPCI_IO_SIZE);
-+    if (res) return res;
++#define PCI_OP_WRITE(size, type) \
++    void pci_conf_write##size (pci_sbdf_t sbdf,unsigned int reg, type val) \
++{                                               \
++    pci_config_write(sbdf, reg, size / 8, val);     \
++}
 +
-+    res = fdt_property_vpci_interrupt_map_mask(gc, fdt, 4, 0, 0, 0, 7);
-+    if (res) return res;
++#define PCI_OP_READ(size, type) \
++    type pci_conf_read##size (pci_sbdf_t sbdf, unsigned int reg)  \
++{                                               \
++    return pci_config_read(sbdf, reg, size / 8);     \
++}
++
++PCI_OP_READ(8, u8)
++PCI_OP_READ(16, u16)
++PCI_OP_READ(32, u32)
++PCI_OP_WRITE(8, u8)
++PCI_OP_WRITE(16, u16)
++PCI_OP_WRITE(32, u32)
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * tab-width: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
+diff --git a/xen/arch/arm/pci/pci-host-common.c b/xen/arch/arm/pci/pci-host-common.c
+new file mode 100644
+index 0000000000..c5f98be698
+--- /dev/null
++++ b/xen/arch/arm/pci/pci-host-common.c
+@@ -0,0 +1,198 @@
++/*
++ * Copyright (C) 2020 Arm Ltd.
++ *
++ * Based on Linux drivers/pci/ecam.c
++ * Copyright 2016 Broadcom.
++ *
++ * Based on Linux drivers/pci/controller/pci-host-common.c
++ * Based on Linux drivers/pci/controller/pci-host-generic.c
++ * Copyright (C) 2014 ARM Limited Will Deacon <will.deacon@arm.com>
++ *
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License version 2 as
++ * published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#include <xen/init.h>
++#include <xen/pci.h>
++#include <asm/pci.h>
++#include <xen/rwlock.h>
++#include <xen/vmap.h>
++
++/*
++ * List for all the pci host bridges.
++ */
++
++static LIST_HEAD(pci_host_bridges);
++
++static bool __init dt_pci_parse_bus_range(struct dt_device_node *dev,
++        struct pci_config_window *cfg)
++{
++    const __be32 *cells;
++    uint32_t len;
++
++    cells = dt_get_property(dev, "bus-range", &len);
++    /* bus-range should at least be 2 cells */
++    if ( !cells || (len < (sizeof(*cells) * 2)) )
++        return false;
++
++    cfg->busn_start = dt_next_cell(1, &cells);
++    cfg->busn_end = dt_next_cell(1, &cells);
++
++    return true;
++}
++
++static inline void __iomem *pci_remap_cfgspace(paddr_t start, size_t len)
++{
++    return ioremap_nocache(start, len);
++}
++
++static void pci_ecam_free(struct pci_config_window *cfg)
++{
++    if ( cfg->win )
++        iounmap(cfg->win);
++
++    xfree(cfg);
++}
++
++static struct pci_config_window *gen_pci_init(struct dt_device_node *dev,
++        struct pci_ecam_ops *ops)
++{
++    int err;
++    struct pci_config_window *cfg;
++    paddr_t addr, size;
++
++    cfg = xzalloc(struct pci_config_window);
++    if ( !cfg )
++        return NULL;
++
++    err = dt_pci_parse_bus_range(dev, cfg);
++    if ( !err ) {
++        cfg->busn_start = 0;
++        cfg->busn_end = 0xff;
++        printk(XENLOG_ERR "No bus range found for pci controller\n");
++    } else {
++        if ( cfg->busn_end > cfg->busn_start + 0xff )
++            cfg->busn_end = cfg->busn_start + 0xff;
++    }
++
++    /* Parse our PCI ecam register address*/
++    err = dt_device_get_address(dev, 0, &addr, &size);
++    if ( err )
++        goto err_exit;
++
++    cfg->phys_addr = addr;
++    cfg->size = size;
++    cfg->ops = ops;
 +
 +    /*
-+     * Legacy interrupt is forced and assigned to the guest.
-+     * This will be removed once we have implementation for MSI support.
++     * On 64-bit systems, we do a single ioremap for the whole config space
++     * since we have enough virtual address range available.  On 32-bit, we
++     * ioremap the config space for each bus individually.
 +     *
++     * As of now only 64-bit is supported 32-bit is not supported.
 +     */
-+    res = fdt_property_vpci_interrupt_map(gc, fdt, 3, 1, 0, 3,
-+            4,
-+            0, 0, 0, 1, 0, 136, DT_IRQ_TYPE_LEVEL_HIGH,
-+            0, 0, 0, 2, 0, 137, DT_IRQ_TYPE_LEVEL_HIGH,
-+            0, 0, 0, 3, 0, 138, DT_IRQ_TYPE_LEVEL_HIGH,
-+            0, 0, 0, 4, 0, 139, DT_IRQ_TYPE_LEVEL_HIGH);
-+    if (res) return res;
++    cfg->win = pci_remap_cfgspace(cfg->phys_addr, cfg->size);
++    if ( !cfg->win )
++        goto err_exit_remap;
 +
-+    res = fdt_end_node(fdt);
-+    if (res) return res;
++    printk("ECAM at [mem %lx-%lx] for [bus %x-%x] \n",cfg->phys_addr,
++            cfg->phys_addr + cfg->size - 1,cfg->busn_start,cfg->busn_end);
++
++    if ( ops->init ) {
++        err = ops->init(cfg);
++        if (err)
++            goto err_exit;
++    }
++
++    return cfg;
++
++err_exit_remap:
++    printk(XENLOG_ERR "ECAM ioremap failed\n");
++err_exit:
++    pci_ecam_free(cfg);
++    return NULL;
++}
++
++static struct pci_host_bridge * pci_alloc_host_bridge(void)
++{
++    struct pci_host_bridge *bridge = xzalloc(struct pci_host_bridge);
++
++    if ( !bridge )
++        return NULL;
++
++    INIT_LIST_HEAD(&bridge->node);
++    return bridge;
++}
++
++int pci_host_common_probe(struct dt_device_node *dev,
++        struct pci_ecam_ops *ops)
++{
++    struct pci_host_bridge *bridge;
++    struct pci_config_window *cfg;
++    u32 segment;
++
++    bridge = pci_alloc_host_bridge();
++    if ( !bridge )
++        return -ENOMEM;
++
++    /* Parse and map our Configuration Space windows */
++    cfg = gen_pci_init(dev, ops);
++    if ( !cfg )
++        return -ENOMEM;
++
++    bridge->dt_node = dev;
++    bridge->sysdata = cfg;
++    bridge->ops = &ops->pci_ops;
++
++    if( !dt_property_read_u32(dev, "linux,pci-domain", &segment) )
++    {
++        printk(XENLOG_ERR "\"linux,pci-domain\" property in not available in DT\n");
++        return -ENODEV;
++    }
++
++    bridge->segment = (u16)segment;
++
++    list_add_tail(&bridge->node, &pci_host_bridges);
 +
 +    return 0;
 +}
 +
- static const struct arch_info *get_arch_info(libxl__gc *gc,
-                                              const struct xc_dom_image *dom)
- {
-@@ -962,6 +1159,9 @@ next_resize:
-         if (info->tee == LIBXL_TEE_TYPE_OPTEE)
-             FDT( make_optee_node(gc, fdt) );
- 
-+        if (info->arch_arm.vpci == LIBXL_VPCI_TYPE_ECAM)
-+            FDT( make_vpci_node(gc, fdt, ainfo, dom) );
++/*
++ * This function will lookup an hostbridge based on the segment and bus
++ * number.
++ */
++struct pci_host_bridge *pci_find_host_bridge(uint16_t segment, uint8_t bus)
++{
++    struct pci_host_bridge *bridge;
++    bool found = false;
 +
-         if (pfdt)
-             FDT( copy_partial_fdt(gc, fdt, pfdt) );
- 
-diff --git a/tools/libxl/libxl_types.idl b/tools/libxl/libxl_types.idl
-index 9d3f05f399..d493637705 100644
---- a/tools/libxl/libxl_types.idl
-+++ b/tools/libxl/libxl_types.idl
-@@ -257,6 +257,11 @@ libxl_vuart_type = Enumeration("vuart_type", [
-     (1, "sbsa_uart"),
-     ])
- 
-+libxl_vpci_type = Enumeration("vpci_type", [
-+    (0, "unknown"),
-+    (1, "ecam"),
-+    ])
++    list_for_each_entry( bridge, &pci_host_bridges, node )
++    {
++        if ( bridge->segment != segment )
++            continue;
 +
- libxl_vkb_backend = Enumeration("vkb_backend", [
-     (0, "UNKNOWN"),
-     (1, "QEMU"),
-@@ -640,6 +645,7 @@ libxl_domain_build_info = Struct("domain_build_info",[
- 
-     ("arch_arm", Struct(None, [("gic_version", libxl_gic_version),
-                                ("vuart", libxl_vuart_type),
-+                               ("vpci", libxl_vpci_type),
-                               ])),
-     # Alternate p2m is not bound to any architecture or guest type, as it is
-     # supported by x86 HVM and ARM support is planned.
-diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
-index 61b4ef7b7e..58b7e6f56a 100644
---- a/tools/xl/xl_parse.c
-+++ b/tools/xl/xl_parse.c
-@@ -1386,6 +1386,13 @@ void parse_config_data(const char *config_source,
-         }
-     }
- 
-+    if (!xlu_cfg_get_string(config, "vpci", &buf, 0)) {
-+        if (libxl_vpci_type_from_string(buf, &b_info->arch_arm.vpci)) {
-+            fprintf(stderr, "ERROR: invalid value \"%s\" for \"vpci\"\n",
-+                    buf);
-+            exit(1);
-+        }
++        found = true;
++        break;
 +    }
-     parse_vnuma_config(config, b_info);
- 
-     /* Set max_memkb to target_memkb and max_vcpus to avail_vcpus if
-diff --git a/xen/include/public/arch-arm.h b/xen/include/public/arch-arm.h
-index 7364a07362..4e19c62948 100644
---- a/xen/include/public/arch-arm.h
-+++ b/xen/include/public/arch-arm.h
-@@ -426,6 +426,34 @@ typedef uint64_t xen_callback_t;
- #define GUEST_VPCI_ECAM_BASE    xen_mk_ullong(0x10000000)
- #define GUEST_VPCI_ECAM_SIZE    xen_mk_ullong(0x10000000)
- 
-+#define GUEST_PCI_ADDRESS_CELLS 3
-+#define GUEST_PCI_SIZE_CELLS 2
 +
-+/* PCI-PCIe memory space types */
-+#define GUEST_VPCI_ADDR_TYPE_PREFETCH_MEM xen_mk_ullong(0x42000000)
-+#define GUEST_VPCI_ADDR_TYPE_MEM          xen_mk_ullong(0x02000000)
-+#define GUEST_VPCI_ADDR_TYPE_IO           xen_mk_ullong(0x01000000)
++    return (found) ? bridge : NULL;
++}
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * tab-width: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
+diff --git a/xen/arch/arm/pci/pci-host-generic.c b/xen/arch/arm/pci/pci-host-generic.c
+new file mode 100644
+index 0000000000..cd67b3dec6
+--- /dev/null
++++ b/xen/arch/arm/pci/pci-host-generic.c
+@@ -0,0 +1,131 @@
++/*
++ * Copyright (C) 2020 Arm Ltd.
++ *
++ * Based on Linux drivers/pci/controller/pci-host-common.c
++ * Based on Linux drivers/pci/controller/pci-host-generic.c
++ * Copyright (C) 2014 ARM Limited Will Deacon <will.deacon@arm.com>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License version 2 as
++ * published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
 +
-+/* Guest PCI-PCIe memory space where config space and BAR will be available.*/
-+#define GUEST_VPCI_PREFETCH_MEM_CPU_ADDR  xen_mk_ullong(0x4000000000)
-+#define GUEST_VPCI_MEM_CPU_ADDR           xen_mk_ullong(0x04020000)
-+#define GUEST_VPCI_IO_CPU_ADDR            xen_mk_ullong(0xC0200800)
++#include <asm/device.h>
++#include <asm/io.h>
++#include <xen/pci.h>
++#include <asm/pci.h>
 +
 +/*
-+ * This is hardcoded values for the real PCI physical addresses.
-+ * This will be removed once we read the real PCI-PCIe physical
-+ * addresses form the config space and map to the guest memory map
-+ * when assigning the device to guest via VPCI.
-+ *
++ * Function to get the config space base.
 + */
-+#define GUEST_VPCI_PREFETCH_MEM_PCI_ADDR  xen_mk_ullong(0x4000000000)
-+#define GUEST_VPCI_MEM_PCI_ADDR           xen_mk_ullong(0x50000000)
-+#define GUEST_VPCI_IO_PCI_ADDR            xen_mk_ullong(0x00000000)
++static void __iomem *pci_config_base(struct pci_host_bridge *bridge,
++        uint32_t sbdf, int where)
++{
++    struct pci_config_window *cfg = bridge->sysdata;
++    unsigned int devfn_shift = cfg->ops->bus_shift - 8;
 +
-+#define GUEST_VPCI_PREFETCH_MEM_SIZE      xen_mk_ullong(0x100000000)
-+#define GUEST_VPCI_MEM_SIZE               xen_mk_ullong(0x08000000)
-+#define GUEST_VPCI_IO_SIZE                xen_mk_ullong(0x00800000)
++    pci_sbdf_t sbdf_t = (pci_sbdf_t) sbdf ;
 +
- /*
-  * 16MB == 4096 pages reserved for guest to use as a region to map its
-  * grant table in.
++    unsigned int busn = sbdf_t.bus;
++    void __iomem *base;
++
++    if ( busn < cfg->busn_start || busn > cfg->busn_end )
++        return NULL;
++
++    base = cfg->win + (busn << cfg->ops->bus_shift);
++
++    return base + (PCI_DEVFN(sbdf_t.dev, sbdf_t.fn) << devfn_shift) + where;
++}
++
++int pci_ecam_config_write(struct pci_host_bridge *bridge, uint32_t sbdf,
++        int where, int size, u32 val)
++{
++    void __iomem *addr;
++
++    addr = pci_config_base(bridge, sbdf, where);
++    if ( !addr )
++        return -ENODEV;
++
++    if ( size == 1 )
++        writeb(val, addr);
++    else if ( size == 2 )
++        writew(val, addr);
++    else
++        writel(val, addr);
++
++    return 0;
++}
++
++int pci_ecam_config_read(struct pci_host_bridge *bridge, uint32_t sbdf,
++        int where, int size, u32 *val)
++{
++    void __iomem *addr;
++
++    addr = pci_config_base(bridge, sbdf, where);
++    if ( !addr ) {
++        *val = ~0;
++        return -ENODEV;
++    }
++
++    if ( size == 1 )
++        *val = readb(addr);
++    else if ( size == 2 )
++        *val = readw(addr);
++    else
++        *val = readl(addr);
++
++    return 0;
++}
++
++/* ECAM ops */
++struct pci_ecam_ops pci_generic_ecam_ops = {
++    .bus_shift  = 20,
++    .pci_ops    = {
++        .read       = pci_ecam_config_read,
++        .write      = pci_ecam_config_write,
++    }
++};
++
++static const struct dt_device_match gen_pci_dt_match[] = {
++    { .compatible = "pci-host-ecam-generic",
++      .data =       &pci_generic_ecam_ops },
++
++    { },
++};
++
++static int gen_pci_dt_init(struct dt_device_node *dev, const void *data)
++{
++    const struct dt_device_match *of_id;
++    struct pci_ecam_ops *ops;
++
++    of_id = dt_match_node(gen_pci_dt_match, dev->dev.of_node);
++    ops = (struct pci_ecam_ops *) of_id->data;
++
++    printk(XENLOG_INFO "Found PCI host bridge %s compatible:%s \n",
++            dt_node_full_name(dev), of_id->compatible);
++
++    return pci_host_common_probe(dev, ops);
++}
++
++DT_DEVICE_START(pci_gen, "PCI HOST GENERIC", DEVICE_PCI)
++.dt_match = gen_pci_dt_match,
++.init = gen_pci_dt_init,
++DT_DEVICE_END
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * tab-width: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
+diff --git a/xen/arch/arm/pci/pci.c b/xen/arch/arm/pci/pci.c
+new file mode 100644
+index 0000000000..f8cbb99591
+--- /dev/null
++++ b/xen/arch/arm/pci/pci.c
+@@ -0,0 +1,112 @@
++/*
++ * Copyright (C) 2020 Arm Ltd.
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License version 2 as
++ * published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#include <xen/acpi.h>
++#include <xen/device_tree.h>
++#include <xen/errno.h>
++#include <xen/init.h>
++#include <xen/pci.h>
++#include <xen/param.h>
++
++static int __init dt_pci_init(void)
++{
++    struct dt_device_node *np;
++    int rc;
++
++    dt_for_each_device_node(dt_host, np)
++    {
++        rc = device_init(np, DEVICE_PCI, NULL);
++        if( !rc )
++            continue;
++        /*
++         * Ignore the following error codes:
++         *   - EBADF: Indicate the current is not an pci
++         *   - ENODEV: The pci device is not present or cannot be used by
++         *     Xen.
++         */
++        else if ( rc != -EBADF && rc != -ENODEV )
++        {
++            printk(XENLOG_ERR "No driver found in XEN or driver init error.\n");
++            return rc;
++        }
++    }
++
++    return 0;
++}
++
++#ifdef CONFIG_ACPI
++static void __init acpi_pci_init(void)
++{
++    printk(XENLOG_ERR "ACPI pci init not supported \n");
++    return;
++}
++#else
++static inline void __init acpi_pci_init(void) { }
++#endif
++
++static bool __initdata param_pci_enable;
++static int __init parse_pci_param(const char *arg)
++{
++    if ( !arg )
++    {
++        param_pci_enable = false;
++        return 0;
++    }
++
++    switch ( parse_bool(arg, NULL) )
++    {
++        case 0:
++            param_pci_enable = false;
++            return 0;
++        case 1:
++            param_pci_enable = true;
++            return 0;
++    }
++
++    return -EINVAL;
++}
++custom_param("pci", parse_pci_param);
++
++void __init pci_init(void)
++{
++    /*
++     * Enable PCI when has been enabled explicitly (pci=on)
++     */
++    if ( !param_pci_enable)
++        goto disable;
++
++    if ( acpi_disabled )
++        dt_pci_init();
++    else
++        acpi_pci_init();
++
++#ifdef CONFIG_HAS_PCI
++    pci_segments_init();
++#endif
++
++disable:
++    return;
++}
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * tab-width: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
+diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
+index 7968cee47d..2d7f1db44f 100644
+--- a/xen/arch/arm/setup.c
++++ b/xen/arch/arm/setup.c
+@@ -930,6 +930,8 @@ void __init start_xen(unsigned long boot_phys_offset,
+ 
+     setup_virt_paging();
+ 
++    pci_init();
++
+     do_initcalls();
+ 
+     /*
+diff --git a/xen/include/asm-arm/device.h b/xen/include/asm-arm/device.h
+index ee7cff2d44..28f8049cfd 100644
+--- a/xen/include/asm-arm/device.h
++++ b/xen/include/asm-arm/device.h
+@@ -4,6 +4,7 @@
+ enum device_type
+ {
+     DEV_DT,
++    DEV_PCI,
+ };
+ 
+ struct dev_archdata {
+@@ -25,15 +26,15 @@ typedef struct device device_t;
+ 
+ #include <xen/device_tree.h>
+ 
+-/* TODO: Correctly implement dev_is_pci when PCI is supported on ARM */
+-#define dev_is_pci(dev) ((void)(dev), 0)
+-#define dev_is_dt(dev)  ((dev->type == DEV_DT)
++#define dev_is_pci(dev) (dev->type == DEV_PCI)
++#define dev_is_dt(dev)  (dev->type == DEV_DT)
+ 
+ enum device_class
+ {
+     DEVICE_SERIAL,
+     DEVICE_IOMMU,
+     DEVICE_GIC,
++    DEVICE_PCI,
+     /* Use for error */
+     DEVICE_UNKNOWN,
+ };
+diff --git a/xen/include/asm-arm/pci.h b/xen/include/asm-arm/pci.h
+index de13359f65..94fd00360a 100644
+--- a/xen/include/asm-arm/pci.h
++++ b/xen/include/asm-arm/pci.h
+@@ -1,7 +1,98 @@
+-#ifndef __X86_PCI_H__
+-#define __X86_PCI_H__
++/*
++ * Copyright (C) 2020 Arm Ltd.
++ *
++ * Based on Linux drivers/pci/ecam.c
++ * Copyright 2016 Broadcom.
++ *
++ * Based on Linux drivers/pci/controller/pci-host-common.c
++ * Based on Linux drivers/pci/controller/pci-host-generic.c
++ * Copyright (C) 2014 ARM Limited Will Deacon <will.deacon@arm.com>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License version 2 as
++ * published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
+ 
++#ifndef __ARM_PCI_H__
++#define __ARM_PCI_H__
++
++#include <xen/pci.h>
++#include <xen/device_tree.h>
++#include <asm/device.h>
++
++#ifdef CONFIG_ARM_PCI
++
++/* Arch pci dev struct */
+ struct arch_pci_dev {
++    struct device dev;
++};
++
++#define PRI_pci "%04x:%02x:%02x.%u"
++#define pci_to_dev(pcidev) (&(pcidev)->arch.dev)
++
++/*
++ * struct to hold the mappings of a config space window. This
++ * is expected to be used as sysdata for PCI controllers that
++ * use ECAM.
++ */
++struct pci_config_window {
++    paddr_t     phys_addr;
++    paddr_t     size;
++    uint8_t     busn_start;
++    uint8_t     busn_end;
++    struct pci_ecam_ops     *ops;
++    void __iomem        *win;
++};
++
++/* Forward declaration as pci_host_bridge and pci_ops depend on each other. */
++struct pci_host_bridge;
++
++struct pci_ops {
++    int (*read)(struct pci_host_bridge *bridge,
++                    uint32_t sbdf, int where, int size, u32 *val);
++    int (*write)(struct pci_host_bridge *bridge,
++                    uint32_t sbdf, int where, int size, u32 val);
++};
++
++/*
++ * struct to hold pci ops and bus shift of the config window
++ * for a PCI controller.
++ */
++struct pci_ecam_ops {
++    unsigned int            bus_shift;
++    struct pci_ops          pci_ops;
++    int             (*init)(struct pci_config_window *);
++};
++
++/*
++ * struct to hold pci host bridge information
++ * for a PCI controller.
++ */
++struct pci_host_bridge {
++    struct dt_device_node *dt_node;  /* Pointer to the associated DT node */
++    struct list_head node;           /* Node in list of host bridges */
++    uint16_t segment;                /* Segment number */
++    void *sysdata;                   /* Pointer to the config space window*/
++    const struct pci_ops *ops;
+ };
+ 
+-#endif /* __X86_PCI_H__ */
++struct pci_host_bridge *pci_find_host_bridge(uint16_t segment, uint8_t bus);
++
++int pci_host_common_probe(struct dt_device_node *dev,
++                struct pci_ecam_ops *ops);
++
++void pci_init(void);
++
++#else   /*!CONFIG_ARM_PCI*/
++struct arch_pci_dev { };
++static inline void  pci_init(void) { }
++#endif  /*!CONFIG_ARM_PCI*/
++#endif /* __ARM_PCI_H__ */
 -- 
 2.17.1
 
