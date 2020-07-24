@@ -7,40 +7,40 @@ X-Spam-Status: No, score=-13.0 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 38742C433DF
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Jul 2020 17:23:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 87714C433E1
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Jul 2020 17:23:16 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 17E14206F6
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Jul 2020 17:23:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 17E14206F6
+	by mail.kernel.org (Postfix) with ESMTPS id 644252070B
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Jul 2020 17:23:16 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 644252070B
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jz1PO-0005sY-El; Fri, 24 Jul 2020 17:22:58 +0000
+	id 1jz1PY-00060l-2E; Fri, 24 Jul 2020 17:23:08 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ulAu=BD=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1jz1PN-0005eH-12
- for xen-devel@lists.xenproject.org; Fri, 24 Jul 2020 17:22:57 +0000
-X-Inumbo-ID: 3c428380-cdd2-11ea-8862-bc764e2007e4
+ id 1jz1PX-0005eH-1D
+ for xen-devel@lists.xenproject.org; Fri, 24 Jul 2020 17:23:07 +0000
+X-Inumbo-ID: 3c9c94d8-cdd2-11ea-8862-bc764e2007e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3c428380-cdd2-11ea-8862-bc764e2007e4;
+ id 3c9c94d8-cdd2-11ea-8862-bc764e2007e4;
  Fri, 24 Jul 2020 17:22:23 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1jz1Oo-00021j-1H; Fri, 24 Jul 2020 18:22:22 +0100
+ id 1jz1Oo-00021j-N9; Fri, 24 Jul 2020 18:22:22 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH 07/11] sg-report-host-history: Rerganisation: Make
- mainquery per-host
-Date: Fri, 24 Jul 2020 18:22:12 +0100
-Message-Id: <20200724172216.28204-8-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 09/11] sg-report-host-history: Rerganisation: Change
+ loops
+Date: Fri, 24 Jul 2020 18:22:14 +0100
+Message-Id: <20200724172216.28204-10-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200724172216.28204-1-ian.jackson@eu.citrix.com>
 References: <20200724172216.28204-1-ian.jackson@eu.citrix.com>
@@ -60,61 +60,41 @@ Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This moves the loop over hosts into the main program.  We are working
-our way to a new code structure.
+Move the per-host code all into the same per-host loop.  One effect is
+to transpose the db_retry and host loops for mainquery.
 
 No functional change.
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- sg-report-host-history | 19 +++++++++++--------
- 1 file changed, 11 insertions(+), 8 deletions(-)
+ sg-report-host-history | 12 ++----------
+ 1 file changed, 2 insertions(+), 10 deletions(-)
 
 diff --git a/sg-report-host-history b/sg-report-host-history
-index ab88828e..509d053d 100755
+index 4b0b5b2d..1f5c14e1 100755
 --- a/sg-report-host-history
 +++ b/sg-report-host-history
-@@ -164,7 +164,9 @@ sub jobquery ($$$) {
+@@ -469,18 +469,10 @@ db_retry($dbh_tests, [], sub {
+     computeflightsrange();
+ });
  
- our %hosts;
- 
--sub mainquery () {
-+sub mainquery ($) {
-+    my ($host) = @_;
-+
-     our $runvarq //= db_prepare(<<END);
- 	SELECT flight, job, name, status
- 	  FROM runvars
-@@ -177,13 +179,12 @@ sub mainquery () {
- 	 ORDER BY flight DESC
-          LIMIT $limit * 2
- END
+-foreach (keys %hosts) {
+-    read_existing_logs($_);
+-}
+-
+-db_retry($dbh_tests, [], sub {
 -    foreach my $host (sort keys %hosts) {
--	print DEBUG "MAINQUERY $host...\n";
--	$runvarq->execute($host, $minflight);
- 
--	$hosts{$host} = $runvarq->fetchall_arrayref({});
--	print DEBUG "MAINQUERY $host got ".(scalar @{ $hosts{$host} })."\n";
+-	mainquery($host);
 -    }
-+    print DEBUG "MAINQUERY $host...\n";
-+    $runvarq->execute($host, $minflight);
-+
-+    $hosts{$host} = $runvarq->fetchall_arrayref({});
-+    print DEBUG "MAINQUERY $host got ".(scalar @{ $hosts{$host} })."\n";
- }
- 
- sub reporthost ($) {
-@@ -473,7 +474,9 @@ db_retry($dbh_tests, [], sub {
- });
- 
- db_retry($dbh_tests, [], sub {
--    mainquery();
-+    foreach my $host (sort keys %hosts) {
-+	mainquery($host);
-+    }
- });
- 
+-});
+-
  foreach my $host (sort keys %hosts) {
++    read_existing_logs($host);
+     db_retry($dbh_tests, [], sub {
++        mainquery($host);
+ 	reporthost $host;
+     });
+ }
 -- 
 2.20.1
 
