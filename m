@@ -2,50 +2,65 @@ Return-Path: <SRS0=9gwS=BD=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.0 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=unavailable
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.3 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EF96FC433E3
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Jul 2020 17:40:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D0616C433E5
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Jul 2020 17:47:50 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CFDF62065F
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Jul 2020 17:40:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CFDF62065F
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id A4C4F206F6
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Jul 2020 17:47:50 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZU61QnxT"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A4C4F206F6
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jz1fk-0007nl-77; Fri, 24 Jul 2020 17:39:52 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jz1nA-0000Xo-HN; Fri, 24 Jul 2020 17:47:32 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ulAu=BD=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1jz1fj-0007ng-D9
- for xen-devel@lists.xenproject.org; Fri, 24 Jul 2020 17:39:51 +0000
-X-Inumbo-ID: ac5af1e6-cdd4-11ea-8867-bc764e2007e4
-Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id ac5af1e6-cdd4-11ea-8867-bc764e2007e4;
- Fri, 24 Jul 2020 17:39:50 +0000 (UTC)
-Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
- by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
- (return-path ijackson@chiark.greenend.org.uk)
- id 1jz1Op-00021j-0g; Fri, 24 Jul 2020 18:22:23 +0100
-From: Ian Jackson <ian.jackson@eu.citrix.com>
-To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH 10/11] sg-report-host-history: Drop a redundznt AND
- clause
-Date: Fri, 24 Jul 2020 18:22:15 +0100
-Message-Id: <20200724172216.28204-11-ian.jackson@eu.citrix.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200724172216.28204-1-ian.jackson@eu.citrix.com>
-References: <20200724172216.28204-1-ian.jackson@eu.citrix.com>
+ <SRS0=fOER=BD=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1jz1n9-0000Xj-7k
+ for xen-devel@lists.xenproject.org; Fri, 24 Jul 2020 17:47:31 +0000
+X-Inumbo-ID: bed969e6-cdd5-11ea-a443-12813bfff9fa
+Received: from mail.kernel.org (unknown [198.145.29.99])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id bed969e6-cdd5-11ea-a443-12813bfff9fa;
+ Fri, 24 Jul 2020 17:47:30 +0000 (UTC)
+Received: from localhost (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 6CB46206F6;
+ Fri, 24 Jul 2020 17:47:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1595612849;
+ bh=jMib/9zVPmUdrJblnmrrcAKQU0Co/1a5agUte3mYzr4=;
+ h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+ b=ZU61QnxTtbUlxju21WGlAZw7YhogjZQnib8+b7ewWM85Ae6t4KCDd7Ur9pVXhTTe2
+ c39nOvsNGukM4CK8q9CuqnQ9thAVhat3qZdliDiSeMPzwJkQWqJqZ8t3zwkdwSpN+q
+ 8d19Qf4sDO6M1588NSLoH/JQI6ob7FOy6C6nrCxM=
+Date: Fri, 24 Jul 2020 10:47:29 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
+To: Julien Grall <julien@xen.org>
+Subject: Re: [RFC PATCH v1 1/4] arm/pci: PCI setup and PCI host bridge
+ discovery within XEN on ARM.
+In-Reply-To: <276d6b48-8cd7-7fb1-1d76-15cb6a95cad9@xen.org>
+Message-ID: <alpine.DEB.2.21.2007241045340.17562@sstabellini-ThinkPad-T480s>
+References: <cover.1595511416.git.rahul.singh@arm.com>
+ <64ebd4ef614b36a5844c52426a4a6a4a23b1f087.1595511416.git.rahul.singh@arm.com>
+ <alpine.DEB.2.21.2007231055230.17562@sstabellini-ThinkPad-T480s>
+ <3ee41590-e8ca-84d6-3010-6e5dffe91df0@epam.com>
+ <276d6b48-8cd7-7fb1-1d76-15cb6a95cad9@xen.org>
+User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,39 +71,37 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>
+Cc: "nd@arm.com" <nd@arm.com>, Stefano Stabellini <sstabellini@kernel.org>,
+ Oleksandr Andrushchenko <Oleksandr_Andrushchenko@epam.com>,
+ "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>,
+ "Bertrand.Marquis@arm.com" <Bertrand.Marquis@arm.com>,
+ "jbeulich@suse.com" <jbeulich@suse.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Rahul Singh <rahul.singh@arm.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ "roger.pau@citrix.com" <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This condition is the same as $flightcond.  (This has no effect on the
-db performance since the query planner figures it out, but it is
-confusing.)
+On Fri, 24 Jul 2020, Julien Grall wrote:
+> > > > +    list_add_tail(&bridge->node, &pci_host_bridges);
+> > > It looks like &pci_host_bridges should be an ordered list, ordered by
+> > > segment number?
+> > 
+> > Why? Do you expect bridge access in some specific order so ordered
+> > 
+> > list will make it faster?
+> 
+> Access to the configure space will be pretty random. So I don't think ordering
+> the list will make anything better.
+> 
+> However, looking up for the bridge for every config spec access is pretty
+> slow. When I was working on the PCI passthrough, I wanted to look whether it
+> would be possible to have a pointer to the PCI host bridge passed in argument
+> to the helpers (rather than the segment).
 
-Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
----
- sg-report-host-history | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
-
-diff --git a/sg-report-host-history b/sg-report-host-history
-index 1f5c14e1..787f7c5b 100755
---- a/sg-report-host-history
-+++ b/sg-report-host-history
-@@ -175,13 +175,12 @@ sub mainquery ($) {
- 	   AND val = ?
- 	   AND $flightcond
-            AND $restrictflight_cond
--           AND flight > ?
- 	 ORDER BY flight DESC
-          LIMIT $limit * 2
- END
- 
-     print DEBUG "MAINQUERY $host...\n";
--    $runvarq->execute($host, $minflight);
-+    $runvarq->execute($host);
- 
-     $hosts{$host} = $runvarq->fetchall_arrayref({});
-     print DEBUG "MAINQUERY $host got ".(scalar @{ $hosts{$host} })."\n";
--- 
-2.20.1
-
+I was suggesting ordering the list because it is a rather cheap
+optimization: it is easy to implement and it typically leads to decent
+improvements (although it varies on a case by case basis). Something
+more sophisticated as you mention here would be even better.
 
