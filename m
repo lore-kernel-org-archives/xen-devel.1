@@ -2,75 +2,74 @@ Return-Path: <SRS0=9gwS=BD=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0B2B6C433E4
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Jul 2020 19:01:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3F5FAC433E3
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Jul 2020 19:06:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D7582206F6
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Jul 2020 19:01:20 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 133DF206F0
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Jul 2020 19:06:40 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="XSBKHQjq"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D7582206F6
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="mY+QgsBx"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 133DF206F0
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jz2wH-0000Cv-OD; Fri, 24 Jul 2020 19:01:01 +0000
+	id 1jz31T-0000Vs-Cs; Fri, 24 Jul 2020 19:06:23 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=tno1=BD=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1jz2wG-0000Cn-Pb
- for xen-devel@lists.xenproject.org; Fri, 24 Jul 2020 19:01:00 +0000
-X-Inumbo-ID: 02b4ea46-cde0-11ea-a461-12813bfff9fa
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ <SRS0=qjWU=BD=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
+ id 1jz31R-0000Vn-SU
+ for xen-devel@lists.xenproject.org; Fri, 24 Jul 2020 19:06:21 +0000
+X-Inumbo-ID: c294e6cc-cde0-11ea-a463-12813bfff9fa
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 02b4ea46-cde0-11ea-a461-12813bfff9fa;
- Fri, 24 Jul 2020 19:00:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1595617259;
- h=subject:to:cc:references:from:message-id:date:
- mime-version:in-reply-to:content-transfer-encoding;
- bh=qDLpyFG01JuszQaIrW57+Qe/R3/LrJ9ztBtSJyWamN4=;
- b=XSBKHQjqlXlW3wtfRC7Mcc2djxD1iPhxzOECSyxLZuVAx4LCkIJWxMbo
- +6+ldzmSJ5ys/ZFZmUmxnplDfOrYEJJkx3UzilP/nkS58K51eiTwWdmS4
- QAhxmkqACHYrkd4HnM1WRCc2fUXrtDjUwXdc7m9TOjim3FfuHKi2zGdnV s=;
-Authentication-Results: esa6.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: 1OYxkBD80Rr28m8mNtIUCswqXFa3S86bTbd6VugChtaqn/c52UmfSarczN4KqV/O86qGd9aEJ1
- tbghh/tQvRA2OIw8F0TCCSNXzHNg0BvYZFmJ/0Vbia/djOi5e0bj4vdtnalajBUKVGzPAPNzYl
- Om3UO2DjzK/+DD6uBqsqYlaO/8X2TdcgqY6lkXihKBYTd6xJHCBgCpfWkDMnWTMK9mcZENAgBH
- uwPkeMn6Fdp95AZgvnGKSd/1dnjT6ONtAP2rzDj6m+OLDiud3ufeY3XPDMkFHYeO5LQolUw5ve
- OJQ=
-X-SBRS: 2.7
-X-MesageID: 23481107
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.75,391,1589256000"; d="scan'208";a="23481107"
-Subject: Re: [PATCH 5/6] iommu: remove the share_p2m operation
-To: Paul Durrant <paul@xen.org>, <xen-devel@lists.xenproject.org>
-References: <20200724164619.1245-1-paul@xen.org>
- <20200724164619.1245-6-paul@xen.org>
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Message-ID: <0e3d1914-2bf0-0b14-721e-7694f3657523@citrix.com>
-Date: Fri, 24 Jul 2020 20:00:48 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
-MIME-Version: 1.0
-In-Reply-To: <20200724164619.1245-6-paul@xen.org>
-Content-Type: text/plain; charset="utf-8"
+ id c294e6cc-cde0-11ea-a463-12813bfff9fa;
+ Fri, 24 Jul 2020 19:06:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+ Content-Transfer-Encoding:Content-Type:Message-ID:To:Sender:Reply-To:Cc:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=0aVI7tuZxnkrZ2kNoGo/7m2VrsXnIX5xK3zmuvG9oIw=; b=mY+QgsBxNVzMj+fWpS4ZzYsMJ
+ b1icVWDBF5Z+mL7vAR9VpuyCOArdYalWpt00GTMnPRBuCahqywj7Gvve3Se0s0mVhiUM+Rvm10lIm
+ 52gkiWtHHyiYYiHb6kVH7yr2lQ9nV0KzLu8Mkgp+jx4Jg6x9pX5XspMoyLZ8FkU9IwISE=;
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1jz31Q-00086t-Bf; Fri, 24 Jul 2020 19:06:20 +0000
+Received: from [172.16.144.3] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1jz31Q-0000pr-33; Fri, 24 Jul 2020 19:06:20 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.89) (envelope-from <osstest-admin@xenproject.org>)
+ id 1jz31Q-0005zh-2Q; Fri, 24 Jul 2020 19:06:20 +0000
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-152180-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-Content-Language: en-GB
-X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
- AMSPEX02CL02.citrite.net (10.69.22.126)
+MIME-Version: 1.0
+Subject: [xen-unstable-smoke test] 152180: tolerable all pass - PUSHED
+X-Osstest-Failures: xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+ xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+ xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+ xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+ xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This: xen=0562cbc14cf02b8188b9f1f37f39a4886776ce7c
+X-Osstest-Versions-That: xen=b2a64292b0bfa317886b3432d1a5b2a4193a48d6
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Fri, 24 Jul 2020 19:06:20 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,35 +80,62 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Kevin Tian <kevin.tian@intel.com>, Wei Liu <wl@xen.org>,
- Paul Durrant <pdurrant@amazon.com>, George Dunlap <george.dunlap@citrix.com>,
- Jan Beulich <jbeulich@suse.com>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 24/07/2020 17:46, Paul Durrant wrote:
-> From: Paul Durrant <pdurrant@amazon.com>
->
-> Sharing of HAP tables is VT-d specific so the operation is never defined for
-> AMD IOMMU.
+flight 152180 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/152180/
 
-It's not VT-d specific, and Xen really did used to share on AMD.
+Failures :-/ but no regressions.
 
-In fact, a remnant of this logic is still present in the form of the
-comment for p2m_type_t explaining why p2m_ram_rw needs to be 0.
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
 
-That said, I agree it shouldn't be a hook, because it is statically
-known at domain create time based on flags and hardware properties.
+version targeted for testing:
+ xen                  0562cbc14cf02b8188b9f1f37f39a4886776ce7c
+baseline version:
+ xen                  b2a64292b0bfa317886b3432d1a5b2a4193a48d6
 
->  There's also no need to pro-actively set vtd.pgd_maddr when using
-> shared EPT as it is straightforward to simply define a helper function to
-> return the appropriate value in the shared and non-shared cases.
+Last test of basis   152173  2020-07-24 09:00:31 Z    0 days
+Testing same since   152180  2020-07-24 15:02:33 Z    0 days    1 attempts
 
-It occurs to me that vtd.pgd_maddr and amd.root_table really are the
-same thing, and furthermore are common to all IOMMU implementations on
-any architecture.  Is it worth trying to make them common, rather than
-continuing to let each implementation handle them differently?
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
 
-~Andrew
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/xen.git
+   b2a64292b0..0562cbc14c  0562cbc14cf02b8188b9f1f37f39a4886776ce7c -> smoke
 
