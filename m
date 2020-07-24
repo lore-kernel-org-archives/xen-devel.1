@@ -7,39 +7,40 @@ X-Spam-Status: No, score=-13.0 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=unavailable
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E5D10C433EB
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Jul 2020 17:22:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 69AE7C43446
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Jul 2020 17:23:01 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C31E520674
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Jul 2020 17:22:47 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C31E520674
+	by mail.kernel.org (Postfix) with ESMTPS id 46C4F206F6
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Jul 2020 17:23:01 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 46C4F206F6
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jz1P4-0005il-AA; Fri, 24 Jul 2020 17:22:38 +0000
+	id 1jz1PJ-0005q3-5S; Fri, 24 Jul 2020 17:22:53 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ulAu=BD=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1jz1P3-0005eH-0m
- for xen-devel@lists.xenproject.org; Fri, 24 Jul 2020 17:22:37 +0000
-X-Inumbo-ID: 3b8d8494-cdd2-11ea-8862-bc764e2007e4
+ id 1jz1PI-0005eH-15
+ for xen-devel@lists.xenproject.org; Fri, 24 Jul 2020 17:22:52 +0000
+X-Inumbo-ID: 3b8d8496-cdd2-11ea-8862-bc764e2007e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3b8d8494-cdd2-11ea-8862-bc764e2007e4;
- Fri, 24 Jul 2020 17:22:21 +0000 (UTC)
+ id 3b8d8496-cdd2-11ea-8862-bc764e2007e4;
+ Fri, 24 Jul 2020 17:22:22 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1jz1Om-00021j-W9; Fri, 24 Jul 2020 18:22:21 +0100
+ id 1jz1On-00021j-Ot; Fri, 24 Jul 2020 18:22:21 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH 03/11] sg-report-host-history: Drop per-job debug etc.
-Date: Fri, 24 Jul 2020 18:22:08 +0100
-Message-Id: <20200724172216.28204-4-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 06/11] sg-report-host-history: Do the main query per
+ host
+Date: Fri, 24 Jul 2020 18:22:11 +0100
+Message-Id: <20200724172216.28204-7-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200724172216.28204-1-ian.jackson@eu.citrix.com>
 References: <20200724172216.28204-1-ian.jackson@eu.citrix.com>
@@ -59,63 +60,83 @@ Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This printing has a significant effect on the performance of this
-program, at least after we optimise various other things.
+In f6001d628c3b3fd42b10cd15351981a04bc02572 we combined these
+queries into one:
+  sg-report-host-history: Aggregate runvars query for all hosts
+
+Now that we have an index, there is a faster way for the db to do this
+query: via that index.  But it doesn't like to do that if be aggregate
+the queries.  Experimentally, doing this query separately once per
+host is significantly faster.
+
+Also, later, it will allow us to parallelise this work.
+
+So, we undo that.  (Not by reverting, though.)
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- sg-report-host-history | 14 +++++++-------
- 1 file changed, 7 insertions(+), 7 deletions(-)
+ schema/runvars-host-index.sql |  2 +-
+ sg-report-host-history        | 27 +++++++++------------------
+ 2 files changed, 10 insertions(+), 19 deletions(-)
 
+diff --git a/schema/runvars-host-index.sql b/schema/runvars-host-index.sql
+index fec0b960..cd6a1f9e 100644
+--- a/schema/runvars-host-index.sql
++++ b/schema/runvars-host-index.sql
+@@ -1,4 +1,4 @@
+--- ##OSSTEST## 009 Preparatory
++-- ##OSSTEST## 009 Needed
+ --
+ -- This index helps sg-report-host-history find relevant flights.
+ 
 diff --git a/sg-report-host-history b/sg-report-host-history
-index 5dd875c1..8b409fc7 100755
+index 25a0c847..ab88828e 100755
 --- a/sg-report-host-history
 +++ b/sg-report-host-history
-@@ -102,9 +102,9 @@ sub read_existing_logs ($) {
- 	    my $k = $1;
- 	    s{\%([0-9a-f]{2})}{ chr hex $1 }ge;
- 	    $ch->{$k} = $_;
--	    print DEBUG "GOTCACHE $hostname $k\n";
-+#	    print DEBUG "GOTCACHE $hostname $k\n";
- 	}
--	print DEBUG "GOTCACHE $hostname \@ $jr->{flight} $jr->{job} $jr->{status},$jr->{name}\n";
-+#	print DEBUG "GOTCACHE $hostname \@ $jr->{flight} $jr->{job} $jr->{status},$jr->{name}\n";
- 	$tcache->{$jr->{flight},$jr->{job},$jr->{status},$jr->{name}} = $jr;
+@@ -165,34 +165,25 @@ sub jobquery ($$$) {
+ our %hosts;
+ 
+ sub mainquery () {
+-    our $valcond = join " OR ", map { "val = ?" } keys %hosts;
+-    our @params = keys %hosts;
+-
+     our $runvarq //= db_prepare(<<END);
+-	SELECT flight, job, name, val, status
++	SELECT flight, job, name, status
+ 	  FROM runvars
+           JOIN jobs USING (flight, job)
+-	 WHERE $namecond
+-	   AND ($valcond)
++	 WHERE (name = 'host' OR name LIKE '%_host')
++	   AND val = ?
+ 	   AND $flightcond
+            AND $restrictflight_cond
+            AND flight > ?
+ 	 ORDER BY flight DESC
+-	 LIMIT ($limit * 3 + 100) * ?
++         LIMIT $limit * 2
+ END
++    foreach my $host (sort keys %hosts) {
++	print DEBUG "MAINQUERY $host...\n";
++	$runvarq->execute($host, $minflight);
+ 
+-    push @params, $minflight;
+-    push @params, scalar keys %hosts;
+-
+-    print DEBUG "MAINQUERY...\n";
+-    $runvarq->execute(@params);
+-
+-    print DEBUG "FIRST PASS\n";
+-    while (my $jr= $runvarq->fetchrow_hashref()) {
+-	print DEBUG " $jr->{flight}.$jr->{job} ";
+-	push @{ $hosts{$jr->{val}} }, $jr;
++	$hosts{$host} = $runvarq->fetchall_arrayref({});
++	print DEBUG "MAINQUERY $host got ".(scalar @{ $hosts{$host} })."\n";
      }
-     close H;
-@@ -272,7 +272,7 @@ END
-     my @rows;
-     my $cachehits = 0;
-     foreach my $jr (@$inrows) {
--	print DEBUG "JOB $jr->{flight}.$jr->{job} ";
-+	#print DEBUG "JOB $jr->{flight}.$jr->{job} ";
+-    print DEBUG "\n";
+ }
  
- 	my $cacherow =
- 	    $tcache->{$jr->{flight},$jr->{job},$jr->{status},$jr->{name}};
-@@ -283,11 +283,11 @@ END
- 
- 	my $endedrow = jobquery($endedq, $jr, 'e');
- 	if (!$endedrow) {
--	    print DEBUG "no-finished\n";
-+	    #print DEBUG "no-finished\n";
- 	    next;
- 	}
--	print DEBUG join " ", map { $endedrow->{$_} } sort keys %$endedrow;
--	print DEBUG ".\n";
-+	#print DEBUG join " ", map { $endedrow->{$_} } sort keys %$endedrow;
-+	#print DEBUG ".\n";
- 
- 	push @rows, { %$jr, %$endedrow };
-     }
-@@ -329,7 +329,7 @@ END
- 	    next;
- 	}
- 
--        print DEBUG "JR $jr->{flight}.$jr->{job}\n";
-+        #print DEBUG "JR $jr->{flight}.$jr->{job}\n";
- 	my $ir = jobquery($infoq, $jr, 'i');
- 	my $ar = jobquery($allocdq, $jr, 'a');
- 	my $ident = $jr->{name};
+ sub reporthost ($) {
 -- 
 2.20.1
 
