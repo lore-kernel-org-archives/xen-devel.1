@@ -7,39 +7,39 @@ X-Spam-Status: No, score=-13.0 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=unavailable
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 95CB3C433FC
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Jul 2020 17:22:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E5D10C433EB
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Jul 2020 17:22:47 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5F0B9206F6
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Jul 2020 17:22:54 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5F0B9206F6
+	by mail.kernel.org (Postfix) with ESMTPS id C31E520674
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Jul 2020 17:22:47 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C31E520674
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jz1P8-0005kQ-Ie; Fri, 24 Jul 2020 17:22:42 +0000
+	id 1jz1P4-0005il-AA; Fri, 24 Jul 2020 17:22:38 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ulAu=BD=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1jz1P8-0005eH-0j
- for xen-devel@lists.xenproject.org; Fri, 24 Jul 2020 17:22:42 +0000
-X-Inumbo-ID: 3bb38216-cdd2-11ea-8862-bc764e2007e4
+ id 1jz1P3-0005eH-0m
+ for xen-devel@lists.xenproject.org; Fri, 24 Jul 2020 17:22:37 +0000
+X-Inumbo-ID: 3b8d8494-cdd2-11ea-8862-bc764e2007e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3bb38216-cdd2-11ea-8862-bc764e2007e4;
- Fri, 24 Jul 2020 17:22:22 +0000 (UTC)
+ id 3b8d8494-cdd2-11ea-8862-bc764e2007e4;
+ Fri, 24 Jul 2020 17:22:21 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1jz1On-00021j-7W; Fri, 24 Jul 2020 18:22:21 +0100
+ id 1jz1Om-00021j-W9; Fri, 24 Jul 2020 18:22:21 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH 04/11] Executive: Export opendb_tests
-Date: Fri, 24 Jul 2020 18:22:09 +0100
-Message-Id: <20200724172216.28204-5-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 03/11] sg-report-host-history: Drop per-job debug etc.
+Date: Fri, 24 Jul 2020 18:22:08 +0100
+Message-Id: <20200724172216.28204-4-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200724172216.28204-1-ian.jackson@eu.citrix.com>
 References: <20200724172216.28204-1-ian.jackson@eu.citrix.com>
@@ -59,26 +59,63 @@ Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-sg-report-host-history is going to want this in a moment
+This printing has a significant effect on the performance of this
+program, at least after we optimise various other things.
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- Osstest/Executive.pm | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ sg-report-host-history | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/Osstest/Executive.pm b/Osstest/Executive.pm
-index 33de3708..c1095bac 100644
---- a/Osstest/Executive.pm
-+++ b/Osstest/Executive.pm
-@@ -49,7 +49,7 @@ BEGIN {
-                       task_spec_desc findtask findtask_spec @all_lock_tables
-                       restrictflight_arg restrictflight_cond
-                       report_run_getinfo report_altcolour
--                      report_altchangecolour
-+                      report_altchangecolour opendb_tests
-                       report_blessingscond report_find_push_age_info
-                       tcpconnect_queuedaemon plan_search
-                       manual_allocation_base_jobinfo
+diff --git a/sg-report-host-history b/sg-report-host-history
+index 5dd875c1..8b409fc7 100755
+--- a/sg-report-host-history
++++ b/sg-report-host-history
+@@ -102,9 +102,9 @@ sub read_existing_logs ($) {
+ 	    my $k = $1;
+ 	    s{\%([0-9a-f]{2})}{ chr hex $1 }ge;
+ 	    $ch->{$k} = $_;
+-	    print DEBUG "GOTCACHE $hostname $k\n";
++#	    print DEBUG "GOTCACHE $hostname $k\n";
+ 	}
+-	print DEBUG "GOTCACHE $hostname \@ $jr->{flight} $jr->{job} $jr->{status},$jr->{name}\n";
++#	print DEBUG "GOTCACHE $hostname \@ $jr->{flight} $jr->{job} $jr->{status},$jr->{name}\n";
+ 	$tcache->{$jr->{flight},$jr->{job},$jr->{status},$jr->{name}} = $jr;
+     }
+     close H;
+@@ -272,7 +272,7 @@ END
+     my @rows;
+     my $cachehits = 0;
+     foreach my $jr (@$inrows) {
+-	print DEBUG "JOB $jr->{flight}.$jr->{job} ";
++	#print DEBUG "JOB $jr->{flight}.$jr->{job} ";
+ 
+ 	my $cacherow =
+ 	    $tcache->{$jr->{flight},$jr->{job},$jr->{status},$jr->{name}};
+@@ -283,11 +283,11 @@ END
+ 
+ 	my $endedrow = jobquery($endedq, $jr, 'e');
+ 	if (!$endedrow) {
+-	    print DEBUG "no-finished\n";
++	    #print DEBUG "no-finished\n";
+ 	    next;
+ 	}
+-	print DEBUG join " ", map { $endedrow->{$_} } sort keys %$endedrow;
+-	print DEBUG ".\n";
++	#print DEBUG join " ", map { $endedrow->{$_} } sort keys %$endedrow;
++	#print DEBUG ".\n";
+ 
+ 	push @rows, { %$jr, %$endedrow };
+     }
+@@ -329,7 +329,7 @@ END
+ 	    next;
+ 	}
+ 
+-        print DEBUG "JR $jr->{flight}.$jr->{job}\n";
++        #print DEBUG "JR $jr->{flight}.$jr->{job}\n";
+ 	my $ir = jobquery($infoq, $jr, 'i');
+ 	my $ar = jobquery($allocdq, $jr, 'a');
+ 	my $ident = $jr->{name};
 -- 
 2.20.1
 
