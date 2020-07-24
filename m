@@ -7,56 +7,56 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EC59BC43458
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Jul 2020 16:46:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0A266C4345C
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Jul 2020 16:46:50 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B56A2206C1
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Jul 2020 16:46:46 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id C644220674
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Jul 2020 16:46:49 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="RaJZh4Tn"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B56A2206C1
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="epYqwH6K"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C644220674
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jz0q8-000165-VX; Fri, 24 Jul 2020 16:46:32 +0000
+	id 1jz0qD-00018G-Lk; Fri, 24 Jul 2020 16:46:37 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=yL+a=BD=xen.org=paul@srs-us1.protection.inumbo.net>)
- id 1jz0q8-00015t-1H
- for xen-devel@lists.xenproject.org; Fri, 24 Jul 2020 16:46:32 +0000
-X-Inumbo-ID: 3973b03e-cdcd-11ea-8855-bc764e2007e4
+ id 1jz0qC-00015t-SC
+ for xen-devel@lists.xenproject.org; Fri, 24 Jul 2020 16:46:36 +0000
+X-Inumbo-ID: 3abf2220-cdcd-11ea-8855-bc764e2007e4
 Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3973b03e-cdcd-11ea-8855-bc764e2007e4;
- Fri, 24 Jul 2020 16:46:30 +0000 (UTC)
+ id 3abf2220-cdcd-11ea-8855-bc764e2007e4;
+ Fri, 24 Jul 2020 16:46:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
  s=20200302mail; h=Content-Transfer-Encoding:Content-Type:MIME-Version:
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ps1c79dS8Hxss26DESmmy5+bX2VNTeAFQ2QuKg57l58=; b=RaJZh4Tnwh4AzAyIlYnGnWgJKq
- PPH7unRrbDmv8YApUVNbuNr8vjQ+OvXhndPp/VttG9dexJ8FWwRG5WgrcbCD1shmfE10AAb7/n/8H
- SG+aQyFLfMdpdUgaFgMRzlSnvHm/fWWNnmhlr2uj+H2G1VXGXKPzbtpExyO0R/YunsXg=;
+ bh=AosL3w16YGuBNK92YZOL2rtFKWqYL/0zf7A/3jIqAEA=; b=epYqwH6KbmyaIuwxIGxeO7s4h7
+ 8dBL3k6uJOlglLQFZ4k0ZlsORcJWEymRcNG7ykte9Q8FyyQFYNCXZBhI48ZxcW2nBHr3tKSaSyRBY
+ 7VpbatyZO7WurHJkZpUq3Vd+om01KjnKQHJYxt5owe6ld77YXxzybazCb7vEZ7ru9x1w=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1jz0q4-00054O-Ky; Fri, 24 Jul 2020 16:46:28 +0000
+ id 1jz0q7-00054a-0h; Fri, 24 Jul 2020 16:46:31 +0000
 Received: from host86-143-223-30.range86-143.btcentralplus.com
  ([86.143.223.30] helo=u2f063a87eabd5f.home)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1jz0q4-0006WL-Ag; Fri, 24 Jul 2020 16:46:28 +0000
+ id 1jz0q6-0006WL-P4; Fri, 24 Jul 2020 16:46:30 +0000
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH 2/6] x86/iommu: add common page-table allocator
-Date: Fri, 24 Jul 2020 17:46:15 +0100
-Message-Id: <20200724164619.1245-3-paul@xen.org>
+Subject: [PATCH 4/6] remove remaining uses of iommu_legacy_map/unmap
+Date: Fri, 24 Jul 2020 17:46:17 +0100
+Message-Id: <20200724164619.1245-5-paul@xen.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200724164619.1245-1-paul@xen.org>
 References: <20200724164619.1245-1-paul@xen.org>
@@ -73,519 +73,451 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Kevin Tian <kevin.tian@intel.com>, Wei Liu <wl@xen.org>,
+Cc: Kevin Tian <kevin.tian@intel.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Jun Nakajima <jun.nakajima@intel.com>, Wei Liu <wl@xen.org>,
  Andrew Cooper <andrew.cooper3@citrix.com>, Paul Durrant <pdurrant@amazon.com>,
- Jan Beulich <jbeulich@suse.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
  =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Paul Durrant <pdurrant@amazon.com>
 
-Instead of having separate page table allocation functions in VT-d and AMD
-IOMMU code, use a common allocation function in the general x86 code.
-Also, rather than walking the page tables and using a tasklet to free them
-during iommu_domain_destroy(), add allocated page table pages to a list and
-then simply walk the list to free them. This saves ~90 lines of code overall.
+The 'legacy' functions do implicit flushing so amend the callers to do the
+appropriate flushing.
 
-NOTE: There is no need to clear and sync PTEs during teardown since the per-
-      device root entries will have already been cleared (when devices were
-      de-assigned) so the page tables can no longer be accessed by the IOMMU.
+Unfortunately, because of the structure of the P2M code, we cannot remove
+the per-CPU 'iommu_dont_flush_iotlb' global and the optimization it
+facilitates. It is now checked directly iommu_iotlb_flush(). Also, it is
+now declared as bool (rather than bool_t) and setting/clearing it are no
+longer pointlessly gated on is_iommu_enabled() returning true. (Arguably
+it is also pointless to gate the call to iommu_iotlb_flush() on that
+condition - since it is a no-op in that case - but the if clause allows
+the scope of a stack variable to be restricted).
 
 Signed-off-by: Paul Durrant <pdurrant@amazon.com>
 ---
 Cc: Jan Beulich <jbeulich@suse.com>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Kevin Tian <kevin.tian@intel.com>
 Cc: Wei Liu <wl@xen.org>
 Cc: "Roger Pau Monné" <roger.pau@citrix.com>
+Cc: George Dunlap <george.dunlap@citrix.com>
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>
+Cc: Julien Grall <julien@xen.org>
+Cc: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Jun Nakajima <jun.nakajima@intel.com>
+Cc: Kevin Tian <kevin.tian@intel.com>
 ---
- xen/drivers/passthrough/amd/iommu.h         | 18 +----
- xen/drivers/passthrough/amd/iommu_map.c     | 10 +--
- xen/drivers/passthrough/amd/pci_amd_iommu.c | 74 +++------------------
- xen/drivers/passthrough/iommu.c             | 23 -------
- xen/drivers/passthrough/vtd/iommu.c         | 51 ++------------
- xen/drivers/passthrough/x86/iommu.c         | 41 ++++++++++++
- xen/include/asm-x86/iommu.h                 |  6 ++
- xen/include/xen/iommu.h                     |  5 --
- 8 files changed, 68 insertions(+), 160 deletions(-)
+ xen/arch/x86/mm.c               | 22 +++++++++++++++-----
+ xen/arch/x86/mm/p2m-ept.c       | 22 +++++++++++++-------
+ xen/arch/x86/mm/p2m-pt.c        | 17 +++++++++++----
+ xen/arch/x86/mm/p2m.c           | 28 ++++++++++++++++++-------
+ xen/arch/x86/x86_64/mm.c        | 27 ++++++++++++++++++------
+ xen/common/grant_table.c        | 36 +++++++++++++++++++++++++-------
+ xen/common/memory.c             |  7 +++----
+ xen/drivers/passthrough/iommu.c | 37 +--------------------------------
+ xen/include/xen/iommu.h         | 20 +++++-------------
+ 9 files changed, 123 insertions(+), 93 deletions(-)
 
-diff --git a/xen/drivers/passthrough/amd/iommu.h b/xen/drivers/passthrough/amd/iommu.h
-index 3489c2a015..e2d174f3b4 100644
---- a/xen/drivers/passthrough/amd/iommu.h
-+++ b/xen/drivers/passthrough/amd/iommu.h
-@@ -226,7 +226,7 @@ int __must_check amd_iommu_map_page(struct domain *d, dfn_t dfn,
-                                     unsigned int *flush_flags);
- int __must_check amd_iommu_unmap_page(struct domain *d, dfn_t dfn,
-                                       unsigned int *flush_flags);
--int __must_check amd_iommu_alloc_root(struct domain_iommu *hd);
-+int __must_check amd_iommu_alloc_root(struct domain *d);
- int amd_iommu_reserve_domain_unity_map(struct domain *domain,
-                                        paddr_t phys_addr, unsigned long size,
-                                        int iw, int ir);
-@@ -356,22 +356,6 @@ static inline int amd_iommu_get_paging_mode(unsigned long max_frames)
-     return level;
- }
+diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+index 82bc676553..8a5658b97a 100644
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -2446,10 +2446,16 @@ static int cleanup_page_mappings(struct page_info *page)
  
--static inline struct page_info *alloc_amd_iommu_pgtable(void)
--{
--    struct page_info *pg = alloc_domheap_page(NULL, 0);
--
--    if ( pg )
--        clear_domain_page(page_to_mfn(pg));
--
--    return pg;
--}
--
--static inline void free_amd_iommu_pgtable(struct page_info *pg)
--{
--    if ( pg )
--        free_domheap_page(pg);
--}
--
- static inline void *__alloc_amd_iommu_tables(unsigned int order)
- {
-     return alloc_xenheap_pages(order, 0);
-diff --git a/xen/drivers/passthrough/amd/iommu_map.c b/xen/drivers/passthrough/amd/iommu_map.c
-index 06c564968c..d54cbf1cb9 100644
---- a/xen/drivers/passthrough/amd/iommu_map.c
-+++ b/xen/drivers/passthrough/amd/iommu_map.c
-@@ -217,7 +217,7 @@ static int iommu_pde_from_dfn(struct domain *d, unsigned long dfn,
-             mfn = next_table_mfn;
+         if ( d && unlikely(need_iommu_pt_sync(d)) && is_pv_domain(d) )
+         {
+-            int rc2 = iommu_legacy_unmap(d, _dfn(mfn), PAGE_ORDER_4K);
++            unsigned int flush_flags = 0;
++            int err;
  
-             /* allocate lower level page table */
--            table = alloc_amd_iommu_pgtable();
-+            table = iommu_alloc_pgtable(d);
-             if ( table == NULL )
-             {
-                 AMD_IOMMU_DEBUG("Cannot allocate I/O page table\n");
-@@ -248,7 +248,7 @@ static int iommu_pde_from_dfn(struct domain *d, unsigned long dfn,
- 
-             if ( next_table_mfn == 0 )
-             {
--                table = alloc_amd_iommu_pgtable();
-+                table = iommu_alloc_pgtable(d);
-                 if ( table == NULL )
-                 {
-                     AMD_IOMMU_DEBUG("Cannot allocate I/O page table\n");
-@@ -286,7 +286,7 @@ int amd_iommu_map_page(struct domain *d, dfn_t dfn, mfn_t mfn,
- 
-     spin_lock(&hd->arch.mapping_lock);
- 
--    rc = amd_iommu_alloc_root(hd);
-+    rc = amd_iommu_alloc_root(d);
-     if ( rc )
-     {
-         spin_unlock(&hd->arch.mapping_lock);
-@@ -458,7 +458,7 @@ int __init amd_iommu_quarantine_init(struct domain *d)
- 
-     spin_lock(&hd->arch.mapping_lock);
- 
--    hd->arch.amd_iommu.root_table = alloc_amd_iommu_pgtable();
-+    hd->arch.amd_iommu.root_table = iommu_alloc_pgtable(d);
-     if ( !hd->arch.amd_iommu.root_table )
-         goto out;
- 
-@@ -473,7 +473,7 @@ int __init amd_iommu_quarantine_init(struct domain *d)
-          * page table pages, and the resulting allocations are always
-          * zeroed.
-          */
--        pg = alloc_amd_iommu_pgtable();
-+        pg = iommu_alloc_pgtable(d);
-         if ( !pg )
-             break;
- 
-diff --git a/xen/drivers/passthrough/amd/pci_amd_iommu.c b/xen/drivers/passthrough/amd/pci_amd_iommu.c
-index c386dc4387..fd9b1e7bd5 100644
---- a/xen/drivers/passthrough/amd/pci_amd_iommu.c
-+++ b/xen/drivers/passthrough/amd/pci_amd_iommu.c
-@@ -206,11 +206,13 @@ static int iov_enable_xt(void)
-     return 0;
- }
- 
--int amd_iommu_alloc_root(struct domain_iommu *hd)
-+int amd_iommu_alloc_root(struct domain *d)
- {
-+    struct domain_iommu *hd = dom_iommu(d);
++            err = iommu_unmap(d, _dfn(mfn), PAGE_ORDER_4K, &flush_flags);
+             if ( !rc )
+-                rc = rc2;
++                rc = err;
 +
-     if ( unlikely(!hd->arch.amd_iommu.root_table) )
++            err = iommu_iotlb_flush(d, _dfn(mfn), 1, flush_flags);
++            if ( !rc )
++                rc = err;
+         }
+ 
+         if ( likely(!is_special_page(page)) )
+@@ -2971,13 +2977,19 @@ static int _get_page_type(struct page_info *page, unsigned long type,
+         if ( d && unlikely(need_iommu_pt_sync(d)) && is_pv_domain(d) )
+         {
+             mfn_t mfn = page_to_mfn(page);
++            dfn_t dfn = _dfn(mfn_x(mfn));
++            unsigned int flush_flags = 0;
++            int err;
+ 
+             if ( (x & PGT_type_mask) == PGT_writable_page )
+-                rc = iommu_legacy_unmap(d, _dfn(mfn_x(mfn)), PAGE_ORDER_4K);
++                rc = iommu_unmap(d, dfn, PAGE_ORDER_4K, &flush_flags);
+             else
+-                rc = iommu_legacy_map(d, _dfn(mfn_x(mfn)), mfn, PAGE_ORDER_4K,
+-                                      IOMMUF_readable | IOMMUF_writable);
++                rc = iommu_map(d, dfn, mfn, PAGE_ORDER_4K,
++                               IOMMUF_readable | IOMMUF_writable, &flush_flags);
+ 
++            err = iommu_iotlb_flush(d, dfn, 1, flush_flags);
++            if ( !rc )
++                rc = err;
+             if ( unlikely(rc) )
+             {
+                 _put_page_type(page, 0, NULL);
+diff --git a/xen/arch/x86/mm/p2m-ept.c b/xen/arch/x86/mm/p2m-ept.c
+index b8154a7ecc..d71c949b35 100644
+--- a/xen/arch/x86/mm/p2m-ept.c
++++ b/xen/arch/x86/mm/p2m-ept.c
+@@ -842,15 +842,21 @@ out:
+     if ( rc == 0 && p2m_is_hostp2m(p2m) &&
+          need_modify_vtd_table )
      {
--        hd->arch.amd_iommu.root_table = alloc_amd_iommu_pgtable();
-+        hd->arch.amd_iommu.root_table = iommu_alloc_pgtable(d);
-         if ( !hd->arch.amd_iommu.root_table )
-             return -ENOMEM;
-     }
-@@ -218,12 +220,13 @@ int amd_iommu_alloc_root(struct domain_iommu *hd)
-     return 0;
- }
- 
--static int __must_check allocate_domain_resources(struct domain_iommu *hd)
-+static int __must_check allocate_domain_resources(struct domain *d)
- {
-+    struct domain_iommu *hd = dom_iommu(d);
-     int rc;
- 
-     spin_lock(&hd->arch.mapping_lock);
--    rc = amd_iommu_alloc_root(hd);
-+    rc = amd_iommu_alloc_root(d);
-     spin_unlock(&hd->arch.mapping_lock);
- 
-     return rc;
-@@ -255,7 +258,7 @@ static void __hwdom_init amd_iommu_hwdom_init(struct domain *d)
- {
-     const struct amd_iommu *iommu;
- 
--    if ( allocate_domain_resources(dom_iommu(d)) )
-+    if ( allocate_domain_resources(d) )
-         BUG();
- 
-     for_each_amd_iommu ( iommu )
-@@ -324,7 +327,6 @@ static int reassign_device(struct domain *source, struct domain *target,
- {
-     struct amd_iommu *iommu;
-     int bdf, rc;
--    struct domain_iommu *t = dom_iommu(target);
- 
-     bdf = PCI_BDF2(pdev->bus, pdev->devfn);
-     iommu = find_iommu_for_device(pdev->seg, bdf);
-@@ -345,7 +347,7 @@ static int reassign_device(struct domain *source, struct domain *target,
-         pdev->domain = target;
+-        if ( iommu_use_hap_pt(d) )
+-            rc = iommu_iotlb_flush(d, _dfn(gfn), (1u << order),
+-                                   (iommu_flags ? IOMMU_FLUSHF_added : 0) |
+-                                   (vtd_pte_present ? IOMMU_FLUSHF_modified
+-                                                    : 0));
+-        else if ( need_iommu_pt_sync(d) )
++        unsigned int flush_flags = 0;
++        int err;
++
++        if ( need_iommu_pt_sync(d) )
+             rc = iommu_flags ?
+-                iommu_legacy_map(d, _dfn(gfn), mfn, order, iommu_flags) :
+-                iommu_legacy_unmap(d, _dfn(gfn), order);
++                iommu_map(d, _dfn(gfn), mfn, order, iommu_flags, &flush_flags) :
++                iommu_unmap(d, _dfn(gfn), order, &flush_flags);
++        else if ( iommu_use_hap_pt(d) )
++            flush_flags =
++                (iommu_flags ? IOMMU_FLUSHF_added : 0) |
++                (vtd_pte_present ? IOMMU_FLUSHF_modified : 0);
++
++        err = iommu_iotlb_flush(d, _dfn(gfn), 1u << order, flush_flags);
++        if ( !rc )
++            rc = err;
      }
  
--    rc = allocate_domain_resources(t);
-+    rc = allocate_domain_resources(target);
-     if ( rc )
-         return rc;
+     unmap_domain_page(table);
+diff --git a/xen/arch/x86/mm/p2m-pt.c b/xen/arch/x86/mm/p2m-pt.c
+index badb26bc34..c48245cfe4 100644
+--- a/xen/arch/x86/mm/p2m-pt.c
++++ b/xen/arch/x86/mm/p2m-pt.c
+@@ -678,10 +678,19 @@ p2m_pt_set_entry(struct p2m_domain *p2m, gfn_t gfn_, mfn_t mfn,
  
-@@ -378,64 +380,9 @@ static int amd_iommu_assign_device(struct domain *d, u8 devfn,
-     return reassign_device(pdev->domain, d, devfn, pdev);
- }
+     if ( need_iommu_pt_sync(p2m->domain) &&
+          (iommu_old_flags != iommu_pte_flags || old_mfn != mfn_x(mfn)) )
+-        rc = iommu_pte_flags
+-             ? iommu_legacy_map(d, _dfn(gfn), mfn, page_order,
+-                                iommu_pte_flags)
+-             : iommu_legacy_unmap(d, _dfn(gfn), page_order);
++    {
++        unsigned int flush_flags = 0;
++        int err;
++
++        rc = iommu_pte_flags ?
++            iommu_map(d, _dfn(gfn), mfn, page_order, iommu_pte_flags,
++                      &flush_flags) :
++            iommu_unmap(d, _dfn(gfn), page_order, &flush_flags);
++
++        err = iommu_iotlb_flush(d, _dfn(gfn), 1u << page_order, flush_flags);
++        if ( !rc )
++            rc = err;
++    }
  
--static void deallocate_next_page_table(struct page_info *pg, int level)
--{
--    PFN_ORDER(pg) = level;
--    spin_lock(&iommu_pt_cleanup_lock);
--    page_list_add_tail(pg, &iommu_pt_cleanup_list);
--    spin_unlock(&iommu_pt_cleanup_lock);
--}
--
--static void deallocate_page_table(struct page_info *pg)
--{
--    struct amd_iommu_pte *table_vaddr;
--    unsigned int index, level = PFN_ORDER(pg);
--
--    PFN_ORDER(pg) = 0;
--
--    if ( level <= 1 )
--    {
--        free_amd_iommu_pgtable(pg);
--        return;
--    }
--
--    table_vaddr = __map_domain_page(pg);
--
--    for ( index = 0; index < PTE_PER_TABLE_SIZE; index++ )
--    {
--        struct amd_iommu_pte *pde = &table_vaddr[index];
--
--        if ( pde->mfn && pde->next_level && pde->pr )
--        {
--            /* We do not support skip levels yet */
--            ASSERT(pde->next_level == level - 1);
--            deallocate_next_page_table(mfn_to_page(_mfn(pde->mfn)),
--                                       pde->next_level);
--        }
--    }
--
--    unmap_domain_page(table_vaddr);
--    free_amd_iommu_pgtable(pg);
--}
--
--static void deallocate_iommu_page_tables(struct domain *d)
--{
--    struct domain_iommu *hd = dom_iommu(d);
--
--    spin_lock(&hd->arch.mapping_lock);
--    if ( hd->arch.amd_iommu.root_table )
--    {
--        deallocate_next_page_table(hd->arch.amd_iommu.root_table,
--                                   hd->arch.amd_iommu.paging_mode);
--        hd->arch.amd_iommu.root_table = NULL;
--    }
--    spin_unlock(&hd->arch.mapping_lock);
--}
--
--
- static void amd_iommu_domain_destroy(struct domain *d)
- {
--    deallocate_iommu_page_tables(d);
-+    dom_iommu(d)->arch.amd_iommu.root_table = NULL;
-     amd_iommu_flush_all_pages(d);
- }
+     /*
+      * Free old intermediate tables if necessary.  This has to be the
+diff --git a/xen/arch/x86/mm/p2m.c b/xen/arch/x86/mm/p2m.c
+index db7bde0230..c5f52a4118 100644
+--- a/xen/arch/x86/mm/p2m.c
++++ b/xen/arch/x86/mm/p2m.c
+@@ -1350,10 +1350,17 @@ int set_identity_p2m_entry(struct domain *d, unsigned long gfn_l,
  
-@@ -627,7 +574,6 @@ static const struct iommu_ops __initconstrel _iommu_ops = {
-     .unmap_page = amd_iommu_unmap_page,
-     .iotlb_flush = amd_iommu_flush_iotlb_pages,
-     .iotlb_flush_all = amd_iommu_flush_iotlb_all,
--    .free_page_table = deallocate_page_table,
-     .reassign_device = reassign_device,
-     .get_device_group_id = amd_iommu_group_id,
-     .enable_x2apic = iov_enable_xt,
+     if ( !paging_mode_translate(p2m->domain) )
+     {
+-        if ( !is_iommu_enabled(d) )
+-            return 0;
+-        return iommu_legacy_map(d, _dfn(gfn_l), _mfn(gfn_l), PAGE_ORDER_4K,
+-                                IOMMUF_readable | IOMMUF_writable);
++        unsigned int flush_flags = 0;
++        int err;
++
++        ret = iommu_map(d, _dfn(gfn_l), _mfn(gfn_l), PAGE_ORDER_4K,
++                        IOMMUF_readable | IOMMUF_writable, &flush_flags);
++
++        err = iommu_iotlb_flush(d, _dfn(gfn_l), 1, flush_flags);
++        if ( !ret )
++            ret = err;
++
++        return ret;
+     }
+ 
+     gfn_lock(p2m, gfn, 0);
+@@ -1441,9 +1448,16 @@ int clear_identity_p2m_entry(struct domain *d, unsigned long gfn_l)
+ 
+     if ( !paging_mode_translate(d) )
+     {
+-        if ( !is_iommu_enabled(d) )
+-            return 0;
+-        return iommu_legacy_unmap(d, _dfn(gfn_l), PAGE_ORDER_4K);
++        unsigned int flush_flags = 0;
++        int err;
++
++        ret = iommu_unmap(d, _dfn(gfn_l), PAGE_ORDER_4K, &flush_flags);
++
++        err = iommu_iotlb_flush(d, _dfn(gfn_l), 1, flush_flags);
++        if ( !ret )
++            ret = err;
++
++        return ret;
+     }
+ 
+     gfn_lock(p2m, gfn, 0);
+diff --git a/xen/arch/x86/x86_64/mm.c b/xen/arch/x86/x86_64/mm.c
+index 102079a801..3e0bff228e 100644
+--- a/xen/arch/x86/x86_64/mm.c
++++ b/xen/arch/x86/x86_64/mm.c
+@@ -1413,21 +1413,36 @@ int memory_add(unsigned long spfn, unsigned long epfn, unsigned int pxm)
+          !iommu_use_hap_pt(hardware_domain) &&
+          !need_iommu_pt_sync(hardware_domain) )
+     {
++        unsigned int flush_flags = 0;
++        bool failed = false;
++        unsigned int n;
++
+         for ( i = spfn; i < epfn; i++ )
+-            if ( iommu_legacy_map(hardware_domain, _dfn(i), _mfn(i),
+-                                  PAGE_ORDER_4K,
+-                                  IOMMUF_readable | IOMMUF_writable) )
++            if ( iommu_map(hardware_domain, _dfn(i), _mfn(i),
++                           PAGE_ORDER_4K, IOMMUF_readable | IOMMUF_writable,
++                           &flush_flags) )
+                 break;
+         if ( i != epfn )
+         {
++            failed = true;
++
+             while (i-- > old_max)
+                 /* If statement to satisfy __must_check. */
+-                if ( iommu_legacy_unmap(hardware_domain, _dfn(i),
+-                                        PAGE_ORDER_4K) )
++                if ( iommu_unmap(hardware_domain, _dfn(i), PAGE_ORDER_4K,
++                                 &flush_flags) )
+                     continue;
++        }
+ 
+-            goto destroy_m2p;
++        for ( i = spfn; i < epfn; i += n )
++        {
++            n = epfn - i; /* may truncate */
++
++            /* If statement to satisfy __must_check. */
++            if ( iommu_iotlb_flush(hardware_domain, _dfn(i), n, flush_flags) )
++                continue;
+         }
++        if ( failed )
++            goto destroy_m2p;
+     }
+ 
+     /* We can't revert any more */
+diff --git a/xen/common/grant_table.c b/xen/common/grant_table.c
+index 9f0cae52c0..bc2b5000cf 100644
+--- a/xen/common/grant_table.c
++++ b/xen/common/grant_table.c
+@@ -1225,11 +1225,25 @@ map_grant_ref(
+             kind = IOMMUF_readable;
+         else
+             kind = 0;
+-        if ( kind && iommu_legacy_map(ld, _dfn(mfn_x(mfn)), mfn, 0, kind) )
++        if ( kind )
+         {
+-            double_gt_unlock(lgt, rgt);
+-            rc = GNTST_general_error;
+-            goto undo_out;
++            dfn_t dfn = _dfn(mfn_x(mfn));
++            unsigned int flush_flags = 0;
++            int err;
++
++            err = iommu_map(ld, dfn, mfn, 0, kind, &flush_flags);
++            if ( err )
++                rc = GNTST_general_error;
++
++            err = iommu_iotlb_flush(ld, dfn, 1, flush_flags);
++            if ( err )
++                rc = GNTST_general_error;
++
++            if ( rc != GNTST_okay )
++            {
++                double_gt_unlock(lgt, rgt);
++                goto undo_out;
++            }
+         }
+     }
+ 
+@@ -1473,21 +1487,27 @@ unmap_common(
+     if ( rc == GNTST_okay && gnttab_need_iommu_mapping(ld) )
+     {
+         unsigned int kind;
++        dfn_t dfn = _dfn(mfn_x(op->mfn));
++        unsigned int flush_flags = 0;
+         int err = 0;
+ 
+         double_gt_lock(lgt, rgt);
+ 
+         kind = mapkind(lgt, rd, op->mfn);
+         if ( !kind )
+-            err = iommu_legacy_unmap(ld, _dfn(mfn_x(op->mfn)), 0);
++            err = iommu_unmap(ld, dfn, 0, &flush_flags);
+         else if ( !(kind & MAPKIND_WRITE) )
+-            err = iommu_legacy_map(ld, _dfn(mfn_x(op->mfn)), op->mfn, 0,
+-                                   IOMMUF_readable);
++            err = iommu_map(ld, dfn, op->mfn, 0, IOMMUF_readable,
++                            &flush_flags);
+ 
+-        double_gt_unlock(lgt, rgt);
++        if ( err )
++            rc = GNTST_general_error;
+ 
++        err = iommu_iotlb_flush(ld, dfn, 1, flush_flags);
+         if ( err )
+             rc = GNTST_general_error;
++
++        double_gt_unlock(lgt, rgt);
+     }
+ 
+     /* If just unmapped a writable mapping, mark as dirtied */
+diff --git a/xen/common/memory.c b/xen/common/memory.c
+index 714077c1e5..fedbd9019e 100644
+--- a/xen/common/memory.c
++++ b/xen/common/memory.c
+@@ -824,8 +824,7 @@ int xenmem_add_to_physmap(struct domain *d, struct xen_add_to_physmap *xatp,
+     xatp->gpfn += start;
+     xatp->size -= start;
+ 
+-    if ( is_iommu_enabled(d) )
+-       this_cpu(iommu_dont_flush_iotlb) = 1;
++    this_cpu(iommu_dont_flush_iotlb) = true;
+ 
+     while ( xatp->size > done )
+     {
+@@ -845,12 +844,12 @@ int xenmem_add_to_physmap(struct domain *d, struct xen_add_to_physmap *xatp,
+         }
+     }
+ 
++    this_cpu(iommu_dont_flush_iotlb) = false;
++
+     if ( is_iommu_enabled(d) )
+     {
+         int ret;
+ 
+-        this_cpu(iommu_dont_flush_iotlb) = 0;
+-
+         ret = iommu_iotlb_flush(d, _dfn(xatp->idx - done), done,
+                                 IOMMU_FLUSHF_added | IOMMU_FLUSHF_modified);
+         if ( unlikely(ret) && rc >= 0 )
 diff --git a/xen/drivers/passthrough/iommu.c b/xen/drivers/passthrough/iommu.c
-index 1d644844ab..dad4088531 100644
+index 327df17c5d..f32d8e25a8 100644
 --- a/xen/drivers/passthrough/iommu.c
 +++ b/xen/drivers/passthrough/iommu.c
-@@ -49,10 +49,6 @@ bool_t __read_mostly amd_iommu_perdev_intremap = 1;
- 
- DEFINE_PER_CPU(bool_t, iommu_dont_flush_iotlb);
- 
--DEFINE_SPINLOCK(iommu_pt_cleanup_lock);
--PAGE_LIST_HEAD(iommu_pt_cleanup_list);
--static struct tasklet iommu_pt_cleanup_tasklet;
--
- static int __init parse_iommu_param(const char *s)
- {
-     const char *ss;
-@@ -226,7 +222,6 @@ static void iommu_teardown(struct domain *d)
-     struct domain_iommu *hd = dom_iommu(d);
- 
-     hd->platform_ops->teardown(d);
--    tasklet_schedule(&iommu_pt_cleanup_tasklet);
+@@ -277,24 +277,6 @@ int iommu_map(struct domain *d, dfn_t dfn, mfn_t mfn,
+     return rc;
  }
  
- void iommu_domain_destroy(struct domain *d)
-@@ -366,23 +361,6 @@ int iommu_lookup_page(struct domain *d, dfn_t dfn, mfn_t *mfn,
-     return iommu_call(hd->platform_ops, lookup_page, d, dfn, mfn, flags);
- }
- 
--static void iommu_free_pagetables(void *unused)
+-int iommu_legacy_map(struct domain *d, dfn_t dfn, mfn_t mfn,
+-                     unsigned int page_order, unsigned int flags)
 -{
--    do {
--        struct page_info *pg;
+-    unsigned int flush_flags = 0;
+-    int rc = iommu_map(d, dfn, mfn, page_order, flags, &flush_flags);
 -
--        spin_lock(&iommu_pt_cleanup_lock);
--        pg = page_list_remove_head(&iommu_pt_cleanup_list);
--        spin_unlock(&iommu_pt_cleanup_lock);
--        if ( !pg )
--            return;
--        iommu_vcall(iommu_get_ops(), free_page_table, pg);
--    } while ( !softirq_pending(smp_processor_id()) );
+-    if ( !this_cpu(iommu_dont_flush_iotlb) )
+-    {
+-        int err = iommu_iotlb_flush(d, dfn, (1u << page_order),
+-                                    flush_flags);
 -
--    tasklet_schedule_on_cpu(&iommu_pt_cleanup_tasklet,
--                            cpumask_cycle(smp_processor_id(), &cpu_online_map));
+-        if ( !rc )
+-            rc = err;
+-    }
+-
+-    return rc;
+-}
+-
+ int iommu_unmap(struct domain *d, dfn_t dfn, unsigned int page_order,
+                 unsigned int *flush_flags)
+ {
+@@ -333,23 +315,6 @@ int iommu_unmap(struct domain *d, dfn_t dfn, unsigned int page_order,
+     return rc;
+ }
+ 
+-int iommu_legacy_unmap(struct domain *d, dfn_t dfn, unsigned int page_order)
+-{
+-    unsigned int flush_flags = 0;
+-    int rc = iommu_unmap(d, dfn, page_order, &flush_flags);
+-
+-    if ( !this_cpu(iommu_dont_flush_iotlb) )
+-    {
+-        int err = iommu_iotlb_flush(d, dfn, (1u << page_order),
+-                                    flush_flags);
+-
+-        if ( !rc )
+-            rc = err;
+-    }
+-
+-    return rc;
 -}
 -
  int iommu_iotlb_flush(struct domain *d, dfn_t dfn, unsigned int page_count,
                        unsigned int flush_flags)
  {
-@@ -506,7 +484,6 @@ int __init iommu_setup(void)
- #ifndef iommu_intremap
-         printk("Interrupt remapping %sabled\n", iommu_intremap ? "en" : "dis");
- #endif
--        tasklet_init(&iommu_pt_cleanup_tasklet, iommu_free_pagetables, NULL);
-     }
+@@ -357,7 +322,7 @@ int iommu_iotlb_flush(struct domain *d, dfn_t dfn, unsigned int page_count,
+     int rc;
  
-     return rc;
-diff --git a/xen/drivers/passthrough/vtd/iommu.c b/xen/drivers/passthrough/vtd/iommu.c
-index ac1373fb99..40834e2e7a 100644
---- a/xen/drivers/passthrough/vtd/iommu.c
-+++ b/xen/drivers/passthrough/vtd/iommu.c
-@@ -279,13 +279,16 @@ static u64 addr_to_dma_page_maddr(struct domain *domain, u64 addr, int alloc)
-         pte_maddr = dma_pte_addr(*pte);
-         if ( !pte_maddr )
-         {
-+            struct page_info *pg;
-+
-             if ( !alloc )
-                 break;
+     if ( !is_iommu_enabled(d) || !hd->platform_ops->iotlb_flush ||
+-         !page_count || !flush_flags )
++         !page_count || !flush_flags || this_cpu(iommu_dont_flush_iotlb) )
+         return 0;
  
--            pte_maddr = alloc_pgtable_maddr(1, hd->node);
--            if ( !pte_maddr )
-+            pg = iommu_alloc_pgtable(domain);
-+            if ( !pg )
-                 break;
- 
-+            pte_maddr = page_to_maddr(pg);
-             dma_set_pte_addr(*pte, pte_maddr);
- 
-             /*
-@@ -675,45 +678,6 @@ static void dma_pte_clear_one(struct domain *domain, uint64_t addr,
-     unmap_vtd_domain_page(page);
- }
- 
--static void iommu_free_pagetable(u64 pt_maddr, int level)
--{
--    struct page_info *pg = maddr_to_page(pt_maddr);
--
--    if ( pt_maddr == 0 )
--        return;
--
--    PFN_ORDER(pg) = level;
--    spin_lock(&iommu_pt_cleanup_lock);
--    page_list_add_tail(pg, &iommu_pt_cleanup_list);
--    spin_unlock(&iommu_pt_cleanup_lock);
--}
--
--static void iommu_free_page_table(struct page_info *pg)
--{
--    unsigned int i, next_level = PFN_ORDER(pg) - 1;
--    u64 pt_maddr = page_to_maddr(pg);
--    struct dma_pte *pt_vaddr, *pte;
--
--    PFN_ORDER(pg) = 0;
--    pt_vaddr = (struct dma_pte *)map_vtd_domain_page(pt_maddr);
--
--    for ( i = 0; i < PTE_NUM; i++ )
--    {
--        pte = &pt_vaddr[i];
--        if ( !dma_pte_present(*pte) )
--            continue;
--
--        if ( next_level >= 1 )
--            iommu_free_pagetable(dma_pte_addr(*pte), next_level);
--
--        dma_clear_pte(*pte);
--        iommu_sync_cache(pte, sizeof(struct dma_pte));
--    }
--
--    unmap_vtd_domain_page(pt_vaddr);
--    free_pgtable_maddr(pt_maddr);
--}
--
- static int iommu_set_root_entry(struct vtd_iommu *iommu)
- {
-     u32 sts;
-@@ -1766,11 +1730,7 @@ static void iommu_domain_teardown(struct domain *d)
-     if ( iommu_use_hap_pt(d) )
-         return;
- 
--    spin_lock(&hd->arch.mapping_lock);
--    iommu_free_pagetable(hd->arch.vtd.pgd_maddr,
--                         agaw_to_level(hd->arch.vtd.agaw));
-     hd->arch.vtd.pgd_maddr = 0;
--    spin_unlock(&hd->arch.mapping_lock);
- }
- 
- static int __must_check intel_iommu_map_page(struct domain *d, dfn_t dfn,
-@@ -2751,7 +2711,6 @@ static struct iommu_ops __initdata vtd_ops = {
-     .map_page = intel_iommu_map_page,
-     .unmap_page = intel_iommu_unmap_page,
-     .lookup_page = intel_iommu_lookup_page,
--    .free_page_table = iommu_free_page_table,
-     .reassign_device = reassign_device_ownership,
-     .get_device_group_id = intel_iommu_group_id,
-     .enable_x2apic = intel_iommu_enable_eim,
-diff --git a/xen/drivers/passthrough/x86/iommu.c b/xen/drivers/passthrough/x86/iommu.c
-index a12109a1de..b3c7da0fe2 100644
---- a/xen/drivers/passthrough/x86/iommu.c
-+++ b/xen/drivers/passthrough/x86/iommu.c
-@@ -140,11 +140,19 @@ int arch_iommu_domain_init(struct domain *d)
- 
-     spin_lock_init(&hd->arch.mapping_lock);
- 
-+    INIT_PAGE_LIST_HEAD(&hd->arch.pgtables.list);
-+    spin_lock_init(&hd->arch.pgtables.lock);
-+
-     return 0;
- }
- 
- void arch_iommu_domain_destroy(struct domain *d)
- {
-+    struct domain_iommu *hd = dom_iommu(d);
-+    struct page_info *pg;
-+
-+    while ( (pg = page_list_remove_head(&hd->arch.pgtables.list)) )
-+        free_domheap_page(pg);
- }
- 
- static bool __hwdom_init hwdom_iommu_map(const struct domain *d,
-@@ -257,6 +265,39 @@ void __hwdom_init arch_iommu_hwdom_init(struct domain *d)
-         return;
- }
- 
-+struct page_info *iommu_alloc_pgtable(struct domain *d)
-+{
-+    struct domain_iommu *hd = dom_iommu(d);
-+#ifdef CONFIG_NUMA
-+    unsigned int memflags = (hd->node == NUMA_NO_NODE) ?
-+        0 : MEMF_node(hd->node);
-+#else
-+    unsigned int memflags = 0;
-+#endif
-+    struct page_info *pg;
-+    void *p;
-+
-+    BUG_ON(!iommu_enabled);
-+
-+    pg = alloc_domheap_page(NULL, memflags);
-+    if ( !pg )
-+        return NULL;
-+
-+    p = __map_domain_page(pg);
-+    clear_page(p);
-+
-+    if ( hd->platform_ops->sync_cache )
-+        iommu_vcall(hd->platform_ops, sync_cache, p, PAGE_SIZE);
-+
-+    unmap_domain_page(p);
-+
-+    spin_lock(&hd->arch.pgtables.lock);
-+    page_list_add(pg, &hd->arch.pgtables.list);
-+    spin_unlock(&hd->arch.pgtables.lock);
-+
-+    return pg;
-+}
-+
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/include/asm-x86/iommu.h b/xen/include/asm-x86/iommu.h
-index a7add5208c..280515966c 100644
---- a/xen/include/asm-x86/iommu.h
-+++ b/xen/include/asm-x86/iommu.h
-@@ -46,6 +46,10 @@ typedef uint64_t daddr_t;
- struct arch_iommu
- {
-     spinlock_t mapping_lock; /* io page table lock */
-+    struct {
-+        struct page_list_head list;
-+        spinlock_t lock;
-+    } pgtables;
- 
-     union {
-         /* Intel VT-d */
-@@ -131,6 +135,8 @@ int pi_update_irte(const struct pi_desc *pi_desc, const struct pirq *pirq,
-         iommu_vcall(ops, sync_cache, addr, size);       \
- })
- 
-+struct page_info * __must_check iommu_alloc_pgtable(struct domain *d);
-+
- #endif /* !__ARCH_X86_IOMMU_H__ */
- /*
-  * Local variables:
+     if ( dfn_eq(dfn, INVALID_DFN) )
 diff --git a/xen/include/xen/iommu.h b/xen/include/xen/iommu.h
-index 3272874958..51c29180a4 100644
+index 271bd8e546..ec639ba128 100644
 --- a/xen/include/xen/iommu.h
 +++ b/xen/include/xen/iommu.h
-@@ -263,8 +263,6 @@ struct iommu_ops {
-     int __must_check (*lookup_page)(struct domain *d, dfn_t dfn, mfn_t *mfn,
-                                     unsigned int *flags);
- 
--    void (*free_page_table)(struct page_info *);
+@@ -151,13 +151,6 @@ int __must_check iommu_map(struct domain *d, dfn_t dfn, mfn_t mfn,
+ int __must_check iommu_unmap(struct domain *d, dfn_t dfn,
+                              unsigned int page_order,
+                              unsigned int *flush_flags);
 -
- #ifdef CONFIG_X86
-     int (*enable_x2apic)(void);
-     void (*disable_x2apic)(void);
-@@ -381,9 +379,6 @@ void iommu_dev_iotlb_flush_timeout(struct domain *d, struct pci_dev *pdev);
-  */
- DECLARE_PER_CPU(bool_t, iommu_dont_flush_iotlb);
- 
--extern struct spinlock iommu_pt_cleanup_lock;
--extern struct page_list_head iommu_pt_cleanup_list;
+-int __must_check iommu_legacy_map(struct domain *d, dfn_t dfn, mfn_t mfn,
+-                                  unsigned int page_order,
+-                                  unsigned int flags);
+-int __must_check iommu_legacy_unmap(struct domain *d, dfn_t dfn,
+-                                    unsigned int page_order);
 -
- #endif /* _IOMMU_H_ */
+ int __must_check iommu_iotlb_flush(struct domain *d, dfn_t dfn,
+                                    unsigned int page_count,
+                                    unsigned int flush_flags);
+@@ -364,15 +357,12 @@ void iommu_dev_iotlb_flush_timeout(struct domain *d, struct pci_dev *pdev);
  
  /*
+  * The purpose of the iommu_dont_flush_iotlb optional cpu flag is to
+- * avoid unecessary iotlb_flush in the low level IOMMU code.
+- *
+- * iommu_map_page/iommu_unmap_page must flush the iotlb but somethimes
+- * this operation can be really expensive. This flag will be set by the
+- * caller to notify the low level IOMMU code to avoid the iotlb flushes.
+- * iommu_iotlb_flush/iommu_iotlb_flush_all will be explicitly called by
+- * the caller.
++ * avoid unecessary IOMMU flushing while updating the P2M.
++ * Setting the value to true will cause iommu_iotlb_flush() to return without
++ * actually performing a flush. A batch flush must therefore be done by the
++ * calling code after setting the value back to false.
+  */
+-DECLARE_PER_CPU(bool_t, iommu_dont_flush_iotlb);
++DECLARE_PER_CPU(bool, iommu_dont_flush_iotlb);
+ 
+ #endif /* _IOMMU_H_ */
+ 
 -- 
 2.20.1
 
