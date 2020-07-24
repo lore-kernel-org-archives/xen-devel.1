@@ -2,76 +2,55 @@ Return-Path: <SRS0=9gwS=BD=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 054BFC433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Jul 2020 15:43:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0E0F8C433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Jul 2020 16:01:59 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BDFB1206D8
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Jul 2020 15:43:30 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="XM6kJR2e"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BDFB1206D8
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id D8E972065E
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Jul 2020 16:01:58 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D8E972065E
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jyzqn-0002gz-Ho; Fri, 24 Jul 2020 15:43:09 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=hWcK=BD=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1jyzql-0002gu-Ol
- for xen-devel@lists.xenproject.org; Fri, 24 Jul 2020 15:43:07 +0000
-X-Inumbo-ID: 5e13f498-cdc4-11ea-a419-12813bfff9fa
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 5e13f498-cdc4-11ea-a419-12813bfff9fa;
- Fri, 24 Jul 2020 15:43:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1595605386;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:content-transfer-encoding:in-reply-to;
- bh=jBwu/lC1CRCBJQBBwKMwaiUjwXvhlSWzTbi+7dWIwo4=;
- b=XM6kJR2enGzp1pgMRCDOtNK40/l6HOnJeEFv4kI6sG51f6O9ayaUuVqw
- iepgvL/pbUQr7DR8hcqPeXHpPinptldZRSTMlotyFsN8ooOSEaOJCETes
- F0wUyWVVDUNAjPSjYyQl2ay60qViwGL2HFzFDohPfjWBv/nvaKddeMW1E A=;
-Authentication-Results: esa6.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: zAX6CyxwJaoQzTG4kTZ0fXv6NecS5ad+meuXDFkXswObRqKFbuVydJ1jgPA/0WJp4rpDm/LqlU
- RilXjzxzcwDOiIBxR8RWoKbqNml0NjxFQlvNe1rW770sEvOxL6lgbGGxXiEvK5cWNc4Yyb1xKm
- kxeYh7O6QlHbHFLNU0nRp11clNYI57dtCQTfnhOryt0RiM3Lbs0+7kWPMdlHAOQlN4pjllB27K
- R5X4ABnz0bjoH60PvaCOwjiB7GuIkDlDleCN0szg36rhmgopboYeOHfcJNBr3ssE0sdTynoY1J
- aY8=
-X-SBRS: 2.7
-X-MesageID: 23466067
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.75,391,1589256000"; d="scan'208";a="23466067"
-Date: Fri, 24 Jul 2020 17:42:58 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Julien Grall <julien@xen.org>
+	id 1jz08g-0005FP-Gm; Fri, 24 Jul 2020 16:01:38 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=yKVY=BD=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1jz08f-0005FK-F5
+ for xen-devel@lists.xenproject.org; Fri, 24 Jul 2020 16:01:37 +0000
+X-Inumbo-ID: f3981d4e-cdc6-11ea-883d-bc764e2007e4
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id f3981d4e-cdc6-11ea-883d-bc764e2007e4;
+ Fri, 24 Jul 2020 16:01:36 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 19FB5B128;
+ Fri, 24 Jul 2020 16:01:44 +0000 (UTC)
 Subject: Re: [RFC PATCH v1 1/4] arm/pci: PCI setup and PCI host bridge
  discovery within XEN on ARM.
-Message-ID: <20200724154258.GN7191@Air-de-Roger>
+To: Julien Grall <julien@xen.org>
 References: <cover.1595511416.git.rahul.singh@arm.com>
  <64ebd4ef614b36a5844c52426a4a6a4a23b1f087.1595511416.git.rahul.singh@arm.com>
  <20200724144404.GJ7191@Air-de-Roger>
  <0c53b2cb-47e9-f34e-8922-7095669175be@xen.org>
- <20200724152905.GM7191@Air-de-Roger>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <980fc583-edb6-b536-f211-f6b8ea6d21a7@suse.com>
+Date: Fri, 24 Jul 2020 18:01:37 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
+In-Reply-To: <0c53b2cb-47e9-f34e-8922-7095669175be@xen.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20200724152905.GM7191@Air-de-Roger>
-X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
- AMSPEX02CL02.citrite.net (10.69.22.126)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -82,40 +61,40 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Rahul Singh <rahul.singh@arm.com>, Bertrand.Marquis@arm.com, Stefano
- Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org, nd@arm.com,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Cc: Rahul Singh <rahul.singh@arm.com>, Bertrand.Marquis@arm.com,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org,
+ nd@arm.com, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Fri, Jul 24, 2020 at 05:29:05PM +0200, Roger Pau Monné wrote:
-> On Fri, Jul 24, 2020 at 04:15:47PM +0100, Julien Grall wrote:
-> > 
-> > 
-> > On 24/07/2020 15:44, Roger Pau Monné wrote:
-> > > > +
-> > > > +    if ( acpi_disabled )
-> > > > +        dt_pci_init();
-> > > > +    else
-> > > > +        acpi_pci_init();
-> > > 
-> > > Isn't there an enum or something that tells you whether the system
-> > > description is coming from ACPI or from DT?
-> > > 
-> > > This if .. else seems fragile.
-> > > 
-> > 
-> > This is the common way we do it on Arm.... I would welcome any improvement,
-> > but I don't think this should be part of this work.
+On 24.07.2020 17:15, Julien Grall wrote:
+> On 24/07/2020 15:44, Roger Pau Monné wrote:
+>>> +
+>>> +    struct pci_host_bridge *bridge = pci_find_host_bridge(sbdf.seg, sbdf.bus);
+>>> +
+>>> +    if ( unlikely(!bridge) )
+>>> +    {
+>>> +        printk(XENLOG_ERR "Unable to find bridge for "PRI_pci"\n",
+>>> +                sbdf.seg, sbdf.bus, sbdf.dev, sbdf.fn);
+>>
+>> I had a patch to add a custom modifier to out printf format in
+>> order to handle pci_sbdf_t natively:
+>>
+>> https://patchew.org/Xen/20190822065132.48200-1-roger.pau@citrix.com/
+>>
+>> It missed maintainers Acks and was never committed. Since you are
+>> doing a bunch of work here, and likely adding a lot of SBDF related
+>> prints, feel free to import the modifier (%pp) and use in your code
+>> (do not attempt to switch existing users, or it's likely to get
+>> stuck again).
 > 
-> Ack. In any case I think for ACPI PCI init will get called by
-> acpi_mmcfg_init as part of acpi_boot_init, so I'm not sure there's
-> much point in having something about ACPI added here, as it seems this
-> will be DT only?
+> I forgot about this patch :/. It would be good to revive it. Which acks 
+> are you missing?
 
-Sorry I got confused and acpi_boot_init is a x86 specific function,
-wrong context. If Arm is not using that path then maybe it makes sense
-to init PCI here for ACPI also.
+It wasn't so much missing acks, but a controversy. And that not so much
+about switching existing users, but whether to indeed derive this from
+%p (which I continue to consider inefficient).
 
-Roger.
+Jan
 
