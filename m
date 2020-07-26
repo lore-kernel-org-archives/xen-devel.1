@@ -2,52 +2,69 @@ Return-Path: <SRS0=MTdN=BF=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.7 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 282ECC433E1
-	for <xen-devel@archiver.kernel.org>; Sun, 26 Jul 2020 09:01:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4F11BC433E0
+	for <xen-devel@archiver.kernel.org>; Sun, 26 Jul 2020 10:08:47 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id F3C532065C
-	for <xen-devel@archiver.kernel.org>; Sun, 26 Jul 2020 09:01:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F3C532065C
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 181C5206D8
+	for <xen-devel@archiver.kernel.org>; Sun, 26 Jul 2020 10:08:46 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="GoOWbPtJ"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 181C5206D8
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jzc8i-0001Bf-1s; Sun, 26 Jul 2020 08:36:12 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=00Q8=BF=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jzc8h-0001Ba-A8
- for xen-devel@lists.xenproject.org; Sun, 26 Jul 2020 08:36:11 +0000
-X-Inumbo-ID: 0e6348b0-cf1b-11ea-8a02-bc764e2007e4
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 0e6348b0-cf1b-11ea-8a02-bc764e2007e4;
- Sun, 26 Jul 2020 08:36:10 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 22213B601;
- Sun, 26 Jul 2020 08:36:19 +0000 (UTC)
-Subject: Re: [PATCH 4/6] remove remaining uses of iommu_legacy_map/unmap
-To: Paul Durrant <paul@xen.org>
-References: <20200724164619.1245-1-paul@xen.org>
- <20200724164619.1245-5-paul@xen.org>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <3face98c-7fa7-2baf-2fe8-b5869865203f@suse.com>
-Date: Sun, 26 Jul 2020 10:36:08 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+	id 1jzdZk-0000TL-BS; Sun, 26 Jul 2020 10:08:12 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=s9Qx=BF=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
+ id 1jzdZi-0000TG-Tf
+ for xen-devel@lists.xenproject.org; Sun, 26 Jul 2020 10:08:10 +0000
+X-Inumbo-ID: e6ade39a-cf27-11ea-a662-12813bfff9fa
+Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id e6ade39a-cf27-11ea-a662-12813bfff9fa;
+ Sun, 26 Jul 2020 10:08:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+ Content-Transfer-Encoding:Content-Type:Message-ID:To:Sender:Reply-To:Cc:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=Fex71lD3WIoXQPwtI8bVa4JLDSOOr8KNmZO3Qv7nof0=; b=GoOWbPtJU8gb2W/620RJyedg/
+ ofRnGncp1Czi7BPmDpN/ikhDTwdEbaYWjMhwqkwJDrnqzRrw5bQVpTO182Hbig68hqt1iuGQz/sLB
+ o/s6ULMgKPIbJUWYFEiHRpGKgbxnG270FQ9HFMevtrs3mvfcQrySeSyIpoFWlpKPJPQe8=;
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1jzdZe-0004JC-Hv; Sun, 26 Jul 2020 10:08:06 +0000
+Received: from [172.16.144.3] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1jzdZe-00058p-AY; Sun, 26 Jul 2020 10:08:06 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.89) (envelope-from <osstest-admin@xenproject.org>)
+ id 1jzdZe-0006pg-9s; Sun, 26 Jul 2020 10:08:06 +0000
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-152213-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-In-Reply-To: <20200724164619.1245-5-paul@xen.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Subject: [xen-unstable-coverity test] 152213: all pass - PUSHED
+X-Osstest-Versions-This: xen=0562cbc14cf02b8188b9f1f37f39a4886776ce7c
+X-Osstest-Versions-That: xen=f3885e8c3ceaef101e466466e879e97103ecce18
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Sun, 26 Jul 2020 10:08:06 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,68 +75,49 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Kevin Tian <kevin.tian@intel.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Paul Durrant <pdurrant@amazon.com>, Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>,
- Jun Nakajima <jun.nakajima@intel.com>, xen-devel@lists.xenproject.org,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 24.07.2020 18:46, Paul Durrant wrote:
-> ---
->  xen/arch/x86/mm.c               | 22 +++++++++++++++-----
->  xen/arch/x86/mm/p2m-ept.c       | 22 +++++++++++++-------
->  xen/arch/x86/mm/p2m-pt.c        | 17 +++++++++++----
->  xen/arch/x86/mm/p2m.c           | 28 ++++++++++++++++++-------
->  xen/arch/x86/x86_64/mm.c        | 27 ++++++++++++++++++------
->  xen/common/grant_table.c        | 36 +++++++++++++++++++++++++-------
->  xen/common/memory.c             |  7 +++----
->  xen/drivers/passthrough/iommu.c | 37 +--------------------------------
->  xen/include/xen/iommu.h         | 20 +++++-------------
->  9 files changed, 123 insertions(+), 93 deletions(-)
+flight 152213 xen-unstable-coverity real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/152213/
 
-Overall more code. I wonder whether a map-and-flush function (named
-differently than the current ones) wouldn't still be worthwhile to
-have.
+Perfect :-)
+All tests in this flight passed as required
+version targeted for testing:
+ xen                  0562cbc14cf02b8188b9f1f37f39a4886776ce7c
+baseline version:
+ xen                  f3885e8c3ceaef101e466466e879e97103ecce18
 
-> --- a/xen/common/grant_table.c
-> +++ b/xen/common/grant_table.c
-> @@ -1225,11 +1225,25 @@ map_grant_ref(
->              kind = IOMMUF_readable;
->          else
->              kind = 0;
-> -        if ( kind && iommu_legacy_map(ld, _dfn(mfn_x(mfn)), mfn, 0, kind) )
-> +        if ( kind )
->          {
-> -            double_gt_unlock(lgt, rgt);
-> -            rc = GNTST_general_error;
-> -            goto undo_out;
-> +            dfn_t dfn = _dfn(mfn_x(mfn));
-> +            unsigned int flush_flags = 0;
-> +            int err;
-> +
-> +            err = iommu_map(ld, dfn, mfn, 0, kind, &flush_flags);
-> +            if ( err )
-> +                rc = GNTST_general_error;
-> +
-> +            err = iommu_iotlb_flush(ld, dfn, 1, flush_flags);
-> +            if ( err )
-> +                rc = GNTST_general_error;
-> +
-> +            if ( rc != GNTST_okay )
-> +            {
-> +                double_gt_unlock(lgt, rgt);
-> +                goto undo_out;
-> +            }
->          }
+Last test of basis   152103  2020-07-22 09:24:23 Z    4 days
+Testing same since   152213  2020-07-26 09:18:31 Z    0 days    1 attempts
 
-The mapping needs to happen with at least ld's lock held, yes. But
-is the same true also for the flushing? Can't (not necessarily
-right in this change) the flush be pulled out of the function and
-instead done once per batch that got processed?
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  Jan Beulich <jbeulich@suse.com>
 
-Jan
+jobs:
+ coverity-amd64                                               pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/xen.git
+   f3885e8c3c..0562cbc14c  0562cbc14cf02b8188b9f1f37f39a4886776ce7c -> coverity-tested/smoke
 
