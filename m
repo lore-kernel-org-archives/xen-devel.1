@@ -2,75 +2,81 @@ Return-Path: <SRS0=5MCE=BG=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_ADSP_CUSTOM_MED,
-	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
+	DKIM_ADSP_CUSTOM_MED,DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=unavailable
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 66660C433E3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B30AC433E8
 	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2020 13:27:10 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 341BE2070A
+	by mail.kernel.org (Postfix) with ESMTPS id 4EC982074F
 	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2020 13:27:10 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Fjpay9uk"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 341BE2070A
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="lay2kK3C"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4EC982074F
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k039M-0001Vg-FU; Mon, 27 Jul 2020 13:26:40 +0000
+	id 1k039X-0001WL-1c; Mon, 27 Jul 2020 13:26:51 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=KGXS=BG=gmail.com=rosbrookn@srs-us1.protection.inumbo.net>)
- id 1k039L-0001Vb-IK
- for xen-devel@lists.xenproject.org; Mon, 27 Jul 2020 13:26:39 +0000
-X-Inumbo-ID: cd299500-d00c-11ea-8abe-bc764e2007e4
-Received: from mail-qk1-x742.google.com (unknown [2607:f8b0:4864:20::742])
+ id 1k039V-0001Vb-E5
+ for xen-devel@lists.xenproject.org; Mon, 27 Jul 2020 13:26:49 +0000
+X-Inumbo-ID: cf386830-d00c-11ea-8abe-bc764e2007e4
+Received: from mail-qk1-x736.google.com (unknown [2607:f8b0:4864:20::736])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id cd299500-d00c-11ea-8abe-bc764e2007e4;
- Mon, 27 Jul 2020 13:26:38 +0000 (UTC)
-Received: by mail-qk1-x742.google.com with SMTP id e13so15155744qkg.5
- for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2020 06:26:38 -0700 (PDT)
+ id cf386830-d00c-11ea-8abe-bc764e2007e4;
+ Mon, 27 Jul 2020 13:26:42 +0000 (UTC)
+Received: by mail-qk1-x736.google.com with SMTP id l6so15157261qkc.6
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2020 06:26:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id;
- bh=Kx49vDFEnCjpI9bgQaIAKZwKthm3TcnrdPiQQLY4D+g=;
- b=Fjpay9uk88OzlbDiI4XZj29nQRdpswTCUxSE5QdvPFokrh9SFKNDQMiK6u+vyo9wdQ
- swXZx57LaMMCFUyHaoIXSNvXfUyOA5c85IixL7WdwtZg6h+Z6Z2nxHe4/iokGGMriV5+
- spt+rRmwVhWD8wTYJHxSveQcCE+uWEn5WXG1Tzp63lZAS3oUIFT7tMdgKMLNABgUt0kZ
- Sr0gJdffacM8dR7FA43XVFF6YlzFsoQ3LHLifWEChq6mMMiqXsRk78tvN0ShZbuX14wU
- N+E9KT3WeYN+d2UAm9EW395tn6hkZWEDUMMfHN532cTnh0eXEw2sxLPXUJyxcE0jIBAn
- XVsg==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :in-reply-to:references;
+ bh=CV8gyjU9PwIWw8K/PGrpSXQm3oWpb9KSiaV2uQ4454U=;
+ b=lay2kK3CCt51wkbTIp8LTo2lZhzDQnuSNFU+0RWOUNzK9LMgcSIkudUrTf9IAiY1GA
+ fM9vgNgJkZRjrBny0DX0qd/5qTR2n9PkCKhfmzcBXazOhD12PgaaH4vzE/WYn2dWIGHf
+ PFB3TsoOP5ItV+VnAZdkmyXToxDIHYFgdGZOQaSHWlyXNkyg+IPjqJbg1JrL6MC1qA+o
+ vUEsEkGE2QX1o6s2XCuCNL3tRCABo8VQmN92QcqZwYjpM3Jn6WzYZTYrXpCuAS+Dhg5G
+ ZWjwfdYxKZHXD9hQukmZTvdQyOWf7HzFNcc26yEN0c+5ozfQcc2Vrloo9WXSYz3G0CEG
+ ztLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id;
- bh=Kx49vDFEnCjpI9bgQaIAKZwKthm3TcnrdPiQQLY4D+g=;
- b=Nx3p+rfgv0Yb51sx6kPO5Uo2XTUKPr5zk5DLx7MkAMWuil6xS/4jX1sktKj71iQFIF
- 6tRF3NjH0S/+f0onf4w59TTR5TkEzuvWksaI9xdg3cUv0pjOqStspPVeDSglwv/Q3V8R
- KxDw81NQV3cgticUyEmZ4Wf6E9z2a0p9RCVSrLYxAHJnkCea+TXOAVUtMivGZoGUTAr7
- z/q+5r1zwSZPr7aAmrsIvr5+ubsV2/b+BTEEdAPrZKZ5yvmCl96WjKF8/8PmVF4J2p3l
- ptS5m50ZDMM84NLgru9o0f+EGN19QwzRL2eYltXr2Ab6HcIBoavdCpVS+D3zID+1uz+R
- nepw==
-X-Gm-Message-State: AOAM533hcZrMlp/8JAls0x1IqHZLXV8Dez3A0I5+6XUOBRrENnaWszhx
- 90Ry3hY30NoynYDDDjQzNQuV5Xo05OY=
-X-Google-Smtp-Source: ABdhPJxGoSMrCEdz6hfZkFVRol1BJDahKxEfx9VpH4C9sQeIhlzkV19UDfnTzYgRfFKQbtFZt3/n9Q==
-X-Received: by 2002:a37:5bc3:: with SMTP id
- p186mr23556116qkb.401.1595856397970; 
- Mon, 27 Jul 2020 06:26:37 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:in-reply-to:references;
+ bh=CV8gyjU9PwIWw8K/PGrpSXQm3oWpb9KSiaV2uQ4454U=;
+ b=lE3xe9zvjYEXFEgF6iYmbaL68UoRbgUmA9tB50YS5OrVwCNDezBu4nHN4cfK4U0ANQ
+ hBgcdEeJlXt4emztcdL5NopXprtgpA6ol42EpB6TFofksX7YcSwmXfaF4WhSnp8PCxC0
+ AS8HGn6Z5Em6RplgWcPb4g/zaUWIEbf0UAknQeUBoxWoSYhTTj3sYTsBOo9pw/4OlArN
+ t/zsplJNSo4ZRu4O2eLDspnrLa0KKOOy/UMyGL/iMNplXCjetq4seKYkHfqCNRzJFtCR
+ OyJKJ5eZLIqRHkZBAiC6nq2KWE0XJ7Hg6Peu554G0w1QGRzBSJKQRfsM8NOjrheCqx9I
+ dPUg==
+X-Gm-Message-State: AOAM530ebiFQYTrPV5PHbph8c0/rh5kiQ2dKJ+FwnDR6eViXEnw1D/6m
+ UWHGnnH5cfm1BJyyBYGZqPrWA8P/n6Q=
+X-Google-Smtp-Source: ABdhPJwHEgYH4RxJ65dlOvT3skSegMWUJKq1BEmSOXGP8QWPnZMs5dxi3yTrOWud3p4+upZklo4niA==
+X-Received: by 2002:a37:a503:: with SMTP id o3mr22160178qke.162.1595856401512; 
+ Mon, 27 Jul 2020 06:26:41 -0700 (PDT)
 Received: from six.lan (cpe-67-241-56-252.twcny.res.rr.com. [67.241.56.252])
- by smtp.gmail.com with ESMTPSA id t8sm11828003qtc.50.2020.07.27.06.26.35
+ by smtp.gmail.com with ESMTPSA id t8sm11828003qtc.50.2020.07.27.06.26.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Jul 2020 06:26:36 -0700 (PDT)
+ Mon, 27 Jul 2020 06:26:40 -0700 (PDT)
 From: Nick Rosbrook <rosbrookn@gmail.com>
 X-Google-Original-From: Nick Rosbrook <rosbrookn@ainfosec.com>
 To: xen-devel@lists.xenproject.org
-Subject: [RFC PATCH 0/2] add function support to IDL
-Date: Mon, 27 Jul 2020 09:26:31 -0400
-Message-Id: <cover.1595854292.git.rosbrookn@ainfosec.com>
+Subject: [RFC PATCH 2/2] libxl: prototype libxl_device_nic_add/remove with IDL
+Date: Mon, 27 Jul 2020 09:26:33 -0400
+Message-Id: <b7313e96b6865bb13b221720a437c6e2ac57140c.1595854292.git.rosbrookn@ainfosec.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <cover.1595854292.git.rosbrookn@ainfosec.com>
+References: <cover.1595854292.git.rosbrookn@ainfosec.com>
+In-Reply-To: <cover.1595854292.git.rosbrookn@ainfosec.com>
+References: <cover.1595854292.git.rosbrookn@ainfosec.com>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -88,29 +94,54 @@ Cc: Nick Rosbrook <rosbrookn@ainfosec.com>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-At a Xen Summit design session for the golang bindings (see [1]), we
-agreed that it would be beneficial to expand the libxl IDL with function
-support. In addition to benefiting libxl itself, this would allow other
-language bindings to easily generate function wrappers.
+Add a DeviceFunction class and describe prototypes for
+libxl_device_nic_add/remove in libxl_types.idl.
 
-These RFC patches outline a potential strategy for accomplishing this
-goal. The first patch adds the Function and CtxFunction classes to
-libxl/idl.py, introducing the idea of functions to the IDL. The second
-patch adds a DeviceFunction class and adds some sample definitions to
-libxl/libxl_types.idl for example purposes.
+Signed-off-by: Nick Rosbrook <rosbrookn@ainfosec.com>
+--
+This is mostly to serve as an example of how the first patch would be
+used for function support in the IDL.
+---
+ tools/libxl/idl.py          | 8 ++++++++
+ tools/libxl/libxl_types.idl | 6 ++++++
+ 2 files changed, 14 insertions(+)
 
-[1] https://lists.xenproject.org/archives/html/xen-devel/2020-07/msg00964.html
-
-Nick Rosbrook (2):
-  libxl: add Function class to IDL
-  libxl: prototype libxl_device_nic_add/remove with IDL
-
- tools/golang/xenlight/gengotypes.py |  2 +-
- tools/libxl/gentypes.py             |  2 +-
- tools/libxl/idl.py                  | 54 ++++++++++++++++++++++++++++-
- tools/libxl/libxl_types.idl         |  6 ++++
- 4 files changed, 61 insertions(+), 3 deletions(-)
-
+diff --git a/tools/libxl/idl.py b/tools/libxl/idl.py
+index 1839871f86..15085af8c7 100644
+--- a/tools/libxl/idl.py
++++ b/tools/libxl/idl.py
+@@ -386,6 +386,14 @@ class CtxFunction(Function):
+ 
+         Function.__init__(self, name, params, return_type, return_is_status)
+ 
++class DeviceFunction(CtxFunction):
++    """ A function that modifies a device. """
++    def __init__(self, name=None, device_param=None):
++        params = [ ("domid", uint32), device_param ]
++
++        CtxFunction.__init__(self, name=name, params=params, return_type=integer,
++                             return_is_status=True, is_asyncop=True)
++
+ def parse(f):
+     print("Parsing %s" % f, file=sys.stderr)
+ 
+diff --git a/tools/libxl/libxl_types.idl b/tools/libxl/libxl_types.idl
+index 9d3f05f399..22ba93ee4b 100644
+--- a/tools/libxl/libxl_types.idl
++++ b/tools/libxl/libxl_types.idl
+@@ -769,6 +769,12 @@ libxl_device_nic = Struct("device_nic", [
+     ("colo_checkpoint_port", string)
+     ])
+ 
++libxl_device_nic_add = DeviceFunction("device_nic_add",
++    ("nic", libxl_device_nic))
++
++libxl_device_nic_remove = DeviceFunction("device_nic_remove",
++    ("nic", libxl_device_nic))
++
+ libxl_device_pci = Struct("device_pci", [
+     ("func",      uint8),
+     ("dev",       uint8),
 -- 
 2.17.1
 
