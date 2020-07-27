@@ -2,78 +2,66 @@ Return-Path: <SRS0=5MCE=BG=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.1 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=unavailable
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CB064C433FB
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2020 14:36:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E9E84C43445
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2020 14:40:05 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 863CE208E4
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2020 14:36:32 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id BA8A120719
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2020 14:40:05 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=elium.com header.i=@elium.com header.b="kT72GXLm"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 863CE208E4
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=elium.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="WonXnoIW"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BA8A120719
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k04EU-0000VE-3y; Mon, 27 Jul 2020 14:36:02 +0000
+	id 1k04IC-0000e4-MU; Mon, 27 Jul 2020 14:39:52 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=iIX7=BG=whatever-company.com=a.perdaens@srs-us1.protection.inumbo.net>)
- id 1k04ET-0000V5-4Y
- for xen-devel@lists.xenproject.org; Mon, 27 Jul 2020 14:36:01 +0000
-X-Inumbo-ID: 7d144f24-d016-11ea-8ac7-bc764e2007e4
-Received: from mail-wr1-x433.google.com (unknown [2a00:1450:4864:20::433])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=wM/5=BG=xen.org=hx242@srs-us1.protection.inumbo.net>)
+ id 1k04IB-0000dt-9p
+ for xen-devel@lists.xenproject.org; Mon, 27 Jul 2020 14:39:51 +0000
+X-Inumbo-ID: 06c97230-d017-11ea-8ac7-bc764e2007e4
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 7d144f24-d016-11ea-8ac7-bc764e2007e4;
- Mon, 27 Jul 2020 14:36:00 +0000 (UTC)
-Received: by mail-wr1-x433.google.com with SMTP id l2so4577579wrc.7
- for <xen-devel@lists.xenproject.org>; Mon, 27 Jul 2020 07:35:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=elium.com; s=google;
- h=from:content-transfer-encoding:mime-version:subject:message-id:date
- :to; bh=w3mAClGwbtL4eYyuh3YjOyz5SaSi3M232OPbxlO7Kvg=;
- b=kT72GXLm2QqoL/vDo+BLIyBKHBSxH1/IxHn9AYUELKo9gaNGI73Xyxavmlk+lz8K8P
- W667GDaOvzg3Qs5qc7JOnGWhqzETUk3J1fUcFEoAFAUJehbKLNDfxnlOjAcZduqMqriu
- vjAQCeB1sQi2VJMRiWGQyt2Hp6qBzFvMI6hPhXqGSCKe8OU1R9uzrbat71uTlfpDc4BR
- RxrSEF+fHps0mMA0rK3PvwVLzqrkox8gqtlWfkqn/MHbSEzB8aDwEbj397tHNyr2OZbP
- ehcpum0fA4GEYnrWGICcD6vs25ChDjP10ZlEaxG2XNSc7p/4LdL3bxA13YUmdeTQm2TM
- swgw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:content-transfer-encoding:mime-version
- :subject:message-id:date:to;
- bh=w3mAClGwbtL4eYyuh3YjOyz5SaSi3M232OPbxlO7Kvg=;
- b=smqvysUWr7cYz3oq0GOhxjNi4/nyNvFfdZyfosejGeDM44y7Zh7j4gkaajWU/+RFyx
- VgPF75D5wgOfQv5sYCfvBFheirhIiW1bpr9uW9O5+UzlHSliQy1pJ4h4O0f1KPXCf7dA
- i8qzZ5UXh/IgI1/7fds6Y4XP4KMf/8etz7rMp8xVWzLckJF3LVXD72ai3UOmbQfBePel
- yMlHtk37vXtaZx/d2malL7he0prNk14HoaHluKrdvAgkeGGFUyqV2r50EBZtT9TBFf36
- k1FOxFqkrFf6FVnxpk/Vq6vGoIoQpG8PI603XHC9ylimlWwUeTtffJUI6oqjQiITIbgb
- TmUA==
-X-Gm-Message-State: AOAM533ZrXyAKZq2AbCj9ORwe3dfZn0gzS+yDHAsBRCoXn+CKfxqdOz7
- OMYmbhxU3Lk7fypE4BpCKJNP76E5PoI=
-X-Google-Smtp-Source: ABdhPJxzLq5vJ7Jr1p6TwHVhtJA6qMvI6HL5i6AkAOwIuNEE+vwZA/I8Y7J8RL3SimpZcOyBqWvOfQ==
-X-Received: by 2002:a5d:6990:: with SMTP id g16mr20072972wru.131.1595860558537; 
- Mon, 27 Jul 2020 07:35:58 -0700 (PDT)
-Received: from [10.192.1.211] ([37.19.15.130])
- by smtp.gmail.com with ESMTPSA id f9sm12631505wru.47.2020.07.27.07.35.57
- for <xen-devel@lists.xenproject.org>
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 27 Jul 2020 07:35:58 -0700 (PDT)
-From: Antoine Perdaens <a.perdaens@elium.com>
-Content-Type: text/plain;
-	charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Mime-Version: 1.0 (Mac OS X Mail 13.4 \(3608.80.23.2.2\))
-Subject: qdisk error with rbd
-Message-Id: <81E74684-4758-4647-BCE5-8C881067ABC9@elium.com>
-Date: Mon, 27 Jul 2020 16:35:56 +0200
+ id 06c97230-d017-11ea-8ac7-bc764e2007e4;
+ Mon, 27 Jul 2020 14:39:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
+ Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=0SVN7QjGjE3dnCfA1k5zj/jcGmdnfLnwdJ2VVUqhG5k=; b=WonXnoIWsAqA230psvX0In7bWl
+ uVzIRmyiajs2qXzMAeSNEdQ1atSLNx1KeTWA4BDng/75VqLa26X70uHJi5Q4lg2bAI7T94IdQGQx0
+ 4AxmW14Ua6+sqiJr6c/EDM6OLN/uFEwFC10xYOK41gepNkgHc40jZN6JCKfbMn4sS+t4=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <hx242@xen.org>)
+ id 1k04IA-0001kp-60; Mon, 27 Jul 2020 14:39:50 +0000
+Received: from 54-240-197-233.amazon.com ([54.240.197.233]
+ helo=u1bbd043a57dd5a.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+ (envelope-from <hx242@xen.org>)
+ id 1k041Q-0002w6-OG; Mon, 27 Jul 2020 14:22:33 +0000
+From: Hongyan Xia <hx242@xen.org>
 To: xen-devel@lists.xenproject.org
-X-Mailer: Apple Mail (2.3608.80.23.2.2)
+Subject: [PATCH v8 11/15] x86/smpboot: add exit path for clone_mapping()
+Date: Mon, 27 Jul 2020 15:22:01 +0100
+Message-Id: <c4c7a913319a6c9ae8e9823f8985570dfe7054e8.1595857947.git.hongyxia@amazon.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <cover.1595857947.git.hongyxia@amazon.com>
+References: <cover.1595857947.git.hongyxia@amazon.com>
+In-Reply-To: <cover.1595857947.git.hongyxia@amazon.com>
+References: <cover.1595857947.git.hongyxia@amazon.com>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,28 +72,95 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, jgrall@amazon.com,
+ Wei Liu <wl@xen.org>, Jan Beulich <jbeulich@suse.com>,
+ =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Hello all,
+From: Wei Liu <wei.liu2@citrix.com>
 
-Our current setup is based on Xen 4.11 + Qemu 3.1 with rbd disks, an =
-example of a disk that works : =
-"vdev=3Dxvda1,backendtype=3Dqdisk,target=3Drbd:rbd-pool/disk-02-root:id=3D=
-rbd=E2=80=9D.
+We will soon need to clean up page table mappings in the exit path.
 
-The same setup with Qemu 5.0 gives this error in /var/log/xen/qemu-dm-* =
-: "qemu-system-i386: failed to create 'qdisk' device '51713': failed to =
-create drive: Could not open 'rbd:rbd-pool/disk-02-root:id=3Drbd': No =
-such file or directory=E2=80=9D
+No functional change.
 
+Signed-off-by: Wei Liu <wei.liu2@citrix.com>
+Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
 
-Looking at the source in xen-block.c it looks like the driver is forced =
-to =E2=80=9Cfile=E2=80=9D which wouldn=E2=80=99t work for other type of =
-block devices.
+---
+Changed in v7:
+- edit commit message.
+- begin with rc = 0 and set it to -ENOMEM ahead of if().
+---
+ xen/arch/x86/smpboot.c | 16 +++++++++++-----
+ 1 file changed, 11 insertions(+), 5 deletions(-)
 
-It looks like a regression with the xen-disk introduction.
+diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
+index 5708573c41..05df08f945 100644
+--- a/xen/arch/x86/smpboot.c
++++ b/xen/arch/x86/smpboot.c
+@@ -676,6 +676,7 @@ static int clone_mapping(const void *ptr, root_pgentry_t *rpt)
+     l3_pgentry_t *pl3e;
+     l2_pgentry_t *pl2e;
+     l1_pgentry_t *pl1e;
++    int rc = 0;
+ 
+     /*
+      * Sanity check 'linear'.  We only allow cloning from the Xen virtual
+@@ -716,7 +717,7 @@ static int clone_mapping(const void *ptr, root_pgentry_t *rpt)
+             pl1e = l2e_to_l1e(*pl2e) + l1_table_offset(linear);
+             flags = l1e_get_flags(*pl1e);
+             if ( !(flags & _PAGE_PRESENT) )
+-                return 0;
++                goto out;
+             pfn = l1e_get_pfn(*pl1e);
+         }
+     }
+@@ -724,8 +725,9 @@ static int clone_mapping(const void *ptr, root_pgentry_t *rpt)
+     if ( !(root_get_flags(rpt[root_table_offset(linear)]) & _PAGE_PRESENT) )
+     {
+         pl3e = alloc_xen_pagetable();
++        rc = -ENOMEM;
+         if ( !pl3e )
+-            return -ENOMEM;
++            goto out;
+         clear_page(pl3e);
+         l4e_write(&rpt[root_table_offset(linear)],
+                   l4e_from_paddr(__pa(pl3e), __PAGE_HYPERVISOR));
+@@ -738,8 +740,9 @@ static int clone_mapping(const void *ptr, root_pgentry_t *rpt)
+     if ( !(l3e_get_flags(*pl3e) & _PAGE_PRESENT) )
+     {
+         pl2e = alloc_xen_pagetable();
++        rc = -ENOMEM;
+         if ( !pl2e )
+-            return -ENOMEM;
++            goto out;
+         clear_page(pl2e);
+         l3e_write(pl3e, l3e_from_paddr(__pa(pl2e), __PAGE_HYPERVISOR));
+     }
+@@ -754,8 +757,9 @@ static int clone_mapping(const void *ptr, root_pgentry_t *rpt)
+     if ( !(l2e_get_flags(*pl2e) & _PAGE_PRESENT) )
+     {
+         pl1e = alloc_xen_pagetable();
++        rc = -ENOMEM;
+         if ( !pl1e )
+-            return -ENOMEM;
++            goto out;
+         clear_page(pl1e);
+         l2e_write(pl2e, l2e_from_paddr(__pa(pl1e), __PAGE_HYPERVISOR));
+     }
+@@ -776,7 +780,9 @@ static int clone_mapping(const void *ptr, root_pgentry_t *rpt)
+     else
+         l1e_write(pl1e, l1e_from_pfn(pfn, flags));
+ 
+-    return 0;
++    rc = 0;
++ out:
++    return rc;
+ }
+ 
+ DEFINE_PER_CPU(root_pgentry_t *, root_pgt);
+-- 
+2.16.6
 
-Regards,
-Antoine=
 
