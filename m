@@ -7,59 +7,60 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=unavailable
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 524ABC433EA
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 41C97C433EC
 	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2020 17:06:22 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 241EE2073E
+	by mail.kernel.org (Postfix) with ESMTPS id 16B692064B
 	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2020 17:06:22 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="QN/r0ryM"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 241EE2073E
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="H/6TthRi"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 16B692064B
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k06Zf-0006s7-Rz; Mon, 27 Jul 2020 17:06:03 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1k06ZZ-0006qP-5r; Mon, 27 Jul 2020 17:05:57 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1WzZ=BG=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1k06Ze-0006s0-Vf
- for xen-devel@lists.xenproject.org; Mon, 27 Jul 2020 17:06:03 +0000
-X-Inumbo-ID: 72e92cc6-d02b-11ea-8ad9-bc764e2007e4
+ id 1k06ZX-0006qK-Dz
+ for xen-devel@lists.xenproject.org; Mon, 27 Jul 2020 17:05:55 +0000
+X-Inumbo-ID: 6dc71d84-d02b-11ea-a7b1-12813bfff9fa
 Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 72e92cc6-d02b-11ea-8ad9-bc764e2007e4;
- Mon, 27 Jul 2020 17:06:02 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 6dc71d84-d02b-11ea-a7b1-12813bfff9fa;
+ Mon, 27 Jul 2020 17:05:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1595869562;
+ d=citrix.com; s=securemail; t=1595869553;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=dFV/5IIieWSOyYLpuMea63bzinjrU9UWYgTJ7LkynSg=;
- b=QN/r0ryMllnh41ZJKvznUKbIbis/5iIlLxAEBhsmugf+38kyo0ZAJPbD
- Ivv9H5uc2zmJ3IxCwawAQJ3QD3BMFpf1cL2Yz3KCORa/4DAKhu6bNbbhQ
- XMY6Z6XYyWzDBaArK3wTZwW+WRi3uxeYxG1lOd+vBU59emlFmlwf5rVwU M=;
+ bh=Up0va2PHL+5mIou+IC4Y87q4ak8L8JXy1B8SeD1Qmuo=;
+ b=H/6TthRiqEImLObwWiNtt7rj7iwF8BAlcLZNBs3K0NP5EGL3p3H9RVYb
+ 90yDbpYkf8UpZnuVqWfI/W1NtFth4HM64O1bKYJphkUctRURBK2EaWecv
+ VY3B/lky/VmmXtvdv4HTbTjagTAwge3x8wZEDSId5M79Lg4BiGw+jwKa0 A=;
 Authentication-Results: esa5.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: yX0Ucm7OmM9ftMh86I8MenFv19Jl15favDXMS1gmwiOs726c9E7XWQ6DfS6NhCbf7Yx5kJlvun
- ICR0PpJB8CmlbWKP8a2CS8m4x4dRvg9TZATeU3UTnouR72F0u4sS++/mxdQ+m9xRGC+WuANi63
- ANe5dWZrpj/Ur3UEuG74BTf4G92WneT9hdmOqi4hVFVnKIAeX9V+bbrWXru+MyXroPqGn9HBU0
- 1lKGaH01YRIvIe7PhSUGzPYHchfzMuzPzCmw6J7WYHBbkpEGiJ7vDxc2s9Pk76huPiTWGQypCD
- 35k=
+IronPort-SDR: 3NyJ2mKrVC5cGwM/IZpfLlAZeMKYPgseDdHEdrtodAuhDkLYDbi6eSn0FW/qhovh51HuBK0BGf
+ MTJbaOvYa9NIe1o5Ry3qTfE72NiTRpA9PcEO0SPSm63l52XSGSpEHLIcPg0Ej1BrtcpWy7VHWq
+ wr00foe33T3x+7UtxwGQf9PYmMFHAhb5HI03Aj2xB5FQrzt8uOQjvNS+4UNekypK1gUuOcfVFy
+ rfqCoJmIMWFNU+UH65802BZYo4QvLQqOtCWpfReV/yO/UAHxqmHcV3Rrdo4RaDzx5HskJ7yMTk
+ nQE=
 X-SBRS: 2.7
-X-MesageID: 23469017
+X-MesageID: 23469011
 X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.75,402,1589256000"; d="scan'208";a="23469017"
+X-IronPort-AV: E=Sophos;i="5.75,402,1589256000"; d="scan'208";a="23469011"
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-Subject: [PATCH v2 5/5] x86/hvm: only translate ISA interrupts to GSIs in
- virtual timers
-Date: Mon, 27 Jul 2020 19:05:39 +0200
-Message-ID: <20200727170539.55798-6-roger.pau@citrix.com>
+Subject: [PATCH v2 1/5] x86/hvm: fix vIO-APIC build without
+ IRQ0_SPECIAL_ROUTING
+Date: Mon, 27 Jul 2020 19:05:35 +0200
+Message-ID: <20200727170539.55798-2-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <20200727170539.55798-1-roger.pau@citrix.com>
 References: <20200727170539.55798-1-roger.pau@citrix.com>
@@ -81,41 +82,55 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Only call hvm_isa_irq_to_gsi for ISA interrupts, interrupts
-originating from an IO APIC pin already use a GSI and don't need to be
-translated.
+pit_channel0_enabled needs to be guarded with IRQ0_SPECIAL_ROUTING
+since it's only used when the special handling of ISA IRQ 0 is
+enabled. However such helper being a single line it's better to just
+inline it directly in vioapic_deliver where it's used.
 
-I haven't observed any issues from this, but I think it's better to
-use it correctly.
+No functional change.
 
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes since v1:
- - Delay the setting of gsi a bit.
+ - Remove pit_channel0_enabled altogether.
 ---
- xen/arch/x86/hvm/vpt.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ xen/arch/x86/hvm/vioapic.c | 9 ++-------
+ 1 file changed, 2 insertions(+), 7 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/vpt.c b/xen/arch/x86/hvm/vpt.c
-index 62c87867c5..c68bbd1558 100644
---- a/xen/arch/x86/hvm/vpt.c
-+++ b/xen/arch/x86/hvm/vpt.c
-@@ -86,13 +86,13 @@ static int pt_irq_vector(struct periodic_time *pt, enum hvm_intsrc src)
-         return pt->irq;
+diff --git a/xen/arch/x86/hvm/vioapic.c b/xen/arch/x86/hvm/vioapic.c
+index b87facb0e0..b00037ea87 100644
+--- a/xen/arch/x86/hvm/vioapic.c
++++ b/xen/arch/x86/hvm/vioapic.c
+@@ -391,11 +391,6 @@ static void ioapic_inj_irq(
+     vlapic_set_irq(target, vector, trig_mode);
+ }
  
-     isa_irq = pt->irq;
--    gsi = hvm_isa_irq_to_gsi(isa_irq);
- 
-     if ( src == hvm_intsrc_pic )
-         return (v->domain->arch.hvm.vpic[isa_irq >> 3].irq_base
-                 + (isa_irq & 7));
- 
-     ASSERT(src == hvm_intsrc_lapic);
-+    gsi = pt->source == PTSRC_isa ? hvm_isa_irq_to_gsi(isa_irq) : pt->irq;
-     vector = vioapic_get_vector(v->domain, gsi);
-     if ( vector < 0 )
+-static inline int pit_channel0_enabled(void)
+-{
+-    return pt_active(&current->domain->arch.vpit.pt0);
+-}
+-
+ static void vioapic_deliver(struct hvm_vioapic *vioapic, unsigned int pin)
+ {
+     uint16_t dest = vioapic->redirtbl[pin].fields.dest_id;
+@@ -421,7 +416,7 @@ static void vioapic_deliver(struct hvm_vioapic *vioapic, unsigned int pin)
      {
+ #ifdef IRQ0_SPECIAL_ROUTING
+         /* Force round-robin to pick VCPU 0 */
+-        if ( (irq == hvm_isa_irq_to_gsi(0)) && pit_channel0_enabled() )
++        if ( (irq == hvm_isa_irq_to_gsi(0)) && pt_active(&d->arch.vpit.pt0) )
+         {
+             v = d->vcpu ? d->vcpu[0] : NULL;
+             target = v ? vcpu_vlapic(v) : NULL;
+@@ -446,7 +441,7 @@ static void vioapic_deliver(struct hvm_vioapic *vioapic, unsigned int pin)
+     {
+ #ifdef IRQ0_SPECIAL_ROUTING
+         /* Do not deliver timer interrupts to VCPU != 0 */
+-        if ( (irq == hvm_isa_irq_to_gsi(0)) && pit_channel0_enabled() )
++        if ( (irq == hvm_isa_irq_to_gsi(0)) && pt_active(&d->arch.vpit.pt0) )
+         {
+             if ( (v = d->vcpu ? d->vcpu[0] : NULL) != NULL )
+                 ioapic_inj_irq(vioapic, vcpu_vlapic(v), vector,
 -- 
 2.27.0
 
