@@ -7,60 +7,60 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=unavailable
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 12E01C433EB
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2020 17:06:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 74D73C433ED
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2020 17:06:23 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D188B2073E
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2020 17:06:21 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 3F3562064B
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2020 17:06:23 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="hvHbfeSU"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D188B2073E
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="gRRbpzVU"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3F3562064B
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k06Zc-0006r0-Hu; Mon, 27 Jul 2020 17:06:00 +0000
+	id 1k06Zn-0006uz-Ef; Mon, 27 Jul 2020 17:06:11 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1WzZ=BG=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1k06Zc-0006qK-7U
- for xen-devel@lists.xenproject.org; Mon, 27 Jul 2020 17:06:00 +0000
-X-Inumbo-ID: 6f1647b4-d02b-11ea-a7b1-12813bfff9fa
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ id 1k06Zm-0006qK-89
+ for xen-devel@lists.xenproject.org; Mon, 27 Jul 2020 17:06:10 +0000
+X-Inumbo-ID: 71a883fc-d02b-11ea-a7b1-12813bfff9fa
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 6f1647b4-d02b-11ea-a7b1-12813bfff9fa;
- Mon, 27 Jul 2020 17:05:55 +0000 (UTC)
+ id 71a883fc-d02b-11ea-a7b1-12813bfff9fa;
+ Mon, 27 Jul 2020 17:06:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1595869555;
+ d=citrix.com; s=securemail; t=1595869560;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=9BA2HuY2XfFbO7rOd5htwjlC8tyCla4CvMSRDDan0zM=;
- b=hvHbfeSU5EghLHXL0RE4MfWuUjtKOxBqV8nRz33X9lmu942Mmx3W0MQl
- NXSNgPZoG7VmOzuF64RdN7Q7qTHkngnSu3b1W22L8Z+I9RJ4zNuHVTsCf
- kfx8cpwXaxW0jwegLsYdCQ9jEyLHhSyb0+eRoQtwiRbgVaW0cNNPWVRtZ c=;
-Authentication-Results: esa6.hc3370-68.iphmx.com;
+ bh=+UrtDnq8F4eKIjcjNHn8k54mlLah4ENCqM3HBW0OiIE=;
+ b=gRRbpzVUawqj5TxHdGBpiyB8+CjxxNXjIzboe1SnfvadfwT5M2EsUUwh
+ Kjg1TfG5DXv03E9UiHCLg5gwGE+PuJPipuXRFkvSaDxs/90gC5UqXrK+Z
+ cEQ+E8J8ALjVCfibQqSvUmp39D1ufBhZjR5qnExFxGBL6n75swfD9TgyU s=;
+Authentication-Results: esa4.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: Cn+VFplSK30A9ca43AE3YL9md4WrnPn8Hd8a+AWow0raSKjK6EGyBpPdmEAToQ+UOrkXTHUPwr
- 0xkgbKh5R/r6OQ/Yt/bZtjewBYXoXMkehllRyFl9N4vJKukDB4zyoGt/tzExtPRE/tf7Q8rHGY
- 3YzHsq7bBlo0iHYFpkLbALQbdYVKqCC9hreyMI9J1GIiy93wKQdv+uGJiVpsLw4MNlXozw2oJQ
- PkGLS+mHAkzhteDah9IoEOTqheAA83On1BKqcsuj9MA/yrEcKnHO/rm9UlBHNIGm8MblLga+J4
- sF0=
+IronPort-SDR: 2dtOmp8c2Nwrd+LUQ4J9RPBxhaEZfrC856jhgoQ+7Bw5E1CyN4gbGYR9OyI4x1PcqlfV58Rzqv
+ 3BYXLDz/Ea9OY0JQoggv3zA2atPYZ4/eDbCaHnUWPnMKbItTX+9PXbzrDbNwarHC5a6JGoSYAx
+ ula5+FWpHzijYGbT0T7FlaRq/o37xxIxQfcvkOcVEsVZcjOL/NJW//1i4FwzODJ1sqz9KMRvFz
+ cPShm+jK6lXrdXtwg916Ne5pDATSeQQdQMXceGKkZia2/X8QR2tv6kFoIVuxJnwHwC7GCsXlNQ
+ U/s=
 X-SBRS: 2.7
-X-MesageID: 23610699
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 24144262
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.75,402,1589256000"; d="scan'208";a="23610699"
+X-IronPort-AV: E=Sophos;i="5.75,402,1589256000"; d="scan'208";a="24144262"
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-Subject: [PATCH v2 2/5] x86/hvm: don't force vCPU 0 for IRQ 0 when using fixed
- destination mode
-Date: Mon, 27 Jul 2020 19:05:36 +0200
-Message-ID: <20200727170539.55798-3-roger.pau@citrix.com>
+Subject: [PATCH v2 4/5] x86/vpt: only try to resume timers belonging to
+ enabled devices
+Date: Mon, 27 Jul 2020 19:05:38 +0200
+Message-ID: <20200727170539.55798-5-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <20200727170539.55798-1-roger.pau@citrix.com>
 References: <20200727170539.55798-1-roger.pau@citrix.com>
@@ -82,58 +82,52 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-When the IO APIC pin mapped to the ISA IRQ 0 has been configured to
-use fixed delivery mode do not forcefully route interrupts to vCPU 0,
-as the OS might have setup those interrupts to be injected to a
-different vCPU, and injecting to vCPU 0 can cause the OS to miss such
-interrupts or errors to happen due to unexpected vectors being
-injected on vCPU 0.
+Check whether the emulated device is actually enabled before trying to
+resume the associated timers.
 
-In order to fix remove such handling altogether for fixed destination
-mode pins and just inject them according to the data setup in the
-IO-APIC entry.
+Thankfully all those structures are zeroed at initialization, and
+since the devices are not enabled they are never populated, which
+triggers the pt->vcpu check at the beginning of pt_resume forcing an
+exit from the function.
+
+While there limit the scope of i and make it unsigned.
 
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
- xen/arch/x86/hvm/vioapic.c | 23 ++++-------------------
- 1 file changed, 4 insertions(+), 19 deletions(-)
+ xen/arch/x86/hvm/vpt.c | 17 +++++++++++------
+ 1 file changed, 11 insertions(+), 6 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/vioapic.c b/xen/arch/x86/hvm/vioapic.c
-index b00037ea87..123191db75 100644
---- a/xen/arch/x86/hvm/vioapic.c
-+++ b/xen/arch/x86/hvm/vioapic.c
-@@ -438,26 +438,11 @@ static void vioapic_deliver(struct hvm_vioapic *vioapic, unsigned int pin)
+diff --git a/xen/arch/x86/hvm/vpt.c b/xen/arch/x86/hvm/vpt.c
+index 47f2c2aa64..62c87867c5 100644
+--- a/xen/arch/x86/hvm/vpt.c
++++ b/xen/arch/x86/hvm/vpt.c
+@@ -636,14 +636,19 @@ static void pt_resume(struct periodic_time *pt)
+ 
+ void pt_may_unmask_irq(struct domain *d, struct periodic_time *vlapic_pt)
+ {
+-    int i;
+-
+     if ( d )
+     {
+-        pt_resume(&d->arch.vpit.pt0);
+-        pt_resume(&d->arch.hvm.pl_time->vrtc.pt);
+-        for ( i = 0; i < HPET_TIMER_NUM; i++ )
+-            pt_resume(&d->arch.hvm.pl_time->vhpet.pt[i]);
++        if ( has_vpit(d) )
++            pt_resume(&d->arch.vpit.pt0);
++        if ( has_vrtc(d) )
++            pt_resume(&d->arch.hvm.pl_time->vrtc.pt);
++        if ( has_vhpet(d) )
++        {
++            unsigned int i;
++
++            for ( i = 0; i < HPET_TIMER_NUM; i++ )
++                pt_resume(&d->arch.hvm.pl_time->vhpet.pt[i]);
++        }
      }
  
-     case dest_Fixed:
--    {
--#ifdef IRQ0_SPECIAL_ROUTING
--        /* Do not deliver timer interrupts to VCPU != 0 */
--        if ( (irq == hvm_isa_irq_to_gsi(0)) && pt_active(&d->arch.vpit.pt0) )
--        {
--            if ( (v = d->vcpu ? d->vcpu[0] : NULL) != NULL )
--                ioapic_inj_irq(vioapic, vcpu_vlapic(v), vector,
--                               trig_mode, delivery_mode);
--        }
--        else
--#endif
--        {
--            for_each_vcpu ( d, v )
--                if ( vlapic_match_dest(vcpu_vlapic(v), NULL,
--                                       0, dest, dest_mode) )
--                    ioapic_inj_irq(vioapic, vcpu_vlapic(v), vector,
--                                   trig_mode, delivery_mode);
--        }
-+        for_each_vcpu ( d, v )
-+            if ( vlapic_match_dest(vcpu_vlapic(v), NULL, 0, dest, dest_mode) )
-+                ioapic_inj_irq(vioapic, vcpu_vlapic(v), vector, trig_mode,
-+                               delivery_mode);
-         break;
--    }
- 
-     case dest_NMI:
-     {
+     if ( vlapic_pt )
 -- 
 2.27.0
 
