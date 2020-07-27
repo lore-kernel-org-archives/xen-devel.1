@@ -2,70 +2,70 @@ Return-Path: <SRS0=5MCE=BG=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.3 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_2 autolearn=unavailable
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=unavailable
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B9D3FC433DF
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2020 09:10:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1904CC433EC
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2020 09:15:22 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8580920714
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2020 09:10:13 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id DF1E120656
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2020 09:15:21 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="QB13JIGK"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8580920714
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="IfxfXrJ/"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DF1E120656
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jzz8e-0003Xv-W1; Mon, 27 Jul 2020 09:09:40 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=wM/5=BG=xen.org=hx242@srs-us1.protection.inumbo.net>)
- id 1jzz8d-0003Xq-Lu
- for xen-devel@lists.xenproject.org; Mon, 27 Jul 2020 09:09:39 +0000
-X-Inumbo-ID: e5fa0d86-cfe8-11ea-a776-12813bfff9fa
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id e5fa0d86-cfe8-11ea-a776-12813bfff9fa;
- Mon, 27 Jul 2020 09:09:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:Mime-Version:Content-Type:
- References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=kCuh2KFv5piuBc1L+35MIJLc0EbntaZ4unEdO6wadUs=; b=QB13JIGKx7FKaQH7I1nu7ATXzP
- ftlrz2VnnSn5LBDXWbTzAzcLvyYmNUkCbb3/W4Wcf7LX8GHl3RbgsQWX8aH929sC9bGadWrohIwsV
- QtuV+aC4J47jAcPfIo+orCI6SbXvzAV7i4LDDw9/RPZrsNcm/Ly2s6jEKMCWbXAy+QxM=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <hx242@xen.org>)
- id 1jzz8a-0003B8-Vm; Mon, 27 Jul 2020 09:09:36 +0000
-Received: from 54-240-197-233.amazon.com ([54.240.197.233]
- helo=edge-cache-102.e-fra50.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
- (envelope-from <hx242@xen.org>)
- id 1jzz8a-0001mB-If; Mon, 27 Jul 2020 09:09:36 +0000
-Message-ID: <bbd18a2f7d86d451f529292c627616044955a84c.camel@xen.org>
-Subject: Re: [PATCH v7 03/15] x86/mm: rewrite virt_to_xen_l*e
-From: Hongyan Xia <hx242@xen.org>
-To: Jan Beulich <jbeulich@suse.com>
-Date: Mon, 27 Jul 2020 10:09:33 +0100
-In-Reply-To: <826d5a28-c391-dd30-d588-6f730b454c18@suse.com>
-References: <cover.1590750232.git.hongyxia@amazon.com>
- <fd5d98198d9539b232a570a83e7a24be2407e739.1590750232.git.hongyxia@amazon.com>
- <826d5a28-c391-dd30-d588-6f730b454c18@suse.com>
+	id 1jzzDx-0004OX-Se; Mon, 27 Jul 2020 09:15:09 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=1WzZ=BG=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1jzzDx-0004OD-H3
+ for xen-devel@lists.xenproject.org; Mon, 27 Jul 2020 09:15:09 +0000
+X-Inumbo-ID: a8040e54-cfe9-11ea-8a7e-bc764e2007e4
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id a8040e54-cfe9-11ea-8a7e-bc764e2007e4;
+ Mon, 27 Jul 2020 09:15:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1595841304;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=yXg+mOKMXOlPk9hYGg2gJuPP2ADAccszlFJ6TOt/+Ug=;
+ b=IfxfXrJ/joTh9ku3J7FuyT0KyFAAzt4bHsRv/vFVYYBTRqQSPcbmj/IM
+ v4cpmsGTUy+AKQexRzegb1s3RO+XY+BnQ4REx8EQwJsZKZiwvTtc6QgTX
+ 4086FOVZ5PmNZxHJm4z4pidOJ84alp/+YAVPOAUPXKur+cJu/AUNYBt3k A=;
+Authentication-Results: esa1.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none
+IronPort-SDR: /lonDtJpry0GWq2IuiXzOVqYuyFYZER9q6g6pJnZVdsuhB60qYm8sw5ir81a6lE5JD3VvhAgnZ
+ uuL5JM5gPHap68Oz7Fo4P5sHe+FH6rqD/766TtL7+nfxGgX5SQLd2SdX4TYFz/FTZ0ajYT3Xbt
+ rB6divUhbolOgbljhK0WH+nMFJ5IRNvSU3I9OV+jZvZifd4q2AgNFuE8TTh/foBPfTGMsl9Jqf
+ 0SJi+bG8Sd9zz8aeie0dIrsLOFQmPTiT1b5E8G3k8quqYAfiezZ6DqObqRbQGcB2zt1RJBuw1b
+ Acc=
+X-SBRS: 2.7
+X-MesageID: 23569857
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.75,402,1589256000"; d="scan'208";a="23569857"
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: <linux-kernel@vger.kernel.org>
+Subject: [PATCH v3 1/4] xen/balloon: fix accounting in
+ alloc_xenballooned_pages error path
+Date: Mon, 27 Jul 2020 11:13:39 +0200
+Message-ID: <20200727091342.52325-2-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.27.0
+In-Reply-To: <20200727091342.52325-1-roger.pau@citrix.com>
+References: <20200727091342.52325-1-roger.pau@citrix.com>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
-Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,125 +76,48 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, julien@xen.org,
- Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xenproject.org,
- Roger Pau =?ISO-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+Cc: Juergen Gross <jgross@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, stable@vger.kernel.org,
+ xen-devel@lists.xenproject.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Roger Pau Monne <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Tue, 2020-07-14 at 12:47 +0200, Jan Beulich wrote:
-> On 29.05.2020 13:11, Hongyan Xia wrote:
-> > From: Wei Liu <wei.liu2@citrix.com>
-> > 
-> > Rewrite those functions to use the new APIs. Modify its callers to
-> > unmap
-> > the pointer returned. Since alloc_xen_pagetable_new() is almost
-> > never
-> > useful unless accompanied by page clearing and a mapping, introduce
-> > a
-> > helper alloc_map_clear_xen_pt() for this sequence.
-> > 
-> > Note that the change of virt_to_xen_l1e() also requires
-> > vmap_to_mfn() to
-> > unmap the page, which requires domain_page.h header in vmap.
-> > 
-> > Signed-off-by: Wei Liu <wei.liu2@citrix.com>
-> > Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
-> 
-> Reviewed-by: Jan Beulich <jbeulich@suse.com>
-> with two further small adjustments:
-> 
-> > --- a/xen/arch/x86/mm.c
-> > +++ b/xen/arch/x86/mm.c
-> > @@ -4948,8 +4948,28 @@ void free_xen_pagetable_new(mfn_t mfn)
-> >          free_xenheap_page(mfn_to_virt(mfn_x(mfn)));
-> >  }
-> >  
-> > +void *alloc_map_clear_xen_pt(mfn_t *pmfn)
-> > +{
-> > +    mfn_t mfn = alloc_xen_pagetable_new();
-> > +    void *ret;
-> > +
-> > +    if ( mfn_eq(mfn, INVALID_MFN) )
-> > +        return NULL;
-> > +
-> > +    if ( pmfn )
-> > +        *pmfn = mfn;
-> > +    ret = map_domain_page(mfn);
-> > +    clear_page(ret);
-> > +
-> > +    return ret;
-> > +}
-> > +
-> >  static DEFINE_SPINLOCK(map_pgdir_lock);
-> >  
-> > +/*
-> > + * For virt_to_xen_lXe() functions, they take a virtual address
-> > and return a
-> > + * pointer to Xen's LX entry. Caller needs to unmap the pointer.
-> > + */
-> >  static l3_pgentry_t *virt_to_xen_l3e(unsigned long v)
-> 
-> May I suggest s/virtual/linear/ to at least make the new comment
-> correct?
-> 
-> > --- a/xen/include/asm-x86/page.h
-> > +++ b/xen/include/asm-x86/page.h
-> > @@ -291,7 +291,13 @@ void copy_page_sse2(void *, const void *);
-> >  #define pfn_to_paddr(pfn)   __pfn_to_paddr(pfn)
-> >  #define paddr_to_pfn(pa)    __paddr_to_pfn(pa)
-> >  #define paddr_to_pdx(pa)    pfn_to_pdx(paddr_to_pfn(pa))
-> > -#define
-> > vmap_to_mfn(va)     _mfn(l1e_get_pfn(*virt_to_xen_l1e((unsigned
-> > long)(va))))
-> > +
-> > +#define vmap_to_mfn(va)
-> > ({                                                  \
-> > +        const l1_pgentry_t *pl1e_ = virt_to_xen_l1e((unsigned
-> > long)(va));   \
-> > +        mfn_t mfn_ =
-> > l1e_get_mfn(*pl1e_);                                   \
-> > +        unmap_domain_page(pl1e_);                                 
-> >           \
-> > +        mfn_; })
-> 
-> Just like is already the case in domain_page_map_to_mfn() I think
-> you want to add "BUG_ON(!pl1e)" here to limit the impact of any
-> problem to DoS (rather than a possible privilege escalation).
-> 
-> Or actually, considering the only case where virt_to_xen_l1e()
-> would return NULL, returning INVALID_MFN here would likely be
-> even more robust. There looks to be just a single caller, which
-> would need adjusting to cope with an error coming back. In fact -
-> it already ASSERT()s, despite NULL right now never coming back
-> from vmap_to_page(). I think the loop there would better be
-> 
->     for ( i = 0; i < pages; i++ )
->     {
->         struct page_info *page = vmap_to_page(va + i * PAGE_SIZE);
-> 
->         if ( page )
->             page_list_add(page, &pg_list);
->         else
->             printk_once(...);
->     }
-> 
-> Thoughts?
+target_unpopulated is incremented with nr_pages at the start of the
+function, but the call to free_xenballooned_pages will only subtract
+pgno number of pages, and thus the rest need to be subtracted before
+returning or else accounting will be skewed.
 
-To be honest, I think the current implementation of vmap_to_mfn() is
-just incorrect. There is simply no guarantee that a vmap is mapped with
-small pages, so IMO we just cannot do virt_to_xen_x1e() here. The
-correct way is to have a generic page table walking function which
-walks from the base and can stop at any level, and properly return code
-to indicate level or any error.
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+Reviewed-by: Juergen Gross <jgross@suse.com>
+Cc: stable@vger.kernel.org
+---
+Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Cc: Juergen Gross <jgross@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>
+Cc: xen-devel@lists.xenproject.org
+---
+ drivers/xen/balloon.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-I am inclined to BUG_ON() here, and upstream a proper fix later to
-vmap_to_mfn() as an individual patch.
-
-Am I missing anything here?
-
-Hongyan
+diff --git a/drivers/xen/balloon.c b/drivers/xen/balloon.c
+index 77c57568e5d7..3cb10ed32557 100644
+--- a/drivers/xen/balloon.c
++++ b/drivers/xen/balloon.c
+@@ -630,6 +630,12 @@ int alloc_xenballooned_pages(int nr_pages, struct page **pages)
+  out_undo:
+ 	mutex_unlock(&balloon_mutex);
+ 	free_xenballooned_pages(pgno, pages);
++	/*
++	 * NB: free_xenballooned_pages will only subtract pgno pages, but since
++	 * target_unpopulated is incremented with nr_pages at the start we need
++	 * to remove the remaining ones also, or accounting will be screwed.
++	 */
++	balloon_stats.target_unpopulated -= nr_pages - pgno;
+ 	return ret;
+ }
+ EXPORT_SYMBOL(alloc_xenballooned_pages);
+-- 
+2.27.0
 
 
