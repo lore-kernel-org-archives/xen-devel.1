@@ -2,71 +2,54 @@ Return-Path: <SRS0=5MCE=BG=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.3 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=unavailable
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CFD02C433DF
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2020 14:55:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AC090C433E3
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2020 15:09:30 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 913F4206E7
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2020 14:55:56 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="ci665bOP"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 913F4206E7
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id 7AEFC20672
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2020 15:09:30 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7AEFC20672
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k04XP-0002m2-Ra; Mon, 27 Jul 2020 14:55:35 +0000
+	id 1k04ka-0003sy-EG; Mon, 27 Jul 2020 15:09:12 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=1WzZ=BG=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1k04XP-0002lx-2l
- for xen-devel@lists.xenproject.org; Mon, 27 Jul 2020 14:55:35 +0000
-X-Inumbo-ID: 38b20d64-d019-11ea-a787-12813bfff9fa
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=8heM=BG=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1k04kZ-0003st-C0
+ for xen-devel@lists.xenproject.org; Mon, 27 Jul 2020 15:09:11 +0000
+X-Inumbo-ID: 1f50df88-d01b-11ea-a78b-12813bfff9fa
+Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 38b20d64-d019-11ea-a787-12813bfff9fa;
- Mon, 27 Jul 2020 14:55:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1595861733;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=TSQx4u/NB3+tiEqbPj9WfpMigBdq193jCABaybi7IOc=;
- b=ci665bOPwfWbRFHFlxaWOVs7PbEqF+3fIz9/u0UM+yh8VNzyDrms7Opf
- 4g2oInyhm1NKN/bDyymVRGSZMi756Y6aU0BygAbaCR0KMvf4X7vXS23ED
- 1KsdquJUOade/rLi3KoCHoyzCRJDUNz2Qdp/jZPGaWigrxvisljVrRp0+ E=;
-Authentication-Results: esa6.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: sD/fboHLkvKPD/flZmpPerZr3r9zoVp7Mwe5Y0h5eJWSW5XHrSIaYszpgAu71QsZK6KtzIyGtm
- UxSE2OYt6SR7zgYx+tMaf+ZqwCwCDDtnWKVIcxFi+FMJeWC8s04B/pIQ6oehhKb6fzxLCBOQez
- DT/xnmXYufLK6490aoO81YgyL8A14npC8iEx2h+VWai/huuEnk2gq7nETOAKP3TrFbUTUvZ/Bm
- 2ZucoCdEBQMN/t7RyXhYBtGu+BJ91uFKfYc1IdkWp9YietdSE/zcmccIu1oklFY4CeyUHcU/BF
- bk4=
-X-SBRS: 2.7
-X-MesageID: 23592628
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.75,402,1589256000"; d="scan'208";a="23592628"
-Date: Mon, 27 Jul 2020 16:55:26 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Jan Beulich <jbeulich@suse.com>
-Subject: Re: [PATCH 1/4] x86: replace __ASM_{CL,ST}AC
-Message-ID: <20200727145526.GR7191@Air-de-Roger>
-References: <58b9211a-f6dd-85da-d0bd-c927ac537a5d@suse.com>
- <fc8e042e-fef8-ac38-34d8-16b13e4b0135@suse.com>
+ id 1f50df88-d01b-11ea-a78b-12813bfff9fa;
+ Mon, 27 Jul 2020 15:09:10 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 88571B71A;
+ Mon, 27 Jul 2020 15:09:19 +0000 (UTC)
+Subject: Re: [PATCH v3 4/4] xen: add helpers to allocate unpopulated memory
+To: Roger Pau Monne <roger.pau@citrix.com>, linux-kernel@vger.kernel.org
+References: <20200727091342.52325-1-roger.pau@citrix.com>
+ <20200727091342.52325-5-roger.pau@citrix.com>
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Message-ID: <06e21488-25a6-1c9f-366b-3c2ab63e4632@suse.com>
+Date: Mon, 27 Jul 2020 17:09:07 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-In-Reply-To: <fc8e042e-fef8-ac38-34d8-16b13e4b0135@suse.com>
-X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
- AMSPEX02CL02.citrite.net (10.69.22.126)
+In-Reply-To: <20200727091342.52325-5-roger.pau@citrix.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,55 +60,58 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+ David Airlie <airlied@linux.ie>, Yan Yankovskyi <yyankovskyi@gmail.com>,
+ David Hildenbrand <david@redhat.com>, dri-devel@lists.freedesktop.org,
+ Michal Hocko <mhocko@kernel.org>, linux-mm@kvack.org,
+ Daniel Vetter <daniel@ffwll.ch>, xen-devel@lists.xenproject.org,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Dan Williams <dan.j.williams@intel.com>,
+ Dan Carpenter <dan.carpenter@oracle.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Wed, Jul 15, 2020 at 12:48:14PM +0200, Jan Beulich wrote:
-> Introduce proper assembler macros instead, enabled only when the
-> assembler itself doesn't support the insns. To avoid duplicating the
-> macros for assembly and C files, have them processed into asm-macros.h.
-> This in turn requires adding a multiple inclusion guard when generating
-> that header.
+On 27.07.20 11:13, Roger Pau Monne wrote:
+> To be used in order to create foreign mappings. This is based on the
+> ZONE_DEVICE facility which is used by persistent memory devices in
+> order to create struct pages and kernel virtual mappings for the IOMEM
+> areas of such devices. Note that on kernels without support for
+> ZONE_DEVICE Xen will fallback to use ballooned pages in order to
+> create foreign mappings.
 > 
-> No change to generated code.
+> The newly added helpers use the same parameters as the existing
+> {alloc/free}_xenballooned_pages functions, which allows for in-place
+> replacement of the callers. Once a memory region has been added to be
+> used as scratch mapping space it will no longer be released, and pages
+> returned are kept in a linked list. This allows to have a buffer of
+> pages and prevents resorting to frequent additions and removals of
+> regions.
 > 
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> If enabled (because ZONE_DEVICE is supported) the usage of the new
+> functionality untangles Xen balloon and RAM hotplug from the usage of
+> unpopulated physical memory ranges to map foreign pages, which is the
+> correct thing to do in order to avoid mappings of foreign pages depend
+> on memory hotplug.
 > 
-> --- a/xen/arch/x86/Makefile
-> +++ b/xen/arch/x86/Makefile
-> @@ -235,7 +235,10 @@ $(BASEDIR)/include/asm-x86/asm-macros.h:
->  	echo '#if 0' >$@.new
->  	echo '.if 0' >>$@.new
->  	echo '#endif' >>$@.new
-> +	echo '#ifndef __ASM_MACROS_H__' >>$@.new
-> +	echo '#define __ASM_MACROS_H__' >>$@.new
->  	echo 'asm ( ".include \"$@\"" );' >>$@.new
-> +	echo '#endif /* __ASM_MACROS_H__ */' >>$@.new
->  	echo '#if 0' >>$@.new
->  	echo '.endif' >>$@.new
->  	cat $< >>$@.new
-> --- a/xen/arch/x86/arch.mk
-> +++ b/xen/arch/x86/arch.mk
-> @@ -20,6 +20,7 @@ $(call as-option-add,CFLAGS,CC,"rdrand %
->  $(call as-option-add,CFLAGS,CC,"rdfsbase %rax",-DHAVE_AS_FSGSBASE)
->  $(call as-option-add,CFLAGS,CC,"xsaveopt (%rax)",-DHAVE_AS_XSAVEOPT)
->  $(call as-option-add,CFLAGS,CC,"rdseed %eax",-DHAVE_AS_RDSEED)
-> +$(call as-option-add,CFLAGS,CC,"clac",-DHAVE_AS_CLAC_STAC)
->  $(call as-option-add,CFLAGS,CC,"clwb (%rax)",-DHAVE_AS_CLWB)
->  $(call as-option-add,CFLAGS,CC,".equ \"x\"$$(comma)1",-DHAVE_AS_QUOTED_SYM)
->  $(call as-option-add,CFLAGS,CC,"invpcid (%rax)$$(comma)%rax",-DHAVE_AS_INVPCID)
-> --- a/xen/arch/x86/asm-macros.c
-> +++ b/xen/arch/x86/asm-macros.c
-> @@ -1 +1,2 @@
-> +#include <asm/asm-defns.h>
->  #include <asm/alternative-asm.h>
-> --- /dev/null
-> +++ b/xen/include/asm-x86/asm-defns.h
+> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+> ---
+> I've not added a new memory_type type and just used
+> MEMORY_DEVICE_DEVDAX which seems to be what we want for such memory
+> regions. I'm unsure whether abusing this type is fine, or if I should
+> instead add a specific type, maybe MEMORY_DEVICE_GENERIC? I don't
+> think we should be using a specific Xen type at all.
 
-Maybe this could be asm-insn.h or a different name? I find it
-confusing to have asm-defns.h and an asm_defs.h.
+What about introducing MEMORY_DEVICE_VIRT? The comment for
+MEMORY_DEVICE_DEVDAX doesn't really fit, as there is no character device
+involved.
 
-Thanks, Roger.
+In the end its the memory management maintainers to decide that.
+
+Other than that you can have my
+
+Reviewed-by: Juergen Gross <jgross@suse.com>
+
+
+Juergen
 
