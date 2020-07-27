@@ -2,63 +2,67 @@ Return-Path: <SRS0=5MCE=BG=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=unavailable
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B5958C433F1
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2020 09:15:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9D4AFC433E0
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2020 09:15:30 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 888AC20656
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2020 09:15:22 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 7131A20656
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2020 09:15:30 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="Lyj0XVJN"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 888AC20656
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="KZInzin2"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7131A20656
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jzzDu-0004OI-KT; Mon, 27 Jul 2020 09:15:06 +0000
+	id 1jzzE8-0004TU-TT; Mon, 27 Jul 2020 09:15:20 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1WzZ=BG=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1jzzDs-0004OD-MB
- for xen-devel@lists.xenproject.org; Mon, 27 Jul 2020 09:15:04 +0000
-X-Inumbo-ID: a6aadbf1-cfe9-11ea-8a7e-bc764e2007e4
+ id 1jzzE7-0004OD-HT
+ for xen-devel@lists.xenproject.org; Mon, 27 Jul 2020 09:15:19 +0000
+X-Inumbo-ID: ab0a4cda-cfe9-11ea-8a7e-bc764e2007e4
 Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id a6aadbf1-cfe9-11ea-8a7e-bc764e2007e4;
- Mon, 27 Jul 2020 09:15:02 +0000 (UTC)
+ id ab0a4cda-cfe9-11ea-8a7e-bc764e2007e4;
+ Mon, 27 Jul 2020 09:15:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1595841303;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=XRiTkYPt/VoC9tJRw/kDVebohjydPMQ3t9eNfBCqXdU=;
- b=Lyj0XVJNKWirANFhaUByZk7n57WoEeGBxa6UlNdyGOcWgMuVRMBfQ5ld
- McA5w4ZKZ27A4R8WDvpLqhHExcn/AV0CBdk5C3MAIavwWs5Q1txPHlfUX
- 47rSndytsZtuIALmNOGNUgw+f4PgA49XjTDZ5/LXKOe7TvqlrkDR8NziO Y=;
+ d=citrix.com; s=securemail; t=1595841309;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=Nq9yI9ZapjAU3I2ISQYBx01cREm8iD5IrXb3HWdctu0=;
+ b=KZInzin2gcDJQRvZdUwizW0PAokuwA9G1EfiBgPiA+O49KeLaeSfkJMr
+ f1GNSEvLtMTwrrUrVsUcnLOhOR1fZr6H5SwkForVztBAWQcQ/rljyQO/d
+ Ao6+E4cvtv4YW6j2Xns7IBOVSd5u4r3hr5DvPx21Z+N4q7tfFY29NztrC Y=;
 Authentication-Results: esa3.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: +KtSj5NtdshyL3nTLDYcTIfIGM+JtKqneYpA9XnR9mJ4w6Dz8isYXOKKcOnhJLDLSXBqEv1fu+
- VGNP0SE2q8zhO30K32oMsHQOp5hhNZgELfIOa6tfnys3f8oHgqbDGYwofr/TbczILeDIXfHUgr
- poQ3JWUpCw9BwPfD/E3zFgF8Q+/611RVo0J/BqOLVTTTJF+W3UTMRcEOfKG22Cws4bhIWNmy3J
- JevId2zYkDY2i1+FaHRkeOidBsqqHNX/ZvPjexde2s079X6tbdIdRziNV21pXv8TcP/6O/J26r
- 2U4=
+IronPort-SDR: CaWT5LIbKdSm6bglJh6wY7Rm9pQCl8a6jhy9q8a+NizdhgIBcUgMJIVzAoXIXdLIYwEyNXjysu
+ jSQTvNe1bbYVQi7e3KcyTmEZFi3CsDbUMupe+asAciCVSRx7faRfhMETYPniYTT+tB4f4E/ny3
+ 8Z9NHVXMK/B/ZfpG36jfHVTra6T4EWIxWxLV5SwAHLLEW5I157sJPAJSregsF8/dAdp6FxmzH3
+ k9ZqiAppaKjGEJvBHAgFr+VIUtwQG6LUpdZxvOwrLfYO2QKjsRrmZ1Z54Lp0a4thonvBtWrRo4
+ ohI=
 X-SBRS: 2.7
-X-MesageID: 23233911
+X-MesageID: 23233916
 X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.75,402,1589256000"; d="scan'208";a="23233911"
+X-IronPort-AV: E=Sophos;i="5.75,402,1589256000"; d="scan'208";a="23233916"
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: <linux-kernel@vger.kernel.org>
-Subject: [PATCH v3 0/4] xen/balloon: fixes for memory hotplug
-Date: Mon, 27 Jul 2020 11:13:38 +0200
-Message-ID: <20200727091342.52325-1-roger.pau@citrix.com>
+Subject: [PATCH v3 3/4] Revert "xen/balloon: Fix crash when ballooning on x86
+ 32 bit PAE"
+Date: Mon, 27 Jul 2020 11:13:41 +0200
+Message-ID: <20200727091342.52325-4-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.27.0
+In-Reply-To: <20200727091342.52325-1-roger.pau@citrix.com>
+References: <20200727091342.52325-1-roger.pau@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
@@ -72,42 +76,60 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: xen-devel@lists.xenproject.org, Roger Pau Monne <roger.pau@citrix.com>
+Cc: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Roger Pau Monne <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Hello,
+This reverts commit dfd74a1edfaba5864276a2859190a8d242d18952.
 
-The following series contain some fixes in order to split Xen
-unpopulated memory handling from the ballooning driver if ZONE_DEVICE is
-available, so that physical memory regions used to map foreign pages are
-not tied to memory hotplug.
+This has been fixed by commit dca4436d1cf9e0d237c which added the out
+of bounds check to __add_memory, so that trying to add blocks past
+MAX_PHYSMEM_BITS will fail.
 
-First two patches are bugfixes that IMO should be backported to stable
-branches, third patch is a revert of a workaround applied to the balloon
-driver and last patch introduces an interface based on ZONE_DEVICE in
-order to manage regions to use for foreign mappings.
+Note the check in the Xen balloon driver was bogus anyway, as it
+checked the start address of the resource, but it should instead test
+the end address to assert the whole resource falls below
+MAX_PHYSMEM_BITS.
 
-Thanks, Roger.
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+Reviewed-by: Juergen Gross <jgross@suse.com>
+---
+Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Cc: Juergen Gross <jgross@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>
+Cc: xen-devel@lists.xenproject.org
+---
+ drivers/xen/balloon.c | 14 --------------
+ 1 file changed, 14 deletions(-)
 
-Roger Pau Monne (4):
-  xen/balloon: fix accounting in alloc_xenballooned_pages error path
-  xen/balloon: make the balloon wait interruptible
-  Revert "xen/balloon: Fix crash when ballooning on x86 32 bit PAE"
-  xen: add helpers to allocate unpopulated memory
-
- drivers/gpu/drm/xen/xen_drm_front_gem.c |   9 +-
- drivers/xen/Makefile                    |   1 +
- drivers/xen/balloon.c                   |  30 ++--
- drivers/xen/grant-table.c               |   4 +-
- drivers/xen/privcmd.c                   |   4 +-
- drivers/xen/unpopulated-alloc.c         | 185 ++++++++++++++++++++++++
- drivers/xen/xenbus/xenbus_client.c      |   6 +-
- drivers/xen/xlate_mmu.c                 |   4 +-
- include/xen/xen.h                       |   9 ++
- 9 files changed, 221 insertions(+), 31 deletions(-)
- create mode 100644 drivers/xen/unpopulated-alloc.c
-
+diff --git a/drivers/xen/balloon.c b/drivers/xen/balloon.c
+index 292413b27575..b1d8b028bf80 100644
+--- a/drivers/xen/balloon.c
++++ b/drivers/xen/balloon.c
+@@ -266,20 +266,6 @@ static struct resource *additional_memory_resource(phys_addr_t size)
+ 		return NULL;
+ 	}
+ 
+-#ifdef CONFIG_SPARSEMEM
+-	{
+-		unsigned long limit = 1UL << (MAX_PHYSMEM_BITS - PAGE_SHIFT);
+-		unsigned long pfn = res->start >> PAGE_SHIFT;
+-
+-		if (pfn > limit) {
+-			pr_err("New System RAM resource outside addressable RAM (%lu > %lu)\n",
+-			       pfn, limit);
+-			release_memory_resource(res);
+-			return NULL;
+-		}
+-	}
+-#endif
+-
+ 	return res;
+ }
+ 
 -- 
 2.27.0
 
