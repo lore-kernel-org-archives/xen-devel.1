@@ -2,71 +2,81 @@ Return-Path: <SRS0=5MCE=BG=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=unavailable
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 74D73C433ED
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2020 17:06:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B43CC433E1
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2020 17:44:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3F3562064B
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2020 17:06:23 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id F339C20714
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Jul 2020 17:44:45 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="gRRbpzVU"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3F3562064B
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="JJ+qHXr6"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F339C20714
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k06Zn-0006uz-Ef; Mon, 27 Jul 2020 17:06:11 +0000
+	id 1k07An-0002Ep-Mv; Mon, 27 Jul 2020 17:44:25 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=1WzZ=BG=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1k06Zm-0006qK-89
- for xen-devel@lists.xenproject.org; Mon, 27 Jul 2020 17:06:10 +0000
-X-Inumbo-ID: 71a883fc-d02b-11ea-a7b1-12813bfff9fa
+ <SRS0=qU+V=BG=citrix.com=george.dunlap@srs-us1.protection.inumbo.net>)
+ id 1k07Am-0002Ek-PB
+ for xen-devel@lists.xenproject.org; Mon, 27 Jul 2020 17:44:24 +0000
+X-Inumbo-ID: cea9cd4a-d030-11ea-a7ba-12813bfff9fa
 Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 71a883fc-d02b-11ea-a7b1-12813bfff9fa;
- Mon, 27 Jul 2020 17:06:00 +0000 (UTC)
+ id cea9cd4a-d030-11ea-a7ba-12813bfff9fa;
+ Mon, 27 Jul 2020 17:44:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1595869560;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=+UrtDnq8F4eKIjcjNHn8k54mlLah4ENCqM3HBW0OiIE=;
- b=gRRbpzVUawqj5TxHdGBpiyB8+CjxxNXjIzboe1SnfvadfwT5M2EsUUwh
- Kjg1TfG5DXv03E9UiHCLg5gwGE+PuJPipuXRFkvSaDxs/90gC5UqXrK+Z
- cEQ+E8J8ALjVCfibQqSvUmp39D1ufBhZjR5qnExFxGBL6n75swfD9TgyU s=;
+ d=citrix.com; s=securemail; t=1595871863;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-id:content-transfer-encoding: mime-version;
+ bh=bJ0kaQduqDVF+77W+mBhRVvoJakxF9BxcsDihqyVBuI=;
+ b=JJ+qHXr6RFrUFILq8XLXMk7WOUeR/5vbU8ntWxP53q571gDuRcDsodvH
+ 05L1s3E5uf9xkJQOg3QJXgaQBQcBQ07oKYYvPzv3NokbXhjTUiNb2m4Dc
+ p5UKdGaA+9gwaDeejv3q/4Q2LrvHIMmUiKC/zUXQTEPeHi7TQtX3DhzuD w=;
 Authentication-Results: esa4.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: 2dtOmp8c2Nwrd+LUQ4J9RPBxhaEZfrC856jhgoQ+7Bw5E1CyN4gbGYR9OyI4x1PcqlfV58Rzqv
- 3BYXLDz/Ea9OY0JQoggv3zA2atPYZ4/eDbCaHnUWPnMKbItTX+9PXbzrDbNwarHC5a6JGoSYAx
- ula5+FWpHzijYGbT0T7FlaRq/o37xxIxQfcvkOcVEsVZcjOL/NJW//1i4FwzODJ1sqz9KMRvFz
- cPShm+jK6lXrdXtwg916Ne5pDATSeQQdQMXceGKkZia2/X8QR2tv6kFoIVuxJnwHwC7GCsXlNQ
- U/s=
+IronPort-SDR: sYkvvr2wlyKV7bIgqh3sIKkYlYj28T/iMdh0Q5O7voTAIyZ/K/YtKKy0ZtwZ6k/C5qDJeoTIBv
+ 9ugxTSuyvIgbgmj1gNLHxnEqGVdWRbc6rbYceqbuZQOfXlYY+4p/0zlunruFSRSeh0IZyznV3c
+ pwwNhNPG4n+JEjJWxZHz5fvIoJ3MaciGuefcylx6wgx4H+L+enFJMug73lDBAXM2jjGNNhZqPO
+ u6H+PGdMVu3emFjvr8MjNkxcpG69mnwwU9jWW6qmXwdo4F57frDAkSC4wwGQ81SOj/+CmlUWpM
+ 7rc=
 X-SBRS: 2.7
-X-MesageID: 24144262
+X-MesageID: 24147597
 X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.75,402,1589256000"; d="scan'208";a="24144262"
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: <xen-devel@lists.xenproject.org>
-Subject: [PATCH v2 4/5] x86/vpt: only try to resume timers belonging to
- enabled devices
-Date: Mon, 27 Jul 2020 19:05:38 +0200
-Message-ID: <20200727170539.55798-5-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.27.0
-In-Reply-To: <20200727170539.55798-1-roger.pau@citrix.com>
-References: <20200727170539.55798-1-roger.pau@citrix.com>
+X-IronPort-AV: E=Sophos;i="5.75,403,1589256000"; d="scan'208";a="24147597"
+From: George Dunlap <George.Dunlap@citrix.com>
+To: Ian Jackson <Ian.Jackson@citrix.com>
+Subject: Re: [OSSTEST PATCH 14/14] duration_estimator: Move duration query
+ loop into database
+Thread-Topic: [OSSTEST PATCH 14/14] duration_estimator: Move duration query
+ loop into database
+Thread-Index: AQHWX5IXwUKXL54pjkKddmBXrxrv3qkbmlIA
+Date: Mon, 27 Jul 2020 17:43:54 +0000
+Message-ID: <7A4B6786-4456-44E4-A85D-9CC83B522FBB@citrix.com>
+References: <20200721184205.15232-1-ian.jackson@eu.citrix.com>
+ <20200721184205.15232-15-ian.jackson@eu.citrix.com>
+In-Reply-To: <20200721184205.15232-15-ian.jackson@eu.citrix.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-mailer: Apple Mail (2.3608.80.23.2.2)
+x-ms-exchange-messagesentrepresentingtype: 1
+x-ms-exchange-transport-fromentityheader: Hosted
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <568C883840095F499A78DF2F162C85AA@citrix.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,58 +87,106 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- Jan Beulich <jbeulich@suse.com>, Roger Pau Monne <roger.pau@citrix.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Check whether the emulated device is actually enabled before trying to
-resume the associated timers.
-
-Thankfully all those structures are zeroed at initialization, and
-since the devices are not enabled they are never populated, which
-triggers the pt->vcpu check at the beginning of pt_resume forcing an
-exit from the function.
-
-While there limit the scope of i and make it unsigned.
-
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
----
- xen/arch/x86/hvm/vpt.c | 17 +++++++++++------
- 1 file changed, 11 insertions(+), 6 deletions(-)
-
-diff --git a/xen/arch/x86/hvm/vpt.c b/xen/arch/x86/hvm/vpt.c
-index 47f2c2aa64..62c87867c5 100644
---- a/xen/arch/x86/hvm/vpt.c
-+++ b/xen/arch/x86/hvm/vpt.c
-@@ -636,14 +636,19 @@ static void pt_resume(struct periodic_time *pt)
- 
- void pt_may_unmask_irq(struct domain *d, struct periodic_time *vlapic_pt)
- {
--    int i;
--
-     if ( d )
-     {
--        pt_resume(&d->arch.vpit.pt0);
--        pt_resume(&d->arch.hvm.pl_time->vrtc.pt);
--        for ( i = 0; i < HPET_TIMER_NUM; i++ )
--            pt_resume(&d->arch.hvm.pl_time->vhpet.pt[i]);
-+        if ( has_vpit(d) )
-+            pt_resume(&d->arch.vpit.pt0);
-+        if ( has_vrtc(d) )
-+            pt_resume(&d->arch.hvm.pl_time->vrtc.pt);
-+        if ( has_vhpet(d) )
-+        {
-+            unsigned int i;
-+
-+            for ( i = 0; i < HPET_TIMER_NUM; i++ )
-+                pt_resume(&d->arch.hvm.pl_time->vhpet.pt[i]);
-+        }
-     }
- 
-     if ( vlapic_pt )
--- 
-2.27.0
-
+DQoNCj4gT24gSnVsIDIxLCAyMDIwLCBhdCA3OjQyIFBNLCBJYW4gSmFja3NvbiA8aWFuLmphY2tz
+b25AZXUuY2l0cml4LmNvbT4gd3JvdGU6DQo+IA0KPiBTdHVmZiB0aGUgdHdvIHF1ZXJpZXMgdG9n
+ZXRoZXI6IHdlIHVzZSB0aGUgZmlyc3R5IHF1ZXJ5IGFzIGEgV0lUSA0KPiBjbGF1c2UuICBUaGlz
+IGlzIHNpZ25pZmljYW50bHkgZmFzdGVyLCBwZXJoYXBzIGJlY2F1c2UgdGhlIHF1ZXJ5DQo+IG9w
+dGltaXNlciBkb2VzIGEgYmV0dGVyIGpvYiBidXQgcHJvYmFibHkganVzdCBiZWNhdXNlIGl0IHNh
+dmVzIG9uDQo+IHJvdW5kIHRyaXBzLg0KPiANCj4gTm8gZnVuY3Rpb25hbCBjaGFuZ2UuDQo+IA0K
+PiBQZXJmOiBzdWJqZWN0aXZlbHkgdGhpcyBzZWVtZWQgdG8gaGVscCB3aGVuIHRoZSBjYWNoZSB3
+YXMgY29sZC4gIE5vdyBJDQo+IGhhdmUgYSB3YXJtIGNhY2hlIGFuZCBpdCBkb2Vzbid0IHNlZW0g
+dG8gbWFrZSBtdWNoIGRpZmZlcmVuY2UuDQo+IA0KPiBQZXJmOiBydW50aW1lIG9mIG15IHRlc3Qg
+Y2FzZSBub3cgfjUtN3MuDQo+IA0KPiBFeGFtcGxlIHF1ZXJpZXMgYmVmb3JlIChmcm9tIHRoZSBk
+ZWJ1Z2dpbmcgb3V0cHV0KToNCj4gDQo+IFF1ZXJ5IEEgcGFydCBJOg0KPiANCj4gICAgICAgICAg
+ICBTRUxFQ1QgZi5mbGlnaHQgQVMgZmxpZ2h0LA0KPiAgICAgICAgICAgICAgICAgICBqLmpvYiBB
+UyBqb2IsDQo+ICAgICAgICAgICAgICAgICAgIGYuc3RhcnRlZCBBUyBzdGFydGVkLA0KPiAgICAg
+ICAgICAgICAgICAgICBqLnN0YXR1cyBBUyBzdGF0dXMNCj4gICAgICAgICAgICAgICAgICAgICBG
+Uk9NIGZsaWdodHMgZg0KPiAgICAgICAgICAgICAgICAgICAgIEpPSU4gam9icyBqIFVTSU5HIChm
+bGlnaHQpDQo+ICAgICAgICAgICAgICAgICAgICAgSk9JTiBydW52YXJzIHINCj4gICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIE9OICBmLmZsaWdodD1yLmZsaWdodA0KPiAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICBBTkQgIHIubmFtZT0/DQo+ICAgICAgICAgICAgICAgICAgICBXSEVSRSAg
+ai5qb2I9ci5qb2INCg0KRGlkIHRoZXNlIGxhc3QgdHdvIGdldCBtaXhlZCB1cD8gIE15IGxpbWl0
+ZWQgZXhwZXJpZW5jZSB3LyBKT0lOIE9OIGFuZCBXSEVSRSB3b3VsZCBsZWFkIG1lIHRvIGV4cGVj
+dCB3ZeKAmXJlIGpvaW5pbmcgb24gYGYuZmxpZ2h0PXIuZmxpZ2h0IGFuZCByLmpvYiA9IGouam9i
+YCwgYW5kIGhhdmluZyBgci5uYW1lID0gP2AgYXMgcGFydCBvZiB0aGUgV0hFUkUgY2xhdXNlLiAg
+SSBzZWUgaXTigJlzIHRoZSBzYW1lIGluIHRoZSBjb21iaW5lZCBxdWVyeSBhcyB3ZWxsLg0KDQo+
+ICAgICAgICAgICAgICAgICAgICAgIEFORCAgZi5ibGVzc2luZz0/DQo+ICAgICAgICAgICAgICAg
+ICAgICAgIEFORCAgZi5icmFuY2g9Pw0KPiAgICAgICAgICAgICAgICAgICAgICBBTkQgIGouam9i
+PT8NCj4gICAgICAgICAgICAgICAgICAgICAgQU5EICByLnZhbD0/DQo+ICAgICAgICAgICAgICAg
+ICAgICAgIEFORCAgKGouc3RhdHVzPSdwYXNzJyBPUiBqLnN0YXR1cz0nZmFpbCcNCj4gICAgICAg
+ICAgICAgICAgICAgICAgICAgICBPUiBqLnN0YXR1cz0ndHJ1bmNhdGVkJyEpDQo+ICAgICAgICAg
+ICAgICAgICAgICAgIEFORCAgZi5zdGFydGVkIElTIE5PVCBOVUxMDQo+ICAgICAgICAgICAgICAg
+ICAgICAgIEFORCAgZi5zdGFydGVkID49ID8NCj4gICAgICAgICAgICAgICAgIE9SREVSIEJZIGYu
+c3RhcnRlZCBERVNDDQo+IA0KPiBXaXRoIGJpbmQgdmFyaWFibGVzOg0KPiAgICAgInRlc3QtYW1k
+NjQtaTM4Ni14bC1wdnNoaW0iDQo+ICAgICAiZ3Vlc3Qtc3RhcnQiDQo+IA0KPiBRdWVyeSBCIHBh
+cnQgSToNCj4gDQo+ICAgICAgICAgICAgU0VMRUNUIGYuZmxpZ2h0IEFTIGZsaWdodCwNCj4gICAg
+ICAgICAgICAgICAgICAgcy5qb2IgQVMgam9iLA0KPiAgICAgICAgICAgICAgICAgICBOVUxMIGFz
+IHN0YXJ0ZWQsDQo+ICAgICAgICAgICAgICAgICAgIE5VTEwgYXMgc3RhdHVzLA0KPiAgICAgICAg
+ICAgICAgICAgICBtYXgocy5maW5pc2hlZCkgQVMgbWF4X2ZpbmlzaGVkDQo+ICAgICAgICAgICAg
+ICAgICAgICAgIEZST00gc3RlcHMgcyBKT0lOIGZsaWdodHMgZg0KPiAgICAgICAgICAgICAgICAg
+ICAgICAgIE9OIHMuZmxpZ2h0PWYuZmxpZ2h0DQo+ICAgICAgICAgICAgICAgICAgICAgV0hFUkUg
+cy5qb2I9PyBBTkQgZi5ibGVzc2luZz0/IEFORCBmLmJyYW5jaD0/DQo+ICAgICAgICAgICAgICAg
+ICAgICAgICBBTkQgcy5maW5pc2hlZCBJUyBOT1QgTlVMTA0KPiAgICAgICAgICAgICAgICAgICAg
+ICAgQU5EIGYuc3RhcnRlZCBJUyBOT1QgTlVMTA0KPiAgICAgICAgICAgICAgICAgICAgICAgQU5E
+IGYuc3RhcnRlZCA+PSA/DQo+ICAgICAgICAgICAgICAgICAgICAgR1JPVVAgQlkgZi5mbGlnaHQs
+IHMuam9iDQo+ICAgICAgICAgICAgICAgICAgICAgT1JERVIgQlkgbWF4X2ZpbmlzaGVkIERFU0MN
+Cj4gDQo+IFdpdGggYmluZCB2YXJpYWJsZXM6DQo+ICAgICJ0ZXN0LWFybWhmLWFybWhmLWxpYnZp
+cnQiDQo+ICAgICdyZWFsJw0KPiAgICAieGVuLXVuc3RhYmxlIg0KPiAgICAxNTk0MTQ0NDY5DQo+
+IA0KPiBRdWVyeSBjb21tb24gcGFydCBJSToNCj4gDQo+ICAgICAgICBXSVRIIHRzdGVwcyBBUw0K
+PiAgICAgICAgKA0KPiAgICAgICAgICAgIFNFTEVDVCAqDQo+ICAgICAgICAgICAgICBGUk9NIHN0
+ZXBzDQo+ICAgICAgICAgICAgIFdIRVJFIGZsaWdodD0/IEFORCBqb2I9Pw0KPiAgICAgICAgKQ0K
+PiAgICAgICAgLCB0c3RlcHMyIEFTDQo+ICAgICAgICAoDQo+ICAgICAgICAgICAgU0VMRUNUICoN
+Cj4gICAgICAgICAgICAgIEZST00gdHN0ZXBzDQo+ICAgICAgICAgICAgIFdIRVJFIGZpbmlzaGVk
+IDw9DQo+ICAgICAgICAgICAgICAgICAgICAgKFNFTEVDVCBmaW5pc2hlZA0KPiAgICAgICAgICAg
+ICAgICAgICAgICAgIEZST00gdHN0ZXBzDQo+ICAgICAgICAgICAgICAgICAgICAgICBXSEVSRSB0
+c3RlcHMudGVzdGlkID0gPykNCj4gICAgICAgICkNCj4gICAgICAgIFNFTEVDVCAoDQo+ICAgICAg
+ICAgICAgU0VMRUNUIG1heChmaW5pc2hlZCktbWluKHN0YXJ0ZWQpDQo+ICAgICAgICAgICAgICBG
+Uk9NIHRzdGVwczINCj4gICAgICAgICAgKSAtICgNCj4gICAgICAgICAgICBTRUxFQ1Qgc3VtKGZp
+bmlzaGVkLXN0YXJ0ZWQpDQo+ICAgICAgICAgICAgICBGUk9NIHRzdGVwczINCj4gICAgICAgICAg
+ICAgV0hFUkUgc3RlcCA9ICd0cy1ob3N0cy1hbGxvY2F0ZScNCj4gICAgICAgICAgKQ0KPiAgICAg
+ICAgICAgICAgICBBUyBkdXJhdGlvbg0KDQpFciwgd2FpdCDigJQgeW91IHdlcmUgZG9pbmcgYSBz
+ZXBhcmF0ZSBgZHVyYXRpb25gIHF1ZXJ5IGZvciBlYWNoIHJvdyBvZiB0aGUgcHJldmlvdXMgcXVl
+cnk/ICBZZWFoLCB0aGF0IHNvdW5kcyBsaWtlIGl0IGNvdWxkIGJlIGEgbG90IG9mIHJvdW5kIHRy
+aXBzLiA6LSkNCg0KPiANCj4gV2l0aCBiaW5kIHZhcmlhYmxlcyBmcm9tIHByZXZpb3VzIHF1ZXJ5
+LCBlZzoNCj4gICAgIDE1MjA0NQ0KPiAgICAgInRlc3QtYXJtaGYtYXJtaGYtbGlidmlydCINCj4g
+ICAgICJndWVzdC1zdGFydC4yIg0KPiANCj4gQWZ0ZXI6DQo+IA0KPiBRdWVyeSBBIChjb21iaW5l
+ZCk6DQo+IA0KPiAgICAgICAgICAgIFdJVEggZiBBUyAoDQo+ICAgICAgICAgICAgU0VMRUNUIGYu
+ZmxpZ2h0IEFTIGZsaWdodCwNCj4gICAgICAgICAgICAgICAgICAgai5qb2IgQVMgam9iLA0KPiAg
+ICAgICAgICAgICAgICAgICBmLnN0YXJ0ZWQgQVMgc3RhcnRlZCwNCj4gICAgICAgICAgICAgICAg
+ICAgai5zdGF0dXMgQVMgc3RhdHVzDQo+ICAgICAgICAgICAgICAgICAgICAgRlJPTSBmbGlnaHRz
+IGYNCj4gICAgICAgICAgICAgICAgICAgICBKT0lOIGpvYnMgaiBVU0lORyAoZmxpZ2h0KQ0KPiAg
+ICAgICAgICAgICAgICAgICAgIEpPSU4gcnVudmFycyByDQo+ICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICBPTiAgZi5mbGlnaHQ9ci5mbGlnaHQNCj4gICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgQU5EICByLm5hbWU9Pw0KPiAgICAgICAgICAgICAgICAgICAgV0hFUkUgIGouam9iPXIuam9i
+DQo+ICAgICAgICAgICAgICAgICAgICAgIEFORCAgZi5ibGVzc2luZz0/DQo+ICAgICAgICAgICAg
+ICAgICAgICAgIEFORCAgZi5icmFuY2g9Pw0KPiAgICAgICAgICAgICAgICAgICAgICBBTkQgIGou
+am9iPT8NCj4gICAgICAgICAgICAgICAgICAgICAgQU5EICByLnZhbD0/DQo+ICAgICAgICAgICAg
+ICAgICAgICAgIEFORCAgKGouc3RhdHVzPSdwYXNzJyBPUiBqLnN0YXR1cz0nZmFpbCcNCj4gICAg
+ICAgICAgICAgICAgICAgICAgICAgICBPUiBqLnN0YXR1cz0ndHJ1bmNhdGVkJyEpDQo+ICAgICAg
+ICAgICAgICAgICAgICAgIEFORCAgZi5zdGFydGVkIElTIE5PVCBOVUxMDQo+ICAgICAgICAgICAg
+ICAgICAgICAgIEFORCAgZi5zdGFydGVkID49ID8NCj4gICAgICAgICAgICAgICAgIE9SREVSIEJZ
+IGYuc3RhcnRlZCBERVNDDQo+IA0KPiAgICAgICAgICAgICkNCj4gICAgICAgICAgICBTRUxFQ1Qg
+ZmxpZ2h0LCBtYXhfZmluaXNoZWQsIGpvYiwgc3RhcnRlZCwgc3RhdHVzLA0KPiAgICAgICAgICAg
+ICgNCj4gICAgICAgIFdJVEggdHN0ZXBzIEFTDQo+ICAgICAgICAoDQo+ICAgICAgICAgICAgU0VM
+RUNUICoNCj4gICAgICAgICAgICAgIEZST00gc3RlcHMNCj4gICAgICAgICAgICAgV0hFUkUgZmxp
+Z2h0PWYuZmxpZ2h0IEFORCBqb2I9Zi5qb2INCj4gICAgICAgICkNCj4gICAgICAgICwgdHN0ZXBz
+MiBBUw0KPiAgICAgICAgKA0KPiAgICAgICAgICAgIFNFTEVDVCAqDQo+ICAgICAgICAgICAgICBG
+Uk9NIHRzdGVwcw0KPiAgICAgICAgICAgICBXSEVSRSBmaW5pc2hlZCA8PQ0KPiAgICAgICAgICAg
+ICAgICAgICAgIChTRUxFQ1QgZmluaXNoZWQNCj4gICAgICAgICAgICAgICAgICAgICAgICBGUk9N
+IHRzdGVwcw0KPiAgICAgICAgICAgICAgICAgICAgICAgV0hFUkUgdHN0ZXBzLnRlc3RpZCA9ID8p
+DQo+ICAgICAgICApDQo+ICAgICAgICBTRUxFQ1QgKA0KPiAgICAgICAgICAgIFNFTEVDVCBtYXgo
+ZmluaXNoZWQpLW1pbihzdGFydGVkKQ0KPiAgICAgICAgICAgICAgRlJPTSB0c3RlcHMyDQo+ICAg
+ICAgICAgICkgLSAoDQo+ICAgICAgICAgICAgU0VMRUNUIHN1bShmaW5pc2hlZC1zdGFydGVkKQ0K
+PiAgICAgICAgICAgICAgRlJPTSB0c3RlcHMyDQo+ICAgICAgICAgICAgIFdIRVJFIHN0ZXAgPSAn
+dHMtaG9zdHMtYWxsb2NhdGUnDQo+ICAgICAgICAgICkNCj4gICAgICAgICAgICAgICAgQVMgZHVy
+YXRpb24NCj4gDQo+ICAgICAgICAgICAgKSBGUk9NIGYNCg0KSSBtZWFuLCBpbiBib3RoIHF1ZXJp
+ZXMgKEEgYW5kIEIpLCB0aGUgdHJhbnNmb3JtIHNob3VsZCBiYXNpY2FsbHkgcmVzdWx0IGluIHRo
+ZSBzYW1lIHRoaW5nIGhhcHBlbmluZywgYXMgZmFyIGFzIEkgY2FuIHRlbGwuDQoNCkkgY2FuIHRy
+eSB0byBhbmFseXplIHRoZSBkdXJhdGlvbiBxdWVyeSBhbmQgc2VlIGlmIEkgY2FuIGNvbWUgdXAg
+d2l0aCBhbnkgc3VnZ2VzdGlvbnMsIGJ1dCB0aGF0IHdvdWxkIGJlIGEgZGlmZmVyZW50IHBhdGNo
+IGFueXdheS4NCg0KIC1HZW9yZ2UNCg0K
 
