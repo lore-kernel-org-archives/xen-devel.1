@@ -2,64 +2,68 @@ Return-Path: <SRS0=jQwh=BH=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 84489C433F1
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2020 11:37:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7C7D2C433ED
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2020 11:37:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 585FB2065C
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2020 11:37:59 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 50A382065C
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Jul 2020 11:37:57 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="V6P5/adk"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 585FB2065C
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="L0Mz4JCH"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 50A382065C
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k0NvP-0006D0-U6; Tue, 28 Jul 2020 11:37:39 +0000
+	id 1k0NvV-0006FD-6t; Tue, 28 Jul 2020 11:37:45 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=K5Bo=BH=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1k0NvO-0006Bw-PZ
- for xen-devel@lists.xenproject.org; Tue, 28 Jul 2020 11:37:38 +0000
-X-Inumbo-ID: b98ebc40-d0c6-11ea-a8af-12813bfff9fa
+ id 1k0NvT-0006Bw-Pe
+ for xen-devel@lists.xenproject.org; Tue, 28 Jul 2020 11:37:43 +0000
+X-Inumbo-ID: ba9e3aa2-d0c6-11ea-a8af-12813bfff9fa
 Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id b98ebc40-d0c6-11ea-a8af-12813bfff9fa;
- Tue, 28 Jul 2020 11:37:32 +0000 (UTC)
+ id ba9e3aa2-d0c6-11ea-a8af-12813bfff9fa;
+ Tue, 28 Jul 2020 11:37:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1595936253;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=3No2HcQqm9xHBXNjS9kD8Wz1wiCqHR/Ty8ECtIr5Vtg=;
- b=V6P5/adkx3u7+PqSh8S3wXgaP5TvmvPKjXWo6i135bdDlJuwBzdH90sS
- aZoSuW5Sv0qHJ5ov4yLPbfsk9/1SXwRg20/uy3VVsTNr5ZDu+29mhMMuR
- IcJbGhnj7fqOJcXSpXT6uqatKmvQnOnqnVAk32CJmHEofoyIhxKNbsQ+x o=;
+ d=citrix.com; s=securemail; t=1595936255;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=9OlWrYwwBC2nlui7wolnYoUzIAvQh25bk2h1rFifnms=;
+ b=L0Mz4JCHJQYSLsCUOIiX9d8Rt8Ofd/rtttuupIqrU1rBa5gOkv+x91v8
+ hsrAi7I7tlEBe+zZ8p4K47qvl45IQFvREj4VV1iJ7/YcPDdLtjRkW1uWG
+ cForkMqkSxWe0pBdQN+yvkgg3MEW1+TZ0nRQBcAEeNsYBeOjrwq2Hv8GO w=;
 Authentication-Results: esa3.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: lDNkjIazj4HQryWxseOpakg+d+ncEDdqGsqTiRxwvfZROzNMooGTh9Q5S1oseHkmy1Q6Ysctvo
- u3aAEjJYUM864kQXvyL5E7bxYHNRdDIJjeM7ikIecx4ezxYMtWKEtNVzpIligCKQZ7cTrgkoqW
- VucbE9igE84WEVyZjsGkQoKKKFFDQVNYGVE7h5klzDRWP1lVOZ2zOeepG9bjxPNMaPOub0rQ0M
- g6bQWpF4LviyPqD8T0p58gvYAPE1/wyVuUrtpTI3Sy7UPyCMGYN2MSzs3WtVlzvNWHOtgwsMw+
- 2eY=
+IronPort-SDR: m9XKyherp46SXYwrhXV7kJyXn2sW1WqwI7PhNSStILK1R1a6B7s+lNNAMvY7NJ74rwDWP3UBuv
+ olRkvmTVZG1Jj3Oh2Vrhb+XUWNcZJ+r06st/fSD9kjuShRn45Oci6B+3QBg4JtFCmnPhi5kBYr
+ GFqrFR6o1gKt147gUkmpPn3+xD/NQ2g64DQT09uG1lKFC6EEqZIXBP224VXDMSbEInZ4m1m1Da
+ Tgp3k2gNjrjces4wgCWiDqdZ8fio1q1Dp+WMUG/29LEdv8+sSVBC0v+T2KEeXlqFhqev8N0NwE
+ XnA=
 X-SBRS: 2.7
-X-MesageID: 23330306
+X-MesageID: 23330309
 X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.75,406,1589256000"; d="scan'208";a="23330306"
+X-IronPort-AV: E=Sophos;i="5.75,406,1589256000"; d="scan'208";a="23330309"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-Subject: [PATCH 0/5] Multiple fixes to XENMEM_acquire_resource
-Date: Tue, 28 Jul 2020 12:37:06 +0100
-Message-ID: <20200728113712.22966-1-andrew.cooper3@citrix.com>
+Subject: [PATCH 3/5] xen/memory: Fix compat XENMEM_acquire_resource for size
+ requests
+Date: Tue, 28 Jul 2020 12:37:09 +0100
+Message-ID: <20200728113712.22966-4-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20200728113712.22966-1-andrew.cooper3@citrix.com>
+References: <20200728113712.22966-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
@@ -75,61 +79,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Cc: Hubert Jasudowicz <hubert.jasudowicz@cert.pl>,
  Stefano Stabellini <sstabellini@kernel.org>, Julien
- Grall <julien@xen.org>, Wei Liu <wl@xen.org>, Paul Durrant <paul@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
+ Grall <julien@xen.org>, Wei Liu <wl@xen.org>,
+ Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+ George Dunlap <George.Dunlap@eu.citrix.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Paul Durrant <paul@xen.org>, Jan
+ Beulich <JBeulich@suse.com>,
  =?UTF-8?q?Micha=C5=82=20Leszczy=C5=84ski?= <michal.leszczynski@cert.pl>,
- Jan Beulich <JBeulich@suse.com>, Ian Jackson <Ian.Jackson@citrix.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+ Ian Jackson <ian.jackson@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-I thought this was going to be a very simple small bugfix for Michał's
-Processor Trace series.  Serves me right for expecting it not to be full of
-bear traps...
+Copy the nr_frames from the correct structure, so the caller doesn't
+unconditionally receive 0.
 
-The sole implementation of acquire_resource never asks for size, so its little
-surprise that Xen is broken for compat callers, and returns incorrect
-information for regular callers.
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: George Dunlap <George.Dunlap@eu.citrix.com>
+CC: Ian Jackson <ian.jackson@citrix.com>
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Wei Liu <wl@xen.org>
+CC: Julien Grall <julien@xen.org>
+CC: Paul Durrant <paul@xen.org>
+CC: Michał Leszczyński <michal.leszczynski@cert.pl>
+CC: Hubert Jasudowicz <hubert.jasudowicz@cert.pl>
+---
+ xen/common/compat/memory.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Patches 1-2 are cleanup with no net functional change.  Patches 3-5 are fixes
-to the size side of this interface, and allow userspace to obtain the actual
-size of resources.
-
-I'm still working on fixing the batch mapping support, which has further sharp
-corners, especially for compat callers.
-
-This is sufficenet of a series so far to post for comments.  A branch can be
-obtained from:
-
-  https://xenbits.xen.org/gitweb/?p=people/andrewcoop/xen.git;a=shortlog;h=refs/heads/xen-acquire-size
-
-Andrew Cooper (5):
-  xen/memory: Introduce CONFIG_ARCH_ACQUIRE_RESOURCE
-  xen/gnttab: Rework resource acquisition
-  xen/memory: Fix compat XENMEM_acquire_resource for size requests
-  xen/memory: Fix acquire_resource size semantics
-  tools/foreignmem: Support querying the size of a resource
-
- tools/libs/foreignmemory/Makefile                  |   2 +-
- tools/libs/foreignmemory/core.c                    |  14 +++
- .../libs/foreignmemory/include/xenforeignmemory.h  |  15 +++
- tools/libs/foreignmemory/libxenforeignmemory.map   |   4 +
- tools/libs/foreignmemory/linux.c                   |  35 +++++++
- tools/libs/foreignmemory/private.h                 |  14 +++
- xen/arch/x86/Kconfig                               |   1 +
- xen/arch/x86/mm.c                                  |  20 ++++
- xen/common/Kconfig                                 |   3 +
- xen/common/compat/memory.c                         |   2 +-
- xen/common/grant_table.c                           | 112 ++++++++++++++++-----
- xen/common/memory.c                                |  85 +++++++---------
- xen/include/asm-arm/mm.h                           |   8 --
- xen/include/asm-x86/mm.h                           |   3 +
- xen/include/public/memory.h                        |  16 ++-
- xen/include/xen/grant_table.h                      |  21 ++--
- xen/include/xen/mm.h                               |  15 +++
- 17 files changed, 273 insertions(+), 97 deletions(-)
-
+diff --git a/xen/common/compat/memory.c b/xen/common/compat/memory.c
+index 3851f756c7..ed92e05b08 100644
+--- a/xen/common/compat/memory.c
++++ b/xen/common/compat/memory.c
+@@ -599,7 +599,7 @@ int compat_memory_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) compat)
+                 if ( __copy_field_to_guest(
+                          guest_handle_cast(compat,
+                                            compat_mem_acquire_resource_t),
+-                         &cmp.mar, nr_frames) )
++                         nat.mar, nr_frames) )
+                     return -EFAULT;
+             }
+             else
 -- 
 2.11.0
 
