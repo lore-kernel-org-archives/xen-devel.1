@@ -7,61 +7,61 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2652BC433E0
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2020 14:04:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 73B6DC433E0
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2020 14:29:54 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D950F20829
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2020 14:04:04 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 426B8208A9
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2020 14:29:54 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="ifC2DomT"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D950F20829
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="NkIuc7H3"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 426B8208A9
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k199Z-0003bq-UH; Thu, 30 Jul 2020 14:03:25 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=mqfy=BJ=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1k199Y-0003be-5f
- for xen-devel@lists.xenproject.org; Thu, 30 Jul 2020 14:03:24 +0000
-X-Inumbo-ID: 6c56ba25-d26d-11ea-8d64-bc764e2007e4
-Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 6c56ba25-d26d-11ea-8d64-bc764e2007e4;
- Thu, 30 Jul 2020 14:03:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1596117802;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=4TMVIVMpX1FCyLw1mlF83kaGSqx+wZpyRfgFknW/4SM=;
- b=ifC2DomTsBdWu9wR10c1Q1WE8a/f78S4oyoojQdZBjIT/dVeBMHP2xpL
- lEftT6fnPecJPMbdTcds88MA6B9MQ+DZ/Vkpf5cb+sw+DIJSo7SCAMVqA
- eb3WR8TFn6LN3TewS+vO+c5/3/iIswOfGyV86bJY6AuapUnaLY1MShg1h w=;
-Authentication-Results: esa2.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: tc0tkk4xUGO1z45vHMcikuX5ISOT9Bg2FOwespuxsEmUb5qMMGbkLqm4aGJA0SqSDJocDSjw7s
- xgIACT1pDgKQfDy8Og/2n/nQc0KfYKwbVDd+XCcEHMID/zTHf52IYbAeztd2rd78+PZfQzCsGi
- oGIbAW8ZFNJ68dsiP+JLAmZrhupzjaeE8SmAOrl+kMuyvI3417vS/SDGGiY/Q9+u9XH3v/xSrV
- M2IGcBSFnzi+1odhcnZB1kjD+nq56RUt1+ITYhaLvbaxBVp7igt4NhBBMFkw4VhOKRpXZg01b8
- qX4=
-X-SBRS: 2.7
-X-MesageID: 23557320
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.75,414,1589256000"; d="scan'208";a="23557320"
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: <xen-devel@lists.xenproject.org>
-Subject: [PATCH] x86/vmx: reorder code in vmx_deliver_posted_intr
-Date: Thu, 30 Jul 2020 16:03:09 +0200
-Message-ID: <20200730140309.59916-1-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.28.0
+	id 1k19Yz-0005R6-0h; Thu, 30 Jul 2020 14:29:41 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=B5Vg=BJ=xen.org=paul@srs-us1.protection.inumbo.net>)
+ id 1k19Yx-0005Q0-FI
+ for xen-devel@lists.xenproject.org; Thu, 30 Jul 2020 14:29:39 +0000
+X-Inumbo-ID: 174a6568-d271-11ea-aad0-12813bfff9fa
+Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 174a6568-d271-11ea-aad0-12813bfff9fa;
+ Thu, 30 Jul 2020 14:29:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=OjYigD2p3SvkFolBbmgzZMPONZM8wJufvetu1fVmKFs=; b=NkIuc7H3PZvo7MGh/0RvFlqBl6
+ 4eX+/X6ZsHAecwbN1/dj5MtmcuJc78NKE6KYGXETUGm9BvG99rN/9UeQutdKyMrvjSnv6x2Tk/Db6
+ h5+wChq4/HbVMZTs9JuYgjL8wd3B/RzXN5BvkpFESizoMmZoRxlP9TrfZHpD/6HeqTo4=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <paul@xen.org>)
+ id 1k19Ys-0002OW-Sk; Thu, 30 Jul 2020 14:29:34 +0000
+Received: from host86-143-223-30.range86-143.btcentralplus.com
+ ([86.143.223.30] helo=u2f063a87eabd5f.home)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+ (envelope-from <paul@xen.org>)
+ id 1k19Ys-0005aN-Lx; Thu, 30 Jul 2020 14:29:34 +0000
+From: Paul Durrant <paul@xen.org>
+To: xen-devel@lists.xenproject.org
+Subject: [PATCH v2 05/10] iommu: remove unused iommu_ops method and tasklet
+Date: Thu, 30 Jul 2020 15:29:21 +0100
+Message-Id: <20200730142926.6051-6-paul@xen.org>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20200730142926.6051-1-paul@xen.org>
+References: <20200730142926.6051-1-paul@xen.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -73,103 +73,98 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Kevin Tian <kevin.tian@intel.com>, Jun Nakajima <jun.nakajima@intel.com>,
- Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Jan Beulich <jbeulich@suse.com>, Roger Pau Monne <roger.pau@citrix.com>
+Cc: Paul Durrant <pdurrant@amazon.com>, Jan Beulich <jbeulich@suse.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Remove the unneeded else branch, which allows to reduce the
-indentation of a larger block of code, while making the flow of the
-function more obvious.
+From: Paul Durrant <pdurrant@amazon.com>
 
-No functional change intended.
+The VT-d and AMD IOMMU both use the general x86 IOMMU page table allocator
+and ARM always shares page tables with CPU. Hence there is no need to retain
+the free_page_table() method or the tasklet which invokes it.
 
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+Signed-off-by: Paul Durrant <pdurrant@amazon.com>
 ---
- xen/arch/x86/hvm/vmx/vmx.c | 55 ++++++++++++++++++--------------------
- 1 file changed, 26 insertions(+), 29 deletions(-)
+Cc: Jan Beulich <jbeulich@suse.com>
 
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index eb54aadfba..7773dcae1b 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -2003,6 +2003,8 @@ static void __vmx_deliver_posted_interrupt(struct vcpu *v)
+v2:
+  - New in v2 (split from "add common page-table allocator")
+---
+ xen/drivers/passthrough/iommu.c | 25 -------------------------
+ xen/include/xen/iommu.h         |  2 --
+ 2 files changed, 27 deletions(-)
+
+diff --git a/xen/drivers/passthrough/iommu.c b/xen/drivers/passthrough/iommu.c
+index 2b1db8022c..660dc5deb2 100644
+--- a/xen/drivers/passthrough/iommu.c
++++ b/xen/drivers/passthrough/iommu.c
+@@ -49,10 +49,6 @@ bool_t __read_mostly amd_iommu_perdev_intremap = 1;
  
- static void vmx_deliver_posted_intr(struct vcpu *v, u8 vector)
- {
-+    struct pi_desc old, new, prev;
-+
-     if ( pi_test_and_set_pir(vector, &v->arch.hvm.vmx.pi_desc) )
-         return;
+ DEFINE_PER_CPU(bool_t, iommu_dont_flush_iotlb);
  
-@@ -2014,41 +2016,36 @@ static void vmx_deliver_posted_intr(struct vcpu *v, u8 vector)
-          * VMEntry as it used to be.
-          */
-         pi_set_on(&v->arch.hvm.vmx.pi_desc);
-+        vcpu_kick(v);
-+        return;
-     }
--    else
--    {
--        struct pi_desc old, new, prev;
- 
--        prev.control = v->arch.hvm.vmx.pi_desc.control;
-+    prev.control = v->arch.hvm.vmx.pi_desc.control;
- 
--        do {
--            /*
--             * Currently, we don't support urgent interrupt, all
--             * interrupts are recognized as non-urgent interrupt,
--             * Besides that, if 'ON' is already set, no need to
--             * sent posted-interrupts notification event as well,
--             * according to hardware behavior.
--             */
--            if ( pi_test_sn(&prev) || pi_test_on(&prev) )
--            {
--                vcpu_kick(v);
--                return;
--            }
+-DEFINE_SPINLOCK(iommu_pt_cleanup_lock);
+-PAGE_LIST_HEAD(iommu_pt_cleanup_list);
+-static struct tasklet iommu_pt_cleanup_tasklet;
 -
--            old.control = v->arch.hvm.vmx.pi_desc.control &
--                          ~((1 << POSTED_INTR_ON) | (1 << POSTED_INTR_SN));
--            new.control = v->arch.hvm.vmx.pi_desc.control |
--                          (1 << POSTED_INTR_ON);
-+    do {
-+        /*
-+         * Currently, we don't support urgent interrupt, all
-+         * interrupts are recognized as non-urgent interrupt,
-+         * Besides that, if 'ON' is already set, no need to
-+         * sent posted-interrupts notification event as well,
-+         * according to hardware behavior.
-+         */
-+        if ( pi_test_sn(&prev) || pi_test_on(&prev) )
-+        {
-+            vcpu_kick(v);
-+            return;
-+        }
+ static int __init parse_iommu_param(const char *s)
+ {
+     const char *ss;
+@@ -226,9 +222,6 @@ static void iommu_teardown(struct domain *d)
+     struct domain_iommu *hd = dom_iommu(d);
  
--            prev.control = cmpxchg(&v->arch.hvm.vmx.pi_desc.control,
--                                   old.control, new.control);
--        } while ( prev.control != old.control );
-+        old.control = v->arch.hvm.vmx.pi_desc.control &
-+                      ~((1 << POSTED_INTR_ON) | (1 << POSTED_INTR_SN));
-+        new.control = v->arch.hvm.vmx.pi_desc.control |
-+                      (1 << POSTED_INTR_ON);
- 
--        __vmx_deliver_posted_interrupt(v);
--        return;
--    }
-+        prev.control = cmpxchg(&v->arch.hvm.vmx.pi_desc.control,
-+                               old.control, new.control);
-+    } while ( prev.control != old.control );
- 
--    vcpu_kick(v);
-+    __vmx_deliver_posted_interrupt(v);
+     iommu_vcall(hd->platform_ops, teardown, d);
+-
+-    if ( hd->platform_ops->free_page_table )
+-        tasklet_schedule(&iommu_pt_cleanup_tasklet);
  }
  
- static void vmx_sync_pir_to_irr(struct vcpu *v)
+ void iommu_domain_destroy(struct domain *d)
+@@ -368,23 +361,6 @@ int iommu_lookup_page(struct domain *d, dfn_t dfn, mfn_t *mfn,
+     return iommu_call(hd->platform_ops, lookup_page, d, dfn, mfn, flags);
+ }
+ 
+-static void iommu_free_pagetables(void *unused)
+-{
+-    do {
+-        struct page_info *pg;
+-
+-        spin_lock(&iommu_pt_cleanup_lock);
+-        pg = page_list_remove_head(&iommu_pt_cleanup_list);
+-        spin_unlock(&iommu_pt_cleanup_lock);
+-        if ( !pg )
+-            return;
+-        iommu_vcall(iommu_get_ops(), free_page_table, pg);
+-    } while ( !softirq_pending(smp_processor_id()) );
+-
+-    tasklet_schedule_on_cpu(&iommu_pt_cleanup_tasklet,
+-                            cpumask_cycle(smp_processor_id(), &cpu_online_map));
+-}
+-
+ int iommu_iotlb_flush(struct domain *d, dfn_t dfn, unsigned int page_count,
+                       unsigned int flush_flags)
+ {
+@@ -508,7 +484,6 @@ int __init iommu_setup(void)
+ #ifndef iommu_intremap
+         printk("Interrupt remapping %sabled\n", iommu_intremap ? "en" : "dis");
+ #endif
+-        tasklet_init(&iommu_pt_cleanup_tasklet, iommu_free_pagetables, NULL);
+     }
+ 
+     return rc;
+diff --git a/xen/include/xen/iommu.h b/xen/include/xen/iommu.h
+index 3272874958..1831dc66b0 100644
+--- a/xen/include/xen/iommu.h
++++ b/xen/include/xen/iommu.h
+@@ -263,8 +263,6 @@ struct iommu_ops {
+     int __must_check (*lookup_page)(struct domain *d, dfn_t dfn, mfn_t *mfn,
+                                     unsigned int *flags);
+ 
+-    void (*free_page_table)(struct page_info *);
+-
+ #ifdef CONFIG_X86
+     int (*enable_x2apic)(void);
+     void (*disable_x2apic)(void);
 -- 
-2.28.0
+2.20.1
 
 
