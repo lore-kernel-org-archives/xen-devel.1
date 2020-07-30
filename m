@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C50BC433E0
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2020 17:52:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EE9DEC433E3
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2020 17:52:51 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 457C820809
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2020 17:52:50 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id C68AB20809
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2020 17:52:51 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="dFsiwvxr"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 457C820809
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="RDzByCds"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C68AB20809
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k1CjH-0008AQ-OH; Thu, 30 Jul 2020 17:52:31 +0000
+	id 1k1CjR-0008FV-P6; Thu, 30 Jul 2020 17:52:41 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=IK5u=BJ=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1k1CjF-00089P-WB
- for xen-devel@lists.xenproject.org; Thu, 30 Jul 2020 17:52:30 +0000
-X-Inumbo-ID: 6a6afc82-d28d-11ea-aaff-12813bfff9fa
+ id 1k1CjQ-00089P-07
+ for xen-devel@lists.xenproject.org; Thu, 30 Jul 2020 17:52:40 +0000
+X-Inumbo-ID: 6b914058-d28d-11ea-aaff-12813bfff9fa
 Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 6a6afc82-d28d-11ea-aaff-12813bfff9fa;
- Thu, 30 Jul 2020 17:52:20 +0000 (UTC)
+ id 6b914058-d28d-11ea-aaff-12813bfff9fa;
+ Thu, 30 Jul 2020 17:52:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
  s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
  Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=YMp6yPrLfWKrTtFlQljFXWPvFCrq7jJMWfWyLnEct0g=; b=dFsiwvxroEX580uHUCUg7Aoyyg
- ViSgZYMP4Yd22r4r5I/adNrFQV99Z7R7hPdhrPN3XJi3b1PXMdebgY2LMz54V5M4fZpKqTmAsQ3Fd
- btY1QUvSzlC2TdVqy6APhnbrGt8BP+f095I/dfQzVmeeG+vMOZCS29arIJB06MLpTDkc=;
+ bh=ShgvcGkxdE4OnoXDwV1go3UlHBZgZS/RIoOwLBZvFGA=; b=RDzByCdshJW1Er+0IgfzylPy5n
+ 4CksJB+yJgm3fDSmBtpzBWNIMHaGppj0H2NfFZix3KvYNmR6ZYEPN9zAtvNu6q3X1PCPFIsBiVFYZ
+ lZtf4jomHPAu6PuhOslzMMPbRPMF2aB7iN9AcMIoJ8+4zGUYHyKTEFoy9rQNhYuOZzFQ=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1k1Cj6-00079I-2x; Thu, 30 Jul 2020 17:52:20 +0000
+ id 1k1Cj8-00079Z-5l; Thu, 30 Jul 2020 17:52:22 +0000
 Received: from 54-240-197-227.amazon.com ([54.240.197.227]
  helo=ufe34d9ed68d054.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1k1Cj5-0004nV-PA; Thu, 30 Jul 2020 17:52:20 +0000
+ id 1k1Cj7-0004nV-TG; Thu, 30 Jul 2020 17:52:22 +0000
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH v2 1/7] xen/guest_access: Add emacs magics
-Date: Thu, 30 Jul 2020 18:52:02 +0100
-Message-Id: <20200730175213.30679-3-julien@xen.org>
+Subject: [PATCH v2 2/7] xen/arm: kernel: Re-order the includes
+Date: Thu, 30 Jul 2020 18:52:04 +0100
+Message-Id: <20200730175213.30679-5-julien@xen.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200730175213.30679-1-julien@xen.org>
 References: <20200730175213.30679-1-julien@xen.org>
@@ -71,62 +71,52 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, julien@xen.org,
- Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Julien Grall <jgrall@amazon.com>, Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
- =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Julien Grall <jgrall@amazon.com>, Stefano Stabellini <sstabellini@kernel.org>,
+ julien@xen.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Julien Grall <jgrall@amazon.com>
 
-Add emacs magics for xen/guest_access.h and
-asm-x86/guest_access.h.
+We usually have xen/ includes first and then asm/. They are also ordered
+alphabetically among themselves.
 
 Signed-off-by: Julien Grall <jgrall@amazon.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
-
 ---
-    Changes in v2:
-        - Remove the word "missing"
----
- xen/include/asm-x86/guest_access.h | 8 ++++++++
- xen/include/xen/guest_access.h     | 8 ++++++++
- 2 files changed, 16 insertions(+)
+ xen/arch/arm/kernel.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/xen/include/asm-x86/guest_access.h b/xen/include/asm-x86/guest_access.h
-index 2be3577bd340..3ffde205f6a1 100644
---- a/xen/include/asm-x86/guest_access.h
-+++ b/xen/include/asm-x86/guest_access.h
-@@ -160,3 +160,11 @@
- })
+diff --git a/xen/arch/arm/kernel.c b/xen/arch/arm/kernel.c
+index 8eff0748367d..f95fa392af44 100644
+--- a/xen/arch/arm/kernel.c
++++ b/xen/arch/arm/kernel.c
+@@ -3,20 +3,20 @@
+  *
+  * Copyright (C) 2011 Citrix Systems, Inc.
+  */
++#include <xen/domain_page.h>
+ #include <xen/errno.h>
++#include <xen/gunzip.h>
+ #include <xen/init.h>
+ #include <xen/lib.h>
++#include <xen/libfdt/libfdt.h>
+ #include <xen/mm.h>
+-#include <xen/domain_page.h>
+ #include <xen/sched.h>
+-#include <asm/byteorder.h>
+-#include <asm/setup.h>
+-#include <xen/libfdt/libfdt.h>
+-#include <xen/gunzip.h>
+ #include <xen/vmap.h>
  
- #endif /* __ASM_X86_GUEST_ACCESS_H__ */
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
-diff --git a/xen/include/xen/guest_access.h b/xen/include/xen/guest_access.h
-index 09989df819ce..ef9aaa3efcfe 100644
---- a/xen/include/xen/guest_access.h
-+++ b/xen/include/xen/guest_access.h
-@@ -33,3 +33,11 @@ char *safe_copy_string_from_guest(XEN_GUEST_HANDLE(char) u_buf,
-                                   size_t size, size_t max_size);
++#include <asm/byteorder.h>
+ #include <asm/guest_access.h>
+ #include <asm/kernel.h>
++#include <asm/setup.h>
  
- #endif /* __XEN_GUEST_ACCESS_H__ */
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
+ #define UIMAGE_MAGIC          0x27051956
+ #define UIMAGE_NMLEN          32
 -- 
 2.17.1
 
