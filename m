@@ -2,66 +2,74 @@ Return-Path: <SRS0=aecc=BJ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3FF9CC433DF
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2020 04:10:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E380EC433E0
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2020 04:32:51 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A7DBA22B48
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2020 04:10:06 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id AFF0F2072A
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2020 04:32:51 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=euphon.net header.i=fam@euphon.net header.b="GuHJN0yR"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A7DBA22B48
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=euphon.net
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="HGFsW8mG"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AFF0F2072A
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k0zsz-0001Gn-SP; Thu, 30 Jul 2020 04:09:41 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=4+cv=BI=euphon.net=fam@srs-us1.protection.inumbo.net>)
- id 1k0p1v-0007yt-OX
- for xen-devel@lists.xenproject.org; Wed, 29 Jul 2020 16:34:12 +0000
-X-Inumbo-ID: 51ecf96e-d1b9-11ea-8c97-bc764e2007e4
-Received: from sender2-op-o12.zoho.com.cn (unknown [163.53.93.243])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 51ecf96e-d1b9-11ea-8c97-bc764e2007e4;
- Wed, 29 Jul 2020 16:34:08 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1596040431; cv=none; d=zoho.com.cn; s=zohoarc; 
- b=RAIS9PAY2Jt1iDjYHPgQ/6xupBEovUgXf1YflQUBodAexRxpbpob94u2bKHyOi5rG3H2EiVB7SdGqn7rm2rv3m6b1hrH97egxH428Ju7e9SFuX60Vti6/eee6SPmOt1nQX63m3xviOiTRNbr3Pjo92NuBKDc8ZrcQv5WMu1qXrg=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zoho.com.cn;
- s=zohoarc; 
- t=1596040431; h=Cc:Date:From:Message-ID:Subject:To; 
- bh=qf+v61LzDCqXASCfRuZXnlqCP79J34yOy7yE9dChAZs=; 
- b=NuvtotFev6VztUSwIBAF0o4NuXR+80lBwaIoF0LOTDVzE2roLqxtxXIvgc5deQcare8x0nrMnQSb54gJwtQotsPkczw6V5nviKlZo5kSBqo8L49a6Xx1A5O5k9Ozco7pb1uwFHdxfQf6e8h3VmzExsWmwOYZ5Hknn7yEqJOh+fU=
-ARC-Authentication-Results: i=1; mx.zoho.com.cn;
- dkim=pass  header.i=euphon.net;
- spf=pass  smtp.mailfrom=fam@euphon.net;
- dmarc=pass header.from=<fam@euphon.net> header.from=<fam@euphon.net>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1596040431; 
- s=zoho; d=euphon.net; i=fam@euphon.net;
- h=From:To:Cc:Subject:Date:Message-Id;
- bh=qf+v61LzDCqXASCfRuZXnlqCP79J34yOy7yE9dChAZs=;
- b=GuHJN0yRWD2zqY0FZgjgjyKK639XfbijCxtFeopXgwFNVHYG9qwQgJNPsrtWwRj9
- QxMODejono5nNs+VZgoPKaDT7r/oAMbL0bpJB2swlcCjq6colmkyqS8Z+7b5+sgFpKB
- HdHQFhIi/4D0N/J4pExr3zgunbhnT18EW6nILx8s=
-Received: from localhost (54.239.6.186 [54.239.6.186]) by mx.zoho.com.cn
- with SMTPS id 15960404289281017.0441578230091;
- Thu, 30 Jul 2020 00:33:48 +0800 (CST)
-From: fam@euphon.net
-To: xen-devel@lists.xenproject.org
-Subject: [PATCH] x86/cpuid: Fix APIC bit clearing
-Date: Wed, 29 Jul 2020 17:33:41 +0100
-Message-Id: <20200729163341.5662-1-fam@euphon.net>
-X-Mailer: git-send-email 2.17.1
-X-ZohoCNMailClient: External
-X-Mailman-Approved-At: Thu, 30 Jul 2020 04:09:41 +0000
+	id 1k10Er-0003l4-LQ; Thu, 30 Jul 2020 04:32:17 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=6uMI=BJ=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
+ id 1k10Eq-0003ke-T0
+ for xen-devel@lists.xenproject.org; Thu, 30 Jul 2020 04:32:16 +0000
+X-Inumbo-ID: a2513fdc-d21d-11ea-aa9f-12813bfff9fa
+Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id a2513fdc-d21d-11ea-aa9f-12813bfff9fa;
+ Thu, 30 Jul 2020 04:32:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+ Content-Transfer-Encoding:Content-Type:Message-ID:To:Sender:Reply-To:Cc:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=t6KGXJpP5EnxK53Cu8vWRZnx8sauOTKFm7wwf+jqqLQ=; b=HGFsW8mGTO8CD8p9WOTAFN1fV
+ RgGGvj94O3o66r3b5oyaLNBA//oZr6SoXOglj9P7sSLG8a2Du0oIdSznSWLp7nYLiKQtbi0gjoji3
+ xuc1GHw3+cDlnsTfxixtUOZn1bAdj7C44kdkKFMxemIJotE8VQF7MuTTc6wwkMAm4OxwA=;
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1k10Ej-0005Ls-Ut; Thu, 30 Jul 2020 04:32:09 +0000
+Received: from [172.16.144.3] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1k10Ej-00017K-J6; Thu, 30 Jul 2020 04:32:09 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.89) (envelope-from <osstest-admin@xenproject.org>)
+ id 1k10Ej-0001s6-IT; Thu, 30 Jul 2020 04:32:09 +0000
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-152291-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [xen-unstable-smoke test] 152291: regressions - FAIL
+X-Osstest-Failures: xen-unstable-smoke:test-arm64-arm64-xl-xsm:xen-boot:fail:regression
+ xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+ xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+ xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This: xen=64219fa179c3e48adad12bfce3f6b3f1596cccbf
+X-Osstest-Versions-That: xen=b071ec25e85c4aacf3da59e5258cda0b1c4df45d
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Thu, 30 Jul 2020 04:32:09 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,38 +80,77 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: fam@euphon.net, Wei Liu <wl@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>,
- famzheng@amazon.com,
- =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: Fam Zheng <famzheng@amazon.com>
+flight 152291 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/152291/
 
-The bug is obvious here, other places in this function used
-"cpufeat_mask" correctly.
+Regressions :-(
 
-Signed-off-by: Fam Zheng <famzheng@amazon.com>
-Fixes: 46df8a65 ("x86/cpuid: Effectively remove pv_cpuid() and hvm_cpuid()")
----
- xen/arch/x86/cpuid.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ test-arm64-arm64-xl-xsm       7 xen-boot                 fail REGR. vs. 152269
 
-diff --git a/xen/arch/x86/cpuid.c b/xen/arch/x86/cpuid.c
-index 6a4a787b68..63a03ef1e5 100644
---- a/xen/arch/x86/cpuid.c
-+++ b/xen/arch/x86/cpuid.c
-@@ -1057,7 +1057,7 @@ void guest_cpuid(const struct vcpu *v, uint32_t leaf,
-         {
-             /* Fast-forward MSR_APIC_BASE.EN. */
-             if ( vlapic_hw_disabled(vcpu_vlapic(v)) )
--                res->d &= ~cpufeat_bit(X86_FEATURE_APIC);
-+                res->d &= ~cpufeat_mask(X86_FEATURE_APIC);
- 
-             /*
-              * PSE36 is not supported in shadow mode.  This bit should be
--- 
-2.17.1
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
 
+version targeted for testing:
+ xen                  64219fa179c3e48adad12bfce3f6b3f1596cccbf
+baseline version:
+ xen                  b071ec25e85c4aacf3da59e5258cda0b1c4df45d
+
+Last test of basis   152269  2020-07-28 19:05:32 Z    1 days
+Testing same since   152288  2020-07-29 19:01:00 Z    0 days    2 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Fam Zheng <famzheng@amazon.com>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      fail    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+------------------------------------------------------------
+commit 64219fa179c3e48adad12bfce3f6b3f1596cccbf
+Author: Fam Zheng <famzheng@amazon.com>
+Date:   Wed Jul 29 18:51:45 2020 +0100
+
+    x86/cpuid: Fix APIC bit clearing
+    
+    The bug is obvious here, other places in this function used
+    "cpufeat_mask" correctly.
+    
+    Fixed: b648feff8ea2 ("xen/x86: Improvements to in-hypervisor cpuid sanity checks")
+    Signed-off-by: Fam Zheng <famzheng@amazon.com>
+    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+(qemu changes not included)
 
