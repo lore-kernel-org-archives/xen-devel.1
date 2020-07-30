@@ -2,90 +2,74 @@ Return-Path: <SRS0=aecc=BJ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.8 required=3.0 tests=BAYES_00,DKIM_ADSP_CUSTOM_MED,
-	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-12.1 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ADFABC433E0
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2020 18:30:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 55390C433DF
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2020 18:31:11 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7D5AC20829
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2020 18:30:04 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 25F4E206E6
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2020 18:31:11 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="MEUeLJfQ"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7D5AC20829
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="b5+AKboL"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 25F4E206E6
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k1DJQ-0004X1-49; Thu, 30 Jul 2020 18:29:52 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Gz/s=BJ=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
- id 1k1DJO-0004Wm-JR
- for xen-devel@lists.xenproject.org; Thu, 30 Jul 2020 18:29:50 +0000
-X-Inumbo-ID: a6b7ac09-d292-11ea-8db4-bc764e2007e4
-Received: from mail-wm1-x341.google.com (unknown [2a00:1450:4864:20::341])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id a6b7ac09-d292-11ea-8db4-bc764e2007e4;
- Thu, 30 Jul 2020 18:29:49 +0000 (UTC)
-Received: by mail-wm1-x341.google.com with SMTP id p14so6568072wmg.1
- for <xen-devel@lists.xenproject.org>; Thu, 30 Jul 2020 11:29:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:reply-to:to:cc:references:in-reply-to:subject:date:message-id
- :mime-version:content-transfer-encoding:content-language
- :thread-index; bh=/oQ2B/nA5GJoZwORYhxmg1CGViXflM1e2jiWcV2alIE=;
- b=MEUeLJfQhbMl2ymOXA24n4PxsLgYpsVwSjLBNJTxUwcL/HSofd5QMX+f01esEH79U8
- jIMgEEidPlJQarh1xEKZX4WwANvU0GDN6ZnK2vPhYbBNiInbx0znkhwo+nZwb/3BYhKy
- dacx2oUSlXEXmoJyncT1WFtg36WiSTaC4aAt0YAhcC0Yqx5KiOyQdF5QhArW9HT8KF7U
- Xax+c6lkoUYbi4qLZs/8DWfVdOq8hEG+DQQ9d+jWB82pfxh8bPzKr1sQjeCufoKWlOIl
- 6KVnyVgHg1ugIvkNMPwrZQAxKsZ1DJBRmJ3NXu6yn8aDJx15YElqjC4qirg0/hDQOj63
- hBWw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:reply-to:to:cc:references:in-reply-to
- :subject:date:message-id:mime-version:content-transfer-encoding
- :content-language:thread-index;
- bh=/oQ2B/nA5GJoZwORYhxmg1CGViXflM1e2jiWcV2alIE=;
- b=TANALuklAkbxUcSlzP0R+bIXgLB5jIj+AzNOgDt+61TmG2cxcbhAYW0XIbIyA2YNiT
- tuEiwzAizZvMT9HSuHaiigQ52LaVTFiq1pFJraN/3WGQ+Tp7F6pQFerto2UMhTgyAoLB
- iuRJ72+YdKfAZhNr04dsC5zoemlEn4tMpfTsgTNwaGxotZLa9VaxTMxpajz8dM51IO56
- Bdm+LBK5IukH8cEd1wCkerfKExbOgY1dvMHHO4E10REn1FLN5l0twGcEh+xJ/Rwev+jj
- DxPVvY16iM7KZ5J5fyBe8InMjDXLjOBfEJZkqUdXrzV3jsVuStqpd1o+TGzzj3XWgBnV
- Ciug==
-X-Gm-Message-State: AOAM531h0oNW45E4oulmLxxfa57DMGuF8Lk15S3mKDtlcVh79fnuz8VD
- 8hETyBJaXjS1kGbhwbaeJr8=
-X-Google-Smtp-Source: ABdhPJwJ5JfmPslQwuRXUb66cXv4PAirCb1OjMzodPGqKFQ/dxT4SOW6am0FgccGpgNJrPjJWA/esg==
-X-Received: by 2002:a05:600c:284:: with SMTP id 4mr513155wmk.48.1596133788881; 
- Thu, 30 Jul 2020 11:29:48 -0700 (PDT)
-Received: from CBGR90WXYV0 ([2a00:23c5:5785:9a01:ad9a:ab78:5748:a7ec])
- by smtp.gmail.com with ESMTPSA id 31sm10855810wrp.87.2020.07.30.11.29.47
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 30 Jul 2020 11:29:48 -0700 (PDT)
-From: Paul Durrant <xadimgnik@gmail.com>
-X-Google-Original-From: "Paul Durrant" <paul@xen.org>
-To: "'Andrew Cooper'" <andrew.cooper3@citrix.com>,
- "'Xen-devel'" <xen-devel@lists.xenproject.org>
+	id 1k1DKV-0005Ij-Ej; Thu, 30 Jul 2020 18:30:59 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=IK5u=BJ=xen.org=julien@srs-us1.protection.inumbo.net>)
+ id 1k1DKU-0005Ic-8M
+ for xen-devel@lists.xenproject.org; Thu, 30 Jul 2020 18:30:58 +0000
+X-Inumbo-ID: cf69b650-d292-11ea-ab07-12813bfff9fa
+Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id cf69b650-d292-11ea-ab07-12813bfff9fa;
+ Thu, 30 Jul 2020 18:30:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=hGnvvsl+jPnMAF+M9FDBgVeGkyKtb7kb+pt1WPQma4Y=; b=b5+AKboLC7ZNLumERi8mb2PwWV
+ 1rXuy8Gooyxs3zOXyfkQ9bySggempHAnHCZQSah/S/zpEuEgnbLTYalecHqA2RuUdM+OcBI3RfMhW
+ FexKuChyfYqy8/CI7QYeHmHentk8NTUfAfDhqn22vGBP8WrfUxkZlFbGEk4ReFd4UhCY=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1k1DKQ-000852-TW; Thu, 30 Jul 2020 18:30:54 +0000
+Received: from 54-240-197-234.amazon.com ([54.240.197.234]
+ helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1k1DKQ-0007JG-M3; Thu, 30 Jul 2020 18:30:54 +0000
+Subject: Re: [PATCH 1/5] xen/memory: Introduce CONFIG_ARCH_ACQUIRE_RESOURCE
+To: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>
 References: <20200728113712.22966-1-andrew.cooper3@citrix.com>
  <20200728113712.22966-2-andrew.cooper3@citrix.com>
- <002601d66647$ca8567e0$5f9037a0$@xen.org>
- <33a10589-6890-b653-d8c2-7eb19a5e4929@citrix.com>
-In-Reply-To: <33a10589-6890-b653-d8c2-7eb19a5e4929@citrix.com>
-Subject: RE: [PATCH 1/5] xen/memory: Introduce CONFIG_ARCH_ACQUIRE_RESOURCE
-Date: Thu, 30 Jul 2020 19:24:35 +0100
-Message-ID: <003301d6669e$addc2500$09946f00$@xen.org>
+ <9b8397fc-f50e-ef2b-cbaa-2298294af2e3@xen.org>
+ <0b02d7dd-ebf1-9210-a52f-8debbddddbaa@citrix.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <954f6551-b5ae-f221-c2c9-5c28d5985bd0@xen.org>
+Date: Thu, 30 Jul 2020 19:30:52 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
+ Gecko/20100101 Thunderbird/68.11.0
 MIME-Version: 1.0
-Content-Type: text/plain;
-	charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailer: Microsoft Outlook 16.0
-Content-Language: en-gb
-Thread-Index: AQF6ExwjYkgZ+OK4ROtT1vtJIEnjiAIw/yGXAh+jJtsCDzS7HKmmGCIw
+In-Reply-To: <0b02d7dd-ebf1-9210-a52f-8debbddddbaa@citrix.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -96,107 +80,66 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Reply-To: paul@xen.org
-Cc: 'Stefano Stabellini' <sstabellini@kernel.org>,
- 'Julien Grall' <julien@xen.org>, 'Wei Liu' <wl@xen.org>,
- =?utf-8?Q?'Micha=C5=82_Leszczy=C5=84ski'?= <michal.leszczynski@cert.pl>,
- 'Jan Beulich' <JBeulich@suse.com>,
- 'Hubert Jasudowicz' <hubert.jasudowicz@cert.pl>,
- 'Volodymyr Babchuk' <Volodymyr_Babchuk@epam.com>,
- =?utf-8?Q?'Roger_Pau_Monn=C3=A9'?= <roger.pau@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+ Hubert Jasudowicz <hubert.jasudowicz@cert.pl>, Wei Liu <wl@xen.org>,
+ Paul Durrant <paul@xen.org>,
+ =?UTF-8?Q?Micha=c5=82_Leszczy=c5=84ski?= <michal.leszczynski@cert.pl>,
+ Jan Beulich <JBeulich@suse.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-> -----Original Message-----
-> From: Andrew Cooper <andrew.cooper3@citrix.com>
-> Sent: 30 July 2020 18:34
-> To: paul@xen.org; 'Xen-devel' <xen-devel@lists.xenproject.org>
-> Cc: 'Jan Beulich' <JBeulich@suse.com>; 'Wei Liu' <wl@xen.org>; 'Roger =
-Pau Monn=C3=A9'
-> <roger.pau@citrix.com>; 'Stefano Stabellini' <sstabellini@kernel.org>; =
-'Julien Grall'
-> <julien@xen.org>; 'Volodymyr Babchuk' <Volodymyr_Babchuk@epam.com>; =
-'Micha=C5=82 Leszczy=C5=84ski'
-> <michal.leszczynski@cert.pl>; 'Hubert Jasudowicz' =
-<hubert.jasudowicz@cert.pl>
-> Subject: Re: [PATCH 1/5] xen/memory: Introduce =
-CONFIG_ARCH_ACQUIRE_RESOURCE
->=20
-> On 30/07/2020 09:02, Paul Durrant wrote:
-> >> -----Original Message-----
-> >> From: Andrew Cooper <andrew.cooper3@citrix.com>
-> >> Sent: 28 July 2020 12:37
-> >> To: Xen-devel <xen-devel@lists.xenproject.org>
-> >> Cc: Andrew Cooper <andrew.cooper3@citrix.com>; Jan Beulich =
-<JBeulich@suse.com>; Wei Liu
-> <wl@xen.org>;
-> >> Roger Pau Monn=C3=A9 <roger.pau@citrix.com>; Stefano Stabellini =
-<sstabellini@kernel.org>; Julien Grall
-> >> <julien@xen.org>; Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>; =
-Paul Durrant <paul@xen.org>;
-> Micha=C5=82
-> >> Leszczy=C5=84ski <michal.leszczynski@cert.pl>; Hubert Jasudowicz =
-<hubert.jasudowicz@cert.pl>
-> >> Subject: [PATCH 1/5] xen/memory: Introduce =
-CONFIG_ARCH_ACQUIRE_RESOURCE
-> >>
-> >> New architectures shouldn't be forced to implement no-op stubs for =
-unused
-> >> functionality.
-> >>
-> >> Introduce CONFIG_ARCH_ACQUIRE_RESOURCE which can be opted in to, =
-and provide
-> >> compatibility logic in xen/mm.h
-> >>
-> >> No functional change.
-> > Code-wise, it looks fine, so...
-> >
-> > Reviewed-by: Paul Durrant <paul@xen.org>
->=20
+
+
+On 30/07/2020 18:28, Andrew Cooper wrote:
+> On 30/07/2020 10:50, Julien Grall wrote:
+>> Hi Andrew,
+>>
+>> On 28/07/2020 12:37, Andrew Cooper wrote:
+>>> New architectures shouldn't be forced to implement no-op stubs for
+>>> unused
+>>> functionality.
+>>>
+>>> Introduce CONFIG_ARCH_ACQUIRE_RESOURCE which can be opted in to, and
+>>> provide
+>>> compatibility logic in xen/mm.h
+>>>
+>>> No functional change.
+>>>
+>>> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+>>
+>> With one question below:
+>>
+>> Acked-by: Julien Grall <jgrall@amazon.com>
+> 
 > Thanks,
->=20
-> >
-> > ...but ...
-> >
-> >> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-> >> ---
-> >> CC: Jan Beulich <JBeulich@suse.com>
-> >> CC: Wei Liu <wl@xen.org>
-> >> CC: Roger Pau Monn=C3=A9 <roger.pau@citrix.com>
-> >> CC: Stefano Stabellini <sstabellini@kernel.org>
-> >> CC: Julien Grall <julien@xen.org>
-> >> CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-> >> CC: Paul Durrant <paul@xen.org>
-> >> CC: Micha=C5=82 Leszczy=C5=84ski <michal.leszczynski@cert.pl>
-> >> CC: Hubert Jasudowicz <hubert.jasudowicz@cert.pl>
-> >> ---
-> >>  xen/arch/x86/Kconfig     | 1 +
-> >>  xen/common/Kconfig       | 3 +++
-> >>  xen/include/asm-arm/mm.h | 8 --------
-> >>  xen/include/xen/mm.h     | 9 +++++++++
-> >>  4 files changed, 13 insertions(+), 8 deletions(-)
-> >>
-> >> diff --git a/xen/arch/x86/Kconfig b/xen/arch/x86/Kconfig
-> >> index a636a4bb1e..e7644a0a9d 100644
-> >> --- a/xen/arch/x86/Kconfig
-> >> +++ b/xen/arch/x86/Kconfig
-> >> @@ -6,6 +6,7 @@ config X86
-> >>  	select ACPI
-> >>  	select ACPI_LEGACY_TABLES_LOOKUP
-> >>  	select ARCH_SUPPORTS_INT128
-> >> +	select ARCH_ACQUIRE_RESOURCE
-> > ... I do wonder whether 'HAS_ACQUIRE_RESOURCE' is a better and more =
-descriptive name.
->=20
-> We don't have a coherent policy for how to categorise these things.  I
-> can change the name if you insist, but I'm not sure it makes a useful
-> difference.
->=20
+> 
+>>
+>>
+>>> diff --git a/xen/include/xen/mm.h b/xen/include/xen/mm.h
+>>> index 1061765bcd..1b2c1f6b32 100644
+>>> --- a/xen/include/xen/mm.h
+>>> +++ b/xen/include/xen/mm.h
+>>> @@ -685,4 +685,13 @@ static inline void put_page_alloc_ref(struct
+>>> page_info *page)
+>>>        }
+>>>    }
+>>>    +#ifndef CONFIG_ARCH_ACQUIRE_RESOURCE
+>>> +static inline int arch_acquire_resource(
+>>> +    struct domain *d, unsigned int type, unsigned int id, unsigned
+>>> long frame,
+>>> +    unsigned int nr_frames, xen_pfn_t mfn_list[])
+>>
+>> Any reason to change the way we indent the arguments?
+> 
+> So its not all squashed on the right hand side.
 
-Ok, it's fine. My R-b stands.
+Fair enough. I have asked the same question on a follow-up patch. Feel 
+free to ignore it :).
 
-  Paul
+Cheers,
 
-> ~Andrew
-
+-- 
+Julien Grall
 
