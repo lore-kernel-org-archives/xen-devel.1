@@ -4,35 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BA0FBC433E1
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2020 19:49:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9A286C433DF
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2020 19:49:19 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 843DC20838
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2020 19:49:17 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 6C05C20838
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2020 19:49:19 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="qM1rwFgs"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 843DC20838
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="jNw6wNDi"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6C05C20838
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k1EY5-0003pV-Ok; Thu, 30 Jul 2020 19:49:05 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1k1EY8-0003qJ-0Q; Thu, 30 Jul 2020 19:49:08 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=B5Vg=BJ=xen.org=paul@srs-us1.protection.inumbo.net>)
- id 1k1EY4-0003pM-Qz
- for xen-devel@lists.xenproject.org; Thu, 30 Jul 2020 19:49:04 +0000
-X-Inumbo-ID: b8789c8a-d29d-11ea-ab18-12813bfff9fa
+ id 1k1EY7-0003p9-2y
+ for xen-devel@lists.xenproject.org; Thu, 30 Jul 2020 19:49:07 +0000
+X-Inumbo-ID: b84e38be-d29d-11ea-8dc5-bc764e2007e4
 Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id b8789c8a-d29d-11ea-ab18-12813bfff9fa;
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id b84e38be-d29d-11ea-8dc5-bc764e2007e4;
  Thu, 30 Jul 2020 19:49:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
  s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
@@ -40,24 +39,25 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8UnD14dYKCdyYi6YratGsYxZMEOmXUkZTQOXSnNy2ec=; b=qM1rwFgsvkvmFrUxckN5wRBlEU
- QVo9/7xQDlBETj2ZmEZsV/Ic5WufQEBs9w+8R4Bbt9P7YB1vwzGubUznHt6Od+KtzNnj5PnaeTOrj
- m/tNYypKBGzS8akFZFj43vmBx7YehsJ0s1+PygG/KASXi980e4mTT4iEwORXYL4m+KqQ=;
+ bh=kR8KOrJwsxDE/ONPFOt3nY9mFnEziImu/LnFUCfqeYk=; b=jNw6wNDiG67DDYLFxqmgL6wTMu
+ uk20JibukfLKx343xnmcK4QeGDATQ3ngudLzGnF5ViL43KWpTfALxK/MlWmsnWZSR7CYFli64kgAW
+ MY+qrPNP1eEbIvYlT2svb1yASIIsi+q9Xo0Rt+iIK1/NIe1K2tzAlbTr4dlM/94sP7cU=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1k1EY3-0001L1-9z; Thu, 30 Jul 2020 19:49:03 +0000
+ id 1k1EY2-0001Kv-LW; Thu, 30 Jul 2020 19:49:02 +0000
 Received: from host86-143-223-30.range86-143.btcentralplus.com
  ([86.143.223.30] helo=u2f063a87eabd5f.home)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1k1EY3-0004CS-2s; Thu, 30 Jul 2020 19:49:03 +0000
+ id 1k1EY2-0004CS-EG; Thu, 30 Jul 2020 19:49:02 +0000
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH 3/4] public/io/netif: specify MTU override node
-Date: Thu, 30 Jul 2020 20:48:57 +0100
-Message-Id: <20200730194858.28523-4-paul@xen.org>
+Subject: [PATCH 2/4] tools/hotplug: combine add/online and remove/offline in
+ vif-bridge...
+Date: Thu, 30 Jul 2020 20:48:56 +0100
+Message-Id: <20200730194858.28523-3-paul@xen.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200730194858.28523-1-paul@xen.org>
 References: <20200730194858.28523-1-paul@xen.org>
@@ -73,53 +73,65 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Juergen Gross <jgross@suse.com>, Paul Durrant <pdurrant@amazon.com>
+Cc: Paul Durrant <pdurrant@amazon.com>, Ian Jackson <ian.jackson@eu.citrix.com>,
+ Wei Liu <wl@xen.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Paul Durrant <pdurrant@amazon.com>
 
-There is currently no documentation to state what MTU a frontend should
-adertise to its network stack. It has however long been assumed that the
-default value of 1500 is correct.
+... as they are in vif-route.
 
-This patch specifies a mechanism to allow the tools to set the MTU via a
-xenstore node in the frontend area and states that the absence of that node
-means the frontend should assume an MTU of 1500 octets.
+The script is invoked with online/offline for vifs and add/remove for taps.
+The operations that are necessary, however, are the same in both cases. This
+patch therefore combines the cases.
 
-NOTE: The Windows PV frontend has used an MTU sampled from the xenstore
-      node specified in this patch.
+The open-coded bridge removal code is also replaced with call to
+remove_from_bridge().
 
 Signed-off-by: Paul Durrant <pdurrant@amazon.com>
 ---
-Cc: Juergen Gross <jgross@suse.com>
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>
+Cc: Wei Liu <wl@xen.org>
 ---
- xen/include/public/io/netif.h | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+ tools/hotplug/Linux/vif-bridge | 18 +++++-------------
+ 1 file changed, 5 insertions(+), 13 deletions(-)
 
-diff --git a/xen/include/public/io/netif.h b/xen/include/public/io/netif.h
-index 9fcf91a2fe..00dd258712 100644
---- a/xen/include/public/io/netif.h
-+++ b/xen/include/public/io/netif.h
-@@ -204,6 +204,18 @@
-  * present).
-  */
+diff --git a/tools/hotplug/Linux/vif-bridge b/tools/hotplug/Linux/vif-bridge
+index e722090ca8..e1d7c49788 100644
+--- a/tools/hotplug/Linux/vif-bridge
++++ b/tools/hotplug/Linux/vif-bridge
+@@ -77,25 +77,17 @@ then
+ fi
  
-+/*
-+ * MTU
-+ * ===
-+ *
-+ * The toolstack may set a value of MTU for the frontend by setting the
-+ * /local/domain/<domid>/device/vif/<vif>/mtu node with the MTU value in
-+ * octets. If this node is absent the frontend should assume an MTU value
-+ * of 1500 octets. A frontend is also at liberty to ignore this value so
-+ * it is only suitable for informing the frontend that a packet payload
-+ * >1500 octets is permitted.
-+ */
-+
- /*
-  * Hash types
-  * ==========
+ case "$command" in
++    add)
++        ;&
+     online)
+         setup_virtual_bridge_port "$dev"
+         set_mtu "$bridge" "$dev"
+         add_to_bridge "$bridge" "$dev"
+         ;;
+-
++    remove)
++        ;&
+     offline)
+-        if which brctl >&/dev/null; then
+-            do_without_error brctl delif "$bridge" "$dev"
+-        else
+-            do_without_error ip link set "$dev" nomaster
+-        fi
+-        do_without_error ifconfig "$dev" down
+-        ;;
+-
+-    add)
+-        setup_virtual_bridge_port "$dev"
+-        set_mtu "$bridge" "$dev"
+-        add_to_bridge "$bridge" "$dev"
++        remove_from_bridge "$bridge" "$dev"
+         ;;
+ esac
+ 
 -- 
 2.20.1
 
