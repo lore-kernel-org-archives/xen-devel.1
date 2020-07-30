@@ -7,58 +7,57 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C3A31C433E0
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2020 19:49:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 00416C433DF
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2020 19:49:24 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9571520838
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2020 19:49:22 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id C3B3C20838
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Jul 2020 19:49:23 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="G5Qsw7KV"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9571520838
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="WxT0hE7R"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C3B3C20838
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k1EYB-0003rq-DB; Thu, 30 Jul 2020 19:49:11 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1k1EYD-0003t9-Lc; Thu, 30 Jul 2020 19:49:13 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=B5Vg=BJ=xen.org=paul@srs-us1.protection.inumbo.net>)
- id 1k1EY9-0003pM-PR
- for xen-devel@lists.xenproject.org; Thu, 30 Jul 2020 19:49:09 +0000
-X-Inumbo-ID: b7d6e534-d29d-11ea-ab18-12813bfff9fa
+ id 1k1EYC-0003p9-39
+ for xen-devel@lists.xenproject.org; Thu, 30 Jul 2020 19:49:12 +0000
+X-Inumbo-ID: b84e38bf-d29d-11ea-8dc5-bc764e2007e4
 Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id b7d6e534-d29d-11ea-ab18-12813bfff9fa;
- Thu, 30 Jul 2020 19:49:02 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id b84e38bf-d29d-11ea-8dc5-bc764e2007e4;
+ Thu, 30 Jul 2020 19:49:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
  s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=fEecjANlWh3hBTz/ieGtixPqvrZoBJyua6jWfk3Vf10=; b=G5Qsw7KVQaPGTbUXp7+U+YIsx1
- icyS+WhS4A2kpWgA4LgOE29z4wLfrYOYNjehteBqZridgptx9qrXC5I2caHh7i88uZRfiAUdH7iJm
- bwY7HtldogY8HtDfNy8jLXwkVOcwvSwxR0ee6PiLh4UBr8RdPRNcR9Wtii8NPZMgZ/co=;
+ bh=TpRalkvkG38JtEdNhqPS3RNesiK5+8RoUBFVAeIBPhI=; b=WxT0hE7RoSokynNV8k06V/6cIF
+ S9AOZWhblGoHd0merPmft9QPFy+61K5AEobk0g62atYnIFOBmhuWDaKghbpAWAsDxsmfUkCvLBhVw
+ yI/yopP+8i7mzveNfASh1hdVRPFI9Wk76GZspJrgeCe74/W/u9Z07YMDel06MBn3onCA=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1k1EY1-0001Kr-Vg; Thu, 30 Jul 2020 19:49:01 +0000
+ id 1k1EY4-0001L6-2O; Thu, 30 Jul 2020 19:49:04 +0000
 Received: from host86-143-223-30.range86-143.btcentralplus.com
  ([86.143.223.30] helo=u2f063a87eabd5f.home)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1k1EY1-0004CS-Mi; Thu, 30 Jul 2020 19:49:01 +0000
+ id 1k1EY3-0004CS-Qi; Thu, 30 Jul 2020 19:49:04 +0000
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH 1/4] tools/hotplug: add remove_from_bridge() and improve debug
- output
-Date: Thu, 30 Jul 2020 20:48:55 +0100
-Message-Id: <20200730194858.28523-2-paul@xen.org>
+Subject: [PATCH 4/4] tools/hotplug: modify set_mtu() to inform the frontend
+ via xenstore
+Date: Thu, 30 Jul 2020 20:48:58 +0100
+Message-Id: <20200730194858.28523-5-paul@xen.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200730194858.28523-1-paul@xen.org>
 References: <20200730194858.28523-1-paul@xen.org>
@@ -81,77 +80,62 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Paul Durrant <pdurrant@amazon.com>
 
-This patch adds a remove_from_bridge() function into xen-network-common.sh
-to partner with the existing add_to_bridge() function. The code in
-add_to_bridge() is also slightly re-arranged to avoid duplication calls of
-'ip link'.
+set_mtu() currently sets the backend vif MTU but does not inform the frontend
+what it is. This patch adds code to write the MTU into a xenstore node. See
+netif.h for a specification of the node.
 
-Both add_to_bridge() and remove_from_bridge() will check if their bridge
-manipulation operations are necessary and emit a log message if they are not.
-
-NOTE: A call to remove_from_bridge() will be added by a subsequent patch.
+NOTE: There is also a small modification replacing '$mtu' with '${mtu}'
+      for style consistency.
 
 Signed-off-by: Paul Durrant <pdurrant@amazon.com>
 ---
 Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Cc: Wei Liu <wl@xen.org>
 ---
- tools/hotplug/Linux/xen-network-common.sh | 37 ++++++++++++++++++-----
- 1 file changed, 29 insertions(+), 8 deletions(-)
+ tools/hotplug/Linux/vif-bridge            |  2 +-
+ tools/hotplug/Linux/xen-network-common.sh | 14 +++++++++++++-
+ 2 files changed, 14 insertions(+), 2 deletions(-)
 
+diff --git a/tools/hotplug/Linux/vif-bridge b/tools/hotplug/Linux/vif-bridge
+index e1d7c49788..b99cc82a21 100644
+--- a/tools/hotplug/Linux/vif-bridge
++++ b/tools/hotplug/Linux/vif-bridge
+@@ -81,7 +81,7 @@ case "$command" in
+         ;&
+     online)
+         setup_virtual_bridge_port "$dev"
+-        set_mtu "$bridge" "$dev"
++        set_mtu "$bridge" "$dev" "$type_if"
+         add_to_bridge "$bridge" "$dev"
+         ;;
+     remove)
 diff --git a/tools/hotplug/Linux/xen-network-common.sh b/tools/hotplug/Linux/xen-network-common.sh
-index 8dd3a62068..37e71cfa9c 100644
+index 37e71cfa9c..24fc42d9cf 100644
 --- a/tools/hotplug/Linux/xen-network-common.sh
 +++ b/tools/hotplug/Linux/xen-network-common.sh
-@@ -126,19 +126,40 @@ add_to_bridge () {
-     local bridge=$1
-     local dev=$2
- 
--    # Don't add $dev to $bridge if it's already on a bridge.
--    if [ -e "/sys/class/net/${bridge}/brif/${dev}" ]; then
--	ip link set dev ${dev} up || true
--	return
--    fi
--    if which brctl >&/dev/null; then
--        brctl addif ${bridge} ${dev}
-+    # Don't add $dev to $bridge if it's already on the bridge.
-+    if [ ! -e "/sys/class/net/${bridge}/brif/${dev}" ]; then
-+	log debug "adding $dev to bridge $bridge"
-+	if which brctl >&/dev/null; then
-+            brctl addif ${bridge} ${dev}
-+	else
-+            ip link set ${dev} master ${bridge}
-+	fi
-     else
--        ip link set ${dev} master ${bridge}
-+	log debug "$dev already on bridge $bridge"
-     fi
-+
-     ip link set dev ${dev} up
- }
- 
-+remove_from_bridge () {
-+    local bridge=$1
-+    local dev=$2
-+
-+    ip link set dev ${dev} down || :
-+
-+    # Don't remove $dev from $bridge if it's not on the bridge.
-+    if [ -e "/sys/class/net/${bridge}/brif/${dev}" ]; then
-+	log debug "removing $dev from bridge $bridge"
-+	if which brctl >&/dev/null; then
-+            brctl delif ${bridge} ${dev}
-+	else
-+            ip link set ${dev} nomaster
-+	fi
-+    else
-+	log debug "$dev not on bridge $bridge"
-+    fi
-+}
-+
- # Usage: set_mtu bridge dev
+@@ -164,9 +164,21 @@ remove_from_bridge () {
  set_mtu () {
      local bridge=$1
+     local dev=$2
++    local type_if=$3
++
+     mtu="`ip link show dev ${bridge}| awk '/mtu/ { print $5 }'`"
+     if [ -n "$mtu" ] && [ "$mtu" -gt 0 ]
+     then
+-            ip link set dev ${dev} mtu $mtu || :
++            ip link set dev ${dev} mtu ${mtu} || :
++    fi
++
++    if [ ${type_if} = vif ]
++    then
++       dev_=${dev#vif}
++       domid=${dev_%.*}
++       devid=${dev_#*.}
++
++       XENBUS_PATH="/local/domain/$domid/device/vif/$devid"
++       xenstore_write "$XENBUS_PATH/mtu" ${mtu}
+     fi
+ }
 -- 
 2.20.1
 
