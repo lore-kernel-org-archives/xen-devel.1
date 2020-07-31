@@ -7,40 +7,40 @@ X-Spam-Status: No, score=-13.0 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C795EC433DF
-	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 12:01:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1C534C433DF
+	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 12:01:08 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A087522B40
-	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 12:01:03 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A087522B40
+	by mail.kernel.org (Postfix) with ESMTPS id E579A22B40
+	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 12:01:07 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E579A22B40
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k1TiV-0001M3-99; Fri, 31 Jul 2020 12:00:51 +0000
+	id 1k1Tia-0001Nh-I8; Fri, 31 Jul 2020 12:00:56 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=nr0X=BK=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1k1TiU-0001Jk-KF
- for xen-devel@lists.xenproject.org; Fri, 31 Jul 2020 12:00:50 +0000
-X-Inumbo-ID: 78ce6d3e-d325-11ea-8e2b-bc764e2007e4
+ id 1k1TiZ-0001Jk-KC
+ for xen-devel@lists.xenproject.org; Fri, 31 Jul 2020 12:00:55 +0000
+X-Inumbo-ID: 7a17f7c8-d325-11ea-8e2b-bc764e2007e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 78ce6d3e-d325-11ea-8e2b-bc764e2007e4;
- Fri, 31 Jul 2020 12:00:48 +0000 (UTC)
+ id 7a17f7c8-d325-11ea-8e2b-bc764e2007e4;
+ Fri, 31 Jul 2020 12:00:50 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1k1TMt-0001W4-O5; Fri, 31 Jul 2020 12:38:31 +0100
+ id 1k1TN6-0001W4-Jg; Fri, 31 Jul 2020 12:38:44 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH v2 15/41] duration_estimator: Explicitly provide null
- in general host q
-Date: Fri, 31 Jul 2020 12:37:54 +0100
-Message-Id: <20200731113820.5765-16-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH v2 41/41] duration_estimator: Clarify recentflights
+ query a bit
+Date: Fri, 31 Jul 2020 12:38:20 +0100
+Message-Id: <20200731113820.5765-42-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200731113820.5765-1-ian.jackson@eu.citrix.com>
 References: <20200731113820.5765-1-ian.jackson@eu.citrix.com>
@@ -56,37 +56,46 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <George.Dunlap@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Our spec. says we return nulls for started and status if we don't find
-a job matching the host spec.
+The condition on r.job is more naturally thought of as a join
+condition than a where condition.  (This is an inner join, so the
+semantics are identical.)
 
-The way this works right now is that we look up the nonexistent
-entries in $refs->[0].  This is not really brilliant and is going to
-be troublesome as we continue to refactor.
+Also, for clarity, swap the flight and job conditions round, so that
+the ON clause is a series of r.thing = otherthing.
 
-Provide these values explicitly.  No functional change.
+No functional change.
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
+CC: George Dunlap <George.Dunlap@citrix.com>
 ---
- Osstest/Executive.pm | 2 ++
- 1 file changed, 2 insertions(+)
+v2: New patch.
+---
+ Osstest/Executive.pm | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/Osstest/Executive.pm b/Osstest/Executive.pm
-index 4cb22cc9..d45d6557 100644
+index 8e4c5b9a..a69c624f 100644
 --- a/Osstest/Executive.pm
 +++ b/Osstest/Executive.pm
-@@ -1169,6 +1169,8 @@ END
- 
-     my $duration_anyref_qtxt= <<END;
-             SELECT f.flight AS flight,
-+                   NULL as started,
-+                   NULL as status,
-                    max(s.finished) AS max_finished
- 		      FROM steps s JOIN flights f
- 		        ON s.flight=f.flight
+@@ -1153,10 +1153,10 @@ sub duration_estimator ($$;$$) {
+ 		     FROM flights f
+                      JOIN jobs j USING (flight)
+                      JOIN runvars r
+-                             ON  f.flight=r.flight
++                             ON  r.flight=f.flight
++                            AND  r.job=j.job=
+                             AND  r.name=?
+-                    WHERE  j.job=r.job
+-                      AND  f.blessing=?
++                    WHERE  f.blessing=?
+                       AND  f.branch=?
+                       AND  j.job=?
+                       AND  r.val=?
 -- 
 2.20.1
 
