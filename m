@@ -7,40 +7,40 @@ X-Spam-Status: No, score=-13.0 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 52618C433DF
-	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 12:01:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 08370C433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 12:01:25 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2C4BA22B40
-	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 12:01:22 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2C4BA22B40
+	by mail.kernel.org (Postfix) with ESMTPS id DB17A22BF3
+	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 12:01:24 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DB17A22BF3
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k1Tin-0001Rg-S7; Fri, 31 Jul 2020 12:01:09 +0000
+	id 1k1Tis-0001TI-4l; Fri, 31 Jul 2020 12:01:14 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=nr0X=BK=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1k1Tim-0001R9-5A
- for xen-devel@lists.xenproject.org; Fri, 31 Jul 2020 12:01:08 +0000
-X-Inumbo-ID: 83774e7d-d325-11ea-8e2b-bc764e2007e4
+ id 1k1Tiq-0001R9-36
+ for xen-devel@lists.xenproject.org; Fri, 31 Jul 2020 12:01:12 +0000
+X-Inumbo-ID: 8663f32e-d325-11ea-8e2b-bc764e2007e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 83774e7d-d325-11ea-8e2b-bc764e2007e4;
- Fri, 31 Jul 2020 12:01:07 +0000 (UTC)
+ id 8663f32e-d325-11ea-8e2b-bc764e2007e4;
+ Fri, 31 Jul 2020 12:01:11 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1k1TMu-0001W4-4C; Fri, 31 Jul 2020 12:38:32 +0100
+ id 1k1TMs-0001W4-Th; Fri, 31 Jul 2020 12:38:31 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH v2 16/41] duration_estimator: Return job column in
- first query
-Date: Fri, 31 Jul 2020 12:37:55 +0100
-Message-Id: <20200731113820.5765-17-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH v2 13/41] duration_estimator: Ignore truncated jobs
+ unless we know the step
+Date: Fri, 31 Jul 2020 12:37:52 +0100
+Message-Id: <20200731113820.5765-14-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200731113820.5765-1-ian.jackson@eu.citrix.com>
 References: <20200731113820.5765-1-ian.jackson@eu.citrix.com>
@@ -56,88 +56,51 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <George.Dunlap@citrix.com>
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Right now this is pointless since the Perl code doesn't need it.  But
-this row is going to be part of a WITH clause soon.
+If we are looking for a particular step then we will ignore jobs
+without that step, so any job which was truncated before it will be
+ignored.
 
-No functional change.
+Otherwise we are looking for the whole job duration and a truncated
+job is not a good representative.
 
-Diffs to two example queries (from the Perl DBI trace):
+This is a bugfix (to duration estimation), not a performance
+improvement like the preceding and subsequent changes.
 
-            SELECT f.flight AS flight,
-+                   j.job AS job,
-                   f.started AS started,
-                    j.status AS status
-                     FROM flights f
-                     JOIN jobs j USING (flight)
-                     JOIN runvars r
-                             ON  f.flight=r.flight
-                            AND  r.name=?
-                    WHERE  j.job=r.job
-                      AND  f.blessing=?
-                      AND  f.branch=?
-                      AND  j.job=?
-                      AND  r.val=?
-                      AND  (j.status='pass' OR j.status='fail'
-                           OR j.status='truncated'!)
-                      AND  f.started IS NOT NULL
-                       AND  f.started >= ?
-                  ORDER BY f.started DESC
-
-            SELECT f.flight AS flight,
-+                   s.job AS job,
-                    NULL as started,
-                    NULL as status,
-                    max(s.finished) AS max_finished
-                      FROM steps s JOIN flights f
-                        ON s.flight=f.flight
-                     WHERE s.job=? AND f.blessing=? AND f.branch=?
-                        AND s.finished IS NOT NULL
-                        AND f.started IS NOT NULL
-                        AND f.started >= ?
--                     GROUP BY f.flight
-+                     GROUP BY f.flight, s.job
-                      ORDER BY max_finished DESC
-
-CC: George Dunlap <George.Dunlap@citrix.com>
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- Osstest/Executive.pm | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ Osstest/Executive.pm | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
 
 diff --git a/Osstest/Executive.pm b/Osstest/Executive.pm
-index d45d6557..359120c0 100644
+index 9208d8af..f528edd0 100644
 --- a/Osstest/Executive.pm
 +++ b/Osstest/Executive.pm
-@@ -1148,6 +1148,7 @@ sub duration_estimator ($$;$$) {
-     }
-     my $recentflights_qtxt= <<END;
-             SELECT f.flight AS flight,
-+                   j.job AS job,
- 		   f.started AS started,
-                    j.status AS status
- 		     FROM flights f
-@@ -1169,6 +1170,7 @@ END
+@@ -1142,6 +1142,10 @@ sub duration_estimator ($$;$$) {
+     # estimated (and only jobs which contained that step will be
+     # considered).
  
-     my $duration_anyref_qtxt= <<END;
++    my $or_status_truncated = '';
++    if ($will_uptoincl_testid) {
++	$or_status_truncated = "OR j.status='truncated'!";
++    }
+     my $recentflights_q= $dbh_tests->prepare(<<END);
              SELECT f.flight AS flight,
-+                   s.job AS job,
-                    NULL as started,
-                    NULL as status,
-                    max(s.finished) AS max_finished
-@@ -1178,7 +1180,7 @@ END
-                        AND s.finished IS NOT NULL
-                        AND f.started IS NOT NULL
-                        AND f.started >= ?
--                     GROUP BY f.flight
-+                     GROUP BY f.flight, s.job
-                      ORDER BY max_finished DESC
- END
-     # s J J J # fix perl-mode
+ 		   f.started AS started,
+@@ -1156,8 +1160,8 @@ sub duration_estimator ($$;$$) {
+                       AND  f.branch=?
+                       AND  j.job=?
+                       AND  r.val=?
+-		      AND  (j.status='pass' OR j.status='fail' OR
+-                            j.status='truncated')
++		      AND  (j.status='pass' OR j.status='fail'
++                           $or_status_truncated)
+                       AND  f.started IS NOT NULL
+                       AND  f.started >= ?
+                  ORDER BY f.started DESC
 -- 
 2.20.1
 
