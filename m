@@ -2,50 +2,54 @@ Return-Path: <SRS0=y719=BK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.0 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.2 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 51B91C433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 11:39:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 09BDCC433DF
+	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 11:42:27 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 309F820838
-	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 11:39:21 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 309F820838
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id D756A2087C
+	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 11:42:26 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D756A2087C
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k1TNX-00065Q-AR; Fri, 31 Jul 2020 11:39:11 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=nr0X=BK=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1k1TNX-0005kZ-0j
- for xen-devel@lists.xenproject.org; Fri, 31 Jul 2020 11:39:11 +0000
-X-Inumbo-ID: 5aa0cf16-d322-11ea-8e26-bc764e2007e4
-Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 5aa0cf16-d322-11ea-8e26-bc764e2007e4;
- Fri, 31 Jul 2020 11:38:30 +0000 (UTC)
-Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
- by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
- (return-path ijackson@chiark.greenend.org.uk)
- id 1k1TMr-0001W4-KU; Fri, 31 Jul 2020 12:38:29 +0100
-From: Ian Jackson <ian.jackson@eu.citrix.com>
-To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH v2 09/41] sg-report-flight: Use WITH to use best index
- use for $flightsq
-Date: Fri, 31 Jul 2020 12:37:48 +0100
-Message-Id: <20200731113820.5765-10-ian.jackson@eu.citrix.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200731113820.5765-1-ian.jackson@eu.citrix.com>
-References: <20200731113820.5765-1-ian.jackson@eu.citrix.com>
+	id 1k1TQB-0007Jw-QK; Fri, 31 Jul 2020 11:41:55 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=S17i=BK=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1k1TQA-0007Jj-Uh
+ for xen-devel@lists.xenproject.org; Fri, 31 Jul 2020 11:41:54 +0000
+X-Inumbo-ID: d45e36fa-d322-11ea-aba1-12813bfff9fa
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id d45e36fa-d322-11ea-aba1-12813bfff9fa;
+ Fri, 31 Jul 2020 11:41:53 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 0FA76B6A4;
+ Fri, 31 Jul 2020 11:42:06 +0000 (UTC)
+Subject: Re: [RESEND][PATCH v2 7/7] xen/guest_access: Fix coding style in
+ xen/guest_access.h
+To: Julien Grall <julien@xen.org>
+References: <20200730181827.1670-1-julien@xen.org>
+ <20200730181827.1670-8-julien@xen.org>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <3bafb97f-45a3-7203-3e73-37e73c453de6@suse.com>
+Date: Fri, 31 Jul 2020 13:41:52 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20200730181827.1670-8-julien@xen.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,187 +60,25 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <George.Dunlap@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <jgrall@amazon.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xenproject.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-While we're here, convert this EXISTS subquery to a JOIN.
+On 30.07.2020 20:18, Julien Grall wrote:
+> From: Julien Grall <jgrall@amazon.com>
+> 
+>     * Add space before and after operator
+>     * Align \
+>     * Format comments
 
-Perf: runtime of my test case now ~200-300s.
+How about also
 
-Example query before (from the Perl DBI trace):
+    * remove/replace leading underscores
 
-      SELECT * FROM (
-        SELECT DISTINCT flight, blessing
-             FROM flights
-             JOIN runvars r1 USING (flight)
+?
 
-            WHERE (branch='xen-unstable')
-              AND ( (TRUE AND flight <= 151903) AND (blessing='real') )
-                  AND EXISTS (SELECT 1
-                            FROM jobs
-                           WHERE jobs.flight = flights.flight
-                             AND jobs.job = ?)
-
-              AND r1.name LIKE 'built_revision_%'
-              AND r1.name = ?
-              AND r1.val= ?
-
-            ORDER BY flight DESC
-            LIMIT 1000
-      ) AS sub
-      ORDER BY blessing ASC, flight DESC
-
-With bind variables:
-
-     "test-armhf-armhf-libvirt"
-     'built_revision_xen'
-     '165f3afbfc3db70fcfdccad07085cde0a03c858b'
-
-After:
-
-      WITH sub AS (
-        SELECT DISTINCT flight, blessing
-             FROM flights
-             JOIN runvars r1 USING (flight)
-
-            WHERE (branch='xen-unstable')
-              AND ( (TRUE AND flight <= 151903) AND (blessing='real') )
-              AND r1.name LIKE 'built_revision_%'
-              AND r1.name = ?
-              AND r1.val= ?
-
-            ORDER BY flight DESC
-            LIMIT 1000
-      )
-      SELECT *
-        FROM sub
-        JOIN jobs USING (flight)
-
-       WHERE (1=1)
-                  AND jobs.job = ?
-
-      ORDER BY blessing ASC, flight DESC
-
-With bind variables:
-
-    'built_revision_xen'
-    '165f3afbfc3db70fcfdccad07085cde0a03c858b'
-    "test-armhf-armhf-libvirt"
-
-Diff to the query:
-
--      SELECT * FROM (
-+      WITH sub AS (
-         SELECT DISTINCT flight, blessing
-              FROM flights
-              JOIN runvars r1 USING (flight)
-
-             WHERE (branch='xen-unstable')
-               AND ( (TRUE AND flight <= 151903) AND (blessing='real') )
--                  AND EXISTS (SELECT 1
--                            FROM jobs
--                           WHERE jobs.flight = flights.flight
--                             AND jobs.job = ?)
--
-               AND r1.name LIKE 'built_revision_%'
-               AND r1.name = ?
-               AND r1.val= ?
-
-             ORDER BY flight DESC
-             LIMIT 1000
--      ) AS sub
-+      )
-+      SELECT *
-+        FROM sub
-+        JOIN jobs USING (flight)
-+
-+       WHERE (1=1)
-+                  AND jobs.job = ?
-+
-       ORDER BY blessing ASC, flight DESC
-
-Reviewed-by: George Dunlap <George.Dunlap@citrix.com>
-Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
----
- sg-report-flight | 39 ++++++++++++++++++++++++---------------
- 1 file changed, 24 insertions(+), 15 deletions(-)
-
-diff --git a/sg-report-flight b/sg-report-flight
-index 10127582..d06be292 100755
---- a/sg-report-flight
-+++ b/sg-report-flight
-@@ -180,18 +180,6 @@ END
-         return undef;
-     }
- 
--    my @flightsq_params;
--    my $flightsq_jobcond='(1=1)';
--    if (defined $job) {
--	push @flightsq_params, $job;
--	$flightsq_jobcond = <<END;
--                  AND EXISTS (SELECT 1
--			    FROM jobs
--			   WHERE jobs.flight = flights.flight
--			     AND jobs.job = ?)
--END
--    }
--
-     # We build a slightly complicated query to find possibly-relevant
-     # flights.  A "possibly-relevant" flight is one which the main
-     # flight categorisation algorithm below (the loop over $tflight)
-@@ -220,6 +208,7 @@ END
-     # still execute the full job-specific recursive examination, for
-     # each possibly-relevant flight - that's the $tflight loop body.
- 
-+    my @flightsq_params;
-     my $runvars_joins = '';
-     my $runvars_conds = '';
-     my $ri=0;
-@@ -247,18 +236,38 @@ END
-       }
-     }
- 
-+    my $flightsq_jobs_join = '';
-+    my $flightsq_jobcond = '';
-+    if (defined $job) {
-+	push @flightsq_params, $job;
-+	$flightsq_jobs_join = <<END;
-+        JOIN jobs USING (flight)
-+END
-+	$flightsq_jobcond = <<END;
-+                  AND jobs.job = ?
-+END
-+    }
-+
-+    # In psql 9.6 this WITH clause makes postgresql do the flights
-+    # query first.  This is good because our built revision index finds
-+    # relevant flights very quickly.  Without this, postgresql seems
-+    # to like to scan the jobs table.
-     my $flightsq= <<END;
--      SELECT * FROM (
-+      WITH sub AS (
-         SELECT DISTINCT flight, blessing
-              FROM flights
- $runvars_joins
-             WHERE $branches_cond_q
-               AND $blessingscond
--$flightsq_jobcond
- $runvars_conds
-             ORDER BY flight DESC
-             LIMIT 1000
--      ) AS sub
-+      )
-+      SELECT *
-+        FROM sub
-+$flightsq_jobs_join
-+       WHERE (1=1)
-+$flightsq_jobcond
-       ORDER BY blessing ASC, flight DESC
- END
-     $flightsq= db_prepare($flightsq);
--- 
-2.20.1
-
+Jan
 
