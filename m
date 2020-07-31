@@ -2,72 +2,66 @@ Return-Path: <SRS0=y719=BK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.0 required=3.0 tests=BAYES_00,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D56CBC433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 14:25:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6BF7DC433DF
+	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 14:26:23 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id ACADE20663
-	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 14:25:41 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org ACADE20663
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
+	by mail.kernel.org (Postfix) with ESMTPS id 3BE4220663
+	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 14:26:23 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="hqK3dbOB"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3BE4220663
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k1VyQ-00041r-CD; Fri, 31 Jul 2020 14:25:26 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=7AOU=BK=gmail.com=rjwysocki@srs-us1.protection.inumbo.net>)
- id 1k1VyP-00041l-62
- for xen-devel@lists.xenproject.org; Fri, 31 Jul 2020 14:25:25 +0000
-X-Inumbo-ID: abda3475-d339-11ea-8e4a-bc764e2007e4
-Received: from mail-oi1-f193.google.com (unknown [209.85.167.193])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id abda3475-d339-11ea-8e4a-bc764e2007e4;
- Fri, 31 Jul 2020 14:25:24 +0000 (UTC)
-Received: by mail-oi1-f193.google.com with SMTP id e6so6627473oii.4
- for <xen-devel@lists.xenproject.org>; Fri, 31 Jul 2020 07:25:24 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=LUq1ijDD9SyO2ufTXKPW9//vrm+uL0JQvV8OQ7tDtyA=;
- b=pLnw3WxW6FrK4QQGOgLG+9xHM1D6GN0ldJ0iGIAeulZbMBM0uHOzcTMagxg/H8fAO4
- tW5YuAFhcW2TMHyiEsU/zmrntdTOzAYw2Sc2qtT1W6xU0AZUPWa+hifPtynqcPO9u1ec
- KiN42KGd2iGlkwSYN5FQf6NRI1bxWQ6WKsjNhvs9K65ZmkX1jES87xsrouVRHTjJJukl
- kbuV8AvYgsZcVFl2eDRfLeRCMzoWrHV62lfL17ASNAgY/wtTgvjT0IWFqS6/qF7gdyU8
- XgNNKcubet3B0TQd0cM91bHhMhC9Tx8/qSwP8Uz4WBNXksR23cofCttcCo0bfofs8q6B
- 4E/Q==
-X-Gm-Message-State: AOAM531BNEyH3M2OcY9HeGZKW0ImeE8GDk5/zBqeG9rE5iezMtekA9rz
- Jzv9dktsWtlCE4T6ThAHLOBp2AvqTUPe+jH4RuA=
-X-Google-Smtp-Source: ABdhPJwXQdnG1otKOfzVxyL9Pv5KPx5Dv3MAzyWKLAJcQfKXU/RGMyj9PAedIsxXvXnE+QB4qD60adxhPMBESDi6fDY=
-X-Received: by 2002:aca:a88e:: with SMTP id r136mr3259373oie.110.1596205523967; 
- Fri, 31 Jul 2020 07:25:23 -0700 (PDT)
+	id 1k1Vz7-00045U-NC; Fri, 31 Jul 2020 14:26:09 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=S/xS=BK=xen.org=paul@srs-us1.protection.inumbo.net>)
+ id 1k1Vz6-00045J-Qb
+ for xen-devel@lists.xenproject.org; Fri, 31 Jul 2020 14:26:08 +0000
+X-Inumbo-ID: c63e343c-d339-11ea-abc3-12813bfff9fa
+Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id c63e343c-d339-11ea-abc3-12813bfff9fa;
+ Fri, 31 Jul 2020 14:26:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=Content-Transfer-Encoding:Content-Type:MIME-Version:
+ Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=AP1vBeaCfx9AP7a24e34n/oJJkJNPvuMBU2kMllpL5g=; b=hqK3dbOBOpsHdb8/jm0f/wWaDY
+ mUW4jWn0L+NpK83xAwILRtEFrpxQArNFr4MnDQXBSQtbDwYLZgkNdSZtnHPCCgVgXIU7EcpP8MVdq
+ 0bPnVsZfc92nkJ7JRylyLu6JeFCmK2rZ0hzyGF32gbKDZz3RiMKV2ssrJ/ZiDSSiERGk=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <paul@xen.org>)
+ id 1k1Vz5-0003Zv-HQ; Fri, 31 Jul 2020 14:26:07 +0000
+Received: from host86-143-223-30.range86-143.btcentralplus.com
+ ([86.143.223.30] helo=u2f063a87eabd5f.home)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+ (envelope-from <paul@xen.org>)
+ id 1k1Vz5-0005vI-7r; Fri, 31 Jul 2020 14:26:07 +0000
+From: Paul Durrant <paul@xen.org>
+To: xen-devel@lists.xenproject.org
+Subject: [PATCH v3 0/2] epte_get_entry_emt() modifications
+Date: Fri, 31 Jul 2020 15:26:02 +0100
+Message-Id: <20200731142604.30149-1-paul@xen.org>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-References: <20200717191009.GA3387@dev-dsk-anchalag-2a-9c2d1d96.us-west-2.amazon.com>
- <5464f384-d4b4-73f0-d39e-60ba9800d804@oracle.com>
- <20200721000348.GA19610@dev-dsk-anchalag-2a-9c2d1d96.us-west-2.amazon.com>
- <408d3ce9-2510-2950-d28d-fdfe8ee41a54@oracle.com>
- <alpine.DEB.2.21.2007211640500.17562@sstabellini-ThinkPad-T480s>
- <20200722180229.GA32316@dev-dsk-anchalag-2a-9c2d1d96.us-west-2.amazon.com>
- <alpine.DEB.2.21.2007221645430.17562@sstabellini-ThinkPad-T480s>
- <20200723225745.GB32316@dev-dsk-anchalag-2a-9c2d1d96.us-west-2.amazon.com>
- <alpine.DEB.2.21.2007241431280.17562@sstabellini-ThinkPad-T480s>
- <66a9b838-70ed-0807-9260-f2c31343a081@oracle.com>
- <20200730230634.GA17221@dev-dsk-anchalag-2a-9c2d1d96.us-west-2.amazon.com>
- <53b577a3-6af9-5587-7e47-485be38b3653@oracle.com>
-In-Reply-To: <53b577a3-6af9-5587-7e47-485be38b3653@oracle.com>
-From: "Rafael J. Wysocki" <rafael@kernel.org>
-Date: Fri, 31 Jul 2020 16:25:12 +0200
-Message-ID: <CAJZ5v0j2kqgEfbiQchiA_USwGKC-UFkn2J3bUU2xCWU=+1p9Mw@mail.gmail.com>
-Subject: Re: [PATCH v2 01/11] xen/manage: keep track of the on-going suspend
- mode
-To: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -78,62 +72,27 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: the arch/x86 maintainers <x86@kernel.org>, Len Brown <len.brown@intel.com>,
- Peter Zijlstra <peterz@infradead.org>,
- Benjamin Herrenschmidt <benh@kernel.crashing.org>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Linux Memory Management List <linux-mm@kvack.org>, Pavel Machek <pavel@ucw.cz>,
- "H. Peter Anvin" <hpa@zytor.com>, Stefano Stabellini <sstabellini@kernel.org>,
- Eduardo Valentin <eduval@amazon.com>, Ingo Molnar <mingo@redhat.com>,
- xen-devel@lists.xenproject.org, "Singh, Balbir" <sblbir@amazon.com>,
- Jens Axboe <axboe@kernel.dk>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
- Anchal Agarwal <anchalag@amazon.com>, Borislav Petkov <bp@alien8.de>,
- Thomas Gleixner <tglx@linutronix.de>, Juergen Gross <jgross@suse.com>,
- netdev <netdev@vger.kernel.org>, Linux PM <linux-pm@vger.kernel.org>,
- "Rafael J. Wysocki" <rjw@rjwysocki.net>, "Kamata,
- Munehisa" <kamatam@amazon.com>, Vitaly Kuznetsov <vkuznets@redhat.com>,
- David Miller <davem@davemloft.net>, David Woodhouse <dwmw@amazon.co.uk>,
- roger.pau@citrix.com
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Paul Durrant <pdurrant@amazon.com>, Wei Liu <wl@xen.org>,
+ Jan Beulich <jbeulich@suse.com>,
+ =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Fri, Jul 31, 2020 at 4:14 PM Boris Ostrovsky
-<boris.ostrovsky@oracle.com> wrote:
->
-> On 7/30/20 7:06 PM, Anchal Agarwal wrote:
-> > On Mon, Jul 27, 2020 at 06:08:29PM -0400, Boris Ostrovsky wrote:
-> >> CAUTION: This email originated from outside of the organization. Do not click links or open attachments unless you can confirm the sender and know the content is safe.
-> >>
-> >>
-> >>
-> >> On 7/24/20 7:01 PM, Stefano Stabellini wrote:
-> >>> Yes, it does, thank you. I'd rather not introduce unknown regressions so
-> >>> I would recommend to add an arch-specific check on registering
-> >>> freeze/thaw/restore handlers. Maybe something like the following:
-> >>>
-> >>> #ifdef CONFIG_X86
-> >>>     .freeze = blkfront_freeze,
-> >>>     .thaw = blkfront_restore,
-> >>>     .restore = blkfront_restore
-> >>> #endif
-> >>>
-> >>>
-> >>> maybe Boris has a better suggestion on how to do it
-> >>
-> >> An alternative might be to still install pm notifier in
-> >> drivers/xen/manage.c (I think as result of latest discussions we decided
-> >> we won't need it) and return -ENOTSUPP for ARM for
-> >> PM_HIBERNATION_PREPARE and friends. Would that work?
-> >>
-> > I think the question here is for registering driver specific freeze/thaw/restore
-> > callbacks for x86 only. I have dropped the pm_notifier in the v3 still pending
-> > testing. So I think just registering driver specific callbacks for x86 only is a
-> > good option. What do you think?
->
->
-> I suggested using the notifier under assumption that if it returns an
-> error then that will prevent callbacks to be called because hibernation
-> will be effectively disabled.
+From: Paul Durrant <pdurrant@amazon.com>
 
-That's correct.
+Paul Durrant (2):
+  x86/hvm: set 'ipat' in EPT for special pages
+  x86/hvm: simplify 'mmio_direct' check in epte_get_entry_emt()
+
+ xen/arch/x86/hvm/mtrr.c | 26 +++++++++++++++-----------
+ 1 file changed, 15 insertions(+), 11 deletions(-)
+---
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Jan Beulich <jbeulich@suse.com>
+Cc: "Roger Pau Monné" <roger.pau@citrix.com>
+Cc: Wei Liu <wl@xen.org>
+-- 
+2.20.1
+
 
