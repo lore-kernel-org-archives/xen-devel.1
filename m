@@ -2,66 +2,74 @@ Return-Path: <SRS0=y719=BK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+X-Spam-Status: No, score=-9.0 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 65965C433DF
-	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 10:47:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4B7EFC433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 10:50:27 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 33C7720838
-	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 10:47:04 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 1889820838
+	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 10:50:27 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="L8m+eq5Z"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 33C7720838
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="cq4mkn7y"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1889820838
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k1SYt-0000gj-W8; Fri, 31 Jul 2020 10:46:51 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=S/xS=BK=xen.org=paul@srs-us1.protection.inumbo.net>)
- id 1k1SYs-0000gb-SR
- for xen-devel@lists.xenproject.org; Fri, 31 Jul 2020 10:46:50 +0000
-X-Inumbo-ID: 232515c2-d31b-11ea-ab99-12813bfff9fa
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 232515c2-d31b-11ea-ab99-12813bfff9fa;
- Fri, 31 Jul 2020 10:46:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:Content-Type:MIME-Version:
- Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Ss8BcfguJ4eLaJkT8XAPmw+xnIY7iragrK2r4C0eMGM=; b=L8m+eq5ZuEINNtrHOcScU8c6GO
- vp+daTw0XVb7yu1/W0dsO30piz3TYaw17a7Bmy0wC0G0JXzNqNB4Yd39NiTtpjZuywMyifk/XX5M+
- 0Iuupyy1bzW/k0JSI10P2i/m2TYwKMQ+QX7YSldfR6ysZsjXMYdOQpbkUX+wQikAiDpI=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>)
- id 1k1SYq-00074G-Pj; Fri, 31 Jul 2020 10:46:48 +0000
-Received: from host86-143-223-30.range86-143.btcentralplus.com
- ([86.143.223.30] helo=u2f063a87eabd5f.home)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
- (envelope-from <paul@xen.org>)
- id 1k1SYq-0000ZR-Bd; Fri, 31 Jul 2020 10:46:48 +0000
-From: Paul Durrant <paul@xen.org>
-To: xen-devel@lists.xenproject.org
-Subject: [PATCH] x86/hvm: set 'ipat' in EPT for special pages
-Date: Fri, 31 Jul 2020 11:46:44 +0100
-Message-Id: <20200731104644.20906-1-paul@xen.org>
-X-Mailer: git-send-email 2.20.1
+	id 1k1Sc8-0001VH-F8; Fri, 31 Jul 2020 10:50:12 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=oG5j=BK=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1k1Sc7-0001VB-Ny
+ for xen-devel@lists.xenproject.org; Fri, 31 Jul 2020 10:50:11 +0000
+X-Inumbo-ID: 9aca1492-d31b-11ea-8e24-bc764e2007e4
+Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 9aca1492-d31b-11ea-8e24-bc764e2007e4;
+ Fri, 31 Jul 2020 10:50:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1596192611;
+ h=subject:to:cc:references:from:message-id:date:
+ mime-version:in-reply-to:content-transfer-encoding;
+ bh=tZx3PEJmOBHD6pru8XvPlLvbiHaBtjABhRbeqzn/zek=;
+ b=cq4mkn7yKLXI8+n5P9oiGSnZHKGNxOKO0Sm02MgZLD0mIFxP56i8hqGb
+ gpmHMRKuEd1frb309NaUnnrbjRE52rXo/GiK81A0lNNtAyBX+o1pvcgCn
+ 53JL0P8NRJwPP82qC49ek5/rKbw1Xdbz65DXC2sn5Jy6S4gzwy+T1KHx/ 0=;
+Authentication-Results: esa2.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none
+IronPort-SDR: U0rYzTZXmpNJz2TQ4Cf3cHdh0JXuKqzA2cK1XcU1UaqNGQtV0nJQNZGYPhi/fo38YIS7YQKztF
+ 9HapsaWQ32f3pXiZnux1M35iTU95aruXBLenpV+Ils+OY4yT0kCHTI/03wdxlig0h9nr4wz6Fa
+ ENsU1wnhBAeqt07N93ehua0ziM5VNsXAYkX6GuXSp0gplbLbnQLFZ6h23h+0T68mmJeVKcVqES
+ HS91pnISWu6JWpux8wLGoTiSDERhsJ1NMaqejD2Z0ADAvFDWtOleSBpRK8aHwEKxOcBknPXdi0
+ vHA=
+X-SBRS: 3.7
+X-MesageID: 23632365
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.75,418,1589256000"; d="scan'208";a="23632365"
+Subject: Re: [PATCH] x86emul: replace UB shifts
+To: Jan Beulich <jbeulich@suse.com>, "xen-devel@lists.xenproject.org"
+ <xen-devel@lists.xenproject.org>
+References: <bd679766-939d-3176-c913-e993dd48ef15@suse.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Message-ID: <564e3f51-335d-dcdf-900f-380886d01d6b@citrix.com>
+Date: Fri, 31 Jul 2020 11:50:06 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <bd679766-939d-3176-c913-e993dd48ef15@suse.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Content-Language: en-GB
+X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
+ AMSPEX02CL02.citrite.net (10.69.22.126)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,59 +80,25 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Paul Durrant <pdurrant@amazon.com>, Wei Liu <wl@xen.org>,
- Jan Beulich <jbeulich@suse.com>,
- =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: Wei Liu <wl@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: Paul Durrant <pdurrant@amazon.com>
+On 31/07/2020 08:06, Jan Beulich wrote:
+> Displacement values can be negative, hence we shouldn't left-shift them.
+>
+> While auditing shifts, I noticed a pair of missing parentheses, which
+> also get added right here.
+>
+> Reported-by: Andrew Cooper <andrew.cooper3@citrix.com>
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-All non-MMIO ranges (i.e those not mapping real device MMIO regions) that
-map valid MFNs are normally marked MTRR_TYPE_WRBACK and 'ipat' is set. Hence
-when PV drivers running in a guest populate the BAR space of the Xen Platform
-PCI Device with pages such as the Shared Info page or Grant Table pages,
-accesses to these pages will be cachable.
+I'd suggest putting the UBSAN report into the commit message
 
-However, should IOMMU mappings be enabled be enabled for the guest then these
-accesses become uncachable. This has a substantial negative effect on I/O
-throughput of PV devices. Arguably PV drivers should bot be using BAR space to
-host the Shared Info and Grant Table pages but it is currently commonplace for
-them to do this and so this problem needs mitigation. Hence this patch makes
-sure the 'ipat' bit is set for any special page regardless of where in GFN
-space it is mapped.
+(XEN) UBSAN: Undefined behaviour in x86_emulate/x86_emulate.c:3482:55
+(XEN) left shift of negative value -2
 
-NOTE: Clearly this mitigation only applies to Intel EPT. It is not obvious
-      that there is any similar mitigation possible for AMD NPT. Downstreams
-      such as Citrix XenServer have been carrying a patch similar to this for
-      several releases though.
-
-Signed-off-by: Paul Durrant <pdurrant@amazon.com>
----
-Cc: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Wei Liu <wl@xen.org>
-Cc: "Roger Pau Monné" <roger.pau@citrix.com>
----
- xen/arch/x86/hvm/mtrr.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/xen/arch/x86/hvm/mtrr.c b/xen/arch/x86/hvm/mtrr.c
-index 511c3be1c8..3ad813ed15 100644
---- a/xen/arch/x86/hvm/mtrr.c
-+++ b/xen/arch/x86/hvm/mtrr.c
-@@ -830,7 +830,8 @@ int epte_get_entry_emt(struct domain *d, unsigned long gfn, mfn_t mfn,
-         return MTRR_TYPE_UNCACHABLE;
-     }
- 
--    if ( !is_iommu_enabled(d) && !cache_flush_permitted(d) )
-+    if ( (!is_iommu_enabled(d) && !cache_flush_permitted(d)) ||
-+         is_special_page(mfn_to_page(mfn)) )
-     {
-         *ipat = 1;
-         return MTRR_TYPE_WRBACK;
--- 
-2.20.1
-
+Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Tested-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
