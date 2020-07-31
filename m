@@ -2,50 +2,69 @@ Return-Path: <SRS0=y719=BK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.0 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
+X-Spam-Status: No, score=-5.3 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_2 autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CAA31C433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 12:13:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DD6E2C433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 12:16:27 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A2540208E4
-	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 12:13:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A2540208E4
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id EE72A22BF3
+	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 12:16:26 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=aepfle.de header.i=@aepfle.de header.b="KYLbhsH7"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EE72A22BF3
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k1TuY-0004MN-5g; Fri, 31 Jul 2020 12:13:18 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=nr0X=BK=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1k1TuW-0004Ac-VG
- for xen-devel@lists.xenproject.org; Fri, 31 Jul 2020 12:13:16 +0000
-X-Inumbo-ID: 33015f95-d327-11ea-8e2c-bc764e2007e4
-Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 33015f95-d327-11ea-8e2c-bc764e2007e4;
- Fri, 31 Jul 2020 12:13:10 +0000 (UTC)
-Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
- by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
- (return-path ijackson@chiark.greenend.org.uk)
- id 1k1TN0-0001W4-Th; Fri, 31 Jul 2020 12:38:39 +0100
-From: Ian Jackson <ian.jackson@eu.citrix.com>
-To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH v2 29/41] sg-report-host-history: Drop a redundznt AND
- clause
-Date: Fri, 31 Jul 2020 12:38:08 +0100
-Message-Id: <20200731113820.5765-30-ian.jackson@eu.citrix.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200731113820.5765-1-ian.jackson@eu.citrix.com>
-References: <20200731113820.5765-1-ian.jackson@eu.citrix.com>
+	id 1k1TxH-0004tW-Lq; Fri, 31 Jul 2020 12:16:07 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=OevI=BK=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1k1TxF-0004tQ-RQ
+ for xen-devel@lists.xenproject.org; Fri, 31 Jul 2020 12:16:06 +0000
+X-Inumbo-ID: 9a438646-d327-11ea-abaa-12813bfff9fa
+Received: from mo4-p00-ob.smtp.rzone.de (unknown [85.215.255.20])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 9a438646-d327-11ea-abaa-12813bfff9fa;
+ Fri, 31 Jul 2020 12:16:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1596197763;
+ s=strato-dkim-0002; d=aepfle.de;
+ h=References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:
+ X-RZG-CLASS-ID:X-RZG-AUTH:From:Subject:Sender;
+ bh=oDJV2Te/0euogOizTXwWSecv1vZ4GMrGg4ZiS8EsREo=;
+ b=KYLbhsH7kjTdDC568+VGQiE/yk60Q1FfUuwTSB+NTePepQ/dmELlf9t9E9z+O1ww8f
+ +DbRk07X2nJZc//GhP99RFW7lBF1ikNeLpbWJibP044sNA6UX1/g6t7GfO0xafv4Vzwn
+ NtsqGLnR27v71vq+5qG68N2AIVEadEbmeAhGVosuvWM2XDgoG1I5WBfs0NkPNUwtzWif
+ hwowt4LYflbZFFTwqLHzlPUTPGVki3N+IQIzsSUQ9wfkcu5OTm5/ltDnpZJMCtXZIfmk
+ vBYfXdF4lUZDgda2A9+KTubdOnXiXxwoxJxxAGHoAo9n7B3pFY8XzAwOWf4tyyRfgkTY
+ Y1jg==
+X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QLpd5ylWvMDXdoX8l8pYAcz5OTUoY="
+X-RZG-CLASS-ID: mo00
+Received: from sender by smtp.strato.de (RZmta 46.10.5 DYNA|AUTH)
+ with ESMTPSA id m032cfw6VCFuGc8
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
+ (Client did not present a certificate);
+ Fri, 31 Jul 2020 14:15:56 +0200 (CEST)
+Date: Fri, 31 Jul 2020 14:15:49 +0200
+From: Olaf Hering <olaf@aepfle.de>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH v1] tools/xen-cpuid: show enqcmd
+Message-ID: <20200731141549.476fa255.olaf@aepfle.de>
+In-Reply-To: <6e467a8f-d727-8511-da56-69901b6ada85@citrix.com>
+References: <20200730163406.31020-1-olaf@aepfle.de>
+ <65317ac2-0dd0-b453-caec-e5529b423d95@suse.com>
+ <6e467a8f-d727-8511-da56-69901b6ada85@citrix.com>
+X-Mailer: Claws Mail 2020.07.13 (GTK+ 2.24.32; x86_64-suse-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ boundary="Sig_/NjE1vwMdWZYH7_MxQQ==ZYN"; protocol="application/pgp-signature"
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,39 +75,49 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>
+Cc: xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>,
+ Wei Liu <wl@xen.org>, Jan Beulich <jbeulich@suse.com>,
+ Roger Pau =?UTF-8?B?TW9ubsOp?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This condition is the same as $flightcond.  (This has no effect on the
-db performance since the query planner figures it out, but it is
-confusing.)
+--Sig_/NjE1vwMdWZYH7_MxQQ==ZYN
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
----
- sg-report-host-history | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+Am Fri, 31 Jul 2020 13:04:35 +0100
+schrieb Andrew Cooper <andrew.cooper3@citrix.com>:
 
-diff --git a/sg-report-host-history b/sg-report-host-history
-index 2ca0e235..f4352fc3 100755
---- a/sg-report-host-history
-+++ b/sg-report-host-history
-@@ -175,13 +175,12 @@ sub mainquery ($) {
- 	   AND val = ?
- 	   AND $flightcond
-            AND $restrictflight_cond
--           AND flight > ?
- 	 ORDER BY flight DESC
-          LIMIT $limit * 2
- END
- 
-     print DEBUG "MAINQUERY $host...\n";
--    $runvarq->execute($host, $minflight);
-+    $runvarq->execute($host);
- 
-     $hosts{$host} = $runvarq->fetchall_arrayref({});
-     print DEBUG "MAINQUERY $host got ".(scalar @{ $hosts{$host} })."\n";
--- 
-2.20.1
+> And in particular, probably missing from libxl_cpuid.c, which I was
+> meaning to check when I've got a free moment.
 
+Will a ever domU see this flag? I just spotted the <29> when comparing 'xen=
+-cpuid' output between recent Xen releases. It shows up just in the 'Known'=
+ section at this point.
+
+
+Olaf
+
+--Sig_/NjE1vwMdWZYH7_MxQQ==ZYN
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEE97o7Um30LT3B+5b/86SN7mm1DoAFAl8kC3UACgkQ86SN7mm1
+DoBEChAAjZiHJJXd54LUe7zxcGGRVgnK027bclYSllWE6aKaqkcj4OiY1+Du0cVe
+LS81x/7elDpixrco/svlPwkHJ561665eg8piyBfHMzyQ5Wa/5gLsCuviiDlkhx0j
+lThje92/56YLgU0na6OHa3tFxfv7IpThLw7MPHnW9VHcrQbxcJMHJBtGwuxkES4F
+jf2NoKG6FAgu4D2Ref32K1BATc/H/odd3Q1Uar45Y/Bwy3RSq77GXFlcjgALLE7U
+1O1sgZJsInv/Uv0F2vh520LJ5j5tT71z4GnVjzhquSJ39SLsllEK+X2gCTAPlQps
+KZRDsjWLqgO6AeS4k5tkCCwxqn2aWF9F1tUUxpN3ISMxdiSCDY9MB2bnbtxnqKNg
+G3dmIgotuB6EFMeQ0H0+dnJFwKl9MtSnlH4aKNWtrq/ZwNaHlozDFUf5mx982B7H
+3kBrAH1z43bTX8GxuJ0rGBzHx9kVHHNouQORzTJtVqykfHBPZhBHGZ2nwzO79Jm8
+vGpK3gkT+Is04QRRwNWpkda2erve6LDgwcqO3vveTru79G2tM1m/I1ClguEvou8f
+Xj9FM8vnFbWhesOHQURxpCBoK8rMsQxOmA6eE66LrF+EiazwT9r8A7yf5x9eC9FJ
+uoasYS7y6/CeSvqrRQMZ6ngTpQhowOrZv1+bsHnCQMhcqrkdDi0=
+=RrXN
+-----END PGP SIGNATURE-----
+
+--Sig_/NjE1vwMdWZYH7_MxQQ==ZYN--
 
