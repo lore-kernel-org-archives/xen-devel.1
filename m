@@ -7,40 +7,40 @@ X-Spam-Status: No, score=-13.0 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F2F98C433E1
-	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 12:13:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 053DEC433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 12:13:09 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C7D06208E4
-	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 12:13:01 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C7D06208E4
+	by mail.kernel.org (Postfix) with ESMTPS id D28102245C
+	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 12:13:08 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D28102245C
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k1Tu9-00049E-IC; Fri, 31 Jul 2020 12:12:53 +0000
+	id 1k1TuF-0004C7-QY; Fri, 31 Jul 2020 12:12:59 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=nr0X=BK=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1k1Tu8-000489-8T
- for xen-devel@lists.xenproject.org; Fri, 31 Jul 2020 12:12:52 +0000
-X-Inumbo-ID: 27b4b37a-d327-11ea-8e2c-bc764e2007e4
+ id 1k1TuD-0004Ac-Pm
+ for xen-devel@lists.xenproject.org; Fri, 31 Jul 2020 12:12:57 +0000
+X-Inumbo-ID: 2b067d9c-d327-11ea-8e2c-bc764e2007e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 27b4b37a-d327-11ea-8e2c-bc764e2007e4;
- Fri, 31 Jul 2020 12:12:51 +0000 (UTC)
+ id 2b067d9c-d327-11ea-8e2c-bc764e2007e4;
+ Fri, 31 Jul 2020 12:12:57 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1k1TMr-0001W4-UZ; Fri, 31 Jul 2020 12:38:30 +0100
+ id 1k1TMx-0001W4-Jl; Fri, 31 Jul 2020 12:38:35 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH v2 10/41] sg-report-flight: Use WITH clause to use
- index for $anypassq
-Date: Fri, 31 Jul 2020 12:37:49 +0100
-Message-Id: <20200731113820.5765-11-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH v2 22/41] sg-report-host-history: Drop per-job debug
+ etc.
+Date: Fri, 31 Jul 2020 12:38:01 +0100
+Message-Id: <20200731113820.5765-23-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200731113820.5765-1-ian.jackson@eu.citrix.com>
 References: <20200731113820.5765-1-ian.jackson@eu.citrix.com>
@@ -56,96 +56,67 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Perf: runtime of my test case now ~11s
-
-Example query before (from the Perl DBI trace):
-
-        SELECT * FROM flights JOIN steps USING (flight)
-            WHERE (branch='xen-unstable')
-              AND job=? and testid=? and status='pass'
-              AND ( (TRUE AND flight <= 151903) AND (blessing='real') )
-            LIMIT 1
-
-After:
-
-        WITH s AS
-        (
-        SELECT * FROM steps
-         WHERE job=? and testid=? and status='pass'
-        )
-        SELECT * FROM flights JOIN s USING (flight)
-            WHERE (branch='xen-unstable')
-              AND ( (TRUE AND flight <= 151903) AND (blessing='real') )
-            LIMIT 1
-
-In both cases with bind vars:
-
-   "test-amd64-i386-xl-pvshim"
-   "guest-start"
-
-Diff to the query:
-
--        SELECT * FROM flights JOIN steps USING (flight)
-+        WITH s AS
-+        (
-+        SELECT * FROM steps
-+         WHERE job=? and testid=? and status='pass'
-+        )
-+        SELECT * FROM flights JOIN s USING (flight)
-             WHERE (branch='xen-unstable')
--              AND job=? and testid=? and status='pass'
-               AND ( (TRUE AND flight <= 151903) AND (blessing='real') )
-             LIMIT 1
+This printing has a significant effect on the performance of this
+program, at least after we optimise various other things.
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
-Reviewed-by: George Dunlap <george.dunlap@citrix.com>
 ---
- schema/steps-job-index.sql |  2 +-
- sg-report-flight           | 14 ++++++++++++--
- 2 files changed, 13 insertions(+), 3 deletions(-)
+ sg-report-host-history | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/schema/steps-job-index.sql b/schema/steps-job-index.sql
-index 07dc5a30..2c33af72 100644
---- a/schema/steps-job-index.sql
-+++ b/schema/steps-job-index.sql
-@@ -1,4 +1,4 @@
---- ##OSSTEST## 006 Preparatory
-+-- ##OSSTEST## 006 Needed
- --
- -- This index helps sg-report-flight find if a test ever passed.
+diff --git a/sg-report-host-history b/sg-report-host-history
+index a159df3e..a34458e0 100755
+--- a/sg-report-host-history
++++ b/sg-report-host-history
+@@ -102,9 +102,9 @@ sub read_existing_logs ($) {
+ 	    my $k = $1;
+ 	    s{\%([0-9a-f]{2})}{ chr hex $1 }ge;
+ 	    $ch->{$k} = $_;
+-	    print DEBUG "GOTCACHE $hostname $k\n";
++#	    print DEBUG "GOTCACHE $hostname $k\n";
+ 	}
+-	print DEBUG "GOTCACHE $hostname \@ $jr->{flight} $jr->{job} $jr->{status},$jr->{name}\n";
++#	print DEBUG "GOTCACHE $hostname \@ $jr->{flight} $jr->{job} $jr->{status},$jr->{name}\n";
+ 	$tcache->{$jr->{flight},$jr->{job},$jr->{status},$jr->{name}} = $jr;
+     }
+     close H;
+@@ -272,7 +272,7 @@ END
+     my @rows;
+     my $cachehits = 0;
+     foreach my $jr (@$inrows) {
+-	print DEBUG "JOB $jr->{flight}.$jr->{job} ";
++	#print DEBUG "JOB $jr->{flight}.$jr->{job} ";
  
-diff --git a/sg-report-flight b/sg-report-flight
-index d06be292..d218b24e 100755
---- a/sg-report-flight
-+++ b/sg-report-flight
-@@ -849,10 +849,20 @@ sub justifyfailures ($;$) {
+ 	my $cacherow =
+ 	    $tcache->{$jr->{flight},$jr->{job},$jr->{status},$jr->{name}};
+@@ -283,11 +283,11 @@ END
  
-     my @failures= values %{ $fi->{Failures} };
+ 	my $endedrow = jobquery($endedq, $jr, 'e');
+ 	if (!$endedrow) {
+-	    print DEBUG "no-finished\n";
++	    #print DEBUG "no-finished\n";
+ 	    next;
+ 	}
+-	print DEBUG join " ", map { $endedrow->{$_} } sort keys %$endedrow;
+-	print DEBUG ".\n";
++	#print DEBUG join " ", map { $endedrow->{$_} } sort keys %$endedrow;
++	#print DEBUG ".\n";
  
-+    # In psql 9.6 this WITH clause makes postgresql do the steps query
-+    # first.  This is good because if this test never passed we can
-+    # determine that really quickly using the new index, without
-+    # having to scan the flights table.  (If the test passed we will
-+    # probably not have to look at many flights to find one, so in
-+    # that case this is not much worse.)
-     my $anypassq= <<END;
--        SELECT * FROM flights JOIN steps USING (flight)
-+        WITH s AS
-+        (
-+        SELECT * FROM steps
-+         WHERE job=? and testid=? and status='pass'
-+        )
-+        SELECT * FROM flights JOIN s USING (flight)
-             WHERE $branches_cond_q
--              AND job=? and testid=? and status='pass'
-               AND $blessingscond
-             LIMIT 1
- END
+ 	push @rows, { %$jr, %$endedrow };
+     }
+@@ -329,7 +329,7 @@ END
+ 	    next;
+ 	}
+ 
+-        print DEBUG "JR $jr->{flight}.$jr->{job}\n";
++        #print DEBUG "JR $jr->{flight}.$jr->{job}\n";
+ 	my $ir = jobquery($infoq, $jr, 'i');
+ 	my $ar = jobquery($allocdq, $jr, 'a');
+ 	my $ident = $jr->{name};
 -- 
 2.20.1
 
