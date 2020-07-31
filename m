@@ -7,40 +7,40 @@ X-Spam-Status: No, score=-13.0 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 78E1AC433E4
-	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 12:02:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4ED65C433E8
+	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 12:02:29 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 53F5E22BF3
-	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 12:02:26 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 53F5E22BF3
+	by mail.kernel.org (Postfix) with ESMTPS id 29A7C22CF7
+	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 12:02:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 29A7C22CF7
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k1Tjt-00027b-0S; Fri, 31 Jul 2020 12:02:17 +0000
+	id 1k1Tjv-00029K-9j; Fri, 31 Jul 2020 12:02:19 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=nr0X=BK=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1k1Tjr-00026u-HR
- for xen-devel@lists.xenproject.org; Fri, 31 Jul 2020 12:02:15 +0000
-X-Inumbo-ID: ac328bec-d325-11ea-8e2b-bc764e2007e4
+ id 1k1Tju-00026u-4q
+ for xen-devel@lists.xenproject.org; Fri, 31 Jul 2020 12:02:18 +0000
+X-Inumbo-ID: ad15deb1-d325-11ea-8e2b-bc764e2007e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id ac328bec-d325-11ea-8e2b-bc764e2007e4;
- Fri, 31 Jul 2020 12:02:14 +0000 (UTC)
+ id ad15deb1-d325-11ea-8e2b-bc764e2007e4;
+ Fri, 31 Jul 2020 12:02:16 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1k1TN2-0001W4-LZ; Fri, 31 Jul 2020 12:38:40 +0100
+ id 1k1TMz-0001W4-QA; Fri, 31 Jul 2020 12:38:37 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH v2 33/41] cs-bisection-step: Generalise
- qtxt_common_rev_ok
-Date: Fri, 31 Jul 2020 12:38:12 +0100
-Message-Id: <20200731113820.5765-34-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH v2 26/41] sg-report-host-history: Rerganisation: Make
+ mainquery per-host
+Date: Fri, 31 Jul 2020 12:38:05 +0100
+Message-Id: <20200731113820.5765-27-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200731113820.5765-1-ian.jackson@eu.citrix.com>
 References: <20200731113820.5765-1-ian.jackson@eu.citrix.com>
@@ -60,67 +60,61 @@ Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-* Make it into a subref which takes a $table argument.
-* Change the two references into function calls using the @{...} syntax
-* Move the definition earlier in the file
+This moves the loop over hosts into the main program.  We are working
+our way to a new code structure.
 
-No change to the generated query.
+No functional change.
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
-v2: New patch.
----
- cs-bisection-step | 16 ++++++++++------
- 1 file changed, 10 insertions(+), 6 deletions(-)
+ sg-report-host-history | 19 +++++++++++--------
+ 1 file changed, 11 insertions(+), 8 deletions(-)
 
-diff --git a/cs-bisection-step b/cs-bisection-step
-index 9a0fee39..5d4e179e 100755
---- a/cs-bisection-step
-+++ b/cs-bisection-step
-@@ -182,6 +182,14 @@ END
- sub flight_rmap ($$) {
-     my ($flight, $need_urls) = @_;
+diff --git a/sg-report-host-history b/sg-report-host-history
+index 15866ab6..34216aa2 100755
+--- a/sg-report-host-history
++++ b/sg-report-host-history
+@@ -164,7 +164,9 @@ sub jobquery ($$$) {
  
-+    my $qtxt_common_rev_ok = sub {
-+	my ($table) = @_;
-+	[<<END];
-+                 ($table.name LIKE E'built\\_revision\\_%' OR
-+                  $table.name LIKE E'revision\\_%')
-+END
-+    };
+ our %hosts;
+ 
+-sub mainquery () {
++sub mainquery ($) {
++    my ($host) = @_;
 +
-     $dbh_tests->do(<<END, {});
-           CREATE TEMP TABLE tmp_build_info (
-               use varchar NOT NULL,
-@@ -236,10 +244,6 @@ END
-     my $qtxt_common_tables = <<END;
- 	    FROM tmp_build_info AS rev
+     our $runvarq //= db_prepare(<<END);
+ 	SELECT flight, job, name, status
+ 	  FROM runvars
+@@ -177,13 +179,12 @@ sub mainquery () {
+ 	 ORDER BY flight DESC
+          LIMIT $limit * 2
  END
--    my $qtxt_common_rev_condition = <<END;
--                 (rev.name LIKE E'built\\_revision\\_%' OR
--                  rev.name LIKE E'revision\\_%')
--END
+-    foreach my $host (sort keys %hosts) {
+-	print DEBUG "MAINQUERY $host...\n";
+-	$runvarq->execute($host, $minflight);
  
-     my $sth= db_prepare(!$need_urls ? <<END_NOURLS : <<END_URLS);
-         SELECT
-@@ -249,7 +253,7 @@ $qtxt_common_results
- $qtxt_common_tables
+-	$hosts{$host} = $runvarq->fetchall_arrayref({});
+-	print DEBUG "MAINQUERY $host got ".(scalar @{ $hosts{$host} })."\n";
+-    }
++    print DEBUG "MAINQUERY $host...\n";
++    $runvarq->execute($host, $minflight);
++
++    $hosts{$host} = $runvarq->fetchall_arrayref({});
++    print DEBUG "MAINQUERY $host got ".(scalar @{ $hosts{$host} })."\n";
+ }
  
-            WHERE
--$qtxt_common_rev_condition
-+@{ $qtxt_common_rev_ok->('rev') }
+ sub reporthost ($) {
+@@ -474,7 +475,9 @@ db_retry($dbh_tests, [], sub {
+ });
  
- 	   ORDER by rev.name;
+ db_retry($dbh_tests, [], sub {
+-    mainquery();
++    foreach my $host (sort keys %hosts) {
++	mainquery($host);
++    }
+ });
  
-@@ -262,7 +266,7 @@ $qtxt_common_tables
-       CROSS JOIN tmp_build_info AS url
- 
-            WHERE
--$qtxt_common_rev_condition
-+@{ $qtxt_common_rev_ok->('rev') }
-   	     AND  url.name LIKE E'tree\\_%'
- 	     AND  url.use = rev.use
- 	     AND  url.job = rev.job
+ foreach my $host (sort keys %hosts) {
 -- 
 2.20.1
 
