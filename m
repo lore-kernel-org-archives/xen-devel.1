@@ -7,40 +7,40 @@ X-Spam-Status: No, score=-13.0 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4ED65C433E8
-	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 12:02:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D3A51C433E1
+	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 12:02:35 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 29A7C22CF7
-	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 12:02:29 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 29A7C22CF7
+	by mail.kernel.org (Postfix) with ESMTPS id B18CB22B40
+	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 12:02:35 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B18CB22B40
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k1Tjv-00029K-9j; Fri, 31 Jul 2020 12:02:19 +0000
+	id 1k1Tk0-0002Cz-IP; Fri, 31 Jul 2020 12:02:24 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=nr0X=BK=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1k1Tju-00026u-4q
- for xen-devel@lists.xenproject.org; Fri, 31 Jul 2020 12:02:18 +0000
-X-Inumbo-ID: ad15deb1-d325-11ea-8e2b-bc764e2007e4
+ id 1k1Tjz-00026u-58
+ for xen-devel@lists.xenproject.org; Fri, 31 Jul 2020 12:02:23 +0000
+X-Inumbo-ID: af900828-d325-11ea-8e2b-bc764e2007e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id ad15deb1-d325-11ea-8e2b-bc764e2007e4;
- Fri, 31 Jul 2020 12:02:16 +0000 (UTC)
+ id af900828-d325-11ea-8e2b-bc764e2007e4;
+ Fri, 31 Jul 2020 12:02:20 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1k1TMz-0001W4-QA; Fri, 31 Jul 2020 12:38:37 +0100
+ id 1k1TN6-0001W4-2a; Fri, 31 Jul 2020 12:38:44 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH v2 26/41] sg-report-host-history: Rerganisation: Make
- mainquery per-host
-Date: Fri, 31 Jul 2020 12:38:05 +0100
-Message-Id: <20200731113820.5765-27-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH v2 40/41] cs-bisection-step: Lay out the revision
+ tuple graph once
+Date: Fri, 31 Jul 2020 12:38:19 +0100
+Message-Id: <20200731113820.5765-41-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200731113820.5765-1-ian.jackson@eu.citrix.com>
 References: <20200731113820.5765-1-ian.jackson@eu.citrix.com>
@@ -60,61 +60,39 @@ Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This moves the loop over hosts into the main program.  We are working
-our way to a new code structure.
-
-No functional change.
+The graph layout algorithm is not very fast, particularly if the
+revision graph is big.  In my test case this saves about 10s.
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- sg-report-host-history | 19 +++++++++++--------
- 1 file changed, 11 insertions(+), 8 deletions(-)
+v2: New patch.
+---
+ cs-bisection-step | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
 
-diff --git a/sg-report-host-history b/sg-report-host-history
-index 15866ab6..34216aa2 100755
---- a/sg-report-host-history
-+++ b/sg-report-host-history
-@@ -164,7 +164,9 @@ sub jobquery ($$$) {
+diff --git a/cs-bisection-step b/cs-bisection-step
+index 027032a1..8544bac0 100755
+--- a/cs-bisection-step
++++ b/cs-bisection-step
+@@ -1113,10 +1113,15 @@ END
+         or die "$!";
  
- our %hosts;
- 
--sub mainquery () {
-+sub mainquery ($) {
-+    my ($host) = @_;
-+
-     our $runvarq //= db_prepare(<<END);
- 	SELECT flight, job, name, status
- 	  FROM runvars
-@@ -177,13 +179,12 @@ sub mainquery () {
- 	 ORDER BY flight DESC
-          LIMIT $limit * 2
- END
--    foreach my $host (sort keys %hosts) {
--	print DEBUG "MAINQUERY $host...\n";
--	$runvarq->execute($host, $minflight);
- 
--	$hosts{$host} = $runvarq->fetchall_arrayref({});
--	print DEBUG "MAINQUERY $host got ".(scalar @{ $hosts{$host} })."\n";
--    }
-+    print DEBUG "MAINQUERY $host...\n";
-+    $runvarq->execute($host, $minflight);
-+
-+    $hosts{$host} = $runvarq->fetchall_arrayref({});
-+    print DEBUG "MAINQUERY $host got ".(scalar @{ $hosts{$host} })."\n";
- }
- 
- sub reporthost ($) {
-@@ -474,7 +475,9 @@ db_retry($dbh_tests, [], sub {
- });
- 
- db_retry($dbh_tests, [], sub {
--    mainquery();
-+    foreach my $host (sort keys %hosts) {
-+	mainquery($host);
-+    }
- });
- 
- foreach my $host (sort keys %hosts) {
+     if (eval {
++	print DEBUG "RUNNING dot -Txdot\n";
++	system_checked("dot", "-Txdot", "-o$graphfile.xdot",
++		       "$graphfile.dot");
+         foreach my $fmt (qw(ps png svg)) {
+-	    print DEBUG "RUNNING dot -T$fmt\n";
+-            system_checked("dot", "-T$fmt", "-o$graphfile.$fmt",
+-			   "$graphfile.dot");
++	    # neato rather than dot, because neato just uses positions
++	    # etc. in the input whereas dot does (re)calculation work.
++	    print DEBUG "RUNNING neato -n2 -T$fmt\n";
++            system_checked("neato", "-n2", "-T$fmt", "-o$graphfile.$fmt",
++			   "$graphfile.xdot");
+         }
+ 	open SVGI, "$graphfile.svg" or die "$graphfile.svg $!";
+ 	open SVGO, ">", "$graphfile.svg.new" or die "$graphfile.svg.new $!";
 -- 
 2.20.1
 
