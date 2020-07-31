@@ -2,81 +2,59 @@ Return-Path: <SRS0=y719=BK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.2 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3D7D9C433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 14:04:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 23F50C433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 14:14:29 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 06A0D2083B
-	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 14:04:34 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="TlDwgyPZ"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 06A0D2083B
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id ED871206DA
+	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 14:14:28 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org ED871206DA
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k1Vdv-0001mT-5Q; Fri, 31 Jul 2020 14:04:15 +0000
+	id 1k1VnW-0002ix-5W; Fri, 31 Jul 2020 14:14:10 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=GLoN=BK=citrix.com=george.dunlap@srs-us1.protection.inumbo.net>)
- id 1k1Vdt-0001mL-M5
- for xen-devel@lists.xenproject.org; Fri, 31 Jul 2020 14:04:13 +0000
-X-Inumbo-ID: b5eaaf96-d336-11ea-abbb-12813bfff9fa
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=S17i=BK=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1k1VnV-0002is-6i
+ for xen-devel@lists.xenproject.org; Fri, 31 Jul 2020 14:14:09 +0000
+X-Inumbo-ID: 1819e82a-d338-11ea-abbb-12813bfff9fa
+Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id b5eaaf96-d336-11ea-abbb-12813bfff9fa;
- Fri, 31 Jul 2020 14:04:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1596204252;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-id:content-transfer-encoding: mime-version;
- bh=JbvmWHPnHyFXzuWdV85iadLyRKIgc4icLLHssKEOtHI=;
- b=TlDwgyPZMOWCsx+HtOITZVXMOoomxgftjvvBJ9v+SKGd14G8ryTg5PyM
- VEF+ZgiZxfix9z+0qThVFQ+AuwUJdNOtu0sfAsAB9Pn1ulGN/Zbiwr/YI
- aZpvBHcxzfwrYzaNtPqlwF2Z/OK2XqGbefbzvfmwSPtePeB+trbnGq1lD o=;
-Authentication-Results: esa6.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: JSRjncnjuG1XpqS77FBF4RGbiPcvqHM+AjXFI7YLCNBKDP2yyt2oSaM+izJkuD7PE7AJfSzAxN
- SKU0eKgC9oY9ruZnxgcwyflgufMzMGJIilWc8mUUiXRRHmI8ek1fcyFX2rTem1gH7cpkVJwEEB
- 2ghtBbY3u1lS/H/4gYWTdsUlH9gNCNfvgk0voX/21ZeruZyLTK4Lqxgeu0GfE6w4DQ+El6kntV
- RKkcvKqyc9WqSws8nI45aM/3smaz/S6Ms4C5ejygsF7KesfjPhjDOOvd+QkT5HQbj99frSpeAv
- CWM=
-X-SBRS: 3.7
-X-MesageID: 23953025
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.75,418,1589256000"; d="scan'208";a="23953025"
-From: George Dunlap <George.Dunlap@citrix.com>
-To: Ian Jackson <Ian.Jackson@citrix.com>
-Subject: Re: [OSSTEST PATCH v2 41/41] duration_estimator: Clarify
- recentflights query a bit
-Thread-Topic: [OSSTEST PATCH v2 41/41] duration_estimator: Clarify
- recentflights query a bit
-Thread-Index: AQHWZzI+XEyk28m8zUGjw7HVjV9ik6khlv4A
-Date: Fri, 31 Jul 2020 14:04:09 +0000
-Message-ID: <0E9B6793-7B13-418C-8E8B-7F5CA38520D3@citrix.com>
-References: <20200731113820.5765-1-ian.jackson@eu.citrix.com>
- <20200731113820.5765-42-ian.jackson@eu.citrix.com>
-In-Reply-To: <20200731113820.5765-42-ian.jackson@eu.citrix.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-mailer: Apple Mail (2.3608.80.23.2.2)
-x-ms-exchange-messagesentrepresentingtype: 1
-x-ms-exchange-transport-fromentityheader: Hosted
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <C35978B494756E40BBA332AC7BD54BDF@citrix.com>
-Content-Transfer-Encoding: quoted-printable
+ id 1819e82a-d338-11ea-abbb-12813bfff9fa;
+ Fri, 31 Jul 2020 14:14:06 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 34D22AB8B;
+ Fri, 31 Jul 2020 14:14:19 +0000 (UTC)
+Subject: Re: [PATCH v2 2/2] x86/hvm: simplify 'mmio_direct' check in
+ epte_get_entry_emt()
+To: paul@xen.org
+References: <20200731123926.28970-1-paul@xen.org>
+ <20200731123926.28970-3-paul@xen.org>
+ <a4856c33-8bb0-4afa-cc71-3af4c229bc27@suse.com>
+ <004501d6673b$9adffbf0$d09ff3d0$@xen.org>
+ <84cdd5b8-5149-a240-8bad-be8d67dca0d8@suse.com>
+ <004601d66740$9661ad80$c3250880$@xen.org>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <1386ff11-6bf4-2edb-3b44-354faa75cced@suse.com>
+Date: Fri, 31 Jul 2020 16:14:04 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
+In-Reply-To: <004601d66740$9661ad80$c3250880$@xen.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -87,26 +65,73 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: xen-devel@lists.xenproject.org, 'Paul Durrant' <pdurrant@amazon.com>,
+ =?UTF-8?B?J1JvZ2VyIFBhdSBNb25uw6kn?= <roger.pau@citrix.com>,
+ 'Wei Liu' <wl@xen.org>, 'Andrew Cooper' <andrew.cooper3@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
+On 31.07.2020 15:43, Paul Durrant wrote:
+>> -----Original Message-----
+>> From: Jan Beulich <jbeulich@suse.com>
+>> Sent: 31 July 2020 14:41
+>> To: paul@xen.org
+>> Cc: xen-devel@lists.xenproject.org; 'Paul Durrant' <pdurrant@amazon.com>; 'Andrew Cooper'
+>> <andrew.cooper3@citrix.com>; 'Wei Liu' <wl@xen.org>; 'Roger Pau Monné' <roger.pau@citrix.com>
+>> Subject: Re: [PATCH v2 2/2] x86/hvm: simplify 'mmio_direct' check in epte_get_entry_emt()
+>>
+>> On 31.07.2020 15:07, Paul Durrant wrote:
+>>>> -----Original Message-----
+>>>> From: Jan Beulich <jbeulich@suse.com>
+>>>> Sent: 31 July 2020 13:58
+>>>> To: Paul Durrant <paul@xen.org>
+>>>> Cc: xen-devel@lists.xenproject.org; Paul Durrant <pdurrant@amazon.com>; Andrew Cooper
+>>>> <andrew.cooper3@citrix.com>; Wei Liu <wl@xen.org>; Roger Pau Monné <roger.pau@citrix.com>
+>>>> Subject: Re: [PATCH v2 2/2] x86/hvm: simplify 'mmio_direct' check in epte_get_entry_emt()
+>>>>
+>>>> On 31.07.2020 14:39, Paul Durrant wrote:
+>>>>> From: Paul Durrant <pdurrant@amazon.com>
+>>>>>
+>>>>> Re-factor the code to take advantage of the fact that the APIC access page is
+>>>>> a 'special' page.
+>>>>
+>>>> Hmm, that's going quite as far as I was thinking to go: In
+>>>> particular, you leave in place the set_mmio_p2m_entry() use
+>>>> in vmx_alloc_vlapic_mapping(). With that replaced, the
+>>>> re-ordering in epte_get_entry_emt() that you do shouldn't
+>>>> be necessary; you'd simple drop the checking of the
+>>>> specific MFN.
+>>>
+>>> Ok, it still needs to go in the p2m though so are you suggesting
+>>> just calling p2m_set_entry() directly?
+>>
+>> Yes, if this works. The main question really is whether there are
+>> any hidden assumptions elsewhere that this page gets mapped as an
+>> MMIO one.
+>>
+> 
+> Actually, it occurs to me that logdirty is going to be an issue if I
+> use p2m_ram_rw. If I'm not going to use p2m_mmio_direct then do you
+> have another suggestion?
 
+p2m_ram_rw is also not good because of allowing execution. If we don't
+want to create a new type, how about (ab)using p2m_grant_map_rw (in
+the sense of Xen granting the domain access to this page)? Possible
+problems with this are
+- replace_grant_p2m_mapping()
+- hvm_translate_get_page()
+All other uses of p2m_grant_map_rw and p2m_is_grant() look to be
+compatible with this approach.
 
-> On Jul 31, 2020, at 12:38 PM, Ian Jackson <ian.jackson@eu.citrix.com> wro=
-te:
->=20
-> The condition on r.job is more naturally thought of as a join
-> condition than a where condition.  (This is an inner join, so the
-> semantics are identical.)
->=20
-> Also, for clarity, swap the flight and job conditions round, so that
-> the ON clause is a series of r.thing =3D otherthing.
->=20
-> No functional change.
->=20
-> Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
+For replace_grant_p2m_mapping() I think there's no issue because the
+grant table code won't find a suitable active entry.
 
-Reviewed-by: George Dunlap <george.dunlap@citrix.com>
+For hvm_translate_get_page() the question is why it checks for the
+two grant types in the first place; iow I wonder whether that check
+couldn't be dropped.
 
+Independent of this, btw, you may need to call set_gpfn_from_mfn()
+alongside p2m_set_entry().
+
+Jan
 
