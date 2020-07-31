@@ -4,43 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-13.0 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 79863C433E0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8946FC433E1
 	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 12:00:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5325922B40
+	by mail.kernel.org (Postfix) with ESMTPS id 6832C22BF3
 	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 12:00:57 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5325922B40
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6832C22BF3
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k1TiR-0001KY-0p; Fri, 31 Jul 2020 12:00:47 +0000
+	id 1k1TiL-0001Jt-P9; Fri, 31 Jul 2020 12:00:41 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=nr0X=BK=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1k1TiP-0001Jk-Jv
- for xen-devel@lists.xenproject.org; Fri, 31 Jul 2020 12:00:45 +0000
-X-Inumbo-ID: 76268c7e-d325-11ea-8e2b-bc764e2007e4
+ id 1k1TiK-0001Jk-L8
+ for xen-devel@lists.xenproject.org; Fri, 31 Jul 2020 12:00:40 +0000
+X-Inumbo-ID: 737bffed-d325-11ea-8e2b-bc764e2007e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 76268c7e-d325-11ea-8e2b-bc764e2007e4;
- Fri, 31 Jul 2020 12:00:44 +0000 (UTC)
+ id 737bffed-d325-11ea-8e2b-bc764e2007e4;
+ Fri, 31 Jul 2020 12:00:40 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1k1TN4-0001W4-8W; Fri, 31 Jul 2020 12:38:42 +0100
+ id 1k1TN1-0001W4-UH; Fri, 31 Jul 2020 12:38:40 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH v2 37/41] cs-bisection-step: temporary table: Insert
- only rows we care about
-Date: Fri, 31 Jul 2020 12:38:16 +0100
-Message-Id: <20200731113820.5765-38-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH v2 31/41] schema: Add index to help cs-bisection-step
+Date: Fri, 31 Jul 2020 12:38:10 +0100
+Message-Id: <20200731113820.5765-32-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200731113820.5765-1-ian.jackson@eu.citrix.com>
 References: <20200731113820.5765-1-ian.jackson@eu.citrix.com>
@@ -60,47 +59,29 @@ Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Every use of this table has a WHERE or ON which invokes at least one
-of these conditions.  So put only those rows into the table.
-
-This provides a significant speedup (which I haven't properly
-measured).
-
-No overall functional change.
+cs-bisection step basis search involves looking for recent flights
+that weren't broken.  A flight is broken if it has broken steps.
+Make an index for this to save it scanning the steps table.
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
-v2: New patch.
----
- cs-bisection-step | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+ schema/steps-broken-index.sql | 7 +++++++
+ 1 file changed, 7 insertions(+)
+ create mode 100644 schema/steps-broken-index.sql
 
-diff --git a/cs-bisection-step b/cs-bisection-step
-index 1c165b78..718c87b0 100755
---- a/cs-bisection-step
-+++ b/cs-bisection-step
-@@ -219,7 +219,9 @@ END
-     
-            WHERE t.job = ?
- 	     AND t.flight = ?
--	     AND t.name LIKE '%buildjob'
-+	     AND t.name LIKE '%buildjob' AND
-+(@{ $qtxt_common_rev_ok->('b') } OR
-+ @{ $qtxt_common_tree_ok->('b') })
- 	     AND b.flight = (CASE WHEN t.val NOT LIKE '%.%'
-                                   THEN t.flight
-                                   ELSE cast(split_part(t.val, '.', 1) AS int)
-@@ -239,7 +241,9 @@ END
- 	           job  AS job
- 	      FROM runvars
- 	     WHERE job = ?
--	       AND flight = ?
-+	       AND flight = ? AND
-+(@{ $qtxt_common_rev_ok->('runvars') } OR
-+ @{ $qtxt_common_tree_ok->('runvars') })
- END
- 
-     my $qtxt_common_results = <<END;
+diff --git a/schema/steps-broken-index.sql b/schema/steps-broken-index.sql
+new file mode 100644
+index 00000000..770747cc
+--- /dev/null
++++ b/schema/steps-broken-index.sql
+@@ -0,0 +1,7 @@
++-- ##OSSTEST## 010 Harmless
++--
++-- This index helps cs-bisection-flight check if flighss are broken.
++
++CREATE INDEX steps_broken_idx
++    ON steps (flight)
++ WHERE status='broken';
 -- 
 2.20.1
 
