@@ -2,79 +2,75 @@ Return-Path: <SRS0=y719=BK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
-	DKIM_ADSP_CUSTOM_MED,DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_ADSP_CUSTOM_MED,
+	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3820FC433E3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2342DC433E4
 	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 12:51:28 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 06AA72087C
+	by mail.kernel.org (Postfix) with ESMTPS id E846421D95
 	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 12:51:27 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="WgUyGPBf"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 06AA72087C
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="bH1oegfq"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E846421D95
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k1UVL-0001JL-IW; Fri, 31 Jul 2020 12:51:19 +0000
+	id 1k1UVI-0001Hz-90; Fri, 31 Jul 2020 12:51:16 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YcXq=BK=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
- id 1k1UVK-0001HZ-I5
- for xen-devel@lists.xenproject.org; Fri, 31 Jul 2020 12:51:18 +0000
-X-Inumbo-ID: 84af1b9c-d32c-11ea-8e30-bc764e2007e4
-Received: from mail-lf1-x142.google.com (unknown [2a00:1450:4864:20::142])
+ id 1k1UVG-0001HZ-Kd
+ for xen-devel@lists.xenproject.org; Fri, 31 Jul 2020 12:51:14 +0000
+X-Inumbo-ID: 83bd0c26-d32c-11ea-8e30-bc764e2007e4
+Received: from mail-lj1-x242.google.com (unknown [2a00:1450:4864:20::242])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 84af1b9c-d32c-11ea-8e30-bc764e2007e4;
- Fri, 31 Jul 2020 12:51:15 +0000 (UTC)
-Received: by mail-lf1-x142.google.com with SMTP id j22so10896253lfm.2
- for <xen-devel@lists.xenproject.org>; Fri, 31 Jul 2020 05:51:15 -0700 (PDT)
+ id 83bd0c26-d32c-11ea-8e30-bc764e2007e4;
+ Fri, 31 Jul 2020 12:51:13 +0000 (UTC)
+Received: by mail-lj1-x242.google.com with SMTP id t23so8799919ljc.3
+ for <xen-devel@lists.xenproject.org>; Fri, 31 Jul 2020 05:51:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=P8zgpF044pgTW1uK5Q8AXrv/7bel3rEWKcAtjS7WDeo=;
- b=WgUyGPBfwmJ9bTlFZ1iykzmaC+/eyxO2mETTCyh0EN7DEuu6cfihmRQOfjN0UX17KJ
- 1XK/aClkr4jouIfR2Uq33SHtLP56E4y8DgZ87NMJDRnE/5HMKnL0qQRmTaRqEurFsoxI
- D/R3+eHgdIAl42+OdJRKAhPJheLy6IATe2ljDZKS9Ir/9TnHfgeT9ND6Q078g/e5NeAs
- I2W7ZBR4JYFb7XWCyVQlSdl0Ydv93Ytn/B8SI+DrRwYKxIF7FMjE6FYcroqJuyHyrA1S
- e7Z785IPUZkU0urptiMhDbgonuN0KgLkpcNKcT+5pvixgh0YZDlTJ29FOCn97utl+t8+
- hahQ==
+ h=from:to:cc:subject:date:message-id;
+ bh=B/WYQkneNHHasyBibLNJc39P94On0q0Yf/0dGxBiCnM=;
+ b=bH1oegfq4F1BjeNTK0Nmijn8MhoTBmIOgLZoaVfUGo0h2JoRT+aO14I78TeLvdBHYm
+ Pt4W0qwPJ4s9jm03v4G0XX/uCdXRfRLPIyYfE7mgknlRuHgczule6rCWmicdbvvZkVR5
+ FK1yg1ZEqij2/fftNtqZXSMUYpyr8RLHPKXEKIlnDfhXUcnkj7I+tcnqEu4OLCIdRvwU
+ kdCVHuuI5NS6sIq8V5pwcioRFKnchzzF27Gus5xnrUP4lSfxpu9uXYL8eh3rwklF60Hw
+ yDmB2W+Hz3BQ8SKUUY/ifYHZeaBqiQgP66TgtLdW15C+Z/XUEQZamtVRWmfGMyn6Brg4
+ z6Jw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references;
- bh=P8zgpF044pgTW1uK5Q8AXrv/7bel3rEWKcAtjS7WDeo=;
- b=rv3q0HIgph9RvopwE15MHDPbwNdcwxyW/8MD9y7kG0wdGxSvZyEq9LTD3oNsMmjBdK
- 3nzYVXiRKX4aTVYg7aDg4YhjPrav2dZdMwOqs3mfIQLcuT7UqhE+6NDDk9PRuHVPpqy8
- a2MdvIUZdLX1fFXggRSXH2HjB2Jf9dhqXrOlR3JFCsNqJVYyze04ik+s9+qr5yaT1bHx
- zPpiQn9af63FnNBoM+1NNf+rIfNpgKZ1lURqAgYB9rMaJHAon4dpg0lsgvtEm2sDLRdV
- 6lzXbe5buBhfmJqOxxm8xPgr9i1eqYnG5UqcYMTZk33b4x/ewuyeIukwpDESFpToDv8S
- cSTg==
-X-Gm-Message-State: AOAM531M4tTvHi68nwPo4T0owXUZV02iETMwvwQpqfrkD7arbrhs7CwJ
- AXoHVCYoAWB0tuMgYr17A4j0guzb45Y=
-X-Google-Smtp-Source: ABdhPJzATe0fCD2sbhssHSnUfNXc6kWFAY41kSspFrVQTiQcz0U9VH0isUKE3+W9ohrCIfVkdQXBSg==
-X-Received: by 2002:ac2:5683:: with SMTP id 3mr1948307lfr.69.1596199873919;
- Fri, 31 Jul 2020 05:51:13 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=B/WYQkneNHHasyBibLNJc39P94On0q0Yf/0dGxBiCnM=;
+ b=gjc7/A1TVz9DhXvzya6kfyEf1DWDRZamQpv63xihwdlpdvJ8HScRVsHr5X22pNfUfH
+ FYVojepZL/YFXbQRxHli+pQpPouXeBKv/4XSQcL17nsCo6N3d5WZ8+/lpTGz5piUH0l4
+ StYxCaj1B4ck6SL87xWaupKJ7xNr5Wy2ef1G8OlV2RKdk55132Z004eHZQdtOT9saLtf
+ tUWFKYmmlv/i/C8Oug0yERMYmKlnQKSVi0DOV37UIc75kIK8r1QiHzgIDydsKEnSEgd9
+ Z96T2cC5oDgUW7BI8e8s2KZU0ddsYxUMhrB6OQvFRII0ErLA+p4bhCFvliib9Bvb71wd
+ mByw==
+X-Gm-Message-State: AOAM531AOo9yCMgE/rjuYJ9OWR3jhckcG+4I0k01sLVrQweH/mjuJgfG
+ 9a1OqejHEHdPvcRRYWZvIFgw19kkA+4=
+X-Google-Smtp-Source: ABdhPJwQKJDe178RRgB019PdVZcaJRxYEd+DG5Tp68DUOkwsyOEYd5yGBw9xFWQf08QnB4cwBtO9VA==
+X-Received: by 2002:a2e:7a07:: with SMTP id v7mr1822750ljc.159.1596199872208; 
+ Fri, 31 Jul 2020 05:51:12 -0700 (PDT)
 Received: from a2klaptop.localdomain ([185.199.97.5])
- by smtp.gmail.com with ESMTPSA id s2sm1923362lfs.4.2020.07.31.05.51.12
+ by smtp.gmail.com with ESMTPSA id s2sm1923362lfs.4.2020.07.31.05.51.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 31 Jul 2020 05:51:13 -0700 (PDT)
+ Fri, 31 Jul 2020 05:51:11 -0700 (PDT)
 From: Oleksandr Andrushchenko <andr2000@gmail.com>
 To: xen-devel@lists.xenproject.org, dri-devel@lists.freedesktop.org,
  linux-kernel@vger.kernel.org, boris.ostrovsky@oracle.com, jgross@suse.com,
  airlied@linux.ie, daniel@ffwll.ch
-Subject: [PATCH 1/6] xen/gntdev: Fix dmabuf import with non-zero sgt offset
-Date: Fri, 31 Jul 2020 15:51:04 +0300
-Message-Id: <20200731125109.18666-2-andr2000@gmail.com>
+Subject: [PATCH 0/6] Fixes and improvements for Xen pvdrm
+Date: Fri, 31 Jul 2020 15:51:03 +0300
+Message-Id: <20200731125109.18666-1-andr2000@gmail.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200731125109.18666-1-andr2000@gmail.com>
-References: <20200731125109.18666-1-andr2000@gmail.com>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -93,36 +89,61 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 
-It is possible that the scatter-gather table during dmabuf import has
-non-zero offset of the data, but user-space doesn't expect that.
-Fix this by failing the import, so user-space doesn't access wrong data.
+Hello,
 
-Fixes: 37ccb44d0b00 ("xen/gntdev: Implement dma-buf import functionality")
+This series contains an assorted set of fixes and improvements for
+the Xen para-virtualized display driver and grant device driver which
+I have collected over the last couple of months:
 
-Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
----
- drivers/xen/gntdev-dmabuf.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+1. Minor fixes to grant device driver and drm/xen-front.
 
-diff --git a/drivers/xen/gntdev-dmabuf.c b/drivers/xen/gntdev-dmabuf.c
-index 75d3bb948bf3..b1b6eebafd5d 100644
---- a/drivers/xen/gntdev-dmabuf.c
-+++ b/drivers/xen/gntdev-dmabuf.c
-@@ -613,6 +613,14 @@ dmabuf_imp_to_refs(struct gntdev_dmabuf_priv *priv, struct device *dev,
- 		goto fail_detach;
- 	}
- 
-+	/* Check that we have zero offset. */
-+	if (sgt->sgl->offset) {
-+		ret = ERR_PTR(-EINVAL);
-+		pr_debug("DMA buffer has %d bytes offset, user-space expects 0\n",
-+			 sgt->sgl->offset);
-+		goto fail_unmap;
-+	}
-+
- 	/* Check number of pages that imported buffer has. */
- 	if (attach->dmabuf->size != gntdev_dmabuf->nr_pages << PAGE_SHIFT) {
- 		ret = ERR_PTR(-EINVAL);
+2. New format (YUYV) added to the list of the PV DRM supported formats
+which allows the driver to be used in zero-copying use-cases when
+a camera device is the source of the dma-bufs.
+
+3. Synchronization with the latest para-virtualized protocol definition
+in Xen [1].
+
+4. SGT offset is now propagated to the backend: while importing a dmabuf
+it is possible that the data of the buffer is put with offset which is
+indicated by the SGT offset. This is needed for some GPUs which have
+non-zero offset.
+
+5. Version 2 of the Xen displif protocol adds XENDISPL_OP_GET_EDID
+request which allows frontends to request EDID structure per
+connector. This request is optional and if not supported by the
+backend then visible area is still defined by the relevant
+XenStore's "resolution" property.
+If backend provides EDID with XENDISPL_OP_GET_EDID request then
+its values must take precedence over the resolutions defined in
+XenStore.
+
+Thank you,
+Oleksandr Andrushchenko
+
+[1] https://xenbits.xen.org/gitweb/?p=xen.git;a=commit;h=c27a184225eab54d20435c8cab5ad0ef384dc2c0
+
+Oleksandr Andrushchenko (6):
+  xen/gntdev: Fix dmabuf import with non-zero sgt offset
+  drm/xen-front: Fix misused IS_ERR_OR_NULL checks
+  drm/xen-front: Add YUYV to supported formats
+  xen: Sync up with the canonical protocol definition in Xen
+  drm/xen-front: Pass dumb buffer data offset to the backend
+  drm/xen-front: Add support for EDID based configuration
+
+ drivers/gpu/drm/xen/xen_drm_front.c         | 72 +++++++++++++++-
+ drivers/gpu/drm/xen/xen_drm_front.h         | 11 ++-
+ drivers/gpu/drm/xen/xen_drm_front_cfg.c     | 82 +++++++++++++++++++
+ drivers/gpu/drm/xen/xen_drm_front_cfg.h     |  7 ++
+ drivers/gpu/drm/xen/xen_drm_front_conn.c    | 27 +++++-
+ drivers/gpu/drm/xen/xen_drm_front_evtchnl.c |  3 +
+ drivers/gpu/drm/xen/xen_drm_front_evtchnl.h |  3 +
+ drivers/gpu/drm/xen/xen_drm_front_gem.c     | 11 +--
+ drivers/gpu/drm/xen/xen_drm_front_kms.c     |  7 +-
+ drivers/xen/gntdev-dmabuf.c                 |  8 ++
+ include/xen/interface/io/displif.h          | 91 ++++++++++++++++++++-
+ 11 files changed, 305 insertions(+), 17 deletions(-)
+
 -- 
 2.17.1
 
