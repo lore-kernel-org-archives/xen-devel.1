@@ -7,40 +7,40 @@ X-Spam-Status: No, score=-13.0 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7940FC433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 12:12:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F2F98C433E1
+	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 12:13:01 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 506ED208E4
-	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 12:12:59 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 506ED208E4
+	by mail.kernel.org (Postfix) with ESMTPS id C7D06208E4
+	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 12:13:01 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C7D06208E4
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k1Ttz-00047x-25; Fri, 31 Jul 2020 12:12:43 +0000
+	id 1k1Tu9-00049E-IC; Fri, 31 Jul 2020 12:12:53 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=nr0X=BK=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1k1Tty-00047s-0v
- for xen-devel@lists.xenproject.org; Fri, 31 Jul 2020 12:12:42 +0000
-X-Inumbo-ID: 2140508a-d327-11ea-8e2c-bc764e2007e4
+ id 1k1Tu8-000489-8T
+ for xen-devel@lists.xenproject.org; Fri, 31 Jul 2020 12:12:52 +0000
+X-Inumbo-ID: 27b4b37a-d327-11ea-8e2c-bc764e2007e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 2140508a-d327-11ea-8e2c-bc764e2007e4;
- Fri, 31 Jul 2020 12:12:40 +0000 (UTC)
+ id 27b4b37a-d327-11ea-8e2c-bc764e2007e4;
+ Fri, 31 Jul 2020 12:12:51 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1k1TMv-0001W4-2L; Fri, 31 Jul 2020 12:38:33 +0100
+ id 1k1TMr-0001W4-UZ; Fri, 31 Jul 2020 12:38:30 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH v2 18/41] duration_estimator: Move duration query loop
- into database
-Date: Fri, 31 Jul 2020 12:37:57 +0100
-Message-Id: <20200731113820.5765-19-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH v2 10/41] sg-report-flight: Use WITH clause to use
+ index for $anypassq
+Date: Fri, 31 Jul 2020 12:37:49 +0100
+Message-Id: <20200731113820.5765-11-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200731113820.5765-1-ian.jackson@eu.citrix.com>
 References: <20200731113820.5765-1-ian.jackson@eu.citrix.com>
@@ -57,341 +57,95 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Cc: Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <George.Dunlap@citrix.com>
+ George Dunlap <george.dunlap@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Stuff the two queries together: we use the firsty query as a WITH
-clause.  This is significantly faster, perhaps because the query
-optimiser does a better job but probably just because it saves on
-round trips.
+Perf: runtime of my test case now ~11s
 
-No functional change.
+Example query before (from the Perl DBI trace):
 
-Perf: subjectively this seemed to help when the cache was cold.  Now I
-have a warm cache and it doesn't seem to make much difference.
-
-Perf: runtime of my test case now ~5-7s.
-
-Example queries before (from the debugging output):
-
- Query A part I:
-
-            SELECT f.flight AS flight,
-                   j.job AS job,
-                   f.started AS started,
-                   j.status AS status
-                     FROM flights f
-                     JOIN jobs j USING (flight)
-                     JOIN runvars r
-                             ON  f.flight=r.flight
-                            AND  r.name=?
-                    WHERE  j.job=r.job
-                      AND  f.blessing=?
-                      AND  f.branch=?
-                      AND  j.job=?
-                      AND  r.val=?
-                      AND  (j.status='pass' OR j.status='fail'
-                           OR j.status='truncated'!)
-                      AND  f.started IS NOT NULL
-                      AND  f.started >= ?
-                 ORDER BY f.started DESC
-
- With bind variables:
-     "test-amd64-i386-xl-pvshim"
-     "guest-start"
-
- Query B part I:
-
-            SELECT f.flight AS flight,
-                   s.job AS job,
-                   NULL as started,
-                   NULL as status,
-                   max(s.finished) AS max_finished
-                      FROM steps s JOIN flights f
-                        ON s.flight=f.flight
-                     WHERE s.job=? AND f.blessing=? AND f.branch=?
-                       AND s.finished IS NOT NULL
-                       AND f.started IS NOT NULL
-                       AND f.started >= ?
-                     GROUP BY f.flight, s.job
-                     ORDER BY max_finished DESC
-
- With bind variables:
-    "test-armhf-armhf-libvirt"
-    'real'
-    "xen-unstable"
-    1594144469
-
- Query common part II:
-
-        WITH tsteps AS
-        (
-            SELECT *
-              FROM steps
-             WHERE flight=? AND job=?
-        )
-        , tsteps2 AS
-        (
-            SELECT *
-              FROM tsteps
-             WHERE finished <=
-                     (SELECT finished
-                        FROM tsteps
-                       WHERE tsteps.testid = ?)
-        )
-        SELECT (
-            SELECT max(finished)-min(started)
-              FROM tsteps2
-          ) - (
-            SELECT sum(finished-started)
-              FROM tsteps2
-             WHERE step = 'ts-hosts-allocate'
-          )
-                AS duration
-
- With bind variables from previous query, eg:
-     152045
-     "test-armhf-armhf-libvirt"
-     "guest-start.2"
+        SELECT * FROM flights JOIN steps USING (flight)
+            WHERE (branch='xen-unstable')
+              AND job=? and testid=? and status='pass'
+              AND ( (TRUE AND flight <= 151903) AND (blessing='real') )
+            LIMIT 1
 
 After:
 
- Query A (combined):
-
-            WITH f AS (
-            SELECT f.flight AS flight,
-                   j.job AS job,
-                   f.started AS started,
-                   j.status AS status
-                     FROM flights f
-                     JOIN jobs j USING (flight)
-                     JOIN runvars r
-                             ON  f.flight=r.flight
-                            AND  r.name=?
-                    WHERE  j.job=r.job
-                      AND  f.blessing=?
-                      AND  f.branch=?
-                      AND  j.job=?
-                      AND  r.val=?
-                      AND  (j.status='pass' OR j.status='fail'
-                           OR j.status='truncated'!)
-                      AND  f.started IS NOT NULL
-                      AND  f.started >= ?
-                 ORDER BY f.started DESC
-
-            )
-            SELECT flight, max_finished, job, started, status,
-            (
-        WITH tsteps AS
+        WITH s AS
         (
-            SELECT *
-              FROM steps
-             WHERE flight=f.flight AND job=f.job
+        SELECT * FROM steps
+         WHERE job=? and testid=? and status='pass'
         )
-        , tsteps2 AS
-        (
-            SELECT *
-              FROM tsteps
-             WHERE finished <=
-                     (SELECT finished
-                        FROM tsteps
-                       WHERE tsteps.testid = ?)
-        )
-        SELECT (
-            SELECT max(finished)-min(started)
-              FROM tsteps2
-          ) - (
-            SELECT sum(finished-started)
-              FROM tsteps2
-             WHERE step = 'ts-hosts-allocate'
-          )
-                AS duration
+        SELECT * FROM flights JOIN s USING (flight)
+            WHERE (branch='xen-unstable')
+              AND ( (TRUE AND flight <= 151903) AND (blessing='real') )
+            LIMIT 1
 
-            ) FROM f
+In both cases with bind vars:
 
- Query B (combined):
+   "test-amd64-i386-xl-pvshim"
+   "guest-start"
 
-            WITH f AS (
-            SELECT f.flight AS flight,
-                   s.job AS job,
-                   NULL as started,
-                   NULL as status,
-                   max(s.finished) AS max_finished
-                      FROM steps s JOIN flights f
-                        ON s.flight=f.flight
-                     WHERE s.job=? AND f.blessing=? AND f.branch=?
-                       AND s.finished IS NOT NULL
-                       AND f.started IS NOT NULL
-                       AND f.started >= ?
-                     GROUP BY f.flight, s.job
-                     ORDER BY max_finished DESC
+Diff to the query:
 
-            )
-            SELECT flight, max_finished, job, started, status,
-            (
-        WITH tsteps AS
-        (
-            SELECT *
-              FROM steps
-             WHERE flight=f.flight AND job=f.job
-        )
-        , tsteps2 AS
-        (
-            SELECT *
-              FROM tsteps
-             WHERE finished <=
-                     (SELECT finished
-                        FROM tsteps
-                       WHERE tsteps.testid = ?)
-        )
-        SELECT (
-            SELECT max(finished)-min(started)
-              FROM tsteps2
-          ) - (
-            SELECT sum(finished-started)
-              FROM tsteps2
-             WHERE step = 'ts-hosts-allocate'
-          )
-                AS duration
+-        SELECT * FROM flights JOIN steps USING (flight)
++        WITH s AS
++        (
++        SELECT * FROM steps
++         WHERE job=? and testid=? and status='pass'
++        )
++        SELECT * FROM flights JOIN s USING (flight)
+             WHERE (branch='xen-unstable')
+-              AND job=? and testid=? and status='pass'
+               AND ( (TRUE AND flight <= 151903) AND (blessing='real') )
+             LIMIT 1
 
-            ) FROM f
-
-Diff for query A:
-
-@@ -1,3 +1,4 @@
-+            WITH f AS (
-             SELECT f.flight AS flight,
-                    j.job AS job,
-                    f.started AS started,
-@@ -18,11 +19,14 @@
-                       AND  f.started >= ?
-                  ORDER BY f.started DESC
-
-+            )
-+            SELECT flight, max_finished, job, started, status,
-+            (
-        WITH tsteps AS
-         (
-             SELECT *
-               FROM steps
--             WHERE flight=? AND job=?
-+             WHERE flight=f.flight AND job=f.job
-         )
-         , tsteps2 AS
-         (
-@@ -42,3 +46,5 @@
-              WHERE step = 'ts-hosts-allocate'
-           )
-                 AS duration
-+
-+            ) FROM f
-
-Diff for query B:
-
-@@ -1,3 +1,4 @@
-+            WITH f AS (
-             SELECT f.flight AS flight,
-                    s.job AS job,
-                    NULL as started,
-@@ -12,11 +13,14 @@
-                      GROUP BY f.flight, s.job
-                      ORDER BY max_finished DESC
-
-+            )
-+            SELECT flight, max_finished, job, started, status,
-+            (
-         WITH tsteps AS
-         (
-             SELECT *
-               FROM steps
--             WHERE flight=? AND job=?
-+             WHERE flight=f.flight AND job=f.job
-         )
-         , tsteps2 AS
-         (
-@@ -36,3 +40,5 @@
-              WHERE step = 'ts-hosts-allocate'
-           )
-                 AS duration
-+
-+            ) FROM f
-
-Reviewed-by: George Dunlap <George.Dunlap@citrix.com>
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
+Reviewed-by: George Dunlap <george.dunlap@citrix.com>
 ---
- Osstest/Executive.pm | 31 ++++++++++++++++++++-----------
- 1 file changed, 20 insertions(+), 11 deletions(-)
+ schema/steps-job-index.sql |  2 +-
+ sg-report-flight           | 14 ++++++++++++--
+ 2 files changed, 13 insertions(+), 3 deletions(-)
 
-diff --git a/Osstest/Executive.pm b/Osstest/Executive.pm
-index fb975dac..684cafc3 100644
---- a/Osstest/Executive.pm
-+++ b/Osstest/Executive.pm
-@@ -1192,7 +1192,7 @@ END
-         (
-             SELECT *
-               FROM steps
--             WHERE flight=? AND job=?
-+             WHERE flight=f.flight AND job=f.job
-         )
- END_ALWAYS
-         , tsteps2 AS
-@@ -1216,9 +1216,20 @@ END_UPTOINCL
-                 AS duration
- END_ALWAYS
- 	
--    my $recentflights_q= $dbh_tests->prepare($recentflights_qtxt);
--    my $duration_anyref_q= $dbh_tests->prepare($duration_anyref_qtxt);
--    my $duration_duration_q = $dbh_tests->prepare($duration_duration_qtxt);
-+    my $prepare_combi = sub {
-+	db_prepare(<<END);
-+            WITH f AS (
-+$_[0]
-+            )
-+            SELECT flight, max_finished, job, started, status,
-+            (
-+$duration_duration_qtxt
-+            ) FROM f
-+END
-+    };
-+
-+    my $recentflights_q= $prepare_combi->($recentflights_qtxt);
-+    my $duration_anyref_q= $prepare_combi->($duration_anyref_qtxt);
+diff --git a/schema/steps-job-index.sql b/schema/steps-job-index.sql
+index 07dc5a30..2c33af72 100644
+--- a/schema/steps-job-index.sql
++++ b/schema/steps-job-index.sql
+@@ -1,4 +1,4 @@
+--- ##OSSTEST## 006 Preparatory
++-- ##OSSTEST## 006 Needed
+ --
+ -- This index helps sg-report-flight find if a test ever passed.
  
-     return sub {
-         my ($job, $hostidname, $onhost, $uptoincl_testid) = @_;
-@@ -1239,14 +1250,16 @@ END_ALWAYS
-                                       $branch,
-                                       $job,
-                                       $onhost,
--                                      $limit);
-+                                      $limit,
-+				      @x_params);
-             $refs= $recentflights_q->fetchall_arrayref({});
-             $recentflights_q->finish();
-             $dbg->("SAME-HOST GOT ".scalar(@$refs));
-         }
+diff --git a/sg-report-flight b/sg-report-flight
+index d06be292..d218b24e 100755
+--- a/sg-report-flight
++++ b/sg-report-flight
+@@ -849,10 +849,20 @@ sub justifyfailures ($;$) {
  
-         if (!@$refs) {
--            $duration_anyref_q->execute($job, $blessing, $branch, $limit);
-+            $duration_anyref_q->execute($job, $blessing, $branch, $limit,
-+					@x_params);
-             $refs= $duration_anyref_q->fetchall_arrayref({});
-             $duration_anyref_q->finish();
-             $dbg->("ANY-HOST GOT ".scalar(@$refs));
-@@ -1259,11 +1272,7 @@ END_ALWAYS
+     my @failures= values %{ $fi->{Failures} };
  
-         my $duration_max= 0;
-         foreach my $ref (@$refs) {
--	    my @d_d_args = ($ref->{flight}, $job);
--	    push @d_d_args, @x_params;
--            $duration_duration_q->execute(@d_d_args);
--            my ($duration) = $duration_duration_q->fetchrow_array();
--            $duration_duration_q->finish();
-+            my ($duration) = $ref->{duration};
-             if ($duration) {
-                 $dbg->("REF $ref->{flight} DURATION $duration ".
- 		       ($ref->{status} // ''));
++    # In psql 9.6 this WITH clause makes postgresql do the steps query
++    # first.  This is good because if this test never passed we can
++    # determine that really quickly using the new index, without
++    # having to scan the flights table.  (If the test passed we will
++    # probably not have to look at many flights to find one, so in
++    # that case this is not much worse.)
+     my $anypassq= <<END;
+-        SELECT * FROM flights JOIN steps USING (flight)
++        WITH s AS
++        (
++        SELECT * FROM steps
++         WHERE job=? and testid=? and status='pass'
++        )
++        SELECT * FROM flights JOIN s USING (flight)
+             WHERE $branches_cond_q
+-              AND job=? and testid=? and status='pass'
+               AND $blessingscond
+             LIMIT 1
+ END
 -- 
 2.20.1
 
