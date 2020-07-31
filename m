@@ -7,40 +7,40 @@ X-Spam-Status: No, score=-13.0 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 053DEC433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 12:13:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 52700C433DF
+	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 12:13:11 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D28102245C
-	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 12:13:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D28102245C
+	by mail.kernel.org (Postfix) with ESMTPS id 2C5E5208E4
+	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 12:13:11 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2C5E5208E4
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k1TuF-0004C7-QY; Fri, 31 Jul 2020 12:12:59 +0000
+	id 1k1TuJ-0004EJ-4s; Fri, 31 Jul 2020 12:13:03 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=nr0X=BK=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1k1TuD-0004Ac-Pm
- for xen-devel@lists.xenproject.org; Fri, 31 Jul 2020 12:12:57 +0000
-X-Inumbo-ID: 2b067d9c-d327-11ea-8e2c-bc764e2007e4
+ id 1k1TuH-0004Ac-V0
+ for xen-devel@lists.xenproject.org; Fri, 31 Jul 2020 12:13:01 +0000
+X-Inumbo-ID: 2c6d87ca-d327-11ea-8e2c-bc764e2007e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 2b067d9c-d327-11ea-8e2c-bc764e2007e4;
- Fri, 31 Jul 2020 12:12:57 +0000 (UTC)
+ id 2c6d87ca-d327-11ea-8e2c-bc764e2007e4;
+ Fri, 31 Jul 2020 12:12:59 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1k1TMx-0001W4-Jl; Fri, 31 Jul 2020 12:38:35 +0100
+ id 1k1TN0-0001W4-HO; Fri, 31 Jul 2020 12:38:38 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH v2 22/41] sg-report-host-history: Drop per-job debug
- etc.
-Date: Fri, 31 Jul 2020 12:38:01 +0100
-Message-Id: <20200731113820.5765-23-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH v2 28/41] sg-report-host-history: Rerganisation:
+ Change loops
+Date: Fri, 31 Jul 2020 12:38:07 +0100
+Message-Id: <20200731113820.5765-29-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200731113820.5765-1-ian.jackson@eu.citrix.com>
 References: <20200731113820.5765-1-ian.jackson@eu.citrix.com>
@@ -60,63 +60,41 @@ Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This printing has a significant effect on the performance of this
-program, at least after we optimise various other things.
+Move the per-host code all into the same per-host loop.  One effect is
+to transpose the db_retry and host loops for mainquery.
+
+No functional change.
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- sg-report-host-history | 14 +++++++-------
- 1 file changed, 7 insertions(+), 7 deletions(-)
+ sg-report-host-history | 12 ++----------
+ 1 file changed, 2 insertions(+), 10 deletions(-)
 
 diff --git a/sg-report-host-history b/sg-report-host-history
-index a159df3e..a34458e0 100755
+index 3f4670e5..2ca0e235 100755
 --- a/sg-report-host-history
 +++ b/sg-report-host-history
-@@ -102,9 +102,9 @@ sub read_existing_logs ($) {
- 	    my $k = $1;
- 	    s{\%([0-9a-f]{2})}{ chr hex $1 }ge;
- 	    $ch->{$k} = $_;
--	    print DEBUG "GOTCACHE $hostname $k\n";
-+#	    print DEBUG "GOTCACHE $hostname $k\n";
- 	}
--	print DEBUG "GOTCACHE $hostname \@ $jr->{flight} $jr->{job} $jr->{status},$jr->{name}\n";
-+#	print DEBUG "GOTCACHE $hostname \@ $jr->{flight} $jr->{job} $jr->{status},$jr->{name}\n";
- 	$tcache->{$jr->{flight},$jr->{job},$jr->{status},$jr->{name}} = $jr;
-     }
-     close H;
-@@ -272,7 +272,7 @@ END
-     my @rows;
-     my $cachehits = 0;
-     foreach my $jr (@$inrows) {
--	print DEBUG "JOB $jr->{flight}.$jr->{job} ";
-+	#print DEBUG "JOB $jr->{flight}.$jr->{job} ";
+@@ -470,18 +470,10 @@ db_retry($dbh_tests, [], sub {
+     computeflightsrange();
+ });
  
- 	my $cacherow =
- 	    $tcache->{$jr->{flight},$jr->{job},$jr->{status},$jr->{name}};
-@@ -283,11 +283,11 @@ END
- 
- 	my $endedrow = jobquery($endedq, $jr, 'e');
- 	if (!$endedrow) {
--	    print DEBUG "no-finished\n";
-+	    #print DEBUG "no-finished\n";
- 	    next;
- 	}
--	print DEBUG join " ", map { $endedrow->{$_} } sort keys %$endedrow;
--	print DEBUG ".\n";
-+	#print DEBUG join " ", map { $endedrow->{$_} } sort keys %$endedrow;
-+	#print DEBUG ".\n";
- 
- 	push @rows, { %$jr, %$endedrow };
-     }
-@@ -329,7 +329,7 @@ END
- 	    next;
- 	}
- 
--        print DEBUG "JR $jr->{flight}.$jr->{job}\n";
-+        #print DEBUG "JR $jr->{flight}.$jr->{job}\n";
- 	my $ir = jobquery($infoq, $jr, 'i');
- 	my $ar = jobquery($allocdq, $jr, 'a');
- 	my $ident = $jr->{name};
+-foreach (keys %hosts) {
+-    read_existing_logs($_);
+-}
+-
+-db_retry($dbh_tests, [], sub {
+-    foreach my $host (sort keys %hosts) {
+-	mainquery($host);
+-    }
+-});
+-
+ foreach my $host (sort keys %hosts) {
++    read_existing_logs($host);
+     db_retry($dbh_tests, [], sub {
++        mainquery($host);
+ 	reporthost $host;
+     });
+ }
 -- 
 2.20.1
 
