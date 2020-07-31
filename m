@@ -4,56 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-6.2 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 006E6C433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 13:30:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F0D29C433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 13:41:07 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D007A20656
-	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 13:30:28 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D007A20656
+	by mail.kernel.org (Postfix) with ESMTPS id C6F19208E4
+	for <xen-devel@archiver.kernel.org>; Fri, 31 Jul 2020 13:41:07 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C6F19208E4
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k1V74-0006bj-Vo; Fri, 31 Jul 2020 13:30:18 +0000
+	id 1k1VHD-0007Z6-0R; Fri, 31 Jul 2020 13:40:47 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=S17i=BK=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1k1V73-0006bd-9S
- for xen-devel@lists.xenproject.org; Fri, 31 Jul 2020 13:30:17 +0000
-X-Inumbo-ID: f7cf482c-d331-11ea-abb1-12813bfff9fa
+ id 1k1VHC-0007Z1-2k
+ for xen-devel@lists.xenproject.org; Fri, 31 Jul 2020 13:40:46 +0000
+X-Inumbo-ID: 6ef5c5ec-d333-11ea-abb3-12813bfff9fa
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id f7cf482c-d331-11ea-abb1-12813bfff9fa;
- Fri, 31 Jul 2020 13:30:15 +0000 (UTC)
+ id 6ef5c5ec-d333-11ea-abb3-12813bfff9fa;
+ Fri, 31 Jul 2020 13:40:45 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id EB622AC5E;
- Fri, 31 Jul 2020 13:30:27 +0000 (UTC)
-Subject: Re: [PATCH] tools/configure: drop BASH configure variable [and 1 more
- messages]
-To: Ian Jackson <ian.jackson@citrix.com>
-References: <20200722113258.3673-1-andrew.cooper3@citrix.com>
- <20200626170038.27650-1-andrew.cooper3@citrix.com>
- <880fcc83-875c-c030-bfac-c64477aa3254@suse.com>
- <24313.55588.61431.336617@mariner.uk.xensource.com>
- <2c202733-cbff-74e0-30c6-4cba227e7969@suse.com>
- <24356.5736.297234.341867@mariner.uk.xensource.com>
+ by mx2.suse.de (Postfix) with ESMTP id 69428AFAC;
+ Fri, 31 Jul 2020 13:40:57 +0000 (UTC)
+Subject: Re: [PATCH v2 2/2] x86/hvm: simplify 'mmio_direct' check in
+ epte_get_entry_emt()
+To: paul@xen.org
+References: <20200731123926.28970-1-paul@xen.org>
+ <20200731123926.28970-3-paul@xen.org>
+ <a4856c33-8bb0-4afa-cc71-3af4c229bc27@suse.com>
+ <004501d6673b$9adffbf0$d09ff3d0$@xen.org>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <d963d352-d6d6-393a-9fdf-9d6f46450309@suse.com>
-Date: Fri, 31 Jul 2020 15:30:13 +0200
+Message-ID: <84cdd5b8-5149-a240-8bad-be8d67dca0d8@suse.com>
+Date: Fri, 31 Jul 2020 15:40:42 +0200
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <24356.5736.297234.341867@mariner.uk.xensource.com>
+In-Reply-To: <004501d6673b$9adffbf0$d09ff3d0$@xen.org>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,42 +63,68 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Daniel De Graaf <dgdegra@tycho.nsa.gov>, Paul Durrant <paul@xen.org>,
- Wei Liu <wl@xen.org>, Xen-devel <xen-devel@lists.xenproject.org>
+Cc: xen-devel@lists.xenproject.org, 'Paul Durrant' <pdurrant@amazon.com>,
+ =?UTF-8?B?J1JvZ2VyIFBhdSBNb25uw6kn?= <roger.pau@citrix.com>,
+ 'Wei Liu' <wl@xen.org>, 'Andrew Cooper' <andrew.cooper3@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 31.07.2020 15:02, Ian Jackson wrote:
-> Jan Beulich writes ("Re: [PATCH] tools/configure: drop BASH configure variable"):
->> On 29.06.2020 14:05, Ian Jackson wrote:
->>> Jan Beulich writes ("Re: [PATCH] tools/configure: drop BASH configure variable"):
->>>> On 26.06.2020 19:00, Andrew Cooper wrote:
->>>> ... this may or may not take effect on the file system the sources
->>>> are stored on.
->>>
->>> In what circumstances might this not take effect ?
+On 31.07.2020 15:07, Paul Durrant wrote:
+>> -----Original Message-----
+>> From: Jan Beulich <jbeulich@suse.com>
+>> Sent: 31 July 2020 13:58
+>> To: Paul Durrant <paul@xen.org>
+>> Cc: xen-devel@lists.xenproject.org; Paul Durrant <pdurrant@amazon.com>; Andrew Cooper
+>> <andrew.cooper3@citrix.com>; Wei Liu <wl@xen.org>; Roger Pau Monné <roger.pau@citrix.com>
+>> Subject: Re: [PATCH v2 2/2] x86/hvm: simplify 'mmio_direct' check in epte_get_entry_emt()
 >>
->> When the file system is incapable of recording execute permissions?
->> It has been a common workaround for this in various projects that
->> I've worked with to use $(SHELL) to account for that, so the actual
->> permissions from the fs don't matter. (There may be mount options
->> to make everything executable on such file systems, but people may
->> be hesitant to use them.)
+>> On 31.07.2020 14:39, Paul Durrant wrote:
+>>> From: Paul Durrant <pdurrant@amazon.com>
+>>>
+>>> Re-factor the code to take advantage of the fact that the APIC access page is
+>>> a 'special' page.
+>>
+>> Hmm, that's going quite as far as I was thinking to go: In
+>> particular, you leave in place the set_mmio_p2m_entry() use
+>> in vmx_alloc_vlapic_mapping(). With that replaced, the
+>> re-ordering in epte_get_entry_emt() that you do shouldn't
+>> be necessary; you'd simple drop the checking of the
+>> specific MFN.
 > 
-> I don't think we support building from sources which have been
-> unpacked onto such filesystems.  Other projects which might actually
-> need to build on Windows or something do do this $(SHELL) thing or an
-> equivalent, but I don't think that's us.
+> Ok, it still needs to go in the p2m though so are you suggesting
+> just calling p2m_set_entry() directly?
 
-It's not unexpected that you think of Windows here, but my thoughts
-were more towards building from sources on a CD or DVD, where iirc
-execute permissions also don't exist. The latest when we have
-out-of-tree builds fully working, this ought to be something that
-people should be able to do, imo. (Even without out-of-tree builds,
-my "next best" alternative of using a tree of symlinks to build in
-would similarly have an issue with the links pointing at a mounted
-CD/DVD, if the $(SHELL) wasn't present.)
+Yes, if this works. The main question really is whether there are
+any hidden assumptions elsewhere that this page gets mapped as an
+MMIO one.
+
+>>> --- a/xen/arch/x86/hvm/mtrr.c
+>>> +++ b/xen/arch/x86/hvm/mtrr.c
+>>> @@ -814,29 +814,22 @@ int epte_get_entry_emt(struct domain *d, unsigned long gfn, mfn_t mfn,
+>>>          return -1;
+>>>      }
+>>>
+>>> -    if ( direct_mmio )
+>>> -    {
+>>> -        if ( (mfn_x(mfn) ^ mfn_x(d->arch.hvm.vmx.apic_access_mfn)) >> order )
+>>> -            return MTRR_TYPE_UNCACHABLE;
+>>> -        if ( order )
+>>> -            return -1;
+>>
+>> ... this part of the logic wants retaining, I think, i.e.
+>> reporting back to the guest that the mapping needs splitting.
+>> I'm afraid I have to withdraw my R-b on patch 1 for this
+>> reason, as the check needs to be added there already.
+> 
+> To be clear... You mean I need the:
+> 
+> if ( order )
+>   return -1;
+> 
+> there?
+
+Not just - first of all you need to check whether the requested
+range overlaps a special page.
 
 Jan
 
