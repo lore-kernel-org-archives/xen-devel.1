@@ -2,67 +2,64 @@ Return-Path: <SRS0=+EUz=BN=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.0 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E3A44C433E4
-	for <xen-devel@archiver.kernel.org>; Mon,  3 Aug 2020 12:29:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 319BDC433E0
+	for <xen-devel@archiver.kernel.org>; Mon,  3 Aug 2020 12:30:47 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B5BF02086A
-	for <xen-devel@archiver.kernel.org>; Mon,  3 Aug 2020 12:29:56 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="sUVmnpcN"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B5BF02086A
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id C0CA7204EC
+	for <xen-devel@archiver.kernel.org>; Mon,  3 Aug 2020 12:30:46 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C0CA7204EC
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=3mdeb.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k2Zb6-0007X2-21; Mon, 03 Aug 2020 12:29:44 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=rQjY=BN=xen.org=paul@srs-us1.protection.inumbo.net>)
- id 1k2Zb5-0007NV-1A
- for xen-devel@lists.xenproject.org; Mon, 03 Aug 2020 12:29:43 +0000
-X-Inumbo-ID: f8ddcd10-d584-11ea-af26-12813bfff9fa
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id f8ddcd10-d584-11ea-af26-12813bfff9fa;
- Mon, 03 Aug 2020 12:29:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9CNNemKJGP8SuVWzacpv68au3entEv5YFODLnV2d/u0=; b=sUVmnpcNrI10qLi84QPnqnAnP8
- jU5qzZCRv+AQwxe0RbaGxXqpffhJXuIH3x+R2W2LI2ZFcGAakxhT7jnXj7Qi+p28XKlLZLQg/UGju
- pHWuh425o6RLot6mjQ3nYuQY5ZVgeazKHsD7xHsfbfDQB2ORbgQ//DsYWr8go7a8JLrk=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>)
- id 1k2Zap-0000TA-A7; Mon, 03 Aug 2020 12:29:27 +0000
-Received: from host86-143-223-30.range86-143.btcentralplus.com
- ([86.143.223.30] helo=u2f063a87eabd5f.home)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
- (envelope-from <paul@xen.org>)
- id 1k2Zap-0000zk-33; Mon, 03 Aug 2020 12:29:27 +0000
-From: Paul Durrant <paul@xen.org>
-To: xen-devel@lists.xenproject.org
-Subject: [PATCH v3 09/11] common/grant_table: batch flush I/O TLB
-Date: Mon,  3 Aug 2020 13:29:12 +0100
-Message-Id: <20200803122914.2259-10-paul@xen.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200803122914.2259-1-paul@xen.org>
-References: <20200803122914.2259-1-paul@xen.org>
+	id 1k2Zbv-00007x-DR; Mon, 03 Aug 2020 12:30:35 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=jPY3=BN=3mdeb.com=norbert.kaminski@srs-us1.protection.inumbo.net>)
+ id 1k2Zbt-00007R-IF
+ for xen-devel@lists.xenproject.org; Mon, 03 Aug 2020 12:30:33 +0000
+X-Inumbo-ID: 1eb3501e-d585-11ea-908e-bc764e2007e4
+Received: from 4.mo2.mail-out.ovh.net (unknown [87.98.172.75])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 1eb3501e-d585-11ea-908e-bc764e2007e4;
+ Mon, 03 Aug 2020 12:30:31 +0000 (UTC)
+Received: from player796.ha.ovh.net (unknown [10.108.57.50])
+ by mo2.mail-out.ovh.net (Postfix) with ESMTP id 7CBEA1DE840
+ for <xen-devel@lists.xenproject.org>; Mon,  3 Aug 2020 14:30:24 +0200 (CEST)
+Received: from RCM-web4.webmail.mail.ovh.net (85-222-117-222.dynamic.chello.pl
+ [85.222.117.222]) (Authenticated sender: norbert.kaminski@3mdeb.com)
+ by player796.ha.ovh.net (Postfix) with ESMTPSA id 9F70714E43909;
+ Mon,  3 Aug 2020 12:30:18 +0000 (UTC)
 MIME-Version: 1.0
+Date: Mon, 03 Aug 2020 14:30:18 +0200
+From: norbert.kaminski@3mdeb.com
+To: =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: Re: fwupd support under Xen - firmware updates with the UEFI capsule
+In-Reply-To: <20200728221645.GO1626@mail-itl>
+References: <497f1524-b57e-0ea1-5899-62f677bfae91@3mdeb.com>
+ <39be665c-b6c8-23e3-b18b-d38cfe5c1286@suse.com>
+ <bbe85f76-0999-1150-3d48-c7f9e1796dac@citrix.com>
+ <20200728221645.GO1626@mail-itl>
+User-Agent: Roundcube Webmail/1.4.3
+Message-ID: <82c27cf6dd6dfac3fb5ce38b335fa997@3mdeb.com>
+X-Sender: norbert.kaminski@3mdeb.com
+X-Originating-IP: 85.222.117.222
+X-Webmail-UserID: norbert.kaminski@3mdeb.com
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
 Content-Transfer-Encoding: 8bit
+X-Ovh-Tracer-Id: 243194383087999326
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeduiedrjeeggdehfecutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpeggfffhvffujghffgfkgihitgfgsehtkehjtddtreejnecuhfhrohhmpehnohhrsggvrhhtrdhkrghmihhnshhkihesfehmuggvsgdrtghomhenucggtffrrghtthgvrhhnpeevgffgfeffteeivdetffekkeefueevjeejvddvfedtfffhtdeikeffuedvveetgeenucffohhmrghinhepfehmuggvsgdrtghomhenucfkpheptddrtddrtddrtddpkeehrddvvddvrdduudejrddvvddvnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmohguvgepshhmthhpqdhouhhtpdhhvghlohepphhlrgihvghrjeeliedrhhgrrdhovhhhrdhnvghtpdhinhgvtheptddrtddrtddrtddpmhgrihhlfhhrohhmpehnohhrsggvrhhtrdhkrghmihhnshhkihesfehmuggvsgdrtghomhdprhgtphhtthhopeigvghnqdguvghvvghlsehlihhsthhsrdigvghnphhrohhjvggtthdrohhrgh
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,322 +70,114 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Paul Durrant <pdurrant@amazon.com>, Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Maciej Pijanowski <maciej.pijanowski@3mdeb.com>, piotr.krol@3mdeb.com,
+ xen-devel@lists.xenproject.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: Paul Durrant <pdurrant@amazon.com>
+On 29.07.2020 00:16, Marek Marczykowski-Górecki wrote:
+> On Tue, Jul 28, 2020 at 10:01:33PM +0100, Andrew Cooper wrote:
+>> On 28/07/2020 21:00, Jan Beulich wrote:
+>> > On 28.07.2020 09:41, Norbert Kaminski wrote:
+>> >> I'm trying to add support for the firmware updates with the UEFI
+>> >> capsule in
+>> >> Qubes OS. I've got the troubles with reading ESRT (EFI System
+>> >> Resource Table)
+>> >> in the dom0, which is based on the EFI memory map. The EFI_MEMMAP is not
+>> >> enabled despite the loaded drivers (CONFIG_EFI, CONFIG_EFI_ESRT) and
+>> >> kernel
+>> >> cmdline parameters (add_efi_memmap):
+>> >>
+>> >> ```
+>> >> [    3.451249] efi: EFI_MEMMAP is not enabled.
+>> >> ```
+>> >
+>> > It is, according to my understanding, a layering violation to expose
+>> > the EFI memory map to Dom0. It's not supposed to make use of this
+>> > information in any way. Hence any functionality depending on its use
+>> > also needs to be implemented in the hypervisor, with Dom0 making a
+>> > suitable hypercall to access this functionality. (And I find it
+>> > quite natural to expect that Xen gets involved in an update of the
+>> > firmware of a system.)
+>> 
+>> ERST is a table (read only by the looks of things) which is a 
+>> catalogue
+>> of various bits of firmware in the system, including GUIDs for
+>> identification, and version information.
+>> 
+>> It is the kind of data which the hardware domain should have access 
+>> to,
+>> and AFAICT, behaves just like a static ACPI table.
+>> 
+>> Presumably it wants to an E820 reserved region so dom0 gets indent
+>> access, and something in the EFI subsystem needs extending to pass the
+>> ERST address to dom0.
+> 
+> I think most (if not all) pieces in Xen are already there - there is
+> XENPF_firmware_info with XEN_EFW_EFI_INFO + XEN_FW_EFI_CONFIG_TABLE
+> that gives address of the EFI config table. Linux saves it in
+> efi_systab_xen.tables (arch/x86/xen/efi.c:xen_efi_probe().
+> I haven't figured out yet if it does anything with that information, 
+> but
+> the content of /sys/firmware/efi/systab suggests it does.
+> 
+> It seems ESRT driver in Linux uses memmap just for some sanity checks
+> (if the ESRT points at memory with EFI_MEMORY_RUNTIME and appropriate
+> type). Perhaps the check (if really necessary) can be added to Xen and
+> in case of dom0 simply skipped in Linux.
+> 
+> Norbert, if you're brave enough ;) I would suggests trying the (Linux)
+> patch below:
+> 
+> -----8<-----
+> diff --git a/drivers/firmware/efi/esrt.c b/drivers/firmware/efi/esrt.c
+> index e3d692696583..a2a5ccbb00a8 100644
+> --- a/drivers/firmware/efi/esrt.c
+> +++ b/drivers/firmware/efi/esrt.c
+> @@ -245,13 +245,14 @@ void __init efi_esrt_init(void)
+>  	int rc;
+>  	phys_addr_t end;
+> 
+> -	if (!efi_enabled(EFI_MEMMAP))
+> +	if (!efi_enabled(EFI_MEMMAP) && !efi_enabled(EFI_PARAVIRT))
+>  		return;
+> 
+>  	pr_debug("esrt-init: loading.\n");
+>  	if (!esrt_table_exists())
+>  		return;
+> 
+> +	if (!efi_enabled(EFI_PARAVIRT)) {
+>  	rc = efi_mem_desc_lookup(efi.esrt, &md);
+>  	if (rc < 0 ||
+>  	    (!(md.attribute & EFI_MEMORY_RUNTIME) &&
+> @@ -276,6 +277,7 @@ void __init efi_esrt_init(void)
+>  		       size, max);
+>  		return;
+>  	}
+> +	}
+> 
+>  	va = early_memremap(efi.esrt, size);
+>  	if (!va) {
+> @@ -331,7 +333,8 @@ void __init efi_esrt_init(void)
+> 
+>  	end = esrt_data + size;
+>  	pr_info("Reserving ESRT space from %pa to %pa.\n", &esrt_data, &end);
+> -	if (md.type == EFI_BOOT_SERVICES_DATA)
+> +
+> +	if (!efi_enabled(EFI_PARAVIRT) && md.type == EFI_BOOT_SERVICES_DATA)
+>  		efi_mem_reserve(esrt_data, esrt_data_size);
+> 
+>  	pr_debug("esrt-init: loaded.\n");
+> ----8<-----
+I've built the kernel with your patch. Unfortunately it doesn't bring 
+expected
+sysfs directories. We still need some changes here.
 
-This patch avoids calling iommu_iotlb_flush() for each individual GNTTABOP and
-insteads calls iommu_iotlb_flush_all() at the end of the hypercall. This
-should mean batched map/unmap operations perform better but may be slightly
-detrimental to singleton performance.
-
-Suggested-by: Jan Beulich <jbeulich@suse.com>
-Signed-off-by: Paul Durrant <pdurrant@amazon.com>
 ---
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: George Dunlap <george.dunlap@citrix.com>
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>
-Cc: Jan Beulich <jbeulich@suse.com>
-Cc: Julien Grall <julien@xen.org>
-Cc: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Wei Liu <wl@xen.org>
-
-v3:
- - New in v3
----
- xen/common/grant_table.c | 132 ++++++++++++++++++++++++---------------
- 1 file changed, 80 insertions(+), 52 deletions(-)
-
-diff --git a/xen/common/grant_table.c b/xen/common/grant_table.c
-index d6526bca12..f382e0be52 100644
---- a/xen/common/grant_table.c
-+++ b/xen/common/grant_table.c
-@@ -979,7 +979,7 @@ static unsigned int mapkind(
- 
- static void
- map_grant_ref(
--    struct gnttab_map_grant_ref *op)
-+    struct gnttab_map_grant_ref *op, unsigned int *flush_flags)
- {
-     struct domain *ld, *rd, *owner = NULL;
-     struct grant_table *lgt, *rgt;
-@@ -1228,17 +1228,12 @@ map_grant_ref(
-         if ( kind )
-         {
-             dfn_t dfn = _dfn(mfn_x(mfn));
--            unsigned int flush_flags = 0;
-             int err;
- 
--            err = iommu_map(ld, dfn, mfn, 0, 1, kind, &flush_flags);
--            if ( !err )
--                err = iommu_iotlb_flush(ld, dfn, 0, 1, flush_flags);
-+            err = iommu_map(ld, dfn, mfn, 0, 1, kind, flush_flags);
-             if ( err )
--                rc = GNTST_general_error;
--
--            if ( rc != GNTST_okay )
-             {
-+                rc = GNTST_general_error;
-                 double_gt_unlock(lgt, rgt);
-                 goto undo_out;
-             }
-@@ -1322,6 +1317,8 @@ gnttab_map_grant_ref(
- {
-     int i;
-     struct gnttab_map_grant_ref op;
-+    unsigned int flush_flags = 0;
-+    int err, rc = 0;
- 
-     for ( i = 0; i < count; i++ )
-     {
-@@ -1329,20 +1326,30 @@ gnttab_map_grant_ref(
-             return i;
- 
-         if ( unlikely(__copy_from_guest_offset(&op, uop, i, 1)) )
--            return -EFAULT;
-+        {
-+            rc = -EFAULT;
-+            break;
-+        }
- 
--        map_grant_ref(&op);
-+        map_grant_ref(&op, &flush_flags);
- 
-         if ( unlikely(__copy_to_guest_offset(uop, i, &op, 1)) )
--            return -EFAULT;
-+        {
-+            rc = -EFAULT;
-+            break;
-+        }
-     }
- 
--    return 0;
-+    err = iommu_iotlb_flush_all(current->domain, flush_flags);
-+    if ( !rc )
-+        rc = err;
-+
-+    return rc;
- }
- 
- static void
- unmap_common(
--    struct gnttab_unmap_common *op)
-+    struct gnttab_unmap_common *op, unsigned int *flush_flags)
- {
-     domid_t          dom;
-     struct domain   *ld, *rd;
-@@ -1486,20 +1493,16 @@ unmap_common(
-     {
-         unsigned int kind;
-         dfn_t dfn = _dfn(mfn_x(op->mfn));
--        unsigned int flush_flags = 0;
-         int err = 0;
- 
-         double_gt_lock(lgt, rgt);
- 
-         kind = mapkind(lgt, rd, op->mfn);
-         if ( !kind )
--            err = iommu_unmap(ld, dfn, 0, 1, &flush_flags);
-+            err = iommu_unmap(ld, dfn, 0, 1, flush_flags);
-         else if ( !(kind & MAPKIND_WRITE) )
-             err = iommu_map(ld, dfn, op->mfn, 0, 1, IOMMUF_readable,
--                            &flush_flags);
--
--        if ( !err )
--            err = iommu_iotlb_flush(ld, dfn, 0, 1, flush_flags);
-+                            flush_flags);
-         if ( err )
-             rc = GNTST_general_error;
- 
-@@ -1600,8 +1603,8 @@ unmap_common_complete(struct gnttab_unmap_common *op)
- 
- static void
- unmap_grant_ref(
--    struct gnttab_unmap_grant_ref *op,
--    struct gnttab_unmap_common *common)
-+    struct gnttab_unmap_grant_ref *op, struct gnttab_unmap_common *common,
-+    unsigned int *flush_flags)
- {
-     common->host_addr = op->host_addr;
-     common->dev_bus_addr = op->dev_bus_addr;
-@@ -1613,7 +1616,7 @@ unmap_grant_ref(
-     common->rd = NULL;
-     common->mfn = INVALID_MFN;
- 
--    unmap_common(common);
-+    unmap_common(common, flush_flags);
-     op->status = common->status;
- }
- 
-@@ -1622,31 +1625,50 @@ static long
- gnttab_unmap_grant_ref(
-     XEN_GUEST_HANDLE_PARAM(gnttab_unmap_grant_ref_t) uop, unsigned int count)
- {
--    int i, c, partial_done, done = 0;
-+    struct domain *currd = current->domain;
-     struct gnttab_unmap_grant_ref op;
-     struct gnttab_unmap_common common[GNTTAB_UNMAP_BATCH_SIZE];
-+    int rc = 0;
- 
-     while ( count != 0 )
-     {
-+        unsigned int i, c, partial_done = 0, done = 0;
-+        unsigned int flush_flags = 0;
-+        int err;
-+
-         c = min(count, (unsigned int)GNTTAB_UNMAP_BATCH_SIZE);
--        partial_done = 0;
- 
-         for ( i = 0; i < c; i++ )
-         {
-             if ( unlikely(__copy_from_guest(&op, uop, 1)) )
--                goto fault;
--            unmap_grant_ref(&op, &common[i]);
-+            {
-+                rc = -EFAULT;
-+                break;
-+            }
-+
-+            unmap_grant_ref(&op, &common[i], &flush_flags);
-             ++partial_done;
-+
-             if ( unlikely(__copy_field_to_guest(uop, &op, status)) )
--                goto fault;
-+            {
-+                rc = -EFAULT;
-+                break;
-+            }
-+
-             guest_handle_add_offset(uop, 1);
-         }
- 
--        gnttab_flush_tlb(current->domain);
-+        gnttab_flush_tlb(currd);
-+        err = iommu_iotlb_flush_all(currd, flush_flags);
-+        if ( !rc )
-+            rc = err;
- 
-         for ( i = 0; i < partial_done; i++ )
-             unmap_common_complete(&common[i]);
- 
-+        if ( rc )
-+            break;
-+
-         count -= c;
-         done += c;
- 
-@@ -1654,20 +1676,14 @@ gnttab_unmap_grant_ref(
-             return done;
-     }
- 
--    return 0;
--
--fault:
--    gnttab_flush_tlb(current->domain);
--
--    for ( i = 0; i < partial_done; i++ )
--        unmap_common_complete(&common[i]);
--    return -EFAULT;
-+    return rc;
- }
- 
- static void
- unmap_and_replace(
-     struct gnttab_unmap_and_replace *op,
--    struct gnttab_unmap_common *common)
-+    struct gnttab_unmap_common *common,
-+    unsigned int *flush_flags)
- {
-     common->host_addr = op->host_addr;
-     common->new_addr = op->new_addr;
-@@ -1679,7 +1695,7 @@ unmap_and_replace(
-     common->rd = NULL;
-     common->mfn = INVALID_MFN;
- 
--    unmap_common(common);
-+    unmap_common(common, flush_flags);
-     op->status = common->status;
- }
- 
-@@ -1687,31 +1703,50 @@ static long
- gnttab_unmap_and_replace(
-     XEN_GUEST_HANDLE_PARAM(gnttab_unmap_and_replace_t) uop, unsigned int count)
- {
--    int i, c, partial_done, done = 0;
-+    struct domain *currd = current->domain;
-     struct gnttab_unmap_and_replace op;
-     struct gnttab_unmap_common common[GNTTAB_UNMAP_BATCH_SIZE];
-+    int rc = 0;
- 
-     while ( count != 0 )
-     {
-+        unsigned int i, c, partial_done = 0, done = 0;
-+        unsigned int flush_flags = 0;
-+        int err;
-+
-         c = min(count, (unsigned int)GNTTAB_UNMAP_BATCH_SIZE);
--        partial_done = 0;
- 
-         for ( i = 0; i < c; i++ )
-         {
-             if ( unlikely(__copy_from_guest(&op, uop, 1)) )
--                goto fault;
--            unmap_and_replace(&op, &common[i]);
-+            {
-+                rc = -EFAULT;
-+                break;
-+            }
-+
-+            unmap_and_replace(&op, &common[i], &flush_flags);
-             ++partial_done;
-+
-             if ( unlikely(__copy_field_to_guest(uop, &op, status)) )
--                goto fault;
-+            {
-+                rc = -EFAULT;
-+                break;
-+            }
-+
-             guest_handle_add_offset(uop, 1);
-         }
- 
--        gnttab_flush_tlb(current->domain);
-+        gnttab_flush_tlb(currd);
-+        err = iommu_iotlb_flush_all(currd, flush_flags);
-+        if ( !rc )
-+            rc = err;
- 
-         for ( i = 0; i < partial_done; i++ )
-             unmap_common_complete(&common[i]);
- 
-+        if ( rc )
-+            break;
-+
-         count -= c;
-         done += c;
- 
-@@ -1719,14 +1754,7 @@ gnttab_unmap_and_replace(
-             return done;
-     }
- 
--    return 0;
--
--fault:
--    gnttab_flush_tlb(current->domain);
--
--    for ( i = 0; i < partial_done; i++ )
--        unmap_common_complete(&common[i]);
--    return -EFAULT;
-+    return rc;
- }
- 
- static int
--- 
-2.20.1
-
+Best Regards,
+Norbert Kamiński
+Embedded Systems Engineer
+GPG key ID: 9E9F90AFE10F466A
+3mdeb.com
 
