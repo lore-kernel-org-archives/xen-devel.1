@@ -2,65 +2,57 @@ Return-Path: <SRS0=+EUz=BN=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.0 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B6717C433DF
-	for <xen-devel@archiver.kernel.org>; Mon,  3 Aug 2020 12:50:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3721BC433E0
+	for <xen-devel@archiver.kernel.org>; Mon,  3 Aug 2020 13:18:35 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 865B02064B
-	for <xen-devel@archiver.kernel.org>; Mon,  3 Aug 2020 12:50:01 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="hJC6+ih5"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 865B02064B
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 0502F206D7
+	for <xen-devel@archiver.kernel.org>; Mon,  3 Aug 2020 13:18:34 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0502F206D7
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k2Zua-0001st-WD; Mon, 03 Aug 2020 12:49:53 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1k2aM0-0004nn-D3; Mon, 03 Aug 2020 13:18:12 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=rQjY=BN=xen.org=paul@srs-us1.protection.inumbo.net>)
- id 1k2ZuZ-0001oJ-KL
- for xen-devel@lists.xenproject.org; Mon, 03 Aug 2020 12:49:51 +0000
-X-Inumbo-ID: cac696e8-d587-11ea-908e-bc764e2007e4
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id cac696e8-d587-11ea-908e-bc764e2007e4;
- Mon, 03 Aug 2020 12:49:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ZlyGB/IJYGIn5IH/TrwY8/sEiVYZi4FF/kqtp/gyRxw=; b=hJC6+ih5zJRfQVFW6Xs+gmmWiq
- YJhFI9oAmkTlJ3xCbgIfFxXloH8CAPaa9IZvw7n+mgKWcE9optOJDA4EKcSC6R8CaVBpWJG+6GFA9
- jxDVxDOYCpOSnTvDw1YveJc2AeAj2n80rk8zPkBxHrvglE/STnWKYVt/9dikQ/bDqeXg=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>)
- id 1k2ZuM-0000x6-5e; Mon, 03 Aug 2020 12:49:38 +0000
-Received: from host86-143-223-30.range86-143.btcentralplus.com
- ([86.143.223.30] helo=u2f063a87eabd5f.home)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
- (envelope-from <paul@xen.org>)
- id 1k2ZuL-0002Mv-TE; Mon, 03 Aug 2020 12:49:38 +0000
-From: Paul Durrant <paul@xen.org>
-To: xen-devel@lists.xenproject.org
-Subject: [PATCH v2 3/4] public/io/netif: specify MTU override node
-Date: Mon,  3 Aug 2020 13:49:30 +0100
-Message-Id: <20200803124931.2678-4-paul@xen.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200803124931.2678-1-paul@xen.org>
-References: <20200803124931.2678-1-paul@xen.org>
+ (envelope-from <SRS0=uwFZ=BN=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1k2aLy-0004ni-SC
+ for xen-devel@lists.xenproject.org; Mon, 03 Aug 2020 13:18:10 +0000
+X-Inumbo-ID: c67f5a8a-d58b-11ea-af2f-12813bfff9fa
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id c67f5a8a-d58b-11ea-af2f-12813bfff9fa;
+ Mon, 03 Aug 2020 13:18:10 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 77287ADDF;
+ Mon,  3 Aug 2020 13:18:24 +0000 (UTC)
+Subject: Re: RESCHEDULED Call for agenda items for Community Call, August 13 @
+ 15:00 UTC
+From: Jan Beulich <jbeulich@suse.com>
+To: George Dunlap <George.Dunlap@citrix.com>
+References: <1E023F6E-0E3C-4CD5-A074-7BF62635E123@citrix.com>
+ <40615946-FF55-48DB-91FB-58DD603FDD69@citrix.com>
+ <9bfef1bf-31a7-1c95-60fa-2ca665942fda@suse.com>
+ <047B12C2-71AA-459F-853C-DF1CD040D6C1@citrix.com>
+ <37d5e973-7645-d4eb-7bd6-f8d3226d7cb5@suse.com>
+Message-ID: <b72f7526-4874-b29b-39d3-913b2b62799b@suse.com>
+Date: Mon, 3 Aug 2020 15:18:08 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.11.0
 MIME-Version: 1.0
+In-Reply-To: <37d5e973-7645-d4eb-7bd6-f8d3226d7cb5@suse.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -72,83 +64,39 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Juergen Gross <jgross@suse.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Paul Durrant <pdurrant@amazon.com>, Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: Paul Durrant <pdurrant@amazon.com>
+On 31.07.2020 14:35, Jan Beulich wrote:
+> On 31.07.2020 14:27, George Dunlap wrote:
+>>> On Jul 31, 2020, at 1:25 PM, Jan Beulich <jbeulich@suse.com> wrote:
+>>> On 30.07.2020 17:41, George Dunlap wrote:
+>>>>> On Jul 30, 2020, at 4:17 PM, George Dunlap <George.Dunlap@citrix.com> wrote:
+>>>>>
+>>>>> Hey all,
+>>>>>
+>>>>> The community call is scheduled for next week, 6 August.  I, however, will be on PTO that week; I propose rescheduling it for the following week, 13 August, at the same time.
+>>>>>
+>>>>> The proposed agenda is in ZZZ and you can edit to add items.  Alternatively, you can reply to this mail directly.
+>>>>
+>>>> Sorry, in all my manual templating I seem to have missed this one.  Here’s the URL:
+>>>>
+>>>> https://cryptpad.fr/pad/#/3/pad/edit/9c58993a08fe97451f0a5b6c8bb906b1/
+>>>
+>>> I get "This link does not give you access to the document". Maybe a
+>>> permissions problem? I've meant to add a "minimum toolchain versions"
+>>> topic ...
+>>
+>> Try this one?
+>>
+>> https://cryptpad.fr/pad/#/2/pad/edit/VlLdjiw7iBm0R-efOMyCY+Ks/
+> 
+> Ah yes, this one works. Thanks.
 
-There is currently no documentation to state what MTU a frontend should
-adertise to its network stack. It has however long been assumed that the
-default value of 1500 is correct.
+And over the weekend I realized that the week of the 13th I'm going to be
+on PTO, so very likely won't be able to make the call. Not sure what to
+suggest you do with the topic ...
 
-This patch specifies a mechanism to allow the tools to set the MTU via a
-xenstore node in the frontend area and states that the absence of that node
-means the frontend should assume an MTU of 1500 octets.
-
-NOTE: The Windows PV frontend has used an MTU sampled from the xenstore
-      node specified in this patch.
-
-Signed-off-by: Paul Durrant <pdurrant@amazon.com>
-Reviewed-by: Juergen Gross <jgross@suse.com>
----
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: George Dunlap <george.dunlap@citrix.com>
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>
-Cc: Jan Beulich <jbeulich@suse.com>
-Cc: Julien Grall <julien@xen.org>
-Cc: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Wei Liu <wl@xen.org>
-
-v2:
- - Add a note in xenstore-paths highlighting the new xenstore node
----
- docs/misc/xenstore-paths.pandoc |  3 +++
- xen/include/public/io/netif.h   | 12 ++++++++++++
- 2 files changed, 15 insertions(+)
-
-diff --git a/docs/misc/xenstore-paths.pandoc b/docs/misc/xenstore-paths.pandoc
-index 766e8008dc..5cd5c8a3b9 100644
---- a/docs/misc/xenstore-paths.pandoc
-+++ b/docs/misc/xenstore-paths.pandoc
-@@ -298,6 +298,9 @@ A virtual keyboard device frontend. Described by
- A virtual network device frontend. Described by
- [xen/include/public/io/netif.h][NETIF]
- 
-+NOTE: ~/device/vif/$DEVID/mtu can be used to inform the frontend of an
-+      increased MTU. (The default MTU is 1500 octets).
-+
- #### ~/device/vscsi/$DEVID/* []
- 
- A virtual scsi device frontend. Described by
-diff --git a/xen/include/public/io/netif.h b/xen/include/public/io/netif.h
-index 9fcf91a2fe..00dd258712 100644
---- a/xen/include/public/io/netif.h
-+++ b/xen/include/public/io/netif.h
-@@ -204,6 +204,18 @@
-  * present).
-  */
- 
-+/*
-+ * MTU
-+ * ===
-+ *
-+ * The toolstack may set a value of MTU for the frontend by setting the
-+ * /local/domain/<domid>/device/vif/<vif>/mtu node with the MTU value in
-+ * octets. If this node is absent the frontend should assume an MTU value
-+ * of 1500 octets. A frontend is also at liberty to ignore this value so
-+ * it is only suitable for informing the frontend that a packet payload
-+ * >1500 octets is permitted.
-+ */
-+
- /*
-  * Hash types
-  * ==========
--- 
-2.20.1
-
+Jan
 
