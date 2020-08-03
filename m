@@ -4,48 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-10.0 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=unavailable
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=unavailable
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 031DFC433E0
-	for <xen-devel@archiver.kernel.org>; Mon,  3 Aug 2020 06:18:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 67129C433E0
+	for <xen-devel@archiver.kernel.org>; Mon,  3 Aug 2020 06:19:27 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D1ADA20672
-	for <xen-devel@archiver.kernel.org>; Mon,  3 Aug 2020 06:18:58 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D1ADA20672
+	by mail.kernel.org (Postfix) with ESMTPS id 431BD20672
+	for <xen-devel@archiver.kernel.org>; Mon,  3 Aug 2020 06:19:27 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 431BD20672
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k2To7-0008SN-IB; Mon, 03 Aug 2020 06:18:47 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1k2Tob-0008WV-RF; Mon, 03 Aug 2020 06:19:17 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=CqhT=BN=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1k2To6-0008SE-DR
- for xen-devel@lists.xenproject.org; Mon, 03 Aug 2020 06:18:46 +0000
-X-Inumbo-ID: 2f47bf20-d551-11ea-9075-bc764e2007e4
+ id 1k2Toa-0008WJ-Hj
+ for xen-devel@lists.xenproject.org; Mon, 03 Aug 2020 06:19:16 +0000
+X-Inumbo-ID: 41768c26-d551-11ea-aef8-12813bfff9fa
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 2f47bf20-d551-11ea-9075-bc764e2007e4;
- Mon, 03 Aug 2020 06:18:45 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 41768c26-d551-11ea-aef8-12813bfff9fa;
+ Mon, 03 Aug 2020 06:19:16 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id C0078AF38;
- Mon,  3 Aug 2020 06:18:59 +0000 (UTC)
-Subject: Re: [PATCH v3 2/4] xen/balloon: make the balloon wait interruptible
+ by mx2.suse.de (Postfix) with ESMTP id 4A084AF38;
+ Mon,  3 Aug 2020 06:19:30 +0000 (UTC)
+Subject: Re: [PATCH v3 3/4] Revert "xen/balloon: Fix crash when ballooning on
+ x86 32 bit PAE"
 To: Roger Pau Monne <roger.pau@citrix.com>, linux-kernel@vger.kernel.org
 References: <20200727091342.52325-1-roger.pau@citrix.com>
- <20200727091342.52325-3-roger.pau@citrix.com>
+ <20200727091342.52325-4-roger.pau@citrix.com>
 From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Message-ID: <65a4575a-d3ed-3aca-3f30-60eab3792346@suse.com>
-Date: Mon, 3 Aug 2020 08:18:44 +0200
+Message-ID: <cb9783d8-ba48-f290-95b5-adbdb3900cfd@suse.com>
+Date: Mon, 3 Aug 2020 08:19:14 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20200727091342.52325-3-roger.pau@citrix.com>
+In-Reply-To: <20200727091342.52325-4-roger.pau@citrix.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
@@ -61,17 +63,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Cc: xen-devel@lists.xenproject.org,
  Boris Ostrovsky <boris.ostrovsky@oracle.com>,
- Stefano Stabellini <sstabellini@kernel.org>, stable@vger.kernel.org
+ Stefano Stabellini <sstabellini@kernel.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 On 27.07.20 11:13, Roger Pau Monne wrote:
-> So it can be killed, or else processes can get hung indefinitely
-> waiting for balloon pages.
+> This reverts commit dfd74a1edfaba5864276a2859190a8d242d18952.
+> 
+> This has been fixed by commit dca4436d1cf9e0d237c which added the out
+> of bounds check to __add_memory, so that trying to add blocks past
+> MAX_PHYSMEM_BITS will fail.
+> 
+> Note the check in the Xen balloon driver was bogus anyway, as it
+> checked the start address of the resource, but it should instead test
+> the end address to assert the whole resource falls below
+> MAX_PHYSMEM_BITS.
 > 
 > Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 > Reviewed-by: Juergen Gross <jgross@suse.com>
-> Cc: stable@vger.kernel.org
 
 Pushed to: xen/tip.git for-linus-5.9
 
