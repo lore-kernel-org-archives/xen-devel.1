@@ -2,74 +2,78 @@ Return-Path: <SRS0=+EUz=BN=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
+	DKIM_ADSP_CUSTOM_MED,DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3F7A2C433E0
-	for <xen-devel@archiver.kernel.org>; Mon,  3 Aug 2020 17:28:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 233DBC433DF
+	for <xen-devel@archiver.kernel.org>; Mon,  3 Aug 2020 18:22:16 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1195B22BEA
-	for <xen-devel@archiver.kernel.org>; Mon,  3 Aug 2020 17:28:26 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 9AE8722B4E
+	for <xen-devel@archiver.kernel.org>; Mon,  3 Aug 2020 18:22:15 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="H+BvLWGG"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1195B22BEA
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="XjS6U4v4"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9AE8722B4E
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k2eFu-0003FC-7z; Mon, 03 Aug 2020 17:28:10 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1k2f5x-0008Fz-4r; Mon, 03 Aug 2020 18:21:57 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=f7s4=BN=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
- id 1k2eFs-0003EM-IO
- for xen-devel@lists.xenproject.org; Mon, 03 Aug 2020 17:28:08 +0000
-X-Inumbo-ID: b16d7618-d5ae-11ea-af66-12813bfff9fa
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id b16d7618-d5ae-11ea-af66-12813bfff9fa;
- Mon, 03 Aug 2020 17:28:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
- Content-Transfer-Encoding:Content-Type:Message-ID:To:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jmyjTvBlJf219FGZqE6H9Lx7vxS+CFpPcS85FIstZBQ=; b=H+BvLWGG7p98/EBTs7UGa5i6x
- p3UkMY96YKAI+WJo2FJzgsPT5+NroI7xoR8UORvTcUSdhFNPB/gzmwGQjxyyCrIqjlKwbXcyPCpVz
- BIUI5rGSyCLmpVQqHVmtsI4+JnPMcFuT8RFQIqVwSexYqGzpdVPNCS6lluM377wCX9pYo=;
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1k2eFp-0007jF-QW; Mon, 03 Aug 2020 17:28:05 +0000
-Received: from [172.16.144.3] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1k2eFp-00040S-Cf; Mon, 03 Aug 2020 17:28:05 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.89) (envelope-from <osstest-admin@xenproject.org>)
- id 1k2eFp-0001Iq-C4; Mon, 03 Aug 2020 17:28:05 +0000
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-152428-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 152428: tolerable all pass - PUSHED
-X-Osstest-Failures: xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
- xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
- xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
- xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
- xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This: xen=9909532113692020c1b50eb974cac47d4ea10e69
-X-Osstest-Versions-That: xen=81fd0d3ca4b2cd309403c6e8da662c325dd35750
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Mon, 03 Aug 2020 17:28:05 +0000
+ <SRS0=XyPB=BN=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
+ id 1k2f5w-0008F4-6W
+ for xen-devel@lists.xenproject.org; Mon, 03 Aug 2020 18:21:56 +0000
+X-Inumbo-ID: 3188cb0d-d5b6-11ea-90c4-bc764e2007e4
+Received: from mail-lf1-x141.google.com (unknown [2a00:1450:4864:20::141])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 3188cb0d-d5b6-11ea-90c4-bc764e2007e4;
+ Mon, 03 Aug 2020 18:21:48 +0000 (UTC)
+Received: by mail-lf1-x141.google.com with SMTP id b11so20987266lfe.10
+ for <xen-devel@lists.xenproject.org>; Mon, 03 Aug 2020 11:21:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id:in-reply-to:references;
+ bh=oslIVtwtHBl5F3ZhQAPxrDGKrXRg4UKsfSDdvc5ciUQ=;
+ b=XjS6U4v4PSxa1s3IfmNtC3cWuXvF7nIUasRVK2guc6ntXJJAHaL0mrU8joAIIvYweP
+ 5THry527m+O7psZ3j7XNum5igWNb7Bik4NYBcmwLcCeHzrbOA948vb2hLndQ+QRQ5M/9
+ reN+IcpKVZaQlgxIXKL4XPnXEYNM+Rbz7xguH3dWq3++rLoQ5qsulqsDGbpU/WClvzrw
+ v5Bvw3RV0xj+qh+5ooSIpQVZsUDGuVmG/zZdlWdTWTzTHVFKhnvKmDlnanVA+MHQkcyA
+ nuZlQ+Nsx9tUO9qy0gGabRQZScyHIKApfOj8UHxkBtyK+C4jgQXQfEOdQp/61KXD20Zh
+ hD9A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references;
+ bh=oslIVtwtHBl5F3ZhQAPxrDGKrXRg4UKsfSDdvc5ciUQ=;
+ b=dH5TERHIS5J4t7mAvwYWbeMaKLtdUn13HGsitaVP1A5Ke9XnZEf83j2cbJVikD/W9E
+ Ye8is4a3eZS4rzv6y7nNb1ubrtYmj+5hN3lL34gD6f/FPMAAhQ+1Cjdu2VPtxpSBo065
+ Kz2AQhXJ1CnG9/ZRmTYBXv0cnQ+o6GhudJ2pzmrKa2BVXsn8vFFCZ9kUxGNQ4pq0PK72
+ PYq1wpd4fvUtS18I3QKTJ+2JvrTAfto7eQ/+36dO5qjZPxqimUsGCP0+3f/4xEUxU5C5
+ Gc8NpRaKU2yPq6Y3ScqPB4E/mnybEsZftdBvJit2cPZMkhqy7nL8U4iuU04TsLLP/QCC
+ C14w==
+X-Gm-Message-State: AOAM533KYj4iQv7XB4900AyXFVtFRt4HY/FAjcuOtmL7Ch7G//QaT1+P
+ epEIiIArnEvKoIVJBefJzIo3zS5zm20=
+X-Google-Smtp-Source: ABdhPJxOLAttpeuy9/RgN7qjnqDLVPrgno1Gy+KRXHv9MzMDEQy+mv7bT2weMP+GR17sWoTcH/sXyg==
+X-Received: by 2002:ac2:46d0:: with SMTP id p16mr9369899lfo.142.1596478907282; 
+ Mon, 03 Aug 2020 11:21:47 -0700 (PDT)
+Received: from otyshchenko.www.tendawifi.com ([212.22.223.21])
+ by smtp.gmail.com with ESMTPSA id h18sm4486730ljk.7.2020.08.03.11.21.46
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Mon, 03 Aug 2020 11:21:46 -0700 (PDT)
+From: Oleksandr Tyshchenko <olekstysh@gmail.com>
+To: xen-devel@lists.xenproject.org
+Subject: [RFC PATCH V1 03/12] xen/mm: Make x86's XENMEM_resource_ioreq_server
+ handling common
+Date: Mon,  3 Aug 2020 21:21:19 +0300
+Message-Id: <1596478888-23030-4-git-send-email-olekstysh@gmail.com>
+X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1596478888-23030-1-git-send-email-olekstysh@gmail.com>
+References: <1596478888-23030-1-git-send-email-olekstysh@gmail.com>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,63 +84,205 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+ Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-flight 152428 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/152428/
+From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 
-Failures :-/ but no regressions.
+As x86 implementation of XENMEM_resource_ioreq_server can be
+re-used on Arm later on, this patch makes it common and removes
+arch_acquire_resource as unneeded.
 
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+This support is going to be used on Arm to be able run device
+emulator outside of Xen hypervisor.
 
-version targeted for testing:
- xen                  9909532113692020c1b50eb974cac47d4ea10e69
-baseline version:
- xen                  81fd0d3ca4b2cd309403c6e8da662c325dd35750
+Please note, this is a split/cleanup of Julien's PoC:
+"Add support for Guest IO forwarding to a device emulator"
 
-Last test of basis   152334  2020-07-31 20:01:29 Z    2 days
-Testing same since   152428  2020-08-03 15:03:25 Z    0 days    1 attempts
+Signed-off-by: Julien Grall <julien.grall@arm.com>
+Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+---
+ xen/arch/x86/mm.c        | 45 ---------------------------------------------
+ xen/common/memory.c      | 45 +++++++++++++++++++++++++++++++++++++++++++--
+ xen/include/asm-arm/mm.h |  8 --------
+ xen/include/asm-x86/mm.h |  4 ----
+ 4 files changed, 43 insertions(+), 59 deletions(-)
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Jan Beulich <jbeulich@suse.com>
+diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+index 2b06e15..33238d0 100644
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -99,7 +99,6 @@
+  * doing the final put_page(), and remove it from the iommu if so.
+  */
+ 
+-#include <xen/hvm/ioreq.h>
+ #include <xen/init.h>
+ #include <xen/kernel.h>
+ #include <xen/lib.h>
+@@ -4600,50 +4599,6 @@ int xenmem_add_to_physmap_one(
+     return rc;
+ }
+ 
+-int arch_acquire_resource(struct domain *d, unsigned int type,
+-                          unsigned int id, unsigned long frame,
+-                          unsigned int nr_frames, xen_pfn_t mfn_list[])
+-{
+-    int rc;
+-
+-    switch ( type )
+-    {
+-#ifdef CONFIG_HVM
+-    case XENMEM_resource_ioreq_server:
+-    {
+-        ioservid_t ioservid = id;
+-        unsigned int i;
+-
+-        rc = -EINVAL;
+-        if ( !is_hvm_domain(d) )
+-            break;
+-
+-        if ( id != (unsigned int)ioservid )
+-            break;
+-
+-        rc = 0;
+-        for ( i = 0; i < nr_frames; i++ )
+-        {
+-            mfn_t mfn;
+-
+-            rc = hvm_get_ioreq_server_frame(d, id, frame + i, &mfn);
+-            if ( rc )
+-                break;
+-
+-            mfn_list[i] = mfn_x(mfn);
+-        }
+-        break;
+-    }
+-#endif
+-
+-    default:
+-        rc = -EOPNOTSUPP;
+-        break;
+-    }
+-
+-    return rc;
+-}
+-
+ long arch_memory_op(unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
+ {
+     int rc;
+diff --git a/xen/common/memory.c b/xen/common/memory.c
+index 714077c..9283e5e 100644
+--- a/xen/common/memory.c
++++ b/xen/common/memory.c
+@@ -30,6 +30,10 @@
+ #include <public/memory.h>
+ #include <xsm/xsm.h>
+ 
++#ifdef CONFIG_IOREQ_SERVER
++#include <xen/hvm/ioreq.h>
++#endif
++
+ #ifdef CONFIG_X86
+ #include <asm/guest.h>
+ #endif
+@@ -1045,6 +1049,38 @@ static int acquire_grant_table(struct domain *d, unsigned int id,
+     return 0;
+ }
+ 
++#ifdef CONFIG_IOREQ_SERVER
++static int acquire_ioreq_server(struct domain *d,
++                                unsigned int id,
++                                unsigned long frame,
++                                unsigned int nr_frames,
++                                xen_pfn_t mfn_list[])
++{
++    ioservid_t ioservid = id;
++    unsigned int i;
++    int rc;
++
++    if ( !is_hvm_domain(d) )
++        return -EINVAL;
++
++    if ( id != (unsigned int)ioservid )
++        return -EINVAL;
++
++    for ( i = 0; i < nr_frames; i++ )
++    {
++        mfn_t mfn;
++
++        rc = hvm_get_ioreq_server_frame(d, id, frame + i, &mfn);
++        if ( rc )
++            return rc;
++
++        mfn_list[i] = mfn_x(mfn);
++    }
++
++    return 0;
++}
++#endif
++
+ static int acquire_resource(
+     XEN_GUEST_HANDLE_PARAM(xen_mem_acquire_resource_t) arg)
+ {
+@@ -1095,9 +1131,14 @@ static int acquire_resource(
+                                  mfn_list);
+         break;
+ 
++#ifdef CONFIG_IOREQ_SERVER
++    case XENMEM_resource_ioreq_server:
++        rc = acquire_ioreq_server(d, xmar.id, xmar.frame, xmar.nr_frames,
++                                  mfn_list);
++        break;
++#endif
+     default:
+-        rc = arch_acquire_resource(d, xmar.type, xmar.id, xmar.frame,
+-                                   xmar.nr_frames, mfn_list);
++        rc = -EOPNOTSUPP;
+         break;
+     }
+ 
+diff --git a/xen/include/asm-arm/mm.h b/xen/include/asm-arm/mm.h
+index f8ba49b..0b7de31 100644
+--- a/xen/include/asm-arm/mm.h
++++ b/xen/include/asm-arm/mm.h
+@@ -358,14 +358,6 @@ static inline void put_page_and_type(struct page_info *page)
+ 
+ void clear_and_clean_page(struct page_info *page);
+ 
+-static inline
+-int arch_acquire_resource(struct domain *d, unsigned int type, unsigned int id,
+-                          unsigned long frame, unsigned int nr_frames,
+-                          xen_pfn_t mfn_list[])
+-{
+-    return -EOPNOTSUPP;
+-}
+-
+ unsigned int arch_get_dma_bitsize(void);
+ 
+ #endif /*  __ARCH_ARM_MM__ */
+diff --git a/xen/include/asm-x86/mm.h b/xen/include/asm-x86/mm.h
+index 7e74996..2e111ad 100644
+--- a/xen/include/asm-x86/mm.h
++++ b/xen/include/asm-x86/mm.h
+@@ -649,8 +649,4 @@ static inline bool arch_mfn_in_directmap(unsigned long mfn)
+     return mfn <= (virt_to_mfn(eva - 1) + 1);
+ }
+ 
+-int arch_acquire_resource(struct domain *d, unsigned int type,
+-                          unsigned int id, unsigned long frame,
+-                          unsigned int nr_frames, xen_pfn_t mfn_list[]);
+-
+ #endif /* __ASM_X86_MM_H__ */
+-- 
+2.7.4
 
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-libvirt                                     pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/xen.git
-   81fd0d3ca4..9909532113  9909532113692020c1b50eb974cac47d4ea10e69 -> smoke
 
