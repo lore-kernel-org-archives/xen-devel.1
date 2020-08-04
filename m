@@ -7,61 +7,61 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 69DA7C433DF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1F79FC433E3
 	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 14:10:17 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4608C2054F
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 14:10:17 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id EEB5C2177B
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 14:10:16 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="xwRDKOxB"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4608C2054F
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="prve2la1"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EEB5C2177B
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k2xde-0002tI-78; Tue, 04 Aug 2020 14:09:58 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1k2xde-0002tR-GT; Tue, 04 Aug 2020 14:09:58 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=hzL0=BO=xen.org=paul@srs-us1.protection.inumbo.net>)
- id 1k2xdd-0002sb-2d
+ id 1k2xdd-0002sc-A8
  for xen-devel@lists.xenproject.org; Tue, 04 Aug 2020 14:09:57 +0000
-X-Inumbo-ID: 8aa9938d-f19e-463d-9cf1-90edaedb9d7c
+X-Inumbo-ID: 90780af9-081f-42d5-b893-424c160e7350
 Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 8aa9938d-f19e-463d-9cf1-90edaedb9d7c;
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 90780af9-081f-42d5-b893-424c160e7350;
  Tue, 04 Aug 2020 14:09:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:Content-Type:MIME-Version:
- References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=JvpjW2yuqqsP9Nf9RqSvKwq47T2XEc66z0tnFgkOJgM=; b=xwRDKOxBVWnuOYXjXfJ1l7Y7RT
- /Re88HAIGfds3UwtASLEhpS8cDOsiSt7FpdYq0ztVDs4/pkOX5/+iulbdk1eQTT/LihBH4oHxAgDD
- 2IBjcQt0Vz67LtoBJYqfbuBdZwQxCWKgNpGf69gxnQFP0botnfTkpGZAQJCbPRAHHN8s=;
+ bh=vAf8F1azmxpSkAU8hG593+fhhZfmNP3RoDkUnJJss0w=; b=prve2la1ewe4a9OxTHH6gPrFEH
+ B8TkYPdb3iFIQ0Coz6PZg3AyB6HjvJicebvoBR2FVNF5sppLB4XJAi6sDhatxMD481BMYm6q7fxSU
+ 2gYS9iPcBoiB7BgdzLp1yhooNMLSDRqU/3UQxHE7R+AXPdtX5ofGA+VhRA/Q9nZRhkSY=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1k2xdW-0000NX-8o; Tue, 04 Aug 2020 14:09:50 +0000
+ id 1k2xdW-0000NZ-Bq; Tue, 04 Aug 2020 14:09:50 +0000
 Received: from host86-143-223-30.range86-143.btcentralplus.com
  ([86.143.223.30] helo=u2f063a87eabd5f.home)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1k2xD0-0003ag-Kz; Tue, 04 Aug 2020 13:42:26 +0000
+ id 1k2xD2-0003ag-Eg; Tue, 04 Aug 2020 13:42:28 +0000
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH v4 10/14] iommu: remove the share_p2m operation
-Date: Tue,  4 Aug 2020 14:42:05 +0100
-Message-Id: <20200804134209.8717-11-paul@xen.org>
+Subject: [PATCH v4 12/14] vtd: use a bit field for root_entry
+Date: Tue,  4 Aug 2020 14:42:07 +0100
+Message-Id: <20200804134209.8717-13-paul@xen.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200804134209.8717-1-paul@xen.org>
 References: <20200804134209.8717-1-paul@xen.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -73,235 +73,170 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Kevin Tian <kevin.tian@intel.com>, Wei Liu <wl@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Paul Durrant <pdurrant@amazon.com>,
- George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
- =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: Paul Durrant <pdurrant@amazon.com>, Kevin Tian <kevin.tian@intel.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Paul Durrant <pdurrant@amazon.com>
 
-Sharing of HAP tables is now VT-d specific so the operation is never defined
-for AMD IOMMU any more. There's also no need to pro-actively set vtd.pgd_maddr
-when using shared EPT as it is straightforward to simply define a helper
-function to return the appropriate value in the shared and non-shared cases.
+This makes the code a little easier to read and also makes it more consistent
+with iremap_entry.
+
+Also take the opportunity to tidy up the implementation of device_in_domain().
 
 Signed-off-by: Paul Durrant <pdurrant@amazon.com>
 ---
-Cc: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: George Dunlap <george.dunlap@citrix.com>
-Cc: Wei Liu <wl@xen.org>
-Cc: "Roger Pau Monné" <roger.pau@citrix.com>
 Cc: Kevin Tian <kevin.tian@intel.com>
 
-v2:
-  - Put the PGD level adjust into the helper function too, since it is
-    irrelevant in the shared EPT case
+v4:
+ - New in v4
 ---
- xen/arch/x86/mm/p2m.c               |  3 -
- xen/drivers/passthrough/iommu.c     |  8 ---
- xen/drivers/passthrough/vtd/iommu.c | 90 ++++++++++++++++-------------
- xen/include/xen/iommu.h             |  3 -
- 4 files changed, 50 insertions(+), 54 deletions(-)
+ xen/drivers/passthrough/vtd/iommu.c   |  4 ++--
+ xen/drivers/passthrough/vtd/iommu.h   | 33 ++++++++++++++++-----------
+ xen/drivers/passthrough/vtd/utils.c   |  4 ++--
+ xen/drivers/passthrough/vtd/x86/ats.c | 27 ++++++++++++----------
+ 4 files changed, 39 insertions(+), 29 deletions(-)
 
-diff --git a/xen/arch/x86/mm/p2m.c b/xen/arch/x86/mm/p2m.c
-index 9f8b9bc5fd..3bd8d83d23 100644
---- a/xen/arch/x86/mm/p2m.c
-+++ b/xen/arch/x86/mm/p2m.c
-@@ -726,9 +726,6 @@ int p2m_alloc_table(struct p2m_domain *p2m)
- 
-     p2m->phys_table = pagetable_from_mfn(top_mfn);
- 
--    if ( hap_enabled(d) )
--        iommu_share_p2m_table(d);
--
-     p2m_unlock(p2m);
-     return 0;
- }
-diff --git a/xen/drivers/passthrough/iommu.c b/xen/drivers/passthrough/iommu.c
-index ab44c332bb..7464f10d1c 100644
---- a/xen/drivers/passthrough/iommu.c
-+++ b/xen/drivers/passthrough/iommu.c
-@@ -498,14 +498,6 @@ int iommu_do_domctl(
-     return ret;
- }
- 
--void iommu_share_p2m_table(struct domain* d)
--{
--    ASSERT(hap_enabled(d));
--
--    if ( iommu_use_hap_pt(d) )
--        iommu_get_ops()->share_p2m(d);
--}
--
- void iommu_crash_shutdown(void)
- {
-     if ( !iommu_crash_disable )
 diff --git a/xen/drivers/passthrough/vtd/iommu.c b/xen/drivers/passthrough/vtd/iommu.c
-index 68cf0e535a..a532d9e88c 100644
+index f8da4fe0e7..76025f6ccd 100644
 --- a/xen/drivers/passthrough/vtd/iommu.c
 +++ b/xen/drivers/passthrough/vtd/iommu.c
-@@ -318,6 +318,48 @@ static u64 addr_to_dma_page_maddr(struct domain *domain, u64 addr, int alloc)
-     return pte_maddr;
- }
- 
-+static uint64_t domain_pgd_maddr(struct domain *d, struct vtd_iommu *iommu)
-+{
-+    struct domain_iommu *hd = dom_iommu(d);
-+    uint64_t pgd_maddr;
-+    unsigned int agaw;
-+
-+    ASSERT(spin_is_locked(&hd->arch.mapping_lock));
-+
-+    if ( iommu_use_hap_pt(d) )
-+    {
-+        mfn_t pgd_mfn =
-+            pagetable_get_mfn(p2m_get_pagetable(p2m_get_hostp2m(d)));
-+
-+        return pagetable_get_paddr(pagetable_from_mfn(pgd_mfn));
-+    }
-+
-+    if ( !hd->arch.vtd.pgd_maddr )
-+    {
-+        addr_to_dma_page_maddr(d, 0, 1);
-+
-+        if ( !hd->arch.vtd.pgd_maddr )
-+            return 0;
-+    }
-+
-+    pgd_maddr = hd->arch.vtd.pgd_maddr;
-+
-+    /* Skip top levels of page tables for 2- and 3-level DRHDs. */
-+    for ( agaw = level_to_agaw(4);
-+          agaw != level_to_agaw(iommu->nr_pt_levels);
-+          agaw-- )
-+    {
-+        struct dma_pte *p = map_vtd_domain_page(pgd_maddr);
-+
-+        pgd_maddr = dma_pte_addr(*p);
-+        unmap_vtd_domain_page(p);
-+        if ( !pgd_maddr )
-+            return 0;
-+    }
-+
-+    return pgd_maddr;
-+}
-+
- static void iommu_flush_write_buffer(struct vtd_iommu *iommu)
- {
-     u32 val;
-@@ -1286,7 +1328,7 @@ int domain_context_mapping_one(
-     struct context_entry *context, *context_entries;
-     u64 maddr, pgd_maddr;
-     u16 seg = iommu->drhd->segment;
--    int agaw, rc, ret;
-+    int rc, ret;
-     bool_t flush_dev_iotlb;
- 
-     ASSERT(pcidevs_locked());
-@@ -1340,37 +1382,18 @@ int domain_context_mapping_one(
-     if ( iommu_hwdom_passthrough && is_hardware_domain(domain) )
-     {
-         context_set_translation_type(*context, CONTEXT_TT_PASS_THRU);
--        agaw = level_to_agaw(iommu->nr_pt_levels);
-     }
-     else
-     {
-         spin_lock(&hd->arch.mapping_lock);
- 
--        /* Ensure we have pagetables allocated down to leaf PTE. */
--        if ( hd->arch.vtd.pgd_maddr == 0 )
-+        pgd_maddr = domain_pgd_maddr(domain, iommu);
-+        if ( !pgd_maddr )
-         {
--            addr_to_dma_page_maddr(domain, 0, 1);
--            if ( hd->arch.vtd.pgd_maddr == 0 )
--            {
--            nomem:
--                spin_unlock(&hd->arch.mapping_lock);
--                spin_unlock(&iommu->lock);
--                unmap_vtd_domain_page(context_entries);
--                return -ENOMEM;
--            }
--        }
--
--        /* Skip top levels of page tables for 2- and 3-level DRHDs. */
--        pgd_maddr = hd->arch.vtd.pgd_maddr;
--        for ( agaw = level_to_agaw(4);
--              agaw != level_to_agaw(iommu->nr_pt_levels);
--              agaw-- )
--        {
--            struct dma_pte *p = map_vtd_domain_page(pgd_maddr);
--            pgd_maddr = dma_pte_addr(*p);
--            unmap_vtd_domain_page(p);
--            if ( pgd_maddr == 0 )
--                goto nomem;
-+            spin_unlock(&hd->arch.mapping_lock);
-+            spin_unlock(&iommu->lock);
-+            unmap_vtd_domain_page(context_entries);
-+            return -ENOMEM;
+@@ -245,11 +245,11 @@ static u64 bus_to_context_maddr(struct vtd_iommu *iommu, u8 bus)
+             unmap_vtd_domain_page(root_entries);
+             return 0;
          }
- 
-         context_set_address_root(*context, pgd_maddr);
-@@ -1389,7 +1412,7 @@ int domain_context_mapping_one(
-         return -EFAULT;
+-        set_root_value(*root, maddr);
++        set_root_ctp(*root, maddr);
+         set_root_present(*root);
+         iommu_sync_cache(root, sizeof(struct root_entry));
      }
- 
--    context_set_address_width(*context, agaw);
-+    context_set_address_width(*context, level_to_agaw(iommu->nr_pt_levels));
-     context_set_fault_enable(*context);
-     context_set_present(*context);
-     iommu_sync_cache(context, sizeof(struct context_entry));
-@@ -1848,18 +1871,6 @@ static int __init vtd_ept_page_compatible(struct vtd_iommu *iommu)
-            (ept_has_1gb(ept_cap) && opt_hap_1gb) <= cap_sps_1gb(vtd_cap);
+-    maddr = (u64) get_context_addr(*root);
++    maddr = root_ctp(*root);
+     unmap_vtd_domain_page(root_entries);
+     return maddr;
  }
+diff --git a/xen/drivers/passthrough/vtd/iommu.h b/xen/drivers/passthrough/vtd/iommu.h
+index 216791b3d6..031ac5f66c 100644
+--- a/xen/drivers/passthrough/vtd/iommu.h
++++ b/xen/drivers/passthrough/vtd/iommu.h
+@@ -184,21 +184,28 @@
+ #define dma_frcd_source_id(c) (c & 0xffff)
+ #define dma_frcd_page_addr(d) (d & (((u64)-1) << 12)) /* low 64 bit */
  
 -/*
-- * set VT-d page table directory to EPT table if allowed
+- * 0: Present
+- * 1-11: Reserved
+- * 12-63: Context Ptr (12 - (haw-1))
+- * 64-127: Reserved
 - */
--static void iommu_set_pgd(struct domain *d)
--{
--    mfn_t pgd_mfn;
--
--    pgd_mfn = pagetable_get_mfn(p2m_get_pagetable(p2m_get_hostp2m(d)));
--    dom_iommu(d)->arch.vtd.pgd_maddr =
--        pagetable_get_paddr(pagetable_from_mfn(pgd_mfn));
--}
--
- static int rmrr_identity_mapping(struct domain *d, bool_t map,
-                                  const struct acpi_rmrr_unit *rmrr,
-                                  u32 flag)
-@@ -2719,7 +2730,6 @@ static struct iommu_ops __initdata vtd_ops = {
-     .adjust_irq_affinities = adjust_vtd_irq_affinities,
-     .suspend = vtd_suspend,
-     .resume = vtd_resume,
--    .share_p2m = iommu_set_pgd,
-     .crash_shutdown = vtd_crash_shutdown,
-     .iotlb_flush = iommu_flush_iotlb_pages,
-     .iotlb_flush_all = iommu_flush_iotlb_all,
-diff --git a/xen/include/xen/iommu.h b/xen/include/xen/iommu.h
-index b7e5d3da09..1f25d2082f 100644
---- a/xen/include/xen/iommu.h
-+++ b/xen/include/xen/iommu.h
-@@ -271,7 +271,6 @@ struct iommu_ops {
+ struct root_entry {
+-    u64    val;
+-    u64    rsvd1;
++    union {
++        __uint128_t val;
++        struct { uint64_t lo, hi; };
++        struct {
++            /* 0 - 63 */
++            uint64_t p:1;
++            uint64_t reserved0:11;
++            uint64_t ctp:52;
++
++            /* 64 - 127 */
++            uint64_t reserved1;
++        };
++    };
+ };
+-#define root_present(root)    ((root).val & 1)
+-#define set_root_present(root) do {(root).val |= 1;} while(0)
+-#define get_context_addr(root) ((root).val & PAGE_MASK_4K)
+-#define set_root_value(root, value) \
+-    do {(root).val |= ((value) & PAGE_MASK_4K);} while(0)
++
++#define root_present(r) (r).p
++#define set_root_present(r) do { (r).p = 1; } while (0)
++
++#define root_ctp(r) ((r).ctp << PAGE_SHIFT_4K)
++#define set_root_ctp(r, val) \
++    do { (r).ctp = ((val) >> PAGE_SHIFT_4K); } while (0)
  
-     int __must_check (*suspend)(void);
-     void (*resume)(void);
--    void (*share_p2m)(struct domain *d);
-     void (*crash_shutdown)(void);
-     int __must_check (*iotlb_flush)(struct domain *d, dfn_t dfn,
-                                     unsigned long page_count,
-@@ -348,8 +347,6 @@ void iommu_resume(void);
- void iommu_crash_shutdown(void);
- int iommu_get_reserved_device_memory(iommu_grdm_t *, void *);
+ struct context_entry {
+     u64 lo;
+diff --git a/xen/drivers/passthrough/vtd/utils.c b/xen/drivers/passthrough/vtd/utils.c
+index 4febcf506d..4c85242894 100644
+--- a/xen/drivers/passthrough/vtd/utils.c
++++ b/xen/drivers/passthrough/vtd/utils.c
+@@ -112,7 +112,7 @@ void print_vtd_entries(struct vtd_iommu *iommu, int bus, int devfn, u64 gmfn)
+         return;
+     }
  
--void iommu_share_p2m_table(struct domain *d);
--
- #ifdef CONFIG_HAS_PCI
- int iommu_do_pci_domctl(struct xen_domctl *, struct domain *d,
-                         XEN_GUEST_HANDLE_PARAM(xen_domctl_t));
+-    printk("    root_entry[%02x] = %"PRIx64"\n", bus, root_entry[bus].val);
++    printk("    root_entry[%02x] = %"PRIx64"\n", bus, root_entry[bus].lo);
+     if ( !root_present(root_entry[bus]) )
+     {
+         unmap_vtd_domain_page(root_entry);
+@@ -120,7 +120,7 @@ void print_vtd_entries(struct vtd_iommu *iommu, int bus, int devfn, u64 gmfn)
+         return;
+     }
+ 
+-    val = root_entry[bus].val;
++    val = root_ctp(root_entry[bus]);
+     unmap_vtd_domain_page(root_entry);
+     ctxt_entry = map_vtd_domain_page(val);
+     if ( ctxt_entry == NULL )
+diff --git a/xen/drivers/passthrough/vtd/x86/ats.c b/xen/drivers/passthrough/vtd/x86/ats.c
+index 04d702b1d6..8369415dcc 100644
+--- a/xen/drivers/passthrough/vtd/x86/ats.c
++++ b/xen/drivers/passthrough/vtd/x86/ats.c
+@@ -74,8 +74,8 @@ int ats_device(const struct pci_dev *pdev, const struct acpi_drhd_unit *drhd)
+ static bool device_in_domain(const struct vtd_iommu *iommu,
+                              const struct pci_dev *pdev, uint16_t did)
+ {
+-    struct root_entry *root_entry;
+-    struct context_entry *ctxt_entry = NULL;
++    struct root_entry *root_entry, *root_entries = NULL;
++    struct context_entry *context_entry, *context_entries = NULL;
+     unsigned int tt;
+     bool found = false;
+ 
+@@ -85,25 +85,28 @@ static bool device_in_domain(const struct vtd_iommu *iommu,
+         return false;
+     }
+ 
+-    root_entry = map_vtd_domain_page(iommu->root_maddr);
+-    if ( !root_present(root_entry[pdev->bus]) )
++    root_entries = (struct root_entry *)map_vtd_domain_page(iommu->root_maddr);
++    root_entry = &root_entries[pdev->bus];
++    if ( !root_present(*root_entry) )
+         goto out;
+ 
+-    ctxt_entry = map_vtd_domain_page(root_entry[pdev->bus].val);
+-    if ( context_domain_id(ctxt_entry[pdev->devfn]) != did )
++    context_entries = map_vtd_domain_page(root_ctp(*root_entry));
++    context_entry = &context_entries[pdev->devfn];
++    if ( context_domain_id(*context_entry) != did )
+         goto out;
+ 
+-    tt = context_translation_type(ctxt_entry[pdev->devfn]);
++    tt = context_translation_type(*context_entry);
+     if ( tt != CONTEXT_TT_DEV_IOTLB )
+         goto out;
+ 
+     found = true;
+-out:
+-    if ( root_entry )
+-        unmap_vtd_domain_page(root_entry);
+ 
+-    if ( ctxt_entry )
+-        unmap_vtd_domain_page(ctxt_entry);
++ out:
++    if ( root_entries )
++        unmap_vtd_domain_page(root_entries);
++
++    if ( context_entries )
++        unmap_vtd_domain_page(context_entries);
+ 
+     return found;
+ }
 -- 
 2.20.1
 
