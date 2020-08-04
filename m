@@ -2,67 +2,73 @@ Return-Path: <SRS0=QSaH=BO=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 686EFC433E0
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 13:43:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 778BEC433E0
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 13:53:16 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 34B522075D
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 13:43:04 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 4D7ED2086A
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 13:53:16 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="1BvJC7ZU"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 34B522075D
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="ml8AtgUU"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4D7ED2086A
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k2xDP-0000BS-Jq; Tue, 04 Aug 2020 13:42:51 +0000
+	id 1k2xNB-0001h7-V7; Tue, 04 Aug 2020 13:52:57 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=hzL0=BO=xen.org=paul@srs-us1.protection.inumbo.net>)
- id 1k2xDN-0008MU-LV
- for xen-devel@lists.xenproject.org; Tue, 04 Aug 2020 13:42:49 +0000
-X-Inumbo-ID: 09676321-9f90-436f-960f-05a855f8956a
+ (envelope-from <SRS0=KvlI=BO=xen.org=julien@srs-us1.protection.inumbo.net>)
+ id 1k2xNA-0001h0-FM
+ for xen-devel@lists.xenproject.org; Tue, 04 Aug 2020 13:52:56 +0000
+X-Inumbo-ID: 27aa72e7-1a80-4003-b49f-1967c04e64d5
 Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 09676321-9f90-436f-960f-05a855f8956a;
- Tue, 04 Aug 2020 13:42:25 +0000 (UTC)
+ id 27aa72e7-1a80-4003-b49f-1967c04e64d5;
+ Tue, 04 Aug 2020 13:52:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:Content-Type:MIME-Version:
- References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=uX0pTBNJWLcwNpGyIoW6P7DNZjTBgM7ya3gdLDIudsU=; b=1BvJC7ZUSTLTLpGtBNcWTJr/5+
- 9bg0ShTmQ46PqBzIdxNVvuy2hGmdQiM1WisnYdn2jT3rDjIUE1/4dAy8snxKZ76rxFO71UNYbgqCh
- w3o87WCTilGWGbs0yXpsjG4J7b3iux4TH6htP10avDIXEYsJqlocgAg8+YNHqSRoyW4A=;
+ bh=5ihO59wyAX8zkLS1CY3TtNPmuystf+aQGxWecJuP6eM=; b=ml8AtgUUu4GlCZpsftB6HeKtql
+ Fgw05jiBmxFS4XfSh0GXD0m2zuOk+zRLiusaIfA0S2rY7OnaH+Hp2oeSXA0kfw5ZFNFSn7OADhkFY
+ WeB6caaV8vukH53cgwoxxP9fODpkHW9nweihEED/AOlwDcI3Ju4MXAD4vG/c+VfHhdTo=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>)
- id 1k2xCy-00084j-5i; Tue, 04 Aug 2020 13:42:24 +0000
-Received: from host86-143-223-30.range86-143.btcentralplus.com
- ([86.143.223.30] helo=u2f063a87eabd5f.home)
+ (envelope-from <julien@xen.org>)
+ id 1k2xN1-0008KJ-64; Tue, 04 Aug 2020 13:52:47 +0000
+Received: from 54-240-197-225.amazon.com ([54.240.197.225]
+ helo=a483e7b01a66.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
- (envelope-from <paul@xen.org>)
- id 1k2xCx-0003ag-UW; Tue, 04 Aug 2020 13:42:24 +0000
-From: Paul Durrant <paul@xen.org>
-To: xen-devel@lists.xenproject.org
-Subject: [PATCH v4 08/14] remove remaining uses of iommu_legacy_map/unmap
-Date: Tue,  4 Aug 2020 14:42:03 +0100
-Message-Id: <20200804134209.8717-9-paul@xen.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200804134209.8717-1-paul@xen.org>
-References: <20200804134209.8717-1-paul@xen.org>
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1k2xN0-0004Ao-RL; Tue, 04 Aug 2020 13:52:46 +0000
+Subject: Re: [RFC PATCH V1 01/12] hvm/ioreq: Make x86's IOREQ feature common
+To: Oleksandr <olekstysh@gmail.com>, paul@xen.org,
+ xen-devel@lists.xenproject.org
+References: <1596478888-23030-1-git-send-email-olekstysh@gmail.com>
+ <1596478888-23030-2-git-send-email-olekstysh@gmail.com>
+ <000c01d66a33$2bd56510$83802f30$@xen.org>
+ <9f83a7ed-ca97-449f-c7b9-a1140644abe9@gmail.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <f0c32cfe-5c33-30ae-b08a-3d72e935745a@xen.org>
+Date: Tue, 4 Aug 2020 14:52:43 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
+ Gecko/20100101 Thunderbird/68.11.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+In-Reply-To: <9f83a7ed-ca97-449f-c7b9-a1140644abe9@gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
 Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -74,431 +80,58 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Kevin Tian <kevin.tian@intel.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Jun Nakajima <jun.nakajima@intel.com>, Wei Liu <wl@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Paul Durrant <pdurrant@amazon.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
- =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: 'Kevin Tian' <kevin.tian@intel.com>,
+ 'Stefano Stabellini' <sstabellini@kernel.org>,
+ 'Jun Nakajima' <jun.nakajima@intel.com>, 'Wei Liu' <wl@xen.org>,
+ 'Andrew Cooper' <andrew.cooper3@citrix.com>,
+ 'Ian Jackson' <ian.jackson@eu.citrix.com>,
+ 'George Dunlap' <george.dunlap@citrix.com>, 'Tim Deegan' <tim@xen.org>,
+ 'Oleksandr Tyshchenko' <oleksandr_tyshchenko@epam.com>,
+ 'Julien Grall' <julien.grall@arm.com>, 'Jan Beulich' <jbeulich@suse.com>,
+ =?UTF-8?B?J1JvZ2VyIFBhdSBNb25uw6kn?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: Paul Durrant <pdurrant@amazon.com>
+Hi,
 
-The 'legacy' functions do implicit flushing so amend the callers to do the
-appropriate flushing.
+On 04/08/2020 12:10, Oleksandr wrote:
+> On 04.08.20 10:45, Paul Durrant wrote:
+>>> +static inline bool hvm_ioreq_needs_completion(const ioreq_t *ioreq)
+>>> +{
+>>> +    return ioreq->state == STATE_IOREQ_READY &&
+>>> +           !ioreq->data_is_ptr &&
+>>> +           (ioreq->type != IOREQ_TYPE_PIO || ioreq->dir != 
+>>> IOREQ_WRITE);
+>>> +}
+>> I don't think having this in common code is correct. The short-cut of 
+>> not completing PIO reads seems somewhat x86 specific. 
 
-Unfortunately, because of the structure of the P2M code, we cannot remove
-the per-CPU 'iommu_dont_flush_iotlb' global and the optimization it
-facilitates. It is now checked directly iommu_iotlb_flush(). Also, it is
-now declared as bool (rather than bool_t) and setting/clearing it are no
-longer pointlessly gated on is_iommu_enabled() returning true. (Arguably
-it is also pointless to gate the call to iommu_iotlb_flush() on that
-condition - since it is a no-op in that case - but the if clause allows
-the scope of a stack variable to be restricted).
+Hmmm, looking at the code, I think it doesn't wait for PIO writes to 
+complete (not read). Did I miss anything?
 
-NOTE: The code in memory_add() now fails if the number of pages passed to
-      a single call overflows an unsigned int. I don't believe this will
-      ever happen in practice.
+> Does ARM even 
+>> have the concept of PIO?
+> 
+> I am not 100% sure here, but it seems that doesn't have.
 
-Signed-off-by: Paul Durrant <pdurrant@amazon.com>
----
-Cc: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Wei Liu <wl@xen.org>
-Cc: "Roger Pau Monné" <roger.pau@citrix.com>
-Cc: George Dunlap <george.dunlap@citrix.com>
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>
-Cc: Julien Grall <julien@xen.org>
-Cc: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Jun Nakajima <jun.nakajima@intel.com>
-Cc: Kevin Tian <kevin.tian@intel.com>
+Technically, the PIOs exist on Arm, however they are accessed the same 
+way as MMIO and will have a dedicated area defined by the HW.
 
-v3:
- - Same as v2; elected to implement batch flushing in the grant table code as
-   a subsequent patch
+AFAICT, on Arm64, they are only used for PCI IO Bar.
 
-v2:
- - Shorten the diff (mainly because of a prior patch introducing automatic
-   flush-on-fail into iommu_map() and iommu_unmap())
----
- xen/arch/x86/mm.c               | 21 +++++++++++++++-----
- xen/arch/x86/mm/p2m-ept.c       | 20 +++++++++++--------
- xen/arch/x86/mm/p2m-pt.c        | 15 +++++++++++----
- xen/arch/x86/mm/p2m.c           | 26 ++++++++++++++++++-------
- xen/arch/x86/x86_64/mm.c        | 27 +++++++++++++-------------
- xen/common/grant_table.c        | 34 ++++++++++++++++++++++++---------
- xen/common/memory.c             |  5 +++--
- xen/drivers/passthrough/iommu.c | 25 +-----------------------
- xen/include/xen/iommu.h         | 21 +++++---------------
- 9 files changed, 106 insertions(+), 88 deletions(-)
+Now the question is whether we want to expose them to the Device 
+Emulator as PIO or MMIO access. From a generic PoV, a DM shouldn't have 
+to care about the architecture used. It should just be able to request a 
+given IOport region.
 
-diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index 638f6bf580..062af1f684 100644
---- a/xen/arch/x86/mm.c
-+++ b/xen/arch/x86/mm.c
-@@ -2446,10 +2446,16 @@ static int cleanup_page_mappings(struct page_info *page)
- 
-         if ( d && unlikely(need_iommu_pt_sync(d)) && is_pv_domain(d) )
-         {
--            int rc2 = iommu_legacy_unmap(d, _dfn(mfn), PAGE_ORDER_4K);
-+            unsigned int flush_flags = 0;
-+            int err;
- 
-+            err = iommu_unmap(d, _dfn(mfn), PAGE_ORDER_4K, 1, &flush_flags);
-             if ( !rc )
--                rc = rc2;
-+                rc = err;
-+
-+            err = iommu_iotlb_flush(d, _dfn(mfn), PAGE_ORDER_4K, 1, flush_flags);
-+            if ( !rc )
-+                rc = err;
-         }
- 
-         if ( likely(!is_special_page(page)) )
-@@ -2971,12 +2977,17 @@ static int _get_page_type(struct page_info *page, unsigned long type,
-         if ( d && unlikely(need_iommu_pt_sync(d)) && is_pv_domain(d) )
-         {
-             mfn_t mfn = page_to_mfn(page);
-+            dfn_t dfn = _dfn(mfn_x(mfn));
-+            unsigned int flush_flags = 0;
- 
-             if ( (x & PGT_type_mask) == PGT_writable_page )
--                rc = iommu_legacy_unmap(d, _dfn(mfn_x(mfn)), PAGE_ORDER_4K);
-+                rc = iommu_unmap(d, dfn, PAGE_ORDER_4K, 1, &flush_flags);
-             else
--                rc = iommu_legacy_map(d, _dfn(mfn_x(mfn)), mfn, PAGE_ORDER_4K,
--                                      IOMMUF_readable | IOMMUF_writable);
-+                rc = iommu_map(d, dfn, mfn, PAGE_ORDER_4K, 1,
-+                               IOMMUF_readable | IOMMUF_writable, &flush_flags);
-+
-+            if ( !rc )
-+                rc = iommu_iotlb_flush(d, dfn, PAGE_ORDER_4K, 1, flush_flags);
- 
-             if ( unlikely(rc) )
-             {
-diff --git a/xen/arch/x86/mm/p2m-ept.c b/xen/arch/x86/mm/p2m-ept.c
-index b2ac912cde..e38b0bf95c 100644
---- a/xen/arch/x86/mm/p2m-ept.c
-+++ b/xen/arch/x86/mm/p2m-ept.c
-@@ -842,15 +842,19 @@ out:
-     if ( rc == 0 && p2m_is_hostp2m(p2m) &&
-          need_modify_vtd_table )
-     {
--        if ( iommu_use_hap_pt(d) )
--            rc = iommu_iotlb_flush(d, _dfn(gfn), (1u << order), 1,
--                                   (iommu_flags ? IOMMU_FLUSHF_added : 0) |
--                                   (vtd_pte_present ? IOMMU_FLUSHF_modified
--                                                    : 0));
--        else if ( need_iommu_pt_sync(d) )
-+        unsigned int flush_flags = 0;
-+
-+        if ( need_iommu_pt_sync(d) )
-             rc = iommu_flags ?
--                iommu_legacy_map(d, _dfn(gfn), mfn, order, iommu_flags) :
--                iommu_legacy_unmap(d, _dfn(gfn), order);
-+                iommu_map(d, _dfn(gfn), mfn, order, 1, iommu_flags, &flush_flags) :
-+                iommu_unmap(d, _dfn(gfn), order, 1, &flush_flags);
-+        else if ( iommu_use_hap_pt(d) )
-+            flush_flags =
-+                (iommu_flags ? IOMMU_FLUSHF_added : 0) |
-+                (vtd_pte_present ? IOMMU_FLUSHF_modified : 0);
-+
-+        if ( !rc )
-+            rc = iommu_iotlb_flush(d, _dfn(gfn), order, 1, flush_flags);
-     }
- 
-     unmap_domain_page(table);
-diff --git a/xen/arch/x86/mm/p2m-pt.c b/xen/arch/x86/mm/p2m-pt.c
-index badb26bc34..3c0901b56c 100644
---- a/xen/arch/x86/mm/p2m-pt.c
-+++ b/xen/arch/x86/mm/p2m-pt.c
-@@ -678,10 +678,17 @@ p2m_pt_set_entry(struct p2m_domain *p2m, gfn_t gfn_, mfn_t mfn,
- 
-     if ( need_iommu_pt_sync(p2m->domain) &&
-          (iommu_old_flags != iommu_pte_flags || old_mfn != mfn_x(mfn)) )
--        rc = iommu_pte_flags
--             ? iommu_legacy_map(d, _dfn(gfn), mfn, page_order,
--                                iommu_pte_flags)
--             : iommu_legacy_unmap(d, _dfn(gfn), page_order);
-+    {
-+        unsigned int flush_flags = 0;
-+
-+        rc = iommu_pte_flags ?
-+            iommu_map(d, _dfn(gfn), mfn, page_order, 1, iommu_pte_flags,
-+                      &flush_flags) :
-+            iommu_unmap(d, _dfn(gfn), page_order, 1, &flush_flags);
-+
-+        if ( !rc )
-+            rc = iommu_iotlb_flush(d, _dfn(gfn), page_order, 1, flush_flags);
-+    }
- 
-     /*
-      * Free old intermediate tables if necessary.  This has to be the
-diff --git a/xen/arch/x86/mm/p2m.c b/xen/arch/x86/mm/p2m.c
-index db7bde0230..9f8b9bc5fd 100644
---- a/xen/arch/x86/mm/p2m.c
-+++ b/xen/arch/x86/mm/p2m.c
-@@ -1350,10 +1350,15 @@ int set_identity_p2m_entry(struct domain *d, unsigned long gfn_l,
- 
-     if ( !paging_mode_translate(p2m->domain) )
-     {
--        if ( !is_iommu_enabled(d) )
--            return 0;
--        return iommu_legacy_map(d, _dfn(gfn_l), _mfn(gfn_l), PAGE_ORDER_4K,
--                                IOMMUF_readable | IOMMUF_writable);
-+        unsigned int flush_flags = 0;
-+
-+        ret = iommu_map(d, _dfn(gfn_l), _mfn(gfn_l), PAGE_ORDER_4K, 1,
-+                        IOMMUF_readable | IOMMUF_writable, &flush_flags);
-+        if ( !ret )
-+            ret = iommu_iotlb_flush(d, _dfn(gfn_l), PAGE_ORDER_4K, 1,
-+                                    flush_flags);
-+
-+        return ret;
-     }
- 
-     gfn_lock(p2m, gfn, 0);
-@@ -1441,9 +1446,16 @@ int clear_identity_p2m_entry(struct domain *d, unsigned long gfn_l)
- 
-     if ( !paging_mode_translate(d) )
-     {
--        if ( !is_iommu_enabled(d) )
--            return 0;
--        return iommu_legacy_unmap(d, _dfn(gfn_l), PAGE_ORDER_4K);
-+        unsigned int flush_flags = 0;
-+        int err;
-+
-+        ret = iommu_unmap(d, _dfn(gfn_l), PAGE_ORDER_4K, 1, &flush_flags);
-+
-+        err = iommu_iotlb_flush(d, _dfn(gfn_l), PAGE_ORDER_4K, 1, flush_flags);
-+        if ( !ret )
-+            ret = err;
-+
-+        return ret;
-     }
- 
-     gfn_lock(p2m, gfn, 0);
-diff --git a/xen/arch/x86/x86_64/mm.c b/xen/arch/x86/x86_64/mm.c
-index 102079a801..02684bcf9d 100644
---- a/xen/arch/x86/x86_64/mm.c
-+++ b/xen/arch/x86/x86_64/mm.c
-@@ -1413,21 +1413,22 @@ int memory_add(unsigned long spfn, unsigned long epfn, unsigned int pxm)
-          !iommu_use_hap_pt(hardware_domain) &&
-          !need_iommu_pt_sync(hardware_domain) )
-     {
--        for ( i = spfn; i < epfn; i++ )
--            if ( iommu_legacy_map(hardware_domain, _dfn(i), _mfn(i),
--                                  PAGE_ORDER_4K,
--                                  IOMMUF_readable | IOMMUF_writable) )
--                break;
--        if ( i != epfn )
--        {
--            while (i-- > old_max)
--                /* If statement to satisfy __must_check. */
--                if ( iommu_legacy_unmap(hardware_domain, _dfn(i),
--                                        PAGE_ORDER_4K) )
--                    continue;
-+        unsigned int flush_flags = 0;
-+        unsigned int n = epfn - spfn;
-+        int rc;
- 
-+        ret = -EOVERFLOW;
-+        if ( spfn + n != epfn )
-+            goto destroy_m2p;
-+
-+        rc = iommu_map(hardware_domain, _dfn(i), _mfn(i),
-+                       PAGE_ORDER_4K, n, IOMMUF_readable | IOMMUF_writable,
-+                       &flush_flags);
-+        if ( !rc )
-+            rc = iommu_iotlb_flush(hardware_domain, _dfn(i), PAGE_ORDER_4K, n,
-+                                       flush_flags);
-+        if ( rc )
-             goto destroy_m2p;
--        }
-     }
- 
-     /* We can't revert any more */
-diff --git a/xen/common/grant_table.c b/xen/common/grant_table.c
-index 9f0cae52c0..d6526bca12 100644
---- a/xen/common/grant_table.c
-+++ b/xen/common/grant_table.c
-@@ -1225,11 +1225,23 @@ map_grant_ref(
-             kind = IOMMUF_readable;
-         else
-             kind = 0;
--        if ( kind && iommu_legacy_map(ld, _dfn(mfn_x(mfn)), mfn, 0, kind) )
-+        if ( kind )
-         {
--            double_gt_unlock(lgt, rgt);
--            rc = GNTST_general_error;
--            goto undo_out;
-+            dfn_t dfn = _dfn(mfn_x(mfn));
-+            unsigned int flush_flags = 0;
-+            int err;
-+
-+            err = iommu_map(ld, dfn, mfn, 0, 1, kind, &flush_flags);
-+            if ( !err )
-+                err = iommu_iotlb_flush(ld, dfn, 0, 1, flush_flags);
-+            if ( err )
-+                rc = GNTST_general_error;
-+
-+            if ( rc != GNTST_okay )
-+            {
-+                double_gt_unlock(lgt, rgt);
-+                goto undo_out;
-+            }
-         }
-     }
- 
-@@ -1473,21 +1485,25 @@ unmap_common(
-     if ( rc == GNTST_okay && gnttab_need_iommu_mapping(ld) )
-     {
-         unsigned int kind;
-+        dfn_t dfn = _dfn(mfn_x(op->mfn));
-+        unsigned int flush_flags = 0;
-         int err = 0;
- 
-         double_gt_lock(lgt, rgt);
- 
-         kind = mapkind(lgt, rd, op->mfn);
-         if ( !kind )
--            err = iommu_legacy_unmap(ld, _dfn(mfn_x(op->mfn)), 0);
-+            err = iommu_unmap(ld, dfn, 0, 1, &flush_flags);
-         else if ( !(kind & MAPKIND_WRITE) )
--            err = iommu_legacy_map(ld, _dfn(mfn_x(op->mfn)), op->mfn, 0,
--                                   IOMMUF_readable);
--
--        double_gt_unlock(lgt, rgt);
-+            err = iommu_map(ld, dfn, op->mfn, 0, 1, IOMMUF_readable,
-+                            &flush_flags);
- 
-+        if ( !err )
-+            err = iommu_iotlb_flush(ld, dfn, 0, 1, flush_flags);
-         if ( err )
-             rc = GNTST_general_error;
-+
-+        double_gt_unlock(lgt, rgt);
-     }
- 
-     /* If just unmapped a writable mapping, mark as dirtied */
-diff --git a/xen/common/memory.c b/xen/common/memory.c
-index 8de334ff10..2891bef57b 100644
---- a/xen/common/memory.c
-+++ b/xen/common/memory.c
-@@ -824,8 +824,7 @@ int xenmem_add_to_physmap(struct domain *d, struct xen_add_to_physmap *xatp,
-     xatp->gpfn += start;
-     xatp->size -= start;
- 
--    if ( is_iommu_enabled(d) )
--       this_cpu(iommu_dont_flush_iotlb) = 1;
-+    this_cpu(iommu_dont_flush_iotlb) = true;
- 
-     while ( xatp->size > done )
-     {
-@@ -845,6 +844,8 @@ int xenmem_add_to_physmap(struct domain *d, struct xen_add_to_physmap *xatp,
-         }
-     }
- 
-+    this_cpu(iommu_dont_flush_iotlb) = false;
-+
-     if ( is_iommu_enabled(d) )
-     {
-         int ret;
-diff --git a/xen/drivers/passthrough/iommu.c b/xen/drivers/passthrough/iommu.c
-index 568a4a5661..ab44c332bb 100644
---- a/xen/drivers/passthrough/iommu.c
-+++ b/xen/drivers/passthrough/iommu.c
-@@ -281,18 +281,6 @@ int iommu_map(struct domain *d, dfn_t dfn, mfn_t mfn,
-     return rc;
- }
- 
--int iommu_legacy_map(struct domain *d, dfn_t dfn, mfn_t mfn,
--                     unsigned int page_order, unsigned int flags)
--{
--    unsigned int flush_flags = 0;
--    int rc = iommu_map(d, dfn, mfn, page_order, 1, flags, &flush_flags);
--
--    if ( !this_cpu(iommu_dont_flush_iotlb) && !rc )
--        rc = iommu_iotlb_flush(d, dfn, (1u << page_order), 1, flush_flags);
--
--    return rc;
--}
--
- int iommu_unmap(struct domain *d, dfn_t dfn, unsigned int page_order,
-                 unsigned int page_count, unsigned int *flush_flags)
- {
-@@ -335,17 +323,6 @@ int iommu_unmap(struct domain *d, dfn_t dfn, unsigned int page_order,
-     return rc;
- }
- 
--int iommu_legacy_unmap(struct domain *d, dfn_t dfn, unsigned int page_order)
--{
--    unsigned int flush_flags = 0;
--    int rc = iommu_unmap(d, dfn, page_order, 1, &flush_flags);
--
--    if ( !this_cpu(iommu_dont_flush_iotlb) && ! rc )
--        rc = iommu_iotlb_flush(d, dfn, (1u << page_order), 1, flush_flags);
--
--    return rc;
--}
--
- int iommu_lookup_page(struct domain *d, dfn_t dfn, mfn_t *mfn,
-                       unsigned int *flags)
- {
-@@ -364,7 +341,7 @@ int iommu_iotlb_flush(struct domain *d, dfn_t dfn, unsigned int page_order,
-     int rc;
- 
-     if ( !is_iommu_enabled(d) || !hd->platform_ops->iotlb_flush ||
--         !page_count || !flush_flags )
-+         !page_count || !flush_flags || this_cpu(iommu_dont_flush_iotlb) )
-         return 0;
- 
-     if ( dfn_eq(dfn, INVALID_DFN) )
-diff --git a/xen/include/xen/iommu.h b/xen/include/xen/iommu.h
-index d9c2e764aa..b7e5d3da09 100644
---- a/xen/include/xen/iommu.h
-+++ b/xen/include/xen/iommu.h
-@@ -151,16 +151,8 @@ int __must_check iommu_map(struct domain *d, dfn_t dfn, mfn_t mfn,
- int __must_check iommu_unmap(struct domain *d, dfn_t dfn,
-                              unsigned int page_order, unsigned int page_count,
-                              unsigned int *flush_flags);
--
--int __must_check iommu_legacy_map(struct domain *d, dfn_t dfn, mfn_t mfn,
--                                  unsigned int page_order,
--                                  unsigned int flags);
--int __must_check iommu_legacy_unmap(struct domain *d, dfn_t dfn,
--                                    unsigned int page_order);
--
- int __must_check iommu_lookup_page(struct domain *d, dfn_t dfn, mfn_t *mfn,
-                                    unsigned int *flags);
--
- int __must_check iommu_iotlb_flush(struct domain *d, dfn_t dfn,
-                                    unsigned int page_order,
-                                    unsigned int page_count,
-@@ -370,15 +362,12 @@ void iommu_dev_iotlb_flush_timeout(struct domain *d, struct pci_dev *pdev);
- 
- /*
-  * The purpose of the iommu_dont_flush_iotlb optional cpu flag is to
-- * avoid unecessary iotlb_flush in the low level IOMMU code.
-- *
-- * iommu_map_page/iommu_unmap_page must flush the iotlb but somethimes
-- * this operation can be really expensive. This flag will be set by the
-- * caller to notify the low level IOMMU code to avoid the iotlb flushes.
-- * iommu_iotlb_flush/iommu_iotlb_flush_all will be explicitly called by
-- * the caller.
-+ * avoid unecessary IOMMU flushing while updating the P2M.
-+ * Setting the value to true will cause iommu_iotlb_flush() to return without
-+ * actually performing a flush. A batch flush must therefore be done by the
-+ * calling code after setting the value back to false.
-  */
--DECLARE_PER_CPU(bool_t, iommu_dont_flush_iotlb);
-+DECLARE_PER_CPU(bool, iommu_dont_flush_iotlb);
- 
- extern struct spinlock iommu_pt_cleanup_lock;
- extern struct page_list_head iommu_pt_cleanup_list;
+So it may make sense to differentiate them in the common ioreq code as well.
+
+I had a quick look at QEMU and wasn't able to tell if PIOs and MMIOs 
+address space are different on Arm as well. Paul, Stefano, do you know 
+what they are doing?
+
+Cheers,
+
 -- 
-2.20.1
-
+Julien Grall
 
