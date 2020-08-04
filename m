@@ -2,87 +2,67 @@ Return-Path: <SRS0=QSaH=BO=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_ADSP_CUSTOM_MED,
-	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 66955C433DF
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 13:31:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 52E3BC433E0
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 13:42:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3B02A206DA
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 13:31:34 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 29FFA2075D
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 13:42:40 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="HzPtCS01"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3B02A206DA
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="cfHxKelb"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 29FFA2075D
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k2x2B-0007Rm-Mx; Tue, 04 Aug 2020 13:31:15 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=PUrY=BO=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
- id 1k2x2A-0007Rh-Ag
- for xen-devel@lists.xenproject.org; Tue, 04 Aug 2020 13:31:14 +0000
-X-Inumbo-ID: a62b8f89-fafd-4d3a-bead-38dfb9e55709
-Received: from mail-wm1-x330.google.com (unknown [2a00:1450:4864:20::330])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id a62b8f89-fafd-4d3a-bead-38dfb9e55709;
- Tue, 04 Aug 2020 13:31:13 +0000 (UTC)
-Received: by mail-wm1-x330.google.com with SMTP id k8so2943557wma.2
- for <xen-devel@lists.xenproject.org>; Tue, 04 Aug 2020 06:31:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:reply-to:to:cc:references:in-reply-to:subject:date:message-id
- :mime-version:content-transfer-encoding:content-language
- :thread-index; bh=Exfbsw1LYEHKpD3Fp0p8k5eNg19gqSg72l4KRzBAg6I=;
- b=HzPtCS01eh92n0k2bVH+lNGZU7hA5R1TKEV55OVPjq+4O6sQK2DQLNlJ4DWmnRcqSm
- ma1eeCoWGWFAReStrM98iWYfSp2ROtMfVzrKQ1x52jfZ9x8jNNtO6Wx6tmCWm2yiF8nr
- KJ3B5sU6yeRbW0UorRDLa2ONV+Ml5gl/jXLdkDtl1STDJP8h9seg9eQdK1lIHWQo3jDe
- 8m+ls99C3Lq8w+6hks+vAAsh0dheP9Eh6ZOAZu4KMmfkEqb5+dP3qAAjP6B2lCRmpFZf
- a1PUHKhWcELztWCH2WyBPgaOyFua/8FOdg1gc1WFfXYIkv6VglvCVHkYk0DdGJ+Wc/n2
- IrJg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:reply-to:to:cc:references:in-reply-to
- :subject:date:message-id:mime-version:content-transfer-encoding
- :content-language:thread-index;
- bh=Exfbsw1LYEHKpD3Fp0p8k5eNg19gqSg72l4KRzBAg6I=;
- b=BB7Bes3KblpCHGauJwXBJ78Zgit7Tx7hexc6wTw2nMfAeSGDVLgXTJlMFLA89nvvjV
- Qsrq9t53Fpe7o8w9BQctr5izZiMTZ2rG3zCubSV5qLy1b89Bpx344vKPWPZ0DXWJjeak
- iBDmbRe1lxPt8DSZFvwc0X4ERqFmXNQzbNvDKUqSIyoY3YKNkncUnXpNVOJCiv2waRuq
- uBcfCar7z0fDcwxZxzAtGPStK/zUaf42320x9L16SXZdGH+cdSKocpdSzrCgga6+3HDm
- uKJOqXI3EMdIo8/R4iPYs7jl44+xf10iLdlmDvAugzito9wnS8nbbuVk0KAlb0f4oAUL
- OwWw==
-X-Gm-Message-State: AOAM5334aiNj4opoZSe8U5Aw9puwMWjZ5N+Gz4Njia17s0dYazFnT0/c
- crTd9OQhU412JFEUYW26Ex0=
-X-Google-Smtp-Source: ABdhPJxxd5wng/cXBMewHz/8C3Z5LQFtsMnssxfrxAa/vBg5aukG6FkeVrYQyCo33P23uACXfImFQg==
-X-Received: by 2002:a1c:1d92:: with SMTP id d140mr4171448wmd.143.1596547872188; 
- Tue, 04 Aug 2020 06:31:12 -0700 (PDT)
-Received: from CBGR90WXYV0 ([2a00:23c5:5785:9a01:ad9a:ab78:5748:a7ec])
- by smtp.gmail.com with ESMTPSA id l10sm30624211wru.3.2020.08.04.06.31.10
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Tue, 04 Aug 2020 06:31:10 -0700 (PDT)
-From: Paul Durrant <xadimgnik@gmail.com>
-X-Google-Original-From: "Paul Durrant" <paul@xen.org>
-To: "'Ian Jackson'" <ian.jackson@citrix.com>
-References: <20200803124931.2678-1-paul@xen.org>	<20200803124931.2678-5-paul@xen.org>	<24361.17132.762055.478992@mariner.uk.xensource.com>	<002001d66a51$3cd055f0$b67101d0$@xen.org>
- <24361.18433.500622.984594@mariner.uk.xensource.com>
-In-Reply-To: <24361.18433.500622.984594@mariner.uk.xensource.com>
-Subject: RE: [PATCH v2 4/4] tools/hotplug: modify set_mtu() to inform the
- frontend via xenstore
-Date: Tue, 4 Aug 2020 14:31:12 +0100
-Message-ID: <002801d66a63$85fb8c10$91f2a430$@xen.org>
+	id 1k2xD0-0008NF-FF; Tue, 04 Aug 2020 13:42:26 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=hzL0=BO=xen.org=paul@srs-us1.protection.inumbo.net>)
+ id 1k2xCy-0008MU-Kl
+ for xen-devel@lists.xenproject.org; Tue, 04 Aug 2020 13:42:24 +0000
+X-Inumbo-ID: 8c99a871-8be8-4c3f-860d-3ef4149e67ed
+Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 8c99a871-8be8-4c3f-860d-3ef4149e67ed;
+ Tue, 04 Aug 2020 13:42:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=4AoX2QcMIWlbm0K+83CDzVNO/lJ0Ivxf4f14fPbq6/4=; b=cfHxKelb8MqC2GoxjZCC5ILcex
+ ULTpIT4ey1zmoWCYA1yl1hdAyliI0OFHNfFQIt40F5wCbeJB+3f/Jm6r+7DhtPLqekd7Sf0oYvhdK
+ qdw+Ybe3HRk2N9kPXcagbBZkYlqVoyoWGHctUNk8DTSFFFK0VcW0kU+9HrtazgQJPfUs=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <paul@xen.org>)
+ id 1k2xCt-00084B-SL; Tue, 04 Aug 2020 13:42:19 +0000
+Received: from host86-143-223-30.range86-143.btcentralplus.com
+ ([86.143.223.30] helo=u2f063a87eabd5f.home)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+ (envelope-from <paul@xen.org>)
+ id 1k2xCt-0003ag-L8; Tue, 04 Aug 2020 13:42:19 +0000
+From: Paul Durrant <paul@xen.org>
+To: xen-devel@lists.xenproject.org
+Subject: [PATCH v4 05/14] iommu: remove unused iommu_ops method and tasklet
+Date: Tue,  4 Aug 2020 14:42:00 +0100
+Message-Id: <20200804134209.8717-6-paul@xen.org>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20200804134209.8717-1-paul@xen.org>
+References: <20200804134209.8717-1-paul@xen.org>
 MIME-Version: 1.0
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-X-Mailer: Microsoft Outlook 16.0
-Content-Language: en-gb
-Thread-Index: AQIYGZMBbauEfHj5QMvrSYCboUsizgIdsxRvAjZRG38CQrq5MgKDUJ7HqFvABxA=
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -93,75 +73,98 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Reply-To: paul@xen.org
-Cc: xen-devel@lists.xenproject.org, 'Paul Durrant' <pdurrant@amazon.com>,
- 'Wei Liu' <wl@xen.org>
+Cc: Paul Durrant <pdurrant@amazon.com>, Jan Beulich <jbeulich@suse.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-> -----Original Message-----
-> From: Ian Jackson <ian.jackson@citrix.com>
-> Sent: 04 August 2020 12:35
-> To: paul@xen.org
-> Cc: xen-devel@lists.xenproject.org; 'Paul Durrant' <pdurrant@amazon.com>; 'Wei Liu' <wl@xen.org>
-> Subject: RE: [PATCH v2 4/4] tools/hotplug: modify set_mtu() to inform the frontend via xenstore
-> 
-> Paul Durrant writes ("RE: [PATCH v2 4/4] tools/hotplug: modify set_mtu() to inform the frontend via
-> xenstore"):
-> > > -----Original Message-----
-> > > From: Ian Jackson <ian.jackson@citrix.com>
-> > > Sent: 04 August 2020 12:14
-> > > To: Paul Durrant <paul@xen.org>
-> > > Cc: xen-devel@lists.xenproject.org; Paul Durrant <pdurrant@amazon.com>; Wei Liu <wl@xen.org>
-> > > Subject: Re: [PATCH v2 4/4] tools/hotplug: modify set_mtu() to inform the frontend via xenstore
-> > >
-> > > Paul Durrant writes ("[PATCH v2 4/4] tools/hotplug: modify set_mtu() to inform the frontend via
-> > > xenstore"):
-> > > > +       XENBUS_PATH="/local/domain/$domid/device/vif/$devid"
-> > > > +       xenstore_write "$XENBUS_PATH/mtu" ${mtu}
-> > >
-> > > It's surprising to me that this code doesn't have the xenbus path
-> > > already in some variable.  But I guess from the fact that you've added
-> > > this code, that it doesn't.
-> >
-> > It is set, but set to the backend path. For safety I guess it's probably best if I use a local in
-> this instance. Can I keep your R-b
-> > with such a change?
-> 
-> Oh, wow.  I hadn't realised that.  I take back my earlier R-b :-).
-> 
-> Can you please use a different variable name for the frontend path ?
-> 
+From: Paul Durrant <pdurrant@amazon.com>
 
-OK.
+The VT-d and AMD IOMMU implementations both use the general x86 IOMMU page
+table allocator and ARM always shares page tables with CPU. Hence there is no
+need to retain the free_page_table() method or the tasklet which invokes it.
 
-> ...
-> 
-> Actually.
-> 
-> This shouldn't be in the frontend at all, should it ?  In general the
-> backend writes to the backend and the frontend to the frontend.
-> 
-> So maybe I need to take back my R-b of
->   [PATCH v2 3/4] public/io/netif: specify MTU override node
-> 
-> Sorry for the confusion.  I seem rather undercaffienated today.
-> 
+Signed-off-by: Paul Durrant <pdurrant@amazon.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+---
 
-Too late. The xenstore node has been used by Windows frontends for the best part of a decade so we can't practically change the
-path. Another way would be to also modify netback to simply echo the value from backend into frontend, but that seems rather
-pointless.
+v2:
+  - New in v2 (split from "add common page-table allocator")
+---
+ xen/drivers/passthrough/iommu.c | 25 -------------------------
+ xen/include/xen/iommu.h         |  2 --
+ 2 files changed, 27 deletions(-)
 
-Interestingly libxl does define an 'mtu' field for libxl_device_nic, which it sets to 1492 in libxl__device_nic_setdefault() but
-never writes it into xenstore. There is even a comment:
-
-/* nic->mtu = */
-
-in libxl__nic_from_xenstore() which implies it should have been there, but isn't.
-I still think picking up the MTU from the bridge is the better way though. 
-
-  Paul
-
-> Ian.
+diff --git a/xen/drivers/passthrough/iommu.c b/xen/drivers/passthrough/iommu.c
+index 2b1db8022c..660dc5deb2 100644
+--- a/xen/drivers/passthrough/iommu.c
++++ b/xen/drivers/passthrough/iommu.c
+@@ -49,10 +49,6 @@ bool_t __read_mostly amd_iommu_perdev_intremap = 1;
+ 
+ DEFINE_PER_CPU(bool_t, iommu_dont_flush_iotlb);
+ 
+-DEFINE_SPINLOCK(iommu_pt_cleanup_lock);
+-PAGE_LIST_HEAD(iommu_pt_cleanup_list);
+-static struct tasklet iommu_pt_cleanup_tasklet;
+-
+ static int __init parse_iommu_param(const char *s)
+ {
+     const char *ss;
+@@ -226,9 +222,6 @@ static void iommu_teardown(struct domain *d)
+     struct domain_iommu *hd = dom_iommu(d);
+ 
+     iommu_vcall(hd->platform_ops, teardown, d);
+-
+-    if ( hd->platform_ops->free_page_table )
+-        tasklet_schedule(&iommu_pt_cleanup_tasklet);
+ }
+ 
+ void iommu_domain_destroy(struct domain *d)
+@@ -368,23 +361,6 @@ int iommu_lookup_page(struct domain *d, dfn_t dfn, mfn_t *mfn,
+     return iommu_call(hd->platform_ops, lookup_page, d, dfn, mfn, flags);
+ }
+ 
+-static void iommu_free_pagetables(void *unused)
+-{
+-    do {
+-        struct page_info *pg;
+-
+-        spin_lock(&iommu_pt_cleanup_lock);
+-        pg = page_list_remove_head(&iommu_pt_cleanup_list);
+-        spin_unlock(&iommu_pt_cleanup_lock);
+-        if ( !pg )
+-            return;
+-        iommu_vcall(iommu_get_ops(), free_page_table, pg);
+-    } while ( !softirq_pending(smp_processor_id()) );
+-
+-    tasklet_schedule_on_cpu(&iommu_pt_cleanup_tasklet,
+-                            cpumask_cycle(smp_processor_id(), &cpu_online_map));
+-}
+-
+ int iommu_iotlb_flush(struct domain *d, dfn_t dfn, unsigned int page_count,
+                       unsigned int flush_flags)
+ {
+@@ -508,7 +484,6 @@ int __init iommu_setup(void)
+ #ifndef iommu_intremap
+         printk("Interrupt remapping %sabled\n", iommu_intremap ? "en" : "dis");
+ #endif
+-        tasklet_init(&iommu_pt_cleanup_tasklet, iommu_free_pagetables, NULL);
+     }
+ 
+     return rc;
+diff --git a/xen/include/xen/iommu.h b/xen/include/xen/iommu.h
+index 3272874958..1831dc66b0 100644
+--- a/xen/include/xen/iommu.h
++++ b/xen/include/xen/iommu.h
+@@ -263,8 +263,6 @@ struct iommu_ops {
+     int __must_check (*lookup_page)(struct domain *d, dfn_t dfn, mfn_t *mfn,
+                                     unsigned int *flags);
+ 
+-    void (*free_page_table)(struct page_info *);
+-
+ #ifdef CONFIG_X86
+     int (*enable_x2apic)(void);
+     void (*disable_x2apic)(void);
+-- 
+2.20.1
 
 
