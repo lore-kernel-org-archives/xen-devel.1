@@ -2,75 +2,51 @@ Return-Path: <SRS0=QSaH=BO=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_ADSP_CUSTOM_MED,
-	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-8.5 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EF055C433E1
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 15:23:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 146F9C433E0
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 15:26:14 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CB18921744
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 15:23:45 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="aLUIht1Y"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CB18921744
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id EBAC72086A
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 15:26:13 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EBAC72086A
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k2ymV-0001qh-Go; Tue, 04 Aug 2020 15:23:11 +0000
+	id 1k2ypI-0001zo-1i; Tue, 04 Aug 2020 15:26:04 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=e3JV=BO=gmail.com=rosbrookn@srs-us1.protection.inumbo.net>)
- id 1k2ymU-0001qc-0l
- for xen-devel@lists.xenproject.org; Tue, 04 Aug 2020 15:23:10 +0000
-X-Inumbo-ID: 7cd5a37a-9832-4763-ad9f-575c619145a4
-Received: from mail-lj1-x243.google.com (unknown [2a00:1450:4864:20::243])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=xzDE=BO=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1k2ypG-0001zj-Sh
+ for xen-devel@lists.xenproject.org; Tue, 04 Aug 2020 15:26:02 +0000
+X-Inumbo-ID: 7e0f829e-1eb2-4ce4-a626-014105533bb1
+Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 7cd5a37a-9832-4763-ad9f-575c619145a4;
- Tue, 04 Aug 2020 15:23:09 +0000 (UTC)
-Received: by mail-lj1-x243.google.com with SMTP id w25so8588413ljo.12
- for <xen-devel@lists.xenproject.org>; Tue, 04 Aug 2020 08:23:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=30N5ObjJG57l4nH4ZLUzGYro785BrKf9hzlM1FImspk=;
- b=aLUIht1Y27iWOfNH0+ZuslP5EITbZil/6eb3hhIxKlJ3sNXYh2NZ3LJ6ILF1j3SstB
- cJexR2bmSb0a1t1EHriMMZ63h7+WpJs40bXG7nRmfUxzHdzdqqov8SgeTLDor+vXU5CL
- fUd2enFo4sHa0mi6BeCqx+BDrL7aQYErkUKfNEG2BaCCKiPfWWfgXH3Vgz/40AgmTpZV
- HNdLIk3fneVtTIffLlQ8ww6Wuhx7fsXcUZlGnSzg6HOb+kPQCPG4OMhVIQ88a4G6aiaN
- oKWrJMLiyNvRvtidy1dyaBJ1m5TwzfEt4aagkBF6hZ3KEp1eEPbAr4YH0BIWc4Vrjg42
- V76w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=30N5ObjJG57l4nH4ZLUzGYro785BrKf9hzlM1FImspk=;
- b=M8/UgXkCsLQClCzG7O3F3SKKWdOYDwWnnhMb70qzWVOpXTSb2l4Ut2RXBVDW8QlAVg
- t/vtWwUCbIKPCicYNd8I3poEx1vzKXygSu808GQGrsrM3J+WGJgoaIGM8HQao/ieQpR8
- WebndTGjDxx48srj/jqGrpbZASoxMH4QzfD0lR9nEELlWYBE/f3wDh8kz1voSJro9//A
- d6Wr2r1OlNwXFCxSENab8kZDb+AAbm9GDtz34cF9kj0qhyL8X0laEMHLApiDEsKlde6t
- 3wIhrjPDPoodN4YocYIGEAwDoFlkrsTCTgHcasjnocxfBJ+l5V79WVaJdCMWvr2gFS8L
- aj5A==
-X-Gm-Message-State: AOAM533Xvh2n4VQQugPoyHoj6F3CzMRpp7hzeDqykdGonseTxp21tKpy
- o0jqMgad+txZF0fJctiUIMSNTyrmAtkNv8abXEY=
-X-Google-Smtp-Source: ABdhPJwNIGpZXpDiGsloe0h9d1QKrJuFcdXD8xikVuvEtSJbEeo3a0UrSU3HUBHP5x6yRPr63BdBBsPyquKyg9HoBWE=
-X-Received: by 2002:a05:651c:2044:: with SMTP id
- t4mr4725732ljo.420.1596554587907; 
- Tue, 04 Aug 2020 08:23:07 -0700 (PDT)
+ id 7e0f829e-1eb2-4ce4-a626-014105533bb1;
+ Tue, 04 Aug 2020 15:26:02 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 3F62FAF4C;
+ Tue,  4 Aug 2020 15:26:17 +0000 (UTC)
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+From: Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH] x86: comment update after "drop high compat r/o M2P table
+ address range"
+Message-ID: <f561f170-77ab-0108-d8bc-b897e4a8272f@suse.com>
+Date: Tue, 4 Aug 2020 17:26:00 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.11.0
 MIME-Version: 1.0
-References: <e8dd70a7-bdde-e12a-3f4d-f52e58016234@suse.com>
- <20200804141639.k2tpoqy7jj34gcm6@liuwe-devbox-debian-v2>
-In-Reply-To: <20200804141639.k2tpoqy7jj34gcm6@liuwe-devbox-debian-v2>
-From: Nick Rosbrook <rosbrookn@gmail.com>
-Date: Tue, 4 Aug 2020 11:22:56 -0400
-Message-ID: <CAEBZRSf4opmGw2fDOCOMZLTtjisFXaP=Oe9aD6E2fTfUs2YFQQ@mail.gmail.com>
-Subject: Re: [PATCH] libxl: avoid golang building without CONFIG_GOLANG=y
-To: Wei Liu <wl@xen.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,34 +57,37 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Anthony Perard <anthony.perard@citrix.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Tue, Aug 4, 2020 at 10:17 AM Wei Liu <wl@xen.org> wrote:
->
-> On Mon, Aug 03, 2020 at 10:06:32AM +0200, Jan Beulich wrote:
-> > While this doesn't address the real problem I've run into (attempting to
-> > update r/o source files), not recursing into tools/golang/xenlight/ is
-> > enough to fix the build for me for the moment. I don't currently see why
-> > 60db5da62ac0 ("libxl: Generate golang bindings in libxl Makefile") found
-> > it necessary to invoke this build step unconditionally.
-> >
->
-> Perhaps an oversight?
+Commit 5af040ef8b57 clearly should also have updated the comment, not
+just the #define-s.
 
-This is intentional, and I think the commit message in 60db5da62ac0
-("libxl: Generate golang bindings in libxl Makefile") explains the
-reasoning well. But, to summarize, CONFIG_GOLANG is only used to
-control the bindings actually being compiled (i.e. with `go build`).
-However, we always want the code generation script
-(tools/golang/xenlight/gengotypes.py) to run if e.g.
-tools/libxl/libxl_types.idl is modified.
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-I hope this helps.
-
--NR
+--- a/xen/include/asm-x86/config.h
++++ b/xen/include/asm-x86/config.h
+@@ -144,18 +144,16 @@ extern unsigned char boot_edid_info[128]
+  *  0xffff82d000000000 - 0xffff82d03fffffff [1GB,   2^30 bytes, PML4:261]
+  *    Compatibility machine-to-phys translation table.
+  *  0xffff82d040000000 - 0xffff82d07fffffff [1GB,   2^30 bytes, PML4:261]
+- *    High read-only compatibility machine-to-phys translation table.
+- *  0xffff82d080000000 - 0xffff82d0bfffffff [1GB,   2^30 bytes, PML4:261]
+  *    Xen text, static data, bss.
+ #ifndef CONFIG_BIGMEM
+- *  0xffff82d0c0000000 - 0xffff82dfffffffff [61GB,              PML4:261]
++ *  0xffff82d080000000 - 0xffff82dfffffffff [62GB,              PML4:261]
+  *    Reserved for future use.
+  *  0xffff82e000000000 - 0xffff82ffffffffff [128GB, 2^37 bytes, PML4:261]
+  *    Page-frame information array.
+  *  0xffff830000000000 - 0xffff87ffffffffff [5TB, 5*2^40 bytes, PML4:262-271]
+  *    1:1 direct mapping of all physical memory.
+ #else
+- *  0xffff82d0c0000000 - 0xffff82ffffffffff [189GB,             PML4:261]
++ *  0xffff82d080000000 - 0xffff82ffffffffff [190GB,             PML4:261]
+  *    Reserved for future use.
+  *  0xffff830000000000 - 0xffff847fffffffff [1.5TB, 3*2^39 bytes, PML4:262-264]
+  *    Page-frame information array.
 
