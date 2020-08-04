@@ -2,55 +2,55 @@ Return-Path: <SRS0=QSaH=BO=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.0 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-10.0 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5F8B2C433E0
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 15:42:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4B810C433E1
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 15:51:03 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 44B6C21744
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 15:42:09 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 44B6C21744
+	by mail.kernel.org (Postfix) with ESMTPS id 340A422B40
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 15:51:03 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 340A422B40
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k2z4i-0003pO-1O; Tue, 04 Aug 2020 15:42:00 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1k2zDF-0004kU-4d; Tue, 04 Aug 2020 15:50:49 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=xzDE=BO=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1k2z4g-0003pF-J4
- for xen-devel@lists.xenproject.org; Tue, 04 Aug 2020 15:41:58 +0000
-X-Inumbo-ID: d41fc4ad-5b12-4d88-b393-3257ce407432
+ id 1k2zDE-0004kJ-Ln
+ for xen-devel@lists.xenproject.org; Tue, 04 Aug 2020 15:50:48 +0000
+X-Inumbo-ID: e3b9ef3c-a254-46b5-bbbd-726a425dbd82
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id d41fc4ad-5b12-4d88-b393-3257ce407432;
- Tue, 04 Aug 2020 15:41:57 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id e3b9ef3c-a254-46b5-bbbd-726a425dbd82;
+ Tue, 04 Aug 2020 15:50:46 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id F0C02ACB7;
- Tue,  4 Aug 2020 15:42:12 +0000 (UTC)
-Subject: Re: [RFC PATCH V1 01/12] hvm/ioreq: Make x86's IOREQ feature common
-To: Julien Grall <julien@xen.org>
-References: <1596478888-23030-1-git-send-email-olekstysh@gmail.com>
- <1596478888-23030-2-git-send-email-olekstysh@gmail.com>
- <000c01d66a33$2bd56510$83802f30$@xen.org>
- <9f83a7ed-ca97-449f-c7b9-a1140644abe9@gmail.com>
- <f0c32cfe-5c33-30ae-b08a-3d72e935745a@xen.org>
+ by mx2.suse.de (Postfix) with ESMTP id DE8FEAE9D;
+ Tue,  4 Aug 2020 15:51:01 +0000 (UTC)
+Subject: Re: [PATCH] x86emul: further FPU env testing relaxation for AMD-like
+ CPUs
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+References: <b2667393-0196-30de-86e9-b7a6145ed03d@suse.com>
+ <91e628c6-cbbc-2023-51be-674de4901704@citrix.com>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <34907525-1f6e-5413-1017-51cefe0dfcbc@suse.com>
-Date: Tue, 4 Aug 2020 17:41:56 +0200
+Message-ID: <84af154e-c2b9-a6da-f8ee-8acafdd02dff@suse.com>
+Date: Tue, 4 Aug 2020 17:50:45 +0200
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.11.0
 MIME-Version: 1.0
-In-Reply-To: <f0c32cfe-5c33-30ae-b08a-3d72e935745a@xen.org>
+In-Reply-To: <91e628c6-cbbc-2023-51be-674de4901704@citrix.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,40 +61,51 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: 'Kevin Tian' <kevin.tian@intel.com>,
- 'Stefano Stabellini' <sstabellini@kernel.org>, 'Wei Liu' <wl@xen.org>,
- paul@xen.org, 'Andrew Cooper' <andrew.cooper3@citrix.com>,
- 'Ian Jackson' <ian.jackson@eu.citrix.com>,
- 'George Dunlap' <george.dunlap@citrix.com>, 'Tim Deegan' <tim@xen.org>,
- Oleksandr <olekstysh@gmail.com>,
- 'Oleksandr Tyshchenko' <oleksandr_tyshchenko@epam.com>,
- 'Julien Grall' <julien.grall@arm.com>, 'Jun Nakajima' <jun.nakajima@intel.com>,
- xen-devel@lists.xenproject.org,
- =?UTF-8?B?J1JvZ2VyIFBhdSBNb25uw6kn?= <roger.pau@citrix.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 04.08.2020 15:52, Julien Grall wrote:
-> On 04/08/2020 12:10, Oleksandr wrote:
->> On 04.08.20 10:45, Paul Durrant wrote:
->>>> +static inline bool hvm_ioreq_needs_completion(const ioreq_t *ioreq)
->>>> +{
->>>> +    return ioreq->state == STATE_IOREQ_READY &&
->>>> +           !ioreq->data_is_ptr &&
->>>> +           (ioreq->type != IOREQ_TYPE_PIO || ioreq->dir != 
->>>> IOREQ_WRITE);
->>>> +}
->>> I don't think having this in common code is correct. The short-cut of 
->>> not completing PIO reads seems somewhat x86 specific. 
+On 04.08.2020 16:46, Andrew Cooper wrote:
+> On 04/08/2020 10:36, Jan Beulich wrote:
+>> See the code comment that's being extended. Additionally a few more
+>> zap_fpsel() invocations are needed - whenever we stored state after
+>> there potentially having been a context switch behind our backs.
+>>
+>> Reported-by: Andrew Cooper <andrew.cooper3@citrix.com>
+>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 > 
-> Hmmm, looking at the code, I think it doesn't wait for PIO writes to 
-> complete (not read). Did I miss anything?
+> Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
+> Tested-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
-The point of the check isn't to determine whether to wait, but
-what to do after having waited. Reads need a retry round through
-the emulator (to store the result in the designated place),
-while writes don't have such a requirement (and hence guest
-execution can continue immediately in the general case).
+Thanks.
+
+>> --- a/tools/tests/x86_emulator/test_x86_emulator.c
+>> +++ b/tools/tests/x86_emulator/test_x86_emulator.c
+>> @@ -752,6 +752,13 @@ static struct x86_emulate_ops emulops =
+>>   * 64-bit OSes may not (be able to) properly restore the two selectors in
+>>   * the FPU environment. Zap them so that memcmp() on two saved images will
+>>   * work regardless of whether a context switch occurred in the middle.
+>> + *
+>> + * Additionally on AMD-like CPUs FDP/FIP/FOP may get lost across context
+>> + * switches, when there's no unmasked pending FP exception: With
+> 
+> I think you want a full stop rather than a colon, and ...
+
+I'd prefer to stick to the colon here, while ...
+
+>> + * CPUID[80000008].EBX[2] clear, the fields don't get written/read by
+>> + * {F,}XSAVE / {F,}XRSTOR, which OSes often compensate for by invoking an
+>> + * insn forcing the fields to gain a deterministic value. Whereas with said
+> 
+> ... a comma here rather than a full stop.
+> 
+> Having "whereas" at the beginning of a sentence like this is weird,
+> given that you're contrasting the behaviour of the CPUID bit.
+> 
+> Also, the more usual CPUID syntax would be CPUID.0x80000008.EBX[2].
+
+... I've adjusted these.
 
 Jan
 
