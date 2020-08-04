@@ -2,71 +2,68 @@ Return-Path: <SRS0=QSaH=BO=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-11.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PULL_REQUEST,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 620E9C433DF
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 09:21:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D74CC433DF
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 09:26:48 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 55F192086A
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 09:21:30 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 2083D2086A
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 09:26:48 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="UEg12rMb"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 55F192086A
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="L9k1eWw6"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2083D2086A
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k2t7v-0001hV-DM; Tue, 04 Aug 2020 09:20:55 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1k2tDN-0001sk-1r; Tue, 04 Aug 2020 09:26:33 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=FaF5=BO=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1k2t7u-0001hQ-4U
- for xen-devel@lists.xenproject.org; Tue, 04 Aug 2020 09:20:54 +0000
-X-Inumbo-ID: caf9ecc7-d633-11ea-913d-bc764e2007e4
+ id 1k2tDM-0001sf-DF
+ for xen-devel@lists.xenproject.org; Tue, 04 Aug 2020 09:26:32 +0000
+X-Inumbo-ID: 86032adc-4d69-477a-a118-c0ab5446eb94
 Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id caf9ecc7-d633-11ea-913d-bc764e2007e4;
- Tue, 04 Aug 2020 09:20:53 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 86032adc-4d69-477a-a118-c0ab5446eb94;
+ Tue, 04 Aug 2020 09:26:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1596532853;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:content-transfer-encoding:in-reply-to;
- bh=0YqTm8Wb4K9XKQSC3g7togEL7aTIVm8AWDi9Gqx1kAM=;
- b=UEg12rMbo32BIeHedpZGvJ3+JQcQsmhQx1KWumEQykjzWCevLq2an2zT
- CXSG5Lh4fLdz1qby6eFyKywcsE463UM3zimECjqLQ+0Ynk+aC9opw2oni
- jbaqyiTuVx7ug66sUOHOapPvkVJH0OYz1xgnfcdzfyQqs3yVFCfe7WkPV w=;
+ d=citrix.com; s=securemail; t=1596533191;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=BGtV4buQLSV4kVsmhw15UWdyjLxZS1wmHPQnT8rh4jE=;
+ b=L9k1eWw6zNvMJQh+TF0r5ZQwzsL/avFvCL7k2NSLVa76x4vzhdjj52+u
+ 3hv1dfAXJGC8zeBjVt1EJkjy+TrYTTxccAKPweJyFUluAUJYHz4zayVyA
+ tKRhmWYWLeeVSmLRgexqzu1j7wDF375vd+IAMbpzTz39DrK/FAehW2Yaq Q=;
 Authentication-Results: esa5.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: mkDWYMpTe+0YcZjSXoM1iQw9PH9oKlyIwnALZB6VQtHcM6CZaDUcTXIHCRsqEG3ZKKltbNlDTM
- 1rTHpAFUWv/H+304+vK+T+YFCHdmDGPS44Eapvr+bZuzWNSlB4Mm62nXaSGKDaD3Th6YcxTHrJ
- E//VA8AsDwSQTMd5EbmQmj29guus6D0GiOfFIEakEO6NvXPqzZcYDEZxDyfPSUdTgTUey6NAeU
- eahzJ+HREgk6DNOHwvldFqoPAPJ2MCKgBPeoQwrb+mx+qb6q1U0iwX+YLM8Zh9lLmvGYMuLU68
- skI=
+IronPort-SDR: 186U1PMTFN/6mFC++GOTqG77LsGWlYBb5SaonSm0/OhiP55JNb3TbJV9WIGWBcsA2EzDXE7EcR
+ ZKeELt/7IBjcwB48D0IjIvy36wydjXxWJ8gmdCvuvT4fVCoPp5hu8e8YQgle6nIdF33xB9aiVQ
+ g6t2T5HRpE8QYtyX/Xjo7oVrXl8aEoC/5BIYIQOdsatvvlVU9QsNo4+3UaLQhA3GerGUMlI0iz
+ QVd/rm+VE6TwOGp2eoHUD8km/jI2Ed8Lz77C4ri2Rbrv8cFG3zrZjA44Pt8vQTHO420qV5AJzr
+ se4=
 X-SBRS: 3.7
-X-MesageID: 23979240
+X-MesageID: 23979476
 X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.75,433,1589256000"; d="scan'208";a="23979240"
-Date: Tue, 4 Aug 2020 10:20:48 +0100
+X-IronPort-AV: E=Sophos;i="5.75,433,1589256000"; d="scan'208";a="23979476"
 From: Anthony PERARD <anthony.perard@citrix.com>
-To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@redhat.com>
-Subject: Re: [PATCH-for-5.1 v2 1/1] accel/xen: Fix xen_enabled() behavior on
- target-agnostic objects
-Message-ID: <20200804092048.GE2866@perard.uk.xensource.com>
-References: <20200804074930.13104-1-philmd@redhat.com>
- <20200804074930.13104-2-philmd@redhat.com>
+To: <qemu-devel@nongnu.org>
+Subject: [PULL 0/1] xen queue 2020-08-04
+Date: Tue, 4 Aug 2020 10:26:23 +0100
+Message-ID: <20200804092624.1126013-1-anthony.perard@citrix.com>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Disposition: inline
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20200804074930.13104-2-philmd@redhat.com>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,36 +74,34 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Stefano Stabellini <sstabellini@kernel.org>, Paul Durrant <paul@xen.org>,
- Paul Durrant <pdurrant@amazon.com>, qemu-devel@nongnu.org,
- Paolo Bonzini <pbonzini@redhat.com>, xen-devel@lists.xenproject.org
+Cc: Anthony PERARD <anthony.perard@citrix.com>,
+ Peter Maydell <peter.maydell@linaro.org>, xen-devel@lists.xenproject.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Tue, Aug 04, 2020 at 09:49:30AM +0200, Philippe Mathieu-Daudé wrote:
-> CONFIG_XEN is generated by configure and stored in "config-target.h",
-> which is (obviously) only include for target-specific objects.
-> This is a problem for target-agnostic objects as CONFIG_XEN is never
-> defined and xen_enabled() is always inlined as 'false'.
-> 
-> Fix by following the KVM schema, defining CONFIG_XEN_IS_POSSIBLE
-> when we don't know to force the call of the non-inlined function,
-> returning the xen_allowed boolean.
-> 
-> Fixes: da278d58a092 ("accel: Move Xen accelerator code under accel/xen/")
-> Reported-by: Paul Durrant <pdurrant@amazon.com>
-> Suggested-by: Peter Maydell <peter.maydell@linaro.org>
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+The following changes since commit 5c1c3e4f02e458cf280c677c817ae4fd1ed9bf10:
 
-Reviewed-by: Anthony PERARD <anthony.perard@citrix.com>
+  Merge remote-tracking branch 'remotes/pmaydell/tags/pull-target-arm-20200803' into staging (2020-08-03 20:34:26 +0100)
 
-This time, I've also check that build all targets works...
+are available in the Git repository at:
 
-I'll prepare the pull request right away.
+  https://xenbits.xen.org/git-http/people/aperard/qemu-dm.git tags/pull-xen-20200804
 
-Thank you,
+for you to fetch changes up to 8e0ef068942e4152f0d23e76ca1f5e35dc4456f7:
 
--- 
-Anthony PERARD
+  accel/xen: Fix xen_enabled() behavior on target-agnostic objects (2020-08-04 10:21:35 +0100)
+
+----------------------------------------------------------------
+xen patch
+
+Bug fix.
+
+----------------------------------------------------------------
+Philippe Mathieu-DaudÃ© (1):
+      accel/xen: Fix xen_enabled() behavior on target-agnostic objects
+
+ accel/stubs/xen-stub.c |  2 ++
+ accel/xen/xen-all.c    |  7 +------
+ include/sysemu/xen.h   | 18 ++++++++++++++----
+ 3 files changed, 17 insertions(+), 10 deletions(-)
 
