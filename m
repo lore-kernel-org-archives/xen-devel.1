@@ -2,47 +2,81 @@ Return-Path: <SRS0=QSaH=BO=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.0 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_ADSP_CUSTOM_MED,
+	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F07E6C433DF
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 16:13:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 10BFDC433DF
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 16:42:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D0CB22086A
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 16:13:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D0CB22086A
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id DE3772064B
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 16:42:45 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="I0eAguXD"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DE3772064B
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k2zYs-0007YC-6F; Tue, 04 Aug 2020 16:13:10 +0000
+	id 1k300w-0001hG-IO; Tue, 04 Aug 2020 16:42:10 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ER4t=BO=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1k2zYr-0007Y7-4A
- for xen-devel@lists.xenproject.org; Tue, 04 Aug 2020 16:13:09 +0000
-X-Inumbo-ID: 1048a266-1bf8-4a1e-9fe0-25252faa01d1
-Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
+ <SRS0=e3JV=BO=gmail.com=rosbrookn@srs-us1.protection.inumbo.net>)
+ id 1k300u-0001h9-Ri
+ for xen-devel@lists.xenproject.org; Tue, 04 Aug 2020 16:42:08 +0000
+X-Inumbo-ID: 2efdb852-1011-45be-ae0a-f981828cacba
+Received: from mail-lj1-x244.google.com (unknown [2a00:1450:4864:20::244])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 1048a266-1bf8-4a1e-9fe0-25252faa01d1;
- Tue, 04 Aug 2020 16:13:08 +0000 (UTC)
-Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
- by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
- (return-path ijackson@chiark.greenend.org.uk)
- id 1k2zYp-00043d-3J; Tue, 04 Aug 2020 17:13:07 +0100
-From: Ian Jackson <ian.jackson@eu.citrix.com>
-To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH] cri-args-hostlists: Add some calls to date(1)
-Date: Tue,  4 Aug 2020 17:13:04 +0100
-Message-Id: <20200804161304.3018-1-ian.jackson@eu.citrix.com>
-X-Mailer: git-send-email 2.20.1
+ id 2efdb852-1011-45be-ae0a-f981828cacba;
+ Tue, 04 Aug 2020 16:42:07 +0000 (UTC)
+Received: by mail-lj1-x244.google.com with SMTP id v4so34653756ljd.0
+ for <xen-devel@lists.xenproject.org>; Tue, 04 Aug 2020 09:42:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=Fp+iJT6C3dAg6jOiB3xVAFaJaKEb1vg9/C4xVCr/NCU=;
+ b=I0eAguXD4G7wuk/9ZOOWkMhp3RVRQrizacSlb2U9yDnl2RXe3/l6NS8501BSIoUkKZ
+ Siu1KGA9NzMa+9JPJBRACO3RjwqwEJmQM/28dnUUI34xLRh6NakqVFjuqvTkoyK6Hz8W
+ jJ1QzzoylebmnNMoQC/XAz4vZYJcSzehVF68IETQL8mB03uBcfe15d3AVVxLYXEgtFGl
+ QkLKhRPHtM1yce4qZ9vlW3Y0rxd7Gm1NZ9jMdaXXUKAnUp/FBvCZ/zDaOSq806/Yk1b3
+ gqqUs9ueFFLd3/wqmGCu9/GeSF4OnQGWj1p+oaZf/liy/xAhxPhRm9/kT6GXvTCQkZrR
+ udTg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=Fp+iJT6C3dAg6jOiB3xVAFaJaKEb1vg9/C4xVCr/NCU=;
+ b=DNqxX8w6wDMSfU4Ud+1dRQIoJjYXa/z2OMW5EbyBB5f0TzcVEVnPc0l7VbKiPEd5Ze
+ UDT1UicWnPhKFnnzCdiMvHMg+EzSTDbLNLOSiJnCc8gVZ0KW/eIQTvdIPegVV2QBGxmb
+ ZT6frpGHgC79znX97oAcHfkDuDg7qVSqRJTSGoFyqdcfcUDvJtSpep8G0BAkDVjaOWp8
+ 5Z9Iyk3Z4KrE+BoiMKuU8v2y8OF6XQqcNOXhQnhfwY+FejWgCDd+K9Mwtn0poNG5ME38
+ W5oHAO+T5ap9mqvvFbCupRfWcyEl2qvt+76hPA2LeFjcUjyQ1I9m1rfvd5aBllPTj9up
+ 4Nuw==
+X-Gm-Message-State: AOAM532YkkVf1SyatxmGcSD7HBfBjXnOK9TmyD4RhOHY+EodW5gGiAbm
+ 2Pv5LP2iTz2+vtvPpK6WAAG+Lxhp5JO4HygbjFw=
+X-Google-Smtp-Source: ABdhPJx1RGduHOwZizmmY61EQTIxjBBceDacAlXmh7alNKz8UOMV8dGfNQ4V3ROD+7zCl3T1nBHBwgi02OYhZoNCPfY=
+X-Received: by 2002:a05:651c:1182:: with SMTP id
+ w2mr9680574ljo.197.1596559326615; 
+ Tue, 04 Aug 2020 09:42:06 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <e8dd70a7-bdde-e12a-3f4d-f52e58016234@suse.com>
+ <20200804141639.k2tpoqy7jj34gcm6@liuwe-devbox-debian-v2>
+ <CAEBZRSf4opmGw2fDOCOMZLTtjisFXaP=Oe9aD6E2fTfUs2YFQQ@mail.gmail.com>
+ <0deed4c6-ca87-09d3-a19c-ac0c00003cb7@suse.com>
+ <20200804155043.vq7aupbrvmmcgzlv@liuwe-devbox-debian-v2>
+ <12790d2b-020d-b6fe-4924-2233a4e93d83@suse.com>
+ <20200804155707.rrtzkksrle2nojbj@liuwe-devbox-debian-v2>
+ <43f706e4-0292-5758-eb19-9fbb99b1337e@suse.com>
+In-Reply-To: <43f706e4-0292-5758-eb19-9fbb99b1337e@suse.com>
+From: Nick Rosbrook <rosbrookn@gmail.com>
+Date: Tue, 4 Aug 2020 12:41:54 -0400
+Message-ID: <CAEBZRSc=xUjYq7ao9Rv-EEJsjiBkt5mio5QofvixErZj_SJUcw@mail.gmail.com>
+Subject: Re: [PATCH] libxl: avoid golang building without CONFIG_GOLANG=y
+To: Jan Beulich <jbeulich@suse.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -53,48 +87,68 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>
+Cc: Anthony Perard <anthony.perard@citrix.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Wei Liu <wl@xen.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This will make it easier to see perf changes etc.
+On Tue, Aug 4, 2020 at 12:02 PM Jan Beulich <jbeulich@suse.com> wrote:
+>
+> On 04.08.2020 17:57, Wei Liu wrote:
+> > On Tue, Aug 04, 2020 at 05:53:49PM +0200, Jan Beulich wrote:
+> >> On 04.08.2020 17:50, Wei Liu wrote:
+> >>> On Tue, Aug 04, 2020 at 05:30:40PM +0200, Jan Beulich wrote:
+> >>>> On 04.08.2020 17:22, Nick Rosbrook wrote:
+> >>>>> On Tue, Aug 4, 2020 at 10:17 AM Wei Liu <wl@xen.org> wrote:
+> >>>>>>
+> >>>>>> On Mon, Aug 03, 2020 at 10:06:32AM +0200, Jan Beulich wrote:
+> >>>>>>> While this doesn't address the real problem I've run into (attempting to
+> >>>>>>> update r/o source files), not recursing into tools/golang/xenlight/ is
+> >>>>>>> enough to fix the build for me for the moment. I don't currently see why
+> >>>>>>> 60db5da62ac0 ("libxl: Generate golang bindings in libxl Makefile") found
+> >>>>>>> it necessary to invoke this build step unconditionally.
+> >>>>>>>
+> >>>>>>
+> >>>>>> Perhaps an oversight?
+> >>>>>
+> >>>>> This is intentional, and I think the commit message in 60db5da62ac0
+> >>>>> ("libxl: Generate golang bindings in libxl Makefile") explains the
+> >>>>> reasoning well. But, to summarize, CONFIG_GOLANG is only used to
+> >>>>> control the bindings actually being compiled (i.e. with `go build`).
+> >>>>> However, we always want the code generation script
+> >>>>> (tools/golang/xenlight/gengotypes.py) to run if e.g.
+> >>>>> tools/libxl/libxl_types.idl is modified.
+> >>>>>
+> >>>>> I hope this helps.
+> >>>>
+> >>>> Not really - I'm still not seeing the "why" behind this behavior. I.e.
+> >>>> why build _anything_ that's not used further in the build, nor getting
+> >>>> installed? Also if (aiui) you effectively object to the change that
+> >>>> Wei has given his ack for, would you mind providing an alternative fix
+> >>>> for the problem at hand?
+> >>>
+> >>> Is the solution here to make the target check if IDL definition file is
+> >>> actually changed before regenerating the bindings?
+> >>
+> >> I don't know - Nick? A move-if-changed based approach would likely deal
+> >> with the r/o source problem at the same time (at least until such time
+> >> where the directory containing the file(s) is also r/o).
+> >
+> > To make sure Nick and I understand your use case correct -- "r/o source
+> > problem" means you want the tools source to be read-only? But you would
+> > be fine recursing into tools directory to build all the libraries and
+> > programs?
+>
+> Yes - until we support out-of-tree builds, nothing more can be expected
+> to work.
+>
 
-Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
----
- cri-args-hostlists | 8 ++++++++
- 1 file changed, 8 insertions(+)
+Jan - is the problem specifically that a fresh clone,  or `git
+checkout`, etc. changes file timestamps in a way that triggers make to
+rebuild those targets? I have not used the move-if-changed approach
+before, but AFAICT that would be sufficient.
 
-diff --git a/cri-args-hostlists b/cri-args-hostlists
-index 28d576db..61572c2d 100644
---- a/cri-args-hostlists
-+++ b/cri-args-hostlists
-@@ -117,17 +117,25 @@ start_email () {
- 
- 	globallockdir=`getconfig GlobalLockDir`
- 
-+	date >&2
-+
- 	with-lock-ex -w $globallockdir/report-lock \
- 	  ./sg-report-job-history --html-dir=$job_html_dir --flight=$flight
- 
-+	date >&2
-+
- 	./sg-report-flight --html-dir=$flight_html_dir/$flight/ \
- 		--allow=allow.all --allow=allow.$branch \
- 		$sgr_args $flight >tmp/$flight.report
- 	./cr-fold-long-lines tmp/$flight.report
- 
-+	date >&2
-+
- 	mkdir -p $host_html_dir
- 	with-lock-ex -w $globallockdir/report-lock \
- 	  ./sg-report-host-history --html-dir=$host_html_dir flight:$flight
-+
-+	date >&2
- }
- 
- publish_send_email () {
--- 
-2.20.1
-
+-NR
 
