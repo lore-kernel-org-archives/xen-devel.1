@@ -2,64 +2,63 @@ Return-Path: <SRS0=QSaH=BO=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 233C6C433DF
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 13:42:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C3C3DC433E3
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 13:42:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EA8702075D
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 13:42:38 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id A02982075D
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 13:42:40 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="tCbz+Nys"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EA8702075D
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="EIedvXoB"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A02982075D
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k2xCu-0008MZ-MD; Tue, 04 Aug 2020 13:42:20 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1k2xCu-0008Mf-UL; Tue, 04 Aug 2020 13:42:20 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=hzL0=BO=xen.org=paul@srs-us1.protection.inumbo.net>)
- id 1k2xCt-0008MP-6q
+ id 1k2xCt-0008MU-Uf
  for xen-devel@lists.xenproject.org; Tue, 04 Aug 2020 13:42:19 +0000
-X-Inumbo-ID: f94ac7b1-918d-45a7-8763-9eec23dc39e1
+X-Inumbo-ID: 7622e856-a2f1-4fcb-a52f-8dd9985ee52e
 Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id f94ac7b1-918d-45a7-8763-9eec23dc39e1;
- Tue, 04 Aug 2020 13:42:18 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 7622e856-a2f1-4fcb-a52f-8dd9985ee52e;
+ Tue, 04 Aug 2020 13:42:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
  s=20200302mail; h=Content-Transfer-Encoding:Content-Type:MIME-Version:
- References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=YUevJ2uOuasS55jtgIBrQn5dMBHQ7DGNAX5KglNqxbg=; b=tCbz+NysMtQRIDW27NV5t5ddxv
- 5dHN/DH/nff9RSm0Sly0F4HRr4TnYVptxE9U8cgmqCsbPpPEMKgcch9T9i6zhyUGZGNHskS/Hrk6Z
- 3yTAEAea3OBLwdlkztB4xk1iTffdu5KC/IkOFcP6uE/qpUHoXXSPSiksbeCANADMrwDA=;
+ bh=8IxjuGrfelQ0GDEesgxSqx9+VOb5d7SWH04DNE9oG3o=; b=EIedvXoBGl2Tw1aYppdVSMfLX3
+ q/9LRfnFrD7Wa9/WtkgSppUA+jxGcmP5mktbO8r1cPJwaIhLsycecpu0t5SEFw9hV7ifX7YzPHuyc
+ aWbqwb4dpzC/T91dYa168LqgnVOq16HRZYKTwfz91/pJA+4K6mAyKXDOm99uLrd8w3DQ=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1k2xCr-00083s-9j; Tue, 04 Aug 2020 13:42:17 +0000
+ id 1k2xCp-00083o-0M; Tue, 04 Aug 2020 13:42:15 +0000
 Received: from host86-143-223-30.range86-143.btcentralplus.com
  ([86.143.223.30] helo=u2f063a87eabd5f.home)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1k2xCr-0003ag-1e; Tue, 04 Aug 2020 13:42:17 +0000
+ id 1k2xCo-0003ag-KK; Tue, 04 Aug 2020 13:42:14 +0000
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH v4 02/14] x86/iommu: add common page-table allocator
-Date: Tue,  4 Aug 2020 14:41:57 +0100
-Message-Id: <20200804134209.8717-3-paul@xen.org>
+Subject: [PATCH v4 00/14] IOMMU cleanup
+Date: Tue,  4 Aug 2020 14:41:55 +0100
+Message-Id: <20200804134209.8717-1-paul@xen.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200804134209.8717-1-paul@xen.org>
-References: <20200804134209.8717-1-paul@xen.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -73,164 +72,79 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Paul Durrant <pdurrant@amazon.com>, Wei Liu <wl@xen.org>,
+Cc: Kevin Tian <kevin.tian@intel.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Jun Nakajima <jun.nakajima@intel.com>, Wei Liu <wl@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Paul Durrant <pdurrant@amazon.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>,
+ Lukasz Hawrylko <lukasz.hawrylko@linux.intel.com>,
  Jan Beulich <jbeulich@suse.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
  =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Paul Durrant <pdurrant@amazon.com>
 
-Instead of having separate page table allocation functions in VT-d and AMD
-IOMMU code, we could use a common allocation function in the general x86 code.
-
-This patch adds a new allocation function, iommu_alloc_pgtable(), for this
-purpose. The function adds the page table pages to a list. The pages in this
-list are then freed by iommu_free_pgtables(), which is called by
-domain_relinquish_resources() after PCI devices have been de-assigned.
-
-Signed-off-by: Paul Durrant <pdurrant@amazon.com>
----
-Cc: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Wei Liu <wl@xen.org>
-Cc: "Roger Pau Monné" <roger.pau@citrix.com>
-
 v4:
- - Remove space between '*' and '__must_check'
- - Reduce frequency of pre-empt check during table freeing
- - Fix parentheses formatting
+ - Added three more patches to convert root_entry, context_entry and
+   dma_pte to bit fields.
 
-v2:
- - This is split out from a larger patch of the same name in v1
+Paul Durrant (14):
+  x86/iommu: re-arrange arch_iommu to separate common fields...
+  x86/iommu: add common page-table allocator
+  x86/iommu: convert VT-d code to use new page table allocator
+  x86/iommu: convert AMD IOMMU code to use new page table allocator
+  iommu: remove unused iommu_ops method and tasklet
+  iommu: flush I/O TLB if iommu_map() or iommu_unmap() fail
+  iommu: make map, unmap and flush all take both an order and a count
+  remove remaining uses of iommu_legacy_map/unmap
+  common/grant_table: batch flush I/O TLB
+  iommu: remove the share_p2m operation
+  iommu: stop calling IOMMU page tables 'p2m tables'
+  vtd: use a bit field for root_entry
+  vtd: use a bit field for context_entry
+  vtd: use a bit field for dma_pte
+
+ xen/arch/arm/p2m.c                          |   2 +-
+ xen/arch/x86/domain.c                       |   9 +-
+ xen/arch/x86/mm.c                           |  21 +-
+ xen/arch/x86/mm/p2m-ept.c                   |  20 +-
+ xen/arch/x86/mm/p2m-pt.c                    |  15 +-
+ xen/arch/x86/mm/p2m.c                       |  29 ++-
+ xen/arch/x86/tboot.c                        |   4 +-
+ xen/arch/x86/x86_64/mm.c                    |  27 +-
+ xen/common/grant_table.c                    | 142 +++++++----
+ xen/common/memory.c                         |   9 +-
+ xen/drivers/passthrough/amd/iommu.h         |  20 +-
+ xen/drivers/passthrough/amd/iommu_guest.c   |   8 +-
+ xen/drivers/passthrough/amd/iommu_map.c     |  26 +-
+ xen/drivers/passthrough/amd/pci_amd_iommu.c | 110 +++-----
+ xen/drivers/passthrough/arm/ipmmu-vmsa.c    |   2 +-
+ xen/drivers/passthrough/arm/smmu.c          |   2 +-
+ xen/drivers/passthrough/iommu.c             | 118 ++-------
+ xen/drivers/passthrough/vtd/iommu.c         | 269 +++++++++-----------
+ xen/drivers/passthrough/vtd/iommu.h         | 153 ++++++-----
+ xen/drivers/passthrough/vtd/utils.c         |  10 +-
+ xen/drivers/passthrough/vtd/x86/ats.c       |  27 +-
+ xen/drivers/passthrough/x86/iommu.c         |  54 +++-
+ xen/include/asm-x86/iommu.h                 |  34 ++-
+ xen/include/xen/iommu.h                     |  37 +--
+ 24 files changed, 585 insertions(+), 563 deletions(-)
 ---
- xen/arch/x86/domain.c               |  9 ++++-
- xen/drivers/passthrough/x86/iommu.c | 51 +++++++++++++++++++++++++++++
- xen/include/asm-x86/iommu.h         |  7 ++++
- 3 files changed, 66 insertions(+), 1 deletion(-)
-
-diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index f8084dc9e3..d1ecc7b83b 100644
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -2153,7 +2153,8 @@ int domain_relinquish_resources(struct domain *d)
-         d->arch.rel_priv = PROG_ ## x; /* Fallthrough */ case PROG_ ## x
- 
-         enum {
--            PROG_paging = 1,
-+            PROG_iommu_pagetables = 1,
-+            PROG_paging,
-             PROG_vcpu_pagetables,
-             PROG_shared,
-             PROG_xen,
-@@ -2168,6 +2169,12 @@ int domain_relinquish_resources(struct domain *d)
-         if ( ret )
-             return ret;
- 
-+    PROGRESS(iommu_pagetables):
-+
-+        ret = iommu_free_pgtables(d);
-+        if ( ret )
-+            return ret;
-+
-     PROGRESS(paging):
- 
-         /* Tear down paging-assistance stuff. */
-diff --git a/xen/drivers/passthrough/x86/iommu.c b/xen/drivers/passthrough/x86/iommu.c
-index a12109a1de..aea07e47c4 100644
---- a/xen/drivers/passthrough/x86/iommu.c
-+++ b/xen/drivers/passthrough/x86/iommu.c
-@@ -140,6 +140,9 @@ int arch_iommu_domain_init(struct domain *d)
- 
-     spin_lock_init(&hd->arch.mapping_lock);
- 
-+    INIT_PAGE_LIST_HEAD(&hd->arch.pgtables.list);
-+    spin_lock_init(&hd->arch.pgtables.lock);
-+
-     return 0;
- }
- 
-@@ -257,6 +260,54 @@ void __hwdom_init arch_iommu_hwdom_init(struct domain *d)
-         return;
- }
- 
-+int iommu_free_pgtables(struct domain *d)
-+{
-+    struct domain_iommu *hd = dom_iommu(d);
-+    struct page_info *pg;
-+    unsigned int done = 0;
-+
-+    while ( (pg = page_list_remove_head(&hd->arch.pgtables.list)) )
-+    {
-+        free_domheap_page(pg);
-+
-+        if ( !(++done & 0xff) && general_preempt_check() )
-+            return -ERESTART;
-+    }
-+
-+    return 0;
-+}
-+
-+struct page_info *iommu_alloc_pgtable(struct domain *d)
-+{
-+    struct domain_iommu *hd = dom_iommu(d);
-+    unsigned int memflags = 0;
-+    struct page_info *pg;
-+    void *p;
-+
-+#ifdef CONFIG_NUMA
-+    if ( hd->node != NUMA_NO_NODE )
-+        memflags = MEMF_node(hd->node);
-+#endif
-+
-+    pg = alloc_domheap_page(NULL, memflags);
-+    if ( !pg )
-+        return NULL;
-+
-+    p = __map_domain_page(pg);
-+    clear_page(p);
-+
-+    if ( hd->platform_ops->sync_cache )
-+        iommu_vcall(hd->platform_ops, sync_cache, p, PAGE_SIZE);
-+
-+    unmap_domain_page(p);
-+
-+    spin_lock(&hd->arch.pgtables.lock);
-+    page_list_add(pg, &hd->arch.pgtables.list);
-+    spin_unlock(&hd->arch.pgtables.lock);
-+
-+    return pg;
-+}
-+
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/include/asm-x86/iommu.h b/xen/include/asm-x86/iommu.h
-index 8ce97c981f..970eb06ffa 100644
---- a/xen/include/asm-x86/iommu.h
-+++ b/xen/include/asm-x86/iommu.h
-@@ -46,6 +46,10 @@ typedef uint64_t daddr_t;
- struct arch_iommu
- {
-     spinlock_t mapping_lock; /* io page table lock */
-+    struct {
-+        struct page_list_head list;
-+        spinlock_t lock;
-+    } pgtables;
- 
-     union {
-         /* Intel VT-d */
-@@ -131,6 +135,9 @@ int pi_update_irte(const struct pi_desc *pi_desc, const struct pirq *pirq,
-         iommu_vcall(ops, sync_cache, addr, size);       \
- })
- 
-+int __must_check iommu_free_pgtables(struct domain *d);
-+struct page_info *__must_check iommu_alloc_pgtable(struct domain *d);
-+
- #endif /* !__ARCH_X86_IOMMU_H__ */
- /*
-  * Local variables:
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: George Dunlap <george.dunlap@citrix.com>
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>
+Cc: Jan Beulich <jbeulich@suse.com>
+Cc: Julien Grall <julien@xen.org>
+Cc: Jun Nakajima <jun.nakajima@intel.com>
+Cc: Kevin Tian <kevin.tian@intel.com>
+Cc: Lukasz Hawrylko <lukasz.hawrylko@linux.intel.com>
+Cc: "Roger Pau Monné" <roger.pau@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Cc: Wei Liu <wl@xen.org>
 -- 
 2.20.1
 
