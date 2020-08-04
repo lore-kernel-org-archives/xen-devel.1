@@ -2,74 +2,66 @@ Return-Path: <SRS0=QSaH=BO=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=3.4.0
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 17355C433DF
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 14:03:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3B519C433E0
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 14:10:16 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E54652086A
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 14:02:59 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 0E306208C7
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 14:10:16 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="JT3do+Hr"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E54652086A
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="IgSq7zX+"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0E306208C7
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k2xWH-0002gS-T9; Tue, 04 Aug 2020 14:02:21 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1k2xdi-0003A0-TO; Tue, 04 Aug 2020 14:10:02 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=KvlI=BO=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1k2xWG-0002gN-Bn
- for xen-devel@lists.xenproject.org; Tue, 04 Aug 2020 14:02:20 +0000
-X-Inumbo-ID: 700f1ab7-786a-4b27-b03b-99a20e3dfb7c
+ (envelope-from <SRS0=hzL0=BO=xen.org=paul@srs-us1.protection.inumbo.net>)
+ id 1k2xdi-0002sb-2i
+ for xen-devel@lists.xenproject.org; Tue, 04 Aug 2020 14:10:02 +0000
+X-Inumbo-ID: bc1489a7-74f6-4eaa-87cb-684913bc71d2
 Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 700f1ab7-786a-4b27-b03b-99a20e3dfb7c;
- Tue, 04 Aug 2020 14:02:19 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id bc1489a7-74f6-4eaa-87cb-684913bc71d2;
+ Tue, 04 Aug 2020 14:09:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=0xm34ZhZtkbjneIiksswdOIJjA+6W/un6UZlSsYeumU=; b=JT3do+Hri4H5cQNf7WCPxIcj9R
- +WN9eDi+alRjVABzYukw0nZEIVVYItwh6zkY6Et6EmBykTI2kQ1YX9Sd0cfaIzvyvwGcvSDuMoDhV
- MD0dAUIQSVBv6wUhr+fTbJNTNlwtQKQrEp1sxX47DfbmorBG3Ze+ueyjNfzyi9YYuPRA=;
+ bh=uvyR25AaTXnMjxvAXH3JBMG1O3l/XReVQ/qLaoATIEQ=; b=IgSq7zX+HgUbR8jlXfmJavXvtT
+ q9ou7mgARev09hJZJgQtgLCU3dJFScWjNLeMXNuaB8S8L4qITnosDgxAnPUxGtrecQurAM/jB4Ru3
+ WBy4irE7cRa/FAj9VcCsiFqTVFewVbi/gHmV06P4XYfHv5T3+Hs2CAYrnQLAoz8gcx+8=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1k2xVw-0000C7-Qr; Tue, 04 Aug 2020 14:02:00 +0000
-Received: from 54-240-197-225.amazon.com ([54.240.197.225]
- helo=a483e7b01a66.ant.amazon.com)
+ (envelope-from <paul@xen.org>)
+ id 1k2xdW-0000Nd-FU; Tue, 04 Aug 2020 14:09:50 +0000
+Received: from host86-143-223-30.range86-143.btcentralplus.com
+ ([86.143.223.30] helo=u2f063a87eabd5f.home)
  by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1k2xVw-0004ro-Fr; Tue, 04 Aug 2020 14:02:00 +0000
-Subject: Re: [RFC PATCH V1 04/12] xen/arm: Introduce arch specific bits for
- IOREQ/DM features
-To: paul@xen.org, 'Oleksandr Tyshchenko' <olekstysh@gmail.com>,
- xen-devel@lists.xenproject.org
-References: <1596478888-23030-1-git-send-email-olekstysh@gmail.com>
- <1596478888-23030-5-git-send-email-olekstysh@gmail.com>
- <001101d66a33$bba44670$32ecd350$@xen.org>
-From: Julien Grall <julien@xen.org>
-Message-ID: <6c4f7698-a015-91c7-83ec-203f63d48900@xen.org>
-Date: Tue, 4 Aug 2020 15:01:57 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
- Gecko/20100101 Thunderbird/68.11.0
+ (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+ (envelope-from <paul@xen.org>)
+ id 1k2xD1-0003ag-L6; Tue, 04 Aug 2020 13:42:27 +0000
+From: Paul Durrant <paul@xen.org>
+To: xen-devel@lists.xenproject.org
+Subject: [PATCH v4 11/14] iommu: stop calling IOMMU page tables 'p2m tables'
+Date: Tue,  4 Aug 2020 14:42:06 +0100
+Message-Id: <20200804134209.8717-12-paul@xen.org>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20200804134209.8717-1-paul@xen.org>
+References: <20200804134209.8717-1-paul@xen.org>
 MIME-Version: 1.0
-In-Reply-To: <001101d66a33$bba44670$32ecd350$@xen.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,58 +72,231 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: 'Stefano Stabellini' <sstabellini@kernel.org>, 'Wei Liu' <wl@xen.org>,
- 'Andrew Cooper' <andrew.cooper3@citrix.com>,
- 'Ian Jackson' <ian.jackson@eu.citrix.com>,
- 'George Dunlap' <george.dunlap@citrix.com>,
- 'Oleksandr Tyshchenko' <oleksandr_tyshchenko@epam.com>,
- 'Julien Grall' <julien.grall@arm.com>, 'Jan Beulich' <jbeulich@suse.com>,
- 'Daniel De Graaf' <dgdegra@tycho.nsa.gov>,
- 'Volodymyr Babchuk' <Volodymyr_Babchuk@epam.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Paul Durrant <pdurrant@amazon.com>, Kevin Tian <kevin.tian@intel.com>,
+ Jan Beulich <jbeulich@suse.com>, Paul Durrant <paul@xen.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Hi Paul,
+From: Paul Durrant <pdurrant@amazon.com>
 
-On 04/08/2020 08:49, Paul Durrant wrote:
->> diff --git a/tools/libxc/xc_dom_arm.c b/tools/libxc/xc_dom_arm.c
->> index 931404c..b5fc066 100644
->> --- a/tools/libxc/xc_dom_arm.c
->> +++ b/tools/libxc/xc_dom_arm.c
->> @@ -26,11 +26,19 @@
->>   #include "xg_private.h"
->>   #include "xc_dom.h"
->>
->> -#define NR_MAGIC_PAGES 4
->> +
->>   #define CONSOLE_PFN_OFFSET 0
->>   #define XENSTORE_PFN_OFFSET 1
->>   #define MEMACCESS_PFN_OFFSET 2
->>   #define VUART_PFN_OFFSET 3
->> +#define IOREQ_SERVER_PFN_OFFSET 4
->> +
->> +#define NR_IOREQ_SERVER_PAGES 8
->> +#define NR_MAGIC_PAGES (4 + NR_IOREQ_SERVER_PAGES)
->> +
->> +#define GUEST_MAGIC_BASE_PFN (GUEST_MAGIC_BASE >> XC_PAGE_SHIFT)
->> +
->> +#define special_pfn(x)  (GUEST_MAGIC_BASE_PFN + (x))
-> 
-> Why introduce 'magic pages' for Arm? It's quite a horrible hack that we have begun to do away with by adding resource mapping.
+It's confusing and not consistent with the terminology introduced with 'dfn_t'.
+Just call them IOMMU page tables.
 
-This would require us to mandate at least Linux 4.17 in a domain that 
-will run an IOREQ server. If we don't mandate this, the minimum version 
-would be 4.10 where DM OP was introduced.
+Also remove a pointless check of the 'acpi_drhd_units' list in
+vtd_dump_page_table_level(). If the list is empty then IOMMU mappings would
+not have been enabled for the domain in the first place.
 
-Because of XSA-300, we could technically not safely run an IOREQ server 
-with existing Linux. So it is probably OK to enforce the use of the 
-acquire interface.
+NOTE: All calls to printk() have also been removed from
+      iommu_dump_page_tables(); the implementation specific code is now
+      responsible for all output.
+      The check for the global 'iommu_enabled' has also been replaced by an
+      ASSERT since iommu_dump_page_tables() is not registered as a key handler
+      unless IOMMU mappings are enabled.
 
-Note that I haven't yet looked at the rest of the series. So I am not 
-sure if there is more work necessary to enable it.
+Signed-off-by: Paul Durrant <pdurrant@amazon.com>
+---
+Cc: Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Paul Durrant <paul@xen.org>
+Cc: Kevin Tian <kevin.tian@intel.com>
 
-Cheers,
+v2:
+ - Moved all output into implementation specific code
+---
+ xen/drivers/passthrough/amd/pci_amd_iommu.c | 16 ++++++-------
+ xen/drivers/passthrough/iommu.c             | 21 ++++-------------
+ xen/drivers/passthrough/vtd/iommu.c         | 26 +++++++++++----------
+ xen/include/xen/iommu.h                     |  2 +-
+ 4 files changed, 28 insertions(+), 37 deletions(-)
 
+diff --git a/xen/drivers/passthrough/amd/pci_amd_iommu.c b/xen/drivers/passthrough/amd/pci_amd_iommu.c
+index 3390c22cf3..be578607b1 100644
+--- a/xen/drivers/passthrough/amd/pci_amd_iommu.c
++++ b/xen/drivers/passthrough/amd/pci_amd_iommu.c
+@@ -491,8 +491,8 @@ static int amd_iommu_group_id(u16 seg, u8 bus, u8 devfn)
+ 
+ #include <asm/io_apic.h>
+ 
+-static void amd_dump_p2m_table_level(struct page_info* pg, int level, 
+-                                     paddr_t gpa, int indent)
++static void amd_dump_page_table_level(struct page_info* pg, int level,
++                                      paddr_t gpa, int indent)
+ {
+     paddr_t address;
+     struct amd_iommu_pte *table_vaddr;
+@@ -529,7 +529,7 @@ static void amd_dump_p2m_table_level(struct page_info* pg, int level,
+ 
+         address = gpa + amd_offset_level_address(index, level);
+         if ( pde->next_level >= 1 )
+-            amd_dump_p2m_table_level(
++            amd_dump_page_table_level(
+                 mfn_to_page(_mfn(pde->mfn)), pde->next_level,
+                 address, indent + 1);
+         else
+@@ -542,16 +542,16 @@ static void amd_dump_p2m_table_level(struct page_info* pg, int level,
+     unmap_domain_page(table_vaddr);
+ }
+ 
+-static void amd_dump_p2m_table(struct domain *d)
++static void amd_dump_page_tables(struct domain *d)
+ {
+     const struct domain_iommu *hd = dom_iommu(d);
+ 
+     if ( !hd->arch.amd.root_table )
+         return;
+ 
+-    printk("p2m table has %u levels\n", hd->arch.amd.paging_mode);
+-    amd_dump_p2m_table_level(hd->arch.amd.root_table,
+-                             hd->arch.amd.paging_mode, 0, 0);
++    printk("AMD IOMMU table has %u levels\n", hd->arch.amd.paging_mode);
++    amd_dump_page_table_level(hd->arch.amd.root_table,
++                              hd->arch.amd.paging_mode, 0, 0);
+ }
+ 
+ static const struct iommu_ops __initconstrel _iommu_ops = {
+@@ -578,7 +578,7 @@ static const struct iommu_ops __initconstrel _iommu_ops = {
+     .suspend = amd_iommu_suspend,
+     .resume = amd_iommu_resume,
+     .crash_shutdown = amd_iommu_crash_shutdown,
+-    .dump_p2m_table = amd_dump_p2m_table,
++    .dump_page_tables = amd_dump_page_tables,
+ };
+ 
+ static const struct iommu_init_ops __initconstrel _iommu_init_ops = {
+diff --git a/xen/drivers/passthrough/iommu.c b/xen/drivers/passthrough/iommu.c
+index 7464f10d1c..0f468379e1 100644
+--- a/xen/drivers/passthrough/iommu.c
++++ b/xen/drivers/passthrough/iommu.c
+@@ -22,7 +22,7 @@
+ #include <xen/keyhandler.h>
+ #include <xsm/xsm.h>
+ 
+-static void iommu_dump_p2m_table(unsigned char key);
++static void iommu_dump_page_tables(unsigned char key);
+ 
+ unsigned int __read_mostly iommu_dev_iotlb_timeout = 1000;
+ integer_param("iommu_dev_iotlb_timeout", iommu_dev_iotlb_timeout);
+@@ -212,7 +212,7 @@ void __hwdom_init iommu_hwdom_init(struct domain *d)
+     if ( !is_iommu_enabled(d) )
+         return;
+ 
+-    register_keyhandler('o', &iommu_dump_p2m_table, "dump iommu p2m table", 0);
++    register_keyhandler('o', &iommu_dump_page_tables, "dump iommu page tables", 0);
+ 
+     hd->platform_ops->hwdom_init(d);
+ }
+@@ -533,16 +533,12 @@ bool_t iommu_has_feature(struct domain *d, enum iommu_feature feature)
+     return is_iommu_enabled(d) && test_bit(feature, dom_iommu(d)->features);
+ }
+ 
+-static void iommu_dump_p2m_table(unsigned char key)
++static void iommu_dump_page_tables(unsigned char key)
+ {
+     struct domain *d;
+     const struct iommu_ops *ops;
+ 
+-    if ( !iommu_enabled )
+-    {
+-        printk("IOMMU not enabled!\n");
+-        return;
+-    }
++    ASSERT(iommu_enabled);
+ 
+     ops = iommu_get_ops();
+ 
+@@ -553,14 +549,7 @@ static void iommu_dump_p2m_table(unsigned char key)
+         if ( is_hardware_domain(d) || !is_iommu_enabled(d) )
+             continue;
+ 
+-        if ( iommu_use_hap_pt(d) )
+-        {
+-            printk("\ndomain%d IOMMU p2m table shared with MMU: \n", d->domain_id);
+-            continue;
+-        }
+-
+-        printk("\ndomain%d IOMMU p2m table: \n", d->domain_id);
+-        ops->dump_p2m_table(d);
++        ops->dump_page_tables(d);
+     }
+ 
+     rcu_read_unlock(&domlist_read_lock);
+diff --git a/xen/drivers/passthrough/vtd/iommu.c b/xen/drivers/passthrough/vtd/iommu.c
+index a532d9e88c..f8da4fe0e7 100644
+--- a/xen/drivers/passthrough/vtd/iommu.c
++++ b/xen/drivers/passthrough/vtd/iommu.c
+@@ -2582,8 +2582,8 @@ static void vtd_resume(void)
+     }
+ }
+ 
+-static void vtd_dump_p2m_table_level(paddr_t pt_maddr, int level, paddr_t gpa, 
+-                                     int indent)
++static void vtd_dump_page_table_level(paddr_t pt_maddr, int level, paddr_t gpa,
++                                      int indent)
+ {
+     paddr_t address;
+     int i;
+@@ -2612,8 +2612,8 @@ static void vtd_dump_p2m_table_level(paddr_t pt_maddr, int level, paddr_t gpa,
+ 
+         address = gpa + offset_level_address(i, level);
+         if ( next_level >= 1 ) 
+-            vtd_dump_p2m_table_level(dma_pte_addr(*pte), next_level, 
+-                                     address, indent + 1);
++            vtd_dump_page_table_level(dma_pte_addr(*pte), next_level,
++                                      address, indent + 1);
+         else
+             printk("%*sdfn: %08lx mfn: %08lx\n",
+                    indent, "",
+@@ -2624,17 +2624,19 @@ static void vtd_dump_p2m_table_level(paddr_t pt_maddr, int level, paddr_t gpa,
+     unmap_vtd_domain_page(pt_vaddr);
+ }
+ 
+-static void vtd_dump_p2m_table(struct domain *d)
++static void vtd_dump_page_tables(struct domain *d)
+ {
+-    const struct domain_iommu *hd;
++    const struct domain_iommu *hd = dom_iommu(d);
+ 
+-    if ( list_empty(&acpi_drhd_units) )
++    if ( iommu_use_hap_pt(d) )
++    {
++        printk("VT-D sharing EPT table\n");
+         return;
++    }
+ 
+-    hd = dom_iommu(d);
+-    printk("p2m table has %d levels\n", agaw_to_level(hd->arch.vtd.agaw));
+-    vtd_dump_p2m_table_level(hd->arch.vtd.pgd_maddr,
+-                             agaw_to_level(hd->arch.vtd.agaw), 0, 0);
++    printk("VT-D table has %d levels\n", agaw_to_level(hd->arch.vtd.agaw));
++    vtd_dump_page_table_level(hd->arch.vtd.pgd_maddr,
++                              agaw_to_level(hd->arch.vtd.agaw), 0, 0);
+ }
+ 
+ static int __init intel_iommu_quarantine_init(struct domain *d)
+@@ -2734,7 +2736,7 @@ static struct iommu_ops __initdata vtd_ops = {
+     .iotlb_flush = iommu_flush_iotlb_pages,
+     .iotlb_flush_all = iommu_flush_iotlb_all,
+     .get_reserved_device_memory = intel_iommu_get_reserved_device_memory,
+-    .dump_p2m_table = vtd_dump_p2m_table,
++    .dump_page_tables = vtd_dump_page_tables,
+ };
+ 
+ const struct iommu_init_ops __initconstrel intel_iommu_init_ops = {
+diff --git a/xen/include/xen/iommu.h b/xen/include/xen/iommu.h
+index 1f25d2082f..23e884f54b 100644
+--- a/xen/include/xen/iommu.h
++++ b/xen/include/xen/iommu.h
+@@ -277,7 +277,7 @@ struct iommu_ops {
+                                     unsigned int flush_flags);
+     int __must_check (*iotlb_flush_all)(struct domain *d);
+     int (*get_reserved_device_memory)(iommu_grdm_t *, void *);
+-    void (*dump_p2m_table)(struct domain *d);
++    void (*dump_page_tables)(struct domain *d);
+ 
+ #ifdef CONFIG_HAS_DEVICE_TREE
+     /*
 -- 
-Julien Grall
+2.20.1
+
 
