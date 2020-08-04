@@ -2,70 +2,61 @@ Return-Path: <SRS0=QSaH=BO=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.5 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.3 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 404AEC433E0
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 15:51:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C1924C433DF
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 15:53:08 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1B0902177B
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 15:51:03 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1B0902177B
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 9C6462177B
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Aug 2020 15:53:08 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="OI3MDkvG"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9C6462177B
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k2zDE-0004kO-Sf; Tue, 04 Aug 2020 15:50:48 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1k2zFJ-0004xQ-Lv; Tue, 04 Aug 2020 15:52:57 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=3j1i=BO=gmail.com=wei.liu.xen@srs-us1.protection.inumbo.net>)
- id 1k2zDD-0004kD-Hi
- for xen-devel@lists.xenproject.org; Tue, 04 Aug 2020 15:50:47 +0000
-X-Inumbo-ID: 3957bb7d-4e80-46ef-b4d4-924741db5f8f
-Received: from mail-wr1-f67.google.com (unknown [209.85.221.67])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3957bb7d-4e80-46ef-b4d4-924741db5f8f;
- Tue, 04 Aug 2020 15:50:46 +0000 (UTC)
-Received: by mail-wr1-f67.google.com with SMTP id c15so1658336wrs.11
- for <xen-devel@lists.xenproject.org>; Tue, 04 Aug 2020 08:50:46 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=6XBMq2OUK/ORpEVxRNpgI9GI/0wcOHymaMOtJI3tPKA=;
- b=fQb43r+i/RfpXyLIMvst09+jVfsqm03jPk+WeEj5yOEpeXMFrDAoFeRysGKhZ74/TV
- 8ywuXItfXe0tRE4TmQkHZ+q31AICl6f2HOcDELs9uu5F2AScgvd4Agaycj9EvAYxMGqe
- GpM6nuQFACmS5tNocisns3KxUquBT/T5RDLw1VKSgUPHBMxbF25qa1DzXwKQ6HyyTBPK
- 8/DFP7F7/owwSbHEqy3AwaHfvIzp+4SxdcRIrfRRdZpJKZ7WOAykoZ5JqYgrZ0v8PRR2
- QIMjiosuDf4KotQOX0FcvOjGuFxr7W+q/TSby9CdNgCa044FZ2kXhTisb9mhrCLF6mBM
- VWrQ==
-X-Gm-Message-State: AOAM530x8mdYLvF32hC6yax2O6lz4xF8PuDY3zoVFMMGuBoJ7OC4IYNA
- fwTygfNLE7KWnfLiTAqt+qk=
-X-Google-Smtp-Source: ABdhPJxV6Elycqx1dRICdiCNg79b4Htqdl3dOeDDKtv9plNUw3cTgOknWkb2K4DTrDHt370T7qeSHQ==
-X-Received: by 2002:a5d:55d2:: with SMTP id i18mr19291070wrw.378.1596556245535; 
- Tue, 04 Aug 2020 08:50:45 -0700 (PDT)
-Received: from liuwe-devbox-debian-v2 ([51.145.34.42])
- by smtp.gmail.com with ESMTPSA id 69sm5417207wmb.8.2020.08.04.08.50.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Aug 2020 08:50:44 -0700 (PDT)
-Date: Tue, 4 Aug 2020 15:50:43 +0000
-From: Wei Liu <wl@xen.org>
-To: Jan Beulich <jbeulich@suse.com>
-Subject: Re: [PATCH] libxl: avoid golang building without CONFIG_GOLANG=y
-Message-ID: <20200804155043.vq7aupbrvmmcgzlv@liuwe-devbox-debian-v2>
-References: <e8dd70a7-bdde-e12a-3f4d-f52e58016234@suse.com>
- <20200804141639.k2tpoqy7jj34gcm6@liuwe-devbox-debian-v2>
- <CAEBZRSf4opmGw2fDOCOMZLTtjisFXaP=Oe9aD6E2fTfUs2YFQQ@mail.gmail.com>
- <0deed4c6-ca87-09d3-a19c-ac0c00003cb7@suse.com>
+ <SRS0=gGWh=BO=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1k2zFI-0004xL-H9
+ for xen-devel@lists.xenproject.org; Tue, 04 Aug 2020 15:52:56 +0000
+X-Inumbo-ID: be60f59d-d5b7-44c7-bc9e-de44d9d9656c
+Received: from mail.kernel.org (unknown [198.145.29.99])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id be60f59d-d5b7-44c7-bc9e-de44d9d9656c;
+ Tue, 04 Aug 2020 15:52:55 +0000 (UTC)
+Received: from localhost (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id D16492177B;
+ Tue,  4 Aug 2020 15:52:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1596556375;
+ bh=tDpIkWuSdpodqGPQDWIFOE7o7/wTSGZ0oJmR6Sz9Ia0=;
+ h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+ b=OI3MDkvGqDpsgTM5w7jN/tiL+atoldmOEjEfCWS7pHTnC2Uy1MY0J813NPeuSI6rz
+ xhvQyEAAalWPyUsZx6E0SeXw3RI4fmv3s0L+a9GjazjECiPEKRU1BLI8ztJSblepe0
+ uakSz5POYLuNJqFDfji1qYcISOWDiO6oPuAcHGYI=
+Date: Tue, 4 Aug 2020 08:52:54 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
+To: =?UTF-8?Q?J=C3=BCrgen_Gro=C3=9F?= <jgross@suse.com>
+Subject: Re: [PATCH v3 00/11] fix swiotlb-xen for RPi4
+In-Reply-To: <8413f3e2-0bbf-efa3-1a8a-2ae05b1d07c8@suse.com>
+Message-ID: <alpine.DEB.2.21.2008040852460.5748@sstabellini-ThinkPad-T480s>
+References: <alpine.DEB.2.21.2007101521290.4124@sstabellini-ThinkPad-T480s>
+ <8413f3e2-0bbf-efa3-1a8a-2ae05b1d07c8@suse.com>
+User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <0deed4c6-ca87-09d3-a19c-ac0c00003cb7@suse.com>
-User-Agent: NeoMutt/20180716
+Content-Type: multipart/mixed; boundary="8323329-1376642103-1596556375=:5748"
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,50 +67,47 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Wei Liu <wl@xen.org>, Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Nick Rosbrook <rosbrookn@gmail.com>,
- Anthony Perard <anthony.perard@citrix.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, konrad.wilk@oracle.com,
+ roman@zededa.com, linux-kernel@vger.kernel.org, hch@infradead.org,
+ tamas@tklengyel.com, xen-devel@lists.xenproject.org,
+ boris.ostrovsky@oracle.com
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Tue, Aug 04, 2020 at 05:30:40PM +0200, Jan Beulich wrote:
-> On 04.08.2020 17:22, Nick Rosbrook wrote:
-> > On Tue, Aug 4, 2020 at 10:17 AM Wei Liu <wl@xen.org> wrote:
-> >>
-> >> On Mon, Aug 03, 2020 at 10:06:32AM +0200, Jan Beulich wrote:
-> >>> While this doesn't address the real problem I've run into (attempting to
-> >>> update r/o source files), not recursing into tools/golang/xenlight/ is
-> >>> enough to fix the build for me for the moment. I don't currently see why
-> >>> 60db5da62ac0 ("libxl: Generate golang bindings in libxl Makefile") found
-> >>> it necessary to invoke this build step unconditionally.
-> >>>
-> >>
-> >> Perhaps an oversight?
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-1376642103-1596556375=:5748
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
+
+On Tue, 4 Aug 2020, Jürgen Groß wrote:
+> On 11.07.20 00:34, Stefano Stabellini wrote:
+> > Hi all,
 > > 
-> > This is intentional, and I think the commit message in 60db5da62ac0
-> > ("libxl: Generate golang bindings in libxl Makefile") explains the
-> > reasoning well. But, to summarize, CONFIG_GOLANG is only used to
-> > control the bindings actually being compiled (i.e. with `go build`).
-> > However, we always want the code generation script
-> > (tools/golang/xenlight/gengotypes.py) to run if e.g.
-> > tools/libxl/libxl_types.idl is modified.
+> > This series is a collection of fixes to get Linux running on the RPi4 as
+> > dom0. Conceptually there are only two significant changes:
 > > 
-> > I hope this helps.
+> > - make sure not to call virt_to_page on vmalloc virt addresses (patch
+> >    #1)
+> > - use phys_to_dma and dma_to_phys to translate phys to/from dma
+> >    addresses (all other patches)
+> > 
+> > 
+> > I addressed all comments by Christoph to v2 of the series except from
+> > the one about merging the precursor "add struct device *" patches. I can
+> > always merge them together at any time as needed.
+> > 
+> > 
+> > Boris gave his Reviewed-by to the whole series v2. I added his
+> > Reviewed-by to all patches, including the ones with small cosmetic
+> > fixes, except for patch #8 #9 #10 because they are either new or changed
+> > significantly in this version of the series.
+> > 
+> > I retained Roman and Corey's Tested-by.
 > 
-> Not really - I'm still not seeing the "why" behind this behavior. I.e.
-> why build _anything_ that's not used further in the build, nor getting
-> installed? Also if (aiui) you effectively object to the change that
-> Wei has given his ack for, would you mind providing an alternative fix
-> for the problem at hand?
+> Series pushed to: xen/tip.git for-linus-5.9
 
-Is the solution here to make the target check if IDL definition file is
-actually changed before regenerating the bindings?
-
-Admittedly I had misunderstood what CONFIG_GOLANG meant.
-
-Wei.
-
-> 
-> Jan
+Fantastic, thank you!
+--8323329-1376642103-1596556375=:5748--
 
