@@ -2,52 +2,88 @@ Return-Path: <SRS0=cbMO=BQ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.0 required=3.0 tests=BAYES_00,
+X-Spam-Status: No, score=-6.7 required=3.0 tests=BAYES_00,DKIM_ADSP_CUSTOM_MED,
+	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A6801C433E3
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BC8C2C433E0
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:34 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8146E22D05
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:33 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8146E22D05
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 8DD4E22D06
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:34 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="VFtMT4pL"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8DD4E22D06
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k3eOV-0007he-NN; Thu, 06 Aug 2020 11:49:11 +0000
+	id 1k3c6r-00028h-1Q; Thu, 06 Aug 2020 09:22:49 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=gxiU=BQ=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1k3eOU-0007gT-Sy
- for xen-devel@lists.xenproject.org; Thu, 06 Aug 2020 11:49:10 +0000
-X-Inumbo-ID: 9dacde75-e8e7-4001-86d1-28b9cd188ad8
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=HTjn=BQ=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
+ id 1k3c6p-00028U-RM
+ for xen-devel@lists.xenproject.org; Thu, 06 Aug 2020 09:22:47 +0000
+X-Inumbo-ID: b88acdc7-d9ec-4d48-9f23-7750deab8776
+Received: from mail-lj1-x241.google.com (unknown [2a00:1450:4864:20::241])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9dacde75-e8e7-4001-86d1-28b9cd188ad8;
- Thu, 06 Aug 2020 11:49:10 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 8E2BCAE18;
- Thu,  6 Aug 2020 11:49:26 +0000 (UTC)
-Subject: Re: [PATCH v4 09/14] common/grant_table: batch flush I/O TLB
-To: Paul Durrant <paul@xen.org>
-References: <20200804134209.8717-1-paul@xen.org>
- <20200804134209.8717-10-paul@xen.org>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <4f533589-4df9-59d3-d238-cb46d292e16d@suse.com>
-Date: Thu, 6 Aug 2020 13:49:11 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.11.0
+ id b88acdc7-d9ec-4d48-9f23-7750deab8776;
+ Thu, 06 Aug 2020 09:22:46 +0000 (UTC)
+Received: by mail-lj1-x241.google.com with SMTP id v9so16475731ljk.6
+ for <xen-devel@lists.xenproject.org>; Thu, 06 Aug 2020 02:22:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-transfer-encoding:content-language;
+ bh=V5VGMK+6XYnjTworljWPVg5y65/T5eBThBfgObSPij8=;
+ b=VFtMT4pLZY0A+hDD1z7wT3BhGaR5KORHbJlTl8u5Rr+nn8ZRQta4vqSCs8C6AyceRr
+ 3q9vEq61PuUX/izqc+PAlomAS986fuZiIaOTLl6T28lp9l4WX3YEvTViAG3LXkp8Tm6m
+ KqHrbg8gaySIL3THPiM7uBmqtEmXU1Ps1uUL/z5ChxThnNIpCWHVzqFnzkjscv9aSTWW
+ eaD9O7HDa8WEKU0mvUSCjLZAmIGWfSAssByjQ8eNDFOZT2FBdsjkH/RhHMF+i5/NOP5A
+ QWvMAdIJo/yyvwHvnslGhvMCAgOdg4PdfEfBGFHVkpCMWe76yRRpWpxmPaProPb53N6/
+ 3IiA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-transfer-encoding
+ :content-language;
+ bh=V5VGMK+6XYnjTworljWPVg5y65/T5eBThBfgObSPij8=;
+ b=g2EcUzqd5P8QzU3IUXZZ5iYiOsMiwrXYmVlYOtbQpvP8cm19kJ+Q101kInQwf6X0+G
+ cjVIHPHfG7dv3I4zdTdDX2q2+VTmqD+yKpDgHE3DSaDppA9KGlOldnswF3gLjNhKNZXz
+ DsY/2ZBPqKsjWrMnE/B0fd5tR/0wMM4ytQnnNh06+VxQAaeYtb4XRPCM2XLHTu6g6gws
+ Y+eyFAfuMrEPL/Hb5DwRgq1onUaTZFW1hQL8nkxlEPoz29cVR7ucPOf1n+5bVkqieXjM
+ nItr/0lMldjD1ANKkDYdifFO1MeWu+rjIzzawcdRvQ1j5a51TW+i/s6dJbjIdWnnoVXq
+ b+GQ==
+X-Gm-Message-State: AOAM533v0ZX00aKz1iMfI5X8fnH1u9E+NS4EQO+3/KxC2bfzPLhp/shk
+ bwDVhoPfEC1QRRW18XvzaIs=
+X-Google-Smtp-Source: ABdhPJxwafOxxZsJNrQkXWC3YT7Ml9rHQf/0Xsrq92lv9g+ByL0YmwhqUkgctOutuKFrQYsZw18zxw==
+X-Received: by 2002:a2e:8804:: with SMTP id x4mr3378619ljh.328.1596705765714; 
+ Thu, 06 Aug 2020 02:22:45 -0700 (PDT)
+Received: from [192.168.1.2] ([212.22.223.21])
+ by smtp.gmail.com with ESMTPSA id d15sm2124101ljl.32.2020.08.06.02.22.44
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 06 Aug 2020 02:22:45 -0700 (PDT)
+Subject: Re: [RFC PATCH V1 07/12] A collection of tweaks to be able to run
+ emulator in driver domain
+To: paul@xen.org, 'Jan Beulich' <jbeulich@suse.com>
+References: <1596478888-23030-1-git-send-email-olekstysh@gmail.com>
+ <1596478888-23030-8-git-send-email-olekstysh@gmail.com>
+ <4ffa6434-3ad6-04dc-bfde-f75196930fb4@suse.com>
+ <005f01d66b47$1c58ccc0$550a6640$@xen.org>
+From: Oleksandr <olekstysh@gmail.com>
+Message-ID: <a9a8a3fb-10ad-96f7-651b-9bed46310ba2@gmail.com>
+Date: Thu, 6 Aug 2020 12:22:39 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20200804134209.8717-10-paul@xen.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+In-Reply-To: <005f01d66b47$1c58ccc0$550a6640$@xen.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,56 +94,69 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Paul Durrant <pdurrant@amazon.com>, Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xenproject.org
+Cc: 'Stefano Stabellini' <sstabellini@kernel.org>,
+ 'Julien Grall' <julien@xen.org>, 'Wei Liu' <wl@xen.org>,
+ 'Andrew Cooper' <andrew.cooper3@citrix.com>,
+ 'Ian Jackson' <ian.jackson@eu.citrix.com>,
+ 'George Dunlap' <george.dunlap@citrix.com>,
+ 'Oleksandr Tyshchenko' <oleksandr_tyshchenko@epam.com>,
+ xen-devel@lists.xenproject.org, 'Daniel De Graaf' <dgdegra@tycho.nsa.gov>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 04.08.2020 15:42, Paul Durrant wrote:
-> From: Paul Durrant <pdurrant@amazon.com>
-> 
-> This patch avoids calling iommu_iotlb_flush() for each individual GNTTABOP and
-> insteads calls iommu_iotlb_flush_all() at the end of the hypercall. This
-> should mean batched map/unmap operations perform better but may be slightly
-> detrimental to singleton performance.
 
-I would strongly suggest keeping singleton operations do single-DFN flushes.
+On 05.08.20 19:40, Paul Durrant wrote:
 
-> @@ -1329,20 +1326,30 @@ gnttab_map_grant_ref(
->              return i;
+Hi Jan, Paul
 
-This one line is part of a path which you can't bypass as far as flushing
-is concerned. In this regard the description is also slightly misleading:
-It's not just "at the end of the hypercall" when flushing needs doing,
-but also on every preemption.
+>> -----Original Message-----
+>> From: Jan Beulich <jbeulich@suse.com>
+>> Sent: 05 August 2020 17:20
+>> To: Oleksandr Tyshchenko <olekstysh@gmail.com>; Paul Durrant <paul@xen.org>
+>> Cc: xen-devel@lists.xenproject.org; Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>; Andrew
+>> Cooper <andrew.cooper3@citrix.com>; George Dunlap <george.dunlap@citrix.com>; Ian Jackson
+>> <ian.jackson@eu.citrix.com>; Julien Grall <julien@xen.org>; Stefano Stabellini
+>> <sstabellini@kernel.org>; Wei Liu <wl@xen.org>; Daniel De Graaf <dgdegra@tycho.nsa.gov>
+>> Subject: Re: [RFC PATCH V1 07/12] A collection of tweaks to be able to run emulator in driver domain
+>>
+>> On 03.08.2020 20:21, Oleksandr Tyshchenko wrote:
+>>> From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+>>>
+>>> Trying to run emulator in driver domain I ran into various issues
+>>> mostly policy-related. So this patch tries to resolve all them
+>>> plobably in a hackish way. I would like to get feedback how
+>>> to implement them properly as having an emulator in driver domain
+>>> is a completely valid use-case.
+>>  From going over the comments I can only derive you want to run
+>> an emulator in a driver domain, which doesn't really make sense
+>> to me. A driver domain has a different purpose after all. If
+>> instead you mean it to be run in just some other domain (which
+>> also isn't the domain controlling the target), then there may
+>> be more infrastructure changes needed.
+>>
+>> Paul - was/is your standalone ioreq server (demu?) able to run
+>> in other than the domain controlling a guest?
+>>
+> Not something I've done yet, but it was always part of the idea so that we could e.g. pass through a device to a dedicated domain and then run multiple demu instances there to virtualize it for many domUs. (I'm thinking here of a device that is not SR-IOV and hence would need some bespoke emulation code to share it out).That dedicated domain would be termed the 'driver domain' simply because it is running the device driver for the h/w that underpins the emulation.
 
->          if ( unlikely(__copy_from_guest_offset(&op, uop, i, 1)) )
-> -            return -EFAULT;
-> +        {
-> +            rc = -EFAULT;
-> +            break;
-> +        }
->  
-> -        map_grant_ref(&op);
-> +        map_grant_ref(&op, &flush_flags);
->  
->          if ( unlikely(__copy_to_guest_offset(uop, i, &op, 1)) )
-> -            return -EFAULT;
-> +        {
-> +            rc = -EFAULT;
-> +            break;
-> +        }
->      }
->  
-> -    return 0;
-> +    err = iommu_iotlb_flush_all(current->domain, flush_flags);
-> +    if ( !rc )
-> +        rc = err;
+I may abuse "driver domain" terminology, but indeed in our use-case we 
+pass through a set of H/W devices to a dedicated domain which is running 
+the device drivers for that H/Ws. Our target system comprises a thin 
+Dom0 (without H/W devices at all), DomD (which owns most of the H/W 
+devices) and DomU which runs on virtual devices. This patch tries to 
+make changes at Xen side to be able run standalone ioreq server 
+(emulator) in that dedicated (driver?) domain. Actually the virtio-mmio 
+PoC is based on IOREQ/DM features and emulator (based on demu) acting as 
+a virtio-mmio backend. But it may be various use-cases for that (some 
+mediator for sharing specific H/W resource between Guests or custom PCI 
+emulator for example). If this is valid from Xen PoV I would be happy to 
+get feedback how to transform tweaks (hacks) in current patch into the 
+proper support.
 
-Not sure how important it is to retain performance upon errors: Strictly
-speaking there's no need to flush when i == 0 and rc != 0.
 
-Jan
+-- 
+Regards,
+
+Oleksandr Tyshchenko
+
 
