@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 326C9C433E0
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 23:49:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 505A1C433E0
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 23:49:54 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 326A821744
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 23:49:52 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 4BB7921744
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 23:49:54 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="If5S1EL3"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 326A821744
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="GbWqXG4Z"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4BB7921744
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k3pdn-0004Hl-Sw; Thu, 06 Aug 2020 23:49:43 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1k3pdp-0004Id-5j; Thu, 06 Aug 2020 23:49:45 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=flvv=BQ=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1k3pdm-0004FE-9P
- for xen-devel@lists.xenproject.org; Thu, 06 Aug 2020 23:49:42 +0000
-X-Inumbo-ID: de950a77-4645-4183-8609-e3c81e6c3e77
+ id 1k3pdn-0004FC-KI
+ for xen-devel@lists.xenproject.org; Thu, 06 Aug 2020 23:49:43 +0000
+X-Inumbo-ID: 29a9c849-bce0-46c7-947d-d1f4f0fd0f11
 Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id de950a77-4645-4183-8609-e3c81e6c3e77;
- Thu, 06 Aug 2020 23:49:40 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 29a9c849-bce0-46c7-947d-d1f4f0fd0f11;
+ Thu, 06 Aug 2020 23:49:38 +0000 (UTC)
 Received: from sstabellini-ThinkPad-T480s.hsd1.ca.comcast.net
  (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 237ED22D07;
- Thu,  6 Aug 2020 23:49:40 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id F111222CBB;
+ Thu,  6 Aug 2020 23:49:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1596757780;
- bh=vVWvxFFs7Yr6hpfuyCAosWa4IVXyicJJf2O/VvYAi0Y=;
+ s=default; t=1596757778;
+ bh=kQJOWQmiev2GmAsfEYKexaRWR3uthIyBp6QIEIE2jMM=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=If5S1EL3ji2mtq9qiY+h/4Ky85NXw1uNXd49fNwqCoCfcO+LgaxgCglvB1jOoxYIJ
- Zifs7DLec76pfR57z+Jjk/KwrYyeo2YscTgcMp6/zsZtCi+RJp4J+Tiyb/fEF+dtAs
- +9EFJ3NggIJuEl8E7YY3X1GPDaf66lYOZEKdiYWI=
+ b=GbWqXG4ZBOtym3xLogVvTTc16LfMczACHj42CNSN9hiB7Q0xwaUktOn2ocbpdmud8
+ sP6CMrMJVlhP1tKliZzMutB3ardys81p12byqv4EtlEu8xedMN+RMaVpsYkOYBfYBm
+ ZA7utGr39Bm04LZsY8AogBhOeq3UmE2Vf/5t2C/w=
 From: Stefano Stabellini <sstabellini@kernel.org>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH 07/14] kernel-doc: public/hypfs.h
-Date: Thu,  6 Aug 2020 16:49:26 -0700
-Message-Id: <20200806234933.16448-7-sstabellini@kernel.org>
+Subject: [PATCH 03/14] kernel-doc: public/device_tree_defs.h
+Date: Thu,  6 Aug 2020 16:49:22 -0700
+Message-Id: <20200806234933.16448-3-sstabellini@kernel.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <alpine.DEB.2.21.2008061605410.16004@sstabellini-ThinkPad-T480s>
 References: <alpine.DEB.2.21.2008061605410.16004@sstabellini-ThinkPad-T480s>
@@ -76,145 +76,52 @@ Convert in-code comments to kernel-doc format wherever possible.
 
 Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
 ---
- xen/include/public/hypfs.h | 72 ++++++++++++++++++++++++--------------
- 1 file changed, 45 insertions(+), 27 deletions(-)
+ xen/include/public/device_tree_defs.h | 24 +++++++++++++-----------
+ 1 file changed, 13 insertions(+), 11 deletions(-)
 
-diff --git a/xen/include/public/hypfs.h b/xen/include/public/hypfs.h
-index 63a5df1629..ef33aee4ce 100644
---- a/xen/include/public/hypfs.h
-+++ b/xen/include/public/hypfs.h
-@@ -32,12 +32,21 @@
-  * Definitions for the __HYPERVISOR_hypfs_op hypercall.
-  */
+diff --git a/xen/include/public/device_tree_defs.h b/xen/include/public/device_tree_defs.h
+index 209d43de3f..be35598b53 100644
+--- a/xen/include/public/device_tree_defs.h
++++ b/xen/include/public/device_tree_defs.h
+@@ -2,7 +2,9 @@
+ #define __XEN_DEVICE_TREE_DEFS_H__
  
--/* Highest version number of the hypfs interface currently defined. */
-+/**
-+ * DOC: XEN_HYPFS_VERSION
-+ * Highest version number of the hypfs interface currently defined.
-+ */
- #define XEN_HYPFS_VERSION      1
- 
--/* Maximum length of a path in the filesystem. */
-+/**
-+ * DOC: XEN_HYPFS_MAX_PATHLEN
-+ * Maximum length of a path in the filesystem.
-+ */
- #define XEN_HYPFS_MAX_PATHLEN  1024
- 
-+/**
-+ * struct xen_hypfs_direntry
-+ */
- struct xen_hypfs_direntry {
-     uint8_t type;
- #define XEN_HYPFS_TYPE_DIR     0
-@@ -49,16 +58,22 @@ struct xen_hypfs_direntry {
-     uint8_t encoding;
- #define XEN_HYPFS_ENC_PLAIN    0
- #define XEN_HYPFS_ENC_GZIP     1
--    uint16_t pad;              /* Returned as 0. */
--    uint32_t content_len;      /* Current length of data. */
--    uint32_t max_write_len;    /* Max. length for writes (0 if read-only). */
-+    /** @pad: Returned as 0. */
-+    uint16_t pad;
-+    /** @content_len: Current length of data. */
-+    uint32_t content_len;
-+    /** @max_write_len: Max. length for writes (0 if read-only). */
-+    uint32_t max_write_len;
- };
- 
-+/**
-+ * struct xen_hypfs_dirlistentry
-+ */
- struct xen_hypfs_dirlistentry {
-     struct xen_hypfs_direntry e;
--    /* Offset in bytes to next entry (0 == this is the last entry). */
-+    /** @off_next: Offset in bytes to next entry (0 == this is the last entry). */
-     uint16_t off_next;
--    /* Zero terminated entry name, possibly with some padding for alignment. */
-+    /** @name: Zero terminated entry name, possibly with some padding for alignment. */
-     char name[XEN_FLEX_ARRAY_DIM];
- };
- 
-@@ -66,21 +81,22 @@ struct xen_hypfs_dirlistentry {
-  * Hypercall operations.
-  */
- 
+ #if defined(__XEN__) || defined(__XEN_TOOLS__)
 -/*
-- * XEN_HYPFS_OP_get_version
 +/**
-+ * DOC: XEN_HYPFS_OP_get_version
-  *
-  * Read highest interface version supported by the hypervisor.
-  *
-  * arg1 - arg4: all 0/NULL
-  *
-  * Possible return values:
-- * >0: highest supported interface version
-- * <0: negative Xen errno value
++ * DOC: GUEST_PHANDLE_GIC
 + *
-+ * - >0: highest supported interface version
-+ * - <0: negative Xen errno value
+  * The device tree compiler (DTC) is allocating the phandle from 1 to
+  * onwards. Reserve a high value for the GIC phandle.
   */
- #define XEN_HYPFS_OP_get_version     0
+@@ -12,17 +14,17 @@
+ #define GUEST_ROOT_SIZE_CELLS 2
  
--/*
-- * XEN_HYPFS_OP_read
-+/**
-+ * DOC: XEN_HYPFS_OP_read
+ /**
+- * IRQ line type.
++ * DOC: IRQ line type.
   *
-  * Read a filesystem entry.
-  *
-@@ -95,19 +111,20 @@ struct xen_hypfs_dirlistentry {
-  * The contents of a directory are multiple struct xen_hypfs_dirlistentry
-  * items.
-  *
-- * arg1: XEN_GUEST_HANDLE(path name)
-- * arg2: length of path name (including trailing zero byte)
-- * arg3: XEN_GUEST_HANDLE(data buffer written by hypervisor)
-- * arg4: data buffer size
-+ * - arg1: XEN_GUEST_HANDLE(path name)
-+ * - arg2: length of path name (including trailing zero byte)
-+ * - arg3: XEN_GUEST_HANDLE(data buffer written by hypervisor)
-+ * - arg4: data buffer size
-  *
-  * Possible return values:
-- * 0: success
-- * <0 : negative Xen errno value
-+ *
-+ * - 0: success
-+ * - <0 : negative Xen errno value
+- * DT_IRQ_TYPE_NONE            - default, unspecified type
+- * DT_IRQ_TYPE_EDGE_RISING     - rising edge triggered
+- * DT_IRQ_TYPE_EDGE_FALLING    - falling edge triggered
+- * DT_IRQ_TYPE_EDGE_BOTH       - rising and falling edge triggered
+- * DT_IRQ_TYPE_LEVEL_HIGH      - high level triggered
+- * DT_IRQ_TYPE_LEVEL_LOW       - low level triggered
+- * DT_IRQ_TYPE_LEVEL_MASK      - Mask to filter out the level bits
+- * DT_IRQ_TYPE_SENSE_MASK      - Mask for all the above bits
+- * DT_IRQ_TYPE_INVALID         - Use to initialize the type
++ * - DT_IRQ_TYPE_NONE            - default, unspecified type
++ * - DT_IRQ_TYPE_EDGE_RISING     - rising edge triggered
++ * - DT_IRQ_TYPE_EDGE_FALLING    - falling edge triggered
++ * - DT_IRQ_TYPE_EDGE_BOTH       - rising and falling edge triggered
++ * - DT_IRQ_TYPE_LEVEL_HIGH      - high level triggered
++ * - DT_IRQ_TYPE_LEVEL_LOW       - low level triggered
++ * - DT_IRQ_TYPE_LEVEL_MASK      - Mask to filter out the level bits
++ * - DT_IRQ_TYPE_SENSE_MASK      - Mask for all the above bits
++ * - DT_IRQ_TYPE_INVALID         - Use to initialize the type
   */
- #define XEN_HYPFS_OP_read              1
- 
--/*
-- * XEN_HYPFS_OP_write_contents
-+/**
-+ * DOC: XEN_HYPFS_OP_write_contents
-  *
-  * Write contents of a filesystem entry.
-  *
-@@ -115,14 +132,15 @@ struct xen_hypfs_dirlistentry {
-  * The data type and encoding can't be changed. The size can be changed only
-  * for blobs and strings.
-  *
-- * arg1: XEN_GUEST_HANDLE(path name)
-- * arg2: length of path name (including trailing zero byte)
-- * arg3: XEN_GUEST_HANDLE(content buffer read by hypervisor)
-- * arg4: content buffer size
-+ * - arg1: XEN_GUEST_HANDLE(path name)
-+ * - arg2: length of path name (including trailing zero byte)
-+ * - arg3: XEN_GUEST_HANDLE(content buffer read by hypervisor)
-+ * - arg4: content buffer size
-  *
-  * Possible return values:
-- * 0: success
-- * <0 : negative Xen errno value
-+ *
-+ * - 0: success
-+ * - <0: negative Xen errno value
-  */
- #define XEN_HYPFS_OP_write_contents    2
- 
+ #define DT_IRQ_TYPE_NONE           0x00000000
+ #define DT_IRQ_TYPE_EDGE_RISING    0x00000001
 -- 
 2.17.1
 
