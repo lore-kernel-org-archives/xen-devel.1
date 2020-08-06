@@ -2,52 +2,69 @@ Return-Path: <SRS0=cbMO=BQ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.5 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-9.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 834ADC433E0
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9A9F9C433DF
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:22 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5020122D02
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:21 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5020122D02
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 6C11D22D05
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:22 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="Pk4EOddw"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6C11D22D05
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k3bpt-0008BA-Ba; Thu, 06 Aug 2020 09:05:17 +0000
+	id 1k3brw-0008TA-9s; Thu, 06 Aug 2020 09:07:24 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=gxiU=BQ=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1k3bps-0008B2-9j
- for xen-devel@lists.xenproject.org; Thu, 06 Aug 2020 09:05:16 +0000
-X-Inumbo-ID: 30b871ee-f5b2-49bf-980a-550ffac0fff5
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ (envelope-from <SRS0=dZxa=BQ=xen.org=julien@srs-us1.protection.inumbo.net>)
+ id 1k3brv-0008T3-Hr
+ for xen-devel@lists.xenproject.org; Thu, 06 Aug 2020 09:07:23 +0000
+X-Inumbo-ID: fcc5e954-3ff2-4fc6-b734-cc3f96047b3d
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 30b871ee-f5b2-49bf-980a-550ffac0fff5;
- Thu, 06 Aug 2020 09:05:15 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 12D80AC50;
- Thu,  6 Aug 2020 09:05:32 +0000 (UTC)
-Subject: [PATCH 2/4] build: correctly report non-empty section sizes upon .o
- -> .init.o conversion
-From: Jan Beulich <jbeulich@suse.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+ id fcc5e954-3ff2-4fc6-b734-cc3f96047b3d;
+ Thu, 06 Aug 2020 09:07:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=JRMwKKEpbRfbvlV3oeNr75bWFNzkmlb2XMoM7s4VMVk=; b=Pk4EOddwR79+fK7wRoQ4HWv+Qi
+ Ya6uWnB4A7OIt0hr2OTnEor+GR+68LkmbKanV/ewE+jqzVenkgdPmmp/Buvo/4lEa3/klkwlUC05O
+ yV7TF3+BryftkfrtunOEinwEPjupMW5MDnu5TGWIj2zYoegI/Mr9CXEvk0Ogx86QYZKs=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1k3brt-0005vu-0U; Thu, 06 Aug 2020 09:07:21 +0000
+Received: from [54.239.6.185] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1k3brs-00037n-PQ; Thu, 06 Aug 2020 09:07:20 +0000
+Subject: Re: [PATCH 1/4] build: work around bash issue
+To: Jan Beulich <jbeulich@suse.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 References: <305c2532-408a-9f78-61fe-c90a2e86eb8e@suse.com>
-Message-ID: <5fcb47ec-4a0e-99a2-c548-f42ec1cc8030@suse.com>
-Date: Thu, 6 Aug 2020 11:05:17 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.11.0
+ <b427e8e6-b9ff-65d2-074b-19439a2e3d02@suse.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <e8006147-31e5-d4c5-8c13-74250f267c0c@xen.org>
+Date: Thu, 6 Aug 2020 10:07:18 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
+ Gecko/20100101 Thunderbird/68.11.0
 MIME-Version: 1.0
-In-Reply-To: <305c2532-408a-9f78-61fe-c90a2e86eb8e@suse.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+In-Reply-To: <b427e8e6-b9ff-65d2-074b-19439a2e3d02@suse.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
 Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -59,36 +76,47 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Wei Liu <wl@xen.org>, George Dunlap <George.Dunlap@eu.citrix.com>,
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ George Dunlap <George.Dunlap@eu.citrix.com>,
  Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony Perard <anthony.perard@citrix.com>,
  Ian Jackson <ian.jackson@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-The originally used sed expression converted not just multiple leading
-zeroes (as intended), but also trailing ones, rendering the error
-message somewhat confusing. Collapse zeroes in just the one place where
-we need them collapsed, and leave objdump's output as is for all other
-purposes.
+Hi Jan,
 
-Fixes: 48115d14743e ("Move more kernel decompression bits to .init.* sections")
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
+On 06/08/2020 10:04, Jan Beulich wrote:
+> Older bash fails to honor "set -e" for certain built-in commands
 
---- a/xen/Rules.mk
-+++ b/xen/Rules.mk
-@@ -185,11 +185,11 @@ cmd_cc_o_S = $(CC) $(a_flags) -c $< -o $
- 
- quiet_cmd_obj_init_o = INIT_O  $@
- define cmd_obj_init_o
--    $(OBJDUMP) -h $< | sed -n '/[0-9]/{s,00*,0,g;p;}' | while read idx name sz rest; do \
-+    $(OBJDUMP) -h $< | while read idx name sz rest; do \
-         case "$$name" in \
-         .*.local) ;; \
-         .text|.text.*|.data|.data.*|.bss) \
--            test $$sz != 0 || continue; \
-+            test $$(echo $$sz | sed 's,00*,0,') != 0 || continue; \
-             echo "Error: size of $<:$$name is 0x$$sz" >&2; \
-             exit $$(expr $$idx + 1);; \
-         esac; \
+"Older" is pretty vague. May I ask the exact version you run into the issue?
+
+> ("while" here), despite the command's status correctly bein non-zero.
+> The subsequent objcopy invocation now being separated by a semicolon
+> results in no failure. Insert an explicit "exit" (replacing ; by &&
+> ought to be another possible workaround).
+> 
+> Fixes: e321576f4047 ("xen/build: start using if_changed")
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> ---
+> I've done a pretty light-weight audit of possible further instances of
+> this issue, but didn't find any.
+> 
+> --- a/xen/Rules.mk
+> +++ b/xen/Rules.mk
+> @@ -193,7 +193,7 @@ define cmd_obj_init_o
+>               echo "Error: size of $<:$$name is 0x$$sz" >&2; \
+>               exit $$(expr $$idx + 1);; \
+>           esac; \
+> -    done; \
+> +    done || exit $$?; \
+>       $(OBJCOPY) $(foreach s,$(SPECIAL_DATA_SECTIONS),--rename-section .$(s)=.init.$(s)) $< $@
+>   endef
+>   
+> 
+
+Cheers,
+
+-- 
+Julien Grall
 
