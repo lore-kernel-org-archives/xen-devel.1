@@ -2,86 +2,76 @@ Return-Path: <SRS0=cbMO=BQ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.7 required=3.0 tests=BAYES_00,DKIM_ADSP_CUSTOM_MED,
-	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 37134C433E3
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 50027C433E4
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:29 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 04C0C22D02
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:28 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 23E6322D07
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:29 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="fb7bgxh3"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 04C0C22D02
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="ayMd6734"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 23E6322D07
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k3b8b-0004OT-50; Thu, 06 Aug 2020 08:20:33 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=HTjn=BQ=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
- id 1k3b8Z-0004OO-Fj
- for xen-devel@lists.xenproject.org; Thu, 06 Aug 2020 08:20:31 +0000
-X-Inumbo-ID: 7526d188-3049-4643-836c-879667853536
-Received: from mail-lj1-x242.google.com (unknown [2a00:1450:4864:20::242])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 7526d188-3049-4643-836c-879667853536;
- Thu, 06 Aug 2020 08:20:30 +0000 (UTC)
-Received: by mail-lj1-x242.google.com with SMTP id g6so38115035ljn.11
- for <xen-devel@lists.xenproject.org>; Thu, 06 Aug 2020 01:20:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-transfer-encoding:content-language;
- bh=N/jRCuLrGIw0wydT6IPDn4A6ZllL+0k+MGioxejrhJg=;
- b=fb7bgxh3WV0Rcl9k4cctFwuf8nuNzqfQIxqe9CJES3R+MIqBGqEcE9jQVyD1pG26Wu
- OpKCrq0ImOqeeghZTvuikFf/qGKLFz62ohIoiQMVuVR9zNHDCzm7qGgQx1MdY0UFv1dE
- B4MtP6bCZNr/rhs/qRZdpH45ugKhAuXLqPLB21zwGT+L/bA1EP3W4L2A+IWIDAK1YMDD
- nQL8Y0ViPx3nzzqyvrquYcMySq6RPjK4cgkLQSyZ9Xx1xUIJouBo1ZS5TTX93FzIqp39
- wl5p2wzHWTgxepH3av3pZ6uUHjxmg7k2udQdIvlDb/KwllQZk039+tzn3rQMW3bxSBhJ
- 9+WQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-transfer-encoding
- :content-language;
- bh=N/jRCuLrGIw0wydT6IPDn4A6ZllL+0k+MGioxejrhJg=;
- b=TYgzf0ODywyz1z038Nghyv8joEdURViGBC0DUdoHeFrqMg0vah27O9gAUI9EWvsRQJ
- Ax7/bcCZ0yGUmt5Wf6W196Th8q3Gns/9ftTyRiBUcMegSL/5Cy6w34uKEqfjztdCAaKK
- 0qGibS8vZBDD9I8V7f8wIhQrukg34vGAO/y8eZMAfhWlGU+DOL80cymVvXLCGJMoBFdD
- rjL1Q3pQVzMN7zwsO6s6OqmPj+qnPSpQOS9UMG3/+DVdPJldGipg2NyRuHKHhbaiUYJZ
- H5XtmdtiP12KXeKGwDB2fzQ9/A2SerzyE/bNPIIjfTf7cTMMmAIzrERPTIvp2jT1C8MU
- taag==
-X-Gm-Message-State: AOAM533gKvD691QgS147al1cLr8Y76NiDhYm2VCGD9JN4I1POTdy1LGy
- SyvmjHNx/lidyGo2OTSv5C8=
-X-Google-Smtp-Source: ABdhPJxBFTu29BeH2Ek58cpSwUhh14eMMNKF4cfifP4cm5VociUQNlxXx824iD0EeJNetUPazqkYhQ==
-X-Received: by 2002:a2e:850b:: with SMTP id j11mr3073243lji.254.1596702028899; 
- Thu, 06 Aug 2020 01:20:28 -0700 (PDT)
-Received: from [192.168.1.2] ([212.22.223.21])
- by smtp.gmail.com with ESMTPSA id i19sm2371150lfi.14.2020.08.06.01.20.27
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 06 Aug 2020 01:20:28 -0700 (PDT)
+	id 1k3cSt-0004aa-Jw; Thu, 06 Aug 2020 09:45:35 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=dZxa=BQ=xen.org=julien@srs-us1.protection.inumbo.net>)
+ id 1k3cSs-0004aT-R6
+ for xen-devel@lists.xenproject.org; Thu, 06 Aug 2020 09:45:34 +0000
+X-Inumbo-ID: 1bfb1a83-6506-4470-8765-4bf29376f5d0
+Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 1bfb1a83-6506-4470-8765-4bf29376f5d0;
+ Thu, 06 Aug 2020 09:45:33 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=3kvMxfrz/ED50c7Hg32ZOSs/V6sID2XG0ios81uRB0Q=; b=ayMd67340+2GtqJaj28WNlY31Y
+ zEKBEh9u22eERrlrEaiHAR0VCepsUEo3IUl9Jhbn4mDBtpaFE3oV3igB48bQvouewjqu1r8VP5+yV
+ v0/cMm6jYNEMvbzB1Bh5e1NBgyHHb9Ktf9hq3WvCduWx5/srPh+kGVqhTtTfku+GmdQ8=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1k3cSg-0006n6-OL; Thu, 06 Aug 2020 09:45:22 +0000
+Received: from [54.239.6.187] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1k3cSg-0005UA-I0; Thu, 06 Aug 2020 09:45:22 +0000
 Subject: Re: [RFC PATCH V1 01/12] hvm/ioreq: Make x86's IOREQ feature common
-To: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
+To: Stefano Stabellini <sstabellini@kernel.org>
 References: <1596478888-23030-1-git-send-email-olekstysh@gmail.com>
  <1596478888-23030-2-git-send-email-olekstysh@gmail.com>
- <57ab62fb-048f-44ae-f815-9d5054457eb9@citrix.com>
-From: Oleksandr <olekstysh@gmail.com>
-Message-ID: <863748b5-f4f4-b240-b29a-a54d64b7a04e@gmail.com>
-Date: Thu, 6 Aug 2020 11:20:21 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ <000c01d66a33$2bd56510$83802f30$@xen.org>
+ <9f83a7ed-ca97-449f-c7b9-a1140644abe9@gmail.com>
+ <f0c32cfe-5c33-30ae-b08a-3d72e935745a@xen.org>
+ <alpine.DEB.2.21.2008041105510.5748@sstabellini-ThinkPad-T480s>
+ <5df97055-67f9-16cc-a274-864672d67164@xen.org>
+ <alpine.DEB.2.21.2008051121580.5748@sstabellini-ThinkPad-T480s>
+From: Julien Grall <julien@xen.org>
+Message-ID: <1afb9ffd-088c-ef4e-131a-0f2b62142405@xen.org>
+Date: Thu, 6 Aug 2020 10:45:19 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
+ Gecko/20100101 Thunderbird/68.11.0
 MIME-Version: 1.0
-In-Reply-To: <57ab62fb-048f-44ae-f815-9d5054457eb9@citrix.com>
+In-Reply-To: <alpine.DEB.2.21.2008051121580.5748@sstabellini-ThinkPad-T480s>
 Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
 Content-Transfer-Encoding: 8bit
-Content-Language: en-US
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -92,67 +82,102 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Kevin Tian <kevin.tian@intel.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Jan Beulich <jbeulich@suse.com>, Wei Liu <wl@xen.org>,
- Paul Durrant <paul@xen.org>, Tim Deegan <tim@xen.org>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>,
- Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
- Julien Grall <julien.grall@arm.com>, Jun Nakajima <jun.nakajima@intel.com>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Cc: 'Kevin Tian' <kevin.tian@intel.com>,
+ 'Jun Nakajima' <jun.nakajima@intel.com>, 'Wei Liu' <wl@xen.org>, paul@xen.org,
+ 'Andrew Cooper' <andrew.cooper3@citrix.com>,
+ 'Ian Jackson' <ian.jackson@eu.citrix.com>,
+ 'George Dunlap' <george.dunlap@citrix.com>, 'Tim Deegan' <tim@xen.org>,
+ Oleksandr <olekstysh@gmail.com>,
+ 'Oleksandr Tyshchenko' <oleksandr_tyshchenko@epam.com>,
+ 'Julien Grall' <julien.grall@arm.com>, 'Jan Beulich' <jbeulich@suse.com>,
+ xen-devel@lists.xenproject.org,
+ =?UTF-8?B?J1JvZ2VyIFBhdSBNb25uw6kn?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
+Hi,
 
-On 05.08.20 19:15, Andrew Cooper wrote:
+On 06/08/2020 01:37, Stefano Stabellini wrote:
+> On Wed, 5 Aug 2020, Julien Grall wrote:
+>> On 04/08/2020 20:11, Stefano Stabellini wrote:
+>>> On Tue, 4 Aug 2020, Julien Grall wrote:
+>>>> On 04/08/2020 12:10, Oleksandr wrote:
+>>>>> On 04.08.20 10:45, Paul Durrant wrote:
+>>>>>>> +static inline bool hvm_ioreq_needs_completion(const ioreq_t *ioreq)
+>>>>>>> +{
+>>>>>>> +    return ioreq->state == STATE_IOREQ_READY &&
+>>>>>>> +           !ioreq->data_is_ptr &&
+>>>>>>> +           (ioreq->type != IOREQ_TYPE_PIO || ioreq->dir !=
+>>>>>>> IOREQ_WRITE);
+>>>>>>> +}
+>>>>>> I don't think having this in common code is correct. The short-cut of
+>>>>>> not
+>>>>>> completing PIO reads seems somewhat x86 specific.
+>>>>
+>>>> Hmmm, looking at the code, I think it doesn't wait for PIO writes to
+>>>> complete
+>>>> (not read). Did I miss anything?
+>>>>
+>>>>> Does ARM even
+>>>>>> have the concept of PIO?
+>>>>>
+>>>>> I am not 100% sure here, but it seems that doesn't have.
+>>>>
+>>>> Technically, the PIOs exist on Arm, however they are accessed the same way
+>>>> as
+>>>> MMIO and will have a dedicated area defined by the HW.
+>>>>
+>>>> AFAICT, on Arm64, they are only used for PCI IO Bar.
+>>>>
+>>>> Now the question is whether we want to expose them to the Device Emulator
+>>>> as
+>>>> PIO or MMIO access. From a generic PoV, a DM shouldn't have to care about
+>>>> the
+>>>> architecture used. It should just be able to request a given IOport
+>>>> region.
+>>>>
+>>>> So it may make sense to differentiate them in the common ioreq code as
+>>>> well.
+>>>>
+>>>> I had a quick look at QEMU and wasn't able to tell if PIOs and MMIOs
+>>>> address
+>>>> space are different on Arm as well. Paul, Stefano, do you know what they
+>>>> are
+>>>> doing?
+>>>
+>>> On the QEMU side, it looks like PIO (address_space_io) is used in
+>>> connection with the emulation of the "in" or "out" instructions, see
+>>> ioport.c:cpu_inb for instance. Some parts of PCI on QEMU emulate PIO
+>>> space regardless of the architecture, such as
+>>> hw/pci/pci_bridge.c:pci_bridge_initfn.
+>>>
+>>> However, because there is no "in" and "out" on ARM, I don't think
+>>> address_space_io can be accessed. Specifically, there is no equivalent
+>>> for target/i386/misc_helper.c:helper_inb on ARM.
+>>
+>> So how PCI I/O BAR are accessed? Surely, they could be used on Arm, right?
+> 
+> PIO is also memory mapped on ARM and it seems to have its own MMIO
+> address window.
+This part is already well-understood :). However, this only tell us how 
+an OS is accessing a PIO.
 
-Hi Andrew
+What I am trying to figure out is how the hardware (or QEMU) is meant to 
+work.
 
-> On 03/08/2020 19:21, Oleksandr Tyshchenko wrote:
->> diff --git a/xen/common/Makefile b/xen/common/Makefile
->> index 06881d0..f6fc3f8 100644
->> --- a/xen/common/Makefile
->> +++ b/xen/common/Makefile
->> @@ -70,6 +70,7 @@ extra-y := symbols-dummy.o
->>   
->>   obj-$(CONFIG_COVERAGE) += coverage/
->>   obj-y += sched/
->> +obj-$(CONFIG_IOREQ_SERVER) += hvm/
->>   obj-$(CONFIG_UBSAN) += ubsan/
->>   
->>   obj-$(CONFIG_NEEDS_LIBELF) += libelf/
->> diff --git a/xen/common/hvm/Makefile b/xen/common/hvm/Makefile
->> new file mode 100644
->> index 0000000..326215d
->> --- /dev/null
->> +++ b/xen/common/hvm/Makefile
->> @@ -0,0 +1 @@
->> +obj-y += ioreq.o
->> diff --git a/xen/common/hvm/ioreq.c b/xen/common/hvm/ioreq.c
->> new file mode 100644
->> index 0000000..7e1fa23
->> --- /dev/null
->> +++ b/xen/common/hvm/ioreq.c
->> <snip>
-> HVM is an internal detail of arch specific code.  It should not escape
-> into common code.
->
->  From x86's point of view, there is nothing conceptually wrong with
-> having an IOREQ server for PV guests, although it is very unlikely at
-> this point that adding support would be a good use of time.
+ From my understanding, the MMIO access will be received by the 
+hostbridge and then forwarded to the appropriate PCI device. The two 
+questions I am trying to answer is: How the I/O BARs are configured? 
+Will it contain an MMIO address or an offset?
 
-Got it.
+If the answer is the latter, then we will need PIO because a DM will 
+never see the MMIO address (the hostbridge will be emulated in Xen).
 
+I am still trying to navigate through the code and didn't manage to find 
+an answer so far.
 
-> Please make this into a proper top-level common set of functionality.
-
-ok.
-
+Cheers,
 
 -- 
-Regards,
-
-Oleksandr Tyshchenko
-
+Julien Grall
 
