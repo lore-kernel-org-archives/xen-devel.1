@@ -7,51 +7,50 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 01A8EC433E3
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 23:50:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 60DA0C433DF
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 23:50:05 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EA14921744
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 23:50:01 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 5DFE721744
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 23:50:05 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="tfhsB1in"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EA14921744
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="GxI0OoET"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5DFE721744
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k3pdu-0004NB-AU; Thu, 06 Aug 2020 23:49:50 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1k3pdy-0004SJ-S2; Thu, 06 Aug 2020 23:49:54 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=flvv=BQ=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1k3pds-0004FE-Ml
- for xen-devel@lists.xenproject.org; Thu, 06 Aug 2020 23:49:48 +0000
-X-Inumbo-ID: 64cc51bb-e701-4fd5-b585-337cf1a47716
+ id 1k3pdx-0004FC-Kj
+ for xen-devel@lists.xenproject.org; Thu, 06 Aug 2020 23:49:53 +0000
+X-Inumbo-ID: 2e66862a-07a4-432f-a589-c70212a3ad76
 Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 64cc51bb-e701-4fd5-b585-337cf1a47716;
- Thu, 06 Aug 2020 23:49:41 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 2e66862a-07a4-432f-a589-c70212a3ad76;
+ Thu, 06 Aug 2020 23:49:39 +0000 (UTC)
 Received: from sstabellini-ThinkPad-T480s.hsd1.ca.comcast.net
  (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 9854122D0A;
- Thu,  6 Aug 2020 23:49:40 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 0B77622D05;
+ Thu,  6 Aug 2020 23:49:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1596757781;
- bh=1i0A/yLeRs9Euo2cflhW8+2Che9bifUajcXNkMOKeGQ=;
+ s=default; t=1596757779;
+ bh=tG7IOMVzAKrOpHe65a5zGXzao6XoCl9HRXWwSXpjlE0=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=tfhsB1inKyz8eryNqcRz+jhO914SuQXY2t1YjsML6HAVwBm+YUw2HCSOBgutT1gV5
- rDZnrJHVBJIErHF1AG1cSHH5PFwf4ohzT5XVt8lhjrpvYm6XPO2rdIEtXYm4rhownV
- HkAZV1Z31KMZbjiD7nVlo70eU1idlPlcly/PupqA=
+ b=GxI0OoETdZHYjWzTj7zc4Fx7XEP9Op9CJs1G9FU0BQNvMB2GW4qPIDUvWHf/BCHIq
+ ddrxZ/cSHMxwm9bGiH6wcUoxkQi0iFiursnZBvZz6U6d1sABRHB03beYxelhageYdv
+ 9c/MR87PwOwyC7H57kU4xg0+BW+t22TwJ0vwBAV0=
 From: Stefano Stabellini <sstabellini@kernel.org>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH 08/14] kernel-doc: public/memory.h
-Date: Thu,  6 Aug 2020 16:49:27 -0700
-Message-Id: <20200806234933.16448-8-sstabellini@kernel.org>
+Subject: [PATCH 05/14] kernel-doc: public/features.h
+Date: Thu,  6 Aug 2020 16:49:24 -0700
+Message-Id: <20200806234933.16448-5-sstabellini@kernel.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <alpine.DEB.2.21.2008061605410.16004@sstabellini-ThinkPad-T480s>
 References: <alpine.DEB.2.21.2008061605410.16004@sstabellini-ThinkPad-T480s>
@@ -77,481 +76,153 @@ Convert in-code comments to kernel-doc format wherever possible.
 
 Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
 ---
- xen/include/public/memory.h | 232 ++++++++++++++++++++++++------------
- 1 file changed, 155 insertions(+), 77 deletions(-)
+ xen/include/public/features.h | 78 ++++++++++++++++++++++++++---------
+ 1 file changed, 59 insertions(+), 19 deletions(-)
 
-diff --git a/xen/include/public/memory.h b/xen/include/public/memory.h
-index 21057ed78e..4c57ed213c 100644
---- a/xen/include/public/memory.h
-+++ b/xen/include/public/memory.h
-@@ -30,7 +30,9 @@
- #include "xen.h"
- #include "physdev.h"
+diff --git a/xen/include/public/features.h b/xen/include/public/features.h
+index 1613b2aab8..524d1758c4 100644
+--- a/xen/include/public/features.h
++++ b/xen/include/public/features.h
+@@ -27,8 +27,8 @@
+ #ifndef __XEN_PUBLIC_FEATURES_H__
+ #define __XEN_PUBLIC_FEATURES_H__
  
 -/*
+- * `incontents 200 elfnotes_features XEN_ELFNOTE_FEATURES
 +/**
-+ * DOC: XENMEM_increase_reservation and XENMEM_decrease_reservation
-+ *
-  * Increase or decrease the specified domain's memory reservation. Returns the
-  * number of extents successfully allocated or freed.
-  * arg == addr of struct xen_memory_reservation.
-@@ -40,29 +42,37 @@
- #define XENMEM_populate_physmap     6
- 
- #if __XEN_INTERFACE_VERSION__ >= 0x00030209
--/*
-- * Maximum # bits addressable by the user of the allocated region (e.g., I/O
-- * devices often have a 32-bit limitation even in 64-bit systems). If zero
-- * then the user has no addressing restriction. This field is not used by
-- * XENMEM_decrease_reservation.
-+/**
-+ * DOC: XENMEMF_*
-+ *
-+ * - XENMEMF_address_bits, XENMEMF_get_address_bits:
-+ *       Maximum # bits addressable by the user of the allocated region
-+ *       (e.g., I/O devices often have a 32-bit limitation even in 64-bit
-+ *       systems). If zero then the user has no addressing restriction. This
-+ *       field is not used by XENMEM_decrease_reservation.
-+ * - XENMEMF_node, XENMEMF_get_node: NUMA node to allocate from
-+ * - XENMEMF_populate_on_demand: Flag to populate physmap with populate-on-demand entries
-+ * - XENMEMF_exact_node_request, XENMEMF_exact_node: Flag to request allocation only from the node specified
-+ * - XENMEMF_vnode: Flag to indicate the node specified is virtual node
-  */
- #define XENMEMF_address_bits(x)     (x)
- #define XENMEMF_get_address_bits(x) ((x) & 0xffu)
--/* NUMA node to allocate from. */
- #define XENMEMF_node(x)     (((x) + 1) << 8)
- #define XENMEMF_get_node(x) ((((x) >> 8) - 1) & 0xffu)
--/* Flag to populate physmap with populate-on-demand entries */
- #define XENMEMF_populate_on_demand (1<<16)
--/* Flag to request allocation only from the node specified */
- #define XENMEMF_exact_node_request  (1<<17)
- #define XENMEMF_exact_node(n) (XENMEMF_node(n) | XENMEMF_exact_node_request)
--/* Flag to indicate the node specified is virtual node */
- #define XENMEMF_vnode  (1<<18)
- #endif
- 
-+/**
-+ * struct xen_memory_reservation
-+ */
- struct xen_memory_reservation {
- 
--    /*
-+    /**
-+     * @extent_start:
-+     *
-      * XENMEM_increase_reservation:
-      *   OUT: MFN (*not* GMFN) bases of extents that were allocated
-      * XENMEM_decrease_reservation:
-@@ -76,18 +86,20 @@ struct xen_memory_reservation {
-      */
-     XEN_GUEST_HANDLE(xen_pfn_t) extent_start;
- 
--    /* Number of extents, and size/alignment of each (2^extent_order pages). */
-+    /** @nr_extents: Number of extents, and size/alignment of each (2^extent_order pages). */
-     xen_ulong_t    nr_extents;
-     unsigned int   extent_order;
- 
- #if __XEN_INTERFACE_VERSION__ >= 0x00030209
--    /* XENMEMF flags. */
-+    /** @mem_flags: XENMEMF flags. */
-     unsigned int   mem_flags;
- #else
-     unsigned int   address_bits;
- #endif
- 
--    /*
-+    /**
-+     * @domid:
-+     *
-      * Domain whose reservation is being changed.
-      * Unprivileged domains can specify only DOMID_SELF.
-      */
-@@ -96,7 +108,10 @@ struct xen_memory_reservation {
- typedef struct xen_memory_reservation xen_memory_reservation_t;
- DEFINE_XEN_GUEST_HANDLE(xen_memory_reservation_t);
- 
--/*
-+#define XENMEM_exchange             11
-+/**
-+ * struct xen_memory_exchange - XENMEM_exchange
-+ *
-  * An atomic exchange of memory pages. If return code is zero then
-  * @out.extent_list provides GMFNs of the newly-allocated memory.
-  * Returns zero on complete success, otherwise a negative error code.
-@@ -105,15 +120,18 @@ DEFINE_XEN_GUEST_HANDLE(xen_memory_reservation_t);
++ * DOC: XEN_ELFNOTE_FEATURES
   *
-  * Note that only PV guests can use this operation.
+  * The list of all the features the guest supports. They are set by
+  * parsing the XEN_ELFNOTE_FEATURES and XEN_ELFNOTE_SUPPORTED_FEATURES
+@@ -41,19 +41,25 @@
+  * XENFEAT_dom0 MUST be set if the guest is to be booted as dom0,
   */
--#define XENMEM_exchange             11
- struct xen_memory_exchange {
--    /*
-+    /**
-+     * @in:
-+     *
-      * [IN] Details of memory extents to be exchanged (GMFN bases).
-      * Note that @in.address_bits is ignored and unused.
-      */
-     struct xen_memory_reservation in;
  
--    /*
-+    /**
-+     * @out:
-+     *
-      * [IN/OUT] Details of new memory extents.
-      * We require that:
-      *  1. @in.domid == @out.domid
-@@ -125,7 +143,9 @@ struct xen_memory_exchange {
-      */
-     struct xen_memory_reservation out;
- 
--    /*
-+    /**
-+     * @nr_exchanged:
-+     *
-      * [OUT] Number of input extents that were successfully exchanged:
-      *  1. The first @nr_exchanged input extents were successfully
-      *     deallocated.
-@@ -141,14 +161,18 @@ struct xen_memory_exchange {
- typedef struct xen_memory_exchange xen_memory_exchange_t;
- DEFINE_XEN_GUEST_HANDLE(xen_memory_exchange_t);
+-/*
+- * If set, the guest does not need to write-protect its pagetables, and can
+- * update them via direct writes.
++/**
++ * DOC: XENFEAT_writable_page_tables
++ *
++ * If set, the guest does not need to write-protect its pagetables, and
++ * can update them via direct writes.
+  */
+ #define XENFEAT_writable_page_tables       0
  
 -/*
 +/**
-+ * DOC: XENMEM_maximum_ram_page
++ * DOC: XENFEAT_writable_descriptor_tables
 + *
-  * Returns the maximum machine frame number of mapped RAM in this system.
-  * This command always succeeds (it never returns an error code).
-  * arg == NULL.
+  * If set, the guest does not need to write-protect its segment descriptor
+  * tables, and can update them via direct writes.
   */
- #define XENMEM_maximum_ram_page     2
+ #define XENFEAT_writable_descriptor_tables 1
  
 -/*
 +/**
-+ * DOC: XENMEM_current_reservation and XENMEM_maximum_reservation
++ * DOC: XENFEAT_auto_translated_physmap
 + *
-  * Returns the current or maximum memory reservation, in pages, of the
-  * specified domain (may be DOMID_SELF). Returns -ve errcode on failure.
-  * arg == addr of domid_t.
-@@ -156,33 +180,43 @@ DEFINE_XEN_GUEST_HANDLE(xen_memory_exchange_t);
- #define XENMEM_current_reservation  3
- #define XENMEM_maximum_reservation  4
- 
--/*
-+/**
-+ * DOC: XENMEM_maximum_gpfn
-+ *
-  * Returns the maximum GPFN in use by the guest, or -ve errcode on failure.
+  * If set, translation between the guest's 'pseudo-physical' address space
+  * and the host's machine address space are handled by the hypervisor. In this
+  * mode the guest does not need to perform phys-to/from-machine translations
+@@ -61,37 +67,63 @@
   */
- #define XENMEM_maximum_gpfn         14
+ #define XENFEAT_auto_translated_physmap    2
  
--/*
-+#define XENMEM_machphys_mfn_list    5
+-/* If set, the guest is running in supervisor mode (e.g., x86 ring 0). */
 +/**
-+ * struct xen_machphys_mfn_list - XENMEM_machphys_mfn_list
++ * DOC: XENFEAT_supervisor_mode_kernel
 + *
-  * Returns a list of MFN bases of 2MB extents comprising the machine_to_phys
-  * mapping table. Architectures which do not have a m2p table do not implement
-  * this command.
-  * arg == addr of xen_machphys_mfn_list_t.
-  */
--#define XENMEM_machphys_mfn_list    5
- struct xen_machphys_mfn_list {
--    /*
-+    /**
-+     * @max_extents:
-+     *
-      * Size of the 'extent_start' array. Fewer entries will be filled if the
-      * machphys table is smaller than max_extents * 2MB.
-      */
-     unsigned int max_extents;
- 
--    /*
-+    /**
-+     * @extent_start:
-+     *
-      * Pointer to buffer to fill with list of extent starts. If there are
-      * any large discontiguities in the machine address space, 2MB gaps in
-      * the machphys table will be represented by an MFN base of zero.
-      */
-     XEN_GUEST_HANDLE(xen_pfn_t) extent_start;
- 
--    /*
-+    /**
-+     * @nr_extents:
-+     *
-      * Number of extents written to the above array. This will be smaller
-      * than 'max_extents' if the machphys table is smaller than max_e * 2MB.
-      */
-@@ -191,7 +225,9 @@ struct xen_machphys_mfn_list {
- typedef struct xen_machphys_mfn_list xen_machphys_mfn_list_t;
- DEFINE_XEN_GUEST_HANDLE(xen_machphys_mfn_list_t);
- 
--/*
-+/**
-+ * DOC: XENMEM_machphys_compat_mfn_list
-+ *
-  * For a compat caller, this is identical to XENMEM_machphys_mfn_list.
-  *
-  * For a non compat caller, this functions similarly to
-@@ -200,90 +236,115 @@ DEFINE_XEN_GUEST_HANDLE(xen_machphys_mfn_list_t);
-  */
- #define XENMEM_machphys_compat_mfn_list     25
- 
--/*
-+#define XENMEM_machphys_mapping     12
-+/**
-+ * struct xen_machphys_mapping - XENMEM_machphys_mapping
-+ *
-  * Returns the location in virtual address space of the machine_to_phys
-  * mapping table. Architectures which do not have a m2p table, or which do not
-  * map it by default into guest address space, do not implement this command.
-  * arg == addr of xen_machphys_mapping_t.
-  */
--#define XENMEM_machphys_mapping     12
- struct xen_machphys_mapping {
-+    /** @v_start: Start virtual address */
-     xen_ulong_t v_start, v_end; /* Start and end virtual addresses.   */
--    xen_ulong_t max_mfn;        /* Maximum MFN that can be looked up. */
-+    /** @v_end: End virtual addresses */
-+    xen_ulong_t v_end;
-+    /** @max_mfn: Maximum MFN that can be looked up */
-+    xen_ulong_t max_mfn;
- };
- typedef struct xen_machphys_mapping xen_machphys_mapping_t;
- DEFINE_XEN_GUEST_HANDLE(xen_machphys_mapping_t);
- 
--/* Source mapping space. */
-+/**
-+ * DOC: Source mapping space.
-+ *
-+ * - XENMAPSPACE_shared_info:  shared info page
-+ * - XENMAPSPACE_grant_table:  grant table page
-+ * - XENMAPSPACE_gmfn:         GMFN
-+ * - XENMAPSPACE_gmfn_range:   GMFN range, XENMEM_add_to_physmap only.
-+ * - XENMAPSPACE_gmfn_foreign: GMFN from another dom,
-+ *                             XENMEM_add_to_physmap_batch only.
-+ * - XENMAPSPACE_dev_mmio:     device mmio region ARM only; the region is mapped
-+ *                             in Stage-2 using the Normal MemoryInner/Outer
-+ *                             Write-Back Cacheable memory attribute.
++ * If set, the guest is running in supervisor mode (e.g., x86 ring 0).
 + */
- /* ` enum phys_map_space { */
--#define XENMAPSPACE_shared_info  0 /* shared info page */
--#define XENMAPSPACE_grant_table  1 /* grant table page */
--#define XENMAPSPACE_gmfn         2 /* GMFN */
--#define XENMAPSPACE_gmfn_range   3 /* GMFN range, XENMEM_add_to_physmap only. */
--#define XENMAPSPACE_gmfn_foreign 4 /* GMFN from another dom,
--                                    * XENMEM_add_to_physmap_batch only. */
--#define XENMAPSPACE_dev_mmio     5 /* device mmio region
--                                      ARM only; the region is mapped in
--                                      Stage-2 using the Normal Memory
--                                      Inner/Outer Write-Back Cacheable
--                                      memory attribute. */
-+#define XENMAPSPACE_shared_info  0
-+#define XENMAPSPACE_grant_table  1
-+#define XENMAPSPACE_gmfn         2
-+#define XENMAPSPACE_gmfn_range   3
-+#define XENMAPSPACE_gmfn_foreign 4
-+#define XENMAPSPACE_dev_mmio     5
- /* ` } */
+ #define XENFEAT_supervisor_mode_kernel     3
  
 -/*
-+#define XENMEM_add_to_physmap      7
 +/**
-+ * struct xen_add_to_physmap - XENMEM_add_to_physmap
++ * DOC: XENFEAT_pae_pgdir_above_4gb
 + *
-  * Sets the GPFN at which a particular page appears in the specified guest's
-  * physical address space (translated guests only).
-  * arg == addr of xen_add_to_physmap_t.
+  * If set, the guest does not need to allocate x86 PAE page directories
+  * below 4GB. This flag is usually implied by auto_translated_physmap.
   */
--#define XENMEM_add_to_physmap      7
- struct xen_add_to_physmap {
--    /* Which domain to change the mapping for. */
-+    /** @domid: Which domain to change the mapping for. */
-     domid_t domid;
+ #define XENFEAT_pae_pgdir_above_4gb        4
  
--    /* Number of pages to go through for gmfn_range */
-+    /** @size: Number of pages to go through for gmfn_range */
-     uint16_t    size;
- 
--    unsigned int space; /* => enum phys_map_space */
-+    /** @space: enum phys_map_space */
-+    unsigned int space;
- 
- #define XENMAPIDX_grant_table_status 0x80000000
- 
--    /* Index into space being mapped. */
-+    /** @idx: Index into space being mapped. */
-     xen_ulong_t idx;
- 
--    /* GPFN in domid where the source mapping page should appear. */
-+    /** @gpfn: GPFN in domid where the source mapping page should appear. */
-     xen_pfn_t     gpfn;
- };
- typedef struct xen_add_to_physmap xen_add_to_physmap_t;
- DEFINE_XEN_GUEST_HANDLE(xen_add_to_physmap_t);
- 
--/* A batched version of add_to_physmap. */
- #define XENMEM_add_to_physmap_batch 23
+-/* x86: Does this Xen host support the MMU_PT_UPDATE_PRESERVE_AD hypercall? */
 +/**
-+ * struct xen_add_to_physmap_batch - XENMEM_add_to_physmap_batch
-+ *
-+ * A batched version of add_to_physmap.
++ * DOC: XENFEAT_mmu_pt_update_preserve_ad
++ * x86: Does this Xen host support the MMU_PT_UPDATE_PRESERVE_AD hypercall?
 + */
- struct xen_add_to_physmap_batch {
--    /* IN */
--    /* Which domain to change the mapping for. */
-+    /** @domid: IN, which domain to change the mapping for */
-     domid_t domid;
--    uint16_t space; /* => enum phys_map_space */
-+    /** @space: IN, enum phys_map_space */
-+    uint16_t space;
+ #define XENFEAT_mmu_pt_update_preserve_ad  5
  
--    /* Number of pages to go through */
-+    /** @size: IN, Number of pages to go through */
-     uint16_t size;
- 
- #if __XEN_INTERFACE_VERSION__ < 0x00040700
--    domid_t foreign_domid; /* IFF gmfn_foreign. Should be 0 for other spaces. */
-+    /** @foreign_domid: IN, iff gmfn_foreign. Should be 0 for other spaces. */
-+    domid_t foreign_domid;
- #else
-+    /**
-+     * @u: IN
-+     *
-+     * - u.foreign_domid: gmfn_foreign
-+     * - u.res0: All the other spaces. Should be 0
-+     */
-     union xen_add_to_physmap_batch_extra {
--        domid_t foreign_domid; /* gmfn_foreign */
--        uint16_t res0;  /* All the other spaces. Should be 0 */
-+        domid_t foreign_domid;
-+        uint16_t res0;
-     } u;
- #endif
- 
--    /* Indexes into space being mapped. */
-+    /** @idxs: IN, Indexes into space being mapped. */
-     XEN_GUEST_HANDLE(xen_ulong_t) idxs;
- 
--    /* GPFN in domid where the source mapping page should appear. */
-+    /** @gpfns: IN, GPFN in domid where the source mapping page should appear. */
-     XEN_GUEST_HANDLE(xen_pfn_t) gpfns;
- 
--    /* OUT */
--
--    /* Per index error code. */
-+    /** @errs: OUT, Per index error code. */
-     XEN_GUEST_HANDLE(int) errs;
- };
- typedef struct xen_add_to_physmap_batch xen_add_to_physmap_batch_t;
-@@ -296,17 +357,19 @@ typedef struct xen_add_to_physmap_batch xen_add_to_physmap_range_t;
- DEFINE_XEN_GUEST_HANDLE(xen_add_to_physmap_range_t);
- #endif
- 
--/*
-+#define XENMEM_remove_from_physmap      15
+-/* x86: Does this Xen host support the MMU_{CLEAR,COPY}_PAGE hypercall? */
 +/**
-+ * struct xen_remove_from_physmap - XENMEM_remove_from_physmap
-+ *
-  * Unmaps the page appearing at a particular GPFN from the specified guest's
-  * physical address space (translated guests only).
-  * arg == addr of xen_remove_from_physmap_t.
-  */
--#define XENMEM_remove_from_physmap      15
- struct xen_remove_from_physmap {
--    /* Which domain to change the mapping for. */
-+    /** @domid: Which domain to change the mapping for. */
-     domid_t domid;
- 
--    /* GPFN of the current mapping of the page. */
-+    /** @gpfn: GPFN of the current mapping of the page. */
-     xen_pfn_t     gpfn;
- };
- typedef struct xen_remove_from_physmap xen_remove_from_physmap_t;
-@@ -315,21 +378,27 @@ DEFINE_XEN_GUEST_HANDLE(xen_remove_from_physmap_t);
- /*** REMOVED ***/
- /*#define XENMEM_translate_gpfn_list  8*/
- 
--/*
-+#define XENMEM_memory_map           9
-+/**
-+ * struct xen_memory_map - XENMEM_memory_map
-+ *
-  * Returns the pseudo-physical memory map as it was when the domain
-  * was started (specified by XENMEM_set_memory_map).
-  * arg == addr of xen_memory_map_t.
-  */
--#define XENMEM_memory_map           9
- struct xen_memory_map {
--    /*
-+    /**
-+     * @nr_entries:
-+     *
-      * On call the number of entries which can be stored in buffer. On
-      * return the number of entries which have been stored in
-      * buffer.
-      */
-     unsigned int nr_entries;
- 
--    /*
-+    /**
-+     * @buffer:
-+     *
-      * Entries in the buffer are in the same format as returned by the
-      * BIOS INT 0x15 EAX=0xE820 call.
-      */
-@@ -338,7 +407,9 @@ struct xen_memory_map {
- typedef struct xen_memory_map xen_memory_map_t;
- DEFINE_XEN_GUEST_HANDLE(xen_memory_map_t);
- 
--/*
-+/**
-+ * DOC: XENMEM_machine_memory_map
-+ *
-  * Returns the real physical memory map. Passes the same structure as
-  * XENMEM_memory_map.
-  * Specifying buffer as NULL will return the number of entries required
-@@ -347,12 +418,14 @@ DEFINE_XEN_GUEST_HANDLE(xen_memory_map_t);
-  */
- #define XENMEM_machine_memory_map   10
- 
--/*
-+#define XENMEM_set_memory_map       13
-+/**
-+ * struct xen_foreign_memory_map - XENMEM_set_memory_map
-+ *
-  * Set the pseudo-physical memory map of a domain, as returned by
-  * XENMEM_memory_map.
-  * arg == addr of xen_foreign_memory_map_t.
-  */
--#define XENMEM_set_memory_map       13
- struct xen_foreign_memory_map {
-     domid_t domid;
-     struct xen_memory_map map;
-@@ -362,14 +435,19 @@ DEFINE_XEN_GUEST_HANDLE(xen_foreign_memory_map_t);
- 
- #define XENMEM_set_pod_target       16
- #define XENMEM_get_pod_target       17
-+/**
-+ * struct xen_pod_target - XENMEM_set_pod_target and XENMEM_get_pod_target
++ * DOC: XENFEAT_highmem_assist
++ * x86: Does this Xen host support the MMU_{CLEAR,COPY}_PAGE hypercall?
 + */
- struct xen_pod_target {
--    /* IN */
-+    /** @target_pages: IN */
-     uint64_t target_pages;
--    /* OUT */
-+    /** @tot_pages: OUT */
-     uint64_t tot_pages;
-+    /** @pod_cache_pages: OUT */
-     uint64_t pod_cache_pages;
-+    /** @pod_entries: OUT */
-     uint64_t pod_entries;
--    /* IN */
-+    /** @domid: IN */
-     domid_t domid;
- };
- typedef struct xen_pod_target xen_pod_target_t;
+ #define XENFEAT_highmem_assist             6
+ 
+-/*
++/**
++ * DOC: XENFEAT_gnttab_map_avail_bits
++ *
+  * If set, GNTTABOP_map_grant_ref honors flags to be placed into guest kernel
+  * available pte bits.
+  */
+ #define XENFEAT_gnttab_map_avail_bits      7
+ 
+-/* x86: Does this Xen host support the HVM callback vector type? */
++/**
++ * DOC: XENFEAT_hvm_callback_vector
++ * x86: Does this Xen host support the HVM callback vector type?
++ */
+ #define XENFEAT_hvm_callback_vector        8
+ 
+-/* x86: pvclock algorithm is safe to use on HVM */
++/**
++ * DOC: XENFEAT_hvm_safe_pvclock
++ * x86: pvclock algorithm is safe to use on HVM
++ */
+ #define XENFEAT_hvm_safe_pvclock           9
+ 
+-/* x86: pirq can be used by HVM guests */
++/**
++ * DOC: XENFEAT_hvm_pirqs
++ * x86: pirq can be used by HVM guests
++ */
+ #define XENFEAT_hvm_pirqs                 10
+ 
+-/* operation as Dom0 is supported */
++/**
++ * DOC: XENFEAT_dom0
++ * operation as Dom0 is supported
++ */
+ #define XENFEAT_dom0                      11
+ 
+ /* Xen also maps grant references at pfn = mfn.
+@@ -99,13 +131,21 @@
+ #define XENFEAT_grant_map_identity        12
+  */
+ 
+-/* Guest can use XENMEMF_vnode to specify virtual node for memory op. */
++/**
++ * DOC: XENFEAT_memory_op_vnode_supported
++ * Guest can use XENMEMF_vnode to specify virtual node for memory op.
++ */
+ #define XENFEAT_memory_op_vnode_supported 13
+ 
+-/* arm: Hypervisor supports ARM SMC calling convention. */
++/**
++ * DOC: XENFEAT_ARM_SMCCC_supported
++ * arm: Hypervisor supports ARM SMC calling convention.
++ */
+ #define XENFEAT_ARM_SMCCC_supported       14
+ 
+-/*
++/**
++ * DOC: XENFEAT_linux_rsdp_unrestricted
++ *
+  * x86/PVH: If set, ACPI RSDP can be placed at any address. Otherwise RSDP
+  * must be located in lower 1MB, as required by ACPI Specification for IA-PC
+  * systems.
 -- 
 2.17.1
 
