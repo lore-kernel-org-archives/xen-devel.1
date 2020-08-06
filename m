@@ -2,86 +2,55 @@ Return-Path: <SRS0=cbMO=BQ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.1 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C20B6C433E1
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 17:45:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F0AAFC433E0
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 18:10:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 128F5206B2
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 17:45:13 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 3075722D0B
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 18:10:38 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="AbIyQAGf"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 128F5206B2
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
+	dkim=pass (1024-bit key) header.d=trmm.net header.i=@trmm.net header.b="ZCUH+4I0"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3075722D0B
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=trmm.net
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k3jwQ-0006uv-IW; Thu, 06 Aug 2020 17:44:34 +0000
+	id 1k3kLI-00015V-OP; Thu, 06 Aug 2020 18:10:16 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=G/J/=BQ=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
- id 1k3jwP-0006ub-MF
- for xen-devel@lists.xenproject.org; Thu, 06 Aug 2020 17:44:33 +0000
-X-Inumbo-ID: 22f86972-a485-4503-a3da-881acb80c9f4
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=775r=BQ=trmm.net=hudson@srs-us1.protection.inumbo.net>)
+ id 1k3kLH-00015Q-0B
+ for xen-devel@lists.xenproject.org; Thu, 06 Aug 2020 18:10:15 +0000
+X-Inumbo-ID: 1edb704f-63dd-4da4-a270-6dadf0dc6f39
+Received: from mail1.protonmail.ch (unknown [185.70.40.18])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 22f86972-a485-4503-a3da-881acb80c9f4;
- Thu, 06 Aug 2020 17:44:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
- Content-Transfer-Encoding:Content-Type:Message-ID:To:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=XrLVSe/9iOruavnpecAOGTHu2VAtkqiFn0DuxMFdFzI=; b=AbIyQAGfeQMTrMrEcItMpcTDs
- +WwVHF6lDGpW9jd4qBvsUHEnR5pltj+ZVM4RU28mpYgYeU5w25EUtUuA8SSBuL+7ghBuACd9gO0P0
- D2ES30XuBJIamWJHtWU3WvEGHv9+/rkxj7llLd5+CPJiNZJsZ0sUlD7BQYTvg2dfdkdvo=;
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1k3jwI-0001Df-67; Thu, 06 Aug 2020 17:44:26 +0000
-Received: from [172.16.144.3] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1k3jwH-0005za-PW; Thu, 06 Aug 2020 17:44:25 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.89) (envelope-from <osstest-admin@xenproject.org>)
- id 1k3jwH-0006hq-Os; Thu, 06 Aug 2020 17:44:25 +0000
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-152502-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+ id 1edb704f-63dd-4da4-a270-6dadf0dc6f39;
+ Thu, 06 Aug 2020 18:10:12 +0000 (UTC)
+Date: Thu, 06 Aug 2020 18:10:02 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=trmm.net;
+ s=protonmail; t=1596737411;
+ bh=A96Ly/X7XtmMBUSs9TB/vOHY3B3n6bGi+f5LX2HnQSw=;
+ h=Date:To:From:Cc:Reply-To:Subject:In-Reply-To:References:From;
+ b=ZCUH+4I0B++i6EdEArGCQumN7ATjS6xiLjndfeXqTnEZj/CQQ7sFuqv9bRUAJK8Fn
+ G4pBtljb9ZwWY4Www5SWyUUFPjJmR87gSqy/gQ2n252cn1DHae5/pD6R9Zha0XxR7U
+ lJMFqy2+C7UAt9j3617GLrS+q6q4x9KB2zhJWXDg=
+To: Jan Beulich <jbeulich@suse.com>
+From: Trammell Hudson <hudson@trmm.net>
+Subject: Re: EFI executable corruption when live patching is turned off
+Message-ID: <aqOz6WXf04xXyZWiHQBxn5cS1V3ZdgCYb4DFVCGULA8ZPqG-0QAd_eg-Rgti5SK1-K9uxrcZTjXEp-CUPqCd5muymPLqPH2UJgUsyIPa0nQ=@trmm.net>
+In-Reply-To: <a72c87a1-c725-04d0-2b1c-4092c4170a34@suse.com>
+References: <3TMd7J2u5gCA8ouIG_Xfcw7s5JKMG06XsDIesEB3Fi9htUJ43Lfl057wXohlpCHcszqoCmicpIlneEDO26ZqT8QfC2Y39VxBuqD3nS1j5Q4=@trmm.net>
+ <a72c87a1-c725-04d0-2b1c-4092c4170a34@suse.com>
 MIME-Version: 1.0
-Subject: [libvirt test] 152502: regressions - FAIL
-X-Osstest-Failures: libvirt:build-amd64-libvirt:libvirt-build:fail:regression
- libvirt:build-i386-libvirt:libvirt-build:fail:regression
- libvirt:build-arm64-libvirt:libvirt-build:fail:regression
- libvirt:build-armhf-libvirt:libvirt-build:fail:regression
- libvirt:test-arm64-arm64-libvirt:build-check(1):blocked:nonblocking
- libvirt:test-arm64-arm64-libvirt-qcow2:build-check(1):blocked:nonblocking
- libvirt:test-amd64-amd64-libvirt:build-check(1):blocked:nonblocking
- libvirt:test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm:build-check(1):blocked:nonblocking
- libvirt:test-armhf-armhf-libvirt:build-check(1):blocked:nonblocking
- libvirt:test-amd64-amd64-libvirt-vhd:build-check(1):blocked:nonblocking
- libvirt:test-amd64-amd64-libvirt-pair:build-check(1):blocked:nonblocking
- libvirt:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:build-check(1):blocked:nonblocking
- libvirt:test-armhf-armhf-libvirt-raw:build-check(1):blocked:nonblocking
- libvirt:test-amd64-i386-libvirt:build-check(1):blocked:nonblocking
- libvirt:test-arm64-arm64-libvirt-xsm:build-check(1):blocked:nonblocking
- libvirt:test-amd64-i386-libvirt-xsm:build-check(1):blocked:nonblocking
- libvirt:test-amd64-amd64-libvirt-xsm:build-check(1):blocked:nonblocking
- libvirt:test-amd64-i386-libvirt-pair:build-check(1):blocked:nonblocking
-X-Osstest-Versions-This: libvirt=84bb5fd1ab2bce88e508d416f4bcea520c803ea8
-X-Osstest-Versions-That: libvirt=2c846fa6bcc11929c9fb857a22430fb9945654ad
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Thu, 06 Aug 2020 17:44:25 +0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -92,139 +61,50 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
+Reply-To: Trammell Hudson <hudson@trmm.net>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-flight 152502 libvirt real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/152502/
+On Thursday, August 6, 2020 6:40 PM, Jan Beulich <jbeulich@suse.com> wrote:
 
-Regressions :-(
+> On 05.08.2020 20:19, Trammell Hudson wrote:
+> [...]
+> > ~/build/xen-clean/xen$ objcopy xen.efi test.efi
+> > objcopy: test.efi: Data Directory size (1c) exceeds space left in secti=
+on (18)
+> > objcopy: test.efi: error copying private BFD data: file in wrong format
+> > ~/build/xen-clean/xen$ objcopy --version | head -1
+> > GNU objcopy (GNU Binutils for Ubuntu) 2.34
+>
+> I've tried to find a sensible way to fix this in objcopy, but could
+> come up with only a somewhat hackish variant:
+> https://sourceware.org/pipermail/binutils/2020-August/112746.html
+> Let's see what the maintainers there think, or if they have better
+> suggestions (or are willing to address this themselves). The issue
+> is pretty certainly not tied to LIVEPATCH, but rather to how much
+> padding space there is at the end of the .rodata section.
 
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- build-amd64-libvirt           6 libvirt-build            fail REGR. vs. 151777
- build-i386-libvirt            6 libvirt-build            fail REGR. vs. 151777
- build-arm64-libvirt           6 libvirt-build            fail REGR. vs. 151777
- build-armhf-libvirt           6 libvirt-build            fail REGR. vs. 151777
+Thanks for tracking that down!  I was also almost certain it was not a live=
+patch issue, although that was the easiest minimal test case that I could p=
+roduce.
 
-Tests which did not succeed, but are not blocking:
- test-arm64-arm64-libvirt      1 build-check(1)               blocked  n/a
- test-arm64-arm64-libvirt-qcow2  1 build-check(1)               blocked  n/a
- test-amd64-amd64-libvirt      1 build-check(1)               blocked  n/a
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 1 build-check(1) blocked n/a
- test-armhf-armhf-libvirt      1 build-check(1)               blocked  n/a
- test-amd64-amd64-libvirt-vhd  1 build-check(1)               blocked  n/a
- test-amd64-amd64-libvirt-pair  1 build-check(1)               blocked  n/a
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 1 build-check(1) blocked n/a
- test-armhf-armhf-libvirt-raw  1 build-check(1)               blocked  n/a
- test-amd64-i386-libvirt       1 build-check(1)               blocked  n/a
- test-arm64-arm64-libvirt-xsm  1 build-check(1)               blocked  n/a
- test-amd64-i386-libvirt-xsm   1 build-check(1)               blocked  n/a
- test-amd64-amd64-libvirt-xsm  1 build-check(1)               blocked  n/a
- test-amd64-i386-libvirt-pair  1 build-check(1)               blocked  n/a
+As a workaround for the Xen project, what do you think of forcing alignment=
+ on .buildid so that the tool is happy:
 
-version targeted for testing:
- libvirt              84bb5fd1ab2bce88e508d416f4bcea520c803ea8
-baseline version:
- libvirt              2c846fa6bcc11929c9fb857a22430fb9945654ad
+diff --git a/xen/arch/x86/xen.lds.S b/xen/arch/x86/xen.lds.S
+index 111edb5..712ffc8 100644
+--- a/xen/arch/x86/xen.lds.S
++++ b/xen/arch/x86/xen.lds.S
+@@ -161,6 +161,7 @@ SECTIONS
+        __note_gnu_build_id_end =3D .;
+   } :note :text
+ #elif defined(BUILD_ID_EFI)
++  . =3D ALIGN(4096);
+   DECL_SECTION(.buildid) {
+        __note_gnu_build_id_start =3D .;
+        *(.buildid)
 
-Last test of basis   151777  2020-07-10 04:19:19 Z   27 days
-Failing since        151818  2020-07-11 04:18:52 Z   26 days   27 attempts
-Testing same since   152502  2020-08-06 04:20:09 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrea Bolognani <abologna@redhat.com>
-  Balázs Meskó <meskobalazs@mailbox.org>
-  Bastien Orivel <bastien.orivel@diateam.net>
-  Bihong Yu <yubihong@huawei.com>
-  Binfeng Wu <wubinfeng@huawei.com>
-  Boris Fiuczynski <fiuczy@linux.ibm.com>
-  Côme Borsoi <fedora@borsoi.fr>
-  Daniel Henrique Barboza <danielhb413@gmail.com>
-  Daniel P. Berrange <berrange@redhat.com>
-  Daniel P. Berrangé <berrange@redhat.com>
-  Erik Skultety <eskultet@redhat.com>
-  Fedora Weblate Translation <i18n@lists.fedoraproject.org>
-  Han Han <hhan@redhat.com>
-  Hao Wang <wanghao232@huawei.com>
-  Jean-Baptiste Holcroft <jean-baptiste@holcroft.fr>
-  Jianan Gao <jgao@redhat.com>
-  Jin Yan <jinyan12@huawei.com>
-  Jiri Denemark <jdenemar@redhat.com>
-  Ján Tomko <jtomko@redhat.com>
-  Laine Stump <laine@redhat.com>
-  Liao Pingfang <liao.pingfang@zte.com.cn>
-  Martin Kletzander <mkletzan@redhat.com>
-  Michal Privoznik <mprivozn@redhat.com>
-  Nikolay Shirokovskiy <nshirokovskiy@virtuozzo.com>
-  Paulo de Rezende Pinatti <ppinatti@linux.ibm.com>
-  Pavel Hrdina <phrdina@redhat.com>
-  Peter Krempa <pkrempa@redhat.com>
-  Pino Toscano <ptoscano@redhat.com>
-  Pino Toscano <toscano.pino@tiscali.it>
-  Piotr Drąg <piotrdrag@gmail.com>
-  Prathamesh Chavan <pc44800@gmail.com>
-  Roman Bogorodskiy <bogorodskiy@gmail.com>
-  Ryan Schmidt <git@ryandesign.com>
-  Stefan Berger <stefanb@linux.ibm.com>
-  Szymon Scholz <szymonscholz@gmail.com>
-  Wang Xin <wangxinxin.wang@huawei.com>
-  Weblate <noreply@weblate.org>
-  Yang Hang <yanghang44@huawei.com>
-  Yi Wang <wang.yi59@zte.com.cn>
-  Yuri Chornoivan <yurchor@ukr.net>
-  Zheng Chuan <zhengchuan@huawei.com>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-arm64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-arm64                                                  pass    
- build-armhf                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          fail    
- build-arm64-libvirt                                          fail    
- build-armhf-libvirt                                          fail    
- build-i386-libvirt                                           fail    
- build-amd64-pvops                                            pass    
- build-arm64-pvops                                            pass    
- build-armhf-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           blocked 
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            blocked 
- test-amd64-amd64-libvirt-xsm                                 blocked 
- test-arm64-arm64-libvirt-xsm                                 blocked 
- test-amd64-i386-libvirt-xsm                                  blocked 
- test-amd64-amd64-libvirt                                     blocked 
- test-arm64-arm64-libvirt                                     blocked 
- test-armhf-armhf-libvirt                                     blocked 
- test-amd64-i386-libvirt                                      blocked 
- test-amd64-amd64-libvirt-pair                                blocked 
- test-amd64-i386-libvirt-pair                                 blocked 
- test-arm64-arm64-libvirt-qcow2                               blocked 
- test-armhf-armhf-libvirt-raw                                 blocked 
- test-amd64-amd64-libvirt-vhd                                 blocked 
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Not pushing.
-
-(No revision log; it would be 8907 lines long.)
+--
+Trammell
 
