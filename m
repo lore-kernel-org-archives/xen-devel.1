@@ -2,52 +2,56 @@ Return-Path: <SRS0=cbMO=BQ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.5 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-9.1 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CBDF9C433DF
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EF0ACC433E0
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:25 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9C12D22D05
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:24 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9C12D22D05
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id BE07222D05
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:25 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=pass (1024-bit key) header.d=trmm.net header.i=@trmm.net header.b="cAGhqfJR"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BE07222D05
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=trmm.net
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k3cCT-0002cQ-IX; Thu, 06 Aug 2020 09:28:37 +0000
+	id 1k3eKI-0007WN-1H; Thu, 06 Aug 2020 11:44:50 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=gxiU=BQ=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1k3cCS-0002cA-0K
- for xen-devel@lists.xenproject.org; Thu, 06 Aug 2020 09:28:36 +0000
-X-Inumbo-ID: 3c2c9161-dde8-40ea-813b-7b148645b323
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ (envelope-from <SRS0=775r=BQ=trmm.net=hudson@srs-us1.protection.inumbo.net>)
+ id 1k3eKG-0007WH-VD
+ for xen-devel@lists.xenproject.org; Thu, 06 Aug 2020 11:44:49 +0000
+X-Inumbo-ID: 28d2d612-df76-4d1a-9f34-5c38c085f630
+Received: from mail-40133.protonmail.ch (unknown [185.70.40.133])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3c2c9161-dde8-40ea-813b-7b148645b323;
- Thu, 06 Aug 2020 09:28:34 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 1D97AAE41;
- Thu,  6 Aug 2020 09:28:51 +0000 (UTC)
-Subject: [PATCH 2/3] x86: don't maintain compat M2P when !PV32
-From: Jan Beulich <jbeulich@suse.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <a2b8f0e9-77ea-6127-a25e-d8fd3dcbb866@suse.com>
-Message-ID: <4575f42b-a347-b34e-0032-e04668106a9b@suse.com>
-Date: Thu, 6 Aug 2020 11:28:36 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.11.0
+ id 28d2d612-df76-4d1a-9f34-5c38c085f630;
+ Thu, 06 Aug 2020 11:44:46 +0000 (UTC)
+Date: Thu, 06 Aug 2020 11:44:41 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=trmm.net;
+ s=protonmail; t=1596714285;
+ bh=KNAMclvymDk/FZJ4GGKyc5K4JCgXd7BWu3UZZXVnjNY=;
+ h=Date:To:From:Cc:Reply-To:Subject:In-Reply-To:References:From;
+ b=cAGhqfJRP7NQx7ae+o6KImXDmDJ/pI+WQjOH4Mv1q3Vw7NPe7xhapLtCwcEKRoxBF
+ kSE/m1RaFHs/zUd0Ovt5fDA0kq/IH8kLISgBsRytHtG1FrH8WFqT84nNHrAOzcovqG
+ ZRlFVaL8XIiPZOc1//vYsxR1N+To1RHxhXALRyxQ=
+To: Jan Beulich <jbeulich@suse.com>
+From: Trammell Hudson <hudson@trmm.net>
+Subject: Re: [RFC] efi/boot: Unified Xen executable for UEFI Secure Boot
+ support
+Message-ID: <FKRB6MJm-n6DwX0LoYfI4Ysny1U_xRbxvZn7ttLHGxpKTEnAmcoDMLsLsgKZGYaB2eVuIzoNQ6UPpsfiMlaRPW-7AIXQ9mqz_i9sF-tI2Ks=@trmm.net>
+In-Reply-To: <1bd2d79e-5bef-835c-f6cc-9fd367e8beb7@suse.com>
+References: <SQvDCuitxs8ZbVLJqpnPlbhTvIw_fMkZDetiBpJD-DID2X8EnTvReCaJgThJ8b-3kS9gHm3-HYRqNJk-k1cVYPIQf04R8uuhPjm9WNKzJh4=@trmm.net>
+ <1bd2d79e-5bef-835c-f6cc-9fd367e8beb7@suse.com>
 MIME-Version: 1.0
-In-Reply-To: <a2b8f0e9-77ea-6127-a25e-d8fd3dcbb866@suse.com>
 Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,353 +62,220 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Reply-To: Trammell Hudson <hudson@trmm.net>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Note that opt_pv32's declaration / #define need to be moved due to other
-header dependencies; in particular can asm-x86/mm.h not include
-asm-x86/pv/domain.h.
+On Thursday, August 6, 2020 9:57 AM, Jan Beulich <jbeulich@suse.com> wrote:
+> On 05.08.2020 19:20, Trammell Hudson wrote:
+> > This preliminary patch adds support for bundling the Xen hypervisor, xe=
+n.cfg,
+> > the Linux kernel, initrd and XSM into a single "unified" EFI executable=
+ that
+> > can be signed by sbsigntool for verification by UEFI Secure Boot. [...]
+>
+> Looks reasonable for a PoC, thanks, but needs cleaning up I think.
 
-While touching their definitions anyway, also adjust section placement
-of m2p_compat_vstart and compat_idle_pg_table_l2. Similarly, while
-putting init_xen_pae_l2_slots() inside #ifdef, also move it to a PV-only
-source file.
+Thanks for the comments.  It is very much a WIP and hopefully we can clean
+it up for merging.
 
-Suggested-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
----
-An alternative place for opt_pv32.h would seem to be asm-x86/config.h.
+> A couple of specific remarks / questions:
+>
+> [...]
+> > -   /* PE32+ Subsystem type */
+> > -   if (pe->FileHeader.Machine !=3D PE_HEADER_MACHINE_X64
+> > -   && pe->FileHeader.Machine !=3D PE_HEADER_MACHINE_ARM64
+> > -   && pe->FileHeader.Machine !=3D PE_HEADER_MACHINE_I386)
+> > -          return NULL;
+>
+> I don't think i386 should be recognized here, and of the two other
+> ones only the one matching the current target architecture should
+> be.
 
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -597,8 +597,10 @@ int arch_domain_create(struct domain *d,
-     }
-     d->arch.emulation_flags = emflags;
- 
-+#ifdef CONFIG_PV32
-     HYPERVISOR_COMPAT_VIRT_START(d) =
-         is_pv_domain(d) ? __HYPERVISOR_COMPAT_VIRT_START : ~0u;
-+#endif
- 
-     if ( (rc = paging_domain_init(d)) != 0 )
-         goto fail;
---- a/xen/arch/x86/mm.c
-+++ b/xen/arch/x86/mm.c
-@@ -1427,13 +1427,6 @@ static bool pae_xen_mappings_check(const
-     return true;
- }
- 
--void init_xen_pae_l2_slots(l2_pgentry_t *l2t, const struct domain *d)
--{
--    memcpy(&l2t[COMPAT_L2_PAGETABLE_FIRST_XEN_SLOT(d)],
--           compat_idle_pg_table_l2,
--           COMPAT_L2_PAGETABLE_XEN_SLOTS(d) * sizeof(*l2t));
--}
--
- static int promote_l2_table(struct page_info *page, unsigned long type)
- {
-     struct domain *d = page_get_owner(page);
---- a/xen/arch/x86/pv/mm.c
-+++ b/xen/arch/x86/pv/mm.c
-@@ -128,6 +128,15 @@ bool pv_map_ldt_shadow_page(unsigned int
-     return true;
- }
- 
-+#ifdef CONFIG_PV32
-+void init_xen_pae_l2_slots(l2_pgentry_t *l2t, const struct domain *d)
-+{
-+    memcpy(&l2t[COMPAT_L2_PAGETABLE_FIRST_XEN_SLOT(d)],
-+           compat_idle_pg_table_l2,
-+           COMPAT_L2_PAGETABLE_XEN_SLOTS(d) * sizeof(*l2t));
-+}
-+#endif
-+
- /*
-  * Local variables:
-  * mode: C
---- a/xen/arch/x86/x86_64/compat/mm.c
-+++ b/xen/arch/x86/x86_64/compat/mm.c
-@@ -103,6 +103,9 @@ int compat_arch_memory_op(unsigned long
-             .max_mfn = MACH2PHYS_COMPAT_NR_ENTRIES(d) - 1
-         };
- 
-+        if ( !opt_pv32 )
-+            return -EOPNOTSUPP;
-+
-         if ( copy_to_guest(arg, &mapping, 1) )
-             rc = -EFAULT;
- 
-@@ -115,6 +118,9 @@ int compat_arch_memory_op(unsigned long
-         unsigned long limit;
-         compat_pfn_t last_mfn;
- 
-+        if ( !opt_pv32 )
-+            return -EOPNOTSUPP;
-+
-         if ( copy_from_guest(&xmml, arg, 1) )
-             return -EFAULT;
- 
---- a/xen/arch/x86/x86_64/mm.c
-+++ b/xen/arch/x86/x86_64/mm.c
-@@ -40,9 +40,11 @@ EMIT_FILE;
- #include <asm/mem_sharing.h>
- #include <public/memory.h>
- 
--unsigned int __read_mostly m2p_compat_vstart = __HYPERVISOR_COMPAT_VIRT_START;
-+#ifdef CONFIG_PV32
-+unsigned int __initdata m2p_compat_vstart = __HYPERVISOR_COMPAT_VIRT_START;
- 
--l2_pgentry_t *compat_idle_pg_table_l2;
-+l2_pgentry_t *__read_mostly compat_idle_pg_table_l2;
-+#endif
- 
- void *do_page_walk(struct vcpu *v, unsigned long addr)
- {
-@@ -218,7 +220,8 @@ static void destroy_compat_m2p_mapping(s
- {
-     unsigned long i, smap = info->spfn, emap = info->spfn;
- 
--    if ( smap > ((RDWR_COMPAT_MPT_VIRT_END - RDWR_COMPAT_MPT_VIRT_START) >> 2) )
-+    if ( !opt_pv32 ||
-+         smap > ((RDWR_COMPAT_MPT_VIRT_END - RDWR_COMPAT_MPT_VIRT_START) >> 2) )
-         return;
- 
-     if ( emap > ((RDWR_COMPAT_MPT_VIRT_END - RDWR_COMPAT_MPT_VIRT_START) >> 2) )
-@@ -315,10 +318,10 @@ static void destroy_m2p_mapping(struct m
-  */
- static int setup_compat_m2p_table(struct mem_hotadd_info *info)
- {
-+    int err = 0;
-     unsigned long i, smap, emap, epfn = info->epfn;
-     mfn_t mfn;
-     unsigned int n;
--    int err = 0;
- 
-     smap = info->spfn & (~((1UL << (L2_PAGETABLE_SHIFT - 2)) -1));
- 
-@@ -326,7 +329,8 @@ static int setup_compat_m2p_table(struct
-      * Notice: For hot-added memory, only range below m2p_compat_vstart
-      * will be filled up (assuming memory is discontinous when booting).
-      */
--    if   ((smap > ((RDWR_COMPAT_MPT_VIRT_END - RDWR_COMPAT_MPT_VIRT_START) >> 2)) )
-+    if ( !opt_pv32 ||
-+         (smap > ((RDWR_COMPAT_MPT_VIRT_END - RDWR_COMPAT_MPT_VIRT_START) >> 2)) )
-         return 0;
- 
-     if ( epfn > ((RDWR_COMPAT_MPT_VIRT_END - RDWR_COMPAT_MPT_VIRT_START) >> 2) )
-@@ -368,6 +372,7 @@ static int setup_compat_m2p_table(struct
-     }
- #undef CNT
- #undef MFN
-+
-     return err;
- }
- 
-@@ -609,17 +614,24 @@ void __init paging_init(void)
- #undef MFN
- 
-     /* Create user-accessible L2 directory to map the MPT for compat guests. */
--    if ( (l2_ro_mpt = alloc_xen_pagetable()) == NULL )
--        goto nomem;
--    compat_idle_pg_table_l2 = l2_ro_mpt;
--    clear_page(l2_ro_mpt);
--    /* Allocate and map the compatibility mode machine-to-phys table. */
--    mpt_size = (mpt_size >> 1) + (1UL << (L2_PAGETABLE_SHIFT - 1));
--    if ( mpt_size > RDWR_COMPAT_MPT_VIRT_END - RDWR_COMPAT_MPT_VIRT_START )
--        mpt_size = RDWR_COMPAT_MPT_VIRT_END - RDWR_COMPAT_MPT_VIRT_START;
--    mpt_size &= ~((1UL << L2_PAGETABLE_SHIFT) - 1UL);
--    if ( (m2p_compat_vstart + mpt_size) < MACH2PHYS_COMPAT_VIRT_END )
--        m2p_compat_vstart = MACH2PHYS_COMPAT_VIRT_END - mpt_size;
-+    if ( opt_pv32 )
-+    {
-+        if ( (l2_ro_mpt = alloc_xen_pagetable()) == NULL )
-+            goto nomem;
-+        compat_idle_pg_table_l2 = l2_ro_mpt;
-+        clear_page(l2_ro_mpt);
-+
-+        /* Allocate and map the compatibility mode machine-to-phys table. */
-+        mpt_size = (mpt_size >> 1) + (1UL << (L2_PAGETABLE_SHIFT - 1));
-+        if ( mpt_size > RDWR_COMPAT_MPT_VIRT_END - RDWR_COMPAT_MPT_VIRT_START )
-+            mpt_size = RDWR_COMPAT_MPT_VIRT_END - RDWR_COMPAT_MPT_VIRT_START;
-+        mpt_size &= ~((1UL << L2_PAGETABLE_SHIFT) - 1UL);
-+        if ( (m2p_compat_vstart + mpt_size) < MACH2PHYS_COMPAT_VIRT_END )
-+            m2p_compat_vstart = MACH2PHYS_COMPAT_VIRT_END - mpt_size;
-+    }
-+    else
-+        mpt_size = 0;
-+
- #define MFN(x) (((x) << L2_PAGETABLE_SHIFT) / sizeof(unsigned int))
- #define CNT ((sizeof(*frame_table) & -sizeof(*frame_table)) / \
-              sizeof(*compat_machine_to_phys_mapping))
-@@ -845,23 +857,24 @@ void __init subarch_init_memory(void)
-                 mfn_to_page(_mfn(m2p_start_mfn + i)), SHARE_ro);
-     }
- 
--    for ( v  = RDWR_COMPAT_MPT_VIRT_START;
--          v != RDWR_COMPAT_MPT_VIRT_END;
--          v += 1 << L2_PAGETABLE_SHIFT )
--    {
--        l3e = l3e_from_l4e(idle_pg_table[l4_table_offset(v)],
--                           l3_table_offset(v));
--        if ( !(l3e_get_flags(l3e) & _PAGE_PRESENT) )
--            continue;
--        l2e = l2e_from_l3e(l3e, l2_table_offset(v));
--        if ( !(l2e_get_flags(l2e) & _PAGE_PRESENT) )
--            continue;
--        m2p_start_mfn = l2e_get_pfn(l2e);
-+    if ( opt_pv32 )
-+        for ( v  = RDWR_COMPAT_MPT_VIRT_START;
-+              v != RDWR_COMPAT_MPT_VIRT_END;
-+              v += 1 << L2_PAGETABLE_SHIFT )
-+        {
-+            l3e = l3e_from_l4e(idle_pg_table[l4_table_offset(v)],
-+                               l3_table_offset(v));
-+            if ( !(l3e_get_flags(l3e) & _PAGE_PRESENT) )
-+                continue;
-+            l2e = l2e_from_l3e(l3e, l2_table_offset(v));
-+            if ( !(l2e_get_flags(l2e) & _PAGE_PRESENT) )
-+                continue;
-+            m2p_start_mfn = l2e_get_pfn(l2e);
- 
--        for ( i = 0; i < L1_PAGETABLE_ENTRIES; i++ )
--            share_xen_page_with_privileged_guests(
--                mfn_to_page(_mfn(m2p_start_mfn + i)), SHARE_ro);
--    }
-+            for ( i = 0; i < L1_PAGETABLE_ENTRIES; i++ )
-+                share_xen_page_with_privileged_guests(
-+                    mfn_to_page(_mfn(m2p_start_mfn + i)), SHARE_ro);
-+        }
- 
-     /* Mark all of direct map NX if hardware supports it. */
-     if ( !cpu_has_nx )
-@@ -933,6 +946,9 @@ long subarch_memory_op(unsigned long cmd
-         break;
- 
-     case XENMEM_machphys_compat_mfn_list:
-+        if ( !opt_pv32 )
-+            return -EOPNOTSUPP;
-+
-         if ( copy_from_guest(&xmml, arg, 1) )
-             return -EFAULT;
- 
---- a/xen/include/asm-x86/config.h
-+++ b/xen/include/asm-x86/config.h
-@@ -142,7 +142,7 @@ extern unsigned char boot_edid_info[128]
-  *  0xffff82c000000000 - 0xffff82cfffffffff [64GB,  2^36 bytes, PML4:261]
-  *    vmap()/ioremap()/fixmap area.
-  *  0xffff82d000000000 - 0xffff82d03fffffff [1GB,   2^30 bytes, PML4:261]
-- *    Compatibility machine-to-phys translation table.
-+ *    Compatibility machine-to-phys translation table (CONFIG_PV32).
-  *  0xffff82d040000000 - 0xffff82d07fffffff [1GB,   2^30 bytes, PML4:261]
-  *    Xen text, static data, bss.
- #ifndef CONFIG_BIGMEM
-@@ -246,9 +246,18 @@ extern unsigned char boot_edid_info[128]
- 
- #ifndef __ASSEMBLY__
- 
-+#ifdef CONFIG_PV32
-+
- /* This is not a fixed value, just a lower limit. */
- #define __HYPERVISOR_COMPAT_VIRT_START 0xF5800000
- #define HYPERVISOR_COMPAT_VIRT_START(d) ((d)->arch.hv_compat_vstart)
-+
-+#else
-+
-+#define HYPERVISOR_COMPAT_VIRT_START(d) ((void)(d), 0)
-+
-+#endif
-+
- #define MACH2PHYS_COMPAT_VIRT_START    HYPERVISOR_COMPAT_VIRT_START
- #define MACH2PHYS_COMPAT_VIRT_END      0xFFE00000
- #define MACH2PHYS_COMPAT_NR_ENTRIES(d) \
---- a/xen/include/asm-x86/domain.h
-+++ b/xen/include/asm-x86/domain.h
-@@ -307,7 +307,9 @@ struct arch_domain
- {
-     struct page_info *perdomain_l3_pg;
- 
-+#ifdef CONFIG_PV32
-     unsigned int hv_compat_vstart;
-+#endif
- 
-     /* Maximum physical-address bitwidth supported by this guest. */
-     unsigned int physaddr_bitsize;
---- a/xen/include/asm-x86/mm.h
-+++ b/xen/include/asm-x86/mm.h
-@@ -42,8 +42,12 @@
- #define _PGT_validated    PG_shift(6)
- #define PGT_validated     PG_mask(1, 6)
-  /* PAE only: is this an L2 page directory containing Xen-private mappings? */
-+#ifdef CONFIG_PV32
- #define _PGT_pae_xen_l2   PG_shift(7)
- #define PGT_pae_xen_l2    PG_mask(1, 7)
-+#else
-+#define PGT_pae_xen_l2    0
-+#endif
- /* Has this page been *partially* validated for use as its current type? */
- #define _PGT_partial      PG_shift(8)
- #define PGT_partial       PG_mask(1, 8)
-@@ -494,15 +498,39 @@ extern paddr_t mem_hotplug;
- #define SHARED_M2P_ENTRY         (~0UL - 1UL)
- #define SHARED_M2P(_e)           ((_e) == SHARED_M2P_ENTRY)
- 
--#define compat_machine_to_phys_mapping ((unsigned int *)RDWR_COMPAT_MPT_VIRT_START)
-+#ifdef CONFIG_PV32
-+
-+extern int8_t opt_pv32;
-+
-+# define compat_machine_to_phys_mapping ((unsigned int *)RDWR_COMPAT_MPT_VIRT_START)
-+
-+# define set_compat_m2p(mfn, entry) \
-+    ((void)(!opt_pv32 || \
-+            (mfn) >= (RDWR_COMPAT_MPT_VIRT_END - RDWR_COMPAT_MPT_VIRT_START) / 4 || \
-+            (compat_machine_to_phys_mapping[mfn] = (entry))))
-+
-+#else /* !CONFIG_PV32 */
-+
-+# define opt_pv32 false
-+
-+/*
-+ * Declare the symbol such that (dead) code referencing it can be built
-+ * without a lot of #ifdef-ary, but mark it fully const and don't define
-+ * this symbol anywhere (relying on DCE by the compiler).
-+ */
-+extern const unsigned int *const compat_machine_to_phys_mapping;
-+
-+# define set_compat_m2p(mfn, entry)
-+
-+#endif /* CONFIG_PV32 */
-+
- #define _set_gpfn_from_mfn(mfn, pfn) ({                        \
-     struct domain *d = page_get_owner(mfn_to_page(_mfn(mfn))); \
-     unsigned long entry = (d && (d == dom_cow)) ?              \
-         SHARED_M2P_ENTRY : (pfn);                              \
--    ((void)((mfn) >= (RDWR_COMPAT_MPT_VIRT_END - RDWR_COMPAT_MPT_VIRT_START) / 4 || \
--            (compat_machine_to_phys_mapping[(mfn)] = (unsigned int)(entry))), \
--     machine_to_phys_mapping[(mfn)] = (entry));                \
--    })
-+    set_compat_m2p(mfn, (unsigned int)(entry));                \
-+    machine_to_phys_mapping[mfn] = (entry);                    \
-+})
- 
- /*
-  * Disable some users of set_gpfn_from_mfn() (e.g., free_heap_pages()) until
---- a/xen/include/asm-x86/pv/domain.h
-+++ b/xen/include/asm-x86/pv/domain.h
-@@ -23,12 +23,6 @@
- 
- #include <xen/sched.h>
- 
--#ifdef CONFIG_PV32
--extern int8_t opt_pv32;
--#else
--# define opt_pv32 false
--#endif
--
- /*
-  * PCID values for the address spaces of 64-bit pv domains:
-  *
+That's a good point.  There isn't much point in proceeding if Xen
+can't boot the executable anyway...
 
+
+> > -   if ( pe->FileHeader.NumberOfSections > 96 )
+> > -          return NULL;
+>
+> What's this 96 about?
+
+Not sure, to be honest.  The PE parsing code is directly copied
+from systemd-boot (including the bit about ARM and i386):
+
+https://github.com/systemd/systemd/blob/07d5ed536ec0a76b08229c7a80b910cb9ac=
+af6b1/src/boot/efi/pe.c#L83
+
+> Overall I think it might help if this PE parsing code (if UEFI
+> doesn't offer a protocol to do it for us) was put into its own
+> source file.
+
+I tried to putting it into a separate file and ran into link issues,
+seems that it needs to be mentioned in both arch/x86/Makefile and
+arch/x86/pe/Makefile, so this was a "just make it work" for the PoC.
+Now that it is working, I'll go back to see if I can figure out the
+makefile magic.
+
+> I also wonder if it wouldn't better be optional
+> (i.e. depend on a Kconfig option).
+
+My preference would be to have it always on so that any Xen
+executable can be unified and signed by the end user, rather than
+requiring the user to do a separate build from source. For instance,
+the Qubes install DVD has a normal xen.efi, but I can generate my own
+signed version for my system by unifying it with the kernel and
+initrd.
+
+> > -   if ( efi_rs->GetVariable(L"SecureBoot", (EFI_GUID *)&global_guid, N=
+ULL, &size, buf) !=3D EFI_SUCCESS )
+> > -          return false;
+> > -   return buf[0] !=3D 0;
+>
+> I.e. "SecureBoot=3DN" still means "enabled"?
+
+Maybe? UEFI 2.8, section 3.3 "Global Variables" says for SecureBoot:
+
+"Whether the platform firmware is operating in Secure boot mode (1) or not =
+(0). All other values
+are reserved. Should be treated as read-only."
+
+> [...]
+> "secure" depending merely on an env var, how is this logic compatible
+> with the shim model? You need to keep the other approach working.
+
+Oops. Yes, I broke the shim model when booting in non-unified way with
+SecureBoot enabled.
+
+> Also, considering kernel and initrd are embedded, is there really a
+> strict need for a config file? It would seem to me that you could
+> boot the system fine without.
+
+The config file is still necessary for Xen options (console, etc) as
+well as the kernel command line.
+
+> [...]
+> Once you know whether you're dealing with a "unified" image, you
+> shouldn't have a need to make logic dependent upon read_section()
+> finding a particular section: Either you find all of them (and
+> don't even try to interpret respective config file settings), or
+> you read everything from disk.
+
+Another option that might be better would be to have a "special"
+file name -- if the config file has a leading "." then read_file()
+could do the PE section search instead of going to the disk.
+That way the config file could have some things on disk, and
+some things unified.
+
+For instance, microcode doesn't (always) need to be signed, since
+it is already signed and encrypted by Intel.  Many OEM's leave
+the ucode regions of flash unprotected by bootguard, which allows
+the end user to update the microcode without requiring an OEM
+signature.  This does potentially leave open some rollback
+attacks, so I'm not 100% positive it is a good idea (although the
+firmware volume should still be measured into the TPM and things
+like SGX include the microcode version in the attestation).
+
+
+> > --- /dev/null
+> > +++ b/xen/scripts/unify-xen
+> > @@ -0,0 +1,68 @@
+> > +#!/bin/bash
+> > +# Merge a Linux kernel, initrd and commandline into xen.efi to produce=
+ a single signed
+> > +# EFI executable.
+> > +#
+> > +# turn off "expressions don't expand in single quotes"
+> > +# and "can't follow non-constant sources"
+> > +# shellcheck disable=3DSC2016 disable=3DSC1090
+>
+> What are these three lines about?
+
+Those are hold-overs from the safeboot script that I borrowed this from.
+When linting the script with shellcheck, it complains about sourcing
+files based on environment variables, and some code that has '$' in
+single quotes.
+
+This script is definitely NOT ready for inclusion and is just an example
+of how to use objcopy to build the unified image.  A more full-featured
+unify script could take the xen.cfg file and use it to locate the kernel,
+initrd, xsm, ucode, etc instead of hard coded command line arguments.
+
+I'm surprised that systemd-boot doesn't have a proper script; their
+tutorials show how to run a raw objcopy command, which is about as
+user unfriendly as possible...
+
+> [...]
+> > +# Xen goes up to a pad at 00400000
+>
+> "pad at 00400000"?
+
+$ objdump -h xen.efi
+
+xen.efi:     file format pei-x86-64
+
+Sections:
+Idx Name          Size      VMA               LMA               File off  A=
+lgn
+[...]
+  8 .pad          00400000  ffff82d040c00000  ffff82d040c00000  00000000  2=
+**2
+                  ALLOC
+
+There is this pad at the end of the image; I wasn't sure if it was importan=
+t,
+so I had the script deposit the extra sections after it.  Hopefully there i=
+s
+someway to automatically figure out the correct address for the additional
+segments.
+
+> > +XEN=3D"$1"
+> > +CONFIG=3D"$2"
+> > +KERNEL=3D"$3"
+> > +RAMDISK=3D"$4"
+>
+> What about ucode and xsm policy?
+
+Yeah... Did I mention this is a total hack?
+
+It looks like microcode is handled in efi_arch_cfg_file_late(),
+so it will need to be updated.  If the read_file() change is made,
+then it would automatically do the right thing.
+
+>
+> > +objcopy \
+> > -   --add-section .kernel=3D"$KERNEL" \
+> > -   --add-section .ramdisk=3D"$RAMDISK" \
+> > -   --add-section .config=3D"$CONFIG" \
+> > -   --change-section-vma .config=3D0xffff82d041000000 \
+> > -   --change-section-vma .kernel=3D0xffff82d041010000 \
+> > -   --change-section-vma .ramdisk=3D0xffff82d042000000 \
+>
+> Of course these hard coded numbers will be eliminated in the
+> long run?
+
+Ideally.  We could try to parse out the address based on the objdump output=
+,
+although oddly systemd-boot has hardcoded ones as well.
+
+[...]
+> > -   warn "$OUTDIR/linux.efi: signature failed! Try $try."
+> >     +done
+>
+> Why the retries? (Also leftover "linux.efi" in the warning?)
+
+The sbsign could be moved into a separate script or example.
+
+The retries in the safeboot script are because this happens after
+the dm-verity hashes have been computed, which takes a while,
+so it is a better user experience to give them another chance if
+they mis-type their signing key password (or haven't yet plugged in
+the yubikey).
+
+Thanks again for the comments!  I'm really hopeful that we can have
+Xen interoperating with UEFI SecureBoot sometime soon!
+
+--
+Trammell
 
