@@ -6,46 +6,51 @@ X-Spam-Status: No, score=-7.0 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,
 	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 96A3BC433E0
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F2297C433E3
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:08 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 72C6E22D03
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:07 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 72C6E22D03
+	by mail.kernel.org (Postfix) with ESMTPS id CFF2922D02
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:08 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CFF2922D02
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k3ce9-0005c9-NG; Thu, 06 Aug 2020 09:57:13 +0000
+	id 1k3ZsY-0004UI-K8; Thu, 06 Aug 2020 06:59:54 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=gxiU=BQ=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1k3ce7-0005c4-SN
- for xen-devel@lists.xenproject.org; Thu, 06 Aug 2020 09:57:11 +0000
-X-Inumbo-ID: 82258e23-b800-4150-b2ed-01af3552afdf
+ id 1k3ZsY-0004UD-8T
+ for xen-devel@lists.xenproject.org; Thu, 06 Aug 2020 06:59:54 +0000
+X-Inumbo-ID: d7fcf635-7a57-4d5f-a186-bd9bab7e41ba
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 82258e23-b800-4150-b2ed-01af3552afdf;
- Thu, 06 Aug 2020 09:57:11 +0000 (UTC)
+ id d7fcf635-7a57-4d5f-a186-bd9bab7e41ba;
+ Thu, 06 Aug 2020 06:59:53 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 7632EAC12;
- Thu,  6 Aug 2020 09:57:27 +0000 (UTC)
-Subject: Re: [PATCH v4 07/14] iommu: make map, unmap and flush all take both
- an order and a count
-To: Paul Durrant <paul@xen.org>
-References: <20200804134209.8717-1-paul@xen.org>
- <20200804134209.8717-8-paul@xen.org>
+ by mx2.suse.de (Postfix) with ESMTP id 6A892ABCE;
+ Thu,  6 Aug 2020 07:00:09 +0000 (UTC)
+Subject: Re: [RFC PATCH V1 01/12] hvm/ioreq: Make x86's IOREQ feature common
+To: Stefano Stabellini <sstabellini@kernel.org>
+References: <1596478888-23030-1-git-send-email-olekstysh@gmail.com>
+ <1596478888-23030-2-git-send-email-olekstysh@gmail.com>
+ <000c01d66a33$2bd56510$83802f30$@xen.org>
+ <9f83a7ed-ca97-449f-c7b9-a1140644abe9@gmail.com>
+ <f0c32cfe-5c33-30ae-b08a-3d72e935745a@xen.org>
+ <alpine.DEB.2.21.2008041105510.5748@sstabellini-ThinkPad-T480s>
+ <2ab4c567-8efa-1b9d-ab00-4ea7e1ab323e@suse.com>
+ <alpine.DEB.2.21.2008051253230.5748@sstabellini-ThinkPad-T480s>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <2765087f-4168-191d-c547-cbc2e74d3fee@suse.com>
-Date: Thu, 6 Aug 2020 11:57:12 +0200
+Message-ID: <51e30c1c-6b19-e646-fdc4-683b3197817a@suse.com>
+Date: Thu, 6 Aug 2020 08:59:54 +0200
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.11.0
 MIME-Version: 1.0
-In-Reply-To: <20200804134209.8717-8-paul@xen.org>
+In-Reply-To: <alpine.DEB.2.21.2008051253230.5748@sstabellini-ThinkPad-T480s>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -59,60 +64,63 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Kevin Tian <kevin.tian@intel.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Paul Durrant <pdurrant@amazon.com>, Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>,
- Jun Nakajima <jun.nakajima@intel.com>, xen-devel@lists.xenproject.org,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Cc: 'Kevin Tian' <kevin.tian@intel.com>, Julien Grall <julien@xen.org>,
+ 'Wei Liu' <wl@xen.org>, paul@xen.org,
+ 'Andrew Cooper' <andrew.cooper3@citrix.com>,
+ 'Ian Jackson' <ian.jackson@eu.citrix.com>,
+ 'George Dunlap' <george.dunlap@citrix.com>, 'Tim Deegan' <tim@xen.org>,
+ Oleksandr <olekstysh@gmail.com>,
+ 'Oleksandr Tyshchenko' <oleksandr_tyshchenko@epam.com>,
+ 'Julien Grall' <julien.grall@arm.com>, 'Jun Nakajima' <jun.nakajima@intel.com>,
+ xen-devel@lists.xenproject.org,
+ =?UTF-8?B?J1JvZ2VyIFBhdSBNb25uw6kn?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 04.08.2020 15:42, Paul Durrant wrote:
-> From: Paul Durrant <pdurrant@amazon.com>
+On 06.08.2020 02:37, Stefano Stabellini wrote:
+> What should do_trap_stage2_abort_guest do on IO_RETRY? Simply return
+> early and let the scheduler do its job? Something like:
 > 
-> At the moment iommu_map() and iommu_unmap() take a page order but not a
-> count, whereas iommu_iotlb_flush() takes a count but not a page order.
-> This patch simply makes them consistent with each other.
+>             enum io_state state = try_handle_mmio(regs, hsr, gpa);
+> 
+>             switch ( state )
+>             {
+>             case IO_ABORT:
+>                 goto inject_abt;
+>             case IO_HANDLED:
+>                 advance_pc(regs, hsr);
+>                 return;
+>             case IO_RETRY:
+>                 /* finish later */
+>                 return;
+>             case IO_UNHANDLED:
+>                 /* IO unhandled, try another way to handle it. */
+>                 break;
+>             default:
+>                 ASSERT_UNREACHABLE();
+>             }
+> 
+> Then, xen/arch/arm/ioreq.c:handle_mmio() gets called by
+> handle_hvm_io_completion() after QEMU completes the emulation. Today,
+> handle_mmio just sets the user register with the read value.
+> 
+> But it would be better if it called again the original function
+> do_trap_stage2_abort_guest to actually retry the original operation.
+> This time do_trap_stage2_abort_guest calls try_handle_mmio() and gets
+> IO_HANDLED instead of IO_RETRY, thus, it will advance_pc (the program
+> counter) completing the handling of this instruction.
+> 
+> The user register with the read value could be set by try_handle_mmio if
+> try_fwd_ioserv returns IO_HANDLED instead of IO_RETRY.
+> 
+> Is that how the state machine is expected to work?
 
-Why can't we do with just a count, where order gets worked out by
-functions knowing how to / wanting to deal with higher order pages?
-
-> --- a/xen/arch/x86/mm/p2m-ept.c
-> +++ b/xen/arch/x86/mm/p2m-ept.c
-> @@ -843,7 +843,7 @@ out:
->           need_modify_vtd_table )
->      {
->          if ( iommu_use_hap_pt(d) )
-> -            rc = iommu_iotlb_flush(d, _dfn(gfn), (1u << order),
-> +            rc = iommu_iotlb_flush(d, _dfn(gfn), (1u << order), 1,
-
-Forgot to drop the "1 << "? (There are then I think two more instances
-further down.)
-
-> --- a/xen/common/memory.c
-> +++ b/xen/common/memory.c
-> @@ -851,12 +851,12 @@ int xenmem_add_to_physmap(struct domain *d, struct xen_add_to_physmap *xatp,
->  
->          this_cpu(iommu_dont_flush_iotlb) = 0;
->  
-> -        ret = iommu_iotlb_flush(d, _dfn(xatp->idx - done), done,
-> +        ret = iommu_iotlb_flush(d, _dfn(xatp->idx - done), 0, done,
-
-Arguments wrong way round? (This risk of inverting their order is
-one of the primary reasons why I think we want just a count.) I'm
-also uncertain about the use of 0 vs PAGE_ORDER_4K here.
-
->                                  IOMMU_FLUSHF_added | IOMMU_FLUSHF_modified);
->          if ( unlikely(ret) && rc >= 0 )
->              rc = ret;
->  
-> -        ret = iommu_iotlb_flush(d, _dfn(xatp->gpfn - done), done,
-> +        ret = iommu_iotlb_flush(d, _dfn(xatp->gpfn - done), 0, done,
-
-Same here then.
+I think so. Just because it has taken us quite some time (years) on
+the x86 side to get reasonably close to how hardware would behave
+(I think we're still not fully there): The re-execution path needs
+to make sure it observes exactly the same machine state as the
+original path did. In particular changes to memory (by another vCPU)
+must not be observed.
 
 Jan
 
