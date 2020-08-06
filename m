@@ -2,54 +2,74 @@ Return-Path: <SRS0=cbMO=BQ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.5 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-9.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8757CC433E1
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B67CCC433DF
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:14 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6461622D03
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:13 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6461622D03
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 88E6D22D06
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:14 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="v86h2BDL"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 88E6D22D06
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k3cCs-0002iG-St; Thu, 06 Aug 2020 09:29:02 +0000
+	id 1k3czS-0007YK-PH; Thu, 06 Aug 2020 10:19:14 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=gxiU=BQ=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1k3cCr-0002i4-G8
- for xen-devel@lists.xenproject.org; Thu, 06 Aug 2020 09:29:01 +0000
-X-Inumbo-ID: c422bb10-8cea-499d-896f-e1bfa38e0de2
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ (envelope-from <SRS0=dZxa=BQ=xen.org=julien@srs-us1.protection.inumbo.net>)
+ id 1k3czR-0007YF-DH
+ for xen-devel@lists.xenproject.org; Thu, 06 Aug 2020 10:19:13 +0000
+X-Inumbo-ID: b1ca73ca-bc6a-4c02-ba21-a6d2383a8217
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id c422bb10-8cea-499d-896f-e1bfa38e0de2;
- Thu, 06 Aug 2020 09:29:00 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 5FD1FB66B;
- Thu,  6 Aug 2020 09:29:17 +0000 (UTC)
-Subject: [PATCH 3/3] x86: don't override INVALID_M2P_ENTRY with
- SHARED_M2P_ENTRY
-From: Jan Beulich <jbeulich@suse.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <a2b8f0e9-77ea-6127-a25e-d8fd3dcbb866@suse.com>
-Message-ID: <1d83fd35-6ea5-289c-d8db-029c50957f85@suse.com>
-Date: Thu, 6 Aug 2020 11:29:02 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.11.0
+ id b1ca73ca-bc6a-4c02-ba21-a6d2383a8217;
+ Thu, 06 Aug 2020 10:19:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=SmE88vg8iPkyIESyDSppIYWzS5C1Aj/g36wK5TIZsdc=; b=v86h2BDL04C1eUr5+lM5gLvMqi
+ D5rKp0d9mWTfWaGNISqbS+IPwFDMvaCUITsL2ROfOXhM18F9ODF3o9GeqD0j7zXbV9nomteQaQCP2
+ NV3ptGvwc4cugGwBJcQdjevy/n1iTtLDhMABALzSQhJM3sxw/xFRVjbIVbx2k3hJaiZE=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1k3czH-0007dz-2G; Thu, 06 Aug 2020 10:19:03 +0000
+Received: from [54.239.6.186] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1k3czG-0007Jv-MQ; Thu, 06 Aug 2020 10:19:02 +0000
+Subject: Re: [RFC PATCH V1 04/12] xen/arm: Introduce arch specific bits for
+ IOREQ/DM features
+To: Oleksandr <olekstysh@gmail.com>
+References: <1596478888-23030-1-git-send-email-olekstysh@gmail.com>
+ <1596478888-23030-5-git-send-email-olekstysh@gmail.com>
+ <alpine.DEB.2.21.2008041327110.5748@sstabellini-ThinkPad-T480s>
+ <8e8a394c-bd2a-4444-9f4b-e022c59e0f81@xen.org>
+ <ba4069dd-cc87-921b-6b52-dc51ff7bb13d@gmail.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <977d80d8-84b5-00dc-7ade-fab38a6ec84a@xen.org>
+Date: Thu, 6 Aug 2020 11:19:00 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
+ Gecko/20100101 Thunderbird/68.11.0
 MIME-Version: 1.0
-In-Reply-To: <a2b8f0e9-77ea-6127-a25e-d8fd3dcbb866@suse.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+In-Reply-To: <ba4069dd-cc87-921b-6b52-dc51ff7bb13d@gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,37 +80,120 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+ Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>,
+ xen-devel@lists.xenproject.org, Daniel De Graaf <dgdegra@tycho.nsa.gov>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-While in most cases code ahead of the invocation of set_gpfn_from_mfn()
-deals with shared pages, at least in set_typed_p2m_entry() I can't spot
-such handling (it's entirely possible there's code missing there). Let's
-try to play safe and add an extra check.
+Hi,
 
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
+On 05/08/2020 16:41, Oleksandr wrote:
+> 
+> On 05.08.20 12:32, Julien Grall wrote:
+> 
+> Hi Julien.
+> 
+>> Hi Stefano,
+>>
+>> On 05/08/2020 00:22, Stefano Stabellini wrote:
+>>> On Mon, 3 Aug 2020, Oleksandr Tyshchenko wrote:
+>>>> From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+>>>>
+>>>> This patch makes possible to forward Guest MMIO accesses
+>>>> to a device emulator on Arm and enables that support for
+>>>> Arm64.
+>>>>
+>>>> Also update XSM code a bit to let DM op be used on Arm.
+>>>> New arch DM op will be introduced in the follow-up patch.
+>>>>
+>>>> Please note, at the moment build on Arm32 is broken
+>>>> (see cmpxchg usage in hvm_send_buffered_ioreq()) if someone
+>>>
+>>> Speaking of buffered_ioreq, if I recall correctly, they were only used
+>>> for VGA-related things on x86. It looks like it is still true.
+>>>
+>>> If so, do we need it on ARM? Note that I don't think we can get rid of
+>>> it from the interface as it is baked into ioreq, but it might be
+>>> possible to have a dummy implementation on ARM. Or maybe not: looking at
+>>> xen/common/hvm/ioreq.c it looks like it would be difficult to
+>>> disentangle bufioreq stuff from the rest of the code.
+>>
+>> We possibly don't need it right now. However, this could possibly be 
+>> used in the future (e.g. virtio notification doorbell).
+>>
+>>>> @@ -2275,6 +2282,16 @@ static void check_for_vcpu_work(void)
+>>>>    */
+>>>>   void leave_hypervisor_to_guest(void)
+>>>>   {
+>>>> +#ifdef CONFIG_IOREQ_SERVER
+>>>> +    /*
+>>>> +     * XXX: Check the return. Shall we call that in
+>>>> +     * continue_running and context_switch instead?
+>>>> +     * The benefits would be to avoid calling
+>>>> +     * handle_hvm_io_completion on every return.
+>>>> +     */
+>>>
+>>> Yeah, that could be a simple and good optimization
+>>
+>> Well, it is not simple as it is sounds :). handle_hvm_io_completion() 
+>> is the function in charge to mark the vCPU as waiting for I/O. So we 
+>> would at least need to split the function.
+>>
+>> I wrote this TODO because I wasn't sure about the complexity of 
+>> handle_hvm_io_completion(current). Looking at it again, the main 
+>> complexity is the looping over the IOREQ servers.
+>>
+>> I think it would be better to optimize handle_hvm_io_completion() 
+>> rather than trying to hack the context_switch() or continue_running().
+>>
+>> [...]
+>>
+>>>> diff --git a/xen/include/asm-arm/p2m.h b/xen/include/asm-arm/p2m.h
+>>>> index 5fdb6e8..5823f11 100644
+>>>> --- a/xen/include/asm-arm/p2m.h
+>>>> +++ b/xen/include/asm-arm/p2m.h
+>>>> @@ -385,10 +385,11 @@ static inline int set_foreign_p2m_entry(struct 
+>>>> domain *d, unsigned long gfn,
+>>>>                                           mfn_t mfn)
+>>>>   {
+>>>>       /*
+>>>> -     * NOTE: If this is implemented then proper reference counting of
+>>>> -     *       foreign entries will need to be implemented.
+>>>> +     * XXX: handle properly reference. It looks like the page may 
+>>>> not always
+>>>> +     * belong to d.
+>>>
+>>> Just as a reference, and without taking away anything from the comment,
+>>> I think that QEMU is doing its own internal reference counting for these
+>>> mappings.
+>>
+>> I am not sure how this matters here? We can't really trust the DM to 
+>> do the right thing if it is not running in dom0.
+>>
+>> But, IIRC, the problem is some of the pages doesn't belong to do a 
+>> domain, so it is not possible to treat them as foreign mapping (e.g. 
+>> you wouldn't be able to grab a reference). This investigation was done 
+>> a couple of years ago, so this may have changed in recent Xen.
+>>
+>> As a side note, I am a bit surprised to see most of my original TODOs 
+>> present in the code. What is the plan to solve them?
+> The plan is to solve most critical TODOs in current series, and rest in 
+> follow-up series if no objections of course. Any pointers how to solve 
+> them properly would be much appreciated. Unfortunately, now I have a 
+> weak understanding how they should be fixed. 
 
---- a/xen/include/asm-x86/mm.h
-+++ b/xen/include/asm-x86/mm.h
-@@ -525,9 +525,14 @@ extern const unsigned int *const compat_
- #endif /* CONFIG_PV32 */
- 
- #define _set_gpfn_from_mfn(mfn, pfn) ({                        \
--    struct domain *d = page_get_owner(mfn_to_page(_mfn(mfn))); \
--    unsigned long entry = (d && (d == dom_cow)) ?              \
--        SHARED_M2P_ENTRY : (pfn);                              \
-+    unsigned long entry = (pfn);                               \
-+    if ( entry != INVALID_M2P_ENTRY )                          \
-+    {                                                          \
-+        const struct domain *d;                                \
-+        d = page_get_owner(mfn_to_page(_mfn(mfn)));            \
-+        if ( d && (d == dom_cow) )                             \
-+            entry = SHARED_M2P_ENTRY;                          \
-+    }                                                          \
-     set_compat_m2p(mfn, (unsigned int)(entry));                \
-     machine_to_phys_mapping[mfn] = (entry);                    \
- })
+AFAICT, there is already some discussion about those 3 major TODOs 
+happening. I would suggest to go through the discussions. We can clarify 
+anything if needed.
 
+Cheers,
+
+-- 
+Julien Grall
 
