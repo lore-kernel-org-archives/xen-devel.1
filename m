@@ -2,50 +2,51 @@ Return-Path: <SRS0=cbMO=BQ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.0 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-8.5 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4BD8CC433E3
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8757CC433E1
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:13 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 298E322D06
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:12 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 298E322D06
+	by mail.kernel.org (Postfix) with ESMTPS id 6461622D03
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:13 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6461622D03
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k3bFV-0004bT-TN; Thu, 06 Aug 2020 08:27:41 +0000
+	id 1k3cCs-0002iG-St; Thu, 06 Aug 2020 09:29:02 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=gxiU=BQ=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1k3bFU-0004bO-TD
- for xen-devel@lists.xenproject.org; Thu, 06 Aug 2020 08:27:40 +0000
-X-Inumbo-ID: d8da35c5-b3de-460b-8bd4-fd3a927bdfea
+ id 1k3cCr-0002i4-G8
+ for xen-devel@lists.xenproject.org; Thu, 06 Aug 2020 09:29:01 +0000
+X-Inumbo-ID: c422bb10-8cea-499d-896f-e1bfa38e0de2
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id d8da35c5-b3de-460b-8bd4-fd3a927bdfea;
- Thu, 06 Aug 2020 08:27:39 +0000 (UTC)
+ id c422bb10-8cea-499d-896f-e1bfa38e0de2;
+ Thu, 06 Aug 2020 09:29:00 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 8B12CAB9F;
- Thu,  6 Aug 2020 08:27:55 +0000 (UTC)
-Subject: Re: EFI executable corruption when live patching is turned off
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-References: <3TMd7J2u5gCA8ouIG_Xfcw7s5JKMG06XsDIesEB3Fi9htUJ43Lfl057wXohlpCHcszqoCmicpIlneEDO26ZqT8QfC2Y39VxBuqD3nS1j5Q4=@trmm.net>
- <ec1b0f4f-c895-db42-7821-31c2ab8e8708@citrix.com>
+ by mx2.suse.de (Postfix) with ESMTP id 5FD1FB66B;
+ Thu,  6 Aug 2020 09:29:17 +0000 (UTC)
+Subject: [PATCH 3/3] x86: don't override INVALID_M2P_ENTRY with
+ SHARED_M2P_ENTRY
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <676d3a8f-fb65-31d7-1da8-983e226145b7@suse.com>
-Date: Thu, 6 Aug 2020 10:27:40 +0200
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <a2b8f0e9-77ea-6127-a25e-d8fd3dcbb866@suse.com>
+Message-ID: <1d83fd35-6ea5-289c-d8db-029c50957f85@suse.com>
+Date: Thu, 6 Aug 2020 11:29:02 +0200
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.11.0
 MIME-Version: 1.0
-In-Reply-To: <ec1b0f4f-c895-db42-7821-31c2ab8e8708@citrix.com>
+In-Reply-To: <a2b8f0e9-77ea-6127-a25e-d8fd3dcbb866@suse.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -59,49 +60,37 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>,
- Trammell Hudson <hudson@trmm.net>, Ross Lagerwall <ross.lagerwall@citrix.com>,
- Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 05.08.2020 20:30, Andrew Cooper wrote:
-> On 05/08/2020 19:19, Trammell Hudson wrote:
->> When building xen from head with almost any combination of options, the resulting xen.efi seems properly formed. When CONFIG_LIVEPATCH is turned off, however, the resulting xen.efi is corrupted in some way and binutils no longer wants to work with it:
->>
->> ~/build/xen-clean/xen$ git rev-parse HEAD
->> 81fd0d3ca4b2cd309403c6e8da662c325dd35750
->> ~/build/xen-clean/xen$ diff .config.orig .config
->> 71,72c71
->> < CONFIG_LIVEPATCH=y
->> < CONFIG_FAST_SYMBOL_LOOKUP=y
->> ---
->>> # CONFIG_LIVEPATCH is not set
->> 105a105
->>> # CONFIG_COVERAGE is not set
->> ~/build/xen-clean/xen$ objcopy xen-orig.efi test.efi
->> ~/build/xen-clean/xen$ objcopy xen.efi test.efi
->> objcopy: test.efi: Data Directory size (1c) exceeds space left in section (18)
->> objcopy: test.efi: error copying private BFD data: file in wrong format
->> ~/build/xen-clean/xen$ objcopy --version | head -1
->> GNU objcopy (GNU Binutils for Ubuntu) 2.34
->>
->>
->> I spent most of today unsuccessfully trying to figure out what was different between the builds (on multiple build host OS with different binutils), so I'm hoping that perhaps someone else has seen this problem.
-> 
-> CC'ing appropriate maintainers.
-> 
-> The difference caused by CONFIG_LIVEPATCH will probably be the logic to
-> embed the GNU BuildID, which for xen.efi takes a trip through .bin/.ihex
-> immediately prior to the final link.
+While in most cases code ahead of the invocation of set_gpfn_from_mfn()
+deals with shared pages, at least in set_typed_p2m_entry() I can't spot
+such handling (it's entirely possible there's code missing there). Let's
+try to play safe and add an extra check.
 
-The build ID gets added independent of LIVEPATCH; aiui it's merely a
-prereq for it. In any event this wouldn't be an excuse: We don't
-fiddle with the binary after it was created by ld, so I can't help
-thinking this is a binutils bug. I'll look into this more closely,
-but initial experiments produce errors different from the ones
-Trammell has reported (albeit I'm using 2.35, not 2.34, in case this
-makes a difference).
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-Jan
+--- a/xen/include/asm-x86/mm.h
++++ b/xen/include/asm-x86/mm.h
+@@ -525,9 +525,14 @@ extern const unsigned int *const compat_
+ #endif /* CONFIG_PV32 */
+ 
+ #define _set_gpfn_from_mfn(mfn, pfn) ({                        \
+-    struct domain *d = page_get_owner(mfn_to_page(_mfn(mfn))); \
+-    unsigned long entry = (d && (d == dom_cow)) ?              \
+-        SHARED_M2P_ENTRY : (pfn);                              \
++    unsigned long entry = (pfn);                               \
++    if ( entry != INVALID_M2P_ENTRY )                          \
++    {                                                          \
++        const struct domain *d;                                \
++        d = page_get_owner(mfn_to_page(_mfn(mfn)));            \
++        if ( d && (d == dom_cow) )                             \
++            entry = SHARED_M2P_ENTRY;                          \
++    }                                                          \
+     set_compat_m2p(mfn, (unsigned int)(entry));                \
+     machine_to_phys_mapping[mfn] = (entry);                    \
+ })
+
 
