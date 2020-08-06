@@ -7,50 +7,51 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 60DA0C433DF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 67B57C433E1
 	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 23:50:05 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5DFE721744
+	by mail.kernel.org (Postfix) with ESMTPS id 62048221E2
 	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 23:50:05 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="GxI0OoET"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5DFE721744
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="LW3TnvpD"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 62048221E2
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k3pdy-0004SJ-S2; Thu, 06 Aug 2020 23:49:54 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1k3pdz-0004Sp-7c; Thu, 06 Aug 2020 23:49:55 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=flvv=BQ=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1k3pdx-0004FC-Kj
+ id 1k3pdx-0004FE-Mw
  for xen-devel@lists.xenproject.org; Thu, 06 Aug 2020 23:49:53 +0000
-X-Inumbo-ID: 2e66862a-07a4-432f-a589-c70212a3ad76
+X-Inumbo-ID: 65196a16-6859-4420-b545-0fc5d466942c
 Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 2e66862a-07a4-432f-a589-c70212a3ad76;
- Thu, 06 Aug 2020 23:49:39 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 65196a16-6859-4420-b545-0fc5d466942c;
+ Thu, 06 Aug 2020 23:49:41 +0000 (UTC)
 Received: from sstabellini-ThinkPad-T480s.hsd1.ca.comcast.net
  (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 0B77622D05;
- Thu,  6 Aug 2020 23:49:39 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 247E3221E2;
+ Thu,  6 Aug 2020 23:49:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1596757779;
- bh=tG7IOMVzAKrOpHe65a5zGXzao6XoCl9HRXWwSXpjlE0=;
+ s=default; t=1596757781;
+ bh=fI8sUwAia9oJeCWiNXgbqAhwYFTIQGUCuTFqxFs8WNk=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=GxI0OoETdZHYjWzTj7zc4Fx7XEP9Op9CJs1G9FU0BQNvMB2GW4qPIDUvWHf/BCHIq
- ddrxZ/cSHMxwm9bGiH6wcUoxkQi0iFiursnZBvZz6U6d1sABRHB03beYxelhageYdv
- 9c/MR87PwOwyC7H57kU4xg0+BW+t22TwJ0vwBAV0=
+ b=LW3TnvpD+CyGwfYRt8OjItPvI8tVr0URGSRNUGwRNk6Cc3Y9/KJFUZ0JICZnPoG3g
+ t3HiKoftepNBqtWOFUQ9XtnBmA3+Y+rXwErRidWFIxdf0LbV0JD/YYjnLxG4TBudZa
+ DxQ7KWE+SiblsFcKVJuIyRAJJmSEJ22gznSkYpag=
 From: Stefano Stabellini <sstabellini@kernel.org>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH 05/14] kernel-doc: public/features.h
-Date: Thu,  6 Aug 2020 16:49:24 -0700
-Message-Id: <20200806234933.16448-5-sstabellini@kernel.org>
+Subject: [PATCH 09/14] kernel-doc: public/sched.h
+Date: Thu,  6 Aug 2020 16:49:28 -0700
+Message-Id: <20200806234933.16448-9-sstabellini@kernel.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <alpine.DEB.2.21.2008061605410.16004@sstabellini-ThinkPad-T480s>
 References: <alpine.DEB.2.21.2008061605410.16004@sstabellini-ThinkPad-T480s>
@@ -76,153 +77,254 @@ Convert in-code comments to kernel-doc format wherever possible.
 
 Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
 ---
- xen/include/public/features.h | 78 ++++++++++++++++++++++++++---------
- 1 file changed, 59 insertions(+), 19 deletions(-)
+ xen/include/public/sched.h | 129 ++++++++++++++++++++++++++-----------
+ 1 file changed, 92 insertions(+), 37 deletions(-)
 
-diff --git a/xen/include/public/features.h b/xen/include/public/features.h
-index 1613b2aab8..524d1758c4 100644
---- a/xen/include/public/features.h
-+++ b/xen/include/public/features.h
-@@ -27,8 +27,8 @@
- #ifndef __XEN_PUBLIC_FEATURES_H__
- #define __XEN_PUBLIC_FEATURES_H__
+diff --git a/xen/include/public/sched.h b/xen/include/public/sched.h
+index 811bd87c82..6f36c3748a 100644
+--- a/xen/include/public/sched.h
++++ b/xen/include/public/sched.h
+@@ -29,41 +29,50 @@
+ 
+ #include "event_channel.h"
  
 -/*
-- * `incontents 200 elfnotes_features XEN_ELFNOTE_FEATURES
+- * `incontents 150 sched Guest Scheduler Operations
 +/**
-+ * DOC: XEN_ELFNOTE_FEATURES
++ * DOC: Guest Scheduler Operations
   *
-  * The list of all the features the guest supports. They are set by
-  * parsing the XEN_ELFNOTE_FEATURES and XEN_ELFNOTE_SUPPORTED_FEATURES
-@@ -41,19 +41,25 @@
-  * XENFEAT_dom0 MUST be set if the guest is to be booted as dom0,
+  * The SCHEDOP interface provides mechanisms for a guest to interact
+  * with the scheduler, including yield, blocking and shutting itself
+  * down.
   */
  
 -/*
-- * If set, the guest does not need to write-protect its pagetables, and can
-- * update them via direct writes.
 +/**
-+ * DOC: XENFEAT_writable_page_tables
++ * DOC: HYPERVISOR_sched_op
 + *
-+ * If set, the guest does not need to write-protect its pagetables, and
-+ * can update them via direct writes.
+  * The prototype for this hypercall is:
+- * ` long HYPERVISOR_sched_op(enum sched_op cmd, void *arg, ...)
+  *
+- * @cmd == SCHEDOP_??? (scheduler operation).
+- * @arg == Operation-specific extra argument(s), as described below.
+- * ...  == Additional Operation-specific extra arguments, described below.
++ * long HYPERVISOR_sched_op(enum sched_op cmd, void *arg, ...)
++ *
++ * - @cmd == SCHEDOP_??? (scheduler operation).
++ * - @arg == Operation-specific extra argument(s), as described below.
++ * - ...  == Additional Operation-specific extra arguments, described below.
+  *
+  * Versions of Xen prior to 3.0.2 provided only the following legacy version
+  * of this hypercall, supporting only the commands yield, block and shutdown:
++ *
+  *  long sched_op(int cmd, unsigned long arg)
+- * @cmd == SCHEDOP_??? (scheduler operation).
+- * @arg == 0               (SCHEDOP_yield and SCHEDOP_block)
+- *      == SHUTDOWN_* code (SCHEDOP_shutdown)
++ *
++ * - @cmd == SCHEDOP_??? (scheduler operation).
++ * - @arg == 0               (SCHEDOP_yield and SCHEDOP_block)
++ * -      == SHUTDOWN_* code (SCHEDOP_shutdown)
+  *
+  * This legacy version is available to new guests as:
+- * ` long HYPERVISOR_sched_op_compat(enum sched_op cmd, unsigned long arg)
++ *
++ * long HYPERVISOR_sched_op_compat(enum sched_op cmd, unsigned long arg)
   */
- #define XENFEAT_writable_page_tables       0
+ 
+ /* ` enum sched_op { // SCHEDOP_* => struct sched_* */
+-/*
+- * Voluntarily yield the CPU.
+- * @arg == NULL.
++
++/**
++ * DOC: SCHEDOP_yield
++ * Voluntarily yield the CPU. @arg == NULL.
+  */
+ #define SCHEDOP_yield       0
  
 -/*
 +/**
-+ * DOC: XENFEAT_writable_descriptor_tables
++ * DOC: SCHEDOP_block
 + *
-  * If set, the guest does not need to write-protect its segment descriptor
-  * tables, and can update them via direct writes.
+  * Block execution of this VCPU until an event is received for processing.
+  * If called with event upcalls masked, this operation will atomically
+  * reenable event delivery and check for pending events before blocking the
+@@ -72,7 +81,9 @@
   */
- #define XENFEAT_writable_descriptor_tables 1
+ #define SCHEDOP_block       1
  
 -/*
 +/**
-+ * DOC: XENFEAT_auto_translated_physmap
++ * DOC: SCHEDOP_shutdown
 + *
-  * If set, translation between the guest's 'pseudo-physical' address space
-  * and the host's machine address space are handled by the hypervisor. In this
-  * mode the guest does not need to perform phys-to/from-machine translations
-@@ -61,37 +67,63 @@
+  * Halt execution of this domain (all VCPUs) and notify the system controller.
+  * @arg == pointer to sched_shutdown_t structure.
+  *
+@@ -87,14 +98,18 @@
   */
- #define XENFEAT_auto_translated_physmap    2
- 
--/* If set, the guest is running in supervisor mode (e.g., x86 ring 0). */
-+/**
-+ * DOC: XENFEAT_supervisor_mode_kernel
-+ *
-+ * If set, the guest is running in supervisor mode (e.g., x86 ring 0).
-+ */
- #define XENFEAT_supervisor_mode_kernel     3
+ #define SCHEDOP_shutdown    2
  
 -/*
 +/**
-+ * DOC: XENFEAT_pae_pgdir_above_4gb
++ * DOC: SCHEDOP_poll
 + *
-  * If set, the guest does not need to allocate x86 PAE page directories
-  * below 4GB. This flag is usually implied by auto_translated_physmap.
+  * Poll a set of event-channel ports. Return when one or more are pending. An
+  * optional timeout may be specified.
+  * @arg == pointer to sched_poll_t structure.
   */
- #define XENFEAT_pae_pgdir_above_4gb        4
- 
--/* x86: Does this Xen host support the MMU_PT_UPDATE_PRESERVE_AD hypercall? */
-+/**
-+ * DOC: XENFEAT_mmu_pt_update_preserve_ad
-+ * x86: Does this Xen host support the MMU_PT_UPDATE_PRESERVE_AD hypercall?
-+ */
- #define XENFEAT_mmu_pt_update_preserve_ad  5
- 
--/* x86: Does this Xen host support the MMU_{CLEAR,COPY}_PAGE hypercall? */
-+/**
-+ * DOC: XENFEAT_highmem_assist
-+ * x86: Does this Xen host support the MMU_{CLEAR,COPY}_PAGE hypercall?
-+ */
- #define XENFEAT_highmem_assist             6
+ #define SCHEDOP_poll        3
  
 -/*
 +/**
-+ * DOC: XENFEAT_gnttab_map_avail_bits
++ * DOC: SCHEDOP_remote_shutdown
 + *
-  * If set, GNTTABOP_map_grant_ref honors flags to be placed into guest kernel
-  * available pte bits.
+  * Declare a shutdown for another domain. The main use of this function is
+  * in interpreting shutdown requests and reasons for fully-virtualized
+  * domains.  A para-virtualized domain may use SCHEDOP_shutdown directly.
+@@ -102,14 +117,18 @@
   */
- #define XENFEAT_gnttab_map_avail_bits      7
- 
--/* x86: Does this Xen host support the HVM callback vector type? */
-+/**
-+ * DOC: XENFEAT_hvm_callback_vector
-+ * x86: Does this Xen host support the HVM callback vector type?
-+ */
- #define XENFEAT_hvm_callback_vector        8
- 
--/* x86: pvclock algorithm is safe to use on HVM */
-+/**
-+ * DOC: XENFEAT_hvm_safe_pvclock
-+ * x86: pvclock algorithm is safe to use on HVM
-+ */
- #define XENFEAT_hvm_safe_pvclock           9
- 
--/* x86: pirq can be used by HVM guests */
-+/**
-+ * DOC: XENFEAT_hvm_pirqs
-+ * x86: pirq can be used by HVM guests
-+ */
- #define XENFEAT_hvm_pirqs                 10
- 
--/* operation as Dom0 is supported */
-+/**
-+ * DOC: XENFEAT_dom0
-+ * operation as Dom0 is supported
-+ */
- #define XENFEAT_dom0                      11
- 
- /* Xen also maps grant references at pfn = mfn.
-@@ -99,13 +131,21 @@
- #define XENFEAT_grant_map_identity        12
-  */
- 
--/* Guest can use XENMEMF_vnode to specify virtual node for memory op. */
-+/**
-+ * DOC: XENFEAT_memory_op_vnode_supported
-+ * Guest can use XENMEMF_vnode to specify virtual node for memory op.
-+ */
- #define XENFEAT_memory_op_vnode_supported 13
- 
--/* arm: Hypervisor supports ARM SMC calling convention. */
-+/**
-+ * DOC: XENFEAT_ARM_SMCCC_supported
-+ * arm: Hypervisor supports ARM SMC calling convention.
-+ */
- #define XENFEAT_ARM_SMCCC_supported       14
+ #define SCHEDOP_remote_shutdown        4
  
 -/*
 +/**
-+ * DOC: XENFEAT_linux_rsdp_unrestricted
++ * DOC: SCHEDOP_shutdown_code
 + *
-  * x86/PVH: If set, ACPI RSDP can be placed at any address. Otherwise RSDP
-  * must be located in lower 1MB, as required by ACPI Specification for IA-PC
-  * systems.
+  * Latch a shutdown code, so that when the domain later shuts down it
+  * reports this code to the control tools.
+  * @arg == sched_shutdown_t, as for SCHEDOP_shutdown.
+  */
+ #define SCHEDOP_shutdown_code 5
+ 
+-/*
++/**
++ * DOC: SCHEDOP_watchdog
++ *
+  * Setup, poke and destroy a domain watchdog timer.
+  * @arg == pointer to sched_watchdog_t structure.
+  * With id == 0, setup a domain watchdog timer to cause domain shutdown
+@@ -119,7 +138,9 @@
+  */
+ #define SCHEDOP_watchdog    6
+ 
+-/*
++/**
++ * DOC: SCHEDOP_pin_override
++ *
+  * Override the current vcpu affinity by pinning it to one physical cpu or
+  * undo this override restoring the previous affinity.
+  * @arg == pointer to sched_pin_override_t structure.
+@@ -132,12 +153,19 @@
+ #define SCHEDOP_pin_override 7
+ /* ` } */
+ 
++/**
++ * struct sched_shutdown
++ */
+ struct sched_shutdown {
+-    unsigned int reason; /* SHUTDOWN_* => enum sched_shutdown_reason */
++    /** @reason: SHUTDOWN_* => enum sched_shutdown_reason */
++    unsigned int reason;
+ };
+ typedef struct sched_shutdown sched_shutdown_t;
+ DEFINE_XEN_GUEST_HANDLE(sched_shutdown_t);
+ 
++/**
++ * struct sched_poll
++ */
+ struct sched_poll {
+     XEN_GUEST_HANDLE(evtchn_port_t) ports;
+     unsigned int nr_ports;
+@@ -146,39 +174,62 @@ struct sched_poll {
+ typedef struct sched_poll sched_poll_t;
+ DEFINE_XEN_GUEST_HANDLE(sched_poll_t);
+ 
++/**
++ * struct sched_remote_shutdown
++ */
+ struct sched_remote_shutdown {
+-    domid_t domain_id;         /* Remote domain ID */
+-    unsigned int reason;       /* SHUTDOWN_* => enum sched_shutdown_reason */
++    /** @domain_id: Remote domain ID */
++    domid_t domain_id;
++    /** @reason: SHUTDOWN_* => enum sched_shutdown_reason */
++    unsigned int reason;
+ };
+ typedef struct sched_remote_shutdown sched_remote_shutdown_t;
+ DEFINE_XEN_GUEST_HANDLE(sched_remote_shutdown_t);
+ 
++/**
++ * struct sched_watchdog
++ */
+ struct sched_watchdog {
+-    uint32_t id;                /* watchdog ID */
+-    uint32_t timeout;           /* timeout */
++    /** @id: watchdog ID */
++    uint32_t id;
++    /** @timeout: timeout */
++    uint32_t timeout;
+ };
+ typedef struct sched_watchdog sched_watchdog_t;
+ DEFINE_XEN_GUEST_HANDLE(sched_watchdog_t);
+ 
++/**
++ * struct sched_pin_override
++ */
+ struct sched_pin_override {
+     int32_t pcpu;
+ };
+ typedef struct sched_pin_override sched_pin_override_t;
+ DEFINE_XEN_GUEST_HANDLE(sched_pin_override_t);
+ 
+-/*
+- * Reason codes for SCHEDOP_shutdown. These may be interpreted by control
+- * software to determine the appropriate action. For the most part, Xen does
+- * not care about the shutdown code.
++/**
++ * DOC: Reason codes for SCHEDOP_shutdown
++ *
++ * These may be interpreted by control software to determine the
++ * appropriate action. For the most part, Xen does not care about the
++ * shutdown code.
++ *
++ * - SHUTDOWN_poweroff: Domain exited normally. Clean up and kill.
++ * - SHUTDOWN_reboot:   Clean up, kill, and then restart.
++ * - SHUTDOWN_suspend:  Clean up, save suspend info, kill.
++ * - SHUTDOWN_crash:    Tell controller we've crashed.
++ * - SHUTDOWN_watchdog: Restart because watchdog time expired.
+  */
+ /* ` enum sched_shutdown_reason { */
+-#define SHUTDOWN_poweroff   0  /* Domain exited normally. Clean up and kill. */
+-#define SHUTDOWN_reboot     1  /* Clean up, kill, and then restart.          */
+-#define SHUTDOWN_suspend    2  /* Clean up, save suspend info, kill.         */
+-#define SHUTDOWN_crash      3  /* Tell controller we've crashed.             */
+-#define SHUTDOWN_watchdog   4  /* Restart because watchdog time expired.     */
++#define SHUTDOWN_poweroff   0
++#define SHUTDOWN_reboot     1
++#define SHUTDOWN_suspend    2
++#define SHUTDOWN_crash      3
++#define SHUTDOWN_watchdog   4
+ 
+-/*
++/**
++ * DOC: SHUTDOWN_soft_reset
++ *
+  * Domain asked to perform 'soft reset' for it. The expected behavior is to
+  * reset internal Xen state for the domain returning it to the point where it
+  * was created but leaving the domain's memory contents and vCPU contexts
+@@ -186,7 +237,11 @@ DEFINE_XEN_GUEST_HANDLE(sched_pin_override_t);
+  * interfaces again.
+  */
+ #define SHUTDOWN_soft_reset 5
+-#define SHUTDOWN_MAX        5  /* Maximum valid shutdown reason.             */
++/**
++ * DOC: SHUTDOWN_MAX
++ * Maximum valid shutdown reason
++ */
++#define SHUTDOWN_MAX        5
+ /* ` } */
+ 
+ #endif /* __XEN_PUBLIC_SCHED_H__ */
 -- 
 2.17.1
 
