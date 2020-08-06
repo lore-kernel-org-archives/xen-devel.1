@@ -2,86 +2,54 @@ Return-Path: <SRS0=cbMO=BQ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.7 required=3.0 tests=BAYES_00,DKIM_ADSP_CUSTOM_MED,
-	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.0 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EA6E1C433E1
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1BCB4C433E0
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BDD5822D06
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:36 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="BdCPfkls"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BDD5822D06
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id EDD5222D07
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EDD5222D07
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k3eDV-0006Vm-1G; Thu, 06 Aug 2020 11:37:49 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=HTjn=BQ=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
- id 1k3eDT-0006Vg-Qg
- for xen-devel@lists.xenproject.org; Thu, 06 Aug 2020 11:37:47 +0000
-X-Inumbo-ID: 3e76ec6e-369b-4b10-abc5-867b43a3a818
-Received: from mail-lj1-x242.google.com (unknown [2a00:1450:4864:20::242])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3e76ec6e-369b-4b10-abc5-867b43a3a818;
- Thu, 06 Aug 2020 11:37:47 +0000 (UTC)
-Received: by mail-lj1-x242.google.com with SMTP id z14so13780622ljm.1
- for <xen-devel@lists.xenproject.org>; Thu, 06 Aug 2020 04:37:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-transfer-encoding:content-language;
- bh=3qvrv2NcCrVhNCjBXcmn6ydC3U+4juJl4Q8+G+Je9Zk=;
- b=BdCPfklsNJcLwrOcGt/pIEQva8ijnwCjRAtFio+TZ/jR5Uhiux8Z/AmMrcdntQeFXp
- 553h3r/EmRU88emS7/btRuN3NZ6tmL+EVe0xOpiMD09qFIp0BG7GZknw/BQHN3b78tZW
- IPJrlMYe4135gwUkMmecWBdSUvxSGYTXt7jm4ypAQj5HaB8Ei4HApS93Zbzi+Qbyg82m
- WJmBD+Nc9aowWNfDiw7V+uKcE+BBWOuid7RED66DFw6itKw0Xpe9mp4ewpLcZonflm/p
- 2+T+taXYyfbkmumprNqzWlezzmo8FhEte6yLj6u6Whi8JyQHrB90X44tnQisEoc0GUnf
- FAXQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-transfer-encoding
- :content-language;
- bh=3qvrv2NcCrVhNCjBXcmn6ydC3U+4juJl4Q8+G+Je9Zk=;
- b=bThR6+kZxB3/I3cCHm/OUfusDgvT6DgEFMkAj8pqlOR5WpY7HF53m2TFVGbXCRBEN/
- aVoHeCL9w2F7ahARGg20len4cbKLwTP01svtFMYT82+ZZx6g8XkNL2TSJX0s9xcSFpAE
- ClQqY4BLAznRWD4NjvfV00/p597OYBHNiQg7kn8t8NdCMdF9Ia5XV3E5rx2t9b1apQTG
- R6iiN8FWQsnJRZYytyFPRGlxsbB0RmDGKbe+JfnbNC0WQJDswxVu3cpEZ8zKLNjO5vc6
- AAxofemvsCBj5uucqtl8NYix/HH0rbfzTtZ+7fDpLmi6wItjLOPLEU63aSSx+4/5IyXZ
- IJXQ==
-X-Gm-Message-State: AOAM533KQJPXkyrQ4VnmHwxiDA+T+5hqrO715NPSqFozuwxMax8C8pQA
- 74RsKD2o4IYdBeJLGN3MqbM=
-X-Google-Smtp-Source: ABdhPJwIz48LYBOkFJt9OBx2MfKKXy/WzkbfWa5xcacF/QjLGvR5GGktIpH29IDVMhsea39NomdmVw==
-X-Received: by 2002:a2e:b00f:: with SMTP id y15mr3844992ljk.223.1596713865812; 
- Thu, 06 Aug 2020 04:37:45 -0700 (PDT)
-Received: from [192.168.1.2] ([212.22.223.21])
- by smtp.gmail.com with ESMTPSA id l5sm2304962ljh.56.2020.08.06.04.37.44
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 06 Aug 2020 04:37:45 -0700 (PDT)
-Subject: Re: [RFC PATCH V1 01/12] hvm/ioreq: Make x86's IOREQ feature common
-To: Julien Grall <julien@xen.org>, xen-devel@lists.xenproject.org
-References: <1596478888-23030-1-git-send-email-olekstysh@gmail.com>
- <1596478888-23030-2-git-send-email-olekstysh@gmail.com>
- <6bfc3920-8f29-188c-cff4-2b99dabe166f@xen.org>
-From: Oleksandr <olekstysh@gmail.com>
-Message-ID: <b0103c16-0cec-1734-93a6-3a4169448179@gmail.com>
-Date: Thu, 6 Aug 2020 14:37:39 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+	id 1k3bz1-0000zY-2o; Thu, 06 Aug 2020 09:14:43 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=gxiU=BQ=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1k3bz0-0000zQ-1p
+ for xen-devel@lists.xenproject.org; Thu, 06 Aug 2020 09:14:42 +0000
+X-Inumbo-ID: 119ba00f-d325-4d22-94fe-f57a7fb398de
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 119ba00f-d325-4d22-94fe-f57a7fb398de;
+ Thu, 06 Aug 2020 09:14:41 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id A9BC8AD75;
+ Thu,  6 Aug 2020 09:14:57 +0000 (UTC)
+Subject: Re: [PATCH 1/4] build: work around bash issue
+To: Julien Grall <julien@xen.org>
+References: <305c2532-408a-9f78-61fe-c90a2e86eb8e@suse.com>
+ <b427e8e6-b9ff-65d2-074b-19439a2e3d02@suse.com>
+ <e8006147-31e5-d4c5-8c13-74250f267c0c@xen.org>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <df45f8af-a32b-67cf-2f56-4761ce263a28@suse.com>
+Date: Thu, 6 Aug 2020 11:14:42 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.11.0
 MIME-Version: 1.0
-In-Reply-To: <6bfc3920-8f29-188c-cff4-2b99dabe166f@xen.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <e8006147-31e5-d4c5-8c13-74250f267c0c@xen.org>
+Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -92,83 +60,23 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Kevin Tian <kevin.tian@intel.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Jan Beulich <jbeulich@suse.com>,
- Wei Liu <wl@xen.org>, Paul Durrant <paul@xen.org>,
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ George Dunlap <George.Dunlap@eu.citrix.com>,
  Andrew Cooper <andrew.cooper3@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Tim Deegan <tim@xen.org>,
- Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
- Julien Grall <julien.grall@arm.com>, Jun Nakajima <jun.nakajima@intel.com>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+ Ian Jackson <ian.jackson@citrix.com>,
+ Anthony Perard <anthony.perard@citrix.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
+On 06.08.2020 11:07, Julien Grall wrote:
+> On 06/08/2020 10:04, Jan Beulich wrote:
+>> Older bash fails to honor "set -e" for certain built-in commands
+> 
+> "Older" is pretty vague. May I ask the exact version you run into the issue?
 
-On 05.08.20 16:30, Julien Grall wrote:
-> Hi,
+If I knew in what version the issue got fixed, I'd have specified
+that version. I've observed it with 3.2.57(2).
 
-Hi Julien
-
-
->
-> On 03/08/2020 19:21, Oleksandr Tyshchenko wrote:
->> From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
->>
->> As a lot of x86 code can be re-used on Arm later on, this patch
->> splits IOREQ support into common and arch specific parts.
->>
->> This support is going to be used on Arm to be able run device
->> emulator outside of Xen hypervisor.
->>
->> Please note, this is a split/cleanup of Julien's PoC:
->> "Add support for Guest IO forwarding to a device emulator"
->>
->> Signed-off-by: Julien Grall <julien.grall@arm.com>
->> Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
->> ---
->>   xen/arch/x86/Kconfig            |    1 +
->>   xen/arch/x86/hvm/dm.c           |    2 +-
->>   xen/arch/x86/hvm/emulate.c      |    2 +-
->>   xen/arch/x86/hvm/hvm.c          |    2 +-
->>   xen/arch/x86/hvm/io.c           |    2 +-
->>   xen/arch/x86/hvm/ioreq.c        | 1431 
->> +--------------------------------------
->>   xen/arch/x86/hvm/stdvga.c       |    2 +-
->>   xen/arch/x86/hvm/vmx/realmode.c |    1 +
->>   xen/arch/x86/hvm/vmx/vvmx.c     |    2 +-
->>   xen/arch/x86/mm.c               |    2 +-
->>   xen/arch/x86/mm/shadow/common.c |    2 +-
->>   xen/common/Kconfig              |    3 +
->>   xen/common/Makefile             |    1 +
->>   xen/common/hvm/Makefile         |    1 +
->>   xen/common/hvm/ioreq.c          | 1430 
->> ++++++++++++++++++++++++++++++++++++++
->>   xen/include/asm-x86/hvm/ioreq.h |   45 +-
->>   xen/include/asm-x86/hvm/vcpu.h  |    7 -
->>   xen/include/xen/hvm/ioreq.h     |   89 +++
->>   18 files changed, 1575 insertions(+), 1450 deletions(-)
->
-> That's quite a lot of code moved in a single patch. How can we check 
-> the code moved is still correct? Is it a verbatim copy?
-In this patch I mostly tried to separate a common IOREQ part which also 
-resulted in updating x86 sources to include new header.  Also I moved 
-hvm_ioreq_needs_completion() to common header (which probably wanted to 
-be in a separate patch). It was a verbatim copy initially (w/o 
-hvm_map_mem_type_to_ioreq_server) and then updated to deal with arch 
-specific parts.
-In which way do you want me to split this patch?
-
-I could think of the following:
-
-1. Copy of x86's ioreq.c/ioreq.h to common code
-2. Update common ioreq.c/ioreq.h
-3. Update x86's parts to be able to deal with common code
-4. Move hvm_ioreq_needs_completion() to common code
-
--- 
-Regards,
-
-Oleksandr Tyshchenko
-
+Jan
 
