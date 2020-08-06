@@ -2,96 +2,53 @@ Return-Path: <SRS0=cbMO=BQ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.3 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,UNPARSEABLE_RELAY,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-8.5 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 873D7C433E1
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 98483C433DF
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:32 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 51C8022D03
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:31 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="VBCNZ0B6"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 51C8022D03
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=oracle.com
+	by mail.kernel.org (Postfix) with ESMTPS id 7527222D03
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:32 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7527222D03
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k3c4b-0001uu-4C; Thu, 06 Aug 2020 09:20:29 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=zvyT=BQ=oracle.com=dan.carpenter@srs-us1.protection.inumbo.net>)
- id 1k3c4Z-0001un-HE
- for xen-devel@lists.xenproject.org; Thu, 06 Aug 2020 09:20:27 +0000
-X-Inumbo-ID: b54d2ec2-fc36-4caf-9fc3-9f162f6ac9ab
-Received: from userp2130.oracle.com (unknown [156.151.31.86])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b54d2ec2-fc36-4caf-9fc3-9f162f6ac9ab;
- Thu, 06 Aug 2020 09:20:26 +0000 (UTC)
-Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
- by userp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 0769DP4M134775;
- Thu, 6 Aug 2020 09:20:15 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
- h=date : from : to : cc
- : subject : message-id : references : mime-version : content-type :
- content-transfer-encoding : in-reply-to; s=corp-2020-01-29;
- bh=K6nnIq7KbMdGmwq3DRCgXsdqJJG+nAKIN0b+IcOgc+k=;
- b=VBCNZ0B6tMfR1rKyX72Att5NUO6if4UBo9dHYDl+0D3q1NcsaDvCWtVjbHrVRnGpz+Ud
- x+ihOlgeDyR0x8PKISxsN7Wi0fs5rpqTqv77K4/3mB4xa8FbFlAx9iXJJ4ZMJO6qom7y
- umDcAh0fQbfMZh7yUC7s9oHI3OQ4H1pkGd/yCX4uFpcF8WusdLnV5nfVpNiqj4xyY49D
- AqxiVxYwMXOT1eEQP9aq1XCh5vWufjALgF8rY86Br7SxI+DUP7f1hNi71z1q7WUMAvyk
- daIl/wf/W3yD2yONtZ7Sym3V7oP4TmG+WPmyJSLme8ucD0jSm14WEvh5Vaas/7mgW53G tg== 
-Received: from userp3030.oracle.com (userp3030.oracle.com [156.151.31.80])
- by userp2130.oracle.com with ESMTP id 32r6gwssvs-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 06 Aug 2020 09:20:15 +0000
-Received: from pps.filterd (userp3030.oracle.com [127.0.0.1])
- by userp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 0769Dnvf019978;
- Thu, 6 Aug 2020 09:20:15 GMT
-Received: from userv0122.oracle.com (userv0122.oracle.com [156.151.31.75])
- by userp3030.oracle.com with ESMTP id 32r6cv0q8m-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 06 Aug 2020 09:20:14 +0000
-Received: from abhmp0017.oracle.com (abhmp0017.oracle.com [141.146.116.23])
- by userv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 0769KB5b024041;
- Thu, 6 Aug 2020 09:20:11 GMT
-Received: from kadam (/41.57.98.10) by default (Oracle Beehive Gateway v4.0)
- with ESMTP ; Thu, 06 Aug 2020 02:20:10 -0700
-Date: Thu, 6 Aug 2020 12:20:02 +0300
-From: Dan Carpenter <dan.carpenter@oracle.com>
-To: Oleksandr Andrushchenko <Oleksandr_Andrushchenko@epam.com>
-Subject: Re: [PATCH 2/6] drm/xen-front: Fix misused IS_ERR_OR_NULL checks
-Message-ID: <20200806092001.GV5493@kadam>
-References: <20200731125109.18666-1-andr2000@gmail.com>
- <20200731125109.18666-3-andr2000@gmail.com>
- <6d719ab2-d9f6-2c3c-8979-b12a4d10b96d@suse.com>
- <0ed5082f-0280-16c0-7410-f6a90262bcee@epam.com>
+	id 1k3bqj-0008J7-Up; Thu, 06 Aug 2020 09:06:09 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=gxiU=BQ=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1k3bqi-0008I9-B3
+ for xen-devel@lists.xenproject.org; Thu, 06 Aug 2020 09:06:08 +0000
+X-Inumbo-ID: 75dab13f-ff1d-496c-afa3-bab25eb6db47
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 75dab13f-ff1d-496c-afa3-bab25eb6db47;
+ Thu, 06 Aug 2020 09:06:07 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 276C7B1AA;
+ Thu,  6 Aug 2020 09:06:24 +0000 (UTC)
+Subject: [PATCH 4/4] EFI: free unused boot mem in at least some cases
+From: Jan Beulich <jbeulich@suse.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <305c2532-408a-9f78-61fe-c90a2e86eb8e@suse.com>
+Message-ID: <4e2d0d0a-9d85-d704-5d61-ae9efc69256a@suse.com>
+Date: Thu, 6 Aug 2020 11:06:09 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.11.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <0ed5082f-0280-16c0-7410-f6a90262bcee@epam.com>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9704
- signatures=668679
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
- mlxscore=0 bulkscore=0
- spamscore=0 adultscore=0 mlxlogscore=999 phishscore=0 malwarescore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2006250000
- definitions=main-2008060065
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9704
- signatures=668679
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 malwarescore=0
- bulkscore=0 spamscore=0
- impostorscore=0 mlxscore=0 mlxlogscore=999 adultscore=0 priorityscore=1501
- phishscore=0 clxscore=1015 suspectscore=0 lowpriorityscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2006250000
- definitions=main-2008060065
+In-Reply-To: <305c2532-408a-9f78-61fe-c90a2e86eb8e@suse.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -102,55 +59,154 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: =?iso-8859-1?Q?J=FCrgen_Gro=DF?= <jgross@suse.com>,
- "sstabellini@kernel.org" <sstabellini@kernel.org>,
- Oleksandr Andrushchenko <andr2000@gmail.com>,
- "intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
- "airlied@linux.ie" <airlied@linux.ie>, "daniel@ffwll.ch" <daniel@ffwll.ch>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- "boris.ostrovsky@oracle.com" <boris.ostrovsky@oracle.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Wei Liu <wl@xen.org>, George Dunlap <George.Dunlap@eu.citrix.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Tue, Aug 04, 2020 at 06:35:20AM +0000, Oleksandr Andrushchenko wrote:
-> 
-> On 8/4/20 9:12 AM, Jürgen Groß wrote:
-> > On 31.07.20 14:51, Oleksandr Andrushchenko wrote:
-> >> From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-> >>
-> >> The patch c575b7eeb89f: "drm/xen-front: Add support for Xen PV
-> >> display frontend" from Apr 3, 2018, leads to the following static
-> >> checker warning:
-> >>
-> >>     drivers/gpu/drm/xen/xen_drm_front_gem.c:140 xen_drm_front_gem_create()
-> >>     warn: passing zero to 'ERR_CAST'
-> >>
-> >> drivers/gpu/drm/xen/xen_drm_front_gem.c
-> >>     133  struct drm_gem_object *xen_drm_front_gem_create(struct drm_device *dev,
-> >>     134                                                  size_t size)
-> >>     135  {
-> >>     136          struct xen_gem_object *xen_obj;
-> >>     137
-> >>     138          xen_obj = gem_create(dev, size);
-> >>     139          if (IS_ERR_OR_NULL(xen_obj))
-> >>     140                  return ERR_CAST(xen_obj);
-> >>
-> >> Fix this and the rest of misused places with IS_ERR_OR_NULL in the
-> >> driver.
-> >>
-> >> Fixes:  c575b7eeb89f: "drm/xen-front: Add support for Xen PV display frontend"
-> >
-> > Again forgot to Cc stable?
-> 
-> I was just not sure if these minor fixes need to go the stable, but I will add
+Address at least the primary reason why 52bba67f8b87 ("efi/boot: Don't
+free ebmalloc area at all") was put in place: Make xen_in_range() aware
+of the freed range. This is in particular relevant for EFI-enabled
+builds not actually running on EFI, as the entire range will be unused
+in this case.
 
-Correct.  It's still a bug because it's setting the error code
-incorrectly on the impossible path.  But fortunately impossible things
-don't affect runtime.
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
+---
+The remaining issue could be addressed too, by making the area 2M in
+size and 2M-aligned.
 
-regards,
-dan carpenter
+--- a/xen/arch/x86/efi/stub.c
++++ b/xen/arch/x86/efi/stub.c
+@@ -52,6 +52,12 @@ bool efi_enabled(unsigned int feature)
+ 
+ void __init efi_init_memory(void) { }
+ 
++bool __hwdom_init efi_boot_mem_unused(unsigned long *start, unsigned long *end)
++{
++    *start = *end = (unsigned long)_end;
++    return false;
++}
++
+ void efi_update_l4_pgtable(unsigned int l4idx, l4_pgentry_t l4e) { }
+ 
+ bool efi_rs_using_pgtables(void)
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -608,7 +608,7 @@ static void __init kexec_reserve_area(st
+ #endif
+ }
+ 
+-static inline bool using_2M_mapping(void)
++bool using_2M_mapping(void)
+ {
+     return !l1_table_offset((unsigned long)__2M_text_end) &&
+            !l1_table_offset((unsigned long)__2M_rodata_start) &&
+@@ -1970,7 +1970,7 @@ int __hwdom_init xen_in_range(unsigned l
+     paddr_t start, end;
+     int i;
+ 
+-    enum { region_s3, region_ro, region_rw, nr_regions };
++    enum { region_s3, region_ro, region_rw, region_bss, nr_regions };
+     static struct {
+         paddr_t s, e;
+     } xen_regions[nr_regions] __hwdom_initdata;
+@@ -1994,7 +1994,14 @@ int __hwdom_init xen_in_range(unsigned l
+         xen_regions[region_ro].e = __pa(&__2M_rodata_end);
+         /* hypervisor .data + .bss */
+         xen_regions[region_rw].s = __pa(&__2M_rwdata_start);
+-        xen_regions[region_rw].e = __pa(&__2M_rwdata_end);
++        if ( efi_boot_mem_unused(&start, &end) )
++        {
++            xen_regions[region_rw].e = __pa(start);
++            xen_regions[region_bss].s = __pa(end);
++            xen_regions[region_bss].e = __pa(&__2M_rwdata_end);
++        }
++        else
++            xen_regions[region_rw].e = __pa(&__2M_rwdata_end);
+     }
+ 
+     start = (paddr_t)mfn << PAGE_SHIFT;
+--- a/xen/common/efi/ebmalloc.c
++++ b/xen/common/efi/ebmalloc.c
+@@ -1,5 +1,9 @@
+ #include "efi.h"
+ #include <xen/init.h>
++#include <xen/mm.h>
++#ifdef CONFIG_X86
++#include <asm/setup.h>
++#endif
+ 
+ #ifdef CONFIG_ARM
+ /*
+@@ -21,7 +25,7 @@
+ 
+ static char __section(".bss.page_aligned") __aligned(PAGE_SIZE)
+     ebmalloc_mem[EBMALLOC_SIZE];
+-static unsigned long __initdata ebmalloc_allocated;
++static unsigned long __read_mostly ebmalloc_allocated;
+ 
+ /* EFI boot allocator. */
+ void __init *ebmalloc(size_t size)
+@@ -36,17 +40,32 @@ void __init *ebmalloc(size_t size)
+     return ptr;
+ }
+ 
++bool __hwdom_init efi_boot_mem_unused(unsigned long *start, unsigned long *end)
++{
++    *start = (unsigned long)ebmalloc_mem + PAGE_ALIGN(ebmalloc_allocated);
++    *end = (unsigned long)ebmalloc_mem + sizeof(ebmalloc_mem);
++
++    return *start < *end;
++}
++
+ void __init free_ebmalloc_unused_mem(void)
+ {
+-#if 0 /* FIXME: Putting a hole in the BSS breaks the IOMMU mappings for dom0. */
+     unsigned long start, end;
+ 
+-    start = (unsigned long)ebmalloc_mem + PAGE_ALIGN(ebmalloc_allocated);
+-    end = (unsigned long)ebmalloc_mem + sizeof(ebmalloc_mem);
++#ifdef CONFIG_X86
++    /* FIXME: Putting a hole in .bss would shatter the large page mapping. */
++    if ( using_2M_mapping() )
++    {
++        ebmalloc_allocated = sizeof(ebmalloc_mem);
++        return;
++    }
++#endif
++
++    if ( !efi_boot_mem_unused(&start, &end) )
++        return;
+ 
+     destroy_xen_mappings(start, end);
+     init_xenheap_pages(__pa(start), __pa(end));
+ 
+     printk(XENLOG_INFO "Freed %lukB unused BSS memory\n", (end - start) >> 10);
+-#endif
+ }
+--- a/xen/include/asm-x86/setup.h
++++ b/xen/include/asm-x86/setup.h
+@@ -9,6 +9,8 @@ extern const char __2M_rodata_start[], _
+ extern char __2M_init_start[], __2M_init_end[];
+ extern char __2M_rwdata_start[], __2M_rwdata_end[];
+ 
++bool using_2M_mapping(void);
++
+ extern unsigned long xenheap_initial_phys_start;
+ extern uint64_t boot_tsc_stamp;
+ 
+--- a/xen/include/xen/efi.h
++++ b/xen/include/xen/efi.h
+@@ -33,6 +33,7 @@ struct compat_pf_efi_runtime_call;
+ 
+ bool efi_enabled(unsigned int feature);
+ void efi_init_memory(void);
++bool efi_boot_mem_unused(unsigned long *start, unsigned long *end);
+ bool efi_rs_using_pgtables(void);
+ unsigned long efi_get_time(void);
+ void efi_halt_system(void);
 
 
