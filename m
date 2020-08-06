@@ -7,51 +7,50 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 67B57C433E1
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 23:50:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 595D9C433E0
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 23:50:09 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 62048221E2
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 23:50:05 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 5A15C21744
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 23:50:09 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="LW3TnvpD"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 62048221E2
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="tHiMGuXB"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5A15C21744
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k3pdz-0004Sp-7c; Thu, 06 Aug 2020 23:49:55 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1k3pe3-0004XM-JU; Thu, 06 Aug 2020 23:49:59 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=flvv=BQ=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1k3pdx-0004FE-Mw
- for xen-devel@lists.xenproject.org; Thu, 06 Aug 2020 23:49:53 +0000
-X-Inumbo-ID: 65196a16-6859-4420-b545-0fc5d466942c
+ id 1k3pe2-0004FC-Ko
+ for xen-devel@lists.xenproject.org; Thu, 06 Aug 2020 23:49:58 +0000
+X-Inumbo-ID: 6954ef09-0bf3-4d94-8bf6-5350f103198a
 Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 65196a16-6859-4420-b545-0fc5d466942c;
- Thu, 06 Aug 2020 23:49:41 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 6954ef09-0bf3-4d94-8bf6-5350f103198a;
+ Thu, 06 Aug 2020 23:49:42 +0000 (UTC)
 Received: from sstabellini-ThinkPad-T480s.hsd1.ca.comcast.net
  (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 247E3221E2;
- Thu,  6 Aug 2020 23:49:41 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 2AFCE22D01;
+ Thu,  6 Aug 2020 23:49:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1596757781;
- bh=fI8sUwAia9oJeCWiNXgbqAhwYFTIQGUCuTFqxFs8WNk=;
+ s=default; t=1596757782;
+ bh=48yV9TkD2TZYv7cImPdyFJp0Stqs2SUX0/t0o7IpwKo=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=LW3TnvpD+CyGwfYRt8OjItPvI8tVr0URGSRNUGwRNk6Cc3Y9/KJFUZ0JICZnPoG3g
- t3HiKoftepNBqtWOFUQ9XtnBmA3+Y+rXwErRidWFIxdf0LbV0JD/YYjnLxG4TBudZa
- DxQ7KWE+SiblsFcKVJuIyRAJJmSEJ22gznSkYpag=
+ b=tHiMGuXBeLAKKHmdrUk+S7Ht1wpP8C/POC2Dho1OP8zsVoEN1ZYVochY6hArtHNQB
+ hT7q3b7v6MJAiRoIM8G+is0tima6EAUMURtyIs6MhRxg0J5Cw2b5SJptPY1ujdsMZA
+ RdCXvOZ6apA5UMcSmeJ4eh+F1abVe7Tirbu13CUg=
 From: Stefano Stabellini <sstabellini@kernel.org>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH 09/14] kernel-doc: public/sched.h
-Date: Thu,  6 Aug 2020 16:49:28 -0700
-Message-Id: <20200806234933.16448-9-sstabellini@kernel.org>
+Subject: [PATCH 11/14] kernel-doc: public/version.h
+Date: Thu,  6 Aug 2020 16:49:30 -0700
+Message-Id: <20200806234933.16448-11-sstabellini@kernel.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <alpine.DEB.2.21.2008061605410.16004@sstabellini-ThinkPad-T480s>
 References: <alpine.DEB.2.21.2008061605410.16004@sstabellini-ThinkPad-T480s>
@@ -77,254 +76,146 @@ Convert in-code comments to kernel-doc format wherever possible.
 
 Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
 ---
- xen/include/public/sched.h | 129 ++++++++++++++++++++++++++-----------
- 1 file changed, 92 insertions(+), 37 deletions(-)
+ xen/include/public/version.h | 74 +++++++++++++++++++++++++++++-------
+ 1 file changed, 60 insertions(+), 14 deletions(-)
 
-diff --git a/xen/include/public/sched.h b/xen/include/public/sched.h
-index 811bd87c82..6f36c3748a 100644
---- a/xen/include/public/sched.h
-+++ b/xen/include/public/sched.h
-@@ -29,41 +29,50 @@
+diff --git a/xen/include/public/version.h b/xen/include/public/version.h
+index 17a81e23cd..9a7d8d26dd 100644
+--- a/xen/include/public/version.h
++++ b/xen/include/public/version.h
+@@ -30,19 +30,33 @@
  
- #include "event_channel.h"
+ #include "xen.h"
  
--/*
-- * `incontents 150 sched Guest Scheduler Operations
+-/* NB. All ops return zero on success, except XENVER_{version,pagesize}
+- * XENVER_{version,pagesize,build_id} */
 +/**
-+ * DOC: Guest Scheduler Operations
-  *
-  * The SCHEDOP interface provides mechanisms for a guest to interact
-  * with the scheduler, including yield, blocking and shutting itself
-  * down.
-  */
- 
--/*
-+/**
-+ * DOC: HYPERVISOR_sched_op
++ * DOC: XENVER_*
 + *
-  * The prototype for this hypercall is:
-- * ` long HYPERVISOR_sched_op(enum sched_op cmd, void *arg, ...)
-  *
-- * @cmd == SCHEDOP_??? (scheduler operation).
-- * @arg == Operation-specific extra argument(s), as described below.
-- * ...  == Additional Operation-specific extra arguments, described below.
-+ * long HYPERVISOR_sched_op(enum sched_op cmd, void *arg, ...)
++ * NB. All ops return zero on success, except for:
 + *
-+ * - @cmd == SCHEDOP_??? (scheduler operation).
-+ * - @arg == Operation-specific extra argument(s), as described below.
-+ * - ...  == Additional Operation-specific extra arguments, described below.
-  *
-  * Versions of Xen prior to 3.0.2 provided only the following legacy version
-  * of this hypercall, supporting only the commands yield, block and shutdown:
-+ *
-  *  long sched_op(int cmd, unsigned long arg)
-- * @cmd == SCHEDOP_??? (scheduler operation).
-- * @arg == 0               (SCHEDOP_yield and SCHEDOP_block)
-- *      == SHUTDOWN_* code (SCHEDOP_shutdown)
-+ *
-+ * - @cmd == SCHEDOP_??? (scheduler operation).
-+ * - @arg == 0               (SCHEDOP_yield and SCHEDOP_block)
-+ * -      == SHUTDOWN_* code (SCHEDOP_shutdown)
-  *
-  * This legacy version is available to new guests as:
-- * ` long HYPERVISOR_sched_op_compat(enum sched_op cmd, unsigned long arg)
-+ *
-+ * long HYPERVISOR_sched_op_compat(enum sched_op cmd, unsigned long arg)
-  */
- 
- /* ` enum sched_op { // SCHEDOP_* => struct sched_* */
--/*
-- * Voluntarily yield the CPU.
-- * @arg == NULL.
-+
-+/**
-+ * DOC: SCHEDOP_yield
-+ * Voluntarily yield the CPU. @arg == NULL.
-  */
- #define SCHEDOP_yield       0
- 
--/*
-+/**
-+ * DOC: SCHEDOP_block
-+ *
-  * Block execution of this VCPU until an event is received for processing.
-  * If called with event upcalls masked, this operation will atomically
-  * reenable event delivery and check for pending events before blocking the
-@@ -72,7 +81,9 @@
-  */
- #define SCHEDOP_block       1
- 
--/*
-+/**
-+ * DOC: SCHEDOP_shutdown
-+ *
-  * Halt execution of this domain (all VCPUs) and notify the system controller.
-  * @arg == pointer to sched_shutdown_t structure.
-  *
-@@ -87,14 +98,18 @@
-  */
- #define SCHEDOP_shutdown    2
- 
--/*
-+/**
-+ * DOC: SCHEDOP_poll
-+ *
-  * Poll a set of event-channel ports. Return when one or more are pending. An
-  * optional timeout may be specified.
-  * @arg == pointer to sched_poll_t structure.
-  */
- #define SCHEDOP_poll        3
- 
--/*
-+/**
-+ * DOC: SCHEDOP_remote_shutdown
-+ *
-  * Declare a shutdown for another domain. The main use of this function is
-  * in interpreting shutdown requests and reasons for fully-virtualized
-  * domains.  A para-virtualized domain may use SCHEDOP_shutdown directly.
-@@ -102,14 +117,18 @@
-  */
- #define SCHEDOP_remote_shutdown        4
- 
--/*
-+/**
-+ * DOC: SCHEDOP_shutdown_code
-+ *
-  * Latch a shutdown code, so that when the domain later shuts down it
-  * reports this code to the control tools.
-  * @arg == sched_shutdown_t, as for SCHEDOP_shutdown.
-  */
- #define SCHEDOP_shutdown_code 5
- 
--/*
-+/**
-+ * DOC: SCHEDOP_watchdog
-+ *
-  * Setup, poke and destroy a domain watchdog timer.
-  * @arg == pointer to sched_watchdog_t structure.
-  * With id == 0, setup a domain watchdog timer to cause domain shutdown
-@@ -119,7 +138,9 @@
-  */
- #define SCHEDOP_watchdog    6
- 
--/*
-+/**
-+ * DOC: SCHEDOP_pin_override
-+ *
-  * Override the current vcpu affinity by pinning it to one physical cpu or
-  * undo this override restoring the previous affinity.
-  * @arg == pointer to sched_pin_override_t structure.
-@@ -132,12 +153,19 @@
- #define SCHEDOP_pin_override 7
- /* ` } */
- 
-+/**
-+ * struct sched_shutdown
++ * - XENVER_{version,pagesize}
++ * - XENVER_{version,pagesize,build_id}
 + */
- struct sched_shutdown {
--    unsigned int reason; /* SHUTDOWN_* => enum sched_shutdown_reason */
-+    /** @reason: SHUTDOWN_* => enum sched_shutdown_reason */
-+    unsigned int reason;
+ 
+-/* arg == NULL; returns major:minor (16:16). */
++/**
++ * DOC: XENVER_version
++ * @arg == NULL; returns major:minor (16:16).
++ */
+ #define XENVER_version      0
+ 
+-/* arg == xen_extraversion_t. */
++/**
++ * DOC: XENVER_extraversion
++ * @arg == xen_extraversion_t.
++ */
+ #define XENVER_extraversion 1
+ typedef char xen_extraversion_t[16];
+ #define XEN_EXTRAVERSION_LEN (sizeof(xen_extraversion_t))
+ 
+-/* arg == xen_compile_info_t. */
+ #define XENVER_compile_info 2
++/**
++ * struct xen_compile_info - XENVER_compile_info
++ */
+ struct xen_compile_info {
+     char compiler[64];
+     char compile_by[16];
+@@ -51,52 +65,84 @@ struct xen_compile_info {
  };
- typedef struct sched_shutdown sched_shutdown_t;
- DEFINE_XEN_GUEST_HANDLE(sched_shutdown_t);
+ typedef struct xen_compile_info xen_compile_info_t;
  
 +/**
-+ * struct sched_poll
++ * DOC: XENVER_capabilities
++ * @arg: xen_capabilities_info_t
 + */
- struct sched_poll {
-     XEN_GUEST_HANDLE(evtchn_port_t) ports;
-     unsigned int nr_ports;
-@@ -146,39 +174,62 @@ struct sched_poll {
- typedef struct sched_poll sched_poll_t;
- DEFINE_XEN_GUEST_HANDLE(sched_poll_t);
+ #define XENVER_capabilities 3
+ typedef char xen_capabilities_info_t[1024];
+ #define XEN_CAPABILITIES_INFO_LEN (sizeof(xen_capabilities_info_t))
  
 +/**
-+ * struct sched_remote_shutdown
++ * DOC: XENVER_changeset
++ * @arg: xen_changeset_info_t
 + */
- struct sched_remote_shutdown {
--    domid_t domain_id;         /* Remote domain ID */
--    unsigned int reason;       /* SHUTDOWN_* => enum sched_shutdown_reason */
-+    /** @domain_id: Remote domain ID */
-+    domid_t domain_id;
-+    /** @reason: SHUTDOWN_* => enum sched_shutdown_reason */
-+    unsigned int reason;
+ #define XENVER_changeset 4
+ typedef char xen_changeset_info_t[64];
+ #define XEN_CHANGESET_INFO_LEN (sizeof(xen_changeset_info_t))
+ 
+ #define XENVER_platform_parameters 5
++/**
++ * struct xen_platform_parameters - XENVER_platform_parameters
++ */
+ struct xen_platform_parameters {
+     xen_ulong_t virt_start;
  };
- typedef struct sched_remote_shutdown sched_remote_shutdown_t;
- DEFINE_XEN_GUEST_HANDLE(sched_remote_shutdown_t);
+ typedef struct xen_platform_parameters xen_platform_parameters_t;
+ 
+ #define XENVER_get_features 6
++/**
++ * struct xen_feature_info - XENVER_get_features
++ */
+ struct xen_feature_info {
+-    unsigned int submap_idx;    /* IN: which 32-bit submap to return */
+-    uint32_t     submap;        /* OUT: 32-bit submap */
++    /** @submap_idx: IN: which 32-bit submap to return */
++    unsigned int submap_idx;
++    /** @submap: OUT: 32-bit submap */
++    uint32_t     submap;
+ };
+ typedef struct xen_feature_info xen_feature_info_t;
+ 
+-/* Declares the features reported by XENVER_get_features. */
++/**
++ * DOC: features.h
++ * Declares the features reported by XENVER_get_features.
++ */
+ #include "features.h"
+ 
+-/* arg == NULL; returns host memory page size. */
++/**
++ * DOC: XENVER_pagesize
++ * @arg == NULL; returns host memory page size.
++ */
+ #define XENVER_pagesize 7
+ 
+-/* arg == xen_domain_handle_t.
++/**
++ * DOC: XENVER_guest_handle
++ *
++ * @arg == xen_domain_handle_t.
+  *
+  * The toolstack fills it out for guest consumption. It is intended to hold
+  * the UUID of the guest.
+  */
+ #define XENVER_guest_handle 8
  
 +/**
-+ * struct sched_watchdog
++ * DOC: XENVER_commandline
++ * @arg: xen_commandline_t
 + */
- struct sched_watchdog {
--    uint32_t id;                /* watchdog ID */
--    uint32_t timeout;           /* timeout */
-+    /** @id: watchdog ID */
-+    uint32_t id;
-+    /** @timeout: timeout */
-+    uint32_t timeout;
- };
- typedef struct sched_watchdog sched_watchdog_t;
- DEFINE_XEN_GUEST_HANDLE(sched_watchdog_t);
- 
-+/**
-+ * struct sched_pin_override
-+ */
- struct sched_pin_override {
-     int32_t pcpu;
- };
- typedef struct sched_pin_override sched_pin_override_t;
- DEFINE_XEN_GUEST_HANDLE(sched_pin_override_t);
+ #define XENVER_commandline 9
+ typedef char xen_commandline_t[1024];
  
 -/*
-- * Reason codes for SCHEDOP_shutdown. These may be interpreted by control
-- * software to determine the appropriate action. For the most part, Xen does
-- * not care about the shutdown code.
++#define XENVER_build_id 10
 +/**
-+ * DOC: Reason codes for SCHEDOP_shutdown
++ * struct xen_build_id - XENVER_build_id
 + *
-+ * These may be interpreted by control software to determine the
-+ * appropriate action. For the most part, Xen does not care about the
-+ * shutdown code.
-+ *
-+ * - SHUTDOWN_poweroff: Domain exited normally. Clean up and kill.
-+ * - SHUTDOWN_reboot:   Clean up, kill, and then restart.
-+ * - SHUTDOWN_suspend:  Clean up, save suspend info, kill.
-+ * - SHUTDOWN_crash:    Tell controller we've crashed.
-+ * - SHUTDOWN_watchdog: Restart because watchdog time expired.
+  * Return value is the number of bytes written, or XEN_Exx on error.
+  * Calling with empty parameter returns the size of build_id.
   */
- /* ` enum sched_shutdown_reason { */
--#define SHUTDOWN_poweroff   0  /* Domain exited normally. Clean up and kill. */
--#define SHUTDOWN_reboot     1  /* Clean up, kill, and then restart.          */
--#define SHUTDOWN_suspend    2  /* Clean up, save suspend info, kill.         */
--#define SHUTDOWN_crash      3  /* Tell controller we've crashed.             */
--#define SHUTDOWN_watchdog   4  /* Restart because watchdog time expired.     */
-+#define SHUTDOWN_poweroff   0
-+#define SHUTDOWN_reboot     1
-+#define SHUTDOWN_suspend    2
-+#define SHUTDOWN_crash      3
-+#define SHUTDOWN_watchdog   4
+-#define XENVER_build_id 10
+ struct xen_build_id {
+-        uint32_t        len; /* IN: size of buf[]. */
++        /** @len: IN: size of buf[]. */
++        uint32_t        len;
++        /** @buf: OUT: Variable length buffer with build_id. */
+         unsigned char   buf[XEN_FLEX_ARRAY_DIM];
+-                             /* OUT: Variable length buffer with build_id. */
+ };
+ typedef struct xen_build_id xen_build_id_t;
  
--/*
-+/**
-+ * DOC: SHUTDOWN_soft_reset
-+ *
-  * Domain asked to perform 'soft reset' for it. The expected behavior is to
-  * reset internal Xen state for the domain returning it to the point where it
-  * was created but leaving the domain's memory contents and vCPU contexts
-@@ -186,7 +237,11 @@ DEFINE_XEN_GUEST_HANDLE(sched_pin_override_t);
-  * interfaces again.
-  */
- #define SHUTDOWN_soft_reset 5
--#define SHUTDOWN_MAX        5  /* Maximum valid shutdown reason.             */
-+/**
-+ * DOC: SHUTDOWN_MAX
-+ * Maximum valid shutdown reason
-+ */
-+#define SHUTDOWN_MAX        5
- /* ` } */
- 
- #endif /* __XEN_PUBLIC_SCHED_H__ */
 -- 
 2.17.1
 
