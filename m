@@ -2,73 +2,54 @@ Return-Path: <SRS0=cbMO=BQ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
+X-Spam-Status: No, score=-7.0 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8B67FC433E3
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8BA3DC433DF
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:05:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5B7D822D02
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:01:44 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="q3j+oj4r"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5B7D822D02
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 6841122D05
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 12:05:04 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6841122D05
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k3cS1-0004Xg-9u; Thu, 06 Aug 2020 09:44:41 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1k3edX-0001CW-Mp; Thu, 06 Aug 2020 12:04:43 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=dZxa=BQ=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1k3cS0-0004Xa-Lm
- for xen-devel@lists.xenproject.org; Thu, 06 Aug 2020 09:44:40 +0000
-X-Inumbo-ID: ff8ff1f7-4cd1-4e94-9072-722a1face18c
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id ff8ff1f7-4cd1-4e94-9072-722a1face18c;
- Thu, 06 Aug 2020 09:44:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vuPhnUSIT7TQpzuqweSrTCzl/IuMTfJWC4ovwxhQBoU=; b=q3j+oj4rwH/7acxpKboudYJhG+
- gBPVElmAzQCb3NmBxvzY3wtrekNZin5gkt0GeUuNS8v4cWF+PxdLeGEMPlheXBMm5Uz6DBUEKu+Ud
- I0/vUhb253hxeDz22uuKy6JOHMx8RbdauTHKZJ1XM7kdEhpkGDzsD+qm+lhWc+Qr5+cs=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1k3cRx-0006m5-EB; Thu, 06 Aug 2020 09:44:37 +0000
-Received: from [54.239.6.187] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1k3cRx-0005Si-5w; Thu, 06 Aug 2020 09:44:37 +0000
-Subject: Re: [PATCH 1/4] build: work around bash issue
-To: Jan Beulich <jbeulich@suse.com>
-References: <305c2532-408a-9f78-61fe-c90a2e86eb8e@suse.com>
- <b427e8e6-b9ff-65d2-074b-19439a2e3d02@suse.com>
- <e8006147-31e5-d4c5-8c13-74250f267c0c@xen.org>
- <df45f8af-a32b-67cf-2f56-4761ce263a28@suse.com>
- <1a3325a8-a59a-7759-b7a9-9263652b429c@xen.org>
- <0f853234-3f62-de82-d083-3c0cfc285c20@suse.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <9dea7b27-f97e-45c3-30ae-66e85d9eda87@xen.org>
-Date: Thu, 6 Aug 2020 10:44:34 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
- Gecko/20100101 Thunderbird/68.11.0
+ (envelope-from <SRS0=gxiU=BQ=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1k3edW-0001CO-E4
+ for xen-devel@lists.xenproject.org; Thu, 06 Aug 2020 12:04:42 +0000
+X-Inumbo-ID: 5ccde9d2-8749-4329-9cb7-b4be8137846f
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 5ccde9d2-8749-4329-9cb7-b4be8137846f;
+ Thu, 06 Aug 2020 12:04:41 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id D3417ACC6;
+ Thu,  6 Aug 2020 12:04:57 +0000 (UTC)
+Subject: Re: [RFC] efi/boot: Unified Xen executable for UEFI Secure Boot
+ support
+To: Trammell Hudson <hudson@trmm.net>
+References: <SQvDCuitxs8ZbVLJqpnPlbhTvIw_fMkZDetiBpJD-DID2X8EnTvReCaJgThJ8b-3kS9gHm3-HYRqNJk-k1cVYPIQf04R8uuhPjm9WNKzJh4=@trmm.net>
+ <1bd2d79e-5bef-835c-f6cc-9fd367e8beb7@suse.com>
+ <FKRB6MJm-n6DwX0LoYfI4Ysny1U_xRbxvZn7ttLHGxpKTEnAmcoDMLsLsgKZGYaB2eVuIzoNQ6UPpsfiMlaRPW-7AIXQ9mqz_i9sF-tI2Ks=@trmm.net>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <5e3b16b3-0f93-4683-dcc7-852c805870c8@suse.com>
+Date: Thu, 6 Aug 2020 14:04:42 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.11.0
 MIME-Version: 1.0
-In-Reply-To: <0f853234-3f62-de82-d083-3c0cfc285c20@suse.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
+In-Reply-To: <FKRB6MJm-n6DwX0LoYfI4Ysny1U_xRbxvZn7ttLHGxpKTEnAmcoDMLsLsgKZGYaB2eVuIzoNQ6UPpsfiMlaRPW-7AIXQ9mqz_i9sF-tI2Ks=@trmm.net>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -80,37 +61,125 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- George Dunlap <George.Dunlap@eu.citrix.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Ian Jackson <ian.jackson@citrix.com>,
- Anthony Perard <anthony.perard@citrix.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 06/08/2020 10:25, Jan Beulich wrote:
-> On 06.08.2020 11:20, Julien Grall wrote:
->> On 06/08/2020 10:14, Jan Beulich wrote:
->>> I've observed it with 3.2.57(2).
->>
->> Thank you. Please mention it in the commit message.
+On 06.08.2020 13:44, Trammell Hudson wrote:
+> On Thursday, August 6, 2020 9:57 AM, Jan Beulich <jbeulich@suse.com> wrote:
+>> Overall I think it might help if this PE parsing code (if UEFI
+>> doesn't offer a protocol to do it for us) was put into its own
+>> source file.
 > 
-> Well, added. If I had seen any use of the precise version, I would
-> have done so right away. Would you mind educating me how knowing
-> the precise version is useful, without knowing up to which version
-> the issue exists?
+> I tried to putting it into a separate file and ran into link issues,
+> seems that it needs to be mentioned in both arch/x86/Makefile and
+> arch/x86/pe/Makefile, so this was a "just make it work" for the PoC.
+> Now that it is working, I'll go back to see if I can figure out the
+> makefile magic.
 
-Indeed, this wouldn't tell us whether other bash versions are affected.
+I was rather thinking of e.g. xen/common/efi/pe.c.
 
-However, as a reviewer, I need to be able to verify what you wrote is 
-correct and that your patch is the correct way to solve it.
+>> I also wonder if it wouldn't better be optional
+>> (i.e. depend on a Kconfig option).
+> 
+> My preference would be to have it always on so that any Xen
+> executable can be unified and signed by the end user, rather than
+> requiring the user to do a separate build from source. For instance,
+> the Qubes install DVD has a normal xen.efi, but I can generate my own
+> signed version for my system by unifying it with the kernel and
+> initrd.
 
-So providing the bash version where you observed the issue will at least 
-fulfill this part.
+It's still a choice that can be left to the distro imo. In particular
+embedded use cases may want to save the extra logic.
 
-Cheers,
+>>> -   if ( efi_rs->GetVariable(L"SecureBoot", (EFI_GUID *)&global_guid, NULL, &size, buf) != EFI_SUCCESS )
+>>> -          return false;
+>>> -   return buf[0] != 0;
+>>
+>> I.e. "SecureBoot=N" still means "enabled"?
+> 
+> Maybe? UEFI 2.8, section 3.3 "Global Variables" says for SecureBoot:
+> 
+> "Whether the platform firmware is operating in Secure boot mode (1) or not (0). All other values
+> are reserved. Should be treated as read-only."
 
--- 
-Julien Grall
+But in your expression that's then presumably '0', not 0?
+
+>> Also, considering kernel and initrd are embedded, is there really a
+>> strict need for a config file? It would seem to me that you could
+>> boot the system fine without.
+> 
+> The config file is still necessary for Xen options (console, etc) as
+> well as the kernel command line.
+
+But command line options are optional. Yes, you need a config file if
+you want to pass any options. But you may be able to get away without
+command line options, and hence without config file.
+
+>> [...]
+>> Once you know whether you're dealing with a "unified" image, you
+>> shouldn't have a need to make logic dependent upon read_section()
+>> finding a particular section: Either you find all of them (and
+>> don't even try to interpret respective config file settings), or
+>> you read everything from disk.
+> 
+> Another option that might be better would be to have a "special"
+> file name -- if the config file has a leading "." then read_file()
+> could do the PE section search instead of going to the disk.
+> That way the config file could have some things on disk, and
+> some things unified.
+
+The config file name can by supplied on the xen.efi command line.
+There's nothing keeping a user from choosing a "special" file name.
+Hence your only option here would be to pick something which is
+guaranteed to not be a valid file name, not matter what file system.
+IOW - I'm unconvinced this is the route to go.
+
+>> [...]
+>>> +# Xen goes up to a pad at 00400000
+>>
+>> "pad at 00400000"?
+> 
+> $ objdump -h xen.efi
+> 
+> xen.efi:     file format pei-x86-64
+> 
+> Sections:
+> Idx Name          Size      VMA               LMA               File off  Algn
+> [...]
+>   8 .pad          00400000  ffff82d040c00000  ffff82d040c00000  00000000  2**2
+>                   ALLOC
+> 
+> There is this pad at the end of the image; I wasn't sure if it was important,
+> so I had the script deposit the extra sections after it.  Hopefully there is
+> someway to automatically figure out the correct address for the additional
+> segments.
+
+There's no useful data in this section - see the linker script for
+why it exists. But an important issue here again is that there
+shouldn't be hard coded numbers. The size of this section can
+easily change over time.
+
+>>> +objcopy \
+>>> -   --add-section .kernel="$KERNEL" \
+>>> -   --add-section .ramdisk="$RAMDISK" \
+>>> -   --add-section .config="$CONFIG" \
+>>> -   --change-section-vma .config=0xffff82d041000000 \
+>>> -   --change-section-vma .kernel=0xffff82d041010000 \
+>>> -   --change-section-vma .ramdisk=0xffff82d042000000 \
+>>
+>> Of course these hard coded numbers will be eliminated in the
+>> long run?
+> 
+> Ideally.  We could try to parse out the address based on the objdump output,
+> although oddly systemd-boot has hardcoded ones as well.
+
+Perhaps the Linux kernel (or whatever else they work on) doesn't
+ever change addresses. The addresses shown here have changed just
+recently (they moved down by 1Gb). Earlier today I've submitted a
+patch where, in the course of putting together, I did consider
+whether I'd change the virtual memory layout again (and then even
+conditionally upon CONFIG_PV32).
+
+Jan
 
