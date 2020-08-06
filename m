@@ -4,60 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-11.3 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=3.4.0
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3F57AC433E1
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 00:37:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D586EC433E3
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 00:37:50 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1596920842
-	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 00:37:49 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id A6C832245C
+	for <xen-devel@archiver.kernel.org>; Thu,  6 Aug 2020 00:37:50 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="K+RgeZLA"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1596920842
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="aEQ5h/vB"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A6C832245C
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k3TuK-0008Sy-9U; Thu, 06 Aug 2020 00:37:20 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1k3Tue-0008VK-2r; Thu, 06 Aug 2020 00:37:40 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=flvv=BQ=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1k3TuI-0008St-Ks
- for xen-devel@lists.xenproject.org; Thu, 06 Aug 2020 00:37:18 +0000
-X-Inumbo-ID: 677f2daf-3738-4a90-8d48-2da1ce953f19
+ id 1k3Tuc-0008Un-KO
+ for xen-devel@lists.xenproject.org; Thu, 06 Aug 2020 00:37:38 +0000
+X-Inumbo-ID: 0318ceb1-8ef3-4499-ba90-c6c1c530e1d1
 Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 677f2daf-3738-4a90-8d48-2da1ce953f19;
- Thu, 06 Aug 2020 00:37:16 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 0318ceb1-8ef3-4499-ba90-c6c1c530e1d1;
+ Thu, 06 Aug 2020 00:37:38 +0000 (UTC)
 Received: from localhost (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 4714720842;
- Thu,  6 Aug 2020 00:37:15 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id EC97E20842;
+ Thu,  6 Aug 2020 00:37:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1596674235;
- bh=QL2X5XhqFxDTG6/bMrTWuGUIjxEqBB6EpA4FLHOdu94=;
+ s=default; t=1596674257;
+ bh=HUah37MMBn0GfpIWlikSkdn3TmdrL0UVtnSZU4cStsQ=;
  h=Date:From:To:cc:Subject:In-Reply-To:References:From;
- b=K+RgeZLA5Yn124yXBV/brINIkhAyoYii2OQ9X2vyBUKIsU6UWzgDRPSIQT74Iam/b
- EqfnuLN30qpXXYLisXtq6TwLphrEN/Becv3R6c7CAj3z1HADho/6/JDYAd17k7eyHg
- e+lup9+nFhys67svZc3s9E3tyA9HK0VmF5vSgtkY=
-Date: Wed, 5 Aug 2020 17:37:14 -0700 (PDT)
+ b=aEQ5h/vBXHTcZjJoUDP4Kj0475b8Lxd3Q9GRVrModzkvk+8W4eLL+HHjFKXtX9nZn
+ hK9fG93kkGeiEEE4plX/NuRkqaM+7YCzEVPp3QDN5CJTqEfKBW5NUk0B9LdlHm7z3S
+ 54V9rIh35DsWoRi4nAkO2S6aGsSapRJ0z5XdyGfE=
+Date: Wed, 5 Aug 2020 17:37:36 -0700 (PDT)
 From: Stefano Stabellini <sstabellini@kernel.org>
 X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
-To: Julien Grall <julien@xen.org>
-Subject: Re: [RFC PATCH V1 05/12] hvm/dm: Introduce
- xendevicemodel_set_irq_level DM op
-In-Reply-To: <00e261e0-295a-9cd8-ed11-7e3801a4eb58@xen.org>
-Message-ID: <alpine.DEB.2.21.2008050943300.5748@sstabellini-ThinkPad-T480s>
+To: Oleksandr <olekstysh@gmail.com>
+Subject: Re: [RFC PATCH V1 10/12] libxl: Add support for virtio-disk
+ configuration
+In-Reply-To: <19fd2966-6e54-4f68-7f37-b2d8bb910d93@gmail.com>
+Message-ID: <alpine.DEB.2.21.2008051419370.5748@sstabellini-ThinkPad-T480s>
 References: <1596478888-23030-1-git-send-email-olekstysh@gmail.com>
- <1596478888-23030-6-git-send-email-olekstysh@gmail.com>
- <alpine.DEB.2.21.2008041358150.5748@sstabellini-ThinkPad-T480s>
- <00e261e0-295a-9cd8-ed11-7e3801a4eb58@xen.org>
+ <1596478888-23030-11-git-send-email-olekstysh@gmail.com>
+ <alpine.DEB.2.21.2008041601420.5748@sstabellini-ThinkPad-T480s>
+ <19fd2966-6e54-4f68-7f37-b2d8bb910d93@gmail.com>
 User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
@@ -71,83 +69,171 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>,
- Oleksandr Tyshchenko <olekstysh@gmail.com>,
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Wei Liu <wl@xen.org>, Ian Jackson <ian.jackson@eu.citrix.com>,
  Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
- Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>,
- xen-devel@lists.xenproject.org, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+ Anthony PERARD <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Wed, 5 Aug 2020, Julien Grall wrote:
-> On 05/08/2020 00:22, Stefano Stabellini wrote:
+On Thu, 6 Aug 2020, Oleksandr wrote:
+> On 05.08.20 02:23, Stefano Stabellini wrote:
 > > On Mon, 3 Aug 2020, Oleksandr Tyshchenko wrote:
 > > > From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 > > > 
-> > > This patch adds ability to the device emulator to notify otherend
-> > > (some entity running in the guest) using a SPI and implements Arm
-> > > specific bits for it. Proposed interface allows emulator to set
-> > > the logical level of a one of a domain's IRQ lines.
+> > > This patch adds basic support for configuring and assisting virtio-disk
+> > > backend (emualator) which is intended to run out of Qemu and could be run
+> > > in any domain.
 > > > 
-> > > Please note, this is a split/cleanup of Julien's PoC:
-> > > "Add support for Guest IO forwarding to a device emulator"
+> > > Xenstore was chosen as a communication interface for the emulator running
+> > > in non-toolstack domain to be able to get configuration either by reading
+> > > Xenstore directly or by receiving command line parameters (an updated 'xl
+> > > devd'
+> > > running in the same domain would read Xenstore beforehand and call backend
+> > > executable with the required arguments).
 > > > 
-> > > Signed-off-by: Julien Grall <julien.grall@arm.com>
+> > > An example of domain configuration (two disks are assigned to the guest,
+> > > the latter is in readonly mode):
+> > > 
+> > > vdisk = [ 'backend=DomD, disks=rw:/dev/mmcblk0p3;ro:/dev/mmcblk1p3' ]
+> > > 
+> > > Where per-disk Xenstore entries are:
+> > > - filename and readonly flag (configured via "vdisk" property)
+> > > - base and irq (allocated dynamically)
+> > > 
+> > > Besides handling 'visible' params described in configuration file,
+> > > patch also allocates virtio-mmio specific ones for each device and
+> > > writes them into Xenstore. virtio-mmio params (irq and base) are
+> > > unique per guest domain, they allocated at the domain creation time
+> > > and passed through to the emulator. Each VirtIO device has at least
+> > > one pair of these params.
+> > > 
+> > > TODO:
+> > > 1. An extra "virtio" property could be removed.
+> > > 2. Update documentation.
+> > > 
 > > > Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 > > > ---
-> > >   tools/libs/devicemodel/core.c                   | 18 ++++++++++++++++++
-> > >   tools/libs/devicemodel/include/xendevicemodel.h |  4 ++++
-> > >   tools/libs/devicemodel/libxendevicemodel.map    |  1 +
-> > >   xen/arch/arm/dm.c                               | 22
-> > > +++++++++++++++++++++-
-> > >   xen/common/hvm/dm.c                             |  1 +
-> > >   xen/include/public/hvm/dm_op.h                  | 15 +++++++++++++++
-> > >   6 files changed, 60 insertions(+), 1 deletion(-)
+> > >   tools/libxl/Makefile                 |   4 +-
+> > >   tools/libxl/libxl_arm.c              |  63 +++++++++++++++----
+> > >   tools/libxl/libxl_create.c           |   1 +
+> > >   tools/libxl/libxl_internal.h         |   1 +
+> > >   tools/libxl/libxl_types.idl          |  15 +++++
+> > >   tools/libxl/libxl_types_internal.idl |   1 +
+> > >   tools/libxl/libxl_virtio_disk.c      | 109
+> > > +++++++++++++++++++++++++++++++++
+> > >   tools/xl/Makefile                    |   2 +-
+> > >   tools/xl/xl.h                        |   3 +
+> > >   tools/xl/xl_cmdtable.c               |  15 +++++
+> > >   tools/xl/xl_parse.c                  | 115
+> > > +++++++++++++++++++++++++++++++++++
+> > >   tools/xl/xl_virtio_disk.c            |  46 ++++++++++++++
+> > >   12 files changed, 360 insertions(+), 15 deletions(-)
+> > >   create mode 100644 tools/libxl/libxl_virtio_disk.c
+> > >   create mode 100644 tools/xl/xl_virtio_disk.c
 > > > 
-> > > diff --git a/tools/libs/devicemodel/core.c b/tools/libs/devicemodel/core.c
-> > > index 4d40639..30bd79f 100644
-> > > --- a/tools/libs/devicemodel/core.c
-> > > +++ b/tools/libs/devicemodel/core.c
-> > > @@ -430,6 +430,24 @@ int xendevicemodel_set_isa_irq_level(
-> > >       return xendevicemodel_op(dmod, domid, 1, &op, sizeof(op));
-> > >   }
-> > >   +int xendevicemodel_set_irq_level(
-> > > +    xendevicemodel_handle *dmod, domid_t domid, uint32_t irq,
-> > > +    unsigned int level)
+> > > diff --git a/tools/libxl/Makefile b/tools/libxl/Makefile
+> > > index 38cd43a..df94b13 100644
+> > > --- a/tools/libxl/Makefile
+> > > +++ b/tools/libxl/Makefile
+> > > @@ -141,7 +141,9 @@ LIBXL_OBJS = flexarray.o libxl.o libxl_create.o
+> > > libxl_dm.o libxl_pci.o \
+> > >   			libxl_vtpm.o libxl_nic.o libxl_disk.o libxl_console.o
+> > > \
+> > >   			libxl_cpupool.o libxl_mem.o libxl_sched.o libxl_tmem.o
+> > > \
+> > >   			libxl_9pfs.o libxl_domain.o libxl_vdispl.o \
+> > > -			libxl_pvcalls.o libxl_vsnd.o libxl_vkb.o
+> > > $(LIBXL_OBJS-y)
+> > > +			libxl_pvcalls.o libxl_vsnd.o libxl_vkb.o \
+> > > +			libxl_virtio_disk.o $(LIBXL_OBJS-y)
+> > > +
+> > >   LIBXL_OBJS += libxl_genid.o
+> > >   LIBXL_OBJS += _libxl_types.o libxl_flask.o _libxl_types_internal.o
+> > >   diff --git a/tools/libxl/libxl_arm.c b/tools/libxl/libxl_arm.c
+> > > index 4f748e3..469a8b0 100644
+> > > --- a/tools/libxl/libxl_arm.c
+> > > +++ b/tools/libxl/libxl_arm.c
+> > > @@ -13,6 +13,12 @@
+> > >   #define GUEST_VIRTIO_MMIO_SIZE  xen_mk_ullong(0x200)
+> > >   #define GUEST_VIRTIO_MMIO_SPI   33
+> > >   +#ifndef container_of
+> > > +#define container_of(ptr, type, member) ({			\
+> > > +        typeof( ((type *)0)->member ) *__mptr = (ptr);	\
+> > > +        (type *)( (char *)__mptr - offsetof(type,member) );})
+> > > +#endif
+> > > +
+> > >   static const char *gicv_to_string(libxl_gic_version gic_version)
+> > >   {
+> > >       switch (gic_version) {
+> > > @@ -44,14 +50,32 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
+> > >           vuart_enabled = true;
+> > >       }
+> > >   -    /*
+> > > -     * XXX: Handle properly virtio
+> > > -     * A proper solution would be the toolstack to allocate the
+> > > interrupts
+> > > -     * used by each virtio backend and let the backend now which one is
+> > > used
+> > > -     */
+> > >       if (libxl_defbool_val(d_config->b_info.arch_arm.virtio)) {
+> > > -        nr_spis += (GUEST_VIRTIO_MMIO_SPI - 32) + 1;
+> > > +        uint64_t virtio_base;
+> > > +        libxl_device_virtio_disk *virtio_disk;
+> > > +
+> > > +        virtio_base = GUEST_VIRTIO_MMIO_BASE;
+> > >           virtio_irq = GUEST_VIRTIO_MMIO_SPI;
+> > > +
+> > > +        if (!d_config->num_virtio_disks) {
+> > > +            LOG(ERROR, "Virtio is enabled, but no Virtio devices
+> > > present\n");
+> > > +            return ERROR_FAIL;
+> > > +        }
+> > > +        virtio_disk = &d_config->virtio_disks[0];
+> > > +
+> > > +        for (i = 0; i < virtio_disk->num_disks; i++) {
+> > > +            virtio_disk->disks[i].base = virtio_base;
+> > > +            virtio_disk->disks[i].irq = virtio_irq;
+> > > +
+> > > +            LOG(DEBUG, "Allocate Virtio MMIO params: IRQ %u BASE
+> > > 0x%"PRIx64,
+> > > +                virtio_irq, virtio_base);
+> > > +
+> > > +            virtio_irq ++;
+> > > +            virtio_base += GUEST_VIRTIO_MMIO_SIZE;
+> > > +        }
+> > > +        virtio_irq --;
+> > > +
+> > > +        nr_spis += (virtio_irq - 32) + 1;
+> > It looks like it is an interrupt per device, which could lead to quite a
+> > few of them being allocated.
+> 
+> Yes.
+> 
+> 
+> > So, if we end up allocating
+> > let's say 6 virtio interrupts for a domain, the chance of a clash with a
+> > physical interrupt of a passthrough device is real.
+> 
+> Yes.
+> 
+> 
 > > 
-> > It is a pity that having xen_dm_op_set_pci_intx_level and
-> > xen_dm_op_set_isa_irq_level already we need to add a third one, but from
-> > the names alone I don't think we can reuse either of them.
+> > I am not entirely sure how to solve it, but these are a few ideas:
+> > - choosing virtio interrupts that are less likely to conflict (maybe >
+> >    1000)
+> > - make the virtio irq (optionally) configurable so that a user could
+> >    override the default irq and specify one that doesn't conflict
+> > - implementing support for virq != pirq (even the xl interface doesn't
+> >    allow to specify the virq number for passthrough devices, see "irqs")
 > 
-> The problem is not the name...
-> 
-> > 
-> > It is very similar to set_isa_irq_level. We could almost rename
-> > xendevicemodel_set_isa_irq_level to xendevicemodel_set_irq_level or,
-> > better, just add an alias to it so that xendevicemodel_set_irq_level is
-> > implemented by calling xendevicemodel_set_isa_irq_level. Honestly I am
-> > not sure if it is worth doing it though. Any other opinions?
-> 
-> ... the problem is the interrupt field is only 8-bit. So we would only be able
-> to cover IRQ 0 - 255.
+> Good ideas. The first requires minimum effort. Couldn't we choose virtio
+> interrupt to allocate after making sure it is absent in guest "irqs"
+> (d_config->b_info.irqs[i]), I mean to find some holes?
 
-Argh, that's not going to work :-(  I wasn't sure if it was a good idea
-anyway.
+Yes, that might be possible too.
 
-
-> It is not entirely clear how the existing subop could be extended without
-> breaking existing callers.
->
-> > But I think we should plan for not needing two calls (one to set level
-> > to 1, and one to set it to 0):
-> > https://marc.info/?l=xen-devel&m=159535112027405
-> 
-> I am not sure to understand your suggestion here? Are you suggesting to remove
-> the 'level' parameter?
-
-My hope was to make it optional to call the hypercall with level = 0,
-not necessarily to remove 'level' from the struct.
+So far we have tried to stay away from dynamic irq allocation for guests
+virtual devices, but we also didn't have to deal with potentially large
+amount of them :-)
 
