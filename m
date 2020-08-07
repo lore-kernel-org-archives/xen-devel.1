@@ -7,41 +7,41 @@ X-Spam-Status: No, score=-13.0 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7AB36C433DF
-	for <xen-devel@archiver.kernel.org>; Fri,  7 Aug 2020 08:39:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9461EC433E0
+	for <xen-devel@archiver.kernel.org>; Fri,  7 Aug 2020 08:39:08 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 548E622CAE
-	for <xen-devel@archiver.kernel.org>; Fri,  7 Aug 2020 08:39:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 548E622CAE
+	by mail.kernel.org (Postfix) with ESMTPS id 7254522CAE
+	for <xen-devel@archiver.kernel.org>; Fri,  7 Aug 2020 08:39:08 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7254522CAE
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k3xtu-00074J-Sj; Fri, 07 Aug 2020 08:38:54 +0000
+	id 1k3xu0-00077g-5w; Fri, 07 Aug 2020 08:39:00 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=yQGK=BR=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1k3xtt-0006sR-B6
- for xen-devel@lists.xenproject.org; Fri, 07 Aug 2020 08:38:53 +0000
-X-Inumbo-ID: 87eccea8-7006-4d6d-a4ef-eb3a486a0b6e
+ id 1k3xty-0006sR-BQ
+ for xen-devel@lists.xenproject.org; Fri, 07 Aug 2020 08:38:58 +0000
+X-Inumbo-ID: 11b9c77f-e984-414a-94f3-f0c4c07f335e
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 87eccea8-7006-4d6d-a4ef-eb3a486a0b6e;
+ id 11b9c77f-e984-414a-94f3-f0c4c07f335e;
  Fri, 07 Aug 2020 08:38:33 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id C33E3B645;
+ by mx2.suse.de (Postfix) with ESMTP id 4FE19B643;
  Fri,  7 Aug 2020 08:38:50 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org, x86@kernel.org,
- linux-kernel@vger.kernel.org
-Subject: [PATCH v3 7/7] x86/entry/32: revert "Fix XEN_PV build dependency"
-Date: Fri,  7 Aug 2020 10:38:26 +0200
-Message-Id: <20200807083826.16794-8-jgross@suse.com>
+ virtualization@lists.linux-foundation.org, linux-kernel@vger.kernel.org
+Subject: [PATCH v3 5/7] x86/paravirt: cleanup paravirt macros
+Date: Fri,  7 Aug 2020 10:38:24 +0200
+Message-Id: <20200807083826.16794-6-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200807083826.16794-1-jgross@suse.com>
 References: <20200807083826.16794-1-jgross@suse.com>
@@ -57,42 +57,56 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Juergen Gross <jgross@suse.com>, Thomas Gleixner <tglx@linutronix.de>,
- Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
- "H. Peter Anvin" <hpa@zytor.com>
+Cc: Juergen Gross <jgross@suse.com>, Deep Shah <sdeep@vmware.com>, "VMware,
+ Inc." <pv-drivers@vmware.com>, Ingo Molnar <mingo@redhat.com>,
+ Borislav Petkov <bp@alien8.de>, "H. Peter Anvin" <hpa@zytor.com>,
+ Thomas Gleixner <tglx@linutronix.de>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-With 32-bit Xen PV support gone commit a4c0e91d1d65bc58
-("x86/entry/32: Fix XEN_PV build dependency") can be reverted again.
+Some paravirt macros are no longer used, delete them.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- arch/x86/include/asm/idtentry.h | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ arch/x86/include/asm/paravirt.h | 15 ---------------
+ 1 file changed, 15 deletions(-)
 
-diff --git a/arch/x86/include/asm/idtentry.h b/arch/x86/include/asm/idtentry.h
-index a43366191212..337dcfd45472 100644
---- a/arch/x86/include/asm/idtentry.h
-+++ b/arch/x86/include/asm/idtentry.h
-@@ -547,7 +547,7 @@ DECLARE_IDTENTRY_RAW(X86_TRAP_MC,	exc_machine_check);
+diff --git a/arch/x86/include/asm/paravirt.h b/arch/x86/include/asm/paravirt.h
+index dedc89a07826..99da08852df0 100644
+--- a/arch/x86/include/asm/paravirt.h
++++ b/arch/x86/include/asm/paravirt.h
+@@ -614,16 +614,9 @@ bool __raw_callee_save___native_vcpu_is_preempted(long cpu);
+ #endif /* SMP && PARAVIRT_SPINLOCKS */
  
- /* NMI */
- DECLARE_IDTENTRY_NMI(X86_TRAP_NMI,	exc_nmi);
--#if defined(CONFIG_XEN_PV) && defined(CONFIG_X86_64)
-+#ifdef CONFIG_XEN_PV
- DECLARE_IDTENTRY_RAW(X86_TRAP_NMI,	xenpv_exc_nmi);
- #endif
- 
-@@ -557,7 +557,7 @@ DECLARE_IDTENTRY_DEBUG(X86_TRAP_DB,	exc_debug);
+ #ifdef CONFIG_X86_32
+-#define PV_SAVE_REGS "pushl %ecx; pushl %edx;"
+-#define PV_RESTORE_REGS "popl %edx; popl %ecx;"
+-
+ /* save and restore all caller-save registers, except return value */
+ #define PV_SAVE_ALL_CALLER_REGS		"pushl %ecx;"
+ #define PV_RESTORE_ALL_CALLER_REGS	"popl  %ecx;"
+-
+-#define PV_FLAGS_ARG "0"
+-#define PV_EXTRA_CLOBBERS
+-#define PV_VEXTRA_CLOBBERS
  #else
- DECLARE_IDTENTRY_RAW(X86_TRAP_DB,	exc_debug);
- #endif
--#if defined(CONFIG_XEN_PV) && defined(CONFIG_X86_64)
-+#ifdef CONFIG_XEN_PV
- DECLARE_IDTENTRY_RAW(X86_TRAP_DB,	xenpv_exc_debug);
+ /* save and restore all caller-save registers, except return value */
+ #define PV_SAVE_ALL_CALLER_REGS						\
+@@ -644,14 +637,6 @@ bool __raw_callee_save___native_vcpu_is_preempted(long cpu);
+ 	"pop %rsi;"							\
+ 	"pop %rdx;"							\
+ 	"pop %rcx;"
+-
+-/* We save some registers, but all of them, that's too much. We clobber all
+- * caller saved registers but the argument parameter */
+-#define PV_SAVE_REGS "pushq %%rdi;"
+-#define PV_RESTORE_REGS "popq %%rdi;"
+-#define PV_EXTRA_CLOBBERS EXTRA_CLOBBERS, "rcx" , "rdx", "rsi"
+-#define PV_VEXTRA_CLOBBERS EXTRA_CLOBBERS, "rdi", "rcx" , "rdx", "rsi"
+-#define PV_FLAGS_ARG "D"
  #endif
  
+ /*
 -- 
 2.26.2
 
