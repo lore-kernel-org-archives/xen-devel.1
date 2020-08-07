@@ -2,72 +2,74 @@ Return-Path: <SRS0=XA5Y=BR=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
+X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=3.4.0
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 211CAC433DF
-	for <xen-devel@archiver.kernel.org>; Fri,  7 Aug 2020 17:14:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8657FC433DF
+	for <xen-devel@archiver.kernel.org>; Fri,  7 Aug 2020 17:51:17 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BCB1B2086A
-	for <xen-devel@archiver.kernel.org>; Fri,  7 Aug 2020 17:14:35 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 4FC7C2086A
+	for <xen-devel@archiver.kernel.org>; Fri,  7 Aug 2020 17:51:17 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="XfSZjtlF"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BCB1B2086A
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="ihfffQgD"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4FC7C2086A
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k45wZ-0005mq-Tz; Fri, 07 Aug 2020 17:14:11 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1k46Vs-0000l5-1f; Fri, 07 Aug 2020 17:50:40 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1r1P=BR=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1k45wZ-0005ml-3f
- for xen-devel@lists.xenproject.org; Fri, 07 Aug 2020 17:14:11 +0000
-X-Inumbo-ID: 37846215-4723-44f4-90ea-dc4faf91d2cb
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 37846215-4723-44f4-90ea-dc4faf91d2cb;
- Fri, 07 Aug 2020 17:14:09 +0000 (UTC)
+ id 1k46Vq-0000l0-Nn
+ for xen-devel@lists.xenproject.org; Fri, 07 Aug 2020 17:50:38 +0000
+X-Inumbo-ID: d5ad2b37-00c7-46cf-940e-f048e993cece
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id d5ad2b37-00c7-46cf-940e-f048e993cece;
+ Fri, 07 Aug 2020 17:50:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1596820449;
+ d=citrix.com; s=securemail; t=1596822636;
  h=subject:to:cc:references:from:message-id:date:
  mime-version:in-reply-to:content-transfer-encoding;
- bh=YOv9m0OA/Njj00Z8OLpL/M86vtvTEEo/iImQR6upzVE=;
- b=XfSZjtlFJEX603sk+nth7vm7NEFEcrpDIRlqjP4wfXDQx+hCqi9RznsM
- CPe68pp1Fif3jzi9xk+kb/E/4aggIESavAhCfAcByTvMgzyRSUBL9XqIs
- Z9Mu3yIRXJc2VJ2UXDG8up6TWgfjxAd4O8Nz4H95sZLmd3hfrIObpEt0n o=;
-Authentication-Results: esa6.hc3370-68.iphmx.com;
+ bh=wwCZLKDhb5/YHhej40g9Rn2xcYtbyTNw7MdBP6jan68=;
+ b=ihfffQgDex21wl4lLunsxYKBS0kNghNDffsk7YBiBV9L4LC/YleBzxKQ
+ w/Iuu8WPZmSQT2TVubXnBoBD2zrsyNZkvxYLFQvDuuwez+og8P1QJmj+1
+ ipPyQX+XpTnpxxrFFZ7AJDz6lXBVhZbXdKcOMHBY3jKkEsP7KeyqeX0SG M=;
+Authentication-Results: esa3.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: yr4h3eRYOVSRdXPMgdRowVeJMPmBfN3D987wTz6jkjI8us0o1k3CX5W5mcRBKizGuE6iJbPDl2
- igK9F/vry0+r5yzwS7CVk6K45dhKeGX1Gay476bsUMt713AfEKoMgXdfZOpGxZG67CFyDUgf24
- C0dGBdxqprpgWrCk6Bw1rNwaD23F+t4bOjM7HJmHRQY1XuWTgNAN4onW+IftoMfmvJcBV3Y0Be
- MfeV5UTnm+H0HL00jdnL7KuexmyPQzESJnwh0kF7MiutpVvZDxu0A0MEHhE402288uWw+uSZda
- kiw=
+IronPort-SDR: 95vaTNz1rDw8oL3yK908yQAuC+KF38oWZ9SCRarG7Ppc57YIt+MjzVY6128t47a/nJt1VcyH5I
+ WkMdJKbXOOns/87G16HF2FQnx1d0CK1/7MgRkM68/cqkBbNSIud8nFkh20wKUMl4YR4kzGav/Z
+ Yy0mLqgiq+6N3ppxYFKJiAu84HRVamHvYT1ocNfQr3HJcEVH0xcdexQANKw+8RY03qhpsvcInq
+ sCOdWqe8Io5Mtr9AhFTuzlQ2Vv9wmwu37BEqjrmbtvQDH4I1EYpJE7KCLXVjTmnZTuGyHQBzgP
+ /jU=
 X-SBRS: 2.7
-X-MesageID: 24398669
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 24071940
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.75,446,1589256000"; d="scan'208";a="24398669"
-Subject: Re: [PATCH v2 3/7] x86: shrink struct arch_{vcpu,domain} when !HVM
+X-IronPort-AV: E=Sophos;i="5.75,446,1589256000"; d="scan'208";a="24071940"
+Subject: Re: [PATCH v2 4/7] bitmap: move to/from xenctl_bitmap conversion
+ helpers
 To: Jan Beulich <jbeulich@suse.com>, "xen-devel@lists.xenproject.org"
  <xen-devel@lists.xenproject.org>
 References: <3a8356a9-313c-6de8-f409-977eae1fbfa5@suse.com>
- <014a655b-7080-3804-3a56-5e00851a2a7d@suse.com>
+ <677805f1-c44c-ef65-8190-c4de3bdb327d@suse.com>
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-Message-ID: <306cec0c-93e6-4b45-f68c-3808309478bf@citrix.com>
-Date: Fri, 7 Aug 2020 18:14:05 +0100
+Message-ID: <d59cc97f-0896-f53c-8705-25f8bc9556d5@citrix.com>
+Date: Fri, 7 Aug 2020 18:50:29 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <014a655b-7080-3804-3a56-5e00851a2a7d@suse.com>
+In-Reply-To: <677805f1-c44c-ef65-8190-c4de3bdb327d@suse.com>
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 Content-Language: en-GB
 X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
  AMSPEX02CL02.citrite.net (10.69.22.126)
@@ -81,61 +83,108 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Wei Liu <wl@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Cc: George Dunlap <George.Dunlap@eu.citrix.com>,
+ Ian Jackson <ian.jackson@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Wei Liu <wl@xen.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 On 07/08/2020 12:33, Jan Beulich wrote:
-> While this won't affect overall memory overhead (struct vcpu as well as
-> struct domain get allocated as single pages) nor code size (the offsets
-> into the base structures are too large to be representable as signed 8-
-> bit displacements), it'll allow the tail of struct pv_{domain,vcpu} to
-> share a cache line with subsequent struct arch_{domain,vcpu} fields.
->
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-> ---
-> RFC: There is a risk associated with this: If we still have code
->      somewhere accessing the HVM parts of the structures without a prior
->      type check of the guest, this going to end up worse than the so far
->      not uncommon case of the access simply going to space unused by PV.
->      We may therefore want to consider whether to further restrict when
->      this conversion to union gets done.
->      And of course there's also the risk of future compilers complaining
->      about this abuse of unions. But this is limited to code that's dead
->      in !HVM configs, so only an apparent problem.
->
-> --- a/xen/include/asm-x86/hvm/domain.h
-> +++ b/xen/include/asm-x86/hvm/domain.h
-> @@ -99,7 +99,13 @@ struct hvm_pi_ops {
+> --- a/xen/common/bitmap.c
+> +++ b/xen/common/bitmap.c
+> @@ -384,3 +386,87 @@ void bitmap_byte_to_long(unsigned long *
+>  }
 >  
->  #define MAX_NR_IOREQ_SERVERS 8
->  
-> -struct hvm_domain {
-> +typedef
-> +#ifdef CONFIG_HVM
-> +struct
-> +#else
-> +union
-> +#endif
-> +hvm_domain {
->      /* Guest page range used for non-default ioreq servers */
->      struct {
->          unsigned long base;
-> @@ -203,7 +209,7 @@ struct hvm_domain {
->  #ifdef CONFIG_MEM_SHARING
->      struct mem_sharing_domain mem_sharing;
 >  #endif
-> -};
-> +} hvm_domain_t;
+> +
+> +int bitmap_to_xenctl_bitmap(struct xenctl_bitmap *xenctl_bitmap,
+> +                            const unsigned long *bitmap, unsigned int nbits)
+> +{
+> +    unsigned int guest_bytes, copy_bytes, i;
+> +    uint8_t zero = 0;
+> +    int err = 0;
+> +    uint8_t *bytemap = xmalloc_array(uint8_t, (nbits + 7) / 8);
+> +
+> +    if ( !bytemap )
+> +        return -ENOMEM;
+> +
+> +    guest_bytes = (xenctl_bitmap->nr_bits + 7) / 8;
+> +    copy_bytes  = min_t(unsigned int, guest_bytes, (nbits + 7) / 8);
+> +
+> +    bitmap_long_to_byte(bytemap, bitmap, nbits);
+> +
+> +    if ( copy_bytes != 0 )
+> +        if ( copy_to_guest(xenctl_bitmap->bitmap, bytemap, copy_bytes) )
+> +            err = -EFAULT;
+> +
+> +    for ( i = copy_bytes; !err && i < guest_bytes; i++ )
+> +        if ( copy_to_guest_offset(xenctl_bitmap->bitmap, i, &zero, 1) )
+> +            err = -EFAULT;
+> +
+> +    xfree(bytemap);
+> +
+> +    return err;
+> +}
+> +
+> +int xenctl_bitmap_to_bitmap(unsigned long *bitmap,
+> +                            const struct xenctl_bitmap *xenctl_bitmap,
+> +                            unsigned int nbits)
+> +{
+> +    unsigned int guest_bytes, copy_bytes;
+> +    int err = 0;
+> +    uint8_t *bytemap = xzalloc_array(uint8_t, (nbits + 7) / 8);
+> +
+> +    if ( !bytemap )
+> +        return -ENOMEM;
+> +
+> +    guest_bytes = (xenctl_bitmap->nr_bits + 7) / 8;
+> +    copy_bytes  = min_t(unsigned int, guest_bytes, (nbits + 7) / 8);
+> +
+> +    if ( copy_bytes != 0 )
+> +    {
+> +        if ( copy_from_guest(bytemap, xenctl_bitmap->bitmap, copy_bytes) )
+> +            err = -EFAULT;
+> +        if ( (xenctl_bitmap->nr_bits & 7) && (guest_bytes == copy_bytes) )
+> +            bytemap[guest_bytes-1] &= ~(0xff << (xenctl_bitmap->nr_bits & 7));
+> +    }
+> +
+> +    if ( !err )
+> +        bitmap_byte_to_long(bitmap, bytemap, nbits);
+> +
+> +    xfree(bytemap);
+> +
+> +    return err;
+> +}
+> +
+> +int cpumask_to_xenctl_bitmap(struct xenctl_bitmap *xenctl_cpumap,
+> +                             const cpumask_t *cpumask)
+> +{
+> +    return bitmap_to_xenctl_bitmap(xenctl_cpumap, cpumask_bits(cpumask),
+> +                                   nr_cpu_ids);
+> +}
+> +
+> +int xenctl_bitmap_to_cpumask(cpumask_var_t *cpumask,
+> +                             const struct xenctl_bitmap *xenctl_cpumap)
+> +{
+> +    int err = 0;
+> +
+> +    if ( alloc_cpumask_var(cpumask) ) {
 
-Honestly, I'd say no to this patch even it resulted in a 100x speedup,
-because I am totally lost for words about this construct, and the effect
-it comprehensibility of our code.
+At a minimum, please fix this style during the move.
 
-Seeing as improved cache locality appears to be the sole benefit,
-marginal as it is, you can achieve that in a better way by rearranging
-struct domain/vcpu to put the pv/hvm union at the end.
+However, the more I look at this code, the more concerned I get.
+
+There is absolutely no need to allocate(/doubly allocate) memory or
+double/triple bounce buffer the data.  All that is necessary is some
+careful handling of the copy length, and trailing zeroing.
+
+The cpumask variants should be trivial static inline wrapper.  The fact
+that they're not suggests an API error.
+
+In reality, these are just data-shuffling helpers, and would probably
+live better in a guest-access.c if we had a suitable one to hand, but I
+guess bitmap.c will have to do for now.
 
 ~Andrew
 
