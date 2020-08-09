@@ -2,72 +2,75 @@ Return-Path: <SRS0=77Ri=BT=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9BFBCC433DF
-	for <xen-devel@archiver.kernel.org>; Sun,  9 Aug 2020 02:24:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 266A7C433DF
+	for <xen-devel@archiver.kernel.org>; Sun,  9 Aug 2020 02:35:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 67F83206B2
-	for <xen-devel@archiver.kernel.org>; Sun,  9 Aug 2020 02:24:51 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id E6B262065C
+	for <xen-devel@archiver.kernel.org>; Sun,  9 Aug 2020 02:35:39 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="qKLyJ/T7"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 67F83206B2
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="gLSskbVP"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E6B262065C
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=oracle.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k4b0e-0004AH-MZ; Sun, 09 Aug 2020 02:24:28 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1k4bBB-00057G-NQ; Sun, 09 Aug 2020 02:35:21 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=UHIP=BT=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
- id 1k4b0d-0004AC-NV
- for xen-devel@lists.xenproject.org; Sun, 09 Aug 2020 02:24:27 +0000
-X-Inumbo-ID: 1e95eefd-f67d-4b37-8bfa-8e0d96cdee61
+ id 1k4bBA-00057B-Hp
+ for xen-devel@lists.xenproject.org; Sun, 09 Aug 2020 02:35:20 +0000
+X-Inumbo-ID: 1439a22e-a165-42e8-9f82-43a033626cfd
 Received: from userp2130.oracle.com (unknown [156.151.31.86])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 1e95eefd-f67d-4b37-8bfa-8e0d96cdee61;
- Sun, 09 Aug 2020 02:24:26 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 1439a22e-a165-42e8-9f82-43a033626cfd;
+ Sun, 09 Aug 2020 02:35:18 +0000 (UTC)
 Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
- by userp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 0792Mkq7008496;
- Sun, 9 Aug 2020 02:24:20 GMT
+ by userp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 0792XvX2026168;
+ Sun, 9 Aug 2020 02:35:10 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
  h=subject : to : cc :
  references : from : message-id : date : mime-version : in-reply-to :
  content-type : content-transfer-encoding; s=corp-2020-01-29;
- bh=KDJ+jCsIdC7X/bzGxKLszgvp0oAdjJ7d+BTcByVJjQI=;
- b=qKLyJ/T75v46keNrVtfM+2ck5obpWzZhtcOYpIFydR6yzMh5oDxJQ2LT2ITDlP6sR0C4
- GKsP8Ed2s2Ckxpvx3xP1ac4fmXlBXp9uk4o/34gw/DWfmFpYK1+2lBTSAc17axwz7rQD
- gS2hdh53gFCu9x03O3J1NmTgyIkm1GQ4tHaFGwP26t2BDgwZA0xcqgdhLGmaX1pWDOn3
- z7/zeuL1siT5Y9xpF4KZTkr5HFoQUF1RznEqbQV8kLaE9qG2d5sPcQT6v1j9Ow8iCbWG
- N9x+IcsGtjfVL68K3xQBw+cwxRT+tp3gJxSzvfzjeoqtNuW66Cdl8NNUs/lOTX6X5L9b lA== 
+ bh=6ZRtf8FS7xL94chgQEhL0kkialPRsW1/lgBWdpFkeLY=;
+ b=gLSskbVPU/hnTzo16mBN+3izzI2KqatJ7h4zdzGkzah6ndd0ahT8tbPwjD61pUZv9uUv
+ y1vE/7wpASwdwZwaNC1KeaetOvb8AqDOfioEZ92zOZKkumb9E9JYYWFU6WESgLGoZEAE
+ LOj/wyjKqwGOFNs5o+UMPh1GUSaWu7MiNPazSyldJA1BwgRSQpic8lN5OeH7lIO7OiDZ
+ XGpT/GgkUvqOtgpv2kiZ/5FaKbfxzVIlKTUVzeuagVswurLh8IjM0XFWiPcOcwDlJjRy
+ uo5m8UOJ1M32zRpFWAxsyjp8ZBe3pTGHxGK7ojrXEuipijCoQGt+zsBp57Y/gG3QoUpA BQ== 
 Received: from aserp3030.oracle.com (aserp3030.oracle.com [141.146.126.71])
- by userp2130.oracle.com with ESMTP id 32t2yd8bcm-1
+ by userp2130.oracle.com with ESMTP id 32t2yd8bpk-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Sun, 09 Aug 2020 02:24:20 +0000
+ Sun, 09 Aug 2020 02:35:10 +0000
 Received: from pps.filterd (aserp3030.oracle.com [127.0.0.1])
- by aserp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 0792HL1w051571;
- Sun, 9 Aug 2020 02:22:19 GMT
-Received: from aserv0122.oracle.com (aserv0122.oracle.com [141.146.126.236])
- by aserp3030.oracle.com with ESMTP id 32t5mjmjxx-1
+ by aserp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 0792XSPI088134;
+ Sun, 9 Aug 2020 02:35:09 GMT
+Received: from userv0122.oracle.com (userv0122.oracle.com [156.151.31.75])
+ by aserp3030.oracle.com with ESMTP id 32t5mjmsje-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Sun, 09 Aug 2020 02:22:19 +0000
-Received: from abhmp0003.oracle.com (abhmp0003.oracle.com [141.146.116.9])
- by aserv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 0792MH0V030284;
- Sun, 9 Aug 2020 02:22:17 GMT
+ Sun, 09 Aug 2020 02:35:09 +0000
+Received: from abhmp0008.oracle.com (abhmp0008.oracle.com [141.146.116.14])
+ by userv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 0792Z6GH028575;
+ Sun, 9 Aug 2020 02:35:06 GMT
 Received: from [192.168.29.236] (/73.249.50.119)
  by default (Oracle Beehive Gateway v4.0)
- with ESMTP ; Sun, 09 Aug 2020 02:22:17 +0000
-Subject: Re: [PATCH v3 3/7] x86/xen: drop tests for highmem in pv code
+ with ESMTP ; Sun, 09 Aug 2020 02:35:06 +0000
+Subject: Re: [PATCH v3 4/7] x86/paravirt: remove 32-bit support from
+ PARAVIRT_XXL
 To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org,
- x86@kernel.org, linux-kernel@vger.kernel.org
+ x86@kernel.org, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org
 References: <20200807083826.16794-1-jgross@suse.com>
- <20200807083826.16794-4-jgross@suse.com>
+ <20200807083826.16794-5-jgross@suse.com>
 From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
 Autocrypt: addr=boris.ostrovsky@oracle.com; keydata=
  xsFNBFH8CgsBEAC0KiOi9siOvlXatK2xX99e/J3OvApoYWjieVQ9232Eb7GzCWrItCzP8FUV
@@ -112,14 +115,14 @@ Autocrypt: addr=boris.ostrovsky@oracle.com; keydata=
  Fm5PY8YtX576DchSP6qJC57/eAAe/9ztZdVAdesQwGb9hZHJc75B+VNm4xrh/PJO6c1THqdQ
  19WVJ+7rDx3PhVncGlbAOiiiE3NOFPJ1OQYxPKtpBUukAlOTnkKE6QcA4zckFepUkfmBV1wM
  Jg6OxFYd01z+a+oL
-Message-ID: <60f40558-a3a8-2c1e-2c32-09f93bfca724@oracle.com>
-Date: Sat, 8 Aug 2020 22:22:07 -0400
+Message-ID: <a1073b86-ebd5-68b6-7761-99669dd93e1c@oracle.com>
+Date: Sat, 8 Aug 2020 22:34:50 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20200807083826.16794-4-jgross@suse.com>
+In-Reply-To: <20200807083826.16794-5-jgross@suse.com>
 Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 Content-Language: en-US
 X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9707
  signatures=668679
@@ -127,15 +130,15 @@ X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 bulkscore=0
  spamscore=0 mlxscore=0
  adultscore=0 malwarescore=0 mlxlogscore=999 phishscore=0 suspectscore=0
  classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2006250000
- definitions=main-2008090013
+ definitions=main-2008090015
 X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9707
  signatures=668679
 X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxlogscore=999
  priorityscore=1501
  malwarescore=0 impostorscore=0 lowpriorityscore=0 mlxscore=0 bulkscore=0
- suspectscore=0 phishscore=0 adultscore=0 spamscore=0 clxscore=1015
+ suspectscore=0 phishscore=0 adultscore=0 spamscore=0 clxscore=1011
  classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2006250000
- definitions=main-2008090013
+ definitions=main-2008090015
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -146,59 +149,32 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Thomas Gleixner <tglx@linutronix.de>,
- Stefano Stabellini <sstabellini@kernel.org>, Borislav Petkov <bp@alien8.de>,
- Ingo Molnar <mingo@redhat.com>, "H. Peter Anvin" <hpa@zytor.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Deep Shah <sdeep@vmware.com>,
+ "VMware, Inc." <pv-drivers@vmware.com>, Ingo Molnar <mingo@redhat.com>,
+ Borislav Petkov <bp@alien8.de>, Andy Lutomirski <luto@kernel.org>,
+ "H. Peter Anvin" <hpa@zytor.com>, Thomas Gleixner <tglx@linutronix.de>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 On 8/7/20 4:38 AM, Juergen Gross wrote:
-> With support for 32-bit pv guests gone pure pv-code no longer needs to
-> test for highmem. Dropping those tests removes the need for flushing
-> in some places.
->
-> Signed-off-by: Juergen Gross <jgross@suse.com>
+> @@ -377,10 +373,7 @@ static inline pte_t __pte(pteval_t val)
+>  {
+>  	pteval_t ret;
+>  
+> -	if (sizeof(pteval_t) > sizeof(long))
+> -		ret = PVOP_CALLEE2(pteval_t, mmu.make_pte, val, (u64)val >> 32);
+> -	else
+> -		ret = PVOP_CALLEE1(pteval_t, mmu.make_pte, val);
+> +	ret = PVOP_CALLEE1(pteval_t, mmu.make_pte, val);
+>  
+>  	return (pte_t) { .pte = ret };
 
 
-Reviewed-by: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Can this now simply return (pte_t) ret?
 
 
-with a suggestion
+-boris
 
-
-> ---
->  arch/x86/xen/enlighten_pv.c |  11 ++-
->  arch/x86/xen/mmu_pv.c       | 138 ++++++++++++++----------------------=
-
->  2 files changed, 57 insertions(+), 92 deletions(-)
->
-> diff --git a/arch/x86/xen/enlighten_pv.c b/arch/x86/xen/enlighten_pv.c
-> index 7d90b3da8bb4..9fec952f84f3 100644
-> --- a/arch/x86/xen/enlighten_pv.c
-> +++ b/arch/x86/xen/enlighten_pv.c
-> @@ -347,6 +347,7 @@ static void set_aliased_prot(void *v, pgprot_t prot=
-)
->  	unsigned long pfn;
->  	struct page *page;
->  	unsigned char dummy;
-> +	void *av;
-
-
-to rename this to va since you are modifying those lines anyway.
-
-
-> =20
->  	ptep =3D lookup_address((unsigned long)v, &level);
->  	BUG_ON(ptep =3D=3D NULL);
-> @@ -383,14 +384,10 @@ static void set_aliased_prot(void *v, pgprot_t pr=
-ot)
->  	if (HYPERVISOR_update_va_mapping((unsigned long)v, pte, 0))
->  		BUG();
-> =20
-> -	if (!PageHighMem(page)) {
-> -		void *av =3D __va(PFN_PHYS(pfn));
-> +	av =3D __va(PFN_PHYS(pfn));
-> =20
 
 
 
