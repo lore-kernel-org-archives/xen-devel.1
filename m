@@ -2,71 +2,67 @@ Return-Path: <SRS0=UpcS=BU=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.5 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8755AC433DF
-	for <xen-devel@archiver.kernel.org>; Mon, 10 Aug 2020 13:06:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 33D48C433E0
+	for <xen-devel@archiver.kernel.org>; Mon, 10 Aug 2020 13:25:30 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 14A282073A
-	for <xen-devel@archiver.kernel.org>; Mon, 10 Aug 2020 13:06:19 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=iittp-ac-in.20150623.gappssmtp.com header.i=@iittp-ac-in.20150623.gappssmtp.com header.b="CUvUy+/H"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 14A282073A
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=iittp.ac.in
+	by mail.kernel.org (Postfix) with ESMTPS id C6DA320729
+	for <xen-devel@archiver.kernel.org>; Mon, 10 Aug 2020 13:25:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C6DA320729
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k57V6-0000PF-5d; Mon, 10 Aug 2020 13:06:04 +0000
+	id 1k57nY-000262-Ph; Mon, 10 Aug 2020 13:25:08 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=eXML=BU=iittp.ac.in=cs17b006@srs-us1.protection.inumbo.net>)
- id 1k576N-0006wE-JT
- for xen-devel@lists.xenproject.org; Mon, 10 Aug 2020 12:40:31 +0000
-X-Inumbo-ID: f0982355-bf7a-46ca-8f47-c95c6b6325f1
-Received: from mail-wr1-x42e.google.com (unknown [2a00:1450:4864:20::42e])
+ <SRS0=ZZ4s=BU=gmail.com=wei.liu.xen@srs-us1.protection.inumbo.net>)
+ id 1k57nX-00025x-I9
+ for xen-devel@lists.xenproject.org; Mon, 10 Aug 2020 13:25:07 +0000
+X-Inumbo-ID: 8aff9d79-ce8a-49db-9ca3-6e496c3b5f98
+Received: from mail-wm1-f54.google.com (unknown [209.85.128.54])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id f0982355-bf7a-46ca-8f47-c95c6b6325f1;
- Mon, 10 Aug 2020 12:40:29 +0000 (UTC)
-Received: by mail-wr1-x42e.google.com with SMTP id f7so8036612wrw.1
- for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2020 05:40:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=iittp-ac-in.20150623.gappssmtp.com; s=20150623;
- h=mime-version:from:date:message-id:subject:to;
- bh=6RI9ge20MGwyQDF/q+D13QX8FqQS5DG75aexxfmIIus=;
- b=CUvUy+/HbzjMNa3L+c0Sb05/HonofISu/AZopp9MtVAsrUM+R77cXjsDIgsa+8kAaQ
- iBX7G+8FRHeZspfG0zPtQzVHlCF6hku1lnhIdFP/ykjfMmh6v4jXj+erMS28B4SCR5DV
- sn0z9KHcz9Wuo02vGliR9h2aSmJjxdibHWtrneqSPFAdsYMQlpD6bH4MCmiE+NN8In2e
- a+T2Bysh2Vn3grgZGQh7fZkkBeCOOipUl9O4JynRif/xdJeCOZbjn3ZyXMN9Thb/ndY9
- QXcGWztozPIIFj3MaKeK/ewoIT/WtQS2gF9zxdKd1g5l+O7I9/8GablVihIA9KAg9b2i
- TXVQ==
+ id 8aff9d79-ce8a-49db-9ca3-6e496c3b5f98;
+ Mon, 10 Aug 2020 13:25:06 +0000 (UTC)
+Received: by mail-wm1-f54.google.com with SMTP id c80so7621089wme.0
+ for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2020 06:25:06 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=6RI9ge20MGwyQDF/q+D13QX8FqQS5DG75aexxfmIIus=;
- b=sWKpXXACl0tbizHPwUSA5olAxPub8IBoCenIoxJROUsUmb2YtasYjhPDwWNHTJE95b
- fVY0J3lzmWHKphztcR3OxxrUVMMq8tS157LgrdPigF1F3gZNmGKVw48uuXY6caeM8ChZ
- qAg9c5ZEm5XdVvV6PbL0TAO7YKmRM2QIhSXp03h3Moci913oGLAwy2v9s+6IN5XTVpXh
- npkRzNAa3iVOvPgzZdjkoKMCyB4qXdNb1AVEUegrnsHQL0sQaw7DPDXkCYEW3+cEiOkp
- vxkN0zsb96ofoO6uuOOCp+cBgC74Q1G+40t9xMS55DEYvVr2l5HS9A77UX7e1hA4YyAW
- +NVw==
-X-Gm-Message-State: AOAM533QFQF3iXYkJEq/Iay121PSbmjfrhTN/e/UTgvpi31BhHpjlQrJ
- lQrd1bPhc/VIMUn8fcGxz1F2hmrCykVfLllqazjjoTHMk55paA==
-X-Google-Smtp-Source: ABdhPJxdjdUEEWqrFiCEvsNGbXTUMu/gjazRjRZbo3UHJaYxy39H6Xlo0vyt5b5ncut0XJQ5o+yhyYHM0h6KCeDp2P4=
-X-Received: by 2002:adf:df08:: with SMTP id y8mr26127825wrl.152.1597063228049; 
- Mon, 10 Aug 2020 05:40:28 -0700 (PDT)
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=0ynUFJpbuM6ihmRdtWyzhJzCORfgz4nGuPongSlaZv0=;
+ b=NIBOsaFZ6GP76OLaoKWeGu0BNpz8/mM5cjcZTJ2gXHbQabksQGTlzc25cq4BCWujcS
+ 1w3Ld61R7I47gHUjz6Ovg2C1lq8ZeEY95SonsDFV4rmJYXeARj2q+1Z4CDTvSSF5Y3ev
+ BjH3YXY6XJ48qnO3DgvgMujNqK5r7DiIncZOCWGj+t0QM5tkoseBy1aidaCDuPFwUmpe
+ OQwxkIbTzI9igJq+EbuorZ9g3faMyyDPxKzzH3vP0AZHaLHeOTaqGn0s17IF/h/Iq9go
+ wefCpqzqZ3lP1Bmz1k1fFqJxBEdnsvxOvHO8hDOlZ8s1sJhUrAHqOShLggtJiu6N+gpF
+ AvrA==
+X-Gm-Message-State: AOAM533dzQk2FihvY7PgOnheZ2NRs5/mDGXrfPSfOx64OZwfJFbif30M
+ GOEQ5ypL1+eVn3shVi/O4kc=
+X-Google-Smtp-Source: ABdhPJxTFYoBHUlKdDg8jHrQxr+2M+BeoEWH256LiDRgkZF5vPDvJht2VdQM3tRFcMsIIcjUiX6SAg==
+X-Received: by 2002:a1c:23c2:: with SMTP id j185mr24773204wmj.84.1597065905735; 
+ Mon, 10 Aug 2020 06:25:05 -0700 (PDT)
+Received: from liuwe-devbox-debian-v2 ([51.145.34.42])
+ by smtp.gmail.com with ESMTPSA id 126sm22079956wme.42.2020.08.10.06.25.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 10 Aug 2020 06:25:04 -0700 (PDT)
+Date: Mon, 10 Aug 2020 13:25:03 +0000
+From: Wei Liu <wl@xen.org>
+To: CS17B006 ARNAB DUTTA <cs17b006@iittp.ac.in>
+Subject: Re: Xen VMI APIs
+Message-ID: <20200810132503.fywmbihmaadaj45i@liuwe-devbox-debian-v2>
+References: <CA+_ggFiM+1i9BH2m5+WCgEjjzLXLS6x8823FyuL1JBBO3wc4RA@mail.gmail.com>
 MIME-Version: 1.0
-From: CS17B006 ARNAB DUTTA <cs17b006@iittp.ac.in>
-Date: Mon, 10 Aug 2020 18:10:17 +0530
-Message-ID: <CA+_ggFiM+1i9BH2m5+WCgEjjzLXLS6x8823FyuL1JBBO3wc4RA@mail.gmail.com>
-Subject: Xen VMI APIs
-To: xen-devel@lists.xenproject.org
-Content-Type: multipart/alternative; boundary="000000000000645def05ac85425d"
-X-Mailman-Approved-At: Mon, 10 Aug 2020 13:06:03 +0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CA+_ggFiM+1i9BH2m5+WCgEjjzLXLS6x8823FyuL1JBBO3wc4RA@mail.gmail.com>
+User-Agent: NeoMutt/20180716
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,74 +73,33 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wl@xen.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
---000000000000645def05ac85425d
-Content-Type: text/plain; charset="UTF-8"
+On Mon, Aug 10, 2020 at 06:10:17PM +0530, CS17B006 ARNAB DUTTA wrote:
+> Respected Sir/Ma'm
+> I am Arnab and I am currently writing rust bindings for xen vmi APIs for a
+> project known as Libmicrovmi which aims to provide unified vmi APIs for
+> various hypervisors. I am facing some difficulty regarding setting up the
+> event system in the sense that after enabling monitoring for events, on
+> polling I get a return value of 1, but xenevtchn_pending() returns a value
+> -1, which probably means it cannot get a port with pending events. I am
+> really confused and need help here.
+> 
 
-Respected Sir/Ma'm
-I am Arnab and I am currently writing rust bindings for xen vmi APIs for a
-project known as Libmicrovmi which aims to provide unified vmi APIs for
-various hypervisors. I am facing some difficulty regarding setting up the
-event system in the sense that after enabling monitoring for events, on
-polling I get a return value of 1, but xenevtchn_pending() returns a value
--1, which probably means it cannot get a port with pending events. I am
-really confused and need help here.
+If you can, please post your code.
 
-Thanking you
+Also, you can check why eenevtchn_pending returns -1 by reading kernel /
+hypervisor code and adding a few debug prints.
 
-With regards
-Arnab Dutta
-Computer Science and Engineering Department
-Indian Institute of Technology, Tirupati, India
-Ph no. 8420771531
+Wei.
 
---000000000000645def05ac85425d
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><font size=3D"2"><span style=3D"background-color:rgb(255,2=
-55,255)"><span style=3D"color:rgb(0,0,0)">Respected Sir/Ma&#39;m <span styl=
-e=3D"font-family:&quot;source sans pro&quot;,helvetica,sans-serif;white-spa=
-ce:pre-wrap"><br></span></span></span></font><div><font size=3D"2"><span st=
-yle=3D"background-color:rgb(255,255,255)"><span style=3D"color:rgb(0,0,0)">=
-<span style=3D"font-family:&quot;source sans pro&quot;,helvetica,sans-serif=
-;white-space:pre-wrap">I am Arnab and I am currently writing rust bindings =
-for xen vmi APIs for a project known as Libmicrovmi which aims to provide u=
-nified vmi APIs for various hypervisors. I am facing some difficulty regard=
-ing setting up the event system in the sense that after enabling monitoring=
- for events, on polling I get a return value of 1, but xenevtchn_pending() =
-returns a value -1, which probably means it cannot get a port with pending =
-events. I am really confused and need help here. <br></span></span></span><=
-/font></div><div><font size=3D"2"><span style=3D"background-color:rgb(255,2=
-55,255)"><span style=3D"color:rgb(0,0,0)"><span style=3D"font-family:&quot;=
-source sans pro&quot;,helvetica,sans-serif;white-space:pre-wrap"><br></span=
-></span></span></font></div><div><font size=3D"2"><span style=3D"background=
--color:rgb(255,255,255)"><span style=3D"color:rgb(0,0,0)"><span style=3D"fo=
-nt-family:&quot;source sans pro&quot;,helvetica,sans-serif;white-space:pre-=
-wrap">Thanking you</span></span></span></font></div><div><font size=3D"2"><=
-span style=3D"background-color:rgb(255,255,255)"><span style=3D"color:rgb(0=
-,0,0)"><span style=3D"font-family:&quot;source sans pro&quot;,helvetica,san=
-s-serif;white-space:pre-wrap"><br></span></span></span></font></div><div><f=
-ont size=3D"2"><span style=3D"background-color:rgb(255,255,255)"><span styl=
-e=3D"color:rgb(0,0,0)"><span style=3D"font-family:&quot;source sans pro&quo=
-t;,helvetica,sans-serif;white-space:pre-wrap">With regards</span></span></s=
-pan></font></div><div><font size=3D"2"><span style=3D"background-color:rgb(=
-255,255,255)"><span style=3D"color:rgb(0,0,0)"><span style=3D"font-family:&=
-quot;source sans pro&quot;,helvetica,sans-serif;white-space:pre-wrap">Arnab=
- Dutta</span></span></span></font></div><div><font size=3D"2"><span style=
-=3D"background-color:rgb(255,255,255)"><span style=3D"color:rgb(0,0,0)"><sp=
-an style=3D"font-family:&quot;source sans pro&quot;,helvetica,sans-serif;wh=
-ite-space:pre-wrap">Computer Science and Engineering Department</span></spa=
-n></span></font></div><div><font size=3D"2"><span style=3D"background-color=
-:rgb(255,255,255)"><span style=3D"color:rgb(0,0,0)"><span style=3D"font-fam=
-ily:&quot;source sans pro&quot;,helvetica,sans-serif;white-space:pre-wrap">=
-Indian Institute of Technology, Tirupati, India</span></span></span></font>=
-</div><div><span style=3D"background-color:rgb(255,255,255)"><span style=3D=
-"color:rgb(0,0,0)"><span style=3D"font-family:&quot;source sans pro&quot;,h=
-elvetica,sans-serif;font-size:15.12px;white-space:pre-wrap"><font size=3D"2=
-">Ph no. 8420771531</font><br></span></span></span></div></div>
-
---000000000000645def05ac85425d--
+> Thanking you
+> 
+> With regards
+> Arnab Dutta
+> Computer Science and Engineering Department
+> Indian Institute of Technology, Tirupati, India
+> Ph no. 8420771531
 
