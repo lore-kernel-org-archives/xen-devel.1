@@ -2,80 +2,71 @@ Return-Path: <SRS0=UpcS=BU=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_ADSP_CUSTOM_MED,
-	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
+X-Spam-Status: No, score=-5.3 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
 	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A546C433E0
-	for <xen-devel@archiver.kernel.org>; Mon, 10 Aug 2020 22:38:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 208C4C433E0
+	for <xen-devel@archiver.kernel.org>; Mon, 10 Aug 2020 23:34:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3ED62206DA
-	for <xen-devel@archiver.kernel.org>; Mon, 10 Aug 2020 22:38:36 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id E153C206DA
+	for <xen-devel@archiver.kernel.org>; Mon, 10 Aug 2020 23:34:37 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="aYw4TuF/"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3ED62206DA
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="0nL56wCN"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E153C206DA
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k5GQd-00008s-HB; Mon, 10 Aug 2020 22:38:03 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1k5HJ8-00056K-79; Mon, 10 Aug 2020 23:34:22 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=clbu=BU=gmail.com=julien.grall.oss@srs-us1.protection.inumbo.net>)
- id 1k5GQc-00008n-V4
- for xen-devel@lists.xenproject.org; Mon, 10 Aug 2020 22:38:03 +0000
-X-Inumbo-ID: 3ea5796a-7e7c-4262-9a14-29338de17ed8
-Received: from mail-wm1-x342.google.com (unknown [2a00:1450:4864:20::342])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3ea5796a-7e7c-4262-9a14-29338de17ed8;
- Mon, 10 Aug 2020 22:38:01 +0000 (UTC)
-Received: by mail-wm1-x342.google.com with SMTP id f18so897436wmc.0
- for <xen-devel@lists.xenproject.org>; Mon, 10 Aug 2020 15:38:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=fDsiuLPQ59OP1+i2xJ/jl++wqzTXI6dpK6NdpqI0a28=;
- b=aYw4TuF/9xzpkpCvhbHDgrmbLO7ufHfKK5m5btLFjv/da3idv1CJ+0k3u5i0759LYU
- McNRMdKAru+g2rLq30sESl/nK3qxyvX5NtTabp/nNZraiav7FMFdZcOZSFWejLde7X1f
- YuK4YDKdXy4D05mQW82m+hp4nZTaElzcxoRWUpw94mkdqkRurveE02/qSwQpaJoSNY7q
- iDuPkx5RaUQWjGMDFqzcHduyHIs4BLjKWrMxILyisvlj599eYdLJ+eVMnMH3msptDpYE
- rx0uFP0Cu2R1XPEW+0WIIyCPCmcsrz0RzKDuFgBD5k62DkgqTKl/i0paXgcS4iB3XXoh
- +pyA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=fDsiuLPQ59OP1+i2xJ/jl++wqzTXI6dpK6NdpqI0a28=;
- b=CzGR1QFzwOQR8pG4vDTmppDR7ClQAzZCVvYO3Ixez/0u2nEk1brArviMpdlnEVDdNn
- 7jDkjVQCxe7sHXZbpwuknqdtjRtDTErV7YwGZf88tE+gKOiPlXFf/mJq5HjtdlokvsJa
- 0hv3GDVfWB152NJk92px4IYrVlck//Pmxp7WMX6rcRJxvbC3z8XAXXFOppdHzoPmJ0/c
- /2/c+1gpl8p/eTjBhSmgV4qyfKLmf04Ypz6I1glBVU1oy6I/ecM3FA+MdEFd/HP+/M2O
- 5KMhklnjsNVRAiwfSwd8DXMwU2gYM0utLpba6VK0qx1/tDjVuln+yfFdHmz89+Rh8rWb
- O+3g==
-X-Gm-Message-State: AOAM5336ljEJzSWC8z/5jDJyENMBJJfbTXQ012KsZY96xGoOTXXYGob5
- naF6HaCtLd2jf5VZ/pKpH+zhI1VJ5kGmgJQ0yaw=
-X-Google-Smtp-Source: ABdhPJyJFZKkVxDdmu7DqL8Zc4lYiAm68TbqKneMEczWt/q/Ui/nTACz/yxfM96NFcyTe4RTjkTJVBWb/YZzZ1i7/E0=
-X-Received: by 2002:a7b:cc90:: with SMTP id p16mr1260039wma.79.1597099080842; 
- Mon, 10 Aug 2020 15:38:00 -0700 (PDT)
-MIME-Version: 1.0
-References: <1596478888-23030-1-git-send-email-olekstysh@gmail.com>
- <1596478888-23030-5-git-send-email-olekstysh@gmail.com>
- <alpine.DEB.2.21.2008041327110.5748@sstabellini-ThinkPad-T480s>
- <8e8a394c-bd2a-4444-9f4b-e022c59e0f81@xen.org>
- <a1a1fcca-e840-3c02-dc9c-742c3e397836@gmail.com>
- <659a5b45-a37a-5cf2-0bcd-ba1ea3d47cc4@xen.org>
- <48a130dc-57fd-0627-d188-ddff4abf6778@gmail.com>
-In-Reply-To: <48a130dc-57fd-0627-d188-ddff4abf6778@gmail.com>
-From: Julien Grall <julien.grall.oss@gmail.com>
-Date: Mon, 10 Aug 2020 23:37:49 +0100
-Message-ID: <CAJ=z9a3x7LgztG2KQKza8n3Y7xJsoO+DSmyi8Pxm1BgQOBs=xQ@mail.gmail.com>
-Subject: Re: [RFC PATCH V1 04/12] xen/arm: Introduce arch specific bits for
- IOREQ/DM features
+ <SRS0=RcVj=BU=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1k5HJ6-00056C-5f
+ for xen-devel@lists.xenproject.org; Mon, 10 Aug 2020 23:34:20 +0000
+X-Inumbo-ID: ee4bccd4-e02b-478c-a0f1-6d591fcbf6eb
+Received: from mail.kernel.org (unknown [198.145.29.99])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id ee4bccd4-e02b-478c-a0f1-6d591fcbf6eb;
+ Mon, 10 Aug 2020 23:34:19 +0000 (UTC)
+Received: from localhost (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 55648206DA;
+ Mon, 10 Aug 2020 23:34:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1597102458;
+ bh=JlWIceHJKmkCzLojUgDXFu8M8TOrsQD3Kh5m9CJMlv4=;
+ h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+ b=0nL56wCN9Gi3aIYWwcoKODFe/BxskENM7i96BQPhkyPG1/P1rqzOLp2J1HwQDotpA
+ 2KdYUykzmgIm9kNQ9/Z5tZDPATTxXn65EyFFsrsFeW4RJaw31B8g+dunXuTTB8k1U0
+ l3k3goVG8yGtsdUVs7CK50hHwnNjhzRLRQBn8R00=
+Date: Mon, 10 Aug 2020 16:34:17 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
 To: Oleksandr <olekstysh@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [RFC PATCH V1 01/12] hvm/ioreq: Make x86's IOREQ feature
+ common
+In-Reply-To: <910ec6ee-1076-2c9d-c01d-b6b4cc0bc6b8@gmail.com>
+Message-ID: <alpine.DEB.2.21.2008101210240.16004@sstabellini-ThinkPad-T480s>
+References: <1596478888-23030-1-git-send-email-olekstysh@gmail.com>
+ <1596478888-23030-2-git-send-email-olekstysh@gmail.com>
+ <000c01d66a33$2bd56510$83802f30$@xen.org>
+ <9f83a7ed-ca97-449f-c7b9-a1140644abe9@gmail.com>
+ <f0c32cfe-5c33-30ae-b08a-3d72e935745a@xen.org>
+ <alpine.DEB.2.21.2008041105510.5748@sstabellini-ThinkPad-T480s>
+ <2ab4c567-8efa-1b9d-ab00-4ea7e1ab323e@suse.com>
+ <alpine.DEB.2.21.2008051253230.5748@sstabellini-ThinkPad-T480s>
+ <013b142d-5296-5bbe-7d19-903f59e0c974@gmail.com>
+ <alpine.DEB.2.21.2008071259580.16004@sstabellini-ThinkPad-T480s>
+ <910ec6ee-1076-2c9d-c01d-b6b4cc0bc6b8@gmail.com>
+User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,130 +77,98 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>,
- Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
- Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>,
- xen-devel <xen-devel@lists.xenproject.org>,
- Daniel De Graaf <dgdegra@tycho.nsa.gov>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Cc: 'Kevin Tian' <kevin.tian@intel.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ 'Jun Nakajima' <jun.nakajima@intel.com>, 'Wei Liu' <wl@xen.org>, paul@xen.org,
+ 'Andrew Cooper' <andrew.cooper3@citrix.com>,
+ 'Ian Jackson' <ian.jackson@eu.citrix.com>,
+ 'George Dunlap' <george.dunlap@citrix.com>, 'Tim Deegan' <tim@xen.org>,
+ 'Oleksandr Tyshchenko' <oleksandr_tyshchenko@epam.com>,
+ 'Julien Grall' <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>,
+ xen-devel@lists.xenproject.org,
+ =?UTF-8?Q?'Roger_Pau_Monn=C3=A9'?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Mon, 10 Aug 2020 at 21:29, Oleksandr <olekstysh@gmail.com> wrote:
->
->
-> On 10.08.20 22:00, Julien Grall wrote:
->
-> Hi Julien
->
-> >
-> >>>
-> >>>>> @@ -2275,6 +2282,16 @@ static void check_for_vcpu_work(void)
-> >>>>>    */
-> >>>>>   void leave_hypervisor_to_guest(void)
-> >>>>>   {
-> >>>>> +#ifdef CONFIG_IOREQ_SERVER
-> >>>>> +    /*
-> >>>>> +     * XXX: Check the return. Shall we call that in
-> >>>>> +     * continue_running and context_switch instead?
-> >>>>> +     * The benefits would be to avoid calling
-> >>>>> +     * handle_hvm_io_completion on every return.
-> >>>>> +     */
-> >>>>
-> >>>> Yeah, that could be a simple and good optimization
-> >>>
-> >>> Well, it is not simple as it is sounds :).
-> >>> handle_hvm_io_completion() is the function in charge to mark the
-> >>> vCPU as waiting for I/O. So we would at least need to split the
-> >>> function.
-> >>>
-> >>> I wrote this TODO because I wasn't sure about the complexity of
-> >>> handle_hvm_io_completion(current). Looking at it again, the main
-> >>> complexity is the looping over the IOREQ servers.
-> >>>
-> >>> I think it would be better to optimize handle_hvm_io_completion()
-> >>> rather than trying to hack the context_switch() or continue_running().
-> >> Well, is the idea in proposed dirty test patch below close to what
-> >> you expect? Patch optimizes handle_hvm_io_completion() to avoid extra
-> >> actions if vcpu's domain doesn't have ioreq_server, alternatively
-> >> the check could be moved out of handle_hvm_io_completion() to avoid
-> >> calling that function at all.
-> >
-> > This looks ok to me.
-> >
-> >> BTW, TODO also suggests checking the return value of
-> >> handle_hvm_io_completion(), but I am completely sure we can simply
-> >> just return from leave_hypervisor_to_guest() at this point. Could you
-> >> please share your opinion?
-> >
-> > From my understanding, handle_hvm_io_completion() may return false if
-> > there is pending I/O or a failure.
->
-> It seems, yes
->
->
-> >
-> > In the former case, I think we want to call handle_hvm_io_completion()
-> > later on. Possibly after we call do_softirq().
-> >
-> > I am wondering whether check_for_vcpu_work() could return whether
-> > there are more work todo on the behalf of the vCPU.
-> >
-> > So we could have:
-> >
-> > do
-> > {
-> >   check_for_pcpu_work();
-> > } while (check_for_vcpu_work())
-> >
-> > The implementation of check_for_vcpu_work() would be:
-> >
-> > if ( !handle_hvm_io_completion() )
-> >   return true;
-> >
-> > /* Rest of the existing code */
-> >
-> > return false;
->
-> Thank you, will give it a try.
->
-> Can we behave the same way for both "pending I/O" and "failure" or we
-> need to distinguish them?
+On Sat, 8 Aug 2020, Oleksandr wrote:
+> On 08.08.20 00:50, Stefano Stabellini wrote:
+> > On Fri, 7 Aug 2020, Oleksandr wrote:
+> > > On 06.08.20 03:37, Stefano Stabellini wrote:
+> > > 
+> > > Hi Stefano
+> > > 
+> > > Trying to simulate IO_RETRY handling mechanism (according to model below)
+> > > I
+> > > continuously get IO_RETRY from try_fwd_ioserv() ...
+> > > 
+> > > > OK, thanks for the details. My interpretation seems to be correct.
+> > > > 
+> > > > In which case, it looks like xen/arch/arm/io.c:try_fwd_ioserv should
+> > > > return IO_RETRY. Then, xen/arch/arm/traps.c:do_trap_stage2_abort_guest
+> > > > also needs to handle try_handle_mmio returning IO_RETRY the first
+> > > > around, and IO_HANDLED when after QEMU does its job.
+> > > > 
+> > > > What should do_trap_stage2_abort_guest do on IO_RETRY? Simply return
+> > > > early and let the scheduler do its job? Something like:
+> > > > 
+> > > >               enum io_state state = try_handle_mmio(regs, hsr, gpa);
+> > > > 
+> > > >               switch ( state )
+> > > >               {
+> > > >               case IO_ABORT:
+> > > >                   goto inject_abt;
+> > > >               case IO_HANDLED:
+> > > >                   advance_pc(regs, hsr);
+> > > >                   return;
+> > > >               case IO_RETRY:
+> > > >                   /* finish later */
+> > > >                   return;
+> > > >               case IO_UNHANDLED:
+> > > >                   /* IO unhandled, try another way to handle it. */
+> > > >                   break;
+> > > >               default:
+> > > >                   ASSERT_UNREACHABLE();
+> > > >               }
+> > > > 
+> > > > Then, xen/arch/arm/ioreq.c:handle_mmio() gets called by
+> > > > handle_hvm_io_completion() after QEMU completes the emulation. Today,
+> > > > handle_mmio just sets the user register with the read value.
+> > > > 
+> > > > But it would be better if it called again the original function
+> > > > do_trap_stage2_abort_guest to actually retry the original operation.
+> > > > This time do_trap_stage2_abort_guest calls try_handle_mmio() and gets
+> > > > IO_HANDLED instead of IO_RETRY,
+> > > I may miss some important point, but I failed to see why try_handle_mmio
+> > > (try_fwd_ioserv) will return IO_HANDLED instead of IO_RETRY at this stage.
+> > > Or current try_fwd_ioserv() logic needs rework?
+> > I think you should check the ioreq->state in try_fwd_ioserv(), if the
+> > result is ready, then ioreq->state should be STATE_IORESP_READY, and you
+> > can return IO_HANDLED.
+> > 
+> > That is assuming that you are looking at the live version of the ioreq
+> > shared with QEMU instead of a private copy of it, which I am not sure.
+> > Looking at try_fwd_ioserv() it would seem that vio->io_req is just a
+> > copy? The live version is returned by get_ioreq() ?
+> 
+> If I understand the code correctly, indeed, get_ioreq() returns live version
+> shared with emulator.
+> Desired state change (STATE_IORESP_READY) what actually the hvm_wait_for_io()
+> is waiting for is set here (in my case):
+> https://xenbits.xen.org/gitweb/?p=people/pauldu/demu.git;a=blob;f=demu.c;h=f785b394d0cf141dffa05bdddecf338214358aea;hb=refs/heads/master#l698 
+> 
+> > Even in handle_hvm_io_completion, instead of setting vio->io_req.state
+> > to STATE_IORESP_READY by hand, it would be better to look at the live
+> > version of the ioreq because QEMU will have already set ioreq->state
+> > to STATE_IORESP_READY (hw/i386/xen/xen-hvm.c:cpu_handle_ioreq).
+> It seems that after detecting STATE_IORESP_READY in hvm_wait_for_io() the
+> state of live version is set to STATE_IOREQ_NONE immediately, so looking at
+> the live version down the handle_hvm_io_completion()
+> or in try_fwd_ioserv() shows us nothing I am afraid.
 
-We don't need to distinguish them. In both cases, we will want to
-process softirqs. In all the failure cases, the domain will have
-crashed. Therefore the vCPU will be unscheduled.
-
->
-> Probably we need some sort of safe timeout/number attempts in order to
-> not spin forever?
-
-Well, anything based on timeout/number of attempts is flaky. How do
-you know whether the I/O is just taking a "long time" to complete?
-
-But a vCPU shouldn't continue until an I/O has completed. This is
-nothing very different than what a processor would do.
-
-In Xen case, if an I/O never completes then it most likely means that
-something went horribly wrong with the Device Emulator. So it is most
-likely not safe to continue. In HW, when there is a device failure,
-the OS may receive an SError (this is implementation defined) and
-could act accordingly if it is able to recognize the issue.
-
-It *might* be possible to send a virtual SError but there are a couple
-of issues with it:
-     * How do you detect a failure?
-     * SErrors are implementations defined. You would need to teach
-your OS (or the firmware) how to deal with them.
-
-I would expect quite a bit of effort in order to design and implement
-it. For now, it is probably best to just let the vCPU spin forever.
-
-This wouldn't be an issue for Xen as do_softirq() would be called at
-every loop.
-
-Cheers,
+I see. That is because we want to "free" the ioreq as soon as possible,
+which is good. handle_hvm_io_completion also sets vio->io_req.state to
+STATE_IORESP_READY, so our private copy is still set to
+STATE_IORESP_READY. Thus, try_fwd_ioserv should do the right thing
+simply reading vio->io_req.state: try_fwd_ioserv should be able to
+return IO_HANDLED when the "state" is STATE_IORESP_READY, right?
 
