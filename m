@@ -7,40 +7,40 @@ X-Spam-Status: No, score=-13.0 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 917EDC433E0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8B753C433DF
 	for <xen-devel@archiver.kernel.org>; Mon, 10 Aug 2020 11:21:26 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 725BD2070B
+	by mail.kernel.org (Postfix) with ESMTPS id 6649C206E9
 	for <xen-devel@archiver.kernel.org>; Mon, 10 Aug 2020 11:21:26 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 725BD2070B
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6649C206E9
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k55ra-0008H3-Vp; Mon, 10 Aug 2020 11:21:10 +0000
+	id 1k55rQ-0008Fy-FV; Mon, 10 Aug 2020 11:21:00 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=W5wo=BU=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1k55rZ-0008Fj-Ux
- for xen-devel@lists.xenproject.org; Mon, 10 Aug 2020 11:21:09 +0000
-X-Inumbo-ID: 5e45584a-3d19-4d05-a336-5bdc192aae41
+ id 1k55rP-0008Fj-UW
+ for xen-devel@lists.xenproject.org; Mon, 10 Aug 2020 11:20:59 +0000
+X-Inumbo-ID: 276036f7-fddc-46d1-b86e-4ff89e0331dc
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 5e45584a-3d19-4d05-a336-5bdc192aae41;
+ id 276036f7-fddc-46d1-b86e-4ff89e0331dc;
  Mon, 10 Aug 2020 11:20:54 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1k55rJ-0003aJ-QP; Mon, 10 Aug 2020 12:20:53 +0100
+ id 1k55rJ-0003aJ-AT; Mon, 10 Aug 2020 12:20:53 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH 4/6] timing traces: sg-check-tested: Add prints of
- (show_abs_time time)
-Date: Mon, 10 Aug 2020 12:20:45 +0100
-Message-Id: <20200810112047.30285-4-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 2/6] timing traces: cr-publish-flight-logs: Report
+ more progress
+Date: Mon, 10 Aug 2020 12:20:43 +0100
+Message-Id: <20200810112047.30285-2-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200810112047.30285-1-ian.jackson@eu.citrix.com>
 References: <20200810112047.30285-1-ian.jackson@eu.citrix.com>
@@ -64,49 +64,43 @@ More tools to see where it is faffing too much.
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- sg-check-tested | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ cr-publish-flight-logs | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
-diff --git a/sg-check-tested b/sg-check-tested
-index 7946e4b5..39c0d0c2 100755
---- a/sg-check-tested
-+++ b/sg-check-tested
-@@ -148,7 +148,7 @@ sub prepare_execute ($@) {
-     my ($qtxt, @vars) = @_;
-     print DEBUG "\n==========\n", $qtxt,
-                 "\n----------\n", (join ' | ', @vars),
--                "\n==========\n";
-+                "\n========== ".(show_abs_time time)."\n";
-     my $q= $dbh_tests->prepare($qtxt);
-     $q->execute(@vars);
-     return $q;
-@@ -169,7 +169,7 @@ sub search () {
-     while (my $row= $q->fetchrow_hashref()) {
- 	my $flight= $row->{flight};
- 	if (!defined $prrev) {
--	    print DEBUG "==========YES\n";
-+	    print DEBUG "========== ".(show_abs_time time)." YES\n";
- 	    output $flight,"\n";
- 	    return;
- 	} else {
-@@ -195,7 +195,7 @@ END
- 	    my $row1= $valsq->fetchrow_hashref();
- 	    next unless defined $row1->{val} && length $row1->{val};
- 	    my $val1 = massage($row1->{val});
--	    print DEBUG "got $val1\n";
-+	    print DEBUG (show_abs_time time)." got $val1\n";
- 	    while (my $row2 = $valsq->fetchrow_hashref()) {
- 		my $val2 = massage($row2->{val});
- 		next if $val2 eq $val1;
-@@ -212,7 +212,7 @@ END
- 	    return;
- 	}
-     }
--    print DEBUG "==========NO\n";
-+    print DEBUG "========== ".(show_abs_time time)." NO\n";
+diff --git a/cr-publish-flight-logs b/cr-publish-flight-logs
+index 717cb957..ba5d3b70 100755
+--- a/cr-publish-flight-logs
++++ b/cr-publish-flight-logs
+@@ -43,6 +43,9 @@ die unless $flight =~ m/^\d*$/;
+ 
+ die "usage: ./cr-publish-flight-logs [flight]" unless @ARGV==0;
+ 
++sub progress { print (show_abs_time time), @_, "\n" }
++
++progress("acquiring publish-lock...");
+ open LOCK, "> $c{GlobalLockDir}/publish-lock" or die $!;
+ flock LOCK, LOCK_EX or die $!;
+ 
+@@ -51,6 +54,7 @@ if ($push_harness) {
+     my $gitdir= $c{HarnessPublishGitRepoDir};
+ 
+     if ($githost && $gitdir) {
++	progress("pushing...");
+         eval {
+     system_checked("git push $githost:$gitdir HEAD:refs/heads/flight-$flight");
+     system_checked("ssh $githost 'cd $gitdir && git update-server-info'");
+@@ -72,9 +76,10 @@ sub copydir ($$) {
+     push @cmd, '-e', join(' ', map { s/\'/''/g; "'$_'"; } @ssh);
+     #--bwlimit=50
+     push @cmd, $src, $dst;
+-    print "+ @cmd\n";
++    progress "+ @cmd";
+     $!=0; $?=0; system @cmd; die "rsync $? $!" if $? or $!;
  }
  
- db_retry($dbh_tests, [], sub {
+ copydir(qw(Logs), "/$flight") if $flight;
+ copydir(qw(Results), '');
++progress "complete.";
 -- 
 2.20.1
 
