@@ -7,40 +7,40 @@ X-Spam-Status: No, score=-13.0 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9C93AC433E1
-	for <xen-devel@archiver.kernel.org>; Mon, 10 Aug 2020 11:21:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5C19AC433E0
+	for <xen-devel@archiver.kernel.org>; Mon, 10 Aug 2020 11:21:28 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7C58120734
-	for <xen-devel@archiver.kernel.org>; Mon, 10 Aug 2020 11:21:26 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7C58120734
+	by mail.kernel.org (Postfix) with ESMTPS id 3B804206E9
+	for <xen-devel@archiver.kernel.org>; Mon, 10 Aug 2020 11:21:28 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3B804206E9
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k55rV-0008GO-Na; Mon, 10 Aug 2020 11:21:05 +0000
+	id 1k55rg-0008Ih-8U; Mon, 10 Aug 2020 11:21:16 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=W5wo=BU=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1k55rU-0008Fj-Ul
- for xen-devel@lists.xenproject.org; Mon, 10 Aug 2020 11:21:04 +0000
-X-Inumbo-ID: f70dfcdf-0d3f-4b96-aec0-c4ee5e881699
+ id 1k55re-0008Fj-VB
+ for xen-devel@lists.xenproject.org; Mon, 10 Aug 2020 11:21:14 +0000
+X-Inumbo-ID: d25bf53b-c4b2-46da-8e49-dcfd55ead790
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id f70dfcdf-0d3f-4b96-aec0-c4ee5e881699;
+ id d25bf53b-c4b2-46da-8e49-dcfd55ead790;
  Mon, 10 Aug 2020 11:20:54 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1k55rJ-0003aJ-He; Mon, 10 Aug 2020 12:20:53 +0100
+ id 1k55rK-0003aJ-2L; Mon, 10 Aug 2020 12:20:54 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH 3/6] timing traces: cr-daily-branch: Add more calls to
- date >&2
-Date: Mon, 10 Aug 2020 12:20:44 +0100
-Message-Id: <20200810112047.30285-3-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 5/6] timing traces: Executive: Provide processing
+ timestamp facilities
+Date: Mon, 10 Aug 2020 12:20:46 +0100
+Message-Id: <20200810112047.30285-5-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200810112047.30285-1-ian.jackson@eu.citrix.com>
 References: <20200810112047.30285-1-ian.jackson@eu.citrix.com>
@@ -60,100 +60,49 @@ Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-More tools to see where it is faffing too much.
+Nothing uses these yet.
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- cr-daily-branch | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+ Osstest/Executive.pm | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
 
-diff --git a/cr-daily-branch b/cr-daily-branch
-index d84dcc8e..b8f221ee 100755
---- a/cr-daily-branch
-+++ b/cr-daily-branch
-@@ -51,6 +51,7 @@ determine_version () {
-                 if [ "x$FORCE_REVISION" != x ]; then
-                         tversion="$FORCE_REVISION"
-                 else
-+			date >&2
- 			tversion=`$AP_FETCH_PFX ./ap-fetch-version "$tbranch"`
-                 fi
- 		determine_tree "$treevarwhich" "" _${treevarwhich}
-@@ -98,6 +99,7 @@ if [ "x$OLD_REVISION" = x ]; then
- 		# last test will have tested the previous upstream baseline
- 		OLD_REVISION=`check_tested --print-revision=$tree`
- 	    else
-+		date >&2
- 		OLD_REVISION="`$AP_FETCH_PFX ./ap-fetch-version-old $branch`"
- 	    fi
- 	    ;;
-@@ -159,6 +161,7 @@ if [ "x$REVISION_XEN" = x ]; then
-         export REVISION_XEN
- fi
- if [ "x$REVISION_PREVXEN" = x -a "x$prevxenbranch" != "x" ]; then
-+	date >&2
- 	REVISION_PREVXEN="`\
- 		$AP_FETCH_PFX ./ap-fetch-version-baseline $prevxenbranch`"
- 	export REVISION_PREVXEN
-@@ -321,6 +324,7 @@ unset IFS
+diff --git a/Osstest/Executive.pm b/Osstest/Executive.pm
+index c46a979d..1e94b282 100644
+--- a/Osstest/Executive.pm
++++ b/Osstest/Executive.pm
+@@ -51,6 +51,7 @@ BEGIN {
+                       report_run_getinfo report_altcolour
+                       report_altchangecolour opendb_tests
+                       report_blessingscond report_find_push_age_info
++		      log_stderr_timestamped
+                       tcpconnect_queuedaemon plan_search
+                       manual_allocation_base_jobinfo
+                       alloc_resources alloc_resources_rollback_begin_work
+@@ -293,11 +294,23 @@ sub restrictflight_arg ($) {
+         $restrictflight_cond .= " AND flights.flight != $_"
+ 	    foreach split /,/, $1;
+ 	return 1;
++    } elsif ($arg =~ m/^--report-processing-start-time$/) {
++	# This functionality is wanted by all the callers of
++	# restrictflight_arg and is here for convenience, rather than
++	# out of principle.
++	log_stderr_timestamped("starting...");
++	return 1;
+     } else {
+ 	return 0;
+     }
+ }
  
- if [ "x$OLD_REVISION" = xdetermine-late ]; then
- 	OLD_REVISION="`\
-+ date >&2
-  $AP_FETCH_PFX ./ap-fetch-version-baseline-late $branch $NEW_REVISION`"
- fi
- 
-@@ -430,6 +434,7 @@ case "$NEW_REVISION/$OLD_REVISION" in
- 
-                 case "$realtree" in
-                 xen-4*|xen-unstable*)
-+		    date >&2
-                     oldqemu=`./ap-qemu-revision $realtree $OLD_REVISION`
-                     newqemu=`./ap-qemu-revision $realtree $NEW_REVISION`
-                     if [ "$oldqemu" ] && [ "$newqemu" ]; then
-@@ -445,6 +450,7 @@ case "$NEW_REVISION/$OLD_REVISION" in
-                 cat <<END >tmp/$flight.people-touched
- People who touched revisions under test:
- END
-+		date >&2
-                 ./adhoc-people-touched-filter <$revlog \
-                         >>tmp/$flight.people-touched
- 		touched_lines=`wc -l <tmp/$flight.people-touched`
-@@ -464,9 +470,12 @@ esac
- 
- sgr_args+=" $EXTRA_SGR_ARGS"
- 
-+date >&2
- : $flight $branch $OSSTEST_BLESSING $sgr_args
- $DAILY_BRANCH_PREEXEC_HOOK
- execute_flight $flight $OSSTEST_BLESSING
-+date >&2
++sub log_stderr_timestamped ($) {
++    my $us = $0;
++    $us =~ s{.*/}{};
++    print STDERR (show_abs_time time)." $us: @_\n";
++}
 +
- start_email $flight $branch "$sgr_args" "$subject_prefix"
- 
- push=false
-@@ -502,6 +511,7 @@ elif $push; then
- 		echo >&2 "BAD PUSH REVISION $to_push"
- 		;;
- 	[0-9a-f]*)
-+		date >&2
- 	        if ./ap-push $branch $to_push 2>&1; then
- 			rm -f $branch.push $branch.force-rev
- 			perl -i~ -pe '
-@@ -527,6 +537,7 @@ freebsd-*)
-     if grep '^tolerable$' $mrof >/dev/null 2>&1 && $OSSTEST_ANOINT &&
-        [ "x$OSSTEST_BLESSING" == "xreal" ]; then
-         IFS=$'\n'
-+	date >&2
-         for anointed in `./mg-anoint list-prepared \
-                                      "freebsd build $freebsd_branch *"`; do
-             # Update anointed versions
-@@ -554,4 +565,5 @@ if [ -f $revlog ]; then
-     fi
- fi
- 
-+date >&2
- publish_send_email $flight
+ sub restrictflight_cond () {
+     return "($restrictflight_cond)";
+ }
 -- 
 2.20.1
 
