@@ -2,70 +2,66 @@ Return-Path: <SRS0=1DY5=BW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.0 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-13.0 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9AB00C433DF
-	for <xen-devel@archiver.kernel.org>; Wed, 12 Aug 2020 09:55:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8E627C433DF
+	for <xen-devel@archiver.kernel.org>; Wed, 12 Aug 2020 09:55:52 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7145C204EC
-	for <xen-devel@archiver.kernel.org>; Wed, 12 Aug 2020 09:55:48 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7145C204EC
+	by mail.kernel.org (Postfix) with ESMTPS id 6B60E204EC
+	for <xen-devel@archiver.kernel.org>; Wed, 12 Aug 2020 09:55:52 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6B60E204EC
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k5nTb-0000Vu-BO; Wed, 12 Aug 2020 09:55:19 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1k5nTw-0000XO-Lf; Wed, 12 Aug 2020 09:55:40 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=rnXN=BW=gmail.com=wei.liu.xen@srs-us1.protection.inumbo.net>)
- id 1k5nTZ-0000Vp-Td
- for xen-devel@lists.xenproject.org; Wed, 12 Aug 2020 09:55:17 +0000
-X-Inumbo-ID: 33706cb2-ac72-40a4-85f4-06659d873dea
-Received: from mail-wr1-f66.google.com (unknown [209.85.221.66])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 33706cb2-ac72-40a4-85f4-06659d873dea;
- Wed, 12 Aug 2020 09:55:16 +0000 (UTC)
-Received: by mail-wr1-f66.google.com with SMTP id 88so1441360wrh.3
- for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2020 02:55:16 -0700 (PDT)
+ id 1k5nTv-0000Wc-84
+ for xen-devel@lists.xenproject.org; Wed, 12 Aug 2020 09:55:39 +0000
+X-Inumbo-ID: ee43593f-25d8-473c-9728-f88a27570c80
+Received: from mail-wm1-f68.google.com (unknown [209.85.128.68])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id ee43593f-25d8-473c-9728-f88a27570c80;
+ Wed, 12 Aug 2020 09:55:38 +0000 (UTC)
+Received: by mail-wm1-f68.google.com with SMTP id k8so1345027wma.2
+ for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2020 02:55:38 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
  :content-transfer-encoding;
- bh=tVOHhHr3o885IpPYVJM4uZwCLiEXm2Y3E8ipvZuyt24=;
- b=fpAlrZjzq1tDTqFWd75tc9jBAlRr7suMYwSzUJVZ4LpLJtRq8uXQruy/Vuv0NjtYoN
- 6AEn0YLJPtnINU7pqjko95Op2fyIPfXWFBS+oN/BrRn0QtGv99mlqkSAnX0CVyrX7DkD
- wYhmPTAHYshXaw+yW7IRq7exk2R/49FK6DWwFP90xeEfqGQyPihq1qcQk6e6cZGrAzLx
- YD88XsO4WqCkekcliA0QrQc4A9iTzGVrXlmbkhF81HG8JmDsj6ppp2xD7FTX6hE4O3wt
- fBOIJ20ZYzGsIWYs0bj4egbnk0x2DpMw4zKXJNpeN5W8+cSf9iQXZl/IrDVpM7kzrhjl
- WqFg==
-X-Gm-Message-State: AOAM533OuNp6Qqt1o1mqfcGPpu+7vewOBHMxfox/3Kl/QjbwfrXaoTeh
- eVYP3ETBQLJjIdnVjaOLhaYeDTzL
-X-Google-Smtp-Source: ABdhPJxuJab11xDlRDMZ9s3JR7LHbRKrpQE/vV2AqhSZJ0Q+9ucWGW4shHOzawJszZGBOsCT5noaxA==
-X-Received: by 2002:adf:ee83:: with SMTP id b3mr32515697wro.163.1597226115471; 
- Wed, 12 Aug 2020 02:55:15 -0700 (PDT)
+ bh=lDUAzQ1oJy7PFmryfuc7OfGKGaMTx/e+9bB0gY1fjxI=;
+ b=I1V6xQVSpM0Bh1vViU8ICFTiObKdqERid7V/3buAZOeN3D6c3LNZwEh0xplO52r9m+
+ oPfsBJPPbh9g4vgPPQUYUHMUfGQRwER9tzyFxzWkJtX1c9d/IkSUgP7+BwBEbjzh5QOW
+ VYFPiRKEcf3U0A4yHLW4e3m7+79gID2aqa/GOSO83f4lu0+7mif19tjHg3cPCGUaLMiS
+ CgArjpWnLiQPgqYG/tUbFB7ODr4e6CBmm/YjipGrDmu4HEdSwiKHNyEVUs2BoW+Rs8RG
+ gfuFg+R7XNnB0cYGvr6i/QqO7cRFesqKPBecv5XcuL7b29qwAJjn5v+1Gn3sfzKnf3Ns
+ NVtw==
+X-Gm-Message-State: AOAM5336ZeZX254B9y/Zv32q6DxmDokjyNRie08i08bO5VWp3Xlr+wPm
+ BZROxqnpYZZRveU7StZaDyBJZp0Y
+X-Google-Smtp-Source: ABdhPJxyrjsxlXtyZGruI+Gj/Iy4FwS+X5tptIdOp0k/eM+hZFitwwGJaKgC+q+/fwgK9IgYMZp1Gw==
+X-Received: by 2002:a1c:1d91:: with SMTP id d139mr8137035wmd.144.1597226136905; 
+ Wed, 12 Aug 2020 02:55:36 -0700 (PDT)
 Received: from
  liuwe-devbox-debian-v2.j3c5onc20sse1dnehy4noqpfcg.zx.internal.cloudapp.net
  ([51.145.34.42])
- by smtp.gmail.com with ESMTPSA id q19sm3184053wrf.48.2020.08.12.02.55.13
+ by smtp.gmail.com with ESMTPSA id v8sm3033618wmb.24.2020.08.12.02.55.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Aug 2020 02:55:13 -0700 (PDT)
+ Wed, 12 Aug 2020 02:55:36 -0700 (PDT)
 From: Wei Liu <wl@xen.org>
 To: Xen Development List <xen-devel@lists.xenproject.org>
-Cc: Anthony PERARD <anthony.perard@citrix.com>, Wei Liu <wl@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>, Jan Beulich <jbeulich@suse.com>,
- Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH] Config.mk: update OVMF changeset
-Date: Wed, 12 Aug 2020 09:55:11 +0000
-Message-Id: <20200812095511.107277-1-wl@xen.org>
+Cc: Wei Liu <wl@xen.org>, Ian Jackson <ian.jackson@eu.citrix.com>,
+ Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH] tools: bump library version numbers
+Date: Wed, 12 Aug 2020 09:55:34 +0000
+Message-Id: <20200812095534.107510-1-wl@xen.org>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -84,22 +80,82 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 Signed-off-by: Wei Liu <wl@xen.org>
 ---
- Config.mk | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ tools/libfsimage/common/Makefile  | 2 +-
+ tools/libvchan/Makefile           | 2 +-
+ tools/libxc/Makefile              | 2 +-
+ tools/libxl/Makefile              | 4 ++--
+ tools/xenstat/libxenstat/Makefile | 2 +-
+ 5 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/Config.mk b/Config.mk
-index 4093dcb9e366..3603cf4ca58d 100644
---- a/Config.mk
-+++ b/Config.mk
-@@ -244,7 +244,7 @@ QEMU_TRADITIONAL_URL ?= git://xenbits.xen.org/qemu-xen-traditional.git
- SEABIOS_UPSTREAM_URL ?= git://xenbits.xen.org/seabios.git
- MINIOS_UPSTREAM_URL ?= git://xenbits.xen.org/mini-os.git
- endif
--OVMF_UPSTREAM_REVISION ?= 20d2e5a125e34fc8501026613a71549b2a1a3e54
-+OVMF_UPSTREAM_REVISION ?= a3741780fe3535e19e02efa869a7cac481891129
- QEMU_UPSTREAM_REVISION ?= master
- MINIOS_UPSTREAM_REVISION ?= master
+diff --git a/tools/libfsimage/common/Makefile b/tools/libfsimage/common/Makefile
+index 8c8ba09f12d2..060f029ca94d 100644
+--- a/tools/libfsimage/common/Makefile
++++ b/tools/libfsimage/common/Makefile
+@@ -1,7 +1,7 @@
+ XEN_ROOT = $(CURDIR)/../../..
+ include $(XEN_ROOT)/tools/libfsimage/Rules.mk
  
+-MAJOR = 4.14
++MAJOR = 4.15
+ MINOR = 0
+ 
+ LDFLAGS-$(CONFIG_SunOS) = -Wl,-M -Wl,mapfile-SunOS
+diff --git a/tools/libvchan/Makefile b/tools/libvchan/Makefile
+index 913bcc888462..d99a6137e17f 100644
+--- a/tools/libvchan/Makefile
++++ b/tools/libvchan/Makefile
+@@ -15,7 +15,7 @@ $(LIBVCHAN_OBJS) $(LIBVCHAN_PIC_OBJS): CFLAGS += $(CFLAGS_libxenstore) $(CFLAGS_
+ $(NODE_OBJS) $(NODE2_OBJS): CFLAGS += $(CFLAGS_libxengnttab) $(CFLAGS_libxenevtchn)
+ vchan-socket-proxy.o: CFLAGS += $(CFLAGS_libxenstore) $(CFLAGS_libxenctrl) $(CFLAGS_libxengnttab) $(CFLAGS_libxenevtchn)
+ 
+-MAJOR = 4.14
++MAJOR = 4.15
+ MINOR = 0
+ 
+ CFLAGS += -I../include -I.
+diff --git a/tools/libxc/Makefile b/tools/libxc/Makefile
+index fae5969a737c..955cd5ab185d 100644
+--- a/tools/libxc/Makefile
++++ b/tools/libxc/Makefile
+@@ -1,7 +1,7 @@
+ XEN_ROOT = $(CURDIR)/../..
+ include $(XEN_ROOT)/tools/Rules.mk
+ 
+-MAJOR    = 4.14
++MAJOR    = 4.15
+ MINOR    = 0
+ 
+ ifeq ($(CONFIG_LIBXC_MINIOS),y)
+diff --git a/tools/libxl/Makefile b/tools/libxl/Makefile
+index 38cd43abae1c..0e8dfc61935b 100644
+--- a/tools/libxl/Makefile
++++ b/tools/libxl/Makefile
+@@ -5,10 +5,10 @@
+ XEN_ROOT = $(CURDIR)/../..
+ include $(XEN_ROOT)/tools/Rules.mk
+ 
+-MAJOR = 4.14
++MAJOR = 4.15
+ MINOR = 0
+ 
+-XLUMAJOR = 4.14
++XLUMAJOR = 4.15
+ XLUMINOR = 0
+ 
+ CFLAGS += -Werror -Wno-format-zero-length -Wmissing-declarations \
+diff --git a/tools/xenstat/libxenstat/Makefile b/tools/xenstat/libxenstat/Makefile
+index 03cb212e3b87..ab980852da7b 100644
+--- a/tools/xenstat/libxenstat/Makefile
++++ b/tools/xenstat/libxenstat/Makefile
+@@ -18,7 +18,7 @@ include $(XEN_ROOT)/tools/Rules.mk
+ LDCONFIG=ldconfig
+ MAKE_LINK=ln -sf
+ 
+-MAJOR=4.14
++MAJOR=4.15
+ MINOR=0
+ 
+ LIB=src/libxenstat.a
 -- 
 2.20.1
 
