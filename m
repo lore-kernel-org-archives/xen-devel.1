@@ -2,68 +2,70 @@ Return-Path: <SRS0=1DY5=BW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DF6E3C433E0
-	for <xen-devel@archiver.kernel.org>; Wed, 12 Aug 2020 12:47:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 15F1BC433DF
+	for <xen-devel@archiver.kernel.org>; Wed, 12 Aug 2020 12:47:59 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AB9742065C
+	by mail.kernel.org (Postfix) with ESMTPS id DDE9E20829
 	for <xen-devel@archiver.kernel.org>; Wed, 12 Aug 2020 12:47:58 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="J0r75XcS"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AB9742065C
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="MTNrXx73"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DDE9E20829
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k5qAH-0006Z1-R3; Wed, 12 Aug 2020 12:47:33 +0000
+	id 1k5qAQ-0006a9-SY; Wed, 12 Aug 2020 12:47:42 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=rOR4=BW=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1k5qAG-0006Yw-BK
- for xen-devel@lists.xenproject.org; Wed, 12 Aug 2020 12:47:32 +0000
-X-Inumbo-ID: 43f13c03-38a8-47d2-8814-59f2f9223e2b
+ id 1k5qAQ-0006ZO-0h
+ for xen-devel@lists.xenproject.org; Wed, 12 Aug 2020 12:47:42 +0000
+X-Inumbo-ID: 880b2dae-fce3-4085-9756-7bb5ee8b7757
 Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 43f13c03-38a8-47d2-8814-59f2f9223e2b;
- Wed, 12 Aug 2020 12:47:31 +0000 (UTC)
+ id 880b2dae-fce3-4085-9756-7bb5ee8b7757;
+ Wed, 12 Aug 2020 12:47:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1597236451;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=uF/F2yfIT/eAfPrCDzbbPjkHRrxoZJW5fvYYO14wnvo=;
- b=J0r75XcS9564BZidoP+ETHYQZGng3bCyOiMqXxzkGraeob53kjhVLIe3
- xNJA0n4ASSVHeSzAgzFx6R1B9yU0nfZ2VAa5hGK7K4uMjLDCWZx9buEtx
- N4e1vWoLgTojrjJyoxDnIuLlkJHKZna4XjnPqcl6l/zDOlf6w89olwaJC s=;
+ d=citrix.com; s=securemail; t=1597236460;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=q3MiLHAhAHNiPwuVE11OtW79xlxcO35A8P9+Xd2bmlQ=;
+ b=MTNrXx73lNaLMwa2SdaNMU5tqZW+/9EUtrgZUtAx4sPkV28/ast94eZU
+ FKcwf1MDocVPjuHlWGMGY6fPKBQ/wt5ZvYhBPdiGkw4zSHe/ju2A/8v+/
+ 1m+aEjKCKAUFJkPfYLNy4uzyR9nOyt45iAdydbqaAc3rK7FGZbfeWdkLX Q=;
 Authentication-Results: esa3.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: eQF8/pzrQcNFuF6uJe2x0NvD3NslssVOzSaYIGeejvp0pJr7qNHkfYYMe1jMYB9SLgszFr13vJ
- xRpSI6z3GNIFpdrflqNkLzOIdaDxoBiyD2jsIrDTxwKR4wfhXSpcDCRvFITpJDzU7T05YJjqr4
- 2RPc1R3y3uyuWk+WJCnq/1gDjAhCOBw0+Qqc6NQpXd4Q7XUf44vmkW4bJRjNn50zlgSTGCqXuf
- hCkFHLbG7kptRIekcRDhv8oIyeawjt1/bugvwcBuqX2yBgDn5RQIS95Xnii7SGNkVKbAiENbaT
- LBU=
+IronPort-SDR: dtcbon7iAF4f7uIC/Vdr/f6tq7McFktUGHksYldFf1xu8RHOatLyn2AByPEg6wgTReynZ6abef
+ W84EL90Fzi6ueeVFkGs3XILIaohQBhXuSDb3GOolIsftCrXwSnhIwIxv47L9TWkqpD+vUhnNly
+ iOXQGUqOPcgop31QsJo5CcL5kI+jTJHz/Aj653LBFWr5aqEenEuium+Gww1Fgy8K82X3w7tb7E
+ R8YQMX6ZkGCJdlNI+NkEWepkIO0KTr3ojeHHZmXum5zlG5LhOEzOxX2kACaEMbfTrH3nxoYGY7
+ DLo=
 X-SBRS: 2.7
-X-MesageID: 24344708
+X-MesageID: 24344723
 X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,304,1592884800"; d="scan'208";a="24344708"
+X-IronPort-AV: E=Sophos;i="5.76,304,1592884800"; d="scan'208";a="24344723"
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Roger Pau Monne <roger.pau@citrix.com>, Jun Nakajima
- <jun.nakajima@intel.com>, Kevin Tian <kevin.tian@intel.com>, Jan Beulich
- <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu
- <wl@xen.org>, Paul Durrant <paul@xen.org>
-Subject: [PATCH 0/5] x86/vlapic: implement EOI callbacks
-Date: Wed, 12 Aug 2020 14:47:04 +0200
-Message-ID: <20200812124709.4165-1-roger.pau@citrix.com>
+CC: Roger Pau Monne <roger.pau@citrix.com>, Paul Durrant <paul@xen.org>, "Wei
+ Liu" <wl@xen.org>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper
+ <andrew.cooper3@citrix.com>
+Subject: [PATCH 4/5] x86/viridian: switch synic to use the new EOI callback
+Date: Wed, 12 Aug 2020 14:47:08 +0200
+Message-ID: <20200812124709.4165-5-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.28.0
+In-Reply-To: <20200812124709.4165-1-roger.pau@citrix.com>
+References: <20200812124709.4165-1-roger.pau@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
@@ -80,47 +82,106 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Hello,
+Switch synic interrupts to use an EOI callback in order to execute the
+logic tied to the end of interrupt. This allows to remove the synic
+call in vlapic_handle_EOI.
 
-The following series attempts to implement EOI callbacks for vlapic
-injected vectors, this allows to remove the hardcoded callbacks in
-vlapic_handle_EOI. Instead a new vlapic vector injection helper is
-provided, that takes two extra parameters in order to pass a callback and
-an opaque data blob that will be called once the vector is EOI'ed by the
-guest.
+Move and rename viridian_synic_ack_sint now that it can be made
+static.
 
-My plan with this is to be able to provide EOI callbacks for all
-interrupt types that we inject to the guest, this is only the first step
-of that work by changing the emulated lapic to use this model. The
-IO-APIC and PIC still need to be switched to a similar model.
-
-Long term having such callbacks would greatly simplify the virtual
-periodic timers code, as being able to get a callback when the injected
-interrupt is EOI'ed simplifies the handling of missed ticks, as we would
-no longer need to check at each vmentry whether a virtual interrupt
-timer is being injected.
-
-Thanks, Roger.
-
-Roger Pau Monne (5):
-  x86/hvm: change EOI exit bitmap helper parameter
-  x86/vlapic: introduce an EOI callback mechanism
-  x86/vmsi: use the newly introduced EOI callbacks
-  x86/viridian: switch synic to use the new EOI callback
-  x86/vioapic: switch to use the EOI callback mechanism
-
- xen/arch/x86/hvm/vioapic.c         | 90 +++++++++++++++---------------
- xen/arch/x86/hvm/viridian/synic.c  | 28 +++++-----
- xen/arch/x86/hvm/vlapic.c          | 61 ++++++++++++++++----
- xen/arch/x86/hvm/vmsi.c            | 36 +++++++-----
- xen/arch/x86/hvm/vmx/vmx.c         |  4 +-
- xen/drivers/passthrough/io.c       |  4 +-
- xen/include/asm-x86/hvm/hvm.h      |  2 +-
- xen/include/asm-x86/hvm/io.h       |  2 +-
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+I'm unsure about the logic in viridian_synic_deliver_timer_msg, as it
+seems to only set the vector in msg_pending when the message is
+already pending?
+---
+ xen/arch/x86/hvm/viridian/synic.c  | 28 +++++++++++++++-------------
+ xen/arch/x86/hvm/vlapic.c          |  4 ----
  xen/include/asm-x86/hvm/viridian.h |  1 -
- xen/include/asm-x86/hvm/vlapic.h   | 10 ++++
- 10 files changed, 150 insertions(+), 88 deletions(-)
+ 3 files changed, 15 insertions(+), 18 deletions(-)
 
+diff --git a/xen/arch/x86/hvm/viridian/synic.c b/xen/arch/x86/hvm/viridian/synic.c
+index 94a2b88733..250f0353cf 100644
+--- a/xen/arch/x86/hvm/viridian/synic.c
++++ b/xen/arch/x86/hvm/viridian/synic.c
+@@ -315,6 +315,19 @@ void viridian_synic_poll(struct vcpu *v)
+     viridian_time_poll_timers(v);
+ }
+ 
++static void synic_ack_sint(struct vcpu *v, unsigned int vector, void *data)
++{
++    struct viridian_vcpu *vv = v->arch.hvm.viridian;
++    unsigned int sintx = vv->vector_to_sintx[vector];
++
++    ASSERT(v == current);
++
++    if ( sintx < ARRAY_SIZE(vv->sint) )
++        __clear_bit(array_index_nospec(sintx, ARRAY_SIZE(vv->sint)),
++                    &vv->msg_pending);
++}
++
++
+ bool viridian_synic_deliver_timer_msg(struct vcpu *v, unsigned int sintx,
+                                       unsigned int index,
+                                       uint64_t expiration,
+@@ -361,7 +374,8 @@ bool viridian_synic_deliver_timer_msg(struct vcpu *v, unsigned int sintx,
+     memcpy(msg->u.payload, &payload, sizeof(payload));
+ 
+     if ( !vs->masked )
+-        vlapic_set_irq(vcpu_vlapic(v), vs->vector, 0);
++        vlapic_set_irq_callback(vcpu_vlapic(v), vs->vector, 0,
++                                synic_ack_sint, NULL);
+ 
+     return true;
+ }
+@@ -380,18 +394,6 @@ bool viridian_synic_is_auto_eoi_sint(const struct vcpu *v,
+     return vs->auto_eoi;
+ }
+ 
+-void viridian_synic_ack_sint(const struct vcpu *v, unsigned int vector)
+-{
+-    struct viridian_vcpu *vv = v->arch.hvm.viridian;
+-    unsigned int sintx = vv->vector_to_sintx[vector];
+-
+-    ASSERT(v == current);
+-
+-    if ( sintx < ARRAY_SIZE(vv->sint) )
+-        __clear_bit(array_index_nospec(sintx, ARRAY_SIZE(vv->sint)),
+-                    &vv->msg_pending);
+-}
+-
+ void viridian_synic_save_vcpu_ctxt(const struct vcpu *v,
+                                    struct hvm_viridian_vcpu_context *ctxt)
+ {
+diff --git a/xen/arch/x86/hvm/vlapic.c b/xen/arch/x86/hvm/vlapic.c
+index 3b3b3d7621..701ff942e6 100644
+--- a/xen/arch/x86/hvm/vlapic.c
++++ b/xen/arch/x86/hvm/vlapic.c
+@@ -489,12 +489,8 @@ void vlapic_handle_EOI(struct vlapic *vlapic, u8 vector)
+     void *data;
+     unsigned long flags;
+ 
+-    /* All synic SINTx vectors are edge triggered */
+-
+     if ( vlapic_test_vector(vector, &vlapic->regs->data[APIC_TMR]) )
+         vioapic_update_EOI(d, vector);
+-    else if ( has_viridian_synic(d) )
+-        viridian_synic_ack_sint(v, vector);
+ 
+     spin_lock_irqsave(&vlapic->callback_lock, flags);
+     callback = vlapic->callbacks[vector].callback;
+diff --git a/xen/include/asm-x86/hvm/viridian.h b/xen/include/asm-x86/hvm/viridian.h
+index 844e56b38f..d387d11ce0 100644
+--- a/xen/include/asm-x86/hvm/viridian.h
++++ b/xen/include/asm-x86/hvm/viridian.h
+@@ -89,7 +89,6 @@ void viridian_apic_assist_clear(const struct vcpu *v);
+ void viridian_synic_poll(struct vcpu *v);
+ bool viridian_synic_is_auto_eoi_sint(const struct vcpu *v,
+                                      unsigned int vector);
+-void viridian_synic_ack_sint(const struct vcpu *v, unsigned int vector);
+ 
+ #endif /* __ASM_X86_HVM_VIRIDIAN_H__ */
+ 
 -- 
 2.28.0
 
