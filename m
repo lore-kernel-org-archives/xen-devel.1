@@ -7,62 +7,60 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A61CCC433E5
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A1B4EC433E3
 	for <xen-devel@archiver.kernel.org>; Wed, 12 Aug 2020 12:47:59 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 754D620829
+	by mail.kernel.org (Postfix) with ESMTPS id 757FA20838
 	for <xen-devel@archiver.kernel.org>; Wed, 12 Aug 2020 12:47:59 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="Qgl9LK4t"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 754D620829
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="fqxQtOZQ"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 757FA20838
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k5qAO-0006Zb-Ac; Wed, 12 Aug 2020 12:47:40 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1k5qAV-0006cd-8z; Wed, 12 Aug 2020 12:47:47 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=rOR4=BW=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1k5qAM-0006ZO-Kx
- for xen-devel@lists.xenproject.org; Wed, 12 Aug 2020 12:47:38 +0000
-X-Inumbo-ID: e585d38a-a1df-46b2-974a-99492b04e3b9
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id e585d38a-a1df-46b2-974a-99492b04e3b9;
- Wed, 12 Aug 2020 12:47:37 +0000 (UTC)
+ id 1k5qAU-0006Z7-48
+ for xen-devel@lists.xenproject.org; Wed, 12 Aug 2020 12:47:46 +0000
+X-Inumbo-ID: 7de72e45-4428-4e23-921a-9cbfaa54810d
+Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 7de72e45-4428-4e23-921a-9cbfaa54810d;
+ Wed, 12 Aug 2020 12:47:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1597236458;
+ d=citrix.com; s=securemail; t=1597236462;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=bdpiKKQKGV+KOXDSfz7N1UpSnACi0zOdRo+Vf79VXGs=;
- b=Qgl9LK4tToPQQE7Ya9uPX4KMo3Qo3rd37r8tDSeERHkwsGZC3h113BFc
- 8ocN8XXGMRPt7GHW8ryOlO/R6DjJtM0mYMsSVtNkAzj7qre1AO49ubwJA
- trz3+KtmyT7HONJ0UbK04KaplNojCdAgzvR/FY2vEypkBv87xrVClGfYy 8=;
-Authentication-Results: esa1.hc3370-68.iphmx.com;
+ bh=dRrun04ltOsR3Kur95ASzIsUrKz96b+1KdggwxKtE5U=;
+ b=fqxQtOZQSYltAN4PGX5EeNGP1cAwMtrt+tDxhHrXg4ORmX0fs4rkqp7Z
+ g3TrRCEhIvBPxQzOp3onrXqqTfQbNj8+trVWA1iQN6ZedAvfhZLPzrCSx
+ zPIpb2/VcYndvXqEL9FNYJs23Raz32ATLzY8rjckK2AO0XiFSh/CcjS6d s=;
+Authentication-Results: esa2.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: ONrAu3atxNDYyfZUlT90eLDY4OnQmuawYElEt/qnjJIzjYB8TDB6b6hFz8XBYE9WHwIX2UvP+T
- 6+eWz7a41edY2XGl8sv6DujQUP8MaCMlcMNy8dwijuILGPNUohFF63FjepT+SXsbt4/H9NXhc0
- nYtIbjeZYHZpvx0MJC7U7acIpfK0UsTixUPDg+SOEy14eJ7e/i7R7tk6W2Jpf1UFnEWFu08vx+
- k1/YuhwqyTEP299wOtTzmeLbhCIVjhscP+082XX4MFi0gDUmAb4771o6r6KWIzqoNQkbVNm2hh
- vx0=
+IronPort-SDR: TfO4erpf8SzeMgcK6TRhMjdHaCjmFPBeLC3UsnNZILnzA3uUHzDaw1DlqzdBOL1TRfUS/X0Ekf
+ 1QPNl1YBGbKh/8r0QJUCUcExYk0cHw3ICzI8zBXUm7QXnO4clBtQDG+iIINhjQ4shatDESnz/X
+ ozH/rfpmMNaUaSQxrQ8rXdpofdlDYhT5hulfaoC+8X/f8jhEhqsV/of3bLBUjy9EIcTXuz38Ng
+ BthB61aW+a2AaF6eP6XNMEfTZgxYKfKq2rgRKAmtOY9IaqWt8FlssWTzKNrXdIM+m/AowRlryR
+ vgw=
 X-SBRS: 2.7
-X-MesageID: 24693521
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 24374217
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,304,1592884800"; d="scan'208";a="24693521"
+X-IronPort-AV: E=Sophos;i="5.76,304,1592884800"; d="scan'208";a="24374217"
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Roger Pau Monne <roger.pau@citrix.com>, Jan Beulich <jbeulich@suse.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>, Paul Durrant
- <paul@xen.org>
-Subject: [PATCH 3/5] x86/vmsi: use the newly introduced EOI callbacks
-Date: Wed, 12 Aug 2020 14:47:07 +0200
-Message-ID: <20200812124709.4165-4-roger.pau@citrix.com>
+ Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH 5/5] x86/vioapic: switch to use the EOI callback mechanism
+Date: Wed, 12 Aug 2020 14:47:09 +0200
+Message-ID: <20200812124709.4165-6-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200812124709.4165-1-roger.pau@citrix.com>
 References: <20200812124709.4165-1-roger.pau@citrix.com>
@@ -82,149 +80,161 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Remove the unconditional call to hvm_dpci_msi_eoi in vlapic_handle_EOI
-and instead use the newly introduced EOI callback mechanism in order
-to register a callback for MSI vectors injected from passed through
-devices.
+Switch the emulated IO-APIC code to use the local APIC EOI callback
+mechanism. This allows to remove the last hardcoded callback from
+vlapic_handle_EOI.
+
+Move and rename the vioapic_update_EOI now that it can be made static.
 
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
- xen/arch/x86/hvm/vlapic.c    |  2 --
- xen/arch/x86/hvm/vmsi.c      | 36 ++++++++++++++++++++++--------------
- xen/drivers/passthrough/io.c |  4 +++-
- xen/include/asm-x86/hvm/io.h |  2 +-
- 4 files changed, 26 insertions(+), 18 deletions(-)
+ xen/arch/x86/hvm/vioapic.c | 90 +++++++++++++++++++-------------------
+ xen/arch/x86/hvm/vlapic.c  |  7 +--
+ 2 files changed, 47 insertions(+), 50 deletions(-)
 
+diff --git a/xen/arch/x86/hvm/vioapic.c b/xen/arch/x86/hvm/vioapic.c
+index 67d4a6237f..58a85cf9de 100644
+--- a/xen/arch/x86/hvm/vioapic.c
++++ b/xen/arch/x86/hvm/vioapic.c
+@@ -375,6 +375,50 @@ static const struct hvm_mmio_ops vioapic_mmio_ops = {
+     .write = vioapic_write
+ };
+ 
++static void eoi_callback(struct vcpu *v, unsigned int vector, void *data)
++{
++    struct domain *d = v->domain;
++    struct hvm_irq *hvm_irq = hvm_domain_irq(d);
++    union vioapic_redir_entry *ent;
++    unsigned int i;
++
++    ASSERT(has_vioapic(d));
++
++    spin_lock(&d->arch.hvm.irq_lock);
++
++    for ( i = 0; i < d->arch.hvm.nr_vioapics; i++ )
++    {
++        struct hvm_vioapic *vioapic = domain_vioapic(d, i);
++        unsigned int pin;
++
++        for ( pin = 0; pin < vioapic->nr_pins; pin++ )
++        {
++            ent = &vioapic->redirtbl[pin];
++            if ( ent->fields.vector != vector )
++                continue;
++
++            ent->fields.remote_irr = 0;
++
++            if ( is_iommu_enabled(d) )
++            {
++                spin_unlock(&d->arch.hvm.irq_lock);
++                hvm_dpci_eoi(d, vioapic->base_gsi + pin, ent);
++                spin_lock(&d->arch.hvm.irq_lock);
++            }
++
++            if ( (ent->fields.trig_mode == VIOAPIC_LEVEL_TRIG) &&
++                 !ent->fields.mask &&
++                 hvm_irq->gsi_assert_count[vioapic->base_gsi + pin] )
++            {
++                ent->fields.remote_irr = 1;
++                vioapic_deliver(vioapic, pin);
++            }
++        }
++    }
++
++    spin_unlock(&d->arch.hvm.irq_lock);
++}
++
+ static void ioapic_inj_irq(
+     struct hvm_vioapic *vioapic,
+     struct vlapic *target,
+@@ -388,7 +432,8 @@ static void ioapic_inj_irq(
+     ASSERT((delivery_mode == dest_Fixed) ||
+            (delivery_mode == dest_LowestPrio));
+ 
+-    vlapic_set_irq(target, vector, trig_mode);
++    vlapic_set_irq_callback(target, vector, trig_mode,
++                            trig_mode ? eoi_callback : NULL, NULL);
+ }
+ 
+ static void vioapic_deliver(struct hvm_vioapic *vioapic, unsigned int pin)
+@@ -495,49 +540,6 @@ void vioapic_irq_positive_edge(struct domain *d, unsigned int irq)
+     }
+ }
+ 
+-void vioapic_update_EOI(struct domain *d, u8 vector)
+-{
+-    struct hvm_irq *hvm_irq = hvm_domain_irq(d);
+-    union vioapic_redir_entry *ent;
+-    unsigned int i;
+-
+-    ASSERT(has_vioapic(d));
+-
+-    spin_lock(&d->arch.hvm.irq_lock);
+-
+-    for ( i = 0; i < d->arch.hvm.nr_vioapics; i++ )
+-    {
+-        struct hvm_vioapic *vioapic = domain_vioapic(d, i);
+-        unsigned int pin;
+-
+-        for ( pin = 0; pin < vioapic->nr_pins; pin++ )
+-        {
+-            ent = &vioapic->redirtbl[pin];
+-            if ( ent->fields.vector != vector )
+-                continue;
+-
+-            ent->fields.remote_irr = 0;
+-
+-            if ( is_iommu_enabled(d) )
+-            {
+-                spin_unlock(&d->arch.hvm.irq_lock);
+-                hvm_dpci_eoi(d, vioapic->base_gsi + pin, ent);
+-                spin_lock(&d->arch.hvm.irq_lock);
+-            }
+-
+-            if ( (ent->fields.trig_mode == VIOAPIC_LEVEL_TRIG) &&
+-                 !ent->fields.mask &&
+-                 hvm_irq->gsi_assert_count[vioapic->base_gsi + pin] )
+-            {
+-                ent->fields.remote_irr = 1;
+-                vioapic_deliver(vioapic, pin);
+-            }
+-        }
+-    }
+-
+-    spin_unlock(&d->arch.hvm.irq_lock);
+-}
+-
+ int vioapic_get_mask(const struct domain *d, unsigned int gsi)
+ {
+     unsigned int pin = 0; /* See gsi_vioapic */
 diff --git a/xen/arch/x86/hvm/vlapic.c b/xen/arch/x86/hvm/vlapic.c
-index 7369be468b..3b3b3d7621 100644
+index 701ff942e6..129b20ff10 100644
 --- a/xen/arch/x86/hvm/vlapic.c
 +++ b/xen/arch/x86/hvm/vlapic.c
-@@ -496,8 +496,6 @@ void vlapic_handle_EOI(struct vlapic *vlapic, u8 vector)
-     else if ( has_viridian_synic(d) )
-         viridian_synic_ack_sint(v, vector);
+@@ -483,22 +483,17 @@ void vlapic_EOI_set(struct vlapic *vlapic)
  
--    hvm_dpci_msi_eoi(d, vector);
+ void vlapic_handle_EOI(struct vlapic *vlapic, u8 vector)
+ {
+-    struct vcpu *v = vlapic_vcpu(vlapic);
+-    struct domain *d = v->domain;
+     vlapic_eoi_callback_t *callback;
+     void *data;
+     unsigned long flags;
+ 
+-    if ( vlapic_test_vector(vector, &vlapic->regs->data[APIC_TMR]) )
+-        vioapic_update_EOI(d, vector);
 -
      spin_lock_irqsave(&vlapic->callback_lock, flags);
      callback = vlapic->callbacks[vector].callback;
      data = vlapic->callbacks[vector].data;
-diff --git a/xen/arch/x86/hvm/vmsi.c b/xen/arch/x86/hvm/vmsi.c
-index 7ca19353ab..e192c4c6da 100644
---- a/xen/arch/x86/hvm/vmsi.c
-+++ b/xen/arch/x86/hvm/vmsi.c
-@@ -44,11 +44,9 @@
- #include <asm/event.h>
- #include <asm/io_apic.h>
+     spin_unlock_irqrestore(&vlapic->callback_lock, flags);
  
--static void vmsi_inj_irq(
--    struct vlapic *target,
--    uint8_t vector,
--    uint8_t trig_mode,
--    uint8_t delivery_mode)
-+static void vmsi_inj_irq(struct vlapic *target, uint8_t vector,
-+                         uint8_t trig_mode, uint8_t delivery_mode,
-+                         vlapic_eoi_callback_t *callback, void *data)
- {
-     HVM_DBG_LOG(DBG_LEVEL_VLAPIC, "vmsi_inj_irq: vec %02x trig %d dm %d\n",
-                 vector, trig_mode, delivery_mode);
-@@ -57,17 +55,17 @@ static void vmsi_inj_irq(
-     {
-     case dest_Fixed:
-     case dest_LowestPrio:
--        vlapic_set_irq(target, vector, trig_mode);
-+        vlapic_set_irq_callback(target, vector, trig_mode, callback, data);
-         break;
-     default:
-         BUG();
-     }
+     if ( callback )
+-        callback(v, vector, data);
++        callback(vlapic_vcpu(vlapic), vector, data);
  }
  
--int vmsi_deliver(
--    struct domain *d, int vector,
--    uint8_t dest, uint8_t dest_mode,
--    uint8_t delivery_mode, uint8_t trig_mode)
-+static int vmsi_deliver_callback(struct domain *d, int vector, uint8_t dest,
-+                                 uint8_t dest_mode, uint8_t delivery_mode,
-+                                 uint8_t trig_mode,
-+                                 vlapic_eoi_callback_t *callback, void *data)
- {
-     struct vlapic *target;
-     struct vcpu *v;
-@@ -78,7 +76,8 @@ int vmsi_deliver(
-         target = vlapic_lowest_prio(d, NULL, 0, dest, dest_mode);
-         if ( target != NULL )
-         {
--            vmsi_inj_irq(target, vector, trig_mode, delivery_mode);
-+            vmsi_inj_irq(target, vector, trig_mode, delivery_mode, callback,
-+                         data);
-             break;
-         }
-         HVM_DBG_LOG(DBG_LEVEL_VLAPIC, "null MSI round robin: vector=%02x\n",
-@@ -89,8 +88,8 @@ int vmsi_deliver(
-         for_each_vcpu ( d, v )
-             if ( vlapic_match_dest(vcpu_vlapic(v), NULL,
-                                    0, dest, dest_mode) )
--                vmsi_inj_irq(vcpu_vlapic(v), vector,
--                             trig_mode, delivery_mode);
-+                vmsi_inj_irq(vcpu_vlapic(v), vector, trig_mode, delivery_mode,
-+                             callback, data);
-         break;
- 
-     default:
-@@ -103,6 +102,14 @@ int vmsi_deliver(
-     return 0;
- }
- 
-+
-+int vmsi_deliver(struct domain *d, int vector, uint8_t dest, uint8_t dest_mode,
-+                 uint8_t delivery_mode, uint8_t trig_mode)
-+{
-+    return vmsi_deliver_callback(d, vector, dest, dest_mode, delivery_mode,
-+                                 trig_mode, NULL, NULL);
-+}
-+
- void vmsi_deliver_pirq(struct domain *d, const struct hvm_pirq_dpci *pirq_dpci)
- {
-     uint32_t flags = pirq_dpci->gmsi.gflags;
-@@ -119,7 +126,8 @@ void vmsi_deliver_pirq(struct domain *d, const struct hvm_pirq_dpci *pirq_dpci)
- 
-     ASSERT(pirq_dpci->flags & HVM_IRQ_DPCI_GUEST_MSI);
- 
--    vmsi_deliver(d, vector, dest, dest_mode, delivery_mode, trig_mode);
-+    vmsi_deliver_callback(d, vector, dest, dest_mode, delivery_mode, trig_mode,
-+                          hvm_dpci_msi_eoi, NULL);
- }
- 
- /* Return value, -1 : multi-dests, non-negative value: dest_vcpu_id */
-diff --git a/xen/drivers/passthrough/io.c b/xen/drivers/passthrough/io.c
-index 6b1305a3e5..3793029b29 100644
---- a/xen/drivers/passthrough/io.c
-+++ b/xen/drivers/passthrough/io.c
-@@ -874,8 +874,10 @@ static int _hvm_dpci_msi_eoi(struct domain *d,
-     return 0;
- }
- 
--void hvm_dpci_msi_eoi(struct domain *d, int vector)
-+void hvm_dpci_msi_eoi(struct vcpu *v, unsigned int vector, void *data)
- {
-+    struct domain *d = v->domain;
-+
-     if ( !is_iommu_enabled(d) ||
-          (!hvm_domain_irq(d)->dpci && !is_hardware_domain(d)) )
-        return;
-diff --git a/xen/include/asm-x86/hvm/io.h b/xen/include/asm-x86/hvm/io.h
-index 558426b772..450c7c8acb 100644
---- a/xen/include/asm-x86/hvm/io.h
-+++ b/xen/include/asm-x86/hvm/io.h
-@@ -159,7 +159,7 @@ struct hvm_hw_stdvga {
- void stdvga_init(struct domain *d);
- void stdvga_deinit(struct domain *d);
- 
--extern void hvm_dpci_msi_eoi(struct domain *d, int vector);
-+void hvm_dpci_msi_eoi(struct vcpu *v, unsigned int vector, void *data);
- 
- /* Decode a PCI port IO access into a bus/slot/func/reg. */
- unsigned int hvm_pci_decode_addr(unsigned int cf8, unsigned int addr,
+ static bool_t is_multicast_dest(struct vlapic *vlapic, unsigned int short_hand,
 -- 
 2.28.0
 
