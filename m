@@ -2,92 +2,68 @@ Return-Path: <SRS0=1DY5=BW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_ADSP_CUSTOM_MED,
-	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 81423C433DF
-	for <xen-devel@archiver.kernel.org>; Wed, 12 Aug 2020 13:49:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E0CE1C433E0
+	for <xen-devel@archiver.kernel.org>; Wed, 12 Aug 2020 14:30:30 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 44114206B2
-	for <xen-devel@archiver.kernel.org>; Wed, 12 Aug 2020 13:49:36 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 9CFD620656
+	for <xen-devel@archiver.kernel.org>; Wed, 12 Aug 2020 14:30:30 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="OTkIb2zn"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 44114206B2
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="V6MqHjMl"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9CFD620656
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k5r7v-0004A1-ND; Wed, 12 Aug 2020 13:49:11 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1k5rlY-0008FU-J2; Wed, 12 Aug 2020 14:30:08 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=fTRk=BW=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
- id 1k5r7v-00049w-5D
- for xen-devel@lists.xenproject.org; Wed, 12 Aug 2020 13:49:11 +0000
-X-Inumbo-ID: bcbd956b-a92a-4773-8d57-1bd04ff66c91
-Received: from mail-wr1-x442.google.com (unknown [2a00:1450:4864:20::442])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id bcbd956b-a92a-4773-8d57-1bd04ff66c91;
- Wed, 12 Aug 2020 13:49:10 +0000 (UTC)
-Received: by mail-wr1-x442.google.com with SMTP id z18so2081714wrm.12
- for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2020 06:49:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:reply-to:to:cc:references:in-reply-to:subject:date:message-id
- :mime-version:content-transfer-encoding:thread-index
- :content-language;
- bh=B+K/F9zTWabTlMfuT8Q8J7uqeCLpmF3XHAFxcwcJVDQ=;
- b=OTkIb2znAwtxjrTuIbdxlR7ys2FJVdovAKJzKB35lGwTfnfhDq378FqYbEytVAgQ8T
- eCVb00PQ5GxlX06CnUee2bb4oeHoRhMBa6rEFAbs05Wn+mZX2V8amMLa+ESsRZTMBaId
- 06vV2VXAHkTzVYe8aLGQWYkC50mTB0WOJCXmdS032I6310poxIZxivdMv5JQ4TX91kBc
- FwekV7J2exgS0dxDrotgm1Nftx1ww3VIAKhAK0BaTK20JM+c4vq6wgtQ3oHtcDSUJZ29
- xUYUmKzQAj7SrvT/kZbshvmvNr9sMgrlPyGC8s9rlufKwyqinnrEaocWJZcW/cNSoQMG
- J+Ew==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:reply-to:to:cc:references:in-reply-to
- :subject:date:message-id:mime-version:content-transfer-encoding
- :thread-index:content-language;
- bh=B+K/F9zTWabTlMfuT8Q8J7uqeCLpmF3XHAFxcwcJVDQ=;
- b=Woz4soU2R6mK3s+lOBM+wUaEvtCoAXOm/Tll0IC23stcu7rhRo4M/Eo+mOP13dprZV
- o+1GnZv5doAkGBGmjP8WUeZbmBeq40VK8ll7ZrjaQVb6vPWsoSviRRl5QqAzsVQZuA+r
- vYwerUk/TKJONUiT4iFF4mHQz0fnJwwRaItl+xrWP3ugz2sML9QVdOg3ycrEYCahGfcv
- 7Hc9W0PP7vCe1AzO5JQicEO0UmsNFaJ9o6WOVCkHN51XcxyrP3eav9md5bK+dknSPTPp
- cLCP1JjQ/xAMK1nqufmD2uQlEbgmQh0Hon0ZWLxwcIFPr6iw9+gxwtF/arP1jXD5Ux6C
- IoZQ==
-X-Gm-Message-State: AOAM53142pZO1PqW3R3Wsvpk9pIqH1zlSNozeUUQ7Yod8K19E3/QRFEa
- 5CB34HqoDwUUiIoeLr0hNiA=
-X-Google-Smtp-Source: ABdhPJzR5UtNlFT+bTv3NE5dHWvVTTftNtzyno+hhp4PyCzdTpGmBQ2k/wWPCn6spjamN7KvpEjVVA==
-X-Received: by 2002:a05:6000:118e:: with SMTP id
- g14mr35054938wrx.139.1597240149565; 
- Wed, 12 Aug 2020 06:49:09 -0700 (PDT)
-Received: from CBGR90WXYV0 (host86-143-223-30.range86-143.btcentralplus.com.
- [86.143.223.30])
- by smtp.gmail.com with ESMTPSA id g145sm5462472wmg.23.2020.08.12.06.49.08
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Wed, 12 Aug 2020 06:49:08 -0700 (PDT)
-From: Paul Durrant <xadimgnik@gmail.com>
-X-Google-Original-From: "Paul Durrant" <paul@xen.org>
-To: "'Jan Beulich'" <jbeulich@suse.com>
-Cc: <xen-devel@lists.xenproject.org>, "'Paul Durrant'" <pdurrant@amazon.com>,
- "'Kevin Tian'" <kevin.tian@intel.com>
-References: <20200804134209.8717-1-paul@xen.org>
- <20200804134209.8717-15-paul@xen.org>
- <918260ba-0241-80eb-567c-a2d48419c12a@suse.com>
-In-Reply-To: <918260ba-0241-80eb-567c-a2d48419c12a@suse.com>
-Subject: RE: [PATCH v4 14/14] vtd: use a bit field for dma_pte
-Date: Wed, 12 Aug 2020 14:49:07 +0100
-Message-ID: <000901d670af$59d705e0$0d8511a0$@xen.org>
+ <SRS0=tE7g=BW=citrix.com=ian.jackson@srs-us1.protection.inumbo.net>)
+ id 1k5rlX-0008FP-VO
+ for xen-devel@lists.xenproject.org; Wed, 12 Aug 2020 14:30:08 +0000
+X-Inumbo-ID: bea311fe-1655-47f4-8e77-89161ef5a3e7
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id bea311fe-1655-47f4-8e77-89161ef5a3e7;
+ Wed, 12 Aug 2020 14:30:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1597242607;
+ h=from:mime-version:content-transfer-encoding:message-id:
+ date:to:cc:subject;
+ bh=X3YoeWSBQB6eNiVStiVx6CBFctTLjzfr6DUaaLxD9Sc=;
+ b=V6MqHjMlPES8Z2Jp9hMMoAutbnO54J1/mdrt6CPWjp9kTnjaTwaWlsKH
+ xScPukff+mrG2q9GpUDMgqkwzFvQug0m+5JINCpMo1QFiS6xKybDQvfwp
+ KYcorqfgDFQxIVb1n664TBu2E1CIGEm6zs+/bC0hbX5aVWywaqh2vjYaW 8=;
+Authentication-Results: esa3.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none
+IronPort-SDR: vc+XMQly3Kh63+40XISXkNWmjhzutX92ZX2SP/gB2D4mgm0GyBghnqoZjL++Durzakv86yS3CX
+ 3ze9viIE7Jqugcl3R265KNAMJuVJ5UVt9GENv3k2uAIo4BSiDluYp8BayXovAdga7GDU+NK2MD
+ AQKB1g9A1y1Iw4Hskw2SS3jCRuvXj3XtrGmbD5TgzGtYe/5NAbBqX9q6LPpfXUslUIWu0yM5Hz
+ l9jSDLdGltByrfqx+Uwe5RMYXvVckRhBRLdDlYqKzTlWNpgnp3DknVfRqSUb1tZUGDsfP2A6e0
+ bB0=
+X-SBRS: 2.7
+X-MesageID: 24354583
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.76,304,1592884800"; d="scan'208";a="24354583"
+From: Ian Jackson <ian.jackson@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain;
-	charset="utf-8"
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQGtxlp5X/CuH2IzEhv/FXA8KDRK/wDXgLP2ATS60cSpdW+7cA==
-Content-Language: en-gb
+Message-ID: <24371.64746.743317.606471@mariner.uk.xensource.com>
+Date: Wed, 12 Aug 2020 15:30:02 +0100
+To: <committers@xenproject.org>
+CC: <xen-devel@lists.xenproject.org>
+Subject: Planned osstest outage, around 17th August
+X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -98,58 +74,20 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Reply-To: paul@xen.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-> -----Original Message-----
-> From: Jan Beulich <jbeulich@suse.com>
-> Sent: 06 August 2020 13:54
-> To: Paul Durrant <paul@xen.org>
-> Cc: xen-devel@lists.xenproject.org; Paul Durrant <pdurrant@amazon.com>; Kevin Tian
-> <kevin.tian@intel.com>
-> Subject: Re: [PATCH v4 14/14] vtd: use a bit field for dma_pte
-> 
-> On 04.08.2020 15:42, Paul Durrant wrote:
-> > --- a/xen/drivers/passthrough/vtd/iommu.c
-> > +++ b/xen/drivers/passthrough/vtd/iommu.c
-> > @@ -1772,13 +1772,14 @@ static int __must_check intel_iommu_map_page(struct domain *d, dfn_t dfn,
-> >      old = *pte;
-> >
-> >      dma_set_pte_addr(new, mfn_to_maddr(mfn));
-> > -    dma_set_pte_prot(new,
-> > -                     ((flags & IOMMUF_readable) ? DMA_PTE_READ  : 0) |
-> > -                     ((flags & IOMMUF_writable) ? DMA_PTE_WRITE : 0));
-> > +    if ( flags & IOMMUF_readable )
-> > +        dma_set_pte_readable(new);
-> > +    if ( flags & IOMMUF_writable )
-> > +        dma_set_pte_writable(new);
-> >
-> >      /* Set the SNP on leaf page table if Snoop Control available */
-> >      if ( iommu_snoop )
-> > -        dma_set_pte_snp(new);
-> > +        dma_set_pte_snoop(new);
-> 
-> Perhaps simply use an initializer:
-> 
->     new = (struct dma_ptr){
->             .r = flags & IOMMUF_readable,
->             .w = flags & IOMMUF_writable,
->             .snp = iommu_snoop,
->             .addr = mfn_x(mfn),
->         };
-> 
-> ? This also points out that the "addr" field isn't really an address,
-> and hence may want renaming.
+osstest's infrastructure hosts need upgrading to Debian "buster" (aka
+Debian "stable").  We are planning to do this on Monday the 17th of
+August.
 
-If I am getting rid of macros then this makes more sense.
+This will involve telling osstest to start draining its queues some
+time around the 15th of August.  If all goes well, it will be back in
+operation late on the 17th.  But it is possible that difficulties will
+arise, in which case it might be out of operation, or operating in a
+degraded way, for perhaps the rest of that week.
 
-  Paul
+Please let me know if you think this is a bad time.
 
-> 
-> Again comments on the two earlier patch apply here respectively (or
-> else part of the suggestion above isn't going to work as is).
-> 
-> Jan
-
+Ian.
 
