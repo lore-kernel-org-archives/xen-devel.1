@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-13.0 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=unavailable
-	autolearn_force=no version=3.4.0
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 36930C43468
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2020 08:37:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4FA88C4346B
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2020 08:37:45 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 12B6A20781
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2020 08:37:38 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 12B6A20781
+	by mail.kernel.org (Postfix) with ESMTPS id 2C92420781
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2020 08:37:45 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2C92420781
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k68jp-0006nx-L8; Thu, 13 Aug 2020 08:37:29 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1k68jw-0006ws-O2; Thu, 13 Aug 2020 08:37:36 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=cOQw=BX=suse.de=tzimmermann@srs-us1.protection.inumbo.net>)
- id 1k68jo-0006LO-Lp
- for xen-devel@lists.xenproject.org; Thu, 13 Aug 2020 08:37:28 +0000
-X-Inumbo-ID: afb9fa85-ef19-4718-af2d-822c69f0df40
+ id 1k68jv-0006LY-Hc
+ for xen-devel@lists.xenproject.org; Thu, 13 Aug 2020 08:37:35 +0000
+X-Inumbo-ID: 7b34e725-7d97-40de-bfed-74ea6dd63e7f
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id afb9fa85-ef19-4718-af2d-822c69f0df40;
- Thu, 13 Aug 2020 08:37:00 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 7b34e725-7d97-40de-bfed-74ea6dd63e7f;
+ Thu, 13 Aug 2020 08:37:09 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 0DE75B59E;
- Thu, 13 Aug 2020 08:37:22 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 2ACFFB5A7;
+ Thu, 13 Aug 2020 08:37:30 +0000 (UTC)
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: alexander.deucher@amd.com, christian.koenig@amd.com, airlied@linux.ie,
  daniel@ffwll.ch, linux@armlinux.org.uk, maarten.lankhorst@linux.intel.com,
@@ -64,9 +65,10 @@ Cc: amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
  freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
  linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
  xen-devel@lists.xenproject.org, Thomas Zimmermann <tzimmermann@suse.de>
-Subject: [PATCH 10/20] drm/omapdrm: Introduce GEM object functions
-Date: Thu, 13 Aug 2020 10:36:34 +0200
-Message-Id: <20200813083644.31711-11-tzimmermann@suse.de>
+Subject: [PATCH 19/20] drm/xlnx: Initialize DRM driver instance with CMA
+ helper macro
+Date: Thu, 13 Aug 2020 10:36:43 +0200
+Message-Id: <20200813083644.31711-20-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200813083644.31711-1-tzimmermann@suse.de>
 References: <20200813083644.31711-1-tzimmermann@suse.de>
@@ -85,98 +87,44 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-GEM object functions deprecate several similar callback interfaces in
-struct drm_driver. This patch replaces the per-driver callbacks with
-per-instance callbacks in omapdrm.
+The xlnx driver uses CMA helpers with default callback functions.
+Initialize the driver structure with the rsp CMA helper macro. The
+driver is being converted to use GEM object functions as part of
+this change.
+
+Two callbacks, .dumb_destroy and .gem_prime_import, were initialized
+to their default implementations, so they are just kept empty now.
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 ---
- drivers/gpu/drm/omapdrm/omap_drv.c |  9 ---------
- drivers/gpu/drm/omapdrm/omap_gem.c | 16 +++++++++++++++-
- drivers/gpu/drm/omapdrm/omap_gem.h |  1 -
- 3 files changed, 15 insertions(+), 11 deletions(-)
+ drivers/gpu/drm/xlnx/zynqmp_dpsub.c | 14 +-------------
+ 1 file changed, 1 insertion(+), 13 deletions(-)
 
-diff --git a/drivers/gpu/drm/omapdrm/omap_drv.c b/drivers/gpu/drm/omapdrm/omap_drv.c
-index 53d5e184ee77..2e598b8b72af 100644
---- a/drivers/gpu/drm/omapdrm/omap_drv.c
-+++ b/drivers/gpu/drm/omapdrm/omap_drv.c
-@@ -521,12 +521,6 @@ static int dev_open(struct drm_device *dev, struct drm_file *file)
- 	return 0;
- }
+diff --git a/drivers/gpu/drm/xlnx/zynqmp_dpsub.c b/drivers/gpu/drm/xlnx/zynqmp_dpsub.c
+index 26328c76305b..058044dcc062 100644
+--- a/drivers/gpu/drm/xlnx/zynqmp_dpsub.c
++++ b/drivers/gpu/drm/xlnx/zynqmp_dpsub.c
+@@ -80,19 +80,7 @@ static struct drm_driver zynqmp_dpsub_drm_driver = {
+ 	.driver_features		= DRIVER_MODESET | DRIVER_GEM |
+ 					  DRIVER_ATOMIC,
  
--static const struct vm_operations_struct omap_gem_vm_ops = {
--	.fault = omap_gem_fault,
--	.open = drm_gem_vm_open,
--	.close = drm_gem_vm_close,
--};
--
- static const struct file_operations omapdriver_fops = {
- 	.owner = THIS_MODULE,
- 	.open = drm_open,
-@@ -549,10 +543,7 @@ static struct drm_driver omap_drm_driver = {
- #endif
- 	.prime_handle_to_fd = drm_gem_prime_handle_to_fd,
- 	.prime_fd_to_handle = drm_gem_prime_fd_to_handle,
--	.gem_prime_export = omap_gem_prime_export,
- 	.gem_prime_import = omap_gem_prime_import,
--	.gem_free_object_unlocked = omap_gem_free_object,
--	.gem_vm_ops = &omap_gem_vm_ops,
- 	.dumb_create = omap_gem_dumb_create,
- 	.dumb_map_offset = omap_gem_dumb_map_offset,
- 	.ioctls = ioctls,
-diff --git a/drivers/gpu/drm/omapdrm/omap_gem.c b/drivers/gpu/drm/omapdrm/omap_gem.c
-index d0d12d5dd76c..d68dc63dea0a 100644
---- a/drivers/gpu/drm/omapdrm/omap_gem.c
-+++ b/drivers/gpu/drm/omapdrm/omap_gem.c
-@@ -487,7 +487,7 @@ static vm_fault_t omap_gem_fault_2d(struct drm_gem_object *obj,
-  * vma->vm_private_data points to the GEM object that is backing this
-  * mapping.
-  */
--vm_fault_t omap_gem_fault(struct vm_fault *vmf)
-+static vm_fault_t omap_gem_fault(struct vm_fault *vmf)
- {
- 	struct vm_area_struct *vma = vmf->vma;
- 	struct drm_gem_object *obj = vma->vm_private_data;
-@@ -1169,6 +1169,18 @@ static bool omap_gem_validate_flags(struct drm_device *dev, u32 flags)
- 	return true;
- }
+-	.prime_handle_to_fd		= drm_gem_prime_handle_to_fd,
+-	.prime_fd_to_handle		= drm_gem_prime_fd_to_handle,
+-	.gem_prime_export		= drm_gem_prime_export,
+-	.gem_prime_import		= drm_gem_prime_import,
+-	.gem_prime_get_sg_table		= drm_gem_cma_prime_get_sg_table,
+-	.gem_prime_import_sg_table	= drm_gem_cma_prime_import_sg_table,
+-	.gem_prime_vmap			= drm_gem_cma_prime_vmap,
+-	.gem_prime_vunmap		= drm_gem_cma_prime_vunmap,
+-	.gem_prime_mmap			= drm_gem_cma_prime_mmap,
+-	.gem_free_object_unlocked	= drm_gem_cma_free_object,
+-	.gem_vm_ops			= &drm_gem_cma_vm_ops,
+-	.dumb_create			= zynqmp_dpsub_dumb_create,
+-	.dumb_destroy			= drm_gem_dumb_destroy,
++	DRM_GEM_CMA_DRIVER_OPS_VMAP_WITH_DUMB_CREATE(zynqmp_dpsub_dumb_create),
  
-+static const struct vm_operations_struct omap_gem_vm_ops = {
-+	.fault = omap_gem_fault,
-+	.open = drm_gem_vm_open,
-+	.close = drm_gem_vm_close,
-+};
-+
-+static const struct drm_gem_object_funcs omap_gem_object_funcs = {
-+	.free = omap_gem_free_object,
-+	.export = omap_gem_prime_export,
-+	.vm_ops = &omap_gem_vm_ops,
-+};
-+
- /* GEM buffer object constructor */
- struct drm_gem_object *omap_gem_new(struct drm_device *dev,
- 		union omap_gem_size gsize, u32 flags)
-@@ -1236,6 +1248,8 @@ struct drm_gem_object *omap_gem_new(struct drm_device *dev,
- 		size = PAGE_ALIGN(gsize.bytes);
- 	}
+ 	.fops				= &zynqmp_dpsub_drm_fops,
  
-+	obj->funcs = &omap_gem_object_funcs;
-+
- 	/* Initialize the GEM object. */
- 	if (!(flags & OMAP_BO_MEM_SHMEM)) {
- 		drm_gem_private_object_init(dev, obj, size);
-diff --git a/drivers/gpu/drm/omapdrm/omap_gem.h b/drivers/gpu/drm/omapdrm/omap_gem.h
-index 729b7812a815..9e6b5c8195d9 100644
---- a/drivers/gpu/drm/omapdrm/omap_gem.h
-+++ b/drivers/gpu/drm/omapdrm/omap_gem.h
-@@ -69,7 +69,6 @@ struct dma_buf *omap_gem_prime_export(struct drm_gem_object *obj, int flags);
- struct drm_gem_object *omap_gem_prime_import(struct drm_device *dev,
- 		struct dma_buf *buffer);
- 
--vm_fault_t omap_gem_fault(struct vm_fault *vmf);
- int omap_gem_roll(struct drm_gem_object *obj, u32 roll);
- void omap_gem_cpu_sync_page(struct drm_gem_object *obj, int pgoff);
- void omap_gem_dma_sync_buffer(struct drm_gem_object *obj,
 -- 
 2.28.0
 
