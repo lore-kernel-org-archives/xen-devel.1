@@ -2,76 +2,75 @@ Return-Path: <SRS0=Q/fq=BX=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.0 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=unavailable
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D66D8C433DF
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2020 08:46:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3A3A0C433DF
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2020 08:50:37 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A921420771
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2020 08:46:51 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A921420771
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.de
+	by mail.kernel.org (Postfix) with ESMTPS id 086F220771
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2020 08:50:36 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="BPbRLtil"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 086F220771
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k68sd-0000Yw-Lg; Thu, 13 Aug 2020 08:46:35 +0000
+	id 1k68wJ-0001Lm-6r; Thu, 13 Aug 2020 08:50:23 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=cOQw=BX=suse.de=tzimmermann@srs-us1.protection.inumbo.net>)
- id 1k68k3-0006LO-MM
- for xen-devel@lists.xenproject.org; Thu, 13 Aug 2020 08:37:43 +0000
-X-Inumbo-ID: 27bed916-49f9-42f2-806a-702135a87c06
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ <SRS0=lIW0=BX=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1k68wI-0001Lh-BF
+ for xen-devel@lists.xenproject.org; Thu, 13 Aug 2020 08:50:22 +0000
+X-Inumbo-ID: 4bd48ad7-145d-4eae-9d4d-f6c190a76da5
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 27bed916-49f9-42f2-806a-702135a87c06;
- Thu, 13 Aug 2020 08:37:06 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 82370B5A3;
- Thu, 13 Aug 2020 08:37:27 +0000 (UTC)
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: alexander.deucher@amd.com, christian.koenig@amd.com, airlied@linux.ie,
- daniel@ffwll.ch, linux@armlinux.org.uk, maarten.lankhorst@linux.intel.com,
- mripard@kernel.org, l.stach@pengutronix.de, christian.gmeiner@gmail.com,
- inki.dae@samsung.com, jy0922.shim@samsung.com, sw0312.kim@samsung.com,
- kyungmin.park@samsung.com, kgene@kernel.org, krzk@kernel.org,
- patrik.r.jakobsson@gmail.com, jani.nikula@linux.intel.com,
- joonas.lahtinen@linux.intel.com, rodrigo.vivi@intel.com,
- chunkuang.hu@kernel.org, p.zabel@pengutronix.de, matthias.bgg@gmail.com,
- robdclark@gmail.com, sean@poorly.run, bskeggs@redhat.com,
- tomi.valkeinen@ti.com, eric@anholt.net, hjc@rock-chips.com,
- heiko@sntech.de, thierry.reding@gmail.com, jonathanh@nvidia.com,
- rodrigosiqueiramelo@gmail.com, hamohammed.sa@gmail.com,
- oleksandr_andrushchenko@epam.com, hyun.kwon@xilinx.com,
- laurent.pinchart@ideasonboard.com, michal.simek@xilinx.com,
- sumit.semwal@linaro.org, evan.quan@amd.com, Hawking.Zhang@amd.com,
- tianci.yin@amd.com, marek.olsak@amd.com, hdegoede@redhat.com,
- andrey.grodzovsky@amd.com, Felix.Kuehling@amd.com, xinhui.pan@amd.com,
- aaron.liu@amd.com, nirmoy.das@amd.com, chris@chris-wilson.co.uk,
- matthew.auld@intel.com, abdiel.janulgue@linux.intel.com,
- tvrtko.ursulin@linux.intel.com, andi.shyti@intel.com, sam@ravnborg.org,
- miaoqinglang@huawei.com, emil.velikov@collabora.com
-Cc: amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- etnaviv@lists.freedesktop.org, linux-arm-kernel@lists.infradead.org,
- linux-samsung-soc@vger.kernel.org, intel-gfx@lists.freedesktop.org,
- linux-mediatek@lists.infradead.org, linux-arm-msm@vger.kernel.org,
- freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
- xen-devel@lists.xenproject.org, Thomas Zimmermann <tzimmermann@suse.de>
-Subject: [PATCH 16/20] drm/vgem: Introduce GEM object functions
-Date: Thu, 13 Aug 2020 10:36:40 +0200
-Message-Id: <20200813083644.31711-17-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20200813083644.31711-1-tzimmermann@suse.de>
-References: <20200813083644.31711-1-tzimmermann@suse.de>
+ id 4bd48ad7-145d-4eae-9d4d-f6c190a76da5;
+ Thu, 13 Aug 2020 08:50:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1597308619;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:content-transfer-encoding:in-reply-to;
+ bh=+ewbFVzXCY/jdMIxNTAVdRDKD2RrTHjc8jmctgiRh4Y=;
+ b=BPbRLtiljVey/loOlpdfNxQLDjbavs8mcALYuQKlbD9oIiwb6vxYwtuu
+ c1mxfKi+bwwWaP8qQmmhz3m5FbJI9tAXJVrAbohQvQL00dnVdAm6wCaWv
+ CjjeaU7EFuUqAL+U8sj9/H74kw62mPIExWhyjB07TXqcYBgXHxaQibuWI k=;
+Authentication-Results: esa4.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none
+IronPort-SDR: pb/3sk9nuAYfhhHIsVtN5h9CSngbjDSR7jCr49XR300z0pPaJI8sNJ0GsUrnSLZtBKf5GyDoGq
+ 0KIZtDlHOLxK0yP1C7AHMj9UW7h35Xx+SXLHVaz6NF29wy6pvza2rUhMRDzXmstfZT2YgMX6mz
+ 1EKy/uHhK1Eyu+Ar4KFLf2fpJcfN9AV6SxsjnuACdj0anuMYLQ8I1UPgH4/YFBrSKZvE6O1LwO
+ DQHL4cVqYtgM5cRfcG8ih43E6/SZ+iDROXOP/EsHo2+D2cHnlwDQW4UE4Dk24T+cRrDzsUkYeT
+ 3a8=
+X-SBRS: 2.7
+X-MesageID: 25351986
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.76,307,1592884800"; d="scan'208";a="25351986"
+Date: Thu, 13 Aug 2020 10:50:09 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: <paul@xen.org>
+CC: <xen-devel@lists.xenproject.org>, 'Jan Beulich' <jbeulich@suse.com>,
+ 'Andrew Cooper' <andrew.cooper3@citrix.com>, 'Wei Liu' <wl@xen.org>
+Subject: Re: [PATCH 3/5] x86/vmsi: use the newly introduced EOI callbacks
+Message-ID: <20200813085009.GD975@Air-de-Roger>
+References: <20200812124709.4165-1-roger.pau@citrix.com>
+ <20200812124709.4165-4-roger.pau@citrix.com>
+ <004b01d6714a$782dbbb0$68893310$@xen.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <004b01d6714a$782dbbb0$68893310$@xen.org>
+X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
+ AMSPEX02CL02.citrite.net (10.69.22.126)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -85,77 +84,158 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-GEM object functions deprecate several similar callback interfaces in
-struct drm_driver. This patch replaces the per-driver callbacks with
-per-instance callbacks in vgem. The only exception is gem_prime_mmap,
-which is non-trivial to convert.
+On Thu, Aug 13, 2020 at 09:19:30AM +0100, Paul Durrant wrote:
+> > -----Original Message-----
+> > From: Roger Pau Monne <roger.pau@citrix.com>
+> > Sent: 12 August 2020 13:47
+> > To: xen-devel@lists.xenproject.org
+> > Cc: Roger Pau Monne <roger.pau@citrix.com>; Jan Beulich <jbeulich@suse.com>; Andrew Cooper
+> > <andrew.cooper3@citrix.com>; Wei Liu <wl@xen.org>; Paul Durrant <paul@xen.org>
+> > Subject: [PATCH 3/5] x86/vmsi: use the newly introduced EOI callbacks
+> > 
+> > Remove the unconditional call to hvm_dpci_msi_eoi in vlapic_handle_EOI
+> > and instead use the newly introduced EOI callback mechanism in order
+> > to register a callback for MSI vectors injected from passed through
+> > devices.
+> > 
+> > Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+> > ---
+> >  xen/arch/x86/hvm/vlapic.c    |  2 --
+> >  xen/arch/x86/hvm/vmsi.c      | 36 ++++++++++++++++++++++--------------
+> >  xen/drivers/passthrough/io.c |  4 +++-
+> >  xen/include/asm-x86/hvm/io.h |  2 +-
+> >  4 files changed, 26 insertions(+), 18 deletions(-)
+> > 
+> > diff --git a/xen/arch/x86/hvm/vlapic.c b/xen/arch/x86/hvm/vlapic.c
+> > index 7369be468b..3b3b3d7621 100644
+> > --- a/xen/arch/x86/hvm/vlapic.c
+> > +++ b/xen/arch/x86/hvm/vlapic.c
+> > @@ -496,8 +496,6 @@ void vlapic_handle_EOI(struct vlapic *vlapic, u8 vector)
+> >      else if ( has_viridian_synic(d) )
+> >          viridian_synic_ack_sint(v, vector);
+> > 
+> > -    hvm_dpci_msi_eoi(d, vector);
+> > -
+> >      spin_lock_irqsave(&vlapic->callback_lock, flags);
+> >      callback = vlapic->callbacks[vector].callback;
+> >      data = vlapic->callbacks[vector].data;
+> > diff --git a/xen/arch/x86/hvm/vmsi.c b/xen/arch/x86/hvm/vmsi.c
+> > index 7ca19353ab..e192c4c6da 100644
+> > --- a/xen/arch/x86/hvm/vmsi.c
+> > +++ b/xen/arch/x86/hvm/vmsi.c
+> > @@ -44,11 +44,9 @@
+> >  #include <asm/event.h>
+> >  #include <asm/io_apic.h>
+> > 
+> > -static void vmsi_inj_irq(
+> > -    struct vlapic *target,
+> > -    uint8_t vector,
+> > -    uint8_t trig_mode,
+> > -    uint8_t delivery_mode)
+> > +static void vmsi_inj_irq(struct vlapic *target, uint8_t vector,
+> > +                         uint8_t trig_mode, uint8_t delivery_mode,
+> > +                         vlapic_eoi_callback_t *callback, void *data)
+> >  {
+> >      HVM_DBG_LOG(DBG_LEVEL_VLAPIC, "vmsi_inj_irq: vec %02x trig %d dm %d\n",
+> >                  vector, trig_mode, delivery_mode);
+> > @@ -57,17 +55,17 @@ static void vmsi_inj_irq(
+> >      {
+> >      case dest_Fixed:
+> >      case dest_LowestPrio:
+> > -        vlapic_set_irq(target, vector, trig_mode);
+> > +        vlapic_set_irq_callback(target, vector, trig_mode, callback, data);
+> >          break;
+> >      default:
+> >          BUG();
+> >      }
+> >  }
+> > 
+> > -int vmsi_deliver(
+> > -    struct domain *d, int vector,
+> > -    uint8_t dest, uint8_t dest_mode,
+> > -    uint8_t delivery_mode, uint8_t trig_mode)
+> > +static int vmsi_deliver_callback(struct domain *d, int vector, uint8_t dest,
+> > +                                 uint8_t dest_mode, uint8_t delivery_mode,
+> > +                                 uint8_t trig_mode,
+> > +                                 vlapic_eoi_callback_t *callback, void *data)
+> >  {
+> >      struct vlapic *target;
+> >      struct vcpu *v;
+> > @@ -78,7 +76,8 @@ int vmsi_deliver(
+> >          target = vlapic_lowest_prio(d, NULL, 0, dest, dest_mode);
+> >          if ( target != NULL )
+> >          {
+> > -            vmsi_inj_irq(target, vector, trig_mode, delivery_mode);
+> > +            vmsi_inj_irq(target, vector, trig_mode, delivery_mode, callback,
+> > +                         data);
+> >              break;
+> >          }
+> >          HVM_DBG_LOG(DBG_LEVEL_VLAPIC, "null MSI round robin: vector=%02x\n",
+> > @@ -89,8 +88,8 @@ int vmsi_deliver(
+> >          for_each_vcpu ( d, v )
+> >              if ( vlapic_match_dest(vcpu_vlapic(v), NULL,
+> >                                     0, dest, dest_mode) )
+> > -                vmsi_inj_irq(vcpu_vlapic(v), vector,
+> > -                             trig_mode, delivery_mode);
+> > +                vmsi_inj_irq(vcpu_vlapic(v), vector, trig_mode, delivery_mode,
+> > +                             callback, data);
+> >          break;
+> > 
+> >      default:
+> > @@ -103,6 +102,14 @@ int vmsi_deliver(
+> >      return 0;
+> >  }
+> > 
+> > +
+> > +int vmsi_deliver(struct domain *d, int vector, uint8_t dest, uint8_t dest_mode,
+> > +                 uint8_t delivery_mode, uint8_t trig_mode)
+> > +{
+> > +    return vmsi_deliver_callback(d, vector, dest, dest_mode, delivery_mode,
+> > +                                 trig_mode, NULL, NULL);
+> > +}
+> > +
+> >  void vmsi_deliver_pirq(struct domain *d, const struct hvm_pirq_dpci *pirq_dpci)
+> >  {
+> >      uint32_t flags = pirq_dpci->gmsi.gflags;
+> > @@ -119,7 +126,8 @@ void vmsi_deliver_pirq(struct domain *d, const struct hvm_pirq_dpci *pirq_dpci)
+> > 
+> >      ASSERT(pirq_dpci->flags & HVM_IRQ_DPCI_GUEST_MSI);
+> > 
+> > -    vmsi_deliver(d, vector, dest, dest_mode, delivery_mode, trig_mode);
+> > +    vmsi_deliver_callback(d, vector, dest, dest_mode, delivery_mode, trig_mode,
+> > +                          hvm_dpci_msi_eoi, NULL);
+> >  }
+> > 
+> >  /* Return value, -1 : multi-dests, non-negative value: dest_vcpu_id */
+> > diff --git a/xen/drivers/passthrough/io.c b/xen/drivers/passthrough/io.c
+> > index 6b1305a3e5..3793029b29 100644
+> > --- a/xen/drivers/passthrough/io.c
+> > +++ b/xen/drivers/passthrough/io.c
+> > @@ -874,8 +874,10 @@ static int _hvm_dpci_msi_eoi(struct domain *d,
+> >      return 0;
+> >  }
+> > 
+> > -void hvm_dpci_msi_eoi(struct domain *d, int vector)
+> > +void hvm_dpci_msi_eoi(struct vcpu *v, unsigned int vector, void *data)
+> >  {
+> > +    struct domain *d = v->domain;
+> > +
+> 
+> Could we actually drop the vcpu parameter here... i.e. is there any case where this code will be invoked with v != current?
 
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
----
- drivers/gpu/drm/vgem/vgem_drv.c | 21 ++++++++++++++-------
- 1 file changed, 14 insertions(+), 7 deletions(-)
+viridian_synic_wrmsr seems to call vlapic_EOI_set without enforcing v
+== current (as it seems to be fine being called from v != current as
+long as it's not running).
 
-diff --git a/drivers/gpu/drm/vgem/vgem_drv.c b/drivers/gpu/drm/vgem/vgem_drv.c
-index 313339bbff90..c49f841dd4cd 100644
---- a/drivers/gpu/drm/vgem/vgem_drv.c
-+++ b/drivers/gpu/drm/vgem/vgem_drv.c
-@@ -50,6 +50,8 @@
- #define DRIVER_MAJOR	1
- #define DRIVER_MINOR	0
- 
-+static const struct drm_gem_object_funcs vgem_gem_object_funcs;
-+
- static struct vgem_device {
- 	struct drm_device drm;
- 	struct platform_device *platform;
-@@ -167,6 +169,8 @@ static struct drm_vgem_gem_object *__vgem_gem_create(struct drm_device *dev,
- 	if (!obj)
- 		return ERR_PTR(-ENOMEM);
- 
-+	obj->base.funcs = &vgem_gem_object_funcs;
-+
- 	ret = drm_gem_object_init(dev, &obj->base, roundup(size, PAGE_SIZE));
- 	if (ret) {
- 		kfree(obj);
-@@ -408,13 +412,21 @@ static void vgem_release(struct drm_device *dev)
- 	platform_device_unregister(vgem->platform);
- }
- 
-+static const struct drm_gem_object_funcs vgem_gem_object_funcs = {
-+	.free = vgem_gem_free_object,
-+	.pin = vgem_prime_pin,
-+	.unpin = vgem_prime_unpin,
-+	.get_sg_table = vgem_prime_get_sg_table,
-+	.vmap = vgem_prime_vmap,
-+	.vunmap = vgem_prime_vunmap,
-+	.vm_ops = &vgem_gem_vm_ops,
-+};
-+
- static struct drm_driver vgem_driver = {
- 	.driver_features		= DRIVER_GEM | DRIVER_RENDER,
- 	.release			= vgem_release,
- 	.open				= vgem_open,
- 	.postclose			= vgem_postclose,
--	.gem_free_object_unlocked	= vgem_gem_free_object,
--	.gem_vm_ops			= &vgem_gem_vm_ops,
- 	.ioctls				= vgem_ioctls,
- 	.num_ioctls 			= ARRAY_SIZE(vgem_ioctls),
- 	.fops				= &vgem_driver_fops,
-@@ -423,13 +435,8 @@ static struct drm_driver vgem_driver = {
- 
- 	.prime_handle_to_fd = drm_gem_prime_handle_to_fd,
- 	.prime_fd_to_handle = drm_gem_prime_fd_to_handle,
--	.gem_prime_pin = vgem_prime_pin,
--	.gem_prime_unpin = vgem_prime_unpin,
- 	.gem_prime_import = vgem_prime_import,
- 	.gem_prime_import_sg_table = vgem_prime_import_sg_table,
--	.gem_prime_get_sg_table = vgem_prime_get_sg_table,
--	.gem_prime_vmap = vgem_prime_vmap,
--	.gem_prime_vunmap = vgem_prime_vunmap,
- 	.gem_prime_mmap = vgem_prime_mmap,
- 
- 	.name	= DRIVER_NAME,
--- 
-2.28.0
+There's also a call to vlapic_EOI_set in vlapic_has_pending_irq that
+I'm not sure won't be called with v != current.
 
+In a normal hardware architecture I would say the EOI can only be
+performed from the same CPU, and hence v == current, on Xen however
+I'm not sure if any of the assists that we provide would allow for the
+EOI to be performed from a different vCPU. I can prepare a pre-patch
+to change the functions called from vlapic_handle_EOI to not take a
+domain or vcpu parameter.
+
+Thanks, Roger.
 
