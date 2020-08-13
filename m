@@ -7,35 +7,34 @@ X-Spam-Status: No, score=-13.0 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=unavailable
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0A1C5C43457
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2020 08:37:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EC458C43639
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2020 08:37:32 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DC06620781
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2020 08:37:41 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DC06620781
+	by mail.kernel.org (Postfix) with ESMTPS id CB3012080C
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2020 08:37:32 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CB3012080C
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k68jr-0006qY-Vw; Thu, 13 Aug 2020 08:37:31 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1k68jk-0006hg-Kx; Thu, 13 Aug 2020 08:37:24 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=cOQw=BX=suse.de=tzimmermann@srs-us1.protection.inumbo.net>)
- id 1k68jq-0006LY-HY
- for xen-devel@lists.xenproject.org; Thu, 13 Aug 2020 08:37:30 +0000
-X-Inumbo-ID: e1d607c3-1350-4e64-8b4f-ad4d42a0aa25
+ id 1k68jj-0006LO-Lv
+ for xen-devel@lists.xenproject.org; Thu, 13 Aug 2020 08:37:23 +0000
+X-Inumbo-ID: 7ff59eb2-8967-4391-9e91-9448a2dd1af2
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id e1d607c3-1350-4e64-8b4f-ad4d42a0aa25;
- Thu, 13 Aug 2020 08:37:08 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 7ff59eb2-8967-4391-9e91-9448a2dd1af2;
+ Thu, 13 Aug 2020 08:36:59 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 4D6F9B5A8;
- Thu, 13 Aug 2020 08:37:29 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 10A75AFB0;
+ Thu, 13 Aug 2020 08:37:21 +0000 (UTC)
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: alexander.deucher@amd.com, christian.koenig@amd.com, airlied@linux.ie,
  daniel@ffwll.ch, linux@armlinux.org.uk, maarten.lankhorst@linux.intel.com,
@@ -65,9 +64,9 @@ Cc: amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
  freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
  linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
  xen-devel@lists.xenproject.org, Thomas Zimmermann <tzimmermann@suse.de>
-Subject: [PATCH 18/20] drm/xen: Introduce GEM object functions
-Date: Thu, 13 Aug 2020 10:36:42 +0200
-Message-Id: <20200813083644.31711-19-tzimmermann@suse.de>
+Subject: [PATCH 09/20] drm/nouveau: Introduce GEM object functions
+Date: Thu, 13 Aug 2020 10:36:33 +0200
+Message-Id: <20200813083644.31711-10-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200813083644.31711-1-tzimmermann@suse.de>
 References: <20200813083644.31711-1-tzimmermann@suse.de>
@@ -88,96 +87,94 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 GEM object functions deprecate several similar callback interfaces in
 struct drm_driver. This patch replaces the per-driver callbacks with
-per-instance callbacks in xen. The only exception is gem_prime_mmap,
-which is non-trivial to convert.
+per-instance callbacks in nouveau.
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 ---
- drivers/gpu/drm/xen/xen_drm_front.c     | 12 +-----------
- drivers/gpu/drm/xen/xen_drm_front.h     |  2 ++
- drivers/gpu/drm/xen/xen_drm_front_gem.c | 15 +++++++++++++++
- 3 files changed, 18 insertions(+), 11 deletions(-)
+ drivers/gpu/drm/nouveau/nouveau_drm.c   |  9 ---------
+ drivers/gpu/drm/nouveau/nouveau_gem.c   | 13 +++++++++++++
+ drivers/gpu/drm/nouveau/nouveau_gem.h   |  2 ++
+ drivers/gpu/drm/nouveau/nouveau_prime.c |  2 ++
+ 4 files changed, 17 insertions(+), 9 deletions(-)
 
-diff --git a/drivers/gpu/drm/xen/xen_drm_front.c b/drivers/gpu/drm/xen/xen_drm_front.c
-index 3e660fb111b3..bd9af1875af1 100644
---- a/drivers/gpu/drm/xen/xen_drm_front.c
-+++ b/drivers/gpu/drm/xen/xen_drm_front.c
-@@ -433,7 +433,7 @@ static int xen_drm_drv_dumb_create(struct drm_file *filp,
- 	return ret;
- }
+diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
+index 22d246acc5e5..dc2388efc857 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_drm.c
++++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
+@@ -1207,16 +1207,7 @@ driver_stub = {
  
--static void xen_drm_drv_free_object_unlocked(struct drm_gem_object *obj)
-+void xen_drm_drv_free_object_unlocked(struct drm_gem_object *obj)
- {
- 	struct xen_drm_front_drm_info *drm_info = obj->dev->dev_private;
- 	int idx;
-@@ -481,22 +481,12 @@ static const struct file_operations xen_drm_dev_fops = {
- 	.mmap           = xen_drm_front_gem_mmap,
- };
- 
--static const struct vm_operations_struct xen_drm_drv_vm_ops = {
--	.open           = drm_gem_vm_open,
--	.close          = drm_gem_vm_close,
--};
+ 	.prime_handle_to_fd = drm_gem_prime_handle_to_fd,
+ 	.prime_fd_to_handle = drm_gem_prime_fd_to_handle,
+-	.gem_prime_pin = nouveau_gem_prime_pin,
+-	.gem_prime_unpin = nouveau_gem_prime_unpin,
+-	.gem_prime_get_sg_table = nouveau_gem_prime_get_sg_table,
+ 	.gem_prime_import_sg_table = nouveau_gem_prime_import_sg_table,
+-	.gem_prime_vmap = nouveau_gem_prime_vmap,
+-	.gem_prime_vunmap = nouveau_gem_prime_vunmap,
 -
- static struct drm_driver xen_drm_driver = {
- 	.driver_features           = DRIVER_GEM | DRIVER_MODESET | DRIVER_ATOMIC,
- 	.release                   = xen_drm_drv_release,
--	.gem_vm_ops                = &xen_drm_drv_vm_ops,
--	.gem_free_object_unlocked  = xen_drm_drv_free_object_unlocked,
- 	.prime_handle_to_fd        = drm_gem_prime_handle_to_fd,
- 	.prime_fd_to_handle        = drm_gem_prime_fd_to_handle,
- 	.gem_prime_import_sg_table = xen_drm_front_gem_import_sg_table,
--	.gem_prime_get_sg_table    = xen_drm_front_gem_get_sg_table,
--	.gem_prime_vmap            = xen_drm_front_gem_prime_vmap,
--	.gem_prime_vunmap          = xen_drm_front_gem_prime_vunmap,
- 	.gem_prime_mmap            = xen_drm_front_gem_prime_mmap,
- 	.dumb_create               = xen_drm_drv_dumb_create,
- 	.fops                      = &xen_drm_dev_fops,
-diff --git a/drivers/gpu/drm/xen/xen_drm_front.h b/drivers/gpu/drm/xen/xen_drm_front.h
-index f92c258350ca..93e60c1db550 100644
---- a/drivers/gpu/drm/xen/xen_drm_front.h
-+++ b/drivers/gpu/drm/xen/xen_drm_front.h
-@@ -160,4 +160,6 @@ int xen_drm_front_page_flip(struct xen_drm_front_info *front_info,
- void xen_drm_front_on_frame_done(struct xen_drm_front_info *front_info,
- 				 int conn_idx, u64 fb_cookie);
+-	.gem_free_object_unlocked = nouveau_gem_object_del,
+-	.gem_open_object = nouveau_gem_object_open,
+-	.gem_close_object = nouveau_gem_object_close,
  
-+void xen_drm_drv_free_object_unlocked(struct drm_gem_object *obj);
-+
- #endif /* __XEN_DRM_FRONT_H_ */
-diff --git a/drivers/gpu/drm/xen/xen_drm_front_gem.c b/drivers/gpu/drm/xen/xen_drm_front_gem.c
-index f0b85e094111..7b315c08bcfc 100644
---- a/drivers/gpu/drm/xen/xen_drm_front_gem.c
-+++ b/drivers/gpu/drm/xen/xen_drm_front_gem.c
-@@ -56,6 +56,19 @@ static void gem_free_pages_array(struct xen_gem_object *xen_obj)
- 	xen_obj->pages = NULL;
+ 	.dumb_create = nouveau_display_dumb_create,
+ 	.dumb_map_offset = nouveau_display_dumb_map_offset,
+diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c b/drivers/gpu/drm/nouveau/nouveau_gem.c
+index 81f111ad3f4f..b04b8f6bb9d5 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_gem.c
++++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
+@@ -169,6 +169,17 @@ nouveau_gem_object_close(struct drm_gem_object *gem, struct drm_file *file_priv)
+ 	ttm_bo_unreserve(&nvbo->bo);
  }
  
-+static const struct vm_operations_struct xen_drm_drv_vm_ops = {
-+	.open           = drm_gem_vm_open,
-+	.close          = drm_gem_vm_close,
++const struct drm_gem_object_funcs nouveau_gem_object_funcs = {
++	.free = nouveau_gem_object_del,
++	.open = nouveau_gem_object_open,
++	.close = nouveau_gem_object_close,
++	.pin = nouveau_gem_prime_pin,
++	.unpin = nouveau_gem_prime_unpin,
++	.get_sg_table = nouveau_gem_prime_get_sg_table,
++	.vmap = nouveau_gem_prime_vmap,
++	.vunmap = nouveau_gem_prime_vunmap,
 +};
 +
-+static const struct drm_gem_object_funcs xen_drm_front_gem_object_funcs = {
-+	.free = xen_drm_drv_free_object_unlocked,
-+	.get_sg_table = xen_drm_front_gem_get_sg_table,
-+	.vmap = xen_drm_front_gem_prime_vmap,
-+	.vunmap = xen_drm_front_gem_prime_vunmap,
-+	.vm_ops = &xen_drm_drv_vm_ops,
-+};
-+
- static struct xen_gem_object *gem_create_obj(struct drm_device *dev,
- 					     size_t size)
- {
-@@ -66,6 +79,8 @@ static struct xen_gem_object *gem_create_obj(struct drm_device *dev,
- 	if (!xen_obj)
- 		return ERR_PTR(-ENOMEM);
+ int
+ nouveau_gem_new(struct nouveau_cli *cli, u64 size, int align, uint32_t domain,
+ 		uint32_t tile_mode, uint32_t tile_flags,
+@@ -194,6 +205,8 @@ nouveau_gem_new(struct nouveau_cli *cli, u64 size, int align, uint32_t domain,
+ 	if (IS_ERR(nvbo))
+ 		return PTR_ERR(nvbo);
  
-+	xen_obj->base.funcs = &xen_drm_front_gem_object_funcs;
++	nvbo->bo.base.funcs = &nouveau_gem_object_funcs;
 +
- 	ret = drm_gem_object_init(dev, &xen_obj->base, size);
- 	if (ret < 0) {
- 		kfree(xen_obj);
+ 	/* Initialize the embedded gem-object. We return a single gem-reference
+ 	 * to the caller, instead of a normal nouveau_bo ttm reference. */
+ 	ret = drm_gem_object_init(drm->dev, &nvbo->bo.base, size);
+diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.h b/drivers/gpu/drm/nouveau/nouveau_gem.h
+index 978e07591990..b35c180322e2 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_gem.h
++++ b/drivers/gpu/drm/nouveau/nouveau_gem.h
+@@ -5,6 +5,8 @@
+ #include "nouveau_drv.h"
+ #include "nouveau_bo.h"
+ 
++extern const struct drm_gem_object_funcs nouveau_gem_object_funcs;
++
+ static inline struct nouveau_bo *
+ nouveau_gem_object(struct drm_gem_object *gem)
+ {
+diff --git a/drivers/gpu/drm/nouveau/nouveau_prime.c b/drivers/gpu/drm/nouveau/nouveau_prime.c
+index bae6a3eccee0..30f616aa251e 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_prime.c
++++ b/drivers/gpu/drm/nouveau/nouveau_prime.c
+@@ -79,6 +79,8 @@ struct drm_gem_object *nouveau_gem_prime_import_sg_table(struct drm_device *dev,
+ 
+ 	nvbo->valid_domains = NOUVEAU_GEM_DOMAIN_GART;
+ 
++	nvbo->bo.base.funcs = &nouveau_gem_object_funcs;
++
+ 	/* Initialize the embedded gem-object. We return a single gem-reference
+ 	 * to the caller, instead of a normal nouveau_bo ttm reference. */
+ 	ret = drm_gem_object_init(dev, &nvbo->bo.base, size);
 -- 
 2.28.0
 
