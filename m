@@ -7,34 +7,34 @@ X-Spam-Status: No, score=-13.0 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=unavailable
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C43E1C43600
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2020 08:37:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 36930C43468
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2020 08:37:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A11D820781
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2020 08:37:49 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A11D820781
+	by mail.kernel.org (Postfix) with ESMTPS id 12B6A20781
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2020 08:37:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 12B6A20781
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k68k0-00072L-95; Thu, 13 Aug 2020 08:37:40 +0000
+	id 1k68jp-0006nx-L8; Thu, 13 Aug 2020 08:37:29 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=cOQw=BX=suse.de=tzimmermann@srs-us1.protection.inumbo.net>)
- id 1k68jy-0006LO-M6
- for xen-devel@lists.xenproject.org; Thu, 13 Aug 2020 08:37:38 +0000
-X-Inumbo-ID: 2d7e79af-abef-42d5-a665-da01662fa144
+ id 1k68jo-0006LO-Lp
+ for xen-devel@lists.xenproject.org; Thu, 13 Aug 2020 08:37:28 +0000
+X-Inumbo-ID: afb9fa85-ef19-4718-af2d-822c69f0df40
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 2d7e79af-abef-42d5-a665-da01662fa144;
- Thu, 13 Aug 2020 08:37:05 +0000 (UTC)
+ id afb9fa85-ef19-4718-af2d-822c69f0df40;
+ Thu, 13 Aug 2020 08:37:00 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 8255FB59B;
- Thu, 13 Aug 2020 08:37:26 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 0DE75B59E;
+ Thu, 13 Aug 2020 08:37:22 +0000 (UTC)
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: alexander.deucher@amd.com, christian.koenig@amd.com, airlied@linux.ie,
  daniel@ffwll.ch, linux@armlinux.org.uk, maarten.lankhorst@linux.intel.com,
@@ -64,9 +64,9 @@ Cc: amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
  freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
  linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
  xen-devel@lists.xenproject.org, Thomas Zimmermann <tzimmermann@suse.de>
-Subject: [PATCH 15/20] drm/vc4: Introduce GEM object functions
-Date: Thu, 13 Aug 2020 10:36:39 +0200
-Message-Id: <20200813083644.31711-16-tzimmermann@suse.de>
+Subject: [PATCH 10/20] drm/omapdrm: Introduce GEM object functions
+Date: Thu, 13 Aug 2020 10:36:34 +0200
+Message-Id: <20200813083644.31711-11-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200813083644.31711-1-tzimmermann@suse.de>
 References: <20200813083644.31711-1-tzimmermann@suse.de>
@@ -87,115 +87,96 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 GEM object functions deprecate several similar callback interfaces in
 struct drm_driver. This patch replaces the per-driver callbacks with
-per-instance callbacks in vc4. The only exception is gem_prime_mmap,
-which is non-trivial to convert.
+per-instance callbacks in omapdrm.
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 ---
- drivers/gpu/drm/vc4/vc4_bo.c  | 21 ++++++++++++++++++++-
- drivers/gpu/drm/vc4/vc4_drv.c | 12 ------------
- drivers/gpu/drm/vc4/vc4_drv.h |  1 -
- 3 files changed, 20 insertions(+), 14 deletions(-)
+ drivers/gpu/drm/omapdrm/omap_drv.c |  9 ---------
+ drivers/gpu/drm/omapdrm/omap_gem.c | 16 +++++++++++++++-
+ drivers/gpu/drm/omapdrm/omap_gem.h |  1 -
+ 3 files changed, 15 insertions(+), 11 deletions(-)
 
-diff --git a/drivers/gpu/drm/vc4/vc4_bo.c b/drivers/gpu/drm/vc4/vc4_bo.c
-index 74ceebd62fbc..f432278173cd 100644
---- a/drivers/gpu/drm/vc4/vc4_bo.c
-+++ b/drivers/gpu/drm/vc4/vc4_bo.c
-@@ -21,6 +21,8 @@
- #include "vc4_drv.h"
- #include "uapi/drm/vc4_drm.h"
- 
-+static vm_fault_t vc4_fault(struct vm_fault *vmf);
-+
- static const char * const bo_type_names[] = {
- 	"kernel",
- 	"V3D",
-@@ -374,6 +376,21 @@ static struct vc4_bo *vc4_bo_get_from_cache(struct drm_device *dev,
- 	return bo;
+diff --git a/drivers/gpu/drm/omapdrm/omap_drv.c b/drivers/gpu/drm/omapdrm/omap_drv.c
+index 53d5e184ee77..2e598b8b72af 100644
+--- a/drivers/gpu/drm/omapdrm/omap_drv.c
++++ b/drivers/gpu/drm/omapdrm/omap_drv.c
+@@ -521,12 +521,6 @@ static int dev_open(struct drm_device *dev, struct drm_file *file)
+ 	return 0;
  }
  
-+static const struct vm_operations_struct vc4_vm_ops = {
-+	.fault = vc4_fault,
-+	.open = drm_gem_vm_open,
-+	.close = drm_gem_vm_close,
-+};
-+
-+static const struct drm_gem_object_funcs vc4_gem_object_funcs = {
-+	.free = vc4_free_object,
-+	.export = vc4_prime_export,
-+	.get_sg_table = drm_gem_cma_prime_get_sg_table,
-+	.vmap = vc4_prime_vmap,
-+	.vunmap = drm_gem_cma_prime_vunmap,
-+	.vm_ops = &vc4_vm_ops,
-+};
-+
- /**
-  * vc4_gem_create_object - Implementation of driver->gem_create_object.
-  * @dev: DRM device
-@@ -400,6 +417,8 @@ struct drm_gem_object *vc4_create_object(struct drm_device *dev, size_t size)
- 	vc4->bo_labels[VC4_BO_TYPE_KERNEL].size_allocated += size;
- 	mutex_unlock(&vc4->bo_lock);
- 
-+	bo->base.base.funcs = &vc4_gem_object_funcs;
-+
- 	return &bo->base.base;
- }
- 
-@@ -684,7 +703,7 @@ struct dma_buf * vc4_prime_export(struct drm_gem_object *obj, int flags)
- 	return dmabuf;
- }
- 
--vm_fault_t vc4_fault(struct vm_fault *vmf)
-+static vm_fault_t vc4_fault(struct vm_fault *vmf)
- {
- 	struct vm_area_struct *vma = vmf->vma;
- 	struct drm_gem_object *obj = vma->vm_private_data;
-diff --git a/drivers/gpu/drm/vc4/vc4_drv.c b/drivers/gpu/drm/vc4/vc4_drv.c
-index 38343d2fb4fb..56c702033d79 100644
---- a/drivers/gpu/drm/vc4/vc4_drv.c
-+++ b/drivers/gpu/drm/vc4/vc4_drv.c
-@@ -140,12 +140,6 @@ static void vc4_close(struct drm_device *dev, struct drm_file *file)
- 	kfree(vc4file);
- }
- 
--static const struct vm_operations_struct vc4_vm_ops = {
--	.fault = vc4_fault,
+-static const struct vm_operations_struct omap_gem_vm_ops = {
+-	.fault = omap_gem_fault,
 -	.open = drm_gem_vm_open,
 -	.close = drm_gem_vm_close,
 -};
 -
- static const struct file_operations vc4_drm_fops = {
+ static const struct file_operations omapdriver_fops = {
  	.owner = THIS_MODULE,
  	.open = drm_open,
-@@ -195,16 +189,10 @@ static struct drm_driver vc4_drm_driver = {
+@@ -549,10 +543,7 @@ static struct drm_driver omap_drm_driver = {
  #endif
- 
- 	.gem_create_object = vc4_create_object,
--	.gem_free_object_unlocked = vc4_free_object,
--	.gem_vm_ops = &vc4_vm_ops,
- 
  	.prime_handle_to_fd = drm_gem_prime_handle_to_fd,
  	.prime_fd_to_handle = drm_gem_prime_fd_to_handle,
--	.gem_prime_export = vc4_prime_export,
--	.gem_prime_get_sg_table	= drm_gem_cma_prime_get_sg_table,
- 	.gem_prime_import_sg_table = vc4_prime_import_sg_table,
--	.gem_prime_vmap = vc4_prime_vmap,
--	.gem_prime_vunmap = drm_gem_cma_prime_vunmap,
- 	.gem_prime_mmap = vc4_prime_mmap,
+-	.gem_prime_export = omap_gem_prime_export,
+ 	.gem_prime_import = omap_gem_prime_import,
+-	.gem_free_object_unlocked = omap_gem_free_object,
+-	.gem_vm_ops = &omap_gem_vm_ops,
+ 	.dumb_create = omap_gem_dumb_create,
+ 	.dumb_map_offset = omap_gem_dumb_map_offset,
+ 	.ioctls = ioctls,
+diff --git a/drivers/gpu/drm/omapdrm/omap_gem.c b/drivers/gpu/drm/omapdrm/omap_gem.c
+index d0d12d5dd76c..d68dc63dea0a 100644
+--- a/drivers/gpu/drm/omapdrm/omap_gem.c
++++ b/drivers/gpu/drm/omapdrm/omap_gem.c
+@@ -487,7 +487,7 @@ static vm_fault_t omap_gem_fault_2d(struct drm_gem_object *obj,
+  * vma->vm_private_data points to the GEM object that is backing this
+  * mapping.
+  */
+-vm_fault_t omap_gem_fault(struct vm_fault *vmf)
++static vm_fault_t omap_gem_fault(struct vm_fault *vmf)
+ {
+ 	struct vm_area_struct *vma = vmf->vma;
+ 	struct drm_gem_object *obj = vma->vm_private_data;
+@@ -1169,6 +1169,18 @@ static bool omap_gem_validate_flags(struct drm_device *dev, u32 flags)
+ 	return true;
+ }
  
- 	.dumb_create = vc4_dumb_create,
-diff --git a/drivers/gpu/drm/vc4/vc4_drv.h b/drivers/gpu/drm/vc4/vc4_drv.h
-index fa19160c801f..8eac046f3457 100644
---- a/drivers/gpu/drm/vc4/vc4_drv.h
-+++ b/drivers/gpu/drm/vc4/vc4_drv.h
-@@ -778,7 +778,6 @@ int vc4_get_hang_state_ioctl(struct drm_device *dev, void *data,
- 			     struct drm_file *file_priv);
- int vc4_label_bo_ioctl(struct drm_device *dev, void *data,
- 		       struct drm_file *file_priv);
--vm_fault_t vc4_fault(struct vm_fault *vmf);
- int vc4_mmap(struct file *filp, struct vm_area_struct *vma);
- int vc4_prime_mmap(struct drm_gem_object *obj, struct vm_area_struct *vma);
- struct drm_gem_object *vc4_prime_import_sg_table(struct drm_device *dev,
++static const struct vm_operations_struct omap_gem_vm_ops = {
++	.fault = omap_gem_fault,
++	.open = drm_gem_vm_open,
++	.close = drm_gem_vm_close,
++};
++
++static const struct drm_gem_object_funcs omap_gem_object_funcs = {
++	.free = omap_gem_free_object,
++	.export = omap_gem_prime_export,
++	.vm_ops = &omap_gem_vm_ops,
++};
++
+ /* GEM buffer object constructor */
+ struct drm_gem_object *omap_gem_new(struct drm_device *dev,
+ 		union omap_gem_size gsize, u32 flags)
+@@ -1236,6 +1248,8 @@ struct drm_gem_object *omap_gem_new(struct drm_device *dev,
+ 		size = PAGE_ALIGN(gsize.bytes);
+ 	}
+ 
++	obj->funcs = &omap_gem_object_funcs;
++
+ 	/* Initialize the GEM object. */
+ 	if (!(flags & OMAP_BO_MEM_SHMEM)) {
+ 		drm_gem_private_object_init(dev, obj, size);
+diff --git a/drivers/gpu/drm/omapdrm/omap_gem.h b/drivers/gpu/drm/omapdrm/omap_gem.h
+index 729b7812a815..9e6b5c8195d9 100644
+--- a/drivers/gpu/drm/omapdrm/omap_gem.h
++++ b/drivers/gpu/drm/omapdrm/omap_gem.h
+@@ -69,7 +69,6 @@ struct dma_buf *omap_gem_prime_export(struct drm_gem_object *obj, int flags);
+ struct drm_gem_object *omap_gem_prime_import(struct drm_device *dev,
+ 		struct dma_buf *buffer);
+ 
+-vm_fault_t omap_gem_fault(struct vm_fault *vmf);
+ int omap_gem_roll(struct drm_gem_object *obj, u32 roll);
+ void omap_gem_cpu_sync_page(struct drm_gem_object *obj, int pgoff);
+ void omap_gem_dma_sync_buffer(struct drm_gem_object *obj,
 -- 
 2.28.0
 
