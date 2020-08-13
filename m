@@ -2,91 +2,77 @@ Return-Path: <SRS0=Q/fq=BX=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.8 required=3.0 tests=BAYES_00,DKIM_ADSP_CUSTOM_MED,
-	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+X-Spam-Status: No, score=-13.0 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.0
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=unavailable
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A756C433DF
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2020 08:34:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BA628C43463
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2020 08:37:06 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 38A9A20781
-	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2020 08:34:17 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Qmw6EYIp"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 38A9A20781
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id 929292080C
+	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2020 08:37:06 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 929292080C
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k68gF-0006Cg-RO; Thu, 13 Aug 2020 08:33:47 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1k68jI-0006Lt-M2; Thu, 13 Aug 2020 08:36:56 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=JVDZ=BX=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
- id 1k68gE-0006Cb-R3
- for xen-devel@lists.xenproject.org; Thu, 13 Aug 2020 08:33:46 +0000
-X-Inumbo-ID: 6cc30f48-4264-4761-afdd-e66e663dfc94
-Received: from mail-wm1-x341.google.com (unknown [2a00:1450:4864:20::341])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 6cc30f48-4264-4761-afdd-e66e663dfc94;
- Thu, 13 Aug 2020 08:33:45 +0000 (UTC)
-Received: by mail-wm1-x341.google.com with SMTP id x5so3973014wmi.2
- for <xen-devel@lists.xenproject.org>; Thu, 13 Aug 2020 01:33:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:reply-to:to:cc:references:in-reply-to:subject:date:message-id
- :mime-version:content-transfer-encoding:thread-index
- :content-language;
- bh=rpQzT81yG9oculy0yH22eNr0uNmpBDk/TugSd6rMMWA=;
- b=Qmw6EYIpk0aS+SiWKArRMYxW3kYf+KbgzuUk7ieboKbuYzhmhY5KXMCy4IXUIknQpV
- Vd5wniO2n+2pPgVGVblVvtZpOYFXJF84JUcyQ4pwUfNi6pfGo4w7bcZROwNqbNfurBPh
- zcXgg8EZ9U0IJiMo86H0m5vSQqIqYxjxL1gwSQZt9yzdpD77F2VENs3MV8OwJXqIsDhF
- GzVFanTuW1U+WWABi2GJLL9Hoz5i/C3lnDtK2xuPwJIli4jYZaFUy08y64TwAeIpIb84
- MVlFuBYAyuZ7Zz2fn7fPHFiYLiLojxxHow7ilVlzEltwPNRyoIqcGDwVTGex2/Zl7t74
- ivrQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:reply-to:to:cc:references:in-reply-to
- :subject:date:message-id:mime-version:content-transfer-encoding
- :thread-index:content-language;
- bh=rpQzT81yG9oculy0yH22eNr0uNmpBDk/TugSd6rMMWA=;
- b=DPMQw+xwSaCRplj/W2EuVTY7uAVmz38WglzPcN7XIkp5bSMuuAqnLw44Ui3WY6b5Iy
- 7Ds+aQdbdQHsKwOovio7Dg8SItsDVz6PuXyD1f61nNaiOVBBUaUAw94TNMsBAhpEpPw1
- RkQ/3iWDk1emMN+AkmxiAGR05gcH/kcOoio4ahNfKGRxm6xZjZdhNXEdA6gMqM3oOP/o
- ckoJNt3QZAFmU1YI09lxsR29Ocf4y2Q6N/uCOLfRFMJcVsEOtOf0M1D38i1sD+93YUv0
- 7Lv4kp6YMgyk1NGHAbzFGeASJiNvcWIChKWlzeXoE193Rbh8tpNV3B+dxZgKJg902LCI
- iEWw==
-X-Gm-Message-State: AOAM530p8Mmg/HUlk5YBWDXpWR5FpGM619kxp/aZFIxGP3juRfmdYGoI
- BmxCmJpuwwBLSpNY2W6Hcw0=
-X-Google-Smtp-Source: ABdhPJxUmf0WNRn9L8sWZSxcR2CM8KBL/LXD5dYW2LokWeDiD1EHwR/uEWml0hj6MOv9PpMwZgUnzQ==
-X-Received: by 2002:a1c:4409:: with SMTP id r9mr3169463wma.114.1597307624866; 
- Thu, 13 Aug 2020 01:33:44 -0700 (PDT)
-Received: from CBGR90WXYV0 (host86-143-223-30.range86-143.btcentralplus.com.
- [86.143.223.30])
- by smtp.gmail.com with ESMTPSA id s206sm8412895wmf.40.2020.08.13.01.33.43
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 13 Aug 2020 01:33:44 -0700 (PDT)
-From: Paul Durrant <xadimgnik@gmail.com>
-X-Google-Original-From: "Paul Durrant" <paul@xen.org>
-To: "'Roger Pau Monne'" <roger.pau@citrix.com>,
- <xen-devel@lists.xenproject.org>
-Cc: "'Wei Liu'" <wl@xen.org>, "'Jan Beulich'" <jbeulich@suse.com>,
- "'Andrew Cooper'" <andrew.cooper3@citrix.com>
-References: <20200812124709.4165-1-roger.pau@citrix.com>
- <20200812124709.4165-5-roger.pau@citrix.com>
-In-Reply-To: <20200812124709.4165-5-roger.pau@citrix.com>
-Subject: RE: [PATCH 4/5] x86/viridian: switch synic to use the new EOI callback
-Date: Thu, 13 Aug 2020 09:33:43 +0100
-Message-ID: <004e01d6714c$748450d0$5d8cf270$@xen.org>
+ <SRS0=cOQw=BX=suse.de=tzimmermann@srs-us1.protection.inumbo.net>)
+ id 1k68jH-0006LY-NM
+ for xen-devel@lists.xenproject.org; Thu, 13 Aug 2020 08:36:55 +0000
+X-Inumbo-ID: 34017627-192b-4e0c-8bda-393bbd598881
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 34017627-192b-4e0c-8bda-393bbd598881;
+ Thu, 13 Aug 2020 08:36:53 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 8D1EAAFB1;
+ Thu, 13 Aug 2020 08:37:14 +0000 (UTC)
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: alexander.deucher@amd.com, christian.koenig@amd.com, airlied@linux.ie,
+ daniel@ffwll.ch, linux@armlinux.org.uk, maarten.lankhorst@linux.intel.com,
+ mripard@kernel.org, l.stach@pengutronix.de, christian.gmeiner@gmail.com,
+ inki.dae@samsung.com, jy0922.shim@samsung.com, sw0312.kim@samsung.com,
+ kyungmin.park@samsung.com, kgene@kernel.org, krzk@kernel.org,
+ patrik.r.jakobsson@gmail.com, jani.nikula@linux.intel.com,
+ joonas.lahtinen@linux.intel.com, rodrigo.vivi@intel.com,
+ chunkuang.hu@kernel.org, p.zabel@pengutronix.de, matthias.bgg@gmail.com,
+ robdclark@gmail.com, sean@poorly.run, bskeggs@redhat.com,
+ tomi.valkeinen@ti.com, eric@anholt.net, hjc@rock-chips.com,
+ heiko@sntech.de, thierry.reding@gmail.com, jonathanh@nvidia.com,
+ rodrigosiqueiramelo@gmail.com, hamohammed.sa@gmail.com,
+ oleksandr_andrushchenko@epam.com, hyun.kwon@xilinx.com,
+ laurent.pinchart@ideasonboard.com, michal.simek@xilinx.com,
+ sumit.semwal@linaro.org, evan.quan@amd.com, Hawking.Zhang@amd.com,
+ tianci.yin@amd.com, marek.olsak@amd.com, hdegoede@redhat.com,
+ andrey.grodzovsky@amd.com, Felix.Kuehling@amd.com, xinhui.pan@amd.com,
+ aaron.liu@amd.com, nirmoy.das@amd.com, chris@chris-wilson.co.uk,
+ matthew.auld@intel.com, abdiel.janulgue@linux.intel.com,
+ tvrtko.ursulin@linux.intel.com, andi.shyti@intel.com, sam@ravnborg.org,
+ miaoqinglang@huawei.com, emil.velikov@collabora.com
+Cc: amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ etnaviv@lists.freedesktop.org, linux-arm-kernel@lists.infradead.org,
+ linux-samsung-soc@vger.kernel.org, intel-gfx@lists.freedesktop.org,
+ linux-mediatek@lists.infradead.org, linux-arm-msm@vger.kernel.org,
+ freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
+ xen-devel@lists.xenproject.org, Thomas Zimmermann <tzimmermann@suse.de>
+Subject: [PATCH 02/20] drm/armada: Introduce GEM object functions
+Date: Thu, 13 Aug 2020 10:36:26 +0200
+Message-Id: <20200813083644.31711-3-tzimmermann@suse.de>
+X-Mailer: git-send-email 2.28.0
+In-Reply-To: <20200813083644.31711-1-tzimmermann@suse.de>
+References: <20200813083644.31711-1-tzimmermann@suse.de>
 MIME-Version: 1.0
-Content-Type: text/plain;
-	charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQHtt6hyfd7HfGtbm1qQjI5TC+nvgAFzOaW4qPuMi9A=
-Content-Language: en-gb
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -97,155 +83,96 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Reply-To: paul@xen.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-> -----Original Message-----
-> From: Roger Pau Monne <roger.pau@citrix.com>
-> Sent: 12 August 2020 13:47
-> To: xen-devel@lists.xenproject.org
-> Cc: Roger Pau Monne <roger.pau@citrix.com>; Paul Durrant =
-<paul@xen.org>; Wei Liu <wl@xen.org>; Jan
-> Beulich <jbeulich@suse.com>; Andrew Cooper <andrew.cooper3@citrix.com>
-> Subject: [PATCH 4/5] x86/viridian: switch synic to use the new EOI =
-callback
->=20
-> Switch synic interrupts to use an EOI callback in order to execute the
-> logic tied to the end of interrupt. This allows to remove the synic
-> call in vlapic_handle_EOI.
->=20
-> Move and rename viridian_synic_ack_sint now that it can be made
-> static.
->=20
-> Signed-off-by: Roger Pau Monn=C3=A9 <roger.pau@citrix.com>
-> ---
-> I'm unsure about the logic in viridian_synic_deliver_timer_msg, as it
-> seems to only set the vector in msg_pending when the message is
-> already pending?
+GEM object functions deprecate several similar callback interfaces in
+struct drm_driver. This patch replaces the per-driver callbacks with
+per-instance callbacks in armada.
 
-See section 11.10.3 of the TLFS (SynIC Message Flags)...
+Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+---
+ drivers/gpu/drm/armada/armada_drv.c |  3 ---
+ drivers/gpu/drm/armada/armada_gem.c | 12 +++++++++++-
+ drivers/gpu/drm/armada/armada_gem.h |  2 --
+ 3 files changed, 11 insertions(+), 6 deletions(-)
 
-"The MessagePending flag indicates whether or not there are any messages =
-pending in the message queue of the synthetic interrupt source. If there =
-are, then an =E2=80=9Cend of message=E2=80=9D must be performed by the =
-guest after emptying the message slot. This allows for opportunistic =
-writes to the EOM MSR (only when required). Note that this flag may be =
-set by the hypervisor upon message delivery or at any time afterwards. =
-The flag should be tested after the message slot has been emptied and if =
-set, then there are one or more pending messages and the =E2=80=9Cend of =
-message=E2=80=9D should be performed."
-
-IOW it's a bit like APIC assist in that it tries to avoid a VMEXIT (in =
-this case an access to the EOM MSR) unless it is necessary.
-
-Reading the code again I think it may well be possible to get rid of the =
-'msg_pending' flag since it only appears to be an optimization to avoid =
-testing 'message_type'. I'll try dropping it and see what breaks.
-
-  Paul
-
-> ---
->  xen/arch/x86/hvm/viridian/synic.c  | 28 +++++++++++++++-------------
->  xen/arch/x86/hvm/vlapic.c          |  4 ----
->  xen/include/asm-x86/hvm/viridian.h |  1 -
->  3 files changed, 15 insertions(+), 18 deletions(-)
->=20
-> diff --git a/xen/arch/x86/hvm/viridian/synic.c =
-b/xen/arch/x86/hvm/viridian/synic.c
-> index 94a2b88733..250f0353cf 100644
-> --- a/xen/arch/x86/hvm/viridian/synic.c
-> +++ b/xen/arch/x86/hvm/viridian/synic.c
-> @@ -315,6 +315,19 @@ void viridian_synic_poll(struct vcpu *v)
->      viridian_time_poll_timers(v);
->  }
->=20
-> +static void synic_ack_sint(struct vcpu *v, unsigned int vector, void =
-*data)
-> +{
-> +    struct viridian_vcpu *vv =3D v->arch.hvm.viridian;
-> +    unsigned int sintx =3D vv->vector_to_sintx[vector];
-> +
-> +    ASSERT(v =3D=3D current);
-> +
-> +    if ( sintx < ARRAY_SIZE(vv->sint) )
-> +        __clear_bit(array_index_nospec(sintx, ARRAY_SIZE(vv->sint)),
-> +                    &vv->msg_pending);
-> +}
-> +
-> +
->  bool viridian_synic_deliver_timer_msg(struct vcpu *v, unsigned int =
-sintx,
->                                        unsigned int index,
->                                        uint64_t expiration,
-> @@ -361,7 +374,8 @@ bool viridian_synic_deliver_timer_msg(struct vcpu =
-*v, unsigned int sintx,
->      memcpy(msg->u.payload, &payload, sizeof(payload));
->=20
->      if ( !vs->masked )
-> -        vlapic_set_irq(vcpu_vlapic(v), vs->vector, 0);
-> +        vlapic_set_irq_callback(vcpu_vlapic(v), vs->vector, 0,
-> +                                synic_ack_sint, NULL);
->=20
->      return true;
->  }
-> @@ -380,18 +394,6 @@ bool viridian_synic_is_auto_eoi_sint(const struct =
-vcpu *v,
->      return vs->auto_eoi;
->  }
->=20
-> -void viridian_synic_ack_sint(const struct vcpu *v, unsigned int =
-vector)
-> -{
-> -    struct viridian_vcpu *vv =3D v->arch.hvm.viridian;
-> -    unsigned int sintx =3D vv->vector_to_sintx[vector];
-> -
-> -    ASSERT(v =3D=3D current);
-> -
-> -    if ( sintx < ARRAY_SIZE(vv->sint) )
-> -        __clear_bit(array_index_nospec(sintx, ARRAY_SIZE(vv->sint)),
-> -                    &vv->msg_pending);
-> -}
-> -
->  void viridian_synic_save_vcpu_ctxt(const struct vcpu *v,
->                                     struct hvm_viridian_vcpu_context =
-*ctxt)
->  {
-> diff --git a/xen/arch/x86/hvm/vlapic.c b/xen/arch/x86/hvm/vlapic.c
-> index 3b3b3d7621..701ff942e6 100644
-> --- a/xen/arch/x86/hvm/vlapic.c
-> +++ b/xen/arch/x86/hvm/vlapic.c
-> @@ -489,12 +489,8 @@ void vlapic_handle_EOI(struct vlapic *vlapic, u8 =
-vector)
->      void *data;
->      unsigned long flags;
->=20
-> -    /* All synic SINTx vectors are edge triggered */
-> -
->      if ( vlapic_test_vector(vector, &vlapic->regs->data[APIC_TMR]) )
->          vioapic_update_EOI(d, vector);
-> -    else if ( has_viridian_synic(d) )
-> -        viridian_synic_ack_sint(v, vector);
->=20
->      spin_lock_irqsave(&vlapic->callback_lock, flags);
->      callback =3D vlapic->callbacks[vector].callback;
-> diff --git a/xen/include/asm-x86/hvm/viridian.h =
-b/xen/include/asm-x86/hvm/viridian.h
-> index 844e56b38f..d387d11ce0 100644
-> --- a/xen/include/asm-x86/hvm/viridian.h
-> +++ b/xen/include/asm-x86/hvm/viridian.h
-> @@ -89,7 +89,6 @@ void viridian_apic_assist_clear(const struct vcpu =
-*v);
->  void viridian_synic_poll(struct vcpu *v);
->  bool viridian_synic_is_auto_eoi_sint(const struct vcpu *v,
->                                       unsigned int vector);
-> -void viridian_synic_ack_sint(const struct vcpu *v, unsigned int =
-vector);
->=20
->  #endif /* __ASM_X86_HVM_VIRIDIAN_H__ */
->=20
-> --
-> 2.28.0
-
+diff --git a/drivers/gpu/drm/armada/armada_drv.c b/drivers/gpu/drm/armada/armada_drv.c
+index 5fc25c3f445c..9bccfd894be9 100644
+--- a/drivers/gpu/drm/armada/armada_drv.c
++++ b/drivers/gpu/drm/armada/armada_drv.c
+@@ -37,13 +37,10 @@ DEFINE_DRM_GEM_FOPS(armada_drm_fops);
+ 
+ static struct drm_driver armada_drm_driver = {
+ 	.lastclose		= drm_fb_helper_lastclose,
+-	.gem_free_object_unlocked = armada_gem_free_object,
+ 	.prime_handle_to_fd	= drm_gem_prime_handle_to_fd,
+ 	.prime_fd_to_handle	= drm_gem_prime_fd_to_handle,
+-	.gem_prime_export	= armada_gem_prime_export,
+ 	.gem_prime_import	= armada_gem_prime_import,
+ 	.dumb_create		= armada_gem_dumb_create,
+-	.gem_vm_ops		= &armada_gem_vm_ops,
+ 	.major			= 1,
+ 	.minor			= 0,
+ 	.name			= "armada-drm",
+diff --git a/drivers/gpu/drm/armada/armada_gem.c b/drivers/gpu/drm/armada/armada_gem.c
+index 8005614d2e6b..81c9da65045c 100644
+--- a/drivers/gpu/drm/armada/armada_gem.c
++++ b/drivers/gpu/drm/armada/armada_gem.c
+@@ -25,7 +25,7 @@ static vm_fault_t armada_gem_vm_fault(struct vm_fault *vmf)
+ 	return vmf_insert_pfn(vmf->vma, vmf->address, pfn);
+ }
+ 
+-const struct vm_operations_struct armada_gem_vm_ops = {
++static const struct vm_operations_struct armada_gem_vm_ops = {
+ 	.fault	= armada_gem_vm_fault,
+ 	.open	= drm_gem_vm_open,
+ 	.close	= drm_gem_vm_close,
+@@ -184,6 +184,12 @@ armada_gem_map_object(struct drm_device *dev, struct armada_gem_object *dobj)
+ 	return dobj->addr;
+ }
+ 
++static const struct drm_gem_object_funcs armada_gem_object_funcs = {
++	.free = armada_gem_free_object,
++	.export = armada_gem_prime_export,
++	.vm_ops = &armada_gem_vm_ops,
++};
++
+ struct armada_gem_object *
+ armada_gem_alloc_private_object(struct drm_device *dev, size_t size)
+ {
+@@ -195,6 +201,8 @@ armada_gem_alloc_private_object(struct drm_device *dev, size_t size)
+ 	if (!obj)
+ 		return NULL;
+ 
++	obj->obj.funcs = &armada_gem_object_funcs;
++
+ 	drm_gem_private_object_init(dev, &obj->obj, size);
+ 
+ 	DRM_DEBUG_DRIVER("alloc private obj %p size %zu\n", obj, size);
+@@ -214,6 +222,8 @@ static struct armada_gem_object *armada_gem_alloc_object(struct drm_device *dev,
+ 	if (!obj)
+ 		return NULL;
+ 
++	obj->obj.funcs = &armada_gem_object_funcs;
++
+ 	if (drm_gem_object_init(dev, &obj->obj, size)) {
+ 		kfree(obj);
+ 		return NULL;
+diff --git a/drivers/gpu/drm/armada/armada_gem.h b/drivers/gpu/drm/armada/armada_gem.h
+index de04cc2c8f0e..ffcc7e8dd351 100644
+--- a/drivers/gpu/drm/armada/armada_gem.h
++++ b/drivers/gpu/drm/armada/armada_gem.h
+@@ -21,8 +21,6 @@ struct armada_gem_object {
+ 	void			*update_data;
+ };
+ 
+-extern const struct vm_operations_struct armada_gem_vm_ops;
+-
+ #define drm_to_armada_gem(o) container_of(o, struct armada_gem_object, obj)
+ 
+ void armada_gem_free_object(struct drm_gem_object *);
+-- 
+2.28.0
 
 
