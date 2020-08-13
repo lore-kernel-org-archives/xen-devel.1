@@ -2,69 +2,67 @@ Return-Path: <SRS0=Q/fq=BX=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.1 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-7.1 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=unavailable
-	autolearn_force=no version=3.4.0
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F352EC433DF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 60DEBC433E5
 	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2020 06:21:49 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BF5B220716
+	by mail.kernel.org (Postfix) with ESMTPS id 329AE20716
 	for <xen-devel@archiver.kernel.org>; Thu, 13 Aug 2020 06:21:49 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="QKKKrIiw"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BF5B220716
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="jDpTVC3s"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 329AE20716
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k66cO-00029S-0V; Thu, 13 Aug 2020 06:21:40 +0000
+	id 1k66c3-00025k-Oo; Thu, 13 Aug 2020 06:21:19 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=7cFh=BX=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
- id 1k66cM-00025f-5i
- for xen-devel@lists.xenproject.org; Thu, 13 Aug 2020 06:21:38 +0000
-X-Inumbo-ID: ce68b61a-6bc4-4276-8496-256b8c641462
-Received: from mail-lj1-x22a.google.com (unknown [2a00:1450:4864:20::22a])
+ id 1k66c2-00025f-BZ
+ for xen-devel@lists.xenproject.org; Thu, 13 Aug 2020 06:21:18 +0000
+X-Inumbo-ID: f9531c7a-62fc-4311-9bd9-2da340c49280
+Received: from mail-lf1-x141.google.com (unknown [2a00:1450:4864:20::141])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id ce68b61a-6bc4-4276-8496-256b8c641462;
- Thu, 13 Aug 2020 06:21:22 +0000 (UTC)
-Received: by mail-lj1-x22a.google.com with SMTP id g6so4870133ljn.11
- for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2020 23:21:22 -0700 (PDT)
+ id f9531c7a-62fc-4311-9bd9-2da340c49280;
+ Thu, 13 Aug 2020 06:21:17 +0000 (UTC)
+Received: by mail-lf1-x141.google.com with SMTP id d2so2452734lfj.1
+ for <xen-devel@lists.xenproject.org>; Wed, 12 Aug 2020 23:21:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=IH75Bnms5DPUZxVd4scsKK5yOA6U4dgdsyqfLFTRRs0=;
- b=QKKKrIiwcWdX5YYhi+IBDzFnMzjp6BoSprArgCKJGaFTAFllL2t0ucD3tGKgBwpFvN
- in6kuJpiVUtaHTQ3TW4R/yzg0P2l0ntv2OQXzVQGcjgkUhOYlrGRAGy8n/Iyk8q8BFeu
- 0S/pdYd7UYA/6paTgZms7xIXYMQgqQ9+8vtFqsuCQljaX/b4OSlc1s21jKsJqgd6jG+K
- StlWFVqsso5qkm3ZKbZfI/OYTvxWcpOjGenmx423rC41g52XKhksvmFWK7vYLG9BZ0oN
- hbwz5PzY8SVWx8BqvGgFNteRAgZmgIGQ7p1Pkkaxh+eqmGutPo5m7+oEyxVuY+ptdRtO
- 4biQ==
+ h=from:to:cc:subject:date:message-id;
+ bh=wDWU02+wCKok8nwDMeBlH97/pQcKgRkp+JF5JymdpUo=;
+ b=jDpTVC3sIm7gufDjf0d+/+hJrzDRXPB5ir1t8eW5KL1T4aQ4sPLBnwenLQJBq8qKIT
+ jbWxj5JszQNrbU7t/NghozcTj8mbbQlIm6qR389+tdkpQMibep+6sVKx04ZpKchRa7LV
+ GNarSi2rJdVEBIeItxbNSzQqwt1BU78frDE9wbp2rvt/2v1RWsrdGtn4StePHqGj+jOs
+ 0hkOuKOaNcoKsUQjwgop4MRJCWhnqOQS/C5bdq1bBa5QlE+tS3/4sQxnvthYHBWU4xY8
+ HfUDYiAqSdSuj7GT21GU5fs5apPoGqXCDyMaqNXkiNYk+hF3l+HR3QJrDN2l/Qih7nVD
+ R67Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references;
- bh=IH75Bnms5DPUZxVd4scsKK5yOA6U4dgdsyqfLFTRRs0=;
- b=seAuTcz/LsJwNipPJMGbkz05lwl1+cf++5GPbZTz6LZby4BGt36kZT++TQhbud4hw6
- r/Pw+9l8PDCYMzUUzaTJNvKVfcONC6Dx3PZGtyFbq+fiAqGPf77XcwChEZzoiiak2y8+
- u7LfbpVxnJsQt66kYElHy/mfCvkyne94Iio5+xw9F/fyevzHk0BZ12E8BdGHL0kVg/zs
- onCoSp3UQprQBl7prfzlQ9Z9M5h029WmbQXE6QZbnY0a4DgidBac/+Qg66LaQSoeIAvh
- diRCpGLdDfdQwqHL4bJ/LpiD/a4gAIzDA2AZp7mrZplUlrIuaIAeKyaUz5JAcotOHREN
- LAyA==
-X-Gm-Message-State: AOAM531iqKphUIQhWyHlMYVXo4tU9hJxBMMzgOYgIETQ6Hp5h/MGPIup
- blHV+MN3ytCf/vpuijEHiB7bY5Ecwno=
-X-Google-Smtp-Source: ABdhPJzZ/6L5Z/fBwUE4Dex+np7ONiwAFJpUyzfR48jKW7Q6gk4iOCDuNNlT3JqaSw4e0sXtMyhQ8w==
-X-Received: by 2002:a2e:804b:: with SMTP id p11mr1352175ljg.221.1597299680641; 
- Wed, 12 Aug 2020 23:21:20 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=wDWU02+wCKok8nwDMeBlH97/pQcKgRkp+JF5JymdpUo=;
+ b=szaviOpSQ6XkXboI/nEF69NUy47+7kUdAU/HZaXeei8EfKsWl7vWxMga/rtXnc9OX0
+ WWiTvWOPQX+7eGAIX+EPEme/Sa6ARScp2wiGlYxDxUt4Oyy3bIOAr600o9NtElJ8fbgC
+ vmkI2HwsWEZeKILk+ku6HTjFF+SB6lXs4gpNyeQ0HM0keP5PcQ1aLc44/MS8R8EQKJYs
+ cnIC44lNRKBd3HNFCsbSVpOUOUJ/x7KO4EzTwD1+s2NZBseHgDnzPgYlOa9Pw+OSd2qj
+ iG4Sr8bM5A7jeBbLhMgYqvFFhBeg8bbt1zNcanXwL7/wvJRuUFGdVF89dE011ZQ5UI+4
+ RUiQ==
+X-Gm-Message-State: AOAM531ylC/DWBvcJBaoNPahd+VV6fl62Qjb0ksGylNjZ+uGbbse3fqw
+ crROgv0WvxC3ALBw8kfU341xH1VxyII=
+X-Google-Smtp-Source: ABdhPJyM6kqvqKmDAxBHlLEed6fda0trrJcviieTKINPyset90Po5kDy6xXF6opl++WeilsLdmCx8A==
+X-Received: by 2002:ac2:5ec8:: with SMTP id d8mr1391609lfq.169.1597299675256; 
+ Wed, 12 Aug 2020 23:21:15 -0700 (PDT)
 Received: from a2klaptop.localdomain ([185.199.97.5])
- by smtp.gmail.com with ESMTPSA id f14sm964060lfd.2.2020.08.12.23.21.19
+ by smtp.gmail.com with ESMTPSA id f14sm964060lfd.2.2020.08.12.23.21.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Aug 2020 23:21:20 -0700 (PDT)
+ Wed, 12 Aug 2020 23:21:14 -0700 (PDT)
 From: Oleksandr Andrushchenko <andr2000@gmail.com>
 To: xen-devel@lists.xenproject.org, dri-devel@lists.freedesktop.org,
  linux-kernel@vger.kernel.org, boris.ostrovsky@oracle.com, jgross@suse.com,
@@ -72,13 +70,10 @@ To: xen-devel@lists.xenproject.org, dri-devel@lists.freedesktop.org,
 Cc: sstabellini@kernel.org, dan.carpenter@oracle.com,
  intel-gfx@lists.freedesktop.org,
  Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Subject: [PATCH v2 4/5] xen: Sync up with the canonical protocol definition in
- Xen
-Date: Thu, 13 Aug 2020 09:21:12 +0300
-Message-Id: <20200813062113.11030-5-andr2000@gmail.com>
+Subject: [PATCH v2 0/5] Fixes and improvements for Xen pvdrm
+Date: Thu, 13 Aug 2020 09:21:08 +0300
+Message-Id: <20200813062113.11030-1-andr2000@gmail.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200813062113.11030-1-andr2000@gmail.com>
-References: <20200813062113.11030-1-andr2000@gmail.com>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -94,217 +89,63 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 
-This is the sync up with the canonical definition of the
-display protocol in Xen.
+Hello,
 
-1. Add protocol version as an integer
+This series contains an assorted set of fixes and improvements for
+the Xen para-virtualized display driver and grant device driver which
+I have collected over the last couple of months:
 
-Version string, which is in fact an integer, is hard to handle in the
-code that supports different protocol versions. To simplify that
-also add the version as an integer.
+1. Minor fixes to grant device driver and drm/xen-front.
 
-2. Pass buffer offset with XENDISPL_OP_DBUF_CREATE
+2. New format (YUYV) added to the list of the PV DRM supported formats
+which allows the driver to be used in zero-copying use-cases when
+a camera device is the source of the dma-bufs.
 
-There are cases when display data buffer is created with non-zero
-offset to the data start. Handle such cases and provide that offset
-while creating a display buffer.
+3. Synchronization with the latest para-virtualized protocol definition
+in Xen [1].
 
-3. Add XENDISPL_OP_GET_EDID command
+4. SGT offset is now propagated to the backend: while importing a dmabuf
+it is possible that the data of the buffer is put with offset which is
+indicated by the SGT offset. This is needed for some GPUs which have
+non-zero offset.
 
-Add an optional request for reading Extended Display Identification
-Data (EDID) structure which allows better configuration of the
-display connectors over the configuration set in XenStore.
-With this change connectors may have multiple resolutions defined
-with respect to detailed timing definitions and additional properties
-normally provided by displays.
+Thank you,
+Oleksandr Andrushchenko
 
-If this request is not supported by the backend then visible area
-is defined by the relevant XenStore's "resolution" property.
+[1] https://xenbits.xen.org/gitweb/?p=xen.git;a=commit;h=c27a184225eab54d20435c8cab5ad0ef384dc2c0
 
-If backend provides extended display identification data (EDID) with
-XENDISPL_OP_GET_EDID request then EDID values must take precedence
-over the resolutions defined in XenStore.
+Changes since v1:
+=================
 
-4. Bump protocol version to 2.
+1. Removed patch which adds EDID to PV DRM as it needs more time for review:
+"5. Version 2 of the Xen displif protocol adds XENDISPL_OP_GET_EDID
+request which allows frontends to request EDID structure per
+connector. This request is optional and if not supported by the
+backend then visible area is still defined by the relevant
+XenStore's "resolution" property.
+If backend provides EDID with XENDISPL_OP_GET_EDID request then
+its values must take precedence over the resolutions defined in
+XenStore."
+I will send this as a dedicated patch.
 
-Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Reviewed-by: Juergen Gross <jgross@suse.com>
----
- include/xen/interface/io/displif.h | 91 +++++++++++++++++++++++++++++-
- 1 file changed, 88 insertions(+), 3 deletions(-)
+2. Added missing CC stable for the patches with fixes
 
-diff --git a/include/xen/interface/io/displif.h b/include/xen/interface/io/displif.h
-index fdc279dc4a88..d43ca0361f86 100644
---- a/include/xen/interface/io/displif.h
-+++ b/include/xen/interface/io/displif.h
-@@ -38,7 +38,8 @@
-  *                           Protocol version
-  ******************************************************************************
-  */
--#define XENDISPL_PROTOCOL_VERSION	"1"
-+#define XENDISPL_PROTOCOL_VERSION	"2"
-+#define XENDISPL_PROTOCOL_VERSION_INT	 2
- 
- /*
-  ******************************************************************************
-@@ -202,6 +203,9 @@
-  *      Width and height of the connector in pixels separated by
-  *      XENDISPL_RESOLUTION_SEPARATOR. This defines visible area of the
-  *      display.
-+ *      If backend provides extended display identification data (EDID) with
-+ *      XENDISPL_OP_GET_EDID request then EDID values must take precedence
-+ *      over the resolutions defined here.
-  *
-  *------------------ Connector Request Transport Parameters -------------------
-  *
-@@ -349,6 +353,8 @@
- #define XENDISPL_OP_FB_DETACH		0x13
- #define XENDISPL_OP_SET_CONFIG		0x14
- #define XENDISPL_OP_PG_FLIP		0x15
-+/* The below command is available in protocol version 2 and above. */
-+#define XENDISPL_OP_GET_EDID		0x16
- 
- /*
-  ******************************************************************************
-@@ -377,6 +383,10 @@
- #define XENDISPL_FIELD_BE_ALLOC		"be-alloc"
- #define XENDISPL_FIELD_UNIQUE_ID	"unique-id"
- 
-+#define XENDISPL_EDID_BLOCK_SIZE	128
-+#define XENDISPL_EDID_BLOCK_COUNT	256
-+#define XENDISPL_EDID_MAX_SIZE		(XENDISPL_EDID_BLOCK_SIZE * XENDISPL_EDID_BLOCK_COUNT)
-+
- /*
-  ******************************************************************************
-  *                          STATUS RETURN CODES
-@@ -451,7 +461,9 @@
-  * +----------------+----------------+----------------+----------------+
-  * |                           gref_directory                          | 40
-  * +----------------+----------------+----------------+----------------+
-- * |                             reserved                              | 44
-+ * |                             data_ofs                              | 44
-+ * +----------------+----------------+----------------+----------------+
-+ * |                             reserved                              | 48
-  * +----------------+----------------+----------------+----------------+
-  * |/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/|
-  * +----------------+----------------+----------------+----------------+
-@@ -494,6 +506,7 @@
-  *   buffer size (buffer_sz) exceeds what can be addressed by this single page,
-  *   then reference to the next page must be supplied (see gref_dir_next_page
-  *   below)
-+ * data_ofs - uint32_t, offset of the data in the buffer, octets
-  */
- 
- #define XENDISPL_DBUF_FLG_REQ_ALLOC	(1 << 0)
-@@ -506,6 +519,7 @@ struct xendispl_dbuf_create_req {
- 	uint32_t buffer_sz;
- 	uint32_t flags;
- 	grant_ref_t gref_directory;
-+	uint32_t data_ofs;
- };
- 
- /*
-@@ -731,6 +745,44 @@ struct xendispl_page_flip_req {
- 	uint64_t fb_cookie;
- };
- 
-+/*
-+ * Request EDID - request EDID describing current connector:
-+ *         0                1                 2               3        octet
-+ * +----------------+----------------+----------------+----------------+
-+ * |               id                | _OP_GET_EDID   |   reserved     | 4
-+ * +----------------+----------------+----------------+----------------+
-+ * |                             buffer_sz                             | 8
-+ * +----------------+----------------+----------------+----------------+
-+ * |                          gref_directory                           | 12
-+ * +----------------+----------------+----------------+----------------+
-+ * |                             reserved                              | 16
-+ * +----------------+----------------+----------------+----------------+
-+ * |/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/|
-+ * +----------------+----------------+----------------+----------------+
-+ * |                             reserved                              | 64
-+ * +----------------+----------------+----------------+----------------+
-+ *
-+ * Notes:
-+ *   - This command is not available in protocol version 1 and should be
-+ *     ignored.
-+ *   - This request is optional and if not supported then visible area
-+ *     is defined by the relevant XenStore's "resolution" property.
-+ *   - Shared buffer, allocated for EDID storage, must not be less then
-+ *     XENDISPL_EDID_MAX_SIZE octets.
-+ *
-+ * buffer_sz - uint32_t, buffer size to be allocated, octets
-+ * gref_directory - grant_ref_t, a reference to the first shared page
-+ *   describing EDID buffer references. See XENDISPL_OP_DBUF_CREATE for
-+ *   grant page directory structure (struct xendispl_page_directory).
-+ *
-+ * See response format for this request.
-+ */
-+
-+struct xendispl_get_edid_req {
-+	uint32_t buffer_sz;
-+	grant_ref_t gref_directory;
-+};
-+
- /*
-  *---------------------------------- Responses --------------------------------
-  *
-@@ -753,6 +805,35 @@ struct xendispl_page_flip_req {
-  * id - uint16_t, private guest value, echoed from request
-  * status - int32_t, response status, zero on success and -XEN_EXX on failure
-  *
-+ *
-+ * Get EDID response - response for XENDISPL_OP_GET_EDID:
-+ *         0                1                 2               3        octet
-+ * +----------------+----------------+----------------+----------------+
-+ * |               id                |    operation   |    reserved    | 4
-+ * +----------------+----------------+----------------+----------------+
-+ * |                              status                               | 8
-+ * +----------------+----------------+----------------+----------------+
-+ * |                             edid_sz                               | 12
-+ * +----------------+----------------+----------------+----------------+
-+ * |                             reserved                              | 16
-+ * +----------------+----------------+----------------+----------------+
-+ * |/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/|
-+ * +----------------+----------------+----------------+----------------+
-+ * |                             reserved                              | 64
-+ * +----------------+----------------+----------------+----------------+
-+ *
-+ * Notes:
-+ *   - This response is not available in protocol version 1 and should be
-+ *     ignored.
-+ *
-+ * edid_sz - uint32_t, size of the EDID, octets
-+ */
-+
-+struct xendispl_get_edid_resp {
-+	uint32_t edid_sz;
-+};
-+
-+/*
-  *----------------------------------- Events ----------------------------------
-  *
-  * Events are sent via a shared page allocated by the front and propagated by
-@@ -804,6 +885,7 @@ struct xendispl_req {
- 		struct xendispl_fb_detach_req fb_detach;
- 		struct xendispl_set_config_req set_config;
- 		struct xendispl_page_flip_req pg_flip;
-+		struct xendispl_get_edid_req get_edid;
- 		uint8_t reserved[56];
- 	} op;
- };
-@@ -813,7 +895,10 @@ struct xendispl_resp {
- 	uint8_t operation;
- 	uint8_t reserved;
- 	int32_t status;
--	uint8_t reserved1[56];
-+	union {
-+		struct xendispl_get_edid_resp get_edid;
-+		uint8_t reserved1[56];
-+	} op;
- };
- 
- struct xendispl_evt {
+Oleksandr Andrushchenko (5):
+  xen/gntdev: Fix dmabuf import with non-zero sgt offset
+  drm/xen-front: Fix misused IS_ERR_OR_NULL checks
+  drm/xen-front: Add YUYV to supported formats
+  xen: Sync up with the canonical protocol definition in Xen
+  drm/xen-front: Pass dumb buffer data offset to the backend
+
+ drivers/gpu/drm/xen/xen_drm_front.c      | 10 +--
+ drivers/gpu/drm/xen/xen_drm_front.h      |  2 +-
+ drivers/gpu/drm/xen/xen_drm_front_conn.c |  1 +
+ drivers/gpu/drm/xen/xen_drm_front_gem.c  | 11 +--
+ drivers/gpu/drm/xen/xen_drm_front_kms.c  |  2 +-
+ drivers/xen/gntdev-dmabuf.c              |  8 +++
+ include/xen/interface/io/displif.h       | 91 +++++++++++++++++++++++-
+ 7 files changed, 111 insertions(+), 14 deletions(-)
+
 -- 
 2.17.1
 
