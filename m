@@ -2,71 +2,73 @@ Return-Path: <SRS0=TMXt=BY=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-8.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 69677C433E3
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:27:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C13E8C433DF
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 18:37:25 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 36C2D20791
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:27:34 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 8A40F20774
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 18:37:25 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="bx2NKp19"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 36C2D20791
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=eu.citrix.com
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="cXrghoeD"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8A40F20774
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k6dUC-0005tg-6r; Fri, 14 Aug 2020 17:27:24 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=gClF=BY=citrix.com=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1k6dQd-00024H-0k
- for xen-devel@lists.xenproject.org; Fri, 14 Aug 2020 17:23:43 +0000
-X-Inumbo-ID: 760e6777-aa2f-4a1a-a86d-ef4f670b4791
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 760e6777-aa2f-4a1a-a86d-ef4f670b4791;
- Fri, 14 Aug 2020 17:22:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1597425738;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version;
- bh=zLcHhKo1cmGICQ2dzNfIzPI8l1nwyFvOoh6iuMg7/JM=;
- b=bx2NKp19tbBnW4q0/AagMciZEdpWgUiet9wg5LeAZrUMhA9quBE+WMLk
- KzSrHr76JyeDhlfDLHVWj5XcTiByyOA8D2bEmm1v8NZxQ4iOXRxwCU+6e
- 14avMiGeLqgnQVKntdc7AdjU+dHoy0wOymZxVY7oA5e46fyL2zr5gIvs2 4=;
-Authentication-Results: esa5.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: VZVhd9rwqwtWKEI/K/ZXRLl7EVsrakjNSOWIcBpLpsx/jCDOZkn0BqdG8WFs+zCFYIBTlTukA0
- h7juCpDFUL/KX80J/DYcnhygLz85c0/ADnz8CNAp8ChooR4IyJhyPmgMPJqOiTSZeKlFGSxJoF
- oXoFf7hvZCFGbhzB9JwWvN4H/e2+8KJA9HOa9emrMyZqkcoNxmvH25IUeNJrJiyv22nIZCGX35
- vQVmyQT2Vis+KM7uYz8clDy31YmfNHWZrKS9QQWQcFoEDnJkUxZ/d8/Kyx8FhoRGLzOhTCxuj6
- ARY=
-X-SBRS: 2.7
-X-MesageID: 24725183
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,313,1592884800"; d="scan'208";a="24725183"
-From: Ian Jackson <ian.jackson@eu.citrix.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH 32/60] sg-report-job-history: Prep for fork: Move
- $revisionsq query
-Date: Fri, 14 Aug 2020 18:21:37 +0100
-Message-ID: <20200814172205.9624-33-ian.jackson@eu.citrix.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20200814172205.9624-1-ian.jackson@eu.citrix.com>
-References: <20200814172205.9624-1-ian.jackson@eu.citrix.com>
+	id 1k6eZL-0005ZI-S8; Fri, 14 Aug 2020 18:36:47 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=osIB=BY=xen.org=julien@srs-us1.protection.inumbo.net>)
+ id 1k6eZK-0005ZC-Ia
+ for xen-devel@lists.xenproject.org; Fri, 14 Aug 2020 18:36:46 +0000
+X-Inumbo-ID: 081544ca-dbcb-42a5-8e17-76fad6c020d8
+Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 081544ca-dbcb-42a5-8e17-76fad6c020d8;
+ Fri, 14 Aug 2020 18:36:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+ bh=wG5SSjoeZFQ3I3RmH6RjDk81lS4EuJOtxq1QfSyZ+FQ=; b=cXrghoeD3MnagzkGaKmNdJbMZ6
+ SIMo4FGIVbG0BeLFgSDRltpc2TRnDOGl8CI8pPpMvHDpfJfCzO2AzeqbzNcPe9uhLLvMfdhidm7mR
+ SV5Tzjx/BtGbY0IaNfz709p4YMGX6ogV6zT60/d4zjNQ+RglCgub1knHpHT9jwVdzvb8=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1k6eZE-000462-Ou; Fri, 14 Aug 2020 18:36:40 +0000
+Received: from [54.239.6.185] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1k6eZE-0007wt-Fd; Fri, 14 Aug 2020 18:36:40 +0000
+Subject: Re: [RESEND][PATCH v2 1/7] xen/guest_access: Add emacs magics
+To: Bertrand Marquis <Bertrand.Marquis@arm.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <jgrall@amazon.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, nd <nd@arm.com>
+References: <20200730181827.1670-1-julien@xen.org>
+ <20200730181827.1670-2-julien@xen.org>
+ <5DD7E100-D146-4853-A1CA-168DA1802C7A@arm.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <86e45fef-e180-9190-873c-6989cf14f861@xen.org>
+Date: Fri, 14 Aug 2020 19:36:37 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
+ Gecko/20100101 Thunderbird/68.11.0
 MIME-Version: 1.0
-Content-Type: text/plain
+In-Reply-To: <5DD7E100-D146-4853-A1CA-168DA1802C7A@arm.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,43 +82,28 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-We will need to prepare this in add_revisions so that it works when we
-do each (job,branch) in a different process.
+Hi,
 
-It is OK that it is still global, becauswe we only call add_revisions
-in the children.
+On 31/07/2020 14:04, Bertrand Marquis wrote:
+> 
+> 
+>> On 30 Jul 2020, at 20:18, Julien Grall <julien@xen.org> wrote:
+>>
+>> From: Julien Grall <jgrall@amazon.com>
+>>
+>> Add emacs magics for xen/guest_access.h and
+>> asm-x86/guest_access.h.
+>>
+>> Signed-off-by: Julien Grall <jgrall@amazon.com>
+>> Acked-by: Jan Beulich <jbeulich@suse.com>
+> 
+> Most of file in Xen source code seem to have a white line before the “emacs magics”.
+> If this is something that should be enforced, it should be done here.
+I am not sure whether we always ask the newline before. Anyway, I have 
+added one as this is trivial.
 
-Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
----
- sg-report-job-history | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
+Cheers,
 
-diff --git a/sg-report-job-history b/sg-report-job-history
-index 47fc7a62..424053f1 100755
---- a/sg-report-job-history
-+++ b/sg-report-job-history
-@@ -89,15 +89,16 @@ if (defined($flight)) {
-     push @jobs, $job;
- }
- 
--our $revisionsq= db_prepare(<<END);
-+sub add_revisions ($$$$) {
-+    my ($revmap, $flightnum, $j, $sfx) = @_;
-+
-+    our $revisionsq //= db_prepare(<<END);
-         SELECT * FROM runvars
-          WHERE flight=? AND job=?
-            AND name LIKE 'built\\_revision\\_%'
- END
--# (We report on non-main-revision jobs just as for main-revision ones.)
-+    # (We report on non-main-revision jobs just as for main-revision ones.)
- 
--sub add_revisions ($$$$) {
--    my ($revmap, $flightnum, $j, $sfx) = @_;
-     $revisionsq->execute($flightnum, $j);
-     while (my $row= $revisionsq->fetchrow_hashref()) {
-         my $n= $row->{name};
 -- 
-2.11.0
-
+Julien Grall
 
