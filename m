@@ -2,66 +2,66 @@ Return-Path: <SRS0=TMXt=BY=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
+X-Spam-Status: No, score=-9.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B7FDFC433E1
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:26:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0E59DC433E8
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:26:48 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 876BA20708
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:26:49 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id D0C8120774
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:26:47 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="JxVGtU5S"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 876BA20708
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="W3936b+d"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D0C8120774
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k6dTN-0003zu-0T; Fri, 14 Aug 2020 17:26:33 +0000
+	id 1k6dTQ-00047B-Ha; Fri, 14 Aug 2020 17:26:36 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gClF=BY=citrix.com=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1k6dQs-00024H-1V
- for xen-devel@lists.xenproject.org; Fri, 14 Aug 2020 17:23:58 +0000
-X-Inumbo-ID: 749a8c06-0975-4c08-af34-0971eb50803e
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+ id 1k6dQT-00024H-0L
+ for xen-devel@lists.xenproject.org; Fri, 14 Aug 2020 17:23:33 +0000
+X-Inumbo-ID: 18e06ca4-8e91-4e14-8870-2ebf0dd220ae
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 749a8c06-0975-4c08-af34-0971eb50803e;
- Fri, 14 Aug 2020 17:22:20 +0000 (UTC)
+ id 18e06ca4-8e91-4e14-8870-2ebf0dd220ae;
+ Fri, 14 Aug 2020 17:22:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1597425740;
+ d=citrix.com; s=securemail; t=1597425738;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version;
- bh=w0mAgyyUXpLt7oHYlPS5haLuq7oCjn7NqYL9AvRgxDs=;
- b=JxVGtU5SsWrrnnU7DeKQC9fuW8HP7hUp3EhNFZNnFE45muHoQhcdmRcw
- ABk47UMNWv2DU3RV/9zCOYaplzHrXrzt0KQmP9PNfFfbpLpoH4onxSfAh
- mS2k8TaVQDJNU1U7rqtejokgF9HgKupeKE3B7vTxM434kGSLQkr9NW92P k=;
-Authentication-Results: esa5.hc3370-68.iphmx.com;
+ bh=Q2DHznUSzDCiwJvbTpK+EsflStSwpJzgic3yYjwBj88=;
+ b=W3936b+dKOxBpLppvk2MLg3vgGqGkrBhwO+0A3FffcuuEyOgP9R+ZcaQ
+ FNKO/YM93Rb8pAUT7ayj6pia/7Hv8AsMMjU/7i1WH9NLUPufGScqLFmfD
+ 4BYd6/MmzYdV4kYk/rrNlR2dmNRud/QU0kWzBnljbGA7OfMsgrUztn/HO g=;
+Authentication-Results: esa4.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: GQnkPuEvFvPygCaE7B/72A7gl2K5hfP+jxP3OspD//H00LURecshAlXMAOe9QCuqTw9cGMJ2G0
- c8e0ACC/5PN2gYge1t3cWzVRQsgTiDkpsbHt5T0Tk4005tmRagTExLVazGd9DpAf1MMDmqHkMN
- Hp0fMMMb4/MfZzdWvTd92KxeCzh57SP/T9r7fVbQ7CxRw6n04YEuZ66lZzk5NsMqVT44iSr0jx
- SPKZJdsqwXn8VD4qkMq7tvyzAfhb3ynbLeZUOUBeS9fsX4j3oSaMfzxonz5E4FR48aCEmESv/l
- nJw=
+IronPort-SDR: mt2cdu9oNkD8xicT9fbKvliQ7A3TX45j3aCLdnPz5GAglhXZhphN5SIeIVjMX23WqG1ZqrWqk0
+ jyZrJH8rGukQPspN49o847UUVUmOM+/0nh0rQgRtHecmCtvPKdmIq2gV0LHt4W5xI0NO6AvUhy
+ Tus+KnbGK9nIYqzYELKs44iCbUJxtIOJ10PemoNxBVoSdqfgdBoA+IxL2WTE/WhKxwliMYSFNq
+ 6sQRRK9/n20WzhR0BwjaAU9YNMgZvvtK+/Pp/Q5j1d7OgxqeRsKzgMHAo0c1q8XH0ACIIehyph
+ 9LY=
 X-SBRS: 2.7
-X-MesageID: 24725189
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 25487825
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,313,1592884800"; d="scan'208,217";a="24725189"
+X-IronPort-AV: E=Sophos;i="5.76,313,1592884800"; d="scan'208";a="25487825"
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH 37/60] sg-report-job-history (nfc): Remove needless
- conditional
-Date: Fri, 14 Aug 2020 18:21:42 +0100
-Message-ID: <20200814172205.9624-38-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 29/60] parallel by fork: Disconnect $dbh_tests as well
+ as undefing it
+Date: Fri, 14 Aug 2020 18:21:34 +0100
+Message-ID: <20200814172205.9624-30-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20200814172205.9624-1-ian.jackson@eu.citrix.com>
 References: <20200814172205.9624-1-ian.jackson@eu.citrix.com>
@@ -80,190 +80,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-$htmlout is now always defined.
+If the caller is buggy and has statement handles still open, they can
+still "work" even if we have thrown away the db handle.
 
-Nothing other than indentation change, and removal of the surrounding
-if block.
+Where, after forking, "work" means "use the same connection in
+multiple processes simultaneously, without locking".  This could
+result in arbitrary crazy nbehaviour (eg, TLS crypto failures).
 
-Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
+No functional change with existing callers since they don't have this
+bug.
+
+Acked-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- sg-report-job-history | 162 +++++++++++++++++++++++++-------------------------
- 1 file changed, 80 insertions(+), 82 deletions(-)
+ Osstest/HistoryReport.pm | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/sg-report-job-history b/sg-report-job-history
-index 7197a5f6..3b45992f 100755
---- a/sg-report-job-history
-+++ b/sg-report-job-history
-@@ -209,89 +209,87 @@ END
-          WHERE flight=?
- END
+diff --git a/Osstest/HistoryReport.pm b/Osstest/HistoryReport.pm
+index 0b206de4..f0571189 100644
+--- a/Osstest/HistoryReport.pm
++++ b/Osstest/HistoryReport.pm
+@@ -245,6 +245,7 @@ sub parallel_by_fork ($$$$) {
+     # db is reopened in each child.
  
--    if (defined $htmlout) {
--        my ($title,$url);
--	ensuredir "$htmlout/history";
--	ensuredir "$htmlout/history/$j";
--        if (defined $bra) {
--            $title= "$j (branch $bra)";
--        } else {
--            $title= "$j (all branches)";
--        }
--        $html_file= "$htmlout/$html_file";
--        open H, "> $html_file.new" or die "$html_file $!";
--        $title= encode_entities($title);
--        print H "<html><head><title>$title</title></head><body>\n";
--        print H "<h1>$title</h1>\n";
--        print H "<table rules=all>";
--        print H "<tr><th>started</th><th>flight</th>",
--	        "<th>branch</th><th>failure</th>\n";
--        print H "<th>", (join ", ", @hostvarcols), "</th>\n";
--        print H "<th>osstest</th>";
--        foreach my $c (@rev_grid_cols) {
--            print H "<th>".encode_entities($c)."</th>\n";
--        }
--        print H "</tr>\n";
--        my $alternate= 0;
--        my @last_revs;
--        my @alt_revs;
--        my $alt_hosts;
--        my $alt_osstest;
--        foreach my $r (@test_rows) {
--            my $altcolour= report_altcolour($alternate);
--            print H "<tr $altcolour>";
--	    my $started = $r->{Flight}{started};
--	    print H "<td>";
--	    print H show_abs_time $started if $started;
--	    print H "</td>\n";
--            my $flt= $r->{Flight}{flight};
--            $url= "$c{ReportHtmlPubBaseUrl}/$flt";
--            print H "<td><a href=\"$url\">$flt</a></td>\n";
--            print H "<td>".encode_entities($r->{Flight}{branch})."</td>\n";
--            $url= "$c{ReportHtmlPubBaseUrl}/$flt/".encode_entities($j).
--		"/info.html";
--            print H "<td $r->{ColourAttr}><a href=\"$url\">".
--                $r->{Content}."</a></td>\n";
--            my $lastrev;
--            my $hosts = join ", ", map { $_ // "-" } @{ $r->{Hosts} };
--            my $hosts_colour = report_altchangecolour(\$alt_hosts, $hosts);
--            print H "<td $hosts_colour>".encode_entities($hosts)."</td>\n";
--            $osstestverq->execute($r->{Flight}{flight});
--            my $osstestrevs = join ' ',
--                 map {
--                    $_ = $_->{harness};
--                    s/^([0-9a-f]{12})[0-9a-f]+\b/$1/;
--                    "<kbd>".encode_entities($_)."</kbd>";
--                 }
--                 @{ $osstestverq->fetchall_arrayref({}) };
--            my $osstest_colour = report_altchangecolour(\$alt_osstest, $osstestrevs);
--            print H "<td $osstest_colour>$osstestrevs</td>\n";
--            foreach my $i (0..$#rev_grid_cols) {
--                my $v= $r->{Revisions}[$i];
--		my $rev_colour = report_altchangecolour(\$alt_revs[$i], $v);
--                print H "<td $rev_colour>";
--                if (defined $v) {
--                    my $vp= $v;
--                    if (defined $lastrev && $v eq $lastrev) {
--                        $vp= '<-';
--                    } else {
--                        $vp =~ s/^((?:\d+\:)?[0-9a-f]{12})([0-9a-f].*)$/$1/;
--                    }
--                    print H "<kbd>".encode_entities($vp)."</kbd>";
--                }
--                $lastrev= $v;
--                $last_revs[$i]= $v;
--                print H "</td>";
--            }
--            print H "</tr>\n";
--            $alternate ^= 1;
--        }
--        print H "</table></body></html>\n";
--        H->error and die $!;
--        close H or die $!;
--        rename "$html_file.new", $html_file or die "$html_file $!";
--        #print "wrote $html_file\n";
-+    my ($title,$url);
-+    ensuredir "$htmlout/history";
-+    ensuredir "$htmlout/history/$j";
-+    if (defined $bra) {
-+	$title= "$j (branch $bra)";
-+    } else {
-+	$title= "$j (all branches)";
-+    }
-+    $html_file= "$htmlout/$html_file";
-+    open H, "> $html_file.new" or die "$html_file $!";
-+    $title= encode_entities($title);
-+    print H "<html><head><title>$title</title></head><body>\n";
-+    print H "<h1>$title</h1>\n";
-+    print H "<table rules=all>";
-+    print H "<tr><th>started</th><th>flight</th>",
-+	    "<th>branch</th><th>failure</th>\n";
-+    print H "<th>", (join ", ", @hostvarcols), "</th>\n";
-+    print H "<th>osstest</th>";
-+    foreach my $c (@rev_grid_cols) {
-+	print H "<th>".encode_entities($c)."</th>\n";
-+    }
-+    print H "</tr>\n";
-+    my $alternate= 0;
-+    my @last_revs;
-+    my @alt_revs;
-+    my $alt_hosts;
-+    my $alt_osstest;
-+    foreach my $r (@test_rows) {
-+	my $altcolour= report_altcolour($alternate);
-+	print H "<tr $altcolour>";
-+	my $started = $r->{Flight}{started};
-+	print H "<td>";
-+	print H show_abs_time $started if $started;
-+	print H "</td>\n";
-+	my $flt= $r->{Flight}{flight};
-+	$url= "$c{ReportHtmlPubBaseUrl}/$flt";
-+	print H "<td><a href=\"$url\">$flt</a></td>\n";
-+	print H "<td>".encode_entities($r->{Flight}{branch})."</td>\n";
-+	$url= "$c{ReportHtmlPubBaseUrl}/$flt/".encode_entities($j).
-+	    "/info.html";
-+	print H "<td $r->{ColourAttr}><a href=\"$url\">".
-+	    $r->{Content}."</a></td>\n";
-+	my $lastrev;
-+	my $hosts = join ", ", map { $_ // "-" } @{ $r->{Hosts} };
-+	my $hosts_colour = report_altchangecolour(\$alt_hosts, $hosts);
-+	print H "<td $hosts_colour>".encode_entities($hosts)."</td>\n";
-+	$osstestverq->execute($r->{Flight}{flight});
-+	my $osstestrevs = join ' ',
-+	     map {
-+		$_ = $_->{harness};
-+		s/^([0-9a-f]{12})[0-9a-f]+\b/$1/;
-+		"<kbd>".encode_entities($_)."</kbd>";
-+	     }
-+	     @{ $osstestverq->fetchall_arrayref({}) };
-+	my $osstest_colour = report_altchangecolour(\$alt_osstest, $osstestrevs);
-+	print H "<td $osstest_colour>$osstestrevs</td>\n";
-+	foreach my $i (0..$#rev_grid_cols) {
-+	    my $v= $r->{Revisions}[$i];
-+	    my $rev_colour = report_altchangecolour(\$alt_revs[$i], $v);
-+	    print H "<td $rev_colour>";
-+	    if (defined $v) {
-+		my $vp= $v;
-+		if (defined $lastrev && $v eq $lastrev) {
-+		    $vp= '<-';
-+		} else {
-+		    $vp =~ s/^((?:\d+\:)?[0-9a-f]{12})([0-9a-f].*)$/$1/;
-+		}
-+		print H "<kbd>".encode_entities($vp)."</kbd>";
-+	    }
-+	    $lastrev= $v;
-+	    $last_revs[$i]= $v;
-+	    print H "</td>";
-+	}
-+	print H "</tr>\n";
-+	$alternate ^= 1;
-     }
-+    print H "</table></body></html>\n";
-+    H->error and die $!;
-+    close H or die $!;
-+    rename "$html_file.new", $html_file or die "$html_file $!";
-+    #print "wrote $html_file\n";
- }
+     $whoami = $set_whoami;
++    $dbh_tests->disconnect();
+     undef $dbh_tests;
  
- my @tasks;
+     foreach my $task (@$tasks) {
 -- 
 2.11.0
 
