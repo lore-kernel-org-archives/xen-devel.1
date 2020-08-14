@@ -7,59 +7,61 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E62EFC433DF
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:27:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C0AEC433E1
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:27:03 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B470020708
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:27:00 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id D441420708
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:27:02 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="UGWE1S45"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B470020708
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="JJ4fV94L"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D441420708
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k6dTf-0004Xa-Ri; Fri, 14 Aug 2020 17:26:51 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1k6dTi-0004d9-3k; Fri, 14 Aug 2020 17:26:54 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gClF=BY=citrix.com=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1k6dQZ-00024Q-Gy
- for xen-devel@lists.xenproject.org; Fri, 14 Aug 2020 17:23:39 +0000
-X-Inumbo-ID: 1d35dbac-2730-4307-8984-dfc8985cc8d2
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 1d35dbac-2730-4307-8984-dfc8985cc8d2;
- Fri, 14 Aug 2020 17:22:25 +0000 (UTC)
+ id 1k6dQ8-00024H-WF
+ for xen-devel@lists.xenproject.org; Fri, 14 Aug 2020 17:23:13 +0000
+X-Inumbo-ID: 1bf497fa-4c22-4c20-9e89-315c3d95e6e1
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 1bf497fa-4c22-4c20-9e89-315c3d95e6e1;
+ Fri, 14 Aug 2020 17:22:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1597425745;
+ d=citrix.com; s=securemail; t=1597425737;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version;
- bh=HuGiUl9r9GZbvDQ8LofQzM7tXyOp/3WzRBA9aRRSObY=;
- b=UGWE1S45GUao3fFbrNyfRPnFwXgou8DQJQBzvIJ6LjDG2uBSWV6xMils
- USPuLkZfV1i3/RmWrJECkap5x+Eb0HsodW5/LMNt1lk1QAJ24Z2eIbSXV
- b6qbn37kwi+onxHlRN8o+/AByyt4e+E4wH+zt6oFgHxEqgN20A+LcAwEc w=;
-Authentication-Results: esa6.hc3370-68.iphmx.com;
+ bh=jayi6sGhQIIc8z8XNhCFRTqmNCWkgiucBJ6yZix0Kvw=;
+ b=JJ4fV94L/BV3JCqWJgb3gLa1souVWmWSSG+7j6yTp9JGWu97A6aBst/5
+ RFytzl0zIfgMMligeZlHt7GZuPa3KlvC+OBSFkUaTOzR3Yvv5V6NSjloK
+ IcZTvszs9Dl82rF8j/t/yThkG0E+JmpIBFuvKPMak6SR7pIYr/51IxB9g g=;
+Authentication-Results: esa4.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: V6otqD9WK/PLcAD9hC3YWrdxwFbF1aLBK+Y0vWEvhBSBJiGErkW+Q8MjVFZUyWBx1MkWGwguTG
- vRRFn5hybXX+hFJbOwaljfjIW2J3qyRlrukSZdl37xavPM9IaiNraWqvRHLeJm0aAPUXyfUpj+
- Vo2e9YUviAX5nh59y6KmX87skxjY08lt9Tcq9iqUNiE90PTzI8NNOisoniFjKHhCYbEaeS+YLr
- HBkRzD/fjY/8IQChshxOPLSmyWQ358KN9AEKCtwiewf8OexZfHhUFno2xp2khx4RCkumloIuEb
- rFw=
+IronPort-SDR: ZM+qnAmamfS8aNtrEEM81CpDEcrPmI36jzG2YueP+r9+lJqBMkYcGDA64gvfd41lerJSmrHH1t
+ +zDi/NW6mYv0DspCJq7gwWk+nNj5jh+TTYk2TY00ZSKcBqqaQghTgKijta7j1QRWvt0w+rJD54
+ 5Q8cB9JMVbcEh0DqcqZJfXk9yXgqdJ39zrT/ZuGVqNp1/z4UP8FSKQDwoimP0DkfgiBe6QRLKp
+ V3hmSTtp+Dg5byve+VY2YnUAlTX4+Pemy0m2kTxGejrfrD9v1OwZWy7VaxtYrYKI4FhB6A7W7/
+ nBE=
 X-SBRS: 2.7
-X-MesageID: 24879752
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 25487821
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,313,1592884800"; d="scan'208";a="24879752"
+X-IronPort-AV: E=Sophos;i="5.76,313,1592884800"; d="scan'208";a="25487821"
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH 60/60] sg-report-job-history: Increase default limit
-Date: Fri, 14 Aug 2020 18:22:05 +0100
-Message-ID: <20200814172205.9624-61-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 27/60] sg-report-host-history: Write cache entry for
+ unfinished jobs
+Date: Fri, 14 Aug 2020 18:21:32 +0100
+Message-ID: <20200814172205.9624-28-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20200814172205.9624-1-ian.jackson@eu.citrix.com>
 References: <20200814172205.9624-1-ian.jackson@eu.citrix.com>
@@ -78,26 +80,31 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Now this is a *lot* faster, we can print a lot more history.
+We have to also check ->{finished}, rather than the existence of a row
+at all, since now unfinished jobs can appear in the cache.
+
+Because the cache key includes the job status, when the job becomes
+finished the cache entry will be invalidated.
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- sg-report-job-history | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ sg-report-host-history | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/sg-report-job-history b/sg-report-job-history
-index e09c694f..843dd776 100755
---- a/sg-report-job-history
-+++ b/sg-report-job-history
-@@ -29,7 +29,7 @@ use Osstest::Executive;
- use Osstest::HistoryReport;
+diff --git a/sg-report-host-history b/sg-report-host-history
+index 2ad2134d..6bf14aa2 100755
+--- a/sg-report-host-history
++++ b/sg-report-host-history
+@@ -214,7 +214,8 @@ END
+ 	cache_row_lookup_prep(\$jr);
  
- our (@blessings,@branches);
--our $limit= 100;
-+our $limit= 2000;
- our $timelimit= 86400 * (366 + 14);
- our $htmlout = '.';
- our $flight;
+ 	my $endedrow = cacheable_query($endedq, $jr, 'e');
+-	if (!$endedrow) {
++	if (!defined $endedrow->{finished}) {
++	    cache_write_entry(\*H, $jr);
+ 	    #print DEBUG "no-finished\n";
+ 	    next;
+ 	}
 -- 
 2.11.0
 
