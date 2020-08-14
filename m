@@ -7,61 +7,60 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 69B50C433E3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F3595C433E4
 	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:26:56 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3B6D320708
+	by mail.kernel.org (Postfix) with ESMTPS id C885D20774
 	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:26:56 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="LgSS+yI0"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3B6D320708
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="Qiw9NEXO"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C885D20774
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k6dTb-0004MF-G8; Fri, 14 Aug 2020 17:26:47 +0000
+	id 1k6dTa-0004L2-TA; Fri, 14 Aug 2020 17:26:46 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gClF=BY=citrix.com=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1k6dR2-00024H-26
- for xen-devel@lists.xenproject.org; Fri, 14 Aug 2020 17:24:08 +0000
-X-Inumbo-ID: 7b739c17-12e3-4632-90be-eecd9e270004
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ id 1k6dQO-00024H-0H
+ for xen-devel@lists.xenproject.org; Fri, 14 Aug 2020 17:23:28 +0000
+X-Inumbo-ID: daa8a508-c75e-4f20-aff3-e79041e9cc43
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 7b739c17-12e3-4632-90be-eecd9e270004;
- Fri, 14 Aug 2020 17:22:21 +0000 (UTC)
+ id daa8a508-c75e-4f20-aff3-e79041e9cc43;
+ Fri, 14 Aug 2020 17:22:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1597425741;
+ d=citrix.com; s=securemail; t=1597425738;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version;
- bh=Dc1iYPOHo/sW4uoJCyRT7Y63wrTdDiuAqSFl61F0cNU=;
- b=LgSS+yI0toLrPxfqDkOoe7XZ433ev0DfLpvroZ9DOE9XBEHULzOv95+q
- AY0fOR9aK9SEwM+U15Ys46IRZUJo79pYQEQHPgHPxIJyQhI+mTQa3haP3
- MKRxeoBUsFKyG9yVNFc0fqjW+TNfVZnjwtkzBGa348bFj+YKL7yb1bbxl A=;
-Authentication-Results: esa6.hc3370-68.iphmx.com;
+ bh=Cb4uZBmyPAuwXWIZ5X4FCPlExKibgY6AbAI+s7FEbxM=;
+ b=Qiw9NEXOVWOoiiq26utDZV1x396xP6pLIk8y/MWC+kvB2rlGoupfjdJr
+ 4WX7+aH5Vv0QmHXW7M1sDY8JfIRGH4fgOiPJ0lGzyzvG8kqv+IoMvyOuT
+ vq45plBzz/K4hSlrsnlGQqU19R5ZYoUk+RKWG7Utp7MgPtq8MY/xoO5s6 I=;
+Authentication-Results: esa4.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: xzcpiXWt2MDVKaH0+t+J4BZz9NNgtQGsKmhYOQJLttcwgGR3o5z8fbi0gMFW2gQn7P7+MJHKEK
- ER6TZN8QdXnN0vZBVX5IgVQVzQY4jJxeZp8E4tLTuptYKpLmdY5jqhTUT7ptP7y344zVRm74s0
- d/Bxrv6FkTecUoP3127/WnShj4n7CrEK77uM5WOCiHcIexj6oVUmooTZCLD8U1/ZP46GqHVVYx
- Ak3cb7sIiBvOZWicDdAVaH2me1QkHnZfw45LCM+H0LvpcfOtTtd01/CcMCZf9PENghJf4w/9kw
- A2E=
+IronPort-SDR: bAJhGQySFnlcl+mQrLKaBRSO9NFhcConVYT6M9+EgceM8Wg+EOnZ1bETigIBj70kHwyKhqRkVA
+ 5PmKrbd0iNhKJUPGjMRPDHeeMbVk+koXDgG6Tb6YiBdRbb5/WUUDplxpq17Eo8OWgdcQ8i9IXh
+ WzbkXgA1KW/zXrENHfa3BZCWXe3gy1iNOSIizrESui2vUVN7eHX4xJUQ1CejK1AvKRs6wyRgnb
+ rsrY4TOmu1iKP1Hji/YIk+0HahDQbyPp913ZrEdxPG6zRElI2BLZGCP0qWnCMW6Bdbk4blK0ZI
+ Pes=
 X-SBRS: 2.7
-X-MesageID: 24879747
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 25487824
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,313,1592884800"; d="scan'208";a="24879747"
+X-IronPort-AV: E=Sophos;i="5.76,313,1592884800"; d="scan'208";a="25487824"
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH 45/60] history reporting (nfc): Provide
- cache_set_task_print
-Date: Fri, 14 Aug 2020 18:21:50 +0100
-Message-ID: <20200814172205.9624-46-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 30/60] parallel by fork: Fix a variable name to $task
+Date: Fri, 14 Aug 2020 18:21:35 +0100
+Message-ID: <20200814172205.9624-31-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20200814172205.9624-1-ian.jackson@eu.citrix.com>
 References: <20200814172205.9624-1-ian.jackson@eu.citrix.com>
@@ -80,63 +79,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This takes a string which gets added to the cache messages.  This
-will allow us to distinguish the output from different processes
-when using parallel by fork.
-
-Nothing sets this yet.
+This code came from sg-report-host-history where tasks were hosts.
+But in the more general context, the names are wrong.
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- Osstest/HistoryReport.pm | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+ Osstest/HistoryReport.pm | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/Osstest/HistoryReport.pm b/Osstest/HistoryReport.pm
-index 5d2c83b7..bfbee28c 100644
+index f0571189..695d744a 100644
 --- a/Osstest/HistoryReport.pm
 +++ b/Osstest/HistoryReport.pm
-@@ -29,6 +29,7 @@ BEGIN {
-     @ISA         = qw(Exporter);
-     @EXPORT      = qw(
- 			 cache_set_key_cols
-+			 cache_set_task_print
- 			 cache_read_previous
- 			 cache_row_lookup_prep
- 			 cacheable_query
-@@ -46,6 +47,7 @@ use POSIX;
- 
- our @key_cols;
- 
-+our $taskprint='';
- our %cache;
- our @previous;
- 
-@@ -91,6 +93,7 @@ our $rows_extra = 0;
- 
- 
- sub cache_set_key_cols { @key_cols = @_; }
-+sub cache_set_task_print ($) { ($taskprint)=@_; $taskprint =~ s/\s*$/ /; }
- 
- sub key ($) {
-     my ($jr) = @_;
-@@ -162,7 +165,7 @@ sub cache_row_lookup_prep ($) {
- 	$$jrr = $cacherow;
- 	$rows_hit++;
-     } else {
--	print ::DEBUG "CACHE MISS ",
-+	print ::DEBUG "CACHE MISS $taskprint",
- 	    (join " ", map { $$jrr->{$_} } @key_cols), "\n";
+@@ -226,13 +226,13 @@ sub wait_for_max_children ($) {
+     while (keys(%children) > $lim) {
+ 	$!=0; $?=0; my $got = wait;
+ 	die "$! $got $?" unless exists $children{$got};
+-	my $host = $children{$got};
++	my $task = $children{$got};
+ 	delete $children{$got};
+ 	$worst = $? if $? > $worst;
+ 	if ($?) {
+-	    print STDERR $whoami."[$$]: [$got] failed for $host: $?\n";
++	    print STDERR $whoami."[$$]: [$got] failed for $task: $?\n";
+ 	} else {
+-	    print ::DEBUG "REAPED [$got] $host\n";
++	    print ::DEBUG "REAPED [$got] $task\n";
+ 	}
      }
  }
-@@ -209,7 +212,7 @@ sub cache_finish ($$) {
-     }
- 
-     print ::DEBUG
--	"CACHE $what read=$nprevious hits $rows_hit/$rows_today";
-+	"CACHE $taskprint$what read=$nprevious hits $rows_hit/$rows_today";
-     for my $cachekey (sort keys %q_count) {
- 	my $total = $q_count{$cachekey};
- 	my $hits = $total - ($q_misses{$cachekey} // 0);
 -- 
 2.11.0
 
