@@ -7,69 +7,69 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C41EC433DF
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 22:13:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 91F2FC433DF
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 22:14:53 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B822820771
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 22:13:02 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 5F13820771
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 22:14:53 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="NIlWr4qe"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B822820771
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="Ubu10ISK"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5F13820771
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k6hwM-00089z-HR; Fri, 14 Aug 2020 22:12:46 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1k6hyF-00009R-DI; Fri, 14 Aug 2020 22:14:43 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=uEIT=BY=citrix.com=edvin.torok@srs-us1.protection.inumbo.net>)
- id 1k6hwL-000891-Qn
- for xen-devel@lists.xenproject.org; Fri, 14 Aug 2020 22:12:45 +0000
-X-Inumbo-ID: 8f36f27c-12dd-423d-9c95-49a5bcecb5e8
+ id 1k6hyD-00007n-P3
+ for xen-devel@lists.xenproject.org; Fri, 14 Aug 2020 22:14:41 +0000
+X-Inumbo-ID: 6909c582-9f4e-44d7-bc8b-509c7e7097c7
 Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 8f36f27c-12dd-423d-9c95-49a5bcecb5e8;
- Fri, 14 Aug 2020 22:12:38 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 6909c582-9f4e-44d7-bc8b-509c7e7097c7;
+ Fri, 14 Aug 2020 22:14:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1597443159;
+ d=citrix.com; s=securemail; t=1597443279;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=r8ehkDegyME6bv9QcJZhEj/RknOtin3F+AcEEK7wbxw=;
- b=NIlWr4qe9rEqzHC7UVjwT3VC1M2tWsvLmrdLTgpN2Enth+4qOr3zWcuP
- oPFmjLg2dKcwDtoUlrFA1PMcrYjuBylIslAF3SCJkAud5FBg9yjLrP9vf
- 3gWPwOZ+do9Cx5xHMjdis0gfzzcRNJ4GCKJ470dVl6gxlB61bRY0lpKpM c=;
+ bh=0Q7mZezmkZDXxgdfVrSnPIVAXJc1OwrHZVcWnmgusxs=;
+ b=Ubu10ISKPvXSxvDbqWooK3wDw9jmlzJkNWwyHPHkDSF9b1vesulhAHIy
+ wYR9ju6rcm8XR0PZ905IEmQ+lmQNHwR1kB/vxYlymFc9CuRVUxzFZ1Xu0
+ 8X1BXjvgec00cVC3VLOirYDV9v56btTD4jS8CLd4cpMvPJp1tjqJVYeak 8=;
 Authentication-Results: esa1.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: 9+CkQgBCMCycE6HAp4+5UhYsxpOdTWeixjXQM9sbdbxbQxLbq7Oxq7PmKGefkOjlGo6c+EfuQK
- y4V6lhmYpnkxesi7c5a2PkBGW3J+4odhw+9qtlobNyWfAObHf/tihnZWZUeinD010Us7V2E/gv
- uMqb8CE3BaJU1k+JCwOBVk6U2HqCZjOdb80eBb54WQuHuCKOxBEPLW/SPEiihYvzDT/8JIsGFM
- lKPlyzno5FdO37pJhd9/1RlW2jUxPEQw1smaEFQRq0pSIUZVhjenfKX5yP5xzaCiPUi/e3t9Wc
- uzU=
+IronPort-SDR: 1LBNtNrPDNlAwaIFp3ww/RJ8dePjBdmQ0essod3qtkvnJPnEVBiqMl1hKXPllR4ZYmiy1lI3F/
+ Eqplq86CoKTMeW25/bjvz5DHqLiHCmGaUnEM9peONsiFysBH6acXcGbUqbawUMP8PHHXu6tZIp
+ 3WXil2ha5g3nBxtKCRSVsnj8K49F584Wkvt8zqPAe47A9Pn9aBIsgidXVULJre/zoKxoM1staa
+ Vy0LFVOdm79M53gol2JlGpkLmyIh8J9/F4UZb+FSbEY9drbncn5bn3F1Oo/8IixIaOIyil3hjk
+ EoY=
 X-SBRS: 2.7
-X-MesageID: 24917749
+X-MesageID: 24917872
 X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,313,1592884800"; d="scan'208";a="24917749"
+X-IronPort-AV: E=Sophos;i="5.76,313,1592884800"; d="scan'208";a="24917872"
 From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>, "Christian
  Lindig" <christian.lindig@citrix.com>, David Scott <dave@recoil.org>, "Ian
  Jackson" <ian.jackson@eu.citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH v1 3/6] tools/ocaml/xenstored: replace hand rolled GC with
- weak GC references
-Date: Fri, 14 Aug 2020 23:11:43 +0100
-Message-ID: <163338eec9bc32a886e8def8f59224c902b1c07b.1597442238.git.edvin.torok@citrix.com>
+Subject: [PATCH v1 5/6] tools/ocaml/xenstored: use more efficient node trees
+Date: Fri, 14 Aug 2020 23:14:16 +0100
+Message-ID: <f2aff7b39137518d56ef99ea9faf7ce959c81ab9.1597442238.git.edvin.torok@citrix.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1597442238.git.edvin.torok@citrix.com>
 References: <cover.1597442238.git.edvin.torok@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FTLPEX02CAS02.citrite.net (10.13.99.123) To
+X-ClientProxiedBy: FTLPEX02CAS01.citrite.net (10.13.99.120) To
  AMSPEX02CL02.citrite.net (10.69.22.126)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -84,266 +84,164 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-The code here is attempting to reduce memory usage by sharing common
-substrings in the tree: it replaces strings with ints, and keeps a
-string->int map that gets manually garbage collected using a hand-rolled
-mark and sweep algorithm.
+This changes the output of xenstore-ls to be sorted.
+Previously the keys were listed in the order in which they were inserted
+in.
+docs/misc/xenstore.txt doesn't specify in what order keys are listed.
 
-This is unnecessary: OCaml already has a mark-and-sweep Garbage
-Collector runtime, and sharing of common strings in tree nodes
-can be achieved through Weak references: if the string hasn't been seen
-yet it gets added to the Weak reference table, and if it has we use the
-entry from the table instead, thus storing a string only once.
-When the string is no longer referenced OCaml's GC will drop it from the
-weak table: there is no need to manually do a mark-and-sweep, or to tell
-OCaml when to drop it.
+Map.update is used to retain semantics with replace_child:
+only an existing child is replaced, if it wasn't part of the original
+map we don't add it.
+Similarly exception behaviour is retained for del_childname and related
+functions.
+
+Entries are stored in reverse sort order, so that upon Map.fold the
+constructed list is sorted in ascending order and there is no need for a
+List.rev.
 
 Signed-off-by: Edwin Török <edvin.torok@citrix.com>
 ---
- tools/ocaml/xenstored/connection.ml |  3 --
- tools/ocaml/xenstored/history.ml    | 14 ------
- tools/ocaml/xenstored/store.ml      | 11 ++---
- tools/ocaml/xenstored/symbol.ml     | 68 ++++++-----------------------
- tools/ocaml/xenstored/symbol.mli    | 21 ++-------
- tools/ocaml/xenstored/xenstored.ml  | 16 +------
- 6 files changed, 24 insertions(+), 109 deletions(-)
+ tools/ocaml/xenstored/store.ml   | 46 +++++++++++++++-----------------
+ tools/ocaml/xenstored/symbol.ml  |  4 +++
+ tools/ocaml/xenstored/symbol.mli |  3 +++
+ 3 files changed, 29 insertions(+), 24 deletions(-)
 
-diff --git a/tools/ocaml/xenstored/connection.ml b/tools/ocaml/xenstored/connection.ml
-index 24750ada43..aa6dd95501 100644
---- a/tools/ocaml/xenstored/connection.ml
-+++ b/tools/ocaml/xenstored/connection.ml
-@@ -271,9 +271,6 @@ let has_more_work con =
- 
- let incr_ops con = con.stat_nb_ops <- con.stat_nb_ops + 1
- 
--let mark_symbols con =
--	Hashtbl.iter (fun _ t -> Store.mark_symbols (Transaction.get_store t)) con.transactions
--
- let stats con =
- 	Hashtbl.length con.watches, con.stat_nb_ops
- 
-diff --git a/tools/ocaml/xenstored/history.ml b/tools/ocaml/xenstored/history.ml
-index f39565bff5..029802bd15 100644
---- a/tools/ocaml/xenstored/history.ml
-+++ b/tools/ocaml/xenstored/history.ml
-@@ -22,20 +22,6 @@ type history_record = {
- 
- let history : history_record list ref = ref []
- 
--(* Called from periodic_ops to ensure we don't discard symbols that are still needed. *)
--(* There is scope for optimisation here, since in consecutive commits one commit's `after`
-- * is the same thing as the next commit's `before`, but not all commits in history are
-- * consecutive. *)
--let mark_symbols () =
--	(* There are gaps where dom0's commits are missing. Otherwise we could assume that
--	 * each element's `before` is the same thing as the next element's `after`
--	 * since the next element is the previous commit *)
--	List.iter (fun hist_rec ->
--			Store.mark_symbols hist_rec.before;
--			Store.mark_symbols hist_rec.after;
--		)
--		!history
--
- (* Keep only enough commit-history to protect the running transactions that we are still tracking *)
- (* There is scope for optimisation here, replacing List.filter with something more efficient,
-  * probably on a different list-like structure. *)
 diff --git a/tools/ocaml/xenstored/store.ml b/tools/ocaml/xenstored/store.ml
-index f299ec6461..45659a23ee 100644
+index 45659a23ee..d9dfa36045 100644
 --- a/tools/ocaml/xenstored/store.ml
 +++ b/tools/ocaml/xenstored/store.ml
-@@ -46,18 +46,18 @@ let add_child node child =
+@@ -16,17 +16,19 @@
+  *)
+ open Stdext
+ 
++module SymbolMap = Map.Make(Symbol)
++
+ module Node = struct
+ 
+ type t = {
+ 	name: Symbol.t;
+ 	perms: Perms.Node.t;
+ 	value: string;
+-	children: t list;
++	children: t SymbolMap.t;
+ }
+ 
+ let create _name _perms _value =
+-	{ name = Symbol.of_string _name; perms = _perms; value = _value; children = []; }
++	{ name = Symbol.of_string _name; perms = _perms; value = _value; children = SymbolMap.empty; }
+ 
+ let get_owner node = Perms.Node.get_owner node.perms
+ let get_children node = node.children
+@@ -42,38 +44,34 @@ let set_value node nvalue =
+ let set_perms node nperms = { node with perms = nperms }
+ 
+ let add_child node child =
+-	{ node with children = child :: node.children }
++	let children = SymbolMap.add child.name child node.children in
++	{ node with children }
  
  let exists node childname =
  	let childname = Symbol.of_string childname in
--	List.exists (fun n -> n.name = childname) node.children
-+	List.exists (fun n -> Symbol.equal n.name childname) node.children
+-	List.exists (fun n -> Symbol.equal n.name childname) node.children
++	SymbolMap.mem childname node.children
  
  let find node childname =
  	let childname = Symbol.of_string childname in
--	List.find (fun n -> n.name = childname) node.children
-+	List.find (fun n -> Symbol.equal n.name childname) node.children
+-	List.find (fun n -> Symbol.equal n.name childname) node.children
++	SymbolMap.find childname node.children
  
  let replace_child node child nchild =
- 	(* this is the on-steroid version of the filter one-replace one *)
- 	let rec replace_one_in_list l =
- 		match l with
- 		| []                               -> []
--		| h :: tl when h.name = child.name -> nchild :: tl
-+		| h :: tl when Symbol.equal h.name child.name -> nchild :: tl
- 		| h :: tl                          -> h :: replace_one_in_list tl
- 		in
- 	{ node with children = (replace_one_in_list node.children) }
-@@ -67,7 +67,7 @@ let del_childname node childname =
- 	let rec delete_one_in_list l =
- 		match l with
- 		| []                        -> raise Not_found
--		| h :: tl when h.name = sym -> tl
-+		| h :: tl when Symbol.equal h.name sym -> tl
- 		| h :: tl                   -> h :: delete_one_in_list tl
- 		in
- 	{ node with children = (delete_one_in_list node.children) }
-@@ -463,9 +463,6 @@ let copy store = {
- 	quota = Quota.copy store.quota;
- }
+-	(* this is the on-steroid version of the filter one-replace one *)
+-	let rec replace_one_in_list l =
+-		match l with
+-		| []                               -> []
+-		| h :: tl when Symbol.equal h.name child.name -> nchild :: tl
+-		| h :: tl                          -> h :: replace_one_in_list tl
+-		in
+-	{ node with children = (replace_one_in_list node.children) }
++	{ node with
++	  children = SymbolMap.update child.name
++		     (function None -> None | Some _ -> Some nchild)
++		     node.children
++	}
  
--let mark_symbols store =
--	Node.recurse (fun node -> Symbol.mark_as_used node.Node.name) store.root
--
- let incr_transaction_coalesce store =
- 	store.stat_transaction_coalesce <- store.stat_transaction_coalesce + 1
- let incr_transaction_abort store =
+ let del_childname node childname =
+ 	let sym = Symbol.of_string childname in
+-	let rec delete_one_in_list l =
+-		match l with
+-		| []                        -> raise Not_found
+-		| h :: tl when Symbol.equal h.name sym -> tl
+-		| h :: tl                   -> h :: delete_one_in_list tl
+-		in
+-	{ node with children = (delete_one_in_list node.children) }
++	{ node with children =
++		SymbolMap.update sym
++		  (function None -> raise Not_found | Some _ -> None)
++		  node.children
++	}
+ 
+ let del_all_children node =
+-	{ node with children = [] }
++	{ node with children = SymbolMap.empty }
+ 
+ (* check if the current node can be accessed by the current connection with rperm permissions *)
+ let check_perm node connection request =
+@@ -87,7 +85,7 @@ let check_owner node connection =
+ 		raise Define.Permission_denied;
+ 	end
+ 
+-let rec recurse fct node = fct node; List.iter (recurse fct) node.children
++let rec recurse fct node = fct node; SymbolMap.iter (fun _ -> recurse fct) node.children
+ 
+ let unpack node = (Symbol.to_string node.name, node.perms, node.value)
+ 
+@@ -321,7 +319,7 @@ let ls store perm path =
+ 				Node.check_perm cnode perm Perms.READ;
+ 				cnode.Node.children in
+ 			Path.apply store.root path do_ls in
+-	List.rev (List.map (fun n -> Symbol.to_string n.Node.name) children)
++	SymbolMap.fold (fun k _ accu -> Symbol.to_string k :: accu) children []
+ 
+ let getperms store perm path =
+ 	if path = [] then
+@@ -350,7 +348,7 @@ let traversal root_node f =
+ 	let rec _traversal path node =
+ 		f path node;
+ 		let node_path = Path.of_path_and_name path (Symbol.to_string node.Node.name) in
+-		List.iter (_traversal node_path) node.Node.children
++		SymbolMap.iter (fun _ -> _traversal node_path) node.Node.children
+ 		in
+ 	_traversal [] root_node
+ 
 diff --git a/tools/ocaml/xenstored/symbol.ml b/tools/ocaml/xenstored/symbol.ml
-index 4420c6a4d7..dac6f9f819 100644
+index dac6f9f819..2697915623 100644
 --- a/tools/ocaml/xenstored/symbol.ml
 +++ b/tools/ocaml/xenstored/symbol.ml
-@@ -14,63 +14,23 @@
-  * GNU Lesser General Public License for more details.
-  *)
+@@ -31,6 +31,10 @@ let equal a b =
+   (* compare using physical equality, both members have to be part of the above weak table *)
+   a == b
  
--type t = int
-+module WeakTable = Weak.Make(struct
-+    type t = string
-+    let equal = String.equal
-+    let hash = Hashtbl.hash
-+end)
- 
--type 'a record = { data: 'a; mutable garbage: bool }
--let int_string_tbl : (int,string record) Hashtbl.t = Hashtbl.create 1024
--let string_int_tbl : (string,int) Hashtbl.t = Hashtbl.create 1024
-+type t = string
- 
--let created_counter = ref 0
--let used_counter = ref 0
-+let tbl = WeakTable.create 1024
- 
--let count = ref 0
--let rec fresh () =
--	if Hashtbl.mem int_string_tbl !count
--	then begin
--		incr count;
--		fresh ()
--	end else
--		!count
-+let of_string s = WeakTable.merge tbl s
-+let to_string s = s
- 
--let new_record v = { data=v; garbage=false }
--
--let of_string name =
--	if Hashtbl.mem string_int_tbl name
--	then begin
--		incr used_counter;
--		Hashtbl.find string_int_tbl name
--	end else begin
--		let i = fresh () in
--		incr created_counter;
--		Hashtbl.add string_int_tbl name i;
--		Hashtbl.add int_string_tbl i (new_record name);
--		i
--	end
--
--let to_string i =
--	(Hashtbl.find int_string_tbl i).data
--
--let mark_all_as_unused () =
--	Hashtbl.iter (fun _ v -> v.garbage <- true) int_string_tbl
--
--let mark_as_used symb =
--	let record1 = Hashtbl.find int_string_tbl symb in
--		record1.garbage <- false
--
--let garbage () =
--	let records = Hashtbl.fold (fun symb record accu ->
--		if record.garbage then (symb, record.data) :: accu else accu
--	) int_string_tbl [] in
--	let remove (int,string) =
--		Hashtbl.remove int_string_tbl int;
--		Hashtbl.remove string_int_tbl string
--	in
--	created_counter := 0;
--	used_counter := 0;
--	List.iter remove records
-+let equal a b =
-+  (* compare using physical equality, both members have to be part of the above weak table *)
-+  a == b
- 
++let compare a b =
++  if equal a b then 0
++  else -(String.compare a b)
++
  let stats () =
--	Hashtbl.length string_int_tbl
--
--let created () = !created_counter
--let used () = !used_counter
-+  let len, entries, _, _, _, _ = WeakTable.stats tbl in
-+  len, entries
+   let len, entries, _, _, _, _ = WeakTable.stats tbl in
+   len, entries
 diff --git a/tools/ocaml/xenstored/symbol.mli b/tools/ocaml/xenstored/symbol.mli
-index c3c9f6e2f8..586ab57507 100644
+index 586ab57507..dd0f014796 100644
 --- a/tools/ocaml/xenstored/symbol.mli
 +++ b/tools/ocaml/xenstored/symbol.mli
-@@ -29,24 +29,11 @@ val of_string : string -> t
- val to_string : t -> string
- (** Convert a symbol into a string. *)
+@@ -32,6 +32,9 @@ val to_string : t -> string
+ val equal: t -> t -> bool
+ (** Compare two symbols for equality *)
  
--(** {6 Garbage Collection} *)
--
--(** Symbols need to be regulary garbage collected. The following steps should be followed:
---     mark all the knowns symbols as unused (with [mark_all_as_unused]);
---     mark all the symbols really usefull as used (with [mark_as_used]); and
---     finally, call [garbage] *)
--
--val mark_all_as_unused : unit -> unit
--val mark_as_used : t -> unit
--val garbage : unit -> unit
-+val equal: t -> t -> bool
-+(** Compare two symbols for equality *)
- 
++val compare: t -> t -> int
++(** Compare two symbols *)
++
  (** {6 Statistics } *)
  
--val stats : unit -> int
--(** Get the number of used symbols. *)
-+val stats : unit -> int * int
-+(** Get the table size and number of entries. *)
- 
--val created : unit -> int
--(** Returns the number of symbols created since the last GC. *)
--
--val used : unit -> int
--(** Returns the number of existing symbols used since the last GC *)
-diff --git a/tools/ocaml/xenstored/xenstored.ml b/tools/ocaml/xenstored/xenstored.ml
-index a4466c5b5c..047e093555 100644
---- a/tools/ocaml/xenstored/xenstored.ml
-+++ b/tools/ocaml/xenstored/xenstored.ml
-@@ -378,18 +378,6 @@ let _ =
- 
- 	let periodic_ops now =
- 		debug "periodic_ops starting";
--		(* we garbage collect the string->int dictionary after a sizeable amount of operations,
--		 * there's no need to be really fast even if we got loose
--		 * objects since names are often reuse.
--		 *)
--		if Symbol.created () > 1000 || Symbol.used () > 20000
--		then begin
--			Symbol.mark_all_as_unused ();
--			Store.mark_symbols store;
--			Connections.iter cons Connection.mark_symbols;
--			History.mark_symbols ();
--			Symbol.garbage ()
--		end;
- 
- 		(* scan all the xs rings as a safenet for ill-behaved clients *)
- 		if !ring_scan_interval >= 0 && now > (!last_scan_time +. float !ring_scan_interval) then
-@@ -407,11 +395,11 @@ let _ =
- 			let (lanon, lanon_ops, lanon_watchs,
- 			     ldom, ldom_ops, ldom_watchs) = Connections.stats cons in
- 			let store_nodes, store_abort, store_coalesce = Store.stats store in
--			let symtbl_len = Symbol.stats () in
-+			let symtbl_len, symtbl_entries = Symbol.stats () in
- 
- 			info "store stat: nodes(%d) t-abort(%d) t-coalesce(%d)"
- 			     store_nodes store_abort store_coalesce;
--			info "sytbl stat: %d" symtbl_len;
-+			info "sytbl stat: length(%d) entries(%d)" symtbl_len symtbl_entries;
- 			info "  con stat: anonymous(%d, %d o, %d w) domains(%d, %d o, %d w)"
- 			     lanon lanon_ops lanon_watchs ldom ldom_ops ldom_watchs;
- 			info "  mem stat: minor(%.0f) promoted(%.0f) major(%.0f) heap(%d w, %d c) live(%d w, %d b) free(%d w, %d b)"
+ val stats : unit -> int * int
 -- 
 2.25.1
 
