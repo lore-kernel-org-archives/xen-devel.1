@@ -7,60 +7,61 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 07367C433E1
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:27:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 40A70C433DF
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:27:20 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CBAA420708
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:27:17 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 11F6420708
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:27:20 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="VYkpXh6q"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CBAA420708
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="HzWNdqZk"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 11F6420708
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k6dTs-00053q-TO; Fri, 14 Aug 2020 17:27:04 +0000
+	id 1k6dTx-0005FO-27; Fri, 14 Aug 2020 17:27:09 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gClF=BY=citrix.com=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1k6dRR-00024H-36
- for xen-devel@lists.xenproject.org; Fri, 14 Aug 2020 17:24:33 +0000
-X-Inumbo-ID: 1a689d73-2d84-4814-9b5c-03cf1c59b582
-Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
+ id 1k6dQY-00024H-0Y
+ for xen-devel@lists.xenproject.org; Fri, 14 Aug 2020 17:23:38 +0000
+X-Inumbo-ID: fe115fab-4164-4cf4-a2e1-fd75a7cc3094
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 1a689d73-2d84-4814-9b5c-03cf1c59b582;
- Fri, 14 Aug 2020 17:22:25 +0000 (UTC)
+ id fe115fab-4164-4cf4-a2e1-fd75a7cc3094;
+ Fri, 14 Aug 2020 17:22:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1597425746;
+ d=citrix.com; s=securemail; t=1597425739;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version;
- bh=vk1erg2EhIozZ671QuB2WFTSrxHDQXDO2TUsLVUzIrA=;
- b=VYkpXh6qyq/3nOnPnhqHd5XrTOxc09fxGuTuAbwZYbp05i40Vzu765Cf
- yv0MeqW0O1UZqw4oE80JcCsFwG97mkrNKAUjzmyFMnK63zDj2u2AHSP/E
- 1QWF4ukj42v3HLQmiR/ZSV5qVoYs33TkDbIAgtS54ocL8p5Bew923soeU o=;
-Authentication-Results: esa3.hc3370-68.iphmx.com;
+ bh=0DVXE2AqFVp60oYFsg0RponXDX/ELl0fuRQ+BVVXl9o=;
+ b=HzWNdqZkyV0t5uHJQkeXWZWg78UeprqYbDqqwTtXsYBUmZmxkiCZj82s
+ tHtwuunSxWX0d9iVQR80FYx26KKW/OnpilEhN04vO4AvJUiyJgfRZo6DX
+ I3b6qvtaBIdtfwnaU1O9rqtth+6Vdfq/JIG0oKTlFDqv6EsJim4uyr6lP Q=;
+Authentication-Results: esa4.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: 2GK7l3G/uOcKXbY4SjRQWQUlQEzoo5dZmdQlsaPFIRd6/Bs+9n55B0Vghq5A0xGQtUfKni4ICU
- +5qZt2lVKqGkOPDCXSNi1JSmSP74g64HGAmdZBJsyBSPgHzfpv+97ea9FKR6uNd3KPsY7qbpah
- YxR9GumtmQbVyhm4RVuTe1YGNXeU2YCtSQ5dR6efxtAteefE5L8ygiEcm8YAYPjijw9RGgi/s6
- 38kto9Jv2O2LiOnVD2QR7G5cvLGQSd3pa5LvemQ4jabUThiukgOzTlOvbDAru1PCzlvnrecGKb
- Ma0=
+IronPort-SDR: 9BULI4WaFnmOP0IWATDe50lEkRiAS7v+k23D/fvybUNsECBZfnrUx7zmA/yS9oUAUzi3cngFFh
+ KLi9kzPWUexJx9iAIdYN7KSa28buvQUut7rC6cYqI06sMB8Aas5tKTrTJnXGXPvcUV9A0TgP2W
+ Fx4k/thKN3yAZH44l5lCwQmHyFKVr4GoRj/6ekHxYvoa5BMnjvaAIOrPMLk1mpyHjRvfjNFhE8
+ oukIIb3S+yIzoS9d2iT0NywaUd7ls4UkXBujJMv2CNAMJZSDLd2oClxdrBr8Fpl/il5tYZUHhm
+ ehY=
 X-SBRS: 2.7
-X-MesageID: 24545479
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 25487826
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,313,1592884800"; d="scan'208";a="24545479"
+X-IronPort-AV: E=Sophos;i="5.76,313,1592884800"; d="scan'208";a="25487826"
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH 59/60] sg-report-job-history: Provide --time-limit
-Date: Fri, 14 Aug 2020 18:22:04 +0100
-Message-ID: <20200814172205.9624-60-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 31/60] sg-report-job-history: Prep for fork: Move
+ $buildsq query
+Date: Fri, 14 Aug 2020 18:21:36 +0100
+Message-ID: <20200814172205.9624-32-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20200814172205.9624-1-ian.jackson@eu.citrix.com>
 References: <20200814172205.9624-1-ian.jackson@eu.citrix.com>
@@ -79,53 +80,38 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Calculate a minflight based on the time limit, and set the time limit
-to a year ago by default.
+We will need to prepare this once per (job,branch) so that it works
+when we do each of those in a different process.
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- sg-report-job-history | 7 +++++++
- 1 file changed, 7 insertions(+)
+ sg-report-job-history | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/sg-report-job-history b/sg-report-job-history
-index 5d2a7e15..e09c694f 100755
+index 6008ca72..47fc7a62 100755
 --- a/sg-report-job-history
 +++ b/sg-report-job-history
-@@ -30,6 +30,7 @@ use Osstest::HistoryReport;
+@@ -106,15 +106,15 @@ sub add_revisions ($$$$) {
+     }
+ }
  
- our (@blessings,@branches);
- our $limit= 100;
-+our $timelimit= 86400 * (366 + 14);
- our $htmlout = '.';
- our $flight;
- our $maxjobs=10;
-@@ -44,6 +45,8 @@ while (@ARGV && $ARGV[0] =~ m/^-/) {
-         $$1= $2;
-     } elsif (m/^--(limit)\=([1-9]\d*)$/) {
-         $$1= $2;
-+    } elsif (m/^--time-limit\=([1-9]\d*)$/) {
-+        $timelimit= $1;
-     } elsif (restrictflight_arg($_)) {
- 	# Handled by Executive
-     } elsif (m/^--html-dir=(.*)$/) {
-@@ -67,6 +70,9 @@ csreadconfig();
- 
- our @jobs;
- 
-+our $minflight = minflight_by_time($timelimit);
-+print DEBUG "MINFLIGHT $minflight\n";
+-our $buildsq= db_prepare(<<END);
++sub processjobbranch ($$) {
++    my ($j,$bra) = @_;
 +
- sub findflight () {
-     my $branches= $dbh_tests->selectcol_arrayref(<<END, {}, $flight);
-         SELECT branch FROM flights WHERE flight=?
-@@ -144,6 +150,7 @@ END
-         SELECT * 
-           FROM jobs JOIN flights USING (flight)
-          WHERE ($cond)
-+           AND flight > $minflight
-       ORDER BY flight DESC
-          LIMIT $limit
++    my $buildsq= db_prepare(<<END);
+         SELECT * FROM runvars
+          WHERE flight=? AND job=?
+            AND name LIKE '%buildjob'
  END
+ 
+-sub processjobbranch ($$) {
+-    my ($j,$bra) = @_;
+-
+     print DEBUG "processjobbranch('$j',", ($bra ? "'$bra'" : 'undef'), ")\n";
+ 
+     my %rev_grid_col;
 -- 
 2.11.0
 
