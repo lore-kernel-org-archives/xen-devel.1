@@ -7,61 +7,60 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B71B5C433E3
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:27:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 46762C433DF
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:27:17 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8632720708
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:27:09 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 1678A20708
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:27:17 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="UH5jPwKL"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8632720708
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="VMhQYvIA"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1678A20708
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k6dTo-0004t4-B5; Fri, 14 Aug 2020 17:27:00 +0000
+	id 1k6dTt-00055q-PD; Fri, 14 Aug 2020 17:27:05 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gClF=BY=citrix.com=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1k6dSP-00024H-55
- for xen-devel@lists.xenproject.org; Fri, 14 Aug 2020 17:25:33 +0000
-X-Inumbo-ID: cec8a870-aeaf-4337-8028-080daa349966
+ id 1k6dRv-00024H-4A
+ for xen-devel@lists.xenproject.org; Fri, 14 Aug 2020 17:25:03 +0000
+X-Inumbo-ID: fec89442-f640-4447-b2f8-be604317b767
 Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id cec8a870-aeaf-4337-8028-080daa349966;
- Fri, 14 Aug 2020 17:22:41 +0000 (UTC)
+ id fec89442-f640-4447-b2f8-be604317b767;
+ Fri, 14 Aug 2020 17:22:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1597425762;
+ d=citrix.com; s=securemail; t=1597425760;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version;
- bh=NHSD6TGEqM5ArTfICWOWbpPDVCeLImS8L+r0LiJLVRw=;
- b=UH5jPwKLZGD3oRjXuNJCAxpeBLXQzeuRi7pTDHWJ/uU3qdlBNBOkTB3B
- zOAgGBBc/oo5kplMkJ0M+Fh6ou9SWU/OgJoF25qXOr+gQnpOjEFQ7DUYK
- 0zGshZSEXHpc4RUs3RR7eVzRKLb2nMnuQ4eg1geM9dfPF2AyNDa28oTug k=;
+ bh=xNFNARb2DH3nytu+LwtUfgJ/aOgJiJDqOJzo2YjtfkA=;
+ b=VMhQYvIAtWlrYNIOM6K4u4aIU0TkIb93fsERkY2hfUCARoHBPW37R7MJ
+ yKHbCfohHZcQpiCRpCh0X5vyrNtHgRzcB5NaE2j76QKoI7O2GKHW84YeZ
+ bMOmiIynXF+/MeqTlK+qmDMfNyW8IoBaGIcr3jmQyJxHSDd5tK/J21Bo7 E=;
 Authentication-Results: esa2.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: Ez1uaDVp3YNnZmB8o5hfowhFbk2KXYlLwJxDccw/0cocOpw8NZX3shD+l6qDoFjxPAEDwqU+21
- OkEm8iHYWXcrUFUH4rnB/OVuMPs4Rs1uOwvvVz3P4ygMGUVS/J3rbpxF+jfi8t6sM3QyqCl5QP
- MYsEpzjII7cXrkHHFoK4hyWFWMzBZk83ag4YEeFS702AY3X//fK7BMRBNiYDFdpyOdF6FFUqvZ
- xjKYuJLYKaVRIMOWGYNqa2jlR0nHSbodwpe5BmlpNF/YnKLWBwhJLJM8ZEYp0PbiXTvO0faacH
- Nr8=
+IronPort-SDR: wuducQNRVAq8B5xzQ7UBCn0VqtsE5FEzld/9mfYnWqs9kS+ZM3RiooT5SVwl4qR/LReD/d/IVD
+ mZ+f/3qkdGLpngT10HDEzjOq0KsovPBBG7FsR05OLOVPIJSaVGmKjqGQKSlacEYNvL/EyVDOTa
+ YKRXO2FI4JP7Sc/fRoWp2HyUcafxY10wm5MlpwD5gHsZ+cA3UXo0HeNuE2Gr/sXBjqNCNs3oIh
+ SP087T4ZFTpA672YoeLpUzoMSW32+S8RP9IUuEARqIFWqkE9i2+ioXjW+RValGwfsgfrmUTkxr
+ lzA=
 X-SBRS: 2.7
-X-MesageID: 24576917
+X-MesageID: 24576920
 X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,313,1592884800"; d="scan'208";a="24576917"
+X-IronPort-AV: E=Sophos;i="5.76,313,1592884800"; d="scan'208";a="24576920"
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH 21/60] history reporting (nfc): Rename some module
- variables, remove "cache"
-Date: Fri, 14 Aug 2020 18:21:26 +0100
-Message-ID: <20200814172205.9624-22-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 48/60] history reporting (nfc): Break out url_unquote
+Date: Fri, 14 Aug 2020 18:21:53 +0100
+Message-ID: <20200814172205.9624-49-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20200814172205.9624-1-ian.jackson@eu.citrix.com>
 References: <20200814172205.9624-1-ian.jackson@eu.citrix.com>
@@ -80,59 +79,38 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This makes the code terser and easier to read.  No functional change.
-
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- Osstest/HistoryReport.pm | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+ Osstest/HistoryReport.pm | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
 diff --git a/Osstest/HistoryReport.pm b/Osstest/HistoryReport.pm
-index a0565b6a..61b1ee8f 100644
+index f30ded5b..f8a49955 100644
 --- a/Osstest/HistoryReport.pm
 +++ b/Osstest/HistoryReport.pm
-@@ -40,7 +40,7 @@ BEGIN {
- 
- use POSIX;
- 
--our @cache_row_key_cols;
-+our @key_cols;
- 
- our %cache;
- 
-@@ -51,11 +51,11 @@ our $rows_previous = 0;
- our $rows_today = 0;
- our $rows_hit = 0;
- 
--sub cache_set_key_cols { @cache_row_key_cols = @_; }
-+sub cache_set_key_cols { @key_cols = @_; }
- 
--sub cache_row_key ($) {
-+sub key ($) {
-     my ($jr) = @_;
--    return join $; , map { $jr->{$_} } @cache_row_key_cols;
-+    return join $; , map { $jr->{$_} } @key_cols;
- }
- 
- sub cacheable_fn ($$$) {
-@@ -107,7 +107,7 @@ sub cache_read_previous ($) {
- 	    s{\%([0-9a-f]{2})}{ chr hex $1 }ge;
- 	    $ch->{$k} = $_;
+@@ -147,8 +147,7 @@ sub cache_read_previous ($) {
+ 	    }
+ 	    s{^(\w+)=}{} or die "$orig -- $_ ";
+ 	    my $k = $1;
+-	    s{\%([0-9a-f]{2})}{ chr hex $1 }ge;
+-	    $ch->{$k} = $_;
++	    $ch->{$k} = url_unquote($_);
  	}
--	$cache{cache_row_key($jr)} = $jr;
-+	$cache{key($jr)} = $jr;
-     }
+ 	push @previous, $jr;
+ 	$cache{key($jr)} = $jr;
+@@ -156,6 +155,12 @@ sub cache_read_previous ($) {
      close H;
  }
-@@ -116,7 +116,7 @@ sub cache_row_lookup_prep ($) {
-     my ($jrr) = @_;
  
-     $rows_today++;
--    my $cacherow = $cache{cache_row_key($$jrr)};
-+    my $cacherow = $cache{key($$jrr)};
-     if ($cacherow) {
- 	$$jrr = $cacherow;
- 	$rows_hit++;
++sub url_unquote ($) {
++    local ($_) = "$_[0]";
++    s{\%([0-9a-f]{2})}{ chr hex $1 }ge;
++    $_;
++}
++
+ sub url_quote ($) {
+     local ($_) = "$_[0]";
+     s{[^-+=/~:;_.,\w]}{ sprintf "%%%02x", ord $& }ge;
 -- 
 2.11.0
 
