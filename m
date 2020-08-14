@@ -7,61 +7,60 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3B41BC433E1
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AA716C433E3
 	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:23:05 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0DF5020708
+	by mail.kernel.org (Postfix) with ESMTPS id 7BE6B20708
 	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:23:05 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="V78mDAs8"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0DF5020708
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="OaHP0596"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7BE6B20708
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k6dPq-0002aY-7O; Fri, 14 Aug 2020 17:22:54 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1k6dPr-0002ce-JS; Fri, 14 Aug 2020 17:22:55 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gClF=BY=citrix.com=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1k6dPo-00024H-Vd
- for xen-devel@lists.xenproject.org; Fri, 14 Aug 2020 17:22:53 +0000
-X-Inumbo-ID: 6f09f715-d41d-4452-ad68-84fe856b129e
+ id 1k6dPq-00024Q-Fy
+ for xen-devel@lists.xenproject.org; Fri, 14 Aug 2020 17:22:54 +0000
+X-Inumbo-ID: 5d65d4e3-876c-4136-98ca-f3e8e235ac0a
 Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 6f09f715-d41d-4452-ad68-84fe856b129e;
- Fri, 14 Aug 2020 17:22:16 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 5d65d4e3-876c-4136-98ca-f3e8e235ac0a;
+ Fri, 14 Aug 2020 17:22:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1597425736;
+ d=citrix.com; s=securemail; t=1597425740;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version;
- bh=47TkWKaaMaSDWsGucq1zdsdrawQzX1oeIufX8OcbbNY=;
- b=V78mDAs8efXQIUdZJjPyIroEivHDu5bOCuhAc4PwIeS9vGZ4hNBMIXGx
- JOmK6NYLkEoQDjUfqU4oGAl9LaLk31WAXcoCZ7MqnfWpO4EJ2pwci0YxZ
- f4XPF3Qu3V8swAOqcwjn1olUMTHK/pXfSzj6Q4Ln1OE9HIEFPqw0R1RC6 k=;
+ bh=cgymAWCuGG6G0PHhWvU8N3IYB47K2vDm+DZU0S9yr2A=;
+ b=OaHP0596L+MgxsEDrAQe1piklO+CgZaEuoo9nTqOwvA4IVd7Be/0cyaf
+ eoJwSf60q8leQs6+XFeZthrU3J50VCoX0KuZNttKT54nBqntbhULcNqo8
+ Aubr/s1u3TsP3B+vSdZ4oSw0QZxmBZoxJgwzJwtSty59/Tav56/rqf4zL E=;
 Authentication-Results: esa1.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: zFNVZ/yNaBs/RwWhfhsC3hLuE+5mbJuv5+TSB6jTA/S45Ql/xDkCZYXNQDOD+Ul7Zy5325BDwD
- 3KQkroufcgpnS9VvdPWkQrPuzWioHFTXLZzN+tnRKTDgF8RW1TOsCKWbDOxK7061p2dAKCGB8E
- NV6OutNrglmz0SEUtiKRce+PaaGUThdACd7nqujpzX5GkMxAg183rUWvxb82RrHbTjqDuliYat
- CFsdSVI9qhvr7CL/Sw5YK1sJd7ddLMDaXB9wvMNYcCTDT8WQlF1VeSgxcQalL/opXvIfw3Mwgw
- JCE=
+IronPort-SDR: XLTBOLShMunTVXpzUPk0nL30OigiYSi84mZ8SU1DYgCm8dckGpD+ff64M3PkY9hrJUNTxBlzKs
+ dxjwmp/nV5gCvaCGIXPNgoQkojgEJDz7k3+/Yajo79Hsp/OFfvNQAfa1l2U9BVuk3m8vBtqayB
+ 1yoJu4XWTtS0qKEsnSZi9v8icnD2uUbbFbIsxZbNz+sxCVhzgwbLSbtMZysSIHCiPhQIxvCILn
+ 2Zr9JovgA0ZOfe9XxcAyvCNjX3G0PfZf9Mmv6KiSEwhryICoE9Uz87t2rYH2x9Pl+teg4jtIYc
+ 60Q=
 X-SBRS: 2.7
-X-MesageID: 24900369
+X-MesageID: 24900377
 X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,313,1592884800"; d="scan'208";a="24900369"
+X-IronPort-AV: E=Sophos;i="5.76,313,1592884800"; d="scan'208";a="24900377"
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH 17/60] history reporting: Cache stats reporting:
- Centralise and rework
-Date: Fri, 14 Aug 2020 18:21:22 +0100
-Message-ID: <20200814172205.9624-18-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 41/60] sg-report-job-history (nfc): Make $ri->{Hosts}
+ a hash
+Date: Fri, 14 Aug 2020 18:21:46 +0100
+Message-ID: <20200814172205.9624-42-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20200814172205.9624-1-ian.jackson@eu.citrix.com>
 References: <20200814172205.9624-1-ian.jackson@eu.citrix.com>
@@ -80,63 +79,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This uses the new variables instead of the old ones.
+This will make it easier to cache this.
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- sg-report-host-history | 18 ++++++++++++------
- 1 file changed, 12 insertions(+), 6 deletions(-)
+ sg-report-job-history | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/sg-report-host-history b/sg-report-host-history
-index 32cc883d..9c70b560 100755
---- a/sg-report-host-history
-+++ b/sg-report-host-history
-@@ -185,6 +185,17 @@ sub cache_write_entry ($$) {
-     print $fh " -->\n";
- }
+diff --git a/sg-report-job-history b/sg-report-job-history
+index 8932458e..118926c6 100755
+--- a/sg-report-job-history
++++ b/sg-report-job-history
+@@ -173,11 +173,11 @@ END
+     while (my $f= $flightsq->fetchrow_hashref()) {
+         my $ri= report_run_getinfo($f);
  
-+sub cache_report_stats ($) {
-+    my ($what) = @_;
-+    print ::DEBUG "CACHE $what read=$rows_previous hits $rows_hit/$rows_today";
-+    for my $cachekey (sort keys %q_count) {
-+	my $total = $q_count{$cachekey};
-+	my $hits = $total - ($q_misses{$cachekey} // 0);
-+	print ::DEBUG " $cachekey=$hits/$total";
-+    }
-+    print ::DEBUG "\n";
-+}
-+
- cache_set_key_cols(qw(flight job status name));
+-	$ri->{Hosts} = [ ];
++	$ri->{Hosts} = { };
+ 	foreach my $hostvar (@hostvarcols) {
+ 	    $hostq->execute($f->{flight}, $f->{job}, $hostvar);
+ 	    my ($host) = $hostq->fetchrow_array();
+-	    push @{ $ri->{Hosts} }, ($host // "-");
++	    $ri->{Hosts}{$hostvar} = $host;
+ 	}
  
- sub computeflightsrange () {
-@@ -335,9 +346,6 @@ END
- 	push @rows, { %$jr, %$endedrow };
-     }
- 
--    print DEBUG "CACHE $hostname $rows_hit / ".(scalar @rows)
--	." of ".(scalar %cache)."\n";
--
-     @rows = sort { $b->{finished} <=> $a->{finished} } @rows;
- 
-     print DEBUG "SORTED\n";
-@@ -457,8 +465,7 @@ END
-     rename "$html_file.new", "$html_file" or die "$html_file $!"
-         if $doinstall;
- 
--    print DEBUG "HOST CACHE RQ $runvarq_hits / ".
--	  ($runvarq_hits+$runvarq_misses)."\n";
-+    cache_report_stats("$hostname");
- }
- 
- foreach my $host (@ARGV) {
-@@ -528,7 +535,6 @@ foreach my $host (sort keys %hosts) {
-             mainquery($host);
- 	    reporthost $host;
- 	});
--	print DEBUG "JQ CACHE ".($jqtotal-$jqcachemisses)." / $jqtotal\n";
- 	exit(0);
-     }
-     print DEBUG "SPAWNED [$pid] $host\n";
+         my %revisions;
+@@ -255,7 +255,7 @@ END
+ 	print H "<td $r->{ColourAttr}><a href=\"$url\">".
+ 	    $r->{Content}."</a></td>\n";
+ 	my $lastrev;
+-	my $hosts = join ", ", map { $_ // "-" } @{ $r->{Hosts} };
++	my $hosts = join ", ", map { $r->{Hosts}{$_} // "-" } @hostvarcols;
+ 	my $hosts_colour = report_altchangecolour(\$alt_hosts, $hosts);
+ 	print H "<td $hosts_colour>".encode_entities($hosts)."</td>\n";
+ 	$osstestverq->execute($r->{Flight}{flight});
 -- 
 2.11.0
 
