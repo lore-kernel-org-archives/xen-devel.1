@@ -7,61 +7,59 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5245CC433EC
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:26:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A923AC433DF
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:26:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 258DD20708
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:26:47 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 7FA2020774
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:26:46 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="S5h7qEMS"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 258DD20708
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="hKZIPPKq"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7FA2020774
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k6dTN-00040C-9R; Fri, 14 Aug 2020 17:26:33 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1k6dTJ-0003xY-Mc; Fri, 14 Aug 2020 17:26:29 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gClF=BY=citrix.com=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1k6dQi-00024H-0y
- for xen-devel@lists.xenproject.org; Fri, 14 Aug 2020 17:23:48 +0000
-X-Inumbo-ID: e8fe2ef3-73ed-437b-9f28-16e53105f8cb
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id e8fe2ef3-73ed-437b-9f28-16e53105f8cb;
- Fri, 14 Aug 2020 17:22:19 +0000 (UTC)
+ id 1k6dR3-00024Q-I8
+ for xen-devel@lists.xenproject.org; Fri, 14 Aug 2020 17:24:09 +0000
+X-Inumbo-ID: 33120668-a05a-4e35-95d1-b92d3baf3302
+Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 33120668-a05a-4e35-95d1-b92d3baf3302;
+ Fri, 14 Aug 2020 17:22:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1597425739;
+ d=citrix.com; s=securemail; t=1597425756;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version;
- bh=TQcIqqhFJdYsJk5BMaUT3ykNr/SrI/Z/YpnxsNoFOD0=;
- b=S5h7qEMS3QNYtw2m1bVexcC1+gi5OVUziYT27jMXipVgVOUnO4d2wsSx
- fhbMzrTegSizWhGefOi5F7/QY70FVpJyxmdNR978KksIJRSaKo1WUfZnc
- KNw14moBN0yQTy79WeXy6EHKwYtGdOsagUIuWqavtP4NdQDiiCQp2iqm0 E=;
-Authentication-Results: esa5.hc3370-68.iphmx.com;
+ bh=X6/feefs+EBmTwV9A8+QWNObBLw3cmrBQxuV3E+6g3c=;
+ b=hKZIPPKqx3MovPReQ7KyXonMxOopr+CtQkOduARttGbEPNS2BTVZWMrX
+ c+uhPqexWlwIsvEdyaI80+GscyQs73VHCDO1VmliGtF7OML1wMWMljMU2
+ XoIdCiqjqNutHOAWn9lWGE5J/zKz4g/b5Z34EZxWQwi87kol71+ZwkTjB M=;
+Authentication-Results: esa2.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: 13x5v+jN+N7cZeeL23w1/uVLruEaZDX2PvS1Bv/h4AYAyeBpFf/B+gq+xqzeB+qDtYrCXfVFnu
- gZfj7GBZIxapXcfPpRr0ZGlc/ceqdBEpRfm7+IocuNWp2+oKr8vQBhjqlTzTEA9+yR7YxyQBQb
- hFXTy4rrQ9503CK45bPzBhXP6Wka4F5ACTVtX9AD908rcXyd76lo6yGLC2oseULiDew0OAqZiK
- PO/QFex9tA7sQ9yc0CSD69keBbH+ZVMJQO6AgNrq3bvIcOZw+EIEpHEjcoWLo043AN2AHTc5yy
- 3j0=
+IronPort-SDR: HM1x3iOPWrYXuGhFyidvWlgA3coSfl/c0Ncma2X8a35RmMbAO+wu9fnfzZw7dSnWhmIiacXrNB
+ gWYoLo7OaK1NiOpWRZMprn/iznQXYjamKW9sW+5kqgKcz+JpXObUPFEGjy6lgqKjODOM7jUNjd
+ Hs8s4KwerOGgNLdQrcTYuumVn9jhzQswHuN71q/XerLD4MeOnWXVg20TCQ0PhKBc6oHUNXiiGY
+ rXe6us5Ud2dNrzIJxu+ysDBABxK98kFri41ssHiJu2pzHaJYGdebAPRNldSwUoF57NF9mHvYWO
+ d+8=
 X-SBRS: 2.7
-X-MesageID: 24725187
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 24576909
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,313,1592884800"; d="scan'208";a="24725187"
+X-IronPort-AV: E=Sophos;i="5.76,313,1592884800"; d="scan'208";a="24576909"
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH 35/60] sg-report-job-history (nfc): Have main program
- decide HTML filename
-Date: Fri, 14 Aug 2020 18:21:40 +0100
-Message-ID: <20200814172205.9624-36-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 03/60] history reporting: Delete two debug prints
+Date: Fri, 14 Aug 2020 18:21:08 +0100
+Message-ID: <20200814172205.9624-4-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20200814172205.9624-1-ian.jackson@eu.citrix.com>
 References: <20200814172205.9624-1-ian.jackson@eu.citrix.com>
@@ -80,53 +78,28 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
+These are going to become invalid and I don't think it's important to
+save them.
+
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- sg-report-job-history | 11 +++++------
- 1 file changed, 5 insertions(+), 6 deletions(-)
+ sg-report-host-history | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/sg-report-job-history b/sg-report-job-history
-index 3307b281..3f10a74c 100755
---- a/sg-report-job-history
-+++ b/sg-report-job-history
-@@ -109,8 +109,8 @@ END
+diff --git a/sg-report-host-history b/sg-report-host-history
+index 50cc5b58..4c0022e8 100755
+--- a/sg-report-host-history
++++ b/sg-report-host-history
+@@ -102,9 +102,7 @@ sub read_existing_logs ($) {
+ 	    my $k = $1;
+ 	    s{\%([0-9a-f]{2})}{ chr hex $1 }ge;
+ 	    $ch->{$k} = $_;
+-#	    print DEBUG "GOTCACHE $hostname $k\n";
+ 	}
+-#	print DEBUG "GOTCACHE $hostname \@ $jr->{flight} $jr->{job} $jr->{status},$jr->{name}\n";
+ 	$cache{$jr->{flight},$jr->{job},$jr->{status},$jr->{name}} = $jr;
      }
- }
- 
--sub processjobbranch ($$) {
--    my ($j,$bra) = @_;
-+sub processjobbranch ($$$) {
-+    my ($j,$bra,$html_file) = @_;
- 
-     my $buildsq= db_prepare(<<END);
-         SELECT * FROM runvars
-@@ -210,15 +210,13 @@ END
- END
- 
-     if (defined $htmlout) {
--        my ($title,$html_file,$url);
-+        my ($title,$url);
- 	ensuredir "$htmlout/history";
- 	ensuredir "$htmlout/history/$j";
-         if (defined $bra) {
-             $title= "$j (branch $bra)";
--            $html_file= "history/$j/$bra.html";
-         } else {
-             $title= "$j (all branches)";
--            $html_file= "history/$j/ALL.html";
-         }
-         $html_file= "$htmlout/$html_file";
-         open H, "> $html_file.new" or die "$html_file $!";
-@@ -305,7 +303,8 @@ foreach my $j (@jobs) {
- parallel_by_fork('sg-report-job-history', $maxjobs, \@tasks, sub {
-     my ($task) = @_;
-     my ($job, $branch) = split / /, $task; # $branch might be undef
-+    my $html_file = sprintf "history/%s/%s.html", $job, ($branch // 'ALL');
-     db_retry($dbh_tests, [], sub {
--        processjobbranch($job, $branch);
-+        processjobbranch($job, $branch, $html_file);
-     });
- });
+     close H;
 -- 
 2.11.0
 
