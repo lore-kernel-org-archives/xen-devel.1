@@ -7,61 +7,60 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 669E4C433DF
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:27:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 997B5C433E3
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:27:31 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 358EF20708
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:27:28 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 6771B20866
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:27:31 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="UdLS7Lvu"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 358EF20708
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="FCK66EYN"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6771B20866
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k6dU5-0005av-9k; Fri, 14 Aug 2020 17:27:17 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1k6dU8-0005k3-Tt; Fri, 14 Aug 2020 17:27:20 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gClF=BY=citrix.com=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1k6dS5-00024H-4Z
- for xen-devel@lists.xenproject.org; Fri, 14 Aug 2020 17:25:13 +0000
-X-Inumbo-ID: 6de50cb7-ecf3-48f5-a5c0-fa71292e5f28
+ id 1k6dRc-00024Q-JG
+ for xen-devel@lists.xenproject.org; Fri, 14 Aug 2020 17:24:44 +0000
+X-Inumbo-ID: e4380587-44ea-47ba-a23c-6fce3ce9b12c
 Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 6de50cb7-ecf3-48f5-a5c0-fa71292e5f28;
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id e4380587-44ea-47ba-a23c-6fce3ce9b12c;
  Fri, 14 Aug 2020 17:22:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=citrix.com; s=securemail; t=1597425760;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version;
- bh=7jO5oa9Cvf0sgduE8CWd2v2zY8hx6IqAdysPRIm7Ppc=;
- b=UdLS7LvuwsPPEoo7qra2GtUEy4x4i/ab91JPmEo91GRA7+w9BDyHlcbP
- MlbVE+pJ/ED65AJUOxSkX51TodPajmfFQxiYc3h3dS3xsPrRmBs19Aj5G
- S1TKN+BCQGfSBoYFkeV3uvWKwKt/vGsIreKuYKFXbmYxpPjqkiPaKleIi M=;
+ bh=2BRyay7ySv9zUIDvN5Jo2Q0hBQCNwJhXHMBk7elBw7g=;
+ b=FCK66EYNzY4f0U5MjxMwBG5NMZldAGx4of7v6H0oPBAkslvA3Hjrdy3f
+ DDzYmH+Ms4thSM7fHYBTenih2fk8a/hqdUJ7mhSKgBQQ7bW6vW2BZjVXg
+ SzdQsEMyROcIN980R+NZJH3JfBrL0XtAWIjGe9bG5QokSeDWO/Rb3P8mJ U=;
 Authentication-Results: esa2.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: ph4SRXbhe4sIQGmZIvgHxjmu9GFETUGky+FvNjxdOr6XZ2LPKMtcZLT93sSQz0cvokwQ8bZHRf
- njt+SaBnlIADqXi8Lc3wtOhOAvsb2Wo8Qkgf6likKSwlPSXopO8aTPGKX+mBGtszU5YkwQwLX1
- kS7Sta9WODbOwSK44PStqtwq0+9WSbHGXTRKCJP6y/VFaNcGKvJPP8ukZoZzLVY6OruwA+jCjj
- EgG+wWP5d7AS060Nx5ouybvJS2cVRqA3/MEZcvfYoB8TIGISEiCIF2xp0ZBlM5zyMJZ4IbZljN
- dko=
+IronPort-SDR: NrB0FhW6FhsTx4sJML8vp8SQmOnDDQYGciMcYCmvIFRLqNUg4xsz3/wMwGVYi3iB6Ngqgmlr5N
+ 401J/McXKXwFLHuOAHL5fCrcLmgzxpYNVEyGJHpzxTcaI1qG10QFEUd9kIyl7ovqZl66paIkjy
+ pwX8rW4XT8djWEXe94aStObE5jguax0ayEoYi59E7NKkIn9MQ5z/9NqlDRbIez8ML2nLr8eUnc
+ q827IdX1JcYKT2mTI1PWiOV59g+ufwXv09LZcC3R/OupGxjM4iyuIcofX4nOIUC13R7Ci4vzxx
+ BgI=
 X-SBRS: 2.7
-X-MesageID: 24576919
+X-MesageID: 24576921
 X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,313,1592884800"; d="scan'208";a="24576919"
+X-IronPort-AV: E=Sophos;i="5.76,313,1592884800"; d="scan'208";a="24576921"
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH 26/60] history reporting: Improve an error message
- slightly
-Date: Fri, 14 Aug 2020 18:21:31 +0100
-Message-ID: <20200814172205.9624-27-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 50/60] history reporting (nfc): url-quoting: quote =
+ too
+Date: Fri, 14 Aug 2020 18:21:55 +0100
+Message-ID: <20200814172205.9624-51-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20200814172205.9624-1-ian.jackson@eu.citrix.com>
 References: <20200814172205.9624-1-ian.jackson@eu.citrix.com>
@@ -80,32 +79,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
+We are going to want to url-encode keys.  If key contains =, we still
+need to be able to tell where it ends, so it must be encoded.
+
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- Osstest/HistoryReport.pm | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ Osstest/HistoryReport.pm | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/Osstest/HistoryReport.pm b/Osstest/HistoryReport.pm
-index b593f207..6a23cfba 100644
+index 75ec75f3..20913d27 100644
 --- a/Osstest/HistoryReport.pm
 +++ b/Osstest/HistoryReport.pm
-@@ -128,6 +128,7 @@ sub cache_read_previous ($) {
-     for (;;) {
-         $_ = <H> // last;
-         next unless m{^\<\!-- osstest-report-reuseable (.*)--\>$};
-+	my $orig = $_;
- 	my $jr = {};
- 	my $ch = $jr;
- 	foreach (split / /, $1) {
-@@ -136,7 +137,7 @@ sub cache_read_previous ($) {
- 		$jr->{'%'.$&} = $ch;
- 		next;
- 	    }
--	    s{^(\w+)=}{} or die;
-+	    s{^(\w+)=}{} or die "$orig -- $_ ";
- 	    my $k = $1;
- 	    s{\%([0-9a-f]{2})}{ chr hex $1 }ge;
- 	    $ch->{$k} = $_;
+@@ -45,7 +45,7 @@ BEGIN {
+ 
+ use POSIX;
+ 
+-our $url_ok_chars = '-+=/~:;_.,\w';
++our $url_ok_chars = '-+/~:;_.,\w';
+ 
+ our @key_cols;
+ 
 -- 
 2.11.0
 
