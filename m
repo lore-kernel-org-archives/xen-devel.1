@@ -2,82 +2,66 @@ Return-Path: <SRS0=TMXt=BY=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-8.5 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F172AC433E3
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 09:57:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 79BBDC433E1
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 10:28:09 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C294F206DA
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 09:57:03 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="VMUPhAun"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C294F206DA
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id 4DA1E206DA
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 10:28:09 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4DA1E206DA
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k6WS2-0004EA-QY; Fri, 14 Aug 2020 09:56:42 +0000
+	id 1k6Wvx-0006tC-AZ; Fri, 14 Aug 2020 10:27:37 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=CCCI=BY=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1k6WS1-0004E5-Ro
- for xen-devel@lists.xenproject.org; Fri, 14 Aug 2020 09:56:41 +0000
-X-Inumbo-ID: 04f13d06-eece-4014-83d2-106e55574347
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=UNK8=BY=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1k6Wvw-0006t7-1h
+ for xen-devel@lists.xenproject.org; Fri, 14 Aug 2020 10:27:36 +0000
+X-Inumbo-ID: 266627a0-6e53-47a0-abfa-8a4ffe82f77d
+Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 04f13d06-eece-4014-83d2-106e55574347;
- Fri, 14 Aug 2020 09:56:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1597398999;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=M2heJ5UJIi6VeX83HdtsuKbDz3J1W8I/My2z+YBPJbc=;
- b=VMUPhAunCPJYS7U/d4AcTWAUNCTlkb+q/8skt/OUmXKQ4MaqEQAeVgXX
- BMInVCYqVOYrPRmN/H/+cbHAa9l6X4TmLr6fbLeMioVvrAo49N1rgzyyD
- Wym+QZ5mrVnxXlmY+vv1umCugWKy7RBV5iFubSq01LEZGm70YZ8432AjK o=;
-Authentication-Results: esa6.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: LSUv+nx7tcMiKh/86la0ov2CD6bm0s6I0CZ/3c8oZ8SKd5FBsD9NTk6X+etvRWHGxjQoN4ifLc
- WZkEtigJTsHGqnWNv9UJ60WQsP5kEKf5sFfIOA6zvU9VIklNrxh92Vbu7Lw/zOteb+Zprr9bcz
- EDqmXPpuivFanGkQt/96ZKFaN0KdR0AoyWD2zxgECUj3l8VTghEId76fKUoi3SYFO8M2Otk1Pf
- CYzZj5rDqfvUJsn9+hgY+6CFXoxaN6UM05eSlIPALUijsytQzL+vRPNV5LDNkQ09XoNxVizA79
- cjQ=
-X-SBRS: 2.7
-X-MesageID: 24845878
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,311,1592884800"; d="scan'208";a="24845878"
-Date: Fri, 14 Aug 2020 11:56:29 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Christoph Hellwig <hch@infradead.org>
-CC: <linux-kernel@vger.kernel.org>, Oleksandr Andrushchenko
- <oleksandr_andrushchenko@epam.com>, David Airlie <airlied@linux.ie>, "Daniel
- Vetter" <daniel@ffwll.ch>, Boris Ostrovsky <boris.ostrovsky@oracle.com>,
- Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, 
- Dan Carpenter <dan.carpenter@oracle.com>, Wei Liu <wl@xen.org>, "Yan
- Yankovskyi" <yyankovskyi@gmail.com>, <dri-devel@lists.freedesktop.org>,
- <xen-devel@lists.xenproject.org>, <linux-mm@kvack.org>, David Hildenbrand
- <david@redhat.com>, Michal Hocko <mhocko@kernel.org>, Dan Williams
- <dan.j.williams@intel.com>
+ id 266627a0-6e53-47a0-abfa-8a4ffe82f77d;
+ Fri, 14 Aug 2020 10:27:34 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 5DBB0AF8F;
+ Fri, 14 Aug 2020 10:27:56 +0000 (UTC)
 Subject: Re: [PATCH v4 2/2] xen: add helpers to allocate unpopulated memory
-Message-ID: <20200814095629.GJ975@Air-de-Roger>
+To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
+ Christoph Hellwig <hch@infradead.org>
+Cc: linux-kernel@vger.kernel.org,
+ Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+ David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Dan Carpenter <dan.carpenter@oracle.com>, Wei Liu <wl@xen.org>,
+ Yan Yankovskyi <yyankovskyi@gmail.com>, dri-devel@lists.freedesktop.org,
+ xen-devel@lists.xenproject.org, linux-mm@kvack.org,
+ David Hildenbrand <david@redhat.com>, Michal Hocko <mhocko@kernel.org>,
+ Dan Williams <dan.j.williams@intel.com>
 References: <20200811094447.31208-1-roger.pau@citrix.com>
  <20200811094447.31208-3-roger.pau@citrix.com>
- <20200813073337.GA16160@infradead.org>
- <20200813075420.GC975@Air-de-Roger>
- <20200814072920.GA6126@infradead.org>
+ <20200813073337.GA16160@infradead.org> <20200813075420.GC975@Air-de-Roger>
+ <20200814072920.GA6126@infradead.org> <20200814095629.GJ975@Air-de-Roger>
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Message-ID: <a907ff4a-c887-7d02-1d45-140d7749afa4@suse.com>
+Date: Fri, 14 Aug 2020 12:27:32 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-In-Reply-To: <20200814072920.GA6126@infradead.org>
-X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
- AMSPEX02CL02.citrite.net (10.69.22.126)
+In-Reply-To: <20200814095629.GJ975@Air-de-Roger>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -91,52 +75,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Fri, Aug 14, 2020 at 08:29:20AM +0100, Christoph Hellwig wrote:
-> On Thu, Aug 13, 2020 at 09:54:20AM +0200, Roger Pau Monn?? wrote:
-> > On Thu, Aug 13, 2020 at 08:33:37AM +0100, Christoph Hellwig wrote:
-> > > On Tue, Aug 11, 2020 at 11:44:47AM +0200, Roger Pau Monne wrote:
-> > > > If enabled (because ZONE_DEVICE is supported) the usage of the new
-> > > > functionality untangles Xen balloon and RAM hotplug from the usage of
-> > > > unpopulated physical memory ranges to map foreign pages, which is the
-> > > > correct thing to do in order to avoid mappings of foreign pages depend
-> > > > on memory hotplug.
-> > > 
-> > > So please just select ZONE_DEVICE if this is so much better rather
-> > > than maintaining two variants.
-> > 
-> > We still need to other variant for Arm at least, so both need to be
-> > maintained anyway, even if we force ZONE_DEVICE on x86.
+On 14.08.20 11:56, Roger Pau Monné wrote:
+> On Fri, Aug 14, 2020 at 08:29:20AM +0100, Christoph Hellwig wrote:
+>> On Thu, Aug 13, 2020 at 09:54:20AM +0200, Roger Pau Monn?? wrote:
+>>> On Thu, Aug 13, 2020 at 08:33:37AM +0100, Christoph Hellwig wrote:
+>>>> On Tue, Aug 11, 2020 at 11:44:47AM +0200, Roger Pau Monne wrote:
+>>>>> If enabled (because ZONE_DEVICE is supported) the usage of the new
+>>>>> functionality untangles Xen balloon and RAM hotplug from the usage of
+>>>>> unpopulated physical memory ranges to map foreign pages, which is the
+>>>>> correct thing to do in order to avoid mappings of foreign pages depend
+>>>>> on memory hotplug.
+>>>>
+>>>> So please just select ZONE_DEVICE if this is so much better rather
+>>>> than maintaining two variants.
+>>>
+>>> We still need to other variant for Arm at least, so both need to be
+>>> maintained anyway, even if we force ZONE_DEVICE on x86.
+>>
+>> Well, it still really helps reproducability if you stick to one
+>> implementation of x86.
+>>
+>> The alternative would be an explicit config option to opt into it,
+>> but just getting a different implementation based on a random
+>> kernel option is strange.
 > 
-> Well, it still really helps reproducability if you stick to one
-> implementation of x86.
+> Would adding something like the chunk below to the patch be OK?
 > 
-> The alternative would be an explicit config option to opt into it,
-> but just getting a different implementation based on a random
-> kernel option is strange.
+> ---8<---
+> diff --git a/drivers/xen/Kconfig b/drivers/xen/Kconfig
+> index 018020b91baa..5f321a1319e6 100644
+> --- a/drivers/xen/Kconfig
+> +++ b/drivers/xen/Kconfig
+> @@ -328,7 +328,14 @@ config XEN_FRONT_PGDIR_SHBUF
+>   	tristate
+>   
+>   config XEN_UNPOPULATED_ALLOC
+> -	bool
+> -	default y if ZONE_DEVICE && !ARM && !ARM64
+> +	bool "Use unpopulated memory ranges for guest mappings"
+> +	depends on X86
+> +	select ZONE_DEVICE
+> +	default y
 
-Would adding something like the chunk below to the patch be OK?
+I'd rather use "default XEN_BACKEND" here, as mappings of other guest's
+memory is rarely used for non-backend guests.
 
----8<---
-diff --git a/drivers/xen/Kconfig b/drivers/xen/Kconfig
-index 018020b91baa..5f321a1319e6 100644
---- a/drivers/xen/Kconfig
-+++ b/drivers/xen/Kconfig
-@@ -328,7 +328,14 @@ config XEN_FRONT_PGDIR_SHBUF
- 	tristate
- 
- config XEN_UNPOPULATED_ALLOC
--	bool
--	default y if ZONE_DEVICE && !ARM && !ARM64
-+	bool "Use unpopulated memory ranges for guest mappings"
-+	depends on X86
-+	select ZONE_DEVICE
-+	default y
-+	help
-+	  Use unpopulated memory ranges in order to create mappings for guest
-+	  memory regions, including grants maps and foreign pages. This avoids
-+	  having to balloon out RAM regions in order to obtain physical memory
-+	  space to create such mappings.
- 
- endmenu
+
+Juergen
 
 
