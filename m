@@ -2,60 +2,75 @@ Return-Path: <SRS0=TMXt=BY=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
-	SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E5A6C433E1
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 20:43:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0E500C433E3
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 22:13:03 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EAD8F206C0
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 20:43:01 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id B63FD20768
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 22:13:02 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="No5HZncu"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EAD8F206C0
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="ZlKPQRZf"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B63FD20768
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k6gX4-0000c6-TH; Fri, 14 Aug 2020 20:42:34 +0000
+	id 1k6hwD-000899-W1; Fri, 14 Aug 2020 22:12:37 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=cza9=BY=kernel.org=pr-tracker-bot@srs-us1.protection.inumbo.net>)
- id 1k6gX3-0000c1-Gu
- for xen-devel@lists.xenproject.org; Fri, 14 Aug 2020 20:42:33 +0000
-X-Inumbo-ID: 7ca3122e-f60a-430a-885d-43cf64210048
-Received: from mail.kernel.org (unknown [198.145.29.99])
+ <SRS0=uEIT=BY=citrix.com=edvin.torok@srs-us1.protection.inumbo.net>)
+ id 1k6hwC-000891-1z
+ for xen-devel@lists.xenproject.org; Fri, 14 Aug 2020 22:12:36 +0000
+X-Inumbo-ID: ac1994c2-799c-4656-a432-1ce28cd9734c
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 7ca3122e-f60a-430a-885d-43cf64210048;
- Fri, 14 Aug 2020 20:42:32 +0000 (UTC)
-Subject: Re: [GIT PULL] xen: branch for v5.9-rc1b
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1597437751;
- bh=ld1CD1D5bCWqOEzLyWc1OFNEOsxo4WZetS/hMlqUvNk=;
- h=From:In-Reply-To:References:Date:To:Cc:From;
- b=No5HZncuyM2OEwhwqc7/GW7HZ+0ksxI20rj0dqJ9o1fJztFrxGyyVZ12McMTIiSFk
- 1ZN813nBjEBa/CBwW3VUJkukeXmbSAq/EqkLi7iD0xYVknky80+uPwnj/NinXH7FWC
- vNWoL/ua13Ld3hS3GQd/tiCoy3KFVhngO8adduaI=
-From: pr-tracker-bot@kernel.org
-In-Reply-To: <20200814133939.21185-1-jgross@suse.com>
-References: <20200814133939.21185-1-jgross@suse.com>
-X-PR-Tracked-List-Id: <linux-kernel.vger.kernel.org>
-X-PR-Tracked-Message-Id: <20200814133939.21185-1-jgross@suse.com>
-X-PR-Tracked-Remote: git://git.kernel.org/pub/scm/linux/kernel/git/xen/tip.git
- for-linus-5.9-rc1b-tag
-X-PR-Tracked-Commit-Id: 585c6ed738a5ed2a6fd7662fa1d82f25acfa85de
-X-PR-Merge-Tree: torvalds/linux.git
-X-PR-Merge-Refname: refs/heads/master
-X-PR-Merge-Commit-Id: 0520058d0578c2924b1571c16281f873cb4a3d2b
-Message-Id: <159743775165.14792.6384919127435789166.pr-tracker-bot@kernel.org>
-Date: Fri, 14 Aug 2020 20:42:31 +0000
-To: Juergen Gross <jgross@suse.com>
-Cc: torvalds@linux-foundation.org, linux-kernel@vger.kernel.org,
- xen-devel@lists.xenproject.org, boris.ostrovsky@oracle.com
+ id ac1994c2-799c-4656-a432-1ce28cd9734c;
+ Fri, 14 Aug 2020 22:12:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1597443155;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=SMCBsmOzak2flXbv7Zo/YlQyvKHgExmZi0mtL3kNGOc=;
+ b=ZlKPQRZfhRC0Hf0U9ZiW8CyAKhhc5FiGxOZs3ZeNZiiMJqpUkYp/jS2N
+ MQ295C29rc7RGWzvpaB/HrbqqbV9YuNoM0QXn8Or/GenA02gvZi6UyG0h
+ M3/CPz6S1AH7zsmY9ikJT1NAnLKakSnzBt23t7OmBlruYiPGF6UY0MGGx I=;
+Authentication-Results: esa1.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none
+IronPort-SDR: 8o2irhUK6ivwW2LwCmgsbAmHRyIZbk6sxuvhZuSNn4hpq4reWoYmwVZjpdYsbegpOvYh31Y/Hj
+ rX+Trj8uYTTx/i4yPQdMJQmtRcBjheyi35nNkQLcHyp+LrpwlApFUKINMzME+WM65kibFpmjpy
+ uaAmcWvvzGt4XDR8wSHZJoI+EKggsKuabmWL1oDzSpbodHTmwPHms1AUncYSEsffTm5ethXrQu
+ wtqJx64k+3PW09sJvNXExBQ54LZNxhjrhDnHpuDVltZR/o77dlitTX8AO3AVrXCC8fbsYL6rCv
+ cgc=
+X-SBRS: 2.7
+X-MesageID: 24917745
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.76,313,1592884800"; d="scan'208";a="24917745"
+From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>
+To: <xen-devel@lists.xenproject.org>
+CC: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>, "Christian
+ Lindig" <christian.lindig@citrix.com>, David Scott <dave@recoil.org>, "Ian
+ Jackson" <ian.jackson@eu.citrix.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH v1 1/6] tools/ocaml/libs/xc: Fix ambiguous documentation
+ comment
+Date: Fri, 14 Aug 2020 23:11:41 +0100
+Message-ID: <f9a32b2d1012ab49572f18722122502342e052ea.1597442238.git.edvin.torok@citrix.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <cover.1597442238.git.edvin.torok@citrix.com>
+References: <cover.1597442238.git.edvin.torok@citrix.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: FTLPEX02CAS02.citrite.net (10.13.99.123) To
+ AMSPEX02CL02.citrite.net (10.69.22.126)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,16 +84,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-The pull request you sent on Fri, 14 Aug 2020 15:39:39 +0200:
+Signed-off-by: Edwin Török <edvin.torok@citrix.com>
+---
+ tools/ocaml/libs/xc/xenctrl.mli | 2 ++
+ 1 file changed, 2 insertions(+)
 
-> git://git.kernel.org/pub/scm/linux/kernel/git/xen/tip.git for-linus-5.9-rc1b-tag
-
-has been merged into torvalds/linux.git:
-https://git.kernel.org/torvalds/c/0520058d0578c2924b1571c16281f873cb4a3d2b
-
-Thank you!
-
+diff --git a/tools/ocaml/libs/xc/xenctrl.mli b/tools/ocaml/libs/xc/xenctrl.mli
+index 26ec7e59b1..f7f6ec570d 100644
+--- a/tools/ocaml/libs/xc/xenctrl.mli
++++ b/tools/ocaml/libs/xc/xenctrl.mli
+@@ -132,8 +132,10 @@ external interface_close : handle -> unit = "stub_xc_interface_close"
+  * interface_open and interface_close or with_intf although mixing both
+  * is possible *)
+ val with_intf : (handle -> 'a) -> 'a
++
+ (** [get_handle] returns the global handle used by [with_intf] *)
+ val get_handle: unit -> handle option
++
+ (** [close handle] closes the handle maintained by [with_intf]. This
+  * should only be closed before process exit. It must not be called from
+  * a function called directly or indirectly by with_intf as this
 -- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/prtracker.html
+2.25.1
+
 
