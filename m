@@ -2,69 +2,70 @@ Return-Path: <SRS0=TMXt=BY=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,
-	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0B424C433E1
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 16:55:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C982CC433E1
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:22:32 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CA392205CB
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 16:55:45 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 7D32820708
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:22:32 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="b0ouzRvO"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CA392205CB
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="TIfosQz4"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7D32820708
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k6cz8-0007yg-3y; Fri, 14 Aug 2020 16:55:18 +0000
+	id 1k6dPD-00024X-Ig; Fri, 14 Aug 2020 17:22:15 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gClF=BY=citrix.com=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1k6cz6-0007yb-SX
- for xen-devel@lists.xenproject.org; Fri, 14 Aug 2020 16:55:16 +0000
-X-Inumbo-ID: 6b07fecd-dba9-4a01-b5a0-36f4ea2c7962
-Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
+ id 1k6dPC-00024Q-JZ
+ for xen-devel@lists.xenproject.org; Fri, 14 Aug 2020 17:22:14 +0000
+X-Inumbo-ID: b8347382-924e-4d0d-9e5e-3016f5d321cf
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 6b07fecd-dba9-4a01-b5a0-36f4ea2c7962;
- Fri, 14 Aug 2020 16:55:15 +0000 (UTC)
+ id b8347382-924e-4d0d-9e5e-3016f5d321cf;
+ Fri, 14 Aug 2020 17:22:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1597424115;
- h=from:mime-version:content-transfer-encoding:message-id:
- date:to:subject:in-reply-to:references;
- bh=fPlJ9+aKoFusmKdB1ZVmmkGMFH2I0gczxz3s3mNbj+U=;
- b=b0ouzRvOOWhlIv3UojlNa8uPzI8vmAE6XXLtng5vg4Msz0MQvOx9+PGV
- cH8qV5pNdKCwpTqBAmmq74FY0cgmM0f/wtmOiCoRDlEOu4zhByWSgcALG
- ZXzhso7rbGxWs6RAN5177PHZoT6RgCwiPLqUrdxal7eQiVyfTBVEF9K5l 4=;
-Authentication-Results: esa3.hc3370-68.iphmx.com;
+ d=citrix.com; s=securemail; t=1597425733;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version;
+ bh=RjjORyA+rdseRm2tV6Z7JEe1+gg8kiuTDoKkbr3lFMQ=;
+ b=TIfosQz4s08fgocO6QaE7ES6nuU3DsyC5/8VgJp49lL1gz7dcJ+UkDqF
+ HeGDXznnC//J7UfSmYeSz9dMEWk6QysgZ3aW+RGL97Xuq9RBqUDDMJXbE
+ P0L1paw0mR5Pf+Jerp9zm8jgKxWTfbdFbc2l+IZs9FF236vtXVdtMuEiZ 8=;
+Authentication-Results: esa1.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: 4NG30KvVOXdApYEiq8xVOQ83F6dSfdOKqm8Ca2qImadeTUqbUpIh+Rg0ClPlmLUdm9+h5Ud9ty
- qh8CRruKL+y5AIPsIeel59pWKyVC5C9Uy2iv+RGWd7wb6jPEWZkT39s4ixq0/aPbPWbRfi2xJm
- rjXO7gDNFwEWm1CB5kanFR+f5mAVi41YiQlkZNJdBEInjT41NHUIEO7rfLb0z7477sI6HmLjaF
- tALKeDx6nDUqC1Es+0MnymDB+SRN0/NS7a9QzXobYZjwTUc8WuClWCmMJ9GyI2gmMIRwokV0wE
- oks=
+IronPort-SDR: ONtIFVyXJwkCpDNFv43eVx5sFrmhe57dsGwVmo3cuMWhLTNHKS8SlVvhyewcYHDHV4iZaBObwY
+ vOWuIi5UQbmECw0soiEYJ1dZYFlHVVhGNwYG7BhHuVXjWEZHZ/k9GrTLpK17hTTFkQnsBrmsHi
+ HGwyGw6bxn5M/EXEhdGUyO2QiydwC8e+B/T73qLw0KJe8EHJrrZ9UUtfrPJf/WsaSBFX8nlO77
+ ptbTv70h5jmjOutwcY53VFfDGfULOTnysQwmeZ3aS0l029RIKr3kZfpLCBCfPw8TmaFPoWogLK
+ iEM=
 X-SBRS: 2.7
-X-MesageID: 24543199
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 24900362
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,313,1592884800"; d="scan'208";a="24543199"
-From: Ian Jackson <ian.jackson@citrix.com>
+X-IronPort-AV: E=Sophos;i="5.76,313,1592884800"; d="scan'208";a="24900362"
+From: Ian Jackson <ian.jackson@eu.citrix.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Ian Jackson <ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 01/60] history reporting (nfc): Do not key cache on
+ hostname any more
+Date: Fri, 14 Aug 2020 18:21:06 +0100
+Message-ID: <20200814172205.9624-2-ian.jackson@eu.citrix.com>
+X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20200814172205.9624-1-ian.jackson@eu.citrix.com>
+References: <20200814172205.9624-1-ian.jackson@eu.citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-Message-ID: <24374.49647.650481.677464@mariner.uk.xensource.com>
-Date: Fri, 14 Aug 2020 17:55:11 +0100
-To: "committers@xenproject.org" <committers@xenproject.org>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Subject: Re: Planned osstest outage, around 17th August
-In-Reply-To: <24371.64746.743317.606471@mariner.uk.xensource.com>
-References: <24371.64746.743317.606471@mariner.uk.xensource.com>
-X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
+Content-Type: text/plain
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -78,21 +79,76 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Ian Jackson writes ("Planned osstest outage, around 17th August"):
-> osstest's infrastructure hosts need upgrading to Debian "buster" (aka
-> Debian "stable").  We are planning to do this on Monday the 17th of
-> August.
-> 
-> This will involve telling osstest to start draining its queues some
-> time around the 15th of August.  If all goes well, it will be back in
-> operation late on the 17th.  But it is possible that difficulties will
-> arise, in which case it might be out of operation, or operating in a
-> degraded way, for perhaps the rest of that week.
-> 
-> Please let me know if you think this is a bad time.
+Now we process only one host at a time, so we don't need to
+distinguish.
 
-I have dropped stop files which means that osstest will not pick up
-new work until service is (hopefully!) restored on Monday.
+Replace all references to $tcache with %cache.
 
-Ian.
+Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
+---
+ sg-report-host-history | 13 +++++--------
+ 1 file changed, 5 insertions(+), 8 deletions(-)
+
+diff --git a/sg-report-host-history b/sg-report-host-history
+index 380f8fac..50cc5b58 100755
+--- a/sg-report-host-history
++++ b/sg-report-host-history
+@@ -76,7 +76,7 @@ our $restrictflight_cond = restrictflight_cond();
+ our $flightcond;
+ our $minflight;
+ 
+-our %hcaches;
++our %cache;
+ 
+ sub read_existing_logs ($) {
+     my ($hostname) = @_;
+@@ -86,8 +86,7 @@ sub read_existing_logs ($) {
+         return if $!==ENOENT;
+         die "failed to open $html_file: $!";
+     }
+-    my $tcache = { };
+-    $hcaches{$hostname} = $tcache;
++    %cache = ();
+     for (;;) {
+         $_ = <H> // last;
+         next unless m{^\<\!-- osstest-report-reuseable (.*)--\>$};
+@@ -106,7 +105,7 @@ sub read_existing_logs ($) {
+ #	    print DEBUG "GOTCACHE $hostname $k\n";
+ 	}
+ #	print DEBUG "GOTCACHE $hostname \@ $jr->{flight} $jr->{job} $jr->{status},$jr->{name}\n";
+-	$tcache->{$jr->{flight},$jr->{job},$jr->{status},$jr->{name}} = $jr;
++	$cache{$jr->{flight},$jr->{job},$jr->{status},$jr->{name}} = $jr;
+     }
+     close H;
+ }
+@@ -253,8 +252,6 @@ END
+     my $inrows = $hosts{$hostname};
+     print DEBUG "FOUND ", (scalar @$inrows), " ROWS for $hostname\n";
+ 
+-    my $tcache = $hcaches{$hostname};
+-
+     # Each entry in @$inrows is a $jr, which is a hash
+     # It has keys for the result columns in mainquery
+     # It also has keys '%<letter>' (yes, with a literal '%')
+@@ -267,7 +264,7 @@ END
+ 	#print DEBUG "JOB $jr->{flight}.$jr->{job} ";
+ 
+ 	my $cacherow =
+-	    $tcache->{$jr->{flight},$jr->{job},$jr->{status},$jr->{name}};
++	    $cache{$jr->{flight},$jr->{job},$jr->{status},$jr->{name}};
+ 	if ($cacherow) {
+ 	    $jr = $cacherow;
+ 	    $cachehits++;
+@@ -285,7 +282,7 @@ END
+     }
+ 
+     print DEBUG "CACHE $hostname $cachehits / ".(scalar @rows)
+-	." of ".(scalar %$tcache)."\n";
++	." of ".(scalar %cache)."\n";
+ 
+     my $write_cache_entry = sub {
+ 	my ($jr) = @_;
+-- 
+2.11.0
+
 
