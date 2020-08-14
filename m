@@ -7,59 +7,61 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A923AC433DF
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:26:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B2BD9C433ED
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:26:48 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7FA2020774
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:26:46 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 7D62720708
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:26:48 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="hKZIPPKq"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7FA2020774
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="g02raETM"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7D62720708
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k6dTJ-0003xY-Mc; Fri, 14 Aug 2020 17:26:29 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1k6dTQ-000463-1Q; Fri, 14 Aug 2020 17:26:36 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gClF=BY=citrix.com=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1k6dR3-00024Q-I8
- for xen-devel@lists.xenproject.org; Fri, 14 Aug 2020 17:24:09 +0000
-X-Inumbo-ID: 33120668-a05a-4e35-95d1-b92d3baf3302
+ id 1k6dSF-00024H-4s
+ for xen-devel@lists.xenproject.org; Fri, 14 Aug 2020 17:25:23 +0000
+X-Inumbo-ID: d27ef01e-6d63-4b80-af4d-bcf3d76fcf90
 Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 33120668-a05a-4e35-95d1-b92d3baf3302;
- Fri, 14 Aug 2020 17:22:36 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id d27ef01e-6d63-4b80-af4d-bcf3d76fcf90;
+ Fri, 14 Aug 2020 17:22:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1597425756;
+ d=citrix.com; s=securemail; t=1597425761;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version;
- bh=X6/feefs+EBmTwV9A8+QWNObBLw3cmrBQxuV3E+6g3c=;
- b=hKZIPPKqx3MovPReQ7KyXonMxOopr+CtQkOduARttGbEPNS2BTVZWMrX
- c+uhPqexWlwIsvEdyaI80+GscyQs73VHCDO1VmliGtF7OML1wMWMljMU2
- XoIdCiqjqNutHOAWn9lWGE5J/zKz4g/b5Z34EZxWQwi87kol71+ZwkTjB M=;
+ bh=KK2C5LTSWHXRXWbqc/OKGwTBW3Gmuf54SK1hkOQC7AY=;
+ b=g02raETMvwmVIvNu6KnE3XwfEM5ByaxhqKLkD8qB6XNXG5poitQVkhpv
+ rLDV6pwGXMEr+BpEBvP+oLtEFkTHQlTb8NDArqwmKZirilmxmxh9pL/4R
+ q8OTeHnlU3z7+c7g8G7/sMlrN6i5ByKoiBQQQqldBcvFmjaccx7HMsLuD A=;
 Authentication-Results: esa2.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: HM1x3iOPWrYXuGhFyidvWlgA3coSfl/c0Ncma2X8a35RmMbAO+wu9fnfzZw7dSnWhmIiacXrNB
- gWYoLo7OaK1NiOpWRZMprn/iznQXYjamKW9sW+5kqgKcz+JpXObUPFEGjy6lgqKjODOM7jUNjd
- Hs8s4KwerOGgNLdQrcTYuumVn9jhzQswHuN71q/XerLD4MeOnWXVg20TCQ0PhKBc6oHUNXiiGY
- rXe6us5Ud2dNrzIJxu+ysDBABxK98kFri41ssHiJu2pzHaJYGdebAPRNldSwUoF57NF9mHvYWO
- d+8=
+IronPort-SDR: yMkTEtTkwa6Z7Zl0aTNzX97qii72UIAqi31sn8bj30x1CXvyvZJyQnGo3ygB0kQm23ueBsl2Ao
+ X/HU9lATQLMrkbqxH2bQI1fGbKW8cZIujYo5+J7eFXbFXOU7YiF7cBpCtj7rjJJGdWE5gKJ1Yc
+ SlU47uDFYStfbpZKjx/EQIqbAiSOzlqPstrxQ5b9Nb4d6cK5VLu4rjr9/l7hftTAmHST1piljH
+ L9o/VlEtXUQFNWzNjl0VFXg2ayMTdEDO6vuTyfikLahoYg1R7mPmqpnWsd8jEBpRdaSffPiAk6
+ J3Y=
 X-SBRS: 2.7
-X-MesageID: 24576909
+X-MesageID: 24576924
 X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,313,1592884800"; d="scan'208";a="24576909"
+X-IronPort-AV: E=Sophos;i="5.76,313,1592884800"; d="scan'208";a="24576924"
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH 03/60] history reporting: Delete two debug prints
-Date: Fri, 14 Aug 2020 18:21:08 +0100
-Message-ID: <20200814172205.9624-4-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 52/60] sg-report-job-history: Cache the per-flight
+ revisions
+Date: Fri, 14 Aug 2020 18:21:57 +0100
+Message-ID: <20200814172205.9624-53-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20200814172205.9624-1-ian.jackson@eu.citrix.com>
 References: <20200814172205.9624-1-ian.jackson@eu.citrix.com>
@@ -78,28 +80,61 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-These are going to become invalid and I don't think it's important to
-save them.
+This involves changing %revisions to %$revisions in the code which
+uses the value.
+
+No logical change.
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- sg-report-host-history | 2 --
- 1 file changed, 2 deletions(-)
+ sg-report-job-history | 26 +++++++++++++++-----------
+ 1 file changed, 15 insertions(+), 11 deletions(-)
 
-diff --git a/sg-report-host-history b/sg-report-host-history
-index 50cc5b58..4c0022e8 100755
---- a/sg-report-host-history
-+++ b/sg-report-host-history
-@@ -102,9 +102,7 @@ sub read_existing_logs ($) {
- 	    my $k = $1;
- 	    s{\%([0-9a-f]{2})}{ chr hex $1 }ge;
- 	    $ch->{$k} = $_;
--#	    print DEBUG "GOTCACHE $hostname $k\n";
- 	}
--#	print DEBUG "GOTCACHE $hostname \@ $jr->{flight} $jr->{job} $jr->{status},$jr->{name}\n";
- 	$cache{$jr->{flight},$jr->{job},$jr->{status},$jr->{name}} = $jr;
-     }
-     close H;
+diff --git a/sg-report-job-history b/sg-report-job-history
+index 9f1216a6..39ebe024 100755
+--- a/sg-report-job-history
++++ b/sg-report-job-history
+@@ -172,25 +172,29 @@ END
+ 	    \%hosts;
+ 	});
+ 
+-        my %revisions;
+-        add_revisions(\%revisions, $f->{flight}, $f->{job}, '');
++	my $revisions = cacheable_fn($f, 'r', sub {
++            my %revisions;
++	    add_revisions(\%revisions, $f->{flight}, $f->{job}, '');
+         
+-        $buildsq->execute($f->{flight}, $f->{job});
+-        while (my $bld= $buildsq->fetchrow_hashref()) {
+-            my $bn= $bld->{name};
+-            $bn =~ s/buildjob$//;
+-            my ($oflight,$ojob) = flight_otherjob($f->{flight}, $bld->{val});
+-            add_revisions(\%revisions, $oflight, $ojob, " ($bn)");
+-        }
++	    $buildsq->execute($f->{flight}, $f->{job});
++	    while (my $bld= $buildsq->fetchrow_hashref()) {
++		my $bn= $bld->{name};
++		$bn =~ s/buildjob$//;
++		my ($oflight,$ojob) =
++		  flight_otherjob($f->{flight}, $bld->{val});
++		add_revisions(\%revisions, $oflight, $ojob, " ($bn)");
++	    }
++	    \%revisions;
++	});
+         my @rev_cols;
+-        foreach my $revk (sort keys %revisions) {
++        foreach my $revk (sort keys %$revisions) {
+             my $col= $rev_grid_col{$revk};
+             if (!defined $col) {
+                 $col= @rev_grid_cols;
+                 push @rev_grid_cols, $revk;
+                 $rev_grid_col{$revk}= $col;
+             }
+-            $rev_cols[$col]= $revisions{$revk};
++            $rev_cols[$col]= $$revisions{$revk};
+         }
+         $ri->{Revisions}= \@rev_cols;
+         $ri->{Flight}= $f;
 -- 
 2.11.0
 
