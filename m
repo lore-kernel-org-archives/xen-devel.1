@@ -7,61 +7,59 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2ACD0C433E3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 66F76C433E4
 	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:22:33 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DF15120708
-	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:22:32 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 3619C20708
+	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:22:33 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="copc8rFQ"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DF15120708
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="YrJY1nvk"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3619C20708
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k6dPH-00024z-Qx; Fri, 14 Aug 2020 17:22:19 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1k6dPI-000257-2g; Fri, 14 Aug 2020 17:22:20 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gClF=BY=citrix.com=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1k6dPF-00024H-UD
- for xen-devel@lists.xenproject.org; Fri, 14 Aug 2020 17:22:17 +0000
-X-Inumbo-ID: baab65aa-6d25-44f2-a8a2-8b0d04228735
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id baab65aa-6d25-44f2-a8a2-8b0d04228735;
- Fri, 14 Aug 2020 17:22:13 +0000 (UTC)
+ id 1k6dPH-00024Q-F1
+ for xen-devel@lists.xenproject.org; Fri, 14 Aug 2020 17:22:19 +0000
+X-Inumbo-ID: 2adde251-d036-4faf-ae7a-63afdc966da3
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 2adde251-d036-4faf-ae7a-63afdc966da3;
+ Fri, 14 Aug 2020 17:22:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1597425733;
+ d=citrix.com; s=securemail; t=1597425734;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version;
- bh=5gDfq120B1TdLL2gzZ7GTUxIKoMyYxGwxpZ/5dWdhfU=;
- b=copc8rFQvTBzg46YaIYc5RS35YjX7P+UgncQdf/BpOB7c15FY4W6hAEO
- /APdeYjvOybXipUHnwWCp+YbEKeMPf3W319vYTMGUIfqzflGyjb8ercWB
- SJw/AxBRzEZG2Hdy8TYbSb77QPeE1Qax9WW05vBI45tWhcnLnESJM7VmT c=;
-Authentication-Results: esa6.hc3370-68.iphmx.com;
+ bh=VWuuAPMerjfMQAsxmPr3Y+nXxd0ZATQLLz4PXLvUE9U=;
+ b=YrJY1nvko0fjO0IZERJQxmkp3VdMXWs54jZe9HKhqtJZHQF4d51Kk2Fm
+ Is6e+ezuT23abNQRP7o4MGoSLBJy2XuHYJ2gZWaNOtLAn3+BT38DhDIDi
+ 7DRUf9+/t5NzmNap2vTzgesNLmRxpTYkk0yuwpXzoZkO5SZUjWVqo5x5m k=;
+Authentication-Results: esa1.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: MlOk7mvYTrWJ2MacOCGhA+a7t/6PeGH6nlGF6cx8cqRH+L7gR+dr7pr46eJz7470Tv2TKggzk3
- gvozQQvCa84qDPDO/8OTHtjfhTZoE7xuOpufy9dCaTgqPlk5Ekaqxd5tRTCwMEKKmGihOxMmB3
- 9g98GFCMh0OegL4qSUxyc7+m37iG0p4R0oofrhQpSIoC1fUSL5Q3uxoNt+JWaVSGfZuyguJQYs
- KWuxuhS6vUEfxfbghiu+XLxIOQv5nEfZdu8/Le8l71uc0owvcCCCOSs026WnoIDTSS7pmqCEgY
- We8=
+IronPort-SDR: DLrvCt/pkEFSxhXfX8rOcRGnPb5aQSF+z8NJjaw7a8W9P5aUSkw3ZbIQc6wRQyASHExuQ4RkZ8
+ IvkiOLxVoVRbMv0BCpAdpelnF2xgYIpLHr8ZkyP9xEHamLeqYwTzbrwz7tcbMvQLzfD/szbsid
+ A1TkjlJADSwh9MPqSgA/pIDsF7+sm2XmOELnUO3SaDfaoNZ+PFBs9vfHVU03B8T8bURWbBiaAs
+ 0cln33AU7NfAvPjcQk+g+YkrEbIM0EooWc3W948bzeSM8faPnyeITWwBPBBiQUsAPk/3+eUwax
+ cYw=
 X-SBRS: 2.7
-X-MesageID: 24879726
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 24900364
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,313,1592884800"; d="scan'208";a="24879726"
+X-IronPort-AV: E=Sophos;i="5.76,313,1592884800"; d="scan'208";a="24900364"
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH 04/60] history reporting (nfc): Refactor to generalise,
- cache_read_existing
-Date: Fri, 14 Aug 2020 18:21:09 +0100
-Message-ID: <20200814172205.9624-5-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 09/60] history reporting (nfc): Provide cacheable_fn
+Date: Fri, 14 Aug 2020 18:21:14 +0100
+Message-ID: <20200814172205.9624-10-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20200814172205.9624-1-ian.jackson@eu.citrix.com>
 References: <20200814172205.9624-1-ian.jackson@eu.citrix.com>
@@ -80,68 +78,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-* Introduce @cache_row_key_cols and cache_row_key
-* Handle $html_file pathname construction and $read_existing
-  at the call site.
-* Rename cache_read_existing.
+Prep work.
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- sg-report-host-history | 19 +++++++++++--------
- 1 file changed, 11 insertions(+), 8 deletions(-)
+ sg-report-host-history | 15 +++++++++++----
+ 1 file changed, 11 insertions(+), 4 deletions(-)
 
 diff --git a/sg-report-host-history b/sg-report-host-history
-index 4c0022e8..83344a40 100755
+index f37dd4a2..90369ce4 100755
 --- a/sg-report-host-history
 +++ b/sg-report-host-history
-@@ -77,11 +77,15 @@ our $flightcond;
- our $minflight;
+@@ -181,20 +181,27 @@ END
+ our $jqcachemisses = 0;
+ our $jqtotal = 0;
  
- our %cache;
-+our @cache_row_key_cols = qw(flight job status name);
+-sub cacheable_query ($$$) {
+-    my ($q, $jr, $cachekey) = @_;
++sub cacheable_fn ($$$) {
++    my ($jr, $cachekey, $fn) = @_;
+     $jqtotal++;
+     $cachekey = '%'.$cachekey;
+     my $cached = $jr->{$cachekey};
+     if (!$cached) {
+ 	$jqcachemisses++;
+-	$q->execute($jr->{flight}, $jr->{job});
+-	$cached = $q->fetchrow_hashref();
++	$cached = $fn->();
+ 	$jr->{$cachekey} = $cached;
+     }
+     return $cached;
+ }
  
--sub read_existing_logs ($) {
--    my ($hostname) = @_;
--    return unless $read_existing;
--    my $html_file = "$htmlout/$hostname.html";
-+sub cache_row_key ($) {
-+    my ($jr) = @_;
-+    return join $; , map { $jr->{$_} } @cache_row_key_cols;
++sub cacheable_query ($$$) {
++    my ($q, $jr, $cachekey) = @_;
++    cacheable_fn($jr, $cachekey, sub {
++	$q->execute($jr->{flight}, $jr->{job});
++	return $q->fetchrow_hashref();
++    });
 +}
 +
-+sub cache_read_existing ($) {
-+    my ($html_file) = @_;
-     if (!open H, $html_file) {
-         return if $!==ENOENT;
-         die "failed to open $html_file: $!";
-@@ -103,7 +107,7 @@ sub read_existing_logs ($) {
- 	    s{\%([0-9a-f]{2})}{ chr hex $1 }ge;
- 	    $ch->{$k} = $_;
- 	}
--	$cache{$jr->{flight},$jr->{job},$jr->{status},$jr->{name}} = $jr;
-+	$cache{cache_row_key($jr)} = $jr;
-     }
-     close H;
- }
-@@ -261,8 +265,7 @@ END
-     foreach my $jr (@$inrows) {
- 	#print DEBUG "JOB $jr->{flight}.$jr->{job} ";
+ our %hosts;
  
--	my $cacherow =
--	    $cache{$jr->{flight},$jr->{job},$jr->{status},$jr->{name}};
-+	my $cacherow = $cache{cache_row_key($jr)};
- 	if ($cacherow) {
- 	    $jr = $cacherow;
- 	    $cachehits++;
-@@ -492,7 +495,7 @@ foreach my $host (sort keys %hosts) {
-     my $pid = fork // die $!;
-     if (!$pid) {
- 	opendb_tests();
--	read_existing_logs($host);
-+	cache_read_existing("$htmlout/$host.html") if $read_existing;
- 	db_retry($dbh_tests, [], sub {
-             mainquery($host);
- 	    reporthost $host;
+ sub mainquery ($) {
 -- 
 2.11.0
 
