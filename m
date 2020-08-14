@@ -7,60 +7,60 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6F61AC433DF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9DAACC433E1
 	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:26:44 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3FA6620708
+	by mail.kernel.org (Postfix) with ESMTPS id 7299520774
 	for <xen-devel@archiver.kernel.org>; Fri, 14 Aug 2020 17:26:44 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="cYvks3HB"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3FA6620708
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="cSx3K5O2"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7299520774
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k6dTH-0003wQ-Q7; Fri, 14 Aug 2020 17:26:27 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1k6dTJ-0003xH-Cl; Fri, 14 Aug 2020 17:26:29 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gClF=BY=citrix.com=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1k6dRN-00024Q-Il
- for xen-devel@lists.xenproject.org; Fri, 14 Aug 2020 17:24:29 +0000
-X-Inumbo-ID: 6c66d8ac-e734-4832-9a77-65879c1fb801
-Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 6c66d8ac-e734-4832-9a77-65879c1fb801;
- Fri, 14 Aug 2020 17:22:38 +0000 (UTC)
+ id 1k6dQn-00024H-1P
+ for xen-devel@lists.xenproject.org; Fri, 14 Aug 2020 17:23:53 +0000
+X-Inumbo-ID: 896d20ac-b3ff-4c88-86d6-f9658b05afd8
+Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 896d20ac-b3ff-4c88-86d6-f9658b05afd8;
+ Fri, 14 Aug 2020 17:22:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1597425758;
+ d=citrix.com; s=securemail; t=1597425740;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version;
- bh=HqW2km6WXxTiCTWVnMIybLjWRSja3jGobFMQpHWc/Ug=;
- b=cYvks3HB7XWfE82iVaNegHKbbGOrmex/WCxTZswLoMt/uWPPemijWonh
- bLl8zN/XQPGnLI/7XPaWzJJAIQcJeO+M+vrtmRKFPN01S45JYkkRBTse7
- VNpVydyY0IOevkaAExN8ZjQGDab1AL4chyG1w86GEjXrqW3lm+9BfBftb A=;
-Authentication-Results: esa2.hc3370-68.iphmx.com;
+ bh=SF6JrZam2+wPokpUiTs03Zat4tqLyBtCgJsqjxxZn6A=;
+ b=cSx3K5O2yGIqk+n5pldrQ6ksDcSGif3/S9Iu0gydXzeECVyHh6OqvT9S
+ b3f6Rxve1/82v6acfw7Olk0hiRuCKPo55TXLSJJFQvq97ccpJdyxo16L3
+ PdA0WGx90yoqVQYq0VPU5AGjUelnYFhTI52aoJ6L1qAys8Ys9x14xFvN3 c=;
+Authentication-Results: esa5.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: 0LIije89+jZss5FbdKtuoJ2XR1nDpq+FwGeNy498e/CIP+E26WemoojBHOh/B1nQtePSLfNg4O
- QBSzVdjVmBJjO4oh9lYATF/DaOZyK3JUgshcGp4EAGPl+x+92A6LtYQ2Jlk4bKkN9OV78JyVqm
- hbqU6r6fk6E+f8f86tekDb1FySH9b3vFmkp+05EpJMPor0RGhfl0dOHyvtL4Oxvkwz3XIgtgc+
- A/BPLDAg7/H2RBYnMhficbywNy+PNo91GdoRI7UNiTII1tfIppWQGuT/lBZYMBDGqsQxNzVHqQ
- ASE=
+IronPort-SDR: yQR9GLMmyubOyPDCTK8gsCAWRoXoHZc8EdYCy67UCCHFoPuav9VuDh53vdLYGzafy4ico5lbEj
+ k7NCKrjP6mEGV8dmisz00J3VZAfFOFae5Cb/MvQXdyJZZCqFai8uQHsXwCqVWo6YWSM7iaoa4v
+ uifl8V955WKHTf9MJMiYGFBJo+MO8Y8yQ61qzmhgWNuoMnsxPDAFJsjqUWJgWFzsEjPDyB10GQ
+ /W3QmIzLuzYW57rMag2nDahBaR//oVTTB5iOUw2NLT/xn05XaRO3Icf35S7KhkO1hfkHopzktp
+ BzQ=
 X-SBRS: 2.7
-X-MesageID: 24576912
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-MesageID: 24725188
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,313,1592884800"; d="scan'208";a="24576912"
+X-IronPort-AV: E=Sophos;i="5.76,313,1592884800"; d="scan'208";a="24725188"
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH 14/60] history reporting (nfc): Use cacheable_fn for
- power methods
-Date: Fri, 14 Aug 2020 18:21:19 +0100
-Message-ID: <20200814172205.9624-15-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 36/60] sg-report-job-history: Always write HTML output
+Date: Fri, 14 Aug 2020 18:21:41 +0100
+Message-ID: <20200814172205.9624-37-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20200814172205.9624-1-ian.jackson@eu.citrix.com>
 References: <20200814172205.9624-1-ian.jackson@eu.citrix.com>
@@ -79,68 +79,30 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Avoids open-coding knowledge of the $jr convention at this use site.
-%powers becomes %$powers, so it's a bit noisy.
+Previously, unlike sg-report-host-history, if you didn't specify
+--html-dir, it would would do a lot work to no effect.
+
+This is not useful and nothing calls it this way.  So abolish this
+notion.
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- sg-report-host-history | 20 ++++++++------------
- 1 file changed, 8 insertions(+), 12 deletions(-)
+ sg-report-job-history | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/sg-report-host-history b/sg-report-host-history
-index 43ddd2af..9510757f 100755
---- a/sg-report-host-history
-+++ b/sg-report-host-history
-@@ -387,12 +387,8 @@ END
- 	my $ri = report_run_getinfo({ %$jr, %$ir });
- 	print H "<td $ri->{ColourAttr}>$ri->{Content}</td>\n";
+diff --git a/sg-report-job-history b/sg-report-job-history
+index 3f10a74c..7197a5f6 100755
+--- a/sg-report-job-history
++++ b/sg-report-job-history
+@@ -30,7 +30,7 @@ use Osstest::HistoryReport;
  
--	my %powers;
--	if ($jr->{'%p'}) {
--	    %powers = %{ $jr->{'%p'} };
--	    $runvarq_hits++;
--	} else {
--	    $runvarq_misses++;
-+	my $powers = cacheable_fn($jr, 'b', sub {
-+            my %powers;
- 	    $jrunvarq->execute($jr->{flight}, $jr->{job},
- 			       db_quote_like_pattern($ident));
- 	    my %runvars;
-@@ -404,8 +400,8 @@ END
- 		next unless $r =~ m{^\Q${ident}\E_power_};
- 		$powers{$'} = $runvars{$r};
- 	    }
--	    $jr->{'%p'} = { %powers };
--	}
-+	    \%powers;
-+	});
- 	my $skipped = 0;
-         my $any_power = 0;
-         my $pr_power_colour = sub {
-@@ -421,7 +417,7 @@ END
- 	    for (; $skipped; $skipped--) {
- 		$pr_power_colour->($grey_mid, " - ");
- 	    }
--	    my $how = $powers{$wh};
-+	    my $how = $powers->{$wh};
- 	    my $colour =
- 		$how =~ /PDU/      ? $yellow :
- 		$how =~ /Combined/ ? $yellow :
-@@ -430,11 +426,11 @@ END
-             $pr_power_colour->($colour, " $how ");
- 	};
- 	foreach my $wh (qw(install recover)) {
--	    $skipped++, next unless exists $powers{$wh};
-+	    $skipped++, next unless exists $powers->{$wh};
- 	    $pr_power->($wh);
--	    delete $powers{$wh};
-+	    delete $powers->{$wh};
- 	}
--	foreach my $wh (sort keys %powers) {
-+	foreach my $wh (sort keys %$powers) {
- 	    $pr_power->($wh);
- 	}
-         print H "<td>" if !$any_power;
+ our (@blessings,@branches);
+ our $limit= 100;
+-our $htmlout;
++our $htmlout = '.';
+ our $flight;
+ our $maxjobs=10;
+ our $job;
 -- 
 2.11.0
 
