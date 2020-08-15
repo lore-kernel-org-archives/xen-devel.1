@@ -7,62 +7,62 @@ X-Spam-Status: No, score=-11.5 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 13F62C433E1
-	for <xen-devel@archiver.kernel.org>; Sat, 15 Aug 2020 21:40:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 102F8C433DF
+	for <xen-devel@archiver.kernel.org>; Sat, 15 Aug 2020 21:43:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D799623B24
-	for <xen-devel@archiver.kernel.org>; Sat, 15 Aug 2020 21:40:31 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D799623B24
+	by mail.kernel.org (Postfix) with ESMTPS id DF4B523B24
+	for <xen-devel@archiver.kernel.org>; Sat, 15 Aug 2020 21:43:39 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DF4B523B24
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=ens-lyon.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k73uM-0001GB-7y; Sat, 15 Aug 2020 21:40:10 +0000
+	id 1k73xa-0001QT-R1; Sat, 15 Aug 2020 21:43:30 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=VULP=BZ=ens-lyon.org=samuel.thibault@srs-us1.protection.inumbo.net>)
- id 1k73uK-0001G6-D4
- for xen-devel@lists.xenproject.org; Sat, 15 Aug 2020 21:40:08 +0000
-X-Inumbo-ID: a60975e0-0d4f-4aa1-af7b-a198fd4450b2
+ id 1k73xZ-0001Ps-Ra
+ for xen-devel@lists.xenproject.org; Sat, 15 Aug 2020 21:43:29 +0000
+X-Inumbo-ID: dd007171-d210-4b69-98ea-e0c516208e1c
 Received: from hera.aquilenet.fr (unknown [185.233.100.1])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id a60975e0-0d4f-4aa1-af7b-a198fd4450b2;
- Sat, 15 Aug 2020 21:40:05 +0000 (UTC)
+ id dd007171-d210-4b69-98ea-e0c516208e1c;
+ Sat, 15 Aug 2020 21:43:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hera.aquilenet.fr (Postfix) with ESMTP id 6278B116FA;
- Sat, 15 Aug 2020 23:40:04 +0200 (CEST)
+ by hera.aquilenet.fr (Postfix) with ESMTP id 14AE511457;
+ Sat, 15 Aug 2020 23:43:23 +0200 (CEST)
 X-Virus-Scanned: Debian amavisd-new at aquilenet.fr
 Received: from hera.aquilenet.fr ([127.0.0.1])
  by localhost (hera.aquilenet.fr [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id X_2rCA7E-Re5; Sat, 15 Aug 2020 23:40:03 +0200 (CEST)
+ with ESMTP id 0t9WTyfwBkGy; Sat, 15 Aug 2020 23:43:22 +0200 (CEST)
 Received: from function.home
  (2a01cb008800c5009eb6d0fffe88c3c7.ipv6.abo.wanadoo.fr
  [IPv6:2a01:cb00:8800:c500:9eb6:d0ff:fe88:c3c7])
- by hera.aquilenet.fr (Postfix) with ESMTPSA id 5EB592E70;
- Sat, 15 Aug 2020 23:40:03 +0200 (CEST)
+ by hera.aquilenet.fr (Postfix) with ESMTPSA id 41BFB2E70;
+ Sat, 15 Aug 2020 23:43:22 +0200 (CEST)
 Received: from samy by function.home with local (Exim 4.94)
  (envelope-from <samuel.thibault@ens-lyon.org>)
- id 1k73uE-001iIz-9u; Sat, 15 Aug 2020 23:40:02 +0200
-Date: Sat, 15 Aug 2020 23:40:02 +0200
+ id 1k73xR-001iMT-Gi; Sat, 15 Aug 2020 23:43:21 +0200
+Date: Sat, 15 Aug 2020 23:43:21 +0200
 From: Samuel Thibault <samuel.thibault@ens-lyon.org>
 To: Juergen Gross <jgross@suse.com>
 Cc: minios-devel@lists.xenproject.org, xen-devel@lists.xenproject.org,
  wl@xen.org
-Subject: Re: [PATCH] mini-os: correct memory access rights for pvh mode
-Message-ID: <20200815214002.vow2zqlqhtxw6jmb@function>
+Subject: Re: [PATCH] mini-os: fix do_map_frames() for pvh
+Message-ID: <20200815214321.qp46x46ucqlh6mp6@function>
 Mail-Followup-To: Samuel Thibault <samuel.thibault@ens-lyon.org>,
  Juergen Gross <jgross@suse.com>, minios-devel@lists.xenproject.org,
  xen-devel@lists.xenproject.org, wl@xen.org
-References: <20200815111557.29564-1-jgross@suse.com>
+References: <20200815111257.29302-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20200815111557.29564-1-jgross@suse.com>
+In-Reply-To: <20200815111257.29302-1-jgross@suse.com>
 Organization: I am not organized
 User-Agent: NeoMutt/20170609 (1.8.3)
 X-BeenThere: xen-devel@lists.xenproject.org
@@ -78,87 +78,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Juergen Gross, le sam. 15 août 2020 13:15:57 +0200, a ecrit:
-> When running as a PVH guest the memory access rights are not set
-> correctly: _PAGE_USER should not be set and CR0.WP should be set.
-> Especially CR0.WP is important in order to let the allocate on
-> demand feature work, as it requires a page fault when writing to a
-> read-only page.
+Juergen Gross, le sam. 15 août 2020 13:12:57 +0200, a ecrit:
+> In case ov PVH dom_map_frames() is missing to increment the virtual
+> address. This leads to writing only the first page table entry multiple
+> times.
 > 
 > Signed-off-by: Juergen Gross <jgross@suse.com>
 
 Reviewed-by: Samuel Thibault <samuel.thibault@ens-lyon.org>
 
 > ---
->  arch/x86/x86_hvm.S    |  2 +-
->  include/x86/arch_mm.h | 18 ++++++++++++------
->  include/x86/os.h      |  1 +
->  3 files changed, 14 insertions(+), 7 deletions(-)
+>  arch/x86/mm.c | 1 +
+>  1 file changed, 1 insertion(+)
 > 
-> diff --git a/arch/x86/x86_hvm.S b/arch/x86/x86_hvm.S
-> index 6e8ad98..42a5f02 100644
-> --- a/arch/x86/x86_hvm.S
-> +++ b/arch/x86/x86_hvm.S
-> @@ -20,7 +20,7 @@ _start:
->  #endif /* __x86_64__ */
+> diff --git a/arch/x86/mm.c b/arch/x86/mm.c
+> index ea58444..8ba14a5 100644
+> --- a/arch/x86/mm.c
+> +++ b/arch/x86/mm.c
+> @@ -695,6 +695,7 @@ int do_map_frames(unsigned long va,
+>          pgt[l1_table_offset(va)] = (pgentry_t)
+>              (((mfns[done * stride] + done * incr) << PAGE_SHIFT) | prot);
+>          done++;
+> +        va += PAGE_SIZE;
+>  #endif
+>      }
 >  
->          mov %cr0, %eax
-> -        or $X86_CR0_PG, %eax
-> +        or $(X86_CR0_PG | X86_CR0_WP), %eax
->          mov %eax, %cr0
->  
->          lgdt gdt_ptr
-> diff --git a/include/x86/arch_mm.h b/include/x86/arch_mm.h
-> index cbbeb21..ffbec5a 100644
-> --- a/include/x86/arch_mm.h
-> +++ b/include/x86/arch_mm.h
-> @@ -171,17 +171,23 @@ typedef unsigned long pgentry_t;
->  #define _PAGE_PSE      CONST(0x080)
->  #define _PAGE_GLOBAL   CONST(0x100)
->  
-> +#ifdef CONFIG_PARAVIRT
-> +#define PAGE_USER _PAGE_USER
-> +#else
-> +#define PAGE_USER CONST(0)
-> +#endif
-> +
->  #if defined(__i386__)
->  #define L1_PROT (_PAGE_PRESENT|_PAGE_RW|_PAGE_ACCESSED)
->  #define L1_PROT_RO (_PAGE_PRESENT|_PAGE_ACCESSED)
-> -#define L2_PROT (_PAGE_PRESENT|_PAGE_RW|_PAGE_ACCESSED|_PAGE_DIRTY |_PAGE_USER)
-> +#define L2_PROT (_PAGE_PRESENT|_PAGE_RW|_PAGE_ACCESSED|_PAGE_DIRTY |PAGE_USER)
->  #define L3_PROT (_PAGE_PRESENT)
->  #elif defined(__x86_64__)
-> -#define L1_PROT (_PAGE_PRESENT|_PAGE_RW|_PAGE_ACCESSED|_PAGE_USER)
-> -#define L1_PROT_RO (_PAGE_PRESENT|_PAGE_ACCESSED|_PAGE_USER)
-> -#define L2_PROT (_PAGE_PRESENT|_PAGE_RW|_PAGE_ACCESSED|_PAGE_DIRTY|_PAGE_USER)
-> -#define L3_PROT (_PAGE_PRESENT|_PAGE_RW|_PAGE_ACCESSED|_PAGE_DIRTY|_PAGE_USER)
-> -#define L4_PROT (_PAGE_PRESENT|_PAGE_RW|_PAGE_ACCESSED|_PAGE_DIRTY|_PAGE_USER)
-> +#define L1_PROT (_PAGE_PRESENT|_PAGE_RW|_PAGE_ACCESSED|PAGE_USER)
-> +#define L1_PROT_RO (_PAGE_PRESENT|_PAGE_ACCESSED|PAGE_USER)
-> +#define L2_PROT (_PAGE_PRESENT|_PAGE_RW|_PAGE_ACCESSED|_PAGE_DIRTY|PAGE_USER)
-> +#define L3_PROT (_PAGE_PRESENT|_PAGE_RW|_PAGE_ACCESSED|_PAGE_DIRTY|PAGE_USER)
-> +#define L4_PROT (_PAGE_PRESENT|_PAGE_RW|_PAGE_ACCESSED|_PAGE_DIRTY|PAGE_USER)
->  #endif /* __i386__ || __x86_64__ */
->  
->  /* flags for ioremap */
-> diff --git a/include/x86/os.h b/include/x86/os.h
-> index a73b63e..46a824d 100644
-> --- a/include/x86/os.h
-> +++ b/include/x86/os.h
-> @@ -27,6 +27,7 @@
->  #define MSR_EFER          0xc0000080
->  #define _EFER_LME         8             /* Long mode enable */
->  
-> +#define X86_CR0_WP        0x00010000    /* Write protect */
->  #define X86_CR0_PG        0x80000000    /* Paging */
->  #define X86_CR4_PAE       0x00000020    /* enable physical address extensions */
->  #define X86_CR4_OSFXSR    0x00000200    /* enable fast FPU save and restore */
 > -- 
 > 2.26.2
 > 
 
 -- 
 Samuel
-<y> la vraie vie, c'est quand le prompt passe de $ à #
+j'etais en train de nettoyer ma souris et le coup est parti...
+ -+- s sur #ens-mim - et en plus c vrai... -+-
 
