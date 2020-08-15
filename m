@@ -7,43 +7,44 @@ X-Spam-Status: No, score=-13.0 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C3C4C433E3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8BE31C433E4
 	for <xen-devel@archiver.kernel.org>; Sat, 15 Aug 2020 13:04:21 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 19E4723121
+	by mail.kernel.org (Postfix) with ESMTPS id 6959C23121
 	for <xen-devel@archiver.kernel.org>; Sat, 15 Aug 2020 13:04:21 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 19E4723121
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6959C23121
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k6vqu-0006Sr-3N; Sat, 15 Aug 2020 13:04:04 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1k6vqp-0006Rc-3e; Sat, 15 Aug 2020 13:03:59 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=ceF6=BZ=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1k6vqt-0006R1-5s
- for xen-devel@lists.xenproject.org; Sat, 15 Aug 2020 13:04:03 +0000
-X-Inumbo-ID: 1045f604-88e3-414d-b10f-d82fccd01c9d
+ id 1k6vqn-0006Qw-Ln
+ for xen-devel@lists.xenproject.org; Sat, 15 Aug 2020 13:03:57 +0000
+X-Inumbo-ID: b91349a9-bf38-429e-bd2a-927eb6923aca
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 1045f604-88e3-414d-b10f-d82fccd01c9d;
- Sat, 15 Aug 2020 13:03:53 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id b91349a9-bf38-429e-bd2a-927eb6923aca;
+ Sat, 15 Aug 2020 13:03:51 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 6362CB57B;
+ by mx2.suse.de (Postfix) with ESMTP id 1761BB57E;
  Sat, 15 Aug 2020 13:04:14 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>, Ian Jackson <ian.jackson@eu.citrix.com>,
- Wei Liu <wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH I v2 5/6] tools: define ROUNDUP() in
- tools/include/xen-tools/libs.h
-Date: Sat, 15 Aug 2020 15:03:40 +0200
-Message-Id: <20200815130341.27147-6-jgross@suse.com>
+Cc: Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Wei Liu <wl@xen.org>
+Subject: [PATCH I v2 3/6] tools: add a copy of library headers in tools/include
+Date: Sat, 15 Aug 2020 15:03:38 +0200
+Message-Id: <20200815130341.27147-4-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200815130341.27147-1-jgross@suse.com>
 References: <20200815130341.27147-1-jgross@suse.com>
@@ -62,150 +63,128 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Today there are multiple copies of the ROUNDUP() macro in various
-sources and headers. Define it once in tools/include/xen-tools/libs.h.
+The headers.chk target in tools/Rules.mk tries to compile all headers
+stand alone for testing them not to include any internal header.
 
-Using xen-tools/libs.h enables removing copies of MIN() and MAX(), too.
+Unfortunately the headers tested against are not complete, as any
+header for a Xen library is not included in the include path of the
+test compile run, resulting in a failure in case any of the tested
+headers in including an official Xen library header.
+
+Fix that by copying the official headers located in
+tools/libs/*/include to tools/include.
+
+In order to support libraries with header name other than xen<lib>.h
+or with multiple headers add a LIBHEADER make variable a lib specific
+Makefile can set in that case.
+
+Move the headers.chk target from Rules.mk to libs.mk as it is used
+for libraries in tools/libs only.
+
+Add NO_HEADERS_CHK variable to skip checking headers as this will be
+needed e.g. for libxenctrl.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- tools/console/daemon/io.c        | 6 +-----
- tools/include/xen-tools/libs.h   | 4 ++++
- tools/libs/call/buffer.c         | 3 +--
- tools/libs/foreignmemory/linux.c | 3 +--
- tools/libs/gnttab/private.h      | 3 ---
- tools/libxc/xg_private.h         | 1 -
- tools/libxl/libxl_internal.h     | 3 ---
- tools/xenstore/xenstored_core.c  | 2 --
- 8 files changed, 7 insertions(+), 18 deletions(-)
+ .gitignore         |  1 +
+ tools/Rules.mk     |  8 --------
+ tools/libs/libs.mk | 26 +++++++++++++++++++++++---
+ 3 files changed, 24 insertions(+), 11 deletions(-)
 
-diff --git a/tools/console/daemon/io.c b/tools/console/daemon/io.c
-index a43c57edad..4af27ffc5d 100644
---- a/tools/console/daemon/io.c
-+++ b/tools/console/daemon/io.c
-@@ -49,9 +49,7 @@
- #include <sys/ioctl.h>
- #include <libutil.h>
- #endif
+diff --git a/.gitignore b/.gitignore
+index 36ce2ea104..5ea48af818 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -188,6 +188,7 @@ tools/hotplug/Linux/xendomains
+ tools/hotplug/NetBSD/rc.d/xencommons
+ tools/hotplug/NetBSD/rc.d/xendriverdomain
+ tools/include/acpi
++tools/include/*.h
+ tools/include/xen/*
+ tools/include/xen-xsm/*
+ tools/include/xen-foreign/*.(c|h|size)
+diff --git a/tools/Rules.mk b/tools/Rules.mk
+index b42e50ebf6..5d699cfd39 100644
+--- a/tools/Rules.mk
++++ b/tools/Rules.mk
+@@ -225,14 +225,6 @@ INSTALL_PYTHON_PROG = \
+ %.opic: %.S
+ 	$(CC) $(CPPFLAGS) -DPIC $(CFLAGS) $(CFLAGS.opic) -fPIC -c -o $@ $< $(APPEND_CFLAGS)
+ 
+-headers.chk:
+-	for i in $(filter %.h,$^); do \
+-	    $(CC) -x c -ansi -Wall -Werror $(CFLAGS_xeninclude) \
+-	          -S -o /dev/null $$i || exit 1; \
+-	    echo $$i; \
+-	done >$@.new
+-	mv $@.new $@
 -
--#define MAX(a, b) (((a) > (b)) ? (a) : (b))
--#define MIN(a, b) (((a) < (b)) ? (a) : (b))
-+#include <xen-tools/libs.h>
+ subdirs-all subdirs-clean subdirs-install subdirs-distclean subdirs-uninstall: .phony
+ 	@set -e; for subdir in $(SUBDIRS) $(SUBDIRS-y); do \
+ 		$(MAKE) subdir-$(patsubst subdirs-%,%,$@)-$$subdir; \
+diff --git a/tools/libs/libs.mk b/tools/libs/libs.mk
+index 8027ae7400..8045c00e9a 100644
+--- a/tools/libs/libs.mk
++++ b/tools/libs/libs.mk
+@@ -34,6 +34,10 @@ endif
  
- /* Each 10 bits takes ~ 3 digits, plus one, plus one for nul terminator. */
- #define MAX_STRLEN(x) ((sizeof(x) * CHAR_BIT + CHAR_BIT-1) / 10 * 3 + 2)
-@@ -80,8 +78,6 @@ static struct pollfd  *fds;
- static unsigned int current_array_size;
- static unsigned int nr_fds;
+ PKG_CONFIG_LOCAL := $(foreach pc,$(PKG_CONFIG),$(PKG_CONFIG_DIR)/$(pc))
  
--#define ROUNDUP(_x,_w) (((unsigned long)(_x)+(1UL<<(_w))-1) & ~((1UL<<(_w))-1))
--
- struct buffer {
- 	char *data;
- 	size_t consumed;
-diff --git a/tools/include/xen-tools/libs.h b/tools/include/xen-tools/libs.h
-index cc7dfc8c64..a16e0c3807 100644
---- a/tools/include/xen-tools/libs.h
-+++ b/tools/include/xen-tools/libs.h
-@@ -59,4 +59,8 @@
-     })
- #endif
- 
-+#ifndef ROUNDUP
-+#define ROUNDUP(_x,_w) (((unsigned long)(_x)+(1UL<<(_w))-1) & ~((1UL<<(_w))-1))
-+#endif
++LIBHEADER ?= xen$(LIBNAME).h
++LIBHEADERS = $(foreach h, $(LIBHEADER), include/$(h))
++LIBHEADERSGLOB = $(foreach h, $(LIBHEADER), $(XEN_ROOT)/tools/include/$(h))
 +
- #endif	/* __XEN_TOOLS_LIBS__ */
-diff --git a/tools/libs/call/buffer.c b/tools/libs/call/buffer.c
-index 0b6af2db60..085674d882 100644
---- a/tools/libs/call/buffer.c
-+++ b/tools/libs/call/buffer.c
-@@ -16,14 +16,13 @@
- #include <errno.h>
- #include <string.h>
- #include <pthread.h>
-+#include <xen-tools/libs.h>
+ $(PKG_CONFIG_LOCAL): PKG_CONFIG_PREFIX = $(XEN_ROOT)
+ $(PKG_CONFIG_LOCAL): PKG_CONFIG_LIBDIR = $(CURDIR)
  
- #include "private.h"
+@@ -47,7 +51,22 @@ build:
+ .PHONY: libs
+ libs: headers.chk $(LIB) $(PKG_CONFIG_INST) $(PKG_CONFIG_LOCAL)
  
- #define DBGPRINTF(_m...) \
-     xtl_log(xcall->logger, XTL_DEBUG, -1, "xencall:buffer", _m)
+-headers.chk: $(wildcard include/*.h) $(AUTOINCS)
++ifneq ($(NO_HEADERS_CHK),y)
++headers.chk:
++	for i in $(filter %.h,$^); do \
++	    $(CC) -x c -ansi -Wall -Werror $(CFLAGS_xeninclude) \
++	          -S -o /dev/null $$i || exit 1; \
++	    echo $$i; \
++	done >$@.new
++	mv $@.new $@
++else
++.PHONY: headers.chk
++endif
++
++headers.chk: $(LIBHEADERSGLOB) $(AUTOINCS)
++
++$(LIBHEADERSGLOB): $(LIBHEADERS)
++	for i in $(realpath $(LIBHEADERS)); do ln -sf $$i $(XEN_ROOT)/tools/include; done
  
--#define ROUNDUP(_x,_w) (((unsigned long)(_x)+(1UL<<(_w))-1) & ~((1UL<<(_w))-1))
--
- pthread_mutex_t cache_mutex = PTHREAD_MUTEX_INITIALIZER;
+ libxen$(LIBNAME).a: $(LIB_OBJS)
+ 	$(AR) rc $@ $^
+@@ -68,13 +87,13 @@ install: build
+ 	$(INSTALL_DATA) libxen$(LIBNAME).a $(DESTDIR)$(libdir)
+ 	$(SYMLINK_SHLIB) libxen$(LIBNAME).so.$(MAJOR).$(MINOR) $(DESTDIR)$(libdir)/libxen$(LIBNAME).so.$(MAJOR)
+ 	$(SYMLINK_SHLIB) libxen$(LIBNAME).so.$(MAJOR) $(DESTDIR)$(libdir)/libxen$(LIBNAME).so
+-	$(INSTALL_DATA) include/xen$(LIBNAME).h $(DESTDIR)$(includedir)
++	for i in $(LIBHEADERS); do $(INSTALL_DATA) $$i $(DESTDIR)$(includedir); done
+ 	$(INSTALL_DATA) xen$(LIBNAME).pc $(DESTDIR)$(PKG_INSTALLDIR)
  
- static void cache_lock(xencall_handle *xcall)
-diff --git a/tools/libs/foreignmemory/linux.c b/tools/libs/foreignmemory/linux.c
-index 8daa5828e3..fe73d5ab72 100644
---- a/tools/libs/foreignmemory/linux.c
-+++ b/tools/libs/foreignmemory/linux.c
-@@ -25,11 +25,10 @@
+ .PHONY: uninstall
+ uninstall:
+ 	rm -f $(DESTDIR)$(PKG_INSTALLDIR)/xen$(LIBNAME).pc
+-	rm -f $(DESTDIR)$(includedir)/xen$(LIBNAME).h
++	for i in $(LIBHEADER); do rm -f $(DESTDIR)$(includedir)/$(LIBHEADER); done
+ 	rm -f $(DESTDIR)$(libdir)/libxen$(LIBNAME).so
+ 	rm -f $(DESTDIR)$(libdir)/libxen$(LIBNAME).so.$(MAJOR)
+ 	rm -f $(DESTDIR)$(libdir)/libxen$(LIBNAME).so.$(MAJOR).$(MINOR)
+@@ -90,6 +109,7 @@ clean:
+ 	rm -f libxen$(LIBNAME).so.$(MAJOR).$(MINOR) libxen$(LIBNAME).so.$(MAJOR)
+ 	rm -f headers.chk
+ 	rm -f xen$(LIBNAME).pc
++	rm -f $(LIBHEADERSGLOB)
  
- #include <sys/mman.h>
- #include <sys/ioctl.h>
-+#include <xen-tools/libs.h>
- 
- #include "private.h"
- 
--#define ROUNDUP(_x,_w) (((unsigned long)(_x)+(1UL<<(_w))-1) & ~((1UL<<(_w))-1))
--
- #ifndef O_CLOEXEC
- #define O_CLOEXEC 0
- #endif
-diff --git a/tools/libs/gnttab/private.h b/tools/libs/gnttab/private.h
-index c5e23639b1..eb6a6abe54 100644
---- a/tools/libs/gnttab/private.h
-+++ b/tools/libs/gnttab/private.h
-@@ -5,9 +5,6 @@
- #include <xentoolcore_internal.h>
- #include <xengnttab.h>
- 
--/* Set of macros/defines used by both Linux and FreeBSD */
--#define ROUNDUP(_x,_w) (((unsigned long)(_x)+(1UL<<(_w))-1) & ~((1UL<<(_w))-1))
--
- #define GTERROR(_l, _f...) xtl_log(_l, XTL_ERROR, errno, "gnttab", _f)
- #define GSERROR(_l, _f...) xtl_log(_l, XTL_ERROR, errno, "gntshr", _f)
- 
-diff --git a/tools/libxc/xg_private.h b/tools/libxc/xg_private.h
-index f0a4b2c616..40b5baecde 100644
---- a/tools/libxc/xg_private.h
-+++ b/tools/libxc/xg_private.h
-@@ -95,7 +95,6 @@ typedef uint64_t x86_pgentry_t;
- #define PAGE_SIZE_X86           (1UL << PAGE_SHIFT_X86)
- #define PAGE_MASK_X86           (~(PAGE_SIZE_X86-1))
- 
--#define ROUNDUP(_x,_w) (((unsigned long)(_x)+(1UL<<(_w))-1) & ~((1UL<<(_w))-1))
- #define NRPAGES(x) (ROUNDUP(x, PAGE_SHIFT) >> PAGE_SHIFT)
- 
- 
-diff --git a/tools/libxl/libxl_internal.h b/tools/libxl/libxl_internal.h
-index 94a23179d3..c63d0686fd 100644
---- a/tools/libxl/libxl_internal.h
-+++ b/tools/libxl/libxl_internal.h
-@@ -132,9 +132,6 @@
- #define MB(_mb)     (_AC(_mb, ULL) << 20)
- #define GB(_gb)     (_AC(_gb, ULL) << 30)
- 
--#define ROUNDUP(_val, _order)                                           \
--    (((unsigned long)(_val)+(1UL<<(_order))-1) & ~((1UL<<(_order))-1))
--
- #define DIV_ROUNDUP(n, d) (((n) + (d) - 1) / (d))
- 
- #define MASK_EXTR(v, m) (((v) & (m)) / ((m) & -(m)))
-diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
-index 7bd959f28b..9700772d40 100644
---- a/tools/xenstore/xenstored_core.c
-+++ b/tools/xenstore/xenstored_core.c
-@@ -73,8 +73,6 @@ static unsigned int nr_fds;
- static int sock = -1;
- static int ro_sock = -1;
- 
--#define ROUNDUP(_x, _w) (((unsigned long)(_x)+(1UL<<(_w))-1) & ~((1UL<<(_w))-1))
--
- static bool verbose = false;
- LIST_HEAD(connections);
- int tracefd = -1;
+ .PHONY: distclean
+ distclean: clean
 -- 
 2.26.2
 
