@@ -7,63 +7,68 @@ X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B462C433E1
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2020 18:24:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 646A9C433E3
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2020 18:40:45 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5173420738
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2020 18:24:17 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 39282204EC
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2020 18:40:45 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="Q+9AIXFH"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5173420738
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=eu.citrix.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="a1dyxw4G"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 39282204EC
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k7jnU-0004Wh-M1; Mon, 17 Aug 2020 18:23:52 +0000
+	id 1k7k3b-0006Km-KE; Mon, 17 Aug 2020 18:40:31 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ScJ9=B3=citrix.com=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1k7jnT-0004Wc-G0
- for xen-devel@lists.xenproject.org; Mon, 17 Aug 2020 18:23:51 +0000
-X-Inumbo-ID: be42de41-a33f-49ad-9d68-deeef73929e6
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
+ <SRS0=mm75=B3=citrix.com=edvin.torok@srs-us1.protection.inumbo.net>)
+ id 1k7k3a-0006K5-KD
+ for xen-devel@lists.xenproject.org; Mon, 17 Aug 2020 18:40:30 +0000
+X-Inumbo-ID: 24fc1c7c-12be-4305-b72c-bf4614c6342d
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id be42de41-a33f-49ad-9d68-deeef73929e6;
- Mon, 17 Aug 2020 18:23:50 +0000 (UTC)
+ id 24fc1c7c-12be-4305-b72c-bf4614c6342d;
+ Mon, 17 Aug 2020 18:40:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1597688630;
- h=from:to:cc:subject:date:message-id:mime-version;
- bh=8bvHg9Ok0+Yy7eN9kWcIBBh5lZqJ38ZCXhVXq8vAo40=;
- b=Q+9AIXFHnYOTdj4dceRdrTdPluEkPeebCcvoBQ3rgt5iE4nXNSqQURCL
- V/z5/IL0a+wKsUqc/D1wmrEJ9/ZLaKQHndgDmjhFki2RQw//oPhS1Oueu
- X+BqjKa4YFELGUq87pRvrh/lkF3uqqO41mNjEkDolP/wawy+TdmQa125N Q=;
-Authentication-Results: esa1.hc3370-68.iphmx.com;
+ d=citrix.com; s=securemail; t=1597689626;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=0Q7mZezmkZDXxgdfVrSnPIVAXJc1OwrHZVcWnmgusxs=;
+ b=a1dyxw4GE8Wf995Ez2H0vLlEs3J4GLY0U76SBA4X+Qc17RP5xs2u5HVw
+ 5bptnd+uK901JILkQNtO5Z4b7hsPhYoJhNf1UIAxLyrtwPw7oB2ARhIFu
+ O8iZRjSZBscWmR18s8/oj9yFISduzhnNU7nT61j8VJi8t12uotKFnRhfo M=;
+Authentication-Results: esa3.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: AUb69I8jDrSlvUyViuMAlnt9+mmzox4n8b4GFxqxI7Ij49Yo6G3Ugza6xr47NgjsELoez4LQns
- K93E74q2DlvEZNuBlZpt5dS84QO3fYCCOBi+/KQ23ShEgbujLlp/ZGt/ve7EBCFqmhTMvOMNzs
- +XtXK+64WJLny6UXUpEZuUNoztkEtdNPMABX/sKA3Qu8tctzSnqtsqx7qNAVOk3mLoBpvKvnsK
- T7qBp79jzxDRVkTcroI/dnF6zX/ML6dzOVu1H/ZIETmhcVuiYoQRF44F0GT9Si5tpTbYS4/Zis
- 7t0=
+IronPort-SDR: GxPWrP2BOYCOvGSr03Wk5mThVW6qeZhMyNISnxgcWieMrs6D2KH+qHF4DxlKlyMODVbEVm/bxL
+ QB46okf0eAGUxukDvva4FtQDqqdsfoyv7Do0AHZgQMaGIidAnL+HHD52EgNWpHqz/n7KqVl8sQ
+ lSFZVtGn6FAm62scy5BGuIqcM7AZYXehjm+dEbwN+4jvtLT9TDMOS9n3MejC4ustRLE/NXfMXo
+ SgehxWYPS/DCku3ee2Fmi/nm3WjPQq+DOSLcBejPca/TNtT2ojabXWQgqkT6Qpg6+doTuUgDpv
+ RQ8=
 X-SBRS: 2.7
-X-MesageID: 25044707
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 24692795
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,324,1592884800"; d="scan'208";a="25044707"
-From: Ian Jackson <ian.jackson@eu.citrix.com>
+X-IronPort-AV: E=Sophos;i="5.76,324,1592884800"; d="scan'208";a="24692795"
+From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Ian Jackson <ian.jackson@eu.citrix.com>, Ian Jackson
- <Ian.Jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH 1/2] Tcl: Use tclsh8.6
-Date: Mon, 17 Aug 2020 19:23:36 +0100
-Message-ID: <20200817182337.29144-1-ian.jackson@eu.citrix.com>
-X-Mailer: git-send-email 2.11.0
+CC: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>, "Christian
+ Lindig" <christian.lindig@citrix.com>, David Scott <dave@recoil.org>, "Ian
+ Jackson" <ian.jackson@eu.citrix.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH v2 5/6] tools/ocaml/xenstored: use more efficient node trees
+Date: Mon, 17 Aug 2020 19:39:53 +0100
+Message-ID: <b0b4093cc7360ed013af1f17b7aabfb5c9f0cf9c.1597689211.git.edvin.torok@citrix.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <cover.1597689211.git.edvin.torok@citrix.com>
+References: <cover.1597689211.git.edvin.torok@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,101 +82,165 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This is needed to run on buster.
+This changes the output of xenstore-ls to be sorted.
+Previously the keys were listed in the order in which they were inserted
+in.
+docs/misc/xenstore.txt doesn't specify in what order keys are listed.
 
-I have checked that tclsh8.6 and TclX works on osstest.test-lab.  TclX
-seems to be provided by tcl8.4 but work with tcl8.6 (at least on
-buster).
+Map.update is used to retain semantics with replace_child:
+only an existing child is replaced, if it wasn't part of the original
+map we don't add it.
+Similarly exception behaviour is retained for del_childname and related
+functions.
 
-Deployment note: hosts running earlier Debian (including
-osstest.xs.citrite.net, the Citrix Cambridge instance), may need
-OSSTEST_DAEMON_TCLSH=tclsh8.4 or similar in ~/.xen-osstest/settings.
+Entries are stored in reverse sort order, so that upon Map.fold the
+constructed list is sorted in ascending order and there is no need for a
+List.rev.
 
-Signed-off-by: Ian Jackson <Ian.Jackson@eu.citrix.com>
+Signed-off-by: Edwin Török <edvin.torok@citrix.com>
 ---
- README            | 2 +-
- mg-transient-task | 2 +-
- ms-ownerdaemon    | 2 +-
- ms-queuedaemon    | 2 +-
- ms-reportuptime   | 2 +-
- sg-execute-flight | 2 +-
- sg-run-job        | 2 +-
- 7 files changed, 7 insertions(+), 7 deletions(-)
+ tools/ocaml/xenstored/store.ml   | 46 +++++++++++++++-----------------
+ tools/ocaml/xenstored/symbol.ml  |  4 +++
+ tools/ocaml/xenstored/symbol.mli |  3 +++
+ 3 files changed, 29 insertions(+), 24 deletions(-)
 
-diff --git a/README b/README
-index 91793795..2804ecf3 100644
---- a/README
-+++ b/README
-@@ -291,7 +291,7 @@ To run osstest in standalone mode:
+diff --git a/tools/ocaml/xenstored/store.ml b/tools/ocaml/xenstored/store.ml
+index 45659a23ee..d9dfa36045 100644
+--- a/tools/ocaml/xenstored/store.ml
++++ b/tools/ocaml/xenstored/store.ml
+@@ -16,17 +16,19 @@
+  *)
+ open Stdext
  
-  - You need to install
-      sqlite3
--     tcl8.5 tclx8.4 libsqlite3-tcl
-+     tcl8.6 tclx8.4 libsqlite3-tcl
-      libdbi-perl libdbd-sqlite3-perl
-      pax rsync
-      curl
-diff --git a/mg-transient-task b/mg-transient-task
-index ce5180ff..d707ce76 100755
---- a/mg-transient-task
-+++ b/mg-transient-task
-@@ -1,4 +1,4 @@
--#!/usr/bin/tclsh8.5
-+#!/usr/bin/tclsh8.6
- # -*- Tcl -*- 
- # usage: ./mg-transient-task PROGRAM [ARGS...]
++module SymbolMap = Map.Make(Symbol)
++
+ module Node = struct
  
-diff --git a/ms-ownerdaemon b/ms-ownerdaemon
-index bf0b5952..4c33e93a 100755
---- a/ms-ownerdaemon
-+++ b/ms-ownerdaemon
-@@ -1,4 +1,4 @@
--#!/usr/bin/tclsh8.5
-+#!/usr/bin/tclsh8.6
- # -*- Tcl -*- 
- # usage: ./ms-ownerdaemon  ... | logger
+ type t = {
+ 	name: Symbol.t;
+ 	perms: Perms.Node.t;
+ 	value: string;
+-	children: t list;
++	children: t SymbolMap.t;
+ }
  
-diff --git a/ms-queuedaemon b/ms-queuedaemon
-index f02abf37..a3a009ca 100755
---- a/ms-queuedaemon
-+++ b/ms-queuedaemon
-@@ -1,4 +1,4 @@
--#!/usr/bin/tclsh8.5
-+#!/usr/bin/tclsh8.6
- # -*- Tcl -*- 
- # usage: ./ms-queuedaemon  ... | logger
+ let create _name _perms _value =
+-	{ name = Symbol.of_string _name; perms = _perms; value = _value; children = []; }
++	{ name = Symbol.of_string _name; perms = _perms; value = _value; children = SymbolMap.empty; }
  
-diff --git a/ms-reportuptime b/ms-reportuptime
-index 804e563d..bcf79054 100755
---- a/ms-reportuptime
-+++ b/ms-reportuptime
-@@ -1,4 +1,4 @@
--#!/usr/bin/tclsh8.5
-+#!/usr/bin/tclsh8.6
- # -*- Tcl -*- 
- # usage: ./ms-reportuptime
+ let get_owner node = Perms.Node.get_owner node.perms
+ let get_children node = node.children
+@@ -42,38 +44,34 @@ let set_value node nvalue =
+ let set_perms node nperms = { node with perms = nperms }
  
-diff --git a/sg-execute-flight b/sg-execute-flight
-index 02f63316..1b002cdd 100755
---- a/sg-execute-flight
-+++ b/sg-execute-flight
-@@ -1,4 +1,4 @@
--#!/usr/bin/tclsh8.5
-+#!/usr/bin/tclsh8.6
- # -*- Tcl -*- 
- # usage: ./sg-execute-flight FLIGHT BLESSING
+ let add_child node child =
+-	{ node with children = child :: node.children }
++	let children = SymbolMap.add child.name child node.children in
++	{ node with children }
  
-diff --git a/sg-run-job b/sg-run-job
-index aa7953ac..df3d08d0 100755
---- a/sg-run-job
-+++ b/sg-run-job
-@@ -1,4 +1,4 @@
--#!/usr/bin/tclsh8.5
-+#!/usr/bin/tclsh8.6
- # -*- Tcl -*-
+ let exists node childname =
+ 	let childname = Symbol.of_string childname in
+-	List.exists (fun n -> Symbol.equal n.name childname) node.children
++	SymbolMap.mem childname node.children
  
- # This is part of "osstest", an automated testing framework for Xen.
+ let find node childname =
+ 	let childname = Symbol.of_string childname in
+-	List.find (fun n -> Symbol.equal n.name childname) node.children
++	SymbolMap.find childname node.children
+ 
+ let replace_child node child nchild =
+-	(* this is the on-steroid version of the filter one-replace one *)
+-	let rec replace_one_in_list l =
+-		match l with
+-		| []                               -> []
+-		| h :: tl when Symbol.equal h.name child.name -> nchild :: tl
+-		| h :: tl                          -> h :: replace_one_in_list tl
+-		in
+-	{ node with children = (replace_one_in_list node.children) }
++	{ node with
++	  children = SymbolMap.update child.name
++		     (function None -> None | Some _ -> Some nchild)
++		     node.children
++	}
+ 
+ let del_childname node childname =
+ 	let sym = Symbol.of_string childname in
+-	let rec delete_one_in_list l =
+-		match l with
+-		| []                        -> raise Not_found
+-		| h :: tl when Symbol.equal h.name sym -> tl
+-		| h :: tl                   -> h :: delete_one_in_list tl
+-		in
+-	{ node with children = (delete_one_in_list node.children) }
++	{ node with children =
++		SymbolMap.update sym
++		  (function None -> raise Not_found | Some _ -> None)
++		  node.children
++	}
+ 
+ let del_all_children node =
+-	{ node with children = [] }
++	{ node with children = SymbolMap.empty }
+ 
+ (* check if the current node can be accessed by the current connection with rperm permissions *)
+ let check_perm node connection request =
+@@ -87,7 +85,7 @@ let check_owner node connection =
+ 		raise Define.Permission_denied;
+ 	end
+ 
+-let rec recurse fct node = fct node; List.iter (recurse fct) node.children
++let rec recurse fct node = fct node; SymbolMap.iter (fun _ -> recurse fct) node.children
+ 
+ let unpack node = (Symbol.to_string node.name, node.perms, node.value)
+ 
+@@ -321,7 +319,7 @@ let ls store perm path =
+ 				Node.check_perm cnode perm Perms.READ;
+ 				cnode.Node.children in
+ 			Path.apply store.root path do_ls in
+-	List.rev (List.map (fun n -> Symbol.to_string n.Node.name) children)
++	SymbolMap.fold (fun k _ accu -> Symbol.to_string k :: accu) children []
+ 
+ let getperms store perm path =
+ 	if path = [] then
+@@ -350,7 +348,7 @@ let traversal root_node f =
+ 	let rec _traversal path node =
+ 		f path node;
+ 		let node_path = Path.of_path_and_name path (Symbol.to_string node.Node.name) in
+-		List.iter (_traversal node_path) node.Node.children
++		SymbolMap.iter (fun _ -> _traversal node_path) node.Node.children
+ 		in
+ 	_traversal [] root_node
+ 
+diff --git a/tools/ocaml/xenstored/symbol.ml b/tools/ocaml/xenstored/symbol.ml
+index dac6f9f819..2697915623 100644
+--- a/tools/ocaml/xenstored/symbol.ml
++++ b/tools/ocaml/xenstored/symbol.ml
+@@ -31,6 +31,10 @@ let equal a b =
+   (* compare using physical equality, both members have to be part of the above weak table *)
+   a == b
+ 
++let compare a b =
++  if equal a b then 0
++  else -(String.compare a b)
++
+ let stats () =
+   let len, entries, _, _, _, _ = WeakTable.stats tbl in
+   len, entries
+diff --git a/tools/ocaml/xenstored/symbol.mli b/tools/ocaml/xenstored/symbol.mli
+index 586ab57507..dd0f014796 100644
+--- a/tools/ocaml/xenstored/symbol.mli
++++ b/tools/ocaml/xenstored/symbol.mli
+@@ -32,6 +32,9 @@ val to_string : t -> string
+ val equal: t -> t -> bool
+ (** Compare two symbols for equality *)
+ 
++val compare: t -> t -> int
++(** Compare two symbols *)
++
+ (** {6 Statistics } *)
+ 
+ val stats : unit -> int * int
 -- 
-2.11.0
+2.25.1
 
 
