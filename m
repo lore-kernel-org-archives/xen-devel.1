@@ -7,60 +7,60 @@ X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AD230C433E3
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2020 15:59:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EA785C433E4
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2020 15:59:16 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 79A55206FA
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2020 15:59:15 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id B6904206FA
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2020 15:59:16 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="ONUltRMm"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 79A55206FA
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="Ju688uKM"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B6904206FA
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k7hXJ-00073u-Gb; Mon, 17 Aug 2020 15:59:01 +0000
+	id 1k7hXO-00077g-7h; Mon, 17 Aug 2020 15:59:06 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=AGoP=B3=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1k7hXI-00073P-I6
- for xen-devel@lists.xenproject.org; Mon, 17 Aug 2020 15:59:00 +0000
-X-Inumbo-ID: 9fb2d8e2-3995-469b-9d84-57708e00eb6e
+ id 1k7hXN-00073P-3N
+ for xen-devel@lists.xenproject.org; Mon, 17 Aug 2020 15:59:05 +0000
+X-Inumbo-ID: 51b78f9d-fad0-4c41-a9e0-5c7261eb96e8
 Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9fb2d8e2-3995-469b-9d84-57708e00eb6e;
- Mon, 17 Aug 2020 15:58:59 +0000 (UTC)
+ id 51b78f9d-fad0-4c41-a9e0-5c7261eb96e8;
+ Mon, 17 Aug 2020 15:59:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1597679939;
+ d=citrix.com; s=securemail; t=1597679940;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=ZKzK+c5XyV+OLEz6QG9xmudgjXWSKUFpmUQMfU+3bSg=;
- b=ONUltRMm0RQNSBw4pXTqbQa58Cdkd38XqtVsFcltvWEfJGZMMS0zQ5kK
- xM6Hw1Kx+VvUSM18YRkIs/TrYu8A4iXYdzKwznLsVt8dIpWzpIryes3ev
- 7cuKPv/7FKLfIzewVNfcvt3cFdeWW4PWyCCSsMxH0N3syyeLGHK/p1QCU c=;
+ bh=F/Ls1vXs3JLCaDO3OMKs0GkvZz4YTpGo+BI7GjCWN+A=;
+ b=Ju688uKMZP8oM6iW5pYVm6sT6VpHCOb6d/+jNCy0E6tygRBsYUDnhM3V
+ LPhBCCtaeLzXd4EUmT1V9S1FMDk6nCx8huqfmqNFr9VXg/GcBC3XcK9qL
+ qxqtcdPX3Ni2uluM9JzWeVx3aiFGI47EefBthoO30jhrvo5ylkVpsFWuE s=;
 Authentication-Results: esa3.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: vNnOf95SAcM0GK1/8PeZCJTmEGsEhWMOICD6AbiaziiIqB7OFH3eW9QOojO4AiD/kmTT8dYbQL
- lWn+rCwGlyAb04YtphdWOcto2QHQtipIv29JNtViI/HMfWlBeHPfyYbjOLDElT2sAQXPJhHLJs
- 1lwZs975dYvQ2yl1QS1+9f4rK9fhTIhzH0UQNrbVIM87wd1ibaz85X9BFActm/o9ny1K4Clgrp
- OtCCk1zq0Ag+zFdAO+GO+y80bf8vBaEl9jexT5BgAGJH+ZOqeZiFwIe/liEvF4cKL7aYfS88Bq
- v+U=
+IronPort-SDR: OqmOhAaQ34hFtLweGTvGmfWDIiPIs06YVkYMJRpw6AFmKK0+l1Txm31nZnCnpQM9eVpSLo7Skb
+ 0aXOrZAPGA411m/oYh8YdsWjiQPIIW/ZJZsFHZxcHpSed2tDJMb4Jh712xdb4yTzGvi9k/Q5X6
+ Ue9f8wyRs56iaQdwhT2M6ZsUXH2Wf4tv1CEWRq9PSQoCFbFkT303lbN/N8qheDf6RR+4w6ifAm
+ hhenlmGVldRPNfPkMQphPMZwq1fGTwlJ21WQbQ6m+nke3V44SQOa6LChrQ/7vEq2IO4RgFtej5
+ XjI=
 X-SBRS: 2.7
-X-MesageID: 24673328
+X-MesageID: 24673333
 X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,324,1592884800"; d="scan'208";a="24673328"
+X-IronPort-AV: E=Sophos;i="5.76,324,1592884800"; d="scan'208";a="24673333"
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Roger Pau Monne <roger.pau@citrix.com>, Jan Beulich <jbeulich@suse.com>,
  Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH 3/8] x86/pv: handle writes to the EFER MSR
-Date: Mon, 17 Aug 2020 17:57:52 +0200
-Message-ID: <20200817155757.3372-4-roger.pau@citrix.com>
+Subject: [PATCH 5/8] x86/pv: allow reading APIC_BASE MSR
+Date: Mon, 17 Aug 2020 17:57:54 +0200
+Message-ID: <20200817155757.3372-6-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200817155757.3372-1-roger.pau@citrix.com>
 References: <20200817155757.3372-1-roger.pau@citrix.com>
@@ -80,79 +80,32 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Silently drop writes to the EFER MSR for PV guests if the value is not
-changed from what it's being reported. Current PV Linux will attempt
-to write to the MSR with the same value that's been read, and raising
-a fault will result in a guest crash.
-
-As part of this work introduce a helper to easily get the EFER value
-reported to guests.
+Linux PV guests will attempt to read the APIC_BASE MSR, so just report
+a default value to make Linux happy.
 
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
- xen/arch/x86/pv/emul-priv-op.c | 35 ++++++++++++++++++++++++----------
- 1 file changed, 25 insertions(+), 10 deletions(-)
+ xen/arch/x86/pv/emul-priv-op.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
 diff --git a/xen/arch/x86/pv/emul-priv-op.c b/xen/arch/x86/pv/emul-priv-op.c
-index efeb2a727e..fd3cbfaebc 100644
+index ff87c7d769..554a95ae8d 100644
 --- a/xen/arch/x86/pv/emul-priv-op.c
 +++ b/xen/arch/x86/pv/emul-priv-op.c
-@@ -837,6 +837,23 @@ static inline bool is_cpufreq_controller(const struct domain *d)
-             is_hardware_domain(d));
- }
+@@ -872,6 +872,13 @@ static int read_msr(unsigned int reg, uint64_t *val,
  
-+static uint64_t guest_efer(const struct domain *d)
-+{
-+    uint64_t val;
-+
-+    /* Hide unknown bits, and unconditionally hide SVME from guests. */
-+    val = read_efer() & EFER_KNOWN_MASK & ~EFER_SVME;
-+    /*
-+     * Hide the 64-bit features from 32-bit guests.  SCE has
-+     * vendor-dependent behaviour.
-+     */
-+    if ( is_pv_32bit_domain(d) )
-+        val &= ~(EFER_LME | EFER_LMA |
-+                 (boot_cpu_data.x86_vendor == X86_VENDOR_INTEL
-+                  ? EFER_SCE : 0));
-+    return val;
-+}
-+
- static int read_msr(unsigned int reg, uint64_t *val,
-                     struct x86_emulate_ctxt *ctxt)
- {
-@@ -880,16 +897,7 @@ static int read_msr(unsigned int reg, uint64_t *val,
-         return X86EMUL_OKAY;
- 
-     case MSR_EFER:
--        /* Hide unknown bits, and unconditionally hide SVME from guests. */
--        *val = read_efer() & EFER_KNOWN_MASK & ~EFER_SVME;
--        /*
--         * Hide the 64-bit features from 32-bit guests.  SCE has
--         * vendor-dependent behaviour.
--         */
--        if ( is_pv_32bit_domain(currd) )
--            *val &= ~(EFER_LME | EFER_LMA |
--                      (boot_cpu_data.x86_vendor == X86_VENDOR_INTEL
--                       ? EFER_SCE : 0));
-+        *val = guest_efer(currd);
-         return X86EMUL_OKAY;
- 
-     case MSR_K7_FID_VID_CTL:
-@@ -1005,6 +1013,13 @@ static int write_msr(unsigned int reg, uint64_t val,
-         curr->arch.pv.gs_base_user = val;
-         return X86EMUL_OKAY;
- 
-+    case MSR_EFER:
-+        /* Silently drop writes that don't change the reported value. */
-+        temp = guest_efer(currd);
-+        if ( val != temp )
-+            goto invalid;
+     switch ( reg )
+     {
++    case MSR_APIC_BASE:
++        /* Linux PV guests will attempt to read APIC_BASE. */
++        *val = APIC_BASE_ENABLE | APIC_DEFAULT_PHYS_BASE;
++        if ( !curr->vcpu_id )
++            *val |= APIC_BASE_BSP;
 +        return X86EMUL_OKAY;
 +
-     case MSR_K7_FID_VID_STATUS:
-     case MSR_K7_FID_VID_CTL:
-     case MSR_K8_PSTATE_LIMIT:
+     case MSR_FS_BASE:
+         if ( is_pv_32bit_domain(currd) )
+             break;
 -- 
 2.28.0
 
