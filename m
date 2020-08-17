@@ -7,45 +7,49 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 66E81C433E1
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 04A97C433DF
 	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2020 09:57:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3A00C206C0
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2020 09:57:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3A00C206C0
+	by mail.kernel.org (Postfix) with ESMTPS id C7D21206C0
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2020 09:57:03 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C7D21206C0
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k7bsr-0006n6-Rr; Mon, 17 Aug 2020 09:56:53 +0000
+	id 1k7bsm-0006kQ-DN; Mon, 17 Aug 2020 09:56:48 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=YVS9=B3=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1k7bmT-00046j-1M
- for xen-devel@lists.xenproject.org; Mon, 17 Aug 2020 09:50:17 +0000
-X-Inumbo-ID: 6fbcaa63-1b30-4132-b980-518286e87702
+ id 1k7bmY-00046j-1e
+ for xen-devel@lists.xenproject.org; Mon, 17 Aug 2020 09:50:22 +0000
+X-Inumbo-ID: b9e5717c-c3bb-43af-b72e-7fc9c71bc232
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 6fbcaa63-1b30-4132-b980-518286e87702;
+ id b9e5717c-c3bb-43af-b72e-7fc9c71bc232;
  Mon, 17 Aug 2020 09:49:28 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 751CBAD33;
- Mon, 17 Aug 2020 09:49:52 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 02CABAE3A;
+ Mon, 17 Aug 2020 09:49:53 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>,
- Samuel Thibault <samuel.thibault@ens-lyon.org>,
- Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wl@xen.org>,
- Anthony PERARD <anthony.perard@citrix.com>,
+To: xen-devel@lists.xenproject.org,
+	xen-devel@dornerworks.com
+Cc: Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Wei Liu <wl@xen.org>, Samuel Thibault <samuel.thibault@ens-lyon.org>,
+ Josh Whitehead <josh.whitehead@dornerworks.com>,
+ Stewart Hildebrand <stewart.hildebrand@dornerworks.com>,
  =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?=
  <marmarek@invisiblethingslab.com>
-Subject: [PATCH II v2 15/17] tools/misc: rename xc_dom.h do xenctrl_dom.h
-Date: Mon, 17 Aug 2020 11:49:20 +0200
-Message-Id: <20200817094922.15768-16-jgross@suse.com>
+Subject: [PATCH II v2 17/17] tools: move libxenctrl below tools/libs
+Date: Mon, 17 Aug 2020 11:49:22 +0200
+Message-Id: <20200817094922.15768-18-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200817094922.15768-1-jgross@suse.com>
 References: <20200817094922.15768-1-jgross@suse.com>
@@ -64,406 +68,761 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-For being able to disentangle lixenctrl and libxenguest headers
-xc_dom.h will need to be public. Prepare that by renaming xc_dom.h
-to xenctrl_dom.h.
+Today tools/libxc needs to be built after tools/libs as libxenctrl is
+depending on some libraries in tools/libs. This in turn blocks moving
+other libraries depending on libxenctrl below tools/libs.
+
+So carve out libxenctrl from tools/libxc and move it into
+tools/libs/ctrl.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- stubdom/grub/kexec.c                            | 2 +-
- tools/helpers/init-xenstore-domain.c            | 2 +-
- tools/libxc/include/{xc_dom.h => xenctrl_dom.h} | 0
- tools/libxc/xc_core.c                           | 2 +-
- tools/libxc/xc_private.c                        | 2 +-
- tools/libxc/xg_dom_arm.c                        | 2 +-
- tools/libxc/xg_dom_armzimageloader.c            | 2 +-
- tools/libxc/xg_dom_binloader.c                  | 2 +-
- tools/libxc/xg_dom_boot.c                       | 2 +-
- tools/libxc/xg_dom_compat_linux.c               | 2 +-
- tools/libxc/xg_dom_core.c                       | 2 +-
- tools/libxc/xg_dom_decompress.h                 | 2 +-
- tools/libxc/xg_dom_decompress_unsafe.h          | 2 +-
- tools/libxc/xg_dom_elfloader.c                  | 2 +-
- tools/libxc/xg_dom_hvmloader.c                  | 2 +-
- tools/libxc/xg_dom_x86.c                        | 2 +-
- tools/libxc/xg_offline_page.c                   | 2 +-
- tools/libxc/xg_sr_common.h                      | 2 +-
- tools/libxl/libxl_arm.c                         | 2 +-
- tools/libxl/libxl_arm.h                         | 2 +-
- tools/libxl/libxl_create.c                      | 2 +-
- tools/libxl/libxl_dm.c                          | 2 +-
- tools/libxl/libxl_dom.c                         | 2 +-
- tools/libxl/libxl_internal.h                    | 2 +-
- tools/libxl/libxl_vnuma.c                       | 2 +-
- tools/libxl/libxl_x86.c                         | 2 +-
- tools/libxl/libxl_x86_acpi.c                    | 2 +-
- tools/python/xen/lowlevel/xc/xc.c               | 2 +-
- tools/xcutils/readnotes.c                       | 2 +-
- 29 files changed, 28 insertions(+), 28 deletions(-)
- rename tools/libxc/include/{xc_dom.h => xenctrl_dom.h} (100%)
+ .gitignore                                    |  8 ++
+ MAINTAINERS                                   |  2 +-
+ stubdom/Makefile                              | 23 ++++-
+ stubdom/mini-os.mk                            |  2 +-
+ tools/Rules.mk                                | 10 +-
+ tools/libs/Makefile                           |  1 +
+ tools/libs/ctrl/Makefile                      | 68 +++++++++++++
+ tools/{libxc => libs/ctrl}/include/xenctrl.h  |  0
+ .../ctrl}/include/xenctrl_compat.h            |  0
+ .../ctrl}/include/xenctrl_dom.h               |  0
+ tools/{libxc => libs/ctrl}/xc_altp2m.c        |  0
+ tools/{libxc => libs/ctrl}/xc_arinc653.c      |  0
+ tools/{libxc => libs/ctrl}/xc_bitops.h        |  0
+ tools/{libxc => libs/ctrl}/xc_core.c          |  0
+ tools/{libxc => libs/ctrl}/xc_core.h          |  0
+ tools/{libxc => libs/ctrl}/xc_core_arm.c      |  0
+ tools/{libxc => libs/ctrl}/xc_core_arm.h      |  0
+ tools/{libxc => libs/ctrl}/xc_core_x86.c      |  0
+ tools/{libxc => libs/ctrl}/xc_core_x86.h      |  0
+ tools/{libxc => libs/ctrl}/xc_cpu_hotplug.c   |  0
+ tools/{libxc => libs/ctrl}/xc_cpupool.c       |  0
+ tools/{libxc => libs/ctrl}/xc_csched.c        |  0
+ tools/{libxc => libs/ctrl}/xc_csched2.c       |  0
+ .../ctrl}/xc_devicemodel_compat.c             |  0
+ tools/{libxc => libs/ctrl}/xc_domain.c        |  0
+ tools/{libxc => libs/ctrl}/xc_evtchn.c        |  0
+ tools/{libxc => libs/ctrl}/xc_evtchn_compat.c |  0
+ tools/{libxc => libs/ctrl}/xc_flask.c         |  0
+ .../{libxc => libs/ctrl}/xc_foreign_memory.c  |  0
+ tools/{libxc => libs/ctrl}/xc_freebsd.c       |  0
+ tools/{libxc => libs/ctrl}/xc_gnttab.c        |  0
+ tools/{libxc => libs/ctrl}/xc_gnttab_compat.c |  0
+ tools/{libxc => libs/ctrl}/xc_hcall_buf.c     |  0
+ tools/{libxc => libs/ctrl}/xc_kexec.c         |  0
+ tools/{libxc => libs/ctrl}/xc_linux.c         |  0
+ tools/{libxc => libs/ctrl}/xc_mem_access.c    |  0
+ tools/{libxc => libs/ctrl}/xc_mem_paging.c    |  0
+ tools/{libxc => libs/ctrl}/xc_memshr.c        |  0
+ tools/{libxc => libs/ctrl}/xc_minios.c        |  0
+ tools/{libxc => libs/ctrl}/xc_misc.c          |  0
+ tools/{libxc => libs/ctrl}/xc_monitor.c       |  0
+ tools/{libxc => libs/ctrl}/xc_msr_x86.h       |  0
+ tools/{libxc => libs/ctrl}/xc_netbsd.c        |  0
+ tools/{libxc => libs/ctrl}/xc_pagetab.c       |  0
+ tools/{libxc => libs/ctrl}/xc_physdev.c       |  0
+ tools/{libxc => libs/ctrl}/xc_pm.c            |  0
+ tools/{libxc => libs/ctrl}/xc_private.c       |  0
+ tools/{libxc => libs/ctrl}/xc_private.h       |  0
+ tools/{libxc => libs/ctrl}/xc_psr.c           |  0
+ tools/{libxc => libs/ctrl}/xc_resource.c      |  0
+ tools/{libxc => libs/ctrl}/xc_resume.c        |  0
+ tools/{libxc => libs/ctrl}/xc_rt.c            |  0
+ tools/{libxc => libs/ctrl}/xc_solaris.c       |  0
+ tools/{libxc => libs/ctrl}/xc_tbuf.c          |  0
+ tools/{libxc => libs/ctrl}/xc_vm_event.c      |  0
+ tools/{libxc => libs/ctrl}/xencontrol.pc.in   |  0
+ tools/libxc/Makefile                          | 99 +++----------------
+ tools/python/Makefile                         |  2 +-
+ tools/python/setup.py                         |  8 +-
+ 59 files changed, 117 insertions(+), 106 deletions(-)
+ create mode 100644 tools/libs/ctrl/Makefile
+ rename tools/{libxc => libs/ctrl}/include/xenctrl.h (100%)
+ rename tools/{libxc => libs/ctrl}/include/xenctrl_compat.h (100%)
+ rename tools/{libxc => libs/ctrl}/include/xenctrl_dom.h (100%)
+ rename tools/{libxc => libs/ctrl}/xc_altp2m.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_arinc653.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_bitops.h (100%)
+ rename tools/{libxc => libs/ctrl}/xc_core.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_core.h (100%)
+ rename tools/{libxc => libs/ctrl}/xc_core_arm.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_core_arm.h (100%)
+ rename tools/{libxc => libs/ctrl}/xc_core_x86.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_core_x86.h (100%)
+ rename tools/{libxc => libs/ctrl}/xc_cpu_hotplug.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_cpupool.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_csched.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_csched2.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_devicemodel_compat.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_domain.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_evtchn.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_evtchn_compat.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_flask.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_foreign_memory.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_freebsd.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_gnttab.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_gnttab_compat.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_hcall_buf.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_kexec.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_linux.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_mem_access.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_mem_paging.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_memshr.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_minios.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_misc.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_monitor.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_msr_x86.h (100%)
+ rename tools/{libxc => libs/ctrl}/xc_netbsd.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_pagetab.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_physdev.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_pm.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_private.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_private.h (100%)
+ rename tools/{libxc => libs/ctrl}/xc_psr.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_resource.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_resume.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_rt.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_solaris.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_tbuf.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_vm_event.c (100%)
+ rename tools/{libxc => libs/ctrl}/xencontrol.pc.in (100%)
 
-diff --git a/stubdom/grub/kexec.c b/stubdom/grub/kexec.c
-index 0e68b969a2..24001220a9 100644
---- a/stubdom/grub/kexec.c
-+++ b/stubdom/grub/kexec.c
-@@ -20,7 +20,7 @@
- #include <sys/mman.h>
+diff --git a/.gitignore b/.gitignore
+index 5ea48af818..3e1008e372 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -114,6 +114,9 @@ tools/libs/hypfs/headers.chk
+ tools/libs/hypfs/xenhypfs.pc
+ tools/libs/call/headers.chk
+ tools/libs/call/xencall.pc
++tools/libs/ctrl/_paths.h
++tools/libs/ctrl/libxenctrl.map
++tools/libs/ctrl/xencontrol.pc
+ tools/libs/foreignmemory/headers.chk
+ tools/libs/foreignmemory/xenforeignmemory.pc
+ tools/libs/devicemodel/headers.chk
+@@ -195,6 +198,11 @@ tools/include/xen-foreign/*.(c|h|size)
+ tools/include/xen-foreign/checker
+ tools/libvchan/xenvchan.pc
+ tools/libxc/*.pc
++tools/libxc/xc_bitops.h
++tools/libxc/xc_core.h
++tools/libxc/xc_core_arm.h
++tools/libxc/xc_core_x86.h
++tools/libxc/xc_private.h
+ tools/libxl/_libxl.api-for-check
+ tools/libxl/*.api-ok
+ tools/libxl/*.pc
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 33fe51324e..91ca2c9c40 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -226,7 +226,7 @@ M:	Stewart Hildebrand <stewart.hildebrand@dornerworks.com>
+ S:	Supported
+ L:	xen-devel@dornerworks.com
+ F:	xen/common/sched/arinc653.c
+-F:	tools/libxc/xc_arinc653.c
++F:	tools/libs/ctrl/xc_arinc653.c
  
- #include <xenctrl.h>
--#include <xc_dom.h>
-+#include <xenctrl_dom.h>
+ ARM (W/ VIRTUALISATION EXTENSIONS) ARCHITECTURE
+ M:	Stefano Stabellini <sstabellini@kernel.org>
+diff --git a/stubdom/Makefile b/stubdom/Makefile
+index 6fcecadeb9..440adc2eb4 100644
+--- a/stubdom/Makefile
++++ b/stubdom/Makefile
+@@ -351,13 +351,16 @@ libs-$(XEN_TARGET_ARCH)/foreignmemory/stamp: $(XEN_ROOT)/tools/libs/foreignmemor
+ libs-$(XEN_TARGET_ARCH)/devicemodel/stamp: $(XEN_ROOT)/tools/libs/devicemodel/Makefile
+ 	$(do_links)
  
- #include <kernel.h>
- #include <console.h>
-diff --git a/tools/helpers/init-xenstore-domain.c b/tools/helpers/init-xenstore-domain.c
-index 4ce8299c3c..5bdb48dc80 100644
---- a/tools/helpers/init-xenstore-domain.c
-+++ b/tools/helpers/init-xenstore-domain.c
-@@ -8,7 +8,7 @@
- #include <sys/ioctl.h>
- #include <sys/mman.h>
- #include <xenctrl.h>
--#include <xc_dom.h>
-+#include <xenctrl_dom.h>
- #include <xenstore.h>
- #include <xen/sys/xenbus_dev.h>
- #include <xen-xsm/flask/flask.h>
-diff --git a/tools/libxc/include/xc_dom.h b/tools/libxc/include/xenctrl_dom.h
++libs-$(XEN_TARGET_ARCH)/ctrl/stamp: $(XEN_ROOT)/tools/libs/ctrl/Makefile
++	$(do_links)
++
+ libxc-$(XEN_TARGET_ARCH)/stamp: $(XEN_ROOT)/tools/libxc/Makefile
+ 	$(do_links)
+ 
+ xenstore/stamp: $(XEN_ROOT)/tools/xenstore/Makefile
+ 	$(do_links)
+ 
+-LINK_LIBS_DIRS := toolcore toollog evtchn gnttab call foreignmemory devicemodel
++LINK_LIBS_DIRS := toolcore toollog evtchn gnttab call foreignmemory devicemodel ctrl
+ LINK_DIRS := libxc-$(XEN_TARGET_ARCH) xenstore $(foreach dir,$(LINK_LIBS_DIRS),libs-$(XEN_TARGET_ARCH)/$(dir))
+ LINK_STAMPS := $(foreach dir,$(LINK_DIRS),$(dir)/stamp)
+ 
+@@ -449,17 +452,26 @@ libs-$(XEN_TARGET_ARCH)/devicemodel/libxendevicemodel.a: libxentoolcore libxento
+ libs-$(XEN_TARGET_ARCH)/devicemodel/libxendevicemodel.a: mk-headers-$(XEN_TARGET_ARCH) $(NEWLIB_STAMPFILE)
+ 	CPPFLAGS="$(TARGET_CPPFLAGS)" CFLAGS="$(TARGET_CFLAGS)" $(MAKE) DESTDIR= -C libs-$(XEN_TARGET_ARCH)/devicemodel
+ 
++#######
++# libxenctrl
++#######
++
++.PHONY: libxenctrl
++libxenctrl: libs-$(XEN_TARGET_ARCH)/ctrl/libxenctrl.a
++libs-$(XEN_TARGET_ARCH)/ctrl/libxenctrl.a: libxentoollog libxencall libxenevtchn libxengnttab libxenforeignmemory libxendevicemodel
++libs-$(XEN_TARGET_ARCH)/ctrl/libxenctrl.a: mk-headers-$(XEN_TARGET_ARCH) $(NEWLIB_STAMPFILE)
++	CPPFLAGS="$(TARGET_CPPFLAGS)" CFLAGS="$(TARGET_CFLAGS)" $(MAKE) DESTDIR= CONFIG_LIBXC_MINIOS=y -C libs-$(XEN_TARGET_ARCH)/ctrl
++
+ #######
+ # libxc
+ #######
+ 
+ .PHONY: libxc
+-libxc: libxc-$(XEN_TARGET_ARCH)/libxenctrl.a libxc-$(XEN_TARGET_ARCH)/libxenguest.a
+-libxc-$(XEN_TARGET_ARCH)/libxenctrl.a: mk-headers-$(XEN_TARGET_ARCH) libxentoolcore libxentoollog libxenevtchn libxengnttab libxencall libxenforeignmemory libxendevicemodel cross-zlib
++libxc: libxc-$(XEN_TARGET_ARCH)/libxenguest.a
++libxc-$(XEN_TARGET_ARCH)/libxenguest.a: libxenevtchn libxenctrl cross-zlib
++libxc-$(XEN_TARGET_ARCH)/libxenguest.a: mk-headers-$(XEN_TARGET_ARCH) $(NEWLIB_STAMPFILE)
+ 	CPPFLAGS="$(TARGET_CPPFLAGS)" CFLAGS="$(TARGET_CFLAGS)" $(MAKE) DESTDIR= CONFIG_LIBXC_MINIOS=y -C libxc-$(XEN_TARGET_ARCH)
+ 
+- libxc-$(XEN_TARGET_ARCH)/libxenguest.a: libxc-$(XEN_TARGET_ARCH)/libxenctrl.a
+-
+ #######
+ # ioemu
+ #######
+@@ -686,6 +698,7 @@ clean:
+ 	[ ! -e libs-$(XEN_TARGET_ARCH)/call/Makefile ] || $(MAKE) DESTDIR= -C libs-$(XEN_TARGET_ARCH)/call clean
+ 	[ ! -e libs-$(XEN_TARGET_ARCH)/foreignmemory/Makefile ] || $(MAKE) DESTDIR= -C libs-$(XEN_TARGET_ARCH)/foreignmemory clean
+ 	[ ! -e libs-$(XEN_TARGET_ARCH)/devicemodel/Makefile ] || $(MAKE) DESTDIR= -C libs-$(XEN_TARGET_ARCH)/devicemodel clean
++	[ ! -e libs-$(XEN_TARGET_ARCH)/ctrl/Makefile ] || $(MAKE) DESTDIR= -C libs-$(XEN_TARGET_ARCH)/ctrl clean
+ 	[ ! -e libxc-$(XEN_TARGET_ARCH)/Makefile ] || $(MAKE) DESTDIR= -C libxc-$(XEN_TARGET_ARCH) clean
+ 	-[ ! -d ioemu ] || $(MAKE) DESTDIR= -C ioemu clean
+ 	-[ ! -d xenstore ] || $(MAKE) DESTDIR= -C xenstore clean
+diff --git a/stubdom/mini-os.mk b/stubdom/mini-os.mk
+index 32528bb91f..b1387df3f8 100644
+--- a/stubdom/mini-os.mk
++++ b/stubdom/mini-os.mk
+@@ -13,5 +13,5 @@ GNTTAB_PATH = $(XEN_ROOT)/stubdom/libs-$(MINIOS_TARGET_ARCH)/gnttab
+ CALL_PATH = $(XEN_ROOT)/stubdom/libs-$(MINIOS_TARGET_ARCH)/call
+ FOREIGNMEMORY_PATH = $(XEN_ROOT)/stubdom/libs-$(MINIOS_TARGET_ARCH)/foreignmemory
+ DEVICEMODEL_PATH = $(XEN_ROOT)/stubdom/libs-$(MINIOS_TARGET_ARCH)/devicemodel
+-CTRL_PATH = $(XEN_ROOT)/stubdom/libxc-$(MINIOS_TARGET_ARCH)
++CTRL_PATH = $(XEN_ROOT)/stubdom/libs-$(MINIOS_TARGET_ARCH)/ctrl
+ GUEST_PATH = $(XEN_ROOT)/stubdom/libxc-$(MINIOS_TARGET_ARCH)
+diff --git a/tools/Rules.mk b/tools/Rules.mk
+index 35d237bba6..cf992b480f 100644
+--- a/tools/Rules.mk
++++ b/tools/Rules.mk
+@@ -29,8 +29,9 @@ LIBS_LIBS += devicemodel
+ USELIBS_devicemodel := toollog toolcore call
+ LIBS_LIBS += hypfs
+ USELIBS_hypfs := toollog toolcore call
++LIBS_LIBS += ctrl
++USELIBS_ctrl := toollog call evtchn gnttab foreignmemory devicemodel
+ 
+-XEN_libxenctrl     = $(XEN_ROOT)/tools/libxc
+ XEN_libxenguest    = $(XEN_ROOT)/tools/libxc
+ XEN_libxenlight    = $(XEN_ROOT)/tools/libxl
+ # Currently libxlutil lives in the same directory as libxenlight
+@@ -120,13 +121,10 @@ $(foreach lib,$(LIBS_LIBS),$(eval $(call LIB_defs,$(lib))))
+ 
+ # code which compiles against libxenctrl get __XEN_TOOLS__ and
+ # therefore sees the unstable hypercall interfaces.
+-CFLAGS_libxenctrl = -I$(XEN_libxenctrl)/include $(CFLAGS_libxentoollog) $(CFLAGS_libxenforeignmemory) $(CFLAGS_libxendevicemodel) $(CFLAGS_xeninclude) -D__XEN_TOOLS__
+-SHDEPS_libxenctrl = $(SHLIB_libxentoollog) $(SHLIB_libxenevtchn) $(SHLIB_libxengnttab) $(SHLIB_libxencall) $(SHLIB_libxenforeignmemory) $(SHLIB_libxendevicemodel)
+-LDLIBS_libxenctrl = $(SHDEPS_libxenctrl) $(XEN_libxenctrl)/libxenctrl$(libextension)
+-SHLIB_libxenctrl  = $(SHDEPS_libxenctrl) -Wl,-rpath-link=$(XEN_libxenctrl)
++CFLAGS_libxenctrl += $(CFLAGS_libxentoollog) $(CFLAGS_libxenforeignmemory) $(CFLAGS_libxendevicemodel) -D__XEN_TOOLS__
+ 
+ CFLAGS_libxenguest = -I$(XEN_libxenguest)/include $(CFLAGS_libxenevtchn) $(CFLAGS_libxenforeignmemory) $(CFLAGS_xeninclude)
+-SHDEPS_libxenguest = $(SHLIB_libxenevtchn)
++SHDEPS_libxenguest = $(SHLIB_libxenevtchn) $(SHLIB_libxenctrl)
+ LDLIBS_libxenguest = $(SHDEPS_libxenguest) $(XEN_libxenguest)/libxenguest$(libextension)
+ SHLIB_libxenguest  = $(SHDEPS_libxenguest) -Wl,-rpath-link=$(XEN_libxenguest)
+ 
+diff --git a/tools/libs/Makefile b/tools/libs/Makefile
+index 69cdfb5975..7648ea0e4c 100644
+--- a/tools/libs/Makefile
++++ b/tools/libs/Makefile
+@@ -9,6 +9,7 @@ SUBDIRS-y += gnttab
+ SUBDIRS-y += call
+ SUBDIRS-y += foreignmemory
+ SUBDIRS-y += devicemodel
++SUBDIRS-y += ctrl
+ SUBDIRS-y += hypfs
+ 
+ ifeq ($(CONFIG_RUMP),y)
+diff --git a/tools/libs/ctrl/Makefile b/tools/libs/ctrl/Makefile
+new file mode 100644
+index 0000000000..59e0dcdfd2
+--- /dev/null
++++ b/tools/libs/ctrl/Makefile
+@@ -0,0 +1,68 @@
++XEN_ROOT = $(CURDIR)/../../..
++include $(XEN_ROOT)/tools/Rules.mk
++
++SRCS-y       += xc_altp2m.c
++SRCS-y       += xc_core.c
++SRCS-$(CONFIG_X86) += xc_core_x86.c
++SRCS-$(CONFIG_ARM) += xc_core_arm.c
++SRCS-y       += xc_cpupool.c
++SRCS-y       += xc_domain.c
++SRCS-y       += xc_evtchn.c
++SRCS-y       += xc_gnttab.c
++SRCS-y       += xc_misc.c
++SRCS-y       += xc_flask.c
++SRCS-y       += xc_physdev.c
++SRCS-y       += xc_private.c
++SRCS-y       += xc_csched.c
++SRCS-y       += xc_csched2.c
++SRCS-y       += xc_arinc653.c
++SRCS-y       += xc_rt.c
++SRCS-y       += xc_tbuf.c
++SRCS-y       += xc_pm.c
++SRCS-y       += xc_cpu_hotplug.c
++SRCS-y       += xc_resume.c
++SRCS-y       += xc_vm_event.c
++SRCS-y       += xc_monitor.c
++SRCS-y       += xc_mem_paging.c
++SRCS-y       += xc_mem_access.c
++SRCS-y       += xc_memshr.c
++SRCS-y       += xc_hcall_buf.c
++SRCS-y       += xc_foreign_memory.c
++SRCS-y       += xc_kexec.c
++SRCS-y       += xc_resource.c
++SRCS-$(CONFIG_X86) += xc_psr.c
++SRCS-$(CONFIG_X86) += xc_pagetab.c
++SRCS-$(CONFIG_Linux) += xc_linux.c
++SRCS-$(CONFIG_FreeBSD) += xc_freebsd.c
++SRCS-$(CONFIG_SunOS) += xc_solaris.c
++SRCS-$(CONFIG_NetBSD) += xc_netbsd.c
++SRCS-$(CONFIG_NetBSDRump) += xc_netbsd.c
++SRCS-$(CONFIG_MiniOS) += xc_minios.c
++SRCS-y       += xc_evtchn_compat.c
++SRCS-y       += xc_gnttab_compat.c
++SRCS-y       += xc_devicemodel_compat.c
++
++CFLAGS   += -D__XEN_TOOLS__
++CFLAGS	+= $(PTHREAD_CFLAGS)
++CFLAGS += -include $(XEN_ROOT)/tools/config.h
++
++# Needed for posix_fadvise64() in xc_linux.c
++CFLAGS-$(CONFIG_Linux) += -D_GNU_SOURCE
++
++LIBHEADER := xenctrl.h xenctrl_compat.h xenctrl_dom.h
++PKG_CONFIG := xencontrol.pc
++
++NO_HEADERS_CHK := y
++
++include $(XEN_ROOT)/tools/libs/libs.mk
++
++genpath-target = $(call buildmakevars2header,_paths.h)
++$(eval $(genpath-target))
++
++$(LIB_OBJS) $(PIC_OBJS): _paths.h
++
++$(PKG_CONFIG_LOCAL): PKG_CONFIG_INCDIR = $(XEN_libxenctrl)/include
++$(PKG_CONFIG_LOCAL): PKG_CONFIG_CFLAGS_LOCAL = $(CFLAGS_xeninclude)
++
++clean:
++	rm -f libxenctrl.map
+diff --git a/tools/libxc/include/xenctrl.h b/tools/libs/ctrl/include/xenctrl.h
 similarity index 100%
-rename from tools/libxc/include/xc_dom.h
-rename to tools/libxc/include/xenctrl_dom.h
-diff --git a/tools/libxc/xc_core.c b/tools/libxc/xc_core.c
-index 2ee1d205b4..7df1fccd62 100644
---- a/tools/libxc/xc_core.c
-+++ b/tools/libxc/xc_core.c
-@@ -62,7 +62,7 @@
+rename from tools/libxc/include/xenctrl.h
+rename to tools/libs/ctrl/include/xenctrl.h
+diff --git a/tools/libxc/include/xenctrl_compat.h b/tools/libs/ctrl/include/xenctrl_compat.h
+similarity index 100%
+rename from tools/libxc/include/xenctrl_compat.h
+rename to tools/libs/ctrl/include/xenctrl_compat.h
+diff --git a/tools/libxc/include/xenctrl_dom.h b/tools/libs/ctrl/include/xenctrl_dom.h
+similarity index 100%
+rename from tools/libxc/include/xenctrl_dom.h
+rename to tools/libs/ctrl/include/xenctrl_dom.h
+diff --git a/tools/libxc/xc_altp2m.c b/tools/libs/ctrl/xc_altp2m.c
+similarity index 100%
+rename from tools/libxc/xc_altp2m.c
+rename to tools/libs/ctrl/xc_altp2m.c
+diff --git a/tools/libxc/xc_arinc653.c b/tools/libs/ctrl/xc_arinc653.c
+similarity index 100%
+rename from tools/libxc/xc_arinc653.c
+rename to tools/libs/ctrl/xc_arinc653.c
+diff --git a/tools/libxc/xc_bitops.h b/tools/libs/ctrl/xc_bitops.h
+similarity index 100%
+rename from tools/libxc/xc_bitops.h
+rename to tools/libs/ctrl/xc_bitops.h
+diff --git a/tools/libxc/xc_core.c b/tools/libs/ctrl/xc_core.c
+similarity index 100%
+rename from tools/libxc/xc_core.c
+rename to tools/libs/ctrl/xc_core.c
+diff --git a/tools/libxc/xc_core.h b/tools/libs/ctrl/xc_core.h
+similarity index 100%
+rename from tools/libxc/xc_core.h
+rename to tools/libs/ctrl/xc_core.h
+diff --git a/tools/libxc/xc_core_arm.c b/tools/libs/ctrl/xc_core_arm.c
+similarity index 100%
+rename from tools/libxc/xc_core_arm.c
+rename to tools/libs/ctrl/xc_core_arm.c
+diff --git a/tools/libxc/xc_core_arm.h b/tools/libs/ctrl/xc_core_arm.h
+similarity index 100%
+rename from tools/libxc/xc_core_arm.h
+rename to tools/libs/ctrl/xc_core_arm.h
+diff --git a/tools/libxc/xc_core_x86.c b/tools/libs/ctrl/xc_core_x86.c
+similarity index 100%
+rename from tools/libxc/xc_core_x86.c
+rename to tools/libs/ctrl/xc_core_x86.c
+diff --git a/tools/libxc/xc_core_x86.h b/tools/libs/ctrl/xc_core_x86.h
+similarity index 100%
+rename from tools/libxc/xc_core_x86.h
+rename to tools/libs/ctrl/xc_core_x86.h
+diff --git a/tools/libxc/xc_cpu_hotplug.c b/tools/libs/ctrl/xc_cpu_hotplug.c
+similarity index 100%
+rename from tools/libxc/xc_cpu_hotplug.c
+rename to tools/libs/ctrl/xc_cpu_hotplug.c
+diff --git a/tools/libxc/xc_cpupool.c b/tools/libs/ctrl/xc_cpupool.c
+similarity index 100%
+rename from tools/libxc/xc_cpupool.c
+rename to tools/libs/ctrl/xc_cpupool.c
+diff --git a/tools/libxc/xc_csched.c b/tools/libs/ctrl/xc_csched.c
+similarity index 100%
+rename from tools/libxc/xc_csched.c
+rename to tools/libs/ctrl/xc_csched.c
+diff --git a/tools/libxc/xc_csched2.c b/tools/libs/ctrl/xc_csched2.c
+similarity index 100%
+rename from tools/libxc/xc_csched2.c
+rename to tools/libs/ctrl/xc_csched2.c
+diff --git a/tools/libxc/xc_devicemodel_compat.c b/tools/libs/ctrl/xc_devicemodel_compat.c
+similarity index 100%
+rename from tools/libxc/xc_devicemodel_compat.c
+rename to tools/libs/ctrl/xc_devicemodel_compat.c
+diff --git a/tools/libxc/xc_domain.c b/tools/libs/ctrl/xc_domain.c
+similarity index 100%
+rename from tools/libxc/xc_domain.c
+rename to tools/libs/ctrl/xc_domain.c
+diff --git a/tools/libxc/xc_evtchn.c b/tools/libs/ctrl/xc_evtchn.c
+similarity index 100%
+rename from tools/libxc/xc_evtchn.c
+rename to tools/libs/ctrl/xc_evtchn.c
+diff --git a/tools/libxc/xc_evtchn_compat.c b/tools/libs/ctrl/xc_evtchn_compat.c
+similarity index 100%
+rename from tools/libxc/xc_evtchn_compat.c
+rename to tools/libs/ctrl/xc_evtchn_compat.c
+diff --git a/tools/libxc/xc_flask.c b/tools/libs/ctrl/xc_flask.c
+similarity index 100%
+rename from tools/libxc/xc_flask.c
+rename to tools/libs/ctrl/xc_flask.c
+diff --git a/tools/libxc/xc_foreign_memory.c b/tools/libs/ctrl/xc_foreign_memory.c
+similarity index 100%
+rename from tools/libxc/xc_foreign_memory.c
+rename to tools/libs/ctrl/xc_foreign_memory.c
+diff --git a/tools/libxc/xc_freebsd.c b/tools/libs/ctrl/xc_freebsd.c
+similarity index 100%
+rename from tools/libxc/xc_freebsd.c
+rename to tools/libs/ctrl/xc_freebsd.c
+diff --git a/tools/libxc/xc_gnttab.c b/tools/libs/ctrl/xc_gnttab.c
+similarity index 100%
+rename from tools/libxc/xc_gnttab.c
+rename to tools/libs/ctrl/xc_gnttab.c
+diff --git a/tools/libxc/xc_gnttab_compat.c b/tools/libs/ctrl/xc_gnttab_compat.c
+similarity index 100%
+rename from tools/libxc/xc_gnttab_compat.c
+rename to tools/libs/ctrl/xc_gnttab_compat.c
+diff --git a/tools/libxc/xc_hcall_buf.c b/tools/libs/ctrl/xc_hcall_buf.c
+similarity index 100%
+rename from tools/libxc/xc_hcall_buf.c
+rename to tools/libs/ctrl/xc_hcall_buf.c
+diff --git a/tools/libxc/xc_kexec.c b/tools/libs/ctrl/xc_kexec.c
+similarity index 100%
+rename from tools/libxc/xc_kexec.c
+rename to tools/libs/ctrl/xc_kexec.c
+diff --git a/tools/libxc/xc_linux.c b/tools/libs/ctrl/xc_linux.c
+similarity index 100%
+rename from tools/libxc/xc_linux.c
+rename to tools/libs/ctrl/xc_linux.c
+diff --git a/tools/libxc/xc_mem_access.c b/tools/libs/ctrl/xc_mem_access.c
+similarity index 100%
+rename from tools/libxc/xc_mem_access.c
+rename to tools/libs/ctrl/xc_mem_access.c
+diff --git a/tools/libxc/xc_mem_paging.c b/tools/libs/ctrl/xc_mem_paging.c
+similarity index 100%
+rename from tools/libxc/xc_mem_paging.c
+rename to tools/libs/ctrl/xc_mem_paging.c
+diff --git a/tools/libxc/xc_memshr.c b/tools/libs/ctrl/xc_memshr.c
+similarity index 100%
+rename from tools/libxc/xc_memshr.c
+rename to tools/libs/ctrl/xc_memshr.c
+diff --git a/tools/libxc/xc_minios.c b/tools/libs/ctrl/xc_minios.c
+similarity index 100%
+rename from tools/libxc/xc_minios.c
+rename to tools/libs/ctrl/xc_minios.c
+diff --git a/tools/libxc/xc_misc.c b/tools/libs/ctrl/xc_misc.c
+similarity index 100%
+rename from tools/libxc/xc_misc.c
+rename to tools/libs/ctrl/xc_misc.c
+diff --git a/tools/libxc/xc_monitor.c b/tools/libs/ctrl/xc_monitor.c
+similarity index 100%
+rename from tools/libxc/xc_monitor.c
+rename to tools/libs/ctrl/xc_monitor.c
+diff --git a/tools/libxc/xc_msr_x86.h b/tools/libs/ctrl/xc_msr_x86.h
+similarity index 100%
+rename from tools/libxc/xc_msr_x86.h
+rename to tools/libs/ctrl/xc_msr_x86.h
+diff --git a/tools/libxc/xc_netbsd.c b/tools/libs/ctrl/xc_netbsd.c
+similarity index 100%
+rename from tools/libxc/xc_netbsd.c
+rename to tools/libs/ctrl/xc_netbsd.c
+diff --git a/tools/libxc/xc_pagetab.c b/tools/libs/ctrl/xc_pagetab.c
+similarity index 100%
+rename from tools/libxc/xc_pagetab.c
+rename to tools/libs/ctrl/xc_pagetab.c
+diff --git a/tools/libxc/xc_physdev.c b/tools/libs/ctrl/xc_physdev.c
+similarity index 100%
+rename from tools/libxc/xc_physdev.c
+rename to tools/libs/ctrl/xc_physdev.c
+diff --git a/tools/libxc/xc_pm.c b/tools/libs/ctrl/xc_pm.c
+similarity index 100%
+rename from tools/libxc/xc_pm.c
+rename to tools/libs/ctrl/xc_pm.c
+diff --git a/tools/libxc/xc_private.c b/tools/libs/ctrl/xc_private.c
+similarity index 100%
+rename from tools/libxc/xc_private.c
+rename to tools/libs/ctrl/xc_private.c
+diff --git a/tools/libxc/xc_private.h b/tools/libs/ctrl/xc_private.h
+similarity index 100%
+rename from tools/libxc/xc_private.h
+rename to tools/libs/ctrl/xc_private.h
+diff --git a/tools/libxc/xc_psr.c b/tools/libs/ctrl/xc_psr.c
+similarity index 100%
+rename from tools/libxc/xc_psr.c
+rename to tools/libs/ctrl/xc_psr.c
+diff --git a/tools/libxc/xc_resource.c b/tools/libs/ctrl/xc_resource.c
+similarity index 100%
+rename from tools/libxc/xc_resource.c
+rename to tools/libs/ctrl/xc_resource.c
+diff --git a/tools/libxc/xc_resume.c b/tools/libs/ctrl/xc_resume.c
+similarity index 100%
+rename from tools/libxc/xc_resume.c
+rename to tools/libs/ctrl/xc_resume.c
+diff --git a/tools/libxc/xc_rt.c b/tools/libs/ctrl/xc_rt.c
+similarity index 100%
+rename from tools/libxc/xc_rt.c
+rename to tools/libs/ctrl/xc_rt.c
+diff --git a/tools/libxc/xc_solaris.c b/tools/libs/ctrl/xc_solaris.c
+similarity index 100%
+rename from tools/libxc/xc_solaris.c
+rename to tools/libs/ctrl/xc_solaris.c
+diff --git a/tools/libxc/xc_tbuf.c b/tools/libs/ctrl/xc_tbuf.c
+similarity index 100%
+rename from tools/libxc/xc_tbuf.c
+rename to tools/libs/ctrl/xc_tbuf.c
+diff --git a/tools/libxc/xc_vm_event.c b/tools/libs/ctrl/xc_vm_event.c
+similarity index 100%
+rename from tools/libxc/xc_vm_event.c
+rename to tools/libs/ctrl/xc_vm_event.c
+diff --git a/tools/libxc/xencontrol.pc.in b/tools/libs/ctrl/xencontrol.pc.in
+similarity index 100%
+rename from tools/libxc/xencontrol.pc.in
+rename to tools/libs/ctrl/xencontrol.pc.in
+diff --git a/tools/libxc/Makefile b/tools/libxc/Makefile
+index 1e4065f87c..a52264c74c 100644
+--- a/tools/libxc/Makefile
++++ b/tools/libxc/Makefile
+@@ -9,47 +9,10 @@ ifeq ($(CONFIG_LIBXC_MINIOS),y)
+ override CONFIG_MIGRATE := n
+ endif
  
- #include "xg_private.h"
- #include "xc_core.h"
--#include "xc_dom.h"
-+#include "xenctrl_dom.h"
- #include <stdlib.h>
- #include <unistd.h>
+-CTRL_SRCS-y       :=
+-CTRL_SRCS-y       += xc_altp2m.c
+-CTRL_SRCS-y       += xc_core.c
+-CTRL_SRCS-$(CONFIG_X86) += xc_core_x86.c
+-CTRL_SRCS-$(CONFIG_ARM) += xc_core_arm.c
+-CTRL_SRCS-y       += xc_cpupool.c
+-CTRL_SRCS-y       += xc_domain.c
+-CTRL_SRCS-y       += xc_evtchn.c
+-CTRL_SRCS-y       += xc_gnttab.c
+-CTRL_SRCS-y       += xc_misc.c
+-CTRL_SRCS-y       += xc_flask.c
+-CTRL_SRCS-y       += xc_physdev.c
+-CTRL_SRCS-y       += xc_private.c
+-CTRL_SRCS-y       += xc_csched.c
+-CTRL_SRCS-y       += xc_csched2.c
+-CTRL_SRCS-y       += xc_arinc653.c
+-CTRL_SRCS-y       += xc_rt.c
+-CTRL_SRCS-y       += xc_tbuf.c
+-CTRL_SRCS-y       += xc_pm.c
+-CTRL_SRCS-y       += xc_cpu_hotplug.c
+-CTRL_SRCS-y       += xc_resume.c
+-CTRL_SRCS-y       += xc_vm_event.c
+-CTRL_SRCS-y       += xc_monitor.c
+-CTRL_SRCS-y       += xc_mem_paging.c
+-CTRL_SRCS-y       += xc_mem_access.c
+-CTRL_SRCS-y       += xc_memshr.c
+-CTRL_SRCS-y       += xc_hcall_buf.c
+-CTRL_SRCS-y       += xc_foreign_memory.c
+-CTRL_SRCS-y       += xc_kexec.c
+-CTRL_SRCS-y       += xc_resource.c
+-CTRL_SRCS-$(CONFIG_X86) += xc_psr.c
+-CTRL_SRCS-$(CONFIG_X86) += xc_pagetab.c
+-CTRL_SRCS-$(CONFIG_Linux) += xc_linux.c
+-CTRL_SRCS-$(CONFIG_FreeBSD) += xc_freebsd.c
+-CTRL_SRCS-$(CONFIG_SunOS) += xc_solaris.c
+-CTRL_SRCS-$(CONFIG_NetBSD) += xc_netbsd.c
+-CTRL_SRCS-$(CONFIG_NetBSDRump) += xc_netbsd.c
+-CTRL_SRCS-$(CONFIG_MiniOS) += xc_minios.c
+-CTRL_SRCS-y       += xc_evtchn_compat.c
+-CTRL_SRCS-y       += xc_gnttab_compat.c
+-CTRL_SRCS-y       += xc_devicemodel_compat.c
++LINK_FILES := xc_private.h xc_core.h xc_core_x86.h xc_core_arm.h xc_bitops.h
++
++$(LINK_FILES):
++	ln -sf $(XEN_ROOT)/tools/libs/ctrl/$(notdir $@) $@
  
-diff --git a/tools/libxc/xc_private.c b/tools/libxc/xc_private.c
-index 90974d572e..6ecdf6953f 100644
---- a/tools/libxc/xc_private.c
-+++ b/tools/libxc/xc_private.c
-@@ -19,7 +19,7 @@
+ GUEST_SRCS-y :=
+ GUEST_SRCS-y += xg_private.c
+@@ -124,26 +87,14 @@ CFLAGS	+= $(CFLAGS_libxentoollog)
+ CFLAGS	+= $(CFLAGS_libxenevtchn)
+ CFLAGS	+= $(CFLAGS_libxendevicemodel)
  
- #include "xc_private.h"
- #include "xg_private.h"
--#include "xc_dom.h"
-+#include "xenctrl_dom.h"
- #include <stdarg.h>
- #include <stdlib.h>
- #include <unistd.h>
-diff --git a/tools/libxc/xg_dom_arm.c b/tools/libxc/xg_dom_arm.c
-index 931404c222..3f66f1d890 100644
---- a/tools/libxc/xg_dom_arm.c
-+++ b/tools/libxc/xg_dom_arm.c
-@@ -24,7 +24,7 @@
- #include <xen-tools/libs.h>
+-CTRL_LIB_OBJS := $(patsubst %.c,%.o,$(CTRL_SRCS-y))
+-CTRL_PIC_OBJS := $(patsubst %.c,%.opic,$(CTRL_SRCS-y))
+-
+ GUEST_LIB_OBJS := $(patsubst %.c,%.o,$(GUEST_SRCS-y))
+ GUEST_PIC_OBJS := $(patsubst %.c,%.opic,$(GUEST_SRCS-y))
  
- #include "xg_private.h"
--#include "xc_dom.h"
-+#include "xenctrl_dom.h"
+-$(CTRL_LIB_OBJS) $(GUEST_LIB_OBJS) \
+-$(CTRL_PIC_OBJS) $(GUEST_PIC_OBJS): CFLAGS += -include $(XEN_ROOT)/tools/config.h
++$(GUEST_LIB_OBJS) $(GUEST_PIC_OBJS): CFLAGS += -include $(XEN_ROOT)/tools/config.h
  
- #define NR_MAGIC_PAGES 4
- #define CONSOLE_PFN_OFFSET 0
-diff --git a/tools/libxc/xg_dom_armzimageloader.c b/tools/libxc/xg_dom_armzimageloader.c
-index 0df8c2a4b1..4246c8e5fa 100644
---- a/tools/libxc/xg_dom_armzimageloader.c
-+++ b/tools/libxc/xg_dom_armzimageloader.c
-@@ -25,7 +25,7 @@
- #include <inttypes.h>
+ # libxenguest includes xc_private.h, so needs this despite not using
+ # this functionality directly.
+-$(CTRL_LIB_OBJS) $(GUEST_LIB_OBJS) \
+-$(CTRL_PIC_OBJS) $(GUEST_PIC_OBJS): CFLAGS += $(CFLAGS_libxencall) $(CFLAGS_libxenforeignmemory)
+-
+-$(CTRL_LIB_OBJS) $(CTRL_PIC_OBJS): CFLAGS += $(CFLAGS_libxengnttab)
+-
+-LIB := libxenctrl.a
+-ifneq ($(nosharedlibs),y)
+-LIB += libxenctrl.so libxenctrl.so.$(MAJOR) libxenctrl.so.$(MAJOR).$(MINOR)
+-endif
++$(GUEST_LIB_OBJS) $(GUEST_PIC_OBJS): CFLAGS += $(CFLAGS_libxencall) $(CFLAGS_libxenforeignmemory)
  
- #include "xg_private.h"
--#include "xc_dom.h"
-+#include "xenctrl_dom.h"
+ LIB += libxenguest.a
+ ifneq ($(nosharedlibs),y)
+@@ -155,10 +106,9 @@ $(eval $(genpath-target))
  
- #include <arpa/inet.h> /* XXX ntohl is not the right function... */
+ xc_private.h: _paths.h
  
-diff --git a/tools/libxc/xg_dom_binloader.c b/tools/libxc/xg_dom_binloader.c
-index d6f7f2a500..870a921427 100644
---- a/tools/libxc/xg_dom_binloader.c
-+++ b/tools/libxc/xg_dom_binloader.c
-@@ -83,7 +83,7 @@
- #include <inttypes.h>
+-$(CTRL_LIB_OBJS) $(GUEST_LIB_OBJS) \
+-$(CTRL_PIC_OBJS) $(GUEST_PIC_OBJS): xc_private.h
++$(GUEST_LIB_OBJS) $(GUEST_PIC_OBJS): $(LINK_FILES)
  
- #include "xg_private.h"
--#include "xc_dom.h"
-+#include "xenctrl_dom.h"
+-PKG_CONFIG := xencontrol.pc xenguest.pc
++PKG_CONFIG := xenguest.pc
+ PKG_CONFIG_VERSION := $(MAJOR).$(MINOR)
  
- #define round_pgup(_p)    (((_p)+(PAGE_SIZE_X86-1))&PAGE_MASK_X86)
- #define round_pgdown(_p)  ((_p)&PAGE_MASK_X86)
-diff --git a/tools/libxc/xg_dom_boot.c b/tools/libxc/xg_dom_boot.c
-index bb599b33ba..1e31e92244 100644
---- a/tools/libxc/xg_dom_boot.c
-+++ b/tools/libxc/xg_dom_boot.c
-@@ -31,7 +31,7 @@
- #include <zlib.h>
+ ifneq ($(CONFIG_LIBXC_MINIOS),y)
+@@ -189,17 +139,11 @@ libs: $(LIB) $(PKG_CONFIG_INST) $(PKG_CONFIG_LOCAL)
+ install: build
+ 	$(INSTALL_DIR) $(DESTDIR)$(libdir)
+ 	$(INSTALL_DIR) $(DESTDIR)$(includedir)
+-	$(INSTALL_SHLIB) libxenctrl.so.$(MAJOR).$(MINOR) $(DESTDIR)$(libdir)
+-	$(INSTALL_DATA) libxenctrl.a $(DESTDIR)$(libdir)
+-	$(SYMLINK_SHLIB) libxenctrl.so.$(MAJOR).$(MINOR) $(DESTDIR)$(libdir)/libxenctrl.so.$(MAJOR)
+-	$(SYMLINK_SHLIB) libxenctrl.so.$(MAJOR) $(DESTDIR)$(libdir)/libxenctrl.so
+-	$(INSTALL_DATA) include/xenctrl.h include/xenctrl_compat.h include/xenctrl_dom.h $(DESTDIR)$(includedir)
+ 	$(INSTALL_SHLIB) libxenguest.so.$(MAJOR).$(MINOR) $(DESTDIR)$(libdir)
+ 	$(INSTALL_DATA) libxenguest.a $(DESTDIR)$(libdir)
+ 	$(SYMLINK_SHLIB) libxenguest.so.$(MAJOR).$(MINOR) $(DESTDIR)$(libdir)/libxenguest.so.$(MAJOR)
+ 	$(SYMLINK_SHLIB) libxenguest.so.$(MAJOR) $(DESTDIR)$(libdir)/libxenguest.so
+ 	$(INSTALL_DATA) include/xenguest.h $(DESTDIR)$(includedir)
+-	$(INSTALL_DATA) xencontrol.pc $(DESTDIR)$(PKG_INSTALLDIR)
+ 	$(INSTALL_DATA) xenguest.pc $(DESTDIR)$(PKG_INSTALLDIR)
  
- #include "xg_private.h"
--#include "xc_dom.h"
-+#include "xenctrl_dom.h"
- #include "xc_core.h"
- #include <xen/hvm/params.h>
- #include <xen/grant_table.h>
-diff --git a/tools/libxc/xg_dom_compat_linux.c b/tools/libxc/xg_dom_compat_linux.c
-index b3d43feed9..b645f0b14b 100644
---- a/tools/libxc/xg_dom_compat_linux.c
-+++ b/tools/libxc/xg_dom_compat_linux.c
-@@ -30,7 +30,7 @@
+ .PHONY: uninstall
+@@ -210,14 +154,6 @@ uninstall:
+ 	rm -f $(DESTDIR)$(libdir)/libxenguest.so.$(MAJOR)
+ 	rm -f $(DESTDIR)$(libdir)/libxenguest.so.$(MAJOR).$(MINOR)
+ 	rm -f $(DESTDIR)$(libdir)/libxenguest.a
+-	rm -f $(DESTDIR)$(PKG_INSTALLDIR)/xencontrol.pc
+-	rm -f $(DESTDIR)$(includedir)/xenctrl.h
+-	rm -f $(DESTDIR)$(includedir)/xenctrl_compat.h
+-	rm -f $(DESTDIR)$(includedir)/xenctrl_dom.h
+-	rm -f $(DESTDIR)$(libdir)/libxenctrl.so
+-	rm -f $(DESTDIR)$(libdir)/libxenctrl.so.$(MAJOR)
+-	rm -f $(DESTDIR)$(libdir)/libxenctrl.so.$(MAJOR).$(MINOR)
+-	rm -f $(DESTDIR)$(libdir)/libxenctrl.a
  
- #include "xenctrl.h"
- #include "xg_private.h"
--#include "xc_dom.h"
-+#include "xenctrl_dom.h"
+ .PHONY: TAGS
+ TAGS:
+@@ -227,8 +163,8 @@ TAGS:
+ clean:
+ 	rm -rf *.rpm $(LIB) *~ $(DEPS_RM) \
+             _paths.h \
+-	    xencontrol.pc xenguest.pc \
+-            $(CTRL_LIB_OBJS) $(CTRL_PIC_OBJS) \
++	    $(LINK_FILES) \
++	    xenguest.pc \
+             $(GUEST_LIB_OBJS) $(GUEST_PIC_OBJS)
  
- /* ------------------------------------------------------------------------ */
+ .PHONY: distclean
+@@ -244,19 +180,6 @@ rpm: build
+ 	mv staging/i386/*.rpm .
+ 	rm -rf staging
  
-diff --git a/tools/libxc/xg_dom_core.c b/tools/libxc/xg_dom_core.c
-index 327c8a8575..1c91cce315 100644
---- a/tools/libxc/xg_dom_core.c
-+++ b/tools/libxc/xg_dom_core.c
-@@ -32,7 +32,7 @@
- #include <assert.h>
+-# libxenctrl
+-
+-libxenctrl.a: $(CTRL_LIB_OBJS)
+-	$(AR) rc $@ $^
+-
+-libxenctrl.so: libxenctrl.so.$(MAJOR)
+-	$(SYMLINK_SHLIB) $< $@
+-libxenctrl.so.$(MAJOR): libxenctrl.so.$(MAJOR).$(MINOR)
+-	$(SYMLINK_SHLIB) $< $@
+-
+-libxenctrl.so.$(MAJOR).$(MINOR): $(CTRL_PIC_OBJS)
+-	$(CC) $(LDFLAGS) $(PTHREAD_LDFLAGS) -Wl,$(SONAME_LDFLAG) -Wl,libxenctrl.so.$(MAJOR) $(SHLIB_LDFLAGS) -o $@ $^ $(LDLIBS_libxentoollog) $(LDLIBS_libxenevtchn) $(LDLIBS_libxengnttab) $(LDLIBS_libxencall) $(LDLIBS_libxenforeignmemory) $(LDLIBS_libxendevicemodel) $(PTHREAD_LIBS) $(APPEND_LDFLAGS)
+-
+ # libxenguest
  
- #include "xg_private.h"
--#include "xc_dom.h"
-+#include "xenctrl_dom.h"
- #include "_paths.h"
+ libxenguest.a: $(GUEST_LIB_OBJS)
+@@ -277,7 +200,7 @@ xc_dom_bzimageloader.o: CFLAGS += $(filter -D%,$(zlib-options))
+ xc_dom_bzimageloader.opic: CFLAGS += $(filter -D%,$(zlib-options))
  
- /* ------------------------------------------------------------------------ */
-diff --git a/tools/libxc/xg_dom_decompress.h b/tools/libxc/xg_dom_decompress.h
-index d9a21cf297..c5ab2e59eb 100644
---- a/tools/libxc/xg_dom_decompress.h
-+++ b/tools/libxc/xg_dom_decompress.h
-@@ -1,5 +1,5 @@
- #ifndef __MINIOS__
--# include "xc_dom.h"
-+# include "xenctrl_dom.h"
- #else
- # include "xg_dom_decompress_unsafe.h"
- #endif
-diff --git a/tools/libxc/xg_dom_decompress_unsafe.h b/tools/libxc/xg_dom_decompress_unsafe.h
-index 64f68864b1..fb84b6add8 100644
---- a/tools/libxc/xg_dom_decompress_unsafe.h
-+++ b/tools/libxc/xg_dom_decompress_unsafe.h
-@@ -1,4 +1,4 @@
--#include "xc_dom.h"
-+#include "xenctrl_dom.h"
+ libxenguest.so.$(MAJOR).$(MINOR): COMPRESSION_LIBS = $(filter -l%,$(zlib-options))
+-libxenguest.so.$(MAJOR).$(MINOR): $(GUEST_PIC_OBJS) libxenctrl.so
++libxenguest.so.$(MAJOR).$(MINOR): $(GUEST_PIC_OBJS)
+ 	$(CC) $(LDFLAGS) -Wl,$(SONAME_LDFLAG) -Wl,libxenguest.so.$(MAJOR) $(SHLIB_LDFLAGS) -o $@ $(GUEST_PIC_OBJS) $(COMPRESSION_LIBS) -lz $(LDLIBS_libxenevtchn) $(LDLIBS_libxenctrl) $(PTHREAD_LIBS) $(APPEND_LDFLAGS)
  
- typedef int decompress_fn(unsigned char *inbuf, unsigned int len,
-                           int (*fill)(void*, unsigned int),
-diff --git a/tools/libxc/xg_dom_elfloader.c b/tools/libxc/xg_dom_elfloader.c
-index b327db219d..7043c3bbba 100644
---- a/tools/libxc/xg_dom_elfloader.c
-+++ b/tools/libxc/xg_dom_elfloader.c
-@@ -26,7 +26,7 @@
- #include <inttypes.h>
+ -include $(DEPS_INCLUDE)
+diff --git a/tools/python/Makefile b/tools/python/Makefile
+index 8d22c03676..8dc755d6e8 100644
+--- a/tools/python/Makefile
++++ b/tools/python/Makefile
+@@ -33,7 +33,7 @@ uninstall:
  
- #include "xg_private.h"
--#include "xc_dom.h"
-+#include "xenctrl_dom.h"
- #include "xc_bitops.h"
+ .PHONY: test
+ test:
+-	LD_LIBRARY_PATH=$$(readlink -f ../libxc):$$(readlink -f ../xenstore) $(PYTHON) -m unittest discover
++	LD_LIBRARY_PATH=$$(readlink -f ../libs/ctrl):$$(readlink -f ../xenstore) $(PYTHON) -m unittest discover
  
- #define XEN_VER "xen-3.0"
-diff --git a/tools/libxc/xg_dom_hvmloader.c b/tools/libxc/xg_dom_hvmloader.c
-index 3f0bd65547..995a0f3dc3 100644
---- a/tools/libxc/xg_dom_hvmloader.c
-+++ b/tools/libxc/xg_dom_hvmloader.c
-@@ -26,7 +26,7 @@
- #include <assert.h>
+ .PHONY: clean
+ clean:
+diff --git a/tools/python/setup.py b/tools/python/setup.py
+index 44696b3998..24b284af39 100644
+--- a/tools/python/setup.py
++++ b/tools/python/setup.py
+@@ -9,7 +9,7 @@ extra_compile_args  = [ "-fno-strict-aliasing", "-Werror" ]
+ PATH_XEN      = XEN_ROOT + "/tools/include"
+ PATH_LIBXENTOOLLOG = XEN_ROOT + "/tools/libs/toollog"
+ PATH_LIBXENEVTCHN = XEN_ROOT + "/tools/libs/evtchn"
+-PATH_LIBXC    = XEN_ROOT + "/tools/libxc"
++PATH_LIBXENCTRL = XEN_ROOT + "/tools/libs/ctrl"
+ PATH_LIBXL    = XEN_ROOT + "/tools/libxl"
+ PATH_XENSTORE = XEN_ROOT + "/tools/xenstore"
  
- #include "xg_private.h"
--#include "xc_dom.h"
-+#include "xenctrl_dom.h"
- #include "xc_bitops.h"
- 
- /* ------------------------------------------------------------------------ */
-diff --git a/tools/libxc/xg_dom_x86.c b/tools/libxc/xg_dom_x86.c
-index 9439805eaa..842dbcccdd 100644
---- a/tools/libxc/xg_dom_x86.c
-+++ b/tools/libxc/xg_dom_x86.c
-@@ -38,7 +38,7 @@
- #include <xen-tools/libs.h>
- 
- #include "xg_private.h"
--#include "xc_dom.h"
-+#include "xenctrl_dom.h"
- #include "xenctrl.h"
- 
- /* ------------------------------------------------------------------------ */
-diff --git a/tools/libxc/xg_offline_page.c b/tools/libxc/xg_offline_page.c
-index 19538fc436..77e8889b11 100644
---- a/tools/libxc/xg_offline_page.c
-+++ b/tools/libxc/xg_offline_page.c
-@@ -28,7 +28,7 @@
- #include <xc_core.h>
- 
- #include "xc_private.h"
--#include "xc_dom.h"
-+#include "xenctrl_dom.h"
- #include "xg_private.h"
- #include "xg_save_restore.h"
- 
-diff --git a/tools/libxc/xg_sr_common.h b/tools/libxc/xg_sr_common.h
-index 35f23fabb5..13fcc47420 100644
---- a/tools/libxc/xg_sr_common.h
-+++ b/tools/libxc/xg_sr_common.h
-@@ -5,7 +5,7 @@
- 
- #include "xg_private.h"
- #include "xg_save_restore.h"
--#include "xc_dom.h"
-+#include "xenctrl_dom.h"
- #include "xc_bitops.h"
- 
- #include "xg_sr_stream_format.h"
-diff --git a/tools/libxl/libxl_arm.c b/tools/libxl/libxl_arm.c
-index 34f8a29056..975a4d730a 100644
---- a/tools/libxl/libxl_arm.c
-+++ b/tools/libxl/libxl_arm.c
-@@ -3,7 +3,7 @@
- #include "libxl_libfdt_compat.h"
- #include "libxl_arm.h"
- 
--#include <xc_dom.h>
-+#include <xenctrl_dom.h>
- #include <stdbool.h>
- #include <libfdt.h>
- #include <assert.h>
-diff --git a/tools/libxl/libxl_arm.h b/tools/libxl/libxl_arm.h
-index 8aef210d4c..52c2ab5e3a 100644
---- a/tools/libxl/libxl_arm.h
-+++ b/tools/libxl/libxl_arm.h
-@@ -17,7 +17,7 @@
- #include "libxl_internal.h"
- #include "libxl_arch.h"
- 
--#include <xc_dom.h>
-+#include <xenctrl_dom.h>
- 
- _hidden
- int libxl__prepare_acpi(libxl__gc *gc, libxl_domain_build_info *info,
-diff --git a/tools/libxl/libxl_create.c b/tools/libxl/libxl_create.c
-index 2814818e34..1031b75159 100644
---- a/tools/libxl/libxl_create.c
-+++ b/tools/libxl/libxl_create.c
-@@ -20,7 +20,7 @@
- #include "libxl_internal.h"
- #include "libxl_arch.h"
- 
--#include <xc_dom.h>
-+#include <xenctrl_dom.h>
- #include <xenguest.h>
- #include <xen/hvm/hvm_info_table.h>
- #include <xen/hvm/e820.h>
-diff --git a/tools/libxl/libxl_dm.c b/tools/libxl/libxl_dm.c
-index f2dc5696b9..fec4e0fbe5 100644
---- a/tools/libxl/libxl_dm.c
-+++ b/tools/libxl/libxl_dm.c
-@@ -19,7 +19,7 @@
- 
- #include "libxl_internal.h"
- 
--#include <xc_dom.h>
-+#include <xenctrl_dom.h>
- #include <xen/hvm/e820.h>
- #include <sys/types.h>
- #include <pwd.h>
-diff --git a/tools/libxl/libxl_dom.c b/tools/libxl/libxl_dom.c
-index f8661e90d4..e2dca64aa1 100644
---- a/tools/libxl/libxl_dom.c
-+++ b/tools/libxl/libxl_dom.c
-@@ -20,7 +20,7 @@
- #include "libxl_internal.h"
- #include "libxl_arch.h"
- 
--#include <xc_dom.h>
-+#include <xenctrl_dom.h>
- #include <xen/hvm/hvm_info_table.h>
- #include <xen/hvm/hvm_xs_strings.h>
- #include <xen/hvm/e820.h>
-diff --git a/tools/libxl/libxl_internal.h b/tools/libxl/libxl_internal.h
-index c63d0686fd..e16ae9630b 100644
---- a/tools/libxl/libxl_internal.h
-+++ b/tools/libxl/libxl_internal.h
-@@ -57,7 +57,7 @@
- #include <xenctrl.h>
- #include <xenguest.h>
- #include <xenhypfs.h>
--#include <xc_dom.h>
-+#include <xenctrl_dom.h>
- 
- #include <xen-tools/libs.h>
- 
-diff --git a/tools/libxl/libxl_vnuma.c b/tools/libxl/libxl_vnuma.c
-index 8ec2abb2e6..c2e144ceae 100644
---- a/tools/libxl/libxl_vnuma.c
-+++ b/tools/libxl/libxl_vnuma.c
-@@ -17,7 +17,7 @@
- #include "libxl_arch.h"
- #include <stdlib.h>
- 
--#include <xc_dom.h>
-+#include <xenctrl_dom.h>
- 
- bool libxl__vnuma_configured(const libxl_domain_build_info *b_info)
- {
-diff --git a/tools/libxl/libxl_x86.c b/tools/libxl/libxl_x86.c
-index e57f63282e..7d95506e00 100644
---- a/tools/libxl/libxl_x86.c
-+++ b/tools/libxl/libxl_x86.c
-@@ -1,7 +1,7 @@
- #include "libxl_internal.h"
- #include "libxl_arch.h"
- 
--#include <xc_dom.h>
-+#include <xenctrl_dom.h>
- 
- int libxl__arch_domain_prepare_config(libxl__gc *gc,
-                                       libxl_domain_config *d_config,
-diff --git a/tools/libxl/libxl_x86_acpi.c b/tools/libxl/libxl_x86_acpi.c
-index ed6610c84e..3df86c7be5 100644
---- a/tools/libxl/libxl_x86_acpi.c
-+++ b/tools/libxl/libxl_x86_acpi.c
-@@ -18,7 +18,7 @@
- #include <xen/hvm/e820.h>
- #include "libacpi/libacpi.h"
- 
--#include <xc_dom.h>
-+#include <xenctrl_dom.h>
- 
-  /* Number of pages holding ACPI tables */
- #define NUM_ACPI_PAGES 16
-diff --git a/tools/python/xen/lowlevel/xc/xc.c b/tools/python/xen/lowlevel/xc/xc.c
-index 8fde5f311f..8c7b184f0b 100644
---- a/tools/python/xen/lowlevel/xc/xc.c
-+++ b/tools/python/xen/lowlevel/xc/xc.c
-@@ -17,7 +17,7 @@
- #include <arpa/inet.h>
- 
- #include <xen/elfnote.h>
--#include "xc_dom.h"
-+#include "xenctrl_dom.h"
- #include <xen/hvm/hvm_info_table.h>
- #include <xen/hvm/params.h>
- 
-diff --git a/tools/xcutils/readnotes.c b/tools/xcutils/readnotes.c
-index e682dd1a21..a6b7358e70 100644
---- a/tools/xcutils/readnotes.c
-+++ b/tools/xcutils/readnotes.c
-@@ -12,7 +12,7 @@
- #include <sys/mman.h>
- 
- #include <xg_private.h>
--#include <xc_dom.h> /* gunzip bits */
-+#include <xenctrl_dom.h> /* gunzip bits */
- 
- #include <xen/libelf/libelf.h>
+@@ -18,11 +18,11 @@ xc = Extension("xc",
+                include_dirs       = [ PATH_XEN,
+                                       PATH_LIBXENTOOLLOG + "/include",
+                                       PATH_LIBXENEVTCHN + "/include",
+-                                      PATH_LIBXC + "/include",
++                                      PATH_LIBXENCTRL + "/include",
+                                       "xen/lowlevel/xc" ],
+-               library_dirs       = [ PATH_LIBXC ],
++               library_dirs       = [ PATH_LIBXENCTRL ],
+                libraries          = [ "xenctrl" ],
+-               depends            = [ PATH_LIBXC + "/libxenctrl.so" ],
++               depends            = [ PATH_LIBXENCTRL + "/libxenctrl.so" ],
+                extra_link_args    = [ "-Wl,-rpath-link="+PATH_LIBXENTOOLLOG ],
+                sources            = [ "xen/lowlevel/xc/xc.c" ])
  
 -- 
 2.26.2
