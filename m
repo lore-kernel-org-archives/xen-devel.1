@@ -2,64 +2,68 @@ Return-Path: <SRS0=Z/2m=B3=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 512DCC433DF
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2020 18:46:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5393EC433E1
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2020 18:46:41 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2B1D4204EC
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2020 18:46:36 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 29E8A204EC
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2020 18:46:41 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="CXIvTbVu"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2B1D4204EC
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="c/pQbrLS"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 29E8A204EC
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k7k9H-0007Ar-KW; Mon, 17 Aug 2020 18:46:23 +0000
+	id 1k7k9M-0007Dp-7d; Mon, 17 Aug 2020 18:46:28 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=mm75=B3=citrix.com=edvin.torok@srs-us1.protection.inumbo.net>)
- id 1k7k9F-00078A-Vi
- for xen-devel@lists.xenproject.org; Mon, 17 Aug 2020 18:46:22 +0000
-X-Inumbo-ID: 812f62ed-efb0-4038-9513-a056ee470ed7
-Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
+ id 1k7k9K-00078A-W5
+ for xen-devel@lists.xenproject.org; Mon, 17 Aug 2020 18:46:27 +0000
+X-Inumbo-ID: bb848584-6c41-40c2-bd63-a4c2475781c8
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 812f62ed-efb0-4038-9513-a056ee470ed7;
- Mon, 17 Aug 2020 18:46:17 +0000 (UTC)
+ id bb848584-6c41-40c2-bd63-a4c2475781c8;
+ Mon, 17 Aug 2020 18:46:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1597689977;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=FRpV90KeI8B7ArLRuxmomEKdZaQAbOLsg8q0M61j2qc=;
- b=CXIvTbVudYXMBrPNoUuYQ+q/utq/kLHfupnpBg245qLCZ/H1OVz1AlsZ
- BnLEE8p7d/eneQxOm8SUPue9DIgggPttyc1GTkHZuKFvQLJmunVk2g2bA
- 88pk4eC3kctCc77GsCDGLu8gam/ralXjqTQ69sqrVV6S/YKJhwaV+7oNX c=;
-Authentication-Results: esa2.hc3370-68.iphmx.com;
+ d=citrix.com; s=securemail; t=1597689981;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=Jwr6W7VdvDSBzVBwOidlGCgXyRsM0JTbKS0k1mHOFbY=;
+ b=c/pQbrLSSlpCdG1IijVqPu52kFsbxRQMEivgvj9jNV0BtJj4LgpDNFup
+ xEiZgkZ+zTqRAaWtjPGAZhtgCuy9VY9S/TNH3dikgrSkfJRR7t4kvFdAC
+ maQ7YU7uWKRJsDqALKZh/y5J/CmaDMei7137/UTClMrDY3YumRCAyjA9O E=;
+Authentication-Results: esa3.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: CrV6div7GpEA0v8rLUix6DMSs9IO9kU4Xzl/XIeZofXsftWCoHD7xVhT2q1q8Pawpz8CHOTqw7
- q5sGj9u8Vi16ydxufKjFUy4cyyml83Fbul0S3dSI2dcsPDMQHaHELAd6Dxi0mPTboXKN2xaHQ0
- vMeY809j4gsQuoBEt88J+qrl5aXaVEGormIcPuGZ2CiQu5BmU+r+286o6bwsz6d7tSkOydkIYw
- PdXFdy79es64wqJ4bByfaukyjaFuOzABehVJGToQ5JkV9uf01w+jmb93HG3Y77iFJVzb8DUOga
- fwM=
+IronPort-SDR: clY59/0462dpma5dCVjD3FxzhG8/IoPdXnQ492U90Z/31pFleXMZhfsymHRAKOJ+8NbLfdOWqO
+ oIAC/Yg4xTSWxeFAXRnnQcbNw1pyzIi62XAVvddzRXfEG1YpNhGdMa8ZTubNXBaXr0cpdYCMFX
+ YNKCpopOVd8A14f5eYfwRoOdP+ahyicJw6lkTkx17EhLxlfZc9y3SIfWqwbex2agpHxe6UyTjz
+ qqRSARMbik7IlhFEUkOadeZN7IN+UCH03YUhT/gny55e4/f6FcH0CodCAvVguqFmy0ghqkV+Dm
+ EVE=
 X-SBRS: 2.7
-X-MesageID: 24725993
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-MesageID: 24693238
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,324,1592884800"; d="scan'208";a="24725993"
+X-IronPort-AV: E=Sophos;i="5.76,324,1592884800"; d="scan'208";a="24693238"
 From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>
-Subject: [PATCH v3 0/6] tools/ocaml/xenstored: simplify code
-Date: Mon, 17 Aug 2020 19:45:43 +0100
-Message-ID: <cover.1597689796.git.edvin.torok@citrix.com>
+Subject: [PATCH v3 4/6] tools/ocaml/xenstored: drop select based socket
+ watching
+Date: Mon, 17 Aug 2020 19:45:47 +0100
+Message-ID: <bb1423a37560bbb9b655fef116c7c31346665529.1597689796.git.edvin.torok@citrix.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <cover.1597689796.git.edvin.torok@citrix.com>
+References: <cover.1597689796.git.edvin.torok@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
@@ -76,56 +80,174 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Fix warnings, and delete some obsolete code.
-oxenstored contained a hand-rolled GC to perform hash-consing:
-this can be done with a lot fewer lines of code by using the built-in Weak module.
+Poll has been the default since 2014, I think we can safely say by now
+that poll() works and we don't need to fall back to select().
 
-The choice of data structures for trees/tries is not very efficient: they are just
-lists. Using a map improves lookup and deletion complexity, and replaces hand-rolled
-recursion with higher-level library calls.
+This will allow fixing up the way we call poll to be more efficient
+(and pave the way for introducing epoll support):
+currently poll wraps the select API, which is inefficient.
 
-There is a lot more that could be done to optimize socket polling:
-an epoll backend with a poll fallback,but API structured around event-based polling
-would be better. But first lets drop the legacy select based code: I think every
-modern *nix should have a working poll(3) by now.
-
-This is a draft series, in need of more testing.
-Changes since v1:
-    * fix bug where a 'set_node' call was missed
-    * simplify 'compare' code
-    * fix commit title for 'drop select based'
-    * passed some testing
-
-Please ignore V2, something went wrong and V2 was nearly identical to V1,
-not matching what I had in my git tree.
-
-Edwin Török (6):
-  tools/ocaml/libs/xc: Fix ambiguous documentation comment
-  tools/ocaml/xenstored: fix deprecation warning
-  tools/ocaml/xenstored: replace hand rolled GC with weak GC references
-  tools/ocaml/xenstored: drop select based socket watching
-  tools/ocaml/xenstored: use more efficient node trees
-  tools/ocaml/xenstored: use more efficient tries
-
- tools/ocaml/libs/xc/xenctrl.mli               |  2 +
- tools/ocaml/xenstored/Makefile                | 12 ++--
- tools/ocaml/xenstored/connection.ml           |  3 -
- tools/ocaml/xenstored/connections.ml          |  2 +-
- tools/ocaml/xenstored/disk.ml                 |  2 +-
- tools/ocaml/xenstored/history.ml              | 14 ----
- tools/ocaml/xenstored/parse_arg.ml            |  7 +-
- tools/ocaml/xenstored/{select.ml => poll.ml}  | 14 +---
- .../ocaml/xenstored/{select.mli => poll.mli}  | 12 +---
- tools/ocaml/xenstored/store.ml                | 49 ++++++-------
- tools/ocaml/xenstored/symbol.ml               | 70 +++++--------------
- tools/ocaml/xenstored/symbol.mli              | 22 ++----
- tools/ocaml/xenstored/trie.ml                 | 59 +++++++---------
- tools/ocaml/xenstored/trie.mli                | 26 +++----
- tools/ocaml/xenstored/xenstored.ml            | 20 +-----
- 15 files changed, 103 insertions(+), 211 deletions(-)
+Signed-off-by: Edwin Török <edvin.torok@citrix.com>
+---
+Changed since v1:
+ * fix commit title
+---
+ tools/ocaml/xenstored/Makefile                 | 12 ++++++------
+ tools/ocaml/xenstored/parse_arg.ml             |  7 ++-----
+ tools/ocaml/xenstored/{select.ml => poll.ml}   | 14 ++------------
+ tools/ocaml/xenstored/{select.mli => poll.mli} | 12 ++----------
+ tools/ocaml/xenstored/xenstored.ml             |  4 +---
+ 5 files changed, 13 insertions(+), 36 deletions(-)
  rename tools/ocaml/xenstored/{select.ml => poll.ml} (85%)
  rename tools/ocaml/xenstored/{select.mli => poll.mli} (58%)
 
+diff --git a/tools/ocaml/xenstored/Makefile b/tools/ocaml/xenstored/Makefile
+index 68d35c483a..692a62584e 100644
+--- a/tools/ocaml/xenstored/Makefile
++++ b/tools/ocaml/xenstored/Makefile
+@@ -18,12 +18,12 @@ OCAMLINCLUDE += \
+ 	-I $(OCAML_TOPLEVEL)/libs/xc \
+ 	-I $(OCAML_TOPLEVEL)/libs/eventchn
+ 
+-LIBS = syslog.cma syslog.cmxa select.cma select.cmxa
++LIBS = syslog.cma syslog.cmxa poll.cma poll.cmxa
+ syslog_OBJS = syslog
+ syslog_C_OBJS = syslog_stubs
+-select_OBJS = select
+-select_C_OBJS = select_stubs
+-OCAML_LIBRARY = syslog select
++poll_OBJS = poll
++poll_C_OBJS = select_stubs
++OCAML_LIBRARY = syslog poll
+ 
+ LIBS += systemd.cma systemd.cmxa
+ systemd_OBJS = systemd
+@@ -58,13 +58,13 @@ OBJS = paths \
+ 	process \
+ 	xenstored
+ 
+-INTF = symbol.cmi trie.cmi syslog.cmi systemd.cmi select.cmi
++INTF = symbol.cmi trie.cmi syslog.cmi systemd.cmi poll.cmi
+ 
+ XENSTOREDLIBS = \
+ 	unix.cmxa \
+ 	-ccopt -L -ccopt . syslog.cmxa \
+ 	-ccopt -L -ccopt . systemd.cmxa \
+-	-ccopt -L -ccopt . select.cmxa \
++	-ccopt -L -ccopt . poll.cmxa \
+ 	-ccopt -L -ccopt $(OCAML_TOPLEVEL)/libs/mmap $(OCAML_TOPLEVEL)/libs/mmap/xenmmap.cmxa \
+ 	-ccopt -L -ccopt $(OCAML_TOPLEVEL)/libs/eventchn $(OCAML_TOPLEVEL)/libs/eventchn/xeneventchn.cmxa \
+ 	-ccopt -L -ccopt $(OCAML_TOPLEVEL)/libs/xc $(OCAML_TOPLEVEL)/libs/xc/xenctrl.cmxa \
+diff --git a/tools/ocaml/xenstored/parse_arg.ml b/tools/ocaml/xenstored/parse_arg.ml
+index 1803c3eda0..2c4b5a8528 100644
+--- a/tools/ocaml/xenstored/parse_arg.ml
++++ b/tools/ocaml/xenstored/parse_arg.ml
+@@ -25,7 +25,6 @@ type config =
+ 	tracefile: string option; (* old xenstored compatibility *)
+ 	restart: bool;
+ 	disable_socket: bool;
+-	use_select: bool;
+ }
+ 
+ let do_argv =
+@@ -37,7 +36,7 @@ let do_argv =
+ 	and config_file = ref ""
+ 	and restart = ref false
+ 	and disable_socket = ref false
+-	and use_select = ref false in
++	in
+ 
+ 	let speclist =
+ 		[ ("--no-domain-init", Arg.Unit (fun () -> domain_init := false),
+@@ -54,9 +53,8 @@ let do_argv =
+ 		  ("-T", Arg.Set_string tracefile, ""); (* for compatibility *)
+ 		  ("--restart", Arg.Set restart, "Read database on starting");
+ 		  ("--disable-socket", Arg.Unit (fun () -> disable_socket := true), "Disable socket");
+-		  ("--use-select", Arg.Unit (fun () -> use_select := true), "Use select instead of poll"); (* for backward compatibility and testing *)
+ 		] in
+-	let usage_msg = "usage : xenstored [--config-file <filename>] [--no-domain-init] [--help] [--no-fork] [--reraise-top-level] [--restart] [--disable-socket] [--use-select]" in
++	let usage_msg = "usage : xenstored [--config-file <filename>] [--no-domain-init] [--help] [--no-fork] [--reraise-top-level] [--restart] [--disable-socket]" in
+ 	Arg.parse speclist (fun _ -> ()) usage_msg;
+ 	{
+ 		domain_init = !domain_init;
+@@ -68,5 +66,4 @@ let do_argv =
+ 		tracefile = if !tracefile <> "" then Some !tracefile else None;
+ 		restart = !restart;
+ 		disable_socket = !disable_socket;
+-		use_select = !use_select;
+ 	}
+diff --git a/tools/ocaml/xenstored/select.ml b/tools/ocaml/xenstored/poll.ml
+similarity index 85%
+rename from tools/ocaml/xenstored/select.ml
+rename to tools/ocaml/xenstored/poll.ml
+index 0455e163e3..26f8620dfc 100644
+--- a/tools/ocaml/xenstored/select.ml
++++ b/tools/ocaml/xenstored/poll.ml
+@@ -63,15 +63,5 @@ let poll_select in_fds out_fds exc_fds timeout =
+ 			 (if event.except then fd :: x else x))
+ 			a r
+ 
+-(* If the use_poll function is not called at all, we default to the original Unix.select behavior *)
+-let select_fun = ref Unix.select
+-
+-let use_poll yes =
+-	let sel_fun, max_fd =
+-		if yes then poll_select, get_sys_fs_nr_open ()
+-		else Unix.select, 1024 in
+-	select_fun := sel_fun;
+-	set_fd_limit max_fd
+-
+-let select in_fds out_fds exc_fds timeout =
+-	(!select_fun) in_fds out_fds exc_fds timeout
++let () =
++        set_fd_limit (get_sys_fs_nr_open ())
+diff --git a/tools/ocaml/xenstored/select.mli b/tools/ocaml/xenstored/poll.mli
+similarity index 58%
+rename from tools/ocaml/xenstored/select.mli
+rename to tools/ocaml/xenstored/poll.mli
+index 3912779172..f73465b99f 100644
+--- a/tools/ocaml/xenstored/select.mli
++++ b/tools/ocaml/xenstored/poll.mli
+@@ -13,15 +13,7 @@
+  *)
+ 
+ 
+-(** Same interface and semantics as [Unix.select] but with an extra alternative
+-    implementation based on poll. Switching implementations is done by calling
+-     the [use_poll] function. *)
+-val select:
++(** Same interface and semantics as [Unix.select], implemented using poll(3). *)
++val poll_select:
+ 	Unix.file_descr list -> Unix.file_descr list -> Unix.file_descr list -> float
+ 	-> Unix.file_descr list * Unix.file_descr list * Unix.file_descr list
+-
+-(** [use_poll true] will use poll based select with max fds number limitation
+-   eliminated; [use_poll false] will use standard [Unix.select] with max fd
+-   number set to 1024; not calling this function at all equals to use the
+-   standard [Unix.select] with max fd number setting untouched. *)
+-val use_poll: bool -> unit
+diff --git a/tools/ocaml/xenstored/xenstored.ml b/tools/ocaml/xenstored/xenstored.ml
+index 047e093555..f3e4697dea 100644
+--- a/tools/ocaml/xenstored/xenstored.ml
++++ b/tools/ocaml/xenstored/xenstored.ml
+@@ -308,8 +308,6 @@ let _ =
+ 		);
+ 	);
+ 
+-	Select.use_poll (not cf.use_select);
+-
+ 	Sys.set_signal Sys.sighup (Sys.Signal_handle sighup_handler);
+ 	Sys.set_signal Sys.sigterm (Sys.Signal_handle (fun _ -> quit := true));
+ 	Sys.set_signal Sys.sigusr1 (Sys.Signal_handle (fun _ -> sigusr1_handler store));
+@@ -441,7 +439,7 @@ let _ =
+ 		let inset, outset = Connections.select ~only_if:is_peaceful cons in
+ 		let rset, wset, _ =
+ 		try
+-			Select.select (spec_fds @ inset) outset [] timeout
++			Poll.poll_select (spec_fds @ inset) outset [] timeout
+ 		with Unix.Unix_error(Unix.EINTR, _, _) ->
+ 			[], [], [] in
+ 		let sfds, cfds =
 -- 
 2.25.1
 
