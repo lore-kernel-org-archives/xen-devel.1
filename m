@@ -7,42 +7,41 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 91D80C433E1
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2020 09:50:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 39D86C433DF
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2020 09:50:15 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6DDDE206C0
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2020 09:50:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6DDDE206C0
+	by mail.kernel.org (Postfix) with ESMTPS id 17D7B206C0
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2020 09:50:15 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 17D7B206C0
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k7bmA-0004S3-2E; Mon, 17 Aug 2020 09:49:58 +0000
+	id 1k7bmE-0004eF-EO; Mon, 17 Aug 2020 09:50:02 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=YVS9=B3=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1k7bm9-00046j-0e
- for xen-devel@lists.xenproject.org; Mon, 17 Aug 2020 09:49:57 +0000
-X-Inumbo-ID: 5ba70a82-228c-4aea-b628-3c6574037f79
+ id 1k7bmE-00046j-0v
+ for xen-devel@lists.xenproject.org; Mon, 17 Aug 2020 09:50:02 +0000
+X-Inumbo-ID: c495a367-0ebd-40d4-a65a-ab916c5567d6
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 5ba70a82-228c-4aea-b628-3c6574037f79;
+ id c495a367-0ebd-40d4-a65a-ab916c5567d6;
  Mon, 17 Aug 2020 09:49:28 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id E8EA0AF01;
- Mon, 17 Aug 2020 09:49:51 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 405B1AF0B;
+ Mon, 17 Aug 2020 09:49:52 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>, Ian Jackson <ian.jackson@eu.citrix.com>,
  Wei Liu <wl@xen.org>
-Subject: [PATCH II v2 12/17] tools/libxc: move xc_[un]map_domain_meminfo()
- into new source xg_domain.c
-Date: Mon, 17 Aug 2020 11:49:17 +0200
-Message-Id: <20200817094922.15768-13-jgross@suse.com>
+Subject: [PATCH II v2 14/17] tools/libxc: rename libxenguest internal headers
+Date: Mon, 17 Aug 2020 11:49:19 +0200
+Message-Id: <20200817094922.15768-15-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200817094922.15768-1-jgross@suse.com>
 References: <20200817094922.15768-1-jgross@suse.com>
@@ -61,324 +60,313 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Move xc_[un]map_domain_meminfo() functions to new source xg_domain.c as
-they are defined in include/xenguest.h and should be in libxenguest.
+Rename the header files private to libxenguest from xc_*.h to xg_*.h.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- tools/libxc/Makefile    |   4 +-
- tools/libxc/xc_domain.c | 126 ---------------------------------
- tools/libxc/xg_domain.c | 149 ++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 152 insertions(+), 127 deletions(-)
- create mode 100644 tools/libxc/xg_domain.c
+ tools/libxc/xg_dom_bzimageloader.c                              | 2 +-
+ tools/libxc/{xc_dom_decompress.h => xg_dom_decompress.h}        | 2 +-
+ tools/libxc/xg_dom_decompress_lz4.c                             | 2 +-
+ tools/libxc/xg_dom_decompress_unsafe.c                          | 2 +-
+ .../{xc_dom_decompress_unsafe.h => xg_dom_decompress_unsafe.h}  | 0
+ tools/libxc/xg_dom_decompress_unsafe_bzip2.c                    | 2 +-
+ tools/libxc/xg_dom_decompress_unsafe_lzma.c                     | 2 +-
+ tools/libxc/xg_dom_decompress_unsafe_lzo1x.c                    | 2 +-
+ tools/libxc/xg_dom_decompress_unsafe_xz.c                       | 2 +-
+ tools/libxc/xg_sr_common.c                                      | 2 +-
+ tools/libxc/{xc_sr_common.h => xg_sr_common.h}                  | 2 +-
+ tools/libxc/xg_sr_common_x86.c                                  | 2 +-
+ tools/libxc/{xc_sr_common_x86.h => xg_sr_common_x86.h}          | 2 +-
+ tools/libxc/xg_sr_common_x86_pv.c                               | 2 +-
+ tools/libxc/{xc_sr_common_x86_pv.h => xg_sr_common_x86_pv.h}    | 2 +-
+ tools/libxc/xg_sr_restore.c                                     | 2 +-
+ tools/libxc/xg_sr_restore_x86_hvm.c                             | 2 +-
+ tools/libxc/xg_sr_restore_x86_pv.c                              | 2 +-
+ tools/libxc/xg_sr_save.c                                        | 2 +-
+ tools/libxc/xg_sr_save_x86_hvm.c                                | 2 +-
+ tools/libxc/xg_sr_save_x86_pv.c                                 | 2 +-
+ tools/libxc/{xc_sr_stream_format.h => xg_sr_stream_format.h}    | 0
+ 22 files changed, 20 insertions(+), 20 deletions(-)
+ rename tools/libxc/{xc_dom_decompress.h => xg_dom_decompress.h} (77%)
+ rename tools/libxc/{xc_dom_decompress_unsafe.h => xg_dom_decompress_unsafe.h} (100%)
+ rename tools/libxc/{xc_sr_common.h => xg_sr_common.h} (99%)
+ rename tools/libxc/{xc_sr_common_x86.h => xg_sr_common_x86.h} (98%)
+ rename tools/libxc/{xc_sr_common_x86_pv.h => xg_sr_common_x86_pv.h} (98%)
+ rename tools/libxc/{xc_sr_stream_format.h => xg_sr_stream_format.h} (100%)
 
-diff --git a/tools/libxc/Makefile b/tools/libxc/Makefile
-index c1e41a8ee9..f3f1edc07b 100644
---- a/tools/libxc/Makefile
-+++ b/tools/libxc/Makefile
-@@ -52,7 +52,9 @@ CTRL_SRCS-y       += xc_gnttab_compat.c
- CTRL_SRCS-y       += xc_devicemodel_compat.c
+diff --git a/tools/libxc/xg_dom_bzimageloader.c b/tools/libxc/xg_dom_bzimageloader.c
+index a7d70cc7c6..f959a77602 100644
+--- a/tools/libxc/xg_dom_bzimageloader.c
++++ b/tools/libxc/xg_dom_bzimageloader.c
+@@ -32,7 +32,7 @@
+ #include <inttypes.h>
  
- GUEST_SRCS-y :=
--GUEST_SRCS-y += xg_private.c xc_suspend.c
-+GUEST_SRCS-y += xg_private.c
-+GUEST_SRCS-y += xg_domain.c
-+GUEST_SRCS-y += xc_suspend.c
- ifeq ($(CONFIG_MIGRATE),y)
- GUEST_SRCS-y += xc_sr_common.c
- GUEST_SRCS-$(CONFIG_X86) += xc_sr_common_x86.c
-diff --git a/tools/libxc/xc_domain.c b/tools/libxc/xc_domain.c
-index 71829c2bce..fbc22c4df6 100644
---- a/tools/libxc/xc_domain.c
-+++ b/tools/libxc/xc_domain.c
-@@ -1892,132 +1892,6 @@ int xc_domain_unbind_pt_spi_irq(xc_interface *xch,
-                                         PT_IRQ_TYPE_SPI, 0, 0, 0, 0, spi));
- }
+ #include "xg_private.h"
+-#include "xc_dom_decompress.h"
++#include "xg_dom_decompress.h"
  
--int xc_unmap_domain_meminfo(xc_interface *xch, struct xc_domain_meminfo *minfo)
--{
--    struct domain_info_context _di = { .guest_width = minfo->guest_width,
--                                       .p2m_size = minfo->p2m_size};
--    struct domain_info_context *dinfo = &_di;
--
--    free(minfo->pfn_type);
--    if ( minfo->p2m_table )
--        munmap(minfo->p2m_table, P2M_FL_ENTRIES * PAGE_SIZE);
--    minfo->p2m_table = NULL;
--
--    return 0;
--}
--
--int xc_map_domain_meminfo(xc_interface *xch, uint32_t domid,
--                          struct xc_domain_meminfo *minfo)
--{
--    struct domain_info_context _di;
--    struct domain_info_context *dinfo = &_di;
--
--    xc_dominfo_t info;
--    shared_info_any_t *live_shinfo;
--    xen_capabilities_info_t xen_caps = "";
--    int i;
--
--    /* Only be initialized once */
--    if ( minfo->pfn_type || minfo->p2m_table )
--    {
--        errno = EINVAL;
--        return -1;
--    }
--
--    if ( xc_domain_getinfo(xch, domid, 1, &info) != 1 )
--    {
--        PERROR("Could not get domain info");
--        return -1;
--    }
--
--    if ( xc_domain_get_guest_width(xch, domid, &minfo->guest_width) )
--    {
--        PERROR("Could not get domain address size");
--        return -1;
--    }
--    _di.guest_width = minfo->guest_width;
--
--    /* Get page table levels (see get_platform_info() in xg_save_restore.h */
--    if ( xc_version(xch, XENVER_capabilities, &xen_caps) )
--    {
--        PERROR("Could not get Xen capabilities (for page table levels)");
--        return -1;
--    }
--    if ( strstr(xen_caps, "xen-3.0-x86_64") )
--        /* Depends on whether it's a compat 32-on-64 guest */
--        minfo->pt_levels = ( (minfo->guest_width == 8) ? 4 : 3 );
--    else if ( strstr(xen_caps, "xen-3.0-x86_32p") )
--        minfo->pt_levels = 3;
--    else if ( strstr(xen_caps, "xen-3.0-x86_32") )
--        minfo->pt_levels = 2;
--    else
--    {
--        errno = EFAULT;
--        return -1;
--    }
--
--    /* We need the shared info page for mapping the P2M */
--    live_shinfo = xc_map_foreign_range(xch, domid, PAGE_SIZE, PROT_READ,
--                                       info.shared_info_frame);
--    if ( !live_shinfo )
--    {
--        PERROR("Could not map the shared info frame (MFN 0x%lx)",
--               info.shared_info_frame);
--        return -1;
--    }
--
--    if ( xc_core_arch_map_p2m_writable(xch, minfo->guest_width, &info,
--                                       live_shinfo, &minfo->p2m_table,
--                                       &minfo->p2m_size) )
--    {
--        PERROR("Could not map the P2M table");
--        munmap(live_shinfo, PAGE_SIZE);
--        return -1;
--    }
--    munmap(live_shinfo, PAGE_SIZE);
--    _di.p2m_size = minfo->p2m_size;
--
--    /* Make space and prepare for getting the PFN types */
--    minfo->pfn_type = calloc(sizeof(*minfo->pfn_type), minfo->p2m_size);
--    if ( !minfo->pfn_type )
--    {
--        PERROR("Could not allocate memory for the PFN types");
--        goto failed;
--    }
--    for ( i = 0; i < minfo->p2m_size; i++ )
--        minfo->pfn_type[i] = xc_pfn_to_mfn(i, minfo->p2m_table,
--                                           minfo->guest_width);
--
--    /* Retrieve PFN types in batches */
--    for ( i = 0; i < minfo->p2m_size ; i+=1024 )
--    {
--        int count = ((minfo->p2m_size - i ) > 1024 ) ?
--                        1024: (minfo->p2m_size - i);
--
--        if ( xc_get_pfn_type_batch(xch, domid, count, minfo->pfn_type + i) )
--        {
--            PERROR("Could not get %d-eth batch of PFN types", (i+1)/1024);
--            goto failed;
--        }
--    }
--
--    return 0;
--
--failed:
--    if ( minfo->pfn_type )
--    {
--        free(minfo->pfn_type);
--        minfo->pfn_type = NULL;
--    }
--    if ( minfo->p2m_table )
--    {
--        munmap(minfo->p2m_table, P2M_FL_ENTRIES * PAGE_SIZE);
--        minfo->p2m_table = NULL;
--    }
--
--    return -1;
--}
--
- int xc_domain_memory_mapping(
-     xc_interface *xch,
-     uint32_t domid,
-diff --git a/tools/libxc/xg_domain.c b/tools/libxc/xg_domain.c
-new file mode 100644
-index 0000000000..58713cd35d
---- /dev/null
-+++ b/tools/libxc/xg_domain.c
-@@ -0,0 +1,149 @@
-+/******************************************************************************
-+ * xg_domain.c
-+ *
-+ * API for manipulating and obtaining information on domains.
-+ *
-+ * This library is free software; you can redistribute it and/or
-+ * modify it under the terms of the GNU Lesser General Public
-+ * License as published by the Free Software Foundation;
-+ * version 2.1 of the License.
-+ *
-+ * This library is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-+ * Lesser General Public License for more details.
-+ *
-+ * You should have received a copy of the GNU Lesser General Public
-+ * License along with this library; If not, see <http://www.gnu.org/licenses/>.
-+ *
-+ * Copyright (c) 2003, K A Fraser.
-+ */
-+
-+#include "xg_private.h"
-+#include "xc_core.h"
-+
-+int xc_unmap_domain_meminfo(xc_interface *xch, struct xc_domain_meminfo *minfo)
-+{
-+    struct domain_info_context _di = { .guest_width = minfo->guest_width,
-+                                       .p2m_size = minfo->p2m_size};
-+    struct domain_info_context *dinfo = &_di;
-+
-+    free(minfo->pfn_type);
-+    if ( minfo->p2m_table )
-+        munmap(minfo->p2m_table, P2M_FL_ENTRIES * PAGE_SIZE);
-+    minfo->p2m_table = NULL;
-+
-+    return 0;
-+}
-+
-+int xc_map_domain_meminfo(xc_interface *xch, uint32_t domid,
-+                          struct xc_domain_meminfo *minfo)
-+{
-+    struct domain_info_context _di;
-+    struct domain_info_context *dinfo = &_di;
-+
-+    xc_dominfo_t info;
-+    shared_info_any_t *live_shinfo;
-+    xen_capabilities_info_t xen_caps = "";
-+    int i;
-+
-+    /* Only be initialized once */
-+    if ( minfo->pfn_type || minfo->p2m_table )
-+    {
-+        errno = EINVAL;
-+        return -1;
-+    }
-+
-+    if ( xc_domain_getinfo(xch, domid, 1, &info) != 1 )
-+    {
-+        PERROR("Could not get domain info");
-+        return -1;
-+    }
-+
-+    if ( xc_domain_get_guest_width(xch, domid, &minfo->guest_width) )
-+    {
-+        PERROR("Could not get domain address size");
-+        return -1;
-+    }
-+    _di.guest_width = minfo->guest_width;
-+
-+    /* Get page table levels (see get_platform_info() in xg_save_restore.h */
-+    if ( xc_version(xch, XENVER_capabilities, &xen_caps) )
-+    {
-+        PERROR("Could not get Xen capabilities (for page table levels)");
-+        return -1;
-+    }
-+    if ( strstr(xen_caps, "xen-3.0-x86_64") )
-+        /* Depends on whether it's a compat 32-on-64 guest */
-+        minfo->pt_levels = ( (minfo->guest_width == 8) ? 4 : 3 );
-+    else if ( strstr(xen_caps, "xen-3.0-x86_32p") )
-+        minfo->pt_levels = 3;
-+    else if ( strstr(xen_caps, "xen-3.0-x86_32") )
-+        minfo->pt_levels = 2;
-+    else
-+    {
-+        errno = EFAULT;
-+        return -1;
-+    }
-+
-+    /* We need the shared info page for mapping the P2M */
-+    live_shinfo = xc_map_foreign_range(xch, domid, PAGE_SIZE, PROT_READ,
-+                                       info.shared_info_frame);
-+    if ( !live_shinfo )
-+    {
-+        PERROR("Could not map the shared info frame (MFN 0x%lx)",
-+               info.shared_info_frame);
-+        return -1;
-+    }
-+
-+    if ( xc_core_arch_map_p2m_writable(xch, minfo->guest_width, &info,
-+                                       live_shinfo, &minfo->p2m_table,
-+                                       &minfo->p2m_size) )
-+    {
-+        PERROR("Could not map the P2M table");
-+        munmap(live_shinfo, PAGE_SIZE);
-+        return -1;
-+    }
-+    munmap(live_shinfo, PAGE_SIZE);
-+    _di.p2m_size = minfo->p2m_size;
-+
-+    /* Make space and prepare for getting the PFN types */
-+    minfo->pfn_type = calloc(sizeof(*minfo->pfn_type), minfo->p2m_size);
-+    if ( !minfo->pfn_type )
-+    {
-+        PERROR("Could not allocate memory for the PFN types");
-+        goto failed;
-+    }
-+    for ( i = 0; i < minfo->p2m_size; i++ )
-+        minfo->pfn_type[i] = xc_pfn_to_mfn(i, minfo->p2m_table,
-+                                           minfo->guest_width);
-+
-+    /* Retrieve PFN types in batches */
-+    for ( i = 0; i < minfo->p2m_size ; i+=1024 )
-+    {
-+        int count = ((minfo->p2m_size - i ) > 1024 ) ?
-+                        1024: (minfo->p2m_size - i);
-+
-+        if ( xc_get_pfn_type_batch(xch, domid, count, minfo->pfn_type + i) )
-+        {
-+            PERROR("Could not get %d-eth batch of PFN types", (i+1)/1024);
-+            goto failed;
-+        }
-+    }
-+
-+    return 0;
-+
-+failed:
-+    if ( minfo->pfn_type )
-+    {
-+        free(minfo->pfn_type);
-+        minfo->pfn_type = NULL;
-+    }
-+    if ( minfo->p2m_table )
-+    {
-+        munmap(minfo->p2m_table, P2M_FL_ENTRIES * PAGE_SIZE);
-+        minfo->p2m_table = NULL;
-+    }
-+
-+    return -1;
-+}
+ #include <xen-tools/libs.h>
+ 
+diff --git a/tools/libxc/xc_dom_decompress.h b/tools/libxc/xg_dom_decompress.h
+similarity index 77%
+rename from tools/libxc/xc_dom_decompress.h
+rename to tools/libxc/xg_dom_decompress.h
+index 42cefa3f0e..d9a21cf297 100644
+--- a/tools/libxc/xc_dom_decompress.h
++++ b/tools/libxc/xg_dom_decompress.h
+@@ -1,7 +1,7 @@
+ #ifndef __MINIOS__
+ # include "xc_dom.h"
+ #else
+-# include "xc_dom_decompress_unsafe.h"
++# include "xg_dom_decompress_unsafe.h"
+ #endif
+ 
+ int xc_try_lz4_decode(struct xc_dom_image *dom, void **blob, size_t *size);
+diff --git a/tools/libxc/xg_dom_decompress_lz4.c b/tools/libxc/xg_dom_decompress_lz4.c
+index b6a33f27a8..97ba620d86 100644
+--- a/tools/libxc/xg_dom_decompress_lz4.c
++++ b/tools/libxc/xg_dom_decompress_lz4.c
+@@ -4,7 +4,7 @@
+ #include <stdint.h>
+ 
+ #include "xg_private.h"
+-#include "xc_dom_decompress.h"
++#include "xg_dom_decompress.h"
+ 
+ #define CONFIG_HAVE_EFFICIENT_UNALIGNED_ACCESS
+ 
+diff --git a/tools/libxc/xg_dom_decompress_unsafe.c b/tools/libxc/xg_dom_decompress_unsafe.c
+index 164e35558f..21d964787d 100644
+--- a/tools/libxc/xg_dom_decompress_unsafe.c
++++ b/tools/libxc/xg_dom_decompress_unsafe.c
+@@ -3,7 +3,7 @@
+ #include <inttypes.h>
+ 
+ #include "xg_private.h"
+-#include "xc_dom_decompress_unsafe.h"
++#include "xg_dom_decompress_unsafe.h"
+ 
+ static struct xc_dom_image *unsafe_dom;
+ static unsigned char *output_blob;
+diff --git a/tools/libxc/xc_dom_decompress_unsafe.h b/tools/libxc/xg_dom_decompress_unsafe.h
+similarity index 100%
+rename from tools/libxc/xc_dom_decompress_unsafe.h
+rename to tools/libxc/xg_dom_decompress_unsafe.h
+diff --git a/tools/libxc/xg_dom_decompress_unsafe_bzip2.c b/tools/libxc/xg_dom_decompress_unsafe_bzip2.c
+index 4dcabe4061..9d3709e6cc 100644
+--- a/tools/libxc/xg_dom_decompress_unsafe_bzip2.c
++++ b/tools/libxc/xg_dom_decompress_unsafe_bzip2.c
+@@ -3,7 +3,7 @@
+ #include <inttypes.h>
+ 
+ #include "xg_private.h"
+-#include "xc_dom_decompress_unsafe.h"
++#include "xg_dom_decompress_unsafe.h"
+ 
+ #include "../../xen/common/bunzip2.c"
+ 
+diff --git a/tools/libxc/xg_dom_decompress_unsafe_lzma.c b/tools/libxc/xg_dom_decompress_unsafe_lzma.c
+index 4ee8cdbab1..5d178f0c43 100644
+--- a/tools/libxc/xg_dom_decompress_unsafe_lzma.c
++++ b/tools/libxc/xg_dom_decompress_unsafe_lzma.c
+@@ -3,7 +3,7 @@
+ #include <inttypes.h>
+ 
+ #include "xg_private.h"
+-#include "xc_dom_decompress_unsafe.h"
++#include "xg_dom_decompress_unsafe.h"
+ 
+ #include "../../xen/common/unlzma.c"
+ 
+diff --git a/tools/libxc/xg_dom_decompress_unsafe_lzo1x.c b/tools/libxc/xg_dom_decompress_unsafe_lzo1x.c
+index 59888b9da2..a4f8ebd42d 100644
+--- a/tools/libxc/xg_dom_decompress_unsafe_lzo1x.c
++++ b/tools/libxc/xg_dom_decompress_unsafe_lzo1x.c
+@@ -5,7 +5,7 @@
+ #include <stdint.h>
+ 
+ #include "xg_private.h"
+-#include "xc_dom_decompress_unsafe.h"
++#include "xg_dom_decompress_unsafe.h"
+ 
+ typedef uint8_t u8;
+ typedef uint32_t u32;
+diff --git a/tools/libxc/xg_dom_decompress_unsafe_xz.c b/tools/libxc/xg_dom_decompress_unsafe_xz.c
+index fe7a7f49b4..ff6824b38d 100644
+--- a/tools/libxc/xg_dom_decompress_unsafe_xz.c
++++ b/tools/libxc/xg_dom_decompress_unsafe_xz.c
+@@ -6,7 +6,7 @@
+ #include <inttypes.h>
+ 
+ #include "xg_private.h"
+-#include "xc_dom_decompress_unsafe.h"
++#include "xg_dom_decompress_unsafe.h"
+ 
+ // TODO
+ #define XZ_DEC_X86
+diff --git a/tools/libxc/xg_sr_common.c b/tools/libxc/xg_sr_common.c
+index 7c54b03414..17567ab133 100644
+--- a/tools/libxc/xg_sr_common.c
++++ b/tools/libxc/xg_sr_common.c
+@@ -1,6 +1,6 @@
+ #include <assert.h>
+ 
+-#include "xc_sr_common.h"
++#include "xg_sr_common.h"
+ 
+ #include <xen-tools/libs.h>
+ 
+diff --git a/tools/libxc/xc_sr_common.h b/tools/libxc/xg_sr_common.h
+similarity index 99%
+rename from tools/libxc/xc_sr_common.h
+rename to tools/libxc/xg_sr_common.h
+index f3bdea8006..35f23fabb5 100644
+--- a/tools/libxc/xc_sr_common.h
++++ b/tools/libxc/xg_sr_common.h
+@@ -8,7 +8,7 @@
+ #include "xc_dom.h"
+ #include "xc_bitops.h"
+ 
+-#include "xc_sr_stream_format.h"
++#include "xg_sr_stream_format.h"
+ 
+ /* String representation of Domain Header types. */
+ const char *dhdr_type_to_str(uint32_t type);
+diff --git a/tools/libxc/xg_sr_common_x86.c b/tools/libxc/xg_sr_common_x86.c
+index 77ea044a74..6f12483907 100644
+--- a/tools/libxc/xg_sr_common_x86.c
++++ b/tools/libxc/xg_sr_common_x86.c
+@@ -1,4 +1,4 @@
+-#include "xc_sr_common_x86.h"
++#include "xg_sr_common_x86.h"
+ 
+ int write_x86_tsc_info(struct xc_sr_context *ctx)
+ {
+diff --git a/tools/libxc/xc_sr_common_x86.h b/tools/libxc/xg_sr_common_x86.h
+similarity index 98%
+rename from tools/libxc/xc_sr_common_x86.h
+rename to tools/libxc/xg_sr_common_x86.h
+index e08d81e0e7..b55758c96d 100644
+--- a/tools/libxc/xc_sr_common_x86.h
++++ b/tools/libxc/xg_sr_common_x86.h
+@@ -1,7 +1,7 @@
+ #ifndef __COMMON_X86__H
+ #define __COMMON_X86__H
+ 
+-#include "xc_sr_common.h"
++#include "xg_sr_common.h"
+ 
+ /*
+  * Obtains a domains TSC information from Xen and writes a X86_TSC_INFO record
+diff --git a/tools/libxc/xg_sr_common_x86_pv.c b/tools/libxc/xg_sr_common_x86_pv.c
+index d3d425cb82..cd33406aab 100644
+--- a/tools/libxc/xg_sr_common_x86_pv.c
++++ b/tools/libxc/xg_sr_common_x86_pv.c
+@@ -1,6 +1,6 @@
+ #include <assert.h>
+ 
+-#include "xc_sr_common_x86_pv.h"
++#include "xg_sr_common_x86_pv.h"
+ 
+ xen_pfn_t mfn_to_pfn(struct xc_sr_context *ctx, xen_pfn_t mfn)
+ {
+diff --git a/tools/libxc/xc_sr_common_x86_pv.h b/tools/libxc/xg_sr_common_x86_pv.h
+similarity index 98%
+rename from tools/libxc/xc_sr_common_x86_pv.h
+rename to tools/libxc/xg_sr_common_x86_pv.h
+index 2ed03309af..953b5bfb8d 100644
+--- a/tools/libxc/xc_sr_common_x86_pv.h
++++ b/tools/libxc/xg_sr_common_x86_pv.h
+@@ -1,7 +1,7 @@
+ #ifndef __COMMON_X86_PV_H
+ #define __COMMON_X86_PV_H
+ 
+-#include "xc_sr_common_x86.h"
++#include "xg_sr_common_x86.h"
+ 
+ /* Virtual address ranges reserved for hypervisor. */
+ #define HYPERVISOR_VIRT_START_X86_64 0xFFFF800000000000ULL
+diff --git a/tools/libxc/xg_sr_restore.c b/tools/libxc/xg_sr_restore.c
+index bc811e6e3a..b57a787519 100644
+--- a/tools/libxc/xg_sr_restore.c
++++ b/tools/libxc/xg_sr_restore.c
+@@ -2,7 +2,7 @@
+ 
+ #include <assert.h>
+ 
+-#include "xc_sr_common.h"
++#include "xg_sr_common.h"
+ 
+ /*
+  * Read and validate the Image and Domain headers.
+diff --git a/tools/libxc/xg_sr_restore_x86_hvm.c b/tools/libxc/xg_sr_restore_x86_hvm.c
+index a77624cc9d..d6ea6f3012 100644
+--- a/tools/libxc/xg_sr_restore_x86_hvm.c
++++ b/tools/libxc/xg_sr_restore_x86_hvm.c
+@@ -1,7 +1,7 @@
+ #include <assert.h>
+ #include <arpa/inet.h>
+ 
+-#include "xc_sr_common_x86.h"
++#include "xg_sr_common_x86.h"
+ 
+ /*
+  * Process an HVM_CONTEXT record from the stream.
+diff --git a/tools/libxc/xg_sr_restore_x86_pv.c b/tools/libxc/xg_sr_restore_x86_pv.c
+index d086271efb..dc50b0f5a8 100644
+--- a/tools/libxc/xg_sr_restore_x86_pv.c
++++ b/tools/libxc/xg_sr_restore_x86_pv.c
+@@ -1,6 +1,6 @@
+ #include <assert.h>
+ 
+-#include "xc_sr_common_x86_pv.h"
++#include "xg_sr_common_x86_pv.h"
+ 
+ static xen_pfn_t pfn_to_mfn(const struct xc_sr_context *ctx, xen_pfn_t pfn)
+ {
+diff --git a/tools/libxc/xg_sr_save.c b/tools/libxc/xg_sr_save.c
+index 80b1d5de1f..d74c72cba6 100644
+--- a/tools/libxc/xg_sr_save.c
++++ b/tools/libxc/xg_sr_save.c
+@@ -1,7 +1,7 @@
+ #include <assert.h>
+ #include <arpa/inet.h>
+ 
+-#include "xc_sr_common.h"
++#include "xg_sr_common.h"
+ 
+ /*
+  * Writes an Image header and Domain header into the stream.
+diff --git a/tools/libxc/xg_sr_save_x86_hvm.c b/tools/libxc/xg_sr_save_x86_hvm.c
+index 0b2abb26bd..1634a7bc43 100644
+--- a/tools/libxc/xg_sr_save_x86_hvm.c
++++ b/tools/libxc/xg_sr_save_x86_hvm.c
+@@ -1,6 +1,6 @@
+ #include <assert.h>
+ 
+-#include "xc_sr_common_x86.h"
++#include "xg_sr_common_x86.h"
+ 
+ #include <xen/hvm/params.h>
+ 
+diff --git a/tools/libxc/xg_sr_save_x86_pv.c b/tools/libxc/xg_sr_save_x86_pv.c
+index c7e246ef4f..4964f1f7b8 100644
+--- a/tools/libxc/xg_sr_save_x86_pv.c
++++ b/tools/libxc/xg_sr_save_x86_pv.c
+@@ -1,7 +1,7 @@
+ #include <assert.h>
+ #include <limits.h>
+ 
+-#include "xc_sr_common_x86_pv.h"
++#include "xg_sr_common_x86_pv.h"
+ 
+ /* Check a 64 bit virtual address for being canonical. */
+ static inline bool is_canonical_address(xen_vaddr_t vaddr)
+diff --git a/tools/libxc/xc_sr_stream_format.h b/tools/libxc/xg_sr_stream_format.h
+similarity index 100%
+rename from tools/libxc/xc_sr_stream_format.h
+rename to tools/libxc/xg_sr_stream_format.h
 -- 
 2.26.2
 
