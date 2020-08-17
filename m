@@ -7,59 +7,61 @@ X-Spam-Status: No, score=-11.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 04EE9C433E3
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2020 22:56:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 069AAC433E3
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2020 22:57:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CC0B02063A
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2020 22:56:56 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id CA2182063A
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2020 22:56:59 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="Di/60dHn"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CC0B02063A
+	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="SeyF9uIm"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CA2182063A
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k7o3H-0003Zi-O1; Mon, 17 Aug 2020 22:56:27 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1k7o3d-0003dD-Ok; Mon, 17 Aug 2020 22:56:49 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Ksrr=B3=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1k7o3F-0003Ya-Ph
- for xen-devel@lists.xenproject.org; Mon, 17 Aug 2020 22:56:25 +0000
-X-Inumbo-ID: c6ab1b40-ca85-4d0b-9e3e-da082d720e46
+ id 1k7o3c-0003ch-Bk
+ for xen-devel@lists.xenproject.org; Mon, 17 Aug 2020 22:56:48 +0000
+X-Inumbo-ID: 0afdc704-78f2-403e-825b-db13ccf9a36a
 Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id c6ab1b40-ca85-4d0b-9e3e-da082d720e46;
- Mon, 17 Aug 2020 22:56:25 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 0afdc704-78f2-403e-825b-db13ccf9a36a;
+ Mon, 17 Aug 2020 22:56:47 +0000 (UTC)
 Received: from localhost (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 2E7E82063A;
- Mon, 17 Aug 2020 22:56:24 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id C7EB82063A;
+ Mon, 17 Aug 2020 22:56:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1597704984;
- bh=5+BGwVWOEwpj8TByUvwM8p5P9w7m9OJjeJCPyCDh13o=;
+ s=default; t=1597705007;
+ bh=s2AzfbSsHIpsVwLkyRLRrkPMVCUpBTpK3mQoki+llZU=;
  h=Date:From:To:cc:Subject:In-Reply-To:References:From;
- b=Di/60dHn5yZYWDvo9riozOXwuZ1GCghjiX26Ll7ejPYmQsjDbLwdTeyGAl18re3cN
- tcluUN4B+bPJMinezftXgqjlIHE9blRb1KMXqa21PTpKqb2Engar9MxhCNH6ZKbwKP
- CneL1Kox6tBhQrZYh5T6obxZs7eITn5Miol/yH2Q=
-Date: Mon, 17 Aug 2020 15:56:23 -0700 (PDT)
+ b=SeyF9uImCrQEKaymjgxPQPjuS5eXIu630nELReGuW7GARtXoENmzb0KM0tJOFQHiu
+ F/KWigL5mh96/OUOhBZdGqMGerrVy7EL23MuPvM29oG6FBwOPhQlfWggbpUTz7secb
+ C4HLV+IKhZNtM4CuEonnDlUZqGCpgoQr+Cmohryk=
+Date: Mon, 17 Aug 2020 15:56:46 -0700 (PDT)
 From: Stefano Stabellini <sstabellini@kernel.org>
 X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
-To: Julien Grall <julien@xen.org>
-cc: xen-devel@lists.xenproject.org, Julien Grall <jgrall@amazon.com>, 
- Stefano Stabellini <sstabellini@kernel.org>, 
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, 
- Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, 
- Wei Liu <wl@xen.org>, 
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
- Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Subject: Re: [PATCH] xen: Introduce cmpxchg64() and guest_cmpxchg64()
-In-Reply-To: <20200815172143.1327-1-julien@xen.org>
-Message-ID: <alpine.DEB.2.21.2008171327020.15985@sstabellini-ThinkPad-T480s>
-References: <20200815172143.1327-1-julien@xen.org>
+To: Jan Beulich <jbeulich@suse.com>
+cc: Stefano Stabellini <sstabellini@kernel.org>, 
+ xen-devel@lists.xenproject.org, andrew.cooper3@citrix.com, 
+ george.dunlap@citrix.com, ian.jackson@eu.citrix.com, julien@xen.org, 
+ wl@xen.org, Stefano Stabellini <stefano.stabellini@xilinx.com>
+Subject: Re: [PATCH 08/14] kernel-doc: public/memory.h
+In-Reply-To: <73419983-5300-32ca-2f12-7d3673ad543d@suse.com>
+Message-ID: <alpine.DEB.2.21.2008171523440.15985@sstabellini-ThinkPad-T480s>
+References: <alpine.DEB.2.21.2008061605410.16004@sstabellini-ThinkPad-T480s>
+ <20200806234933.16448-8-sstabellini@kernel.org>
+ <5567ef5a-35c4-6dd8-38f5-348c7c3713b1@suse.com>
+ <alpine.DEB.2.21.2008071217590.16004@sstabellini-ThinkPad-T480s>
+ <73419983-5300-32ca-2f12-7d3673ad543d@suse.com>
 User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
@@ -76,211 +78,208 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Sat, 15 Aug 2020, Julien Grall wrote:
-> From: Julien Grall <jgrall@amazon.com>
+On Mon, 17 Aug 2020, Jan Beulich wrote:
+> On 07.08.2020 23:51, Stefano Stabellini wrote:
+> > On Fri, 7 Aug 2020, Jan Beulich wrote:
+> >> On 07.08.2020 01:49, Stefano Stabellini wrote:
+> >>> From: Stefano Stabellini <stefano.stabellini@xilinx.com>
+> >>>
+> >>> Convert in-code comments to kernel-doc format wherever possible.
+> >>>
+> >>> Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
+> >>> ---
+> >>>  xen/include/public/memory.h | 232 ++++++++++++++++++++++++------------
+> >>>  1 file changed, 155 insertions(+), 77 deletions(-)
+> >>>
+> >>> diff --git a/xen/include/public/memory.h b/xen/include/public/memory.h
+> >>> index 21057ed78e..4c57ed213c 100644
+> >>> --- a/xen/include/public/memory.h
+> >>> +++ b/xen/include/public/memory.h
+> >>> @@ -30,7 +30,9 @@
+> >>>  #include "xen.h"
+> >>>  #include "physdev.h"
+> >>>  
+> >>> -/*
+> >>> +/**
+> >>> + * DOC: XENMEM_increase_reservation and XENMEM_decrease_reservation
+> >>> + *
+> >>>   * Increase or decrease the specified domain's memory reservation. Returns the
+> >>>   * number of extents successfully allocated or freed.
+> >>>   * arg == addr of struct xen_memory_reservation.
+> >>> @@ -40,29 +42,37 @@
+> >>>  #define XENMEM_populate_physmap     6
+> >>>  
+> >>>  #if __XEN_INTERFACE_VERSION__ >= 0x00030209
+> >>> -/*
+> >>> - * Maximum # bits addressable by the user of the allocated region (e.g., I/O
+> >>> - * devices often have a 32-bit limitation even in 64-bit systems). If zero
+> >>> - * then the user has no addressing restriction. This field is not used by
+> >>> - * XENMEM_decrease_reservation.
+> >>> +/**
+> >>> + * DOC: XENMEMF_*
+> >>> + *
+> >>> + * - XENMEMF_address_bits, XENMEMF_get_address_bits:
+> >>> + *       Maximum # bits addressable by the user of the allocated region
+> >>> + *       (e.g., I/O devices often have a 32-bit limitation even in 64-bit
+> >>> + *       systems). If zero then the user has no addressing restriction. This
+> >>> + *       field is not used by XENMEM_decrease_reservation.
+> >>> + * - XENMEMF_node, XENMEMF_get_node: NUMA node to allocate from
+> >>> + * - XENMEMF_populate_on_demand: Flag to populate physmap with populate-on-demand entries
+> >>> + * - XENMEMF_exact_node_request, XENMEMF_exact_node: Flag to request allocation only from the node specified
+> >>
+> >> Nit: overly long line
+> > 
+> > I'll fix
+> > 
+> > 
+> >>> + * - XENMEMF_vnode: Flag to indicate the node specified is virtual node
+> >>>   */
+> >>>  #define XENMEMF_address_bits(x)     (x)
+> >>>  #define XENMEMF_get_address_bits(x) ((x) & 0xffu)
+> >>> -/* NUMA node to allocate from. */
+> >>>  #define XENMEMF_node(x)     (((x) + 1) << 8)
+> >>>  #define XENMEMF_get_node(x) ((((x) >> 8) - 1) & 0xffu)
+> >>> -/* Flag to populate physmap with populate-on-demand entries */
+> >>>  #define XENMEMF_populate_on_demand (1<<16)
+> >>> -/* Flag to request allocation only from the node specified */
+> >>>  #define XENMEMF_exact_node_request  (1<<17)
+> >>>  #define XENMEMF_exact_node(n) (XENMEMF_node(n) | XENMEMF_exact_node_request)
+> >>> -/* Flag to indicate the node specified is virtual node */
+> >>>  #define XENMEMF_vnode  (1<<18)
+> >>>  #endif
+> >>>  
+> >>> +/**
+> >>> + * struct xen_memory_reservation
+> >>> + */
+> >>>  struct xen_memory_reservation {
+> >>>  
+> >>> -    /*
+> >>> +    /**
+> >>> +     * @extent_start:
+> >>> +     *
+> >>
+> >> Take the opportunity and drop the stray blank line?
+> >  
+> > Sure
+> > 
+> > 
+> >>> @@ -200,90 +236,115 @@ DEFINE_XEN_GUEST_HANDLE(xen_machphys_mfn_list_t);
+> >>>   */
+> >>>  #define XENMEM_machphys_compat_mfn_list     25
+> >>>  
+> >>> -/*
+> >>> +#define XENMEM_machphys_mapping     12
+> >>> +/**
+> >>> + * struct xen_machphys_mapping - XENMEM_machphys_mapping
+> >>> + *
+> >>>   * Returns the location in virtual address space of the machine_to_phys
+> >>>   * mapping table. Architectures which do not have a m2p table, or which do not
+> >>>   * map it by default into guest address space, do not implement this command.
+> >>>   * arg == addr of xen_machphys_mapping_t.
+> >>>   */
+> >>> -#define XENMEM_machphys_mapping     12
+> >>>  struct xen_machphys_mapping {
+> >>> +    /** @v_start: Start virtual address */
+> >>>      xen_ulong_t v_start, v_end; /* Start and end virtual addresses.   */
+> >>> -    xen_ulong_t max_mfn;        /* Maximum MFN that can be looked up. */
+> >>> +    /** @v_end: End virtual addresses */
+> >>> +    xen_ulong_t v_end;
+> >>> +    /** @max_mfn: Maximum MFN that can be looked up */
+> >>> +    xen_ulong_t max_mfn;
+> >>>  };
+> >>>  typedef struct xen_machphys_mapping xen_machphys_mapping_t;
+> >>>  DEFINE_XEN_GUEST_HANDLE(xen_machphys_mapping_t);
+> >>>  
+> >>> -/* Source mapping space. */
+> >>> +/**
+> >>> + * DOC: Source mapping space.
+> >>> + *
+> >>> + * - XENMAPSPACE_shared_info:  shared info page
+> >>> + * - XENMAPSPACE_grant_table:  grant table page
+> >>> + * - XENMAPSPACE_gmfn:         GMFN
+> >>> + * - XENMAPSPACE_gmfn_range:   GMFN range, XENMEM_add_to_physmap only.
+> >>> + * - XENMAPSPACE_gmfn_foreign: GMFN from another dom,
+> >>> + *                             XENMEM_add_to_physmap_batch only.
+> >>> + * - XENMAPSPACE_dev_mmio:     device mmio region ARM only; the region is mapped
+> >>> + *                             in Stage-2 using the Normal MemoryInner/Outer
+> >>> + *                             Write-Back Cacheable memory attribute.
+> >>> + */
+> >>>  /* ` enum phys_map_space { */
+> >>
+> >> Isn't this and ...
+> >>
+> >>> -#define XENMAPSPACE_shared_info  0 /* shared info page */
+> >>> -#define XENMAPSPACE_grant_table  1 /* grant table page */
+> >>> -#define XENMAPSPACE_gmfn         2 /* GMFN */
+> >>> -#define XENMAPSPACE_gmfn_range   3 /* GMFN range, XENMEM_add_to_physmap only. */
+> >>> -#define XENMAPSPACE_gmfn_foreign 4 /* GMFN from another dom,
+> >>> -                                    * XENMEM_add_to_physmap_batch only. */
+> >>> -#define XENMAPSPACE_dev_mmio     5 /* device mmio region
+> >>> -                                      ARM only; the region is mapped in
+> >>> -                                      Stage-2 using the Normal Memory
+> >>> -                                      Inner/Outer Write-Back Cacheable
+> >>> -                                      memory attribute. */
+> >>> +#define XENMAPSPACE_shared_info  0
+> >>> +#define XENMAPSPACE_grant_table  1
+> >>> +#define XENMAPSPACE_gmfn         2
+> >>> +#define XENMAPSPACE_gmfn_range   3
+> >>> +#define XENMAPSPACE_gmfn_foreign 4
+> >>> +#define XENMAPSPACE_dev_mmio     5
+> >>>  /* ` } */
+> >>
+> >> ... this also something that wants converting?
+> > 
+> > For clarity, I take you are talking about these two enum-related
+> > comments:
+> > 
+> > /* ` enum phys_map_space { */
+> > [... various #defines ... ]
+> > /* ` } */
+> > 
+> > Is this something we want to convert to kernel-doc? I don't know. I
+> > couldn't see an obvious value in doing it, in the sense that it doesn't
+> > necessarely make things clearer.
+> > 
+> > I took a second look at the header and the following would work:
+> > 
+> > /**
+> >  * DOC: Source mapping space.
+> >  *
+> >  * enum phys_map_space {
+> >  *
+> >  * - XENMAPSPACE_shared_info:  shared info page
+> >  * - XENMAPSPACE_grant_table:  grant table page
+> >  * - XENMAPSPACE_gmfn:         GMFN
+> >  * - XENMAPSPACE_gmfn_range:   GMFN range, XENMEM_add_to_physmap only.
+> >  * - XENMAPSPACE_gmfn_foreign: GMFN from another dom,
+> >  *                             XENMEM_add_to_physmap_batch only.
+> >  * - XENMAPSPACE_dev_mmio:     device mmio region ARM only; the region is mapped
+> >  *                             in Stage-2 using the Normal MemoryInner/Outer
+> >  *                             Write-Back Cacheable memory attribute.
+> >  * }
+> >  */
+> > 
+> > Note the blank line after "enum phys_map_space {" is required.
+> > 
+> > 
+> > All in all I am in favor of *not* converting the enum comment to
+> > kernel-doc, but I'd be OK with it anyway.
 > 
-> The IOREQ code is using cmpxchg() with 64-bit value. At the moment, this
-> is x86 code, but there is plan to make it common.
+> Iirc the enum comments were added for documentation purposes. This to
+> me means there are two options at this point:
+> - retain them in a way that the new doc model consumes them,
+> - drop them at the same time as adding the new doc comments.
 > 
-> To cater 32-bit arch, introduce two new helpers to deal with 64-bit
-> cmpxchg.
-> 
-> The Arm 32-bit implementation of cmpxchg64() is based on the __cmpxchg64
-> in Linux v5.8 (arch/arm/include/asm/cmpxchg.h).
-> 
-> Signed-off-by: Julien Grall <jgrall@amazon.com>
-> Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-> ---
->  xen/include/asm-arm/arm32/cmpxchg.h | 68 +++++++++++++++++++++++++++++
->  xen/include/asm-arm/arm64/cmpxchg.h |  5 +++
->  xen/include/asm-arm/guest_atomics.h | 22 ++++++++++
->  xen/include/asm-x86/guest_atomics.h |  2 +
->  xen/include/asm-x86/x86_64/system.h |  2 +
->  5 files changed, 99 insertions(+)
-> 
-> diff --git a/xen/include/asm-arm/arm32/cmpxchg.h b/xen/include/asm-arm/arm32/cmpxchg.h
-> index 0770f272ee99..5e2fa6ee38a0 100644
-> --- a/xen/include/asm-arm/arm32/cmpxchg.h
-> +++ b/xen/include/asm-arm/arm32/cmpxchg.h
-> @@ -87,6 +87,38 @@ __CMPXCHG_CASE(b, 1)
->  __CMPXCHG_CASE(h, 2)
->  __CMPXCHG_CASE( , 4)
->  
-> +static inline bool __cmpxchg_case_8(volatile uint64_t *ptr,
-> +			 	    uint64_t *old,
-> +			 	    uint64_t new,
-> +			 	    bool timeout,
-> +				    unsigned int max_try)
-> +{
-> +	uint64_t oldval;
-> +	uint64_t res;
-> +
-> +	do {
-> +		asm volatile(
-> +		"	ldrexd		%1, %H1, [%3]\n"
-> +		"	teq		%1, %4\n"
-> +		"	teqeq		%H1, %H4\n"
-> +		"	movne		%0, #0\n"
-> +		"	movne		%H0, #0\n"
-> +		"	bne		2f\n"
-> +		"	strexd		%0, %5, %H5, [%3]\n"
-> +		"	teq		%0, #0\n"
+> Their (presumed) value is that they identify #define-s which supposed
+> to be enum-like without actually being able to use enums in the public
+> headers (with some exceptions).
 
-Apologies if I am misreading this code, but this last "teq" instruction
-doesn't seem to be useful?
+I understand. Then, it doesn't look like we want to keep them in the code
+without converting them to kernel-doc. We could either:
 
+1) remove them as part of this series
+2) convert them to kernel-doc in the top comment as shown above
 
-> +		"2:"
-> +		: "=&r" (res), "=&r" (oldval), "+Qo" (*ptr)
-                                              ^ not used ?
-
-
-> +		: "r" (ptr), "r" (*old), "r" (new)
-> +		: "memory", "cc");
-> +		if (!res)
-> +			break;
-> +	} while (!timeout || ((--max_try) > 0));
-> +
-> +	*old = oldval;
-> +
-> +	return !res;
-> +}
-> +
->  static always_inline bool __int_cmpxchg(volatile void *ptr, unsigned long *old,
->  					unsigned long new, int size,
->  					bool timeout, unsigned int max_try)
-> @@ -156,6 +188,30 @@ static always_inline bool __cmpxchg_mb_timeout(volatile void *ptr,
->  	return ret;
->  }
->  
-> +/*
-> + * The helper may fail to update the memory if the action takes too long.
-> + *
-> + * @old: On call the value pointed contains the expected old value. It will be
-> + * updated to the actual old value.
-> + * @max_try: Maximum number of iterations
-> + *
-> + * The helper will return true when the update has succeeded (i.e no
-> + * timeout) and false if the update has failed.
-> + */
-> +static always_inline bool __cmpxchg64_mb_timeout(volatile uint64_t *ptr,
-> +						 uint64_t *old,
-> +						 uint64_t new,
-> +						 unsigned int max_try)
-> +{
-> +	bool ret;
-> +
-> +	smp_mb();
-> +	ret = __cmpxchg_case_8(ptr, old, new, true, max_try);
-> +	smp_mb();
-> +
-> +	return ret;
-> +}
-> +
->  #define cmpxchg(ptr,o,n)						\
->  	((__typeof__(*(ptr)))__cmpxchg_mb((ptr),			\
->  					  (unsigned long)(o),		\
-> @@ -167,6 +223,18 @@ static always_inline bool __cmpxchg_mb_timeout(volatile void *ptr,
->  				       (unsigned long)(o),		\
->  				       (unsigned long)(n),		\
->  				       sizeof(*(ptr))))
-> +
-> +static inline uint64_t cmpxchg64(volatile uint64_t *ptr,
-> +				 uint64_t old,
-> +				 uint64_t new)
-> +{
-> +	smp_mb();
-
-I was looking at the existing code I noticed that we don't have a
-corresponding smp_mb(); in this position. Is it needed here because of
-the 64bit-ness?
-
-
-> +	if (!__cmpxchg_case_8(ptr, &old, new, false, 0))
-> +		ASSERT_UNREACHABLE();
-> +
-> +	return old;
-> +}
-> +
->  #endif
->  /*
->   * Local variables:
-> diff --git a/xen/include/asm-arm/arm64/cmpxchg.h b/xen/include/asm-arm/arm64/cmpxchg.h
-> index fc5c60f0bd74..de9cd0ee2b07 100644
-> --- a/xen/include/asm-arm/arm64/cmpxchg.h
-> +++ b/xen/include/asm-arm/arm64/cmpxchg.h
-> @@ -187,6 +187,11 @@ static always_inline bool __cmpxchg_mb_timeout(volatile void *ptr,
->  	__ret; \
->  })
->  
-> +#define cmpxchg64(ptr, o, n) cmpxchg(ptr, o, n)
-> +
-> +#define __cmpxchg64_mb_timeout(ptr, old, new, max_try) \
-> +	__cmpxchg_mb_timeout(ptr, old, new, 8, max_try)
-> +
->  #endif
->  /*
->   * Local variables:
-> diff --git a/xen/include/asm-arm/guest_atomics.h b/xen/include/asm-arm/guest_atomics.h
-> index af27cc627bf3..28ce402bea79 100644
-> --- a/xen/include/asm-arm/guest_atomics.h
-> +++ b/xen/include/asm-arm/guest_atomics.h
-> @@ -115,6 +115,28 @@ static inline unsigned long __guest_cmpxchg(struct domain *d,
->                                           (unsigned long)(n),\
->                                           sizeof (*(ptr))))
->  
-> +static inline uint64_t guest_cmpxchg64(struct domain *d,
-> +                                       volatile uint64_t *ptr,
-> +                                       uint64_t old,
-> +                                       uint64_t new)
-> +{
-> +    uint64_t oldval = old;
-> +
-> +    perfc_incr(atomics_guest);
-> +
-> +    if ( __cmpxchg64_mb_timeout(ptr, &oldval, new,
-> +                                this_cpu(guest_safe_atomic_max)) )
-> +        return oldval;
-> +
-> +    perfc_incr(atomics_guest_paused);
-> +
-> +    domain_pause_nosync(d);
-> +    oldval = cmpxchg64(ptr, old, new);
-> +    domain_unpause(d);
-> +
-> +    return oldval;
-> +}
-> +
->  #endif /* _ARM_GUEST_ATOMICS_H */
->  /*
->   * Local variables:
-> diff --git a/xen/include/asm-x86/guest_atomics.h b/xen/include/asm-x86/guest_atomics.h
-> index 029417c8ffc1..f4de9d3631ff 100644
-> --- a/xen/include/asm-x86/guest_atomics.h
-> +++ b/xen/include/asm-x86/guest_atomics.h
-> @@ -20,6 +20,8 @@
->      ((void)(d), test_and_change_bit(nr, p))
->  
->  #define guest_cmpxchg(d, ptr, o, n) ((void)(d), cmpxchg(ptr, o, n))
-> +#define guest_cmpxchg64(d, ptr, o, n) ((void)(d), cmpxchg64(ptr, o, n))
-> +
->  
->  #endif /* _X86_GUEST_ATOMICS_H */
->  /*
-> diff --git a/xen/include/asm-x86/x86_64/system.h b/xen/include/asm-x86/x86_64/system.h
-> index f471859c19cc..c1b16105e9f2 100644
-> --- a/xen/include/asm-x86/x86_64/system.h
-> +++ b/xen/include/asm-x86/x86_64/system.h
-> @@ -5,6 +5,8 @@
->      ((__typeof__(*(ptr)))__cmpxchg((ptr),(unsigned long)(o),            \
->                                     (unsigned long)(n),sizeof(*(ptr))))
->  
-> +#define cmpxchg64(ptr, o, n) cmpxchg(ptr, o, n)
-> +
->  /*
->   * Atomic 16 bytes compare and exchange.  Compare OLD with MEM, if
->   * identical, store NEW in MEM.  Return the initial value in MEM.
-> -- 
-> 2.17.1
-> 
+I could do either, but my preference is 1) because I think it leads to
+clearer docs.
 
