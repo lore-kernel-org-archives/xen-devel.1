@@ -2,77 +2,73 @@ Return-Path: <SRS0=Z/2m=B3=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AF049C433E1
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2020 15:54:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 352EFC433DF
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2020 15:58:55 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 66885208C7
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2020 15:54:16 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id E21D7206FA
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2020 15:58:54 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="V00e4ioZ"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 66885208C7
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="f4rG+COf"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E21D7206FA
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k7hSP-0006l8-AR; Mon, 17 Aug 2020 15:53:57 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=GDTU=B3=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1k7hSO-0006kP-M8
- for xen-devel@lists.xenproject.org; Mon, 17 Aug 2020 15:53:56 +0000
-X-Inumbo-ID: 415d017c-b44b-4ad4-a1fc-5f2a1897fcb8
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 415d017c-b44b-4ad4-a1fc-5f2a1897fcb8;
- Mon, 17 Aug 2020 15:53:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
- bh=8+NhCMpKk3J4mcHA02+50i2L8ag9CoDySvpmw+yIFAQ=; b=V00e4ioZccvSIqFQHHNj7pwtmT
- eoWNkKMS8zyPClf4Zb4PAlzy9HxQjFUD2174glZFBKqleT7ap30z9Tu51ycI/28bTVPApplEyODKg
- eXI43BP5ixub4zrKU6iZeMlPxacQZKdJDefea7IWFkIV3bcoFMhzMdDlZH8pCWLxV3bI=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1k7hSL-0003ow-VH; Mon, 17 Aug 2020 15:53:53 +0000
-Received: from [54.239.6.187] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1k7hSL-0000lr-K1; Mon, 17 Aug 2020 15:53:53 +0000
-Subject: Re: [PATCH] xen/x86: irq: Avoid a TOCTOU race in
- pirq_spin_lock_irq_desc()
-To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
- <jbeulich@suse.com>, xen-devel@lists.xenproject.org,
- Julien Grall <jgrall@amazon.com>, Wei Liu <wl@xen.org>
-References: <20200722165300.22655-1-julien@xen.org>
- <c9863243-0b5e-521f-80b8-bc5673f895a6@suse.com>
- <5bd56ef4-8bf5-3308-b7db-71e41ac45918@xen.org>
- <bb25c46f-0670-889e-db0b-3031291db640@citrix.com>
- <5a11fa4e-1d57-ad12-ef43-08ed9c5c79dd@xen.org>
- <20200817124600.GC828@Air-de-Roger>
- <9375f5f2-7cbd-1344-ae03-51909dfd41e9@xen.org>
- <20200817140125.GD828@Air-de-Roger>
- <53eeaa9f-3a4f-525e-a07f-d36ef245925a@xen.org>
- <20200817150307.GF828@Air-de-Roger>
-From: Julien Grall <julien@xen.org>
-Message-ID: <5e20ad2f-3d16-6cae-0aa3-ca028c176d99@xen.org>
-Date: Mon, 17 Aug 2020 16:53:51 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
- Gecko/20100101 Thunderbird/68.11.0
+	id 1k7hX1-0006wa-5b; Mon, 17 Aug 2020 15:58:43 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=AGoP=B3=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1k7hX0-0006wT-00
+ for xen-devel@lists.xenproject.org; Mon, 17 Aug 2020 15:58:42 +0000
+X-Inumbo-ID: a974dbae-8d5b-4c51-9431-158ab1435b63
+Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id a974dbae-8d5b-4c51-9431-158ab1435b63;
+ Mon, 17 Aug 2020 15:58:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1597679921;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=Q74puLuT0vDNhKrTxd4JxP8KRkMXdKwVK0okEy3W1sI=;
+ b=f4rG+COfA8FoZ/58C92hfv7xyZAdcqMZYmFS76Hp71dbWHS2DHzs0Sgy
+ DXF3k0mPRqu6O4MBYH9079tbvGl2aJkFTRqJWL4FMf2CvyJalIKUElCTM
+ JZl9daqjMKa0AkyCoTTFYEz/Ds0wymeQZnTmfAgaIiAeqc6L9l1WFdJ+1 c=;
+Authentication-Results: esa2.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none
+IronPort-SDR: n0cCQP+s4fdOY5jDtDWlu45NH6L9O3fooTJpfJ5uGNpbTBsm1EkxTXr2wuV5LKXJjyBKrY9+9E
+ bWn/jYGICclhD9hJ6r9X7vHg5UvKuJcVYZ5sCD4vT0TLvNEf0rsWwy9b1gv2XOpqEzoiBtGFn9
+ yJ5Gs+x0uuYMZHbglYDZuaknpphFRiH7IbcCq2ugvb1rz3+ZR0xwCEvGYQaneEEN+bj7IE90FK
+ wpbRc2FZi/H86meV6hCmqSxXVC0YCUQ1iaopS+MArhBliO47cKRmP7YZB1adPI8f1kfquOyGbP
+ P54=
+X-SBRS: 2.7
+X-MesageID: 24707108
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.76,324,1592884800"; d="scan'208";a="24707108"
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Roger Pau Monne <roger.pau@citrix.com>, Jun Nakajima
+ <jun.nakajima@intel.com>, Kevin Tian <kevin.tian@intel.com>, Jan Beulich
+ <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu
+ <wl@xen.org>
+Subject: [PATCH 1/8] x86/vmx: handle writes to MISC_ENABLE MSR
+Date: Mon, 17 Aug 2020 17:57:50 +0200
+Message-ID: <20200817155757.3372-2-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.28.0
+In-Reply-To: <20200817155757.3372-1-roger.pau@citrix.com>
+References: <20200817155757.3372-1-roger.pau@citrix.com>
 MIME-Version: 1.0
-In-Reply-To: <20200817150307.GF828@Air-de-Roger>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -87,135 +83,46 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
+Such handling consist in checking that no bits have been changed from
+the read value, if that's the case silently drop the write, otherwise
+inject a fault.
 
+At least Windows guests will expect to write to the MISC_ENABLE MSR
+with the same value that's been read from it.
 
-On 17/08/2020 16:03, Roger Pau Monné wrote:
-> On Mon, Aug 17, 2020 at 03:39:52PM +0100, Julien Grall wrote:
->>
->>
->> On 17/08/2020 15:01, Roger Pau Monné wrote:
->>> On Mon, Aug 17, 2020 at 02:14:01PM +0100, Julien Grall wrote:
->>>> Hi,
->>>>
->>>> On 17/08/2020 13:46, Roger Pau Monné wrote:
->>>>> On Fri, Aug 14, 2020 at 08:25:28PM +0100, Julien Grall wrote:
->>>>>> Hi Andrew,
->>>>>>
->>>>>> Sorry for the late answer.
->>>>>>
->>>>>> On 23/07/2020 14:59, Andrew Cooper wrote:
->>>>>>> On 23/07/2020 14:22, Julien Grall wrote:
->>>>>>>> Hi Jan,
->>>>>>>>
->>>>>>>> On 23/07/2020 12:23, Jan Beulich wrote:
->>>>>>>>> On 22.07.2020 18:53, Julien Grall wrote:
->>>>>>>>>> --- a/xen/arch/x86/irq.c
->>>>>>>>>> +++ b/xen/arch/x86/irq.c
->>>>>>>>>> @@ -1187,7 +1187,7 @@ struct irq_desc *pirq_spin_lock_irq_desc(
->>>>>>>>>>             for ( ; ; )
->>>>>>>>>>           {
->>>>>>>>>> -        int irq = pirq->arch.irq;
->>>>>>>>>> +        int irq = read_atomic(&pirq->arch.irq);
->>>>>>>>>
->>>>>>>>> There we go - I'd be fine this way, but I'm pretty sure Andrew
->>>>>>>>> would want this to be ACCESS_ONCE(). So I guess now is the time
->>>>>>>>> to settle which one to prefer in new code (or which criteria
->>>>>>>>> there are to prefer one over the other).
->>>>>>>>
->>>>>>>> I would prefer if we have a single way to force the compiler to do a
->>>>>>>> single access (read/write).
->>>>>>>
->>>>>>> Unlikely to happen, I'd expect.
->>>>>>>
->>>>>>> But I would really like to get rid of (or at least rename)
->>>>>>> read_atomic()/write_atomic() specifically because they've got nothing to
->>>>>>> do with atomic_t's and the set of functionality who's namespace they share.
->>>>>>
->>>>>> Would you be happy if I rename both to READ_ONCE() and WRITE_ONCE()? I would
->>>>>> also suggest to move them implementation in a new header asm/lib.h.
->>>>>
->>>>> Maybe {READ/WRITE}_SINGLE (to note those should be implemented using a
->>>>> single instruction)?
->>>>
->>>> The asm volatile statement contains only one instruction, but this doesn't
->>>> mean the helper will generate a single instruction.
->>>
->>> Well, the access should be done using a single instruction, which is
->>> what we care about when using this helpers.
->>>
->>>> You may have other instructions to get the registers ready for the access.
->>>>
->>>>>
->>>>> ACCESS_ONCE (which also has the _ONCE suffix) IIRC could be
->>>>> implemented using several instructions, and hence doesn't seem right
->>>>> that they all have the _ONCE suffix.
->>>>
->>>> The goal here is the same, we want to access the variable *only* once.
->>>
->>> Right, but this is not guaranteed by the current implementation of
->>> ACCESS_ONCE AFAICT, as the compiler *might* split the access into two
->>> (or more) instructions, and hence won't be an atomic access anymore?
->>  From my understanding, at least on GCC/Clang, ACCESS_ONCE() should be atomic
->> if you are using aligned address and the size smaller than a register size.
-> 
-> Yes, any sane compiler shouldn't split such access, but this is not
-> guaranteed by the current code in ACCESS_ONCE.
-To be sure, your concern here is not about GCC/Clang but other 
-compilers. Am I correct?
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+ xen/arch/x86/hvm/vmx/vmx.c | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
 
-We already have a collection of compiler specific macros in compiler.h. 
-So how about we classify this macro as a compiler specific one? (See 
-more below).
-
-> 
->>>
->>>> May I ask why we would want to expose the difference to the user?
->>>
->>> I'm not saying we should, but naming them using the _ONCE suffix seems
->>> misleading IMO, as they have different guarantees than what
->>> ACCESS_ONCE currently provides.
->>
->> Lets leave aside how ACCESS_ONCE() is implemented for a moment.
->>
->> If ACCESS_ONCE() doesn't guarantee atomicy, then it means you may read a mix
->> of the old and new value. This would most likely break quite a few of the
->> users because the result wouldn't be coherent.
->>
->> Do you have place in mind where the non-atomicity would be useful?
-> 
-> Not that I'm aware, I think they could all be safely switched to use
-> the atomic variants
-There is concern that read_atomic(), write_atomic() prevent the compiler 
-to do certain optimization. Andrew gave the example of:
-
-ACCESS_ONCE(...) |= ...
-
-> 
-> In fact I wouldn't be surprised if users of ACCESS_ONCE break if the
-> access was split into multiple instructions.
-> 
-> My comment was to notice that just renaming the atomic read/write
-> helpers to use the _ONCE prefix is IMO weird as they offer different
-> properties than ACCESS_ONCE, and hence might confuse users.Just
-> looking at READ_ONCE users could assume all _ONCE helpers would
-> guarantee atomicity, which is not the case.
-
-Our implementation of ACCESS_ONCE() is very similar to what Linux used 
-to have. There READ_ONCE()/WRITE_ONCE() are also using the same principles.
-
- From my understanding, you can safely assume the access will be atomic 
-if the following conditions are met:
-	- The address is correctly size
-	- The size is smaller than the word machine size
-
-I would agree this may not be correct on all the existing compilers. But 
-this macro could easily be re-implemented if we add support for a 
-compiler with different guarantee.
-
-Therefore, I fail to see why we can't use the same guarantee in Xen.
-
-Cheers,
-
+diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
+index eb54aadfba..fbfb31af05 100644
+--- a/xen/arch/x86/hvm/vmx/vmx.c
++++ b/xen/arch/x86/hvm/vmx/vmx.c
+@@ -3166,7 +3166,7 @@ static int vmx_msr_write_intercept(unsigned int msr, uint64_t msr_content)
+ 
+     switch ( msr )
+     {
+-        uint64_t rsvd;
++        uint64_t rsvd, tmp;
+ 
+     case MSR_IA32_SYSENTER_CS:
+         __vmwrite(GUEST_SYSENTER_CS, msr_content);
+@@ -3304,6 +3304,13 @@ static int vmx_msr_write_intercept(unsigned int msr, uint64_t msr_content)
+         /* None of these MSRs are writeable. */
+         goto gp_fault;
+ 
++    case MSR_IA32_MISC_ENABLE:
++        /* Silently drop writes that don't change the reported value. */
++        if ( vmx_msr_read_intercept(msr, &tmp) != X86EMUL_OKAY ||
++             tmp != msr_content )
++            goto gp_fault;
++        break;
++
+     case MSR_P6_PERFCTR(0)...MSR_P6_PERFCTR(7):
+     case MSR_P6_EVNTSEL(0)...MSR_P6_EVNTSEL(7):
+     case MSR_CORE_PERF_FIXED_CTR0...MSR_CORE_PERF_FIXED_CTR2:
 -- 
-Julien Grall
+2.28.0
+
 
