@@ -2,70 +2,77 @@ Return-Path: <SRS0=Ms5E=B4=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-14.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DC99CC433DF
-	for <xen-devel@archiver.kernel.org>; Tue, 18 Aug 2020 09:51:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EE6F9C433E1
+	for <xen-devel@archiver.kernel.org>; Tue, 18 Aug 2020 10:13:56 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AD38E206B5
-	for <xen-devel@archiver.kernel.org>; Tue, 18 Aug 2020 09:51:20 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id B947820789
+	for <xen-devel@archiver.kernel.org>; Tue, 18 Aug 2020 10:13:56 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="U0oOqB4O"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AD38E206B5
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="Y/Ns5OiK"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B947820789
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k7yGr-0002Aj-Q7; Tue, 18 Aug 2020 09:51:09 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=ffgU=B4=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1k7yGq-0002Ae-F3
- for xen-devel@lists.xenproject.org; Tue, 18 Aug 2020 09:51:08 +0000
-X-Inumbo-ID: 81e0dc59-d577-4974-a784-a24ce931f4aa
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 81e0dc59-d577-4974-a784-a24ce931f4aa;
- Tue, 18 Aug 2020 09:51:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
- bh=13t8NOjDx7k3G+xFcMn+xj3wUFUtxp/fkbF0fxO4Rxw=; b=U0oOqB4OWBQSyh1TqJBfvm3GYf
- BiEXGnwhBHxklLJJY9cL/9EW+Cjq6tITNGZSK3ZdKHcxQDf8C27TejQNWEgzR4YxmNxX/phZiyB56
- CFG1+tmP7VFYzCUASU/Q9rp+AV+St9b/z9lExl+vw3NJ7vDUX88DIbRwMey9vqkCo95s=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1k7yGn-00008r-L7; Tue, 18 Aug 2020 09:51:05 +0000
-Received: from [54.239.6.186] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1k7yGn-0001RK-F9; Tue, 18 Aug 2020 09:51:05 +0000
-Subject: Re: [PATCH] xen/arm: Missing N1/A76/A75 FP registers in vCPU context
- switch
-To: Wei Chen <wei.chen@arm.com>, xen-devel@lists.xenproject.org,
- sstabellini@kernel.org
-Cc: Andre.Przywara@arm.com, Bertrand.Marquis@arm.com, steve.capper@arm.com,
- Kaly.Xin@arm.com
-References: <20200818031112.7038-1-wei.chen@arm.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <bc3088eb-bb21-bea2-7e24-3a335046525a@xen.org>
-Date: Tue, 18 Aug 2020 10:51:03 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
- Gecko/20100101 Thunderbird/68.11.0
+	id 1k7yca-00044F-KL; Tue, 18 Aug 2020 10:13:36 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=SD0B=B4=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1k7ycZ-000447-0F
+ for xen-devel@lists.xenproject.org; Tue, 18 Aug 2020 10:13:35 +0000
+X-Inumbo-ID: 9077fe8d-a95f-43ce-a411-d2d49ec0a2ba
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 9077fe8d-a95f-43ce-a411-d2d49ec0a2ba;
+ Tue, 18 Aug 2020 10:13:33 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1597745613;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:content-transfer-encoding:in-reply-to;
+ bh=TekmC2H7WYrAdCi69L8xPJdOf+bla6N7QVNfnXduFmo=;
+ b=Y/Ns5OiKgJwPcdtLDUH7QVpXjgcvpf+vx2rXY+7ltsw5a9arA5B/0wbW
+ KXxcAQKnZzh2Xrclw9avf8haRmoeznEZcEbVTtztO3zrbz7g2RwnVCXTV
+ nlUtB136kmSn2K3S9fbEMqYNbh2LqfA2ERUEIRF49vYXn6yS78VhKP6Rr A=;
+Authentication-Results: esa6.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none
+IronPort-SDR: oNF9japKYAWwyWMNzYoWd/VxfpYi8fIIKDhhMWJbOMxMVdm/Adl18MxFVrGCujYMIXKBDXy6C7
+ W5sNt7KHtL3mZXVzzPzjIaR2tH5f4EpLZ9/FInfuOgS/xt/DvyeV/rnZfhG8+BItv5i2sYw2vi
+ xIm6W0YcVnLHbtx63/uNKv+oQjywKfYLHnXVnxImmiOKZKVKUKa1Ev/w5YfftYegPeYnEFrtIU
+ ch8e/h3dQHkJMWAkgeRRiO0qPj8QxMgUcEdrUiYmlU56S7DXrRQvhjSSE1xpvNZ61t0t48owQf
+ cqc=
+X-SBRS: 2.7
+X-MesageID: 25068609
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.76,327,1592884800"; d="scan'208";a="25068609"
+Date: Tue, 18 Aug 2020 12:13:26 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+CC: Julien Grall <julien@xen.org>, Jan Beulich <jbeulich@suse.com>,
+ <xen-devel@lists.xenproject.org>, Julien Grall <jgrall@amazon.com>, Wei Liu
+ <wl@xen.org>
+Subject: Re: [PATCH] xen/x86: irq: Avoid a TOCTOU race in
+ pirq_spin_lock_irq_desc()
+Message-ID: <20200818101326.GJ828@Air-de-Roger>
+References: <20200722165300.22655-1-julien@xen.org>
+ <c9863243-0b5e-521f-80b8-bc5673f895a6@suse.com>
+ <5bd56ef4-8bf5-3308-b7db-71e41ac45918@xen.org>
+ <bb25c46f-0670-889e-db0b-3031291db640@citrix.com>
 MIME-Version: 1.0
-In-Reply-To: <20200818031112.7038-1-wei.chen@arm.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <bb25c46f-0670-889e-db0b-3031291db640@citrix.com>
+X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
+ AMSPEX02CL02.citrite.net (10.69.22.126)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,68 +86,44 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Hi Wei,
-
-On 18/08/2020 04:11, Wei Chen wrote:
-> Xen has cpu_has_fp/cpu_has_simd to detect whether the CPU supports
-> FP/SIMD or not. But currently, this two MACROs only consider value 0
-
-s/this/these/
-
-> of ID_AA64PFR0_EL1.FP/SIMD as FP/SIMD features enabled. But for CPUs
-> that support FP/SIMD and half-precision floating-point features, the
-> ID_AA64PFR0_EL1.FP/SIMD are 1. For these CPUs, xen will treat them as
-> no FP/SIMD support. In this case, the vfp_save/restore_state will not
-> take effect.
+On Thu, Jul 23, 2020 at 02:59:57PM +0100, Andrew Cooper wrote:
+> On 23/07/2020 14:22, Julien Grall wrote:
+> > Hi Jan,
+> >
+> > On 23/07/2020 12:23, Jan Beulich wrote:
+> >> On 22.07.2020 18:53, Julien Grall wrote:
+> >>> --- a/xen/arch/x86/irq.c
+> >>> +++ b/xen/arch/x86/irq.c
+> >>> @@ -1187,7 +1187,7 @@ struct irq_desc *pirq_spin_lock_irq_desc(
+> >>>         for ( ; ; )
+> >>>       {
+> >>> -        int irq = pirq->arch.irq;
+> >>> +        int irq = read_atomic(&pirq->arch.irq);
+> >>
+> >> There we go - I'd be fine this way, but I'm pretty sure Andrew
+> >> would want this to be ACCESS_ONCE(). So I guess now is the time
+> >> to settle which one to prefer in new code (or which criteria
+> >> there are to prefer one over the other).
+> >
+> > I would prefer if we have a single way to force the compiler to do a
+> > single access (read/write).
 > 
-> Unfortunately, Cortex-N1/A76/A75 are the CPUs support FP/SIMD and
-> half-precision floatiing-point. 
-
-I am not sure to understand this sentence. Could you clarify?
-
-> Their ID_AA64PFR0_EL1.FP/SMID are 1
-> (see Arm ARM DDI0487F.b, D13.2.64). In this case, on N1/A76/A75
-> platforms, Xen will always miss the float pointer registers save/restore.
-
-s/float pointer/floating point/?
-
-> If different vCPUs are running on the same pCPU, the float pointer
-
-Likewise?
-
-> registers will be corrupted randomly.
+> Unlikely to happen, I'd expect.
 > 
-> This patch fixes Xen on these new cores.
-> 
-> Signed-off-by: Wei Chen <wei.chen@arm.com>
-> ---
->   xen/include/asm-arm/cpufeature.h | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/xen/include/asm-arm/cpufeature.h b/xen/include/asm-arm/cpufeature.h
-> index 674beb0353..588089e5ae 100644
-> --- a/xen/include/asm-arm/cpufeature.h
-> +++ b/xen/include/asm-arm/cpufeature.h
-> @@ -13,8 +13,8 @@
->   #define cpu_has_el2_64    (boot_cpu_feature64(el2) >= 1)
->   #define cpu_has_el3_32    (boot_cpu_feature64(el3) == 2)
->   #define cpu_has_el3_64    (boot_cpu_feature64(el3) >= 1)
-> -#define cpu_has_fp        (boot_cpu_feature64(fp) == 0)
-> -#define cpu_has_simd      (boot_cpu_feature64(simd) == 0)
-> +#define cpu_has_fp        (boot_cpu_feature64(fp) <= 1)
-> +#define cpu_has_simd      (boot_cpu_feature64(simd) <= 1)
->   #define cpu_has_gicv3     (boot_cpu_feature64(gic) == 1)
->   #endif
-> 
-> --
-> 2.17.1
-> 
-> IMPORTANT NOTICE: The contents of this email and any attachments are confidential and may also be privileged. If you are not the intended recipient, please notify the sender immediately and do not disclose the contents to any other person, use it for any purpose, or store or copy the information in any medium. Thank you.
+> But I would really like to get rid of (or at least rename)
+> read_atomic()/write_atomic() specifically because they've got nothing to
+> do with atomic_t's and the set of functionality who's namespace they share.
 
-Please configure your e-mail client to remove the disclaimer.
+I've been thinking about this a bit, and maybe the problem is the
+other way around. Having an 'atomic' type doesn't make much sense IMO,
+because atomicity is not (solely) based on the type but rather on how
+the accesses are performed.
 
-Cheers,
+Maybe it would make more sense to rename atomic_t to counter_t: a
+counter that guarantees atomic accesses. Then the atomic namespace
+could be used to implement the low level helpers that actually
+guarantee atomicity and support a wider set of types than what
+atomic_t currently is (ie: an int).
 
--- 
-Julien Grall
+Roger.
 
