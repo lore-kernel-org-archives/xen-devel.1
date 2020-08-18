@@ -1,80 +1,177 @@
-Return-Path: <SRS0=Z/2m=B3=lists.xenproject.org=xen-devel-bounces@kernel.org>
+Return-Path: <SRS0=Ms5E=B4=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,UNPARSEABLE_RELAY,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 67B2CC433DF
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2020 22:57:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2AF77C433DF
+	for <xen-devel@archiver.kernel.org>; Tue, 18 Aug 2020 03:12:07 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 35D952063A
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Aug 2020 22:57:05 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id E5E58206DA
+	for <xen-devel@archiver.kernel.org>; Tue, 18 Aug 2020 03:12:06 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="bhcDxymr"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 35D952063A
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
+	dkim=pass (1024-bit key) header.d=armh.onmicrosoft.com header.i=@armh.onmicrosoft.com header.b="j3Wyn6t5";
+	dkim=pass (1024-bit key) header.d=armh.onmicrosoft.com header.i=@armh.onmicrosoft.com header.b="j3Wyn6t5"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E5E58206DA
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k7o3O-0003aF-5j; Mon, 17 Aug 2020 22:56:34 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Ksrr=B3=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1k7o3M-0003a9-Tz
- for xen-devel@lists.xenproject.org; Mon, 17 Aug 2020 22:56:32 +0000
-X-Inumbo-ID: c99bf54b-e505-4b3f-a543-0c4fc690913a
-Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id c99bf54b-e505-4b3f-a543-0c4fc690913a;
- Mon, 17 Aug 2020 22:56:32 +0000 (UTC)
-Received: from localhost (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 478402063A;
- Mon, 17 Aug 2020 22:56:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1597704991;
- bh=k3C/CJrDxY91ceuYo1kB0Qc8CBh+q3MptRAsJlanmyg=;
- h=Date:From:To:cc:Subject:In-Reply-To:References:From;
- b=bhcDxymrsOCDjuz6P4sMQi7sYZMhIyHsAIb1xEwquG33PIGbIgpymBZwHr6slu8SK
- Y9KSqjtCG3oIV38QXEN8CqUz4qOl87pgnEy5lpjjN+NVP8JcGQpyH0s3CpdD7OHwaw
- qO9umVioALMyalhEezUq6adlmuEj+o7Bs5Eou3Rs=
-Date: Mon, 17 Aug 2020 15:56:30 -0700 (PDT)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
-To: Jan Beulich <jbeulich@suse.com>
-cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Oleksandr Tyshchenko <olekstysh@gmail.com>, xen-devel@lists.xenproject.org, 
- Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, 
- Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wl@xen.org>, 
- Andrew Cooper <andrew.cooper3@citrix.com>, 
- George Dunlap <george.dunlap@citrix.com>, 
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, 
- Julien Grall <julien.grall@arm.com>
-Subject: Re: [RFC PATCH V1 05/12] hvm/dm: Introduce
- xendevicemodel_set_irq_level DM op
-In-Reply-To: <21da3195-f43a-ebc7-cbc6-986d5a3a1e67@suse.com>
-Message-ID: <alpine.DEB.2.21.2008171502390.15985@sstabellini-ThinkPad-T480s>
-References: <1596478888-23030-1-git-send-email-olekstysh@gmail.com>
- <1596478888-23030-6-git-send-email-olekstysh@gmail.com>
- <alpine.DEB.2.21.2008041358150.5748@sstabellini-ThinkPad-T480s>
- <00e261e0-295a-9cd8-ed11-7e3801a4eb58@xen.org>
- <alpine.DEB.2.21.2008050943300.5748@sstabellini-ThinkPad-T480s>
- <92e2b136-8468-2877-0e8c-c13ff2a0a1fb@xen.org>
- <alpine.DEB.2.21.2008061422300.16004@sstabellini-ThinkPad-T480s>
- <d8aa0f36-d3c4-011a-9ec1-32c1e3118112@suse.com>
- <alpine.DEB.2.21.2008071253520.16004@sstabellini-ThinkPad-T480s>
- <21da3195-f43a-ebc7-cbc6-986d5a3a1e67@suse.com>
-User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
+	id 1k7s28-0006Xj-KE; Tue, 18 Aug 2020 03:11:32 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=+cVS=B4=arm.com=wei.chen@srs-us1.protection.inumbo.net>)
+ id 1k7s27-0006Xe-33
+ for xen-devel@lists.xenproject.org; Tue, 18 Aug 2020 03:11:31 +0000
+X-Inumbo-ID: d258a4f8-6f05-40ea-82a6-b92e2c53f4e8
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com (unknown
+ [40.107.22.57]) by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id d258a4f8-6f05-40ea-82a6-b92e2c53f4e8;
+ Tue, 18 Aug 2020 03:11:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com; 
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=QIgfXj+zbAOvVR84RCePLoTUejtcyhxbQHtWvDZRZ0Y=;
+ b=j3Wyn6t5Aly+hWh3qDcqRgr3NJQwmakeY2d4ZgpGKb8wspGBNhLqdPFqSjW3BVqyOWSP+uhV4Y0qE8lXLE4C6wIHt3u7LRQTgc80XBgyP8UZx2ZfiCxejozuS2Zf5vGne8afqTt0I/PI+vXz5TakfPKvxD5w2Pr3SSnnS+FMAec=
+Received: from AM6P191CA0105.EURP191.PROD.OUTLOOK.COM (2603:10a6:209:8a::46)
+ by AM0PR08MB4481.eurprd08.prod.outlook.com (2603:10a6:208:148::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3283.18; Tue, 18 Aug
+ 2020 03:11:25 +0000
+Received: from AM5EUR03FT035.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:209:8a:cafe::4d) by AM6P191CA0105.outlook.office365.com
+ (2603:10a6:209:8a::46) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3283.16 via Frontend
+ Transport; Tue, 18 Aug 2020 03:11:25 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
+ smtp.mailfrom=arm.com; lists.xenproject.org; dkim=pass (signature was
+ verified) header.d=armh.onmicrosoft.com;lists.xenproject.org;
+ dmarc=bestguesspass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
+ client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
+Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
+ AM5EUR03FT035.mail.protection.outlook.com (10.152.16.119) with
+ Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3283.16 via Frontend Transport; Tue, 18 Aug 2020 03:11:25 +0000
+Received: ("Tessian outbound 7fc8f57bdedc:v64");
+ Tue, 18 Aug 2020 03:11:25 +0000
+X-CheckRecipientChecked: true
+X-CR-MTA-CID: 02f3247f4f6e3cc5
+X-CR-MTA-TID: 64aa7808
+Received: from 45ed22510b1c.1
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com id
+ 05B2EE15-533B-4A86-95A4-EFA5CBA0A491.1; 
+ Tue, 18 Aug 2020 03:11:20 +0000
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 45ed22510b1c.1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
+ Tue, 18 Aug 2020 03:11:20 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=ie7zVfLwlrAmmUK1bibrAn+iAAKAvwNf5TFUuh8OI4lwDVZvEj5CKKCg3fe5LIhjEYAdJXcerK2bmxJzRQCOAQoixFUhaNwx2hVvUwNW1FYC7kLSbbf4ZmWoS1WlwOkvQ3nZvF/pWUEebkOOv3qddFEWO/J03GjHCzDfe7lCVunUGKGEaYIupsocVzpIMB+X4CVjOQ2tYFwI94QwzOhmeU0KCncpHYH8TdnK9s8K1aKV9atglzIfwRFav3qItI12dkm6Hx5JH3vN0N/nSzZtwJ68dphOyXVx3iMo3ggD7XNPpItuGNkqtEd0uaS76fJow2n13g3JgJA0D7ZWt4/qHw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=QIgfXj+zbAOvVR84RCePLoTUejtcyhxbQHtWvDZRZ0Y=;
+ b=kkB57uAc5Ns2olrPaJ9FmeF45GpZSKFJwa4ebv6NVplNZVwQiO0rtkfW0TQomTArOj66Ylva4C72PbGuTQndGkxRe4Z+39fBL6fhXOAVIzhCnGAR0aMFaMilTbe9I2H5HxMEmeEevH/Bvhb2iIzrldEBGtET1uYuegQ/Gv2TgEg9xGpcOyoP8j9I9pTBheMHQLWrs4+YaOusvjk99/L31qi8EFE4cFHpnPZ3q6UhhHpHPsdhMynamoGCRZNkQgrWYnKXG+lRluBrSTsZqgyTCTbEUBtEo9pY+x6hMoWdn0/LhJrKp9b2D/AEXzO/XLo5lrqZl3+mRNuXXI7MhnNlLA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 40.67.248.234) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=arm.com;
+ dmarc=bestguesspass action=none header.from=arm.com; dkim=none (message not
+ signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com; 
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=QIgfXj+zbAOvVR84RCePLoTUejtcyhxbQHtWvDZRZ0Y=;
+ b=j3Wyn6t5Aly+hWh3qDcqRgr3NJQwmakeY2d4ZgpGKb8wspGBNhLqdPFqSjW3BVqyOWSP+uhV4Y0qE8lXLE4C6wIHt3u7LRQTgc80XBgyP8UZx2ZfiCxejozuS2Zf5vGne8afqTt0I/PI+vXz5TakfPKvxD5w2Pr3SSnnS+FMAec=
+Received: from DB7PR05CA0061.eurprd05.prod.outlook.com (2603:10a6:10:2e::38)
+ by AM0PR08MB4258.eurprd08.prod.outlook.com (2603:10a6:208:142::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3283.16; Tue, 18 Aug
+ 2020 03:11:18 +0000
+Received: from DB5EUR03FT022.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:10:2e:cafe::fd) by DB7PR05CA0061.outlook.office365.com
+ (2603:10a6:10:2e::38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3283.15 via Frontend
+ Transport; Tue, 18 Aug 2020 03:11:18 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 40.67.248.234)
+ smtp.mailfrom=arm.com; lists.xenproject.org; dkim=none (message not signed)
+ header.d=none;lists.xenproject.org; dmarc=bestguesspass action=none
+ header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 40.67.248.234 as permitted sender) receiver=protection.outlook.com;
+ client-ip=40.67.248.234; helo=nebula.arm.com;
+Received: from nebula.arm.com (40.67.248.234) by
+ DB5EUR03FT022.mail.protection.outlook.com (10.152.20.171) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.3283.16 via Frontend Transport; Tue, 18 Aug 2020 03:11:17 +0000
+Received: from AZ-NEU-EX01.Emea.Arm.com (10.251.26.4) by AZ-NEU-EX03.Arm.com
+ (10.251.24.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2044.4; Tue, 18 Aug
+ 2020 03:11:17 +0000
+Received: from AZ-NEU-EX04.Arm.com (10.251.24.32) by AZ-NEU-EX01.Emea.Arm.com
+ (10.251.26.4) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1779.2; Tue, 18
+ Aug 2020 03:11:16 +0000
+Received: from localhost.localdomain (10.169.214.112) by mail.arm.com
+ (10.251.24.32) with Microsoft SMTP Server id 15.1.2044.4 via Frontend
+ Transport; Tue, 18 Aug 2020 03:11:13 +0000
+From: Wei Chen <wei.chen@arm.com>
+To: <xen-devel@lists.xenproject.org>, <sstabellini@kernel.org>,
+ <julien@xen.org>
+CC: <Andre.Przywara@arm.com>, <Bertrand.Marquis@arm.com>,
+ <steve.capper@arm.com>, <Kaly.Xin@arm.com>, <wei.chen@arm.com>
+Subject: [PATCH] xen/arm: Missing N1/A76/A75 FP registers in vCPU context
+ switch
+Date: Tue, 18 Aug 2020 03:11:12 +0000
+Message-ID: <20200818031112.7038-1-wei.chen@arm.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Type: text/plain
+X-EOPAttributedMessage: 1
+X-MS-Office365-Filtering-HT: Tenant
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 8cb6a443-2df5-4a80-f47c-08d843246480
+X-MS-TrafficTypeDiagnostic: AM0PR08MB4258:|AM0PR08MB4481:
+X-Microsoft-Antispam-PRVS: <AM0PR08MB4481A673BA07C74C81BA6FEC9E5C0@AM0PR08MB4481.eurprd08.prod.outlook.com>
+x-checkrecipientrouted: true
+Content-Transfer-Encoding: quoted-printable
+NoDisclaimer: true
+X-MS-Oob-TLC-OOBClassifiers: OLM:6790;OLM:9508;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam-Untrusted: BCL:0;
+X-Microsoft-Antispam-Message-Info-Original: tvMXF7COruPNW8LGASbyJGeUWAGntN/Ns+kMuKLxAJRUJ5WU58vYfwd1OTljGst/1zQAq8B4JoYWJQ4ftD9ehG0/FN2er/cAwpbToXTqdJdZP4P0axMkw/B6aLPbdPeGunsJuuX80ut+pk/hGowwDumvCOR1cvit7MUE4U/nLJFwx6EdjoSeK5gXcJ5Yojd6sC6OvTqUlM6taJrChlB3Rm17PY+86dqSJ5v3/JkIReHqIlv9Sa0LAcFx7Gu98J8Mus0QOAlp9VNBaLmoGuzTTA/AEASuKQ8eSZkXnTu+WZpaRqXH0yIYpQqGvYenWnch4SPZqpNTWNOaQqZ20tRpscRQSCATLcEqEZjkauhucOgb4siK+t7oQEcD9OO+z7vayY5LXwf/hHqObyx2JoAeXg==
+X-Forefront-Antispam-Report-Untrusted: CIP:40.67.248.234; CTRY:IE; LANG:en;
+ SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:nebula.arm.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(4636009)(136003)(346002)(376002)(39860400002)(396003)(46966005)(70206006)(44832011)(26005)(2906002)(1076003)(8676002)(70586007)(316002)(4326008)(86362001)(336012)(2616005)(54906003)(426003)(186003)(478600001)(8936002)(110136005)(83380400001)(356005)(81166007)(82310400002)(5660300002)(36756003)(47076004)(82740400003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR08MB4258
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: AM5EUR03FT035.eop-EUR03.prod.protection.outlook.com
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 678dc6a1-eaca-491a-ab80-08d843245fdf
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: yI5p9SSp7jeLhUdNTZReBBxZy3ZOOQR+uVrL0DFPb5pnhHVM4Zx9eaFdyq4RCWXRTNRBopbEGCucGM5/uzzfQt8ZmtEClPHQHRpI88V0qsrU8mwCgbl96BMyrC2gFOYWqH+A0LLe9l5zZ+x97o7b/2Nq670R6x2koQ/LTpLIp86pm0guw8+JSinZ8aGrwMjkr8f7pg0JajdtiX3KSWF6+pCEvlIzR6m9fCeCzrBxonCFVUN3bkiEnGpUCMGaX6nFWKY3l8VM4a6XmL7GMVUJGqHFFAXww+xNToHiIClSGGpz2gvk6XBUnB61nCDdYH616yUivY0N5OdfIMkq7EyB+2KpPgpWMTAMFPrH6BO2+WsXcWR519tda3Hq+cnQybG/gEOvzxvvDNfZEn8N+8z+9g==
+X-Forefront-Antispam-Report: CIP:63.35.35.123; CTRY:IE; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:64aa7808-outbound-1.mta.getcheckrecipient.com;
+ PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com; CAT:NONE;
+ SFS:(4636009)(346002)(376002)(136003)(396003)(39860400002)(46966005)(36906005)(478600001)(47076004)(54906003)(2906002)(316002)(82740400003)(110136005)(26005)(5660300002)(186003)(86362001)(336012)(44832011)(1076003)(2616005)(426003)(8676002)(4326008)(8936002)(70206006)(81166007)(82310400002)(70586007)(36756003)(83380400001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Aug 2020 03:11:25.6202 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8cb6a443-2df5-4a80-f47c-08d843246480
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d; Ip=[63.35.35.123];
+ Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
+X-MS-Exchange-CrossTenant-AuthSource: AM5EUR03FT035.eop-EUR03.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR08MB4481
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -88,164 +185,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Mon, 17 Aug 2020, Jan Beulich wrote:
-> On 07.08.2020 23:50, Stefano Stabellini wrote:
-> > On Fri, 7 Aug 2020, Jan Beulich wrote:
-> >> On 07.08.2020 01:49, Stefano Stabellini wrote:
-> >>> On Thu, 6 Aug 2020, Julien Grall wrote:
-> >>>> On 06/08/2020 01:37, Stefano Stabellini wrote:
-> >>>>> On Wed, 5 Aug 2020, Julien Grall wrote:
-> >>>>>> On 05/08/2020 00:22, Stefano Stabellini wrote:
-> >>>>>>> On Mon, 3 Aug 2020, Oleksandr Tyshchenko wrote:
-> >>>>>>>> From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-> >>>>>>>>
-> >>>>>>>> This patch adds ability to the device emulator to notify otherend
-> >>>>>>>> (some entity running in the guest) using a SPI and implements Arm
-> >>>>>>>> specific bits for it. Proposed interface allows emulator to set
-> >>>>>>>> the logical level of a one of a domain's IRQ lines.
-> >>>>>>>>
-> >>>>>>>> Please note, this is a split/cleanup of Julien's PoC:
-> >>>>>>>> "Add support for Guest IO forwarding to a device emulator"
-> >>>>>>>>
-> >>>>>>>> Signed-off-by: Julien Grall <julien.grall@arm.com>
-> >>>>>>>> Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-> >>>>>>>> ---
-> >>>>>>>>    tools/libs/devicemodel/core.c                   | 18
-> >>>>>>>> ++++++++++++++++++
-> >>>>>>>>    tools/libs/devicemodel/include/xendevicemodel.h |  4 ++++
-> >>>>>>>>    tools/libs/devicemodel/libxendevicemodel.map    |  1 +
-> >>>>>>>>    xen/arch/arm/dm.c                               | 22
-> >>>>>>>> +++++++++++++++++++++-
-> >>>>>>>>    xen/common/hvm/dm.c                             |  1 +
-> >>>>>>>>    xen/include/public/hvm/dm_op.h                  | 15
-> >>>>>>>> +++++++++++++++
-> >>>>>>>>    6 files changed, 60 insertions(+), 1 deletion(-)
-> >>>>>>>>
-> >>>>>>>> diff --git a/tools/libs/devicemodel/core.c
-> >>>>>>>> b/tools/libs/devicemodel/core.c
-> >>>>>>>> index 4d40639..30bd79f 100644
-> >>>>>>>> --- a/tools/libs/devicemodel/core.c
-> >>>>>>>> +++ b/tools/libs/devicemodel/core.c
-> >>>>>>>> @@ -430,6 +430,24 @@ int xendevicemodel_set_isa_irq_level(
-> >>>>>>>>        return xendevicemodel_op(dmod, domid, 1, &op, sizeof(op));
-> >>>>>>>>    }
-> >>>>>>>>    +int xendevicemodel_set_irq_level(
-> >>>>>>>> +    xendevicemodel_handle *dmod, domid_t domid, uint32_t irq,
-> >>>>>>>> +    unsigned int level)
-> >>>>>>>
-> >>>>>>> It is a pity that having xen_dm_op_set_pci_intx_level and
-> >>>>>>> xen_dm_op_set_isa_irq_level already we need to add a third one, but from
-> >>>>>>> the names alone I don't think we can reuse either of them.
-> >>>>>>
-> >>>>>> The problem is not the name...
-> >>>>>>
-> >>>>>>>
-> >>>>>>> It is very similar to set_isa_irq_level. We could almost rename
-> >>>>>>> xendevicemodel_set_isa_irq_level to xendevicemodel_set_irq_level or,
-> >>>>>>> better, just add an alias to it so that xendevicemodel_set_irq_level is
-> >>>>>>> implemented by calling xendevicemodel_set_isa_irq_level. Honestly I am
-> >>>>>>> not sure if it is worth doing it though. Any other opinions?
-> >>>>>>
-> >>>>>> ... the problem is the interrupt field is only 8-bit. So we would only be
-> >>>>>> able
-> >>>>>> to cover IRQ 0 - 255.
-> >>>>>
-> >>>>> Argh, that's not going to work :-(  I wasn't sure if it was a good idea
-> >>>>> anyway.
-> >>>>>
-> >>>>>
-> >>>>>> It is not entirely clear how the existing subop could be extended without
-> >>>>>> breaking existing callers.
-> >>>>>>
-> >>>>>>> But I think we should plan for not needing two calls (one to set level
-> >>>>>>> to 1, and one to set it to 0):
-> >>>>>>> https://marc.info/?l=xen-devel&m=159535112027405
-> >>>>>>
-> >>>>>> I am not sure to understand your suggestion here? Are you suggesting to
-> >>>>>> remove
-> >>>>>> the 'level' parameter?
-> >>>>>
-> >>>>> My hope was to make it optional to call the hypercall with level = 0,
-> >>>>> not necessarily to remove 'level' from the struct.
-> >>>>
-> >>>> From my understanding, the hypercall is meant to represent the status of the
-> >>>> line between the device and the interrupt controller (either low or high).
-> >>>>
-> >>>> This is then up to the interrupt controller to decide when the interrupt is
-> >>>> going to be fired:
-> >>>>   - For edge interrupt, this will fire when the line move from low to high (or
-> >>>> vice versa).
-> >>>>   - For level interrupt, this will fire when line is high (assuming level
-> >>>> trigger high) and will keeping firing until the device decided to lower the
-> >>>> line.
-> >>>>
-> >>>> For a device, it is common to keep the line high until an OS wrote to a
-> >>>> specific register.
-> >>>>
-> >>>> Furthermore, technically, the guest OS is in charge to configure how an
-> >>>> interrupt is triggered. Admittely this information is part of the DT, but
-> >>>> nothing prevent a guest to change it.
-> >>>>
-> >>>> As side note, we have a workaround in Xen for some buggy DT (see the arch
-> >>>> timer) exposing the wrong trigger type.
-> >>>>
-> >>>> Because of that, I don't really see a way to make optional. Maybe you have
-> >>>> something different in mind?
-> >>>
-> >>> For level, we need the level parameter. For edge, we are only interested
-> >>> in the "edge", right?
-> >>
-> >> I don't think so, unless Arm has special restrictions. Edges can be
-> >> both rising and falling ones.
-> > 
-> > And the same is true for level interrupts too: they could be active-low
-> > or active-high.
-> > 
-> > 
-> > Instead of modelling the state of the line, which seems to be a bit
-> > error prone especially in the case of a single-device emulator that
-> > might not have enough information about the rest of the system (it might
-> > not know if the interrupt is active-high or active-low), we could model
-> > the triggering of the interrupt instead.
-> > 
-> > In the case of level=1, it would mean that the interrupt line is active,
-> > no matter if it is active-low or active-high. In the case of level=0, it
-> > would mean that it is inactive.
-> > 
-> > Similarly, in the case of an edge interrupt edge=1 or level=1 would mean
-> > that there is an edge, no matter if it is a rising or falling.
-> 
-> Am I understanding right that you propose to fold two properties into
-> a single bit?
+Xen has cpu_has_fp/cpu_has_simd to detect whether the CPU supports
+FP/SIMD or not. But currently, this two MACROs only consider value 0
+of ID_AA64PFR0_EL1.FP/SIMD as FP/SIMD features enabled. But for CPUs
+that support FP/SIMD and half-precision floating-point features, the
+ID_AA64PFR0_EL1.FP/SIMD are 1. For these CPUs, xen will treat them as
+no FP/SIMD support. In this case, the vfp_save/restore_state will not
+take effect.
 
-I don't think I understand what are the two properties that my proposal
-is merging into a single bit.
+Unfortunately, Cortex-N1/A76/A75 are the CPUs support FP/SIMD and
+half-precision floatiing-point. Their ID_AA64PFR0_EL1.FP/SMID are 1
+(see Arm ARM DDI0487F.b, D13.2.64). In this case, on N1/A76/A75
+platforms, Xen will always miss the float pointer registers save/restore.
+If different vCPUs are running on the same pCPU, the float pointer
+registers will be corrupted randomly.
 
-The hypercall specifies the state of the line in terms of "high" and
-"low". My proposal is to replace it with "fire the interrupt" for edge
-interrupts, and "interrupt enabled/disabled" for level, abstracting away
-the state of the line in terms of high/low and instead focusing on
-whether the interrupt should be injected or not.
+This patch fixes Xen on these new cores.
 
+Signed-off-by: Wei Chen <wei.chen@arm.com>
+---
+ xen/include/asm-arm/cpufeature.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-> While this _may_ be sufficient for Arm, wouldn't it be
-> better to retain both properties separately, to cover possible further
-> uses of the new sub-op?
+diff --git a/xen/include/asm-arm/cpufeature.h b/xen/include/asm-arm/cpufeat=
+ure.h
+index 674beb0353..588089e5ae 100644
+--- a/xen/include/asm-arm/cpufeature.h
++++ b/xen/include/asm-arm/cpufeature.h
+@@ -13,8 +13,8 @@
+ #define cpu_has_el2_64    (boot_cpu_feature64(el2) >=3D 1)
+ #define cpu_has_el3_32    (boot_cpu_feature64(el3) =3D=3D 2)
+ #define cpu_has_el3_64    (boot_cpu_feature64(el3) >=3D 1)
+-#define cpu_has_fp        (boot_cpu_feature64(fp) =3D=3D 0)
+-#define cpu_has_simd      (boot_cpu_feature64(simd) =3D=3D 0)
++#define cpu_has_fp        (boot_cpu_feature64(fp) <=3D 1)
++#define cpu_has_simd      (boot_cpu_feature64(simd) <=3D 1)
+ #define cpu_has_gicv3     (boot_cpu_feature64(gic) =3D=3D 1)
+ #endif
 
-It would be possible to pass both sets of information, such as:
+--
+2.17.1
 
-- line high/low
-- "interrupt enabled/disabled" or "fire the interrupt"
-
-If we pass both sets of information at the same time we lose the
-benefits of my proposal. So I take you are suggesting to design the
-hypercall so that either set (not both!) could be passed? So either:
-
-- line high/low
-
-or:
-
-- "interrupt enabled/disabled" or "fire the interrupt"
-
-?
+IMPORTANT NOTICE: The contents of this email and any attachments are confid=
+ential and may also be privileged. If you are not the intended recipient, p=
+lease notify the sender immediately and do not disclose the contents to any=
+ other person, use it for any purpose, or store or copy the information in =
+any medium. Thank you.
 
