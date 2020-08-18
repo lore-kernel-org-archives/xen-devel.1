@@ -7,56 +7,59 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5A7B3C433DF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5BCBCC433E4
 	for <xen-devel@archiver.kernel.org>; Tue, 18 Aug 2020 10:31:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2F925207DF
+	by mail.kernel.org (Postfix) with ESMTPS id 2F40D2075E
 	for <xen-devel@archiver.kernel.org>; Tue, 18 Aug 2020 10:31:00 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="IoU2922M"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2F925207DF
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="38xHLYP4"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2F40D2075E
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k7ytH-00067M-BC; Tue, 18 Aug 2020 10:30:51 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1k7ytE-00065T-Tc; Tue, 18 Aug 2020 10:30:48 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=pr8P=B4=xen.org=paul@srs-us1.protection.inumbo.net>)
- id 1k7ytF-0005zo-Mw
- for xen-devel@lists.xenproject.org; Tue, 18 Aug 2020 10:30:49 +0000
-X-Inumbo-ID: 9e8c31ba-2ac6-408d-a3f2-7ae4f002bea8
+ id 1k7ytD-0005zI-Fv
+ for xen-devel@lists.xenproject.org; Tue, 18 Aug 2020 10:30:47 +0000
+X-Inumbo-ID: 9c319070-5a32-4881-ad6b-0ca37fb04855
 Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 9e8c31ba-2ac6-408d-a3f2-7ae4f002bea8;
- Tue, 18 Aug 2020 10:30:43 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 9c319070-5a32-4881-ad6b-0ca37fb04855;
+ Tue, 18 Aug 2020 10:30:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
  s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
- bh=nABtIpE3ocPIbmrY/Y6TR8lqLGhPX2t/r6AUyXMJ7rQ=; b=IoU2922M7bsU8yeqsYH6tiihY2
- MshAGFNsqPc9jChRx63ddW1Tnzs1arwkJnNJf/hsJPYzd3UfT7dD8BL+cNST851In1hjxrAJPJ/Fm
- FfBQNVMEeuTNM5S1jG/VeVXy+7K3Z2M4gD3+GkSxUqNkRaduD9aUP/K8NUnoH/rp/vgc=;
+ bh=Q48nB/F4uU8xPjTIE8qhVPPBlboQ5C2A8+ikvUg0FYs=; b=38xHLYP4EgnuuyRVwsdfJGaudc
+ jUx1E4+GfNq9ma2ubdK7PhwL6ldSe4Umw6AY6qFquyWcNgHRY2c6GXnN0X00CVYNSLXvfmVNz/eag
+ csYkoO1ITnaHyubSiTJ5m+JTBSy+CJ+OVmsq/0p4j1HiNEpNcjFu8bVBza9sXDJslZso=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1k7yt9-000145-1w; Tue, 18 Aug 2020 10:30:43 +0000
+ id 1k7yt6-00013i-Mc; Tue, 18 Aug 2020 10:30:40 +0000
 Received: from host31-48-92-96.range31-48.btcentralplus.com ([31.48.92.96]
  helo=u2f063a87eabd5f.home) by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1k7yt8-0003Rw-Ql; Tue, 18 Aug 2020 10:30:43 +0000
+ id 1k7yt6-0003Rw-Db; Tue, 18 Aug 2020 10:30:40 +0000
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: Paul Durrant <pdurrant@amazon.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH v7 6/9] tools/libxc: split restore handler
- handle_shared_info() functionality
-Date: Tue, 18 Aug 2020 11:30:29 +0100
-Message-Id: <20200818103032.3050-7-paul@xen.org>
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Wei Liu <wl@xen.org>
+Subject: [PATCH v7 4/9] docs/specs: add missing definitions to
+ libxc-migration-stream
+Date: Tue, 18 Aug 2020 11:30:27 +0100
+Message-Id: <20200818103032.3050-5-paul@xen.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200818103032.3050-1-paul@xen.org>
 References: <20200818103032.3050-1-paul@xen.org>
@@ -77,86 +80,68 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Paul Durrant <pdurrant@amazon.com>
 
-The code is invoked when a SHARED_INFO record is processed but actually
-performs two functions:
+The STATIC_DATA_END, X86_CPUID_POLICY and X86_MSR_POLICY record types have
+sections explaining what they are but their values are not defined. Indeed
+their values are defined as "Reserved for future mandatory records."
 
-[1] Copy the 'vcpu_info' and 'arch' substructures from the record into the
-    new domain's shared_info
-[2] Clear out any pending event channel state, mask all channels and also
-    clear 'arch.pfn_to_mfn_frame_list_list'
-
-To facilitate deprecation of the SHARED_INFO record in version 4 of the
-migration stream, this patch splits the functionality, leaving [1] in
-handle_shared_info() and adding update_shared_info() (called from
-x86_pv_stream_complete()) to deal with [2].
+Also, the spec revision is adjusted to match the migration stream version
+and an END record is added to the description of a 'typical save record for
+and x86 HVM guest.'
 
 Signed-off-by: Paul Durrant <pdurrant@amazon.com>
+Fixes: 6f71b5b1506 ("docs/migration Specify migration v3 and STATIC_DATA_END")
+Fixes: ddd273d8863 ("docs/migration: Specify X86_{CPUID,MSR}_POLICY records")
 ---
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: George Dunlap <george.dunlap@citrix.com>
 Cc: Ian Jackson <ian.jackson@eu.citrix.com>
+Cc: Jan Beulich <jbeulich@suse.com>
+Cc: Julien Grall <julien@xen.org>
+Cc: Stefano Stabellini <sstabellini@kernel.org>
 Cc: Wei Liu <wl@xen.org>
 
 v7:
  - New in v7
 ---
- tools/libxc/xc_sr_restore_x86_pv.c | 31 +++++++++++++++++++++++++++++-
- 1 file changed, 30 insertions(+), 1 deletion(-)
+ docs/specs/libxc-migration-stream.pandoc | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
 
-diff --git a/tools/libxc/xc_sr_restore_x86_pv.c b/tools/libxc/xc_sr_restore_x86_pv.c
-index d086271efb..1ed8cc66ca 100644
---- a/tools/libxc/xc_sr_restore_x86_pv.c
-+++ b/tools/libxc/xc_sr_restore_x86_pv.c
-@@ -880,7 +880,6 @@ static int handle_shared_info(struct xc_sr_context *ctx,
-                               struct xc_sr_record *rec)
- {
-     xc_interface *xch = ctx->xch;
--    unsigned int i;
-     int rc = -1;
-     shared_info_any_t *guest_shinfo = NULL;
-     const shared_info_any_t *old_shinfo = rec->data;
-@@ -911,6 +910,32 @@ static int handle_shared_info(struct xc_sr_context *ctx,
-     MEMCPY_FIELD(guest_shinfo, old_shinfo, vcpu_info, ctx->x86.pv.width);
-     MEMCPY_FIELD(guest_shinfo, old_shinfo, arch, ctx->x86.pv.width);
+diff --git a/docs/specs/libxc-migration-stream.pandoc b/docs/specs/libxc-migration-stream.pandoc
+index 6b0c49e97a..8aeab3b11b 100644
+--- a/docs/specs/libxc-migration-stream.pandoc
++++ b/docs/specs/libxc-migration-stream.pandoc
+@@ -3,7 +3,7 @@
+   Andrew Cooper <<andrew.cooper3@citrix.com>>
+   Wen Congyang <<wency@cn.fujitsu.com>>
+   Yang Hongyang <<hongyang.yang@easystack.cn>>
+-% Revision 2
++% Revision 3
  
-+    rc = 0;
-+
-+ err:
-+    if ( guest_shinfo )
-+        munmap(guest_shinfo, PAGE_SIZE);
-+
-+    return rc;
-+}
-+
-+static int update_shared_info(struct xc_sr_context *ctx)
-+{
-+    xc_interface *xch = ctx->xch;
-+    unsigned int i;
-+    int rc = -1;
-+    shared_info_any_t *guest_shinfo = NULL;
-+
-+    guest_shinfo = xc_map_foreign_range(
-+        xch, ctx->domid, PAGE_SIZE, PROT_READ | PROT_WRITE,
-+        ctx->dominfo.shared_info_frame);
-+    if ( !guest_shinfo )
-+    {
-+        PERROR("Failed to map Shared Info at mfn %#lx",
-+               ctx->dominfo.shared_info_frame);
-+        goto err;
-+    }
-+
-     SET_FIELD(guest_shinfo, arch.pfn_to_mfn_frame_list_list,
-               0, ctx->x86.pv.width);
+ Introduction
+ ============
+@@ -227,7 +227,13 @@ type         0x00000000: END
  
-@@ -1122,6 +1147,10 @@ static int x86_pv_stream_complete(struct xc_sr_context *ctx)
-     xc_interface *xch = ctx->xch;
-     int rc;
+              0x0000000F: CHECKPOINT_DIRTY_PFN_LIST (Secondary -> Primary)
  
-+    rc = update_shared_info(ctx);
-+    if ( rc )
-+        return rc;
+-             0x00000010 - 0x7FFFFFFF: Reserved for future _mandatory_
++             0x00000010: STATIC_DATA_END
 +
-     rc = update_vcpu_context(ctx);
-     if ( rc )
-         return rc;
++             0x00000011: X86_CPUID_POLICY
++
++             0x00000012: X86_MSR_POLICY
++
++             0x00000013 - 0x7FFFFFFF: Reserved for future _mandatory_
+              records.
+ 
+              0x80000000 - 0xFFFFFFFF: Reserved for future _optional_
+@@ -732,6 +738,7 @@ A typical save record for an x86 HVM guest image would look like:
+ * X86_TSC_INFO
+ * HVM_PARAMS
+ * HVM_CONTEXT
++* END record
+ 
+ HVM_PARAMS must precede HVM_CONTEXT, as certain parameters can affect
+ the validity of architectural state in the context.
 -- 
 2.20.1
 
