@@ -8,66 +8,66 @@ X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6194BC433E8
-	for <xen-devel@archiver.kernel.org>; Wed, 19 Aug 2020 16:52:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2A964C433E1
+	for <xen-devel@archiver.kernel.org>; Wed, 19 Aug 2020 16:53:01 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 29EF220888
-	for <xen-devel@archiver.kernel.org>; Wed, 19 Aug 2020 16:52:55 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id E2980207FF
+	for <xen-devel@archiver.kernel.org>; Wed, 19 Aug 2020 16:53:00 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="YdvE7fnE"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 29EF220888
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="CbLvWNpv"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E2980207FF
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k8RKB-0003nb-7d; Wed, 19 Aug 2020 16:52:31 +0000
+	id 1k8RKR-0003tr-9v; Wed, 19 Aug 2020 16:52:47 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=qP9Y=B5=gmail.com=don.slutz@srs-us1.protection.inumbo.net>)
- id 1k8RKA-0003kZ-KY
- for xen-devel@lists.xen.org; Wed, 19 Aug 2020 16:52:30 +0000
-X-Inumbo-ID: 4e0e270c-728b-40c8-b4a1-e30d4472be23
-Received: from mail-qt1-x843.google.com (unknown [2607:f8b0:4864:20::843])
+ id 1k8RKP-0003kZ-Kt
+ for xen-devel@lists.xen.org; Wed, 19 Aug 2020 16:52:45 +0000
+X-Inumbo-ID: 7a440347-f763-4d42-ba2f-9bfd17d2a484
+Received: from mail-qk1-x744.google.com (unknown [2607:f8b0:4864:20::744])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 4e0e270c-728b-40c8-b4a1-e30d4472be23;
- Wed, 19 Aug 2020 16:52:21 +0000 (UTC)
-Received: by mail-qt1-x843.google.com with SMTP id x12so18308891qtp.1
- for <xen-devel@lists.xen.org>; Wed, 19 Aug 2020 09:52:21 -0700 (PDT)
+ id 7a440347-f763-4d42-ba2f-9bfd17d2a484;
+ Wed, 19 Aug 2020 16:52:24 +0000 (UTC)
+Received: by mail-qk1-x744.google.com with SMTP id d14so22197009qke.13
+ for <xen-devel@lists.xen.org>; Wed, 19 Aug 2020 09:52:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :in-reply-to:references;
- bh=8SYC8sEnMQTsHzsw/bx/BLngdPeGac6jdXJvvh92/2k=;
- b=YdvE7fnE4fXmnC+AL4dirmXy6rFjNOVTUiQZ0fVL5Z5J9b3Cje8Zcg4vr4CHYuYhb1
- 7uq0Aje58DADmqsa3WZDdSTCR9WM636LghCWxGCfMda04/yVa/yhIwBzXZMc+JCQ8g5m
- nqEW9kUjt7p9AhUnMtITqBboj/0nXoteYItDpZxNe1WfVSVjaPAoeYm8U4GEeI0yJxmC
- hSM4p9EsrN73/E/LmkGwIao3X0OSoSNUauiC+NJucGWuaKhZAHDauFhXIUo/gkT2HpTB
- b9Q7Z1sQUgRinCp3id3CHt7UVFt/kIg868oQmh4NdJGaCTKXUZMWvsJsoIj0mPyGiGPy
- QIbQ==
+ bh=tr8ETHyk66gli0Zs0a+x97izMEXltG1WJae06N0roAU=;
+ b=CbLvWNpvPqhn3VjusMp1+/de+9zSLTgYwFU1GZeKVrnf8kn5fMlx+A224iVQZTsv9n
+ jYqr/mP+V29NmRyAMu/fBSKzuFKW5qsPAez63iyV5Nr1EcljZu/+PLpI+ZshTBGmnAgD
+ IEDPatqPOJpXlnfXYWHKpFutVGWzGCN7WekpJ0xX72DGnir7s8IH69BRcZtbf5FLjNHD
+ OsvOko17uUEXd4+BvH/7neI851/5o/7xRDw2KcMl1OsGywNVFzYRL1yQxTmh7pVHbEcZ
+ 1hHcexFUeUvfFMDYVfYWVY15D4sW74CQbaKHRDRZN7YXenhnMSev0FGfSmcyhW6Oa28D
+ jl0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:in-reply-to:references;
- bh=8SYC8sEnMQTsHzsw/bx/BLngdPeGac6jdXJvvh92/2k=;
- b=WyKtfn7mhLzb1J/vHHlQ4Qg5Rgh9ig0h2NpOQyOtKlBvM4tbUmVFpr/nvxbEL6ZUIX
- v8Cc5eJWk4maYAKnGrAqDGq2Amt6z59rcpnhE5qanBvSvn8NzJn2fuCIlAor1x2PqA87
- bEH7Weuu0uCRCckRy7iPWa+rNBIWv/gXtVj5xonx+NUcFwLHR818idcToT9xQuFv+I5I
- AtwlRco1aSuvzPe0rohjWIzreIiBTtBgpDGzxvVug78StZixDPRdZZQfYkwFv9DNXj0d
- k+hnt/9uWVSDQmTfsEPifKQI/f6cipOqhudK1CBq4qP8pWVwx5X1u8lz3VsCUbjlEiHW
- z+lg==
-X-Gm-Message-State: AOAM5308+YZQxuG8Mh2SHvIjARyLz1zu76r+UrHHfufH+qQcsSkj9NHw
- Sy/yZZaE51yu9BDc4LKpuQI+obnpIm7QUu3u
-X-Google-Smtp-Source: ABdhPJzlcFdccey/j/56pBX2TIswRx3uE9pXL3vzRNKKZGunQfi0TvE2d80UfVZ32hTKuYIVyWUs9w==
-X-Received: by 2002:ac8:4514:: with SMTP id q20mr23701170qtn.122.1597855940174; 
- Wed, 19 Aug 2020 09:52:20 -0700 (PDT)
+ bh=tr8ETHyk66gli0Zs0a+x97izMEXltG1WJae06N0roAU=;
+ b=f2FybRUjpXOa7tLx7GVFtCj37npJe6hgnTKusTYBe1TljkS4D5Ov9cs4Ek5pz8FLDu
+ UoRkF5HNp5Rwnc79RqqxEajNpnXhztDjEBKgBuqx06BmwJyYMGx6LpP+IRplFNO0qNVo
+ 82E9Sj4BRi4s8zs287mu3SmiogbQbXRu1HrAoke+R/hVnS6gInOE57j+u7e7DF9iaX07
+ SJpAR+Jq1+ZrJPpD23RZyCxaNgm0/BK5YPOhdLJzcrht16dlo8uOc9iRv3yv7p4NAvd6
+ q7N4TxHQZTpEvkt/pawlXA6Rq3Uih3AyQjgz+0xlQsRRpPgHUHYBdg07mxNcrBPhy/Bt
+ BGAA==
+X-Gm-Message-State: AOAM5301H47bZJP+zqNWZhwXCbaYxv9B8S79/zbMuM237qP+rAsh01kl
+ pQoNhiV2z1e0w2sRJyrKk/qelMVMI8SFazfP
+X-Google-Smtp-Source: ABdhPJwuUvKu9Gs03eick4zQO79sPn0/g0zNWlBgsDydJbkTyGo/Cu+nO3obuSX4gRUyoKET28oKdA==
+X-Received: by 2002:ae9:e505:: with SMTP id w5mr22040124qkf.282.1597855944154; 
+ Wed, 19 Aug 2020 09:52:24 -0700 (PDT)
 Received: from TestCloud1.don.dslutz.org.zatium.us
  (pool-96-230-225-98.bstnma.fios.verizon.net. [96.230.225.98])
  by smtp.googlemail.com with ESMTPSA id
- 128sm25105832qkk.101.2020.08.19.09.52.19
+ 128sm25105832qkk.101.2020.08.19.09.52.23
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Wed, 19 Aug 2020 09:52:19 -0700 (PDT)
+ Wed, 19 Aug 2020 09:52:23 -0700 (PDT)
 From: Don Slutz <don.slutz@gmail.com>
 X-Google-Original-From: Don Slutz <Don.Slutz@Gmail.com
 To: xen-devel@lists.xen.org
@@ -83,14 +83,16 @@ Cc: Aravind Gopalakrishnan <Aravind.Gopalakrishnan@amd.com>,
  Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
  George Dunlap <George.Dunlap@eu.citrix.com>,
  Don Slutz <dslutz@verizon.com>, Don Slutz <don.slutz@gmail.com>
-Subject: [Xen-devel] [XEN PATCH v14 2/8] xen: Add support for VMware cpuid
- leaves
-Date: Wed, 19 Aug 2020 12:51:56 -0400
-Message-Id: <67b90d11eae2c88faab22d458e7e38db0f5aada4.1597854907.git.don.slutz@gmail.com>
+Subject: [Xen-devel] [XEN PATCH v14 5/8] xen: Add vmware_port support
+Date: Wed, 19 Aug 2020 12:51:59 -0400
+Message-Id: <5d2e424a19ea4934be3be962cdbe6a0ec8db9a6c.1597854907.git.don.slutz@gmail.com>
 X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <34a50dc69e4c5722597e02a4df4e3da6d6586ec7.1597854907.git.don.slutz@gmail.com>
+In-Reply-To: <ce3e037dc51581629fdb158f71f8f2e9e56d9eae.1597854907.git.don.slutz@gmail.com>
 References: <cover.1597854907.git.don.slutz@gmail.com>
  <34a50dc69e4c5722597e02a4df4e3da6d6586ec7.1597854907.git.don.slutz@gmail.com>
+ <67b90d11eae2c88faab22d458e7e38db0f5aada4.1597854907.git.don.slutz@gmail.com>
+ <c1560bc4cecae1c40de5f5cfc39832394f77c5ed.1597854907.git.don.slutz@gmail.com>
+ <ce3e037dc51581629fdb158f71f8f2e9e56d9eae.1597854907.git.don.slutz@gmail.com>
 In-Reply-To: <cover.1597854907.git.don.slutz@gmail.com>
 References: <cover.1597854907.git.don.slutz@gmail.com>
 X-BeenThere: xen-devel@lists.xenproject.org
@@ -108,227 +110,242 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Don Slutz <dslutz@verizon.com>
 
-This is done by adding xen_arch_domainconfig vmware_hw. It is set to
-the VMware virtual hardware version.
+This includes adding is_vmware_port_enabled
 
-Currently 0, 3-4, 6-11 are good values.  However the
-code only checks for == 0 or != 0 or >= 7.
+This is a new xen_arch_domainconfig flag,
+XEN_DOMCTL_CONFIG_VMWARE_PORT_MASK.
 
-If non-zero then
-  Return VMware's cpuid leaves.  If >= 7 return data, else
-  return 0.
+This enables limited support of VMware's hyper-call.
 
-The support of hypervisor cpuid leaves has not been agreed to.
+This is both a more complete support then in currently provided by
+QEMU and/or KVM and less.  The missing part requires QEMU changes
+and has been left out until the QEMU patches are accepted upstream.
 
-MicroSoft Hyper-V (AKA viridian) currently must be at 0x40000000.
+VMware's hyper-call is also known as VMware Backdoor I/O Port.
 
-VMware currently must be at 0x40000000.
+Note: this support does not depend on vmware_hw being non-zero.
 
-KVM currently must be at 0x40000000 (from Seabios).
+Summary is that VMware treats "in (%dx),%eax" (or "out %eax,(%dx)")
+to port 0x5658 specially.  Note: since many operations return data
+in EAX, "in (%dx),%eax" is the one to use.  The other lengths like
+"in (%dx),%al" will still do things, only AL part of EAX will be
+changed.  For "out %eax,(%dx)" of all lengths, EAX will remain
+unchanged.
 
-Xen can be found at the first otherwise unused 0x100 aligned
-offset between 0x40000000 and 0x40010000.
+An open source example of using this is:
 
-http://download.microsoft.com/download/F/B/0/FB0D01A3-8E3A-4F5F-AA59-08C8026D3B8A/requirements-for-implementing-microsoft-hypervisor-interface.docx
+http://open-vm-tools.sourceforge.net/
+
+Which only uses "inl (%dx)".  Also
 
 http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=1009458
 
-http://lwn.net/Articles/301888/
-  Attempted to get this cleaned up.
+Some of the best info is at:
 
-So based on this, I picked the order:
-
-Xen at 0x40000000 or
-Viridian or VMware at 0x40000000 and Xen at 0x40000100
-
-If both Viridian and VMware selected, report an error.
-
-Since I need to change xen/arch/x86/hvm/Makefile; also add
-a newline at end of file.
+https://sites.google.com/site/chitchatvmback/backdoor
 
 Signed-off-by: Don Slutz <dslutz@verizon.com>
 CC: Don Slutz <don.slutz@gmail.com>
 ---
 Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Tools side only: Acked-by: Ian Campbell <ian.campbell@citrix.com>
 
 v14:
   Reworked to current code.
-  Changed vmware_hwver to 32 bits
+  Drop arch_flags and use XEN_X86_EMU_VMWARE_PORT which will not be
+    added to "all".
 
 v13:
-  Adjust temporary comment to include which patch.
-  Adjust copyright year to 2012-2015
+  Changed to uint32_t arch_flags, since the emulation_flags is this.
 
 v12:
-  No change
+     Surrounding code avoiding the use of "break" makes the result
+     look rather inconsistent. Please move this up immediately after
+     the XSM check, or drop the "break".
+       Moved it up.
 
 v11:
-  Adjust /* Disallow if vmware_hwver */
-  Newline after break;
-  Added Reviewed-by: Andrew Cooper.
-    It would be worth to add an explicit vmware_hwver = 0 in the
-    libxl__arch_domain_prepare_config.
- Note: Adds a tool change to this patch.
+   Dropped ASSERT(is_hvm_domain(currd))
+    Newline after break;
 
 v10:
-    Did not add "Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>"
-    because of changes here to do things the new way.
-  Reword comment message to reflect new way.
+    Probably better as EOPNOTSUPP, as it is a configuration problem.
+    This function looks as if it should be static.
+    I would suggest putting vmport_register declaration in hvm.h ...
+    As indicated before, I don't think this is a good use case for a
+    domain creation flag.
+      Switch to the new config way.
+    struct domain *d => struct domain *currd
+    Are you sure you don't want to zero the high halves of 64-bit ...
+      Comment added.
+   Then just have this handled into the default case.
+      Reworked new_eax handling.
+   is_hvm_domain(currd)
+   And - why here rather than before the switch() or even right at the
+   start of the function?
+      Moved to start.
+   With that, is it really correct that OUT updates the other registers
+   just like IN? If so, this deserves a comment, so that readers won't
+   think this is in error.
+     All done in comment at start.
+
 
 v9:
-    s/vmware_hw/vmware_hwver/i
-    Change -EXDEV to EOPNOTSUPP.
-      Done.
-    adding another subdirectory: xen/arch/x86/hvm/vmware
-    Much will depend on the discussion of the subsequent patches.
-      TBD.
-    So for versions < 7 there's effectively no CPUID support at all?
-      Changed to check at entry.
-    The comment /* Params for VMware */ seems wrong...
-      Changed to /* emulated VMware Hardware Version */
-    Also please use d, not _d in #define is_vmware_domain()
-      Changed.  Line is now > 80 characters, so split into 2.
+  Switch to x86_emulator to handle #GP code moved to next patch.
+    Can you explain why a HVM param isn't suitable here?
+      Issue with changing QEMU on the fly.
+      Andrew Cooper: My recommendation is still to use a creation flag
+        So no change.
+    Please move SVM's identical definition into ...
+      Did this as #1.  No longer needed, but since the patch was ready
+      I have included it.
+    --Lots of questions about code that no long is part of this patch. --
+    With this, is handling other than 32-bit in/out really
+    meaningful/correct?
+      Added comment about this.
+    Since you can't get here for PV, I can't see what you need this.
+      Changed to an ASSERT.
+    Why version 4?
+      Added comment about this.
+    -- Several questions about register changes.
+      Re-coded to use new_eax and set *val to this.
+      Change to generealy use reg->_e..
+    These ei1/ei2 checks belong in the callers imo -
+      Moved.
+    the "port" function parameter isn't even checked
+      Add check for exact match.
+    If dropping the code is safe without also forbidding the
+    combination of nested and VMware emulation.
+      Added the forbidding the combination of nested and VMware.
+      Mostly do to the cases of the nested virtual code is the one
+      to handle VMware stuff if needed, not the root one.  Also I am
+      having issues testing xen nested in xen and using hvm.
 
 v7:
-      Prevent setting of HVM_PARAM_VIRIDIAN if HVM_PARAM_VMWARE_HW set.
+      More on AMD in the commit message.
+      Switch to only change 32bit part of registers, what VMware
+        does.
+    Too much logging and tracing.
+      Dropped a lot of it.  This includes vmport_debug=
+
+v6:
+      Dropped the attempt to use svm_nextrip_insn_length via
+      __get_instruction_length (added in v2).  Just always look
+      at upto 15 bytes on AMD.
+
 v5:
-      Given how is_viridian and is_vmware are defined I think '||' is more
-      appropriate.
-        Fixed.
-      The names of all three functions are bogus.
-        removed static support routines.
-      This hunk is unrelated, but is perhaps something better fixed.
-        Added to commit message.
-      include <xen/types.h> (IIRC) please.
-        Done.
-      At least 1 pair of brackets please, especially as the placement of
-      brackets affects the result of this particular calculation.
-        Switch to "1000000ull / APIC_BUS_CYCLE_NS"      
+      we should make sure that svm_vmexit_gp_intercept is not executed for
+      any other guest.
+        Added an ASSERT on is_vmware_port_enabled.
+      magic integers?
+        Added #define for them.
+      I am fairly certain that you need some brackets here.
+        Added brackets.
 
- tools/libxl/libxl_x86.c           |  2 +
- xen/arch/x86/cpuid.c              |  4 ++
- xen/arch/x86/domain.c             |  5 +++
- xen/arch/x86/hvm/Makefile         |  1 +
- xen/arch/x86/hvm/hvm.c            |  8 ++++
- xen/arch/x86/hvm/vmware/Makefile  |  1 +
- xen/arch/x86/hvm/vmware/vmware.c  | 82 +++++++++++++++++++++++++++++++++++++++
- xen/arch/x86/traps.c              | 21 ++++++----
- xen/include/asm-x86/hvm/domain.h  |  3 ++
- xen/include/asm-x86/hvm/hvm.h     | 15 +++++++
- xen/include/asm-x86/hvm/vmware.h  | 33 ++++++++++++++++
- xen/include/public/arch-x86/xen.h |  1 +
- 12 files changed, 169 insertions(+), 7 deletions(-)
- create mode 100644 xen/arch/x86/hvm/vmware/Makefile
- create mode 100644 xen/arch/x86/hvm/vmware/vmware.c
- create mode 100644 xen/include/asm-x86/hvm/vmware.h
+ xen/arch/x86/domain.c             |  15 ++--
+ xen/arch/x86/hvm/hvm.c            |   9 +++
+ xen/arch/x86/hvm/vmware/Makefile  |   1 +
+ xen/arch/x86/hvm/vmware/vmport.c  | 148 ++++++++++++++++++++++++++++++++++++++
+ xen/include/asm-x86/hvm/domain.h  |   3 +
+ xen/include/asm-x86/hvm/hvm.h     |   2 +
+ xen/include/public/arch-x86/xen.h |   4 ++
+ 7 files changed, 177 insertions(+), 5 deletions(-)
+ create mode 100644 xen/arch/x86/hvm/vmware/vmport.c
 
-diff --git a/tools/libxl/libxl_x86.c b/tools/libxl/libxl_x86.c
-index e57f632..3418a81 100644
---- a/tools/libxl/libxl_x86.c
-+++ b/tools/libxl/libxl_x86.c
-@@ -21,6 +21,8 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
-         abort();
-     }
- 
-+    /* Note: will be changed in next patch (tools: Add ...). */
-+    config->arch.vmware_hwver = 0;
-     return 0;
- }
- 
-diff --git a/xen/arch/x86/cpuid.c b/xen/arch/x86/cpuid.c
-index 63a03ef..6cd3670 100644
---- a/xen/arch/x86/cpuid.c
-+++ b/xen/arch/x86/cpuid.c
-@@ -8,6 +8,7 @@
- #include <asm/hvm/nestedhvm.h>
- #include <asm/hvm/svm/svm.h>
- #include <asm/hvm/viridian.h>
-+#include <asm/hvm/vmware.h>
- #include <asm/hvm/vmx/vmcs.h>
- #include <asm/paging.h>
- #include <asm/processor.h>
-@@ -791,6 +792,9 @@ void guest_cpuid(const struct vcpu *v, uint32_t leaf,
-         if ( is_viridian_domain(d) )
-             return cpuid_viridian_leaves(v, leaf, subleaf, res);
- 
-+        if ( has_vmware_cpuid(d) )
-+            return cpuid_vmware_leaves(v, leaf, subleaf, res);
-+
-         /*
-          * Fallthrough.
-          *
 diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index d1ecc7b..a317907 100644
+index a317907..0cf73ef 100644
 --- a/xen/arch/x86/domain.c
 +++ b/xen/arch/x86/domain.c
-@@ -597,6 +597,11 @@ int arch_domain_create(struct domain *d,
-     }
-     d->arch.emulation_flags = emflags;
+@@ -504,6 +504,8 @@ int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
  
-+    if ( is_hvm_domain(d) )
-+    {
-+        d->arch.hvm.vmware_hwver = config->arch.vmware_hwver;
-+    }
+ static bool emulation_flags_ok(const struct domain *d, uint32_t emflags)
+ {
++    uint32_t all_emflags = emflags & XEN_X86_EMU_ALL;
 +
+ #ifdef CONFIG_HVM
+     /* This doesn't catch !CONFIG_HVM case but it is better than nothing */
+     BUILD_BUG_ON(X86_EMU_ALL != XEN_X86_EMU_ALL);
+@@ -512,14 +514,15 @@ static bool emulation_flags_ok(const struct domain *d, uint32_t emflags)
+     if ( is_hvm_domain(d) )
+     {
+         if ( is_hardware_domain(d) &&
+-             emflags != (X86_EMU_VPCI | X86_EMU_LAPIC | X86_EMU_IOAPIC) )
++             all_emflags != (X86_EMU_VPCI | X86_EMU_LAPIC | X86_EMU_IOAPIC) )
+             return false;
+         if ( !is_hardware_domain(d) &&
+-             emflags != (X86_EMU_ALL & ~X86_EMU_VPCI) &&
+-             emflags != X86_EMU_LAPIC )
++             all_emflags != (X86_EMU_ALL & ~X86_EMU_VPCI) &&
++             all_emflags != X86_EMU_LAPIC )
+             return false;
+     }
+-    else if ( emflags != 0 && emflags != X86_EMU_PIT )
++    else if ( emflags & XEN_X86_EMU_VMWARE_PORT ||
++              (all_emflags != 0 && all_emflags != X86_EMU_PIT) )
+     {
+         /* PV or classic PVH. */
+         return false;
+@@ -581,7 +584,7 @@ int arch_domain_create(struct domain *d,
+     if ( is_hardware_domain(d) && is_pv_domain(d) )
+         emflags |= XEN_X86_EMU_PIT;
+ 
+-    if ( emflags & ~XEN_X86_EMU_ALL )
++    if ( emflags & ~(XEN_X86_EMU_ALL | XEN_X86_EMU_VMWARE_PORT) )
+     {
+         printk(XENLOG_G_ERR "d%d: Invalid emulation bitmap: %#x\n",
+                d->domain_id, emflags);
+@@ -600,6 +603,8 @@ int arch_domain_create(struct domain *d,
+     if ( is_hvm_domain(d) )
+     {
+         d->arch.hvm.vmware_hwver = config->arch.vmware_hwver;
++        d->arch.hvm.is_vmware_port_enabled =
++            !!(emflags & XEN_X86_EMU_VMWARE_PORT);
+     }
+ 
      HYPERVISOR_COMPAT_VIRT_START(d) =
-         is_pv_domain(d) ? __HYPERVISOR_COMPAT_VIRT_START : ~0u;
- 
-diff --git a/xen/arch/x86/hvm/Makefile b/xen/arch/x86/hvm/Makefile
-index 3464191..58de573 100644
---- a/xen/arch/x86/hvm/Makefile
-+++ b/xen/arch/x86/hvm/Makefile
-@@ -1,6 +1,7 @@
- obj-y += svm/
- obj-y += vmx/
- obj-y += viridian/
-+obj-y += vmware/
- 
- obj-y += asid.o
- obj-y += dm.o
 diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index a9d1685..e91169f 100644
+index e91169f..42d96b1 100644
 --- a/xen/arch/x86/hvm/hvm.c
 +++ b/xen/arch/x86/hvm/hvm.c
-@@ -68,6 +68,7 @@
- #include <asm/hvm/viridian.h>
- #include <asm/hvm/vm_event.h>
- #include <asm/altp2m.h>
-+#include <asm/hvm/vmware.h>
- #include <asm/mtrr.h>
- #include <asm/apic.h>
- #include <asm/vm_event.h>
-@@ -4109,6 +4110,13 @@ static int hvm_allow_set_param(struct domain *d,
-     {
-     /* The following parameters should only be changed once. */
-     case HVM_PARAM_VIRIDIAN:
-+        /* Disallow if vmware_hwver is in use */
-+        if ( d->arch.hvm.vmware_hwver )
+@@ -697,6 +697,9 @@ int hvm_domain_initialise(struct domain *d)
+     if ( hvm_tsc_scaling_supported )
+         d->arch.hvm.tsc_scaling_ratio = hvm_default_tsc_scaling_ratio;
+ 
++    if ( d->arch.hvm.is_vmware_port_enabled )
++        vmport_register(d);
++
+     rc = viridian_domain_init(d);
+     if ( rc )
+         goto fail2;
+@@ -4214,6 +4217,12 @@ static int hvm_set_param(struct domain *d, uint32_t index, uint64_t value)
+         rc = xsm_hvm_param_nested(XSM_PRIV, d);
+         if ( rc )
+             break;
++        /* Prevent nestedhvm enable with vmport */
++        if ( value && d->arch.hvm.is_vmware_port_enabled )
 +        {
 +            rc = -EOPNOTSUPP;
 +            break;
 +        }
-+        /* Fall through */
-     case HVM_PARAM_IOREQ_PFN:
-     case HVM_PARAM_BUFIOREQ_PFN:
-     case HVM_PARAM_IOREQ_SERVER_PFN:
+         if ( value > 1 )
+             rc = -EINVAL;
+         /*
 diff --git a/xen/arch/x86/hvm/vmware/Makefile b/xen/arch/x86/hvm/vmware/Makefile
-new file mode 100644
-index 0000000..f864486
---- /dev/null
+index f864486..74aea16 100644
+--- a/xen/arch/x86/hvm/vmware/Makefile
 +++ b/xen/arch/x86/hvm/vmware/Makefile
-@@ -0,0 +1 @@
-+obj-y += vmware.o
-diff --git a/xen/arch/x86/hvm/vmware/vmware.c b/xen/arch/x86/hvm/vmware/vmware.c
+@@ -1 +1,2 @@
+ obj-y += vmware.o
++obj-y += vmport.o
+diff --git a/xen/arch/x86/hvm/vmware/vmport.c b/xen/arch/x86/hvm/vmware/vmport.c
 new file mode 100644
-index 0000000..19e52c1
+index 0000000..863ec50
 --- /dev/null
-+++ b/xen/arch/x86/hvm/vmware/vmware.c
-@@ -0,0 +1,82 @@
++++ b/xen/arch/x86/hvm/vmware/vmport.c
+@@ -0,0 +1,148 @@
 +/*
-+ * arch/x86/hvm/vmware/cpuid.c
++ * HVM VMPORT emulation
 + *
-+ * Copyright (C) 2012-2015 Verizon Corporation
++ * Copyright (C) 2012 Verizon Corporation
 + *
 + * This file is free software; you can redistribute it and/or modify it
 + * under the terms of the GNU General Public License Version 2 (GPLv2)
@@ -340,225 +357,181 @@ index 0000000..19e52c1
 + * General Public License for more details. <http://www.gnu.org/licenses/>.
 + */
 +
-+#include <xen/sched.h>
-+#include <xen/version.h>
-+#include <xen/hypercall.h>
-+#include <xen/domain_page.h>
-+#include <xen/param.h>
-+#include <asm/guest_access.h>
-+#include <asm/guest/hyperv-tlfs.h>
-+#include <asm/paging.h>
-+#include <asm/p2m.h>
-+#include <asm/apic.h>
++#include <xen/lib.h>
++#include <asm/hvm/hvm.h>
 +#include <asm/hvm/support.h>
-+#include <public/sched.h>
-+#include <public/hvm/hvm_op.h>
 +
-+/*
-+ * VMware hardware version 7 defines some of these cpuid levels,
-+ * below is a brief description about those.
-+ *
-+ *     Leaf 0x40000000, Hypervisor CPUID information
-+ * # EAX: The maximum input value for hypervisor CPUID info (0x40000010).
-+ * # EBX, ECX, EDX: Hypervisor vendor ID signature. E.g. "VMwareVMware"
-+ *
-+ *     Leaf 0x40000010, Timing information.
-+ * # EAX: (Virtual) TSC frequency in kHz.
-+ * # EBX: (Virtual) Bus (local apic timer) frequency in kHz.
-+ * # ECX, EDX: RESERVED
-+ */
++#include "backdoor_def.h"
 +
-+void cpuid_vmware_leaves(const struct vcpu *v, uint32_t leaf,
-+                         uint32_t subleaf, struct cpuid_leaf *res)
++static int vmport_ioport(int dir, uint32_t port, uint32_t bytes, uint32_t *val)
 +{
-+    struct domain *d = current->domain;
++    struct cpu_user_regs *regs = guest_cpu_user_regs();
 +
-+    ASSERT(has_vmware_cpuid(d));
-+    ASSERT(leaf >= 0x40000000 && leaf < 0x40000100);
-+
-+    leaf -= 0x40000000;
-+
-+    switch ( leaf )
++    /*
++     * While VMware expects only 32-bit in, they do support using
++     * other sizes and out.  However they do require only the 1 port
++     * and the correct value in eax.  Since some of the data
++     * returned in eax is smaller the 32 bits and/or you only need
++     * the other registers the dir and bytes do not need any
++     * checking.  The caller will handle the bytes, and dir is
++     * handled below for eax.
++     */
++    if ( port == BDOOR_PORT && regs->eax == BDOOR_MAGIC )
 +    {
-+    case 0x0:
-+        res->a = 0x40000010; /* Maximum leaf */
-+        memcpy(&res->b, "VMwa", 4);
-+        memcpy(&res->c, "reVM", 4);
-+        memcpy(&res->d, "ware", 4);
-+        break;
++        uint32_t new_eax = ~0u;
++        uint64_t value;
++        struct vcpu *curr = current;
++        struct domain *currd = curr->domain;
 +
-+    case 0x10:
-+        /* (Virtual) TSC frequency in kHz. */
-+        res->a = d->arch.tsc_khz;
-+        /* (Virtual) Bus (local apic timer) frequency in kHz. */
-+        res->b = 1000000ull / APIC_BUS_CYCLE_NS;
-+        res->c = 0;          /* Reserved */
-+        res->d = 0;          /* Reserved */
-+        break;
++        /*
++         * VMware changes the other (non eax) registers ignoring dir
++         * (IN vs OUT).  It also changes only the 32-bit part
++         * leaving the high 32-bits unchanged, unlike what one would
++         * expect to happen.
++         */
++        switch ( regs->ecx & 0xffff )
++        {
++        case BDOOR_CMD_GETMHZ:
++            new_eax = currd->arch.tsc_khz / 1000;
++            break;
++
++        case BDOOR_CMD_GETVERSION:
++            /* MAGIC */
++            regs->ebx = BDOOR_MAGIC;
++            /* VERSION_MAGIC */
++            new_eax = 6;
++            /* Claim we are an ESX. VMX_TYPE_SCALABLE_SERVER */
++            regs->ecx = 2;
++            break;
++
++        case BDOOR_CMD_GETHWVERSION:
++            /* vmware_hw */
++            new_eax = currd->arch.hvm.vmware_hwver;
++            /*
++             * Returning zero is not the best.  VMware was not at
++             * all consistent in the handling of this command until
++             * VMware hardware version 4.  So it is better to claim
++             * 4 then 0.  This should only happen in strange configs.
++             */
++            if ( !new_eax )
++                new_eax = 4;
++            break;
++
++        case BDOOR_CMD_GETHZ:
++        {
++            struct segment_register sreg;
++
++            hvm_get_segment_register(curr, x86_seg_ss, &sreg);
++            if ( sreg.dpl == 0 )
++            {
++                value = currd->arch.tsc_khz * 1000;
++                /* apic-frequency (bus speed) */
++                regs->ecx = 1000000000ULL / APIC_BUS_CYCLE_NS;
++                /* High part of tsc-frequency */
++                regs->ebx = value >> 32;
++                /* Low part of tsc-frequency */
++                new_eax = value;
++            }
++            break;
++
++        }
++        case BDOOR_CMD_GETTIME:
++            value = get_localtime_us(currd) -
++                currd->time_offset.seconds * 1000000ULL;
++            /* hostUsecs */
++            regs->ebx = value % 1000000UL;
++            /* hostSecs */
++            new_eax = value / 1000000ULL;
++            /* maxTimeLag */
++            regs->ecx = 1000000;
++            /* offset to GMT in minutes */
++            regs->edx = currd->time_offset.seconds / 60;
++            break;
++
++        case BDOOR_CMD_GETTIMEFULL:
++            /* BDOOR_MAGIC */
++            new_eax = BDOOR_MAGIC;
++            value = get_localtime_us(currd) -
++                currd->time_offset.seconds * 1000000ULL;
++            /* hostUsecs */
++            regs->ebx = value % 1000000UL;
++            /* hostSecs low 32 bits */
++            regs->edx = value / 1000000ULL;
++            /* hostSecs high 32 bits */
++            regs->esi = (value / 1000000ULL) >> 32;
++            /* maxTimeLag */
++            regs->ecx = 1000000;
++            break;
++
++        default:
++            /* Let backing DM handle */
++            return X86EMUL_UNHANDLEABLE;
++        }
++        if ( dir == IOREQ_READ )
++            *val = new_eax;
 +    }
++    else if ( dir == IOREQ_READ )
++        *val = ~0u;
++
++    return X86EMUL_OKAY;
++}
++
++void vmport_register(struct domain *d)
++{
++    register_portio_handler(d, BDOOR_PORT, 4, vmport_ioport);
 +}
 +
 +/*
 + * Local variables:
 + * mode: C
-+ * c-file-style: "BSD"
++ * c-set-style: "BSD"
 + * c-basic-offset: 4
 + * tab-width: 4
 + * indent-tabs-mode: nil
 + * End:
 + */
-diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
-index bc5b8f8..b1e93bb 100644
---- a/xen/arch/x86/traps.c
-+++ b/xen/arch/x86/traps.c
-@@ -885,8 +885,11 @@ static void do_trap(struct cpu_user_regs *regs)
- int guest_rdmsr_xen(const struct vcpu *v, uint32_t idx, uint64_t *val)
- {
-     const struct domain *d = v->domain;
--    /* Optionally shift out of the way of Viridian architectural MSRs. */
--    uint32_t base = is_viridian_domain(d) ? 0x40000200 : 0x40000000;
-+    /*
-+     * Optionally shift out of the way of Viridian or VMware
-+     * architectural leaves.
-+     */
-+    uint32_t base = is_viridian_or_vmware_cpuid(d) ? 0x40000200 : 0x40000000;
- 
-     switch ( idx - base )
-     {
-@@ -901,8 +904,11 @@ int guest_rdmsr_xen(const struct vcpu *v, uint32_t idx, uint64_t *val)
- int guest_wrmsr_xen(struct vcpu *v, uint32_t idx, uint64_t val)
- {
-     struct domain *d = v->domain;
--    /* Optionally shift out of the way of Viridian architectural MSRs. */
--    uint32_t base = is_viridian_domain(d) ? 0x40000200 : 0x40000000;
-+    /*
-+     * Optionally shift out of the way of Viridian or VMware
-+     * architectural leaves.
-+     */
-+    uint32_t base = is_viridian_or_vmware_cpuid(d) ? 0x40000200 : 0x40000000;
- 
-     switch ( idx - base )
-     {
-@@ -959,9 +965,10 @@ void cpuid_hypervisor_leaves(const struct vcpu *v, uint32_t leaf,
- {
-     const struct domain *d = v->domain;
-     const struct cpuid_policy *p = d->arch.cpuid;
--    uint32_t base = is_viridian_domain(d) ? 0x40000100 : 0x40000000;
-+    uint32_t base = is_viridian_or_vmware_cpuid(d) ? 0x40000100 : 0x40000000;
-     uint32_t idx  = leaf - base;
--    unsigned int limit = is_viridian_domain(d) ? p->hv2_limit : p->hv_limit;
-+    unsigned int limit = is_viridian_or_vmware_cpuid(d) ?
-+        p->hv2_limit : p->hv_limit;
- 
-     if ( limit == 0 )
-         /* Default number of leaves */
-@@ -989,7 +996,7 @@ void cpuid_hypervisor_leaves(const struct vcpu *v, uint32_t leaf,
-     case 2:
-         res->a = 1;            /* Number of hypercall-transfer pages */
-                                /* MSR base address */
--        res->b = is_viridian_domain(d) ? 0x40000200 : 0x40000000;
-+        res->b = is_viridian_or_vmware_cpuid(d) ? 0x40000200 : 0x40000000;
-         if ( is_pv_domain(d) ) /* Features */
-             res->c |= XEN_CPUID_FEAT1_MMU_PT_UPDATE_PRESERVE_AD;
-         break;
 diff --git a/xen/include/asm-x86/hvm/domain.h b/xen/include/asm-x86/hvm/domain.h
-index 9d247ba..0f64a4b 100644
+index 0f64a4b..355777c 100644
 --- a/xen/include/asm-x86/hvm/domain.h
 +++ b/xen/include/asm-x86/hvm/domain.h
-@@ -147,6 +147,9 @@ struct hvm_domain {
+@@ -162,6 +162,9 @@ struct hvm_domain {
+     spinlock_t             uc_lock;
+     bool_t                 is_in_uc_mode;
  
-     uint64_t              *params;
- 
-+    /* emulated VMware Hardware Version */
-+    uint32_t               vmware_hwver;
++    /* VMware backdoor port available */
++    bool_t                 is_vmware_port_enabled;
 +
-     /* Memory ranges with pinned cache attributes. */
-     struct list_head       pinned_cacheattr_ranges;
+     /* hypervisor intercepted msix table */
+     struct list_head       msixtbl_list;
  
 diff --git a/xen/include/asm-x86/hvm/hvm.h b/xen/include/asm-x86/hvm/hvm.h
-index be0d8b0..cb55dfb 100644
+index cb55dfb..74a9590 100644
 --- a/xen/include/asm-x86/hvm/hvm.h
 +++ b/xen/include/asm-x86/hvm/hvm.h
-@@ -474,6 +474,18 @@ static inline bool hvm_get_guest_bndcfgs(struct vcpu *v, u64 *val)
- #define has_viridian_synic(d) \
-     (is_viridian_domain(d) && (viridian_feature_mask(d) & HVMPV_synic))
+@@ -789,6 +789,8 @@ static inline bool hvm_has_set_descriptor_access_exiting(void)
  
-+#define vmware_feature_mask(d) \
-+    ((d)->arch.hvm.vmware_hwver)
-+
-+#define is_vmware_domain(d) \
-+    (is_hvm_domain(d) && vmware_feature_mask(d))
-+
-+#define has_vmware_cpuid(d) \
-+    (is_hvm_domain(d) && (vmware_feature_mask(d) >= 7))
-+
-+#define is_viridian_or_vmware_cpuid(d) \
-+    (is_viridian_domain(d) || has_vmware_cpuid(d))
-+
- static inline void hvm_inject_exception(
-     unsigned int vector, unsigned int type,
-     unsigned int insn_len, int error_code)
-@@ -754,6 +766,9 @@ static inline bool hvm_has_set_descriptor_access_exiting(void)
- #define is_viridian_domain(d) ((void)(d), false)
- #define is_viridian_vcpu(v) ((void)(v), false)
- #define has_viridian_time_ref_count(d) ((void)(d), false)
-+#define is_vmware_domain(d) ((void)(d), false)
-+#define has_vmware_cpuid(d) ((void)(d), false)
-+#define is_viridian_or_vmware_cpuid(d) ((void)(d), false)
- #define hvm_long_mode_active(v) ((void)(v), false)
- #define hvm_get_guest_time(v) ((void)(v), 0)
+ #endif  /* CONFIG_HVM */
  
-diff --git a/xen/include/asm-x86/hvm/vmware.h b/xen/include/asm-x86/hvm/vmware.h
-new file mode 100644
-index 0000000..98248e7
---- /dev/null
-+++ b/xen/include/asm-x86/hvm/vmware.h
-@@ -0,0 +1,33 @@
-+/*
-+ * asm-x86/hvm/vmware.h
-+ *
-+ * Copyright (C) 2012-2015 Verizon Corporation
-+ *
-+ * This file is free software; you can redistribute it and/or modify it
-+ * under the terms of the GNU General Public License Version 2 (GPLv2)
-+ * as published by the Free Software Foundation.
-+ *
-+ * This file is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-+ * General Public License for more details. <http://www.gnu.org/licenses/>.
-+ */
++void vmport_register(struct domain *d);
 +
-+#ifndef ASM_X86_HVM_VMWARE_H__
-+#define ASM_X86_HVM_VMWARE_H__
-+
-+#include <xen/types.h>
-+
-+void cpuid_vmware_leaves(const struct vcpu *v, uint32_t leaf,
-+                         uint32_t subleaf, struct cpuid_leaf *res);
-+
-+#endif /* ASM_X86_HVM_VMWARE_H__ */
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
+ #endif /* __ASM_X86_HVM_HVM_H__ */
+ 
+ /*
 diff --git a/xen/include/public/arch-x86/xen.h b/xen/include/public/arch-x86/xen.h
-index 629cb2b..54b1c4d 100644
+index 54b1c4d..105c6a3 100644
 --- a/xen/include/public/arch-x86/xen.h
 +++ b/xen/include/public/arch-x86/xen.h
-@@ -304,6 +304,7 @@ struct xen_arch_domainconfig {
-                                      XEN_X86_EMU_PIT | XEN_X86_EMU_USE_PIRQ |\
-                                      XEN_X86_EMU_VPCI)
-     uint32_t emulation_flags;
-+    uint32_t vmware_hwver;
- };
+@@ -296,6 +296,10 @@ struct xen_arch_domainconfig {
+ #define XEN_X86_EMU_USE_PIRQ        (1U<<_XEN_X86_EMU_USE_PIRQ)
+ #define _XEN_X86_EMU_VPCI           10
+ #define XEN_X86_EMU_VPCI            (1U<<_XEN_X86_EMU_VPCI)
++/* Enable use of vmware backdoor port.
++ * Not part of XEN_X86_EMU_ALL */
++#define _XEN_X86_EMU_VMWARE_PORT    11
++#define XEN_X86_EMU_VMWARE_PORT     (1U<<_XEN_X86_EMU_VMWARE_PORT)
  
- /* Location of online VCPU bitmap. */
+ #define XEN_X86_EMU_ALL             (XEN_X86_EMU_LAPIC | XEN_X86_EMU_HPET |  \
+                                      XEN_X86_EMU_PM | XEN_X86_EMU_RTC |      \
 -- 
 1.8.3.1
 
