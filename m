@@ -7,61 +7,60 @@ X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 007F2C433E1
-	for <xen-devel@archiver.kernel.org>; Wed, 19 Aug 2020 16:02:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 91330C433E1
+	for <xen-devel@archiver.kernel.org>; Wed, 19 Aug 2020 16:02:28 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C5F4C20882
-	for <xen-devel@archiver.kernel.org>; Wed, 19 Aug 2020 16:02:21 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 571932078D
+	for <xen-devel@archiver.kernel.org>; Wed, 19 Aug 2020 16:02:28 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="XbpfatPY"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C5F4C20882
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="SJ6dw3hE"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 571932078D
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k8QXT-000748-R2; Wed, 19 Aug 2020 16:02:11 +0000
+	id 1k8QXZ-00077E-4W; Wed, 19 Aug 2020 16:02:17 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=N7ZT=B5=citrix.com=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1k8QXT-0006xV-63
- for xen-devel@lists.xenproject.org; Wed, 19 Aug 2020 16:02:11 +0000
-X-Inumbo-ID: cfd62f0e-1fcb-4bee-8444-59e20b3db30d
+ id 1k8QXY-0006xV-64
+ for xen-devel@lists.xenproject.org; Wed, 19 Aug 2020 16:02:16 +0000
+X-Inumbo-ID: ecb68983-4e28-4c7e-bf0a-35f14a563bf6
 Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id cfd62f0e-1fcb-4bee-8444-59e20b3db30d;
- Wed, 19 Aug 2020 16:02:01 +0000 (UTC)
+ id ecb68983-4e28-4c7e-bf0a-35f14a563bf6;
+ Wed, 19 Aug 2020 16:02:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1597852922;
+ d=citrix.com; s=securemail; t=1597852923;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version;
- bh=zWpQNW1nSTO5KEdMe+zYQIylPdBgmXTMUmQ9itT0K6Y=;
- b=XbpfatPYZmMYFF48252bcoWxqfkVQd80eaDtF2KIryUNk4gS027IePG7
- NTrchS5vu4wtxWUsbxIFVjyiM64ZTmTiu/b9sEUMqvrtKy2hUc3WUp6L+
- PRFqUv9gXtiauThE/KB1qZ2rsdZlw7QPWdQjKP2rkh0vyKt0pLiWLZFew Y=;
+ bh=p7mP1vtVn+OU33mr73pbYK282VyBZ/DreNKLS9hTU+0=;
+ b=SJ6dw3hE9BFNgkGRLBmbF6UgjXb/WshyAjk8IVFKdCMrjq2S5nfv9pUs
+ zypsR8G5ACDHfmXyT5tqWy+Qa+JYv/Xrrx0TPhxPyMXgdL0CcSBZ2oRTP
+ vtjof+27AaZm/DOqO1DsfSMR9gwH0BrTLh2MmjWvCW5PDeaknFeRhEyHX E=;
 Authentication-Results: esa2.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: rmn/7TNe+olCT57QrSkYrJDRdN0+Xdjx2LYCuafupsdii/K/jzGgc7RsLE6o7d/THhkllbPDFt
- r2tpV7nJHufPRWufvOS8TtWgmgqxF7WFmPmUpZSQg1oKunF0Juwe+6maFU3eqAUC+hV0FM94P+
- tv5bFHx4mJr8C1vsp3u6dY1Fhg7IFlooz0FMjLACOi5DRxgd0FhLBRpzxKQ71iREt3KH4JN8ur
- wfgxPp4R5/wrxI9KmcCjDa0Nmk6quZMql7W2+1xmMmC9WDeqeO7kGcAOtEF1o5biHJncD/EpRx
- Lq4=
+IronPort-SDR: Hi7luPsYY2MTYMITLuDPYOiEvVCM4nubTIq6/jQSBQA+IwwA2WKXOLhfYzAnjxlGI6c3qBm0vB
+ E+HsiBTgSPIanwKl1rI2qnCTAQdXNDJdaRdLi4YJffF9B68oWDBFFck3VPE8aDtuai1EyUSfqR
+ yIMytJ4Zuy/bgzno2A7QPcSZenN/+epoAEFDOHnkyoPsSTf2v4oDjVbSP2o+e91iZeSI6dS8AF
+ LKNmNLzekQSnjv2CFzHJtH2hSI/g0wWg1YjE+bo4Bg5RiIqEEtqy4yd3fbqXqR+fAH7K2Jj5Sm
+ wmk=
 X-SBRS: 2.7
-X-MesageID: 24885410
+X-MesageID: 24885411
 X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,331,1592884800"; d="scan'208";a="24885410"
+X-IronPort-AV: E=Sophos;i="5.76,331,1592884800"; d="scan'208";a="24885411"
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH 1/7] ts-hosts-allocate-Executive: Fix broken call to
- $duration_estimator
-Date: Wed, 19 Aug 2020 17:01:37 +0100
-Message-ID: <20200819160143.11178-2-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 7/7] schema: Provide index on flights by start time
+Date: Wed, 19 Aug 2020 17:01:43 +0100
+Message-ID: <20200819160143.11178-8-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20200819160143.11178-1-ian.jackson@eu.citrix.com>
 References: <20200819160143.11178-1-ian.jackson@eu.citrix.com>
@@ -80,33 +79,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-The debug subref is passed to the constructor (and indeed we do that).
-The final argument to the actual estimator is $uptoincl_testid (but we
-didn't say $will_uptoincl_testid, so it is ignored).
+We often use flight number as a proxy for ordering, but this is not
+always appropriate and not always done (and sometimes it's a bit of a
+bodge).
 
-The code was wrong, but with no effect.  So no functional change.
+Provide an index to find flights by start time.  This significantly
+speeds up the host allocation $equivstatusq query, and the duration
+estimator.
+
+(I have tested this by creating a trial index in the production
+database.  That index can be dropped again, preferably after this
+commit makes it to production.)
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- ts-hosts-allocate-Executive | 5 +----
- 1 file changed, 1 insertion(+), 4 deletions(-)
+ schema/flights-started-index.sql | 7 +++++++
+ 1 file changed, 7 insertions(+)
+ create mode 100644 schema/flights-started-index.sql
 
-diff --git a/ts-hosts-allocate-Executive b/ts-hosts-allocate-Executive
-index 3bc38102..e5a6fbfe 100755
---- a/ts-hosts-allocate-Executive
-+++ b/ts-hosts-allocate-Executive
-@@ -516,10 +516,7 @@ sub find_recent_duration ($$) {
-     ($candrow->{Duration},
-      $candrow->{MostRecentStarted},
-      $candrow->{MostRecentStatus}) =
--        $duration_estimator->($job, $hid->{Ident}, $candrow->{resname},
--                              sub {
--#                                  print DEBUG "$dbg DUR-EST @_\n";
--                              });
-+        $duration_estimator->($job, $hid->{Ident}, $candrow->{resname});
- }
- 
- 
+diff --git a/schema/flights-started-index.sql b/schema/flights-started-index.sql
+new file mode 100644
+index 00000000..c230d9d8
+--- /dev/null
++++ b/schema/flights-started-index.sql
+@@ -0,0 +1,7 @@
++-- ##OSSTEST## 011 Harmless
++--
++-- This index helps ts-hosts-allocate-Executive find recent instances
++-- of the same job.  It may be useful for other things too.
++
++CREATE INDEX flights_blessing_started_idx
++    ON flights (blessing, started);
 -- 
 2.11.0
 
