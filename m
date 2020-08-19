@@ -7,61 +7,59 @@ X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7D685C433E1
-	for <xen-devel@archiver.kernel.org>; Wed, 19 Aug 2020 16:02:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 82DC8C433DF
+	for <xen-devel@archiver.kernel.org>; Wed, 19 Aug 2020 16:02:19 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 48E952078D
-	for <xen-devel@archiver.kernel.org>; Wed, 19 Aug 2020 16:02:14 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 51C082078D
+	for <xen-devel@archiver.kernel.org>; Wed, 19 Aug 2020 16:02:19 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="aVD91ZYk"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 48E952078D
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="TiXvFs1r"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 51C082078D
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k8QXK-000704-PQ; Wed, 19 Aug 2020 16:02:02 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1k8QXQ-00072S-FV; Wed, 19 Aug 2020 16:02:08 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=N7ZT=B5=citrix.com=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1k8QXJ-0006xV-5Y
- for xen-devel@lists.xenproject.org; Wed, 19 Aug 2020 16:02:01 +0000
-X-Inumbo-ID: 2720d963-099c-4660-9606-f6fff63917c7
+ id 1k8QXP-0006yd-Gs
+ for xen-devel@lists.xenproject.org; Wed, 19 Aug 2020 16:02:07 +0000
+X-Inumbo-ID: dc685f10-8370-42b2-8454-55ebff3203f5
 Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 2720d963-099c-4660-9606-f6fff63917c7;
- Wed, 19 Aug 2020 16:01:59 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id dc685f10-8370-42b2-8454-55ebff3203f5;
+ Wed, 19 Aug 2020 16:02:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1597852920;
+ d=citrix.com; s=securemail; t=1597852922;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version;
- bh=X+7wgvczDPTfTwDjWG9+pu1n4jK7Ii4wbwsbXI7r9vQ=;
- b=aVD91ZYkFjxWLb5F9KCEoJPgjYo0V+ZYXdeDhtfwQTQhwFp82u2rDHXN
- RSKtnSKu+q0GhDI3wYgStz49QscFL66jfpajk4TTBRVV/BxaVJGXdPCxl
- sSNf6x2QsbD0uT19A6cEc+5Q3u/BSreaeOyQDCNluJm/ZrpaoibIC3JJn 8=;
+ bh=PTQfIV4yQE1BF9Rx3GBSziCx/l3gtDRWZCafZEHerYw=;
+ b=TiXvFs1rOvrPW87eXOdy2IZ58p8e55O7PHOQ4liyFezY7PEu5P/4GyJL
+ iu4mCcYh0cz4yxicUXOpzlIWOCNHq2bejqenPGf0kvqQnLirgzLyXh64I
+ N+xgBm3spTSIVejvPDrWy9Dcd5G8eMTPSpg1DFi4RddkUjXhYVSVRIg7A E=;
 Authentication-Results: esa2.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: v0FaXVvy1mbxHR0Z3z5WtampetuyWG/fWbcM3eay2agJQaRO2FP3PfNO3JFwJMPBWZ9gEL+fUy
- JdU8tWD9xrryVTMIc88jGAFy+2zLj9f5mSD6m5DYo/z8p9CjWxFKZQcRgnv60dwIW7S2qojkc9
- Ln+tFDIZUCXr29yo410Mt67Ktk9XrFPAa/U4Nzhzr2ZHtAy5qk+PN+jRuAJ5HkZ3dNNZJ82b5T
- pMDmD2I0ihoLc22SLFF9gY53vMF4+YfxztnrOgGc2mh2eBdXuYf4ogg+7IesMqDc5fA7Lu/0oV
- 1LE=
+IronPort-SDR: TjgKA2w+4zWZHVB7/rNGYO/TzivonIAnv1AH57q/2LClQrAdc2pkpqxumKLkQNCb4swea5A+Ab
+ jqoDR+eyXj2Lc9tq5knQpCLcFPgSg+owIDrUlqXCTH10aQcvM+eoVoL7iHxG1Mk6PQ0RHuFSs/
+ syNgDq5OKuXr42LXXGrANQxeok91EShJeEckz/5AiIalx0lUHJ5Vq2lHh7OmfOtbyf61XvEqJk
+ r+Hm3yD/3NAMy9NQPJjDFweT7qnwhkQ6MeOb/4zxj6c6md0deninG2mISZOzPnzMR/jixKeDYF
+ dxU=
 X-SBRS: 2.7
-X-MesageID: 24885405
+X-MesageID: 24885409
 X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,331,1592884800"; d="scan'208";a="24885405"
+X-IronPort-AV: E=Sophos;i="5.76,331,1592884800"; d="scan'208";a="24885409"
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH 2/7] resource allocation: Provide
- OSSTEST_ALLOC_FAKE_PLAN test facility
-Date: Wed, 19 Aug 2020 17:01:38 +0100
-Message-ID: <20200819160143.11178-3-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 5/7] host allocation: Memoise duration estimates
+Date: Wed, 19 Aug 2020 17:01:41 +0100
+Message-ID: <20200819160143.11178-6-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20200819160143.11178-1-ian.jackson@eu.citrix.com>
 References: <20200819160143.11178-1-ian.jackson@eu.citrix.com>
@@ -80,52 +78,55 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Set this variable (to a data-plan.final.pl, say) and it becomes
-possible to test host allocation programs without actually allocating
-anything and without engaging with the queue system.
+We look at our own branch to estimate durations.  If somehow we are
+one of multiple concurrent flights on this branch with the appropriate
+blessing, we don't mind not noticing the doing of our peer flights so
+that if our estimates are a bit out of date.
+
+So it is fine to use an estimate no older than our own runtime.
+
+Right now we generate a new duration estimator during each queueing
+round, because it contains a statement handle and we must disconnect
+from the db while waiting.  So the internal memo table gets thrown
+away each time and is useless.
+
+To actually memoise, pass our own hash which lives as long as we do.
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- Osstest/Executive.pm | 26 ++++++++++++++++++++++++++
- 1 file changed, 26 insertions(+)
+ Osstest/Executive.pm        | 2 +-
+ ts-hosts-allocate-Executive | 4 +++-
+ 2 files changed, 4 insertions(+), 2 deletions(-)
 
 diff --git a/Osstest/Executive.pm b/Osstest/Executive.pm
-index 0808202b..d6b2736b 100644
+index 50c84cc3..61a99bc3 100644
 --- a/Osstest/Executive.pm
 +++ b/Osstest/Executive.pm
-@@ -767,6 +767,32 @@ sub alloc_resources {
- 	? sub { print $debugfh @_, "\n" or die $!; }
-         : sub { };
+@@ -1274,7 +1274,7 @@ END
+     return sub {
+         my ($job, $hostidname, $onhost, $uptoincl_testid) = @_;
  
-+    my $fake_plan = $ENV{OSSTEST_ALLOC_FAKE_PLAN};
-+    if (defined $fake_plan) {
-+	my $fake_data = do {
-+	    local $/ = undef;
-+	    open FAKEPLAN, "<", $ENV{OSSTEST_ALLOC_FAKE_PLAN} or die $!;
-+	    my $r = <FAKEPLAN> // die $!;
-+	    close FAKEPLAN;
-+	    $r;
-+	};
-+	if ($fake_plan =~ m{\.pl$}) {
-+	    $fake_data = eval $fake_data;
-+	} elsif ($fake_plan =~ m{\.json$}) {
-+	    $fake_data = from_json($fake_data);
-+	} else {
-+	    die;
-+	}
-+	db_retry($flight,'running', $dbh_tests, [], sub {
-+            logm("fake resourcecall..");
-+	    my ($ok, $bookinglist) = $resourcecall->($fake_data, 1);
-+            logm("fake resourcecall ok=$ok");
-+	    $dbh_tests->rollback();
-+	    exit $ok;
-+        });
-+	die "unexpectedly left db_retry";
-+    }
-+
-     my $set_info= sub {
-         return if grep { !defined } @_;
-         my @s;
+-	my $memokey = "$job $hostidname $onhost $uptoincl_testid";
++	my $memokey = "$job $hostidname $onhost ".($uptoincl_testid//"");
+ 	my $memo = $our_memo->{$memokey};
+ 	return @$memo if $memo;
+ 
+diff --git a/ts-hosts-allocate-Executive b/ts-hosts-allocate-Executive
+index 4140b65c..39c66346 100755
+--- a/ts-hosts-allocate-Executive
++++ b/ts-hosts-allocate-Executive
+@@ -145,8 +145,10 @@ END
+ 		      AND hostflag LIKE 'equiv-%'
+ END
+ 
++    our %duration_memo;
+     $duration_estimator= duration_estimator($fi->{branch}, $blessing,
+-                                            sub { print DEBUG "@_\n"; });
++                                            sub { print DEBUG "@_\n"; },
++					    0, \%duration_memo);
+ 
+     $resprop_q= $dbh_tests->prepare(<<END);
+             SELECT * FROM resource_properties
 -- 
 2.11.0
 
