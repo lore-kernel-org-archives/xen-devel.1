@@ -8,66 +8,66 @@ X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2761DC433E4
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 287DEC433E5
 	for <xen-devel@archiver.kernel.org>; Wed, 19 Aug 2020 16:52:55 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id F0AF8207FF
+	by mail.kernel.org (Postfix) with ESMTPS id F0EAF20885
 	for <xen-devel@archiver.kernel.org>; Wed, 19 Aug 2020 16:52:54 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="or7mw6CE"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F0AF8207FF
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="nt34M22L"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F0EAF20885
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k8RK1-0003ke-CI; Wed, 19 Aug 2020 16:52:21 +0000
+	id 1k8RKG-0003oW-GX; Wed, 19 Aug 2020 16:52:36 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=qP9Y=B5=gmail.com=don.slutz@srs-us1.protection.inumbo.net>)
- id 1k8RK0-0003kZ-LG
- for xen-devel@lists.xen.org; Wed, 19 Aug 2020 16:52:20 +0000
-X-Inumbo-ID: 7fe40239-f4b7-49b4-9c41-a29fe5a3a1f3
-Received: from mail-qk1-x744.google.com (unknown [2607:f8b0:4864:20::744])
+ id 1k8RKF-0003kZ-KZ
+ for xen-devel@lists.xen.org; Wed, 19 Aug 2020 16:52:35 +0000
+X-Inumbo-ID: 701a3ca8-835e-4475-a585-f8387a64ef99
+Received: from mail-qt1-x844.google.com (unknown [2607:f8b0:4864:20::844])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 7fe40239-f4b7-49b4-9c41-a29fe5a3a1f3;
- Wed, 19 Aug 2020 16:52:19 +0000 (UTC)
-Received: by mail-qk1-x744.google.com with SMTP id g26so22234013qka.3
- for <xen-devel@lists.xen.org>; Wed, 19 Aug 2020 09:52:19 -0700 (PDT)
+ id 701a3ca8-835e-4475-a585-f8387a64ef99;
+ Wed, 19 Aug 2020 16:52:21 +0000 (UTC)
+Received: by mail-qt1-x844.google.com with SMTP id h21so18273845qtp.11
+ for <xen-devel@lists.xen.org>; Wed, 19 Aug 2020 09:52:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :in-reply-to:references;
- bh=o8NsCKzA6WRTBrSnDhC70WmZpWrA7tMMr87qsIxTF40=;
- b=or7mw6CE7ZHJHTWLAA6az4SyS7RVqBPInRmZK8ZHWu3vO1uHeLX/S0uMydfzMh+kcd
- 61SUhJMTUBrjxAlLWs1Q3b3i6ubUTt3HieM9LcY/iPIhDVDEE/Q4oX9VOd72QOB+J4C8
- 8dwNcbPalbBDTwreaVrhasg3D74OdKzq1tT7PuhhLTCXpHBv3lKKGxht02ov19IE6x+O
- SedYMSnsR9wYID9j52cVn40ms/ujJLmJXJx2uixjy3Q6ui4de0ZT+08ORPSvNGTcvJuO
- orwV7NPVWK0iGWFeEJ1mXHk90lmEjqEbZGsiqg2NgTg7W1/6oUNGqcOnZi2NbnCbzWX3
- OsUA==
+ bh=cWulFsHkNsMNGC2uvEY33xRgo78iJDptDGbhfvQXNSY=;
+ b=nt34M22LhQ1cPr4+nW9rwrLB32z5vE3SvLB0ziE3HRWakRRfJKH3MoxzP8nCtY1+XN
+ cTbINjuAKiky9/Nwa3dPldHvY5ITG3DnEmwteyijN6RB1NK6IZ4uDyoTvmrClSeWlWEK
+ CKAa5wI1mtlRKgYoC+7GjvsVMKNpx0dyQDCpJRVXLum7rwGgQvAH78k1+S5AwxCnCunW
+ x34sfJfjlUnA4bschugwDTCpLP99IPl1IdvXzOHGBI8Rq5T8GMPdyALA0KH316urzWt6
+ qHMzrPMYAmKnbQ/j+jWTpJuQlOZ6sDFCe7nK8tVoiqYYqBQcIjf/Qtwck0aizipMcx3V
+ M3yg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:in-reply-to:references;
- bh=o8NsCKzA6WRTBrSnDhC70WmZpWrA7tMMr87qsIxTF40=;
- b=cANjJX/b10vplHg+5u6tlJzZY3jj4GPrqC/cxJ2SbBRg/6SHtvPLgcyxz+ciNN+qqG
- 4LCzdvjvcCQObx2/dih3+LmQTNSmWcyt1AL3HAlk1vd/7rM2GW22LrjNHSLluaZ7mWhL
- 8HK82pA4vZFgx4CAf4EIj378e8Ns5i4RM+ItSs/zfHaYyzemscmG6c8FUkKi8DmZjgBY
- rbAK0C4OYBat3BOdmfDefkKnVNH9GbDscur8YIqM/oTS5U/aJ3FarWFL2gJPPHEq5Rd0
- 7LwzGonCt4x6aezvlgr26gnB6DHK9rNLGLngOP4egq0HTsDceL2Oqc6jZDciGEaDqhhS
- Ds1Q==
-X-Gm-Message-State: AOAM531MVRwb2blQ9IFqeDed0tRbMwSk4V4phUzuhqeTvXAzfHrcMUs0
- 07eX18bRQv25qV0TdArdtzJOULyR5FoFu4JE
-X-Google-Smtp-Source: ABdhPJyFJtKozsnnsbOOoPYSGupD2wNujEjLeKexbnZ0L7bSO4PguO/vorL+e12kdCtmqli1SHtZcw==
-X-Received: by 2002:a37:84c:: with SMTP id 73mr22337947qki.464.1597855939132; 
- Wed, 19 Aug 2020 09:52:19 -0700 (PDT)
+ bh=cWulFsHkNsMNGC2uvEY33xRgo78iJDptDGbhfvQXNSY=;
+ b=iAxrzDkarXqXJf8sQ0MRVkvImdtrsBkIyVVmpNK7r9X/3+TP7ptgN8VXl+X5p2KLrs
+ zpLdWMCVoeO31Ql5kd+DcJqezl2SLGWbybYFd4BrV9mAA/6q3Pah6ke40LD8OKDupc1Z
+ JA9ynGa5pakxu1z7ep2pP+2uMMnQaJvb0Uh6RtxcEBNvBK11zF5zh1jJBd2tk4j67DvZ
+ RhZezLRgj+58tFYStDTFnXmqenzgPN21QZfyOqig7Tw5/KCKBDflhZNua9b2x9iSiPE/
+ uy/2RsS1VqIZ6JZN9a/IUDKyPkBSo4EPK21u/5dQywtsXwCgJxyjpyG9wrUDJx+GFmaq
+ /oVQ==
+X-Gm-Message-State: AOAM533JYwL/U7QdHDkCZzJKgayAixcPXmj1pRv0+6uChBEr269dqNe0
+ 3HDjRUMtym3wwY72sHzNvLN3mLg3yvPHwmPZ
+X-Google-Smtp-Source: ABdhPJyREnuFIxcunzazKQW44dQPm0Jfaa9gruk7tvcOZ9HQbKF2VbFaQdLSNdDsZ5SvI8HHCiXFfA==
+X-Received: by 2002:ac8:1788:: with SMTP id o8mr22064948qtj.330.1597855941268; 
+ Wed, 19 Aug 2020 09:52:21 -0700 (PDT)
 Received: from TestCloud1.don.dslutz.org.zatium.us
  (pool-96-230-225-98.bstnma.fios.verizon.net. [96.230.225.98])
  by smtp.googlemail.com with ESMTPSA id
- 128sm25105832qkk.101.2020.08.19.09.52.18
+ 128sm25105832qkk.101.2020.08.19.09.52.20
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Wed, 19 Aug 2020 09:52:18 -0700 (PDT)
+ Wed, 19 Aug 2020 09:52:20 -0700 (PDT)
 From: Don Slutz <don.slutz@gmail.com>
 X-Google-Original-From: Don Slutz <Don.Slutz@Gmail.com
 To: xen-devel@lists.xen.org
@@ -83,12 +83,14 @@ Cc: Aravind Gopalakrishnan <Aravind.Gopalakrishnan@amd.com>,
  Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
  George Dunlap <George.Dunlap@eu.citrix.com>,
  Don Slutz <dslutz@verizon.com>, Don Slutz <don.slutz@gmail.com>
-Subject: [Xen-devel] [XEN PATCH v14 1/8] tools: Add vga=vmware
-Date: Wed, 19 Aug 2020 12:51:55 -0400
-Message-Id: <34a50dc69e4c5722597e02a4df4e3da6d6586ec7.1597854907.git.don.slutz@gmail.com>
+Subject: [Xen-devel] [XEN PATCH v14 3/8] tools: Add vmware_hwver support
+Date: Wed, 19 Aug 2020 12:51:57 -0400
+Message-Id: <c1560bc4cecae1c40de5f5cfc39832394f77c5ed.1597854907.git.don.slutz@gmail.com>
 X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <cover.1597854907.git.don.slutz@gmail.com>
+In-Reply-To: <67b90d11eae2c88faab22d458e7e38db0f5aada4.1597854907.git.don.slutz@gmail.com>
 References: <cover.1597854907.git.don.slutz@gmail.com>
+ <34a50dc69e4c5722597e02a4df4e3da6d6586ec7.1597854907.git.don.slutz@gmail.com>
+ <67b90d11eae2c88faab22d458e7e38db0f5aada4.1597854907.git.don.slutz@gmail.com>
 In-Reply-To: <cover.1597854907.git.don.slutz@gmail.com>
 References: <cover.1597854907.git.don.slutz@gmail.com>
 X-BeenThere: xen-devel@lists.xenproject.org
@@ -106,117 +108,155 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Don Slutz <dslutz@verizon.com>
 
-This allows use of QEMU's VMware emulated video card
+This is used to set xen_arch_domainconfig vmware_hw. It is set to
+the emulated VMware virtual hardware version.
 
-NOTE: vga=vmware is not supported by device_model_version=qemu-xen-traditional
+Currently 0, 3-4, 6-11 are good values.  However the code only
+checks for == 0, != 0, or < 7.
 
 Signed-off-by: Don Slutz <dslutz@verizon.com>
 CC: Don Slutz <don.slutz@gmail.com>
 ---
 Acked-by: Ian Campbell <ian.campbell@citrix.com>
-Reviewed-by: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
 
 v14:
   Reworked to current code.
-  Added below --- Reviewed-by: Konrad Rzeszutek 
 
 v13:
-  Added Acked-by: Ian Campbell
+  Added: Acked-by: Ian Campbell
 
 v12:
-  Dropped LIBXL_HAVE_LIBXL_VGA_INTERFACE_TYPE_VMWARE
-  This means that the later patch that defines LIBXL_HAVE_VMWARE
-  is now also required.
+    I'm not sure this hunk has anything to do with this patch, nor
+    what the semantic difference between the old and new text is
+    supposed to be.
+      Dropped comment change.
+
 
 v11:
-  Dropped support for Qemu-trad.
-  Also changed later patchs to not need this one.
+  Dropped "If non-zero then default VGA to VMware's VGA"
 
-v10: New at v10.
+v10:
+    LIBXL_HAVE_LIBXL_VGA_INTERFACE_TYPE_VMWARE &
+    LIBXL_HAVE_BUILDINFO_HVM_VMWARE_HWVER are arriving together
+    a single umbrella could be used.
+      Since I split the LIBXL_VGA_INTERFACE_TYPE_VMWARE into
+      it's own patch, this is not longer true.
+      But I did use 1 for the 2 c_info changes.
+    Please use GCSPRINTF.
+  Remove vga=vmware from here.
 
-  Was part of "tools: Add vmware_hwver support"
+v9:
+      I assumed that s/vmware_hw/vmware_hwver/ is not a big enough
+      change to drop the Reviewed-by.  Did a minor edit to the
+      commit message to add 7 to the list of values checked.
 
+v7:
+    Default handling of hvm.vga.kind bad.
+      Fixed.
+    Default of vmware_port should be based on vmware_hw.
+      Done. 
 
- docs/man/xl.cfg.5.pod.in    | 4 +++-
- tools/libxl/libxl_dm.c      | 9 +++++++++
- tools/libxl/libxl_types.idl | 1 +
- tools/xl/xl_parse.c         | 2 ++
- 4 files changed, 15 insertions(+), 1 deletion(-)
+v5:
+      Anything looking for Xen according to the Xen cpuid instructions...
+        Adjusted doc to new wording.
+
+ docs/man/xl.cfg.5.pod.in    | 17 +++++++++++++++++
+ tools/libxl/libxl_create.c  |  4 +++-
+ tools/libxl/libxl_types.idl |  1 +
+ tools/libxl/libxl_x86.c     |  3 +--
+ tools/xl/xl_parse.c         |  3 +++
+ 5 files changed, 25 insertions(+), 3 deletions(-)
 
 diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
-index 0532739..a9eae96 100644
+index a9eae96..10eac33 100644
 --- a/docs/man/xl.cfg.5.pod.in
 +++ b/docs/man/xl.cfg.5.pod.in
-@@ -2396,7 +2396,7 @@ B<This option is deprecated, use vga="stdvga" instead>.
- =item B<vga="STRING">
+@@ -2353,6 +2353,23 @@ The viridian option can be specified as a boolean. A value of true (1)
+ is equivalent to the list [ "defaults" ], and a value of false (0) is
+ equivalent to an empty list.
  
- Selects the emulated video card.
--Options are: B<none>, B<stdvga>, B<cirrus> and B<qxl>.
-+Options are: B<none>, B<stdvga>, B<cirrus>, B<vmware> and B<qxl>.
- The default is B<cirrus>.
- 
- In general, QXL should work with the Spice remote display protocol
-@@ -2404,6 +2404,8 @@ for acceleration, and a QXL driver is necessary in the guest in that case.
- QXL can also work with the VNC protocol, but it will be like a standard
- VGA card without acceleration.
- 
-+NOTE: B<vmware> is not supported on B<device_model_version = "qemu-xen-traditional">
++=item B<vmware_hwver=NUMBER>
 +
- =item B<vnc=BOOLEAN>
++Turns on or off the exposure of VMware cpuid.  The number is
++VMware's hardware version number, where 0 is off.  A number >= 7
++is needed to enable exposure of VMware cpuid.
++
++The hardware version number (vmware_hwver) comes from VMware config files.
++
++=over 4
++
++In a .vmx it is virtualHW.version
++
++In a .ovf it is part of the value of vssd:VirtualSystemType.
++For vssd:VirtualSystemType == vmx-07, vmware_hwver = 7.
++
++=back
++
+ =back
  
- Allow access to the display via the VNC protocol.  This enables the
-diff --git a/tools/libxl/libxl_dm.c b/tools/libxl/libxl_dm.c
-index f2dc569..415c12e 100644
---- a/tools/libxl/libxl_dm.c
-+++ b/tools/libxl/libxl_dm.c
-@@ -808,6 +808,10 @@ static int libxl__build_device_model_args_old(libxl__gc *gc,
-         case LIBXL_VGA_INTERFACE_TYPE_NONE:
-             flexarray_append_pair(dm_args, "-vga", "none");
-             break;
-+        case LIBXL_VGA_INTERFACE_TYPE_VMWARE:
-+            LOG(ERROR, "vga=vmware is not supported by "
-+                "qemu-xen-traditional");
-+            return ERROR_INVAL;
-         case LIBXL_VGA_INTERFACE_TYPE_QXL:
-             break;
-         default:
-@@ -1446,6 +1450,11 @@ static int libxl__build_device_model_args_new(libxl__gc *gc,
-                 GCSPRINTF("qxl-vga,vram_size_mb=%"PRIu64",ram_size_mb=%"PRIu64,
-                 (b_info->video_memkb/2/1024), (b_info->video_memkb/2/1024) ) );
-             break;
-+        case LIBXL_VGA_INTERFACE_TYPE_VMWARE:
-+            flexarray_append_pair(dm_args, "-device",
-+                GCSPRINTF("vmware-svga,vgamem_mb=%d",
-+                libxl__sizekb_to_mb(b_info->video_memkb)));
-+            break;
-         default:
-             LOGD(ERROR, guest_domid, "Invalid emulated video card specified");
-             return ERROR_INVAL;
+ =head3 Emulated VGA Graphics Device
+diff --git a/tools/libxl/libxl_create.c b/tools/libxl/libxl_create.c
+index 2814818..e28d175 100644
+--- a/tools/libxl/libxl_create.c
++++ b/tools/libxl/libxl_create.c
+@@ -499,7 +499,7 @@ int libxl__domain_build(libxl__gc *gc,
+         vments[4] = "start_time";
+         vments[5] = GCSPRINTF("%lu.%02d", start_time.tv_sec,(int)start_time.tv_usec/10000);
+ 
+-        localents = libxl__calloc(gc, 13, sizeof(char *));
++        localents = libxl__calloc(gc, 15, sizeof(char *));
+         i = 0;
+         localents[i++] = "platform/acpi";
+         localents[i++] = libxl__acpi_defbool_val(info) ? "1" : "0";
+@@ -509,6 +509,8 @@ int libxl__domain_build(libxl__gc *gc,
+         localents[i++] = libxl_defbool_val(info->u.hvm.acpi_s4) ? "1" : "0";
+         localents[i++] = "platform/acpi_laptop_slate";
+         localents[i++] = libxl_defbool_val(info->u.hvm.acpi_laptop_slate) ? "1" : "0";
++        localents[i++] = "platform/vmware_hwver";
++        localents[i++] = GCSPRINTF("%d", d_config->c_info.vmware_hwver);
+         if (info->u.hvm.mmio_hole_memkb) {
+             uint64_t max_ram_below_4g =
+                 (1ULL << 32) - (info->u.hvm.mmio_hole_memkb << 10);
 diff --git a/tools/libxl/libxl_types.idl b/tools/libxl/libxl_types.idl
-index 9d3f05f..36350d2 100644
+index 36350d2..89a9ee7 100644
 --- a/tools/libxl/libxl_types.idl
 +++ b/tools/libxl/libxl_types.idl
-@@ -220,6 +220,7 @@ libxl_vga_interface_type = Enumeration("vga_interface_type", [
-     (2, "STD"),
-     (3, "NONE"),
-     (4, "QXL"),
-+    (5, "VMWARE"),
-     ], init_val = "LIBXL_VGA_INTERFACE_TYPE_UNKNOWN")
+@@ -420,6 +420,7 @@ libxl_domain_create_info = Struct("domain_create_info",[
+     ("driver_domain",libxl_defbool),
+     ("passthrough",  libxl_passthrough),
+     ("xend_suspend_evtchn_compat",libxl_defbool),
++    ("vmware_hwver", uint32),
+     ], dir=DIR_IN)
  
- libxl_vendor_device = Enumeration("vendor_device", [
+ libxl_domain_restore_params = Struct("domain_restore_params", [
+diff --git a/tools/libxl/libxl_x86.c b/tools/libxl/libxl_x86.c
+index 3418a81..0ee7418 100644
+--- a/tools/libxl/libxl_x86.c
++++ b/tools/libxl/libxl_x86.c
+@@ -21,8 +21,7 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
+         abort();
+     }
+ 
+-    /* Note: will be changed in next patch (tools: Add ...). */
+-    config->arch.vmware_hwver = 0;
++    config->arch.vmware_hwver = d_config->c_info.vmware_hwver;
+     return 0;
+ }
+ 
 diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
-index 61b4ef7..c74a9e3 100644
+index c74a9e3..4794398 100644
 --- a/tools/xl/xl_parse.c
 +++ b/tools/xl/xl_parse.c
-@@ -2590,6 +2590,8 @@ skip_usbdev:
-                 b_info->u.hvm.vga.kind = LIBXL_VGA_INTERFACE_TYPE_NONE;
-             } else if (!strcmp(buf, "qxl")) {
-                 b_info->u.hvm.vga.kind = LIBXL_VGA_INTERFACE_TYPE_QXL;
-+            } else if (!strcmp(buf, "vmware")) {
-+                b_info->u.hvm.vga.kind = LIBXL_VGA_INTERFACE_TYPE_VMWARE;
-             } else {
-                 fprintf(stderr, "Unknown vga \"%s\" specified\n", buf);
-                 exit(1);
+@@ -1573,6 +1573,9 @@ void parse_config_data(const char *config_source,
+     b_info->cmdline = parse_cmdline(config);
+ 
+     xlu_cfg_get_defbool(config, "driver_domain", &c_info->driver_domain, 0);
++    if (!xlu_cfg_get_long(config, "vmware_hwver",  &l, 1))
++        c_info->vmware_hwver = l;
++
+     xlu_cfg_get_defbool(config, "acpi", &b_info->acpi, 0);
+ 
+     xlu_cfg_replace_string (config, "bootloader", &b_info->bootloader, 0);
 -- 
 1.8.3.1
 
