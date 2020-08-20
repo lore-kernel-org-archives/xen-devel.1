@@ -2,64 +2,72 @@ Return-Path: <SRS0=1JDs=B6=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.7 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E59E8C433DF
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2020 11:57:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 571EAC433E1
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2020 12:33:42 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BEAF5214F1
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2020 11:57:44 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BEAF5214F1
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=leiner.me
+	by mail.kernel.org (Postfix) with ESMTPS id 07A0E20738
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2020 12:33:41 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="kDv3Clsb"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 07A0E20738
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k8jBv-0003ug-0i; Thu, 20 Aug 2020 11:57:11 +0000
+	id 1k8jkt-0007Ky-3n; Thu, 20 Aug 2020 12:33:19 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=zrnf=B6=leiner.me=simon@srs-us1.protection.inumbo.net>)
- id 1k8jBu-0003ub-AY
- for xen-devel@lists.xenproject.org; Thu, 20 Aug 2020 11:57:10 +0000
-X-Inumbo-ID: 34847500-28db-4a29-9f06-92a814a5db0c
-Received: from mx2.mailbox.org (unknown [80.241.60.215])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=wn9w=B6=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
+ id 1k8jkr-0007Kt-U6
+ for xen-devel@lists.xenproject.org; Thu, 20 Aug 2020 12:33:17 +0000
+X-Inumbo-ID: f7191eab-3dc7-4b7d-9c0e-7b98d1852298
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 34847500-28db-4a29-9f06-92a814a5db0c;
- Thu, 20 Aug 2020 11:57:08 +0000 (UTC)
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [80.241.60.241])
- (using TLSv1.2 with cipher ECDHE-RSA-CHACHA20-POLY1305 (256/256 bits))
- (No client certificate requested)
- by mx2.mailbox.org (Postfix) with ESMTPS id 1A77EA11FD;
- Thu, 20 Aug 2020 13:57:07 +0200 (CEST)
-X-Virus-Scanned: amavisd-new at heinlein-support.de
-Received: from smtp2.mailbox.org ([80.241.60.241])
- by spamfilter03.heinlein-hosting.de (spamfilter03.heinlein-hosting.de
- [80.241.56.117]) (amavisd-new, port 10030)
- with ESMTP id BpXQqhYb1scQ; Thu, 20 Aug 2020 13:57:03 +0200 (CEST)
-Subject: Re: [Linux] [ARM] Granting memory obtained from the DMA API
-To: Julien Grall <julien@xen.org>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?=
- <jgross@suse.com>
-References: <32922E87-9F50-41B3-A321-3212697CF7DB@leiner.me>
- <b45a40e3-ea9d-0eef-ea99-88201be83511@xen.org>
-From: Simon Leiner <simon@leiner.me>
-Message-ID: <44f2d486-e3bd-6a44-042d-f05b5d0c0732@leiner.me>
-Date: Thu, 20 Aug 2020 13:57:02 +0200
+ id f7191eab-3dc7-4b7d-9c0e-7b98d1852298;
+ Thu, 20 Aug 2020 12:33:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+ Content-Transfer-Encoding:Content-Type:Message-ID:To;
+ bh=ILmht8AdrOnA9G5W6QuCmN7kqN1Jq7zis3+tvvjm6Bc=; b=kDv3Clsb6/OArxhA0BnlvlasMw
+ GlqEn2TtwkRb8cImxJqCkrmYKwhnmVpEfBgFN9itiHQ3ZcvUXbP6IkVP2ii0xfpi2S/sKqycm20XV
+ 2LkmmHM8EvwPRIUB+aqrC4VOCiMXa9TcsNQGM14S5CRxHV8UmKl+z4w6iRYtuLmGSDjE=;
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1k8jko-0002sG-VC; Thu, 20 Aug 2020 12:33:14 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1k8jko-0006aY-NM; Thu, 20 Aug 2020 12:33:14 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1k8jko-0005SJ-Ms; Thu, 20 Aug 2020 12:33:14 +0000
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-152632-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-In-Reply-To: <b45a40e3-ea9d-0eef-ea99-88201be83511@xen.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-MBO-SPAM-Probability: 
-X-Rspamd-Score: -0.87 / 15.00 / 15.00
-X-Rspamd-Queue-Id: 9AA5E1738
-X-Rspamd-UID: eff3f3
+Subject: [xen-unstable-smoke test] 152632: tolerable all pass - PUSHED
+X-Osstest-Failures: xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+ xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+ xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+ xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+ xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This: xen=858c0be8c2fa4125a0fa0acaa03ae730e5c7cb3c
+X-Osstest-Versions-That: xen=f9d67340b4aa254f64b40f2031720f61a33c2904
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Thu, 20 Aug 2020 12:33:14 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,38 +81,60 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Hi Julien,
+flight 152632 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/152632/
 
-On 20.08.20 13:17, Julien Grall wrote:
-> There is a lot of interest to get Virtio working on Xen at the moment.
-> Is this going to be a new transport layer for Virtio?
+Failures :-/ but no regressions.
+
+Tests which did not succeed, but are not blocking:
+ test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+
+version targeted for testing:
+ xen                  858c0be8c2fa4125a0fa0acaa03ae730e5c7cb3c
+baseline version:
+ xen                  f9d67340b4aa254f64b40f2031720f61a33c2904
+
+Last test of basis   152622  2020-08-19 12:01:17 Z    1 days
+Testing same since   152632  2020-08-20 10:01:46 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Bertrand Marquis <bertrand.marquis@arm.com>
+  Julien Grall <jgrall@amazon.com>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-libvirt                                     pass    
 
 
-It is designed that way, yes. The current implementation (based on
-virtio_mmio.c) has a few limitations:
- - Only the host side is implemented for Linux (We are currently only
-using bare metal domains for the device side - so the device
-implementation is based on OpenAMP[1])
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
 
-- It lacks some features, e.g. there is currently no device
-configuration space
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
 
-- It is tested only very narrowly (only for my use case which is RPMsg
-via the rpmsg_char kernel driver)
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
 
-As this was really just a byproduct of my main research topic, I'm
-currently not in touch with the virtio standards committee. But I'm
-happy to contribute my work if there is interest :-)
-
-> Xen-devel is probably most suitable for this discussion, so I moved the
-> discussion there. I have also CCed a couple of Linux maintainers that
-> should be able to provide feedbacks on the approaches.
-
-Thanks!
-
-Greetings,
-Simon
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
 
 
-[1]: https://www.openampproject.org
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/xen.git
+   f9d67340b4..858c0be8c2  858c0be8c2fa4125a0fa0acaa03ae730e5c7cb3c -> smoke
 
