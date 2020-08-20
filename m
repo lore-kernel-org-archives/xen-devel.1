@@ -7,46 +7,45 @@ X-Spam-Status: No, score=-13.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EFAFDC433E1
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2020 00:01:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B536DC433E3
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2020 00:02:33 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C1E16214F1
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2020 00:01:59 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 7CEF521741
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2020 00:02:33 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="UL8pE1I4"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C1E16214F1
+	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="lcEIr4B4"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7CEF521741
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k8Y1Z-0000yd-HF; Thu, 20 Aug 2020 00:01:45 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1k8Y26-00011K-S2; Thu, 20 Aug 2020 00:02:18 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Q1N0=B6=kernel.org=sashal@srs-us1.protection.inumbo.net>)
- id 1k8Y1X-0000yY-RB
- for xen-devel@lists.xenproject.org; Thu, 20 Aug 2020 00:01:43 +0000
-X-Inumbo-ID: 451c8420-59be-4e1b-895e-4a3fa25c0814
+ id 1k8Y26-00011E-AS
+ for xen-devel@lists.xenproject.org; Thu, 20 Aug 2020 00:02:18 +0000
+X-Inumbo-ID: 7507ca01-b617-4108-abb6-bdbc7ca8b658
 Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 451c8420-59be-4e1b-895e-4a3fa25c0814;
- Thu, 20 Aug 2020 00:01:42 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 7507ca01-b617-4108-abb6-bdbc7ca8b658;
+ Thu, 20 Aug 2020 00:02:17 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 22CF621775;
- Thu, 20 Aug 2020 00:01:40 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id F10F321741;
+ Thu, 20 Aug 2020 00:02:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1597881701;
+ s=default; t=1597881737;
  bh=/S/5fcNXp1qF0dj5Sh7EBvrVNQQbog7E1B1vZS/c6vk=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=UL8pE1I4ZQDqAImmRtg4skD02jMIjFvneVDTdLfMYuOJeQ/nKjqUSFDKZDJR0rHbP
- +1aRDNmqMwNpckqtGIl8R0HA5YeksLdEE04yTMtuCzwJYEV1TW/DonTAubE2N/iv7E
- O8D9JnWlGGkYR9tExbA0JAy2Rxf6aJJuP2Nga9jY=
+ b=lcEIr4B4Gyut2krPkxrECa5l+X6KWt7FqZD5lRLWyqr0s+PTwxrtMnw5QLLrs0PY4
+ s78p3Cj6t501J2VPXa3Rwyecj7hubG3I3MxhIAZoDDla0N4ZjeGZvPFXgLj7T/f8jj
+ oWf7HAyC2X95hbAZHkpBVQZD8nqan0VmVRLo9e8Q=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
@@ -55,13 +54,13 @@ Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>,
  Corey Minyard <cminyard@mvista.com>, Roman Shaposhnik <roman@zededa.com>,
  Juergen Gross <jgross@suse.com>, Sasha Levin <sashal@kernel.org>,
  xen-devel@lists.xenproject.org, iommu@lists.linux-foundation.org
-Subject: [PATCH AUTOSEL 5.8 18/27] swiotlb-xen: use vmalloc_to_page on vmalloc
+Subject: [PATCH AUTOSEL 5.7 16/24] swiotlb-xen: use vmalloc_to_page on vmalloc
  virt addresses
-Date: Wed, 19 Aug 2020 20:01:07 -0400
-Message-Id: <20200820000116.214821-18-sashal@kernel.org>
+Date: Wed, 19 Aug 2020 20:01:47 -0400
+Message-Id: <20200820000155.215089-16-sashal@kernel.org>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20200820000116.214821-1-sashal@kernel.org>
-References: <20200820000116.214821-1-sashal@kernel.org>
+In-Reply-To: <20200820000155.215089-1-sashal@kernel.org>
+References: <20200820000155.215089-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
