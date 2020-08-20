@@ -3,73 +3,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-6.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C8ADC433E4
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2020 15:35:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E945C433E3
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2020 15:35:18 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C99452086A
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2020 15:35:16 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 02B782075E
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2020 15:35:17 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="FCOMumPd"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C99452086A
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="WCEDYnzE"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 02B782075E
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k8mad-00073W-L7; Thu, 20 Aug 2020 15:34:55 +0000
+	id 1k8mah-00073n-Td; Thu, 20 Aug 2020 15:34:59 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ddnW=B6=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1k8mab-00073R-VC
- for xen-devel@lists.xenproject.org; Thu, 20 Aug 2020 15:34:53 +0000
-X-Inumbo-ID: 3107b300-c624-4192-a1af-3c5447eabce5
+ <SRS0=00F7=B6=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1k8mag-00073R-O0
+ for xen-devel@lists.xenproject.org; Thu, 20 Aug 2020 15:34:58 +0000
+X-Inumbo-ID: 8c83216e-21ec-4ccb-b24e-b628c12e5959
 Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 3107b300-c624-4192-a1af-3c5447eabce5;
- Thu, 20 Aug 2020 15:34:53 +0000 (UTC)
+ id 8c83216e-21ec-4ccb-b24e-b628c12e5959;
+ Thu, 20 Aug 2020 15:34:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1597937693;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=GT4Wl/D+4NhzJRaoMf/yM5omzEmXk23J2lRTjZHe4oQ=;
- b=FCOMumPdYLp8pLtNb4+5bZvyV7ojC2u3tS33v4q/IpqYILcOocsvPsKR
- D+o5FmYdkFZCTh8FYDDXUxhsm1P9xrxD/6tJIOrd9xXZqS9c9NN/Ts3lN
- 2eRDXyuv37iCiDdXwuMy9Lv2cfuEPS2KWqkiYRp3mFoLmkm6LgZ7s6Ce4 k=;
+ d=citrix.com; s=securemail; t=1597937698;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=WJLwJ4E/RqhURG/hBP5llvAxz6xHQJx0t50Z8hMyykA=;
+ b=WCEDYnzEoTXZSOMuhn2HDqQuQdL5/Xwttmbc3oIOOU8DHJ7XModaNCE8
+ utIG9Ee8qUZFHDVZ6e0eKfHWSObpl+gqZrdtgp7lxEMGyofw0vmKSn7vC
+ wFnGI1P2bRXHkuHEOHTovjgN68BnWjkjUckiVFsRCLjl0p8zyZvr91m92 o=;
 Authentication-Results: esa6.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: Zt099DJFApclj8vBK3EbxfTbHrLBRGE14BoA8xltKpO25W33zkCj72eV0Olpza91OePjxE0FYW
- OrTPYmIzqH4DtAuz5K3mfPahXSEP/BPgnFGGDjDybb+BpcsToClwNtBXX85H6IBr2+EOojF4kU
- NqaIac/MbMAFXlhhkjCcO0Mz7kzdAjJ7AN6IZWk8iXyV5QyuI/qfBhkDnnRM0o6YOooVYSf8PE
- /cmdeR6IIv6MnhurE8kQOSveVbw6rViWYEgMv9Xpca5LYxkpt1bKCKWm4CE7Tpyjz6nne6M3wC
- Wpo=
+IronPort-SDR: 7/GqR1IFiEvPXxPVgQEfx28s2s+rKv/PM84EFp6gwRXTSYDOTzD4U7W80UxMd+G5frTQnob6i4
+ W44SRlCmnaOY9Of8UdQa9S1pC6wmoAMd0sWhMQXIW/G4oanpFvwYyqzoJd1F4Bc1UMxqBO6VZc
+ lwfgv2EBsv423RkCdCm7afcDA0sk6l9/gEtyhZKHFNz3G8bEe9JGWpDBOwYtMg7CcKXhheHEZq
+ oTHx3YkW4WcVaeIM5RmCxQZC4EsTnI0jugYKhnPZouogsei07ixX17Z8zzgL9AY8IUAc2agRM4
+ JQE=
 X-SBRS: 2.7
-X-MesageID: 25269797
+X-MesageID: 25269809
 X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,333,1592884800"; d="scan'208";a="25269797"
-Date: Thu, 20 Aug 2020 16:34:49 +0100
-From: Anthony PERARD <anthony.perard@citrix.com>
-To: Eduardo Habkost <ehabkost@redhat.com>
-CC: <qemu-devel@nongnu.org>, Paolo Bonzini <pbonzini@redhat.com>, "Daniel P.
- Berrange" <berrange@redhat.com>, Stefano Stabellini <sstabellini@kernel.org>, 
- Paul Durrant <paul@xen.org>, <xen-devel@lists.xenproject.org>
-Subject: Re: [PATCH v2 26/58] xen-legacy-backend: Add missing typedef
- XenLegacyDevice
-Message-ID: <20200820153449.GG2024@perard.uk.xensource.com>
-References: <20200820001236.1284548-1-ehabkost@redhat.com>
- <20200820001236.1284548-27-ehabkost@redhat.com>
+X-IronPort-AV: E=Sophos;i="5.76,333,1592884800"; d="scan'208";a="25269809"
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Roger Pau Monne <roger.pau@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH 0/2] x86/vpic: minor fixes
+Date: Thu, 20 Aug 2020 17:34:40 +0200
+Message-ID: <20200820153442.28305-1-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20200820001236.1284548-27-ehabkost@redhat.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,17 +78,23 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Wed, Aug 19, 2020 at 08:12:04PM -0400, Eduardo Habkost wrote:
-> The typedef was used in the XENBACKEND_DEVICE macro, but it was
-> never defined.  Define the typedef close to the type checking
-> macro.
-> 
-> Signed-off-by: Eduardo Habkost <ehabkost@redhat.com>
+Hello,
 
-Acked-by: Anthony PERARD <anthony.perard@citrix.com>
+This series contains one non-functional change and one small fix for
+pci-passthrough when using the 8259A PIC. I very much doubt anyone has
+done pci-passthrough on guests using the legacy PIC, but nonetheless
+let's aim for it to be correct.
 
-Thanks,
+Thanks, Roger.
+
+Roger Pau Monne (2):
+  x86/vpic: rename irq to pin in vpic_ioport_write
+  x86/vpic: also execute dpci callback for non-specific EOI
+
+ xen/arch/x86/hvm/vpic.c | 24 +++++++++++++-----------
+ 1 file changed, 13 insertions(+), 11 deletions(-)
 
 -- 
-Anthony PERARD
+2.28.0
+
 
