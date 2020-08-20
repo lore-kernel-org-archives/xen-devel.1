@@ -2,72 +2,74 @@ Return-Path: <SRS0=1JDs=B6=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 083B6C433DF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C8ADC433E4
 	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2020 15:35:17 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C83862075E
+	by mail.kernel.org (Postfix) with ESMTPS id C99452086A
 	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2020 15:35:16 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="THk88iUN"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C83862075E
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="FCOMumPd"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C99452086A
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k8mam-00074E-6H; Thu, 20 Aug 2020 15:35:04 +0000
+	id 1k8mad-00073W-L7; Thu, 20 Aug 2020 15:34:55 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=00F7=B6=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1k8mal-00073R-OE
- for xen-devel@lists.xenproject.org; Thu, 20 Aug 2020 15:35:03 +0000
-X-Inumbo-ID: 9b8898ea-4825-4517-87bf-4b598b951f64
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
+ <SRS0=ddnW=B6=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
+ id 1k8mab-00073R-VC
+ for xen-devel@lists.xenproject.org; Thu, 20 Aug 2020 15:34:53 +0000
+X-Inumbo-ID: 3107b300-c624-4192-a1af-3c5447eabce5
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 9b8898ea-4825-4517-87bf-4b598b951f64;
- Thu, 20 Aug 2020 15:35:01 +0000 (UTC)
+ id 3107b300-c624-4192-a1af-3c5447eabce5;
+ Thu, 20 Aug 2020 15:34:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1597937701;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=U6WGOnqz3Y31PJ1a+CdQ2M/flpyDjWIVzqWxfWUCibg=;
- b=THk88iUNW9kSns3UdYpM6Iz1NlLvSBA7PSjC1UGR5ADFWKtrsFMB7GIN
- Qp2hpsTEO+oZNAYZ1fP7HkYP/A625vpZC+7R4TP7gs61IeqEHt9reUo1d
- xepZbxzYcv/2FLEyPOMmWnvL01z0ak4w8btlDwvct2NuCkeQJ1f+KGU2r 8=;
-Authentication-Results: esa1.hc3370-68.iphmx.com;
+ d=citrix.com; s=securemail; t=1597937693;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=GT4Wl/D+4NhzJRaoMf/yM5omzEmXk23J2lRTjZHe4oQ=;
+ b=FCOMumPdYLp8pLtNb4+5bZvyV7ojC2u3tS33v4q/IpqYILcOocsvPsKR
+ D+o5FmYdkFZCTh8FYDDXUxhsm1P9xrxD/6tJIOrd9xXZqS9c9NN/Ts3lN
+ 2eRDXyuv37iCiDdXwuMy9Lv2cfuEPS2KWqkiYRp3mFoLmkm6LgZ7s6Ce4 k=;
+Authentication-Results: esa6.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: xsKwCJi0O0w1LKtGM6gY/azk4WpIgM5Q/e4prcz7IUT7v46inmjKq/CSHYnO5w64i4B/hyIQPZ
- G2P7mmK0XZ4q+ha/oxUmYylbQUQqVXJwQcwmhviLeU7/TOH19lvCXfxMKKKtkL8Fwqym6oyyvP
- 5lceyWawwnnoCTEpBFezApExCfFcpxa2aXEaMIkQdMB2M2PKk/J66TEBcZWziXd3sDeLJOP34W
- P9CbHG1A3zhVMocpztf8Ex6jCP79qzCF81FUrbF8fBv6aqrYZaq4ChHDgepAYdTGIOvk952mAf
- J+E=
+IronPort-SDR: Zt099DJFApclj8vBK3EbxfTbHrLBRGE14BoA8xltKpO25W33zkCj72eV0Olpza91OePjxE0FYW
+ OrTPYmIzqH4DtAuz5K3mfPahXSEP/BPgnFGGDjDybb+BpcsToClwNtBXX85H6IBr2+EOojF4kU
+ NqaIac/MbMAFXlhhkjCcO0Mz7kzdAjJ7AN6IZWk8iXyV5QyuI/qfBhkDnnRM0o6YOooVYSf8PE
+ /cmdeR6IIv6MnhurE8kQOSveVbw6rViWYEgMv9Xpca5LYxkpt1bKCKWm4CE7Tpyjz6nne6M3wC
+ Wpo=
 X-SBRS: 2.7
-X-MesageID: 25294991
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 25269797
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,333,1592884800"; d="scan'208";a="25294991"
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Roger Pau Monne <roger.pau@citrix.com>, Jan Beulich <jbeulich@suse.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH 1/2] x86/vpic: rename irq to pin in vpic_ioport_write
-Date: Thu, 20 Aug 2020 17:34:41 +0200
-Message-ID: <20200820153442.28305-2-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20200820153442.28305-1-roger.pau@citrix.com>
-References: <20200820153442.28305-1-roger.pau@citrix.com>
+X-IronPort-AV: E=Sophos;i="5.76,333,1592884800"; d="scan'208";a="25269797"
+Date: Thu, 20 Aug 2020 16:34:49 +0100
+From: Anthony PERARD <anthony.perard@citrix.com>
+To: Eduardo Habkost <ehabkost@redhat.com>
+CC: <qemu-devel@nongnu.org>, Paolo Bonzini <pbonzini@redhat.com>, "Daniel P.
+ Berrange" <berrange@redhat.com>, Stefano Stabellini <sstabellini@kernel.org>, 
+ Paul Durrant <paul@xen.org>, <xen-devel@lists.xenproject.org>
+Subject: Re: [PATCH v2 26/58] xen-legacy-backend: Add missing typedef
+ XenLegacyDevice
+Message-ID: <20200820153449.GG2024@perard.uk.xensource.com>
+References: <20200820001236.1284548-1-ehabkost@redhat.com>
+ <20200820001236.1284548-27-ehabkost@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20200820001236.1284548-27-ehabkost@redhat.com>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,70 +83,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-The irq variable is wrongly named, as it's used to store the pin on
-the 8259 chip, but not the global irq value. While renaming reduce
-it's scope and make it unsigned.
+On Wed, Aug 19, 2020 at 08:12:04PM -0400, Eduardo Habkost wrote:
+> The typedef was used in the XENBACKEND_DEVICE macro, but it was
+> never defined.  Define the typedef close to the type checking
+> macro.
+> 
+> Signed-off-by: Eduardo Habkost <ehabkost@redhat.com>
 
-No functional change intended.
+Acked-by: Anthony PERARD <anthony.perard@citrix.com>
 
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
- xen/arch/x86/hvm/vpic.c | 18 ++++++++++--------
- 1 file changed, 10 insertions(+), 8 deletions(-)
+Thanks,
 
-diff --git a/xen/arch/x86/hvm/vpic.c b/xen/arch/x86/hvm/vpic.c
-index 936c7b27c6..feb1db2ee3 100644
---- a/xen/arch/x86/hvm/vpic.c
-+++ b/xen/arch/x86/hvm/vpic.c
-@@ -184,7 +184,7 @@ static int vpic_intack(struct hvm_hw_vpic *vpic)
- static void vpic_ioport_write(
-     struct hvm_hw_vpic *vpic, uint32_t addr, uint32_t val)
- {
--    int priority, cmd, irq;
-+    int priority, cmd;
-     uint8_t mask, unmasked = 0;
- 
-     vpic_lock(vpic);
-@@ -230,6 +230,8 @@ static void vpic_ioport_write(
-         }
-         else
-         {
-+            unsigned int pin;
-+
-             /* OCW2 */
-             cmd = val >> 5;
-             switch ( cmd )
-@@ -246,22 +248,22 @@ static void vpic_ioport_write(
-                 priority = vpic_get_priority(vpic, mask);
-                 if ( priority == VPIC_PRIO_NONE )
-                     break;
--                irq = (priority + vpic->priority_add) & 7;
--                vpic->isr &= ~(1 << irq);
-+                pin = (priority + vpic->priority_add) & 7;
-+                vpic->isr &= ~(1 << pin);
-                 if ( cmd == 5 )
--                    vpic->priority_add = (irq + 1) & 7;
-+                    vpic->priority_add = (pin + 1) & 7;
-                 break;
-             case 3: /* Specific EOI                */
-             case 7: /* Specific EOI & Rotate       */
--                irq = val & 7;
--                vpic->isr &= ~(1 << irq);
-+                pin = val & 7;
-+                vpic->isr &= ~(1 << pin);
-                 if ( cmd == 7 )
--                    vpic->priority_add = (irq + 1) & 7;
-+                    vpic->priority_add = (pin + 1) & 7;
-                 /* Release lock and EOI the physical interrupt (if any). */
-                 vpic_update_int_output(vpic);
-                 vpic_unlock(vpic);
-                 hvm_dpci_eoi(current->domain,
--                             hvm_isa_irq_to_gsi((addr >> 7) ? (irq|8) : irq),
-+                             hvm_isa_irq_to_gsi((addr >> 7) ? (pin | 8) : pin),
-                              NULL);
-                 return; /* bail immediately */
-             case 6: /* Set Priority                */
 -- 
-2.28.0
-
+Anthony PERARD
 
