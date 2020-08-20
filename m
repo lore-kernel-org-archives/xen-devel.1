@@ -2,68 +2,70 @@ Return-Path: <SRS0=1JDs=B6=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9996AC433E8
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2020 15:09:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8E01CC433ED
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2020 15:09:55 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 651C1208C7
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2020 15:09:48 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 55DD3208C7
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2020 15:09:55 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="Jp/jXHXB"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 651C1208C7
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="G/IM78Wz"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 55DD3208C7
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k8mBw-0003ll-Ue; Thu, 20 Aug 2020 15:09:24 +0000
+	id 1k8mCH-0003sm-IL; Thu, 20 Aug 2020 15:09:45 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=00F7=B6=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1k8mBw-0003lg-84
- for xen-devel@lists.xenproject.org; Thu, 20 Aug 2020 15:09:24 +0000
-X-Inumbo-ID: f1917742-2aa1-4be3-b516-971bce180aa2
+ id 1k8mCG-0003lg-2P
+ for xen-devel@lists.xenproject.org; Thu, 20 Aug 2020 15:09:44 +0000
+X-Inumbo-ID: 33fd808e-749d-48f2-b6d2-da44e8b11909
 Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id f1917742-2aa1-4be3-b516-971bce180aa2;
- Thu, 20 Aug 2020 15:09:23 +0000 (UTC)
+ id 33fd808e-749d-48f2-b6d2-da44e8b11909;
+ Thu, 20 Aug 2020 15:09:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1597936162;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=wiZ0iNtUz8Uj2XL5L9742gj0111CrDtbYBS4ycUdLXU=;
- b=Jp/jXHXBlxWXvHNKBj9QNuACGladRnnHF16UfDByvOCpW73PL5EsWemK
- bSvxJGDpxvlEoKICMCzPom/sNQOiFpX2DfdXGRdDqi4pRE6ELu1xRbgUr
- jdHLmFKGdFiUaXqEKyGWSErkW+OwlksMSG+W45QVMGONSXvl4xkP88EDA s=;
+ d=citrix.com; s=securemail; t=1597936173;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=DgPYrIn2ueyNZtkxRfEph5bavhTq242QMrgpf1Jrbio=;
+ b=G/IM78WzGbom0pfPBqc1d5+KI6JIRyl8PKTJQydrWfvvXgBvYBmBqrIe
+ XwMLoTPNsoXsjS8h+xSJbXXIrBd6l6pLdJ0f5KaOQn6rbTKz2N09+EJGN
+ Pyf9UhdOvrHsQrToCH1h9J6oGC0aQdmWZ+eCY8JE0OKOv4k5TAJP0kvOV Y=;
 Authentication-Results: esa6.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: p9pcAjzD5bVOJg0JuvvvRjMFNP9gH4/sSZG4aWX5I96GaH3yKTkO9uroBENPArZdCHmIKTSo+0
- E1uBtMlcbW8a8WHRrWDlv3Qusb2yrFfC/DrqL9MuXv4IPNK2ozjGEDrXemBOci0mBtQTq80K4q
- 67lwTiZcq0I+zsODlQTXffUb8RwqwfrNAuavxDTfH3pyyUK9L1Uj4NfxM/fP1IXw9yyiiq5Z+v
- /PQHucfZZi4q0J6RFi0QYxKEi2Tw/0qQifSlyQjUqOheg/bbKD43EMuw5ulRWgFnVkHhsO87VA
- +0U=
+IronPort-SDR: z+vuYppG4zblNgHYnqXoqB9apxIWoO1kbkdRKj1Verxge6DD/1PqsHw2Tc+S3IlLv4FK1CfGBE
+ t1R7zSuTjMI3xvQSZx0LiIjW74Qu2tgAkTwhH9a75mk8+8BvXdvSzbHKflZh14/Vgmsp6jJP76
+ XC75oxk1vWsdTtYYCjuEX480Dh/4B33IH3Av/drft/Xpj2ACiExWMOxK+SRg+VB8bC7tY3gxqO
+ Wx5MEYs+830o08UgL9rVFPUPzp4Tg/wizob8nDurDyPSq6AWg7wQcqaOWpH4iRMSYh2Du11bLl
+ xew=
 X-SBRS: 2.7
-X-MesageID: 25266651
+X-MesageID: 25266665
 X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,333,1592884800"; d="scan'208";a="25266651"
+X-IronPort-AV: E=Sophos;i="5.76,333,1592884800"; d="scan'208";a="25266665"
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Roger Pau Monne <roger.pau@citrix.com>, Jun Nakajima
  <jun.nakajima@intel.com>, Kevin Tian <kevin.tian@intel.com>, Jan Beulich
  <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu
  <wl@xen.org>
-Subject: [PATCH v2 0/8] x86: switch default MSR behavior
-Date: Thu, 20 Aug 2020 17:08:27 +0200
-Message-ID: <20200820150835.27440-1-roger.pau@citrix.com>
+Subject: [PATCH v2 5/8] x86/pv: allow reading FEATURE_CONTROL MSR
+Date: Thu, 20 Aug 2020 17:08:32 +0200
+Message-ID: <20200820150835.27440-6-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.28.0
+In-Reply-To: <20200820150835.27440-1-roger.pau@citrix.com>
+References: <20200820150835.27440-1-roger.pau@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
@@ -80,38 +82,69 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Hello,
+Linux PV guests will attempt to read the FEATURE_CONTROL MSR, so move
+the handling done in VMX code into guest_rdmsr as it can be shared
+between PV and HVM guests that way.
 
-The current series attempts to change the current MSR default handling
-behavior, which is to silently drop writes to writable MSRs, and allow
-reading any MSR not explicitly handled.
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+Changes from v1:
+ - Move the VMX implementation into guest_rdmsr.
+---
+ xen/arch/x86/hvm/vmx/vmx.c |  8 +-------
+ xen/arch/x86/msr.c         | 13 +++++++++++++
+ 2 files changed, 14 insertions(+), 7 deletions(-)
 
-After this series access to MSRs not explicitly handled will trigger a
-#GP fault. I've tested this series with osstest and it doesn't introduce
-any regression, at least on the boxes selected for testing:
-
-http://logs.test-lab.xenproject.org/osstest/logs/152630/
-
-Thanks, Roger.
-
-Andrew Cooper (2):
-  x86/hvm: Disallow access to unknown MSRs
-  x86/msr: Drop compatibility #GP handling in guest_{rd,wr}msr()
-
-Roger Pau Monne (6):
-  x86/vmx: handle writes to MISC_ENABLE MSR
-  x86/svm: silently drop writes to SYSCFG and related MSRs
-  x86/msr: explicitly handle AMD DE_CFG
-  x86/svm: drop writes to BU_CFG on revF chips
-  x86/pv: allow reading FEATURE_CONTROL MSR
-  x86/pv: disallow access to unknown MSRs
-
- xen/arch/x86/hvm/svm/svm.c     | 38 ++++++++++++++----
- xen/arch/x86/hvm/vmx/vmx.c     | 31 ++++++---------
- xen/arch/x86/msr.c             | 71 +++++++++++++---------------------
- xen/arch/x86/pv/emul-priv-op.c | 18 +++++----
- 4 files changed, 79 insertions(+), 79 deletions(-)
-
+diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
+index 4717e50d4a..f6657af923 100644
+--- a/xen/arch/x86/hvm/vmx/vmx.c
++++ b/xen/arch/x86/hvm/vmx/vmx.c
+@@ -2980,13 +2980,7 @@ static int vmx_msr_read_intercept(unsigned int msr, uint64_t *msr_content)
+     case MSR_IA32_DEBUGCTLMSR:
+         __vmread(GUEST_IA32_DEBUGCTL, msr_content);
+         break;
+-    case MSR_IA32_FEATURE_CONTROL:
+-        *msr_content = IA32_FEATURE_CONTROL_LOCK;
+-        if ( vmce_has_lmce(curr) )
+-            *msr_content |= IA32_FEATURE_CONTROL_LMCE_ON;
+-        if ( nestedhvm_enabled(curr->domain) )
+-            *msr_content |= IA32_FEATURE_CONTROL_ENABLE_VMXON_OUTSIDE_SMX;
+-        break;
++
+     case MSR_IA32_VMX_BASIC...MSR_IA32_VMX_VMFUNC:
+         if ( !nvmx_msr_read_intercept(msr, msr_content) )
+             goto gp_fault;
+diff --git a/xen/arch/x86/msr.c b/xen/arch/x86/msr.c
+index a890cb9976..bb0dd5ff0a 100644
+--- a/xen/arch/x86/msr.c
++++ b/xen/arch/x86/msr.c
+@@ -25,6 +25,7 @@
+ #include <xen/sched.h>
+ 
+ #include <asm/debugreg.h>
++#include <asm/hvm/nestedhvm.h>
+ #include <asm/hvm/viridian.h>
+ #include <asm/msr.h>
+ #include <asm/setup.h>
+@@ -181,6 +182,18 @@ int guest_rdmsr(struct vcpu *v, uint32_t msr, uint64_t *val)
+         /* Not offered to guests. */
+         goto gp_fault;
+ 
++    case MSR_IA32_FEATURE_CONTROL:
++        if ( !(cp->x86_vendor & X86_VENDOR_INTEL) )
++            goto gp_fault;
++
++        *val = IA32_FEATURE_CONTROL_LOCK;
++        if ( vmce_has_lmce(v) )
++            *val |= IA32_FEATURE_CONTROL_LMCE_ON;
++        if ( nestedhvm_enabled(d) )
++            *val |= IA32_FEATURE_CONTROL_ENABLE_VMXON_OUTSIDE_SMX;
++        break;
++
++
+     case MSR_IA32_PLATFORM_ID:
+         if ( !(cp->x86_vendor & X86_VENDOR_INTEL) ||
+              !(boot_cpu_data.x86_vendor & X86_VENDOR_INTEL) )
 -- 
 2.28.0
 
