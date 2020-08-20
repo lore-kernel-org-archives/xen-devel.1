@@ -7,65 +7,64 @@ X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9C31CC433E3
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2020 15:10:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 083B6C433DF
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2020 15:35:17 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 65ABD20FC3
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2020 15:10:05 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id C83862075E
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Aug 2020 15:35:16 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="FLLQf6MN"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 65ABD20FC3
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="THk88iUN"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C83862075E
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k8mCR-0003zE-B7; Thu, 20 Aug 2020 15:09:55 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1k8mam-00074E-6H; Thu, 20 Aug 2020 15:35:04 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=00F7=B6=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1k8mCQ-0003lg-2a
- for xen-devel@lists.xenproject.org; Thu, 20 Aug 2020 15:09:54 +0000
-X-Inumbo-ID: 9b9d86af-17a7-4d72-a21f-c75d8547d178
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9b9d86af-17a7-4d72-a21f-c75d8547d178;
- Thu, 20 Aug 2020 15:09:40 +0000 (UTC)
+ id 1k8mal-00073R-OE
+ for xen-devel@lists.xenproject.org; Thu, 20 Aug 2020 15:35:03 +0000
+X-Inumbo-ID: 9b8898ea-4825-4517-87bf-4b598b951f64
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 9b8898ea-4825-4517-87bf-4b598b951f64;
+ Thu, 20 Aug 2020 15:35:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1597936180;
+ d=citrix.com; s=securemail; t=1597937701;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=u63m2tXhuuAu/gd/zkG4g8sb+Z+3RgZGzbLxlSgXxBo=;
- b=FLLQf6MNAmDy3kbMwrc49GPRFtRK+OR72K5NZ5F/l1fXmfNDEpeRGPny
- 0euUCjH34cNgfmpDBoKqLo0L3T7JkrLVoOPm0KInOF01uRGJTF6x1c1AA
- bTdZEM9QZwxSPoGd0n6G6OeKdT9MihoF+KKJ4nj6TVuIY9caxPc1UFaOq E=;
-Authentication-Results: esa5.hc3370-68.iphmx.com;
+ bh=U6WGOnqz3Y31PJ1a+CdQ2M/flpyDjWIVzqWxfWUCibg=;
+ b=THk88iUNW9kSns3UdYpM6Iz1NlLvSBA7PSjC1UGR5ADFWKtrsFMB7GIN
+ Qp2hpsTEO+oZNAYZ1fP7HkYP/A625vpZC+7R4TP7gs61IeqEHt9reUo1d
+ xepZbxzYcv/2FLEyPOMmWnvL01z0ak4w8btlDwvct2NuCkeQJ1f+KGU2r 8=;
+Authentication-Results: esa1.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: UE5O4/bvrPO/wv6B7XMDrVbV0sbAZ/kXCKUsOfw6/1lDaYcLKz2Sdy4k5yZr/ZSMdlcWtOl4iV
- qKor7pxl+zI/EYgrSrH7XTRTJ9w8bgZJvitq8wWnyxZQ0w0GKupz0kBuGAhELMASFCmp9G9KhT
- EOTfkpPKrzb5aGcxj1A2fQhMYmcAZBpwKSNY4Pt30sNbjG2qqj902Uo4RLUN6vlRqwGKInbdZ1
- dZIThQ07DymCgvxh1PB6J5xHBE2zoqZjPAl1T5bJur2LwF3T79vbIJM3Hjqc3qw0ktsh2mOgEM
- yBI=
+IronPort-SDR: xsKwCJi0O0w1LKtGM6gY/azk4WpIgM5Q/e4prcz7IUT7v46inmjKq/CSHYnO5w64i4B/hyIQPZ
+ G2P7mmK0XZ4q+ha/oxUmYylbQUQqVXJwQcwmhviLeU7/TOH19lvCXfxMKKKtkL8Fwqym6oyyvP
+ 5lceyWawwnnoCTEpBFezApExCfFcpxa2aXEaMIkQdMB2M2PKk/J66TEBcZWziXd3sDeLJOP34W
+ P9CbHG1A3zhVMocpztf8Ex6jCP79qzCF81FUrbF8fBv6aqrYZaq4ChHDgepAYdTGIOvk952mAf
+ J+E=
 X-SBRS: 2.7
-X-MesageID: 25108129
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 25294991
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,333,1592884800"; d="scan'208";a="25108129"
+X-IronPort-AV: E=Sophos;i="5.76,333,1592884800"; d="scan'208";a="25294991"
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
- <jbeulich@suse.com>, Wei Liu <wl@xen.org>,
- =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v2 8/8] x86/msr: Drop compatibility #GP handling in guest_{rd,
- wr}msr()
-Date: Thu, 20 Aug 2020 17:08:35 +0200
-Message-ID: <20200820150835.27440-9-roger.pau@citrix.com>
+CC: Roger Pau Monne <roger.pau@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH 1/2] x86/vpic: rename irq to pin in vpic_ioport_write
+Date: Thu, 20 Aug 2020 17:34:41 +0200
+Message-ID: <20200820153442.28305-2-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20200820150835.27440-1-roger.pau@citrix.com>
-References: <20200820150835.27440-1-roger.pau@citrix.com>
+In-Reply-To: <20200820153442.28305-1-roger.pau@citrix.com>
+References: <20200820153442.28305-1-roger.pau@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
@@ -82,84 +81,69 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: Andrew Cooper <andrew.cooper3@citrix.com>
+The irq variable is wrongly named, as it's used to store the pin on
+the 8259 chip, but not the global irq value. While renaming reduce
+it's scope and make it unsigned.
 
-Now that the main PV/HVM MSR handlers raise #GP for all unknown MSRs, there is
-no need to special case these MSRs any more.
+No functional change intended.
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
-Changes since v1:
- - New in this version.
----
- xen/arch/x86/msr.c | 46 ----------------------------------------------
- 1 file changed, 46 deletions(-)
+ xen/arch/x86/hvm/vpic.c | 18 ++++++++++--------
+ 1 file changed, 10 insertions(+), 8 deletions(-)
 
-diff --git a/xen/arch/x86/msr.c b/xen/arch/x86/msr.c
-index bb0dd5ff0a..560719c2aa 100644
---- a/xen/arch/x86/msr.c
-+++ b/xen/arch/x86/msr.c
-@@ -159,29 +159,6 @@ int guest_rdmsr(struct vcpu *v, uint32_t msr, uint64_t *val)
+diff --git a/xen/arch/x86/hvm/vpic.c b/xen/arch/x86/hvm/vpic.c
+index 936c7b27c6..feb1db2ee3 100644
+--- a/xen/arch/x86/hvm/vpic.c
++++ b/xen/arch/x86/hvm/vpic.c
+@@ -184,7 +184,7 @@ static int vpic_intack(struct hvm_hw_vpic *vpic)
+ static void vpic_ioport_write(
+     struct hvm_hw_vpic *vpic, uint32_t addr, uint32_t val)
+ {
+-    int priority, cmd, irq;
++    int priority, cmd;
+     uint8_t mask, unmasked = 0;
  
-     switch ( msr )
-     {
--    case MSR_AMD_PATCHLOADER:
--    case MSR_IA32_UCODE_WRITE:
--    case MSR_PRED_CMD:
--    case MSR_FLUSH_CMD:
--        /* Write-only */
--    case MSR_TEST_CTRL:
--    case MSR_CORE_CAPABILITIES:
--    case MSR_TSX_FORCE_ABORT:
--    case MSR_TSX_CTRL:
--    case MSR_MCU_OPT_CTRL:
--    case MSR_RTIT_OUTPUT_BASE ... MSR_RTIT_ADDR_B(7):
--    case MSR_U_CET:
--    case MSR_S_CET:
--    case MSR_PL0_SSP ... MSR_INTERRUPT_SSP_TABLE:
--    case MSR_AMD64_LWP_CFG:
--    case MSR_AMD64_LWP_CBADDR:
--    case MSR_PPIN_CTL:
--    case MSR_PPIN:
--    case MSR_AMD_PPIN_CTL:
--    case MSR_AMD_PPIN:
--        /* Not offered to guests. */
--        goto gp_fault;
--
-     case MSR_IA32_FEATURE_CONTROL:
-         if ( !(cp->x86_vendor & X86_VENDOR_INTEL) )
-             goto gp_fault;
-@@ -349,29 +326,6 @@ int guest_wrmsr(struct vcpu *v, uint32_t msr, uint64_t val)
-     {
-         uint64_t rsvd;
- 
--    case MSR_IA32_PLATFORM_ID:
--    case MSR_CORE_CAPABILITIES:
--    case MSR_INTEL_CORE_THREAD_COUNT:
--    case MSR_INTEL_PLATFORM_INFO:
--    case MSR_ARCH_CAPABILITIES:
--        /* Read-only */
--    case MSR_TEST_CTRL:
--    case MSR_TSX_FORCE_ABORT:
--    case MSR_TSX_CTRL:
--    case MSR_MCU_OPT_CTRL:
--    case MSR_RTIT_OUTPUT_BASE ... MSR_RTIT_ADDR_B(7):
--    case MSR_U_CET:
--    case MSR_S_CET:
--    case MSR_PL0_SSP ... MSR_INTERRUPT_SSP_TABLE:
--    case MSR_AMD64_LWP_CFG:
--    case MSR_AMD64_LWP_CBADDR:
--    case MSR_PPIN_CTL:
--    case MSR_PPIN:
--    case MSR_AMD_PPIN_CTL:
--    case MSR_AMD_PPIN:
--        /* Not offered to guests. */
--        goto gp_fault;
--
-     case MSR_AMD_PATCHLEVEL:
-         BUILD_BUG_ON(MSR_IA32_UCODE_REV != MSR_AMD_PATCHLEVEL);
-         /*
+     vpic_lock(vpic);
+@@ -230,6 +230,8 @@ static void vpic_ioport_write(
+         }
+         else
+         {
++            unsigned int pin;
++
+             /* OCW2 */
+             cmd = val >> 5;
+             switch ( cmd )
+@@ -246,22 +248,22 @@ static void vpic_ioport_write(
+                 priority = vpic_get_priority(vpic, mask);
+                 if ( priority == VPIC_PRIO_NONE )
+                     break;
+-                irq = (priority + vpic->priority_add) & 7;
+-                vpic->isr &= ~(1 << irq);
++                pin = (priority + vpic->priority_add) & 7;
++                vpic->isr &= ~(1 << pin);
+                 if ( cmd == 5 )
+-                    vpic->priority_add = (irq + 1) & 7;
++                    vpic->priority_add = (pin + 1) & 7;
+                 break;
+             case 3: /* Specific EOI                */
+             case 7: /* Specific EOI & Rotate       */
+-                irq = val & 7;
+-                vpic->isr &= ~(1 << irq);
++                pin = val & 7;
++                vpic->isr &= ~(1 << pin);
+                 if ( cmd == 7 )
+-                    vpic->priority_add = (irq + 1) & 7;
++                    vpic->priority_add = (pin + 1) & 7;
+                 /* Release lock and EOI the physical interrupt (if any). */
+                 vpic_update_int_output(vpic);
+                 vpic_unlock(vpic);
+                 hvm_dpci_eoi(current->domain,
+-                             hvm_isa_irq_to_gsi((addr >> 7) ? (irq|8) : irq),
++                             hvm_isa_irq_to_gsi((addr >> 7) ? (pin | 8) : pin),
+                              NULL);
+                 return; /* bail immediately */
+             case 6: /* Set Priority                */
 -- 
 2.28.0
 
