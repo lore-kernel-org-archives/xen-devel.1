@@ -7,84 +7,86 @@ X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 363FDC433E3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B0AA6C433DF
 	for <xen-devel@archiver.kernel.org>; Fri, 21 Aug 2020 02:26:44 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0AAE620732
+	by mail.kernel.org (Postfix) with ESMTPS id 85A6320732
 	for <xen-devel@archiver.kernel.org>; Fri, 21 Aug 2020 02:26:44 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="CryCUTKa";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="TuwW+F3T"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0AAE620732
+	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="u83GoZD7";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="uYI8PYXm"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 85A6320732
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k8wlH-0004zb-3Z; Fri, 21 Aug 2020 02:26:35 +0000
+	id 1k8wlF-0004wY-DL; Fri, 21 Aug 2020 02:26:33 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=z7lF=B7=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1k8wck-0002BQ-Us
- for xen-devel@lists.xenproject.org; Fri, 21 Aug 2020 02:17:46 +0000
-X-Inumbo-ID: 1516bde5-25be-4c60-87e5-75077a178c53
+ id 1k8wcz-0002BQ-VT
+ for xen-devel@lists.xenproject.org; Fri, 21 Aug 2020 02:18:01 +0000
+X-Inumbo-ID: 7975cab2-7ca2-48a7-afd2-ccd74e7ec5da
 Received: from galois.linutronix.de (unknown [193.142.43.55])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 1516bde5-25be-4c60-87e5-75077a178c53;
- Fri, 21 Aug 2020 02:17:05 +0000 (UTC)
-Message-Id: <20200821002947.373714034@linutronix.de>
+ id 7975cab2-7ca2-48a7-afd2-ccd74e7ec5da;
+ Fri, 21 Aug 2020 02:17:10 +0000 (UTC)
+Message-Id: <20200821002947.775455439@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1597976224;
+ s=2020; t=1597976229;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=reYnyh7jh+yv1GDoiXq7RNM83WC+1VYQVpYCVOOTMoA=;
- b=CryCUTKazFP6s599DZ8seDe98Lq3ytoT7AnXMnvl0MqK5auZjh7l7ev5Glpg3b2Jaf6LEd
- KB3L9RvTDX7Frs5Tgaj5q+40l6HQs+gI/8imc31WFyKqizOYD3QqETg6VrllcsdXOSr6KO
- hU7V3fUx+wqM7A2G6+e0aMQJCTz0aN3XsHqd2ie+W4Rtqnl31nsOhv+QzsiDMyKycxlWrp
- xwWzmd6VV0DuDyEmFbD7F3Iq+vSy7gNyhX4acto/HkvlgSpceqArTg8iKn9Yw0vSrU4QZn
- lxUXRue9tJbWEPgnLjNYtnS/hsq7zQauzhBY2BQg3GR0q9zfgAvnhRAdAQsfJw==
+ bh=5rm8mQE6Z9mzP1/Hjhj/ozCQldgRwMSJG8h+qhJlUXA=;
+ b=u83GoZD7MYm1uxfJ39lk5U5vQF2a+dUEFcGURH/CfalKLcghkdDrT1n2jjBPck0+r2r1I1
+ DlGtNwEHaNgPTtqkrCx1GlqSrmUcZSeeP6A3ZpdUX+DF+VxxpHrHIqJCPm/1k7z5AvZmSr
+ +CelVad8Y/oRsxD+lP0cgDORIAsgRCYAG52SkufeR5G4K4lop9+ReQpKwlposJ+pXXS6t2
+ GUGBkn8g9w2yjmj7G6ZjLgL8A67sysaVJbmknShDj43aTG6ukY4oATY42lmry9TvhkJqmx
+ zqps7udq3hQ53fB/cTXpOgS1wmOL33SDUr+ameR3IGL+83fHLLPHHpuaSNVxJA==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1597976224;
+ s=2020e; t=1597976229;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=reYnyh7jh+yv1GDoiXq7RNM83WC+1VYQVpYCVOOTMoA=;
- b=TuwW+F3TicX0d31PeQeYxQl6anEIOdzcRuaGCUNWyZvMzGJVHaQ3q0eAgvoOznLCzeI2Is
- M1MxM4FYQTvFykAQ==
-Date: Fri, 21 Aug 2020 02:24:45 +0200
+ bh=5rm8mQE6Z9mzP1/Hjhj/ozCQldgRwMSJG8h+qhJlUXA=;
+ b=uYI8PYXm9tBwGXdQfjD44Lqs0sQhcrFf16gEzewh5ZbvPbY0jEqTtygLqwx2S0Ur6ouQqD
+ XhZKak8nvK3ezlDw==
+Date: Fri, 21 Aug 2020 02:24:49 +0200
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
-Cc: x86@kernel.org, Bjorn Helgaas <bhelgaas@google.com>,
- linux-pci@vger.kernel.org, Joerg Roedel <joro@8bytes.org>,
- iommu@lists.linux-foundation.org, linux-hyperv@vger.kernel.org,
- Haiyang Zhang <haiyangz@microsoft.com>,
+Cc: x86@kernel.org, Marc Zyngier <maz@kernel.org>,
+ Joerg Roedel <joro@8bytes.org>, iommu@lists.linux-foundation.org,
+ linux-hyperv@vger.kernel.org, Haiyang Zhang <haiyangz@microsoft.com>,
  Jon Derrick <jonathan.derrick@intel.com>,
  Lu Baolu <baolu.lu@linux.intel.com>, Wei Liu <wei.liu@kernel.org>,
  "K. Y. Srinivasan" <kys@microsoft.com>,
  Stephen Hemminger <sthemmin@microsoft.com>,
  Steve Wahl <steve.wahl@hpe.com>, Dimitri Sivanich <sivanich@hpe.com>,
- Russ Anderson <rja@hpe.com>, Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
+ Russ Anderson <rja@hpe.com>, linux-pci@vger.kernel.org,
+ Bjorn Helgaas <bhelgaas@google.com>,
+ Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
  Jonathan Derrick <jonathan.derrick@intel.com>,
  Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
  xen-devel@lists.xenproject.org, Juergen Gross <jgross@suse.com>,
  Boris Ostrovsky <boris.ostrovsky@oracle.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Marc Zyngier <maz@kernel.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
  "Rafael J. Wysocki" <rafael@kernel.org>, Megha Dey <megha.dey@intel.com>,
  Jason Gunthorpe <jgg@mellanox.com>, Dave Jiang <dave.jiang@intel.com>,
  Alex Williamson <alex.williamson@redhat.com>,
  Jacob Pan <jacob.jun.pan@intel.com>, Baolu Lu <baolu.lu@intel.com>,
  Kevin Tian <kevin.tian@intel.com>, Dan Williams <dan.j.williams@intel.com>
-Subject: [patch RFC 21/38] PCI: MSI: Provide pci_dev_has_special_msi_domain()
- helper
+Subject: [patch RFC 25/38] irqdomain/msi: Allow to override
+ msi_domain_alloc/free_irqs()
 References: <20200821002424.119492231@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Disposition: inline;
- filename="genirq-msi--Provide-pci_dev_has_special_msi_domain"
+ filename*0*=utf-8''irqdomain-msi--Allow-to-override-msi_domain_alloc-free_ir; 
+ filename*1*=qs--.patch
 Content-transfer-encoding: 8-bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -99,57 +101,201 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Provide a helper function to check whether a PCI device is handled by a
-non-standard PCI/MSI domain. This will be used to exclude such devices
-which hang of a special bus, e.g. VMD, to be excluded from the irq domain
-override in irq remapping.
+To support MSI irq domains which do not fit at all into the regular MSI
+irqdomain scheme, like the XEN MSI interrupt management for PV/HVM/DOM0,
+it's necessary to allow to override the alloc/free implementation.
+
+This is a preperatory step to switch X86 away from arch_*_msi_irqs() and
+store the irq domain pointer right in struct device.
+
+No functional change for existing MSI irq domain users.
+
+Aside of the evil XEN wrapper this is also useful for special MSI domains
+which need to do extra alloc/free work before/after calling the generic
+core function. Work like allocating/freeing MSI descriptors, MSI storage
+space etc.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-Cc: Bjorn Helgaas <bhelgaas@google.com>
-Cc: linux-pci@vger.kernel.org
+Cc: Marc Zyngier <maz@kernel.org>
 ---
- drivers/pci/msi.c   |   22 ++++++++++++++++++++++
- include/linux/msi.h |    1 +
- 2 files changed, 23 insertions(+)
+ include/linux/msi.h |   27 ++++++++++++++++++++
+ kernel/irq/msi.c    |   70 +++++++++++++++++++++++++++++++++++-----------------
+ 2 files changed, 75 insertions(+), 22 deletions(-)
 
---- a/drivers/pci/msi.c
-+++ b/drivers/pci/msi.c
-@@ -1553,4 +1553,26 @@ struct irq_domain *pci_msi_get_device_do
- 					     DOMAIN_BUS_PCI_MSI);
- 	return dom;
- }
-+
-+/**
-+ * pci_dev_has_special_msi_domain - Check whether the device is handled by
-+ *				    a non-standard PCI-MSI domain
-+ * @pdev:	The PCI device to check.
-+ *
-+ * Returns: True if the device irqdomain or the bus irqdomain is
-+ * non-standard PCI/MSI.
-+ */
-+bool pci_dev_has_special_msi_domain(struct pci_dev *pdev)
-+{
-+	struct irq_domain *dom = dev_get_msi_domain(&pdev->dev);
-+
-+	if (!dom)
-+		dom = dev_get_msi_domain(&pdev->bus->dev);
-+
-+	if (!dom)
-+		return true;
-+
-+	return dom->bus_token != DOMAIN_BUS_PCI_MSI;
-+}
-+
- #endif /* CONFIG_PCI_MSI_IRQ_DOMAIN */
 --- a/include/linux/msi.h
 +++ b/include/linux/msi.h
-@@ -374,6 +374,7 @@ int pci_msi_domain_check_cap(struct irq_
- 			     struct msi_domain_info *info, struct device *dev);
- u32 pci_msi_domain_get_msi_rid(struct irq_domain *domain, struct pci_dev *pdev);
- struct irq_domain *pci_msi_get_device_domain(struct pci_dev *pdev);
-+bool pci_dev_has_special_msi_domain(struct pci_dev *pdev);
- #else
- static inline struct irq_domain *pci_msi_get_device_domain(struct pci_dev *pdev)
+@@ -241,6 +241,10 @@ struct msi_domain_info;
+  * @msi_finish:		Optional callback to finalize the allocation
+  * @set_desc:		Set the msi descriptor for an interrupt
+  * @handle_error:	Optional error handler if the allocation fails
++ * @domain_alloc_irqs:	Optional function to override the default allocation
++ *			function.
++ * @domain_free_irqs:	Optional function to override the default free
++ *			function.
+  *
+  * @get_hwirq, @msi_init and @msi_free are callbacks used by
+  * msi_create_irq_domain() and related interfaces
+@@ -248,6 +252,22 @@ struct msi_domain_info;
+  * @msi_check, @msi_prepare, @msi_finish, @set_desc and @handle_error
+  * are callbacks used by msi_domain_alloc_irqs() and related
+  * interfaces which are based on msi_desc.
++ *
++ * @domain_alloc_irqs, @domain_free_irqs can be used to override the
++ * default allocation/free functions (__msi_domain_alloc/free_irqs). This
++ * is initially for a wrapper around XENs seperate MSI universe which can't
++ * be wrapped into the regular irq domains concepts by mere mortals.  This
++ * allows to universally use msi_domain_alloc/free_irqs without having to
++ * special case XEN all over the place.
++ *
++ * Contrary to other operations @domain_alloc_irqs and @domain_free_irqs
++ * are set to the default implementation if NULL and even when
++ * MSI_FLAG_USE_DEF_DOM_OPS is not set to avoid breaking existing users and
++ * because these callbacks are obviously mandatory.
++ *
++ * This is NOT meant to be abused, but it can be useful to build wrappers
++ * for specialized MSI irq domains which need extra work before and after
++ * calling __msi_domain_alloc_irqs()/__msi_domain_free_irqs().
+  */
+ struct msi_domain_ops {
+ 	irq_hw_number_t	(*get_hwirq)(struct msi_domain_info *info,
+@@ -270,6 +290,10 @@ struct msi_domain_ops {
+ 				    struct msi_desc *desc);
+ 	int		(*handle_error)(struct irq_domain *domain,
+ 					struct msi_desc *desc, int error);
++	int		(*domain_alloc_irqs)(struct irq_domain *domain,
++					     struct device *dev, int nvec);
++	void		(*domain_free_irqs)(struct irq_domain *domain,
++					    struct device *dev);
+ };
+ 
+ /**
+@@ -327,8 +351,11 @@ int msi_domain_set_affinity(struct irq_d
+ struct irq_domain *msi_create_irq_domain(struct fwnode_handle *fwnode,
+ 					 struct msi_domain_info *info,
+ 					 struct irq_domain *parent);
++int __msi_domain_alloc_irqs(struct irq_domain *domain, struct device *dev,
++			    int nvec);
+ int msi_domain_alloc_irqs(struct irq_domain *domain, struct device *dev,
+ 			  int nvec);
++void __msi_domain_free_irqs(struct irq_domain *domain, struct device *dev);
+ void msi_domain_free_irqs(struct irq_domain *domain, struct device *dev);
+ struct msi_domain_info *msi_get_domain_info(struct irq_domain *domain);
+ 
+--- a/kernel/irq/msi.c
++++ b/kernel/irq/msi.c
+@@ -229,11 +229,13 @@ static int msi_domain_ops_check(struct i
+ }
+ 
+ static struct msi_domain_ops msi_domain_ops_default = {
+-	.get_hwirq	= msi_domain_ops_get_hwirq,
+-	.msi_init	= msi_domain_ops_init,
+-	.msi_check	= msi_domain_ops_check,
+-	.msi_prepare	= msi_domain_ops_prepare,
+-	.set_desc	= msi_domain_ops_set_desc,
++	.get_hwirq		= msi_domain_ops_get_hwirq,
++	.msi_init		= msi_domain_ops_init,
++	.msi_check		= msi_domain_ops_check,
++	.msi_prepare		= msi_domain_ops_prepare,
++	.set_desc		= msi_domain_ops_set_desc,
++	.domain_alloc_irqs	= __msi_domain_alloc_irqs,
++	.domain_free_irqs	= __msi_domain_free_irqs,
+ };
+ 
+ static void msi_domain_update_dom_ops(struct msi_domain_info *info)
+@@ -245,6 +247,14 @@ static void msi_domain_update_dom_ops(st
+ 		return;
+ 	}
+ 
++	if (ops->domain_alloc_irqs == NULL)
++		ops->domain_alloc_irqs = msi_domain_ops_default.domain_alloc_irqs;
++	if (ops->domain_free_irqs == NULL)
++		ops->domain_free_irqs = msi_domain_ops_default.domain_free_irqs;
++
++	if (!(info->flags & MSI_FLAG_USE_DEF_DOM_OPS))
++		return;
++
+ 	if (ops->get_hwirq == NULL)
+ 		ops->get_hwirq = msi_domain_ops_default.get_hwirq;
+ 	if (ops->msi_init == NULL)
+@@ -278,8 +288,7 @@ struct irq_domain *msi_create_irq_domain
  {
+ 	struct irq_domain *domain;
+ 
+-	if (info->flags & MSI_FLAG_USE_DEF_DOM_OPS)
+-		msi_domain_update_dom_ops(info);
++	msi_domain_update_dom_ops(info);
+ 	if (info->flags & MSI_FLAG_USE_DEF_CHIP_OPS)
+ 		msi_domain_update_chip_ops(info);
+ 
+@@ -386,17 +395,8 @@ static bool msi_check_reservation_mode(s
+ 	return desc->msi_attrib.is_msix || desc->msi_attrib.maskbit;
+ }
+ 
+-/**
+- * msi_domain_alloc_irqs - Allocate interrupts from a MSI interrupt domain
+- * @domain:	The domain to allocate from
+- * @dev:	Pointer to device struct of the device for which the interrupts
+- *		are allocated
+- * @nvec:	The number of interrupts to allocate
+- *
+- * Returns 0 on success or an error code.
+- */
+-int msi_domain_alloc_irqs(struct irq_domain *domain, struct device *dev,
+-			  int nvec)
++int __msi_domain_alloc_irqs(struct irq_domain *domain, struct device *dev,
++			    int nvec)
+ {
+ 	struct msi_domain_info *info = domain->host_data;
+ 	struct msi_domain_ops *ops = info->ops;
+@@ -490,12 +490,24 @@ int msi_domain_alloc_irqs(struct irq_dom
+ }
+ 
+ /**
+- * msi_domain_free_irqs - Free interrupts from a MSI interrupt @domain associated tp @dev
+- * @domain:	The domain to managing the interrupts
++ * msi_domain_alloc_irqs - Allocate interrupts from a MSI interrupt domain
++ * @domain:	The domain to allocate from
+  * @dev:	Pointer to device struct of the device for which the interrupts
+- *		are free
++ *		are allocated
++ * @nvec:	The number of interrupts to allocate
++ *
++ * Returns 0 on success or an error code.
+  */
+-void msi_domain_free_irqs(struct irq_domain *domain, struct device *dev)
++int msi_domain_alloc_irqs(struct irq_domain *domain, struct device *dev,
++			  int nvec)
++{
++	struct msi_domain_info *info = domain->host_data;
++	struct msi_domain_ops *ops = info->ops;
++
++	return ops->domain_alloc_irqs(domain, dev, nvec);
++}
++
++void __msi_domain_free_irqs(struct irq_domain *domain, struct device *dev)
+ {
+ 	struct msi_desc *desc;
+ 
+@@ -513,6 +525,20 @@ void msi_domain_free_irqs(struct irq_dom
+ }
+ 
+ /**
++ * __msi_domain_free_irqs - Free interrupts from a MSI interrupt @domain associated tp @dev
++ * @domain:	The domain to managing the interrupts
++ * @dev:	Pointer to device struct of the device for which the interrupts
++ *		are free
++ */
++void msi_domain_free_irqs(struct irq_domain *domain, struct device *dev)
++{
++	struct msi_domain_info *info = domain->host_data;
++	struct msi_domain_ops *ops = info->ops;
++
++	return ops->domain_free_irqs(domain, dev);
++}
++
++/**
+  * msi_get_domain_info - Get the MSI interrupt domain info for @domain
+  * @domain:	The interrupt domain to retrieve data from
+  *
 
 
