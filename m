@@ -2,68 +2,70 @@ Return-Path: <SRS0=m7Uf=B7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS autolearn=unavailable
-	autolearn_force=no version=3.4.0
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9F724C433F8
-	for <xen-devel@archiver.kernel.org>; Fri, 21 Aug 2020 02:17:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 42853C433EC
+	for <xen-devel@archiver.kernel.org>; Fri, 21 Aug 2020 02:17:28 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6EE0F22B3F
-	for <xen-devel@archiver.kernel.org>; Fri, 21 Aug 2020 02:17:23 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 0BBB52075E
+	for <xen-devel@archiver.kernel.org>; Fri, 21 Aug 2020 02:17:28 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="ypwGQhEt";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="ModaSDKC"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6EE0F22B3F
+	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="Rsv1T8F/";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="b9OJ97C9"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0BBB52075E
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k8wbj-0002BV-LC; Fri, 21 Aug 2020 02:16:43 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1k8wcC-0002Nc-D3; Fri, 21 Aug 2020 02:17:12 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=z7lF=B7=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1k8wbi-0002BQ-15
- for xen-devel@lists.xenproject.org; Fri, 21 Aug 2020 02:16:42 +0000
-X-Inumbo-ID: 954d0d28-3215-486f-b765-3dfc0e1e050c
+ id 1k8wcB-0002Bb-4V
+ for xen-devel@lists.xenproject.org; Fri, 21 Aug 2020 02:17:11 +0000
+X-Inumbo-ID: ac869fdc-1c00-482d-b96b-f9a84955964f
 Received: from galois.linutronix.de (unknown [193.142.43.55])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 954d0d28-3215-486f-b765-3dfc0e1e050c;
- Fri, 21 Aug 2020 02:16:39 +0000 (UTC)
-Message-Id: <20200821002424.119492231@linutronix.de>
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id ac869fdc-1c00-482d-b96b-f9a84955964f;
+ Fri, 21 Aug 2020 02:16:58 +0000 (UTC)
+Message-Id: <20200821002946.779723926@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1597976198;
+ s=2020; t=1597976218;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:content-transfer-encoding:content-transfer-encoding;
- bh=6NqCao/16SSVwxU3sscyKk1x2qrVHv19Kl/+7RncOTA=;
- b=ypwGQhEtLxJihh7WUOQQEaAMlphwrov24vksOjnplfhLD07eIrUGaOcUsnEzRKsQfyOv/i
- 7w3zMDmRM2AoILgUnodia+JhCGDeEecxjS6Pu5B9VOARPg36DZQvZeo3cHLxUaeivTe+oA
- b91J3yONxQwvP86lUhhb4bjxDEGxzXuyNYzWewdtECWVYDomQWqDCXKmI2M3HSXB6Prxt7
- nLYJK526HDM/9meX7y2CpT4QepzWxd6Yg+SAMiq1YT8ZAHqO22TcuSmwUR8pFh1G1hA4Sr
- 0Uyr/DE44KKYwFVw7JO1Gl05Kv5vlC356zn0ns8or6odT6MWASx99abAUFd1zg==
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:  references:references;
+ bh=d8EPioWtx5drJqrcXnN7xcWjcEFvzbwtUk0NCHv0h4o=;
+ b=Rsv1T8F/5id3E2QlMxxoUYNs9OrQBiJXcdBWv+VUDTaLWtAd3zGdtL2TgS/zxGfcSo2sdk
+ s/3Nys6r5NkcPDwEIDudSphnlW5ek9FfWWGra7vP8r3S9Ko9RdsogSQsMdaNqOL5G4nr1b
+ mgh18ADIgpivQp44XrdHu7qbFz0CLMcTz5p6e2CXH81FYKmF8ubeE32KoI9SxDMrHH57zc
+ 0zVkj56GrnvfVLlmm7ENGGosWtnUqi7u3Yv6XbTwtiAw5h8l9sliGu8hdD/SRC6N/7r5ZQ
+ H/1oePq3VSz+QkOSrnU6+PD4ELo6cRfPODfe8VWXCDci3DJz9vCbwi0frf3U5w==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1597976198;
+ s=2020e; t=1597976218;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:content-transfer-encoding:content-transfer-encoding;
- bh=6NqCao/16SSVwxU3sscyKk1x2qrVHv19Kl/+7RncOTA=;
- b=ModaSDKC/7KPKpfoJXwOupDLtqnQezio5NWZrrxDV9Wdr6vs4o0nJj6hFBppTFsrFMtbmR
- 0BGx93AAb/NWdaDg==
-Date: Fri, 21 Aug 2020 02:24:24 +0200
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:  references:references;
+ bh=d8EPioWtx5drJqrcXnN7xcWjcEFvzbwtUk0NCHv0h4o=;
+ b=b9OJ97C9AmXxu38Qx9+yLOswWlewjRXers9iQg2+nezGb8zb/+p2RX3IXe/2SnyX1Q314M
+ 9rB9ovwHoTsGx+Aw==
+Date: Fri, 21 Aug 2020 02:24:39 +0200
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
-Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
- iommu@lists.linux-foundation.org, linux-hyperv@vger.kernel.org,
- Haiyang Zhang <haiyangz@microsoft.com>,
- Jon Derrick <jonathan.derrick@intel.com>,
- Lu Baolu <baolu.lu@linux.intel.com>, Wei Liu <wei.liu@kernel.org>,
- "K. Y. Srinivasan" <kys@microsoft.com>,
+Cc: x86@kernel.org, Wei Liu <wei.liu@kernel.org>,
  Stephen Hemminger <sthemmin@microsoft.com>,
- Steve Wahl <steve.wahl@hpe.com>, Dimitri Sivanich <sivanich@hpe.com>,
- Russ Anderson <rja@hpe.com>, linux-pci@vger.kernel.org,
+ Haiyang Zhang <haiyangz@microsoft.com>, linux-pci@vger.kernel.org,
+ linux-hyperv@vger.kernel.org, Joerg Roedel <joro@8bytes.org>,
+ iommu@lists.linux-foundation.org, Jon Derrick <jonathan.derrick@intel.com>,
+ Lu Baolu <baolu.lu@linux.intel.com>,
+ "K. Y. Srinivasan" <kys@microsoft.com>, Steve Wahl <steve.wahl@hpe.com>,
+ Dimitri Sivanich <sivanich@hpe.com>, Russ Anderson <rja@hpe.com>,
  Bjorn Helgaas <bhelgaas@google.com>,
  Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
  Jonathan Derrick <jonathan.derrick@intel.com>,
@@ -77,7 +79,12 @@ Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
  Alex Williamson <alex.williamson@redhat.com>,
  Jacob Pan <jacob.jun.pan@intel.com>, Baolu Lu <baolu.lu@intel.com>,
  Kevin Tian <kevin.tian@intel.com>, Dan Williams <dan.j.williams@intel.com>
-Subject: [patch RFC 00/38] x86, PCI, XEN, genirq ...: Prepare for device MSI
+Subject: [patch RFC 15/38] x86/msi: Use generic MSI domain ops
+References: <20200821002424.119492231@linutronix.de>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Disposition: inline;
+ filename="x86-msi--Use-generic-MSI-domain-ops.patch"
 Content-transfer-encoding: 8-bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -92,146 +99,126 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-First of all, sorry for the horrible long Cc list, which was
-unfortunately unavoidable as this touches the world and some more.
+pci_msi_get_hwirq() and pci_msi_set_desc are not longer special. Enable the
+generic MSI domain ops in the core and PCI MSI code unconditionally and get
+rid of the x86 specific implementations in the X86 MSI code and in the
+hyperv PCI driver.
 
-This patch series aims to provide a base to support device MSI (non
-PCI based) in a halfways architecture independent way.
+Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+Cc: Wei Liu <wei.liu@kernel.org>
+Cc: Stephen Hemminger <sthemmin@microsoft.com>
+Cc: Haiyang Zhang <haiyangz@microsoft.com>
+Cc: linux-pci@vger.kernel.org
+Cc: linux-hyperv@vger.kernel.org
+---
+ arch/x86/include/asm/msi.h          |    2 --
+ arch/x86/kernel/apic/msi.c          |   15 ---------------
+ drivers/pci/controller/pci-hyperv.c |    8 --------
+ drivers/pci/msi.c                   |    4 ----
+ kernel/irq/msi.c                    |    6 ------
+ 5 files changed, 35 deletions(-)
 
-It's a mixed bag of bug fixes, cleanups and general improvements which
-are worthwhile independent of the device MSI stuff. Unfortunately this
-also comes with an evil abuse of the irqdomain system to coerce XEN on
-x86 into compliance without rewriting XEN from scratch.
+--- a/arch/x86/include/asm/msi.h
++++ b/arch/x86/include/asm/msi.h
+@@ -9,6 +9,4 @@ typedef struct irq_alloc_info msi_alloc_
+ int pci_msi_prepare(struct irq_domain *domain, struct device *dev, int nvec,
+ 		    msi_alloc_info_t *arg);
+ 
+-void pci_msi_set_desc(msi_alloc_info_t *arg, struct msi_desc *desc);
+-
+ #endif /* _ASM_X86_MSI_H */
+--- a/arch/x86/kernel/apic/msi.c
++++ b/arch/x86/kernel/apic/msi.c
+@@ -204,12 +204,6 @@ void native_teardown_msi_irq(unsigned in
+ 	irq_domain_free_irqs(irq, 1);
+ }
+ 
+-static irq_hw_number_t pci_msi_get_hwirq(struct msi_domain_info *info,
+-					 msi_alloc_info_t *arg)
+-{
+-	return arg->hwirq;
+-}
+-
+ int pci_msi_prepare(struct irq_domain *domain, struct device *dev, int nvec,
+ 		    msi_alloc_info_t *arg)
+ {
+@@ -228,17 +222,8 @@ int pci_msi_prepare(struct irq_domain *d
+ }
+ EXPORT_SYMBOL_GPL(pci_msi_prepare);
+ 
+-void pci_msi_set_desc(msi_alloc_info_t *arg, struct msi_desc *desc)
+-{
+-	arg->desc = desc;
+-	arg->hwirq = pci_msi_domain_calc_hwirq(desc);
+-}
+-EXPORT_SYMBOL_GPL(pci_msi_set_desc);
+-
+ static struct msi_domain_ops pci_msi_domain_ops = {
+-	.get_hwirq	= pci_msi_get_hwirq,
+ 	.msi_prepare	= pci_msi_prepare,
+-	.set_desc	= pci_msi_set_desc,
+ };
+ 
+ static struct msi_domain_info pci_msi_domain_info = {
+--- a/drivers/pci/controller/pci-hyperv.c
++++ b/drivers/pci/controller/pci-hyperv.c
+@@ -1531,16 +1531,8 @@ static struct irq_chip hv_msi_irq_chip =
+ 	.irq_unmask		= hv_irq_unmask,
+ };
+ 
+-static irq_hw_number_t hv_msi_domain_ops_get_hwirq(struct msi_domain_info *info,
+-						   msi_alloc_info_t *arg)
+-{
+-	return arg->hwirq;
+-}
+-
+ static struct msi_domain_ops hv_msi_ops = {
+-	.get_hwirq	= hv_msi_domain_ops_get_hwirq,
+ 	.msi_prepare	= pci_msi_prepare,
+-	.set_desc	= pci_msi_set_desc,
+ 	.msi_free	= hv_msi_free,
+ };
+ 
+--- a/drivers/pci/msi.c
++++ b/drivers/pci/msi.c
+@@ -1401,16 +1401,12 @@ static int pci_msi_domain_handle_error(s
+ 	return error;
+ }
+ 
+-#ifdef GENERIC_MSI_DOMAIN_OPS
+ static void pci_msi_domain_set_desc(msi_alloc_info_t *arg,
+ 				    struct msi_desc *desc)
+ {
+ 	arg->desc = desc;
+ 	arg->hwirq = pci_msi_domain_calc_hwirq(desc);
+ }
+-#else
+-#define pci_msi_domain_set_desc		NULL
+-#endif
+ 
+ static struct msi_domain_ops pci_msi_domain_ops_default = {
+ 	.set_desc	= pci_msi_domain_set_desc,
+--- a/kernel/irq/msi.c
++++ b/kernel/irq/msi.c
+@@ -187,7 +187,6 @@ static const struct irq_domain_ops msi_d
+ 	.deactivate	= msi_domain_deactivate,
+ };
+ 
+-#ifdef GENERIC_MSI_DOMAIN_OPS
+ static irq_hw_number_t msi_domain_ops_get_hwirq(struct msi_domain_info *info,
+ 						msi_alloc_info_t *arg)
+ {
+@@ -206,11 +205,6 @@ static void msi_domain_ops_set_desc(msi_
+ {
+ 	arg->desc = desc;
+ }
+-#else
+-#define msi_domain_ops_get_hwirq	NULL
+-#define msi_domain_ops_prepare		NULL
+-#define msi_domain_ops_set_desc		NULL
+-#endif /* !GENERIC_MSI_DOMAIN_OPS */
+ 
+ static int msi_domain_ops_init(struct irq_domain *domain,
+ 			       struct msi_domain_info *info,
 
-As discussed in length in this mail thread:
-
-  https://lore.kernel.org/r/87h7tcgbs2.fsf@nanos.tec.linutronix.de
-
-the initial attempt of piggypacking device MSI support on platform MSI
-is doomed for various reasons, but creating independent interrupt
-domains for these upcoming magic PCI subdevices which are not PCI, but
-might be exposed as PCI devices is not as trivial as it seems.
-
-The initially suggested and evaluated approach of extending platform
-MSI turned out to be the completely wrong direction and in fact
-platform MSI should be rewritten on top of device MSI or completely
-replaced by it.
-
-One of the main issues is that x86 does not support the concept of irq
-domains associations stored in device::msi_domain and still relies on
-the arch_*_msi_irqs() fallback implementations which has it's own set
-of problems as outlined in
-
-  https://lore.kernel.org/r/87bljg7u4f.fsf@nanos.tec.linutronix.de/
-
-in the very same thread.
-
-The main obstacle of storing that pointer is XEN which has it's own
-historical notiion of handling PCI MSI interupts.
-
-This series tries to address these issues in several steps:
-
- 1) Accidental bug fixes
-	iommu/amd: Prevent NULL pointer dereference
-
- 2) Janitoring
-	x86/init: Remove unused init ops
-
- 3) Simplification of the x86 specific interrupt allocation mechanism
-
-	x86/irq: Rename X86_IRQ_ALLOC_TYPE_MSI* to reflect PCI dependency
-	x86/irq: Add allocation type for parent domain retrieval
-	iommu/vt-d: Consolidate irq domain getter
-	iommu/amd: Consolidate irq domain getter
-	iommu/irq_remapping: Consolidate irq domain lookup
-
- 4) Consolidation of the X86 specific interrupt allocation mechanism to be as close
-    as possible to the generic MSI allocation mechanism which allows to get rid
-    of quite a bunch of x86'isms which are pointless
-
-	x86/irq: Prepare consolidation of irq_alloc_info
-	x86/msi: Consolidate HPET allocation
-	x86/ioapic: Consolidate IOAPIC allocation
-	x86/irq: Consolidate DMAR irq allocation
-	x86/irq: Consolidate UV domain allocation
-	PCI: MSI: Rework pci_msi_domain_calc_hwirq()
-	x86/msi: Consolidate MSI allocation
-	x86/msi: Use generic MSI domain ops
-
-  5) x86 specific cleanups to remove the dependency on arch_*_msi_irqs()
-
-	x86/irq: Move apic_post_init() invocation to one place
-	z86/pci: Reducde #ifdeffery in PCI init code
-	x86/irq: Initialize PCI/MSI domain at PCI init time
-	irqdomain/msi: Provide DOMAIN_BUS_VMD_MSI
-	PCI: vmd: Mark VMD irqdomain with DOMAIN_BUS_VMD_MSI
-	PCI: MSI: Provide pci_dev_has_special_msi_domain() helper
-	x86/xen: Make xen_msi_init() static and rename it to xen_hvm_msi_init()
-	x86/xen: Rework MSI teardown
-	x86/xen: Consolidate XEN-MSI init
-	irqdomain/msi: Allow to override msi_domain_alloc/free_irqs()
-	x86/xen: Wrap XEN MSI management into irqdomain
-	iommm/vt-d: Store irq domain in struct device
-	iommm/amd: Store irq domain in struct device
-	x86/pci: Set default irq domain in pcibios_add_device()
-	PCI/MSI: Allow to disable arch fallbacks
-	x86/irq: Cleanup the arch_*_msi_irqs() leftovers
-	x86/irq: Make most MSI ops XEN private
-
-    This one is paving the way to device MSI support, but it comes
-    with an ugly and evil hack. The ability of overriding the default
-    allocation/free functions of an MSI irq domain is useful in general as
-    (hopefully) demonstrated with the device MSI POC, but the abuse
-    in context of XEN is evil. OTOH without enough XENology and without
-    rewriting XEN from scratch wrapping XEN MSI handling into a pseudo
-    irq domain is a reasonable step forward for mere mortals with severly
-    limited XENology. One day the XEN folks might make it a real irq domain.
-    Perhaps when they have to support the same mess on other architectures.
-    Hope dies last...
-
-    At least the mechanism to override alloc/free turned out to be useful
-    for implementing the base infrastructure for device MSI. So it's not a
-    completely lost case.
-
-  6) X86 specific preparation for device MSI
-
-       x86/irq: Add DEV_MSI allocation type
-       x86/msi: Let pci_msi_prepare() handle non-PCI MSI
-
-  7) Generic device MSI infrastructure
-
-       platform-msi: Provide default irq_chip:ack
-       platform-msi: Add device MSI infrastructure
-
-  8) Infrastructure for and a POC of an IMS (Interrupt Message
-     Storm) irq domain and irqchip implementation
-
-       irqdomain/msi: Provide msi_alloc/free_store() callbacks
-       irqchip: Add IMS array driver - NOT FOR MERGING
-
-The whole lot is also available from git:
-
-   git://git.kernel.org/pub/scm/linux/kernel/git/tglx/devel.git device-msi
-
-This has been tested on Intel/AMD/KVM but lacks testing on:
-
-    - HYPERV (-ENODEV)
-    - VMD enabled systems (-ENODEV)
-    - XEN (-ENOCLUE)
-
-#1 and #2 should be applied unconditionally for obvious reasons
-#3-5 are wortwhile cleanups which should be done independent of device MSI
-
-#6-7 look promising to cleanup the platform MSI implementation
-     independent of #8, but I neither had cycles nor stomache to tackle that.
-
-#8 is obviously just for the folks interested in IMS
-
-And of course this all started with a 100 lines combo patch to figure
-out whether this is possible at all with a reasonable effort. 38
-patches later ...
-
-Thanks,
-
-	tglx
 
