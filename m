@@ -7,64 +7,59 @@ X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 05918C433E3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 672B1C433DF
 	for <xen-devel@archiver.kernel.org>; Fri, 21 Aug 2020 02:26:42 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CC97A20732
-	for <xen-devel@archiver.kernel.org>; Fri, 21 Aug 2020 02:26:41 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 3C70720732
+	for <xen-devel@archiver.kernel.org>; Fri, 21 Aug 2020 02:26:42 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="l/wu+Pva";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="7kh3fLmi"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CC97A20732
+	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="oIYWpA1m";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="y7HPmfdR"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3C70720732
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k8wlC-0004tZ-KZ; Fri, 21 Aug 2020 02:26:30 +0000
+	id 1k8wlA-0004rt-3b; Fri, 21 Aug 2020 02:26:28 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=z7lF=B7=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1k8wdo-0002BQ-1R
- for xen-devel@lists.xenproject.org; Fri, 21 Aug 2020 02:18:52 +0000
-X-Inumbo-ID: 17ff7a5f-ea44-4f08-8a8c-9469f92cb796
+ id 1k8wdE-0002BQ-WA
+ for xen-devel@lists.xenproject.org; Fri, 21 Aug 2020 02:18:17 +0000
+X-Inumbo-ID: aed8f2ce-605d-404c-9242-406868a68a0b
 Received: from galois.linutronix.de (unknown [193.142.43.55])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 17ff7a5f-ea44-4f08-8a8c-9469f92cb796;
- Fri, 21 Aug 2020 02:17:26 +0000 (UTC)
-Message-Id: <20200821002949.049867339@linutronix.de>
+ id aed8f2ce-605d-404c-9242-406868a68a0b;
+ Fri, 21 Aug 2020 02:17:14 +0000 (UTC)
+Message-Id: <20200821002948.088290046@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1597976245;
+ s=2020; t=1597976233;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=UZL8Vrdl0kfkPDF5SaQDsWiCtREqKSzkO7Z4G3k5ULk=;
- b=l/wu+Pva8knpMeliQg3p05zViowZHU+QrYhimvAjTlzTvj7Rq0o3z0fgDwioZqT5n3RmXm
- F0aNCytWXBt3Xlz7oezNwVDUjuMreDqNU6oeR2pPLOwNnd9pgXGfQt3QBAF+3GQ8wBXp/c
- gV8PrEsxwldr4Cmq+FjlkWmPQ6dwED9J9p6AR1ww3KUj2t4wDbNLU+i7YFgCfTSbuyXl2e
- XPlsK/VEgMFEDIHDRKu23aCsekWuzHSirgeg2lkkswLfA3QKQ5cuDL8yMnocgM1nxYZy4c
- 34+5mV2GLxrkckJysmQbmOMx08+XZIVMbmVkHxO9Iq3pB69jMzKnzkc54L7F8Q==
+ bh=I+1xcnxpEKwhL/2w1Df+4sJP4BV3gtVsGmDq2fpteQU=;
+ b=oIYWpA1mK705vLgr0Pi3yvIwVY/JzWY6Zt8eNLdc9jL4sFmxDIPaDT052QDL9CckTVPM90
+ ZJFVX+4ngFjF7amPFN2+FS286alUpCex1etIdfZMLu3UkN838sMfFVP0p9U+LvWeLaFf4H
+ c430ZjWUmX5nUQYzWohUSa6CuOGYMSjpRHgRts7syQ5WyxJsiaxhIEb+Eu7E/PNmrdbAMp
+ 3Ik2FRwKvXFNm3om2igSs17GeofXgRc9iO+IqgqsxsibgkiIu3rvoltPIw81/AdpfrI2z7
+ 3nVAGJCOveCRgWSFYxa1YH+plh0xnrK9Ay0dTd3vL9eLDlz7E/nTv3YxqgsSXQ==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1597976245;
+ s=2020e; t=1597976233;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=UZL8Vrdl0kfkPDF5SaQDsWiCtREqKSzkO7Z4G3k5ULk=;
- b=7kh3fLmij9PvpFN53Wn8ekuPhx6wjhRLqyiDFbeUfbbAIiSuYbaAqZpnLbGxdxX22bkT3C
- oRRfQnxb9WWfMzDw==
-Date: Fri, 21 Aug 2020 02:25:02 +0200
+ bh=I+1xcnxpEKwhL/2w1Df+4sJP4BV3gtVsGmDq2fpteQU=;
+ b=y7HPmfdRFAGEjH7N5iAux5Kp3SKyHIxKVvhZ7t+Z4q47rqymbpcW2zB+eSXhv48NUWrhBJ
+ vhIQMjF0CardtkBA==
+Date: Fri, 21 Aug 2020 02:24:52 +0200
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
-Cc: x86@kernel.org, Marc Zyngier <maz@kernel.org>,
- Megha Dey <megha.dey@intel.com>, Jason Gunthorpe <jgg@mellanox.com>,
- Dave Jiang <dave.jiang@intel.com>,
- Alex Williamson <alex.williamson@redhat.com>,
- Jacob Pan <jacob.jun.pan@intel.com>, Baolu Lu <baolu.lu@intel.com>,
- Kevin Tian <kevin.tian@intel.com>, Dan Williams <dan.j.williams@intel.com>,
- Joerg Roedel <joro@8bytes.org>, iommu@lists.linux-foundation.org,
- linux-hyperv@vger.kernel.org, Haiyang Zhang <haiyangz@microsoft.com>,
+Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
+ iommu@lists.linux-foundation.org, linux-hyperv@vger.kernel.org,
+ Haiyang Zhang <haiyangz@microsoft.com>,
  Jon Derrick <jonathan.derrick@intel.com>,
  Lu Baolu <baolu.lu@linux.intel.com>, Wei Liu <wei.liu@kernel.org>,
  "K. Y. Srinivasan" <kys@microsoft.com>,
@@ -77,14 +72,19 @@ Cc: x86@kernel.org, Marc Zyngier <maz@kernel.org>,
  Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
  xen-devel@lists.xenproject.org, Juergen Gross <jgross@suse.com>,
  Boris Ostrovsky <boris.ostrovsky@oracle.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, Marc Zyngier <maz@kernel.org>,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- "Rafael J. Wysocki" <rafael@kernel.org>
-Subject: [patch RFC 38/38] irqchip: Add IMS array driver - NOT FOR MERGING
+ "Rafael J. Wysocki" <rafael@kernel.org>, Megha Dey <megha.dey@intel.com>,
+ Jason Gunthorpe <jgg@mellanox.com>, Dave Jiang <dave.jiang@intel.com>,
+ Alex Williamson <alex.williamson@redhat.com>,
+ Jacob Pan <jacob.jun.pan@intel.com>, Baolu Lu <baolu.lu@intel.com>,
+ Kevin Tian <kevin.tian@intel.com>, Dan Williams <dan.j.williams@intel.com>
+Subject: [patch RFC 28/38] iommm/amd: Store irq domain in struct device
 References: <20200821002424.119492231@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Content-Disposition: inline; filename=irqchip--Add-IMS-array-driver.patch
+Content-Disposition: inline;
+ filename="iommm-amd--Store-irq-domain-in-struct-device.patch"
 Content-transfer-encoding: 8-bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -99,275 +99,58 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-A generic IMS irq chip and irq domain implementation for IMS based devices
-which utilize a MSI message store array on chip.
+As the next step to make X86 utilize the direct MSI irq domain operations
+store the irq domain pointer in the device struct when a device is probed.
 
-Allows IMS devices with a MSI message store array to reuse this code for
-different array sizes.
+It only overrides the irqdomain of devices which are handled by a regular
+PCI/MSI irq domain which protects PCI devices behind special busses like
+VMD which have their own irq domain.
 
-Allocation and freeing of interrupts happens via the generic
-msi_domain_alloc/free_irqs() interface. No special purpose IMS magic
-required as long as the interrupt domain is stored in the underlying device
-struct.
+No functional change.
 
-Completely untested of course and mostly for illustration and educational
-purpose. This should of course be a modular irq chip, but adding that
-support is left as an exercise for the people who care about this deeply.
+It just avoids the redirection through arch_*_msi_irqs() and allows the
+PCI/MSI core to directly invoke the irq domain alloc/free functions instead
+of having to look up the irq domain for every single MSI interupt.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-Cc: Marc Zyngier <maz@kernel.org>
-Cc: Megha Dey <megha.dey@intel.com>
-Cc: Jason Gunthorpe <jgg@mellanox.com>
-Cc: Dave Jiang <dave.jiang@intel.com>
-Cc: Alex Williamson <alex.williamson@redhat.com>
-Cc: Jacob Pan <jacob.jun.pan@intel.com>
-Cc: Baolu Lu <baolu.lu@intel.com>
-Cc: Kevin Tian <kevin.tian@intel.com>
-Cc: Dan Williams <dan.j.williams@intel.com>
+Cc: Joerg Roedel <joro@8bytes.org>
+Cc: iommu@lists.linux-foundation.org
 ---
- drivers/irqchip/Kconfig             |    8 +
- drivers/irqchip/Makefile            |    1 
- drivers/irqchip/irq-ims-msi.c       |  169 ++++++++++++++++++++++++++++++++++++
- include/linux/irqchip/irq-ims-msi.h |   41 ++++++++
- 4 files changed, 219 insertions(+)
+ drivers/iommu/amd/iommu.c |   17 ++++++++++++++++-
+ 1 file changed, 16 insertions(+), 1 deletion(-)
 
---- a/drivers/irqchip/Kconfig
-+++ b/drivers/irqchip/Kconfig
-@@ -571,4 +571,12 @@ config LOONGSON_PCH_MSI
- 	help
- 	  Support for the Loongson PCH MSI Controller.
+--- a/drivers/iommu/amd/iommu.c
++++ b/drivers/iommu/amd/iommu.c
+@@ -729,7 +729,21 @@ static void iommu_poll_ga_log(struct amd
+ 		}
+ 	}
+ }
+-#endif /* CONFIG_IRQ_REMAP */
++
++static void
++amd_iommu_set_pci_msi_domain(struct device *dev, struct amd_iommu *iommu)
++{
++	if (!irq_remapping_enabled || !dev_is_pci(dev) ||
++	    pci_dev_has_special_msi_domain(to_pci_dev(dev)))
++		return;
++
++	dev_set_msi_domain(dev, iommu->msi_domain);
++}
++
++#else /* CONFIG_IRQ_REMAP */
++static inline void
++amd_iommu_set_pci_msi_domain(struct device *dev, struct amd_iommu *iommu) { }
++#endif /* !CONFIG_IRQ_REMAP */
  
-+config IMS_MSI
-+	bool "IMS Interrupt Message Store MSI controller"
-+	depends on PCI
-+	select DEVICE_MSI
-+	help
-+	  Support for IMS Interrupt Message Store MSI controller
-+	  with IMS slot storage in a slot array
-+
- endmenu
---- a/drivers/irqchip/Makefile
-+++ b/drivers/irqchip/Makefile
-@@ -111,3 +111,4 @@ obj-$(CONFIG_LOONGSON_HTPIC)		+= irq-loo
- obj-$(CONFIG_LOONGSON_HTVEC)		+= irq-loongson-htvec.o
- obj-$(CONFIG_LOONGSON_PCH_PIC)		+= irq-loongson-pch-pic.o
- obj-$(CONFIG_LOONGSON_PCH_MSI)		+= irq-loongson-pch-msi.o
-+obj-$(CONFIG_IMS_MSI)			+= irq-ims-msi.o
---- /dev/null
-+++ b/drivers/irqchip/irq-ims-msi.c
-@@ -0,0 +1,169 @@
-+// SPDX-License-Identifier: GPL-2.0
-+// (C) Copyright 2020 Thomas Gleixner <tglx@linutronix.de>
-+/*
-+ * Shared interrupt chip and irq domain for Intel IMS devices
-+ */
-+#include <linux/device.h>
-+#include <linux/slab.h>
-+#include <linux/msi.h>
-+#include <linux/irq.h>
-+
-+#include <linux/irqchip/irq-ims-msi.h>
-+
-+struct ims_data {
-+	struct ims_array_info	info;
-+	unsigned long		map[0];
-+};
-+
-+static void ims_mask_irq(struct irq_data *data)
-+{
-+	struct msi_desc *desc = irq_data_get_msi_desc(data);
-+	struct ims_array_slot __iomem *slot = desc->device_msi.priv_iomem;
-+	u32 __iomem *ctrl = &slot->ctrl;
-+
-+	iowrite32(ioread32(ctrl) & ~IMS_VECTOR_CTRL_UNMASK, ctrl);
-+}
-+
-+static void ims_unmask_irq(struct irq_data *data)
-+{
-+	struct msi_desc *desc = irq_data_get_msi_desc(data);
-+	struct ims_array_slot __iomem *slot = desc->device_msi.priv_iomem;
-+	u32 __iomem *ctrl = &slot->ctrl;
-+
-+	iowrite32(ioread32(ctrl) | IMS_VECTOR_CTRL_UNMASK, ctrl);
-+}
-+
-+static void ims_write_msi_msg(struct irq_data *data, struct msi_msg *msg)
-+{
-+	struct msi_desc *desc = irq_data_get_msi_desc(data);
-+	struct ims_array_slot __iomem *slot = desc->device_msi.priv_iomem;
-+
-+	iowrite32(msg->address_lo, &slot->address_lo);
-+	iowrite32(msg->address_hi, &slot->address_hi);
-+	iowrite32(msg->data, &slot->data);
-+}
-+
-+static const struct irq_chip ims_msi_controller = {
-+	.name			= "IMS",
-+	.irq_mask		= ims_mask_irq,
-+	.irq_unmask		= ims_unmask_irq,
-+	.irq_write_msi_msg	= ims_write_msi_msg,
-+	.irq_retrigger		= irq_chip_retrigger_hierarchy,
-+	.flags			= IRQCHIP_SKIP_SET_WAKE,
-+};
-+
-+static void ims_reset_slot(struct ims_array_slot __iomem *slot)
-+{
-+	iowrite32(0, &slot->address_lo);
-+	iowrite32(0, &slot->address_hi);
-+	iowrite32(0, &slot->data);
-+	iowrite32(0, &slot->ctrl);
-+}
-+
-+static void ims_free_msi_store(struct irq_domain *domain, struct device *dev)
-+{
-+	struct msi_domain_info *info = domain->host_data;
-+	struct ims_data *ims = info->data;
-+	struct msi_desc *entry;
-+
-+	for_each_msi_entry(entry, dev) {
-+		if (entry->device_msi.priv_iomem) {
-+			clear_bit(entry->device_msi.hwirq, ims->map);
-+			ims_reset_slot(entry->device_msi.priv_iomem);
-+			entry->device_msi.priv_iomem = NULL;
-+			entry->device_msi.hwirq = 0;
-+		}
-+	}
-+}
-+
-+static int ims_alloc_msi_store(struct irq_domain *domain, struct device *dev,
-+			       int nvec)
-+{
-+	struct msi_domain_info *info = domain->host_data;
-+	struct ims_data *ims = info->data;
-+	struct msi_desc *entry;
-+
-+	for_each_msi_entry(entry, dev) {
-+		unsigned int idx;
-+
-+		idx = find_first_zero_bit(ims->map, ims->info.max_slots);
-+		if (idx >= ims->info.max_slots)
-+			goto fail;
-+		set_bit(idx, ims->map);
-+		entry->device_msi.priv_iomem = &ims->info.slots[idx];
-+		entry->device_msi.hwirq = idx;
-+	}
-+	return 0;
-+
-+fail:
-+	ims_free_msi_store(domain, dev);
-+	return -ENOSPC;
-+}
-+
-+struct ims_domain_template {
-+	struct msi_domain_ops	ops;
-+	struct msi_domain_info	info;
-+};
-+
-+static const struct ims_domain_template ims_domain_template = {
-+	.ops = {
-+		.msi_alloc_store	= ims_alloc_msi_store,
-+		.msi_free_store		= ims_free_msi_store,
-+	},
-+	.info = {
-+		.flags		= MSI_FLAG_USE_DEF_DOM_OPS |
-+				  MSI_FLAG_USE_DEF_CHIP_OPS,
-+		.handler	= handle_edge_irq,
-+		.handler_name	= "edge",
-+	},
-+};
-+
-+struct irq_domain *
-+pci_ims_create_msi_irq_domain(struct pci_dev *pdev,
-+			      struct ims_array_info *ims_info)
-+{
-+	struct ims_domain_template *info;
-+	struct irq_domain *domain;
-+	struct irq_chip *chip;
-+	struct ims_data *data;
-+	unsigned int size;
-+
-+	/* Allocate new domain storage */
-+	info = kmemdup(&ims_domain_template, sizeof(ims_domain_template),
-+		       GFP_KERNEL);
-+	if (!info)
-+		return NULL;
-+	/* Link the ops */
-+	info->info.ops = &info->ops;
-+
-+	/* Allocate ims_info along with the bitmap */
-+	size = sizeof(*data);
-+	size += BITS_TO_LONGS(ims_info->max_slots) * sizeof(unsigned long);
-+	data = kzalloc(size, GFP_KERNEL);
-+	if (!data)
-+		goto err_info;
-+
-+	data->info = *ims_info;
-+	info->info.data = data;
-+
-+	chip = kmemdup(&ims_msi_controller, sizeof(ims_msi_controller),
-+		       GFP_KERNEL);
-+	if (!chip)
-+		goto err_data;
-+	info->info.chip = chip;
-+
-+	domain = pci_subdevice_msi_create_irq_domain(pdev, &info->info);
-+	if (!domain)
-+		goto err_chip;
-+
-+	return domain;
-+
-+err_chip:
-+	kfree(chip);
-+err_data:
-+	kfree(data);
-+err_info:
-+	kfree(info);
-+	return NULL;
-+}
-+EXPORT_SYMBOL_GPL(pci_ims_create_msi_irq_domain);
---- /dev/null
-+++ b/include/linux/irqchip/irq-ims-msi.h
-@@ -0,0 +1,41 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/* (C) Copyright 2020 Thomas Gleixner <tglx@linutronix.de> */
-+
-+#ifndef _LINUX_IRQCHIP_IRQ_IMS_MSI_H
-+#define _LINUX_IRQCHIP_IRQ_IMS_MSI_H
-+
-+#include <linux/types.h>
-+
-+struct ims_array_slot {
-+	u32	address_lo;
-+	u32	address_hi;
-+	u32	data;
-+	u32	ctrl;
-+};
-+
-+/* Bit to unmask the interrupt in slot->ctrl */
-+#define IMS_VECTOR_CTRL_UNMASK	0x01
-+
-+struct ims_array_info {
-+	struct ims_array_slot	__iomem *slots;
-+	unsigned int		max_slots;
-+};
-+
-+/* Dummy forward declaration for illustration */
-+struct ims_queue_slot;
-+
-+/**
-+ * ims_msi_store - Interrupt Message Store descriptor data
-+ * @array_slot:	Pointer to a on device IMS storage array slot
-+ * @queue_slot:	Pointer to storage embedded in queue data
-+ * @hw_irq:	Index of the slot or queue. Also hardware irq number
-+ */
-+struct ims_msi_store {
-+	union {
-+		struct ims_array_slot __iomem	*array_slot;
-+		struct ims_queue_slot		*queue_slot;
-+	};
-+	unsigned int				hw_irq;
-+};
-+
-+#endif
+ #define AMD_IOMMU_INT_MASK	\
+ 	(MMIO_STATUS_EVT_INT_MASK | \
+@@ -2157,6 +2171,7 @@ static struct iommu_device *amd_iommu_pr
+ 		iommu_dev = ERR_PTR(ret);
+ 		iommu_ignore_device(dev);
+ 	} else {
++		amd_iommu_set_pci_msi_domain(dev, iommu);
+ 		iommu_dev = &iommu->iommu;
+ 	}
+ 
 
 
