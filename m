@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
-	autolearn_force=no version=3.4.0
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 34CEBC433E5
-	for <xen-devel@archiver.kernel.org>; Fri, 21 Aug 2020 02:17:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 50961C433F2
+	for <xen-devel@archiver.kernel.org>; Fri, 21 Aug 2020 02:17:28 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0118F2177B
-	for <xen-devel@archiver.kernel.org>; Fri, 21 Aug 2020 02:17:26 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 1C56B208E4
+	for <xen-devel@archiver.kernel.org>; Fri, 21 Aug 2020 02:17:28 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="3Jzoygds";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="JRFyeoXj"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0118F2177B
+	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="q7dSxIfa";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="QYOx4xUy"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1C56B208E4
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k8wc6-0002JG-ME; Fri, 21 Aug 2020 02:17:06 +0000
+	id 1k8wcH-0002Sa-6I; Fri, 21 Aug 2020 02:17:17 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=z7lF=B7=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1k8wc6-0002Bb-4F
- for xen-devel@lists.xenproject.org; Fri, 21 Aug 2020 02:17:06 +0000
-X-Inumbo-ID: 025451c0-2912-416d-8ee7-1b67c62a0832
+ id 1k8wcG-0002Bb-4p
+ for xen-devel@lists.xenproject.org; Fri, 21 Aug 2020 02:17:16 +0000
+X-Inumbo-ID: 82896dfd-5336-4959-8093-031b1ec68c5a
 Received: from galois.linutronix.de (unknown [193.142.43.55])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 025451c0-2912-416d-8ee7-1b67c62a0832;
- Fri, 21 Aug 2020 02:16:54 +0000 (UTC)
-Message-Id: <20200821002946.500438544@linutronix.de>
+ id 82896dfd-5336-4959-8093-031b1ec68c5a;
+ Fri, 21 Aug 2020 02:16:59 +0000 (UTC)
+Message-Id: <20200821002946.887237419@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1597976213;
+ s=2020; t=1597976218;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=yYVYsGIC1JN3QDzHJK9SuOYIPe5JO6p6NbW5fm8Jlzc=;
- b=3Jzoygdsjx0fIGRNdM1ePUhTi24PE4EV/PGVMS1ezdy27BoMA+xbIyyXO2uodCxEr9aves
- fdYpw1bs5rVsrgP7AzLM8VaaCXEyC8i2Zr1wpADi8xU69lwniResKlv7g7oG5aHC1Fr8HE
- MtpzX8wYGt47BBbrgvWg11m9R1mmsqh3HIurWdDPM3yx3DeXrT77uOgsk8pzdGJw81uvPA
- phYlOCS/IH9H5LQ0CraxSW2f02IkFbdRgyY8aAt6/Fr/DubfNsygAAnSMThNSyaErpwnWf
- 5tLuEswY3ROAjQOn17n/LEmT1mFyMC6m0ejSEVTWjyOjHqvukv0F3HIyr6ZBhQ==
+ bh=GYsCif/3llmuLBvpYPtjuTHhsKUK5MCMDeW2t2MJscU=;
+ b=q7dSxIfa2NAL9KD2teMyDV01SxnyZKzF6/JmWFSxrt4bg5x1doERDgaXnVj7u4mOEdz45i
+ s8eTgKutbpA8zbvLN5XbMOhfEhT83rB5QSmk3Nf0wJfsbCBE7O+H8RbvjPFoHLYvaj3PI5
+ 0Ir3gWIVXdw7KlQi2QzmUFBvtwM6SWdulp/PPE8Spn9KjhcUnevfsg+y1085hUP5RhdjNK
+ F3NUTNp6L/aTcVNHc6YLFBxk5XAo5Pz16xMSpAOmFrmGxGLLpFdTuB0EtA14DMy8whOStx
+ rsDXjkHsk66HqrWp+bjMVgu9KVh7sP5kmRE4Up2Fo/rMlXBGcFLN0TtbKmh7Xw==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1597976213;
+ s=2020e; t=1597976218;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=yYVYsGIC1JN3QDzHJK9SuOYIPe5JO6p6NbW5fm8Jlzc=;
- b=JRFyeoXjz8LdEzy20vpxzfwC4fdt3ZEVXh7UmgCH3f+U5Vn496TJ+YrPyDBzBms8MW+CzY
- f0A7NXs3cE+IE1Bg==
-Date: Fri, 21 Aug 2020 02:24:36 +0200
+ bh=GYsCif/3llmuLBvpYPtjuTHhsKUK5MCMDeW2t2MJscU=;
+ b=QYOx4xUygE/UcllLug+eYgjWxrxLwQK7B3c3lbd2KZJMEHg+1hEG377sd9w4Vwj9eR08qW
+ BT1NC9ypZFV92bAg==
+Date: Fri, 21 Aug 2020 02:24:40 +0200
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
-Cc: x86@kernel.org, Steve Wahl <steve.wahl@hpe.com>,
- Dimitri Sivanich <sivanich@hpe.com>, Russ Anderson <rja@hpe.com>,
- Joerg Roedel <joro@8bytes.org>, iommu@lists.linux-foundation.org,
- linux-hyperv@vger.kernel.org, Haiyang Zhang <haiyangz@microsoft.com>,
+Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
+ iommu@lists.linux-foundation.org, linux-hyperv@vger.kernel.org,
+ Haiyang Zhang <haiyangz@microsoft.com>,
  Jon Derrick <jonathan.derrick@intel.com>,
  Lu Baolu <baolu.lu@linux.intel.com>, Wei Liu <wei.liu@kernel.org>,
  "K. Y. Srinivasan" <kys@microsoft.com>,
- Stephen Hemminger <sthemmin@microsoft.com>, linux-pci@vger.kernel.org,
+ Stephen Hemminger <sthemmin@microsoft.com>,
+ Steve Wahl <steve.wahl@hpe.com>, Dimitri Sivanich <sivanich@hpe.com>,
+ Russ Anderson <rja@hpe.com>, linux-pci@vger.kernel.org,
  Bjorn Helgaas <bhelgaas@google.com>,
  Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
  Jonathan Derrick <jonathan.derrick@intel.com>,
@@ -79,12 +80,12 @@ Cc: x86@kernel.org, Steve Wahl <steve.wahl@hpe.com>,
  Alex Williamson <alex.williamson@redhat.com>,
  Jacob Pan <jacob.jun.pan@intel.com>, Baolu Lu <baolu.lu@intel.com>,
  Kevin Tian <kevin.tian@intel.com>, Dan Williams <dan.j.williams@intel.com>
-Subject: [patch RFC 12/38] x86/irq: Consolidate UV domain allocation
+Subject: [patch RFC 16/38] x86/irq: Move apic_post_init() invocation to one
+ place
 References: <20200821002424.119492231@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Content-Disposition: inline;
- filename="x86-irq--Consolidate-UV-domain-allocation.patch"
+Content-Disposition: inline; filename="x86-irq--Move-apic_post_init"
 Content-transfer-encoding: 8-bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -99,106 +100,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Move the UV specific fields into their own struct for readability sake. Get
-rid of the #ifdeffery as it does not matter at all whether the alloc info
-is a couple of bytes longer or not.
+No point to call it from both 32bit and 64bit implementations of
+default_setup_apic_routing(). Move it to the caller.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-Cc: Steve Wahl <steve.wahl@hpe.com>
-Cc:  Dimitri Sivanich <sivanich@hpe.com>
-Cc: Russ Anderson <rja@hpe.com>
 ---
- arch/x86/include/asm/hw_irq.h |   21 ++++++++++++---------
- arch/x86/platform/uv/uv_irq.c |   16 ++++++++--------
- 2 files changed, 20 insertions(+), 17 deletions(-)
+ arch/x86/kernel/apic/apic.c     |    3 +++
+ arch/x86/kernel/apic/probe_32.c |    3 ---
+ arch/x86/kernel/apic/probe_64.c |    3 ---
+ 3 files changed, 3 insertions(+), 6 deletions(-)
 
---- a/arch/x86/include/asm/hw_irq.h
-+++ b/arch/x86/include/asm/hw_irq.h
-@@ -53,6 +53,14 @@ struct ioapic_alloc_info {
- 	struct IO_APIC_route_entry	*entry;
- };
- 
-+struct uv_alloc_info {
-+	int		limit;
-+	int		blade;
-+	unsigned long	offset;
-+	char		*name;
-+
-+};
-+
- /**
-  * irq_alloc_info - X86 specific interrupt allocation info
-  * @type:	X86 specific allocation type
-@@ -64,7 +72,8 @@ struct ioapic_alloc_info {
-  * @data:	Allocation specific data
-  *
-  * @ioapic:	IOAPIC specific allocation data
-- */
-+ * @uv:		UV specific allocation data
-+*/
- struct irq_alloc_info {
- 	enum irq_alloc_type	type;
- 	u32			flags;
-@@ -76,6 +85,8 @@ struct irq_alloc_info {
- 
- 	union {
- 		struct ioapic_alloc_info	ioapic;
-+		struct uv_alloc_info		uv;
-+
- 		int		unused;
- #ifdef	CONFIG_PCI_MSI
- 		struct {
-@@ -83,14 +94,6 @@ struct irq_alloc_info {
- 			irq_hw_number_t	msi_hwirq;
- 		};
- #endif
--#ifdef	CONFIG_X86_UV
--		struct {
--			int		uv_limit;
--			int		uv_blade;
--			unsigned long	uv_offset;
--			char		*uv_name;
--		};
--#endif
- 	};
- };
- 
---- a/arch/x86/platform/uv/uv_irq.c
-+++ b/arch/x86/platform/uv/uv_irq.c
-@@ -90,15 +90,15 @@ static int uv_domain_alloc(struct irq_do
- 
- 	ret = irq_domain_alloc_irqs_parent(domain, virq, nr_irqs, arg);
- 	if (ret >= 0) {
--		if (info->uv_limit == UV_AFFINITY_CPU)
-+		if (info->uv.limit == UV_AFFINITY_CPU)
- 			irq_set_status_flags(virq, IRQ_NO_BALANCING);
- 		else
- 			irq_set_status_flags(virq, IRQ_MOVE_PCNTXT);
- 
--		chip_data->pnode = uv_blade_to_pnode(info->uv_blade);
--		chip_data->offset = info->uv_offset;
-+		chip_data->pnode = uv_blade_to_pnode(info->uv.blade);
-+		chip_data->offset = info->uv.offset;
- 		irq_domain_set_info(domain, virq, virq, &uv_irq_chip, chip_data,
--				    handle_percpu_irq, NULL, info->uv_name);
-+				    handle_percpu_irq, NULL, info->uv.name);
- 	} else {
- 		kfree(chip_data);
+--- a/arch/x86/kernel/apic/apic.c
++++ b/arch/x86/kernel/apic/apic.c
+@@ -1429,6 +1429,9 @@ void __init apic_intr_mode_init(void)
+ 		break;
  	}
-@@ -193,10 +193,10 @@ int uv_setup_irq(char *irq_name, int cpu
  
- 	init_irq_alloc_info(&info, cpumask_of(cpu));
- 	info.type = X86_IRQ_ALLOC_TYPE_UV;
--	info.uv_limit = limit;
--	info.uv_blade = mmr_blade;
--	info.uv_offset = mmr_offset;
--	info.uv_name = irq_name;
-+	info.uv.limit = limit;
-+	info.uv.blade = mmr_blade;
-+	info.uv.offset = mmr_offset;
-+	info.uv.name = irq_name;
++	if (x86_platform.apic_post_init)
++		x86_platform.apic_post_init();
++
+ 	apic_bsp_setup(upmode);
+ }
  
- 	return irq_domain_alloc_irqs(domain, 1,
- 				     uv_blade_to_memory_nid(mmr_blade), &info);
+--- a/arch/x86/kernel/apic/probe_32.c
++++ b/arch/x86/kernel/apic/probe_32.c
+@@ -170,9 +170,6 @@ void __init default_setup_apic_routing(v
+ 
+ 	if (apic->setup_apic_routing)
+ 		apic->setup_apic_routing();
+-
+-	if (x86_platform.apic_post_init)
+-		x86_platform.apic_post_init();
+ }
+ 
+ void __init generic_apic_probe(void)
+--- a/arch/x86/kernel/apic/probe_64.c
++++ b/arch/x86/kernel/apic/probe_64.c
+@@ -32,9 +32,6 @@ void __init default_setup_apic_routing(v
+ 			break;
+ 		}
+ 	}
+-
+-	if (x86_platform.apic_post_init)
+-		x86_platform.apic_post_init();
+ }
+ 
+ int __init default_acpi_madt_oem_check(char *oem_id, char *oem_table_id)
 
 
