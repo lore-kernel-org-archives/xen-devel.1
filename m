@@ -2,65 +2,92 @@ Return-Path: <SRS0=m7Uf=B7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DF88DC433DF
-	for <xen-devel@archiver.kernel.org>; Fri, 21 Aug 2020 01:39:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 535FFC433E1
+	for <xen-devel@archiver.kernel.org>; Fri, 21 Aug 2020 02:17:19 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A7C942075E
-	for <xen-devel@archiver.kernel.org>; Fri, 21 Aug 2020 01:39:25 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 258EC2075E
+	for <xen-devel@archiver.kernel.org>; Fri, 21 Aug 2020 02:17:19 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="S+yiPB2m"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A7C942075E
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
+	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="hduGjMZb";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="54vZUbSC"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 258EC2075E
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k8w1I-0006kq-Jb; Fri, 21 Aug 2020 01:39:04 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1k8wbm-0002Bg-TU; Fri, 21 Aug 2020 02:16:46 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=0g3v=B7=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1k8w1H-0006ki-HW
- for xen-devel@lists.xenproject.org; Fri, 21 Aug 2020 01:39:03 +0000
-X-Inumbo-ID: ddc6133a-1561-4772-a440-6532342b9d31
-Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id ddc6133a-1561-4772-a440-6532342b9d31;
- Fri, 21 Aug 2020 01:39:02 +0000 (UTC)
-Received: from localhost (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 03FF92075E;
- Fri, 21 Aug 2020 01:39:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1597973942;
- bh=I0+iqwmXz5st+fplCzQpAejA2Wr4HUXMe+fQl8MoSxc=;
- h=Date:From:To:cc:Subject:In-Reply-To:References:From;
- b=S+yiPB2mSYeDSYV2tVcQ9VBwUGnUa5tz5XRboZ8rusm+/ti3W4JLQZtE0By0qzlM9
- 4HgMIGlskp7zsrWEBvW+4VcQl7jJtzezDEKf+j7/7UTZv1omtAZyuMtDydTq0+1UTX
- okDrUkF9T3jpW/QPqsNFUvr2g+n5yi4fv0V1kUF8=
-Date: Thu, 20 Aug 2020 18:39:01 -0700 (PDT)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
-To: Roman Shaposhnik <roman@zededa.com>
-cc: Xen-devel <xen-devel@lists.xenproject.org>, 
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
- Andrew Cooper <andrew.cooper3@citrix.com>, Paul Durrant <paul@xen.org>, 
- Jan Beulich <jbeulich@suse.com>, sstabellini@kernel.org
-Subject: Re: Xen 4.14.0 is busted on Dell 300x IoT Gateways
-In-Reply-To: <CAMmSBy9-cJuxC0jLPh6O-UCraThzg2wvNO29ZvxrBmVkatt_sg@mail.gmail.com>
-Message-ID: <alpine.DEB.2.21.2008201823050.6005@sstabellini-ThinkPad-T480s>
-References: <CAMmSBy9-cJuxC0jLPh6O-UCraThzg2wvNO29ZvxrBmVkatt_sg@mail.gmail.com>
-User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
+ <SRS0=z7lF=B7=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
+ id 1k8wbm-0002Bb-6I
+ for xen-devel@lists.xenproject.org; Fri, 21 Aug 2020 02:16:46 +0000
+X-Inumbo-ID: ae2affa3-6c43-4e51-9de2-a225919c9871
+Received: from galois.linutronix.de (unknown [193.142.43.55])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id ae2affa3-6c43-4e51-9de2-a225919c9871;
+ Fri, 21 Aug 2020 02:16:44 +0000 (UTC)
+Message-Id: <20200821002945.695825784@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020; t=1597976203;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:  references:references;
+ bh=n+9JzjgCW829xt57cBjdIpc/3IF3JudgknsVK2IiGtk=;
+ b=hduGjMZbM0/qwLquCj86fWVEcSBPc0Iv1xA1asxyvWI+3WaJk/FZv3obiS9pdKi2N4Xi55
+ g2B24e5RBCG7WKFAQnorS3FWxwuVXn4z6S30wQ9GCVD8rtp+77IWCQCGVnhsf3znLjLhSM
+ aQmZw2lG8elAmC//IGUjNVWAb+xaLL0KKz9IZ14ZS5Czuz7wC08nu5Y+pBKinVQ49JiyCU
+ CXbMGhzaoeBIvlaaHMr23nvutvRUEOUuFrM649Lo5JGWcrMEOw972tIYLaoecwN/uLHyl2
+ R6g+Wh1VCvbaQYIhXKJhJnK8aiSLIDvD0enema4nF0KLI5Yj7n1BELeKwzCgbA==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020e; t=1597976203;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:  references:references;
+ bh=n+9JzjgCW829xt57cBjdIpc/3IF3JudgknsVK2IiGtk=;
+ b=54vZUbSCVLbmLl/kEHzdwLB30JzHXmmLwe5GfkEeAMeKUbcsXnsiboZQzVlzf/vQeQ28JW
+ WkKbSmHVLKTXoHDw==
+Date: Fri, 21 Aug 2020 02:24:28 +0200
+From: Thomas Gleixner <tglx@linutronix.de>
+To: LKML <linux-kernel@vger.kernel.org>
+Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
+ linux-hyperv@vger.kernel.org, iommu@lists.linux-foundation.org,
+ Haiyang Zhang <haiyangz@microsoft.com>,
+ Jon Derrick <jonathan.derrick@intel.com>,
+ Lu Baolu <baolu.lu@linux.intel.com>, Wei Liu <wei.liu@kernel.org>,
+ "K. Y. Srinivasan" <kys@microsoft.com>,
+ Stephen Hemminger <sthemmin@microsoft.com>,
+ Steve Wahl <steve.wahl@hpe.com>, Dimitri Sivanich <sivanich@hpe.com>,
+ Russ Anderson <rja@hpe.com>, linux-pci@vger.kernel.org,
+ Bjorn Helgaas <bhelgaas@google.com>,
+ Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
+ Jonathan Derrick <jonathan.derrick@intel.com>,
+ Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+ xen-devel@lists.xenproject.org, Juergen Gross <jgross@suse.com>,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Marc Zyngier <maz@kernel.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ "Rafael J. Wysocki" <rafael@kernel.org>, Megha Dey <megha.dey@intel.com>,
+ Jason Gunthorpe <jgg@mellanox.com>, Dave Jiang <dave.jiang@intel.com>,
+ Alex Williamson <alex.williamson@redhat.com>,
+ Jacob Pan <jacob.jun.pan@intel.com>, Baolu Lu <baolu.lu@intel.com>,
+ Kevin Tian <kevin.tian@intel.com>, Dan Williams <dan.j.williams@intel.com>
+Subject: [patch RFC 04/38] x86/irq: Add allocation type for parent domain
+ retrieval
+References: <20200821002424.119492231@linutronix.de>
 MIME-Version: 1.0
-Content-Type: multipart/mixed; BOUNDARY="8323329-1654727271-1597973251=:6005"
-Content-ID: <alpine.DEB.2.21.2008201827350.6005@sstabellini-ThinkPad-T480s>
+Content-Type: text/plain; charset=UTF-8
+Content-Disposition: inline;
+ filename="x86-irq--Add-allocation-flag-for-domain-retrieval.patch"
+Content-transfer-encoding: 8-bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,67 +101,115 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
+irq_remapping_ir_irq_domain() is used to retrieve the remapping parent
+domain for an allocation type. irq_remapping_irq_domain() is for retrieving
+the actual device domain for allocating interrupts for a device.
 
---8323329-1654727271-1597973251=:6005
-Content-Type: text/plain; CHARSET=UTF-8
-Content-Transfer-Encoding: 8BIT
-Content-ID: <alpine.DEB.2.21.2008201827351.6005@sstabellini-ThinkPad-T480s>
+The two functions are similar and can be unified by using explicit modes
+for parent irq domain retrieval.
 
-On Tue, 18 Aug 2020, Roman Shaposhnik wrote:
-> Hi!
-> first things first -- booting on those devices have always
-> required efi=no-rs -- but it seems that Xen 4.14 is now 
-> busted at a more fundamental level. I'm attaching two
-> boot sequences (one with kernel 4.19.5 and one with 5.4.51)
-> in the hopes that this may provide some clues right away.
-> 
-> Any help would be greatly appreciated!
-> 
-> Oh, and finally it appears that this is NOT a regression from
-> Xen 4.13 -- it fails the same way. I haven't tried Xen's earlier
-> than that.
+Add X86_IRQ_ALLOC_TYPE_IOAPIC/HPET_GET_PARENT and use it in the iommu
+implementations. Drop the parent domain retrieval for PCI_MSI/X as that is
+unused.
 
-FYI Roman and I tracked down the issue and it is due to the gpio
-controller driver (drivers/pinctrl/intel/pinctrl-baytrail.c) overwriting
-the interrupt handler data used by Xen to store the irq_data structure.
+Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+Cc: Joerg Roedel <joro@8bytes.org>
+Cc: x86@kernel.org
+Cc: linux-hyperv@vger.kernel.org
+Cc: iommu@lists.linux-foundation.org
+Cc: Haiyang Zhang <haiyangz@microsoft.com>
+Cc: Jon Derrick <jonathan.derrick@intel.com>
+Cc: Lu Baolu <baolu.lu@linux.intel.com>
+---
+ arch/x86/include/asm/hw_irq.h       |    2 ++
+ arch/x86/kernel/apic/io_apic.c      |    2 +-
+ arch/x86/kernel/apic/msi.c          |    2 +-
+ drivers/iommu/amd/iommu.c           |    8 ++++++++
+ drivers/iommu/hyperv-iommu.c        |    2 +-
+ drivers/iommu/intel/irq_remapping.c |    8 ++------
+ 6 files changed, 15 insertions(+), 9 deletions(-)
 
-I have a very small tentative workaround, see below. It allows the
-kernel to boot successfully as dom0 and gpio writes work. I am still
-thinking on how to fix the issue properly in an upstreamable way, but I
-wanted to send this out to the list right away in case somebody else is
-stuck on this problem.
-
-
-diff --git a/drivers/pinctrl/intel/pinctrl-baytrail.c b/drivers/pinctrl/intel/pinctrl-baytrail.c
-index f38d596efa05..acd28a9e6a8a 100644
---- a/drivers/pinctrl/intel/pinctrl-baytrail.c
-+++ b/drivers/pinctrl/intel/pinctrl-baytrail.c
-@@ -1604,8 +1604,8 @@ static struct irq_chip byt_irqchip = {
- static void byt_gpio_irq_handler(struct irq_desc *desc)
+--- a/arch/x86/include/asm/hw_irq.h
++++ b/arch/x86/include/asm/hw_irq.h
+@@ -40,6 +40,8 @@ enum irq_alloc_type {
+ 	X86_IRQ_ALLOC_TYPE_PCI_MSIX,
+ 	X86_IRQ_ALLOC_TYPE_DMAR,
+ 	X86_IRQ_ALLOC_TYPE_UV,
++	X86_IRQ_ALLOC_TYPE_IOAPIC_GET_PARENT,
++	X86_IRQ_ALLOC_TYPE_HPET_GET_PARENT,
+ };
+ 
+ struct irq_alloc_info {
+--- a/arch/x86/kernel/apic/io_apic.c
++++ b/arch/x86/kernel/apic/io_apic.c
+@@ -2296,7 +2296,7 @@ static int mp_irqdomain_create(int ioapi
+ 		return 0;
+ 
+ 	init_irq_alloc_info(&info, NULL);
+-	info.type = X86_IRQ_ALLOC_TYPE_IOAPIC;
++	info.type = X86_IRQ_ALLOC_TYPE_IOAPIC_GET_PARENT;
+ 	info.ioapic_id = mpc_ioapic_id(ioapic);
+ 	parent = irq_remapping_get_ir_irq_domain(&info);
+ 	if (!parent)
+--- a/arch/x86/kernel/apic/msi.c
++++ b/arch/x86/kernel/apic/msi.c
+@@ -476,7 +476,7 @@ struct irq_domain *hpet_create_irq_domai
+ 	domain_info->data = (void *)(long)hpet_id;
+ 
+ 	init_irq_alloc_info(&info, NULL);
+-	info.type = X86_IRQ_ALLOC_TYPE_HPET;
++	info.type = X86_IRQ_ALLOC_TYPE_HPET_GET_PARENT;
+ 	info.hpet_id = hpet_id;
+ 	parent = irq_remapping_get_ir_irq_domain(&info);
+ 	if (parent == NULL)
+--- a/drivers/iommu/amd/iommu.c
++++ b/drivers/iommu/amd/iommu.c
+@@ -3534,6 +3534,14 @@ static struct irq_domain *get_ir_irq_dom
+ 	if (!info)
+ 		return NULL;
+ 
++	switch (info->type) {
++	case X86_IRQ_ALLOC_TYPE_IOAPIC_GET_PARENT:
++	case X86_IRQ_ALLOC_TYPE_HPET_GET_PARENT:
++		break;
++	default:
++		return NULL;
++	}
++
+ 	devid = get_devid(info);
+ 	if (devid >= 0) {
+ 		iommu = amd_iommu_rlookup_table[devid];
+--- a/drivers/iommu/hyperv-iommu.c
++++ b/drivers/iommu/hyperv-iommu.c
+@@ -184,7 +184,7 @@ static int __init hyperv_enable_irq_rema
+ 
+ static struct irq_domain *hyperv_get_ir_irq_domain(struct irq_alloc_info *info)
  {
- 	struct irq_data *data = irq_desc_get_irq_data(desc);
--	struct byt_gpio *vg = gpiochip_get_data(
--				irq_desc_get_handler_data(desc));
-+	struct gpio_chip *gc = irq_desc_get_chip_data(desc);
-+	struct byt_gpio *vg = (struct byt_gpio *)gc;
- 	struct irq_chip *chip = irq_data_get_irq_chip(data);
- 	u32 base, pin;
- 	void __iomem *reg;
-diff --git a/kernel/irq/chip.c b/kernel/irq/chip.c
-index a2b3d9de999c..b9551fb41ed1 100644
---- a/kernel/irq/chip.c
-+++ b/kernel/irq/chip.c
-@@ -1003,7 +1003,8 @@ irq_set_chained_handler_and_data(unsigned int irq, irq_flow_handler_t handle,
- 	if (!desc)
- 		return;
+-	if (info->type == X86_IRQ_ALLOC_TYPE_IOAPIC)
++	if (info->type == X86_IRQ_ALLOC_TYPE_IOAPIC_GET_PARENT)
+ 		return ioapic_ir_domain;
+ 	else
+ 		return NULL;
+--- a/drivers/iommu/intel/irq_remapping.c
++++ b/drivers/iommu/intel/irq_remapping.c
+@@ -1109,16 +1109,12 @@ static struct irq_domain *intel_get_ir_i
+ 		return NULL;
  
--	desc->irq_common_data.handler_data = data;
-+	if (!desc->irq_common_data.handler_data)
-+		desc->irq_common_data.handler_data = data;
- 	__irq_do_set_handler(desc, handle, 1, NULL);
- 
- 	irq_put_desc_busunlock(desc, flags);
---8323329-1654727271-1597973251=:6005--
+ 	switch (info->type) {
+-	case X86_IRQ_ALLOC_TYPE_IOAPIC:
++	case X86_IRQ_ALLOC_TYPE_IOAPIC_GET_PARENT:
+ 		iommu = map_ioapic_to_ir(info->ioapic_id);
+ 		break;
+-	case X86_IRQ_ALLOC_TYPE_HPET:
++	case X86_IRQ_ALLOC_TYPE_HPET_GET_PARENT:
+ 		iommu = map_hpet_to_ir(info->hpet_id);
+ 		break;
+-	case X86_IRQ_ALLOC_TYPE_PCI_MSI:
+-	case X86_IRQ_ALLOC_TYPE_PCI_MSIX:
+-		iommu = map_dev_to_ir(info->msi_dev);
+-		break;
+ 	default:
+ 		BUG_ON(1);
+ 		break;
+
 
