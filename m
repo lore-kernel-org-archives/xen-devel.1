@@ -7,66 +7,65 @@ X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4E620C433E4
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9842AC433E8
 	for <xen-devel@archiver.kernel.org>; Fri, 21 Aug 2020 02:26:43 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 21D4B20732
+	by mail.kernel.org (Postfix) with ESMTPS id 6E52920732
 	for <xen-devel@archiver.kernel.org>; Fri, 21 Aug 2020 02:26:43 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="BEmgTzBx";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="T+P8E/4o"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 21D4B20732
+	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="N2+U2u4I";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="ca4eWdnE"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6E52920732
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k8wlG-0004xP-25; Fri, 21 Aug 2020 02:26:34 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1k8wlF-0004x1-P4; Fri, 21 Aug 2020 02:26:33 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=z7lF=B7=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1k8wcf-0002Bb-5c
- for xen-devel@lists.xenproject.org; Fri, 21 Aug 2020 02:17:41 +0000
-X-Inumbo-ID: c0f1a567-0922-49ec-b5ba-05ffa8a3e3d7
+ id 1k8wd9-0002BQ-W2
+ for xen-devel@lists.xenproject.org; Fri, 21 Aug 2020 02:18:12 +0000
+X-Inumbo-ID: 2a305a12-0750-4c8e-a16a-f9cd5a3c46af
 Received: from galois.linutronix.de (unknown [193.142.43.55])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id c0f1a567-0922-49ec-b5ba-05ffa8a3e3d7;
- Fri, 21 Aug 2020 02:17:21 +0000 (UTC)
-Message-Id: <20200821002948.664301259@linutronix.de>
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 2a305a12-0750-4c8e-a16a-f9cd5a3c46af;
+ Fri, 21 Aug 2020 02:17:12 +0000 (UTC)
+Message-Id: <20200821002947.976983300@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1597976240;
+ s=2020; t=1597976231;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=IwU9izKFyrpGzvPqUYbXOT7wStkGGFUidxtSyI7gSuU=;
- b=BEmgTzBxRO6uP/nQragORSfmUBwF9g5jAN8GwWNyIDqCY4t9h3ubI9++1vqwr8KU9IbZLO
- p10e+l66E+ryn4Ttlv8e/y2BBV7V+gjAbAuCb1GFvddNAGXqQChjTpRKq59SWiJZXpfZov
- jFshF4WsVdOngCAm3eagjJnbmGf9AGKSdFN0+AlyAkysQTGaD26h6xR6sSFnWKMkmNNiyX
- H0B2uy0Y4GfLOEL62Z00xUZqtRMKBpIUPpxUPgTf8Bp78w+wI4nVXHV5xQE1J39tbV6jKL
- MrW0YTdmu4U3XmeAtdJSVC5lYS5hw8biIfLfcbKqGDhb/BSiRo5tRLn9JtrWfQ==
+ bh=SGz3jtzA9Q1y95hnVuLxxhCEaendeRp/03jNV4aYAm8=;
+ b=N2+U2u4I8yJg8VF+uL4FQq9guu91mSkYx2sWqM85NBILITb3QcvFgm3DFxyihU8cdO6L2r
+ tjLGN4ImjBGwPeuIZo27Ukf2dhXy/slZLMN6IOkVCA2U0KMUQrtgLJy8hFf3CWnR8A6uYW
+ t8Xgtgt7favibCuGa/mRXiQLNak7Xxj6xhZkiFkDTWwNRR0WIAnA6TMAGlUKDPc9uZoeM3
+ dCXAofwGcByhVxrZT++YN5qD88X6DPgym6vieG2bSZeSDJHGp+nyRpxD4houiQjBvXz9DH
+ gIJbh4Od3qhPa5HhYgTwFJo9kwDaUZ3hm5hVrna8JJwUYVfrgVppvdByPkSgmQ==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1597976240;
+ s=2020e; t=1597976231;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=IwU9izKFyrpGzvPqUYbXOT7wStkGGFUidxtSyI7gSuU=;
- b=T+P8E/4ofySSwCHEUhHzxsNh0HImJ7FPAu6EkeURZr78qBWqiOVLSSqiG1nrI+PJMJvkx8
- Dwt9OYTzDoUQoeCw==
-Date: Fri, 21 Aug 2020 02:24:58 +0200
+ bh=SGz3jtzA9Q1y95hnVuLxxhCEaendeRp/03jNV4aYAm8=;
+ b=ca4eWdnEIOSuKlOGPK+65FKofe5JXsumdjO2jo0sJX45NwsOG0Tk62i1rXRTSyUBmVAOfx
+ wHjKYSP2PINyZoCA==
+Date: Fri, 21 Aug 2020 02:24:51 +0200
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
-Cc: x86@kernel.org, linux-pci@vger.kernel.org, linux-hyperv@vger.kernel.org,
- Joerg Roedel <joro@8bytes.org>, iommu@lists.linux-foundation.org,
- Haiyang Zhang <haiyangz@microsoft.com>,
- Jon Derrick <jonathan.derrick@intel.com>,
- Lu Baolu <baolu.lu@linux.intel.com>, Wei Liu <wei.liu@kernel.org>,
+Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
+ iommu@lists.linux-foundation.org, Lu Baolu <baolu.lu@linux.intel.com>,
+ linux-hyperv@vger.kernel.org, Haiyang Zhang <haiyangz@microsoft.com>,
+ Jon Derrick <jonathan.derrick@intel.com>, Wei Liu <wei.liu@kernel.org>,
  "K. Y. Srinivasan" <kys@microsoft.com>,
  Stephen Hemminger <sthemmin@microsoft.com>,
  Steve Wahl <steve.wahl@hpe.com>, Dimitri Sivanich <sivanich@hpe.com>,
- Russ Anderson <rja@hpe.com>, Bjorn Helgaas <bhelgaas@google.com>,
+ Russ Anderson <rja@hpe.com>, linux-pci@vger.kernel.org,
+ Bjorn Helgaas <bhelgaas@google.com>,
  Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
  Jonathan Derrick <jonathan.derrick@intel.com>,
  Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
@@ -79,12 +78,12 @@ Cc: x86@kernel.org, linux-pci@vger.kernel.org, linux-hyperv@vger.kernel.org,
  Alex Williamson <alex.williamson@redhat.com>,
  Jacob Pan <jacob.jun.pan@intel.com>, Baolu Lu <baolu.lu@intel.com>,
  Kevin Tian <kevin.tian@intel.com>, Dan Williams <dan.j.williams@intel.com>
-Subject: [patch RFC 34/38] x86/msi: Let pci_msi_prepare() handle non-PCI MSI
+Subject: [patch RFC 27/38] iommm/vt-d: Store irq domain in struct device
 References: <20200821002424.119492231@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Disposition: inline;
- filename="x86-msi--Let-pci_msi_prepare---handle-non-PCI-MSI.patch"
+ filename="iommm-vt-d--Store-irq-domain-in-struct-device.patch"
 Content-transfer-encoding: 8-bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -99,108 +98,79 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Rename it to x86_msi_prepare() and handle the allocation type setup
-depending on the device type.
+As a first step to make X86 utilize the direct MSI irq domain operations
+store the irq domain pointer in the device struct when a device is probed.
 
-Add a new arch_msi_prepare define which will be utilized by the upcoming
-device MSI support. Define it to NULL if not provided by an architecture in
-the generic MSI header.
+This is done from dmar_pci_bus_add_dev() because it has to work even when
+DMA remapping is disabled. It only overrides the irqdomain of devices which
+are handled by a regular PCI/MSI irq domain which protects PCI devices
+behind special busses like VMD which have their own irq domain.
 
-One arch specific function for MSI support is truly enough.
+No functional change. It just avoids the redirection through
+arch_*_msi_irqs() and allows the PCI/MSI core to directly invoke the irq
+domain alloc/free functions instead of having to look up the irq domain for
+every single MSI interupt.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-Cc: linux-pci@vger.kernel.org
-Cc: linux-hyperv@vger.kernel.org
+Cc: Joerg Roedel <joro@8bytes.org>
+Cc: iommu@lists.linux-foundation.org
+Cc: Lu Baolu <baolu.lu@linux.intel.com>
 ---
- arch/x86/include/asm/msi.h          |    4 +++-
- arch/x86/kernel/apic/msi.c          |   27 ++++++++++++++++++++-------
- drivers/pci/controller/pci-hyperv.c |    2 +-
- include/linux/msi.h                 |    4 ++++
- 4 files changed, 28 insertions(+), 9 deletions(-)
+ drivers/iommu/intel/dmar.c          |    3 +++
+ drivers/iommu/intel/irq_remapping.c |   16 ++++++++++++++++
+ include/linux/intel-iommu.h         |    5 +++++
+ 3 files changed, 24 insertions(+)
 
---- a/arch/x86/include/asm/msi.h
-+++ b/arch/x86/include/asm/msi.h
-@@ -6,7 +6,9 @@
+--- a/drivers/iommu/intel/dmar.c
++++ b/drivers/iommu/intel/dmar.c
+@@ -316,6 +316,9 @@ static int dmar_pci_bus_add_dev(struct d
+ 	if (ret < 0 && dmar_dev_scope_status == 0)
+ 		dmar_dev_scope_status = ret;
  
- typedef struct irq_alloc_info msi_alloc_info_t;
- 
--int pci_msi_prepare(struct irq_domain *domain, struct device *dev, int nvec,
-+int x86_msi_prepare(struct irq_domain *domain, struct device *dev, int nvec,
- 		    msi_alloc_info_t *arg);
- 
-+#define arch_msi_prepare		x86_msi_prepare
++	if (ret >= 0)
++		intel_irq_remap_add_device(info);
 +
- #endif /* _ASM_X86_MSI_H */
---- a/arch/x86/kernel/apic/msi.c
-+++ b/arch/x86/kernel/apic/msi.c
-@@ -182,26 +182,39 @@ static struct irq_chip pci_msi_controlle
- 	.flags			= IRQCHIP_SKIP_SET_WAKE,
- };
+ 	return ret;
+ }
  
--int pci_msi_prepare(struct irq_domain *domain, struct device *dev, int nvec,
--		    msi_alloc_info_t *arg)
-+static void pci_msi_prepare(struct device *dev, msi_alloc_info_t *arg)
+--- a/drivers/iommu/intel/irq_remapping.c
++++ b/drivers/iommu/intel/irq_remapping.c
+@@ -1086,6 +1086,22 @@ static int reenable_irq_remapping(int ei
+ 	return -1;
+ }
+ 
++/*
++ * Store the MSI remapping domain pointer in the device if enabled.
++ *
++ * This is called from dmar_pci_bus_add_dev() so it works even when DMA
++ * remapping is disabled. Only update the pointer if the device is not
++ * already handled by a non default PCI/MSI interrupt domain. This protects
++ * e.g. VMD devices.
++ */
++void intel_irq_remap_add_device(struct dmar_pci_notify_info *info)
++{
++	if (!irq_remapping_enabled || pci_dev_has_special_msi_domain(info->dev))
++		return;
++
++	dev_set_msi_domain(&info->dev->dev, map_dev_to_ir(info->dev));
++}
++
+ static void prepare_irte(struct irte *irte, int vector, unsigned int dest)
  {
--	struct pci_dev *pdev = to_pci_dev(dev);
--	struct msi_desc *desc = first_pci_msi_entry(pdev);
-+	struct msi_desc *desc = first_msi_entry(dev);
- 
--	init_irq_alloc_info(arg, NULL);
- 	if (desc->msi_attrib.is_msix) {
- 		arg->type = X86_IRQ_ALLOC_TYPE_PCI_MSIX;
- 	} else {
- 		arg->type = X86_IRQ_ALLOC_TYPE_PCI_MSI;
- 		arg->flags |= X86_IRQ_ALLOC_CONTIGUOUS_VECTORS;
- 	}
-+}
-+
-+static void dev_msi_prepare(struct device *dev, msi_alloc_info_t *arg)
-+{
-+	arg->type = X86_IRQ_ALLOC_TYPE_DEV_MSI;
-+}
-+
-+int x86_msi_prepare(struct irq_domain *domain, struct device *dev, int nvec,
-+		    msi_alloc_info_t *arg)
-+{
-+	init_irq_alloc_info(arg, NULL);
-+
-+	if (dev_is_pci(dev))
-+		pci_msi_prepare(dev, arg);
-+	else
-+		dev_msi_prepare(dev, arg);
- 
- 	return 0;
- }
--EXPORT_SYMBOL_GPL(pci_msi_prepare);
-+EXPORT_SYMBOL_GPL(x86_msi_prepare);
- 
- static struct msi_domain_ops pci_msi_domain_ops = {
--	.msi_prepare	= pci_msi_prepare,
-+	.msi_prepare	= x86_msi_prepare,
+ 	memset(irte, 0, sizeof(*irte));
+--- a/include/linux/intel-iommu.h
++++ b/include/linux/intel-iommu.h
+@@ -439,6 +439,11 @@ struct ir_table {
+ 	struct irte *base;
+ 	unsigned long *bitmap;
  };
- 
- static struct msi_domain_info pci_msi_domain_info = {
---- a/drivers/pci/controller/pci-hyperv.c
-+++ b/drivers/pci/controller/pci-hyperv.c
-@@ -1532,7 +1532,7 @@ static struct irq_chip hv_msi_irq_chip =
- };
- 
- static struct msi_domain_ops hv_msi_ops = {
--	.msi_prepare	= pci_msi_prepare,
-+	.msi_prepare	= arch_msi_prepare,
- 	.msi_free	= hv_msi_free,
- };
- 
---- a/include/linux/msi.h
-+++ b/include/linux/msi.h
-@@ -430,4 +430,8 @@ static inline struct irq_domain *pci_msi
- }
- #endif /* CONFIG_PCI_MSI_IRQ_DOMAIN */
- 
-+#ifndef arch_msi_prepare
-+# define arch_msi_prepare	NULL
-+#endif
 +
- #endif /* LINUX_MSI_H */
++void intel_irq_remap_add_device(struct dmar_pci_notify_info *info);
++#else
++static inline void
++intel_irq_remap_add_device(struct dmar_pci_notify_info *info) { }
+ #endif
+ 
+ struct iommu_flush {
 
 
