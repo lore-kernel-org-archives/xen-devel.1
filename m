@@ -7,60 +7,59 @@ X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5E566C433E8
-	for <xen-devel@archiver.kernel.org>; Fri, 21 Aug 2020 02:26:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6FFE8C433E1
+	for <xen-devel@archiver.kernel.org>; Fri, 21 Aug 2020 02:26:51 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3310E20732
-	for <xen-devel@archiver.kernel.org>; Fri, 21 Aug 2020 02:26:52 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 44A91207BB
+	for <xen-devel@archiver.kernel.org>; Fri, 21 Aug 2020 02:26:51 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="XYwY5aZB";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="SJFB1hWr"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3310E20732
+	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="aKS5lAGS";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="WDwJDz3X"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 44A91207BB
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k8wlO-0005DY-Fh; Fri, 21 Aug 2020 02:26:42 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1k8wlO-0005EO-Vh; Fri, 21 Aug 2020 02:26:42 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=z7lF=B7=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1k8wca-0002Bb-5Q
- for xen-devel@lists.xenproject.org; Fri, 21 Aug 2020 02:17:36 +0000
-X-Inumbo-ID: 63f56983-db12-4138-b4e4-1a54478862a9
-Received: from galois.linutronix.de (unknown [193.142.43.55])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 63f56983-db12-4138-b4e4-1a54478862a9;
- Fri, 21 Aug 2020 02:17:18 +0000 (UTC)
-Message-Id: <20200821002948.472642859@linutronix.de>
+ id 1k8wcV-0002BQ-UM
+ for xen-devel@lists.xenproject.org; Fri, 21 Aug 2020 02:17:31 +0000
+X-Inumbo-ID: 7a704007-1592-45fc-ba69-ae4f12f61845
+Received: from galois.linutronix.de (unknown [2a0a:51c0:0:12e:550::1])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 7a704007-1592-45fc-ba69-ae4f12f61845;
+ Fri, 21 Aug 2020 02:17:00 +0000 (UTC)
+Message-Id: <20200821002946.982695529@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1597976238;
+ s=2020; t=1597976219;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=YM0Jb+0jacRYeAAEIXyvt7LyQs4eenP0P8zOev+VYEA=;
- b=XYwY5aZBZHc/cE8NoEwTRaXWx4kQ9d5LAVJKdZmLxtBDVRWBQIJ1CD55OOiD8/PaSIC/Qz
- 86xyuToyG6fI0SYmZSPxwoPMnRKptHaFKEijx8ccnzdBv83L4NnYP/UaMCRLf1xPIu9QD6
- LnA+w+4x3Jkpbea1y5BQ1kxBaz1UJLA/aMDIsKy/If47+NLxbOJk4c2rnPclYU5gciOWt2
- q7yABVl1IeaRUY1SCLr5pnWVG3Lc67GbPkqqE2Np8EEdfhi2F/dQu1naD6Hi5jWT+CBefq
- 9I1Ctkigd4ye/r+nFa9qaNWht25+BgwifwFgNJLDdwMDEhIbqsoywHttGKLZ8A==
+ bh=mCqKSi3fy8ExwYtATAttVbUTM8VvxHS3vlXvJsftOtw=;
+ b=aKS5lAGS5ICSii2yx/d+iI9vMr1TvMV6r1bAMpnFaLBPzLpprqV5C2sjipiRq2dRuzhRiY
+ Az6dslm3aVt4hPbEyKkI/D9eWyVHd27CLerF0Ton1pdq5TwNkWnNGd/kJISan8R49Ot7ZB
+ sWJoFZLYcCFpjGGPo7Jcov0/WMrmV8a45snuLmRBKEneXpuNC6PulemnGlTOjvmH52PJwN
+ P6J37XWmZ1FnqSkWFS4YJ5HsiRXDbni3J5QlKfWYvwc6g0xqojb7tE8NdT9asatHPJ1Rvm
+ BX9whaNMTWkolxgA+W6rN9UBEQ5UGb11Zi1AOgw7iX0qzCnAt9bA7MYUBjmGDA==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1597976238;
+ s=2020e; t=1597976219;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=YM0Jb+0jacRYeAAEIXyvt7LyQs4eenP0P8zOev+VYEA=;
- b=SJFB1hWrc9NTcS6nWGalTM0SJUTy+5x03Z372SqiJn9+JXrx5GkSr1rUnc2/RHr+HRLf5m
- OPRQxTlNSr1y7xCA==
-Date: Fri, 21 Aug 2020 02:24:56 +0200
+ bh=mCqKSi3fy8ExwYtATAttVbUTM8VvxHS3vlXvJsftOtw=;
+ b=WDwJDz3XYNRtoThpdQR9sTE4mZZIR7w9oJFDzo4JCrHmGb/5G0PJkUtPZlyqOmPU4yudO2
+ OY/aUoq64F7uSMDw==
+Date: Fri, 21 Aug 2020 02:24:41 +0200
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
-Cc: x86@kernel.org, xen-devel@lists.xenproject.org, linux-pci@vger.kernel.org,
- Joerg Roedel <joro@8bytes.org>, iommu@lists.linux-foundation.org,
- linux-hyperv@vger.kernel.org, Haiyang Zhang <haiyangz@microsoft.com>,
+Cc: x86@kernel.org, linux-pci@vger.kernel.org, Joerg Roedel <joro@8bytes.org>,
+ iommu@lists.linux-foundation.org, linux-hyperv@vger.kernel.org,
+ Haiyang Zhang <haiyangz@microsoft.com>,
  Jon Derrick <jonathan.derrick@intel.com>,
  Lu Baolu <baolu.lu@linux.intel.com>, Wei Liu <wei.liu@kernel.org>,
  "K. Y. Srinivasan" <kys@microsoft.com>,
@@ -70,7 +69,7 @@ Cc: x86@kernel.org, xen-devel@lists.xenproject.org, linux-pci@vger.kernel.org,
  Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
  Jonathan Derrick <jonathan.derrick@intel.com>,
  Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
- Juergen Gross <jgross@suse.com>,
+ xen-devel@lists.xenproject.org, Juergen Gross <jgross@suse.com>,
  Boris Ostrovsky <boris.ostrovsky@oracle.com>,
  Stefano Stabellini <sstabellini@kernel.org>, Marc Zyngier <maz@kernel.org>,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
@@ -79,12 +78,12 @@ Cc: x86@kernel.org, xen-devel@lists.xenproject.org, linux-pci@vger.kernel.org,
  Alex Williamson <alex.williamson@redhat.com>,
  Jacob Pan <jacob.jun.pan@intel.com>, Baolu Lu <baolu.lu@intel.com>,
  Kevin Tian <kevin.tian@intel.com>, Dan Williams <dan.j.williams@intel.com>
-Subject: [patch RFC 32/38] x86/irq: Make most MSI ops XEN private
+Subject: [patch RFC 17/38] x86/pci: Reducde #ifdeffery in PCI init code
 References: <20200821002424.119492231@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Disposition: inline;
- filename="x86-irq--Make-most-MSI-ops-XEN-private.patch"
+ filename="x86-pci--Reducde-#ifdeffery-in-PCI-init-code.patch"
 Content-transfer-encoding: 8-bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -99,84 +98,77 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Nothing except XEN uses the setup/teardown ops. Hide them there.
+Adding a function call before the first #ifdef in arch_pci_init() triggers
+a 'mixed declarations and code' warning if PCI_DIRECT is enabled.
+
+Use stub functions and move the #ifdeffery to the header file where it is
+not in the way.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-Cc: xen-devel@lists.xenproject.org
 Cc: linux-pci@vger.kernel.org
 ---
- arch/x86/include/asm/x86_init.h |    2 --
- arch/x86/pci/xen.c              |   23 +++++++++++++++--------
- 2 files changed, 15 insertions(+), 10 deletions(-)
+ arch/x86/include/asm/pci_x86.h |   11 +++++++++++
+ arch/x86/pci/init.c            |   10 +++-------
+ 2 files changed, 14 insertions(+), 7 deletions(-)
 
---- a/arch/x86/include/asm/x86_init.h
-+++ b/arch/x86/include/asm/x86_init.h
-@@ -276,8 +276,6 @@ struct x86_platform_ops {
- struct pci_dev;
+--- a/arch/x86/include/asm/pci_x86.h
++++ b/arch/x86/include/asm/pci_x86.h
+@@ -114,9 +114,20 @@ extern const struct pci_raw_ops pci_dire
+ extern bool port_cf9_safe;
  
- struct x86_msi_ops {
--	int (*setup_msi_irqs)(struct pci_dev *dev, int nvec, int type);
--	void (*teardown_msi_irqs)(struct pci_dev *dev);
- 	void (*restore_msi_irqs)(struct pci_dev *dev);
- };
- 
---- a/arch/x86/pci/xen.c
-+++ b/arch/x86/pci/xen.c
-@@ -156,6 +156,13 @@ static int acpi_register_gsi_xen(struct
- struct xen_pci_frontend_ops *xen_pci_frontend;
- EXPORT_SYMBOL_GPL(xen_pci_frontend);
- 
-+struct xen_msi_ops {
-+	int (*setup_msi_irqs)(struct pci_dev *dev, int nvec, int type);
-+	void (*teardown_msi_irqs)(struct pci_dev *dev);
-+};
+ /* arch_initcall level */
++#ifdef CONFIG_PCI_DIRECT
+ extern int pci_direct_probe(void);
+ extern void pci_direct_init(int type);
++#else
++static inline int pci_direct_probe(void) { return -1; }
++static inline  void pci_direct_init(int type) { }
++#endif
 +
-+static struct xen_msi_ops xen_msi_ops __ro_after_init;
++#ifdef CONFIG_PCI_BIOS
+ extern void pci_pcbios_init(void);
++#else
++static inline void pci_pcbios_init(void) { }
++#endif
 +
- static int xen_setup_msi_irqs(struct pci_dev *dev, int nvec, int type)
+ extern void __init dmi_check_pciprobe(void);
+ extern void __init dmi_check_skip_isa_align(void);
+ 
+--- a/arch/x86/pci/init.c
++++ b/arch/x86/pci/init.c
+@@ -8,11 +8,9 @@
+    in the right sequence from here. */
+ static __init int pci_arch_init(void)
  {
- 	int irq, ret, i;
-@@ -414,7 +421,7 @@ static int xen_msi_domain_alloc_irqs(str
- 	else
- 		type = PCI_CAP_ID_MSI;
+-#ifdef CONFIG_PCI_DIRECT
+-	int type = 0;
++	int type;
  
--	return x86_msi.setup_msi_irqs(to_pci_dev(dev), nvec, type);
-+	return xen_msi_ops.setup_msi_irqs(to_pci_dev(dev), nvec, type);
- }
+ 	type = pci_direct_probe();
+-#endif
  
- static void xen_msi_domain_free_irqs(struct irq_domain *domain,
-@@ -423,7 +430,7 @@ static void xen_msi_domain_free_irqs(str
- 	if (WARN_ON_ONCE(!dev_is_pci(dev)))
- 		return;
+ 	if (!(pci_probe & PCI_PROBE_NOEARLY))
+ 		pci_mmcfg_early_init();
+@@ -20,18 +18,16 @@ static __init int pci_arch_init(void)
+ 	if (x86_init.pci.arch_init && !x86_init.pci.arch_init())
+ 		return 0;
  
--	x86_msi.teardown_msi_irqs(to_pci_dev(dev));
-+	xen_msi_ops.teardown_msi_irqs(to_pci_dev(dev));
- }
- 
- static struct msi_domain_ops xen_pci_msi_domain_ops = {
-@@ -461,17 +468,17 @@ static __init struct irq_domain *xen_cre
- static __init void xen_setup_pci_msi(void)
- {
- 	if (xen_initial_domain()) {
--		x86_msi.setup_msi_irqs = xen_initdom_setup_msi_irqs;
--		x86_msi.teardown_msi_irqs = xen_teardown_msi_irqs;
-+		xen_msi_ops.setup_msi_irqs = xen_initdom_setup_msi_irqs;
-+		xen_msi_ops.teardown_msi_irqs = xen_teardown_msi_irqs;
- 		x86_msi.restore_msi_irqs = xen_initdom_restore_msi_irqs;
- 		pci_msi_ignore_mask = 1;
- 	} else if (xen_pv_domain()) {
--		x86_msi.setup_msi_irqs = xen_setup_msi_irqs;
--		x86_msi.teardown_msi_irqs = xen_pv_teardown_msi_irqs;
-+		xen_msi_ops.setup_msi_irqs = xen_setup_msi_irqs;
-+		xen_msi_ops.teardown_msi_irqs = xen_pv_teardown_msi_irqs;
- 		pci_msi_ignore_mask = 1;
- 	} else if (xen_hvm_domain()) {
--		x86_msi.setup_msi_irqs = xen_hvm_setup_msi_irqs;
--		x86_msi.teardown_msi_irqs = xen_teardown_msi_irqs;
-+		xen_msi_ops.setup_msi_irqs = xen_hvm_setup_msi_irqs;
-+		xen_msi_ops.teardown_msi_irqs = xen_teardown_msi_irqs;
- 	} else {
- 		WARN_ON_ONCE(1);
- 		return;
+-#ifdef CONFIG_PCI_BIOS
+ 	pci_pcbios_init();
+-#endif
++
+ 	/*
+ 	 * don't check for raw_pci_ops here because we want pcbios as last
+ 	 * fallback, yet it's needed to run first to set pcibios_last_bus
+ 	 * in case legacy PCI probing is used. otherwise detecting peer busses
+ 	 * fails.
+ 	 */
+-#ifdef CONFIG_PCI_DIRECT
+ 	pci_direct_init(type);
+-#endif
++
+ 	if (!raw_pci_ops && !raw_pci_ext_ops)
+ 		printk(KERN_ERR
+ 		"PCI: Fatal: No config space access function found\n");
 
 
