@@ -2,66 +2,66 @@ Return-Path: <SRS0=m7Uf=B7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,UNWANTED_LANGUAGE_BODY,URIBL_BLOCKED
-	autolearn=no autolearn_force=no version=3.4.0
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8C4C1C433E5
-	for <xen-devel@archiver.kernel.org>; Fri, 21 Aug 2020 02:17:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2C61BC433E8
+	for <xen-devel@archiver.kernel.org>; Fri, 21 Aug 2020 02:17:20 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5FBCC2075E
-	for <xen-devel@archiver.kernel.org>; Fri, 21 Aug 2020 02:17:19 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 015A8207DE
+	for <xen-devel@archiver.kernel.org>; Fri, 21 Aug 2020 02:17:20 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="AbJw0WBB";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="1Ral7jAZ"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5FBCC2075E
+	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="Kq3VTSX8";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="ASAU7xfB"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 015A8207DE
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k8wbs-0002Ch-K2; Fri, 21 Aug 2020 02:16:52 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1k8wbt-0002Cv-Te; Fri, 21 Aug 2020 02:16:53 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=z7lF=B7=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1k8wbr-0002Bb-3m
+ id 1k8wbr-0002BQ-TB
  for xen-devel@lists.xenproject.org; Fri, 21 Aug 2020 02:16:51 +0000
-X-Inumbo-ID: 723cd253-2f52-4de1-96e7-ea7c3c90bb0e
+X-Inumbo-ID: 6924fe08-d163-4ae4-a0f2-027bb81bd270
 Received: from galois.linutronix.de (unknown [193.142.43.55])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 723cd253-2f52-4de1-96e7-ea7c3c90bb0e;
- Fri, 21 Aug 2020 02:16:45 +0000 (UTC)
-Message-Id: <20200821002945.804797850@linutronix.de>
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 6924fe08-d163-4ae4-a0f2-027bb81bd270;
+ Fri, 21 Aug 2020 02:16:41 +0000 (UTC)
+Message-Id: <20200821002945.441137487@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1597976204;
+ s=2020; t=1597976200;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=Qu+7FKLOcLL66ZIh2kkYhCRZlvPg4izTcWMNSWqGAVg=;
- b=AbJw0WBBJU7N+y9z9LJq0rg6joNTq9fAO/5xpYZgQmoU83d473FH3juufzFqjCxaz7kD3X
- rGB8Yu7EG20FrtQed/17Um9CuVL73NdPKYQA+mySHdH23c3cly2oXdEW/RBVhUAMgnEpz1
- RdtJdEaplAHJdPK3RSUUAkwfQpaWWYDePYO8SJYHT8A3d3pudH2HB8pybVwNE9Jd99biTR
- Jhs3VB70Or9sFuZiUyr/w2+TSs+47/lRsL7txihyq9ByFmbHnWgP/jkKKFMquT0BmYMUbZ
- YPr1qCYb+GOXohIMEtjMUsFjWptoZWnswjYruPNKsZDtCWwG/JlrroTCA9L3xw==
+ bh=+IgASHQdqPCnOTucPcGX02wYMC5pdn/nyOwg+ouAU7Y=;
+ b=Kq3VTSX8uKjpioBzzueTkN79nNBO2I0XUAh6jd71XwTySEooE4uoZ7HkYYujC26KxfiByj
+ vj/umpMZyxUbQTfEwQEQJx7Nu0JBttvca8e0D+yDHETVbvQ7Ef5eIIglB0we9V36cMBnyT
+ zCkjrT+YImdEjrxWFJshsLvIFDur7OnZtXRW8WFNyhZ5/30P/l0sWafQCCn5R6Or0tO8x1
+ G1GHFZ91C4ttID0SK06vuZMb8GKmiNN29i25BygZZJo7Ioo/h9219SPZtsE3nV23yqglAP
+ 8nD7vKolbLJZ0c8QYpdewxwfG5hksiFcVSYd3eve0E8mNhSCa43lKd8UBggBWA==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1597976204;
+ s=2020e; t=1597976200;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=Qu+7FKLOcLL66ZIh2kkYhCRZlvPg4izTcWMNSWqGAVg=;
- b=1Ral7jAZ2QZLHZbmUKB/eMrJyyHwt7NibfZJnj8yCzsnH6ODz7XOB8qvm4nSfkqDQUMzIz
- tssPLziYLTewlUDg==
-Date: Fri, 21 Aug 2020 02:24:29 +0200
+ bh=+IgASHQdqPCnOTucPcGX02wYMC5pdn/nyOwg+ouAU7Y=;
+ b=ASAU7xfBpU57hwXmRkSKAraaHaBXoaaWxjHGByCWVurZfPFoa1OO+VM698eeg4/bGLoGHL
+ RYRF87iRi7qicEAw==
+Date: Fri, 21 Aug 2020 02:24:26 +0200
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
- iommu@lists.linux-foundation.org, Lu Baolu <baolu.lu@linux.intel.com>,
- linux-hyperv@vger.kernel.org, Haiyang Zhang <haiyangz@microsoft.com>,
- Jon Derrick <jonathan.derrick@intel.com>, Wei Liu <wei.liu@kernel.org>,
+ iommu@lists.linux-foundation.org, linux-hyperv@vger.kernel.org,
+ Haiyang Zhang <haiyangz@microsoft.com>,
+ Jon Derrick <jonathan.derrick@intel.com>,
+ Lu Baolu <baolu.lu@linux.intel.com>, Wei Liu <wei.liu@kernel.org>,
  "K. Y. Srinivasan" <kys@microsoft.com>,
  Stephen Hemminger <sthemmin@microsoft.com>,
  Steve Wahl <steve.wahl@hpe.com>, Dimitri Sivanich <sivanich@hpe.com>,
@@ -79,12 +79,11 @@ Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
  Alex Williamson <alex.williamson@redhat.com>,
  Jacob Pan <jacob.jun.pan@intel.com>, Baolu Lu <baolu.lu@intel.com>,
  Kevin Tian <kevin.tian@intel.com>, Dan Williams <dan.j.williams@intel.com>
-Subject: [patch RFC 05/38] iommu/vt-d: Consolidate irq domain getter
+Subject: [patch RFC 02/38] x86/init: Remove unused init ops
 References: <20200821002424.119492231@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Content-Disposition: inline;
- filename="iommu-vt-d--Consolidate-irq-domain-getter.patch"
+Content-Disposition: inline; filename=x86-init--Remove-unused-init-ops.patch
 Content-transfer-encoding: 8-bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -99,143 +98,162 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-The irq domain request mode is now indicated in irq_alloc_info::type.
-
-Consolidate the two getter functions into one.
+Some past platform removal forgot to get rid of this unused ballast.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-Cc: Joerg Roedel <joro@8bytes.org>
-Cc: iommu@lists.linux-foundation.org
-Cc: Lu Baolu <baolu.lu@linux.intel.com>
 ---
- drivers/iommu/intel/irq_remapping.c |   67 ++++++++++++------------------------
- 1 file changed, 24 insertions(+), 43 deletions(-)
+ arch/x86/include/asm/mpspec.h   |   10 ----------
+ arch/x86/include/asm/x86_init.h |   10 ----------
+ arch/x86/kernel/mpparse.c       |   26 ++++----------------------
+ arch/x86/kernel/x86_init.c      |    4 ----
+ 4 files changed, 4 insertions(+), 46 deletions(-)
 
---- a/drivers/iommu/intel/irq_remapping.c
-+++ b/drivers/iommu/intel/irq_remapping.c
-@@ -204,35 +204,40 @@ static int modify_irte(struct irq_2_iomm
- 	return rc;
+--- a/arch/x86/include/asm/mpspec.h
++++ b/arch/x86/include/asm/mpspec.h
+@@ -67,21 +67,11 @@ static inline void find_smp_config(void)
+ #ifdef CONFIG_X86_MPPARSE
+ extern void e820__memblock_alloc_reserved_mpc_new(void);
+ extern int enable_update_mptable;
+-extern int default_mpc_apic_id(struct mpc_cpu *m);
+-extern void default_smp_read_mpc_oem(struct mpc_table *mpc);
+-# ifdef CONFIG_X86_IO_APIC
+-extern void default_mpc_oem_bus_info(struct mpc_bus *m, char *str);
+-# else
+-#  define default_mpc_oem_bus_info NULL
+-# endif
+ extern void default_find_smp_config(void);
+ extern void default_get_smp_config(unsigned int early);
+ #else
+ static inline void e820__memblock_alloc_reserved_mpc_new(void) { }
+ #define enable_update_mptable 0
+-#define default_mpc_apic_id NULL
+-#define default_smp_read_mpc_oem NULL
+-#define default_mpc_oem_bus_info NULL
+ #define default_find_smp_config x86_init_noop
+ #define default_get_smp_config x86_init_uint_noop
+ #endif
+--- a/arch/x86/include/asm/x86_init.h
++++ b/arch/x86/include/asm/x86_init.h
+@@ -11,22 +11,12 @@ struct cpuinfo_x86;
+ 
+ /**
+  * struct x86_init_mpparse - platform specific mpparse ops
+- * @mpc_record:			platform specific mpc record accounting
+  * @setup_ioapic_ids:		platform specific ioapic id override
+- * @mpc_apic_id:		platform specific mpc apic id assignment
+- * @smp_read_mpc_oem:		platform specific oem mpc table setup
+- * @mpc_oem_pci_bus:		platform specific pci bus setup (default NULL)
+- * @mpc_oem_bus_info:		platform specific mpc bus info
+  * @find_smp_config:		find the smp configuration
+  * @get_smp_config:		get the smp configuration
+  */
+ struct x86_init_mpparse {
+-	void (*mpc_record)(unsigned int mode);
+ 	void (*setup_ioapic_ids)(void);
+-	int (*mpc_apic_id)(struct mpc_cpu *m);
+-	void (*smp_read_mpc_oem)(struct mpc_table *mpc);
+-	void (*mpc_oem_pci_bus)(struct mpc_bus *m);
+-	void (*mpc_oem_bus_info)(struct mpc_bus *m, char *name);
+ 	void (*find_smp_config)(void);
+ 	void (*get_smp_config)(unsigned int early);
+ };
+--- a/arch/x86/kernel/mpparse.c
++++ b/arch/x86/kernel/mpparse.c
+@@ -46,11 +46,6 @@ static int __init mpf_checksum(unsigned
+ 	return sum & 0xFF;
  }
  
--static struct intel_iommu *map_hpet_to_ir(u8 hpet_id)
-+static struct irq_domain *map_hpet_to_ir(u8 hpet_id)
- {
- 	int i;
- 
--	for (i = 0; i < MAX_HPET_TBS; i++)
-+	for (i = 0; i < MAX_HPET_TBS; i++) {
- 		if (ir_hpet[i].id == hpet_id && ir_hpet[i].iommu)
--			return ir_hpet[i].iommu;
-+			return ir_hpet[i].iommu->ir_domain;
-+	}
- 	return NULL;
- }
- 
--static struct intel_iommu *map_ioapic_to_ir(int apic)
-+static struct intel_iommu *map_ioapic_to_iommu(int apic)
- {
- 	int i;
- 
--	for (i = 0; i < MAX_IO_APICS; i++)
-+	for (i = 0; i < MAX_IO_APICS; i++) {
- 		if (ir_ioapic[i].id == apic && ir_ioapic[i].iommu)
- 			return ir_ioapic[i].iommu;
-+	}
- 	return NULL;
- }
- 
--static struct intel_iommu *map_dev_to_ir(struct pci_dev *dev)
-+static struct irq_domain *map_ioapic_to_ir(int apic)
- {
--	struct dmar_drhd_unit *drhd;
-+	struct intel_iommu *iommu = map_ioapic_to_iommu(apic);
- 
--	drhd = dmar_find_matched_drhd_unit(dev);
--	if (!drhd)
--		return NULL;
-+	return iommu ? iommu->ir_domain : NULL;
-+}
-+
-+static struct irq_domain *map_dev_to_ir(struct pci_dev *dev)
-+{
-+	struct dmar_drhd_unit *drhd = dmar_find_matched_drhd_unit(dev);
- 
--	return drhd->iommu;
-+	return drhd ? drhd->iommu->ir_msi_domain : NULL;
- }
- 
- static int clear_entries(struct irq_2_iommu *irq_iommu)
-@@ -996,7 +1001,7 @@ static int __init parse_ioapics_under_ir
- 
- 	for (ioapic_idx = 0; ioapic_idx < nr_ioapics; ioapic_idx++) {
- 		int ioapic_id = mpc_ioapic_id(ioapic_idx);
--		if (!map_ioapic_to_ir(ioapic_id)) {
-+		if (!map_ioapic_to_iommu(ioapic_id)) {
- 			pr_err(FW_BUG "ioapic %d has no mapping iommu, "
- 			       "interrupt remapping will be disabled\n",
- 			       ioapic_id);
-@@ -1101,47 +1106,23 @@ static void prepare_irte(struct irte *ir
- 	irte->redir_hint = 1;
- }
- 
--static struct irq_domain *intel_get_ir_irq_domain(struct irq_alloc_info *info)
-+static struct irq_domain *intel_get_irq_domain(struct irq_alloc_info *info)
- {
--	struct intel_iommu *iommu = NULL;
--
- 	if (!info)
- 		return NULL;
- 
- 	switch (info->type) {
- 	case X86_IRQ_ALLOC_TYPE_IOAPIC_GET_PARENT:
--		iommu = map_ioapic_to_ir(info->ioapic_id);
--		break;
-+		return map_ioapic_to_ir(info->ioapic_id);
- 	case X86_IRQ_ALLOC_TYPE_HPET_GET_PARENT:
--		iommu = map_hpet_to_ir(info->hpet_id);
--		break;
--	default:
--		BUG_ON(1);
--		break;
--	}
--
--	return iommu ? iommu->ir_domain : NULL;
+-int __init default_mpc_apic_id(struct mpc_cpu *m)
+-{
+-	return m->apicid;
 -}
 -
--static struct irq_domain *intel_get_irq_domain(struct irq_alloc_info *info)
--{
--	struct intel_iommu *iommu;
--
--	if (!info)
--		return NULL;
--
--	switch (info->type) {
-+		return map_hpet_to_ir(info->hpet_id);
- 	case X86_IRQ_ALLOC_TYPE_PCI_MSI:
- 	case X86_IRQ_ALLOC_TYPE_PCI_MSIX:
--		iommu = map_dev_to_ir(info->msi_dev);
--		if (iommu)
--			return iommu->ir_msi_domain;
--		break;
-+		return map_dev_to_ir(info->msi_dev);
- 	default:
--		break;
-+		WARN_ON_ONCE(1);
-+		return NULL;
+ static void __init MP_processor_info(struct mpc_cpu *m)
+ {
+ 	int apicid;
+@@ -61,7 +56,7 @@ static void __init MP_processor_info(str
+ 		return;
  	}
--
--	return NULL;
+ 
+-	apicid = x86_init.mpparse.mpc_apic_id(m);
++	apicid = m->apicid;
+ 
+ 	if (m->cpuflag & CPU_BOOTPROCESSOR) {
+ 		bootup_cpu = " (Bootup-CPU)";
+@@ -73,7 +68,7 @@ static void __init MP_processor_info(str
  }
  
- struct irq_remap_ops intel_irq_remap_ops = {
-@@ -1150,7 +1131,7 @@ struct irq_remap_ops intel_irq_remap_ops
- 	.disable		= disable_irq_remapping,
- 	.reenable		= reenable_irq_remapping,
- 	.enable_faulting	= enable_drhd_fault_handling,
--	.get_ir_irq_domain	= intel_get_ir_irq_domain,
-+	.get_ir_irq_domain	= intel_get_irq_domain,
- 	.get_irq_domain		= intel_get_irq_domain,
- };
+ #ifdef CONFIG_X86_IO_APIC
+-void __init default_mpc_oem_bus_info(struct mpc_bus *m, char *str)
++static void __init mpc_oem_bus_info(struct mpc_bus *m, char *str)
+ {
+ 	memcpy(str, m->bustype, 6);
+ 	str[6] = 0;
+@@ -84,7 +79,7 @@ static void __init MP_bus_info(struct mp
+ {
+ 	char str[7];
  
+-	x86_init.mpparse.mpc_oem_bus_info(m, str);
++	mpc_oem_bus_info(m, str);
+ 
+ #if MAX_MP_BUSSES < 256
+ 	if (m->busid >= MAX_MP_BUSSES) {
+@@ -100,9 +95,6 @@ static void __init MP_bus_info(struct mp
+ 		mp_bus_id_to_type[m->busid] = MP_BUS_ISA;
+ #endif
+ 	} else if (strncmp(str, BUSTYPE_PCI, sizeof(BUSTYPE_PCI) - 1) == 0) {
+-		if (x86_init.mpparse.mpc_oem_pci_bus)
+-			x86_init.mpparse.mpc_oem_pci_bus(m);
+-
+ 		clear_bit(m->busid, mp_bus_not_pci);
+ #ifdef CONFIG_EISA
+ 		mp_bus_id_to_type[m->busid] = MP_BUS_PCI;
+@@ -198,8 +190,6 @@ static void __init smp_dump_mptable(stru
+ 			1, mpc, mpc->length, 1);
+ }
+ 
+-void __init default_smp_read_mpc_oem(struct mpc_table *mpc) { }
+-
+ static int __init smp_read_mpc(struct mpc_table *mpc, unsigned early)
+ {
+ 	char str[16];
+@@ -218,14 +208,7 @@ static int __init smp_read_mpc(struct mp
+ 	if (early)
+ 		return 1;
+ 
+-	if (mpc->oemptr)
+-		x86_init.mpparse.smp_read_mpc_oem(mpc);
+-
+-	/*
+-	 *      Now process the configuration blocks.
+-	 */
+-	x86_init.mpparse.mpc_record(0);
+-
++	/* Now process the configuration blocks. */
+ 	while (count < mpc->length) {
+ 		switch (*mpt) {
+ 		case MP_PROCESSOR:
+@@ -256,7 +239,6 @@ static int __init smp_read_mpc(struct mp
+ 			count = mpc->length;
+ 			break;
+ 		}
+-		x86_init.mpparse.mpc_record(1);
+ 	}
+ 
+ 	if (!num_processors)
+--- a/arch/x86/kernel/x86_init.c
++++ b/arch/x86/kernel/x86_init.c
+@@ -67,11 +67,7 @@ struct x86_init_ops x86_init __initdata
+ 	},
+ 
+ 	.mpparse = {
+-		.mpc_record		= x86_init_uint_noop,
+ 		.setup_ioapic_ids	= x86_init_noop,
+-		.mpc_apic_id		= default_mpc_apic_id,
+-		.smp_read_mpc_oem	= default_smp_read_mpc_oem,
+-		.mpc_oem_bus_info	= default_mpc_oem_bus_info,
+ 		.find_smp_config	= default_find_smp_config,
+ 		.get_smp_config		= default_get_smp_config,
+ 	},
 
 
