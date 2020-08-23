@@ -7,43 +7,42 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D4795C433E4
-	for <xen-devel@archiver.kernel.org>; Sun, 23 Aug 2020 09:47:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7AA7CC433E3
+	for <xen-devel@archiver.kernel.org>; Sun, 23 Aug 2020 09:47:05 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AEF1F2074D
-	for <xen-devel@archiver.kernel.org>; Sun, 23 Aug 2020 09:47:03 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AEF1F2074D
+	by mail.kernel.org (Postfix) with ESMTPS id 5885A2074D
+	for <xen-devel@archiver.kernel.org>; Sun, 23 Aug 2020 09:47:05 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5885A2074D
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k9maT-0008QL-Ei; Sun, 23 Aug 2020 09:46:53 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1k9maS-0008O4-J1; Sun, 23 Aug 2020 09:46:52 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=kEn0=CB=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1k9mQg-0004t9-U7
- for xen-devel@lists.xenproject.org; Sun, 23 Aug 2020 09:36:46 +0000
-X-Inumbo-ID: 5bc1115a-a029-44ce-9d06-989ee2105bdc
+ id 1k9mQe-0004sy-HB
+ for xen-devel@lists.xenproject.org; Sun, 23 Aug 2020 09:36:44 +0000
+X-Inumbo-ID: 7b7fd969-8cc3-4c62-98de-b1967d13a608
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 5bc1115a-a029-44ce-9d06-989ee2105bdc;
- Sun, 23 Aug 2020 09:35:30 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 7b7fd969-8cc3-4c62-98de-b1967d13a608;
+ Sun, 23 Aug 2020 09:35:29 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id BD6A7ADC4;
- Sun, 23 Aug 2020 09:35:58 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id A7E3EB7CE;
+ Sun, 23 Aug 2020 09:35:57 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>, Ian Jackson <ian.jackson@eu.citrix.com>,
- Wei Liu <wl@xen.org>
-Subject: [PATCH v3 37/38] tools: add support for library names other than
- libxen*
-Date: Sun, 23 Aug 2020 11:35:18 +0200
-Message-Id: <20200823093519.18386-38-jgross@suse.com>
+ Wei Liu <wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH v3 32/38] tools/libxl: don't include libxl_osdeps.h from
+ libxlutil sources
+Date: Sun, 23 Aug 2020 11:35:13 +0200
+Message-Id: <20200823093519.18386-33-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200823093519.18386-1-jgross@suse.com>
 References: <20200823093519.18386-1-jgross@suse.com>
@@ -62,167 +61,167 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-All Xen libraries but one (libxlutil) are named libxen...
+There is no need for the sources of libxlutil to include libxl_osdeps.h
+as the only dependency is the leading
 
-Add support in the generic library build framework for that different
-naming by adding another indirection layer. For a library
-LIB_PREFIX_<lib> can be set in tools/libs/uselibs.mk. The default is
-"xen", assuming that all libraries are starting with "lib".
+#define _GNU_SOURCE
 
-For now don't expand this support to stubdoms, as it isn't needed
-there yet.
+in libxl_osdeps.h. So replace including libxl_osdeps.h by the needed
+define.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- tools/Rules.mk     | 12 ++++++-----
- tools/libs/libs.mk | 51 ++++++++++++++++++++++++----------------------
- 2 files changed, 34 insertions(+), 29 deletions(-)
+ tools/libxl/libxlu_cfg.c    |  3 +--
+ tools/libxl/libxlu_cfg_i.h  |  1 -
+ tools/libxl/libxlu_disk.c   |  1 -
+ tools/libxl/libxlu_disk_l.c | 14 +++++++-------
+ tools/libxl/libxlu_disk_l.h |  8 ++++----
+ tools/libxl/libxlu_disk_l.l |  2 +-
+ tools/libxl/libxlu_pci.c    |  3 ++-
+ tools/libxl/libxlu_vif.c    |  3 ++-
+ 8 files changed, 17 insertions(+), 18 deletions(-)
 
-diff --git a/tools/Rules.mk b/tools/Rules.mk
-index 8ecaf063b5..5537056d00 100644
---- a/tools/Rules.mk
-+++ b/tools/Rules.mk
-@@ -87,11 +87,13 @@ endif
- # $(SHLIB_libfoo)
+diff --git a/tools/libxl/libxlu_cfg.c b/tools/libxl/libxlu_cfg.c
+index f9e8aa2f3a..874f5abfb9 100644
+--- a/tools/libxl/libxlu_cfg.c
++++ b/tools/libxl/libxlu_cfg.c
+@@ -15,8 +15,7 @@
+  * GNU Lesser General Public License for more details.
+  */
  
- define LIB_defs =
-- XEN_libxen$(1) = $$(XEN_ROOT)/tools/libs/$(1)
-- CFLAGS_libxen$(1) = -I$$(XEN_libxen$(1))/include $$(CFLAGS_xeninclude)
-- SHDEPS_libxen$(1) = $$(foreach use,$$(USELIBS_$(1)),$$(SHLIB_libxen$$(use)))
-- LDLIBS_libxen$(1) = $$(SHDEPS_libxen$(1)) $$(XEN_libxen$(1))/libxen$(1)$$(libextension)
-- SHLIB_libxen$(1) = $$(SHDEPS_libxen$(1)) -Wl,-rpath-link=$$(XEN_libxen$(1))
-+ LIB_PREFIX_$(1) ?= xen
-+ LIBREF_$(1) = lib$$(LIB_PREFIX_$(1))$(1)
-+ XEN_$$(LIBREF_$(1)) = $$(XEN_ROOT)/tools/libs/$(1)
-+ CFLAGS_$$(LIBREF_$(1)) = -I$$(XEN_$$(LIBREF_$(1)))/include $$(CFLAGS_xeninclude)
-+ SHDEPS_$$(LIBREF_$(1)) = $$(foreach use,$$(USELIBS_$(1)),$$(SHLIB_$$(LIBREF_$$(use))))
-+ LDLIBS_$$(LIBREF_$(1)) = $$(SHDEPS_$$(LIBREF_$(1))) $$(XEN_$$(LIBREF_$(1)))/$$(LIBREF_$(1))$$(libextension)
-+ SHLIB_$$(LIBREF_$(1)) = $$(SHDEPS_$$(LIBREF_$(1))) -Wl,-rpath-link=$$(XEN_$$(LIBREF_$(1)))
- endef
+-
+-#include "libxl_osdeps.h" /* must come before any other headers */
++#define _GNU_SOURCE
  
- $(foreach lib,$(LIBS_LIBS),$(eval $(call LIB_defs,$(lib))))
-diff --git a/tools/libs/libs.mk b/tools/libs/libs.mk
-index 8b1ca2aa62..fca8228d25 100644
---- a/tools/libs/libs.mk
-+++ b/tools/libs/libs.mk
-@@ -9,23 +9,26 @@ LIBNAME := $(notdir $(CURDIR))
- MAJOR ?= $(shell $(XEN_ROOT)/version.sh $(XEN_ROOT)/xen/Makefile)
- MINOR ?= 0
+ #include <limits.h>
  
--SHLIB_LDFLAGS += -Wl,--version-script=libxen$(LIBNAME).map
-+my_lib := $(LIBREF_$(LIBNAME))
-+my_name := $(LIB_PREFIX_$(LIBNAME))$(LIBNAME)
+diff --git a/tools/libxl/libxlu_cfg_i.h b/tools/libxl/libxlu_cfg_i.h
+index 87b19df311..4217f5b28d 100644
+--- a/tools/libxl/libxlu_cfg_i.h
++++ b/tools/libxl/libxlu_cfg_i.h
+@@ -18,7 +18,6 @@
+ #ifndef LIBXLU_CFG_I_H
+ #define LIBXLU_CFG_I_H
+ 
+-#include "libxl_osdeps.h" /* must come before any other headers */
+ #include "libxlu_internal.h"
+ #include "libxlu_cfg_y.h"
+ 
+diff --git a/tools/libxl/libxlu_disk.c b/tools/libxl/libxlu_disk.c
+index 18fe386dbe..1de16a6a06 100644
+--- a/tools/libxl/libxlu_disk.c
++++ b/tools/libxl/libxlu_disk.c
+@@ -1,4 +1,3 @@
+-#include "libxl_osdeps.h" /* must come before any other headers */
+ #include "libxlu_internal.h"
+ #include "libxlu_disk_l.h"
+ #include "libxlu_disk_i.h"
+diff --git a/tools/libxl/libxlu_disk_l.c b/tools/libxl/libxlu_disk_l.c
+index 05f7ac74a0..32d4b74b58 100644
+--- a/tools/libxl/libxlu_disk_l.c
++++ b/tools/libxl/libxlu_disk_l.c
+@@ -1,7 +1,7 @@
+-#line 2 "libxlu_disk_l.c"
+-#include "libxl_osdeps.h" /* must come before any other headers */
++#line 1 "libxlu_disk_l.c"
++#define _GNU_SOURCE
+ 
+-#line 5 "libxlu_disk_l.c"
++#line 4 "libxlu_disk_l.c"
+ 
+ #define  YY_INT_ALIGNED short int
+ 
+@@ -1199,9 +1199,9 @@ static int vdev_and_devtype(DiskParseContext *dpc, char *str) {
+ #undef DPC /* needs to be defined differently the actual lexer */
+ #define DPC ((DiskParseContext*)yyextra)
+ 
+-#line 1203 "libxlu_disk_l.c"
++#line 1202 "libxlu_disk_l.c"
+ 
+-#line 1205 "libxlu_disk_l.c"
++#line 1204 "libxlu_disk_l.c"
+ 
+ #define INITIAL 0
+ #define LEXERR 1
+@@ -1483,7 +1483,7 @@ YY_DECL
+ #line 180 "libxlu_disk_l.l"
+  /*----- the scanner rules which do the parsing -----*/
+ 
+-#line 1487 "libxlu_disk_l.c"
++#line 1486 "libxlu_disk_l.c"
+ 
+ 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
+ 		{
+@@ -1836,7 +1836,7 @@ YY_RULE_SETUP
+ #line 291 "libxlu_disk_l.l"
+ YY_FATAL_ERROR( "flex scanner jammed" );
+ 	YY_BREAK
+-#line 1840 "libxlu_disk_l.c"
++#line 1839 "libxlu_disk_l.c"
+ 			case YY_STATE_EOF(INITIAL):
+ 			case YY_STATE_EOF(LEXERR):
+ 				yyterminate();
+diff --git a/tools/libxl/libxlu_disk_l.h b/tools/libxl/libxlu_disk_l.h
+index 54f4662d7a..6abeecf279 100644
+--- a/tools/libxl/libxlu_disk_l.h
++++ b/tools/libxl/libxlu_disk_l.h
+@@ -2,10 +2,10 @@
+ #define xlu__disk_yyHEADER_H 1
+ #define xlu__disk_yyIN_HEADER 1
+ 
+-#line 6 "libxlu_disk_l.h"
+-#include "libxl_osdeps.h" /* must come before any other headers */
++#line 5 "libxlu_disk_l.h"
++#define _GNU_SOURCE
+ 
+-#line 9 "libxlu_disk_l.h"
++#line 8 "libxlu_disk_l.h"
+ 
+ #define  YY_INT_ALIGNED short int
+ 
+@@ -696,6 +696,6 @@ extern int yylex (yyscan_t yyscanner);
+ 
+ #line 291 "libxlu_disk_l.l"
+ 
+-#line 700 "libxlu_disk_l.h"
++#line 699 "libxlu_disk_l.h"
+ #undef xlu__disk_yyIN_HEADER
+ #endif /* xlu__disk_yyHEADER_H */
+diff --git a/tools/libxl/libxlu_disk_l.l b/tools/libxl/libxlu_disk_l.l
+index 7a46f4a30c..3bd639aab0 100644
+--- a/tools/libxl/libxlu_disk_l.l
++++ b/tools/libxl/libxlu_disk_l.l
+@@ -28,7 +28,7 @@
+  */
+ 
+ %top{
+-#include "libxl_osdeps.h" /* must come before any other headers */
++#define _GNU_SOURCE
+ }
+ 
+ %{
+diff --git a/tools/libxl/libxlu_pci.c b/tools/libxl/libxlu_pci.c
+index 7947687661..bbce719e91 100644
+--- a/tools/libxl/libxlu_pci.c
++++ b/tools/libxl/libxlu_pci.c
+@@ -1,4 +1,5 @@
+-#include "libxl_osdeps.h" /* must come before any other headers */
++#define _GNU_SOURCE
 +
-+SHLIB_LDFLAGS += -Wl,--version-script=$(my_lib).map
+ #include "libxlu_internal.h"
+ #include "libxlu_disk_l.h"
+ #include "libxlu_disk_i.h"
+diff --git a/tools/libxl/libxlu_vif.c b/tools/libxl/libxlu_vif.c
+index 0665e624dc..ccf0cbdf57 100644
+--- a/tools/libxl/libxlu_vif.c
++++ b/tools/libxl/libxlu_vif.c
+@@ -1,4 +1,5 @@
+-#include "libxl_osdeps.h" /* must come before any other headers */
++#define _GNU_SOURCE
++
+ #include "libxlu_internal.h"
  
- CFLAGS   += -Werror -Wmissing-prototypes
- CFLAGS   += -I./include $(CFLAGS_xeninclude)
--CFLAGS   += $(foreach lib, $(USELIBS_$(LIBNAME)), $(CFLAGS_libxen$(lib)))
-+CFLAGS   += $(foreach lib, $(USELIBS_$(LIBNAME)), $(CFLAGS_$(LIBREF_$(lib))))
- 
--LDUSELIBS = $(foreach lib, $(USELIBS_$(LIBNAME)), $(LDLIBS_libxen$(lib)))
-+LDUSELIBS = $(foreach lib, $(USELIBS_$(LIBNAME)), $(LDLIBS_$(LIBREF_$(lib))))
- 
- LIB_OBJS := $(SRCS-y:.c=.o)
- PIC_OBJS := $(SRCS-y:.c=.opic)
- 
--LIB := libxen$(LIBNAME).a
-+LIB := $(my_lib).a
- ifneq ($(nosharedlibs),y)
--LIB += libxen$(LIBNAME).so
-+LIB += $(my_lib).so
- endif
- 
--PKG_CONFIG ?= xen$(LIBNAME).pc
-+PKG_CONFIG ?= $(my_name).pc
- PKG_CONFIG_VERSION := $(MAJOR).$(MINOR)
- 
- ifneq ($(CONFIG_LIBXC_MINIOS),y)
-@@ -37,7 +40,7 @@ endif
- 
- PKG_CONFIG_LOCAL := $(PKG_CONFIG_DIR)/$(PKG_CONFIG)
- 
--LIBHEADER ?= xen$(LIBNAME).h
-+LIBHEADER ?= $(my_name).h
- LIBHEADERS = $(foreach h, $(LIBHEADER), include/$(h))
- LIBHEADERSGLOB = $(foreach h, $(LIBHEADER), $(XEN_ROOT)/tools/include/$(h))
- 
-@@ -48,7 +51,7 @@ $(PKG_CONFIG_LOCAL): PKG_CONFIG_LIBDIR = $(CURDIR)
- all: build
- 
- .PHONY: build
--build: libs libxen$(LIBNAME).map
-+build: libs $(my_lib).map
- 
- .PHONY: libs
- libs: headers.chk $(LIB) $(PKG_CONFIG_INST) $(PKG_CONFIG_LOCAL)
-@@ -67,42 +70,42 @@ endif
- 
- headers.chk: $(LIBHEADERSGLOB) $(AUTOINCS)
- 
--libxen$(LIBNAME).map:
-+$(my_lib).map:
- 	echo 'VERS_$(MAJOR).$(MINOR) { global: *; };' >$@
- 
- $(LIBHEADERSGLOB): $(LIBHEADERS)
- 	for i in $(realpath $(LIBHEADERS)); do ln -sf $$i $(XEN_ROOT)/tools/include; done
- 
--libxen$(LIBNAME).a: $(LIB_OBJS)
-+$(my_lib).a: $(LIB_OBJS)
- 	$(AR) rc $@ $^
- 
--libxen$(LIBNAME).so: libxen$(LIBNAME).so.$(MAJOR)
-+$(my_lib).so: $(my_lib).so.$(MAJOR)
- 	$(SYMLINK_SHLIB) $< $@
--libxen$(LIBNAME).so.$(MAJOR): libxen$(LIBNAME).so.$(MAJOR).$(MINOR)
-+$(my_lib).so.$(MAJOR): $(my_lib).so.$(MAJOR).$(MINOR)
- 	$(SYMLINK_SHLIB) $< $@
- 
--libxen$(LIBNAME).so.$(MAJOR).$(MINOR): $(PIC_OBJS) libxen$(LIBNAME).map
--	$(CC) $(LDFLAGS) $(PTHREAD_LDFLAGS) -Wl,$(SONAME_LDFLAG) -Wl,libxen$(LIBNAME).so.$(MAJOR) $(SHLIB_LDFLAGS) -o $@ $(PIC_OBJS) $(LDUSELIBS) $(APPEND_LDFLAGS)
-+$(my_lib).so.$(MAJOR).$(MINOR): $(PIC_OBJS) $(my_lib).map
-+	$(CC) $(LDFLAGS) $(PTHREAD_LDFLAGS) -Wl,$(SONAME_LDFLAG) -Wl,$(my_lib).so.$(MAJOR) $(SHLIB_LDFLAGS) -o $@ $(PIC_OBJS) $(LDUSELIBS) $(APPEND_LDFLAGS)
- 
- .PHONY: install
- install: build
- 	$(INSTALL_DIR) $(DESTDIR)$(libdir)
- 	$(INSTALL_DIR) $(DESTDIR)$(includedir)
--	$(INSTALL_SHLIB) libxen$(LIBNAME).so.$(MAJOR).$(MINOR) $(DESTDIR)$(libdir)
--	$(INSTALL_DATA) libxen$(LIBNAME).a $(DESTDIR)$(libdir)
--	$(SYMLINK_SHLIB) libxen$(LIBNAME).so.$(MAJOR).$(MINOR) $(DESTDIR)$(libdir)/libxen$(LIBNAME).so.$(MAJOR)
--	$(SYMLINK_SHLIB) libxen$(LIBNAME).so.$(MAJOR) $(DESTDIR)$(libdir)/libxen$(LIBNAME).so
-+	$(INSTALL_SHLIB) $(my_lib).so.$(MAJOR).$(MINOR) $(DESTDIR)$(libdir)
-+	$(INSTALL_DATA) $(my_lib).a $(DESTDIR)$(libdir)
-+	$(SYMLINK_SHLIB) $(my_lib).so.$(MAJOR).$(MINOR) $(DESTDIR)$(libdir)/$(my_lib).so.$(MAJOR)
-+	$(SYMLINK_SHLIB) $(my_lib).so.$(MAJOR) $(DESTDIR)$(libdir)/$(my_lib).so
- 	for i in $(LIBHEADERS); do $(INSTALL_DATA) $$i $(DESTDIR)$(includedir); done
- 	$(INSTALL_DATA) $(PKG_CONFIG) $(DESTDIR)$(PKG_INSTALLDIR)
- 
- .PHONY: uninstall
- uninstall:
--	rm -f $(DESTDIR)$(PKG_INSTALLDIR)/xen$(LIBNAME).pc
-+	rm -f $(DESTDIR)$(PKG_INSTALLDIR)/$(my_name).pc
- 	for i in $(LIBHEADER); do rm -f $(DESTDIR)$(includedir)/$(LIBHEADER); done
--	rm -f $(DESTDIR)$(libdir)/libxen$(LIBNAME).so
--	rm -f $(DESTDIR)$(libdir)/libxen$(LIBNAME).so.$(MAJOR)
--	rm -f $(DESTDIR)$(libdir)/libxen$(LIBNAME).so.$(MAJOR).$(MINOR)
--	rm -f $(DESTDIR)$(libdir)/libxen$(LIBNAME).a
-+	rm -f $(DESTDIR)$(libdir)/$(my_lib).so
-+	rm -f $(DESTDIR)$(libdir)/$(my_lib).so.$(MAJOR)
-+	rm -f $(DESTDIR)$(libdir)/$(my_lib).so.$(MAJOR).$(MINOR)
-+	rm -f $(DESTDIR)$(libdir)/$(my_lib).a
- 
- .PHONY: TAGS
- TAGS:
-@@ -111,7 +114,7 @@ TAGS:
- .PHONY: clean
- clean:
- 	rm -rf *.rpm $(LIB) *~ $(DEPS_RM) $(LIB_OBJS) $(PIC_OBJS)
--	rm -f libxen$(LIBNAME).so.$(MAJOR).$(MINOR) libxen$(LIBNAME).so.$(MAJOR)
-+	rm -f $(my_lib).so.$(MAJOR).$(MINOR) $(my_lib).so.$(MAJOR)
- 	rm -f headers.chk
- 	rm -f $(PKG_CONFIG)
- 	rm -f $(LIBHEADERSGLOB)
+ static const char *vif_bytes_per_sec_re = "^[0-9]+[GMK]?[Bb]/s$";
 -- 
 2.26.2
 
