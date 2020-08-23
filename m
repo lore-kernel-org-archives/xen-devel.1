@@ -7,42 +7,41 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E9E3BC433DF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E2A74C433E1
 	for <xen-devel@archiver.kernel.org>; Sun, 23 Aug 2020 09:36:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C103520768
+	by mail.kernel.org (Postfix) with ESMTPS id B608E2075B
 	for <xen-devel@archiver.kernel.org>; Sun, 23 Aug 2020 09:36:00 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C103520768
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B608E2075B
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k9mPh-00053X-7B; Sun, 23 Aug 2020 09:35:45 +0000
+	id 1k9mPc-00050D-EF; Sun, 23 Aug 2020 09:35:40 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=kEn0=CB=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1k9mPg-0004sy-FX
- for xen-devel@lists.xenproject.org; Sun, 23 Aug 2020 09:35:44 +0000
-X-Inumbo-ID: 24254a33-80c3-4139-a7cd-8e08c719ab0a
+ id 1k9mPb-0004sy-FD
+ for xen-devel@lists.xenproject.org; Sun, 23 Aug 2020 09:35:39 +0000
+X-Inumbo-ID: 3672458b-09c3-42b9-b597-b23e1a75522c
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 24254a33-80c3-4139-a7cd-8e08c719ab0a;
+ id 3672458b-09c3-42b9-b597-b23e1a75522c;
  Sun, 23 Aug 2020 09:35:26 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 60131AE02;
+ by mx2.suse.de (Postfix) with ESMTP id 1B4FAADD6;
  Sun, 23 Aug 2020 09:35:53 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>, Ian Jackson <ian.jackson@eu.citrix.com>,
- Wei Liu <wl@xen.org>
-Subject: [PATCH v3 09/38] tools: drop explicit path specifications for qemu
- build
-Date: Sun, 23 Aug 2020 11:34:50 +0200
-Message-Id: <20200823093519.18386-10-jgross@suse.com>
+ Wei Liu <wl@xen.org>, Samuel Thibault <samuel.thibault@ens-lyon.org>
+Subject: [PATCH v3 07/38] stubdom: add correct dependencies for Xen libraries
+Date: Sun, 23 Aug 2020 11:34:48 +0200
+Message-Id: <20200823093519.18386-8-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200823093519.18386-1-jgross@suse.com>
 References: <20200823093519.18386-1-jgross@suse.com>
@@ -61,56 +60,97 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Since more than three years now qemu is capable to set the needed
-include and library paths for the Xen libraries via pkg-config.
-
-So drop the specification of those paths in tools/Makefile. This will
-enable to move libxenctrl away from tools/libxc, as qemu's configure
-script has special treatment of this path.
+The stubdom Makefile is missing several dependencies between Xen
+libraries. Add them.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- tools/Makefile | 26 +-------------------------
- 1 file changed, 1 insertion(+), 25 deletions(-)
+ stubdom/Makefile | 16 +++++++++++++++-
+ 1 file changed, 15 insertions(+), 1 deletion(-)
 
-diff --git a/tools/Makefile b/tools/Makefile
-index 198b239edc..7c9f9fc900 100644
---- a/tools/Makefile
-+++ b/tools/Makefile
-@@ -245,32 +245,8 @@ subdir-all-qemu-xen-dir: qemu-xen-dir-find
- 		-DXC_WANT_COMPAT_GNTTAB_API=1 \
- 		-DXC_WANT_COMPAT_MAP_FOREIGN_API=1 \
- 		-DXC_WANT_COMPAT_DEVICEMODEL_API=1 \
--		-I$(XEN_ROOT)/tools/include \
--		-I$(XEN_ROOT)/tools/libs/toolcore/include \
--		-I$(XEN_ROOT)/tools/libs/toollog/include \
--		-I$(XEN_ROOT)/tools/libs/evtchn/include \
--		-I$(XEN_ROOT)/tools/libs/gnttab/include \
--		-I$(XEN_ROOT)/tools/libs/foreignmemory/include \
--		-I$(XEN_ROOT)/tools/libs/devicemodel/include \
--		-I$(XEN_ROOT)/tools/libxc/include \
--		-I$(XEN_ROOT)/tools/xenstore/include \
--		-I$(XEN_ROOT)/tools/xenstore/compat/include \
- 		$(EXTRA_CFLAGS_QEMU_XEN)" \
--		--extra-ldflags="-L$(XEN_ROOT)/tools/libxc \
--		-L$(XEN_ROOT)/tools/xenstore \
--		-L$(XEN_ROOT)/tools/libs/toolcore \
--		-L$(XEN_ROOT)/tools/libs/evtchn \
--		-L$(XEN_ROOT)/tools/libs/gnttab \
--		-L$(XEN_ROOT)/tools/libs/foreignmemory \
--		-L$(XEN_ROOT)/tools/libs/devicemodel \
--		-Wl,-rpath-link=$(XEN_ROOT)/tools/libs/toolcore \
--		-Wl,-rpath-link=$(XEN_ROOT)/tools/libs/toollog \
--		-Wl,-rpath-link=$(XEN_ROOT)/tools/libs/evtchn \
--		-Wl,-rpath-link=$(XEN_ROOT)/tools/libs/gnttab \
--		-Wl,-rpath-link=$(XEN_ROOT)/tools/libs/call \
--		-Wl,-rpath-link=$(XEN_ROOT)/tools/libs/foreignmemory \
--		-Wl,-rpath-link=$(XEN_ROOT)/tools/libs/devicemodel \
--		$(QEMU_UPSTREAM_RPATH)" \
-+		--extra-ldflags="$(QEMU_UPSTREAM_RPATH)" \
- 		--bindir=$(LIBEXEC_BIN) \
- 		--datadir=$(SHAREDIR)/qemu-xen \
- 		--localstatedir=$(localstatedir) \
+diff --git a/stubdom/Makefile b/stubdom/Makefile
+index af8cde41b9..a95212e363 100644
+--- a/stubdom/Makefile
++++ b/stubdom/Makefile
+@@ -23,6 +23,13 @@ endif
+ 
+ -include $(XEN_ROOT)/config/Stubdom.mk
+ 
++include $(XEN_ROOT)/tools/libs/uselibs.mk
++
++define LIB_deps =
++ LIBDEPS_$(1) = $$(foreach use,$$(USELIBS_$(1)),libxen$$(use))
++endef
++$(foreach lib,$(LIBS_LIBS),$(eval $(call LIB_deps,$(lib))))
++
+ GNU_TARGET_ARCH:=$(XEN_TARGET_ARCH)
+ ifeq ($(XEN_TARGET_ARCH),x86_32)
+ GNU_TARGET_ARCH:=i686
+@@ -387,6 +394,7 @@ $(TARGETS_MINIOS): mini-os-%:
+ 
+ .PHONY: libxentoolcore
+ libxentoolcore: libs-$(XEN_TARGET_ARCH)/toolcore/libxentoolcore.a
++libs-$(XEN_TARGET_ARCH)/toolcore/libxentoolcore.a: $(LIBDEPS_toolcore)
+ libs-$(XEN_TARGET_ARCH)/toolcore/libxentoolcore.a: mk-headers-$(XEN_TARGET_ARCH) $(NEWLIB_STAMPFILE)
+ 	CPPFLAGS="$(TARGET_CPPFLAGS)" CFLAGS="$(TARGET_CFLAGS)" $(MAKE) DESTDIR= -C libs-$(XEN_TARGET_ARCH)/toolcore
+ 
+@@ -396,6 +404,7 @@ libs-$(XEN_TARGET_ARCH)/toolcore/libxentoolcore.a: mk-headers-$(XEN_TARGET_ARCH)
+ 
+ .PHONY: libxentoollog
+ libxentoollog: libs-$(XEN_TARGET_ARCH)/toollog/libxentoollog.a
++libs-$(XEN_TARGET_ARCH)/toollog/libxentoollog.a: $(LIBDEPS_toollog)
+ libs-$(XEN_TARGET_ARCH)/toollog/libxentoollog.a: mk-headers-$(XEN_TARGET_ARCH) $(NEWLIB_STAMPFILE)
+ 	CPPFLAGS="$(TARGET_CPPFLAGS)" CFLAGS="$(TARGET_CFLAGS)" $(MAKE) DESTDIR= -C libs-$(XEN_TARGET_ARCH)/toollog
+ 
+@@ -405,6 +414,7 @@ libs-$(XEN_TARGET_ARCH)/toollog/libxentoollog.a: mk-headers-$(XEN_TARGET_ARCH) $
+ 
+ .PHONY: libxenevtchn
+ libxenevtchn: libs-$(XEN_TARGET_ARCH)/evtchn/libxenevtchn.a
++libs-$(XEN_TARGET_ARCH)/evtchn/libxenevtchn.a: $(LIBDEPS_evtchn)
+ libs-$(XEN_TARGET_ARCH)/evtchn/libxenevtchn.a: mk-headers-$(XEN_TARGET_ARCH) $(NEWLIB_STAMPFILE)
+ 	CPPFLAGS="$(TARGET_CPPFLAGS)" CFLAGS="$(TARGET_CFLAGS)" $(MAKE) DESTDIR= -C libs-$(XEN_TARGET_ARCH)/evtchn
+ 
+@@ -414,6 +424,7 @@ libs-$(XEN_TARGET_ARCH)/evtchn/libxenevtchn.a: mk-headers-$(XEN_TARGET_ARCH) $(N
+ 
+ .PHONY: libxengnttab
+ libxengnttab: libs-$(XEN_TARGET_ARCH)/gnttab/libxengnttab.a
++libs-$(XEN_TARGET_ARCH)/gnttab/libxengnttab.a: $(LIBDEPS_gnttab)
+ libs-$(XEN_TARGET_ARCH)/gnttab/libxengnttab.a: mk-headers-$(XEN_TARGET_ARCH) $(NEWLIB_STAMPFILE)
+ 	CPPFLAGS="$(TARGET_CPPFLAGS)" CFLAGS="$(TARGET_CFLAGS)" $(MAKE) DESTDIR= -C libs-$(XEN_TARGET_ARCH)/gnttab
+ 
+@@ -423,6 +434,7 @@ libs-$(XEN_TARGET_ARCH)/gnttab/libxengnttab.a: mk-headers-$(XEN_TARGET_ARCH) $(N
+ 
+ .PHONY: libxencall
+ libxencall: libs-$(XEN_TARGET_ARCH)/call/libxencall.a
++libs-$(XEN_TARGET_ARCH)/call/libxencall.a: $(LIBDEPS_call)
+ libs-$(XEN_TARGET_ARCH)/call/libxencall.a: mk-headers-$(XEN_TARGET_ARCH) $(NEWLIB_STAMPFILE)
+ 	CPPFLAGS="$(TARGET_CPPFLAGS)" CFLAGS="$(TARGET_CFLAGS)" $(MAKE) DESTDIR= -C libs-$(XEN_TARGET_ARCH)/call
+ 
+@@ -432,6 +444,7 @@ libs-$(XEN_TARGET_ARCH)/call/libxencall.a: mk-headers-$(XEN_TARGET_ARCH) $(NEWLI
+ 
+ .PHONY: libxenforeignmemory
+ libxenforeignmemory: libs-$(XEN_TARGET_ARCH)/foreignmemory/libxenforeignmemory.a
++libs-$(XEN_TARGET_ARCH)/foreignmemory/libxenforeignmemory.a: $(LIBDEPS_foreignmemory)
+ libs-$(XEN_TARGET_ARCH)/foreignmemory/libxenforeignmemory.a: mk-headers-$(XEN_TARGET_ARCH) $(NEWLIB_STAMPFILE)
+ 	CPPFLAGS="$(TARGET_CPPFLAGS)" CFLAGS="$(TARGET_CFLAGS)" $(MAKE) DESTDIR= -C libs-$(XEN_TARGET_ARCH)/foreignmemory
+ 
+@@ -441,6 +454,7 @@ libs-$(XEN_TARGET_ARCH)/foreignmemory/libxenforeignmemory.a: mk-headers-$(XEN_TA
+ 
+ .PHONY: libxendevicemodel
+ libxendevicemodel: libs-$(XEN_TARGET_ARCH)/devicemodel/libxendevicemodel.a
++libs-$(XEN_TARGET_ARCH)/devicemodel/libxendevicemodel.a: $(LIBDEPS_devicemodel)
+ libs-$(XEN_TARGET_ARCH)/devicemodel/libxendevicemodel.a: mk-headers-$(XEN_TARGET_ARCH) $(NEWLIB_STAMPFILE)
+ 	CPPFLAGS="$(TARGET_CPPFLAGS)" CFLAGS="$(TARGET_CFLAGS)" $(MAKE) DESTDIR= -C libs-$(XEN_TARGET_ARCH)/devicemodel
+ 
+@@ -450,7 +464,7 @@ libs-$(XEN_TARGET_ARCH)/devicemodel/libxendevicemodel.a: mk-headers-$(XEN_TARGET
+ 
+ .PHONY: libxc
+ libxc: libxc-$(XEN_TARGET_ARCH)/libxenctrl.a libxc-$(XEN_TARGET_ARCH)/libxenguest.a
+-libxc-$(XEN_TARGET_ARCH)/libxenctrl.a: mk-headers-$(XEN_TARGET_ARCH) libxentoolcore libxentoollog libxenevtchn libxengnttab libxencall libxenforeignmemory libxendevicemodel cross-zlib
++libxc-$(XEN_TARGET_ARCH)/libxenctrl.a: mk-headers-$(XEN_TARGET_ARCH) libxentoollog libxenevtchn libxengnttab libxencall libxenforeignmemory libxendevicemodel cross-zlib
+ 	CPPFLAGS="$(TARGET_CPPFLAGS)" CFLAGS="$(TARGET_CFLAGS)" $(MAKE) DESTDIR= CONFIG_LIBXC_MINIOS=y -C libxc-$(XEN_TARGET_ARCH)
+ 
+  libxc-$(XEN_TARGET_ARCH)/libxenguest.a: libxc-$(XEN_TARGET_ARCH)/libxenctrl.a
 -- 
 2.26.2
 
