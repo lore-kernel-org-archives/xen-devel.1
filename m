@@ -7,43 +7,42 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EEC67C433E8
-	for <xen-devel@archiver.kernel.org>; Sun, 23 Aug 2020 09:35:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 09390C433DF
+	for <xen-devel@archiver.kernel.org>; Sun, 23 Aug 2020 09:35:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CC6442075B
-	for <xen-devel@archiver.kernel.org>; Sun, 23 Aug 2020 09:35:51 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CC6442075B
+	by mail.kernel.org (Postfix) with ESMTPS id D847D2075B
+	for <xen-devel@archiver.kernel.org>; Sun, 23 Aug 2020 09:35:56 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D847D2075B
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k9mPP-0004tH-R3; Sun, 23 Aug 2020 09:35:27 +0000
+	id 1k9mPa-0004ye-4U; Sun, 23 Aug 2020 09:35:38 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=kEn0=CB=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1k9mPP-0004t9-2Y
- for xen-devel@lists.xenproject.org; Sun, 23 Aug 2020 09:35:27 +0000
-X-Inumbo-ID: 49da23b1-b10f-40a4-bf47-daf5264da9ff
+ id 1k9mPY-0004t9-Ry
+ for xen-devel@lists.xenproject.org; Sun, 23 Aug 2020 09:35:36 +0000
+X-Inumbo-ID: 84808e03-5e73-4a97-9599-33ffbbfa352a
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 49da23b1-b10f-40a4-bf47-daf5264da9ff;
- Sun, 23 Aug 2020 09:35:25 +0000 (UTC)
+ id 84808e03-5e73-4a97-9599-33ffbbfa352a;
+ Sun, 23 Aug 2020 09:35:26 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id E851DADC4;
- Sun, 23 Aug 2020 09:35:52 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 413C3ADE0;
+ Sun, 23 Aug 2020 09:35:53 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>, Ian Jackson <ian.jackson@eu.citrix.com>,
- Wei Liu <wl@xen.org>
-Subject: [PATCH v3 06/38] tools: generate most contents of library make
- variables
-Date: Sun, 23 Aug 2020 11:34:47 +0200
-Message-Id: <20200823093519.18386-7-jgross@suse.com>
+ Wei Liu <wl@xen.org>, Samuel Thibault <samuel.thibault@ens-lyon.org>
+Subject: [PATCH v3 08/38] stubdom: simplify building xen libraries for stubdoms
+Date: Sun, 23 Aug 2020 11:34:49 +0200
+Message-Id: <20200823093519.18386-9-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200823093519.18386-1-jgross@suse.com>
 References: <20200823093519.18386-1-jgross@suse.com>
@@ -62,265 +61,187 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Library related make variables (CFLAGS_lib*, SHDEPS_lib*, LDLIBS_lib*
-and SHLIB_lib*) mostly have a common pattern for their values. Generate
-most of this content automatically by adding a new per-library variable
-defining on which other libraries a lib is depending. Those definitions
-are put into an own file in order to make it possible to include it
-from various Makefiles, especially for stubdom.
+The pattern for building a Xen library with sources under tools/libs
+is always the same. Simplify stubdom/Makefile by defining a callable
+make program for those libraries.
 
-This in turn makes it possible to drop the USELIB variable from each
-library Makefile.
-
-The LIBNAME variable can be dropped, too, as it can be derived from the
-directory name the library is residing in.
+Even if not needed right now add the possibility for defining
+additional dependencies for a library.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- tools/Rules.mk                    | 59 +++++++------------------------
- tools/libs/call/Makefile          |  2 --
- tools/libs/devicemodel/Makefile   |  2 --
- tools/libs/evtchn/Makefile        |  2 --
- tools/libs/foreignmemory/Makefile |  2 --
- tools/libs/gnttab/Makefile        |  2 --
- tools/libs/hypfs/Makefile         |  2 --
- tools/libs/libs.mk                |  8 ++---
- tools/libs/toolcore/Makefile      |  1 -
- tools/libs/toollog/Makefile       |  1 -
- tools/libs/uselibs.mk             | 18 ++++++++++
- 11 files changed, 34 insertions(+), 65 deletions(-)
- create mode 100644 tools/libs/uselibs.mk
+ stubdom/Makefile | 120 ++++++++++-------------------------------------
+ 1 file changed, 24 insertions(+), 96 deletions(-)
 
-diff --git a/tools/Rules.mk b/tools/Rules.mk
-index 5d699cfd39..7e019a8a65 100644
---- a/tools/Rules.mk
-+++ b/tools/Rules.mk
-@@ -12,14 +12,9 @@ INSTALL = $(XEN_ROOT)/tools/cross-install
- LDFLAGS += $(PREPEND_LDFLAGS_XEN_TOOLS)
+diff --git a/stubdom/Makefile b/stubdom/Makefile
+index a95212e363..4fd86dd44b 100644
+--- a/stubdom/Makefile
++++ b/stubdom/Makefile
+@@ -327,6 +327,16 @@ ioemu/linkfarm.stamp:
+ 	touch ioemu/linkfarm.stamp
+ endif
  
- XEN_INCLUDE        = $(XEN_ROOT)/tools/include
--XEN_libxentoolcore = $(XEN_ROOT)/tools/libs/toolcore
--XEN_libxentoollog  = $(XEN_ROOT)/tools/libs/toollog
--XEN_libxenevtchn   = $(XEN_ROOT)/tools/libs/evtchn
--XEN_libxengnttab   = $(XEN_ROOT)/tools/libs/gnttab
--XEN_libxencall     = $(XEN_ROOT)/tools/libs/call
--XEN_libxenforeignmemory = $(XEN_ROOT)/tools/libs/foreignmemory
--XEN_libxendevicemodel = $(XEN_ROOT)/tools/libs/devicemodel
--XEN_libxenhypfs    = $(XEN_ROOT)/tools/libs/hypfs
++#######
++# libraries under tools/libs
++#######
 +
-+include $(XEN_ROOT)/tools/libs/uselibs.mk
++STUB_LIBS := toolcore toollog evtchn gnttab call foreignmemory devicemodel
 +
- XEN_libxenctrl     = $(XEN_ROOT)/tools/libxc
- # Currently libxenguest lives in the same directory as libxenctrl
- XEN_libxenguest    = $(XEN_libxenctrl)
-@@ -99,45 +94,15 @@ endif
- # Consumers of libfoo should not directly use $(SHDEPS_libfoo) or
- # $(SHLIB_libfoo)
++#######
++# common handling
++#######
++
+ define do_links
+   mkdir -p $(dir $@)include
+   cd $(dir $@); \
+@@ -337,26 +347,21 @@ define do_links
+   touch $@
+ endef
  
--CFLAGS_libxentoollog = -I$(XEN_libxentoollog)/include $(CFLAGS_xeninclude)
--SHDEPS_libxentoollog =
--LDLIBS_libxentoollog = $(SHDEPS_libxentoollog) $(XEN_libxentoollog)/libxentoollog$(libextension)
--SHLIB_libxentoollog  = $(SHDEPS_libxentoollog) -Wl,-rpath-link=$(XEN_libxentoollog)
+-libs-$(XEN_TARGET_ARCH)/toolcore/stamp: $(XEN_ROOT)/tools/libs/toolcore/Makefile
+-	$(do_links)
 -
--CFLAGS_libxentoolcore = -I$(XEN_libxentoolcore)/include $(CFLAGS_xeninclude)
--SHDEPS_libxentoolcore =
--LDLIBS_libxentoolcore = $(SHDEPS_libxentoolcore) $(XEN_libxentoolcore)/libxentoolcore$(libextension)
--SHLIB_libxentoolcore  = $(SHDEPS_libxentoolcore) -Wl,-rpath-link=$(XEN_libxentoolcore)
+-libs-$(XEN_TARGET_ARCH)/toollog/stamp: $(XEN_ROOT)/tools/libs/toollog/Makefile
+-	$(do_links)
++define BUILD_lib
++ .PHONY: libxen$(1) clean-libxen$(1)
++ libxen$(1): libs-$$(XEN_TARGET_ARCH)/$(1)/libxen$(1).a
++ libs-$$(XEN_TARGET_ARCH)/$(1)/libxen$(1).a: $$(LIBDEPS_$(1)) $$(LIBDEP_$(1))
++ libs-$$(XEN_TARGET_ARCH)/$(1)/libxen$(1).a: mk-headers-$$(XEN_TARGET_ARCH) $$(NEWLIB_STAMPFILE)
++	CPPFLAGS="$$(TARGET_CPPFLAGS)" CFLAGS="$$(TARGET_CFLAGS)" $$(MAKE) DESTDIR= CONFIG_LIBXC_MINIOS=y -C libs-$$(XEN_TARGET_ARCH)/$(1)
+ 
+-libs-$(XEN_TARGET_ARCH)/evtchn/stamp: $(XEN_ROOT)/tools/libs/evtchn/Makefile
+-	$(do_links)
++ clean-libxen$(1):
++	[ ! -e libs-$$(XEN_TARGET_ARCH)/$(1)/Makefile ] || $$(MAKE) DESTDIR= -C libs-$$(XEN_TARGET_ARCH)/$(1) clean
+ 
+-libs-$(XEN_TARGET_ARCH)/gnttab/stamp: $(XEN_ROOT)/tools/libs/gnttab/Makefile
+-	$(do_links)
 -
--CFLAGS_libxenevtchn = -I$(XEN_libxenevtchn)/include $(CFLAGS_xeninclude)
--SHDEPS_libxenevtchn = $(SHLIB_libxentoolcore)
--LDLIBS_libxenevtchn = $(SHDEPS_libxenevtchn) $(XEN_libxenevtchn)/libxenevtchn$(libextension)
--SHLIB_libxenevtchn  = $(SHDEPS_libxenevtchn) -Wl,-rpath-link=$(XEN_libxenevtchn)
+-libs-$(XEN_TARGET_ARCH)/call/stamp: $(XEN_ROOT)/tools/libs/call/Makefile
+-	$(do_links)
 -
--CFLAGS_libxengnttab = -I$(XEN_libxengnttab)/include $(CFLAGS_xeninclude)
--SHDEPS_libxengnttab = $(SHLIB_libxentoollog) $(SHLIB_libxentoolcore)
--LDLIBS_libxengnttab = $(SHDEPS_libxengnttab) $(XEN_libxengnttab)/libxengnttab$(libextension)
--SHLIB_libxengnttab  = $(SHDEPS_libxengnttab) -Wl,-rpath-link=$(XEN_libxengnttab)
--
--CFLAGS_libxencall = -I$(XEN_libxencall)/include $(CFLAGS_xeninclude)
--SHDEPS_libxencall = $(SHLIB_libxentoolcore)
--LDLIBS_libxencall = $(SHDEPS_libxencall) $(XEN_libxencall)/libxencall$(libextension)
--SHLIB_libxencall  = $(SHDEPS_libxencall) -Wl,-rpath-link=$(XEN_libxencall)
--
--CFLAGS_libxenforeignmemory = -I$(XEN_libxenforeignmemory)/include $(CFLAGS_xeninclude)
--SHDEPS_libxenforeignmemory = $(SHLIB_libxentoolcore)
--LDLIBS_libxenforeignmemory = $(SHDEPS_libxenforeignmemory) $(XEN_libxenforeignmemory)/libxenforeignmemory$(libextension)
--SHLIB_libxenforeignmemory  = $(SHDEPS_libxenforeignmemory) -Wl,-rpath-link=$(XEN_libxenforeignmemory)
--
--CFLAGS_libxendevicemodel = -I$(XEN_libxendevicemodel)/include $(CFLAGS_xeninclude)
--SHDEPS_libxendevicemodel = $(SHLIB_libxentoollog) $(SHLIB_libxentoolcore) $(SHLIB_libxencall)
--LDLIBS_libxendevicemodel = $(SHDEPS_libxendevicemodel) $(XEN_libxendevicemodel)/libxendevicemodel$(libextension)
--SHLIB_libxendevicemodel  = $(SHDEPS_libxendevicemodel) -Wl,-rpath-link=$(XEN_libxendevicemodel)
--
--CFLAGS_libxenhypfs = -I$(XEN_libxenhypfs)/include $(CFLAGS_xeninclude)
--SHDEPS_libxenhypfs = $(SHLIB_libxentoollog) $(SHLIB_libxentoolcore) $(SHLIB_libxencall)
--LDLIBS_libxenhypfs = $(SHDEPS_libxenhypfs) $(XEN_libxenhypfs)/libxenhypfs$(libextension)
--SHLIB_libxenhypfs  = $(SHDEPS_libxenhypfs) -Wl,-rpath-link=$(XEN_libxenhypfs)
-+define LIB_defs =
-+ XEN_libxen$(1) = $$(XEN_ROOT)/tools/libs/$(1)
-+ CFLAGS_libxen$(1) = -I$$(XEN_libxen$(1))/include $$(CFLAGS_xeninclude)
-+ SHDEPS_libxen$(1) = $$(foreach use,$$(USELIBS_$(1)),$$(SHLIB_libxen$$(use)))
-+ LDLIBS_libxen$(1) = $$(SHDEPS_libxen$(1)) $$(XEN_libxen$(1))/libxen$(1)$$(libextension)
-+ SHLIB_libxen$(1) = $$(SHDEPS_libxen$(1)) -Wl,-rpath-link=$$(XEN_libxen$(1))
+-libs-$(XEN_TARGET_ARCH)/foreignmemory/stamp: $(XEN_ROOT)/tools/libs/foreignmemory/Makefile
+-	$(do_links)
++ libs-$$(XEN_TARGET_ARCH)/$(1)/stamp: $$(XEN_ROOT)/tools/libs/$(1)/Makefile
++	$$(do_links)
 +endef
-+
-+$(foreach lib,$(LIBS_LIBS),$(eval $(call LIB_defs,$(lib))))
  
- # code which compiles against libxenctrl get __XEN_TOOLS__ and
- # therefore sees the unstable hypercall interfaces.
-diff --git a/tools/libs/call/Makefile b/tools/libs/call/Makefile
-index 7994b411fa..81c7478efd 100644
---- a/tools/libs/call/Makefile
-+++ b/tools/libs/call/Makefile
-@@ -3,8 +3,6 @@ include $(XEN_ROOT)/tools/Rules.mk
+-libs-$(XEN_TARGET_ARCH)/devicemodel/stamp: $(XEN_ROOT)/tools/libs/devicemodel/Makefile
+-	$(do_links)
++$(foreach lib,$(STUB_LIBS),$(eval $(call BUILD_lib,$(lib))))
  
- MAJOR    = 1
- MINOR    = 2
--LIBNAME  := call
--USELIBS  := toollog toolcore
+ libxc-$(XEN_TARGET_ARCH)/stamp: $(XEN_ROOT)/tools/libxc/Makefile
+ 	$(do_links)
+@@ -364,8 +369,7 @@ libxc-$(XEN_TARGET_ARCH)/stamp: $(XEN_ROOT)/tools/libxc/Makefile
+ xenstore/stamp: $(XEN_ROOT)/tools/xenstore/Makefile
+ 	$(do_links)
  
- SRCS-y                 += core.c buffer.c
- SRCS-$(CONFIG_Linux)   += linux.c
-diff --git a/tools/libs/devicemodel/Makefile b/tools/libs/devicemodel/Makefile
-index d9d1d1b850..42417958f2 100644
---- a/tools/libs/devicemodel/Makefile
-+++ b/tools/libs/devicemodel/Makefile
-@@ -3,8 +3,6 @@ include $(XEN_ROOT)/tools/Rules.mk
+-LINK_LIBS_DIRS := toolcore toollog evtchn gnttab call foreignmemory devicemodel
+-LINK_DIRS := libxc-$(XEN_TARGET_ARCH) xenstore $(foreach dir,$(LINK_LIBS_DIRS),libs-$(XEN_TARGET_ARCH)/$(dir))
++LINK_DIRS := libxc-$(XEN_TARGET_ARCH) xenstore $(foreach dir,$(STUB_LIBS),libs-$(XEN_TARGET_ARCH)/$(dir))
+ LINK_STAMPS := $(foreach dir,$(LINK_DIRS),$(dir)/stamp)
  
- MAJOR    = 1
- MINOR    = 3
--LIBNAME  := devicemodel
--USELIBS  := toollog toolcore call
+ mk-headers-$(XEN_TARGET_ARCH): $(IOEMU_LINKFARM_TARGET) $(LINK_STAMPS)
+@@ -388,76 +392,6 @@ $(TARGETS_MINIOS): mini-os-%:
+                 mkdir -p $@/$$i ; \
+ 	done
  
- SRCS-y                 += core.c
- SRCS-$(CONFIG_Linux)   += linux.c
-diff --git a/tools/libs/evtchn/Makefile b/tools/libs/evtchn/Makefile
-index d7aa4d402f..aec76641e8 100644
---- a/tools/libs/evtchn/Makefile
-+++ b/tools/libs/evtchn/Makefile
-@@ -3,8 +3,6 @@ include $(XEN_ROOT)/tools/Rules.mk
+-#######
+-# libxentoolcore
+-#######
+-
+-.PHONY: libxentoolcore
+-libxentoolcore: libs-$(XEN_TARGET_ARCH)/toolcore/libxentoolcore.a
+-libs-$(XEN_TARGET_ARCH)/toolcore/libxentoolcore.a: $(LIBDEPS_toolcore)
+-libs-$(XEN_TARGET_ARCH)/toolcore/libxentoolcore.a: mk-headers-$(XEN_TARGET_ARCH) $(NEWLIB_STAMPFILE)
+-	CPPFLAGS="$(TARGET_CPPFLAGS)" CFLAGS="$(TARGET_CFLAGS)" $(MAKE) DESTDIR= -C libs-$(XEN_TARGET_ARCH)/toolcore
+-
+-#######
+-# libxentoollog
+-#######
+-
+-.PHONY: libxentoollog
+-libxentoollog: libs-$(XEN_TARGET_ARCH)/toollog/libxentoollog.a
+-libs-$(XEN_TARGET_ARCH)/toollog/libxentoollog.a: $(LIBDEPS_toollog)
+-libs-$(XEN_TARGET_ARCH)/toollog/libxentoollog.a: mk-headers-$(XEN_TARGET_ARCH) $(NEWLIB_STAMPFILE)
+-	CPPFLAGS="$(TARGET_CPPFLAGS)" CFLAGS="$(TARGET_CFLAGS)" $(MAKE) DESTDIR= -C libs-$(XEN_TARGET_ARCH)/toollog
+-
+-#######
+-# libxenevtchn
+-#######
+-
+-.PHONY: libxenevtchn
+-libxenevtchn: libs-$(XEN_TARGET_ARCH)/evtchn/libxenevtchn.a
+-libs-$(XEN_TARGET_ARCH)/evtchn/libxenevtchn.a: $(LIBDEPS_evtchn)
+-libs-$(XEN_TARGET_ARCH)/evtchn/libxenevtchn.a: mk-headers-$(XEN_TARGET_ARCH) $(NEWLIB_STAMPFILE)
+-	CPPFLAGS="$(TARGET_CPPFLAGS)" CFLAGS="$(TARGET_CFLAGS)" $(MAKE) DESTDIR= -C libs-$(XEN_TARGET_ARCH)/evtchn
+-
+-#######
+-# libxengnttab
+-#######
+-
+-.PHONY: libxengnttab
+-libxengnttab: libs-$(XEN_TARGET_ARCH)/gnttab/libxengnttab.a
+-libs-$(XEN_TARGET_ARCH)/gnttab/libxengnttab.a: $(LIBDEPS_gnttab)
+-libs-$(XEN_TARGET_ARCH)/gnttab/libxengnttab.a: mk-headers-$(XEN_TARGET_ARCH) $(NEWLIB_STAMPFILE)
+-	CPPFLAGS="$(TARGET_CPPFLAGS)" CFLAGS="$(TARGET_CFLAGS)" $(MAKE) DESTDIR= -C libs-$(XEN_TARGET_ARCH)/gnttab
+-
+-#######
+-# libxencall
+-#######
+-
+-.PHONY: libxencall
+-libxencall: libs-$(XEN_TARGET_ARCH)/call/libxencall.a
+-libs-$(XEN_TARGET_ARCH)/call/libxencall.a: $(LIBDEPS_call)
+-libs-$(XEN_TARGET_ARCH)/call/libxencall.a: mk-headers-$(XEN_TARGET_ARCH) $(NEWLIB_STAMPFILE)
+-	CPPFLAGS="$(TARGET_CPPFLAGS)" CFLAGS="$(TARGET_CFLAGS)" $(MAKE) DESTDIR= -C libs-$(XEN_TARGET_ARCH)/call
+-
+-#######
+-# libxenforeignmemory
+-#######
+-
+-.PHONY: libxenforeignmemory
+-libxenforeignmemory: libs-$(XEN_TARGET_ARCH)/foreignmemory/libxenforeignmemory.a
+-libs-$(XEN_TARGET_ARCH)/foreignmemory/libxenforeignmemory.a: $(LIBDEPS_foreignmemory)
+-libs-$(XEN_TARGET_ARCH)/foreignmemory/libxenforeignmemory.a: mk-headers-$(XEN_TARGET_ARCH) $(NEWLIB_STAMPFILE)
+-	CPPFLAGS="$(TARGET_CPPFLAGS)" CFLAGS="$(TARGET_CFLAGS)" $(MAKE) DESTDIR= -C libs-$(XEN_TARGET_ARCH)/foreignmemory
+-
+-#######
+-# libxendevicemodel
+-#######
+-
+-.PHONY: libxendevicemodel
+-libxendevicemodel: libs-$(XEN_TARGET_ARCH)/devicemodel/libxendevicemodel.a
+-libs-$(XEN_TARGET_ARCH)/devicemodel/libxendevicemodel.a: $(LIBDEPS_devicemodel)
+-libs-$(XEN_TARGET_ARCH)/devicemodel/libxendevicemodel.a: mk-headers-$(XEN_TARGET_ARCH) $(NEWLIB_STAMPFILE)
+-	CPPFLAGS="$(TARGET_CPPFLAGS)" CFLAGS="$(TARGET_CFLAGS)" $(MAKE) DESTDIR= -C libs-$(XEN_TARGET_ARCH)/devicemodel
+-
+ #######
+ # libxc
+ #######
+@@ -672,6 +606,7 @@ uninstall-vtpmmgr:
  
- MAJOR    = 1
- MINOR    = 1
--LIBNAME  := evtchn
--USELIBS  := toollog toolcore
- 
- SRCS-y                 += core.c
- SRCS-$(CONFIG_Linux)   += linux.c
-diff --git a/tools/libs/foreignmemory/Makefile b/tools/libs/foreignmemory/Makefile
-index 823989681d..cf444d3c1a 100644
---- a/tools/libs/foreignmemory/Makefile
-+++ b/tools/libs/foreignmemory/Makefile
-@@ -3,8 +3,6 @@ include $(XEN_ROOT)/tools/Rules.mk
- 
- MAJOR    = 1
- MINOR    = 3
--LIBNAME  := foreignmemory
--USELIBS  := toollog toolcore
- 
- SRCS-y                 += core.c
- SRCS-$(CONFIG_Linux)   += linux.c
-diff --git a/tools/libs/gnttab/Makefile b/tools/libs/gnttab/Makefile
-index c0fffdac71..d8d4d55e27 100644
---- a/tools/libs/gnttab/Makefile
-+++ b/tools/libs/gnttab/Makefile
-@@ -3,8 +3,6 @@ include $(XEN_ROOT)/tools/Rules.mk
- 
- MAJOR    = 1
- MINOR    = 2
--LIBNAME  := gnttab
--USELIBS  := toollog toolcore
- 
- SRCS-GNTTAB            += gnttab_core.c
- SRCS-GNTSHR            += gntshr_core.c
-diff --git a/tools/libs/hypfs/Makefile b/tools/libs/hypfs/Makefile
-index b4c41f6189..668d68853f 100644
---- a/tools/libs/hypfs/Makefile
-+++ b/tools/libs/hypfs/Makefile
-@@ -3,8 +3,6 @@ include $(XEN_ROOT)/tools/Rules.mk
- 
- MAJOR    = 1
- MINOR    = 0
--LIBNAME  := hypfs
--USELIBS  := toollog toolcore call
- 
- APPEND_LDFLAGS += -lz
- 
-diff --git a/tools/libs/libs.mk b/tools/libs/libs.mk
-index 764f5441e2..19efc5e743 100644
---- a/tools/libs/libs.mk
-+++ b/tools/libs/libs.mk
-@@ -1,18 +1,18 @@
- # Common Makefile for building a lib.
- #
- # Variables taken as input:
--#   LIBNAME: name of lib to build, will be prepended with "libxen"
- #   MAJOR:   major version of lib
- #   MINOR:   minor version of lib
--#   USELIBS: xen libs to use (e.g. "toolcore toollog")
-+
-+LIBNAME := $(notdir $(CURDIR))
- 
- SHLIB_LDFLAGS += -Wl,--version-script=libxen$(LIBNAME).map
- 
- CFLAGS   += -Werror -Wmissing-prototypes
- CFLAGS   += -I./include $(CFLAGS_xeninclude)
--CFLAGS   += $(foreach lib, $(USELIBS), $(CFLAGS_libxen$(lib)))
-+CFLAGS   += $(foreach lib, $(USELIBS_$(LIBNAME)), $(CFLAGS_libxen$(lib)))
- 
--LDUSELIBS = $(foreach lib, $(USELIBS), $(LDLIBS_libxen$(lib)))
-+LDUSELIBS = $(foreach lib, $(USELIBS_$(LIBNAME)), $(LDLIBS_libxen$(lib)))
- 
- LIB_OBJS := $(SRCS-y:.c=.o)
- PIC_OBJS := $(SRCS-y:.c=.opic)
-diff --git a/tools/libs/toolcore/Makefile b/tools/libs/toolcore/Makefile
-index 85ff2b26fd..34b08a4236 100644
---- a/tools/libs/toolcore/Makefile
-+++ b/tools/libs/toolcore/Makefile
-@@ -3,7 +3,6 @@ include $(XEN_ROOT)/tools/Rules.mk
- 
- MAJOR	= 1
- MINOR	= 0
--LIBNAME  := toolcore
- AUTOINCS := include/_xentoolcore_list.h
- 
- SRCS-y	+= handlereg.c
-diff --git a/tools/libs/toollog/Makefile b/tools/libs/toollog/Makefile
-index 2d3ae4e627..3f986835d6 100644
---- a/tools/libs/toollog/Makefile
-+++ b/tools/libs/toollog/Makefile
-@@ -3,7 +3,6 @@ include $(XEN_ROOT)/tools/Rules.mk
- 
- MAJOR	= 1
- MINOR	= 0
--LIBNAME  := toollog
- 
- SRCS-y	+= xtl_core.c
- SRCS-y	+= xtl_logger_stdio.c
-diff --git a/tools/libs/uselibs.mk b/tools/libs/uselibs.mk
-new file mode 100644
-index 0000000000..db73fe314e
---- /dev/null
-+++ b/tools/libs/uselibs.mk
-@@ -0,0 +1,18 @@
-+# Libraries below tools/libs/ and their dependencies
-+
-+LIBS_LIBS += toolcore
-+USELIBS_toolcore :=
-+LIBS_LIBS += toollog
-+USELIBS_toollog :=
-+LIBS_LIBS += evtchn
-+USELIBS_evtchn := toollog toolcore
-+LIBS_LIBS += gnttab
-+USELIBS_gnttab := toollog toolcore
-+LIBS_LIBS += call
-+USELIBS_call := toollog toolcore
-+LIBS_LIBS += foreignmemory
-+USELIBS_foreignmemory := toollog toolcore
-+LIBS_LIBS += devicemodel
-+USELIBS_devicemodel := toollog toolcore call
-+LIBS_LIBS += hypfs
-+USELIBS_hypfs := toollog toolcore call
+ # Only clean the libxc/ioemu/mini-os part
+ .PHONY: clean
++clean: $(foreach lib,$(STUB_LIBS),clean-libxen$(lib))
+ clean:
+ 	rm -fr mini-os-$(XEN_TARGET_ARCH)-ioemu
+ 	rm -fr mini-os-$(XEN_TARGET_ARCH)-c
+@@ -688,13 +623,6 @@ clean:
+ 	rm -f $(STUBDOMPATH)
+ 	rm -f *-minios-config.mk
+ 	rm -fr pkg-config
+-	[ ! -e libs-$(XEN_TARGET_ARCH)/toolcore/Makefile ] || $(MAKE) DESTDIR= -C libs-$(XEN_TARGET_ARCH)/toolcore clean
+-	[ ! -e libs-$(XEN_TARGET_ARCH)/toollog/Makefile ] || $(MAKE) DESTDIR= -C libs-$(XEN_TARGET_ARCH)/toollog clean
+-	[ ! -e libs-$(XEN_TARGET_ARCH)/evtchn/Makefile ] || $(MAKE) DESTDIR= -C libs-$(XEN_TARGET_ARCH)/evtchn clean
+-	[ ! -e libs-$(XEN_TARGET_ARCH)/gnttab/Makefile ] || $(MAKE) DESTDIR= -C libs-$(XEN_TARGET_ARCH)/gnttab clean
+-	[ ! -e libs-$(XEN_TARGET_ARCH)/call/Makefile ] || $(MAKE) DESTDIR= -C libs-$(XEN_TARGET_ARCH)/call clean
+-	[ ! -e libs-$(XEN_TARGET_ARCH)/foreignmemory/Makefile ] || $(MAKE) DESTDIR= -C libs-$(XEN_TARGET_ARCH)/foreignmemory clean
+-	[ ! -e libs-$(XEN_TARGET_ARCH)/devicemodel/Makefile ] || $(MAKE) DESTDIR= -C libs-$(XEN_TARGET_ARCH)/devicemodel clean
+ 	[ ! -e libxc-$(XEN_TARGET_ARCH)/Makefile ] || $(MAKE) DESTDIR= -C libxc-$(XEN_TARGET_ARCH) clean
+ 	-[ ! -d ioemu ] || $(MAKE) DESTDIR= -C ioemu clean
+ 	-[ ! -d xenstore ] || $(MAKE) DESTDIR= -C xenstore clean
 -- 
 2.26.2
 
