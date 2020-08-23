@@ -7,48 +7,45 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E3E57C433E5
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CCB48C433E4
 	for <xen-devel@archiver.kernel.org>; Sun, 23 Aug 2020 09:46:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AE0B5207CD
+	by mail.kernel.org (Postfix) with ESMTPS id 8A0952074D
 	for <xen-devel@archiver.kernel.org>; Sun, 23 Aug 2020 09:46:46 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AE0B5207CD
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8A0952074D
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k9maA-00087w-Fq; Sun, 23 Aug 2020 09:46:34 +0000
+	id 1k9ma3-00086V-VG; Sun, 23 Aug 2020 09:46:27 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=kEn0=CB=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1k9mQW-0004t9-Tb
- for xen-devel@lists.xenproject.org; Sun, 23 Aug 2020 09:36:36 +0000
-X-Inumbo-ID: 7aae9369-6850-4b58-a10a-03c6e7761f0a
+ id 1k9mQl-0004t9-UL
+ for xen-devel@lists.xenproject.org; Sun, 23 Aug 2020 09:36:51 +0000
+X-Inumbo-ID: ee3fe154-c5ad-4f93-b546-ba5c236694b9
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 7aae9369-6850-4b58-a10a-03c6e7761f0a;
- Sun, 23 Aug 2020 09:35:29 +0000 (UTC)
+ id ee3fe154-c5ad-4f93-b546-ba5c236694b9;
+ Sun, 23 Aug 2020 09:35:30 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id D6CCFB7C3;
- Sun, 23 Aug 2020 09:35:56 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 0A50DAC7F;
+ Sun, 23 Aug 2020 09:35:59 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
  George Dunlap <george.dunlap@citrix.com>,
  Ian Jackson <ian.jackson@eu.citrix.com>, Jan Beulich <jbeulich@suse.com>,
  Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
- Wei Liu <wl@xen.org>, Samuel Thibault <samuel.thibault@ens-lyon.org>,
- =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-Subject: [PATCH v3 28/38] tools: split libxenstore into new tools/libs/store
- directory
-Date: Sun, 23 Aug 2020 11:35:09 +0200
-Message-Id: <20200823093519.18386-29-jgross@suse.com>
+ Wei Liu <wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH v3 38/38] tools: move libxlutil to tools/libs/util
+Date: Sun, 23 Aug 2020 11:35:19 +0200
+Message-Id: <20200823093519.18386-39-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200823093519.18386-1-jgross@suse.com>
 References: <20200823093519.18386-1-jgross@suse.com>
@@ -67,357 +64,334 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-There is no reason why libxenstore is not placed in the tools/libs
-directory.
-
-The common files between libxenstore and xenstored are kept in the
-tools/xenstore directory to be easily accessible by xenstore-stubdom
-which needs the xenstored files to be built.
+Move the libxlutil source to tools/libs/util and delete tools/libxl.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- .gitignore                                    |  7 +-
- stubdom/mini-os.mk                            |  2 +-
- tools/Makefile                                |  2 +-
- tools/Rules.mk                                |  5 --
- tools/libs/Makefile                           |  1 +
- tools/libs/store/Makefile                     | 64 +++++++++++++++
- .../store}/include/compat/xs.h                |  0
- .../store}/include/compat/xs_lib.h            |  0
- .../store}/include/xenstore.h                 |  0
- tools/libs/store/libxenstore.map              | 49 +++++++++++
- tools/{xenstore => libs/store}/xenstore.pc.in |  0
- tools/{xenstore => libs/store}/xs.c           |  0
- tools/libs/uselibs.mk                         |  2 +
- tools/python/setup.py                         |  2 +-
- tools/xenstore/Makefile                       | 82 +------------------
- tools/xenstore/{include => }/xenstore_lib.h   |  0
- 16 files changed, 129 insertions(+), 87 deletions(-)
- create mode 100644 tools/libs/store/Makefile
- rename tools/{xenstore => libs/store}/include/compat/xs.h (100%)
- rename tools/{xenstore => libs/store}/include/compat/xs_lib.h (100%)
- rename tools/{xenstore => libs/store}/include/xenstore.h (100%)
- create mode 100644 tools/libs/store/libxenstore.map
- rename tools/{xenstore => libs/store}/xenstore.pc.in (100%)
- rename tools/{xenstore => libs/store}/xs.c (100%)
- rename tools/xenstore/{include => }/xenstore_lib.h (100%)
+ .gitignore                                    |   6 +-
+ tools/Makefile                                |   1 -
+ tools/Rules.mk                                |   7 --
+ tools/libs/Makefile                           |   1 +
+ tools/libs/uselibs.mk                         |   3 +
+ tools/{libxl => libs/util}/CODING_STYLE       |   0
+ tools/libs/util/Makefile                      |  61 ++++++++++
+ .../{libxl => libs/util/include}/libxlutil.h  |   0
+ tools/{libxl => libs/util}/libxlu_cfg.c       |   0
+ tools/{libxl => libs/util}/libxlu_cfg_i.h     |   0
+ tools/{libxl => libs/util}/libxlu_cfg_l.c     |   0
+ tools/{libxl => libs/util}/libxlu_cfg_l.h     |   0
+ tools/{libxl => libs/util}/libxlu_cfg_l.l     |   0
+ tools/{libxl => libs/util}/libxlu_cfg_y.c     |   0
+ tools/{libxl => libs/util}/libxlu_cfg_y.h     |   0
+ tools/{libxl => libs/util}/libxlu_cfg_y.y     |   0
+ tools/{libxl => libs/util}/libxlu_disk.c      |   0
+ tools/{libxl => libs/util}/libxlu_disk_i.h    |   0
+ tools/{libxl => libs/util}/libxlu_disk_l.c    |   0
+ tools/{libxl => libs/util}/libxlu_disk_l.h    |   0
+ tools/{libxl => libs/util}/libxlu_disk_l.l    |   0
+ tools/{libxl => libs/util}/libxlu_internal.h  |   0
+ tools/{libxl => libs/util}/libxlu_pci.c       |   0
+ tools/{libxl => libs/util}/libxlu_vif.c       |   0
+ tools/{libxl => libs/util}/xlutil.pc.in       |   0
+ tools/libxl/Makefile                          | 114 ------------------
+ 26 files changed, 69 insertions(+), 124 deletions(-)
+ rename tools/{libxl => libs/util}/CODING_STYLE (100%)
+ create mode 100644 tools/libs/util/Makefile
+ rename tools/{libxl => libs/util/include}/libxlutil.h (100%)
+ rename tools/{libxl => libs/util}/libxlu_cfg.c (100%)
+ rename tools/{libxl => libs/util}/libxlu_cfg_i.h (100%)
+ rename tools/{libxl => libs/util}/libxlu_cfg_l.c (100%)
+ rename tools/{libxl => libs/util}/libxlu_cfg_l.h (100%)
+ rename tools/{libxl => libs/util}/libxlu_cfg_l.l (100%)
+ rename tools/{libxl => libs/util}/libxlu_cfg_y.c (100%)
+ rename tools/{libxl => libs/util}/libxlu_cfg_y.h (100%)
+ rename tools/{libxl => libs/util}/libxlu_cfg_y.y (100%)
+ rename tools/{libxl => libs/util}/libxlu_disk.c (100%)
+ rename tools/{libxl => libs/util}/libxlu_disk_i.h (100%)
+ rename tools/{libxl => libs/util}/libxlu_disk_l.c (100%)
+ rename tools/{libxl => libs/util}/libxlu_disk_l.h (100%)
+ rename tools/{libxl => libs/util}/libxlu_disk_l.l (100%)
+ rename tools/{libxl => libs/util}/libxlu_internal.h (100%)
+ rename tools/{libxl => libs/util}/libxlu_pci.c (100%)
+ rename tools/{libxl => libs/util}/libxlu_vif.c (100%)
+ rename tools/{libxl => libs/util}/xlutil.pc.in (100%)
+ delete mode 100644 tools/libxl/Makefile
 
 diff --git a/.gitignore b/.gitignore
-index c84a5fd4db..cdfc456aae 100644
+index 94af7a4aee..6dbbd691cb 100644
 --- a/.gitignore
 +++ b/.gitignore
-@@ -128,6 +128,12 @@ tools/libs/guest/xc_core.h
- tools/libs/guest/xc_core_arm.h
- tools/libs/guest/xc_core_x86.h
- tools/libs/guest/xc_private.h
-+tools/libs/store/headers.chk
-+tools/libs/store/list.h
-+tools/libs/store/utils.h
-+tools/libs/store/xenstore.pc
-+tools/libs/store/xs_lib.c
-+tools/libs/store/include/xenstore_lib.h
- tools/console/xenconsole
- tools/console/xenconsoled
- tools/console/client/_paths.h
-@@ -282,7 +288,6 @@ tools/xenstore/xenstore-control
- tools/xenstore/xenstore-ls
- tools/xenstore/xenstored
- tools/xenstore/xenstored_test
--tools/xenstore/xenstore.pc
- tools/xenstore/xs_tdb_dump
- tools/xentrace/xentrace_setsize
- tools/xentrace/tbctl
-diff --git a/stubdom/mini-os.mk b/stubdom/mini-os.mk
-index e1640a7cbc..420e9a8771 100644
---- a/stubdom/mini-os.mk
-+++ b/stubdom/mini-os.mk
-@@ -5,7 +5,7 @@
- # XEN_ROOT
- # MINIOS_TARGET_ARCH
- 
--XENSTORE_CPPFLAGS = -isystem $(XEN_ROOT)/tools/xenstore/include
-+XENSTORE_CPPFLAGS = -isystem $(XEN_ROOT)/tools/libs/store/include
- TOOLCORE_PATH = $(XEN_ROOT)/stubdom/libs-$(MINIOS_TARGET_ARCH)/toolcore
- TOOLLOG_PATH = $(XEN_ROOT)/stubdom/libs-$(MINIOS_TARGET_ARCH)/toollog
- EVTCHN_PATH = $(XEN_ROOT)/stubdom/libs-$(MINIOS_TARGET_ARCH)/evtchn
+@@ -154,6 +154,10 @@ tools/libs/store/utils.h
+ tools/libs/store/xenstore.pc
+ tools/libs/store/xs_lib.c
+ tools/libs/store/include/xenstore_lib.h
++tools/libs/util/*.pc
++tools/libs/util/_paths.h
++tools/libs/util/libxlu_cfg_y.output
++tools/libs/util/libxlutil.map
+ tools/libs/vchan/headers.chk
+ tools/libs/vchan/libxenvchan.map
+ tools/libs/vchan/xenvchan.pc
+@@ -232,8 +236,6 @@ tools/include/xen/*
+ tools/include/xen-xsm/*
+ tools/include/xen-foreign/*.(c|h|size)
+ tools/include/xen-foreign/checker
+-tools/libxl/*.pc
+-tools/libxl/libxlu_cfg_y.output
+ tools/misc/cpuperf/cpuperf-perfcntr
+ tools/misc/cpuperf/cpuperf-xen
+ tools/misc/xc_shadow
 diff --git a/tools/Makefile b/tools/Makefile
-index f9b4012290..4a3646871c 100644
+index ea69675cca..9c77ee6763 100644
 --- a/tools/Makefile
 +++ b/tools/Makefile
-@@ -43,7 +43,7 @@ SUBDIRS-y += pygrub
- SUBDIRS-$(OCAML_TOOLS) += ocaml
- 
- ifeq ($(CONFIG_RUMP),y)
--SUBDIRS-y := libs xenstore
-+SUBDIRS-y := libs
+@@ -29,7 +29,6 @@ SUBDIRS-$(CONFIG_QEMU_XEN) += qemu-xen-dir
  endif
  
- # For the sake of linking, set the sys-root
+ SUBDIRS-y += xenpmd
+-SUBDIRS-y += libxl
+ SUBDIRS-$(CONFIG_GOLANG) += golang
+ SUBDIRS-y += xl
+ SUBDIRS-y += helpers
 diff --git a/tools/Rules.mk b/tools/Rules.mk
-index b969dcfccb..69a9100b1c 100644
+index 5537056d00..7f0b2c2f24 100644
 --- a/tools/Rules.mk
 +++ b/tools/Rules.mk
-@@ -18,7 +18,6 @@ include $(XEN_ROOT)/tools/libs/uselibs.mk
- XEN_libxenlight    = $(XEN_ROOT)/tools/libxl
- # Currently libxlutil lives in the same directory as libxenlight
- XEN_libxlutil      = $(XEN_libxenlight)
--XEN_libxenstore    = $(XEN_ROOT)/tools/xenstore
- XEN_libxenstat     = $(XEN_ROOT)/tools/xenstat/libxenstat/src
- XEN_libxenvchan    = $(XEN_ROOT)/tools/libvchan
+@@ -15,8 +15,6 @@ XEN_INCLUDE        = $(XEN_ROOT)/tools/include
  
-@@ -106,10 +105,6 @@ $(foreach lib,$(LIBS_LIBS),$(eval $(call LIB_defs,$(lib))))
- CFLAGS_libxenctrl += $(CFLAGS_libxentoollog) $(CFLAGS_libxenforeignmemory) $(CFLAGS_libxendevicemodel) -D__XEN_TOOLS__
- CFLAGS_libxenguest += $(CFLAGS_libxenevtchn) $(CFLAGS_libxenforeignmemory)
+ include $(XEN_ROOT)/tools/libs/uselibs.mk
  
--CFLAGS_libxenstore = -I$(XEN_libxenstore)/include $(CFLAGS_xeninclude)
--SHDEPS_libxenstore = $(SHLIB_libxentoolcore) $(SHLIB_libxenctrl)
--LDLIBS_libxenstore = $(SHDEPS_libxenstore) $(XEN_libxenstore)/libxenstore$(libextension)
--SHLIB_libxenstore  = $(SHDEPS_libxenstore) -Wl,-rpath-link=$(XEN_libxenstore)
- ifeq ($(CONFIG_Linux),y)
- LDLIBS_libxenstore += -ldl
+-XEN_libxlutil      = $(XEN_ROOT)/tools/libxl
+-
+ CFLAGS_xeninclude = -I$(XEN_INCLUDE)
+ 
+ XENSTORE_XENSTORED ?= y
+@@ -118,11 +116,6 @@ else
+ CFLAGS += -O2 -fomit-frame-pointer
  endif
+ 
+-CFLAGS_libxlutil = -I$(XEN_libxlutil)
+-SHDEPS_libxlutil = $(SHLIB_libxenlight)
+-LDLIBS_libxlutil = $(SHDEPS_libxlutil) $(XEN_libxlutil)/libxlutil$(libextension)
+-SHLIB_libxlutil  = $(SHDEPS_libxlutil) -Wl,-rpath-link=$(XEN_libxlutil)
+-
+ CFLAGS += -D__XEN_INTERFACE_VERSION__=__XEN_LATEST_INTERFACE_VERSION__
+ 
+ # Get gcc to generate the dependencies for us.
 diff --git a/tools/libs/Makefile b/tools/libs/Makefile
-index f15c1688f7..62bd8f5292 100644
+index c41455c604..1afcd12e2b 100644
 --- a/tools/libs/Makefile
 +++ b/tools/libs/Makefile
-@@ -12,6 +12,7 @@ SUBDIRS-y += devicemodel
- SUBDIRS-y += ctrl
- SUBDIRS-y += guest
- SUBDIRS-y += hypfs
-+SUBDIRS-y += store
+@@ -16,6 +16,7 @@ SUBDIRS-y += store
+ SUBDIRS-y += stat
+ SUBDIRS-$(CONFIG_Linux) += vchan
+ SUBDIRS-y += light
++SUBDIRS-y += util
  
  ifeq ($(CONFIG_RUMP),y)
  SUBDIRS-y := toolcore
-diff --git a/tools/libs/store/Makefile b/tools/libs/store/Makefile
-new file mode 100644
-index 0000000000..4da502646e
---- /dev/null
-+++ b/tools/libs/store/Makefile
-@@ -0,0 +1,64 @@
-+XEN_ROOT=$(CURDIR)/../../..
-+include $(XEN_ROOT)/tools/Rules.mk
-+
-+MAJOR = 3.0
-+MINOR = 3
-+
-+ifeq ($(CONFIG_Linux),y)
-+APPEND_LDFLAGS += -ldl
-+endif
-+
-+SRCS-y   += xs_lib.c
-+SRCS-y   += xs.c
-+
-+LIBHEADER = xenstore.h xenstore_lib.h
-+
-+include ../libs.mk
-+
-+# Include configure output (config.h)
-+CFLAGS += -include $(XEN_ROOT)/tools/config.h
-+CFLAGS += $(CFLAGS_libxentoolcore)
-+CFLAGS += -DXEN_LIB_STORED="\"$(XEN_LIB_STORED)\""
-+CFLAGS += -DXEN_RUN_STORED="\"$(XEN_RUN_STORED)\""
-+
-+LINK_FILES = xs_lib.c include/xenstore_lib.h list.h utils.h
-+
-+$(LIB_OBJS): $(LINK_FILES)
-+
-+$(LINK_FILES):
-+	ln -sf $(XEN_ROOT)/tools/xenstore/$(notdir $@) $@
-+
-+xs.opic: CFLAGS += -DUSE_PTHREAD
-+ifeq ($(CONFIG_Linux),y)
-+xs.opic: CFLAGS += -DUSE_DLSYM
-+else
-+PKG_CONFIG_REMOVE += -ldl
-+endif
-+
-+$(PKG_CONFIG_LOCAL): PKG_CONFIG_INCDIR = $(XEN_libxenstore)/include
-+$(PKG_CONFIG_LOCAL): PKG_CONFIG_CFLAGS_LOCAL = $(CFLAGS_xeninclude)
-+
-+.PHONY: install
-+install: install-headers
-+
-+.PHONY: install-headers
-+install-headers:
-+	$(INSTALL_DIR) $(DESTDIR)$(includedir)
-+	$(INSTALL_DIR) $(DESTDIR)$(includedir)/xenstore-compat
-+	$(INSTALL_DATA) include/compat/xs.h $(DESTDIR)$(includedir)/xenstore-compat/xs.h
-+	$(INSTALL_DATA) include/compat/xs_lib.h $(DESTDIR)$(includedir)/xenstore-compat/xs_lib.h
-+	ln -sf xenstore-compat/xs.h  $(DESTDIR)$(includedir)/xs.h
-+	ln -sf xenstore-compat/xs_lib.h $(DESTDIR)$(includedir)/xs_lib.h
-+
-+.PHONY: uninstall
-+uninstall: uninstall-headers
-+
-+.PHONY: uninstall-headers
-+uninstall-headers:
-+	rm -f $(DESTDIR)$(includedir)/xs_lib.h
-+	rm -f $(DESTDIR)$(includedir)/xs.h
-+	rm -f $(DESTDIR)$(includedir)/xenstore-compat/xs_lib.h
-+	rm -f $(DESTDIR)$(includedir)/xenstore-compat/xs.h
-+	if [ -d $(DESTDIR)$(includedir)/xenstore-compat ]; then \
-+		rmdir --ignore-fail-on-non-empty $(DESTDIR)$(includedir)/xenstore-compat; \
-+	fi
-diff --git a/tools/xenstore/include/compat/xs.h b/tools/libs/store/include/compat/xs.h
-similarity index 100%
-rename from tools/xenstore/include/compat/xs.h
-rename to tools/libs/store/include/compat/xs.h
-diff --git a/tools/xenstore/include/compat/xs_lib.h b/tools/libs/store/include/compat/xs_lib.h
-similarity index 100%
-rename from tools/xenstore/include/compat/xs_lib.h
-rename to tools/libs/store/include/compat/xs_lib.h
-diff --git a/tools/xenstore/include/xenstore.h b/tools/libs/store/include/xenstore.h
-similarity index 100%
-rename from tools/xenstore/include/xenstore.h
-rename to tools/libs/store/include/xenstore.h
-diff --git a/tools/libs/store/libxenstore.map b/tools/libs/store/libxenstore.map
-new file mode 100644
-index 0000000000..9854305a2c
---- /dev/null
-+++ b/tools/libs/store/libxenstore.map
-@@ -0,0 +1,49 @@
-+VERS_3.0.3 {
-+	global:
-+		xs_open;
-+		xs_close;
-+		xs_daemon_open;
-+		xs_domain_open;
-+		xs_daemon_open_readonly;
-+		xs_daemon_close;
-+		xs_daemon_destroy_postfork;
-+		xs_directory;
-+		xs_read;
-+		xs_write;
-+		xs_mkdir;
-+		xs_rm;
-+		xs_restrict;
-+		xs_get_permissions;
-+		xs_set_permissions;
-+		xs_watch;
-+		xs_fileno;
-+		xs_check_watch;
-+		xs_read_watch;
-+		xs_unwatch;
-+		xs_transaction_start;
-+		xs_transaction_end;
-+		xs_introduce_domain;
-+		xs_set_target;
-+		xs_resume_domain;
-+		xs_release_domain;
-+		xs_get_domain_path;
-+		xs_path_is_subpath;
-+		xs_is_domain_introduced;
-+		xs_control_command;
-+		xs_debug_command;
-+		xs_suspend_evtchn_port;
-+		xs_daemon_rootdir;
-+		xs_daemon_rundir;
-+		xs_daemon_socket;
-+		xs_daemon_socket_ro;
-+		xs_domain_dev;
-+		xs_daemon_tdb;
-+		xs_write_all;
-+		xs_strings_to_perms;
-+		xs_perm_to_string;
-+		xs_count_strings;
-+		expanding_buffer_ensure;
-+		sanitise_value;
-+		unsanitise_value;
-+	local: *; /* Do not expose anything by default */
-+};
-diff --git a/tools/xenstore/xenstore.pc.in b/tools/libs/store/xenstore.pc.in
-similarity index 100%
-rename from tools/xenstore/xenstore.pc.in
-rename to tools/libs/store/xenstore.pc.in
-diff --git a/tools/xenstore/xs.c b/tools/libs/store/xs.c
-similarity index 100%
-rename from tools/xenstore/xs.c
-rename to tools/libs/store/xs.c
 diff --git a/tools/libs/uselibs.mk b/tools/libs/uselibs.mk
-index 9619c576ba..a0fe0402ff 100644
+index 685f368aed..74913717a6 100644
 --- a/tools/libs/uselibs.mk
 +++ b/tools/libs/uselibs.mk
-@@ -20,3 +20,5 @@ LIBS_LIBS += ctrl
- USELIBS_ctrl := toollog call evtchn gnttab foreignmemory devicemodel
- LIBS_LIBS += guest
- USELIBS_guest := evtchn ctrl
-+LIBS_LIBS += store
-+USELIBS_store := toolcore
-diff --git a/tools/python/setup.py b/tools/python/setup.py
-index 24b284af39..8254464aff 100644
---- a/tools/python/setup.py
-+++ b/tools/python/setup.py
-@@ -11,7 +11,7 @@ PATH_LIBXENTOOLLOG = XEN_ROOT + "/tools/libs/toollog"
- PATH_LIBXENEVTCHN = XEN_ROOT + "/tools/libs/evtchn"
- PATH_LIBXENCTRL = XEN_ROOT + "/tools/libs/ctrl"
- PATH_LIBXL    = XEN_ROOT + "/tools/libxl"
--PATH_XENSTORE = XEN_ROOT + "/tools/xenstore"
-+PATH_XENSTORE = XEN_ROOT + "/tools/libs/store"
- 
- xc = Extension("xc",
-                extra_compile_args = extra_compile_args,
-diff --git a/tools/xenstore/Makefile b/tools/xenstore/Makefile
-index 0a64ac1571..9a0f0d012d 100644
---- a/tools/xenstore/Makefile
-+++ b/tools/xenstore/Makefile
-@@ -34,17 +34,7 @@ XENSTORED_OBJS_$(CONFIG_MiniOS) = xenstored_minios.o
- XENSTORED_OBJS += $(XENSTORED_OBJS_y)
- LDLIBS_xenstored += -lrt
- 
--ifneq ($(XENSTORE_STATIC_CLIENTS),y)
--LIBXENSTORE := libxenstore.so
--else
--LIBXENSTORE := libxenstore.a
--xenstore xenstore-control: CFLAGS += -static
+@@ -28,3 +28,6 @@ LIBS_LIBS += stat
+ USELIBS_stat := ctrl store
+ LIBS_LIBS += light
+ USELIBS_light := toollog evtchn toolcore ctrl store hypfs guest
++LIBS_LIBS += util
++USELIBS_util := light
++LIB_PREFIX_util := xl
+diff --git a/tools/libxl/CODING_STYLE b/tools/libs/util/CODING_STYLE
+similarity index 100%
+rename from tools/libxl/CODING_STYLE
+rename to tools/libs/util/CODING_STYLE
+diff --git a/tools/libs/util/Makefile b/tools/libs/util/Makefile
+new file mode 100644
+index 0000000000..96508a49e2
+--- /dev/null
++++ b/tools/libs/util/Makefile
+@@ -0,0 +1,61 @@
++XEN_ROOT = $(CURDIR)/../../..
++include $(XEN_ROOT)/tools/Rules.mk
++
++SRCS-y += libxlu_cfg_y.c
++SRCS-y += libxlu_cfg_l.c
++SRCS-y += libxlu_cfg.c
++SRCS-y += libxlu_disk_l.c
++SRCS-y += libxlu_disk.c
++SRCS-y += libxlu_vif.c
++SRCS-y += libxlu_pci.c
++
++CFLAGS += -Wno-format-zero-length -Wmissing-declarations \
++	-Wno-declaration-after-statement -Wformat-nonliteral
++CFLAGS += -I. $(CFLAGS_libxenctrl)
++
++CFLAGS += $(PTHREAD_CFLAGS)
++LDFLAGS += $(PTHREAD_LDFLAGS)
++
++ifeq ($(FLEX),)
++%.c %.h:: %.l
++	$(warning Flex is needed to rebuild some libxl parsers and \
++		  scanners, please install it and rerun configure)
++endif
++
++ifeq ($(BISON),)
++%.c %.h:: %.y
++	$(warning Bison is needed to rebuild some libxl parsers and \
++		  scanners, please install it an rerun configure)
++endif
++
++AUTOINCS = libxlu_cfg_y.h libxlu_cfg_l.h libxlu_disk_l.h
++AUTOSRCS = libxlu_cfg_y.c libxlu_cfg_l.c
++
++LIBHEADER := libxlutil.h
++
++NO_HEADERS_CHK := y
++
++include $(XEN_ROOT)/tools/libs/libs.mk
++
++$(PKG_CONFIG_LOCAL): PKG_CONFIG_INCDIR = $(XEN_libxlutil)/include
++$(PKG_CONFIG_LOCAL): PKG_CONFIG_CFLAGS_LOCAL = $(CFLAGS_xeninclude)
++
++$(LIB_OBJS) $(PIC_OBJS): $(AUTOINCS) _paths.h
++
++%.c %.h:: %.y
++	@rm -f $*.[ch]
++	$(BISON) --output=$*.c $<
++
++%.c %.h:: %.l
++	@rm -f $*.[ch]
++	$(FLEX) --header-file=$*.h --outfile=$*.c $<
++
++genpath-target = $(call buildmakevars2header,_paths.h)
++$(eval $(genpath-target))
++
++clean: cleanlocal
++
++.PHONY: cleanlocal
++cleanlocal:
++	$(RM) -f _*.h
++	$(RM) -f libxlutil.map
+diff --git a/tools/libxl/libxlutil.h b/tools/libs/util/include/libxlutil.h
+similarity index 100%
+rename from tools/libxl/libxlutil.h
+rename to tools/libs/util/include/libxlutil.h
+diff --git a/tools/libxl/libxlu_cfg.c b/tools/libs/util/libxlu_cfg.c
+similarity index 100%
+rename from tools/libxl/libxlu_cfg.c
+rename to tools/libs/util/libxlu_cfg.c
+diff --git a/tools/libxl/libxlu_cfg_i.h b/tools/libs/util/libxlu_cfg_i.h
+similarity index 100%
+rename from tools/libxl/libxlu_cfg_i.h
+rename to tools/libs/util/libxlu_cfg_i.h
+diff --git a/tools/libxl/libxlu_cfg_l.c b/tools/libs/util/libxlu_cfg_l.c
+similarity index 100%
+rename from tools/libxl/libxlu_cfg_l.c
+rename to tools/libs/util/libxlu_cfg_l.c
+diff --git a/tools/libxl/libxlu_cfg_l.h b/tools/libs/util/libxlu_cfg_l.h
+similarity index 100%
+rename from tools/libxl/libxlu_cfg_l.h
+rename to tools/libs/util/libxlu_cfg_l.h
+diff --git a/tools/libxl/libxlu_cfg_l.l b/tools/libs/util/libxlu_cfg_l.l
+similarity index 100%
+rename from tools/libxl/libxlu_cfg_l.l
+rename to tools/libs/util/libxlu_cfg_l.l
+diff --git a/tools/libxl/libxlu_cfg_y.c b/tools/libs/util/libxlu_cfg_y.c
+similarity index 100%
+rename from tools/libxl/libxlu_cfg_y.c
+rename to tools/libs/util/libxlu_cfg_y.c
+diff --git a/tools/libxl/libxlu_cfg_y.h b/tools/libs/util/libxlu_cfg_y.h
+similarity index 100%
+rename from tools/libxl/libxlu_cfg_y.h
+rename to tools/libs/util/libxlu_cfg_y.h
+diff --git a/tools/libxl/libxlu_cfg_y.y b/tools/libs/util/libxlu_cfg_y.y
+similarity index 100%
+rename from tools/libxl/libxlu_cfg_y.y
+rename to tools/libs/util/libxlu_cfg_y.y
+diff --git a/tools/libxl/libxlu_disk.c b/tools/libs/util/libxlu_disk.c
+similarity index 100%
+rename from tools/libxl/libxlu_disk.c
+rename to tools/libs/util/libxlu_disk.c
+diff --git a/tools/libxl/libxlu_disk_i.h b/tools/libs/util/libxlu_disk_i.h
+similarity index 100%
+rename from tools/libxl/libxlu_disk_i.h
+rename to tools/libs/util/libxlu_disk_i.h
+diff --git a/tools/libxl/libxlu_disk_l.c b/tools/libs/util/libxlu_disk_l.c
+similarity index 100%
+rename from tools/libxl/libxlu_disk_l.c
+rename to tools/libs/util/libxlu_disk_l.c
+diff --git a/tools/libxl/libxlu_disk_l.h b/tools/libs/util/libxlu_disk_l.h
+similarity index 100%
+rename from tools/libxl/libxlu_disk_l.h
+rename to tools/libs/util/libxlu_disk_l.h
+diff --git a/tools/libxl/libxlu_disk_l.l b/tools/libs/util/libxlu_disk_l.l
+similarity index 100%
+rename from tools/libxl/libxlu_disk_l.l
+rename to tools/libs/util/libxlu_disk_l.l
+diff --git a/tools/libxl/libxlu_internal.h b/tools/libs/util/libxlu_internal.h
+similarity index 100%
+rename from tools/libxl/libxlu_internal.h
+rename to tools/libs/util/libxlu_internal.h
+diff --git a/tools/libxl/libxlu_pci.c b/tools/libs/util/libxlu_pci.c
+similarity index 100%
+rename from tools/libxl/libxlu_pci.c
+rename to tools/libs/util/libxlu_pci.c
+diff --git a/tools/libxl/libxlu_vif.c b/tools/libs/util/libxlu_vif.c
+similarity index 100%
+rename from tools/libxl/libxlu_vif.c
+rename to tools/libs/util/libxlu_vif.c
+diff --git a/tools/libxl/xlutil.pc.in b/tools/libs/util/xlutil.pc.in
+similarity index 100%
+rename from tools/libxl/xlutil.pc.in
+rename to tools/libs/util/xlutil.pc.in
+diff --git a/tools/libxl/Makefile b/tools/libxl/Makefile
+deleted file mode 100644
+index 8d930dc047..0000000000
+--- a/tools/libxl/Makefile
++++ /dev/null
+@@ -1,114 +0,0 @@
+-#
+-# tools/libxl/Makefile
+-#
+-
+-XEN_ROOT = $(CURDIR)/../..
+-include $(XEN_ROOT)/tools/Rules.mk
+-
+-XLUMAJOR = 4.15
+-XLUMINOR = 0
+-
+-CFLAGS += -Werror -Wno-format-zero-length -Wmissing-declarations \
+-	-Wno-declaration-after-statement -Wformat-nonliteral
+-CFLAGS += -I. -fPIC
+-
+-CFLAGS += $(PTHREAD_CFLAGS)
+-LDFLAGS += $(PTHREAD_LDFLAGS)
+-
+-LIBXLU_LIBS = $(LDLIBS_libxenlight)
+-
+-ifeq ($(FLEX),)
+-%.c %.h:: %.l
+-	$(warning Flex is needed to rebuild some libxl parsers and \
+-		  scanners, please install it and rerun configure)
 -endif
 -
--ALL_TARGETS = libxenstore.a clients
--ifneq ($(nosharedlibs),y)
--ALL_TARGETS += libxenstore.so
--endif
-+ALL_TARGETS = clients
- ifeq ($(XENSTORE_XENSTORED),y)
- ALL_TARGETS += xs_tdb_dump xenstored
- endif
-@@ -87,60 +77,21 @@ xenstored.a: $(XENSTORED_OBJS)
- $(CLIENTS): xenstore
- 	ln -f xenstore $@
- 
--xenstore: xenstore_client.o $(LIBXENSTORE)
-+xenstore: xenstore_client.o
- 	$(CC) $< $(LDFLAGS) $(LDLIBS_libxenstore) $(LDLIBS_libxentoolcore) $(SOCKET_LIBS) -o $@ $(APPEND_LDFLAGS)
- 
--xenstore-control: xenstore_control.o $(LIBXENSTORE)
-+xenstore-control: xenstore_control.o
- 	$(CC) $< $(LDFLAGS) $(LDLIBS_libxenstore) $(LDLIBS_libxentoolcore) $(SOCKET_LIBS) -o $@ $(APPEND_LDFLAGS)
- 
- xs_tdb_dump: xs_tdb_dump.o utils.o tdb.o talloc.o
- 	$(CC) $^ $(LDFLAGS) -o $@ $(APPEND_LDFLAGS)
- 
--libxenstore.so: libxenstore.so.$(MAJOR)
--	ln -sf $< $@
--libxenstore.so.$(MAJOR): libxenstore.so.$(MAJOR).$(MINOR)
--	ln -sf $< $@
--
--xs.opic: CFLAGS += -DUSE_PTHREAD
--ifeq ($(CONFIG_Linux),y)
--xs.opic: CFLAGS += -DUSE_DLSYM
--libxenstore.so.$(MAJOR).$(MINOR): APPEND_LDFLAGS += -ldl
--else
--PKG_CONFIG_REMOVE += -ldl
+-ifeq ($(BISON),)
+-%.c %.h:: %.y
+-	$(warning Bison is needed to rebuild some libxl parsers and \
+-		  scanners, please install it an rerun configure)
 -endif
 -
--libxenstore.so.$(MAJOR).$(MINOR): xs.opic xs_lib.opic
--	$(CC) $(LDFLAGS) $(PTHREAD_LDFLAGS) -Wl,$(SONAME_LDFLAG) -Wl,libxenstore.so.$(MAJOR) $(SHLIB_LDFLAGS) -o $@ $^ $(LDLIBS_libxentoolcore) $(SOCKET_LIBS) $(PTHREAD_LIBS) $(APPEND_LDFLAGS)
+-AUTOINCS= libxlu_cfg_y.h libxlu_cfg_l.h libxlu_disk_l.h
+-AUTOSRCS= libxlu_cfg_y.c libxlu_cfg_l.c
+-LIBXLU_OBJS = libxlu_cfg_y.o libxlu_cfg_l.o libxlu_cfg.o \
+-	libxlu_disk_l.o libxlu_disk.o libxlu_vif.o libxlu_pci.o
+-$(LIBXLU_OBJS): CFLAGS += $(CFLAGS_libxenctrl) # For xentoollog.h
 -
--libxenstore.a: xs.o xs_lib.o
--	$(AR) rcs $@ $^
--
--PKG_CONFIG := xenstore.pc
--PKG_CONFIG_VERSION := $(MAJOR).$(MINOR)
+-PKG_CONFIG = xlutil.pc
 -
 -ifneq ($(CONFIG_LIBXC_MINIOS),y)
 -PKG_CONFIG_INST := $(PKG_CONFIG)
+-xlutil.pc: PKG_CONFIG_VERSION = $(XLUMAJOR).$(XLUMINOR)
 -$(PKG_CONFIG_INST): PKG_CONFIG_PREFIX = $(prefix)
 -$(PKG_CONFIG_INST): PKG_CONFIG_INCDIR = $(includedir)
 -$(PKG_CONFIG_INST): PKG_CONFIG_LIBDIR = $(libdir)
@@ -425,70 +399,71 @@ index 0a64ac1571..9a0f0d012d 100644
 -
 -PKG_CONFIG_LOCAL := $(foreach pc,$(PKG_CONFIG),$(PKG_CONFIG_DIR)/$(pc))
 -
+-$(PKG_CONFIG_DIR)/xlutil.pc: PKG_CONFIG_VERSION = $(XLUMAJOR).$(XLUMINOR)
 -$(PKG_CONFIG_LOCAL): PKG_CONFIG_PREFIX = $(XEN_ROOT)
--$(PKG_CONFIG_LOCAL): PKG_CONFIG_INCDIR = $(XEN_libxenstore)/include
+-$(PKG_CONFIG_LOCAL): PKG_CONFIG_INCDIR = $(CURDIR)
 -$(PKG_CONFIG_LOCAL): PKG_CONFIG_LIBDIR = $(CURDIR)
 -$(PKG_CONFIG_LOCAL): PKG_CONFIG_CFLAGS_LOCAL = $(CFLAGS_xeninclude)
 -
--$(LIBXENSTORE): $(PKG_CONFIG_INST) $(PKG_CONFIG_LOCAL)
+-.PHONY: all
+-all: libxlutil.so libxlutil.a $(AUTOSRCS) $(AUTOINCS) $(PKG_CONFIG) $(PKG_CONFIG_LOCAL)
 -
- .PHONY: clean
- clean:
--	rm -f *.a *.o *.opic *.so* xenstored_probes.h
-+	rm -f *.a *.o xenstored_probes.h
- 	rm -f xenstored xs_random xs_stress xs_crashme
- 	rm -f xs_tdb_dump xenstore-control init-xenstore-domain
- 	rm -f xenstore $(CLIENTS)
--	rm -f xenstore.pc
- 	$(RM) $(DEPS_RM)
- 
- .PHONY: distclean
-@@ -157,8 +108,6 @@ tarball: clean
- .PHONY: install
- install: all
- 	$(INSTALL_DIR) $(DESTDIR)$(bindir)
--	$(INSTALL_DIR) $(DESTDIR)$(includedir)
--	$(INSTALL_DIR) $(DESTDIR)$(includedir)/xenstore-compat
- ifeq ($(XENSTORE_XENSTORED),y)
- 	$(INSTALL_DIR) $(DESTDIR)$(sbindir)
- 	$(INSTALL_DIR) $(DESTDIR)$(XEN_LIB_STORED)
-@@ -169,32 +118,9 @@ endif
- 	set -e ; for c in $(CLIENTS) ; do \
- 		ln -f $(DESTDIR)$(bindir)/xenstore $(DESTDIR)$(bindir)/$${c} ; \
- 	done
+-$(LIBXLU_OBJS): $(AUTOINCS)
+-
+-%.c %.h:: %.y
+-	@rm -f $*.[ch]
+-	$(BISON) --output=$*.c $<
+-
+-%.c %.h:: %.l
+-	@rm -f $*.[ch]
+-	$(FLEX) --header-file=$*.h --outfile=$*.c $<
+-
+-genpath-target = $(call buildmakevars2header,_paths.h)
+-$(eval $(genpath-target))
+-
+-libxlutil.so: libxlutil.so.$(XLUMAJOR)
+-	$(SYMLINK_SHLIB) $< $@
+-
+-libxlutil.so.$(XLUMAJOR): libxlutil.so.$(XLUMAJOR).$(XLUMINOR)
+-	$(SYMLINK_SHLIB) $< $@
+-
+-libxlutil.so.$(XLUMAJOR).$(XLUMINOR): $(LIBXLU_OBJS)
+-	$(CC) $(LDFLAGS) -Wl,$(SONAME_LDFLAG) -Wl,libxlutil.so.$(XLUMAJOR) $(SHLIB_LDFLAGS) -o $@ $(LIBXLU_OBJS) $(LIBXLU_LIBS) $(APPEND_LDFLAGS)
+-
+-libxlutil.a: $(LIBXLU_OBJS)
+-	$(AR) rcs libxlutil.a $^
+-
+-.PHONY: install
+-install: all
 -	$(INSTALL_DIR) $(DESTDIR)$(libdir)
--	$(INSTALL_SHLIB) libxenstore.so.$(MAJOR).$(MINOR) $(DESTDIR)$(libdir)
--	ln -sf libxenstore.so.$(MAJOR).$(MINOR) $(DESTDIR)$(libdir)/libxenstore.so.$(MAJOR)
--	ln -sf libxenstore.so.$(MAJOR) $(DESTDIR)$(libdir)/libxenstore.so
--	$(INSTALL_DATA) libxenstore.a $(DESTDIR)$(libdir)
--	$(INSTALL_DATA) include/xenstore.h $(DESTDIR)$(includedir)
--	$(INSTALL_DATA) include/xenstore_lib.h $(DESTDIR)$(includedir)
--	$(INSTALL_DATA) include/compat/xs.h $(DESTDIR)$(includedir)/xenstore-compat/xs.h
--	$(INSTALL_DATA) include/compat/xs_lib.h $(DESTDIR)$(includedir)/xenstore-compat/xs_lib.h
--	ln -sf xenstore-compat/xs.h  $(DESTDIR)$(includedir)/xs.h
--	ln -sf xenstore-compat/xs_lib.h $(DESTDIR)$(includedir)/xs_lib.h
--	$(INSTALL_DATA) xenstore.pc $(DESTDIR)$(PKG_INSTALLDIR)
- 
- .PHONY: uninstall
- uninstall:
--	rm -f $(DESTDIR)$(PKG_INSTALLDIR)/xenstore.pc
--	rm -f $(DESTDIR)$(includedir)/xs_lib.h
--	rm -f $(DESTDIR)$(includedir)/xs.h
--	rm -f $(DESTDIR)$(includedir)/xenstore-compat/xs_lib.h
--	rm -f $(DESTDIR)$(includedir)/xenstore-compat/xs.h
--	rm -f $(DESTDIR)$(includedir)/xenstore_lib.h
--	rm -f $(DESTDIR)$(includedir)/xenstore.h
--	rm -f $(DESTDIR)$(libdir)/libxenstore.a
--	rm -f $(DESTDIR)$(libdir)/libxenstore.so
--	rm -f $(DESTDIR)$(libdir)/libxenstore.so.$(MAJOR)
--	rm -f $(DESTDIR)$(libdir)/libxenstore.so.$(MAJOR).$(MINOR)
- 	rm -f $(addprefix $(DESTDIR)$(bindir)/, $(CLIENTS))
- 	rm -f $(DESTDIR)$(bindir)/xenstore
- 	rm -f $(DESTDIR)$(bindir)/xenstore-control
-diff --git a/tools/xenstore/include/xenstore_lib.h b/tools/xenstore/xenstore_lib.h
-similarity index 100%
-rename from tools/xenstore/include/xenstore_lib.h
-rename to tools/xenstore/xenstore_lib.h
+-	$(INSTALL_DIR) $(DESTDIR)$(includedir)
+-	$(INSTALL_SHLIB) libxlutil.so.$(XLUMAJOR).$(XLUMINOR) $(DESTDIR)$(libdir)
+-	$(SYMLINK_SHLIB) libxlutil.so.$(XLUMAJOR).$(XLUMINOR) $(DESTDIR)$(libdir)/libxlutil.so.$(XLUMAJOR)
+-	$(SYMLINK_SHLIB) libxlutil.so.$(XLUMAJOR) $(DESTDIR)$(libdir)/libxlutil.so
+-	$(INSTALL_DATA) libxlutil.a $(DESTDIR)$(libdir)
+-	$(INSTALL_DATA) libxlutil.h $(DESTDIR)$(includedir)
+-	$(INSTALL_DATA) xlutil.pc $(DESTDIR)$(PKG_INSTALLDIR)
+-
+-.PHONY: uninstall
+-uninstall:
+-	rm -f $(DESTDIR)$(PKG_INSTALLDIR)/xlutil.pc
+-	rm -f $(DESTDIR)$(includedir)/libxlutil.h
+-	rm -f $(DESTDIR)$(libdir)/libxlutil.a
+-	rm -f $(DESTDIR)$(libdir)/libxlutil.so
+-	rm -f $(DESTDIR)$(libdir)/libxlutil.so.$(XLUMAJOR)
+-	rm -f $(DESTDIR)$(libdir)/libxlutil.so.$(XLUMAJOR).$(XLUMINOR)
+-
+-.PHONY: clean
+-clean:
+-	$(RM) -f _*.h *.o *.so* *.a $(DEPS_RM)
+-	$(RM) -f xlutil.pc
+-
+-distclean: clean
+-
+-realclean: distclean
+-	$(RM) -f $(AUTOSRCS) $(AUTOINCS)
+-
+--include $(DEPS_INCLUDE)
 -- 
 2.26.2
 
