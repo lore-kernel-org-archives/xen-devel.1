@@ -2,50 +2,62 @@ Return-Path: <SRS0=cIP9=CB=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.9 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,UNWANTED_LANGUAGE_BODY,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-11.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 62760C433E1
-	for <xen-devel@archiver.kernel.org>; Sun, 23 Aug 2020 09:36:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C6D76C433E1
+	for <xen-devel@archiver.kernel.org>; Sun, 23 Aug 2020 09:36:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2E5D52075B
-	for <xen-devel@archiver.kernel.org>; Sun, 23 Aug 2020 09:36:31 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2E5D52075B
+	by mail.kernel.org (Postfix) with ESMTPS id 956D02075B
+	for <xen-devel@archiver.kernel.org>; Sun, 23 Aug 2020 09:36:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 956D02075B
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1k9mQ8-0005YX-LH; Sun, 23 Aug 2020 09:36:12 +0000
+	id 1k9mQ3-0005Qx-Ht; Sun, 23 Aug 2020 09:36:07 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=kEn0=CB=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1k9mQ7-0004t9-Se
- for xen-devel@lists.xenproject.org; Sun, 23 Aug 2020 09:36:11 +0000
-X-Inumbo-ID: 666e2964-7854-4f3c-a61e-e217fa76ea62
+ id 1k9mQ2-0004t9-ST
+ for xen-devel@lists.xenproject.org; Sun, 23 Aug 2020 09:36:06 +0000
+X-Inumbo-ID: 4accecb3-897d-4b3e-b90b-47f8df47d6ab
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 666e2964-7854-4f3c-a61e-e217fa76ea62;
- Sun, 23 Aug 2020 09:35:28 +0000 (UTC)
+ id 4accecb3-897d-4b3e-b90b-47f8df47d6ab;
+ Sun, 23 Aug 2020 09:35:25 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 01E0DAE46;
- Sun, 23 Aug 2020 09:35:55 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id B6D64AD68;
+ Sun, 23 Aug 2020 09:35:52 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>, Ian Jackson <ian.jackson@eu.citrix.com>,
- Wei Liu <wl@xen.org>
-Subject: [PATCH v3 20/38] tools/libxc: rename all libxenguest sources to xg_*
-Date: Sun, 23 Aug 2020 11:35:01 +0200
-Message-Id: <20200823093519.18386-21-jgross@suse.com>
+To: xen-devel@lists.xenproject.org,
+	xen-devel@dornerworks.com
+Cc: Juergen Gross <jgross@suse.com>,
+ Samuel Thibault <samuel.thibault@ens-lyon.org>,
+ Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wl@xen.org>,
+ George Dunlap <george.dunlap@citrix.com>,
+ Nick Rosbrook <rosbrookn@ainfosec.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony PERARD <anthony.perard@citrix.com>,
+ =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>, 
+ Josh Whitehead <josh.whitehead@dornerworks.com>,
+ Stewart Hildebrand <stewart.hildebrand@dornerworks.com>,
+ Christian Lindig <christian.lindig@citrix.com>,
+ David Scott <dave@recoil.org>, Shriram Rajagopalan <rshriram@cs.ubc.ca>,
+ Yang Hongyang <imhy.yang@gmail.com>
+Subject: [PATCH v3 00/38] tools: move most libraries into tools/libs
+Date: Sun, 23 Aug 2020 11:34:41 +0200
+Message-Id: <20200823093519.18386-1-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20200823093519.18386-1-jgross@suse.com>
-References: <20200823093519.18386-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
@@ -61,269 +73,649 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Some sources of libxenguest are named xg_*.c and some xc_*.c. Rename
-the xc_*.c files to xg_*.c.
+Move most remaining libraries under tools/libs, including libxenctrl
+and libxl. This is resulting in a lot of cleanup work regarding
+building libs and restructuring of the tools directory.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
- tools/libxc/Makefile                          | 59 ++++++++++---------
- .../libxc/{xc_cpuid_x86.c => xg_cpuid_x86.c}  |  0
- tools/libxc/{xc_dom_arm.c => xg_dom_arm.c}    |  0
- ...imageloader.c => xg_dom_armzimageloader.c} |  0
- ...{xc_dom_binloader.c => xg_dom_binloader.c} |  0
- tools/libxc/{xc_dom_boot.c => xg_dom_boot.c}  |  0
- ...bzimageloader.c => xg_dom_bzimageloader.c} |  0
- ...m_compat_linux.c => xg_dom_compat_linux.c} |  0
- tools/libxc/{xc_dom_core.c => xg_dom_core.c}  |  0
- ...compress_lz4.c => xg_dom_decompress_lz4.c} |  0
- ...ss_unsafe.c => xg_dom_decompress_unsafe.c} |  0
- ...ip2.c => xg_dom_decompress_unsafe_bzip2.c} |  0
- ...lzma.c => xg_dom_decompress_unsafe_lzma.c} |  0
- ...o1x.c => xg_dom_decompress_unsafe_lzo1x.c} |  0
- ...afe_xz.c => xg_dom_decompress_unsafe_xz.c} |  0
- ...{xc_dom_elfloader.c => xg_dom_elfloader.c} |  0
- ...{xc_dom_hvmloader.c => xg_dom_hvmloader.c} |  0
- tools/libxc/{xc_dom_x86.c => xg_dom_x86.c}    |  0
- .../libxc/{xc_nomigrate.c => xg_nomigrate.c}  |  0
- .../{xc_offline_page.c => xg_offline_page.c}  |  0
- .../libxc/{xc_sr_common.c => xg_sr_common.c}  |  0
- ...{xc_sr_common_x86.c => xg_sr_common_x86.c} |  0
- ..._common_x86_pv.c => xg_sr_common_x86_pv.c} |  0
- .../{xc_sr_restore.c => xg_sr_restore.c}      |  0
- ...tore_x86_hvm.c => xg_sr_restore_x86_hvm.c} |  0
- ...estore_x86_pv.c => xg_sr_restore_x86_pv.c} |  0
- tools/libxc/{xc_sr_save.c => xg_sr_save.c}    |  0
- ...sr_save_x86_hvm.c => xg_sr_save_x86_hvm.c} |  0
- ...c_sr_save_x86_pv.c => xg_sr_save_x86_pv.c} |  0
- tools/libxc/{xc_suspend.c => xg_suspend.c}    |  0
- 30 files changed, 30 insertions(+), 29 deletions(-)
- rename tools/libxc/{xc_cpuid_x86.c => xg_cpuid_x86.c} (100%)
- rename tools/libxc/{xc_dom_arm.c => xg_dom_arm.c} (100%)
- rename tools/libxc/{xc_dom_armzimageloader.c => xg_dom_armzimageloader.c} (100%)
- rename tools/libxc/{xc_dom_binloader.c => xg_dom_binloader.c} (100%)
- rename tools/libxc/{xc_dom_boot.c => xg_dom_boot.c} (100%)
- rename tools/libxc/{xc_dom_bzimageloader.c => xg_dom_bzimageloader.c} (100%)
- rename tools/libxc/{xc_dom_compat_linux.c => xg_dom_compat_linux.c} (100%)
- rename tools/libxc/{xc_dom_core.c => xg_dom_core.c} (100%)
- rename tools/libxc/{xc_dom_decompress_lz4.c => xg_dom_decompress_lz4.c} (100%)
- rename tools/libxc/{xc_dom_decompress_unsafe.c => xg_dom_decompress_unsafe.c} (100%)
- rename tools/libxc/{xc_dom_decompress_unsafe_bzip2.c => xg_dom_decompress_unsafe_bzip2.c} (100%)
- rename tools/libxc/{xc_dom_decompress_unsafe_lzma.c => xg_dom_decompress_unsafe_lzma.c} (100%)
- rename tools/libxc/{xc_dom_decompress_unsafe_lzo1x.c => xg_dom_decompress_unsafe_lzo1x.c} (100%)
- rename tools/libxc/{xc_dom_decompress_unsafe_xz.c => xg_dom_decompress_unsafe_xz.c} (100%)
- rename tools/libxc/{xc_dom_elfloader.c => xg_dom_elfloader.c} (100%)
- rename tools/libxc/{xc_dom_hvmloader.c => xg_dom_hvmloader.c} (100%)
- rename tools/libxc/{xc_dom_x86.c => xg_dom_x86.c} (100%)
- rename tools/libxc/{xc_nomigrate.c => xg_nomigrate.c} (100%)
- rename tools/libxc/{xc_offline_page.c => xg_offline_page.c} (100%)
- rename tools/libxc/{xc_sr_common.c => xg_sr_common.c} (100%)
- rename tools/libxc/{xc_sr_common_x86.c => xg_sr_common_x86.c} (100%)
- rename tools/libxc/{xc_sr_common_x86_pv.c => xg_sr_common_x86_pv.c} (100%)
- rename tools/libxc/{xc_sr_restore.c => xg_sr_restore.c} (100%)
- rename tools/libxc/{xc_sr_restore_x86_hvm.c => xg_sr_restore_x86_hvm.c} (100%)
- rename tools/libxc/{xc_sr_restore_x86_pv.c => xg_sr_restore_x86_pv.c} (100%)
- rename tools/libxc/{xc_sr_save.c => xg_sr_save.c} (100%)
- rename tools/libxc/{xc_sr_save_x86_hvm.c => xg_sr_save_x86_hvm.c} (100%)
- rename tools/libxc/{xc_sr_save_x86_pv.c => xg_sr_save_x86_pv.c} (100%)
- rename tools/libxc/{xc_suspend.c => xg_suspend.c} (100%)
+After this huge cleanup all dependencies between libraries are defined
+in a single rather small file tools/libs/uselibs.mk, which is used to
+create the needed make variables and to control the stubdom build
+dependencies as well.
 
-diff --git a/tools/libxc/Makefile b/tools/libxc/Makefile
-index f3f1edc07b..e1b2c24106 100644
---- a/tools/libxc/Makefile
-+++ b/tools/libxc/Makefile
-@@ -54,20 +54,20 @@ CTRL_SRCS-y       += xc_devicemodel_compat.c
- GUEST_SRCS-y :=
- GUEST_SRCS-y += xg_private.c
- GUEST_SRCS-y += xg_domain.c
--GUEST_SRCS-y += xc_suspend.c
-+GUEST_SRCS-y += xg_suspend.c
- ifeq ($(CONFIG_MIGRATE),y)
--GUEST_SRCS-y += xc_sr_common.c
--GUEST_SRCS-$(CONFIG_X86) += xc_sr_common_x86.c
--GUEST_SRCS-$(CONFIG_X86) += xc_sr_common_x86_pv.c
--GUEST_SRCS-$(CONFIG_X86) += xc_sr_restore_x86_pv.c
--GUEST_SRCS-$(CONFIG_X86) += xc_sr_restore_x86_hvm.c
--GUEST_SRCS-$(CONFIG_X86) += xc_sr_save_x86_pv.c
--GUEST_SRCS-$(CONFIG_X86) += xc_sr_save_x86_hvm.c
--GUEST_SRCS-y += xc_sr_restore.c
--GUEST_SRCS-y += xc_sr_save.c
--GUEST_SRCS-y += xc_offline_page.c
-+GUEST_SRCS-y += xg_sr_common.c
-+GUEST_SRCS-$(CONFIG_X86) += xg_sr_common_x86.c
-+GUEST_SRCS-$(CONFIG_X86) += xg_sr_common_x86_pv.c
-+GUEST_SRCS-$(CONFIG_X86) += xg_sr_restore_x86_pv.c
-+GUEST_SRCS-$(CONFIG_X86) += xg_sr_restore_x86_hvm.c
-+GUEST_SRCS-$(CONFIG_X86) += xg_sr_save_x86_pv.c
-+GUEST_SRCS-$(CONFIG_X86) += xg_sr_save_x86_hvm.c
-+GUEST_SRCS-y += xg_sr_restore.c
-+GUEST_SRCS-y += xg_sr_save.c
-+GUEST_SRCS-y += xg_offline_page.c
- else
--GUEST_SRCS-y += xc_nomigrate.c
-+GUEST_SRCS-y += xg_nomigrate.c
- endif
- 
- vpath %.c ../../xen/common/libelf
-@@ -88,25 +88,26 @@ GUEST_SRCS-y                 += cpuid.c msr.c
- endif
- 
- # new domain builder
--GUEST_SRCS-y                 += xc_dom_core.c xc_dom_boot.c
--GUEST_SRCS-y                 += xc_dom_elfloader.c
--GUEST_SRCS-$(CONFIG_X86)     += xc_dom_bzimageloader.c
--GUEST_SRCS-$(CONFIG_X86)     += xc_dom_decompress_lz4.c
--GUEST_SRCS-$(CONFIG_X86)     += xc_dom_hvmloader.c
--GUEST_SRCS-$(CONFIG_ARM)     += xc_dom_armzimageloader.c
--GUEST_SRCS-y                 += xc_dom_binloader.c
--GUEST_SRCS-y                 += xc_dom_compat_linux.c
--
--GUEST_SRCS-$(CONFIG_X86)     += xc_dom_x86.c
--GUEST_SRCS-$(CONFIG_X86)     += xc_cpuid_x86.c
--GUEST_SRCS-$(CONFIG_ARM)     += xc_dom_arm.c
-+GUEST_SRCS-y                 += xg_dom_core.c
-+GUEST_SRCS-y                 += xg_dom_boot.c
-+GUEST_SRCS-y                 += xg_dom_elfloader.c
-+GUEST_SRCS-$(CONFIG_X86)     += xg_dom_bzimageloader.c
-+GUEST_SRCS-$(CONFIG_X86)     += xg_dom_decompress_lz4.c
-+GUEST_SRCS-$(CONFIG_X86)     += xg_dom_hvmloader.c
-+GUEST_SRCS-$(CONFIG_ARM)     += xg_dom_armzimageloader.c
-+GUEST_SRCS-y                 += xg_dom_binloader.c
-+GUEST_SRCS-y                 += xg_dom_compat_linux.c
-+
-+GUEST_SRCS-$(CONFIG_X86)     += xg_dom_x86.c
-+GUEST_SRCS-$(CONFIG_X86)     += xg_cpuid_x86.c
-+GUEST_SRCS-$(CONFIG_ARM)     += xg_dom_arm.c
- 
- ifeq ($(CONFIG_LIBXC_MINIOS),y)
--GUEST_SRCS-y                 += xc_dom_decompress_unsafe.c
--GUEST_SRCS-y                 += xc_dom_decompress_unsafe_bzip2.c
--GUEST_SRCS-y                 += xc_dom_decompress_unsafe_lzma.c
--GUEST_SRCS-y                 += xc_dom_decompress_unsafe_lzo1x.c
--GUEST_SRCS-y                 += xc_dom_decompress_unsafe_xz.c
-+GUEST_SRCS-y                 += xg_dom_decompress_unsafe.c
-+GUEST_SRCS-y                 += xg_dom_decompress_unsafe_bzip2.c
-+GUEST_SRCS-y                 += xg_dom_decompress_unsafe_lzma.c
-+GUEST_SRCS-y                 += xg_dom_decompress_unsafe_lzo1x.c
-+GUEST_SRCS-y                 += xg_dom_decompress_unsafe_xz.c
- endif
- 
- -include $(XEN_TARGET_ARCH)/Makefile
-diff --git a/tools/libxc/xc_cpuid_x86.c b/tools/libxc/xg_cpuid_x86.c
-similarity index 100%
-rename from tools/libxc/xc_cpuid_x86.c
-rename to tools/libxc/xg_cpuid_x86.c
-diff --git a/tools/libxc/xc_dom_arm.c b/tools/libxc/xg_dom_arm.c
-similarity index 100%
-rename from tools/libxc/xc_dom_arm.c
-rename to tools/libxc/xg_dom_arm.c
-diff --git a/tools/libxc/xc_dom_armzimageloader.c b/tools/libxc/xg_dom_armzimageloader.c
-similarity index 100%
-rename from tools/libxc/xc_dom_armzimageloader.c
-rename to tools/libxc/xg_dom_armzimageloader.c
-diff --git a/tools/libxc/xc_dom_binloader.c b/tools/libxc/xg_dom_binloader.c
-similarity index 100%
-rename from tools/libxc/xc_dom_binloader.c
-rename to tools/libxc/xg_dom_binloader.c
-diff --git a/tools/libxc/xc_dom_boot.c b/tools/libxc/xg_dom_boot.c
-similarity index 100%
-rename from tools/libxc/xc_dom_boot.c
-rename to tools/libxc/xg_dom_boot.c
-diff --git a/tools/libxc/xc_dom_bzimageloader.c b/tools/libxc/xg_dom_bzimageloader.c
-similarity index 100%
-rename from tools/libxc/xc_dom_bzimageloader.c
-rename to tools/libxc/xg_dom_bzimageloader.c
-diff --git a/tools/libxc/xc_dom_compat_linux.c b/tools/libxc/xg_dom_compat_linux.c
-similarity index 100%
-rename from tools/libxc/xc_dom_compat_linux.c
-rename to tools/libxc/xg_dom_compat_linux.c
-diff --git a/tools/libxc/xc_dom_core.c b/tools/libxc/xg_dom_core.c
-similarity index 100%
-rename from tools/libxc/xc_dom_core.c
-rename to tools/libxc/xg_dom_core.c
-diff --git a/tools/libxc/xc_dom_decompress_lz4.c b/tools/libxc/xg_dom_decompress_lz4.c
-similarity index 100%
-rename from tools/libxc/xc_dom_decompress_lz4.c
-rename to tools/libxc/xg_dom_decompress_lz4.c
-diff --git a/tools/libxc/xc_dom_decompress_unsafe.c b/tools/libxc/xg_dom_decompress_unsafe.c
-similarity index 100%
-rename from tools/libxc/xc_dom_decompress_unsafe.c
-rename to tools/libxc/xg_dom_decompress_unsafe.c
-diff --git a/tools/libxc/xc_dom_decompress_unsafe_bzip2.c b/tools/libxc/xg_dom_decompress_unsafe_bzip2.c
-similarity index 100%
-rename from tools/libxc/xc_dom_decompress_unsafe_bzip2.c
-rename to tools/libxc/xg_dom_decompress_unsafe_bzip2.c
-diff --git a/tools/libxc/xc_dom_decompress_unsafe_lzma.c b/tools/libxc/xg_dom_decompress_unsafe_lzma.c
-similarity index 100%
-rename from tools/libxc/xc_dom_decompress_unsafe_lzma.c
-rename to tools/libxc/xg_dom_decompress_unsafe_lzma.c
-diff --git a/tools/libxc/xc_dom_decompress_unsafe_lzo1x.c b/tools/libxc/xg_dom_decompress_unsafe_lzo1x.c
-similarity index 100%
-rename from tools/libxc/xc_dom_decompress_unsafe_lzo1x.c
-rename to tools/libxc/xg_dom_decompress_unsafe_lzo1x.c
-diff --git a/tools/libxc/xc_dom_decompress_unsafe_xz.c b/tools/libxc/xg_dom_decompress_unsafe_xz.c
-similarity index 100%
-rename from tools/libxc/xc_dom_decompress_unsafe_xz.c
-rename to tools/libxc/xg_dom_decompress_unsafe_xz.c
-diff --git a/tools/libxc/xc_dom_elfloader.c b/tools/libxc/xg_dom_elfloader.c
-similarity index 100%
-rename from tools/libxc/xc_dom_elfloader.c
-rename to tools/libxc/xg_dom_elfloader.c
-diff --git a/tools/libxc/xc_dom_hvmloader.c b/tools/libxc/xg_dom_hvmloader.c
-similarity index 100%
-rename from tools/libxc/xc_dom_hvmloader.c
-rename to tools/libxc/xg_dom_hvmloader.c
-diff --git a/tools/libxc/xc_dom_x86.c b/tools/libxc/xg_dom_x86.c
-similarity index 100%
-rename from tools/libxc/xc_dom_x86.c
-rename to tools/libxc/xg_dom_x86.c
-diff --git a/tools/libxc/xc_nomigrate.c b/tools/libxc/xg_nomigrate.c
-similarity index 100%
-rename from tools/libxc/xc_nomigrate.c
-rename to tools/libxc/xg_nomigrate.c
-diff --git a/tools/libxc/xc_offline_page.c b/tools/libxc/xg_offline_page.c
-similarity index 100%
-rename from tools/libxc/xc_offline_page.c
-rename to tools/libxc/xg_offline_page.c
-diff --git a/tools/libxc/xc_sr_common.c b/tools/libxc/xg_sr_common.c
-similarity index 100%
-rename from tools/libxc/xc_sr_common.c
-rename to tools/libxc/xg_sr_common.c
-diff --git a/tools/libxc/xc_sr_common_x86.c b/tools/libxc/xg_sr_common_x86.c
-similarity index 100%
-rename from tools/libxc/xc_sr_common_x86.c
-rename to tools/libxc/xg_sr_common_x86.c
-diff --git a/tools/libxc/xc_sr_common_x86_pv.c b/tools/libxc/xg_sr_common_x86_pv.c
-similarity index 100%
-rename from tools/libxc/xc_sr_common_x86_pv.c
-rename to tools/libxc/xg_sr_common_x86_pv.c
-diff --git a/tools/libxc/xc_sr_restore.c b/tools/libxc/xg_sr_restore.c
-similarity index 100%
-rename from tools/libxc/xc_sr_restore.c
-rename to tools/libxc/xg_sr_restore.c
-diff --git a/tools/libxc/xc_sr_restore_x86_hvm.c b/tools/libxc/xg_sr_restore_x86_hvm.c
-similarity index 100%
-rename from tools/libxc/xc_sr_restore_x86_hvm.c
-rename to tools/libxc/xg_sr_restore_x86_hvm.c
-diff --git a/tools/libxc/xc_sr_restore_x86_pv.c b/tools/libxc/xg_sr_restore_x86_pv.c
-similarity index 100%
-rename from tools/libxc/xc_sr_restore_x86_pv.c
-rename to tools/libxc/xg_sr_restore_x86_pv.c
-diff --git a/tools/libxc/xc_sr_save.c b/tools/libxc/xg_sr_save.c
-similarity index 100%
-rename from tools/libxc/xc_sr_save.c
-rename to tools/libxc/xg_sr_save.c
-diff --git a/tools/libxc/xc_sr_save_x86_hvm.c b/tools/libxc/xg_sr_save_x86_hvm.c
-similarity index 100%
-rename from tools/libxc/xc_sr_save_x86_hvm.c
-rename to tools/libxc/xg_sr_save_x86_hvm.c
-diff --git a/tools/libxc/xc_sr_save_x86_pv.c b/tools/libxc/xg_sr_save_x86_pv.c
-similarity index 100%
-rename from tools/libxc/xc_sr_save_x86_pv.c
-rename to tools/libxc/xg_sr_save_x86_pv.c
-diff --git a/tools/libxc/xc_suspend.c b/tools/libxc/xg_suspend.c
-similarity index 100%
-rename from tools/libxc/xc_suspend.c
-rename to tools/libxc/xg_suspend.c
+Another bonus of the rework is the automation of setting the versions
+of unstable libraries. This removes the need to bump those versions
+manually for each Xen release.
+
+libfsimage is not moved by this series, as IMO there are some open
+questions:
+- should it really be unstable?
+- is the support of adding external fs-support used in practice, i.e.
+  shouldn't the fs-specific sub-libraries be just included into
+  libfsimage instead of being loaded dynamically?
+
+The complete series is available via:
+
+git://xenbits.xen.org/people/jgross/xen.git libbuild-v3
+
+Changes in V3:
+- more cleanup added
+- added moving libxenguest, libxl and libxlutil
+- split out dependencies into uselibs.mk
+- use uselibs.mk for stubdoms build
+
+
+Juergen Gross (38):
+  stubdom: add stubdom/mini-os.mk for Xen paths used by Mini-OS
+  tools: switch XEN_LIBXEN* make variables to lower case (XEN_libxen*)
+  tools: add a copy of library headers in tools/include
+  tools: don't call make recursively from libs.mk
+  tools: define ROUNDUP() in tools/include/xen-tools/libs.h
+  tools: generate most contents of library make variables
+  stubdom: add correct dependencies for Xen libraries
+  stubdom: simplify building xen libraries for stubdoms
+  tools: drop explicit path specifications for qemu build
+  tools: tweak tools/libs/libs.mk for being able to support libxenctrl
+  tools/python: drop libxenguest from setup.py
+  tools: fix pkg-config file for libxenguest
+  tools: don't assume libxenguest and libxenctrl to be in same directory
+  tools/misc: don't use libxenctrl internals from xen-hptool
+  tools/misc: don't include xg_save_restore.h from xen-mfndump.c
+  tools/misc: replace PAGE_SIZE with XC_PAGE_SIZE in xen-mfndump.c
+  tools/misc: drop all libxc internals from xen-mfndump.c
+  tools/libxc: remove unused headers xc_efi.h and xc_elf.h
+  tools/libxc: move xc_[un]map_domain_meminfo() into new source
+    xg_domain.c
+  tools/libxc: rename all libxenguest sources to xg_*
+  tools/libxc: rename libxenguest internal headers
+  tools/misc: rename xc_dom.h do xenctrl_dom.h
+  tools/libxc: untangle libxenctrl from libxenguest
+  tools/xcutils: use official headers in readnotes
+  tools/xenpaging: remove libxc internals
+  tools: move libxenctrl below tools/libs
+  tools/libxc: move libxenguest to tools/libs/guest
+  tools: split libxenstore into new tools/libs/store directory
+  tools: split libxenvchan into new tools/libs/vchan directory
+  tools: split libxenstat into new tools/libs/stat directory
+  tools/libxl: fix dependencies of libxl tests
+  tools/libxl: don't include libxl_osdeps.h from libxlutil sources
+  tools/libxl: add missing items to clean target
+  tools/libxl: move xl parsing checks to tools/xl
+  tools/xl: don't assume libxl and libxlutil are in one directory
+  tools/libxl: move libxenlight to tools/libs/light
+  tools: add support for library names other than libxen*
+  tools: move libxlutil to tools/libs/util
+
+ .gitignore                                    |  75 ++--
+ MAINTAINERS                                   |   2 +-
+ stubdom/Makefile                              | 151 ++-----
+ stubdom/grub/Makefile                         |   4 +-
+ stubdom/grub/kexec.c                          |   2 +-
+ stubdom/mini-os.mk                            |  17 +
+ tools/Makefile                                |  34 +-
+ tools/Rules.mk                                | 112 +-----
+ tools/configure                               |   2 +-
+ tools/configure.ac                            |   2 +-
+ tools/console/daemon/io.c                     |   6 +-
+ tools/golang/xenlight/Makefile                |   4 +-
+ tools/helpers/init-xenstore-domain.c          |   2 +-
+ tools/include/xen-tools/libs.h                |   4 +
+ tools/libs/Makefile                           |   7 +
+ tools/libs/call/Makefile                      |   4 +-
+ tools/libs/call/buffer.c                      |   3 +-
+ tools/libs/ctrl/Makefile                      |  71 ++++
+ tools/{libxc => libs/ctrl}/include/xenctrl.h  |   0
+ .../ctrl}/include/xenctrl_compat.h            |   0
+ .../ctrl/include/xenctrl_dom.h}               |  10 +-
+ tools/{libxc => libs/ctrl}/xc_altp2m.c        |   0
+ tools/{libxc => libs/ctrl}/xc_arinc653.c      |   0
+ tools/{libxc => libs/ctrl}/xc_bitops.h        |   0
+ tools/{libxc => libs/ctrl}/xc_core.c          |   5 +-
+ tools/{libxc => libs/ctrl}/xc_core.h          |   2 +-
+ tools/{libxc => libs/ctrl}/xc_core_arm.c      |   2 +-
+ tools/{libxc => libs/ctrl}/xc_core_arm.h      |   0
+ tools/{libxc => libs/ctrl}/xc_core_x86.c      |   6 +-
+ tools/{libxc => libs/ctrl}/xc_core_x86.h      |   0
+ tools/{libxc => libs/ctrl}/xc_cpu_hotplug.c   |   0
+ tools/{libxc => libs/ctrl}/xc_cpupool.c       |   0
+ tools/{libxc => libs/ctrl}/xc_csched.c        |   0
+ tools/{libxc => libs/ctrl}/xc_csched2.c       |   0
+ .../ctrl}/xc_devicemodel_compat.c             |   0
+ tools/{libxc => libs/ctrl}/xc_domain.c        | 129 +-----
+ tools/{libxc => libs/ctrl}/xc_evtchn.c        |   0
+ tools/{libxc => libs/ctrl}/xc_evtchn_compat.c |   0
+ tools/{libxc => libs/ctrl}/xc_flask.c         |   0
+ .../{libxc => libs/ctrl}/xc_foreign_memory.c  |   0
+ tools/{libxc => libs/ctrl}/xc_freebsd.c       |   0
+ tools/{libxc => libs/ctrl}/xc_gnttab.c        |   0
+ tools/{libxc => libs/ctrl}/xc_gnttab_compat.c |   0
+ tools/{libxc => libs/ctrl}/xc_hcall_buf.c     |   1 -
+ tools/{libxc => libs/ctrl}/xc_kexec.c         |   0
+ tools/{libxc => libs/ctrl}/xc_linux.c         |   0
+ tools/{libxc => libs/ctrl}/xc_mem_access.c    |   0
+ tools/{libxc => libs/ctrl}/xc_mem_paging.c    |   0
+ tools/{libxc => libs/ctrl}/xc_memshr.c        |   0
+ tools/{libxc => libs/ctrl}/xc_minios.c        |   0
+ tools/{libxc => libs/ctrl}/xc_misc.c          |   0
+ tools/{libxc => libs/ctrl}/xc_monitor.c       |   0
+ tools/{libxc => libs/ctrl}/xc_msr_x86.h       |   0
+ tools/{libxc => libs/ctrl}/xc_netbsd.c        |   0
+ tools/{libxc => libs/ctrl}/xc_pagetab.c       |   0
+ tools/{libxc => libs/ctrl}/xc_physdev.c       |   0
+ tools/{libxc => libs/ctrl}/xc_pm.c            |   0
+ tools/{libxc => libs/ctrl}/xc_private.c       |   3 +-
+ tools/{libxc => libs/ctrl}/xc_private.h       |  36 ++
+ tools/{libxc => libs/ctrl}/xc_psr.c           |   0
+ tools/{libxc => libs/ctrl}/xc_resource.c      |   0
+ tools/{libxc => libs/ctrl}/xc_resume.c        |   2 -
+ tools/{libxc => libs/ctrl}/xc_rt.c            |   0
+ tools/{libxc => libs/ctrl}/xc_solaris.c       |   0
+ tools/{libxc => libs/ctrl}/xc_tbuf.c          |   0
+ tools/{libxc => libs/ctrl}/xc_vm_event.c      |   0
+ tools/{libxc => libs/ctrl}/xencontrol.pc.in   |   0
+ tools/libs/devicemodel/Makefile               |   4 +-
+ tools/libs/evtchn/Makefile                    |   4 +-
+ tools/libs/foreignmemory/Makefile             |   4 +-
+ tools/libs/foreignmemory/linux.c              |   3 +-
+ tools/libs/gnttab/Makefile                    |   4 +-
+ tools/libs/gnttab/private.h                   |   3 -
+ tools/{libxc => libs/guest}/COPYING           |   0
+ tools/libs/guest/Makefile                     | 121 ++++++
+ .../{libxc => libs/guest}/include/xenguest.h  |   8 +-
+ tools/{libxc => libs/guest}/xenguest.pc.in    |   2 +-
+ .../guest/xg_cpuid_x86.c}                     |   0
+ .../xc_dom_arm.c => libs/guest/xg_dom_arm.c}  |   2 +-
+ .../guest/xg_dom_armzimageloader.c}           |   2 +-
+ .../guest/xg_dom_binloader.c}                 |   2 +-
+ .../guest/xg_dom_boot.c}                      |   2 +-
+ .../guest/xg_dom_bzimageloader.c}             |   2 +-
+ .../guest/xg_dom_compat_linux.c}              |   2 +-
+ .../guest/xg_dom_core.c}                      |   2 +-
+ .../guest/xg_dom_decompress.h}                |   4 +-
+ .../guest/xg_dom_decompress_lz4.c}            |   2 +-
+ .../guest/xg_dom_decompress_unsafe.c}         |   2 +-
+ .../guest/xg_dom_decompress_unsafe.h}         |   2 +-
+ .../guest/xg_dom_decompress_unsafe_bzip2.c}   |   2 +-
+ .../guest/xg_dom_decompress_unsafe_lzma.c}    |   2 +-
+ .../guest/xg_dom_decompress_unsafe_lzo1x.c}   |   2 +-
+ .../guest/xg_dom_decompress_unsafe_xz.c}      |   2 +-
+ .../guest/xg_dom_elfloader.c}                 |   2 +-
+ .../guest/xg_dom_hvmloader.c}                 |   2 +-
+ .../xc_dom_x86.c => libs/guest/xg_dom_x86.c}  |   2 +-
+ tools/libs/guest/xg_domain.c                  | 149 +++++++
+ .../guest/xg_nomigrate.c}                     |   0
+ .../guest/xg_offline_page.c}                  |   2 +-
+ tools/{libxc => libs/guest}/xg_private.c      |   0
+ tools/{libxc => libs/guest}/xg_private.h      |  23 --
+ tools/{libxc => libs/guest}/xg_save_restore.h |  13 -
+ .../guest/xg_sr_common.c}                     |   2 +-
+ .../guest/xg_sr_common.h}                     |   4 +-
+ .../guest/xg_sr_common_x86.c}                 |   2 +-
+ .../guest/xg_sr_common_x86.h}                 |   2 +-
+ .../guest/xg_sr_common_x86_pv.c}              |   2 +-
+ .../guest/xg_sr_common_x86_pv.h}              |   2 +-
+ .../guest/xg_sr_restore.c}                    |   2 +-
+ .../guest/xg_sr_restore_x86_hvm.c}            |   2 +-
+ .../guest/xg_sr_restore_x86_pv.c}             |   2 +-
+ .../xc_sr_save.c => libs/guest/xg_sr_save.c}  |   2 +-
+ .../guest/xg_sr_save_x86_hvm.c}               |   2 +-
+ .../guest/xg_sr_save_x86_pv.c}                |   2 +-
+ .../guest/xg_sr_stream_format.h}              |   0
+ .../xc_suspend.c => libs/guest/xg_suspend.c}  |   0
+ tools/libs/hypfs/Makefile                     |   4 +-
+ tools/libs/libs.mk                            |  95 +++--
+ tools/{libxl => libs/light}/CODING_STYLE      |   0
+ tools/libs/light/Makefile                     | 291 ++++++++++++++
+ .../light}/check-libxl-api-rules              |   0
+ tools/{libxl => libs/light}/flexarray.c       |   0
+ tools/{libxl => libs/light}/flexarray.h       |   0
+ tools/{libxl => libs/light}/gentest.py        |   0
+ tools/{libxl => libs/light}/gentypes.py       |   0
+ tools/{libxl => libs/light}/idl.py            |   0
+ tools/{libxl => libs/light}/idl.txt           |   0
+ tools/{libxl => libs/light/include}/libxl.h   |   0
+ .../light/include}/libxl_event.h              |   0
+ .../light/include}/libxl_json.h               |   0
+ .../light/include}/libxl_utils.h              |   0
+ .../light/include}/libxl_uuid.h               |   0
+ tools/{libxl => libs/light}/libxl.c           |   0
+ tools/{libxl => libs/light}/libxl_9pfs.c      |   0
+ tools/{libxl => libs/light}/libxl_aoutils.c   |   0
+ tools/{libxl => libs/light}/libxl_arch.h      |   0
+ tools/{libxl => libs/light}/libxl_arm.c       |   2 +-
+ tools/{libxl => libs/light}/libxl_arm.h       |   2 +-
+ tools/{libxl => libs/light}/libxl_arm_acpi.c  |   0
+ .../{libxl => libs/light}/libxl_arm_no_acpi.c |   0
+ .../{libxl => libs/light}/libxl_bootloader.c  |   0
+ .../light}/libxl_checkpoint_device.c          |   0
+ tools/{libxl => libs/light}/libxl_colo.h      |   0
+ tools/{libxl => libs/light}/libxl_colo_nic.c  |   0
+ .../{libxl => libs/light}/libxl_colo_proxy.c  |   0
+ .../{libxl => libs/light}/libxl_colo_qdisk.c  |   0
+ .../light}/libxl_colo_restore.c               |   0
+ tools/{libxl => libs/light}/libxl_colo_save.c |   0
+ tools/{libxl => libs/light}/libxl_console.c   |   0
+ .../light}/libxl_convert_callout.c            |   0
+ tools/{libxl => libs/light}/libxl_cpuid.c     |   0
+ tools/{libxl => libs/light}/libxl_cpupool.c   |   0
+ tools/{libxl => libs/light}/libxl_create.c    |   2 +-
+ tools/{libxl => libs/light}/libxl_device.c    |   0
+ tools/{libxl => libs/light}/libxl_disk.c      |   0
+ tools/{libxl => libs/light}/libxl_dm.c        |   2 +-
+ tools/{libxl => libs/light}/libxl_dom.c       |   2 +-
+ tools/{libxl => libs/light}/libxl_dom_save.c  |   0
+ .../{libxl => libs/light}/libxl_dom_suspend.c |   0
+ tools/{libxl => libs/light}/libxl_domain.c    |   0
+ tools/{libxl => libs/light}/libxl_event.c     |   0
+ tools/{libxl => libs/light}/libxl_exec.c      |   0
+ tools/{libxl => libs/light}/libxl_flask.c     |   0
+ tools/{libxl => libs/light}/libxl_fork.c      |   0
+ tools/{libxl => libs/light}/libxl_freebsd.c   |   0
+ tools/{libxl => libs/light}/libxl_genid.c     |   0
+ tools/{libxl => libs/light}/libxl_internal.c  |   0
+ tools/{libxl => libs/light}/libxl_internal.h  |   5 +-
+ tools/{libxl => libs/light}/libxl_json.c      |   0
+ .../light}/libxl_libfdt_compat.c              |   0
+ .../light}/libxl_libfdt_compat.h              |   0
+ tools/{libxl => libs/light}/libxl_linux.c     |   0
+ tools/{libxl => libs/light}/libxl_mem.c       |   0
+ tools/{libxl => libs/light}/libxl_netbsd.c    |   0
+ tools/{libxl => libs/light}/libxl_netbuffer.c |   0
+ tools/{libxl => libs/light}/libxl_nic.c       |   0
+ tools/{libxl => libs/light}/libxl_no_colo.c   |   0
+ .../light}/libxl_no_convert_callout.c         |   0
+ tools/{libxl => libs/light}/libxl_nocpuid.c   |   0
+ .../{libxl => libs/light}/libxl_nonetbuffer.c |   0
+ tools/{libxl => libs/light}/libxl_numa.c      |   0
+ tools/{libxl => libs/light}/libxl_osdeps.h    |   0
+ tools/{libxl => libs/light}/libxl_paths.c     |   0
+ tools/{libxl => libs/light}/libxl_pci.c       |   0
+ tools/{libxl => libs/light}/libxl_psr.c       |   0
+ tools/{libxl => libs/light}/libxl_pvcalls.c   |   0
+ tools/{libxl => libs/light}/libxl_qmp.c       |   0
+ tools/{libxl => libs/light}/libxl_remus.c     |   0
+ .../light}/libxl_remus_disk_drbd.c            |   0
+ .../light}/libxl_save_callout.c               |   0
+ .../{libxl => libs/light}/libxl_save_helper.c |   0
+ .../light}/libxl_save_msgs_gen.pl             |   0
+ tools/{libxl => libs/light}/libxl_sched.c     |   0
+ .../light}/libxl_sr_stream_format.h           |   0
+ .../{libxl => libs/light}/libxl_stream_read.c |   0
+ .../light}/libxl_stream_write.c               |   0
+ .../light}/libxl_test_fdevent.c               |   0
+ .../light}/libxl_test_fdevent.h               |   0
+ .../light}/libxl_test_timedereg.c             |   0
+ .../light}/libxl_test_timedereg.h             |   0
+ tools/{libxl => libs/light}/libxl_tmem.c      |   0
+ tools/{libxl => libs/light}/libxl_types.idl   |   0
+ .../light}/libxl_types_internal.idl           |   0
+ tools/{libxl => libs/light}/libxl_usb.c       |   0
+ tools/{libxl => libs/light}/libxl_utils.c     |   0
+ tools/{libxl => libs/light}/libxl_uuid.c      |   0
+ tools/{libxl => libs/light}/libxl_vdispl.c    |   0
+ tools/{libxl => libs/light}/libxl_vkb.c       |   0
+ tools/{libxl => libs/light}/libxl_vnuma.c     |   2 +-
+ tools/{libxl => libs/light}/libxl_vsnd.c      |   0
+ tools/{libxl => libs/light}/libxl_vtpm.c      |   0
+ tools/{libxl => libs/light}/libxl_x86.c       |   2 +-
+ tools/{libxl => libs/light}/libxl_x86_acpi.c  |   2 +-
+ tools/{libxl => libs/light}/libxl_x86_acpi.h  |   0
+ tools/{libxl => libs/light}/libxl_xshelp.c    |   0
+ tools/{libxl => libs/light}/osdeps.c          |   0
+ tools/{libxl => libs/light}/test_common.c     |   0
+ tools/{libxl => libs/light}/test_common.h     |   0
+ .../{libxl => libs/light}/test_fdderegrace.c  |   0
+ tools/{libxl => libs/light}/test_timedereg.c  |   0
+ tools/{libxl => libs/light}/xenlight.pc.in    |   0
+ .../{xenstat/libxenstat => libs/stat}/COPYING |   0
+ .../libxenstat => libs/stat}/Makefile         | 100 +----
+ .../stat}/bindings/swig/perl/.empty           |   0
+ .../stat}/bindings/swig/python/.empty         |   0
+ .../stat}/bindings/swig/xenstat.i             |   0
+ .../src => libs/stat/include}/xenstat.h       |   3 +
+ .../libxenstat/src => libs/stat}/xenstat.c    |   0
+ .../libxenstat => libs/stat}/xenstat.pc.in    |   2 +-
+ .../src => libs/stat}/xenstat_freebsd.c       |   0
+ .../src => libs/stat}/xenstat_linux.c         |   4 +-
+ .../src => libs/stat}/xenstat_netbsd.c        |   0
+ .../src => libs/stat}/xenstat_priv.h          |   0
+ .../src => libs/stat}/xenstat_qmp.c           |   0
+ .../src => libs/stat}/xenstat_solaris.c       |   0
+ tools/libs/store/Makefile                     |  64 +++
+ .../store}/include/compat/xs.h                |   0
+ .../store}/include/compat/xs_lib.h            |   0
+ .../store}/include/xenstore.h                 |   0
+ tools/libs/store/libxenstore.map              |  49 +++
+ tools/{xenstore => libs/store}/xenstore.pc.in |   0
+ tools/{xenstore => libs/store}/xs.c           |   0
+ tools/libs/toolcore/Makefile                  |   3 +-
+ tools/libs/toollog/Makefile                   |   3 +-
+ tools/libs/uselibs.mk                         |  33 ++
+ tools/libs/util/CODING_STYLE                  | 330 +++++++++++++++
+ tools/libs/util/Makefile                      |  61 +++
+ .../{libxl => libs/util/include}/libxlutil.h  |   0
+ tools/{libxl => libs/util}/libxlu_cfg.c       |   3 +-
+ tools/{libxl => libs/util}/libxlu_cfg_i.h     |   1 -
+ tools/{libxl => libs/util}/libxlu_cfg_l.c     |   0
+ tools/{libxl => libs/util}/libxlu_cfg_l.h     |   0
+ tools/{libxl => libs/util}/libxlu_cfg_l.l     |   0
+ tools/{libxl => libs/util}/libxlu_cfg_y.c     |   0
+ tools/{libxl => libs/util}/libxlu_cfg_y.h     |   0
+ tools/{libxl => libs/util}/libxlu_cfg_y.y     |   0
+ tools/{libxl => libs/util}/libxlu_disk.c      |   1 -
+ tools/{libxl => libs/util}/libxlu_disk_i.h    |   0
+ tools/{libxl => libs/util}/libxlu_disk_l.c    |  14 +-
+ tools/{libxl => libs/util}/libxlu_disk_l.h    |   8 +-
+ tools/{libxl => libs/util}/libxlu_disk_l.l    |   2 +-
+ tools/{libxl => libs/util}/libxlu_internal.h  |   0
+ tools/{libxl => libs/util}/libxlu_pci.c       |   3 +-
+ tools/{libxl => libs/util}/libxlu_vif.c       |   3 +-
+ tools/{libxl => libs/util}/xlutil.pc.in       |   0
+ tools/libs/vchan/Makefile                     |  20 +
+ .../vchan/include}/libxenvchan.h              |   0
+ tools/{libvchan => libs/vchan}/init.c         |   0
+ tools/{libvchan => libs/vchan}/io.c           |   0
+ tools/{libvchan => libs/vchan}/xenvchan.pc.in |   0
+ tools/libvchan/Makefile                       |  95 -----
+ tools/libxc/Makefile                          | 280 -------------
+ tools/libxc/xc_efi.h                          | 158 --------
+ tools/libxc/xc_elf.h                          |  16 -
+ tools/libxl/Makefile                          | 375 ------------------
+ tools/misc/Makefile                           |   5 +-
+ tools/misc/xen-hptool.c                       |   8 +-
+ tools/misc/xen-mfndump.c                      |  44 +-
+ tools/ocaml/libs/xl/Makefile                  |   8 +-
+ tools/ocaml/xenstored/Makefile                |   2 +-
+ tools/python/Makefile                         |   2 +-
+ tools/python/setup.py                         |  12 +-
+ tools/python/xen/lowlevel/xc/xc.c             |   2 +-
+ tools/vchan/Makefile                          |  37 ++
+ tools/{libvchan => vchan}/node-select.c       |   0
+ tools/{libvchan => vchan}/node.c              |   0
+ .../{libvchan => vchan}/vchan-socket-proxy.c  |   0
+ tools/xcutils/Makefile                        |   3 +-
+ tools/xcutils/readnotes.c                     |   5 +-
+ tools/xenpaging/Makefile                      |   3 +-
+ tools/xenpaging/file_ops.c                    |   8 +-
+ tools/xenpaging/pagein.c                      |   2 +-
+ tools/xenpaging/policy_default.c              |   2 +-
+ tools/xenpaging/xenpaging.c                   |  32 +-
+ tools/xenpaging/xenpaging.h                   |  70 +++-
+ tools/xenstat/Makefile                        |  10 -
+ tools/xenstore/Makefile                       |  82 +---
+ tools/xenstore/{include => }/xenstore_lib.h   |   0
+ tools/xenstore/xenstored_core.c               |   2 -
+ tools/{xenstat => }/xentop/Makefile           |   2 +-
+ tools/{xenstat => }/xentop/TODO               |   0
+ tools/{xenstat => }/xentop/xentop.c           |   0
+ tools/xl/Makefile                             |   1 +
+ tools/{libxl => xl}/check-xl-disk-parse       |   0
+ tools/{libxl => xl}/check-xl-vcpupin-parse    |   0
+ .../check-xl-vcpupin-parse.data-example       |   0
+ tools/{libxl => xl}/check-xl-vif-parse        |   0
+ 307 files changed, 1735 insertions(+), 1751 deletions(-)
+ create mode 100644 stubdom/mini-os.mk
+ create mode 100644 tools/libs/ctrl/Makefile
+ rename tools/{libxc => libs/ctrl}/include/xenctrl.h (100%)
+ rename tools/{libxc => libs/ctrl}/include/xenctrl_compat.h (100%)
+ rename tools/{libxc/include/xc_dom.h => libs/ctrl/include/xenctrl_dom.h} (98%)
+ rename tools/{libxc => libs/ctrl}/xc_altp2m.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_arinc653.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_bitops.h (100%)
+ rename tools/{libxc => libs/ctrl}/xc_core.c (99%)
+ rename tools/{libxc => libs/ctrl}/xc_core.h (99%)
+ rename tools/{libxc => libs/ctrl}/xc_core_arm.c (99%)
+ rename tools/{libxc => libs/ctrl}/xc_core_arm.h (100%)
+ rename tools/{libxc => libs/ctrl}/xc_core_x86.c (98%)
+ rename tools/{libxc => libs/ctrl}/xc_core_x86.h (100%)
+ rename tools/{libxc => libs/ctrl}/xc_cpu_hotplug.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_cpupool.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_csched.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_csched2.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_devicemodel_compat.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_domain.c (94%)
+ rename tools/{libxc => libs/ctrl}/xc_evtchn.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_evtchn_compat.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_flask.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_foreign_memory.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_freebsd.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_gnttab.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_gnttab_compat.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_hcall_buf.c (99%)
+ rename tools/{libxc => libs/ctrl}/xc_kexec.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_linux.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_mem_access.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_mem_paging.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_memshr.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_minios.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_misc.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_monitor.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_msr_x86.h (100%)
+ rename tools/{libxc => libs/ctrl}/xc_netbsd.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_pagetab.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_physdev.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_pm.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_private.c (99%)
+ rename tools/{libxc => libs/ctrl}/xc_private.h (91%)
+ rename tools/{libxc => libs/ctrl}/xc_psr.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_resource.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_resume.c (99%)
+ rename tools/{libxc => libs/ctrl}/xc_rt.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_solaris.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_tbuf.c (100%)
+ rename tools/{libxc => libs/ctrl}/xc_vm_event.c (100%)
+ rename tools/{libxc => libs/ctrl}/xencontrol.pc.in (100%)
+ rename tools/{libxc => libs/guest}/COPYING (100%)
+ create mode 100644 tools/libs/guest/Makefile
+ rename tools/{libxc => libs/guest}/include/xenguest.h (99%)
+ rename tools/{libxc => libs/guest}/xenguest.pc.in (73%)
+ rename tools/{libxc/xc_cpuid_x86.c => libs/guest/xg_cpuid_x86.c} (100%)
+ rename tools/{libxc/xc_dom_arm.c => libs/guest/xg_dom_arm.c} (99%)
+ rename tools/{libxc/xc_dom_armzimageloader.c => libs/guest/xg_dom_armzimageloader.c} (99%)
+ rename tools/{libxc/xc_dom_binloader.c => libs/guest/xg_dom_binloader.c} (99%)
+ rename tools/{libxc/xc_dom_boot.c => libs/guest/xg_dom_boot.c} (99%)
+ rename tools/{libxc/xc_dom_bzimageloader.c => libs/guest/xg_dom_bzimageloader.c} (99%)
+ rename tools/{libxc/xc_dom_compat_linux.c => libs/guest/xg_dom_compat_linux.c} (99%)
+ rename tools/{libxc/xc_dom_core.c => libs/guest/xg_dom_core.c} (99%)
+ rename tools/{libxc/xc_dom_decompress.h => libs/guest/xg_dom_decompress.h} (62%)
+ rename tools/{libxc/xc_dom_decompress_lz4.c => libs/guest/xg_dom_decompress_lz4.c} (98%)
+ rename tools/{libxc/xc_dom_decompress_unsafe.c => libs/guest/xg_dom_decompress_unsafe.c} (96%)
+ rename tools/{libxc/xc_dom_decompress_unsafe.h => libs/guest/xg_dom_decompress_unsafe.h} (97%)
+ rename tools/{libxc/xc_dom_decompress_unsafe_bzip2.c => libs/guest/xg_dom_decompress_unsafe_bzip2.c} (87%)
+ rename tools/{libxc/xc_dom_decompress_unsafe_lzma.c => libs/guest/xg_dom_decompress_unsafe_lzma.c} (87%)
+ rename tools/{libxc/xc_dom_decompress_unsafe_lzo1x.c => libs/guest/xg_dom_decompress_unsafe_lzo1x.c} (96%)
+ rename tools/{libxc/xc_dom_decompress_unsafe_xz.c => libs/guest/xg_dom_decompress_unsafe_xz.c} (95%)
+ rename tools/{libxc/xc_dom_elfloader.c => libs/guest/xg_dom_elfloader.c} (99%)
+ rename tools/{libxc/xc_dom_hvmloader.c => libs/guest/xg_dom_hvmloader.c} (99%)
+ rename tools/{libxc/xc_dom_x86.c => libs/guest/xg_dom_x86.c} (99%)
+ create mode 100644 tools/libs/guest/xg_domain.c
+ rename tools/{libxc/xc_nomigrate.c => libs/guest/xg_nomigrate.c} (100%)
+ rename tools/{libxc/xc_offline_page.c => libs/guest/xg_offline_page.c} (99%)
+ rename tools/{libxc => libs/guest}/xg_private.c (100%)
+ rename tools/{libxc => libs/guest}/xg_private.h (79%)
+ rename tools/{libxc => libs/guest}/xg_save_restore.h (91%)
+ rename tools/{libxc/xc_sr_common.c => libs/guest/xg_sr_common.c} (99%)
+ rename tools/{libxc/xc_sr_common.h => libs/guest/xg_sr_common.h} (99%)
+ rename tools/{libxc/xc_sr_common_x86.c => libs/guest/xg_sr_common_x86.c} (99%)
+ rename tools/{libxc/xc_sr_common_x86.h => libs/guest/xg_sr_common_x86.h} (98%)
+ rename tools/{libxc/xc_sr_common_x86_pv.c => libs/guest/xg_sr_common_x86_pv.c} (99%)
+ rename tools/{libxc/xc_sr_common_x86_pv.h => libs/guest/xg_sr_common_x86_pv.h} (98%)
+ rename tools/{libxc/xc_sr_restore.c => libs/guest/xg_sr_restore.c} (99%)
+ rename tools/{libxc/xc_sr_restore_x86_hvm.c => libs/guest/xg_sr_restore_x86_hvm.c} (99%)
+ rename tools/{libxc/xc_sr_restore_x86_pv.c => libs/guest/xg_sr_restore_x86_pv.c} (99%)
+ rename tools/{libxc/xc_sr_save.c => libs/guest/xg_sr_save.c} (99%)
+ rename tools/{libxc/xc_sr_save_x86_hvm.c => libs/guest/xg_sr_save_x86_hvm.c} (99%)
+ rename tools/{libxc/xc_sr_save_x86_pv.c => libs/guest/xg_sr_save_x86_pv.c} (99%)
+ rename tools/{libxc/xc_sr_stream_format.h => libs/guest/xg_sr_stream_format.h} (100%)
+ rename tools/{libxc/xc_suspend.c => libs/guest/xg_suspend.c} (100%)
+ rename tools/{libxl => libs/light}/CODING_STYLE (100%)
+ create mode 100644 tools/libs/light/Makefile
+ rename tools/{libxl => libs/light}/check-libxl-api-rules (100%)
+ rename tools/{libxl => libs/light}/flexarray.c (100%)
+ rename tools/{libxl => libs/light}/flexarray.h (100%)
+ rename tools/{libxl => libs/light}/gentest.py (100%)
+ rename tools/{libxl => libs/light}/gentypes.py (100%)
+ rename tools/{libxl => libs/light}/idl.py (100%)
+ rename tools/{libxl => libs/light}/idl.txt (100%)
+ rename tools/{libxl => libs/light/include}/libxl.h (100%)
+ rename tools/{libxl => libs/light/include}/libxl_event.h (100%)
+ rename tools/{libxl => libs/light/include}/libxl_json.h (100%)
+ rename tools/{libxl => libs/light/include}/libxl_utils.h (100%)
+ rename tools/{libxl => libs/light/include}/libxl_uuid.h (100%)
+ rename tools/{libxl => libs/light}/libxl.c (100%)
+ rename tools/{libxl => libs/light}/libxl_9pfs.c (100%)
+ rename tools/{libxl => libs/light}/libxl_aoutils.c (100%)
+ rename tools/{libxl => libs/light}/libxl_arch.h (100%)
+ rename tools/{libxl => libs/light}/libxl_arm.c (99%)
+ rename tools/{libxl => libs/light}/libxl_arm.h (98%)
+ rename tools/{libxl => libs/light}/libxl_arm_acpi.c (100%)
+ rename tools/{libxl => libs/light}/libxl_arm_no_acpi.c (100%)
+ rename tools/{libxl => libs/light}/libxl_bootloader.c (100%)
+ rename tools/{libxl => libs/light}/libxl_checkpoint_device.c (100%)
+ rename tools/{libxl => libs/light}/libxl_colo.h (100%)
+ rename tools/{libxl => libs/light}/libxl_colo_nic.c (100%)
+ rename tools/{libxl => libs/light}/libxl_colo_proxy.c (100%)
+ rename tools/{libxl => libs/light}/libxl_colo_qdisk.c (100%)
+ rename tools/{libxl => libs/light}/libxl_colo_restore.c (100%)
+ rename tools/{libxl => libs/light}/libxl_colo_save.c (100%)
+ rename tools/{libxl => libs/light}/libxl_console.c (100%)
+ rename tools/{libxl => libs/light}/libxl_convert_callout.c (100%)
+ rename tools/{libxl => libs/light}/libxl_cpuid.c (100%)
+ rename tools/{libxl => libs/light}/libxl_cpupool.c (100%)
+ rename tools/{libxl => libs/light}/libxl_create.c (99%)
+ rename tools/{libxl => libs/light}/libxl_device.c (100%)
+ rename tools/{libxl => libs/light}/libxl_disk.c (100%)
+ rename tools/{libxl => libs/light}/libxl_dm.c (99%)
+ rename tools/{libxl => libs/light}/libxl_dom.c (99%)
+ rename tools/{libxl => libs/light}/libxl_dom_save.c (100%)
+ rename tools/{libxl => libs/light}/libxl_dom_suspend.c (100%)
+ rename tools/{libxl => libs/light}/libxl_domain.c (100%)
+ rename tools/{libxl => libs/light}/libxl_event.c (100%)
+ rename tools/{libxl => libs/light}/libxl_exec.c (100%)
+ rename tools/{libxl => libs/light}/libxl_flask.c (100%)
+ rename tools/{libxl => libs/light}/libxl_fork.c (100%)
+ rename tools/{libxl => libs/light}/libxl_freebsd.c (100%)
+ rename tools/{libxl => libs/light}/libxl_genid.c (100%)
+ rename tools/{libxl => libs/light}/libxl_internal.c (100%)
+ rename tools/{libxl => libs/light}/libxl_internal.h (99%)
+ rename tools/{libxl => libs/light}/libxl_json.c (100%)
+ rename tools/{libxl => libs/light}/libxl_libfdt_compat.c (100%)
+ rename tools/{libxl => libs/light}/libxl_libfdt_compat.h (100%)
+ rename tools/{libxl => libs/light}/libxl_linux.c (100%)
+ rename tools/{libxl => libs/light}/libxl_mem.c (100%)
+ rename tools/{libxl => libs/light}/libxl_netbsd.c (100%)
+ rename tools/{libxl => libs/light}/libxl_netbuffer.c (100%)
+ rename tools/{libxl => libs/light}/libxl_nic.c (100%)
+ rename tools/{libxl => libs/light}/libxl_no_colo.c (100%)
+ rename tools/{libxl => libs/light}/libxl_no_convert_callout.c (100%)
+ rename tools/{libxl => libs/light}/libxl_nocpuid.c (100%)
+ rename tools/{libxl => libs/light}/libxl_nonetbuffer.c (100%)
+ rename tools/{libxl => libs/light}/libxl_numa.c (100%)
+ rename tools/{libxl => libs/light}/libxl_osdeps.h (100%)
+ rename tools/{libxl => libs/light}/libxl_paths.c (100%)
+ rename tools/{libxl => libs/light}/libxl_pci.c (100%)
+ rename tools/{libxl => libs/light}/libxl_psr.c (100%)
+ rename tools/{libxl => libs/light}/libxl_pvcalls.c (100%)
+ rename tools/{libxl => libs/light}/libxl_qmp.c (100%)
+ rename tools/{libxl => libs/light}/libxl_remus.c (100%)
+ rename tools/{libxl => libs/light}/libxl_remus_disk_drbd.c (100%)
+ rename tools/{libxl => libs/light}/libxl_save_callout.c (100%)
+ rename tools/{libxl => libs/light}/libxl_save_helper.c (100%)
+ rename tools/{libxl => libs/light}/libxl_save_msgs_gen.pl (100%)
+ rename tools/{libxl => libs/light}/libxl_sched.c (100%)
+ rename tools/{libxl => libs/light}/libxl_sr_stream_format.h (100%)
+ rename tools/{libxl => libs/light}/libxl_stream_read.c (100%)
+ rename tools/{libxl => libs/light}/libxl_stream_write.c (100%)
+ rename tools/{libxl => libs/light}/libxl_test_fdevent.c (100%)
+ rename tools/{libxl => libs/light}/libxl_test_fdevent.h (100%)
+ rename tools/{libxl => libs/light}/libxl_test_timedereg.c (100%)
+ rename tools/{libxl => libs/light}/libxl_test_timedereg.h (100%)
+ rename tools/{libxl => libs/light}/libxl_tmem.c (100%)
+ rename tools/{libxl => libs/light}/libxl_types.idl (100%)
+ rename tools/{libxl => libs/light}/libxl_types_internal.idl (100%)
+ rename tools/{libxl => libs/light}/libxl_usb.c (100%)
+ rename tools/{libxl => libs/light}/libxl_utils.c (100%)
+ rename tools/{libxl => libs/light}/libxl_uuid.c (100%)
+ rename tools/{libxl => libs/light}/libxl_vdispl.c (100%)
+ rename tools/{libxl => libs/light}/libxl_vkb.c (100%)
+ rename tools/{libxl => libs/light}/libxl_vnuma.c (99%)
+ rename tools/{libxl => libs/light}/libxl_vsnd.c (100%)
+ rename tools/{libxl => libs/light}/libxl_vtpm.c (100%)
+ rename tools/{libxl => libs/light}/libxl_x86.c (99%)
+ rename tools/{libxl => libs/light}/libxl_x86_acpi.c (99%)
+ rename tools/{libxl => libs/light}/libxl_x86_acpi.h (100%)
+ rename tools/{libxl => libs/light}/libxl_xshelp.c (100%)
+ rename tools/{libxl => libs/light}/osdeps.c (100%)
+ rename tools/{libxl => libs/light}/test_common.c (100%)
+ rename tools/{libxl => libs/light}/test_common.h (100%)
+ rename tools/{libxl => libs/light}/test_fdderegrace.c (100%)
+ rename tools/{libxl => libs/light}/test_timedereg.c (100%)
+ rename tools/{libxl => libs/light}/xenlight.pc.in (100%)
+ rename tools/{xenstat/libxenstat => libs/stat}/COPYING (100%)
+ rename tools/{xenstat/libxenstat => libs/stat}/Makefile (55%)
+ rename tools/{xenstat/libxenstat => libs/stat}/bindings/swig/perl/.empty (100%)
+ rename tools/{xenstat/libxenstat => libs/stat}/bindings/swig/python/.empty (100%)
+ rename tools/{xenstat/libxenstat => libs/stat}/bindings/swig/xenstat.i (100%)
+ rename tools/{xenstat/libxenstat/src => libs/stat/include}/xenstat.h (98%)
+ rename tools/{xenstat/libxenstat/src => libs/stat}/xenstat.c (100%)
+ rename tools/{xenstat/libxenstat => libs/stat}/xenstat.pc.in (82%)
+ rename tools/{xenstat/libxenstat/src => libs/stat}/xenstat_freebsd.c (100%)
+ rename tools/{xenstat/libxenstat/src => libs/stat}/xenstat_linux.c (98%)
+ rename tools/{xenstat/libxenstat/src => libs/stat}/xenstat_netbsd.c (100%)
+ rename tools/{xenstat/libxenstat/src => libs/stat}/xenstat_priv.h (100%)
+ rename tools/{xenstat/libxenstat/src => libs/stat}/xenstat_qmp.c (100%)
+ rename tools/{xenstat/libxenstat/src => libs/stat}/xenstat_solaris.c (100%)
+ create mode 100644 tools/libs/store/Makefile
+ rename tools/{xenstore => libs/store}/include/compat/xs.h (100%)
+ rename tools/{xenstore => libs/store}/include/compat/xs_lib.h (100%)
+ rename tools/{xenstore => libs/store}/include/xenstore.h (100%)
+ create mode 100644 tools/libs/store/libxenstore.map
+ rename tools/{xenstore => libs/store}/xenstore.pc.in (100%)
+ rename tools/{xenstore => libs/store}/xs.c (100%)
+ create mode 100644 tools/libs/uselibs.mk
+ create mode 100644 tools/libs/util/CODING_STYLE
+ create mode 100644 tools/libs/util/Makefile
+ rename tools/{libxl => libs/util/include}/libxlutil.h (100%)
+ rename tools/{libxl => libs/util}/libxlu_cfg.c (99%)
+ rename tools/{libxl => libs/util}/libxlu_cfg_i.h (96%)
+ rename tools/{libxl => libs/util}/libxlu_cfg_l.c (100%)
+ rename tools/{libxl => libs/util}/libxlu_cfg_l.h (100%)
+ rename tools/{libxl => libs/util}/libxlu_cfg_l.l (100%)
+ rename tools/{libxl => libs/util}/libxlu_cfg_y.c (100%)
+ rename tools/{libxl => libs/util}/libxlu_cfg_y.h (100%)
+ rename tools/{libxl => libs/util}/libxlu_cfg_y.y (100%)
+ rename tools/{libxl => libs/util}/libxlu_disk.c (97%)
+ rename tools/{libxl => libs/util}/libxlu_disk_i.h (100%)
+ rename tools/{libxl => libs/util}/libxlu_disk_l.c (99%)
+ rename tools/{libxl => libs/util}/libxlu_disk_l.h (99%)
+ rename tools/{libxl => libs/util}/libxlu_disk_l.l (99%)
+ rename tools/{libxl => libs/util}/libxlu_internal.h (100%)
+ rename tools/{libxl => libs/util}/libxlu_pci.c (99%)
+ rename tools/{libxl => libs/util}/libxlu_vif.c (98%)
+ rename tools/{libxl => libs/util}/xlutil.pc.in (100%)
+ create mode 100644 tools/libs/vchan/Makefile
+ rename tools/{libvchan => libs/vchan/include}/libxenvchan.h (100%)
+ rename tools/{libvchan => libs/vchan}/init.c (100%)
+ rename tools/{libvchan => libs/vchan}/io.c (100%)
+ rename tools/{libvchan => libs/vchan}/xenvchan.pc.in (100%)
+ delete mode 100644 tools/libvchan/Makefile
+ delete mode 100644 tools/libxc/Makefile
+ delete mode 100644 tools/libxc/xc_efi.h
+ delete mode 100644 tools/libxc/xc_elf.h
+ delete mode 100644 tools/libxl/Makefile
+ create mode 100644 tools/vchan/Makefile
+ rename tools/{libvchan => vchan}/node-select.c (100%)
+ rename tools/{libvchan => vchan}/node.c (100%)
+ rename tools/{libvchan => vchan}/vchan-socket-proxy.c (100%)
+ delete mode 100644 tools/xenstat/Makefile
+ rename tools/xenstore/{include => }/xenstore_lib.h (100%)
+ rename tools/{xenstat => }/xentop/Makefile (97%)
+ rename tools/{xenstat => }/xentop/TODO (100%)
+ rename tools/{xenstat => }/xentop/xentop.c (100%)
+ rename tools/{libxl => xl}/check-xl-disk-parse (100%)
+ rename tools/{libxl => xl}/check-xl-vcpupin-parse (100%)
+ rename tools/{libxl => xl}/check-xl-vcpupin-parse.data-example (100%)
+ rename tools/{libxl => xl}/check-xl-vif-parse (100%)
+
 -- 
 2.26.2
 
