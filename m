@@ -2,74 +2,54 @@ Return-Path: <SRS0=i2DS=CC=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-8.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
+	SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1AEDCC433DF
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2020 18:24:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 36A0DC433DF
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2020 18:29:44 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DB6F620738
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2020 18:24:37 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=zededa.com header.i=@zededa.com header.b="EyxCQcDw"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DB6F620738
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=zededa.com
+	by mail.kernel.org (Postfix) with ESMTPS id 1029220738
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2020 18:29:43 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1029220738
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=antioche.eu.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kAH8l-0004ii-Vl; Mon, 24 Aug 2020 18:24:19 +0000
+	id 1kAHDh-0004u0-Jh; Mon, 24 Aug 2020 18:29:25 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=+7PQ=CC=zededa.com=roman@srs-us1.protection.inumbo.net>)
- id 1kAH8k-0004id-Uf
- for xen-devel@lists.xen.org; Mon, 24 Aug 2020 18:24:19 +0000
-X-Inumbo-ID: 4d48b5f8-36c1-4819-85a4-4dc8e54b0438
-Received: from mail-qk1-x72c.google.com (unknown [2607:f8b0:4864:20::72c])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=9JQT=CC=antioche.eu.org=bouyer@srs-us1.protection.inumbo.net>)
+ id 1kAHDg-0004tv-95
+ for xen-devel@lists.xen.org; Mon, 24 Aug 2020 18:29:24 +0000
+X-Inumbo-ID: 2c181168-76e0-443d-81ce-badac14562f6
+Received: from chassiron.antioche.eu.org (unknown [2001:41d0:fe9d:1101::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 4d48b5f8-36c1-4819-85a4-4dc8e54b0438;
- Mon, 24 Aug 2020 18:24:18 +0000 (UTC)
-Received: by mail-qk1-x72c.google.com with SMTP id b14so8364210qkn.4
- for <xen-devel@lists.xen.org>; Mon, 24 Aug 2020 11:24:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zededa.com; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=E16eb5/A+Qwl9Ib/4VtSwRiqsBojzOAk2nzPefBT8jg=;
- b=EyxCQcDwiFTS1sJzknDC/TABUFq/tcCtAG6lM18HXlIOyG6HXEdr6iPrJ+/490UH0P
- zEU3A2eoEWh4xXZQ/1Mpw3t+M0/1asbVRW4SeV3EsQOCwKvnJEypcgx+MQ5kEwWvxVow
- Wg2E1i25izmJPrrWc7BO1Byifjo6L+poZ1d11USCEabb12u4B6yyVt7dJD96XX/ewlGf
- v2rjCfcJNJVMpMcWMupjpXQlBNyzSgRKCZxq7nfgjx5ZATRUKVQ0CLRUsCKPcm+hJHf2
- qHub3m4dMbpXM2/36+RyYXBQ5Fq0p0ftVTr0n5BKA64QR+4Kjdpi/8zCAOw1ohK/g4p5
- QGew==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=E16eb5/A+Qwl9Ib/4VtSwRiqsBojzOAk2nzPefBT8jg=;
- b=bRRVwxygXkMuOCUn+jnOgdDOPfJz+aJVCZwa0HCZ7tJXmdYCsDIBwpvJgzoFgempcp
- jHIFx9whz66o43AuC1mRbNO+Y1x8a4i73a4ombjTPNy37b0h7eSmWim8a+UgWrl3nBR+
- cRj4MAE3f9/Gk94yVpMuDQUgyazSPmzG9AMypjFDQKgTAazV2JvDRCw0btvm0SiZQjZd
- Sg2tQa/pOYhV+8p3hqVKrSsNOE3DXBIADBdOMtVGoyyQycCnFM7l0O4QaBbfddq6uf3X
- jCH28PC/ESQYK6xFW2DVetIut/EDh64phXs9lXxPcv8t5hu2m+3t1X/0KHE/pK3g564h
- tl4w==
-X-Gm-Message-State: AOAM533HjCFm5RsEDDtBm3u67rBxlblIexRFO962c1Y6WazyDqNFOxt3
- l37FbribuZMl/GyJQRz3gzQ+vTUJ6I8Nc1Q+Chr3sO4xcT+6Wg==
-X-Google-Smtp-Source: ABdhPJzZPiSquxX5er2f2hm7VmHl5YA96y1md0ng9KTDIswZ4IEd24VCQLfsYrtEiHEioErNT4PJfahVRo5VRIOtXPg=
-X-Received: by 2002:a37:8107:: with SMTP id c7mr5818483qkd.22.1598293457751;
- Mon, 24 Aug 2020 11:24:17 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200824181143.GA571@antioche.eu.org>
-In-Reply-To: <20200824181143.GA571@antioche.eu.org>
-From: Roman Shaposhnik <roman@zededa.com>
-Date: Mon, 24 Aug 2020 11:24:06 -0700
-Message-ID: <CAMmSBy_cvK2c3x6anVS3KzZPANW4OdVCgO2dfQY+SCi7dxTeDg@mail.gmail.com>
-Subject: Re: qemu-xen and bridge (xen 4.11)
-To: Manuel Bouyer <bouyer@antioche.eu.org>
+ id 2c181168-76e0-443d-81ce-badac14562f6;
+ Mon, 24 Aug 2020 18:29:22 +0000 (UTC)
+Received: from rochebonne.antioche.eu.org (rochebonne [10.0.0.1])
+ by chassiron.antioche.eu.org (8.15.2/8.15.2) with ESMTP id 07OITKSv014529;
+ Mon, 24 Aug 2020 20:29:20 +0200 (MEST)
+Received: by rochebonne.antioche.eu.org (Postfix, from userid 1210)
+ id 60CEC2803; Mon, 24 Aug 2020 20:29:20 +0200 (CEST)
+Date: Mon, 24 Aug 2020 20:29:19 +0200
+From: Manuel Bouyer <bouyer@antioche.eu.org>
+To: Roman Shaposhnik <roman@zededa.com>
 Cc: xen-devel@lists.xen.org
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: qemu-xen and bridge (xen 4.11)
+Message-ID: <20200824182919.GA936@antioche.eu.org>
+References: <20200824181143.GA571@antioche.eu.org>
+ <CAMmSBy_cvK2c3x6anVS3KzZPANW4OdVCgO2dfQY+SCi7dxTeDg@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAMmSBy_cvK2c3x6anVS3KzZPANW4OdVCgO2dfQY+SCi7dxTeDg@mail.gmail.com>
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.4.3
+ (chassiron.antioche.eu.org [151.127.5.145]);
+ Mon, 24 Aug 2020 20:29:21 +0200 (MEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,26 +63,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Mon, Aug 24, 2020 at 11:12 AM Manuel Bouyer <bouyer@antioche.eu.org> wrote:
->
-> Hello,
-> with the recent XSA about qemu, I'm trying to switch the NetBSD port from
-> qemu-xen-traditional to qemu-xen (in Xen 4.11 for now, I'll look at
-> 4.13 later).
-> One showstopper is that with qemu-xen, the bridge name is not passed
-> any more to the qemu-ifup script. I tried adding a br= option to
-> the qemu invocation, but qemu-system-i386 doesn't seem to use it
-> (at last the script is still called with only one argument).
-> I'm not about to pass to qemu the value of nics[i].script instead of
-> libxl_tapif_script(), so that at last per-domain script can be
-> specified.
->
-> How is this issue dealt with on other OSes ? I can't believe I'm
-> the only one with multiple bridges in the dom0 ...
+On Mon, Aug 24, 2020 at 11:24:06AM -0700, Roman Shaposhnik wrote:
+> On Mon, Aug 24, 2020 at 11:12 AM Manuel Bouyer <bouyer@antioche.eu.org> wrote:
+> >
+> > Hello,
+> > with the recent XSA about qemu, I'm trying to switch the NetBSD port from
+> > qemu-xen-traditional to qemu-xen (in Xen 4.11 for now, I'll look at
+> > 4.13 later).
+> > One showstopper is that with qemu-xen, the bridge name is not passed
+> > any more to the qemu-ifup script. I tried adding a br= option to
+> > the qemu invocation, but qemu-system-i386 doesn't seem to use it
+> > (at last the script is still called with only one argument).
+> > I'm not about to pass to qemu the value of nics[i].script instead of
+> > libxl_tapif_script(), so that at last per-domain script can be
+> > specified.
+> >
+> > How is this issue dealt with on other OSes ? I can't believe I'm
+> > the only one with multiple bridges in the dom0 ...
+> 
+> You mean something like?
+>    https://github.com/lf-edge/eve/blob/master/pkg/xen-tools/patches-4.14.0/10-bridge-helper-support.patch
 
-You mean something like?
-   https://github.com/lf-edge/eve/blob/master/pkg/xen-tools/patches-4.14.0/10-bridge-helper-support.patch
+yes, that is going to help. I'll see if I can backport it to 4.11
 
-Thanks,
-Roman.
+thanks !
+
+-- 
+Manuel Bouyer <bouyer@antioche.eu.org>
+     NetBSD: 26 ans d'experience feront toujours la difference
+--
 
