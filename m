@@ -2,65 +2,74 @@ Return-Path: <SRS0=i2DS=CC=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-8.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EEDE6C433E1
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2020 18:20:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1AEDCC433DF
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2020 18:24:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BDA6220738
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2020 18:20:37 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id DB6F620738
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2020 18:24:37 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="zPBxKeNb"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BDA6220738
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
+	dkim=pass (2048-bit key) header.d=zededa.com header.i=@zededa.com header.b="EyxCQcDw"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DB6F620738
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=zededa.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kAH4u-0004YR-DH; Mon, 24 Aug 2020 18:20:20 +0000
+	id 1kAH8l-0004ii-Vl; Mon, 24 Aug 2020 18:24:19 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=z2P5=CC=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
- id 1kAH4s-0004YM-SZ
- for xen-devel@lists.xenproject.org; Mon, 24 Aug 2020 18:20:18 +0000
-X-Inumbo-ID: b2bbbdda-d119-4d38-98b2-b44f849820de
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=+7PQ=CC=zededa.com=roman@srs-us1.protection.inumbo.net>)
+ id 1kAH8k-0004id-Uf
+ for xen-devel@lists.xen.org; Mon, 24 Aug 2020 18:24:19 +0000
+X-Inumbo-ID: 4d48b5f8-36c1-4819-85a4-4dc8e54b0438
+Received: from mail-qk1-x72c.google.com (unknown [2607:f8b0:4864:20::72c])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b2bbbdda-d119-4d38-98b2-b44f849820de;
- Mon, 24 Aug 2020 18:20:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
- Content-Transfer-Encoding:Content-Type:Message-ID:To;
- bh=210SvOX+3zKP2u7pMX0XBo/8d15HBF0Xaus5ubcM5ck=; b=zPBxKeNb91nQJhDmVLkZeeKWFa
- h8mDVU4BKLIh9n4d2weIg+KBPEY0eqoFA33coiY6niZyBQnVq3nOsFOfJKjf+fgCNHeA7VT98lqjs
- siM5vJmqjHA1GDvczGPL5suqvjjGeUTTbSZYqYLPDhFXt6uHes/IPz8Qrj46BCFUzkfk=;
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kAH4r-00015U-CL; Mon, 24 Aug 2020 18:20:17 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kAH4r-0001L8-3s; Mon, 24 Aug 2020 18:20:17 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1kAH4r-0008Rx-3N; Mon, 24 Aug 2020 18:20:17 +0000
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-152743-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+ id 4d48b5f8-36c1-4819-85a4-4dc8e54b0438;
+ Mon, 24 Aug 2020 18:24:18 +0000 (UTC)
+Received: by mail-qk1-x72c.google.com with SMTP id b14so8364210qkn.4
+ for <xen-devel@lists.xen.org>; Mon, 24 Aug 2020 11:24:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zededa.com; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=E16eb5/A+Qwl9Ib/4VtSwRiqsBojzOAk2nzPefBT8jg=;
+ b=EyxCQcDwiFTS1sJzknDC/TABUFq/tcCtAG6lM18HXlIOyG6HXEdr6iPrJ+/490UH0P
+ zEU3A2eoEWh4xXZQ/1Mpw3t+M0/1asbVRW4SeV3EsQOCwKvnJEypcgx+MQ5kEwWvxVow
+ Wg2E1i25izmJPrrWc7BO1Byifjo6L+poZ1d11USCEabb12u4B6yyVt7dJD96XX/ewlGf
+ v2rjCfcJNJVMpMcWMupjpXQlBNyzSgRKCZxq7nfgjx5ZATRUKVQ0CLRUsCKPcm+hJHf2
+ qHub3m4dMbpXM2/36+RyYXBQ5Fq0p0ftVTr0n5BKA64QR+4Kjdpi/8zCAOw1ohK/g4p5
+ QGew==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=E16eb5/A+Qwl9Ib/4VtSwRiqsBojzOAk2nzPefBT8jg=;
+ b=bRRVwxygXkMuOCUn+jnOgdDOPfJz+aJVCZwa0HCZ7tJXmdYCsDIBwpvJgzoFgempcp
+ jHIFx9whz66o43AuC1mRbNO+Y1x8a4i73a4ombjTPNy37b0h7eSmWim8a+UgWrl3nBR+
+ cRj4MAE3f9/Gk94yVpMuDQUgyazSPmzG9AMypjFDQKgTAazV2JvDRCw0btvm0SiZQjZd
+ Sg2tQa/pOYhV+8p3hqVKrSsNOE3DXBIADBdOMtVGoyyQycCnFM7l0O4QaBbfddq6uf3X
+ jCH28PC/ESQYK6xFW2DVetIut/EDh64phXs9lXxPcv8t5hu2m+3t1X/0KHE/pK3g564h
+ tl4w==
+X-Gm-Message-State: AOAM533HjCFm5RsEDDtBm3u67rBxlblIexRFO962c1Y6WazyDqNFOxt3
+ l37FbribuZMl/GyJQRz3gzQ+vTUJ6I8Nc1Q+Chr3sO4xcT+6Wg==
+X-Google-Smtp-Source: ABdhPJzZPiSquxX5er2f2hm7VmHl5YA96y1md0ng9KTDIswZ4IEd24VCQLfsYrtEiHEioErNT4PJfahVRo5VRIOtXPg=
+X-Received: by 2002:a37:8107:: with SMTP id c7mr5818483qkd.22.1598293457751;
+ Mon, 24 Aug 2020 11:24:17 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [ovmf test] 152743: all pass - PUSHED
-X-Osstest-Versions-This: ovmf=4535fc312b76cb5b05b6a8064c1c64d9780f55ba
-X-Osstest-Versions-That: ovmf=d4e0b9607c9a64a8eff20724b2e35ea2cd5bd33f
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Mon, 24 Aug 2020 18:20:17 +0000
+References: <20200824181143.GA571@antioche.eu.org>
+In-Reply-To: <20200824181143.GA571@antioche.eu.org>
+From: Roman Shaposhnik <roman@zededa.com>
+Date: Mon, 24 Aug 2020 11:24:06 -0700
+Message-ID: <CAMmSBy_cvK2c3x6anVS3KzZPANW4OdVCgO2dfQY+SCi7dxTeDg@mail.gmail.com>
+Subject: Re: qemu-xen and bridge (xen 4.11)
+To: Manuel Bouyer <bouyer@antioche.eu.org>
+Cc: xen-devel@lists.xen.org
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,55 +83,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-flight 152743 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/152743/
+On Mon, Aug 24, 2020 at 11:12 AM Manuel Bouyer <bouyer@antioche.eu.org> wrote:
+>
+> Hello,
+> with the recent XSA about qemu, I'm trying to switch the NetBSD port from
+> qemu-xen-traditional to qemu-xen (in Xen 4.11 for now, I'll look at
+> 4.13 later).
+> One showstopper is that with qemu-xen, the bridge name is not passed
+> any more to the qemu-ifup script. I tried adding a br= option to
+> the qemu invocation, but qemu-system-i386 doesn't seem to use it
+> (at last the script is still called with only one argument).
+> I'm not about to pass to qemu the value of nics[i].script instead of
+> libxl_tapif_script(), so that at last per-domain script can be
+> specified.
+>
+> How is this issue dealt with on other OSes ? I can't believe I'm
+> the only one with multiple bridges in the dom0 ...
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- ovmf                 4535fc312b76cb5b05b6a8064c1c64d9780f55ba
-baseline version:
- ovmf                 d4e0b9607c9a64a8eff20724b2e35ea2cd5bd33f
+You mean something like?
+   https://github.com/lf-edge/eve/blob/master/pkg/xen-tools/patches-4.14.0/10-bridge-helper-support.patch
 
-Last test of basis   152718  2020-08-24 03:09:44 Z    0 days
-Testing same since   152743  2020-08-24 16:09:39 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Vladimir Olovyannikov <vladimir.olovyannikov@broadcom.com>
-  Vladimir Olovyannikov via groups.io <vladimir.olovyannikov=broadcom.com@groups.io>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
-   d4e0b9607c..4535fc312b  4535fc312b76cb5b05b6a8064c1c64d9780f55ba -> xen-tested-master
+Thanks,
+Roman.
 
