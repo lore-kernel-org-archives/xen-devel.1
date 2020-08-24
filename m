@@ -6,56 +6,55 @@ X-Spam-Status: No, score=-6.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,
 	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 33DB3C433E1
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2020 08:23:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E4731C433DF
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2020 08:23:21 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0397E20738
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2020 08:23:13 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id B25E020738
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2020 08:23:21 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="nD3lCPJo"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0397E20738
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="sf45wCYw"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B25E020738
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linuxfoundation.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kA7kt-0006hG-1n; Mon, 24 Aug 2020 08:23:03 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kA7l1-0006kk-BT; Mon, 24 Aug 2020 08:23:11 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=HY0O=CC=linuxfoundation.org=gregkh@srs-us1.protection.inumbo.net>)
- id 1kA7ks-0006h5-Cs
- for xen-devel@lists.xenproject.org; Mon, 24 Aug 2020 08:23:02 +0000
-X-Inumbo-ID: b8dade1d-7a38-4ccc-b001-fbb4aa63c0e0
+ id 1kA7l0-0006kW-JE
+ for xen-devel@lists.xenproject.org; Mon, 24 Aug 2020 08:23:10 +0000
+X-Inumbo-ID: e51dde3f-b1d7-489c-b47b-e796deb8438f
 Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id b8dade1d-7a38-4ccc-b001-fbb4aa63c0e0;
- Mon, 24 Aug 2020 08:23:01 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id e51dde3f-b1d7-489c-b47b-e796deb8438f;
+ Mon, 24 Aug 2020 08:23:09 +0000 (UTC)
 Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl
  [83.86.89.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id B03872074D;
- Mon, 24 Aug 2020 08:23:00 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 6D3222074D;
+ Mon, 24 Aug 2020 08:23:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1598257381;
- bh=7ZmrzFx8tSRrzdiqMT1qo70mbPHZPbwgh2T/Kdj2NQM=;
+ s=default; t=1598257389;
+ bh=3wq/MzR5NmEmGgG2m19J3rMTZjVfVRsvtF2yyDmKKKk=;
  h=Subject:To:Cc:From:Date:In-Reply-To:From;
- b=nD3lCPJoqa6/ZV089rhSBBAdkC61OaxQLiwNUEyBCkYtnpuAI0DSLujLcNA/zemNF
- EHBqkn+6UZAJGDymttSGJWIvHcXgomVbP4OpEUzBdAr1jXLnwP9GyYcqMNoJvmsaV6
- UIVAW7qFiE/zeXCCST65JEweCEuw6H9NjeEUyNRY=
+ b=sf45wCYws+hinuQoVIErYLO6D1IXedfCqDTtqRY+tuOVIFb6d32vPud381jGk82as
+ ldN7xBcmAfAhJMYlkRWjhz40VvH1UFv7JP4iHHu+nowt/alHfMT7Bv0ZQvr06e3xQM
+ RxMruQLhft6Y81HKhLlc+QD04UqgCH1dv7KkTnIA=
 Subject: Patch "xen: don't reschedule in preemption off sections" has been
- added to the 5.4-stable tree
+ added to the 5.7-stable tree
 To: boris.ostrovsky@oracle.com, cmb@prgmr.com, gregkh@linuxfoundation.org,
  jgross@suse.com, srn@prgmr.com, sstabellini@kernel.org,
  xen-devel@lists.xenproject.org
 Cc: <stable-commits@vger.kernel.org>
 From: <gregkh@linuxfoundation.org>
-Date: Mon, 24 Aug 2020 10:23:14 +0200
+Date: Mon, 24 Aug 2020 10:23:27 +0200
 In-Reply-To: <20200820065908.20592-1-jgross@suse.com>
-Message-ID: <159825739439125@kroah.com>
+Message-ID: <15982574071316@kroah.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=ANSI_X3.4-1968
 Content-Transfer-Encoding: 8bit
@@ -79,12 +78,12 @@ This is a note to let you know that I've just added the patch titled
 
     xen: don't reschedule in preemption off sections
 
-to the 5.4-stable tree which can be found at:
+to the 5.7-stable tree which can be found at:
     http://www.kernel.org/git/?p=linux/kernel/git/stable/stable-queue.git;a=summary
 
 The filename of the patch is:
      xen-don-t-reschedule-in-preemption-off-sections.patch
-and it can be found in the queue-5.4 subdirectory.
+and it can be found in the queue-5.7 subdirectory.
 
 If you, or anyone else, feels it should not be added to the stable tree,
 please let <stable@vger.kernel.org> know about it.
@@ -190,8 +189,8 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 
 Patches currently in stable-queue which might be from jgross@suse.com are
 
-queue-5.4/fix-build-error-when-config_acpi-is-not-set-enabled.patch
-queue-5.4/xen-don-t-reschedule-in-preemption-off-sections.patch
-queue-5.4/efi-avoid-error-message-when-booting-under-xen.patch
-queue-5.4/swiotlb-xen-use-vmalloc_to_page-on-vmalloc-virt-addr.patch
+queue-5.7/fix-build-error-when-config_acpi-is-not-set-enabled.patch
+queue-5.7/xen-don-t-reschedule-in-preemption-off-sections.patch
+queue-5.7/efi-avoid-error-message-when-booting-under-xen.patch
+queue-5.7/swiotlb-xen-use-vmalloc_to_page-on-vmalloc-virt-addr.patch
 
