@@ -2,78 +2,71 @@ Return-Path: <SRS0=i2DS=CC=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E909DC433DF
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2020 16:40:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9103EC433E1
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2020 16:49:20 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B767E2067C
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2020 16:40:37 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 587A32078D
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2020 16:49:20 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="iEuaQiO3"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B767E2067C
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="vY0M8pMj"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 587A32078D
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kAFVs-0003JW-Sx; Mon, 24 Aug 2020 16:40:04 +0000
+	id 1kAFee-0003rC-4f; Mon, 24 Aug 2020 16:49:08 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=61pB=CC=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1kAFVr-00034N-5z
- for xen-devel@lists.xenproject.org; Mon, 24 Aug 2020 16:40:03 +0000
-X-Inumbo-ID: 1b59e6f5-2ece-42ee-8bb9-28262ba9384d
-Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
+ <SRS0=z2P5=CC=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
+ id 1kAFec-0003r3-Rx
+ for xen-devel@lists.xenproject.org; Mon, 24 Aug 2020 16:49:06 +0000
+X-Inumbo-ID: cda3e20c-fe68-401b-b570-f2806b52c25d
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 1b59e6f5-2ece-42ee-8bb9-28262ba9384d;
- Mon, 24 Aug 2020 16:40:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1598287201;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:content-transfer-encoding:in-reply-to;
- bh=OTLN75NlUWPuWNxefqTy3oZgzYM60HTegkqGN2Yw6QY=;
- b=iEuaQiO3CPgnhepIJMBugjOuqyTvNw7cc/7DCrjUI8JkIvaNh+S4VHcL
- 9KIp8eLWX2jAPpdqScKXrKHNqUpHK8ra7Li1bmhI4gQHogiRfo1t3SU2J
- KjK3PvIAeJZCTt7krv/uYyG67pzpv3oLapJEv+aWrJJhr/17V19HjKZqC 4=;
-Authentication-Results: esa2.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: rxKObjcmUH4JpsncydvA67vWFTOxo6lsnEaCwFyAFq+57sdzdqKUUiGK1qAPh0BHf+l+QHvuEK
- wSnMVnuw9GVLl7JTUX0dm16H8ytXYrRP0pn4cPjoevW7eM+/buKe0KXJdHuN04jU1Ekrnr2exZ
- fgc+EdXfBDoge4DkzQD7x68aNtydKcflxog2QFhKtS4245H/LIrsyOcVhAts7vqsdQ9PwWMYoe
- Bp445y1yZUyvsPAp3XfEi3r24xBd23WCR0QuQL7onMhnnfNHW6RedNog7U+HojZAk/bw+TdFUx
- kVo=
-X-SBRS: 2.7
-X-MesageID: 25182513
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,349,1592884800"; d="scan'208";a="25182513"
-Date: Mon, 24 Aug 2020 18:39:52 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Jan Beulich <jbeulich@suse.com>
-CC: <xen-devel@lists.xenproject.org>, Andrew Cooper
- <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>, Paul Durrant
- <paul@xen.org>
-Subject: Re: [PATCH 3/5] x86/vmsi: use the newly introduced EOI callbacks
-Message-ID: <20200824163952.GE1587@Air-de-Roger>
-References: <20200812124709.4165-1-roger.pau@citrix.com>
- <20200812124709.4165-4-roger.pau@citrix.com>
- <0d3afbb2-a2a8-f570-6f59-fd3c3d56e6dd@suse.com>
- <20200824144440.GD1587@Air-de-Roger>
- <f1913d9a-a0a3-3eef-5427-f10573d5385a@suse.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
+ id cda3e20c-fe68-401b-b570-f2806b52c25d;
+ Mon, 24 Aug 2020 16:49:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+ Content-Transfer-Encoding:Content-Type:Message-ID:To;
+ bh=/azDzhlStiUMMwCyfUretFU5mOhPhoqUkwGikO+2hqQ=; b=vY0M8pMjsRuC1mgEfuCCOKAf7W
+ oZAHkTf0oIarW3t0XlQTJE6XoBt+gHL/FixvHzbwZsUAxIR+Wts0I0aDuETmjFrAKJM6jldcg3KwJ
+ vr+Z5l46irJLrYTdWyxlph85/k3oJcHCaraemhsry8NUrtn877XVrK+oQuApV7aa9J18=;
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kAFea-0007YF-La; Mon, 24 Aug 2020 16:49:04 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kAFea-0006jD-Eo; Mon, 24 Aug 2020 16:49:04 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1kAFea-0000iL-EK; Mon, 24 Aug 2020 16:49:04 +0000
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-152739-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <f1913d9a-a0a3-3eef-5427-f10573d5385a@suse.com>
-X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
- AMSPEX02CL02.citrite.net (10.69.22.126)
+MIME-Version: 1.0
+Subject: [xen-unstable-smoke test] 152739: tolerable all pass - PUSHED
+X-Osstest-Failures: xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+ xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+ xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+ xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+ xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This: xen=347384331ee0eee22a4dc10f805847e658e523ac
+X-Osstest-Versions-That: xen=858c0be8c2fa4125a0fa0acaa03ae730e5c7cb3c
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Mon, 24 Aug 2020 16:49:04 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -87,81 +80,62 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Mon, Aug 24, 2020 at 06:07:28PM +0200, Jan Beulich wrote:
-> On 24.08.2020 16:44, Roger Pau Monné wrote:
-> > On Mon, Aug 24, 2020 at 04:06:31PM +0200, Jan Beulich wrote:
-> >> On 12.08.2020 14:47, Roger Pau Monne wrote:
-> >>> Remove the unconditional call to hvm_dpci_msi_eoi in vlapic_handle_EOI
-> >>> and instead use the newly introduced EOI callback mechanism in order
-> >>> to register a callback for MSI vectors injected from passed through
-> >>> devices.
-> >>
-> >> In patch 2 you merely invoke the callback when the EOI arrived,
-> >> but you don't clear the callback (unless I've missed something).
-> >> Here you register the callback once per triggering of the IRQ,
-> >> without clearing it from the callback itself either.
-> > 
-> > It gets cleared on the next call to vlapic_set_irq_callback, or set to
-> > a new callback value if the passed callback is not NULL.
-> > 
-> >> Why is it
-> >> correct / safe to keep the callback registered?
-> > 
-> > The next vector injected is going to clear it, so should be safe, as
-> > no vector can be injected without calling vlapic_set_irq_callback.
-> 
-> But what about duplicate EOIs, even if just by bug or erratum?
-> I notice, for example, that VMX'es VMEXIT handler directly
-> calls vlapic_handle_EOI().
+flight 152739 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/152739/
 
-Yes, but that's expected and required, because when using VMX LAPIC
-virtualization you get an explicit vmexit (EXIT_REASON_EOI_INDUCED) on
-EOI of requested vectors by using the EOI exit bitmap
-(vmx_update_eoi_exit_bitmap).
+Failures :-/ but no regressions.
 
-> I'd find it more safe if an
-> unexpected EOI didn't get any callback invoked.
+Tests which did not succeed, but are not blocking:
+ test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
 
-OK, the callback can be certainly cleared in vlapic_handle_EOI.
+version targeted for testing:
+ xen                  347384331ee0eee22a4dc10f805847e658e523ac
+baseline version:
+ xen                  858c0be8c2fa4125a0fa0acaa03ae730e5c7cb3c
 
-> 
-> >> What about
-> >> conflicting callbacks for shared vectors?
-> > 
-> > In this callback model for vlapic only the last injected vector
-> > callback would get executed. It's my understanding that lapic
-> > vectors cannot be safely shared unless there's a higher level
-> > interrupt controller (ie: an IO-APIC) that does the sharing.
-> 
-> As said on a different, but pretty recent thread: I do think
-> sharing is possible if devices and drivers meet certain criteria
-> (in particular have a way to determine which of the devices
-> actually require service). It's just not something one would
-> normally do. But iirc such a model was used in good old DOS to
-> overcome the 15 IRQs limit (of which quite a few had fixed
-> purposes, so for add-in devices there were only very few left).
+Last test of basis   152632  2020-08-20 10:01:46 Z    4 days
+Testing same since   152739  2020-08-24 14:00:23 Z    0 days    1 attempts
 
-So my callback model for the vIO-APIC/vPIC is different from the one
-used for the vlapic. In that case callers must use a helper to
-register/remove a callback for GSIs, and a single GSI can have
-multiple callbacks attached.
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  George Dunlap <george.dunlap@citrix.com>
+  Jan Beulich <jbeulich@suse.com>
+  Roger Pau Monné <roger.pau@citrix.com>
 
-Such interface works well with the vIO-APIC/vPIC because interrupts
-from devices are statically assigned a GSI, and you only need to
-register the callback when the device is instantiated.
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-libvirt                                     pass    
 
-For vlapic OTOH this would be more complex, as a guest might decide to
-change MSI vectors constantly and thus require a non-trivial amount of
-registrations/removals of callbacks.
 
-I was assuming that any sane OS wouldn't share a lapic vector for
-multiple devices, and that hence we could get away without having to
-implement multiple per-vector callback support.
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
 
-Would you be fine with clearing the callback in vlapic_handle_EOI and
-then vlapic_set_irq_callback complaining if it finds there's a
-previous callback different than the one provided already set for the
-to be injected vector?
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
 
-Thanks, Roger.
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/xen.git
+   858c0be8c2..347384331e  347384331ee0eee22a4dc10f805847e658e523ac -> smoke
 
