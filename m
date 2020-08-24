@@ -2,73 +2,55 @@ Return-Path: <SRS0=i2DS=CC=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-10.5 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=unavailable
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.5 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 50F52C433E4
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2020 06:40:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E0948C433E1
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2020 06:44:48 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A11BC2310A
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2020 06:21:49 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A11BC2310A
+	by mail.kernel.org (Postfix) with ESMTPS id B5C9C20578
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2020 06:44:48 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B5C9C20578
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kA5qx-0003fj-3t; Mon, 24 Aug 2020 06:21:11 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kA6DZ-0005Z5-Ie; Mon, 24 Aug 2020 06:44:33 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=h8JF=CC=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kA5qv-0003fe-Dp
- for xen-devel@lists.xenproject.org; Mon, 24 Aug 2020 06:21:09 +0000
-X-Inumbo-ID: 33ea4293-4ed8-4ca5-84e1-35797aa57e29
+ (envelope-from <SRS0=dIEj=CC=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1kA6DY-0005Z0-9q
+ for xen-devel@lists.xenproject.org; Mon, 24 Aug 2020 06:44:32 +0000
+X-Inumbo-ID: 86698e9a-f47b-432b-9a1e-e014cdaece8f
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 33ea4293-4ed8-4ca5-84e1-35797aa57e29;
- Mon, 24 Aug 2020 06:21:08 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 86698e9a-f47b-432b-9a1e-e014cdaece8f;
+ Mon, 24 Aug 2020 06:44:29 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id C1123AC3F;
- Mon, 24 Aug 2020 06:21:36 +0000 (UTC)
-Subject: Re: [patch RFC 26/38] x86/xen: Wrap XEN MSI management into irqdomain
-To: Thomas Gleixner <tglx@linutronix.de>, LKML <linux-kernel@vger.kernel.org>
-Cc: x86@kernel.org, linux-pci@vger.kernel.org,
- xen-devel@lists.xenproject.org, Joerg Roedel <joro@8bytes.org>,
- iommu@lists.linux-foundation.org, linux-hyperv@vger.kernel.org,
- Haiyang Zhang <haiyangz@microsoft.com>,
- Jon Derrick <jonathan.derrick@intel.com>, Lu Baolu
- <baolu.lu@linux.intel.com>, Wei Liu <wei.liu@kernel.org>,
- "K. Y. Srinivasan" <kys@microsoft.com>,
- Stephen Hemminger <sthemmin@microsoft.com>, Steve Wahl <steve.wahl@hpe.com>,
- Dimitri Sivanich <sivanich@hpe.com>, Russ Anderson <rja@hpe.com>,
- Bjorn Helgaas <bhelgaas@google.com>,
- Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
- Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Marc Zyngier <maz@kernel.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- "Rafael J. Wysocki" <rafael@kernel.org>, Megha Dey <megha.dey@intel.com>,
- Jason Gunthorpe <jgg@mellanox.com>, Dave Jiang <dave.jiang@intel.com>,
- Alex Williamson <alex.williamson@redhat.com>,
- Jacob Pan <jacob.jun.pan@intel.com>, Baolu Lu <baolu.lu@intel.com>,
- Kevin Tian <kevin.tian@intel.com>, Dan Williams <dan.j.williams@intel.com>
-References: <20200821002424.119492231@linutronix.de>
- <20200821002947.868727656@linutronix.de>
-From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Message-ID: <8860c7bc-67ab-ce64-0340-1458d2483a39@suse.com>
-Date: Mon, 24 Aug 2020 08:21:05 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ by mx2.suse.de (Postfix) with ESMTP id EBAA9AC82;
+ Mon, 24 Aug 2020 06:44:58 +0000 (UTC)
+Subject: Re: [linux-linus test] 152672: regressions - FAIL
+To: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>,
+ osstest service owner <osstest-admin@xenproject.org>
+References: <osstest-152672-mainreport@xen.org>
+ <93d94ca3-1a87-a11a-daef-11ec183d9a2f@suse.com>
+Cc: xen-devel@lists.xenproject.org
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <d8fb302b-8dae-a0fe-7617-dc9d3b0ec6fa@suse.com>
+Date: Mon, 24 Aug 2020 08:44:28 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.11.0
 MIME-Version: 1.0
-In-Reply-To: <20200821002947.868727656@linutronix.de>
-Content-Type: text/plain; charset=utf-8; format=flowed
+In-Reply-To: <93d94ca3-1a87-a11a-daef-11ec183d9a2f@suse.com>
+Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -82,120 +64,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 21.08.20 02:24, Thomas Gleixner wrote:
-> To allow utilizing the irq domain pointer in struct device it is necessary
-> to make XEN/MSI irq domain compatible.
+On 23.08.2020 07:52, Jürgen Groß wrote:
+> On 23.08.20 07:24, osstest service owner wrote:
+>> flight 152672 linux-linus real [real]
+>> http://logs.test-lab.xenproject.org/osstest/logs/152672/
+>>
+>> Regressions :-(
 > 
-> While the right solution would be to truly convert XEN to irq domains, this
-> is an exercise which is not possible for mere mortals with limited XENology.
-> 
-> Provide a plain irqdomain wrapper around XEN. While this is blatant
-> violation of the irqdomain design, it's the only solution for a XEN igorant
-> person to make progress on the issue which triggered this change.
-> 
-> Signed-off-by: Thomas Gleixner<tglx@linutronix.de>
-> Cc:linux-pci@vger.kernel.org
-> Cc:xen-devel@lists.xenproject.org
+> With 32-bit pv support now removed from the kernel the associated tests
+> should be removed for the upstream kernel, too.
 
-Acked-by: Juergen Gross <jgross@suse.com>
+Not exactly sure how things are organized, but isn't the 2nd
+<arch> in the test identifier currently specifying "Dom0
+bitness" as a whole? If so, shouldn't testing a 32-bit tool
+stack build continue to be done (under this same name perhaps),
+just with a 64-bit kernel now? In which case the next question
+is whether the 64-bit kernel is actually fully ready to be used
+this way. I'm afraid it isn't, as there's still no privcmd
+compat ioctl handling afaict, which I would say should have
+been a prereq for removing PV support from 32-bit kernels.
 
-Looking into https://www.kernel.org/doc/Documentation/IRQ-domain.txt (is
-this still valid?) I believe Xen should be able to use the "No Map"
-approach, as Xen only ever uses software IRQs (at least those are the
-only ones visible to any driver). The (virtualized) hardware interrupts
-are Xen events after all.
-
-So maybe morphing Xen into supporting irqdomains in a sane way isn't
-that complicated. Maybe I'm missing the main complexities, though.
-
-
-Juergen
-
-> ---
-> Note: This is completely untested, but it compiles so it must be perfect.
-> ---
->   arch/x86/pci/xen.c |   63 +++++++++++++++++++++++++++++++++++++++++++++++++++++
->   1 file changed, 63 insertions(+)
-> 
-> --- a/arch/x86/pci/xen.c
-> +++ b/arch/x86/pci/xen.c
-> @@ -406,6 +406,63 @@ static void xen_teardown_msi_irq(unsigne
->   	WARN_ON_ONCE(1);
->   }
->   
-> +static int xen_msi_domain_alloc_irqs(struct irq_domain *domain,
-> +				     struct device *dev,  int nvec)
-> +{
-> +	int type;
-> +
-> +	if (WARN_ON_ONCE(!dev_is_pci(dev)))
-> +		return -EINVAL;
-> +
-> +	if (first_msi_entry(dev)->msi_attrib.is_msix)
-> +		type = PCI_CAP_ID_MSIX;
-> +	else
-> +		type = PCI_CAP_ID_MSI;
-> +
-> +	return x86_msi.setup_msi_irqs(to_pci_dev(dev), nvec, type);
-> +}
-> +
-> +static void xen_msi_domain_free_irqs(struct irq_domain *domain,
-> +				     struct device *dev)
-> +{
-> +	if (WARN_ON_ONCE(!dev_is_pci(dev)))
-> +		return;
-> +
-> +	x86_msi.teardown_msi_irqs(to_pci_dev(dev));
-> +}
-> +
-> +static struct msi_domain_ops xen_pci_msi_domain_ops = {
-> +	.domain_alloc_irqs	= xen_msi_domain_alloc_irqs,
-> +	.domain_free_irqs	= xen_msi_domain_free_irqs,
-> +};
-> +
-> +static struct msi_domain_info xen_pci_msi_domain_info = {
-> +	.ops			= &xen_pci_msi_domain_ops,
-> +};
-> +
-> +/*
-> + * This irq domain is a blatant violation of the irq domain design, but
-> + * distangling XEN into real irq domains is not a job for mere mortals with
-> + * limited XENology. But it's the least dangerous way for a mere mortal to
-> + * get rid of the arch_*_msi_irqs() hackery in order to store the irq
-> + * domain pointer in struct device. This irq domain wrappery allows to do
-> + * that without breaking XEN terminally.
-> + */
-> +static __init struct irq_domain *xen_create_pci_msi_domain(void)
-> +{
-> +	struct irq_domain *d = NULL;
-> +	struct fwnode_handle *fn;
-> +
-> +	fn = irq_domain_alloc_named_fwnode("XEN-MSI");
-> +	if (fn)
-> +		d = msi_create_irq_domain(fn, &xen_pci_msi_domain_info, NULL);
-> +
-> +	/* FIXME: No idea how to survive if this fails */
-> +	BUG_ON(!d);
-> +
-> +	return d;
-> +}
-> +
->   static __init void xen_setup_pci_msi(void)
->   {
->   	if (xen_initial_domain()) {
-> @@ -426,6 +483,12 @@ static __init void xen_setup_pci_msi(voi
->   	}
->   
->   	x86_msi.teardown_msi_irq = xen_teardown_msi_irq;
-> +
-> +	/*
-> +	 * Override the PCI/MSI irq domain init function. No point
-> +	 * in allocating the native domain and never use it.
-> +	 */
-> +	x86_init.irqs.create_pci_msi_domain = xen_create_pci_msi_domain;
->   }
->   
->   #else /* CONFIG_PCI_MSI */
-> 
-
+Jan
 
