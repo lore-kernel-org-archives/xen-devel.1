@@ -2,51 +2,57 @@ Return-Path: <SRS0=i2DS=CC=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.3 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-8.3 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4AC97C433DF
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2020 12:28:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 237D3C433DF
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2020 12:33:18 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 232342074D
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2020 12:28:25 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 232342074D
+	by mail.kernel.org (Postfix) with ESMTPS id F18E320706
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2020 12:33:17 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F18E320706
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kABZr-0003wG-JP; Mon, 24 Aug 2020 12:27:55 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kABem-0004qK-72; Mon, 24 Aug 2020 12:33:00 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=dIEj=CC=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kABZq-0003wA-38
- for xen-devel@lists.xenproject.org; Mon, 24 Aug 2020 12:27:54 +0000
-X-Inumbo-ID: cc517e72-a539-46a1-9654-931d1de19a06
+ id 1kABel-0004qF-46
+ for xen-devel@lists.xenproject.org; Mon, 24 Aug 2020 12:32:59 +0000
+X-Inumbo-ID: 6c274358-3fbf-4d0a-9d04-8903ab58c027
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id cc517e72-a539-46a1-9654-931d1de19a06;
- Mon, 24 Aug 2020 12:27:53 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 6c274358-3fbf-4d0a-9d04-8903ab58c027;
+ Mon, 24 Aug 2020 12:32:58 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 8B0FBAE91;
- Mon, 24 Aug 2020 12:28:22 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 79F56B63F;
+ Mon, 24 Aug 2020 12:33:27 +0000 (UTC)
+Subject: Ping: [PATCH] x86: guard against port I/O overlapping the RTC/CMOS
+ range
 From: Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH v2 0/5] x86: M2P maintenance adjustments (step 1)
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-Message-ID: <5d456607-b36b-9802-1021-2e6d01d7f158@suse.com>
-Date: Mon, 24 Aug 2020 14:27:50 +0200
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+References: <38c73e17-30b8-27b4-bc7c-e6ef7817fa1e@suse.com>
+ <8b267b5e-8bd0-692e-d5d9-4a2bd21fb261@citrix.com>
+ <f192793d-d074-990a-190d-67f48ccda87a@suse.com>
+Message-ID: <062a7505-eb35-cf15-3663-9890fbd50d4b@suse.com>
+Date: Mon, 24 Aug 2020 14:32:56 +0200
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.11.0
 MIME-Version: 1.0
+In-Reply-To: <f192793d-d074-990a-190d-67f48ccda87a@suse.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,19 +66,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-As pointed out by Andrew, maintaining the compat M2P when !PV32
-(or when "pv=no-32" was given) is a pointless waste of memory. Do
-away with this, with a possible plan to subsequently use the
-compat instance instead of the native one in shim mode with a
-32-bit guest (requiring more intrusive rework, in particular to
-delay setting up the M2P until the bitness of the client domain
-is known).
+On 24.07.2020 16:19, Jan Beulich wrote:
+> On 24.07.2020 14:11, Andrew Cooper wrote:
+>> On 17/07/2020 14:10, Jan Beulich wrote:
+>>> Since we intercept RTC/CMOS port accesses, let's do so consistently in
+>>> all cases, i.e. also for e.g. a dword access to [006E,0071]. To avoid
+>>> the risk of unintended impact on Dom0 code actually doing so (despite
+>>> the belief that none ought to exist), also extend
+>>> guest_io_{read,write}() to decompose accesses where some ports are
+>>> allowed to be directly accessed and some aren't.
+>>>
+>>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+>>>
+>>> --- a/xen/arch/x86/pv/emul-priv-op.c
+>>> +++ b/xen/arch/x86/pv/emul-priv-op.c
+>>> @@ -210,7 +210,7 @@ static bool admin_io_okay(unsigned int p
+>>>          return false;
+>>>  
+>>>      /* We also never permit direct access to the RTC/CMOS registers. */
+>>> -    if ( ((port & ~1) == RTC_PORT(0)) )
+>>> +    if ( port <= RTC_PORT(1) && port + bytes > RTC_PORT(0) )
+>>>          return false;
+>>
+>> This first hunk is fine.
+>>
+>> However, why decompose anything?  Any disallowed port in the range
+>> terminates the entire access, and doesn't internally shrink the access.
+> 
+> What tells you that adjacent ports (e.g. 006E and 006F to match
+> the example in the description) are disallowed? The typical
+> case here is Dom0 (as mentioned in the description), which has
+> access to most of the ports.
 
-1: convert set_gpfn_from_mfn() to a function
-2: don't maintain compat M2P when !PV32
-3: don't override INVALID_M2P_ENTRY with SHARED_M2P_ENTRY
-4: PV: also check kernel endianness when building Dom0
-5: simplify is_guest_l2_slot()
+Are you okay with this answer, and hence may I commit the change
+with Roger's R-b (and the cosmetic adjustments he did ask for)?
+(Unless I hear otherwise within the next day or two, I guess I'll
+assume so.)
 
 Jan
 
