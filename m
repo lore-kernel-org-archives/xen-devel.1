@@ -7,46 +7,45 @@ X-Spam-Status: No, score=-13.7 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 71BDAC433E1
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2020 08:44:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7539EC433E1
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2020 08:49:03 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 32BD12087D
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2020 08:44:50 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 498A22072D
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Aug 2020 08:49:03 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="GLv05kR1"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 32BD12087D
+	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="C2CVBvgK"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 498A22072D
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linuxfoundation.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kA85l-0000W0-Rf; Mon, 24 Aug 2020 08:44:37 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kA89p-0000i8-DP; Mon, 24 Aug 2020 08:48:49 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=HY0O=CC=linuxfoundation.org=gregkh@srs-us1.protection.inumbo.net>)
- id 1kA85l-0000Vu-42
- for xen-devel@lists.xenproject.org; Mon, 24 Aug 2020 08:44:37 +0000
-X-Inumbo-ID: 8fec8710-55aa-4959-9c18-a6bee49c279c
+ id 1kA89o-0000hu-61
+ for xen-devel@lists.xenproject.org; Mon, 24 Aug 2020 08:48:48 +0000
+X-Inumbo-ID: 70d96ae1-9290-4d15-b8d4-990df4b2bd80
 Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 8fec8710-55aa-4959-9c18-a6bee49c279c;
- Mon, 24 Aug 2020 08:44:36 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 70d96ae1-9290-4d15-b8d4-990df4b2bd80;
+ Mon, 24 Aug 2020 08:48:43 +0000 (UTC)
 Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl
  [83.86.89.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 2B0E62087D;
- Mon, 24 Aug 2020 08:44:35 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 3CEB721741;
+ Mon, 24 Aug 2020 08:48:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1598258675;
+ s=default; t=1598258922;
  bh=jRgIWyY0b4yL1+iU+rEN7X0YTkrV7SA7WEWwegKb4Wo=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=GLv05kR1lWE6WrE5AooVSyROBQkbsFuDzjoOdbFbz1UxliK6VrA8nFGiD/kdj+VVa
- 0C0OjG/Pc+2FzCsoAP2pE/Swlgfa5GZhfEs/E+9gla8cn+ANU8Hub44fWspLRXbO5M
- lCfowSlWWve5nuTwNU4cvBDWoDTHQYIOn3vE7Xho=
+ b=C2CVBvgK8EgKPjWqphrXn5t1r25wMAM4aX4wG+87SkIZmwFRFP1zlWIk2Z2hbIcGH
+ r/29mpG0vAVTE3AD8wewpRjXkykWqV8gJAJqGpotsw7+U1aNThuZZnJhUm9MYH5XDa
+ HczkWczVH/pAE++bYJXZZnfGzOzYkwBqN/4Pwqns=
 From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 To: linux-kernel@vger.kernel.org
 Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, stable@vger.kernel.org,
@@ -56,13 +55,13 @@ Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, stable@vger.kernel.org,
  Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
  xen-devel@lists.xenproject.org, linux-pci@vger.kernel.org,
  Sasha Levin <sashal@kernel.org>
-Subject: [PATCH 5.7 104/124] Fix build error when CONFIG_ACPI is not
+Subject: [PATCH 5.4 093/107] Fix build error when CONFIG_ACPI is not
  set/enabled:
-Date: Mon, 24 Aug 2020 10:30:38 +0200
-Message-Id: <20200824082414.534832195@linuxfoundation.org>
+Date: Mon, 24 Aug 2020 10:30:59 +0200
+Message-Id: <20200824082409.704889057@linuxfoundation.org>
 X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20200824082409.368269240@linuxfoundation.org>
-References: <20200824082409.368269240@linuxfoundation.org>
+In-Reply-To: <20200824082405.020301642@linuxfoundation.org>
+References: <20200824082405.020301642@linuxfoundation.org>
 User-Agent: quilt/0.66
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
