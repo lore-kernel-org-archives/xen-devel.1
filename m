@@ -2,91 +2,177 @@ Return-Path: <SRS0=XBNZ=CD=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,UNPARSEABLE_RELAY,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C900C433DF
-	for <xen-devel@archiver.kernel.org>; Tue, 25 Aug 2020 09:52:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1F0B6C433DF
+	for <xen-devel@archiver.kernel.org>; Tue, 25 Aug 2020 10:09:48 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3E51C2071E
-	for <xen-devel@archiver.kernel.org>; Tue, 25 Aug 2020 09:52:14 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id CD79A2068E
+	for <xen-devel@archiver.kernel.org>; Tue, 25 Aug 2020 10:09:47 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="saPe2SMH";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="OlmbOjhD"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3E51C2071E
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
+	dkim=pass (1024-bit key) header.d=armh.onmicrosoft.com header.i=@armh.onmicrosoft.com header.b="W88BlXob";
+	dkim=pass (1024-bit key) header.d=armh.onmicrosoft.com header.i=@armh.onmicrosoft.com header.b="W88BlXob"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CD79A2068E
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kAVcY-0000UV-Ot; Tue, 25 Aug 2020 09:52:02 +0000
+	id 1kAVtX-0001eB-1T; Tue, 25 Aug 2020 10:09:35 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ixcz=CD=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1kAVcY-0000UP-5k
- for xen-devel@lists.xenproject.org; Tue, 25 Aug 2020 09:52:02 +0000
-X-Inumbo-ID: 9a08f9dc-d57e-4919-818d-dfc80a326e92
-Received: from galois.linutronix.de (unknown [193.142.43.55])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9a08f9dc-d57e-4919-818d-dfc80a326e92;
- Tue, 25 Aug 2020 09:52:00 +0000 (UTC)
-From: Thomas Gleixner <tglx@linutronix.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1598349119;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=qi88rJ2mAeMyhee0eT9kDZfffU9Q0nWkBLlAEntSw8w=;
- b=saPe2SMHs4fxaHPtIfmZINCVtmade/IUdScDTrTE56bKhbWhWWPmlrhyuwQwbPnFdv02n1
- qRKHY6+Fao2onQFOAz/d63P6+2VnSYMbUC+pcft0s0SMwT2vV9us/1npGja2X+2tYSpscB
- iPJsYuS2FMf/1nMuwC8vtsuYf/y0bjbBwKrk2/0oTU5egQm1Ek/7EUMyQDShnlbtAcdbLe
- JE09lOMIrym7gVQeJa9rILtA3RsQfKKlIKniu0Z45R81ceeja+uMDPulnSnTEjTA49o3W7
- SMaqJJyWq0AnhRrTNSiWKeKyPcK0S21cZa7G3cB+Y0b9eRpBKdLEAoz+GdDGSg==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1598349119;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=qi88rJ2mAeMyhee0eT9kDZfffU9Q0nWkBLlAEntSw8w=;
- b=OlmbOjhDdhkNmF8xd3M7JINOojGOBGj4UhpScwvT1dHOdNPkfP2dB8Acep6NLHMEEgMoKl
- YoToi1lJLBSp6rDQ==
-To: =?utf-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>, LKML
- <linux-kernel@vger.kernel.org>
-Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
- iommu@lists.linux-foundation.org, linux-hyperv@vger.kernel.org, Haiyang
- Zhang <haiyangz@microsoft.com>, Jon Derrick <jonathan.derrick@intel.com>,
- Lu Baolu <baolu.lu@linux.intel.com>, Wei Liu <wei.liu@kernel.org>, "K. Y.
- Srinivasan" <kys@microsoft.com>, Stephen Hemminger
- <sthemmin@microsoft.com>, Steve Wahl <steve.wahl@hpe.com>, Dimitri
- Sivanich <sivanich@hpe.com>, Russ Anderson <rja@hpe.com>,
- linux-pci@vger.kernel.org, Bjorn Helgaas <bhelgaas@google.com>, Lorenzo
- Pieralisi <lorenzo.pieralisi@arm.com>, Konrad Rzeszutek Wilk
- <konrad.wilk@oracle.com>, xen-devel@lists.xenproject.org, Boris Ostrovsky
- <boris.ostrovsky@oracle.com>, Stefano Stabellini <sstabellini@kernel.org>,
- Marc Zyngier <maz@kernel.org>, Greg Kroah-Hartman
- <gregkh@linuxfoundation.org>, "Rafael J. Wysocki" <rafael@kernel.org>,
- Megha Dey <megha.dey@intel.com>, Jason Gunthorpe <jgg@mellanox.com>, Dave
- Jiang <dave.jiang@intel.com>, Alex Williamson
- <alex.williamson@redhat.com>, Jacob Pan <jacob.jun.pan@intel.com>, Baolu
- Lu <baolu.lu@intel.com>, Kevin Tian <kevin.tian@intel.com>, Dan Williams
- <dan.j.williams@intel.com>
-Subject: Re: [patch RFC 24/38] x86/xen: Consolidate XEN-MSI init
-In-Reply-To: <fb4e3d13-18c8-a425-19a8-975fda80d411@suse.com>
-References: <20200821002424.119492231@linutronix.de>
- <20200821002947.667887608@linutronix.de>
- <5caec213-8f56-9f12-34db-a29de8326f95@suse.com>
- <87tuwr68q8.fsf@nanos.tec.linutronix.de>
- <fb4e3d13-18c8-a425-19a8-975fda80d411@suse.com>
-Date: Tue, 25 Aug 2020 11:51:58 +0200
-Message-ID: <87d03f59z5.fsf@nanos.tec.linutronix.de>
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=BGsN=CD=arm.com=wei.chen@srs-us1.protection.inumbo.net>)
+ id 1kAVtV-0001dt-Sw
+ for xen-devel@lists.xenproject.org; Tue, 25 Aug 2020 10:09:33 +0000
+X-Inumbo-ID: dbbdd7bd-e0d3-4ca1-9b38-30e9d55da82b
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com (unknown
+ [40.107.21.61]) by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id dbbdd7bd-e0d3-4ca1-9b38-30e9d55da82b;
+ Tue, 25 Aug 2020 10:09:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com; 
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=M2/X1lxOqtNOoaoNqkOIqK3fV/KCVSJ8dBxu2KBfPFQ=;
+ b=W88BlXob1pBoJSUcZgF2t9nuz6aW1XiychpUiMtHpDaTa5ZAfqIY3D8tOYHlIkf7wZN4k8i6juoTP+3u4TpBjxRp0eMxHHTwieFi/jCR3mKHDK8vq9s1ZdsIxkg2JQbAPBIiITUef+f0AI/kYdDDJKFQ0T9qpwNgxGst9oR1iuM=
+Received: from DB6PR0301CA0008.eurprd03.prod.outlook.com (2603:10a6:4:3e::18)
+ by AM5PR0801MB1985.eurprd08.prod.outlook.com (2603:10a6:203:4b::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3326.19; Tue, 25 Aug
+ 2020 10:09:29 +0000
+Received: from DB5EUR03FT063.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:4:3e:cafe::9a) by DB6PR0301CA0008.outlook.office365.com
+ (2603:10a6:4:3e::18) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3305.24 via Frontend
+ Transport; Tue, 25 Aug 2020 10:09:29 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
+ smtp.mailfrom=arm.com; lists.xenproject.org; dkim=pass (signature was
+ verified) header.d=armh.onmicrosoft.com;lists.xenproject.org;
+ dmarc=bestguesspass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
+ client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
+Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
+ DB5EUR03FT063.mail.protection.outlook.com (10.152.20.209) with
+ Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3305.24 via Frontend Transport; Tue, 25 Aug 2020 10:09:28 +0000
+Received: ("Tessian outbound e8cdb8c6f386:v64");
+ Tue, 25 Aug 2020 10:09:28 +0000
+X-CheckRecipientChecked: true
+X-CR-MTA-CID: 4892738f9bc7c9f1
+X-CR-MTA-TID: 64aa7808
+Received: from 6f3eabee282e.1
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com id
+ EF79E2F0-4405-4FB8-B210-24DE6C410DA9.1; 
+ Tue, 25 Aug 2020 10:09:22 +0000
+Received: from EUR04-VI1-obe.outbound.protection.outlook.com
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 6f3eabee282e.1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
+ Tue, 25 Aug 2020 10:09:22 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=JiBVjyYRsfYl81A3dFIoGZRoMCoCu/pQBE0Fxt2iswRd+92uMUJsHn77rmnAN1/0jV+5dcEt/WHQJ2xVnFbAGfeRzjJ5QyJQxL2UFu6c3L2G2e9Xcf48Q+N+WHT40iK2pjYFs+HMvukQKvjUgoiyxoMLpy8A1nN3k+lz6tLBGu1+/17IG7YtsinVgMkrmo2Yt97MO2vG51d47D5/ZKKi/mQBuZsHXDILzPIINaK2MGkQhP75RfFRcrWCRijjVGiJoqVMrhOVWOMVOghxIRreVn2kHugilQc2S57oiyxbhGfHNw0+k0YDTNfmGhaqucqJywNizoFgevvEfSls0DfOog==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=M2/X1lxOqtNOoaoNqkOIqK3fV/KCVSJ8dBxu2KBfPFQ=;
+ b=SyqouUFC0lcNAImEr8SJOI0M94/SAAw+R3C0DGcZFdQeVQ2FPv09N2IGNrURHXqu0FhY0ktixUwirZrmto7ILYld2a8YUQLhDMtPue9cPYD0rFYrvzkiGlZWWslANuZj6QY5ZlXa8+jjkUlz2iquwbEaiEt7HXglppsfNsmHUI1FOhGC3/mBUjQoSRPRUrYx1ugo7rIjNiXG/qFiLopqpQtoNLxZ219HhtCnZ8otXvjytM3UCb+YawIP6NyjYCPNkwawZeH2+nwWlSaWlbbVtddDkY76CzshpVaTvCyrjb+juN/YiskeLFCRWdb1cKjr6Q4Fv51K2spgmlGDDVPH3A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 40.67.248.234) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=arm.com;
+ dmarc=bestguesspass action=none header.from=arm.com; dkim=none (message not
+ signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com; 
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=M2/X1lxOqtNOoaoNqkOIqK3fV/KCVSJ8dBxu2KBfPFQ=;
+ b=W88BlXob1pBoJSUcZgF2t9nuz6aW1XiychpUiMtHpDaTa5ZAfqIY3D8tOYHlIkf7wZN4k8i6juoTP+3u4TpBjxRp0eMxHHTwieFi/jCR3mKHDK8vq9s1ZdsIxkg2JQbAPBIiITUef+f0AI/kYdDDJKFQ0T9qpwNgxGst9oR1iuM=
+Received: from MR2P264CA0105.FRAP264.PROD.OUTLOOK.COM (2603:10a6:500:33::21)
+ by PR3PR08MB5804.eurprd08.prod.outlook.com (2603:10a6:102:83::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3305.25; Tue, 25 Aug
+ 2020 10:09:21 +0000
+Received: from VE1EUR03FT047.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:500:33:cafe::58) by MR2P264CA0105.outlook.office365.com
+ (2603:10a6:500:33::21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3305.24 via Frontend
+ Transport; Tue, 25 Aug 2020 10:09:21 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 40.67.248.234)
+ smtp.mailfrom=arm.com; lists.xenproject.org; dkim=none (message not signed)
+ header.d=none;lists.xenproject.org; dmarc=bestguesspass action=none
+ header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 40.67.248.234 as permitted sender) receiver=protection.outlook.com;
+ client-ip=40.67.248.234; helo=nebula.arm.com;
+Received: from nebula.arm.com (40.67.248.234) by
+ VE1EUR03FT047.mail.protection.outlook.com (10.152.19.218) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.3305.24 via Frontend Transport; Tue, 25 Aug 2020 10:09:20 +0000
+Received: from AZ-NEU-EX01.Emea.Arm.com (10.251.26.4) by AZ-NEU-EX04.Arm.com
+ (10.251.24.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2044.4; Tue, 25 Aug
+ 2020 10:09:11 +0000
+Received: from AZ-NEU-EX04.Arm.com (10.251.24.32) by AZ-NEU-EX01.Emea.Arm.com
+ (10.251.26.4) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1779.2; Tue, 25
+ Aug 2020 10:09:11 +0000
+Received: from localhost.localdomain (10.169.214.112) by mail.arm.com
+ (10.251.24.32) with Microsoft SMTP Server id 15.1.2044.4 via Frontend
+ Transport; Tue, 25 Aug 2020 10:09:06 +0000
+From: Wei Chen <wei.chen@arm.com>
+To: <xen-devel@lists.xenproject.org>, <sstabellini@kernel.org>,
+ <julien@xen.org>
+CC: <Andre.Przywara@arm.com>, <Bertrand.Marquis@arm.com>,
+ <Penny.Zheng@arm.com>, <Kaly.Xin@arm.com>, <nd@arm.com>
+Subject: [PATCH v3 2/2] xen/arm: Throw messages for unknown FP/SIMD implement
+ ID
+Date: Tue, 25 Aug 2020 10:08:47 +0000
+Message-ID: <20200825100847.27988-3-wei.chen@arm.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200825100847.27988-1-wei.chen@arm.com>
+References: <20200825100847.27988-1-wei.chen@arm.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-EOPAttributedMessage: 1
+X-MS-Office365-Filtering-HT: Tenant
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 8ba8c812-c575-4d4d-8746-08d848def3c4
+X-MS-TrafficTypeDiagnostic: PR3PR08MB5804:|AM5PR0801MB1985:
+X-Microsoft-Antispam-PRVS: <AM5PR0801MB1985E3D23C888D4D5ECB59609E570@AM5PR0801MB1985.eurprd08.prod.outlook.com>
+x-checkrecipientrouted: true
+NoDisclaimer: true
+X-MS-Oob-TLC-OOBClassifiers: OLM:8273;OLM:8273;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam-Untrusted: BCL:0;
+X-Microsoft-Antispam-Message-Info-Original: N6tawul2ZwRrBAN1EAou4pTE4zLJ63PkNEF1HAPg1oipTEymKC3wjx6UVYAX53zFjSryXDBbFlwnpjTKvekYYfLZoKUw/v+4f+XfJFSyQ1cTQtSbvwkl8Bx/+NgM70OCk8iTjhQlB8/A3obuDErssHATDkIYE59sUa8xXW/LpoxrVLbz/LxX2vRbx+Q8wg4D2t4LP39CkDP3MBe/s0uIVxinoydC9Oyw2ybjmWwdKbqdbIPUMt7Tx2hpjf4qd1TiTBZvOaH22WuQhz6wn2y920FLnfiTQNK6V6agscFScXHJzRgWWBKhQnaBbpl4BwhQXsrDm8rwUKIUJQk8D5wYSb0u4ZjAD5vDfDZvyHglUT4YGo+kihDlY6J6XqxrRju0qJCHgMMkRgWyRMF/TDfYYQ==
+X-Forefront-Antispam-Report-Untrusted: CIP:40.67.248.234; CTRY:IE; LANG:en;
+ SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:nebula.arm.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(4636009)(396003)(136003)(39860400002)(376002)(346002)(46966005)(83380400001)(26005)(2616005)(186003)(44832011)(336012)(81166007)(82740400003)(15650500001)(5660300002)(426003)(47076004)(356005)(54906003)(1076003)(4326008)(70206006)(110136005)(36756003)(316002)(478600001)(6666004)(82310400002)(86362001)(8676002)(2906002)(8936002)(70586007);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3PR08MB5804
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: DB5EUR03FT063.eop-EUR03.prod.protection.outlook.com
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 1c0eb9e5-b1f6-4673-94b3-08d848deef60
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: DZrvFk/DUI1rx3gCt95Fvm3uD1lcLoXq9kWYQq6OrJM4wQVUa/DhSZanTerGwdGSIol8e4bVWZYPNg/dkC454GVaT6RT4Oamdwrc1dldx/6OnTEr2xnn6Z7BCQKvgSjjnxERTuc+Lhb8O/kSWpCLGEYZ/BQPXFhBDnyfDaZku8ZkES+BsKCTwRXuHeaYmXlEKXFupOQ/E0iNpkQoD/SGsFzUc8A1l9JlQEvbGMWji7L2L7fFuUM3kl844GINqU5V9DCOq54aQj+txP5E4dZuPuIlwaF7FiBKDKl5gedK4Gfdm5zZdcSa9t2d7UcYAsnPB+TUFMlCe6LTXBJvXHZAT+hnT+mwqXyYGhpoUkk+pBcDX3LI9tYouAQgZ4N2kzzv1KwnbIxC69DKsbYD28gELQ==
+X-Forefront-Antispam-Report: CIP:63.35.35.123; CTRY:IE; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:64aa7808-outbound-1.mta.getcheckrecipient.com;
+ PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com; CAT:NONE;
+ SFS:(4636009)(136003)(346002)(376002)(39860400002)(396003)(46966005)(54906003)(44832011)(2906002)(336012)(186003)(26005)(2616005)(5660300002)(426003)(316002)(110136005)(81166007)(82740400003)(47076004)(36756003)(70206006)(15650500001)(70586007)(478600001)(4326008)(83380400001)(1076003)(8676002)(8936002)(6666004)(82310400002)(86362001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Aug 2020 10:09:28.2537 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8ba8c812-c575-4d4d-8746-08d848def3c4
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d; Ip=[63.35.35.123];
+ Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
+X-MS-Exchange-CrossTenant-AuthSource: DB5EUR03FT063.eop-EUR03.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM5PR0801MB1985
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -100,16 +186,59 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Tue, Aug 25 2020 at 06:21, J=C3=BCrgen Gro=C3=9F wrote:
-> On 24.08.20 23:21, Thomas Gleixner wrote:
->> I still think it does the right thing depending on the place it is
->> called from, but even if so, it's completely unreadable gunk. I'll fix
->> that proper.
->
-> The main issue is that xen_initial_domain() and xen_pv_domain() are
-> orthogonal to each other. So xen_initial_domain() can either be true
-> for xen_pv_domain() (the "classic" pv dom0) or for xen_hvm_domain()
-> (the new PVH dom0).
+Arm ID_AA64PFR0_EL1 register provides two fields to describe CPU
+FP/SIMD implementations. Currently, we exactly know the meaning of
+0x0, 0x1 and 0xf of these fields. Xen treats value < 8 as FP/SIMD
+features presented. If there is a value 0x2 bumped in the future,
+Xen behaviors for value <= 0x1 can also take effect. But what Xen
+done for value <= 0x1 may not always cover new value 0x2 required.
+We throw these messages to break the silence when Xen detected
+unknown FP/SIMD IDs to notice user to check.
 
-Fair enough. My limited XENology striked again.
+Signed-off-by: Wei Chen <wei.chen@arm.com>
+Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
+---
+ xen/arch/arm/setup.c             | 12 ++++++++++++
+ xen/include/asm-arm/cpufeature.h |  2 ++
+ 2 files changed, 14 insertions(+)
+
+diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
+index 7968cee47d..ef39ce1ec6 100644
+--- a/xen/arch/arm/setup.c
++++ b/xen/arch/arm/setup.c
+@@ -133,6 +133,18 @@ static void __init processor_id(void)
+            cpu_has_simd ? " AdvancedSIMD" : "",
+            cpu_has_gicv3 ? " GICv3-SysReg" : "");
+ 
++    /* Warn user if we find unknown floating-point features */
++    if ( cpu_has_unknown_fp )
++        printk(XENLOG_WARNING "WARNING: Unknown Floating-point ID:%d, "
++               "this may result to corruption on the platform\n",
++               boot_cpu_feature64(fp));
++
++    /* Warn user if we find unknown AdvancedSIMD features */
++    if ( cpu_has_unknown_simd )
++        printk(XENLOG_WARNING "WARNING: Unknown AdvancedSIMD ID:%d, "
++               "this may result to corruption on the platform\n",
++               boot_cpu_feature64(simd));
++
+     printk("  Debug Features: %016"PRIx64" %016"PRIx64"\n",
+            boot_cpu_data.dbg64.bits[0], boot_cpu_data.dbg64.bits[1]);
+     printk("  Auxiliary Features: %016"PRIx64" %016"PRIx64"\n",
+diff --git a/xen/include/asm-arm/cpufeature.h b/xen/include/asm-arm/cpufeature.h
+index 10878ead8a..a32309986e 100644
+--- a/xen/include/asm-arm/cpufeature.h
++++ b/xen/include/asm-arm/cpufeature.h
+@@ -16,6 +16,8 @@
+ #define cpu_has_fp        (boot_cpu_feature64(fp) < 8)
+ #define cpu_has_simd      (boot_cpu_feature64(simd) < 8)
+ #define cpu_has_gicv3     (boot_cpu_feature64(gic) == 1)
++#define cpu_has_unknown_fp   (cpu_has_fp && (boot_cpu_feature64(fp) >= 2))
++#define cpu_has_unknown_simd (cpu_has_simd && (boot_cpu_feature64(simd) >= 2))
+ #endif
+ 
+ #define cpu_feature32(c, feat)         ((c)->pfr32.feat)
+-- 
+2.17.1
+
 
