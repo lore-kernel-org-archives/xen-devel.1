@@ -7,55 +7,54 @@ X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EB274C433E4
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:06:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 07475C433E8
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:06:58 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BC1322087C
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:06:59 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id CB8E820838
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:06:57 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="xQK+hWPf";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="gYT9vQkY"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BC1322087C
+	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="2u4vytYI";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="PSjOt7VF"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CB8E820838
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kAuCX-0002G7-EZ; Wed, 26 Aug 2020 12:06:49 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kAuCR-00022Z-GJ; Wed, 26 Aug 2020 12:06:43 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=LG6r=CE=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1kAu7m-00083C-Br
- for xen-devel@lists.xenproject.org; Wed, 26 Aug 2020 12:01:54 +0000
-X-Inumbo-ID: 8be08264-29a9-4456-8af8-26aff0bd65be
+ id 1kAu7q-000821-7S
+ for xen-devel@lists.xenproject.org; Wed, 26 Aug 2020 12:01:58 +0000
+X-Inumbo-ID: e4a67cec-c2d3-410b-b5c2-5d9ed0cf2f28
 Received: from galois.linutronix.de (unknown [193.142.43.55])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 8be08264-29a9-4456-8af8-26aff0bd65be;
- Wed, 26 Aug 2020 12:01:41 +0000 (UTC)
-Message-Id: <20200826112334.198633344@linutronix.de>
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id e4a67cec-c2d3-410b-b5c2-5d9ed0cf2f28;
+ Wed, 26 Aug 2020 12:01:16 +0000 (UTC)
+Message-Id: <20200826112332.255792469@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1598443300;
+ s=2020; t=1598443275;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=x1lilm1wSab7jCk+RVn7Y9w51r0P/DEEXiuOg6SwxNA=;
- b=xQK+hWPf8Qa3VBlzaS65MXD1rTSFvkAArmzsKQ683fYw7lGT3CJmc6zDW+r/7Jgj7ZV2nl
- 4UevQBnTw5XpFbtakjWkpbHWqqet9HRqvMyaTaWT3cBq4RXUPJOhHdfh2EIk61yrHamuIN
- rwAWoeD72N9K27PQHP75BHj50xOq7Jn7kaeVNW4Cq6/dGK200KYcNr3AFIK7SNAH4HSk1j
- JxFtDFFu+1RikYKodYarFpSnJDprYU8G0NdM5nmBB3ic8gWfzlYKdubancrikcp+6yOWJe
- 4Z8TVxOBgZtq/VWS2JJDmRCvaLbI3TPKTxzAHcjo1M3fn/h1MXV08dRp/uIHQA==
+ bh=+SoMFjSy3jxF5f7dqPyd8PSV+JeMGK6juDfUnA5hngg=;
+ b=2u4vytYI/UB7itfPfJyvcdtqgCSKW46Ox/zzv2XerZ/InxrGE2GWHhUDKlY8KgMdB7HXL0
+ aLOdvn+B7AKdSbMuJNLtpZnHpUhROBD88RM3sZNaYgn4L9mRZ01tMg9oUEB7hNqxxpaxWu
+ PuWPB9GE8gYW2nV/GNNUJXz2QRA1aGEbBgme8ZLddYRvk8mJdtNuM8JAPZV39AP5FWFg+e
+ 6mCaujWeR7ty5TW1jh05CxG1dO0TpdiTKJadJRyoTzko/NyP4r516waUKG+f3i3UxKVb33
+ jOoOW+eKn8eNokn5EzeqiaAzG15RYHWhPZq+zVKV7VaRVNEAB9gP2x3UcAMe9Q==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1598443300;
+ s=2020e; t=1598443275;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=x1lilm1wSab7jCk+RVn7Y9w51r0P/DEEXiuOg6SwxNA=;
- b=gYT9vQkYl8yJG877OT3E6JNjTxccLTMsmLl+imB25zhe9GgkmpQIzEmEzvfi2t8TSIfYQR
- EUDgFsP2OsmAzsCA==
-Date: Wed, 26 Aug 2020 13:17:04 +0200
+ bh=+SoMFjSy3jxF5f7dqPyd8PSV+JeMGK6juDfUnA5hngg=;
+ b=PSjOt7VFjQr229YKNjiivKh8I6ovDgS9HVBurRV+6P90PPJdlYxwtL6KbmLSwDXPUAQZH4
+ W8RvnGxIZdv3mZBw==
+Date: Wed, 26 Aug 2020 13:16:44 +0200
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
@@ -79,7 +78,7 @@ Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
  Alex Williamson <alex.williamson@redhat.com>,
  Jacob Pan <jacob.jun.pan@intel.com>, Baolu Lu <baolu.lu@intel.com>,
  Kevin Tian <kevin.tian@intel.com>, Dan Williams <dan.j.williams@intel.com>
-Subject: [patch V2 36/46] x86/irq: Make most MSI ops XEN private
+Subject: [patch V2 16/46] x86/irq: Consolidate UV domain allocation
 References: <20200826111628.794979401@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -99,81 +98,105 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-Nothing except XEN uses the setup/teardown ops. Hide them there.
+Move the UV specific fields into their own struct for readability sake. Get
+rid of the #ifdeffery as it does not matter at all whether the alloc info
+is a couple of bytes longer or not.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 
 ---
- arch/x86/include/asm/x86_init.h |    2 --
- arch/x86/pci/xen.c              |   21 ++++++++++++++-------
- 2 files changed, 14 insertions(+), 9 deletions(-)
+ arch/x86/include/asm/hw_irq.h |   21 ++++++++++++---------
+ arch/x86/platform/uv/uv_irq.c |   16 ++++++++--------
+ 2 files changed, 20 insertions(+), 17 deletions(-)
 
---- a/arch/x86/include/asm/x86_init.h
-+++ b/arch/x86/include/asm/x86_init.h
-@@ -276,8 +276,6 @@ struct x86_platform_ops {
- struct pci_dev;
- 
- struct x86_msi_ops {
--	int (*setup_msi_irqs)(struct pci_dev *dev, int nvec, int type);
--	void (*teardown_msi_irqs)(struct pci_dev *dev);
- 	void (*restore_msi_irqs)(struct pci_dev *dev);
+--- a/arch/x86/include/asm/hw_irq.h
++++ b/arch/x86/include/asm/hw_irq.h
+@@ -53,6 +53,14 @@ struct ioapic_alloc_info {
+ 	struct IO_APIC_route_entry	*entry;
  };
  
---- a/arch/x86/pci/xen.c
-+++ b/arch/x86/pci/xen.c
-@@ -157,6 +157,13 @@ static int acpi_register_gsi_xen(struct
- struct xen_pci_frontend_ops *xen_pci_frontend;
- EXPORT_SYMBOL_GPL(xen_pci_frontend);
- 
-+struct xen_msi_ops {
-+	int (*setup_msi_irqs)(struct pci_dev *dev, int nvec, int type);
-+	void (*teardown_msi_irqs)(struct pci_dev *dev);
++struct uv_alloc_info {
++	int		limit;
++	int		blade;
++	unsigned long	offset;
++	char		*name;
++
 +};
 +
-+static struct xen_msi_ops xen_msi_ops __ro_after_init;
+ /**
+  * irq_alloc_info - X86 specific interrupt allocation info
+  * @type:	X86 specific allocation type
+@@ -64,7 +72,8 @@ struct ioapic_alloc_info {
+  * @data:	Allocation specific data
+  *
+  * @ioapic:	IOAPIC specific allocation data
+- */
++ * @uv:		UV specific allocation data
++*/
+ struct irq_alloc_info {
+ 	enum irq_alloc_type	type;
+ 	u32			flags;
+@@ -76,6 +85,8 @@ struct irq_alloc_info {
+ 
+ 	union {
+ 		struct ioapic_alloc_info	ioapic;
++		struct uv_alloc_info		uv;
 +
- static int xen_setup_msi_irqs(struct pci_dev *dev, int nvec, int type)
- {
- 	int irq, ret, i;
-@@ -415,7 +422,7 @@ static int xen_msi_domain_alloc_irqs(str
- 	else
- 		type = PCI_CAP_ID_MSI;
+ 		int		unused;
+ #ifdef	CONFIG_PCI_MSI
+ 		struct {
+@@ -83,14 +94,6 @@ struct irq_alloc_info {
+ 			irq_hw_number_t	msi_hwirq;
+ 		};
+ #endif
+-#ifdef	CONFIG_X86_UV
+-		struct {
+-			int		uv_limit;
+-			int		uv_blade;
+-			unsigned long	uv_offset;
+-			char		*uv_name;
+-		};
+-#endif
+ 	};
+ };
  
--	return x86_msi.setup_msi_irqs(to_pci_dev(dev), nvec, type);
-+	return xen_msi_ops.setup_msi_irqs(to_pci_dev(dev), nvec, type);
- }
+--- a/arch/x86/platform/uv/uv_irq.c
++++ b/arch/x86/platform/uv/uv_irq.c
+@@ -90,15 +90,15 @@ static int uv_domain_alloc(struct irq_do
  
- static void xen_msi_domain_free_irqs(struct irq_domain *domain,
-@@ -424,7 +431,7 @@ static void xen_msi_domain_free_irqs(str
- 	if (WARN_ON_ONCE(!dev_is_pci(dev)))
- 		return;
+ 	ret = irq_domain_alloc_irqs_parent(domain, virq, nr_irqs, arg);
+ 	if (ret >= 0) {
+-		if (info->uv_limit == UV_AFFINITY_CPU)
++		if (info->uv.limit == UV_AFFINITY_CPU)
+ 			irq_set_status_flags(virq, IRQ_NO_BALANCING);
+ 		else
+ 			irq_set_status_flags(virq, IRQ_MOVE_PCNTXT);
  
--	x86_msi.teardown_msi_irqs(to_pci_dev(dev));
-+	xen_msi_ops.teardown_msi_irqs(to_pci_dev(dev));
- }
- 
- static struct msi_domain_ops xen_pci_msi_domain_ops = {
-@@ -463,16 +470,16 @@ static __init void xen_setup_pci_msi(voi
- {
- 	if (xen_pv_domain()) {
- 		if (xen_initial_domain()) {
--			x86_msi.setup_msi_irqs = xen_initdom_setup_msi_irqs;
-+			xen_msi_ops.setup_msi_irqs = xen_initdom_setup_msi_irqs;
- 			x86_msi.restore_msi_irqs = xen_initdom_restore_msi_irqs;
- 		} else {
--			x86_msi.setup_msi_irqs = xen_setup_msi_irqs;
-+			xen_msi_ops.setup_msi_irqs = xen_setup_msi_irqs;
- 		}
--		x86_msi.teardown_msi_irqs = xen_pv_teardown_msi_irqs;
-+		xen_msi_ops.teardown_msi_irqs = xen_pv_teardown_msi_irqs;
- 		pci_msi_ignore_mask = 1;
- 	} else if (xen_hvm_domain()) {
--		x86_msi.setup_msi_irqs = xen_hvm_setup_msi_irqs;
--		x86_msi.teardown_msi_irqs = xen_teardown_msi_irqs;
-+		xen_msi_ops.setup_msi_irqs = xen_hvm_setup_msi_irqs;
-+		xen_msi_ops.teardown_msi_irqs = xen_teardown_msi_irqs;
+-		chip_data->pnode = uv_blade_to_pnode(info->uv_blade);
+-		chip_data->offset = info->uv_offset;
++		chip_data->pnode = uv_blade_to_pnode(info->uv.blade);
++		chip_data->offset = info->uv.offset;
+ 		irq_domain_set_info(domain, virq, virq, &uv_irq_chip, chip_data,
+-				    handle_percpu_irq, NULL, info->uv_name);
++				    handle_percpu_irq, NULL, info->uv.name);
  	} else {
- 		WARN_ON_ONCE(1);
- 		return;
+ 		kfree(chip_data);
+ 	}
+@@ -193,10 +193,10 @@ int uv_setup_irq(char *irq_name, int cpu
+ 
+ 	init_irq_alloc_info(&info, cpumask_of(cpu));
+ 	info.type = X86_IRQ_ALLOC_TYPE_UV;
+-	info.uv_limit = limit;
+-	info.uv_blade = mmr_blade;
+-	info.uv_offset = mmr_offset;
+-	info.uv_name = irq_name;
++	info.uv.limit = limit;
++	info.uv.blade = mmr_blade;
++	info.uv.offset = mmr_offset;
++	info.uv.name = irq_name;
+ 
+ 	return irq_domain_alloc_irqs(domain, 1,
+ 				     uv_blade_to_memory_nid(mmr_blade), &info);
+
 
 
