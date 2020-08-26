@@ -7,54 +7,54 @@ X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A3C21C433DF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C8079C433E3
 	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:06:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 72FAF20786
+	by mail.kernel.org (Postfix) with ESMTPS id 9C67020838
 	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:06:40 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="Ci+yEYTV";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="oFL/js22"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 72FAF20786
+	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="sGq7w5Vv";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="wIUepu9R"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9C67020838
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kAuCC-0001fQ-PX; Wed, 26 Aug 2020 12:06:28 +0000
+	id 1kAuCB-0001er-Oh; Wed, 26 Aug 2020 12:06:27 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=LG6r=CE=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1kAu8U-000821-9E
- for xen-devel@lists.xenproject.org; Wed, 26 Aug 2020 12:02:38 +0000
-X-Inumbo-ID: af299910-4bdb-4fa2-ac9d-81aa9ac72410
-Received: from galois.linutronix.de (unknown [193.142.43.55])
+ id 1kAu9S-000821-BV
+ for xen-devel@lists.xenproject.org; Wed, 26 Aug 2020 12:03:38 +0000
+X-Inumbo-ID: fe4d9188-ef08-4e96-bbdf-11106746d1d4
+Received: from galois.linutronix.de (unknown [2a0a:51c0:0:12e:550::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id af299910-4bdb-4fa2-ac9d-81aa9ac72410;
- Wed, 26 Aug 2020 12:01:33 +0000 (UTC)
-Message-Id: <20200826112333.622352798@linutronix.de>
+ id fe4d9188-ef08-4e96-bbdf-11106746d1d4;
+ Wed, 26 Aug 2020 12:01:52 +0000 (UTC)
+Message-Id: <20200826112335.092521442@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1598443292;
+ s=2020; t=1598443311;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=m8VqN5j7CyoINljd+ev/uJTpzn1HV5cfd+C+/482K8I=;
- b=Ci+yEYTVdn5HrvM1gWFjUHFH5E0a8fnUM0twCozKUIyvPackZGIEC1eEn1P9voCSchqxoe
- cbRDIA+GcmiYA8P8bLyu+IO/TvXATMZzaCAgLTHgi2S+2eBV284MU0YnHjci+ffs85TW3S
- Dm4ID1SxrKaVtlLBYh82EhYa7Fbii8vRrPYTkX4wb7noEwSgk/QG6D7vjkyDYVT6qEQmV2
- DbJOLG51R61SMLP/9lKHqU2ufbvoHcJbPnNAs4uXW3X/OSr6YPLjGB0Ldcl1eXRpL2sZVL
- 349nZT9B18UKuwImao/7wESbOOL9PmLyk0S0sT2ykfqjXEaYS3Bsx/YgL5KggA==
+ bh=b69SWJ3Ur45XxM77SmSu/tsjVczGdpPRTUPeP/VD4Ik=;
+ b=sGq7w5VvBLEz68W/6n3xv/ju+gIZDsclrMN42Kbt+Lek2xpknqP50K1/N3zLQ3qy/tSs8i
+ 5FUrDzJiUCLsdEJZ4ovTq/PJQFLtIf/MfxmxW+nu6cwW9IfZO+2nncmzTnjpEbrV3MH6tj
+ 9b3brF3GgBQbP9y2bmXgCU8M4zoc2GmpJnNPYPngl4Q3CAXCKlffOoU2TbmM1e7rBtgxG5
+ I955rjrk1V8U3FHUiSZO6UvjD62oqONm2qhsAdvpgboUJlslC/n2D3AmOJoiDXEw8WOFvk
+ k66LV22FAJnV0xR9tR25lKLopG2+yp6AUrfyM0um/WMR7J6qyoLFz+U0tt9W2Q==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1598443292;
+ s=2020e; t=1598443311;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=m8VqN5j7CyoINljd+ev/uJTpzn1HV5cfd+C+/482K8I=;
- b=oFL/js22qqSW7G3PPr5wjroZDaDLsQwO4oZM8Pjs2hlm7OciNNEbJWYeWlRq9TWSaCeZeL
- VwR0c3IpoWnkNkBQ==
-Date: Wed, 26 Aug 2020 13:16:58 +0200
+ bh=b69SWJ3Ur45XxM77SmSu/tsjVczGdpPRTUPeP/VD4Ik=;
+ b=wIUepu9R9BwJrfL5hHLBQrW187phV08auxKlkm3THVUKZ6T3NRDo7Cxcy1mizpDRZnSQiD
+ b3u1CTDbJZZ/EOBg==
+Date: Wed, 26 Aug 2020 13:17:13 +0200
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
@@ -78,7 +78,8 @@ Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
  Alex Williamson <alex.williamson@redhat.com>,
  Jacob Pan <jacob.jun.pan@intel.com>, Baolu Lu <baolu.lu@intel.com>,
  Kevin Tian <kevin.tian@intel.com>, Dan Williams <dan.j.williams@intel.com>
-Subject: [patch V2 30/46] x86/xen: Wrap XEN MSI management into irqdomain
+Subject: [patch V2 45/46] irqdomain/msi: Provide msi_alloc/free_store()
+ callbacks
 References: <20200826111628.794979401@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -98,103 +99,84 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-To allow utilizing the irq domain pointer in struct device it is necessary
-to make XEN/MSI irq domain compatible.
+For devices which don't have a standard storage for MSI messages like the
+upcoming IMS (Interrupt Message Storm) it's required to allocate storage
+space before allocating interrupts and after freeing them.
 
-While the right solution would be to truly convert XEN to irq domains, this
-is an exercise which is not possible for mere mortals with limited XENology.
+This could be achieved with the existing callbacks, but that would be
+awkward because they operate on msi_alloc_info_t which is not uniform
+accross architectures. Also these callbacks are invoked per interrupt but
+the allocation might have bulk requirements depending on the device.
 
-Provide a plain irqdomain wrapper around XEN. While this is blatant
-violation of the irqdomain design, it's the only solution for a XEN igorant
-person to make progress on the issue which triggered this change.
+As such devices can operate on different architectures it is simpler to
+have seperate callbacks which operate on struct device. The resulting
+storage information has to be stored in struct msi_desc so the underlying
+irq chip implementation can retrieve it for the relevant operations.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-Acked-by: Juergen Gross <jgross@suse.com>
 
 ---
-Note: This is completely untested, but it compiles so it must be perfect.
----
- arch/x86/pci/xen.c |   63 +++++++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 63 insertions(+)
+ include/linux/msi.h |    8 ++++++++
+ kernel/irq/msi.c    |   11 +++++++++++
+ 2 files changed, 19 insertions(+)
 
---- a/arch/x86/pci/xen.c
-+++ b/arch/x86/pci/xen.c
-@@ -407,6 +407,63 @@ static void xen_teardown_msi_irq(unsigne
- 	WARN_ON_ONCE(1);
- }
+--- a/include/linux/msi.h
++++ b/include/linux/msi.h
+@@ -279,6 +279,10 @@ struct msi_domain_info;
+  *			function.
+  * @domain_free_irqs:	Optional function to override the default free
+  *			function.
++ * @msi_alloc_store:	Optional callback to allocate storage in a device
++ *			specific non-standard MSI store
++ * @msi_alloc_free:	Optional callback to free storage in a device
++ *			specific non-standard MSI store
+  *
+  * @get_hwirq, @msi_init and @msi_free are callbacks used by
+  * msi_create_irq_domain() and related interfaces
+@@ -328,6 +332,10 @@ struct msi_domain_ops {
+ 					     struct device *dev, int nvec);
+ 	void		(*domain_free_irqs)(struct irq_domain *domain,
+ 					    struct device *dev);
++	int		(*msi_alloc_store)(struct irq_domain *domain,
++					   struct device *dev, int nvec);
++	void		(*msi_free_store)(struct irq_domain *domain,
++					    struct device *dev);
+ };
  
-+static int xen_msi_domain_alloc_irqs(struct irq_domain *domain,
-+				     struct device *dev,  int nvec)
-+{
-+	int type;
+ /**
+--- a/kernel/irq/msi.c
++++ b/kernel/irq/msi.c
+@@ -434,6 +434,12 @@ int __msi_domain_alloc_irqs(struct irq_d
+ 	if (ret)
+ 		return ret;
+ 
++	if (ops->msi_alloc_store) {
++		ret = ops->msi_alloc_store(domain, dev, nvec);
++		if (ret)
++			return ret;
++	}
 +
-+	if (WARN_ON_ONCE(!dev_is_pci(dev)))
-+		return -EINVAL;
-+
-+	if (first_msi_entry(dev)->msi_attrib.is_msix)
-+		type = PCI_CAP_ID_MSIX;
-+	else
-+		type = PCI_CAP_ID_MSI;
-+
-+	return x86_msi.setup_msi_irqs(to_pci_dev(dev), nvec, type);
-+}
-+
-+static void xen_msi_domain_free_irqs(struct irq_domain *domain,
-+				     struct device *dev)
-+{
-+	if (WARN_ON_ONCE(!dev_is_pci(dev)))
-+		return;
-+
-+	x86_msi.teardown_msi_irqs(to_pci_dev(dev));
-+}
-+
-+static struct msi_domain_ops xen_pci_msi_domain_ops = {
-+	.domain_alloc_irqs	= xen_msi_domain_alloc_irqs,
-+	.domain_free_irqs	= xen_msi_domain_free_irqs,
-+};
-+
-+static struct msi_domain_info xen_pci_msi_domain_info = {
-+	.ops			= &xen_pci_msi_domain_ops,
-+};
-+
-+/*
-+ * This irq domain is a blatant violation of the irq domain design, but
-+ * distangling XEN into real irq domains is not a job for mere mortals with
-+ * limited XENology. But it's the least dangerous way for a mere mortal to
-+ * get rid of the arch_*_msi_irqs() hackery in order to store the irq
-+ * domain pointer in struct device. This irq domain wrappery allows to do
-+ * that without breaking XEN terminally.
-+ */
-+static __init struct irq_domain *xen_create_pci_msi_domain(void)
-+{
-+	struct irq_domain *d = NULL;
-+	struct fwnode_handle *fn;
-+
-+	fn = irq_domain_alloc_named_fwnode("XEN-MSI");
-+	if (fn)
-+		d = msi_create_irq_domain(fn, &xen_pci_msi_domain_info, NULL);
-+
-+	/* FIXME: No idea how to survive if this fails */
-+	BUG_ON(!d);
-+
-+	return d;
-+}
-+
- static __init void xen_setup_pci_msi(void)
+ 	for_each_msi_entry(desc, dev) {
+ 		ops->set_desc(&arg, desc);
+ 
+@@ -533,6 +539,8 @@ int msi_domain_alloc_irqs(struct irq_dom
+ 
+ void __msi_domain_free_irqs(struct irq_domain *domain, struct device *dev)
  {
- 	if (xen_pv_domain()) {
-@@ -427,6 +484,12 @@ static __init void xen_setup_pci_msi(voi
- 	}
++	struct msi_domain_info *info = domain->host_data;
++	struct msi_domain_ops *ops = info->ops;
+ 	struct msi_desc *desc;
  
- 	x86_msi.teardown_msi_irq = xen_teardown_msi_irq;
+ 	for_each_msi_entry(desc, dev) {
+@@ -546,6 +554,9 @@ void __msi_domain_free_irqs(struct irq_d
+ 			desc->irq = 0;
+ 		}
+ 	}
 +
-+	/*
-+	 * Override the PCI/MSI irq domain init function. No point
-+	 * in allocating the native domain and never use it.
-+	 */
-+	x86_init.irqs.create_pci_msi_domain = xen_create_pci_msi_domain;
++	if (ops->msi_free_store)
++		ops->msi_free_store(domain, dev);
  }
  
- #else /* CONFIG_PCI_MSI */
+ /**
 
 
