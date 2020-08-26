@@ -7,55 +7,54 @@ X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 826F5C433E1
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:01:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2C7ECC433DF
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:01:55 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 48B3D221E2
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:01:49 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 0072820786
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:01:54 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="vXtAyApT";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="syOM68to"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 48B3D221E2
+	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="Vs7Crzs/";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="Msr8qgC+"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0072820786
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kAu7Y-000064-Lu; Wed, 26 Aug 2020 12:01:40 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kAu7c-0000AX-54; Wed, 26 Aug 2020 12:01:44 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=LG6r=CE=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1kAu7X-00083C-B4
- for xen-devel@lists.xenproject.org; Wed, 26 Aug 2020 12:01:39 +0000
-X-Inumbo-ID: 280cf3bb-d3be-4b21-9d9a-df48e07067d1
+ id 1kAu7b-000821-6k
+ for xen-devel@lists.xenproject.org; Wed, 26 Aug 2020 12:01:43 +0000
+X-Inumbo-ID: 93db906f-c783-41e2-963f-fe37d60d0d93
 Received: from galois.linutronix.de (unknown [193.142.43.55])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 280cf3bb-d3be-4b21-9d9a-df48e07067d1;
- Wed, 26 Aug 2020 12:01:29 +0000 (UTC)
-Message-Id: <20200826112333.326841410@linutronix.de>
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 93db906f-c783-41e2-963f-fe37d60d0d93;
+ Wed, 26 Aug 2020 12:01:11 +0000 (UTC)
+Message-Id: <20200826112331.849577844@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1598443288;
+ s=2020; t=1598443270;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=pWFmsUcFsRa+ZQPUyY9l6i/Ptm0fiSvCYr5L6A2XYBA=;
- b=vXtAyApTtuCfG5BYP4assb/j+cBeP89Kxhh0WpAXDmqkrySzry9EIa81BCWbuqDPysiRV5
- UA51a1qFzXUk+l7k+IchM6cgliPwWolFtnvHqJpRCMiI/Pf8I2f0mx2Jqrff/VUJ9eRrzm
- Pabm2gZ9VGeFKdG0iu/j+meUNCfNr7eKEkvtx4381ivq71VWEtl9xwhZUrvCZbIVoXXDox
- FOZ2I6CULrb9dZhoS6jjHLPbLMljRV0z2c8ypaxHy6uhTuce0zQRnfSZ4kd08F5xBF9BV6
- P5hUlYT0IGGWYsQ7PZV3chaIHeG1KQ8im76GYiNuSdOeDFQPFe/OtzSDk4v9Og==
+ bh=1I9yW3eMm4iVQaR5dfVSMWt9KqqPcB0KB7Tj4Yik9Do=;
+ b=Vs7Crzs/frt067nyUVkVFJOIQw6uTtI6Y26Uhysh9DPryE0UufkujposG7+OAE/EsM8Fj6
+ q4K3EC3m4fL5Pb4heM215T5j1kO+LEzHeBvS8By8A7i7kzyUqiQIyTWi4QCH0bGMk0hYnn
+ yFYKTb4rdzNDMUYt0Vm1cxuxsJt3flpfKrnFIPk83LI0HAz5OE6yF0+dr3fbr72J+CMNH9
+ 6d/IgE4yFEW45kzkwQ4YqiBBQtpptF5MYmWw3wDSkh/WO8XGv61ETXFpnhjd0QRQLw61KT
+ BcdS2XHVFOJWNRsyGm+wHedFsUdnwc4F7fV/F3Rawwgl7ORqZ3Bn3zXGFkdqbQ==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1598443288;
+ s=2020e; t=1598443270;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=pWFmsUcFsRa+ZQPUyY9l6i/Ptm0fiSvCYr5L6A2XYBA=;
- b=syOM68toRaTrOCmyKOY8xULsP7wEIpKhMMwbMTYSFnERZcypX7xwqt29P6SxCNcDtggCTB
- t5wSt9ZoiVKA9ABQ==
-Date: Wed, 26 Aug 2020 13:16:55 +0200
+ bh=1I9yW3eMm4iVQaR5dfVSMWt9KqqPcB0KB7Tj4Yik9Do=;
+ b=Msr8qgC+pO20pz2h9JxLzlcZ/HkirmM4OCsAR405gtLWFmI+l5BU2dRBJFB/SeCb3iPUKh
+ 2tDkTIU4fgHsuKAA==
+Date: Wed, 26 Aug 2020 13:16:40 +0200
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
@@ -79,7 +78,7 @@ Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
  Alex Williamson <alex.williamson@redhat.com>,
  Jacob Pan <jacob.jun.pan@intel.com>, Baolu Lu <baolu.lu@intel.com>,
  Kevin Tian <kevin.tian@intel.com>, Dan Williams <dan.j.williams@intel.com>
-Subject: [patch V2 27/46] x86/xen: Rework MSI teardown
+Subject: [patch V2 12/46] x86/irq: Prepare consolidation of irq_alloc_info
 References: <20200826111628.794979401@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -99,90 +98,62 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-X86 cannot store the irq domain pointer in struct device without breaking
-XEN because the irq domain pointer takes precedence over arch_*_msi_irqs()
-fallbacks.
+struct irq_alloc_info is a horrible zoo of unnamed structs in a union. Many
+of the struct fields can be generic and don't have to be type specific like
+hpet_id, ioapic_id...
 
-XENs MSI teardown relies on default_teardown_msi_irqs() which invokes
-arch_teardown_msi_irq(). default_teardown_msi_irqs() is a trivial iterator
-over the msi entries associated to a device.
-
-Implement this loop in xen_teardown_msi_irqs() to prepare for removal of
-the fallbacks for X86.
-
-This is a preparatory step to wrap XEN MSI alloc/free into a irq domain
-which in turn allows to store the irq domain pointer in struct device and
-to use the irq domain functions directly.
+Provide a generic set of members to prepare for the consolidation. The goal
+is to make irq_alloc_info have the same basic member as the generic
+msi_alloc_info so generic MSI domain ops can be reused and yet more mess
+can be avoided when (non-PCI) device MSI support comes along.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
----
-V2: Use teardown_pv... for initial domain (Juergen)
----
- arch/x86/pci/xen.c |   23 ++++++++++++++++++-----
- 1 file changed, 18 insertions(+), 5 deletions(-)
 
---- a/arch/x86/pci/xen.c
-+++ b/arch/x86/pci/xen.c
-@@ -377,20 +377,31 @@ static void xen_initdom_restore_msi_irqs
- static void xen_teardown_msi_irqs(struct pci_dev *dev)
- {
- 	struct msi_desc *msidesc;
-+	int i;
+---
+ arch/x86/include/asm/hw_irq.h |   22 ++++++++++++++++------
+ 1 file changed, 16 insertions(+), 6 deletions(-)
+
+--- a/arch/x86/include/asm/hw_irq.h
++++ b/arch/x86/include/asm/hw_irq.h
+@@ -44,10 +44,25 @@ enum irq_alloc_type {
+ 	X86_IRQ_ALLOC_TYPE_HPET_GET_PARENT,
+ };
+ 
++/**
++ * irq_alloc_info - X86 specific interrupt allocation info
++ * @type:	X86 specific allocation type
++ * @flags:	Flags for allocation tweaks
++ * @devid:	Device ID for allocations
++ * @hwirq:	Associated hw interrupt number in the domain
++ * @mask:	CPU mask for vector allocation
++ * @desc:	Pointer to msi descriptor
++ * @data:	Allocation specific data
++ */
+ struct irq_alloc_info {
+ 	enum irq_alloc_type	type;
+ 	u32			flags;
+-	const struct cpumask	*mask;	/* CPU mask for vector allocation */
++	u32			devid;
++	irq_hw_number_t		hwirq;
++	const struct cpumask	*mask;
++	struct msi_desc		*desc;
++	void			*data;
 +
-+	for_each_pci_msi_entry(msidesc, dev) {
-+		if (msidesc->irq) {
-+			for (i = 0; i < msidesc->nvec_used; i++)
-+				xen_destroy_irq(msidesc->irq + i);
-+		}
-+	}
-+}
-+
-+static void xen_pv_teardown_msi_irqs(struct pci_dev *dev)
-+{
-+	struct msi_desc *msidesc = first_pci_msi_entry(dev);
- 
--	msidesc = first_pci_msi_entry(dev);
- 	if (msidesc->msi_attrib.is_msix)
- 		xen_pci_frontend_disable_msix(dev);
- 	else
- 		xen_pci_frontend_disable_msi(dev);
- 
--	/* Free the IRQ's and the msidesc using the generic code. */
--	default_teardown_msi_irqs(dev);
-+	xen_teardown_msi_irqs(dev);
- }
- 
- static void xen_teardown_msi_irq(unsigned int irq)
- {
--	xen_destroy_irq(irq);
-+	WARN_ON_ONCE(1);
- }
- 
+ 	union {
+ 		int		unused;
+ #ifdef	CONFIG_HPET_TIMER
+@@ -88,11 +103,6 @@ struct irq_alloc_info {
+ 			char		*uv_name;
+ 		};
  #endif
-@@ -413,7 +424,7 @@ int __init pci_xen_init(void)
- #ifdef CONFIG_PCI_MSI
- 	x86_msi.setup_msi_irqs = xen_setup_msi_irqs;
- 	x86_msi.teardown_msi_irq = xen_teardown_msi_irq;
--	x86_msi.teardown_msi_irqs = xen_teardown_msi_irqs;
-+	x86_msi.teardown_msi_irqs = xen_pv_teardown_msi_irqs;
- 	pci_msi_ignore_mask = 1;
- #endif
- 	return 0;
-@@ -437,6 +448,7 @@ static void __init xen_hvm_msi_init(void
- 	}
+-#if IS_ENABLED(CONFIG_VMD)
+-		struct {
+-			struct msi_desc *desc;
+-		};
+-#endif
+ 	};
+ };
  
- 	x86_msi.setup_msi_irqs = xen_hvm_setup_msi_irqs;
-+	x86_msi.teardown_msi_irqs = xen_teardown_msi_irqs;
- 	x86_msi.teardown_msi_irq = xen_teardown_msi_irq;
- }
- #endif
-@@ -473,6 +485,7 @@ int __init pci_xen_initial_domain(void)
- #ifdef CONFIG_PCI_MSI
- 	x86_msi.setup_msi_irqs = xen_initdom_setup_msi_irqs;
- 	x86_msi.teardown_msi_irq = xen_teardown_msi_irq;
-+	x86_msi.teardown_msi_irqs = xen_teardown_pv_msi_irqs;
- 	x86_msi.restore_msi_irqs = xen_initdom_restore_msi_irqs;
- 	pci_msi_ignore_mask = 1;
- #endif
+
 
 
