@@ -7,54 +7,55 @@ X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 58621C433DF
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:01:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A50F0C433E1
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:01:33 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2A66220897
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:01:31 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 7810220786
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:01:33 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="yBa1jZyq";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="X+rqdbCz"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2A66220897
+	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="RSaEHbjL";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="ZWD1CYot"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7810220786
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kAu7D-0008BI-OA; Wed, 26 Aug 2020 12:01:19 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kAu7E-0008CA-Au; Wed, 26 Aug 2020 12:01:20 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=LG6r=CE=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1kAu7C-000821-5x
- for xen-devel@lists.xenproject.org; Wed, 26 Aug 2020 12:01:18 +0000
-X-Inumbo-ID: 2599cddc-12ca-4b9c-9561-5bf448716c28
+ id 1kAu7D-00083C-Ac
+ for xen-devel@lists.xenproject.org; Wed, 26 Aug 2020 12:01:19 +0000
+X-Inumbo-ID: e0b3927c-0d59-4824-b13e-c7282218426b
 Received: from galois.linutronix.de (unknown [193.142.43.55])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 2599cddc-12ca-4b9c-9561-5bf448716c28;
- Wed, 26 Aug 2020 12:01:02 +0000 (UTC)
-Message-Id: <20200826112331.157603198@linutronix.de>
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id e0b3927c-0d59-4824-b13e-c7282218426b;
+ Wed, 26 Aug 2020 12:01:17 +0000 (UTC)
+Message-Id: <20200826112332.352583299@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1598443261;
+ s=2020; t=1598443276;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=6S+VPwjCO4/0/sg5O/D8yGF7mUxRzB6iCmAEo7WLFeY=;
- b=yBa1jZyq19hlxKFJk3xxqm7DyS+GDm5bb0xsGOflfAgTKxIfxMWsOquHJO8oAmDg57DS2O
- lOd5gVhWE33CpyLZ98lEY6XLD8VUMPfnergrf924inK2Y0VoOUDpqLwrNon8BZkDdz3+RZ
- yX47Hb4PiDkN+/QsBNEh9UPVPiX3u0mN3awXLTF4/59iOyWlV4bQiBwP1s4Iy1rkRwPWcl
- 0sRWk8UdH9fpJKD4wOajIaX4OIEMEwGSfYibyYvgtipQmWu1nChRU0L9O3ofQCESFnO2r0
- /O1UWsUyXWAh1MgcFvs4LyhV7tN+dM6a3oK2zVsEshW1p5maB74zT8l4pFyB8w==
+ bh=fVhW8KAVATdE5OfIFLDkUDKtiJTirmfoZAw4dLuU/10=;
+ b=RSaEHbjLpnFji4hz+Yy4c8bqEMxRRjqZmMzNy+AsOAmz7haEpvScma2J862+aoSt0Jx/fP
+ wpEZ+m8CFz87Kms6JDCsSXqlUYZRurteUMJFTFx70vJA7FUDukHRSRbiN2HDQup3j0fQ3p
+ /eGjZPH40K//Odahljcf5ldDXbN8qqgBwFjJA35ecwN1YGnp4feI3LppSIVBNHUHZKgejP
+ gko7AY5/4LhNw2+mzjbusGmail/fwVNjbKC0AQ8pOqtbOKBUIqXP48nAHDhE8odchS6+r8
+ NPJeA/Ftnj+6dYgmmZjy2mywn3wwhVlETbtZA+kA82uPSz1OkvV+5fPeO6WKYQ==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1598443261;
+ s=2020e; t=1598443276;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=6S+VPwjCO4/0/sg5O/D8yGF7mUxRzB6iCmAEo7WLFeY=;
- b=X+rqdbCzEwcm50ULD6Yd1kuRe0Xhd7Md4D5DV2hlhjFcxaDeRH1iXqy0ovLxzi9/fl9LUK
- RmgSqOyBQ/HmJiAQ==
-Date: Wed, 26 Aug 2020 13:16:33 +0200
+ bh=fVhW8KAVATdE5OfIFLDkUDKtiJTirmfoZAw4dLuU/10=;
+ b=ZWD1CYotXnOjjXp+138Tk20c5w43RAEe9EOJjlrH+LlQz81yGpSUwNDWRKCxwEqnBM92DI
+ BqABSllW7MPHyeCQ==
+Date: Wed, 26 Aug 2020 13:16:45 +0200
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
@@ -78,8 +79,7 @@ Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
  Alex Williamson <alex.williamson@redhat.com>,
  Jacob Pan <jacob.jun.pan@intel.com>, Baolu Lu <baolu.lu@intel.com>,
  Kevin Tian <kevin.tian@intel.com>, Dan Williams <dan.j.williams@intel.com>
-Subject: [patch V2 05/46] x86/msi: Move compose message callback where it
- belongs
+Subject: [patch V2 17/46] PCI/MSI: Rework pci_msi_domain_calc_hwirq()
 References: <20200826111628.794979401@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -97,104 +97,73 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Composing the MSI message at the MSI chip level is wrong because the
-underlying parent domain is the one which knows how the message should be
-composed for the direct vector delivery or the interrupt remapping table
-entry.
+From: Thomas Gleixner <tglx@linutronix.de>
 
-The interrupt remapping aware PCI/MSI chip does that already. Make the
-direct delivery chip do the same and move the composition of the direct
-delivery MSI message to the vector domain irq chip.
-
-This prepares for the upcoming device MSI support to avoid having
-architecture specific knowledge in the device MSI domain irq chips.
+Retrieve the PCI device from the msi descriptor instead of doing so at the
+call sites.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+Acked-by: Bjorn Helgaas <bhelgaas@google.com>
 ---
-V2: New patch
+V2: Address Bjorns comments (subject prefix, pdev/dev)
 ---
- arch/x86/include/asm/apic.h   |    8 ++++++++
- arch/x86/kernel/apic/msi.c    |   12 +++---------
- arch/x86/kernel/apic/vector.c |    1 +
- 3 files changed, 12 insertions(+), 9 deletions(-)
+ arch/x86/kernel/apic/msi.c |    2 +-
+ drivers/pci/msi.c          |    9 ++++-----
+ include/linux/msi.h        |    3 +--
+ 3 files changed, 6 insertions(+), 8 deletions(-)
 
---- a/arch/x86/include/asm/apic.h
-+++ b/arch/x86/include/asm/apic.h
-@@ -519,6 +519,14 @@ static inline bool apic_id_is_primary_th
- static inline void apic_smt_update(void) { }
- #endif
- 
-+struct msi_msg;
-+
-+#ifdef CONFIG_PCI_MSI
-+void x86_vector_msi_compose_msg(struct irq_data *data, struct msi_msg *msg);
-+#else
-+# define x86_vector_msi_compose_msg NULL
-+#endif
-+
- extern void ioapic_zap_locks(void);
- 
- #endif /* _ASM_X86_APIC_H */
 --- a/arch/x86/kernel/apic/msi.c
 +++ b/arch/x86/kernel/apic/msi.c
-@@ -45,7 +45,7 @@ static void __irq_msi_compose_msg(struct
- 		MSI_DATA_VECTOR(cfg->vector);
- }
+@@ -232,7 +232,7 @@ EXPORT_SYMBOL_GPL(pci_msi_prepare);
  
--static void irq_msi_compose_msg(struct irq_data *data, struct msi_msg *msg)
-+void x86_vector_msi_compose_msg(struct irq_data *data, struct msi_msg *msg)
+ void pci_msi_set_desc(msi_alloc_info_t *arg, struct msi_desc *desc)
  {
- 	__irq_msi_compose_msg(irqd_cfg(data), msg);
+-	arg->msi_hwirq = pci_msi_domain_calc_hwirq(arg->msi_dev, desc);
++	arg->msi_hwirq = pci_msi_domain_calc_hwirq(desc);
  }
-@@ -177,7 +177,6 @@ static struct irq_chip pci_msi_controlle
- 	.irq_mask		= pci_msi_mask_irq,
- 	.irq_ack		= irq_chip_ack_parent,
- 	.irq_retrigger		= irq_chip_retrigger_hierarchy,
--	.irq_compose_msi_msg	= irq_msi_compose_msg,
- 	.irq_set_affinity	= msi_set_affinity,
- 	.flags			= IRQCHIP_SKIP_SET_WAKE,
- };
-@@ -321,7 +320,6 @@ static struct irq_chip dmar_msi_controll
- 	.irq_ack		= irq_chip_ack_parent,
- 	.irq_set_affinity	= msi_domain_set_affinity,
- 	.irq_retrigger		= irq_chip_retrigger_hierarchy,
--	.irq_compose_msi_msg	= irq_msi_compose_msg,
- 	.irq_write_msi_msg	= dmar_msi_write_msg,
- 	.flags			= IRQCHIP_SKIP_SET_WAKE,
- };
-@@ -419,7 +417,6 @@ static struct irq_chip hpet_msi_controll
- 	.irq_ack = irq_chip_ack_parent,
- 	.irq_set_affinity = msi_domain_set_affinity,
- 	.irq_retrigger = irq_chip_retrigger_hierarchy,
--	.irq_compose_msi_msg = irq_msi_compose_msg,
- 	.irq_write_msi_msg = hpet_msi_write_msg,
- 	.flags = IRQCHIP_SKIP_SET_WAKE,
- };
-@@ -479,13 +476,10 @@ struct irq_domain *hpet_create_irq_domai
- 	info.type = X86_IRQ_ALLOC_TYPE_HPET;
- 	info.hpet_id = hpet_id;
- 	parent = irq_remapping_get_ir_irq_domain(&info);
--	if (parent == NULL) {
-+	if (parent == NULL)
- 		parent = x86_vector_domain;
--	} else {
-+	else
- 		hpet_msi_controller.name = "IR-HPET-MSI";
--		/* Temporary fix: Will go away */
--		hpet_msi_controller.irq_compose_msi_msg = NULL;
--	}
+ EXPORT_SYMBOL_GPL(pci_msi_set_desc);
  
- 	fn = irq_domain_alloc_named_id_fwnode(hpet_msi_controller.name,
- 					      hpet_id);
---- a/arch/x86/kernel/apic/vector.c
-+++ b/arch/x86/kernel/apic/vector.c
-@@ -823,6 +823,7 @@ static struct irq_chip lapic_controller
- 	.name			= "APIC",
- 	.irq_ack		= apic_ack_edge,
- 	.irq_set_affinity	= apic_set_affinity,
-+	.irq_compose_msi_msg	= x86_vector_msi_compose_msg,
- 	.irq_retrigger		= apic_retrigger_irq,
- };
+--- a/drivers/pci/msi.c
++++ b/drivers/pci/msi.c
+@@ -1346,14 +1346,14 @@ void pci_msi_domain_write_msg(struct irq
  
+ /**
+  * pci_msi_domain_calc_hwirq - Generate a unique ID for an MSI source
+- * @dev:	Pointer to the PCI device
+  * @desc:	Pointer to the MSI descriptor
+  *
+  * The ID number is only used within the irqdomain.
+  */
+-irq_hw_number_t pci_msi_domain_calc_hwirq(struct pci_dev *dev,
+-					  struct msi_desc *desc)
++irq_hw_number_t pci_msi_domain_calc_hwirq(struct msi_desc *desc)
+ {
++	struct pci_dev *dev = msi_desc_to_pci_dev(desc);
++
+ 	return (irq_hw_number_t)desc->msi_attrib.entry_nr |
+ 		pci_dev_id(dev) << 11 |
+ 		(pci_domain_nr(dev->bus) & 0xFFFFFFFF) << 27;
+@@ -1406,8 +1406,7 @@ static void pci_msi_domain_set_desc(msi_
+ 				    struct msi_desc *desc)
+ {
+ 	arg->desc = desc;
+-	arg->hwirq = pci_msi_domain_calc_hwirq(msi_desc_to_pci_dev(desc),
+-					       desc);
++	arg->hwirq = pci_msi_domain_calc_hwirq(desc);
+ }
+ #else
+ #define pci_msi_domain_set_desc		NULL
+--- a/include/linux/msi.h
++++ b/include/linux/msi.h
+@@ -369,8 +369,7 @@ void pci_msi_domain_write_msg(struct irq
+ struct irq_domain *pci_msi_create_irq_domain(struct fwnode_handle *fwnode,
+ 					     struct msi_domain_info *info,
+ 					     struct irq_domain *parent);
+-irq_hw_number_t pci_msi_domain_calc_hwirq(struct pci_dev *dev,
+-					  struct msi_desc *desc);
++irq_hw_number_t pci_msi_domain_calc_hwirq(struct msi_desc *desc);
+ int pci_msi_domain_check_cap(struct irq_domain *domain,
+ 			     struct msi_domain_info *info, struct device *dev);
+ u32 pci_msi_domain_get_msi_rid(struct irq_domain *domain, struct pci_dev *pdev);
 
 
