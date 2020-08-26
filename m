@@ -7,54 +7,54 @@ X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 280E0C433ED
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 198B3C433E1
 	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:06:50 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E426020897
+	by mail.kernel.org (Postfix) with ESMTPS id D920B2087C
 	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:06:49 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="H5ct7yxy";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="IbCUcGl7"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E426020897
+	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="0jSenzh6";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="C8u5XcoT"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D920B2087C
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kAuCN-0001tX-2M; Wed, 26 Aug 2020 12:06:39 +0000
+	id 1kAuCP-0001xP-0i; Wed, 26 Aug 2020 12:06:41 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=LG6r=CE=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1kAu93-000821-AJ
- for xen-devel@lists.xenproject.org; Wed, 26 Aug 2020 12:03:13 +0000
-X-Inumbo-ID: 33136824-7f93-4517-bd15-6650aa9da21e
-Received: from galois.linutronix.de (unknown [193.142.43.55])
+ id 1kAu8K-000821-8l
+ for xen-devel@lists.xenproject.org; Wed, 26 Aug 2020 12:02:28 +0000
+X-Inumbo-ID: c5529d7f-828c-4163-a30c-032915d624ae
+Received: from galois.linutronix.de (unknown [2a0a:51c0:0:12e:550::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 33136824-7f93-4517-bd15-6650aa9da21e;
- Wed, 26 Aug 2020 12:01:44 +0000 (UTC)
-Message-Id: <20200826112334.493642963@linutronix.de>
+ id c5529d7f-828c-4163-a30c-032915d624ae;
+ Wed, 26 Aug 2020 12:01:28 +0000 (UTC)
+Message-Id: <20200826112333.234097629@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1598443303;
+ s=2020; t=1598443287;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=Jbe7LG9G4Zvu5BS675dx2ovvPd7Zs7K+V3j/Ww3fTeI=;
- b=H5ct7yxyfPkw9COn6I7pDw6V1ilNzNBmxLT5gZpiqG5VFJDTYIRVrKS9MvIkCv/cVCNxwb
- 9rABWH11GRrt/F1XhhSDp0w0Wy41gVFSZzn9pQiNTcHs+63DsMc+BAwMYNXNq+QlX8TbDd
- 4nuvxxC6zG54EVKX1tE1lNMYsndx6DnV51i+GGKczVfx6JZBYjHMTx3ogkXMbyFmrmgHIh
- /Vtqytt4cTeGvYKfsbOypaBGU6hCS9jWwmQ59jHoutngqHxs7Z7hy9qB5xiKsaUmM/tmYI
- M4N9kw88/wBcNGfGIXWdqU/EB32+w2yt5iCXEHIfU/0M3jstk1ercqpAR2sL5A==
+ bh=s4SeYBthv8w4UR8KrcCzunKzBoXJmS11W4/9Ii+wPwg=;
+ b=0jSenzh6VMcbo5+9rHYdiJaVUtSyatLMPnP8UId36opBJ9reS21zWdvIP9laqMLP72TxHN
+ qJyfblVrn8J8N517J1EWmCfktvN/NZ1CtZN8nlF7bZid5zFAegxBMcdfQHQgHC+Gp90H7n
+ 9sESDryS5HzKppZp1LW/c/8dAAsikLDjI2lZJqftZV6DBFcT+b9vqq03XohIEfOcxWc38J
+ 6ES89Am49KT0SjmgVddjV0/u3LM1wfI75S6yDON/Jm2XufuKdlV2oFDfwlySAbkxdY492a
+ CHmqsE5ke05SYtf5Cmr0DlQ88El+cd+cFGaXihvD7PXFoDTGLuoQC9YRKVzlDw==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1598443303;
+ s=2020e; t=1598443287;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=Jbe7LG9G4Zvu5BS675dx2ovvPd7Zs7K+V3j/Ww3fTeI=;
- b=IbCUcGl7XvQeZPqcjY0sMmXx+SATO7tqwsqpLLv6njqYgigJNA52AxgTU6srAQXn4Ie9po
- 9VYvOCbhOnB1xaDg==
-Date: Wed, 26 Aug 2020 13:17:07 +0200
+ bh=s4SeYBthv8w4UR8KrcCzunKzBoXJmS11W4/9Ii+wPwg=;
+ b=C8u5XcoTZYCozPWWBT669Nb/bz2gzhwadoicELlzkl29EJb0qX+wUaZv2O6m5j6Ql9skbp
+ WYNcQvMK17AqSGCQ==
+Date: Wed, 26 Aug 2020 13:16:54 +0200
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
@@ -78,7 +78,8 @@ Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
  Alex Williamson <alex.williamson@redhat.com>,
  Jacob Pan <jacob.jun.pan@intel.com>, Baolu Lu <baolu.lu@intel.com>,
  Kevin Tian <kevin.tian@intel.com>, Dan Williams <dan.j.williams@intel.com>
-Subject: [patch V2 39/46] x86/irq: Add DEV_MSI allocation type
+Subject: [patch V2 26/46] x86/xen: Make xen_msi_init() static and rename it to
+ xen_hvm_msi_init()
 References: <20200826111628.794979401@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -98,25 +99,36 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-For the upcoming device MSI support a new allocation type is
-required.
+The only user is in the same file and the name is too generic because this
+function is only ever used for HVM domains.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+Reviewed-by: Juergen Gross<jgross@suse.com>
+
 
 ---
- arch/x86/include/asm/hw_irq.h |    1 +
- 1 file changed, 1 insertion(+)
+ arch/x86/pci/xen.c |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
---- a/arch/x86/include/asm/hw_irq.h
-+++ b/arch/x86/include/asm/hw_irq.h
-@@ -40,6 +40,7 @@ enum irq_alloc_type {
- 	X86_IRQ_ALLOC_TYPE_PCI_MSIX,
- 	X86_IRQ_ALLOC_TYPE_DMAR,
- 	X86_IRQ_ALLOC_TYPE_UV,
-+	X86_IRQ_ALLOC_TYPE_DEV_MSI,
- 	X86_IRQ_ALLOC_TYPE_IOAPIC_GET_PARENT,
- 	X86_IRQ_ALLOC_TYPE_HPET_GET_PARENT,
- };
-
+--- a/arch/x86/pci/xen.c
++++ b/arch/x86/pci/xen.c
+@@ -420,7 +420,7 @@ int __init pci_xen_init(void)
+ }
+ 
+ #ifdef CONFIG_PCI_MSI
+-void __init xen_msi_init(void)
++static void __init xen_hvm_msi_init(void)
+ {
+ 	if (!disable_apic) {
+ 		/*
+@@ -460,7 +460,7 @@ int __init pci_xen_hvm_init(void)
+ 	 * We need to wait until after x2apic is initialized
+ 	 * before we can set MSI IRQ ops.
+ 	 */
+-	x86_platform.apic_post_init = xen_msi_init;
++	x86_platform.apic_post_init = xen_hvm_msi_init;
+ #endif
+ 	return 0;
+ }
 
 
