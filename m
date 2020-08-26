@@ -7,54 +7,54 @@ X-Spam-Status: No, score=-4.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,UNWANTED_LANGUAGE_BODY autolearn=no
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 621D8C433EB
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2A4A2C433E5
 	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:06:48 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 228E220897
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:06:48 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id D84FE2087C
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:06:47 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="PTt2WU+p";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="hYGth7cW"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 228E220897
+	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="zyVd7NX6";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="+iA+4gTK"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D84FE2087C
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kAuCL-0001pi-1O; Wed, 26 Aug 2020 12:06:37 +0000
+	id 1kAuCI-0001ko-Ek; Wed, 26 Aug 2020 12:06:34 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=LG6r=CE=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1kAu98-000821-Ad
- for xen-devel@lists.xenproject.org; Wed, 26 Aug 2020 12:03:18 +0000
-X-Inumbo-ID: 0108ecbe-a027-4bda-9954-6bfab1d6391f
-Received: from galois.linutronix.de (unknown [193.142.43.55])
+ id 1kAu9X-000821-Bh
+ for xen-devel@lists.xenproject.org; Wed, 26 Aug 2020 12:03:43 +0000
+X-Inumbo-ID: f52c4b13-a569-4264-9f64-6833e359c38b
+Received: from galois.linutronix.de (unknown [2a0a:51c0:0:12e:550::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 0108ecbe-a027-4bda-9954-6bfab1d6391f;
- Wed, 26 Aug 2020 12:01:45 +0000 (UTC)
-Message-Id: <20200826112334.586607694@linutronix.de>
+ id f52c4b13-a569-4264-9f64-6833e359c38b;
+ Wed, 26 Aug 2020 12:01:53 +0000 (UTC)
+Message-Id: <20200826112335.202234502@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1598443304;
+ s=2020; t=1598443312;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=g7DHu3XlO4NZfG0CcnfSe2nwDNXDP3IAgVMt5hiACQA=;
- b=PTt2WU+p6zfz7V88lwJVqTwKEg75IwWC26uLjCoB9s/z9UAd0TkEUOZ29RhZSGDO4s3LOi
- bWPe6BJss0s4Ns1yLeFAgNOc5kWjLQw1+huLXBQRR9pOr6VS3DjkLaPR3gx695JvZFRGPN
- En9NsVjd9FecoDtv0u4frlgP+v7D/t2xuKziRMpn9XqtIdL0sjURRpLET4mgv0udxEETYE
- GaN+Qses8Rv474fclMJB//XWzf2HncjF0i5g/Qw7CjiFd5h0+jF8DG8xK5sIHAMdU5yrRE
- vD0QCxdXrEKE65c7LfAR1Pxge+I/whZ4NQS8h5pH4PhABIuN8WTZGc60QxJZ2Q==
+ bh=uPQqEgGFOe4cl6XAlfv+gagaLsuiNZm2NWUpf1sogAY=;
+ b=zyVd7NX6ttwVL4AxLaDbK+42XmkO5hSjdZ+yHCJtQTRzO5BkPhQ0siM+olIZkmvOtlPyR5
+ qoIdRg7v+ZoUpI6Garx+ZUpueZPO3JuVdeLVi8onnz1vkzHUrM9oVExcVgJjGAAYHHKghw
+ bC6iDtRAwu27SbvZwNdlbpL5PtqT9hq8Jpoxs6aPmfa4/H297Vm4iPn23gYPm78j3yePHh
+ XFPIDXpGksQvfO0bU87Jr0bwWCqGCxHKoRP+2fqfCh3pKYt5LBO9Pd2pQSLB0mcyWe/5i3
+ dqtZ8CVnIqGLUUO9SMTgOUtJqC93FlQCDOvNJhJwi5GFSuFX686Z2haE0N+grg==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1598443304;
+ s=2020e; t=1598443312;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=g7DHu3XlO4NZfG0CcnfSe2nwDNXDP3IAgVMt5hiACQA=;
- b=hYGth7cWR27j87vnhr4XR39L/vq8tfhYbawC3DI7EzPmHFEZUwzddGvwlgUEiukU3rRaF1
- Tuq8dUB9v4Yo85Cw==
-Date: Wed, 26 Aug 2020 13:17:08 +0200
+ bh=uPQqEgGFOe4cl6XAlfv+gagaLsuiNZm2NWUpf1sogAY=;
+ b=+iA+4gTK4+hVCN7IQ5xXgQsk1j5xKpfs62FvyLwf2zKAjL323xaFNOuSL/nz/DvdzDwINe
+ r57s9BG+f4uFPZDg==
+Date: Wed, 26 Aug 2020 13:17:14 +0200
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
@@ -78,8 +78,8 @@ Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
  Alex Williamson <alex.williamson@redhat.com>,
  Jacob Pan <jacob.jun.pan@intel.com>, Baolu Lu <baolu.lu@intel.com>,
  Kevin Tian <kevin.tian@intel.com>, Dan Williams <dan.j.williams@intel.com>
-Subject: [patch V2 40/46] x86/msi: Rename and rework pci_msi_prepare() to
- cover non-PCI MSI
+Subject: [patch V2 46/46] irqchip: Add IMS (Interrupt Message Storm) driver -
+ NOT FOR MERGING
 References: <20200826111628.794979401@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -97,110 +97,507 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: Thomas Gleixner <tglx@linutronix.de>
+Generic IMS irq chips and irq domain implementations for IMS based devices
+in both variants:
 
-Rename it to x86_msi_prepare() and handle the allocation type setup
-depending on the device type.
+   - Message store in an array in device memory
+   - Message store in system RAM (part of queue memory)
 
-Add a new arch_msi_prepare define which will be utilized by the upcoming
-device MSI support. Define it to NULL if not provided by an architecture in
-the generic MSI header.
-
-One arch specific function for MSI support is truly enough.
+Allocation and freeing of interrupts happens via the generic
+msi_domain_alloc/free_irqs() interface. No special purpose IMS magic
+required as long as the interrupt domain is stored in the underlying device
+struct.
+                                                                                                                                                                                                                                                                               
+Completely untested of course and mostly for illustration and educational
+purpose. This should of course be a modular irq chip, but adding that
+support is left as an exercise for the people who care about this deeply.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 ---
-V2: Polish subject line
+V2: Reworked to handle both devmem arrays and queue based storage.
 ---
- arch/x86/include/asm/msi.h          |    4 +++-
- arch/x86/kernel/apic/msi.c          |   27 ++++++++++++++++++++-------
- drivers/pci/controller/pci-hyperv.c |    2 +-
- include/linux/msi.h                 |    4 ++++
- 4 files changed, 28 insertions(+), 9 deletions(-)
+ drivers/irqchip/Kconfig             |   19 +
+ drivers/irqchip/Makefile            |    1 
+ drivers/irqchip/irq-ims-msi.c       |  343 ++++++++++++++++++++++++++++++++++++
+ include/linux/irqchip/irq-ims-msi.h |   95 +++++++++
+ 4 files changed, 458 insertions(+)
 
---- a/arch/x86/include/asm/msi.h
-+++ b/arch/x86/include/asm/msi.h
-@@ -6,7 +6,9 @@
+--- a/drivers/irqchip/Kconfig
++++ b/drivers/irqchip/Kconfig
+@@ -571,4 +571,23 @@ config LOONGSON_PCH_MSI
+ 	help
+ 	  Support for the Loongson PCH MSI Controller.
  
- typedef struct irq_alloc_info msi_alloc_info_t;
- 
--int pci_msi_prepare(struct irq_domain *domain, struct device *dev, int nvec,
-+int x86_msi_prepare(struct irq_domain *domain, struct device *dev, int nvec,
- 		    msi_alloc_info_t *arg);
- 
-+#define arch_msi_prepare		x86_msi_prepare
++config IMS_MSI
++	depends on PCI
++	select DEVICE_MSI
++	bool
 +
- #endif /* _ASM_X86_MSI_H */
---- a/arch/x86/kernel/apic/msi.c
-+++ b/arch/x86/kernel/apic/msi.c
-@@ -181,26 +181,39 @@ static struct irq_chip pci_msi_controlle
- 	.flags			= IRQCHIP_SKIP_SET_WAKE,
- };
- 
--int pci_msi_prepare(struct irq_domain *domain, struct device *dev, int nvec,
--		    msi_alloc_info_t *arg)
-+static void pci_msi_prepare(struct device *dev, msi_alloc_info_t *arg)
- {
--	struct pci_dev *pdev = to_pci_dev(dev);
--	struct msi_desc *desc = first_pci_msi_entry(pdev);
-+	struct msi_desc *desc = first_msi_entry(dev);
- 
--	init_irq_alloc_info(arg, NULL);
- 	if (desc->msi_attrib.is_msix) {
- 		arg->type = X86_IRQ_ALLOC_TYPE_PCI_MSIX;
- 	} else {
- 		arg->type = X86_IRQ_ALLOC_TYPE_PCI_MSI;
- 		arg->flags |= X86_IRQ_ALLOC_CONTIGUOUS_VECTORS;
- 	}
++config IMS_MSI_ARRAY
++	bool "IMS Interrupt Message Storm MSI controller for device memory storage arrays"
++	select IMS_MSI
++	help
++	  Support for IMS Interrupt Message Storm MSI controller
++	  with IMS slot storage in a slot array in device memory
++
++config IMS_MSI_QUEUE
++	bool "IMS Interrupt Message Storm MSI controller for IMS queue storage"
++	select IMS_MSI
++	help
++	  Support for IMS Interrupt Message Storm MSI controller
++	  with IMS slot storage in the queue storage of a device
++
+ endmenu
+--- a/drivers/irqchip/Makefile
++++ b/drivers/irqchip/Makefile
+@@ -111,3 +111,4 @@ obj-$(CONFIG_LOONGSON_HTPIC)		+= irq-loo
+ obj-$(CONFIG_LOONGSON_HTVEC)		+= irq-loongson-htvec.o
+ obj-$(CONFIG_LOONGSON_PCH_PIC)		+= irq-loongson-pch-pic.o
+ obj-$(CONFIG_LOONGSON_PCH_MSI)		+= irq-loongson-pch-msi.o
++obj-$(CONFIG_IMS_MSI)			+= irq-ims-msi.o
+--- /dev/null
++++ b/drivers/irqchip/irq-ims-msi.c
+@@ -0,0 +1,343 @@
++// SPDX-License-Identifier: GPL-2.0
++// (C) Copyright 2020 Thomas Gleixner <tglx@linutronix.de>
++/*
++ * Shared interrupt chips and irq domains for IMS devices
++ */
++#include <linux/device.h>
++#include <linux/slab.h>
++#include <linux/msi.h>
++#include <linux/irq.h>
++
++#include <linux/irqchip/irq-ims-msi.h>
++
++#ifdef CONFIG_IMS_ARRAY
++
++struct ims_array_data {
++	struct ims_array_info	info;
++	unsigned long		map[0];
++};
++
++static void ims_array_mask_irq(struct irq_data *data)
++{
++	struct msi_desc *desc = irq_data_get_msi_desc(data);
++	struct ims_slot __iomem *slot = desc->device_msi.priv_iomem;
++	u32 __iomem *ctrl = &slot->ctrl;
++
++	iowrite32(ioread32(ctrl) & ~IMS_VECTOR_CTRL_UNMASK, ctrl);
 +}
 +
-+static void dev_msi_prepare(struct device *dev, msi_alloc_info_t *arg)
++static void ims_array_unmask_irq(struct irq_data *data)
 +{
-+	arg->type = X86_IRQ_ALLOC_TYPE_DEV_MSI;
++	struct msi_desc *desc = irq_data_get_msi_desc(data);
++	struct ims_slot __iomem *slot = desc->device_msi.priv_iomem;
++	u32 __iomem *ctrl = &slot->ctrl;
++
++	iowrite32(ioread32(ctrl) | IMS_VECTOR_CTRL_UNMASK, ctrl);
 +}
 +
-+int x86_msi_prepare(struct irq_domain *domain, struct device *dev, int nvec,
-+		    msi_alloc_info_t *arg)
++static void ims_array_write_msi_msg(struct irq_data *data, struct msi_msg *msg)
 +{
-+	init_irq_alloc_info(arg, NULL);
++	struct msi_desc *desc = irq_data_get_msi_desc(data);
++	struct ims_slot __iomem *slot = desc->device_msi.priv_iomem;
 +
-+	if (dev_is_pci(dev))
-+		pci_msi_prepare(dev, arg);
-+	else
-+		dev_msi_prepare(dev, arg);
- 
- 	return 0;
- }
--EXPORT_SYMBOL_GPL(pci_msi_prepare);
-+EXPORT_SYMBOL_GPL(x86_msi_prepare);
- 
- static struct msi_domain_ops pci_msi_domain_ops = {
--	.msi_prepare	= pci_msi_prepare,
-+	.msi_prepare	= x86_msi_prepare,
- };
- 
- static struct msi_domain_info pci_msi_domain_info = {
---- a/drivers/pci/controller/pci-hyperv.c
-+++ b/drivers/pci/controller/pci-hyperv.c
-@@ -1532,7 +1532,7 @@ static struct irq_chip hv_msi_irq_chip =
- };
- 
- static struct msi_domain_ops hv_msi_ops = {
--	.msi_prepare	= pci_msi_prepare,
-+	.msi_prepare	= arch_msi_prepare,
- 	.msi_free	= hv_msi_free,
- };
- 
---- a/include/linux/msi.h
-+++ b/include/linux/msi.h
-@@ -430,4 +430,8 @@ static inline struct irq_domain *pci_msi
- }
- #endif /* CONFIG_PCI_MSI_IRQ_DOMAIN */
- 
-+#ifndef arch_msi_prepare
-+# define arch_msi_prepare	NULL
++	iowrite32(msg->address_lo, &slot->address_lo);
++	iowrite32(msg->address_hi, &slot->address_hi);
++	iowrite32(msg->data, &slot->data);
++}
++
++static const struct irq_chip ims_array_msi_controller = {
++	.name			= "IMS",
++	.irq_mask		= ims_array_mask_irq,
++	.irq_unmask		= ims_array_unmask_irq,
++	.irq_write_msi_msg	= ims_array_write_msi_msg,
++	.irq_retrigger		= irq_chip_retrigger_hierarchy,
++	.flags			= IRQCHIP_SKIP_SET_WAKE,
++};
++
++static void ims_array_reset_slot(struct ims_slot __iomem *slot)
++{
++	iowrite32(0, &slot->address_lo);
++	iowrite32(0, &slot->address_hi);
++	iowrite32(0, &slot->data);
++	iowrite32(0, &slot->ctrl);
++}
++
++static void ims_array_free_msi_store(struct irq_domain *domain,
++				     struct device *dev)
++{
++	struct msi_domain_info *info = domain->host_data;
++	struct ims_array_data *ims = info->data;
++	struct msi_desc *entry;
++
++	for_each_msi_entry(entry, dev) {
++		if (entry->device_msi.priv_iomem) {
++			clear_bit(entry->device_msi.hwirq, ims->map);
++			ims_array_reset_slot(entry->device_msi.priv_iomem);
++			entry->device_msi.priv_iomem = NULL;
++			entry->device_msi.hwirq = 0;
++		}
++	}
++}
++
++static int ims_array_alloc_msi_store(struct irq_domain *domain,
++				     struct device *dev, int nvec)
++{
++	struct msi_domain_info *info = domain->host_data;
++	struct ims_array_data *ims = info->data;
++	struct msi_desc *entry;
++
++	for_each_msi_entry(entry, dev) {
++		unsigned int idx;
++
++		idx = find_first_zero_bit(ims->map, ims->info.max_slots);
++		if (idx >= ims->info.max_slots)
++			goto fail;
++		set_bit(idx, ims->map);
++		entry->device_msi.priv_iomem = &ims->info.slots[idx];
++		entry->device_msi.hwirq = idx;
++	}
++	return 0;
++
++fail:
++	ims_array_free_msi_store(domain, dev);
++	return -ENOSPC;
++}
++
++struct ims_domain_template {
++	struct msi_domain_ops	ops;
++	struct msi_domain_info	info;
++};
++
++static const struct ims_array_domain_template ims_array_domain_template = {
++	.ops = {
++		.msi_alloc_store	= ims_array_alloc_msi_store,
++		.msi_free_store		= ims_array_free_msi_store,
++	},
++	.info = {
++		.flags		= MSI_FLAG_USE_DEF_DOM_OPS |
++				  MSI_FLAG_USE_DEF_CHIP_OPS,
++		.handler	= handle_edge_irq,
++		.handler_name	= "edge",
++	},
++};
++
++struct irq_domain *
++pci_ims_array_create_msi_irq_domain(struct pci_dev *pdev,
++				    struct ims_array_info *ims_info)
++{
++	struct ims_domain_template *info;
++	struct ims_array_data *data;
++	struct irq_domain *domain;
++	struct irq_chip *chip;
++	unsigned int size;
++
++	/* Allocate new domain storage */
++	info = kmemdup(&ims_array_domain_template,
++		       sizeof(ims_array_domain_template), GFP_KERNEL);
++	if (!info)
++		return NULL;
++	/* Link the ops */
++	info->info.ops = &info->ops;
++
++	/* Allocate ims_info along with the bitmap */
++	size = sizeof(*data);
++	size += BITS_TO_LONGS(ims_info->max_slots) * sizeof(unsigned long);
++	data = kzalloc(size, GFP_KERNEL);
++	if (!data)
++		goto err_info;
++
++	data->info = *ims_info;
++	info->info.data = data;
++
++	/*
++	 * Allocate an interrupt chip because the core needs to be able to
++	 * update it with default callbacks.
++	 */
++	chip = kmemdup(&ims_array_msi_controller,
++		       sizeof(ims_array_msi_controller), GFP_KERNEL);
++	if (!chip)
++		goto err_data;
++	info->info.chip = chip;
++
++	domain = pci_subdevice_msi_create_irq_domain(pdev, &info->info);
++	if (!domain)
++		goto err_chip;
++
++	return domain;
++
++err_chip:
++	kfree(chip);
++err_data:
++	kfree(data);
++err_info:
++	kfree(info);
++	return NULL;
++}
++EXPORT_SYMBOL_GPL(pci_ims_array_create_msi_irq_domain);
++
++#endif /* CONFIG_IMS_ARRAY */
++
++#ifdef CONFIG_IMS_QUEUE
++
++static void ims_queue_mask_irq(struct irq_data *data)
++{
++	struct msi_desc *desc = irq_data_get_msi_desc(data);
++	struct ims_slot *slot = desc->device_msi.priv;
++
++	slot->ctrl &= ~IMS_VECTOR_CTRL_UNMASK;
++}
++
++static void ims_queue_unmask_irq(struct irq_data *data)
++{
++	struct msi_desc *desc = irq_data_get_msi_desc(data);
++	struct ims_slot *slot = desc->device_msi.priv;
++
++	slot->ctrl |= IMS_VECTOR_CTRL_UNMASK;
++}
++
++static void ims_queue_write_msi_msg(struct irq_data *data, struct msi_msg *msg)
++{
++	struct msi_desc *desc = irq_data_get_msi_desc(data);
++	struct ims_slot *slot = desc->device_msi.priv;
++
++	slot->address_lo = msg->address_lo;
++	slot->address_hi = msg->address_hi;
++	slot->data = msg->data;
++}
++
++static void ims_queue_lock(struct irq_data *data)
++{
++	struct ims_queue_info *ims = irq_data_get_chip_data(data);
++	struct msi_desc *desc = irq_data_get_msi_desc(data);
++
++	ims->queue_lock(desc->device_msi.priv);
++}
++
++static void ims_queue_sync_unlock(struct irq_data *data)
++{
++	struct ims_queue_info *ims = irq_data_get_chip_data(data);
++	struct msi_desc *desc = irq_data_get_msi_desc(data);
++
++	ims->queue_sync_unlock(desc->device_msi.priv);
++}
++
++static const struct irq_chip ims_queue_msi_controller = {
++	.name			= "IMS",
++	.irq_mask		= ims_queue_mask_irq,
++	.irq_unmask		= ims_queue_unmask_irq,
++	.irq_disable		= ims_queue_mask_irq,
++	.irq_enable		= ims_queue_unmask_irq,
++	.irq_write_msi_msg	= ims_queue_write_msi_msg,
++	.irq_retrigger		= irq_chip_retrigger_hierarchy,
++	.irq_bus_lock		= ims_queue_lock,
++	.irq_bus_sync_unlock	= ims_queue_sync_unlock,
++	.flags			= IRQCHIP_SKIP_SET_WAKE,
++};
++
++static void ims_queue_reset_slot(struct ims_slot *slot)
++{
++	memset(slot, 0, sizeof(*slot));
++}
++
++static void ims_queue_free_msi_store(struct irq_domain *domain, struct device *dev)
++{
++	struct msi_domain_info *info = domain->host_data;
++	struct ims_queue_info *ims = info->chip_data;
++	struct msi_desc *entry;
++
++	for_each_msi_entry(entry, dev) {
++		if (entry->device_msi.priv) {
++			ims_queue_reset_slot(entry->device_msi.priv);
++			entry->device_msi.priv = NULL;
++			entry->device_msi.hwirq = 0;
++		}
++	}
++}
++
++static int ims_queue_alloc_msi_store(struct irq_domain *domain,
++				     struct device *dev,
++				     int nvec)
++{
++	struct msi_domain_info *info = domain->host_data;
++	struct ims_queue_info *ims = info->chip_data;
++	struct msi_desc *entry;
++	struct ims_slot *slot;
++	int idx = 0;
++
++	for_each_msi_entry(entry, dev) {
++		slot = ims->queue_get_shadow(dev, idx);
++		if (!slot)
++			goto fail;
++		entry->device_msi.priv = slot;
++		entry->device_msi.hwirq = (dev->id << 16) | idx;
++		idx++;
++	}
++	return 0;
++
++fail:
++	ims_queue_free_msi_store(domain, dev);
++	return -ENOSPC;
++}
++
++struct ims_domain_template {
++	struct msi_domain_ops	ops;
++	struct msi_domain_info	info;
++};
++
++static const struct ims_queue_domain_template ims_queue_domain_template = {
++	.ops = {
++		.msi_alloc_store	= ims_queue_alloc_msi_store,
++		.msi_free_store		= ims_queue_free_msi_store,
++	},
++	.info = {
++		.flags		= MSI_FLAG_USE_DEF_DOM_OPS |
++				  MSI_FLAG_USE_DEF_CHIP_OPS,
++		.handler	= handle_edge_irq,
++		.handler_name	= "edge",
++	},
++};
++
++struct irq_domain *
++pci_ims_queue_create_msi_irq_domain(struct pci_dev *pdev,
++				    struct ims_queue_info *ims_info)
++{
++	struct ims_domain_template *info;
++	struct irq_domain *domain;
++	struct irq_chip *chip;
++	unsigned int size;
++
++	/* Allocate new domain storage */
++	info = kmemdup(&ims_queue_domain_template,
++			  sizeof(ims_queue_domain_template), GFP_KERNEL);
++	if (!info)
++		return NULL;
++	/* Link the ops */
++	info->info.ops = &info->ops;
++
++	info->info.chip_data = ims_info;
++
++	/*
++	 * Allocate an interrupt chip because the core needs to be able to
++	 * update it with default callbacks.
++	 */
++	chip = kmemdup(&ims_queue_msi_controller,
++		       sizeof(ims_queue_msi_controller), GFP_KERNEL);
++	if (!chip)
++		goto err_info;
++	info->info.chip = chip;
++
++	domain = pci_subdevice_msi_create_irq_domain(pdev, &info->info);
++	if (!domain)
++		goto err_chip;
++
++	return domain;
++
++err_chip:
++	kfree(chip);
++err_info:
++	kfree(info);
++	return NULL;
++}
++EXPORT_SYMBOL_GPL(pci_ims_queue_create_msi_irq_domain);
++
++#endif /* CONFIG_IMS_ARRAY */
+--- /dev/null
++++ b/include/linux/irqchip/irq-ims-msi.h
+@@ -0,0 +1,95 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/* (C) Copyright 2020 Thomas Gleixner <tglx@linutronix.de> */
++
++#ifndef _LINUX_IRQCHIP_IRQ_IMS_MSI_H
++#define _LINUX_IRQCHIP_IRQ_IMS_MSI_H
++
++#include <linux/types.h>
++
++/**
++ * ims_hw_slot - The hardware layout of an IMS based MSI message
++ * @address_lo:	Lower 32bit address
++ * @address_hi:	Upper 32bit address
++ * @data:	Message data
++ * @ctrl:	Control word
++ *
++ * This structure is used by both the device memory array and the queue
++ * memory variants of IMS.
++ */
++struct ims_slot {
++	u32	address_lo;
++	u32	address_hi;
++	u32	data;
++	u32	ctrl;
++} __packed;
++
++/* Bit to unmask the interrupt in ims_hw_slot::ctrl */
++#define IMS_VECTOR_CTRL_UNMASK	0x01
++
++/**
++ * struct ims_array_info - Information to create an IMS array domain
++ * @slots:	Pointer to the start of the array
++ * @max_slots:	Maximum number of slots in the array
++ */
++struct ims_array_info {
++	struct ims_slot		__iomem *slots;
++	unsigned int		max_slots;
++};
++
++/**
++ * ims_queue_info - Information to create an IMS queue domain
++ * @queue_lock:		Callback which informs the device driver that
++ *			an interrupt management operation starts.
++ * @queue_sync_unlock:	Callback which informs the device driver that an
++ *			interrupt management operation ends.
++
++ * @queue_get_shadow:   Callback to retrieve te shadow storage for a MSI
++ *			entry associated to a queue. The queue is
++ *			identified by the device struct which is used for
++ *			allocating interrupts and the msi entry index.
++ *
++ * @queue_lock() and @queue_sync_unlock() are only called for management
++ * operations on a particular interrupt: request, free, enable, disable,
++ * affinity setting.  These functions are never called from atomic context,
++ * like low level interrupt handling code. The purpose of these functions
++ * is to signal the device driver the start and end of an operation which
++ * affects the IMS queue shadow state. @queue_lock() allows the driver to
++ * do preperatory work, e.g. locking. Note, that @queue_lock() has to
++ * preserve the sleepable state on return. That means the driver cannot
++ * disable preemption and (soft)interrupts in @queue_lock and then undo
++ * that operation in @queue_sync_unlock() which restricts the lock types
++ * for eventual serialization of these operations to sleepable locks. Of
++ * course the driver can disable preemption and (soft)interrupts
++ * temporarily for internal work.
++ *
++ * On @queue_sync_unlock() the driver has to check whether the shadow state
++ * changed and issue a command to update the hardware state and wait for
++ * the command to complete. If the command fails or times out then the
++ * driver has to take care of the resulting mess as this is called from
++ * functions which have no return value and none of the callers can deal
++ * with the failure. The lock which is used by the driver to protect a
++ * operation sequence must obviously not be released before the command
++ * completes or fails. Otherwise new operations on the same interrupt line
++ * could take place and change the shadow state before the driver was able
++ * to compose the command.
++ *
++ * The serialization is not provided by the common interrupt chip and also
++ * not by the core code to let the driver decide about the granularity of
++ * the locking and the lock type.
++ */
++struct ims_queue_info {
++	void		(*queue_lock)(struct ims_slot *shadow);
++	void		(*queue_sync_unlock)(struct ims_slot *shadow);
++	struct ims_slot	*(*queue_get_shadow)(struct device *dev, unsigned int msi_index);
++};
++
++struct pci_dev;
++struct irq_domain;
++
++struct irq_domain *pci_ims_array_create_msi_irq_domain(struct pci_dev *pdev,
++						       struct ims_array_info *ims_info);
++
++struct irq_domain *pci_ims_queue_create_msi_irq_domain(struct pci_dev *pdev,
++						       struct ims_queue_info *ims_info);
++
 +#endif
-+
- #endif /* LINUX_MSI_H */
 
 
