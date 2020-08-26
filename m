@@ -2,69 +2,87 @@ Return-Path: <SRS0=oDxe=CE=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.5 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4E72FC433E1
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 11:18:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D34DFC433E1
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:01:17 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2714E20786
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 11:18:13 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2714E20786
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id A693520786
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:01:17 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="UoGPFS/7";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="sUrBzRDj"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A693520786
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kAtQx-0003tY-Mv; Wed, 26 Aug 2020 11:17:39 +0000
+	id 1kAu6y-00082s-BT; Wed, 26 Aug 2020 12:01:04 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=vb2W=CE=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kAtQw-0003tT-Eb
- for xen-devel@lists.xenproject.org; Wed, 26 Aug 2020 11:17:38 +0000
-X-Inumbo-ID: e253d914-5f07-46ee-a81f-48319aad57f7
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=LG6r=CE=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
+ id 1kAu6x-000821-5a
+ for xen-devel@lists.xenproject.org; Wed, 26 Aug 2020 12:01:03 +0000
+X-Inumbo-ID: 391fc6a6-481b-4f8c-a10b-b400a91951a7
+Received: from galois.linutronix.de (unknown [193.142.43.55])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id e253d914-5f07-46ee-a81f-48319aad57f7;
- Wed, 26 Aug 2020 11:17:37 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 960A7B1BE;
- Wed, 26 Aug 2020 11:18:07 +0000 (UTC)
-Subject: Re: [PATCH] libxl: avoid golang building without CONFIG_GOLANG=y
-To: George Dunlap <George.Dunlap@citrix.com>
-Cc: Nick Rosbrook <rosbrookn@gmail.com>, Wei Liu <wl@xen.org>,
- Anthony Perard <anthony.perard@citrix.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Ian Jackson <Ian.Jackson@citrix.com>
-References: <e8dd70a7-bdde-e12a-3f4d-f52e58016234@suse.com>
- <20200804141639.k2tpoqy7jj34gcm6@liuwe-devbox-debian-v2>
- <CAEBZRSf4opmGw2fDOCOMZLTtjisFXaP=Oe9aD6E2fTfUs2YFQQ@mail.gmail.com>
- <0deed4c6-ca87-09d3-a19c-ac0c00003cb7@suse.com>
- <20200804155043.vq7aupbrvmmcgzlv@liuwe-devbox-debian-v2>
- <12790d2b-020d-b6fe-4924-2233a4e93d83@suse.com>
- <20200804155707.rrtzkksrle2nojbj@liuwe-devbox-debian-v2>
- <43f706e4-0292-5758-eb19-9fbb99b1337e@suse.com>
- <CAEBZRSc=xUjYq7ao9Rv-EEJsjiBkt5mio5QofvixErZj_SJUcw@mail.gmail.com>
- <289981a3-9baf-bf6a-abbd-e4d613709f2a@suse.com>
- <20200824145849.GA8275@FED-nrosbr-BE.crux.rad.ainfosec.com>
- <3e6858f4-bb63-5533-c523-cffd13503f2c@suse.com>
- <B99E1A82-FBE8-4EE3-943A-4384BA504184@citrix.com>
- <ea3ab742-84e0-1e98-87ad-2e38b2224917@suse.com>
- <E62153E8-5EA8-46E5-AA12-6629F480A6BA@citrix.com>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <dbc62371-e8b3-980f-183e-96d98f4827e5@suse.com>
-Date: Wed, 26 Aug 2020 13:17:38 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.11.0
+ id 391fc6a6-481b-4f8c-a10b-b400a91951a7;
+ Wed, 26 Aug 2020 12:00:58 +0000 (UTC)
+Message-Id: <20200826112330.806095671@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020; t=1598443257;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:  references:references;
+ bh=TWm8LKwbxOdbljCkicslqQNPr7yXxn0950j4VKvFXNo=;
+ b=UoGPFS/7WkvtfI0hX3punHqhBhP/UK4S88ikGD8RW/yf+AurFKJjX4P4EC3wMRQEo3XlUZ
+ LtujGPYmgVYq+2AdnyFhaPffxQeMmZLY5riQhmLkbyaNqb5/Tl2/vF8P4/flzxfoNve7Gd
+ HvMq+AchBIH/zXZpuCw50Xyw8kZUbXsTBX1z6AM0cPb4XUIN3ZT296ZxwMS9Ftls90RKIx
+ QYPHptNSZLVoIKxXnLJuhge/uZrOimnl1Bbl+174HzrumKwK3TJyXxS/LA+CUj9RLLCDum
+ tDilxjDbgeG8VP1uAjLlsZFPbkEndfzcYttDAx/NS1vPFTXjsmKgSZgpI1+3tQ==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020e; t=1598443257;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:  references:references;
+ bh=TWm8LKwbxOdbljCkicslqQNPr7yXxn0950j4VKvFXNo=;
+ b=sUrBzRDj7jLvhAKHO3Jo5Tdws9M7K35CNKNa2DKprDj7HLmFAHquotUL5w484KVxZFblZx
+ 8bAUtdxFXrHkzvDg==
+Date: Wed, 26 Aug 2020 13:16:30 +0200
+From: Thomas Gleixner <tglx@linutronix.de>
+To: LKML <linux-kernel@vger.kernel.org>
+Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
+ iommu@lists.linux-foundation.org, linux-hyperv@vger.kernel.org,
+ Haiyang Zhang <haiyangz@microsoft.com>,
+ Jon Derrick <jonathan.derrick@intel.com>,
+ Lu Baolu <baolu.lu@linux.intel.com>, Wei Liu <wei.liu@kernel.org>,
+ "K. Y. Srinivasan" <kys@microsoft.com>,
+ Stephen Hemminger <sthemmin@microsoft.com>,
+ Steve Wahl <steve.wahl@hpe.com>, Dimitri Sivanich <sivanich@hpe.com>,
+ Russ Anderson <rja@hpe.com>, linux-pci@vger.kernel.org,
+ Bjorn Helgaas <bhelgaas@google.com>,
+ Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
+ Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+ xen-devel@lists.xenproject.org, Juergen Gross <jgross@suse.com>,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Marc Zyngier <maz@kernel.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ "Rafael J. Wysocki" <rafael@kernel.org>, Megha Dey <megha.dey@intel.com>,
+ Jason Gunthorpe <jgg@mellanox.com>, Dave Jiang <dave.jiang@intel.com>,
+ Alex Williamson <alex.williamson@redhat.com>,
+ Jacob Pan <jacob.jun.pan@intel.com>, Baolu Lu <baolu.lu@intel.com>,
+ Kevin Tian <kevin.tian@intel.com>, Dan Williams <dan.j.williams@intel.com>
+Subject: [patch V2 02/46] x86/init: Remove unused init ops
+References: <20200826111628.794979401@linutronix.de>
 MIME-Version: 1.0
-In-Reply-To: <E62153E8-5EA8-46E5-AA12-6629F480A6BA@citrix.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=UTF-8
+Content-transfer-encoding: 8-bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -78,47 +96,166 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 26.08.2020 12:33, George Dunlap wrote:
-> 
-> 
->> On Aug 26, 2020, at 8:41 AM, Jan Beulich <jbeulich@suse.com> wrote:
->>
->> On 25.08.2020 12:37, George Dunlap wrote:
->>> As an explanation, there are a combination of things. You proposed A (remove the dependency), Ian proposed B (use move-if-changed), but we’re hoping to do C (have an external tree) before the next release.  I haven’t had the time to look into either B or C (nor, unfortunately, to review Nick’s submissions to other parts of the code — sorry Nick!); but I’ve still been reluctant to go for A.
->>>
->>> I think basically, unless someone is ready to tackle B or C immediately, we should just check in Jan’s fix (or probably better, just revert the patch that introduced the dependency).  It will be annoying to have to potentially fix up the generated golang bindings, but that puts the incentives in the right place.
->>
->> One additional aspect to consider is that I ran into the issue actually
->> in a 4.14 tree (because it just so happened that the timestamps of the
->> involved files were "right" for the problem to be hit), i.e. whatever
->> we decide to do will also end up needing backporting. To me this looks
->> to make A less attractive.
-> 
-> I don’t understand why?
+From: Thomas Gleixner <tglx@linutronix.de>
 
-Because you and Nick made clear that it's not the right way to deal with
-the situation, i.e. I only consider this a band aid.
+Some past platform removal forgot to get rid of this unused ballast.
 
->  If it’s a regression in 4.14 functionality, we have to backport something to fix it one way or another.
+Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 
-Oh, yes, something will need backporting. But perhaps a more permanent
-and/or appropriate solution?
+---
+ arch/x86/include/asm/mpspec.h   |   10 ----------
+ arch/x86/include/asm/x86_init.h |   10 ----------
+ arch/x86/kernel/mpparse.c       |   26 ++++----------------------
+ arch/x86/kernel/x86_init.c      |    4 ----
+ 4 files changed, 4 insertions(+), 46 deletions(-)
 
-> If we were going to leave the functionality the way it is, it might make sense to make it so that the dependency was triggered only on staging/master; the goal, after all, was to make sure that the generated files were updated when libxl_types.idl was updated during development.
-> 
-> BTW, one way to prevent this from happening would be to add a version of the build to the Gitlab CI loop which would build out-of-tree and fail in a similar manner.  If there had been such a test, this change would have been reverted immediately.
+--- a/arch/x86/include/asm/mpspec.h
++++ b/arch/x86/include/asm/mpspec.h
+@@ -67,21 +67,11 @@ static inline void find_smp_config(void)
+ #ifdef CONFIG_X86_MPPARSE
+ extern void e820__memblock_alloc_reserved_mpc_new(void);
+ extern int enable_update_mptable;
+-extern int default_mpc_apic_id(struct mpc_cpu *m);
+-extern void default_smp_read_mpc_oem(struct mpc_table *mpc);
+-# ifdef CONFIG_X86_IO_APIC
+-extern void default_mpc_oem_bus_info(struct mpc_bus *m, char *str);
+-# else
+-#  define default_mpc_oem_bus_info NULL
+-# endif
+ extern void default_find_smp_config(void);
+ extern void default_get_smp_config(unsigned int early);
+ #else
+ static inline void e820__memblock_alloc_reserved_mpc_new(void) { }
+ #define enable_update_mptable 0
+-#define default_mpc_apic_id NULL
+-#define default_smp_read_mpc_oem NULL
+-#define default_mpc_oem_bus_info NULL
+ #define default_find_smp_config x86_init_noop
+ #define default_get_smp_config x86_init_uint_noop
+ #endif
+--- a/arch/x86/include/asm/x86_init.h
++++ b/arch/x86/include/asm/x86_init.h
+@@ -11,22 +11,12 @@ struct cpuinfo_x86;
+ 
+ /**
+  * struct x86_init_mpparse - platform specific mpparse ops
+- * @mpc_record:			platform specific mpc record accounting
+  * @setup_ioapic_ids:		platform specific ioapic id override
+- * @mpc_apic_id:		platform specific mpc apic id assignment
+- * @smp_read_mpc_oem:		platform specific oem mpc table setup
+- * @mpc_oem_pci_bus:		platform specific pci bus setup (default NULL)
+- * @mpc_oem_bus_info:		platform specific mpc bus info
+  * @find_smp_config:		find the smp configuration
+  * @get_smp_config:		get the smp configuration
+  */
+ struct x86_init_mpparse {
+-	void (*mpc_record)(unsigned int mode);
+ 	void (*setup_ioapic_ids)(void);
+-	int (*mpc_apic_id)(struct mpc_cpu *m);
+-	void (*smp_read_mpc_oem)(struct mpc_table *mpc);
+-	void (*mpc_oem_pci_bus)(struct mpc_bus *m);
+-	void (*mpc_oem_bus_info)(struct mpc_bus *m, char *name);
+ 	void (*find_smp_config)(void);
+ 	void (*get_smp_config)(unsigned int early);
+ };
+--- a/arch/x86/kernel/mpparse.c
++++ b/arch/x86/kernel/mpparse.c
+@@ -46,11 +46,6 @@ static int __init mpf_checksum(unsigned
+ 	return sum & 0xFF;
+ }
+ 
+-int __init default_mpc_apic_id(struct mpc_cpu *m)
+-{
+-	return m->apicid;
+-}
+-
+ static void __init MP_processor_info(struct mpc_cpu *m)
+ {
+ 	int apicid;
+@@ -61,7 +56,7 @@ static void __init MP_processor_info(str
+ 		return;
+ 	}
+ 
+-	apicid = x86_init.mpparse.mpc_apic_id(m);
++	apicid = m->apicid;
+ 
+ 	if (m->cpuflag & CPU_BOOTPROCESSOR) {
+ 		bootup_cpu = " (Bootup-CPU)";
+@@ -73,7 +68,7 @@ static void __init MP_processor_info(str
+ }
+ 
+ #ifdef CONFIG_X86_IO_APIC
+-void __init default_mpc_oem_bus_info(struct mpc_bus *m, char *str)
++static void __init mpc_oem_bus_info(struct mpc_bus *m, char *str)
+ {
+ 	memcpy(str, m->bustype, 6);
+ 	str[6] = 0;
+@@ -84,7 +79,7 @@ static void __init MP_bus_info(struct mp
+ {
+ 	char str[7];
+ 
+-	x86_init.mpparse.mpc_oem_bus_info(m, str);
++	mpc_oem_bus_info(m, str);
+ 
+ #if MAX_MP_BUSSES < 256
+ 	if (m->busid >= MAX_MP_BUSSES) {
+@@ -100,9 +95,6 @@ static void __init MP_bus_info(struct mp
+ 		mp_bus_id_to_type[m->busid] = MP_BUS_ISA;
+ #endif
+ 	} else if (strncmp(str, BUSTYPE_PCI, sizeof(BUSTYPE_PCI) - 1) == 0) {
+-		if (x86_init.mpparse.mpc_oem_pci_bus)
+-			x86_init.mpparse.mpc_oem_pci_bus(m);
+-
+ 		clear_bit(m->busid, mp_bus_not_pci);
+ #ifdef CONFIG_EISA
+ 		mp_bus_id_to_type[m->busid] = MP_BUS_PCI;
+@@ -198,8 +190,6 @@ static void __init smp_dump_mptable(stru
+ 			1, mpc, mpc->length, 1);
+ }
+ 
+-void __init default_smp_read_mpc_oem(struct mpc_table *mpc) { }
+-
+ static int __init smp_read_mpc(struct mpc_table *mpc, unsigned early)
+ {
+ 	char str[16];
+@@ -218,14 +208,7 @@ static int __init smp_read_mpc(struct mp
+ 	if (early)
+ 		return 1;
+ 
+-	if (mpc->oemptr)
+-		x86_init.mpparse.smp_read_mpc_oem(mpc);
+-
+-	/*
+-	 *      Now process the configuration blocks.
+-	 */
+-	x86_init.mpparse.mpc_record(0);
+-
++	/* Now process the configuration blocks. */
+ 	while (count < mpc->length) {
+ 		switch (*mpt) {
+ 		case MP_PROCESSOR:
+@@ -256,7 +239,6 @@ static int __init smp_read_mpc(struct mp
+ 			count = mpc->length;
+ 			break;
+ 		}
+-		x86_init.mpparse.mpc_record(1);
+ 	}
+ 
+ 	if (!num_processors)
+--- a/arch/x86/kernel/x86_init.c
++++ b/arch/x86/kernel/x86_init.c
+@@ -67,11 +67,7 @@ struct x86_init_ops x86_init __initdata
+ 	},
+ 
+ 	.mpparse = {
+-		.mpc_record		= x86_init_uint_noop,
+ 		.setup_ioapic_ids	= x86_init_noop,
+-		.mpc_apic_id		= default_mpc_apic_id,
+-		.smp_read_mpc_oem	= default_smp_read_mpc_oem,
+-		.mpc_oem_bus_info	= default_mpc_oem_bus_info,
+ 		.find_smp_config	= default_find_smp_config,
+ 		.get_smp_config		= default_get_smp_config,
+ 	},
 
-Not sure about this. For one, the out-of-tree aspect has got nothing
-to do with it, I think. It's instead the read-only-ness of the
-source file which matters. IOW I assume things would have worked
-fine if I didn't keep my original source trees r/o at almost all
-times (and hence the symlinks, when followed, make the files be
-viewed as r/o in the build tree, too).
 
-And then the timestamps matter, too. On a fresh clone (which is what
-osstest uses afaik, and I guess which is also what's done in gitlab
-CI), the two files quite likely would have matching ones, in which
-case no re-build attempt would occur.
-
-Jan
 
