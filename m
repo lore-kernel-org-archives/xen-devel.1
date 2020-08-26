@@ -7,54 +7,54 @@ X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 07456C433E5
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:06:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 992DCC433EC
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:06:55 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CE1EF2087C
+	by mail.kernel.org (Postfix) with ESMTPS id 667E720838
 	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:06:55 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="KU244bnL";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="L0z/1eeN"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CE1EF2087C
+	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="nW2KeZ1g";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="rGD9yaPS"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 667E720838
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kAuCT-00026P-9W; Wed, 26 Aug 2020 12:06:45 +0000
+	id 1kAuCU-00028Y-AP; Wed, 26 Aug 2020 12:06:46 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=LG6r=CE=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1kAu85-000821-85
- for xen-devel@lists.xenproject.org; Wed, 26 Aug 2020 12:02:13 +0000
-X-Inumbo-ID: 7074e2cc-ed2b-4e21-94d4-7172a1f92a5e
-Received: from galois.linutronix.de (unknown [193.142.43.55])
+ id 1kAu8e-000821-9X
+ for xen-devel@lists.xenproject.org; Wed, 26 Aug 2020 12:02:48 +0000
+X-Inumbo-ID: f873b3c8-1d39-4955-a1ce-593a7dce06a4
+Received: from galois.linutronix.de (unknown [2a0a:51c0:0:12e:550::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 7074e2cc-ed2b-4e21-94d4-7172a1f92a5e;
- Wed, 26 Aug 2020 12:01:22 +0000 (UTC)
-Message-Id: <20200826112332.767707340@linutronix.de>
+ id f873b3c8-1d39-4955-a1ce-593a7dce06a4;
+ Wed, 26 Aug 2020 12:01:35 +0000 (UTC)
+Message-Id: <20200826112333.806328762@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1598443281;
+ s=2020; t=1598443294;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=dYN9jX79rKIWQfhP8dq1fK8m0T2bDgxKsf6OxKJhURs=;
- b=KU244bnLCRTLggIkAhPoRrnNk4ecCLY5jSzkQr6tLrIl0Rk53IfMfXlDPNJwZMmLCFLGkD
- FowqqLBIyHL7DDqMUmJGrs0bDiR0AEPQmJOlKQbIc6jWLyGSXeSScT/iGGqH3nE1lbwVJh
- hDGEwBiQjs58m5lMA87cVjCA60Mx4YpaQoRKiP1/+tFJpURnzokJJNJm41O7i4z82WEpGq
- mrTXb25RBx4IIwRjyNMumY46rKZFYwBOnn6FEiCJGF+9CJUHRlIIjM3XetbKQy3rPyH5W5
- 0oxvv87MCFdKOtE+q8tpyYW13CiWVcS8XxQGqRrfVTeqS/G6WRa8DXIZoOu31Q==
+ bh=asFOSA32T62YaRCSzrTor6aeI57DpOL3CUuGKRRZsEk=;
+ b=nW2KeZ1gqPVv2gyaRKq8TR1UkwXl0haOMGUN03QRISdwQmfCn7UJwXCHQXWSfPgpIa+WE5
+ dFV5V8IpWj0OJ5/D7iaEmAAzia9sMireqBKNTgfwBW0x32c8WcLBFqyY4C3zXLZl0pKZ9S
+ kbvZoHvciBXwqW1PY4VzXjvXqcmQjVynrEJnQe4+Vy7Tv8omIDJ2tjEuvictoUTMcGSKpF
+ bwvwqQcGDIe6TqfooJCNM+0WtHU0xfoqHLKxazezkBOMG3xzacun6q8a4wPa4LcFbmUIkZ
+ D9Eyz1ErgNGXpUdNgnbQSGl0sWAvf10vqBSj5tjVkoI6kOyIqsXE1tw+oQQTwQ==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1598443281;
+ s=2020e; t=1598443294;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=dYN9jX79rKIWQfhP8dq1fK8m0T2bDgxKsf6OxKJhURs=;
- b=L0z/1eeNvfqCZHeoL4JEuN1YMBW1Iiw6iNV20WAqkSdplzffASpgi2hZ4NMQTB/x3w87bA
- czWHTCA8dXDh6gAw==
-Date: Wed, 26 Aug 2020 13:16:49 +0200
+ bh=asFOSA32T62YaRCSzrTor6aeI57DpOL3CUuGKRRZsEk=;
+ b=rGD9yaPSSC0dyJal0i0gvsXCtRDpI7ulC+ReNWLDGiw7Ztg5ZQgzYmYvFhwrOM19cmby/R
+ 4PQn9wIN97sJZqAg==
+Date: Wed, 26 Aug 2020 13:17:00 +0200
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
@@ -78,7 +78,7 @@ Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
  Alex Williamson <alex.williamson@redhat.com>,
  Jacob Pan <jacob.jun.pan@intel.com>, Baolu Lu <baolu.lu@intel.com>,
  Kevin Tian <kevin.tian@intel.com>, Dan Williams <dan.j.williams@intel.com>
-Subject: [patch V2 21/46] x86/pci: Reducde #ifdeffery in PCI init code
+Subject: [patch V2 32/46] iommm/amd: Store irq domain in struct device
 References: <20200826111628.794979401@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -98,78 +98,58 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-Adding a function call before the first #ifdef in arch_pci_init() triggers
-a 'mixed declarations and code' warning if PCI_DIRECT is enabled.
+As the next step to make X86 utilize the direct MSI irq domain operations
+store the irq domain pointer in the device struct when a device is probed.
 
-Use stub functions and move the #ifdeffery to the header file where it is
-not in the way.
+It only overrides the irqdomain of devices which are handled by a regular
+PCI/MSI irq domain which protects PCI devices behind special busses like
+VMD which have their own irq domain.
+
+No functional change.
+
+It just avoids the redirection through arch_*_msi_irqs() and allows the
+PCI/MSI core to directly invoke the irq domain alloc/free functions instead
+of having to look up the irq domain for every single MSI interupt.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 
 ---
- arch/x86/include/asm/pci_x86.h |   11 +++++++++++
- arch/x86/pci/init.c            |   10 +++-------
- 2 files changed, 14 insertions(+), 7 deletions(-)
+ drivers/iommu/amd/iommu.c |   17 ++++++++++++++++-
+ 1 file changed, 16 insertions(+), 1 deletion(-)
 
---- a/arch/x86/include/asm/pci_x86.h
-+++ b/arch/x86/include/asm/pci_x86.h
-@@ -114,9 +114,20 @@ extern const struct pci_raw_ops pci_dire
- extern bool port_cf9_safe;
- 
- /* arch_initcall level */
-+#ifdef CONFIG_PCI_DIRECT
- extern int pci_direct_probe(void);
- extern void pci_direct_init(int type);
-+#else
-+static inline int pci_direct_probe(void) { return -1; }
-+static inline  void pci_direct_init(int type) { }
-+#endif
+--- a/drivers/iommu/amd/iommu.c
++++ b/drivers/iommu/amd/iommu.c
+@@ -729,7 +729,21 @@ static void iommu_poll_ga_log(struct amd
+ 		}
+ 	}
+ }
+-#endif /* CONFIG_IRQ_REMAP */
 +
-+#ifdef CONFIG_PCI_BIOS
- extern void pci_pcbios_init(void);
-+#else
-+static inline void pci_pcbios_init(void) { }
-+#endif
++static void
++amd_iommu_set_pci_msi_domain(struct device *dev, struct amd_iommu *iommu)
++{
++	if (!irq_remapping_enabled || !dev_is_pci(dev) ||
++	    pci_dev_has_special_msi_domain(to_pci_dev(dev)))
++		return;
 +
- extern void __init dmi_check_pciprobe(void);
- extern void __init dmi_check_skip_isa_align(void);
- 
---- a/arch/x86/pci/init.c
-+++ b/arch/x86/pci/init.c
-@@ -8,11 +8,9 @@
-    in the right sequence from here. */
- static __init int pci_arch_init(void)
- {
--#ifdef CONFIG_PCI_DIRECT
--	int type = 0;
-+	int type;
- 
- 	type = pci_direct_probe();
--#endif
- 
- 	if (!(pci_probe & PCI_PROBE_NOEARLY))
- 		pci_mmcfg_early_init();
-@@ -20,18 +18,16 @@ static __init int pci_arch_init(void)
- 	if (x86_init.pci.arch_init && !x86_init.pci.arch_init())
- 		return 0;
- 
--#ifdef CONFIG_PCI_BIOS
- 	pci_pcbios_init();
--#endif
++	dev_set_msi_domain(dev, iommu->msi_domain);
++}
 +
- 	/*
- 	 * don't check for raw_pci_ops here because we want pcbios as last
- 	 * fallback, yet it's needed to run first to set pcibios_last_bus
- 	 * in case legacy PCI probing is used. otherwise detecting peer busses
- 	 * fails.
- 	 */
--#ifdef CONFIG_PCI_DIRECT
- 	pci_direct_init(type);
--#endif
-+
- 	if (!raw_pci_ops && !raw_pci_ext_ops)
- 		printk(KERN_ERR
- 		"PCI: Fatal: No config space access function found\n");
++#else /* CONFIG_IRQ_REMAP */
++static inline void
++amd_iommu_set_pci_msi_domain(struct device *dev, struct amd_iommu *iommu) { }
++#endif /* !CONFIG_IRQ_REMAP */
+ 
+ #define AMD_IOMMU_INT_MASK	\
+ 	(MMIO_STATUS_EVT_INT_MASK | \
+@@ -2157,6 +2171,7 @@ static struct iommu_device *amd_iommu_pr
+ 		iommu_dev = ERR_PTR(ret);
+ 		iommu_ignore_device(dev);
+ 	} else {
++		amd_iommu_set_pci_msi_domain(dev, iommu);
+ 		iommu_dev = &iommu->iommu;
+ 	}
+ 
 
 
 
