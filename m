@@ -7,54 +7,54 @@ X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B2CEC433E4
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 88862C433E8
 	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:06:47 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3351620786
+	by mail.kernel.org (Postfix) with ESMTPS id 4B873208A9
 	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:06:47 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="g7xv50AT";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="YlpLIMOq"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3351620786
+	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="vRQXfv32";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="74Nj30mT"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4B873208A9
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kAuCM-0001sY-GJ; Wed, 26 Aug 2020 12:06:38 +0000
+	id 1kAuCJ-0001nN-W7; Wed, 26 Aug 2020 12:06:36 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=LG6r=CE=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1kAu8y-000821-A1
- for xen-devel@lists.xenproject.org; Wed, 26 Aug 2020 12:03:08 +0000
-X-Inumbo-ID: 0a051cbe-f8cb-4b7f-9558-f0183e09efe2
+ id 1kAu8Z-000821-9Q
+ for xen-devel@lists.xenproject.org; Wed, 26 Aug 2020 12:02:43 +0000
+X-Inumbo-ID: fa279d7f-334f-47cd-b8f0-46dfb25bd1ed
 Received: from galois.linutronix.de (unknown [2a0a:51c0:0:12e:550::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 0a051cbe-f8cb-4b7f-9558-f0183e09efe2;
- Wed, 26 Aug 2020 12:01:43 +0000 (UTC)
-Message-Id: <20200826112334.400700807@linutronix.de>
+ id fa279d7f-334f-47cd-b8f0-46dfb25bd1ed;
+ Wed, 26 Aug 2020 12:01:34 +0000 (UTC)
+Message-Id: <20200826112333.714566121@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1598443302;
+ s=2020; t=1598443293;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=XS2OtPL63+BbeAwrgOvQZ62jjX8dKd2NUee/RefW/jE=;
- b=g7xv50ATWyf0Y9KZtfd5GDP7gv+ub4Reyp3zzVcltJZHJTLFQiFFXZP+cdXkZqtXlfvIpG
- tdDcnRDMiB+NAD5pfoxdVPRDMENd5IGhIAds5207sNs7ZFUbnwlncbC9MFo6M3VyfOi/E2
- sTAtg0h0YKOOz9nDA3vW1m6MWO8ZCD3zzYaI7xVc9jcBd/G5iYloQEx+PRC6EaWAe2KhaK
- owm1ZICVZYAXvrQzrjTMUaGTpQ4IZGqclzgFWEqg5L8qaWofCWb0s81fNwQhQPAj02rxjV
- cyoLMosaH14iqtGJnoLcXp3hzvcc4rpt7+YOBBmYbBg+vQie4RgCA7KB9JgMBQ==
+ bh=lYvnoAPQWUQ+lzpgP+IiwnNeH1MqCUGgXZQosJYDQY0=;
+ b=vRQXfv327OIRrmBpatce9zJYvVSKGz9rxbKVO9yT1yZnm6MAF6kqafQ5Ay88u1vp4j2WKf
+ w1HKMPXq393uNFPMWAFwUrUnSGPfLNNupRnyNvd7TH+Fl8J9uLvWs6P/g0ycISyoIs+Tcb
+ Xt6VcPt1dmdoKxe5p3MOCjNBijQ102S2vBENRLBkHbnr1AEN02Hq+R0SIED2ZUbcUbevk9
+ v+LiIefGVV2qKYRfUnTSFxpchJDd7EsXz35rR2S2waJZLdik0ZbN4vMG1SAjwdWH/A/M2L
+ FgvDphPLESUO8O0ALaV+pVF2iWsyvxNjwOgliwpa1V8+7AboY1HO3WCFQFmepQ==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1598443302;
+ s=2020e; t=1598443293;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=XS2OtPL63+BbeAwrgOvQZ62jjX8dKd2NUee/RefW/jE=;
- b=YlpLIMOqrorOG1iP3fEgl8h8huJ+SEm1UgkOPUBIUHdgsvpjhvsDnVL85p8wf3l/OswF4l
- 3rF6X4dWCwWuIwAQ==
-Date: Wed, 26 Aug 2020 13:17:06 +0200
+ bh=lYvnoAPQWUQ+lzpgP+IiwnNeH1MqCUGgXZQosJYDQY0=;
+ b=74Nj30mT4kacCMUvrAOn6Ir2cuRq9elzCKoOuyST4heReMM9HfcFNpttWcNgI6Q6Y5FKkP
+ jIh2F+rccKFEAbDA==
+Date: Wed, 26 Aug 2020 13:16:59 +0200
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
@@ -78,7 +78,7 @@ Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
  Alex Williamson <alex.williamson@redhat.com>,
  Jacob Pan <jacob.jun.pan@intel.com>, Baolu Lu <baolu.lu@intel.com>,
  Kevin Tian <kevin.tian@intel.com>, Dan Williams <dan.j.williams@intel.com>
-Subject: [patch V2 38/46] iommu/amd: Remove domain search for PCI/MSI
+Subject: [patch V2 31/46] iommm/vt-d: Store irq domain in struct device
 References: <20200826111628.794979401@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -96,27 +96,89 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Now that the domain can be retrieved through device::msi_domain the domain
-search for PCI_MSI[X] is not longer required. Remove it.
+From: Thomas Gleixner <tglx@linutronix.de>
+
+As a first step to make X86 utilize the direct MSI irq domain operations
+store the irq domain pointer in the device struct when a device is probed.
+
+This is done from dmar_pci_bus_add_dev() because it has to work even when
+DMA remapping is disabled. It only overrides the irqdomain of devices which
+are handled by a regular PCI/MSI irq domain which protects PCI devices
+behind special busses like VMD which have their own irq domain.
+
+No functional change. It just avoids the redirection through
+arch_*_msi_irqs() and allows the PCI/MSI core to directly invoke the irq
+domain alloc/free functions instead of having to look up the irq domain for
+every single MSI interupt.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 ---
-V2: New patch
+V2: Add missing forward declaration
 ---
- drivers/iommu/amd/iommu.c |    3 ---
- 1 file changed, 3 deletions(-)
+ drivers/iommu/intel/dmar.c          |    3 +++
+ drivers/iommu/intel/irq_remapping.c |   16 ++++++++++++++++
+ include/linux/intel-iommu.h         |    7 +++++++
+ 3 files changed, 26 insertions(+)
 
---- a/drivers/iommu/amd/iommu.c
-+++ b/drivers/iommu/amd/iommu.c
-@@ -3548,9 +3548,6 @@ static struct irq_domain *get_irq_domain
- 	case X86_IRQ_ALLOC_TYPE_IOAPIC_GET_PARENT:
- 	case X86_IRQ_ALLOC_TYPE_HPET_GET_PARENT:
- 		return iommu->ir_domain;
--	case X86_IRQ_ALLOC_TYPE_PCI_MSI:
--	case X86_IRQ_ALLOC_TYPE_PCI_MSIX:
--		return iommu->msi_domain;
- 	default:
- 		WARN_ON_ONCE(1);
- 		return NULL;
+--- a/drivers/iommu/intel/dmar.c
++++ b/drivers/iommu/intel/dmar.c
+@@ -316,6 +316,9 @@ static int dmar_pci_bus_add_dev(struct d
+ 	if (ret < 0 && dmar_dev_scope_status == 0)
+ 		dmar_dev_scope_status = ret;
+ 
++	if (ret >= 0)
++		intel_irq_remap_add_device(info);
++
+ 	return ret;
+ }
+ 
+--- a/drivers/iommu/intel/irq_remapping.c
++++ b/drivers/iommu/intel/irq_remapping.c
+@@ -1086,6 +1086,22 @@ static int reenable_irq_remapping(int ei
+ 	return -1;
+ }
+ 
++/*
++ * Store the MSI remapping domain pointer in the device if enabled.
++ *
++ * This is called from dmar_pci_bus_add_dev() so it works even when DMA
++ * remapping is disabled. Only update the pointer if the device is not
++ * already handled by a non default PCI/MSI interrupt domain. This protects
++ * e.g. VMD devices.
++ */
++void intel_irq_remap_add_device(struct dmar_pci_notify_info *info)
++{
++	if (!irq_remapping_enabled || pci_dev_has_special_msi_domain(info->dev))
++		return;
++
++	dev_set_msi_domain(&info->dev->dev, map_dev_to_ir(info->dev));
++}
++
+ static void prepare_irte(struct irte *irte, int vector, unsigned int dest)
+ {
+ 	memset(irte, 0, sizeof(*irte));
+--- a/include/linux/intel-iommu.h
++++ b/include/linux/intel-iommu.h
+@@ -425,6 +425,8 @@ struct q_inval {
+ 	int             free_cnt;
+ };
+ 
++struct dmar_pci_notify_info;
++
+ #ifdef CONFIG_IRQ_REMAP
+ /* 1MB - maximum possible interrupt remapping table size */
+ #define INTR_REMAP_PAGE_ORDER	8
+@@ -439,6 +441,11 @@ struct ir_table {
+ 	struct irte *base;
+ 	unsigned long *bitmap;
+ };
++
++void intel_irq_remap_add_device(struct dmar_pci_notify_info *info);
++#else
++static inline void
++intel_irq_remap_add_device(struct dmar_pci_notify_info *info) { }
+ #endif
+ 
+ struct iommu_flush {
 
 
