@@ -7,55 +7,55 @@ X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4ADB7C433DF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D1B95C433E8
 	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:01:19 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1ABA32087C
+	by mail.kernel.org (Postfix) with ESMTPS id 92963214F1
 	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:01:19 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="CcZtqL4l";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="K2Lxyzsd"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1ABA32087C
+	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="Ba+ApzA3";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="JYpSEt6S"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 92963214F1
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kAu71-00084X-NW; Wed, 26 Aug 2020 12:01:07 +0000
+	id 1kAu6v-00082M-1A; Wed, 26 Aug 2020 12:01:01 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=LG6r=CE=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1kAu6z-00083C-RQ
- for xen-devel@lists.xenproject.org; Wed, 26 Aug 2020 12:01:05 +0000
-X-Inumbo-ID: be76ba5b-82f5-4cce-b0de-c2069c8190b9
+ id 1kAu6t-00082F-GO
+ for xen-devel@lists.xenproject.org; Wed, 26 Aug 2020 12:00:59 +0000
+X-Inumbo-ID: 385035e7-36d6-4613-b904-d5c6f025dfc9
 Received: from galois.linutronix.de (unknown [193.142.43.55])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id be76ba5b-82f5-4cce-b0de-c2069c8190b9;
- Wed, 26 Aug 2020 12:01:04 +0000 (UTC)
-Message-Id: <20200826112331.343103175@linutronix.de>
+ id 385035e7-36d6-4613-b904-d5c6f025dfc9;
+ Wed, 26 Aug 2020 12:00:57 +0000 (UTC)
+Message-Id: <20200826112330.683298931@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1598443263;
+ s=2020; t=1598443256;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=yUak3m0NwlqIqsF9vwdOVEDgjCYRdAN21F8d0mSMKGQ=;
- b=CcZtqL4lvptBr6O8tkmhEQLyN2lRF7B9yfOWJiZHdO44k0wdGsKpl6eWdq06TDejigd6ob
- JDCD52HZX+tsL5/rUPRGCwvIyqDA9zwUQ2VDiaoYgWK0cvpU2nAZUW+oVwywZr9FEINxUi
- VPGA2iy3zrIyWLUAGs4V3oB5DonOhA2FxuFQIi3d7LuHT+Gama3dCMZ8JahfFfHkRfxJm7
- D5UltiIvHeZ+/SpaNlhpYmHQ8lJWZdq24exfT4lKNQ2AeVtmjerFG05h04YY3WFDo4H3z5
- aBwORx/I0HI+GncAXRYaJ2j9Pv6KAcTg9Xj39PuKxCKBAvV3TCHZdRxCwy5kqw==
+ bh=Oz0/1gWRPSvvsPJtwAVY3cS6pNjuxGdtqsobcr4ZCvs=;
+ b=Ba+ApzA3lxf0wI52RxaFIrxrYAUyBUQG1gGFQztF1br0kk0U6AoE5wqCgnixhkjrgzOMo6
+ rT2ZvDyvuHISEifoHKZcKVSGoRPA4BuCErcMtK3FQsusSIwD5cxoIwTKUluv4ET8zep/wX
+ rIHR72+BqmwB1T2FYELwwtUSa5KalCb4GGFT5jGxBlx+9x72db//rw0t1XujWqIY8Vjs+P
+ FVWGmQd/RE/PAIEnL0RNQjFWLeWLoGfwUlzXfBeO7dzRVssgTu8kngEQeo/lNittJ7g2V5
+ NVXx9eYNRt9ZrPbdlXzYbDphBoMnpc/BMMJMcyjRQDnN40c6/GFaU/Q5glpFAg==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1598443263;
+ s=2020e; t=1598443256;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=yUak3m0NwlqIqsF9vwdOVEDgjCYRdAN21F8d0mSMKGQ=;
- b=K2Lxyzsd9n0HFLhQ7NLh5Km/SSUSbbyJ7SJ4NwtKLHNFB2UnCTgLYIOtfVN93n9DYdKBau
- Z3yoeEu2w5MuXuDg==
-Date: Wed, 26 Aug 2020 13:16:35 +0200
+ bh=Oz0/1gWRPSvvsPJtwAVY3cS6pNjuxGdtqsobcr4ZCvs=;
+ b=JYpSEt6S0O9MIXMNQT5EttPLTAVkYzwAAPVY2vxQEslrb722eNdO+r4OYiSe56zO/bTHh/
+ UR0TOrKuXedUnoCQ==
+Date: Wed, 26 Aug 2020 13:16:29 +0200
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
@@ -79,8 +79,7 @@ Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
  Alex Williamson <alex.williamson@redhat.com>,
  Jacob Pan <jacob.jun.pan@intel.com>, Baolu Lu <baolu.lu@intel.com>,
  Kevin Tian <kevin.tian@intel.com>, Dan Williams <dan.j.williams@intel.com>
-Subject: [patch V2 07/46] x86/irq: Rename X86_IRQ_ALLOC_TYPE_MSI* to reflect
- PCI dependency
+Subject: [patch V2 01/46] iommu/amd: Prevent NULL pointer dereference
 References: <20200826111628.794979401@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -100,174 +99,27 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-No functional change.
+Dereferencing irq_data before checking it for NULL is suboptimal.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 
 ---
- arch/x86/include/asm/hw_irq.h       |    4 ++--
- arch/x86/kernel/apic/msi.c          |    6 +++---
- drivers/iommu/amd/iommu.c           |   24 ++++++++++++------------
- drivers/iommu/intel/irq_remapping.c |   18 +++++++++---------
- 4 files changed, 26 insertions(+), 26 deletions(-)
+ drivers/iommu/amd/iommu.c |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
---- a/arch/x86/include/asm/hw_irq.h
-+++ b/arch/x86/include/asm/hw_irq.h
-@@ -36,8 +36,8 @@ struct msi_desc;
- enum irq_alloc_type {
- 	X86_IRQ_ALLOC_TYPE_IOAPIC = 1,
- 	X86_IRQ_ALLOC_TYPE_HPET,
--	X86_IRQ_ALLOC_TYPE_MSI,
--	X86_IRQ_ALLOC_TYPE_MSIX,
-+	X86_IRQ_ALLOC_TYPE_PCI_MSI,
-+	X86_IRQ_ALLOC_TYPE_PCI_MSIX,
- 	X86_IRQ_ALLOC_TYPE_DMAR,
- 	X86_IRQ_ALLOC_TYPE_UV,
- };
---- a/arch/x86/kernel/apic/msi.c
-+++ b/arch/x86/kernel/apic/msi.c
-@@ -188,7 +188,7 @@ int native_setup_msi_irqs(struct pci_dev
- 	struct irq_alloc_info info;
- 
- 	init_irq_alloc_info(&info, NULL);
--	info.type = X86_IRQ_ALLOC_TYPE_MSI;
-+	info.type = X86_IRQ_ALLOC_TYPE_PCI_MSI;
- 	info.msi_dev = dev;
- 
- 	domain = irq_remapping_get_irq_domain(&info);
-@@ -220,9 +220,9 @@ int pci_msi_prepare(struct irq_domain *d
- 	init_irq_alloc_info(arg, NULL);
- 	arg->msi_dev = pdev;
- 	if (desc->msi_attrib.is_msix) {
--		arg->type = X86_IRQ_ALLOC_TYPE_MSIX;
-+		arg->type = X86_IRQ_ALLOC_TYPE_PCI_MSIX;
- 	} else {
--		arg->type = X86_IRQ_ALLOC_TYPE_MSI;
-+		arg->type = X86_IRQ_ALLOC_TYPE_PCI_MSI;
- 		arg->flags |= X86_IRQ_ALLOC_CONTIGUOUS_VECTORS;
- 	}
- 
 --- a/drivers/iommu/amd/iommu.c
 +++ b/drivers/iommu/amd/iommu.c
-@@ -3514,8 +3514,8 @@ static int get_devid(struct irq_alloc_in
- 	case X86_IRQ_ALLOC_TYPE_HPET:
- 		devid     = get_hpet_devid(info->hpet_id);
- 		break;
--	case X86_IRQ_ALLOC_TYPE_MSI:
--	case X86_IRQ_ALLOC_TYPE_MSIX:
-+	case X86_IRQ_ALLOC_TYPE_PCI_MSI:
-+	case X86_IRQ_ALLOC_TYPE_PCI_MSIX:
- 		devid = get_device_id(&info->msi_dev->dev);
- 		break;
- 	default:
-@@ -3553,8 +3553,8 @@ static struct irq_domain *get_irq_domain
- 		return NULL;
+@@ -3717,8 +3717,8 @@ static int irq_remapping_alloc(struct ir
  
- 	switch (info->type) {
--	case X86_IRQ_ALLOC_TYPE_MSI:
--	case X86_IRQ_ALLOC_TYPE_MSIX:
-+	case X86_IRQ_ALLOC_TYPE_PCI_MSI:
-+	case X86_IRQ_ALLOC_TYPE_PCI_MSIX:
- 		devid = get_device_id(&info->msi_dev->dev);
- 		if (devid < 0)
- 			return NULL;
-@@ -3615,8 +3615,8 @@ static void irq_remapping_prepare_irte(s
- 		break;
- 
- 	case X86_IRQ_ALLOC_TYPE_HPET:
--	case X86_IRQ_ALLOC_TYPE_MSI:
--	case X86_IRQ_ALLOC_TYPE_MSIX:
-+	case X86_IRQ_ALLOC_TYPE_PCI_MSI:
-+	case X86_IRQ_ALLOC_TYPE_PCI_MSIX:
- 		msg->address_hi = MSI_ADDR_BASE_HI;
- 		msg->address_lo = MSI_ADDR_BASE_LO;
- 		msg->data = irte_info->index;
-@@ -3660,15 +3660,15 @@ static int irq_remapping_alloc(struct ir
- 
- 	if (!info)
- 		return -EINVAL;
--	if (nr_irqs > 1 && info->type != X86_IRQ_ALLOC_TYPE_MSI &&
--	    info->type != X86_IRQ_ALLOC_TYPE_MSIX)
-+	if (nr_irqs > 1 && info->type != X86_IRQ_ALLOC_TYPE_PCI_MSI &&
-+	    info->type != X86_IRQ_ALLOC_TYPE_PCI_MSIX)
- 		return -EINVAL;
- 
- 	/*
- 	 * With IRQ remapping enabled, don't need contiguous CPU vectors
- 	 * to support multiple MSI interrupts.
- 	 */
--	if (info->type == X86_IRQ_ALLOC_TYPE_MSI)
-+	if (info->type == X86_IRQ_ALLOC_TYPE_PCI_MSI)
- 		info->flags &= ~X86_IRQ_ALLOC_CONTIGUOUS_VECTORS;
- 
- 	devid = get_devid(info);
-@@ -3700,9 +3700,9 @@ static int irq_remapping_alloc(struct ir
- 		} else {
- 			index = -ENOMEM;
+ 	for (i = 0; i < nr_irqs; i++) {
+ 		irq_data = irq_domain_get_irq_data(domain, virq + i);
+-		cfg = irqd_cfg(irq_data);
+-		if (!irq_data || !cfg) {
++		cfg = irq_data ? irqd_cfg(irq_data) : NULL;
++		if (!cfg) {
+ 			ret = -EINVAL;
+ 			goto out_free_data;
  		}
--	} else if (info->type == X86_IRQ_ALLOC_TYPE_MSI ||
--		   info->type == X86_IRQ_ALLOC_TYPE_MSIX) {
--		bool align = (info->type == X86_IRQ_ALLOC_TYPE_MSI);
-+	} else if (info->type == X86_IRQ_ALLOC_TYPE_PCI_MSI ||
-+		   info->type == X86_IRQ_ALLOC_TYPE_PCI_MSIX) {
-+		bool align = (info->type == X86_IRQ_ALLOC_TYPE_PCI_MSI);
- 
- 		index = alloc_irq_index(devid, nr_irqs, align, info->msi_dev);
- 	} else {
---- a/drivers/iommu/intel/irq_remapping.c
-+++ b/drivers/iommu/intel/irq_remapping.c
-@@ -1115,8 +1115,8 @@ static struct irq_domain *intel_get_ir_i
- 	case X86_IRQ_ALLOC_TYPE_HPET:
- 		iommu = map_hpet_to_ir(info->hpet_id);
- 		break;
--	case X86_IRQ_ALLOC_TYPE_MSI:
--	case X86_IRQ_ALLOC_TYPE_MSIX:
-+	case X86_IRQ_ALLOC_TYPE_PCI_MSI:
-+	case X86_IRQ_ALLOC_TYPE_PCI_MSIX:
- 		iommu = map_dev_to_ir(info->msi_dev);
- 		break;
- 	default:
-@@ -1135,8 +1135,8 @@ static struct irq_domain *intel_get_irq_
- 		return NULL;
- 
- 	switch (info->type) {
--	case X86_IRQ_ALLOC_TYPE_MSI:
--	case X86_IRQ_ALLOC_TYPE_MSIX:
-+	case X86_IRQ_ALLOC_TYPE_PCI_MSI:
-+	case X86_IRQ_ALLOC_TYPE_PCI_MSIX:
- 		iommu = map_dev_to_ir(info->msi_dev);
- 		if (iommu)
- 			return iommu->ir_msi_domain;
-@@ -1306,8 +1306,8 @@ static void intel_irq_remapping_prepare_
- 		break;
- 
- 	case X86_IRQ_ALLOC_TYPE_HPET:
--	case X86_IRQ_ALLOC_TYPE_MSI:
--	case X86_IRQ_ALLOC_TYPE_MSIX:
-+	case X86_IRQ_ALLOC_TYPE_PCI_MSI:
-+	case X86_IRQ_ALLOC_TYPE_PCI_MSIX:
- 		if (info->type == X86_IRQ_ALLOC_TYPE_HPET)
- 			set_hpet_sid(irte, info->hpet_id);
- 		else
-@@ -1362,15 +1362,15 @@ static int intel_irq_remapping_alloc(str
- 
- 	if (!info || !iommu)
- 		return -EINVAL;
--	if (nr_irqs > 1 && info->type != X86_IRQ_ALLOC_TYPE_MSI &&
--	    info->type != X86_IRQ_ALLOC_TYPE_MSIX)
-+	if (nr_irqs > 1 && info->type != X86_IRQ_ALLOC_TYPE_PCI_MSI &&
-+	    info->type != X86_IRQ_ALLOC_TYPE_PCI_MSIX)
- 		return -EINVAL;
- 
- 	/*
- 	 * With IRQ remapping enabled, don't need contiguous CPU vectors
- 	 * to support multiple MSI interrupts.
- 	 */
--	if (info->type == X86_IRQ_ALLOC_TYPE_MSI)
-+	if (info->type == X86_IRQ_ALLOC_TYPE_PCI_MSI)
- 		info->flags &= ~X86_IRQ_ALLOC_CONTIGUOUS_VECTORS;
- 
- 	ret = irq_domain_alloc_irqs_parent(domain, virq, nr_irqs, arg);
 
 
 
