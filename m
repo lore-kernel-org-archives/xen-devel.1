@@ -7,54 +7,54 @@ X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 07273C433E1
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:06:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E8A6CC433E4
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:06:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CF78320838
+	by mail.kernel.org (Postfix) with ESMTPS id BC54320786
 	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:06:40 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="15vzrh+W";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="kD7LSBOG"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CF78320838
+	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="znarvJZW";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="d+LBHoPq"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BC54320786
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kAuCB-0001el-Bq; Wed, 26 Aug 2020 12:06:27 +0000
+	id 1kAuCC-0001fB-CY; Wed, 26 Aug 2020 12:06:28 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=LG6r=CE=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1kAu8o-000821-9s
- for xen-devel@lists.xenproject.org; Wed, 26 Aug 2020 12:02:58 +0000
-X-Inumbo-ID: b73d26fd-097d-4d86-92be-a6944a0b6e22
+ id 1kAu7g-000821-6v
+ for xen-devel@lists.xenproject.org; Wed, 26 Aug 2020 12:01:48 +0000
+X-Inumbo-ID: d120c6de-4e29-4a60-bce3-df040dcd0b4c
 Received: from galois.linutronix.de (unknown [193.142.43.55])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b73d26fd-097d-4d86-92be-a6944a0b6e22;
- Wed, 26 Aug 2020 12:01:39 +0000 (UTC)
-Message-Id: <20200826112334.086003720@linutronix.de>
+ id d120c6de-4e29-4a60-bce3-df040dcd0b4c;
+ Wed, 26 Aug 2020 12:01:12 +0000 (UTC)
+Message-Id: <20200826112331.943993771@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1598443298;
+ s=2020; t=1598443271;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=4GR30s5GgYbrNACLVjkL2Z4Vc3S8YRxhz8JprbkQ4/Q=;
- b=15vzrh+WEt/YNZOsozwZ+WvaE0KRfmdkhA6KFC+jQ577UxrHhrtciftZ2WN553VbQ7FbrN
- nxh/mQXcDb42ecdHwTgxAxp/rVdziiFKVIlqPDDDmhA8wcipnzpgcAy9YX31cElht5snPh
- aRe8AL/ngpPV/0D6Gcvrm9OAh8W8OUeFGBdTh59wOMgelq9vBfUd1pV769vuqbRPcVUwvc
- iWO/jJU+1PKpMQ65WwaKFIRX/4fbahxl8EHUOErEg/LhtqzshmKPdjLuyHJdjBfekPfehw
- sAbS5Ei1NWTirGg3JVgec2tphKQAaviPw68KaXjf76/TOdCoZ+q+MgjrOTzDlA==
+ bh=smN5Lw4O6gmWewW32/CNzDhDg44t7zx2oz8Ohy7d/iE=;
+ b=znarvJZWtDATtlJI8tOo2+tiLdVrGcoHLqDkmFaTrOTfXRWl8qVB6xD+GDQCsM7HmfRUrK
+ JvKagkhyZlsO+Ugqesetp7KDtVkB4/Lu8nW9SalZiwbcrxrstycWplN4ZmzycRSSyGp4u9
+ iZSfxMzZX5U00wrSxHqOcVWyETZKtM7FxRGeSYJMR0WZv+5oOX356Q4FQdRaqCO5QARFvA
+ Bwk1NsKLYiudaIx8BkNsDFZ+KVAL6ym3iouXM6jKjT5OtGOg0dIfJKChOal3L26MWnBKmA
+ ZH2npVDrfeeVUM7aaMuGSA93ZKeuhvb3Ra7zUmrKu77nvb0WQzrOxd6i+fZLlQ==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1598443298;
+ s=2020e; t=1598443271;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=4GR30s5GgYbrNACLVjkL2Z4Vc3S8YRxhz8JprbkQ4/Q=;
- b=kD7LSBOGP377ptxMy8QUsT8p4tGWKTXIjr5euUh4DjI5Nu9+rSEdclDD/RedRs6uVRrjoi
- q5eGzh+h+HBqKyAQ==
-Date: Wed, 26 Aug 2020 13:17:03 +0200
+ bh=smN5Lw4O6gmWewW32/CNzDhDg44t7zx2oz8Ohy7d/iE=;
+ b=d+LBHoPqo9jhxBe2+7tlgUGtfmujgPoaPeVgH14+w1GryJONvme6F47/Po20GiMhqzpwfk
+ RUbqsNrpsGalcCBw==
+Date: Wed, 26 Aug 2020 13:16:41 +0200
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
@@ -78,7 +78,7 @@ Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
  Alex Williamson <alex.williamson@redhat.com>,
  Jacob Pan <jacob.jun.pan@intel.com>, Baolu Lu <baolu.lu@intel.com>,
  Kevin Tian <kevin.tian@intel.com>, Dan Williams <dan.j.williams@intel.com>
-Subject: [patch V2 35/46] x86/irq: Cleanup the arch_*_msi_irqs() leftovers
+Subject: [patch V2 13/46] x86/msi: Consolidate HPET allocation
 References: <20200826111628.794979401@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -98,148 +98,108 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-Get rid of all the gunk and remove the 'select PCI_MSI_ARCH_FALLBACK' from
-the x86 Kconfig so the weak functions in the PCI core are replaced by stubs
-which emit a warning, which ensures that any fail to set the irq domain
-pointer results in a warning when the device is used.
+None of the magic HPET fields are required in any way.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
----
-V2: Adjust to the PCI_MSI_ARCH_FALLBACK change, i.e. remove it instead
-    of selecting the disabler.
----
- arch/x86/Kconfig                |    1 -
- arch/x86/include/asm/pci.h      |   11 -----------
- arch/x86/include/asm/x86_init.h |    1 -
- arch/x86/kernel/apic/msi.c      |   22 ----------------------
- arch/x86/kernel/x86_init.c      |   18 ------------------
- arch/x86/pci/xen.c              |    7 -------
- 6 files changed, 60 deletions(-)
 
---- a/arch/x86/Kconfig
-+++ b/arch/x86/Kconfig
-@@ -225,7 +225,6 @@ config X86
- 	select NEED_SG_DMA_LENGTH
- 	select PCI_DOMAINS			if PCI
- 	select PCI_LOCKLESS_CONFIG		if PCI
--	select PCI_MSI_ARCH_FALLBACKS
- 	select PERF_EVENTS
- 	select RTC_LIB
- 	select RTC_MC146818_LIB
---- a/arch/x86/include/asm/pci.h
-+++ b/arch/x86/include/asm/pci.h
-@@ -105,17 +105,6 @@ static inline void early_quirks(void) {
+---
+ arch/x86/include/asm/hw_irq.h       |    7 -------
+ arch/x86/kernel/apic/msi.c          |   14 +++++++-------
+ drivers/iommu/amd/iommu.c           |    2 +-
+ drivers/iommu/intel/irq_remapping.c |    4 ++--
+ 4 files changed, 10 insertions(+), 17 deletions(-)
+
+--- a/arch/x86/include/asm/hw_irq.h
++++ b/arch/x86/include/asm/hw_irq.h
+@@ -65,13 +65,6 @@ struct irq_alloc_info {
  
- extern void pci_iommu_alloc(void);
- 
--#ifdef CONFIG_PCI_MSI
--/* implemented in arch/x86/kernel/apic/io_apic. */
--struct msi_desc;
--int native_setup_msi_irqs(struct pci_dev *dev, int nvec, int type);
--void native_teardown_msi_irq(unsigned int irq);
--void native_restore_msi_irqs(struct pci_dev *dev);
--#else
--#define native_setup_msi_irqs		NULL
--#define native_teardown_msi_irq		NULL
+ 	union {
+ 		int		unused;
+-#ifdef	CONFIG_HPET_TIMER
+-		struct {
+-			int		hpet_id;
+-			int		hpet_index;
+-			void		*hpet_data;
+-		};
 -#endif
--
- /* generic pci stuff */
- #include <asm-generic/pci.h>
- 
---- a/arch/x86/include/asm/x86_init.h
-+++ b/arch/x86/include/asm/x86_init.h
-@@ -277,7 +277,6 @@ struct pci_dev;
- 
- struct x86_msi_ops {
- 	int (*setup_msi_irqs)(struct pci_dev *dev, int nvec, int type);
--	void (*teardown_msi_irq)(unsigned int irq);
- 	void (*teardown_msi_irqs)(struct pci_dev *dev);
- 	void (*restore_msi_irqs)(struct pci_dev *dev);
- };
+ #ifdef	CONFIG_PCI_MSI
+ 		struct {
+ 			struct pci_dev	*msi_dev;
 --- a/arch/x86/kernel/apic/msi.c
 +++ b/arch/x86/kernel/apic/msi.c
-@@ -182,28 +182,6 @@ static struct irq_chip pci_msi_controlle
- 	.flags			= IRQCHIP_SKIP_SET_WAKE,
- };
- 
--int native_setup_msi_irqs(struct pci_dev *dev, int nvec, int type)
--{
--	struct irq_domain *domain;
--	struct irq_alloc_info info;
--
--	init_irq_alloc_info(&info, NULL);
--	info.type = X86_IRQ_ALLOC_TYPE_PCI_MSI;
--
--	domain = irq_remapping_get_irq_domain(&info);
--	if (domain == NULL)
--		domain = x86_pci_msi_default_domain;
--	if (domain == NULL)
--		return -ENOSYS;
--
--	return msi_domain_alloc_irqs(domain, &dev->dev, nvec);
--}
--
--void native_teardown_msi_irq(unsigned int irq)
--{
--	irq_domain_free_irqs(irq, 1);
--}
--
- int pci_msi_prepare(struct irq_domain *domain, struct device *dev, int nvec,
- 		    msi_alloc_info_t *arg)
+@@ -427,7 +427,7 @@ static struct irq_chip hpet_msi_controll
+ static irq_hw_number_t hpet_msi_get_hwirq(struct msi_domain_info *info,
+ 					  msi_alloc_info_t *arg)
  {
---- a/arch/x86/kernel/x86_init.c
-+++ b/arch/x86/kernel/x86_init.c
-@@ -146,28 +146,10 @@ EXPORT_SYMBOL_GPL(x86_platform);
- 
- #if defined(CONFIG_PCI_MSI)
- struct x86_msi_ops x86_msi __ro_after_init = {
--	.setup_msi_irqs		= native_setup_msi_irqs,
--	.teardown_msi_irq	= native_teardown_msi_irq,
--	.teardown_msi_irqs	= default_teardown_msi_irqs,
- 	.restore_msi_irqs	= default_restore_msi_irqs,
- };
- 
- /* MSI arch specific hooks */
--int arch_setup_msi_irqs(struct pci_dev *dev, int nvec, int type)
--{
--	return x86_msi.setup_msi_irqs(dev, nvec, type);
--}
--
--void arch_teardown_msi_irqs(struct pci_dev *dev)
--{
--	x86_msi.teardown_msi_irqs(dev);
--}
--
--void arch_teardown_msi_irq(unsigned int irq)
--{
--	x86_msi.teardown_msi_irq(irq);
--}
--
- void arch_restore_msi_irqs(struct pci_dev *dev)
- {
- 	x86_msi.restore_msi_irqs(dev);
---- a/arch/x86/pci/xen.c
-+++ b/arch/x86/pci/xen.c
-@@ -402,11 +402,6 @@ static void xen_pv_teardown_msi_irqs(str
- 	xen_teardown_msi_irqs(dev);
+-	return arg->hpet_index;
++	return arg->hwirq;
  }
  
--static void xen_teardown_msi_irq(unsigned int irq)
--{
--	WARN_ON_ONCE(1);
--}
--
- static int xen_msi_domain_alloc_irqs(struct irq_domain *domain,
- 				     struct device *dev,  int nvec)
+ static int hpet_msi_init(struct irq_domain *domain,
+@@ -435,8 +435,8 @@ static int hpet_msi_init(struct irq_doma
+ 			 irq_hw_number_t hwirq, msi_alloc_info_t *arg)
  {
-@@ -483,8 +478,6 @@ static __init void xen_setup_pci_msi(voi
- 		return;
- 	}
+ 	irq_set_status_flags(virq, IRQ_MOVE_PCNTXT);
+-	irq_domain_set_info(domain, virq, arg->hpet_index, info->chip, NULL,
+-			    handle_edge_irq, arg->hpet_data, "edge");
++	irq_domain_set_info(domain, virq, arg->hwirq, info->chip, NULL,
++			    handle_edge_irq, arg->data, "edge");
  
--	x86_msi.teardown_msi_irq = xen_teardown_msi_irq;
--
- 	/*
- 	 * Override the PCI/MSI irq domain init function. No point
- 	 * in allocating the native domain and never use it.
+ 	return 0;
+ }
+@@ -477,7 +477,7 @@ struct irq_domain *hpet_create_irq_domai
+ 
+ 	init_irq_alloc_info(&info, NULL);
+ 	info.type = X86_IRQ_ALLOC_TYPE_HPET_GET_PARENT;
+-	info.hpet_id = hpet_id;
++	info.devid = hpet_id;
+ 	parent = irq_remapping_get_irq_domain(&info);
+ 	if (parent == NULL)
+ 		parent = x86_vector_domain;
+@@ -506,9 +506,9 @@ int hpet_assign_irq(struct irq_domain *d
+ 
+ 	init_irq_alloc_info(&info, NULL);
+ 	info.type = X86_IRQ_ALLOC_TYPE_HPET;
+-	info.hpet_data = hc;
+-	info.hpet_id = hpet_dev_id(domain);
+-	info.hpet_index = dev_num;
++	info.data = hc;
++	info.devid = hpet_dev_id(domain);
++	info.hwirq = dev_num;
+ 
+ 	return irq_domain_alloc_irqs(domain, 1, NUMA_NO_NODE, &info);
+ }
+--- a/drivers/iommu/amd/iommu.c
++++ b/drivers/iommu/amd/iommu.c
+@@ -3511,7 +3511,7 @@ static int get_devid(struct irq_alloc_in
+ 		return get_ioapic_devid(info->ioapic_id);
+ 	case X86_IRQ_ALLOC_TYPE_HPET:
+ 	case X86_IRQ_ALLOC_TYPE_HPET_GET_PARENT:
+-		return get_hpet_devid(info->hpet_id);
++		return get_hpet_devid(info->devid);
+ 	case X86_IRQ_ALLOC_TYPE_PCI_MSI:
+ 	case X86_IRQ_ALLOC_TYPE_PCI_MSIX:
+ 		return get_device_id(&info->msi_dev->dev);
+--- a/drivers/iommu/intel/irq_remapping.c
++++ b/drivers/iommu/intel/irq_remapping.c
+@@ -1115,7 +1115,7 @@ static struct irq_domain *intel_get_irq_
+ 	case X86_IRQ_ALLOC_TYPE_IOAPIC_GET_PARENT:
+ 		return map_ioapic_to_ir(info->ioapic_id);
+ 	case X86_IRQ_ALLOC_TYPE_HPET_GET_PARENT:
+-		return map_hpet_to_ir(info->hpet_id);
++		return map_hpet_to_ir(info->devid);
+ 	case X86_IRQ_ALLOC_TYPE_PCI_MSI:
+ 	case X86_IRQ_ALLOC_TYPE_PCI_MSIX:
+ 		return map_dev_to_ir(info->msi_dev);
+@@ -1285,7 +1285,7 @@ static void intel_irq_remapping_prepare_
+ 	case X86_IRQ_ALLOC_TYPE_PCI_MSI:
+ 	case X86_IRQ_ALLOC_TYPE_PCI_MSIX:
+ 		if (info->type == X86_IRQ_ALLOC_TYPE_HPET)
+-			set_hpet_sid(irte, info->hpet_id);
++			set_hpet_sid(irte, info->devid);
+ 		else
+ 			set_msi_sid(irte, info->msi_dev);
+ 
+
 
 
