@@ -2,60 +2,59 @@ Return-Path: <SRS0=oDxe=CE=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-4.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
-	version=3.4.0
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,UNWANTED_LANGUAGE_BODY autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A1174C433E3
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:01:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 64E78C433DF
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:01:45 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7205D20838
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:01:44 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 39CF32087D
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:01:45 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="AFAYy1AZ";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="u2ouyFH0"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7205D20838
+	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="kcbYH/xL";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="iI5qSUQD"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 39CF32087D
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kAu7S-0008RO-Rm; Wed, 26 Aug 2020 12:01:34 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kAu7S-0008QY-BD; Wed, 26 Aug 2020 12:01:34 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=LG6r=CE=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1kAu7S-00083C-B6
- for xen-devel@lists.xenproject.org; Wed, 26 Aug 2020 12:01:34 +0000
-X-Inumbo-ID: 63b71c43-fa07-467d-990c-c3bb59609121
+ id 1kAu7R-000821-6I
+ for xen-devel@lists.xenproject.org; Wed, 26 Aug 2020 12:01:33 +0000
+X-Inumbo-ID: 62c8e92f-d899-443b-8d05-d058b8019b34
 Received: from galois.linutronix.de (unknown [193.142.43.55])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 63b71c43-fa07-467d-990c-c3bb59609121;
- Wed, 26 Aug 2020 12:01:27 +0000 (UTC)
-Message-Id: <20200826112333.139387358@linutronix.de>
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 62c8e92f-d899-443b-8d05-d058b8019b34;
+ Wed, 26 Aug 2020 12:01:07 +0000 (UTC)
+Message-Id: <20200826112331.530546013@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1598443286;
+ s=2020; t=1598443266;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=+WzR5MCuCex7ytf6rjsXfS+TP5lRyvSEuqbO3kY2ypY=;
- b=AFAYy1AZODdBAXiQF7D/2Af8hjoA4F8whD1dpfxhZK0wDTkBf3sx/VW4O7HKpqAFQF6LfQ
- XqAnO4Jday9Dy+ZAnDZuaZIcexHC5k39FSw5iwposD/R9Hh5EubsWwJv9/VREawRgyHgD0
- CJrI9TXEVoVnmeZEEdDR73bytPy2vid/IRs7h2lro8AX8dn3PHz6Up96z37+dXPCe9s8FO
- Jbf8kKTgVcXc0g9b3oirnxBiTzC21Iy1eeEsFbcC6bnLXB7fls4O14ynXejBtmZBynS/cT
- nqFa+ajT5XGYIQYNicdr9NM1gu9bnuAyf5ubP6NEsBw3LzgzK18Bvd4eQmq+Dg==
+ bh=u1yYqnSZZDMMoV9tW/nQF0JmP98FzCrk6ksyf7BvRgs=;
+ b=kcbYH/xLrUAPJ6fWejOeJmxHcJDtKvq9rSmjVFfexK1fGAerVZEcPvhUq/Yew/wTSQUxQA
+ nYDgNz2x9gVWr9YdEQXXW0/VcVXT6+SYH6p8Pyg8LMws06CpAnLkPedYCmO3f2I9OLqFZC
+ 16SjJaTyVMLuhEx4zWaHmggPOa/fosS1Fq7g8m+hzqpJbS1dA17hIkTlOSEM+4V1C3Wna4
+ KXGIFDSYKSWp2EXIYFP8vuYyh2bqmw9EgsOEgcMI4J/Dvpl40jcQyeoFMFpF2CAHjFrcVJ
+ TwP8ELN56HifujjCfZXWP2+C1SEu5/OwFOCAvmXbM99ahdOwcMZQk1h/7bsxwg==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1598443286;
+ s=2020e; t=1598443266;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=+WzR5MCuCex7ytf6rjsXfS+TP5lRyvSEuqbO3kY2ypY=;
- b=u2ouyFH0DTUgP45ogWuZh8vqAlI+1eKXuHYVXRV5MEZcJUmzJuBp+ygWAV3omQ2ec9yiFP
- sQTZJqjSD3yBN0Dw==
-Date: Wed, 26 Aug 2020 13:16:53 +0200
+ bh=u1yYqnSZZDMMoV9tW/nQF0JmP98FzCrk6ksyf7BvRgs=;
+ b=iI5qSUQDjqoguOE0M0yhLqFGsfgkjHhT91vZR8ljMovSZDUawcj8oW/wubtZ3EtOdx3Jc7
+ jK0U+RgVJOpYeYAg==
+Date: Wed, 26 Aug 2020 13:16:37 +0200
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
@@ -79,8 +78,7 @@ Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
  Alex Williamson <alex.williamson@redhat.com>,
  Jacob Pan <jacob.jun.pan@intel.com>, Baolu Lu <baolu.lu@intel.com>,
  Kevin Tian <kevin.tian@intel.com>, Dan Williams <dan.j.williams@intel.com>
-Subject: [patch V2 25/46] PCI/MSI: Provide pci_dev_has_special_msi_domain()
- helper
+Subject: [patch V2 09/46] iommu/vt-d: Consolidate irq domain getter
 References: <20200826111628.794979401@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -100,56 +98,142 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-Provide a helper function to check whether a PCI device is handled by a
-non-standard PCI/MSI domain. This will be used to exclude such devices
-which hang of a special bus, e.g. VMD, to be excluded from the irq domain
-override in irq remapping.
+The irq domain request mode is now indicated in irq_alloc_info::type.
+
+Consolidate the two getter functions into one.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-Acked-by: Bjorn Helgaas <bhelgaas@google.com>
----
- drivers/pci/msi.c   |   22 ++++++++++++++++++++++
- include/linux/msi.h |    1 +
- 2 files changed, 23 insertions(+)
 
---- a/drivers/pci/msi.c
-+++ b/drivers/pci/msi.c
-@@ -1553,4 +1553,26 @@ struct irq_domain *pci_msi_get_device_do
- 					     DOMAIN_BUS_PCI_MSI);
- 	return dom;
+---
+ drivers/iommu/intel/irq_remapping.c |   67 ++++++++++++------------------------
+ 1 file changed, 24 insertions(+), 43 deletions(-)
+
+--- a/drivers/iommu/intel/irq_remapping.c
++++ b/drivers/iommu/intel/irq_remapping.c
+@@ -204,35 +204,40 @@ static int modify_irte(struct irq_2_iomm
+ 	return rc;
  }
-+
-+/**
-+ * pci_dev_has_special_msi_domain - Check whether the device is handled by
-+ *				    a non-standard PCI-MSI domain
-+ * @pdev:	The PCI device to check.
-+ *
-+ * Returns: True if the device irqdomain or the bus irqdomain is
-+ * non-standard PCI/MSI.
-+ */
-+bool pci_dev_has_special_msi_domain(struct pci_dev *pdev)
-+{
-+	struct irq_domain *dom = dev_get_msi_domain(&pdev->dev);
-+
-+	if (!dom)
-+		dom = dev_get_msi_domain(&pdev->bus->dev);
-+
-+	if (!dom)
-+		return true;
-+
-+	return dom->bus_token != DOMAIN_BUS_PCI_MSI;
+ 
+-static struct intel_iommu *map_hpet_to_ir(u8 hpet_id)
++static struct irq_domain *map_hpet_to_ir(u8 hpet_id)
+ {
+ 	int i;
+ 
+-	for (i = 0; i < MAX_HPET_TBS; i++)
++	for (i = 0; i < MAX_HPET_TBS; i++) {
+ 		if (ir_hpet[i].id == hpet_id && ir_hpet[i].iommu)
+-			return ir_hpet[i].iommu;
++			return ir_hpet[i].iommu->ir_domain;
++	}
+ 	return NULL;
+ }
+ 
+-static struct intel_iommu *map_ioapic_to_ir(int apic)
++static struct intel_iommu *map_ioapic_to_iommu(int apic)
+ {
+ 	int i;
+ 
+-	for (i = 0; i < MAX_IO_APICS; i++)
++	for (i = 0; i < MAX_IO_APICS; i++) {
+ 		if (ir_ioapic[i].id == apic && ir_ioapic[i].iommu)
+ 			return ir_ioapic[i].iommu;
++	}
+ 	return NULL;
+ }
+ 
+-static struct intel_iommu *map_dev_to_ir(struct pci_dev *dev)
++static struct irq_domain *map_ioapic_to_ir(int apic)
+ {
+-	struct dmar_drhd_unit *drhd;
++	struct intel_iommu *iommu = map_ioapic_to_iommu(apic);
+ 
+-	drhd = dmar_find_matched_drhd_unit(dev);
+-	if (!drhd)
+-		return NULL;
++	return iommu ? iommu->ir_domain : NULL;
 +}
 +
- #endif /* CONFIG_PCI_MSI_IRQ_DOMAIN */
---- a/include/linux/msi.h
-+++ b/include/linux/msi.h
-@@ -374,6 +374,7 @@ int pci_msi_domain_check_cap(struct irq_
- 			     struct msi_domain_info *info, struct device *dev);
- u32 pci_msi_domain_get_msi_rid(struct irq_domain *domain, struct pci_dev *pdev);
- struct irq_domain *pci_msi_get_device_domain(struct pci_dev *pdev);
-+bool pci_dev_has_special_msi_domain(struct pci_dev *pdev);
- #else
- static inline struct irq_domain *pci_msi_get_device_domain(struct pci_dev *pdev)
++static struct irq_domain *map_dev_to_ir(struct pci_dev *dev)
++{
++	struct dmar_drhd_unit *drhd = dmar_find_matched_drhd_unit(dev);
+ 
+-	return drhd->iommu;
++	return drhd ? drhd->iommu->ir_msi_domain : NULL;
+ }
+ 
+ static int clear_entries(struct irq_2_iommu *irq_iommu)
+@@ -996,7 +1001,7 @@ static int __init parse_ioapics_under_ir
+ 
+ 	for (ioapic_idx = 0; ioapic_idx < nr_ioapics; ioapic_idx++) {
+ 		int ioapic_id = mpc_ioapic_id(ioapic_idx);
+-		if (!map_ioapic_to_ir(ioapic_id)) {
++		if (!map_ioapic_to_iommu(ioapic_id)) {
+ 			pr_err(FW_BUG "ioapic %d has no mapping iommu, "
+ 			       "interrupt remapping will be disabled\n",
+ 			       ioapic_id);
+@@ -1101,47 +1106,23 @@ static void prepare_irte(struct irte *ir
+ 	irte->redir_hint = 1;
+ }
+ 
+-static struct irq_domain *intel_get_ir_irq_domain(struct irq_alloc_info *info)
++static struct irq_domain *intel_get_irq_domain(struct irq_alloc_info *info)
  {
+-	struct intel_iommu *iommu = NULL;
+-
+ 	if (!info)
+ 		return NULL;
+ 
+ 	switch (info->type) {
+ 	case X86_IRQ_ALLOC_TYPE_IOAPIC_GET_PARENT:
+-		iommu = map_ioapic_to_ir(info->ioapic_id);
+-		break;
++		return map_ioapic_to_ir(info->ioapic_id);
+ 	case X86_IRQ_ALLOC_TYPE_HPET_GET_PARENT:
+-		iommu = map_hpet_to_ir(info->hpet_id);
+-		break;
+-	default:
+-		BUG_ON(1);
+-		break;
+-	}
+-
+-	return iommu ? iommu->ir_domain : NULL;
+-}
+-
+-static struct irq_domain *intel_get_irq_domain(struct irq_alloc_info *info)
+-{
+-	struct intel_iommu *iommu;
+-
+-	if (!info)
+-		return NULL;
+-
+-	switch (info->type) {
++		return map_hpet_to_ir(info->hpet_id);
+ 	case X86_IRQ_ALLOC_TYPE_PCI_MSI:
+ 	case X86_IRQ_ALLOC_TYPE_PCI_MSIX:
+-		iommu = map_dev_to_ir(info->msi_dev);
+-		if (iommu)
+-			return iommu->ir_msi_domain;
+-		break;
++		return map_dev_to_ir(info->msi_dev);
+ 	default:
+-		break;
++		WARN_ON_ONCE(1);
++		return NULL;
+ 	}
+-
+-	return NULL;
+ }
+ 
+ struct irq_remap_ops intel_irq_remap_ops = {
+@@ -1150,7 +1131,7 @@ struct irq_remap_ops intel_irq_remap_ops
+ 	.disable		= disable_irq_remapping,
+ 	.reenable		= reenable_irq_remapping,
+ 	.enable_faulting	= enable_drhd_fault_handling,
+-	.get_ir_irq_domain	= intel_get_ir_irq_domain,
++	.get_ir_irq_domain	= intel_get_irq_domain,
+ 	.get_irq_domain		= intel_get_irq_domain,
+ };
+ 
+
 
 
