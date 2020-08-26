@@ -7,55 +7,54 @@ X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 88E42C433E8
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4BC3BC433EA
 	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:06:52 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5AA5220838
+	by mail.kernel.org (Postfix) with ESMTPS id 17A7C20838
 	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:06:52 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="rYeOk83p";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="19p1170o"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5AA5220838
+	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="2s4c2y6v";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="3q3l2bUB"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 17A7C20838
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kAuCQ-00020v-LP; Wed, 26 Aug 2020 12:06:42 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kAuCP-0001zW-Va; Wed, 26 Aug 2020 12:06:41 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=LG6r=CE=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1kAu7w-00083C-C1
- for xen-devel@lists.xenproject.org; Wed, 26 Aug 2020 12:02:04 +0000
-X-Inumbo-ID: 3d631cdf-ef47-475d-88f0-1577b48b1546
-Received: from galois.linutronix.de (unknown [193.142.43.55])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 3d631cdf-ef47-475d-88f0-1577b48b1546;
- Wed, 26 Aug 2020 12:01:47 +0000 (UTC)
-Message-Id: <20200826112334.698236296@linutronix.de>
+ id 1kAu8t-000821-9x
+ for xen-devel@lists.xenproject.org; Wed, 26 Aug 2020 12:03:03 +0000
+X-Inumbo-ID: f71ce4ec-c3d0-4634-bd28-4cd447645026
+Received: from galois.linutronix.de (unknown [2a0a:51c0:0:12e:550::1])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id f71ce4ec-c3d0-4634-bd28-4cd447645026;
+ Wed, 26 Aug 2020 12:01:42 +0000 (UTC)
+Message-Id: <20200826112334.305699301@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1598443306;
+ s=2020; t=1598443301;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=T7GI6+per3yw7C/RYhxMMvPmri10khmLfeX2/IGCf+c=;
- b=rYeOk83pkEJnp46ajEK6NUiZaIQWhcYQOD7ARwQ4vU+RFzqloQ63JN2nVYehUzJCZ3LhEM
- nSvRtOTy2UEio1ys8RRtDU/QayBvKZkSuMuvMgk+a9H5ILcig8cpK/553ZabvDI8df5lKS
- okR053zhIrINePDGUZi1mOpY/lBtAW5f6ZunqQOcOmm/Sm2oNDC+w9GwUD6L0lAJTkCSNt
- voLf39dTRK8wXWcqnk8nqZa7+ytxZXByWN4UpDIwm6TP4r34cMxnX/n8ogGmo5ibrOp+nq
- jMMBNare5DRQuC71qjLfmswliL61Gs8OgznCWDk/2DJZm1QTEOADZCXvc8ODGQ==
+ bh=NwMc6HHKOuHFHcs9NWEQ/BqYaKGLdBqNmeOK/gzAh14=;
+ b=2s4c2y6vMTA/ieuCUb5qVuGjCDXggTJgYejSfg0lcfKJYt5P4jPML4GNoFJfltIsMgj9J/
+ VsYGggzk6sZLyaSo1vduT1Cs8ZCZJF+gcFI5TysO5jNKER7ArJbOJSsKrAYyuBkOukGuOb
+ FQ1uwyKinluUzGE5jmKOqJ1Nn3myMvav7uegmQbKQ00Jnr5lAPorFBwcH4owHKpC4eqmcQ
+ nTCtjB4ARME8/+Eka6y5gKr8nqGuy7LuhYt+7/6KtE/SFCe8bHEMYab4NG78feBGLj58qW
+ zNS4V06IzETi4o9ul8bZJDO9OOlWl4cILudMLmaIif3jM3lc5O0/X0iLtZvTvA==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1598443306;
+ s=2020e; t=1598443301;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=T7GI6+per3yw7C/RYhxMMvPmri10khmLfeX2/IGCf+c=;
- b=19p1170oqCuoZJTSY37jpDQNACEfJLfBQIGgKA6yb2yN5TF7Hyw1gvihiQWU9wKDv1m7Ky
- q5LnSO3wTOR3faCA==
-Date: Wed, 26 Aug 2020 13:17:09 +0200
+ bh=NwMc6HHKOuHFHcs9NWEQ/BqYaKGLdBqNmeOK/gzAh14=;
+ b=3q3l2bUBLfdN8GkRZWgvhVoU0iSm0dsQYXjNUnttHUPTMWchNTEnImRkpz4neyKjFHiPYO
+ cgmpPnzdfvDOXADA==
+Date: Wed, 26 Aug 2020 13:17:05 +0200
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
@@ -79,7 +78,7 @@ Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
  Alex Williamson <alex.williamson@redhat.com>,
  Jacob Pan <jacob.jun.pan@intel.com>, Baolu Lu <baolu.lu@intel.com>,
  Kevin Tian <kevin.tian@intel.com>, Dan Williams <dan.j.williams@intel.com>
-Subject: [patch V2 41/46] platform-msi: Provide default irq_chip:: Ack
+Subject: [patch V2 37/46] iommu/vt-d: Remove domain search for PCI/MSI[X]
 References: <20200826111628.794979401@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -97,28 +96,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: Thomas Gleixner <tglx@linutronix.de>
-
-For the upcoming device MSI support it's required to have a default
-irq_chip::ack implementation (irq_chip_ack_parent) so the drivers do not
-need to care.
+Now that the domain can be retrieved through device::msi_domain the domain
+search for PCI_MSI[X] is not longer required. Remove it.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-
 ---
- drivers/base/platform-msi.c |    2 ++
- 1 file changed, 2 insertions(+)
+V2: New patch
+---
+ drivers/iommu/intel/irq_remapping.c |    3 ---
+ 1 file changed, 3 deletions(-)
 
---- a/drivers/base/platform-msi.c
-+++ b/drivers/base/platform-msi.c
-@@ -95,6 +95,8 @@ static void platform_msi_update_chip_ops
- 		chip->irq_mask = irq_chip_mask_parent;
- 	if (!chip->irq_unmask)
- 		chip->irq_unmask = irq_chip_unmask_parent;
-+	if (!chip->irq_ack)
-+		chip->irq_ack = irq_chip_ack_parent;
- 	if (!chip->irq_eoi)
- 		chip->irq_eoi = irq_chip_eoi_parent;
- 	if (!chip->irq_set_affinity)
+--- a/drivers/iommu/intel/irq_remapping.c
++++ b/drivers/iommu/intel/irq_remapping.c
+@@ -1132,9 +1132,6 @@ static struct irq_domain *intel_get_irq_
+ 		return map_ioapic_to_ir(info->devid);
+ 	case X86_IRQ_ALLOC_TYPE_HPET_GET_PARENT:
+ 		return map_hpet_to_ir(info->devid);
+-	case X86_IRQ_ALLOC_TYPE_PCI_MSI:
+-	case X86_IRQ_ALLOC_TYPE_PCI_MSIX:
+-		return map_dev_to_ir(msi_desc_to_pci_dev(info->desc));
+ 	default:
+ 		WARN_ON_ONCE(1);
+ 		return NULL;
 
 
