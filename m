@@ -7,54 +7,54 @@ X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C8079C433E3
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:06:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0B506C433E8
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:06:41 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9C67020838
+	by mail.kernel.org (Postfix) with ESMTPS id D16192087C
 	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:06:40 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="sGq7w5Vv";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="wIUepu9R"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9C67020838
+	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="cRxNY6q4";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="qSPUnSes"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D16192087C
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kAuCB-0001er-Oh; Wed, 26 Aug 2020 12:06:27 +0000
+	id 1kAuCC-0001ex-2c; Wed, 26 Aug 2020 12:06:28 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=LG6r=CE=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1kAu9S-000821-BV
- for xen-devel@lists.xenproject.org; Wed, 26 Aug 2020 12:03:38 +0000
-X-Inumbo-ID: fe4d9188-ef08-4e96-bbdf-11106746d1d4
-Received: from galois.linutronix.de (unknown [2a0a:51c0:0:12e:550::1])
+ id 1kAu80-000821-7r
+ for xen-devel@lists.xenproject.org; Wed, 26 Aug 2020 12:02:08 +0000
+X-Inumbo-ID: 45edb361-c8f8-405b-8e11-e50d53b9cb61
+Received: from galois.linutronix.de (unknown [193.142.43.55])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id fe4d9188-ef08-4e96-bbdf-11106746d1d4;
- Wed, 26 Aug 2020 12:01:52 +0000 (UTC)
-Message-Id: <20200826112335.092521442@linutronix.de>
+ id 45edb361-c8f8-405b-8e11-e50d53b9cb61;
+ Wed, 26 Aug 2020 12:01:21 +0000 (UTC)
+Message-Id: <20200826112332.658496557@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1598443311;
+ s=2020; t=1598443280;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=b69SWJ3Ur45XxM77SmSu/tsjVczGdpPRTUPeP/VD4Ik=;
- b=sGq7w5VvBLEz68W/6n3xv/ju+gIZDsclrMN42Kbt+Lek2xpknqP50K1/N3zLQ3qy/tSs8i
- 5FUrDzJiUCLsdEJZ4ovTq/PJQFLtIf/MfxmxW+nu6cwW9IfZO+2nncmzTnjpEbrV3MH6tj
- 9b3brF3GgBQbP9y2bmXgCU8M4zoc2GmpJnNPYPngl4Q3CAXCKlffOoU2TbmM1e7rBtgxG5
- I955rjrk1V8U3FHUiSZO6UvjD62oqONm2qhsAdvpgboUJlslC/n2D3AmOJoiDXEw8WOFvk
- k66LV22FAJnV0xR9tR25lKLopG2+yp6AUrfyM0um/WMR7J6qyoLFz+U0tt9W2Q==
+ bh=b4bGIil7bipa/5kRCGwLR6ysbuS705o3f6zVCEpgylA=;
+ b=cRxNY6q4LD/qHQC5Xo0FZAvJhkMhdFi+cHQ4Jj7FlYWljEI49HYpMgeULtRuZ4BnVjs7du
+ mvAren+Txod753wg+6pyzdEQg/Z596Zf0s0EImMYDPCN0TucaGcDFZKa31K6/ZQaZZxVRW
+ 6bVlvZWqJTEAHcTNGb+tNnOVHkP07vPvDT3DOSv+m0qWFbLWC5Jtn1AcRGfjyw5aDwIttl
+ dM2ajV3sBaH8zQbs3Qga0yV5zHBpraCiSLRPf/aA3sRPVyszjgcqimWSj6lJoWyexV70yT
+ QCRcEx+/PcnvfQwSHz2Ju6mwxxFx7nKha8ZZYUB5hr1Vq52e6/uSd6XA9Ikx5g==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1598443311;
+ s=2020e; t=1598443280;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=b69SWJ3Ur45XxM77SmSu/tsjVczGdpPRTUPeP/VD4Ik=;
- b=wIUepu9R9BwJrfL5hHLBQrW187phV08auxKlkm3THVUKZ6T3NRDo7Cxcy1mizpDRZnSQiD
- b3u1CTDbJZZ/EOBg==
-Date: Wed, 26 Aug 2020 13:17:13 +0200
+ bh=b4bGIil7bipa/5kRCGwLR6ysbuS705o3f6zVCEpgylA=;
+ b=qSPUnSeslpA0/D/c0Wds3lF32+rYjaFAhwCnjhz0P2c0Mmhu1EcCv1mmL4jo7S0ApmHD+F
+ 95+es/w/dVUH7hDQ==
+Date: Wed, 26 Aug 2020 13:16:48 +0200
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
@@ -78,8 +78,8 @@ Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
  Alex Williamson <alex.williamson@redhat.com>,
  Jacob Pan <jacob.jun.pan@intel.com>, Baolu Lu <baolu.lu@intel.com>,
  Kevin Tian <kevin.tian@intel.com>, Dan Williams <dan.j.williams@intel.com>
-Subject: [patch V2 45/46] irqdomain/msi: Provide msi_alloc/free_store()
- callbacks
+Subject: [patch V2 20/46] x86/irq: Move apic_post_init() invocation to one
+ place
 References: <20200826111628.794979401@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -99,84 +99,53 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-For devices which don't have a standard storage for MSI messages like the
-upcoming IMS (Interrupt Message Storm) it's required to allocate storage
-space before allocating interrupts and after freeing them.
-
-This could be achieved with the existing callbacks, but that would be
-awkward because they operate on msi_alloc_info_t which is not uniform
-accross architectures. Also these callbacks are invoked per interrupt but
-the allocation might have bulk requirements depending on the device.
-
-As such devices can operate on different architectures it is simpler to
-have seperate callbacks which operate on struct device. The resulting
-storage information has to be stored in struct msi_desc so the underlying
-irq chip implementation can retrieve it for the relevant operations.
+No point to call it from both 32bit and 64bit implementations of
+default_setup_apic_routing(). Move it to the caller.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 
 ---
- include/linux/msi.h |    8 ++++++++
- kernel/irq/msi.c    |   11 +++++++++++
- 2 files changed, 19 insertions(+)
+ arch/x86/kernel/apic/apic.c     |    3 +++
+ arch/x86/kernel/apic/probe_32.c |    3 ---
+ arch/x86/kernel/apic/probe_64.c |    3 ---
+ 3 files changed, 3 insertions(+), 6 deletions(-)
 
---- a/include/linux/msi.h
-+++ b/include/linux/msi.h
-@@ -279,6 +279,10 @@ struct msi_domain_info;
-  *			function.
-  * @domain_free_irqs:	Optional function to override the default free
-  *			function.
-+ * @msi_alloc_store:	Optional callback to allocate storage in a device
-+ *			specific non-standard MSI store
-+ * @msi_alloc_free:	Optional callback to free storage in a device
-+ *			specific non-standard MSI store
-  *
-  * @get_hwirq, @msi_init and @msi_free are callbacks used by
-  * msi_create_irq_domain() and related interfaces
-@@ -328,6 +332,10 @@ struct msi_domain_ops {
- 					     struct device *dev, int nvec);
- 	void		(*domain_free_irqs)(struct irq_domain *domain,
- 					    struct device *dev);
-+	int		(*msi_alloc_store)(struct irq_domain *domain,
-+					   struct device *dev, int nvec);
-+	void		(*msi_free_store)(struct irq_domain *domain,
-+					    struct device *dev);
- };
- 
- /**
---- a/kernel/irq/msi.c
-+++ b/kernel/irq/msi.c
-@@ -434,6 +434,12 @@ int __msi_domain_alloc_irqs(struct irq_d
- 	if (ret)
- 		return ret;
- 
-+	if (ops->msi_alloc_store) {
-+		ret = ops->msi_alloc_store(domain, dev, nvec);
-+		if (ret)
-+			return ret;
-+	}
-+
- 	for_each_msi_entry(desc, dev) {
- 		ops->set_desc(&arg, desc);
- 
-@@ -533,6 +539,8 @@ int msi_domain_alloc_irqs(struct irq_dom
- 
- void __msi_domain_free_irqs(struct irq_domain *domain, struct device *dev)
- {
-+	struct msi_domain_info *info = domain->host_data;
-+	struct msi_domain_ops *ops = info->ops;
- 	struct msi_desc *desc;
- 
- 	for_each_msi_entry(desc, dev) {
-@@ -546,6 +554,9 @@ void __msi_domain_free_irqs(struct irq_d
- 			desc->irq = 0;
- 		}
+--- a/arch/x86/kernel/apic/apic.c
++++ b/arch/x86/kernel/apic/apic.c
+@@ -1429,6 +1429,9 @@ void __init apic_intr_mode_init(void)
+ 		break;
  	}
+ 
++	if (x86_platform.apic_post_init)
++		x86_platform.apic_post_init();
 +
-+	if (ops->msi_free_store)
-+		ops->msi_free_store(domain, dev);
+ 	apic_bsp_setup(upmode);
  }
  
- /**
+--- a/arch/x86/kernel/apic/probe_32.c
++++ b/arch/x86/kernel/apic/probe_32.c
+@@ -170,9 +170,6 @@ void __init default_setup_apic_routing(v
+ 
+ 	if (apic->setup_apic_routing)
+ 		apic->setup_apic_routing();
+-
+-	if (x86_platform.apic_post_init)
+-		x86_platform.apic_post_init();
+ }
+ 
+ void __init generic_apic_probe(void)
+--- a/arch/x86/kernel/apic/probe_64.c
++++ b/arch/x86/kernel/apic/probe_64.c
+@@ -32,9 +32,6 @@ void __init default_setup_apic_routing(v
+ 			break;
+ 		}
+ 	}
+-
+-	if (x86_platform.apic_post_init)
+-		x86_platform.apic_post_init();
+ }
+ 
+ int __init default_acpi_madt_oem_check(char *oem_id, char *oem_table_id)
+
 
 
