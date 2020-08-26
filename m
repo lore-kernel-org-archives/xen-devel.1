@@ -7,54 +7,55 @@ X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 68841C433EB
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:01:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CB1EEC433DF
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:01:23 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 310B9214F1
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:01:20 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 997DA20786
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:01:23 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="dUiCUdbm";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="HQTmvGI7"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 310B9214F1
+	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="snoRszRW";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="nkWzhAcY"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 997DA20786
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kAu73-00085d-8z; Wed, 26 Aug 2020 12:01:09 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kAu76-00087D-Jv; Wed, 26 Aug 2020 12:01:12 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=LG6r=CE=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1kAu72-000821-5l
- for xen-devel@lists.xenproject.org; Wed, 26 Aug 2020 12:01:08 +0000
-X-Inumbo-ID: 2ee3c551-0e80-4adb-a44c-a6da1df135ac
-Received: from galois.linutronix.de (unknown [2a0a:51c0:0:12e:550::1])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 2ee3c551-0e80-4adb-a44c-a6da1df135ac;
- Wed, 26 Aug 2020 12:00:59 +0000 (UTC)
-Message-Id: <20200826112330.928952181@linutronix.de>
+ id 1kAu74-00083C-Mh
+ for xen-devel@lists.xenproject.org; Wed, 26 Aug 2020 12:01:10 +0000
+X-Inumbo-ID: 34a6fc90-ae56-4d7a-86c9-724fb84f4053
+Received: from galois.linutronix.de (unknown [193.142.43.55])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 34a6fc90-ae56-4d7a-86c9-724fb84f4053;
+ Wed, 26 Aug 2020 12:01:09 +0000 (UTC)
+Message-Id: <20200826112331.741909337@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1598443258;
+ s=2020; t=1598443268;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=GJq1CEkWcaKs7Em2GYlhCtoVPP5Bukhfi2C/MO87oqU=;
- b=dUiCUdbmQOpMkybm8iOwgllxN+rbWKXHIOv8xVx9P0CYcEvTrFfH+U510MWl4oVPJ0gtga
- ahqCxi9ahMWxjIEsaydAa/rKy2pLoS0XfR5K4IDb4uihwE2PQKBjV4F9A8pFZYgGN7PuxQ
- EOB1SaNvp8dPe4VJ46qh1GtqJBzaIwyAez52Agf9f+0VgyaCndFq+l56XNDg+v6HO0uzx9
- KwoWueh6GMvJjAnouk8aSNrY7sJJRDuvX4Ynt2UCn35woH/JnJXgQKrYdLfLlaCEBkFk9c
- Y7WVHB/k+RUE/B1QV9Xa55mz4IiFTHSC1D8o3oA/1GFewMJzkzQ+YqY5c8skRQ==
+ bh=AgqtG7FWGG/aGAFBHu5WBpbnYbeqKy2fMcz2CwAcWys=;
+ b=snoRszRWXNTq8lUaP7yhojk4htjebRsW3YGR8fE9Gmfx4qVobtdoAr26AWBP7qIQpliA4f
+ 7aFa2pBnsl9Ctw0m0pZ90ko8gj7NLGRIag9IPsjt0vCG9SfV5xYQm3iIZ3b4A+jj2KBP2r
+ n7m7Z9h3VKo1mzE01T7/oJC/cA9cuTMdCMXitRoW+N/uLvRYqvOjNNtE0EnvBT57sOseIJ
+ +ep5495Xm6M1vtZxqZoNXtIwPNaDD5YFbygXw/S7p52zaTUO8FgXMs/HT8CDB7PoJgBrCS
+ PgBUXOPf4RweIoJl/JgGjSw0p2TonbjlkDh+/e7Po0YSgcxwAe3CB5qUgecnPw==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1598443258;
+ s=2020e; t=1598443268;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=GJq1CEkWcaKs7Em2GYlhCtoVPP5Bukhfi2C/MO87oqU=;
- b=HQTmvGI7KkXeaCWVTYGHuxhaaAjsX1BJNwh3dDUbNFgWHKVDFEbHlgJXRMU0uVeDi8WgHM
- cnjckdDSNiedpnBg==
-Date: Wed, 26 Aug 2020 13:16:31 +0200
+ bh=AgqtG7FWGG/aGAFBHu5WBpbnYbeqKy2fMcz2CwAcWys=;
+ b=nkWzhAcYABzUIpHke7RusnFIf+hrjRwwhuLGcmAEoC2SxHQAjUUdw1Le9FKphWcTohRd6/
+ mLASKAi/R6fSbOCA==
+Date: Wed, 26 Aug 2020 13:16:39 +0200
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
@@ -78,7 +79,7 @@ Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
  Alex Williamson <alex.williamson@redhat.com>,
  Jacob Pan <jacob.jun.pan@intel.com>, Baolu Lu <baolu.lu@intel.com>,
  Kevin Tian <kevin.tian@intel.com>, Dan Williams <dan.j.williams@intel.com>
-Subject: [patch V2 03/46] PCI: vmd: Dont abuse vector irqomain as parent
+Subject: [patch V2 11/46] iommu/irq_remapping: Consolidate irq domain lookup
 References: <20200826111628.794979401@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -96,41 +97,161 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-VMD has it's own PCI/MSI interrupt domain which is not in any way depending
-on the x86 vector domain. PCI devices behind VMD share the VMD MSIX vector
-entries via a VMD specific message translation to the actual VMD MSIX
-vector. The VMD device interrupt handler for the VMD MSIX vectors invokes
-all interrupt handlers of the devices which share a vector.
+From: Thomas Gleixner <tglx@linutronix.de>
 
-Making the x86 vector domain the actual parent of the VMD irq domain is
-pointless and actually counterproductive. When a device interrupt is
-requested then it will activate the interrupt which traverses down the
-hierarchy and consumes an interrupt vector in the vector domain which is
-never used.
-
-The domain is self contained and has no parent dependencies, so just hand
-in NULL for the parent and be done with it.
+Now that the iommu implementations handle the X86_*_GET_PARENT_DOMAIN
+types, consolidate the two getter functions.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-Cc: Jonathan Derrick <jonathan.derrick@intel.com>
-Cc: linux-pci@vger.kernel.org
----
-V2: New patch.
----
- drivers/pci/controller/vmd.c |    3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
 
---- a/drivers/pci/controller/vmd.c
-+++ b/drivers/pci/controller/vmd.c
-@@ -573,7 +573,8 @@ static int vmd_enable_domain(struct vmd_
- 		return -ENODEV;
+---
+ arch/x86/include/asm/irq_remapping.h |    8 --------
+ arch/x86/kernel/apic/io_apic.c       |    2 +-
+ arch/x86/kernel/apic/msi.c           |    2 +-
+ drivers/iommu/amd/iommu.c            |    1 -
+ drivers/iommu/hyperv-iommu.c         |    4 ++--
+ drivers/iommu/intel/irq_remapping.c  |    1 -
+ drivers/iommu/irq_remapping.c        |   23 +----------------------
+ drivers/iommu/irq_remapping.h        |    5 +----
+ 8 files changed, 6 insertions(+), 40 deletions(-)
+
+--- a/arch/x86/include/asm/irq_remapping.h
++++ b/arch/x86/include/asm/irq_remapping.h
+@@ -45,8 +45,6 @@ extern int irq_remap_enable_fault_handli
+ extern void panic_if_irq_remap(const char *msg);
  
- 	vmd->irq_domain = pci_msi_create_irq_domain(fn, &vmd_msi_domain_info,
--						    x86_vector_domain);
-+						    NULL);
-+
- 	if (!vmd->irq_domain) {
- 		irq_domain_free_fwnode(fn);
- 		return -ENODEV;
+ extern struct irq_domain *
+-irq_remapping_get_ir_irq_domain(struct irq_alloc_info *info);
+-extern struct irq_domain *
+ irq_remapping_get_irq_domain(struct irq_alloc_info *info);
+ 
+ /* Create PCI MSI/MSIx irqdomain, use @parent as the parent irqdomain. */
+@@ -74,12 +72,6 @@ static inline void panic_if_irq_remap(co
+ }
+ 
+ static inline struct irq_domain *
+-irq_remapping_get_ir_irq_domain(struct irq_alloc_info *info)
+-{
+-	return NULL;
+-}
+-
+-static inline struct irq_domain *
+ irq_remapping_get_irq_domain(struct irq_alloc_info *info)
+ {
+ 	return NULL;
+--- a/arch/x86/kernel/apic/io_apic.c
++++ b/arch/x86/kernel/apic/io_apic.c
+@@ -2298,7 +2298,7 @@ static int mp_irqdomain_create(int ioapi
+ 	init_irq_alloc_info(&info, NULL);
+ 	info.type = X86_IRQ_ALLOC_TYPE_IOAPIC_GET_PARENT;
+ 	info.ioapic_id = mpc_ioapic_id(ioapic);
+-	parent = irq_remapping_get_ir_irq_domain(&info);
++	parent = irq_remapping_get_irq_domain(&info);
+ 	if (!parent)
+ 		parent = x86_vector_domain;
+ 	else
+--- a/arch/x86/kernel/apic/msi.c
++++ b/arch/x86/kernel/apic/msi.c
+@@ -478,7 +478,7 @@ struct irq_domain *hpet_create_irq_domai
+ 	init_irq_alloc_info(&info, NULL);
+ 	info.type = X86_IRQ_ALLOC_TYPE_HPET_GET_PARENT;
+ 	info.hpet_id = hpet_id;
+-	parent = irq_remapping_get_ir_irq_domain(&info);
++	parent = irq_remapping_get_irq_domain(&info);
+ 	if (parent == NULL)
+ 		parent = x86_vector_domain;
+ 	else
+--- a/drivers/iommu/amd/iommu.c
++++ b/drivers/iommu/amd/iommu.c
+@@ -3561,7 +3561,6 @@ struct irq_remap_ops amd_iommu_irq_ops =
+ 	.disable		= amd_iommu_disable,
+ 	.reenable		= amd_iommu_reenable,
+ 	.enable_faulting	= amd_iommu_enable_faulting,
+-	.get_ir_irq_domain	= get_irq_domain,
+ 	.get_irq_domain		= get_irq_domain,
+ };
+ 
+--- a/drivers/iommu/hyperv-iommu.c
++++ b/drivers/iommu/hyperv-iommu.c
+@@ -182,7 +182,7 @@ static int __init hyperv_enable_irq_rema
+ 	return IRQ_REMAP_X2APIC_MODE;
+ }
+ 
+-static struct irq_domain *hyperv_get_ir_irq_domain(struct irq_alloc_info *info)
++static struct irq_domain *hyperv_get_irq_domain(struct irq_alloc_info *info)
+ {
+ 	if (info->type == X86_IRQ_ALLOC_TYPE_IOAPIC_GET_PARENT)
+ 		return ioapic_ir_domain;
+@@ -193,7 +193,7 @@ static struct irq_domain *hyperv_get_ir_
+ struct irq_remap_ops hyperv_irq_remap_ops = {
+ 	.prepare		= hyperv_prepare_irq_remapping,
+ 	.enable			= hyperv_enable_irq_remapping,
+-	.get_ir_irq_domain	= hyperv_get_ir_irq_domain,
++	.get_irq_domain		= hyperv_get_irq_domain,
+ };
+ 
+ #endif
+--- a/drivers/iommu/intel/irq_remapping.c
++++ b/drivers/iommu/intel/irq_remapping.c
+@@ -1131,7 +1131,6 @@ struct irq_remap_ops intel_irq_remap_ops
+ 	.disable		= disable_irq_remapping,
+ 	.reenable		= reenable_irq_remapping,
+ 	.enable_faulting	= enable_drhd_fault_handling,
+-	.get_ir_irq_domain	= intel_get_irq_domain,
+ 	.get_irq_domain		= intel_get_irq_domain,
+ };
+ 
+--- a/drivers/iommu/irq_remapping.c
++++ b/drivers/iommu/irq_remapping.c
+@@ -160,33 +160,12 @@ void panic_if_irq_remap(const char *msg)
+ }
+ 
+ /**
+- * irq_remapping_get_ir_irq_domain - Get the irqdomain associated with the IOMMU
+- *				     device serving request @info
+- * @info: interrupt allocation information, used to identify the IOMMU device
+- *
+- * It's used to get parent irqdomain for HPET and IOAPIC irqdomains.
+- * Returns pointer to IRQ domain, or NULL on failure.
+- */
+-struct irq_domain *
+-irq_remapping_get_ir_irq_domain(struct irq_alloc_info *info)
+-{
+-	if (!remap_ops || !remap_ops->get_ir_irq_domain)
+-		return NULL;
+-
+-	return remap_ops->get_ir_irq_domain(info);
+-}
+-
+-/**
+  * irq_remapping_get_irq_domain - Get the irqdomain serving the request @info
+  * @info: interrupt allocation information, used to identify the IOMMU device
+  *
+- * There will be one PCI MSI/MSIX irqdomain associated with each interrupt
+- * remapping device, so this interface is used to retrieve the PCI MSI/MSIX
+- * irqdomain serving request @info.
+  * Returns pointer to IRQ domain, or NULL on failure.
+  */
+-struct irq_domain *
+-irq_remapping_get_irq_domain(struct irq_alloc_info *info)
++struct irq_domain *irq_remapping_get_irq_domain(struct irq_alloc_info *info)
+ {
+ 	if (!remap_ops || !remap_ops->get_irq_domain)
+ 		return NULL;
+--- a/drivers/iommu/irq_remapping.h
++++ b/drivers/iommu/irq_remapping.h
+@@ -43,10 +43,7 @@ struct irq_remap_ops {
+ 	/* Enable fault handling */
+ 	int  (*enable_faulting)(void);
+ 
+-	/* Get the irqdomain associated the IOMMU device */
+-	struct irq_domain *(*get_ir_irq_domain)(struct irq_alloc_info *);
+-
+-	/* Get the MSI irqdomain associated with the IOMMU device */
++	/* Get the irqdomain associated to IOMMU device */
+ 	struct irq_domain *(*get_irq_domain)(struct irq_alloc_info *);
+ };
+ 
+
 
 
