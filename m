@@ -7,55 +7,54 @@ X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2CA6DC433DF
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:01:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6D068C433E1
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:01:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id F2D5320786
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:01:35 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 3D4EF20838
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:01:38 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="1Xqx86E3";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="SfxmzM35"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F2D5320786
+	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="wxfQv6Oa";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="8tJ5SZ+n"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3D4EF20838
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kAu7K-0008Hg-37; Wed, 26 Aug 2020 12:01:26 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kAu7I-0008GH-NA; Wed, 26 Aug 2020 12:01:24 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=LG6r=CE=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1kAu7I-00083C-Ae
- for xen-devel@lists.xenproject.org; Wed, 26 Aug 2020 12:01:24 +0000
-X-Inumbo-ID: d938dd91-33ab-4453-91d3-c2b5242c5756
+ id 1kAu7H-000821-69
+ for xen-devel@lists.xenproject.org; Wed, 26 Aug 2020 12:01:23 +0000
+X-Inumbo-ID: 9b97acc2-aa14-4ae9-8a2e-20ac830da826
 Received: from galois.linutronix.de (unknown [193.142.43.55])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id d938dd91-33ab-4453-91d3-c2b5242c5756;
- Wed, 26 Aug 2020 12:01:19 +0000 (UTC)
-Message-Id: <20200826112332.564274859@linutronix.de>
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 9b97acc2-aa14-4ae9-8a2e-20ac830da826;
+ Wed, 26 Aug 2020 12:01:03 +0000 (UTC)
+Message-Id: <20200826112331.250130127@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1598443278;
+ s=2020; t=1598443262;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=i8DAYBEwyev5Sb9kBzuYKhZP/VSkuBj1GjlCA99AJoU=;
- b=1Xqx86E3q2b2ZixfziDqUULh/NKjOj9iSwzOxek01OxyvIOgg8cUw3scQFIUzhIik+ULyn
- eYFFOzQaAtAetJ50JADbspwYOvRf4DuZsIZmaC2YhkoUJhcr8Aw+N6rO1uVGgC7/3shr1d
- OLBVnD9q8QM5PVW3FFw8KiTObe68Q+oWSoYrp0u3NbRzILlSdX1zl6PFApXfxKlDu7mgcY
- VM+FjD84hB1Ylny24sp4NpcF0El5FTnNFvQ/lQe1ts3dGeGXohTL9r/sSDLTTc8KMOCHR9
- EFTxeabk4c1fokQ9HBmZl2X1/37ciY0jgRDlOoW6Jicw2OjZ+uXg/oIDQCh3Sw==
+ bh=1OGPpjWOZmr24XSSpz6Nc6JwYhMQbICDj4hspoAwZbU=;
+ b=wxfQv6OayK5u1H6FLXXIAcQEscg4HPJjeG+pstXl+pgdl31DNhEzs50ZOWpxyGkrMjOLQW
+ 1o9FaSrwh83greTW5vyCTb8zGAVDs36ov93GPrm04pneHRj9I5V1gKWvrEoOOH7jQ4WymB
+ 2dnYg73pm5Qf+NAJfV1VaexuVCwBhHU44wya2eXAw2Z+FnlfrDPKCol1dSx8jwE8+r40Me
+ gFhsh/HnjcO+3pm7neY65BLXMr3nyoULj1GDuHwk6obFDadT45ulfhicTAV256PX5YzSNc
+ dGaROF2c7TCDhfRvvityWK3X4gmliC/zDpfaFSui0jbwM5OFgjvjPhruWz0AMA==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1598443278;
+ s=2020e; t=1598443262;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=i8DAYBEwyev5Sb9kBzuYKhZP/VSkuBj1GjlCA99AJoU=;
- b=SfxmzM35p6LRaIAQ/4CDORuaZiaqNGlLQeEksCh9t6iTSH1SdW+K2Nr2PXf5/KBUbLnT8s
- 4r2ubQSnF63IJVDg==
-Date: Wed, 26 Aug 2020 13:16:47 +0200
+ bh=1OGPpjWOZmr24XSSpz6Nc6JwYhMQbICDj4hspoAwZbU=;
+ b=8tJ5SZ+n+CTD4sQz2apdajCK0eVmBiC+58dr8L0pUzWdakVsmFSRzEYppLbMSxQkKBKFP2
+ zKDpRtN2h+Z7x/Ag==
+Date: Wed, 26 Aug 2020 13:16:34 +0200
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
@@ -79,7 +78,7 @@ Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
  Alex Williamson <alex.williamson@redhat.com>,
  Jacob Pan <jacob.jun.pan@intel.com>, Baolu Lu <baolu.lu@intel.com>,
  Kevin Tian <kevin.tian@intel.com>, Dan Williams <dan.j.williams@intel.com>
-Subject: [patch V2 19/46] x86/msi: Use generic MSI domain ops
+Subject: [patch V2 06/46] x86/msi: Remove pointless vcpu_affinity callback
 References: <20200826111628.794979401@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -97,125 +96,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: Thomas Gleixner <tglx@linutronix.de>
+Setting the irq_set_vcpu_affinity() callback to
+irq_chip_set_vcpu_affinity_parent() is a pointless exercise because the
+function which utilizes it searchs the domain hierarchy to find a parent
+domain which has such a callback.
 
-pci_msi_get_hwirq() and pci_msi_set_desc are not longer special. Enable the
-generic MSI domain ops in the core and PCI MSI code unconditionally and get
-rid of the x86 specific implementations in the X86 MSI code and in the
-hyperv PCI driver.
+Remove the useless indirection.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-
 ---
- arch/x86/include/asm/msi.h          |    2 --
- arch/x86/kernel/apic/msi.c          |   15 ---------------
- drivers/pci/controller/pci-hyperv.c |    8 --------
- drivers/pci/msi.c                   |    4 ----
- kernel/irq/msi.c                    |    6 ------
- 5 files changed, 35 deletions(-)
+V2: New patch. The same is probably true for lots of other irq chips.
+---
+ arch/x86/kernel/apic/msi.c |    1 -
+ 1 file changed, 1 deletion(-)
 
---- a/arch/x86/include/asm/msi.h
-+++ b/arch/x86/include/asm/msi.h
-@@ -9,6 +9,4 @@ typedef struct irq_alloc_info msi_alloc_
- int pci_msi_prepare(struct irq_domain *domain, struct device *dev, int nvec,
- 		    msi_alloc_info_t *arg);
- 
--void pci_msi_set_desc(msi_alloc_info_t *arg, struct msi_desc *desc);
--
- #endif /* _ASM_X86_MSI_H */
 --- a/arch/x86/kernel/apic/msi.c
 +++ b/arch/x86/kernel/apic/msi.c
-@@ -204,12 +204,6 @@ void native_teardown_msi_irq(unsigned in
- 	irq_domain_free_irqs(irq, 1);
- }
- 
--static irq_hw_number_t pci_msi_get_hwirq(struct msi_domain_info *info,
--					 msi_alloc_info_t *arg)
--{
--	return arg->hwirq;
--}
--
- int pci_msi_prepare(struct irq_domain *domain, struct device *dev, int nvec,
- 		    msi_alloc_info_t *arg)
- {
-@@ -228,17 +222,8 @@ int pci_msi_prepare(struct irq_domain *d
- }
- EXPORT_SYMBOL_GPL(pci_msi_prepare);
- 
--void pci_msi_set_desc(msi_alloc_info_t *arg, struct msi_desc *desc)
--{
--	arg->desc = desc;
--	arg->hwirq = pci_msi_domain_calc_hwirq(desc);
--}
--EXPORT_SYMBOL_GPL(pci_msi_set_desc);
--
- static struct msi_domain_ops pci_msi_domain_ops = {
--	.get_hwirq	= pci_msi_get_hwirq,
- 	.msi_prepare	= pci_msi_prepare,
--	.set_desc	= pci_msi_set_desc,
+@@ -278,7 +278,6 @@ static struct irq_chip pci_msi_ir_contro
+ 	.irq_mask		= pci_msi_mask_irq,
+ 	.irq_ack		= irq_chip_ack_parent,
+ 	.irq_retrigger		= irq_chip_retrigger_hierarchy,
+-	.irq_set_vcpu_affinity	= irq_chip_set_vcpu_affinity_parent,
+ 	.flags			= IRQCHIP_SKIP_SET_WAKE,
  };
  
- static struct msi_domain_info pci_msi_domain_info = {
---- a/drivers/pci/controller/pci-hyperv.c
-+++ b/drivers/pci/controller/pci-hyperv.c
-@@ -1531,16 +1531,8 @@ static struct irq_chip hv_msi_irq_chip =
- 	.irq_unmask		= hv_irq_unmask,
- };
- 
--static irq_hw_number_t hv_msi_domain_ops_get_hwirq(struct msi_domain_info *info,
--						   msi_alloc_info_t *arg)
--{
--	return arg->hwirq;
--}
--
- static struct msi_domain_ops hv_msi_ops = {
--	.get_hwirq	= hv_msi_domain_ops_get_hwirq,
- 	.msi_prepare	= pci_msi_prepare,
--	.set_desc	= pci_msi_set_desc,
- 	.msi_free	= hv_msi_free,
- };
- 
---- a/drivers/pci/msi.c
-+++ b/drivers/pci/msi.c
-@@ -1401,16 +1401,12 @@ static int pci_msi_domain_handle_error(s
- 	return error;
- }
- 
--#ifdef GENERIC_MSI_DOMAIN_OPS
- static void pci_msi_domain_set_desc(msi_alloc_info_t *arg,
- 				    struct msi_desc *desc)
- {
- 	arg->desc = desc;
- 	arg->hwirq = pci_msi_domain_calc_hwirq(desc);
- }
--#else
--#define pci_msi_domain_set_desc		NULL
--#endif
- 
- static struct msi_domain_ops pci_msi_domain_ops_default = {
- 	.set_desc	= pci_msi_domain_set_desc,
---- a/kernel/irq/msi.c
-+++ b/kernel/irq/msi.c
-@@ -187,7 +187,6 @@ static const struct irq_domain_ops msi_d
- 	.deactivate	= msi_domain_deactivate,
- };
- 
--#ifdef GENERIC_MSI_DOMAIN_OPS
- static irq_hw_number_t msi_domain_ops_get_hwirq(struct msi_domain_info *info,
- 						msi_alloc_info_t *arg)
- {
-@@ -206,11 +205,6 @@ static void msi_domain_ops_set_desc(msi_
- {
- 	arg->desc = desc;
- }
--#else
--#define msi_domain_ops_get_hwirq	NULL
--#define msi_domain_ops_prepare		NULL
--#define msi_domain_ops_set_desc		NULL
--#endif /* !GENERIC_MSI_DOMAIN_OPS */
- 
- static int msi_domain_ops_init(struct irq_domain *domain,
- 			       struct msi_domain_info *info,
-
 
 
