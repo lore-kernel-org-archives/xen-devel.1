@@ -7,54 +7,55 @@ X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6D068C433E1
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:01:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4BA74C433E3
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:01:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3D4EF20838
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:01:38 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 1E8D520838
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:01:39 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="wxfQv6Oa";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="8tJ5SZ+n"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3D4EF20838
+	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="eJn39pF+";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="hT/OBr4e"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1E8D520838
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kAu7I-0008GH-NA; Wed, 26 Aug 2020 12:01:24 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kAu7O-0008Mo-Qj; Wed, 26 Aug 2020 12:01:30 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=LG6r=CE=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1kAu7H-000821-69
- for xen-devel@lists.xenproject.org; Wed, 26 Aug 2020 12:01:23 +0000
-X-Inumbo-ID: 9b97acc2-aa14-4ae9-8a2e-20ac830da826
+ id 1kAu7N-00083C-Ap
+ for xen-devel@lists.xenproject.org; Wed, 26 Aug 2020 12:01:29 +0000
+X-Inumbo-ID: 3b0841d5-10a6-4670-b4b2-2d7f3e533b6d
 Received: from galois.linutronix.de (unknown [193.142.43.55])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9b97acc2-aa14-4ae9-8a2e-20ac830da826;
- Wed, 26 Aug 2020 12:01:03 +0000 (UTC)
-Message-Id: <20200826112331.250130127@linutronix.de>
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 3b0841d5-10a6-4670-b4b2-2d7f3e533b6d;
+ Wed, 26 Aug 2020 12:01:24 +0000 (UTC)
+Message-Id: <20200826112332.954409970@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1598443262;
+ s=2020; t=1598443283;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=1OGPpjWOZmr24XSSpz6Nc6JwYhMQbICDj4hspoAwZbU=;
- b=wxfQv6OayK5u1H6FLXXIAcQEscg4HPJjeG+pstXl+pgdl31DNhEzs50ZOWpxyGkrMjOLQW
- 1o9FaSrwh83greTW5vyCTb8zGAVDs36ov93GPrm04pneHRj9I5V1gKWvrEoOOH7jQ4WymB
- 2dnYg73pm5Qf+NAJfV1VaexuVCwBhHU44wya2eXAw2Z+FnlfrDPKCol1dSx8jwE8+r40Me
- gFhsh/HnjcO+3pm7neY65BLXMr3nyoULj1GDuHwk6obFDadT45ulfhicTAV256PX5YzSNc
- dGaROF2c7TCDhfRvvityWK3X4gmliC/zDpfaFSui0jbwM5OFgjvjPhruWz0AMA==
+ bh=ua6NqpYSmZApI6uP+18lDgw4EnjAETLTuYc3KhfX2+w=;
+ b=eJn39pF++R7y4RiJv9aME9HZXKzf7AMtx9gOIQ/KZhoM3Ld0hlH/DnKGJSmV3hVK7ueYqX
+ g1TpG290lPqFhzmAKo6hqVmPwqEyrX7rt/PhmQiixSoeLrqPBxlBTb7V5nlKo9FeeO68w9
+ P+nP/kWZ0Q3FfsrwOaftJfMc0rekm49YPAwe1NBLe4ss62eDgjZkUMH5SBARbrLVSeCsHW
+ 9wSFLRhkhyvmHyqMypfoAkbY6kL/Y1hZFdrfo2aarMJtV0+1qhqRZ+WGFKj/hsCV4En27V
+ zyFSS2ZxL7C8PQ53C1/a/Tt9WRdp2fAapfBPmUw2+7K8K2Qi+jcv21W0IVT5RQ==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1598443262;
+ s=2020e; t=1598443283;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=1OGPpjWOZmr24XSSpz6Nc6JwYhMQbICDj4hspoAwZbU=;
- b=8tJ5SZ+n+CTD4sQz2apdajCK0eVmBiC+58dr8L0pUzWdakVsmFSRzEYppLbMSxQkKBKFP2
- zKDpRtN2h+Z7x/Ag==
-Date: Wed, 26 Aug 2020 13:16:34 +0200
+ bh=ua6NqpYSmZApI6uP+18lDgw4EnjAETLTuYc3KhfX2+w=;
+ b=hT/OBr4eTGEXyMwMWWHmsjom0DAsmwGAPtkbOlxE5LrlE3lHi77XHAXMud4bbKn68MLXI3
+ kEfd4yz3w6MRPuDQ==
+Date: Wed, 26 Aug 2020 13:16:51 +0200
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
@@ -78,7 +79,7 @@ Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
  Alex Williamson <alex.williamson@redhat.com>,
  Jacob Pan <jacob.jun.pan@intel.com>, Baolu Lu <baolu.lu@intel.com>,
  Kevin Tian <kevin.tian@intel.com>, Dan Williams <dan.j.williams@intel.com>
-Subject: [patch V2 06/46] x86/msi: Remove pointless vcpu_affinity callback
+Subject: [patch V2 23/46] irqdomain/msi: Provide DOMAIN_BUS_VMD_MSI
 References: <20200826111628.794979401@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -96,29 +97,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Setting the irq_set_vcpu_affinity() callback to
-irq_chip_set_vcpu_affinity_parent() is a pointless exercise because the
-function which utilizes it searchs the domain hierarchy to find a parent
-domain which has such a callback.
+From: Thomas Gleixner <tglx@linutronix.de>
 
-Remove the useless indirection.
+PCI devices behind a VMD bus are not subject to interrupt remapping, but
+the irq domain for VMD MSI cannot be distinguished from a regular PCI/MSI
+irq domain.
+
+Add a new domain bus token and allow it in the bus token check in
+msi_check_reservation_mode() to keep the functionality the same once VMD
+uses this token.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
----
-V2: New patch. The same is probably true for lots of other irq chips.
----
- arch/x86/kernel/apic/msi.c |    1 -
- 1 file changed, 1 deletion(-)
 
---- a/arch/x86/kernel/apic/msi.c
-+++ b/arch/x86/kernel/apic/msi.c
-@@ -278,7 +278,6 @@ static struct irq_chip pci_msi_ir_contro
- 	.irq_mask		= pci_msi_mask_irq,
- 	.irq_ack		= irq_chip_ack_parent,
- 	.irq_retrigger		= irq_chip_retrigger_hierarchy,
--	.irq_set_vcpu_affinity	= irq_chip_set_vcpu_affinity_parent,
- 	.flags			= IRQCHIP_SKIP_SET_WAKE,
+---
+ include/linux/irqdomain.h |    1 +
+ kernel/irq/msi.c          |    7 ++++++-
+ 2 files changed, 7 insertions(+), 1 deletion(-)
+
+--- a/include/linux/irqdomain.h
++++ b/include/linux/irqdomain.h
+@@ -84,6 +84,7 @@ enum irq_domain_bus_token {
+ 	DOMAIN_BUS_FSL_MC_MSI,
+ 	DOMAIN_BUS_TI_SCI_INTA_MSI,
+ 	DOMAIN_BUS_WAKEUP,
++	DOMAIN_BUS_VMD_MSI,
  };
  
+ /**
+--- a/kernel/irq/msi.c
++++ b/kernel/irq/msi.c
+@@ -370,8 +370,13 @@ static bool msi_check_reservation_mode(s
+ {
+ 	struct msi_desc *desc;
+ 
+-	if (domain->bus_token != DOMAIN_BUS_PCI_MSI)
++	switch(domain->bus_token) {
++	case DOMAIN_BUS_PCI_MSI:
++	case DOMAIN_BUS_VMD_MSI:
++		break;
++	default:
+ 		return false;
++	}
+ 
+ 	if (!(info->flags & MSI_FLAG_MUST_REACTIVATE))
+ 		return false;
+
 
 
