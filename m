@@ -7,54 +7,54 @@ X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0B506C433E8
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 07273C433E1
 	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:06:41 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D16192087C
+	by mail.kernel.org (Postfix) with ESMTPS id CF78320838
 	for <xen-devel@archiver.kernel.org>; Wed, 26 Aug 2020 12:06:40 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="cRxNY6q4";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="qSPUnSes"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D16192087C
+	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="15vzrh+W";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="kD7LSBOG"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CF78320838
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kAuCC-0001ex-2c; Wed, 26 Aug 2020 12:06:28 +0000
+	id 1kAuCB-0001el-Bq; Wed, 26 Aug 2020 12:06:27 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=LG6r=CE=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1kAu80-000821-7r
- for xen-devel@lists.xenproject.org; Wed, 26 Aug 2020 12:02:08 +0000
-X-Inumbo-ID: 45edb361-c8f8-405b-8e11-e50d53b9cb61
+ id 1kAu8o-000821-9s
+ for xen-devel@lists.xenproject.org; Wed, 26 Aug 2020 12:02:58 +0000
+X-Inumbo-ID: b73d26fd-097d-4d86-92be-a6944a0b6e22
 Received: from galois.linutronix.de (unknown [193.142.43.55])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 45edb361-c8f8-405b-8e11-e50d53b9cb61;
- Wed, 26 Aug 2020 12:01:21 +0000 (UTC)
-Message-Id: <20200826112332.658496557@linutronix.de>
+ id b73d26fd-097d-4d86-92be-a6944a0b6e22;
+ Wed, 26 Aug 2020 12:01:39 +0000 (UTC)
+Message-Id: <20200826112334.086003720@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1598443280;
+ s=2020; t=1598443298;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=b4bGIil7bipa/5kRCGwLR6ysbuS705o3f6zVCEpgylA=;
- b=cRxNY6q4LD/qHQC5Xo0FZAvJhkMhdFi+cHQ4Jj7FlYWljEI49HYpMgeULtRuZ4BnVjs7du
- mvAren+Txod753wg+6pyzdEQg/Z596Zf0s0EImMYDPCN0TucaGcDFZKa31K6/ZQaZZxVRW
- 6bVlvZWqJTEAHcTNGb+tNnOVHkP07vPvDT3DOSv+m0qWFbLWC5Jtn1AcRGfjyw5aDwIttl
- dM2ajV3sBaH8zQbs3Qga0yV5zHBpraCiSLRPf/aA3sRPVyszjgcqimWSj6lJoWyexV70yT
- QCRcEx+/PcnvfQwSHz2Ju6mwxxFx7nKha8ZZYUB5hr1Vq52e6/uSd6XA9Ikx5g==
+ bh=4GR30s5GgYbrNACLVjkL2Z4Vc3S8YRxhz8JprbkQ4/Q=;
+ b=15vzrh+WEt/YNZOsozwZ+WvaE0KRfmdkhA6KFC+jQ577UxrHhrtciftZ2WN553VbQ7FbrN
+ nxh/mQXcDb42ecdHwTgxAxp/rVdziiFKVIlqPDDDmhA8wcipnzpgcAy9YX31cElht5snPh
+ aRe8AL/ngpPV/0D6Gcvrm9OAh8W8OUeFGBdTh59wOMgelq9vBfUd1pV769vuqbRPcVUwvc
+ iWO/jJU+1PKpMQ65WwaKFIRX/4fbahxl8EHUOErEg/LhtqzshmKPdjLuyHJdjBfekPfehw
+ sAbS5Ei1NWTirGg3JVgec2tphKQAaviPw68KaXjf76/TOdCoZ+q+MgjrOTzDlA==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1598443280;
+ s=2020e; t=1598443298;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=b4bGIil7bipa/5kRCGwLR6ysbuS705o3f6zVCEpgylA=;
- b=qSPUnSeslpA0/D/c0Wds3lF32+rYjaFAhwCnjhz0P2c0Mmhu1EcCv1mmL4jo7S0ApmHD+F
- 95+es/w/dVUH7hDQ==
-Date: Wed, 26 Aug 2020 13:16:48 +0200
+ bh=4GR30s5GgYbrNACLVjkL2Z4Vc3S8YRxhz8JprbkQ4/Q=;
+ b=kD7LSBOGP377ptxMy8QUsT8p4tGWKTXIjr5euUh4DjI5Nu9+rSEdclDD/RedRs6uVRrjoi
+ q5eGzh+h+HBqKyAQ==
+Date: Wed, 26 Aug 2020 13:17:03 +0200
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
@@ -78,8 +78,7 @@ Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
  Alex Williamson <alex.williamson@redhat.com>,
  Jacob Pan <jacob.jun.pan@intel.com>, Baolu Lu <baolu.lu@intel.com>,
  Kevin Tian <kevin.tian@intel.com>, Dan Williams <dan.j.williams@intel.com>
-Subject: [patch V2 20/46] x86/irq: Move apic_post_init() invocation to one
- place
+Subject: [patch V2 35/46] x86/irq: Cleanup the arch_*_msi_irqs() leftovers
 References: <20200826111628.794979401@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -99,53 +98,148 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-No point to call it from both 32bit and 64bit implementations of
-default_setup_apic_routing(). Move it to the caller.
+Get rid of all the gunk and remove the 'select PCI_MSI_ARCH_FALLBACK' from
+the x86 Kconfig so the weak functions in the PCI core are replaced by stubs
+which emit a warning, which ensures that any fail to set the irq domain
+pointer results in a warning when the device is used.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-
 ---
- arch/x86/kernel/apic/apic.c     |    3 +++
- arch/x86/kernel/apic/probe_32.c |    3 ---
- arch/x86/kernel/apic/probe_64.c |    3 ---
- 3 files changed, 3 insertions(+), 6 deletions(-)
+V2: Adjust to the PCI_MSI_ARCH_FALLBACK change, i.e. remove it instead
+    of selecting the disabler.
+---
+ arch/x86/Kconfig                |    1 -
+ arch/x86/include/asm/pci.h      |   11 -----------
+ arch/x86/include/asm/x86_init.h |    1 -
+ arch/x86/kernel/apic/msi.c      |   22 ----------------------
+ arch/x86/kernel/x86_init.c      |   18 ------------------
+ arch/x86/pci/xen.c              |    7 -------
+ 6 files changed, 60 deletions(-)
 
---- a/arch/x86/kernel/apic/apic.c
-+++ b/arch/x86/kernel/apic/apic.c
-@@ -1429,6 +1429,9 @@ void __init apic_intr_mode_init(void)
- 		break;
+--- a/arch/x86/Kconfig
++++ b/arch/x86/Kconfig
+@@ -225,7 +225,6 @@ config X86
+ 	select NEED_SG_DMA_LENGTH
+ 	select PCI_DOMAINS			if PCI
+ 	select PCI_LOCKLESS_CONFIG		if PCI
+-	select PCI_MSI_ARCH_FALLBACKS
+ 	select PERF_EVENTS
+ 	select RTC_LIB
+ 	select RTC_MC146818_LIB
+--- a/arch/x86/include/asm/pci.h
++++ b/arch/x86/include/asm/pci.h
+@@ -105,17 +105,6 @@ static inline void early_quirks(void) {
+ 
+ extern void pci_iommu_alloc(void);
+ 
+-#ifdef CONFIG_PCI_MSI
+-/* implemented in arch/x86/kernel/apic/io_apic. */
+-struct msi_desc;
+-int native_setup_msi_irqs(struct pci_dev *dev, int nvec, int type);
+-void native_teardown_msi_irq(unsigned int irq);
+-void native_restore_msi_irqs(struct pci_dev *dev);
+-#else
+-#define native_setup_msi_irqs		NULL
+-#define native_teardown_msi_irq		NULL
+-#endif
+-
+ /* generic pci stuff */
+ #include <asm-generic/pci.h>
+ 
+--- a/arch/x86/include/asm/x86_init.h
++++ b/arch/x86/include/asm/x86_init.h
+@@ -277,7 +277,6 @@ struct pci_dev;
+ 
+ struct x86_msi_ops {
+ 	int (*setup_msi_irqs)(struct pci_dev *dev, int nvec, int type);
+-	void (*teardown_msi_irq)(unsigned int irq);
+ 	void (*teardown_msi_irqs)(struct pci_dev *dev);
+ 	void (*restore_msi_irqs)(struct pci_dev *dev);
+ };
+--- a/arch/x86/kernel/apic/msi.c
++++ b/arch/x86/kernel/apic/msi.c
+@@ -182,28 +182,6 @@ static struct irq_chip pci_msi_controlle
+ 	.flags			= IRQCHIP_SKIP_SET_WAKE,
+ };
+ 
+-int native_setup_msi_irqs(struct pci_dev *dev, int nvec, int type)
+-{
+-	struct irq_domain *domain;
+-	struct irq_alloc_info info;
+-
+-	init_irq_alloc_info(&info, NULL);
+-	info.type = X86_IRQ_ALLOC_TYPE_PCI_MSI;
+-
+-	domain = irq_remapping_get_irq_domain(&info);
+-	if (domain == NULL)
+-		domain = x86_pci_msi_default_domain;
+-	if (domain == NULL)
+-		return -ENOSYS;
+-
+-	return msi_domain_alloc_irqs(domain, &dev->dev, nvec);
+-}
+-
+-void native_teardown_msi_irq(unsigned int irq)
+-{
+-	irq_domain_free_irqs(irq, 1);
+-}
+-
+ int pci_msi_prepare(struct irq_domain *domain, struct device *dev, int nvec,
+ 		    msi_alloc_info_t *arg)
+ {
+--- a/arch/x86/kernel/x86_init.c
++++ b/arch/x86/kernel/x86_init.c
+@@ -146,28 +146,10 @@ EXPORT_SYMBOL_GPL(x86_platform);
+ 
+ #if defined(CONFIG_PCI_MSI)
+ struct x86_msi_ops x86_msi __ro_after_init = {
+-	.setup_msi_irqs		= native_setup_msi_irqs,
+-	.teardown_msi_irq	= native_teardown_msi_irq,
+-	.teardown_msi_irqs	= default_teardown_msi_irqs,
+ 	.restore_msi_irqs	= default_restore_msi_irqs,
+ };
+ 
+ /* MSI arch specific hooks */
+-int arch_setup_msi_irqs(struct pci_dev *dev, int nvec, int type)
+-{
+-	return x86_msi.setup_msi_irqs(dev, nvec, type);
+-}
+-
+-void arch_teardown_msi_irqs(struct pci_dev *dev)
+-{
+-	x86_msi.teardown_msi_irqs(dev);
+-}
+-
+-void arch_teardown_msi_irq(unsigned int irq)
+-{
+-	x86_msi.teardown_msi_irq(irq);
+-}
+-
+ void arch_restore_msi_irqs(struct pci_dev *dev)
+ {
+ 	x86_msi.restore_msi_irqs(dev);
+--- a/arch/x86/pci/xen.c
++++ b/arch/x86/pci/xen.c
+@@ -402,11 +402,6 @@ static void xen_pv_teardown_msi_irqs(str
+ 	xen_teardown_msi_irqs(dev);
+ }
+ 
+-static void xen_teardown_msi_irq(unsigned int irq)
+-{
+-	WARN_ON_ONCE(1);
+-}
+-
+ static int xen_msi_domain_alloc_irqs(struct irq_domain *domain,
+ 				     struct device *dev,  int nvec)
+ {
+@@ -483,8 +478,6 @@ static __init void xen_setup_pci_msi(voi
+ 		return;
  	}
  
-+	if (x86_platform.apic_post_init)
-+		x86_platform.apic_post_init();
-+
- 	apic_bsp_setup(upmode);
- }
- 
---- a/arch/x86/kernel/apic/probe_32.c
-+++ b/arch/x86/kernel/apic/probe_32.c
-@@ -170,9 +170,6 @@ void __init default_setup_apic_routing(v
- 
- 	if (apic->setup_apic_routing)
- 		apic->setup_apic_routing();
+-	x86_msi.teardown_msi_irq = xen_teardown_msi_irq;
 -
--	if (x86_platform.apic_post_init)
--		x86_platform.apic_post_init();
- }
- 
- void __init generic_apic_probe(void)
---- a/arch/x86/kernel/apic/probe_64.c
-+++ b/arch/x86/kernel/apic/probe_64.c
-@@ -32,9 +32,6 @@ void __init default_setup_apic_routing(v
- 			break;
- 		}
- 	}
--
--	if (x86_platform.apic_post_init)
--		x86_platform.apic_post_init();
- }
- 
- int __init default_acpi_madt_oem_check(char *oem_id, char *oem_table_id)
-
+ 	/*
+ 	 * Override the PCI/MSI irq domain init function. No point
+ 	 * in allocating the native domain and never use it.
 
 
