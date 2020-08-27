@@ -4,38 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-10.0 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=unavailable
-	autolearn_force=no version=3.4.0
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D0661C433E1
-	for <xen-devel@archiver.kernel.org>; Thu, 27 Aug 2020 07:47:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3DBC7C433DF
+	for <xen-devel@archiver.kernel.org>; Thu, 27 Aug 2020 07:47:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A3F7020786
-	for <xen-devel@archiver.kernel.org>; Thu, 27 Aug 2020 07:47:00 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A3F7020786
+	by mail.kernel.org (Postfix) with ESMTPS id 0CCB120786
+	for <xen-devel@archiver.kernel.org>; Thu, 27 Aug 2020 07:47:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0CCB120786
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kBCc8-00065z-Pm; Thu, 27 Aug 2020 07:46:28 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kBCd5-0006AP-3M; Thu, 27 Aug 2020 07:47:27 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=i4js=CF=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kBCc7-00065o-7C
- for xen-devel@lists.xenproject.org; Thu, 27 Aug 2020 07:46:27 +0000
-X-Inumbo-ID: 3ff727a2-f59d-4d90-997b-7114e74015e2
+ id 1kBCd3-0006AH-M2
+ for xen-devel@lists.xenproject.org; Thu, 27 Aug 2020 07:47:25 +0000
+X-Inumbo-ID: e3bd9bf4-2fb1-4ac1-9068-9c6cbdab8d6b
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3ff727a2-f59d-4d90-997b-7114e74015e2;
- Thu, 27 Aug 2020 07:46:26 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id e3bd9bf4-2fb1-4ac1-9068-9c6cbdab8d6b;
+ Thu, 27 Aug 2020 07:47:24 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 49C1EACF2;
- Thu, 27 Aug 2020 07:46:57 +0000 (UTC)
-Subject: Re: [patch V2 27/46] x86/xen: Rework MSI teardown
+ by mx2.suse.de (Postfix) with ESMTP id 4A2A8AC1F;
+ Thu, 27 Aug 2020 07:47:55 +0000 (UTC)
+Subject: Re: [patch V2 28/46] x86/xen: Consolidate XEN-MSI init
 To: Thomas Gleixner <tglx@linutronix.de>, LKML <linux-kernel@vger.kernel.org>
 Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
  iommu@lists.linux-foundation.org, linux-hyperv@vger.kernel.org,
@@ -58,14 +59,14 @@ Cc: x86@kernel.org, Joerg Roedel <joro@8bytes.org>,
  Jacob Pan <jacob.jun.pan@intel.com>, Baolu Lu <baolu.lu@intel.com>,
  Kevin Tian <kevin.tian@intel.com>, Dan Williams <dan.j.williams@intel.com>
 References: <20200826111628.794979401@linutronix.de>
- <20200826112333.326841410@linutronix.de>
+ <20200826112333.420224092@linutronix.de>
 From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Message-ID: <5c18f793-9212-b7f0-583d-896e1957ba1a@suse.com>
-Date: Thu, 27 Aug 2020 09:46:22 +0200
+Message-ID: <fc8d8b63-f908-2520-7cf7-42ead4aa4bd8@suse.com>
+Date: Thu, 27 Aug 2020 09:47:22 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.11.0
 MIME-Version: 1.0
-In-Reply-To: <20200826112333.326841410@linutronix.de>
+In-Reply-To: <20200826112333.420224092@linutronix.de>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -89,16 +90,10 @@ On 26.08.20 13:16, Thomas Gleixner wrote:
 > XEN because the irq domain pointer takes precedence over arch_*_msi_irqs()
 > fallbacks.
 > 
-> XENs MSI teardown relies on default_teardown_msi_irqs() which invokes
-> arch_teardown_msi_irq(). default_teardown_msi_irqs() is a trivial iterator
-> over the msi entries associated to a device.
+> To achieve this XEN MSI interrupt management needs to be wrapped into an
+> irq domain.
 > 
-> Implement this loop in xen_teardown_msi_irqs() to prepare for removal of
-> the fallbacks for X86.
-> 
-> This is a preparatory step to wrap XEN MSI alloc/free into a irq domain
-> which in turn allows to store the irq domain pointer in struct device and
-> to use the irq domain functions directly.
+> Move the x86_msi ops setup into a single function to prepare for this.
 > 
 > Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 
