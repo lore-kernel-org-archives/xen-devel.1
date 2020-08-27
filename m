@@ -2,74 +2,71 @@ Return-Path: <SRS0=HZRB=CF=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,UNWANTED_LANGUAGE_BODY,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-10.1 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2CA7FC433E1
-	for <xen-devel@archiver.kernel.org>; Thu, 27 Aug 2020 17:37:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 31441C433E1
+	for <xen-devel@archiver.kernel.org>; Thu, 27 Aug 2020 18:05:23 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B33B72087E
-	for <xen-devel@archiver.kernel.org>; Thu, 27 Aug 2020 17:37:24 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 032752087C
+	for <xen-devel@archiver.kernel.org>; Thu, 27 Aug 2020 18:05:22 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="c32Oe1sK"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B33B72087E
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="V8j2gDpG"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 032752087C
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kBLpq-0005ch-6G; Thu, 27 Aug 2020 17:37:14 +0000
+	id 1kBMGj-0000VP-Od; Thu, 27 Aug 2020 18:05:01 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=LCk+=CF=citrix.com=edvin.torok@srs-us1.protection.inumbo.net>)
- id 1kBLpp-00056c-0W
- for xen-devel@lists.xenproject.org; Thu, 27 Aug 2020 17:37:13 +0000
-X-Inumbo-ID: dc60f84d-2d97-4916-8360-bcc5e7bf25e6
-Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=k1Y6=CF=xen.org=julien@srs-us1.protection.inumbo.net>)
+ id 1kBMGj-0000VK-6S
+ for xen-devel@lists.xenproject.org; Thu, 27 Aug 2020 18:05:01 +0000
+X-Inumbo-ID: d3d95d20-c4e3-4e90-895b-664fca0a11f4
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id dc60f84d-2d97-4916-8360-bcc5e7bf25e6;
- Thu, 27 Aug 2020 17:36:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1598549801;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=3JAJlhKAtT6VltCui8Tp0Kdu9mctN9hxfwG2v7mhb6M=;
- b=c32Oe1sKdonCBoboQ6eCNBdLm7HTY5QRUdsnkyS+BZQSMU8PRPQYmyhf
- yfVZgAcySmTitzbF0Iwb0iLhYeUBRckbgkw2zygdVsDZjsr6ZhsEfcgGb
- gLHmagQZhQ1xf1pIRfpmVuN5WI6hcGHCM2MMmy7KOez7k+A7W+rT8BiZM 8=;
-Authentication-Results: esa2.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: 95XsEbv5SdvEiFtxG5Upoatpn1CM22AS7cVFzFed/oySNFoo/z6PX/L8s029HAVNEQhrEa+xAI
- 4wu/+BXGsW4zf9sGBdGDCDtsWakXjzHVKZ/nISa3DpnQ7s/hLWjI0eEua/BM0o9bfaUU3+Ripl
- RP654pWgSrw0pyigRjbRymagJDAOO+QWqJfnaXz/iFcK9dhdUwEscL/Lu2XcNgERlw1gXmofVr
- xkabgG1HoQBlstMYqoaI1EFFVsv1mDKeSXuznSkMr1P5alZ6/RFcjg8vtB0Oyyfi1QUoNnT3nB
- tm8=
-X-SBRS: 2.7
-X-MesageID: 25466307
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,360,1592884800"; d="scan'208";a="25466307"
-From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>
-To: <xen-devel@lists.xenproject.org>
-CC: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>, "Christian
- Lindig" <christian.lindig@citrix.com>, David Scott <dave@recoil.org>, "Ian
- Jackson" <ian.jackson@eu.citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH v1 1/9] tools/ocaml: use common macros for manipulating
- mmap_interface
-Date: Thu, 27 Aug 2020 18:35:52 +0100
-Message-ID: <9c9d2ac94cd7c307837643d7a6a59c66cef155e9.1598548832.git.edvin.torok@citrix.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <cover.1598548832.git.edvin.torok@citrix.com>
-References: <cover.1598548832.git.edvin.torok@citrix.com>
+ id d3d95d20-c4e3-4e90-895b-664fca0a11f4;
+ Thu, 27 Aug 2020 18:05:00 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+ bh=0IOmSeruIBnimGB7WcjG0RZiBtNz9R9F+E/gzlAjHSw=; b=V8j2gDpGhxJmrUBjVplbHctGo4
+ 6umYzsDGTAY8MWUUkYMW2wyDdEui9pLAxvwSGv+6bjv2My8uaijfY3IM6cElWgpUyeWS98rY3AJPh
+ 2v0/3a3cYKFzBytrkVJgn5SxL5YKysKrleXSvIUQu2z+PLy6RKksaHrYm9OdvfVdFT5Q=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1kBMGi-0005KM-13; Thu, 27 Aug 2020 18:05:00 +0000
+Received: from [54.239.6.186] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1kBMGh-0003zc-Pn; Thu, 27 Aug 2020 18:04:59 +0000
+Subject: Re: [PATCH v4 2/2] xen/arm: Throw messages for unknown FP/SIMD
+ implement ID
+To: Wei Chen <wei.chen@arm.com>, xen-devel@lists.xenproject.org,
+ sstabellini@kernel.org
+Cc: Andre.Przywara@arm.com, Bertrand.Marquis@arm.com, Penny.Zheng@arm.com,
+ Kaly.Xin@arm.com, nd@arm.com
+References: <20200825160603.32388-1-wei.chen@arm.com>
+ <20200825160603.32388-3-wei.chen@arm.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <223cc698-5c8d-dcf3-a4c1-8dee5521af7b@xen.org>
+Date: Thu, 27 Aug 2020 19:04:57 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
+ Gecko/20100101 Thunderbird/68.11.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20200825160603.32388-3-wei.chen@arm.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,111 +80,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Signed-off-by: Edwin Török <edvin.torok@citrix.com>
----
- tools/ocaml/libs/mmap/mmap_stubs.h    |  7 +++++++
- tools/ocaml/libs/mmap/xenmmap_stubs.c |  2 --
- tools/ocaml/libs/xb/xs_ring_stubs.c   | 14 +++++---------
- 3 files changed, 12 insertions(+), 11 deletions(-)
+Hi,
 
-diff --git a/tools/ocaml/libs/mmap/mmap_stubs.h b/tools/ocaml/libs/mmap/mmap_stubs.h
-index 65e4239890..816ba6a724 100644
---- a/tools/ocaml/libs/mmap/mmap_stubs.h
-+++ b/tools/ocaml/libs/mmap/mmap_stubs.h
-@@ -30,4 +30,11 @@ struct mmap_interface
- 	int len;
- };
- 
-+#ifndef Data_abstract_val
-+#define Data_abstract_val(v) ((void*) Op_val(v))
-+#endif
-+
-+#define Intf_val(a) ((struct mmap_interface *) Data_abstract_val(a))
-+#define Intf_data_val(a) (Intf_val(a)->addr)
-+
- #endif
-diff --git a/tools/ocaml/libs/mmap/xenmmap_stubs.c b/tools/ocaml/libs/mmap/xenmmap_stubs.c
-index e2ce088e25..b811990a89 100644
---- a/tools/ocaml/libs/mmap/xenmmap_stubs.c
-+++ b/tools/ocaml/libs/mmap/xenmmap_stubs.c
-@@ -28,8 +28,6 @@
- #include <caml/fail.h>
- #include <caml/callback.h>
- 
--#define Intf_val(a) ((struct mmap_interface *) a)
--
- static int mmap_interface_init(struct mmap_interface *intf,
-                                int fd, int pflag, int mflag,
-                                int len, int offset)
-diff --git a/tools/ocaml/libs/xb/xs_ring_stubs.c b/tools/ocaml/libs/xb/xs_ring_stubs.c
-index 7537a23949..9b6e3209fe 100644
---- a/tools/ocaml/libs/xb/xs_ring_stubs.c
-+++ b/tools/ocaml/libs/xb/xs_ring_stubs.c
-@@ -34,8 +34,6 @@
- 
- #include "mmap_stubs.h"
- 
--#define GET_C_STRUCT(a) ((struct mmap_interface *) a)
--
- /*
-  * Bytes_val has been introduced by Ocaml 4.06.1. So define our own version
-  * if needed.
-@@ -51,12 +49,11 @@ CAMLprim value ml_interface_read(value ml_interface,
- 	CAMLparam3(ml_interface, ml_buffer, ml_len);
- 	CAMLlocal1(ml_result);
- 
--	struct mmap_interface *interface = GET_C_STRUCT(ml_interface);
- 	unsigned char *buffer = Bytes_val(ml_buffer);
- 	int len = Int_val(ml_len);
- 	int result;
- 
--	struct xenstore_domain_interface *intf = interface->addr;
-+	struct xenstore_domain_interface *intf = Intf_data_val(ml_interface);
- 	XENSTORE_RING_IDX cons, prod; /* offsets only */
- 	int total_data, data;
- 	uint32_t connection;
-@@ -110,12 +107,11 @@ CAMLprim value ml_interface_write(value ml_interface,
- 	CAMLparam3(ml_interface, ml_buffer, ml_len);
- 	CAMLlocal1(ml_result);
- 
--	struct mmap_interface *interface = GET_C_STRUCT(ml_interface);
- 	const unsigned char *buffer = Bytes_val(ml_buffer);
- 	int len = Int_val(ml_len);
- 	int result;
- 
--	struct xenstore_domain_interface *intf = interface->addr;
-+	struct xenstore_domain_interface *intf = Intf_data_val(ml_interface);
- 	XENSTORE_RING_IDX cons, prod;
- 	int total_space, space;
- 	uint32_t connection;
-@@ -165,7 +161,7 @@ exit:
- CAMLprim value ml_interface_set_server_features(value interface, value v)
- {
- 	CAMLparam2(interface, v);
--	struct xenstore_domain_interface *intf = GET_C_STRUCT(interface)->addr;
-+	struct xenstore_domain_interface *intf = Intf_data_val(interface);
- 
- 	intf->server_features = Int_val(v);
- 
-@@ -175,7 +171,7 @@ CAMLprim value ml_interface_set_server_features(value interface, value v)
- CAMLprim value ml_interface_get_server_features(value interface)
- {
- 	CAMLparam1(interface);
--	struct xenstore_domain_interface *intf = GET_C_STRUCT(interface)->addr;
-+	struct xenstore_domain_interface *intf = Intf_data_val(interface);
- 
- 	CAMLreturn(Val_int (intf->server_features));
- }
-@@ -183,7 +179,7 @@ CAMLprim value ml_interface_get_server_features(value interface)
- CAMLprim value ml_interface_close(value interface)
- {
- 	CAMLparam1(interface);
--	struct xenstore_domain_interface *intf = GET_C_STRUCT(interface)->addr;
-+	struct xenstore_domain_interface *intf = Intf_data_val(interface);
- 	int i;
- 
- 	intf->req_cons = intf->req_prod = intf->rsp_cons = intf->rsp_prod = 0;
+On 25/08/2020 17:06, Wei Chen wrote:
+> Arm ID_AA64PFR0_EL1 register provides two fields to describe CPU
+> FP/SIMD implementations. Currently, we exactly know the meaning of
+> 0x0, 0x1 and 0xf of these fields. Xen treats value < 8 as FP/SIMD
+> features presented. If there is a value 0x2 bumped in the future,
+> Xen behaviors for value <= 0x1 can also take effect. But what Xen
+> done for value <= 0x1 may not always cover new value 0x2 required.
+> We throw these messages to break the silence when Xen detected
+> unknown FP/SIMD IDs to notice user to check.
+> 
+> Signed-off-by: Wei Chen <wei.chen@arm.com>
+
+Acked-by: Julien Grall <jgrall@amazon.com>
+
+Cheers,
+
 -- 
-2.25.1
-
+Julien Grall
 
