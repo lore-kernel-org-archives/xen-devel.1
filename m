@@ -2,67 +2,67 @@ Return-Path: <SRS0=HZRB=CF=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
+X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,UNWANTED_LANGUAGE_BODY,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7AFD5C433E1
-	for <xen-devel@archiver.kernel.org>; Thu, 27 Aug 2020 17:36:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EA63CC433DF
+	for <xen-devel@archiver.kernel.org>; Thu, 27 Aug 2020 17:36:58 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3EA8B2087E
-	for <xen-devel@archiver.kernel.org>; Thu, 27 Aug 2020 17:36:55 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id B3C1A2087E
+	for <xen-devel@archiver.kernel.org>; Thu, 27 Aug 2020 17:36:58 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="OhMd4UvN"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3EA8B2087E
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="iVEJgmHA"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B3C1A2087E
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kBLpM-0005Ek-WA; Thu, 27 Aug 2020 17:36:44 +0000
+	id 1kBLpR-0005HB-A3; Thu, 27 Aug 2020 17:36:49 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=LCk+=CF=citrix.com=edvin.torok@srs-us1.protection.inumbo.net>)
- id 1kBLpK-00056c-WD
- for xen-devel@lists.xenproject.org; Thu, 27 Aug 2020 17:36:43 +0000
-X-Inumbo-ID: 563efaa2-08c3-4d94-bfc5-4c72bbfecd22
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+ id 1kBLpQ-00056c-01
+ for xen-devel@lists.xenproject.org; Thu, 27 Aug 2020 17:36:48 +0000
+X-Inumbo-ID: 4af3a760-4c2e-407f-867d-99ddcfafd12b
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 563efaa2-08c3-4d94-bfc5-4c72bbfecd22;
+ id 4af3a760-4c2e-407f-867d-99ddcfafd12b;
  Thu, 27 Aug 2020 17:36:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1598549792;
+ d=citrix.com; s=securemail; t=1598549793;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=MHtz8SI3DK32t3n20Jh2fkPiCC9AQrSqzwoeDRcCDxg=;
- b=OhMd4UvNDmiTHreY9vzL42ZUaQr3IP83FKKe16bweLWWdk2L7DMxphCe
- lsB9AW6K68tDVyR+C936gVvb6Z8wl8xynbu5xZKBg9lNvFiHFPJt5ZO/b
- qpolvm3R1RuMrMl87ZB7cIAnR3E0N56eeCgMHSy/Niw6OfrQOAUWZqQ7h 4=;
-Authentication-Results: esa5.hc3370-68.iphmx.com;
+ bh=Jd/69jSrkYCxXn7af6OWEJJQ8fkaAtMcqXK50r2PD/o=;
+ b=iVEJgmHAqBnaT2Kqz2CnvEAR5QNFdJWpcKw2haZUsrkNcNTbTgWlkZm7
+ beXnCp0DW8PMPojwUCGbB2t/Cd/T25ySHVJ+6z2tVDjqc7vo07CT17AG7
+ wuYtxXP6Rgq/bP2S7D9atugPmS38dknRzDvVAzpVz2LTaUEvNderto9st U=;
+Authentication-Results: esa6.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: C0S0RLJgF8B17AKpgUdpO56kOJ8g4LkusOgkQAqwFnhe0GXIVL6B+VqOASkoNs6XAenp1CyFzh
- IlJYZNHdZFGzvlnU26cz+zgbdnD/sQMQLYPK5awd0/uEI3IrpjgpFlSJwf02QoMSl5aaVvUEEQ
- lkdMFhy7T1QhYl5dUJpwWp1TT+I0Bbgy+CMOfH7FYS+F//6rZ6og/EVWIM+4KN3VNmNYFlBfWd
- rJ5wYLkvappcfgC8d3ZJ22QxWfRGbjNpSgioxUJ3X4wJuCr8nHTMLwSWMA7OhMXreqywLwafqf
- djk=
+IronPort-SDR: E27MO3U+SpUGqyCWEqLeJvxJUxgSSkU9mV9fBNw9FTOYknKMWUsS0HfeiNFeD/Owxq8/5JQPP1
+ zkcBO5G8oIy8fVFbHJHvmUr40jcxySR+HJ1A7NS3oC7khcR4rpJn3qgU/6RdXvAvzEAfl/Jfkk
+ s57JimTRlbceEDftuPdGt/E3gDPBuIr9vabt/2bnP/AHhZMSJR0LahXGEjdPKRgFKgArcE8p2b
+ 4H8dujc5HRGIf4Y9qQ5UO83gkGS3/m9xJ+/+DVrtpabLHo3WsO/8B+V5M4EEek8AeAfFokE1Hx
+ idE=
 X-SBRS: 2.7
-X-MesageID: 25595289
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 25758534
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,360,1592884800"; d="scan'208";a="25595289"
+X-IronPort-AV: E=Sophos;i="5.76,360,1592884800"; d="scan'208";a="25758534"
 From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>, "Christian
  Lindig" <christian.lindig@citrix.com>, David Scott <dave@recoil.org>, "Ian
  Jackson" <ian.jackson@eu.citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH v1 3/9] tools/ocaml/libs/mmap: Expose stub_mmap_alloc
-Date: Thu, 27 Aug 2020 18:35:54 +0100
-Message-ID: <3b9add7e69d48e99ea5349169f6e45ef1d802c0e.1598548832.git.edvin.torok@citrix.com>
+Subject: [PATCH v1 8/9] tools/ocaml/libs/mmap: mark mmap/munmap as blocking
+Date: Thu, 27 Aug 2020 18:35:59 +0100
+Message-ID: <2260c8a46871b7996fee69643e25eb3cb0d1c657.1598548832.git.edvin.torok@citrix.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1598548832.git.edvin.torok@citrix.com>
 References: <cover.1598548832.git.edvin.torok@citrix.com>
@@ -82,107 +82,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This also handles mmap errors better by using the `uerror` helper
-to raise a proper exception using `errno`.
-
-Changed type of `len` from `int` to `size_t`: at construction time we
-ensure the length is >= 0, so we can reflect this by using an unsigned
-type. The type is unsigned at the C API level, and a negative integer
-would just get translated to a very large unsigned number otherwise.
-
-mmap also takes off_t and size_t, so using int64 would be more generic
-here, however we only ever use this interface to map rings, so keeping
-the `int` sizes is fine.
-OCaml itself only uses `ints` for mapping bigarrays, and int64 for just
-the offset.
+These functions can potentially take some time,
+so allow other OCaml code to proceed meanwhile (if any).
 
 Signed-off-by: Edwin Török <edvin.torok@citrix.com>
 ---
- tools/ocaml/libs/mmap/mmap_stubs.h    |  4 +++-
- tools/ocaml/libs/mmap/xenmmap_stubs.c | 31 +++++++++++++++++----------
- 2 files changed, 23 insertions(+), 12 deletions(-)
+ tools/ocaml/libs/mmap/xenmmap_stubs.c | 12 ++++++++++--
+ 1 file changed, 10 insertions(+), 2 deletions(-)
 
-diff --git a/tools/ocaml/libs/mmap/mmap_stubs.h b/tools/ocaml/libs/mmap/mmap_stubs.h
-index 816ba6a724..3352594e38 100644
---- a/tools/ocaml/libs/mmap/mmap_stubs.h
-+++ b/tools/ocaml/libs/mmap/mmap_stubs.h
-@@ -27,7 +27,7 @@
- struct mmap_interface
- {
- 	void *addr;
--	int len;
-+	size_t len;
- };
- 
- #ifndef Data_abstract_val
-@@ -37,4 +37,6 @@ struct mmap_interface
- #define Intf_val(a) ((struct mmap_interface *) Data_abstract_val(a))
- #define Intf_data_val(a) (Intf_val(a)->addr)
- 
-+value stub_mmap_alloc(void *addr, size_t len);
-+
- #endif
 diff --git a/tools/ocaml/libs/mmap/xenmmap_stubs.c b/tools/ocaml/libs/mmap/xenmmap_stubs.c
-index 4d09c5a6e6..9c1126c6a2 100644
+index 9c1126c6a2..21feceea0e 100644
 --- a/tools/ocaml/libs/mmap/xenmmap_stubs.c
 +++ b/tools/ocaml/libs/mmap/xenmmap_stubs.c
-@@ -27,16 +27,18 @@
- #include <caml/custom.h>
+@@ -28,6 +28,7 @@
  #include <caml/fail.h>
  #include <caml/callback.h>
-+#include <caml/unixsupport.h>
+ #include <caml/unixsupport.h>
++#include <caml/signals.h>
  
  #define Wsize_bsize_round(n) (Wsize_bsize( (n) + sizeof(value) - 1 ))
  
--static int mmap_interface_init(struct mmap_interface *intf,
--                               int fd, int pflag, int mflag,
--                               int len, int offset)
-+value stub_mmap_alloc(void *addr, size_t len)
+@@ -69,7 +70,9 @@ CAMLprim value stub_mmap_init(value fd, value pflag, value mflag,
+ 		caml_invalid_argument("negative offset");
+ 	length = Int_val(len);
+ 
++	caml_enter_blocking_section();
+ 	addr = mmap(NULL, length, c_pflag, c_mflag, fd, Int_val(offset));
++	caml_leave_blocking_section();
+ 	if (MAP_FAILED == addr)
+ 		uerror("mmap", Nothing);
+ 
+@@ -80,10 +83,15 @@ CAMLprim value stub_mmap_init(value fd, value pflag, value mflag,
+ CAMLprim value stub_mmap_final(value intf)
  {
--	intf->len = len;
--	intf->addr = mmap(NULL, len, pflag, mflag, fd, offset);
--	return (intf->addr == MAP_FAILED) ? errno : 0;
-+	CAMLparam0();
-+	CAMLlocal1(result);
-+	result = caml_alloc(Wsize_bsize_round(sizeof(struct mmap_interface)), Abstract_tag);
-+	Intf_val(result)->addr = addr;
-+	Intf_val(result)->len = len;
-+	CAMLreturn(result);
+ 	CAMLparam1(intf);
++	struct mmap_interface interface = *Intf_val(intf);
+ 
+-	if (Intf_val(intf)->addr != MAP_FAILED)
+-		munmap(Intf_val(intf)->addr, Intf_val(intf)->len);
++	/* mark it as freed, in case munmap below fails, so we don't retry it */
+ 	Intf_val(intf)->addr = MAP_FAILED;
++	if (interface.addr != MAP_FAILED) {
++		caml_enter_blocking_section();
++		munmap(interface.addr, interface.len);
++		caml_leave_blocking_section();
++	}
+ 
+ 	CAMLreturn(Val_unit);
  }
- 
- CAMLprim value stub_mmap_init(value fd, value pflag, value mflag,
-@@ -45,6 +47,8 @@ CAMLprim value stub_mmap_init(value fd, value pflag, value mflag,
- 	CAMLparam5(fd, pflag, mflag, len, offset);
- 	CAMLlocal1(result);
- 	int c_pflag, c_mflag;
-+	void* addr;
-+	size_t length;
- 
- 	switch (Int_val(pflag)) {
- 	case 0: c_pflag = PROT_READ; break;
-@@ -59,12 +63,17 @@ CAMLprim value stub_mmap_init(value fd, value pflag, value mflag,
- 	default: caml_invalid_argument("maptype");
- 	}
- 
--	result = caml_alloc(Wsize_bsize_round(sizeof(struct mmap_interface)), Abstract_tag);
-+	if (Int_val(len) < 0)
-+		caml_invalid_argument("negative size");
-+	if (Int_val(offset) < 0)
-+		caml_invalid_argument("negative offset");
-+	length = Int_val(len);
- 
--	if (mmap_interface_init(Intf_val(result), Int_val(fd),
--	                        c_pflag, c_mflag,
--	                        Int_val(len), Int_val(offset)))
--		caml_failwith("mmap");
-+	addr = mmap(NULL, length, c_pflag, c_mflag, fd, Int_val(offset));
-+	if (MAP_FAILED == addr)
-+		uerror("mmap", Nothing);
-+
-+	result = stub_mmap_alloc(addr, length);
- 	CAMLreturn(result);
- }
- 
 -- 
 2.25.1
 
