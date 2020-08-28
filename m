@@ -7,43 +7,42 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C05E8C433E2
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D4837C433E6
 	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2020 15:08:21 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9C7F12075B
+	by mail.kernel.org (Postfix) with ESMTPS id B3021208C9
 	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2020 15:08:21 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9C7F12075B
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B3021208C9
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kBfz2-0004fm-OK; Fri, 28 Aug 2020 15:08:04 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kBfz9-0004jg-0b; Fri, 28 Aug 2020 15:08:11 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Pjxq=CG=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kBfz1-0004eG-4p
- for xen-devel@lists.xenproject.org; Fri, 28 Aug 2020 15:08:03 +0000
-X-Inumbo-ID: 8c572d87-0582-4a3b-9d71-acce5cf17360
+ id 1kBfz7-0004eL-Hn
+ for xen-devel@lists.xenproject.org; Fri, 28 Aug 2020 15:08:09 +0000
+X-Inumbo-ID: a28c6cc9-13a5-4375-9d06-4751087d6f40
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 8c572d87-0582-4a3b-9d71-acce5cf17360;
- Fri, 28 Aug 2020 15:07:51 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id a28c6cc9-13a5-4375-9d06-4751087d6f40;
+ Fri, 28 Aug 2020 15:07:53 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 662C0AEB6;
- Fri, 28 Aug 2020 15:08:23 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 47DD8AF30;
+ Fri, 28 Aug 2020 15:08:24 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>, Ian Jackson <iwj@xenproject.org>,
  Wei Liu <wl@xen.org>
-Subject: [PATCH v4 02/31] tools: drop explicit path specifications for qemu
- build
-Date: Fri, 28 Aug 2020 17:07:18 +0200
-Message-Id: <20200828150747.25305-3-jgross@suse.com>
+Subject: [PATCH v4 08/31] tools/misc: replace PAGE_SIZE with XC_PAGE_SIZE in
+ xen-mfndump.c
+Date: Fri, 28 Aug 2020 17:07:24 +0200
+Message-Id: <20200828150747.25305-9-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200828150747.25305-1-jgross@suse.com>
 References: <20200828150747.25305-1-jgross@suse.com>
@@ -62,56 +61,117 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Since more than three years now qemu is capable to set the needed
-include and library paths for the Xen libraries via pkg-config.
+The definition of PAGE_SIZE comes from xc_private.h, which shouldn't be
+used by xen-mfndump.c. Replace PAGE_SIZE by XC_PAGE_SIZE, as
+xc_private.h contains:
 
-So drop the specification of those paths in tools/Makefile. This will
-enable to move libxenctrl away from tools/libxc, as qemu's configure
-script has special treatment of this path.
+#define PAGE_SIZE XC_PAGE_SIZE
+
+For the same reason PAGE_SHIFT_X86 needs to replaced with
+XC_PAGE_SHIFT.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
+Acked-by: Wei Liu <wl@xen.org>
 ---
- tools/Makefile | 26 +-------------------------
- 1 file changed, 1 insertion(+), 25 deletions(-)
+ tools/misc/xen-mfndump.c | 26 +++++++++++++-------------
+ 1 file changed, 13 insertions(+), 13 deletions(-)
 
-diff --git a/tools/Makefile b/tools/Makefile
-index 198b239edc..7c9f9fc900 100644
---- a/tools/Makefile
-+++ b/tools/Makefile
-@@ -245,32 +245,8 @@ subdir-all-qemu-xen-dir: qemu-xen-dir-find
- 		-DXC_WANT_COMPAT_GNTTAB_API=1 \
- 		-DXC_WANT_COMPAT_MAP_FOREIGN_API=1 \
- 		-DXC_WANT_COMPAT_DEVICEMODEL_API=1 \
--		-I$(XEN_ROOT)/tools/include \
--		-I$(XEN_ROOT)/tools/libs/toolcore/include \
--		-I$(XEN_ROOT)/tools/libs/toollog/include \
--		-I$(XEN_ROOT)/tools/libs/evtchn/include \
--		-I$(XEN_ROOT)/tools/libs/gnttab/include \
--		-I$(XEN_ROOT)/tools/libs/foreignmemory/include \
--		-I$(XEN_ROOT)/tools/libs/devicemodel/include \
--		-I$(XEN_ROOT)/tools/libxc/include \
--		-I$(XEN_ROOT)/tools/xenstore/include \
--		-I$(XEN_ROOT)/tools/xenstore/compat/include \
- 		$(EXTRA_CFLAGS_QEMU_XEN)" \
--		--extra-ldflags="-L$(XEN_ROOT)/tools/libxc \
--		-L$(XEN_ROOT)/tools/xenstore \
--		-L$(XEN_ROOT)/tools/libs/toolcore \
--		-L$(XEN_ROOT)/tools/libs/evtchn \
--		-L$(XEN_ROOT)/tools/libs/gnttab \
--		-L$(XEN_ROOT)/tools/libs/foreignmemory \
--		-L$(XEN_ROOT)/tools/libs/devicemodel \
--		-Wl,-rpath-link=$(XEN_ROOT)/tools/libs/toolcore \
--		-Wl,-rpath-link=$(XEN_ROOT)/tools/libs/toollog \
--		-Wl,-rpath-link=$(XEN_ROOT)/tools/libs/evtchn \
--		-Wl,-rpath-link=$(XEN_ROOT)/tools/libs/gnttab \
--		-Wl,-rpath-link=$(XEN_ROOT)/tools/libs/call \
--		-Wl,-rpath-link=$(XEN_ROOT)/tools/libs/foreignmemory \
--		-Wl,-rpath-link=$(XEN_ROOT)/tools/libs/devicemodel \
--		$(QEMU_UPSTREAM_RPATH)" \
-+		--extra-ldflags="$(QEMU_UPSTREAM_RPATH)" \
- 		--bindir=$(LIBEXEC_BIN) \
- 		--datadir=$(SHAREDIR)/qemu-xen \
- 		--localstatedir=$(localstatedir) \
+diff --git a/tools/misc/xen-mfndump.c b/tools/misc/xen-mfndump.c
+index cb15d08c7e..92bc954ce0 100644
+--- a/tools/misc/xen-mfndump.c
++++ b/tools/misc/xen-mfndump.c
+@@ -207,7 +207,7 @@ int dump_ptes_func(int argc, char *argv[])
+         goto out;
+     }
+ 
+-    page = xc_map_foreign_range(xch, domid, PAGE_SIZE, PROT_READ,
++    page = xc_map_foreign_range(xch, domid, XC_PAGE_SIZE, PROT_READ,
+                                 minfo.p2m_table[pfn]);
+     if ( !page )
+     {
+@@ -216,7 +216,7 @@ int dump_ptes_func(int argc, char *argv[])
+         goto out;
+     }
+ 
+-    pte_num = PAGE_SIZE / 8;
++    pte_num = XC_PAGE_SIZE / 8;
+ 
+     printf(" --- Dumping %d PTEs for domain %d ---\n", pte_num, domid);
+     printf(" Guest Width: %u, PT Levels: %u P2M size: = %lu\n",
+@@ -252,7 +252,7 @@ int dump_ptes_func(int argc, char *argv[])
+ 
+  out:
+     if ( page )
+-        munmap(page, PAGE_SIZE);
++        munmap(page, XC_PAGE_SIZE);
+     xc_unmap_domain_meminfo(xch, &minfo);
+     munmap(m2p_table, M2P_SIZE(max_mfn));
+     return rc;
+@@ -290,7 +290,7 @@ int lookup_pte_func(int argc, char *argv[])
+         return -1;
+     }
+ 
+-    pte_num = PAGE_SIZE / 8;
++    pte_num = XC_PAGE_SIZE / 8;
+ 
+     printf(" --- Lookig for PTEs mapping mfn 0x%lx for domain %d ---\n",
+            mfn, domid);
+@@ -302,7 +302,7 @@ int lookup_pte_func(int argc, char *argv[])
+         if ( !(minfo.pfn_type[i] & XEN_DOMCTL_PFINFO_LTABTYPE_MASK) )
+             continue;
+ 
+-        page = xc_map_foreign_range(xch, domid, PAGE_SIZE, PROT_READ,
++        page = xc_map_foreign_range(xch, domid, XC_PAGE_SIZE, PROT_READ,
+                                     minfo.p2m_table[i]);
+         if ( !page )
+             continue;
+@@ -312,15 +312,15 @@ int lookup_pte_func(int argc, char *argv[])
+             uint64_t pte = ((const uint64_t*)page)[j];
+ 
+ #define __MADDR_BITS_X86  ((minfo.guest_width == 8) ? 52 : 44)
+-#define __MFN_MASK_X86    ((1ULL << (__MADDR_BITS_X86 - PAGE_SHIFT_X86)) - 1)
+-            if ( ((pte >> PAGE_SHIFT_X86) & __MFN_MASK_X86) == mfn)
++#define __MFN_MASK_X86    ((1ULL << (__MADDR_BITS_X86 - XC_PAGE_SHIFT)) - 1)
++            if ( ((pte >> XC_PAGE_SHIFT) & __MFN_MASK_X86) == mfn)
+                 printf("  0x%lx <-- [0x%lx][%lu]: 0x%"PRIx64"\n",
+                        mfn, minfo.p2m_table[i], j, pte);
+ #undef __MADDR_BITS_X86
+ #undef __MFN_MASK_X8
+         }
+ 
+-        munmap(page, PAGE_SIZE);
++        munmap(page, XC_PAGE_SIZE);
+         page = NULL;
+     }
+ 
+@@ -355,8 +355,8 @@ int memcmp_mfns_func(int argc, char *argv[])
+         return -1;
+     }
+ 
+-    page1 = xc_map_foreign_range(xch, domid1, PAGE_SIZE, PROT_READ, mfn1);
+-    page2 = xc_map_foreign_range(xch, domid2, PAGE_SIZE, PROT_READ, mfn2);
++    page1 = xc_map_foreign_range(xch, domid1, XC_PAGE_SIZE, PROT_READ, mfn1);
++    page2 = xc_map_foreign_range(xch, domid2, XC_PAGE_SIZE, PROT_READ, mfn2);
+     if ( !page1 || !page2 )
+     {
+         ERROR("Failed to map either 0x%lx[dom %d] or 0x%lx[dom %d]\n",
+@@ -368,13 +368,13 @@ int memcmp_mfns_func(int argc, char *argv[])
+     printf(" --- Comparing the content of 2 MFNs ---\n");
+     printf(" 1: 0x%lx[dom %d], 2: 0x%lx[dom %d]\n",
+            mfn1, domid1, mfn2, domid2);
+-    printf("  memcpy(1, 2) = %d\n", memcmp(page1, page2, PAGE_SIZE));
++    printf("  memcpy(1, 2) = %d\n", memcmp(page1, page2, XC_PAGE_SIZE));
+ 
+  out:
+     if ( page1 )
+-        munmap(page1, PAGE_SIZE);
++        munmap(page1, XC_PAGE_SIZE);
+     if ( page2 )
+-        munmap(page2, PAGE_SIZE);
++        munmap(page2, XC_PAGE_SIZE);
+     return rc;
+ }
+ 
 -- 
 2.26.2
 
