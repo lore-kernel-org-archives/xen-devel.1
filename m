@@ -7,42 +7,42 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 38AAFC433E2
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2020 15:08:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 02A44C433E6
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2020 15:08:25 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 10440208D5
+	by mail.kernel.org (Postfix) with ESMTPS id D23BA208C9
 	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2020 15:08:24 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 10440208D5
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D23BA208C9
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kBfzD-0004n0-LF; Fri, 28 Aug 2020 15:08:15 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kBfzD-0004mb-AT; Fri, 28 Aug 2020 15:08:15 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Pjxq=CG=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kBfzC-0004eL-Hm
- for xen-devel@lists.xenproject.org; Fri, 28 Aug 2020 15:08:14 +0000
-X-Inumbo-ID: c21d23e2-bbf1-4eb3-9b23-dca14a90fa20
+ id 1kBfzB-0004eG-56
+ for xen-devel@lists.xenproject.org; Fri, 28 Aug 2020 15:08:13 +0000
+X-Inumbo-ID: bb108699-f94b-49f4-b014-de0b14328eb5
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id c21d23e2-bbf1-4eb3-9b23-dca14a90fa20;
- Fri, 28 Aug 2020 15:07:53 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id bb108699-f94b-49f4-b014-de0b14328eb5;
+ Fri, 28 Aug 2020 15:07:55 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 24C1FAF47;
- Fri, 28 Aug 2020 15:08:24 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 7A916AF85;
+ Fri, 28 Aug 2020 15:08:25 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>, Ian Jackson <iwj@xenproject.org>,
  Wei Liu <wl@xen.org>
-Subject: [PATCH v4 07/31] tools/misc: don't include xg_save_restore.h from
- xen-mfndump.c
-Date: Fri, 28 Aug 2020 17:07:23 +0200
-Message-Id: <20200828150747.25305-8-jgross@suse.com>
+Subject: [PATCH v4 16/31] tools/xcutils: use official headers in readnotes
+Date: Fri, 28 Aug 2020 17:07:32 +0200
+Message-Id: <20200828150747.25305-17-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200828150747.25305-1-jgross@suse.com>
 References: <20200828150747.25305-1-jgross@suse.com>
@@ -61,48 +61,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-xen-mfndump.c is including the libxc private header xg_save_restore.h.
-Avoid that by moving the definition of is_mapped() to xen-mfndump.c
-(it is used there only) and by duplicating the definition of
-M2P_SIZE() in xen-mfndump.c.
+readnotes.c is including xg_private.h. Now that the xenctrl headers
+are structured better this is no longer needed.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 Acked-by: Wei Liu <wl@xen.org>
 ---
- tools/libxc/xg_save_restore.h | 4 ----
- tools/misc/xen-mfndump.c      | 5 ++++-
- 2 files changed, 4 insertions(+), 5 deletions(-)
+ tools/xcutils/Makefile    | 3 +--
+ tools/xcutils/readnotes.c | 5 +++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/tools/libxc/xg_save_restore.h b/tools/libxc/xg_save_restore.h
-index 303081df0d..b904296997 100644
---- a/tools/libxc/xg_save_restore.h
-+++ b/tools/libxc/xg_save_restore.h
-@@ -109,10 +109,6 @@ static inline int get_platform_info(xc_interface *xch, uint32_t dom,
- #define M2P_SIZE(_m)    ROUNDUP(((_m) * sizeof(xen_pfn_t)), M2P_SHIFT)
- #define M2P_CHUNKS(_m)  (M2P_SIZE((_m)) >> M2P_SHIFT)
+diff --git a/tools/xcutils/Makefile b/tools/xcutils/Makefile
+index 2811893980..82d42624c8 100644
+--- a/tools/xcutils/Makefile
++++ b/tools/xcutils/Makefile
+@@ -15,8 +15,7 @@ PROGRAMS = readnotes lsevtchn
  
--/* Returns TRUE if the PFN is currently mapped */
--#define is_mapped(pfn_type) (!((pfn_type) & 0x80000000UL))
--
--
- #define GET_FIELD(_p, _f, _w) (((_w) == 8) ? ((_p)->x64._f) : ((_p)->x32._f))
+ CFLAGS += -Werror
  
- #define SET_FIELD(_p, _f, _v, _w) do {          \
-diff --git a/tools/misc/xen-mfndump.c b/tools/misc/xen-mfndump.c
-index 858bd0e26b..cb15d08c7e 100644
---- a/tools/misc/xen-mfndump.c
-+++ b/tools/misc/xen-mfndump.c
-@@ -5,7 +5,10 @@
- #include <unistd.h>
- #include <inttypes.h>
+-# incorrectly uses libxc internals
+-CFLAGS_readnotes.o  := $(CFLAGS_libxenevtchn) $(CFLAGS_libxenctrl) $(CFLAGS_libxenguest) -I$(XEN_ROOT)/tools/libxc $(CFLAGS_libxencall)
++CFLAGS_readnotes.o  := $(CFLAGS_libxenevtchn) $(CFLAGS_libxenctrl) $(CFLAGS_libxenguest)
+ CFLAGS_lsevtchn.o   := $(CFLAGS_libxenevtchn) $(CFLAGS_libxenctrl)
  
--#include "xg_save_restore.h"
-+#include <xen-tools/libs.h>
-+
-+#define M2P_SIZE(_m)    ROUNDUP(((_m) * sizeof(xen_pfn_t)), 21)
-+#define is_mapped(pfn_type) (!((pfn_type) & 0x80000000UL))
+ .PHONY: all
+diff --git a/tools/xcutils/readnotes.c b/tools/xcutils/readnotes.c
+index a6b7358e70..ff684c7dcb 100644
+--- a/tools/xcutils/readnotes.c
++++ b/tools/xcutils/readnotes.c
+@@ -11,8 +11,9 @@
+ #include <sys/stat.h>
+ #include <sys/mman.h>
  
- static xc_interface *xch;
+-#include <xg_private.h>
+-#include <xenctrl_dom.h> /* gunzip bits */
++#include <xen/xen.h>
++#include <xenctrl.h>
++#include <xenguest.h>
+ 
+ #include <xen/libelf/libelf.h>
  
 -- 
 2.26.2
