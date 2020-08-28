@@ -7,42 +7,45 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3A598C433E6
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2020 15:08:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CDDF6C43461
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2020 15:08:48 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 132222075B
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2020 15:08:47 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 132222075B
+	by mail.kernel.org (Postfix) with ESMTPS id 9BBE6208C9
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2020 15:08:48 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9BBE6208C9
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kBfzX-0005BZ-H2; Fri, 28 Aug 2020 15:08:35 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kBfzW-00059I-0Q; Fri, 28 Aug 2020 15:08:34 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Pjxq=CG=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kBfzW-0004eL-If
- for xen-devel@lists.xenproject.org; Fri, 28 Aug 2020 15:08:34 +0000
-X-Inumbo-ID: 9c285ca6-7a91-4841-8dbb-a225b154761e
+ id 1kBfzV-0004eG-61
+ for xen-devel@lists.xenproject.org; Fri, 28 Aug 2020 15:08:33 +0000
+X-Inumbo-ID: d2b9f8f5-10dd-4235-992a-71adaff343ad
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9c285ca6-7a91-4841-8dbb-a225b154761e;
- Fri, 28 Aug 2020 15:07:55 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id d2b9f8f5-10dd-4235-992a-71adaff343ad;
+ Fri, 28 Aug 2020 15:07:56 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id AE626AF6E;
- Fri, 28 Aug 2020 15:08:24 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id F155DAFBE;
+ Fri, 28 Aug 2020 15:08:26 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>, Ian Jackson <iwj@xenproject.org>,
- Wei Liu <wl@xen.org>
-Subject: [PATCH v4 11/31] tools/libxc: move xc_[un]map_domain_meminfo() into
- new source xg_domain.c
-Date: Fri, 28 Aug 2020 17:07:27 +0200
-Message-Id: <20200828150747.25305-12-jgross@suse.com>
+Cc: Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
+Subject: [PATCH v4 22/31] tools: split libxenstat into new tools/libs/stat
+ directory
+Date: Fri, 28 Aug 2020 17:07:38 +0200
+Message-Id: <20200828150747.25305-23-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200828150747.25305-1-jgross@suse.com>
 References: <20200828150747.25305-1-jgross@suse.com>
@@ -61,325 +64,418 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Move xc_[un]map_domain_meminfo() functions to new source xg_domain.c as
-they are defined in include/xenguest.h and should be in libxenguest.
+There is no reason why libxenstat is not placed in the tools/libs
+directory.
+
+At the same time move xenstat.h to a dedicated include directory
+in tools/libs/stat in order to follow the same pattern as the other
+libraries in tools/libs.
+
+As now xentop is the only left directory in xenstat move it directly
+under tools and get rid of tools/xenstat.
+
+Fix some missing prototype errors (add one prototype and make two
+functions static).
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 Acked-by: Wei Liu <wl@xen.org>
 ---
- tools/libxc/Makefile    |   4 +-
- tools/libxc/xc_domain.c | 126 ---------------------------------
- tools/libxc/xg_domain.c | 149 ++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 152 insertions(+), 127 deletions(-)
- create mode 100644 tools/libxc/xg_domain.c
+ .gitignore                                    |   8 +-
+ tools/Makefile                                |   2 +-
+ tools/Rules.mk                                |   6 -
+ tools/libs/Makefile                           |   1 +
+ .../{xenstat/libxenstat => libs/stat}/COPYING |   0
+ .../libxenstat => libs/stat}/Makefile         | 105 ++++--------------
+ .../stat}/bindings/swig/perl/.empty           |   0
+ .../stat}/bindings/swig/python/.empty         |   0
+ .../stat}/bindings/swig/xenstat.i             |   0
+ .../src => libs/stat/include}/xenstat.h       |   3 +
+ .../libxenstat/src => libs/stat}/xenstat.c    |   0
+ .../src => libs/stat}/xenstat_freebsd.c       |   0
+ .../src => libs/stat}/xenstat_linux.c         |   4 +-
+ .../src => libs/stat}/xenstat_netbsd.c        |   0
+ .../src => libs/stat}/xenstat_priv.h          |   0
+ .../src => libs/stat}/xenstat_qmp.c           |   0
+ .../src => libs/stat}/xenstat_solaris.c       |   0
+ tools/libs/uselibs.mk                         |   2 +
+ tools/xenstat/Makefile                        |  10 --
+ tools/{xenstat => }/xentop/Makefile           |   2 +-
+ tools/{xenstat => }/xentop/TODO               |   0
+ tools/{xenstat => }/xentop/xentop.c           |   0
+ 22 files changed, 36 insertions(+), 107 deletions(-)
+ rename tools/{xenstat/libxenstat => libs/stat}/COPYING (100%)
+ rename tools/{xenstat/libxenstat => libs/stat}/Makefile (54%)
+ rename tools/{xenstat/libxenstat => libs/stat}/bindings/swig/perl/.empty (100%)
+ rename tools/{xenstat/libxenstat => libs/stat}/bindings/swig/python/.empty (100%)
+ rename tools/{xenstat/libxenstat => libs/stat}/bindings/swig/xenstat.i (100%)
+ rename tools/{xenstat/libxenstat/src => libs/stat/include}/xenstat.h (98%)
+ rename tools/{xenstat/libxenstat/src => libs/stat}/xenstat.c (100%)
+ rename tools/{xenstat/libxenstat/src => libs/stat}/xenstat_freebsd.c (100%)
+ rename tools/{xenstat/libxenstat/src => libs/stat}/xenstat_linux.c (98%)
+ rename tools/{xenstat/libxenstat/src => libs/stat}/xenstat_netbsd.c (100%)
+ rename tools/{xenstat/libxenstat/src => libs/stat}/xenstat_priv.h (100%)
+ rename tools/{xenstat/libxenstat/src => libs/stat}/xenstat_qmp.c (100%)
+ rename tools/{xenstat/libxenstat/src => libs/stat}/xenstat_solaris.c (100%)
+ delete mode 100644 tools/xenstat/Makefile
+ rename tools/{xenstat => }/xentop/Makefile (97%)
+ rename tools/{xenstat => }/xentop/TODO (100%)
+ rename tools/{xenstat => }/xentop/xentop.c (100%)
 
-diff --git a/tools/libxc/Makefile b/tools/libxc/Makefile
-index 763231065c..7b81f8c193 100644
---- a/tools/libxc/Makefile
-+++ b/tools/libxc/Makefile
-@@ -52,7 +52,9 @@ CTRL_SRCS-y       += xc_gnttab_compat.c
- CTRL_SRCS-y       += xc_devicemodel_compat.c
+diff --git a/.gitignore b/.gitignore
+index 364b09506b..5e8c47e2db 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -128,6 +128,10 @@ tools/libs/guest/xc_core.h
+ tools/libs/guest/xc_core_arm.h
+ tools/libs/guest/xc_core_x86.h
+ tools/libs/guest/xc_private.h
++tools/libs/stat/_paths.h
++tools/libs/stat/headers.chk
++tools/libs/stat/libxenstat.map
++tools/libs/stat/xenstat.pc
+ tools/libs/store/headers.chk
+ tools/libs/store/list.h
+ tools/libs/store/utils.h
+@@ -276,9 +280,6 @@ tools/xenmon/xentrace_setmask
+ tools/xenmon/xenbaked
+ tools/xenpaging/xenpaging
+ tools/xenpmd/xenpmd
+-tools/xenstat/libxenstat/src/_paths.h
+-tools/xenstat/libxenstat/xenstat.pc
+-tools/xenstat/xentop/xentop
+ tools/xenstore/xenstore
+ tools/xenstore/xenstore-chmod
+ tools/xenstore/xenstore-exists
+@@ -291,6 +292,7 @@ tools/xenstore/xenstore-ls
+ tools/xenstore/xenstored
+ tools/xenstore/xenstored_test
+ tools/xenstore/xs_tdb_dump
++tools/xentop/xentop
+ tools/xentrace/xentrace_setsize
+ tools/xentrace/tbctl
+ tools/xentrace/xenctx
+diff --git a/tools/Makefile b/tools/Makefile
+index 0db01707a4..ea69675cca 100644
+--- a/tools/Makefile
++++ b/tools/Makefile
+@@ -17,7 +17,7 @@ SUBDIRS-$(CONFIG_XCUTILS) += xcutils
+ SUBDIRS-$(CONFIG_X86) += firmware
+ SUBDIRS-y += console
+ SUBDIRS-y += xenmon
+-SUBDIRS-y += xenstat
++SUBDIRS-y += xentop
+ SUBDIRS-$(CONFIG_NetBSD) += xenbackendd
+ SUBDIRS-y += libfsimage
+ SUBDIRS-$(CONFIG_Linux) += vchan
+diff --git a/tools/Rules.mk b/tools/Rules.mk
+index 071fe364a3..fc121d0d75 100644
+--- a/tools/Rules.mk
++++ b/tools/Rules.mk
+@@ -18,7 +18,6 @@ include $(XEN_ROOT)/tools/libs/uselibs.mk
+ XEN_libxenlight    = $(XEN_ROOT)/tools/libxl
+ # Currently libxlutil lives in the same directory as libxenlight
+ XEN_libxlutil      = $(XEN_libxenlight)
+-XEN_libxenstat     = $(XEN_ROOT)/tools/xenstat/libxenstat/src
  
- GUEST_SRCS-y :=
--GUEST_SRCS-y += xg_private.c xc_suspend.c
-+GUEST_SRCS-y += xg_private.c
-+GUEST_SRCS-y += xg_domain.c
-+GUEST_SRCS-y += xc_suspend.c
- ifeq ($(CONFIG_MIGRATE),y)
- GUEST_SRCS-y += xc_sr_common.c
- GUEST_SRCS-$(CONFIG_X86) += xc_sr_common_x86.c
-diff --git a/tools/libxc/xc_domain.c b/tools/libxc/xc_domain.c
-index 71829c2bce..fbc22c4df6 100644
---- a/tools/libxc/xc_domain.c
-+++ b/tools/libxc/xc_domain.c
-@@ -1892,132 +1892,6 @@ int xc_domain_unbind_pt_spi_irq(xc_interface *xch,
-                                         PT_IRQ_TYPE_SPI, 0, 0, 0, 0, spi));
- }
+ CFLAGS_xeninclude = -I$(XEN_INCLUDE)
  
--int xc_unmap_domain_meminfo(xc_interface *xch, struct xc_domain_meminfo *minfo)
--{
--    struct domain_info_context _di = { .guest_width = minfo->guest_width,
--                                       .p2m_size = minfo->p2m_size};
--    struct domain_info_context *dinfo = &_di;
+@@ -108,11 +107,6 @@ ifeq ($(CONFIG_Linux),y)
+ LDLIBS_libxenstore += -ldl
+ endif
+ 
+-CFLAGS_libxenstat  = -I$(XEN_libxenstat)
+-SHDEPS_libxenstat  = $(SHLIB_libxenctrl) $(SHLIB_libxenstore)
+-LDLIBS_libxenstat  = $(SHDEPS_libxenstat) $(XEN_libxenstat)/libxenstat$(libextension)
+-SHLIB_libxenstat   = $(SHDEPS_libxenstat) -Wl,-rpath-link=$(XEN_libxenstat)
 -
--    free(minfo->pfn_type);
--    if ( minfo->p2m_table )
--        munmap(minfo->p2m_table, P2M_FL_ENTRIES * PAGE_SIZE);
--    minfo->p2m_table = NULL;
+ ifeq ($(debug),y)
+ # Disable optimizations
+ CFLAGS += -O0 -fno-omit-frame-pointer
+diff --git a/tools/libs/Makefile b/tools/libs/Makefile
+index 756d059ee7..e8fcd59214 100644
+--- a/tools/libs/Makefile
++++ b/tools/libs/Makefile
+@@ -13,6 +13,7 @@ SUBDIRS-y += ctrl
+ SUBDIRS-y += guest
+ SUBDIRS-y += hypfs
+ SUBDIRS-y += store
++SUBDIRS-y += stat
+ SUBDIRS-$(CONFIG_Linux) += vchan
+ 
+ ifeq ($(CONFIG_RUMP),y)
+diff --git a/tools/xenstat/libxenstat/COPYING b/tools/libs/stat/COPYING
+similarity index 100%
+rename from tools/xenstat/libxenstat/COPYING
+rename to tools/libs/stat/COPYING
+diff --git a/tools/xenstat/libxenstat/Makefile b/tools/libs/stat/Makefile
+similarity index 54%
+rename from tools/xenstat/libxenstat/Makefile
+rename to tools/libs/stat/Makefile
+index bdd5a0f469..5463f5f7ca 100644
+--- a/tools/xenstat/libxenstat/Makefile
++++ b/tools/libs/stat/Makefile
+@@ -15,85 +15,24 @@
+ XEN_ROOT=$(CURDIR)/../../..
+ include $(XEN_ROOT)/tools/Rules.mk
+ 
+-LDCONFIG=ldconfig
+-MAKE_LINK=ln -sf
 -
--    return 0;
--}
+-MAJOR=4.15
+-MINOR=0
 -
--int xc_map_domain_meminfo(xc_interface *xch, uint32_t domid,
--                          struct xc_domain_meminfo *minfo)
--{
--    struct domain_info_context _di;
--    struct domain_info_context *dinfo = &_di;
+-LIB=src/libxenstat.a
+-SHLIB=src/libxenstat.so.$(MAJOR).$(MINOR)
+-SHLIB_LINKS=src/libxenstat.so.$(MAJOR) src/libxenstat.so
+-OBJECTS-y=src/xenstat.o src/xenstat_qmp.o
+-OBJECTS-$(CONFIG_Linux) += src/xenstat_linux.o
+-OBJECTS-$(CONFIG_SunOS) += src/xenstat_solaris.o
+-OBJECTS-$(CONFIG_NetBSD) += src/xenstat_netbsd.o
+-OBJECTS-$(CONFIG_FreeBSD) += src/xenstat_freebsd.o
+-SONAME_FLAGS=-Wl,$(SONAME_LDFLAG) -Wl,libxenstat.so.$(MAJOR)
 -
--    xc_dominfo_t info;
--    shared_info_any_t *live_shinfo;
--    xen_capabilities_info_t xen_caps = "";
--    int i;
+-CFLAGS+=-fPIC -Werror
+-CFLAGS+=-Isrc $(CFLAGS_libxenctrl) $(CFLAGS_libxenstore) $(CFLAGS_xeninclude) -include $(XEN_ROOT)/tools/config.h
 -
--    /* Only be initialized once */
--    if ( minfo->pfn_type || minfo->p2m_table )
--    {
--        errno = EINVAL;
--        return -1;
--    }
+-LDLIBS-y = $(LDLIBS_libxenstore) $(LDLIBS_libxenctrl) -lyajl
+-LDLIBS-$(CONFIG_SunOS) += -lkstat
 -
--    if ( xc_domain_getinfo(xch, domid, 1, &info) != 1 )
--    {
--        PERROR("Could not get domain info");
--        return -1;
--    }
+-PKG_CONFIG := xenstat.pc
+-PKG_CONFIG_NAME := Xenstat
+-PKG_CONFIG_DESC := The Xenstat library for Xen hypervisor
+-PKG_CONFIG_VERSION := $(MAJOR).$(MINOR)
+-PKG_CONFIG_USELIBS := $(SHLIB_libxenstat)
+-PKG_CONFIG_LIB := xenstat
+-PKG_CONFIG_REQPRIV := xencontrol,xenstore
 -
--    if ( xc_domain_get_guest_width(xch, domid, &minfo->guest_width) )
--    {
--        PERROR("Could not get domain address size");
--        return -1;
--    }
--    _di.guest_width = minfo->guest_width;
+-ifneq ($(CONFIG_LIBXC_MINIOS),y)
+-PKG_CONFIG_INST := $(PKG_CONFIG)
+-$(PKG_CONFIG_INST): PKG_CONFIG_PREFIX = $(prefix)
+-$(PKG_CONFIG_INST): PKG_CONFIG_INCDIR = $(includedir)
+-$(PKG_CONFIG_INST): PKG_CONFIG_LIBDIR = $(libdir)
+-endif
 -
--    /* Get page table levels (see get_platform_info() in xg_save_restore.h */
--    if ( xc_version(xch, XENVER_capabilities, &xen_caps) )
--    {
--        PERROR("Could not get Xen capabilities (for page table levels)");
--        return -1;
--    }
--    if ( strstr(xen_caps, "xen-3.0-x86_64") )
--        /* Depends on whether it's a compat 32-on-64 guest */
--        minfo->pt_levels = ( (minfo->guest_width == 8) ? 4 : 3 );
--    else if ( strstr(xen_caps, "xen-3.0-x86_32p") )
--        minfo->pt_levels = 3;
--    else if ( strstr(xen_caps, "xen-3.0-x86_32") )
--        minfo->pt_levels = 2;
--    else
--    {
--        errno = EFAULT;
--        return -1;
--    }
+-PKG_CONFIG_LOCAL := $(foreach pc,$(PKG_CONFIG),$(PKG_CONFIG_DIR)/$(pc))
 -
--    /* We need the shared info page for mapping the P2M */
--    live_shinfo = xc_map_foreign_range(xch, domid, PAGE_SIZE, PROT_READ,
--                                       info.shared_info_frame);
--    if ( !live_shinfo )
--    {
--        PERROR("Could not map the shared info frame (MFN 0x%lx)",
--               info.shared_info_frame);
--        return -1;
--    }
+-$(PKG_CONFIG_LOCAL): PKG_CONFIG_PREFIX = $(XEN_ROOT)
+-$(PKG_CONFIG_LOCAL): PKG_CONFIG_INCDIR = $(XEN_libxenstat)
+-$(PKG_CONFIG_LOCAL): PKG_CONFIG_LIBDIR = $(CURDIR)
++CFLAGS += $(CFLAGS_libxenctrl) $(CFLAGS_libxenstore) $(CFLAGS_xeninclude) -include $(XEN_ROOT)/tools/config.h
+ 
+-.PHONY: all
+-all: $(LIB) $(SHLIB) $(SHLIB_LINKS) $(PKG_CONFIG_INST) $(PKG_CONFIG_LOCAL)
 -
--    if ( xc_core_arch_map_p2m_writable(xch, minfo->guest_width, &info,
--                                       live_shinfo, &minfo->p2m_table,
--                                       &minfo->p2m_size) )
--    {
--        PERROR("Could not map the P2M table");
--        munmap(live_shinfo, PAGE_SIZE);
--        return -1;
--    }
--    munmap(live_shinfo, PAGE_SIZE);
--    _di.p2m_size = minfo->p2m_size;
+-$(OBJECTS-y): src/_paths.h
 -
--    /* Make space and prepare for getting the PFN types */
--    minfo->pfn_type = calloc(sizeof(*minfo->pfn_type), minfo->p2m_size);
--    if ( !minfo->pfn_type )
--    {
--        PERROR("Could not allocate memory for the PFN types");
--        goto failed;
--    }
--    for ( i = 0; i < minfo->p2m_size; i++ )
--        minfo->pfn_type[i] = xc_pfn_to_mfn(i, minfo->p2m_table,
--                                           minfo->guest_width);
+-$(LIB): $(OBJECTS-y)
+-	$(AR) rc $@ $^
+-	$(RANLIB) $@
++SRCS-y += xenstat.c
++SRCS-y += xenstat_qmp.c
++SRCS-$(CONFIG_Linux) += xenstat_linux.c
++SRCS-$(CONFIG_SunOS) += xenstat_solaris.c
++SRCS-$(CONFIG_NetBSD) += xenstat_netbsd.c
++SRCS-$(CONFIG_FreeBSD) += xenstat_freebsd.c
+ 
+-$(SHLIB): $(OBJECTS-y)
+-	$(CC) $(LDFLAGS) $(SONAME_FLAGS) $(SHLIB_LDFLAGS) -o $@ \
+-	    $(OBJECTS-y) $(LDLIBS-y) $(APPEND_LDFLAGS)
++LDLIBS-y += -lyajl
++LDLIBS-$(CONFIG_SunOS) += -lkstat
++APPEND_LDFLAGS += $(LDLIBS-y)
+ 
+-src/libxenstat.so.$(MAJOR): $(SHLIB)
+-	$(MAKE_LINK) $(<F) $@
++include $(XEN_ROOT)/tools/libs/libs.mk
+ 
+-src/libxenstat.so: src/libxenstat.so.$(MAJOR)
+-	$(MAKE_LINK) $(<F) $@
++$(PKG_CONFIG_LOCAL): PKG_CONFIG_INCDIR = $(XEN_libxenstat)/include
+ 
+-.PHONY: install
+-install: all
+-	$(INSTALL_DATA) src/xenstat.h $(DESTDIR)$(includedir)
+-	$(INSTALL_DATA) $(LIB) $(DESTDIR)$(libdir)/libxenstat.a
+-	$(INSTALL_PROG) src/libxenstat.so.$(MAJOR).$(MINOR) $(DESTDIR)$(libdir)
+-	ln -sf libxenstat.so.$(MAJOR).$(MINOR) $(DESTDIR)$(libdir)/libxenstat.so.$(MAJOR)
+-	ln -sf libxenstat.so.$(MAJOR) $(DESTDIR)$(libdir)/libxenstat.so
+-	$(INSTALL_DATA) xenstat.pc $(DESTDIR)$(PKG_INSTALLDIR)
 -
--    /* Retrieve PFN types in batches */
--    for ( i = 0; i < minfo->p2m_size ; i+=1024 )
--    {
--        int count = ((minfo->p2m_size - i ) > 1024 ) ?
--                        1024: (minfo->p2m_size - i);
+-.PHONY: uninstall
+-uninstall:
+-	rm -f $(DESTDIR)$(PKG_INSTALLDIR)/xenstat.pc
+-	rm -f $(DESTDIR)$(libdir)/libxenstat.so
+-	rm -f $(DESTDIR)$(libdir)/libxenstat.so.$(MAJOR)
+-	rm -f $(DESTDIR)$(libdir)/libxenstat.so.$(MAJOR).$(MINOR)
+-	rm -f $(DESTDIR)$(libdir)/libxenstat.a
+-	rm -f $(DESTDIR)$(includedir)/xenstat.h
++$(LIB_OBJS): _paths.h
+ 
+ PYLIB=bindings/swig/python/_xenstat.so
+ PYMOD=bindings/swig/python/xenstat.py
+@@ -114,9 +53,9 @@ install-bindings: install-perl-bindings install-python-bindings
+ .PHONY: uninstall-bindings
+ uninstall-bindings: uninstall-perl-bindings uninstall-python-bindings
+ 
+-$(BINDINGS): $(SHLIB) $(SHLIB_LINKS) src/xenstat.h
++$(BINDINGS): $(SHLIB) $(SHLIB_LINKS) include/xenstat.h
+ 
+-SWIG_FLAGS=-module xenstat -Isrc
++SWIG_FLAGS=-module xenstat -Iinclude -I.
+ 
+ # Python bindings
+ PYTHON_VERSION=$(PYTHON:python%=%)
+@@ -180,16 +119,14 @@ install: install-perl-bindings
+ uninstall: uninstall-perl-bindings
+ endif
+ 
+-.PHONY: clean
+-clean:
+-	rm -f $(LIB) $(SHLIB) $(SHLIB_LINKS) $(OBJECTS-y) \
+-	      $(BINDINGS) $(BINDINGSRC) $(DEPS_RM) src/_paths.h
+-	rm -f xenstat.pc
++clean: cleanlocal
+ 
+-.PHONY: distclean
+-distclean: clean
++.PHONY: cleanlocal
++cleanlocal:
++	rm -f $(BINDINGS) $(BINDINGSRC) $(DEPS_RM) _paths.h
++	rm -f libxenstat.map
+ 
+ -include $(DEPS_INCLUDE)
+ 
+-genpath-target = $(call buildmakevars2header,src/_paths.h)
++genpath-target = $(call buildmakevars2header,_paths.h)
+ $(eval $(genpath-target))
+diff --git a/tools/xenstat/libxenstat/bindings/swig/perl/.empty b/tools/libs/stat/bindings/swig/perl/.empty
+similarity index 100%
+rename from tools/xenstat/libxenstat/bindings/swig/perl/.empty
+rename to tools/libs/stat/bindings/swig/perl/.empty
+diff --git a/tools/xenstat/libxenstat/bindings/swig/python/.empty b/tools/libs/stat/bindings/swig/python/.empty
+similarity index 100%
+rename from tools/xenstat/libxenstat/bindings/swig/python/.empty
+rename to tools/libs/stat/bindings/swig/python/.empty
+diff --git a/tools/xenstat/libxenstat/bindings/swig/xenstat.i b/tools/libs/stat/bindings/swig/xenstat.i
+similarity index 100%
+rename from tools/xenstat/libxenstat/bindings/swig/xenstat.i
+rename to tools/libs/stat/bindings/swig/xenstat.i
+diff --git a/tools/xenstat/libxenstat/src/xenstat.h b/tools/libs/stat/include/xenstat.h
+similarity index 98%
+rename from tools/xenstat/libxenstat/src/xenstat.h
+rename to tools/libs/stat/include/xenstat.h
+index 76a660f321..c3b98909dd 100644
+--- a/tools/xenstat/libxenstat/src/xenstat.h
++++ b/tools/libs/stat/include/xenstat.h
+@@ -71,6 +71,9 @@ unsigned long long xenstat_node_tot_mem(xenstat_node * node);
+ /* Get amount of free memory on a node */
+ unsigned long long xenstat_node_free_mem(xenstat_node * node);
+ 
++/* Get amount of freeable memory on a node */
++long xenstat_node_freeable_mb(xenstat_node * node);
++
+ /* Find the number of domains existing on a node */
+ unsigned int xenstat_node_num_domains(xenstat_node * node);
+ 
+diff --git a/tools/xenstat/libxenstat/src/xenstat.c b/tools/libs/stat/xenstat.c
+similarity index 100%
+rename from tools/xenstat/libxenstat/src/xenstat.c
+rename to tools/libs/stat/xenstat.c
+diff --git a/tools/xenstat/libxenstat/src/xenstat_freebsd.c b/tools/libs/stat/xenstat_freebsd.c
+similarity index 100%
+rename from tools/xenstat/libxenstat/src/xenstat_freebsd.c
+rename to tools/libs/stat/xenstat_freebsd.c
+diff --git a/tools/xenstat/libxenstat/src/xenstat_linux.c b/tools/libs/stat/xenstat_linux.c
+similarity index 98%
+rename from tools/xenstat/libxenstat/src/xenstat_linux.c
+rename to tools/libs/stat/xenstat_linux.c
+index 7530349eee..793263f2b6 100644
+--- a/tools/xenstat/libxenstat/src/xenstat_linux.c
++++ b/tools/libs/stat/xenstat_linux.c
+@@ -64,7 +64,7 @@ static const char PROCNETDEV_HEADER[] =
+ 
+ /* We need to get the name of the bridge interface for use with bonding interfaces */
+ /* Use excludeName parameter to avoid adding bridges we don't care about, eg. virbr0 */
+-void getBridge(char *excludeName, char *result, size_t resultLen)
++static void getBridge(char *excludeName, char *result, size_t resultLen)
+ {
+ 	struct dirent *de;
+ 	DIR *d;
+@@ -89,7 +89,7 @@ void getBridge(char *excludeName, char *result, size_t resultLen)
+ 
+ /* parseNetLine provides regular expression based parsing for lines from /proc/net/dev, all the */
+ /* information are parsed but not all are used in our case, ie. for xenstat */
+-int parseNetDevLine(char *line, char *iface, unsigned long long *rxBytes, unsigned long long *rxPackets,
++static int parseNetDevLine(char *line, char *iface, unsigned long long *rxBytes, unsigned long long *rxPackets,
+ 		unsigned long long *rxErrs, unsigned long long *rxDrops, unsigned long long *rxFifo,
+ 		unsigned long long *rxFrames, unsigned long long *rxComp, unsigned long long *rxMcast,
+ 		unsigned long long *txBytes, unsigned long long *txPackets, unsigned long long *txErrs,
+diff --git a/tools/xenstat/libxenstat/src/xenstat_netbsd.c b/tools/libs/stat/xenstat_netbsd.c
+similarity index 100%
+rename from tools/xenstat/libxenstat/src/xenstat_netbsd.c
+rename to tools/libs/stat/xenstat_netbsd.c
+diff --git a/tools/xenstat/libxenstat/src/xenstat_priv.h b/tools/libs/stat/xenstat_priv.h
+similarity index 100%
+rename from tools/xenstat/libxenstat/src/xenstat_priv.h
+rename to tools/libs/stat/xenstat_priv.h
+diff --git a/tools/xenstat/libxenstat/src/xenstat_qmp.c b/tools/libs/stat/xenstat_qmp.c
+similarity index 100%
+rename from tools/xenstat/libxenstat/src/xenstat_qmp.c
+rename to tools/libs/stat/xenstat_qmp.c
+diff --git a/tools/xenstat/libxenstat/src/xenstat_solaris.c b/tools/libs/stat/xenstat_solaris.c
+similarity index 100%
+rename from tools/xenstat/libxenstat/src/xenstat_solaris.c
+rename to tools/libs/stat/xenstat_solaris.c
+diff --git a/tools/libs/uselibs.mk b/tools/libs/uselibs.mk
+index edb4b34256..a9dc2ce994 100644
+--- a/tools/libs/uselibs.mk
++++ b/tools/libs/uselibs.mk
+@@ -24,3 +24,5 @@ LIBS_LIBS += store
+ USELIBS_store := toolcore
+ LIBS_LIBS += vchan
+ USELIBS_vchan := toollog store gnttab evtchn
++LIBS_LIBS += stat
++USELIBS_stat := ctrl store
+diff --git a/tools/xenstat/Makefile b/tools/xenstat/Makefile
+deleted file mode 100644
+index b300f31289..0000000000
+--- a/tools/xenstat/Makefile
++++ /dev/null
+@@ -1,10 +0,0 @@
+-XEN_ROOT = $(CURDIR)/../..
+-include $(XEN_ROOT)/tools/Rules.mk
 -
--        if ( xc_get_pfn_type_batch(xch, domid, count, minfo->pfn_type + i) )
--        {
--            PERROR("Could not get %d-eth batch of PFN types", (i+1)/1024);
--            goto failed;
--        }
--    }
+-SUBDIRS :=
+-SUBDIRS += libxenstat
+-SUBDIRS += xentop
 -
--    return 0;
+-.PHONY: all install clean distclean uninstall
 -
--failed:
--    if ( minfo->pfn_type )
--    {
--        free(minfo->pfn_type);
--        minfo->pfn_type = NULL;
--    }
--    if ( minfo->p2m_table )
--    {
--        munmap(minfo->p2m_table, P2M_FL_ENTRIES * PAGE_SIZE);
--        minfo->p2m_table = NULL;
--    }
--
--    return -1;
--}
--
- int xc_domain_memory_mapping(
-     xc_interface *xch,
-     uint32_t domid,
-diff --git a/tools/libxc/xg_domain.c b/tools/libxc/xg_domain.c
-new file mode 100644
-index 0000000000..58713cd35d
---- /dev/null
-+++ b/tools/libxc/xg_domain.c
-@@ -0,0 +1,149 @@
-+/******************************************************************************
-+ * xg_domain.c
-+ *
-+ * API for manipulating and obtaining information on domains.
-+ *
-+ * This library is free software; you can redistribute it and/or
-+ * modify it under the terms of the GNU Lesser General Public
-+ * License as published by the Free Software Foundation;
-+ * version 2.1 of the License.
-+ *
-+ * This library is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-+ * Lesser General Public License for more details.
-+ *
-+ * You should have received a copy of the GNU Lesser General Public
-+ * License along with this library; If not, see <http://www.gnu.org/licenses/>.
-+ *
-+ * Copyright (c) 2003, K A Fraser.
-+ */
-+
-+#include "xg_private.h"
-+#include "xc_core.h"
-+
-+int xc_unmap_domain_meminfo(xc_interface *xch, struct xc_domain_meminfo *minfo)
-+{
-+    struct domain_info_context _di = { .guest_width = minfo->guest_width,
-+                                       .p2m_size = minfo->p2m_size};
-+    struct domain_info_context *dinfo = &_di;
-+
-+    free(minfo->pfn_type);
-+    if ( minfo->p2m_table )
-+        munmap(minfo->p2m_table, P2M_FL_ENTRIES * PAGE_SIZE);
-+    minfo->p2m_table = NULL;
-+
-+    return 0;
-+}
-+
-+int xc_map_domain_meminfo(xc_interface *xch, uint32_t domid,
-+                          struct xc_domain_meminfo *minfo)
-+{
-+    struct domain_info_context _di;
-+    struct domain_info_context *dinfo = &_di;
-+
-+    xc_dominfo_t info;
-+    shared_info_any_t *live_shinfo;
-+    xen_capabilities_info_t xen_caps = "";
-+    int i;
-+
-+    /* Only be initialized once */
-+    if ( minfo->pfn_type || minfo->p2m_table )
-+    {
-+        errno = EINVAL;
-+        return -1;
-+    }
-+
-+    if ( xc_domain_getinfo(xch, domid, 1, &info) != 1 )
-+    {
-+        PERROR("Could not get domain info");
-+        return -1;
-+    }
-+
-+    if ( xc_domain_get_guest_width(xch, domid, &minfo->guest_width) )
-+    {
-+        PERROR("Could not get domain address size");
-+        return -1;
-+    }
-+    _di.guest_width = minfo->guest_width;
-+
-+    /* Get page table levels (see get_platform_info() in xg_save_restore.h */
-+    if ( xc_version(xch, XENVER_capabilities, &xen_caps) )
-+    {
-+        PERROR("Could not get Xen capabilities (for page table levels)");
-+        return -1;
-+    }
-+    if ( strstr(xen_caps, "xen-3.0-x86_64") )
-+        /* Depends on whether it's a compat 32-on-64 guest */
-+        minfo->pt_levels = ( (minfo->guest_width == 8) ? 4 : 3 );
-+    else if ( strstr(xen_caps, "xen-3.0-x86_32p") )
-+        minfo->pt_levels = 3;
-+    else if ( strstr(xen_caps, "xen-3.0-x86_32") )
-+        minfo->pt_levels = 2;
-+    else
-+    {
-+        errno = EFAULT;
-+        return -1;
-+    }
-+
-+    /* We need the shared info page for mapping the P2M */
-+    live_shinfo = xc_map_foreign_range(xch, domid, PAGE_SIZE, PROT_READ,
-+                                       info.shared_info_frame);
-+    if ( !live_shinfo )
-+    {
-+        PERROR("Could not map the shared info frame (MFN 0x%lx)",
-+               info.shared_info_frame);
-+        return -1;
-+    }
-+
-+    if ( xc_core_arch_map_p2m_writable(xch, minfo->guest_width, &info,
-+                                       live_shinfo, &minfo->p2m_table,
-+                                       &minfo->p2m_size) )
-+    {
-+        PERROR("Could not map the P2M table");
-+        munmap(live_shinfo, PAGE_SIZE);
-+        return -1;
-+    }
-+    munmap(live_shinfo, PAGE_SIZE);
-+    _di.p2m_size = minfo->p2m_size;
-+
-+    /* Make space and prepare for getting the PFN types */
-+    minfo->pfn_type = calloc(sizeof(*minfo->pfn_type), minfo->p2m_size);
-+    if ( !minfo->pfn_type )
-+    {
-+        PERROR("Could not allocate memory for the PFN types");
-+        goto failed;
-+    }
-+    for ( i = 0; i < minfo->p2m_size; i++ )
-+        minfo->pfn_type[i] = xc_pfn_to_mfn(i, minfo->p2m_table,
-+                                           minfo->guest_width);
-+
-+    /* Retrieve PFN types in batches */
-+    for ( i = 0; i < minfo->p2m_size ; i+=1024 )
-+    {
-+        int count = ((minfo->p2m_size - i ) > 1024 ) ?
-+                        1024: (minfo->p2m_size - i);
-+
-+        if ( xc_get_pfn_type_batch(xch, domid, count, minfo->pfn_type + i) )
-+        {
-+            PERROR("Could not get %d-eth batch of PFN types", (i+1)/1024);
-+            goto failed;
-+        }
-+    }
-+
-+    return 0;
-+
-+failed:
-+    if ( minfo->pfn_type )
-+    {
-+        free(minfo->pfn_type);
-+        minfo->pfn_type = NULL;
-+    }
-+    if ( minfo->p2m_table )
-+    {
-+        munmap(minfo->p2m_table, P2M_FL_ENTRIES * PAGE_SIZE);
-+        minfo->p2m_table = NULL;
-+    }
-+
-+    return -1;
-+}
+-all install clean distclean uninstall: %: subdirs-%
+diff --git a/tools/xenstat/xentop/Makefile b/tools/xentop/Makefile
+similarity index 97%
+rename from tools/xenstat/xentop/Makefile
+rename to tools/xentop/Makefile
+index ec612db2a2..0034114684 100644
+--- a/tools/xenstat/xentop/Makefile
++++ b/tools/xentop/Makefile
+@@ -10,7 +10,7 @@
+ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ # GNU General Public License for more details.
+ 
+-XEN_ROOT=$(CURDIR)/../../..
++XEN_ROOT=$(CURDIR)/../..
+ include $(XEN_ROOT)/tools/Rules.mk
+ 
+ ifneq ($(XENSTAT_XENTOP),y)
+diff --git a/tools/xenstat/xentop/TODO b/tools/xentop/TODO
+similarity index 100%
+rename from tools/xenstat/xentop/TODO
+rename to tools/xentop/TODO
+diff --git a/tools/xenstat/xentop/xentop.c b/tools/xentop/xentop.c
+similarity index 100%
+rename from tools/xenstat/xentop/xentop.c
+rename to tools/xentop/xentop.c
 -- 
 2.26.2
 
