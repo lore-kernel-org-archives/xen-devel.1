@@ -2,85 +2,53 @@ Return-Path: <SRS0=+ST8=CG=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.1 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+X-Spam-Status: No, score=-12.7 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=3.4.0
+	SPF_HELO_NONE,SPF_PASS,UPPERCASE_50_75,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EDFA6C433E6
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2020 15:20:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 852FCC433E6
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2020 15:22:06 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B61FA20757
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2020 15:20:02 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="KfInV/ad"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B61FA20757
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id 5DFF920757
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2020 15:22:06 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5DFF920757
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kBgAR-0007VZ-RJ; Fri, 28 Aug 2020 15:19:51 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=YQLo=CG=gmail.com=rosbrookn@srs-us1.protection.inumbo.net>)
- id 1kBgAQ-0007VO-JA
- for xen-devel@lists.xenproject.org; Fri, 28 Aug 2020 15:19:50 +0000
-X-Inumbo-ID: d5210c9d-ab45-439c-bfe1-163c98274c2f
-Received: from mail-qv1-xf42.google.com (unknown [2607:f8b0:4864:20::f42])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id d5210c9d-ab45-439c-bfe1-163c98274c2f;
- Fri, 28 Aug 2020 15:19:49 +0000 (UTC)
-Received: by mail-qv1-xf42.google.com with SMTP id w2so542910qvh.12
- for <xen-devel@lists.xenproject.org>; Fri, 28 Aug 2020 08:19:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=FRQfopwuX7HYbmPKXXnaTqbTDQHSfhdbA9ROlcaESOE=;
- b=KfInV/ads5ocn4lgz2t8vjb7sWI8VtUjtCTDx2kdgVo0mzya7/uXNbZxvddYljgehL
- hWQzRlaTaDfvqRbRmOlg98iqIF4bwAeS7wDXnJj1kKJwPyOmPaDJmW8nNF/iXGpxAhlb
- sILP3FT8zLBOijt3b8cYmcCH5E9EyRvSsm9kYOfvYXtbbEfCgAlLBMdRS1oAU/PqFpZq
- 5Q3+DjETlhr8ErdkpgWpaAdmEqkcpkhEGihHNhMBgvn1sXSQ9hWv0NluAyRTVPwYhC+5
- 8y6gvWDPFP2y6bjk71Wm/o5QNYHQHwHoW557qU+jJ6WPGw0CKmk6H057+blt8qdAgi4y
- oiDQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=FRQfopwuX7HYbmPKXXnaTqbTDQHSfhdbA9ROlcaESOE=;
- b=XzGOTmkYh5vdLUKPPHoK/hfw4hx0Uf0GEaIoD2jPb0dbYn0JMN1k1gMpUy32/HydPa
- FcruiT38h6oXqU/3T8+NFbcTYPQCwX3ptcOnn/SiJUtYCHQsOJbaCgLXUV/aOBt/GuzR
- vSvu2QhtKljhh5/jD1n5B/0O0NG6/qyJbZqs51m0D2+2GoCQoCDvymcfR2E3O7J2+awb
- 6ENeo5jGv1c3SUvv2ZJ/MJPkw8zgmegA6uBkdjdAcdjTosnprEbDGP2cCnrejIhsRXzt
- cjFZ81RNRpW1p9jjx1dtYWGLYDbRMIt6WW1L64Uy/pOJinoYosHc6MT0ImB0WXw/oI84
- bBCA==
-X-Gm-Message-State: AOAM5309XbCkHyMjGNhADsjEM85ObJ7Ra+xtWLN0o69OdEiXH95IefAX
- Sjdi+dLWe4dRY55dea4doA8=
-X-Google-Smtp-Source: ABdhPJy9ug+JbgY7irS7GOEgid3MYlPglGNv+qmKk7nyMrAEgwTZZa9aooGR8ArzGBcw8u47ZZctZg==
-X-Received: by 2002:a05:6214:1910:: with SMTP id
- er16mr2276198qvb.228.1598627989336; 
- Fri, 28 Aug 2020 08:19:49 -0700 (PDT)
-Received: from six (cpe-67-241-56-252.twcny.res.rr.com. [67.241.56.252])
- by smtp.gmail.com with ESMTPSA id w27sm1158733qtv.68.2020.08.28.08.19.47
- (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Fri, 28 Aug 2020 08:19:48 -0700 (PDT)
-Date: Fri, 28 Aug 2020 11:19:44 -0400
-From: Nick Rosbrook <rosbrookn@gmail.com>
-To: George Dunlap <george.dunlap@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>,
- Nick Rosbrook <rosbrookn@ainfosec.com>,
- Ian Jackson <ian.jackson@citrix.com>, Wei Liu <wl@xen.org>
-Subject: Re: [PATCH] Revert "libxl: Generate golang bindings in libxl Makefile"
-Message-ID: <20200828151944.GA21717@six>
-References: <20200828144248.1970259-1-george.dunlap@citrix.com>
+	id 1kBgCS-0008HD-Vl; Fri, 28 Aug 2020 15:21:56 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=Pjxq=CG=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1kBfzz-0004eG-6x
+ for xen-devel@lists.xenproject.org; Fri, 28 Aug 2020 15:09:03 +0000
+X-Inumbo-ID: 6fe39159-02f4-4e94-96c6-efb230cff06f
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 6fe39159-02f4-4e94-96c6-efb230cff06f;
+ Fri, 28 Aug 2020 15:07:59 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 5D9D1B01D;
+ Fri, 28 Aug 2020 15:08:28 +0000 (UTC)
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>, Ian Jackson <iwj@xenproject.org>,
+ Wei Liu <wl@xen.org>
+Subject: [PATCH v4 30/31] tools/libs: add option for library names not
+ starting with libxen
+Date: Fri, 28 Aug 2020 17:07:46 +0200
+Message-Id: <20200828150747.25305-31-jgross@suse.com>
+X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20200828150747.25305-1-jgross@suse.com>
+References: <20200828150747.25305-1-jgross@suse.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20200828144248.1970259-1-george.dunlap@citrix.com>
-User-Agent: Mutt/1.9.4 (2018-02-28)
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -94,44 +62,133 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Fri, Aug 28, 2020 at 03:42:48PM +0100, George Dunlap wrote:
-> This reverts commit 60db5da62ac051aab0b217fa2d96acca1cd3ca3e.
-> 
-> This is in preparation for the planned move to hosting the xenlight
-> package in a separate repo.
-> 
-> This also fixes a regression when building with a read-only source and
-> an out-of-tree build.
-> 
-> Signed-off-by: George Dunlap <george.dunlap@citrix.com>
-> ---
-> This is a candidate to backport for 4.14.
-> 
-> I was doing prep for writing the infrastructure to create or update an
-> external repo, and figured I might as well send this out now.
-> 
-> CC: Jan Beulich <jbeulich@suse.com>
-> CC: Nick Rosbrook <rosbrookn@ainfosec.com>
-> CC: Ian Jackson <ian.jackson@citrix.com>
-> CC: Wei Liu <wl@xen.org>
-> ---
->  tools/golang/xenlight/Makefile |  9 ---------
->  tools/libxl/Makefile           | 17 +----------------
->  2 files changed, 1 insertion(+), 25 deletions(-)
-> 
-> diff --git a/tools/golang/xenlight/Makefile b/tools/golang/xenlight/Makefile
-> index eac9dbf12a..8d4d1e97ac 100644
-> --- a/tools/golang/xenlight/Makefile
-> +++ b/tools/golang/xenlight/Makefile
-> @@ -13,15 +13,6 @@ LIBXL_SRC_DIR = ../../libxl
->  .PHONY: all
->  all: build
->  
-> -GOXL_GEN_FILES = types.gen.go helpers.gen.go
-The build target in golang/xenlight/Makefile still uses this variable
-after reverting this patch. $(GOXL_GEN_FILES) will be empty now, meaning
-`make build` will not re-generate *.gen.go if a change was made to
-gengotypes.py.
+libxlutil doesn't follow the standard name pattern of all other Xen
+libraries, so add another make variable which can be used to allow
+other names.
 
--NR
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ tools/Rules.mk     |  3 ++-
+ tools/libs/libs.mk | 41 +++++++++++++++++++++--------------------
+ 2 files changed, 23 insertions(+), 21 deletions(-)
+
+diff --git a/tools/Rules.mk b/tools/Rules.mk
+index 9b9db62fe5..5ad17b313b 100644
+--- a/tools/Rules.mk
++++ b/tools/Rules.mk
+@@ -87,10 +87,11 @@ endif
+ # $(SHLIB_libfoo)
+ 
+ define LIB_defs =
++ FILENAME_$(1) ?= xen$(1)
+  XEN_libxen$(1) = $$(XEN_ROOT)/tools/libs/$(1)
+  CFLAGS_libxen$(1) = -I$$(XEN_libxen$(1))/include $$(CFLAGS_xeninclude)
+  SHDEPS_libxen$(1) = $$(foreach use,$$(USELIBS_$(1)),$$(SHLIB_libxen$$(use)))
+- LDLIBS_libxen$(1) = $$(SHDEPS_libxen$(1)) $$(XEN_libxen$(1))/libxen$(1)$$(libextension)
++ LDLIBS_libxen$(1) = $$(SHDEPS_libxen$(1)) $$(XEN_libxen$(1))/lib$$(FILENAME_$(1))$$(libextension)
+  SHLIB_libxen$(1) = $$(SHDEPS_libxen$(1)) -Wl,-rpath-link=$$(XEN_libxen$(1))
+ endef
+ 
+diff --git a/tools/libs/libs.mk b/tools/libs/libs.mk
+index 9d0ed08846..325b7b7cea 100644
+--- a/tools/libs/libs.mk
++++ b/tools/libs/libs.mk
+@@ -20,20 +20,21 @@ LDUSELIBS = $(foreach lib, $(USELIBS_$(LIBNAME)), $(LDLIBS_libxen$(lib)))
+ LIB_OBJS := $(SRCS-y:.c=.o)
+ PIC_OBJS := $(SRCS-y:.c=.opic)
+ 
+-LIB := libxen$(LIBNAME).a
++LIB_FILE_NAME = $(FILENAME_$(LIBNAME))
++LIB := lib$(LIB_FILE_NAME).a
+ ifneq ($(nosharedlibs),y)
+-LIB += libxen$(LIBNAME).so
++LIB += lib$(LIB_FILE_NAME).so
+ endif
+ 
+ comma:= ,
+ empty:=
+ space:= $(empty) $(empty)
+-PKG_CONFIG ?= xen$(LIBNAME).pc
++PKG_CONFIG ?= $(LIB_FILE_NAME).pc
+ PKG_CONFIG_NAME ?= Xen$(LIBNAME)
+ PKG_CONFIG_DESC ?= The $(PKG_CONFIG_NAME) library for Xen hypervisor
+ PKG_CONFIG_VERSION := $(MAJOR).$(MINOR)
+ PKG_CONFIG_USELIBS := $(SHLIB_libxen$(LIBNAME))
+-PKG_CONFIG_LIB := xen$(LIBNAME)
++PKG_CONFIG_LIB := $(LIB_FILE_NAME)
+ PKG_CONFIG_REQPRIV := $(subst $(space),$(comma),$(strip $(foreach lib,$(patsubst ctrl,control,$(USELIBS_$(LIBNAME))),xen$(lib))))
+ 
+ ifneq ($(CONFIG_LIBXC_MINIOS),y)
+@@ -45,7 +46,7 @@ endif
+ 
+ PKG_CONFIG_LOCAL := $(PKG_CONFIG_DIR)/$(PKG_CONFIG)
+ 
+-LIBHEADER ?= xen$(LIBNAME).h
++LIBHEADER ?= $(LIB_FILE_NAME).h
+ LIBHEADERS = $(foreach h, $(LIBHEADER), include/$(h))
+ LIBHEADERSGLOB = $(foreach h, $(LIBHEADER), $(XEN_ROOT)/tools/include/$(h))
+ 
+@@ -81,36 +82,36 @@ libxen$(LIBNAME).map:
+ $(LIBHEADERSGLOB): $(LIBHEADERS)
+ 	for i in $(realpath $(LIBHEADERS)); do ln -sf $$i $(XEN_ROOT)/tools/include; done
+ 
+-libxen$(LIBNAME).a: $(LIB_OBJS)
++lib$(LIB_FILE_NAME).a: $(LIB_OBJS)
+ 	$(AR) rc $@ $^
+ 
+-libxen$(LIBNAME).so: libxen$(LIBNAME).so.$(MAJOR)
++lib$(LIB_FILE_NAME).so: lib$(LIB_FILE_NAME).so.$(MAJOR)
+ 	$(SYMLINK_SHLIB) $< $@
+-libxen$(LIBNAME).so.$(MAJOR): libxen$(LIBNAME).so.$(MAJOR).$(MINOR)
++lib$(LIB_FILE_NAME).so.$(MAJOR): lib$(LIB_FILE_NAME).so.$(MAJOR).$(MINOR)
+ 	$(SYMLINK_SHLIB) $< $@
+ 
+-libxen$(LIBNAME).so.$(MAJOR).$(MINOR): $(PIC_OBJS) libxen$(LIBNAME).map
+-	$(CC) $(LDFLAGS) $(PTHREAD_LDFLAGS) -Wl,$(SONAME_LDFLAG) -Wl,libxen$(LIBNAME).so.$(MAJOR) $(SHLIB_LDFLAGS) -o $@ $(PIC_OBJS) $(LDUSELIBS) $(APPEND_LDFLAGS)
++lib$(LIB_FILE_NAME).so.$(MAJOR).$(MINOR): $(PIC_OBJS) libxen$(LIBNAME).map
++	$(CC) $(LDFLAGS) $(PTHREAD_LDFLAGS) -Wl,$(SONAME_LDFLAG) -Wl,lib$(LIB_FILE_NAME).so.$(MAJOR) $(SHLIB_LDFLAGS) -o $@ $(PIC_OBJS) $(LDUSELIBS) $(APPEND_LDFLAGS)
+ 
+ .PHONY: install
+ install: build
+ 	$(INSTALL_DIR) $(DESTDIR)$(libdir)
+ 	$(INSTALL_DIR) $(DESTDIR)$(includedir)
+-	$(INSTALL_SHLIB) libxen$(LIBNAME).so.$(MAJOR).$(MINOR) $(DESTDIR)$(libdir)
+-	$(INSTALL_DATA) libxen$(LIBNAME).a $(DESTDIR)$(libdir)
+-	$(SYMLINK_SHLIB) libxen$(LIBNAME).so.$(MAJOR).$(MINOR) $(DESTDIR)$(libdir)/libxen$(LIBNAME).so.$(MAJOR)
+-	$(SYMLINK_SHLIB) libxen$(LIBNAME).so.$(MAJOR) $(DESTDIR)$(libdir)/libxen$(LIBNAME).so
++	$(INSTALL_SHLIB) lib$(LIB_FILE_NAME).so.$(MAJOR).$(MINOR) $(DESTDIR)$(libdir)
++	$(INSTALL_DATA) lib$(LIB_FILE_NAME).a $(DESTDIR)$(libdir)
++	$(SYMLINK_SHLIB) lib$(LIB_FILE_NAME).so.$(MAJOR).$(MINOR) $(DESTDIR)$(libdir)/lib$(LIB_FILE_NAME).so.$(MAJOR)
++	$(SYMLINK_SHLIB) lib$(LIB_FILE_NAME).so.$(MAJOR) $(DESTDIR)$(libdir)/lib$(LIB_FILE_NAME).so
+ 	for i in $(LIBHEADERS); do $(INSTALL_DATA) $$i $(DESTDIR)$(includedir); done
+ 	$(INSTALL_DATA) $(PKG_CONFIG) $(DESTDIR)$(PKG_INSTALLDIR)
+ 
+ .PHONY: uninstall
+ uninstall:
+-	rm -f $(DESTDIR)$(PKG_INSTALLDIR)/xen$(LIBNAME).pc
++	rm -f $(DESTDIR)$(PKG_INSTALLDIR)/$(LIB_FILE_NAME).pc
+ 	for i in $(LIBHEADER); do rm -f $(DESTDIR)$(includedir)/$(LIBHEADER); done
+-	rm -f $(DESTDIR)$(libdir)/libxen$(LIBNAME).so
+-	rm -f $(DESTDIR)$(libdir)/libxen$(LIBNAME).so.$(MAJOR)
+-	rm -f $(DESTDIR)$(libdir)/libxen$(LIBNAME).so.$(MAJOR).$(MINOR)
+-	rm -f $(DESTDIR)$(libdir)/libxen$(LIBNAME).a
++	rm -f $(DESTDIR)$(libdir)/lib$(LIB_FILE_NAME).so
++	rm -f $(DESTDIR)$(libdir)/lib$(LIB_FILE_NAME).so.$(MAJOR)
++	rm -f $(DESTDIR)$(libdir)/lib$(LIB_FILE_NAME).so.$(MAJOR).$(MINOR)
++	rm -f $(DESTDIR)$(libdir)/lib$(LIB_FILE_NAME).a
+ 
+ .PHONY: TAGS
+ TAGS:
+@@ -119,7 +120,7 @@ TAGS:
+ .PHONY: clean
+ clean:
+ 	rm -rf *.rpm $(LIB) *~ $(DEPS_RM) $(LIB_OBJS) $(PIC_OBJS)
+-	rm -f libxen$(LIBNAME).so.$(MAJOR).$(MINOR) libxen$(LIBNAME).so.$(MAJOR)
++	rm -f lib$(LIB_FILE_NAME).so.$(MAJOR).$(MINOR) lib$(LIB_FILE_NAME).so.$(MAJOR)
+ 	rm -f headers.chk
+ 	rm -f $(PKG_CONFIG)
+ 	rm -f $(LIBHEADERSGLOB)
+-- 
+2.26.2
+
 
