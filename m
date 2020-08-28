@@ -7,45 +7,45 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CDDF6C43461
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 077BCC433E7
 	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2020 15:08:48 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9BBE6208C9
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2020 15:08:48 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9BBE6208C9
+	by mail.kernel.org (Postfix) with ESMTPS id CDEC42075B
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2020 15:08:47 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CDEC42075B
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kBfzW-00059I-0Q; Fri, 28 Aug 2020 15:08:34 +0000
+	id 1kBfzR-00051D-1e; Fri, 28 Aug 2020 15:08:29 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Pjxq=CG=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kBfzV-0004eG-61
- for xen-devel@lists.xenproject.org; Fri, 28 Aug 2020 15:08:33 +0000
-X-Inumbo-ID: d2b9f8f5-10dd-4235-992a-71adaff343ad
+ id 1kBfzQ-0004eG-5o
+ for xen-devel@lists.xenproject.org; Fri, 28 Aug 2020 15:08:28 +0000
+X-Inumbo-ID: 30b6fb5a-bd2b-485b-87c0-4a241c316ecb
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id d2b9f8f5-10dd-4235-992a-71adaff343ad;
- Fri, 28 Aug 2020 15:07:56 +0000 (UTC)
+ id 30b6fb5a-bd2b-485b-87c0-4a241c316ecb;
+ Fri, 28 Aug 2020 15:07:55 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id F155DAFBE;
+ by mx2.suse.de (Postfix) with ESMTP id 4EE1CAF2A;
  Fri, 28 Aug 2020 15:08:26 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
  George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
  Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
-Subject: [PATCH v4 22/31] tools: split libxenstat into new tools/libs/stat
- directory
-Date: Fri, 28 Aug 2020 17:07:38 +0200
-Message-Id: <20200828150747.25305-23-jgross@suse.com>
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ Samuel Thibault <samuel.thibault@ens-lyon.org>
+Subject: [PATCH v4 19/31] tools/libxc: move libxenguest to tools/libs/guest
+Date: Fri, 28 Aug 2020 17:07:35 +0200
+Message-Id: <20200828150747.25305-20-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200828150747.25305-1-jgross@suse.com>
 References: <20200828150747.25305-1-jgross@suse.com>
@@ -64,189 +64,791 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-There is no reason why libxenstat is not placed in the tools/libs
-directory.
+tools/libxc now contains libxenguest only. Move it to tools/libs/guest.
 
-At the same time move xenstat.h to a dedicated include directory
-in tools/libs/stat in order to follow the same pattern as the other
-libraries in tools/libs.
-
-As now xentop is the only left directory in xenstat move it directly
-under tools and get rid of tools/xenstat.
-
-Fix some missing prototype errors (add one prototype and make two
-functions static).
+When generating the pkg-config file for libxenguest a filter is now
+required for replacing "xenctrl" by "xencontrol" in the
+"Requires.private:" entry. Add this filter to tools/libs/libs.mk.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
-Acked-by: Wei Liu <wl@xen.org>
+Reviewed-by: Samuel Thibault <samuel.thibault@ens-lyon.org> (stubdom parts)
 ---
- .gitignore                                    |   8 +-
- tools/Makefile                                |   2 +-
- tools/Rules.mk                                |   6 -
+ .gitignore                                    |  16 +-
+ stubdom/Makefile                              |  34 +--
+ stubdom/grub/Makefile                         |   2 +-
+ stubdom/mini-os.mk                            |   2 +-
+ tools/Makefile                                |   3 +-
+ tools/Rules.mk                                |   7 +-
  tools/libs/Makefile                           |   1 +
- .../{xenstat/libxenstat => libs/stat}/COPYING |   0
- .../libxenstat => libs/stat}/Makefile         | 105 ++++--------------
- .../stat}/bindings/swig/perl/.empty           |   0
- .../stat}/bindings/swig/python/.empty         |   0
- .../stat}/bindings/swig/xenstat.i             |   0
- .../src => libs/stat/include}/xenstat.h       |   3 +
- .../libxenstat/src => libs/stat}/xenstat.c    |   0
- .../src => libs/stat}/xenstat_freebsd.c       |   0
- .../src => libs/stat}/xenstat_linux.c         |   4 +-
- .../src => libs/stat}/xenstat_netbsd.c        |   0
- .../src => libs/stat}/xenstat_priv.h          |   0
- .../src => libs/stat}/xenstat_qmp.c           |   0
- .../src => libs/stat}/xenstat_solaris.c       |   0
+ tools/{libxc => libs/guest}/COPYING           |   0
+ tools/libs/guest/Makefile                     | 121 ++++++++++
+ .../{libxc => libs/guest}/include/xenguest.h  |   0
+ tools/{libxc => libs/guest}/xg_cpuid_x86.c    |   0
+ tools/{libxc => libs/guest}/xg_dom_arm.c      |   0
+ .../guest}/xg_dom_armzimageloader.c           |   0
+ .../{libxc => libs/guest}/xg_dom_binloader.c  |   0
+ tools/{libxc => libs/guest}/xg_dom_boot.c     |   0
+ .../guest}/xg_dom_bzimageloader.c             |   0
+ .../guest}/xg_dom_compat_linux.c              |   0
+ tools/{libxc => libs/guest}/xg_dom_core.c     |   0
+ .../{libxc => libs/guest}/xg_dom_decompress.h |   0
+ .../guest}/xg_dom_decompress_lz4.c            |   0
+ .../guest}/xg_dom_decompress_unsafe.c         |   0
+ .../guest}/xg_dom_decompress_unsafe.h         |   0
+ .../guest}/xg_dom_decompress_unsafe_bzip2.c   |   0
+ .../guest}/xg_dom_decompress_unsafe_lzma.c    |   0
+ .../guest}/xg_dom_decompress_unsafe_lzo1x.c   |   0
+ .../guest}/xg_dom_decompress_unsafe_xz.c      |   0
+ .../{libxc => libs/guest}/xg_dom_elfloader.c  |   0
+ .../{libxc => libs/guest}/xg_dom_hvmloader.c  |   0
+ tools/{libxc => libs/guest}/xg_dom_x86.c      |   0
+ tools/{libxc => libs/guest}/xg_domain.c       |   0
+ tools/{libxc => libs/guest}/xg_nomigrate.c    |   0
+ tools/{libxc => libs/guest}/xg_offline_page.c |   0
+ tools/{libxc => libs/guest}/xg_private.c      |   0
+ tools/{libxc => libs/guest}/xg_private.h      |   0
+ tools/{libxc => libs/guest}/xg_save_restore.h |   0
+ tools/{libxc => libs/guest}/xg_sr_common.c    |   0
+ tools/{libxc => libs/guest}/xg_sr_common.h    |   0
+ .../{libxc => libs/guest}/xg_sr_common_x86.c  |   0
+ .../{libxc => libs/guest}/xg_sr_common_x86.h  |   0
+ .../guest}/xg_sr_common_x86_pv.c              |   0
+ .../guest}/xg_sr_common_x86_pv.h              |   0
+ tools/{libxc => libs/guest}/xg_sr_restore.c   |   0
+ .../guest}/xg_sr_restore_x86_hvm.c            |   0
+ .../guest}/xg_sr_restore_x86_pv.c             |   0
+ tools/{libxc => libs/guest}/xg_sr_save.c      |   0
+ .../guest}/xg_sr_save_x86_hvm.c               |   0
+ .../{libxc => libs/guest}/xg_sr_save_x86_pv.c |   0
+ .../guest}/xg_sr_stream_format.h              |   0
+ tools/{libxc => libs/guest}/xg_suspend.c      |   0
+ tools/libs/libs.mk                            |   2 +-
  tools/libs/uselibs.mk                         |   2 +
- tools/xenstat/Makefile                        |  10 --
- tools/{xenstat => }/xentop/Makefile           |   2 +-
- tools/{xenstat => }/xentop/TODO               |   0
- tools/{xenstat => }/xentop/xentop.c           |   0
- 22 files changed, 36 insertions(+), 107 deletions(-)
- rename tools/{xenstat/libxenstat => libs/stat}/COPYING (100%)
- rename tools/{xenstat/libxenstat => libs/stat}/Makefile (54%)
- rename tools/{xenstat/libxenstat => libs/stat}/bindings/swig/perl/.empty (100%)
- rename tools/{xenstat/libxenstat => libs/stat}/bindings/swig/python/.empty (100%)
- rename tools/{xenstat/libxenstat => libs/stat}/bindings/swig/xenstat.i (100%)
- rename tools/{xenstat/libxenstat/src => libs/stat/include}/xenstat.h (98%)
- rename tools/{xenstat/libxenstat/src => libs/stat}/xenstat.c (100%)
- rename tools/{xenstat/libxenstat/src => libs/stat}/xenstat_freebsd.c (100%)
- rename tools/{xenstat/libxenstat/src => libs/stat}/xenstat_linux.c (98%)
- rename tools/{xenstat/libxenstat/src => libs/stat}/xenstat_netbsd.c (100%)
- rename tools/{xenstat/libxenstat/src => libs/stat}/xenstat_priv.h (100%)
- rename tools/{xenstat/libxenstat/src => libs/stat}/xenstat_qmp.c (100%)
- rename tools/{xenstat/libxenstat/src => libs/stat}/xenstat_solaris.c (100%)
- delete mode 100644 tools/xenstat/Makefile
- rename tools/{xenstat => }/xentop/Makefile (97%)
- rename tools/{xenstat => }/xentop/TODO (100%)
- rename tools/{xenstat => }/xentop/xentop.c (100%)
+ tools/libxc/Makefile                          | 219 ------------------
+ 52 files changed, 148 insertions(+), 261 deletions(-)
+ rename tools/{libxc => libs/guest}/COPYING (100%)
+ create mode 100644 tools/libs/guest/Makefile
+ rename tools/{libxc => libs/guest}/include/xenguest.h (100%)
+ rename tools/{libxc => libs/guest}/xg_cpuid_x86.c (100%)
+ rename tools/{libxc => libs/guest}/xg_dom_arm.c (100%)
+ rename tools/{libxc => libs/guest}/xg_dom_armzimageloader.c (100%)
+ rename tools/{libxc => libs/guest}/xg_dom_binloader.c (100%)
+ rename tools/{libxc => libs/guest}/xg_dom_boot.c (100%)
+ rename tools/{libxc => libs/guest}/xg_dom_bzimageloader.c (100%)
+ rename tools/{libxc => libs/guest}/xg_dom_compat_linux.c (100%)
+ rename tools/{libxc => libs/guest}/xg_dom_core.c (100%)
+ rename tools/{libxc => libs/guest}/xg_dom_decompress.h (100%)
+ rename tools/{libxc => libs/guest}/xg_dom_decompress_lz4.c (100%)
+ rename tools/{libxc => libs/guest}/xg_dom_decompress_unsafe.c (100%)
+ rename tools/{libxc => libs/guest}/xg_dom_decompress_unsafe.h (100%)
+ rename tools/{libxc => libs/guest}/xg_dom_decompress_unsafe_bzip2.c (100%)
+ rename tools/{libxc => libs/guest}/xg_dom_decompress_unsafe_lzma.c (100%)
+ rename tools/{libxc => libs/guest}/xg_dom_decompress_unsafe_lzo1x.c (100%)
+ rename tools/{libxc => libs/guest}/xg_dom_decompress_unsafe_xz.c (100%)
+ rename tools/{libxc => libs/guest}/xg_dom_elfloader.c (100%)
+ rename tools/{libxc => libs/guest}/xg_dom_hvmloader.c (100%)
+ rename tools/{libxc => libs/guest}/xg_dom_x86.c (100%)
+ rename tools/{libxc => libs/guest}/xg_domain.c (100%)
+ rename tools/{libxc => libs/guest}/xg_nomigrate.c (100%)
+ rename tools/{libxc => libs/guest}/xg_offline_page.c (100%)
+ rename tools/{libxc => libs/guest}/xg_private.c (100%)
+ rename tools/{libxc => libs/guest}/xg_private.h (100%)
+ rename tools/{libxc => libs/guest}/xg_save_restore.h (100%)
+ rename tools/{libxc => libs/guest}/xg_sr_common.c (100%)
+ rename tools/{libxc => libs/guest}/xg_sr_common.h (100%)
+ rename tools/{libxc => libs/guest}/xg_sr_common_x86.c (100%)
+ rename tools/{libxc => libs/guest}/xg_sr_common_x86.h (100%)
+ rename tools/{libxc => libs/guest}/xg_sr_common_x86_pv.c (100%)
+ rename tools/{libxc => libs/guest}/xg_sr_common_x86_pv.h (100%)
+ rename tools/{libxc => libs/guest}/xg_sr_restore.c (100%)
+ rename tools/{libxc => libs/guest}/xg_sr_restore_x86_hvm.c (100%)
+ rename tools/{libxc => libs/guest}/xg_sr_restore_x86_pv.c (100%)
+ rename tools/{libxc => libs/guest}/xg_sr_save.c (100%)
+ rename tools/{libxc => libs/guest}/xg_sr_save_x86_hvm.c (100%)
+ rename tools/{libxc => libs/guest}/xg_sr_save_x86_pv.c (100%)
+ rename tools/{libxc => libs/guest}/xg_sr_stream_format.h (100%)
+ rename tools/{libxc => libs/guest}/xg_suspend.c (100%)
+ delete mode 100644 tools/libxc/Makefile
 
 diff --git a/.gitignore b/.gitignore
-index 364b09506b..5e8c47e2db 100644
+index d22b031ed2..eb637a98e9 100644
 --- a/.gitignore
 +++ b/.gitignore
-@@ -128,6 +128,10 @@ tools/libs/guest/xc_core.h
- tools/libs/guest/xc_core_arm.h
- tools/libs/guest/xc_core_x86.h
- tools/libs/guest/xc_private.h
-+tools/libs/stat/_paths.h
-+tools/libs/stat/headers.chk
-+tools/libs/stat/libxenstat.map
-+tools/libs/stat/xenstat.pc
- tools/libs/store/headers.chk
- tools/libs/store/list.h
- tools/libs/store/utils.h
-@@ -276,9 +280,6 @@ tools/xenmon/xentrace_setmask
- tools/xenmon/xenbaked
- tools/xenpaging/xenpaging
- tools/xenpmd/xenpmd
--tools/xenstat/libxenstat/src/_paths.h
--tools/xenstat/libxenstat/xenstat.pc
--tools/xenstat/xentop/xentop
- tools/xenstore/xenstore
- tools/xenstore/xenstore-chmod
- tools/xenstore/xenstore-exists
-@@ -291,6 +292,7 @@ tools/xenstore/xenstore-ls
- tools/xenstore/xenstored
- tools/xenstore/xenstored_test
- tools/xenstore/xs_tdb_dump
-+tools/xentop/xentop
- tools/xentrace/xentrace_setsize
- tools/xentrace/tbctl
- tools/xentrace/xenctx
+@@ -71,7 +71,6 @@ stubdom/include
+ stubdom/ioemu
+ stubdom/ioemu/
+ stubdom/libs-*
+-stubdom/libxc-*
+ stubdom/libxencall-*
+ stubdom/libxenevtchn-*
+ stubdom/libxenforeignmemory-*
+@@ -121,6 +120,14 @@ tools/libs/foreignmemory/headers.chk
+ tools/libs/foreignmemory/xenforeignmemory.pc
+ tools/libs/devicemodel/headers.chk
+ tools/libs/devicemodel/xendevicemodel.pc
++tools/libs/guest/_*.[ch]
++tools/libs/guest/libxenguest.map
++tools/libs/guest/xenguest.pc
++tools/libs/guest/xc_bitops.h
++tools/libs/guest/xc_core.h
++tools/libs/guest/xc_core_arm.h
++tools/libs/guest/xc_core_x86.h
++tools/libs/guest/xc_private.h
+ tools/console/xenconsole
+ tools/console/xenconsoled
+ tools/console/client/_paths.h
+@@ -197,12 +204,6 @@ tools/include/xen-xsm/*
+ tools/include/xen-foreign/*.(c|h|size)
+ tools/include/xen-foreign/checker
+ tools/libvchan/xenvchan.pc
+-tools/libxc/*.pc
+-tools/libxc/xc_bitops.h
+-tools/libxc/xc_core.h
+-tools/libxc/xc_core_arm.h
+-tools/libxc/xc_core_x86.h
+-tools/libxc/xc_private.h
+ tools/libxl/_libxl.api-for-check
+ tools/libxl/*.api-ok
+ tools/libxl/*.pc
+@@ -370,7 +371,6 @@ tools/include/xen-foreign/arm64.h
+ tools/misc/xen-hptool
+ tools/misc/xen-mfndump
+ tools/libs/toolcore/include/_*.h
+-tools/libxc/_*.[ch]
+ tools/libxl/_*.[ch]
+ tools/libxl/testidl
+ tools/libxl/testidl.c
+diff --git a/stubdom/Makefile b/stubdom/Makefile
+index 961a9f8704..de10281ca3 100644
+--- a/stubdom/Makefile
++++ b/stubdom/Makefile
+@@ -331,7 +331,9 @@ endif
+ # libraries under tools/libs
+ #######
+ 
+-STUB_LIBS := toolcore toollog evtchn gnttab call foreignmemory devicemodel ctrl
++STUB_LIBS := toolcore toollog evtchn gnttab call foreignmemory devicemodel ctrl guest
++
++LIBDEP_guest := cross-zlib
+ 
+ #######
+ # common handling
+@@ -362,13 +364,10 @@ endef
+ 
+ $(foreach lib,$(STUB_LIBS),$(eval $(call BUILD_lib,$(lib))))
+ 
+-libxc-$(XEN_TARGET_ARCH)/stamp: $(XEN_ROOT)/tools/libxc/Makefile
+-	$(do_links)
+-
+ xenstore/stamp: $(XEN_ROOT)/tools/xenstore/Makefile
+ 	$(do_links)
+ 
+-LINK_DIRS := libxc-$(XEN_TARGET_ARCH) xenstore $(foreach dir,$(STUB_LIBS),libs-$(XEN_TARGET_ARCH)/$(dir))
++LINK_DIRS := xenstore $(foreach dir,$(STUB_LIBS),libs-$(XEN_TARGET_ARCH)/$(dir))
+ LINK_STAMPS := $(foreach dir,$(LINK_DIRS),$(dir)/stamp)
+ 
+ mk-headers-$(XEN_TARGET_ARCH): $(IOEMU_LINKFARM_TARGET) $(LINK_STAMPS)
+@@ -391,16 +390,6 @@ $(TARGETS_MINIOS): mini-os-%:
+                 mkdir -p $@/$$i ; \
+ 	done
+ 
+-#######
+-# libxc
+-#######
+-
+-.PHONY: libxc
+-libxc: libxc-$(XEN_TARGET_ARCH)/libxenguest.a
+-libxc-$(XEN_TARGET_ARCH)/libxenguest.a: libxenevtchn libxenctrl cross-zlib
+-libxc-$(XEN_TARGET_ARCH)/libxenguest.a: mk-headers-$(XEN_TARGET_ARCH) $(NEWLIB_STAMPFILE)
+-	CPPFLAGS="$(TARGET_CPPFLAGS)" CFLAGS="$(TARGET_CFLAGS)" $(MAKE) DESTDIR= CONFIG_LIBXC_MINIOS=y -C libxc-$(XEN_TARGET_ARCH)
+-
+ #######
+ # ioemu
+ #######
+@@ -409,7 +398,7 @@ ioemu-minios-config.mk: $(CURDIR)/ioemu-minios.cfg
+ 	MINIOS_CONFIG="$<" CONFIG_FILE="$(CURDIR)/$@" $(MAKE) DESTDIR= -C $(MINI_OS) config
+ 
+ .PHONY: ioemu
+-ioemu: cross-zlib cross-libpci libxc ioemu-minios-config.mk
++ioemu: cross-zlib cross-libpci libxenguest ioemu-minios-config.mk
+ 	[ -f ioemu/config-host.mak ] || \
+ 	  ( $(buildmakevars2shellvars); \
+ 	    cd ioemu ; \
+@@ -503,15 +492,15 @@ xenstore: $(CROSS_ROOT) xenstore-minios-config.mk
+ 
+ .PHONY: ioemu-stubdom
+ ioemu-stubdom: APP_OBJS=$(CURDIR)/ioemu/i386-stubdom/qemu.a $(CURDIR)/ioemu/i386-stubdom/libqemu.a $(CURDIR)/ioemu/libqemu_common.a
+-ioemu-stubdom: mini-os-$(XEN_TARGET_ARCH)-ioemu lwip-$(XEN_TARGET_ARCH) libxc ioemu
++ioemu-stubdom: mini-os-$(XEN_TARGET_ARCH)-ioemu lwip-$(XEN_TARGET_ARCH) libxenguest ioemu
+ 	DEF_CPPFLAGS="$(TARGET_CPPFLAGS)" DEF_CFLAGS="$(TARGET_CFLAGS)" DEF_LDFLAGS="$(TARGET_LDFLAGS)" MINIOS_CONFIG="$(CURDIR)/ioemu-minios.cfg" $(MAKE) DESTDIR= -C $(MINI_OS) OBJ_DIR=$(CURDIR)/$< LWIPDIR=$(CURDIR)/lwip-$(XEN_TARGET_ARCH) APP_OBJS="$(APP_OBJS)"
+ 
+ .PHONY: caml-stubdom
+-caml-stubdom: mini-os-$(XEN_TARGET_ARCH)-caml lwip-$(XEN_TARGET_ARCH) libxc cross-ocaml caml
++caml-stubdom: mini-os-$(XEN_TARGET_ARCH)-caml lwip-$(XEN_TARGET_ARCH) libxenguest cross-ocaml caml
+ 	DEF_CPPFLAGS="$(TARGET_CPPFLAGS)" DEF_CFLAGS="$(TARGET_CFLAGS)" DEF_LDFLAGS="$(TARGET_LDFLAGS)" MINIOS_CONFIG="$(CURDIR)/caml/minios.cfg" $(MAKE) DESTDIR= -C $(MINI_OS) OBJ_DIR=$(CURDIR)/$< LWIPDIR=$(CURDIR)/lwip-$(XEN_TARGET_ARCH) APP_OBJS="$(CURDIR)/caml/main-caml.o $(CURDIR)/caml/caml.o $(CAMLLIB)/libasmrun.a"
+ 
+ .PHONY: c-stubdom
+-c-stubdom: mini-os-$(XEN_TARGET_ARCH)-c lwip-$(XEN_TARGET_ARCH) libxc c
++c-stubdom: mini-os-$(XEN_TARGET_ARCH)-c lwip-$(XEN_TARGET_ARCH) libxenguest c
+ 	DEF_CPPFLAGS="$(TARGET_CPPFLAGS)" DEF_CFLAGS="$(TARGET_CFLAGS)" DEF_LDFLAGS="$(TARGET_LDFLAGS)" MINIOS_CONFIG="$(CURDIR)/c/minios.cfg" $(MAKE) DESTDIR= -C $(MINI_OS) OBJ_DIR=$(CURDIR)/$< LWIPDIR=$(CURDIR)/lwip-$(XEN_TARGET_ARCH) APP_OBJS=$(CURDIR)/c/main.a
+ 
+ .PHONY: vtpm-stubdom
+@@ -523,11 +512,11 @@ vtpmmgr-stubdom: mini-os-$(XEN_TARGET_ARCH)-vtpmmgr vtpmmgr
+ 	DEF_CPPFLAGS="$(TARGET_CPPFLAGS)" DEF_CFLAGS="$(TARGET_CFLAGS)" DEF_LDFLAGS="$(TARGET_LDFLAGS)" MINIOS_CONFIG="$(CURDIR)/vtpmmgr/minios.cfg" $(MAKE) -C $(MINI_OS) OBJ_DIR=$(CURDIR)/$< APP_OBJS="$(CURDIR)/vtpmmgr/vtpmmgr.a" APP_LDLIBS="-lm -lpolarssl"
+ 
+ .PHONY: pv-grub
+-pv-grub: mini-os-$(XEN_TARGET_ARCH)-grub libxc grub
++pv-grub: mini-os-$(XEN_TARGET_ARCH)-grub libxenguest grub
+ 	DEF_CPPFLAGS="$(TARGET_CPPFLAGS)" DEF_CFLAGS="$(TARGET_CFLAGS)" DEF_LDFLAGS="$(TARGET_LDFLAGS)" MINIOS_CONFIG="$(CURDIR)/grub/minios.cfg" $(MAKE) DESTDIR= -C $(MINI_OS) OBJ_DIR=$(CURDIR)/$< APP_OBJS=$(CURDIR)/grub-$(XEN_TARGET_ARCH)/main.a
+ 
+ .PHONY: xenstore-stubdom
+-xenstore-stubdom: mini-os-$(XEN_TARGET_ARCH)-xenstore libxc xenstore
++xenstore-stubdom: mini-os-$(XEN_TARGET_ARCH)-xenstore libxenguest xenstore
+ 	DEF_CPPFLAGS="$(TARGET_CPPFLAGS)" DEF_CFLAGS="$(TARGET_CFLAGS)" DEF_LDFLAGS="$(TARGET_LDFLAGS)" MINIOS_CONFIG="$(CURDIR)/xenstore-minios.cfg" $(MAKE) DESTDIR= -C $(MINI_OS) OBJ_DIR=$(CURDIR)/$< APP_OBJS=$(CURDIR)/xenstore/xenstored.a
+ 
+ #########
+@@ -621,7 +610,6 @@ clean:
+ 	rm -f $(STUBDOMPATH)
+ 	rm -f *-minios-config.mk
+ 	rm -fr pkg-config
+-	[ ! -e libxc-$(XEN_TARGET_ARCH)/Makefile ] || $(MAKE) DESTDIR= -C libxc-$(XEN_TARGET_ARCH) clean
+ 	-[ ! -d ioemu ] || $(MAKE) DESTDIR= -C ioemu clean
+ 	-[ ! -d xenstore ] || $(MAKE) DESTDIR= -C xenstore clean
+ 
+@@ -632,7 +620,7 @@ crossclean: clean
+ 	rm -fr newlib-$(XEN_TARGET_ARCH)
+ 	rm -fr zlib-$(XEN_TARGET_ARCH) pciutils-$(XEN_TARGET_ARCH)
+ 	rm -fr libs-$(XEN_TARGET_ARCH)
+-	rm -fr libxc-$(XEN_TARGET_ARCH) ioemu xenstore
++	rm -fr ioemu xenstore
+ 	rm -fr gmp-$(XEN_TARGET_ARCH)
+ 	rm -fr polarssl-$(XEN_TARGET_ARCH)
+ 	rm -fr openssl-$(XEN_TARGET_ARCH)
+diff --git a/stubdom/grub/Makefile b/stubdom/grub/Makefile
+index d33fa2f71e..7397661c9b 100644
+--- a/stubdom/grub/Makefile
++++ b/stubdom/grub/Makefile
+@@ -7,7 +7,7 @@ BOOT=$(OBJ_DIR)/boot-$(XEN_TARGET_ARCH).o
+ 
+ DEF_CPPFLAGS += -I$(XEN_ROOT)/tools/libs/toollog/include
+ DEF_CPPFLAGS += -I$(XEN_ROOT)/tools/libs/ctrl/include
+-DEF_CPPFLAGS += -I$(XEN_ROOT)/tools/libxc/include
++DEF_CPPFLAGS += -I$(XEN_ROOT)/tools/libs/guest/include
+ DEF_CPPFLAGS += -I$(XEN_ROOT)/tools/include -I.
+ DEF_CPPFLAGS += -I../grub-upstream/stage1
+ DEF_CPPFLAGS += -I../grub-upstream/stage2
+diff --git a/stubdom/mini-os.mk b/stubdom/mini-os.mk
+index b1387df3f8..e1640a7cbc 100644
+--- a/stubdom/mini-os.mk
++++ b/stubdom/mini-os.mk
+@@ -14,4 +14,4 @@ CALL_PATH = $(XEN_ROOT)/stubdom/libs-$(MINIOS_TARGET_ARCH)/call
+ FOREIGNMEMORY_PATH = $(XEN_ROOT)/stubdom/libs-$(MINIOS_TARGET_ARCH)/foreignmemory
+ DEVICEMODEL_PATH = $(XEN_ROOT)/stubdom/libs-$(MINIOS_TARGET_ARCH)/devicemodel
+ CTRL_PATH = $(XEN_ROOT)/stubdom/libs-$(MINIOS_TARGET_ARCH)/ctrl
+-GUEST_PATH = $(XEN_ROOT)/stubdom/libxc-$(MINIOS_TARGET_ARCH)
++GUEST_PATH = $(XEN_ROOT)/stubdom/libs-$(MINIOS_TARGET_ARCH)/guest
 diff --git a/tools/Makefile b/tools/Makefile
-index 0db01707a4..ea69675cca 100644
+index 7c9f9fc900..f9b4012290 100644
 --- a/tools/Makefile
 +++ b/tools/Makefile
-@@ -17,7 +17,7 @@ SUBDIRS-$(CONFIG_XCUTILS) += xcutils
- SUBDIRS-$(CONFIG_X86) += firmware
- SUBDIRS-y += console
- SUBDIRS-y += xenmon
--SUBDIRS-y += xenstat
-+SUBDIRS-y += xentop
- SUBDIRS-$(CONFIG_NetBSD) += xenbackendd
- SUBDIRS-y += libfsimage
- SUBDIRS-$(CONFIG_Linux) += vchan
+@@ -6,7 +6,6 @@ include $(XEN_ROOT)/tools/Rules.mk
+ 
+ SUBDIRS-y :=
+ SUBDIRS-y += libs
+-SUBDIRS-y += libxc
+ SUBDIRS-y += flask
+ SUBDIRS-y += fuzz
+ SUBDIRS-y += xenstore
+@@ -44,7 +43,7 @@ SUBDIRS-y += pygrub
+ SUBDIRS-$(OCAML_TOOLS) += ocaml
+ 
+ ifeq ($(CONFIG_RUMP),y)
+-SUBDIRS-y := libs libxc xenstore
++SUBDIRS-y := libs xenstore
+ endif
+ 
+ # For the sake of linking, set the sys-root
 diff --git a/tools/Rules.mk b/tools/Rules.mk
-index 071fe364a3..fc121d0d75 100644
+index 1cc56e9ab8..914c79bfb9 100644
 --- a/tools/Rules.mk
 +++ b/tools/Rules.mk
-@@ -18,7 +18,6 @@ include $(XEN_ROOT)/tools/libs/uselibs.mk
+@@ -15,7 +15,6 @@ XEN_INCLUDE        = $(XEN_ROOT)/tools/include
+ 
+ include $(XEN_ROOT)/tools/libs/uselibs.mk
+ 
+-XEN_libxenguest    = $(XEN_ROOT)/tools/libxc
  XEN_libxenlight    = $(XEN_ROOT)/tools/libxl
  # Currently libxlutil lives in the same directory as libxenlight
  XEN_libxlutil      = $(XEN_libxenlight)
--XEN_libxenstat     = $(XEN_ROOT)/tools/xenstat/libxenstat/src
- 
- CFLAGS_xeninclude = -I$(XEN_INCLUDE)
- 
-@@ -108,11 +107,6 @@ ifeq ($(CONFIG_Linux),y)
- LDLIBS_libxenstore += -ldl
- endif
- 
--CFLAGS_libxenstat  = -I$(XEN_libxenstat)
--SHDEPS_libxenstat  = $(SHLIB_libxenctrl) $(SHLIB_libxenstore)
--LDLIBS_libxenstat  = $(SHDEPS_libxenstat) $(XEN_libxenstat)/libxenstat$(libextension)
--SHLIB_libxenstat   = $(SHDEPS_libxenstat) -Wl,-rpath-link=$(XEN_libxenstat)
+@@ -105,11 +104,7 @@ $(foreach lib,$(LIBS_LIBS),$(eval $(call LIB_defs,$(lib))))
+ # code which compiles against libxenctrl get __XEN_TOOLS__ and
+ # therefore sees the unstable hypercall interfaces.
+ CFLAGS_libxenctrl += $(CFLAGS_libxentoollog) $(CFLAGS_libxenforeignmemory) $(CFLAGS_libxendevicemodel) -D__XEN_TOOLS__
 -
- ifeq ($(debug),y)
- # Disable optimizations
- CFLAGS += -O0 -fno-omit-frame-pointer
+-CFLAGS_libxenguest = -I$(XEN_libxenguest)/include $(CFLAGS_libxenevtchn) $(CFLAGS_libxenforeignmemory) $(CFLAGS_xeninclude)
+-SHDEPS_libxenguest = $(SHLIB_libxenevtchn) $(SHLIB_libxenctrl)
+-LDLIBS_libxenguest = $(SHDEPS_libxenguest) $(XEN_libxenguest)/libxenguest$(libextension)
+-SHLIB_libxenguest  = $(SHDEPS_libxenguest) -Wl,-rpath-link=$(XEN_libxenguest)
++CFLAGS_libxenguest += $(CFLAGS_libxenevtchn) $(CFLAGS_libxenforeignmemory)
+ 
+ CFLAGS_libxenstore = -I$(XEN_libxenstore)/include $(CFLAGS_xeninclude)
+ SHDEPS_libxenstore = $(SHLIB_libxentoolcore) $(SHLIB_libxenctrl)
 diff --git a/tools/libs/Makefile b/tools/libs/Makefile
-index 756d059ee7..e8fcd59214 100644
+index 7648ea0e4c..f15c1688f7 100644
 --- a/tools/libs/Makefile
 +++ b/tools/libs/Makefile
-@@ -13,6 +13,7 @@ SUBDIRS-y += ctrl
- SUBDIRS-y += guest
+@@ -10,6 +10,7 @@ SUBDIRS-y += call
+ SUBDIRS-y += foreignmemory
+ SUBDIRS-y += devicemodel
+ SUBDIRS-y += ctrl
++SUBDIRS-y += guest
  SUBDIRS-y += hypfs
- SUBDIRS-y += store
-+SUBDIRS-y += stat
- SUBDIRS-$(CONFIG_Linux) += vchan
  
  ifeq ($(CONFIG_RUMP),y)
-diff --git a/tools/xenstat/libxenstat/COPYING b/tools/libs/stat/COPYING
+diff --git a/tools/libxc/COPYING b/tools/libs/guest/COPYING
 similarity index 100%
-rename from tools/xenstat/libxenstat/COPYING
-rename to tools/libs/stat/COPYING
-diff --git a/tools/xenstat/libxenstat/Makefile b/tools/libs/stat/Makefile
-similarity index 54%
-rename from tools/xenstat/libxenstat/Makefile
-rename to tools/libs/stat/Makefile
-index bdd5a0f469..5463f5f7ca 100644
---- a/tools/xenstat/libxenstat/Makefile
-+++ b/tools/libs/stat/Makefile
-@@ -15,85 +15,24 @@
- XEN_ROOT=$(CURDIR)/../../..
- include $(XEN_ROOT)/tools/Rules.mk
+rename from tools/libxc/COPYING
+rename to tools/libs/guest/COPYING
+diff --git a/tools/libs/guest/Makefile b/tools/libs/guest/Makefile
+new file mode 100644
+index 0000000000..e53aeabd3e
+--- /dev/null
++++ b/tools/libs/guest/Makefile
+@@ -0,0 +1,121 @@
++XEN_ROOT = $(CURDIR)/../../..
++include $(XEN_ROOT)/tools/Rules.mk
++
++ifeq ($(CONFIG_LIBXC_MINIOS),y)
++# Save/restore of a domain is currently incompatible with a stubdom environment
++override CONFIG_MIGRATE := n
++endif
++
++LINK_FILES := xc_private.h xc_core.h xc_core_x86.h xc_core_arm.h xc_bitops.h
++
++$(LINK_FILES):
++	ln -sf $(XEN_ROOT)/tools/libs/ctrl/$(notdir $@) $@
++
++SRCS-y += xg_private.c
++SRCS-y += xg_domain.c
++SRCS-y += xg_suspend.c
++ifeq ($(CONFIG_MIGRATE),y)
++SRCS-y += xg_sr_common.c
++SRCS-$(CONFIG_X86) += xg_sr_common_x86.c
++SRCS-$(CONFIG_X86) += xg_sr_common_x86_pv.c
++SRCS-$(CONFIG_X86) += xg_sr_restore_x86_pv.c
++SRCS-$(CONFIG_X86) += xg_sr_restore_x86_hvm.c
++SRCS-$(CONFIG_X86) += xg_sr_save_x86_pv.c
++SRCS-$(CONFIG_X86) += xg_sr_save_x86_hvm.c
++SRCS-y += xg_sr_restore.c
++SRCS-y += xg_sr_save.c
++SRCS-y += xg_offline_page.c
++else
++SRCS-y += xg_nomigrate.c
++endif
++
++vpath %.c ../../../xen/common/libelf
++CFLAGS += -I../../../xen/common/libelf
++
++ELF_SRCS-y += libelf-tools.c libelf-loader.c
++ELF_SRCS-y += libelf-dominfo.c
++
++SRCS-y += $(ELF_SRCS-y)
++
++$(patsubst %.c,%.o,$(ELF_SRCS-y)): CFLAGS += -Wno-pointer-sign
++$(patsubst %.c,%.opic,$(ELF_SRCS-y)): CFLAGS += -Wno-pointer-sign
++
++ifeq ($(CONFIG_X86),y) # Add libx86 to the build
++vpath %.c ../../../xen/lib/x86
++
++SRCS-y                 += cpuid.c msr.c
++endif
++
++# new domain builder
++SRCS-y                 += xg_dom_core.c
++SRCS-y                 += xg_dom_boot.c
++SRCS-y                 += xg_dom_elfloader.c
++SRCS-$(CONFIG_X86)     += xg_dom_bzimageloader.c
++SRCS-$(CONFIG_X86)     += xg_dom_decompress_lz4.c
++SRCS-$(CONFIG_X86)     += xg_dom_hvmloader.c
++SRCS-$(CONFIG_ARM)     += xg_dom_armzimageloader.c
++SRCS-y                 += xg_dom_binloader.c
++SRCS-y                 += xg_dom_compat_linux.c
++
++SRCS-$(CONFIG_X86)     += xg_dom_x86.c
++SRCS-$(CONFIG_X86)     += xg_cpuid_x86.c
++SRCS-$(CONFIG_ARM)     += xg_dom_arm.c
++
++ifeq ($(CONFIG_LIBXC_MINIOS),y)
++SRCS-y                 += xg_dom_decompress_unsafe.c
++SRCS-y                 += xg_dom_decompress_unsafe_bzip2.c
++SRCS-y                 += xg_dom_decompress_unsafe_lzma.c
++SRCS-y                 += xg_dom_decompress_unsafe_lzo1x.c
++SRCS-y                 += xg_dom_decompress_unsafe_xz.c
++endif
++
++-include $(XEN_TARGET_ARCH)/Makefile
++
++CFLAGS   += -Werror -Wmissing-prototypes
++CFLAGS   += -I. -I./include $(CFLAGS_xeninclude)
++CFLAGS   += -D__XEN_TOOLS__
++CFLAGS   += -include $(XEN_ROOT)/tools/config.h
++
++# Needed for posix_fadvise64() in xc_linux.c
++CFLAGS-$(CONFIG_Linux) += -D_GNU_SOURCE
++
++CFLAGS	+= $(PTHREAD_CFLAGS)
++CFLAGS	+= $(CFLAGS_libxentoollog)
++CFLAGS	+= $(CFLAGS_libxenevtchn)
++CFLAGS	+= $(CFLAGS_libxendevicemodel)
++
++# libxenguest includes xc_private.h, so needs this despite not using
++# this functionality directly.
++CFLAGS += $(CFLAGS_libxencall) $(CFLAGS_libxenforeignmemory)
++
++ifeq ($(CONFIG_MiniOS),y)
++zlib-options =
++else
++zlib-options = $(ZLIB)
++endif
++
++xc_dom_bzimageloader.o: CFLAGS += $(filter -D%,$(zlib-options))
++xc_dom_bzimageloader.opic: CFLAGS += $(filter -D%,$(zlib-options))
++
++LIBHEADER := xenguest.h
++
++NO_HEADERS_CHK := y
++
++include $(XEN_ROOT)/tools/libs/libs.mk
++
++libxenguest.so.$(MAJOR).$(MINOR): COMPRESSION_LIBS = $(filter -l%,$(zlib-options))
++libxenguest.so.$(MAJOR).$(MINOR): APPEND_LDFLAGS += $(COMPRESSION_LIBS) -lz
++
++genpath-target = $(call buildmakevars2header,_paths.h)
++$(eval $(genpath-target))
++
++xc_private.h: _paths.h
++
++$(LIB_OBJS) $(PIC_OBJS): $(LINK_FILES)
++
++$(PKG_CONFIG_LOCAL): PKG_CONFIG_INCDIR = $(XEN_libxenctrl)/include
++$(PKG_CONFIG_LOCAL): PKG_CONFIG_CFLAGS_LOCAL = $(CFLAGS_xeninclude)
++
++.PHONY: cleanlocal
++cleanlocal:
++	rm -f libxenguest.map
+diff --git a/tools/libxc/include/xenguest.h b/tools/libs/guest/include/xenguest.h
+similarity index 100%
+rename from tools/libxc/include/xenguest.h
+rename to tools/libs/guest/include/xenguest.h
+diff --git a/tools/libxc/xg_cpuid_x86.c b/tools/libs/guest/xg_cpuid_x86.c
+similarity index 100%
+rename from tools/libxc/xg_cpuid_x86.c
+rename to tools/libs/guest/xg_cpuid_x86.c
+diff --git a/tools/libxc/xg_dom_arm.c b/tools/libs/guest/xg_dom_arm.c
+similarity index 100%
+rename from tools/libxc/xg_dom_arm.c
+rename to tools/libs/guest/xg_dom_arm.c
+diff --git a/tools/libxc/xg_dom_armzimageloader.c b/tools/libs/guest/xg_dom_armzimageloader.c
+similarity index 100%
+rename from tools/libxc/xg_dom_armzimageloader.c
+rename to tools/libs/guest/xg_dom_armzimageloader.c
+diff --git a/tools/libxc/xg_dom_binloader.c b/tools/libs/guest/xg_dom_binloader.c
+similarity index 100%
+rename from tools/libxc/xg_dom_binloader.c
+rename to tools/libs/guest/xg_dom_binloader.c
+diff --git a/tools/libxc/xg_dom_boot.c b/tools/libs/guest/xg_dom_boot.c
+similarity index 100%
+rename from tools/libxc/xg_dom_boot.c
+rename to tools/libs/guest/xg_dom_boot.c
+diff --git a/tools/libxc/xg_dom_bzimageloader.c b/tools/libs/guest/xg_dom_bzimageloader.c
+similarity index 100%
+rename from tools/libxc/xg_dom_bzimageloader.c
+rename to tools/libs/guest/xg_dom_bzimageloader.c
+diff --git a/tools/libxc/xg_dom_compat_linux.c b/tools/libs/guest/xg_dom_compat_linux.c
+similarity index 100%
+rename from tools/libxc/xg_dom_compat_linux.c
+rename to tools/libs/guest/xg_dom_compat_linux.c
+diff --git a/tools/libxc/xg_dom_core.c b/tools/libs/guest/xg_dom_core.c
+similarity index 100%
+rename from tools/libxc/xg_dom_core.c
+rename to tools/libs/guest/xg_dom_core.c
+diff --git a/tools/libxc/xg_dom_decompress.h b/tools/libs/guest/xg_dom_decompress.h
+similarity index 100%
+rename from tools/libxc/xg_dom_decompress.h
+rename to tools/libs/guest/xg_dom_decompress.h
+diff --git a/tools/libxc/xg_dom_decompress_lz4.c b/tools/libs/guest/xg_dom_decompress_lz4.c
+similarity index 100%
+rename from tools/libxc/xg_dom_decompress_lz4.c
+rename to tools/libs/guest/xg_dom_decompress_lz4.c
+diff --git a/tools/libxc/xg_dom_decompress_unsafe.c b/tools/libs/guest/xg_dom_decompress_unsafe.c
+similarity index 100%
+rename from tools/libxc/xg_dom_decompress_unsafe.c
+rename to tools/libs/guest/xg_dom_decompress_unsafe.c
+diff --git a/tools/libxc/xg_dom_decompress_unsafe.h b/tools/libs/guest/xg_dom_decompress_unsafe.h
+similarity index 100%
+rename from tools/libxc/xg_dom_decompress_unsafe.h
+rename to tools/libs/guest/xg_dom_decompress_unsafe.h
+diff --git a/tools/libxc/xg_dom_decompress_unsafe_bzip2.c b/tools/libs/guest/xg_dom_decompress_unsafe_bzip2.c
+similarity index 100%
+rename from tools/libxc/xg_dom_decompress_unsafe_bzip2.c
+rename to tools/libs/guest/xg_dom_decompress_unsafe_bzip2.c
+diff --git a/tools/libxc/xg_dom_decompress_unsafe_lzma.c b/tools/libs/guest/xg_dom_decompress_unsafe_lzma.c
+similarity index 100%
+rename from tools/libxc/xg_dom_decompress_unsafe_lzma.c
+rename to tools/libs/guest/xg_dom_decompress_unsafe_lzma.c
+diff --git a/tools/libxc/xg_dom_decompress_unsafe_lzo1x.c b/tools/libs/guest/xg_dom_decompress_unsafe_lzo1x.c
+similarity index 100%
+rename from tools/libxc/xg_dom_decompress_unsafe_lzo1x.c
+rename to tools/libs/guest/xg_dom_decompress_unsafe_lzo1x.c
+diff --git a/tools/libxc/xg_dom_decompress_unsafe_xz.c b/tools/libs/guest/xg_dom_decompress_unsafe_xz.c
+similarity index 100%
+rename from tools/libxc/xg_dom_decompress_unsafe_xz.c
+rename to tools/libs/guest/xg_dom_decompress_unsafe_xz.c
+diff --git a/tools/libxc/xg_dom_elfloader.c b/tools/libs/guest/xg_dom_elfloader.c
+similarity index 100%
+rename from tools/libxc/xg_dom_elfloader.c
+rename to tools/libs/guest/xg_dom_elfloader.c
+diff --git a/tools/libxc/xg_dom_hvmloader.c b/tools/libs/guest/xg_dom_hvmloader.c
+similarity index 100%
+rename from tools/libxc/xg_dom_hvmloader.c
+rename to tools/libs/guest/xg_dom_hvmloader.c
+diff --git a/tools/libxc/xg_dom_x86.c b/tools/libs/guest/xg_dom_x86.c
+similarity index 100%
+rename from tools/libxc/xg_dom_x86.c
+rename to tools/libs/guest/xg_dom_x86.c
+diff --git a/tools/libxc/xg_domain.c b/tools/libs/guest/xg_domain.c
+similarity index 100%
+rename from tools/libxc/xg_domain.c
+rename to tools/libs/guest/xg_domain.c
+diff --git a/tools/libxc/xg_nomigrate.c b/tools/libs/guest/xg_nomigrate.c
+similarity index 100%
+rename from tools/libxc/xg_nomigrate.c
+rename to tools/libs/guest/xg_nomigrate.c
+diff --git a/tools/libxc/xg_offline_page.c b/tools/libs/guest/xg_offline_page.c
+similarity index 100%
+rename from tools/libxc/xg_offline_page.c
+rename to tools/libs/guest/xg_offline_page.c
+diff --git a/tools/libxc/xg_private.c b/tools/libs/guest/xg_private.c
+similarity index 100%
+rename from tools/libxc/xg_private.c
+rename to tools/libs/guest/xg_private.c
+diff --git a/tools/libxc/xg_private.h b/tools/libs/guest/xg_private.h
+similarity index 100%
+rename from tools/libxc/xg_private.h
+rename to tools/libs/guest/xg_private.h
+diff --git a/tools/libxc/xg_save_restore.h b/tools/libs/guest/xg_save_restore.h
+similarity index 100%
+rename from tools/libxc/xg_save_restore.h
+rename to tools/libs/guest/xg_save_restore.h
+diff --git a/tools/libxc/xg_sr_common.c b/tools/libs/guest/xg_sr_common.c
+similarity index 100%
+rename from tools/libxc/xg_sr_common.c
+rename to tools/libs/guest/xg_sr_common.c
+diff --git a/tools/libxc/xg_sr_common.h b/tools/libs/guest/xg_sr_common.h
+similarity index 100%
+rename from tools/libxc/xg_sr_common.h
+rename to tools/libs/guest/xg_sr_common.h
+diff --git a/tools/libxc/xg_sr_common_x86.c b/tools/libs/guest/xg_sr_common_x86.c
+similarity index 100%
+rename from tools/libxc/xg_sr_common_x86.c
+rename to tools/libs/guest/xg_sr_common_x86.c
+diff --git a/tools/libxc/xg_sr_common_x86.h b/tools/libs/guest/xg_sr_common_x86.h
+similarity index 100%
+rename from tools/libxc/xg_sr_common_x86.h
+rename to tools/libs/guest/xg_sr_common_x86.h
+diff --git a/tools/libxc/xg_sr_common_x86_pv.c b/tools/libs/guest/xg_sr_common_x86_pv.c
+similarity index 100%
+rename from tools/libxc/xg_sr_common_x86_pv.c
+rename to tools/libs/guest/xg_sr_common_x86_pv.c
+diff --git a/tools/libxc/xg_sr_common_x86_pv.h b/tools/libs/guest/xg_sr_common_x86_pv.h
+similarity index 100%
+rename from tools/libxc/xg_sr_common_x86_pv.h
+rename to tools/libs/guest/xg_sr_common_x86_pv.h
+diff --git a/tools/libxc/xg_sr_restore.c b/tools/libs/guest/xg_sr_restore.c
+similarity index 100%
+rename from tools/libxc/xg_sr_restore.c
+rename to tools/libs/guest/xg_sr_restore.c
+diff --git a/tools/libxc/xg_sr_restore_x86_hvm.c b/tools/libs/guest/xg_sr_restore_x86_hvm.c
+similarity index 100%
+rename from tools/libxc/xg_sr_restore_x86_hvm.c
+rename to tools/libs/guest/xg_sr_restore_x86_hvm.c
+diff --git a/tools/libxc/xg_sr_restore_x86_pv.c b/tools/libs/guest/xg_sr_restore_x86_pv.c
+similarity index 100%
+rename from tools/libxc/xg_sr_restore_x86_pv.c
+rename to tools/libs/guest/xg_sr_restore_x86_pv.c
+diff --git a/tools/libxc/xg_sr_save.c b/tools/libs/guest/xg_sr_save.c
+similarity index 100%
+rename from tools/libxc/xg_sr_save.c
+rename to tools/libs/guest/xg_sr_save.c
+diff --git a/tools/libxc/xg_sr_save_x86_hvm.c b/tools/libs/guest/xg_sr_save_x86_hvm.c
+similarity index 100%
+rename from tools/libxc/xg_sr_save_x86_hvm.c
+rename to tools/libs/guest/xg_sr_save_x86_hvm.c
+diff --git a/tools/libxc/xg_sr_save_x86_pv.c b/tools/libs/guest/xg_sr_save_x86_pv.c
+similarity index 100%
+rename from tools/libxc/xg_sr_save_x86_pv.c
+rename to tools/libs/guest/xg_sr_save_x86_pv.c
+diff --git a/tools/libxc/xg_sr_stream_format.h b/tools/libs/guest/xg_sr_stream_format.h
+similarity index 100%
+rename from tools/libxc/xg_sr_stream_format.h
+rename to tools/libs/guest/xg_sr_stream_format.h
+diff --git a/tools/libxc/xg_suspend.c b/tools/libs/guest/xg_suspend.c
+similarity index 100%
+rename from tools/libxc/xg_suspend.c
+rename to tools/libs/guest/xg_suspend.c
+diff --git a/tools/libs/libs.mk b/tools/libs/libs.mk
+index 4679268fc2..9d0ed08846 100644
+--- a/tools/libs/libs.mk
++++ b/tools/libs/libs.mk
+@@ -34,7 +34,7 @@ PKG_CONFIG_DESC ?= The $(PKG_CONFIG_NAME) library for Xen hypervisor
+ PKG_CONFIG_VERSION := $(MAJOR).$(MINOR)
+ PKG_CONFIG_USELIBS := $(SHLIB_libxen$(LIBNAME))
+ PKG_CONFIG_LIB := xen$(LIBNAME)
+-PKG_CONFIG_REQPRIV := $(subst $(space),$(comma),$(strip $(foreach lib,$(USELIBS_$(LIBNAME)),xen$(lib))))
++PKG_CONFIG_REQPRIV := $(subst $(space),$(comma),$(strip $(foreach lib,$(patsubst ctrl,control,$(USELIBS_$(LIBNAME))),xen$(lib))))
  
--LDCONFIG=ldconfig
--MAKE_LINK=ln -sf
+ ifneq ($(CONFIG_LIBXC_MINIOS),y)
+ PKG_CONFIG_INST := $(PKG_CONFIG)
+diff --git a/tools/libs/uselibs.mk b/tools/libs/uselibs.mk
+index 8e45e8d917..9619c576ba 100644
+--- a/tools/libs/uselibs.mk
++++ b/tools/libs/uselibs.mk
+@@ -18,3 +18,5 @@ LIBS_LIBS += hypfs
+ USELIBS_hypfs := toollog toolcore call
+ LIBS_LIBS += ctrl
+ USELIBS_ctrl := toollog call evtchn gnttab foreignmemory devicemodel
++LIBS_LIBS += guest
++USELIBS_guest := evtchn ctrl
+diff --git a/tools/libxc/Makefile b/tools/libxc/Makefile
+deleted file mode 100644
+index 44fa0488c9..0000000000
+--- a/tools/libxc/Makefile
++++ /dev/null
+@@ -1,219 +0,0 @@
+-XEN_ROOT = $(CURDIR)/../..
+-include $(XEN_ROOT)/tools/Rules.mk
 -
--MAJOR=4.15
--MINOR=0
+-MAJOR    = 4.15
+-MINOR    = 0
 -
--LIB=src/libxenstat.a
--SHLIB=src/libxenstat.so.$(MAJOR).$(MINOR)
--SHLIB_LINKS=src/libxenstat.so.$(MAJOR) src/libxenstat.so
--OBJECTS-y=src/xenstat.o src/xenstat_qmp.o
--OBJECTS-$(CONFIG_Linux) += src/xenstat_linux.o
--OBJECTS-$(CONFIG_SunOS) += src/xenstat_solaris.o
--OBJECTS-$(CONFIG_NetBSD) += src/xenstat_netbsd.o
--OBJECTS-$(CONFIG_FreeBSD) += src/xenstat_freebsd.o
--SONAME_FLAGS=-Wl,$(SONAME_LDFLAG) -Wl,libxenstat.so.$(MAJOR)
+-ifeq ($(CONFIG_LIBXC_MINIOS),y)
+-# Save/restore of a domain is currently incompatible with a stubdom environment
+-override CONFIG_MIGRATE := n
+-endif
 -
--CFLAGS+=-fPIC -Werror
--CFLAGS+=-Isrc $(CFLAGS_libxenctrl) $(CFLAGS_libxenstore) $(CFLAGS_xeninclude) -include $(XEN_ROOT)/tools/config.h
+-LINK_FILES := xc_private.h xc_core.h xc_core_x86.h xc_core_arm.h xc_bitops.h
 -
--LDLIBS-y = $(LDLIBS_libxenstore) $(LDLIBS_libxenctrl) -lyajl
--LDLIBS-$(CONFIG_SunOS) += -lkstat
+-$(LINK_FILES):
+-	ln -sf $(XEN_ROOT)/tools/libs/ctrl/$(notdir $@) $@
 -
--PKG_CONFIG := xenstat.pc
--PKG_CONFIG_NAME := Xenstat
--PKG_CONFIG_DESC := The Xenstat library for Xen hypervisor
+-GUEST_SRCS-y :=
+-GUEST_SRCS-y += xg_private.c
+-GUEST_SRCS-y += xg_domain.c
+-GUEST_SRCS-y += xg_suspend.c
+-ifeq ($(CONFIG_MIGRATE),y)
+-GUEST_SRCS-y += xg_sr_common.c
+-GUEST_SRCS-$(CONFIG_X86) += xg_sr_common_x86.c
+-GUEST_SRCS-$(CONFIG_X86) += xg_sr_common_x86_pv.c
+-GUEST_SRCS-$(CONFIG_X86) += xg_sr_restore_x86_pv.c
+-GUEST_SRCS-$(CONFIG_X86) += xg_sr_restore_x86_hvm.c
+-GUEST_SRCS-$(CONFIG_X86) += xg_sr_save_x86_pv.c
+-GUEST_SRCS-$(CONFIG_X86) += xg_sr_save_x86_hvm.c
+-GUEST_SRCS-y += xg_sr_restore.c
+-GUEST_SRCS-y += xg_sr_save.c
+-GUEST_SRCS-y += xg_offline_page.c
+-else
+-GUEST_SRCS-y += xg_nomigrate.c
+-endif
+-
+-vpath %.c ../../xen/common/libelf
+-CFLAGS += -I../../xen/common/libelf
+-
+-ELF_SRCS-y += libelf-tools.c libelf-loader.c
+-ELF_SRCS-y += libelf-dominfo.c
+-
+-GUEST_SRCS-y += $(ELF_SRCS-y)
+-
+-$(patsubst %.c,%.o,$(ELF_SRCS-y)): CFLAGS += -Wno-pointer-sign
+-$(patsubst %.c,%.opic,$(ELF_SRCS-y)): CFLAGS += -Wno-pointer-sign
+-
+-ifeq ($(CONFIG_X86),y) # Add libx86 to the build
+-vpath %.c ../../xen/lib/x86
+-
+-GUEST_SRCS-y                 += cpuid.c msr.c
+-endif
+-
+-# new domain builder
+-GUEST_SRCS-y                 += xg_dom_core.c
+-GUEST_SRCS-y                 += xg_dom_boot.c
+-GUEST_SRCS-y                 += xg_dom_elfloader.c
+-GUEST_SRCS-$(CONFIG_X86)     += xg_dom_bzimageloader.c
+-GUEST_SRCS-$(CONFIG_X86)     += xg_dom_decompress_lz4.c
+-GUEST_SRCS-$(CONFIG_X86)     += xg_dom_hvmloader.c
+-GUEST_SRCS-$(CONFIG_ARM)     += xg_dom_armzimageloader.c
+-GUEST_SRCS-y                 += xg_dom_binloader.c
+-GUEST_SRCS-y                 += xg_dom_compat_linux.c
+-
+-GUEST_SRCS-$(CONFIG_X86)     += xg_dom_x86.c
+-GUEST_SRCS-$(CONFIG_X86)     += xg_cpuid_x86.c
+-GUEST_SRCS-$(CONFIG_ARM)     += xg_dom_arm.c
+-
+-ifeq ($(CONFIG_LIBXC_MINIOS),y)
+-GUEST_SRCS-y                 += xg_dom_decompress_unsafe.c
+-GUEST_SRCS-y                 += xg_dom_decompress_unsafe_bzip2.c
+-GUEST_SRCS-y                 += xg_dom_decompress_unsafe_lzma.c
+-GUEST_SRCS-y                 += xg_dom_decompress_unsafe_lzo1x.c
+-GUEST_SRCS-y                 += xg_dom_decompress_unsafe_xz.c
+-endif
+-
+--include $(XEN_TARGET_ARCH)/Makefile
+-
+-CFLAGS   += -Werror -Wmissing-prototypes
+-CFLAGS   += -I. -I./include $(CFLAGS_xeninclude)
+-CFLAGS   += -D__XEN_TOOLS__
+-
+-# Needed for posix_fadvise64() in xc_linux.c
+-CFLAGS-$(CONFIG_Linux) += -D_GNU_SOURCE
+-
+-CFLAGS	+= $(PTHREAD_CFLAGS)
+-CFLAGS	+= $(CFLAGS_libxentoollog)
+-CFLAGS	+= $(CFLAGS_libxenevtchn)
+-CFLAGS	+= $(CFLAGS_libxendevicemodel)
+-
+-GUEST_LIB_OBJS := $(patsubst %.c,%.o,$(GUEST_SRCS-y))
+-GUEST_PIC_OBJS := $(patsubst %.c,%.opic,$(GUEST_SRCS-y))
+-
+-$(GUEST_LIB_OBJS) $(GUEST_PIC_OBJS): CFLAGS += -include $(XEN_ROOT)/tools/config.h
+-
+-# libxenguest includes xc_private.h, so needs this despite not using
+-# this functionality directly.
+-$(GUEST_LIB_OBJS) $(GUEST_PIC_OBJS): CFLAGS += $(CFLAGS_libxencall) $(CFLAGS_libxenforeignmemory)
+-
+-LIB += libxenguest.a
+-ifneq ($(nosharedlibs),y)
+-LIB += libxenguest.so libxenguest.so.$(MAJOR) libxenguest.so.$(MAJOR).$(MINOR)
+-endif
+-
+-genpath-target = $(call buildmakevars2header,_paths.h)
+-$(eval $(genpath-target))
+-
+-xc_private.h: _paths.h
+-
+-$(GUEST_LIB_OBJS) $(GUEST_PIC_OBJS): $(LINK_FILES)
+-
+-PKG_CONFIG := xenguest.pc
 -PKG_CONFIG_VERSION := $(MAJOR).$(MINOR)
--PKG_CONFIG_USELIBS := $(SHLIB_libxenstat)
--PKG_CONFIG_LIB := xenstat
--PKG_CONFIG_REQPRIV := xencontrol,xenstore
+-
+-xenguest.pc: PKG_CONFIG_NAME = Xenguest
+-xenguest.pc: PKG_CONFIG_DESC = The Xenguest library for Xen hypervisor
+-xenguest.pc: PKG_CONFIG_USELIBS = $(SHLIB_libxenguest)
+-xenguest.pc: PKG_CONFIG_LIB = xenguest
+-xenguest.pc: PKG_CONFIG_REQPRIV = xentoollog,xencall,xenforeignmemory,xenevtchn
+-
+-$(PKG_CONFIG_DIR)/xenguest.pc: PKG_CONFIG_NAME = Xenguest
+-$(PKG_CONFIG_DIR)/xenguest.pc: PKG_CONFIG_DESC = The Xenguest library for Xen hypervisor
+-$(PKG_CONFIG_DIR)/xenguest.pc: PKG_CONFIG_USELIBS = $(SHLIB_libxenguest)
+-$(PKG_CONFIG_DIR)/xenguest.pc: PKG_CONFIG_LIB = xenguest
+-$(PKG_CONFIG_DIR)/xenguest.pc: PKG_CONFIG_REQPRIV = xentoollog,xencall,xenforeignmemory,xenevtchn,xencontrol
 -
 -ifneq ($(CONFIG_LIBXC_MINIOS),y)
 -PKG_CONFIG_INST := $(PKG_CONFIG)
@@ -258,224 +860,90 @@ index bdd5a0f469..5463f5f7ca 100644
 -PKG_CONFIG_LOCAL := $(foreach pc,$(PKG_CONFIG),$(PKG_CONFIG_DIR)/$(pc))
 -
 -$(PKG_CONFIG_LOCAL): PKG_CONFIG_PREFIX = $(XEN_ROOT)
--$(PKG_CONFIG_LOCAL): PKG_CONFIG_INCDIR = $(XEN_libxenstat)
+-$(PKG_CONFIG_LOCAL): PKG_CONFIG_INCDIR = $(XEN_libxenctrl)/include
 -$(PKG_CONFIG_LOCAL): PKG_CONFIG_LIBDIR = $(CURDIR)
-+CFLAGS += $(CFLAGS_libxenctrl) $(CFLAGS_libxenstore) $(CFLAGS_xeninclude) -include $(XEN_ROOT)/tools/config.h
- 
+-$(PKG_CONFIG_LOCAL): PKG_CONFIG_CFLAGS_LOCAL = $(CFLAGS_xeninclude)
+-
 -.PHONY: all
--all: $(LIB) $(SHLIB) $(SHLIB_LINKS) $(PKG_CONFIG_INST) $(PKG_CONFIG_LOCAL)
+-all: build
 -
--$(OBJECTS-y): src/_paths.h
+-.PHONY: build
+-build:
+-	$(MAKE) libs
 -
--$(LIB): $(OBJECTS-y)
--	$(AR) rc $@ $^
--	$(RANLIB) $@
-+SRCS-y += xenstat.c
-+SRCS-y += xenstat_qmp.c
-+SRCS-$(CONFIG_Linux) += xenstat_linux.c
-+SRCS-$(CONFIG_SunOS) += xenstat_solaris.c
-+SRCS-$(CONFIG_NetBSD) += xenstat_netbsd.c
-+SRCS-$(CONFIG_FreeBSD) += xenstat_freebsd.c
- 
--$(SHLIB): $(OBJECTS-y)
--	$(CC) $(LDFLAGS) $(SONAME_FLAGS) $(SHLIB_LDFLAGS) -o $@ \
--	    $(OBJECTS-y) $(LDLIBS-y) $(APPEND_LDFLAGS)
-+LDLIBS-y += -lyajl
-+LDLIBS-$(CONFIG_SunOS) += -lkstat
-+APPEND_LDFLAGS += $(LDLIBS-y)
- 
--src/libxenstat.so.$(MAJOR): $(SHLIB)
--	$(MAKE_LINK) $(<F) $@
-+include $(XEN_ROOT)/tools/libs/libs.mk
- 
--src/libxenstat.so: src/libxenstat.so.$(MAJOR)
--	$(MAKE_LINK) $(<F) $@
-+$(PKG_CONFIG_LOCAL): PKG_CONFIG_INCDIR = $(XEN_libxenstat)/include
- 
+-.PHONY: libs
+-libs: $(LIB) $(PKG_CONFIG_INST) $(PKG_CONFIG_LOCAL)
+-
 -.PHONY: install
--install: all
--	$(INSTALL_DATA) src/xenstat.h $(DESTDIR)$(includedir)
--	$(INSTALL_DATA) $(LIB) $(DESTDIR)$(libdir)/libxenstat.a
--	$(INSTALL_PROG) src/libxenstat.so.$(MAJOR).$(MINOR) $(DESTDIR)$(libdir)
--	ln -sf libxenstat.so.$(MAJOR).$(MINOR) $(DESTDIR)$(libdir)/libxenstat.so.$(MAJOR)
--	ln -sf libxenstat.so.$(MAJOR) $(DESTDIR)$(libdir)/libxenstat.so
--	$(INSTALL_DATA) xenstat.pc $(DESTDIR)$(PKG_INSTALLDIR)
+-install: build
+-	$(INSTALL_DIR) $(DESTDIR)$(libdir)
+-	$(INSTALL_DIR) $(DESTDIR)$(includedir)
+-	$(INSTALL_SHLIB) libxenguest.so.$(MAJOR).$(MINOR) $(DESTDIR)$(libdir)
+-	$(INSTALL_DATA) libxenguest.a $(DESTDIR)$(libdir)
+-	$(SYMLINK_SHLIB) libxenguest.so.$(MAJOR).$(MINOR) $(DESTDIR)$(libdir)/libxenguest.so.$(MAJOR)
+-	$(SYMLINK_SHLIB) libxenguest.so.$(MAJOR) $(DESTDIR)$(libdir)/libxenguest.so
+-	$(INSTALL_DATA) include/xenguest.h $(DESTDIR)$(includedir)
+-	$(INSTALL_DATA) xenguest.pc $(DESTDIR)$(PKG_INSTALLDIR)
 -
 -.PHONY: uninstall
 -uninstall:
--	rm -f $(DESTDIR)$(PKG_INSTALLDIR)/xenstat.pc
--	rm -f $(DESTDIR)$(libdir)/libxenstat.so
--	rm -f $(DESTDIR)$(libdir)/libxenstat.so.$(MAJOR)
--	rm -f $(DESTDIR)$(libdir)/libxenstat.so.$(MAJOR).$(MINOR)
--	rm -f $(DESTDIR)$(libdir)/libxenstat.a
--	rm -f $(DESTDIR)$(includedir)/xenstat.h
-+$(LIB_OBJS): _paths.h
- 
- PYLIB=bindings/swig/python/_xenstat.so
- PYMOD=bindings/swig/python/xenstat.py
-@@ -114,9 +53,9 @@ install-bindings: install-perl-bindings install-python-bindings
- .PHONY: uninstall-bindings
- uninstall-bindings: uninstall-perl-bindings uninstall-python-bindings
- 
--$(BINDINGS): $(SHLIB) $(SHLIB_LINKS) src/xenstat.h
-+$(BINDINGS): $(SHLIB) $(SHLIB_LINKS) include/xenstat.h
- 
--SWIG_FLAGS=-module xenstat -Isrc
-+SWIG_FLAGS=-module xenstat -Iinclude -I.
- 
- # Python bindings
- PYTHON_VERSION=$(PYTHON:python%=%)
-@@ -180,16 +119,14 @@ install: install-perl-bindings
- uninstall: uninstall-perl-bindings
- endif
- 
+-	rm -f $(DESTDIR)$(PKG_INSTALLDIR)/xenguest.pc
+-	rm -f $(DESTDIR)$(includedir)/xenguest.h
+-	rm -f $(DESTDIR)$(libdir)/libxenguest.so
+-	rm -f $(DESTDIR)$(libdir)/libxenguest.so.$(MAJOR)
+-	rm -f $(DESTDIR)$(libdir)/libxenguest.so.$(MAJOR).$(MINOR)
+-	rm -f $(DESTDIR)$(libdir)/libxenguest.a
+-
+-.PHONY: TAGS
+-TAGS:
+-	etags -t *.c *.h
+-
 -.PHONY: clean
 -clean:
--	rm -f $(LIB) $(SHLIB) $(SHLIB_LINKS) $(OBJECTS-y) \
--	      $(BINDINGS) $(BINDINGSRC) $(DEPS_RM) src/_paths.h
--	rm -f xenstat.pc
-+clean: cleanlocal
- 
+-	rm -rf *.rpm $(LIB) *~ $(DEPS_RM) \
+-            _paths.h \
+-	    $(LINK_FILES) \
+-	    xenguest.pc \
+-            $(GUEST_LIB_OBJS) $(GUEST_PIC_OBJS)
+-
 -.PHONY: distclean
 -distclean: clean
-+.PHONY: cleanlocal
-+cleanlocal:
-+	rm -f $(BINDINGS) $(BINDINGSRC) $(DEPS_RM) _paths.h
-+	rm -f libxenstat.map
- 
- -include $(DEPS_INCLUDE)
- 
--genpath-target = $(call buildmakevars2header,src/_paths.h)
-+genpath-target = $(call buildmakevars2header,_paths.h)
- $(eval $(genpath-target))
-diff --git a/tools/xenstat/libxenstat/bindings/swig/perl/.empty b/tools/libs/stat/bindings/swig/perl/.empty
-similarity index 100%
-rename from tools/xenstat/libxenstat/bindings/swig/perl/.empty
-rename to tools/libs/stat/bindings/swig/perl/.empty
-diff --git a/tools/xenstat/libxenstat/bindings/swig/python/.empty b/tools/libs/stat/bindings/swig/python/.empty
-similarity index 100%
-rename from tools/xenstat/libxenstat/bindings/swig/python/.empty
-rename to tools/libs/stat/bindings/swig/python/.empty
-diff --git a/tools/xenstat/libxenstat/bindings/swig/xenstat.i b/tools/libs/stat/bindings/swig/xenstat.i
-similarity index 100%
-rename from tools/xenstat/libxenstat/bindings/swig/xenstat.i
-rename to tools/libs/stat/bindings/swig/xenstat.i
-diff --git a/tools/xenstat/libxenstat/src/xenstat.h b/tools/libs/stat/include/xenstat.h
-similarity index 98%
-rename from tools/xenstat/libxenstat/src/xenstat.h
-rename to tools/libs/stat/include/xenstat.h
-index 76a660f321..c3b98909dd 100644
---- a/tools/xenstat/libxenstat/src/xenstat.h
-+++ b/tools/libs/stat/include/xenstat.h
-@@ -71,6 +71,9 @@ unsigned long long xenstat_node_tot_mem(xenstat_node * node);
- /* Get amount of free memory on a node */
- unsigned long long xenstat_node_free_mem(xenstat_node * node);
- 
-+/* Get amount of freeable memory on a node */
-+long xenstat_node_freeable_mb(xenstat_node * node);
-+
- /* Find the number of domains existing on a node */
- unsigned int xenstat_node_num_domains(xenstat_node * node);
- 
-diff --git a/tools/xenstat/libxenstat/src/xenstat.c b/tools/libs/stat/xenstat.c
-similarity index 100%
-rename from tools/xenstat/libxenstat/src/xenstat.c
-rename to tools/libs/stat/xenstat.c
-diff --git a/tools/xenstat/libxenstat/src/xenstat_freebsd.c b/tools/libs/stat/xenstat_freebsd.c
-similarity index 100%
-rename from tools/xenstat/libxenstat/src/xenstat_freebsd.c
-rename to tools/libs/stat/xenstat_freebsd.c
-diff --git a/tools/xenstat/libxenstat/src/xenstat_linux.c b/tools/libs/stat/xenstat_linux.c
-similarity index 98%
-rename from tools/xenstat/libxenstat/src/xenstat_linux.c
-rename to tools/libs/stat/xenstat_linux.c
-index 7530349eee..793263f2b6 100644
---- a/tools/xenstat/libxenstat/src/xenstat_linux.c
-+++ b/tools/libs/stat/xenstat_linux.c
-@@ -64,7 +64,7 @@ static const char PROCNETDEV_HEADER[] =
- 
- /* We need to get the name of the bridge interface for use with bonding interfaces */
- /* Use excludeName parameter to avoid adding bridges we don't care about, eg. virbr0 */
--void getBridge(char *excludeName, char *result, size_t resultLen)
-+static void getBridge(char *excludeName, char *result, size_t resultLen)
- {
- 	struct dirent *de;
- 	DIR *d;
-@@ -89,7 +89,7 @@ void getBridge(char *excludeName, char *result, size_t resultLen)
- 
- /* parseNetLine provides regular expression based parsing for lines from /proc/net/dev, all the */
- /* information are parsed but not all are used in our case, ie. for xenstat */
--int parseNetDevLine(char *line, char *iface, unsigned long long *rxBytes, unsigned long long *rxPackets,
-+static int parseNetDevLine(char *line, char *iface, unsigned long long *rxBytes, unsigned long long *rxPackets,
- 		unsigned long long *rxErrs, unsigned long long *rxDrops, unsigned long long *rxFifo,
- 		unsigned long long *rxFrames, unsigned long long *rxComp, unsigned long long *rxMcast,
- 		unsigned long long *txBytes, unsigned long long *txPackets, unsigned long long *txErrs,
-diff --git a/tools/xenstat/libxenstat/src/xenstat_netbsd.c b/tools/libs/stat/xenstat_netbsd.c
-similarity index 100%
-rename from tools/xenstat/libxenstat/src/xenstat_netbsd.c
-rename to tools/libs/stat/xenstat_netbsd.c
-diff --git a/tools/xenstat/libxenstat/src/xenstat_priv.h b/tools/libs/stat/xenstat_priv.h
-similarity index 100%
-rename from tools/xenstat/libxenstat/src/xenstat_priv.h
-rename to tools/libs/stat/xenstat_priv.h
-diff --git a/tools/xenstat/libxenstat/src/xenstat_qmp.c b/tools/libs/stat/xenstat_qmp.c
-similarity index 100%
-rename from tools/xenstat/libxenstat/src/xenstat_qmp.c
-rename to tools/libs/stat/xenstat_qmp.c
-diff --git a/tools/xenstat/libxenstat/src/xenstat_solaris.c b/tools/libs/stat/xenstat_solaris.c
-similarity index 100%
-rename from tools/xenstat/libxenstat/src/xenstat_solaris.c
-rename to tools/libs/stat/xenstat_solaris.c
-diff --git a/tools/libs/uselibs.mk b/tools/libs/uselibs.mk
-index edb4b34256..a9dc2ce994 100644
---- a/tools/libs/uselibs.mk
-+++ b/tools/libs/uselibs.mk
-@@ -24,3 +24,5 @@ LIBS_LIBS += store
- USELIBS_store := toolcore
- LIBS_LIBS += vchan
- USELIBS_vchan := toollog store gnttab evtchn
-+LIBS_LIBS += stat
-+USELIBS_stat := ctrl store
-diff --git a/tools/xenstat/Makefile b/tools/xenstat/Makefile
-deleted file mode 100644
-index b300f31289..0000000000
---- a/tools/xenstat/Makefile
-+++ /dev/null
-@@ -1,10 +0,0 @@
--XEN_ROOT = $(CURDIR)/../..
--include $(XEN_ROOT)/tools/Rules.mk
 -
--SUBDIRS :=
--SUBDIRS += libxenstat
--SUBDIRS += xentop
+-.PHONY: rpm
+-rpm: build
+-	rm -rf staging
+-	mkdir staging
+-	mkdir staging/i386
+-	rpmbuild --define "staging$$PWD/staging" --define '_builddir.' \
+-		--define "_rpmdir$$PWD/staging" -bb rpm.spec
+-	mv staging/i386/*.rpm .
+-	rm -rf staging
 -
--.PHONY: all install clean distclean uninstall
+-# libxenguest
 -
--all install clean distclean uninstall: %: subdirs-%
-diff --git a/tools/xenstat/xentop/Makefile b/tools/xentop/Makefile
-similarity index 97%
-rename from tools/xenstat/xentop/Makefile
-rename to tools/xentop/Makefile
-index ec612db2a2..0034114684 100644
---- a/tools/xenstat/xentop/Makefile
-+++ b/tools/xentop/Makefile
-@@ -10,7 +10,7 @@
- # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- # GNU General Public License for more details.
- 
--XEN_ROOT=$(CURDIR)/../../..
-+XEN_ROOT=$(CURDIR)/../..
- include $(XEN_ROOT)/tools/Rules.mk
- 
- ifneq ($(XENSTAT_XENTOP),y)
-diff --git a/tools/xenstat/xentop/TODO b/tools/xentop/TODO
-similarity index 100%
-rename from tools/xenstat/xentop/TODO
-rename to tools/xentop/TODO
-diff --git a/tools/xenstat/xentop/xentop.c b/tools/xentop/xentop.c
-similarity index 100%
-rename from tools/xenstat/xentop/xentop.c
-rename to tools/xentop/xentop.c
+-libxenguest.a: $(GUEST_LIB_OBJS)
+-	$(AR) rc $@ $^
+-
+-libxenguest.so: libxenguest.so.$(MAJOR)
+-	$(SYMLINK_SHLIB) $< $@
+-libxenguest.so.$(MAJOR): libxenguest.so.$(MAJOR).$(MINOR)
+-	$(SYMLINK_SHLIB) $< $@
+-
+-ifeq ($(CONFIG_MiniOS),y)
+-zlib-options =
+-else
+-zlib-options = $(ZLIB)
+-endif
+-
+-xc_dom_bzimageloader.o: CFLAGS += $(filter -D%,$(zlib-options))
+-xc_dom_bzimageloader.opic: CFLAGS += $(filter -D%,$(zlib-options))
+-
+-libxenguest.so.$(MAJOR).$(MINOR): COMPRESSION_LIBS = $(filter -l%,$(zlib-options))
+-libxenguest.so.$(MAJOR).$(MINOR): $(GUEST_PIC_OBJS)
+-	$(CC) $(LDFLAGS) -Wl,$(SONAME_LDFLAG) -Wl,libxenguest.so.$(MAJOR) $(SHLIB_LDFLAGS) -o $@ $(GUEST_PIC_OBJS) $(COMPRESSION_LIBS) -lz $(LDLIBS_libxenevtchn) $(LDLIBS_libxenctrl) $(PTHREAD_LIBS) $(APPEND_LDFLAGS)
+-
+--include $(DEPS_INCLUDE)
+-
 -- 
 2.26.2
 
