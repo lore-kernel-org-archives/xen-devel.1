@@ -7,44 +7,45 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DFA62C433E2
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2020 15:22:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3E6A4C433E6
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2020 15:22:08 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BC64A20757
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2020 15:22:07 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BC64A20757
+	by mail.kernel.org (Postfix) with ESMTPS id 11C3120757
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2020 15:22:08 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 11C3120757
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kBgCS-0008H6-Jc; Fri, 28 Aug 2020 15:21:56 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kBgCS-0008H0-8D; Fri, 28 Aug 2020 15:21:56 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Pjxq=CG=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kBfzv-0004eL-JT
- for xen-devel@lists.xenproject.org; Fri, 28 Aug 2020 15:08:59 +0000
-X-Inumbo-ID: 5a05ba65-bf66-44f3-b5a0-2753f2c157c6
+ id 1kBg04-0004eG-76
+ for xen-devel@lists.xenproject.org; Fri, 28 Aug 2020 15:09:08 +0000
+X-Inumbo-ID: 22e481ce-8c9d-4ace-ab66-a81ab3088fa4
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 5a05ba65-bf66-44f3-b5a0-2753f2c157c6;
- Fri, 28 Aug 2020 15:07:56 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 22e481ce-8c9d-4ace-ab66-a81ab3088fa4;
+ Fri, 28 Aug 2020 15:07:59 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id B92B7AEB6;
- Fri, 28 Aug 2020 15:08:26 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 9A79AB157;
+ Fri, 28 Aug 2020 15:08:28 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
  George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
  Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
-Subject: [PATCH v4 21/31] tools: split libxenvchan into new tools/libs/vchan
- directory
-Date: Fri, 28 Aug 2020 17:07:37 +0200
-Message-Id: <20200828150747.25305-22-jgross@suse.com>
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH v4 31/31] tools: move libxlutil to tools/libs/util
+Date: Fri, 28 Aug 2020 17:07:47 +0200
+Message-Id: <20200828150747.25305-32-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200828150747.25305-1-jgross@suse.com>
 References: <20200828150747.25305-1-jgross@suse.com>
@@ -63,214 +64,335 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-There is no reason why libvchan is not placed in the tools/libs
-directory.
-
-At the same time move libxenvchan.h to a dedicated include directory
-in tools/libs/vchan in order to follow the same pattern as the other
-libraries in tools/libs.
-
-As tools/libvchan now contains no library any longer rename it to
-tools/vchan.
+Move the libxlutil source to tools/libs/util and delete tools/libxl.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
-Acked-by: Wei Liu <wl@xen.org>
 ---
- .gitignore                                    |   8 +-
- tools/Makefile                                |   2 +-
- tools/Rules.mk                                |   6 --
+ .gitignore                                    |   6 +-
+ tools/Makefile                                |   1 -
+ tools/Rules.mk                                |   7 -
  tools/libs/Makefile                           |   1 +
- tools/libs/uselibs.mk                         |   2 +
- tools/libs/vchan/Makefile                     |  20 ++++
- .../vchan/include}/libxenvchan.h              |   0
- tools/{libvchan => libs/vchan}/init.c         |   0
- tools/{libvchan => libs/vchan}/io.c           |   0
- tools/libvchan/Makefile                       | 100 ------------------
- tools/vchan/Makefile                          |  37 +++++++
- tools/{libvchan => vchan}/node-select.c       |   0
- tools/{libvchan => vchan}/node.c              |   0
- .../{libvchan => vchan}/vchan-socket-proxy.c  |   0
- 14 files changed, 66 insertions(+), 110 deletions(-)
- create mode 100644 tools/libs/vchan/Makefile
- rename tools/{libvchan => libs/vchan/include}/libxenvchan.h (100%)
- rename tools/{libvchan => libs/vchan}/init.c (100%)
- rename tools/{libvchan => libs/vchan}/io.c (100%)
- delete mode 100644 tools/libvchan/Makefile
- create mode 100644 tools/vchan/Makefile
- rename tools/{libvchan => vchan}/node-select.c (100%)
- rename tools/{libvchan => vchan}/node.c (100%)
- rename tools/{libvchan => vchan}/vchan-socket-proxy.c (100%)
+ tools/libs/uselibs.mk                         |   3 +
+ tools/{libxl => libs/util}/CODING_STYLE       |   0
+ tools/libs/util/Makefile                      |  63 +++++++++
+ .../{libxl => libs/util/include}/libxlutil.h  |   0
+ tools/{libxl => libs/util}/libxlu_cfg.c       |   0
+ tools/{libxl => libs/util}/libxlu_cfg_i.h     |   0
+ tools/{libxl => libs/util}/libxlu_cfg_l.c     |   0
+ tools/{libxl => libs/util}/libxlu_cfg_l.h     |   0
+ tools/{libxl => libs/util}/libxlu_cfg_l.l     |   0
+ tools/{libxl => libs/util}/libxlu_cfg_y.c     |   0
+ tools/{libxl => libs/util}/libxlu_cfg_y.h     |   0
+ tools/{libxl => libs/util}/libxlu_cfg_y.y     |   0
+ tools/{libxl => libs/util}/libxlu_disk.c      |   0
+ tools/{libxl => libs/util}/libxlu_disk_i.h    |   0
+ tools/{libxl => libs/util}/libxlu_disk_l.c    |   0
+ tools/{libxl => libs/util}/libxlu_disk_l.h    |   0
+ tools/{libxl => libs/util}/libxlu_disk_l.l    |   0
+ tools/{libxl => libs/util}/libxlu_internal.h  |   0
+ tools/{libxl => libs/util}/libxlu_pci.c       |   0
+ tools/{libxl => libs/util}/libxlu_vif.c       |   0
+ tools/libxl/Makefile                          | 124 ------------------
+ 25 files changed, 71 insertions(+), 134 deletions(-)
+ rename tools/{libxl => libs/util}/CODING_STYLE (100%)
+ create mode 100644 tools/libs/util/Makefile
+ rename tools/{libxl => libs/util/include}/libxlutil.h (100%)
+ rename tools/{libxl => libs/util}/libxlu_cfg.c (100%)
+ rename tools/{libxl => libs/util}/libxlu_cfg_i.h (100%)
+ rename tools/{libxl => libs/util}/libxlu_cfg_l.c (100%)
+ rename tools/{libxl => libs/util}/libxlu_cfg_l.h (100%)
+ rename tools/{libxl => libs/util}/libxlu_cfg_l.l (100%)
+ rename tools/{libxl => libs/util}/libxlu_cfg_y.c (100%)
+ rename tools/{libxl => libs/util}/libxlu_cfg_y.h (100%)
+ rename tools/{libxl => libs/util}/libxlu_cfg_y.y (100%)
+ rename tools/{libxl => libs/util}/libxlu_disk.c (100%)
+ rename tools/{libxl => libs/util}/libxlu_disk_i.h (100%)
+ rename tools/{libxl => libs/util}/libxlu_disk_l.c (100%)
+ rename tools/{libxl => libs/util}/libxlu_disk_l.h (100%)
+ rename tools/{libxl => libs/util}/libxlu_disk_l.l (100%)
+ rename tools/{libxl => libs/util}/libxlu_internal.h (100%)
+ rename tools/{libxl => libs/util}/libxlu_pci.c (100%)
+ rename tools/{libxl => libs/util}/libxlu_vif.c (100%)
+ delete mode 100644 tools/libxl/Makefile
 
 diff --git a/.gitignore b/.gitignore
-index 1335034fd3..364b09506b 100644
+index f30550255f..188495783e 100644
 --- a/.gitignore
 +++ b/.gitignore
-@@ -134,6 +134,9 @@ tools/libs/store/utils.h
+@@ -154,6 +154,10 @@ tools/libs/store/utils.h
  tools/libs/store/xenstore.pc
  tools/libs/store/xs_lib.c
  tools/libs/store/include/xenstore_lib.h
-+tools/libs/vchan/headers.chk
-+tools/libs/vchan/libxenvchan.map
-+tools/libs/vchan/xenvchan.pc
- tools/console/xenconsole
- tools/console/xenconsoled
- tools/console/client/_paths.h
-@@ -209,7 +212,6 @@ tools/include/xen/*
++tools/libs/util/*.pc
++tools/libs/util/_paths.h
++tools/libs/util/libxlu_cfg_y.output
++tools/libs/util/libxenutil.map
+ tools/libs/vchan/headers.chk
+ tools/libs/vchan/libxenvchan.map
+ tools/libs/vchan/xenvchan.pc
+@@ -232,8 +236,6 @@ tools/include/xen/*
  tools/include/xen-xsm/*
  tools/include/xen-foreign/*.(c|h|size)
  tools/include/xen-foreign/checker
--tools/libvchan/xenvchan.pc
- tools/libxl/_libxl.api-for-check
- tools/libxl/*.api-ok
- tools/libxl/*.pc
-@@ -389,8 +391,8 @@ tools/misc/xenhypfs
- tools/misc/xenwatchdogd
- tools/misc/xen-hvmcrash
- tools/misc/xen-lowmemd
--tools/libvchan/vchan-node[12]
--tools/libvchan/vchan-socket-proxy
-+tools/vchan/vchan-node[12]
-+tools/vchan/vchan-socket-proxy
- tools/ocaml/*/.ocamldep.make
- tools/ocaml/*/*.cm[ixao]
- tools/ocaml/*/*.cmxa
+-tools/libxl/*.pc
+-tools/libxl/libxlu_cfg_y.output
+ tools/misc/cpuperf/cpuperf-perfcntr
+ tools/misc/cpuperf/cpuperf-xen
+ tools/misc/xc_shadow
 diff --git a/tools/Makefile b/tools/Makefile
-index 4a3646871c..0db01707a4 100644
+index ea69675cca..9c77ee6763 100644
 --- a/tools/Makefile
 +++ b/tools/Makefile
-@@ -20,7 +20,7 @@ SUBDIRS-y += xenmon
- SUBDIRS-y += xenstat
- SUBDIRS-$(CONFIG_NetBSD) += xenbackendd
- SUBDIRS-y += libfsimage
--SUBDIRS-$(CONFIG_Linux) += libvchan
-+SUBDIRS-$(CONFIG_Linux) += vchan
+@@ -29,7 +29,6 @@ SUBDIRS-$(CONFIG_QEMU_XEN) += qemu-xen-dir
+ endif
  
- # do not recurse in to a dir we are about to delete
- ifneq "$(MAKECMDGOALS)" "distclean"
+ SUBDIRS-y += xenpmd
+-SUBDIRS-y += libxl
+ SUBDIRS-$(CONFIG_GOLANG) += golang
+ SUBDIRS-y += xl
+ SUBDIRS-y += helpers
 diff --git a/tools/Rules.mk b/tools/Rules.mk
-index 557fd1e757..071fe364a3 100644
+index 5ad17b313b..842b9daf92 100644
 --- a/tools/Rules.mk
 +++ b/tools/Rules.mk
-@@ -19,7 +19,6 @@ XEN_libxenlight    = $(XEN_ROOT)/tools/libxl
- # Currently libxlutil lives in the same directory as libxenlight
- XEN_libxlutil      = $(XEN_libxenlight)
- XEN_libxenstat     = $(XEN_ROOT)/tools/xenstat/libxenstat/src
--XEN_libxenvchan    = $(XEN_ROOT)/tools/libvchan
+@@ -15,8 +15,6 @@ XEN_INCLUDE        = $(XEN_ROOT)/tools/include
  
+ include $(XEN_ROOT)/tools/libs/uselibs.mk
+ 
+-XEN_libxenutil     = $(XEN_ROOT)/tools/libxl
+-
  CFLAGS_xeninclude = -I$(XEN_INCLUDE)
  
-@@ -114,11 +113,6 @@ SHDEPS_libxenstat  = $(SHLIB_libxenctrl) $(SHLIB_libxenstore)
- LDLIBS_libxenstat  = $(SHDEPS_libxenstat) $(XEN_libxenstat)/libxenstat$(libextension)
- SHLIB_libxenstat   = $(SHDEPS_libxenstat) -Wl,-rpath-link=$(XEN_libxenstat)
+ XENSTORE_XENSTORED ?= y
+@@ -117,11 +115,6 @@ else
+ CFLAGS += -O2 -fomit-frame-pointer
+ endif
  
--CFLAGS_libxenvchan = -I$(XEN_libxenvchan) $(CFLAGS_libxengnttab) $(CFLAGS_libxenevtchn)
--SHDEPS_libxenvchan = $(SHLIB_libxentoollog) $(SHLIB_libxenstore) $(SHLIB_libxenevtchn) $(SHLIB_libxengnttab)
--LDLIBS_libxenvchan = $(SHDEPS_libxenvchan) $(XEN_libxenvchan)/libxenvchan$(libextension)
--SHLIB_libxenvchan  = $(SHDEPS_libxenvchan) -Wl,-rpath-link=$(XEN_libxenvchan)
+-CFLAGS_libxenutil = -I$(XEN_libxenutil)
+-SHDEPS_libxenutil = $(SHLIB_libxenlight)
+-LDLIBS_libxenutil = $(SHDEPS_libxenutil) $(XEN_libxenutil)/libxlutil$(libextension)
+-SHLIB_libxenutil  = $(SHDEPS_libxenutil) -Wl,-rpath-link=$(XEN_libxenutil)
 -
- ifeq ($(debug),y)
- # Disable optimizations
- CFLAGS += -O0 -fno-omit-frame-pointer
+ CFLAGS += -D__XEN_INTERFACE_VERSION__=__XEN_LATEST_INTERFACE_VERSION__
+ 
+ # Get gcc to generate the dependencies for us.
 diff --git a/tools/libs/Makefile b/tools/libs/Makefile
-index 62bd8f5292..756d059ee7 100644
+index c41455c604..1afcd12e2b 100644
 --- a/tools/libs/Makefile
 +++ b/tools/libs/Makefile
-@@ -13,6 +13,7 @@ SUBDIRS-y += ctrl
- SUBDIRS-y += guest
- SUBDIRS-y += hypfs
- SUBDIRS-y += store
-+SUBDIRS-$(CONFIG_Linux) += vchan
+@@ -16,6 +16,7 @@ SUBDIRS-y += store
+ SUBDIRS-y += stat
+ SUBDIRS-$(CONFIG_Linux) += vchan
+ SUBDIRS-y += light
++SUBDIRS-y += util
  
  ifeq ($(CONFIG_RUMP),y)
  SUBDIRS-y := toolcore
 diff --git a/tools/libs/uselibs.mk b/tools/libs/uselibs.mk
-index a0fe0402ff..edb4b34256 100644
+index 685f368aed..efd7a475ba 100644
 --- a/tools/libs/uselibs.mk
 +++ b/tools/libs/uselibs.mk
-@@ -22,3 +22,5 @@ LIBS_LIBS += guest
- USELIBS_guest := evtchn ctrl
- LIBS_LIBS += store
- USELIBS_store := toolcore
-+LIBS_LIBS += vchan
-+USELIBS_vchan := toollog store gnttab evtchn
-diff --git a/tools/libs/vchan/Makefile b/tools/libs/vchan/Makefile
+@@ -28,3 +28,6 @@ LIBS_LIBS += stat
+ USELIBS_stat := ctrl store
+ LIBS_LIBS += light
+ USELIBS_light := toollog evtchn toolcore ctrl store hypfs guest
++LIBS_LIBS += util
++USELIBS_util := light
++FILENAME_util := xlutil
+diff --git a/tools/libxl/CODING_STYLE b/tools/libs/util/CODING_STYLE
+similarity index 100%
+rename from tools/libxl/CODING_STYLE
+rename to tools/libs/util/CODING_STYLE
+diff --git a/tools/libs/util/Makefile b/tools/libs/util/Makefile
 new file mode 100644
-index 0000000000..87ff608f45
+index 0000000000..0c9db8027d
 --- /dev/null
-+++ b/tools/libs/vchan/Makefile
-@@ -0,0 +1,20 @@
++++ b/tools/libs/util/Makefile
+@@ -0,0 +1,63 @@
 +XEN_ROOT = $(CURDIR)/../../..
 +include $(XEN_ROOT)/tools/Rules.mk
 +
-+CFLAGS += $(CFLAGS_libxenctrl)
++SRCS-y += libxlu_cfg_y.c
++SRCS-y += libxlu_cfg_l.c
++SRCS-y += libxlu_cfg.c
++SRCS-y += libxlu_disk_l.c
++SRCS-y += libxlu_disk.c
++SRCS-y += libxlu_vif.c
++SRCS-y += libxlu_pci.c
 +
-+LIBHEADER := libxenvchan.h
++CFLAGS += -Wno-format-zero-length -Wmissing-declarations \
++	-Wno-declaration-after-statement -Wformat-nonliteral
++CFLAGS += -I. $(CFLAGS_libxenctrl)
 +
-+SRCS-y += init.c
-+SRCS-y += io.c
++CFLAGS += $(PTHREAD_CFLAGS)
++LDFLAGS += $(PTHREAD_LDFLAGS)
++
++ifeq ($(FLEX),)
++%.c %.h:: %.l
++	$(warning Flex is needed to rebuild some libxl parsers and \
++		  scanners, please install it and rerun configure)
++endif
++
++ifeq ($(BISON),)
++%.c %.h:: %.y
++	$(warning Bison is needed to rebuild some libxl parsers and \
++		  scanners, please install it and rerun configure)
++endif
++
++AUTOINCS = libxlu_cfg_y.h libxlu_cfg_l.h libxlu_disk_l.h
++AUTOSRCS = libxlu_cfg_y.c libxlu_cfg_l.c
++
++LIBHEADER := libxlutil.h
++PKG_CONFIG_NAME := Xlutil
++PKG_CONFIG_DESC := The xl utility library for Xen hypervisor
++
++NO_HEADERS_CHK := y
 +
 +include $(XEN_ROOT)/tools/libs/libs.mk
 +
-+$(PKG_CONFIG_LOCAL): PKG_CONFIG_INCDIR = $(XEN_libxenvchan)/include
++$(PKG_CONFIG_LOCAL): PKG_CONFIG_INCDIR = $(XEN_libxenutil)/include
 +$(PKG_CONFIG_LOCAL): PKG_CONFIG_CFLAGS_LOCAL = $(CFLAGS_xeninclude)
++
++$(LIB_OBJS) $(PIC_OBJS): $(AUTOINCS) _paths.h
++
++%.c %.h:: %.y
++	@rm -f $*.[ch]
++	$(BISON) --output=$*.c $<
++
++%.c %.h:: %.l
++	@rm -f $*.[ch]
++	$(FLEX) --header-file=$*.h --outfile=$*.c $<
++
++genpath-target = $(call buildmakevars2header,_paths.h)
++$(eval $(genpath-target))
 +
 +clean: cleanlocal
 +
 +.PHONY: cleanlocal
 +cleanlocal:
-+	rm -f libxenvchan.map
-diff --git a/tools/libvchan/libxenvchan.h b/tools/libs/vchan/include/libxenvchan.h
++	$(RM) -f _*.h
++	$(RM) -f libxlutil.map
+diff --git a/tools/libxl/libxlutil.h b/tools/libs/util/include/libxlutil.h
 similarity index 100%
-rename from tools/libvchan/libxenvchan.h
-rename to tools/libs/vchan/include/libxenvchan.h
-diff --git a/tools/libvchan/init.c b/tools/libs/vchan/init.c
+rename from tools/libxl/libxlutil.h
+rename to tools/libs/util/include/libxlutil.h
+diff --git a/tools/libxl/libxlu_cfg.c b/tools/libs/util/libxlu_cfg.c
 similarity index 100%
-rename from tools/libvchan/init.c
-rename to tools/libs/vchan/init.c
-diff --git a/tools/libvchan/io.c b/tools/libs/vchan/io.c
+rename from tools/libxl/libxlu_cfg.c
+rename to tools/libs/util/libxlu_cfg.c
+diff --git a/tools/libxl/libxlu_cfg_i.h b/tools/libs/util/libxlu_cfg_i.h
 similarity index 100%
-rename from tools/libvchan/io.c
-rename to tools/libs/vchan/io.c
-diff --git a/tools/libvchan/Makefile b/tools/libvchan/Makefile
+rename from tools/libxl/libxlu_cfg_i.h
+rename to tools/libs/util/libxlu_cfg_i.h
+diff --git a/tools/libxl/libxlu_cfg_l.c b/tools/libs/util/libxlu_cfg_l.c
+similarity index 100%
+rename from tools/libxl/libxlu_cfg_l.c
+rename to tools/libs/util/libxlu_cfg_l.c
+diff --git a/tools/libxl/libxlu_cfg_l.h b/tools/libs/util/libxlu_cfg_l.h
+similarity index 100%
+rename from tools/libxl/libxlu_cfg_l.h
+rename to tools/libs/util/libxlu_cfg_l.h
+diff --git a/tools/libxl/libxlu_cfg_l.l b/tools/libs/util/libxlu_cfg_l.l
+similarity index 100%
+rename from tools/libxl/libxlu_cfg_l.l
+rename to tools/libs/util/libxlu_cfg_l.l
+diff --git a/tools/libxl/libxlu_cfg_y.c b/tools/libs/util/libxlu_cfg_y.c
+similarity index 100%
+rename from tools/libxl/libxlu_cfg_y.c
+rename to tools/libs/util/libxlu_cfg_y.c
+diff --git a/tools/libxl/libxlu_cfg_y.h b/tools/libs/util/libxlu_cfg_y.h
+similarity index 100%
+rename from tools/libxl/libxlu_cfg_y.h
+rename to tools/libs/util/libxlu_cfg_y.h
+diff --git a/tools/libxl/libxlu_cfg_y.y b/tools/libs/util/libxlu_cfg_y.y
+similarity index 100%
+rename from tools/libxl/libxlu_cfg_y.y
+rename to tools/libs/util/libxlu_cfg_y.y
+diff --git a/tools/libxl/libxlu_disk.c b/tools/libs/util/libxlu_disk.c
+similarity index 100%
+rename from tools/libxl/libxlu_disk.c
+rename to tools/libs/util/libxlu_disk.c
+diff --git a/tools/libxl/libxlu_disk_i.h b/tools/libs/util/libxlu_disk_i.h
+similarity index 100%
+rename from tools/libxl/libxlu_disk_i.h
+rename to tools/libs/util/libxlu_disk_i.h
+diff --git a/tools/libxl/libxlu_disk_l.c b/tools/libs/util/libxlu_disk_l.c
+similarity index 100%
+rename from tools/libxl/libxlu_disk_l.c
+rename to tools/libs/util/libxlu_disk_l.c
+diff --git a/tools/libxl/libxlu_disk_l.h b/tools/libs/util/libxlu_disk_l.h
+similarity index 100%
+rename from tools/libxl/libxlu_disk_l.h
+rename to tools/libs/util/libxlu_disk_l.h
+diff --git a/tools/libxl/libxlu_disk_l.l b/tools/libs/util/libxlu_disk_l.l
+similarity index 100%
+rename from tools/libxl/libxlu_disk_l.l
+rename to tools/libs/util/libxlu_disk_l.l
+diff --git a/tools/libxl/libxlu_internal.h b/tools/libs/util/libxlu_internal.h
+similarity index 100%
+rename from tools/libxl/libxlu_internal.h
+rename to tools/libs/util/libxlu_internal.h
+diff --git a/tools/libxl/libxlu_pci.c b/tools/libs/util/libxlu_pci.c
+similarity index 100%
+rename from tools/libxl/libxlu_pci.c
+rename to tools/libs/util/libxlu_pci.c
+diff --git a/tools/libxl/libxlu_vif.c b/tools/libs/util/libxlu_vif.c
+similarity index 100%
+rename from tools/libxl/libxlu_vif.c
+rename to tools/libs/util/libxlu_vif.c
+diff --git a/tools/libxl/Makefile b/tools/libxl/Makefile
 deleted file mode 100644
-index e718447977..0000000000
---- a/tools/libvchan/Makefile
+index 51da1d5be4..0000000000
+--- a/tools/libxl/Makefile
 +++ /dev/null
-@@ -1,100 +0,0 @@
+@@ -1,124 +0,0 @@
 -#
--# tools/libvchan/Makefile
+-# tools/libxl/Makefile
 -#
 -
 -XEN_ROOT = $(CURDIR)/../..
 -include $(XEN_ROOT)/tools/Rules.mk
 -
--LIBVCHAN_OBJS = init.o io.o
--NODE_OBJS = node.o
--NODE2_OBJS = node-select.o
+-XLUMAJOR = 4.15
+-XLUMINOR = 0
 -
--LIBVCHAN_PIC_OBJS = $(patsubst %.o,%.opic,$(LIBVCHAN_OBJS))
--LIBVCHAN_LIBS = $(LDLIBS_libxenstore) $(LDLIBS_libxengnttab) $(LDLIBS_libxenevtchn)
--$(LIBVCHAN_OBJS) $(LIBVCHAN_PIC_OBJS): CFLAGS += $(CFLAGS_libxenstore) $(CFLAGS_libxengnttab) $(CFLAGS_libxenevtchn)
--$(NODE_OBJS) $(NODE2_OBJS): CFLAGS += $(CFLAGS_libxengnttab) $(CFLAGS_libxenevtchn)
--vchan-socket-proxy.o: CFLAGS += $(CFLAGS_libxenstore) $(CFLAGS_libxenctrl) $(CFLAGS_libxengnttab) $(CFLAGS_libxenevtchn)
+-CFLAGS += -Werror -Wno-format-zero-length -Wmissing-declarations \
+-	-Wno-declaration-after-statement -Wformat-nonliteral
+-CFLAGS += -I. -fPIC
 -
--MAJOR = 4.15
--MINOR = 0
+-CFLAGS += $(PTHREAD_CFLAGS)
+-LDFLAGS += $(PTHREAD_LDFLAGS)
 -
--CFLAGS += -I../include -I.
+-LIBXLU_LIBS = $(LDLIBS_libxenlight)
 -
--io.o io.opic: CFLAGS += $(CFLAGS_libxenctrl) # for xen_mb et al
+-ifeq ($(FLEX),)
+-%.c %.h:: %.l
+-	$(warning Flex is needed to rebuild some libxl parsers and \
+-		  scanners, please install it and rerun configure)
+-endif
 -
--PKG_CONFIG := xenvchan.pc
--PKG_CONFIG_NAME := Xenvchan
--PKG_CONFIG_DESC := The Xenvchan library for Xen hypervisor
--PKG_CONFIG_VERSION := $(MAJOR).$(MINOR)
--PKG_CONFIG_USELIBS := $(SHLIB_libxenvchan)
--PKG_CONFIG_LIB := xenvchan
--PKG_CONFIG_REQPRIV := xentoollog,xenstore,xenevtchn,xengnttab
+-ifeq ($(BISON),)
+-%.c %.h:: %.y
+-	$(warning Bison is needed to rebuild some libxl parsers and \
+-		  scanners, please install it an rerun configure)
+-endif
+-
+-AUTOINCS= libxlu_cfg_y.h libxlu_cfg_l.h libxlu_disk_l.h
+-AUTOSRCS= libxlu_cfg_y.c libxlu_cfg_l.c
+-LIBXLU_OBJS = libxlu_cfg_y.o libxlu_cfg_l.o libxlu_cfg.o \
+-	libxlu_disk_l.o libxlu_disk.o libxlu_vif.o libxlu_pci.o
+-$(LIBXLU_OBJS): CFLAGS += $(CFLAGS_libxenctrl) # For xentoollog.h
+-
+-PKG_CONFIG = xlutil.pc
 -
 -ifneq ($(CONFIG_LIBXC_MINIOS),y)
 -PKG_CONFIG_INST := $(PKG_CONFIG)
+-xlutil.pc: PKG_CONFIG_NAME = Xlutil
+-xlutil.pc: PKG_CONFIG_DESC = The xl utility library for Xen hypervisor
+-xlutil.pc: PKG_CONFIG_VERSION = $(XLUMAJOR).$(XLUMINOR)
+-xlutil.pc: PKG_CONFIG_USELIBS = $(SHLIB_libxenutil)
+-xlutil.pc: PKG_CONFIG_LIB = xlutil
+-xlutil.pc: PKG_CONFIG_REQPRIV = xenlight
 -$(PKG_CONFIG_INST): PKG_CONFIG_PREFIX = $(prefix)
 -$(PKG_CONFIG_INST): PKG_CONFIG_INCDIR = $(includedir)
 -$(PKG_CONFIG_INST): PKG_CONFIG_LIBDIR = $(libdir)
@@ -278,120 +400,76 @@ index e718447977..0000000000
 -
 -PKG_CONFIG_LOCAL := $(foreach pc,$(PKG_CONFIG),$(PKG_CONFIG_DIR)/$(pc))
 -
+-$(PKG_CONFIG_DIR)/xlutil.pc: PKG_CONFIG_NAME = Xlutil
+-$(PKG_CONFIG_DIR)/xlutil.pc: PKG_CONFIG_DESC = The xl utility library for Xen hypervisor
+-$(PKG_CONFIG_DIR)/xlutil.pc: PKG_CONFIG_VERSION = $(XLUMAJOR).$(XLUMINOR)
+-$(PKG_CONFIG_DIR)/xlutil.pc: PKG_CONFIG_USELIBS = $(SHLIB_libxenutil)
+-$(PKG_CONFIG_DIR)/xlutil.pc: PKG_CONFIG_LIB = xlutil
+-$(PKG_CONFIG_DIR)/xlutil.pc: PKG_CONFIG_REQPRIV = xenlight
 -$(PKG_CONFIG_LOCAL): PKG_CONFIG_PREFIX = $(XEN_ROOT)
--$(PKG_CONFIG_LOCAL): PKG_CONFIG_INCDIR = $(XEN_libxenvchan)
+-$(PKG_CONFIG_LOCAL): PKG_CONFIG_INCDIR = $(CURDIR)
 -$(PKG_CONFIG_LOCAL): PKG_CONFIG_LIBDIR = $(CURDIR)
 -$(PKG_CONFIG_LOCAL): PKG_CONFIG_CFLAGS_LOCAL = $(CFLAGS_xeninclude)
 -
 -.PHONY: all
--all: libxenvchan.so vchan-node1 vchan-node2 vchan-socket-proxy libxenvchan.a $(PKG_CONFIG_INST) $(PKG_CONFIG_LOCAL)
+-all: libxlutil.so libxlutil.a $(AUTOSRCS) $(AUTOINCS) $(PKG_CONFIG) $(PKG_CONFIG_LOCAL)
 -
--libxenvchan.so: libxenvchan.so.$(MAJOR)
--	ln -sf $< $@
+-$(LIBXLU_OBJS): $(AUTOINCS)
 -
--libxenvchan.so.$(MAJOR): libxenvchan.so.$(MAJOR).$(MINOR)
--	ln -sf $< $@
+-%.c %.h:: %.y
+-	@rm -f $*.[ch]
+-	$(BISON) --output=$*.c $<
 -
--libxenvchan.so.$(MAJOR).$(MINOR): $(LIBVCHAN_PIC_OBJS)
--	$(CC) $(LDFLAGS) -Wl,$(SONAME_LDFLAG) -Wl,libxenvchan.so.$(MAJOR) $(SHLIB_LDFLAGS) -o $@ $^ $(LIBVCHAN_LIBS) $(APPEND_LDFLAGS)
+-%.c %.h:: %.l
+-	@rm -f $*.[ch]
+-	$(FLEX) --header-file=$*.h --outfile=$*.c $<
 -
--libxenvchan.a: $(LIBVCHAN_OBJS)
--	$(AR) rcs libxenvchan.a $^
+-genpath-target = $(call buildmakevars2header,_paths.h)
+-$(eval $(genpath-target))
 -
--vchan-node1: $(NODE_OBJS) libxenvchan.so
--	$(CC) $(LDFLAGS) -o $@ $(NODE_OBJS) $(LDLIBS_libxenvchan) $(APPEND_LDFLAGS)
+-libxlutil.so: libxlutil.so.$(XLUMAJOR)
+-	$(SYMLINK_SHLIB) $< $@
 -
--vchan-node2: $(NODE2_OBJS) libxenvchan.so
--	$(CC) $(LDFLAGS) -o $@ $(NODE2_OBJS) $(LDLIBS_libxenvchan) $(APPEND_LDFLAGS)
+-libxlutil.so.$(XLUMAJOR): libxlutil.so.$(XLUMAJOR).$(XLUMINOR)
+-	$(SYMLINK_SHLIB) $< $@
 -
--vchan-socket-proxy: vchan-socket-proxy.o libxenvchan.so
--	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS_libxenvchan) $(LDLIBS_libxenstore) $(LDLIBS_libxenctrl) $(APPEND_LDFLAGS)
+-libxlutil.so.$(XLUMAJOR).$(XLUMINOR): $(LIBXLU_OBJS)
+-	$(CC) $(LDFLAGS) -Wl,$(SONAME_LDFLAG) -Wl,libxlutil.so.$(XLUMAJOR) $(SHLIB_LDFLAGS) -o $@ $(LIBXLU_OBJS) $(LIBXLU_LIBS) $(APPEND_LDFLAGS)
+-
+-libxlutil.a: $(LIBXLU_OBJS)
+-	$(AR) rcs libxlutil.a $^
 -
 -.PHONY: install
 -install: all
 -	$(INSTALL_DIR) $(DESTDIR)$(libdir)
 -	$(INSTALL_DIR) $(DESTDIR)$(includedir)
--	$(INSTALL_DIR) $(DESTDIR)$(bindir)
--	$(INSTALL_PROG) libxenvchan.so.$(MAJOR).$(MINOR) $(DESTDIR)$(libdir)
--	ln -sf libxenvchan.so.$(MAJOR).$(MINOR) $(DESTDIR)$(libdir)/libxenvchan.so.$(MAJOR)
--	ln -sf libxenvchan.so.$(MAJOR) $(DESTDIR)$(libdir)/libxenvchan.so
--	$(INSTALL_PROG) vchan-socket-proxy $(DESTDIR)$(bindir)
--	$(INSTALL_DATA) libxenvchan.h $(DESTDIR)$(includedir)
--	$(INSTALL_DATA) libxenvchan.a $(DESTDIR)$(libdir)
--	$(INSTALL_DATA) xenvchan.pc $(DESTDIR)$(PKG_INSTALLDIR)
+-	$(INSTALL_SHLIB) libxlutil.so.$(XLUMAJOR).$(XLUMINOR) $(DESTDIR)$(libdir)
+-	$(SYMLINK_SHLIB) libxlutil.so.$(XLUMAJOR).$(XLUMINOR) $(DESTDIR)$(libdir)/libxlutil.so.$(XLUMAJOR)
+-	$(SYMLINK_SHLIB) libxlutil.so.$(XLUMAJOR) $(DESTDIR)$(libdir)/libxlutil.so
+-	$(INSTALL_DATA) libxlutil.a $(DESTDIR)$(libdir)
+-	$(INSTALL_DATA) libxlutil.h $(DESTDIR)$(includedir)
+-	$(INSTALL_DATA) xlutil.pc $(DESTDIR)$(PKG_INSTALLDIR)
 -
 -.PHONY: uninstall
 -uninstall:
--	rm -f $(DESTDIR)$(PKG_INSTALLDIR)/xenvchan.pc
--	rm -f $(DESTDIR)$(libdir)/libxenvchan.a
--	rm -f $(DESTDIR)$(includedir)/libxenvchan.h
--	rm -f $(DESTDIR)$(libdir)/libxenvchan.so
--	rm -f $(DESTDIR)$(libdir)/libxenvchan.so.$(MAJOR)
--	rm -f $(DESTDIR)$(libdir)/libxenvchan.so.$(MAJOR).$(MINOR)
+-	rm -f $(DESTDIR)$(PKG_INSTALLDIR)/xlutil.pc
+-	rm -f $(DESTDIR)$(includedir)/libxlutil.h
+-	rm -f $(DESTDIR)$(libdir)/libxlutil.a
+-	rm -f $(DESTDIR)$(libdir)/libxlutil.so
+-	rm -f $(DESTDIR)$(libdir)/libxlutil.so.$(XLUMAJOR)
+-	rm -f $(DESTDIR)$(libdir)/libxlutil.so.$(XLUMAJOR).$(XLUMINOR)
 -
 -.PHONY: clean
 -clean:
--	$(RM) -f *.o *.opic *.so* *.a vchan-node1 vchan-node2 $(DEPS_RM)
--	$(RM) -f xenvchan.pc
+-	$(RM) -f _*.h *.o *.so* *.a $(DEPS_RM)
+-	$(RM) -f xlutil.pc
 -
 -distclean: clean
 -
+-realclean: distclean
+-	$(RM) -f $(AUTOSRCS) $(AUTOINCS)
+-
 --include $(DEPS_INCLUDE)
-diff --git a/tools/vchan/Makefile b/tools/vchan/Makefile
-new file mode 100644
-index 0000000000..a731e0e073
---- /dev/null
-+++ b/tools/vchan/Makefile
-@@ -0,0 +1,37 @@
-+#
-+# tools/vchan/Makefile
-+#
-+
-+XEN_ROOT = $(CURDIR)/../..
-+include $(XEN_ROOT)/tools/Rules.mk
-+
-+NODE_OBJS = node.o
-+NODE2_OBJS = node-select.o
-+
-+$(NODE_OBJS) $(NODE2_OBJS): CFLAGS += $(CFLAGS_libxenvchan) $(CFLAGS_libxengnttab) $(CFLAGS_libxenevtchn)
-+vchan-socket-proxy.o: CFLAGS += $(CFLAGS_libxenvchan) $(CFLAGS_libxenstore) $(CFLAGS_libxenctrl) $(CFLAGS_libxengnttab) $(CFLAGS_libxenevtchn)
-+
-+.PHONY: all
-+all: vchan-node1 vchan-node2 vchan-socket-proxy
-+
-+vchan-node1: $(NODE_OBJS)
-+	$(CC) $(LDFLAGS) -o $@ $(NODE_OBJS) $(LDLIBS_libxenvchan) $(APPEND_LDFLAGS)
-+
-+vchan-node2: $(NODE2_OBJS)
-+	$(CC) $(LDFLAGS) -o $@ $(NODE2_OBJS) $(LDLIBS_libxenvchan) $(APPEND_LDFLAGS)
-+
-+vchan-socket-proxy: vchan-socket-proxy.o
-+	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS_libxenvchan) $(LDLIBS_libxenstore) $(LDLIBS_libxenctrl) $(APPEND_LDFLAGS)
-+
-+.PHONY: install
-+install: all
-+	$(INSTALL_DIR) $(DESTDIR)$(bindir)
-+	$(INSTALL_PROG) vchan-socket-proxy $(DESTDIR)$(bindir)
-+
-+.PHONY: clean
-+clean:
-+	$(RM) -f *.o vchan-node1 vchan-node2 $(DEPS_RM)
-+
-+distclean: clean
-+
-+-include $(DEPS_INCLUDE)
-diff --git a/tools/libvchan/node-select.c b/tools/vchan/node-select.c
-similarity index 100%
-rename from tools/libvchan/node-select.c
-rename to tools/vchan/node-select.c
-diff --git a/tools/libvchan/node.c b/tools/vchan/node.c
-similarity index 100%
-rename from tools/libvchan/node.c
-rename to tools/vchan/node.c
-diff --git a/tools/libvchan/vchan-socket-proxy.c b/tools/vchan/vchan-socket-proxy.c
-similarity index 100%
-rename from tools/libvchan/vchan-socket-proxy.c
-rename to tools/vchan/vchan-socket-proxy.c
 -- 
 2.26.2
 
