@@ -2,171 +2,75 @@ Return-Path: <SRS0=+ST8=CG=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=no autolearn_force=no
+X-Spam-Status: No, score=-6.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5F7F6C43461
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2020 02:34:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 315A8C433E6
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2020 02:50:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2F9E82080C
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2020 02:34:51 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id EF1452080C
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2020 02:49:59 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=armh.onmicrosoft.com header.i=@armh.onmicrosoft.com header.b="j5DSuIj/";
-	dkim=pass (1024-bit key) header.d=armh.onmicrosoft.com header.i=@armh.onmicrosoft.com header.b="j5DSuIj/"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2F9E82080C
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=arm.com
+	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="vrZ/L+Aq"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EF1452080C
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kBUDi-0001ay-Qe; Fri, 28 Aug 2020 02:34:26 +0000
+	id 1kBUSP-0002oK-S5; Fri, 28 Aug 2020 02:49:37 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=UB2A=CG=arm.com=wei.chen@srs-us1.protection.inumbo.net>)
- id 1kBUDh-0001at-KO
- for xen-devel@lists.xenproject.org; Fri, 28 Aug 2020 02:34:25 +0000
-X-Inumbo-ID: 4050aaca-c929-4db5-849c-40c38cfd85d4
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com (unknown
- [40.107.22.88]) by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 4050aaca-c929-4db5-849c-40c38cfd85d4;
- Fri, 28 Aug 2020 02:34:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com; 
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=mO9efFaq5wEOo++Fy4tv1aJrTxnbNQSeSgs/TrRSuBU=;
- b=j5DSuIj/G8Y/0uj8v9ozQJq4NMJJjzVHqIfb51nJPlQP0RXUUEnyUYzndWp0yY5zVdE2zudtUpE2L1T5tCxucz2dTzhiKlHSSgPPAy8Dka54CVFDDOAx9Tj+aWvHk0loAuY8Z2fa7QmLZNeYgHv3N4S4XXAR+ZmFDewIoxRkgDs=
-Received: from MRXP264CA0048.FRAP264.PROD.OUTLOOK.COM (2603:10a6:500:14::36)
- by DB8PR08MB5497.eurprd08.prod.outlook.com (2603:10a6:10:11a::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3305.25; Fri, 28 Aug
- 2020 02:34:20 +0000
-Received: from VE1EUR03FT012.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:500:14:cafe::80) by MRXP264CA0048.outlook.office365.com
- (2603:10a6:500:14::36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3326.19 via Frontend
- Transport; Fri, 28 Aug 2020 02:34:20 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
- smtp.mailfrom=arm.com; lists.xenproject.org; dkim=pass (signature was
- verified) header.d=armh.onmicrosoft.com;lists.xenproject.org;
- dmarc=bestguesspass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
- client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
-Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- VE1EUR03FT012.mail.protection.outlook.com (10.152.18.211) with
- Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3326.19 via Frontend Transport; Fri, 28 Aug 2020 02:34:20 +0000
-Received: ("Tessian outbound 34b830c8a0ef:v64");
- Fri, 28 Aug 2020 02:34:19 +0000
-X-CheckRecipientChecked: true
-X-CR-MTA-CID: 208062b9fdd150ee
-X-CR-MTA-TID: 64aa7808
-Received: from e64d50107e70.1
- by 64aa7808-outbound-1.mta.getcheckrecipient.com id
- 07BEE591-7EC8-4527-B97F-4AE947407F6D.1; 
- Fri, 28 Aug 2020 02:34:14 +0000
-Received: from EUR03-VE1-obe.outbound.protection.outlook.com
- by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id e64d50107e70.1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
- Fri, 28 Aug 2020 02:34:14 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=C162ntESH0R0jU0V4F0skL1f3hZtb+uSmdTCl+E0ZQ80ITfxFn87X9UPyJnftV2wnbWX2q7toSNVIK6ASmdlDKZtygtMt0qe06J48Wsa6XMoqLjYoKrZ/C9mgcWIIA+TsYEPg0rB7ITUJVDN7qXCdVh2DEEqkTqDEeFzRYl4wySe1zoGAB4AM8rjeZX1FD1Dzy+/g9I5FjfcdRwvi2yYwgN7t3IpZWt78VWNXpXbjK7/T7UnqBAjINWryy8jsdrVwa/G5K8gNTQPyy1+MitQ0lCkxuU+GVO9FgsaGV08V8C3UsGVwxshrr/CVu44LKQHlvCIkPK5CzHhKBVeREBkXg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=mO9efFaq5wEOo++Fy4tv1aJrTxnbNQSeSgs/TrRSuBU=;
- b=GELG2cr/RXxyDh250D1bMS/DILDo/whm7zv3CsHr7xnCvUJPfMMZzLbriUWH16jpegWcQgFqqLaVBJpCvn+GukVojxPRUZdkNhLcah+auRaHUxT+tDMZ7IJg2UN2Fkufj7eehXwe7VUDsPBKns9eTrrTYoBq+3dW+OUWYX20I1uKpUFoIiuCHI9MuCWB5/9aaYZoJwzjCIs38GbBzsH3t6UT+mhWoRiyukJhDlZ/C99JkiZC1VSqI9DS7oMb873rwL+gf+O8U3OxCG39mKMIlbkekJjFgBjlnZKXRzOlxePqCQ324xRmf2wnhR/pOnO06Y3Ur2A29Y3aGPYac81tBQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 40.67.248.234) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=arm.com;
- dmarc=bestguesspass action=none header.from=arm.com; dkim=none (message not
- signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com; 
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=mO9efFaq5wEOo++Fy4tv1aJrTxnbNQSeSgs/TrRSuBU=;
- b=j5DSuIj/G8Y/0uj8v9ozQJq4NMJJjzVHqIfb51nJPlQP0RXUUEnyUYzndWp0yY5zVdE2zudtUpE2L1T5tCxucz2dTzhiKlHSSgPPAy8Dka54CVFDDOAx9Tj+aWvHk0loAuY8Z2fa7QmLZNeYgHv3N4S4XXAR+ZmFDewIoxRkgDs=
-Received: from DB7PR02CA0020.eurprd02.prod.outlook.com (2603:10a6:10:52::33)
- by AM8PR08MB5827.eurprd08.prod.outlook.com (2603:10a6:20b:1da::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3326.19; Fri, 28 Aug
- 2020 02:34:13 +0000
-Received: from DB5EUR03FT015.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:10:52:cafe::a2) by DB7PR02CA0020.outlook.office365.com
- (2603:10a6:10:52::33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3326.19 via Frontend
- Transport; Fri, 28 Aug 2020 02:34:13 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 40.67.248.234)
- smtp.mailfrom=arm.com; lists.xenproject.org; dkim=none (message not signed)
- header.d=none;lists.xenproject.org; dmarc=bestguesspass action=none
- header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 40.67.248.234 as permitted sender) receiver=protection.outlook.com;
- client-ip=40.67.248.234; helo=nebula.arm.com;
-Received: from nebula.arm.com (40.67.248.234) by
- DB5EUR03FT015.mail.protection.outlook.com (10.152.20.145) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.3326.19 via Frontend Transport; Fri, 28 Aug 2020 02:34:13 +0000
-Received: from AZ-NEU-EX04.Arm.com (10.251.24.32) by AZ-NEU-EX03.Arm.com
- (10.251.24.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2044.4; Fri, 28 Aug
- 2020 02:34:11 +0000
-Received: from localhost.localdomain (10.169.214.112) by mail.arm.com
- (10.251.24.32) with Microsoft SMTP Server id 15.1.2044.4 via Frontend
- Transport; Fri, 28 Aug 2020 02:34:09 +0000
-From: Wei Chen <wei.chen@arm.com>
-To: <xen-devel@lists.xenproject.org>, <sstabellini@kernel.org>,
- <julien@xen.org>
-CC: <Andre.Przywara@arm.com>, <Bertrand.Marquis@arm.com>,
- <Penny.Zheng@arm.com>, <Kaly.Xin@arm.com>, <nd@arm.com>
-Subject: [PATCH v5 0/2] Fix Guest random crash on Cortex-N1/A76/A75 cores
-Date: Fri, 28 Aug 2020 02:34:02 +0000
-Message-ID: <20200828023404.28638-1-wei.chen@arm.com>
-X-Mailer: git-send-email 2.17.1
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=htBp=CG=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
+ id 1kBUSN-0002ns-Th
+ for xen-devel@lists.xenproject.org; Fri, 28 Aug 2020 02:49:35 +0000
+X-Inumbo-ID: 00512885-d7c9-4d88-8745-e1e891513093
+Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 00512885-d7c9-4d88-8745-e1e891513093;
+ Fri, 28 Aug 2020 02:49:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+ Content-Transfer-Encoding:Content-Type:Message-ID:To;
+ bh=Fn1EIy8vXEirXuhbSK+2yvH/IA9TFWX8GtL6YkNRt30=; b=vrZ/L+Aqac2X6uNs9JUpMwPOr5
+ e9nb0A1VFcCM/W5rCJUWU5DEhFghZdxnhR2jLDb9kC8n/35TxDzkaXvHEX3ZWzZjcdck/jXGRaIpl
+ JrSQ0iD4nkZ9p5VXBVDbydYWqlWmiN9GwoMKCAhInjWbnCDW7Ld35W6Cs5g2IDgaYD+E=;
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kBUSG-0005WX-O8; Fri, 28 Aug 2020 02:49:28 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kBUSG-0002nn-I1; Fri, 28 Aug 2020 02:49:28 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1kBUSG-0004wh-HW; Fri, 28 Aug 2020 02:49:28 +0000
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-152950-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EOPAttributedMessage: 1
-X-MS-Office365-Filtering-HT: Tenant
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 9ba4fdf0-5a2c-449e-c1f6-08d84afade44
-X-MS-TrafficTypeDiagnostic: AM8PR08MB5827:|DB8PR08MB5497:
-X-Microsoft-Antispam-PRVS: <DB8PR08MB54979135671CE5C712B945749E520@DB8PR08MB5497.eurprd08.prod.outlook.com>
-x-checkrecipientrouted: true
-NoDisclaimer: true
-X-MS-Oob-TLC-OOBClassifiers: OLM:5797;OLM:5797;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam-Untrusted: BCL:0;
-X-Microsoft-Antispam-Message-Info-Original: FrgoHS02AM9Z+ba2RDNnErRuWfxf9iwSyQ+RlCO4RS7ZRjX5FCBAanc3vQFQ9fHv3k+5Gia8w2dv21c3YXYG6cnzA6/CqoybvCkDM9uGm6oQFJV0x4t4uyw65Nu0+0b5HAlYVaq5vbAQX9itr85DB+5JiE9QxtdBqSLveJDlf1Cfm7bEnqN3NrirPJPblnWZ6gOsGlK+FUiax2m3dv+Ns4fNIOAnwImP6DB4KOGwReB9kstLBzC6ZeY0j4uKxl4uGkAaeWZ2wcHwGQtg9M+ZWagGsxGJF9RbShEMcUJ5wLLa+GOMlE6pZF8kG0OWaTgy6rZDy2VeGuamLzCLZX6EDro/8BFu8nrZcNgqB4tVu+P24PTVs/8XW1A/VUJ6MzDcbNSzFvqz22G5gret0d+SN44nnttL2m++0Hpx8zBN0rHfkMVengMrco3icIIb5NqJeQ8+2EK3705Fr56lB9CVWc4RmoxLhdn3n2JWTcs2idc=
-X-Forefront-Antispam-Report-Untrusted: CIP:40.67.248.234; CTRY:IE; LANG:en;
- SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:nebula.arm.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(4636009)(376002)(136003)(396003)(346002)(39860400002)(46966005)(83380400001)(8936002)(8676002)(36756003)(70586007)(356005)(2616005)(70206006)(47076004)(6666004)(478600001)(336012)(44832011)(966005)(82740400003)(5660300002)(186003)(81166007)(426003)(316002)(2906002)(4744005)(82310400002)(86362001)(4326008)(1076003)(26005)(54906003)(110136005);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR08MB5827
-X-MS-Exchange-Transport-CrossTenantHeadersStripped: VE1EUR03FT012.eop-EUR03.prod.protection.outlook.com
-X-MS-Office365-Filtering-Correlation-Id-Prvs: 5348dfd7-2015-478f-396b-08d84afad9eb
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: PRmr6bmVdNiTjHk0sGQAt8/aWEyKmwawDMfyms7KWGBPD1/LMY6ECTDtEmcfY6grq2WUS58lfhmbLAHzOSVsLxSvy83uVDN25M5E+/FmD3q5kESf3i2dbJT7EgxrvCg+9qDyqcywa6Bb3c02Ll/lpjxQn038/ndrcne/b2S7oB65GCN9rvaON6jJYkN/bTrjmRPcZYoe9e0zVTahELPDNuE+2kxyourl+k0QidBH625DODvBXFwoLyoluQq0mO+F6AzFWNXrygb/Gy3o3nvl6JvyNL/9TR+0d8wNkCc7303lUdUDcFF1ZfngQW0V+g1kO/JI9aG71Mnvc95C0jXsfYLaSeVF6PtAFvpMSY7SLntpLSFw1czWLzPWiFXMIvFsebYysGkulciEkfyz9aZxhIllZeLu/z/atalUP/qQdBUSI37/b31RYVw2sflT+T0te/YkadAtCBZpWnpMC7EN9FOnG0CYB+p0FT1dNdS07Pc=
-X-Forefront-Antispam-Report: CIP:63.35.35.123; CTRY:IE; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:64aa7808-outbound-1.mta.getcheckrecipient.com;
- PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com; CAT:NONE;
- SFS:(4636009)(346002)(376002)(136003)(396003)(39860400002)(46966005)(110136005)(6666004)(54906003)(26005)(5660300002)(2906002)(86362001)(478600001)(1076003)(70206006)(4744005)(82310400002)(36906005)(426003)(8676002)(81166007)(47076004)(70586007)(36756003)(82740400003)(316002)(336012)(83380400001)(186003)(8936002)(44832011)(966005)(2616005)(4326008);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Aug 2020 02:34:20.3163 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9ba4fdf0-5a2c-449e-c1f6-08d84afade44
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d; Ip=[63.35.35.123];
- Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
-X-MS-Exchange-CrossTenant-AuthSource: VE1EUR03FT012.eop-EUR03.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR08MB5497
+Subject: [ovmf test] 152950: regressions - FAIL
+X-Osstest-Failures: ovmf:build-i386-xsm:xen-build:fail:regression
+ ovmf:build-amd64-xsm:xen-build:fail:regression
+ ovmf:build-amd64:xen-build:fail:regression
+ ovmf:build-i386:xen-build:fail:regression
+ ovmf:build-amd64-libvirt:build-check(1):blocked:nonblocking
+ ovmf:build-i386-libvirt:build-check(1):blocked:nonblocking
+ ovmf:test-amd64-amd64-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
+ ovmf:test-amd64-i386-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
+X-Osstest-Versions-This: ovmf=cbccf995920a28071f5403b847f29ebf8b732fa9
+X-Osstest-Versions-That: ovmf=63d92674d240ab4ecab94f98e1e198842bb7de00
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Fri, 28 Aug 2020 02:49:28 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -180,41 +84,163 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On latest Arm Cortex-N1/A76/A75 cores, Xen guests will encouter random
-crash when they have wordloads. It's because Xen will ignore FP/SIMD
-registers in vCPU context switch (see patch#1 for more details).
+flight 152950 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/152950/
 
-This patch set fix guest random crash on these new cores, and throw
-messages when Xen detects known FP/SIMD features.
+Regressions :-(
 
----
- v4 --> v5:
-  1. Fix typos.
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-i386-xsm                6 xen-build                fail REGR. vs. 152863
+ build-amd64-xsm               6 xen-build                fail REGR. vs. 152863
+ build-amd64                   6 xen-build                fail REGR. vs. 152863
+ build-i386                    6 xen-build                fail REGR. vs. 152863
 
- v3 --> v4:
-  1. Use open-code instead of new cpu_has_unknown_{fp,simd} macros.
+Tests which did not succeed, but are not blocking:
+ build-amd64-libvirt           1 build-check(1)               blocked  n/a
+ build-i386-libvirt            1 build-check(1)               blocked  n/a
+ test-amd64-amd64-xl-qemuu-ovmf-amd64  1 build-check(1)             blocked n/a
+ test-amd64-i386-xl-qemuu-ovmf-amd64  1 build-check(1)              blocked n/a
 
- v2 --> v3:
-  1. Improve the warning messages to give clear meanings
-  2. Fix typos
+version targeted for testing:
+ ovmf                 cbccf995920a28071f5403b847f29ebf8b732fa9
+baseline version:
+ ovmf                 63d92674d240ab4ecab94f98e1e198842bb7de00
 
- v1 --> v2:
-  1. Use "< 8" instead of "<= 1" to detect FP/SIMD features.
-  2. Give messages for unknown FP/SIMD features.
-  3. Fix typos.
- 
- v1:
-  https://lists.xenproject.org/archives/html/xen-devel/2020-08/msg00857.html
+Last test of basis   152863  2020-08-26 16:09:47 Z    1 days
+Testing same since   152915  2020-08-27 18:09:42 Z    0 days   10 attempts
 
-Wei Chen (2):
-  xen/arm: Missing N1/A76/A75 FP registers in vCPU context switch
-  xen/arm: Throw messages for unknown FP/SIMD implement ID
+------------------------------------------------------------
+People who touched revisions under test:
+  Laszlo Ersek <lersek@redhat.com>
 
- xen/arch/arm/setup.c             | 12 ++++++++++++
- xen/include/asm-arm/cpufeature.h |  4 ++--
- 2 files changed, 14 insertions(+), 2 deletions(-)
+jobs:
+ build-amd64-xsm                                              fail    
+ build-i386-xsm                                               fail    
+ build-amd64                                                  fail    
+ build-i386                                                   fail    
+ build-amd64-libvirt                                          blocked 
+ build-i386-libvirt                                           blocked 
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         blocked 
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          blocked 
 
--- 
-2.17.1
 
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+------------------------------------------------------------
+commit cbccf995920a28071f5403b847f29ebf8b732fa9
+Author: Laszlo Ersek <lersek@redhat.com>
+Date:   Thu Aug 27 00:21:29 2020 +0200
+
+    OvmfPkg/CpuHotplugSmm: fix CPU hotplug race just after SMI broadcast
+    
+    The "virsh setvcpus" (plural) command may hot-plug several VCPUs in quick
+    succession -- it means a series of "device_add" QEMU monitor commands,
+    back-to-back.
+    
+    If a "device_add" occurs *just after* ACPI raises the broadcast SMI, then:
+    
+    - the CPU_FOREACH() loop in QEMU's ich9_apm_ctrl_changed() cannot make the
+      SMI pending for the new CPU -- at that time, the new CPU doesn't even
+      exist yet,
+    
+    - OVMF will find the new CPU however (in the CPU hotplug register block),
+      in QemuCpuhpCollectApicIds().
+    
+    As a result, when the firmware sends an INIT-SIPI-SIPI to the new CPU in
+    SmbaseRelocate(), expecting it to boot into SMM (due to the pending SMI),
+    the new CPU instead boots straight into the post-RSM (normal mode) "pen",
+    skipping its initial SMI handler.
+    
+    The CPU halts nicely in the pen, but its SMBASE is never relocated, and
+    the SMRAM message exchange with the BSP falls apart -- the BSP gets stuck
+    in the following loop:
+    
+      //
+      // Wait until the hot-added CPU is just about to execute RSM.
+      //
+      while (Context->AboutToLeaveSmm == 0) {
+        CpuPause ();
+      }
+    
+    because the new CPU's initial SMI handler never sets the flag to nonzero.
+    
+    Fix this by sending a directed SMI to the new CPU just before sending it
+    the INIT-SIPI-SIPI. The various scenarios are documented in the code --
+    the cases affected by the patch are documented under point (2).
+    
+    Note that this is not considered a security patch, as for a malicious
+    guest OS, the issue is not exploitable -- the symptom is a hang on the
+    BSP, in the above-noted loop in SmbaseRelocate(). Instead, the patch fixes
+    behavior for a benign guest OS.
+    
+    Cc: Ard Biesheuvel <ard.biesheuvel@arm.com>
+    Cc: Igor Mammedov <imammedo@redhat.com>
+    Cc: Jordan Justen <jordan.l.justen@intel.com>
+    Cc: Philippe Mathieu-Daudé <philmd@redhat.com>
+    Fixes: 51a6fb41181529e4b50ea13377425bda6bb69ba6
+    Ref: https://bugzilla.tianocore.org/show_bug.cgi?id=2929
+    Signed-off-by: Laszlo Ersek <lersek@redhat.com>
+    Message-Id: <20200826222129.25798-3-lersek@redhat.com>
+    Reviewed-by: Ard Biesheuvel <ard.biesheuvel@arm.com>
+
+commit 020bb4b46d6f6708bb3358e1c738109b7908f0de
+Author: Laszlo Ersek <lersek@redhat.com>
+Date:   Thu Aug 27 00:21:28 2020 +0200
+
+    OvmfPkg/CpuHotplugSmm: fix CPU hotplug race just before SMI broadcast
+    
+    The "virsh setvcpus" (plural) command may hot-plug several VCPUs in quick
+    succession -- it means a series of "device_add" QEMU monitor commands,
+    back-to-back.
+    
+    If a "device_add" occurs *just before* ACPI raises the broadcast SMI,
+    then:
+    
+    - OVMF processes the hot-added CPU well.
+    
+    - However, QEMU's post-SMI ACPI loop -- which clears the pending events
+      for the hot-added CPUs that were collected before raising the SMI -- is
+      unaware of the stray CPU. Thus, the pending event is not cleared for it.
+    
+    As a result of the stuck event, at the next hot-plug, OVMF tries to re-add
+    (relocate for the 2nd time) the already-known CPU. At that time, the AP is
+    already in the normal edk2 SMM busy-wait however, so it doesn't respond to
+    the exchange that the BSP intends to do in SmbaseRelocate(). Thus the VM
+    gets stuck in SMM.
+    
+    (Because of the above symptom, this is not considered a security patch; it
+    doesn't seem exploitable by a malicious guest OS.)
+    
+    In CpuHotplugMmi(), skip the supposedly hot-added CPU if it's already
+    known. The post-SMI ACPI loop will clear the pending event for it this
+    time.
+    
+    Cc: Ard Biesheuvel <ard.biesheuvel@arm.com>
+    Cc: Igor Mammedov <imammedo@redhat.com>
+    Cc: Jordan Justen <jordan.l.justen@intel.com>
+    Cc: Philippe Mathieu-Daudé <philmd@redhat.com>
+    Fixes: bc498ac4ca7590479cfd91ad1bb8a36286b0dc21
+    Ref: https://bugzilla.tianocore.org/show_bug.cgi?id=2929
+    Signed-off-by: Laszlo Ersek <lersek@redhat.com>
+    Message-Id: <20200826222129.25798-2-lersek@redhat.com>
+    Reviewed-by: Ard Biesheuvel <ard.biesheuvel@arm.com>
 
