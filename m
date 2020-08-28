@@ -7,43 +7,41 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E5F5BC433E2
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2020 15:08:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7F7B0C433E6
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2020 15:08:36 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BA9A02075B
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2020 15:08:31 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BA9A02075B
+	by mail.kernel.org (Postfix) with ESMTPS id 5B4EB2075B
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2020 15:08:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5B4EB2075B
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kBfzH-0004pf-0y; Fri, 28 Aug 2020 15:08:19 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kBfzO-0004y1-Kw; Fri, 28 Aug 2020 15:08:26 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Pjxq=CG=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kBfzG-0004eG-59
- for xen-devel@lists.xenproject.org; Fri, 28 Aug 2020 15:08:18 +0000
-X-Inumbo-ID: b5300681-fa9c-46fd-b827-f6b024e9e7f7
+ id 1kBfzM-0004eL-IB
+ for xen-devel@lists.xenproject.org; Fri, 28 Aug 2020 15:08:24 +0000
+X-Inumbo-ID: bdbb3cf6-aa30-4cc8-9081-c5debef4743e
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id b5300681-fa9c-46fd-b827-f6b024e9e7f7;
- Fri, 28 Aug 2020 15:07:53 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id bdbb3cf6-aa30-4cc8-9081-c5debef4743e;
+ Fri, 28 Aug 2020 15:07:55 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 8B97FAF6D;
+ by mx2.suse.de (Postfix) with ESMTP id F24EFAF77;
  Fri, 28 Aug 2020 15:08:24 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>, Ian Jackson <iwj@xenproject.org>,
  Wei Liu <wl@xen.org>
-Subject: [PATCH v4 10/31] tools/libxc: remove unused headers xc_efi.h and
- xc_elf.h
-Date: Fri, 28 Aug 2020 17:07:26 +0200
-Message-Id: <20200828150747.25305-11-jgross@suse.com>
+Subject: [PATCH v4 13/31] tools/libxc: rename libxenguest internal headers
+Date: Fri, 28 Aug 2020 17:07:29 +0200
+Message-Id: <20200828150747.25305-14-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200828150747.25305-1-jgross@suse.com>
 References: <20200828150747.25305-1-jgross@suse.com>
@@ -62,203 +60,314 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Remove xc_efi.h and xc_elf.h as they aren't used anywhere.
+Rename the header files private to libxenguest from xc_*.h to xg_*.h.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 Acked-by: Wei Liu <wl@xen.org>
 ---
- tools/libxc/xc_efi.h | 158 -------------------------------------------
- tools/libxc/xc_elf.h |  16 -----
- 2 files changed, 174 deletions(-)
- delete mode 100644 tools/libxc/xc_efi.h
- delete mode 100644 tools/libxc/xc_elf.h
+ tools/libxc/xg_dom_bzimageloader.c                              | 2 +-
+ tools/libxc/{xc_dom_decompress.h => xg_dom_decompress.h}        | 2 +-
+ tools/libxc/xg_dom_decompress_lz4.c                             | 2 +-
+ tools/libxc/xg_dom_decompress_unsafe.c                          | 2 +-
+ .../{xc_dom_decompress_unsafe.h => xg_dom_decompress_unsafe.h}  | 0
+ tools/libxc/xg_dom_decompress_unsafe_bzip2.c                    | 2 +-
+ tools/libxc/xg_dom_decompress_unsafe_lzma.c                     | 2 +-
+ tools/libxc/xg_dom_decompress_unsafe_lzo1x.c                    | 2 +-
+ tools/libxc/xg_dom_decompress_unsafe_xz.c                       | 2 +-
+ tools/libxc/xg_sr_common.c                                      | 2 +-
+ tools/libxc/{xc_sr_common.h => xg_sr_common.h}                  | 2 +-
+ tools/libxc/xg_sr_common_x86.c                                  | 2 +-
+ tools/libxc/{xc_sr_common_x86.h => xg_sr_common_x86.h}          | 2 +-
+ tools/libxc/xg_sr_common_x86_pv.c                               | 2 +-
+ tools/libxc/{xc_sr_common_x86_pv.h => xg_sr_common_x86_pv.h}    | 2 +-
+ tools/libxc/xg_sr_restore.c                                     | 2 +-
+ tools/libxc/xg_sr_restore_x86_hvm.c                             | 2 +-
+ tools/libxc/xg_sr_restore_x86_pv.c                              | 2 +-
+ tools/libxc/xg_sr_save.c                                        | 2 +-
+ tools/libxc/xg_sr_save_x86_hvm.c                                | 2 +-
+ tools/libxc/xg_sr_save_x86_pv.c                                 | 2 +-
+ tools/libxc/{xc_sr_stream_format.h => xg_sr_stream_format.h}    | 0
+ 22 files changed, 20 insertions(+), 20 deletions(-)
+ rename tools/libxc/{xc_dom_decompress.h => xg_dom_decompress.h} (77%)
+ rename tools/libxc/{xc_dom_decompress_unsafe.h => xg_dom_decompress_unsafe.h} (100%)
+ rename tools/libxc/{xc_sr_common.h => xg_sr_common.h} (99%)
+ rename tools/libxc/{xc_sr_common_x86.h => xg_sr_common_x86.h} (98%)
+ rename tools/libxc/{xc_sr_common_x86_pv.h => xg_sr_common_x86_pv.h} (98%)
+ rename tools/libxc/{xc_sr_stream_format.h => xg_sr_stream_format.h} (100%)
 
-diff --git a/tools/libxc/xc_efi.h b/tools/libxc/xc_efi.h
-deleted file mode 100644
-index dbe105be8f..0000000000
---- a/tools/libxc/xc_efi.h
-+++ /dev/null
-@@ -1,158 +0,0 @@
--/*
-- * Extensible Firmware Interface
-- * Based on 'Extensible Firmware Interface Specification' version 0.9, April 30, 1999
-- *
-- * This library is free software; you can redistribute it and/or
-- * modify it under the terms of the GNU Lesser General Public
-- * License as published by the Free Software Foundation;
-- * version 2.1 of the License.
-- *
-- * This library is distributed in the hope that it will be useful,
-- * but WITHOUT ANY WARRANTY; without even the implied warranty of
-- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-- * Lesser General Public License for more details.
-- *
-- * You should have received a copy of the GNU Lesser General Public
-- * License along with this library; If not, see <http://www.gnu.org/licenses/>.
-- *
-- * Copyright (C) 1999 VA Linux Systems
-- * Copyright (C) 1999 Walt Drummond <drummond@valinux.com>
-- * Copyright (C) 1999, 2002-2003 Hewlett-Packard Co.
-- *      David Mosberger-Tang <davidm@hpl.hp.com>
-- *      Stephane Eranian <eranian@hpl.hp.com>
-- */
--
--#ifndef XC_EFI_H
--#define XC_EFI_H
--
--/* definitions from xen/include/asm-ia64/linux-xen/linux/efi.h */
--
--typedef struct {
--        uint8_t b[16];
--} efi_guid_t;
--
--#define EFI_GUID(a,b,c,d0,d1,d2,d3,d4,d5,d6,d7) \
--((efi_guid_t) \
--{{ (a) & 0xff, ((a) >> 8) & 0xff, ((a) >> 16) & 0xff, ((a) >> 24) & 0xff, \
--  (b) & 0xff, ((b) >> 8) & 0xff, \
--  (c) & 0xff, ((c) >> 8) & 0xff, \
--  (d0), (d1), (d2), (d3), (d4), (d5), (d6), (d7) }})
--
--/*
-- * Generic EFI table header
-- */
--typedef struct {
--	uint64_t signature;
--	uint32_t revision;
--	uint32_t headersize;
--	uint32_t crc32;
--	uint32_t reserved;
--} efi_table_hdr_t;
--
--/*
-- * Memory map descriptor:
-- */
--
--/* Memory types: */
--#define EFI_RESERVED_TYPE                0
--#define EFI_LOADER_CODE                  1
--#define EFI_LOADER_DATA                  2
--#define EFI_BOOT_SERVICES_CODE           3
--#define EFI_BOOT_SERVICES_DATA           4
--#define EFI_RUNTIME_SERVICES_CODE        5
--#define EFI_RUNTIME_SERVICES_DATA        6
--#define EFI_CONVENTIONAL_MEMORY          7
--#define EFI_UNUSABLE_MEMORY              8
--#define EFI_ACPI_RECLAIM_MEMORY          9
--#define EFI_ACPI_MEMORY_NVS             10
--#define EFI_MEMORY_MAPPED_IO            11
--#define EFI_MEMORY_MAPPED_IO_PORT_SPACE 12
--#define EFI_PAL_CODE                    13
--#define EFI_MAX_MEMORY_TYPE             14
--
--/* Attribute values: */
--#define EFI_MEMORY_UC           ((uint64_t)0x0000000000000001ULL)    /* uncached */
--#define EFI_MEMORY_WC           ((uint64_t)0x0000000000000002ULL)    /* write-coalescing */
--#define EFI_MEMORY_WT           ((uint64_t)0x0000000000000004ULL)    /* write-through */
--#define EFI_MEMORY_WB           ((uint64_t)0x0000000000000008ULL)    /* write-back */
--#define EFI_MEMORY_WP           ((uint64_t)0x0000000000001000ULL)    /* write-protect */
--#define EFI_MEMORY_RP           ((uint64_t)0x0000000000002000ULL)    /* read-protect */
--#define EFI_MEMORY_XP           ((uint64_t)0x0000000000004000ULL)    /* execute-protect */
--#define EFI_MEMORY_RUNTIME      ((uint64_t)0x8000000000000000ULL)    /* range requires runtime mapping */
--#define EFI_MEMORY_DESCRIPTOR_VERSION   1
--
--#define EFI_PAGE_SHIFT          12
--
--/*
-- * For current x86 implementations of EFI, there is
-- * additional padding in the mem descriptors.  This is not
-- * the case in ia64.  Need to have this fixed in the f/w.
-- */
--typedef struct {
--        uint32_t type;
--        uint32_t pad;
--        uint64_t phys_addr;
--        uint64_t virt_addr;
--        uint64_t num_pages;
--        uint64_t attribute;
--#if defined (__i386__)
--        uint64_t pad1;
--#endif
--} efi_memory_desc_t;
--
--/*
-- * EFI Runtime Services table
-- */
--#define EFI_RUNTIME_SERVICES_SIGNATURE	((uint64_t)0x5652453544e5552ULL)
--#define EFI_RUNTIME_SERVICES_REVISION	0x00010000
--
--typedef struct {
--	efi_table_hdr_t hdr;
--	unsigned long get_time;
--	unsigned long set_time;
--	unsigned long get_wakeup_time;
--	unsigned long set_wakeup_time;
--	unsigned long set_virtual_address_map;
--	unsigned long convert_pointer;
--	unsigned long get_variable;
--	unsigned long get_next_variable;
--	unsigned long set_variable;
--	unsigned long get_next_high_mono_count;
--	unsigned long reset_system;
--} efi_runtime_services_t;
--
--/*
-- *  EFI Configuration Table and GUID definitions
-- */
--#define NULL_GUID \
--    EFI_GUID(  0x00000000, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 )
--#define ACPI_20_TABLE_GUID    \
--    EFI_GUID(  0x8868e871, 0xe4f1, 0x11d3, 0xbc, 0x22, 0x0, 0x80, 0xc7, 0x3c, 0x88, 0x81 )
--#define SAL_SYSTEM_TABLE_GUID    \
--    EFI_GUID(  0xeb9d2d32, 0x2d88, 0x11d3, 0x9a, 0x16, 0x0, 0x90, 0x27, 0x3f, 0xc1, 0x4d )
--
--typedef struct {
--	efi_guid_t guid;
--	unsigned long table;
--} efi_config_table_t;
--
--#define EFI_SYSTEM_TABLE_SIGNATURE ((uint64_t)0x5453595320494249ULL)
--#define EFI_SYSTEM_TABLE_REVISION  ((1 << 16) | 00)
--
--typedef struct {
--	efi_table_hdr_t hdr;
--	unsigned long fw_vendor;	/* physical addr of CHAR16 vendor string */
--	uint32_t fw_revision;
--	unsigned long con_in_handle;
--	unsigned long con_in;
--	unsigned long con_out_handle;
--	unsigned long con_out;
--	unsigned long stderr_handle;
--	unsigned long stderr;
--	efi_runtime_services_t *runtime;
--	unsigned long boottime;
--	unsigned long nr_tables;
--	unsigned long tables;
--} efi_system_table_t;
--
--#endif /* XC_EFI_H */
-diff --git a/tools/libxc/xc_elf.h b/tools/libxc/xc_elf.h
-deleted file mode 100644
-index acbc0280bd..0000000000
---- a/tools/libxc/xc_elf.h
-+++ /dev/null
-@@ -1,16 +0,0 @@
--/*
-- * This library is free software; you can redistribute it and/or
-- * modify it under the terms of the GNU Lesser General Public
-- * License as published by the Free Software Foundation;
-- * version 2.1 of the License.
-- *
-- * This library is distributed in the hope that it will be useful,
-- * but WITHOUT ANY WARRANTY; without even the implied warranty of
-- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-- * Lesser General Public License for more details.
-- *
-- * You should have received a copy of the GNU Lesser General Public
-- * License along with this library; If not, see <http://www.gnu.org/licenses/>.
-- */
--
--#include <xen/libelf/elfstructs.h>
+diff --git a/tools/libxc/xg_dom_bzimageloader.c b/tools/libxc/xg_dom_bzimageloader.c
+index a7d70cc7c6..f959a77602 100644
+--- a/tools/libxc/xg_dom_bzimageloader.c
++++ b/tools/libxc/xg_dom_bzimageloader.c
+@@ -32,7 +32,7 @@
+ #include <inttypes.h>
+ 
+ #include "xg_private.h"
+-#include "xc_dom_decompress.h"
++#include "xg_dom_decompress.h"
+ 
+ #include <xen-tools/libs.h>
+ 
+diff --git a/tools/libxc/xc_dom_decompress.h b/tools/libxc/xg_dom_decompress.h
+similarity index 77%
+rename from tools/libxc/xc_dom_decompress.h
+rename to tools/libxc/xg_dom_decompress.h
+index 42cefa3f0e..d9a21cf297 100644
+--- a/tools/libxc/xc_dom_decompress.h
++++ b/tools/libxc/xg_dom_decompress.h
+@@ -1,7 +1,7 @@
+ #ifndef __MINIOS__
+ # include "xc_dom.h"
+ #else
+-# include "xc_dom_decompress_unsafe.h"
++# include "xg_dom_decompress_unsafe.h"
+ #endif
+ 
+ int xc_try_lz4_decode(struct xc_dom_image *dom, void **blob, size_t *size);
+diff --git a/tools/libxc/xg_dom_decompress_lz4.c b/tools/libxc/xg_dom_decompress_lz4.c
+index b6a33f27a8..97ba620d86 100644
+--- a/tools/libxc/xg_dom_decompress_lz4.c
++++ b/tools/libxc/xg_dom_decompress_lz4.c
+@@ -4,7 +4,7 @@
+ #include <stdint.h>
+ 
+ #include "xg_private.h"
+-#include "xc_dom_decompress.h"
++#include "xg_dom_decompress.h"
+ 
+ #define CONFIG_HAVE_EFFICIENT_UNALIGNED_ACCESS
+ 
+diff --git a/tools/libxc/xg_dom_decompress_unsafe.c b/tools/libxc/xg_dom_decompress_unsafe.c
+index 164e35558f..21d964787d 100644
+--- a/tools/libxc/xg_dom_decompress_unsafe.c
++++ b/tools/libxc/xg_dom_decompress_unsafe.c
+@@ -3,7 +3,7 @@
+ #include <inttypes.h>
+ 
+ #include "xg_private.h"
+-#include "xc_dom_decompress_unsafe.h"
++#include "xg_dom_decompress_unsafe.h"
+ 
+ static struct xc_dom_image *unsafe_dom;
+ static unsigned char *output_blob;
+diff --git a/tools/libxc/xc_dom_decompress_unsafe.h b/tools/libxc/xg_dom_decompress_unsafe.h
+similarity index 100%
+rename from tools/libxc/xc_dom_decompress_unsafe.h
+rename to tools/libxc/xg_dom_decompress_unsafe.h
+diff --git a/tools/libxc/xg_dom_decompress_unsafe_bzip2.c b/tools/libxc/xg_dom_decompress_unsafe_bzip2.c
+index 4dcabe4061..9d3709e6cc 100644
+--- a/tools/libxc/xg_dom_decompress_unsafe_bzip2.c
++++ b/tools/libxc/xg_dom_decompress_unsafe_bzip2.c
+@@ -3,7 +3,7 @@
+ #include <inttypes.h>
+ 
+ #include "xg_private.h"
+-#include "xc_dom_decompress_unsafe.h"
++#include "xg_dom_decompress_unsafe.h"
+ 
+ #include "../../xen/common/bunzip2.c"
+ 
+diff --git a/tools/libxc/xg_dom_decompress_unsafe_lzma.c b/tools/libxc/xg_dom_decompress_unsafe_lzma.c
+index 4ee8cdbab1..5d178f0c43 100644
+--- a/tools/libxc/xg_dom_decompress_unsafe_lzma.c
++++ b/tools/libxc/xg_dom_decompress_unsafe_lzma.c
+@@ -3,7 +3,7 @@
+ #include <inttypes.h>
+ 
+ #include "xg_private.h"
+-#include "xc_dom_decompress_unsafe.h"
++#include "xg_dom_decompress_unsafe.h"
+ 
+ #include "../../xen/common/unlzma.c"
+ 
+diff --git a/tools/libxc/xg_dom_decompress_unsafe_lzo1x.c b/tools/libxc/xg_dom_decompress_unsafe_lzo1x.c
+index 59888b9da2..a4f8ebd42d 100644
+--- a/tools/libxc/xg_dom_decompress_unsafe_lzo1x.c
++++ b/tools/libxc/xg_dom_decompress_unsafe_lzo1x.c
+@@ -5,7 +5,7 @@
+ #include <stdint.h>
+ 
+ #include "xg_private.h"
+-#include "xc_dom_decompress_unsafe.h"
++#include "xg_dom_decompress_unsafe.h"
+ 
+ typedef uint8_t u8;
+ typedef uint32_t u32;
+diff --git a/tools/libxc/xg_dom_decompress_unsafe_xz.c b/tools/libxc/xg_dom_decompress_unsafe_xz.c
+index fe7a7f49b4..ff6824b38d 100644
+--- a/tools/libxc/xg_dom_decompress_unsafe_xz.c
++++ b/tools/libxc/xg_dom_decompress_unsafe_xz.c
+@@ -6,7 +6,7 @@
+ #include <inttypes.h>
+ 
+ #include "xg_private.h"
+-#include "xc_dom_decompress_unsafe.h"
++#include "xg_dom_decompress_unsafe.h"
+ 
+ // TODO
+ #define XZ_DEC_X86
+diff --git a/tools/libxc/xg_sr_common.c b/tools/libxc/xg_sr_common.c
+index 7c54b03414..17567ab133 100644
+--- a/tools/libxc/xg_sr_common.c
++++ b/tools/libxc/xg_sr_common.c
+@@ -1,6 +1,6 @@
+ #include <assert.h>
+ 
+-#include "xc_sr_common.h"
++#include "xg_sr_common.h"
+ 
+ #include <xen-tools/libs.h>
+ 
+diff --git a/tools/libxc/xc_sr_common.h b/tools/libxc/xg_sr_common.h
+similarity index 99%
+rename from tools/libxc/xc_sr_common.h
+rename to tools/libxc/xg_sr_common.h
+index f3bdea8006..35f23fabb5 100644
+--- a/tools/libxc/xc_sr_common.h
++++ b/tools/libxc/xg_sr_common.h
+@@ -8,7 +8,7 @@
+ #include "xc_dom.h"
+ #include "xc_bitops.h"
+ 
+-#include "xc_sr_stream_format.h"
++#include "xg_sr_stream_format.h"
+ 
+ /* String representation of Domain Header types. */
+ const char *dhdr_type_to_str(uint32_t type);
+diff --git a/tools/libxc/xg_sr_common_x86.c b/tools/libxc/xg_sr_common_x86.c
+index 77ea044a74..6f12483907 100644
+--- a/tools/libxc/xg_sr_common_x86.c
++++ b/tools/libxc/xg_sr_common_x86.c
+@@ -1,4 +1,4 @@
+-#include "xc_sr_common_x86.h"
++#include "xg_sr_common_x86.h"
+ 
+ int write_x86_tsc_info(struct xc_sr_context *ctx)
+ {
+diff --git a/tools/libxc/xc_sr_common_x86.h b/tools/libxc/xg_sr_common_x86.h
+similarity index 98%
+rename from tools/libxc/xc_sr_common_x86.h
+rename to tools/libxc/xg_sr_common_x86.h
+index e08d81e0e7..b55758c96d 100644
+--- a/tools/libxc/xc_sr_common_x86.h
++++ b/tools/libxc/xg_sr_common_x86.h
+@@ -1,7 +1,7 @@
+ #ifndef __COMMON_X86__H
+ #define __COMMON_X86__H
+ 
+-#include "xc_sr_common.h"
++#include "xg_sr_common.h"
+ 
+ /*
+  * Obtains a domains TSC information from Xen and writes a X86_TSC_INFO record
+diff --git a/tools/libxc/xg_sr_common_x86_pv.c b/tools/libxc/xg_sr_common_x86_pv.c
+index d3d425cb82..cd33406aab 100644
+--- a/tools/libxc/xg_sr_common_x86_pv.c
++++ b/tools/libxc/xg_sr_common_x86_pv.c
+@@ -1,6 +1,6 @@
+ #include <assert.h>
+ 
+-#include "xc_sr_common_x86_pv.h"
++#include "xg_sr_common_x86_pv.h"
+ 
+ xen_pfn_t mfn_to_pfn(struct xc_sr_context *ctx, xen_pfn_t mfn)
+ {
+diff --git a/tools/libxc/xc_sr_common_x86_pv.h b/tools/libxc/xg_sr_common_x86_pv.h
+similarity index 98%
+rename from tools/libxc/xc_sr_common_x86_pv.h
+rename to tools/libxc/xg_sr_common_x86_pv.h
+index 2ed03309af..953b5bfb8d 100644
+--- a/tools/libxc/xc_sr_common_x86_pv.h
++++ b/tools/libxc/xg_sr_common_x86_pv.h
+@@ -1,7 +1,7 @@
+ #ifndef __COMMON_X86_PV_H
+ #define __COMMON_X86_PV_H
+ 
+-#include "xc_sr_common_x86.h"
++#include "xg_sr_common_x86.h"
+ 
+ /* Virtual address ranges reserved for hypervisor. */
+ #define HYPERVISOR_VIRT_START_X86_64 0xFFFF800000000000ULL
+diff --git a/tools/libxc/xg_sr_restore.c b/tools/libxc/xg_sr_restore.c
+index bc811e6e3a..b57a787519 100644
+--- a/tools/libxc/xg_sr_restore.c
++++ b/tools/libxc/xg_sr_restore.c
+@@ -2,7 +2,7 @@
+ 
+ #include <assert.h>
+ 
+-#include "xc_sr_common.h"
++#include "xg_sr_common.h"
+ 
+ /*
+  * Read and validate the Image and Domain headers.
+diff --git a/tools/libxc/xg_sr_restore_x86_hvm.c b/tools/libxc/xg_sr_restore_x86_hvm.c
+index a77624cc9d..d6ea6f3012 100644
+--- a/tools/libxc/xg_sr_restore_x86_hvm.c
++++ b/tools/libxc/xg_sr_restore_x86_hvm.c
+@@ -1,7 +1,7 @@
+ #include <assert.h>
+ #include <arpa/inet.h>
+ 
+-#include "xc_sr_common_x86.h"
++#include "xg_sr_common_x86.h"
+ 
+ /*
+  * Process an HVM_CONTEXT record from the stream.
+diff --git a/tools/libxc/xg_sr_restore_x86_pv.c b/tools/libxc/xg_sr_restore_x86_pv.c
+index d086271efb..dc50b0f5a8 100644
+--- a/tools/libxc/xg_sr_restore_x86_pv.c
++++ b/tools/libxc/xg_sr_restore_x86_pv.c
+@@ -1,6 +1,6 @@
+ #include <assert.h>
+ 
+-#include "xc_sr_common_x86_pv.h"
++#include "xg_sr_common_x86_pv.h"
+ 
+ static xen_pfn_t pfn_to_mfn(const struct xc_sr_context *ctx, xen_pfn_t pfn)
+ {
+diff --git a/tools/libxc/xg_sr_save.c b/tools/libxc/xg_sr_save.c
+index 80b1d5de1f..d74c72cba6 100644
+--- a/tools/libxc/xg_sr_save.c
++++ b/tools/libxc/xg_sr_save.c
+@@ -1,7 +1,7 @@
+ #include <assert.h>
+ #include <arpa/inet.h>
+ 
+-#include "xc_sr_common.h"
++#include "xg_sr_common.h"
+ 
+ /*
+  * Writes an Image header and Domain header into the stream.
+diff --git a/tools/libxc/xg_sr_save_x86_hvm.c b/tools/libxc/xg_sr_save_x86_hvm.c
+index 0b2abb26bd..1634a7bc43 100644
+--- a/tools/libxc/xg_sr_save_x86_hvm.c
++++ b/tools/libxc/xg_sr_save_x86_hvm.c
+@@ -1,6 +1,6 @@
+ #include <assert.h>
+ 
+-#include "xc_sr_common_x86.h"
++#include "xg_sr_common_x86.h"
+ 
+ #include <xen/hvm/params.h>
+ 
+diff --git a/tools/libxc/xg_sr_save_x86_pv.c b/tools/libxc/xg_sr_save_x86_pv.c
+index c7e246ef4f..4964f1f7b8 100644
+--- a/tools/libxc/xg_sr_save_x86_pv.c
++++ b/tools/libxc/xg_sr_save_x86_pv.c
+@@ -1,7 +1,7 @@
+ #include <assert.h>
+ #include <limits.h>
+ 
+-#include "xc_sr_common_x86_pv.h"
++#include "xg_sr_common_x86_pv.h"
+ 
+ /* Check a 64 bit virtual address for being canonical. */
+ static inline bool is_canonical_address(xen_vaddr_t vaddr)
+diff --git a/tools/libxc/xc_sr_stream_format.h b/tools/libxc/xg_sr_stream_format.h
+similarity index 100%
+rename from tools/libxc/xc_sr_stream_format.h
+rename to tools/libxc/xg_sr_stream_format.h
 -- 
 2.26.2
 
