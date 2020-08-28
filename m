@@ -7,42 +7,42 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D4837C433E6
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2020 15:08:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A19D5C43461
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2020 15:08:22 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B3021208C9
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2020 15:08:21 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B3021208C9
+	by mail.kernel.org (Postfix) with ESMTPS id 7E0B2208C9
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2020 15:08:22 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7E0B2208C9
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kBfz9-0004jg-0b; Fri, 28 Aug 2020 15:08:11 +0000
+	id 1kBfyy-0004f7-F7; Fri, 28 Aug 2020 15:08:00 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Pjxq=CG=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kBfz7-0004eL-Hn
- for xen-devel@lists.xenproject.org; Fri, 28 Aug 2020 15:08:09 +0000
-X-Inumbo-ID: a28c6cc9-13a5-4375-9d06-4751087d6f40
+ id 1kBfyx-0004eL-HO
+ for xen-devel@lists.xenproject.org; Fri, 28 Aug 2020 15:07:59 +0000
+X-Inumbo-ID: 291fdadd-8143-4246-979b-7221a0cd4d83
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id a28c6cc9-13a5-4375-9d06-4751087d6f40;
+ id 291fdadd-8143-4246-979b-7221a0cd4d83;
  Fri, 28 Aug 2020 15:07:53 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 47DD8AF30;
- Fri, 28 Aug 2020 15:08:24 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id D3F7DAF2B;
+ Fri, 28 Aug 2020 15:08:23 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>, Ian Jackson <iwj@xenproject.org>,
- Wei Liu <wl@xen.org>
-Subject: [PATCH v4 08/31] tools/misc: replace PAGE_SIZE with XC_PAGE_SIZE in
- xen-mfndump.c
-Date: Fri, 28 Aug 2020 17:07:24 +0200
-Message-Id: <20200828150747.25305-9-jgross@suse.com>
+ Wei Liu <wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH v4 05/31] tools: don't assume libxenguest and libxenctrl to be
+ in same directory
+Date: Fri, 28 Aug 2020 17:07:21 +0200
+Message-Id: <20200828150747.25305-6-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200828150747.25305-1-jgross@suse.com>
 References: <20200828150747.25305-1-jgross@suse.com>
@@ -61,116 +61,76 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-The definition of PAGE_SIZE comes from xc_private.h, which shouldn't be
-used by xen-mfndump.c. Replace PAGE_SIZE by XC_PAGE_SIZE, as
-xc_private.h contains:
+There are quite some places in Makefiles assuming libxenguest and
+libxenctrl being built in the same directory via a single Makefile.
 
-#define PAGE_SIZE XC_PAGE_SIZE
-
-For the same reason PAGE_SHIFT_X86 needs to replaced with
-XC_PAGE_SHIFT.
+Drop this assumption by specifying the dependencies and path variables
+for both libraries correctly.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 Acked-by: Wei Liu <wl@xen.org>
 ---
- tools/misc/xen-mfndump.c | 26 +++++++++++++-------------
- 1 file changed, 13 insertions(+), 13 deletions(-)
+ tools/Rules.mk       | 7 +++----
+ tools/libxl/Makefile | 2 +-
+ tools/misc/Makefile  | 1 +
+ 3 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/tools/misc/xen-mfndump.c b/tools/misc/xen-mfndump.c
-index cb15d08c7e..92bc954ce0 100644
---- a/tools/misc/xen-mfndump.c
-+++ b/tools/misc/xen-mfndump.c
-@@ -207,7 +207,7 @@ int dump_ptes_func(int argc, char *argv[])
-         goto out;
-     }
+diff --git a/tools/Rules.mk b/tools/Rules.mk
+index 7ad72bebd3..4f3aaaacd3 100644
+--- a/tools/Rules.mk
++++ b/tools/Rules.mk
+@@ -16,8 +16,7 @@ XEN_INCLUDE        = $(XEN_ROOT)/tools/include
+ include $(XEN_ROOT)/tools/libs/uselibs.mk
  
--    page = xc_map_foreign_range(xch, domid, PAGE_SIZE, PROT_READ,
-+    page = xc_map_foreign_range(xch, domid, XC_PAGE_SIZE, PROT_READ,
-                                 minfo.p2m_table[pfn]);
-     if ( !page )
-     {
-@@ -216,7 +216,7 @@ int dump_ptes_func(int argc, char *argv[])
-         goto out;
-     }
+ XEN_libxenctrl     = $(XEN_ROOT)/tools/libxc
+-# Currently libxenguest lives in the same directory as libxenctrl
+-XEN_libxenguest    = $(XEN_libxenctrl)
++XEN_libxenguest    = $(XEN_ROOT)/tools/libxc
+ XEN_libxenlight    = $(XEN_ROOT)/tools/libxl
+ # Currently libxlutil lives in the same directory as libxenlight
+ XEN_libxlutil      = $(XEN_libxenlight)
+@@ -117,7 +116,7 @@ LDLIBS_libxenguest = $(SHDEPS_libxenguest) $(XEN_libxenguest)/libxenguest$(libex
+ SHLIB_libxenguest  = $(SHDEPS_libxenguest) -Wl,-rpath-link=$(XEN_libxenguest)
  
--    pte_num = PAGE_SIZE / 8;
-+    pte_num = XC_PAGE_SIZE / 8;
+ CFLAGS_libxenstore = -I$(XEN_libxenstore)/include $(CFLAGS_xeninclude)
+-SHDEPS_libxenstore = $(SHLIB_libxentoolcore)
++SHDEPS_libxenstore = $(SHLIB_libxentoolcore) $(SHLIB_libxenctrl)
+ LDLIBS_libxenstore = $(SHDEPS_libxenstore) $(XEN_libxenstore)/libxenstore$(libextension)
+ SHLIB_libxenstore  = $(SHDEPS_libxenstore) -Wl,-rpath-link=$(XEN_libxenstore)
+ ifeq ($(CONFIG_Linux),y)
+@@ -144,7 +143,7 @@ CFLAGS += -O2 -fomit-frame-pointer
+ endif
  
-     printf(" --- Dumping %d PTEs for domain %d ---\n", pte_num, domid);
-     printf(" Guest Width: %u, PT Levels: %u P2M size: = %lu\n",
-@@ -252,7 +252,7 @@ int dump_ptes_func(int argc, char *argv[])
+ CFLAGS_libxenlight = -I$(XEN_libxenlight) $(CFLAGS_libxenctrl) $(CFLAGS_xeninclude)
+-SHDEPS_libxenlight = $(SHLIB_libxenctrl) $(SHLIB_libxenstore) $(SHLIB_libxenhypfs)
++SHDEPS_libxenlight = $(SHLIB_libxenctrl) $(SHLIB_libxenstore) $(SHLIB_libxenhypfs) $(SHLIB_libxenguest)
+ LDLIBS_libxenlight = $(SHDEPS_libxenlight) $(XEN_libxenlight)/libxenlight$(libextension)
+ SHLIB_libxenlight  = $(SHDEPS_libxenlight) -Wl,-rpath-link=$(XEN_libxenlight)
  
-  out:
-     if ( page )
--        munmap(page, PAGE_SIZE);
-+        munmap(page, XC_PAGE_SIZE);
-     xc_unmap_domain_meminfo(xch, &minfo);
-     munmap(m2p_table, M2P_SIZE(max_mfn));
-     return rc;
-@@ -290,7 +290,7 @@ int lookup_pte_func(int argc, char *argv[])
-         return -1;
-     }
+diff --git a/tools/libxl/Makefile b/tools/libxl/Makefile
+index 684da32a5b..b815c548de 100644
+--- a/tools/libxl/Makefile
++++ b/tools/libxl/Makefile
+@@ -188,7 +188,7 @@ libxl_dom.o: CFLAGS += -I$(XEN_ROOT)/tools  # include libacpi/x86.h
+ libxl_x86_acpi.o: CFLAGS += -I$(XEN_ROOT)/tools
  
--    pte_num = PAGE_SIZE / 8;
-+    pte_num = XC_PAGE_SIZE / 8;
+ SAVE_HELPER_OBJS = libxl_save_helper.o _libxl_save_msgs_helper.o
+-$(SAVE_HELPER_OBJS): CFLAGS += $(CFLAGS_libxenctrl) $(CFLAGS_libxenevtchn)
++$(SAVE_HELPER_OBJS): CFLAGS += $(CFLAGS_libxenctrl) $(CFLAGS_libxenevtchn) $(CFLAGS_libxenguest)
  
-     printf(" --- Lookig for PTEs mapping mfn 0x%lx for domain %d ---\n",
-            mfn, domid);
-@@ -302,7 +302,7 @@ int lookup_pte_func(int argc, char *argv[])
-         if ( !(minfo.pfn_type[i] & XEN_DOMCTL_PFINFO_LTABTYPE_MASK) )
-             continue;
- 
--        page = xc_map_foreign_range(xch, domid, PAGE_SIZE, PROT_READ,
-+        page = xc_map_foreign_range(xch, domid, XC_PAGE_SIZE, PROT_READ,
-                                     minfo.p2m_table[i]);
-         if ( !page )
-             continue;
-@@ -312,15 +312,15 @@ int lookup_pte_func(int argc, char *argv[])
-             uint64_t pte = ((const uint64_t*)page)[j];
- 
- #define __MADDR_BITS_X86  ((minfo.guest_width == 8) ? 52 : 44)
--#define __MFN_MASK_X86    ((1ULL << (__MADDR_BITS_X86 - PAGE_SHIFT_X86)) - 1)
--            if ( ((pte >> PAGE_SHIFT_X86) & __MFN_MASK_X86) == mfn)
-+#define __MFN_MASK_X86    ((1ULL << (__MADDR_BITS_X86 - XC_PAGE_SHIFT)) - 1)
-+            if ( ((pte >> XC_PAGE_SHIFT) & __MFN_MASK_X86) == mfn)
-                 printf("  0x%lx <-- [0x%lx][%lu]: 0x%"PRIx64"\n",
-                        mfn, minfo.p2m_table[i], j, pte);
- #undef __MADDR_BITS_X86
- #undef __MFN_MASK_X8
-         }
- 
--        munmap(page, PAGE_SIZE);
-+        munmap(page, XC_PAGE_SIZE);
-         page = NULL;
-     }
- 
-@@ -355,8 +355,8 @@ int memcmp_mfns_func(int argc, char *argv[])
-         return -1;
-     }
- 
--    page1 = xc_map_foreign_range(xch, domid1, PAGE_SIZE, PROT_READ, mfn1);
--    page2 = xc_map_foreign_range(xch, domid2, PAGE_SIZE, PROT_READ, mfn2);
-+    page1 = xc_map_foreign_range(xch, domid1, XC_PAGE_SIZE, PROT_READ, mfn1);
-+    page2 = xc_map_foreign_range(xch, domid2, XC_PAGE_SIZE, PROT_READ, mfn2);
-     if ( !page1 || !page2 )
-     {
-         ERROR("Failed to map either 0x%lx[dom %d] or 0x%lx[dom %d]\n",
-@@ -368,13 +368,13 @@ int memcmp_mfns_func(int argc, char *argv[])
-     printf(" --- Comparing the content of 2 MFNs ---\n");
-     printf(" 1: 0x%lx[dom %d], 2: 0x%lx[dom %d]\n",
-            mfn1, domid1, mfn2, domid2);
--    printf("  memcpy(1, 2) = %d\n", memcmp(page1, page2, PAGE_SIZE));
-+    printf("  memcpy(1, 2) = %d\n", memcmp(page1, page2, XC_PAGE_SIZE));
- 
-  out:
-     if ( page1 )
--        munmap(page1, PAGE_SIZE);
-+        munmap(page1, XC_PAGE_SIZE);
-     if ( page2 )
--        munmap(page2, PAGE_SIZE);
-+        munmap(page2, XC_PAGE_SIZE);
-     return rc;
- }
+ PKG_CONFIG = xenlight.pc xlutil.pc
+ PKG_CONFIG_VERSION := $(MAJOR).$(MINOR)
+diff --git a/tools/misc/Makefile b/tools/misc/Makefile
+index 9fdb13597f..e7e74db85f 100644
+--- a/tools/misc/Makefile
++++ b/tools/misc/Makefile
+@@ -6,6 +6,7 @@ CFLAGS += -Werror
+ CFLAGS += -include $(XEN_ROOT)/tools/config.h
+ CFLAGS += $(CFLAGS_libxenevtchn)
+ CFLAGS += $(CFLAGS_libxenctrl)
++CFLAGS += $(CFLAGS_libxenguest)
+ CFLAGS += $(CFLAGS_xeninclude)
+ CFLAGS += $(CFLAGS_libxenstore)
  
 -- 
 2.26.2
