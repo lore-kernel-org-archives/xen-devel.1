@@ -2,46 +2,46 @@ Return-Path: <SRS0=+ST8=CG=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
+X-Spam-Status: No, score=-9.9 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=3.4.0
+	SPF_HELO_NONE,SPF_PASS,UNWANTED_LANGUAGE_BODY,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 37491C433E2
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8879AC433E6
 	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2020 15:22:35 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id F2F6C20757
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2020 15:22:34 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F2F6C20757
+	by mail.kernel.org (Postfix) with ESMTPS id 605E520757
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Aug 2020 15:22:35 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 605E520757
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kBgCw-00008n-5U; Fri, 28 Aug 2020 15:22:26 +0000
+	id 1kBgCv-000080-OM; Fri, 28 Aug 2020 15:22:25 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Pjxq=CG=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kBfzl-0004eL-J8
- for xen-devel@lists.xenproject.org; Fri, 28 Aug 2020 15:08:49 +0000
-X-Inumbo-ID: 820c01cc-571d-4eed-95e0-b0e0bd70b196
+ id 1kBfzg-0004eL-JD
+ for xen-devel@lists.xenproject.org; Fri, 28 Aug 2020 15:08:44 +0000
+X-Inumbo-ID: f3aee4f9-d5b3-474c-9d77-10d26987f5d7
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 820c01cc-571d-4eed-95e0-b0e0bd70b196;
+ id f3aee4f9-d5b3-474c-9d77-10d26987f5d7;
  Fri, 28 Aug 2020 15:07:55 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 5A4B3AF83;
+ by mx2.suse.de (Postfix) with ESMTP id 9E127AF92;
  Fri, 28 Aug 2020 15:08:25 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>, Ian Jackson <iwj@xenproject.org>,
  Wei Liu <wl@xen.org>
-Subject: [PATCH v4 15/31] tools/libxc: untangle libxenctrl from libxenguest
-Date: Fri, 28 Aug 2020 17:07:31 +0200
-Message-Id: <20200828150747.25305-16-jgross@suse.com>
+Subject: [PATCH v4 17/31] tools/xenpaging: remove libxc internals
+Date: Fri, 28 Aug 2020 17:07:33 +0200
+Message-Id: <20200828150747.25305-18-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200828150747.25305-1-jgross@suse.com>
 References: <20200828150747.25305-1-jgross@suse.com>
@@ -60,363 +60,316 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Sources of libxenctrl and libxenguest are completely entangled. In
-practice libxenguest is a user of libxenctrl, so don't let any source
-libxenctrl include xg_private.h.
-
-This can be achieved by moving all definitions used by libxenctrl from
-xg_private.h to xc_private.h.
-
-Export xenctrl_dom.h as it will now be included by other public
-headers.
+xenpaging is using libxc internals. Fix that.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 Acked-by: Wei Liu <wl@xen.org>
 ---
- tools/libxc/Makefile              |  3 ++-
- tools/libxc/include/xenctrl_dom.h | 10 +++++++--
- tools/libxc/include/xenguest.h    |  8 ++-----
- tools/libxc/xc_core.c             |  5 +++--
- tools/libxc/xc_core.h             |  2 +-
- tools/libxc/xc_core_arm.c         |  2 +-
- tools/libxc/xc_core_x86.c         |  6 ++----
- tools/libxc/xc_domain.c           |  3 +--
- tools/libxc/xc_hcall_buf.c        |  1 -
- tools/libxc/xc_private.c          |  1 -
- tools/libxc/xc_private.h          | 36 +++++++++++++++++++++++++++++++
- tools/libxc/xc_resume.c           |  2 --
- tools/libxc/xg_private.h          | 22 -------------------
- tools/libxc/xg_save_restore.h     |  9 --------
- 14 files changed, 56 insertions(+), 54 deletions(-)
+ tools/xenpaging/Makefile         |  3 +-
+ tools/xenpaging/file_ops.c       |  8 ++--
+ tools/xenpaging/pagein.c         |  2 +-
+ tools/xenpaging/policy_default.c |  2 +-
+ tools/xenpaging/xenpaging.c      | 32 +++++++--------
+ tools/xenpaging/xenpaging.h      | 70 +++++++++++++++++++++++++++++++-
+ 6 files changed, 92 insertions(+), 25 deletions(-)
 
-diff --git a/tools/libxc/Makefile b/tools/libxc/Makefile
-index 0fd5511143..faf2639894 100644
---- a/tools/libxc/Makefile
-+++ b/tools/libxc/Makefile
-@@ -215,7 +215,7 @@ install: build
- 	$(INSTALL_DATA) libxenctrl.a $(DESTDIR)$(libdir)
- 	$(SYMLINK_SHLIB) libxenctrl.so.$(MAJOR).$(MINOR) $(DESTDIR)$(libdir)/libxenctrl.so.$(MAJOR)
- 	$(SYMLINK_SHLIB) libxenctrl.so.$(MAJOR) $(DESTDIR)$(libdir)/libxenctrl.so
--	$(INSTALL_DATA) include/xenctrl.h include/xenctrl_compat.h $(DESTDIR)$(includedir)
-+	$(INSTALL_DATA) include/xenctrl.h include/xenctrl_compat.h include/xenctrl_dom.h $(DESTDIR)$(includedir)
- 	$(INSTALL_SHLIB) libxenguest.so.$(MAJOR).$(MINOR) $(DESTDIR)$(libdir)
- 	$(INSTALL_DATA) libxenguest.a $(DESTDIR)$(libdir)
- 	$(SYMLINK_SHLIB) libxenguest.so.$(MAJOR).$(MINOR) $(DESTDIR)$(libdir)/libxenguest.so.$(MAJOR)
-@@ -235,6 +235,7 @@ uninstall:
- 	rm -f $(DESTDIR)$(PKG_INSTALLDIR)/xencontrol.pc
- 	rm -f $(DESTDIR)$(includedir)/xenctrl.h
- 	rm -f $(DESTDIR)$(includedir)/xenctrl_compat.h
-+	rm -f $(DESTDIR)$(includedir)/xenctrl_dom.h
- 	rm -f $(DESTDIR)$(libdir)/libxenctrl.so
- 	rm -f $(DESTDIR)$(libdir)/libxenctrl.so.$(MAJOR)
- 	rm -f $(DESTDIR)$(libdir)/libxenctrl.so.$(MAJOR).$(MINOR)
-diff --git a/tools/libxc/include/xenctrl_dom.h b/tools/libxc/include/xenctrl_dom.h
-index 52a4d6c8c0..40b85b7755 100644
---- a/tools/libxc/include/xenctrl_dom.h
-+++ b/tools/libxc/include/xenctrl_dom.h
-@@ -17,9 +17,7 @@
- #define _XC_DOM_H
+diff --git a/tools/xenpaging/Makefile b/tools/xenpaging/Makefile
+index 968678c4e8..04743b335c 100644
+--- a/tools/xenpaging/Makefile
++++ b/tools/xenpaging/Makefile
+@@ -1,8 +1,7 @@
+ XEN_ROOT=$(CURDIR)/../..
+ include $(XEN_ROOT)/tools/Rules.mk
  
- #include <xen/libelf/libelf.h>
--#include <xenguest.h>
+-# xenpaging.c and file_ops.c incorrectly use libxc internals
+-CFLAGS += $(CFLAGS_libxentoollog) $(CFLAGS_libxenevtchn) $(CFLAGS_libxenctrl) $(CFLAGS_libxenstore) $(PTHREAD_CFLAGS) -I$(XEN_ROOT)/tools/libxc $(CFLAGS_libxencall)
++CFLAGS += $(CFLAGS_libxentoollog) $(CFLAGS_libxenevtchn) $(CFLAGS_libxenctrl) $(CFLAGS_libxenstore) $(PTHREAD_CFLAGS) $(CFLAGS_libxencall)
+ LDLIBS += $(LDLIBS_libxentoollog) $(LDLIBS_libxenevtchn) $(LDLIBS_libxenctrl) $(LDLIBS_libxenstore) $(PTHREAD_LIBS)
+ LDFLAGS += $(PTHREAD_LDFLAGS)
  
--#define INVALID_PFN ((xen_pfn_t)-1)
- #define X86_HVM_NR_SPECIAL_PAGES    8
- #define X86_HVM_END_SPECIAL_REGION  0xff000u
- #define XG_MAX_MODULES 2
-@@ -38,6 +36,12 @@ struct xc_dom_seg {
-     xen_pfn_t pages;
- };
+diff --git a/tools/xenpaging/file_ops.c b/tools/xenpaging/file_ops.c
+index 8210f426df..301fb3427c 100644
+--- a/tools/xenpaging/file_ops.c
++++ b/tools/xenpaging/file_ops.c
+@@ -20,7 +20,7 @@
  
-+struct xc_hvm_firmware_module {
-+    uint8_t  *data;
-+    uint32_t  length;
-+    uint64_t  guest_addr_out;
-+};
-+
- struct xc_dom_mem {
-     struct xc_dom_mem *next;
-     void *ptr;
-@@ -255,6 +259,8 @@ struct xc_dom_arch {
-     int (*setup_pgtables) (struct xc_dom_image * dom);
  
-     /* arch-specific data structs setup */
-+    /* in Mini-OS environment start_info might be a macro, avoid collision. */
-+#undef start_info
-     int (*start_info) (struct xc_dom_image * dom);
-     int (*shared_info) (struct xc_dom_image * dom, void *shared_info);
-     int (*vcpu) (struct xc_dom_image * dom);
-diff --git a/tools/libxc/include/xenguest.h b/tools/libxc/include/xenguest.h
-index 7a12d21ff2..4643384790 100644
---- a/tools/libxc/include/xenguest.h
-+++ b/tools/libxc/include/xenguest.h
-@@ -22,6 +22,8 @@
- #ifndef XENGUEST_H
- #define XENGUEST_H
- 
-+#include <xenctrl_dom.h>
-+
- #define XC_NUMA_NO_NODE   (~0U)
- 
- #define XCFLAGS_LIVE      (1 << 0)
-@@ -249,12 +251,6 @@ int xc_linux_build(xc_interface *xch,
-                    unsigned int console_evtchn,
-                    unsigned long *console_mfn);
- 
--struct xc_hvm_firmware_module {
--    uint8_t  *data;
--    uint32_t  length;
--    uint64_t  guest_addr_out;
--};
--
- /*
-  * Sets *lockfd to -1.
-  * Has deallocated everything even on error.
-diff --git a/tools/libxc/xc_core.c b/tools/libxc/xc_core.c
-index 7df1fccd62..e8c6fb96f9 100644
---- a/tools/libxc/xc_core.c
-+++ b/tools/libxc/xc_core.c
-@@ -60,12 +60,13 @@
-  *
-  */
- 
--#include "xg_private.h"
-+#include "xc_private.h"
- #include "xc_core.h"
--#include "xenctrl_dom.h"
- #include <stdlib.h>
  #include <unistd.h>
+-#include <xc_private.h>
++#include <xenctrl.h>
  
-+#include <xen/libelf/libelf.h>
-+
- /* number of pages to write at a time */
- #define DUMP_INCREMENT (4 * 1024)
+ static int file_op(int fd, void *page, int i,
+                    ssize_t (*fn)(int, void *, size_t))
+@@ -29,13 +29,13 @@ static int file_op(int fd, void *page, int i,
+     int total = 0;
+     int bytes;
  
-diff --git a/tools/libxc/xc_core.h b/tools/libxc/xc_core.h
-index ed7ed53ca5..36fb755da2 100644
---- a/tools/libxc/xc_core.h
-+++ b/tools/libxc/xc_core.h
-@@ -21,7 +21,7 @@
- #define XC_CORE_H
+-    offset = lseek(fd, offset << PAGE_SHIFT, SEEK_SET);
++    offset = lseek(fd, offset << XC_PAGE_SHIFT, SEEK_SET);
+     if ( offset == (off_t)-1 )
+         return -1;
  
- #include "xen/version.h"
--#include "xg_private.h"
-+#include "xc_private.h"
- #include "xen/libelf/elfstructs.h"
- 
- /* section names */
-diff --git a/tools/libxc/xc_core_arm.c b/tools/libxc/xc_core_arm.c
-index c3c492c971..7b587b4cc5 100644
---- a/tools/libxc/xc_core_arm.c
-+++ b/tools/libxc/xc_core_arm.c
-@@ -16,7 +16,7 @@
-  *
-  */
- 
--#include "xg_private.h"
-+#include "xc_private.h"
- #include "xc_core.h"
- 
- #include <xen-tools/libs.h>
-diff --git a/tools/libxc/xc_core_x86.c b/tools/libxc/xc_core_x86.c
-index 54852a2d1a..cb76e6207b 100644
---- a/tools/libxc/xc_core_x86.c
-+++ b/tools/libxc/xc_core_x86.c
-@@ -17,12 +17,10 @@
-  *
-  */
- 
--#include "xg_private.h"
-+#include "xc_private.h"
- #include "xc_core.h"
- #include <xen/hvm/e820.h>
- 
--#define GET_FIELD(_p, _f) ((dinfo->guest_width==8) ? ((_p)->x64._f) : ((_p)->x32._f))
--
- int
- xc_core_arch_gpfn_may_present(struct xc_core_arch_context *arch_ctxt,
-                               unsigned long pfn)
-@@ -98,7 +96,7 @@ xc_core_arch_map_p2m_rw(xc_interface *xch, struct domain_info_context *dinfo, xc
- 
-     live_p2m_frame_list_list =
-         xc_map_foreign_range(xch, dom, PAGE_SIZE, PROT_READ,
--                             GET_FIELD(live_shinfo, arch.pfn_to_mfn_frame_list_list));
-+                             GET_FIELD(live_shinfo, arch.pfn_to_mfn_frame_list_list, dinfo->guest_width));
- 
-     if ( !live_p2m_frame_list_list )
+-    while ( total < PAGE_SIZE )
++    while ( total < XC_PAGE_SIZE )
      {
-diff --git a/tools/libxc/xc_domain.c b/tools/libxc/xc_domain.c
-index fbc22c4df6..43fab50c06 100644
---- a/tools/libxc/xc_domain.c
-+++ b/tools/libxc/xc_domain.c
-@@ -21,8 +21,7 @@
+-        bytes = fn(fd, page + total, PAGE_SIZE - total);
++        bytes = fn(fd, page + total, XC_PAGE_SIZE - total);
+         if ( bytes <= 0 )
+             return -1;
  
- #include "xc_private.h"
- #include "xc_core.h"
--#include "xg_private.h"
--#include "xg_save_restore.h"
-+#include "xc_private.h"
- #include <xen/memory.h>
- #include <xen/hvm/hvm_op.h>
- 
-diff --git a/tools/libxc/xc_hcall_buf.c b/tools/libxc/xc_hcall_buf.c
-index c1230a1e2b..200671f36f 100644
---- a/tools/libxc/xc_hcall_buf.c
-+++ b/tools/libxc/xc_hcall_buf.c
-@@ -19,7 +19,6 @@
- #include <string.h>
- 
- #include "xc_private.h"
--#include "xg_private.h"
- 
- xc_hypercall_buffer_t XC__HYPERCALL_BUFFER_NAME(HYPERCALL_BUFFER_NULL) = {
-     .hbuf = NULL,
-diff --git a/tools/libxc/xc_private.c b/tools/libxc/xc_private.c
-index 6ecdf6953f..8af96b1b7e 100644
---- a/tools/libxc/xc_private.c
-+++ b/tools/libxc/xc_private.c
-@@ -18,7 +18,6 @@
-  */
- 
- #include "xc_private.h"
--#include "xg_private.h"
- #include "xenctrl_dom.h"
- #include <stdarg.h>
- #include <stdlib.h>
-diff --git a/tools/libxc/xc_private.h b/tools/libxc/xc_private.h
-index c77edb3c4c..f0b5f83ac8 100644
---- a/tools/libxc/xc_private.h
-+++ b/tools/libxc/xc_private.h
-@@ -26,6 +26,7 @@
- #include <sys/types.h>
- #include <sys/stat.h>
- #include <stdlib.h>
-+#include <limits.h>
- #include <sys/ioctl.h>
- 
- #include "_paths.h"
-@@ -62,6 +63,39 @@ struct iovec {
- #include <sys/uio.h>
- #endif
- 
-+#define ROUNDUP(_x,_w) (((unsigned long)(_x)+(1UL<<(_w))-1) & ~((1UL<<(_w))-1))
-+
-+#define GET_FIELD(_p, _f, _w) (((_w) == 8) ? ((_p)->x64._f) : ((_p)->x32._f))
-+
-+#define SET_FIELD(_p, _f, _v, _w) do {          \
-+    if ((_w) == 8)                              \
-+        (_p)->x64._f = (_v);                    \
-+    else                                        \
-+        (_p)->x32._f = (_v);                    \
-+} while (0)
-+
-+/* XXX SMH: following skanky macros rely on variable p2m_size being set */
-+/* XXX TJD: also, "guest_width" should be the guest's sizeof(unsigned long) */
-+
-+struct domain_info_context {
-+    unsigned int guest_width;
-+    unsigned long p2m_size;
-+};
-+
-+/* Number of xen_pfn_t in a page */
-+#define FPP             (PAGE_SIZE/(dinfo->guest_width))
-+
-+/* Number of entries in the pfn_to_mfn_frame_list_list */
-+#define P2M_FLL_ENTRIES (((dinfo->p2m_size)+(FPP*FPP)-1)/(FPP*FPP))
-+
-+/* Number of entries in the pfn_to_mfn_frame_list */
-+#define P2M_FL_ENTRIES  (((dinfo->p2m_size)+FPP-1)/FPP)
-+
-+/* Size in bytes of the pfn_to_mfn_frame_list     */
-+#define P2M_GUEST_FL_SIZE ((P2M_FL_ENTRIES) * (dinfo->guest_width))
-+#define P2M_TOOLS_FL_SIZE ((P2M_FL_ENTRIES) *                           \
-+                           max_t(size_t, sizeof(xen_pfn_t), dinfo->guest_width))
-+
- #define DECLARE_DOMCTL struct xen_domctl domctl
- #define DECLARE_SYSCTL struct xen_sysctl sysctl
- #define DECLARE_PHYSDEV_OP struct physdev_op physdev_op
-@@ -75,6 +109,8 @@ struct iovec {
- #define PAGE_SIZE               XC_PAGE_SIZE
- #define PAGE_MASK               XC_PAGE_MASK
- 
-+#define INVALID_PFN ((xen_pfn_t)-1)
-+
- /*
- ** Define max dirty page cache to permit during save/restore -- need to balance 
- ** keeping cache usage down with CPU impact of invalidating too often.
-diff --git a/tools/libxc/xc_resume.c b/tools/libxc/xc_resume.c
-index c169204fac..94c6c9fb31 100644
---- a/tools/libxc/xc_resume.c
-+++ b/tools/libxc/xc_resume.c
-@@ -14,8 +14,6 @@
-  */
- 
- #include "xc_private.h"
--#include "xg_private.h"
--#include "xg_save_restore.h"
- 
- #if defined(__i386__) || defined(__x86_64__)
- 
-diff --git a/tools/libxc/xg_private.h b/tools/libxc/xg_private.h
-index 40b5baecde..0000b2b9b6 100644
---- a/tools/libxc/xg_private.h
-+++ b/tools/libxc/xg_private.h
-@@ -97,15 +97,6 @@ typedef uint64_t x86_pgentry_t;
- 
- #define NRPAGES(x) (ROUNDUP(x, PAGE_SHIFT) >> PAGE_SHIFT)
- 
--
--/* XXX SMH: following skanky macros rely on variable p2m_size being set */
--/* XXX TJD: also, "guest_width" should be the guest's sizeof(unsigned long) */
--
--struct domain_info_context {
--    unsigned int guest_width;
--    unsigned long p2m_size;
--};
--
- static inline xen_pfn_t xc_pfn_to_mfn(xen_pfn_t pfn, xen_pfn_t *p2m,
-                                       unsigned gwidth)
- {
-@@ -121,19 +112,6 @@ static inline xen_pfn_t xc_pfn_to_mfn(xen_pfn_t pfn, xen_pfn_t *p2m,
+diff --git a/tools/xenpaging/pagein.c b/tools/xenpaging/pagein.c
+index 2a298b436c..1c8a7d983d 100644
+--- a/tools/xenpaging/pagein.c
++++ b/tools/xenpaging/pagein.c
+@@ -43,7 +43,7 @@ static void *page_in(void *arg)
+         /* Ignore errors */
+         page = xc_map_foreign_pages(pia->xch, pia->dom, PROT_READ, gfns, num);
+         if (page)
+-            munmap(page, PAGE_SIZE * num);
++            munmap(page, XC_PAGE_SIZE * num);
      }
+     page_in_possible = 0;
+     pthread_exit(NULL);
+diff --git a/tools/xenpaging/policy_default.c b/tools/xenpaging/policy_default.c
+index 3324835957..979d251230 100644
+--- a/tools/xenpaging/policy_default.c
++++ b/tools/xenpaging/policy_default.c
+@@ -18,8 +18,8 @@
+  * along with this program; If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
++#include <errno.h>
+ 
+-#include "xc_bitops.h"
+ #include "policy.h"
+ 
+ 
+diff --git a/tools/xenpaging/xenpaging.c b/tools/xenpaging/xenpaging.c
+index d0571cabac..33098046c2 100644
+--- a/tools/xenpaging/xenpaging.c
++++ b/tools/xenpaging/xenpaging.c
+@@ -30,7 +30,6 @@
+ #include <xenstore.h>
+ #include <getopt.h>
+ 
+-#include "xc_bitops.h"
+ #include "file_ops.h"
+ #include "policy.h"
+ #include "xenpaging.h"
+@@ -183,12 +182,12 @@ static void *init_page(void)
+     void *buffer;
+ 
+     /* Allocated page memory */
+-    errno = posix_memalign(&buffer, PAGE_SIZE, PAGE_SIZE);
++    errno = posix_memalign(&buffer, XC_PAGE_SIZE, XC_PAGE_SIZE);
+     if ( errno != 0 )
+         return NULL;
+ 
+     /* Lock buffer in memory so it can't be paged out */
+-    if ( mlock(buffer, PAGE_SIZE) < 0 )
++    if ( mlock(buffer, XC_PAGE_SIZE) < 0 )
+     {
+         free(buffer);
+         buffer = NULL;
+@@ -277,7 +276,6 @@ static struct xenpaging *xenpaging_init(int argc, char *argv[])
+     struct xenpaging *paging;
+     xc_domaininfo_t domain_info;
+     xc_interface *xch = NULL;
+-    xentoollog_logger *dbg = NULL;
+     char *p;
+     int rc;
+     unsigned long ring_pfn, mmap_pfn;
+@@ -291,12 +289,11 @@ static struct xenpaging *xenpaging_init(int argc, char *argv[])
+     if ( xenpaging_getopts(paging, argc, argv) )
+         goto err;
+ 
+-    /* Enable debug output */
+-    if ( paging->debug )
+-        dbg = (xentoollog_logger *)xtl_createlogger_stdiostream(stderr, XTL_DEBUG, 0);
++    paging->logger = (xentoollog_logger *)xtl_createlogger_stdiostream(stderr,
++                         paging->debug ? XTL_DEBUG : XTL_PROGRESS, 0);
+ 
+     /* Open connection to xen */
+-    paging->xc_handle = xch = xc_interface_open(dbg, NULL, 0);
++    paging->xc_handle = xch = xc_interface_open(paging->logger, NULL, 0);
+     if ( !xch )
+         goto err;
+ 
+@@ -416,7 +413,7 @@ static struct xenpaging *xenpaging_init(int argc, char *argv[])
+     SHARED_RING_INIT((vm_event_sring_t *)paging->vm_event.ring_page);
+     BACK_RING_INIT(&paging->vm_event.back_ring,
+                    (vm_event_sring_t *)paging->vm_event.ring_page,
+-                   PAGE_SIZE);
++                   XC_PAGE_SIZE);
+ 
+     /* Now that the ring is set, remove it from the guest's physmap */
+     if ( xc_domain_decrease_reservation_exact(xch, 
+@@ -490,15 +487,17 @@ static struct xenpaging *xenpaging_init(int argc, char *argv[])
+             xs_close(paging->xs_handle);
+         if ( xch )
+             xc_interface_close(xch);
++        if ( paging->logger )
++            xtl_logger_destroy(paging->logger);
+         if ( paging->paging_buffer )
+         {
+-            munlock(paging->paging_buffer, PAGE_SIZE);
++            munlock(paging->paging_buffer, XC_PAGE_SIZE);
+             free(paging->paging_buffer);
+         }
+ 
+         if ( paging->vm_event.ring_page )
+         {
+-            munmap(paging->vm_event.ring_page, PAGE_SIZE);
++            munmap(paging->vm_event.ring_page, XC_PAGE_SIZE);
+         }
+ 
+         free(dom_path);
+@@ -523,7 +522,7 @@ static void xenpaging_teardown(struct xenpaging *paging)
+ 
+     paging->xc_handle = NULL;
+     /* Tear down domain paging in Xen */
+-    munmap(paging->vm_event.ring_page, PAGE_SIZE);
++    munmap(paging->vm_event.ring_page, XC_PAGE_SIZE);
+     rc = xc_mem_paging_disable(xch, paging->vm_event.domain_id);
+     if ( rc != 0 )
+     {
+@@ -551,6 +550,8 @@ static void xenpaging_teardown(struct xenpaging *paging)
+ 
+     /* Close connection to Xen */
+     xc_interface_close(xch);
++
++    xtl_logger_destroy(paging->logger);
  }
  
--/* Number of xen_pfn_t in a page */
--#define FPP             (PAGE_SIZE/(dinfo->guest_width))
+ static void get_request(struct vm_event *vm_event, vm_event_request_t *req)
+@@ -598,8 +599,7 @@ static int xenpaging_evict_page(struct xenpaging *paging, unsigned long gfn, int
+     void *page;
+     xen_pfn_t victim = gfn;
+     int ret;
 -
--/* Number of entries in the pfn_to_mfn_frame_list_list */
--#define P2M_FLL_ENTRIES (((dinfo->p2m_size)+(FPP*FPP)-1)/(FPP*FPP))
--
--/* Number of entries in the pfn_to_mfn_frame_list */
--#define P2M_FL_ENTRIES  (((dinfo->p2m_size)+FPP-1)/FPP)
--
--/* Size in bytes of the pfn_to_mfn_frame_list     */
--#define P2M_GUEST_FL_SIZE ((P2M_FL_ENTRIES) * (dinfo->guest_width))
--#define P2M_TOOLS_FL_SIZE ((P2M_FL_ENTRIES) *                           \
--                           max_t(size_t, sizeof(xen_pfn_t), dinfo->guest_width))
+-    DECLARE_DOMCTL;
++    struct xen_domctl domctl;
  
- /* Masks for PTE<->PFN conversions */
- #define MADDR_BITS_X86  ((dinfo->guest_width == 8) ? 52 : 44)
-diff --git a/tools/libxc/xg_save_restore.h b/tools/libxc/xg_save_restore.h
-index b904296997..88120eb54b 100644
---- a/tools/libxc/xg_save_restore.h
-+++ b/tools/libxc/xg_save_restore.h
-@@ -109,15 +109,6 @@ static inline int get_platform_info(xc_interface *xch, uint32_t dom,
- #define M2P_SIZE(_m)    ROUNDUP(((_m) * sizeof(xen_pfn_t)), M2P_SHIFT)
- #define M2P_CHUNKS(_m)  (M2P_SIZE((_m)) >> M2P_SHIFT)
+     /* Nominate page */
+     ret = xc_mem_paging_nominate(xch, paging->vm_event.domain_id, gfn);
+@@ -627,13 +627,13 @@ static int xenpaging_evict_page(struct xenpaging *paging, unsigned long gfn, int
+     if ( ret < 0 )
+     {
+         PERROR("Error copying page %lx", gfn);
+-        munmap(page, PAGE_SIZE);
++        munmap(page, XC_PAGE_SIZE);
+         ret = -1;
+         goto out;
+     }
  
--#define GET_FIELD(_p, _f, _w) (((_w) == 8) ? ((_p)->x64._f) : ((_p)->x32._f))
--
--#define SET_FIELD(_p, _f, _v, _w) do {          \
--    if ((_w) == 8)                              \
--        (_p)->x64._f = (_v);                    \
--    else                                        \
--        (_p)->x32._f = (_v);                    \
--} while (0)
--
- #define UNFOLD_CR3(_c)                                                  \
-   ((uint64_t)((dinfo->guest_width == 8)                                 \
-               ? ((_c) >> 12)                                            \
+     /* Release page */
+-    munmap(page, PAGE_SIZE);
++    munmap(page, XC_PAGE_SIZE);
+ 
+     /* Tell Xen to evict page */
+     ret = xc_mem_paging_evict(xch, paging->vm_event.domain_id, gfn);
+diff --git a/tools/xenpaging/xenpaging.h b/tools/xenpaging/xenpaging.h
+index d6c8ee5221..e0fc7b31b8 100644
+--- a/tools/xenpaging/xenpaging.h
++++ b/tools/xenpaging/xenpaging.h
+@@ -23,11 +23,17 @@
+ #ifndef __XEN_PAGING2_H__
+ #define __XEN_PAGING2_H__
+ 
++#include <malloc.h>
++#include <string.h>
++#include <sys/types.h>
++#include <sys/stat.h>
++#include <fcntl.h>
++#include <sys/mman.h>
+ 
+ #include <xenevtchn.h>
+ #define XC_WANT_COMPAT_MAP_FOREIGN_API
+ #include <xenctrl.h>
+-#include <xc_private.h>
++// #include <xc_private.h>
+ #include <xen/event_channel.h>
+ #include <xen/vm_event.h>
+ 
+@@ -44,6 +50,7 @@ struct vm_event {
+ 
+ struct xenpaging {
+     xc_interface *xc_handle;
++    xentoollog_logger *logger;
+     struct xs_handle *xs_handle;
+ 
+     unsigned long *bitmap;
+@@ -67,9 +74,70 @@ struct xenpaging {
+     unsigned long pagein_queue[XENPAGING_PAGEIN_QUEUE_SIZE];
+ };
+ 
++#define DPRINTF(msg, args...) xtl_log(paging->logger, XTL_DETAIL, 0,      \
++                                      "paging", msg, ## args)
++#define ERROR(msg, args...)   xtl_log(paging->logger, XTL_ERROR, -1,      \
++                                      "paging", msg, ## args)
++#define PERROR(msg, args...)  xtl_log(paging->logger, XTL_ERROR, -1,      \
++                                      "paging", msg "(%d = %s)", ## args, \
++                                      errno, strerror(errno))
++
+ extern void create_page_in_thread(struct xenpaging *paging);
+ extern void page_in_trigger(void);
+ 
++#define BITS_PER_LONG (sizeof(unsigned long) * 8)
++#define ORDER_LONG (sizeof(unsigned long) == 4 ? 5 : 6)
++
++#define BITMAP_ENTRY(_nr,_bmap) ((_bmap))[(_nr) / 8]
++#define BITMAP_SHIFT(_nr) ((_nr) % 8)
++
++static inline int bitmap_size(int nr_bits)
++{
++    return (nr_bits + 7) / 8;
++}
++
++static inline void *bitmap_alloc(int nr_bits)
++{
++    return calloc(1, bitmap_size(nr_bits));
++}
++
++static inline void bitmap_clear(void *addr, int nr_bits)
++{
++    memset(addr, 0, bitmap_size(nr_bits));
++}
++
++static inline int test_bit(int nr, const void *_addr)
++{
++    const char *addr = _addr;
++    return (BITMAP_ENTRY(nr, addr) >> BITMAP_SHIFT(nr)) & 1;
++}
++
++static inline void clear_bit(int nr, void *_addr)
++{
++    char *addr = _addr;
++    BITMAP_ENTRY(nr, addr) &= ~(1UL << BITMAP_SHIFT(nr));
++}
++
++static inline void set_bit(int nr, void *_addr)
++{
++    char *addr = _addr;
++    BITMAP_ENTRY(nr, addr) |= (1UL << BITMAP_SHIFT(nr));
++}
++
++static inline int test_and_clear_bit(int nr, void *addr)
++{
++    int oldbit = test_bit(nr, addr);
++    clear_bit(nr, addr);
++    return oldbit;
++}
++
++static inline int test_and_set_bit(int nr, void *addr)
++{
++    int oldbit = test_bit(nr, addr);
++    set_bit(nr, addr);
++    return oldbit;
++}
++
+ #endif // __XEN_PAGING_H__
+ 
+ 
 -- 
 2.26.2
 
