@@ -7,58 +7,57 @@ X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 09A6DC433E2
-	for <xen-devel@archiver.kernel.org>; Sun, 30 Aug 2020 04:04:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E41D3C433E2
+	for <xen-devel@archiver.kernel.org>; Sun, 30 Aug 2020 04:53:48 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BCA4820693
-	for <xen-devel@archiver.kernel.org>; Sun, 30 Aug 2020 04:04:45 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id A3C0B2083E
+	for <xen-devel@archiver.kernel.org>; Sun, 30 Aug 2020 04:53:48 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="R+OAa9eW"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BCA4820693
+	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="SdsCZFl1"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A3C0B2083E
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kCEZs-0004q3-0J; Sun, 30 Aug 2020 04:04:24 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kCFL6-0000lR-3J; Sun, 30 Aug 2020 04:53:12 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ueMT=CI=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
- id 1kCEZr-0004py-1E
- for xen-devel@lists.xenproject.org; Sun, 30 Aug 2020 04:04:23 +0000
-X-Inumbo-ID: 15eccb4b-4901-4f64-aaff-b395b1257996
+ id 1kCFL4-0000lM-J5
+ for xen-devel@lists.xenproject.org; Sun, 30 Aug 2020 04:53:10 +0000
+X-Inumbo-ID: bb0804f5-7fcc-47bf-b568-718a4411ca87
 Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 15eccb4b-4901-4f64-aaff-b395b1257996;
- Sun, 30 Aug 2020 04:04:21 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id bb0804f5-7fcc-47bf-b568-718a4411ca87;
+ Sun, 30 Aug 2020 04:53:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
  Content-Transfer-Encoding:Content-Type:Message-ID:To;
- bh=Wwrb4jTKugTTjq/zUfefausikgi8vTgerMjxB/y7f9E=; b=R+OAa9eWFGi+tzu/FZ9ztrVR3s
- 5wNgppGQgV1vg9rPsPmugV8A+ZtI1p6Y+eu9Ilv4kVHYthkLRUXirwhtr2M12diRrI9FidZFbl4ud
- DSZHIWt+s6B5T+kLGgECfobEzaA9RKoBw1cJeg24b9zlwBwryp9t380WP/XqNcRONGXw=;
+ bh=uohuSC3FbXSMy4YDWy++wRS20K1Vygq+FbxjoQtIidQ=; b=SdsCZFl1qE3Dy6ijJbBmkLFa3m
+ hRBqgRMhO+prj0Vvz/SSTAUeGcrvS/nDAA1JJ6Gq8vXmcGUYZB6jzGbqW+j1jMmB4ggyQOWSYjGr/
+ bLXdPhdGaqccEy7eLvK4SyoU9kfRI+R11C2qZubb9lGPs1FoNJoWJnJtkC70JEzL6nZw=;
 Received: from host146.205.237.98.conversent.net ([205.237.98.146]
  helo=infra.test-lab.xenproject.org)
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1kCEZp-0006tL-J2; Sun, 30 Aug 2020 04:04:21 +0000
+ id 1kCFL2-0007zu-G3; Sun, 30 Aug 2020 04:53:08 +0000
 Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
  by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1kCEZp-0005dc-7E; Sun, 30 Aug 2020 04:04:21 +0000
+ id 1kCFL2-0007ne-AF; Sun, 30 Aug 2020 04:53:08 +0000
 Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
  4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1kCEZp-00070E-6o; Sun, 30 Aug 2020 04:04:21 +0000
+ id 1kCFL2-0003Im-9n; Sun, 30 Aug 2020 04:53:08 +0000
 To: xen-devel@lists.xenproject.org,
     osstest-admin@xenproject.org
-Message-ID: <osstest-153139-mainreport@xen.org>
+Message-ID: <osstest-153142-mainreport@xen.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Subject: [ovmf test] 153139: regressions - FAIL
+Subject: [ovmf test] 153142: regressions - FAIL
 X-Osstest-Failures: ovmf:build-i386:xen-build:fail:regression
  ovmf:build-i386-xsm:xen-build:fail:regression
  ovmf:build-amd64-xsm:xen-build:fail:regression
@@ -70,7 +69,7 @@ X-Osstest-Failures: ovmf:build-i386:xen-build:fail:regression
 X-Osstest-Versions-This: ovmf=5ffcbc46908a2037ae3260d3cfcc103e4a6a48c0
 X-Osstest-Versions-That: ovmf=63d92674d240ab4ecab94f98e1e198842bb7de00
 From: osstest service owner <osstest-admin@xenproject.org>
-Date: Sun, 30 Aug 2020 04:04:21 +0000
+Date: Sun, 30 Aug 2020 04:53:08 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,8 +83,8 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-flight 153139 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/153139/
+flight 153142 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/153142/
 
 Regressions :-(
 
@@ -108,8 +107,8 @@ baseline version:
  ovmf                 63d92674d240ab4ecab94f98e1e198842bb7de00
 
 Last test of basis   152863  2020-08-26 16:09:47 Z    3 days
-Failing since        152915  2020-08-27 18:09:42 Z    2 days   58 attempts
-Testing same since   153135  2020-08-30 02:28:59 Z    0 days    2 attempts
+Failing since        152915  2020-08-27 18:09:42 Z    2 days   59 attempts
+Testing same since   153135  2020-08-30 02:28:59 Z    0 days    3 attempts
 
 ------------------------------------------------------------
 People who touched revisions under test:
