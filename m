@@ -7,45 +7,45 @@ X-Spam-Status: No, score=-13.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B4092C2BB4D
-	for <xen-devel@archiver.kernel.org>; Mon, 31 Aug 2020 15:31:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B8D18C433E6
+	for <xen-devel@archiver.kernel.org>; Mon, 31 Aug 2020 15:32:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 87EDF21556
-	for <xen-devel@archiver.kernel.org>; Mon, 31 Aug 2020 15:31:48 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 893DA2168B
+	for <xen-devel@archiver.kernel.org>; Mon, 31 Aug 2020 15:32:00 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="lC+QwGro"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 87EDF21556
+	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="N6gCBwhp"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 893DA2168B
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kClmT-0006Aj-IB; Mon, 31 Aug 2020 15:31:37 +0000
+	id 1kClmh-0006EM-34; Mon, 31 Aug 2020 15:31:51 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=NCiD=CJ=kernel.org=sashal@srs-us1.protection.inumbo.net>)
- id 1kClmS-0006AP-B8
- for xen-devel@lists.xenproject.org; Mon, 31 Aug 2020 15:31:36 +0000
-X-Inumbo-ID: 223458d6-87cb-4c71-9035-41cbfde2559b
+ id 1kClmg-0006EA-Af
+ for xen-devel@lists.xenproject.org; Mon, 31 Aug 2020 15:31:50 +0000
+X-Inumbo-ID: aeac35d9-5ee8-403d-95e3-a2cbbd8af64e
 Received: from mail.kernel.org (unknown [198.145.29.99])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 223458d6-87cb-4c71-9035-41cbfde2559b;
- Mon, 31 Aug 2020 15:31:35 +0000 (UTC)
+ id aeac35d9-5ee8-403d-95e3-a2cbbd8af64e;
+ Mon, 31 Aug 2020 15:31:49 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id E30272158C;
- Mon, 31 Aug 2020 15:31:33 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 5FD8D21531;
+ Mon, 31 Aug 2020 15:31:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1598887895;
+ s=default; t=1598887909;
  bh=h6ks64jl06DbIv9dD4cgt72UfJdgdym0WvGOZh3FOfA=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=lC+QwGroMdjT6AeQWpLRvHHV20zyd/GbWFGVxUjklsbs5lZH1P10eoRLLfHD8+06M
- dBEC+QdLjXOZkjQxyf2OKLRczznCeswTAu2+tyREXFUriqddQKDhhq9KRWtPfu0Wi3
- M4KY4Rp+rkC1mX8WzCuOjvxvUizIOVoBZM0QFEuY=
+ b=N6gCBwhpOWA62Ey/iSK8xrpnVFNaOnZLxS0qaarGtMjH9VnLHN8nrKd5x40iNCOCx
+ n9u5eI2KdBRp0c0TI7u5Cpjb+jQ9wDi6vacv9++6F6c7gjjeFBN7idhMGYPXKNO7b+
+ PWWY9Kad6LsVqTm3JMhwdVOJGHVpxfm6bkY8SAi8=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
@@ -53,13 +53,12 @@ Cc: Simon Leiner <simon@leiner.me>,
  Stefano Stabellini <sstabellini@kernel.org>,
  Juergen Gross <jgross@suse.com>, Sasha Levin <sashal@kernel.org>,
  xen-devel@lists.xenproject.org
-Subject: [PATCH AUTOSEL 4.19 11/11] xen/xenbus: Fix granting of vmalloc'd
- memory
-Date: Mon, 31 Aug 2020 11:31:17 -0400
-Message-Id: <20200831153117.1024537-11-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 4.14 9/9] xen/xenbus: Fix granting of vmalloc'd memory
+Date: Mon, 31 Aug 2020 11:31:36 -0400
+Message-Id: <20200831153136.1024676-9-sashal@kernel.org>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20200831153117.1024537-1-sashal@kernel.org>
-References: <20200831153117.1024537-1-sashal@kernel.org>
+In-Reply-To: <20200831153136.1024676-1-sashal@kernel.org>
+References: <20200831153136.1024676-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
