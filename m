@@ -2,85 +2,74 @@ Return-Path: <SRS0=dV6x=CK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.1 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DF397C433E6
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Sep 2020 00:11:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2C29AC433E6
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Sep 2020 02:23:56 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B28732078B
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Sep 2020 00:11:43 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id E4B00206F0
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Sep 2020 02:23:55 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="jFvnfywm"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B28732078B
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="bKwIaeuw"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E4B00206F0
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kCttI-0001sA-GP; Tue, 01 Sep 2020 00:11:12 +0000
+	id 1kCvx1-0001C1-W2; Tue, 01 Sep 2020 02:23:11 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Hn3Q=CK=gmail.com=rosbrookn@srs-us1.protection.inumbo.net>)
- id 1kCttH-0001rt-B1
- for xen-devel@lists.xenproject.org; Tue, 01 Sep 2020 00:11:11 +0000
-X-Inumbo-ID: 36012594-5be5-4ae7-9f1b-36e5500f7e11
-Received: from mail-qv1-xf2c.google.com (unknown [2607:f8b0:4864:20::f2c])
+ <SRS0=QQ0y=CK=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
+ id 1kCvx0-0001Bh-Ip
+ for xen-devel@lists.xenproject.org; Tue, 01 Sep 2020 02:23:10 +0000
+X-Inumbo-ID: 42425d82-48ba-4737-acec-40c0dba46057
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 36012594-5be5-4ae7-9f1b-36e5500f7e11;
- Tue, 01 Sep 2020 00:11:06 +0000 (UTC)
-Received: by mail-qv1-xf2c.google.com with SMTP id h1so1965691qvo.9
- for <xen-devel@lists.xenproject.org>; Mon, 31 Aug 2020 17:11:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :in-reply-to:references;
- bh=4NqMQIvKR+cjPWOKjy1YxbxPsO0+lnWPEKbNxZzXwjU=;
- b=jFvnfywmTtiMJU9SOpVcCiJlyCVr+Ri3bPz76Z9vfvCRsP0aVNQwmCJuIIe4n5mJFC
- Ei9Wmb4xE7QUS4CQnLhKfZvFAmP1FDLpxwYcBzr8kjh6DanQNEoPOUC4d7ZMbDHUtFGo
- kj1XOMRyNX++1fx4HboUNlmS4gN++4IvTqg8O0EsRFSp0lwIMXdiFtuOB3n9quubUOGP
- K1GiPbWP2IdMrA0Qi6uo3gDfuhMc6hhJF4uxrsFFnEKiBNpV0dDzE7IJsuW/4QhPZ9xC
- /TjNmiZHjXx97pwIAvjBELazGbAKd8PaOXxsbTiyKcW83jqM0Ole2KgB4ILiHQMcMXv0
- 5aYg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:in-reply-to:references;
- bh=4NqMQIvKR+cjPWOKjy1YxbxPsO0+lnWPEKbNxZzXwjU=;
- b=oPJmKLNdJx1vW822mPY9puUBf7ulKZiPqafCtQAfy8tmg8Hd3S/QiDze/ZWIxS/Yfw
- xgH2dn36II7BByN4/+6fESoKqgbqFlMZueAz/trDjbdVIKMCQAELkZNYP0yvuokSwIpQ
- qUCai04b8sEI6ac7U1rJTa6id7tdx0ER0nH6IJR4t4+9szSRRNzmeL2v2KyZwhMXWKik
- JlnkhRBp9Y5uuI+1PWN5hrSeciDC/b6E1SrIggZjAuvkJQ0NdRj0i07f7STRc/W8qqZk
- q8PJ53N3n7jJ0rW1ZOuogV+/6Ym6UqJvUA+EeY9RMWSVx7fpNGeqtsDqXeQnH0xYxh4w
- QgBA==
-X-Gm-Message-State: AOAM530ezEE9++6QlNo3ZgA+URfHxuGasosTdpdF4/KtFq+WtTlJFujs
- DYf0iLGez3HE0HNXUi4LnelI54JG+OU2Rg==
-X-Google-Smtp-Source: ABdhPJy8fb0P45dahxyVr4Rd9ZAJ3OHpBcNNnw19/ETtG6rEJ3qkMfCdecS4x1/+QxwzzTBgO1WCOQ==
-X-Received: by 2002:ad4:51c8:: with SMTP id p8mr3688380qvq.31.1598919065697;
- Mon, 31 Aug 2020 17:11:05 -0700 (PDT)
-Received: from six.home (cpe-67-241-56-252.twcny.res.rr.com. [67.241.56.252])
- by smtp.gmail.com with ESMTPSA id
- d10sm3371675qkk.1.2020.08.31.17.11.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 31 Aug 2020 17:11:05 -0700 (PDT)
-From: Nick Rosbrook <rosbrookn@gmail.com>
-X-Google-Original-From: Nick Rosbrook <rosbrookn@ainfosec.com>
-To: xen-devel@lists.xenproject.org
-Cc: Nick Rosbrook <rosbrookn@ainfosec.com>,
- George Dunlap <george.dunlap@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH 1/2] golang/xenlight: export keyed union interface types
-Date: Mon, 31 Aug 2020 20:10:57 -0400
-Message-Id: <554916143fa18f389902cca888490d54cbb6b77a.1598918801.git.rosbrookn@ainfosec.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <cover.1598918801.git.rosbrookn@ainfosec.com>
-References: <cover.1598918801.git.rosbrookn@ainfosec.com>
-In-Reply-To: <cover.1598918801.git.rosbrookn@ainfosec.com>
-References: <cover.1598918801.git.rosbrookn@ainfosec.com>
+ id 42425d82-48ba-4737-acec-40c0dba46057;
+ Tue, 01 Sep 2020 02:23:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+ Content-Transfer-Encoding:Content-Type:Message-ID:To;
+ bh=Yh363DPfA5rhv0GhHWWk0qjzp8RrkW2wmKsrBet5d74=; b=bKwIaeuwE5diJ0Vpvd/D4YOlBi
+ YNa3GXnPdeMw4/rm9hj0RveGfOjafLyRzUzkuZyJXiM/fa+bn4d/wiLN0jDA9CxZeWyx+iNmlNlB/
+ goCwcUZV4ZIRKgfRPgSVUE6nWUdYKOav5r6rooN2kmqrKR4JhNJ4BU1LvSRvCvPmTVrY=;
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kCvwt-0000ob-Cp; Tue, 01 Sep 2020 02:23:03 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kCvwt-0003BH-4E; Tue, 01 Sep 2020 02:23:03 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1kCvwt-000336-3j; Tue, 01 Sep 2020 02:23:03 +0000
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-153417-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [ovmf test] 153417: regressions - FAIL
+X-Osstest-Failures: ovmf:build-i386-xsm:xen-build:fail:regression
+ ovmf:build-amd64-xsm:xen-build:fail:regression
+ ovmf:build-amd64:xen-build:fail:regression
+ ovmf:build-i386:xen-build:fail:regression
+ ovmf:build-amd64-libvirt:build-check(1):blocked:nonblocking
+ ovmf:build-i386-libvirt:build-check(1):blocked:nonblocking
+ ovmf:test-amd64-amd64-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
+ ovmf:test-amd64-i386-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
+X-Osstest-Versions-This: ovmf=5ffcbc46908a2037ae3260d3cfcc103e4a6a48c0
+X-Osstest-Versions-That: ovmf=63d92674d240ab4ecab94f98e1e198842bb7de00
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Tue, 01 Sep 2020 02:23:03 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -94,247 +83,183 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-For structs that have a keyed union, e.g. DomainBuildInfo, the TypeUnion
-field must be exported so that package users can get/set the fields
-within. This means that users are aware of the existence of the
-interface type used in those fields (see [1]), so it is awkward that the
-interface itself is not exported. However, the single method within the
-interface must remain unexported so that users cannot mistakenly "implement"
-those interfaces.
+flight 153417 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/153417/
 
-Since there seems to be no reason to do otherwise, export the keyed
-union interface types.
+Regressions :-(
 
-[1] https://pkg.go.dev/xenbits.xenproject.org/git-http/xen.git/tools/golang/xenlight?tab=doc#DeviceUsbdev
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-i386-xsm                6 xen-build                fail REGR. vs. 152863
+ build-amd64-xsm               6 xen-build                fail REGR. vs. 152863
+ build-amd64                   6 xen-build                fail REGR. vs. 152863
+ build-i386                    6 xen-build                fail REGR. vs. 152863
 
-Signed-off-by: Nick Rosbrook <rosbrookn@ainfosec.com>
----
- tools/golang/xenlight/gengotypes.py |  6 +--
- tools/golang/xenlight/types.gen.go  | 58 ++++++++++++++---------------
- 2 files changed, 32 insertions(+), 32 deletions(-)
+Tests which did not succeed, but are not blocking:
+ build-amd64-libvirt           1 build-check(1)               blocked  n/a
+ build-i386-libvirt            1 build-check(1)               blocked  n/a
+ test-amd64-amd64-xl-qemuu-ovmf-amd64  1 build-check(1)             blocked n/a
+ test-amd64-i386-xl-qemuu-ovmf-amd64  1 build-check(1)              blocked n/a
 
-diff --git a/tools/golang/xenlight/gengotypes.py b/tools/golang/xenlight/gengotypes.py
-index ebec938224..9acc8c0b49 100644
---- a/tools/golang/xenlight/gengotypes.py
-+++ b/tools/golang/xenlight/gengotypes.py
-@@ -152,7 +152,7 @@ def xenlight_golang_define_union(ty = None, struct_name = '', union_name = ''):
-     extras = []
- 
-     interface_name = '{0}_{1}_union'.format(struct_name, ty.keyvar.name)
--    interface_name = xenlight_golang_fmt_name(interface_name, exported=False)
-+    interface_name = xenlight_golang_fmt_name(interface_name)
- 
-     s += 'type {0} interface {{\n'.format(interface_name)
-     s += 'is{0}()\n'.format(interface_name)
-@@ -334,7 +334,7 @@ def xenlight_golang_union_from_C(ty = None, union_name = '', struct_name = ''):
-     field_name = xenlight_golang_fmt_name('{0}_union'.format(keyname))
- 
-     interface_name = '{0}_{1}_union'.format(struct_name, keyname)
--    interface_name = xenlight_golang_fmt_name(interface_name, exported=False)
-+    interface_name = xenlight_golang_fmt_name(interface_name)
- 
-     cgo_keyname = keyname
-     if cgo_keyname in go_keywords:
-@@ -538,7 +538,7 @@ def xenlight_golang_union_to_C(ty = None, union_name = '',
-     gokeytype = xenlight_golang_fmt_name(keytype)
- 
-     interface_name = '{0}_{1}_union'.format(struct_name, keyname)
--    interface_name = xenlight_golang_fmt_name(interface_name, exported=False)
-+    interface_name = xenlight_golang_fmt_name(interface_name)
- 
-     cgo_keyname = keyname
-     if cgo_keyname in go_keywords:
-diff --git a/tools/golang/xenlight/types.gen.go b/tools/golang/xenlight/types.gen.go
-index 663c1e86b4..b143e32a9c 100644
---- a/tools/golang/xenlight/types.gen.go
-+++ b/tools/golang/xenlight/types.gen.go
-@@ -337,18 +337,18 @@ State int
- Evtch int
- Rref int
- Connection ChannelConnection
--ConnectionUnion channelinfoConnectionUnion
-+ConnectionUnion ChannelinfoConnectionUnion
- }
- 
--type channelinfoConnectionUnion interface {
--ischannelinfoConnectionUnion()
-+type ChannelinfoConnectionUnion interface {
-+isChannelinfoConnectionUnion()
- }
- 
- type ChannelinfoConnectionUnionPty struct {
- Path string
- }
- 
--func (x ChannelinfoConnectionUnionPty) ischannelinfoConnectionUnion(){}
-+func (x ChannelinfoConnectionUnionPty) isChannelinfoConnectionUnion(){}
- 
- type Vminfo struct {
- Uuid Uuid
-@@ -510,7 +510,7 @@ Apic Defbool
- DmRestrict Defbool
- Tee TeeType
- Type DomainType
--TypeUnion domainBuildInfoTypeUnion
-+TypeUnion DomainBuildInfoTypeUnion
- ArchArm struct {
- GicVersion GicVersion
- Vuart VuartType
-@@ -518,8 +518,8 @@ Vuart VuartType
- Altp2M Altp2MMode
- }
- 
--type domainBuildInfoTypeUnion interface {
--isdomainBuildInfoTypeUnion()
-+type DomainBuildInfoTypeUnion interface {
-+isDomainBuildInfoTypeUnion()
- }
- 
- type DomainBuildInfoTypeUnionHvm struct {
-@@ -571,7 +571,7 @@ RdmMemBoundaryMemkb uint64
- McaCaps uint64
- }
- 
--func (x DomainBuildInfoTypeUnionHvm) isdomainBuildInfoTypeUnion(){}
-+func (x DomainBuildInfoTypeUnionHvm) isDomainBuildInfoTypeUnion(){}
- 
- type DomainBuildInfoTypeUnionPv struct {
- Kernel string
-@@ -584,7 +584,7 @@ Features string
- E820Host Defbool
- }
- 
--func (x DomainBuildInfoTypeUnionPv) isdomainBuildInfoTypeUnion(){}
-+func (x DomainBuildInfoTypeUnionPv) isDomainBuildInfoTypeUnion(){}
- 
- type DomainBuildInfoTypeUnionPvh struct {
- Pvshim Defbool
-@@ -593,7 +593,7 @@ PvshimCmdline string
- PvshimExtra string
- }
- 
--func (x DomainBuildInfoTypeUnionPvh) isdomainBuildInfoTypeUnion(){}
-+func (x DomainBuildInfoTypeUnionPvh) isDomainBuildInfoTypeUnion(){}
- 
- type DeviceVfb struct {
- BackendDomid Domid
-@@ -756,11 +756,11 @@ type DeviceUsbdev struct {
- Ctrl Devid
- Port int
- Type UsbdevType
--TypeUnion deviceUsbdevTypeUnion
-+TypeUnion DeviceUsbdevTypeUnion
- }
- 
--type deviceUsbdevTypeUnion interface {
--isdeviceUsbdevTypeUnion()
-+type DeviceUsbdevTypeUnion interface {
-+isDeviceUsbdevTypeUnion()
- }
- 
- type DeviceUsbdevTypeUnionHostdev struct {
-@@ -768,7 +768,7 @@ Hostbus byte
- Hostaddr byte
- }
- 
--func (x DeviceUsbdevTypeUnionHostdev) isdeviceUsbdevTypeUnion(){}
-+func (x DeviceUsbdevTypeUnionHostdev) isDeviceUsbdevTypeUnion(){}
- 
- type DeviceDtdev struct {
- Path string
-@@ -802,18 +802,18 @@ BackendDomname string
- Devid Devid
- Name string
- Connection ChannelConnection
--ConnectionUnion deviceChannelConnectionUnion
-+ConnectionUnion DeviceChannelConnectionUnion
- }
- 
--type deviceChannelConnectionUnion interface {
--isdeviceChannelConnectionUnion()
-+type DeviceChannelConnectionUnion interface {
-+isDeviceChannelConnectionUnion()
- }
- 
- type DeviceChannelConnectionUnionSocket struct {
- Path string
- }
- 
--func (x DeviceChannelConnectionUnionSocket) isdeviceChannelConnectionUnion(){}
-+func (x DeviceChannelConnectionUnionSocket) isDeviceChannelConnectionUnion(){}
- 
- type ConnectorParam struct {
- UniqueId string
-@@ -1110,31 +1110,31 @@ Domid Domid
- Domuuid Uuid
- ForUser uint64
- Type EventType
--TypeUnion eventTypeUnion
-+TypeUnion EventTypeUnion
- }
- 
--type eventTypeUnion interface {
--iseventTypeUnion()
-+type EventTypeUnion interface {
-+isEventTypeUnion()
- }
- 
- type EventTypeUnionDomainShutdown struct {
- ShutdownReason byte
- }
- 
--func (x EventTypeUnionDomainShutdown) iseventTypeUnion(){}
-+func (x EventTypeUnionDomainShutdown) isEventTypeUnion(){}
- 
- type EventTypeUnionDiskEject struct {
- Vdev string
- Disk DeviceDisk
- }
- 
--func (x EventTypeUnionDiskEject) iseventTypeUnion(){}
-+func (x EventTypeUnionDiskEject) isEventTypeUnion(){}
- 
- type EventTypeUnionOperationComplete struct {
- Rc int
- }
- 
--func (x EventTypeUnionOperationComplete) iseventTypeUnion(){}
-+func (x EventTypeUnionOperationComplete) isEventTypeUnion(){}
- 
- type PsrCmtType int
- const(
-@@ -1169,11 +1169,11 @@ PsrFeatTypeMba PsrFeatType = 2
- type PsrHwInfo struct {
- Id uint32
- Type PsrFeatType
--TypeUnion psrHwInfoTypeUnion
-+TypeUnion PsrHwInfoTypeUnion
- }
- 
--type psrHwInfoTypeUnion interface {
--ispsrHwInfoTypeUnion()
-+type PsrHwInfoTypeUnion interface {
-+isPsrHwInfoTypeUnion()
- }
- 
- type PsrHwInfoTypeUnionCat struct {
-@@ -1182,7 +1182,7 @@ CbmLen uint32
- CdpEnabled bool
- }
- 
--func (x PsrHwInfoTypeUnionCat) ispsrHwInfoTypeUnion(){}
-+func (x PsrHwInfoTypeUnionCat) isPsrHwInfoTypeUnion(){}
- 
- type PsrHwInfoTypeUnionMba struct {
- CosMax uint32
-@@ -1190,5 +1190,5 @@ ThrtlMax uint32
- Linear bool
- }
- 
--func (x PsrHwInfoTypeUnionMba) ispsrHwInfoTypeUnion(){}
-+func (x PsrHwInfoTypeUnionMba) isPsrHwInfoTypeUnion(){}
- 
--- 
-2.17.1
+version targeted for testing:
+ ovmf                 5ffcbc46908a2037ae3260d3cfcc103e4a6a48c0
+baseline version:
+ ovmf                 63d92674d240ab4ecab94f98e1e198842bb7de00
 
+Last test of basis   152863  2020-08-26 16:09:47 Z    5 days
+Failing since        152915  2020-08-27 18:09:42 Z    4 days   88 attempts
+Testing same since   153135  2020-08-30 02:28:59 Z    1 days   32 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Laszlo Ersek <lersek@redhat.com>
+  Paul <paul.grimes@amd.com>
+  Paul G <paul.grimes@amd.com>
+
+jobs:
+ build-amd64-xsm                                              fail    
+ build-i386-xsm                                               fail    
+ build-amd64                                                  fail    
+ build-i386                                                   fail    
+ build-amd64-libvirt                                          blocked 
+ build-i386-libvirt                                           blocked 
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         blocked 
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          blocked 
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+------------------------------------------------------------
+commit 5ffcbc46908a2037ae3260d3cfcc103e4a6a48c0
+Author: Paul <paul.grimes@amd.com>
+Date:   Fri Aug 28 04:40:51 2020 +0800
+
+    MdePkg: Correcting EFI_ACPI_DMA_TRANSFER_TYPE_16_BIT definition
+    
+    In Acpi10.h, EFI_ACPI_DMA_TRANSFER_TYPE_16_BIT is defined as 0x10,
+    but should be 0x02 per the ACPI Specification.
+    
+    REF:https://bugzilla.tianocore.org/show_bug.cgi?id=2937
+    
+    Cc: Michael D Kinney <michael.d.kinney@intel.com>
+    Cc: Liming Gao <gaoliming@byosoft.com.cn>
+    Cc: Zhiguang Liu <zhiguang.liu@intel.com>
+    Signed-off-by: Paul G <paul.grimes@amd.com>
+    Reviewed-by: Liming Gao <gaoliming@byosoft.com.cn>
+
+commit cbccf995920a28071f5403b847f29ebf8b732fa9
+Author: Laszlo Ersek <lersek@redhat.com>
+Date:   Thu Aug 27 00:21:29 2020 +0200
+
+    OvmfPkg/CpuHotplugSmm: fix CPU hotplug race just after SMI broadcast
+    
+    The "virsh setvcpus" (plural) command may hot-plug several VCPUs in quick
+    succession -- it means a series of "device_add" QEMU monitor commands,
+    back-to-back.
+    
+    If a "device_add" occurs *just after* ACPI raises the broadcast SMI, then:
+    
+    - the CPU_FOREACH() loop in QEMU's ich9_apm_ctrl_changed() cannot make the
+      SMI pending for the new CPU -- at that time, the new CPU doesn't even
+      exist yet,
+    
+    - OVMF will find the new CPU however (in the CPU hotplug register block),
+      in QemuCpuhpCollectApicIds().
+    
+    As a result, when the firmware sends an INIT-SIPI-SIPI to the new CPU in
+    SmbaseRelocate(), expecting it to boot into SMM (due to the pending SMI),
+    the new CPU instead boots straight into the post-RSM (normal mode) "pen",
+    skipping its initial SMI handler.
+    
+    The CPU halts nicely in the pen, but its SMBASE is never relocated, and
+    the SMRAM message exchange with the BSP falls apart -- the BSP gets stuck
+    in the following loop:
+    
+      //
+      // Wait until the hot-added CPU is just about to execute RSM.
+      //
+      while (Context->AboutToLeaveSmm == 0) {
+        CpuPause ();
+      }
+    
+    because the new CPU's initial SMI handler never sets the flag to nonzero.
+    
+    Fix this by sending a directed SMI to the new CPU just before sending it
+    the INIT-SIPI-SIPI. The various scenarios are documented in the code --
+    the cases affected by the patch are documented under point (2).
+    
+    Note that this is not considered a security patch, as for a malicious
+    guest OS, the issue is not exploitable -- the symptom is a hang on the
+    BSP, in the above-noted loop in SmbaseRelocate(). Instead, the patch fixes
+    behavior for a benign guest OS.
+    
+    Cc: Ard Biesheuvel <ard.biesheuvel@arm.com>
+    Cc: Igor Mammedov <imammedo@redhat.com>
+    Cc: Jordan Justen <jordan.l.justen@intel.com>
+    Cc: Philippe Mathieu-Daudé <philmd@redhat.com>
+    Fixes: 51a6fb41181529e4b50ea13377425bda6bb69ba6
+    Ref: https://bugzilla.tianocore.org/show_bug.cgi?id=2929
+    Signed-off-by: Laszlo Ersek <lersek@redhat.com>
+    Message-Id: <20200826222129.25798-3-lersek@redhat.com>
+    Reviewed-by: Ard Biesheuvel <ard.biesheuvel@arm.com>
+
+commit 020bb4b46d6f6708bb3358e1c738109b7908f0de
+Author: Laszlo Ersek <lersek@redhat.com>
+Date:   Thu Aug 27 00:21:28 2020 +0200
+
+    OvmfPkg/CpuHotplugSmm: fix CPU hotplug race just before SMI broadcast
+    
+    The "virsh setvcpus" (plural) command may hot-plug several VCPUs in quick
+    succession -- it means a series of "device_add" QEMU monitor commands,
+    back-to-back.
+    
+    If a "device_add" occurs *just before* ACPI raises the broadcast SMI,
+    then:
+    
+    - OVMF processes the hot-added CPU well.
+    
+    - However, QEMU's post-SMI ACPI loop -- which clears the pending events
+      for the hot-added CPUs that were collected before raising the SMI -- is
+      unaware of the stray CPU. Thus, the pending event is not cleared for it.
+    
+    As a result of the stuck event, at the next hot-plug, OVMF tries to re-add
+    (relocate for the 2nd time) the already-known CPU. At that time, the AP is
+    already in the normal edk2 SMM busy-wait however, so it doesn't respond to
+    the exchange that the BSP intends to do in SmbaseRelocate(). Thus the VM
+    gets stuck in SMM.
+    
+    (Because of the above symptom, this is not considered a security patch; it
+    doesn't seem exploitable by a malicious guest OS.)
+    
+    In CpuHotplugMmi(), skip the supposedly hot-added CPU if it's already
+    known. The post-SMI ACPI loop will clear the pending event for it this
+    time.
+    
+    Cc: Ard Biesheuvel <ard.biesheuvel@arm.com>
+    Cc: Igor Mammedov <imammedo@redhat.com>
+    Cc: Jordan Justen <jordan.l.justen@intel.com>
+    Cc: Philippe Mathieu-Daudé <philmd@redhat.com>
+    Fixes: bc498ac4ca7590479cfd91ad1bb8a36286b0dc21
+    Ref: https://bugzilla.tianocore.org/show_bug.cgi?id=2929
+    Signed-off-by: Laszlo Ersek <lersek@redhat.com>
+    Message-Id: <20200826222129.25798-2-lersek@redhat.com>
+    Reviewed-by: Ard Biesheuvel <ard.biesheuvel@arm.com>
 
