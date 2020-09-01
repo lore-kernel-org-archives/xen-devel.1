@@ -2,55 +2,72 @@ Return-Path: <SRS0=dV6x=CK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-10.6 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D52EC433E2
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Sep 2020 10:56:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 31848C433E6
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Sep 2020 11:10:52 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E964820665
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Sep 2020 10:56:03 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E964820665
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id E152720BED
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Sep 2020 11:10:51 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="LUF5PaIa"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E152720BED
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kD3x8-00077r-2z; Tue, 01 Sep 2020 10:55:50 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=v4C0=CK=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kD3x6-00077g-Mo
- for xen-devel@lists.xenproject.org; Tue, 01 Sep 2020 10:55:48 +0000
-X-Inumbo-ID: 767e7d5f-02f4-4539-a21b-1e8f3faedc57
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 767e7d5f-02f4-4539-a21b-1e8f3faedc57;
- Tue, 01 Sep 2020 10:55:47 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 67A64AD56;
- Tue,  1 Sep 2020 10:55:47 +0000 (UTC)
-Subject: Re: [PATCH] tools: don't use = after "define" in Rules.mk
-To: Jan Beulich <jbeulich@suse.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>
-References: <1cd1289b-f63a-a74e-a331-b93351781457@suse.com>
-From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Message-ID: <81fece45-1bbb-22f4-f229-3894c07e186e@suse.com>
-Date: Tue, 1 Sep 2020 12:55:45 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.11.0
+	id 1kD4BR-0000Ve-V0; Tue, 01 Sep 2020 11:10:37 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=M6GQ=CK=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1kD4BQ-0000V0-EY
+ for xen-devel@lists.xenproject.org; Tue, 01 Sep 2020 11:10:36 +0000
+X-Inumbo-ID: 263c1e8f-9c54-440b-83fd-2fc466c9c4e2
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 263c1e8f-9c54-440b-83fd-2fc466c9c4e2;
+ Tue, 01 Sep 2020 11:10:33 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1598958633;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=gPkcofx5wqS3WmC+5Y4XByDXXhvalyO2X0/eP2W2w0Y=;
+ b=LUF5PaIau8vuR2UAKFRouQnN/+opAqlteLXuhZzKDcZtSJ3aAUQrMTdj
+ 6SZO8YUF5TpDRQnio5WMeB3GOBIY7QFMy4gM9eARX1J2r42V/Mw7FhpiJ
+ fnx5MIg8hByJ6cOqRKKELrgCqfHMFOjvWHC3uPxRqWTu0lEjEMCs1C1xt c=;
+Authentication-Results: esa4.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none
+IronPort-SDR: JsMJ9J27Kg39sWJ/sRl19UZjLueF8UIkQy4ZHaibDeBsyM/hD7ZGV9hZWP2Ywjfqq+d1rPpRPE
+ NVTySGipQDaxDw63IENjKLFdQ7olxPE+D30p/VpuYSHRIEPQtsMauWbfmwiC5sWH9x2emQVk5p
+ eC6lGWVVQtPE0AP0HKXk3WeLbuB5UEwTHrvpd4az6vbT0ytUodgRfewOqWpYUZNUx/1NRCvxTE
+ G6vIPHN6cZuIbtv9siz8xTC0g5QqaAwezM2vk3jII+oS7PEKsYrXTwBlmjpvL/3LZjW+1HvUK8
+ GiQ=
+X-SBRS: 2.7
+X-MesageID: 26679910
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.76,378,1592884800"; d="scan'208";a="26679910"
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Roger Pau Monne <roger.pau@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH v3 2/8] x86/svm: silently drop writes to SYSCFG and related
+ MSRs
+Date: Tue, 1 Sep 2020 12:54:39 +0200
+Message-ID: <20200901105445.22277-3-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.28.0
+In-Reply-To: <20200901105445.22277-1-roger.pau@citrix.com>
+References: <20200901105445.22277-1-roger.pau@citrix.com>
 MIME-Version: 1.0
-In-Reply-To: <1cd1289b-f63a-a74e-a331-b93351781457@suse.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,30 +81,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 01.09.20 12:27, Jan Beulich wrote:
-> The assignment operator is optional, and use of it breaks with make 3.81.
-> 
-> Fixes: ded08cdfa72b ("tools: generate most contents of library make variables")
-> Suggested-by: Juergen Gross <jgross@suse.com>
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-> 
-> --- a/tools/Rules.mk
-> +++ b/tools/Rules.mk
-> @@ -94,7 +94,7 @@ INSTALL_DIR_ROOT = [ $$UID -ne 0 ] || $(
->   # Consumers of libfoo should not directly use $(SHDEPS_libfoo) or
->   # $(SHLIB_libfoo)
->   
-> -define LIB_defs =
-> +define LIB_defs
->    XEN_libxen$(1) = $$(XEN_ROOT)/tools/libs/$(1)
->    CFLAGS_libxen$(1) = -I$$(XEN_libxen$(1))/include $$(CFLAGS_xeninclude)
->    SHDEPS_libxen$(1) = $$(foreach use,$$(USELIBS_$(1)),$$(SHLIB_libxen$$(use)))
-> 
+The SYSCFG, TOP_MEM1 and TOP_MEM2 MSRs are currently exposed to guests
+and writes are silently discarded. Make this explicit in the SVM code
+now, and just return default constant values when attempting to read
+any of the MSRs, while continuing to silently drop writes.
 
-I'd suggest to fix stubdom/Makefile, too (that was introduced with
-commit ddb2934a914df). I have a patch doing both fixes lying here. Do
-you want me to send it instead, or fix it yourself?
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+Changes since v2:
+ - Return 0 from SYSCFG.
+ - Merge switch cases.
 
+Changes sincxe v1:
+ - Return MtrrFixDramEn in MSR_K8_SYSCFG.
+---
+ xen/arch/x86/hvm/svm/svm.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-Juergen
+diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
+index ca3bbfcbb3..af584ff5d1 100644
+--- a/xen/arch/x86/hvm/svm/svm.c
++++ b/xen/arch/x86/hvm/svm/svm.c
+@@ -1917,6 +1917,9 @@ static int svm_msr_read_intercept(unsigned int msr, uint64_t *msr_content)
+             goto gpf;
+         break;
+ 
++    case MSR_K8_SYSCFG:
++    case MSR_K8_TOP_MEM1:
++    case MSR_K8_TOP_MEM2:
+     case MSR_K8_VM_CR:
+         *msr_content = 0;
+         break;
+@@ -2094,6 +2097,9 @@ static int svm_msr_write_intercept(unsigned int msr, uint64_t msr_content)
+             goto gpf;
+         break;
+ 
++    case MSR_K8_TOP_MEM1:
++    case MSR_K8_TOP_MEM2:
++    case MSR_K8_SYSCFG:
+     case MSR_K8_VM_CR:
+         /* ignore write. handle all bits as read-only. */
+         break;
+-- 
+2.28.0
+
 
