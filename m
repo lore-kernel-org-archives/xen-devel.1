@@ -2,70 +2,55 @@ Return-Path: <SRS0=dV6x=CK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-10.6 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E5411C433E7
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Sep 2020 11:11:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AB007C433E2
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Sep 2020 11:41:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B141C20FC3
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Sep 2020 11:11:04 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="DR5CYW7d"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B141C20FC3
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id 85292206FA
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Sep 2020 11:41:57 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 85292206FA
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kD4Bh-0000eN-5n; Tue, 01 Sep 2020 11:10:53 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=M6GQ=CK=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1kD4Bf-0000V0-Ev
- for xen-devel@lists.xenproject.org; Tue, 01 Sep 2020 11:10:51 +0000
-X-Inumbo-ID: 5f199d10-49cb-442b-9f02-d3ab43f2ec64
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 5f199d10-49cb-442b-9f02-d3ab43f2ec64;
- Tue, 01 Sep 2020 11:10:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1598958641;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=M8ARSpqL0nd5zsCpnhZnfQ+5vJo5jg5hBQPEsOCe3kQ=;
- b=DR5CYW7d0mhFqK3eph/ezqb4uJOg8FjrNZ8JxzxCjulG0hdtQl4OdMSY
- Fh1Qh21STokYCUKkdILb1Wu9X3xdn9GtgxKtMiNn3c3HbtF76jonOCMJJ
- Uiay+DdEZKlXtqB1IWV7rYYl9fOudBLFdzYLd50jEVhDW01L+Mcb3AzXG U=;
-Authentication-Results: esa1.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: TLJWm8NpR2KpPCRtGX1o5O+WTPORA4mgc8Ov6yZt8hRZiz4n0P7cd2AQVHj7+0MDJFiBu8CB1a
- Sd+Ss2oTTmwBvCTFszTXwajMkjAsnEwx/8Wlag95o6N88M+xZX+W6EfIMB2KDiT1FB4ysHugcF
- A7NXuPxoY+lXgn+z+9R317l4p5pA7wkkoVbPC3/J7EG8XypPdCaigNvplgTT8203xeSFoodCj3
- oXX7+D02t+2DTG8XIs1XAmfHlSVaJxiN+CK3UXTpf/onlACZfPLMCFR4wfWpuvi0BA5EoqNcEc
- rJI=
-X-SBRS: 2.7
-X-MesageID: 26058627
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,378,1592884800"; d="scan'208";a="26058627"
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Roger Pau Monne <roger.pau@citrix.com>, Jan Beulich <jbeulich@suse.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH v3 6/8] x86/pv: disallow access to unknown MSRs
-Date: Tue, 1 Sep 2020 12:54:43 +0200
-Message-ID: <20200901105445.22277-7-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20200901105445.22277-1-roger.pau@citrix.com>
-References: <20200901105445.22277-1-roger.pau@citrix.com>
+	id 1kD4fD-0003xu-Hf; Tue, 01 Sep 2020 11:41:23 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=WLfn=CK=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1kD4fC-0003xp-9I
+ for xen-devel@lists.xenproject.org; Tue, 01 Sep 2020 11:41:22 +0000
+X-Inumbo-ID: 5d452c0d-59bd-4279-839f-fbc805eecd26
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 5d452c0d-59bd-4279-839f-fbc805eecd26;
+ Tue, 01 Sep 2020 11:41:21 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id BE856B713;
+ Tue,  1 Sep 2020 11:41:20 +0000 (UTC)
+Subject: Re: [PATCH] tools: don't use = after "define" in Rules.mk
+To: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>
+References: <1cd1289b-f63a-a74e-a331-b93351781457@suse.com>
+ <81fece45-1bbb-22f4-f229-3894c07e186e@suse.com>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <62d20484-ecd4-b16b-3549-84deecc1e9ff@suse.com>
+Date: Tue, 1 Sep 2020 13:41:27 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <81fece45-1bbb-22f4-f229-3894c07e186e@suse.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -80,59 +65,32 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Change the catch-all behavior for MSR not explicitly handled. Instead
-of allow full read-access to the MSR space and silently dropping
-writes return an exception when the MSR is not explicitly handled.
+On 01.09.2020 12:55, Jürgen Groß wrote:
+> On 01.09.20 12:27, Jan Beulich wrote:
+>> The assignment operator is optional, and use of it breaks with make 3.81.
+>>
+>> Fixes: ded08cdfa72b ("tools: generate most contents of library make variables")
+>> Suggested-by: Juergen Gross <jgross@suse.com>
+>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+>>
+>> --- a/tools/Rules.mk
+>> +++ b/tools/Rules.mk
+>> @@ -94,7 +94,7 @@ INSTALL_DIR_ROOT = [ $$UID -ne 0 ] || $(
+>>   # Consumers of libfoo should not directly use $(SHDEPS_libfoo) or
+>>   # $(SHLIB_libfoo)
+>>   
+>> -define LIB_defs =
+>> +define LIB_defs
+>>    XEN_libxen$(1) = $$(XEN_ROOT)/tools/libs/$(1)
+>>    CFLAGS_libxen$(1) = -I$$(XEN_libxen$(1))/include $$(CFLAGS_xeninclude)
+>>    SHDEPS_libxen$(1) = $$(foreach use,$$(USELIBS_$(1)),$$(SHLIB_libxen$$(use)))
+>>
+> 
+> I'd suggest to fix stubdom/Makefile, too (that was introduced with
+> commit ddb2934a914df). I have a patch doing both fixes lying here. Do
+> you want me to send it instead, or fix it yourself?
 
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-Changes since v2:
- - Added missing 0x prefix.
----
- xen/arch/x86/pv/emul-priv-op.c | 18 ++++++++++--------
- 1 file changed, 10 insertions(+), 8 deletions(-)
+Please do, since you say you have it ready.
 
-diff --git a/xen/arch/x86/pv/emul-priv-op.c b/xen/arch/x86/pv/emul-priv-op.c
-index bcc1188f6a..2d9953f5b4 100644
---- a/xen/arch/x86/pv/emul-priv-op.c
-+++ b/xen/arch/x86/pv/emul-priv-op.c
-@@ -972,9 +972,10 @@ static int read_msr(unsigned int reg, uint64_t *val,
-         }
-         /* fall through */
-     default:
-+        gdprintk(XENLOG_WARNING, "RDMSR 0x%08x unimplemented\n", reg);
-+        break;
-+
-     normal:
--        /* Everyone can read the MSR space. */
--        /* gdprintk(XENLOG_WARNING, "Domain attempted RDMSR %08x\n", reg); */
-         if ( rdmsr_safe(reg, *val) )
-             break;
-         return X86EMUL_OKAY;
-@@ -1141,14 +1142,15 @@ static int write_msr(unsigned int reg, uint64_t val,
-         }
-         /* fall through */
-     default:
--        if ( rdmsr_safe(reg, temp) )
--            break;
-+        gdprintk(XENLOG_WARNING,
-+                 "WRMSR 0x%08x val 0x%016"PRIx64" unimplemented\n",
-+                 reg, val);
-+        break;
- 
--        if ( val != temp )
-     invalid:
--            gdprintk(XENLOG_WARNING,
--                     "Domain attempted WRMSR %08x from 0x%016"PRIx64" to 0x%016"PRIx64"\n",
--                     reg, temp, val);
-+        gdprintk(XENLOG_WARNING,
-+                 "Domain attempted WRMSR 0x%08x from 0x%016"PRIx64" to 0x%016"PRIx64"\n",
-+                 reg, temp, val);
-         return X86EMUL_OKAY;
-     }
- 
--- 
-2.28.0
-
+Jan
 
