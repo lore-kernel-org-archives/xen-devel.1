@@ -7,62 +7,63 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C230AC433E6
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Sep 2020 11:11:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CD0A5C433E6
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Sep 2020 11:11:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 85EA020BED
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Sep 2020 11:11:02 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 963CC20BED
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Sep 2020 11:11:04 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="ZucdF/IM"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 85EA020BED
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="U7/HLyV9"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 963CC20BED
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kD4Bc-0000aq-EP; Tue, 01 Sep 2020 11:10:48 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kD4Be-0000ca-Ri; Tue, 01 Sep 2020 11:10:50 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=M6GQ=CK=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1kD4Ba-0000V0-Er
- for xen-devel@lists.xenproject.org; Tue, 01 Sep 2020 11:10:46 +0000
-X-Inumbo-ID: b4a32c02-3e24-4821-80ce-c62ed47c5edf
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b4a32c02-3e24-4821-80ce-c62ed47c5edf;
- Tue, 01 Sep 2020 11:10:38 +0000 (UTC)
+ id 1kD4Bd-0000VB-Ef
+ for xen-devel@lists.xenproject.org; Tue, 01 Sep 2020 11:10:49 +0000
+X-Inumbo-ID: af246697-e068-45e2-be8b-515ad49f064f
+Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id af246697-e068-45e2-be8b-515ad49f064f;
+ Tue, 01 Sep 2020 11:10:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1598958637;
+ d=citrix.com; s=securemail; t=1598958644;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=7HwL1hujKKkpV4RAoFw3wKEs/16rVlGWWGTnnzYIk2E=;
- b=ZucdF/IMtMDHyWwqbzVpoaMVwiFzIFQgY69/sIH4vCDsKKjJSG1xTima
- 9/wHjRXp0s20m9dvASFzb4sBh1Kb7X3tKiarBUqwso4cvcIMK73GgNhqU
- dWNlazkahmJZ5++RIocewAvCf4YFFv9DeQAK3dKbtRpxxXii6Agss2UfY E=;
-Authentication-Results: esa6.hc3370-68.iphmx.com;
+ bh=BMnRreRW+++9kfh3egHsOAJKzSNN/TeOyxU8V9BYfgQ=;
+ b=U7/HLyV96dAXwwSPMaEOKTVHSCVzqjDU5gWRYSkBmkGGDORFb3+Kyyec
+ xbKmSg1hUH8nMp/mb0DuIBeQXPi1vIzbmwRj1O8vu948CvEiGf+PkgGyP
+ 7OIPsPEV3pBPrWV8TZwP4wKugGI5n2J6Yv9woYgOZrosp5Vwigu5yAR5i 0=;
+Authentication-Results: esa2.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: fOFVWvz8X0hf2Aq0WsNW70HpeGZbVyRTz8hQsOweEN5t0MV7TeH7unNIkSTXBQ1pij+Qhng6hH
- gbiFo8+XHuOamgk9XWzvgolDFhVGjFsYNxtlIxxyszcVAhdXiW6Ds9MrMhz5E3iLG/1zdbFwgU
- 0eprqZoaAXI4v/f+FgvrTKWC0lPPj28exkcW+W7oqeGHaUv6cM5bFpgdDqyfV3Obp31f4U750y
- xufJGG5PXmAcNrN66m2SjPUm1MwwyreS9BFNYozITUceGM8oy3RR6fCisQ/Qc8+nXAPknX2Kk+
- j6s=
+IronPort-SDR: n4tkfPQ9WS11cDUSwwbxf6JXeWpSpobbzFPEnDYn1ddNg0gElB6ucVlj9pGb1EjVSPXGJCgCRS
+ 8PTvH2SlWtsCCZgZpfi0j4RG84+hxFqGj3abcVH9fMN06KCoppXQvf9S1/mZnCvDEBiqZAW8FY
+ 2fbtlon4kCUz+rcZAHBM1nTm8/g6xRdCvMy5tEiIS/YF9XgdE+iSTD0EXWaj6lEH0U0X8ST1am
+ yi6Sg6N7+T9m1qycq774GO66PrTzGH5+ME83vhLbIIrbi6ifaTvNqfJLS0g+WcxRLXzDKwmfc2
+ 3/U=
 X-SBRS: 2.7
-X-MesageID: 26025443
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 25738160
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,378,1592884800"; d="scan'208";a="26025443"
+X-IronPort-AV: E=Sophos;i="5.76,378,1592884800"; d="scan'208";a="25738160"
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Roger Pau Monne <roger.pau@citrix.com>, Jun Nakajima
- <jun.nakajima@intel.com>, Kevin Tian <kevin.tian@intel.com>, Jan Beulich
- <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu
- <wl@xen.org>
-Subject: [PATCH v3 5/8] x86/pv: allow reading FEATURE_CONTROL MSR
-Date: Tue, 1 Sep 2020 12:54:42 +0200
-Message-ID: <20200901105445.22277-6-roger.pau@citrix.com>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
+ <jbeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+ <roger.pau@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH v3 8/8] x86/msr: Drop compatibility #GP handling in guest_{rd,
+ wr}msr()
+Date: Tue, 1 Sep 2020 12:54:45 +0200
+Message-ID: <20200901105445.22277-9-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200901105445.22277-1-roger.pau@citrix.com>
 References: <20200901105445.22277-1-roger.pau@citrix.com>
@@ -82,69 +83,84 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Linux PV guests will attempt to read the FEATURE_CONTROL MSR, so move
-the handling done in VMX code into guest_rdmsr as it can be shared
-between PV and HVM guests that way.
+From: Andrew Cooper <andrew.cooper3@citrix.com>
 
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
-Changes from v1:
- - Move the VMX implementation into guest_rdmsr.
----
- xen/arch/x86/hvm/vmx/vmx.c |  8 +-------
- xen/arch/x86/msr.c         | 13 +++++++++++++
- 2 files changed, 14 insertions(+), 7 deletions(-)
+Now that the main PV/HVM MSR handlers raise #GP for all unknown MSRs, there is
+no need to special case these MSRs any more.
 
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index 4717e50d4a..f6657af923 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -2980,13 +2980,7 @@ static int vmx_msr_read_intercept(unsigned int msr, uint64_t *msr_content)
-     case MSR_IA32_DEBUGCTLMSR:
-         __vmread(GUEST_IA32_DEBUGCTL, msr_content);
-         break;
--    case MSR_IA32_FEATURE_CONTROL:
--        *msr_content = IA32_FEATURE_CONTROL_LOCK;
--        if ( vmce_has_lmce(curr) )
--            *msr_content |= IA32_FEATURE_CONTROL_LMCE_ON;
--        if ( nestedhvm_enabled(curr->domain) )
--            *msr_content |= IA32_FEATURE_CONTROL_ENABLE_VMXON_OUTSIDE_SMX;
--        break;
-+
-     case MSR_IA32_VMX_BASIC...MSR_IA32_VMX_VMFUNC:
-         if ( !nvmx_msr_read_intercept(msr, msr_content) )
-             goto gp_fault;
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+Changes since v1:
+ - New in this version.
+---
+ xen/arch/x86/msr.c | 46 ----------------------------------------------
+ 1 file changed, 46 deletions(-)
+
 diff --git a/xen/arch/x86/msr.c b/xen/arch/x86/msr.c
-index e84107ac7b..cc2f111a90 100644
+index cc2f111a90..ab11e3b73c 100644
 --- a/xen/arch/x86/msr.c
 +++ b/xen/arch/x86/msr.c
-@@ -25,6 +25,7 @@
- #include <xen/sched.h>
+@@ -175,29 +175,6 @@ int guest_rdmsr(struct vcpu *v, uint32_t msr, uint64_t *val)
  
- #include <asm/debugreg.h>
-+#include <asm/hvm/nestedhvm.h>
- #include <asm/hvm/viridian.h>
- #include <asm/msr.h>
- #include <asm/setup.h>
-@@ -197,6 +198,18 @@ int guest_rdmsr(struct vcpu *v, uint32_t msr, uint64_t *val)
-         /* Not offered to guests. */
-         goto gp_fault;
+     switch ( msr )
+     {
+-    case MSR_AMD_PATCHLOADER:
+-    case MSR_IA32_UCODE_WRITE:
+-    case MSR_PRED_CMD:
+-    case MSR_FLUSH_CMD:
+-        /* Write-only */
+-    case MSR_TEST_CTRL:
+-    case MSR_CORE_CAPABILITIES:
+-    case MSR_TSX_FORCE_ABORT:
+-    case MSR_TSX_CTRL:
+-    case MSR_MCU_OPT_CTRL:
+-    case MSR_RTIT_OUTPUT_BASE ... MSR_RTIT_ADDR_B(7):
+-    case MSR_U_CET:
+-    case MSR_S_CET:
+-    case MSR_PL0_SSP ... MSR_INTERRUPT_SSP_TABLE:
+-    case MSR_AMD64_LWP_CFG:
+-    case MSR_AMD64_LWP_CBADDR:
+-    case MSR_PPIN_CTL:
+-    case MSR_PPIN:
+-    case MSR_AMD_PPIN_CTL:
+-    case MSR_AMD_PPIN:
+-        /* Not offered to guests. */
+-        goto gp_fault;
+-
+     case MSR_IA32_FEATURE_CONTROL:
+         if ( !(cp->x86_vendor & X86_VENDOR_INTEL) )
+             goto gp_fault;
+@@ -365,29 +342,6 @@ int guest_wrmsr(struct vcpu *v, uint32_t msr, uint64_t val)
+     {
+         uint64_t rsvd;
  
-+    case MSR_IA32_FEATURE_CONTROL:
-+        if ( !(cp->x86_vendor & X86_VENDOR_INTEL) )
-+            goto gp_fault;
-+
-+        *val = IA32_FEATURE_CONTROL_LOCK;
-+        if ( vmce_has_lmce(v) )
-+            *val |= IA32_FEATURE_CONTROL_LMCE_ON;
-+        if ( nestedhvm_enabled(d) )
-+            *val |= IA32_FEATURE_CONTROL_ENABLE_VMXON_OUTSIDE_SMX;
-+        break;
-+
-+
-     case MSR_IA32_PLATFORM_ID:
-         if ( !(cp->x86_vendor & X86_VENDOR_INTEL) ||
-              !(boot_cpu_data.x86_vendor & X86_VENDOR_INTEL) )
+-    case MSR_IA32_PLATFORM_ID:
+-    case MSR_CORE_CAPABILITIES:
+-    case MSR_INTEL_CORE_THREAD_COUNT:
+-    case MSR_INTEL_PLATFORM_INFO:
+-    case MSR_ARCH_CAPABILITIES:
+-        /* Read-only */
+-    case MSR_TEST_CTRL:
+-    case MSR_TSX_FORCE_ABORT:
+-    case MSR_TSX_CTRL:
+-    case MSR_MCU_OPT_CTRL:
+-    case MSR_RTIT_OUTPUT_BASE ... MSR_RTIT_ADDR_B(7):
+-    case MSR_U_CET:
+-    case MSR_S_CET:
+-    case MSR_PL0_SSP ... MSR_INTERRUPT_SSP_TABLE:
+-    case MSR_AMD64_LWP_CFG:
+-    case MSR_AMD64_LWP_CBADDR:
+-    case MSR_PPIN_CTL:
+-    case MSR_PPIN:
+-    case MSR_AMD_PPIN_CTL:
+-    case MSR_AMD_PPIN:
+-        /* Not offered to guests. */
+-        goto gp_fault;
+-
+     case MSR_AMD_PATCHLEVEL:
+         BUILD_BUG_ON(MSR_IA32_UCODE_REV != MSR_AMD_PATCHLEVEL);
+         /*
 -- 
 2.28.0
 
