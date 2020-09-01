@@ -7,63 +7,61 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0A459C433E2
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F197EC433E6
 	for <xen-devel@archiver.kernel.org>; Tue,  1 Sep 2020 11:10:53 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CE1FE20BED
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Sep 2020 11:10:52 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id BBDBA20BED
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Sep 2020 11:10:53 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="BxdtPEC/"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CE1FE20BED
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="dIKh1uzV"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BBDBA20BED
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kD4BP-0000VI-Mh; Tue, 01 Sep 2020 11:10:35 +0000
+	id 1kD4BV-0000Wi-8v; Tue, 01 Sep 2020 11:10:41 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=M6GQ=CK=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1kD4BO-0000VB-Iy
- for xen-devel@lists.xenproject.org; Tue, 01 Sep 2020 11:10:34 +0000
-X-Inumbo-ID: adbb51d7-8ec0-490f-8834-f660d8271a81
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
+ id 1kD4BT-0000VB-EV
+ for xen-devel@lists.xenproject.org; Tue, 01 Sep 2020 11:10:39 +0000
+X-Inumbo-ID: 63ef6d52-76e3-4e40-8936-f4b822b1143a
+Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id adbb51d7-8ec0-490f-8834-f660d8271a81;
- Tue, 01 Sep 2020 11:10:32 +0000 (UTC)
+ id 63ef6d52-76e3-4e40-8936-f4b822b1143a;
+ Tue, 01 Sep 2020 11:10:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1598958633;
+ d=citrix.com; s=securemail; t=1598958635;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=zT5MN7nvkqMoYuX6+gGl+F2zxCCkKoFt0fQb/G0S9wE=;
- b=BxdtPEC/ukYZFnN/oZyNzdmxe4yOJKc/Csn4rrzEB9O6LyODkLM5Huu6
- illgiJqhu4JjsmdNr3b0w00SSbbFEDGRfpz02eD/ikuCTthLv0fB++B5N
- 9P7REpaaxHa2Kv+176mRedcFbGYP4aGppHbNjlHM+sNZqUg8xboHLyyTD w=;
-Authentication-Results: esa1.hc3370-68.iphmx.com;
+ bh=JdFoPoleaw4tuOelguNrercB/rGm2uumX09CkmN978M=;
+ b=dIKh1uzViVnZK1MyPYFsFm7lYcM01zmMIT8NZqYeQN1BP20LDTSUl8eB
+ +CkRlzWLHD9XDFGPY2Qt+Wqbq6VcfPpf6LEPovLyvOFh07bk3rOIEAE8b
+ 9mXXsDpoCYY21a1IZxcT/2bH15ri4qHgi1wH54W4bTJLFqvXo7+NcT7sh g=;
+Authentication-Results: esa5.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: KSWzbafNK/H9Yl9E/Tm0GcMmepaueJn0xpVzrAvruUE6tx8TzmZefARzWNaUnowgMpScoMvyoV
- NYopEIHELntHKSZuKOLiIfQ+L+jFPwWW/VlDehF2+5dCF9JLNJij7lZldA276xeA9fxPIYjvq2
- oADihqaAIowqptpI0Bgq5NdF6u8EK1qbiawwi9A7gcK2KIEl3FeBtL7Dj++Rzl6lkC5erB6QuB
- WMW05uwDXvqGkhQLCXd/M89+pCdE9DYYoBlgkG3NNFDVpWZ0lIoJqP0SSRTOs3niHYcAU27LgV
- UqM=
+IronPort-SDR: 3PT9NW5SBded6iTc0FWkTFU3253T57O2Kjr8lD/3TZw8aLEx489kUJupa+QCfJ6C2AMkxnNOKe
+ H/dEom+Ak5Wzioc08c97FSo0m2My97xb8au5rhtmfSLBXxOjwQx7/XnTGMnPOsx9REsz0GTZQX
+ uRALeT47opfP8cCU52RGjVtuNUY24f0A/6SA16xpBPg0AUfbS1zELcXyPHCE5HkaxAkGvXWR9/
+ USvO0cabvdFvxLtEc9OpKIBH7U0ldUnUlwCRO0ftqxHxkulZWUCcdVHaLA5qZdA2gIg3sOR2Ju
+ Yl0=
 X-SBRS: 2.7
-X-MesageID: 26058623
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 25858454
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,378,1592884800"; d="scan'208";a="26058623"
+X-IronPort-AV: E=Sophos;i="5.76,378,1592884800"; d="scan'208";a="25858454"
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Roger Pau Monne <roger.pau@citrix.com>, Jun Nakajima
- <jun.nakajima@intel.com>, Kevin Tian <kevin.tian@intel.com>, Jan Beulich
- <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu
- <wl@xen.org>
-Subject: [PATCH v3 1/8] x86/vmx: handle writes to MISC_ENABLE MSR
-Date: Tue, 1 Sep 2020 12:54:38 +0200
-Message-ID: <20200901105445.22277-2-roger.pau@citrix.com>
+CC: Roger Pau Monne <roger.pau@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH v3 3/8] x86/msr: explicitly handle AMD DE_CFG
+Date: Tue, 1 Sep 2020 12:54:40 +0200
+Message-ID: <20200901105445.22277-4-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200901105445.22277-1-roger.pau@citrix.com>
 References: <20200901105445.22277-1-roger.pau@citrix.com>
@@ -83,46 +81,57 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Such handling consist in checking that no bits have been changed from
-the read value, if that's the case silently drop the write, otherwise
-inject a fault.
+Report LFENCE_SERIALISE unconditionally for DE_CFG on AMD hardware and
+silently drop writes.
 
-At least Windows guests will expect to write to the MISC_ENABLE MSR
-with the same value that's been read from it.
-
+Reported-by: Andrew Cooper <andrew.cooper3@citrix.com>
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
- xen/arch/x86/hvm/vmx/vmx.c | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+Changes since v2:
+ - Drop the bot_cpu checks and don't attempt to read the MSR, just
+   return LFENCE_SERIALISE unconditionally.
+ - Add a comment about OpenBSD panicking if writing to the MSR
+   triggers a #GP.
 
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index a0d58ffbe2..4717e50d4a 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -3163,7 +3163,7 @@ static int vmx_msr_write_intercept(unsigned int msr, uint64_t msr_content)
+Changes since v1:
+ - New in this version.
+---
+ xen/arch/x86/msr.c | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+
+diff --git a/xen/arch/x86/msr.c b/xen/arch/x86/msr.c
+index a478b91f23..e84107ac7b 100644
+--- a/xen/arch/x86/msr.c
++++ b/xen/arch/x86/msr.c
+@@ -292,6 +292,12 @@ int guest_rdmsr(struct vcpu *v, uint32_t msr, uint64_t *val)
+         *val = msrs->tsc_aux;
+         break;
  
-     switch ( msr )
-     {
--        uint64_t rsvd;
-+        uint64_t rsvd, tmp;
++    case MSR_AMD64_DE_CFG:
++        if ( !(cp->x86_vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON)) )
++            goto gp_fault;
++        *val = AMD64_DE_CFG_LFENCE_SERIALISE;
++        break;
++
+     case MSR_AMD64_DR0_ADDRESS_MASK:
+     case MSR_AMD64_DR1_ADDRESS_MASK ... MSR_AMD64_DR3_ADDRESS_MASK:
+         if ( !cp->extd.dbext )
+@@ -517,6 +523,15 @@ int guest_wrmsr(struct vcpu *v, uint32_t msr, uint64_t val)
+             wrmsr_tsc_aux(val);
+         break;
  
-     case MSR_IA32_SYSENTER_CS:
-         __vmwrite(GUEST_SYSENTER_CS, msr_content);
-@@ -3301,6 +3301,13 @@ static int vmx_msr_write_intercept(unsigned int msr, uint64_t msr_content)
-         /* None of these MSRs are writeable. */
-         goto gp_fault;
- 
-+    case MSR_IA32_MISC_ENABLE:
-+        /* Silently drop writes that don't change the reported value. */
-+        if ( vmx_msr_read_intercept(msr, &tmp) != X86EMUL_OKAY ||
-+             tmp != msr_content )
++    case MSR_AMD64_DE_CFG:
++        /*
++         * OpenBSD 6.7 will panic if writing to DE_CFG triggers a #GP:
++         * https://www.illumos.org/issues/12998
++         */
++        if ( !(cp->x86_vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON)) )
 +            goto gp_fault;
 +        break;
 +
-     case MSR_P6_PERFCTR(0)...MSR_P6_PERFCTR(7):
-     case MSR_P6_EVNTSEL(0)...MSR_P6_EVNTSEL(7):
-     case MSR_CORE_PERF_FIXED_CTR0...MSR_CORE_PERF_FIXED_CTR2:
+     case MSR_AMD64_DR0_ADDRESS_MASK:
+     case MSR_AMD64_DR1_ADDRESS_MASK ... MSR_AMD64_DR3_ADDRESS_MASK:
+         if ( !cp->extd.dbext || val != (uint32_t)val )
 -- 
 2.28.0
 
