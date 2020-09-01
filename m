@@ -7,39 +7,39 @@ X-Spam-Status: No, score=-6.3 required=3.0 tests=BAYES_00,DATE_IN_PAST_96_XX,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 80ADAC43461
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 21:53:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C4DADC10DAA
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 21:53:37 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3115621D7E
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 21:53:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3115621D7E
+	by mail.kernel.org (Postfix) with ESMTPS id 82E8821D7E
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 21:53:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 82E8821D7E
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=m5p.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kG81f-00006t-5U; Wed, 09 Sep 2020 21:53:11 +0000
+	id 1kG81q-00007o-EP; Wed, 09 Sep 2020 21:53:22 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=WRqj=CS=m5p.com=ehem@srs-us1.protection.inumbo.net>)
- id 1kG81d-00006m-Tx
- for xen-devel@lists.xenproject.org; Wed, 09 Sep 2020 21:53:09 +0000
-X-Inumbo-ID: 9c2a3557-f0b5-43e9-a03b-30eec45fc989
+ id 1kG81p-00007c-55
+ for xen-devel@lists.xenproject.org; Wed, 09 Sep 2020 21:53:21 +0000
+X-Inumbo-ID: 890b7005-438b-4c3d-a92a-600149c84c7b
 Received: from mailhost.m5p.com (unknown [74.104.188.4])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 9c2a3557-f0b5-43e9-a03b-30eec45fc989;
- Wed, 09 Sep 2020 21:53:08 +0000 (UTC)
+ id 890b7005-438b-4c3d-a92a-600149c84c7b;
+ Wed, 09 Sep 2020 21:53:15 +0000 (UTC)
 Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:1f07:15ff:0:0:0:f7])
- by mailhost.m5p.com (8.15.2/8.15.2) with ESMTPS id 089Lqrk6039177
+ by mailhost.m5p.com (8.15.2/8.15.2) with ESMTPS id 089Lr1Sg039182
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
- Wed, 9 Sep 2020 17:52:59 -0400 (EDT) (envelope-from ehem@m5p.com)
+ Wed, 9 Sep 2020 17:53:07 -0400 (EDT) (envelope-from ehem@m5p.com)
 Received: (from ehem@localhost)
- by m5p.com (8.15.2/8.15.2/Submit) id 089LqrKZ039176;
- Wed, 9 Sep 2020 14:52:53 -0700 (PDT) (envelope-from ehem)
-Message-Id: <202009092152.089LqrKZ039176@m5p.com>
+ by m5p.com (8.15.2/8.15.2/Submit) id 089Lr130039181;
+ Wed, 9 Sep 2020 14:53:01 -0700 (PDT) (envelope-from ehem)
+Message-Id: <202009092153.089Lr130039181@m5p.com>
 From: Elliott Mitchell <ehem+xen@m5p.com>
 To: xen-devel@lists.xenproject.org
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>
@@ -49,10 +49,8 @@ Cc: Jan Beulich <jbeulich@suse.com>
 Cc: Julien Grall <julien@xen.org>
 Cc: Stefano Stabellini <sstabellini@kernel.org>
 Cc: Wei Liu <wl@xen.org>
-Cc: Doug Goldstein <cardoe@cardoe.com>
-Cc: Daniel De Graaf <dgdegra@tycho.nsa.gov>
-Date: Thu, 27 Aug 2020 12:09:05 -0700
-Subject: [PATCH 01/11 v2] gitignore: Move ignores from global to subdirectories
+Date: Tue, 1 Sep 2020 15:02:17 -0700
+Subject: [PATCH 02/11] gitignore: Remove entries duplicating global entries
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,149 +64,106 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Subdirectories which have .gitignore files should not be referenced in
-the global .gitignore files.  Move several lines to appropriate subdirs.
+As "config.cache", "config.log" and "config.status" already have global
+matching patterns, remove these subdirectory entries.
 
-When moved to the subdirectories the slash after the directory name is
-left on as otherwise the names potentially become unanchored (without a
-leading slash, "foo" also matches "bar/foo").
+"autom4te.cache/" similarly had a global match, so remove those
+duplicates.
 
-As a final step these were either sorted or formatted to match existing
-file format.
+"*.py[ocd]", "*.tmp" and "*.bin" were present, go after their duplicates
+too.
+
+"docs/txt/" covers "docs/txt/misc/*.txt" and "docs/txt/man/*.txt".
 
 Signed-off-by: Elliott Mitchell <ehem+xen@m5p.com>
 
 ---
-Changes in v2:
-- More information in commit message
-- Rebased onto correct branch before submission
----
- .gitignore                   | 31 -------------------------------
- tools/misc/.gitignore        | 23 ++++++++++++++++++++++-
- xen/tools/kconfig/.gitignore |  6 ++++++
- xen/xsm/flask/.gitignore     |  9 ++++++++-
- 4 files changed, 36 insertions(+), 33 deletions(-)
+ .gitignore | 17 -----------------
+ 1 file changed, 17 deletions(-)
 
 diff --git a/.gitignore b/.gitignore
-index 36ce2ea104..429a484ecc 100644
+index 429a484ecc..0f0e79b6d1 100644
 --- a/.gitignore
 +++ b/.gitignore
-@@ -204,21 +204,6 @@ tools/libxl/ssdt*
- tools/libxl/testenum
- tools/libxl/testenum.c
- tools/libxl/tmp.*
--tools/misc/cpuperf/cpuperf-perfcntr
--tools/misc/cpuperf/cpuperf-xen
--tools/misc/xc_shadow
--tools/misc/xen_cpuperf
--tools/misc/xen-cpuid
--tools/misc/xen-detect
--tools/misc/xen-diag
--tools/misc/xen-tmem-list-parse
--tools/misc/xen-livepatch
--tools/misc/xenperf
--tools/misc/xenpm
--tools/misc/xen-hvmctx
--tools/misc/xenlockprof
--tools/misc/lowmemd
--tools/misc/xencov
- tools/pkg-config/*
- tools/qemu-xen-build
- tools/xentrace/xenalyze
-@@ -315,17 +300,7 @@ xen/include/xen/lib/x86/cpuid-autogen.h
- xen/test/livepatch/config.h
- xen/test/livepatch/expect_config.h
- xen/test/livepatch/*.livepatch
--xen/tools/kconfig/.tmp_gtkcheck
--xen/tools/kconfig/.tmp_qtcheck
- xen/tools/symbols
--xen/xsm/flask/flask-policy.S
--xen/xsm/flask/include/av_perm_to_string.h
--xen/xsm/flask/include/av_permissions.h
--xen/xsm/flask/include/class_to_string.h
--xen/xsm/flask/include/flask.h
--xen/xsm/flask/include/initial_sid_to_string.h
--xen/xsm/flask/policy.*
--xen/xsm/flask/xenpolicy-*
- tools/flask/policy/policy.conf
- tools/flask/policy/xenpolicy-*
- xen/xen
-@@ -357,8 +332,6 @@ tools/include/xen-foreign/arm32.h
- tools/include/xen-foreign/arm64.h
- 
- .git
--tools/misc/xen-hptool
--tools/misc/xen-mfndump
- tools/libs/toolcore/include/_*.h
- tools/libxc/_*.[ch]
+@@ -1,6 +1,5 @@
+ .hg
+ .*.cmd
+-.*.tmp
+ *.orig
+ *~
+ *.swp
+@@ -58,11 +57,7 @@ docs/txt/
+ extras/mini-os*
+ install/*
+ stubdom/*-minios-config.mk
+-stubdom/autom4te.cache/
+ stubdom/binutils-*
+-stubdom/config.cache
+-stubdom/config.log
+-stubdom/config.status
+ stubdom/cross-root-*
+ stubdom/gcc-*
+ stubdom/gmp-*
+@@ -94,11 +89,7 @@ stubdom/vtpm/vtpm_manager.h
+ stubdom/xenstore
+ stubdom/zlib-*
+ tools/*/build/lib*/*.py
+-tools/autom4te.cache/
+ tools/config.h
+-tools/config.log
+-tools/config.status
+-tools/config.cache
+ config/Tools.mk
+ config/Stubdom.mk
+ config/Docs.mk
+@@ -128,7 +119,6 @@ tools/debugger/gdb/gdb-6.2.1.tar.bz2
+ tools/debugger/gdbsx/gdbsx
+ tools/debugger/xenitp/xenitp
+ tools/firmware/*/biossums
+-tools/firmware/*.bin
+ tools/firmware/*.sym
+ tools/firmware/*bios/*bios*.txt
+ tools/firmware/etherboot/gpxe/*
+@@ -213,8 +203,6 @@ tools/security/secpol_tool
+ tools/security/xen/*
+ tools/security/xensec_tool
+ tools/tests/depriv/depriv-fd-checker
+-tools/tests/x86_emulator/*.bin
+-tools/tests/x86_emulator/*.tmp
+ tools/tests/x86_emulator/32/x86_emulate
+ tools/tests/x86_emulator/3dnow*.[ch]
+ tools/tests/x86_emulator/asm
+@@ -272,7 +260,6 @@ xen/arch/x86/asm-macros.i
+ xen/arch/x86/boot/mkelf32
+ xen/arch/x86/boot/cmdline.S
+ xen/arch/x86/boot/reloc.S
+-xen/arch/x86/boot/*.bin
+ xen/arch/x86/boot/*.lnk
+ xen/arch/x86/efi.lds
+ xen/arch/x86/efi/check.efi
+@@ -325,7 +312,6 @@ tools/firmware/rombios/_rombios_.c
+ tools/firmware/rombios/rombios.s
+ tools/firmware/rombios/rombios.sym
+ tools/include/xen-foreign/checker.c
+-tools/include/xen-foreign/structs.pyc
+ tools/include/xen-foreign/x86_32.h
+ tools/include/xen-foreign/x86_64.h
+ tools/include/xen-foreign/arm32.h
+@@ -337,7 +323,6 @@ tools/libxc/_*.[ch]
  tools/libxl/_*.[ch]
-@@ -370,10 +343,6 @@ tools/libxl/test_timedereg
+ tools/libxl/testidl
+ tools/libxl/testidl.c
+-tools/libxl/*.pyc
+ tools/libxl/libxl-save-helper
+ tools/libxl/test_timedereg
  tools/libxl/test_fdderegrace
- tools/firmware/etherboot/eb-roms.h
- tools/firmware/etherboot/gpxe-git-snapshot.tar.gz
--tools/misc/xenhypfs
--tools/misc/xenwatchdogd
--tools/misc/xen-hvmcrash
--tools/misc/xen-lowmemd
- tools/libvchan/vchan-node[12]
- tools/libvchan/vchan-socket-proxy
- tools/ocaml/*/.ocamldep.make
-diff --git a/tools/misc/.gitignore b/tools/misc/.gitignore
-index c5fe2cfccd..f909ceccb1 100644
---- a/tools/misc/.gitignore
-+++ b/tools/misc/.gitignore
-@@ -1 +1,22 @@
--xen-ucode
-+/cpuperf/cpuperf-perfcntr
-+/cpuperf/cpuperf-xen
-+/lowmemd
-+/xc_shadow
-+/xen-cpuid
-+/xen-detect
-+/xen-diag
-+/xen-hptool
-+/xen-hvmcrash
-+/xen-hvmctx
-+/xen-livepatch
-+/xen-lowmemd
-+/xen-mfndump
-+/xen-tmem-list-parse
-+/xen-ucode
-+/xen_cpuperf
-+/xencov
-+/xenhypfs
-+/xenlockprof
-+/xenperf
-+/xenpm
-+/xenwatchdogd
-diff --git a/xen/tools/kconfig/.gitignore b/xen/tools/kconfig/.gitignore
-index 9638790613..e289215d27 100644
---- a/xen/tools/kconfig/.gitignore
-+++ b/xen/tools/kconfig/.gitignore
-@@ -15,3 +15,9 @@ mconf
- nconf
- qconf
- gconf
-+
-+#
-+# temporary build tool checking files
-+#
-+/.tmp_gtkcheck
-+/.tmp_qtcheck
-diff --git a/xen/xsm/flask/.gitignore b/xen/xsm/flask/.gitignore
-index 024edbe0ba..f186747c51 100644
---- a/xen/xsm/flask/.gitignore
-+++ b/xen/xsm/flask/.gitignore
-@@ -1 +1,8 @@
--/policy.c
-+/flask-policy.S
-+/include/av_perm_to_string.h
-+/include/av_permissions.h
-+/include/class_to_string.h
-+/include/flask.h
-+/include/initial_sid_to_string.h
-+/policy.*
-+/xenpolicy-*
+@@ -382,6 +367,4 @@ tools/xenstore/xenstore-watch
+ tools/xl/_paths.h
+ tools/xl/xl
+ 
+-docs/txt/misc/*.txt
+-docs/txt/man/*.txt
+ docs/figs/*.png
 -- 
 
 
