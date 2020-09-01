@@ -7,39 +7,38 @@ X-Spam-Status: No, score=-6.3 required=3.0 tests=BAYES_00,DATE_IN_PAST_96_XX,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C0BA3C433E2
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 21:54:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0A6E3C10DAA
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 21:54:36 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 80FE521D81
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 21:54:26 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 80FE521D81
+	by mail.kernel.org (Postfix) with ESMTPS id B76E821D81
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 21:54:35 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B76E821D81
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=m5p.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kG82h-0000VK-ES; Wed, 09 Sep 2020 21:54:15 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kG82l-0000Xu-Op; Wed, 09 Sep 2020 21:54:19 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=WRqj=CS=m5p.com=ehem@srs-us1.protection.inumbo.net>)
- id 1kG82f-0000Uk-Ua
- for xen-devel@lists.xenproject.org; Wed, 09 Sep 2020 21:54:13 +0000
-X-Inumbo-ID: 171bf353-2020-4b4e-9d8f-5c3ef9e21acf
+ id 1kG82k-0000Wv-8P
+ for xen-devel@lists.xenproject.org; Wed, 09 Sep 2020 21:54:18 +0000
+X-Inumbo-ID: 50fc969b-8c2c-43d7-8a9e-387fac720c69
 Received: from mailhost.m5p.com (unknown [74.104.188.4])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 171bf353-2020-4b4e-9d8f-5c3ef9e21acf;
- Wed, 09 Sep 2020 21:54:09 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 50fc969b-8c2c-43d7-8a9e-387fac720c69;
+ Wed, 09 Sep 2020 21:54:17 +0000 (UTC)
 Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:1f07:15ff:0:0:0:f7])
- by mailhost.m5p.com (8.15.2/8.15.2) with ESMTPS id 089Lrr9Q039235
+ by mailhost.m5p.com (8.15.2/8.15.2) with ESMTPS id 089Ls137039244
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
- Wed, 9 Sep 2020 17:53:59 -0400 (EDT) (envelope-from ehem@m5p.com)
+ Wed, 9 Sep 2020 17:54:07 -0400 (EDT) (envelope-from ehem@m5p.com)
 Received: (from ehem@localhost)
- by m5p.com (8.15.2/8.15.2/Submit) id 089Lrrug039234;
- Wed, 9 Sep 2020 14:53:53 -0700 (PDT) (envelope-from ehem)
-Message-Id: <202009092153.089Lrrug039234@m5p.com>
+ by m5p.com (8.15.2/8.15.2/Submit) id 089Ls1sf039243;
+ Wed, 9 Sep 2020 14:54:01 -0700 (PDT) (envelope-from ehem)
+Message-Id: <202009092154.089Ls1sf039243@m5p.com>
 From: Elliott Mitchell <ehem+xen@m5p.com>
 To: xen-devel@lists.xenproject.org
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>
@@ -49,9 +48,8 @@ Cc: Jan Beulich <jbeulich@suse.com>
 Cc: Julien Grall <julien@xen.org>
 Cc: Stefano Stabellini <sstabellini@kernel.org>
 Cc: Wei Liu <wl@xen.org>
-Cc: Samuel Thibault <samuel.thibault@ens-lyon.org>
-Date: Mon, 31 Aug 2020 16:20:45 -0700
-Subject: [PATCH 08/11 RFC] gitignore: Create .gitignore file for stubdom/
+Date: Tue, 1 Sep 2020 15:29:53 -0700
+Subject: [PATCH 09/11 RFC] gitignore: Create .gitignore file for config/
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,8 +63,8 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-stubdom/ is a significant portion of the remaining targeted matches in
-the global .gitignore file.
+Since it seems I'm removing all path-specific entries from .gitignore,
+the ones for config/ need their own file too.
 
 Slashes were left at the start of all filenames.  Entries without slashes
 match files in subdirectories, entries with a slash anywhere are a
@@ -76,92 +74,44 @@ all full paths.
 Signed-off-by: Elliott Mitchell <ehem+xen@m5p.com>
 
 ---
- .gitignore         | 32 --------------------------------
- stubdom/.gitignore | 32 ++++++++++++++++++++++++++++++++
- 2 files changed, 32 insertions(+), 32 deletions(-)
- create mode 100644 stubdom/.gitignore
+ .gitignore        | 5 -----
+ config/.gitignore | 5 +++++
+ 2 files changed, 5 insertions(+), 5 deletions(-)
+ create mode 100644 config/.gitignore
 
 diff --git a/.gitignore b/.gitignore
-index 18339f3bab..3fea6c6b15 100644
+index 3fea6c6b15..877c2579ab 100644
 --- a/.gitignore
 +++ b/.gitignore
-@@ -51,38 +51,6 @@ build-*
+@@ -44,17 +44,12 @@ config.log
+ config.status
+ config.cache
+ config.h
+-config/Toplevel.mk
+-config/Paths.mk
+ 
+ build-*
  dist/*
  extras/mini-os*
  install/*
--stubdom/*-minios-config.mk
--stubdom/binutils-*
--stubdom/cross-root-*
--stubdom/gcc-*
--stubdom/gmp-*
--stubdom/grub-*
--stubdom/include
--stubdom/ioemu
--stubdom/ioemu/
--stubdom/libs-*
--stubdom/libxc-*
--stubdom/libxencall-*
--stubdom/libxenevtchn-*
--stubdom/libxenforeignmemory-*
--stubdom/libxengnttab-*
--stubdom/libxentoolcore-*
--stubdom/libxentoollog-*
--stubdom/lwip-*
--stubdom/lwip/
--stubdom/mini-os-*
--stubdom/mk-headers-*
--stubdom/newlib-1.*
--stubdom/newlib-x86*
--stubdom/ocaml-*
--stubdom/pciutils-*
--stubdom/pkg-config/*
--stubdom/polarssl-*
--stubdom/stubdompath.sh
--stubdom/tpm_emulator-*
--stubdom/vtpm/vtpm_manager.h
--stubdom/xenstore
--stubdom/zlib-*
  tools/*/build/lib*/*.py
- config/Tools.mk
- config/Stubdom.mk
-diff --git a/stubdom/.gitignore b/stubdom/.gitignore
+-config/Tools.mk
+-config/Stubdom.mk
+-config/Docs.mk
+ tools/libs/toolcore/headers.chk
+ tools/libs/toollog/headers.chk
+ tools/libs/evtchn/headers.chk
+diff --git a/config/.gitignore b/config/.gitignore
 new file mode 100644
-index 0000000000..d763921ba2
+index 0000000000..54ad25c672
 --- /dev/null
-+++ b/stubdom/.gitignore
-@@ -0,0 +1,32 @@
-+/*-minios-config.mk
-+/binutils-*
-+/cross-root-*
-+/gcc-*
-+/gmp-*
-+/grub-*
-+/include
-+/ioemu
-+/ioemu/
-+/libs-*
-+/libxc-*
-+/libxencall-*
-+/libxenevtchn-*
-+/libxenforeignmemory-*
-+/libxengnttab-*
-+/libxentoolcore-*
-+/libxentoollog-*
-+/lwip-*
-+/lwip/
-+/mini-os-*
-+/mk-headers-*
-+/newlib-1.*
-+/newlib-x86*
-+/ocaml-*
-+/pciutils-*
-+/pkg-config/
-+/polarssl-*
-+/stubdompath.sh
-+/tpm_emulator-*
-+/vtpm/vtpm_manager.h
-+/xenstore
-+/zlib-*
++++ b/config/.gitignore
+@@ -0,0 +1,5 @@
++/Docs.mk
++/Paths.mk
++/Stubdom.mk
++/Tools.mk
++/Toplevel.mk
 -- 
 
 
