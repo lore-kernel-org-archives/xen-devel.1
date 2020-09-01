@@ -7,63 +7,60 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CD0A5C433E6
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E5411C433E7
 	for <xen-devel@archiver.kernel.org>; Tue,  1 Sep 2020 11:11:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 963CC20BED
+	by mail.kernel.org (Postfix) with ESMTPS id B141C20FC3
 	for <xen-devel@archiver.kernel.org>; Tue,  1 Sep 2020 11:11:04 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="U7/HLyV9"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 963CC20BED
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="DR5CYW7d"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B141C20FC3
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kD4Be-0000ca-Ri; Tue, 01 Sep 2020 11:10:50 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kD4Bh-0000eN-5n; Tue, 01 Sep 2020 11:10:53 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=M6GQ=CK=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1kD4Bd-0000VB-Ef
- for xen-devel@lists.xenproject.org; Tue, 01 Sep 2020 11:10:49 +0000
-X-Inumbo-ID: af246697-e068-45e2-be8b-515ad49f064f
-Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id af246697-e068-45e2-be8b-515ad49f064f;
- Tue, 01 Sep 2020 11:10:43 +0000 (UTC)
+ id 1kD4Bf-0000V0-Ev
+ for xen-devel@lists.xenproject.org; Tue, 01 Sep 2020 11:10:51 +0000
+X-Inumbo-ID: 5f199d10-49cb-442b-9f02-d3ab43f2ec64
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 5f199d10-49cb-442b-9f02-d3ab43f2ec64;
+ Tue, 01 Sep 2020 11:10:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1598958644;
+ d=citrix.com; s=securemail; t=1598958641;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=BMnRreRW+++9kfh3egHsOAJKzSNN/TeOyxU8V9BYfgQ=;
- b=U7/HLyV96dAXwwSPMaEOKTVHSCVzqjDU5gWRYSkBmkGGDORFb3+Kyyec
- xbKmSg1hUH8nMp/mb0DuIBeQXPi1vIzbmwRj1O8vu948CvEiGf+PkgGyP
- 7OIPsPEV3pBPrWV8TZwP4wKugGI5n2J6Yv9woYgOZrosp5Vwigu5yAR5i 0=;
-Authentication-Results: esa2.hc3370-68.iphmx.com;
+ bh=M8ARSpqL0nd5zsCpnhZnfQ+5vJo5jg5hBQPEsOCe3kQ=;
+ b=DR5CYW7d0mhFqK3eph/ezqb4uJOg8FjrNZ8JxzxCjulG0hdtQl4OdMSY
+ Fh1Qh21STokYCUKkdILb1Wu9X3xdn9GtgxKtMiNn3c3HbtF76jonOCMJJ
+ Uiay+DdEZKlXtqB1IWV7rYYl9fOudBLFdzYLd50jEVhDW01L+Mcb3AzXG U=;
+Authentication-Results: esa1.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: n4tkfPQ9WS11cDUSwwbxf6JXeWpSpobbzFPEnDYn1ddNg0gElB6ucVlj9pGb1EjVSPXGJCgCRS
- 8PTvH2SlWtsCCZgZpfi0j4RG84+hxFqGj3abcVH9fMN06KCoppXQvf9S1/mZnCvDEBiqZAW8FY
- 2fbtlon4kCUz+rcZAHBM1nTm8/g6xRdCvMy5tEiIS/YF9XgdE+iSTD0EXWaj6lEH0U0X8ST1am
- yi6Sg6N7+T9m1qycq774GO66PrTzGH5+ME83vhLbIIrbi6ifaTvNqfJLS0g+WcxRLXzDKwmfc2
- 3/U=
+IronPort-SDR: TLJWm8NpR2KpPCRtGX1o5O+WTPORA4mgc8Ov6yZt8hRZiz4n0P7cd2AQVHj7+0MDJFiBu8CB1a
+ Sd+Ss2oTTmwBvCTFszTXwajMkjAsnEwx/8Wlag95o6N88M+xZX+W6EfIMB2KDiT1FB4ysHugcF
+ A7NXuPxoY+lXgn+z+9R317l4p5pA7wkkoVbPC3/J7EG8XypPdCaigNvplgTT8203xeSFoodCj3
+ oXX7+D02t+2DTG8XIs1XAmfHlSVaJxiN+CK3UXTpf/onlACZfPLMCFR4wfWpuvi0BA5EoqNcEc
+ rJI=
 X-SBRS: 2.7
-X-MesageID: 25738160
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-MesageID: 26058627
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,378,1592884800"; d="scan'208";a="25738160"
+X-IronPort-AV: E=Sophos;i="5.76,378,1592884800"; d="scan'208";a="26058627"
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
- <jbeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
- <roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH v3 8/8] x86/msr: Drop compatibility #GP handling in guest_{rd,
- wr}msr()
-Date: Tue, 1 Sep 2020 12:54:45 +0200
-Message-ID: <20200901105445.22277-9-roger.pau@citrix.com>
+CC: Roger Pau Monne <roger.pau@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH v3 6/8] x86/pv: disallow access to unknown MSRs
+Date: Tue, 1 Sep 2020 12:54:43 +0200
+Message-ID: <20200901105445.22277-7-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200901105445.22277-1-roger.pau@citrix.com>
 References: <20200901105445.22277-1-roger.pau@citrix.com>
@@ -83,84 +80,58 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: Andrew Cooper <andrew.cooper3@citrix.com>
+Change the catch-all behavior for MSR not explicitly handled. Instead
+of allow full read-access to the MSR space and silently dropping
+writes return an exception when the MSR is not explicitly handled.
 
-Now that the main PV/HVM MSR handlers raise #GP for all unknown MSRs, there is
-no need to special case these MSRs any more.
-
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
-Changes since v1:
- - New in this version.
+Changes since v2:
+ - Added missing 0x prefix.
 ---
- xen/arch/x86/msr.c | 46 ----------------------------------------------
- 1 file changed, 46 deletions(-)
+ xen/arch/x86/pv/emul-priv-op.c | 18 ++++++++++--------
+ 1 file changed, 10 insertions(+), 8 deletions(-)
 
-diff --git a/xen/arch/x86/msr.c b/xen/arch/x86/msr.c
-index cc2f111a90..ab11e3b73c 100644
---- a/xen/arch/x86/msr.c
-+++ b/xen/arch/x86/msr.c
-@@ -175,29 +175,6 @@ int guest_rdmsr(struct vcpu *v, uint32_t msr, uint64_t *val)
+diff --git a/xen/arch/x86/pv/emul-priv-op.c b/xen/arch/x86/pv/emul-priv-op.c
+index bcc1188f6a..2d9953f5b4 100644
+--- a/xen/arch/x86/pv/emul-priv-op.c
++++ b/xen/arch/x86/pv/emul-priv-op.c
+@@ -972,9 +972,10 @@ static int read_msr(unsigned int reg, uint64_t *val,
+         }
+         /* fall through */
+     default:
++        gdprintk(XENLOG_WARNING, "RDMSR 0x%08x unimplemented\n", reg);
++        break;
++
+     normal:
+-        /* Everyone can read the MSR space. */
+-        /* gdprintk(XENLOG_WARNING, "Domain attempted RDMSR %08x\n", reg); */
+         if ( rdmsr_safe(reg, *val) )
+             break;
+         return X86EMUL_OKAY;
+@@ -1141,14 +1142,15 @@ static int write_msr(unsigned int reg, uint64_t val,
+         }
+         /* fall through */
+     default:
+-        if ( rdmsr_safe(reg, temp) )
+-            break;
++        gdprintk(XENLOG_WARNING,
++                 "WRMSR 0x%08x val 0x%016"PRIx64" unimplemented\n",
++                 reg, val);
++        break;
  
-     switch ( msr )
-     {
--    case MSR_AMD_PATCHLOADER:
--    case MSR_IA32_UCODE_WRITE:
--    case MSR_PRED_CMD:
--    case MSR_FLUSH_CMD:
--        /* Write-only */
--    case MSR_TEST_CTRL:
--    case MSR_CORE_CAPABILITIES:
--    case MSR_TSX_FORCE_ABORT:
--    case MSR_TSX_CTRL:
--    case MSR_MCU_OPT_CTRL:
--    case MSR_RTIT_OUTPUT_BASE ... MSR_RTIT_ADDR_B(7):
--    case MSR_U_CET:
--    case MSR_S_CET:
--    case MSR_PL0_SSP ... MSR_INTERRUPT_SSP_TABLE:
--    case MSR_AMD64_LWP_CFG:
--    case MSR_AMD64_LWP_CBADDR:
--    case MSR_PPIN_CTL:
--    case MSR_PPIN:
--    case MSR_AMD_PPIN_CTL:
--    case MSR_AMD_PPIN:
--        /* Not offered to guests. */
--        goto gp_fault;
--
-     case MSR_IA32_FEATURE_CONTROL:
-         if ( !(cp->x86_vendor & X86_VENDOR_INTEL) )
-             goto gp_fault;
-@@ -365,29 +342,6 @@ int guest_wrmsr(struct vcpu *v, uint32_t msr, uint64_t val)
-     {
-         uint64_t rsvd;
+-        if ( val != temp )
+     invalid:
+-            gdprintk(XENLOG_WARNING,
+-                     "Domain attempted WRMSR %08x from 0x%016"PRIx64" to 0x%016"PRIx64"\n",
+-                     reg, temp, val);
++        gdprintk(XENLOG_WARNING,
++                 "Domain attempted WRMSR 0x%08x from 0x%016"PRIx64" to 0x%016"PRIx64"\n",
++                 reg, temp, val);
+         return X86EMUL_OKAY;
+     }
  
--    case MSR_IA32_PLATFORM_ID:
--    case MSR_CORE_CAPABILITIES:
--    case MSR_INTEL_CORE_THREAD_COUNT:
--    case MSR_INTEL_PLATFORM_INFO:
--    case MSR_ARCH_CAPABILITIES:
--        /* Read-only */
--    case MSR_TEST_CTRL:
--    case MSR_TSX_FORCE_ABORT:
--    case MSR_TSX_CTRL:
--    case MSR_MCU_OPT_CTRL:
--    case MSR_RTIT_OUTPUT_BASE ... MSR_RTIT_ADDR_B(7):
--    case MSR_U_CET:
--    case MSR_S_CET:
--    case MSR_PL0_SSP ... MSR_INTERRUPT_SSP_TABLE:
--    case MSR_AMD64_LWP_CFG:
--    case MSR_AMD64_LWP_CBADDR:
--    case MSR_PPIN_CTL:
--    case MSR_PPIN:
--    case MSR_AMD_PPIN_CTL:
--    case MSR_AMD_PPIN:
--        /* Not offered to guests. */
--        goto gp_fault;
--
-     case MSR_AMD_PATCHLEVEL:
-         BUILD_BUG_ON(MSR_IA32_UCODE_REV != MSR_AMD_PATCHLEVEL);
-         /*
 -- 
 2.28.0
 
