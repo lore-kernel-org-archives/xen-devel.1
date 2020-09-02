@@ -2,68 +2,67 @@ Return-Path: <SRS0=suLm=CL=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-4.1 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 84EFFC433E7
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2020 10:12:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A3689C433E2
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2020 10:13:28 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 53EA1206C0
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2020 10:12:40 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 7281B2071B
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2020 10:13:28 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="LEq0awo9"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 53EA1206C0
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=eu.citrix.com
+	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="OnHxhqt+"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7281B2071B
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kDPkL-0002at-40; Wed, 02 Sep 2020 10:12:05 +0000
+	id 1kDPlR-0002hZ-K6; Wed, 02 Sep 2020 10:13:13 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=514T=CL=xenproject.org=iwj@srs-us1.protection.inumbo.net>)
- id 1kDPkK-0002ao-9B
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2020 10:12:04 +0000
-X-Inumbo-ID: 32af0090-4af5-4bdd-a990-aab53affba87
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ <SRS0=A6j+=CL=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
+ id 1kDPlP-0002hS-Sw
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2020 10:13:11 +0000
+X-Inumbo-ID: 6ad139ee-c3bd-4188-95ca-bbdcf5cee126
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 32af0090-4af5-4bdd-a990-aab53affba87;
- Wed, 02 Sep 2020 10:12:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1599041522;
- h=mime-version:content-transfer-encoding:message-id:date:
- from:to:cc:subject;
- bh=h3tnAaIIto/nzokAomZYc+LpDWntndAcRUvzg14aFeg=;
- b=LEq0awo9uSlMPpv4UytcjVxoafxFqaYeQk0SWSXD/oaIAjQffvsqCjeE
- 1pHyo/ZPlIl3yD0/mTG0xZSV9+GNkmtAkSeffSRj2XVnF6AbN+VhagZ2n
- YZBPE5OPkbELzLH3/V38g1Ha/i8angijftIXN6mqhsYDIH0BqqjBdkG1l M=;
-Authentication-Results: esa6.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: fx0qA861lNDmfRVZ+s8CEe1c3BjqrX564jHb2cD8X7ZMWOXg8tWvG2erx/37qLDpEOW8RGkoqU
- bHbT6RgEukFZepmH6RSrwb7ED+SN8Uu1H1QzPWLa9FkdJ6pDlbTjwypRJt94R2LWbqemYjr+lz
- DP6jjn/ZKt6lmutSTwZ6UfqMluHkWAlI4lKg0odj/dRmjuFDYJD05u/xnOtdvBA4LaH0faZuK/
- v/YcMzdlHEreWmK/eoTPoewEk0kYJivo3xY/enBUjQuFLUylo8yYz7PmobtcSYzkraLwJPdoTR
- gfA=
-X-SBRS: 2.7
-X-MesageID: 26111413
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,381,1592884800"; d="scan'208";a="26111413"
+ id 6ad139ee-c3bd-4188-95ca-bbdcf5cee126;
+ Wed, 02 Sep 2020 10:13:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+ Content-Transfer-Encoding:Content-Type:Message-ID:To;
+ bh=TXFbbR8+tVcM5XsqtPaY214i0luDXTcRk9wcqX4Vqls=; b=OnHxhqt+KpO31vEi5nu8mIVD3Q
+ lvrrCjkCPzLOYdP7mlDg+4mleBnxmwpNQAypEDl36f6UlUqIo48JCNmWlQlghUP8ZBAQoGxv+lquA
+ Vs7dPV9I6v0K5Gj9Abu96M6vfwRFGEK8OgPVbK5nM/wtMplVuO39T5okq/836vDfUncA=;
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kDPlO-0001mG-Ii; Wed, 02 Sep 2020 10:13:10 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kDPlO-0006HR-Bb; Wed, 02 Sep 2020 10:13:10 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1kDPlO-0004y7-B9; Wed, 02 Sep 2020 10:13:10 +0000
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-153545-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-Message-ID: <24399.28655.592045.379053@mariner.uk.xensource.com>
-Date: Wed, 2 Sep 2020 11:11:59 +0100
-From: Ian Jackson <ian.jackson@eu.citrix.com>
-To: <xen-devel@lists.xenproject.org>
-CC: <iwj@xenproject.org>
-Subject: Test mail do not reply
-X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
+Subject: [xen-unstable-coverity test] 153545: all pass - PUSHED
+X-Osstest-Versions-This: xen=afe018e041ec112d90a8b4e6ed607d22aa06f280
+X-Osstest-Versions-That: xen=d400dc5729e4e132d61c2e7df57d81aaed762044
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Wed, 02 Sep 2020 10:13:10 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,5 +76,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Please ignore this message.
+flight 153545 xen-unstable-coverity real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/153545/
+
+Perfect :-)
+All tests in this flight passed as required
+version targeted for testing:
+ xen                  afe018e041ec112d90a8b4e6ed607d22aa06f280
+baseline version:
+ xen                  d400dc5729e4e132d61c2e7df57d81aaed762044
+
+Last test of basis   153169  2020-08-30 09:18:24 Z    3 days
+Testing same since   153545  2020-09-02 09:18:27 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
+
+jobs:
+ coverity-amd64                                               pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/xen.git
+   d400dc5729..afe018e041  afe018e041ec112d90a8b4e6ed607d22aa06f280 -> coverity-tested/smoke
 
