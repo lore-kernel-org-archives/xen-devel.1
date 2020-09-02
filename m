@@ -4,61 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-7.1 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
-	version=3.4.0
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0F343C433E7
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2020 11:04:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B85ABC433E2
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2020 12:23:49 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BFFBA2083B
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2020 11:04:50 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 5E8022078E
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2020 12:23:49 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="IDyeq6kq"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BFFBA2083B
+	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="43aaKn/k"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5E8022078E
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kDQZ1-00087R-O4; Wed, 02 Sep 2020 11:04:27 +0000
+	id 1kDRnC-0006wj-2R; Wed, 02 Sep 2020 12:23:10 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=A6j+=CL=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
- id 1kDQZ0-000877-58
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2020 11:04:26 +0000
-X-Inumbo-ID: a7c6b124-b8f1-4e89-9fde-53601f6a7877
+ id 1kDRnA-0006we-PF
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2020 12:23:08 +0000
+X-Inumbo-ID: 7f7c9c90-64ff-4e0d-a81a-de62dd7eec9c
 Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id a7c6b124-b8f1-4e89-9fde-53601f6a7877;
- Wed, 02 Sep 2020 11:04:18 +0000 (UTC)
+ id 7f7c9c90-64ff-4e0d-a81a-de62dd7eec9c;
+ Wed, 02 Sep 2020 12:23:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
  Content-Transfer-Encoding:Content-Type:Message-ID:To;
- bh=98vpPVCFv4VT/Kxd+av7iHVEp4FVQ/5cTs5GlcdKQkY=; b=IDyeq6kqyeCO2F5HKfLUhyYNxp
- D7nMD2sEE6mY7uUvKmLTcLfYDiUM6A2ncnNFFBzzuvpUROj+5fAFa009U0ywYi6J2fuc4DWyeIDm5
- esVT8JuPGttOjOA0284AtbWKA/i+PndG/OSJ6hMYadh7ikVEnLljzcHebe0mLc07UYpk=;
+ bh=jvfA2GG4k3y8vTqLtXIYklsuuJOGaQW8U1YSLKWrrVQ=; b=43aaKn/ktOXEL8BAojOC0Gykjo
+ 6C3JXnmjme0GJtDGrBJo49k1GJJYYEmGL5P1WHsmB0NhnTrLLpVuLRqYJ8IN4jXm98JICGjddMLvB
+ qaOcZUa0pe2XNcssOxVQZfyAKfL5KGORqUqpvBvsgnyxvjryISyuC82R39fa3sJ98WHs=;
 Received: from host146.205.237.98.conversent.net ([205.237.98.146]
  helo=infra.test-lab.xenproject.org)
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1kDQYs-0002r1-1k; Wed, 02 Sep 2020 11:04:18 +0000
+ id 1kDRn6-0004Sw-Ta; Wed, 02 Sep 2020 12:23:04 +0000
 Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
  by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1kDQYr-0007PY-Pv; Wed, 02 Sep 2020 11:04:17 +0000
+ id 1kDRn6-0001i4-LO; Wed, 02 Sep 2020 12:23:04 +0000
 Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
  4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1kDQYr-0000iX-PQ; Wed, 02 Sep 2020 11:04:17 +0000
+ id 1kDRn6-00033J-Kw; Wed, 02 Sep 2020 12:23:04 +0000
 To: xen-devel@lists.xenproject.org,
     osstest-admin@xenproject.org
-Message-ID: <osstest-153549-mainreport@xen.org>
+Message-ID: <osstest-153552-mainreport@xen.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Subject: [ovmf test] 153549: regressions - FAIL
+Subject: [ovmf test] 153552: regressions - FAIL
 X-Osstest-Failures: ovmf:build-i386-xsm:xen-build:fail:regression
  ovmf:build-amd64-xsm:xen-build:fail:regression
  ovmf:build-amd64:xen-build:fail:regression
@@ -70,7 +70,7 @@ X-Osstest-Failures: ovmf:build-i386-xsm:xen-build:fail:regression
 X-Osstest-Versions-This: ovmf=0b143fa43e92be15d11e22f80773bcb1b2b0608f
 X-Osstest-Versions-That: ovmf=63d92674d240ab4ecab94f98e1e198842bb7de00
 From: osstest service owner <osstest-admin@xenproject.org>
-Date: Wed, 02 Sep 2020 11:04:17 +0000
+Date: Wed, 02 Sep 2020 12:23:04 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,8 +84,8 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-flight 153549 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/153549/
+flight 153552 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/153552/
 
 Regressions :-(
 
@@ -108,8 +108,8 @@ baseline version:
  ovmf                 63d92674d240ab4ecab94f98e1e198842bb7de00
 
 Last test of basis   152863  2020-08-26 16:09:47 Z    6 days
-Failing since        152915  2020-08-27 18:09:42 Z    5 days  110 attempts
-Testing same since   153549  2020-09-02 10:41:52 Z    0 days    1 attempts
+Failing since        152915  2020-08-27 18:09:42 Z    5 days  111 attempts
+Testing same since   153549  2020-09-02 10:41:52 Z    0 days    2 attempts
 
 ------------------------------------------------------------
 People who touched revisions under test:
