@@ -2,67 +2,61 @@ Return-Path: <SRS0=suLm=CL=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.1 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-11.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A3689C433E2
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2020 10:13:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B77E9C433E7
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2020 10:15:41 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7281B2071B
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2020 10:13:28 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="OnHxhqt+"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7281B2071B
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 86FD22078B
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Sep 2020 10:15:41 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 86FD22078B
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kDPlR-0002hZ-K6; Wed, 02 Sep 2020 10:13:13 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=A6j+=CL=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
- id 1kDPlP-0002hS-Sw
- for xen-devel@lists.xenproject.org; Wed, 02 Sep 2020 10:13:11 +0000
-X-Inumbo-ID: 6ad139ee-c3bd-4188-95ca-bbdcf5cee126
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 6ad139ee-c3bd-4188-95ca-bbdcf5cee126;
- Wed, 02 Sep 2020 10:13:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
- Content-Transfer-Encoding:Content-Type:Message-ID:To;
- bh=TXFbbR8+tVcM5XsqtPaY214i0luDXTcRk9wcqX4Vqls=; b=OnHxhqt+KpO31vEi5nu8mIVD3Q
- lvrrCjkCPzLOYdP7mlDg+4mleBnxmwpNQAypEDl36f6UlUqIo48JCNmWlQlghUP8ZBAQoGxv+lquA
- Vs7dPV9I6v0K5Gj9Abu96M6vfwRFGEK8OgPVbK5nM/wtMplVuO39T5okq/836vDfUncA=;
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kDPlO-0001mG-Ii; Wed, 02 Sep 2020 10:13:10 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kDPlO-0006HR-Bb; Wed, 02 Sep 2020 10:13:10 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1kDPlO-0004y7-B9; Wed, 02 Sep 2020 10:13:10 +0000
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-153545-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+	id 1kDPnd-0002qj-1h; Wed, 02 Sep 2020 10:15:29 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=uC8g=CL=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1kDPnb-0002qb-G2
+ for xen-devel@lists.xenproject.org; Wed, 02 Sep 2020 10:15:27 +0000
+X-Inumbo-ID: a40a8e83-7e5c-41e9-918d-320905f95d9c
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id a40a8e83-7e5c-41e9-918d-320905f95d9c;
+ Wed, 02 Sep 2020 10:15:26 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id D97A3AC61;
+ Wed,  2 Sep 2020 10:15:26 +0000 (UTC)
+Subject: Re: [PATCH v1 4/5] xen/balloon: try to merge system ram resources
+To: David Hildenbrand <david@redhat.com>, linux-kernel@vger.kernel.org
+Cc: virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
+ linux-hyperv@vger.kernel.org, xen-devel@lists.xenproject.org,
+ Andrew Morton <akpm@linux-foundation.org>, Michal Hocko <mhocko@suse.com>,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
+ Julien Grall <julien@xen.org>, Pankaj Gupta <pankaj.gupta.linux@gmail.com>,
+ Baoquan He <bhe@redhat.com>, Wei Yang <richardw.yang@linux.intel.com>
+References: <20200821103431.13481-1-david@redhat.com>
+ <20200821103431.13481-5-david@redhat.com>
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Message-ID: <226413fc-ef25-59bd-772f-79012fda0ee3@suse.com>
+Date: Wed, 2 Sep 2020 12:15:25 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.11.0
 MIME-Version: 1.0
-Subject: [xen-unstable-coverity test] 153545: all pass - PUSHED
-X-Osstest-Versions-This: xen=afe018e041ec112d90a8b4e6ed607d22aa06f280
-X-Osstest-Versions-That: xen=d400dc5729e4e132d61c2e7df57d81aaed762044
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Wed, 02 Sep 2020 10:13:10 +0000
+In-Reply-To: <20200821103431.13481-5-david@redhat.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,45 +70,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-flight 153545 xen-unstable-coverity real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/153545/
+On 21.08.20 12:34, David Hildenbrand wrote:
+> Let's reuse the new mechanism to merge system ram resources below the
+> root. We are the only one hotplugging system ram (e.g., DIMMs don't apply),
+> so this is safe to be used.
+> 
+> Cc: Andrew Morton <akpm@linux-foundation.org>
+> Cc: Michal Hocko <mhocko@suse.com>
+> Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+> Cc: Juergen Gross <jgross@suse.com>
+> Cc: Stefano Stabellini <sstabellini@kernel.org>
+> Cc: Roger Pau Monné <roger.pau@citrix.com>
+> Cc: Julien Grall <julien@xen.org>
+> Cc: Pankaj Gupta <pankaj.gupta.linux@gmail.com>
+> Cc: Baoquan He <bhe@redhat.com>
+> Cc: Wei Yang <richardw.yang@linux.intel.com>
+> Signed-off-by: David Hildenbrand <david@redhat.com>
+> ---
+>   drivers/xen/balloon.c | 4 ++++
+>   1 file changed, 4 insertions(+)
+> 
+> diff --git a/drivers/xen/balloon.c b/drivers/xen/balloon.c
+> index 37ffccda8bb87..5ec73f752b8a7 100644
+> --- a/drivers/xen/balloon.c
+> +++ b/drivers/xen/balloon.c
+> @@ -338,6 +338,10 @@ static enum bp_state reserve_additional_memory(void)
+>   	if (rc) {
+>   		pr_warn("Cannot add additional memory (%i)\n", rc);
+>   		goto err;
+> +	} else {
+> +		resource = NULL;
+> +		/* Try to reduce the number of system ram resources. */
+> +		merge_system_ram_resources(&iomem_resource);
+>   	}
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- xen                  afe018e041ec112d90a8b4e6ed607d22aa06f280
-baseline version:
- xen                  d400dc5729e4e132d61c2e7df57d81aaed762044
-
-Last test of basis   153169  2020-08-30 09:18:24 Z    3 days
-Testing same since   153545  2020-09-02 09:18:27 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-
-jobs:
- coverity-amd64                                               pass    
+I don't see the need for setting resource to NULL and to use an "else"
+clause here.
 
 
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/xen.git
-   d400dc5729..afe018e041  afe018e041ec112d90a8b4e6ed607d22aa06f280 -> coverity-tested/smoke
+Juergen
 
