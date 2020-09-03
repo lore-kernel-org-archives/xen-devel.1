@@ -2,77 +2,54 @@ Return-Path: <SRS0=byym=CM=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no
+X-Spam-Status: No, score=-7.9 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BBCE9C433E2
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2020 13:34:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E58CC433E2
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2020 14:03:06 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 708D02072A
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2020 13:34:27 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="HOCazn2A"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 708D02072A
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id 363A62151B
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2020 14:03:06 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 363A62151B
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kDpNQ-0004bh-OM; Thu, 03 Sep 2020 13:34:08 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=rP6q=CM=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1kDpNP-0004bc-2D
- for xen-devel@lists.xenproject.org; Thu, 03 Sep 2020 13:34:07 +0000
-X-Inumbo-ID: 1a20d37f-4858-4a16-9994-4fb706782dd0
-Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 1a20d37f-4858-4a16-9994-4fb706782dd0;
- Thu, 03 Sep 2020 13:34:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1599140046;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:content-transfer-encoding:in-reply-to;
- bh=FRAPDq0IfR6hc3VwoYGazKWr6UscBv3BJC1OzJHsaC4=;
- b=HOCazn2Au9s/99qk8/4bYw7+q9yeemUsOHwIs3HBicLTrtyogu6t3xPv
- BvSkLjDms1LZlq5Di4wIeWBplyMQ3/uNBLmzTCNPsU0zOgkC8g4dhmtLW
- BbahGTQybk5h4HqTVpEquZfpamrX3Lxdd7YN3jSRBgnD6REauDSYRmJbU o=;
-Authentication-Results: esa3.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: z3OLn3i0byoj3w14Iu/PhE2V8Du/zki8jQAWC6Yc/PEvXXBzQ1JTt0tPvwSGQyZwj3mfsE2zQd
- 6NbOaK+YIbeTbvk43LijvdG7XglShaCdP/dUJTxyBdh0MTy/Fmen4BxsBw0NJt5qMrcGkT87Ep
- 03uDmGN6EZ5zVDdSilj1Ho2DJVE1rSoieWg49PzyRcEmfq2VD9G/ga4MAueBlrJedscC3JKs7j
- mcSD9d2SEVGri1rg0CYw2zK2RGUeMgeMjAonEqxM+sKyKs1ak5iH9FZNpUx6kfRO0wE+fyAOB4
- pO8=
-X-SBRS: 2.7
-X-MesageID: 25907108
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,386,1592884800"; d="scan'208";a="25907108"
-Date: Thu, 3 Sep 2020 15:33:56 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-CC: <xen-devel@lists.xenproject.org>, Jun Nakajima <jun.nakajima@intel.com>,
- Kevin Tian <kevin.tian@intel.com>, Jan Beulich <jbeulich@suse.com>, Wei Liu
- <wl@xen.org>
-Subject: Re: [PATCH v3 5/8] x86/pv: allow reading FEATURE_CONTROL MSR
-Message-ID: <20200903133356.GK753@Air-de-Roger>
-References: <20200901105445.22277-1-roger.pau@citrix.com>
- <20200901105445.22277-6-roger.pau@citrix.com>
- <d3a4db9b-2142-b9cb-f84c-2c378f125198@citrix.com>
+	id 1kDpp1-0007ZK-Vp; Thu, 03 Sep 2020 14:02:39 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=kD+y=CM=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1kDpp0-0007ZF-GX
+ for xen-devel@lists.xenproject.org; Thu, 03 Sep 2020 14:02:38 +0000
+X-Inumbo-ID: b00c1511-1452-43fa-a809-f050b27fcce9
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id b00c1511-1452-43fa-a809-f050b27fcce9;
+ Thu, 03 Sep 2020 14:02:37 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 86E6BAB7D;
+ Thu,  3 Sep 2020 14:02:37 +0000 (UTC)
+Subject: Re: [xen-unstable test] 153602: regressions - FAIL
+To: Costin Lupu <costin.lupu@cs.pub.ro>
+References: <osstest-153602-mainreport@xen.org>
+Cc: osstest service owner <osstest-admin@xenproject.org>,
+ xen-devel@lists.xenproject.org, Wei Liu <wl@xen.org>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <1bdbf90f-2150-cb86-63a2-37e5148ec34e@suse.com>
+Date: Thu, 3 Sep 2020 16:02:45 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <d3a4db9b-2142-b9cb-f84c-2c378f125198@citrix.com>
-X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
- FTLPEX02CL06.citrite.net (10.13.108.179)
+In-Reply-To: <osstest-153602-mainreport@xen.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,83 +63,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Wed, Sep 02, 2020 at 09:56:48PM +0100, Andrew Cooper wrote:
-> On 01/09/2020 11:54, Roger Pau Monne wrote:
-> > Linux PV guests will attempt to read the FEATURE_CONTROL MSR, so move
-> > the handling done in VMX code into guest_rdmsr as it can be shared
-> > between PV and HVM guests that way.
-> >
-> > Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-> > ---
-> > Changes from v1:
-> >  - Move the VMX implementation into guest_rdmsr.
-> > ---
-> >  xen/arch/x86/hvm/vmx/vmx.c |  8 +-------
-> >  xen/arch/x86/msr.c         | 13 +++++++++++++
-> >  2 files changed, 14 insertions(+), 7 deletions(-)
-> >
-> > diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-> > index 4717e50d4a..f6657af923 100644
-> > --- a/xen/arch/x86/hvm/vmx/vmx.c
-> > +++ b/xen/arch/x86/hvm/vmx/vmx.c
-> > @@ -2980,13 +2980,7 @@ static int vmx_msr_read_intercept(unsigned int msr, uint64_t *msr_content)
-> >      case MSR_IA32_DEBUGCTLMSR:
-> >          __vmread(GUEST_IA32_DEBUGCTL, msr_content);
-> >          break;
-> > -    case MSR_IA32_FEATURE_CONTROL:
-> > -        *msr_content = IA32_FEATURE_CONTROL_LOCK;
-> > -        if ( vmce_has_lmce(curr) )
-> > -            *msr_content |= IA32_FEATURE_CONTROL_LMCE_ON;
-> > -        if ( nestedhvm_enabled(curr->domain) )
-> > -            *msr_content |= IA32_FEATURE_CONTROL_ENABLE_VMXON_OUTSIDE_SMX;
-> > -        break;
-> > +
-> >      case MSR_IA32_VMX_BASIC...MSR_IA32_VMX_VMFUNC:
-> >          if ( !nvmx_msr_read_intercept(msr, msr_content) )
-> >              goto gp_fault;
-> > diff --git a/xen/arch/x86/msr.c b/xen/arch/x86/msr.c
-> > index e84107ac7b..cc2f111a90 100644
-> > --- a/xen/arch/x86/msr.c
-> > +++ b/xen/arch/x86/msr.c
-> > @@ -25,6 +25,7 @@
-> >  #include <xen/sched.h>
-> >  
-> >  #include <asm/debugreg.h>
-> > +#include <asm/hvm/nestedhvm.h>
-> >  #include <asm/hvm/viridian.h>
-> >  #include <asm/msr.h>
-> >  #include <asm/setup.h>
-> > @@ -197,6 +198,18 @@ int guest_rdmsr(struct vcpu *v, uint32_t msr, uint64_t *val)
-> >          /* Not offered to guests. */
-> >          goto gp_fault;
-> >  
-> > +    case MSR_IA32_FEATURE_CONTROL:
-> > +        if ( !(cp->x86_vendor & X86_VENDOR_INTEL) )
-> > +            goto gp_fault;
+On 03.09.2020 12:24, osstest service owner wrote:
+> flight 153602 xen-unstable real [real]
+> http://logs.test-lab.xenproject.org/osstest/logs/153602/
 > 
-> The MSR is available if:
+> Regressions :-(
 > 
-> "If any one enumeration
-> condition for defined bit
-> field position greater than
-> bit 0 holds."
-> 
-> which for us means cp->basic.vmx || cp->feat.lmce at the moment, with
-> perhaps some smx/sgx in the future.
+> Tests which did not succeed and are blocking,
+> including tests which could not be run:
+>  test-amd64-i386-xl-qemut-stubdom-debianhvm-amd64-xsm 10 debian-hvm-install fail REGR. vs. 152877
+>  test-amd64-amd64-xl-qemut-stubdom-debianhvm-amd64-xsm 10 debian-hvm-install fail REGR. vs. 152877
 
-I don't think there's a lmce cpu bit (seems to be signaled in
-IA32_MCG_CAP[27] = 1), maybe I should just use vmce_has_lmce?
+While at least the hypervisor logs don't provide clear indication
+(and I don't know where else to look among the files osstest
+provides) I can't help thinking that stubdom apparently
+crashing is still fallout from the mini-os changes (and no-one
+really looks to care). In particular I think that this
 
-if ( !cp->basic.vmx || !vmce_has_lmce(v) )
-    goto gp_fault;
+@@ -374,6 +376,10 @@ out:
+        }
+     if (ip)
+         *ip = strdup(ldev->ip);
++    if (mask)
++        *mask = strdup(ldev->mask);
++    if (gw)
++        *gw = strdup(ldev->gw);
 
-Is it fine however to return a #GP if we don't provide any of those
-features to guests, but the underlying CPU does support them?
+was insufficient, as it doesn't guard against ldev->mask and/or
+ldev->gw being NULL, despite that being the result (afaict) when
+only an IP address is found in the parsed string. Please can you
+urgently look into the failures, even if it isn't 100% certain
+that your change is the culprit?
 
-That seems to be slightly different from how we currently handle reads
-to FEATURE_CONTROL, since it will never fault on Intel (or compliant),
-even if we just return with bit 0 set alone. The new approach seems
-closer to what real hardware would do.
-
-Thanks, Roger.
+Jan
 
