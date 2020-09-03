@@ -2,73 +2,56 @@ Return-Path: <SRS0=byym=CM=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.9 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 52F29C2BB84
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2020 08:16:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3617BC433E7
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2020 08:29:42 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1B04320767
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2020 08:16:25 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="SyKKwsnh"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1B04320767
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id EBD6520767
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2020 08:29:41 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EBD6520767
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kDkPK-0007CS-SR; Thu, 03 Sep 2020 08:15:46 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=rP6q=CM=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1kDkPJ-0007CN-FY
- for xen-devel@lists.xenproject.org; Thu, 03 Sep 2020 08:15:45 +0000
-X-Inumbo-ID: de320057-b441-41b4-8fc1-8c6145a53830
-Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id de320057-b441-41b4-8fc1-8c6145a53830;
- Thu, 03 Sep 2020 08:15:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1599120944;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=VjwptlLFdmjOA316+0lctWjIVuC9966OP2Cd6juf8C8=;
- b=SyKKwsnh16pfSkGUPYBYJAeZrBc/NpJabPrN9ckpiK7Wz/BKVoNpXXD3
- VozxK+mn8XQEJJ6oATCBCeA+mwtHfgUVno0rmKmbkDq8mRXR7YsTl92/e
- SS/nQrj5O3G8lf9fHvEv/MpWKje8ljGMGBNUAJxwCmKrqJKZ+GI1FHx3a 4=;
-Authentication-Results: esa2.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: 8Q8i1MWT6hIskMtEOLfLSpFUnvFmV/oOqvTAqLU/Qthoawk9lXvYaG2tRXJideoevy/PUWmuVL
- Eos+UtMkZv91JPYjFQz3JFpKeKJQesxbgblSX24p5n91XGlfdJqvaWwcn1ws0/DoP+DkhkQ29q
- 7SM8tdO5lNo1pNaei7VcjkWqGsEN6zs9UmnimN/DQJ30y9zg00obk+DQvN6DoBIJJOM3rT5Ggj
- dGjV9qWgschootmzZs7Jx1XY7+t0+fY0IKxORirKVFv0PlBOOwe2oPYMrl/vZ859EHCcxLLMAu
- lGA=
-X-SBRS: 2.7
-X-MesageID: 25909845
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,385,1592884800"; d="scan'208";a="25909845"
-Date: Thu, 3 Sep 2020 10:15:28 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-CC: <xen-devel@lists.xenproject.org>, Jan Beulich <jbeulich@suse.com>, Wei Liu
- <wl@xen.org>
+	id 1kDkcW-0008LN-4A; Thu, 03 Sep 2020 08:29:24 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=kD+y=CM=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1kDkcV-0008LI-8u
+ for xen-devel@lists.xenproject.org; Thu, 03 Sep 2020 08:29:23 +0000
+X-Inumbo-ID: 6a1dc7e5-3221-475b-9de0-d975ebf35eef
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 6a1dc7e5-3221-475b-9de0-d975ebf35eef;
+ Thu, 03 Sep 2020 08:29:22 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 859E5AD1A;
+ Thu,  3 Sep 2020 08:29:22 +0000 (UTC)
 Subject: Re: [PATCH v3 4/8] x86/svm: handle BU_CFG and BU_CFG2 with cases
-Message-ID: <20200903080657.GJ753@Air-de-Roger>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Roger Pau Monne <roger.pau@citrix.com>, xen-devel@lists.xenproject.org,
+ Wei Liu <wl@xen.org>
 References: <20200901105445.22277-1-roger.pau@citrix.com>
  <20200901105445.22277-5-roger.pau@citrix.com>
  <6f7a8f21-008f-8b16-fc81-655a58338869@citrix.com>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <a61ed2b1-84ab-0c5e-c14f-635be15feda7@suse.com>
+Date: Thu, 3 Sep 2020 10:29:30 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
 In-Reply-To: <6f7a8f21-008f-8b16-fc81-655a58338869@citrix.com>
-X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
- FTLPEX02CL06.citrite.net (10.13.108.179)
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -82,56 +65,44 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Wed, Sep 02, 2020 at 10:02:33PM +0100, Andrew Cooper wrote:
+On 02.09.2020 23:02, Andrew Cooper wrote:
 > On 01/09/2020 11:54, Roger Pau Monne wrote:
-> > @@ -1942,19 +1966,6 @@ static int svm_msr_read_intercept(unsigned int msr, uint64_t *msr_content)
-> >      default:
-> >          if ( rdmsr_safe(msr, *msr_content) == 0 )
-> >              break;
-> > -
-> > -        if ( boot_cpu_data.x86 == 0xf && msr == MSR_F10_BU_CFG )
-> > -        {
-> > -            /* Win2k8 x64 reads this MSR on revF chips, where it
-> > -             * wasn't publically available; it uses a magic constant
-> > -             * in %rdi as a password, which we don't have in
-> > -             * rdmsr_safe().  Since we'll ignore the later writes,
-> > -             * just use a plausible value here (the reset value from
-> > -             * rev10h chips) if the real CPU didn't provide one. */
-> > -            *msr_content = 0x0000000010200020ull;
-> > -            break;
-> > -        }
-> > -
-> >          goto gpf;
-> >      }
-> >  
-> > @@ -2110,6 +2121,12 @@ static int svm_msr_write_intercept(unsigned int msr, uint64_t msr_content)
-> >          nsvm->ns_msr_hsavepa = msr_content;
-> >          break;
-> >  
-> > +    case MSR_F10_BU_CFG:
-> > +    case MSR_F10_BU_CFG2:
-> > +        if ( rdmsr_safe(msr, msr_content) )
-> > +            goto gpf;
+>> @@ -1942,19 +1966,6 @@ static int svm_msr_read_intercept(unsigned int msr, uint64_t *msr_content)
+>>      default:
+>>          if ( rdmsr_safe(msr, *msr_content) == 0 )
+>>              break;
+>> -
+>> -        if ( boot_cpu_data.x86 == 0xf && msr == MSR_F10_BU_CFG )
+>> -        {
+>> -            /* Win2k8 x64 reads this MSR on revF chips, where it
+>> -             * wasn't publically available; it uses a magic constant
+>> -             * in %rdi as a password, which we don't have in
+>> -             * rdmsr_safe().  Since we'll ignore the later writes,
+>> -             * just use a plausible value here (the reset value from
+>> -             * rev10h chips) if the real CPU didn't provide one. */
+>> -            *msr_content = 0x0000000010200020ull;
+>> -            break;
+>> -        }
+>> -
+>>          goto gpf;
+>>      }
+>>  
+>> @@ -2110,6 +2121,12 @@ static int svm_msr_write_intercept(unsigned int msr, uint64_t msr_content)
+>>          nsvm->ns_msr_hsavepa = msr_content;
+>>          break;
+>>  
+>> +    case MSR_F10_BU_CFG:
+>> +    case MSR_F10_BU_CFG2:
+>> +        if ( rdmsr_safe(msr, msr_content) )
+>> +            goto gpf;
 > 
 > The comment you've moved depends on this not having this behaviour, as
 > you'll now hand #GP back to Win2k8 on its write.
-
-Oh, unless I'm very confused the comment was already wrong, since
-svm_msr_write_intercept previous to this patch would return a #GP when
-trying to write to BU_CFG if the underlying MSR is not readable, so
-this just keeps the previous behavior.
-
-Looking at the original commit (338db98dd8d) it seems the intention
-was to only handle reads and let writes return a #GP?
-
-Maybe Win2k8 would only read the MSR?
-
+> 
 > Honestly, given that how obsolete both Win2k8 and K10's are, I'm
 > seriously tempted to suggest dropping this workaround entirely.
 
-I'm fine to just drop the workaround, but it seems quite trivial to
-just keep it as is (reads returns a know value, writes #GP). I can
-adjust the comment to be clearer.
+Let's not (yet). I'm told we (as a company) still support such guests.
 
-Thanks, Roger.
+Jan
 
