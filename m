@@ -2,74 +2,65 @@ Return-Path: <SRS0=byym=CM=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.1 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-13.1 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D194EC433E7
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2020 09:23:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E9F83C433E7
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2020 10:06:02 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 595E62071B
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2020 09:23:07 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 8D7CE2071B
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2020 10:06:02 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="HOYHhND9"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 595E62071B
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="IncWCt6u"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8D7CE2071B
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kDlRs-0005Z0-Ah; Thu, 03 Sep 2020 09:22:28 +0000
+	id 1kDm7n-0000yH-3X; Thu, 03 Sep 2020 10:05:47 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=zDHn=CM=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
- id 1kDlRr-0005Yv-PT
- for xen-devel@lists.xenproject.org; Thu, 03 Sep 2020 09:22:27 +0000
-X-Inumbo-ID: 8fe3de0e-7a9d-4bf4-a953-944ef2f729dc
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=rObT=CM=xen.org=paul@srs-us1.protection.inumbo.net>)
+ id 1kDm7l-0000xt-Cm
+ for xen-devel@lists.xenproject.org; Thu, 03 Sep 2020 10:05:45 +0000
+X-Inumbo-ID: 60b0fc1e-eacb-467d-b6a8-20b92b3dc9c3
 Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 8fe3de0e-7a9d-4bf4-a953-944ef2f729dc;
- Thu, 03 Sep 2020 09:22:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
- Content-Transfer-Encoding:Content-Type:Message-ID:To;
- bh=8ZOfWOwctAHbp9EOqy8NSTKrezu+qF+4Ws4IupCU0FY=; b=HOYHhND9fhp4kwRYo7NW8v3OFK
- 7dsa6eT6F26HxY2WOr7nPfTzhk4afbLmzPM1IYCE9JOz2XAe4RcXO2ALp55mJ5OSgUhrhajd1Gqd+
- spFE6czHACVQ1db7kEkE4Am+kKb2lw+DpXquxlSzvPtqh6U3kxkC2WiuBex7jxOYnj0A=;
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
+ id 60b0fc1e-eacb-467d-b6a8-20b92b3dc9c3;
+ Thu, 03 Sep 2020 10:05:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
+ bh=DPBUlM35jhYlf960TGWbjpD76dUBghbgq1ala0F7pCc=; b=IncWCt6ubITXyNjv8DHCyDfKkO
+ g1W68Sk12Cro7FDApSiiXjkSw63RYultcM1dLis3fPtG/Fdh8PDktWoIo6L4zPmN9JSZq4RvFXQQM
+ piHw1KFlQ0BQkDAULS8neNFxVrxvrwBx5iD2SPRvRmFr9ypnUuQldLl3ZlQeCcVySU9k=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kDlRo-0004fe-JQ; Thu, 03 Sep 2020 09:22:24 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kDlRo-0001sP-BO; Thu, 03 Sep 2020 09:22:24 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1kDlRo-0006qu-As; Thu, 03 Sep 2020 09:22:24 +0000
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-153614-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+ (envelope-from <paul@xen.org>)
+ id 1kDm7h-0005b0-1b; Thu, 03 Sep 2020 10:05:41 +0000
+Received: from host86-176-94-160.range86-176.btcentralplus.com
+ ([86.176.94.160] helo=u2f063a87eabd5f.home)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+ (envelope-from <paul@xen.org>)
+ id 1kDm7g-0007WE-P7; Thu, 03 Sep 2020 10:05:40 +0000
+From: Paul Durrant <paul@xen.org>
+To: xen-devel@lists.xenproject.org
+Cc: Paul Durrant <pdurrant@amazon.com>, Ian Jackson <iwj@xenproject.org>,
+ Wei Liu <wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH 2/2] libxl: do not automatically force detach of block devices
+Date: Thu,  3 Sep 2020 11:05:37 +0100
+Message-Id: <20200903100537.1337-3-paul@xen.org>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20200903100537.1337-1-paul@xen.org>
+References: <20200903100537.1337-1-paul@xen.org>
 MIME-Version: 1.0
-Subject: [ovmf test] 153614: regressions - FAIL
-X-Osstest-Failures: ovmf:build-i386-xsm:xen-build:fail:regression
- ovmf:build-amd64-xsm:xen-build:fail:regression
- ovmf:build-amd64:xen-build:fail:regression
- ovmf:build-i386:xen-build:fail:regression
- ovmf:build-amd64-libvirt:build-check(1):blocked:nonblocking
- ovmf:build-i386-libvirt:build-check(1):blocked:nonblocking
- ovmf:test-amd64-amd64-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
- ovmf:test-amd64-i386-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
-X-Osstest-Versions-This: ovmf=e8453aa373e96ed76b72a6968d8a48dfb002a1a6
-X-Osstest-Versions-That: ovmf=63d92674d240ab4ecab94f98e1e198842bb7de00
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Thu, 03 Sep 2020 09:22:24 +0000
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,354 +74,58 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-flight 153614 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/153614/
+From: Paul Durrant <pdurrant@amazon.com>
 
-Regressions :-(
+The manpage for 'xl' documents that guest co-operation is required for a (non-
+forced) block-detach operation and that it may consequently fail. Currently,
+however, the implementation of generic device removal means that a time-out
+of a block-detach is being automatically re-tried with the force flag set
+rather than failing. This patch stops such behaviour.
 
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- build-i386-xsm                6 xen-build                fail REGR. vs. 152863
- build-amd64-xsm               6 xen-build                fail REGR. vs. 152863
- build-amd64                   6 xen-build                fail REGR. vs. 152863
- build-i386                    6 xen-build                fail REGR. vs. 152863
+Signed-off-by: Paul Durrant <pdurrant@amazon.com>
+---
+Cc: Ian Jackson <iwj@xenproject.org>
+Cc: Wei Liu <wl@xen.org>
+Cc: Anthony PERARD <anthony.perard@citrix.com>
+---
+ tools/libxl/libxl_device.c | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
 
-Tests which did not succeed, but are not blocking:
- build-amd64-libvirt           1 build-check(1)               blocked  n/a
- build-i386-libvirt            1 build-check(1)               blocked  n/a
- test-amd64-amd64-xl-qemuu-ovmf-amd64  1 build-check(1)             blocked n/a
- test-amd64-i386-xl-qemuu-ovmf-amd64  1 build-check(1)              blocked n/a
+diff --git a/tools/libxl/libxl_device.c b/tools/libxl/libxl_device.c
+index 0381c5d509..d17ca78848 100644
+--- a/tools/libxl/libxl_device.c
++++ b/tools/libxl/libxl_device.c
+@@ -1092,7 +1092,8 @@ static void device_backend_callback(libxl__egc *egc, libxl__ev_devstate *ds,
+ 
+     if (rc == ERROR_TIMEDOUT &&
+         aodev->action == LIBXL__DEVICE_ACTION_REMOVE &&
+-        !aodev->force) {
++        !aodev->force &&
++        aodev->dev->kind != LIBXL__DEVICE_KIND_VBD) {
+         LOGD(DEBUG, aodev->dev->domid, "Timeout reached, initiating forced remove");
+         aodev->force = 1;
+         libxl__initiate_device_generic_remove(egc, aodev);
+@@ -1103,7 +1104,8 @@ static void device_backend_callback(libxl__egc *egc, libxl__ev_devstate *ds,
+         LOGD(ERROR, aodev->dev->domid, "unable to %s device with path %s",
+                     libxl__device_action_to_string(aodev->action),
+                     libxl__device_backend_path(gc, aodev->dev));
+-        goto out;
++        if (!aodev->force)
++            goto out;
+     }
+ 
+     device_hotplug(egc, aodev);
+@@ -1319,7 +1321,8 @@ static void device_hotplug_done(libxl__egc *egc, libxl__ao_device *aodev)
+     device_hotplug_clean(gc, aodev);
+ 
+     /* Clean xenstore if it's a disconnection */
+-    if (aodev->action == LIBXL__DEVICE_ACTION_REMOVE) {
++    if (aodev->action == LIBXL__DEVICE_ACTION_REMOVE &&
++        (aodev->force || !aodev->rc)) {
+         rc = libxl__device_destroy(gc, aodev->dev);
+         if (!aodev->rc)
+             aodev->rc = rc;
+-- 
+2.20.1
 
-version targeted for testing:
- ovmf                 e8453aa373e96ed76b72a6968d8a48dfb002a1a6
-baseline version:
- ovmf                 63d92674d240ab4ecab94f98e1e198842bb7de00
-
-Last test of basis   152863  2020-08-26 16:09:47 Z    7 days
-Failing since        152915  2020-08-27 18:09:42 Z    6 days  123 attempts
-Testing same since   153553  2020-09-02 12:40:39 Z    0 days   12 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Bob Feng <bob.c.feng@intel.com>
-  Laszlo Ersek <lersek@redhat.com>
-  Paul <paul.grimes@amd.com>
-  Paul G <paul.grimes@amd.com>
-  Qi Zhang <qi1.zhang@intel.com>
-  Wenyi Xie <xiewenyi2@huawei.com>
-  Zhiguang Liu <zhiguang.liu@intel.com>
-
-jobs:
- build-amd64-xsm                                              fail    
- build-i386-xsm                                               fail    
- build-amd64                                                  fail    
- build-i386                                                   fail    
- build-amd64-libvirt                                          blocked 
- build-i386-libvirt                                           blocked 
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         blocked 
- test-amd64-i386-xl-qemuu-ovmf-amd64                          blocked 
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Not pushing.
-
-------------------------------------------------------------
-commit e8453aa373e96ed76b72a6968d8a48dfb002a1a6
-Author: Qi Zhang <qi1.zhang@intel.com>
-Date:   Tue Sep 1 15:26:22 2020 +0800
-
-    MdeModulePkg/Library: add PEIM and SEC module type to TpmMeasurementLibNull
-    
-    REF: https://bugzilla.tianocore.org/show_bug.cgi?id=2940
-    
-    Signed-off-by: Qi Zhang <qi1.zhang@intel.com>
-    Cc: Jian J Wang <jian.j.wang@intel.com>
-    Cc: Hao A Wu <hao.a.wu@intel.com>
-    Cc: Jiewen Yao <jiewen.yao@intel.com>
-    Reviewed-by: Laszlo Ersek <lersek@redhat.com>
-    Message-Id: <20200901072622.9391-1-qi1.zhang@intel.com>
-    Reviewed-by: Jian J Wang <jian.j.wang@intel.com>
-
-commit 0b143fa43e92be15d11e22f80773bcb1b2b0608f
-Author: Laszlo Ersek <lersek@redhat.com>
-Date:   Tue Sep 1 11:12:21 2020 +0200
-
-    SecurityPkg/DxeImageVerificationLib: catch alignment overflow (CVE-2019-14562)
-    
-    The DxeImageVerificationHandler() function currently checks whether
-    "SecDataDir" has enough room for "WinCertificate->dwLength". However, for
-    advancing "OffSet", "WinCertificate->dwLength" is aligned to the next
-    multiple of 8. If "WinCertificate->dwLength" is large enough, the
-    alignment will return 0, and "OffSet" will be stuck at the same value.
-    
-    Check whether "SecDataDir" has room left for both
-    "WinCertificate->dwLength" and the alignment.
-    
-    Cc: Jian J Wang <jian.j.wang@intel.com>
-    Cc: Jiewen Yao <jiewen.yao@intel.com>
-    Cc: Min Xu <min.m.xu@intel.com>
-    Cc: Wenyi Xie <xiewenyi2@huawei.com>
-    Ref: https://bugzilla.tianocore.org/show_bug.cgi?id=2215
-    Signed-off-by: Laszlo Ersek <lersek@redhat.com>
-    Message-Id: <20200901091221.20948-4-lersek@redhat.com>
-    Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
-    Tested-by: Wenyi Xie <xiewenyi2@huawei.com>
-    Reviewed-by: Min M Xu <min.m.xu@intel.com>
-    Reviewed-by: Jiewen Yao <jiewen.yao@intel.com>
-
-commit a7632e913c1c106f436aefd5e76c394249c383a8
-Author: Laszlo Ersek <lersek@redhat.com>
-Date:   Tue Sep 1 11:12:20 2020 +0200
-
-    SecurityPkg/DxeImageVerificationLib: assign WinCertificate after size check
-    
-    Currently the (SecDataDirLeft <= sizeof (WIN_CERTIFICATE)) check only
-    guards the de-referencing of the "WinCertificate" pointer. It does not
-    guard the calculation of the pointer itself:
-    
-      WinCertificate = (WIN_CERTIFICATE *) (mImageBase + OffSet);
-    
-    This is wrong; if we don't know for sure that we have enough room for a
-    WIN_CERTIFICATE, then even creating such a pointer, not just
-    de-referencing it, may invoke undefined behavior.
-    
-    Move the pointer calculation after the size check.
-    
-    Cc: Jian J Wang <jian.j.wang@intel.com>
-    Cc: Jiewen Yao <jiewen.yao@intel.com>
-    Cc: Min Xu <min.m.xu@intel.com>
-    Cc: Wenyi Xie <xiewenyi2@huawei.com>
-    Ref: https://bugzilla.tianocore.org/show_bug.cgi?id=2215
-    Signed-off-by: Laszlo Ersek <lersek@redhat.com>
-    Message-Id: <20200901091221.20948-3-lersek@redhat.com>
-    Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
-    Tested-by: Wenyi Xie <xiewenyi2@huawei.com>
-    Reviewed-by: Min M Xu <min.m.xu@intel.com>
-    Reviewed-by: Jiewen Yao <jiewen.yao@intel.com>
-
-commit 503248ccdf45c14d4040ce44163facdc212e4991
-Author: Laszlo Ersek <lersek@redhat.com>
-Date:   Tue Sep 1 11:12:19 2020 +0200
-
-    SecurityPkg/DxeImageVerificationLib: extract SecDataDirEnd, SecDataDirLeft
-    
-    The following two quantities:
-    
-      SecDataDir->VirtualAddress + SecDataDir->Size
-      SecDataDir->VirtualAddress + SecDataDir->Size - OffSet
-    
-    are used multiple times in DxeImageVerificationHandler(). Introduce helper
-    variables for them: "SecDataDirEnd" and "SecDataDirLeft", respectively.
-    This saves us multiple calculations and significantly simplifies the code.
-    
-    Note that all three summands above have type UINT32, therefore the new
-    variables are also of type UINT32.
-    
-    This patch does not change behavior.
-    
-    (Note that the code already handles the case when the
-    
-      SecDataDir->VirtualAddress + SecDataDir->Size
-    
-    UINT32 addition overflows -- namely, in that case, the certificate loop is
-    never entered, and the corruption check right after the loop fires.)
-    
-    Cc: Jian J Wang <jian.j.wang@intel.com>
-    Cc: Jiewen Yao <jiewen.yao@intel.com>
-    Cc: Min Xu <min.m.xu@intel.com>
-    Cc: Wenyi Xie <xiewenyi2@huawei.com>
-    Ref: https://bugzilla.tianocore.org/show_bug.cgi?id=2215
-    Signed-off-by: Laszlo Ersek <lersek@redhat.com>
-    Message-Id: <20200901091221.20948-2-lersek@redhat.com>
-    Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
-    Tested-by: Wenyi Xie <xiewenyi2@huawei.com>
-    Reviewed-by: Min M Xu <min.m.xu@intel.com>
-    Reviewed-by: Jiewen Yao <jiewen.yao@intel.com>
-
-commit 7513559926355dcd20516d01b0b44f2cddc2ff08
-Author: Bob Feng <bob.c.feng@intel.com>
-Date:   Tue Sep 1 18:23:15 2020 +0800
-
-    BaseTools/Ecc: Fix an issue of path separator compatibility
-    
-    REF: https://bugzilla.tianocore.org/show_bug.cgi?id=2904
-    
-    The path separator is different in Windows and Linux, the
-    original code does not handle this difference. This patch
-    is to fix this issue.
-    
-    Signed-off-by: Bob Feng <bob.c.feng@intel.com>
-    Cc: Liming Gao <gaoliming@byosoft.com.cn>
-    Cc: Yuwei Chen <yuwei.chen@intel.com>
-    Cc: Shenglei Zhang <shenglei.zhang@intel.com>
-    Message-Id: <20200901102315.38840-1-bob.c.feng@intel.com>
-    Reviewed-by: Liming Gao <gaoliming@byosoft.com.cn>
-
-commit 46db105b7b77bc478452887e25836cd0745e9b65
-Author: Zhiguang Liu <zhiguang.liu@intel.com>
-Date:   Tue Sep 1 08:55:05 2020 +0800
-
-    SecurityPkg: Initailize variable Status before it is consumed.
-    
-    REF: https://bugzilla.tianocore.org/show_bug.cgi?id=2945
-    
-    V2: Move "Status = EFI_SUCCESS;" before the EDKII_TCG_PRE_HASH check.
-    
-    Cc: Jiewen Yao <jiewen.yao@intel.com>
-    Cc: Jian J Wang <jian.j.wang@intel.com>
-    Cc: Qi Zhang <qi1.zhang@intel.com>
-    Cc: Rahul Kumar <rahul1.kumar@intel.com>
-    Cc: Laszlo Ersek <lersek@redhat.com>
-    Reviewed-by: Jiewen Yao <jiewen.yao@intel.com>
-    Signed-off-by: Zhiguang Liu <zhiguang.liu@intel.com>
-    Message-Id: <20200901005505.1722-1-zhiguang.liu@intel.com>
-    Reviewed-by: Laszlo Ersek <lersek@redhat.com>
-
-commit 0c5c45a1337f82569aa9e60323e1a05a0cbbad74
-Author: Qi Zhang <qi1.zhang@intel.com>
-Date:   Mon Aug 31 10:07:21 2020 +0800
-
-    IntelFsp2WrapperPkg/IntelFsp2WrapperPkg.dec: add FspMeasurementLib.h
-    
-    REF: https://bugzilla.tianocore.org/show_bug.cgi?id=2944
-    
-    Cc: Chasel Chiu <chasel.chiu@intel.com>
-    Cc: Nate DeSimone <nathaniel.l.desimone@intel.com>
-    Cc: Liming Gao <gaoliming@byosoft.com.cn>
-    Cc: Eric Dong <eric.dong@intel.com>
-    Signed-off-by: Qi Zhang <qi1.zhang@intel.com>
-    Message-Id: <20200831020721.8967-1-qi1.zhang@intel.com>
-    Reviewed-by: Chasel Chiu <chasel.chiu@intel.com>
-
-commit 5ffcbc46908a2037ae3260d3cfcc103e4a6a48c0
-Author: Paul <paul.grimes@amd.com>
-Date:   Fri Aug 28 04:40:51 2020 +0800
-
-    MdePkg: Correcting EFI_ACPI_DMA_TRANSFER_TYPE_16_BIT definition
-    
-    In Acpi10.h, EFI_ACPI_DMA_TRANSFER_TYPE_16_BIT is defined as 0x10,
-    but should be 0x02 per the ACPI Specification.
-    
-    REF:https://bugzilla.tianocore.org/show_bug.cgi?id=2937
-    
-    Cc: Michael D Kinney <michael.d.kinney@intel.com>
-    Cc: Liming Gao <gaoliming@byosoft.com.cn>
-    Cc: Zhiguang Liu <zhiguang.liu@intel.com>
-    Signed-off-by: Paul G <paul.grimes@amd.com>
-    Reviewed-by: Liming Gao <gaoliming@byosoft.com.cn>
-
-commit cbccf995920a28071f5403b847f29ebf8b732fa9
-Author: Laszlo Ersek <lersek@redhat.com>
-Date:   Thu Aug 27 00:21:29 2020 +0200
-
-    OvmfPkg/CpuHotplugSmm: fix CPU hotplug race just after SMI broadcast
-    
-    The "virsh setvcpus" (plural) command may hot-plug several VCPUs in quick
-    succession -- it means a series of "device_add" QEMU monitor commands,
-    back-to-back.
-    
-    If a "device_add" occurs *just after* ACPI raises the broadcast SMI, then:
-    
-    - the CPU_FOREACH() loop in QEMU's ich9_apm_ctrl_changed() cannot make the
-      SMI pending for the new CPU -- at that time, the new CPU doesn't even
-      exist yet,
-    
-    - OVMF will find the new CPU however (in the CPU hotplug register block),
-      in QemuCpuhpCollectApicIds().
-    
-    As a result, when the firmware sends an INIT-SIPI-SIPI to the new CPU in
-    SmbaseRelocate(), expecting it to boot into SMM (due to the pending SMI),
-    the new CPU instead boots straight into the post-RSM (normal mode) "pen",
-    skipping its initial SMI handler.
-    
-    The CPU halts nicely in the pen, but its SMBASE is never relocated, and
-    the SMRAM message exchange with the BSP falls apart -- the BSP gets stuck
-    in the following loop:
-    
-      //
-      // Wait until the hot-added CPU is just about to execute RSM.
-      //
-      while (Context->AboutToLeaveSmm == 0) {
-        CpuPause ();
-      }
-    
-    because the new CPU's initial SMI handler never sets the flag to nonzero.
-    
-    Fix this by sending a directed SMI to the new CPU just before sending it
-    the INIT-SIPI-SIPI. The various scenarios are documented in the code --
-    the cases affected by the patch are documented under point (2).
-    
-    Note that this is not considered a security patch, as for a malicious
-    guest OS, the issue is not exploitable -- the symptom is a hang on the
-    BSP, in the above-noted loop in SmbaseRelocate(). Instead, the patch fixes
-    behavior for a benign guest OS.
-    
-    Cc: Ard Biesheuvel <ard.biesheuvel@arm.com>
-    Cc: Igor Mammedov <imammedo@redhat.com>
-    Cc: Jordan Justen <jordan.l.justen@intel.com>
-    Cc: Philippe Mathieu-Daudé <philmd@redhat.com>
-    Fixes: 51a6fb41181529e4b50ea13377425bda6bb69ba6
-    Ref: https://bugzilla.tianocore.org/show_bug.cgi?id=2929
-    Signed-off-by: Laszlo Ersek <lersek@redhat.com>
-    Message-Id: <20200826222129.25798-3-lersek@redhat.com>
-    Reviewed-by: Ard Biesheuvel <ard.biesheuvel@arm.com>
-
-commit 020bb4b46d6f6708bb3358e1c738109b7908f0de
-Author: Laszlo Ersek <lersek@redhat.com>
-Date:   Thu Aug 27 00:21:28 2020 +0200
-
-    OvmfPkg/CpuHotplugSmm: fix CPU hotplug race just before SMI broadcast
-    
-    The "virsh setvcpus" (plural) command may hot-plug several VCPUs in quick
-    succession -- it means a series of "device_add" QEMU monitor commands,
-    back-to-back.
-    
-    If a "device_add" occurs *just before* ACPI raises the broadcast SMI,
-    then:
-    
-    - OVMF processes the hot-added CPU well.
-    
-    - However, QEMU's post-SMI ACPI loop -- which clears the pending events
-      for the hot-added CPUs that were collected before raising the SMI -- is
-      unaware of the stray CPU. Thus, the pending event is not cleared for it.
-    
-    As a result of the stuck event, at the next hot-plug, OVMF tries to re-add
-    (relocate for the 2nd time) the already-known CPU. At that time, the AP is
-    already in the normal edk2 SMM busy-wait however, so it doesn't respond to
-    the exchange that the BSP intends to do in SmbaseRelocate(). Thus the VM
-    gets stuck in SMM.
-    
-    (Because of the above symptom, this is not considered a security patch; it
-    doesn't seem exploitable by a malicious guest OS.)
-    
-    In CpuHotplugMmi(), skip the supposedly hot-added CPU if it's already
-    known. The post-SMI ACPI loop will clear the pending event for it this
-    time.
-    
-    Cc: Ard Biesheuvel <ard.biesheuvel@arm.com>
-    Cc: Igor Mammedov <imammedo@redhat.com>
-    Cc: Jordan Justen <jordan.l.justen@intel.com>
-    Cc: Philippe Mathieu-Daudé <philmd@redhat.com>
-    Fixes: bc498ac4ca7590479cfd91ad1bb8a36286b0dc21
-    Ref: https://bugzilla.tianocore.org/show_bug.cgi?id=2929
-    Signed-off-by: Laszlo Ersek <lersek@redhat.com>
-    Message-Id: <20200826222129.25798-2-lersek@redhat.com>
-    Reviewed-by: Ard Biesheuvel <ard.biesheuvel@arm.com>
 
