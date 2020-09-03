@@ -2,63 +2,60 @@ Return-Path: <SRS0=byym=CM=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.1 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.1 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E9F83C433E7
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2020 10:06:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8B094C43461
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2020 10:06:05 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8D7CE2071B
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2020 10:06:02 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 4BD952071B
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Sep 2020 10:06:05 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="IncWCt6u"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8D7CE2071B
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="VETSJdn7"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4BD952071B
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kDm7n-0000yH-3X; Thu, 03 Sep 2020 10:05:47 +0000
+	id 1kDm7h-0000xz-Qh; Thu, 03 Sep 2020 10:05:41 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=rObT=CM=xen.org=paul@srs-us1.protection.inumbo.net>)
- id 1kDm7l-0000xt-Cm
- for xen-devel@lists.xenproject.org; Thu, 03 Sep 2020 10:05:45 +0000
-X-Inumbo-ID: 60b0fc1e-eacb-467d-b6a8-20b92b3dc9c3
+ id 1kDm7g-0000xt-JF
+ for xen-devel@lists.xenproject.org; Thu, 03 Sep 2020 10:05:40 +0000
+X-Inumbo-ID: 1b34833f-115a-420b-9c76-5bd8b6597e15
 Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 60b0fc1e-eacb-467d-b6a8-20b92b3dc9c3;
- Thu, 03 Sep 2020 10:05:42 +0000 (UTC)
+ id 1b34833f-115a-420b-9c76-5bd8b6597e15;
+ Thu, 03 Sep 2020 10:05:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
- bh=DPBUlM35jhYlf960TGWbjpD76dUBghbgq1ala0F7pCc=; b=IncWCt6ubITXyNjv8DHCyDfKkO
- g1W68Sk12Cro7FDApSiiXjkSw63RYultcM1dLis3fPtG/Fdh8PDktWoIo6L4zPmN9JSZq4RvFXQQM
- piHw1KFlQ0BQkDAULS8neNFxVrxvrwBx5iD2SPRvRmFr9ypnUuQldLl3ZlQeCcVySU9k=;
+ s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:
+ Subject:Cc:To:From; bh=CvD2o1yF1nEodgtDZ2rcJG1/GIjvJzBtuBwUDERucQM=; b=VETSJd
+ n7ffTljgT+dpexcXLA4v5+t2NztKHi/h5ZnUvNUdwQ1oIENgIB2lnZJeC49xbKUmC+A1XLESL4+53
+ F1C54/gYli8v7JKAXOmPbGHCcZSCDHMdCRD/Z6C+fGaywd4lfCT/DJzMP5u7s9cElFqG+CceyNdvm
+ +6hn/1QwO+o=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kDm7h-0005b0-1b; Thu, 03 Sep 2020 10:05:41 +0000
+ id 1kDm7f-0005ar-0Z; Thu, 03 Sep 2020 10:05:39 +0000
 Received: from host86-176-94-160.range86-176.btcentralplus.com
  ([86.176.94.160] helo=u2f063a87eabd5f.home)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kDm7g-0007WE-P7; Thu, 03 Sep 2020 10:05:40 +0000
+ id 1kDm7e-0007WE-Oe; Thu, 03 Sep 2020 10:05:38 +0000
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
-Cc: Paul Durrant <pdurrant@amazon.com>, Ian Jackson <iwj@xenproject.org>,
- Wei Liu <wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH 2/2] libxl: do not automatically force detach of block devices
-Date: Thu,  3 Sep 2020 11:05:37 +0100
-Message-Id: <20200903100537.1337-3-paul@xen.org>
+Cc: Paul Durrant <pdurrant@amazon.com>
+Subject: [PATCH 0/2] fix 'xl block-detach'
+Date: Thu,  3 Sep 2020 11:05:35 +0100
+Message-Id: <20200903100537.1337-1-paul@xen.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200903100537.1337-1-paul@xen.org>
-References: <20200903100537.1337-1-paul@xen.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
@@ -76,55 +73,18 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Paul Durrant <pdurrant@amazon.com>
 
-The manpage for 'xl' documents that guest co-operation is required for a (non-
-forced) block-detach operation and that it may consequently fail. Currently,
-however, the implementation of generic device removal means that a time-out
-of a block-detach is being automatically re-tried with the force flag set
-rather than failing. This patch stops such behaviour.
+This series makes it behave as the documentation states it should
 
-Signed-off-by: Paul Durrant <pdurrant@amazon.com>
----
-Cc: Ian Jackson <iwj@xenproject.org>
-Cc: Wei Liu <wl@xen.org>
-Cc: Anthony PERARD <anthony.perard@citrix.com>
----
- tools/libxl/libxl_device.c | 9 ++++++---
- 1 file changed, 6 insertions(+), 3 deletions(-)
+Paul Durrant (2):
+  xl: implement documented --force option for block-detach
+  libxl: do not automatically force detach of block devices
 
-diff --git a/tools/libxl/libxl_device.c b/tools/libxl/libxl_device.c
-index 0381c5d509..d17ca78848 100644
---- a/tools/libxl/libxl_device.c
-+++ b/tools/libxl/libxl_device.c
-@@ -1092,7 +1092,8 @@ static void device_backend_callback(libxl__egc *egc, libxl__ev_devstate *ds,
- 
-     if (rc == ERROR_TIMEDOUT &&
-         aodev->action == LIBXL__DEVICE_ACTION_REMOVE &&
--        !aodev->force) {
-+        !aodev->force &&
-+        aodev->dev->kind != LIBXL__DEVICE_KIND_VBD) {
-         LOGD(DEBUG, aodev->dev->domid, "Timeout reached, initiating forced remove");
-         aodev->force = 1;
-         libxl__initiate_device_generic_remove(egc, aodev);
-@@ -1103,7 +1104,8 @@ static void device_backend_callback(libxl__egc *egc, libxl__ev_devstate *ds,
-         LOGD(ERROR, aodev->dev->domid, "unable to %s device with path %s",
-                     libxl__device_action_to_string(aodev->action),
-                     libxl__device_backend_path(gc, aodev->dev));
--        goto out;
-+        if (!aodev->force)
-+            goto out;
-     }
- 
-     device_hotplug(egc, aodev);
-@@ -1319,7 +1321,8 @@ static void device_hotplug_done(libxl__egc *egc, libxl__ao_device *aodev)
-     device_hotplug_clean(gc, aodev);
- 
-     /* Clean xenstore if it's a disconnection */
--    if (aodev->action == LIBXL__DEVICE_ACTION_REMOVE) {
-+    if (aodev->action == LIBXL__DEVICE_ACTION_REMOVE &&
-+        (aodev->force || !aodev->rc)) {
-         rc = libxl__device_destroy(gc, aodev->dev);
-         if (!aodev->rc)
-             aodev->rc = rc;
+ docs/man/xl.1.pod.in       |  4 ++--
+ tools/libxl/libxl_device.c |  9 ++++++---
+ tools/xl/xl_block.c        | 21 ++++++++++++++++-----
+ tools/xl/xl_cmdtable.c     |  3 ++-
+ 4 files changed, 26 insertions(+), 11 deletions(-)
+
 -- 
 2.20.1
 
