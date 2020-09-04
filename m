@@ -7,48 +7,49 @@ X-Spam-Status: No, score=-10.9 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3FA8CC43461
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2020 08:34:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A9C2AC43461
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2020 08:37:02 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 107EA206C9
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2020 08:34:41 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 107EA206C9
+	by mail.kernel.org (Postfix) with ESMTPS id 756D920709
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2020 08:37:02 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 756D920709
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kE7B3-0005dN-G1; Fri, 04 Sep 2020 08:34:33 +0000
+	id 1kE7DG-0005st-UH; Fri, 04 Sep 2020 08:36:50 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=saQb=CN=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kE7B2-0005dC-5Q
- for xen-devel@lists.xenproject.org; Fri, 04 Sep 2020 08:34:32 +0000
-X-Inumbo-ID: 22bea200-5e74-4a72-bbf3-586a093a282f
+ id 1kE7DF-0005sm-Bz
+ for xen-devel@lists.xenproject.org; Fri, 04 Sep 2020 08:36:49 +0000
+X-Inumbo-ID: 07531999-d728-4a81-a305-184762203184
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 22bea200-5e74-4a72-bbf3-586a093a282f;
- Fri, 04 Sep 2020 08:34:31 +0000 (UTC)
+ id 07531999-d728-4a81-a305-184762203184;
+ Fri, 04 Sep 2020 08:36:47 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 8EC9EB655;
- Fri,  4 Sep 2020 08:34:31 +0000 (UTC)
-Subject: Re: [PATCH v3 1/8] x86/vmx: handle writes to MISC_ENABLE MSR
-To: Jun Nakajima <jun.nakajima@intel.com>, Kevin Tian <kevin.tian@intel.com>
-Cc: Roger Pau Monne <roger.pau@citrix.com>, xen-devel@lists.xenproject.org,
- Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>
+ by mx2.suse.de (Postfix) with ESMTP id 8F9F8AD1A;
+ Fri,  4 Sep 2020 08:36:47 +0000 (UTC)
+Subject: Re: [PATCH v3 2/8] x86/svm: silently drop writes to SYSCFG and
+ related MSRs
+To: Roger Pau Monne <roger.pau@citrix.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wl@xen.org>
 References: <20200901105445.22277-1-roger.pau@citrix.com>
- <20200901105445.22277-2-roger.pau@citrix.com>
+ <20200901105445.22277-3-roger.pau@citrix.com>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <82aff399-52f3-c0af-f467-e110c94dddc6@suse.com>
-Date: Fri, 4 Sep 2020 10:34:40 +0200
+Message-ID: <104af385-f554-b2f6-6d08-37281bb72bba@suse.com>
+Date: Fri, 4 Sep 2020 10:36:56 +0200
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.12.0
 MIME-Version: 1.0
-In-Reply-To: <20200901105445.22277-2-roger.pau@citrix.com>
+In-Reply-To: <20200901105445.22277-3-roger.pau@citrix.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
@@ -66,21 +67,31 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 On 01.09.2020 12:54, Roger Pau Monne wrote:
-> Such handling consist in checking that no bits have been changed from
-> the read value, if that's the case silently drop the write, otherwise
-> inject a fault.
-> 
-> At least Windows guests will expect to write to the MISC_ENABLE MSR
-> with the same value that's been read from it.
+> The SYSCFG, TOP_MEM1 and TOP_MEM2 MSRs are currently exposed to guests
+> and writes are silently discarded. Make this explicit in the SVM code
+> now, and just return default constant values when attempting to read
+> any of the MSRs, while continuing to silently drop writes.
 > 
 > Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-> Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
-> ---
->  xen/arch/x86/hvm/vmx/vmx.c | 9 ++++++++-
->  1 file changed, 8 insertions(+), 1 deletion(-)
 
-Btw - early next week I think I'll time out waiting for a VMX side
-ack for this change.
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+
+> --- a/xen/arch/x86/hvm/svm/svm.c
+> +++ b/xen/arch/x86/hvm/svm/svm.c
+> @@ -1917,6 +1917,9 @@ static int svm_msr_read_intercept(unsigned int msr, uint64_t *msr_content)
+>              goto gpf;
+>          break;
+>  
+> +    case MSR_K8_SYSCFG:
+> +    case MSR_K8_TOP_MEM1:
+> +    case MSR_K8_TOP_MEM2:
+>      case MSR_K8_VM_CR:
+>          *msr_content = 0;
+>          break;
+
+Andrew, since you did suggest otherwise before, may I ask for an
+explicit statement of yours here, be it in ack/nak form or something
+less formal?
 
 Jan
 
