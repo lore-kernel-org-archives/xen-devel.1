@@ -2,70 +2,78 @@ Return-Path: <SRS0=ERFX=CN=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-11.5 required=3.0 tests=BAYES_00,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 82DA3C433E2
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2020 18:16:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D850C433E2
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2020 18:16:29 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1AEAF20796
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2020 18:16:26 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="uTmaJz5Y"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1AEAF20796
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id ADDE220BED
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2020 18:16:28 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org ADDE220BED
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kEFcy-0006BA-9f; Fri, 04 Sep 2020 17:35:56 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=pQwi=CN=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1kEFcx-0006B5-56
- for xen-devel@lists.xenproject.org; Fri, 04 Sep 2020 17:35:55 +0000
-X-Inumbo-ID: 55b444e8-a037-4a09-ad0b-34df3e4e8fe4
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 55b444e8-a037-4a09-ad0b-34df3e4e8fe4;
- Fri, 04 Sep 2020 17:35:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
- bh=/bsvq4VEnpw2RlksXl3dcylAE88+TYGSqwV4LVf3ZLw=; b=uTmaJz5Y5RHdeuhmtxfNZsyAZz
- gIH3kqwii/VLeXwgFEEy2qj9pb2Vo8tcVFYmlVABE3GKUaipQP+KySSyvMHRja/joJHoK3G/OlsL4
- wK/jcqXRnIZyz7gsxDhnVJioarv1TwJH9oREiMGYTB9C/swxfHsIHNxMxKDzjNYxHP/o=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1kEFcw-0002gS-3x; Fri, 04 Sep 2020 17:35:54 +0000
-Received: from 54-240-197-232.amazon.com ([54.240.197.232]
- helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1kEFcv-0003o7-TI; Fri, 04 Sep 2020 17:35:54 +0000
-Subject: Re: [PATCH] EFI: Enable booting unified hypervisor/kernel/initrd
- images
-To: Trammell Hudson <hudson@trmm.net>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>
-References: <EGZ7EZE5F-c5YJVD9p0TtccTz06ZsdMcL21-BcB64dk9V3x8eKrB3dSDsLbGL4peCaENcp55uRsnWUONZYvrRaQh0tToALcaHRr-QMYNsH0=@trmm.net>
- <96966138-552f-c86a-2d14-85b2f7af50e6@xen.org>
- <kxO4Q0LRhrdqHcPTtg_JQYmf2jaNOF-nUvckzLF_IhHTicunRP3-_CWWMDw2Jg7_-RSg56X_4ULzsL5rU84eIjWV9apUH9sRnu2rVf-6_Mk=@trmm.net>
-From: Julien Grall <julien@xen.org>
-Message-ID: <c629d643-6275-4fc0-b36b-9da5b8ce88e9@xen.org>
-Date: Fri, 4 Sep 2020 18:35:52 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
- Gecko/20100101 Thunderbird/68.12.0
+	id 1kEFXQ-0005r4-CY; Fri, 04 Sep 2020 17:30:12 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=Zmj+=CN=gmail.com=wei.liu.linux@srs-us1.protection.inumbo.net>)
+ id 1kEFXO-0005qr-O8
+ for xen-devel@lists.xenproject.org; Fri, 04 Sep 2020 17:30:10 +0000
+X-Inumbo-ID: dd5b8879-9306-47c9-9dde-be468d8ec2b4
+Received: from mail-wr1-f66.google.com (unknown [209.85.221.66])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id dd5b8879-9306-47c9-9dde-be468d8ec2b4;
+ Fri, 04 Sep 2020 17:30:09 +0000 (UTC)
+Received: by mail-wr1-f66.google.com with SMTP id g4so7514464wrs.5
+ for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2020 10:30:08 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=wNy2hGieTjSAjcYv7kwR0BOvIQ7J3JLWd6JVvNnGJ0g=;
+ b=QWEpeZlcyb1BB5oPEcV1nRFfi4Xe/dz8sQlWXeXvTjx+Mq6xb5ZkwYLq1/aOExyU5U
+ gR/IJWabshG/cihWYBir58s1sr5v2NAWQWj7LH2UieYpTb0d6MC2377CSotMGVWHV3Hi
+ 2npazjgKyR0Dz25laTHdAJG519iT9ssTh1Bn3h/xqinb+++dxySh9MuJ090YL++887aU
+ TmqN1qH1D0YlDyIGxi9eXNc3/WOUHVlpWUbLccaZWAQFb9tOLiJCI5XjwxauJt7LLtlM
+ TrMiCMpR+zjshPOjsJTA6iF599wNHqu7FtQlYEqXruvMnN/PY8LZvg4n/BgvbNq0sKPX
+ XXug==
+X-Gm-Message-State: AOAM530r+sum3ndQetPbfSoaxpVDvzGRcscsOY8RUHqG4VbKp+4fcZwk
+ aPCHuIafDwXJZw4uJk8/jPINeTsyqo0=
+X-Google-Smtp-Source: ABdhPJy4lxSlIVmCZUYUt5G7cHc/b9vzzBbVyS5+h60xbFD5BvIaoh1SmuoljfZVF5ACmqFJVbs98w==
+X-Received: by 2002:a05:6000:100c:: with SMTP id
+ a12mr9155928wrx.115.1599240608246; 
+ Fri, 04 Sep 2020 10:30:08 -0700 (PDT)
+Received: from liuwe-devbox-debian-v2 ([51.145.34.42])
+ by smtp.gmail.com with ESMTPSA id h5sm13026654wrt.31.2020.09.04.10.30.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 04 Sep 2020 10:30:07 -0700 (PDT)
+Date: Fri, 4 Sep 2020 17:30:06 +0000
+From: Wei Liu <wei.liu@kernel.org>
+To: David Hildenbrand <david@redhat.com>
+Cc: linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ linux-mm@kvack.org, linux-hyperv@vger.kernel.org,
+ xen-devel@lists.xenproject.org, Andrew Morton <akpm@linux-foundation.org>,
+ Michal Hocko <mhocko@suse.com>, "K. Y. Srinivasan" <kys@microsoft.com>,
+ Haiyang Zhang <haiyangz@microsoft.com>,
+ Stephen Hemminger <sthemmin@microsoft.com>, Wei Liu <wei.liu@kernel.org>,
+ Pankaj Gupta <pankaj.gupta.linux@gmail.com>, Baoquan He <bhe@redhat.com>,
+ Wei Yang <richardw.yang@linux.intel.com>
+Subject: Re: [PATCH v1 5/5] hv_balloon: try to merge system ram resources
+Message-ID: <20200904173006.e65qow53ietxzpne@liuwe-devbox-debian-v2>
+References: <20200821103431.13481-1-david@redhat.com>
+ <20200821103431.13481-6-david@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <kxO4Q0LRhrdqHcPTtg_JQYmf2jaNOF-nUvckzLF_IhHTicunRP3-_CWWMDw2Jg7_-RSg56X_4ULzsL5rU84eIjWV9apUH9sRnu2rVf-6_Mk=@trmm.net>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20200821103431.13481-6-david@redhat.com>
+User-Agent: NeoMutt/20180716
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,34 +87,46 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Hi Trammell,
-
-On 04/09/2020 11:06, Trammell Hudson wrote:
-> On Friday, September 4, 2020 5:29 AM, Julien Grall <julien@xen.org> wrote:
+On Fri, Aug 21, 2020 at 12:34:31PM +0200, David Hildenbrand wrote:
+> Let's use the new mechanism to merge system ram resources below the
+> root. We are the only one hotplugging system ram, e.g., DIMMs don't apply,
+> so this is safe to be used.
 > 
->> On 28/08/2020 12:51, Trammell Hudson wrote:
->>
->>> -   /* PE32+ Subsystem type */
->>>      +#if defined(ARM)
->>>
->>
->> Shouldn't this be defined(aarch64) ?
+> Cc: Andrew Morton <akpm@linux-foundation.org>
+> Cc: Michal Hocko <mhocko@suse.com>
+> Cc: "K. Y. Srinivasan" <kys@microsoft.com>
+> Cc: Haiyang Zhang <haiyangz@microsoft.com>
+> Cc: Stephen Hemminger <sthemmin@microsoft.com>
+> Cc: Wei Liu <wei.liu@kernel.org>
+> Cc: Pankaj Gupta <pankaj.gupta.linux@gmail.com>
+> Cc: Baoquan He <bhe@redhat.com>
+> Cc: Wei Yang <richardw.yang@linux.intel.com>
+> Signed-off-by: David Hildenbrand <david@redhat.com>
+> ---
+>  drivers/hv/hv_balloon.c | 3 +++
+>  1 file changed, 3 insertions(+)
 > 
-> To be honest I'm not sure and don't have a way to check if
-> this code works on ARM.
+> diff --git a/drivers/hv/hv_balloon.c b/drivers/hv/hv_balloon.c
+> index 32e3bc0aa665a..49a6305f0fb73 100644
+> --- a/drivers/hv/hv_balloon.c
+> +++ b/drivers/hv/hv_balloon.c
+> @@ -745,6 +745,9 @@ static void hv_mem_hot_add(unsigned long start, unsigned long size,
+>  			has->covered_end_pfn -=  processed_pfn;
+>  			spin_unlock_irqrestore(&dm_device.ha_lock, flags);
+>  			break;
+> +		} else {
+> +			/* Try to reduce the number of system ram resources. */
+> +			merge_system_ram_resources(&iomem_resource);
+>  		}
 
-The code looks generic enough. I will give a try to build it.
+You don't need to put the call under the "else" branch. It will have
+broken out of the loop if ret is not zero.
 
-> Does an Xen EFI build on ARM even
-> use the PE32+ format?
+Wei.
 
-So far, we only support EFI and AArch64. This is built using PE32+ format.
-
-Looking at the rest of the UEFI code, we are using CONFIG_ARM. But I 
-think, in this particular instance, we want to use CONFIG_ARM_64.
-
-Cheers,
-
--- 
-Julien Grall
+>  
+>  		/*
+> -- 
+> 2.26.2
+> 
 
