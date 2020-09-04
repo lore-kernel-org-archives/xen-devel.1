@@ -2,77 +2,79 @@ Return-Path: <SRS0=ERFX=CN=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.5 required=3.0 tests=BAYES_00,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.5 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D850C433E2
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2020 18:16:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D8234C43461
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2020 18:16:30 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id ADDE220BED
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2020 18:16:28 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org ADDE220BED
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
+	by mail.kernel.org (Postfix) with ESMTPS id 868A420796
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2020 18:16:30 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 868A420796
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kEFXQ-0005r4-CY; Fri, 04 Sep 2020 17:30:12 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kEFd2-0006Bi-Mu; Fri, 04 Sep 2020 17:36:00 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Zmj+=CN=gmail.com=wei.liu.linux@srs-us1.protection.inumbo.net>)
- id 1kEFXO-0005qr-O8
- for xen-devel@lists.xenproject.org; Fri, 04 Sep 2020 17:30:10 +0000
-X-Inumbo-ID: dd5b8879-9306-47c9-9dde-be468d8ec2b4
-Received: from mail-wr1-f66.google.com (unknown [209.85.221.66])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id dd5b8879-9306-47c9-9dde-be468d8ec2b4;
- Fri, 04 Sep 2020 17:30:09 +0000 (UTC)
-Received: by mail-wr1-f66.google.com with SMTP id g4so7514464wrs.5
- for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2020 10:30:08 -0700 (PDT)
+ <SRS0=oaZu=CN=gmail.com=wei.liu.xen@srs-us1.protection.inumbo.net>)
+ id 1kEFd2-0006B5-2E
+ for xen-devel@lists.xenproject.org; Fri, 04 Sep 2020 17:36:00 +0000
+X-Inumbo-ID: a49032a3-73fa-4c69-bad0-d0f1ec57711b
+Received: from mail-wr1-f67.google.com (unknown [209.85.221.67])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id a49032a3-73fa-4c69-bad0-d0f1ec57711b;
+ Fri, 04 Sep 2020 17:35:55 +0000 (UTC)
+Received: by mail-wr1-f67.google.com with SMTP id w5so7527261wrp.8
+ for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2020 10:35:55 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to:user-agent;
- bh=wNy2hGieTjSAjcYv7kwR0BOvIQ7J3JLWd6JVvNnGJ0g=;
- b=QWEpeZlcyb1BB5oPEcV1nRFfi4Xe/dz8sQlWXeXvTjx+Mq6xb5ZkwYLq1/aOExyU5U
- gR/IJWabshG/cihWYBir58s1sr5v2NAWQWj7LH2UieYpTb0d6MC2377CSotMGVWHV3Hi
- 2npazjgKyR0Dz25laTHdAJG519iT9ssTh1Bn3h/xqinb+++dxySh9MuJ090YL++887aU
- TmqN1qH1D0YlDyIGxi9eXNc3/WOUHVlpWUbLccaZWAQFb9tOLiJCI5XjwxauJt7LLtlM
- TrMiCMpR+zjshPOjsJTA6iF599wNHqu7FtQlYEqXruvMnN/PY8LZvg4n/BgvbNq0sKPX
- XXug==
-X-Gm-Message-State: AOAM530r+sum3ndQetPbfSoaxpVDvzGRcscsOY8RUHqG4VbKp+4fcZwk
- aPCHuIafDwXJZw4uJk8/jPINeTsyqo0=
-X-Google-Smtp-Source: ABdhPJy4lxSlIVmCZUYUt5G7cHc/b9vzzBbVyS5+h60xbFD5BvIaoh1SmuoljfZVF5ACmqFJVbs98w==
-X-Received: by 2002:a05:6000:100c:: with SMTP id
- a12mr9155928wrx.115.1599240608246; 
- Fri, 04 Sep 2020 10:30:08 -0700 (PDT)
+ bh=+zT6TAnfRzC64wZ6w58AordLuF96MIhgesOtRWyfYIA=;
+ b=qX8dVVPmO+IsKBn+8diXjwu5IqfRjlIc8EGmvjfJhqUlG+gBAA1nPWuffkoXGtloUV
+ yKwQv4rg2d/Q/NYxBP30l7nNGXEnVg9HMo4H2vSyCU4Rzkec3BXcEVHEpvomHFmz3oml
+ DKPy4EcuT/wqMcs9zyz/QrqgymnebYNjhMQ7oe279IpVfDqCodnHbKsAVHTLcfVTHWP2
+ hx2YOxAvxrWiQuPMnNpXvaOyZqWtYETXyWGqTB1sYwVdpL0625cF3KKB38bYGXEQ+jc6
+ PLyWH5Qy9qnR1EWSprDJ3Fy50xA+/Xu45W1wFsp2tj3qXR/RWv44WeFSRL9wE7ieVUec
+ jNMg==
+X-Gm-Message-State: AOAM532SGpLbR1HBU9YwMXgEJSZk0BRPxQyiD2Rn0shB8zF3by8L8Aho
+ 46o5ELzk/GuDnzA0ztgrnS0=
+X-Google-Smtp-Source: ABdhPJzVo+tBfXnkbdudJO2lQzB/qV0zYsEgiBNhb2ZVzvd5hwzUl85eLs/NS8V58OOgf2SIV344UA==
+X-Received: by 2002:a5d:5146:: with SMTP id u6mr9163115wrt.255.1599240954421; 
+ Fri, 04 Sep 2020 10:35:54 -0700 (PDT)
 Received: from liuwe-devbox-debian-v2 ([51.145.34.42])
- by smtp.gmail.com with ESMTPSA id h5sm13026654wrt.31.2020.09.04.10.30.07
+ by smtp.gmail.com with ESMTPSA id r14sm12606110wrc.41.2020.09.04.10.35.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Sep 2020 10:30:07 -0700 (PDT)
-Date: Fri, 4 Sep 2020 17:30:06 +0000
-From: Wei Liu <wei.liu@kernel.org>
-To: David Hildenbrand <david@redhat.com>
-Cc: linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
- linux-mm@kvack.org, linux-hyperv@vger.kernel.org,
- xen-devel@lists.xenproject.org, Andrew Morton <akpm@linux-foundation.org>,
- Michal Hocko <mhocko@suse.com>, "K. Y. Srinivasan" <kys@microsoft.com>,
- Haiyang Zhang <haiyangz@microsoft.com>,
- Stephen Hemminger <sthemmin@microsoft.com>, Wei Liu <wei.liu@kernel.org>,
- Pankaj Gupta <pankaj.gupta.linux@gmail.com>, Baoquan He <bhe@redhat.com>,
- Wei Yang <richardw.yang@linux.intel.com>
-Subject: Re: [PATCH v1 5/5] hv_balloon: try to merge system ram resources
-Message-ID: <20200904173006.e65qow53ietxzpne@liuwe-devbox-debian-v2>
-References: <20200821103431.13481-1-david@redhat.com>
- <20200821103431.13481-6-david@redhat.com>
+ Fri, 04 Sep 2020 10:35:53 -0700 (PDT)
+Date: Fri, 4 Sep 2020 17:35:52 +0000
+From: Wei Liu <wl@xen.org>
+To: Ian Jackson <iwj@xenproject.org>
+Cc: Jan Beulich <jbeulich@suse.com>,
+ =?utf-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>,
+ Costin Lupu <costin.lupu@cs.pub.ro>, Wei Liu <wl@xen.org>,
+ Samuel Thibault <samuel.thibault@ens-lyon.org>,
+ xen-devel@lists.xenproject.org
+Subject: Re: [xen-unstable test] 153602: regressions - FAIL [and 1 more
+ messages]
+Message-ID: <20200904173552.upzzbos6hkbvn3t7@liuwe-devbox-debian-v2>
+References: <233c6207-4724-55b0-3c92-84251edfc5b2@suse.com>
+ <20200904160034.11456-1-iwj@xenproject.org>
+ <osstest-153602-mainreport@xen.org>
+ <1bdbf90f-2150-cb86-63a2-37e5148ec34e@suse.com>
+ <24401.5895.115731.487189@mariner.uk.xensource.com>
+ <52d2bdeb-ccde-9d9d-9f62-24571e9e4c15@suse.com>
+ <565646cc-2833-d34e-2bc3-eb920ac7f140@suse.com>
+ <24402.28756.378598.517505@mariner.uk.xensource.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20200821103431.13481-6-david@redhat.com>
+In-Reply-To: <24402.28756.378598.517505@mariner.uk.xensource.com>
 User-Agent: NeoMutt/20180716
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -87,46 +89,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Fri, Aug 21, 2020 at 12:34:31PM +0200, David Hildenbrand wrote:
-> Let's use the new mechanism to merge system ram resources below the
-> root. We are the only one hotplugging system ram, e.g., DIMMs don't apply,
-> so this is safe to be used.
+On Fri, Sep 04, 2020 at 05:50:28PM +0100, Ian Jackson wrote:
+> Jan Beulich writes ("Re: [xen-unstable test] 153602: regressions - FAIL"):
+> > Actually, with also reverting 8d990807ec2c in the main tree (along with
+> > effectively reverting e013e8514389, which comes down to the same as Ian
+> > suggested for 165f3afbfc3d), and with its future re-installment at the
+> > same time bumping the mini-os commit to use, things ought to work I
+> > would think. That would then be the same model again as used for
+> > qemu-trad.
 > 
-> Cc: Andrew Morton <akpm@linux-foundation.org>
-> Cc: Michal Hocko <mhocko@suse.com>
-> Cc: "K. Y. Srinivasan" <kys@microsoft.com>
-> Cc: Haiyang Zhang <haiyangz@microsoft.com>
-> Cc: Stephen Hemminger <sthemmin@microsoft.com>
-> Cc: Wei Liu <wei.liu@kernel.org>
-> Cc: Pankaj Gupta <pankaj.gupta.linux@gmail.com>
-> Cc: Baoquan He <bhe@redhat.com>
-> Cc: Wei Yang <richardw.yang@linux.intel.com>
-> Signed-off-by: David Hildenbrand <david@redhat.com>
-> ---
->  drivers/hv/hv_balloon.c | 3 +++
->  1 file changed, 3 insertions(+)
+> I implemented this here:
 > 
-> diff --git a/drivers/hv/hv_balloon.c b/drivers/hv/hv_balloon.c
-> index 32e3bc0aa665a..49a6305f0fb73 100644
-> --- a/drivers/hv/hv_balloon.c
-> +++ b/drivers/hv/hv_balloon.c
-> @@ -745,6 +745,9 @@ static void hv_mem_hot_add(unsigned long start, unsigned long size,
->  			has->covered_end_pfn -=  processed_pfn;
->  			spin_unlock_irqrestore(&dm_device.ha_lock, flags);
->  			break;
-> +		} else {
-> +			/* Try to reduce the number of system ram resources. */
-> +			merge_system_ram_resources(&iomem_resource);
->  		}
+> Ian Jackson writes ("[PATCH] minios: Revert recent change and revert to working minios"):
+> > Currently, xen.git#staging does not build in many environments because
+> > of issues with minios master.  This regression was introduced in an
+> > uncontrolled manner by an update to mini-os.git#master.
+> 
+> I don't have any formal acks for this but, having build-tested it, I
+> am going to push it now, because the build is broken.
 
-You don't need to put the call under the "else" branch. It will have
-broken out of the loop if ret is not zero.
+Thanks for handling this.
 
 Wei.
 
->  
->  		/*
-> -- 
-> 2.26.2
 > 
+> Ian.
 
