@@ -2,77 +2,57 @@ Return-Path: <SRS0=ERFX=CN=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.5 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-9.1 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
-	version=3.4.0
+	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0747CC433E2
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2020 16:50:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ADB71C2D0F6
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2020 18:10:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C5C63206B7
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2020 16:50:58 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 237F925441
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2020 18:06:02 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="iONvr+4i"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C5C63206B7
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
+	dkim=pass (1024-bit key) header.d=trmm.net header.i=@trmm.net header.b="foF9rIU1"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 237F925441
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=trmm.net
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kEEvA-0001VS-9w; Fri, 04 Sep 2020 16:50:40 +0000
+	id 1kEG5d-0001DM-Il; Fri, 04 Sep 2020 18:05:33 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=/IBy=CN=xenproject.org=iwj@srs-us1.protection.inumbo.net>)
- id 1kEEv9-0001VN-DA
- for xen-devel@lists.xenproject.org; Fri, 04 Sep 2020 16:50:39 +0000
-X-Inumbo-ID: 5e7d01b4-df01-4476-aa1f-bd63b3b47b47
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=/YEB=CN=trmm.net=hudson@srs-us1.protection.inumbo.net>)
+ id 1kEG5b-0001DH-I5
+ for xen-devel@lists.xenproject.org; Fri, 04 Sep 2020 18:05:31 +0000
+X-Inumbo-ID: 9d11c037-e8da-4e2d-a1c3-0e45bab217d0
+Received: from mail2.protonmail.ch (unknown [185.70.40.22])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 5e7d01b4-df01-4476-aa1f-bd63b3b47b47;
- Fri, 04 Sep 2020 16:50:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:CC:To:Date
- :Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
- bh=0ofkIAetg1Cm7nJhZripBc1gt5kuT2PChh7xCZHxHQk=; b=iONvr+4iYiBnMF0Ms3r8Sapfhs
- ootJ56LSJ/R0JDttRjlb7wv7sRBGC+4qxqh80/Ald3AB5MUejNf3SaymclKzKgRpeVEfW2WWlT2QC
- eSaFz1fgTaJScGqNM8XyuWi+11lSi5VZeqmz0/NeLIHXaSreXepgia+nMg6rdfKyElDg=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1kEEv8-0001jy-Fd
- for xen-devel@lists.xenproject.org; Fri, 04 Sep 2020 16:50:38 +0000
-Received: from iwj (helo=mynotebook.example.org)
- by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1kEEv8-0005mN-Ee
- for xen-devel@lists.xenproject.org; Fri, 04 Sep 2020 16:50:38 +0000
-Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
- (envelope-from <iwj@xenproject.org>)
- id 1kEEuy-0008TR-KM; Fri, 04 Sep 2020 17:50:28 +0100
-From: Ian Jackson <iwj@xenproject.org>
+ id 9d11c037-e8da-4e2d-a1c3-0e45bab217d0;
+ Fri, 04 Sep 2020 18:05:30 +0000 (UTC)
+Date: Fri, 04 Sep 2020 18:05:21 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=trmm.net;
+ s=protonmail; t=1599242728;
+ bh=PO9Nkocnb5Xd7RP6OXVLz+jIR06rCt0cOy9SFC6eRiE=;
+ h=Date:To:From:Cc:Reply-To:Subject:In-Reply-To:References:From;
+ b=foF9rIU1YPzr4bAY0j0OHTAI8KmF7nQUvP6tj/4yu8YNDCTzRYssVjtBWZpKGUICP
+ jgo3t3eVeJRSaoW7y5zaN/D15xMrwvHQCj5lsdPai6KfJmYyaf79l9/0ZjOOX3rXph
+ 35DncIeEOxdIyB8mNaqFtjrI5fiknsjmt55RGEWg=
+To: Julien Grall <julien@xen.org>
+From: Trammell Hudson <hudson@trmm.net>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>
+Subject: Re: [PATCH] EFI: Enable booting unified hypervisor/kernel/initrd
+ images
+Message-ID: <qrcMU44FmSMDmicmc9i2Lxpp4zrl0q2k8jgmTB9ZMyuBnbVDp84LHi5V_mNN2IlynTrft_BlSqUotpX4avgjNgMXA51f9cZVuaEoLEzje90=@trmm.net>
+In-Reply-To: <6beb3e6b-e438-caa1-5b51-836091c05ade@xen.org>
+References: <EGZ7EZE5F-c5YJVD9p0TtccTz06ZsdMcL21-BcB64dk9V3x8eKrB3dSDsLbGL4peCaENcp55uRsnWUONZYvrRaQh0tToALcaHRr-QMYNsH0=@trmm.net>
+ <6beb3e6b-e438-caa1-5b51-836091c05ade@xen.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
-Message-ID: <24402.28756.378598.517505@mariner.uk.xensource.com>
-Date: Fri, 4 Sep 2020 17:50:28 +0100
-To: Jan Beulich <jbeulich@suse.com>,
- =?iso-8859-1?Q?J=FCrgen_Gro=DF?= <jgross@suse.com>,
- Costin Lupu <costin.lupu@cs.pub.ro>, Wei Liu <wl@xen.org>,
- Samuel Thibault <samuel.thibault@ens-lyon.org>
-CC: xen-devel@lists.xenproject.org
-Subject: Re: [xen-unstable test] 153602: regressions - FAIL [and 1 more
- messages]
-In-Reply-To: <233c6207-4724-55b0-3c92-84251edfc5b2@suse.com>,
- <20200904160034.11456-1-iwj@xenproject.org>
-References: <233c6207-4724-55b0-3c92-84251edfc5b2@suse.com>
- <20200904160034.11456-1-iwj@xenproject.org>
- <osstest-153602-mainreport@xen.org>
- <1bdbf90f-2150-cb86-63a2-37e5148ec34e@suse.com>
- <24401.5895.115731.487189@mariner.uk.xensource.com>
- <52d2bdeb-ccde-9d9d-9f62-24571e9e4c15@suse.com>
- <565646cc-2833-d34e-2bc3-eb920ac7f140@suse.com>
-X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,26 +63,37 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
+Reply-To: Trammell Hudson <hudson@trmm.net>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Jan Beulich writes ("Re: [xen-unstable test] 153602: regressions - FAIL"):
-> Actually, with also reverting 8d990807ec2c in the main tree (along with
-> effectively reverting e013e8514389, which comes down to the same as Ian
-> suggested for 165f3afbfc3d), and with its future re-installment at the
-> same time bumping the mini-os commit to use, things ought to work I
-> would think. That would then be the same model again as used for
-> qemu-trad.
+On Friday, September 4, 2020 1:58 PM, Julien Grall <julien@xen.org> wrote:
 
-I implemented this here:
+> On 28/08/2020 12:51, Trammell Hudson wrote:
+> > This patch adds support for bundling the xen.efi hypervisor, the xen.cf=
+g
+> > configuration file, the Linux kernel and initrd, as well as the XSM, an=
+d
+> > CPU microcode into a single "unified" EFI executable.
+>
+> For Arm, I would also consider to add the DTB in "unified" EFI
+> executable. See efi_arch_cfg_file_early() in xen/arch/arm/efi/efi-boot.h.
 
-Ian Jackson writes ("[PATCH] minios: Revert recent change and revert to working minios"):
-> Currently, xen.git#staging does not build in many environments because
-> of issues with minios master.  This regression was introduced in an
-> uncontrolled manner by an update to mini-os.git#master.
+Excellent point. The DTB is critical as well. I'll add that to
+the patch on Xen's gitlab.
 
-I don't have any formal acks for this but, having build-tested it, I
-am going to push it now, because the build is broken.
+x86 has a similar call in efi_arch-cfg_file_early() to load
+the CPU microcode from the unified image, if it exists.
 
-Ian.
+> [...]
+> I don't seem to be able to apply the patch using git-am:
+
+You might try this one instead -- it has been based on the
+latest staging tree and has had a few rounds of style guide
+issues as well as the commit id for the systemd-boot code.
+
+https://gitlab.com/xen-project/xen/-/merge_requests/4
+
+--
+Trammell
 
