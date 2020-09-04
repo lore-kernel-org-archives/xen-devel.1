@@ -2,78 +2,53 @@ Return-Path: <SRS0=ERFX=CN=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.7 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-7.9 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 10A73C43461
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2020 09:45:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 49944C433E2
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2020 09:47:26 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BC92D20791
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2020 09:45:15 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="YYYl7GFF"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BC92D20791
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id 06B09205CB
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2020 09:47:26 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 06B09205CB
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kE8Gv-0005AE-1u; Fri, 04 Sep 2020 09:44:41 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=wtGI=CN=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1kE8Gt-0005A8-Fu
- for xen-devel@lists.xenproject.org; Fri, 04 Sep 2020 09:44:39 +0000
-X-Inumbo-ID: d80b5f3a-f087-42e0-a2c3-c0702ef3b6f8
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id d80b5f3a-f087-42e0-a2c3-c0702ef3b6f8;
- Fri, 04 Sep 2020 09:44:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1599212678;
- h=subject:to:cc:references:from:message-id:date:
- mime-version:in-reply-to:content-transfer-encoding;
- bh=36uEOwKiJPaAdwWIJH0AnAkCdtor7kmEVd6Mu1O9x5E=;
- b=YYYl7GFFG1NxMB7Fgjn7JHdvlFVV5m4HpH/+rS9C/NAxslIaUSUcvWrR
- +SnwwSnGBGwGA+TDVxYxxImiJXVqyf6W+m5tGigh2bZQsdD75pxB5bHlw
- MCnwMM13t7uNj70sJrLhnFdUAW/Oz1fjFosPj1fR9TVrdDDwLjFuO/ZCp o=;
-Authentication-Results: esa1.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: z4aebpRE00MjPxZigGCHj91MBKH86aA15kV8E72k36C5QBrUnj1yz8x4kD7lbv6nqXKZjNMteU
- Yu+3AglMI3MxFZJgPCR+WUk1ZRrrv8Bq+STKpmWE+febDMHmjSDNhs/pDmC2hd1efiVM4tQH11
- GIy7oi51jCUg6GRE3Nlf3cK7sxwn1Pft4y2r5NdMlOpQXxkC8CIS8lgxNJSWQrLPZXAflDuRND
- AMhf+8xf/9cIZuDwhryk4GSt3z1P9kYMJYcy57ehPLfQVNl3HZC3TAH5BrOsM0qEpdfvD305Tx
- Pbo=
-X-SBRS: 2.7
-X-MesageID: 26332402
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,389,1592884800"; d="scan'208";a="26332402"
-Subject: Re: [PATCH v3 7/8] x86/hvm: Disallow access to unknown MSRs
-To: Jan Beulich <jbeulich@suse.com>, Roger Pau Monne <roger.pau@citrix.com>
-CC: <xen-devel@lists.xenproject.org>, Wei Liu <wl@xen.org>, Jun Nakajima
- <jun.nakajima@intel.com>, Kevin Tian <kevin.tian@intel.com>
-References: <20200901105445.22277-1-roger.pau@citrix.com>
- <20200901105445.22277-8-roger.pau@citrix.com>
- <6823183f-90f0-90df-f843-6db2e84dba4a@suse.com>
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Message-ID: <79067d5f-2f2f-2308-ecc7-30d5da08b9ef@citrix.com>
-Date: Fri, 4 Sep 2020 10:44:31 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+	id 1kE8JO-0005Pa-Fl; Fri, 04 Sep 2020 09:47:14 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=saQb=CN=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1kE8JN-0005PT-IW
+ for xen-devel@lists.xenproject.org; Fri, 04 Sep 2020 09:47:13 +0000
+X-Inumbo-ID: bbb09dfc-379d-4064-b467-ee997296dcec
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id bbb09dfc-379d-4064-b467-ee997296dcec;
+ Fri, 04 Sep 2020 09:47:12 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id F3C73ACAF;
+ Fri,  4 Sep 2020 09:47:12 +0000 (UTC)
+Subject: Re: [PATCH] efi: Always map EfiRuntimeServicesCode and
+ EfiRuntimeServicesData
+To: Sergey Temerkhanov <s.temerkhanov@gmail.com>
+References: <20200903232458.16551-1-s.temerkhanov@gmail.com>
+Cc: xen-devel@lists.xenproject.org
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <98c44a05-00c8-948f-e3a9-e64d468dd36d@suse.com>
+Date: Fri, 4 Sep 2020 11:47:21 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.0
 MIME-Version: 1.0
-In-Reply-To: <6823183f-90f0-90df-f843-6db2e84dba4a@suse.com>
-Content-Type: text/plain; charset="utf-8"
+In-Reply-To: <20200903232458.16551-1-s.temerkhanov@gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-Content-Language: en-GB
-X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
- FTLPEX02CL05.citrite.net (10.13.108.178)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -87,46 +62,47 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 04/09/2020 09:53, Jan Beulich wrote:
-> On 01.09.2020 12:54, Roger Pau Monne wrote:
->> @@ -3290,11 +3288,6 @@ static int vmx_msr_write_intercept(unsigned int msr, uint64_t msr_content)
->>          __vmwrite(GUEST_IA32_DEBUGCTL, msr_content);
->>          break;
->>  
->> -    case MSR_IA32_FEATURE_CONTROL:
->> -    case MSR_IA32_VMX_BASIC ... MSR_IA32_VMX_VMFUNC:
->> -        /* None of these MSRs are writeable. */
->> -        goto gp_fault;
-> I understand Andrew did ask for this (and I didn't look closely
-> when I saw the comment), but ...
->
->> @@ -3320,10 +3313,9 @@ static int vmx_msr_write_intercept(unsigned int msr, uint64_t msr_content)
->>               is_last_branch_msr(msr) )
->>              break;
->>  
->> -        /* Match up with the RDMSR side; ultimately this should go away. */
->> -        if ( rdmsr_safe(msr, msr_content) == 0 )
->> -            break;
->> -
->> +        gdprintk(XENLOG_WARNING,
->> +                 "WRMSR 0x%08x val 0x%016"PRIx64" unimplemented\n",
->> +                 msr, msr_content);
->>          goto gp_fault;
-> ... above from here is logic that handling of these MSRs now goes
-> through. I'm particularly worried about vmx_write_guest_msr(),
-> which blindly updates the value of any MSR it can find, i.e. if
-> any r/o MSR (from the set above, or even more generally) ever got
-> added to this vCPU-specific set, the r/o-ness would no longer be
-> maintained. Do we perhaps need to white-list MSRs for which
-> vmx_write_guest_msr() may get called here?
+On 04.09.2020 01:24, Sergey Temerkhanov wrote:
+> --- a/xen/common/efi/boot.c
+> +++ b/xen/common/efi/boot.c
+> @@ -1521,7 +1521,9 @@ void __init efi_init_memory(void)
 
-If a read-only MSR ever actually gets into the load/save list, we'll
-take a VMEntry failure (guest load) or SHUTDOWN (host load) as a
-consequence of microcode takes a #GP fault.
+Looking at the line numbers - is this patch against the master
+or staging branch? I ask because about as far away from the line
+number above as the chunk of cose you mean to change there's a
+very similar conditional, which has caused some slight confusion
+over here.
 
-However, restricting the content of this catch-all clause to nothing
-(but the printk) is something I have planned as part of the ongoing MSR
-cleanup work.
+>          }
+>  
+>          if ( !efi_enabled(EFI_RS) ||
+> -             (!(desc->Attribute & EFI_MEMORY_RUNTIME) &&
+> +             ((!(desc->Attribute & EFI_MEMORY_RUNTIME) &&
+> +                (desc->Type != EfiRuntimeServicesCode &&
+> +                 desc->Type != EfiRuntimeServicesData)) &&
+>                (!map_bs ||
+>                 (desc->Type != EfiBootServicesCode &&
+>                  desc->Type != EfiBootServicesData))) )
 
-~Andrew
+I'm in principle okay with a workaround like this, but I don't
+think it should go silently. I'd therefore like to suggest you
+add a new if() ahead of this one and then set
+EFI_MEMORY_RUNTIME in affected descriptors (to keep things
+consistent with other consumers of the memory map without
+having to update every one of those checking for the flag)
+alongside issuing a log message.
+
+There's nevertheless another piece of code you need to adjust,
+inside a CONFIG_EFI_SET_VIRTUAL_ADDRESS_MAP conditional in
+efi_exit_boot(). But you shouldn't adjust the descriptor
+there, yet - this should happen only after its logging in
+efi_init_memory().
+
+Additionally I'd like it to be at least considered to also
+check that EFI_MEMORY_WB (or at the very least one of the
+cachability flags) is set, so that we won't run into the
+path further down complaining about a lack thereof in this
+case.
+
+Jan
 
