@@ -2,50 +2,51 @@ Return-Path: <SRS0=WVJZ=CQ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.1 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-10.1 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 01E81C43461
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Sep 2020 08:22:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 040C8C43461
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Sep 2020 08:31:15 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A2D66208C7
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Sep 2020 08:22:15 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A2D66208C7
+	by mail.kernel.org (Postfix) with ESMTPS id 9E1CB2145D
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Sep 2020 08:31:13 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9E1CB2145D
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kFCPE-0008My-B0; Mon, 07 Sep 2020 08:21:40 +0000
+	id 1kFCYA-0000r7-9Y; Mon, 07 Sep 2020 08:30:54 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=b7xj=CQ=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kFCPD-0008Mt-3f
- for xen-devel@lists.xenproject.org; Mon, 07 Sep 2020 08:21:39 +0000
-X-Inumbo-ID: 05810697-97df-4242-95de-e2b3fcdcee84
+ id 1kFCY9-0000r2-2w
+ for xen-devel@lists.xenproject.org; Mon, 07 Sep 2020 08:30:53 +0000
+X-Inumbo-ID: 29abe61a-85b0-4049-9d0d-517db4511b8f
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 05810697-97df-4242-95de-e2b3fcdcee84;
- Mon, 07 Sep 2020 08:21:38 +0000 (UTC)
+ id 29abe61a-85b0-4049-9d0d-517db4511b8f;
+ Mon, 07 Sep 2020 08:30:52 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 5690BAEE5;
- Mon,  7 Sep 2020 08:21:38 +0000 (UTC)
-Subject: Re: [xen-unstable bisection] complete test-amd64-i386-xl-shadow
-To: xen-devel@lists.xenproject.org
-References: <E1kF3SG-0000mV-7s@osstest.test-lab.xenproject.org>
-Cc: osstest service owner <osstest-admin@xenproject.org>
+ by mx2.suse.de (Postfix) with ESMTP id 3B4E4AF39;
+ Mon,  7 Sep 2020 08:30:52 +0000 (UTC)
+Subject: Re: [PATCH] EFI: Enable booting unified hypervisor/kernel/initrd
+ images
+To: Trammell Hudson <hudson@trmm.net>
+References: <EGZ7EZE5F-c5YJVD9p0TtccTz06ZsdMcL21-BcB64dk9V3x8eKrB3dSDsLbGL4peCaENcp55uRsnWUONZYvrRaQh0tToALcaHRr-QMYNsH0=@trmm.net>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <01e192ce-99ea-2fbd-317c-c9f4b99f6d2a@suse.com>
-Date: Mon, 7 Sep 2020 10:21:36 +0200
+Message-ID: <93bec730-ed74-a21c-0ac4-9ed7349df0d4@suse.com>
+Date: Mon, 7 Sep 2020 10:30:50 +0200
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.12.0
 MIME-Version: 1.0
-In-Reply-To: <E1kF3SG-0000mV-7s@osstest.test-lab.xenproject.org>
+In-Reply-To: <EGZ7EZE5F-c5YJVD9p0TtccTz06ZsdMcL21-BcB64dk9V3x8eKrB3dSDsLbGL4peCaENcp55uRsnWUONZYvrRaQh0tToALcaHRr-QMYNsH0=@trmm.net>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -62,46 +63,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 07.09.2020 00:48, osstest service owner wrote:
-> branch xen-unstable
-> xenbranch xen-unstable
-> job test-amd64-i386-xl-shadow
-> testid guest-saverestore
+On 28.08.2020 13:51, Trammell Hudson wrote:
+> This patch adds support for bundling the xen.efi hypervisor, the xen.cfg
+> configuration file, the Linux kernel and initrd, as well as the XSM, and
+> CPU microcode into a single "unified" EFI executable.  The resulting EFI
+> executable can be invoked directly from the UEFI Boot Manager, removing
+> the need to use a separate loader like grub as well as removing
+> dependencies on local filesystem access.
 > 
-> Tree: linux git://xenbits.xen.org/linux-pvops.git
-> Tree: linuxfirmware git://xenbits.xen.org/osstest/linux-firmware.git
-> Tree: qemu git://xenbits.xen.org/qemu-xen-traditional.git
-> Tree: qemuu git://xenbits.xen.org/qemu-xen.git
-> Tree: xen git://xenbits.xen.org/xen.git
+> It is inspired by systemd-boot's unified kernel technique and borrows the
+> function to locate PE sections from systemd's LGPL'ed code.  During EFI
+> boot, Xen looks at its own loaded image to locate the PE sections for
+> the configuration, kernel, etc, which are included after building xen.efi
+> using objcopy to add named sections for each input file.  This allows an
+> administrator to update the components independently without requiring
+> rebuilding xen.
 > 
-> *** Found and reproduced problem changeset ***
+> The unified image can also be signed by sbsigntool for verification
+> by UEFI Secure Boot.  If secure boot is enabled, the Xen command line
+> arguments are ignored.  Unlike the shim based verification, the signature
+> covers the entire Xen+config+kernel+initrd unified file. This also ensures
+> that properly configured platforms will measure the entire runtime into
+> the TPM for unsealing secrets or remote attestation.
 > 
->   Bug is in tree:  xen git://xenbits.xen.org/xen.git
->   Bug introduced:  696c273f3d9a169911308fb7e0a702a3eb6a150d
->   Bug not present: a609b6577f7867db4be1470130b7b3c686398c4f
->   Last fail repro: http://logs.test-lab.xenproject.org/osstest/logs/153833/
-> 
-> 
->   commit 696c273f3d9a169911308fb7e0a702a3eb6a150d
->   Author: Jan Beulich <jbeulich@suse.com>
->   Date:   Fri Sep 4 11:13:01 2020 +0200
->   
->       x86: generalize padding field handling
->       
->       The original intention was to ignore padding fields, but the pattern
->       matched only ones whose names started with an underscore. Also match
->       fields whose names are in line with the C spec by not having a leading
->       underscore. (Note that the leading ^ in the sed regexps was pointless
->       and hence get dropped.)
+> Signed-off-by: Trammell Hudson <hudson@trmm.net>
 
-I conclude this needs to be reverted, and there was a thinko of mine
-involved here: Avoiding translation of padding fields would be okay
-only when their values don't get checked in the native handler. We
-effectively have a not written down (afaict) rule here that _pad*
-fields get ignored (and hence don't need translation), while pad*
-fields may not be ignored and hence may need translation. I don't
-like this state, but I also can't think of a good way out of it, at
-least not just yet.
+I realize this patch is now stale, and hence there's little point
+looking over it. As indicated elsewhere I don't think the gitlab
+model is suitable here, so may I ask that you post an up-to-date
+patch to the list again?
 
-Jan
+Thanks, Jan
 
