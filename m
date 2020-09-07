@@ -2,66 +2,69 @@ Return-Path: <SRS0=WVJZ=CQ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 20CCAC43461
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7DDF8C433E2
 	for <xen-devel@archiver.kernel.org>; Mon,  7 Sep 2020 07:40:45 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B091E207C3
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Sep 2020 07:40:44 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 2F1F3207C3
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Sep 2020 07:40:45 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="S48bY3xN"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B091E207C3
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="0G/ApBMo"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2F1F3207C3
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kFBlQ-0003Bb-Ki; Mon, 07 Sep 2020 07:40:32 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kFBlS-0003Ca-W5; Mon, 07 Sep 2020 07:40:34 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=9LpL=CQ=xen.org=paul@srs-us1.protection.inumbo.net>)
- id 1kFBlP-0003B9-1d
- for xen-devel@lists.xenproject.org; Mon, 07 Sep 2020 07:40:31 +0000
-X-Inumbo-ID: 5a4bef6d-d5f6-45b0-aa12-87804f4abd64
+ id 1kFBlS-0003Af-Gu
+ for xen-devel@lists.xenproject.org; Mon, 07 Sep 2020 07:40:34 +0000
+X-Inumbo-ID: 7e88fc2d-3815-4c7d-b6d3-0c8f0f653b56
 Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 5a4bef6d-d5f6-45b0-aa12-87804f4abd64;
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 7e88fc2d-3815-4c7d-b6d3-0c8f0f653b56;
  Mon, 07 Sep 2020 07:40:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
- bh=bcXYSziQEVYnJt2FcTKxwvzJvDf1bktnUlerxuTET0c=; b=S48bY3xNU86MaV7pOhWN2st8z+
- fuJ7YTU2yckWUNYkWjZfO761J3Sdz5u+hEQ7ziwjj/JQ826PvtZjdhuF6zJMH44o13ZLpk8VnDboW
- 0TqCyo8UuoieGPrVZYKxGg4cBbUtPhjBJBqHx8XRhyGgQwl7t0ZP7kQh+VEnyGBm2qBY=;
+ s=20200302mail; h=Content-Transfer-Encoding:Content-Type:MIME-Version:
+ Message-Id:Date:Subject:Cc:To:From;
+ bh=wdzM2+xqwvNfuwNgge8rUbjb34P5UZfsK3i/lcNt3xk=; b=0G/ApBMoWC+k7z8ix8x2PDqOt8
+ tcAHIhmcOLSqFcJ/uHOChpWddqEIQ55M5/NiKheW2vdeKQKgYDj8EmUixJ2+6JBG1GIdS88h7ZgZK
+ krVoKTFHEhcyOFWmKyQcwaFt82alJKSFHCFDAsdq7zhHIkvOlRnpq6tNXvzr8cGufJPE=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kFBlN-0000ry-4c; Mon, 07 Sep 2020 07:40:29 +0000
+ id 1kFBlK-0000rp-O0; Mon, 07 Sep 2020 07:40:26 +0000
 Received: from host86-176-94-160.range86-176.btcentralplus.com
  ([86.176.94.160] helo=u2f063a87eabd5f.home)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kFBlM-0008Cf-SD; Mon, 07 Sep 2020 07:40:29 +0000
+ id 1kFBlK-0008Cf-Ac; Mon, 07 Sep 2020 07:40:26 +0000
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: Paul Durrant <pdurrant@amazon.com>,
-	Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH v5 3/8] iommu: flush I/O TLB if iommu_map() or iommu_unmap()
- fail
-Date: Mon,  7 Sep 2020 08:40:18 +0100
-Message-Id: <20200907074023.1392-4-paul@xen.org>
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, Jun Nakajima <jun.nakajima@intel.com>,
+ Kevin Tian <kevin.tian@intel.com>,
+ =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
+Subject: [PATCH v5 0/8] IOMMU cleanup
+Date: Mon,  7 Sep 2020 08:40:15 +0100
+Message-Id: <20200907074023.1392-1-paul@xen.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200907074023.1392-1-paul@xen.org>
-References: <20200907074023.1392-1-paul@xen.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -78,105 +81,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Paul Durrant <pdurrant@amazon.com>
 
-This patch adds a full I/O TLB flush to the error paths of iommu_map() and
-iommu_unmap().
+Paul Durrant (8):
+  x86/iommu: convert VT-d code to use new page table allocator
+  iommu: remove unused iommu_ops method and tasklet
+  iommu: flush I/O TLB if iommu_map() or iommu_unmap() fail
+  iommu: make map and unmap take a page count, similar to flush
+  remove remaining uses of iommu_legacy_map/unmap
+  common/grant_table: batch flush I/O TLB
+  iommu: remove the share_p2m operation
+  iommu: stop calling IOMMU page tables 'p2m tables'
 
-Without this change callers need constructs such as:
-
-rc = iommu_map/unmap(...)
-err = iommu_flush(...)
-if ( !rc )
-  rc = err;
-
-With this change, it can be simplified to:
-
-rc = iommu_map/unmap(...)
-if ( !rc )
-  rc = iommu_flush(...)
-
-because, if the map or unmap fails the flush will be unnecessary. This saves
-a stack variable and generally makes the call sites tidier.
-
-Signed-off-by: Paul Durrant <pdurrant@amazon.com>
+ xen/arch/x86/mm.c                           |  22 +-
+ xen/arch/x86/mm/p2m-ept.c                   |  21 +-
+ xen/arch/x86/mm/p2m-pt.c                    |  16 +-
+ xen/arch/x86/mm/p2m.c                       |  27 ++-
+ xen/arch/x86/x86_64/mm.c                    |  20 +-
+ xen/common/grant_table.c                    | 210 ++++++++++++------
+ xen/common/memory.c                         |   7 +-
+ xen/drivers/passthrough/amd/iommu.h         |   2 +-
+ xen/drivers/passthrough/amd/iommu_map.c     |   2 +-
+ xen/drivers/passthrough/amd/pci_amd_iommu.c |  22 +-
+ xen/drivers/passthrough/iommu.c             | 120 +++--------
+ xen/drivers/passthrough/vtd/extern.h        |   2 +-
+ xen/drivers/passthrough/vtd/iommu.c         | 225 +++++++++-----------
+ xen/drivers/passthrough/vtd/x86/vtd.c       |   2 +-
+ xen/drivers/passthrough/x86/iommu.c         |   2 +-
+ xen/include/xen/iommu.h                     |  36 +---
+ 16 files changed, 373 insertions(+), 363 deletions(-)
 ---
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: George Dunlap <george.dunlap@citrix.com>
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Cc: Jan Beulich <jbeulich@suse.com>
-
-v5:
- - Avoid unnecessary flushing if 'page_order' is 0
- - Add missing indirection on 'flush_flags'
-
-v2:
- - New in v2
----
- xen/drivers/passthrough/iommu.c | 34 +++++++++++++++++----------------
- 1 file changed, 18 insertions(+), 16 deletions(-)
-
-diff --git a/xen/drivers/passthrough/iommu.c b/xen/drivers/passthrough/iommu.c
-index 660dc5deb2..f27facd52d 100644
---- a/xen/drivers/passthrough/iommu.c
-+++ b/xen/drivers/passthrough/iommu.c
-@@ -274,6 +274,13 @@ int iommu_map(struct domain *d, dfn_t dfn, mfn_t mfn,
-         break;
-     }
- 
-+    /*
-+     * Something went wrong so, if we were dealing with more than a single
-+     * page, flush everything and clear flush flags.
-+     */
-+    if ( page_order && unlikely(rc) && !iommu_iotlb_flush_all(d, *flush_flags) )
-+        *flush_flags = 0;
-+
-     return rc;
- }
- 
-@@ -283,14 +290,8 @@ int iommu_legacy_map(struct domain *d, dfn_t dfn, mfn_t mfn,
-     unsigned int flush_flags = 0;
-     int rc = iommu_map(d, dfn, mfn, page_order, flags, &flush_flags);
- 
--    if ( !this_cpu(iommu_dont_flush_iotlb) )
--    {
--        int err = iommu_iotlb_flush(d, dfn, (1u << page_order),
--                                    flush_flags);
--
--        if ( !rc )
--            rc = err;
--    }
-+    if ( !this_cpu(iommu_dont_flush_iotlb) && !rc )
-+        rc = iommu_iotlb_flush(d, dfn, (1u << page_order), flush_flags);
- 
-     return rc;
- }
-@@ -330,6 +331,13 @@ int iommu_unmap(struct domain *d, dfn_t dfn, unsigned int page_order,
-         }
-     }
- 
-+    /*
-+     * Something went wrong so, if we were dealing with more than a single
-+     * page, flush everything and clear flush flags.
-+     */
-+    if ( page_order && unlikely(rc) && !iommu_iotlb_flush_all(d, *flush_flags) )
-+        *flush_flags = 0;
-+
-     return rc;
- }
- 
-@@ -338,14 +346,8 @@ int iommu_legacy_unmap(struct domain *d, dfn_t dfn, unsigned int page_order)
-     unsigned int flush_flags = 0;
-     int rc = iommu_unmap(d, dfn, page_order, &flush_flags);
- 
--    if ( !this_cpu(iommu_dont_flush_iotlb) )
--    {
--        int err = iommu_iotlb_flush(d, dfn, (1u << page_order),
--                                    flush_flags);
--
--        if ( !rc )
--            rc = err;
--    }
-+    if ( !this_cpu(iommu_dont_flush_iotlb) && ! rc )
-+        rc = iommu_iotlb_flush(d, dfn, (1u << page_order), flush_flags);
- 
-     return rc;
- }
+Cc: Julien Grall <julien@xen.org>
+Cc: Jun Nakajima <jun.nakajima@intel.com>
+Cc: Kevin Tian <kevin.tian@intel.com>
+Cc: "Roger Pau Monné" <roger.pau@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Wei Liu <wl@xen.org>
 -- 
 2.20.1
 
