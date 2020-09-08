@@ -2,76 +2,78 @@ Return-Path: <SRS0=UWXF=CR=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-12.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=no
-	autolearn_force=no version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2DF21C43461
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Sep 2020 15:55:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D1999C43461
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Sep 2020 15:55:58 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C9D5322AAB
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Sep 2020 15:55:53 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 7E1C522AAA
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Sep 2020 15:55:58 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="DnDH0Ips"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C9D5322AAB
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="ic3tYcvy"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7E1C522AAA
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kFfy7-0005kA-5s; Tue, 08 Sep 2020 15:55:39 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kFfyG-0005mP-Nj; Tue, 08 Sep 2020 15:55:48 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=cV5b=CR=redhat.com=philmd@srs-us1.protection.inumbo.net>)
- id 1kFfy5-0005k5-S6
- for xen-devel@lists.xenproject.org; Tue, 08 Sep 2020 15:55:38 +0000
-X-Inumbo-ID: 0959607c-2291-4cec-b7af-2185c5f54fc0
-Received: from us-smtp-1.mimecast.com (unknown [207.211.31.81])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id 0959607c-2291-4cec-b7af-2185c5f54fc0;
- Tue, 08 Sep 2020 15:55:36 +0000 (UTC)
+ id 1kFfyF-0005kl-0U
+ for xen-devel@lists.xenproject.org; Tue, 08 Sep 2020 15:55:47 +0000
+X-Inumbo-ID: eaa9dd96-4609-43c9-821d-ee7c066f5a58
+Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id eaa9dd96-4609-43c9-821d-ee7c066f5a58;
+ Tue, 08 Sep 2020 15:55:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1599580536;
+ s=mimecast20190719; t=1599580545;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=9j8LNni0K0Ze9zlV3rWaTDC98qmRJvn1PKy4tvgP9TY=;
- b=DnDH0IpsjL9arnao1Z0dgGVnw6Kk6Aki5t4VKZCLDRJDWnv5IA7NpNcMKLDfroblJXqdFd
- 4omnByLBZ18C75sVb1rlne2/iSw9SiazocTXKCHKujYDw9OHeeyPcM9QI4GEOTJH6OlnSk
- rVBTCfvs3dqkKyCt3EEvJuDkov6/trM=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-505-1PyS7s3hNTWIw0Anxe7kwA-1; Tue, 08 Sep 2020 11:55:34 -0400
-X-MC-Unique: 1PyS7s3hNTWIw0Anxe7kwA-1
-Received: by mail-wm1-f72.google.com with SMTP id w3so4891753wmg.4
- for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2020 08:55:33 -0700 (PDT)
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=L9MSzTqEXdEyImaMC4bb2Kv6juBLliyTUBhWiXmnlsA=;
+ b=ic3tYcvyzyVRipYio/4hCGvoBA9rIUoFyi5tafvJd+WiXuk/lV8LayR4S5Rdd5Oz/KaRaP
+ zUiOb3ZLFOMUZlDqFzOWJqURgWIYQFjXxaTahLNTQ5TRqCVfXy2mBXotkoP0aOs0TGNxv3
+ kz6wj24GIyOWBf8+5s5Or+JPBwXZtAQ=
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-255-hhy-JsTiOCqj8uU5MuO9Bg-1; Tue, 08 Sep 2020 11:55:44 -0400
+X-MC-Unique: hhy-JsTiOCqj8uU5MuO9Bg-1
+Received: by mail-wr1-f71.google.com with SMTP id b7so7126411wrn.6
+ for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2020 08:55:44 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=9j8LNni0K0Ze9zlV3rWaTDC98qmRJvn1PKy4tvgP9TY=;
- b=X5r9Mokwe/bucdoK198AVb+H4O4r8rFT91HbJ6Ntmmv07kGHuooSBZvEHRt/WQru/K
- s0hV0knQsZ4VFpn5DbYiJmmhEvg+AQCssW5Iuz9TL7cNF+Xz2SyEYtSzJhfvSPizNzp2
- o7qaJMYHPTq+PHQ6WN1aJ3yrHbcWOeUxpdrRwuKYsPmvkgn5Y1Vpd/iumLLkP1eu8Wm5
- nHvz6+6aqXYnc/YTq1CoTr8GYBETCxMJkNHCWHlxN4GWnz4RxrDUCvM06jGEYLMrgEIh
- CxyoQ5Mx3Yq0JrCsPk2DqOB9VpML4LPIqJMkyTWf4sSmvUITt3GVJaSO2VXSfgw3mvR+
- /2Mg==
-X-Gm-Message-State: AOAM530Dt9Mqa/Am8UUlyM7y0EnGX3KEaziau6m61yFZb6Z+R8sJ/9ZT
- jXnLM3xBG/e+1nJT1BHyIL1XajcEKvW5kQQp8T5oQkcaFyqmUN7sgBXlFmrahJfHqVFlOrln90z
- v1X1KFq9pwYn2oiRHI5gHYAjIKVA=
-X-Received: by 2002:adf:f082:: with SMTP id n2mr290527wro.35.1599580532999;
- Tue, 08 Sep 2020 08:55:32 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJyxYkBgGzzaWKvpOFlNbbbbP9lrh/psCt3R+tnd0FsuRZrWeLF+XgkSPHCNZYgHHlXHTFCwjQ==
-X-Received: by 2002:adf:f082:: with SMTP id n2mr290518wro.35.1599580532824;
- Tue, 08 Sep 2020 08:55:32 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=L9MSzTqEXdEyImaMC4bb2Kv6juBLliyTUBhWiXmnlsA=;
+ b=j31KcTX3GTUVFc9e+WyMqvKRAuJHk/MRylnchjHsbZGu/QZ3RW5G8XY6avRf/kpznR
+ S0DCWLWwy39btA9v8NBlORi7RRTCg0DghgA2XSVmK7CvSpcxvSCQf8rBVLW9wW8Zn4GT
+ JhmmzxxJcZU2n/6SjPZ9fnR1x0Jw6lr+80Q+Fjf8rQC0y/0B5nsOYYbXeNh9SwitK2Z+
+ Wq8UiD0FFcdWyrVgclsB96XSB/emNLY4gIQPg+A/cxejKAWtKbujOriJfCws94qgzauP
+ yvm4nlglowdSjVOBwwoFeeBKWLSNWXu44QDSGuwBQyDQbJxuUmvd+TlZqnUjHwDxmGSU
+ /w5g==
+X-Gm-Message-State: AOAM530px0idJZLsAdYqX10iuYwfXUNE+pWbVWYpn79QEyDMo1Zr5YTo
+ WKnKb5Oqq3WrEW18TbkL8hOXkwbUpAeMewgIecnUWOovXC6lsN8Ea03ieYYtJEMucZ/cB/Scukg
+ n0Rvdjs7q/0stIn28d862XQbfZro=
+X-Received: by 2002:adf:fa52:: with SMTP id y18mr317409wrr.264.1599580542937; 
+ Tue, 08 Sep 2020 08:55:42 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJyU6NdtM/r+hGgVHJHbxUzLG0yEYCNZp/OUgIpECe7SNk6Rt9b7NXEaxP7j5zNjVZzl5NvrIA==
+X-Received: by 2002:adf:fa52:: with SMTP id y18mr317390wrr.264.1599580542761; 
+ Tue, 08 Sep 2020 08:55:42 -0700 (PDT)
 Received: from localhost.localdomain (65.red-83-57-170.dynamicip.rima-tde.net.
  [83.57.170.65])
- by smtp.gmail.com with ESMTPSA id t1sm30401380wmi.16.2020.09.08.08.55.31
+ by smtp.gmail.com with ESMTPSA id x10sm34206389wmi.37.2020.09.08.08.55.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 08 Sep 2020 08:55:32 -0700 (PDT)
+ Tue, 08 Sep 2020 08:55:42 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <rth@twiddle.net>,
@@ -82,16 +84,20 @@ Cc: Richard Henderson <rth@twiddle.net>,
  Paolo Bonzini <pbonzini@redhat.com>, Paul Durrant <paul@xen.org>,
  Eduardo Habkost <ehabkost@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
-Subject: [PATCH v2 0/6] hw/xen: Housekeeping
-Date: Tue,  8 Sep 2020 17:55:24 +0200
-Message-Id: <20200908155530.249806-1-philmd@redhat.com>
+Subject: [PATCH v2 2/6] hw/i386/xen: Rename X86/PC specific function as
+ xen_hvm_init_pc()
+Date: Tue,  8 Sep 2020 17:55:26 +0200
+Message-Id: <20200908155530.249806-3-philmd@redhat.com>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20200908155530.249806-1-philmd@redhat.com>
+References: <20200908155530.249806-1-philmd@redhat.com>
 MIME-Version: 1.0
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=philmd@redhat.com
-X-Mimecast-Spam-Score: 0.001
+X-Mimecast-Spam-Score: 0.003
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=UTF-8;
+	text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -106,44 +112,80 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Hard to make an exciting cover of this series.
+xen_hvm_init() is only meanful to initialize a X86/PC machine,
+rename it as xen_hvm_init_pc().
 
-Basically:
-- Make better separation between Xen accel and Xen hardware,
-- Move stuff around to restrict PCMachineState to hw/i386/.
+Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+---
+ include/hw/xen/xen.h   | 2 +-
+ accel/stubs/xen-stub.c | 2 +-
+ hw/i386/pc_piix.c      | 6 +++---
+ hw/i386/xen/xen-hvm.c  | 2 +-
+ 4 files changed, 6 insertions(+), 6 deletions(-)
 
-Since v1:
-- added missing include in stubs/xen-hw-stub.c
-- added missing 'exec/cpu-common.h' for ram_addr_t
-
-(Due to a bug in 'make', while rebasing the archives
- might not be updated... so I missed this missing
- hunk as hw/core/libhwcore.fa didn't rebuilt stubs/)
-
-Philippe Mathieu-Daudé (6):
-  hw/i386/q35: Remove unreachable Xen code on Q35 machine
-  hw/i386/xen: Rename X86/PC specific function as xen_hvm_init_pc()
-  sysemu/xen: Add missing 'exec/cpu-common.h' header for ram_addr_t type
-  stubs: Split accelerator / hardware related stubs
-  hw/xen: Split x86-specific declaration from generic hardware ones
-  typedefs: Restrict PCMachineState to 'hw/i386/pc.h'
-
- include/hw/i386/pc.h     |  4 ++--
- include/hw/xen/xen-x86.h | 15 ++++++++++++
- include/hw/xen/xen.h     |  2 --
- include/qemu/typedefs.h  |  1 -
- include/sysemu/xen.h     |  2 ++
- accel/stubs/xen-stub.c   | 41 +-------------------------------
- hw/i386/pc_piix.c        |  8 +++----
- hw/i386/pc_q35.c         | 13 ++---------
- hw/i386/xen/xen-hvm.c    |  3 ++-
- stubs/xen-hw-stub.c      | 50 ++++++++++++++++++++++++++++++++++++++++
- MAINTAINERS              |  1 +
- stubs/meson.build        |  1 +
- 12 files changed, 80 insertions(+), 61 deletions(-)
- create mode 100644 include/hw/xen/xen-x86.h
- create mode 100644 stubs/xen-hw-stub.c
-
+diff --git a/include/hw/xen/xen.h b/include/hw/xen/xen.h
+index 771dd447f2b..b2b459964cb 100644
+--- a/include/hw/xen/xen.h
++++ b/include/hw/xen/xen.h
+@@ -30,7 +30,7 @@ qemu_irq *xen_interrupt_controller_init(void);
+ 
+ void xenstore_store_pv_console_info(int i, struct Chardev *chr);
+ 
+-void xen_hvm_init(PCMachineState *pcms, MemoryRegion **ram_memory);
++void xen_hvm_init_pc(PCMachineState *pcms, MemoryRegion **ram_memory);
+ 
+ void xen_register_framebuffer(struct MemoryRegion *mr);
+ 
+diff --git a/accel/stubs/xen-stub.c b/accel/stubs/xen-stub.c
+index 8ae658acff5..fa3dddbce57 100644
+--- a/accel/stubs/xen-stub.c
++++ b/accel/stubs/xen-stub.c
+@@ -46,7 +46,7 @@ void xen_register_framebuffer(MemoryRegion *mr)
+ {
+ }
+ 
+-void xen_hvm_init(PCMachineState *pcms, MemoryRegion **ram_memory)
++void xen_hvm_init_pc(PCMachineState *pcms, MemoryRegion **ram_memory)
+ {
+ }
+ 
+diff --git a/hw/i386/pc_piix.c b/hw/i386/pc_piix.c
+index 32b1453e6a8..3e008bb0b1a 100644
+--- a/hw/i386/pc_piix.c
++++ b/hw/i386/pc_piix.c
+@@ -117,8 +117,8 @@ static void pc_init1(MachineState *machine,
+      *    so legacy non-PAE guests can get as much memory as possible in
+      *    the 32bit address space below 4G.
+      *
+-     *  - Note that Xen has its own ram setp code in xen_ram_init(),
+-     *    called via xen_hvm_init().
++     *  - Note that Xen has its own ram setup code in xen_ram_init(),
++     *    called via xen_hvm_init_pc().
+      *
+      * Examples:
+      *    qemu -M pc-1.7 -m 4G    (old default)    -> 3584M low,  512M high
+@@ -127,7 +127,7 @@ static void pc_init1(MachineState *machine,
+      *    qemu -M pc,max-ram-below-4g=4G -m 3968M  -> 3968M low (=4G-128M)
+      */
+     if (xen_enabled()) {
+-        xen_hvm_init(pcms, &ram_memory);
++        xen_hvm_init_pc(pcms, &ram_memory);
+     } else {
+         if (!pcms->max_ram_below_4g) {
+             pcms->max_ram_below_4g = 0xe0000000; /* default: 3.5G */
+diff --git a/hw/i386/xen/xen-hvm.c b/hw/i386/xen/xen-hvm.c
+index cde981bad66..49748cda3fb 100644
+--- a/hw/i386/xen/xen-hvm.c
++++ b/hw/i386/xen/xen-hvm.c
+@@ -1395,7 +1395,7 @@ static int xen_map_ioreq_server(XenIOState *state)
+     return 0;
+ }
+ 
+-void xen_hvm_init(PCMachineState *pcms, MemoryRegion **ram_memory)
++void xen_hvm_init_pc(PCMachineState *pcms, MemoryRegion **ram_memory)
+ {
+     MachineState *ms = MACHINE(pcms);
+     unsigned int max_cpus = ms->smp.max_cpus;
 -- 
 2.26.2
 
