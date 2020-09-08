@@ -2,55 +2,101 @@ Return-Path: <SRS0=UWXF=CR=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.9 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 12D6AC43461
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Sep 2020 15:53:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 08072C433E2
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Sep 2020 15:55:53 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C5F7B248F8
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Sep 2020 15:53:15 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C5F7B248F8
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id A230622AAA
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Sep 2020 15:55:52 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="jWbm+J8J"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A230622AAA
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kFfva-0005Yj-Lv; Tue, 08 Sep 2020 15:53:02 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kFfyB-0005lD-EK; Tue, 08 Sep 2020 15:55:43 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=yBuC=CR=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kFfvZ-0005YW-Dy
- for xen-devel@lists.xenproject.org; Tue, 08 Sep 2020 15:53:01 +0000
-X-Inumbo-ID: dd8b5a03-cf61-4a0b-8221-e639f7a91022
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id dd8b5a03-cf61-4a0b-8221-e639f7a91022;
- Tue, 08 Sep 2020 15:53:00 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id B7F8BB603;
- Tue,  8 Sep 2020 15:53:00 +0000 (UTC)
-Subject: Re: [PATCH v4 2/5] x86/pv: allow reading FEATURE_CONTROL MSR
-To: Roger Pau Monne <roger.pau@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Jun Nakajima <jun.nakajima@intel.com>,
- Kevin Tian <kevin.tian@intel.com>, Andrew Cooper
- <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>
-References: <20200907103143.58845-1-roger.pau@citrix.com>
- <20200907103143.58845-3-roger.pau@citrix.com>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <f6e137b9-d0e6-0895-8b49-153db03e1c6e@suse.com>
-Date: Tue, 8 Sep 2020 17:52:59 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.0
+ (envelope-from <SRS0=cV5b=CR=redhat.com=philmd@srs-us1.protection.inumbo.net>)
+ id 1kFfy9-0005kl-Th
+ for xen-devel@lists.xenproject.org; Tue, 08 Sep 2020 15:55:41 +0000
+X-Inumbo-ID: 03031e26-f964-4298-8c76-6bbb7745c7b7
+Received: from us-smtp-delivery-124.mimecast.com (unknown [63.128.21.124])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id 03031e26-f964-4298-8c76-6bbb7745c7b7;
+ Tue, 08 Sep 2020 15:55:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1599580541;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=rd1yDVC2PLm/mbyb4s3J2rHQe4El+Eyr3YAhnhSaUkU=;
+ b=jWbm+J8J5T8MvInyC3T8bziRccFbRUw+7afSpolm2v/A+4H90kgWfM1eayAKn7Ki7p6er2
+ LfmkavgvrfspgpcCPNP2zlWI4dIYkYbxV3k2y8nvY1bcRp/uEmC9/mODpJn1iZP22oXlWN
+ 7RH9/wPMPOGghjiQ9Vae48zxXWijZQc=
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-570-2apKmDi0PgCro21DOvmQ4A-1; Tue, 08 Sep 2020 11:55:39 -0400
+X-MC-Unique: 2apKmDi0PgCro21DOvmQ4A-1
+Received: by mail-wm1-f71.google.com with SMTP id b73so3632786wmb.0
+ for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2020 08:55:39 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=rd1yDVC2PLm/mbyb4s3J2rHQe4El+Eyr3YAhnhSaUkU=;
+ b=pwni3Bv+5Zuc69ioAD8hQaM/9YrSQbEL+m7Y6OZcuDwBdsdL2RzWMseeNeMsGcTOFk
+ tRyaAlx32YsFhpWFfLwzw+RDOtCtLVYifQ0U+d3b29iSqaf+flBgJYxJ5M8VqqEds7OR
+ X65e2+n7srHvIS/on14nKum23luslmfPCoUpZWdl7weLXA9ahqw677e+eIn1Ul/khO2K
+ Q746SjBg4UVKBTXt6ibutQEpdAGcsyOvBcJW5SrJf3eO0YGm0yd8eVd9W27jRQ8JTh23
+ 9XAANGuzlnrU1IIMZmepOlsxEyufC6pmqh1D/4S4ZGAa0H8OsknS21fn2bJBxj7iNzzG
+ 0QKg==
+X-Gm-Message-State: AOAM533apb1h8SGvchv+rqvme03FDxUwPGT/S/MnjrtnbA+JyZv3fk0U
+ uK4Ny9sJ85QosgR7AFO3VDnmdb89cmspmfL0/Ppl5Du5IJpfedd66hXs9DDsHuo+sQ56W9ibvj/
+ 0ZzBYluQdoRxBRx/BohZREVM3TaI=
+X-Received: by 2002:a7b:ca56:: with SMTP id m22mr221220wml.12.1599580538030;
+ Tue, 08 Sep 2020 08:55:38 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxYnoWVgP/Ap99zKyQud1Rr5s6XZtll0OYfYZ+la+K5Rnwnnrg8qI1BhbSu4nN0ILR5SpT+xA==
+X-Received: by 2002:a7b:ca56:: with SMTP id m22mr221200wml.12.1599580537809;
+ Tue, 08 Sep 2020 08:55:37 -0700 (PDT)
+Received: from localhost.localdomain (65.red-83-57-170.dynamicip.rima-tde.net.
+ [83.57.170.65])
+ by smtp.gmail.com with ESMTPSA id b187sm33175270wmb.8.2020.09.08.08.55.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 08 Sep 2020 08:55:37 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: Richard Henderson <rth@twiddle.net>,
+ Anthony Perard <anthony.perard@citrix.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ xen-devel@lists.xenproject.org, "Michael S. Tsirkin" <mst@redhat.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Paolo Bonzini <pbonzini@redhat.com>, Paul Durrant <paul@xen.org>,
+ Eduardo Habkost <ehabkost@redhat.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
+Subject: [PATCH v2 1/6] hw/i386/q35: Remove unreachable Xen code on Q35 machine
+Date: Tue,  8 Sep 2020 17:55:25 +0200
+Message-Id: <20200908155530.249806-2-philmd@redhat.com>
+X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20200908155530.249806-1-philmd@redhat.com>
+References: <20200908155530.249806-1-philmd@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20200907103143.58845-3-roger.pau@citrix.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=philmd@redhat.com
+X-Mimecast-Spam-Score: 0.002
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=UTF-8;
+	text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -65,15 +111,67 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 07.09.2020 12:31, Roger Pau Monne wrote:
-> Linux PV guests will attempt to read the FEATURE_CONTROL MSR, so move
-> the handling done in VMX code into guest_rdmsr as it can be shared
-> between PV and HVM guests that way.
-> 
-> Note that there's a slight behavior change and attempting to read the
-> MSR when no features are available will result in a fault.
-> 
-> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+Xen accelerator requires specific changes to a machine to be able
+to use it. See for example the 'Xen PC' machine configure its PCI
+bus calling pc_xen_hvm_init_pci(). There is no 'Xen Q35' machine
+declared. This code was probably added while introducing the Q35
+machine, based on the existing PC machine (see commit df2d8b3ed4
+"Introduce q35 pc based chipset emulator"). Remove the unreachable
+code to simplify this file.
 
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
+Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+Acked-by: Anthony PERARD <anthony.perard@citrix.com>
+---
+ hw/i386/pc_q35.c | 13 ++-----------
+ 1 file changed, 2 insertions(+), 11 deletions(-)
+
+diff --git a/hw/i386/pc_q35.c b/hw/i386/pc_q35.c
+index 0cb9c18cd44..f3506269fe0 100644
+--- a/hw/i386/pc_q35.c
++++ b/hw/i386/pc_q35.c
+@@ -34,9 +34,7 @@
+ #include "sysemu/arch_init.h"
+ #include "hw/i2c/smbus_eeprom.h"
+ #include "hw/rtc/mc146818rtc.h"
+-#include "hw/xen/xen.h"
+ #include "sysemu/kvm.h"
+-#include "sysemu/xen.h"
+ #include "hw/kvm/clock.h"
+ #include "hw/pci-host/q35.h"
+ #include "hw/qdev-properties.h"
+@@ -179,10 +177,6 @@ static void pc_q35_init(MachineState *machine)
+         x86ms->below_4g_mem_size = machine->ram_size;
+     }
+ 
+-    if (xen_enabled()) {
+-        xen_hvm_init(pcms, &ram_memory);
+-    }
+-
+     x86_cpus_init(x86ms, pcmc->default_cpu_version);
+ 
+     kvmclock_create();
+@@ -208,10 +202,7 @@ static void pc_q35_init(MachineState *machine)
+     }
+ 
+     /* allocate ram and load rom/bios */
+-    if (!xen_enabled()) {
+-        pc_memory_init(pcms, get_system_memory(),
+-                       rom_memory, &ram_memory);
+-    }
++    pc_memory_init(pcms, get_system_memory(), rom_memory, &ram_memory);
+ 
+     /* create pci host bus */
+     q35_host = Q35_HOST_DEVICE(qdev_new(TYPE_Q35_HOST_DEVICE));
+@@ -271,7 +262,7 @@ static void pc_q35_init(MachineState *machine)
+ 
+     assert(pcms->vmport != ON_OFF_AUTO__MAX);
+     if (pcms->vmport == ON_OFF_AUTO_AUTO) {
+-        pcms->vmport = xen_enabled() ? ON_OFF_AUTO_OFF : ON_OFF_AUTO_ON;
++        pcms->vmport = ON_OFF_AUTO_ON;
+     }
+ 
+     /* init basic PC hardware */
+-- 
+2.26.2
+
 
