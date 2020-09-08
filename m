@@ -2,53 +2,68 @@ Return-Path: <SRS0=UWXF=CR=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.2 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-10.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 101D3C43461
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Sep 2020 12:54:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B7E4AC433E2
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Sep 2020 13:03:51 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C1D7D22288
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Sep 2020 12:54:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C1D7D22288
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 5FE0022CAF
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Sep 2020 13:03:51 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="1o2xviEs"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5FE0022CAF
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kFd8h-0003hR-2O; Tue, 08 Sep 2020 12:54:23 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kFdHZ-0004hx-2k; Tue, 08 Sep 2020 13:03:33 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=yBuC=CR=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kFd8g-0003hK-7U
- for xen-devel@lists.xenproject.org; Tue, 08 Sep 2020 12:54:22 +0000
-X-Inumbo-ID: 567e12a6-6ad3-401b-a043-8d0b5d74d648
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 567e12a6-6ad3-401b-a043-8d0b5d74d648;
- Tue, 08 Sep 2020 12:54:21 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 22842ACB7;
- Tue,  8 Sep 2020 12:54:21 +0000 (UTC)
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <George.Dunlap@eu.citrix.com>, Ian Jackson
- <iwj@xenproject.org>, Julien Grall <julien@xen.org>, Wei Liu <wl@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>
-From: Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH] lib: correct __moddi3() description
-Message-ID: <6c8ab543-67dd-62ed-2542-48fa7395e541@suse.com>
-Date: Tue, 8 Sep 2020 14:54:20 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.0
+ (envelope-from <SRS0=MLT7=CR=xen.org=julien@srs-us1.protection.inumbo.net>)
+ id 1kFdHX-0004hs-IV
+ for xen-devel@lists.xenproject.org; Tue, 08 Sep 2020 13:03:31 +0000
+X-Inumbo-ID: 38eb9191-7192-46d3-a68f-62c69cae0df0
+Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 38eb9191-7192-46d3-a68f-62c69cae0df0;
+ Tue, 08 Sep 2020 13:03:30 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+ bh=a3eKbnDaEuwbPiPGDPvUlGgofUEDWNqspnKlbC6NmM0=; b=1o2xviEscx2Xg5kLXwOXQSsW8H
+ lxYMHJuaTG7Qy5VWB6SoG9QgcZxgv+D91ZXsRFCMVcuvus2DVFdsPrqKlK6247H8rAdprcN8/Otyy
+ EVG9fPUljHKiPiT2T4B1v1T4TcVfYurOpGLllLTkC8AbpTRvxW4w13hc72EG3yY5Q2fI=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1kFdHW-00048E-Eg; Tue, 08 Sep 2020 13:03:30 +0000
+Received: from 54-240-197-236.amazon.com ([54.240.197.236]
+ helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1kFdHW-0000d7-6O; Tue, 08 Sep 2020 13:03:30 +0000
+Subject: Re: [PATCH] Arm64: fix build with gcc 10
+To: Jan Beulich <jbeulich@suse.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Stefano Stabellini <sstabellini@kernel.org>
+References: <4c3c3f21-29bf-268c-039e-5adecff05f3a@suse.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <1edce029-34ef-4a49-fff3-c60e91bfaa64@xen.org>
+Date: Tue, 8 Sep 2020 14:03:28 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
+ Gecko/20100101 Thunderbird/68.12.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+In-Reply-To: <4c3c3f21-29bf-268c-039e-5adecff05f3a@suse.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
 Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -63,21 +78,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-The remainder of a division, when non-zero, is specified to always be of
-the same sign as the dividend. Bring a comment in line with the code it
-describes.
+Hi Jan,
 
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
+I would suggest: "xen/arm64: Force GCC to always inline generic atomics 
+helpers".
 
---- a/xen/common/lib.c
-+++ b/xen/common/lib.c
-@@ -390,7 +390,7 @@ u64 __umoddi3(u64 a, u64 b)
-  *  11 %  5 =  1
-  * -11 %  5 = -1
-  *  11 % -5 =  1
-- * -11 % -5 =  1
-+ * -11 % -5 = -1
-  */
- s64 __moddi3(s64 a, s64 b)
- {
+On 08/09/2020 13:53, Jan Beulich wrote:
+> With gcc10 inlining is (no longer?) the default for certain atomics.
+
+How about the following:
+
+"Recent versions of GCC (at least GCC10) will not inline generic atomics 
+helpers. Instead it will expect the software to either link with 
+libatomic.so or implement the helpers.
+
+To keep the previous behavior, force GCC to always inline the generic 
+atomics helpers.
+
+Long term we probably want to avoid relying on GCC atomics helpers as 
+this doesn't allow us to switch between LSE and LL/SC atomic.
+"
+
+> 
+> Suggested-by: Julien Grall <jgrall@amazon.com>
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> 
+> --- a/xen/arch/arm/arch.mk
+> +++ b/xen/arch/arm/arch.mk
+> @@ -12,6 +12,7 @@ CFLAGS-$(CONFIG_ARM_32) += -mcpu=cortex-
+>   
+>   CFLAGS-$(CONFIG_ARM_64) += -mcpu=generic
+>   CFLAGS-$(CONFIG_ARM_64) += -mgeneral-regs-only # No fp registers etc
+> +$(call cc-option-add,CFLAGS-$(CONFIG_ARM_64),CC,-mno-outline-atomics)
+>   
+>   ifneq ($(filter command line environment,$(origin CONFIG_EARLY_PRINTK)),)
+>       $(error You must use 'make menuconfig' to enable/disable early printk now)
+> 
+
+-- 
+Julien Grall
 
