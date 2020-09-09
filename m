@@ -2,73 +2,75 @@ Return-Path: <SRS0=Kfrc=CS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+X-Spam-Status: No, score=-11.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BCF33C433E2
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 10:00:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CF1B3C433E2
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 10:01:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4A55821973
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 10:00:17 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 765A421973
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 10:01:39 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="GOICWHMC"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4A55821973
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="UXDWd4E8"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 765A421973
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kFwtU-00005E-Ro; Wed, 09 Sep 2020 10:00:00 +0000
+	id 1kFwut-0001IO-LS; Wed, 09 Sep 2020 10:01:27 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=wApk=CS=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1kFwtT-0008SC-RP
- for xen-devel@lists.xenproject.org; Wed, 09 Sep 2020 09:59:59 +0000
-X-Inumbo-ID: d67111ab-c8d0-43d3-a25c-f77c3a1c1bec
-Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ id 1kFwus-0001ID-On
+ for xen-devel@lists.xenproject.org; Wed, 09 Sep 2020 10:01:26 +0000
+X-Inumbo-ID: 0575d301-80fe-4264-8e08-89fc6cbb2595
+Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id d67111ab-c8d0-43d3-a25c-f77c3a1c1bec;
- Wed, 09 Sep 2020 09:59:51 +0000 (UTC)
+ id 0575d301-80fe-4264-8e08-89fc6cbb2595;
+ Wed, 09 Sep 2020 10:01:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1599645591;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=OwyxB5tgMIlpdQSglN/DeSMcT7TCEejwNAp6gxAeraY=;
- b=GOICWHMCUv4itdUtuvbkJMsaE4mN+kCxiPt7qF7oNekKq4LrA6HlrMVd
- WUsN/eZoJunrYelaEy/qwMxC8KkbLc6iNkUo4oF487IHbuIyBefOVPtfF
- LXmzXYF28PYMgnQvJDcZpF/p2x6OK6OMEOl/ENNjBNGivX+9LlDZpRT+d Y=;
-Authentication-Results: esa4.hc3370-68.iphmx.com;
+ d=citrix.com; s=securemail; t=1599645684;
+ h=subject:to:cc:references:from:message-id:date:
+ mime-version:in-reply-to:content-transfer-encoding;
+ bh=QKLNJvq/H1lxTlKAwuTi2t0ypSXWvInPgOzCUeEbsKc=;
+ b=UXDWd4E8ZB44BPUVP/iueBfwsbC5/42UFNBIvJ4Ckf4s8Q0uxvHiHOjq
+ zznemHgROiTEjr0f/sdpCVLsCBoR73+zImlLBRNkOZC7NubmQVz/+Sw7R
+ V8MFV2wAux6K7xdwhDKcNaqXEy9L97WhWPfEselP1X/XRGx3g1+Qte4tc U=;
+Authentication-Results: esa5.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: Qins8ku/JDWcnxkbNzlMzFuDloJSCgl6Fw857a+WsrFgqoa38vu6EfajGklltSdgCmPGBvPmjX
- k7z/fkoAEslRw3i+l6icAo0+UmC4OAkbtXujNH3c43N4oSvxr4Qm/Du2dQMDdvoK1Y7IfhYSOn
- JF3fyQqFf7wwbcDEpW4dLzvRlaCq732xmzCepEp0AANPvYZxAZaxeH5zg9+fHakJRapFf5LYVt
- 21IxjK5aEH3pEhfVEW/7KYZdl97htEXRgGVpvEmU5Ql1NVSUJ7J7bOl2PR0MfgaeEw361R3qS+
- ToM=
+IronPort-SDR: qmIHu+PTt4mSEW7J79k06rfkXXiM7lzhbM9cQ3PdkhhitbPDucluPScZlMq28JMcLxgYzp3VFG
+ abCNtOXUUnmufOFcw3O80PKYr4HwpWBDXNQ3yiu1mGDGSfSA0Gb8k0R70L+u7EtgtjBRVEz+yt
+ rFhmZKMn+1RLpv1poMK0fU8xa0wO8k6IQPY0j1mK9SfIhT5/DRUJpx4vheJwDwH03o4CE/22j3
+ liQQH+KCHy9D5+P90ut7upOInhxf3UTrO0WLEYPanHOrCtMpM6KhJ0atQIViC4Dx+LuuGDztJ7
+ 9K4=
 X-SBRS: 2.7
-X-MesageID: 27243911
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-MesageID: 26404450
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,409,1592884800"; d="scan'208";a="27243911"
+X-IronPort-AV: E=Sophos;i="5.76,409,1592884800"; d="scan'208";a="26404450"
+Subject: Re: [PATCH v1] libxc: use bitmap_alloc
+To: Olaf Hering <olaf@aepfle.de>, <xen-devel@lists.xenproject.org>
+CC: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>
+References: <20200909095344.9462-1-olaf@aepfle.de>
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
- <JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
- <roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH 4/5] x86/pv: Optimise to the segment context switching paths
-Date: Wed, 9 Sep 2020 10:59:19 +0100
-Message-ID: <20200909095920.25495-5-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20200909095920.25495-1-andrew.cooper3@citrix.com>
-References: <20200909095920.25495-1-andrew.cooper3@citrix.com>
+Message-ID: <9406261f-2c83-7208-726d-bdbacfffd8b9@citrix.com>
+Date: Wed, 9 Sep 2020 11:01:19 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20200909095344.9462-1-olaf@aepfle.de>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Content-Language: en-GB
+X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
+ FTLPEX02CL05.citrite.net (10.13.108.178)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -82,161 +84,10 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Save the segment selectors with explicit asm, rather than with read_sreg().
-This permits the use of MOV's m16 encoding, which avoids indirecting the
-selector value through a register.
+On 09/09/2020 10:53, Olaf Hering wrote:
+> Use existing helper to allocate a bitmap.
+>
+> Signed-off-by: Olaf Hering <olaf@aepfle.de>
 
-For {save,load}_segments(), opencode the fs/gs helpers, as the optimiser is
-unable to rearrange the logic down to a single X86_CR4_FSGSBASE check.  This
-removes several jumps and creates bigger basic blocks.
-
-In load_segments(), optimise GS base handling substantially.  The call to
-svm_load_segs() already needs gsb/gss the correct way around, so hoist the
-logic for the later path to use it as well.  Swapping the inputs in GPRs is
-far more efficient than using SWAPGS.
-
-Previously, there was optionally one SWAPGS from the user/kernel mode check,
-two SWAPGS's in write_gs_shadow() and two WRGSBASE's.  Updates to GS (4 or 5
-here) in quick succession stall all contemporary pipelines repeatedly.  (Intel
-Core/Xeon pipelines have segment register renaming[1], so can continue to
-speculatively execute with one GS update in flight.  Other pipelines cannot
-have two updates in flight concurrently, and must stall dispatch of the second
-until the first has retired.)
-
-Rewrite the logic to have exactly two WRGSBASEs and one SWAPGS, which removes
-two stalles all contemporary processors.
-
-Although modest, the resulting delta is:
-
-  add/remove: 0/0 grow/shrink: 0/2 up/down: 0/-106 (-106)
-  Function                                     old     new   delta
-  paravirt_ctxt_switch_from                    235     198     -37
-  context_switch                              3582    3513     -69
-
-in a common path.
-
-[1] https://software.intel.com/security-software-guidance/insights/deep-dive-intel-analysis-speculative-behavior-swapgs-and-segment-registers
-
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Wei Liu <wl@xen.org>
----
- xen/arch/x86/domain.c | 70 +++++++++++++++++++++++++++++++++++----------------
- 1 file changed, 49 insertions(+), 21 deletions(-)
-
-diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index 0b0e3f8294..ab71b9f79c 100644
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -1537,6 +1537,7 @@ arch_do_vcpu_op(
- static void load_segments(struct vcpu *n)
- {
-     struct cpu_user_regs *uregs = &n->arch.user_regs;
-+    unsigned long gsb = 0, gss = 0;
-     bool compat = is_pv_32bit_vcpu(n);
-     bool all_segs_okay = true, fs_gs_done = false;
- 
-@@ -1556,18 +1557,24 @@ static void load_segments(struct vcpu *n)
-                    : [ok] "+r" (all_segs_okay)          \
-                    : [_val] "rm" (val) )
- 
--#ifdef CONFIG_HVM
--    if ( cpu_has_svm && !compat && (uregs->fs | uregs->gs) <= 3 )
-+    if ( !compat )
-     {
--        unsigned long gsb = n->arch.flags & TF_kernel_mode
--            ? n->arch.pv.gs_base_kernel : n->arch.pv.gs_base_user;
--        unsigned long gss = n->arch.flags & TF_kernel_mode
--            ? n->arch.pv.gs_base_user : n->arch.pv.gs_base_kernel;
-+        gsb = n->arch.pv.gs_base_kernel;
-+        gss = n->arch.pv.gs_base_user;
-+
-+        /*
-+         * Figure out which way around gsb/gss want to be.  gsb needs to be
-+         * the active context, and gss needs to be the inactive context.
-+         */
-+        if ( !(n->arch.flags & TF_kernel_mode) )
-+            SWAP(gsb, gss);
- 
--        fs_gs_done = svm_load_segs(n->arch.pv.ldt_ents, LDT_VIRT_START(n),
--                                   n->arch.pv.fs_base, gsb, gss);
-+        if ( IS_ENABLED(CONFIG_HVM) && cpu_has_svm &&
-+             (uregs->fs | uregs->gs) <= 3 )
-+            fs_gs_done = svm_load_segs(n->arch.pv.ldt_ents, LDT_VIRT_START(n),
-+                                       n->arch.pv.fs_base, gsb, gss);
-     }
--#endif
-+
-     if ( !fs_gs_done )
-     {
-         load_LDT(n);
-@@ -1581,13 +1588,19 @@ static void load_segments(struct vcpu *n)
- 
-     if ( !fs_gs_done && !compat )
-     {
--        write_fs_base(n->arch.pv.fs_base);
--        write_gs_shadow(n->arch.pv.gs_base_kernel);
--        write_gs_base(n->arch.pv.gs_base_user);
--
--        /* If in kernel mode then switch the GS bases around. */
--        if ( (n->arch.flags & TF_kernel_mode) )
-+        if ( read_cr4() & X86_CR4_FSGSBASE )
-+        {
-+            __wrgsbase(gss);
-+            __wrfsbase(n->arch.pv.fs_base);
-             asm volatile ( "swapgs" );
-+            __wrgsbase(gsb);
-+        }
-+        else
-+        {
-+            wrmsrl(MSR_FS_BASE, n->arch.pv.fs_base);
-+            wrmsrl(MSR_GS_BASE, gsb);
-+            wrmsrl(MSR_SHADOW_GS_BASE, gss);
-+        }
-     }
- 
-     if ( unlikely(!all_segs_okay) )
-@@ -1703,16 +1716,31 @@ static void save_segments(struct vcpu *v)
- {
-     struct cpu_user_regs *regs = &v->arch.user_regs;
- 
--    regs->ds = read_sreg(ds);
--    regs->es = read_sreg(es);
--    regs->fs = read_sreg(fs);
--    regs->gs = read_sreg(gs);
-+    asm volatile ( "mov %%ds, %[ds];\n\t"
-+                   "mov %%es, %[es];\n\t"
-+                   "mov %%fs, %[fs];\n\t"
-+                   "mov %%gs, %[gs];\n\t"
-+                   : [ds] "=m" (regs->ds),
-+                     [es] "=m" (regs->es),
-+                     [fs] "=m" (regs->fs),
-+                     [gs] "=m" (regs->gs) );
- 
-     if ( !is_pv_32bit_vcpu(v) )
-     {
--        unsigned long gs_base = read_gs_base();
-+        unsigned long fs_base, gs_base;
-+
-+        if ( read_cr4() & X86_CR4_FSGSBASE )
-+        {
-+            fs_base = __rdfsbase();
-+            gs_base = __rdgsbase();
-+        }
-+        else
-+        {
-+            rdmsrl(MSR_FS_BASE, fs_base);
-+            rdmsrl(MSR_GS_BASE, gs_base);
-+        }
- 
--        v->arch.pv.fs_base = read_fs_base();
-+        v->arch.pv.fs_base = fs_base;
-         if ( v->arch.flags & TF_kernel_mode )
-             v->arch.pv.gs_base_kernel = gs_base;
-         else
--- 
-2.11.0
-
+Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
