@@ -7,63 +7,62 @@ X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C6D99C10DAA
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 10:00:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 79926C43461
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 10:00:10 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 749EE21973
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 10:00:08 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 1AAC621973
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 10:00:10 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="MBEJt7Ka"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 749EE21973
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="Ks90o/Bj"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1AAC621973
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kFwtH-0008Su-0q; Wed, 09 Sep 2020 09:59:47 +0000
+	id 1kFwtP-0008V8-IG; Wed, 09 Sep 2020 09:59:55 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=wApk=CS=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1kFwtE-0008SC-UJ
- for xen-devel@lists.xenproject.org; Wed, 09 Sep 2020 09:59:44 +0000
-X-Inumbo-ID: 511b9044-14ea-4679-95f9-078476ed94bd
+ id 1kFwtO-0008SC-RH
+ for xen-devel@lists.xenproject.org; Wed, 09 Sep 2020 09:59:54 +0000
+X-Inumbo-ID: 5ae97973-df49-4a94-8459-a4f4a86a9017
 Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 511b9044-14ea-4679-95f9-078476ed94bd;
- Wed, 09 Sep 2020 09:59:39 +0000 (UTC)
+ id 5ae97973-df49-4a94-8459-a4f4a86a9017;
+ Wed, 09 Sep 2020 09:59:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1599645579;
+ d=citrix.com; s=securemail; t=1599645590;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=1PbLj0WTQtCpCIy8e73E6RN9TS0bcCD9OLyImnkdXGA=;
- b=MBEJt7Ka2edXD0mlM5NKPzyMjuYTxbBsl7BgwcHtS7YRqL2qMC/mqZII
- /zRAIxUVzucoNuZEOSxxAHgVTQg5BUcj+G81A9fw3ON+wk6EETOSnmopD
- IbjeDyoRoVP5rLZJvaQJgnGCaSnZ7/7M9qiYvpxynIVr0XftouuXdgFzH k=;
+ bh=omgwX94meR9g2tOyVCxV+2Bo3Nu0tqHjyyAWxvHuVi8=;
+ b=Ks90o/BjeOAwW8BJ2Piub8mGKRkc+vPKMfZm3e39q0FeFJs+Pp3CsfJG
+ JxXxb9iFBchYQYZl2jnTWnmjlQ6yszHGdXHAIUqNSpS6mnsGJvFw9cqXc
+ qLgD8xfKbfQhHiG9s/vIko+xUZN53KRL8AunuRoj4v/8+2NHpWbiCMw5I 8=;
 Authentication-Results: esa3.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: rJfRYUrXr9To57PGQMata2dqgBUpOMRCfgQaokncr5XhphXaBatV3Kk3Ezwx7vp+dkvf8GI87w
- 7piYKmt/OXOrIznziCKhVbQVv3PVc+r5i089fWgzsiYzuQyUcoXlNuDDJeWj5pTpjemSlnvrPx
- azy6lx+S+UfTF4d0oinafiAmLgcIu3De/hGkl4+gmMXro3mImVjxrKmn6Rprf3f4tPWEvDUQqS
- uTOocXc5KIR+1FSYnQw47AI+ZAZQ+ICnB5wXL+9Wyp7xp6XG7l8dnAAOFG5GiMJUqeCC1B5RP+
- h/k=
+IronPort-SDR: sEB81jO8yAmHZnB7wNrWC9viDBCDKqAgErxga3DBrc4/iJQpe79MRxz5y80jtxnEXgJkDPpCur
+ 7RVd5nWVHmxOAqkoAyHgHvcmEZz/vCY97y7Lrglj/Wp3XQ0b7yJY+2RI0K28jh3DKdhf/mmOl/
+ jRJ6S0YqzX++0+ql05KefgQaL802r25lIvwq4sRMmejJ8DSwJ5Esl2kohnW9lzoW4zwS+4zs6e
+ aoG4hEg6Gr93eJtWUuZw/dSVyVT8AHUrTXHXAzNsVfPPDCN7uVDgJWYrFIfZLKEwKguRXUWkEV
+ m9c=
 X-SBRS: 2.7
-X-MesageID: 26254229
+X-MesageID: 26254234
 X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,409,1592884800"; d="scan'208";a="26254229"
+X-IronPort-AV: E=Sophos;i="5.76,409,1592884800"; d="scan'208";a="26254234"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
  <JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
- <roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Jun Nakajima
- <jun.nakajima@intel.com>, Kevin Tian <kevin.tian@intel.com>
-Subject: [PATCH 1/5] x86/asm: Rename FS/GS base helpers
-Date: Wed, 9 Sep 2020 10:59:16 +0100
-Message-ID: <20200909095920.25495-2-andrew.cooper3@citrix.com>
+ <roger.pau@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH 3/5] x86/pv: Optimise prefetching in svm_load_segs()
+Date: Wed, 9 Sep 2020 10:59:18 +0100
+Message-ID: <20200909095920.25495-4-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20200909095920.25495-1-andrew.cooper3@citrix.com>
 References: <20200909095920.25495-1-andrew.cooper3@citrix.com>
@@ -83,282 +82,135 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-They are currently named after the FSGSBASE instructions, but are not thin
-wrappers around said instructions, and therefore do not accurately reflect the
-logic they perform, especially when it comes to functioning safely in non
-FSGSBASE context.
+Split into two functions.  Passing a load of zeros in results in somewhat poor
+register scheduling in __context_switch().
 
-Rename them to {read,write}_{fs,gs}_base() to avoid confusion.
+Update the prefetching comment to note that the main point is the TLB fill.
 
-No functional change.
+Reorder the writes in svm_load_segs() to access the VMCB fields in ascending
+order, which gets better next-line prefetch behaviour out of hardware.  Update
+the prefetch instruction to match.
+
+The net delta is:
+
+  add/remove: 1/0 grow/shrink: 0/2 up/down: 38/-39 (-1)
+  Function                                     old     new   delta
+  svm_load_segs_prefetch                         -      38     +38
+  __context_switch                             967     951     -16
+  svm_load_segs                                291     268     -23
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Wei Liu <wl@xen.org>
-CC: Jun Nakajima <jun.nakajima@intel.com>
-CC: Kevin Tian <kevin.tian@intel.com>
 ---
- xen/arch/x86/domain.c          | 10 +++++-----
- xen/arch/x86/hvm/vmx/vmx.c     |  8 ++++----
- xen/arch/x86/pv/domain.c       |  2 +-
- xen/arch/x86/pv/emul-priv-op.c | 14 +++++++-------
- xen/arch/x86/x86_64/mm.c       |  8 ++++----
- xen/arch/x86/x86_64/traps.c    |  6 +++---
- xen/include/asm-x86/msr.h      | 12 ++++++------
- 7 files changed, 30 insertions(+), 30 deletions(-)
+ xen/arch/x86/domain.c             |  2 +-
+ xen/arch/x86/hvm/svm/svm.c        | 43 ++++++++++++++++++++-------------------
+ xen/include/asm-x86/hvm/svm/svm.h |  5 +++--
+ 3 files changed, 26 insertions(+), 24 deletions(-)
 
 diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index e8e91cf080..2271bee36a 100644
+index 2271bee36a..0b0e3f8294 100644
 --- a/xen/arch/x86/domain.c
 +++ b/xen/arch/x86/domain.c
-@@ -1581,9 +1581,9 @@ static void load_segments(struct vcpu *n)
+@@ -1928,7 +1928,7 @@ static void __context_switch(void)
+     /* Prefetch the VMCB if we expect to use it later in the context switch */
+     if ( cpu_has_svm && is_pv_domain(nd) && !is_pv_32bit_domain(nd) &&
+          !is_idle_domain(nd) )
+-        svm_load_segs(0, 0, 0, 0, 0);
++        svm_load_segs_prefetch();
+ #endif
  
-     if ( !fs_gs_done && !compat )
-     {
--        wrfsbase(n->arch.pv.fs_base);
--        wrgsshadow(n->arch.pv.gs_base_kernel);
--        wrgsbase(n->arch.pv.gs_base_user);
-+        write_fs_base(n->arch.pv.fs_base);
-+        write_gs_shadow(n->arch.pv.gs_base_kernel);
-+        write_gs_base(n->arch.pv.gs_base_user);
- 
-         /* If in kernel mode then switch the GS bases around. */
-         if ( (n->arch.flags & TF_kernel_mode) )
-@@ -1710,9 +1710,9 @@ static void save_segments(struct vcpu *v)
- 
-     if ( !is_pv_32bit_vcpu(v) )
-     {
--        unsigned long gs_base = rdgsbase();
-+        unsigned long gs_base = read_gs_base();
- 
--        v->arch.pv.fs_base = rdfsbase();
-+        v->arch.pv.fs_base = read_fs_base();
-         if ( v->arch.flags & TF_kernel_mode )
-             v->arch.pv.gs_base_kernel = gs_base;
-         else
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index c4b40bf3cb..d26e102970 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -512,12 +512,12 @@ static void vmx_save_guest_msrs(struct vcpu *v)
-      * We cannot cache SHADOW_GS_BASE while the VCPU runs, as it can
-      * be updated at any time via SWAPGS, which we cannot trap.
-      */
--    v->arch.hvm.vmx.shadow_gs = rdgsshadow();
-+    v->arch.hvm.vmx.shadow_gs = read_gs_shadow();
+     if ( need_full_gdt(nd) && !per_cpu(full_gdt_loaded, cpu) )
+diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
+index 23b2a2aa17..9a2aca7770 100644
+--- a/xen/arch/x86/hvm/svm/svm.c
++++ b/xen/arch/x86/hvm/svm/svm.c
+@@ -1520,6 +1520,19 @@ static void svm_init_erratum_383(const struct cpuinfo_x86 *c)
  }
  
- static void vmx_restore_guest_msrs(struct vcpu *v)
- {
--    wrgsshadow(v->arch.hvm.vmx.shadow_gs);
-+    write_gs_shadow(v->arch.hvm.vmx.shadow_gs);
-     wrmsrl(MSR_STAR,           v->arch.hvm.vmx.star);
-     wrmsrl(MSR_LSTAR,          v->arch.hvm.vmx.lstar);
-     wrmsrl(MSR_SYSCALL_MASK,   v->arch.hvm.vmx.sfmask);
-@@ -2958,7 +2958,7 @@ static int vmx_msr_read_intercept(unsigned int msr, uint64_t *msr_content)
-         break;
+ #ifdef CONFIG_PV
++void svm_load_segs_prefetch(void)
++{
++    struct vmcb_struct *vmcb = this_cpu(host_vmcb_va);
++
++    if ( vmcb )
++        /*
++         * The main reason for this prefetch is for the TLB fill.  Use the
++         * opporunity to fetch the lowest address used, to get the best
++         * behaviour out of hardwares next-line prefetcher.
++         */
++        prefetchw(&vmcb->fs);
++}
++
+ bool svm_load_segs(unsigned int ldt_ents, unsigned long ldt_base,
+                    unsigned long fs_base, unsigned long gs_base,
+                    unsigned long gs_shadow)
+@@ -1530,17 +1543,15 @@ bool svm_load_segs(unsigned int ldt_ents, unsigned long ldt_base,
+     if ( unlikely(!vmcb) )
+         return false;
  
-     case MSR_SHADOW_GS_BASE:
--        *msr_content = rdgsshadow();
-+        *msr_content = read_gs_shadow();
-         break;
+-    if ( !ldt_base )
+-    {
+-        /*
+-         * The actual structure field used here was arbitrarily chosen.
+-         * Empirically it doesn't seem to matter much which element is used,
+-         * and a clear explanation of the otherwise poor performance has not
+-         * been found/provided so far.
+-         */
+-        prefetchw(&vmcb->ldtr);
+-        return true;
+-    }
++    vmcb->fs.sel = 0;
++    vmcb->fs.attr = 0;
++    vmcb->fs.limit = 0;
++    vmcb->fs.base = fs_base;
++
++    vmcb->gs.sel = 0;
++    vmcb->gs.attr = 0;
++    vmcb->gs.limit = 0;
++    vmcb->gs.base = gs_base;
  
-     case MSR_STAR:
-@@ -3190,7 +3190,7 @@ static int vmx_msr_write_intercept(unsigned int msr, uint64_t msr_content)
-         else if ( msr == MSR_GS_BASE )
-             __vmwrite(GUEST_GS_BASE, msr_content);
-         else
--            wrgsshadow(msr_content);
-+            write_gs_shadow(msr_content);
+     if ( likely(!ldt_ents) )
+         memset(&vmcb->ldtr, 0, sizeof(vmcb->ldtr));
+@@ -1558,16 +1569,6 @@ bool svm_load_segs(unsigned int ldt_ents, unsigned long ldt_base,
+         vmcb->ldtr.base = ldt_base;
+     }
  
-         break;
+-    vmcb->fs.sel = 0;
+-    vmcb->fs.attr = 0;
+-    vmcb->fs.limit = 0;
+-    vmcb->fs.base = fs_base;
+-
+-    vmcb->gs.sel = 0;
+-    vmcb->gs.attr = 0;
+-    vmcb->gs.limit = 0;
+-    vmcb->gs.base = gs_base;
+-
+     vmcb->kerngsbase = gs_shadow;
  
-diff --git a/xen/arch/x86/pv/domain.c b/xen/arch/x86/pv/domain.c
-index 44e4ea2582..663e76c773 100644
---- a/xen/arch/x86/pv/domain.c
-+++ b/xen/arch/x86/pv/domain.c
-@@ -452,7 +452,7 @@ void toggle_guest_mode(struct vcpu *v)
-      * Update the cached value of the GS base about to become inactive, as a
-      * subsequent context switch won't bother re-reading it.
-      */
--    gs_base = rdgsbase();
-+    gs_base = read_gs_base();
-     if ( v->arch.flags & TF_kernel_mode )
-         v->arch.pv.gs_base_kernel = gs_base;
-     else
-diff --git a/xen/arch/x86/pv/emul-priv-op.c b/xen/arch/x86/pv/emul-priv-op.c
-index a192160f84..9dd1d59423 100644
---- a/xen/arch/x86/pv/emul-priv-op.c
-+++ b/xen/arch/x86/pv/emul-priv-op.c
-@@ -511,10 +511,10 @@ static int read_segment(enum x86_segment seg,
-             reg->base = 0;
-             break;
-         case x86_seg_fs:
--            reg->base = rdfsbase();
-+            reg->base = read_fs_base();
-             break;
-         case x86_seg_gs:
--            reg->base = rdgsbase();
-+            reg->base = read_gs_base();
-             break;
-         }
+     svm_vmload_pa(per_cpu(host_vmcb, cpu));
+diff --git a/xen/include/asm-x86/hvm/svm/svm.h b/xen/include/asm-x86/hvm/svm/svm.h
+index 2310878e41..faeca40174 100644
+--- a/xen/include/asm-x86/hvm/svm/svm.h
++++ b/xen/include/asm-x86/hvm/svm/svm.h
+@@ -50,12 +50,13 @@ void __update_guest_eip(struct cpu_user_regs *regs, unsigned int inst_len);
+ void svm_update_guest_cr(struct vcpu *, unsigned int cr, unsigned int flags);
  
-@@ -871,13 +871,13 @@ static int read_msr(unsigned int reg, uint64_t *val,
-     case MSR_FS_BASE:
-         if ( is_pv_32bit_domain(currd) )
-             break;
--        *val = rdfsbase();
-+        *val = read_fs_base();
-         return X86EMUL_OKAY;
- 
-     case MSR_GS_BASE:
-         if ( is_pv_32bit_domain(currd) )
-             break;
--        *val = rdgsbase();
-+        *val = read_gs_base();
-         return X86EMUL_OKAY;
- 
-     case MSR_SHADOW_GS_BASE:
-@@ -993,19 +993,19 @@ static int write_msr(unsigned int reg, uint64_t val,
-     case MSR_FS_BASE:
-         if ( is_pv_32bit_domain(currd) || !is_canonical_address(val) )
-             break;
--        wrfsbase(val);
-+        write_fs_base(val);
-         return X86EMUL_OKAY;
- 
-     case MSR_GS_BASE:
-         if ( is_pv_32bit_domain(currd) || !is_canonical_address(val) )
-             break;
--        wrgsbase(val);
-+        write_gs_base(val);
-         return X86EMUL_OKAY;
- 
-     case MSR_SHADOW_GS_BASE:
-         if ( is_pv_32bit_domain(currd) || !is_canonical_address(val) )
-             break;
--        wrgsshadow(val);
-+        write_gs_shadow(val);
-         curr->arch.pv.gs_base_user = val;
-         return X86EMUL_OKAY;
- 
-diff --git a/xen/arch/x86/x86_64/mm.c b/xen/arch/x86/x86_64/mm.c
-index b69cf2dc4f..0d11a9f500 100644
---- a/xen/arch/x86/x86_64/mm.c
-+++ b/xen/arch/x86/x86_64/mm.c
-@@ -1030,7 +1030,7 @@ long do_set_segment_base(unsigned int which, unsigned long base)
-     {
-     case SEGBASE_FS:
-         if ( is_canonical_address(base) )
--            wrfsbase(base);
-+            write_fs_base(base);
-         else
-             ret = -EINVAL;
-         break;
-@@ -1038,7 +1038,7 @@ long do_set_segment_base(unsigned int which, unsigned long base)
-     case SEGBASE_GS_USER:
-         if ( is_canonical_address(base) )
-         {
--            wrgsshadow(base);
-+            write_gs_shadow(base);
-             v->arch.pv.gs_base_user = base;
-         }
-         else
-@@ -1047,7 +1047,7 @@ long do_set_segment_base(unsigned int which, unsigned long base)
- 
-     case SEGBASE_GS_KERNEL:
-         if ( is_canonical_address(base) )
--            wrgsbase(base);
-+            write_gs_base(base);
-         else
-             ret = -EINVAL;
-         break;
-@@ -1096,7 +1096,7 @@ long do_set_segment_base(unsigned int which, unsigned long base)
-                        : [flat] "r" (FLAT_USER_DS32) );
- 
-         /* Update the cache of the inactive base, as read from the GDT/LDT. */
--        v->arch.pv.gs_base_user = rdgsbase();
-+        v->arch.pv.gs_base_user = read_gs_base();
- 
-         asm volatile ( safe_swapgs );
-         break;
-diff --git a/xen/arch/x86/x86_64/traps.c b/xen/arch/x86/x86_64/traps.c
-index 93af0c5e87..4f262122b7 100644
---- a/xen/arch/x86/x86_64/traps.c
-+++ b/xen/arch/x86/x86_64/traps.c
-@@ -47,9 +47,9 @@ static void read_registers(struct cpu_user_regs *regs, unsigned long crs[8])
-     regs->es = read_sreg(es);
-     regs->fs = read_sreg(fs);
-     regs->gs = read_sreg(gs);
--    crs[5] = rdfsbase();
--    crs[6] = rdgsbase();
--    crs[7] = rdgsshadow();
-+    crs[5] = read_fs_base();
-+    crs[6] = read_gs_base();
-+    crs[7] = read_gs_shadow();
- }
- 
- static void _show_registers(
-diff --git a/xen/include/asm-x86/msr.h b/xen/include/asm-x86/msr.h
-index 5c44c79600..5e141ac5a5 100644
---- a/xen/include/asm-x86/msr.h
-+++ b/xen/include/asm-x86/msr.h
-@@ -156,7 +156,7 @@ static inline unsigned long __rdgsbase(void)
-     return base;
- }
- 
--static inline unsigned long rdfsbase(void)
-+static inline unsigned long read_fs_base(void)
- {
-     unsigned long base;
- 
-@@ -168,7 +168,7 @@ static inline unsigned long rdfsbase(void)
-     return base;
- }
- 
--static inline unsigned long rdgsbase(void)
-+static inline unsigned long read_gs_base(void)
- {
-     unsigned long base;
- 
-@@ -180,7 +180,7 @@ static inline unsigned long rdgsbase(void)
-     return base;
- }
- 
--static inline unsigned long rdgsshadow(void)
-+static inline unsigned long read_gs_shadow(void)
- {
-     unsigned long base;
- 
-@@ -196,7 +196,7 @@ static inline unsigned long rdgsshadow(void)
-     return base;
- }
- 
--static inline void wrfsbase(unsigned long base)
-+static inline void write_fs_base(unsigned long base)
- {
-     if ( read_cr4() & X86_CR4_FSGSBASE )
- #ifdef HAVE_AS_FSGSBASE
-@@ -208,7 +208,7 @@ static inline void wrfsbase(unsigned long base)
-         wrmsrl(MSR_FS_BASE, base);
- }
- 
--static inline void wrgsbase(unsigned long base)
-+static inline void write_gs_base(unsigned long base)
- {
-     if ( read_cr4() & X86_CR4_FSGSBASE )
- #ifdef HAVE_AS_FSGSBASE
-@@ -220,7 +220,7 @@ static inline void wrgsbase(unsigned long base)
-         wrmsrl(MSR_GS_BASE, base);
- }
- 
--static inline void wrgsshadow(unsigned long base)
-+static inline void write_gs_shadow(unsigned long base)
- {
-     if ( read_cr4() & X86_CR4_FSGSBASE )
-     {
+ /*
+- * PV context switch helper. Calls with zero ldt_base request a prefetch of
+- * the VMCB area to be loaded from, instead of an actual load of state.
++ * PV context switch helpers.  Prefetching the VMCB area itself has been shown
++ * to be useful for performance.
+  *
+  * Must only be used for NUL FS/GS, as the segment attributes/limits are not
+  * read from the GDT/LDT.
+  */
++void svm_load_segs_prefetch(void);
+ bool svm_load_segs(unsigned int ldt_ents, unsigned long ldt_base,
+                    unsigned long fs_base, unsigned long gs_base,
+                    unsigned long gs_shadow);
 -- 
 2.11.0
 
