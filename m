@@ -2,71 +2,71 @@ Return-Path: <SRS0=Kfrc=CS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.0 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_2 autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 19B6AC433E2
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 12:43:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1671AC43461
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 12:53:06 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A6EE32074B
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 12:43:35 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id A666F20757
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 12:53:05 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="rfPRvUa2"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A6EE32074B
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=aepfle.de header.i=@aepfle.de header.b="CUUbjmZX"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A666F20757
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kFzRX-0001hM-C7; Wed, 09 Sep 2020 12:43:19 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kFzab-0002by-BK; Wed, 09 Sep 2020 12:52:41 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=uggq=CS=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1kFzRV-0001hH-L7
- for xen-devel@lists.xenproject.org; Wed, 09 Sep 2020 12:43:17 +0000
-X-Inumbo-ID: 17492840-0b2a-4e31-bef3-014b7d28c3c2
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 17492840-0b2a-4e31-bef3-014b7d28c3c2;
- Wed, 09 Sep 2020 12:43:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
- bh=XzC+A47GwdEpqmRrdh7v8HbkVIJ0ZaLc7R844Dp5/oE=; b=rfPRvUa2DbANZx1w60YwWJ90Pm
- BBntN56XHq0n9yeWmmTs+aLbtaZ5o1hCABWIkKGxroNR5MY8Q1SFHKmqxb/wR7uhYOT2WxGMWlJPE
- riHvIdT4o9PTXmk1aZpCYWFn1G6VvduYexRU2YPrKWbt80fwV5mLpmbiixUBr1omkB3s=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1kFzRQ-00082m-IW; Wed, 09 Sep 2020 12:43:12 +0000
-Received: from 54-240-197-233.amazon.com ([54.240.197.233]
- helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1kFzRQ-00077T-9P; Wed, 09 Sep 2020 12:43:12 +0000
+ (envelope-from <SRS0=M6/y=CS=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1kFzaa-0002bt-OO
+ for xen-devel@lists.xenproject.org; Wed, 09 Sep 2020 12:52:41 +0000
+X-Inumbo-ID: 0f2e2fd7-91f4-4a2a-aee7-6e8f5dc4461e
+Received: from mo4-p01-ob.smtp.rzone.de (unknown [85.215.255.53])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 0f2e2fd7-91f4-4a2a-aee7-6e8f5dc4461e;
+ Wed, 09 Sep 2020 12:52:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1599655958;
+ s=strato-dkim-0002; d=aepfle.de;
+ h=References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:
+ X-RZG-CLASS-ID:X-RZG-AUTH:From:Subject:Sender;
+ bh=SC9Wx6/G9IUj6yWgXqg1tcyo2FClJxS9wEiuAxAlPh8=;
+ b=CUUbjmZXxyjuA35koLSMWaicLK4om7D+Dd6Jl9et+JRaTR2iPw3pQCbzKNkFg5WKQN
+ nvag4K60b6ym9AajndJEttXBQRVUQE6HsDF4fQwYg+1/tkZkfPv4zWThmI3EWBqrKUrX
+ 1VYQatqx32xukAZPVmdve4stvM8k5DS6WsBqR9teLKbcYQIFIj5df/ODhNeH2jlQrc3Q
+ IrPNpZiP4fzsFDAqOWCWRsyYBBkWvzf19JtpDMVWJewkaZH7CNQlI1N97dTW36EjavCZ
+ 5fKNAvJ6Dx0PtA1TMPilOI53axao4+8A0k7mBZOkOnTMmBZlziaARyg5eMw+0iQYYfuh
+ 1yEw==
+X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QLpd5ylWvMDXdoX8l8pYAcz5OTWO///A=="
+X-RZG-CLASS-ID: mo00
+Received: from sender by smtp.strato.de (RZmta 46.10.7 SBL|AUTH)
+ with ESMTPSA id 60ad29w89CqTM4D
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
+ (Client did not present a certificate);
+ Wed, 9 Sep 2020 14:52:29 +0200 (CEST)
+Date: Wed, 9 Sep 2020 14:52:15 +0200
+From: Olaf Hering <olaf@aepfle.de>
+To: Julien Grall <julien@xen.org>
+Cc: xen-devel@lists.xenproject.org, Andrew Cooper
+ <andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, Ian
+ Jackson <iwj@xenproject.org>, Jan Beulich <jbeulich@suse.com>, Stefano
+ Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
 Subject: Re: [PATCH v1] docs: remove bridge-utils from requirements
-To: Olaf Hering <olaf@aepfle.de>, xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
- Jan Beulich <jbeulich@suse.com>, Stefano Stabellini
- <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
+Message-ID: <20200909145215.530ca814.olaf@aepfle.de>
+In-Reply-To: <8240eea7-4822-f8f9-75ee-5ea7c2e85630@xen.org>
 References: <20200909104849.22700-1-olaf@aepfle.de>
-From: Julien Grall <julien@xen.org>
-Message-ID: <8240eea7-4822-f8f9-75ee-5ea7c2e85630@xen.org>
-Date: Wed, 9 Sep 2020 13:43:10 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
- Gecko/20100101 Thunderbird/68.12.0
+ <8240eea7-4822-f8f9-75ee-5ea7c2e85630@xen.org>
+X-Mailer: Claws Mail 2020.07.13 (GTK+ 2.24.32; x86_64-suse-linux-gnu)
 MIME-Version: 1.0
-In-Reply-To: <20200909104849.22700-1-olaf@aepfle.de>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ boundary="Sig_/iZ6a.rs4w47M5lWKHUv.AuE"; protocol="application/pgp-signature"
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,29 +80,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Hi,
+--Sig_/iZ6a.rs4w47M5lWKHUv.AuE
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
 
-On 09/09/2020 11:48, Olaf Hering wrote:
-> Having the latest Xen, but an obsolete iproute package, is an unusual
-> combination.
+Am Wed, 9 Sep 2020 13:43:10 +0100
+schrieb Julien Grall <julien@xen.org>:
 
-The README suggests that bridge-utils is required for /sbin/brctl. On 
-Debian bullseyes:
+> So can you expand how this is an unusual combination?
 
-42sh> sudo apt-file search brctl
-bash-completion: /usr/share/bash-completion/completions/brctl
-bridge-utils: /sbin/brctl
-bridge-utils: /usr/share/man/man8/brctl.8.gz
-python3-networking-mlnx: /usr/bin/ebrctl
-python3-networking-mlnx: 
-/usr/lib/python3/dist-packages/networking_mlnx/eswitchd/cli/ebrctl.py
-zsh-common: /usr/share/zsh/functions/Completion/Linux/_brctl
+'ip' is the tool of choice since a couple of years. What 'git grep' shows i=
+s just compat code.
 
-A grep in the tools directory seems to list some uf ose brctl in the 
-hotplug scripts. So can you expand how this is an unusual combination?
+Olaf
 
-Cheers,
+--Sig_/iZ6a.rs4w47M5lWKHUv.AuE
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
 
--- 
-Julien Grall
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEE97o7Um30LT3B+5b/86SN7mm1DoAFAl9Yz/8ACgkQ86SN7mm1
+DoBDKg/8DbmT+UDs0oEQFRX/kHhCFU1nXRDvizD4Ye8GpUhLGk1pxCCBfxJh0ndp
+M/bBVeoBb+cfH39DUlVIi9BkCoGE/qI2Bwqlr6V9uhH7FKXf3R+YmQgYHHiigdJ6
+8+fVsW2YAUdcRkYhVOF/AblmoXUmRIzbANyrR2s04LGCNWvjPprz7S3zyXGvcs+S
+c3sQUvVvb943M4UHCZe9P/OcTAfAy9j1xCJuGsQQqRGU2J//SE3GXbBZJM9phyc2
+kyIo9TjX55NW8ibnFb0dYP5aai+Bj8sZZgTzV4qVrY/BjnpJMWX5CjGM4BcuRKQP
+1fsm+CEVbC2fkcDtl2CbbfWgU7muwLPcGIaZ8EsTFnxW6+VKpeg8k/8PjTYjkGh5
+k4Gdgyib/92SDMRqVvVSHwLYIms7Hq9vXqsfdmycwRo35bkQvHjx26zbdSdNLUto
++WKYWjX0sawtmDomonQmi+yG8GwldltHEMI3ZI5mjZISdTkMteJy/kmuWG4r49Ft
+K+eox66P89VxOgbU6RlOeerKd4rX6tpL+FHupe1lhKiqR9feWwZl+lVadSH+CroK
+V50YRzc3LrhO12q88crUpWXjroirkJPJV1dsPB4Mh/wXdvMQalX4c6lq4DYaq8cJ
+KrexplqBHpXKATkFciD+dFW+3b28JTS+drvbP6GOpnsYRNBTXKM=
+=ezB2
+-----END PGP SIGNATURE-----
+
+--Sig_/iZ6a.rs4w47M5lWKHUv.AuE--
 
