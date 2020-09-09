@@ -2,74 +2,58 @@ Return-Path: <SRS0=Kfrc=CS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-2.7 required=3.0 tests=BAYES_00,DATE_IN_PAST_12_24,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B2EB3C43461
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 20:42:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F34AEC433E2
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 21:53:35 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5CC082064B
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 20:42:04 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="doAj1CwR"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5CC082064B
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
+	by mail.kernel.org (Postfix) with ESMTPS id 7639B20C09
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 21:53:35 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7639B20C09
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=m5p.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kG6u7-0002dT-92; Wed, 09 Sep 2020 20:41:19 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=N8Zw=CS=kernel.org=helgaas@srs-us1.protection.inumbo.net>)
- id 1kG6u6-0002dO-7r
- for xen-devel@lists.xenproject.org; Wed, 09 Sep 2020 20:41:18 +0000
-X-Inumbo-ID: f6d0faa5-af85-4dd1-aec8-28ff4c508ce1
-Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id f6d0faa5-af85-4dd1-aec8-28ff4c508ce1;
- Wed, 09 Sep 2020 20:41:00 +0000 (UTC)
-Received: from localhost (52.sub-72-107-123.myvzw.com [72.107.123.52])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id E5C4B2064B;
- Wed,  9 Sep 2020 20:40:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1599684059;
- bh=XYTJIX+UX5+9hkTZ1JmQGWBSE1wnXfxEBbc2SLTvbLI=;
- h=Date:From:To:Cc:Subject:In-Reply-To:From;
- b=doAj1CwRVbRE50VuDa0NRPzX3puwcNhH10PkIoMJlZ7VDX3J9Cpv7+Xu8Str2rpMp
- Duyf5ETzvgvpOayzw8I6cdDNzZUgfA5LXZHANt1OAYXDMuRtnJeoYx6BVRCwrzTwl+
- +gjVdbDN5g3o6OLchOJSLhiZ4czH+k8PKVD1rqk0=
-Date: Wed, 9 Sep 2020 15:40:57 -0500
-From: Bjorn Helgaas <helgaas@kernel.org>
-To: Lukas Wunner <lukas@wunner.de>,
- Rick Farrington <ricardo.farrington@cavium.com>
-Cc: kernel test robot <lkp@intel.com>, Bjorn Helgaas <bhelgaas@google.com>,
- Alex Williamson <alex.williamson@redhat.com>,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>,
- Juergen Gross <jgross@suse.com>,
- Michael Haeuptle <michael.haeuptle@hpe.com>,
- Ian May <ian.may@canonical.com>, Keith Busch <kbusch@kernel.org>,
- linux-pci@vger.kernel.org, Cornelia Huck <cohuck@redhat.com>,
- kvm@vger.kernel.org, Derek Chickles <dchickles@marvell.com>,
- Satanand Burla <sburla@marvell.com>,
- Felix Manlunas <fmanlunas@marvell.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- xen-devel@lists.xenproject.org, Govinda Tatti <govinda.tatti@oracle.com>,
- Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
- LKML <linux-kernel@vger.kernel.org>, lkp@lists.01.org
-Subject: Re: [PCI] 3233e41d3e:
- WARNING:at_drivers/pci/pci.c:#pci_reset_hotplug_slot
-Message-ID: <20200909204057.GA724236@bjorn-Precision-5520>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20200723095152.nf3fmfzrjlpoi35h@wunner.de>
+	id 1kG81a-00006g-TY; Wed, 09 Sep 2020 21:53:06 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=WRqj=CS=m5p.com=ehem@srs-us1.protection.inumbo.net>)
+ id 1kG81Z-00006a-Gm
+ for xen-devel@lists.xenproject.org; Wed, 09 Sep 2020 21:53:05 +0000
+X-Inumbo-ID: fd502bcd-50b1-4c4c-ab15-73a386aeab3d
+Received: from mailhost.m5p.com (unknown [74.104.188.4])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id fd502bcd-50b1-4c4c-ab15-73a386aeab3d;
+ Wed, 09 Sep 2020 21:53:03 +0000 (UTC)
+Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:1f07:15ff:0:0:0:f7])
+ by mailhost.m5p.com (8.15.2/8.15.2) with ESMTPS id 089LqjQt039172
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
+ Wed, 9 Sep 2020 17:52:50 -0400 (EDT) (envelope-from ehem@m5p.com)
+Received: (from ehem@localhost)
+ by m5p.com (8.15.2/8.15.2/Submit) id 089Lqhmn039171;
+ Wed, 9 Sep 2020 14:52:43 -0700 (PDT) (envelope-from ehem)
+Message-Id: <202009092152.089Lqhmn039171@m5p.com>
+From: Elliott Mitchell <ehem+xen@m5p.com>
+To: xen-devel@lists.xenproject.org
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: George Dunlap <george.dunlap@citrix.com>
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>
+Cc: Jan Beulich <jbeulich@suse.com>
+Cc: Julien Grall <julien@xen.org>
+Cc: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Wei Liu <wl@xen.org>
+Cc: Doug Goldstein <cardoe@cardoe.com>
+Cc: Daniel De Graaf <dgdegra@tycho.nsa.gov>
+Cc: Christian Lindig <christian.lindig@citrix.com>
+Cc: David Scott <dave@recoil.org>
+Cc: Samuel Thibault <samuel.thibault@ens-lyon.org>
+Date: Tue, 8 Sep 2020 18:28:45 -0700
+Subject: [PATCH 00/11] Major rework of top-level .gitignore
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,47 +67,77 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Thu, Jul 23, 2020 at 11:51:52AM +0200, Lukas Wunner wrote:
-> On Thu, Jul 23, 2020 at 05:13:06PM +0800, kernel test robot wrote:
-> > FYI, we noticed the following commit (built with gcc-9):
-> [...]
-> > commit: 3233e41d3e8ebcd44e92da47ffed97fd49b84278 ("[PATCH] PCI: pciehp: Fix AB-BA deadlock between reset_lock and device_lock")
-> [...]
-> > caused below changes (please refer to attached dmesg/kmsg for entire log/backtrace):
-> > [    0.971752] WARNING: CPU: 0 PID: 1 at drivers/pci/pci.c:4905 pci_reset_hotplug_slot+0x70/0x80
-> 
-> Thank you, trusty robot.
-> 
-> I botched the call to lockdep_assert_held_write(), it should have been
-> conditional on "if (probe)".
-> 
-> Happy to respin the patch, but I'd like to hear opinions on the locking
-> issues surrounding xen and octeon (and the patch in general).
+The top-level .gitignore file for Xen has gotten rather messy.  Looks
+like at times a few people may have added some blank lines looking
+towards some later cleanup.  Alas no one ever got around to that later
+cleanup.
 
-I wish liquidio/octeon weren't a special case.  Why should that driver
-reset the device when unbinding when no other drivers do?
+When looking at one portion of the situation I ended up doing some
+cleanup and it got out of hand.  Hence I'm not sending in these patches
+which hopefully make things better.
 
-Looks like this was added by 70535350e26f ("liquidio: with embedded
-f/w, don't reload f/w, issue pf flr at exit").  Maybe Rick will chime
-in.
+Please note these are somewhat better than work-in-progress status.
+There are several places I'm unsure of which direction to go in.  Likely
+several of these will need more or less information in their commit
+messages.
 
-> In particular, would a solution be entertained wherein the pci_dev is
-> reset by the PCI core after driver unbinding, contingent on a flag which
-> is set by a PCI driver to indicate that the pci_dev is returned to the
-> core in an unclean state?
+Overall pattern is first some initial cleanup on the top-level
+.gitignore.  It is easier to spot targeted file matches which overlapped
+general globs before breaking things apart.  This is followed by breaking
+all targeted matches off of the global .gitignore file.  Lastly the
+global .gitignore file was sorted and I've commented on a few of the
+things which remain.
 
-How would we do this?  The PCI core isn't called after unbinding, is
-it?  So I guess we'd have to have a queue and a worker thread to
-process it?
+Recent versions of `git` include a "check-ignore" command.  For testing
+new patterns `git check-ignore -vn --no-index <pattern>` will tell you
+whether a given filename would be ignored without "add -f".
 
-Device removal also has nasty locking issues, and a queue might help
-solve those, too.  Might also help in the problematic case of
-40f11adc7cd9 ("PCI: Avoid race while enabling upstream bridges"),
-which we had to revert.
+I think patches 01 and 02 are near ready for being committed.  Patches
+03-09 need varying degrees of polish before being in an official tree.
+Patches 10 and 11 are pretty well initial rough outlines.
 
-> Also, why does xen require a device reset on bind?
-> 
-> Thanks!
-> 
-> Lukas
+Elliott Mitchell (11):
+  gitignore: Move ignores from global to subdirectories
+  gitignore: Remove entries duplicating global entries
+  gitignore: Add/Generalize entries
+  gitignore: Create .gitignore file for tools/firmware/
+  gitignore: Create .gitignore file for tools/ocaml/
+  gitignore: Create .gitignore file for xen/
+  gitignore: Create .gitignore file for docs/
+  gitignore: Create .gitignore file for stubdom/
+  gitignore: Create .gitignore file for config/
+  gitignore: Create .gitignore file for tools/
+  gitignore: RFC Prelimiary final cleanup of top-level .gitignore
+
+ .gitignore                   | 440 +++--------------------------------
+ config/.gitignore            |   5 +
+ docs/.gitignore              |   8 +
+ stubdom/.gitignore           |  32 +++
+ tools/.gitignore             | 145 ++++++++++++
+ tools/firmware/.gitignore    |  29 +++
+ tools/misc/.gitignore        |  23 +-
+ tools/ocaml/.gitignore       |  24 ++
+ xen/.gitignore               |  39 ++++
+ xen/tools/kconfig/.gitignore |   6 +
+ xen/xsm/flask/.gitignore     |   9 +-
+ 11 files changed, 354 insertions(+), 406 deletions(-)
+ create mode 100644 config/.gitignore
+ create mode 100644 docs/.gitignore
+ create mode 100644 stubdom/.gitignore
+ create mode 100644 tools/.gitignore
+ create mode 100644 tools/firmware/.gitignore
+ create mode 100644 tools/ocaml/.gitignore
+ create mode 100644 xen/.gitignore
+
+-- 
+
+
+-- 
+(\___(\___(\______          --=> 8-) EHM <=--          ______/)___/)___/)
+ \BS (    |         ehem+sigmsg@m5p.com  PGP 87145445         |    )   /
+  \_CS\   |  _____  -O #include <stddisclaimer.h> O-   _____  |   /  _/
+8A19\___\_|_/58D2 7E3D DDF4 7BA6 <-PGP-> 41D1 B375 37D0 8714\_|_/___/5445
+
+
+
 
