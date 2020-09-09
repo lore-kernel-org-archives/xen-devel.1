@@ -2,52 +2,77 @@ Return-Path: <SRS0=Kfrc=CS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.2 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-11.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C8BA9C433E2
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 15:45:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 587E0C433E2
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 15:46:32 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6273120678
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 15:45:57 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6273120678
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id D666F206B5
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 15:46:31 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="Dyp+354Z"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D666F206B5
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kG2I0-0001Th-Tj; Wed, 09 Sep 2020 15:45:40 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=Y3mV=CS=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kG2Hy-0001Tc-V5
- for xen-devel@lists.xenproject.org; Wed, 09 Sep 2020 15:45:38 +0000
-X-Inumbo-ID: d727f976-cad1-4e12-a4b5-0bec3887d335
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id d727f976-cad1-4e12-a4b5-0bec3887d335;
- Wed, 09 Sep 2020 15:45:37 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id C1B2FAD18;
- Wed,  9 Sep 2020 15:45:51 +0000 (UTC)
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-From: Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH] x86: drop use of prelink-efi_lto.o
-Message-ID: <1b0f6e53-4548-c8ed-7270-53a9a4557b78@suse.com>
-Date: Wed, 9 Sep 2020 17:45:36 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.0
+	id 1kG2If-0001Wp-7b; Wed, 09 Sep 2020 15:46:21 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=wApk=CS=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1kG2Ie-0001Wa-Cv
+ for xen-devel@lists.xenproject.org; Wed, 09 Sep 2020 15:46:20 +0000
+X-Inumbo-ID: ffa29af4-7287-42d8-88ee-126c093995d3
+Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id ffa29af4-7287-42d8-88ee-126c093995d3;
+ Wed, 09 Sep 2020 15:46:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1599666377;
+ h=subject:to:cc:references:from:message-id:date:
+ mime-version:in-reply-to:content-transfer-encoding;
+ bh=gJ6xdlfesjyy2jyzfOiC7d+NDmQvEMINabaHZvk4Vs8=;
+ b=Dyp+354ZMeFZDpMSbjS3zDWFBJM5LOGYdAFcrxC73lU6Lc+vTfAjTlwI
+ qPvxD/OO+jgz5d7aFgA7CtMB9PeHkmm4GI9eEJYDKZdHlw1blMQMogNqV
+ zViyJkVu69iAqjAFNeMryK2t/ZJFyRSIfNWWz0X9DoExxDJ0+Vrd4q5wt M=;
+Authentication-Results: esa5.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none
+IronPort-SDR: bHnUjxR9XsOT5cQ9mq44XNWyuY+cV77uofRYyzTyGZMzt/zLDKO6NRTbAteIpDBfUfGhC2QItl
+ 3TpkVXSCt8eNpbj46gYvf9lW0L7KGvwCFPbVEkxdJJZt0lHDt70cG0SW5PhIzXC6z4kZQBfocM
+ ozza/bk++e5IK2R3/2LtDVdVPHGMcZcXj6k3pYAMW/o6CfQ20nuM1PNIp19CZLDK5H58p9bIHP
+ f1WMWLoOp8y54h2o5VAQEOC47mVUoeZdKxB5Hn8TOFU8wkvZtHpG/UAif9naZKdCpuP67Gi04c
+ JeI=
+X-SBRS: 2.7
+X-MesageID: 26439391
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.76,409,1592884800"; d="scan'208";a="26439391"
+Subject: Re: [PATCH] x86: drop use of prelink-efi_lto.o
+To: Jan Beulich <jbeulich@suse.com>, "xen-devel@lists.xenproject.org"
+ <xen-devel@lists.xenproject.org>
+CC: Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
+ <roger.pau@citrix.com>
+References: <1b0f6e53-4548-c8ed-7270-53a9a4557b78@suse.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Message-ID: <e36d20f2-93ee-9102-d02c-71618e1a3f98@citrix.com>
+Date: Wed, 9 Sep 2020 16:46:12 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+In-Reply-To: <1b0f6e53-4548-c8ed-7270-53a9a4557b78@suse.com>
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Content-Language: en-GB
+X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
+ FTLPEX02CL05.citrite.net (10.13.108.178)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,27 +86,32 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-As of de94e8b4f996 ("x86/EFI: sanitize build logic") it is identical to
-prelink_lto.o.
+On 09/09/2020 16:45, Jan Beulich wrote:
+> As of de94e8b4f996 ("x86/EFI: sanitize build logic") it is identical to
+> prelink_lto.o.
+>
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
+Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
---- a/xen/arch/x86/Makefile
-+++ b/xen/arch/x86/Makefile
-@@ -135,14 +135,11 @@ ifeq ($(CONFIG_LTO),y)
- prelink_lto.o: $(ALL_OBJS)
- 	$(LD_LTO) -r -o $@ $^
- 
--prelink-efi_lto.o: $(ALL_OBJS)
--	$(LD_LTO) -r -o $@ $^
--
- # Link it with all the binary objects
- prelink.o: $(patsubst %/built_in.o,%/built_in_bin.o,$(ALL_OBJS)) prelink_lto.o $(EFI_OBJS-y)
- 	$(LD) $(XEN_LDFLAGS) -r -o $@ $^
- 
--prelink-efi.o: $(patsubst %/built_in.o,%/built_in_bin.o,$(ALL_OBJS)) prelink-efi_lto.o
-+prelink-efi.o: $(patsubst %/built_in.o,%/built_in_bin.o,$(ALL_OBJS)) prelink_lto.o
- 	$(LD) $(XEN_LDFLAGS) -r -o $@ $^
- else
- prelink.o: $(ALL_OBJS) $(EFI_OBJS-y)
+>
+> --- a/xen/arch/x86/Makefile
+> +++ b/xen/arch/x86/Makefile
+> @@ -135,14 +135,11 @@ ifeq ($(CONFIG_LTO),y)
+>  prelink_lto.o: $(ALL_OBJS)
+>  	$(LD_LTO) -r -o $@ $^
+>  
+> -prelink-efi_lto.o: $(ALL_OBJS)
+> -	$(LD_LTO) -r -o $@ $^
+> -
+>  # Link it with all the binary objects
+>  prelink.o: $(patsubst %/built_in.o,%/built_in_bin.o,$(ALL_OBJS)) prelink_lto.o $(EFI_OBJS-y)
+>  	$(LD) $(XEN_LDFLAGS) -r -o $@ $^
+>  
+> -prelink-efi.o: $(patsubst %/built_in.o,%/built_in_bin.o,$(ALL_OBJS)) prelink-efi_lto.o
+> +prelink-efi.o: $(patsubst %/built_in.o,%/built_in_bin.o,$(ALL_OBJS)) prelink_lto.o
+>  	$(LD) $(XEN_LDFLAGS) -r -o $@ $^
+>  else
+>  prelink.o: $(ALL_OBJS) $(EFI_OBJS-y)
+
 
