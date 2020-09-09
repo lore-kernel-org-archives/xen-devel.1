@@ -2,72 +2,69 @@ Return-Path: <SRS0=Kfrc=CS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 05B8AC43461
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 14:51:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 53A6EC43461
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 14:56:12 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8ED9220768
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 14:51:32 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id EB33A21556
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 14:56:11 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="C0FCXauI"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8ED9220768
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=aepfle.de header.i=@aepfle.de header.b="ZKaLYKUN"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EB33A21556
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kG1RK-0005Hr-RA; Wed, 09 Sep 2020 14:51:14 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=kZUP=CS=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1kG1RJ-0005Hm-GN
- for xen-devel@lists.xenproject.org; Wed, 09 Sep 2020 14:51:13 +0000
-X-Inumbo-ID: 7710f681-5e2d-4cca-98e9-926dbf73d292
-Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 7710f681-5e2d-4cca-98e9-926dbf73d292;
- Wed, 09 Sep 2020 14:51:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1599663073;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=T5drBJQw5icXhtwlyFbVjxtHTcuWeoT6NAXl1HUX1FM=;
- b=C0FCXauIXCiVO13WrR39lPZanq3F7X24+4RSLQG5+i4mj6dkGyLfR+Cl
- ruTXY1fcq9sI5G60f2RSkQQ8gxdh+Ri1qBo94Ag7/EHLqnYLVhBSiCZFi
- 6N21ihnF5M/eeG6TUINXEOrSKOuCbHZQTMD5YTVsHK06w1975Uvbccd2Y 4=;
-Authentication-Results: esa3.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: LTqpRkA/fmXTWoX/s09qmWnDYjSN/hiJEoAb7In96piO8SuLIchw3PTl3tOWrbo420QF/M+OHb
- jt8rFy+nliq90cj9O8/ufLMeDibj4xA94fNB29vOq2gekwvn46KTDi02zjqLlpW+OzfDU9Wcb+
- CXol+Tl/lhk4O19knWJd0B9kEIcPhX3nsQzs1UoQ9nf2AmY9KZ8oWWZA+feqHMShXtQ5XDDeLa
- qrIj3Lzq7IWrGx5qOpmHLMnm1IH07T/x69NX+lEaoNrvbAHGE5oKFuaqaxr2TewqlCU/qk0ogD
- QM8=
-X-SBRS: 2.7
-X-MesageID: 26282907
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,409,1592884800"; d="scan'208";a="26282907"
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Roger Pau Monne <roger.pau@citrix.com>, Jan Beulich <jbeulich@suse.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>, Paul Durrant
- <paul@xen.org>
-Subject: [PATCH] x86/hvm: don't treat MMIO pages as special ones regarding
- cache attributes
-Date: Wed, 9 Sep 2020 16:50:58 +0200
-Message-ID: <20200909145058.72066-1-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.28.0
+	id 1kG1Vt-0005TS-HJ; Wed, 09 Sep 2020 14:55:57 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=M6/y=CS=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1kG1Vr-0005TN-8A
+ for xen-devel@lists.xenproject.org; Wed, 09 Sep 2020 14:55:55 +0000
+X-Inumbo-ID: 8fc2a856-cd57-4786-be4a-b8bd0d66b4f3
+Received: from mo4-p00-ob.smtp.rzone.de (unknown [85.215.255.23])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 8fc2a856-cd57-4786-be4a-b8bd0d66b4f3;
+ Wed, 09 Sep 2020 14:55:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1599663353;
+ s=strato-dkim-0002; d=aepfle.de;
+ h=In-Reply-To:References:Message-ID:Subject:Cc:To:From:Date:
+ X-RZG-CLASS-ID:X-RZG-AUTH:From:Subject:Sender;
+ bh=tukLdkeOGQW3DiarZKNmZ1x5LoXcksEo3hYzmdef0M4=;
+ b=ZKaLYKUNd2j75RxRnYeTtIOgUSnecCKTi/4kKl/v04msKFrfGcprXcp6xNQcGooGSX
+ L3yGc2Zz+04Jvao0dwQKoEyYHMTiQxZbf+D2RFrMm9gRQMz79gVUjM/I6BLWGKv8kojn
+ l7Gj1ytNmCXzjXWJRWuNSzhACAmOCECQIInQ1Tu2WLln2VDov2JYq7vm2j2EPQSSdENA
+ Wdl09uo2EcW+k/4ly9eurH0SeLGGbkPsICOiavtKTA6M4avWJB8U9hu7rkm6xNsbDEma
+ 2z25YuMub1KyxSp4MvkOfY87dVTekPC6NFkk7Ns9XhluW+GvYy++pYP01qN3dt4N8J6u
+ Z4KQ==
+X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzBW/OdlBZQ4AHSS32hIjw=="
+X-RZG-CLASS-ID: mo00
+Received: from aepfle.de by smtp.strato.de (RZmta 46.10.7 SBL|AUTH)
+ with ESMTPSA id 60ad29w89EtiMh3
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
+ (Client did not present a certificate);
+ Wed, 9 Sep 2020 16:55:44 +0200 (CEST)
+Date: Wed, 9 Sep 2020 16:55:41 +0200
+From: Olaf Hering <olaf@aepfle.de>
+To: Juergen Gross <jgross@suse.com>
+Cc: xen-devel@lists.xenproject.org,
+ Samuel Thibault <samuel.thibault@ens-lyon.org>,
+ Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
+ Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Subject: Re: [PATCH] tools/libs: merge xenctrl_dom.h into xenguest.h
+Message-ID: <20200909145541.GA9907@aepfle.de>
+References: <20200909141837.8293-1-jgross@suse.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="3V7upXqbjpZ4EhLz"
+Content-Disposition: inline
+In-Reply-To: <20200909141837.8293-1-jgross@suse.com>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,44 +78,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-MMIO regions below the maximum address on the memory map can have a
-backing page struct that's shared with dom_io (see x86
-arch_init_memory and it's usage of share_xen_page_with_guest), and
-thus also fulfill the is_special_page check because the page has the
-Xen heap bit set.
 
-This is incorrect for MMIO regions when is_special_page is used by
-epte_get_entry_emt, as it will force direct MMIO regions mapped into
-the guest p2m to have the cache attributes set to write-back.
+--3V7upXqbjpZ4EhLz
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-Add an extra check in epte_get_entry_emt in order to detect pages
-shared with dom_io (ie: MMIO regions) and don't force them to
-write-back cache type on that case.
+On Wed, Sep 09, Juergen Gross wrote:
 
-Fixes: 81fd0d3ca4b2cd ('x86/hvm: simplify 'mmio_direct' check in epte_get_entry_emt()')
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
-Cc: Paul Durrant <paul@xen.org>
----
- xen/arch/x86/hvm/mtrr.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+> +++ b/tools/libs/guest/include/xenguest.h
 
-diff --git a/xen/arch/x86/hvm/mtrr.c b/xen/arch/x86/hvm/mtrr.c
-index fb051d59c3..33b1dd9052 100644
---- a/xen/arch/x86/hvm/mtrr.c
-+++ b/xen/arch/x86/hvm/mtrr.c
-@@ -829,7 +829,9 @@ int epte_get_entry_emt(struct domain *d, unsigned long gfn, mfn_t mfn,
- 
-     for ( i = 0; i < (1ul << order); i++ )
-     {
--        if ( is_special_page(mfn_to_page(mfn_add(mfn, i))) )
-+        const struct page_info *page = mfn_to_page(mfn_add(mfn, i));
-+
-+        if ( is_special_page(page) && page_get_owner(page) != dom_io )
-         {
-             if ( order )
-                 return -1;
--- 
-2.28.0
+> +#include <xen/libelf/libelf.h>
 
+In case this file will be installed via make install:
+
+Does any of the pending patches create that file?
+
+
+Olaf
+
+--3V7upXqbjpZ4EhLz
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEE97o7Um30LT3B+5b/86SN7mm1DoAFAl9Y7OwACgkQ86SN7mm1
+DoDx3Q//cjAYUGqBeZ14Y3k/zdKFZa0vP9BSfKKOT+7bcUu9DyKb8DAl8DyIITzz
+y+ROuN/+swNiWmt+8mFwhU1hzjTz/ZpGaCS+oqZVq/xA4pn67HKuKwP4mi/wmoXT
+8cBRB/D7FiYYE5odg1eJ/zqAJa1wE2IcuDOFYdNK/GC6BcJvJHGUl1F1hA1wolHF
+u5yvzgDxh7HhUgjofe+L+xpzUXafXRcwd437j+bhvEmmIrm4Vx8D/muXTdHVlJMl
+Mc+akntVZvRUv0honCUgS7DcDkS6ViWiwcVsP4pXKJYP78NXKhpg62cYPnCLMzEO
+6OyTDvQPo23BrsTOQgEQZ+BTnGOZiWrHaSvuRfWrEulTKJ1dA3zweIX0JFcDzq93
+AEdH3rZUXhyq9nV8GF/rv1sG68AW/AGaN4T+G4m1f5OoZE3oGa7kHeCHl9aoB1qN
+0TNm+osfZudvmM/6qMvJd2jHFisdn5HksBNu5tEBDKFA0nnWD5cIjUhPCMVTn68X
+CJ3HWGytVhZ5/zr5hgshIYntUeDiP2rb7SoqtnOnprRSoVifQomn7Vq3Bl3IBLxH
+UPIvrcFCHMAQWeXVuA8c30Dq7hsWpC26bVHThtwX0WdZQ6VfabeTIEf2K1KsKeoG
+3ibb+a08OzXFs1Z5pE0uCr2+eeW7EV6Xcx1b0/OpmECfULX8S14=
+=iTZ5
+-----END PGP SIGNATURE-----
+
+--3V7upXqbjpZ4EhLz--
 
