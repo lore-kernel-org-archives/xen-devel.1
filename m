@@ -2,66 +2,52 @@ Return-Path: <SRS0=Kfrc=CS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
+X-Spam-Status: No, score=-8.2 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7027BC43461
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 15:40:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C8BA9C433E2
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 15:45:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 166C82065E
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 15:40:56 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="Ckm3VUEw"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 166C82065E
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 6273120678
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 15:45:57 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6273120678
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kG2Cr-0001Iv-88; Wed, 09 Sep 2020 15:40:21 +0000
+	id 1kG2I0-0001Th-Tj; Wed, 09 Sep 2020 15:45:40 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=zLKP=CS=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
- id 1kG2Cq-0001Iq-2V
- for xen-devel@lists.xenproject.org; Wed, 09 Sep 2020 15:40:20 +0000
-X-Inumbo-ID: 06248502-560e-4aaa-9f0f-4b64b209bbcb
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=Y3mV=CS=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1kG2Hy-0001Tc-V5
+ for xen-devel@lists.xenproject.org; Wed, 09 Sep 2020 15:45:38 +0000
+X-Inumbo-ID: d727f976-cad1-4e12-a4b5-0bec3887d335
+Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 06248502-560e-4aaa-9f0f-4b64b209bbcb;
- Wed, 09 Sep 2020 15:40:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
- Content-Transfer-Encoding:Content-Type:Message-ID:To;
- bh=i16AXMH0BuQq4LMCot2zQaSUll8/5DRxxpu6yjm0EvI=; b=Ckm3VUEwIK1tb9WqWLkcV7bDzO
- Zhi3mbHz6xh/bKixwdVMJMHkizk+V74+S1qDIFfOua9uWgZJC67klMMmNZ36apf2YypMeuBt8pUm/
- euYgdlTDMJYJiU6S0Iz1ckpmTQ0Ldm+n8taVCO6ndFJGVqQDFwUQyUxBVC1PaM4ahdLo=;
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kG2Co-0003Wp-E1; Wed, 09 Sep 2020 15:40:18 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kG2Co-000678-6c; Wed, 09 Sep 2020 15:40:18 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1kG2Co-0002Ek-68; Wed, 09 Sep 2020 15:40:18 +0000
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-154021-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+ id d727f976-cad1-4e12-a4b5-0bec3887d335;
+ Wed, 09 Sep 2020 15:45:37 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id C1B2FAD18;
+ Wed,  9 Sep 2020 15:45:51 +0000 (UTC)
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+From: Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH] x86: drop use of prelink-efi_lto.o
+Message-ID: <1b0f6e53-4548-c8ed-7270-53a9a4557b78@suse.com>
+Date: Wed, 9 Sep 2020 17:45:36 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.0
 MIME-Version: 1.0
-Subject: [ovmf test] 154021: all pass - PUSHED
-X-Osstest-Versions-This: ovmf=317d84abe3bfbdff10ae1cc4f38b49307838c6c4
-X-Osstest-Versions-That: ovmf=63d92674d240ab4ecab94f98e1e198842bb7de00
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Wed, 09 Sep 2020 15:40:18 +0000
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,68 +61,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-flight 154021 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/154021/
+As of de94e8b4f996 ("x86/EFI: sanitize build logic") it is identical to
+prelink_lto.o.
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- ovmf                 317d84abe3bfbdff10ae1cc4f38b49307838c6c4
-baseline version:
- ovmf                 63d92674d240ab4ecab94f98e1e198842bb7de00
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-Last test of basis   152863  2020-08-26 16:09:47 Z   13 days
-Failing since        152915  2020-08-27 18:09:42 Z   12 days  212 attempts
-Testing same since   153990  2020-09-09 01:40:04 Z    0 days   10 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Abner Chang <abner.chang@hpe.com>
-  Bob Feng <bob.c.feng@intel.com>
-  Guo Dong <guo.dong@intel.com>
-  Laszlo Ersek <lersek@redhat.com>
-  Marcello Sylvester Bauer <marcello.bauer@9elements.com>
-  Patrick Rudolph <patrick.rudolph@9elements.com>
-  Paul <paul.grimes@amd.com>
-  Paul G <paul.grimes@amd.com>
-  Qi Zhang <qi1.zhang@intel.com>
-  Shenglei Zhang <shenglei.zhang@intel.com>
-  Wenyi Xie <xiewenyi2@huawei.com>
-  Zhang, Shenglei <shenglei.zhang@intel.com>
-  Zhichao Gao <zhichao.gao@intel.com>
-  Zhiguang Liu <zhiguang.liu@intel.com>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
-   63d92674d2..317d84abe3  317d84abe3bfbdff10ae1cc4f38b49307838c6c4 -> xen-tested-master
+--- a/xen/arch/x86/Makefile
++++ b/xen/arch/x86/Makefile
+@@ -135,14 +135,11 @@ ifeq ($(CONFIG_LTO),y)
+ prelink_lto.o: $(ALL_OBJS)
+ 	$(LD_LTO) -r -o $@ $^
+ 
+-prelink-efi_lto.o: $(ALL_OBJS)
+-	$(LD_LTO) -r -o $@ $^
+-
+ # Link it with all the binary objects
+ prelink.o: $(patsubst %/built_in.o,%/built_in_bin.o,$(ALL_OBJS)) prelink_lto.o $(EFI_OBJS-y)
+ 	$(LD) $(XEN_LDFLAGS) -r -o $@ $^
+ 
+-prelink-efi.o: $(patsubst %/built_in.o,%/built_in_bin.o,$(ALL_OBJS)) prelink-efi_lto.o
++prelink-efi.o: $(patsubst %/built_in.o,%/built_in_bin.o,$(ALL_OBJS)) prelink_lto.o
+ 	$(LD) $(XEN_LDFLAGS) -r -o $@ $^
+ else
+ prelink.o: $(ALL_OBJS) $(EFI_OBJS-y)
 
