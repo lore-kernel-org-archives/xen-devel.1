@@ -2,55 +2,71 @@ Return-Path: <SRS0=Kfrc=CS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.3 required=3.0 tests=BAYES_00,DATE_IN_PAST_96_XX,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1E7DCC43461
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 21:54:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E2E1DC43461
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 21:55:58 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D6F2621D81
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 21:54:54 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D6F2621D81
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=m5p.com
+	by mail.kernel.org (Postfix) with ESMTPS id 873B220665
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 21:55:58 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="TQEm32y1"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 873B220665
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kG83A-0000nb-I0; Wed, 09 Sep 2020 21:54:44 +0000
+	id 1kG849-00019L-Ti; Wed, 09 Sep 2020 21:55:45 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=WRqj=CS=m5p.com=ehem@srs-us1.protection.inumbo.net>)
- id 1kG839-0000hS-Sy
- for xen-devel@lists.xenproject.org; Wed, 09 Sep 2020 21:54:43 +0000
-X-Inumbo-ID: 2e4f373a-d08d-4ccd-b453-6639bf5fc402
-Received: from mailhost.m5p.com (unknown [74.104.188.4])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=zLKP=CS=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
+ id 1kG848-000194-Uh
+ for xen-devel@lists.xenproject.org; Wed, 09 Sep 2020 21:55:44 +0000
+X-Inumbo-ID: dd4ab7ad-8516-4f7c-9a09-7ca9fad322aa
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 2e4f373a-d08d-4ccd-b453-6639bf5fc402;
- Wed, 09 Sep 2020 21:54:34 +0000 (UTC)
-Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:1f07:15ff:0:0:0:f7])
- by mailhost.m5p.com (8.15.2/8.15.2) with ESMTPS id 089LsKvq039271
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
- Wed, 9 Sep 2020 17:54:26 -0400 (EDT) (envelope-from ehem@m5p.com)
-Received: (from ehem@localhost)
- by m5p.com (8.15.2/8.15.2/Submit) id 089LsKcO039270;
- Wed, 9 Sep 2020 14:54:20 -0700 (PDT) (envelope-from ehem)
-Message-Id: <202009092154.089LsKcO039270@m5p.com>
-From: Elliott Mitchell <ehem+xen@m5p.com>
-To: xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: George Dunlap <george.dunlap@citrix.com>
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>
-Cc: Jan Beulich <jbeulich@suse.com>
-Cc: Julien Grall <julien@xen.org>
-Cc: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Wei Liu <wl@xen.org>
-Date: Tue, 1 Sep 2020 15:54:54 -0700
-Subject: [PATCH 11/11 RFC] gitignore: RFC Prelimiary final cleanup of top-level
- .gitignore
+ id dd4ab7ad-8516-4f7c-9a09-7ca9fad322aa;
+ Wed, 09 Sep 2020 21:55:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+ Content-Transfer-Encoding:Content-Type:Message-ID:To;
+ bh=3G9Gg2flamSBa1qzDynDr7MgFyuf5zwsCLJHYd6JpGg=; b=TQEm32y1u7mcBzaI0sdb1dxqZQ
+ sAm3+95kFXLVzt7pkqQ2xSA4QP1pnQZTqLZiKjzd1k7bxkfRpEq7SfQEZG7duftRHnjgyKrKdf4dv
+ hmylp2TokHQaIW2KkXRkZORqKL6qE7TgPT2vANph4surHVTwxJ9dzn1evpCQwOMZHEqo=;
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kG847-0003bF-KU; Wed, 09 Sep 2020 21:55:43 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kG847-0004gX-Dw; Wed, 09 Sep 2020 21:55:43 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1kG847-0007RD-9l; Wed, 09 Sep 2020 21:55:43 +0000
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-154030-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [xen-unstable-smoke test] 154030: tolerable all pass - PUSHED
+X-Osstest-Failures: xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+ xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+ xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+ xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+ xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This: xen=89002866bb6c6f26024f015820c8f52012f95cf2
+X-Osstest-Versions-That: xen=6d2f1ebccdef655d64fbc3abc83db76c3de08cb1
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Wed, 09 Sep 2020 21:55:43 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,144 +80,62 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This sorts .gitignore and cleans a few entries up.
+flight 154030 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/154030/
 
-Notably I *think* "dist/*" and "install/*" should be "/dist/*" and
-"/install/*" as I'm doubting whether anyone will have those directories
-anywhere, but the top.  Yet on top of this there is also an entry for
-"dist" which I'm unsure of.
+Failures :-/ but no regressions.
 
-I'm rather concerned about "build-*" as I see the scripts:
-"automation/scripts/build-test.sh" and
-"automation/gitlab-ci/build-each-commit.sh" already in the repository.
-These aren't effected by the .gitignore as they're already being tracked,
-but this is a suboptimal situation.
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
 
-I also note the presence of /tools/qemu-xen-build,
-/tools/pygrub/build/, /tools/python/build/ and
-/tools/tests/regression/build/ as things which might be useful to
-address.
+version targeted for testing:
+ xen                  89002866bb6c6f26024f015820c8f52012f95cf2
+baseline version:
+ xen                  6d2f1ebccdef655d64fbc3abc83db76c3de08cb1
 
-The entry "LibVNCServer*" seems like perhaps it should start with a
-slash and/or have a tighter glob?
+Last test of basis   154026  2020-09-09 15:00:25 Z    0 days
+Testing same since   154030  2020-09-09 19:01:21 Z    0 days    1 attempts
 
-Some of the very old entries which originate at the begining,
-e46056227fa3a7319e859455fa9f10c918451e43 I'm unsure of.  Does anyone
-still want "TAGS" ignored?
-".git" and ".hg" are obvious, though is there value in them remaining
-when Mercurial seems to be disappearing?
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  Igor Druzhinin <igor.druzhinin@citrix.com>
+  Jan Beulich <jbeulich@suse.com>
+  Roger Pau Monné <roger.pau@citrix.com>
 
-What is/was behind c1df7c6ab655bcbf97024e8b79e55ba554cde83f and are those
-still useful?  Presently they're still there, but in a situation like
-this, removing this is more valuable than leaving them.
-
-Signed-off-by: Elliott Mitchell <ehem+xen@m5p.com>
-
----
- .gitignore | 70 +++++++++++++++++++++++++-----------------------------
- 1 file changed, 33 insertions(+), 37 deletions(-)
-
-diff --git a/.gitignore b/.gitignore
-index 5c17736c2e..5f9b8b0297 100644
---- a/.gitignore
-+++ b/.gitignore
-@@ -1,54 +1,50 @@
- !__*__.py
--.hg
--.*.cmd
--*.orig
--*~
--*.swp
--*.o
-+*.a
-+*.bak
-+*.bin
- *.d
- *.d2
-+*.gcda
-+*.gcno
-+*.o
-+*.old
- *.opic
--*.a
-+*.orig
-+*.pc
-+*.py[ocd]
- *.so
- *.so.[0-9]*
--*.bin
--*.bak
-+*.spit
-+*.spot
-+*.swp
- *.tar
- *.tar.*z*
- *.tmp
--*.spot
--*.spit
--*.gcno
--*.gcda
--*.old
--*.pc
--*.py[ocd]
--TAGS
--GTAGS
--GRTAGS
-+*~
-+.*.cmd
-+.config
-+.git
-+.hg
-+.vimrc
-+.vscode
- GPATH
-+GRTAGS
- GSYMS
--tags
-+GTAGS
-+LibVNCServer*
-+TAGS
-+autom4te.cache/
-+build-*
-+config.cache
-+config.h
-+config.log
-+config.status
- cscope.files
- cscope.in.out
- cscope.out
- cscope.po.out
--.config
--.vimrc
--.vscode
--
- dist
-+tags
- 
--autom4te.cache/
--config.log
--config.status
--config.cache
--config.h
--
--build-*
--dist/*
--extras/mini-os*
--install/*
--LibVNCServer*
--
--.git
-+/dist/*
-+/install/*
--- 
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-libvirt                                     pass    
 
 
--- 
-(\___(\___(\______          --=> 8-) EHM <=--          ______/)___/)___/)
- \BS (    |         ehem+sigmsg@m5p.com  PGP 87145445         |    )   /
-  \_CS\   |  _____  -O #include <stddisclaimer.h> O-   _____  |   /  _/
-8A19\___\_|_/58D2 7E3D DDF4 7BA6 <-PGP-> 41D1 B375 37D0 8714\_|_/___/5445
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
 
 
+Pushing revision :
 
+To xenbits.xen.org:/home/xen/git/xen.git
+   6d2f1ebccd..89002866bb  89002866bb6c6f26024f015820c8f52012f95cf2 -> smoke
 
