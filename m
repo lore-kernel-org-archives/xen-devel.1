@@ -2,75 +2,75 @@ Return-Path: <SRS0=Kfrc=CS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CF1B3C433E2
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 10:01:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 063D2C433E2
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 10:04:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 765A421973
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 10:01:39 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id B09EC21D7A
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2020 10:04:38 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="UXDWd4E8"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 765A421973
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="V+s+7NY9"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B09EC21D7A
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kFwut-0001IO-LS; Wed, 09 Sep 2020 10:01:27 +0000
+	id 1kFwxj-0001Vs-48; Wed, 09 Sep 2020 10:04:23 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=wApk=CS=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1kFwus-0001ID-On
- for xen-devel@lists.xenproject.org; Wed, 09 Sep 2020 10:01:26 +0000
-X-Inumbo-ID: 0575d301-80fe-4264-8e08-89fc6cbb2595
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+ <SRS0=zLKP=CS=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
+ id 1kFwxh-0001Vn-OB
+ for xen-devel@lists.xenproject.org; Wed, 09 Sep 2020 10:04:21 +0000
+X-Inumbo-ID: 30d73c16-4f6d-4ea3-acf1-fc9dbc6311da
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 0575d301-80fe-4264-8e08-89fc6cbb2595;
- Wed, 09 Sep 2020 10:01:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1599645684;
- h=subject:to:cc:references:from:message-id:date:
- mime-version:in-reply-to:content-transfer-encoding;
- bh=QKLNJvq/H1lxTlKAwuTi2t0ypSXWvInPgOzCUeEbsKc=;
- b=UXDWd4E8ZB44BPUVP/iueBfwsbC5/42UFNBIvJ4Ckf4s8Q0uxvHiHOjq
- zznemHgROiTEjr0f/sdpCVLsCBoR73+zImlLBRNkOZC7NubmQVz/+Sw7R
- V8MFV2wAux6K7xdwhDKcNaqXEy9L97WhWPfEselP1X/XRGx3g1+Qte4tc U=;
-Authentication-Results: esa5.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: qmIHu+PTt4mSEW7J79k06rfkXXiM7lzhbM9cQ3PdkhhitbPDucluPScZlMq28JMcLxgYzp3VFG
- abCNtOXUUnmufOFcw3O80PKYr4HwpWBDXNQ3yiu1mGDGSfSA0Gb8k0R70L+u7EtgtjBRVEz+yt
- rFhmZKMn+1RLpv1poMK0fU8xa0wO8k6IQPY0j1mK9SfIhT5/DRUJpx4vheJwDwH03o4CE/22j3
- liQQH+KCHy9D5+P90ut7upOInhxf3UTrO0WLEYPanHOrCtMpM6KhJ0atQIViC4Dx+LuuGDztJ7
- 9K4=
-X-SBRS: 2.7
-X-MesageID: 26404450
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,409,1592884800"; d="scan'208";a="26404450"
-Subject: Re: [PATCH v1] libxc: use bitmap_alloc
-To: Olaf Hering <olaf@aepfle.de>, <xen-devel@lists.xenproject.org>
-CC: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>
-References: <20200909095344.9462-1-olaf@aepfle.de>
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Message-ID: <9406261f-2c83-7208-726d-bdbacfffd8b9@citrix.com>
-Date: Wed, 9 Sep 2020 11:01:19 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ id 30d73c16-4f6d-4ea3-acf1-fc9dbc6311da;
+ Wed, 09 Sep 2020 10:04:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+ Content-Transfer-Encoding:Content-Type:Message-ID:To;
+ bh=d8J3a4wWd9jDYCPlN7Qj/XPLvc3wOCxOV/Ui8sPW99Y=; b=V+s+7NY9789UX2RwULHbb16zzw
+ zxEYTKHmdTxFu6i3jGXOhzb8G2fUQLndK0yLxeOTBiCZxK/WZ4AXzg9TH3Mie36XZYOJqRz7usseZ
+ 201+K4eQvOMpCc51BR+L6c9b42ok12DY/NzLXfxVhUXM/6MNtihxOALILny6BUch4b70=;
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kFwxf-0004Xa-Sx; Wed, 09 Sep 2020 10:04:19 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kFwxf-00073n-Ko; Wed, 09 Sep 2020 10:04:19 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1kFwxf-0005qC-KH; Wed, 09 Sep 2020 10:04:19 +0000
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-154014-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-In-Reply-To: <20200909095344.9462-1-olaf@aepfle.de>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Content-Language: en-GB
-X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
- FTLPEX02CL05.citrite.net (10.13.108.178)
+Subject: [ovmf test] 154014: regressions - FAIL
+X-Osstest-Failures: ovmf:build-i386-xsm:xen-build:fail:regression
+ ovmf:build-amd64-xsm:xen-build:fail:regression
+ ovmf:build-amd64:xen-build:fail:regression
+ ovmf:build-i386:xen-build:fail:regression
+ ovmf:build-amd64-libvirt:build-check(1):blocked:nonblocking
+ ovmf:build-i386-libvirt:build-check(1):blocked:nonblocking
+ ovmf:test-amd64-amd64-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
+ ovmf:test-amd64-i386-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
+X-Osstest-Versions-This: ovmf=317d84abe3bfbdff10ae1cc4f38b49307838c6c4
+X-Osstest-Versions-That: ovmf=63d92674d240ab4ecab94f98e1e198842bb7de00
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Wed, 09 Sep 2020 10:04:19 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,10 +84,80 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 09/09/2020 10:53, Olaf Hering wrote:
-> Use existing helper to allocate a bitmap.
->
-> Signed-off-by: Olaf Hering <olaf@aepfle.de>
+flight 154014 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/154014/
 
-Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Regressions :-(
+
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-i386-xsm                6 xen-build                fail REGR. vs. 152863
+ build-amd64-xsm               6 xen-build                fail REGR. vs. 152863
+ build-amd64                   6 xen-build                fail REGR. vs. 152863
+ build-i386                    6 xen-build                fail REGR. vs. 152863
+
+Tests which did not succeed, but are not blocking:
+ build-amd64-libvirt           1 build-check(1)               blocked  n/a
+ build-i386-libvirt            1 build-check(1)               blocked  n/a
+ test-amd64-amd64-xl-qemuu-ovmf-amd64  1 build-check(1)             blocked n/a
+ test-amd64-i386-xl-qemuu-ovmf-amd64  1 build-check(1)              blocked n/a
+
+version targeted for testing:
+ ovmf                 317d84abe3bfbdff10ae1cc4f38b49307838c6c4
+baseline version:
+ ovmf                 63d92674d240ab4ecab94f98e1e198842bb7de00
+
+Last test of basis   152863  2020-08-26 16:09:47 Z   13 days
+Failing since        152915  2020-08-27 18:09:42 Z   12 days  210 attempts
+Testing same since   153990  2020-09-09 01:40:04 Z    0 days    8 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Abner Chang <abner.chang@hpe.com>
+  Bob Feng <bob.c.feng@intel.com>
+  Guo Dong <guo.dong@intel.com>
+  Laszlo Ersek <lersek@redhat.com>
+  Marcello Sylvester Bauer <marcello.bauer@9elements.com>
+  Patrick Rudolph <patrick.rudolph@9elements.com>
+  Paul <paul.grimes@amd.com>
+  Paul G <paul.grimes@amd.com>
+  Qi Zhang <qi1.zhang@intel.com>
+  Shenglei Zhang <shenglei.zhang@intel.com>
+  Wenyi Xie <xiewenyi2@huawei.com>
+  Zhang, Shenglei <shenglei.zhang@intel.com>
+  Zhichao Gao <zhichao.gao@intel.com>
+  Zhiguang Liu <zhiguang.liu@intel.com>
+
+jobs:
+ build-amd64-xsm                                              fail    
+ build-i386-xsm                                               fail    
+ build-amd64                                                  fail    
+ build-i386                                                   fail    
+ build-amd64-libvirt                                          blocked 
+ build-i386-libvirt                                           blocked 
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         blocked 
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          blocked 
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+(No revision log; it would be 399 lines long.)
 
