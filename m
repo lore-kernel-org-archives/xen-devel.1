@@ -2,65 +2,69 @@ Return-Path: <SRS0=JUJE=CT=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 614D9C433E2
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2020 14:50:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 380F8C07548
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2020 14:50:33 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 082D52064B
+	by mail.kernel.org (Postfix) with ESMTPS id CEA862064B
 	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2020 14:50:32 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="E+CVQokN"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 082D52064B
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="DaN9i+zm"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CEA862064B
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kGNtv-0007Kc-4p; Thu, 10 Sep 2020 14:50:15 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kGNtt-0007KJ-Sq; Thu, 10 Sep 2020 14:50:13 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=S6nR=CT=xen.org=paul@srs-us1.protection.inumbo.net>)
- id 1kGNtt-0007KI-RD
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2020 14:50:13 +0000
-X-Inumbo-ID: 9a6d75e3-db90-4f59-a1be-8a64bbe00d90
+ id 1kGNts-0007KD-Ar
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2020 14:50:12 +0000
+X-Inumbo-ID: faf72ada-5a48-4f4e-8a61-115e38e67f54
 Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 9a6d75e3-db90-4f59-a1be-8a64bbe00d90;
- Thu, 10 Sep 2020 14:50:12 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id faf72ada-5a48-4f4e-8a61-115e38e67f54;
+ Thu, 10 Sep 2020 14:50:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
- bh=4AoX2QcMIWlbm0K+83CDzVNO/lJ0Ivxf4f14fPbq6/4=; b=E+CVQokNFjqSVb6Mj46b9fUeAw
- KV8Y63D4m7OaNHDQs1Grt8tRomPHKdkcOcVSu2X5ikkT1PZAj9cB27PJkxOzak1g7ZeUi6TK0eq+X
- XLTPIysBZ897fNgwukNgfDHeZyrRaWeeUnrVenbb4Zfg8IaSEJsiQJtkoICKd6AKxGyw=;
+ s=20200302mail; h=Content-Transfer-Encoding:Content-Type:MIME-Version:
+ Message-Id:Date:Subject:Cc:To:From;
+ bh=mjx3NO80S3pdgmREdnLeWlESnzNDS1tuAJrTtCr1dto=; b=DaN9i+zm4pYRZSpLBOiz7gF2Sh
+ 6pWtH1XQwCBE+K78IZEwvdGYjqyO+KxadkKIOTjw+jHTxsaxP5UDRJ0jgAWIMDiCXJB/7KrmkvpUG
+ KIy1HAqBi1z975/WUQ7M/NVVxTdUx0JqRgfqwawcwpvSqIZCfwSjomAEaEF1NqxZl3yk=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kGNts-0006ud-6t; Thu, 10 Sep 2020 14:50:12 +0000
+ id 1kGNtq-0006uT-Hg; Thu, 10 Sep 2020 14:50:10 +0000
 Received: from host86-176-94-160.range86-176.btcentralplus.com
  ([86.176.94.160] helo=u2f063a87eabd5f.home)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kGNtr-0004ZM-V3; Thu, 10 Sep 2020 14:50:12 +0000
+ id 1kGNtq-0004ZM-87; Thu, 10 Sep 2020 14:50:10 +0000
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: Paul Durrant <pdurrant@amazon.com>,
-	Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH v6 2/8] iommu: remove unused iommu_ops method and tasklet
-Date: Thu, 10 Sep 2020 15:50:01 +0100
-Message-Id: <20200910145007.14107-3-paul@xen.org>
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, Jun Nakajima <jun.nakajima@intel.com>,
+ Kevin Tian <kevin.tian@intel.com>,
+ =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
+Subject: [PATCH v6 0/8] IOMMU cleanup
+Date: Thu, 10 Sep 2020 15:49:59 +0100
+Message-Id: <20200910145007.14107-1-paul@xen.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200910145007.14107-1-paul@xen.org>
-References: <20200910145007.14107-1-paul@xen.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -77,91 +81,46 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Paul Durrant <pdurrant@amazon.com>
 
-The VT-d and AMD IOMMU implementations both use the general x86 IOMMU page
-table allocator and ARM always shares page tables with CPU. Hence there is no
-need to retain the free_page_table() method or the tasklet which invokes it.
+*** BLURB HERE ***
 
-Signed-off-by: Paul Durrant <pdurrant@amazon.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
+Paul Durrant (8):
+  x86/iommu: convert VT-d code to use new page table allocator
+  iommu: remove unused iommu_ops method and tasklet
+  iommu: flush I/O TLB if iommu_map() or iommu_unmap() fail
+  iommu: make map and unmap take a page count, similar to flush
+  remove remaining uses of iommu_legacy_map/unmap
+  common/grant_table: batch flush I/O TLB
+  iommu: remove the share_p2m operation
+  iommu: stop calling IOMMU page tables 'p2m tables'
+
+ xen/arch/x86/mm.c                           |  22 +-
+ xen/arch/x86/mm/p2m-ept.c                   |  21 +-
+ xen/arch/x86/mm/p2m-pt.c                    |  16 +-
+ xen/arch/x86/mm/p2m.c                       |  27 ++-
+ xen/arch/x86/x86_64/mm.c                    |  20 +-
+ xen/common/grant_table.c                    | 208 ++++++++++++------
+ xen/common/memory.c                         |   7 +-
+ xen/drivers/passthrough/amd/iommu.h         |   2 +-
+ xen/drivers/passthrough/amd/iommu_map.c     |   4 +-
+ xen/drivers/passthrough/amd/pci_amd_iommu.c |  20 +-
+ xen/drivers/passthrough/iommu.c             | 120 +++--------
+ xen/drivers/passthrough/vtd/extern.h        |   2 +-
+ xen/drivers/passthrough/vtd/iommu.c         | 225 +++++++++-----------
+ xen/drivers/passthrough/vtd/x86/vtd.c       |   2 +-
+ xen/drivers/passthrough/x86/iommu.c         |   2 +-
+ xen/include/xen/iommu.h                     |  36 +---
+ 16 files changed, 371 insertions(+), 363 deletions(-)
 ---
-
-v2:
-  - New in v2 (split from "add common page-table allocator")
----
- xen/drivers/passthrough/iommu.c | 25 -------------------------
- xen/include/xen/iommu.h         |  2 --
- 2 files changed, 27 deletions(-)
-
-diff --git a/xen/drivers/passthrough/iommu.c b/xen/drivers/passthrough/iommu.c
-index 2b1db8022c..660dc5deb2 100644
---- a/xen/drivers/passthrough/iommu.c
-+++ b/xen/drivers/passthrough/iommu.c
-@@ -49,10 +49,6 @@ bool_t __read_mostly amd_iommu_perdev_intremap = 1;
- 
- DEFINE_PER_CPU(bool_t, iommu_dont_flush_iotlb);
- 
--DEFINE_SPINLOCK(iommu_pt_cleanup_lock);
--PAGE_LIST_HEAD(iommu_pt_cleanup_list);
--static struct tasklet iommu_pt_cleanup_tasklet;
--
- static int __init parse_iommu_param(const char *s)
- {
-     const char *ss;
-@@ -226,9 +222,6 @@ static void iommu_teardown(struct domain *d)
-     struct domain_iommu *hd = dom_iommu(d);
- 
-     iommu_vcall(hd->platform_ops, teardown, d);
--
--    if ( hd->platform_ops->free_page_table )
--        tasklet_schedule(&iommu_pt_cleanup_tasklet);
- }
- 
- void iommu_domain_destroy(struct domain *d)
-@@ -368,23 +361,6 @@ int iommu_lookup_page(struct domain *d, dfn_t dfn, mfn_t *mfn,
-     return iommu_call(hd->platform_ops, lookup_page, d, dfn, mfn, flags);
- }
- 
--static void iommu_free_pagetables(void *unused)
--{
--    do {
--        struct page_info *pg;
--
--        spin_lock(&iommu_pt_cleanup_lock);
--        pg = page_list_remove_head(&iommu_pt_cleanup_list);
--        spin_unlock(&iommu_pt_cleanup_lock);
--        if ( !pg )
--            return;
--        iommu_vcall(iommu_get_ops(), free_page_table, pg);
--    } while ( !softirq_pending(smp_processor_id()) );
--
--    tasklet_schedule_on_cpu(&iommu_pt_cleanup_tasklet,
--                            cpumask_cycle(smp_processor_id(), &cpu_online_map));
--}
--
- int iommu_iotlb_flush(struct domain *d, dfn_t dfn, unsigned int page_count,
-                       unsigned int flush_flags)
- {
-@@ -508,7 +484,6 @@ int __init iommu_setup(void)
- #ifndef iommu_intremap
-         printk("Interrupt remapping %sabled\n", iommu_intremap ? "en" : "dis");
- #endif
--        tasklet_init(&iommu_pt_cleanup_tasklet, iommu_free_pagetables, NULL);
-     }
- 
-     return rc;
-diff --git a/xen/include/xen/iommu.h b/xen/include/xen/iommu.h
-index 3272874958..1831dc66b0 100644
---- a/xen/include/xen/iommu.h
-+++ b/xen/include/xen/iommu.h
-@@ -263,8 +263,6 @@ struct iommu_ops {
-     int __must_check (*lookup_page)(struct domain *d, dfn_t dfn, mfn_t *mfn,
-                                     unsigned int *flags);
- 
--    void (*free_page_table)(struct page_info *);
--
- #ifdef CONFIG_X86
-     int (*enable_x2apic)(void);
-     void (*disable_x2apic)(void);
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: George Dunlap <george.dunlap@citrix.com>
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>
+Cc: Jan Beulich <jbeulich@suse.com>
+Cc: Julien Grall <julien@xen.org>
+Cc: Jun Nakajima <jun.nakajima@intel.com>
+Cc: Kevin Tian <kevin.tian@intel.com>
+Cc: "Roger Pau Monné" <roger.pau@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Wei Liu <wl@xen.org>
 -- 
 2.20.1
 
