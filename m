@@ -2,48 +2,51 @@ Return-Path: <SRS0=JUJE=CT=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.2 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-8.2 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 641E0C43461
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2020 12:10:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EF01DC43461
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2020 12:11:56 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 284822076D
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2020 12:10:07 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 284822076D
+	by mail.kernel.org (Postfix) with ESMTPS id 9A3D62076D
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2020 12:11:56 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9A3D62076D
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kGLON-0006rx-2N; Thu, 10 Sep 2020 12:09:31 +0000
+	id 1kGLQY-0007cF-FO; Thu, 10 Sep 2020 12:11:46 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=dCRG=CT=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kGLOM-0006rs-Cb
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2020 12:09:30 +0000
-X-Inumbo-ID: 371cc8ef-ad1b-480c-ade5-e99818922e56
+ id 1kGLQX-0007cA-GA
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2020 12:11:45 +0000
+X-Inumbo-ID: e34baedc-f7d6-4b9d-9ec4-a8cfc22ed640
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 371cc8ef-ad1b-480c-ade5-e99818922e56;
- Thu, 10 Sep 2020 12:09:29 +0000 (UTC)
+ id e34baedc-f7d6-4b9d-9ec4-a8cfc22ed640;
+ Thu, 10 Sep 2020 12:11:44 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id D061FAD52;
- Thu, 10 Sep 2020 12:09:43 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 7D68DAD52;
+ Thu, 10 Sep 2020 12:11:59 +0000 (UTC)
+Subject: [PATCH 1/6] tools/include: adjust population of acpi/
+From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>
-From: Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH 0/6] tools/include: adjustments to the population of xen/
-Message-ID: <2a9f86aa-9104-8a45-cd21-72acd693f924@suse.com>
-Date: Thu, 10 Sep 2020 14:09:30 +0200
+References: <2a9f86aa-9104-8a45-cd21-72acd693f924@suse.com>
+Message-ID: <095cad04-fe20-c31c-9761-880c3a9d568a@suse.com>
+Date: Thu, 10 Sep 2020 14:11:45 +0200
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.12.0
 MIME-Version: 1.0
+In-Reply-To: <2a9f86aa-9104-8a45-cd21-72acd693f924@suse.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -60,16 +63,38 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-While looking at what it would take to move around libelf/
-in the hypervisor subtree, I've run into this rule, which I
-think can do with a few improvements and some simplification.
+Limit what gets exposed - in particular cpufreq/ and apei.h are
+hypervisor private headers which the tool stack building shouldn't see
+or use. Also don't pass -f to ln, to allow noticing name collisions
+right away.
 
-1: adjust population of acpi/
-2: fix (drop) dependencies of when to populate xen/
-3: adjust population of public headers into xen/
-4: properly install Arm public headers
-5: adjust x86-specific population of xen/
-6: drop remaining -f from ln invocations
+Additionally acpi/ also has been in need of deleting at the start of
+the rule, or alternatively the respective ln would have needed to also
+be passed -n.
 
-Jan
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
+
+--- a/tools/include/Makefile
++++ b/tools/include/Makefile
+@@ -16,15 +16,16 @@ XEN_PUBLIC_INCLUDES = $(wildcard $(XEN_R
+ XEN_LIB_X86_INCLUDES = $(filter-out %autogen.h, $(XEN_ROOT)/xen/include/xen/lib/x86/Makefile $(wildcard $(XEN_ROOT)/xen/include/xen/lib/x86/*.h))
+ 
+ xen/.dir: $(XEN_PUBLIC_INCLUDES) $(XEN_LIB_X86_INCLUDES)
+-	@rm -rf xen
+-	mkdir -p xen/libelf
++	@rm -rf xen acpi
++	mkdir -p xen/libelf acpi
+ 	ln -sf $(XEN_ROOT)/xen/include/public/COPYING xen
+ 	ln -sf $(XEN_PUBLIC_INCLUDES) xen
+ 	ln -sf $(addprefix $(XEN_ROOT)/xen/include/public/,arch-x86 arch-arm hvm io xsm) xen
+ 	ln -sf ../xen-sys/$(XEN_OS) xen/sys
+ 	ln -sf $(addprefix $(XEN_ROOT)/xen/include/xen/,libelf.h elfstructs.h) xen/libelf/
+ 	ln -s ../xen-foreign xen/foreign
+-	ln -sf $(XEN_ROOT)/xen/include/acpi acpi
++	ln -s $(XEN_ROOT)/xen/include/acpi/platform acpi/
++	ln -s $(XEN_ROOT)/xen/include/acpi/ac*.h acpi/
+ ifeq ($(CONFIG_X86),y)
+ 	ln -sf $(XEN_ROOT)/xen/include/asm-x86 xen/asm
+ 	mkdir -p xen/lib/x86
+
 
