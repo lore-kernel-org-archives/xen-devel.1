@@ -2,77 +2,83 @@ Return-Path: <SRS0=JUJE=CT=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.0 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham
+X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6D5FDC433E2
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2020 20:10:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B5A9C43461
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2020 20:22:48 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 00807221E2
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2020 20:10:18 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 0A10D21D7E
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2020 20:22:47 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="H+ILzdSl"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 00807221E2
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Py/3IXhw"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0A10D21D7E
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kGSt5-0002g1-64; Thu, 10 Sep 2020 20:09:43 +0000
+	id 1kGT5W-0004Jj-Kp; Thu, 10 Sep 2020 20:22:34 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=FP7I=CT=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1kGSt4-0002fw-A7
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2020 20:09:42 +0000
-X-Inumbo-ID: 2335e501-59ad-48cf-80ce-67073800fe66
-Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
+ <SRS0=vQLO=CT=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
+ id 1kGT5U-0004JK-SH
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2020 20:22:32 +0000
+X-Inumbo-ID: 3bba4dcf-c72b-4725-90a8-348d49e92c4b
+Received: from mail-lf1-x142.google.com (unknown [2a00:1450:4864:20::142])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 2335e501-59ad-48cf-80ce-67073800fe66;
- Thu, 10 Sep 2020 20:09:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1599768581;
- h=subject:to:cc:references:from:message-id:date:
- mime-version:in-reply-to:content-transfer-encoding;
- bh=rRoBQ3YTtW3j0voSlymyJSvbs8RCxxHyuNXWyHKX170=;
- b=H+ILzdSlWN9ZcaiQUMpzofqp2aFkThUfPfkGreE2OBwbd1NYoQ0u0bPU
- KxKUodEZWRAe9onwJv4DK+S4qTmPm7QCJVd7DVt5C+rLglcSpoC0SG+Ov
- d2n72qlwrJMzVQyh4DK5SDruJcDROD5zRZt6TKP49K13sb+n5X+WHvKR2 g=;
-Authentication-Results: esa3.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: kiACMK6Oq5qccr5JKwLDLmZ6BCmCtbnBEYgRYIKH+FQFKwiUHiIazLoGW4w3+hfn3DjNqaSXdo
- E1ER9ZjMycthqyoK5EA2x+wLb8YsNzBZcrLlb+VIlwCa2YRPSmZ0SuwJG832ciLjFKe23rn4Rn
- BU/2onblswMO1Oy9WF87/sRo+9H3TCRbisr4I3xKa+ajWj/Gwjh9Qw4JXBeKmWx9WEZi7a1C+Y
- JGZcFUaLA+saxaZLC49B1+n2RRAvC0sEzeh6MpBrIHH7zelpkch2PQ1lgQLMT0hzip0VMGDy2Y
- ibE=
-X-SBRS: 2.7
-X-MesageID: 26423757
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,413,1592884800"; d="scan'208";a="26423757"
-Subject: Regression: [PATCH v10 10/12] tools/libxl: use libxenhypfs for
- setting xen runtime parameters
-To: Juergen Gross <jgross@suse.com>, <xen-devel@lists.xenproject.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>, Ian Jackson
- <ian.jackson@eu.citrix.com>, Wei Liu <wl@xen.org>
-References: <20200519072106.26894-1-jgross@suse.com>
- <20200519072106.26894-11-jgross@suse.com>
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Message-ID: <b4f66026-67c1-5284-84d7-9d9af1775904@citrix.com>
-Date: Thu, 10 Sep 2020 21:09:34 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
-MIME-Version: 1.0
-In-Reply-To: <20200519072106.26894-11-jgross@suse.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Content-Language: en-GB
-X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
- FTLPEX02CL05.citrite.net (10.13.108.178)
+ id 3bba4dcf-c72b-4725-90a8-348d49e92c4b;
+ Thu, 10 Sep 2020 20:22:27 +0000 (UTC)
+Received: by mail-lf1-x142.google.com with SMTP id y11so4304714lfl.5
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2020 13:22:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id:in-reply-to:references;
+ bh=n2nf5IYkeDI6RdI6d71oNNusBGrb8791Be8/WSU4WGo=;
+ b=Py/3IXhws5PM+yVYrHIdbxRBYMn3I1qIvkKGaMLSdwnCMpUarVDwXesFnQ5wtl7Lx6
+ y7E+Zr7GJVX+SldQ3Y1JkHWwlMxlkTu88vVXK5Shptom2uF0OoySU6zn/bkhAe/66Y3H
+ ZTp8mnQ9V7zmHd5cUSxyPsYzbQfvmPm3yqfjtuOdjbV64BQDU5Tl3usZa2gJxuLNB0sf
+ sH5FLCMH4tRIlxVWvwA6KKZkT6rVkF3HAVQHCRl3G9yNjrdoGRAh44fX58Jg2LWceTxC
+ ZrRqVsJANZOs+U+loeev31kQmjpKF0UeCRTtjkU8H3DYVVBYE43PCTvdX5ROCTcIjEjZ
+ zaxQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references;
+ bh=n2nf5IYkeDI6RdI6d71oNNusBGrb8791Be8/WSU4WGo=;
+ b=NnYsbkulNE8mTdMYFUoLIHgr6t9/WAayVCila5Qxe4g8zia5AOpBpJ2blG7F2tkxJS
+ wtfGsapQzQWTiqdviX9vrC9d3ljh+lHvvZZL0/+nPgnFXBB+bMi4DVqPQFkfMqQTlUmz
+ andW2CGH1QNd4b//bvQBz8Z9uqiRBKcHdeyyp+UfUCQiPdhJ91Sht/cBelF1k3jMBflQ
+ T6B3J3++SeLVyMdY7zGhxm9DIMetiUXlUbGdlbwYp9VfmUXcob/zCnlVk6s6JFYcQm7A
+ 7b4W+amD218yPKApsV1eKv4Xq/G7okpJYDk8jLFWbbE+c9XHvwiTXbVE/WMSt7xpO0iu
+ jpZg==
+X-Gm-Message-State: AOAM533ueCNqTE62u61VzKlccnMB6bj4dxtWZUMZq0krjHsBXDLACe5t
+ AcF/EUgj4iIitvWIgT5JBaBDcb0NZ7Fg+g==
+X-Google-Smtp-Source: ABdhPJwIZc5VNl81pBjgzc3nALZ4KlXWGfDDxaok3/m8HGZY4dO9fpP3yUJXuBUyTtXmIE7W8GmHsg==
+X-Received: by 2002:a19:5214:: with SMTP id m20mr4996228lfb.138.1599769346337; 
+ Thu, 10 Sep 2020 13:22:26 -0700 (PDT)
+Received: from otyshchenko.www.tendawifi.com ([212.22.223.21])
+ by smtp.gmail.com with ESMTPSA id u5sm1584375lfq.17.2020.09.10.13.22.24
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Thu, 10 Sep 2020 13:22:25 -0700 (PDT)
+From: Oleksandr Tyshchenko <olekstysh@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+ Paul Durrant <paul@xen.org>, Jan Beulich <jbeulich@suse.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
+ =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+ Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Julien Grall <julien.grall@arm.com>
+Subject: [PATCH V1 01/16] x86/ioreq: Prepare IOREQ feature for making it common
+Date: Thu, 10 Sep 2020 23:21:55 +0300
+Message-Id: <1599769330-17656-2-git-send-email-olekstysh@gmail.com>
+X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1599769330-17656-1-git-send-email-olekstysh@gmail.com>
+References: <1599769330-17656-1-git-send-email-olekstysh@gmail.com>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,31 +92,314 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 19/05/2020 08:21, Juergen Gross wrote:
-> Instead of xc_set_parameters() use xenhypfs_write() for setting
-> parameters of the hypervisor.
->
-> Signed-off-by: Juergen Gross <jgross@suse.com>
+From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 
-Something here isn't right.  XenServer's testing for XSA-304 has shown
-the following bizarre behaviour.
+As a lot of x86 code can be re-used on Arm later on, this patch
+prepares IOREQ support before moving to the common code. This way
+we will get almost a verbatim copy for a code movement.
 
-# xl set-parameters ept=
-libxl: error: libxl.c:701:libxl_set_parameters: setting parameters:
-Invalid argument
-cannot set parameters: ept=
-# xl set-parameters ept=exec-sp
-# xl set-parameters ept=no-exec-sp
-libxl: error: libxl.c:701:libxl_set_parameters: setting parameters: No
-space left on device
-cannot set parameters: ept=no-exec-sp
+This support is going to be used on Arm to be able run device
+emulator outside of Xen hypervisor.
 
-Instrumentation shows that the first two examples here enter
-parse_ept_param_runtime() with the provided string, while the third
-example doesn't.
+Signed-off-by: Julien Grall <julien.grall@arm.com>
+Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 
-Given the -ENOSPC, I'm guessing there is some overly small internal
-buffer somewhere in the hyperfs infrastructure ?
+---
+Please note, this is a split/cleanup/hardening of Julien's PoC:
+"Add support for Guest IO forwarding to a device emulator"
 
-~Andrew
+Changes RFC -> V1:
+   - new patch, was split from:
+     "[RFC PATCH V1 01/12] hvm/ioreq: Make x86's IOREQ feature common"
+   - fold the check of p->type into hvm_get_ioreq_server_range_type()
+     and make it return success/failure
+   - remove relocate_portio_handler() call from arch_hvm_ioreq_destroy()
+     in arch/x86/hvm/ioreq.c
+   - introduce arch_hvm_destroy_ioreq_server()/arch_handle_hvm_io_completion()
+---
+---
+ xen/arch/x86/hvm/ioreq.c        | 117 ++++++++++++++++++++++++++--------------
+ xen/include/asm-x86/hvm/ioreq.h |  16 ++++++
+ 2 files changed, 93 insertions(+), 40 deletions(-)
+
+diff --git a/xen/arch/x86/hvm/ioreq.c b/xen/arch/x86/hvm/ioreq.c
+index 1cc27df..d912655 100644
+--- a/xen/arch/x86/hvm/ioreq.c
++++ b/xen/arch/x86/hvm/ioreq.c
+@@ -170,6 +170,29 @@ static bool hvm_wait_for_io(struct hvm_ioreq_vcpu *sv, ioreq_t *p)
+     return true;
+ }
+ 
++bool arch_handle_hvm_io_completion(enum hvm_io_completion io_completion)
++{
++    switch ( io_completion )
++    {
++    case HVMIO_realmode_completion:
++    {
++        struct hvm_emulate_ctxt ctxt;
++
++        hvm_emulate_init_once(&ctxt, NULL, guest_cpu_user_regs());
++        vmx_realmode_emulate_one(&ctxt);
++        hvm_emulate_writeback(&ctxt);
++
++        break;
++    }
++
++    default:
++        ASSERT_UNREACHABLE();
++        break;
++    }
++
++    return true;
++}
++
+ bool handle_hvm_io_completion(struct vcpu *v)
+ {
+     struct domain *d = v->domain;
+@@ -209,19 +232,8 @@ bool handle_hvm_io_completion(struct vcpu *v)
+         return handle_pio(vio->io_req.addr, vio->io_req.size,
+                           vio->io_req.dir);
+ 
+-    case HVMIO_realmode_completion:
+-    {
+-        struct hvm_emulate_ctxt ctxt;
+-
+-        hvm_emulate_init_once(&ctxt, NULL, guest_cpu_user_regs());
+-        vmx_realmode_emulate_one(&ctxt);
+-        hvm_emulate_writeback(&ctxt);
+-
+-        break;
+-    }
+     default:
+-        ASSERT_UNREACHABLE();
+-        break;
++        return arch_handle_hvm_io_completion(io_completion);
+     }
+ 
+     return true;
+@@ -836,6 +848,12 @@ int hvm_create_ioreq_server(struct domain *d, int bufioreq_handling,
+     return rc;
+ }
+ 
++/* Called when target domain is paused */
++int arch_hvm_destroy_ioreq_server(struct hvm_ioreq_server *s)
++{
++    return p2m_set_ioreq_server(s->target, 0, s);
++}
++
+ int hvm_destroy_ioreq_server(struct domain *d, ioservid_t id)
+ {
+     struct hvm_ioreq_server *s;
+@@ -855,7 +873,7 @@ int hvm_destroy_ioreq_server(struct domain *d, ioservid_t id)
+ 
+     domain_pause(d);
+ 
+-    p2m_set_ioreq_server(d, 0, s);
++    arch_hvm_destroy_ioreq_server(s);
+ 
+     hvm_ioreq_server_disable(s);
+ 
+@@ -1215,8 +1233,7 @@ void hvm_destroy_all_ioreq_servers(struct domain *d)
+     struct hvm_ioreq_server *s;
+     unsigned int id;
+ 
+-    if ( !relocate_portio_handler(d, 0xcf8, 0xcf8, 4) )
+-        return;
++    arch_hvm_ioreq_destroy(d);
+ 
+     spin_lock_recursive(&d->arch.hvm.ioreq_server.lock);
+ 
+@@ -1239,19 +1256,15 @@ void hvm_destroy_all_ioreq_servers(struct domain *d)
+     spin_unlock_recursive(&d->arch.hvm.ioreq_server.lock);
+ }
+ 
+-struct hvm_ioreq_server *hvm_select_ioreq_server(struct domain *d,
+-                                                 ioreq_t *p)
++int hvm_get_ioreq_server_range_type(struct domain *d,
++                                    ioreq_t *p,
++                                    uint8_t *type,
++                                    uint64_t *addr)
+ {
+-    struct hvm_ioreq_server *s;
+-    uint32_t cf8;
+-    uint8_t type;
+-    uint64_t addr;
+-    unsigned int id;
++    uint32_t cf8 = d->arch.hvm.pci_cf8;
+ 
+     if ( p->type != IOREQ_TYPE_COPY && p->type != IOREQ_TYPE_PIO )
+-        return NULL;
+-
+-    cf8 = d->arch.hvm.pci_cf8;
++        return -EINVAL;
+ 
+     if ( p->type == IOREQ_TYPE_PIO &&
+          (p->addr & ~3) == 0xcfc &&
+@@ -1264,8 +1277,8 @@ struct hvm_ioreq_server *hvm_select_ioreq_server(struct domain *d,
+         reg = hvm_pci_decode_addr(cf8, p->addr, &sbdf);
+ 
+         /* PCI config data cycle */
+-        type = XEN_DMOP_IO_RANGE_PCI;
+-        addr = ((uint64_t)sbdf.sbdf << 32) | reg;
++        *type = XEN_DMOP_IO_RANGE_PCI;
++        *addr = ((uint64_t)sbdf.sbdf << 32) | reg;
+         /* AMD extended configuration space access? */
+         if ( CF8_ADDR_HI(cf8) &&
+              d->arch.cpuid->x86_vendor == X86_VENDOR_AMD &&
+@@ -1277,16 +1290,30 @@ struct hvm_ioreq_server *hvm_select_ioreq_server(struct domain *d,
+ 
+             if ( !rdmsr_safe(MSR_AMD64_NB_CFG, msr_val) &&
+                  (msr_val & (1ULL << AMD64_NB_CFG_CF8_EXT_ENABLE_BIT)) )
+-                addr |= CF8_ADDR_HI(cf8);
++                *addr |= CF8_ADDR_HI(cf8);
+         }
+     }
+     else
+     {
+-        type = (p->type == IOREQ_TYPE_PIO) ?
+-                XEN_DMOP_IO_RANGE_PORT : XEN_DMOP_IO_RANGE_MEMORY;
+-        addr = p->addr;
++        *type = (p->type == IOREQ_TYPE_PIO) ?
++                 XEN_DMOP_IO_RANGE_PORT : XEN_DMOP_IO_RANGE_MEMORY;
++        *addr = p->addr;
+     }
+ 
++    return 0;
++}
++
++struct hvm_ioreq_server *hvm_select_ioreq_server(struct domain *d,
++                                                 ioreq_t *p)
++{
++    struct hvm_ioreq_server *s;
++    uint8_t type;
++    uint64_t addr;
++    unsigned int id;
++
++    if ( hvm_get_ioreq_server_range_type(d, p, &type, &addr) )
++        return NULL;
++
+     FOR_EACH_IOREQ_SERVER(d, id, s)
+     {
+         struct rangeset *r;
+@@ -1351,7 +1378,7 @@ static int hvm_send_buffered_ioreq(struct hvm_ioreq_server *s, ioreq_t *p)
+     pg = iorp->va;
+ 
+     if ( !pg )
+-        return X86EMUL_UNHANDLEABLE;
++        return IOREQ_IO_UNHANDLED;
+ 
+     /*
+      * Return 0 for the cases we can't deal with:
+@@ -1381,7 +1408,7 @@ static int hvm_send_buffered_ioreq(struct hvm_ioreq_server *s, ioreq_t *p)
+         break;
+     default:
+         gdprintk(XENLOG_WARNING, "unexpected ioreq size: %u\n", p->size);
+-        return X86EMUL_UNHANDLEABLE;
++        return IOREQ_IO_UNHANDLED;
+     }
+ 
+     spin_lock(&s->bufioreq_lock);
+@@ -1391,7 +1418,7 @@ static int hvm_send_buffered_ioreq(struct hvm_ioreq_server *s, ioreq_t *p)
+     {
+         /* The queue is full: send the iopacket through the normal path. */
+         spin_unlock(&s->bufioreq_lock);
+-        return X86EMUL_UNHANDLEABLE;
++        return IOREQ_IO_UNHANDLED;
+     }
+ 
+     pg->buf_ioreq[pg->ptrs.write_pointer % IOREQ_BUFFER_SLOT_NUM] = bp;
+@@ -1422,7 +1449,7 @@ static int hvm_send_buffered_ioreq(struct hvm_ioreq_server *s, ioreq_t *p)
+     notify_via_xen_event_channel(d, s->bufioreq_evtchn);
+     spin_unlock(&s->bufioreq_lock);
+ 
+-    return X86EMUL_OKAY;
++    return IOREQ_IO_HANDLED;
+ }
+ 
+ int hvm_send_ioreq(struct hvm_ioreq_server *s, ioreq_t *proto_p,
+@@ -1438,7 +1465,7 @@ int hvm_send_ioreq(struct hvm_ioreq_server *s, ioreq_t *proto_p,
+         return hvm_send_buffered_ioreq(s, proto_p);
+ 
+     if ( unlikely(!vcpu_start_shutdown_deferral(curr)) )
+-        return X86EMUL_RETRY;
++        return IOREQ_IO_RETRY;
+ 
+     list_for_each_entry ( sv,
+                           &s->ioreq_vcpu_list,
+@@ -1478,11 +1505,11 @@ int hvm_send_ioreq(struct hvm_ioreq_server *s, ioreq_t *proto_p,
+             notify_via_xen_event_channel(d, port);
+ 
+             sv->pending = true;
+-            return X86EMUL_RETRY;
++            return IOREQ_IO_RETRY;
+         }
+     }
+ 
+-    return X86EMUL_UNHANDLEABLE;
++    return IOREQ_IO_UNHANDLED;
+ }
+ 
+ unsigned int hvm_broadcast_ioreq(ioreq_t *p, bool buffered)
+@@ -1496,7 +1523,7 @@ unsigned int hvm_broadcast_ioreq(ioreq_t *p, bool buffered)
+         if ( !s->enabled )
+             continue;
+ 
+-        if ( hvm_send_ioreq(s, p, buffered) == X86EMUL_UNHANDLEABLE )
++        if ( hvm_send_ioreq(s, p, buffered) == IOREQ_IO_UNHANDLED )
+             failed++;
+     }
+ 
+@@ -1515,11 +1542,21 @@ static int hvm_access_cf8(
+     return X86EMUL_UNHANDLEABLE;
+ }
+ 
++void arch_hvm_ioreq_init(struct domain *d)
++{
++    register_portio_handler(d, 0xcf8, 4, hvm_access_cf8);
++}
++
++void arch_hvm_ioreq_destroy(struct domain *d)
++{
++
++}
++
+ void hvm_ioreq_init(struct domain *d)
+ {
+     spin_lock_init(&d->arch.hvm.ioreq_server.lock);
+ 
+-    register_portio_handler(d, 0xcf8, 4, hvm_access_cf8);
++    arch_hvm_ioreq_init(d);
+ }
+ 
+ /*
+diff --git a/xen/include/asm-x86/hvm/ioreq.h b/xen/include/asm-x86/hvm/ioreq.h
+index e2588e9..151b92b 100644
+--- a/xen/include/asm-x86/hvm/ioreq.h
++++ b/xen/include/asm-x86/hvm/ioreq.h
+@@ -55,6 +55,22 @@ unsigned int hvm_broadcast_ioreq(ioreq_t *p, bool buffered);
+ 
+ void hvm_ioreq_init(struct domain *d);
+ 
++int arch_hvm_destroy_ioreq_server(struct hvm_ioreq_server *s);
++
++bool arch_handle_hvm_io_completion(enum hvm_io_completion io_completion);
++
++int hvm_get_ioreq_server_range_type(struct domain *d,
++                                    ioreq_t *p,
++                                    uint8_t *type,
++                                    uint64_t *addr);
++
++void arch_hvm_ioreq_init(struct domain *d);
++void arch_hvm_ioreq_destroy(struct domain *d);
++
++#define IOREQ_IO_HANDLED     X86EMUL_OKAY
++#define IOREQ_IO_UNHANDLED   X86EMUL_UNHANDLEABLE
++#define IOREQ_IO_RETRY       X86EMUL_RETRY
++
+ #endif /* __ASM_X86_HVM_IOREQ_H__ */
+ 
+ /*
+-- 
+2.7.4
+
 
