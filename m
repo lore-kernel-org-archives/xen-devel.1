@@ -2,63 +2,62 @@ Return-Path: <SRS0=JUJE=CT=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-10.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	UNWANTED_LANGUAGE_BODY,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4ED34C07548
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2020 17:50:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4461DC433E2
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2020 17:50:10 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D629A206BE
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2020 17:50:04 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id BB185206BE
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2020 17:50:09 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="H7OW0rMw"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D629A206BE
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="wp5kChes"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BB185206BE
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kGQhl-0006jW-FR; Thu, 10 Sep 2020 17:49:53 +0000
+	id 1kGQhq-0006nF-BQ; Thu, 10 Sep 2020 17:49:58 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=S6nR=CT=xen.org=paul@srs-us1.protection.inumbo.net>)
- id 1kGQhk-0006fz-2E
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2020 17:49:52 +0000
-X-Inumbo-ID: d581277a-2673-42c7-9da9-eaa0ff2768fb
+ id 1kGQhp-0006fz-2P
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2020 17:49:57 +0000
+X-Inumbo-ID: a552a271-8e26-45a9-9da7-6bfda67c66c8
 Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id d581277a-2673-42c7-9da9-eaa0ff2768fb;
- Thu, 10 Sep 2020 17:49:46 +0000 (UTC)
+ id a552a271-8e26-45a9-9da7-6bfda67c66c8;
+ Thu, 10 Sep 2020 17:49:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
  s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
- bh=6V76Q1js+MJI/MnngmySvDNGdA9OgOS346gnP058fqs=; b=H7OW0rMwLYByM67GyB63J3UYAM
- JWjniOoBfx43JMFCOpBvf20SFKsOTXu170KYOXq1icm5qySVgUwL99xbs0adxTYU07So0SP+y6JQk
- RRSBWullFQ0GMl3JYNugMllmv/hmE69NtCQu5ZSMgPBgHK1RJrHv5s6qPREcPTbxelhs=;
+ bh=qMHeI4q73tq3sYLBSsNp46ZTjB9OMw3BVboj3MRPDVE=; b=wp5kChespi4za5sn9aaUFWeP/K
+ ok8kc1NqEAJUL8xL/xrbpSgIdBUNepNH53jgKYbKUKV6itdqxD2Hl2Qx4C2I/Xu+1gi3jqs84UzBG
+ EFxyqXaDZxM+9ThFDJt/Poyv+oRDZAXD7j5sxrAzelmw88A0bRyOwFolznyyHW+NkIhI=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kGQhd-0002ix-Vq; Thu, 10 Sep 2020 17:49:45 +0000
+ id 1kGQhg-0002jG-AD; Thu, 10 Sep 2020 17:49:48 +0000
 Received: from host86-176-94-160.range86-176.btcentralplus.com
  ([86.176.94.160] helo=u2f063a87eabd5f.home)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kGQhd-000111-O3; Thu, 10 Sep 2020 17:49:45 +0000
+ id 1kGQhg-000111-2O; Thu, 10 Sep 2020 17:49:48 +0000
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: Paul Durrant <pdurrant@amazon.com>, Jan Beulich <jbeulich@suse.com>,
  Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
-Subject: [PATCH v7 6/8] common/grant_table: batch flush I/O TLB
-Date: Thu, 10 Sep 2020 18:49:33 +0100
-Message-Id: <20200910174935.9518-7-paul@xen.org>
+ Kevin Tian <kevin.tian@intel.com>
+Subject: [PATCH v7 8/8] iommu: stop calling IOMMU page tables 'p2m tables'
+Date: Thu, 10 Sep 2020 18:49:35 +0100
+Message-Id: <20200910174935.9518-9-paul@xen.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200910174935.9518-1-paul@xen.org>
 References: <20200910174935.9518-1-paul@xen.org>
@@ -79,383 +78,259 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Paul Durrant <pdurrant@amazon.com>
 
-This patch avoids calling iommu_iotlb_flush() for each individual GNTTABOP and
-instead calls iommu_iotlb_flush_all() at the end of a batch. This should mean
-non-singleton map/unmap operations perform better.
+It's confusing and not consistent with the terminology introduced with 'dfn_t'.
+Just call them IOMMU page tables.
 
-NOTE: A batch is the number of operations done before a pre-emption check and,
-      in the case of unmap, a TLB flush.
+Also remove a pointless check of the 'acpi_drhd_units' list in
+vtd_dump_page_table_level(). If the list is empty then IOMMU mappings would
+not have been enabled for the domain in the first place.
 
-Suggested-by: Jan Beulich <jbeulich@suse.com>
+NOTE: All calls to printk() have also been removed from
+      iommu_dump_page_tables(); the implementation specific code is now
+      responsible for all output.
+      The check for the global 'iommu_enabled' has also been replaced by an
+      ASSERT since iommu_dump_page_tables() is not registered as a key handler
+      unless IOMMU mappings are enabled.
+      Error messages are now prefixed with the name of the function.
+
 Signed-off-by: Paul Durrant <pdurrant@amazon.com>
 Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: George Dunlap <george.dunlap@citrix.com>
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>
-Cc: Julien Grall <julien@xen.org>
-Cc: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Wei Liu <wl@xen.org>
+Cc: Kevin Tian <kevin.tian@intel.com>
 
 v6:
- - Fix spelling of 'preemption'
- - Drop unneeded 'currd' stack variable
+ - Cosmetic adjustment
+ - Drop use of __func__
 
 v5:
- - Add batching to gnttab_map_grant_ref() to handle flushing before pre-
-   emption check
- - Maintain per-op flushing in the case of singletons
+ - Make sure domain id is in the output
+ - Use VTDPREFIX in output for consistency
 
-v3:
- - New in v3
+v2:
+ - Moved all output into implementation specific code
 ---
- xen/common/grant_table.c | 199 ++++++++++++++++++++++++++-------------
- 1 file changed, 133 insertions(+), 66 deletions(-)
+ xen/drivers/passthrough/amd/pci_amd_iommu.c | 20 +++++++-------
+ xen/drivers/passthrough/iommu.c             | 21 ++++-----------
+ xen/drivers/passthrough/vtd/iommu.c         | 30 ++++++++++++---------
+ xen/include/xen/iommu.h                     |  2 +-
+ 4 files changed, 33 insertions(+), 40 deletions(-)
 
-diff --git a/xen/common/grant_table.c b/xen/common/grant_table.c
-index beb6b2d40d..1e3d7a2d33 100644
---- a/xen/common/grant_table.c
-+++ b/xen/common/grant_table.c
-@@ -241,7 +241,13 @@ struct gnttab_unmap_common {
-     grant_ref_t ref;
+diff --git a/xen/drivers/passthrough/amd/pci_amd_iommu.c b/xen/drivers/passthrough/amd/pci_amd_iommu.c
+index 3390c22cf3..5fe9dc849d 100644
+--- a/xen/drivers/passthrough/amd/pci_amd_iommu.c
++++ b/xen/drivers/passthrough/amd/pci_amd_iommu.c
+@@ -491,8 +491,8 @@ static int amd_iommu_group_id(u16 seg, u8 bus, u8 devfn)
+ 
+ #include <asm/io_apic.h>
+ 
+-static void amd_dump_p2m_table_level(struct page_info* pg, int level, 
+-                                     paddr_t gpa, int indent)
++static void amd_dump_page_table_level(struct page_info *pg, int level,
++                                      paddr_t gpa, int indent)
+ {
+     paddr_t address;
+     struct amd_iommu_pte *table_vaddr;
+@@ -504,7 +504,7 @@ static void amd_dump_p2m_table_level(struct page_info* pg, int level,
+     table_vaddr = __map_domain_page(pg);
+     if ( table_vaddr == NULL )
+     {
+-        printk("Failed to map IOMMU domain page %"PRIpaddr"\n", 
++        printk("AMD IOMMU failed to map domain page %"PRIpaddr"\n",
+                 page_to_maddr(pg));
+         return;
+     }
+@@ -521,7 +521,7 @@ static void amd_dump_p2m_table_level(struct page_info* pg, int level,
+ 
+         if ( pde->next_level && (pde->next_level != (level - 1)) )
+         {
+-            printk("IOMMU p2m table error. next_level = %d, expected %d\n",
++            printk("AMD IOMMU table error. next_level = %d, expected %d\n",
+                    pde->next_level, level - 1);
+ 
+             continue;
+@@ -529,7 +529,7 @@ static void amd_dump_p2m_table_level(struct page_info* pg, int level,
+ 
+         address = gpa + amd_offset_level_address(index, level);
+         if ( pde->next_level >= 1 )
+-            amd_dump_p2m_table_level(
++            amd_dump_page_table_level(
+                 mfn_to_page(_mfn(pde->mfn)), pde->next_level,
+                 address, indent + 1);
+         else
+@@ -542,16 +542,16 @@ static void amd_dump_p2m_table_level(struct page_info* pg, int level,
+     unmap_domain_page(table_vaddr);
+ }
+ 
+-static void amd_dump_p2m_table(struct domain *d)
++static void amd_dump_page_tables(struct domain *d)
+ {
+     const struct domain_iommu *hd = dom_iommu(d);
+ 
+     if ( !hd->arch.amd.root_table )
+         return;
+ 
+-    printk("p2m table has %u levels\n", hd->arch.amd.paging_mode);
+-    amd_dump_p2m_table_level(hd->arch.amd.root_table,
+-                             hd->arch.amd.paging_mode, 0, 0);
++    printk("AMD IOMMU %pd table has %u levels\n", d, hd->arch.amd.paging_mode);
++    amd_dump_page_table_level(hd->arch.amd.root_table,
++                              hd->arch.amd.paging_mode, 0, 0);
+ }
+ 
+ static const struct iommu_ops __initconstrel _iommu_ops = {
+@@ -578,7 +578,7 @@ static const struct iommu_ops __initconstrel _iommu_ops = {
+     .suspend = amd_iommu_suspend,
+     .resume = amd_iommu_resume,
+     .crash_shutdown = amd_iommu_crash_shutdown,
+-    .dump_p2m_table = amd_dump_p2m_table,
++    .dump_page_tables = amd_dump_page_tables,
  };
  
--/* Number of unmap operations that are done between each tlb flush */
-+/* Number of map operations that are done between each preemption check */
-+#define GNTTAB_MAP_BATCH_SIZE 32
-+
-+/*
-+ * Number of unmap operations that are done between each tlb flush and
-+ * preemption check.
-+ */
- #define GNTTAB_UNMAP_BATCH_SIZE 32
+ static const struct iommu_init_ops __initconstrel _iommu_init_ops = {
+diff --git a/xen/drivers/passthrough/iommu.c b/xen/drivers/passthrough/iommu.c
+index e9b6c9a1ec..f5cd04fb3e 100644
+--- a/xen/drivers/passthrough/iommu.c
++++ b/xen/drivers/passthrough/iommu.c
+@@ -22,7 +22,7 @@
+ #include <xen/keyhandler.h>
+ #include <xsm/xsm.h>
  
+-static void iommu_dump_p2m_table(unsigned char key);
++static void iommu_dump_page_tables(unsigned char key);
  
-@@ -979,7 +985,7 @@ static unsigned int mapkind(
+ unsigned int __read_mostly iommu_dev_iotlb_timeout = 1000;
+ integer_param("iommu_dev_iotlb_timeout", iommu_dev_iotlb_timeout);
+@@ -212,7 +212,7 @@ void __hwdom_init iommu_hwdom_init(struct domain *d)
+     if ( !is_iommu_enabled(d) )
+         return;
  
- static void
- map_grant_ref(
--    struct gnttab_map_grant_ref *op)
-+    struct gnttab_map_grant_ref *op, bool do_flush, unsigned int *flush_flags)
+-    register_keyhandler('o', &iommu_dump_p2m_table, "dump iommu p2m table", 0);
++    register_keyhandler('o', &iommu_dump_page_tables, "dump iommu page tables", 0);
+ 
+     hd->platform_ops->hwdom_init(d);
+ }
+@@ -535,16 +535,12 @@ bool_t iommu_has_feature(struct domain *d, enum iommu_feature feature)
+     return is_iommu_enabled(d) && test_bit(feature, dom_iommu(d)->features);
+ }
+ 
+-static void iommu_dump_p2m_table(unsigned char key)
++static void iommu_dump_page_tables(unsigned char key)
  {
-     struct domain *ld, *rd, *owner = NULL;
-     struct grant_table *lgt, *rgt;
-@@ -1229,12 +1235,11 @@ map_grant_ref(
-         if ( kind )
-         {
-             dfn_t dfn = _dfn(mfn_x(mfn));
--            unsigned int flush_flags = 0;
-             int err;
+     struct domain *d;
+     const struct iommu_ops *ops;
  
--            err = iommu_map(ld, dfn, mfn, 1, kind, &flush_flags);
--            if ( !err )
--                err = iommu_iotlb_flush(ld, dfn, 1, flush_flags);
-+            err = iommu_map(ld, dfn, mfn, 1, kind, flush_flags);
-+            if ( do_flush && !err )
-+                err = iommu_iotlb_flush(ld, dfn, 1, *flush_flags);
-             if ( err )
-             {
-                 double_gt_unlock(lgt, rgt);
-@@ -1319,29 +1324,59 @@ static long
- gnttab_map_grant_ref(
-     XEN_GUEST_HANDLE_PARAM(gnttab_map_grant_ref_t) uop, unsigned int count)
- {
--    int i;
--    struct gnttab_map_grant_ref op;
-+    unsigned int done = 0;
-+    int rc = 0;
+-    if ( !iommu_enabled )
+-    {
+-        printk("IOMMU not enabled!\n");
+-        return;
+-    }
++    ASSERT(iommu_enabled);
  
--    for ( i = 0; i < count; i++ )
-+    while ( count )
-     {
--        if ( i && hypercall_preempt_check() )
--            return i;
-+        unsigned int i, c = min_t(unsigned int, count, GNTTAB_MAP_BATCH_SIZE);
-+        unsigned int flush_flags = 0;
+     ops = iommu_get_ops();
  
--        if ( unlikely(__copy_from_guest_offset(&op, uop, i, 1)) )
--            return -EFAULT;
-+        for ( i = 0; i < c; i++ )
-+        {
-+            struct gnttab_map_grant_ref op;
+@@ -555,14 +551,7 @@ static void iommu_dump_p2m_table(unsigned char key)
+         if ( is_hardware_domain(d) || !is_iommu_enabled(d) )
+             continue;
  
--        map_grant_ref(&op);
-+            if ( unlikely(__copy_from_guest(&op, uop, 1)) )
-+            {
-+                rc = -EFAULT;
-+                break;
-+            }
- 
--        if ( unlikely(__copy_to_guest_offset(uop, i, &op, 1)) )
--            return -EFAULT;
-+            map_grant_ref(&op, c == 1, &flush_flags);
-+
-+            if ( unlikely(__copy_to_guest(uop, &op, 1)) )
-+            {
-+                rc = -EFAULT;
-+                break;
-+            }
-+
-+            guest_handle_add_offset(uop, 1);
-+        }
-+
-+        if ( c > 1 )
-+        {
-+            int err = iommu_iotlb_flush_all(current->domain, flush_flags);
-+
-+            if ( !rc )
-+                rc = err;
-+        }
-+
-+        if ( rc )
-+            break;
-+
-+        count -= c;
-+        done += c;
-+
-+        if ( count && hypercall_preempt_check() )
-+            return done;
+-        if ( iommu_use_hap_pt(d) )
+-        {
+-            printk("\ndomain%d IOMMU p2m table shared with MMU: \n", d->domain_id);
+-            continue;
+-        }
+-
+-        printk("\ndomain%d IOMMU p2m table: \n", d->domain_id);
+-        ops->dump_p2m_table(d);
++        ops->dump_page_tables(d);
      }
  
--    return 0;
-+    return rc;
- }
- 
- static void
- unmap_common(
--    struct gnttab_unmap_common *op)
-+    struct gnttab_unmap_common *op, bool do_flush, unsigned int *flush_flags)
- {
-     domid_t          dom;
-     struct domain   *ld, *rd;
-@@ -1485,22 +1520,20 @@ unmap_common(
-     {
-         unsigned int kind;
-         dfn_t dfn = _dfn(mfn_x(op->mfn));
--        unsigned int flush_flags = 0;
-         int err = 0;
- 
-         double_gt_lock(lgt, rgt);
- 
-         kind = mapkind(lgt, rd, op->mfn);
-         if ( !kind )
--            err = iommu_unmap(ld, dfn, 1, &flush_flags);
-+            err = iommu_unmap(ld, dfn, 1, flush_flags);
-         else if ( !(kind & MAPKIND_WRITE) )
--            err = iommu_map(ld, dfn, op->mfn, 1, IOMMUF_readable,
--                            &flush_flags);
-+            err = iommu_map(ld, dfn, op->mfn, 1, IOMMUF_readable, flush_flags);
- 
-         double_gt_unlock(lgt, rgt);
- 
--        if ( !err )
--            err = iommu_iotlb_flush(ld, dfn, 1, flush_flags);
-+        if ( do_flush && !err )
-+            err = iommu_iotlb_flush(ld, dfn, 1, *flush_flags);
-         if ( err )
-             rc = GNTST_general_error;
+     rcu_read_unlock(&domlist_read_lock);
+diff --git a/xen/drivers/passthrough/vtd/iommu.c b/xen/drivers/passthrough/vtd/iommu.c
+index 58d4550a4c..faf258e699 100644
+--- a/xen/drivers/passthrough/vtd/iommu.c
++++ b/xen/drivers/passthrough/vtd/iommu.c
+@@ -2582,8 +2582,8 @@ static void vtd_resume(void)
      }
-@@ -1599,8 +1632,8 @@ unmap_common_complete(struct gnttab_unmap_common *op)
- 
- static void
- unmap_grant_ref(
--    struct gnttab_unmap_grant_ref *op,
--    struct gnttab_unmap_common *common)
-+    struct gnttab_unmap_grant_ref *op, struct gnttab_unmap_common *common,
-+    bool do_flush, unsigned int *flush_flags)
- {
-     common->host_addr = op->host_addr;
-     common->dev_bus_addr = op->dev_bus_addr;
-@@ -1612,7 +1645,7 @@ unmap_grant_ref(
-     common->rd = NULL;
-     common->mfn = INVALID_MFN;
- 
--    unmap_common(common);
-+    unmap_common(common, do_flush, flush_flags);
-     op->status = common->status;
  }
  
-@@ -1621,31 +1654,55 @@ static long
- gnttab_unmap_grant_ref(
-     XEN_GUEST_HANDLE_PARAM(gnttab_unmap_grant_ref_t) uop, unsigned int count)
+-static void vtd_dump_p2m_table_level(paddr_t pt_maddr, int level, paddr_t gpa, 
+-                                     int indent)
++static void vtd_dump_page_table_level(paddr_t pt_maddr, int level, paddr_t gpa,
++                                      int indent)
  {
--    int i, c, partial_done, done = 0;
--    struct gnttab_unmap_grant_ref op;
--    struct gnttab_unmap_common common[GNTTAB_UNMAP_BATCH_SIZE];
-+    struct domain *currd = current->domain;
-+    unsigned int done = 0;
-+    int rc = 0;
- 
--    while ( count != 0 )
-+    while ( count )
+     paddr_t address;
+     int i;
+@@ -2596,7 +2596,8 @@ static void vtd_dump_p2m_table_level(paddr_t pt_maddr, int level, paddr_t gpa,
+     pt_vaddr = map_vtd_domain_page(pt_maddr);
+     if ( pt_vaddr == NULL )
      {
--        c = min(count, (unsigned int)GNTTAB_UNMAP_BATCH_SIZE);
--        partial_done = 0;
-+        struct gnttab_unmap_common common[GNTTAB_UNMAP_BATCH_SIZE];
-+        unsigned int i, c, partial_done = 0;
-+        unsigned int flush_flags = 0;
-+
-+        c = min_t(unsigned int, count, GNTTAB_UNMAP_BATCH_SIZE);
- 
-         for ( i = 0; i < c; i++ )
-         {
-+            struct gnttab_unmap_grant_ref op;
-+
-             if ( unlikely(__copy_from_guest(&op, uop, 1)) )
--                goto fault;
--            unmap_grant_ref(&op, &common[i]);
-+            {
-+                rc = -EFAULT;
-+                break;
-+            }
-+
-+            unmap_grant_ref(&op, &common[i], c == 1, &flush_flags);
-             ++partial_done;
-+
-             if ( unlikely(__copy_field_to_guest(uop, &op, status)) )
--                goto fault;
-+            {
-+                rc = -EFAULT;
-+                break;
-+            }
-+
-             guest_handle_add_offset(uop, 1);
-         }
- 
--        gnttab_flush_tlb(current->domain);
-+        gnttab_flush_tlb(currd);
-+        if ( c > 1 )
-+        {
-+            int err = iommu_iotlb_flush_all(currd, flush_flags);
-+
-+            if ( !rc )
-+                rc = err;
-+        }
- 
-         for ( i = 0; i < partial_done; i++ )
-             unmap_common_complete(&common[i]);
- 
-+        if ( rc )
-+            break;
-+
-         count -= c;
-         done += c;
- 
-@@ -1653,20 +1710,13 @@ gnttab_unmap_grant_ref(
-             return done;
+-        printk("Failed to map VT-D domain page %"PRIpaddr"\n", pt_maddr);
++        printk(VTDPREFIX " failed to map domain page %"PRIpaddr"\n",
++               pt_maddr);
+         return;
      }
  
--    return 0;
--
--fault:
--    gnttab_flush_tlb(current->domain);
--
--    for ( i = 0; i < partial_done; i++ )
--        unmap_common_complete(&common[i]);
--    return -EFAULT;
-+    return rc;
+@@ -2612,8 +2613,8 @@ static void vtd_dump_p2m_table_level(paddr_t pt_maddr, int level, paddr_t gpa,
+ 
+         address = gpa + offset_level_address(i, level);
+         if ( next_level >= 1 ) 
+-            vtd_dump_p2m_table_level(dma_pte_addr(*pte), next_level, 
+-                                     address, indent + 1);
++            vtd_dump_page_table_level(dma_pte_addr(*pte), next_level,
++                                      address, indent + 1);
+         else
+             printk("%*sdfn: %08lx mfn: %08lx\n",
+                    indent, "",
+@@ -2624,17 +2625,20 @@ static void vtd_dump_p2m_table_level(paddr_t pt_maddr, int level, paddr_t gpa,
+     unmap_vtd_domain_page(pt_vaddr);
  }
  
- static void
- unmap_and_replace(
--    struct gnttab_unmap_and_replace *op,
--    struct gnttab_unmap_common *common)
-+    struct gnttab_unmap_and_replace *op, struct gnttab_unmap_common *common,
-+    bool do_flush, unsigned int *flush_flags)
+-static void vtd_dump_p2m_table(struct domain *d)
++static void vtd_dump_page_tables(struct domain *d)
  {
-     common->host_addr = op->host_addr;
-     common->new_addr = op->new_addr;
-@@ -1678,7 +1728,7 @@ unmap_and_replace(
-     common->rd = NULL;
-     common->mfn = INVALID_MFN;
+-    const struct domain_iommu *hd;
++    const struct domain_iommu *hd = dom_iommu(d);
  
--    unmap_common(common);
-+    unmap_common(common, do_flush, flush_flags);
-     op->status = common->status;
+-    if ( list_empty(&acpi_drhd_units) )
++    if ( iommu_use_hap_pt(d) )
++    {
++        printk(VTDPREFIX " %pd sharing EPT table\n", d);
+         return;
++    }
+ 
+-    hd = dom_iommu(d);
+-    printk("p2m table has %d levels\n", agaw_to_level(hd->arch.vtd.agaw));
+-    vtd_dump_p2m_table_level(hd->arch.vtd.pgd_maddr,
+-                             agaw_to_level(hd->arch.vtd.agaw), 0, 0);
++    printk(VTDPREFIX" %pd table has %d levels\n", d,
++           agaw_to_level(hd->arch.vtd.agaw));
++    vtd_dump_page_table_level(hd->arch.vtd.pgd_maddr,
++                              agaw_to_level(hd->arch.vtd.agaw), 0, 0);
  }
  
-@@ -1686,31 +1736,55 @@ static long
- gnttab_unmap_and_replace(
-     XEN_GUEST_HANDLE_PARAM(gnttab_unmap_and_replace_t) uop, unsigned int count)
- {
--    int i, c, partial_done, done = 0;
--    struct gnttab_unmap_and_replace op;
--    struct gnttab_unmap_common common[GNTTAB_UNMAP_BATCH_SIZE];
-+    struct domain *currd = current->domain;
-+    unsigned int done = 0;
-+    int rc = 0;
+ static int __init intel_iommu_quarantine_init(struct domain *d)
+@@ -2734,7 +2738,7 @@ static struct iommu_ops __initdata vtd_ops = {
+     .iotlb_flush = iommu_flush_iotlb_pages,
+     .iotlb_flush_all = iommu_flush_iotlb_all,
+     .get_reserved_device_memory = intel_iommu_get_reserved_device_memory,
+-    .dump_p2m_table = vtd_dump_p2m_table,
++    .dump_page_tables = vtd_dump_page_tables,
+ };
  
--    while ( count != 0 )
-+    while ( count )
-     {
--        c = min(count, (unsigned int)GNTTAB_UNMAP_BATCH_SIZE);
--        partial_done = 0;
-+        struct gnttab_unmap_common common[GNTTAB_UNMAP_BATCH_SIZE];
-+        unsigned int i, c, partial_done = 0;
-+        unsigned int flush_flags = 0;
-+
-+        c = min_t(unsigned int, count, GNTTAB_UNMAP_BATCH_SIZE);
+ const struct iommu_init_ops __initconstrel intel_iommu_init_ops = {
+diff --git a/xen/include/xen/iommu.h b/xen/include/xen/iommu.h
+index 373145266f..7a539522b1 100644
+--- a/xen/include/xen/iommu.h
++++ b/xen/include/xen/iommu.h
+@@ -276,7 +276,7 @@ struct iommu_ops {
+                                     unsigned int flush_flags);
+     int __must_check (*iotlb_flush_all)(struct domain *d);
+     int (*get_reserved_device_memory)(iommu_grdm_t *, void *);
+-    void (*dump_p2m_table)(struct domain *d);
++    void (*dump_page_tables)(struct domain *d);
  
-         for ( i = 0; i < c; i++ )
-         {
-+            struct gnttab_unmap_and_replace op;
-+
-             if ( unlikely(__copy_from_guest(&op, uop, 1)) )
--                goto fault;
--            unmap_and_replace(&op, &common[i]);
-+            {
-+                rc = -EFAULT;
-+                break;
-+            }
-+
-+            unmap_and_replace(&op, &common[i], c == 1, &flush_flags);
-             ++partial_done;
-+
-             if ( unlikely(__copy_field_to_guest(uop, &op, status)) )
--                goto fault;
-+            {
-+                rc = -EFAULT;
-+                break;
-+            }
-+
-             guest_handle_add_offset(uop, 1);
-         }
- 
--        gnttab_flush_tlb(current->domain);
-+        gnttab_flush_tlb(currd);
-+        if ( c > 1 )
-+        {
-+            int err = iommu_iotlb_flush_all(currd, flush_flags);
-+
-+            if ( !rc )
-+                rc = err;
-+        }
- 
-         for ( i = 0; i < partial_done; i++ )
-             unmap_common_complete(&common[i]);
- 
-+        if ( rc )
-+            break;
-+
-         count -= c;
-         done += c;
- 
-@@ -1718,14 +1792,7 @@ gnttab_unmap_and_replace(
-             return done;
-     }
- 
--    return 0;
--
--fault:
--    gnttab_flush_tlb(current->domain);
--
--    for ( i = 0; i < partial_done; i++ )
--        unmap_common_complete(&common[i]);
--    return -EFAULT;
-+    return rc;
- }
- 
- static int
+ #ifdef CONFIG_HAS_DEVICE_TREE
+     /*
 -- 
 2.20.1
 
