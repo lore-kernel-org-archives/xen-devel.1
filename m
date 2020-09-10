@@ -8,72 +8,75 @@ X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 69B4EC2D0E3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 36A5DC2D0A7
 	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2020 20:26:41 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1A798208A9
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2020 20:26:41 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id CC5B9221E3
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2020 20:26:40 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="S9htPGkI"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1A798208A9
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="pQLnLxd6"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CC5B9221E3
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kGT9J-0005IK-El; Thu, 10 Sep 2020 20:26:29 +0000
+	id 1kGT9K-0005Is-0K; Thu, 10 Sep 2020 20:26:30 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=vQLO=CT=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
- id 1kGT6X-0004JK-UJ
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2020 20:23:37 +0000
-X-Inumbo-ID: 7eb5e5d9-1390-4a5a-b0da-896028325392
+ id 1kGT6I-0004JK-U0
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2020 20:23:22 +0000
+X-Inumbo-ID: d5b9db3b-c25d-4e40-8632-104471869275
 Received: from mail-lj1-x243.google.com (unknown [2a00:1450:4864:20::243])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 7eb5e5d9-1390-4a5a-b0da-896028325392;
- Thu, 10 Sep 2020 20:22:48 +0000 (UTC)
-Received: by mail-lj1-x243.google.com with SMTP id y4so9845206ljk.8
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2020 13:22:48 -0700 (PDT)
+ id d5b9db3b-c25d-4e40-8632-104471869275;
+ Thu, 10 Sep 2020 20:22:44 +0000 (UTC)
+Received: by mail-lj1-x243.google.com with SMTP id a22so9837220ljp.13
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2020 13:22:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=wMz8YwG4hLPOu/VkOCrkUjbnYq7kx2pzPFeHLacOB04=;
- b=S9htPGkIJziemFEpfWHTP154Y3fr9m7c8NCDDEGbWZ7hbLg1v/vm9Po/hePEQdCQ2l
- chAcCWTcDQxrmTGQK858OMCg6p6+lDn9/SxqlYyXq04JJy+B70TQ/4rCw55oGkp96Wyu
- 7I47U5iIq1IkBndlTqNlpSvGqzy4+zGhLC6Nl4083JoY2dcRMfHzyw5Tg6Syooc7z6zq
- 9s7X5MLfFGTBrZfYG1qb5BKAZU9XaPq2zXAEeKfJDb4h0gmrXXUVNxSzmSo3dcIc/O//
- l4jWN0S8TZDr5I3i5qzXZnMRHpm1fPfLNnZhSCPYCAIpUZW3XP9TDsZO0O3Les9KUuEI
- xdvw==
+ bh=6Ks15DjS0DDqzRnab3kDGJifccvvIXZZROzSdME2Ru0=;
+ b=pQLnLxd6HijBw6T2/4r0fqA8xBIRT9t6cVrxHnIV9gMVt17VKbu3Zsxxka27qSmdBw
+ 5HrMqzO1V6mNh7eJGjj+GwUnNpFx/I73iJTzIzUblVtY4Y91FBhdhPwn8f/fXBmOrDPP
+ o4B3x9w/h5t8TuhvaMEDr3W7xLqVRDnfTd9hOpq+yZv9dOL/i7Fw6C+TEOUsjgMJ/Kvw
+ 0nprpaQK3NwC7T7uIqIjfNPECDsKDr45zdgFvnpOLYIk89jbwJx+lE8PBUz75g2ZgN1D
+ +wX0DeApF+jna8PMT0c7SRd34WEeuhcvDyuIWZn2o6EwV+mtOrCrkj91XQEIH5PLLKSw
+ xe0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=wMz8YwG4hLPOu/VkOCrkUjbnYq7kx2pzPFeHLacOB04=;
- b=GPUu5m3QElkAbi93VkBrmyIY8bmVz76mUNOhKNIBzwhqsuGR7Cu5XtVw6LuG8YcXok
- s/23UKFH2b2acPrMbWCDLjGJo0qCxS+QTO+jjq2Fwyv8+Ea36nJMZ3xHcbr0VNYNuUxW
- 3Tq1ct27SjxNSG2MUbszxaLhiu+BVTXWjyDkAuSeTBKZY1lLV6qpC5QLP5WXPjjHnkbk
- KsU91Sp8OA6r3DgNs5C19Kb+7SwzKQG28dg2BcMIce49XlD/fGOgxRbrJ7FGlFweJOxo
- 0/vsGpgqaTS9V0g9+FUY2sfoedp8yhrX4hO+E742SCmdwdex6TAIoWPEGaWzx3N35/y/
- Av4A==
-X-Gm-Message-State: AOAM531pkS/MwowWsJpv2qNvkL02xuqcCxTLCmB9rsPieOP1fEBJe/rp
- GYduTG9x521E54MVF4eiJE+fzjOu7Peeiw==
-X-Google-Smtp-Source: ABdhPJwLVRkdcLqQoTKA4OdD4dzufexmHm7MPhAolwgcsdlgJDcUfZ0fTdqT40V0S70R1EFM2q5HEA==
-X-Received: by 2002:a2e:7307:: with SMTP id o7mr5227551ljc.323.1599769367224; 
- Thu, 10 Sep 2020 13:22:47 -0700 (PDT)
+ bh=6Ks15DjS0DDqzRnab3kDGJifccvvIXZZROzSdME2Ru0=;
+ b=IkxSv5HVJdMBbwUdgI0YpOAZ3kMX2clrnOgy8HMetdDElMuhc7vQ8EeH7M7U98Ajvn
+ Oyp4rZ/b5zEsgf094gfBDqeYUuZX9YOad5yTJJRD0Zpq3zq+AjS4hlvV3a9iHmW1gjyz
+ IfPHUly1cu8HjGKTEs04FfEoExJ2+l7I0glNMb94co3F3/n+NDf2vs4dFgZ4UY5o7e8O
+ Vl29WhDiQV0AZTkCcSu/CJWKbVHnoR82vJRe/0NWNona62nlOPjD96hPwrglfzKzFZ3s
+ DLHiG4dfmdAb9OxUpjvZJQ6vIt4fpgGpIDWRwCPUAb1bUF1fzarJl5ko9NKRDR4BMLGZ
+ G7CA==
+X-Gm-Message-State: AOAM533idwie7/50DSPypeh9rhSUyUtDotyrv6JT9qeNJw7EubtbCH3D
+ +HXhJ6idC06aBymIqPQ9UbbZw5iFkZOBiA==
+X-Google-Smtp-Source: ABdhPJz9AmufEaILMskmWAfw+1Yby0aOeEljv9qOECw1anxy1bJsicUW6PMmbqgvYlENXsnfIcElZg==
+X-Received: by 2002:a2e:a16e:: with SMTP id u14mr5889108ljl.464.1599769362623; 
+ Thu, 10 Sep 2020 13:22:42 -0700 (PDT)
 Received: from otyshchenko.www.tendawifi.com ([212.22.223.21])
- by smtp.gmail.com with ESMTPSA id u5sm1584375lfq.17.2020.09.10.13.22.45
+ by smtp.gmail.com with ESMTPSA id u5sm1584375lfq.17.2020.09.10.13.22.41
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 10 Sep 2020 13:22:46 -0700 (PDT)
+ Thu, 10 Sep 2020 13:22:41 -0700 (PDT)
 From: Oleksandr Tyshchenko <olekstysh@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
- Paul Durrant <paul@xen.org>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Julien Grall <jgrall@amazon.com>
-Subject: [PATCH V1 14/16] xen/ioreq: Use guest_cmpxchg64() instead of cmpxchg()
-Date: Thu, 10 Sep 2020 23:22:08 +0300
-Message-Id: <1599769330-17656-15-git-send-email-olekstysh@gmail.com>
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Paul Durrant <paul@xen.org>, Jan Beulich <jbeulich@suse.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
+ =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+ Julien Grall <julien.grall@arm.com>
+Subject: [PATCH V1 11/16] xen/ioreq: Introduce hvm_domain_has_ioreq_server()
+Date: Thu, 10 Sep 2020 23:22:05 +0300
+Message-Id: <1599769330-17656-12-git-send-email-olekstysh@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1599769330-17656-1-git-send-email-olekstysh@gmail.com>
 References: <1599769330-17656-1-git-send-email-olekstysh@gmail.com>
@@ -92,46 +95,132 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 
-The cmpxchg() in hvm_send_buffered_ioreq() operates on memory shared
-with the emulator. In order to be on the safe side we need to switch
-to guest_cmpxchg64() to prevent a domain to DoS Xen on Arm.
+This patch introduces a helper the main purpose of which is to check
+if a domain is using IOREQ server(s).
 
-CC: Julien Grall <jgrall@amazon.com>
+On Arm the benefit is to avoid calling handle_hvm_io_completion()
+(which implies iterating over all possible IOREQ servers anyway)
+on every return in leave_hypervisor_to_guest() if there is no active
+servers for the particular domain.
+
+This involves adding an extra per-domain variable to store the count
+of servers in use.
+
+Signed-off-by: Julien Grall <julien.grall@arm.com>
 Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 
 ---
-Please note, this patch depends on the following patch on a review:
-https://patchwork.kernel.org/patch/11715559/
+Please note, this is a split/cleanup/hardening of Julien's PoC:
+"Add support for Guest IO forwarding to a device emulator"
 
 Changes RFC -> V1:
    - new patch
 ---
 ---
- xen/common/ioreq.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ xen/arch/arm/traps.c             | 15 +++++++++------
+ xen/common/ioreq.c               |  9 ++++++++-
+ xen/include/asm-arm/domain.h     |  1 +
+ xen/include/asm-x86/hvm/domain.h |  1 +
+ xen/include/xen/ioreq.h          |  5 +++++
+ 5 files changed, 24 insertions(+), 7 deletions(-)
 
+diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
+index 121942c..6b37ae1 100644
+--- a/xen/arch/arm/traps.c
++++ b/xen/arch/arm/traps.c
+@@ -2263,14 +2263,17 @@ static bool check_for_vcpu_work(void)
+     struct vcpu *v = current;
+ 
+ #ifdef CONFIG_IOREQ_SERVER
+-    bool handled;
++    if ( hvm_domain_has_ioreq_server(v->domain) )
++    {
++        bool handled;
+ 
+-    local_irq_enable();
+-    handled = handle_hvm_io_completion(v);
+-    local_irq_disable();
++        local_irq_enable();
++        handled = handle_hvm_io_completion(v);
++        local_irq_disable();
+ 
+-    if ( !handled )
+-        return true;
++        if ( !handled )
++            return true;
++    }
+ #endif
+ 
+     if ( likely(!v->arch.need_flush_to_ram) )
 diff --git a/xen/common/ioreq.c b/xen/common/ioreq.c
-index e24a481..645d8a1 100644
+index ce12751..4c3a835 100644
 --- a/xen/common/ioreq.c
 +++ b/xen/common/ioreq.c
-@@ -30,6 +30,8 @@
- #include <xen/trace.h>
- #include <xen/vpci.h>
+@@ -38,9 +38,15 @@ static void set_ioreq_server(struct domain *d, unsigned int id,
+                              struct hvm_ioreq_server *s)
+ {
+     ASSERT(id < MAX_NR_IOREQ_SERVERS);
+-    ASSERT(!s || !d->arch.hvm.ioreq_server.server[id]);
++    ASSERT((!s && d->arch.hvm.ioreq_server.server[id]) ||
++           (s && !d->arch.hvm.ioreq_server.server[id]));
  
-+#include <asm/guest_atomics.h>
+     d->arch.hvm.ioreq_server.server[id] = s;
 +
- #include <public/hvm/dm_op.h>
- #include <public/hvm/ioreq.h>
- #include <public/hvm/params.h>
-@@ -1325,7 +1327,7 @@ static int hvm_send_buffered_ioreq(struct hvm_ioreq_server *s, ioreq_t *p)
++    if ( s )
++        d->arch.hvm.ioreq_server.nr_servers ++;
++    else
++        d->arch.hvm.ioreq_server.nr_servers --;
+ }
  
-         new.read_pointer = old.read_pointer - n * IOREQ_BUFFER_SLOT_NUM;
-         new.write_pointer = old.write_pointer - n * IOREQ_BUFFER_SLOT_NUM;
--        cmpxchg(&pg->ptrs.full, old.full, new.full);
-+        guest_cmpxchg64(d, &pg->ptrs.full, old.full, new.full);
-     }
+ /*
+@@ -1395,6 +1401,7 @@ unsigned int hvm_broadcast_ioreq(ioreq_t *p, bool buffered)
+ void hvm_ioreq_init(struct domain *d)
+ {
+     spin_lock_init(&d->arch.hvm.ioreq_server.lock);
++    d->arch.hvm.ioreq_server.nr_servers = 0;
  
-     notify_via_xen_event_channel(d, s->bufioreq_evtchn);
+     arch_hvm_ioreq_init(d);
+ }
+diff --git a/xen/include/asm-arm/domain.h b/xen/include/asm-arm/domain.h
+index d1c48d7..0c0506a 100644
+--- a/xen/include/asm-arm/domain.h
++++ b/xen/include/asm-arm/domain.h
+@@ -31,6 +31,7 @@ struct hvm_domain
+     struct {
+         spinlock_t              lock;
+         struct hvm_ioreq_server *server[MAX_NR_IOREQ_SERVERS];
++        unsigned int            nr_servers;
+     } ioreq_server;
+ };
+ 
+diff --git a/xen/include/asm-x86/hvm/domain.h b/xen/include/asm-x86/hvm/domain.h
+index 765f35c..79e0afb 100644
+--- a/xen/include/asm-x86/hvm/domain.h
++++ b/xen/include/asm-x86/hvm/domain.h
+@@ -77,6 +77,7 @@ struct hvm_domain {
+     struct {
+         spinlock_t              lock;
+         struct hvm_ioreq_server *server[MAX_NR_IOREQ_SERVERS];
++        unsigned int            nr_servers;
+     } ioreq_server;
+ 
+     /* Cached CF8 for guest PCI config cycles */
+diff --git a/xen/include/xen/ioreq.h b/xen/include/xen/ioreq.h
+index 102f7e8..25ce4c2 100644
+--- a/xen/include/xen/ioreq.h
++++ b/xen/include/xen/ioreq.h
+@@ -57,6 +57,11 @@ struct hvm_ioreq_server {
+     uint8_t                bufioreq_handling;
+ };
+ 
++static inline bool hvm_domain_has_ioreq_server(const struct domain *d)
++{
++    return (d->arch.hvm.ioreq_server.nr_servers > 0);
++}
++
+ #define GET_IOREQ_SERVER(d, id) \
+     (d)->arch.hvm.ioreq_server.server[id]
+ 
 -- 
 2.7.4
 
