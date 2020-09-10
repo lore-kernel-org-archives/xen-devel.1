@@ -6,49 +6,49 @@ X-Spam-Status: No, score=-8.8 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,
 	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C464EC43461
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2020 13:56:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4F182C433E2
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2020 14:01:12 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7B89E2087C
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2020 13:56:29 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7B89E2087C
+	by mail.kernel.org (Postfix) with ESMTPS id F0C7A221E3
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2020 14:01:11 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F0C7A221E3
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kGN3e-0000cV-L8; Thu, 10 Sep 2020 13:56:14 +0000
+	id 1kGN8D-0001Wg-8K; Thu, 10 Sep 2020 14:00:57 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=dCRG=CT=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kGN3d-0000cQ-CX
- for xen-devel@lists.xen.org; Thu, 10 Sep 2020 13:56:13 +0000
-X-Inumbo-ID: 6c4f83a3-262e-4b70-b192-6e11c7c1fe09
+ (envelope-from <SRS0=ajRG=CT=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1kGN8B-0001Wb-GI
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2020 14:00:55 +0000
+X-Inumbo-ID: a3a12069-d74b-4be8-a4b5-e0cb638515dc
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 6c4f83a3-262e-4b70-b192-6e11c7c1fe09;
- Thu, 10 Sep 2020 13:56:12 +0000 (UTC)
+ id a3a12069-d74b-4be8-a4b5-e0cb638515dc;
+ Thu, 10 Sep 2020 14:00:54 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 297A0B153;
- Thu, 10 Sep 2020 13:56:27 +0000 (UTC)
-Subject: Re: Runstate hypercall and Linux KPTI issues
-To: Bertrand Marquis <Bertrand.Marquis@arm.com>
-Cc: "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>,
- Julien Grall <julien@xen.org>, Stefano Stabellini <stefanos@xilinx.com>,
- George Dunlap <George.Dunlap@citrix.com>
-References: <1844689F-814F-48AE-8179-95B0EE4E734C@arm.com>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <8b9d8bc8-254e-01db-6ba3-ec41bc9cd2c7@suse.com>
-Date: Thu, 10 Sep 2020 15:56:13 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
+ by mx2.suse.de (Postfix) with ESMTP id 6B1FEB165;
+ Thu, 10 Sep 2020 14:01:09 +0000 (UTC)
+Subject: Re: [PATCH 0/6] tools/include: adjustments to the population of xen/
+To: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>
+References: <2a9f86aa-9104-8a45-cd21-72acd693f924@suse.com>
+ <2d5579e4-74cf-fd35-da7d-a8f4de2c2c86@citrix.com>
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Message-ID: <0d17b362-3206-1fc3-8714-815f8f053065@suse.com>
+Date: Thu, 10 Sep 2020 16:00:53 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.12.0
 MIME-Version: 1.0
-In-Reply-To: <1844689F-814F-48AE-8179-95B0EE4E734C@arm.com>
-Content-Type: text/plain; charset=utf-8
+In-Reply-To: <2d5579e4-74cf-fd35-da7d-a8f4de2c2c86@citrix.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
@@ -64,19 +64,30 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 10.09.2020 15:46, Bertrand Marquis wrote:
-> Some open questions:
-> - should we allow to register an area using both hypercalls or should it be exclusive ?
+On 10.09.20 15:51, Andrew Cooper wrote:
+> On 10/09/2020 13:09, Jan Beulich wrote:
+>> While looking at what it would take to move around libelf/
+>> in the hypervisor subtree, I've run into this rule, which I
+>> think can do with a few improvements and some simplification.
+> 
+> I realise this might be a controversial move, but can we *please*
+> address this by removing our use of symlinking, rather than kicking the
+> problem down the road.
+> 
+> For header files in particular, there is no need to symlink at all.
+> Some properly formed -I runes for the compiler will do the right thing,
+> and avoid all intermediate regeneration issues.
 
-I thought it was already clarified that to a certain degree both need
-to remain usable at least in sequence, to allow transitioning control
-between entirely independent entities (bootloader -> kernel -> dump-
-kernel, for example).
+This is true only if all headers in a directory are to be shared.
+Otherwise you might end up with including a file with a name collision
+which happens to be in a directory you now specify via -I
 
-> - should we backport the support for this hypercall in older kernel releases ?
+I'm not opposed to your proposal, but this should be accompanied by a
+clean header directory structure (all or no headers in a directory meant
+to be shared).
 
-It's a bug fix to KPTI, and as such ought to be at least eligible for
-considering doing so?
 
-Jan
+Juergen
+
+
 
