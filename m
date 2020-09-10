@@ -2,100 +2,82 @@ Return-Path: <SRS0=JUJE=CT=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-9.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
-	version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D1A12C2D0A7
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2020 09:14:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 73D20C433E2
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2020 09:14:36 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 69CCF207DE
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2020 09:14:25 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 08F20208CA
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2020 09:14:35 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="UUbpsuWs"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 69CCF207DE
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="IBKab27k"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 08F20208CA
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kGIei-0007CS-7e; Thu, 10 Sep 2020 09:14:12 +0000
+	id 1kGIer-0007FT-WD; Thu, 10 Sep 2020 09:14:22 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=nWZe=CT=redhat.com=david@srs-us1.protection.inumbo.net>)
- id 1kGIeh-0007CK-30
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2020 09:14:11 +0000
-X-Inumbo-ID: 979ae280-0474-45a1-bb4c-dc08b185a586
-Received: from us-smtp-delivery-1.mimecast.com (unknown [205.139.110.120])
+ id 1kGIeq-0007CK-SF
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2020 09:14:20 +0000
+X-Inumbo-ID: 815b7d59-56cf-4b86-a282-32a878535fe7
+Received: from us-smtp-1.mimecast.com (unknown [205.139.110.61])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id 979ae280-0474-45a1-bb4c-dc08b185a586;
- Thu, 10 Sep 2020 09:14:09 +0000 (UTC)
+ id 815b7d59-56cf-4b86-a282-32a878535fe7;
+ Thu, 10 Sep 2020 09:14:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1599729249;
+ s=mimecast20190719; t=1599729258;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=q+xRLYk6ElaQMFati+s8ZI/gmN1ETJt7O5tUW1WhghI=;
- b=UUbpsuWspWBy64qJNqR0KQ6hXzfJ2U4HhrstGWZgatVuF/t/43EiKXD7Xt9Mx4x7gB2v95
- iw6/6FftSqjpVYyN7RdluG9gNiCASQp7HsW5RO1htuBE+BbLimnoRe/L3eHaY3IbVi8hBu
- Yfgv5V3T6J+CiY0lsqmu8y+db4MqiR0=
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=zFptVInSDSbB2nDLyh5K9NKtnygiDyhn7CU7AXmV4mo=;
+ b=IBKab27k1ICJ1KYiypDLgdQI71YLC5+2OcbZBblOrOXVLmjKEuC7XphMpeOdaRWuCd9xnJ
+ 0+ZEcf0llpqbuiuTVAmfXMR8dk5vBxrLqa8b4Uv7gILn07XvY3EUlSRuStX5/xcfDJJvh4
+ lIwDpL4sJeFrGuupUIvJVzr5DtH5RgY=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-308-3iuqD9l8MNi4UpNNbX7W8g-1; Thu, 10 Sep 2020 05:14:07 -0400
-X-MC-Unique: 3iuqD9l8MNi4UpNNbX7W8g-1
+ us-mta-444-O9Y06Jz4OkiDaTZaHIbCkg-1; Thu, 10 Sep 2020 05:14:16 -0400
+X-MC-Unique: O9Y06Jz4OkiDaTZaHIbCkg-1
 Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
  [10.5.11.23])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 4996418B9F00;
- Thu, 10 Sep 2020 09:14:01 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 0280418B9F00;
+ Thu, 10 Sep 2020 09:14:14 +0000 (UTC)
 Received: from t480s.redhat.com (ovpn-113-88.ams2.redhat.com [10.36.113.88])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 2A880282CA;
- Thu, 10 Sep 2020 09:13:41 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id D920727CCC;
+ Thu, 10 Sep 2020 09:14:08 +0000 (UTC)
 From: David Hildenbrand <david@redhat.com>
 To: linux-kernel@vger.kernel.org
 Cc: virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
  linux-hyperv@vger.kernel.org, xen-devel@lists.xenproject.org,
  linux-acpi@vger.kernel.org, linux-nvdimm@lists.01.org,
  linux-s390@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
- David Hildenbrand <david@redhat.com>,
- Andrew Morton <akpmt@linux-foundation.org>,
- Anton Blanchard <anton@ozlabs.org>, Ard Biesheuvel <ardb@kernel.org>,
- Baoquan He <bhe@redhat.com>,
- Benjamin Herrenschmidt <benh@kernel.crashing.org>,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>,
- Christian Borntraeger <borntraeger@de.ibm.com>,
- Dan Williams <dan.j.williams@intel.com>, Dave Jiang <dave.jiang@intel.com>,
+ David Hildenbrand <david@redhat.com>, Michal Hocko <mhocko@suse.com>,
+ Dan Williams <dan.j.williams@intel.com>, Jason Gunthorpe <jgg@ziepe.ca>,
+ Kees Cook <keescook@chromium.org>, Ard Biesheuvel <ardb@kernel.org>,
+ Pankaj Gupta <pankaj.gupta.linux@gmail.com>, Baoquan He <bhe@redhat.com>,
+ Wei Yang <richardw.yang@linux.intel.com>,
  Eric Biederman <ebiederm@xmission.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Haiyang Zhang <haiyangz@microsoft.com>, Heiko Carstens <hca@linux.ibm.com>,
- Jason Gunthorpe <jgg@ziepe.ca>, Jason Wang <jasowang@redhat.com>,
- Juergen Gross <jgross@suse.com>, Julien Grall <julien@xen.org>,
- Kees Cook <keescook@chromium.org>, "K. Y. Srinivasan" <kys@microsoft.com>,
- Len Brown <lenb@kernel.org>, Leonardo Bras <leobras.c@gmail.com>,
- Libor Pechacek <lpechacek@suse.cz>, Michael Ellerman <mpe@ellerman.id.au>,
- "Michael S. Tsirkin" <mst@redhat.com>, Michal Hocko <mhocko@suse.com>,
- Nathan Lynch <nathanl@linux.ibm.com>,
- "Oliver O'Halloran" <oohall@gmail.com>,
- Pankaj Gupta <pankaj.gupta.linux@gmail.com>,
- Paul Mackerras <paulus@samba.org>, Pingfan Liu <kernelfans@gmail.com>,
- "Rafael J. Wysocki" <rjw@rjwysocki.net>,
- =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Stephen Hemminger <sthemmin@microsoft.com>,
- Thomas Gleixner <tglx@linutronix.de>, Vasily Gorbik <gor@linux.ibm.com>,
- Vishal Verma <vishal.l.verma@intel.com>, Wei Liu <wei.liu@kernel.org>,
- Wei Yang <richardw.yang@linux.intel.com>
-Subject: [PATCH v3 0/7] mm/memory_hotplug: selective merging of system ram
- resources
-Date: Thu, 10 Sep 2020 11:13:33 +0200
-Message-Id: <20200910091340.8654-1-david@redhat.com>
+ Thomas Gleixner <tglx@linutronix.de>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, kexec@lists.infradead.org
+Subject: [PATCH v3 2/7] kernel/resource: move and rename
+ IORESOURCE_MEM_DRIVER_MANAGED
+Date: Thu, 10 Sep 2020 11:13:35 +0200
+Message-Id: <20200910091340.8654-3-david@redhat.com>
+In-Reply-To: <20200910091340.8654-1-david@redhat.com>
+References: <20200910091340.8654-1-david@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
 X-BeenThere: xen-devel@lists.xenproject.org
@@ -111,79 +93,92 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Some add_memory*() users add memory in small, contiguous memory blocks.
-Examples include virtio-mem, hyper-v balloon, and the XEN balloon.
+IORESOURCE_MEM_DRIVER_MANAGED currently uses an unused PnP bit, which is
+always set to 0 by hardware. This is far from beautiful (and confusing),
+and the bit only applies to SYSRAM. So let's move it out of the
+bus-specific (PnP) defined bits.
 
-This can quickly result in a lot of memory resources, whereby the actual
-resource boundaries are not of interest (e.g., it might be relevant for
-DIMMs, exposed via /proc/iomem to user space). We really want to merge
-added resources in this scenario where possible.
+We'll add another SYSRAM specific bit soon. If we ever need more bits for
+other purposes, we can steal some from "desc", or reshuffle/regroup what we
+have.
 
-Resources are effectively stored in a list-based tree. Having a lot of
-resources not only wastes memory, it also makes traversing that tree more
-expensive, and makes /proc/iomem explode in size (e.g., requiring
-kexec-tools to manually merge resources when creating a kdump header. The
-current kexec-tools resource count limit does not allow for more than
-~100GB of memory with a memory block size of 128MB on x86-64).
+Cc: Andrew Morton <akpm@linux-foundation.org>
+Cc: Michal Hocko <mhocko@suse.com>
+Cc: Dan Williams <dan.j.williams@intel.com>
+Cc: Jason Gunthorpe <jgg@ziepe.ca>
+Cc: Kees Cook <keescook@chromium.org>
+Cc: Ard Biesheuvel <ardb@kernel.org>
+Cc: Pankaj Gupta <pankaj.gupta.linux@gmail.com>
+Cc: Baoquan He <bhe@redhat.com>
+Cc: Wei Yang <richardw.yang@linux.intel.com>
+Cc: Eric Biederman <ebiederm@xmission.com>
+Cc: Thomas Gleixner <tglx@linutronix.de>
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: kexec@lists.infradead.org
+Signed-off-by: David Hildenbrand <david@redhat.com>
+---
+ include/linux/ioport.h | 4 +++-
+ kernel/kexec_file.c    | 2 +-
+ mm/memory_hotplug.c    | 4 ++--
+ 3 files changed, 6 insertions(+), 4 deletions(-)
 
-Let's allow to selectively merge system ram resources by specifying a
-new flag for add_memory*(). Patch #5 contains a /proc/iomem example. Only
-tested with virtio-mem.
-
-v2 -> v3:
-- "mm/memory_hotplug: prepare passing flags to add_memory() and friends"
--- Use proper __bitwise type for flags
--- Use "MHP_NONE" for empty flags
-- Rebased to latest -next, added rb's
-
-v1 -> v2:
-- I had another look at v1 after vacation and didn't like it - it felt like
-  a hack. So I want forward and added a proper flag to add_memory*(), and
-  introduce a clean (non-racy) way to mark System RAM resources mergeable.
-- "kernel/resource: move and rename IORESOURCE_MEM_DRIVER_MANAGED"
--- Clean that flag up, felt wrong in the PnP section
-- "mm/memory_hotplug: prepare passing flags to add_memory() and friends"
--- Previously sent in other context - decided to keep Wei's ack
-- "mm/memory_hotplug: MEMHP_MERGE_RESOURCE to specify merging of System
-   RAM resources"
--- Cleaner approach to get the job done by using proper flags and only
-   merging the single, specified resource
-- "virtio-mem: try to merge system ram resources"
-  "xen/balloon: try to merge system ram resources"
-  "hv_balloon: try to merge system ram resources"
--- Use the new flag MEMHP_MERGE_RESOURCE, much cleaner
-
-RFC -> v1:
-- Switch from rather generic "merge_child_mem_resources()" where a resource
-  name has to be specified to "merge_system_ram_resources().
-- Smaller comment/documentation/patch description changes/fixes
-
-David Hildenbrand (7):
-  kernel/resource: make release_mem_region_adjustable() never fail
-  kernel/resource: move and rename IORESOURCE_MEM_DRIVER_MANAGED
-  mm/memory_hotplug: prepare passing flags to add_memory() and friends
-  mm/memory_hotplug: MEMHP_MERGE_RESOURCE to specify merging of System
-    RAM resources
-  virtio-mem: try to merge system ram resources
-  xen/balloon: try to merge system ram resources
-  hv_balloon: try to merge system ram resources
-
- arch/powerpc/platforms/powernv/memtrace.c     |   2 +-
- .../platforms/pseries/hotplug-memory.c        |   2 +-
- drivers/acpi/acpi_memhotplug.c                |   3 +-
- drivers/base/memory.c                         |   3 +-
- drivers/dax/kmem.c                            |   2 +-
- drivers/hv/hv_balloon.c                       |   2 +-
- drivers/s390/char/sclp_cmd.c                  |   2 +-
- drivers/virtio/virtio_mem.c                   |   3 +-
- drivers/xen/balloon.c                         |   2 +-
- include/linux/ioport.h                        |  12 +-
- include/linux/memory_hotplug.h                |  23 +++-
- kernel/kexec_file.c                           |   2 +-
- kernel/resource.c                             | 109 ++++++++++++++----
- mm/memory_hotplug.c                           |  47 +++-----
- 14 files changed, 146 insertions(+), 68 deletions(-)
-
+diff --git a/include/linux/ioport.h b/include/linux/ioport.h
+index 52a91f5fa1a36..d7620d7c941a0 100644
+--- a/include/linux/ioport.h
++++ b/include/linux/ioport.h
+@@ -58,6 +58,9 @@ struct resource {
+ #define IORESOURCE_EXT_TYPE_BITS 0x01000000	/* Resource extended types */
+ #define IORESOURCE_SYSRAM	0x01000000	/* System RAM (modifier) */
+ 
++/* IORESOURCE_SYSRAM specific bits. */
++#define IORESOURCE_SYSRAM_DRIVER_MANAGED	0x02000000 /* Always detected via a driver. */
++
+ #define IORESOURCE_EXCLUSIVE	0x08000000	/* Userland may not map this resource */
+ 
+ #define IORESOURCE_DISABLED	0x10000000
+@@ -103,7 +106,6 @@ struct resource {
+ #define IORESOURCE_MEM_32BIT		(3<<3)
+ #define IORESOURCE_MEM_SHADOWABLE	(1<<5)	/* dup: IORESOURCE_SHADOWABLE */
+ #define IORESOURCE_MEM_EXPANSIONROM	(1<<6)
+-#define IORESOURCE_MEM_DRIVER_MANAGED	(1<<7)
+ 
+ /* PnP I/O specific bits (IORESOURCE_BITS) */
+ #define IORESOURCE_IO_16BIT_ADDR	(1<<0)
+diff --git a/kernel/kexec_file.c b/kernel/kexec_file.c
+index ca40bef75a616..dfeeed1aed084 100644
+--- a/kernel/kexec_file.c
++++ b/kernel/kexec_file.c
+@@ -520,7 +520,7 @@ static int locate_mem_hole_callback(struct resource *res, void *arg)
+ 	/* Returning 0 will take to next memory range */
+ 
+ 	/* Don't use memory that will be detected and handled by a driver. */
+-	if (res->flags & IORESOURCE_MEM_DRIVER_MANAGED)
++	if (res->flags & IORESOURCE_SYSRAM_DRIVER_MANAGED)
+ 		return 0;
+ 
+ 	if (sz < kbuf->memsz)
+diff --git a/mm/memory_hotplug.c b/mm/memory_hotplug.c
+index 4c47b68a9f4b5..8e1cd18b5cf14 100644
+--- a/mm/memory_hotplug.c
++++ b/mm/memory_hotplug.c
+@@ -105,7 +105,7 @@ static struct resource *register_memory_resource(u64 start, u64 size,
+ 	unsigned long flags =  IORESOURCE_SYSTEM_RAM | IORESOURCE_BUSY;
+ 
+ 	if (strcmp(resource_name, "System RAM"))
+-		flags |= IORESOURCE_MEM_DRIVER_MANAGED;
++		flags |= IORESOURCE_SYSRAM_DRIVER_MANAGED;
+ 
+ 	/*
+ 	 * Make sure value parsed from 'mem=' only restricts memory adding
+@@ -1160,7 +1160,7 @@ EXPORT_SYMBOL_GPL(add_memory);
+  *
+  * For this memory, no entries in /sys/firmware/memmap ("raw firmware-provided
+  * memory map") are created. Also, the created memory resource is flagged
+- * with IORESOURCE_MEM_DRIVER_MANAGED, so in-kernel users can special-case
++ * with IORESOURCE_SYSRAM_DRIVER_MANAGED, so in-kernel users can special-case
+  * this memory as well (esp., not place kexec images onto it).
+  *
+  * The resource_name (visible via /proc/iomem) has to have the format
 -- 
 2.26.2
 
