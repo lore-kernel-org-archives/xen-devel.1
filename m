@@ -7,57 +7,58 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A273DC43461
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2020 17:50:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4ED34C07548
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2020 17:50:05 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2EDC4206BE
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2020 17:50:03 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id D629A206BE
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2020 17:50:04 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="CsZ+1tcH"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2EDC4206BE
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="H7OW0rMw"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D629A206BE
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kGQhl-0006j4-43; Thu, 10 Sep 2020 17:49:53 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kGQhl-0006jW-FR; Thu, 10 Sep 2020 17:49:53 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=S6nR=CT=xen.org=paul@srs-us1.protection.inumbo.net>)
- id 1kGQhj-0006eD-Rw
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2020 17:49:51 +0000
-X-Inumbo-ID: ce6bb708-ef82-47ab-8004-51534e0af942
+ id 1kGQhk-0006fz-2E
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2020 17:49:52 +0000
+X-Inumbo-ID: d581277a-2673-42c7-9da9-eaa0ff2768fb
 Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id ce6bb708-ef82-47ab-8004-51534e0af942;
- Thu, 10 Sep 2020 17:49:41 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id d581277a-2673-42c7-9da9-eaa0ff2768fb;
+ Thu, 10 Sep 2020 17:49:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
  s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
- bh=22FRfQNCAkwAjlVmLY20OL+Ek6oQxsoYvI5RGmP29So=; b=CsZ+1tcHCG9cWGAqvPJ/e82ioH
- ECzTEJL9lHDZbDBs1X1AUqQQrtVDMb1XNO5oCO3NGgMSoouU9pjt/CDuK/q6NOZjpHomqWzfgqq6V
- e9kBU3lysgcKuyIEDZEepv3RTGhW6sghSIGQG7fnhZ1mTY0pFdyMSlkWPgzLCLyMtOkY=;
+ bh=6V76Q1js+MJI/MnngmySvDNGdA9OgOS346gnP058fqs=; b=H7OW0rMwLYByM67GyB63J3UYAM
+ JWjniOoBfx43JMFCOpBvf20SFKsOTXu170KYOXq1icm5qySVgUwL99xbs0adxTYU07So0SP+y6JQk
+ RRSBWullFQ0GMl3JYNugMllmv/hmE69NtCQu5ZSMgPBgHK1RJrHv5s6qPREcPTbxelhs=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kGQhZ-0002iY-0l; Thu, 10 Sep 2020 17:49:41 +0000
+ id 1kGQhd-0002ix-Vq; Thu, 10 Sep 2020 17:49:45 +0000
 Received: from host86-176-94-160.range86-176.btcentralplus.com
  ([86.176.94.160] helo=u2f063a87eabd5f.home)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kGQhY-000111-Oy; Thu, 10 Sep 2020 17:49:40 +0000
+ id 1kGQhd-000111-O3; Thu, 10 Sep 2020 17:49:45 +0000
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
-Cc: Paul Durrant <pdurrant@amazon.com>,
-	Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH v7 3/8] iommu: flush I/O TLB if iommu_map() or iommu_unmap()
- fail
-Date: Thu, 10 Sep 2020 18:49:30 +0100
-Message-Id: <20200910174935.9518-4-paul@xen.org>
+Cc: Paul Durrant <pdurrant@amazon.com>, Jan Beulich <jbeulich@suse.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
+Subject: [PATCH v7 6/8] common/grant_table: batch flush I/O TLB
+Date: Thu, 10 Sep 2020 18:49:33 +0100
+Message-Id: <20200910174935.9518-7-paul@xen.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200910174935.9518-1-paul@xen.org>
 References: <20200910174935.9518-1-paul@xen.org>
@@ -78,108 +79,383 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Paul Durrant <pdurrant@amazon.com>
 
-This patch adds a full I/O TLB flush to the error paths of iommu_map() and
-iommu_unmap().
+This patch avoids calling iommu_iotlb_flush() for each individual GNTTABOP and
+instead calls iommu_iotlb_flush_all() at the end of a batch. This should mean
+non-singleton map/unmap operations perform better.
 
-Without this change callers need constructs such as:
+NOTE: A batch is the number of operations done before a pre-emption check and,
+      in the case of unmap, a TLB flush.
 
-rc = iommu_map/unmap(...)
-err = iommu_flush(...)
-if ( !rc )
-  rc = err;
-
-With this change, it can be simplified to:
-
-rc = iommu_map/unmap(...)
-if ( !rc )
-  rc = iommu_flush(...)
-
-because, if the map or unmap fails the flush will be unnecessary. This saves
-a stack variable and generally makes the call sites tidier.
-
+Suggested-by: Jan Beulich <jbeulich@suse.com>
 Signed-off-by: Paul Durrant <pdurrant@amazon.com>
 Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: George Dunlap <george.dunlap@citrix.com>
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>
+Cc: Julien Grall <julien@xen.org>
+Cc: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Wei Liu <wl@xen.org>
 
 v6:
- - Remove stray blank
+ - Fix spelling of 'preemption'
+ - Drop unneeded 'currd' stack variable
 
 v5:
- - Avoid unnecessary flushing if 'page_order' is 0
- - Add missing indirection on 'flush_flags'
+ - Add batching to gnttab_map_grant_ref() to handle flushing before pre-
+   emption check
+ - Maintain per-op flushing in the case of singletons
 
-v2:
- - New in v2
+v3:
+ - New in v3
 ---
- xen/drivers/passthrough/iommu.c | 34 +++++++++++++++++----------------
- 1 file changed, 18 insertions(+), 16 deletions(-)
+ xen/common/grant_table.c | 199 ++++++++++++++++++++++++++-------------
+ 1 file changed, 133 insertions(+), 66 deletions(-)
 
-diff --git a/xen/drivers/passthrough/iommu.c b/xen/drivers/passthrough/iommu.c
-index 660dc5deb2..eb65631d59 100644
---- a/xen/drivers/passthrough/iommu.c
-+++ b/xen/drivers/passthrough/iommu.c
-@@ -274,6 +274,13 @@ int iommu_map(struct domain *d, dfn_t dfn, mfn_t mfn,
-         break;
+diff --git a/xen/common/grant_table.c b/xen/common/grant_table.c
+index beb6b2d40d..1e3d7a2d33 100644
+--- a/xen/common/grant_table.c
++++ b/xen/common/grant_table.c
+@@ -241,7 +241,13 @@ struct gnttab_unmap_common {
+     grant_ref_t ref;
+ };
+ 
+-/* Number of unmap operations that are done between each tlb flush */
++/* Number of map operations that are done between each preemption check */
++#define GNTTAB_MAP_BATCH_SIZE 32
++
++/*
++ * Number of unmap operations that are done between each tlb flush and
++ * preemption check.
++ */
+ #define GNTTAB_UNMAP_BATCH_SIZE 32
+ 
+ 
+@@ -979,7 +985,7 @@ static unsigned int mapkind(
+ 
+ static void
+ map_grant_ref(
+-    struct gnttab_map_grant_ref *op)
++    struct gnttab_map_grant_ref *op, bool do_flush, unsigned int *flush_flags)
+ {
+     struct domain *ld, *rd, *owner = NULL;
+     struct grant_table *lgt, *rgt;
+@@ -1229,12 +1235,11 @@ map_grant_ref(
+         if ( kind )
+         {
+             dfn_t dfn = _dfn(mfn_x(mfn));
+-            unsigned int flush_flags = 0;
+             int err;
+ 
+-            err = iommu_map(ld, dfn, mfn, 1, kind, &flush_flags);
+-            if ( !err )
+-                err = iommu_iotlb_flush(ld, dfn, 1, flush_flags);
++            err = iommu_map(ld, dfn, mfn, 1, kind, flush_flags);
++            if ( do_flush && !err )
++                err = iommu_iotlb_flush(ld, dfn, 1, *flush_flags);
+             if ( err )
+             {
+                 double_gt_unlock(lgt, rgt);
+@@ -1319,29 +1324,59 @@ static long
+ gnttab_map_grant_ref(
+     XEN_GUEST_HANDLE_PARAM(gnttab_map_grant_ref_t) uop, unsigned int count)
+ {
+-    int i;
+-    struct gnttab_map_grant_ref op;
++    unsigned int done = 0;
++    int rc = 0;
+ 
+-    for ( i = 0; i < count; i++ )
++    while ( count )
+     {
+-        if ( i && hypercall_preempt_check() )
+-            return i;
++        unsigned int i, c = min_t(unsigned int, count, GNTTAB_MAP_BATCH_SIZE);
++        unsigned int flush_flags = 0;
+ 
+-        if ( unlikely(__copy_from_guest_offset(&op, uop, i, 1)) )
+-            return -EFAULT;
++        for ( i = 0; i < c; i++ )
++        {
++            struct gnttab_map_grant_ref op;
+ 
+-        map_grant_ref(&op);
++            if ( unlikely(__copy_from_guest(&op, uop, 1)) )
++            {
++                rc = -EFAULT;
++                break;
++            }
+ 
+-        if ( unlikely(__copy_to_guest_offset(uop, i, &op, 1)) )
+-            return -EFAULT;
++            map_grant_ref(&op, c == 1, &flush_flags);
++
++            if ( unlikely(__copy_to_guest(uop, &op, 1)) )
++            {
++                rc = -EFAULT;
++                break;
++            }
++
++            guest_handle_add_offset(uop, 1);
++        }
++
++        if ( c > 1 )
++        {
++            int err = iommu_iotlb_flush_all(current->domain, flush_flags);
++
++            if ( !rc )
++                rc = err;
++        }
++
++        if ( rc )
++            break;
++
++        count -= c;
++        done += c;
++
++        if ( count && hypercall_preempt_check() )
++            return done;
      }
  
-+    /*
-+     * Something went wrong so, if we were dealing with more than a single
-+     * page, flush everything and clear flush flags.
-+     */
-+    if ( page_order && unlikely(rc) && !iommu_iotlb_flush_all(d, *flush_flags) )
-+        *flush_flags = 0;
+-    return 0;
++    return rc;
+ }
+ 
+ static void
+ unmap_common(
+-    struct gnttab_unmap_common *op)
++    struct gnttab_unmap_common *op, bool do_flush, unsigned int *flush_flags)
+ {
+     domid_t          dom;
+     struct domain   *ld, *rd;
+@@ -1485,22 +1520,20 @@ unmap_common(
+     {
+         unsigned int kind;
+         dfn_t dfn = _dfn(mfn_x(op->mfn));
+-        unsigned int flush_flags = 0;
+         int err = 0;
+ 
+         double_gt_lock(lgt, rgt);
+ 
+         kind = mapkind(lgt, rd, op->mfn);
+         if ( !kind )
+-            err = iommu_unmap(ld, dfn, 1, &flush_flags);
++            err = iommu_unmap(ld, dfn, 1, flush_flags);
+         else if ( !(kind & MAPKIND_WRITE) )
+-            err = iommu_map(ld, dfn, op->mfn, 1, IOMMUF_readable,
+-                            &flush_flags);
++            err = iommu_map(ld, dfn, op->mfn, 1, IOMMUF_readable, flush_flags);
+ 
+         double_gt_unlock(lgt, rgt);
+ 
+-        if ( !err )
+-            err = iommu_iotlb_flush(ld, dfn, 1, flush_flags);
++        if ( do_flush && !err )
++            err = iommu_iotlb_flush(ld, dfn, 1, *flush_flags);
+         if ( err )
+             rc = GNTST_general_error;
+     }
+@@ -1599,8 +1632,8 @@ unmap_common_complete(struct gnttab_unmap_common *op)
+ 
+ static void
+ unmap_grant_ref(
+-    struct gnttab_unmap_grant_ref *op,
+-    struct gnttab_unmap_common *common)
++    struct gnttab_unmap_grant_ref *op, struct gnttab_unmap_common *common,
++    bool do_flush, unsigned int *flush_flags)
+ {
+     common->host_addr = op->host_addr;
+     common->dev_bus_addr = op->dev_bus_addr;
+@@ -1612,7 +1645,7 @@ unmap_grant_ref(
+     common->rd = NULL;
+     common->mfn = INVALID_MFN;
+ 
+-    unmap_common(common);
++    unmap_common(common, do_flush, flush_flags);
+     op->status = common->status;
+ }
+ 
+@@ -1621,31 +1654,55 @@ static long
+ gnttab_unmap_grant_ref(
+     XEN_GUEST_HANDLE_PARAM(gnttab_unmap_grant_ref_t) uop, unsigned int count)
+ {
+-    int i, c, partial_done, done = 0;
+-    struct gnttab_unmap_grant_ref op;
+-    struct gnttab_unmap_common common[GNTTAB_UNMAP_BATCH_SIZE];
++    struct domain *currd = current->domain;
++    unsigned int done = 0;
++    int rc = 0;
+ 
+-    while ( count != 0 )
++    while ( count )
+     {
+-        c = min(count, (unsigned int)GNTTAB_UNMAP_BATCH_SIZE);
+-        partial_done = 0;
++        struct gnttab_unmap_common common[GNTTAB_UNMAP_BATCH_SIZE];
++        unsigned int i, c, partial_done = 0;
++        unsigned int flush_flags = 0;
 +
-     return rc;
- }
++        c = min_t(unsigned int, count, GNTTAB_UNMAP_BATCH_SIZE);
  
-@@ -283,14 +290,8 @@ int iommu_legacy_map(struct domain *d, dfn_t dfn, mfn_t mfn,
-     unsigned int flush_flags = 0;
-     int rc = iommu_map(d, dfn, mfn, page_order, flags, &flush_flags);
- 
--    if ( !this_cpu(iommu_dont_flush_iotlb) )
--    {
--        int err = iommu_iotlb_flush(d, dfn, (1u << page_order),
--                                    flush_flags);
--
--        if ( !rc )
--            rc = err;
--    }
-+    if ( !this_cpu(iommu_dont_flush_iotlb) && !rc )
-+        rc = iommu_iotlb_flush(d, dfn, (1u << page_order), flush_flags);
- 
-     return rc;
- }
-@@ -330,6 +331,13 @@ int iommu_unmap(struct domain *d, dfn_t dfn, unsigned int page_order,
+         for ( i = 0; i < c; i++ )
+         {
++            struct gnttab_unmap_grant_ref op;
++
+             if ( unlikely(__copy_from_guest(&op, uop, 1)) )
+-                goto fault;
+-            unmap_grant_ref(&op, &common[i]);
++            {
++                rc = -EFAULT;
++                break;
++            }
++
++            unmap_grant_ref(&op, &common[i], c == 1, &flush_flags);
+             ++partial_done;
++
+             if ( unlikely(__copy_field_to_guest(uop, &op, status)) )
+-                goto fault;
++            {
++                rc = -EFAULT;
++                break;
++            }
++
+             guest_handle_add_offset(uop, 1);
          }
+ 
+-        gnttab_flush_tlb(current->domain);
++        gnttab_flush_tlb(currd);
++        if ( c > 1 )
++        {
++            int err = iommu_iotlb_flush_all(currd, flush_flags);
++
++            if ( !rc )
++                rc = err;
++        }
+ 
+         for ( i = 0; i < partial_done; i++ )
+             unmap_common_complete(&common[i]);
+ 
++        if ( rc )
++            break;
++
+         count -= c;
+         done += c;
+ 
+@@ -1653,20 +1710,13 @@ gnttab_unmap_grant_ref(
+             return done;
      }
  
-+    /*
-+     * Something went wrong so, if we were dealing with more than a single
-+     * page, flush everything and clear flush flags.
-+     */
-+    if ( page_order && unlikely(rc) && !iommu_iotlb_flush_all(d, *flush_flags) )
-+        *flush_flags = 0;
-+
-     return rc;
- }
- 
-@@ -338,14 +346,8 @@ int iommu_legacy_unmap(struct domain *d, dfn_t dfn, unsigned int page_order)
-     unsigned int flush_flags = 0;
-     int rc = iommu_unmap(d, dfn, page_order, &flush_flags);
- 
--    if ( !this_cpu(iommu_dont_flush_iotlb) )
--    {
--        int err = iommu_iotlb_flush(d, dfn, (1u << page_order),
--                                    flush_flags);
+-    return 0;
 -
--        if ( !rc )
--            rc = err;
--    }
-+    if ( !this_cpu(iommu_dont_flush_iotlb) && !rc )
-+        rc = iommu_iotlb_flush(d, dfn, (1u << page_order), flush_flags);
- 
-     return rc;
+-fault:
+-    gnttab_flush_tlb(current->domain);
+-
+-    for ( i = 0; i < partial_done; i++ )
+-        unmap_common_complete(&common[i]);
+-    return -EFAULT;
++    return rc;
  }
+ 
+ static void
+ unmap_and_replace(
+-    struct gnttab_unmap_and_replace *op,
+-    struct gnttab_unmap_common *common)
++    struct gnttab_unmap_and_replace *op, struct gnttab_unmap_common *common,
++    bool do_flush, unsigned int *flush_flags)
+ {
+     common->host_addr = op->host_addr;
+     common->new_addr = op->new_addr;
+@@ -1678,7 +1728,7 @@ unmap_and_replace(
+     common->rd = NULL;
+     common->mfn = INVALID_MFN;
+ 
+-    unmap_common(common);
++    unmap_common(common, do_flush, flush_flags);
+     op->status = common->status;
+ }
+ 
+@@ -1686,31 +1736,55 @@ static long
+ gnttab_unmap_and_replace(
+     XEN_GUEST_HANDLE_PARAM(gnttab_unmap_and_replace_t) uop, unsigned int count)
+ {
+-    int i, c, partial_done, done = 0;
+-    struct gnttab_unmap_and_replace op;
+-    struct gnttab_unmap_common common[GNTTAB_UNMAP_BATCH_SIZE];
++    struct domain *currd = current->domain;
++    unsigned int done = 0;
++    int rc = 0;
+ 
+-    while ( count != 0 )
++    while ( count )
+     {
+-        c = min(count, (unsigned int)GNTTAB_UNMAP_BATCH_SIZE);
+-        partial_done = 0;
++        struct gnttab_unmap_common common[GNTTAB_UNMAP_BATCH_SIZE];
++        unsigned int i, c, partial_done = 0;
++        unsigned int flush_flags = 0;
++
++        c = min_t(unsigned int, count, GNTTAB_UNMAP_BATCH_SIZE);
+ 
+         for ( i = 0; i < c; i++ )
+         {
++            struct gnttab_unmap_and_replace op;
++
+             if ( unlikely(__copy_from_guest(&op, uop, 1)) )
+-                goto fault;
+-            unmap_and_replace(&op, &common[i]);
++            {
++                rc = -EFAULT;
++                break;
++            }
++
++            unmap_and_replace(&op, &common[i], c == 1, &flush_flags);
+             ++partial_done;
++
+             if ( unlikely(__copy_field_to_guest(uop, &op, status)) )
+-                goto fault;
++            {
++                rc = -EFAULT;
++                break;
++            }
++
+             guest_handle_add_offset(uop, 1);
+         }
+ 
+-        gnttab_flush_tlb(current->domain);
++        gnttab_flush_tlb(currd);
++        if ( c > 1 )
++        {
++            int err = iommu_iotlb_flush_all(currd, flush_flags);
++
++            if ( !rc )
++                rc = err;
++        }
+ 
+         for ( i = 0; i < partial_done; i++ )
+             unmap_common_complete(&common[i]);
+ 
++        if ( rc )
++            break;
++
+         count -= c;
+         done += c;
+ 
+@@ -1718,14 +1792,7 @@ gnttab_unmap_and_replace(
+             return done;
+     }
+ 
+-    return 0;
+-
+-fault:
+-    gnttab_flush_tlb(current->domain);
+-
+-    for ( i = 0; i < partial_done; i++ )
+-        unmap_common_complete(&common[i]);
+-    return -EFAULT;
++    return rc;
+ }
+ 
+ static int
 -- 
 2.20.1
 
