@@ -2,81 +2,61 @@ Return-Path: <SRS0=VPcc=CU=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-11.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 19F14C43461
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2020 10:36:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AF247C43461
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2020 10:38:25 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B566720578
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2020 10:36:22 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 501762076D
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2020 10:38:25 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="WCJjup/g"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B566720578
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
+	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="3r3rWlbX"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 501762076D
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kGgPd-0002Xe-SV; Fri, 11 Sep 2020 10:36:13 +0000
+	id 1kGgRN-00036p-AU; Fri, 11 Sep 2020 10:38:01 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=mhfz=CU=redhat.com=david@srs-us1.protection.inumbo.net>)
- id 1kGgPc-0002T8-2N
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2020 10:36:12 +0000
-X-Inumbo-ID: 4e310f45-c55b-4608-bfb1-9827b8f57987
-Received: from us-smtp-delivery-1.mimecast.com (unknown [207.211.31.81])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id 4e310f45-c55b-4608-bfb1-9827b8f57987;
- Fri, 11 Sep 2020 10:36:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1599820570;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=YsfsAQ2XAkLrSeK5gDaCbmO+kEOKaYFgY1Wng1dGBy0=;
- b=WCJjup/g4XMJhYHmlOHSzrGCsNzg7sqnGfw2C6J++ic7gJE2MG/90ElFxSHL6J+75ziRiu
- vCjCgrWduwUOal7oIiHfXXliBOu0c6Ovc3Apx7r4ibWp3NyS3VU/GuxEejB4UWgBOBpIQu
- ICk0gEuey9sSDGx93CwgESfhJCHN9gE=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-583-vEEKprzxPqCtphnzsAQlyw-1; Fri, 11 Sep 2020 06:36:07 -0400
-X-MC-Unique: vEEKprzxPqCtphnzsAQlyw-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
- [10.5.11.13])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 98CBD6408E;
- Fri, 11 Sep 2020 10:36:04 +0000 (UTC)
-Received: from t480s.redhat.com (ovpn-113-186.ams2.redhat.com [10.36.113.186])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 444B481C46;
- Fri, 11 Sep 2020 10:36:01 +0000 (UTC)
-From: David Hildenbrand <david@redhat.com>
-To: linux-kernel@vger.kernel.org
-Cc: virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
- linux-hyperv@vger.kernel.org, xen-devel@lists.xenproject.org,
- linux-acpi@vger.kernel.org, linux-nvdimm@lists.01.org,
- linux-s390@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
- David Hildenbrand <david@redhat.com>, Wei Liu <wei.liu@kernel.org>,
- Michal Hocko <mhocko@suse.com>, "K. Y. Srinivasan" <kys@microsoft.com>,
- Haiyang Zhang <haiyangz@microsoft.com>,
- Stephen Hemminger <sthemmin@microsoft.com>,
- Pankaj Gupta <pankaj.gupta.linux@gmail.com>, Baoquan He <bhe@redhat.com>,
- Wei Yang <richardw.yang@linux.intel.com>
-Subject: [PATCH v4 8/8] hv_balloon: try to merge system ram resources
-Date: Fri, 11 Sep 2020 12:34:59 +0200
-Message-Id: <20200911103459.10306-9-david@redhat.com>
-In-Reply-To: <20200911103459.10306-1-david@redhat.com>
-References: <20200911103459.10306-1-david@redhat.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=D+4E=CU=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
+ id 1kGgRL-00036h-Uo
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2020 10:37:59 +0000
+X-Inumbo-ID: d24ad5d8-269d-4136-b9c1-cb94e056bf81
+Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id d24ad5d8-269d-4136-b9c1-cb94e056bf81;
+ Fri, 11 Sep 2020 10:37:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=xenproject.org; s=20200302mail; h=Date:From:Message-Id:Subject:To;
+ bh=z69Vq9/YXhbAsBmATRTrOusHH6rtoLMgbtqlCU8lRh0=; b=3r3rWlbXEvPz16RHgRsdP695/p
+ jLanGNuU+9+IbEaBMLa8SLpRhRNz/f5bpdUiuSzt3NrxagqtOlVBGfrjDoq2LBODcYWwtAwHTfq4m
+ 6IBCCKlvJZ/oMp6u7f7MG/DRI19TPvMZoi+YYGm44OrSANe5d7wLDWWUSggbd/Kl+6KI=;
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kGgRI-0005qj-96; Fri, 11 Sep 2020 10:37:56 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kGgRI-0002cS-2D; Fri, 11 Sep 2020 10:37:56 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1kGgRI-00084d-1j; Fri, 11 Sep 2020 10:37:56 +0000
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Subject: [xen-unstable bisection] complete test-amd64-amd64-pygrub
+Message-Id: <E1kGgRI-00084d-1j@osstest.test-lab.xenproject.org>
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Fri, 11 Sep 2020 10:37:56 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -90,39 +70,165 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Let's try to merge system ram resources we add, to minimize the number
-of resources in /proc/iomem. We don't care about the boundaries of
-individual chunks we added.
+branch xen-unstable
+xenbranch xen-unstable
+job test-amd64-amd64-pygrub
+testid debian-di-install
 
-Reviewed-by: Wei Liu <wei.liu@kernel.org>
-Cc: Andrew Morton <akpm@linux-foundation.org>
-Cc: Michal Hocko <mhocko@suse.com>
-Cc: "K. Y. Srinivasan" <kys@microsoft.com>
-Cc: Haiyang Zhang <haiyangz@microsoft.com>
-Cc: Stephen Hemminger <sthemmin@microsoft.com>
-Cc: Wei Liu <wei.liu@kernel.org>
-Cc: Pankaj Gupta <pankaj.gupta.linux@gmail.com>
-Cc: Baoquan He <bhe@redhat.com>
-Cc: Wei Yang <richardw.yang@linux.intel.com>
-Signed-off-by: David Hildenbrand <david@redhat.com>
----
- drivers/hv/hv_balloon.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Tree: linux git://xenbits.xen.org/linux-pvops.git
+Tree: linuxfirmware git://xenbits.xen.org/osstest/linux-firmware.git
+Tree: qemu git://xenbits.xen.org/qemu-xen-traditional.git
+Tree: qemuu git://xenbits.xen.org/qemu-xen.git
+Tree: xen git://xenbits.xen.org/xen.git
 
-diff --git a/drivers/hv/hv_balloon.c b/drivers/hv/hv_balloon.c
-index 3c0d52e244520..b64d2efbefe71 100644
---- a/drivers/hv/hv_balloon.c
-+++ b/drivers/hv/hv_balloon.c
-@@ -726,7 +726,7 @@ static void hv_mem_hot_add(unsigned long start, unsigned long size,
- 
- 		nid = memory_add_physaddr_to_nid(PFN_PHYS(start_pfn));
- 		ret = add_memory(nid, PFN_PHYS((start_pfn)),
--				(HA_CHUNK << PAGE_SHIFT), MHP_NONE);
-+				(HA_CHUNK << PAGE_SHIFT), MEMHP_MERGE_RESOURCE);
- 
- 		if (ret) {
- 			pr_err("hot_add memory failed error is %d\n", ret);
--- 
-2.26.2
+*** Found and reproduced problem changeset ***
+
+  Bug is in tree:  xen git://xenbits.xen.org/xen.git
+  Bug introduced:  f55893171feb64f712d2892a288e3f3dc70f39d8
+  Bug not present: 735749c8316d2f8b074e38138989336cfdec65f2
+  Last fail repro: http://logs.test-lab.xenproject.org/osstest/logs/154109/
+
+
+  commit f55893171feb64f712d2892a288e3f3dc70f39d8
+  Author: Juergen Gross <jgross@suse.com>
+  Date:   Fri Aug 28 17:07:28 2020 +0200
+  
+      tools/libxc: rename all libxenguest sources to xg_*
+      
+      Some sources of libxenguest are named xg_*.c and some xc_*.c. Rename
+      the xc_*.c files to xg_*.c.
+      
+      Signed-off-by: Juergen Gross <jgross@suse.com>
+      Acked-by: Wei Liu <wl@xen.org>
+
+
+For bisection revision-tuple graph see:
+   http://logs.test-lab.xenproject.org/osstest/results/bisect/xen-unstable/test-amd64-amd64-pygrub.debian-di-install.html
+Revision IDs in each graph node refer, respectively, to the Trees above.
+
+----------------------------------------
+Running cs-bisection-step --graph-out=/home/logs/results/bisect/xen-unstable/test-amd64-amd64-pygrub.debian-di-install --summary-out=tmp/154109.bisection-summary --basis-template=154016 --blessings=real,real-bisect xen-unstable test-amd64-amd64-pygrub debian-di-install
+Searching for failure / basis pass:
+ 154058 fail [host=chardonnay1] / 154016 [host=godello1] 153983 [host=rimava1] 153957 [host=rimava1] 153931 [host=fiano1] 153906 [host=chardonnay0] 153882 [host=pinot0] 153845 [host=godello0] 153813 [host=elbling1] 153788 [host=elbling0] 153770 [host=godello1] 153758 [host=albana1] 153653 [host=huxelrebe0] 153619 [host=fiano0] 153602 [host=godello0] 153591 [host=albana0] 153551 ok.
+Failure / basis pass flights: 154058 / 153551
+(tree with no url: minios)
+(tree with no url: ovmf)
+(tree with no url: seabios)
+Tree: linux git://xenbits.xen.org/linux-pvops.git
+Tree: linuxfirmware git://xenbits.xen.org/osstest/linux-firmware.git
+Tree: qemu git://xenbits.xen.org/qemu-xen-traditional.git
+Tree: qemuu git://xenbits.xen.org/qemu-xen.git
+Tree: xen git://xenbits.xen.org/xen.git
+Latest c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 ea6d3cd1ed79d824e605a70c3626bc437c386260 89002866bb6c6f26024f015820c8f52012f95cf2
+Basis pass c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 ea6d3cd1ed79d824e605a70c3626bc437c386260 afe018e041ec112d90a8b4e6ed607d22aa06f280
+Generating revisions with ./adhoc-revtuple-generator  git://xenbits.xen.org/linux-pvops.git#c3038e718a19fc596f7b1baba0f83d5146dc7784-c3038e718a19fc596f7b1baba0f83d5146dc7784 git://xenbits.xen.org/osstest/linux-firmware.git#c530a75c1e6a472b0eb9558310b518f0dfcd8860-c530a75c1e6a472b0eb9558310b518f0dfcd8860 git://xenbits.xen.org/qemu-xen-traditional.git#3d273dd05e51e5a1ffba3d98c7437ee84e8f8764-3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 git://xenbits.xen.org/qemu-xen.git#ea6d3cd1ed79d824e605a70c3626bc4\
+ 37c386260-ea6d3cd1ed79d824e605a70c3626bc437c386260 git://xenbits.xen.org/xen.git#afe018e041ec112d90a8b4e6ed607d22aa06f280-89002866bb6c6f26024f015820c8f52012f95cf2
+Loaded 5001 nodes in revision graph
+Searching for test results:
+ 153400 [host=godello0]
+ 153437 [host=elbling0]
+ 153468 [host=godello1]
+ 153494 [host=chardonnay0]
+ 153526 [host=huxelrebe1]
+ 153551 pass c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 ea6d3cd1ed79d824e605a70c3626bc437c386260 afe018e041ec112d90a8b4e6ed607d22aa06f280
+ 153591 [host=albana0]
+ 153602 [host=godello0]
+ 153619 [host=fiano0]
+ 153653 [host=huxelrebe0]
+ 153758 [host=albana1]
+ 153770 [host=godello1]
+ 153788 [host=elbling0]
+ 153813 [host=elbling1]
+ 153845 [host=godello0]
+ 153882 [host=pinot0]
+ 153906 [host=chardonnay0]
+ 153931 [host=fiano1]
+ 153957 [host=rimava1]
+ 153983 [host=rimava1]
+ 154016 [host=godello1]
+ 154036 fail c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 ea6d3cd1ed79d824e605a70c3626bc437c386260 89002866bb6c6f26024f015820c8f52012f95cf2
+ 154079 pass c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 ea6d3cd1ed79d824e605a70c3626bc437c386260 afe018e041ec112d90a8b4e6ed607d22aa06f280
+ 154082 fail c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 ea6d3cd1ed79d824e605a70c3626bc437c386260 89002866bb6c6f26024f015820c8f52012f95cf2
+ 154084 pass c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 ea6d3cd1ed79d824e605a70c3626bc437c386260 0c293ad3a2842452bff0fe0515cc9046a60afa5e
+ 154086 fail c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 ea6d3cd1ed79d824e605a70c3626bc437c386260 dd33fd2e81a0e83707cc203b974e501fa336590f
+ 154058 fail c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 ea6d3cd1ed79d824e605a70c3626bc437c386260 89002866bb6c6f26024f015820c8f52012f95cf2
+ 154088 fail c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 ea6d3cd1ed79d824e605a70c3626bc437c386260 f55893171feb64f712d2892a288e3f3dc70f39d8
+ 154091 pass c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 ea6d3cd1ed79d824e605a70c3626bc437c386260 790f2dfb598acb5f3f3f75b47c5e3ab642c16478
+ 154095 pass c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 ea6d3cd1ed79d824e605a70c3626bc437c386260 6797d1ed45a4089a22f7278bb45cddb6fd861d72
+ 154098 pass c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 ea6d3cd1ed79d824e605a70c3626bc437c386260 735749c8316d2f8b074e38138989336cfdec65f2
+ 154100 fail c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 ea6d3cd1ed79d824e605a70c3626bc437c386260 f55893171feb64f712d2892a288e3f3dc70f39d8
+ 154103 pass c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 ea6d3cd1ed79d824e605a70c3626bc437c386260 735749c8316d2f8b074e38138989336cfdec65f2
+ 154105 fail c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 ea6d3cd1ed79d824e605a70c3626bc437c386260 f55893171feb64f712d2892a288e3f3dc70f39d8
+ 154108 pass c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 ea6d3cd1ed79d824e605a70c3626bc437c386260 735749c8316d2f8b074e38138989336cfdec65f2
+ 154109 fail c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 ea6d3cd1ed79d824e605a70c3626bc437c386260 f55893171feb64f712d2892a288e3f3dc70f39d8
+Searching for interesting versions
+ Result found: flight 153551 (pass), for basis pass
+ For basis failure, parent search stopping at c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 ea6d3cd1ed79d824e605a70c3626bc437c386260 735749c8316d2f8b074e38138989336cfdec65f2, results HASH(0x562730c56d18) HASH(0x562730c66068) HASH(0x562730c5ea38) For basis failure, parent search stopping at c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 ea6d3cd1e\
+ d79d824e605a70c3626bc437c386260 6797d1ed45a4089a22f7278bb45cddb6fd861d72, results HASH(0x562730c62bf0) For basis failure, parent search stopping at c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 ea6d3cd1ed79d824e605a70c3626bc437c386260 790f2dfb598acb5f3f3f75b47c5e3ab642c16478, results HASH(0x562730cf5ce8) For basis failure, parent search stopping at c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f\
+ 0dfcd8860 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 ea6d3cd1ed79d824e605a70c3626bc437c386260 0c293ad3a2842452bff0fe0515cc9046a60afa5e, results HASH(0x562730c6fbd8) For basis failure, parent search stopping at c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 ea6d3cd1ed79d824e605a70c3626bc437c386260 afe018e041ec112d90a8b4e6ed607d22aa06f280, results HASH(0x562730c5f360) HASH(0x562730c6c3a8) Result found: flight 154036 (fail), \
+ for basis failure (at ancestor ~294)
+ Repro found: flight 154079 (pass), for basis pass
+ Repro found: flight 154082 (fail), for basis failure
+ 0 revisions at c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 ea6d3cd1ed79d824e605a70c3626bc437c386260 735749c8316d2f8b074e38138989336cfdec65f2
+No revisions left to test, checking graph state.
+ Result found: flight 154098 (pass), for last pass
+ Result found: flight 154100 (fail), for first failure
+ Repro found: flight 154103 (pass), for last pass
+ Repro found: flight 154105 (fail), for first failure
+ Repro found: flight 154108 (pass), for last pass
+ Repro found: flight 154109 (fail), for first failure
+
+*** Found and reproduced problem changeset ***
+
+  Bug is in tree:  xen git://xenbits.xen.org/xen.git
+  Bug introduced:  f55893171feb64f712d2892a288e3f3dc70f39d8
+  Bug not present: 735749c8316d2f8b074e38138989336cfdec65f2
+  Last fail repro: http://logs.test-lab.xenproject.org/osstest/logs/154109/
+
+
+  commit f55893171feb64f712d2892a288e3f3dc70f39d8
+  Author: Juergen Gross <jgross@suse.com>
+  Date:   Fri Aug 28 17:07:28 2020 +0200
+  
+      tools/libxc: rename all libxenguest sources to xg_*
+      
+      Some sources of libxenguest are named xg_*.c and some xc_*.c. Rename
+      the xc_*.c files to xg_*.c.
+      
+      Signed-off-by: Juergen Gross <jgross@suse.com>
+      Acked-by: Wei Liu <wl@xen.org>
+
+Revision graph left in /home/logs/results/bisect/xen-unstable/test-amd64-amd64-pygrub.debian-di-install.{dot,ps,png,html,svg}.
+----------------------------------------
+154109: tolerable ALL FAIL
+
+flight 154109 xen-unstable real-bisect [real]
+http://logs.test-lab.xenproject.org/osstest/logs/154109/
+
+Failures :-/ but no regressions.
+
+Tests which did not succeed,
+including tests which could not be run:
+ test-amd64-amd64-pygrub      10 debian-di-install       fail baseline untested
+
+
+jobs:
+ test-amd64-amd64-pygrub                                      fail    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
 
 
