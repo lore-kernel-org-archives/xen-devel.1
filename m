@@ -2,54 +2,70 @@ Return-Path: <SRS0=VPcc=CU=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.7 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EA37BC433E2
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2020 12:38:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AD7BDC433E2
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2020 12:40:48 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8C74D221F1
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2020 12:38:01 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8C74D221F1
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 502A1206DB
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2020 12:40:48 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="X+rKW6S/"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 502A1206DB
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kGiJK-0005rr-Px; Fri, 11 Sep 2020 12:37:50 +0000
+	id 1kGiLw-0006gL-AA; Fri, 11 Sep 2020 12:40:32 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=eh3a=CU=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kGiJK-0005rk-CD
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2020 12:37:50 +0000
-X-Inumbo-ID: 05f3f862-7075-42cd-a446-da13323c5b52
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=vrAB=CU=citrix.com=george.dunlap@srs-us1.protection.inumbo.net>)
+ id 1kGiLv-0006fc-3M
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2020 12:40:31 +0000
+X-Inumbo-ID: f28dd61f-9d27-45fb-ae9b-b0e0d187e4c1
+Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 05f3f862-7075-42cd-a446-da13323c5b52;
- Fri, 11 Sep 2020 12:37:49 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 191ADADAD;
- Fri, 11 Sep 2020 12:38:04 +0000 (UTC)
-Subject: Re: [PATCH] x86/PV: make post-migration page state consistent
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-References: <f7ed53c1-768c-cc71-a432-553b56f7f0a7@suse.com>
- <2e715145-e0b5-07b9-0090-6e1e9a849f33@citrix.com>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <792f8867-55b5-3ce4-e609-c6f75c35a860@suse.com>
-Date: Fri, 11 Sep 2020 14:37:51 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.0
+ id f28dd61f-9d27-45fb-ae9b-b0e0d187e4c1;
+ Fri, 11 Sep 2020 12:40:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1599828030;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=2vtEDHW6LGAocMGYC7G5FyGDCoa3gvEx5lWvLZZsoz0=;
+ b=X+rKW6S/PH8ff+iDkz6M1foyPBTLhpTL3gyxJl2Ps2IXa7NKMQTU3I/8
+ StcH9O/nEFCsWtL0ttA9EHSNGR5IxXo7kPBm62oY+vHFGe3jnVJSXXGSY
+ WWtA/CLsDScIjlE8eMXmVltNgLNoXE8iRhI/hOzYANarK5ETyBRF3ftBC A=;
+Authentication-Results: esa2.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none
+IronPort-SDR: mp7M4Ck9v/m0/QPCNBdgw46gEHlCY2pRLrxIgHXyvZ+plo0AMfAQjxFjXlzsopLpM2oZgCYm8n
+ rBb9ZbckW+JRvqUi1IOzDJnDqaUT9tUwBpb43z9bVrs4wSwsIC3uLxNeJ2xMjCWXegubXeM30y
+ 7UTq/4eoV8S+JxGCeXIGj6uK6wBEwYvpoqtv5Xp+MI9gI+ZPdX8A8UJN8KhpqAg445uqARaE4u
+ Qw+J0CucH9QI1IgS7tA36qJi7PZQKDYQyp7mhb+lZtpcxZrLnuAqKzsDHZTLP6ZZPI6vqmfnFC
+ ddg=
+X-SBRS: 2.7
+X-MesageID: 26497501
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.76,415,1592884800"; d="scan'208";a="26497501"
+From: George Dunlap <george.dunlap@citrix.com>
+To: <xen-devel@lists.xenproject.org>
+CC: George Dunlap <george.dunlap@citrix.com>
+Subject: [PATCH 8/8] Clean up index page
+Date: Fri, 11 Sep 2020 13:40:09 +0100
+Message-ID: <20200911124009.3760032-9-george.dunlap@citrix.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20200911124009.3760032-1-george.dunlap@citrix.com>
+References: <20200911124009.3760032-1-george.dunlap@citrix.com>
 MIME-Version: 1.0
-In-Reply-To: <2e715145-e0b5-07b9-0090-6e1e9a849f33@citrix.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,66 +79,66 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 11.09.2020 13:55, Andrew Cooper wrote:
-> On 11/09/2020 11:34, Jan Beulich wrote:
->> When a page table page gets de-validated, its type reference count drops
->> to zero (and PGT_validated gets cleared), but its type remains intact.
->> XEN_DOMCTL_getpageframeinfo3, therefore, so far reported prior usage for
->> such pages. An intermediate write to such a page via e.g.
->> MMU_NORMAL_PT_UPDATE, however, would transition the page's type to
->> PGT_writable_page, thus altering what XEN_DOMCTL_getpageframeinfo3 would
->> return. In libxc the decision which pages to normalize / localize
->> depends solely on the type returned from the domctl. As a result without
->> further precautions the guest won't be able to tell whether such a page
->> has had its (apparent) PTE entries transitioned to the new MFNs.
-> 
-> I'm afraid I don't follow what the problem is.
-> 
-> Yes - unvalidated pages probably ought to be consistently NOTAB, so this
-> is probably a good change, but I don't see how it impacts the migration
-> logic.
+Get rid of "change this here" comments.
 
-It's not the migration logic itself that's impacted, but the state
-of guest pages after migration. I'm afraid I can only try to expand
-on the original description.
+Break into two sections: "Regulations", which are rules, and "Guides",
+which are suggestions.
 
-Case 1: Once an Ln page has been unvalidated, due to the described
-behavior the migration code in libxc will normalize and then localize
-it. Therefore the guest could go and directly try to use it as a
-page table again. This should work as long as all of the entries in
-the page can still be successfully validated (i.e. unless the guest
-itself has made changes to the state of other pages).
+Remove unused indexes.
 
-Case 2: Once an Ln page has been unvalidated, the guest for whatever
-reason still writes to it through e.g. MMU_NORMAL_PT_UPDATE. Prior
-to migration, and provided the new entry can be validated (and no
-other reference page has changed state), the page can still be
-converted to a proper page table one again. If, however, migration
-occurs inbetween, the page now won't get normalized and then
-localized. The MFNs in it are unlikely to make sense anymore, and
-hence an attempt to make the page a page table again is likely to
-fail (or if it doesn't fail the result is unlikely to be what's
-intended).
+Signed-off-by: George Dunlap <george.dunlap@citrix.com>
+---
+ source/index.rst | 26 +++++++++++++++++++-------
+ 1 file changed, 19 insertions(+), 7 deletions(-)
 
-Since there's no way to make case 2 "work", the only choice is to
-make case 1 behave like case 2, in order for the behavior to be
-predictable / consistent.
+diff --git a/source/index.rst b/source/index.rst
+index c8b45d8..41f92fb 100644
+--- a/source/index.rst
++++ b/source/index.rst
+@@ -1,16 +1,26 @@
+ .. XenProject Governance documentation master file, created by
+    sphinx-quickstart on Tue Sep  8 12:10:02 2020.
+-   You can adapt this file completely to your liking, but it should at least
+-   contain the root `toctree` directive.
+ 
+-Welcome to XenProject Governance's documentation!
+-=================================================
++Welcome to XenProject's Governance Documents
++============================================
++
++The Regulations section contains documents
++that regulate the operation of the XenProject,
++including minimum acceptable behavior
++and possible responses to unacceptable behavior.
++The Guides section contains documents describing ideal behavior
++that we strive for as a community.
+ 
+ .. toctree::
+    :maxdepth: 2
+-   :caption: Contents:
++   :caption: Regulations:
+ 
+    code-of-conduct
++
++.. toctree::
++   :maxdepth: 2
++   :caption: Guides:
++
+    communication-guide
+    code-review-guide
+    communication-practice
+@@ -19,6 +29,8 @@ Welcome to XenProject Governance's documentation!
+ Indices and tables
+ ==================
+ 
+-* :ref:`genindex`
+-* :ref:`modindex`
++.. Comment out the index for now, but leave it here so we can think
++   about adding it back in later
++   * :ref:`genindex`
++
+ * :ref:`search`
+-- 
+2.24.3 (Apple Git-128)
 
-> We already have to cope with a page really changing types in parallel
-> with the normalise/localise logic (that was a "fun" one to debug), which
-> is why errors in that logic are specifically not fatal while the guest
-> is live - the frame gets re-marked as dirty, and deferred until the next
-> round.
-> 
-> Errors encountered after the VM has been paused are fatal.
-> 
-> However, at no point, even with an unvalidated pagetable type, can the
-> contents of the page be anything other than legal PTEs.  (I think)
-
-Correct, because in order to write to the page one has to either
-make it a page table one again (and then write through hypercall
-or for L1 through PTWR) or the mmu-normal-pt-update would first
-convert the page to a writable one.
-
-Jan
 
