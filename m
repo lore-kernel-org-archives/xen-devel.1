@@ -1,72 +1,68 @@
-Return-Path: <SRS0=JUJE=CT=lists.xenproject.org=xen-devel-bounces@kernel.org>
+Return-Path: <SRS0=VPcc=CU=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-5.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BF62BC433E2
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2020 22:53:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9B66EC43461
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2020 00:33:42 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 49DF2208CA
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2020 22:53:21 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 347A8208FE
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2020 00:33:42 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="SR7R1JYF"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 49DF2208CA
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="f/l3ZWLy"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 347A8208FE
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kGVQp-0001Ym-3X; Thu, 10 Sep 2020 22:52:43 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kGWzz-00025Y-ON; Fri, 11 Sep 2020 00:33:07 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=IPm7=CT=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
- id 1kGVQo-0001Yh-9l
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2020 22:52:42 +0000
-X-Inumbo-ID: c82e7941-2b24-43df-85f4-55ae1958500e
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id c82e7941-2b24-43df-85f4-55ae1958500e;
- Thu, 10 Sep 2020 22:52:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
- Content-Transfer-Encoding:Content-Type:Message-ID:To;
- bh=Or4iKSkXiZLeh8VriMmJdDfemrkb7xNCniuk76SoxKk=; b=SR7R1JYFi0Xth3zcj0+ZYAYoI7
- qhiczTMg85aIkSVsvLFbdYcvmm/gQtIm/VSw/KHmn4IMSoGLKHPGodBuPRvjsvbr+KaWIi0uQZlTr
- dmd2dpRGfwHrKMRZmmY9+P6J9AVlCSRk5HnOzSlFFtB88YSt7XOT2e6xPRb5DNCeyozk=;
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kGVQm-0000ig-9F; Thu, 10 Sep 2020 22:52:40 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kGVQm-00036M-1G; Thu, 10 Sep 2020 22:52:40 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1kGVQm-0001ru-0n; Thu, 10 Sep 2020 22:52:40 +0000
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-154074-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+ <SRS0=uMuY=CU=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1kGWzy-00025T-Si
+ for xen-devel@lists.xen.org; Fri, 11 Sep 2020 00:33:07 +0000
+X-Inumbo-ID: 197e7add-e1eb-4e21-9ddb-ee2a49840858
+Received: from mail.kernel.org (unknown [198.145.29.99])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 197e7add-e1eb-4e21-9ddb-ee2a49840858;
+ Fri, 11 Sep 2020 00:33:05 +0000 (UTC)
+Received: from localhost (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id A237F208FE;
+ Fri, 11 Sep 2020 00:33:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1599784385;
+ bh=pOom+B5I2E72/Z01rFwFdXMdIj3bOGjqy1POd1IkJJY=;
+ h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+ b=f/l3ZWLyt0vyyUyUA7MmbS++4F7wLKFmDe1/Kk737RATi3R4QJt/ICN03X40Pkz6U
+ G4DoQ7/O9S9ZH6buQGujpI5cvKqnJnyg68QJUmSvdIL+6ttOc9LrnTkkhPKq+mzuM0
+ 4mre9kHah1b7guowYxj33tJp8ZJGzmDzstm40gqk=
+Date: Thu, 10 Sep 2020 17:33:04 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
+To: Jan Beulich <jbeulich@suse.com>
+cc: Bertrand Marquis <Bertrand.Marquis@arm.com>, 
+ "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>, 
+ Julien Grall <julien@xen.org>, Stefano Stabellini <stefanos@xilinx.com>, 
+ George Dunlap <George.Dunlap@citrix.com>, jgross@suse.com
+Subject: Re: Runstate hypercall and Linux KPTI issues
+In-Reply-To: <b7c7b1c5-c7c0-d7c9-b300-9a26e3b73746@suse.com>
+Message-ID: <alpine.DEB.2.21.2009100914300.28991@sstabellini-ThinkPad-T480s>
+References: <1844689F-814F-48AE-8179-95B0EE4E734C@arm.com>
+ <8b9d8bc8-254e-01db-6ba3-ec41bc9cd2c7@suse.com>
+ <2AD6A14F-AA25-464D-9E9E-6067F2F43F29@arm.com>
+ <b7c7b1c5-c7c0-d7c9-b300-9a26e3b73746@suse.com>
+User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 154074: tolerable all pass - PUSHED
-X-Osstest-Failures: xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
- xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
- xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
- xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
- xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This: xen=cc13835377debe4e300c5f5f11f8f78920778c4e
-X-Osstest-Versions-That: xen=89002866bb6c6f26024f015820c8f52012f95cf2
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Thu, 10 Sep 2020 22:52:40 +0000
+Content-Type: text/plain; charset=US-ASCII
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,60 +76,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-flight 154074 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/154074/
+On Thu, 10 Sep 2020, Jan Beulich wrote:
+> >>> - should we backport the support for this hypercall in older kernel releases ?
+> >>
+> >> It's a bug fix to KPTI, and as such ought to be at least eligible for
+> >> considering doing so?
+> > 
+> > That will mean also backport in Linux. What should be the scope ?
+> 
+> All longterm and stable trees which are affected, as I think is usual.
 
-Failures :-/ but no regressions.
+From a Linux perspective, we should fix this as soon as possible: we
+should backport a patch to make the usage of the runstate hypercall
+conditional on KPTI being disabled on ARM.
 
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+Then, when available in Xen, we should backport the usage of the new
+hypercall with a check to detect if it is available -- do not assume it
+is available, users might not update Xen, but might update Linux.
 
-version targeted for testing:
- xen                  cc13835377debe4e300c5f5f11f8f78920778c4e
-baseline version:
- xen                  89002866bb6c6f26024f015820c8f52012f95cf2
-
-Last test of basis   154030  2020-09-09 19:01:21 Z    1 days
-Testing same since   154074  2020-09-10 20:00:24 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Juergen Gross <jgross@suse.com>
-
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-libvirt                                     pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/xen.git
-   89002866bb..cc13835377  cc13835377debe4e300c5f5f11f8f78920778c4e -> smoke
+We have to do this in two stages for a couple of reasons. It is best not
+to wait for Xen-side changes to fix Linux any longer. And also, a Linux
+fix is best implemented independently anyway: Linux should benefit from
+the Xen improvements when available but not rely on their presence to
+work.
 
