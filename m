@@ -7,41 +7,41 @@ X-Spam-Status: No, score=-8.2 required=3.0 tests=BAYES_00,
 	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9AEFCC433E2
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2020 10:34:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 926EAC2D0E4
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2020 10:35:32 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4B1732076C
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2020 10:34:58 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4B1732076C
+	by mail.kernel.org (Postfix) with ESMTPS id 40E7020578
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2020 10:35:32 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 40E7020578
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kGgNs-00027V-AM; Fri, 11 Sep 2020 10:34:24 +0000
+	id 1kGgOp-0002Al-Lp; Fri, 11 Sep 2020 10:35:23 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=eh3a=CU=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kGgNs-00027Q-2u
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2020 10:34:24 +0000
-X-Inumbo-ID: dd147413-d4f6-49d3-b74a-6821e55a1981
+ id 1kGgOo-0002Ad-Jg
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2020 10:35:22 +0000
+X-Inumbo-ID: 63d758b8-d93f-4c25-9ded-35bd71d3ed25
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id dd147413-d4f6-49d3-b74a-6821e55a1981;
- Fri, 11 Sep 2020 10:34:23 +0000 (UTC)
+ id 63d758b8-d93f-4c25-9ded-35bd71d3ed25;
+ Fri, 11 Sep 2020 10:35:21 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id A3912B1EE;
- Fri, 11 Sep 2020 10:34:37 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id BDA7CAD2F;
+ Fri, 11 Sep 2020 10:35:36 +0000 (UTC)
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
  =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 From: Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH] x86/PV: make post-migration page state consistent
-Message-ID: <f7ed53c1-768c-cc71-a432-553b56f7f0a7@suse.com>
-Date: Fri, 11 Sep 2020 12:34:24 +0200
+Subject: [PATCH] x86/PV: fold exit paths of ptwr_do_page_fault()
+Message-ID: <839f005e-e36a-14be-c2bb-83cb999e783b@suse.com>
+Date: Fri, 11 Sep 2020 12:35:24 +0200
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.12.0
 MIME-Version: 1.0
@@ -61,45 +61,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-When a page table page gets de-validated, its type reference count drops
-to zero (and PGT_validated gets cleared), but its type remains intact.
-XEN_DOMCTL_getpageframeinfo3, therefore, so far reported prior usage for
-such pages. An intermediate write to such a page via e.g.
-MMU_NORMAL_PT_UPDATE, however, would transition the page's type to
-PGT_writable_page, thus altering what XEN_DOMCTL_getpageframeinfo3 would
-return. In libxc the decision which pages to normalize / localize
-depends solely on the type returned from the domctl. As a result without
-further precautions the guest won't be able to tell whether such a page
-has had its (apparent) PTE entries transitioned to the new MFNs.
-
-Add a check of PGT_validated, thus consistently avoiding normalization /
-localization in the tool stack.
-
-Alongside using XEN_DOMCTL_PFINFO_NOTAB instead of plain zero for the
-change at hand, also change the variable's initializer to use this
-constant, too. Take the opportunity and also adjust its type.
+One less aspect to keep an eye on for things to stay in sync.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
+---
+FAOD I did consider (and even try) reducing the scope of ptwr_ctxt at
+the same occasion - this results in worse code with gcc 10 at least, as
+the compiler then indeed defers populating of the struct, and hence
+needs to retain the respective function arguments across prior calls.
 
---- a/xen/arch/x86/domctl.c
-+++ b/xen/arch/x86/domctl.c
-@@ -215,7 +215,8 @@ long arch_do_domctl(
+--- a/xen/arch/x86/pv/ro-page-fault.c
++++ b/xen/arch/x86/pv/ro-page-fault.c
+@@ -262,29 +262,23 @@ static int ptwr_do_page_fault(struct x86
+         .pte = pte,
+     };
+     struct page_info *page;
+-    int rc;
++    int rc = X86EMUL_UNHANDLEABLE;
  
-         for ( i = 0; i < num; ++i )
-         {
--            unsigned long gfn = 0, type = 0;
-+            unsigned long gfn = 0;
-+            unsigned int type = XEN_DOMCTL_PFINFO_NOTAB;
-             struct page_info *page;
-             p2m_type_t t;
+     page = get_page_from_mfn(l1e_get_mfn(pte), current->domain);
+     if ( !page )
+         return X86EMUL_UNHANDLEABLE;
  
-@@ -255,6 +256,8 @@ long arch_do_domctl(
+-    if ( !page_lock(page) )
++    if ( page_lock(page) )
+     {
+-        put_page(page);
+-        return X86EMUL_UNHANDLEABLE;
+-    }
++        if ( (page->u.inuse.type_info & PGT_type_mask) == PGT_l1_page_table )
++        {
++            ctxt->data = &ptwr_ctxt;
++            rc = x86_emulate(ctxt, &ptwr_emulate_ops);
++        }
  
-                 if ( page->u.inuse.type_info & PGT_pinned )
-                     type |= XEN_DOMCTL_PFINFO_LPINTAB;
-+                else if ( !(page->u.inuse.type_info & PGT_validated) )
-+                    type = XEN_DOMCTL_PFINFO_NOTAB;
+-    if ( (page->u.inuse.type_info & PGT_type_mask) != PGT_l1_page_table )
+-    {
+         page_unlock(page);
+-        put_page(page);
+-        return X86EMUL_UNHANDLEABLE;
+     }
  
-                 if ( page->count_info & PGC_broken )
-                     type = XEN_DOMCTL_PFINFO_BROKEN;
+-    ctxt->data = &ptwr_ctxt;
+-    rc = x86_emulate(ctxt, &ptwr_emulate_ops);
+-
+-    page_unlock(page);
+     put_page(page);
+ 
+     return rc;
 
