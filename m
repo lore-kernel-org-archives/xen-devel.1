@@ -2,52 +2,81 @@ Return-Path: <SRS0=VPcc=CU=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.2 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-9.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 926EAC2D0E4
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2020 10:35:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BA49BC2D0E0
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2020 10:35:44 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 40E7020578
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2020 10:35:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 40E7020578
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 772A4204EC
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2020 10:35:44 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="JfR6jOYi"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 772A4204EC
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kGgOp-0002Al-Lp; Fri, 11 Sep 2020 10:35:23 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kGgOy-0002D5-Vl; Fri, 11 Sep 2020 10:35:32 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=eh3a=CU=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kGgOo-0002Ad-Jg
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2020 10:35:22 +0000
-X-Inumbo-ID: 63d758b8-d93f-4c25-9ded-35bd71d3ed25
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 63d758b8-d93f-4c25-9ded-35bd71d3ed25;
- Fri, 11 Sep 2020 10:35:21 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id BDA7CAD2F;
- Fri, 11 Sep 2020 10:35:36 +0000 (UTC)
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-From: Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH] x86/PV: fold exit paths of ptwr_do_page_fault()
-Message-ID: <839f005e-e36a-14be-c2bb-83cb999e783b@suse.com>
-Date: Fri, 11 Sep 2020 12:35:24 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.0
+ (envelope-from <SRS0=mhfz=CU=redhat.com=david@srs-us1.protection.inumbo.net>)
+ id 1kGgOx-0002Cd-Oa
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2020 10:35:31 +0000
+X-Inumbo-ID: 49631f92-dfa2-43a7-8dcc-ee29990afe9a
+Received: from us-smtp-delivery-1.mimecast.com (unknown [205.139.110.61])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id 49631f92-dfa2-43a7-8dcc-ee29990afe9a;
+ Fri, 11 Sep 2020 10:35:30 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1599820529;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=0L/VNlFzuDB/95oeV+NVSs6BIkKkE+sXG0xqekszlyk=;
+ b=JfR6jOYiw3UCOJU9euKxR5EoIJPTpfFLau8hy4H9NxkFdi30U6Xm4faJMfnAq0UHZZVc4x
+ rNGsN0dQCwBOuXy5crrwYdQpThJluYISwNcL6CwbBOSmT7/7Vd8oBwBzsQSZiyjmAnmcCe
+ XVlHorzCoRWWRBaJuT22gy84A4rXoWw=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-228-_3yaQ7fkNFKX3yCvQmaZsw-1; Fri, 11 Sep 2020 06:35:25 -0400
+X-MC-Unique: _3yaQ7fkNFKX3yCvQmaZsw-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id BE71310082E6;
+ Fri, 11 Sep 2020 10:35:23 +0000 (UTC)
+Received: from t480s.redhat.com (ovpn-113-186.ams2.redhat.com [10.36.113.186])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 261DD81C4B;
+ Fri, 11 Sep 2020 10:35:19 +0000 (UTC)
+From: David Hildenbrand <david@redhat.com>
+To: linux-kernel@vger.kernel.org
+Cc: virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
+ linux-hyperv@vger.kernel.org, xen-devel@lists.xenproject.org,
+ linux-acpi@vger.kernel.org, linux-nvdimm@lists.01.org,
+ linux-s390@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
+ David Hildenbrand <david@redhat.com>, Michal Hocko <mhocko@suse.com>,
+ Dan Williams <dan.j.williams@intel.com>, Jason Gunthorpe <jgg@ziepe.ca>,
+ Kees Cook <keescook@chromium.org>, Ard Biesheuvel <ardb@kernel.org>,
+ Pankaj Gupta <pankaj.gupta.linux@gmail.com>, Baoquan He <bhe@redhat.com>,
+ Wei Yang <richardw.yang@linux.intel.com>
+Subject: [PATCH v4 1/8] kernel/resource: make release_mem_region_adjustable()
+ never fail
+Date: Fri, 11 Sep 2020 12:34:52 +0200
+Message-Id: <20200911103459.10306-2-david@redhat.com>
+In-Reply-To: <20200911103459.10306-1-david@redhat.com>
+References: <20200911103459.10306-1-david@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,52 +90,192 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-One less aspect to keep an eye on for things to stay in sync.
+Let's make sure splitting a resource on memory hotunplug will never fail.
+This will become more relevant once we merge selected System RAM
+resources - then, we'll trigger that case more often on memory hotunplug.
 
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
+In general, this function is already unlikely to fail. When we remove
+memory, we free up quite a lot of metadata (memmap, page tables, memory
+block device, etc.). The only reason it could really fail would be when
+injecting allocation errors.
+
+All other error cases inside release_mem_region_adjustable() seem to be
+sanity checks if the function would be abused in different context -
+let's add WARN_ON_ONCE() in these cases so we can catch them.
+
+Cc: Andrew Morton <akpm@linux-foundation.org>
+Cc: Michal Hocko <mhocko@suse.com>
+Cc: Dan Williams <dan.j.williams@intel.com>
+Cc: Jason Gunthorpe <jgg@ziepe.ca>
+Cc: Kees Cook <keescook@chromium.org>
+Cc: Ard Biesheuvel <ardb@kernel.org>
+Cc: Pankaj Gupta <pankaj.gupta.linux@gmail.com>
+Cc: Baoquan He <bhe@redhat.com>
+Cc: Wei Yang <richardw.yang@linux.intel.com>
+Signed-off-by: David Hildenbrand <david@redhat.com>
 ---
-FAOD I did consider (and even try) reducing the scope of ptwr_ctxt at
-the same occasion - this results in worse code with gcc 10 at least, as
-the compiler then indeed defers populating of the struct, and hence
-needs to retain the respective function arguments across prior calls.
+ include/linux/ioport.h |  4 ++--
+ kernel/resource.c      | 49 ++++++++++++++++++++++++------------------
+ mm/memory_hotplug.c    | 22 +------------------
+ 3 files changed, 31 insertions(+), 44 deletions(-)
 
---- a/xen/arch/x86/pv/ro-page-fault.c
-+++ b/xen/arch/x86/pv/ro-page-fault.c
-@@ -262,29 +262,23 @@ static int ptwr_do_page_fault(struct x86
-         .pte = pte,
-     };
-     struct page_info *page;
--    int rc;
-+    int rc = X86EMUL_UNHANDLEABLE;
+diff --git a/include/linux/ioport.h b/include/linux/ioport.h
+index 6c2b06fe8beb7..52a91f5fa1a36 100644
+--- a/include/linux/ioport.h
++++ b/include/linux/ioport.h
+@@ -248,8 +248,8 @@ extern struct resource * __request_region(struct resource *,
+ extern void __release_region(struct resource *, resource_size_t,
+ 				resource_size_t);
+ #ifdef CONFIG_MEMORY_HOTREMOVE
+-extern int release_mem_region_adjustable(struct resource *, resource_size_t,
+-				resource_size_t);
++extern void release_mem_region_adjustable(struct resource *, resource_size_t,
++					  resource_size_t);
+ #endif
  
-     page = get_page_from_mfn(l1e_get_mfn(pte), current->domain);
-     if ( !page )
-         return X86EMUL_UNHANDLEABLE;
+ /* Wrappers for managed devices */
+diff --git a/kernel/resource.c b/kernel/resource.c
+index f1175ce93a1d5..36b3552210120 100644
+--- a/kernel/resource.c
++++ b/kernel/resource.c
+@@ -1258,21 +1258,28 @@ EXPORT_SYMBOL(__release_region);
+  *   assumes that all children remain in the lower address entry for
+  *   simplicity.  Enhance this logic when necessary.
+  */
+-int release_mem_region_adjustable(struct resource *parent,
+-				  resource_size_t start, resource_size_t size)
++void release_mem_region_adjustable(struct resource *parent,
++				   resource_size_t start, resource_size_t size)
+ {
++	struct resource *new_res = NULL;
++	bool alloc_nofail = false;
+ 	struct resource **p;
+ 	struct resource *res;
+-	struct resource *new_res;
+ 	resource_size_t end;
+-	int ret = -EINVAL;
  
--    if ( !page_lock(page) )
-+    if ( page_lock(page) )
-     {
--        put_page(page);
--        return X86EMUL_UNHANDLEABLE;
--    }
-+        if ( (page->u.inuse.type_info & PGT_type_mask) == PGT_l1_page_table )
-+        {
-+            ctxt->data = &ptwr_ctxt;
-+            rc = x86_emulate(ctxt, &ptwr_emulate_ops);
-+        }
+ 	end = start + size - 1;
+-	if ((start < parent->start) || (end > parent->end))
+-		return ret;
++	if (WARN_ON_ONCE((start < parent->start) || (end > parent->end)))
++		return;
  
--    if ( (page->u.inuse.type_info & PGT_type_mask) != PGT_l1_page_table )
--    {
-         page_unlock(page);
--        put_page(page);
--        return X86EMUL_UNHANDLEABLE;
-     }
+-	/* The alloc_resource() result gets checked later */
+-	new_res = alloc_resource(GFP_KERNEL);
++	/*
++	 * We free up quite a lot of memory on memory hotunplug (esp., memap),
++	 * just before releasing the region. This is highly unlikely to
++	 * fail - let's play save and make it never fail as the caller cannot
++	 * perform any error handling (e.g., trying to re-add memory will fail
++	 * similarly).
++	 */
++retry:
++	new_res = alloc_resource(GFP_KERNEL | alloc_nofail ? __GFP_NOFAIL : 0);
  
--    ctxt->data = &ptwr_ctxt;
--    rc = x86_emulate(ctxt, &ptwr_emulate_ops);
+ 	p = &parent->child;
+ 	write_lock(&resource_lock);
+@@ -1298,7 +1305,6 @@ int release_mem_region_adjustable(struct resource *parent,
+ 		 * so if we are dealing with them, let us just back off here.
+ 		 */
+ 		if (!(res->flags & IORESOURCE_SYSRAM)) {
+-			ret = 0;
+ 			break;
+ 		}
+ 
+@@ -1315,20 +1321,23 @@ int release_mem_region_adjustable(struct resource *parent,
+ 			/* free the whole entry */
+ 			*p = res->sibling;
+ 			free_resource(res);
+-			ret = 0;
+ 		} else if (res->start == start && res->end != end) {
+ 			/* adjust the start */
+-			ret = __adjust_resource(res, end + 1,
+-						res->end - end);
++			WARN_ON_ONCE(__adjust_resource(res, end + 1,
++						       res->end - end));
+ 		} else if (res->start != start && res->end == end) {
+ 			/* adjust the end */
+-			ret = __adjust_resource(res, res->start,
+-						start - res->start);
++			WARN_ON_ONCE(__adjust_resource(res, res->start,
++						       start - res->start));
+ 		} else {
+-			/* split into two entries */
++			/* split into two entries - we need a new resource */
+ 			if (!new_res) {
+-				ret = -ENOMEM;
+-				break;
++				new_res = alloc_resource(GFP_ATOMIC);
++				if (!new_res) {
++					alloc_nofail = true;
++					write_unlock(&resource_lock);
++					goto retry;
++				}
+ 			}
+ 			new_res->name = res->name;
+ 			new_res->start = end + 1;
+@@ -1339,9 +1348,8 @@ int release_mem_region_adjustable(struct resource *parent,
+ 			new_res->sibling = res->sibling;
+ 			new_res->child = NULL;
+ 
+-			ret = __adjust_resource(res, res->start,
+-						start - res->start);
+-			if (ret)
++			if (WARN_ON_ONCE(__adjust_resource(res, res->start,
++							   start - res->start)))
+ 				break;
+ 			res->sibling = new_res;
+ 			new_res = NULL;
+@@ -1352,7 +1360,6 @@ int release_mem_region_adjustable(struct resource *parent,
+ 
+ 	write_unlock(&resource_lock);
+ 	free_resource(new_res);
+-	return ret;
+ }
+ #endif	/* CONFIG_MEMORY_HOTREMOVE */
+ 
+diff --git a/mm/memory_hotplug.c b/mm/memory_hotplug.c
+index baded53b9ff92..4c47b68a9f4b5 100644
+--- a/mm/memory_hotplug.c
++++ b/mm/memory_hotplug.c
+@@ -1724,26 +1724,6 @@ void try_offline_node(int nid)
+ }
+ EXPORT_SYMBOL(try_offline_node);
+ 
+-static void __release_memory_resource(resource_size_t start,
+-				      resource_size_t size)
+-{
+-	int ret;
 -
--    page_unlock(page);
-     put_page(page);
+-	/*
+-	 * When removing memory in the same granularity as it was added,
+-	 * this function never fails. It might only fail if resources
+-	 * have to be adjusted or split. We'll ignore the error, as
+-	 * removing of memory cannot fail.
+-	 */
+-	ret = release_mem_region_adjustable(&iomem_resource, start, size);
+-	if (ret) {
+-		resource_size_t endres = start + size - 1;
+-
+-		pr_warn("Unable to release resource <%pa-%pa> (%d)\n",
+-			&start, &endres, ret);
+-	}
+-}
+-
+ static int __ref try_remove_memory(int nid, u64 start, u64 size)
+ {
+ 	int rc = 0;
+@@ -1777,7 +1757,7 @@ static int __ref try_remove_memory(int nid, u64 start, u64 size)
+ 		memblock_remove(start, size);
+ 	}
  
-     return rc;
+-	__release_memory_resource(start, size);
++	release_mem_region_adjustable(&iomem_resource, start, size);
+ 
+ 	try_offline_node(nid);
+ 
+-- 
+2.26.2
+
 
