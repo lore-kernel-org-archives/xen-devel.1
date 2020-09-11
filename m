@@ -2,64 +2,64 @@ Return-Path: <SRS0=VPcc=CU=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
+X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 98756C43461
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DAE15C433E2
 	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2020 12:40:53 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 44911206DB
+	by mail.kernel.org (Postfix) with ESMTPS id 93C4221D92
 	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2020 12:40:53 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="c5V9nSMZ"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 44911206DB
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="ATBOOC6z"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 93C4221D92
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kGiM6-0006iR-3y; Fri, 11 Sep 2020 12:40:42 +0000
+	id 1kGiM5-0006i3-Qp; Fri, 11 Sep 2020 12:40:41 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=vrAB=CU=citrix.com=george.dunlap@srs-us1.protection.inumbo.net>)
- id 1kGiM5-0006hW-1j
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2020 12:40:41 +0000
-X-Inumbo-ID: fc1f6b95-e160-48c0-b8b1-071ee2d75ff6
+ id 1kGiM3-0006hW-Oh
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2020 12:40:39 +0000
+X-Inumbo-ID: 12abceb6-0e6e-4b53-ac42-e0f20e5d1a1d
 Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id fc1f6b95-e160-48c0-b8b1-071ee2d75ff6;
- Fri, 11 Sep 2020 12:40:39 +0000 (UTC)
+ id 12abceb6-0e6e-4b53-ac42-e0f20e5d1a1d;
+ Fri, 11 Sep 2020 12:40:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1599828039;
+ d=citrix.com; s=securemail; t=1599828038;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=Q1aCTFoFO9abujLiq4ebibIbZx1ARS5BNFG2U++NH3w=;
- b=c5V9nSMZ9RfhuaejLzuaaW2CeUKfAMNabtyTQO7aSSATkXWTxKXYwPbK
- Ym8Y5Dbvrmm3vtW8pSCMcOO4EQf5zpkyGbwOiqssou+Y18iPDhbuPsLeU
- dSUMatIArefqSor2QIEiQX2BUZTd+WpEVX8tEI0b/1M7HUOckTQg+zk3e Y=;
+ bh=RIW8Kp6bukJ8jfRLiJqZntK27guAQKQDcsKbEPOP7X4=;
+ b=ATBOOC6zo5XO0en1fJo6hX3MzfD+iYJUpJAG+hY1Db+27RLcE4a5Yl9g
+ N88TeCXrx9ef6jJmJIfAfYzSNdsQzkn+x0FuJ/RxlRoNmZJNwlMnJYTKL
+ Ubl+HTRTO2SHV5qrGG2KmPBiqaADRf/fvUBvZ6bbIJ2l0WvnbbZupBhDG o=;
 Authentication-Results: esa6.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: RL1PNVOr2asCZbkylcYaoSdjJfV1KmvBJTFx28YXKL5zYmWum4OzgYD8uwHMbfQQP+uQ0Xxukx
- es2OdgNh9Hsm5obHOM7S/asKHlUW+XgSOT2A28RG3xpR6T/UCmikpiNKGqhiJshjbITgA7axZ0
- wz52mxPfRHhF3MV18cs3L/q5g/N8EH0qXaffj2qSfHXknZvfbzilM1x+8YOYS7V+rrWPVjZcbZ
- xynN8FeLEjvTZpq+/oMVUnGkp1ikIKDXdnax3165Ooj6G9yFVCTFcNSS0AahdJ1z/LI+Gdgl41
- fg4=
+IronPort-SDR: GusAqBLP2hOZp55ijHdwqeBCR6JkxGGBvdGz4GE9Q2NbNgQQHFiVy+Sllo9C1SGV3lUkQfIvtd
+ tN7snmpk2ZLmfERCBg6ovz+7cFxm46U9KLnrbH7A2c79FnUgLFLqwlYAx+ZNEB/95kp/GtGEtg
+ QT5YpsjHAyYVadV9PmHyPhIoq3fYA+TU8UYxVNSgFw1RRUfkryba6RwpuGe2pAHICKsr99YNMN
+ AKZjF745d960coYYEXd4XfpXePSxc4gkdXV7le8V38pFgFn0u81lhhYERxcbeCzxnBLEE9a3Dv
+ ApM=
 X-SBRS: 2.7
-X-MesageID: 26789698
+X-MesageID: 26789697
 X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,415,1592884800"; d="scan'208";a="26789698"
+X-IronPort-AV: E=Sophos;i="5.76,415,1592884800"; d="scan'208";a="26789697"
 From: George Dunlap <george.dunlap@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: George Dunlap <george.dunlap@citrix.com>
-Subject: [PATCH 1/8] Add basic sphinx structure
-Date: Fri, 11 Sep 2020 13:40:02 +0100
-Message-ID: <20200911124009.3760032-2-george.dunlap@citrix.com>
+Subject: [PATCH 3/8] Convert code-of-conduct to rst
+Date: Fri, 11 Sep 2020 13:40:04 +0100
+Message-ID: <20200911124009.3760032-4-george.dunlap@citrix.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20200911124009.3760032-1-george.dunlap@citrix.com>
 References: <20200911124009.3760032-1-george.dunlap@citrix.com>
@@ -79,126 +79,158 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
----
- Makefile         | 20 +++++++++++++++++++
- source/conf.py   | 52 ++++++++++++++++++++++++++++++++++++++++++++++++
- source/index.rst | 20 +++++++++++++++++++
- 3 files changed, 92 insertions(+)
- create mode 100644 Makefile
- create mode 100644 source/conf.py
- create mode 100644 source/index.rst
+Underline section titles.
 
-diff --git a/Makefile b/Makefile
-new file mode 100644
-index 0000000..d0c3cbf
---- /dev/null
-+++ b/Makefile
-@@ -0,0 +1,20 @@
-+# Minimal makefile for Sphinx documentation
-+#
+Convert links to RST-style links.  NB that the Communication Guide
+link won't work ATM; this will be fixed when we convert that document
+to RST.
+
+Adjust the formatting for the list so that it's converted properly.
+
+A couple of clean-ups:
+
+* Expand the label for communication guidance, and convert the link to
+the project governance to a named reference rather than an "embedded"
+URI.
+
+* Move all hyperlink targets to the bottom of the article, and put
+  them in the order they're linked.
+
+No changes to the text.
+
+Signed-off-by: George Dunlap <george.dunlap@citrix.com>
+---
+ ...code-of-conduct.md => code-of-conduct.rst} | 39 ++++++++++++-------
+ source/conf.py                                |  2 +-
+ source/index.rst                              |  1 +
+ 3 files changed, 27 insertions(+), 15 deletions(-)
+ rename source/{code-of-conduct.md => code-of-conduct.rst} (83%)
+
+diff --git a/source/code-of-conduct.md b/source/code-of-conduct.rst
+similarity index 83%
+rename from source/code-of-conduct.md
+rename to source/code-of-conduct.rst
+index a6080cd..81efe04 100644
+--- a/source/code-of-conduct.md
++++ b/source/code-of-conduct.rst
+@@ -1,6 +1,8 @@
+-# Xen Project Code of Conduct
++Xen Project Code of Conduct
++***************************
+ 
+-## Our Pledge
++Our Pledge
++==========
+ 
+ In the interest of fostering an open and welcoming environment, we as
+ contributors and maintainers pledge to make participation in our project and
+@@ -9,12 +11,13 @@ size, disability, ethnicity, sex characteristics, gender identity and
+ expression, level of experience, education, socio-economic status, nationality,
+ personal appearance, race, religion, or sexual identity and orientation.
+ 
+-## Our Standards
++Our Standards
++=============
+ 
+ We believe that a Code of Conduct can help create a harassment-free environment,
+ but is not sufficient to create a welcoming environment on its own: guidance on
+ creating a welcoming environment, how to communicate in an effective and
+-friendly way, etc. can be found [here][guidance]].
++friendly way, etc. can be found `here <Communication Guidance_>`_.
+ 
+ Examples of unacceptable behavior by participants include:
+ 
+@@ -27,7 +30,8 @@ Examples of unacceptable behavior by participants include:
+ * Other conduct which could reasonably be considered inappropriate in a
+   professional setting
+ 
+-## Our Responsibilities
++Our Responsibilities
++====================
+ 
+ Project leadership team members are responsible for clarifying the standards of
+ acceptable behavior and are expected to take appropriate and fair corrective
+@@ -39,7 +43,8 @@ contributions that are not aligned to this Code of Conduct, or to ban
+ temporarily or permanently any contributor for other behaviors that they deem
+ inappropriate, threatening, offensive, or harmful.
+ 
+-## Scope
++Scope
++=====
+ 
+ This Code of Conduct applies within all project spaces of all sub-projects,
+ and it also applies when an individual is representing the project or its
+@@ -49,7 +54,8 @@ media account, or acting as an appointed representative at an online or offline
+ event. Representation of a project may be further defined and clarified by the
+ project leadership.
+ 
+-## What to do if you witness or are subject to unacceptable behavior
++What to do if you witness or are subject to unacceptable behavior
++=================================================================
+ 
+ Instances of abusive, harassing, or otherwise unacceptable behavior may be
+ reported by contacting Conduct Team members at conduct@xenproject.org. All
+@@ -67,25 +73,30 @@ Project leadership team members who do not follow or enforce the Code of Conduct
+ in good faith may face temporary or permanent repercussions as determined by
+ other members of the project's leadership.
+ 
+-## Conduct Team members
++Conduct Team members
++====================
 +
-+# You can set these variables from the command line, and also
-+# from the environment for the first two.
-+SPHINXOPTS    ?=
-+SPHINXBUILD   ?= sphinx-build
-+SOURCEDIR     = source
-+BUILDDIR      = build
+ Conduct Team members are project leadership team members from any
+ sub-project. The current list of Conduct Team members is:
 +
-+# Put it first so that "make" without argument is like "make help".
-+help:
-+	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+ * Lars Kurth <lars dot kurth at xenproject dot org>
+ * George Dunlap <george dot dunlap at citrix dot com>
+ * Ian Jackson <ian dot jackson at citrix dot com>
+ 
+ Conduct Team members are changed by proposing a change to this document,
+ posted on all sub-project lists, followed by a formal global vote as outlined
+-[here]: https://xenproject.org/developers/governance/#project-decisions
++`here <Project Governance_>`_.
+ 
+-## Attribution
++Attribution
++===========
+ 
+-This Code of Conduct is adapted from the [Contributor Covenant][homepage],
++This Code of Conduct is adapted from the `Contributor Covenant`_,
+ version 1.4, available at
+ https://www.contributor-covenant.org/version/1/4/code-of-conduct.html
+ 
+-[homepage]: https://www.contributor-covenant.org
+-[guidance]: communication-guide.md
+-
+ For answers to common questions about this code of conduct, see
+ https://www.contributor-covenant.org/faq
 +
-+.PHONY: help Makefile
-+
-+# Catch-all target: route all unknown targets to Sphinx using the new
-+# "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
-+%: Makefile
-+	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
++.. _Communication Guidance: communication-guide.md
++.. _Project Governance: https://xenproject.org/developers/governance/#project-decisions
++.. _Contributor Covenant: https://www.contributor-covenant.org
 diff --git a/source/conf.py b/source/conf.py
-new file mode 100644
-index 0000000..7b99910
---- /dev/null
+index 7b99910..85bcedb 100644
+--- a/source/conf.py
 +++ b/source/conf.py
-@@ -0,0 +1,52 @@
-+# Configuration file for the Sphinx documentation builder.
-+#
-+# This file only contains a selection of the most common options. For a full
-+# list see the documentation:
-+# https://www.sphinx-doc.org/en/master/usage/configuration.html
-+
-+# -- Path setup --------------------------------------------------------------
-+
-+# If extensions (or modules to document with autodoc) are in another directory,
-+# add these directories to sys.path here. If the directory is relative to the
-+# documentation root, use os.path.abspath to make it absolute, like shown here.
-+#
-+# import os
-+# import sys
-+# sys.path.insert(0, os.path.abspath('.'))
-+
-+
-+# -- Project information -----------------------------------------------------
-+
-+project = 'XenProject Governance'
-+copyright = '2020, The XenProject Team'
-+author = 'The XenProject Team'
-+
-+
-+# -- General configuration ---------------------------------------------------
-+
-+# Add any Sphinx extension module names here, as strings. They can be
-+# extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
-+# ones.
-+extensions = [
-+]
-+
-+# Add any paths that contain templates here, relative to this directory.
-+templates_path = ['_templates']
-+
-+# List of patterns, relative to source directory, that match files and
-+# directories to ignore when looking for source files.
-+# This pattern also affects html_static_path and html_extra_path.
-+exclude_patterns = []
-+
-+
-+# -- Options for HTML output -------------------------------------------------
-+
-+# The theme to use for HTML and HTML Help pages.  See the documentation for
-+# a list of builtin themes.
-+#
-+html_theme = 'alabaster'
-+
-+# Add any paths that contain custom static files (such as style sheets) here,
-+# relative to this directory. They are copied after the builtin static files,
-+# so a file named "default.css" will overwrite the builtin "default.css".
-+html_static_path = ['_static']
+@@ -49,4 +49,4 @@ html_theme = 'alabaster'
+ # Add any paths that contain custom static files (such as style sheets) here,
+ # relative to this directory. They are copied after the builtin static files,
+ # so a file named "default.css" will overwrite the builtin "default.css".
+-html_static_path = ['_static']
 \ No newline at end of file
++html_static_path = ['_static']
 diff --git a/source/index.rst b/source/index.rst
-new file mode 100644
-index 0000000..63f76f0
---- /dev/null
+index 99cb386..079c02e 100644
+--- a/source/index.rst
 +++ b/source/index.rst
-@@ -0,0 +1,20 @@
-+.. XenProject Governance documentation master file, created by
-+   sphinx-quickstart on Tue Sep  8 12:10:02 2020.
-+   You can adapt this file completely to your liking, but it should at least
-+   contain the root `toctree` directive.
-+
-+Welcome to XenProject Governance's documentation!
-+=================================================
-+
-+.. toctree::
-+   :maxdepth: 2
-+   :caption: Contents:
-+
-+
-+
-+Indices and tables
-+==================
-+
-+* :ref:`genindex`
-+* :ref:`modindex`
-+* :ref:`search`
+@@ -10,6 +10,7 @@ Welcome to XenProject Governance's documentation!
+    :maxdepth: 2
+    :caption: Contents:
+ 
++   code-of-conduct
+ 
+ Indices and tables
+ ==================
 -- 
 2.24.3 (Apple Git-128)
 
