@@ -2,65 +2,53 @@ Return-Path: <SRS0=VPcc=CU=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=no autolearn_force=no
+X-Spam-Status: No, score=-8.2 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 51216C2D0E1
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2020 16:07:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AAC27C43461
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2020 16:09:54 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 027F0221ED
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2020 16:07:06 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="Xtkdyfhc"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 027F0221ED
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 73B8C206CA
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2020 16:09:54 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 73B8C206CA
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kGlZQ-0001mD-Lz; Fri, 11 Sep 2020 16:06:40 +0000
+	id 1kGlcK-00025a-Ra; Fri, 11 Sep 2020 16:09:40 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=yBET=CU=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1kGlZP-0001m8-VR
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2020 16:06:40 +0000
-X-Inumbo-ID: 9e8c31f4-1572-4da8-9da9-86d6ee8335a6
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+ (envelope-from <SRS0=eh3a=CU=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1kGlcK-00025V-9E
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2020 16:09:40 +0000
+X-Inumbo-ID: 5e3522c6-6717-4270-87f7-aa64cdc1e3cd
+Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 9e8c31f4-1572-4da8-9da9-86d6ee8335a6;
- Fri, 11 Sep 2020 16:06:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Message-Id:Date:Subject:Cc:To:From;
- bh=GuatkuS8a2fSSZrSORNiRhJZmMv0JHUgfWvjqdE7TIs=; b=XtkdyfhcebGuD+LACeXsNZUJsp
- yRBjrR1727hlvW4LuNEOVii9HuOQAswFRjjouJwQYdF2/2z5HQT0s6v4GZayVPP/Jxf91ND7x/B5q
- 3SZPL6BwmPrgIhO7CjKRWVM4BGFR0+qrUcFtttNKy8ZCoPntqZXrGTv9NzC2BJjiKRQc=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1kGlZN-0004xT-SR; Fri, 11 Sep 2020 16:06:37 +0000
-Received: from 54-240-197-235.amazon.com ([54.240.197.235]
- helo=ufe34d9ed68d054.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1kGlZN-0001gv-F7; Fri, 11 Sep 2020 16:06:37 +0000
-From: Julien Grall <julien@xen.org>
-To: xen-devel@lists.xenproject.org
-Cc: oleksandr_tyshchenko@epam.com, Julien Grall <jgrall@amazon.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
- Wei Liu <wl@xen.org>
-Subject: [PATCH v2 0/2] Introduce cmpxchg64() and guest_cmpxchg64()
-Date: Fri, 11 Sep 2020 17:06:20 +0100
-Message-Id: <20200911160622.19721-1-julien@xen.org>
-X-Mailer: git-send-email 2.17.1
+ id 5e3522c6-6717-4270-87f7-aa64cdc1e3cd;
+ Fri, 11 Sep 2020 16:09:39 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id E8206AF2F;
+ Fri, 11 Sep 2020 16:09:53 +0000 (UTC)
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+From: Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH v2] x86: guard against straight-line speculation past RET
+Message-ID: <a6d7d72b-b14c-ab7f-b250-cc74cd3c758c@suse.com>
+Date: Fri, 11 Sep 2020 18:09:40 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.0
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,26 +62,75 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: Julien Grall <jgrall@amazon.com>
+Under certain conditions CPUs can speculate into the instruction stream
+past a RET instruction. Guard against this just like 3b7dab93f240
+("x86/spec-ctrl: Protect against CALL/JMP straight-line speculation")
+did - by inserting an "INT $3" insn. It's merely the mechanics of how to
+achieve this that differ: A set of macros gets introduced to post-
+process RET insns issued by the compiler (or living in assembly files).
 
-Hi all,
+Unfortunately for clang this requires further features their built-in
+assembler doesn't support: We need to be able to override insn mnemonics
+produced by the compiler (which may be impossible, if internally
+assembly mnemonics never get generated), and we want to use \(text)
+escaping / quoting in the auxiliary macro.
 
-This small series introduced cmpxch64() and guest_cmpxchg64(). This will be
-useful when porting IOREQ server to Arm.
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
+---
+TBD: Should this depend on CONFIG_SPECULATIVE_HARDEN_BRANCH?
+TBD: Would be nice to avoid the additions in .init.text, but a query to
+     the binutils folks regarding the ability to identify the section
+     stuff is in (by Peter Zijlstra over a year ago:
+     https://sourceware.org/pipermail/binutils/2019-July/107528.html)
+     has been left without helpful replies.
+---
+v2: Fix build with newer clang. Use int3 mnemonic. Also override retq.
+---
+This depends on the "x86: some assembler macro rework" series posted
+well over a month ago.
 
-Cheers,
-
-Julien Grall (2):
-  xen/arm: Remove cmpxchg_local() and drop _mb from the other helpers
-  xen: Introduce cmpxchg64() and guest_cmpxchg64()
-
- xen/include/asm-arm/arm32/cmpxchg.h | 85 +++++++++++++++++++++++------
- xen/include/asm-arm/arm64/cmpxchg.h | 41 +++++---------
- xen/include/asm-arm/guest_atomics.h | 28 +++++++++-
- xen/include/asm-x86/guest_atomics.h |  1 +
- 4 files changed, 107 insertions(+), 48 deletions(-)
-
--- 
-2.17.1
-
+--- a/xen/Makefile
++++ b/xen/Makefile
+@@ -145,7 +145,15 @@ t2 = $(call as-insn,$(CC) -I$(BASEDIR)/i
+ # https://bugs.llvm.org/show_bug.cgi?id=36110
+ t3 = $(call as-insn,$(CC),".macro FOO;.endm"$(close); asm volatile $(open)".macro FOO;.endm",-no-integrated-as)
+ 
+-CLANG_FLAGS += $(call or,$(t1),$(t2),$(t3))
++# Check whether \(text) escaping in macro bodies is supported.
++t4 = $(call as-insn,$(CC),".macro m ret:req; \\(ret) $$\\ret; .endm; m 8",,-no-integrated-as)
++
++# Check whether macros can override insn mnemonics in inline assembly.
++t5 = $(call as-insn,$(CC),".macro ret; .error; .endm; .macro retq; .error; .endm",-no-integrated-as)
++
++acc1 := $(call or,$(t1),$(t2),$(t3),$(t4))
++
++CLANG_FLAGS += $(call or,$(acc1),$(t5))
+ endif
+ 
+ CLANG_FLAGS += -Werror=unknown-warning-option
+--- a/xen/include/asm-x86/asm-defns.h
++++ b/xen/include/asm-x86/asm-defns.h
+@@ -50,3 +50,22 @@
+ .macro INDIRECT_JMP arg:req
+     INDIRECT_BRANCH jmp \arg
+ .endm
++
++/*
++ * To guard against speculation past RET, insert a breakpoint insn
++ * immediately after them.
++ */
++.macro ret operand:vararg
++    ret$ \operand
++.endm
++.macro retq operand:vararg
++    ret$ \operand
++.endm
++.macro ret$ operand:vararg
++    .purgem ret
++    ret \operand
++    int3
++    .macro ret operand:vararg
++        ret$ \\(operand)
++    .endm
++.endm
 
