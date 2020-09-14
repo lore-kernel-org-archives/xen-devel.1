@@ -2,59 +2,75 @@ Return-Path: <SRS0=xX5W=CX=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.3 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 75F08C433E2
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2020 15:56:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 21D77C43461
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2020 15:59:42 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2576E20756
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2020 15:56:51 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2576E20756
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 9C9A720756
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2020 15:59:41 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="ltOPRHPq"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9C9A720756
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kHqqI-0004kh-T5; Mon, 14 Sep 2020 15:56:34 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kHqt7-0004ry-DD; Mon, 14 Sep 2020 15:59:29 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=dIgq=CX=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kHqqI-0004kc-0C
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2020 15:56:34 +0000
-X-Inumbo-ID: 9ad677a8-1fa0-4a62-abca-2fe5b58f25b7
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9ad677a8-1fa0-4a62-abca-2fe5b58f25b7;
- Mon, 14 Sep 2020 15:56:33 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id D85EBAF80;
- Mon, 14 Sep 2020 15:56:47 +0000 (UTC)
-Subject: Re: [PATCH V1 07/16] xen/dm: Make x86's DM feature common
-To: Oleksandr Tyshchenko <olekstysh@gmail.com>
+ (envelope-from <SRS0=LHiq=CX=xen.org=julien@srs-us1.protection.inumbo.net>)
+ id 1kHqt5-0004rt-HH
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2020 15:59:27 +0000
+X-Inumbo-ID: 9a57acd5-2bff-4ea9-b8c2-12703d00489a
+Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 9a57acd5-2bff-4ea9-b8c2-12703d00489a;
+ Mon, 14 Sep 2020 15:59:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+ bh=c8RbSSUUg/Os+enHYD0/o+GHEsmdbHFnLsIxTG4Umic=; b=ltOPRHPq0s8lDKPgo29PkU5ckB
+ QsZecMBWSqi1MuQveN0UcBz7JMof+EDfqBdL8un3tqbUWg1hKEkBcYIb/Eou1/kww3e+w7IelkKFd
+ vtvOrtEaTnxQqUBaACRYe3t8m2YvjypuTEmFppUP+VUuzAyMKNsKkx83cd5C2LiorXUA=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1kHqt1-0001sm-9q; Mon, 14 Sep 2020 15:59:23 +0000
+Received: from 54-240-197-230.amazon.com ([54.240.197.230]
+ helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1kHqt1-0008La-0G; Mon, 14 Sep 2020 15:59:23 +0000
+Subject: Re: [PATCH V1 06/16] xen/ioreq: Make x86's
+ hvm_ioreq_(page/vcpu/server) structs common
+To: Jan Beulich <jbeulich@suse.com>, Oleksandr Tyshchenko <olekstysh@gmail.com>
 Cc: xen-devel@lists.xenproject.org,
  Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
  Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
  =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Daniel De Graaf <dgdegra@tycho.nsa.gov>, Julien Grall <julien.grall@arm.com>
+ Paul Durrant <paul@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Julien Grall <julien.grall@arm.com>
 References: <1599769330-17656-1-git-send-email-olekstysh@gmail.com>
- <1599769330-17656-8-git-send-email-olekstysh@gmail.com>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <70919183-5215-2efb-d399-2b2d5dd8b5ed@suse.com>
-Date: Mon, 14 Sep 2020 17:56:30 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.0
+ <1599769330-17656-7-git-send-email-olekstysh@gmail.com>
+ <1c02f776-a9ae-ac7f-4d17-35745c324c91@suse.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <6022c151-7878-87f7-8dc8-7ccf44b2f779@xen.org>
+Date: Mon, 14 Sep 2020 16:59:20 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
+ Gecko/20100101 Thunderbird/68.12.0
 MIME-Version: 1.0
-In-Reply-To: <1599769330-17656-8-git-send-email-olekstysh@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+In-Reply-To: <1c02f776-a9ae-ac7f-4d17-35745c324c91@suse.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
 Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -69,34 +85,59 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 10.09.2020 22:22, Oleksandr Tyshchenko wrote:
-> --- a/xen/include/xen/hypercall.h
-> +++ b/xen/include/xen/hypercall.h
-> @@ -150,6 +150,18 @@ do_dm_op(
->      unsigned int nr_bufs,
->      XEN_GUEST_HANDLE_PARAM(xen_dm_op_buf_t) bufs);
->  
-> +struct dmop_args {
-> +    domid_t domid;
-> +    unsigned int nr_bufs;
-> +    /* Reserve enough buf elements for all current hypercalls. */
-> +    struct xen_dm_op_buf buf[2];
-> +};
-> +
-> +int arch_dm_op(struct xen_dm_op *op,
-> +               struct domain *d,
-> +               const struct dmop_args *op_args,
-> +               bool *const_op);
-> +
->  #ifdef CONFIG_HYPFS
->  extern long
->  do_hypfs_op(
+Hi Jan,
 
-There are exactly two CUs which need to see these two declarations.
-Personally I think they should go into a new header, or at least
-into one that half-way fits (from the pov of its other contents)
-and doesn't get included by half the code base. But maybe it's
-just me ...
+On 14/09/2020 16:16, Jan Beulich wrote:
+> On 10.09.2020 22:22, Oleksandr Tyshchenko wrote:
+>> --- a/xen/include/xen/ioreq.h
+>> +++ b/xen/include/xen/ioreq.h
+>> @@ -23,6 +23,40 @@
+>>   
+>>   #include <asm/hvm/ioreq.h>
+>>   
+>> +struct hvm_ioreq_page {
+>> +    gfn_t gfn;
+>> +    struct page_info *page;
+>> +    void *va;
+>> +};
+>> +
+>> +struct hvm_ioreq_vcpu {
+>> +    struct list_head list_entry;
+>> +    struct vcpu      *vcpu;
+>> +    evtchn_port_t    ioreq_evtchn;
+>> +    bool             pending;
+>> +};
+>> +
+>> +#define NR_IO_RANGE_TYPES (XEN_DMOP_IO_RANGE_PCI + 1)
+>> +#define MAX_NR_IO_RANGES  256
+>> +
+>> +struct hvm_ioreq_server {
+>> +    struct domain          *target, *emulator;
+>> +
+>> +    /* Lock to serialize toolstack modifications */
+>> +    spinlock_t             lock;
+>> +
+>> +    struct hvm_ioreq_page  ioreq;
+>> +    struct list_head       ioreq_vcpu_list;
+>> +    struct hvm_ioreq_page  bufioreq;
+>> +
+>> +    /* Lock to serialize access to buffered ioreq ring */
+>> +    spinlock_t             bufioreq_lock;
+>> +    evtchn_port_t          bufioreq_evtchn;
+>> +    struct rangeset        *range[NR_IO_RANGE_TYPES];
+>> +    bool                   enabled;
+>> +    uint8_t                bufioreq_handling;
+>> +};
+> 
+> Besides there again being the question of hvm_ prefixes here,
+> is the bufioreq concept something Arm is meaning to make use
+> of? If not, this may want to become conditional ...
 
-Jan
+Yes, I would like to make use of it to optimize virtio notifications as 
+we don't need to wait for them to be processed by the IOREQ server.
+
+Cheers,
+
+-- 
+Julien Grall
 
