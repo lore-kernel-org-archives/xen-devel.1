@@ -7,35 +7,36 @@ X-Spam-Status: No, score=-11.2 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8268DC433E2
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2020 10:18:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 835F5C43461
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2020 10:19:21 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 456C62076C
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2020 10:18:55 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 456C62076C
+	by mail.kernel.org (Postfix) with ESMTPS id 466E520771
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2020 10:19:21 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 466E520771
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kHlZN-0004sr-NI; Mon, 14 Sep 2020 10:18:45 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kHlZp-0004zS-1g; Mon, 14 Sep 2020 10:19:13 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=dIgq=CX=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kHlZM-0004sW-2L
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2020 10:18:44 +0000
-X-Inumbo-ID: f30a21d5-f3d6-40ef-9dc6-04aed49707b7
+ id 1kHlZn-0004yw-1D
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2020 10:19:11 +0000
+X-Inumbo-ID: 4eb91705-1e92-4330-83ae-01ad02185968
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id f30a21d5-f3d6-40ef-9dc6-04aed49707b7;
- Mon, 14 Sep 2020 10:18:33 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 4eb91705-1e92-4330-83ae-01ad02185968;
+ Mon, 14 Sep 2020 10:19:00 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 4FD86B26E;
- Mon, 14 Sep 2020 10:18:48 +0000 (UTC)
-Subject: [PATCH 8/9] lib: move bsearch code
+ by mx2.suse.de (Postfix) with ESMTP id 57F37B265;
+ Mon, 14 Sep 2020 10:19:15 +0000 (UTC)
+Subject: [PATCH 9/9] lib: move sort code
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -43,8 +44,8 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  <iwj@xenproject.org>, Julien Grall <julien@xen.org>, Wei Liu <wl@xen.org>,
  Stefano Stabellini <sstabellini@kernel.org>
 References: <aabca463-21ed-3755-0e8d-908069f40d6e@suse.com>
-Message-ID: <13e17bbd-4e58-d953-87c5-5fabafa21de2@suse.com>
-Date: Mon, 14 Sep 2020 12:18:32 +0200
+Message-ID: <8c086b99-9e0b-0469-b6d0-1190b072f109@suse.com>
+Date: Mon, 14 Sep 2020 12:18:59 +0200
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.12.0
 MIME-Version: 1.0
@@ -65,44 +66,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Build this code into an archive, which results in not linking it into
-x86 final binaries. This saves a little bit of dead code.
+Build this code into an archive, to parallel bsearch().
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 ---
- xen/common/Makefile           | 1 -
- xen/lib/Makefile              | 1 +
- xen/{common => lib}/bsearch.c | 0
+ xen/common/Makefile        | 1 -
+ xen/lib/Makefile           | 1 +
+ xen/{common => lib}/sort.c | 0
  3 files changed, 1 insertion(+), 1 deletion(-)
- rename xen/{common => lib}/bsearch.c (100%)
+ rename xen/{common => lib}/sort.c (100%)
 
 diff --git a/xen/common/Makefile b/xen/common/Makefile
-index 46406dccdfd4..149466b473a8 100644
+index 149466b473a8..efcfd4c34ecf 100644
 --- a/xen/common/Makefile
 +++ b/xen/common/Makefile
-@@ -1,6 +1,5 @@
- obj-$(CONFIG_ARGO) += argo.o
- obj-y += bitmap.o
--obj-y += bsearch.o
- obj-$(CONFIG_HYPFS_CONFIG) += config_data.o
- obj-$(CONFIG_CORE_PARKING) += core_parking.o
- obj-y += cpu.o
+@@ -36,7 +36,6 @@ obj-y += rcupdate.o
+ obj-y += rwlock.o
+ obj-y += shutdown.o
+ obj-y += softirq.o
+-obj-y += sort.o
+ obj-y += smp.o
+ obj-y += spinlock.o
+ obj-y += stop_machine.o
 diff --git a/xen/lib/Makefile b/xen/lib/Makefile
-index b469d2dff7b8..122eeb3d327b 100644
+index 122eeb3d327b..33ff322b1655 100644
 --- a/xen/lib/Makefile
 +++ b/xen/lib/Makefile
-@@ -1,6 +1,7 @@
- obj-y += ctors.o
- obj-$(CONFIG_X86) += x86/
- 
-+lib-y += bsearch.o
- lib-y += ctype.o
+@@ -6,3 +6,4 @@ lib-y += ctype.o
  lib-y += list-sort.o
  lib-y += parse-size.o
-diff --git a/xen/common/bsearch.c b/xen/lib/bsearch.c
+ lib-y += rbtree.o
++lib-y += sort.o
+diff --git a/xen/common/sort.c b/xen/lib/sort.c
 similarity index 100%
-rename from xen/common/bsearch.c
-rename to xen/lib/bsearch.c
+rename from xen/common/sort.c
+rename to xen/lib/sort.c
 -- 
 2.22.0
 
