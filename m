@@ -7,64 +7,70 @@ X-Spam-Status: No, score=-8.2 required=3.0 tests=BAYES_00,
 	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 87222C43461
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2020 09:39:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 06B40C433E2
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2020 09:40:30 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2F36021D1A
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2020 09:39:25 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2F36021D1A
+	by mail.kernel.org (Postfix) with ESMTPS id AF60221D1A
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2020 09:40:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AF60221D1A
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kHkxA-0000CG-Eo; Mon, 14 Sep 2020 09:39:16 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kHky8-0000yO-Pn; Mon, 14 Sep 2020 09:40:16 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=/hQe=CX=gmail.com=wei.liu.xen@srs-us1.protection.inumbo.net>)
- id 1kHkx8-0000C3-Hj
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2020 09:39:14 +0000
-X-Inumbo-ID: 0e443aa4-d4a3-4382-b332-aef5c6b6dc34
-Received: from mail-wm1-f65.google.com (unknown [209.85.128.65])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 0e443aa4-d4a3-4382-b332-aef5c6b6dc34;
- Mon, 14 Sep 2020 09:39:04 +0000 (UTC)
-Received: by mail-wm1-f65.google.com with SMTP id l9so10524839wme.3
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2020 02:39:04 -0700 (PDT)
+ id 1kHky7-0000yC-OS
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2020 09:40:15 +0000
+X-Inumbo-ID: 2a818889-ed56-4390-a459-73d0404fd811
+Received: from mail-wm1-f66.google.com (unknown [209.85.128.66])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 2a818889-ed56-4390-a459-73d0404fd811;
+ Mon, 14 Sep 2020 09:40:04 +0000 (UTC)
+Received: by mail-wm1-f66.google.com with SMTP id a9so10546017wmm.2
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2020 02:40:04 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=kOAz+/3u/Tar4mSMA6ww27fxE7S/z7Jb8EdBtNvriKg=;
- b=ldBKX+6Ra2P8v+LVLiQM5O1jvBlhWYO65GnAiuJdih6kPeWGvUEEdttV/NzjB8hGdq
- S09vwXYoCmPGtGzkrRqqwS00KdaJ0S4jkfhE5CmxUcjUBhrCTBNq/OkCxxCecmH0aZSz
- tmM4kMC02QsmcipD/aBSRDyCQHb+SiDpbxRl9ehDwF4Ys/kz7mwYzDZ05fOkw3cJO4C8
- cLz+U+/0XY/OOjN/RLlVwVUiu0uiQlBo1+4XKmXOWP2IjDCoHlzt1Yo/WF+yagWUpWZA
- EV37hQzlunEF2RS/apur64qmclgQCCFRs4/GjpN7jnXpfqI7ji7Gg1zaI29FSjDBjgsV
- fTuw==
-X-Gm-Message-State: AOAM532ooNLhG5PrjHvHOujdSAdUCHcVwr2kb9d4cXPubsmjZvdF0/iy
- ntT9NgTpuyXwiid+FTu8AYc=
-X-Google-Smtp-Source: ABdhPJyAtQVv3Tg8wGjoGdJUxvLKTXuHPdJAV5mkRhjtVl5zU4V4dOyxBGzHxnRS3VZdURtzF7aBjA==
-X-Received: by 2002:a1c:1f42:: with SMTP id f63mr13660636wmf.1.1600076343384; 
- Mon, 14 Sep 2020 02:39:03 -0700 (PDT)
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to:user-agent;
+ bh=JOVHVpj8HDdhDjRGNrwDZ5dHwxl8UCHWeqvrXY0nuGc=;
+ b=SFx3OEVwBlrhvS7dpmQpf8tOVlvYGTJ9jhAGnIzkrJ/dNwG0GDpUSB+5GaEFOcatWy
+ v5lkalRONFUzX+rCpuxDKbFAiHRgssGt/n9uVc2KsInuNrRBBFx0MRZiPm8RoOfFmC/I
+ /OodLLokz2siAd8wy/ykKV6Yyp2cmT61K8T4htvQ/XmsK+IauAPinub9sT1yQ2E7DXCT
+ vCtey+65+eGiBbvUG+oWBDxjEwGjdVCAcSD61yfVae9yix4Lx8WwNXqY3LFPg1gvCk1s
+ 79Z15JsM/Gjr9F2X31mvlvLzreO8h//4NhcqnmPpLDpumQLWXe5B1QZns2WLs1OfkNp4
+ PjsQ==
+X-Gm-Message-State: AOAM530w85n/Sidkey9sgITFdJ33RW6YbQMAsANjXSfkElZD7XIt12eO
+ 2ypZXshV5LqB6EqH+FcK6jM=
+X-Google-Smtp-Source: ABdhPJzsMPrJFM6k3mKfJhqRDEMak6cksWzUcq8D56KzHe1kLX2CgPkVHxk1bi2q7G7FBlcn+3Dtdg==
+X-Received: by 2002:a1c:2e17:: with SMTP id u23mr14896164wmu.73.1600076403842; 
+ Mon, 14 Sep 2020 02:40:03 -0700 (PDT)
 Received: from liuwe-devbox-debian-v2 ([51.145.34.42])
- by smtp.gmail.com with ESMTPSA id q186sm19588696wma.45.2020.09.14.02.39.02
+ by smtp.gmail.com with ESMTPSA id q186sm19593242wma.45.2020.09.14.02.40.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Sep 2020 02:39:02 -0700 (PDT)
-Date: Mon, 14 Sep 2020 09:39:01 +0000
+ Mon, 14 Sep 2020 02:40:03 -0700 (PDT)
+Date: Mon, 14 Sep 2020 09:40:01 +0000
 From: Wei Liu <wl@xen.org>
-To: Juergen Gross <jgross@suse.com>
-Cc: xen-devel@lists.xenproject.org, Ian Jackson <iwj@xenproject.org>,
- Wei Liu <wl@xen.org>
-Subject: Re: [PATCH] tools/libs/guest: fix Makefile regarding zlib options
-Message-ID: <20200914093901.ce74eajfp36oiuw5@liuwe-devbox-debian-v2>
-References: <20200910154210.2440-1-jgross@suse.com>
+To: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Cc: Wei Liu <wl@xen.org>, Juergen Gross <jgross@suse.com>,
+ xen-devel@lists.xenproject.org, Ian Jackson <iwj@xenproject.org>
+Subject: Re: [PATCH] tools/build: fix python xc bindings
+Message-ID: <20200914094001.r37bp3b7m2uqjgf5@liuwe-devbox-debian-v2>
+References: <20200912135807.28293-1-jgross@suse.com>
+ <20200914093541.nfs3ajzuh4hqu5lq@liuwe-devbox-debian-v2>
+ <20200914093819.GF1482@mail-itl>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
-In-Reply-To: <20200910154210.2440-1-jgross@suse.com>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20200914093819.GF1482@mail-itl>
 User-Agent: NeoMutt/20180716
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -79,12 +85,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Thu, Sep 10, 2020 at 05:42:10PM +0200, Juergen Gross wrote:
-> When renaming the libxenguest sources to xg_*.c there was an omission
-> in the Makefile when setting the zlib related define for the related
-> sources. Fix that.
+On Mon, Sep 14, 2020 at 11:38:19AM +0200, Marek Marczykowski-Górecki wrote:
+> On Mon, Sep 14, 2020 at 09:35:42AM +0000, Wei Liu wrote:
+> > On Sat, Sep 12, 2020 at 03:58:07PM +0200, Juergen Gross wrote:
+> > > Commit 7c273ffdd0e91 ("tools/python: drop libxenguest from setup.py")
+> > > was just wrong: there is one function from libxenguest used in the
+> > > bindings, so readd the library again.
+> > > 
+> > > While at it remove the unused PATH_LIBXL setting.
+> > > 
+> > > Fixes: 7c273ffdd0e91 ("tools/python: drop libxenguest from setup.py")
+> > > Signed-off-by: Juergen Gross <jgross@suse.com>
+> > 
+> > Acked-by: Wei Liu <wl@xen.org>
 > 
-> Signed-off-by: Juergen Gross <jgross@suse.com>
+> Acked-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+> 
 
-Acked-by: Wei Liu <wl@xen.org>
+Thanks for the quick turnaround, Marek.
 
