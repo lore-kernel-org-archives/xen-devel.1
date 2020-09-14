@@ -2,57 +2,76 @@ Return-Path: <SRS0=xX5W=CX=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 27E3DC43461
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2020 16:07:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A88CCC43461
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2020 16:45:21 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B09BD20715
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2020 16:07:10 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 30136217BA
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2020 16:45:20 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=trmm.net header.i=@trmm.net header.b="WMe1Rxg+"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B09BD20715
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=trmm.net
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="E7kfjDuJ"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 30136217BA
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kHr0E-0006IV-B8; Mon, 14 Sep 2020 16:06:50 +0000
+	id 1kHrav-0001F8-Bz; Mon, 14 Sep 2020 16:44:45 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=lZiK=CX=trmm.net=hudson@srs-us1.protection.inumbo.net>)
- id 1kHr0D-0006IQ-F1
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2020 16:06:49 +0000
-X-Inumbo-ID: f1773e9c-b433-40b8-b997-775c26db95e7
-Received: from mail-40134.protonmail.ch (unknown [185.70.40.134])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=odsp=CX=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1kHrau-0001F3-AH
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2020 16:44:44 +0000
+X-Inumbo-ID: 6b86292e-327c-4e0f-a8d6-8e82e4f4a9dc
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id f1773e9c-b433-40b8-b997-775c26db95e7;
- Mon, 14 Sep 2020 16:06:47 +0000 (UTC)
-Date: Mon, 14 Sep 2020 15:05:39 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=trmm.net;
- s=protonmail; t=1600099605;
- bh=AEusmFNmA1vjPjDixEwukHa2mjAITRP5t0r2ZuFFkhk=;
- h=Date:To:From:Cc:Reply-To:Subject:In-Reply-To:References:From;
- b=WMe1Rxg+Wg9ZAkb6rK7iPRu6LIpvVdYe/YtkLp2qgfwq/LPgPGTB0Zf4z6zASuHl3
- pYT65aLKQUsFggecdOl6NUWccfY7oMDgsg8CWLSlDSO0h7yGdnXC4jSN6IW/c3kIOd
- Om9YIXy/DYlX0YGjtp7XNR4Moua3z5l575E1llR4=
+ id 6b86292e-327c-4e0f-a8d6-8e82e4f4a9dc;
+ Mon, 14 Sep 2020 16:44:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1600101882;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:content-transfer-encoding:in-reply-to;
+ bh=p/aTq1oNs06wY+zSNjbe0LpTvGLDhzYM1OOJalPLncc=;
+ b=E7kfjDuJfM7vc5LE2PUaTqKEDZzyQ3yIL/KSlNmQpPBOqkTK2XOPzT15
+ ug0CeW7ROf5DwlRkZsnGm8xtAAotOEPcSpuM/1ITRTuCva9DHyu+Rh3/n
+ a9of6sgPVQGyvguF91ayFo4F7BZHD1T5MNSsQUGBVUl+DyPuOx4wHGI8w c=;
+Authentication-Results: esa6.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none
+IronPort-SDR: siuZc3VcDQedxlLIwP9NuD9Mr7ubMcKrTuNhbo7KB+aSfND9VY7ZqvU9TcvYMHOY1NhvN+EAmW
+ pPDnSbX8idH/EQh8gAAIP3Sea4PMKAlQDkiGr56j0mItxKkxWmCdMNCBuCTHmfJCsPZTCig4Cv
+ VaZZv/x3G5NsHc3KicajmP8d+w22/JZesEJxR/OvpplwLm1+ccO8jq4/GIRVHA0HSgWPdDJP87
+ +kUHzB/uc8yQyTp5MWHW2ri9pbRujroCVNVxuE6Sv991qyYUPsA82yECkLTkI0TP5QtedbVUyV
+ BUc=
+X-SBRS: 2.7
+X-MesageID: 26944771
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.76,426,1592884800"; d="scan'208";a="26944771"
+Date: Mon, 14 Sep 2020 18:44:12 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
 To: Jan Beulich <jbeulich@suse.com>
-From: Trammell Hudson <hudson@trmm.net>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Subject: Re: [RFC PATCH] efi: const correct EFI functions
-Message-ID: <k1CeZGAJquzeIZ1QQgwjPptA5Of3tFvfAE7cUeOvP5D8Th9j55kbwhM410STM91F_ys-HvUZ4WRwch4-gY12EG7cx7u8LEQBxroiwhj8T5Q=@trmm.net>
-In-Reply-To: <d94fdbee-7e41-99db-13f8-16394a288318@suse.com>
-References: <20200914142528.897639-1-hudson@trmm.net>
- <c83fa179-253b-29ba-57d7-c2b5a9b0daee@suse.com>
- <GzkAuTpoKeYXGDsEJtlgfK50xky_Z3ipeYUpbKvW9Fu-0uJamNpsRVMR8fIUYpIzoJlzowf-j7pbcoDAmL8qgYRjE2UwZ2wKma0Xm7U5PpQ=@trmm.net>
- <d94fdbee-7e41-99db-13f8-16394a288318@suse.com>
+CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "Andrew
+ Cooper" <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>, George Dunlap
+ <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>
+Subject: Re: [PATCH 1/3] x86/shim: fix build with PV_SHIM_EXCLUSIVE and
+ SHADOW_PAGING
+Message-ID: <20200914164412.GI753@Air-de-Roger>
+References: <5d86a23c-5dea-8697-9ba1-900d35b99695@suse.com>
+ <3ddb9adf-22b5-9196-1f3c-7cb3cafd08dd@suse.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <3ddb9adf-22b5-9196-1f3c-7cb3cafd08dd@suse.com>
+X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
+ FTLPEX02CL06.citrite.net (10.13.108.179)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,32 +82,31 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Reply-To: Trammell Hudson <hudson@trmm.net>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Monday, September 14, 2020 10:55 AM, Jan Beulich <jbeulich@suse.com> wro=
-te:
-> On 14.09.2020 16:46, Trammell Hudson wrote:
-> > Option 3 would be to write wrappers for the few functions that are
-> > used in the EFI boot path that cast-away the constness of their
-> > arguments (while also silently cursing the UEFI forum for not
-> > writing const-correct code).
->
-> This would be kind of a last resort fallback (except for the
-> cursing, which of course we can do at any time).
+On Mon, Sep 14, 2020 at 02:38:49PM +0200, Jan Beulich wrote:
+> While there's little point in enabling both, the combination ought to at
+> least build correctly. Drop the direct PV_SHIM_EXCLUSIVE conditionals
+> and instead zap PG_log_dirty to zero under the right conditions, and key
+> other #ifdef-s off of that.
+> 
+> While there also expand on ded576ce07e9 ("x86/shadow: dirty VRAM
+> tracking is needed for HVM only"): There was yet another is_hvm_domain()
+> missing, and code touching the struct fields needs to be guarded by
+> suitable #ifdef-s as well. While there also guard shadow-mode-only
+> fields accordingly.
+> 
+> Fixes: 8b5b49ceb3d9 ("x86: don't include domctl and alike in shim-exclusive builds")
+> Reported-by: Andrew Cooper <andrew.cooper3@citrix.com>
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-Since you didn't like the time travel option, I checked to see
-which functions would need to be wrapped.  It is a surprisingly
-small number:
+Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
 
-#define PrintStr(s) StdOut->OutputString(StdOut, (CHAR16 *)(s))
-#define PrintErr(s) StdErr->OutputString(StdErr, (CHAR16 *)(s))
-#define efi_file_open(file,handle,name,mode,attr) \
-  (file)->Open(file, handle, (CHAR16 *)(name), mode, attr)
-#define shim_verify(shim, ptr, len) \
-  (shim)->Verify((void *)(ptr), len)
+We seem to be growing more and more ifdefs which is not ideal IMO, we
+should rather aim to remove them by splitting code into separate
+compilation units. There doesn't seem to be much option to split
+stuff in this case, so be it.
 
---
-Trammell
+Thanks, Roger.
 
