@@ -2,66 +2,68 @@ Return-Path: <SRS0=xX5W=CX=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 804E0C433E2
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2020 09:25:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F8FCC43461
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2020 09:25:12 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2120220719
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2020 09:25:10 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id CD6AD20719
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2020 09:25:11 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="P1Af/ffQ"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2120220719
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="HANrBVzW"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CD6AD20719
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kHkjD-0006zL-1J; Mon, 14 Sep 2020 09:24:51 +0000
+	id 1kHkjM-00070V-Hx; Mon, 14 Sep 2020 09:25:00 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=qknR=CX=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1kHkjB-0006zG-Kt
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2020 09:24:49 +0000
-X-Inumbo-ID: b0a6bfb4-aae1-49e8-8a13-16b466d55ba1
+ id 1kHkjM-00070O-0n
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2020 09:25:00 +0000
+X-Inumbo-ID: a046c954-db43-44f2-b19e-2f76cc1068eb
 Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b0a6bfb4-aae1-49e8-8a13-16b466d55ba1;
- Mon, 14 Sep 2020 09:24:38 +0000 (UTC)
+ id a046c954-db43-44f2-b19e-2f76cc1068eb;
+ Mon, 14 Sep 2020 09:24:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1600075478;
- h=from:to:cc:subject:date:message-id:mime-version;
- bh=REpT4ExM7zcEvoPzI808P1C6pYJR6M8VEXiH743+6mw=;
- b=P1Af/ffQZu04v1keolgUV69YpifG8oX80zuQ1LgDv99qc2rHiyu0ojfO
- 0g/zOLxpB7YICRAsMa0UZhSdluNuDqlCgB8iZyj2gq1g6WyjzoRgZsgz7
- BctzMo+AlDF0rGfiLexTaC9QySu/L3EIRYwmSWx5n8YAVtDJbf6aQQILk A=;
+ d=citrix.com; s=securemail; t=1600075489;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version;
+ bh=wamgop3LxIhBnrdiDDz4m99Y366IRcEkMxrXUbowTR4=;
+ b=HANrBVzWzvPp4PLiQVbnQFkiUEZb90vm/uCwlVoF/0O4LPsksKn6uxcT
+ 1nHv6Ch171QAit4z/7u2xuAHc9P4mNNg9/5ckeuYJf++V7smcQ74GwLCY
+ KBN6XWpfG2+zxgPBXDLZ44OQeipO7wjlJFK1Pk94HHoAdZaCZbi1XenYP E=;
 Authentication-Results: esa6.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: 4cSmOPmuxv7DUvzmg5SKkXWBY3WGNC0y7XM0PP7QVrkFaPtHU9V7dDAe2QTd8LaO+yW3MaqDeo
- MmU3IpDHDRtJ6rbKQ1x6pfb80GAei9EZ5XvDf8QOHHJ+RHAXeugcM2+yJyI8DuVU+hXT4Hfr4w
- grkJktQfqrjoDPoyX1CTudHobNqKrKhri3IOuqQNG/sGqY3R533bPILtRRDW9nVAtjU2E3sRRL
- v2A5OCCFF09xji9taFnK1u5T+y8fqD1pvpN7xWNgh/E4sN/33C4Zq4rBnly4YqoFqVNVztRIlY
- 0s8=
+IronPort-SDR: mRG/iXQlX3apjjUT3C0FvTWC532oOHIGLdmQq3v89r2fcN57LTxOu6cTygsmha4UmyN3MomdHr
+ mSrOsuOC4abMnW3iAS7mRrWc4r00wKeqF+hH9sxfzij7RjWcPm7Ozo7ZyQk81blXqrmuvpcbGN
+ a+s6w01T3UPcmPbKSCg3NEAujmx8bZzJhkTCdYyAGF3F7oc53Ek7ru67OC9ffXUKwf8fnzDM4N
+ ymrT1R9kEP96VWOzM9p8wWiKbrHs2Xek3ulu7XzB2+8pjzZDRtQN7xhTg1PnEyMYQvD79QdPnj
+ ZjE=
 X-SBRS: 2.7
-X-MesageID: 26906970
+X-MesageID: 26906972
 X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,425,1592884800"; d="scan'208";a="26906970"
+X-IronPort-AV: E=Sophos;i="5.76,425,1592884800"; d="scan'208";a="26906972"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson
- <Ian.Jackson@citrix.com>, Wei Liu <wl@xen.org>, Juergen Gross
- <jgross@suse.com>, =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-Subject: [PATCH 0/2] Build fixes
-Date: Mon, 14 Sep 2020 10:24:18 +0100
-Message-ID: <20200914092420.20900-1-andrew.cooper3@citrix.com>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Juergen Gross
+ <jgross@suse.com>, Ian Jackson <Ian.Jackson@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH 1/2] tools/libs/vchan: Don't run the headers check
+Date: Mon, 14 Sep 2020 10:24:19 +0100
+Message-ID: <20200914092420.20900-2-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20200914092420.20900-1-andrew.cooper3@citrix.com>
+References: <20200914092420.20900-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: xen-devel@lists.xenproject.org
@@ -77,18 +79,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-As demonstrated by Gitlab CI.
+There was never a headers check previously, and CentOS 6 can't cope with the
+anonymous union in struct libxenvchan.
 
-Still pending is the xenstat fix, and a newly discovered randconfig issue.
+  cc1: warnings being treated as errors
+  ... tools/include/libxenvchan.h:75: error: declaration does not declare anything
+  make[6]: *** [headers.chk] Error 1
 
-Andrew Cooper (2):
-  tools/libs/vchan: Don't run the headers check
-  tools/Makefile: Drop the use of $(file ...)
+Fixes: 8ab2429f12 ("tools: split libxenvchan into new tools/libs/vchan directory")
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Juergen Gross <jgross@suse.com>
+CC: Ian Jackson <Ian.Jackson@citrix.com>
+CC: Wei Liu <wl@xen.org>
+---
+ tools/libs/vchan/Makefile | 2 ++
+ 1 file changed, 2 insertions(+)
 
- tools/Rules.mk            | 52 +++++++++++++++++++++++++----------------------
- tools/libs/vchan/Makefile |  2 ++
- 2 files changed, 30 insertions(+), 24 deletions(-)
-
+diff --git a/tools/libs/vchan/Makefile b/tools/libs/vchan/Makefile
+index 87ff608f45..5e18d5b196 100644
+--- a/tools/libs/vchan/Makefile
++++ b/tools/libs/vchan/Makefile
+@@ -8,6 +8,8 @@ LIBHEADER := libxenvchan.h
+ SRCS-y += init.c
+ SRCS-y += io.c
+ 
++NO_HEADERS_CHK := y
++
+ include $(XEN_ROOT)/tools/libs/libs.mk
+ 
+ $(PKG_CONFIG_LOCAL): PKG_CONFIG_INCDIR = $(XEN_libxenvchan)/include
 -- 
 2.11.0
 
