@@ -6,50 +6,49 @@ X-Spam-Status: No, score=-5.3 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,
 	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7227AC43461
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2020 12:14:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1E6E4C433E2
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2020 12:16:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1D12521655
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2020 12:14:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1D12521655
+	by mail.kernel.org (Postfix) with ESMTPS id B079821655
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2020 12:16:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B079821655
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kHnNT-0007sV-MH; Mon, 14 Sep 2020 12:14:35 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kHnPG-0007zm-1z; Mon, 14 Sep 2020 12:16:26 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=dIgq=CX=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kHnNS-0007sQ-Vx
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2020 12:14:35 +0000
-X-Inumbo-ID: f0703274-84c7-4e80-aae2-d3318ff30740
+ id 1kHnPE-0007zd-Hi
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2020 12:16:24 +0000
+X-Inumbo-ID: 2a676938-bd89-41b8-b0da-2261c0b45629
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id f0703274-84c7-4e80-aae2-d3318ff30740;
- Mon, 14 Sep 2020 12:14:33 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 2a676938-bd89-41b8-b0da-2261c0b45629;
+ Mon, 14 Sep 2020 12:16:23 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 16A9CAC79;
- Mon, 14 Sep 2020 12:14:48 +0000 (UTC)
-Subject: Re: [PATCH v3 3/4] efi: Enable booting unified
- hypervisor/kernel/initrd images
+ by mx2.suse.de (Postfix) with ESMTP id 79ECCAC79;
+ Mon, 14 Sep 2020 12:16:38 +0000 (UTC)
+Subject: Re: [PATCH v3 4/4] efi: Do not use command line if secure boot is
+ enabled.
 To: Trammell Hudson <hudson@trmm.net>
 Cc: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
  "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 References: <20200907190027.669086-1-hudson@trmm.net>
- <20200907190027.669086-4-hudson@trmm.net> <20200914100609.GC753@Air-de-Roger>
- <3anr6Udui7bFFb1CwaGT9tU_oq3rEh_DwgajzdD_hzmYsvfJX3WGAXUYRzGzBKdgdoxuEfSLM6O1ipl5EitDiRGkgT3vUI8WGzLWM9P2Qdg=@trmm.net>
+ <20200907190027.669086-5-hudson@trmm.net> <20200914102450.GD753@Air-de-Roger>
+ <fbcs49Ps8wnxc2ZwN9e7ptr8gwGxRSVEg6J58A8W84wo2RYwkSUS0bhHeocFpGVXsd4YWDL72FkYOHeye8VzWmy_EUyHKMNeBnAzspklDls=@trmm.net>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <dec55ed4-22c1-d120-3a15-88f3d526ed93@suse.com>
-Date: Mon, 14 Sep 2020 14:14:31 +0200
+Message-ID: <deab1428-c329-b1e5-aa92-866887836f8e@suse.com>
+Date: Mon, 14 Sep 2020 14:16:22 +0200
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.12.0
 MIME-Version: 1.0
-In-Reply-To: <3anr6Udui7bFFb1CwaGT9tU_oq3rEh_DwgajzdD_hzmYsvfJX3WGAXUYRzGzBKdgdoxuEfSLM6O1ipl5EitDiRGkgT3vUI8WGzLWM9P2Qdg=@trmm.net>
+In-Reply-To: <fbcs49Ps8wnxc2ZwN9e7ptr8gwGxRSVEg6J58A8W84wo2RYwkSUS0bhHeocFpGVXsd4YWDL72FkYOHeye8VzWmy_EUyHKMNeBnAzspklDls=@trmm.net>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
@@ -66,19 +65,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 14.09.2020 13:19, Trammell Hudson wrote:
-> On Monday, September 14, 2020 6:06 AM, Roger Pau Monné <roger.pau@citrix.com> wrote:
->> On Mon, Sep 07, 2020 at 03:00:26PM -0400, Trammell Hudson wrote:
->>> -   file->ptr = (void *)pe_find_section(image->ImageBase, image->ImageSize,
+On 14.09.2020 13:36, Trammell Hudson wrote:
+> On Monday, September 14, 2020 6:24 AM, Roger Pau Monné <roger.pau@citrix.com> wrote:
+>> On Mon, Sep 07, 2020 at 03:00:27PM -0400, Trammell Hudson wrote:
+>> [...]
+>>> -   static const __initconst EFI_GUID global_guid = EFI_GLOBAL_VARIABLE;
+>>> -   uint8_t secboot, setupmode;
+>>> -   UINTN secboot_size = sizeof(secboot);
+>>> -   UINTN setupmode_size = sizeof(setupmode);
+>>> -
+>>> -   if ( efi_rs->GetVariable(L"SecureBoot", (EFI_GUID *)&global_guid, NULL, &secboot_size, &secboot) != EFI_SUCCESS )
 >>
->> This already returns a void *, so there's no need for the cast.
+>> I'm slightly worried about the dropping of the const here, and the
+>> fact that the variable is placed in initconst section. Isn't it
+>> dangerous that the EFI services will try to write to it?
 > 
-> It returns const void *, but file has a non-const pointer.  Perhaps files should
-> be immutable and that could be addressed in a const-correctness patch series.
+> The EFI services do not try to write to it; the API doesn't
+> even bother with const-correctness.  The prototype has IN
+> and OUT, but they are not used for constness:
+> 
+> typedef EFI_STATUS(EFIAPI * EFI_GET_VARIABLE) (
+> IN CHAR16 *VariableName,
+> IN EFI_GUID *VendorGuid,
+> OUT UINT32 *Attributes,
+> OPTIONAL IN OUT UINTN *DataSize,
+> OUT VOID *Data OPTIONAL)
 
-But casting away const-ness is really bad. If file->ptr can't
-be adjusted accordingly, I'm afraid the function will need to
-return a pointer to non-const for the time being.
+And I think this underlying aspect if the reason for a lot of apparently
+missing const in our EFI interfacing code.
 
 Jan
 
