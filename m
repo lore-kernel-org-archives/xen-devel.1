@@ -7,58 +7,67 @@ X-Spam-Status: No, score=-9.7 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,UNPARSEABLE_RELAY,URIBL_BLOCKED autolearn=unavailable
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EB60AC2D0E3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7F023C2D0E0
 	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2020 04:12:43 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A4426208FE
+	by mail.kernel.org (Postfix) with ESMTPS id 34DB9212CC
 	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2020 04:12:43 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A4426208FE
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 34DB9212CC
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linux.alibaba.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kI2KA-0007F0-OF; Tue, 15 Sep 2020 04:12:10 +0000
+	id 1kI2KB-0007FC-82; Tue, 15 Sep 2020 04:12:11 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=B5vB=CY=linux.alibaba.com=richard.weiyang@srs-us1.protection.inumbo.net>)
- id 1kI0QG-0005Nh-6Q
- for xen-devel@lists.xenproject.org; Tue, 15 Sep 2020 02:10:20 +0000
-X-Inumbo-ID: 46bbc921-b07a-4a77-a4a3-5e50e1b3237e
-Received: from out4436.biz.mail.alibaba.com (unknown [47.88.44.36])
+ id 1kI0wo-0007uU-TM
+ for xen-devel@lists.xenproject.org; Tue, 15 Sep 2020 02:43:58 +0000
+X-Inumbo-ID: 5cfb8da8-f941-48b9-b67d-5de74204194a
+Received: from out30-133.freemail.mail.aliyun.com (unknown [115.124.30.133])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 46bbc921-b07a-4a77-a4a3-5e50e1b3237e;
- Tue, 15 Sep 2020 02:10:17 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R131e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04426;
- MF=richard.weiyang@linux.alibaba.com; NM=1; PH=DS; RN=17; SR=0;
- TI=SMTPD_---0U9-PFSR_1600135812; 
+ id 5cfb8da8-f941-48b9-b67d-5de74204194a;
+ Tue, 15 Sep 2020 02:43:55 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R161e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04394;
+ MF=richard.weiyang@linux.alibaba.com; NM=1; PH=DS; RN=27; SR=0;
+ TI=SMTPD_---0U9.4qNm_1600137829; 
 Received: from localhost(mailfrom:richard.weiyang@linux.alibaba.com
- fp:SMTPD_---0U9-PFSR_1600135812) by smtp.aliyun-inc.com(127.0.0.1);
- Tue, 15 Sep 2020 10:10:12 +0800
-Date: Tue, 15 Sep 2020 10:10:12 +0800
+ fp:SMTPD_---0U9.4qNm_1600137829) by smtp.aliyun-inc.com(127.0.0.1);
+ Tue, 15 Sep 2020 10:43:49 +0800
+Date: Tue, 15 Sep 2020 10:43:48 +0800
 From: Wei Yang <richard.weiyang@linux.alibaba.com>
 To: David Hildenbrand <david@redhat.com>
 Cc: linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
  linux-mm@kvack.org, linux-hyperv@vger.kernel.org,
  xen-devel@lists.xenproject.org, linux-acpi@vger.kernel.org,
  linux-nvdimm@lists.01.org, linux-s390@vger.kernel.org,
- Andrew Morton <akpm@linux-foundation.org>, Michal Hocko <mhocko@suse.com>,
- Dan Williams <dan.j.williams@intel.com>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ Pankaj Gupta <pankaj.gupta.linux@gmail.com>,
+ Michal Hocko <mhocko@suse.com>, Dan Williams <dan.j.williams@intel.com>,
  Jason Gunthorpe <jgg@ziepe.ca>, Kees Cook <keescook@chromium.org>,
- Ard Biesheuvel <ardb@kernel.org>,
- Pankaj Gupta <pankaj.gupta.linux@gmail.com>, Baoquan He <bhe@redhat.com>
-Subject: Re: [PATCH v2 1/7] kernel/resource: make
- release_mem_region_adjustable() never fail
-Message-ID: <20200915021012.GC2007@L-31X9LVDL-1304.local>
-References: <20200908201012.44168-1-david@redhat.com>
- <20200908201012.44168-2-david@redhat.com>
+ Ard Biesheuvel <ardb@kernel.org>, Thomas Gleixner <tglx@linutronix.de>,
+ "K. Y. Srinivasan" <kys@microsoft.com>,
+ Haiyang Zhang <haiyangz@microsoft.com>,
+ Stephen Hemminger <sthemmin@microsoft.com>, Wei Liu <wei.liu@kernel.org>,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Juergen Gross <jgross@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>,
+ Julien Grall <julien@xen.org>, Baoquan He <bhe@redhat.com>
+Subject: Re: [PATCH v4 5/8] mm/memory_hotplug: MEMHP_MERGE_RESOURCE to
+ specify merging of System RAM resources
+Message-ID: <20200915024348.GA2685@L-31X9LVDL-1304.local>
+References: <20200911103459.10306-1-david@redhat.com>
+ <20200911103459.10306-6-david@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
-In-Reply-To: <20200908201012.44168-2-david@redhat.com>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20200911103459.10306-6-david@redhat.com>
 X-Mailman-Approved-At: Tue, 15 Sep 2020 04:12:09 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -74,197 +83,190 @@ Reply-To: Wei Yang <richard.weiyang@linux.alibaba.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Tue, Sep 08, 2020 at 10:10:06PM +0200, David Hildenbrand wrote:
->Let's make sure splitting a resource on memory hotunplug will never fail.
->This will become more relevant once we merge selected System RAM
->resources - then, we'll trigger that case more often on memory hotunplug.
+On Fri, Sep 11, 2020 at 12:34:56PM +0200, David Hildenbrand wrote:
+>Some add_memory*() users add memory in small, contiguous memory blocks.
+>Examples include virtio-mem, hyper-v balloon, and the XEN balloon.
 >
->In general, this function is already unlikely to fail. When we remove
->memory, we free up quite a lot of metadata (memmap, page tables, memory
->block device, etc.). The only reason it could really fail would be when
->injecting allocation errors.
+>This can quickly result in a lot of memory resources, whereby the actual
+>resource boundaries are not of interest (e.g., it might be relevant for
+>DIMMs, exposed via /proc/iomem to user space). We really want to merge
+>added resources in this scenario where possible.
 >
->All other error cases inside release_mem_region_adjustable() seem to be
->sanity checks if the function would be abused in different context -
->let's add WARN_ON_ONCE() in these cases so we can catch them.
+>Let's provide a flag (MEMHP_MERGE_RESOURCE) to specify that a resource
+>either created within add_memory*() or passed via add_memory_resource()
+>shall be marked mergeable and merged with applicable siblings.
 >
+>To implement that, we need a kernel/resource interface to mark selected
+>System RAM resources mergeable (IORESOURCE_SYSRAM_MERGEABLE) and trigger
+>merging.
+>
+>Note: We really want to merge after the whole operation succeeded, not
+>directly when adding a resource to the resource tree (it would break
+>add_memory_resource() and require splitting resources again when the
+>operation failed - e.g., due to -ENOMEM).
+
+Oops, the latest version is here.
+
+BTW, I don't see patch 4. Not sure it is junked by my mail system?
+
+>
+>Reviewed-by: Pankaj Gupta <pankaj.gupta.linux@gmail.com>
 >Cc: Andrew Morton <akpm@linux-foundation.org>
 >Cc: Michal Hocko <mhocko@suse.com>
 >Cc: Dan Williams <dan.j.williams@intel.com>
 >Cc: Jason Gunthorpe <jgg@ziepe.ca>
 >Cc: Kees Cook <keescook@chromium.org>
 >Cc: Ard Biesheuvel <ardb@kernel.org>
+>Cc: Thomas Gleixner <tglx@linutronix.de>
+>Cc: "K. Y. Srinivasan" <kys@microsoft.com>
+>Cc: Haiyang Zhang <haiyangz@microsoft.com>
+>Cc: Stephen Hemminger <sthemmin@microsoft.com>
+>Cc: Wei Liu <wei.liu@kernel.org>
+>Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+>Cc: Juergen Gross <jgross@suse.com>
+>Cc: Stefano Stabellini <sstabellini@kernel.org>
+>Cc: Roger Pau Monné <roger.pau@citrix.com>
+>Cc: Julien Grall <julien@xen.org>
 >Cc: Pankaj Gupta <pankaj.gupta.linux@gmail.com>
 >Cc: Baoquan He <bhe@redhat.com>
 >Cc: Wei Yang <richardw.yang@linux.intel.com>
 >Signed-off-by: David Hildenbrand <david@redhat.com>
 >---
-> include/linux/ioport.h |  4 ++--
-> kernel/resource.c      | 49 ++++++++++++++++++++++++------------------
-> mm/memory_hotplug.c    | 22 +------------------
-> 3 files changed, 31 insertions(+), 44 deletions(-)
+> include/linux/ioport.h         |  4 +++
+> include/linux/memory_hotplug.h |  7 ++++
+> kernel/resource.c              | 60 ++++++++++++++++++++++++++++++++++
+> mm/memory_hotplug.c            |  7 ++++
+> 4 files changed, 78 insertions(+)
 >
 >diff --git a/include/linux/ioport.h b/include/linux/ioport.h
->index 6c2b06fe8beb7..52a91f5fa1a36 100644
+>index d7620d7c941a0..7e61389dcb017 100644
 >--- a/include/linux/ioport.h
 >+++ b/include/linux/ioport.h
->@@ -248,8 +248,8 @@ extern struct resource * __request_region(struct resource *,
-> extern void __release_region(struct resource *, resource_size_t,
-> 				resource_size_t);
-> #ifdef CONFIG_MEMORY_HOTREMOVE
->-extern int release_mem_region_adjustable(struct resource *, resource_size_t,
->-				resource_size_t);
->+extern void release_mem_region_adjustable(struct resource *, resource_size_t,
->+					  resource_size_t);
+>@@ -60,6 +60,7 @@ struct resource {
+> 
+> /* IORESOURCE_SYSRAM specific bits. */
+> #define IORESOURCE_SYSRAM_DRIVER_MANAGED	0x02000000 /* Always detected via a driver. */
+>+#define IORESOURCE_SYSRAM_MERGEABLE		0x04000000 /* Resource can be merged. */
+> 
+> #define IORESOURCE_EXCLUSIVE	0x08000000	/* Userland may not map this resource */
+> 
+>@@ -253,6 +254,9 @@ extern void __release_region(struct resource *, resource_size_t,
+> extern void release_mem_region_adjustable(struct resource *, resource_size_t,
+> 					  resource_size_t);
 > #endif
+>+#ifdef CONFIG_MEMORY_HOTPLUG
+>+extern void merge_system_ram_resource(struct resource *res);
+>+#endif
 > 
 > /* Wrappers for managed devices */
+> struct device;
+>diff --git a/include/linux/memory_hotplug.h b/include/linux/memory_hotplug.h
+>index 33eb80fdba22f..d65c6fdc5cfc3 100644
+>--- a/include/linux/memory_hotplug.h
+>+++ b/include/linux/memory_hotplug.h
+>@@ -62,6 +62,13 @@ typedef int __bitwise mhp_t;
+> 
+> /* No special request */
+> #define MHP_NONE		((__force mhp_t)0)
+>+/*
+>+ * Allow merging of the added System RAM resource with adjacent,
+>+ * mergeable resources. After a successful call to add_memory_resource()
+>+ * with this flag set, the resource pointer must no longer be used as it
+>+ * might be stale, or the resource might have changed.
+>+ */
+>+#define MEMHP_MERGE_RESOURCE	((__force mhp_t)BIT(0))
+> 
+> /*
+>  * Extended parameters for memory hotplug:
 >diff --git a/kernel/resource.c b/kernel/resource.c
->index f1175ce93a1d5..36b3552210120 100644
+>index 36b3552210120..7a91b935f4c20 100644
 >--- a/kernel/resource.c
 >+++ b/kernel/resource.c
->@@ -1258,21 +1258,28 @@ EXPORT_SYMBOL(__release_region);
->  *   assumes that all children remain in the lower address entry for
->  *   simplicity.  Enhance this logic when necessary.
->  */
->-int release_mem_region_adjustable(struct resource *parent,
->-				  resource_size_t start, resource_size_t size)
->+void release_mem_region_adjustable(struct resource *parent,
->+				   resource_size_t start, resource_size_t size)
-> {
->+	struct resource *new_res = NULL;
->+	bool alloc_nofail = false;
-> 	struct resource **p;
-> 	struct resource *res;
->-	struct resource *new_res;
-> 	resource_size_t end;
->-	int ret = -EINVAL;
-> 
-> 	end = start + size - 1;
->-	if ((start < parent->start) || (end > parent->end))
->-		return ret;
->+	if (WARN_ON_ONCE((start < parent->start) || (end > parent->end)))
->+		return;
-> 
->-	/* The alloc_resource() result gets checked later */
->-	new_res = alloc_resource(GFP_KERNEL);
->+	/*
->+	 * We free up quite a lot of memory on memory hotunplug (esp., memap),
->+	 * just before releasing the region. This is highly unlikely to
->+	 * fail - let's play save and make it never fail as the caller cannot
->+	 * perform any error handling (e.g., trying to re-add memory will fail
->+	 * similarly).
->+	 */
->+retry:
->+	new_res = alloc_resource(GFP_KERNEL | alloc_nofail ? __GFP_NOFAIL : 0);
-> 
-> 	p = &parent->child;
-> 	write_lock(&resource_lock);
->@@ -1298,7 +1305,6 @@ int release_mem_region_adjustable(struct resource *parent,
-> 		 * so if we are dealing with them, let us just back off here.
-> 		 */
-> 		if (!(res->flags & IORESOURCE_SYSRAM)) {
->-			ret = 0;
-> 			break;
-> 		}
-> 
->@@ -1315,20 +1321,23 @@ int release_mem_region_adjustable(struct resource *parent,
-> 			/* free the whole entry */
-> 			*p = res->sibling;
-> 			free_resource(res);
->-			ret = 0;
-> 		} else if (res->start == start && res->end != end) {
-> 			/* adjust the start */
->-			ret = __adjust_resource(res, end + 1,
->-						res->end - end);
->+			WARN_ON_ONCE(__adjust_resource(res, end + 1,
->+						       res->end - end));
-> 		} else if (res->start != start && res->end == end) {
-> 			/* adjust the end */
->-			ret = __adjust_resource(res, res->start,
->-						start - res->start);
->+			WARN_ON_ONCE(__adjust_resource(res, res->start,
->+						       start - res->start));
-> 		} else {
->-			/* split into two entries */
->+			/* split into two entries - we need a new resource */
-> 			if (!new_res) {
->-				ret = -ENOMEM;
->-				break;
->+				new_res = alloc_resource(GFP_ATOMIC);
->+				if (!new_res) {
->+					alloc_nofail = true;
->+					write_unlock(&resource_lock);
->+					goto retry;
->+				}
-> 			}
-> 			new_res->name = res->name;
-> 			new_res->start = end + 1;
->@@ -1339,9 +1348,8 @@ int release_mem_region_adjustable(struct resource *parent,
-> 			new_res->sibling = res->sibling;
-> 			new_res->child = NULL;
-> 
->-			ret = __adjust_resource(res, res->start,
->-						start - res->start);
->-			if (ret)
->+			if (WARN_ON_ONCE(__adjust_resource(res, res->start,
->+							   start - res->start)))
-> 				break;
-> 			res->sibling = new_res;
-> 			new_res = NULL;
->@@ -1352,7 +1360,6 @@ int release_mem_region_adjustable(struct resource *parent,
-> 
-> 	write_unlock(&resource_lock);
-> 	free_resource(new_res);
->-	return ret;
+>@@ -1363,6 +1363,66 @@ void release_mem_region_adjustable(struct resource *parent,
 > }
 > #endif	/* CONFIG_MEMORY_HOTREMOVE */
 > 
+>+#ifdef CONFIG_MEMORY_HOTPLUG
+>+static bool system_ram_resources_mergeable(struct resource *r1,
+>+					   struct resource *r2)
+>+{
+>+	/* We assume either r1 or r2 is IORESOURCE_SYSRAM_MERGEABLE. */
+>+	return r1->flags == r2->flags && r1->end + 1 == r2->start &&
+>+	       r1->name == r2->name && r1->desc == r2->desc &&
+>+	       !r1->child && !r2->child;
+>+}
+>+
+>+/*
+>+ * merge_system_ram_resource - mark the System RAM resource mergeable and try to
+>+ * merge it with adjacent, mergeable resources
+>+ * @res: resource descriptor
+>+ *
+>+ * This interface is intended for memory hotplug, whereby lots of contiguous
+>+ * system ram resources are added (e.g., via add_memory*()) by a driver, and
+>+ * the actual resource boundaries are not of interest (e.g., it might be
+>+ * relevant for DIMMs). Only resources that are marked mergeable, that have the
+>+ * same parent, and that don't have any children are considered. All mergeable
+>+ * resources must be immutable during the request.
+>+ *
+>+ * Note:
+>+ * - The caller has to make sure that no pointers to resources that are
+>+ *   marked mergeable are used anymore after this call - the resource might
+>+ *   be freed and the pointer might be stale!
+>+ * - release_mem_region_adjustable() will split on demand on memory hotunplug
+>+ */
+>+void merge_system_ram_resource(struct resource *res)
+>+{
+>+	const unsigned long flags = IORESOURCE_SYSTEM_RAM | IORESOURCE_BUSY;
+>+	struct resource *cur;
+>+
+>+	if (WARN_ON_ONCE((res->flags & flags) != flags))
+>+		return;
+>+
+>+	write_lock(&resource_lock);
+>+	res->flags |= IORESOURCE_SYSRAM_MERGEABLE;
+>+
+>+	/* Try to merge with next item in the list. */
+>+	cur = res->sibling;
+>+	if (cur && system_ram_resources_mergeable(res, cur)) {
+>+		res->end = cur->end;
+>+		res->sibling = cur->sibling;
+>+		free_resource(cur);
+>+	}
+>+
+>+	/* Try to merge with previous item in the list. */
+>+	cur = res->parent->child;
+>+	while (cur && cur->sibling != res)
+>+		cur = cur->sibling;
+>+	if (cur && system_ram_resources_mergeable(cur, res)) {
+>+		cur->end = res->end;
+>+		cur->sibling = res->sibling;
+>+		free_resource(res);
+>+	}
+>+	write_unlock(&resource_lock);
+>+}
+>+#endif	/* CONFIG_MEMORY_HOTPLUG */
+>+
+> /*
+>  * Managed region resource
+>  */
 >diff --git a/mm/memory_hotplug.c b/mm/memory_hotplug.c
->index baded53b9ff92..4c47b68a9f4b5 100644
+>index 8f0bd7c9a63a5..553c718226b3e 100644
 >--- a/mm/memory_hotplug.c
 >+++ b/mm/memory_hotplug.c
->@@ -1724,26 +1724,6 @@ void try_offline_node(int nid)
-> }
-> EXPORT_SYMBOL(try_offline_node);
+>@@ -1102,6 +1102,13 @@ int __ref add_memory_resource(int nid, struct resource *res, mhp_t mhp_flags)
+> 	/* device_online() will take the lock when calling online_pages() */
+> 	mem_hotplug_done();
 > 
->-static void __release_memory_resource(resource_size_t start,
->-				      resource_size_t size)
->-{
->-	int ret;
->-
->-	/*
->-	 * When removing memory in the same granularity as it was added,
->-	 * this function never fails. It might only fail if resources
->-	 * have to be adjusted or split. We'll ignore the error, as
->-	 * removing of memory cannot fail.
->-	 */
->-	ret = release_mem_region_adjustable(&iomem_resource, start, size);
->-	if (ret) {
->-		resource_size_t endres = start + size - 1;
->-
->-		pr_warn("Unable to release resource <%pa-%pa> (%d)\n",
->-			&start, &endres, ret);
->-	}
->-}
->-
-> static int __ref try_remove_memory(int nid, u64 start, u64 size)
-> {
-> 	int rc = 0;
->@@ -1777,7 +1757,7 @@ static int __ref try_remove_memory(int nid, u64 start, u64 size)
-> 		memblock_remove(start, size);
-> 	}
-> 
->-	__release_memory_resource(start, size);
->+	release_mem_region_adjustable(&iomem_resource, start, size);
-> 
-
-Seems the only user of release_mem_region_adjustable() is here, can we move
-iomem_resource into the function body? Actually, we don't iterate the resource
-tree from any level. We always start from the root.
-
-> 	try_offline_node(nid);
-> 
+>+	/*
+>+	 * In case we're allowed to merge the resource, flag it and trigger
+>+	 * merging now that adding succeeded.
+>+	 */
+>+	if (mhp_flags & MEMHP_MERGE_RESOURCE)
+>+		merge_system_ram_resource(res);
+>+
+> 	/* online pages if requested */
+> 	if (memhp_default_online_type != MMOP_OFFLINE)
+> 		walk_memory_blocks(start, size, NULL, online_memory_block);
 >-- 
 >2.26.2
 
