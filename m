@@ -7,35 +7,34 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 422F8C31E51
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2020 15:00:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CCC24C35265
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2020 15:00:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CF2AE20663
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2020 15:00:41 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CF2AE20663
+	by mail.kernel.org (Postfix) with ESMTPS id 5B6E220663
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2020 15:00:39 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5B6E220663
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kICRb-0000lG-FM; Tue, 15 Sep 2020 15:00:31 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kICRY-0000iD-3S; Tue, 15 Sep 2020 15:00:28 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=X5gY=CY=suse.de=tzimmermann@srs-us1.protection.inumbo.net>)
- id 1kICRa-0000TT-Ff
- for xen-devel@lists.xenproject.org; Tue, 15 Sep 2020 15:00:30 +0000
-X-Inumbo-ID: 4282a109-e6e9-4042-b1dc-c09340d2cb77
+ id 1kICRW-0000TU-Hd
+ for xen-devel@lists.xenproject.org; Tue, 15 Sep 2020 15:00:26 +0000
+X-Inumbo-ID: 9d06c359-ef16-48b8-8b44-2886ade1e163
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 4282a109-e6e9-4042-b1dc-c09340d2cb77;
- Tue, 15 Sep 2020 15:00:09 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 9d06c359-ef16-48b8-8b44-2886ade1e163;
+ Tue, 15 Sep 2020 15:00:13 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 69906AFB0;
- Tue, 15 Sep 2020 15:00:23 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 4F700B2A3;
+ Tue, 15 Sep 2020 15:00:28 +0000 (UTC)
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: alexander.deucher@amd.com, christian.koenig@amd.com, airlied@linux.ie,
  daniel@ffwll.ch, linux@armlinux.org.uk, maarten.lankhorst@linux.intel.com,
@@ -65,9 +64,9 @@ Cc: amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
  freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
  linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
  xen-devel@lists.xenproject.org, Thomas Zimmermann <tzimmermann@suse.de>
-Subject: [PATCH v2 07/21] drm/mediatek: Introduce GEM object functions
-Date: Tue, 15 Sep 2020 16:59:44 +0200
-Message-Id: <20200915145958.19993-8-tzimmermann@suse.de>
+Subject: [PATCH v2 13/21] drm/rockchip: Convert to drm_gem_object_funcs
+Date: Tue, 15 Sep 2020 16:59:50 +0200
+Message-Id: <20200915145958.19993-14-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200915145958.19993-1-tzimmermann@suse.de>
 References: <20200915145958.19993-1-tzimmermann@suse.de>
@@ -88,72 +87,63 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 GEM object functions deprecate several similar callback interfaces in
 struct drm_driver. This patch replaces the per-driver callbacks with
-per-instance callbacks in mediatek. The only exception is gem_prime_mmap,
+per-instance callbacks in rockchip. The only exception is gem_prime_mmap,
 which is non-trivial to convert.
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 ---
- drivers/gpu/drm/mediatek/mtk_drm_drv.c |  5 -----
- drivers/gpu/drm/mediatek/mtk_drm_gem.c | 11 +++++++++++
- 2 files changed, 11 insertions(+), 5 deletions(-)
+ drivers/gpu/drm/rockchip/rockchip_drm_drv.c |  5 -----
+ drivers/gpu/drm/rockchip/rockchip_drm_gem.c | 10 ++++++++++
+ 2 files changed, 10 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/gpu/drm/mediatek/mtk_drm_drv.c b/drivers/gpu/drm/mediatek/mtk_drm_drv.c
-index 040a8f393fe2..2f8d0043fca7 100644
---- a/drivers/gpu/drm/mediatek/mtk_drm_drv.c
-+++ b/drivers/gpu/drm/mediatek/mtk_drm_drv.c
-@@ -301,18 +301,13 @@ struct drm_gem_object *mtk_drm_gem_prime_import(struct drm_device *dev,
- static struct drm_driver mtk_drm_driver = {
- 	.driver_features = DRIVER_MODESET | DRIVER_GEM | DRIVER_ATOMIC,
+diff --git a/drivers/gpu/drm/rockchip/rockchip_drm_drv.c b/drivers/gpu/drm/rockchip/rockchip_drm_drv.c
+index 0f3eb392fe39..b7654f5e4225 100644
+--- a/drivers/gpu/drm/rockchip/rockchip_drm_drv.c
++++ b/drivers/gpu/drm/rockchip/rockchip_drm_drv.c
+@@ -212,15 +212,10 @@ static const struct file_operations rockchip_drm_driver_fops = {
+ static struct drm_driver rockchip_drm_driver = {
+ 	.driver_features	= DRIVER_MODESET | DRIVER_GEM | DRIVER_ATOMIC,
+ 	.lastclose		= drm_fb_helper_lastclose,
+-	.gem_vm_ops		= &drm_gem_cma_vm_ops,
+-	.gem_free_object_unlocked = rockchip_gem_free_object,
+ 	.dumb_create		= rockchip_gem_dumb_create,
+ 	.prime_handle_to_fd	= drm_gem_prime_handle_to_fd,
+ 	.prime_fd_to_handle	= drm_gem_prime_fd_to_handle,
+-	.gem_prime_get_sg_table	= rockchip_gem_prime_get_sg_table,
+ 	.gem_prime_import_sg_table	= rockchip_gem_prime_import_sg_table,
+-	.gem_prime_vmap		= rockchip_gem_prime_vmap,
+-	.gem_prime_vunmap	= rockchip_gem_prime_vunmap,
+ 	.gem_prime_mmap		= rockchip_gem_mmap_buf,
+ 	.fops			= &rockchip_drm_driver_fops,
+ 	.name	= DRIVER_NAME,
+diff --git a/drivers/gpu/drm/rockchip/rockchip_drm_gem.c b/drivers/gpu/drm/rockchip/rockchip_drm_gem.c
+index 0055d86576f7..bddc7d99efe3 100644
+--- a/drivers/gpu/drm/rockchip/rockchip_drm_gem.c
++++ b/drivers/gpu/drm/rockchip/rockchip_drm_gem.c
+@@ -296,6 +296,14 @@ static void rockchip_gem_release_object(struct rockchip_gem_object *rk_obj)
+ 	kfree(rk_obj);
+ }
  
--	.gem_free_object_unlocked = mtk_drm_gem_free_object,
--	.gem_vm_ops = &drm_gem_cma_vm_ops,
- 	.dumb_create = mtk_drm_gem_dumb_create,
- 
- 	.prime_handle_to_fd = drm_gem_prime_handle_to_fd,
- 	.prime_fd_to_handle = drm_gem_prime_fd_to_handle,
- 	.gem_prime_import = mtk_drm_gem_prime_import,
--	.gem_prime_get_sg_table = mtk_gem_prime_get_sg_table,
- 	.gem_prime_import_sg_table = mtk_gem_prime_import_sg_table,
- 	.gem_prime_mmap = mtk_drm_gem_mmap_buf,
--	.gem_prime_vmap = mtk_drm_gem_prime_vmap,
--	.gem_prime_vunmap = mtk_drm_gem_prime_vunmap,
- 	.fops = &mtk_drm_fops,
- 
- 	.name = DRIVER_NAME,
-diff --git a/drivers/gpu/drm/mediatek/mtk_drm_gem.c b/drivers/gpu/drm/mediatek/mtk_drm_gem.c
-index 6190cc3b7b0d..591b90410e4a 100644
---- a/drivers/gpu/drm/mediatek/mtk_drm_gem.c
-+++ b/drivers/gpu/drm/mediatek/mtk_drm_gem.c
-@@ -8,11 +8,20 @@
- #include <drm/drm.h>
- #include <drm/drm_device.h>
- #include <drm/drm_gem.h>
-+#include <drm/drm_gem_cma_helper.h>
- #include <drm/drm_prime.h>
- 
- #include "mtk_drm_drv.h"
- #include "mtk_drm_gem.h"
- 
-+static const struct drm_gem_object_funcs mtk_drm_gem_object_funcs = {
-+	.free = mtk_drm_gem_free_object,
-+	.get_sg_table = mtk_gem_prime_get_sg_table,
-+	.vmap = mtk_drm_gem_prime_vmap,
-+	.vunmap = mtk_drm_gem_prime_vunmap,
++static const struct drm_gem_object_funcs rockchip_gem_object_funcs = {
++	.free = rockchip_gem_free_object,
++	.get_sg_table = rockchip_gem_prime_get_sg_table,
++	.vmap = rockchip_gem_prime_vmap,
++	.vunmap	= rockchip_gem_prime_vunmap,
 +	.vm_ops = &drm_gem_cma_vm_ops,
 +};
 +
- static struct mtk_drm_gem_obj *mtk_drm_gem_init(struct drm_device *dev,
- 						unsigned long size)
+ static struct rockchip_gem_object *
+ 	rockchip_gem_alloc_object(struct drm_device *drm, unsigned int size)
  {
-@@ -25,6 +34,8 @@ static struct mtk_drm_gem_obj *mtk_drm_gem_init(struct drm_device *dev,
- 	if (!mtk_gem_obj)
- 		return ERR_PTR(-ENOMEM);
+@@ -310,6 +318,8 @@ static struct rockchip_gem_object *
  
-+	mtk_gem_obj->base.funcs = &mtk_drm_gem_object_funcs;
+ 	obj = &rk_obj->base;
+ 
++	obj->funcs = &rockchip_gem_object_funcs;
 +
- 	ret = drm_gem_object_init(dev, &mtk_gem_obj->base, size);
- 	if (ret < 0) {
- 		DRM_ERROR("failed to initialize gem object\n");
+ 	drm_gem_object_init(drm, obj, size);
+ 
+ 	return rk_obj;
 -- 
 2.28.0
 
