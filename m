@@ -7,34 +7,34 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D765FC43461
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2020 15:00:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7D626C2D0F6
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2020 15:00:25 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6B41620732
+	by mail.kernel.org (Postfix) with ESMTPS id 0D16B20732
 	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2020 15:00:24 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6B41620732
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0D16B20732
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kICRI-0000YH-Q3; Tue, 15 Sep 2020 15:00:12 +0000
+	id 1kICRE-0000XP-6D; Tue, 15 Sep 2020 15:00:08 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=X5gY=CY=suse.de=tzimmermann@srs-us1.protection.inumbo.net>)
- id 1kICRH-0000TU-H1
- for xen-devel@lists.xenproject.org; Tue, 15 Sep 2020 15:00:11 +0000
-X-Inumbo-ID: 32e6057a-bce9-44a9-b322-03f820f5810c
+ id 1kICRC-0000TU-Kx
+ for xen-devel@lists.xenproject.org; Tue, 15 Sep 2020 15:00:06 +0000
+X-Inumbo-ID: 23d42c92-74fd-4154-82fd-8678b09242e6
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 32e6057a-bce9-44a9-b322-03f820f5810c;
+ id 23d42c92-74fd-4154-82fd-8678b09242e6;
  Tue, 15 Sep 2020 15:00:05 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 7E84AAF3F;
- Tue, 15 Sep 2020 15:00:19 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id BA87AAF5D;
+ Tue, 15 Sep 2020 15:00:18 +0000 (UTC)
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: alexander.deucher@amd.com, christian.koenig@amd.com, airlied@linux.ie,
  daniel@ffwll.ch, linux@armlinux.org.uk, maarten.lankhorst@linux.intel.com,
@@ -64,9 +64,9 @@ Cc: amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
  freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
  linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
  xen-devel@lists.xenproject.org, Thomas Zimmermann <tzimmermann@suse.de>
-Subject: [PATCH v2 03/21] drm/etnaviv: Introduce GEM object functions
-Date: Tue, 15 Sep 2020 16:59:40 +0200
-Message-Id: <20200915145958.19993-4-tzimmermann@suse.de>
+Subject: [PATCH v2 01/21] drm/amdgpu: Introduce GEM object functions
+Date: Tue, 15 Sep 2020 16:59:38 +0200
+Message-Id: <20200915145958.19993-2-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200915145958.19993-1-tzimmermann@suse.de>
 References: <20200915145958.19993-1-tzimmermann@suse.de>
@@ -87,106 +87,137 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 GEM object functions deprecate several similar callback interfaces in
 struct drm_driver. This patch replaces the per-driver callbacks with
-per-instance callbacks in etnaviv. The only exception is gem_prime_mmap,
+per-instance callbacks in amdgpu. The only exception is gem_prime_mmap,
 which is non-trivial to convert.
+
+v2:
+	* move object-function instance to amdgpu_gem.c (Christian)
+	* set callbacks in amdgpu_gem_object_create() (Christian)
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 ---
- drivers/gpu/drm/etnaviv/etnaviv_drv.c | 13 -------------
- drivers/gpu/drm/etnaviv/etnaviv_drv.h |  1 -
- drivers/gpu/drm/etnaviv/etnaviv_gem.c | 19 ++++++++++++++++++-
- 3 files changed, 18 insertions(+), 15 deletions(-)
+ drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c    |  6 ------
+ drivers/gpu/drm/amd/amdgpu/amdgpu_gem.c    | 23 +++++++++++++++++-----
+ drivers/gpu/drm/amd/amdgpu/amdgpu_gem.h    |  5 -----
+ drivers/gpu/drm/amd/amdgpu/amdgpu_object.c |  1 +
+ 4 files changed, 19 insertions(+), 16 deletions(-)
 
-diff --git a/drivers/gpu/drm/etnaviv/etnaviv_drv.c b/drivers/gpu/drm/etnaviv/etnaviv_drv.c
-index a9a3afaef9a1..aa270b79e585 100644
---- a/drivers/gpu/drm/etnaviv/etnaviv_drv.c
-+++ b/drivers/gpu/drm/etnaviv/etnaviv_drv.c
-@@ -468,12 +468,6 @@ static const struct drm_ioctl_desc etnaviv_ioctls[] = {
- 	ETNA_IOCTL(PM_QUERY_SIG, pm_query_sig, DRM_RENDER_ALLOW),
- };
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
+index 6edde2b9e402..840ca8f9c1e1 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
+@@ -1505,19 +1505,13 @@ static struct drm_driver kms_driver = {
+ 	.lastclose = amdgpu_driver_lastclose_kms,
+ 	.irq_handler = amdgpu_irq_handler,
+ 	.ioctls = amdgpu_ioctls_kms,
+-	.gem_free_object_unlocked = amdgpu_gem_object_free,
+-	.gem_open_object = amdgpu_gem_object_open,
+-	.gem_close_object = amdgpu_gem_object_close,
+ 	.dumb_create = amdgpu_mode_dumb_create,
+ 	.dumb_map_offset = amdgpu_mode_dumb_mmap,
+ 	.fops = &amdgpu_driver_kms_fops,
  
--static const struct vm_operations_struct vm_ops = {
--	.fault = etnaviv_gem_fault,
--	.open = drm_gem_vm_open,
--	.close = drm_gem_vm_close,
--};
--
- static const struct file_operations fops = {
- 	.owner              = THIS_MODULE,
- 	.open               = drm_open,
-@@ -490,16 +484,9 @@ static struct drm_driver etnaviv_drm_driver = {
- 	.driver_features    = DRIVER_GEM | DRIVER_RENDER,
- 	.open               = etnaviv_open,
- 	.postclose           = etnaviv_postclose,
--	.gem_free_object_unlocked = etnaviv_gem_free_object,
--	.gem_vm_ops         = &vm_ops,
  	.prime_handle_to_fd = drm_gem_prime_handle_to_fd,
  	.prime_fd_to_handle = drm_gem_prime_fd_to_handle,
--	.gem_prime_pin      = etnaviv_gem_prime_pin,
--	.gem_prime_unpin    = etnaviv_gem_prime_unpin,
--	.gem_prime_get_sg_table = etnaviv_gem_prime_get_sg_table,
- 	.gem_prime_import_sg_table = etnaviv_gem_prime_import_sg_table,
--	.gem_prime_vmap     = etnaviv_gem_prime_vmap,
--	.gem_prime_vunmap   = etnaviv_gem_prime_vunmap,
- 	.gem_prime_mmap     = etnaviv_gem_prime_mmap,
- #ifdef CONFIG_DEBUG_FS
- 	.debugfs_init       = etnaviv_debugfs_init,
-diff --git a/drivers/gpu/drm/etnaviv/etnaviv_drv.h b/drivers/gpu/drm/etnaviv/etnaviv_drv.h
-index 4d8dc9236e5f..914f0867ff71 100644
---- a/drivers/gpu/drm/etnaviv/etnaviv_drv.h
-+++ b/drivers/gpu/drm/etnaviv/etnaviv_drv.h
-@@ -49,7 +49,6 @@ int etnaviv_ioctl_gem_submit(struct drm_device *dev, void *data,
- 		struct drm_file *file);
+-	.gem_prime_export = amdgpu_gem_prime_export,
+ 	.gem_prime_import = amdgpu_gem_prime_import,
+-	.gem_prime_vmap = amdgpu_gem_prime_vmap,
+-	.gem_prime_vunmap = amdgpu_gem_prime_vunmap,
+ 	.gem_prime_mmap = amdgpu_gem_prime_mmap,
  
- int etnaviv_gem_mmap(struct file *filp, struct vm_area_struct *vma);
--vm_fault_t etnaviv_gem_fault(struct vm_fault *vmf);
- int etnaviv_gem_mmap_offset(struct drm_gem_object *obj, u64 *offset);
- struct sg_table *etnaviv_gem_prime_get_sg_table(struct drm_gem_object *obj);
- void *etnaviv_gem_prime_vmap(struct drm_gem_object *obj);
-diff --git a/drivers/gpu/drm/etnaviv/etnaviv_gem.c b/drivers/gpu/drm/etnaviv/etnaviv_gem.c
-index ea19f1d27275..312e9d58d5a7 100644
---- a/drivers/gpu/drm/etnaviv/etnaviv_gem.c
-+++ b/drivers/gpu/drm/etnaviv/etnaviv_gem.c
-@@ -171,7 +171,7 @@ int etnaviv_gem_mmap(struct file *filp, struct vm_area_struct *vma)
- 	return obj->ops->mmap(obj, vma);
- }
+ 	.name = DRIVER_NAME,
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_gem.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_gem.c
+index aa7f230c71bf..aeecd5dc3ce4 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_gem.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_gem.c
+@@ -36,9 +36,12 @@
  
--vm_fault_t etnaviv_gem_fault(struct vm_fault *vmf)
-+static vm_fault_t etnaviv_gem_fault(struct vm_fault *vmf)
- {
- 	struct vm_area_struct *vma = vmf->vma;
- 	struct drm_gem_object *obj = vma->vm_private_data;
-@@ -561,6 +561,22 @@ void etnaviv_gem_obj_add(struct drm_device *dev, struct drm_gem_object *obj)
- 	mutex_unlock(&priv->gem_lock);
- }
+ #include "amdgpu.h"
+ #include "amdgpu_display.h"
++#include "amdgpu_dma_buf.h"
+ #include "amdgpu_xgmi.h"
  
-+static const struct vm_operations_struct vm_ops = {
-+	.fault = etnaviv_gem_fault,
-+	.open = drm_gem_vm_open,
-+	.close = drm_gem_vm_close,
-+};
+-void amdgpu_gem_object_free(struct drm_gem_object *gobj)
++static const struct drm_gem_object_funcs amdgpu_gem_object_funcs;
 +
-+static const struct drm_gem_object_funcs etnaviv_gem_object_funcs = {
-+	.free = etnaviv_gem_free_object,
-+	.pin = etnaviv_gem_prime_pin,
-+	.unpin = etnaviv_gem_prime_unpin,
-+	.get_sg_table = etnaviv_gem_prime_get_sg_table,
-+	.vmap = etnaviv_gem_prime_vmap,
-+	.vunmap = etnaviv_gem_prime_vunmap,
-+	.vm_ops = &vm_ops,
-+};
-+
- static int etnaviv_gem_new_impl(struct drm_device *dev, u32 size, u32 flags,
- 	const struct etnaviv_gem_ops *ops, struct drm_gem_object **obj)
++static void amdgpu_gem_object_free(struct drm_gem_object *gobj)
  {
-@@ -595,6 +611,7 @@ static int etnaviv_gem_new_impl(struct drm_device *dev, u32 size, u32 flags,
- 	INIT_LIST_HEAD(&etnaviv_obj->vram_list);
+ 	struct amdgpu_bo *robj = gem_to_amdgpu_bo(gobj);
  
- 	*obj = &etnaviv_obj->base;
-+	(*obj)->funcs = &etnaviv_gem_object_funcs;
+@@ -87,6 +90,7 @@ int amdgpu_gem_object_create(struct amdgpu_device *adev, unsigned long size,
+ 		return r;
+ 	}
+ 	*obj = &bo->tbo.base;
++	(*obj)->funcs = &amdgpu_gem_object_funcs;
  
  	return 0;
  }
+@@ -119,8 +123,8 @@ void amdgpu_gem_force_release(struct amdgpu_device *adev)
+  * Call from drm_gem_handle_create which appear in both new and open ioctl
+  * case.
+  */
+-int amdgpu_gem_object_open(struct drm_gem_object *obj,
+-			   struct drm_file *file_priv)
++static int amdgpu_gem_object_open(struct drm_gem_object *obj,
++				  struct drm_file *file_priv)
+ {
+ 	struct amdgpu_bo *abo = gem_to_amdgpu_bo(obj);
+ 	struct amdgpu_device *adev = amdgpu_ttm_adev(abo->tbo.bdev);
+@@ -152,8 +156,8 @@ int amdgpu_gem_object_open(struct drm_gem_object *obj,
+ 	return 0;
+ }
+ 
+-void amdgpu_gem_object_close(struct drm_gem_object *obj,
+-			     struct drm_file *file_priv)
++static void amdgpu_gem_object_close(struct drm_gem_object *obj,
++				    struct drm_file *file_priv)
+ {
+ 	struct amdgpu_bo *bo = gem_to_amdgpu_bo(obj);
+ 	struct amdgpu_device *adev = amdgpu_ttm_adev(bo->tbo.bdev);
+@@ -211,6 +215,15 @@ void amdgpu_gem_object_close(struct drm_gem_object *obj,
+ 	ttm_eu_backoff_reservation(&ticket, &list);
+ }
+ 
++static const struct drm_gem_object_funcs amdgpu_gem_object_funcs = {
++	.free = amdgpu_gem_object_free,
++	.open = amdgpu_gem_object_open,
++	.close = amdgpu_gem_object_close,
++	.export = amdgpu_gem_prime_export,
++	.vmap = amdgpu_gem_prime_vmap,
++	.vunmap = amdgpu_gem_prime_vunmap,
++};
++
+ /*
+  * GEM ioctls.
+  */
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_gem.h b/drivers/gpu/drm/amd/amdgpu/amdgpu_gem.h
+index e0f025dd1b14..637bf51dbf06 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_gem.h
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_gem.h
+@@ -33,11 +33,6 @@
+ #define AMDGPU_GEM_DOMAIN_MAX		0x3
+ #define gem_to_amdgpu_bo(gobj) container_of((gobj), struct amdgpu_bo, tbo.base)
+ 
+-void amdgpu_gem_object_free(struct drm_gem_object *obj);
+-int amdgpu_gem_object_open(struct drm_gem_object *obj,
+-				struct drm_file *file_priv);
+-void amdgpu_gem_object_close(struct drm_gem_object *obj,
+-				struct drm_file *file_priv);
+ unsigned long amdgpu_gem_timeout(uint64_t timeout_ns);
+ 
+ /*
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
+index ac043baac05d..c4e82a8fa53f 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
+@@ -561,6 +561,7 @@ static int amdgpu_bo_do_create(struct amdgpu_device *adev,
+ 	bo = kzalloc(sizeof(struct amdgpu_bo), GFP_KERNEL);
+ 	if (bo == NULL)
+ 		return -ENOMEM;
++
+ 	drm_gem_private_object_init(adev_to_drm(adev), &bo->tbo.base, size);
+ 	INIT_LIST_HEAD(&bo->shadow_list);
+ 	bo->vm_bo = NULL;
 -- 
 2.28.0
 
