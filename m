@@ -2,57 +2,65 @@ Return-Path: <SRS0=BsMM=CY=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.3 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0016EC433E2
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2020 08:26:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C961C43461
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2020 08:29:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B5A5F221E7
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2020 08:26:23 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B5A5F221E7
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id DB95920771
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2020 08:29:56 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="bGKVLB9L"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DB95920771
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kI6Hv-0005Qr-5k; Tue, 15 Sep 2020 08:26:07 +0000
+	id 1kI6LP-0005Yg-M2; Tue, 15 Sep 2020 08:29:43 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=jdui=CY=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kI6Ht-0005Ql-Ab
- for xen-devel@lists.xenproject.org; Tue, 15 Sep 2020 08:26:05 +0000
-X-Inumbo-ID: d93e2fd8-6877-4841-94dc-a32ff0a1b7a8
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ (envelope-from <SRS0=2OlW=CY=xen.org=paul@srs-us1.protection.inumbo.net>)
+ id 1kI6LO-0005Xx-EO
+ for xen-devel@lists.xenproject.org; Tue, 15 Sep 2020 08:29:42 +0000
+X-Inumbo-ID: 8e1664a7-ab5c-4002-b631-c5075e3b61ec
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id d93e2fd8-6877-4841-94dc-a32ff0a1b7a8;
- Tue, 15 Sep 2020 08:26:04 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id CEF60AC26;
- Tue, 15 Sep 2020 08:26:18 +0000 (UTC)
-Subject: Re: [PATCH v3] x86/HVM: more consistently set I/O completion
-From: Jan Beulich <jbeulich@suse.com>
-To: Andrew Cooper <andrew.cooper3@citrix.com>, Paul Durrant <paul@xen.org>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
- <roger.pau@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>,
- Kevin Tian <kevin.tian@intel.com>,
- George Dunlap <George.Dunlap@eu.citrix.com>
-References: <96a4cc9b-b1fd-494c-9e99-6d3ca733dea9@suse.com>
-Message-ID: <940134ca-9917-7260-679a-a14ac4e5d099@suse.com>
-Date: Tue, 15 Sep 2020 10:26:03 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.0
+ id 8e1664a7-ab5c-4002-b631-c5075e3b61ec;
+ Tue, 15 Sep 2020 08:29:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
+ bh=4AoX2QcMIWlbm0K+83CDzVNO/lJ0Ivxf4f14fPbq6/4=; b=bGKVLB9LVJgF9ghSe6eg5pFdTw
+ OjJAaO2X+MRzvjRGV8DREMiQjAETy/E6hKsRZsVwoL81nQWmZlvXCKx3mC8cTBvgIoURdKHDf6QYQ
+ iJpePPrBwSVihcysrqLKfcmMYp86BW65JyIqWPW7E55PCcQA1gQ1NucPlKjjgeKFLw6A=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <paul@xen.org>)
+ id 1kI6LN-0004rn-9T; Tue, 15 Sep 2020 08:29:41 +0000
+Received: from host86-176-94-160.range86-176.btcentralplus.com
+ ([86.176.94.160] helo=u2f063a87eabd5f.home)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+ (envelope-from <paul@xen.org>)
+ id 1kI6LN-0007Pl-1r; Tue, 15 Sep 2020 08:29:41 +0000
+From: Paul Durrant <paul@xen.org>
+To: xen-devel@lists.xenproject.org
+Cc: Paul Durrant <pdurrant@amazon.com>,
+	Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH v9 2/8] iommu: remove unused iommu_ops method and tasklet
+Date: Tue, 15 Sep 2020 09:29:30 +0100
+Message-Id: <20200915082936.23663-3-paul@xen.org>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20200915082936.23663-1-paul@xen.org>
+References: <20200915082936.23663-1-paul@xen.org>
 MIME-Version: 1.0
-In-Reply-To: <96a4cc9b-b1fd-494c-9e99-6d3ca733dea9@suse.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,70 +74,94 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 27.08.2020 09:09, Jan Beulich wrote:
-> Doing this just in hvm_emulate_one_insn() is not enough.
-> hvm_ud_intercept() and hvm_emulate_one_vm_event() can get invoked for
-> insns requiring one or more continuations, and at least in principle
-> hvm_emulate_one_mmio() could, too. Without proper setting of the field,
-> handle_hvm_io_completion() will do nothing completion-wise, and in
-> particular the missing re-invocation of the insn emulation paths will
-> lead to emulation caching not getting disabled in due course, causing
-> the ASSERT() in {svm,vmx}_vmenter_helper() to trigger.
-> 
-> Reported-by: Don Slutz <don.slutz@gmail.com>
-> 
-> Similar considerations go for the clearing of vio->mmio_access, which
-> gets moved as well.
-> 
-> Additionally all updating of vio->mmio_* now gets done dependent upon
-> the new completion value, rather than hvm_ioreq_needs_completion()'s
-> return value. This is because it is the completion chosen which controls
-> what path will be taken when handling the completion, not the simple
-> boolean return value. In particular, PIO completion doesn't involve
-> going through the insn emulator, and hence emulator state ought to get
-> cleared early (or it won't get cleared at all).
-> 
-> The new logic, besides allowing for a caller override for the
-> continuation type to be set (for VMX real mode emulation), will also
-> avoid setting an MMIO completion when a simpler PIO one will do. This
-> is a minor optimization only as a side effect - the behavior is strictly
-> needed at least for hvm_ud_intercept(), as only memory accesses can
-> successfully complete through handle_mmio(). Care of course needs to be
-> taken to correctly deal with "mixed" insns (doing both MMIO and PIO at
-> the same time, i.e. INS/OUTS). For this, hvmemul_validate() now latches
-> whether the insn being emulated is a memory access, as this information
-> is no longer easily available at the point where we want to consume it.
-> 
-> Note that the presence of non-NULL .validate fields in the two ops
-> structures in hvm_emulate_one_mmio() was really necessary even before
-> the changes here: Without this, passing non-NULL as middle argument to
-> hvm_emulate_init_once() is meaningless.
-> 
-> The restrictions on when the #UD intercept gets actually enabled are why
-> it was decided that this is not a security issue:
-> - the "hvm_fep" option to enable its use is a debugging option only,
-> - for the cross-vendor case is considered experimental, even if
->   unfortunately SUPPORT.md doesn't have an explicit statement about
->   this.
-> The other two affected functions are
-> - hvm_emulate_one_vm_event(), used for introspection,
-> - hvm_emulate_one_mmio(), used for Dom0 only,
-> which aren't qualifying this as needing an XSA either.
-> 
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-> Tested-by: Don Slutz <don.slutz@gmail.com>
-> ---
-> v3: Add comment ahead of _hvm_emulate_one(). Add parentheses in a
->     conditional expr. Justify why this does not need an XSA.
-> v2: Make updating of vio->mmio_* fields fully driven by the new
->     completion value.
-> ---
-> I further think that the entire tail of _hvm_emulate_one() (everything
-> past the code changed/added there by this patch) wants skipping in case
-> a completion is needed, at the very least for the mmio and realmode
-> cases, where we know we'll come back here.
+From: Paul Durrant <pdurrant@amazon.com>
 
-Does one of the two of you have an opinion on this aspect?
+The VT-d and AMD IOMMU implementations both use the general x86 IOMMU page
+table allocator and ARM always shares page tables with CPU. Hence there is no
+need to retain the free_page_table() method or the tasklet which invokes it.
 
-Jan
+Signed-off-by: Paul Durrant <pdurrant@amazon.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+---
+
+v2:
+  - New in v2 (split from "add common page-table allocator")
+---
+ xen/drivers/passthrough/iommu.c | 25 -------------------------
+ xen/include/xen/iommu.h         |  2 --
+ 2 files changed, 27 deletions(-)
+
+diff --git a/xen/drivers/passthrough/iommu.c b/xen/drivers/passthrough/iommu.c
+index 2b1db8022c..660dc5deb2 100644
+--- a/xen/drivers/passthrough/iommu.c
++++ b/xen/drivers/passthrough/iommu.c
+@@ -49,10 +49,6 @@ bool_t __read_mostly amd_iommu_perdev_intremap = 1;
+ 
+ DEFINE_PER_CPU(bool_t, iommu_dont_flush_iotlb);
+ 
+-DEFINE_SPINLOCK(iommu_pt_cleanup_lock);
+-PAGE_LIST_HEAD(iommu_pt_cleanup_list);
+-static struct tasklet iommu_pt_cleanup_tasklet;
+-
+ static int __init parse_iommu_param(const char *s)
+ {
+     const char *ss;
+@@ -226,9 +222,6 @@ static void iommu_teardown(struct domain *d)
+     struct domain_iommu *hd = dom_iommu(d);
+ 
+     iommu_vcall(hd->platform_ops, teardown, d);
+-
+-    if ( hd->platform_ops->free_page_table )
+-        tasklet_schedule(&iommu_pt_cleanup_tasklet);
+ }
+ 
+ void iommu_domain_destroy(struct domain *d)
+@@ -368,23 +361,6 @@ int iommu_lookup_page(struct domain *d, dfn_t dfn, mfn_t *mfn,
+     return iommu_call(hd->platform_ops, lookup_page, d, dfn, mfn, flags);
+ }
+ 
+-static void iommu_free_pagetables(void *unused)
+-{
+-    do {
+-        struct page_info *pg;
+-
+-        spin_lock(&iommu_pt_cleanup_lock);
+-        pg = page_list_remove_head(&iommu_pt_cleanup_list);
+-        spin_unlock(&iommu_pt_cleanup_lock);
+-        if ( !pg )
+-            return;
+-        iommu_vcall(iommu_get_ops(), free_page_table, pg);
+-    } while ( !softirq_pending(smp_processor_id()) );
+-
+-    tasklet_schedule_on_cpu(&iommu_pt_cleanup_tasklet,
+-                            cpumask_cycle(smp_processor_id(), &cpu_online_map));
+-}
+-
+ int iommu_iotlb_flush(struct domain *d, dfn_t dfn, unsigned int page_count,
+                       unsigned int flush_flags)
+ {
+@@ -508,7 +484,6 @@ int __init iommu_setup(void)
+ #ifndef iommu_intremap
+         printk("Interrupt remapping %sabled\n", iommu_intremap ? "en" : "dis");
+ #endif
+-        tasklet_init(&iommu_pt_cleanup_tasklet, iommu_free_pagetables, NULL);
+     }
+ 
+     return rc;
+diff --git a/xen/include/xen/iommu.h b/xen/include/xen/iommu.h
+index 3272874958..1831dc66b0 100644
+--- a/xen/include/xen/iommu.h
++++ b/xen/include/xen/iommu.h
+@@ -263,8 +263,6 @@ struct iommu_ops {
+     int __must_check (*lookup_page)(struct domain *d, dfn_t dfn, mfn_t *mfn,
+                                     unsigned int *flags);
+ 
+-    void (*free_page_table)(struct page_info *);
+-
+ #ifdef CONFIG_X86
+     int (*enable_x2apic)(void);
+     void (*disable_x2apic)(void);
+-- 
+2.20.1
+
 
