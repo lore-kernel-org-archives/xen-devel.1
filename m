@@ -7,34 +7,35 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BB8CEC433E2
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2020 15:00:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 422F8C31E51
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2020 15:00:42 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4FCD820663
+	by mail.kernel.org (Postfix) with ESMTPS id CF2AE20663
 	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2020 15:00:41 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4FCD820663
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CF2AE20663
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kICRc-0000mx-RT; Tue, 15 Sep 2020 15:00:32 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kICRb-0000lG-FM; Tue, 15 Sep 2020 15:00:31 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=X5gY=CY=suse.de=tzimmermann@srs-us1.protection.inumbo.net>)
- id 1kICRb-0000TU-Hj
- for xen-devel@lists.xenproject.org; Tue, 15 Sep 2020 15:00:31 +0000
-X-Inumbo-ID: d8eeb0ab-acbc-4365-a06a-7b558b20092e
+ id 1kICRa-0000TT-Ff
+ for xen-devel@lists.xenproject.org; Tue, 15 Sep 2020 15:00:30 +0000
+X-Inumbo-ID: 4282a109-e6e9-4042-b1dc-c09340d2cb77
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id d8eeb0ab-acbc-4365-a06a-7b558b20092e;
- Tue, 15 Sep 2020 15:00:14 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 4282a109-e6e9-4042-b1dc-c09340d2cb77;
+ Tue, 15 Sep 2020 15:00:09 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 25941B158;
- Tue, 15 Sep 2020 15:00:29 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 69906AFB0;
+ Tue, 15 Sep 2020 15:00:23 +0000 (UTC)
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: alexander.deucher@amd.com, christian.koenig@amd.com, airlied@linux.ie,
  daniel@ffwll.ch, linux@armlinux.org.uk, maarten.lankhorst@linux.intel.com,
@@ -64,9 +65,9 @@ Cc: amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
  freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
  linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
  xen-devel@lists.xenproject.org, Thomas Zimmermann <tzimmermann@suse.de>
-Subject: [PATCH v2 14/21] drm/tegra: Introduce GEM object functions
-Date: Tue, 15 Sep 2020 16:59:51 +0200
-Message-Id: <20200915145958.19993-15-tzimmermann@suse.de>
+Subject: [PATCH v2 07/21] drm/mediatek: Introduce GEM object functions
+Date: Tue, 15 Sep 2020 16:59:44 +0200
+Message-Id: <20200915145958.19993-8-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200915145958.19993-1-tzimmermann@suse.de>
 References: <20200915145958.19993-1-tzimmermann@suse.de>
@@ -87,57 +88,72 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 GEM object functions deprecate several similar callback interfaces in
 struct drm_driver. This patch replaces the per-driver callbacks with
-per-instance callbacks in tegra.
+per-instance callbacks in mediatek. The only exception is gem_prime_mmap,
+which is non-trivial to convert.
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 ---
- drivers/gpu/drm/tegra/drm.c | 4 ----
- drivers/gpu/drm/tegra/gem.c | 8 ++++++++
- 2 files changed, 8 insertions(+), 4 deletions(-)
+ drivers/gpu/drm/mediatek/mtk_drm_drv.c |  5 -----
+ drivers/gpu/drm/mediatek/mtk_drm_gem.c | 11 +++++++++++
+ 2 files changed, 11 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/gpu/drm/tegra/drm.c b/drivers/gpu/drm/tegra/drm.c
-index ba9d1c3e7cac..f0f581cd345e 100644
---- a/drivers/gpu/drm/tegra/drm.c
-+++ b/drivers/gpu/drm/tegra/drm.c
-@@ -858,12 +858,8 @@ static struct drm_driver tegra_drm_driver = {
- 	.debugfs_init = tegra_debugfs_init,
- #endif
+diff --git a/drivers/gpu/drm/mediatek/mtk_drm_drv.c b/drivers/gpu/drm/mediatek/mtk_drm_drv.c
+index 040a8f393fe2..2f8d0043fca7 100644
+--- a/drivers/gpu/drm/mediatek/mtk_drm_drv.c
++++ b/drivers/gpu/drm/mediatek/mtk_drm_drv.c
+@@ -301,18 +301,13 @@ struct drm_gem_object *mtk_drm_gem_prime_import(struct drm_device *dev,
+ static struct drm_driver mtk_drm_driver = {
+ 	.driver_features = DRIVER_MODESET | DRIVER_GEM | DRIVER_ATOMIC,
  
--	.gem_free_object_unlocked = tegra_bo_free_object,
--	.gem_vm_ops = &tegra_bo_vm_ops,
--
+-	.gem_free_object_unlocked = mtk_drm_gem_free_object,
+-	.gem_vm_ops = &drm_gem_cma_vm_ops,
+ 	.dumb_create = mtk_drm_gem_dumb_create,
+ 
  	.prime_handle_to_fd = drm_gem_prime_handle_to_fd,
  	.prime_fd_to_handle = drm_gem_prime_fd_to_handle,
--	.gem_prime_export = tegra_gem_prime_export,
- 	.gem_prime_import = tegra_gem_prime_import,
+ 	.gem_prime_import = mtk_drm_gem_prime_import,
+-	.gem_prime_get_sg_table = mtk_gem_prime_get_sg_table,
+ 	.gem_prime_import_sg_table = mtk_gem_prime_import_sg_table,
+ 	.gem_prime_mmap = mtk_drm_gem_mmap_buf,
+-	.gem_prime_vmap = mtk_drm_gem_prime_vmap,
+-	.gem_prime_vunmap = mtk_drm_gem_prime_vunmap,
+ 	.fops = &mtk_drm_fops,
  
- 	.dumb_create = tegra_bo_dumb_create,
-diff --git a/drivers/gpu/drm/tegra/gem.c b/drivers/gpu/drm/tegra/gem.c
-index 47e2935b8c68..d481dea4738d 100644
---- a/drivers/gpu/drm/tegra/gem.c
-+++ b/drivers/gpu/drm/tegra/gem.c
-@@ -231,6 +231,12 @@ static int tegra_bo_iommu_unmap(struct tegra_drm *tegra, struct tegra_bo *bo)
- 	return 0;
- }
+ 	.name = DRIVER_NAME,
+diff --git a/drivers/gpu/drm/mediatek/mtk_drm_gem.c b/drivers/gpu/drm/mediatek/mtk_drm_gem.c
+index 6190cc3b7b0d..591b90410e4a 100644
+--- a/drivers/gpu/drm/mediatek/mtk_drm_gem.c
++++ b/drivers/gpu/drm/mediatek/mtk_drm_gem.c
+@@ -8,11 +8,20 @@
+ #include <drm/drm.h>
+ #include <drm/drm_device.h>
+ #include <drm/drm_gem.h>
++#include <drm/drm_gem_cma_helper.h>
+ #include <drm/drm_prime.h>
  
-+static const struct drm_gem_object_funcs tegra_gem_object_funcs = {
-+	.free = tegra_bo_free_object,
-+	.export = tegra_gem_prime_export,
-+	.vm_ops = &tegra_bo_vm_ops,
+ #include "mtk_drm_drv.h"
+ #include "mtk_drm_gem.h"
+ 
++static const struct drm_gem_object_funcs mtk_drm_gem_object_funcs = {
++	.free = mtk_drm_gem_free_object,
++	.get_sg_table = mtk_gem_prime_get_sg_table,
++	.vmap = mtk_drm_gem_prime_vmap,
++	.vunmap = mtk_drm_gem_prime_vunmap,
++	.vm_ops = &drm_gem_cma_vm_ops,
 +};
 +
- static struct tegra_bo *tegra_bo_alloc_object(struct drm_device *drm,
- 					      size_t size)
+ static struct mtk_drm_gem_obj *mtk_drm_gem_init(struct drm_device *dev,
+ 						unsigned long size)
  {
-@@ -241,6 +247,8 @@ static struct tegra_bo *tegra_bo_alloc_object(struct drm_device *drm,
- 	if (!bo)
+@@ -25,6 +34,8 @@ static struct mtk_drm_gem_obj *mtk_drm_gem_init(struct drm_device *dev,
+ 	if (!mtk_gem_obj)
  		return ERR_PTR(-ENOMEM);
  
-+	bo->gem.funcs = &tegra_gem_object_funcs;
++	mtk_gem_obj->base.funcs = &mtk_drm_gem_object_funcs;
 +
- 	host1x_bo_init(&bo->base, &tegra_bo_ops);
- 	size = round_up(size, PAGE_SIZE);
- 
+ 	ret = drm_gem_object_init(dev, &mtk_gem_obj->base, size);
+ 	if (ret < 0) {
+ 		DRM_ERROR("failed to initialize gem object\n");
 -- 
 2.28.0
 
