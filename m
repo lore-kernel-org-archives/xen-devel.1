@@ -7,34 +7,34 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CCC24C35265
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2020 15:00:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8EF4FC35266
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2020 15:00:58 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5B6E220663
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2020 15:00:39 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5B6E220663
+	by mail.kernel.org (Postfix) with ESMTPS id 2FC4220663
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2020 15:00:56 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2FC4220663
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kICRY-0000iD-3S; Tue, 15 Sep 2020 15:00:28 +0000
+	id 1kICRr-00014e-CX; Tue, 15 Sep 2020 15:00:47 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=X5gY=CY=suse.de=tzimmermann@srs-us1.protection.inumbo.net>)
- id 1kICRW-0000TU-Hd
- for xen-devel@lists.xenproject.org; Tue, 15 Sep 2020 15:00:26 +0000
-X-Inumbo-ID: 9d06c359-ef16-48b8-8b44-2886ade1e163
+ id 1kICRq-0000TU-IJ
+ for xen-devel@lists.xenproject.org; Tue, 15 Sep 2020 15:00:46 +0000
+X-Inumbo-ID: 6b776af8-615c-49ac-b3c1-5b0eb8246a6e
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9d06c359-ef16-48b8-8b44-2886ade1e163;
- Tue, 15 Sep 2020 15:00:13 +0000 (UTC)
+ id 6b776af8-615c-49ac-b3c1-5b0eb8246a6e;
+ Tue, 15 Sep 2020 15:00:17 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 4F700B2A3;
- Tue, 15 Sep 2020 15:00:28 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id BCD29B29E;
+ Tue, 15 Sep 2020 15:00:31 +0000 (UTC)
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: alexander.deucher@amd.com, christian.koenig@amd.com, airlied@linux.ie,
  daniel@ffwll.ch, linux@armlinux.org.uk, maarten.lankhorst@linux.intel.com,
@@ -64,9 +64,10 @@ Cc: amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
  freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
  linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
  xen-devel@lists.xenproject.org, Thomas Zimmermann <tzimmermann@suse.de>
-Subject: [PATCH v2 13/21] drm/rockchip: Convert to drm_gem_object_funcs
-Date: Tue, 15 Sep 2020 16:59:50 +0200
-Message-Id: <20200915145958.19993-14-tzimmermann@suse.de>
+Subject: [PATCH v2 17/21] drm/virtgpu: Set PRIME export function in struct
+ drm_gem_object_funcs
+Date: Tue, 15 Sep 2020 16:59:54 +0200
+Message-Id: <20200915145958.19993-18-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200915145958.19993-1-tzimmermann@suse.de>
 References: <20200915145958.19993-1-tzimmermann@suse.de>
@@ -86,64 +87,39 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 GEM object functions deprecate several similar callback interfaces in
-struct drm_driver. This patch replaces the per-driver callbacks with
-per-instance callbacks in rockchip. The only exception is gem_prime_mmap,
-which is non-trivial to convert.
+struct drm_driver. This patch replaces virtgpu's per-driver PRIME export
+function with a per-object function.
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 ---
- drivers/gpu/drm/rockchip/rockchip_drm_drv.c |  5 -----
- drivers/gpu/drm/rockchip/rockchip_drm_gem.c | 10 ++++++++++
- 2 files changed, 10 insertions(+), 5 deletions(-)
+ drivers/gpu/drm/virtio/virtgpu_drv.c    | 1 -
+ drivers/gpu/drm/virtio/virtgpu_object.c | 1 +
+ 2 files changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/gpu/drm/rockchip/rockchip_drm_drv.c b/drivers/gpu/drm/rockchip/rockchip_drm_drv.c
-index 0f3eb392fe39..b7654f5e4225 100644
---- a/drivers/gpu/drm/rockchip/rockchip_drm_drv.c
-+++ b/drivers/gpu/drm/rockchip/rockchip_drm_drv.c
-@@ -212,15 +212,10 @@ static const struct file_operations rockchip_drm_driver_fops = {
- static struct drm_driver rockchip_drm_driver = {
- 	.driver_features	= DRIVER_MODESET | DRIVER_GEM | DRIVER_ATOMIC,
- 	.lastclose		= drm_fb_helper_lastclose,
--	.gem_vm_ops		= &drm_gem_cma_vm_ops,
--	.gem_free_object_unlocked = rockchip_gem_free_object,
- 	.dumb_create		= rockchip_gem_dumb_create,
- 	.prime_handle_to_fd	= drm_gem_prime_handle_to_fd,
- 	.prime_fd_to_handle	= drm_gem_prime_fd_to_handle,
--	.gem_prime_get_sg_table	= rockchip_gem_prime_get_sg_table,
- 	.gem_prime_import_sg_table	= rockchip_gem_prime_import_sg_table,
--	.gem_prime_vmap		= rockchip_gem_prime_vmap,
--	.gem_prime_vunmap	= rockchip_gem_prime_vunmap,
- 	.gem_prime_mmap		= rockchip_gem_mmap_buf,
- 	.fops			= &rockchip_drm_driver_fops,
- 	.name	= DRIVER_NAME,
-diff --git a/drivers/gpu/drm/rockchip/rockchip_drm_gem.c b/drivers/gpu/drm/rockchip/rockchip_drm_gem.c
-index 0055d86576f7..bddc7d99efe3 100644
---- a/drivers/gpu/drm/rockchip/rockchip_drm_gem.c
-+++ b/drivers/gpu/drm/rockchip/rockchip_drm_gem.c
-@@ -296,6 +296,14 @@ static void rockchip_gem_release_object(struct rockchip_gem_object *rk_obj)
- 	kfree(rk_obj);
- }
+diff --git a/drivers/gpu/drm/virtio/virtgpu_drv.c b/drivers/gpu/drm/virtio/virtgpu_drv.c
+index b039f493bda9..1f8d6ed11d21 100644
+--- a/drivers/gpu/drm/virtio/virtgpu_drv.c
++++ b/drivers/gpu/drm/virtio/virtgpu_drv.c
+@@ -203,7 +203,6 @@ static struct drm_driver driver = {
+ 	.prime_handle_to_fd = drm_gem_prime_handle_to_fd,
+ 	.prime_fd_to_handle = drm_gem_prime_fd_to_handle,
+ 	.gem_prime_mmap = drm_gem_prime_mmap,
+-	.gem_prime_export = virtgpu_gem_prime_export,
+ 	.gem_prime_import = virtgpu_gem_prime_import,
+ 	.gem_prime_import_sg_table = virtgpu_gem_prime_import_sg_table,
  
-+static const struct drm_gem_object_funcs rockchip_gem_object_funcs = {
-+	.free = rockchip_gem_free_object,
-+	.get_sg_table = rockchip_gem_prime_get_sg_table,
-+	.vmap = rockchip_gem_prime_vmap,
-+	.vunmap	= rockchip_gem_prime_vunmap,
-+	.vm_ops = &drm_gem_cma_vm_ops,
-+};
-+
- static struct rockchip_gem_object *
- 	rockchip_gem_alloc_object(struct drm_device *drm, unsigned int size)
- {
-@@ -310,6 +318,8 @@ static struct rockchip_gem_object *
+diff --git a/drivers/gpu/drm/virtio/virtgpu_object.c b/drivers/gpu/drm/virtio/virtgpu_object.c
+index 842f8b61aa89..4f7d7ea8194c 100644
+--- a/drivers/gpu/drm/virtio/virtgpu_object.c
++++ b/drivers/gpu/drm/virtio/virtgpu_object.c
+@@ -108,6 +108,7 @@ static const struct drm_gem_object_funcs virtio_gpu_shmem_funcs = {
+ 	.close = virtio_gpu_gem_object_close,
  
- 	obj = &rk_obj->base;
- 
-+	obj->funcs = &rockchip_gem_object_funcs;
-+
- 	drm_gem_object_init(drm, obj, size);
- 
- 	return rk_obj;
+ 	.print_info = drm_gem_shmem_print_info,
++	.export = virtgpu_gem_prime_export,
+ 	.pin = drm_gem_shmem_pin,
+ 	.unpin = drm_gem_shmem_unpin,
+ 	.get_sg_table = drm_gem_shmem_get_sg_table,
 -- 
 2.28.0
 
