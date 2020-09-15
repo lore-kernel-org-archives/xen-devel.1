@@ -2,79 +2,67 @@ Return-Path: <SRS0=BsMM=CY=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BCD7CC43461
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2020 13:47:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 192F1C43461
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2020 14:10:37 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 53E2121D43
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2020 13:47:24 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 95433206A2
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2020 14:10:36 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="bcK4F8yD"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 53E2121D43
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="JPi8bSm+"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 95433206A2
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kIBIB-0001bP-Dw; Tue, 15 Sep 2020 13:46:43 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=SF/R=CY=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1kIBI9-0001bK-KQ
- for xen-devel@lists.xenproject.org; Tue, 15 Sep 2020 13:46:41 +0000
-X-Inumbo-ID: 91782900-82f7-4bcc-aa7a-c7ee44ba4a8d
-Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 91782900-82f7-4bcc-aa7a-c7ee44ba4a8d;
- Tue, 15 Sep 2020 13:46:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1600177600;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:content-transfer-encoding:in-reply-to;
- bh=t0Ow1VAa/MYg6dz3DFulhU7Y+XuRlGuUwuFuzFo98lY=;
- b=bcK4F8yD1Czj3HwjKSll9HsRoMmmPFo6ZQm+kuw/wRmEqEMiBv0C0+z7
- Ph7D/YSuIqJZi7I6syd2ucRRbCmgtcW4syGlB459/zOdFwg41/looGmnQ
- +2t1YC13+cf17kSe9Vj86BBOGSFxl1+LyOYB9V81krdKwBr/KcptqmVuT o=;
-Authentication-Results: esa4.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: qg8qTfYpfFHyJg953FCwotM9cYTJpTIgIDuszSBYgCtuiy5u823ZnyiVmyrL4X+tzxVyL4Kh9t
- JcoHxZ5MGl+YWfLz8p8+mvnyqEL3Cnl3/X6OcbNjoBhyUItvDpcZTMtCpCVvMx1bENeIjDvRaR
- ZpYVjlLNBnh/B8wT94bN71RDySDnMw8zJKXinJwS0U6HuVavoeXlz/TffdiLhWuaMGNP4geyPQ
- dION3M8R8VdnUCv9Ao/ylLAims5H7qDtNkpVrbhE+AqEtkfg5pdc/PDLfpf7TDzKmxwKZ/K9VW
- xuo=
-X-SBRS: 2.7
-X-MesageID: 27704913
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.76,430,1592884800"; d="scan'208";a="27704913"
-Date: Tue, 15 Sep 2020 15:46:30 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Jan Beulich <jbeulich@suse.com>
-CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "Andrew
- Cooper" <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>, Julien Grall
- <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, George Dunlap
- <George.Dunlap@eu.citrix.com>
-Subject: Re: [PATCH 1/9] build: use if_changed more consistently (and
- correctly) for prelink*.o
-Message-ID: <20200915134630.GM753@Air-de-Roger>
-References: <aabca463-21ed-3755-0e8d-908069f40d6e@suse.com>
- <75d94bf1-b419-8a82-2d15-fb02e56109d8@suse.com>
- <20200915115603.GL753@Air-de-Roger>
- <ae76b7d7-ea16-f668-3408-13c01a660e06@suse.com>
+	id 1kIBf0-0004A5-0D; Tue, 15 Sep 2020 14:10:18 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=2OlW=CY=xen.org=paul@srs-us1.protection.inumbo.net>)
+ id 1kIBey-00048m-IT
+ for xen-devel@lists.xenproject.org; Tue, 15 Sep 2020 14:10:16 +0000
+X-Inumbo-ID: e5515df6-853b-4950-a6a0-89a8ef8e1fb0
+Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id e5515df6-853b-4950-a6a0-89a8ef8e1fb0;
+ Tue, 15 Sep 2020 14:10:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
+ bh=G29K1P/YFTJV0Scb7azCBDKwMu+4INdbb4rZTi0L8OU=; b=JPi8bSm+FEyU1y+DxnKibKCQbc
+ A9ycFVYS1xBmNEmxJUNlpWIzl12R0d7sptSE1qZK3T+8b5VsWBLe4i56gFB+bq/F3pDyDK5BozlWW
+ SgLpeP31kOwANYfwPSNcpM9w+JskpiMnqdY0znBnNp4v99c7aJYFdSYNsuaScqqqi06c=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <paul@xen.org>)
+ id 1kIBet-0003nS-Lt; Tue, 15 Sep 2020 14:10:11 +0000
+Received: from host86-176-94-160.range86-176.btcentralplus.com
+ ([86.176.94.160] helo=u2f063a87eabd5f.home)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+ (envelope-from <paul@xen.org>)
+ id 1kIBet-0001rP-Cd; Tue, 15 Sep 2020 14:10:11 +0000
+From: Paul Durrant <paul@xen.org>
+To: xen-devel@lists.xenproject.org
+Cc: Paul Durrant <pdurrant@amazon.com>, Wei Liu <wl@xen.org>,
+ Ian Jackson <iwj@xenproject.org>,
+ Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH v2 2/2] xl: implement documented '--force' option for
+ block-detach
+Date: Tue, 15 Sep 2020 15:10:07 +0100
+Message-Id: <20200915141007.25965-3-paul@xen.org>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20200915141007.25965-1-paul@xen.org>
+References: <20200915141007.25965-1-paul@xen.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <ae76b7d7-ea16-f668-3408-13c01a660e06@suse.com>
-X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
- FTLPEX02CL06.citrite.net (10.13.108.179)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -88,44 +76,119 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Tue, Sep 15, 2020 at 02:26:34PM +0200, Jan Beulich wrote:
-> On 15.09.2020 13:56, Roger Pau Monné wrote:
-> > On Mon, Sep 14, 2020 at 12:15:39PM +0200, Jan Beulich wrote:
-> >> Switch to $(call if_changed,ld) where possible; presumably not doing so
-> >> in e321576f4047 ("xen/build: start using if_changed") right away was an
-> >> oversight, as it did for Arm in (just) one case. It failed to add
-> >> prelink.o to $(targets), though, causing - judging from the observed
-> >> behavior on x86 - undue rebuilds of the final binary (because of
-> >> prelink.o getting rebuild for $(cmd_prelink.o) being empty, in turn
-> >> because of .prelink.o.cmd not getting read) during "make install-xen".
-> > 
-> > I'm not sure I follow why prelink.o needs to be added to targets, does
-> > this offer some kind of protection against rebuilds when doing make
-> > install?
-> 
-> In a way, but (as I view it) not really. It is the use of ...
-> 
-> > The switch to if_changed LGTM.
-> 
-> ... if_changed which requires this. .*.cmd files will only be loaded
-> for anything explicitly or implicitly listed as a target. While .o
-> coming from $(obj-y) get added there automatically, prelink.o is not
-> something that could be recognized as needing adding, hence the
-> "manual" insertion.
+From: Paul Durrant <pdurrant@amazon.com>
 
-This seems very prone to mistakes, as you have to remember that
-whatever object that uses if_changed should also be part of the
-targets set, or else it will get rebuild unconditionally.
+The manpage for 'xl' documents an option to force a block device to be
+released even if the domain to which it is attached does not co-operate.
+The documentation also states that, if the force flag is not specified, the
+block-detach operation should fail.
 
-I think adding some of the above reasoning to the commit message would
-be helpful IMO.
+Currently the force option is not implemented and a non-forced block-detach
+will auto-force after a time-out of 10s. This patch implements the force
+option and also stops auto-forcing a non-forced block-detach by calling
+libxl_device_disk_safe_remove() rather than libxl_device_disk_remove(),
+allowing the operation to fail cleanly as per the documented behaviour.
 
-> Without .prelink.o.cmd loaded, $(if_changed ) will always arrange
-> for it to get re-built, because it then will consider the command
-> used to build the file to have changed (as the stored one appears to
-> be empty).
+NOTE: The documentation is also adjusted since the normal positioning of
+      options is before compulsory parameters. It is also noted that use of
+      the --force option may lead to a guest crash.
 
-Acked-by: Roger Pau Monné <roger.pau@citrix.com>
+Signed-off-by: Paul Durrant <pdurrant@amazon.com>
+Acked-by: Wei Liu <wl@xen.org>
+---
+Cc: Ian Jackson <iwj@xenproject.org>
+Cc: Anthony PERARD <anthony.perard@citrix.com>
 
-Thanks, Roger.
+v2:
+ - Add missing '.'
+ - Use the new libxl_device_disk_safe_remove() function
+ - Keep Wei's A-b as the modifications are trivial
+---
+ docs/man/xl.1.pod.in   |  4 ++--
+ tools/xl/xl_block.c    | 21 ++++++++++++++++-----
+ tools/xl/xl_cmdtable.c |  3 ++-
+ 3 files changed, 20 insertions(+), 8 deletions(-)
+
+diff --git a/docs/man/xl.1.pod.in b/docs/man/xl.1.pod.in
+index 52a47a6fbd..5f7d3a7134 100644
+--- a/docs/man/xl.1.pod.in
++++ b/docs/man/xl.1.pod.in
+@@ -1389,7 +1389,7 @@ Note that only PV block devices are supported by block-attach.
+ Requests to attach emulated devices (eg, vdev=hdc) will result in only
+ the PV view being available to the guest.
+ 
+-=item B<block-detach> I<domain-id> I<devid> [I<OPTIONS>]
++=item B<block-detach> [I<OPTIONS>] I<domain-id> I<devid>
+ 
+ Detach a domain's virtual block device. I<devid> may be the symbolic
+ name or the numeric device id given to the device by domain 0.  You
+@@ -1406,7 +1406,7 @@ B<OPTIONS>
+ =item B<--force>
+ 
+ If this parameter is specified the device will be forcefully detached, which
+-may cause IO errors in the domain.
++may cause IO errors in the domain and possibly a guest crash
+ 
+ =back
+ 
+diff --git a/tools/xl/xl_block.c b/tools/xl/xl_block.c
+index acaf9b96b8..70eed431e4 100644
+--- a/tools/xl/xl_block.c
++++ b/tools/xl/xl_block.c
+@@ -96,12 +96,21 @@ int main_blocklist(int argc, char **argv)
+ 
+ int main_blockdetach(int argc, char **argv)
+ {
++    static struct option opts[] = {
++        {"force", 0, 0, 'f'},
++        COMMON_LONG_OPTS
++    };
+     uint32_t domid;
+     int opt, rc = 0;
+     libxl_device_disk disk;
+-
+-    SWITCH_FOREACH_OPT(opt, "", NULL, "block-detach", 2) {
+-        /* No options */
++    bool force = false;
++
++    SWITCH_FOREACH_OPT(opt, "f", opts, "block-detach", 2) {
++    case 'f':
++        force = true;
++        break;
++    default:
++        break;
+     }
+ 
+     domid = find_domain(argv[optind]);
+@@ -110,9 +119,11 @@ int main_blockdetach(int argc, char **argv)
+         fprintf(stderr, "Error: Device %s not connected.\n", argv[optind+1]);
+         return 1;
+     }
+-    rc = libxl_device_disk_remove(ctx, domid, &disk, 0);
++    rc = !force ? libxl_device_disk_safe_remove(ctx, domid, &disk, 0) :
++        libxl_device_disk_destroy(ctx, domid, &disk, 0);
+     if (rc) {
+-        fprintf(stderr, "libxl_device_disk_remove failed.\n");
++        fprintf(stderr, "libxl_device_disk_%s failed.\n",
++                !force ? "safe_remove" : "destroy");
+         return 1;
+     }
+     libxl_device_disk_dispose(&disk);
+diff --git a/tools/xl/xl_cmdtable.c b/tools/xl/xl_cmdtable.c
+index 2b8e1b321a..7da6c1b927 100644
+--- a/tools/xl/xl_cmdtable.c
++++ b/tools/xl/xl_cmdtable.c
+@@ -368,7 +368,8 @@ struct cmd_spec cmd_table[] = {
+     { "block-detach",
+       &main_blockdetach, 0, 1,
+       "Destroy a domain's virtual block device",
+-      "<Domain> <DevId>",
++      "[option] <Domain> <DevId>",
++      "-f, --force        do not wait for the domain to release the device"
+     },
+     { "vtpm-attach",
+       &main_vtpmattach, 1, 1,
+-- 
+2.20.1
+
 
