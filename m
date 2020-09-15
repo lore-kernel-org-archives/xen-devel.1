@@ -7,35 +7,34 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 782ADC2D0E0
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2020 15:00:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BB8CEC433E2
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2020 15:00:41 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0099820663
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2020 15:00:30 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0099820663
+	by mail.kernel.org (Postfix) with ESMTPS id 4FCD820663
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2020 15:00:41 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4FCD820663
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kICRN-0000ag-7B; Tue, 15 Sep 2020 15:00:17 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kICRc-0000mx-RT; Tue, 15 Sep 2020 15:00:32 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=X5gY=CY=suse.de=tzimmermann@srs-us1.protection.inumbo.net>)
- id 1kICRL-0000TT-FM
- for xen-devel@lists.xenproject.org; Tue, 15 Sep 2020 15:00:15 +0000
-X-Inumbo-ID: 96ebee64-30de-4673-bbdf-3b443596eb6b
+ id 1kICRb-0000TU-Hj
+ for xen-devel@lists.xenproject.org; Tue, 15 Sep 2020 15:00:31 +0000
+X-Inumbo-ID: d8eeb0ab-acbc-4365-a06a-7b558b20092e
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 96ebee64-30de-4673-bbdf-3b443596eb6b;
- Tue, 15 Sep 2020 15:00:06 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id d8eeb0ab-acbc-4365-a06a-7b558b20092e;
+ Tue, 15 Sep 2020 15:00:14 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 62972AF6C;
- Tue, 15 Sep 2020 15:00:20 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 25941B158;
+ Tue, 15 Sep 2020 15:00:29 +0000 (UTC)
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: alexander.deucher@amd.com, christian.koenig@amd.com, airlied@linux.ie,
  daniel@ffwll.ch, linux@armlinux.org.uk, maarten.lankhorst@linux.intel.com,
@@ -65,9 +64,9 @@ Cc: amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
  freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
  linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
  xen-devel@lists.xenproject.org, Thomas Zimmermann <tzimmermann@suse.de>
-Subject: [PATCH v2 04/21] drm/exynos: Introduce GEM object functions
-Date: Tue, 15 Sep 2020 16:59:41 +0200
-Message-Id: <20200915145958.19993-5-tzimmermann@suse.de>
+Subject: [PATCH v2 14/21] drm/tegra: Introduce GEM object functions
+Date: Tue, 15 Sep 2020 16:59:51 +0200
+Message-Id: <20200915145958.19993-15-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200915145958.19993-1-tzimmermann@suse.de>
 References: <20200915145958.19993-1-tzimmermann@suse.de>
@@ -88,81 +87,57 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 GEM object functions deprecate several similar callback interfaces in
 struct drm_driver. This patch replaces the per-driver callbacks with
-per-instance callbacks in exynos. The only exception is gem_prime_mmap,
-which is non-trivial to convert.
+per-instance callbacks in tegra.
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 ---
- drivers/gpu/drm/exynos/exynos_drm_drv.c | 10 ----------
- drivers/gpu/drm/exynos/exynos_drm_gem.c | 15 +++++++++++++++
- 2 files changed, 15 insertions(+), 10 deletions(-)
+ drivers/gpu/drm/tegra/drm.c | 4 ----
+ drivers/gpu/drm/tegra/gem.c | 8 ++++++++
+ 2 files changed, 8 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/gpu/drm/exynos/exynos_drm_drv.c b/drivers/gpu/drm/exynos/exynos_drm_drv.c
-index dbd80f1e4c78..fe46680ca208 100644
---- a/drivers/gpu/drm/exynos/exynos_drm_drv.c
-+++ b/drivers/gpu/drm/exynos/exynos_drm_drv.c
-@@ -75,11 +75,6 @@ static void exynos_drm_postclose(struct drm_device *dev, struct drm_file *file)
- 	file->driver_priv = NULL;
- }
+diff --git a/drivers/gpu/drm/tegra/drm.c b/drivers/gpu/drm/tegra/drm.c
+index ba9d1c3e7cac..f0f581cd345e 100644
+--- a/drivers/gpu/drm/tegra/drm.c
++++ b/drivers/gpu/drm/tegra/drm.c
+@@ -858,12 +858,8 @@ static struct drm_driver tegra_drm_driver = {
+ 	.debugfs_init = tegra_debugfs_init,
+ #endif
  
--static const struct vm_operations_struct exynos_drm_gem_vm_ops = {
--	.open = drm_gem_vm_open,
--	.close = drm_gem_vm_close,
--};
+-	.gem_free_object_unlocked = tegra_bo_free_object,
+-	.gem_vm_ops = &tegra_bo_vm_ops,
 -
- static const struct drm_ioctl_desc exynos_ioctls[] = {
- 	DRM_IOCTL_DEF_DRV(EXYNOS_GEM_CREATE, exynos_drm_gem_create_ioctl,
- 			DRM_RENDER_ALLOW),
-@@ -124,16 +119,11 @@ static struct drm_driver exynos_drm_driver = {
- 	.open			= exynos_drm_open,
- 	.lastclose		= drm_fb_helper_lastclose,
- 	.postclose		= exynos_drm_postclose,
--	.gem_free_object_unlocked = exynos_drm_gem_free_object,
--	.gem_vm_ops		= &exynos_drm_gem_vm_ops,
- 	.dumb_create		= exynos_drm_gem_dumb_create,
- 	.prime_handle_to_fd	= drm_gem_prime_handle_to_fd,
- 	.prime_fd_to_handle	= drm_gem_prime_fd_to_handle,
- 	.gem_prime_import	= exynos_drm_gem_prime_import,
--	.gem_prime_get_sg_table	= exynos_drm_gem_prime_get_sg_table,
- 	.gem_prime_import_sg_table	= exynos_drm_gem_prime_import_sg_table,
--	.gem_prime_vmap		= exynos_drm_gem_prime_vmap,
--	.gem_prime_vunmap	= exynos_drm_gem_prime_vunmap,
- 	.gem_prime_mmap		= exynos_drm_gem_prime_mmap,
- 	.ioctls			= exynos_ioctls,
- 	.num_ioctls		= ARRAY_SIZE(exynos_ioctls),
-diff --git a/drivers/gpu/drm/exynos/exynos_drm_gem.c b/drivers/gpu/drm/exynos/exynos_drm_gem.c
-index efa476858db5..69a5cf28b4ae 100644
---- a/drivers/gpu/drm/exynos/exynos_drm_gem.c
-+++ b/drivers/gpu/drm/exynos/exynos_drm_gem.c
-@@ -129,6 +129,19 @@ void exynos_drm_gem_destroy(struct exynos_drm_gem *exynos_gem)
- 	kfree(exynos_gem);
+ 	.prime_handle_to_fd = drm_gem_prime_handle_to_fd,
+ 	.prime_fd_to_handle = drm_gem_prime_fd_to_handle,
+-	.gem_prime_export = tegra_gem_prime_export,
+ 	.gem_prime_import = tegra_gem_prime_import,
+ 
+ 	.dumb_create = tegra_bo_dumb_create,
+diff --git a/drivers/gpu/drm/tegra/gem.c b/drivers/gpu/drm/tegra/gem.c
+index 47e2935b8c68..d481dea4738d 100644
+--- a/drivers/gpu/drm/tegra/gem.c
++++ b/drivers/gpu/drm/tegra/gem.c
+@@ -231,6 +231,12 @@ static int tegra_bo_iommu_unmap(struct tegra_drm *tegra, struct tegra_bo *bo)
+ 	return 0;
  }
  
-+static const struct vm_operations_struct exynos_drm_gem_vm_ops = {
-+	.open = drm_gem_vm_open,
-+	.close = drm_gem_vm_close,
++static const struct drm_gem_object_funcs tegra_gem_object_funcs = {
++	.free = tegra_bo_free_object,
++	.export = tegra_gem_prime_export,
++	.vm_ops = &tegra_bo_vm_ops,
 +};
 +
-+static const struct drm_gem_object_funcs exynos_drm_gem_object_funcs = {
-+	.free = exynos_drm_gem_free_object,
-+	.get_sg_table = exynos_drm_gem_prime_get_sg_table,
-+	.vmap = exynos_drm_gem_prime_vmap,
-+	.vunmap	= exynos_drm_gem_prime_vunmap,
-+	.vm_ops = &exynos_drm_gem_vm_ops,
-+};
-+
- static struct exynos_drm_gem *exynos_drm_gem_init(struct drm_device *dev,
- 						  unsigned long size)
+ static struct tegra_bo *tegra_bo_alloc_object(struct drm_device *drm,
+ 					      size_t size)
  {
-@@ -143,6 +156,8 @@ static struct exynos_drm_gem *exynos_drm_gem_init(struct drm_device *dev,
- 	exynos_gem->size = size;
- 	obj = &exynos_gem->base;
+@@ -241,6 +247,8 @@ static struct tegra_bo *tegra_bo_alloc_object(struct drm_device *drm,
+ 	if (!bo)
+ 		return ERR_PTR(-ENOMEM);
  
-+	obj->funcs = &exynos_drm_gem_object_funcs;
++	bo->gem.funcs = &tegra_gem_object_funcs;
 +
- 	ret = drm_gem_object_init(dev, obj, size);
- 	if (ret < 0) {
- 		DRM_DEV_ERROR(dev->dev, "failed to initialize gem object\n");
+ 	host1x_bo_init(&bo->base, &tegra_bo_ops);
+ 	size = round_up(size, PAGE_SIZE);
+ 
 -- 
 2.28.0
 
