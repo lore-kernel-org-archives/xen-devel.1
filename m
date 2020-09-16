@@ -7,37 +7,38 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 50C7AC35269
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5C369C3526A
 	for <xen-devel@archiver.kernel.org>; Thu, 17 Sep 2020 04:20:43 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A5D53206A2
+	by mail.kernel.org (Postfix) with ESMTPS id C46252075E
 	for <xen-devel@archiver.kernel.org>; Thu, 17 Sep 2020 04:20:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A5D53206A2
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C46252075E
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=dornerworks.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kIlOz-0006ZG-4T; Thu, 17 Sep 2020 04:20:09 +0000
+	id 1kIlOy-0006ZA-SR; Thu, 17 Sep 2020 04:20:08 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=iutg=CZ=dornerworks.com=jeff.kubascik@srs-us1.protection.inumbo.net>)
- id 1kIc1a-0006gm-UN
- for xen-devel@lists.xenproject.org; Wed, 16 Sep 2020 18:19:22 +0000
-X-Inumbo-ID: fb281fe4-cfee-4c03-abe5-b8530406ac17
-Received: from USG02-CY1-obe.outbound.protection.office365.us (unknown
- [23.103.209.77]) by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id fb281fe4-cfee-4c03-abe5-b8530406ac17;
- Wed, 16 Sep 2020 18:19:17 +0000 (UTC)
+ id 1kIc1W-0006gm-1P
+ for xen-devel@lists.xenproject.org; Wed, 16 Sep 2020 18:19:18 +0000
+X-Inumbo-ID: 13747901-b71e-4d54-8fa5-668888487f7a
+Received: from USG02-BN3-obe.outbound.protection.office365.us (unknown
+ [2001:489a:2202:c::614])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 13747901-b71e-4d54-8fa5-668888487f7a;
+ Wed, 16 Sep 2020 18:19:13 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector5401; d=microsoft.com; cv=none;
- b=mBujoAY17cjln6XydBAqx5usXgTCIgshWp7XjHxIl1nzrHDZ91VcZ4Lqf7kOmRnKtX/JRWAjipnxDYVqhd6j2xluAgVnvQUzYHWP0gfJe4RoJ7sTKj4IN60y7D+E2JKSBCFlXgNMi5DBqpIdryClhLnE3shwuoGiZ3jiMpLtqoMWEoSCepF0KYgaWx6KLced07sTuCWMco1Sv48hISZzIqkrCwimWmMBw0arV1O0t5X+u85cj6AsIF8ALqLWj2s3hicesdNHfN/PdeWHN8cgYooKhfsIHsthjKjM+d3UoLka5ydmZtJND6EQG6AdZC5hD1p3Nt04CPfH5OkZbpzWzg==
+ b=pY+8qkZR/rFCXgBl8m7mDiJ79M+1wOVk5igUcb4tcMUPK6SxFGR9xjawS3iQO8ESQiGHSfyzTX1DU8cm8B9ROynsOEgRQ8W5mftoxTQYCdpxDg4jJ3t11IUD6YYS4ed+OE+I1CdijDflCV2Iyx8ER7JH1PUujqef5mrVygBmmvDuDvOk801wwIG1jYq1+SklcooCBGjTg26PhKkXCIpaCdhQoOosNGBz3ByEuiuQC1PVlyQP8b+xi8o7x+KBft2d+WQDnjjeOG1ja2tbd+DQ3ACciH8yTMYARjb7oEhj3NcbEQeIeFn8zLUGCD3enXyzseS4y5hJ8zFeDuOhzAwYyQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector5401;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gVtCxqmwKSSopDpAd7qfS+p4qq378S6uXEiOlz3Twig=;
- b=xrHPGmtEU7eSHBKjf/oBmyc3iEtcl4XnXQxoPfF4fZM2vNHPReb6TR3mlyDMHcciqBg3Lm/gytQQr0H9SAN6Vjh1oLOb/Vh/dwR3pZ8RI0wqjyqjHn6jSZ5gRnXsls4z9LDv9Poa18qaX7DuIPz2vpgKct/lrF53rrfDUYaCiDu4OFDHmJFTtxpUpjW+LmsEkJxQrZlNOxOA2KuAMl3gynhLkm2vFjdiac/MzYC4LwM/0X1g7EfEkY9lnv2qq/HoJL69svzitkdrtGnEDrRF9k4uvI4DE+Z5qEbw61ndKHYrDOjtSiSIu0M6VSlYYiBqGi6Ocwcai8ZP/JijwDfk8g==
+ bh=bhnhBKvGVPXAawiYRDDYdCNaSE+p+IOwBVAQpAYX7sw=;
+ b=N/csXVrQ14g9B8O+xMI3bO7MtiybU2tIp5ZQ+knhgbwnUAGHquvqP1Je91jxLn5Mfl4lC2y+ZwRNgKhkxb2FuS23/DnAi/7aidOPMIky5BhO6Z3S+3hRMOWKSLR+/tSjDkKVOqcFt0iCC7R7oKQcx+dA5wMZKad6nkotu89scTCXihE2NG/YZ+32bqq1otyCoRqtrgCH/0iV8WijydX3hSY77TS9POp5fulERoc0uvZ18j8phxOtC8kBSHwb8qGKcIKUHMVI5qYIqhUEOwHPl2xNSk7ojqE8MRwQzxIZE2M7NMM5SnzZ4n4WLnwiKf1l0lL61YaTPD+9b2ORW+7kTg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  207.242.234.14) smtp.rcpttodomain=lists.xenproject.org
  smtp.mailfrom=dornerworks.com; dmarc=pass (p=none sp=none pct=100)
@@ -46,18 +47,18 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dornerworks.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gVtCxqmwKSSopDpAd7qfS+p4qq378S6uXEiOlz3Twig=;
- b=mKoggHYDuDss6yVsjHjRxi3+uOLGZpyr/2vrehuVCXwoxCzKKjSbAjwqJ7cVOy8sxTNDleKaDZQ+KSa0PgSLV98qK7Nx0OqWZ0r4yL5Y1nUdUMIGA/m/zICBWlDsM7mKH/UhYWu1hcHouDqejZUkH6rUZ4SwvdAezr4Kt83sm8o10LNCFsjMF6F+Ub2WreEUNZ1e2/8q1aHQeB4qh3PRM/Xq8zKpT2lR+lNgr/P+wwjAG1pqxV66N7MW4YZGmnkq2a6xruZbcO+4Dag1TfoQZ+VSfZpkF8zC/Mz85YxvmaTSdfBVOdUnfx9xX/MD87k22y7zkTDJDk/6im+d4au+9g==
-Received: from CY1P110CA0048.NAMP110.PROD.OUTLOOK.COM (2001:489a:200:400::18)
- by DM3P110MB0378.NAMP110.PROD.OUTLOOK.COM (2001:489a:200:411::20)
+ bh=bhnhBKvGVPXAawiYRDDYdCNaSE+p+IOwBVAQpAYX7sw=;
+ b=ecAgsrrCB2jcKHhqgTZuoq4h1SP7XPa+JG1eiVS7tTuKMQMAvPHK6UJ+uFYyvGWdiaXKmzdKyHb7dHDyaMHqkeZ/uZDXDYiwP5cgcUa5C8HakByUN+2MoCshiLcMTTKplomRHaKUYmDbkNCqOjDED6jGmwrG8UMsWAemHOZ5S6VPCs9t5SJEeqipBWPwEUZfaBROeXFmVn73O+UUu32wOP06vaH9qkocWo8wrJdNMmj7P73uKTXjL8vzlYgKP/tUJOEEGpX2NPIhlUDCBnC0MrxtJFx2UGukIx0Zcjjh1HJWpPMoT3qRttEUYy6RG/aDu1JwywYWWvUAChrwSpp1MA==
+Received: from CY1P110CA0046.NAMP110.PROD.OUTLOOK.COM (2001:489a:200:400::16)
+ by DM3P110MB0444.NAMP110.PROD.OUTLOOK.COM (2001:489a:200:412::21)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3370.16; Wed, 16 Sep
- 2020 18:19:14 +0000
+ 2020 18:19:09 +0000
 Received: from BN3USG02FT003.eop-usg02.itar.protection.office365.us
- (2001:489a:2202:4::206) by CY1P110CA0048.office365.us (2001:489a:200:400::18)
+ (2001:489a:2202:4::205) by CY1P110CA0046.office365.us (2001:489a:200:400::16)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3370.16 via Frontend
- Transport; Wed, 16 Sep 2020 18:19:13 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3370.17 via Frontend
+ Transport; Wed, 16 Sep 2020 18:19:09 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 207.242.234.14)
  smtp.mailfrom=dornerworks.com; lists.xenproject.org; dkim=none (message not
  signed) header.d=none;lists.xenproject.org; dmarc=pass action=none
@@ -68,7 +69,7 @@ Received-SPF: Pass (protection.outlook.com: domain of dornerworks.com
  helo=localhost.localdomain;
 Received: from localhost.localdomain (207.242.234.14) by
  BN3USG02FT003.mail.protection.office365.us (10.97.24.77) with Microsoft SMTP
- Server id 15.20.3348.19 via Frontend Transport; Wed, 16 Sep 2020 18:19:13
+ Server id 15.20.3348.19 via Frontend Transport; Wed, 16 Sep 2020 18:19:08
  +0000
 From: Jeff Kubascik <jeff.kubascik@dornerworks.com>
 To: xen-devel@lists.xenproject.org
@@ -77,9 +78,9 @@ Cc: xen-devel@dornerworks.com, Josh Whitehead <josh.whitehead@dornerworks.com>,
  George Dunlap <george.dunlap@citrix.com>,
  Dario Faggioli <dfaggioli@suse.com>,
  Jeff Kubascik <jeff.kubascik@dornerworks.com>
-Subject: [PATCH 4/5] sched/arinc653: Reorganize function definition order
-Date: Wed, 16 Sep 2020 14:18:53 -0400
-Message-Id: <20200916181854.75563-5-jeff.kubascik@dornerworks.com>
+Subject: [PATCH 2/5] sched/arinc653: Rename scheduler private structs
+Date: Wed, 16 Sep 2020 14:18:51 -0400
+Message-Id: <20200916181854.75563-3-jeff.kubascik@dornerworks.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200916181854.75563-1-jeff.kubascik@dornerworks.com>
 References: <20200916181854.75563-1-jeff.kubascik@dornerworks.com>
@@ -87,28 +88,28 @@ X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
 MIME-Version: 1.0
 Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: 3d4ede72-2386-441a-fa07-08d85a6d03f6
-X-MS-TrafficTypeDiagnostic: DM3P110MB0378:
+X-MS-Office365-Filtering-Correlation-Id: e037a271-8a8b-4535-2f99-08d85a6d013a
+X-MS-TrafficTypeDiagnostic: DM3P110MB0444:
 X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <DM3P110MB0378141C8E9B029911813551E9210@DM3P110MB0378.NAMP110.PROD.OUTLOOK.COM>
-X-MS-Oob-TLC-OOBClassifiers: OLM:1002;
+X-Microsoft-Antispam-PRVS: <DM3P110MB04441FFC9B94E635A625482AE9210@DM3P110MB0444.NAMP110.PROD.OUTLOOK.COM>
+X-MS-Oob-TLC-OOBClassifiers: OLM:353;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Forefront-Antispam-Report: CIP:207.242.234.14; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:localhost.localdomain; PTR:InfoDomainNonexistent;
  CAT:NONE;
- SFS:(6069001)(4636009)(346002)(46966005)(6916009)(2616005)(956004)(70586007)(82310400003)(70206006)(186003)(44832011)(107886003)(4326008)(86362001)(5660300002)(36756003)(336012)(26005)(6666004)(1076003)(33310700002)(8936002)(2906002)(8676002)(83380400001)(54906003)(81166007)(508600001)(47076004)(34070700001);
+ SFS:(6069001)(4636009)(346002)(46966005)(508600001)(33310700002)(82310400003)(2906002)(81166007)(8676002)(36756003)(6916009)(47076004)(5660300002)(186003)(26005)(8936002)(54906003)(1076003)(107886003)(6666004)(44832011)(70586007)(336012)(956004)(2616005)(4326008)(86362001)(83380400001)(70206006)(34070700001);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: dornerworks.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Sep 2020 18:19:13.2603 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3d4ede72-2386-441a-fa07-08d85a6d03f6
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Sep 2020 18:19:08.6777 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e037a271-8a8b-4535-2f99-08d85a6d013a
 X-MS-Exchange-CrossTenant-Id: 097cf9aa-db69-4b12-aeab-ab5f513dbff9
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=097cf9aa-db69-4b12-aeab-ab5f513dbff9; Ip=[207.242.234.14];
  Helo=[localhost.localdomain]
 X-MS-Exchange-CrossTenant-AuthSource: BN3USG02FT003.eop-usg02.itar.protection.office365.us
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM3P110MB0378
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM3P110MB0444
 X-Mailman-Approved-At: Thu, 17 Sep 2020 04:20:06 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -123,322 +124,172 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This change is in preperation for an overhaul of the arinc653 module. It
-groups functions in a logical order and fills out the sched_arinc653_def
-structure. There are no functional changes.
+The arinc653 module uses typedef struct with post fix tags for internal
+structure definitions, which is not consistent with the Xen coding
+style. This change cleans up the code to better match the style used
+elsewhere in the Xen scheduler code, and has no functional changes.
 
 Signed-off-by: Jeff Kubascik <jeff.kubascik@dornerworks.com>
 ---
- xen/common/sched/arinc653.c | 239 +++++++++++++++++++-----------------
- 1 file changed, 123 insertions(+), 116 deletions(-)
+ xen/common/sched/arinc653.c | 42 ++++++++++++++++++-------------------
+ 1 file changed, 21 insertions(+), 21 deletions(-)
 
 diff --git a/xen/common/sched/arinc653.c b/xen/common/sched/arinc653.c
-index 5f3a1be990..0cd39d475f 100644
+index 7bb75ffe2b..d8a23730c3 100644
 --- a/xen/common/sched/arinc653.c
 +++ b/xen/common/sched/arinc653.c
-@@ -144,96 +144,6 @@ static void update_schedule_units(const struct scheduler *ops)
-                       SCHED_PRIV(ops)->schedule[i].unit_id);
- }
+@@ -50,38 +50,38 @@
+  * Return a pointer to the ARINC 653-specific scheduler data information
+  * associated with the given UNIT
+  */
+-#define AUNIT(unit) ((arinc653_unit_t *)(unit)->priv)
++#define AUNIT(unit) ((struct a653sched_unit *)(unit)->priv)
  
--static int a653sched_set(const struct scheduler *ops,
--                         struct xen_sysctl_arinc653_schedule *schedule)
--{
--    struct a653sched_private *sched_priv = SCHED_PRIV(ops);
--    s_time_t total_runtime = 0;
--    unsigned int i;
--    unsigned long flags;
--    int rc = -EINVAL;
--
--    spin_lock_irqsave(&sched_priv->lock, flags);
--
--    /* Check for valid major frame and number of schedule entries */
--    if ( (schedule->major_frame <= 0)
--         || (schedule->num_sched_entries < 1)
--         || (schedule->num_sched_entries > ARINC653_MAX_DOMAINS_PER_SCHEDULE) )
--        goto fail;
--
--    for ( i = 0; i < schedule->num_sched_entries; i++ )
--    {
--        /* Check for a valid run time. */
--        if ( schedule->sched_entries[i].runtime <= 0 )
--            goto fail;
--
--        /* Add this entry's run time to total run time. */
--        total_runtime += schedule->sched_entries[i].runtime;
--    }
--
--    /*
--     * Error if the major frame is not large enough to run all entries as
--     * indicated by comparing the total run time to the major frame length
--     */
--    if ( total_runtime > schedule->major_frame )
--        goto fail;
--
--    /* Copy the new schedule into place. */
--    sched_priv->num_schedule_entries = schedule->num_sched_entries;
--    sched_priv->major_frame = schedule->major_frame;
--    for ( i = 0; i < schedule->num_sched_entries; i++ )
--    {
--        memcpy(sched_priv->schedule[i].dom_handle,
--               schedule->sched_entries[i].dom_handle,
--               sizeof(sched_priv->schedule[i].dom_handle));
--        sched_priv->schedule[i].unit_id =
--            schedule->sched_entries[i].vcpu_id;
--        sched_priv->schedule[i].runtime =
--            schedule->sched_entries[i].runtime;
--    }
--    update_schedule_units(ops);
--
--    /*
--     * The newly-installed schedule takes effect immediately. We do not even
--     * wait for the current major frame to expire.
--     *
--     * Signal a new major frame to begin. The next major frame is set up by
--     * the do_schedule callback function when it is next invoked.
--     */
--    sched_priv->next_major_frame = NOW();
--
--    rc = 0;
--
-- fail:
--    spin_unlock_irqrestore(&sched_priv->lock, flags);
--    return rc;
--}
--
--static int a653sched_get(const struct scheduler *ops,
--                         struct xen_sysctl_arinc653_schedule *schedule)
--{
--    struct a653sched_private *sched_priv = SCHED_PRIV(ops);
--    unsigned int i;
--    unsigned long flags;
--
--    spin_lock_irqsave(&sched_priv->lock, flags);
--
--    schedule->num_sched_entries = sched_priv->num_schedule_entries;
--    schedule->major_frame = sched_priv->major_frame;
--    for ( i = 0; i < sched_priv->num_schedule_entries; i++ )
--    {
--        memcpy(schedule->sched_entries[i].dom_handle,
--               sched_priv->schedule[i].dom_handle,
--               sizeof(sched_priv->schedule[i].dom_handle));
--        schedule->sched_entries[i].vcpu_id = sched_priv->schedule[i].unit_id;
--        schedule->sched_entries[i].runtime = sched_priv->schedule[i].runtime;
--    }
--
--    spin_unlock_irqrestore(&sched_priv->lock, flags);
--
--    return 0;
--}
--
- static int a653sched_init(struct scheduler *ops)
+ /*
+  * Return the global scheduler private data given the scheduler ops pointer
+  */
+-#define SCHED_PRIV(s) ((a653sched_priv_t *)((s)->sched_data))
++#define SCHED_PRIV(s) ((struct a653sched_private *)((s)->sched_data))
+ 
+ /*
+  * Schedule unit
+  */
+-typedef struct arinc653_unit_s
++struct a653sched_unit
  {
-     struct a653sched_private *prv;
-@@ -257,6 +167,20 @@ static void a653sched_deinit(struct scheduler *ops)
-     ops->sched_data = NULL;
- }
+     struct sched_unit *unit;            /* Up-pointer to UNIT */
+     bool awake;                         /* UNIT awake flag */
+     struct list_head list;              /* On the scheduler private data */
+-} arinc653_unit_t;
++};
  
-+static spinlock_t *a653sched_switch_sched(struct scheduler *new_ops,
-+                                          unsigned int cpu, void *pdata,
-+                                          void *vdata)
-+{
-+    struct sched_resource *sr = get_sched_res(cpu);
-+    const struct a653sched_unit *svc = vdata;
-+
-+    ASSERT(!pdata && svc && is_idle_unit(svc->unit));
-+
-+    sched_idle_unit(cpu)->priv = vdata;
-+
-+    return &sr->_lock;
-+}
-+
- static void *a653sched_alloc_udata(const struct scheduler *ops,
-                                    struct sched_unit *unit,
-                                    void *dd)
-@@ -356,6 +280,27 @@ static void a653sched_unit_wake(const struct scheduler *ops,
-     cpu_raise_softirq(sched_unit_master(unit), SCHEDULE_SOFTIRQ);
- }
- 
-+static struct sched_resource *a653sched_pick_resource(const struct scheduler *ops,
-+                                                      const struct sched_unit *unit)
-+{
-+    const cpumask_t *online;
-+    unsigned int cpu;
-+
-+    /*
-+     * If present, prefer unit's current processor, else
-+     * just find the first valid unit.
-+     */
-+    online = cpupool_domain_master_cpumask(unit->domain);
-+
-+    cpu = cpumask_first(online);
-+
-+    if ( cpumask_test_cpu(sched_unit_master(unit), online)
-+         || (cpu >= nr_cpu_ids) )
-+        cpu = sched_unit_master(unit);
-+
-+    return get_sched_res(cpu);
-+}
-+
- static void a653sched_do_schedule(const struct scheduler *ops,
-                                   struct sched_unit *prev, s_time_t now,
-                                   bool tasklet_work_scheduled)
-@@ -444,40 +389,94 @@ static void a653sched_do_schedule(const struct scheduler *ops,
-     BUG_ON(prev->next_time <= 0);
- }
- 
--static struct sched_resource *
--a653sched_pick_resource(const struct scheduler *ops,
--                        const struct sched_unit *unit)
-+static int a653sched_set(const struct scheduler *ops,
-+                         struct xen_sysctl_arinc653_schedule *schedule)
+ /*
+  * Domain frame entry in the ARINC 653 schedule
+  */
+-typedef struct sched_entry_s
++struct sched_entry
  {
--    const cpumask_t *online;
--    unsigned int cpu;
-+    struct a653sched_private *sched_priv = SCHED_PRIV(ops);
-+    s_time_t total_runtime = 0;
-+    unsigned int i;
-+    unsigned long flags;
-+    int rc = -EINVAL;
-+
-+    spin_lock_irqsave(&sched_priv->lock, flags);
-+
-+    /* Check for valid major frame and number of schedule entries */
-+    if ( (schedule->major_frame <= 0)
-+         || (schedule->num_sched_entries < 1)
-+         || (schedule->num_sched_entries > ARINC653_MAX_DOMAINS_PER_SCHEDULE) )
-+        goto fail;
-+
-+    for ( i = 0; i < schedule->num_sched_entries; i++ )
-+    {
-+        /* Check for a valid run time. */
-+        if ( schedule->sched_entries[i].runtime <= 0 )
-+            goto fail;
-+
-+        /* Add this entry's run time to total run time. */
-+        total_runtime += schedule->sched_entries[i].runtime;
-+    }
+     xen_domain_handle_t dom_handle;     /* UUID of the domain */
+     int unit_id;                        /* UNIT number for reference */
+     s_time_t runtime;                   /* Duration of the frame */
+     struct sched_unit *unit;            /* Pointer to UNIT */
+-} sched_entry_t;
++};
+ 
+ /*
+  * Scheduler private data
+  */
+-typedef struct a653sched_priv_s
++struct a653sched_private
+ {
+     spinlock_t lock;                    /* Scheduler private lock */
+ 
+@@ -93,7 +93,7 @@ typedef struct a653sched_priv_s
+      * and UNIT number match, then the UNIT is allowed to run. Its run time
+      * (per major frame) is given in the third entry of the schedule.
+      */
+-    sched_entry_t schedule[ARINC653_MAX_DOMAINS_PER_SCHEDULE];
++    struct sched_entry schedule[ARINC653_MAX_DOMAINS_PER_SCHEDULE];
  
      /*
--     * If present, prefer unit's current processor, else
--     * just find the first valid unit.
-+     * Error if the major frame is not large enough to run all entries as
-+     * indicated by comparing the total run time to the major frame length
-      */
--    online = cpupool_domain_master_cpumask(unit->domain);
-+    if ( total_runtime > schedule->major_frame )
-+        goto fail;
+      * This variable holds the number of entries that are valid in
+@@ -110,7 +110,7 @@ typedef struct a653sched_priv_s
+     s_time_t next_major_frame;          /* When to switch to the next frame */
  
--    cpu = cpumask_first(online);
-+    /* Copy the new schedule into place. */
-+    sched_priv->num_schedule_entries = schedule->num_sched_entries;
-+    sched_priv->major_frame = schedule->major_frame;
-+    for ( i = 0; i < schedule->num_sched_entries; i++ )
-+    {
-+        memcpy(sched_priv->schedule[i].dom_handle,
-+               schedule->sched_entries[i].dom_handle,
-+               sizeof(sched_priv->schedule[i].dom_handle));
-+        sched_priv->schedule[i].unit_id =
-+            schedule->sched_entries[i].vcpu_id;
-+        sched_priv->schedule[i].runtime =
-+            schedule->sched_entries[i].runtime;
-+    }
-+    update_schedule_units(ops);
+     struct list_head unit_list;         /* UNITs belonging to this scheduler */
+-} a653sched_priv_t;
++};
  
--    if ( cpumask_test_cpu(sched_unit_master(unit), online)
--         || (cpu >= nr_cpu_ids) )
--        cpu = sched_unit_master(unit);
-+    /*
-+     * The newly-installed schedule takes effect immediately. We do not even
-+     * wait for the current major frame to expire.
-+     *
-+     * Signal a new major frame to begin. The next major frame is set up by
-+     * the do_schedule callback function when it is next invoked.
-+     */
-+    sched_priv->next_major_frame = NOW();
- 
--    return get_sched_res(cpu);
-+    rc = 0;
-+
-+ fail:
-+    spin_unlock_irqrestore(&sched_priv->lock, flags);
-+    return rc;
- }
- 
--static spinlock_t *a653sched_switch_sched(struct scheduler *new_ops,
--                                          unsigned int cpu, void *pdata,
--                                          void *vdata)
-+static int a653sched_get(const struct scheduler *ops,
-+                         struct xen_sysctl_arinc653_schedule *schedule)
+ /* This function compares two domain handles */
+ static int dom_handle_cmp(const xen_domain_handle_t h1,
+@@ -124,7 +124,7 @@ static struct sched_unit *find_unit(
+     xen_domain_handle_t handle,
+     int unit_id)
  {
--    struct sched_resource *sr = get_sched_res(cpu);
--    const struct a653sched_unit *svc = vdata;
+-    arinc653_unit_t *aunit;
++    struct a653sched_unit *aunit;
+ 
+     list_for_each_entry ( aunit, &SCHED_PRIV(ops)->unit_list, list )
+         if ( (dom_handle_cmp(aunit->unit->domain->handle, handle) == 0)
+@@ -150,7 +150,7 @@ arinc653_sched_set(
+     const struct scheduler *ops,
+     struct xen_sysctl_arinc653_schedule *schedule)
+ {
+-    a653sched_priv_t *sched_priv = SCHED_PRIV(ops);
 +    struct a653sched_private *sched_priv = SCHED_PRIV(ops);
-+    unsigned int i;
-+    unsigned long flags;
+     s_time_t total_runtime = 0;
+     unsigned int i;
+     unsigned long flags;
+@@ -217,7 +217,7 @@ arinc653_sched_get(
+     const struct scheduler *ops,
+     struct xen_sysctl_arinc653_schedule *schedule)
+ {
+-    a653sched_priv_t *sched_priv = SCHED_PRIV(ops);
++    struct a653sched_private *sched_priv = SCHED_PRIV(ops);
+     unsigned int i;
+     unsigned long flags;
  
--    ASSERT(!pdata && svc && is_idle_unit(svc->unit));
-+    spin_lock_irqsave(&sched_priv->lock, flags);
+@@ -242,9 +242,9 @@ arinc653_sched_get(
+ static int
+ a653sched_init(struct scheduler *ops)
+ {
+-    a653sched_priv_t *prv;
++    struct a653sched_private *prv;
  
--    sched_idle_unit(cpu)->priv = vdata;
-+    schedule->num_sched_entries = sched_priv->num_schedule_entries;
-+    schedule->major_frame = sched_priv->major_frame;
-+    for ( i = 0; i < sched_priv->num_schedule_entries; i++ )
-+    {
-+        memcpy(schedule->sched_entries[i].dom_handle,
-+               sched_priv->schedule[i].dom_handle,
-+               sizeof(sched_priv->schedule[i].dom_handle));
-+        schedule->sched_entries[i].vcpu_id = sched_priv->schedule[i].unit_id;
-+        schedule->sched_entries[i].runtime = sched_priv->schedule[i].runtime;
-+    }
+-    prv = xzalloc(a653sched_priv_t);
++    prv = xzalloc(struct a653sched_private);
+     if ( prv == NULL )
+         return -ENOMEM;
  
--    return &sr->_lock;
-+    spin_unlock_irqrestore(&sched_priv->lock, flags);
-+
-+    return 0;
- }
+@@ -268,8 +268,8 @@ static void *
+ a653sched_alloc_udata(const struct scheduler *ops, struct sched_unit *unit,
+                       void *dd)
+ {
+-    a653sched_priv_t *sched_priv = SCHED_PRIV(ops);
+-    arinc653_unit_t *svc;
++    struct a653sched_private *sched_priv = SCHED_PRIV(ops);
++    struct a653sched_unit *svc;
+     unsigned int entry;
+     unsigned long flags;
  
- static int a653sched_adjust_global(const struct scheduler *ops,
-@@ -517,27 +516,35 @@ static const struct scheduler sched_arinc653_def = {
-     .sched_id       = XEN_SCHEDULER_ARINC653,
-     .sched_data     = NULL,
+@@ -277,7 +277,7 @@ a653sched_alloc_udata(const struct scheduler *ops, struct sched_unit *unit,
+      * Allocate memory for the ARINC 653-specific scheduler data information
+      * associated with the given UNIT (unit).
+      */
+-    svc = xmalloc(arinc653_unit_t);
++    svc = xmalloc(struct a653sched_unit);
+     if ( svc == NULL )
+         return NULL;
  
-+    .global_init    = NULL,
-     .init           = a653sched_init,
-     .deinit         = a653sched_deinit,
+@@ -323,8 +323,8 @@ a653sched_alloc_udata(const struct scheduler *ops, struct sched_unit *unit,
+ static void
+ a653sched_free_udata(const struct scheduler *ops, void *priv)
+ {
+-    a653sched_priv_t *sched_priv = SCHED_PRIV(ops);
+-    arinc653_unit_t *av = priv;
++    struct a653sched_private *sched_priv = SCHED_PRIV(ops);
++    struct a653sched_unit *av = priv;
+     unsigned long flags;
  
--    .free_udata     = a653sched_free_udata,
--    .alloc_udata    = a653sched_alloc_udata,
-+    .alloc_pdata    = NULL,
-+    .switch_sched   = a653sched_switch_sched,
-+    .deinit_pdata   = NULL,
-+    .free_pdata     = NULL,
+     if (av == NULL)
+@@ -374,7 +374,7 @@ a653sched_do_schedule(
+     struct sched_unit *new_task = NULL;
+     static unsigned int sched_index = 0;
+     static s_time_t next_switch_time;
+-    a653sched_priv_t *sched_priv = SCHED_PRIV(ops);
++    struct a653sched_private *sched_priv = SCHED_PRIV(ops);
+     const unsigned int cpu = sched_get_resource_cpu(smp_processor_id());
+     unsigned long flags;
  
-+    .alloc_domdata  = NULL,
-+    .free_domdata   = NULL,
-+
-+    .alloc_udata    = a653sched_alloc_udata,
-     .insert_unit    = NULL,
-     .remove_unit    = NULL,
-+    .free_udata     = a653sched_free_udata,
+@@ -482,7 +482,7 @@ a653_switch_sched(struct scheduler *new_ops, unsigned int cpu,
+                   void *pdata, void *vdata)
+ {
+     struct sched_resource *sr = get_sched_res(cpu);
+-    const arinc653_unit_t *svc = vdata;
++    const struct a653sched_unit *svc = vdata;
  
-     .sleep          = a653sched_unit_sleep,
-     .wake           = a653sched_unit_wake,
-     .yield          = NULL,
-     .context_saved  = NULL,
+     ASSERT(!pdata && svc && is_idle_unit(svc->unit));
  
--    .do_schedule    = a653sched_do_schedule,
--
-     .pick_resource  = a653sched_pick_resource,
-+    .migrate        = NULL,
- 
--    .switch_sched   = a653sched_switch_sched,
-+    .do_schedule    = a653sched_do_schedule,
- 
-     .adjust         = NULL,
-+    .adjust_affinity= NULL,
-     .adjust_global  = a653sched_adjust_global,
- 
-     .dump_settings  = NULL,
 -- 
 2.17.1
 
