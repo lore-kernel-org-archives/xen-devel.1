@@ -5,58 +5,58 @@ X-Spam-Level:
 X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.0
+	URIBL_BLOCKED autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DB5F0C35263
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6399BC35257
 	for <xen-devel@archiver.kernel.org>; Wed, 16 Sep 2020 18:34:51 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9AF95206B5
+	by mail.kernel.org (Postfix) with ESMTPS id 1FEDF221EF
 	for <xen-devel@archiver.kernel.org>; Wed, 16 Sep 2020 18:34:51 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="f/RScOlo"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9AF95206B5
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="InLW9gWG"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1FEDF221EF
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kIcGM-0008Vv-Kw; Wed, 16 Sep 2020 18:34:38 +0000
+	id 1kIcGH-0008Uj-Bo; Wed, 16 Sep 2020 18:34:33 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=44SI=CZ=redhat.com=david@srs-us1.protection.inumbo.net>)
- id 1kIcGL-0008Vo-JV
- for xen-devel@lists.xenproject.org; Wed, 16 Sep 2020 18:34:37 +0000
-X-Inumbo-ID: 08717d44-7d9d-45f9-9b38-6e09075ea252
-Received: from us-smtp-delivery-124.mimecast.com (unknown [63.128.21.124])
+ id 1kIcGG-0008Ud-8U
+ for xen-devel@lists.xenproject.org; Wed, 16 Sep 2020 18:34:32 +0000
+X-Inumbo-ID: 2878df72-c1f1-4040-98ad-33d68d6e5e99
+Received: from us-smtp-1.mimecast.com (unknown [207.211.31.120])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id 08717d44-7d9d-45f9-9b38-6e09075ea252;
- Wed, 16 Sep 2020 18:34:34 +0000 (UTC)
+ id 2878df72-c1f1-4040-98ad-33d68d6e5e99;
+ Wed, 16 Sep 2020 18:34:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1600281274;
+ s=mimecast20190719; t=1600281270;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=2jblkU4ogq5hsBAPlkwaxym1Fc+Tde0ELyzoer8oJwA=;
- b=f/RScOloGDcd0BjD4xrfCLX3LUalygVlV0Szk2ItHOGfQG4xxB3G43dRs7poRsaghOuHba
- mC89+PL5IFsm15TqME32zsrkHwFhxYL3gcDaeFLR4pyTWg2LimodIwLaOv9MfaEYdFT5W6
- Lie9NiVI5KCeze16fTj5vdbyCl59OPA=
+ bh=XwubkINL1Uor4z8FYu3b+W/GYdIzfTemmcEGbq8cpJ0=;
+ b=InLW9gWGOIee59Ydokq+OW2Axg4TIrU8kQpw2nqJpnpBPtcZZ86dFebTTDMkL+oWKcHJC3
+ uFf24/sFtBCvMxTk06UNRLffezS9naiPTeTb5hCiIgvkkQx4lMHs+rzkJw4vaN21bv+8/v
+ PmdsDED6Xx2Cz6VD44CkRXpl1Ja/puc=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-50-yst8dbbjNimjZj-WXTth4A-1; Wed, 16 Sep 2020 14:34:30 -0400
-X-MC-Unique: yst8dbbjNimjZj-WXTth4A-1
+ us-mta-163-iu1WFwNHM5mEmTQLNOBZaA-1; Wed, 16 Sep 2020 14:34:26 -0400
+X-MC-Unique: iu1WFwNHM5mEmTQLNOBZaA-1
 Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
  [10.5.11.23])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id E4AF81091065;
- Wed, 16 Sep 2020 18:34:27 +0000 (UTC)
-Received: from t480s.redhat.com (ovpn-113-190.ams2.redhat.com [10.36.113.190])
- by smtp.corp.redhat.com (Postfix) with ESMTP id A2A3119D61;
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 5321B801AC4;
  Wed, 16 Sep 2020 18:34:24 +0000 (UTC)
+Received: from t480s.redhat.com (ovpn-113-190.ams2.redhat.com [10.36.113.190])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 0BCE119D61;
+ Wed, 16 Sep 2020 18:34:20 +0000 (UTC)
 From: David Hildenbrand <david@redhat.com>
 To: linux-kernel@vger.kernel.org
 Cc: linux-mm@kvack.org, linux-hyperv@vger.kernel.org,
@@ -67,13 +67,11 @@ Cc: linux-mm@kvack.org, linux-hyperv@vger.kernel.org,
  Mel Gorman <mgorman@techsingularity.net>, Michal Hocko <mhocko@kernel.org>,
  Dave Hansen <dave.hansen@intel.com>, Vlastimil Babka <vbabka@suse.cz>,
  Wei Yang <richard.weiyang@linux.alibaba.com>,
- Oscar Salvador <osalvador@suse.de>, Mike Rapoport <rppt@kernel.org>,
- Scott Cheloha <cheloha@linux.ibm.com>,
- Michael Ellerman <mpe@ellerman.id.au>
-Subject: [PATCH RFC 2/4] mm/page_alloc: place pages to tail in
- __putback_isolated_page()
-Date: Wed, 16 Sep 2020 20:34:09 +0200
-Message-Id: <20200916183411.64756-3-david@redhat.com>
+ Oscar Salvador <osalvador@suse.de>, Mike Rapoport <rppt@kernel.org>
+Subject: [PATCH RFC 1/4] mm/page_alloc: convert "report" flag of
+ __free_one_page() to a proper flag
+Date: Wed, 16 Sep 2020 20:34:08 +0200
+Message-Id: <20200916183411.64756-2-david@redhat.com>
 In-Reply-To: <20200916183411.64756-1-david@redhat.com>
 References: <20200916183411.64756-1-david@redhat.com>
 MIME-Version: 1.0
@@ -92,35 +90,10 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-__putback_isolated_page() already documents that pages will be placed to
-the tail of the freelist - this is, however, not the case for
-"order >= MAX_ORDER - 2" (see buddy_merge_likely()) - which should be
-the case for all existing users.
-
-This change affects two users:
-- free page reporting
-- page isolation, when undoing the isolation.
-
-This behavior is desireable for pages that haven't really been touched
-lately, so exactly the two users that don't actually read/write page
-content, but rather move untouched pages.
-
-The new behavior is especially desirable for memory onlining, where we
-allow allocation of newly onlined pages via undo_isolate_page_range()
-in online_pages(). Right now, we always place them to the head of the
-free list, resulting in undesireable behavior: Assume we add
-individual memory chunks via add_memory() and online them right away to
-the NORMAL zone. We create a dependency chain of unmovable allocations
-e.g., via the memmap. The memmap of the next chunk will be placed onto
-previous chunks - if the last block cannot get offlined+removed, all
-dependent ones cannot get offlined+removed. While this can already be
-observed with individual DIMMs, it's more of an issue for virtio-mem
-(and I suspect also ppc DLPAR).
-
-Note: If we observe a degradation due to the changed page isolation
-behavior (which I doubt), we can always make this configurable by the
-instance triggering undo of isolation (e.g., alloc_contig_range(),
-memory onlining, memory offlining).
+Let's prepare for additional flags and avoid long parameter lists of bools.
+Follow-up patches will also make use of the flags in __free_pages_ok(),
+however, I wasn't able to come up with a better name for the type - should
+be good enough for internal purposes.
 
 Cc: Andrew Morton <akpm@linux-foundation.org>
 Cc: Alexander Duyck <alexander.h.duyck@linux.intel.com>
@@ -131,45 +104,82 @@ Cc: Vlastimil Babka <vbabka@suse.cz>
 Cc: Wei Yang <richard.weiyang@linux.alibaba.com>
 Cc: Oscar Salvador <osalvador@suse.de>
 Cc: Mike Rapoport <rppt@kernel.org>
-Cc: Scott Cheloha <cheloha@linux.ibm.com>
-Cc: Michael Ellerman <mpe@ellerman.id.au>
 Signed-off-by: David Hildenbrand <david@redhat.com>
 ---
- mm/page_alloc.c | 10 +++++++++-
- 1 file changed, 9 insertions(+), 1 deletion(-)
+ mm/page_alloc.c | 28 ++++++++++++++++++++--------
+ 1 file changed, 20 insertions(+), 8 deletions(-)
 
 diff --git a/mm/page_alloc.c b/mm/page_alloc.c
-index 91cefb8157dd..bba9a0f60c70 100644
+index 6b699d273d6e..91cefb8157dd 100644
 --- a/mm/page_alloc.c
 +++ b/mm/page_alloc.c
-@@ -89,6 +89,12 @@ typedef int __bitwise fop_t;
-  */
- #define FOP_SKIP_REPORT_NOTIFY	((__force fop_t)BIT(0))
+@@ -77,6 +77,18 @@
+ #include "shuffle.h"
+ #include "page_reporting.h"
  
++/* Free One Page flags: for internal, non-pcp variants of free_pages(). */
++typedef int __bitwise fop_t;
++
++/* No special request */
++#define FOP_NONE		((__force fop_t)0)
++
 +/*
-+ * Place the freed page to the tail of the freelist after buddy merging. Will
-+ * get ignored with page shuffling enabled.
++ * Skip free page reporting notification after buddy merging (will *not* mark
++ * the page reported, only skip the notification).
 + */
-+#define FOP_TO_TAIL		((__force fop_t)BIT(1))
++#define FOP_SKIP_REPORT_NOTIFY	((__force fop_t)BIT(0))
 +
  /* prevent >1 _updater_ of zone percpu pageset ->high and ->batch fields */
  static DEFINE_MUTEX(pcp_batch_high_lock);
  #define MIN_PERCPU_PAGELIST_FRACTION	(8)
-@@ -1040,6 +1046,8 @@ static inline void __free_one_page(struct page *page, unsigned long pfn,
+@@ -948,10 +960,9 @@ buddy_merge_likely(unsigned long pfn, unsigned long buddy_pfn,
+  * -- nyc
+  */
  
- 	if (is_shuffle_order(order))
- 		to_tail = shuffle_pick_tail();
-+	else if (fop_flags & FOP_TO_TAIL)
-+		to_tail = true;
- 	else
- 		to_tail = buddy_merge_likely(pfn, buddy_pfn, page, order);
+-static inline void __free_one_page(struct page *page,
+-		unsigned long pfn,
+-		struct zone *zone, unsigned int order,
+-		int migratetype, bool report)
++static inline void __free_one_page(struct page *page, unsigned long pfn,
++				   struct zone *zone, unsigned int order,
++				   int migratetype, fop_t fop_flags)
+ {
+ 	struct capture_control *capc = task_capc(zone);
+ 	unsigned long buddy_pfn;
+@@ -1038,7 +1049,7 @@ static inline void __free_one_page(struct page *page,
+ 		add_to_free_list(page, zone, order, migratetype);
  
-@@ -3289,7 +3297,7 @@ void __putback_isolated_page(struct page *page, unsigned int order, int mt)
+ 	/* Notify page reporting subsystem of freed page */
+-	if (report)
++	if (!(fop_flags & FOP_SKIP_REPORT_NOTIFY))
+ 		page_reporting_notify_free(order);
+ }
+ 
+@@ -1368,7 +1379,7 @@ static void free_pcppages_bulk(struct zone *zone, int count,
+ 		if (unlikely(isolated_pageblocks))
+ 			mt = get_pageblock_migratetype(page);
+ 
+-		__free_one_page(page, page_to_pfn(page), zone, 0, mt, true);
++		__free_one_page(page, page_to_pfn(page), zone, 0, mt, FOP_NONE);
+ 		trace_mm_page_pcpu_drain(page, 0, mt);
+ 	}
+ 	spin_unlock(&zone->lock);
+@@ -1384,7 +1395,7 @@ static void free_one_page(struct zone *zone,
+ 		is_migrate_isolate(migratetype))) {
+ 		migratetype = get_pfnblock_migratetype(page, pfn);
+ 	}
+-	__free_one_page(page, pfn, zone, order, migratetype, true);
++	__free_one_page(page, pfn, zone, order, migratetype, FOP_NONE);
+ 	spin_unlock(&zone->lock);
+ }
+ 
+@@ -3277,7 +3288,8 @@ void __putback_isolated_page(struct page *page, unsigned int order, int mt)
+ 	lockdep_assert_held(&zone->lock);
  
  	/* Return isolated page to tail of freelist. */
- 	__free_one_page(page, page_to_pfn(page), zone, order, mt,
--			FOP_SKIP_REPORT_NOTIFY);
-+			FOP_SKIP_REPORT_NOTIFY | FOP_TO_TAIL);
+-	__free_one_page(page, page_to_pfn(page), zone, order, mt, false);
++	__free_one_page(page, page_to_pfn(page), zone, order, mt,
++			FOP_SKIP_REPORT_NOTIFY);
  }
  
  /*
