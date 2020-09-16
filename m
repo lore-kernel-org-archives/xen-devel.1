@@ -2,67 +2,75 @@ Return-Path: <SRS0=Rhtt=CZ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-9.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 95FC2C433E2
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Sep 2020 07:36:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D0F19C43461
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Sep 2020 07:46:22 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2C16220684
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Sep 2020 07:36:41 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 78D132080C
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Sep 2020 07:46:22 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="VBs4nMW7"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2C16220684
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="F4XBtoMr"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 78D132080C
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kIRzN-0003Bm-E3; Wed, 16 Sep 2020 07:36:25 +0000
+	id 1kIS8d-00045o-CO; Wed, 16 Sep 2020 07:45:59 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=kJNc=CZ=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
- id 1kIRzM-0003Aj-Bj
- for xen-devel@lists.xenproject.org; Wed, 16 Sep 2020 07:36:24 +0000
-X-Inumbo-ID: 569d3a9f-0a8a-48bf-bb08-8ef8bd4b501b
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+ <SRS0=9sPA=CZ=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1kIS8c-00045j-5f
+ for xen-devel@lists.xenproject.org; Wed, 16 Sep 2020 07:45:58 +0000
+X-Inumbo-ID: af7a5de6-936e-4b0f-a2c2-0514355e3c04
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 569d3a9f-0a8a-48bf-bb08-8ef8bd4b501b;
- Wed, 16 Sep 2020 07:36:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
- Content-Transfer-Encoding:Content-Type:Message-ID:To;
- bh=HQ3I1m2KS2OgRPtu90cOEHs8LrPtgw3m1JVtpIN6IqA=; b=VBs4nMW7scHRTdpQz7etjjl5mc
- //xi3l1YjXUIotKnfgUNjzMrpxKfIvm3oqQA2LFh/n+hYKoJ1UBPZPa1KacMbl3Hlzec3BR+y3Vac
- U096H12AIhQLMv61suCH7etgruqdeVYQNB2IqKaITI8zjRNzM+DVLAMIiLxaElgJEDgA=;
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kIRzE-0007OI-DY; Wed, 16 Sep 2020 07:36:16 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kIRzE-0000Lk-54; Wed, 16 Sep 2020 07:36:16 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1kIRzE-0005P7-4Z; Wed, 16 Sep 2020 07:36:16 +0000
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-154376-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+ id af7a5de6-936e-4b0f-a2c2-0514355e3c04;
+ Wed, 16 Sep 2020 07:45:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1600242355;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=FGd41tedmz6bIXZWa7IZrHKursLyzDsGm8JNTgBE5ws=;
+ b=F4XBtoMrZnZhjPwpmFfMXeAQgKfvUYeOYFXydLxw8/BlxlbaCoEiH8lw
+ /W+H+TvMz8lFaCxgFXtJ3N7h2guZdpvYcysFLiar8kWWy5gAmrZwVZyGs
+ IL4xUYSGVy8kjIxdRixBCm8TIEH4Y4w+0+xlnHB5haWMF+BJOKfr2RfrV Q=;
+Authentication-Results: esa4.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none
+IronPort-SDR: o6g63Ro/FGl7e2cOryKhsRZBC8wsURA2lsFoHttam4pywsEZtZtwSCmM7rK7UXZHbOQqLpQXzb
+ Sr3WsbM1zRPgu8PA+AMdOz99aw4+6nAaHV2s29zpArORkmPPeI9glj1+zBVJE9OwEBx6VvahWd
+ MkAzLek7/7MChZ1YSN2Ktt13dAtGyNvSzs4bVGxEmPXlAOaPQzu6+fEDNnXaziThh7IEDQhwE6
+ CeN/njfsfv0EwfU4HzQapMhN5x8IJ8AN7rx7frc1MF8ZQJ3H53elntRIsxeG4o+QGaswJVoyBL
+ 3Fo=
+X-SBRS: 2.7
+X-MesageID: 27782711
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.76,432,1592884800"; d="scan'208";a="27782711"
+Date: Wed, 16 Sep 2020 09:45:44 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Trammell Hudson <hudson@trmm.net>
+CC: <xen-devel@lists.xenproject.org>, <jbeulich@suse.com>,
+ <andrew.cooper3@citrix.com>, <wl@xen.org>
+Subject: Re: [PATCH v4 4/4] efi: Do not use command line if secure boot is
+ enabled.
+Message-ID: <20200916074544.GS753@Air-de-Roger>
+References: <20200914115013.814079-1-hudson@trmm.net>
+ <20200914115013.814079-5-hudson@trmm.net>
 MIME-Version: 1.0
-Subject: [ovmf test] 154376: all pass - PUSHED
-X-Osstest-Versions-This: ovmf=7bcb021a6d54c5775c0fa1a3ea003b61f5c966ed
-X-Osstest-Versions-That: ovmf=a62fb4229d149560cac2bf56011fba49a281ed2b
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Wed, 16 Sep 2020 07:36:16 +0000
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+In-Reply-To: <20200914115013.814079-5-hudson@trmm.net>
+X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
+ FTLPEX02CL06.citrite.net (10.13.108.179)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,54 +84,73 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-flight 154376 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/154376/
+On Mon, Sep 14, 2020 at 07:50:13AM -0400, Trammell Hudson wrote:
+> If secure boot is enabled, the Xen command line arguments are ignored.
+> If a unified Xen image is used, then the bundled configuration, dom0
+> kernel, and initrd are prefered over the ones listed in the config file.
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- ovmf                 7bcb021a6d54c5775c0fa1a3ea003b61f5c966ed
-baseline version:
- ovmf                 a62fb4229d149560cac2bf56011fba49a281ed2b
+I understand that you must ignore the cfg option when using the
+bundled image, but is there then an alternative way for passing the
+basevideo and mapbs parameters?
 
-Last test of basis   154370  2020-09-16 01:39:54 Z    0 days
-Testing same since   154376  2020-09-16 05:40:34 Z    0 days    1 attempts
+Or there's simply no way of doing so when using secure boot with a
+bundled image?
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Qi Zhang <qi1.zhang@intel.com>
+> Unlike the shim based verification, the PE signature on a unified image
+> covers the all of the Xen+config+kernel+initrd modules linked into the
 
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
+Extra 'the'.
 
+> unified image. This also ensures that properly configured platforms
+> will measure the entire runtime into the TPM for unsealing secrets or
+> remote attestation.
+> 
+> Signed-off-by: Trammell Hudson <hudson@trmm.net>
+> ---
+>  xen/common/efi/boot.c | 44 ++++++++++++++++++++++++++++++++++++++++---
+>  1 file changed, 41 insertions(+), 3 deletions(-)
+> 
+> diff --git a/xen/common/efi/boot.c b/xen/common/efi/boot.c
+> index 4b1fbc9643..e65c1f1a09 100644
+> --- a/xen/common/efi/boot.c
+> +++ b/xen/common/efi/boot.c
+> @@ -949,6 +949,39 @@ static void __init setup_efi_pci(void)
+>      efi_bs->FreePool(handles);
+>  }
+>  
+> +/*
+> + * Logic should remain sync'ed with linux/arch/x86/xen/efi.c
+> + * Secure Boot is enabled iff 'SecureBoot' is set and the system is
+> + * not in Setup Mode.
+> + */
+> +static bool __init efi_secure_boot(void)
+> +{
+> +    static const __initconst EFI_GUID global_guid = EFI_GLOBAL_VARIABLE;
+> +    uint8_t secboot, setupmode;
+> +    UINTN secboot_size = sizeof(secboot);
+> +    UINTN setupmode_size = sizeof(setupmode);
+> +    EFI_STATUS rc;
+> +
+> +    rc = efi_rs->GetVariable(L"SecureBoot", (EFI_GUID *)&global_guid,
+> +                             NULL, &secboot_size, &secboot);
+> +    if ( rc != EFI_SUCCESS )
+> +        return false;
+> +
+> +    rc = efi_rs->GetVariable(L"SetupMode", (EFI_GUID *)&global_guid,
+> +                             NULL, &setupmode_size, &setupmode);
+> +    if ( rc != EFI_SUCCESS )
+> +        return false;
+> +
+> +    if ( secboot > 1)
 
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
+Nit: missing space before closing parentheses.
 
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
+> +    {
+> +        PrintStr(L"Invalid SecureBoot variable=0x");
+> +        DisplayUint(secboot, 2);
 
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+Maybe better to use secboot_size * 2 here since you already have the
+size of the variable anyway?
 
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
-   a62fb4229d..7bcb021a6d  7bcb021a6d54c5775c0fa1a3ea003b61f5c966ed -> xen-tested-master
+Thanks, Roger.
 
