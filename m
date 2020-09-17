@@ -7,33 +7,33 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 49994C2BBD1
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Sep 2020 15:41:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0CC7BC43461
+	for <xen-devel@archiver.kernel.org>; Thu, 17 Sep 2020 15:41:48 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 026E22223C
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Sep 2020 15:41:45 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 026E22223C
+	by mail.kernel.org (Postfix) with ESMTPS id AF7712223C
+	for <xen-devel@archiver.kernel.org>; Thu, 17 Sep 2020 15:41:47 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AF7712223C
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=trmm.net
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kIw2E-0003UY-Ig; Thu, 17 Sep 2020 15:41:22 +0000
+	id 1kIw2T-0003ZK-GC; Thu, 17 Sep 2020 15:41:37 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=t+a8=C2=trmm.net=hudson@srs-us1.protection.inumbo.net>)
- id 1kIw2C-0003UO-T2
- for xen-devel@lists.xenproject.org; Thu, 17 Sep 2020 15:41:20 +0000
-X-Inumbo-ID: 234a3bb9-a91a-4af2-9c36-024649d30201
+ id 1kIw2S-0003Z7-Jm
+ for xen-devel@lists.xenproject.org; Thu, 17 Sep 2020 15:41:36 +0000
+X-Inumbo-ID: cbbd5b5b-d89d-431b-9d2b-edb4508d8af6
 Received: from mx1a.swcp.com (unknown [216.184.2.64])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 234a3bb9-a91a-4af2-9c36-024649d30201;
- Thu, 17 Sep 2020 15:41:18 +0000 (UTC)
+ id cbbd5b5b-d89d-431b-9d2b-edb4508d8af6;
+ Thu, 17 Sep 2020 15:41:35 +0000 (UTC)
 Received: from ame7.swcp.com (ame7.swcp.com [216.184.2.70])
- by mx1a.swcp.com (8.14.4/8.14.4/Debian-4) with ESMTP id 08HFfG42024951
- for <xen-devel@lists.xenproject.org>; Thu, 17 Sep 2020 09:41:16 -0600
+ by mx1a.swcp.com (8.14.4/8.14.4/Debian-4) with ESMTP id 08HFfYjE024992
+ for <xen-devel@lists.xenproject.org>; Thu, 17 Sep 2020 09:41:34 -0600
 Received-SPF: neutral (ame7.swcp.com: 62.251.112.184 is neither permitted nor
  denied by domain of hudson@trmm.net) receiver=ame7.swcp.com;
  client-ip=62.251.112.184; helo=diamond.fritz.box;
@@ -41,16 +41,17 @@ Received-SPF: neutral (ame7.swcp.com: 62.251.112.184 is neither permitted nor
  x-software=spfmilter 2.001 http://www.acme.com/software/spfmilter/ with
  libspf2-1.2.10; 
 Received: from diamond.fritz.box (62-251-112-184.ip.xs4all.nl [62.251.112.184])
- by ame7.swcp.com (8.15.2/8.15.2) with ESMTP id 08HFesRN024558
- for <xen-devel@lists.xenproject.org>; Thu, 17 Sep 2020 09:41:14 -0600 (MDT)
+ by ame7.swcp.com (8.15.2/8.15.2) with ESMTP id 08HFesRQ024558
+ for <xen-devel@lists.xenproject.org>; Thu, 17 Sep 2020 09:41:28 -0600 (MDT)
  (envelope-from hudson@trmm.net)
 X-Authentication-Warning: ame7.swcp.com: Host 62-251-112-184.ip.xs4all.nl
  [62.251.112.184] claimed to be diamond.fritz.box
 From: Trammell Hudson <hudson@trmm.net>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH v5 2/5] efi/boot.c: add file.need_to_free
-Date: Thu, 17 Sep 2020 11:40:45 -0400
-Message-Id: <20200917154048.1140580-3-hudson@trmm.net>
+Subject: [PATCH v5 5/5] efi: Do not use command line if unified config is
+ included
+Date: Thu, 17 Sep 2020 11:40:48 -0400
+Message-Id: <20200917154048.1140580-6-hudson@trmm.net>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20200917154048.1140580-1-hudson@trmm.net>
 References: <20200917154048.1140580-1-hudson@trmm.net>
@@ -59,7 +60,7 @@ Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 2.83
 X-Greylist: Message whitelisted by DRAC access database, not delayed by
  milter-greylist-4.6.2 (ame7.swcp.com [216.184.2.128]);
- Thu, 17 Sep 2020 09:41:15 -0600 (MDT)
+ Thu, 17 Sep 2020 09:41:29 -0600 (MDT)
 X-Virus-Scanned: clamav-milter 0.100.2 at ame7
 X-Virus-Status: Clean
 X-BeenThere: xen-devel@lists.xenproject.org
@@ -75,52 +76,110 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-The config file, kernel, initrd, etc should only be freed if they
-are allocated with the UEFI allocator.
+If a unified Xen image is used, then the bundled configuration,
+Xen command line, dom0 kernel, and ramdisk are prefered over
+any files listed in the config file or provided on the command line.
+
+Unlike the shim based verification, the PE signature on a unified image
+covers all of the Xen+config+kernel+initrd modules linked into the
+unified image. This also ensures that, on properly configured UEFI Secure Boot
+platforms,  the entire runtime will be measured into the TPM for unsealing
+secrets or remote attestation.
 
 Signed-off-by: Trammell Hudson <hudson@trmm.net>
 ---
- xen/common/efi/boot.c | 10 ++++++----
- 1 file changed, 6 insertions(+), 4 deletions(-)
+ xen/common/efi/boot.c | 43 ++++++++++++++++++++++++++++++++++++++-----
+ 1 file changed, 38 insertions(+), 5 deletions(-)
 
 diff --git a/xen/common/efi/boot.c b/xen/common/efi/boot.c
-index 157fe0e8c5..77530a0595 100644
+index c14e836640..6dc3f5ac94 100644
 --- a/xen/common/efi/boot.c
 +++ b/xen/common/efi/boot.c
-@@ -102,6 +102,7 @@ union string {
+@@ -952,6 +952,35 @@ static void __init setup_efi_pci(void)
+     efi_bs->FreePool(handles);
+ }
  
- struct file {
-     UINTN size;
-+    bool need_to_free;
-     union {
-         EFI_PHYSICAL_ADDRESS addr;
-         char *str;
-@@ -280,13 +281,13 @@ void __init noreturn blexit(const CHAR16 *str)
-     if ( !efi_bs )
-         efi_arch_halt();
++/*
++ * Logic should remain sync'ed with linux/arch/x86/xen/efi.c
++ * Secure Boot is enabled iff 'SecureBoot' is set and the system is
++ * not in Setup Mode.
++ */
++static bool __init efi_secure_boot(void)
++{
++    static __initdata EFI_GUID global_guid = EFI_GLOBAL_VARIABLE;
++    uint8_t secboot, setupmode;
++    UINTN secboot_size = sizeof(secboot);
++    UINTN setupmode_size = sizeof(setupmode);
++    EFI_STATUS rc;
++
++    rc = efi_rs->GetVariable(L"SecureBoot", &global_guid,
++                             NULL, &secboot_size, &secboot);
++    if ( rc != EFI_SUCCESS )
++        return false;
++
++    rc = efi_rs->GetVariable(L"SetupMode", &global_guid,
++                             NULL, &setupmode_size, &setupmode);
++    if ( rc != EFI_SUCCESS )
++        return false;
++
++    if ( secboot > 1 || setupmode > 1 )
++        blexit(L"Invalid SecureBoot/SetupMode variables");
++
++    return secboot == 1 && setupmode == 0;
++}
++
+ static void __init efi_variables(void)
+ {
+     EFI_STATUS status;
+@@ -1128,15 +1157,15 @@ efi_start(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable)
+     static EFI_GUID __initdata shim_lock_guid = SHIM_LOCK_PROTOCOL_GUID;
+     EFI_LOADED_IMAGE *loaded_image;
+     EFI_STATUS status;
+-    unsigned int i, argc;
+-    CHAR16 **argv, *file_name, *cfg_file_name = NULL, *options = NULL;
++    unsigned int i, argc = 0;
++    CHAR16 **argv = NULL, *file_name, *cfg_file_name = NULL, *options = NULL;
+     UINTN gop_mode = ~0;
+     EFI_SHIM_LOCK_PROTOCOL *shim_lock;
+     EFI_GRAPHICS_OUTPUT_PROTOCOL *gop = NULL;
+     union string section = { NULL }, name;
+     bool base_video = false;
+     const char *option_str;
+-    bool use_cfg_file;
++    bool use_cfg_file, secure;
  
--    if ( cfg.addr )
-+    if ( cfg.addr && cfg.need_to_free )
-         efi_bs->FreePages(cfg.addr, PFN_UP(cfg.size));
--    if ( kernel.addr )
-+    if ( kernel.addr && kernel.need_to_free )
-         efi_bs->FreePages(kernel.addr, PFN_UP(kernel.size));
--    if ( ramdisk.addr )
-+    if ( ramdisk.addr && ramdisk.need_to_free )
-         efi_bs->FreePages(ramdisk.addr, PFN_UP(ramdisk.size));
--    if ( xsm.addr )
-+    if ( xsm.addr && xsm.need_to_free )
-         efi_bs->FreePages(xsm.addr, PFN_UP(xsm.size));
+     __set_bit(EFI_BOOT, &efi_flags);
+     __set_bit(EFI_LOADER, &efi_flags);
+@@ -1155,8 +1184,10 @@ efi_start(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable)
+         PrintErrMesg(L"No Loaded Image Protocol", status);
  
-     efi_arch_blexit();
-@@ -573,6 +574,7 @@ static bool __init read_file(EFI_FILE_HANDLE dir_handle, CHAR16 *name,
-                          HYPERVISOR_VIRT_END - DIRECTMAP_VIRT_START);
-         ret = efi_bs->AllocatePages(AllocateMaxAddress, EfiLoaderData,
-                                     PFN_UP(size), &file->addr);
-+        file->need_to_free = true;
-     }
-     if ( EFI_ERROR(ret) )
+     efi_arch_load_addr_check(loaded_image);
++    secure = efi_secure_boot();
+ 
+-    if ( use_cfg_file )
++    if ( use_cfg_file &&
++         !read_section(loaded_image, ".config", &cfg, NULL))
      {
+         UINTN offset = 0;
+ 
+@@ -1214,6 +1245,8 @@ efi_start(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable)
+ 
+     PrintStr(L"Xen " __stringify(XEN_VERSION) "." __stringify(XEN_SUBVERSION)
+              XEN_EXTRAVERSION " (c/s " XEN_CHANGESET ") EFI loader\r\n");
++    if ( secure )
++        PrintStr(L"UEFI Secure Boot enabled\r\n");
+ 
+     efi_arch_relocate_image(0);
+ 
+@@ -1233,7 +1266,7 @@ efi_start(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable)
+         /* Get the file system interface. */
+         dir_handle = get_parent_handle(loaded_image, &file_name);
+ 
+-        if ( read_section(loaded_image, ".config", &cfg, NULL) )
++        if ( cfg.ptr )
+             PrintStr(L"Using unified config file\r\n");
+         else if ( !cfg_file_name )
+         {
 -- 
 2.25.1
 
