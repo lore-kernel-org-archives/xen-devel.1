@@ -2,67 +2,63 @@ Return-Path: <SRS0=nCK6=C2=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2CB6FC43461
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Sep 2020 15:41:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 36B82C433E2
+	for <xen-devel@archiver.kernel.org>; Thu, 17 Sep 2020 15:46:05 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CE7342222D
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Sep 2020 15:41:51 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CE7342222D
+	by mail.kernel.org (Postfix) with ESMTPS id B425B206B2
+	for <xen-devel@archiver.kernel.org>; Thu, 17 Sep 2020 15:46:04 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=pass (1024-bit key) header.d=trmm.net header.i=@trmm.net header.b="eYmnjN5b"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B425B206B2
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=trmm.net
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kIw2N-0003WX-3S; Thu, 17 Sep 2020 15:41:31 +0000
+	id 1kIw6a-00045B-2Y; Thu, 17 Sep 2020 15:45:52 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=t+a8=C2=trmm.net=hudson@srs-us1.protection.inumbo.net>)
- id 1kIw2M-0003Vz-O6
- for xen-devel@lists.xenproject.org; Thu, 17 Sep 2020 15:41:30 +0000
-X-Inumbo-ID: e9544947-6f11-4f06-be2a-7ae08ead4771
-Received: from mx1a.swcp.com (unknown [216.184.2.64])
+ id 1kIw6Y-000455-8q
+ for xen-devel@lists.xenproject.org; Thu, 17 Sep 2020 15:45:50 +0000
+X-Inumbo-ID: 787e9a52-6225-4b17-b4d1-79a3eb7f46e0
+Received: from mail-40136.protonmail.ch (unknown [185.70.40.136])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id e9544947-6f11-4f06-be2a-7ae08ead4771;
- Thu, 17 Sep 2020 15:41:28 +0000 (UTC)
-Received: from ame7.swcp.com (ame7.swcp.com [216.184.2.70])
- by mx1a.swcp.com (8.14.4/8.14.4/Debian-4) with ESMTP id 08HFfRnI024973;
- Thu, 17 Sep 2020 09:41:27 -0600
-Received-SPF: neutral (ame7.swcp.com: 62.251.112.184 is neither permitted nor
- denied by domain of hudson@trmm.net) receiver=ame7.swcp.com;
- client-ip=62.251.112.184; helo=diamond.fritz.box;
- envelope-from=hudson@trmm.net;
- x-software=spfmilter 2.001 http://www.acme.com/software/spfmilter/ with
- libspf2-1.2.10; 
-Received: from diamond.fritz.box (62-251-112-184.ip.xs4all.nl [62.251.112.184])
- by ame7.swcp.com (8.15.2/8.15.2) with ESMTP id 08HFesRP024558;
- Thu, 17 Sep 2020 09:41:21 -0600 (MDT) (envelope-from hudson@trmm.net)
-X-Authentication-Warning: ame7.swcp.com: Host 62-251-112-184.ip.xs4all.nl
- [62.251.112.184] claimed to be diamond.fritz.box
+ id 787e9a52-6225-4b17-b4d1-79a3eb7f46e0;
+ Thu, 17 Sep 2020 15:45:48 +0000 (UTC)
+Date: Thu, 17 Sep 2020 15:45:44 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=trmm.net;
+ s=protonmail; t=1600357547;
+ bh=JxE9dxGpCN+PYXRqqaGAv0QrXGC+KdotSSzRLhbVBLU=;
+ h=Date:To:From:Cc:Reply-To:Subject:In-Reply-To:References:From;
+ b=eYmnjN5bA3PWIAwV4+SsQM00g3tOZztxR1yh4ZG5JR7eiDUoVZ+wykNNUACpmQKfx
+ zsbca1kug0nJORbIOPIBV74MP3cV4soMUV2deXCChw044NADV1NsTD4ebd/yJULRfH
+ oaeNcxxpR9QU4XT6XA8aid6tIqau0ytJ2jY++Fxc=
+To: Jan Beulich <jbeulich@suse.com>
 From: Trammell Hudson <hudson@trmm.net>
-To: xen-devel@lists.xenproject.org
-Cc: Trammell hudson <hudson@trmm.net>
-Subject: [PATCH v5 4/5] efi: Enable booting unified hypervisor/kernel/initrd
- images
-Date: Thu, 17 Sep 2020 11:40:47 -0400
-Message-Id: <20200917154048.1140580-5-hudson@trmm.net>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20200917154048.1140580-1-hudson@trmm.net>
-References: <20200917154048.1140580-1-hudson@trmm.net>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ "roger.pau@citrix.com" <roger.pau@citrix.com>,
+ "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>,
+ "wl@xen.org" <wl@xen.org>
+Subject: Re: [PATCH v4 4/4] efi: Do not use command line if secure boot is
+ enabled.
+Message-ID: <ueLZdIijYTI6p3rFQXXP2tsFQB9EKRp0k38a0xt95MYQ4ostsijdjqKczhYTDJhf0IbLudGkxMeHraIKMcySwhsfi7y2PIFF6viJdTRuInw=@trmm.net>
+In-Reply-To: <ae3cd252-71fd-ba49-b53d-f0a4882d201e@suse.com>
+References: <20200914115013.814079-1-hudson@trmm.net>
+ <20200914115013.814079-5-hudson@trmm.net>
+ <3def666c-c5f1-a520-18dc-6c1c61026b57@suse.com>
+ <Rtytoe06osw9o7-z0sRD22p_KP8B2SVSp6Ae6IYHyhS_LpwthJkTMwDc1tICmBReafaZOLSu0nNVPV3ceUTqUnjP7dc4DrsMHhjPwfze3X0=@trmm.net>
+ <ae3cd252-71fd-ba49-b53d-f0a4882d201e@suse.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 2.83
-X-Greylist: Message whitelisted by DRAC access database, not delayed by
- milter-greylist-4.6.2 (ame7.swcp.com [216.184.2.128]);
- Thu, 17 Sep 2020 09:41:22 -0600 (MDT)
-X-Virus-Scanned: clamav-milter 0.100.2 at ame7
-X-Virus-Status: Clean
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,487 +69,35 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
+Reply-To: Trammell Hudson <hudson@trmm.net>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This patch adds support for bundling the xen.efi hypervisor, the xen.cfg
-configuration file, the Linux kernel and initrd, as well as the XSM,
-and architectural specific files into a single "unified" EFI executable.
-This allows an administrator to update the components independently
-without requiring rebuilding xen, as well as to replace the components
-in an existing image.
+On Thursday, September 17, 2020 11:26 AM, Jan Beulich <jbeulich@suse.com> w=
+rote:
+> On 17.09.2020 16:05, Trammell Hudson wrote:
+> > If we have a way to detect a unified image early enough, then
+> > we can avoid the backwards incompatibility if it is not unified.
+>
+> I was assuming this was easily possible, if necessary as about the
+> first thing we do. If it's not as easy, perhaps something wants
+> adding to make it so?
 
-The resulting EFI executable can be invoked directly from the UEFI Boot
-Manager, removing the need to use a separate loader like grub as well
-as removing dependencies on local filesystem access.  And since it is
-a single file, it can be signed and validated by UEFI Secure Boot without
-requring the shim protocol.
+v5 of the patch (just sent) has changed the logic so that the
+config section is searched first thing, and if it is found, then
+and only then is the command line ignored.  I believe this
+restores the older behaviour.
 
-It is inspired by systemd-boot's unified kernel technique and borrows the
-function to locate PE sections from systemd's LGPL'ed code.  During EFI
-boot, Xen looks at its own loaded image to locate the PE sections for
-the Xen configuration (`.config`), dom0 kernel (`.kernel`), dom0 initrd
-(`.ramdisk`), and XSM config (`.xsm`), which are included after building
-xen.efi using objcopy to add named sections for each input file.
+> > That would require moving the config parsing to above the relocation
+> > call.
+>
+> I guess I don't understand why this would be.
 
-For x86, the CPU ucode can be included in a section named `.ucode`,
-which is loaded in the efi_arch_cfg_file_late() stage of the boot process.
+The early command line parsing happens before the call to
+efi_arch_relocate_image(), although testing in qemu did not
+seem to cause any problems with calling read_section() before
+the reloc.
 
-On ARM systems the Device Tree can be included in a section named
-`.dtb`, which is loaded during the efi_arch_cfg_file_early() stage of
-the boot process.
-
-Note that the system will fall back to loading files from disk if
-the named sections do not exist. This allows distributions to continue
-with the status quo if they want a signed kernel + config, while still
-allowing a user provided initrd (which is how the shim protocol currently
-works as well).
-
-Signed-off-by: Trammell hudson <hudson@trmm.net>
----
- .gitignore                  |   1 +
- docs/misc/efi.pandoc        |  49 +++++++++++++
- xen/arch/arm/efi/efi-boot.h |  25 ++++---
- xen/arch/x86/efi/Makefile   |   2 +-
- xen/arch/x86/efi/efi-boot.h |  11 ++-
- xen/common/efi/boot.c       |  73 +++++++++++++++-----
- xen/common/efi/efi.h        |   3 +
- xen/common/efi/pe.c         | 134 ++++++++++++++++++++++++++++++++++++
- 8 files changed, 269 insertions(+), 29 deletions(-)
- create mode 100644 xen/common/efi/pe.c
-
-diff --git a/.gitignore b/.gitignore
-index 823f4743dc..d568017804 100644
---- a/.gitignore
-+++ b/.gitignore
-@@ -299,6 +299,7 @@ xen/arch/*/efi/boot.c
- xen/arch/*/efi/compat.c
- xen/arch/*/efi/ebmalloc.c
- xen/arch/*/efi/efi.h
-+xen/arch/*/efi/pe.c
- xen/arch/*/efi/runtime.c
- xen/common/config_data.S
- xen/common/config.gz
-diff --git a/docs/misc/efi.pandoc b/docs/misc/efi.pandoc
-index 23c1a2732d..ac3cd58cae 100644
---- a/docs/misc/efi.pandoc
-+++ b/docs/misc/efi.pandoc
-@@ -116,3 +116,52 @@ Filenames must be specified relative to the location of the EFI binary.
- 
- Extra options to be passed to Xen can also be specified on the command line,
- following a `--` separator option.
-+
-+## Unified Xen kernel image
-+
-+The "Unified" kernel image can be generated by adding additional
-+sections to the Xen EFI executable with objcopy, similar to how
-+[systemd-boot uses the stub to add them to the Linux kernel](https://wiki.archlinux.org/index.php/systemd-boot#Preparing_a_unified_kernel_image)
-+
-+The sections for the xen configuration file, the dom0 kernel, dom0 initrd,
-+XSM and CPU microcode should be added after the Xen `.pad` section, the
-+ending address of which can be located with:
-+
-+```
-+objdump -h xen.efi \
-+	| perl -ane '/\.pad/ && printf "0x%016x\n", hex($F[2]) + hex($F[3])'
-+```
-+
-+For all the examples the `.pad` section ended at 0xffff82d041000000.
-+All the sections are optional (`.config`, `.kernel`, `.ramdisk`, `.xsm`,
-+`.ucode` (x86) and `.dtb` (ARM)) and the order does not matter.
-+The virtual addresses do not need to be contiguous, although they should not
-+be overlapping and should all be greater than the last virtual address of the
-+hypervisor components.
-+
-+```
-+objcopy \
-+	--add-section .config=xen.cfg \
-+	--change-section-vma .config=0xffff82d041000000
-+	--add-section .ucode=ucode.bin \
-+	--change-section-vma .ucode=0xffff82d041010000 \
-+	--add-section .xsm=xsm.cfg \
-+	--change-section-vma .xsm=0xffff82d041080000 \
-+	--add-section .kernel=vmlinux \
-+	--change-section-vma .kernel=0xffff82d041100000 \
-+	--add-section .ramdisk=initrd.img \
-+	--change-section-vma .ramdisk=0xffff82d042000000 \
-+	xen.efi \
-+	xen.unified.efi
-+```
-+
-+The unified executable can be signed with sbsigntool to make
-+it usable with UEFI secure boot:
-+
-+```
-+sbsign \
-+	--key signing.key \
-+	--cert cert.pem \
-+	--output xen.signed.efi \
-+	xen.unified.efi
-+```
-diff --git a/xen/arch/arm/efi/efi-boot.h b/xen/arch/arm/efi/efi-boot.h
-index 27dd0b1a94..47ced1db8d 100644
---- a/xen/arch/arm/efi/efi-boot.h
-+++ b/xen/arch/arm/efi/efi-boot.h
-@@ -375,27 +375,36 @@ static void __init noreturn efi_arch_post_exit_boot(void)
-     efi_xen_start(fdt, fdt_totalsize(fdt));
- }
- 
--static void __init efi_arch_cfg_file_early(EFI_FILE_HANDLE dir_handle, char *section)
-+static void __init efi_arch_cfg_file_early(const EFI_LOADED_IMAGE *image,
-+                                           EFI_FILE_HANDLE dir_handle,
-+                                           const char *section)
- {
-     union string name;
- 
-     /*
-      * The DTB must be processed before any other entries in the configuration
--     * file, as the DTB is updated as modules are loaded.
-+     * file, as the DTB is updated as modules are loaded.  Prefer the one
-+     * stored as a PE section in a unified image, and fall back to a file
-+     * on disk if the section is not present.
-      */
--    name.s = get_value(&cfg, section, "dtb");
--    if ( name.s )
-+    if ( !read_section(image, ".dtb", &dtbfile, NULL) )
-     {
--        split_string(name.s);
--        read_file(dir_handle, s2w(&name), &dtbfile, NULL);
--        efi_bs->FreePool(name.w);
-+        name.s = get_value(&cfg, section, "dtb");
-+        if ( name.s )
-+        {
-+            split_string(name.s);
-+            read_file(dir_handle, s2w(&name), &dtbfile, NULL);
-+            efi_bs->FreePool(name.w);
-+        }
-     }
-     fdt = fdt_increase_size(&dtbfile, cfg.size + EFI_PAGE_SIZE);
-     if ( !fdt )
-         blexit(L"Unable to create new FDT");
- }
- 
--static void __init efi_arch_cfg_file_late(EFI_FILE_HANDLE dir_handle, char *section)
-+static void __init efi_arch_cfg_file_late(const EFI_LOADED_IMAGE *image,
-+                                          EFI_FILE_HANDLE dir_handle,
-+                                          const char *section)
- {
- }
- 
-diff --git a/xen/arch/x86/efi/Makefile b/xen/arch/x86/efi/Makefile
-index 770438a029..e857c0f2cc 100644
---- a/xen/arch/x86/efi/Makefile
-+++ b/xen/arch/x86/efi/Makefile
-@@ -8,7 +8,7 @@ cmd_objcopy_o_ihex = $(OBJCOPY) -I ihex -O binary $< $@
- 
- boot.init.o: buildid.o
- 
--EFIOBJ := boot.init.o ebmalloc.o compat.o runtime.o
-+EFIOBJ := boot.init.o pe.init.o ebmalloc.o compat.o runtime.o
- 
- $(call cc-option-add,cflags-stack-boundary,CC,-mpreferred-stack-boundary=4)
- $(EFIOBJ): CFLAGS-stack-boundary := $(cflags-stack-boundary)
-diff --git a/xen/arch/x86/efi/efi-boot.h b/xen/arch/x86/efi/efi-boot.h
-index eef3f52789..db3e29f573 100644
---- a/xen/arch/x86/efi/efi-boot.h
-+++ b/xen/arch/x86/efi/efi-boot.h
-@@ -272,14 +272,21 @@ static void __init noreturn efi_arch_post_exit_boot(void)
-     unreachable();
- }
- 
--static void __init efi_arch_cfg_file_early(EFI_FILE_HANDLE dir_handle, char *section)
-+static void __init efi_arch_cfg_file_early(const EFI_LOADED_IMAGE *image,
-+                                           EFI_FILE_HANDLE dir_handle,
-+                                           const char *section)
- {
- }
- 
--static void __init efi_arch_cfg_file_late(EFI_FILE_HANDLE dir_handle, char *section)
-+static void __init efi_arch_cfg_file_late(const EFI_LOADED_IMAGE *image,
-+                                          EFI_FILE_HANDLE dir_handle,
-+                                          const char *section)
- {
-     union string name;
- 
-+    if ( read_section(image, ".ucode", &ucode, NULL) )
-+        return;
-+
-     name.s = get_value(&cfg, section, "ucode");
-     if ( !name.s )
-         name.s = get_value(&cfg, "global", "ucode");
-diff --git a/xen/common/efi/boot.c b/xen/common/efi/boot.c
-index e0280f7a21..c14e836640 100644
---- a/xen/common/efi/boot.c
-+++ b/xen/common/efi/boot.c
-@@ -122,6 +122,8 @@ static CHAR16 *s2w(union string *str);
- static char *w2s(const union string *str);
- static bool read_file(EFI_FILE_HANDLE dir_handle, CHAR16 *name,
-                       struct file *file, const char *options);
-+static bool read_section(const EFI_LOADED_IMAGE *image,
-+                         char *name, struct file *file, const char *options);
- static size_t wstrlen(const CHAR16 * s);
- static int set_color(u32 mask, int bpp, u8 *pos, u8 *sz);
- static bool match_guid(const EFI_GUID *guid1, const EFI_GUID *guid2);
-@@ -624,6 +626,29 @@ static bool __init read_file(EFI_FILE_HANDLE dir_handle, CHAR16 *name,
-     return true;
- }
- 
-+static bool __init read_section(const EFI_LOADED_IMAGE *image,
-+                                char *const name, struct file *file,
-+                                const char *options)
-+{
-+    /* skip the leading "." in the section name */
-+    union string name_string = { .s = name + 1 };
-+
-+    file->ptr = pe_find_section(image->ImageBase, image->ImageSize,
-+                                name, &file->size);
-+    if ( !file->ptr )
-+        return false;
-+
-+    file->need_to_free = false;
-+
-+    if ( !s2w(&name_string) )
-+        return false;
-+
-+    handle_file_info(name_string.w, file, options);
-+    efi_bs->FreePool(name_string.w);
-+
-+    return true;
-+}
-+
- static void __init pre_parse(const struct file *cfg)
- {
-     char *ptr = cfg->str, *end = ptr + cfg->size;
-@@ -1208,9 +1233,11 @@ efi_start(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable)
-         /* Get the file system interface. */
-         dir_handle = get_parent_handle(loaded_image, &file_name);
- 
--        /* Read and parse the config file. */
--        if ( !cfg_file_name )
-+        if ( read_section(loaded_image, ".config", &cfg, NULL) )
-+            PrintStr(L"Using unified config file\r\n");
-+        else if ( !cfg_file_name )
-         {
-+            /* Read and parse the config file. */
-             CHAR16 *tail;
- 
-             while ( (tail = point_tail(file_name)) != NULL )
-@@ -1259,29 +1286,39 @@ efi_start(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable)
-         if ( !name.s )
-             blexit(L"No Dom0 kernel image specified.");
- 
--        efi_arch_cfg_file_early(dir_handle, section.s);
-+        efi_arch_cfg_file_early(loaded_image, dir_handle, section.s);
- 
-         option_str = split_string(name.s);
--        read_file(dir_handle, s2w(&name), &kernel, option_str);
--        efi_bs->FreePool(name.w);
--
--        if ( !EFI_ERROR(efi_bs->LocateProtocol(&shim_lock_guid, NULL,
--                        (void **)&shim_lock)) &&
--             (status = shim_lock->Verify(kernel.ptr, kernel.size)) != EFI_SUCCESS )
--            PrintErrMesg(L"Dom0 kernel image could not be verified", status);
- 
--        name.s = get_value(&cfg, section.s, "ramdisk");
--        if ( name.s )
-+        if ( !read_section(loaded_image, ".kernel", &kernel, option_str) )
-         {
--            read_file(dir_handle, s2w(&name), &ramdisk, NULL);
-+            read_file(dir_handle, s2w(&name), &kernel, option_str);
-             efi_bs->FreePool(name.w);
-+
-+            if ( !EFI_ERROR(efi_bs->LocateProtocol(&shim_lock_guid, NULL,
-+                            (void **)&shim_lock)) &&
-+                 (status = shim_lock->Verify(kernel.ptr, kernel.size)) != EFI_SUCCESS )
-+                PrintErrMesg(L"Dom0 kernel image could not be verified", status);
-         }
- 
--        name.s = get_value(&cfg, section.s, "xsm");
--        if ( name.s )
-+        if ( !read_section(loaded_image, ".ramdisk", &ramdisk, NULL) )
-         {
--            read_file(dir_handle, s2w(&name), &xsm, NULL);
--            efi_bs->FreePool(name.w);
-+            name.s = get_value(&cfg, section.s, "ramdisk");
-+            if ( name.s )
-+            {
-+                read_file(dir_handle, s2w(&name), &ramdisk, NULL);
-+                efi_bs->FreePool(name.w);
-+            }
-+        }
-+
-+        if ( !read_section(loaded_image, ".xsm", &xsm, NULL) )
-+        {
-+            name.s = get_value(&cfg, section.s, "xsm");
-+            if ( name.s )
-+            {
-+                read_file(dir_handle, s2w(&name), &xsm, NULL);
-+                efi_bs->FreePool(name.w);
-+            }
-         }
- 
-         /*
-@@ -1317,7 +1354,7 @@ efi_start(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable)
-             }
-         }
- 
--        efi_arch_cfg_file_late(dir_handle, section.s);
-+        efi_arch_cfg_file_late(loaded_image, dir_handle, section.s);
- 
-         efi_bs->FreePages(cfg.addr, PFN_UP(cfg.size));
-         cfg.addr = 0;
-diff --git a/xen/common/efi/efi.h b/xen/common/efi/efi.h
-index 4845d84913..c9d3752121 100644
---- a/xen/common/efi/efi.h
-+++ b/xen/common/efi/efi.h
-@@ -47,3 +47,6 @@ const CHAR16 *wmemchr(const CHAR16 *s, CHAR16 c, UINTN n);
- /* EFI boot allocator. */
- void *ebmalloc(size_t size);
- void free_ebmalloc_unused_mem(void);
-+
-+const void *pe_find_section(const void *image_base, const size_t image_size,
-+                            const char *section_name, UINTN *size_out);
-diff --git a/xen/common/efi/pe.c b/xen/common/efi/pe.c
-new file mode 100644
-index 0000000000..568f0823bb
---- /dev/null
-+++ b/xen/common/efi/pe.c
-@@ -0,0 +1,134 @@
-+/*
-+ * xen/common/efi/pe.c
-+ *
-+ * PE executable header parser.
-+ *
-+ * Derived from https://github.com/systemd/systemd/blob/master/src/boot/efi/pe.c
-+ * commit 07d5ed536ec0a76b08229c7a80b910cb9acaf6b1
-+ *
-+ * Copyright (C) 2015 Kay Sievers <kay@vrfy.org>
-+ * Copyright (C) 2020 Trammell Hudson <hudson@trmm.net>
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms of the GNU Lesser General Public License as published by
-+ * the Free Software Foundation; either version 2.1 of the License, or
-+ * (at your option) any later version.
-+ *
-+ * This program is distributed in the hope that it will be useful, but
-+ * WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-+ * Lesser General Public License for more details.
-+ */
-+
-+
-+#include "efi.h"
-+
-+struct DosFileHeader {
-+    UINT8   Magic[2];
-+    UINT16  LastSize;
-+    UINT16  nBlocks;
-+    UINT16  nReloc;
-+    UINT16  HdrSize;
-+    UINT16  MinAlloc;
-+    UINT16  MaxAlloc;
-+    UINT16  ss;
-+    UINT16  sp;
-+    UINT16  Checksum;
-+    UINT16  ip;
-+    UINT16  cs;
-+    UINT16  RelocPos;
-+    UINT16  nOverlay;
-+    UINT16  reserved[4];
-+    UINT16  OEMId;
-+    UINT16  OEMInfo;
-+    UINT16  reserved2[10];
-+    UINT32  ExeHeader;
-+};
-+
-+#if defined(__arm__) || defined (__aarch64__)
-+#define PE_HEADER_MACHINE 0xaa64
-+#elif defined(__x86_64__)
-+#define PE_HEADER_MACHINE 0x8664
-+#else
-+#error "Unknown architecture"
-+#endif
-+
-+struct PeFileHeader {
-+    UINT16  Machine;
-+    UINT16  NumberOfSections;
-+    UINT32  TimeDateStamp;
-+    UINT32  PointerToSymbolTable;
-+    UINT32  NumberOfSymbols;
-+    UINT16  SizeOfOptionalHeader;
-+    UINT16  Characteristics;
-+};
-+
-+struct PeHeader {
-+    UINT8   Magic[4];
-+    struct PeFileHeader FileHeader;
-+};
-+
-+struct PeSectionHeader {
-+    CHAR8   Name[8];
-+    UINT32  VirtualSize;
-+    UINT32  VirtualAddress;
-+    UINT32  SizeOfRawData;
-+    UINT32  PointerToRawData;
-+    UINT32  PointerToRelocations;
-+    UINT32  PointerToLinenumbers;
-+    UINT16  NumberOfRelocations;
-+    UINT16  NumberOfLinenumbers;
-+    UINT32  Characteristics;
-+};
-+
-+const void *__init pe_find_section(const void *image, const UINTN image_size,
-+                                   const char *section_name, UINTN *size_out)
-+{
-+    const struct DosFileHeader *dos = image;
-+    const struct PeHeader *pe;
-+    const struct PeSectionHeader *sect;
-+    const UINTN name_len = strlen(section_name);
-+    UINTN offset, i;
-+
-+    if ( name_len > sizeof(sect->Name) ||
-+         image_size < sizeof(*dos) ||
-+         memcmp(dos->Magic, "MZ", 2) != 0 )
-+        return NULL;
-+
-+    offset = dos->ExeHeader;
-+    pe = image + offset;
-+
-+    offset += sizeof(*pe);
-+    if ( image_size < offset ||
-+         memcmp(pe->Magic, "PE\0\0", 4) != 0 )
-+        return NULL;
-+
-+    /* PE32+ Subsystem type */
-+    if ( pe->FileHeader.Machine != PE_HEADER_MACHINE )
-+        return NULL;
-+
-+    offset += pe->FileHeader.SizeOfOptionalHeader;
-+
-+    for ( i = 0; i < pe->FileHeader.NumberOfSections; i++ )
-+    {
-+        sect = image + offset;
-+        if ( image_size < offset + sizeof(*sect) )
-+            return NULL;
-+
-+        if ( memcmp(sect->Name, section_name, name_len) != 0 )
-+        {
-+            offset += sizeof(*sect);
-+            continue;
-+        }
-+
-+        if ( image_size < sect->VirtualSize + sect->VirtualAddress )
-+            blexit(L"PE invalid section size + address");
-+
-+        if ( size_out )
-+            *size_out = sect->VirtualSize;
-+
-+        return image + sect->VirtualAddress;
-+    }
-+
-+    return NULL;
-+}
--- 
-2.25.1
-
+--
+Trammell
 
