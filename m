@@ -2,113 +2,79 @@ Return-Path: <SRS0=nCK6=C2=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=unavailable autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-8.1 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CF2F4C43461
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Sep 2020 11:45:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 57D34C433E2
+	for <xen-devel@archiver.kernel.org>; Thu, 17 Sep 2020 12:09:48 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 81BB1206BE
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Sep 2020 11:45:27 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 0390D2087D
+	for <xen-devel@archiver.kernel.org>; Thu, 17 Sep 2020 12:09:47 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="WT+tCnqs"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 81BB1206BE
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="gZz3tjnc"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0390D2087D
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kIsLc-0006LO-86; Thu, 17 Sep 2020 11:45:08 +0000
+	id 1kIsiw-0008DF-F4; Thu, 17 Sep 2020 12:09:14 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=IBe1=C2=gmail.com=melissa.srw@srs-us1.protection.inumbo.net>)
- id 1kIs8S-0005DF-4k
- for xen-devel@lists.xenproject.org; Thu, 17 Sep 2020 11:31:32 +0000
-X-Inumbo-ID: 57b65740-6581-40d6-9dcc-a8de1aa1b219
-Received: from mail-wm1-x344.google.com (unknown [2a00:1450:4864:20::344])
+ <SRS0=ZJEn=C2=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1kIsiv-0008DA-Ar
+ for xen-devel@lists.xenproject.org; Thu, 17 Sep 2020 12:09:13 +0000
+X-Inumbo-ID: aed76a38-0375-4956-a587-064ec4ceffd4
+Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 57b65740-6581-40d6-9dcc-a8de1aa1b219;
- Thu, 17 Sep 2020 11:31:31 +0000 (UTC)
-Received: by mail-wm1-x344.google.com with SMTP id d4so1613144wmd.5
- for <xen-devel@lists.xenproject.org>; Thu, 17 Sep 2020 04:31:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=QoGoJWGY9uvsPbK1VFldPakdj/95886EaH4XmF5Nmig=;
- b=WT+tCnqscdjnhBzx4pey4qfrs3TpF1Xktu7jt8T8cQSP0yZJdX3KoYHPdWspzIugsq
- 6HSKY9VJKgsdLw89cCYxqdbs7Vt7/k4/jK9LtTE+4i9XvfXW1Lr/Fm+fEnngxxWPD5dx
- hAgvu8wEl2ImGMZ/Vxi1axcUTWC/C1hcCZmRCP+VMlQrWSEcu/Hqzj+fuVKA2INfBjX3
- /zcARTJCVi7gGPGSYovxguWtsuZzPwF6TsPs2IH9t/Kp5k3R+t/9fCDbL8cqbYXRyKxo
- iHGdqfCt+o61f/ixQfUMrk5tyRoSS69zCZaqGiTmJsGllEHi/xlz25EYavgN+6zZY8AL
- WM8g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=QoGoJWGY9uvsPbK1VFldPakdj/95886EaH4XmF5Nmig=;
- b=PpfeCgWFthNwtIvYQmyAInGisHciYnFkNiO8iPpF9kYWpLKy5+77U3GrhPlBvKP1h8
- UQ951/0xGx913fLTIOt1c8gtU2erXoeTqmYvntCVmLQzAqXVF8stywLTcs+aBeQforxj
- rNoKCYs9b+6QTWWCNKE8EAbuElcJN3MSkyRgMkxXSa5Y5BMXzCfOtz0owAKh66oGKHSi
- 7o4leI7C2UPq0O6ampA5NBkLRu+NpTKjI7KTFMsRZt6icmK4bxr9Ig9249+uVOnFMrVD
- EUUvTxHa0R7ATGHf4o6735tSxlOK3FE0WVypfle5vRFwgeDGvTGlDEJoxfbQ6Lxz/dFc
- OrOQ==
-X-Gm-Message-State: AOAM532+enxezRkBG8WyV8U7mtr/V2V1AVL8xcXIc0BfUGxV5dfDNbBE
- f80caCshWAdeJGbCLj7MiGQ=
-X-Google-Smtp-Source: ABdhPJyuZcp+AqRLPz3yJIfvdwNUATarIMvgIK7I09VrN4WEXhLqSMqZyvaS1A1ZqiWgJrdIoQA/Hg==
-X-Received: by 2002:a1c:96:: with SMTP id 144mr9601334wma.84.1600342290200;
- Thu, 17 Sep 2020 04:31:30 -0700 (PDT)
-Received: from smtp.gmail.com (a95-92-181-29.cpe.netcabo.pt. [95.92.181.29])
- by smtp.gmail.com with ESMTPSA id 11sm10489240wmi.14.2020.09.17.04.31.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Sep 2020 04:31:29 -0700 (PDT)
-Date: Thu, 17 Sep 2020 08:31:20 -0300
-From: Melissa Wen <melissa.srw@gmail.com>
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Cc: alexander.deucher@amd.com, christian.koenig@amd.com, airlied@linux.ie,
- daniel@ffwll.ch, linux@armlinux.org.uk,
- maarten.lankhorst@linux.intel.com, mripard@kernel.org,
- l.stach@pengutronix.de, christian.gmeiner@gmail.com,
- inki.dae@samsung.com, jy0922.shim@samsung.com,
- sw0312.kim@samsung.com, kyungmin.park@samsung.com, kgene@kernel.org,
- krzk@kernel.org, patrik.r.jakobsson@gmail.com,
- jani.nikula@linux.intel.com, joonas.lahtinen@linux.intel.com,
- rodrigo.vivi@intel.com, chunkuang.hu@kernel.org,
- p.zabel@pengutronix.de, matthias.bgg@gmail.com, robdclark@gmail.com,
- sean@poorly.run, bskeggs@redhat.com, tomi.valkeinen@ti.com,
- eric@anholt.net, hjc@rock-chips.com, heiko@sntech.de,
- thierry.reding@gmail.com, jonathanh@nvidia.com,
- rodrigosiqueiramelo@gmail.com, hamohammed.sa@gmail.com,
- oleksandr_andrushchenko@epam.com, hyun.kwon@xilinx.com,
- laurent.pinchart@ideasonboard.com, michal.simek@xilinx.com,
- sumit.semwal@linaro.org, evan.quan@amd.com, Hawking.Zhang@amd.com,
- tianci.yin@amd.com, marek.olsak@amd.com, hdegoede@redhat.com,
- andrey.grodzovsky@amd.com, Felix.Kuehling@amd.com,
- xinhui.pan@amd.com, aaron.liu@amd.com, nirmoy.das@amd.com,
- chris@chris-wilson.co.uk, matthew.auld@intel.com,
- tvrtko.ursulin@linux.intel.com, andi.shyti@intel.com,
- sam@ravnborg.org, miaoqinglang@huawei.com,
- emil.velikov@collabora.com, linux-samsung-soc@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, intel-gfx@lists.freedesktop.org,
- etnaviv@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- linux-rockchip@lists.infradead.org,
- linux-mediatek@lists.infradead.org, amd-gfx@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, linux-tegra@vger.kernel.org,
- xen-devel@lists.xenproject.org, freedreno@lists.freedesktop.org,
- linux-arm-kernel@lists.infradead.org
-Subject: Re: [PATCH v2 18/21] drm/vkms: Introduce GEM object functions
-Message-ID: <20200917113120.dtz7yxvdg7xdgbx5@smtp.gmail.com>
-References: <20200915145958.19993-1-tzimmermann@suse.de>
- <20200915145958.19993-19-tzimmermann@suse.de>
+ id aed76a38-0375-4956-a587-064ec4ceffd4;
+ Thu, 17 Sep 2020 12:09:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1600344551;
+ h=subject:to:cc:references:from:message-id:date:
+ mime-version:in-reply-to:content-transfer-encoding;
+ bh=TZgjVmsLCg+PxpnY+fgYYgpnxh/CHnGF/MeCksnCXmM=;
+ b=gZz3tjncDn3xcY0D2zm8gQqHmox7U7EXGcUWqBcrNQuN1wLeiZBU4RYX
+ 0x8DSjL8isoZF0JcOIovFlBbm4YfB6+o+0v7U4hMvtKLuiSVOpZM6L5je
+ s0oVrIucbPYnGTCR0X4s0JxyiwRFD8Oi61UYS3FV6/LcVWN7FgVGr6A73 g=;
+Authentication-Results: esa5.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none
+IronPort-SDR: FS86lXY3eRPWY0R/tJSuJ+Juus/zU33fKmhgKo+BT9moBkcZNQ2QBtKJ8Sd8BbY4PewsRJKhm0
+ r+tE5oIc1zPCir17Eg18zE/5AKUqbRc2jRnCTK5jcu4CRD76DRMh7XzzMf2EVI75elvz53JYIP
+ NiVMCfwo/wyy8fi556ALIopjhD+FEfLjycjI3v1Jq86iIxnlTBd3O2RiXF+jqamDKY/Lxl0Yir
+ zJP2G7NB3GpaK90cNgqwLFlzFebJGH/uT4SfodYSFJosB/jyFylPDnmjtCGDBvwJzSilAqFbH+
+ JLU=
+X-SBRS: 2.7
+X-MesageID: 27034315
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.76,436,1592884800"; d="scan'208";a="27034315"
+Subject: Re: [PATCH 2/5] sched/arinc653: Rename scheduler private structs
+To: Jeff Kubascik <jeff.kubascik@dornerworks.com>,
+ <xen-devel@lists.xenproject.org>
+CC: <xen-devel@dornerworks.com>, Josh Whitehead
+ <josh.whitehead@dornerworks.com>, Stewart Hildebrand
+ <stewart.hildebrand@dornerworks.com>, George Dunlap
+ <george.dunlap@citrix.com>, Dario Faggioli <dfaggioli@suse.com>
+References: <20200916181854.75563-1-jeff.kubascik@dornerworks.com>
+ <20200916181854.75563-3-jeff.kubascik@dornerworks.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Message-ID: <fc0b043d-1fe5-8281-fc18-1e1ba26cb127@citrix.com>
+Date: Thu, 17 Sep 2020 13:09:05 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20200915145958.19993-19-tzimmermann@suse.de>
-X-Mailman-Approved-At: Thu, 17 Sep 2020 11:45:06 +0000
+In-Reply-To: <20200916181854.75563-3-jeff.kubascik@dornerworks.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Content-Language: en-GB
+X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
+ FTLPEX02CL05.citrite.net (10.13.108.178)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -122,86 +88,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Hi Thomas,
+On 16/09/2020 19:18, Jeff Kubascik wrote:
+> diff --git a/xen/common/sched/arinc653.c b/xen/common/sched/arinc653.c
+> index 7bb75ffe2b..d8a23730c3 100644
+> --- a/xen/common/sched/arinc653.c
+> +++ b/xen/common/sched/arinc653.c
+> @@ -50,38 +50,38 @@
+>   * Return a pointer to the ARINC 653-specific scheduler data information
+>   * associated with the given UNIT
+>   */
+> -#define AUNIT(unit) ((arinc653_unit_t *)(unit)->priv)
+> +#define AUNIT(unit) ((struct a653sched_unit *)(unit)->priv)
+>  
+>  /*
+>   * Return the global scheduler private data given the scheduler ops pointer
+>   */
+> -#define SCHED_PRIV(s) ((a653sched_priv_t *)((s)->sched_data))
+> +#define SCHED_PRIV(s) ((struct a653sched_private *)((s)->sched_data))
 
-On 09/15, Thomas Zimmermann wrote:
-> GEM object functions deprecate several similar callback interfaces in
-> struct drm_driver. This patch replaces the per-driver callbacks with
-> per-instance callbacks in vkms.
-> 
-> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+While you're cleaning things up, please delete these macros (possibly in
+this patch, as you touch every almost every user).  They strictly
+introduce type safety issues, and are in the process of being taken out
+of the other schedulers.
 
-Thanks! Looks fine.
+Some logic already has a local variable.  These areas can be expanded in
+place and everything will work.
 
-Reviewed-by: Melissa Wen <melissa.srw@gmail.com>
+Any logic which doesn't have a local variable need to gain one.
 
-> ---
->  drivers/gpu/drm/vkms/vkms_drv.c |  8 --------
->  drivers/gpu/drm/vkms/vkms_gem.c | 13 +++++++++++++
->  2 files changed, 13 insertions(+), 8 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/vkms/vkms_drv.c b/drivers/gpu/drm/vkms/vkms_drv.c
-> index cb0b6230c22c..726801ab44d4 100644
-> --- a/drivers/gpu/drm/vkms/vkms_drv.c
-> +++ b/drivers/gpu/drm/vkms/vkms_drv.c
-> @@ -51,12 +51,6 @@ static const struct file_operations vkms_driver_fops = {
->  	.release	= drm_release,
->  };
->  
-> -static const struct vm_operations_struct vkms_gem_vm_ops = {
-> -	.fault = vkms_gem_fault,
-> -	.open = drm_gem_vm_open,
-> -	.close = drm_gem_vm_close,
-> -};
-> -
->  static void vkms_release(struct drm_device *dev)
->  {
->  	struct vkms_device *vkms = container_of(dev, struct vkms_device, drm);
-> @@ -98,8 +92,6 @@ static struct drm_driver vkms_driver = {
->  	.release		= vkms_release,
->  	.fops			= &vkms_driver_fops,
->  	.dumb_create		= vkms_dumb_create,
-> -	.gem_vm_ops		= &vkms_gem_vm_ops,
-> -	.gem_free_object_unlocked = vkms_gem_free_object,
->  	.prime_fd_to_handle	= drm_gem_prime_fd_to_handle,
->  	.gem_prime_import_sg_table = vkms_prime_import_sg_table,
->  
-> diff --git a/drivers/gpu/drm/vkms/vkms_gem.c b/drivers/gpu/drm/vkms/vkms_gem.c
-> index a017fc59905e..19a0e260a4df 100644
-> --- a/drivers/gpu/drm/vkms/vkms_gem.c
-> +++ b/drivers/gpu/drm/vkms/vkms_gem.c
-> @@ -7,6 +7,17 @@
->  
->  #include "vkms_drv.h"
->  
-> +static const struct vm_operations_struct vkms_gem_vm_ops = {
-> +	.fault = vkms_gem_fault,
-> +	.open = drm_gem_vm_open,
-> +	.close = drm_gem_vm_close,
-> +};
-> +
-> +static const struct drm_gem_object_funcs vkms_gem_object_funcs = {
-> +	.free = vkms_gem_free_object,
-> +	.vm_ops = &vkms_gem_vm_ops,
-> +};
-> +
->  static struct vkms_gem_object *__vkms_gem_create(struct drm_device *dev,
->  						 u64 size)
->  {
-> @@ -17,6 +28,8 @@ static struct vkms_gem_object *__vkms_gem_create(struct drm_device *dev,
->  	if (!obj)
->  		return ERR_PTR(-ENOMEM);
->  
-> +	obj->gem.funcs = &vkms_gem_object_funcs;
-> +
->  	size = roundup(size, PAGE_SIZE);
->  	ret = drm_gem_object_init(dev, &obj->gem, size);
->  	if (ret) {
-> -- 
-> 2.28.0
-> 
-> _______________________________________________
-> dri-devel mailing list
-> dri-devel@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/dri-devel
+~Andrew
 
