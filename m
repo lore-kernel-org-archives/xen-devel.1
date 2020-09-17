@@ -2,75 +2,67 @@ Return-Path: <SRS0=nCK6=C2=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.1 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=no
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 877D9C433E2
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Sep 2020 15:26:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4ECFEC433E2
+	for <xen-devel@archiver.kernel.org>; Thu, 17 Sep 2020 15:41:45 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0AB5722208
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Sep 2020 15:26:42 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="key not found in DNS" (0-bit key) header.d=suse.com header.i=@suse.com header.b="akKqHXZx"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0AB5722208
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id E82F32223C
+	for <xen-devel@archiver.kernel.org>; Thu, 17 Sep 2020 15:41:44 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E82F32223C
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=trmm.net
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kIvne-0001nz-PO; Thu, 17 Sep 2020 15:26:18 +0000
+	id 1kIw2C-0003UI-Aa; Thu, 17 Sep 2020 15:41:20 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=w9D7=C2=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kIvne-0001nu-Ai
- for xen-devel@lists.xenproject.org; Thu, 17 Sep 2020 15:26:18 +0000
-X-Inumbo-ID: dd429aae-d5c0-4897-9c22-2e2cddf85e46
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ (envelope-from <SRS0=t+a8=C2=trmm.net=hudson@srs-us1.protection.inumbo.net>)
+ id 1kIw2B-0003Ts-GZ
+ for xen-devel@lists.xenproject.org; Thu, 17 Sep 2020 15:41:19 +0000
+X-Inumbo-ID: 982583e6-9090-45cd-a74f-9fe08c7fd87e
+Received: from mx1a.swcp.com (unknown [216.184.2.64])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id dd429aae-d5c0-4897-9c22-2e2cddf85e46;
- Thu, 17 Sep 2020 15:26:17 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com;
- s=cantorsusede; t=1600356376;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=NVaNXe59J+NL21e1GFQxT5LgaIU4Fc1dBThNybVTuAI=;
- b=akKqHXZxySUvJvG5/JZtZThl5wseTXXkLzYr8XqSWz3lJjMefkcQZwSFuB2RnV4yhhhmTd
- t1CCPhN9Ywdva1yZAszgLzGKSmvd45UxAvXCrp3cIxDvxuX/+o//1/l/WdW7RdEGorfmnP
- H0uytAhpS2ova58NqqBIhXVyMcmog6pHO6R4MMITV6fvFo9C7TgwrydeeJjyyRMXAmGWZN
- O3TfPPYMEAOM5+SEVO2dlCaaOE5kJUCx6BxG3HYCiXJHGgwHy2poQEEsD0s7vcLrM+qdbX
- w2fqjZvhiI48ZwnUgMG3B6kKAUvvFjGhI1fqUK74VX+pqFIDfpkOqPYFpklUug==
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 5171EAD71;
- Thu, 17 Sep 2020 15:26:50 +0000 (UTC)
-Subject: Re: [PATCH v4 4/4] efi: Do not use command line if secure boot is
- enabled.
-To: Trammell Hudson <hudson@trmm.net>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- "roger.pau@citrix.com" <roger.pau@citrix.com>,
- "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>,
- "wl@xen.org" <wl@xen.org>
-References: <20200914115013.814079-1-hudson@trmm.net>
- <20200914115013.814079-5-hudson@trmm.net>
- <3def666c-c5f1-a520-18dc-6c1c61026b57@suse.com>
- <Rtytoe06osw9o7-z0sRD22p_KP8B2SVSp6Ae6IYHyhS_LpwthJkTMwDc1tICmBReafaZOLSu0nNVPV3ceUTqUnjP7dc4DrsMHhjPwfze3X0=@trmm.net>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <ae3cd252-71fd-ba49-b53d-f0a4882d201e@suse.com>
-Date: Thu, 17 Sep 2020 17:26:17 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.0
+ id 982583e6-9090-45cd-a74f-9fe08c7fd87e;
+ Thu, 17 Sep 2020 15:41:14 +0000 (UTC)
+Received: from ame7.swcp.com (ame7.swcp.com [216.184.2.70])
+ by mx1a.swcp.com (8.14.4/8.14.4/Debian-4) with ESMTP id 08HFfDlw024942
+ for <xen-devel@lists.xenproject.org>; Thu, 17 Sep 2020 09:41:13 -0600
+Received-SPF: neutral (ame7.swcp.com: 62.251.112.184 is neither permitted nor
+ denied by domain of hudson@trmm.net) receiver=ame7.swcp.com;
+ client-ip=62.251.112.184; helo=diamond.fritz.box;
+ envelope-from=hudson@trmm.net;
+ x-software=spfmilter 2.001 http://www.acme.com/software/spfmilter/ with
+ libspf2-1.2.10; 
+Received: from diamond.fritz.box (62-251-112-184.ip.xs4all.nl [62.251.112.184])
+ by ame7.swcp.com (8.15.2/8.15.2) with ESMTP id 08HFesRM024558
+ for <xen-devel@lists.xenproject.org>; Thu, 17 Sep 2020 09:41:10 -0600 (MDT)
+ (envelope-from hudson@trmm.net)
+X-Authentication-Warning: ame7.swcp.com: Host 62-251-112-184.ip.xs4all.nl
+ [62.251.112.184] claimed to be diamond.fritz.box
+From: Trammell Hudson <hudson@trmm.net>
+To: xen-devel@lists.xenproject.org
+Subject: [PATCH v5 1/5] efi/boot.c: Make file->ptr const void*
+Date: Thu, 17 Sep 2020 11:40:44 -0400
+Message-Id: <20200917154048.1140580-2-hudson@trmm.net>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20200917154048.1140580-1-hudson@trmm.net>
+References: <20200917154048.1140580-1-hudson@trmm.net>
 MIME-Version: 1.0
-In-Reply-To: <Rtytoe06osw9o7-z0sRD22p_KP8B2SVSp6Ae6IYHyhS_LpwthJkTMwDc1tICmBReafaZOLSu0nNVPV3ceUTqUnjP7dc4DrsMHhjPwfze3X0=@trmm.net>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 2.83
+X-Greylist: Message whitelisted by DRAC access database, not delayed by
+ milter-greylist-4.6.2 (ame7.swcp.com [216.184.2.128]);
+ Thu, 17 Sep 2020 09:41:11 -0600 (MDT)
+X-Virus-Scanned: clamav-milter 0.100.2 at ame7
+X-Virus-Status: Clean
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,40 +76,66 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 17.09.2020 16:05, Trammell Hudson wrote:
-> On Thursday, September 17, 2020 8:51 AM, Jan Beulich <jbeulich@suse.com> wrote:
->> On 14.09.2020 13:50, Trammell Hudson wrote:
->>> If secure boot is enabled, the Xen command line arguments are ignored.
->>> If a unified Xen image is used, then the bundled configuration, dom0
->>> kernel, and initrd are prefered over the ones listed in the config file.
->>> Unlike the shim based verification, the PE signature on a unified image
->>> covers the all of the Xen+config+kernel+initrd modules linked into the
->>> unified image. This also ensures that properly configured platforms
->>> will measure the entire runtime into the TPM for unsealing secrets or
->>> remote attestation.
->>
->> The command line may also include a part handed on to the Dom0 kernel.
->> If the Dom0 kernel image comes from disk, I don't see why that part of
->> the command line shouldn't be honored. Similarly, if the config file
->> doesn't come from the unified image, I think Xen's command line options
->> should also be honored.
-> 
-> Ignoring the command line and breaking the shim behaviour in a
-> unified image should be ok; that is an explicit decision by the
-> system owner to sign and configure the new image (and the shim
-> is not used in a unified image anyway).
-> 
-> If we have a way to detect a unified image early enough, then
-> we can avoid the backwards incompatibility if it is not unified.
+Other than the config file parser that edits the image inplace,
+no other users of the file sections requires write access to the
+data.
 
-I was assuming this was easily possible, if necessary as about the
-first thing we do. If it's not as easy, perhaps something wants
-adding to make it so?
+Signed-off-by: Trammell Hudson <hudson@trmm.net>
+---
+ xen/common/efi/boot.c | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
 
-> That would require moving the config parsing to above the relocation
-> call.
+diff --git a/xen/common/efi/boot.c b/xen/common/efi/boot.c
+index 0ac80e47bb..157fe0e8c5 100644
+--- a/xen/common/efi/boot.c
++++ b/xen/common/efi/boot.c
+@@ -41,7 +41,7 @@
+ 
+ typedef EFI_STATUS
+ (/* _not_ EFIAPI */ *EFI_SHIM_LOCK_VERIFY) (
+-    IN VOID *Buffer,
++    IN const VOID *Buffer,
+     IN UINT32 Size);
+ 
+ typedef struct {
+@@ -104,7 +104,8 @@ struct file {
+     UINTN size;
+     union {
+         EFI_PHYSICAL_ADDRESS addr;
+-        void *ptr;
++        char *str;
++        const void *ptr;
+     };
+ };
+ 
+@@ -592,7 +593,7 @@ static bool __init read_file(EFI_FILE_HANDLE dir_handle, CHAR16 *name,
+             efi_arch_handle_module(file, name, options);
+         }
+ 
+-        ret = FileHandle->Read(FileHandle, &file->size, file->ptr);
++        ret = FileHandle->Read(FileHandle, &file->size, file->str);
+         if ( !EFI_ERROR(ret) && file->size != size )
+             ret = EFI_ABORTED;
+         if ( EFI_ERROR(ret) )
+@@ -616,7 +617,7 @@ static bool __init read_file(EFI_FILE_HANDLE dir_handle, CHAR16 *name,
+ 
+ static void __init pre_parse(const struct file *cfg)
+ {
+-    char *ptr = cfg->ptr, *end = ptr + cfg->size;
++    char *ptr = cfg->str, *end = ptr + cfg->size;
+     bool start = true, comment = false;
+ 
+     for ( ; ptr < end; ++ptr )
+@@ -645,7 +646,7 @@ static void __init pre_parse(const struct file *cfg)
+ static char *__init get_value(const struct file *cfg, const char *section,
+                               const char *item)
+ {
+-    char *ptr = cfg->ptr, *end = ptr + cfg->size;
++    char *ptr = cfg->str, *end = ptr + cfg->size;
+     size_t slen = section ? strlen(section) : 0, ilen = strlen(item);
+     bool match = !slen;
+ 
+-- 
+2.25.1
 
-I guess I don't understand why this would be.
-
-Jan
 
