@@ -7,34 +7,34 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4ECFEC433E2
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A148C43461
 	for <xen-devel@archiver.kernel.org>; Thu, 17 Sep 2020 15:41:45 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E82F32223C
+	by mail.kernel.org (Postfix) with ESMTPS id 20D6122243
 	for <xen-devel@archiver.kernel.org>; Thu, 17 Sep 2020 15:41:44 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E82F32223C
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 20D6122243
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=trmm.net
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kIw2C-0003UI-Aa; Thu, 17 Sep 2020 15:41:20 +0000
+	id 1kIw2H-0003V9-Rc; Thu, 17 Sep 2020 15:41:25 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=t+a8=C2=trmm.net=hudson@srs-us1.protection.inumbo.net>)
- id 1kIw2B-0003Ts-GZ
- for xen-devel@lists.xenproject.org; Thu, 17 Sep 2020 15:41:19 +0000
-X-Inumbo-ID: 982583e6-9090-45cd-a74f-9fe08c7fd87e
+ id 1kIw2G-0003Ts-Gi
+ for xen-devel@lists.xenproject.org; Thu, 17 Sep 2020 15:41:24 +0000
+X-Inumbo-ID: bb120a2d-67c0-4f7e-a9af-0d3f4a3f24d7
 Received: from mx1a.swcp.com (unknown [216.184.2.64])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 982583e6-9090-45cd-a74f-9fe08c7fd87e;
- Thu, 17 Sep 2020 15:41:14 +0000 (UTC)
+ id bb120a2d-67c0-4f7e-a9af-0d3f4a3f24d7;
+ Thu, 17 Sep 2020 15:41:20 +0000 (UTC)
 Received: from ame7.swcp.com (ame7.swcp.com [216.184.2.70])
- by mx1a.swcp.com (8.14.4/8.14.4/Debian-4) with ESMTP id 08HFfDlw024942
- for <xen-devel@lists.xenproject.org>; Thu, 17 Sep 2020 09:41:13 -0600
+ by mx1a.swcp.com (8.14.4/8.14.4/Debian-4) with ESMTP id 08HFfKHP024954
+ for <xen-devel@lists.xenproject.org>; Thu, 17 Sep 2020 09:41:20 -0600
 Received-SPF: neutral (ame7.swcp.com: 62.251.112.184 is neither permitted nor
  denied by domain of hudson@trmm.net) receiver=ame7.swcp.com;
  client-ip=62.251.112.184; helo=diamond.fritz.box;
@@ -42,16 +42,16 @@ Received-SPF: neutral (ame7.swcp.com: 62.251.112.184 is neither permitted nor
  x-software=spfmilter 2.001 http://www.acme.com/software/spfmilter/ with
  libspf2-1.2.10; 
 Received: from diamond.fritz.box (62-251-112-184.ip.xs4all.nl [62.251.112.184])
- by ame7.swcp.com (8.15.2/8.15.2) with ESMTP id 08HFesRM024558
- for <xen-devel@lists.xenproject.org>; Thu, 17 Sep 2020 09:41:10 -0600 (MDT)
+ by ame7.swcp.com (8.15.2/8.15.2) with ESMTP id 08HFesRO024558
+ for <xen-devel@lists.xenproject.org>; Thu, 17 Sep 2020 09:41:17 -0600 (MDT)
  (envelope-from hudson@trmm.net)
 X-Authentication-Warning: ame7.swcp.com: Host 62-251-112-184.ip.xs4all.nl
  [62.251.112.184] claimed to be diamond.fritz.box
 From: Trammell Hudson <hudson@trmm.net>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH v5 1/5] efi/boot.c: Make file->ptr const void*
-Date: Thu, 17 Sep 2020 11:40:44 -0400
-Message-Id: <20200917154048.1140580-2-hudson@trmm.net>
+Subject: [PATCH v5 3/5] efi/boot.c: add handle_file_info()
+Date: Thu, 17 Sep 2020 11:40:46 -0400
+Message-Id: <20200917154048.1140580-4-hudson@trmm.net>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20200917154048.1140580-1-hudson@trmm.net>
 References: <20200917154048.1140580-1-hudson@trmm.net>
@@ -60,7 +60,7 @@ Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 2.83
 X-Greylist: Message whitelisted by DRAC access database, not delayed by
  milter-greylist-4.6.2 (ame7.swcp.com [216.184.2.128]);
- Thu, 17 Sep 2020 09:41:11 -0600 (MDT)
+ Thu, 17 Sep 2020 09:41:18 -0600 (MDT)
 X-Virus-Scanned: clamav-milter 0.100.2 at ame7
 X-Virus-Status: Clean
 X-BeenThere: xen-devel@lists.xenproject.org
@@ -76,65 +76,59 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Other than the config file parser that edits the image inplace,
-no other users of the file sections requires write access to the
-data.
+Add a separate function to display the address ranges used by
+the files and call `efi_arch_handle_module()` on the modules.
 
 Signed-off-by: Trammell Hudson <hudson@trmm.net>
 ---
- xen/common/efi/boot.c | 11 ++++++-----
- 1 file changed, 6 insertions(+), 5 deletions(-)
+ xen/common/efi/boot.c | 27 +++++++++++++++++----------
+ 1 file changed, 17 insertions(+), 10 deletions(-)
 
 diff --git a/xen/common/efi/boot.c b/xen/common/efi/boot.c
-index 0ac80e47bb..157fe0e8c5 100644
+index 77530a0595..e0280f7a21 100644
 --- a/xen/common/efi/boot.c
 +++ b/xen/common/efi/boot.c
-@@ -41,7 +41,7 @@
+@@ -540,6 +540,22 @@ static char * __init split_string(char *s)
+     return NULL;
+ }
  
- typedef EFI_STATUS
- (/* _not_ EFIAPI */ *EFI_SHIM_LOCK_VERIFY) (
--    IN VOID *Buffer,
-+    IN const VOID *Buffer,
-     IN UINT32 Size);
++static void __init handle_file_info(CHAR16 *name,
++                                    const struct file *file, const char *options)
++{
++    if ( file == &cfg )
++        return;
++
++    PrintStr(name);
++    PrintStr(L": ");
++    DisplayUint(file->addr, 2 * sizeof(file->addr));
++    PrintStr(L"-");
++    DisplayUint(file->addr + file->size, 2 * sizeof(file->addr));
++    PrintStr(newline);
++
++    efi_arch_handle_module(file, name, options);
++}
++
+ static bool __init read_file(EFI_FILE_HANDLE dir_handle, CHAR16 *name,
+                              struct file *file, const char *options)
+ {
+@@ -584,16 +600,7 @@ static bool __init read_file(EFI_FILE_HANDLE dir_handle, CHAR16 *name,
+     else
+     {
+         file->size = size;
+-        if ( file != &cfg )
+-        {
+-            PrintStr(name);
+-            PrintStr(L": ");
+-            DisplayUint(file->addr, 2 * sizeof(file->addr));
+-            PrintStr(L"-");
+-            DisplayUint(file->addr + size, 2 * sizeof(file->addr));
+-            PrintStr(newline);
+-            efi_arch_handle_module(file, name, options);
+-        }
++        handle_file_info(name, file, options);
  
- typedef struct {
-@@ -104,7 +104,8 @@ struct file {
-     UINTN size;
-     union {
-         EFI_PHYSICAL_ADDRESS addr;
--        void *ptr;
-+        char *str;
-+        const void *ptr;
-     };
- };
- 
-@@ -592,7 +593,7 @@ static bool __init read_file(EFI_FILE_HANDLE dir_handle, CHAR16 *name,
-             efi_arch_handle_module(file, name, options);
-         }
- 
--        ret = FileHandle->Read(FileHandle, &file->size, file->ptr);
-+        ret = FileHandle->Read(FileHandle, &file->size, file->str);
+         ret = FileHandle->Read(FileHandle, &file->size, file->str);
          if ( !EFI_ERROR(ret) && file->size != size )
-             ret = EFI_ABORTED;
-         if ( EFI_ERROR(ret) )
-@@ -616,7 +617,7 @@ static bool __init read_file(EFI_FILE_HANDLE dir_handle, CHAR16 *name,
- 
- static void __init pre_parse(const struct file *cfg)
- {
--    char *ptr = cfg->ptr, *end = ptr + cfg->size;
-+    char *ptr = cfg->str, *end = ptr + cfg->size;
-     bool start = true, comment = false;
- 
-     for ( ; ptr < end; ++ptr )
-@@ -645,7 +646,7 @@ static void __init pre_parse(const struct file *cfg)
- static char *__init get_value(const struct file *cfg, const char *section,
-                               const char *item)
- {
--    char *ptr = cfg->ptr, *end = ptr + cfg->size;
-+    char *ptr = cfg->str, *end = ptr + cfg->size;
-     size_t slen = section ? strlen(section) : 0, ilen = strlen(item);
-     bool match = !slen;
- 
 -- 
 2.25.1
 
