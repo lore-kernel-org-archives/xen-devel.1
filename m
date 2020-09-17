@@ -2,142 +2,98 @@ Return-Path: <SRS0=nCK6=C2=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-11.3 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B4B4C43461
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Sep 2020 07:41:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 171CEC433E2
+	for <xen-devel@archiver.kernel.org>; Thu, 17 Sep 2020 07:43:29 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0E5E72072E
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Sep 2020 07:41:10 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=intel.onmicrosoft.com header.i=@intel.onmicrosoft.com header.b="xaZAbiKi"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0E5E72072E
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=intel.com
+	by mail.kernel.org (Postfix) with ESMTPS id 910EE2072E
+	for <xen-devel@archiver.kernel.org>; Thu, 17 Sep 2020 07:43:28 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 910EE2072E
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=kaod.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kIoWv-0008DH-4J; Thu, 17 Sep 2020 07:40:33 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=p6zL=C2=intel.com=kevin.tian@srs-us1.protection.inumbo.net>)
- id 1kIoWt-0008DC-Io
- for xen-devel@lists.xenproject.org; Thu, 17 Sep 2020 07:40:31 +0000
-X-Inumbo-ID: 0eca183b-bc88-4336-835e-d67cc4df1918
-Received: from mga09.intel.com (unknown [134.134.136.24])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 0eca183b-bc88-4336-835e-d67cc4df1918;
- Thu, 17 Sep 2020 07:40:27 +0000 (UTC)
-IronPort-SDR: vznS3mWnjcN2RbwIBFkyo4w+6+69rj48jwnt5+gncOddOReOmh9dYjl26zyq6++/ngtuYospPQ
- n2yVzfPTeY7g==
-X-IronPort-AV: E=McAfee;i="6000,8403,9746"; a="160572722"
-X-IronPort-AV: E=Sophos;i="5.76,436,1592895600"; d="scan'208";a="160572722"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
- by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 17 Sep 2020 00:40:24 -0700
-IronPort-SDR: kyS6Nscou+CES1CpN3JcYWDJPr9HOom/7RJHtSp0a74bIGCWjLbvAQKQswJu+nbV5kisHqSbyi
- Cxsx3gEp3soA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.76,436,1592895600"; d="scan'208";a="483636444"
-Received: from fmsmsx601.amr.corp.intel.com ([10.18.126.81])
- by orsmga005.jf.intel.com with ESMTP; 17 Sep 2020 00:40:13 -0700
-Received: from fmsmsx603.amr.corp.intel.com (10.18.126.83) by
- fmsmsx601.amr.corp.intel.com (10.18.126.81) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.1713.5; Thu, 17 Sep 2020 00:40:12 -0700
-Received: from fmsedg602.ED.cps.intel.com (10.1.192.136) by
- fmsmsx603.amr.corp.intel.com (10.18.126.83) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.1713.5
- via Frontend Transport; Thu, 17 Sep 2020 00:40:12 -0700
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com (104.47.57.172)
- by edgegateway.intel.com (192.55.55.71) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.1.1713.5; Thu, 17 Sep 2020 00:40:12 -0700
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=gq4gCde5O5G99+S/MPpe+GLqXahkS6aH1RD9+eunEdHNkSSEJ6ZemblXTBE5EKT0H8jYs+snw1W37OJN+LF+bf25RsfRmBwOLpYb+bRIwjf75hnfZ22EshYGoYVAOWtpmxSwiIENWPc+0GSsHZ1URf/BFsQNwhfrKDTGPCgpwmnvU+JDfMZJJI+ovd/NINAuL9iZYiJP3saPprRhqKtZAanUSzjadll+Alsv+wiBkBeJoqG5bHbD/LZlkoxStNT/rnCUEzQGttWE8z6mA80rdjxtiiwoZww3/iF8fhRjLy0niP2WQ2odYNyW+ona2qlB1WzG544u3IX8xa/GlYt6RQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=V9JB1eYRI05tgEDYv6Uj5MEoAWwUPwsZXwHks+04UsA=;
- b=OwWQj1CuOXVGGLmn33XszAkJFMcrJKEweWlb69iJ1IdaERLIMXTRwql4J7d9oEcKkr4UK6othT+QuMmL703wqIT3wIszNlULgIRdkRRhLtuW/MhbpVZM1Mjlrzd8scW6ktGHAJaBW6atb6qwfKdDDnJAUd8v8zL645WZjMkzytIYcURw4GNz6WnIESgJx8U/mVfsNcTEYR5j6Wv+X+RIvz4U0+52Yf4l98mWvYRJ18D1iSdvY4aSDiClFrAajEhj0yCRuPrSsewzNqi/KsE0DX1d1sClMQCByk0Qnd0noilH+Ss8itM6edIJ+pUpbu+VfdXETonG7TZ9WlsJoMdCvg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=intel.onmicrosoft.com; 
- s=selector2-intel-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=V9JB1eYRI05tgEDYv6Uj5MEoAWwUPwsZXwHks+04UsA=;
- b=xaZAbiKiZ+t5SFWGrQ1iPe0Gr++UXZMXhP5ZAZ3Zqtff2tmPfg9avHYRP+kI7q/Ntf0KqZkyJn4Hqf4REZOPFuQfd8LBH26a3ZUstde4ZbxhYN2D2Dko1QxXtnyBHsIT6oExrozi3N148qSTas3p8o73jfTFzlvN0Ng3NoMhPao=
-Received: from MWHPR11MB1645.namprd11.prod.outlook.com (2603:10b6:301:b::12)
- by MWHPR1101MB2205.namprd11.prod.outlook.com (2603:10b6:301:59::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3391.14; Thu, 17 Sep
- 2020 07:40:10 +0000
-Received: from MWHPR11MB1645.namprd11.prod.outlook.com
- ([fe80::6dfe:feb8:25f1:ac9c]) by MWHPR11MB1645.namprd11.prod.outlook.com
- ([fe80::6dfe:feb8:25f1:ac9c%7]) with mapi id 15.20.3391.011; Thu, 17 Sep 2020
- 07:40:10 +0000
-From: "Tian, Kevin" <kevin.tian@intel.com>
-To: Paul Durrant <paul@xen.org>, "xen-devel@lists.xenproject.org"
- <xen-devel@lists.xenproject.org>
-CC: Paul Durrant <pdurrant@amazon.com>, Jan Beulich <jbeulich@suse.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- =?utf-8?B?Um9nZXIgUGF1IE1vbm7DqQ==?= <roger.pau@citrix.com>, George Dunlap
- <george.dunlap@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, "Julien
- Grall" <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
- "Nakajima, Jun" <jun.nakajima@intel.com>
-Subject: RE: [PATCH v9 5/8] remove remaining uses of iommu_legacy_map/unmap
-Thread-Topic: [PATCH v9 5/8] remove remaining uses of iommu_legacy_map/unmap
-Thread-Index: AQHWizporHXsfw0D0UyZXbhUQHS1t6lsdP5A
-Date: Thu, 17 Sep 2020 07:40:10 +0000
-Message-ID: <MWHPR11MB1645763E400799E4DB0EB4828C3E0@MWHPR11MB1645.namprd11.prod.outlook.com>
-References: <20200915082936.23663-1-paul@xen.org>
- <20200915082936.23663-6-paul@xen.org>
-In-Reply-To: <20200915082936.23663-6-paul@xen.org>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-dlp-version: 11.5.1.3
-dlp-product: dlpe-windows
-dlp-reaction: no-action
-authentication-results: xen.org; dkim=none (message not signed)
- header.d=none;xen.org; dmarc=none action=none header.from=intel.com;
-x-originating-ip: [192.198.147.212]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 0eb92069-6e85-4b9f-0382-08d85adce83a
-x-ms-traffictypediagnostic: MWHPR1101MB2205:
-x-ms-exchange-transport-forked: True
-x-microsoft-antispam-prvs: <MWHPR1101MB22054C1575B937CC1324857F8C3E0@MWHPR1101MB2205.namprd11.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:3631;
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: ccdmJerAarfhYpjnhbgOM6Ug0RD61OBvjsFeJkeKrPBBNKB6lCNSiJAiWqRIDNJNT8jy7klYzYhGIgazj+9o+LB575GRbRZ6fQClCvu6BKuD665K73pfcE8HFRbR/vVeho3v5uERCVMdGK8bL7NmfojJZVN/HHIXO7t609wkJrx7+GoanTNZWN4OKk6klw3o2YKYfUKX+vI7SZFj0ymMb/+x/eJ1e69edu3t+UMmIvOtGk898jEsh5UjIHWNd88ZmqK+I7ClXcLpG03fo70jj9nAT8sOeKTxx+P/AzXpO1aZYaLcHQADZC3xp0PrL0QR
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:MWHPR11MB1645.namprd11.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(4636009)(346002)(136003)(39860400002)(396003)(366004)(376002)(66446008)(7696005)(4326008)(186003)(8676002)(86362001)(9686003)(33656002)(478600001)(316002)(26005)(64756008)(110136005)(6506007)(54906003)(66556008)(55016002)(5660300002)(107886003)(66476007)(66946007)(30864003)(71200400001)(7416002)(52536014)(8936002)(76116006)(83380400001)(2906002);
- DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata: Z/Oja8SrS0xU/i/ai2vYPr9lpqcRCu88X10cwa1LhREAvL5/jxSv6rnOE/WREPySuxV066GndlWMGEBlFIxRuPqvBa1BmqpvXm1lOcTCuetlvoAXnoaItlCIVJ6MSJiXawYuHh9EcGWtnMA2k/J8dZ/xKYcNh4KaAGMiEeDEYWAHdfay8mHdClCYjNxxREYmwY19Iee8pkK28peiYcPConbeZq16QtflUHE7w4N0AJ9DF6n+9PdtlhbtEMXJNZawud7ay0Cpc2jiXzCIs5bRAv4VDFI4LbnDYuqQj7J1oX7wH6n7NN3106VLLEjLX4heq4wm3Rnjo7V3xJrzI1kCoEDJClYLMkM4nmzNCGIbeLmMbRs/zelb8jOW2MJwLlu10k5gUKacX6xnBycFGJuWI7AyyW9nKmxomlO6kUzGkiOh/np1Dk612n6Sih3hzDflpAg5gmZoyJ6NxU0HEu1VDtmiUtNbVeEeXVwZn1oQf+6BBP5nLl96iyk64lZ/sC3bfkhoF2DBaqP5uTsEug8vvaUS2clbjgGMPQ5GhsfuduV/yow18Icrk/sx6AZaEZV2SGLt9f9hLaAoPwtzJGgvSuGuFGZR0ol/ve6ah/nES3z0JDW4KGsXlMTNX8/dIJZMn6QbkcZXuf0UGQ232cO0Kg==
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+	id 1kIoZS-0008Rr-TH; Thu, 17 Sep 2020 07:43:10 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=prKo=C2=kaod.org=clg@srs-us1.protection.inumbo.net>)
+ id 1kIoZS-0008Rj-Ei
+ for xen-devel@lists.xenproject.org; Thu, 17 Sep 2020 07:43:10 +0000
+X-Inumbo-ID: 410a7a3d-fd55-409f-b78c-6b88ad40af5e
+Received: from smtpout1.mo529.mail-out.ovh.net (unknown [178.32.125.2])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 410a7a3d-fd55-409f-b78c-6b88ad40af5e;
+ Thu, 17 Sep 2020 07:43:05 +0000 (UTC)
+Received: from mxplan5.mail.ovh.net (unknown [10.108.4.12])
+ by mo529.mail-out.ovh.net (Postfix) with ESMTPS id EC02C5BF8923;
+ Thu, 17 Sep 2020 09:43:00 +0200 (CEST)
+Received: from kaod.org (37.59.142.104) by DAG4EX1.mxp5.local (172.16.2.31)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2044.4; Thu, 17 Sep
+ 2020 09:42:59 +0200
+Authentication-Results: garm.ovh; auth=pass
+ (GARM-104R0057fb52edf-47a1-48c6-a207-9fbcaa53d224,
+ FF1720B74B3888C93CA5040C1F5ACCC945AC33B8) smtp.auth=clg@kaod.org
+Subject: Re: [PATCH 3/5] qom: Remove module_obj_name parameter from
+ OBJECT_DECLARE* macros
+To: Eduardo Habkost <ehabkost@redhat.com>, <qemu-devel@nongnu.org>
+CC: Paolo Bonzini <pbonzini@redhat.com>, "Daniel P. Berrange"
+ <berrange@redhat.com>, =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?=
+ <marcandre.lureau@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>, "Michael S.
+ Tsirkin" <mst@redhat.com>, Peter Maydell <peter.maydell@linaro.org>, Corey
+ Minyard <cminyard@mvista.com>, David Gibson <david@gibson.dropbear.id.au>,
+ Cornelia Huck <cohuck@redhat.com>, Thomas Huth <thuth@redhat.com>, Halil
+ Pasic <pasic@linux.ibm.com>, Christian Borntraeger <borntraeger@de.ibm.com>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>, Alistair Francis
+ <alistair@alistair23.me>, David Hildenbrand <david@redhat.com>, Laurent
+ Vivier <lvivier@redhat.com>, Amit Shah <amit@kernel.org>, Stefano Stabellini
+ <sstabellini@kernel.org>, Anthony Perard <anthony.perard@citrix.com>, Paul
+ Durrant <paul@xen.org>, Fam Zheng <fam@euphon.net>, "Gonglei (Arei)"
+ <arei.gonglei@huawei.com>, Igor Mammedov <imammedo@redhat.com>, Stefan Berger
+ <stefanb@linux.ibm.com>, Richard Henderson <rth@twiddle.net>, Michael Rolnik
+ <mrolnik@gmail.com>, Sarah Harris <S.E.Harris@kent.ac.uk>, "Edgar E.
+ Iglesias" <edgar.iglesias@gmail.com>, Michael Walle <michael@walle.cc>,
+ Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>, Aurelien Jarno
+ <aurelien@aurel32.net>, Jiaxun Yang <jiaxun.yang@flygoat.com>, Aleksandar
+ Rikalo <aleksandar.rikalo@syrmia.com>, Anthony Green <green@moxielogic.com>,
+ Chris Wulff <crwulff@gmail.com>, Marek Vasut <marex@denx.de>, Stafford Horne
+ <shorne@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>, Sagar Karandikar
+ <sagark@eecs.berkeley.edu>, Bastian Koppelmann
+ <kbastian@mail.uni-paderborn.de>, Yoshinori Sato
+ <ysato@users.sourceforge.jp>, Mark Cave-Ayland
+ <mark.cave-ayland@ilande.co.uk>, Artyom Tarasenko <atar4qemu@gmail.com>, Guan
+ Xuetao <gxt@mprc.pku.edu.cn>, Max Filippov <jcmvbkbc@gmail.com>,
+ <qemu-arm@nongnu.org>, <qemu-ppc@nongnu.org>, <qemu-s390x@nongnu.org>,
+ <qemu-block@nongnu.org>, <xen-devel@lists.xenproject.org>,
+ <qemu-riscv@nongnu.org>
+References: <20200916182519.415636-1-ehabkost@redhat.com>
+ <20200916182519.415636-4-ehabkost@redhat.com>
+From: =?UTF-8?Q?C=c3=a9dric_Le_Goater?= <clg@kaod.org>
+Message-ID: <7dc24fb7-6d01-0cc0-5855-ee6fb05eaa80@kaod.org>
+Date: Thu, 17 Sep 2020 09:42:58 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.11.0
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: MWHPR11MB1645.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0eb92069-6e85-4b9f-0382-08d85adce83a
-X-MS-Exchange-CrossTenant-originalarrivaltime: 17 Sep 2020 07:40:10.6607 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: EPG4hPhg/3vjRbk7YL3x7wYEGZDligVdXjB1VhA6yqfCQ8SWCrRdABbg+OoyWpVoc/kuB61o/pm+faO8RTm1/A==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR1101MB2205
-X-OriginatorOrg: intel.com
+In-Reply-To: <20200916182519.415636-4-ehabkost@redhat.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [37.59.142.104]
+X-ClientProxiedBy: DAG3EX1.mxp5.local (172.16.2.21) To DAG4EX1.mxp5.local
+ (172.16.2.31)
+X-Ovh-Tracer-GUID: b881c584-b540-4bff-aad6-10737d8ae635
+X-Ovh-Tracer-Id: 1406248986254609203
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -98
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedujedrtdefgdduvddvucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnegfrhhlucfvnfffucdlvddmnecujfgurhepuffvfhfhkffffgggjggtgfhisehtkeertddtfeejnecuhfhrohhmpeevrogurhhitggpnfgvpgfiohgrthgvrhcuoegtlhhgsehkrghougdrohhrgheqnecuggftrfgrthhtvghrnhepjeekudeuudevleegudeugeekleffveeludejteffiedvledvgfekueefudehheefnecukfhppedtrddtrddtrddtpdefjedrheelrddugedvrddutdegnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmohguvgepshhmthhpqdhouhhtpdhhvghlohepmhigphhlrghnhedrmhgrihhlrdhovhhhrdhnvghtpdhinhgvtheptddrtddrtddrtddpmhgrihhlfhhrohhmpegtlhhgsehkrghougdrohhrghdprhgtphhtthhopegvhhgrsghkohhsthesrhgvughhrghtrdgtohhm
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -151,314 +107,1159 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-PiBGcm9tOiBQYXVsIER1cnJhbnQgPHBhdWxAeGVuLm9yZz4NCj4gU2VudDogVHVlc2RheSwgU2Vw
-dGVtYmVyIDE1LCAyMDIwIDQ6MzAgUE0NCj4gDQo+IEZyb206IFBhdWwgRHVycmFudCA8cGR1cnJh
-bnRAYW1hem9uLmNvbT4NCj4gDQo+IFRoZSAnbGVnYWN5JyBmdW5jdGlvbnMgZG8gaW1wbGljaXQg
-Zmx1c2hpbmcgc28gYW1lbmQgdGhlIGNhbGxlcnMgdG8gZG8gdGhlDQo+IGFwcHJvcHJpYXRlIGZs
-dXNoaW5nLg0KPiANCj4gVW5mb3J0dW5hdGVseSwgYmVjYXVzZSBvZiB0aGUgc3RydWN0dXJlIG9m
-IHRoZSBQMk0gY29kZSwgd2UgY2Fubm90IHJlbW92ZQ0KPiB0aGUgcGVyLUNQVSAnaW9tbXVfZG9u
-dF9mbHVzaF9pb3RsYicgZ2xvYmFsIGFuZCB0aGUgb3B0aW1pemF0aW9uIGl0DQo+IGZhY2lsaXRh
-dGVzLiBDaGVja2luZyBvZiB0aGlzIGZsYWcgaXMgbm93IGRvbmUgb25seSBpbiByZWxldmFudCBj
-YWxsZXJzIG9mDQo+IGlvbW11X2lvdGxiX2ZsdXNoKCkuIEFsc28sICdpb21tdV9kb250X2ZsdXNo
-X2lvdGxiJyBpcyBub3cgZGVjbGFyZWQNCj4gYXMgYm9vbCAocmF0aGVyIHRoYW4gYm9vbF90KSBh
-bmQgc2V0dGluZy9jbGVhcmluZyBpdCBhcmUgbm8gbG9uZ2VyIHBvaW50bGVzc2x5DQo+IGdhdGVk
-IG9uIGlzX2lvbW11X2VuYWJsZWQoKSByZXR1cm5pbmcgdHJ1ZS4gKEFyZ3VhYmx5IGl0IGlzIGFs
-c28gcG9pbnRsZXNzIHRvDQo+IGdhdGUgdGhlIGNhbGwgdG8gaW9tbXVfaW90bGJfZmx1c2goKSBv
-biB0aGF0IGNvbmRpdGlvbiAtIHNpbmNlIGl0IGlzIGEgbm8tb3ANCj4gaW4gdGhhdCBjYXNlIC0g
-YnV0IHRoZSBpZiBjbGF1c2UgYWxsb3dzIHRoZSBzY29wZSBvZiBhIHN0YWNrIHZhcmlhYmxlIHRv
-IGJlDQo+IHJlc3RyaWN0ZWQpLg0KPiANCj4gTk9URTogVGhlIGNvZGUgaW4gbWVtb3J5X2FkZCgp
-IG5vdyBzZXRzICdyZXQnIGlmIGlvbW11X21hcCgpIG9yDQo+ICAgICAgIGlvbW11X2lvdGxiX2Zs
-dXNoKCkgZmFpbHMuDQo+IA0KPiBTaWduZWQtb2ZmLWJ5OiBQYXVsIER1cnJhbnQgPHBkdXJyYW50
-QGFtYXpvbi5jb20+DQoNClJldmlld2VkLWJ5OiBLZXZpbiBUaWFuIDxrZXZpbi50aWFuQGludGVs
-LmNvbT4NCg0KPiAtLS0NCj4gQ2M6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4NCj4g
-Q2M6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+DQo+IENjOiBXZWkg
-TGl1IDx3bEB4ZW4ub3JnPg0KPiBDYzogIlJvZ2VyIFBhdSBNb25uw6kiIDxyb2dlci5wYXVAY2l0
-cml4LmNvbT4NCj4gQ2M6IEdlb3JnZSBEdW5sYXAgPGdlb3JnZS5kdW5sYXBAY2l0cml4LmNvbT4N
-Cj4gQ2M6IElhbiBKYWNrc29uIDxpYW4uamFja3NvbkBldS5jaXRyaXguY29tPg0KPiBDYzogSnVs
-aWVuIEdyYWxsIDxqdWxpZW5AeGVuLm9yZz4NCj4gQ2M6IFN0ZWZhbm8gU3RhYmVsbGluaSA8c3N0
-YWJlbGxpbmlAa2VybmVsLm9yZz4NCj4gQ2M6IEp1biBOYWthamltYSA8anVuLm5ha2FqaW1hQGlu
-dGVsLmNvbT4NCj4gQ2M6IEtldmluIFRpYW4gPGtldmluLnRpYW5AaW50ZWwuY29tPg0KPiANCj4g
-djk6DQo+ICAtIE1vdmVkIGNoZWNrIG9mICdpb21tdV9kb250X2ZsdXNoX2lvdGxiJyBvdXQgb2Yg
-aW9tbXVfaW90bGJfZmx1c2goKSBhbmQNCj4gICAgaW50byBjYWxsZXJzIHRvIGF2b2lkIHJlLWlu
-dHJvZHVjaW5nIGEgcHJvYmxlbSBvbiBBcm0NCj4gIC0gRHJvcHBlZCBKYW4ncyBSLWIgZHVlIHRv
-IGNoYW5nZQ0KPiANCj4gdjY6DQo+ICAtIEZpeCBmb3JtYXR0aW5nIHByb2JsZW0gaW4gbWVtb3J5
-X2FkZCgpDQo+IA0KPiB2NToNCj4gIC0gUmUtYmFzZQ0KPiAgLSBSZW1vdmVkIGZhaWx1cmUgY2Fz
-ZSBvbiBvdmVyZmxvdyBvZiB1bnNpZ25lZCBpbnQgYXMgaXQgaXMgbm8gbG9uZ2VyDQo+ICAgIG5l
-Y2Vzc2FyeQ0KPiANCj4gdjM6DQo+ICAtIFNhbWUgYXMgdjI7IGVsZWN0ZWQgdG8gaW1wbGVtZW50
-IGJhdGNoIGZsdXNoaW5nIGluIHRoZSBncmFudCB0YWJsZSBjb2RlIGFzDQo+ICAgIGEgc3Vic2Vx
-dWVudCBwYXRjaA0KPiANCj4gdjI6DQo+ICAtIFNob3J0ZW4gdGhlIGRpZmYgKG1haW5seSBiZWNh
-dXNlIG9mIGEgcHJpb3IgcGF0Y2ggaW50cm9kdWNpbmcgYXV0b21hdGljDQo+ICAgIGZsdXNoLW9u
-LWZhaWwgaW50byBpb21tdV9tYXAoKSBhbmQgaW9tbXVfdW5tYXAoKSkNCj4gLS0tDQo+ICB4ZW4v
-YXJjaC94ODYvbW0uYyAgICAgICAgICAgICAgIHwgMjQgKysrKysrKysrKysrKysrKystLS0tLS0t
-DQo+ICB4ZW4vYXJjaC94ODYvbW0vcDJtLWVwdC5jICAgICAgIHwgMjEgKysrKysrKysrKysrKy0t
-LS0tLS0tDQo+ICB4ZW4vYXJjaC94ODYvbW0vcDJtLXB0LmMgICAgICAgIHwgMTYgKysrKysrKysr
-KysrLS0tLQ0KPiAgeGVuL2FyY2gveDg2L21tL3AybS5jICAgICAgICAgICB8IDI1ICsrKysrKysr
-KysrKysrKysrLS0tLS0tLS0NCj4gIHhlbi9hcmNoL3g4Ni94ODZfNjQvbW0uYyAgICAgICAgfCAy
-MCArKysrKysrLS0tLS0tLS0tLS0tLQ0KPiAgeGVuL2NvbW1vbi9ncmFudF90YWJsZS5jICAgICAg
-ICB8IDI5ICsrKysrKysrKysrKysrKysrKysrKystLS0tLS0tDQo+ICB4ZW4vY29tbW9uL21lbW9y
-eS5jICAgICAgICAgICAgIHwgIDcgKysrLS0tLQ0KPiAgeGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gv
-aW9tbXUuYyB8IDIzIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQo+ICB4ZW4vaW5jbHVkZS94ZW4v
-aW9tbXUuaCAgICAgICAgIHwgMjEgKysrKystLS0tLS0tLS0tLS0tLS0tDQo+ICA5IGZpbGVzIGNo
-YW5nZWQsIDk2IGluc2VydGlvbnMoKyksIDkwIGRlbGV0aW9ucygtKQ0KPiANCj4gZGlmZiAtLWdp
-dCBhL3hlbi9hcmNoL3g4Ni9tbS5jIGIveGVuL2FyY2gveDg2L21tLmMNCj4gaW5kZXggOTQ0N2Rh
-YmM1MC4uZmVjOGExOTkyMCAxMDA2NDQNCj4gLS0tIGEveGVuL2FyY2gveDg2L21tLmMNCj4gKysr
-IGIveGVuL2FyY2gveDg2L21tLmMNCj4gQEAgLTI0NDEsMTAgKzI0NDEsMTYgQEAgc3RhdGljIGlu
-dCBjbGVhbnVwX3BhZ2VfbWFwcGluZ3Moc3RydWN0DQo+IHBhZ2VfaW5mbyAqcGFnZSkNCj4gDQo+
-ICAgICAgICAgIGlmICggZCAmJiB1bmxpa2VseShuZWVkX2lvbW11X3B0X3N5bmMoZCkpICYmIGlz
-X3B2X2RvbWFpbihkKSApDQo+ICAgICAgICAgIHsNCj4gLSAgICAgICAgICAgIGludCByYzIgPSBp
-b21tdV9sZWdhY3lfdW5tYXAoZCwgX2RmbihtZm4pLCAxdSA8PA0KPiBQQUdFX09SREVSXzRLKTsN
-Cj4gKyAgICAgICAgICAgIHVuc2lnbmVkIGludCBmbHVzaF9mbGFncyA9IDA7DQo+ICsgICAgICAg
-ICAgICBpbnQgZXJyOw0KPiArDQo+ICsgICAgICAgICAgICBlcnIgPSBpb21tdV91bm1hcChkLCBf
-ZGZuKG1mbiksIDF1bCA8PCBQQUdFX09SREVSXzRLLA0KPiAmZmx1c2hfZmxhZ3MpOw0KPiArICAg
-ICAgICAgICAgaWYgKCAhZXJyICYmICF0aGlzX2NwdShpb21tdV9kb250X2ZsdXNoX2lvdGxiKSAp
-DQo+ICsgICAgICAgICAgICAgICAgZXJyID0gaW9tbXVfaW90bGJfZmx1c2goZCwgX2RmbihtZm4p
-LCAxdWwgPDwgUEFHRV9PUkRFUl80SywNCj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBmbHVzaF9mbGFncyk7DQo+IA0KPiAgICAgICAgICAgICAgaWYgKCAhcmMgKQ0K
-PiAtICAgICAgICAgICAgICAgIHJjID0gcmMyOw0KPiArICAgICAgICAgICAgICAgIHJjID0gZXJy
-Ow0KPiAgICAgICAgICB9DQo+IA0KPiAgICAgICAgICBpZiAoIGxpa2VseSghaXNfc3BlY2lhbF9w
-YWdlKHBhZ2UpKSApDQo+IEBAIC0yOTY2LDE0ICsyOTcyLDE4IEBAIHN0YXRpYyBpbnQgX2dldF9w
-YWdlX3R5cGUoc3RydWN0IHBhZ2VfaW5mbyAqcGFnZSwNCj4gdW5zaWduZWQgbG9uZyB0eXBlLA0K
-PiAgICAgICAgICBpZiAoIGQgJiYgdW5saWtlbHkobmVlZF9pb21tdV9wdF9zeW5jKGQpKSAmJiBp
-c19wdl9kb21haW4oZCkgKQ0KPiAgICAgICAgICB7DQo+ICAgICAgICAgICAgICBtZm5fdCBtZm4g
-PSBwYWdlX3RvX21mbihwYWdlKTsNCj4gKyAgICAgICAgICAgIGRmbl90IGRmbiA9IF9kZm4obWZu
-X3gobWZuKSk7DQo+ICsgICAgICAgICAgICB1bnNpZ25lZCBpbnQgZmx1c2hfZmxhZ3MgPSAwOw0K
-PiANCj4gICAgICAgICAgICAgIGlmICggKHggJiBQR1RfdHlwZV9tYXNrKSA9PSBQR1Rfd3JpdGFi
-bGVfcGFnZSApDQo+IC0gICAgICAgICAgICAgICAgcmMgPSBpb21tdV9sZWdhY3lfdW5tYXAoZCwg
-X2RmbihtZm5feChtZm4pKSwNCj4gLSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAxdWwgPDwgUEFHRV9PUkRFUl80Syk7DQo+ICsgICAgICAgICAgICAgICAgcmMgPSBpb21t
-dV91bm1hcChkLCBkZm4sIDF1bCA8PCBQQUdFX09SREVSXzRLLCAmZmx1c2hfZmxhZ3MpOw0KPiAg
-ICAgICAgICAgICAgZWxzZQ0KPiAtICAgICAgICAgICAgICAgIHJjID0gaW9tbXVfbGVnYWN5X21h
-cChkLCBfZGZuKG1mbl94KG1mbikpLCBtZm4sDQo+IC0gICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIDF1bCA8PCBQQUdFX09SREVSXzRLLA0KPiAtICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBJT01NVUZfcmVhZGFibGUgfCBJT01NVUZfd3JpdGFibGUpOw0K
-PiArICAgICAgICAgICAgICAgIHJjID0gaW9tbXVfbWFwKGQsIGRmbiwgbWZuLCAxdWwgPDwgUEFH
-RV9PUkRFUl80SywNCj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBJT01NVUZfcmVh
-ZGFibGUgfCBJT01NVUZfd3JpdGFibGUsICZmbHVzaF9mbGFncyk7DQo+ICsNCj4gKyAgICAgICAg
-ICAgIGlmICggIXJjICYmICF0aGlzX2NwdShpb21tdV9kb250X2ZsdXNoX2lvdGxiKSApDQo+ICsg
-ICAgICAgICAgICAgICAgcmMgPSBpb21tdV9pb3RsYl9mbHVzaChkLCBkZm4sIDF1bCA8PCBQQUdF
-X09SREVSXzRLLA0KPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmx1
-c2hfZmxhZ3MpOw0KPiANCj4gICAgICAgICAgICAgIGlmICggdW5saWtlbHkocmMpICkNCj4gICAg
-ICAgICAgICAgIHsNCj4gZGlmZiAtLWdpdCBhL3hlbi9hcmNoL3g4Ni9tbS9wMm0tZXB0LmMgYi94
-ZW4vYXJjaC94ODYvbW0vcDJtLWVwdC5jDQo+IGluZGV4IDEyY2YzOGY2ZWIuLjcxNDczZmQzMWQg
-MTAwNjQ0DQo+IC0tLSBhL3hlbi9hcmNoL3g4Ni9tbS9wMm0tZXB0LmMNCj4gKysrIGIveGVuL2Fy
-Y2gveDg2L21tL3AybS1lcHQuYw0KPiBAQCAtODQyLDE1ICs4NDIsMjAgQEAgb3V0Og0KPiAgICAg
-IGlmICggcmMgPT0gMCAmJiBwMm1faXNfaG9zdHAybShwMm0pICYmDQo+ICAgICAgICAgICBuZWVk
-X21vZGlmeV92dGRfdGFibGUgKQ0KPiAgICAgIHsNCj4gLSAgICAgICAgaWYgKCBpb21tdV91c2Vf
-aGFwX3B0KGQpICkNCj4gLSAgICAgICAgICAgIHJjID0gaW9tbXVfaW90bGJfZmx1c2goZCwgX2Rm
-bihnZm4pLCAxdWwgPDwgb3JkZXIsDQo+IC0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIChpb21tdV9mbGFncyA/IElPTU1VX0ZMVVNIRl9hZGRlZCA6IDApIHwNCj4gLSAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgKHZ0ZF9wdGVfcHJlc2VudCA/IElPTU1VX0ZMVVNI
-Rl9tb2RpZmllZA0KPiAtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIDogMCkpOw0KPiAtICAgICAgICBlbHNlIGlmICggbmVlZF9pb21tdV9wdF9zeW5j
-KGQpICkNCj4gKyAgICAgICAgdW5zaWduZWQgaW50IGZsdXNoX2ZsYWdzID0gMDsNCj4gKw0KPiAr
-ICAgICAgICBpZiAoIG5lZWRfaW9tbXVfcHRfc3luYyhkKSApDQo+ICAgICAgICAgICAgICByYyA9
-IGlvbW11X2ZsYWdzID8NCj4gLSAgICAgICAgICAgICAgICBpb21tdV9sZWdhY3lfbWFwKGQsIF9k
-Zm4oZ2ZuKSwgbWZuLCAxdWwgPDwgb3JkZXIsIGlvbW11X2ZsYWdzKSA6DQo+IC0gICAgICAgICAg
-ICAgICAgaW9tbXVfbGVnYWN5X3VubWFwKGQsIF9kZm4oZ2ZuKSwgMXVsIDw8IG9yZGVyKTsNCj4g
-KyAgICAgICAgICAgICAgICBpb21tdV9tYXAoZCwgX2RmbihnZm4pLCBtZm4sIDF1bCA8PCBvcmRl
-ciwgaW9tbXVfZmxhZ3MsDQo+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICZmbHVzaF9mbGFn
-cykgOg0KPiArICAgICAgICAgICAgICAgIGlvbW11X3VubWFwKGQsIF9kZm4oZ2ZuKSwgMXVsIDw8
-IG9yZGVyLCAmZmx1c2hfZmxhZ3MpOw0KPiArICAgICAgICBlbHNlIGlmICggaW9tbXVfdXNlX2hh
-cF9wdChkKSApDQo+ICsgICAgICAgICAgICBmbHVzaF9mbGFncyA9DQo+ICsgICAgICAgICAgICAg
-ICAgKGlvbW11X2ZsYWdzID8gSU9NTVVfRkxVU0hGX2FkZGVkIDogMCkgfA0KPiArICAgICAgICAg
-ICAgICAgICh2dGRfcHRlX3ByZXNlbnQgPyBJT01NVV9GTFVTSEZfbW9kaWZpZWQgOiAwKTsNCj4g
-Kw0KPiArICAgICAgICBpZiAoICFyYyAmJiAhdGhpc19jcHUoaW9tbXVfZG9udF9mbHVzaF9pb3Rs
-YikgKQ0KPiArICAgICAgICAgICAgcmMgPSBpb21tdV9pb3RsYl9mbHVzaChkLCBfZGZuKGdmbiks
-IDF1bCA8PCBvcmRlciwgZmx1c2hfZmxhZ3MpOw0KPiAgICAgIH0NCj4gDQo+ICAgICAgdW5tYXBf
-ZG9tYWluX3BhZ2UodGFibGUpOw0KPiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L21tL3AybS1w
-dC5jIGIveGVuL2FyY2gveDg2L21tL3AybS1wdC5jDQo+IGluZGV4IDNhZjUxYmU3OGUuLjk2Y2Fj
-YjY3NDggMTAwNjQ0DQo+IC0tLSBhL3hlbi9hcmNoL3g4Ni9tbS9wMm0tcHQuYw0KPiArKysgYi94
-ZW4vYXJjaC94ODYvbW0vcDJtLXB0LmMNCj4gQEAgLTY3OCwxMCArNjc4LDE4IEBAIHAybV9wdF9z
-ZXRfZW50cnkoc3RydWN0IHAybV9kb21haW4gKnAybSwNCj4gZ2ZuX3QgZ2ZuXywgbWZuX3QgbWZu
-LA0KPiANCj4gICAgICBpZiAoIG5lZWRfaW9tbXVfcHRfc3luYyhwMm0tPmRvbWFpbikgJiYNCj4g
-ICAgICAgICAgIChpb21tdV9vbGRfZmxhZ3MgIT0gaW9tbXVfcHRlX2ZsYWdzIHx8IG9sZF9tZm4g
-IT0gbWZuX3gobWZuKSkgKQ0KPiAtICAgICAgICByYyA9IGlvbW11X3B0ZV9mbGFncw0KPiAtICAg
-ICAgICAgICAgID8gaW9tbXVfbGVnYWN5X21hcChkLCBfZGZuKGdmbiksIG1mbiwgMXVsIDw8IHBh
-Z2Vfb3JkZXIsDQo+IC0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlvbW11X3B0ZV9m
-bGFncykNCj4gLSAgICAgICAgICAgICA6IGlvbW11X2xlZ2FjeV91bm1hcChkLCBfZGZuKGdmbiks
-IDF1bCA8PCBwYWdlX29yZGVyKTsNCj4gKyAgICB7DQo+ICsgICAgICAgIHVuc2lnbmVkIGludCBm
-bHVzaF9mbGFncyA9IDA7DQo+ICsNCj4gKyAgICAgICAgcmMgPSBpb21tdV9wdGVfZmxhZ3MgPw0K
-PiArICAgICAgICAgICAgaW9tbXVfbWFwKGQsIF9kZm4oZ2ZuKSwgbWZuLCAxdWwgPDwgcGFnZV9v
-cmRlciwgaW9tbXVfcHRlX2ZsYWdzLA0KPiArICAgICAgICAgICAgICAgICAgICAgICZmbHVzaF9m
-bGFncykgOg0KPiArICAgICAgICAgICAgaW9tbXVfdW5tYXAoZCwgX2RmbihnZm4pLCAxdWwgPDwg
-cGFnZV9vcmRlciwgJmZsdXNoX2ZsYWdzKTsNCj4gKw0KPiArICAgICAgICBpZiAoICFyYyAmJiAh
-dGhpc19jcHUoaW9tbXVfZG9udF9mbHVzaF9pb3RsYikgKQ0KPiArICAgICAgICAgICAgcmMgPSBp
-b21tdV9pb3RsYl9mbHVzaChkLCBfZGZuKGdmbiksIDF1bCA8PCBwYWdlX29yZGVyLA0KPiArICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmbHVzaF9mbGFncyk7DQo+ICsgICAgfQ0K
-PiANCj4gICAgICAvKg0KPiAgICAgICAqIEZyZWUgb2xkIGludGVybWVkaWF0ZSB0YWJsZXMgaWYg
-bmVjZXNzYXJ5LiAgVGhpcyBoYXMgdG8gYmUgdGhlDQo+IGRpZmYgLS1naXQgYS94ZW4vYXJjaC94
-ODYvbW0vcDJtLmMgYi94ZW4vYXJjaC94ODYvbW0vcDJtLmMNCj4gaW5kZXggOTI4MzQ0YmUzMC4u
-MDFmZjkyODYyZCAxMDA2NDQNCj4gLS0tIGEveGVuL2FyY2gveDg2L21tL3AybS5jDQo+ICsrKyBi
-L3hlbi9hcmNoL3g4Ni9tbS9wMm0uYw0KPiBAQCAtMTM1MCwxMSArMTM1MCwxNSBAQCBpbnQgc2V0
-X2lkZW50aXR5X3AybV9lbnRyeShzdHJ1Y3QgZG9tYWluICpkLA0KPiB1bnNpZ25lZCBsb25nIGdm
-bl9sLA0KPiANCj4gICAgICBpZiAoICFwYWdpbmdfbW9kZV90cmFuc2xhdGUocDJtLT5kb21haW4p
-ICkNCj4gICAgICB7DQo+IC0gICAgICAgIGlmICggIWlzX2lvbW11X2VuYWJsZWQoZCkgKQ0KPiAt
-ICAgICAgICAgICAgcmV0dXJuIDA7DQo+IC0gICAgICAgIHJldHVybiBpb21tdV9sZWdhY3lfbWFw
-KGQsIF9kZm4oZ2ZuX2wpLCBfbWZuKGdmbl9sKSwNCj4gLSAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgMXVsIDw8IFBBR0VfT1JERVJfNEssDQo+IC0gICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIElPTU1VRl9yZWFkYWJsZSB8IElPTU1VRl93cml0YWJsZSk7DQo+ICsgICAgICAg
-IHVuc2lnbmVkIGludCBmbHVzaF9mbGFncyA9IDA7DQo+ICsNCj4gKyAgICAgICAgcmV0ID0gaW9t
-bXVfbWFwKGQsIF9kZm4oZ2ZuX2wpLCBfbWZuKGdmbl9sKSwgMXVsIDw8IFBBR0VfT1JERVJfNEss
-DQo+ICsgICAgICAgICAgICAgICAgICAgICAgICBJT01NVUZfcmVhZGFibGUgfCBJT01NVUZfd3Jp
-dGFibGUsICZmbHVzaF9mbGFncyk7DQo+ICsgICAgICAgIGlmICggIXJldCApDQo+ICsgICAgICAg
-ICAgICByZXQgPSBpb21tdV9pb3RsYl9mbHVzaChkLCBfZGZuKGdmbl9sKSwgMXVsIDw8IFBBR0Vf
-T1JERVJfNEssDQo+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmbHVzaF9m
-bGFncyk7DQo+ICsNCj4gKyAgICAgICAgcmV0dXJuIHJldDsNCj4gICAgICB9DQo+IA0KPiAgICAg
-IGdmbl9sb2NrKHAybSwgZ2ZuLCAwKTsNCj4gQEAgLTE0NDIsOSArMTQ0NiwxNCBAQCBpbnQgY2xl
-YXJfaWRlbnRpdHlfcDJtX2VudHJ5KHN0cnVjdCBkb21haW4gKmQsDQo+IHVuc2lnbmVkIGxvbmcg
-Z2ZuX2wpDQo+IA0KPiAgICAgIGlmICggIXBhZ2luZ19tb2RlX3RyYW5zbGF0ZShkKSApDQo+ICAg
-ICAgew0KPiAtICAgICAgICBpZiAoICFpc19pb21tdV9lbmFibGVkKGQpICkNCj4gLSAgICAgICAg
-ICAgIHJldHVybiAwOw0KPiAtICAgICAgICByZXR1cm4gaW9tbXVfbGVnYWN5X3VubWFwKGQsIF9k
-Zm4oZ2ZuX2wpLCAxdWwgPDwgUEFHRV9PUkRFUl80Syk7DQo+ICsgICAgICAgIHVuc2lnbmVkIGlu
-dCBmbHVzaF9mbGFncyA9IDA7DQo+ICsNCj4gKyAgICAgICAgcmV0ID0gaW9tbXVfdW5tYXAoZCwg
-X2RmbihnZm5fbCksIDF1bCA8PCBQQUdFX09SREVSXzRLLA0KPiAmZmx1c2hfZmxhZ3MpOw0KPiAr
-ICAgICAgICBpZiAoICFyZXQgKQ0KPiArICAgICAgICAgICAgcmV0ID0gaW9tbXVfaW90bGJfZmx1
-c2goZCwgX2RmbihnZm5fbCksIDF1bCA8PCBQQUdFX09SREVSXzRLLA0KPiArICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgZmx1c2hfZmxhZ3MpOw0KPiArDQo+ICsgICAgICAgIHJl
-dHVybiByZXQ7DQo+ICAgICAgfQ0KPiANCj4gICAgICBnZm5fbG9jayhwMm0sIGdmbiwgMCk7DQo+
-IGRpZmYgLS1naXQgYS94ZW4vYXJjaC94ODYveDg2XzY0L21tLmMgYi94ZW4vYXJjaC94ODYveDg2
-XzY0L21tLmMNCj4gaW5kZXggYmNlMTU2MWUxYS4uN2U5ZDE2NTQ0OSAxMDA2NDQNCj4gLS0tIGEv
-eGVuL2FyY2gveDg2L3g4Nl82NC9tbS5jDQo+ICsrKyBiL3hlbi9hcmNoL3g4Ni94ODZfNjQvbW0u
-Yw0KPiBAQCAtMTI4NCwyMSArMTI4NCwxNSBAQCBpbnQgbWVtb3J5X2FkZCh1bnNpZ25lZCBsb25n
-IHNwZm4sIHVuc2lnbmVkDQo+IGxvbmcgZXBmbiwgdW5zaWduZWQgaW50IHB4bSkNCj4gICAgICAg
-ICAgICFpb21tdV91c2VfaGFwX3B0KGhhcmR3YXJlX2RvbWFpbikgJiYNCj4gICAgICAgICAgICFu
-ZWVkX2lvbW11X3B0X3N5bmMoaGFyZHdhcmVfZG9tYWluKSApDQo+ICAgICAgew0KPiAtICAgICAg
-ICBmb3IgKCBpID0gc3BmbjsgaSA8IGVwZm47IGkrKyApDQo+IC0gICAgICAgICAgICBpZiAoIGlv
-bW11X2xlZ2FjeV9tYXAoaGFyZHdhcmVfZG9tYWluLCBfZGZuKGkpLCBfbWZuKGkpLA0KPiAtICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDF1bCA8PCBQQUdFX09SREVSXzRLLA0KPiAt
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIElPTU1VRl9yZWFkYWJsZSB8IElPTU1V
-Rl93cml0YWJsZSkgKQ0KPiAtICAgICAgICAgICAgICAgIGJyZWFrOw0KPiAtICAgICAgICBpZiAo
-IGkgIT0gZXBmbiApDQo+IC0gICAgICAgIHsNCj4gLSAgICAgICAgICAgIHdoaWxlIChpLS0gPiBv
-bGRfbWF4KQ0KPiAtICAgICAgICAgICAgICAgIC8qIElmIHN0YXRlbWVudCB0byBzYXRpc2Z5IF9f
-bXVzdF9jaGVjay4gKi8NCj4gLSAgICAgICAgICAgICAgICBpZiAoIGlvbW11X2xlZ2FjeV91bm1h
-cChoYXJkd2FyZV9kb21haW4sIF9kZm4oaSksDQo+IC0gICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgMXVsIDw8IFBBR0VfT1JERVJfNEspICkNCj4gLSAgICAgICAgICAgICAg
-ICAgICAgY29udGludWU7DQo+ICsgICAgICAgIHVuc2lnbmVkIGludCBmbHVzaF9mbGFncyA9IDA7
-DQo+ICsgICAgICAgIHVuc2lnbmVkIGxvbmcgbiA9IGVwZm4gLSBzcGZuOw0KPiANCj4gKyAgICAg
-ICAgcmV0ID0gaW9tbXVfbWFwKGhhcmR3YXJlX2RvbWFpbiwgX2RmbihpKSwgX21mbihpKSwgbiwN
-Cj4gKyAgICAgICAgICAgICAgICAgICAgICAgIElPTU1VRl9yZWFkYWJsZSB8IElPTU1VRl93cml0
-YWJsZSwgJmZsdXNoX2ZsYWdzKTsNCj4gKyAgICAgICAgaWYgKCAhcmV0ICkNCj4gKyAgICAgICAg
-ICAgIHJldCA9IGlvbW11X2lvdGxiX2ZsdXNoKGhhcmR3YXJlX2RvbWFpbiwgX2RmbihpKSwgbiwg
-Zmx1c2hfZmxhZ3MpOw0KPiArICAgICAgICBpZiAoIHJldCApDQo+ICAgICAgICAgICAgICBnb3Rv
-IGRlc3Ryb3lfbTJwOw0KPiAtICAgICAgICB9DQo+ICAgICAgfQ0KPiANCj4gICAgICAvKiBXZSBj
-YW4ndCByZXZlcnQgYW55IG1vcmUgKi8NCj4gZGlmZiAtLWdpdCBhL3hlbi9jb21tb24vZ3JhbnRf
-dGFibGUuYyBiL3hlbi9jb21tb24vZ3JhbnRfdGFibGUuYw0KPiBpbmRleCBhNWQzZWQ4YmRhLi5i
-ZWI2YjJkNDBkIDEwMDY0NA0KPiAtLS0gYS94ZW4vY29tbW9uL2dyYW50X3RhYmxlLmMNCj4gKysr
-IGIveGVuL2NvbW1vbi9ncmFudF90YWJsZS5jDQo+IEBAIC0xMjI1LDExICsxMjI1LDIyIEBAIG1h
-cF9ncmFudF9yZWYoDQo+ICAgICAgICAgICAgICBraW5kID0gSU9NTVVGX3JlYWRhYmxlOw0KPiAg
-ICAgICAgICBlbHNlDQo+ICAgICAgICAgICAgICBraW5kID0gMDsNCj4gLSAgICAgICAgaWYgKCBr
-aW5kICYmIGlvbW11X2xlZ2FjeV9tYXAobGQsIF9kZm4obWZuX3gobWZuKSksIG1mbiwgMSwga2lu
-ZCkgKQ0KPiArDQo+ICsgICAgICAgIGlmICgga2luZCApDQo+ICAgICAgICAgIHsNCj4gLSAgICAg
-ICAgICAgIGRvdWJsZV9ndF91bmxvY2sobGd0LCByZ3QpOw0KPiAtICAgICAgICAgICAgcmMgPSBH
-TlRTVF9nZW5lcmFsX2Vycm9yOw0KPiAtICAgICAgICAgICAgZ290byB1bmRvX291dDsNCj4gKyAg
-ICAgICAgICAgIGRmbl90IGRmbiA9IF9kZm4obWZuX3gobWZuKSk7DQo+ICsgICAgICAgICAgICB1
-bnNpZ25lZCBpbnQgZmx1c2hfZmxhZ3MgPSAwOw0KPiArICAgICAgICAgICAgaW50IGVycjsNCj4g
-Kw0KPiArICAgICAgICAgICAgZXJyID0gaW9tbXVfbWFwKGxkLCBkZm4sIG1mbiwgMSwga2luZCwg
-JmZsdXNoX2ZsYWdzKTsNCj4gKyAgICAgICAgICAgIGlmICggIWVyciApDQo+ICsgICAgICAgICAg
-ICAgICAgZXJyID0gaW9tbXVfaW90bGJfZmx1c2gobGQsIGRmbiwgMSwgZmx1c2hfZmxhZ3MpOw0K
-PiArICAgICAgICAgICAgaWYgKCBlcnIgKQ0KPiArICAgICAgICAgICAgew0KPiArICAgICAgICAg
-ICAgICAgIGRvdWJsZV9ndF91bmxvY2sobGd0LCByZ3QpOw0KPiArICAgICAgICAgICAgICAgIHJj
-ID0gR05UU1RfZ2VuZXJhbF9lcnJvcjsNCj4gKyAgICAgICAgICAgICAgICBnb3RvIHVuZG9fb3V0
-Ow0KPiArICAgICAgICAgICAgfQ0KPiAgICAgICAgICB9DQo+ICAgICAgfQ0KPiANCj4gQEAgLTE0
-NzMsMTkgKzE0ODQsMjMgQEAgdW5tYXBfY29tbW9uKA0KPiAgICAgIGlmICggcmMgPT0gR05UU1Rf
-b2theSAmJiBnbnR0YWJfbmVlZF9pb21tdV9tYXBwaW5nKGxkKSApDQo+ICAgICAgew0KPiAgICAg
-ICAgICB1bnNpZ25lZCBpbnQga2luZDsNCj4gKyAgICAgICAgZGZuX3QgZGZuID0gX2RmbihtZm5f
-eChvcC0+bWZuKSk7DQo+ICsgICAgICAgIHVuc2lnbmVkIGludCBmbHVzaF9mbGFncyA9IDA7DQo+
-ICAgICAgICAgIGludCBlcnIgPSAwOw0KPiANCj4gICAgICAgICAgZG91YmxlX2d0X2xvY2sobGd0
-LCByZ3QpOw0KPiANCj4gICAgICAgICAga2luZCA9IG1hcGtpbmQobGd0LCByZCwgb3AtPm1mbik7
-DQo+ICAgICAgICAgIGlmICggIWtpbmQgKQ0KPiAtICAgICAgICAgICAgZXJyID0gaW9tbXVfbGVn
-YWN5X3VubWFwKGxkLCBfZGZuKG1mbl94KG9wLT5tZm4pKSwgMSk7DQo+ICsgICAgICAgICAgICBl
-cnIgPSBpb21tdV91bm1hcChsZCwgZGZuLCAxLCAmZmx1c2hfZmxhZ3MpOw0KPiAgICAgICAgICBl
-bHNlIGlmICggIShraW5kICYgTUFQS0lORF9XUklURSkgKQ0KPiAtICAgICAgICAgICAgZXJyID0g
-aW9tbXVfbGVnYWN5X21hcChsZCwgX2RmbihtZm5feChvcC0+bWZuKSksIG9wLT5tZm4sIDEsDQo+
-IC0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIElPTU1VRl9yZWFkYWJsZSk7DQo+
-ICsgICAgICAgICAgICBlcnIgPSBpb21tdV9tYXAobGQsIGRmbiwgb3AtPm1mbiwgMSwgSU9NTVVG
-X3JlYWRhYmxlLA0KPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICZmbHVzaF9mbGFncyk7
-DQo+IA0KPiAgICAgICAgICBkb3VibGVfZ3RfdW5sb2NrKGxndCwgcmd0KTsNCj4gDQo+ICsgICAg
-ICAgIGlmICggIWVyciApDQo+ICsgICAgICAgICAgICBlcnIgPSBpb21tdV9pb3RsYl9mbHVzaChs
-ZCwgZGZuLCAxLCBmbHVzaF9mbGFncyk7DQo+ICAgICAgICAgIGlmICggZXJyICkNCj4gICAgICAg
-ICAgICAgIHJjID0gR05UU1RfZ2VuZXJhbF9lcnJvcjsNCj4gICAgICB9DQo+IGRpZmYgLS1naXQg
-YS94ZW4vY29tbW9uL21lbW9yeS5jIGIveGVuL2NvbW1vbi9tZW1vcnkuYw0KPiBpbmRleCA3MTQw
-NzdjMWU1Li5mZWRiZDkwMTllIDEwMDY0NA0KPiAtLS0gYS94ZW4vY29tbW9uL21lbW9yeS5jDQo+
-ICsrKyBiL3hlbi9jb21tb24vbWVtb3J5LmMNCj4gQEAgLTgyNCw4ICs4MjQsNyBAQCBpbnQgeGVu
-bWVtX2FkZF90b19waHlzbWFwKHN0cnVjdCBkb21haW4gKmQsDQo+IHN0cnVjdCB4ZW5fYWRkX3Rv
-X3BoeXNtYXAgKnhhdHAsDQo+ICAgICAgeGF0cC0+Z3BmbiArPSBzdGFydDsNCj4gICAgICB4YXRw
-LT5zaXplIC09IHN0YXJ0Ow0KPiANCj4gLSAgICBpZiAoIGlzX2lvbW11X2VuYWJsZWQoZCkgKQ0K
-PiAtICAgICAgIHRoaXNfY3B1KGlvbW11X2RvbnRfZmx1c2hfaW90bGIpID0gMTsNCj4gKyAgICB0
-aGlzX2NwdShpb21tdV9kb250X2ZsdXNoX2lvdGxiKSA9IHRydWU7DQo+IA0KPiAgICAgIHdoaWxl
-ICggeGF0cC0+c2l6ZSA+IGRvbmUgKQ0KPiAgICAgIHsNCj4gQEAgLTg0NSwxMiArODQ0LDEyIEBA
-IGludCB4ZW5tZW1fYWRkX3RvX3BoeXNtYXAoc3RydWN0IGRvbWFpbiAqZCwNCj4gc3RydWN0IHhl
-bl9hZGRfdG9fcGh5c21hcCAqeGF0cCwNCj4gICAgICAgICAgfQ0KPiAgICAgIH0NCj4gDQo+ICsg
-ICAgdGhpc19jcHUoaW9tbXVfZG9udF9mbHVzaF9pb3RsYikgPSBmYWxzZTsNCj4gKw0KPiAgICAg
-IGlmICggaXNfaW9tbXVfZW5hYmxlZChkKSApDQo+ICAgICAgew0KPiAgICAgICAgICBpbnQgcmV0
-Ow0KPiANCj4gLSAgICAgICAgdGhpc19jcHUoaW9tbXVfZG9udF9mbHVzaF9pb3RsYikgPSAwOw0K
-PiAtDQo+ICAgICAgICAgIHJldCA9IGlvbW11X2lvdGxiX2ZsdXNoKGQsIF9kZm4oeGF0cC0+aWR4
-IC0gZG9uZSksIGRvbmUsDQo+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIElPTU1V
-X0ZMVVNIRl9hZGRlZCB8IElPTU1VX0ZMVVNIRl9tb2RpZmllZCk7DQo+ICAgICAgICAgIGlmICgg
-dW5saWtlbHkocmV0KSAmJiByYyA+PSAwICkNCj4gZGlmZiAtLWdpdCBhL3hlbi9kcml2ZXJzL3Bh
-c3N0aHJvdWdoL2lvbW11LmMNCj4gYi94ZW4vZHJpdmVycy9wYXNzdGhyb3VnaC9pb21tdS5jDQo+
-IGluZGV4IDg3ZjlhODU3YmIuLmE5ZGE0ZDJiMDYgMTAwNjQ0DQo+IC0tLSBhL3hlbi9kcml2ZXJz
-L3Bhc3N0aHJvdWdoL2lvbW11LmMNCj4gKysrIGIveGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gvaW9t
-bXUuYw0KPiBAQCAtMjgyLDE4ICsyODIsNiBAQCBpbnQgaW9tbXVfbWFwKHN0cnVjdCBkb21haW4g
-KmQsIGRmbl90IGRmbiwgbWZuX3QNCj4gbWZuLA0KPiAgICAgIHJldHVybiByYzsNCj4gIH0NCj4g
-DQo+IC1pbnQgaW9tbXVfbGVnYWN5X21hcChzdHJ1Y3QgZG9tYWluICpkLCBkZm5fdCBkZm4sIG1m
-bl90IG1mbiwNCj4gLSAgICAgICAgICAgICAgICAgICAgIHVuc2lnbmVkIGxvbmcgcGFnZV9jb3Vu
-dCwgdW5zaWduZWQgaW50IGZsYWdzKQ0KPiAtew0KPiAtICAgIHVuc2lnbmVkIGludCBmbHVzaF9m
-bGFncyA9IDA7DQo+IC0gICAgaW50IHJjID0gaW9tbXVfbWFwKGQsIGRmbiwgbWZuLCBwYWdlX2Nv
-dW50LCBmbGFncywgJmZsdXNoX2ZsYWdzKTsNCj4gLQ0KPiAtICAgIGlmICggIXRoaXNfY3B1KGlv
-bW11X2RvbnRfZmx1c2hfaW90bGIpICYmICFyYyApDQo+IC0gICAgICAgIHJjID0gaW9tbXVfaW90
-bGJfZmx1c2goZCwgZGZuLCBwYWdlX2NvdW50LCBmbHVzaF9mbGFncyk7DQo+IC0NCj4gLSAgICBy
-ZXR1cm4gcmM7DQo+IC19DQo+IC0NCj4gIGludCBpb21tdV91bm1hcChzdHJ1Y3QgZG9tYWluICpk
-LCBkZm5fdCBkZm4sIHVuc2lnbmVkIGxvbmcgcGFnZV9jb3VudCwNCj4gICAgICAgICAgICAgICAg
-ICB1bnNpZ25lZCBpbnQgKmZsdXNoX2ZsYWdzKQ0KPiAgew0KPiBAQCAtMzM4LDE3ICszMjYsNiBA
-QCBpbnQgaW9tbXVfdW5tYXAoc3RydWN0IGRvbWFpbiAqZCwgZGZuX3QgZGZuLA0KPiB1bnNpZ25l
-ZCBsb25nIHBhZ2VfY291bnQsDQo+ICAgICAgcmV0dXJuIHJjOw0KPiAgfQ0KPiANCj4gLWludCBp
-b21tdV9sZWdhY3lfdW5tYXAoc3RydWN0IGRvbWFpbiAqZCwgZGZuX3QgZGZuLCB1bnNpZ25lZCBs
-b25nDQo+IHBhZ2VfY291bnQpDQo+IC17DQo+IC0gICAgdW5zaWduZWQgaW50IGZsdXNoX2ZsYWdz
-ID0gMDsNCj4gLSAgICBpbnQgcmMgPSBpb21tdV91bm1hcChkLCBkZm4sIHBhZ2VfY291bnQsICZm
-bHVzaF9mbGFncyk7DQo+IC0NCj4gLSAgICBpZiAoICF0aGlzX2NwdShpb21tdV9kb250X2ZsdXNo
-X2lvdGxiKSAmJiAhcmMgKQ0KPiAtICAgICAgICByYyA9IGlvbW11X2lvdGxiX2ZsdXNoKGQsIGRm
-biwgcGFnZV9jb3VudCwgZmx1c2hfZmxhZ3MpOw0KPiAtDQo+IC0gICAgcmV0dXJuIHJjOw0KPiAt
-fQ0KPiAtDQo+ICBpbnQgaW9tbXVfbG9va3VwX3BhZ2Uoc3RydWN0IGRvbWFpbiAqZCwgZGZuX3Qg
-ZGZuLCBtZm5fdCAqbWZuLA0KPiAgICAgICAgICAgICAgICAgICAgICAgIHVuc2lnbmVkIGludCAq
-ZmxhZ3MpDQo+ICB7DQo+IGRpZmYgLS1naXQgYS94ZW4vaW5jbHVkZS94ZW4vaW9tbXUuaCBiL3hl
-bi9pbmNsdWRlL3hlbi9pb21tdS5oDQo+IGluZGV4IDEzZjY4ZGM5M2QuLmEyZWVmZTg1ODIgMTAw
-NjQ0DQo+IC0tLSBhL3hlbi9pbmNsdWRlL3hlbi9pb21tdS5oDQo+ICsrKyBiL3hlbi9pbmNsdWRl
-L3hlbi9pb21tdS5oDQo+IEBAIC0xNTEsMTYgKzE1MSw4IEBAIGludCBfX211c3RfY2hlY2sgaW9t
-bXVfbWFwKHN0cnVjdCBkb21haW4gKmQsDQo+IGRmbl90IGRmbiwgbWZuX3QgbWZuLA0KPiAgaW50
-IF9fbXVzdF9jaGVjayBpb21tdV91bm1hcChzdHJ1Y3QgZG9tYWluICpkLCBkZm5fdCBkZm4sDQo+
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHVuc2lnbmVkIGxvbmcgcGFnZV9jb3VudCwN
-Cj4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdW5zaWduZWQgaW50ICpmbHVzaF9mbGFn
-cyk7DQo+IC0NCj4gLWludCBfX211c3RfY2hlY2sgaW9tbXVfbGVnYWN5X21hcChzdHJ1Y3QgZG9t
-YWluICpkLCBkZm5fdCBkZm4sIG1mbl90DQo+IG1mbiwNCj4gLSAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICB1bnNpZ25lZCBsb25nIHBhZ2VfY291bnQsDQo+IC0gICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgdW5zaWduZWQgaW50IGZsYWdzKTsNCj4gLWludCBfX211c3Rf
-Y2hlY2sgaW9tbXVfbGVnYWN5X3VubWFwKHN0cnVjdCBkb21haW4gKmQsIGRmbl90IGRmbiwNCj4g
-LSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHVuc2lnbmVkIGxvbmcgcGFnZV9j
-b3VudCk7DQo+IC0NCj4gIGludCBfX211c3RfY2hlY2sgaW9tbXVfbG9va3VwX3BhZ2Uoc3RydWN0
-IGRvbWFpbiAqZCwgZGZuX3QgZGZuLCBtZm5fdA0KPiAqbWZuLA0KPiAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICB1bnNpZ25lZCBpbnQgKmZsYWdzKTsNCj4gLQ0KPiAgaW50IF9f
-bXVzdF9jaGVjayBpb21tdV9pb3RsYl9mbHVzaChzdHJ1Y3QgZG9tYWluICpkLCBkZm5fdCBkZm4s
-DQo+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHVuc2lnbmVkIGxvbmcgcGFn
-ZV9jb3VudCwNCj4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdW5zaWduZWQg
-aW50IGZsdXNoX2ZsYWdzKTsNCj4gQEAgLTM2OSwxNSArMzYxLDEyIEBAIHZvaWQgaW9tbXVfZGV2
-X2lvdGxiX2ZsdXNoX3RpbWVvdXQoc3RydWN0DQo+IGRvbWFpbiAqZCwgc3RydWN0IHBjaV9kZXYg
-KnBkZXYpOw0KPiANCj4gIC8qDQo+ICAgKiBUaGUgcHVycG9zZSBvZiB0aGUgaW9tbXVfZG9udF9m
-bHVzaF9pb3RsYiBvcHRpb25hbCBjcHUgZmxhZyBpcyB0bw0KPiAtICogYXZvaWQgdW5lY2Vzc2Fy
-eSBpb3RsYl9mbHVzaCBpbiB0aGUgbG93IGxldmVsIElPTU1VIGNvZGUuDQo+IC0gKg0KPiAtICog
-aW9tbXVfbWFwX3BhZ2UvaW9tbXVfdW5tYXBfcGFnZSBtdXN0IGZsdXNoIHRoZSBpb3RsYiBidXQN
-Cj4gc29tZXRoaW1lcw0KPiAtICogdGhpcyBvcGVyYXRpb24gY2FuIGJlIHJlYWxseSBleHBlbnNp
-dmUuIFRoaXMgZmxhZyB3aWxsIGJlIHNldCBieSB0aGUNCj4gLSAqIGNhbGxlciB0byBub3RpZnkg
-dGhlIGxvdyBsZXZlbCBJT01NVSBjb2RlIHRvIGF2b2lkIHRoZSBpb3RsYiBmbHVzaGVzLg0KPiAt
-ICogaW9tbXVfaW90bGJfZmx1c2gvaW9tbXVfaW90bGJfZmx1c2hfYWxsIHdpbGwgYmUgZXhwbGlj
-aXRseSBjYWxsZWQgYnkNCj4gLSAqIHRoZSBjYWxsZXIuDQo+ICsgKiBhdm9pZCB1bm5lY2Vzc2Fy
-eSBJT01NVSBmbHVzaGluZyB3aGlsZSB1cGRhdGluZyB0aGUgUDJNLg0KPiArICogU2V0dGluZyB0
-aGUgdmFsdWUgdG8gdHJ1ZSB3aWxsIGNhdXNlIGlvbW11X2lvdGxiX2ZsdXNoKCkgdG8gcmV0dXJu
-IHdpdGhvdXQNCj4gKyAqIGFjdHVhbGx5IHBlcmZvcm1pbmcgYSBmbHVzaC4gQSBiYXRjaCBmbHVz
-aCBtdXN0IHRoZXJlZm9yZSBiZSBkb25lIGJ5IHRoZQ0KPiArICogY2FsbGluZyBjb2RlIGFmdGVy
-IHNldHRpbmcgdGhlIHZhbHVlIGJhY2sgdG8gZmFsc2UuDQo+ICAgKi8NCj4gLURFQ0xBUkVfUEVS
-X0NQVShib29sX3QsIGlvbW11X2RvbnRfZmx1c2hfaW90bGIpOw0KPiArREVDTEFSRV9QRVJfQ1BV
-KGJvb2wsIGlvbW11X2RvbnRfZmx1c2hfaW90bGIpOw0KPiANCj4gIGV4dGVybiBzdHJ1Y3Qgc3Bp
-bmxvY2sgaW9tbXVfcHRfY2xlYW51cF9sb2NrOw0KPiAgZXh0ZXJuIHN0cnVjdCBwYWdlX2xpc3Rf
-aGVhZCBpb21tdV9wdF9jbGVhbnVwX2xpc3Q7DQo+IC0tDQo+IDIuMjAuMQ0KDQo=
+On 9/16/20 8:25 PM, Eduardo Habkost wrote:
+> One of the goals of having less boilerplate on QOM declarations
+> is to avoid human error.  Requiring an extra argument that is
+> never used is an opportunity for mistakes.
+> 
+> Remove the unused argument from OBJECT_DECLARE_TYPE and
+> OBJECT_DECLARE_SIMPLE_TYPE.
+> 
+> Coccinelle patch used to convert all users of the macros:
+> 
+>   @@
+>   declarer name OBJECT_DECLARE_TYPE;
+>   identifier InstanceType, ClassType, lowercase, UPPERCASE;
+>   @@
+>    OBJECT_DECLARE_TYPE(InstanceType, ClassType,
+>   -                    lowercase,
+>                        UPPERCASE);
+> 
+>   @@
+>   declarer name OBJECT_DECLARE_SIMPLE_TYPE;
+>   identifier InstanceType, lowercase, UPPERCASE;
+>   @@
+>    OBJECT_DECLARE_SIMPLE_TYPE(InstanceType,
+>   -                    lowercase,
+>                        UPPERCASE);
+> 
+> Signed-off-by: Eduardo Habkost <ehabkost@redhat.com>
+
+For the ppc part,
+
+Reviewed-by: Cédric Le Goater <clg@kaod.org>
+
+
+
+> ---
+> Cc: "Marc-André Lureau" <marcandre.lureau@redhat.com>
+> Cc: Gerd Hoffmann <kraxel@redhat.com>
+> Cc: "Michael S. Tsirkin" <mst@redhat.com>
+> Cc: "Daniel P. Berrangé" <berrange@redhat.com>
+> Cc: Peter Maydell <peter.maydell@linaro.org>
+> Cc: Corey Minyard <cminyard@mvista.com>
+> Cc: "Cédric Le Goater" <clg@kaod.org>
+> Cc: David Gibson <david@gibson.dropbear.id.au>
+> Cc: Cornelia Huck <cohuck@redhat.com>
+> Cc: Thomas Huth <thuth@redhat.com>
+> Cc: Halil Pasic <pasic@linux.ibm.com>
+> Cc: Christian Borntraeger <borntraeger@de.ibm.com>
+> Cc: "Philippe Mathieu-Daudé" <f4bug@amsat.org>
+> Cc: Alistair Francis <alistair@alistair23.me>
+> Cc: David Hildenbrand <david@redhat.com>
+> Cc: Laurent Vivier <lvivier@redhat.com>
+> Cc: Amit Shah <amit@kernel.org>
+> Cc: Stefano Stabellini <sstabellini@kernel.org>
+> Cc: Anthony Perard <anthony.perard@citrix.com>
+> Cc: Paul Durrant <paul@xen.org>
+> Cc: Paolo Bonzini <pbonzini@redhat.com>
+> Cc: Eduardo Habkost <ehabkost@redhat.com>
+> Cc: Fam Zheng <fam@euphon.net>
+> Cc: "Gonglei (Arei)" <arei.gonglei@huawei.com>
+> Cc: Igor Mammedov <imammedo@redhat.com>
+> Cc: Stefan Berger <stefanb@linux.ibm.com>
+> Cc: Richard Henderson <rth@twiddle.net>
+> Cc: Michael Rolnik <mrolnik@gmail.com>
+> Cc: Sarah Harris <S.E.Harris@kent.ac.uk>
+> Cc: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
+> Cc: Michael Walle <michael@walle.cc>
+> Cc: Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>
+> Cc: Aurelien Jarno <aurelien@aurel32.net>
+> Cc: Jiaxun Yang <jiaxun.yang@flygoat.com>
+> Cc: Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>
+> Cc: Anthony Green <green@moxielogic.com>
+> Cc: Chris Wulff <crwulff@gmail.com>
+> Cc: Marek Vasut <marex@denx.de>
+> Cc: Stafford Horne <shorne@gmail.com>
+> Cc: Palmer Dabbelt <palmer@dabbelt.com>
+> Cc: Sagar Karandikar <sagark@eecs.berkeley.edu>
+> Cc: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+> Cc: Yoshinori Sato <ysato@users.sourceforge.jp>
+> Cc: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
+> Cc: Artyom Tarasenko <atar4qemu@gmail.com>
+> Cc: Guan Xuetao <gxt@mprc.pku.edu.cn>
+> Cc: Max Filippov <jcmvbkbc@gmail.com>
+> Cc: qemu-devel@nongnu.org
+> Cc: qemu-arm@nongnu.org
+> Cc: qemu-ppc@nongnu.org
+> Cc: qemu-s390x@nongnu.org
+> Cc: qemu-block@nongnu.org
+> Cc: xen-devel@lists.xenproject.org
+> Cc: qemu-riscv@nongnu.org
+> ---
+>  hw/audio/intel-hda.h                | 2 +-
+>  hw/display/virtio-vga.h             | 2 +-
+>  include/authz/base.h                | 2 +-
+>  include/authz/list.h                | 2 +-
+>  include/authz/listfile.h            | 2 +-
+>  include/authz/pamacct.h             | 2 +-
+>  include/authz/simple.h              | 2 +-
+>  include/crypto/secret_common.h      | 2 +-
+>  include/crypto/secret_keyring.h     | 2 +-
+>  include/hw/arm/armsse.h             | 2 +-
+>  include/hw/hyperv/vmbus.h           | 2 +-
+>  include/hw/i2c/i2c.h                | 2 +-
+>  include/hw/i2c/smbus_slave.h        | 2 +-
+>  include/hw/ipack/ipack.h            | 2 +-
+>  include/hw/ipmi/ipmi.h              | 2 +-
+>  include/hw/mem/pc-dimm.h            | 2 +-
+>  include/hw/ppc/pnv.h                | 2 +-
+>  include/hw/ppc/pnv_core.h           | 2 +-
+>  include/hw/ppc/pnv_homer.h          | 2 +-
+>  include/hw/ppc/pnv_occ.h            | 2 +-
+>  include/hw/ppc/pnv_psi.h            | 2 +-
+>  include/hw/ppc/pnv_xive.h           | 2 +-
+>  include/hw/ppc/spapr_cpu_core.h     | 2 +-
+>  include/hw/ppc/spapr_vio.h          | 2 +-
+>  include/hw/ppc/xics.h               | 2 +-
+>  include/hw/ppc/xive.h               | 2 +-
+>  include/hw/s390x/event-facility.h   | 2 +-
+>  include/hw/s390x/s390_flic.h        | 2 +-
+>  include/hw/s390x/sclp.h             | 2 +-
+>  include/hw/sd/sd.h                  | 2 +-
+>  include/hw/ssi/ssi.h                | 2 +-
+>  include/hw/sysbus.h                 | 2 +-
+>  include/hw/virtio/virtio-gpu.h      | 2 +-
+>  include/hw/virtio/virtio-input.h    | 2 +-
+>  include/hw/virtio/virtio-mem.h      | 2 +-
+>  include/hw/virtio/virtio-pmem.h     | 2 +-
+>  include/hw/virtio/virtio-serial.h   | 2 +-
+>  include/hw/xen/xen-bus.h            | 2 +-
+>  include/io/channel.h                | 2 +-
+>  include/io/dns-resolver.h           | 2 +-
+>  include/io/net-listener.h           | 2 +-
+>  include/qom/object.h                | 6 ++----
+>  include/scsi/pr-manager.h           | 2 +-
+>  include/sysemu/cryptodev.h          | 2 +-
+>  include/sysemu/hostmem.h            | 2 +-
+>  include/sysemu/rng.h                | 2 +-
+>  include/sysemu/tpm_backend.h        | 2 +-
+>  include/sysemu/vhost-user-backend.h | 2 +-
+>  target/alpha/cpu-qom.h              | 2 +-
+>  target/arm/cpu-qom.h                | 2 +-
+>  target/avr/cpu-qom.h                | 2 +-
+>  target/cris/cpu-qom.h               | 2 +-
+>  target/hppa/cpu-qom.h               | 2 +-
+>  target/i386/cpu-qom.h               | 2 +-
+>  target/lm32/cpu-qom.h               | 2 +-
+>  target/m68k/cpu-qom.h               | 2 +-
+>  target/microblaze/cpu-qom.h         | 2 +-
+>  target/mips/cpu-qom.h               | 2 +-
+>  target/moxie/cpu.h                  | 2 +-
+>  target/nios2/cpu.h                  | 2 +-
+>  target/openrisc/cpu.h               | 2 +-
+>  target/ppc/cpu-qom.h                | 2 +-
+>  target/riscv/cpu.h                  | 2 +-
+>  target/rx/cpu-qom.h                 | 2 +-
+>  target/s390x/cpu-qom.h              | 2 +-
+>  target/sh4/cpu-qom.h                | 2 +-
+>  target/sparc/cpu-qom.h              | 2 +-
+>  target/tilegx/cpu.h                 | 2 +-
+>  target/tricore/cpu-qom.h            | 2 +-
+>  target/unicore32/cpu-qom.h          | 2 +-
+>  target/xtensa/cpu-qom.h             | 2 +-
+>  backends/dbus-vmstate.c             | 2 +-
+>  ui/input-barrier.c                  | 2 +-
+>  ui/input-linux.c                    | 2 +-
+>  74 files changed, 75 insertions(+), 77 deletions(-)
+> 
+> diff --git a/hw/audio/intel-hda.h b/hw/audio/intel-hda.h
+> index f5cce18fa3..e2372abbdc 100644
+> --- a/hw/audio/intel-hda.h
+> +++ b/hw/audio/intel-hda.h
+> @@ -9,7 +9,7 @@
+>  
+>  #define TYPE_HDA_CODEC_DEVICE "hda-codec"
+>  OBJECT_DECLARE_TYPE(HDACodecDevice, HDACodecDeviceClass,
+> -                    hda_codec_device, HDA_CODEC_DEVICE)
+> +                    HDA_CODEC_DEVICE)
+>  
+>  #define TYPE_HDA_BUS "HDA"
+>  typedef struct HDACodecBus HDACodecBus;
+> diff --git a/hw/display/virtio-vga.h b/hw/display/virtio-vga.h
+> index 5c5671c9c1..977ad5edc2 100644
+> --- a/hw/display/virtio-vga.h
+> +++ b/hw/display/virtio-vga.h
+> @@ -10,7 +10,7 @@
+>   */
+>  #define TYPE_VIRTIO_VGA_BASE "virtio-vga-base"
+>  OBJECT_DECLARE_TYPE(VirtIOVGABase, VirtIOVGABaseClass,
+> -                    virtio_vga_base, VIRTIO_VGA_BASE)
+> +                    VIRTIO_VGA_BASE)
+>  
+>  struct VirtIOVGABase {
+>      VirtIOPCIProxy parent_obj;
+> diff --git a/include/authz/base.h b/include/authz/base.h
+> index 06b5e29f6f..eca170ee1a 100644
+> --- a/include/authz/base.h
+> +++ b/include/authz/base.h
+> @@ -28,7 +28,7 @@
+>  #define TYPE_QAUTHZ "authz"
+>  
+>  OBJECT_DECLARE_TYPE(QAuthZ, QAuthZClass,
+> -                    qauthz, QAUTHZ)
+> +                    QAUTHZ)
+>  
+>  
+>  /**
+> diff --git a/include/authz/list.h b/include/authz/list.h
+> index c5eda0f1bf..f73bc5c50a 100644
+> --- a/include/authz/list.h
+> +++ b/include/authz/list.h
+> @@ -27,7 +27,7 @@
+>  
+>  #define TYPE_QAUTHZ_LIST "authz-list"
+>  
+> -OBJECT_DECLARE_SIMPLE_TYPE(QAuthZList, qauthz_list,
+> +OBJECT_DECLARE_SIMPLE_TYPE(QAuthZList,
+>                             QAUTHZ_LIST)
+>  
+>  
+> diff --git a/include/authz/listfile.h b/include/authz/listfile.h
+> index 83d78cfa50..51824f3fb2 100644
+> --- a/include/authz/listfile.h
+> +++ b/include/authz/listfile.h
+> @@ -27,7 +27,7 @@
+>  
+>  #define TYPE_QAUTHZ_LIST_FILE "authz-list-file"
+>  
+> -OBJECT_DECLARE_SIMPLE_TYPE(QAuthZListFile, qauthz_list_file,
+> +OBJECT_DECLARE_SIMPLE_TYPE(QAuthZListFile,
+>                             QAUTHZ_LIST_FILE)
+>  
+>  
+> diff --git a/include/authz/pamacct.h b/include/authz/pamacct.h
+> index 18087cee20..d05c18a3a4 100644
+> --- a/include/authz/pamacct.h
+> +++ b/include/authz/pamacct.h
+> @@ -27,7 +27,7 @@
+>  
+>  #define TYPE_QAUTHZ_PAM "authz-pam"
+>  
+> -OBJECT_DECLARE_SIMPLE_TYPE(QAuthZPAM, qauthz_pam,
+> +OBJECT_DECLARE_SIMPLE_TYPE(QAuthZPAM,
+>                             QAUTHZ_PAM)
+>  
+>  
+> diff --git a/include/authz/simple.h b/include/authz/simple.h
+> index d3ed05b36f..9f5b979e13 100644
+> --- a/include/authz/simple.h
+> +++ b/include/authz/simple.h
+> @@ -26,7 +26,7 @@
+>  
+>  #define TYPE_QAUTHZ_SIMPLE "authz-simple"
+>  
+> -OBJECT_DECLARE_SIMPLE_TYPE(QAuthZSimple, qauthz_simple,
+> +OBJECT_DECLARE_SIMPLE_TYPE(QAuthZSimple,
+>                             QAUTHZ_SIMPLE)
+>  
+>  
+> diff --git a/include/crypto/secret_common.h b/include/crypto/secret_common.h
+> index daf00c3b2a..42c7ff7af6 100644
+> --- a/include/crypto/secret_common.h
+> +++ b/include/crypto/secret_common.h
+> @@ -26,7 +26,7 @@
+>  
+>  #define TYPE_QCRYPTO_SECRET_COMMON "secret_common"
+>  OBJECT_DECLARE_TYPE(QCryptoSecretCommon, QCryptoSecretCommonClass,
+> -                    qcrypto_secret_common, QCRYPTO_SECRET_COMMON)
+> +                    QCRYPTO_SECRET_COMMON)
+>  
+>  
+>  struct QCryptoSecretCommon {
+> diff --git a/include/crypto/secret_keyring.h b/include/crypto/secret_keyring.h
+> index 803f3fc28b..3758852cb8 100644
+> --- a/include/crypto/secret_keyring.h
+> +++ b/include/crypto/secret_keyring.h
+> @@ -26,7 +26,7 @@
+>  #include "crypto/secret_common.h"
+>  
+>  #define TYPE_QCRYPTO_SECRET_KEYRING "secret_keyring"
+> -OBJECT_DECLARE_SIMPLE_TYPE(QCryptoSecretKeyring, qcrypto_secret_keyring,
+> +OBJECT_DECLARE_SIMPLE_TYPE(QCryptoSecretKeyring,
+>                             QCRYPTO_SECRET_KEYRING)
+>  
+>  
+> diff --git a/include/hw/arm/armsse.h b/include/hw/arm/armsse.h
+> index b844ef6bc0..77f86771c3 100644
+> --- a/include/hw/arm/armsse.h
+> +++ b/include/hw/arm/armsse.h
+> @@ -109,7 +109,7 @@
+>  
+>  #define TYPE_ARM_SSE "arm-sse"
+>  OBJECT_DECLARE_TYPE(ARMSSE, ARMSSEClass,
+> -                    arm_sse, ARM_SSE)
+> +                    ARM_SSE)
+>  
+>  /*
+>   * These type names are for specific IoTKit subsystems; other than
+> diff --git a/include/hw/hyperv/vmbus.h b/include/hw/hyperv/vmbus.h
+> index 00ad8798c1..6e9d1c16be 100644
+> --- a/include/hw/hyperv/vmbus.h
+> +++ b/include/hw/hyperv/vmbus.h
+> @@ -21,7 +21,7 @@
+>  #define TYPE_VMBUS_DEVICE "vmbus-dev"
+>  
+>  OBJECT_DECLARE_TYPE(VMBusDevice, VMBusDeviceClass,
+> -                    vmbus_device, VMBUS_DEVICE)
+> +                    VMBUS_DEVICE)
+>  
+>  #define TYPE_VMBUS "vmbus"
+>  typedef struct VMBus VMBus;
+> diff --git a/include/hw/i2c/i2c.h b/include/hw/i2c/i2c.h
+> index 5b8eef62c6..17e57436ce 100644
+> --- a/include/hw/i2c/i2c.h
+> +++ b/include/hw/i2c/i2c.h
+> @@ -19,7 +19,7 @@ enum i2c_event {
+>  
+>  #define TYPE_I2C_SLAVE "i2c-slave"
+>  OBJECT_DECLARE_TYPE(I2CSlave, I2CSlaveClass,
+> -                    i2c_slave, I2C_SLAVE)
+> +                    I2C_SLAVE)
+>  
+>  struct I2CSlaveClass {
+>      DeviceClass parent_class;
+> diff --git a/include/hw/i2c/smbus_slave.h b/include/hw/i2c/smbus_slave.h
+> index cb9cb372f9..86bfe0a79e 100644
+> --- a/include/hw/i2c/smbus_slave.h
+> +++ b/include/hw/i2c/smbus_slave.h
+> @@ -30,7 +30,7 @@
+>  
+>  #define TYPE_SMBUS_DEVICE "smbus-device"
+>  OBJECT_DECLARE_TYPE(SMBusDevice, SMBusDeviceClass,
+> -                    smbus_device, SMBUS_DEVICE)
+> +                    SMBUS_DEVICE)
+>  
+>  
+>  struct SMBusDeviceClass {
+> diff --git a/include/hw/ipack/ipack.h b/include/hw/ipack/ipack.h
+> index a59a487853..58c611af25 100644
+> --- a/include/hw/ipack/ipack.h
+> +++ b/include/hw/ipack/ipack.h
+> @@ -33,7 +33,7 @@ struct IPackBus {
+>  
+>  #define TYPE_IPACK_DEVICE "ipack-device"
+>  OBJECT_DECLARE_TYPE(IPackDevice, IPackDeviceClass,
+> -                    ipack_device, IPACK_DEVICE)
+> +                    IPACK_DEVICE)
+>  
+>  struct IPackDeviceClass {
+>      /*< private >*/
+> diff --git a/include/hw/ipmi/ipmi.h b/include/hw/ipmi/ipmi.h
+> index 3fa5a4abd0..5290dab1d6 100644
+> --- a/include/hw/ipmi/ipmi.h
+> +++ b/include/hw/ipmi/ipmi.h
+> @@ -177,7 +177,7 @@ struct IPMIInterfaceClass {
+>   */
+>  #define TYPE_IPMI_BMC "ipmi-bmc"
+>  OBJECT_DECLARE_TYPE(IPMIBmc, IPMIBmcClass,
+> -                    ipmi_bmc, IPMI_BMC)
+> +                    IPMI_BMC)
+>  
+>  struct IPMIBmc {
+>      DeviceState parent;
+> diff --git a/include/hw/mem/pc-dimm.h b/include/hw/mem/pc-dimm.h
+> index 1d570defc9..aec9527fdd 100644
+> --- a/include/hw/mem/pc-dimm.h
+> +++ b/include/hw/mem/pc-dimm.h
+> @@ -22,7 +22,7 @@
+>  
+>  #define TYPE_PC_DIMM "pc-dimm"
+>  OBJECT_DECLARE_TYPE(PCDIMMDevice, PCDIMMDeviceClass,
+> -                    pc_dimm, PC_DIMM)
+> +                    PC_DIMM)
+>  
+>  #define PC_DIMM_ADDR_PROP "addr"
+>  #define PC_DIMM_SLOT_PROP "slot"
+> diff --git a/include/hw/ppc/pnv.h b/include/hw/ppc/pnv.h
+> index b4b2b24d80..dd2535ab96 100644
+> --- a/include/hw/ppc/pnv.h
+> +++ b/include/hw/ppc/pnv.h
+> @@ -36,7 +36,7 @@
+>  
+>  #define TYPE_PNV_CHIP "pnv-chip"
+>  OBJECT_DECLARE_TYPE(PnvChip, PnvChipClass,
+> -                    pnv_chip, PNV_CHIP)
+> +                    PNV_CHIP)
+>  
+>  struct PnvChip {
+>      /*< private >*/
+> diff --git a/include/hw/ppc/pnv_core.h b/include/hw/ppc/pnv_core.h
+> index 5cb22c2fa9..fc11edee28 100644
+> --- a/include/hw/ppc/pnv_core.h
+> +++ b/include/hw/ppc/pnv_core.h
+> @@ -26,7 +26,7 @@
+>  
+>  #define TYPE_PNV_CORE "powernv-cpu-core"
+>  OBJECT_DECLARE_TYPE(PnvCore, PnvCoreClass,
+> -                    pnv_core, PNV_CORE)
+> +                    PNV_CORE)
+>  
+>  typedef struct PnvChip PnvChip;
+>  
+> diff --git a/include/hw/ppc/pnv_homer.h b/include/hw/ppc/pnv_homer.h
+> index 0978812713..7d29db8b47 100644
+> --- a/include/hw/ppc/pnv_homer.h
+> +++ b/include/hw/ppc/pnv_homer.h
+> @@ -25,7 +25,7 @@
+>  
+>  #define TYPE_PNV_HOMER "pnv-homer"
+>  OBJECT_DECLARE_TYPE(PnvHomer, PnvHomerClass,
+> -                    pnv_homer, PNV_HOMER)
+> +                    PNV_HOMER)
+>  #define TYPE_PNV8_HOMER TYPE_PNV_HOMER "-POWER8"
+>  DECLARE_INSTANCE_CHECKER(PnvHomer, PNV8_HOMER,
+>                           TYPE_PNV8_HOMER)
+> diff --git a/include/hw/ppc/pnv_occ.h b/include/hw/ppc/pnv_occ.h
+> index b79e3440be..6219f588fd 100644
+> --- a/include/hw/ppc/pnv_occ.h
+> +++ b/include/hw/ppc/pnv_occ.h
+> @@ -25,7 +25,7 @@
+>  
+>  #define TYPE_PNV_OCC "pnv-occ"
+>  OBJECT_DECLARE_TYPE(PnvOCC, PnvOCCClass,
+> -                    pnv_occ, PNV_OCC)
+> +                    PNV_OCC)
+>  #define TYPE_PNV8_OCC TYPE_PNV_OCC "-POWER8"
+>  DECLARE_INSTANCE_CHECKER(PnvOCC, PNV8_OCC,
+>                           TYPE_PNV8_OCC)
+> diff --git a/include/hw/ppc/pnv_psi.h b/include/hw/ppc/pnv_psi.h
+> index 0034db44c3..a1fe25b3eb 100644
+> --- a/include/hw/ppc/pnv_psi.h
+> +++ b/include/hw/ppc/pnv_psi.h
+> @@ -27,7 +27,7 @@
+>  
+>  #define TYPE_PNV_PSI "pnv-psi"
+>  OBJECT_DECLARE_TYPE(PnvPsi, PnvPsiClass,
+> -                    pnv_psi, PNV_PSI)
+> +                    PNV_PSI)
+>  
+>  #define PSIHB_XSCOM_MAX         0x20
+>  
+> diff --git a/include/hw/ppc/pnv_xive.h b/include/hw/ppc/pnv_xive.h
+> index 29d5debd1c..7928e27963 100644
+> --- a/include/hw/ppc/pnv_xive.h
+> +++ b/include/hw/ppc/pnv_xive.h
+> @@ -17,7 +17,7 @@ struct PnvChip;
+>  
+>  #define TYPE_PNV_XIVE "pnv-xive"
+>  OBJECT_DECLARE_TYPE(PnvXive, PnvXiveClass,
+> -                    pnv_xive, PNV_XIVE)
+> +                    PNV_XIVE)
+>  
+>  #define XIVE_BLOCK_MAX      16
+>  
+> diff --git a/include/hw/ppc/spapr_cpu_core.h b/include/hw/ppc/spapr_cpu_core.h
+> index 4022917168..dab3dfc76c 100644
+> --- a/include/hw/ppc/spapr_cpu_core.h
+> +++ b/include/hw/ppc/spapr_cpu_core.h
+> @@ -17,7 +17,7 @@
+>  
+>  #define TYPE_SPAPR_CPU_CORE "spapr-cpu-core"
+>  OBJECT_DECLARE_TYPE(SpaprCpuCore, SpaprCpuCoreClass,
+> -                    spapr_cpu_core, SPAPR_CPU_CORE)
+> +                    SPAPR_CPU_CORE)
+>  
+>  #define SPAPR_CPU_CORE_TYPE_NAME(model) model "-" TYPE_SPAPR_CPU_CORE
+>  
+> diff --git a/include/hw/ppc/spapr_vio.h b/include/hw/ppc/spapr_vio.h
+> index 6c40da72ff..aae03ea6ab 100644
+> --- a/include/hw/ppc/spapr_vio.h
+> +++ b/include/hw/ppc/spapr_vio.h
+> @@ -29,7 +29,7 @@
+>  
+>  #define TYPE_VIO_SPAPR_DEVICE "vio-spapr-device"
+>  OBJECT_DECLARE_TYPE(SpaprVioDevice, SpaprVioDeviceClass,
+> -                    vio_spapr_device, VIO_SPAPR_DEVICE)
+> +                    VIO_SPAPR_DEVICE)
+>  
+>  #define TYPE_SPAPR_VIO_BUS "spapr-vio-bus"
+>  typedef struct SpaprVioBus SpaprVioBus;
+> diff --git a/include/hw/ppc/xics.h b/include/hw/ppc/xics.h
+> index c5a3cdcadc..00b80b08c2 100644
+> --- a/include/hw/ppc/xics.h
+> +++ b/include/hw/ppc/xics.h
+> @@ -49,7 +49,7 @@ typedef struct XICSFabric XICSFabric;
+>  
+>  #define TYPE_ICP "icp"
+>  OBJECT_DECLARE_TYPE(ICPState, ICPStateClass,
+> -                    icp, ICP)
+> +                    ICP)
+>  
+>  #define TYPE_PNV_ICP "pnv-icp"
+>  DECLARE_INSTANCE_CHECKER(PnvICPState, PNV_ICP,
+> diff --git a/include/hw/ppc/xive.h b/include/hw/ppc/xive.h
+> index 482fafccfd..26771bb2b3 100644
+> --- a/include/hw/ppc/xive.h
+> +++ b/include/hw/ppc/xive.h
+> @@ -348,7 +348,7 @@ struct XiveRouter {
+>  
+>  #define TYPE_XIVE_ROUTER "xive-router"
+>  OBJECT_DECLARE_TYPE(XiveRouter, XiveRouterClass,
+> -                    xive_router, XIVE_ROUTER)
+> +                    XIVE_ROUTER)
+>  
+>  struct XiveRouterClass {
+>      SysBusDeviceClass parent;
+> diff --git a/include/hw/s390x/event-facility.h b/include/hw/s390x/event-facility.h
+> index 051c1c6576..3ffd575d8f 100644
+> --- a/include/hw/s390x/event-facility.h
+> +++ b/include/hw/s390x/event-facility.h
+> @@ -43,7 +43,7 @@
+>  
+>  #define TYPE_SCLP_EVENT "s390-sclp-event-type"
+>  OBJECT_DECLARE_TYPE(SCLPEvent, SCLPEventClass,
+> -                    sclp_event, SCLP_EVENT)
+> +                    SCLP_EVENT)
+>  
+>  #define TYPE_SCLP_CPU_HOTPLUG "sclp-cpu-hotplug"
+>  #define TYPE_SCLP_QUIESCE "sclpquiesce"
+> diff --git a/include/hw/s390x/s390_flic.h b/include/hw/s390x/s390_flic.h
+> index 4b718c8ebf..648ae793a1 100644
+> --- a/include/hw/s390x/s390_flic.h
+> +++ b/include/hw/s390x/s390_flic.h
+> @@ -40,7 +40,7 @@ extern const VMStateDescription vmstate_adapter_routes;
+>  
+>  #define TYPE_S390_FLIC_COMMON "s390-flic"
+>  OBJECT_DECLARE_TYPE(S390FLICState, S390FLICStateClass,
+> -                    s390_flic_common, S390_FLIC_COMMON)
+> +                    S390_FLIC_COMMON)
+>  
+>  struct S390FLICState {
+>      SysBusDevice parent_obj;
+> diff --git a/include/hw/s390x/sclp.h b/include/hw/s390x/sclp.h
+> index e9f0f7e67c..cd730772f9 100644
+> --- a/include/hw/s390x/sclp.h
+> +++ b/include/hw/s390x/sclp.h
+> @@ -183,7 +183,7 @@ typedef struct SCCB {
+>  
+>  #define TYPE_SCLP "sclp"
+>  OBJECT_DECLARE_TYPE(SCLPDevice, SCLPDeviceClass,
+> -                    sclp, SCLP)
+> +                    SCLP)
+>  
+>  struct SCLPEventFacility;
+>  
+> diff --git a/include/hw/sd/sd.h b/include/hw/sd/sd.h
+> index 54f97a07cd..8dd4c363f5 100644
+> --- a/include/hw/sd/sd.h
+> +++ b/include/hw/sd/sd.h
+> @@ -130,7 +130,7 @@ struct SDCardClass {
+>  
+>  #define TYPE_SD_BUS "sd-bus"
+>  OBJECT_DECLARE_TYPE(SDBus, SDBusClass,
+> -                    sd_bus, SD_BUS)
+> +                    SD_BUS)
+>  
+>  struct SDBus {
+>      BusState qbus;
+> diff --git a/include/hw/ssi/ssi.h b/include/hw/ssi/ssi.h
+> index 4fe1d85136..fe3028c39d 100644
+> --- a/include/hw/ssi/ssi.h
+> +++ b/include/hw/ssi/ssi.h
+> @@ -18,7 +18,7 @@ typedef enum SSICSMode SSICSMode;
+>  
+>  #define TYPE_SSI_SLAVE "ssi-slave"
+>  OBJECT_DECLARE_TYPE(SSISlave, SSISlaveClass,
+> -                    ssi_slave, SSI_SLAVE)
+> +                    SSI_SLAVE)
+>  
+>  #define SSI_GPIO_CS "ssi-gpio-cs"
+>  
+> diff --git a/include/hw/sysbus.h b/include/hw/sysbus.h
+> index 28a9b0f634..3564b7b6a2 100644
+> --- a/include/hw/sysbus.h
+> +++ b/include/hw/sysbus.h
+> @@ -17,7 +17,7 @@ DECLARE_INSTANCE_CHECKER(BusState, SYSTEM_BUS,
+>  
+>  #define TYPE_SYS_BUS_DEVICE "sys-bus-device"
+>  OBJECT_DECLARE_TYPE(SysBusDevice, SysBusDeviceClass,
+> -                    sys_bus_device, SYS_BUS_DEVICE)
+> +                    SYS_BUS_DEVICE)
+>  
+>  /**
+>   * SysBusDeviceClass:
+> diff --git a/include/hw/virtio/virtio-gpu.h b/include/hw/virtio/virtio-gpu.h
+> index 6b45b4799a..7ef405975a 100644
+> --- a/include/hw/virtio/virtio-gpu.h
+> +++ b/include/hw/virtio/virtio-gpu.h
+> @@ -26,7 +26,7 @@
+>  
+>  #define TYPE_VIRTIO_GPU_BASE "virtio-gpu-base"
+>  OBJECT_DECLARE_TYPE(VirtIOGPUBase, VirtIOGPUBaseClass,
+> -                    virtio_gpu_base, VIRTIO_GPU_BASE)
+> +                    VIRTIO_GPU_BASE)
+>  
+>  #define TYPE_VIRTIO_GPU "virtio-gpu-device"
+>  typedef struct VirtIOGPU VirtIOGPU;
+> diff --git a/include/hw/virtio/virtio-input.h b/include/hw/virtio/virtio-input.h
+> index 5eb9e7745e..91df34b534 100644
+> --- a/include/hw/virtio/virtio-input.h
+> +++ b/include/hw/virtio/virtio-input.h
+> @@ -20,7 +20,7 @@ typedef struct virtio_input_event virtio_input_event;
+>  
+>  #define TYPE_VIRTIO_INPUT "virtio-input-device"
+>  OBJECT_DECLARE_TYPE(VirtIOInput, VirtIOInputClass,
+> -                    virtio_input, VIRTIO_INPUT)
+> +                    VIRTIO_INPUT)
+>  #define VIRTIO_INPUT_GET_PARENT_CLASS(obj) \
+>          OBJECT_GET_PARENT_CLASS(obj, TYPE_VIRTIO_INPUT)
+>  
+> diff --git a/include/hw/virtio/virtio-mem.h b/include/hw/virtio/virtio-mem.h
+> index dfc72e14b1..4eeb82d5dd 100644
+> --- a/include/hw/virtio/virtio-mem.h
+> +++ b/include/hw/virtio/virtio-mem.h
+> @@ -22,7 +22,7 @@
+>  #define TYPE_VIRTIO_MEM "virtio-mem"
+>  
+>  OBJECT_DECLARE_TYPE(VirtIOMEM, VirtIOMEMClass,
+> -                    virtio_mem, VIRTIO_MEM)
+> +                    VIRTIO_MEM)
+>  
+>  #define VIRTIO_MEM_MEMDEV_PROP "memdev"
+>  #define VIRTIO_MEM_NODE_PROP "node"
+> diff --git a/include/hw/virtio/virtio-pmem.h b/include/hw/virtio/virtio-pmem.h
+> index 56df9a03ce..66b590821e 100644
+> --- a/include/hw/virtio/virtio-pmem.h
+> +++ b/include/hw/virtio/virtio-pmem.h
+> @@ -21,7 +21,7 @@
+>  #define TYPE_VIRTIO_PMEM "virtio-pmem"
+>  
+>  OBJECT_DECLARE_TYPE(VirtIOPMEM, VirtIOPMEMClass,
+> -                    virtio_pmem, VIRTIO_PMEM)
+> +                    VIRTIO_PMEM)
+>  
+>  #define VIRTIO_PMEM_ADDR_PROP "memaddr"
+>  #define VIRTIO_PMEM_MEMDEV_PROP "memdev"
+> diff --git a/include/hw/virtio/virtio-serial.h b/include/hw/virtio/virtio-serial.h
+> index 0b7f963611..17359918f7 100644
+> --- a/include/hw/virtio/virtio-serial.h
+> +++ b/include/hw/virtio/virtio-serial.h
+> @@ -27,7 +27,7 @@ struct virtio_serial_conf {
+>  
+>  #define TYPE_VIRTIO_SERIAL_PORT "virtio-serial-port"
+>  OBJECT_DECLARE_TYPE(VirtIOSerialPort, VirtIOSerialPortClass,
+> -                    virtio_serial_port, VIRTIO_SERIAL_PORT)
+> +                    VIRTIO_SERIAL_PORT)
+>  
+>  typedef struct VirtIOSerial VirtIOSerial;
+>  
+> diff --git a/include/hw/xen/xen-bus.h b/include/hw/xen/xen-bus.h
+> index e0e67505b8..1924d93c6c 100644
+> --- a/include/hw/xen/xen-bus.h
+> +++ b/include/hw/xen/xen-bus.h
+> @@ -79,7 +79,7 @@ struct XenBusClass {
+>  
+>  #define TYPE_XEN_BUS "xen-bus"
+>  OBJECT_DECLARE_TYPE(XenBus, XenBusClass,
+> -                    xen_bus, XEN_BUS)
+> +                    XEN_BUS)
+>  
+>  void xen_bus_init(void);
+>  
+> diff --git a/include/io/channel.h b/include/io/channel.h
+> index 245479548a..3c04f0edda 100644
+> --- a/include/io/channel.h
+> +++ b/include/io/channel.h
+> @@ -27,7 +27,7 @@
+>  
+>  #define TYPE_QIO_CHANNEL "qio-channel"
+>  OBJECT_DECLARE_TYPE(QIOChannel, QIOChannelClass,
+> -                    qio_channel, QIO_CHANNEL)
+> +                    QIO_CHANNEL)
+>  
+>  
+>  #define QIO_CHANNEL_ERR_BLOCK -2
+> diff --git a/include/io/dns-resolver.h b/include/io/dns-resolver.h
+> index 9d14a8d98f..01d0bd7a42 100644
+> --- a/include/io/dns-resolver.h
+> +++ b/include/io/dns-resolver.h
+> @@ -26,7 +26,7 @@
+>  #include "io/task.h"
+>  
+>  #define TYPE_QIO_DNS_RESOLVER "qio-dns-resolver"
+> -OBJECT_DECLARE_SIMPLE_TYPE(QIODNSResolver, qio_dns_resolver,
+> +OBJECT_DECLARE_SIMPLE_TYPE(QIODNSResolver,
+>                             QIO_DNS_RESOLVER)
+>  
+>  
+> diff --git a/include/io/net-listener.h b/include/io/net-listener.h
+> index 8145962fbb..ab9f291ed6 100644
+> --- a/include/io/net-listener.h
+> +++ b/include/io/net-listener.h
+> @@ -25,7 +25,7 @@
+>  #include "qom/object.h"
+>  
+>  #define TYPE_QIO_NET_LISTENER "qio-net-listener"
+> -OBJECT_DECLARE_SIMPLE_TYPE(QIONetListener, qio_net_listener,
+> +OBJECT_DECLARE_SIMPLE_TYPE(QIONetListener,
+>                             QIO_NET_LISTENER)
+>  
+>  
+> diff --git a/include/qom/object.h b/include/qom/object.h
+> index 4a23fed586..a5ca75fd54 100644
+> --- a/include/qom/object.h
+> +++ b/include/qom/object.h
+> @@ -614,7 +614,6 @@ struct Object
+>   * OBJECT_DECLARE_TYPE:
+>   * @InstanceType: instance struct name
+>   * @ClassType: class struct name
+> - * @module_obj_name: the object name in lowercase with underscore separators
+>   * @MODULE_OBJ_NAME: the object name in uppercase with underscore separators
+>   *
+>   * This macro is typically used in a header file, and will:
+> @@ -625,7 +624,7 @@ struct Object
+>   *
+>   * The object struct and class struct need to be declared manually.
+>   */
+> -#define OBJECT_DECLARE_TYPE(InstanceType, ClassType, module_obj_name, MODULE_OBJ_NAME) \
+> +#define OBJECT_DECLARE_TYPE(InstanceType, ClassType, MODULE_OBJ_NAME) \
+>      typedef struct InstanceType InstanceType; \
+>      typedef struct ClassType ClassType; \
+>      \
+> @@ -637,7 +636,6 @@ struct Object
+>  /**
+>   * OBJECT_DECLARE_SIMPLE_TYPE:
+>   * @InstanceType: instance struct name
+> - * @module_obj_name: the object name in lowercase with underscore separators
+>   * @MODULE_OBJ_NAME: the object name in uppercase with underscore separators
+>   *
+>   * This does the same as OBJECT_DECLARE_TYPE(), but with no class struct
+> @@ -646,7 +644,7 @@ struct Object
+>   * This macro should be used unless the class struct needs to have
+>   * virtual methods declared.
+>   */
+> -#define OBJECT_DECLARE_SIMPLE_TYPE(InstanceType, module_obj_name, MODULE_OBJ_NAME) \
+> +#define OBJECT_DECLARE_SIMPLE_TYPE(InstanceType, MODULE_OBJ_NAME) \
+>      typedef struct InstanceType InstanceType; \
+>      \
+>      G_DEFINE_AUTOPTR_CLEANUP_FUNC(InstanceType, object_unref) \
+> diff --git a/include/scsi/pr-manager.h b/include/scsi/pr-manager.h
+> index 26bd134531..e4ecbe00f6 100644
+> --- a/include/scsi/pr-manager.h
+> +++ b/include/scsi/pr-manager.h
+> @@ -10,7 +10,7 @@
+>  #define TYPE_PR_MANAGER "pr-manager"
+>  
+>  OBJECT_DECLARE_TYPE(PRManager, PRManagerClass,
+> -                    pr_manager, PR_MANAGER)
+> +                    PR_MANAGER)
+>  
+>  struct sg_io_hdr;
+>  
+> diff --git a/include/sysemu/cryptodev.h b/include/sysemu/cryptodev.h
+> index 06726f7014..b458aa4dae 100644
+> --- a/include/sysemu/cryptodev.h
+> +++ b/include/sysemu/cryptodev.h
+> @@ -38,7 +38,7 @@
+>  #define TYPE_CRYPTODEV_BACKEND "cryptodev-backend"
+>  
+>  OBJECT_DECLARE_TYPE(CryptoDevBackend, CryptoDevBackendClass,
+> -                    cryptodev_backend, CRYPTODEV_BACKEND)
+> +                    CRYPTODEV_BACKEND)
+>  
+>  
+>  #define MAX_CRYPTO_QUEUE_NUM  64
+> diff --git a/include/sysemu/hostmem.h b/include/sysemu/hostmem.h
+> index e5b7a152d3..df5644723a 100644
+> --- a/include/sysemu/hostmem.h
+> +++ b/include/sysemu/hostmem.h
+> @@ -21,7 +21,7 @@
+>  
+>  #define TYPE_MEMORY_BACKEND "memory-backend"
+>  OBJECT_DECLARE_TYPE(HostMemoryBackend, HostMemoryBackendClass,
+> -                    memory_backend, MEMORY_BACKEND)
+> +                    MEMORY_BACKEND)
+>  
+>  /* hostmem-ram.c */
+>  /**
+> diff --git a/include/sysemu/rng.h b/include/sysemu/rng.h
+> index cee45a4787..e383f87d20 100644
+> --- a/include/sysemu/rng.h
+> +++ b/include/sysemu/rng.h
+> @@ -18,7 +18,7 @@
+>  
+>  #define TYPE_RNG_BACKEND "rng-backend"
+>  OBJECT_DECLARE_TYPE(RngBackend, RngBackendClass,
+> -                    rng_backend, RNG_BACKEND)
+> +                    RNG_BACKEND)
+>  
+>  #define TYPE_RNG_BUILTIN "rng-builtin"
+>  
+> diff --git a/include/sysemu/tpm_backend.h b/include/sysemu/tpm_backend.h
+> index 7e8a014031..6f078f5f48 100644
+> --- a/include/sysemu/tpm_backend.h
+> +++ b/include/sysemu/tpm_backend.h
+> @@ -20,7 +20,7 @@
+>  
+>  #define TYPE_TPM_BACKEND "tpm-backend"
+>  OBJECT_DECLARE_TYPE(TPMBackend, TPMBackendClass,
+> -                    tpm_backend, TPM_BACKEND)
+> +                    TPM_BACKEND)
+>  
+>  
+>  typedef struct TPMBackendCmd {
+> diff --git a/include/sysemu/vhost-user-backend.h b/include/sysemu/vhost-user-backend.h
+> index 41d5ff43bd..327b0b84f1 100644
+> --- a/include/sysemu/vhost-user-backend.h
+> +++ b/include/sysemu/vhost-user-backend.h
+> @@ -22,7 +22,7 @@
+>  #include "io/channel.h"
+>  
+>  #define TYPE_VHOST_USER_BACKEND "vhost-user-backend"
+> -OBJECT_DECLARE_SIMPLE_TYPE(VhostUserBackend, vhost_user_backend,
+> +OBJECT_DECLARE_SIMPLE_TYPE(VhostUserBackend,
+>                             VHOST_USER_BACKEND)
+>  
+>  
+> diff --git a/target/alpha/cpu-qom.h b/target/alpha/cpu-qom.h
+> index 568fe3fb77..7bb9173c57 100644
+> --- a/target/alpha/cpu-qom.h
+> +++ b/target/alpha/cpu-qom.h
+> @@ -26,7 +26,7 @@
+>  #define TYPE_ALPHA_CPU "alpha-cpu"
+>  
+>  OBJECT_DECLARE_TYPE(AlphaCPU, AlphaCPUClass,
+> -                    alpha_cpu, ALPHA_CPU)
+> +                    ALPHA_CPU)
+>  
+>  /**
+>   * AlphaCPUClass:
+> diff --git a/target/arm/cpu-qom.h b/target/arm/cpu-qom.h
+> index 94bbbd4473..a22bd506d0 100644
+> --- a/target/arm/cpu-qom.h
+> +++ b/target/arm/cpu-qom.h
+> @@ -28,7 +28,7 @@ struct arm_boot_info;
+>  #define TYPE_ARM_CPU "arm-cpu"
+>  
+>  OBJECT_DECLARE_TYPE(ARMCPU, ARMCPUClass,
+> -                    arm_cpu, ARM_CPU)
+> +                    ARM_CPU)
+>  
+>  #define TYPE_ARM_MAX_CPU "max-" TYPE_ARM_CPU
+>  
+> diff --git a/target/avr/cpu-qom.h b/target/avr/cpu-qom.h
+> index 49d63faad2..9fa6989c18 100644
+> --- a/target/avr/cpu-qom.h
+> +++ b/target/avr/cpu-qom.h
+> @@ -27,7 +27,7 @@
+>  #define TYPE_AVR_CPU "avr-cpu"
+>  
+>  OBJECT_DECLARE_TYPE(AVRCPU, AVRCPUClass,
+> -                    avr_cpu, AVR_CPU)
+> +                    AVR_CPU)
+>  
+>  /**
+>   *  AVRCPUClass:
+> diff --git a/target/cris/cpu-qom.h b/target/cris/cpu-qom.h
+> index 2b0328113c..2596edc7e3 100644
+> --- a/target/cris/cpu-qom.h
+> +++ b/target/cris/cpu-qom.h
+> @@ -26,7 +26,7 @@
+>  #define TYPE_CRIS_CPU "cris-cpu"
+>  
+>  OBJECT_DECLARE_TYPE(CRISCPU, CRISCPUClass,
+> -                    cris_cpu, CRIS_CPU)
+> +                    CRIS_CPU)
+>  
+>  /**
+>   * CRISCPUClass:
+> diff --git a/target/hppa/cpu-qom.h b/target/hppa/cpu-qom.h
+> index 58158f374b..d424f88370 100644
+> --- a/target/hppa/cpu-qom.h
+> +++ b/target/hppa/cpu-qom.h
+> @@ -26,7 +26,7 @@
+>  #define TYPE_HPPA_CPU "hppa-cpu"
+>  
+>  OBJECT_DECLARE_TYPE(HPPACPU, HPPACPUClass,
+> -                    hppa_cpu, HPPA_CPU)
+> +                    HPPA_CPU)
+>  
+>  /**
+>   * HPPACPUClass:
+> diff --git a/target/i386/cpu-qom.h b/target/i386/cpu-qom.h
+> index 0505472e86..f9923cee04 100644
+> --- a/target/i386/cpu-qom.h
+> +++ b/target/i386/cpu-qom.h
+> @@ -31,7 +31,7 @@
+>  #endif
+>  
+>  OBJECT_DECLARE_TYPE(X86CPU, X86CPUClass,
+> -                    x86_cpu, X86_CPU)
+> +                    X86_CPU)
+>  
+>  typedef struct X86CPUModel X86CPUModel;
+>  
+> diff --git a/target/lm32/cpu-qom.h b/target/lm32/cpu-qom.h
+> index e9eb495bf0..245b35cd1d 100644
+> --- a/target/lm32/cpu-qom.h
+> +++ b/target/lm32/cpu-qom.h
+> @@ -26,7 +26,7 @@
+>  #define TYPE_LM32_CPU "lm32-cpu"
+>  
+>  OBJECT_DECLARE_TYPE(LM32CPU, LM32CPUClass,
+> -                    lm32_cpu, LM32_CPU)
+> +                    LM32_CPU)
+>  
+>  /**
+>   * LM32CPUClass:
+> diff --git a/target/m68k/cpu-qom.h b/target/m68k/cpu-qom.h
+> index a10429cf67..1ceb160ecb 100644
+> --- a/target/m68k/cpu-qom.h
+> +++ b/target/m68k/cpu-qom.h
+> @@ -26,7 +26,7 @@
+>  #define TYPE_M68K_CPU "m68k-cpu"
+>  
+>  OBJECT_DECLARE_TYPE(M68kCPU, M68kCPUClass,
+> -                    m68k_cpu, M68K_CPU)
+> +                    M68K_CPU)
+>  
+>  /*
+>   * M68kCPUClass:
+> diff --git a/target/microblaze/cpu-qom.h b/target/microblaze/cpu-qom.h
+> index 82734b9b2b..e520eefb12 100644
+> --- a/target/microblaze/cpu-qom.h
+> +++ b/target/microblaze/cpu-qom.h
+> @@ -26,7 +26,7 @@
+>  #define TYPE_MICROBLAZE_CPU "microblaze-cpu"
+>  
+>  OBJECT_DECLARE_TYPE(MicroBlazeCPU, MicroBlazeCPUClass,
+> -                    microblaze_cpu, MICROBLAZE_CPU)
+> +                    MICROBLAZE_CPU)
+>  
+>  /**
+>   * MicroBlazeCPUClass:
+> diff --git a/target/mips/cpu-qom.h b/target/mips/cpu-qom.h
+> index 93fbbdca1b..826ab13019 100644
+> --- a/target/mips/cpu-qom.h
+> +++ b/target/mips/cpu-qom.h
+> @@ -30,7 +30,7 @@
+>  #endif
+>  
+>  OBJECT_DECLARE_TYPE(MIPSCPU, MIPSCPUClass,
+> -                    mips_cpu, MIPS_CPU)
+> +                    MIPS_CPU)
+>  
+>  /**
+>   * MIPSCPUClass:
+> diff --git a/target/moxie/cpu.h b/target/moxie/cpu.h
+> index d58761ccb1..bd6ab66084 100644
+> --- a/target/moxie/cpu.h
+> +++ b/target/moxie/cpu.h
+> @@ -52,7 +52,7 @@ typedef struct CPUMoxieState {
+>  #define TYPE_MOXIE_CPU "moxie-cpu"
+>  
+>  OBJECT_DECLARE_TYPE(MoxieCPU, MoxieCPUClass,
+> -                    moxie_cpu, MOXIE_CPU)
+> +                    MOXIE_CPU)
+>  
+>  /**
+>   * MoxieCPUClass:
+> diff --git a/target/nios2/cpu.h b/target/nios2/cpu.h
+> index 1fa0fdaa35..86bbe1d867 100644
+> --- a/target/nios2/cpu.h
+> +++ b/target/nios2/cpu.h
+> @@ -33,7 +33,7 @@ typedef struct CPUNios2State CPUNios2State;
+>  #define TYPE_NIOS2_CPU "nios2-cpu"
+>  
+>  OBJECT_DECLARE_TYPE(Nios2CPU, Nios2CPUClass,
+> -                    nios2_cpu, NIOS2_CPU)
+> +                    NIOS2_CPU)
+>  
+>  /**
+>   * Nios2CPUClass:
+> diff --git a/target/openrisc/cpu.h b/target/openrisc/cpu.h
+> index d0a8ee657a..bd42faf144 100644
+> --- a/target/openrisc/cpu.h
+> +++ b/target/openrisc/cpu.h
+> @@ -30,7 +30,7 @@ struct OpenRISCCPU;
+>  #define TYPE_OPENRISC_CPU "or1k-cpu"
+>  
+>  OBJECT_DECLARE_TYPE(OpenRISCCPU, OpenRISCCPUClass,
+> -                    openrisc_cpu, OPENRISC_CPU)
+> +                    OPENRISC_CPU)
+>  
+>  /**
+>   * OpenRISCCPUClass:
+> diff --git a/target/ppc/cpu-qom.h b/target/ppc/cpu-qom.h
+> index 5cf806a3a6..5fdb96f04d 100644
+> --- a/target/ppc/cpu-qom.h
+> +++ b/target/ppc/cpu-qom.h
+> @@ -30,7 +30,7 @@
+>  #endif
+>  
+>  OBJECT_DECLARE_TYPE(PowerPCCPU, PowerPCCPUClass,
+> -                    powerpc_cpu, POWERPC_CPU)
+> +                    POWERPC_CPU)
+>  
+>  typedef struct CPUPPCState CPUPPCState;
+>  typedef struct ppc_tb_t ppc_tb_t;
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 4c00d35ccd..de275782e6 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -234,7 +234,7 @@ struct CPURISCVState {
+>  };
+>  
+>  OBJECT_DECLARE_TYPE(RISCVCPU, RISCVCPUClass,
+> -                    riscv_cpu, RISCV_CPU)
+> +                    RISCV_CPU)
+>  
+>  /**
+>   * RISCVCPUClass:
+> diff --git a/target/rx/cpu-qom.h b/target/rx/cpu-qom.h
+> index 6c5321078d..7310558e0c 100644
+> --- a/target/rx/cpu-qom.h
+> +++ b/target/rx/cpu-qom.h
+> @@ -27,7 +27,7 @@
+>  #define TYPE_RX62N_CPU RX_CPU_TYPE_NAME("rx62n")
+>  
+>  OBJECT_DECLARE_TYPE(RXCPU, RXCPUClass,
+> -                    rx_cpu, RX_CPU)
+> +                    RX_CPU)
+>  
+>  /*
+>   * RXCPUClass:
+> diff --git a/target/s390x/cpu-qom.h b/target/s390x/cpu-qom.h
+> index e2b2513711..9f3a0d86c5 100644
+> --- a/target/s390x/cpu-qom.h
+> +++ b/target/s390x/cpu-qom.h
+> @@ -26,7 +26,7 @@
+>  #define TYPE_S390_CPU "s390x-cpu"
+>  
+>  OBJECT_DECLARE_TYPE(S390CPU, S390CPUClass,
+> -                    s390_cpu, S390_CPU)
+> +                    S390_CPU)
+>  
+>  typedef struct S390CPUModel S390CPUModel;
+>  typedef struct S390CPUDef S390CPUDef;
+> diff --git a/target/sh4/cpu-qom.h b/target/sh4/cpu-qom.h
+> index 595814b8cb..8903b4b9c7 100644
+> --- a/target/sh4/cpu-qom.h
+> +++ b/target/sh4/cpu-qom.h
+> @@ -30,7 +30,7 @@
+>  #define TYPE_SH7785_CPU  SUPERH_CPU_TYPE_NAME("sh7785")
+>  
+>  OBJECT_DECLARE_TYPE(SuperHCPU, SuperHCPUClass,
+> -                    superh_cpu, SUPERH_CPU)
+> +                    SUPERH_CPU)
+>  
+>  /**
+>   * SuperHCPUClass:
+> diff --git a/target/sparc/cpu-qom.h b/target/sparc/cpu-qom.h
+> index 5d7fb727bc..f33949aaee 100644
+> --- a/target/sparc/cpu-qom.h
+> +++ b/target/sparc/cpu-qom.h
+> @@ -30,7 +30,7 @@
+>  #endif
+>  
+>  OBJECT_DECLARE_TYPE(SPARCCPU, SPARCCPUClass,
+> -                    sparc_cpu, SPARC_CPU)
+> +                    SPARC_CPU)
+>  
+>  typedef struct sparc_def_t sparc_def_t;
+>  /**
+> diff --git a/target/tilegx/cpu.h b/target/tilegx/cpu.h
+> index d251ff80b8..c194c1a6fd 100644
+> --- a/target/tilegx/cpu.h
+> +++ b/target/tilegx/cpu.h
+> @@ -100,7 +100,7 @@ typedef struct CPUTLGState {
+>  #define TYPE_TILEGX_CPU "tilegx-cpu"
+>  
+>  OBJECT_DECLARE_TYPE(TileGXCPU, TileGXCPUClass,
+> -                    tilegx_cpu, TILEGX_CPU)
+> +                    TILEGX_CPU)
+>  
+>  /**
+>   * TileGXCPUClass:
+> diff --git a/target/tricore/cpu-qom.h b/target/tricore/cpu-qom.h
+> index 9e588c4c34..59bfd01bbc 100644
+> --- a/target/tricore/cpu-qom.h
+> +++ b/target/tricore/cpu-qom.h
+> @@ -25,7 +25,7 @@
+>  #define TYPE_TRICORE_CPU "tricore-cpu"
+>  
+>  OBJECT_DECLARE_TYPE(TriCoreCPU, TriCoreCPUClass,
+> -                    tricore_cpu, TRICORE_CPU)
+> +                    TRICORE_CPU)
+>  
+>  struct TriCoreCPUClass {
+>      /*< private >*/
+> diff --git a/target/unicore32/cpu-qom.h b/target/unicore32/cpu-qom.h
+> index c914273058..43621e7479 100644
+> --- a/target/unicore32/cpu-qom.h
+> +++ b/target/unicore32/cpu-qom.h
+> @@ -17,7 +17,7 @@
+>  #define TYPE_UNICORE32_CPU "unicore32-cpu"
+>  
+>  OBJECT_DECLARE_TYPE(UniCore32CPU, UniCore32CPUClass,
+> -                    unicore32_cpu, UNICORE32_CPU)
+> +                    UNICORE32_CPU)
+>  
+>  /**
+>   * UniCore32CPUClass:
+> diff --git a/target/xtensa/cpu-qom.h b/target/xtensa/cpu-qom.h
+> index 299ce3e63c..41d9859673 100644
+> --- a/target/xtensa/cpu-qom.h
+> +++ b/target/xtensa/cpu-qom.h
+> @@ -35,7 +35,7 @@
+>  #define TYPE_XTENSA_CPU "xtensa-cpu"
+>  
+>  OBJECT_DECLARE_TYPE(XtensaCPU, XtensaCPUClass,
+> -                    xtensa_cpu, XTENSA_CPU)
+> +                    XTENSA_CPU)
+>  
+>  typedef struct XtensaConfig XtensaConfig;
+>  
+> diff --git a/backends/dbus-vmstate.c b/backends/dbus-vmstate.c
+> index 5bffbc4906..bd050e8e9c 100644
+> --- a/backends/dbus-vmstate.c
+> +++ b/backends/dbus-vmstate.c
+> @@ -23,7 +23,7 @@
+>  
+>  
+>  #define TYPE_DBUS_VMSTATE "dbus-vmstate"
+> -OBJECT_DECLARE_SIMPLE_TYPE(DBusVMState, dbus_vmstate,
+> +OBJECT_DECLARE_SIMPLE_TYPE(DBusVMState,
+>                             DBUS_VMSTATE)
+>  
+>  
+> diff --git a/ui/input-barrier.c b/ui/input-barrier.c
+> index b76697be93..a047919fde 100644
+> --- a/ui/input-barrier.c
+> +++ b/ui/input-barrier.c
+> @@ -20,7 +20,7 @@
+>  #include "input-barrier.h"
+>  
+>  #define TYPE_INPUT_BARRIER "input-barrier"
+> -OBJECT_DECLARE_SIMPLE_TYPE(InputBarrier, input_barrier,
+> +OBJECT_DECLARE_SIMPLE_TYPE(InputBarrier,
+>                             INPUT_BARRIER)
+>  
+>  
+> diff --git a/ui/input-linux.c b/ui/input-linux.c
+> index f02557b012..ab351a4187 100644
+> --- a/ui/input-linux.c
+> +++ b/ui/input-linux.c
+> @@ -31,7 +31,7 @@ static bool linux_is_button(unsigned int lnx)
+>  }
+>  
+>  #define TYPE_INPUT_LINUX "input-linux"
+> -OBJECT_DECLARE_SIMPLE_TYPE(InputLinux, input_linux,
+> +OBJECT_DECLARE_SIMPLE_TYPE(InputLinux,
+>                             INPUT_LINUX)
+>  
+>  
+> 
+
 
