@@ -2,50 +2,51 @@ Return-Path: <SRS0=htIg=C3=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1AF56C43465
-	for <xen-devel@archiver.kernel.org>; Fri, 18 Sep 2020 16:40:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 92226C43464
+	for <xen-devel@archiver.kernel.org>; Fri, 18 Sep 2020 16:42:06 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AB2482074B
-	for <xen-devel@archiver.kernel.org>; Fri, 18 Sep 2020 16:40:15 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 3AB2E2076B
+	for <xen-devel@archiver.kernel.org>; Fri, 18 Sep 2020 16:42:06 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="kW/m5vnU"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AB2482074B
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="Iq9tLT7s"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3AB2E2076B
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kJJQV-0005My-IT; Fri, 18 Sep 2020 16:39:59 +0000
+	id 1kJJSN-0006D9-VL; Fri, 18 Sep 2020 16:41:55 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=EJp8=C3=casper.srs.infradead.org=batv+1a7941a35ce833a0e493+6235+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1kJJQT-0005Mq-Tf
- for xen-devel@lists.xenproject.org; Fri, 18 Sep 2020 16:39:58 +0000
-X-Inumbo-ID: f4afabd2-ea97-48ed-be9a-288b357f2e7b
+ id 1kJJSN-0006D4-Ea
+ for xen-devel@lists.xenproject.org; Fri, 18 Sep 2020 16:41:55 +0000
+X-Inumbo-ID: 53c54d8f-d119-4fcf-84c6-e3b1b56c8df1
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id f4afabd2-ea97-48ed-be9a-288b357f2e7b;
- Fri, 18 Sep 2020 16:39:54 +0000 (UTC)
+ id 53c54d8f-d119-4fcf-84c6-e3b1b56c8df1;
+ Fri, 18 Sep 2020 16:41:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
- Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:In-Reply-To:References;
- bh=kbkCOaAVGW2W0qtF3ILC2dY2YuGuU78+gf+gMb7gwmg=; b=kW/m5vnUNR9hH31GcXuVcpd9j2
- YA6VaBH1j/TiUI3s10h53oQiEx5bSqjcpwY8JemDJbytieos8zt+gRB1FpEaZE9ZsAKzL4LQC0jza
- iqqFAttfNNTd4/5l8lRTxiHEru6CjyH/WYZRSvfVriw/iqmEjMdx7BgGWHp8bWD5i5kx+iWa6kL8H
- gBcyIRucV67OIH/x5iE4iVZODxkkwqs3zdZ+XmOdUAkQoickM8doXsxt/7EZ+p93DBYP3QdoVQtAN
- 2milUFpS2U5fzp8jyoapCmfH59wTxVZclqKH1diAZY87+wVGYpDlWdBfpnNKB0VdioTh1sC8mAgnG
- JPit0e+w==;
+ References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ Content-Type:Content-ID:Content-Description;
+ bh=0M3Bwf+Fb1Uh7qm3wAuaVRN1o0EMdwv1eVJjgWvN6Uc=; b=Iq9tLT7sl2PJmy70EuMRI0ETk5
+ AxqfF3KpbrXnO3sdWxyMXtjg6vmzVCUPIgJp1PSBRrtnNOt3URpzFx9nyVuPRqWYeJnC17qyzs/z5
+ r2xIF0XeLnAmttZMZUlNGMV3+tk4fJ+I7T+qKlfm9t7OTQRBVkjJdVN57/aEvs1nMsevMyEWyxJcz
+ 73GEsGdAPgxx8H2hE4bVixZ3yMqWygz6wjfxib8AEillkuqZu/7D5PDkAQKxqxmg5Xbz7aJVTkLaG
+ 2HQQUGmzaqsYj6cL46N9t5baeaLoYffCnXjIDHDf+rnba1z93sjGeb1AZUoCKhiGuvlkKaiBP6c/G
+ 9S1pG1bg==;
 Received: from 089144214092.atnat0023.highway.a1.net ([89.144.214.92]
  helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kJJQ7-00071w-B7; Fri, 18 Sep 2020 16:39:35 +0000
+ id 1kJJSE-0007Ec-4t; Fri, 18 Sep 2020 16:41:46 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Andrew Morton <akpm@linux-foundation.org>
 Cc: Peter Zijlstra <peterz@infradead.org>,
@@ -59,10 +60,12 @@ Cc: Peter Zijlstra <peterz@infradead.org>,
  xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org,
  intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
  linux-mm@kvack.org
-Subject: remove alloc_vm_area
-Date: Fri, 18 Sep 2020 18:37:18 +0200
-Message-Id: <20200918163724.2511-1-hch@lst.de>
+Subject: [PATCH 1/6] zsmalloc: switch from alloc_vm_area to get_vm_area
+Date: Fri, 18 Sep 2020 18:37:19 +0200
+Message-Id: <20200918163724.2511-2-hch@lst.de>
 X-Mailer: git-send-email 2.28.0
+In-Reply-To: <20200918163724.2511-1-hch@lst.de>
+References: <20200918163724.2511-1-hch@lst.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
@@ -80,35 +83,28 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Hi Andrew,
+There is no obvious reason why zsmalloc needs to pre-fault the PTEs
+given that it later uses map_kernel_range to just like vmap().
 
-this series removes alloc_vm_area, which was left over from the big
-vmalloc interface rework.  It is a rather arkane interface, basicaly
-the equivalent of get_vm_area + actually faulting in all PTEs in
-the allocated area.  It was originally addeds for Xen (which isn't
-modular to start with), and then grew users in zsmalloc and i915
-which seems to mostly qualify as abuses of the interface, especially
-for i915 as a random driver should not set up PTE bits directly.
+Signed-off-by: Christoph Hellwig <hch@lst.de>
+---
+ mm/zsmalloc.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Note that my laptop doesn't seem to actually exercise the new vmap_pfn
-path, so careful review from the i915 maintainers is very welcome.
+diff --git a/mm/zsmalloc.c b/mm/zsmalloc.c
+index c36fdff9a37131..3e4fe3259612fd 100644
+--- a/mm/zsmalloc.c
++++ b/mm/zsmalloc.c
+@@ -1122,7 +1122,7 @@ static inline int __zs_cpu_up(struct mapping_area *area)
+ 	 */
+ 	if (area->vm)
+ 		return 0;
+-	area->vm = alloc_vm_area(PAGE_SIZE * 2, NULL);
++	area->vm = get_vm_area(PAGE_SIZE * 2, 0);
+ 	if (!area->vm)
+ 		return -ENOMEM;
+ 	return 0;
+-- 
+2.28.0
 
-Also I wonder why zsmalloc is even doing the manual allocation of kernel
-virtual address space plus mapping into it.  IMHO zsmalloc should be
-using our normal vm_map_ram / vm_unmap_ram interface instead of being so
-special, which would also allow building it as a module again for the
-virtual mapping case.
-
-Diffstat:
- arch/x86/xen/grant-table.c                |   27 +++++---
- drivers/gpu/drm/i915/Kconfig              |    1 
- drivers/gpu/drm/i915/gem/i915_gem_pages.c |  101 +++++++++++++-----------------
- drivers/gpu/drm/i915/gt/shmem_utils.c     |   90 +++++++++++---------------
- drivers/xen/xenbus/xenbus_client.c        |   30 ++++----
- include/linux/vmalloc.h                   |    6 -
- mm/Kconfig                                |    3 
- mm/nommu.c                                |    7 --
- mm/vmalloc.c                              |   93 +++++++++++++--------------
- mm/zsmalloc.c                             |    2 
- 10 files changed, 172 insertions(+), 188 deletions(-)
 
