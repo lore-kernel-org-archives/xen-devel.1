@@ -7,39 +7,38 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,UNPARSEABLE_RELAY,URIBL_BLOCKED autolearn=unavailable
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 353FDC43465
-	for <xen-devel@archiver.kernel.org>; Fri, 18 Sep 2020 02:08:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A4C55C43464
+	for <xen-devel@archiver.kernel.org>; Fri, 18 Sep 2020 02:17:21 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DB47623977
-	for <xen-devel@archiver.kernel.org>; Fri, 18 Sep 2020 02:08:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DB47623977
+	by mail.kernel.org (Postfix) with ESMTPS id 669A323787
+	for <xen-devel@archiver.kernel.org>; Fri, 18 Sep 2020 02:17:21 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 669A323787
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linux.alibaba.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kJ5ol-0004vV-Uu; Fri, 18 Sep 2020 02:08:07 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kJ5xS-0005ps-RP; Fri, 18 Sep 2020 02:17:06 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=UN7C=C3=linux.alibaba.com=richard.weiyang@srs-us1.protection.inumbo.net>)
- id 1kJ5ok-0004vQ-Qz
- for xen-devel@lists.xenproject.org; Fri, 18 Sep 2020 02:08:06 +0000
-X-Inumbo-ID: d5143593-6e4c-432e-9f70-35c52e90bc3d
-Received: from out30-57.freemail.mail.aliyun.com (unknown [115.124.30.57])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id d5143593-6e4c-432e-9f70-35c52e90bc3d;
- Fri, 18 Sep 2020 02:08:04 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R441e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e01424;
+ id 1kJ5xR-0005pn-JG
+ for xen-devel@lists.xenproject.org; Fri, 18 Sep 2020 02:17:05 +0000
+X-Inumbo-ID: 971e7b5d-3edb-407c-a663-8eedd9af5068
+Received: from out30-130.freemail.mail.aliyun.com (unknown [115.124.30.130])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 971e7b5d-3edb-407c-a663-8eedd9af5068;
+ Fri, 18 Sep 2020 02:17:01 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R271e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04400;
  MF=richard.weiyang@linux.alibaba.com; NM=1; PH=DS; RN=17; SR=0;
- TI=SMTPD_---0U9GoEaQ_1600394878; 
+ TI=SMTPD_---0U9GXwrg_1600395414; 
 Received: from localhost(mailfrom:richard.weiyang@linux.alibaba.com
- fp:SMTPD_---0U9GoEaQ_1600394878) by smtp.aliyun-inc.com(127.0.0.1);
- Fri, 18 Sep 2020 10:07:58 +0800
-Date: Fri, 18 Sep 2020 10:07:58 +0800
+ fp:SMTPD_---0U9GXwrg_1600395414) by smtp.aliyun-inc.com(127.0.0.1);
+ Fri, 18 Sep 2020 10:16:55 +0800
+Date: Fri, 18 Sep 2020 10:16:54 +0800
 From: Wei Yang <richard.weiyang@linux.alibaba.com>
 To: David Hildenbrand <david@redhat.com>
 Cc: linux-kernel@vger.kernel.org, linux-mm@kvack.org,
@@ -54,7 +53,7 @@ Cc: linux-kernel@vger.kernel.org, linux-mm@kvack.org,
  Michael Ellerman <mpe@ellerman.id.au>
 Subject: Re: [PATCH RFC 2/4] mm/page_alloc: place pages to tail in
  __putback_isolated_page()
-Message-ID: <20200918020758.GB54754@L-31X9LVDL-1304.local>
+Message-ID: <20200918021654.GC54754@L-31X9LVDL-1304.local>
 References: <20200916183411.64756-1-david@redhat.com>
  <20200916183411.64756-3-david@redhat.com>
 MIME-Version: 1.0
@@ -92,12 +91,6 @@ On Wed, Sep 16, 2020 at 08:34:09PM +0200, David Hildenbrand wrote:
 >The new behavior is especially desirable for memory onlining, where we
 >allow allocation of newly onlined pages via undo_isolate_page_range()
 >in online_pages(). Right now, we always place them to the head of the
-
-The code looks good, while I don't fully understand the log here.
-
-undo_isolate_page_range() is used in __offline_pages and alloc_contig_range. I
-don't connect them with online_pages(). Do I miss something?
-
 >free list, resulting in undesireable behavior: Assume we add
 >individual memory chunks via add_memory() and online them right away to
 >the NORMAL zone. We create a dependency chain of unmovable allocations
@@ -151,6 +144,18 @@ don't connect them with online_pages(). Do I miss something?
 > 		to_tail = shuffle_pick_tail();
 >+	else if (fop_flags & FOP_TO_TAIL)
 >+		to_tail = true;
+
+Take another look into this part. Maybe we can move this check at top?
+
+For online_page case, currently we have following call flow:
+
+    online_page
+        online_pages_range
+	shuffle_zone
+
+This means we would always shuffle the newly added pages. Maybe we don't need
+to do the shuffle when adding them to the free_list?
+
 > 	else
 > 		to_tail = buddy_merge_likely(pfn, buddy_pfn, page, order);
 > 
