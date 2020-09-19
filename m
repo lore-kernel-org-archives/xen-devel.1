@@ -7,52 +7,50 @@ X-Spam-Status: No, score=-12.7 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 55C5FC43463
-	for <xen-devel@archiver.kernel.org>; Sat, 19 Sep 2020 02:52:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 00C6EC43463
+	for <xen-devel@archiver.kernel.org>; Sat, 19 Sep 2020 04:33:53 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0EAEF208DB
-	for <xen-devel@archiver.kernel.org>; Sat, 19 Sep 2020 02:52:30 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0EAEF208DB
+	by mail.kernel.org (Postfix) with ESMTPS id 4634A20874
+	for <xen-devel@archiver.kernel.org>; Sat, 19 Sep 2020 04:33:53 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4634A20874
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=huawei.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kJSyj-0007HA-Qo; Sat, 19 Sep 2020 02:51:57 +0000
+	id 1kJUYv-0007Rb-BA; Sat, 19 Sep 2020 04:33:25 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=PdNc=C4=huawei.com=miaoqinglang@srs-us1.protection.inumbo.net>)
- id 1kJSyi-0007H5-PF
- for xen-devel@lists.xenproject.org; Sat, 19 Sep 2020 02:51:56 +0000
-X-Inumbo-ID: 05b2b31b-3dcc-45a4-9873-8f9232875c57
+ <SRS0=z0rF=C4=huawei.com=jingxiangfeng@srs-us1.protection.inumbo.net>)
+ id 1kJTN0-0000gw-J7
+ for xen-devel@lists.xenproject.org; Sat, 19 Sep 2020 03:17:02 +0000
+X-Inumbo-ID: 892ebfb6-c078-4477-89f0-94b4c6e02874
 Received: from huawei.com (unknown [45.249.212.35])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 05b2b31b-3dcc-45a4-9873-8f9232875c57;
- Sat, 19 Sep 2020 02:51:51 +0000 (UTC)
-Received: from DGGEMS409-HUB.china.huawei.com (unknown [172.30.72.59])
- by Forcepoint Email with ESMTP id 47D864FA4E1449EC3C6F;
- Sat, 19 Sep 2020 10:51:47 +0800 (CST)
+ id 892ebfb6-c078-4477-89f0-94b4c6e02874;
+ Sat, 19 Sep 2020 03:16:56 +0000 (UTC)
+Received: from DGGEMS407-HUB.china.huawei.com (unknown [172.30.72.60])
+ by Forcepoint Email with ESMTP id 3E32B30318231580C927;
+ Sat, 19 Sep 2020 11:16:51 +0800 (CST)
 Received: from localhost.localdomain.localdomain (10.175.113.25) by
- DGGEMS409-HUB.china.huawei.com (10.3.19.209) with Microsoft SMTP Server id
- 14.3.487.0; Sat, 19 Sep 2020 10:51:37 +0800
-From: Qinglang Miao <miaoqinglang@huawei.com>
-To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, Juergen Gross
- <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, "Thomas
- Gleixner" <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, "Borislav
- Petkov" <bp@alien8.de>, <x86@kernel.org>, "H. Peter Anvin" <hpa@zytor.com>
+ DGGEMS407-HUB.china.huawei.com (10.3.19.207) with Microsoft SMTP Server id
+ 14.3.487.0; Sat, 19 Sep 2020 11:16:41 +0800
+From: Jing Xiangfeng <jingxiangfeng@huawei.com>
+To: <boris.ostrovsky@oracle.com>, <jgross@suse.com>, <sstabellini@kernel.org>
 CC: <xen-devel@lists.xenproject.org>, <linux-kernel@vger.kernel.org>,
- "Qinglang Miao" <miaoqinglang@huawei.com>
-Subject: [PATCH -next v2] x86/xen: Convert to DEFINE_SHOW_ATTRIBUTE
-Date: Sat, 19 Sep 2020 10:52:09 +0800
-Message-ID: <20200919025209.17930-1-miaoqinglang@huawei.com>
+ <jingxiangfeng@huawei.com>
+Subject: [PATCH] xen: remove redundant initialization of variable ret
+Date: Sat, 19 Sep 2020 11:17:02 +0800
+Message-ID: <20200919031702.32192-1-jingxiangfeng@huawei.com>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [10.175.113.25]
 X-CFilter-Loop: Reflected
+X-Mailman-Approved-At: Sat, 19 Sep 2020 04:33:23 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,40 +64,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Use DEFINE_SHOW_ATTRIBUTE macro to simplify the code.
+After commit 9f51c05dc41a ("pvcalls-front: Avoid
+get_free_pages(GFP_KERNEL) under spinlock"), the variable ret is being
+initialized with '-ENOMEM' that is meaningless. So remove it.
 
-Signed-off-by: Qinglang Miao <miaoqinglang@huawei.com>
+Signed-off-by: Jing Xiangfeng <jingxiangfeng@huawei.com>
 ---
-v2: based on linux-next(20200917), and can be applied to
-    mainline cleanly now.
+ drivers/xen/pvcalls-front.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- arch/x86/xen/p2m.c | 12 +-----------
- 1 file changed, 1 insertion(+), 11 deletions(-)
-
-diff --git a/arch/x86/xen/p2m.c b/arch/x86/xen/p2m.c
-index be4151f42..3301875dd 100644
---- a/arch/x86/xen/p2m.c
-+++ b/arch/x86/xen/p2m.c
-@@ -795,17 +795,7 @@ static int p2m_dump_show(struct seq_file *m, void *v)
- 	return 0;
- }
+diff --git a/drivers/xen/pvcalls-front.c b/drivers/xen/pvcalls-front.c
+index 72d725a0ab5c..7984645b5956 100644
+--- a/drivers/xen/pvcalls-front.c
++++ b/drivers/xen/pvcalls-front.c
+@@ -371,7 +371,7 @@ static int alloc_active_ring(struct sock_mapping *map)
+ static int create_active(struct sock_mapping *map, evtchn_port_t *evtchn)
+ {
+ 	void *bytes;
+-	int ret = -ENOMEM, irq = -1, i;
++	int ret, irq = -1, i;
  
--static int p2m_dump_open(struct inode *inode, struct file *filp)
--{
--	return single_open(filp, p2m_dump_show, NULL);
--}
--
--static const struct file_operations p2m_dump_fops = {
--	.open		= p2m_dump_open,
--	.read		= seq_read,
--	.llseek		= seq_lseek,
--	.release	= single_release,
--};
-+DEFINE_SHOW_ATTRIBUTE(p2m_dump);
- 
- static struct dentry *d_mmu_debug;
- 
+ 	*evtchn = 0;
+ 	init_waitqueue_head(&map->active.inflight_conn_req);
 -- 
-2.23.0
+2.17.1
 
 
