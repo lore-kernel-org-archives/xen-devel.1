@@ -2,66 +2,91 @@ Return-Path: <SRS0=mmt8=C5=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D8D0C43465
-	for <xen-devel@archiver.kernel.org>; Sun, 20 Sep 2020 10:03:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C8A8CC43465
+	for <xen-devel@archiver.kernel.org>; Sun, 20 Sep 2020 11:44:49 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CE98320866
-	for <xen-devel@archiver.kernel.org>; Sun, 20 Sep 2020 10:03:06 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 6840A20EDD
+	for <xen-devel@archiver.kernel.org>; Sun, 20 Sep 2020 11:44:49 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="2sSqHCx9"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CE98320866
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="W7bIt4F4"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6840A20EDD
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=amsat.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kJwBF-0004K8-Ln; Sun, 20 Sep 2020 10:02:49 +0000
+	id 1kJxla-0004Me-40; Sun, 20 Sep 2020 11:44:26 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=vkzk=C5=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
- id 1kJwBD-0004Jo-Rn
- for xen-devel@lists.xenproject.org; Sun, 20 Sep 2020 10:02:47 +0000
-X-Inumbo-ID: 6c7f0fd2-6616-4664-9985-ba3a844fa1a6
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+ <SRS0=vT6p=C5=gmail.com=philippe.mathieu.daude@srs-us1.protection.inumbo.net>)
+ id 1kJxlZ-0004Lx-6O
+ for xen-devel@lists.xenproject.org; Sun, 20 Sep 2020 11:44:25 +0000
+X-Inumbo-ID: a0b03a65-9bf9-48f1-8ee8-4b6fa32731c0
+Received: from mail-wm1-x341.google.com (unknown [2a00:1450:4864:20::341])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 6c7f0fd2-6616-4664-9985-ba3a844fa1a6;
- Sun, 20 Sep 2020 10:02:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
- Content-Transfer-Encoding:Content-Type:Message-ID:To;
- bh=AJ4yUmYXM9fs5n1QGmK/FtGZt5ClLRjzYX8nNCBnY9I=; b=2sSqHCx9z23Kfn/7jZYYMRDmFn
- 8dxyIKJcE3oAguuO3tOBg+0SQ1Pvgkw8PirCxHVX+MHDeCEm0iDgDqB0EpTIfvzvNF+ufUuip2okE
- FVnSTzHjOleoJ/uF+/89/XxQpA7awsPd0hvpaTjS1bzFnmPLRKOQGplyzUTfAqJ/pf4c=;
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kJwB7-0001oS-5c; Sun, 20 Sep 2020 10:02:41 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kJwB6-0006ai-SQ; Sun, 20 Sep 2020 10:02:40 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1kJwB6-0000Tg-Rx; Sun, 20 Sep 2020 10:02:40 +0000
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-154529-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+ id a0b03a65-9bf9-48f1-8ee8-4b6fa32731c0;
+ Sun, 20 Sep 2020 11:44:20 +0000 (UTC)
+Received: by mail-wm1-x341.google.com with SMTP id y15so9784541wmi.0
+ for <xen-devel@lists.xenproject.org>; Sun, 20 Sep 2020 04:44:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=vFhP//g2kZUXZ+MAEt2Ablmdm9itVCJ1RZ3mPAAaqKM=;
+ b=W7bIt4F4z6IiBy9m/LcKPgpOqz7FrN9GBpJuve00BFY9kXUb/mLfbBgoPvG81e+e1I
+ PnmN8xdfVYhfolnL/Au7or3VYohzuyU+qgU61oKMiOuiLvML1lLLR1YrG8RyVOxhKkUD
+ At2U1VxKyw0DDkZ3K8+6cgJOlgUg4G4X4ttSbnF28kWiWKEx5DCrAF0R6pwz7R/ksdxO
+ R49LnJb7/kTrQSjtAggbyHcuKbCIapvd4GrEf6Jg/ZC7K9SP2Q6n0s35YN62z1rYuoYc
+ YS7B1susGSIfY5Cjvl4LUE8YHWRaLM1Az0/VQh5o+hB66bh9DtXZa5BUW2dgmMDXj/bb
+ 3X+w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
+ :in-reply-to:references:mime-version:content-transfer-encoding;
+ bh=vFhP//g2kZUXZ+MAEt2Ablmdm9itVCJ1RZ3mPAAaqKM=;
+ b=Z6ruAVPzxwzvvxj7qRuLdE3I6F4Z3Dt9YozSUjRIoqAWY02UKmjE6IGWFv8L8rduvY
+ kKajETqptEBtdfiDZTWglfvF4Tfm2SFvLWwRDaYUe3DTi6Grut+AtY58Wvlxl4iLn3xw
+ mtrJ2AcQmXVqHxvQUjSnSU3hWu2YUE848KlnO1d2TNKLIFQgi7GcxaW35B42A5N/09/2
+ H3FqvNW/I5MCFG/b1z9VRjiRXJxGRkVHN6eaA70tVOllsUUa7MPV1tABqOiGiu3S4Bgw
+ nFedHX1nD0P1dvAgh5MGjjnCMO7PwduO07/fr0Nuq2n+RoYzUk3pjwTlEFatyVvuE3/H
+ YNrQ==
+X-Gm-Message-State: AOAM532cV5uqVCdZlHqNrQVwFVOJRDqHBPN7lz1r+h2xClIYqWquXaNe
+ ET+lXDXkR12+ohT0XEyK1sE=
+X-Google-Smtp-Source: ABdhPJyz0j5G6/Jn6raiSm4b4XBR2XD5rdMCO5YiUU0gweX8qLMIBsSFUJ0cLbs1Gh97QejA8lUIOw==
+X-Received: by 2002:a1c:9c4b:: with SMTP id f72mr24727724wme.188.1600602260050; 
+ Sun, 20 Sep 2020 04:44:20 -0700 (PDT)
+Received: from localhost.localdomain (65.red-83-57-170.dynamicip.rima-tde.net.
+ [83.57.170.65])
+ by smtp.gmail.com with ESMTPSA id e18sm16415708wra.36.2020.09.20.04.44.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 20 Sep 2020 04:44:19 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
+To: Markus Armbruster <armbru@redhat.com>,
+	qemu-devel@nongnu.org
+Cc: Laurent Vivier <laurent@vivier.eu>, Paolo Bonzini <pbonzini@redhat.com>,
+ Anthony Perard <anthony.perard@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+ Eduardo Habkost <ehabkost@redhat.com>, Paul Durrant <paul@xen.org>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>, xen-devel@lists.xenproject.org,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
+Subject: [PATCH 1/2] qdev: Document qbus_realize() and qbus_unrealize()
+Date: Sun, 20 Sep 2020 13:44:15 +0200
+Message-Id: <20200920114416.353277-2-f4bug@amsat.org>
+X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20200920114416.353277-1-f4bug@amsat.org>
+References: <20200920114416.353277-1-f4bug@amsat.org>
 MIME-Version: 1.0
-Subject: [xen-unstable-coverity test] 154529: all pass - PUSHED
-X-Osstest-Versions-This: xen=baa4d064e91b6d2bcfe400bdf71f83b961e4c28e
-X-Osstest-Versions-That: xen=51526576219f122ec7ccfd55dea95afbca70d330
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Sun, 20 Sep 2020 10:02:40 +0000
+Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,48 +100,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-flight 154529 xen-unstable-coverity real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/154529/
+Add some documentation for the qbus_realize() and qbus_unrealize()
+functions introduced in commit 9940b2cfbc0.
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- xen                  baa4d064e91b6d2bcfe400bdf71f83b961e4c28e
-baseline version:
- xen                  51526576219f122ec7ccfd55dea95afbca70d330
+Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+---
+ include/hw/qdev-core.h | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
-Last test of basis   154380  2020-09-16 09:19:21 Z    4 days
-Testing same since   154529  2020-09-20 09:19:32 Z    0 days    1 attempts
+diff --git a/include/hw/qdev-core.h b/include/hw/qdev-core.h
+index e025ba9653f..02ac1c50b7f 100644
+--- a/include/hw/qdev-core.h
++++ b/include/hw/qdev-core.h
+@@ -675,7 +675,19 @@ typedef int (qdev_walkerfn)(DeviceState *dev, void *opaque);
+ void qbus_create_inplace(void *bus, size_t size, const char *typename,
+                          DeviceState *parent, const char *name);
+ BusState *qbus_create(const char *typename, DeviceState *parent, const char *name);
++/**
++ * qbus_realize: Realize a bus
++ * @bus: bus to realize
++ * @errp: pointer to error object
++ *
++ * On success, return true.
++ * On failure, store an error through @errp and return false.
++ */
+ bool qbus_realize(BusState *bus, Error **errp);
++/**
++ * qbus_realize: Unrealize a bus
++ * @bus: bus to unrealize
++ */
+ void qbus_unrealize(BusState *bus);
+ 
+ /* Returns > 0 if either devfn or busfn skip walk somewhere in cursion,
+-- 
+2.26.2
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Ian Jackson <ian.jackson@eu.citrix.com>
-  Jan Beulich <jbeulich@suse.com>
-  Julien Grall <jgrall@amazon.com>
-
-jobs:
- coverity-amd64                                               pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/xen.git
-   5152657621..baa4d064e9  baa4d064e91b6d2bcfe400bdf71f83b961e4c28e -> coverity-tested/smoke
 
