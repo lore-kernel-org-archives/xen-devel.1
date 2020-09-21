@@ -2,64 +2,64 @@ Return-Path: <SRS0=oC9Q=C6=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 00DF2C4363D
-	for <xen-devel@archiver.kernel.org>; Mon, 21 Sep 2020 18:02:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1904DC46466
+	for <xen-devel@archiver.kernel.org>; Mon, 21 Sep 2020 18:02:43 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9FE132071A
-	for <xen-devel@archiver.kernel.org>; Mon, 21 Sep 2020 18:02:41 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id BD9622193E
+	for <xen-devel@archiver.kernel.org>; Mon, 21 Sep 2020 18:02:42 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="h+IcmBbv"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9FE132071A
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="H34jv+yc"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BD9622193E
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kKQ8w-0003L2-AY; Mon, 21 Sep 2020 18:02:26 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kKQ94-0003O6-5Y; Mon, 21 Sep 2020 18:02:34 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=wcPU=C6=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1kKQ8v-0003Kh-4J
- for xen-devel@lists.xenproject.org; Mon, 21 Sep 2020 18:02:25 +0000
-X-Inumbo-ID: 93cad2df-20a6-4767-ab87-053150edfa14
+ id 1kKQ93-0003KW-9x
+ for xen-devel@lists.xenproject.org; Mon, 21 Sep 2020 18:02:33 +0000
+X-Inumbo-ID: b8fc4c22-75bd-495e-bbca-5bdad6c84546
 Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 93cad2df-20a6-4767-ab87-053150edfa14;
- Mon, 21 Sep 2020 18:02:23 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id b8fc4c22-75bd-495e-bbca-5bdad6c84546;
+ Mon, 21 Sep 2020 18:02:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
  s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
- bh=33YMzmUbMY7znlTscUrVDIV5v+7zwKEarD370yVOPcw=; b=h+IcmBbvaNkXB9xBBoZRedXf6
- k2XXdOwnFbHQV/J49RTpKC9mCw5L6bAiaGFYIzLefJ/mCGhuPjqxz3KwwpGMAdejqqAa4xyItp0Kn
- 46VNWhvyeOH6FIdvajpKzcyQwdSBDcZvMZI6ZKwjqbNaGmMp4DOEFZxgeuKq5hOEX+6f4=;
+ bh=kRgAuPJg4QZgZY5JhR8JA1mjiraFCTIYdvp+6bJCoIk=; b=H34jv+ycNSiWmns6bXUCA0I/p
+ DK9uipV5nBaqWuwKi1By0fUPcF4SO/wWIWVypLRKptbOHXivL/Mu6koqhb4F8a+KUfZSIvpQbVcOU
+ wfS5f9f5j2tZhPoizJ95EyeCdlOoWi1oFFgowGHxuxPHVB35lFkQ0aCC0Ws5ycbfzJhvY=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1kKQ8s-000871-Ff; Mon, 21 Sep 2020 18:02:22 +0000
+ id 1kKQ8x-00087T-FT; Mon, 21 Sep 2020 18:02:27 +0000
 Received: from 54-240-197-235.amazon.com ([54.240.197.235]
  helo=ufe34d9ed68d054.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1kKQ8s-0003uk-6L; Mon, 21 Sep 2020 18:02:22 +0000
+ id 1kKQ8x-0003uk-6X; Mon, 21 Sep 2020 18:02:27 +0000
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
-Cc: julien@xen.org, Julien Grall <jgrall@amazon.com>,
+Cc: julien@xen.org, Julien Grall <julien.grall@arm.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
  Andrew Cooper <andrew.cooper3@citrix.com>,
  George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
- Jan Beulich <jbeulich@suse.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
-Subject: [PATCH v4 1/4] xen: XENMEM_exchange should only be used/compiled for
- arch supporting PV guest
-Date: Mon, 21 Sep 2020 19:02:11 +0100
-Message-Id: <20200921180214.4842-2-julien@xen.org>
+ Jan Beulich <jbeulich@suse.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH v4 4/4] xen/mm: Provide dummy M2P-related helpers when
+ !CONFIG_HAVE_M2P
+Date: Mon, 21 Sep 2020 19:02:14 +0100
+Message-Id: <20200921180214.4842-5-julien@xen.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200921180214.4842-1-julien@xen.org>
 References: <20200921180214.4842-1-julien@xen.org>
@@ -76,68 +76,75 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: Julien Grall <jgrall@amazon.com>
+From: Julien Grall <julien.grall@arm.com>
 
-XENMEM_exchange can only be used by PV guest but the check is well
-hidden in steal_page(). This is because paging_model_external() will
-return false only for PV domain.
+At the moment, Arm is providing a dummy implementation for the M2P
+helpers used in common code. However, they are quite isolated and could
+be used by other architecture in the future. So move all the helpers in
+xen/mm.h.
 
-To make clearer this is PV only, add a check at the beginning of the
-implementation. Take the opportunity to compile out the code if
-CONFIG_PV is not set.
-
-This change will also help a follow-up patch where the gmfn_mfn() will
-be completely removed on arch not supporting the M2P.
-
-Signed-off-by: Julien Grall <jgrall@amazon.com>
+Signed-off-by: Julien Grall <julien.grall@arm.com>
 
 ---
-
-Jan suggested to #ifdef anything after the check to is_pv_domain().
-However, it means to have two block of #ifdef as we can't mix
-declaration and code.
-
-I am actually thinking to move the implementation outside of mm.c in
-possibly arch/x86 or a pv specific directory under common. Any opinion?
-
     Changes in v4:
+        - The tags were dropped as the previous version was sent a long
+        time ago.
+
+    Changes in v3:
+        - Add Stefano's reviewed-by
+        - Add George's acked-by
+
+    Changes in v2:
         - Patch added
 ---
- xen/common/memory.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+ xen/include/asm-arm/mm.h | 11 -----------
+ xen/include/xen/mm.h     | 13 +++++++++++++
+ 2 files changed, 13 insertions(+), 11 deletions(-)
 
-diff --git a/xen/common/memory.c b/xen/common/memory.c
-index 714077c1e597..9300104943b0 100644
---- a/xen/common/memory.c
-+++ b/xen/common/memory.c
-@@ -504,6 +504,7 @@ static bool propagate_node(unsigned int xmf, unsigned int *memflags)
+diff --git a/xen/include/asm-arm/mm.h b/xen/include/asm-arm/mm.h
+index 29489a3e1076..5929201d0299 100644
+--- a/xen/include/asm-arm/mm.h
++++ b/xen/include/asm-arm/mm.h
+@@ -318,17 +318,6 @@ static inline void *page_to_virt(const struct page_info *pg)
+ struct page_info *get_page_from_gva(struct vcpu *v, vaddr_t va,
+                                     unsigned long flags);
  
- static long memory_exchange(XEN_GUEST_HANDLE_PARAM(xen_memory_exchange_t) arg)
- {
-+#ifdef CONFIG_PV
-     struct xen_memory_exchange exch;
-     PAGE_LIST_HEAD(in_chunk_list);
-     PAGE_LIST_HEAD(out_chunk_list);
-@@ -516,6 +517,9 @@ static long memory_exchange(XEN_GUEST_HANDLE_PARAM(xen_memory_exchange_t) arg)
-     struct domain *d;
-     struct page_info *page;
+-/*
+- * Arm does not have an M2P, but common code expects a handful of
+- * M2P-related defines and functions. Provide dummy versions of these.
+- */
+-#define INVALID_M2P_ENTRY        (~0UL)
+-#define SHARED_M2P_ENTRY         (~0UL - 1UL)
+-#define SHARED_M2P(_e)           ((_e) == SHARED_M2P_ENTRY)
+-
+-/* We don't have a M2P on Arm */
+-#define set_gpfn_from_mfn(mfn, pfn) do { (void) (mfn), (void)(pfn); } while (0)
+-
+ /* Arch-specific portion of memory_op hypercall. */
+ long arch_memory_op(int op, XEN_GUEST_HANDLE_PARAM(void) arg);
  
-+    if ( !is_pv_domain(d) )
-+        return -EOPNOTSUPP;
-+
-     if ( copy_from_guest(&exch, arg, 1) )
-         return -EFAULT;
- 
-@@ -797,6 +801,9 @@ static long memory_exchange(XEN_GUEST_HANDLE_PARAM(xen_memory_exchange_t) arg)
-     if ( __copy_field_to_guest(arg, &exch, nr_exchanged) )
-         rc = -EFAULT;
-     return rc;
-+#else /* !CONFIG_PV */
-+    return -EOPNOTSUPP;
-+#endif
+diff --git a/xen/include/xen/mm.h b/xen/include/xen/mm.h
+index 4536a62940a1..15bb0aa30d22 100644
+--- a/xen/include/xen/mm.h
++++ b/xen/include/xen/mm.h
+@@ -685,4 +685,17 @@ static inline void put_page_alloc_ref(struct page_info *page)
+     }
  }
  
- int xenmem_add_to_physmap(struct domain *d, struct xen_add_to_physmap *xatp,
++/*
++ * Dummy implementation of M2P-related helpers for common code when
++ * the architecture doesn't have an M2P.
++ */
++#ifndef CONFIG_HAS_M2P
++
++#define INVALID_M2P_ENTRY        (~0UL)
++#define SHARED_M2P(_e)           false
++
++static inline void set_gpfn_from_mfn(unsigned long mfn, unsigned long pfn) {}
++
++#endif
++
+ #endif /* __XEN_MM_H__ */
 -- 
 2.17.1
 
