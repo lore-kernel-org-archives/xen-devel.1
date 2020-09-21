@@ -2,70 +2,58 @@ Return-Path: <SRS0=oC9Q=C6=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-3.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A0640C43464
-	for <xen-devel@archiver.kernel.org>; Mon, 21 Sep 2020 11:40:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 13253C43463
+	for <xen-devel@archiver.kernel.org>; Mon, 21 Sep 2020 11:47:59 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3101D2071A
-	for <xen-devel@archiver.kernel.org>; Mon, 21 Sep 2020 11:40:45 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id AB8A820EDD
+	for <xen-devel@archiver.kernel.org>; Mon, 21 Sep 2020 11:47:58 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="lbFoOg+p"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3101D2071A
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	dkim=pass (1024-bit key) header.d=trmm.net header.i=@trmm.net header.b="x1Ponr6n"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AB8A820EDD
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=trmm.net
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kKKBQ-000855-B4; Mon, 21 Sep 2020 11:40:36 +0000
+	id 1kKKII-0008Mm-4f; Mon, 21 Sep 2020 11:47:42 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=wcPU=C6=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1kKKBP-00084x-Bn
- for xen-devel@lists.xenproject.org; Mon, 21 Sep 2020 11:40:35 +0000
-X-Inumbo-ID: dcc67a4e-35de-42d9-8d0f-241693b1b223
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+ (envelope-from <SRS0=etcF=C6=trmm.net=hudson@srs-us1.protection.inumbo.net>)
+ id 1kKKIG-0008Mh-5A
+ for xen-devel@lists.xenproject.org; Mon, 21 Sep 2020 11:47:40 +0000
+X-Inumbo-ID: 3f56fa0b-9a8a-4cb8-8e95-81302f32096e
+Received: from mail-40133.protonmail.ch (unknown [185.70.40.133])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id dcc67a4e-35de-42d9-8d0f-241693b1b223;
- Mon, 21 Sep 2020 11:40:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:References:Cc:To:From:Subject;
- bh=AlBbjW7/cdCMOUxu4JInEhQwZusQVzJjTLp9zfcFOhA=; b=lbFoOg+phl489YwGSRN8/nIERK
- EHxON8qICqwuNnW/EMkFhJdb7nISGCt3gfTiqMoMbsQMuV0QSmxMvX8/yO9+3cgJWj7VH37cBXEIx
- 1jD8z0CrWKBl4wpLdo516+ZQ6EuVRa6r4u7IBFt2yOLUf9CPlfh361c3gzrxOrDgPWQE=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1kKKBN-0007lq-Rz; Mon, 21 Sep 2020 11:40:33 +0000
-Received: from [54.239.6.186] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1kKKBN-0006jU-La; Mon, 21 Sep 2020 11:40:33 +0000
-Subject: Re: Memory ordering question in the shutdown deferral code
-From: Julien Grall <julien@xen.org>
-To: Jan Beulich <jbeulich@suse.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Paul Durrant <pdurrant@amazon.com>
-Cc: "Xia, Hongyan" <hongyxia@amazon.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <468576ba-8d3f-98e9-e65e-1128b5220d40@xen.org>
-Message-ID: <a75efed4-d435-1746-85ab-a87b328c1101@xen.org>
-Date: Mon, 21 Sep 2020 12:40:31 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
- Gecko/20100101 Thunderbird/68.12.0
+ id 3f56fa0b-9a8a-4cb8-8e95-81302f32096e;
+ Mon, 21 Sep 2020 11:47:37 +0000 (UTC)
+Date: Mon, 21 Sep 2020 11:47:30 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=trmm.net;
+ s=protonmail; t=1600688856;
+ bh=JCDPtqxytWHbcVL+9QQ23fdaCQ8LYNt/REH3k7vJDWw=;
+ h=Date:To:From:Cc:Reply-To:Subject:In-Reply-To:References:From;
+ b=x1Ponr6nqOUAQBxTOkkuOHYevaegJLEMAxDgtAnvU1vKgQzwFkzxypXh2kujLYKEP
+ 8PepamSr0blCbfjXLaZgvYRlN76nUH7iBakHlI12s8RnKe4lzIrhbuMFNOQN+Pwy9X
+ Iy+ECuFRvcIa5p4NHohipLRfm3iF/kbG0F4fjecM=
+To: Jan Beulich <jbeulich@suse.com>
+From: Trammell Hudson <hudson@trmm.net>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Subject: Re: [PATCH v5 4/5] efi: Enable booting unified
+ hypervisor/kernel/initrd images
+Message-ID: <8SCsKmmE_x1CSekfis7_T8O-sWPNAlOzWW4-X_eiW5-iDudhm8rRmnUf1Ft-i92wHoFVxncXaAYgXI54rK34SxGaf3ihuX0cKXnIt5UOBe4=@trmm.net>
+In-Reply-To: <51b0beda-11bc-a587-d390-63e5613ac309@suse.com>
+References: <20200917154048.1140580-1-hudson@trmm.net>
+ <20200917154048.1140580-5-hudson@trmm.net>
+ <51b0beda-11bc-a587-d390-63e5613ac309@suse.com>
 MIME-Version: 1.0
-In-Reply-To: <468576ba-8d3f-98e9-e65e-1128b5220d40@xen.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,58 +64,37 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
+Reply-To: Trammell Hudson <hudson@trmm.net>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-(+ Xen-devel)
+On Friday, September 18, 2020 11:15 AM, Jan Beulich <jbeulich@suse.com> wro=
+te:
+> On 17.09.2020 17:40, Trammell Hudson wrote:
+> Instead of forcing the caller to pass in a dot-prefixed name
+> and you assuming it's a dot here, how about ...
+> ... pe_find_section() looking for '.' followed by <name>?
 
-Sorry I forgot to CC xen-devel.
+v6 adds a special name compare function to do this with a
+CHAR16 section name to avoid the extra s2w() you mentioned.
 
-On 21/09/2020 12:38, Julien Grall wrote:
-> Hi all,
-> 
-> I have started to look at the deferral code (see 
-> vcpu_start_shutdown_deferral()) because we need it for LiveUpdate and 
-> Arm will soon use it.
-> 
-> The current implementation is using an smp_mb() to ensure ordering 
-> between a write then a read. The code looks roughly (I have slightly 
-> adapted it to make my question more obvious):
-> 
-> domain_shutdown()
->      d->is_shutting_down = 1;
->      smp_mb();
->      if ( !vcpu0->defer_shutdown )
->      {
->        vcpu_pause_nosync(v);
->        v->paused_for_shutdown = 1;
->      }
-> 
-> vcpu_start_shutdown_deferral()
->      vcpu0->defer_shutdown = 1;
->      smp_mb();
->      if ( unlikely(d->is_shutting_down) )
->        vcpu_check_shutdown(v);
-> 
->      return vcpu0->defer_shutdown;
-> 
-> smp_mb() should only guarantee ordering (this may be stronger on some 
-> arch), so I think there is a race between the two functions.
-> 
-> It would be possible to pause the vCPU in domain_shutdown() because 
-> vcpu0->defer_shutdown wasn't yet seen.
-> 
-> Equally, vcpu_start_shutdown_deferral() may not see d->is_shutting_down 
-> and therefore Xen may continue to send the I/O. Yet the vCPU will be 
-> paused so the I/O will never complete.
-> 
-> I am not fully familiar with the IOREQ code, but it sounds to me this is 
-> not the behavior that was intended. Can someone more familiar with the 
-> code confirm it?
-> 
-> Cheers,
-> 
+(btw, even if the EFI constness patches don't go in, just
+making PrintStr cast away the const would allow several of
+these startup functions to have const CHAR16* arguments since
+the only reason they are non-const is to be able to print)
 
--- 
-Julien Grall
+> [...]
+> > -          if ( read_section(loaded_image, ".config", &cfg, NULL) )
+> > -              PrintStr(L"Using unified config file\\r\\n");
+>
+> Maybe "embedded" instead of "unified"? The config file isn't unified
+> after all, it's the Xen binary which is.
+
+How about "builtin"?
+
+I missed the reviews on the need_to_free patch; they are also incorporated =
+into v6.
+
+--
+Trammell
 
