@@ -2,58 +2,66 @@ Return-Path: <SRS0=oC9Q=C6=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 13253C43463
-	for <xen-devel@archiver.kernel.org>; Mon, 21 Sep 2020 11:47:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ACB87C43464
+	for <xen-devel@archiver.kernel.org>; Mon, 21 Sep 2020 11:51:42 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AB8A820EDD
-	for <xen-devel@archiver.kernel.org>; Mon, 21 Sep 2020 11:47:58 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=trmm.net header.i=@trmm.net header.b="x1Ponr6n"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AB8A820EDD
+	by mail.kernel.org (Postfix) with ESMTPS id 5BAB720773
+	for <xen-devel@archiver.kernel.org>; Mon, 21 Sep 2020 11:51:42 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5BAB720773
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=trmm.net
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kKKII-0008Mm-4f; Mon, 21 Sep 2020 11:47:42 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kKKLx-0000ko-LY; Mon, 21 Sep 2020 11:51:29 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=etcF=C6=trmm.net=hudson@srs-us1.protection.inumbo.net>)
- id 1kKKIG-0008Mh-5A
- for xen-devel@lists.xenproject.org; Mon, 21 Sep 2020 11:47:40 +0000
-X-Inumbo-ID: 3f56fa0b-9a8a-4cb8-8e95-81302f32096e
-Received: from mail-40133.protonmail.ch (unknown [185.70.40.133])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3f56fa0b-9a8a-4cb8-8e95-81302f32096e;
- Mon, 21 Sep 2020 11:47:37 +0000 (UTC)
-Date: Mon, 21 Sep 2020 11:47:30 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=trmm.net;
- s=protonmail; t=1600688856;
- bh=JCDPtqxytWHbcVL+9QQ23fdaCQ8LYNt/REH3k7vJDWw=;
- h=Date:To:From:Cc:Reply-To:Subject:In-Reply-To:References:From;
- b=x1Ponr6nqOUAQBxTOkkuOHYevaegJLEMAxDgtAnvU1vKgQzwFkzxypXh2kujLYKEP
- 8PepamSr0blCbfjXLaZgvYRlN76nUH7iBakHlI12s8RnKe4lzIrhbuMFNOQN+Pwy9X
- Iy+ECuFRvcIa5p4NHohipLRfm3iF/kbG0F4fjecM=
-To: Jan Beulich <jbeulich@suse.com>
+ id 1kKKLw-0000kj-BK
+ for xen-devel@lists.xenproject.org; Mon, 21 Sep 2020 11:51:28 +0000
+X-Inumbo-ID: cded3dbe-401d-441f-9c15-add46c8622b5
+Received: from mx1a.swcp.com (unknown [216.184.2.64])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id cded3dbe-401d-441f-9c15-add46c8622b5;
+ Mon, 21 Sep 2020 11:51:26 +0000 (UTC)
+Received: from ame7.swcp.com (ame7.swcp.com [216.184.2.70])
+ by mx1a.swcp.com (8.14.4/8.14.4/Debian-4) with ESMTP id 08LBpND1025394;
+ Mon, 21 Sep 2020 05:51:24 -0600
+Received-SPF: neutral (ame7.swcp.com: 62.251.112.184 is neither permitted nor
+ denied by domain of hudson@trmm.net) receiver=ame7.swcp.com;
+ client-ip=62.251.112.184; helo=diamond.fritz.box;
+ envelope-from=hudson@trmm.net;
+ x-software=spfmilter 2.001 http://www.acme.com/software/spfmilter/ with
+ libspf2-1.2.10; 
+Received: from diamond.fritz.box (62-251-112-184.ip.xs4all.nl [62.251.112.184])
+ by ame7.swcp.com (8.15.2/8.15.2) with ESMTP id 08LBpFaR047064;
+ Mon, 21 Sep 2020 05:51:20 -0600 (MDT) (envelope-from hudson@trmm.net)
+X-Authentication-Warning: ame7.swcp.com: Host 62-251-112-184.ip.xs4all.nl
+ [62.251.112.184] claimed to be diamond.fritz.box
 From: Trammell Hudson <hudson@trmm.net>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Subject: Re: [PATCH v5 4/5] efi: Enable booting unified
- hypervisor/kernel/initrd images
-Message-ID: <8SCsKmmE_x1CSekfis7_T8O-sWPNAlOzWW4-X_eiW5-iDudhm8rRmnUf1Ft-i92wHoFVxncXaAYgXI54rK34SxGaf3ihuX0cKXnIt5UOBe4=@trmm.net>
-In-Reply-To: <51b0beda-11bc-a587-d390-63e5613ac309@suse.com>
-References: <20200917154048.1140580-1-hudson@trmm.net>
- <20200917154048.1140580-5-hudson@trmm.net>
- <51b0beda-11bc-a587-d390-63e5613ac309@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: roger.pau@citrix.com, jbeulich@suse.com, andrew.cooper3@citrix.com,
+ wl@xen.org
+Subject: [PATCH v6 0/5] efi: Unified Xen hypervisor/kernel/initrd images
+Date: Mon, 21 Sep 2020 07:51:08 -0400
+Message-Id: <20200921115113.1278655-1-hudson@trmm.net>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 2.83
+X-Greylist: Message whitelisted by DRAC access database, not delayed by
+ milter-greylist-4.6.2 (ame7.swcp.com [216.184.2.128]);
+ Mon, 21 Sep 2020 05:51:22 -0600 (MDT)
+X-Virus-Scanned: clamav-milter 0.100.2 at ame7
+X-Virus-Status: Clean
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,37 +72,48 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Reply-To: Trammell Hudson <hudson@trmm.net>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Friday, September 18, 2020 11:15 AM, Jan Beulich <jbeulich@suse.com> wro=
-te:
-> On 17.09.2020 17:40, Trammell Hudson wrote:
-> Instead of forcing the caller to pass in a dot-prefixed name
-> and you assuming it's a dot here, how about ...
-> ... pe_find_section() looking for '.' followed by <name>?
+This patch series adds support for bundling the xen.efi hypervisor,
+the xen.cfg configuration file, the Linux kernel and initrd, as well
+as the XSM, and architectural specific files into a single "unified"
+EFI executable.  This allows an administrator to update the components
+independently without requiring rebuilding xen, as well as to replace
+the components in an existing image.
 
-v6 adds a special name compare function to do this with a
-CHAR16 section name to avoid the extra s2w() you mentioned.
+The resulting EFI executable can be invoked directly from the UEFI Boot
+Manager, removing the need to use a separate loader like grub as well
+as removing dependencies on local filesystem access.  And since it is
+a single file, it can be signed and validated by UEFI Secure Boot without
+requring the shim protocol.
 
-(btw, even if the EFI constness patches don't go in, just
-making PrintStr cast away the const would allow several of
-these startup functions to have const CHAR16* arguments since
-the only reason they are non-const is to be able to print)
+It is inspired by systemd-boot's unified kernel technique and borrows the
+function to locate PE sections from systemd's LGPL'ed code.  During EFI
+boot, Xen looks at its own loaded image to locate the PE sections for
+the Xen configuration (`.config`), dom0 kernel (`.kernel`), dom0 initrd
+(`.ramdisk`), and XSM config (`.xsm`), which are included after building
+xen.efi using objcopy to add named sections for each input file.
 
-> [...]
-> > -          if ( read_section(loaded_image, ".config", &cfg, NULL) )
-> > -              PrintStr(L"Using unified config file\\r\\n");
->
-> Maybe "embedded" instead of "unified"? The config file isn't unified
-> after all, it's the Xen binary which is.
+Trammell Hudson (5):
+  efi/boot.c: Make file->ptr const void*
+  efi/boot.c: add file.need_to_free
+  efi/boot.c: add handle_file_info()
+  efi: Enable booting unified hypervisor/kernel/initrd images
+  efi: Do not use command line if unified config is included
 
-How about "builtin"?
+ .gitignore                  |   1 +
+ docs/misc/efi.pandoc        |  49 +++++++++++
+ xen/arch/arm/efi/efi-boot.h |  25 ++++--
+ xen/arch/x86/efi/Makefile   |   2 +-
+ xen/arch/x86/efi/efi-boot.h |  11 ++-
+ xen/common/efi/boot.c       | 155 +++++++++++++++++++++++++----------
+ xen/common/efi/efi.h        |   3 +
+ xen/common/efi/pe.c         | 159 ++++++++++++++++++++++++++++++++++++
+ 8 files changed, 353 insertions(+), 52 deletions(-)
+ create mode 100644 xen/common/efi/pe.c
 
-I missed the reviews on the need_to_free patch; they are also incorporated =
-into v6.
+-- 
+2.25.1
 
---
-Trammell
 
