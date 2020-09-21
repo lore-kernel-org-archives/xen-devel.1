@@ -3,72 +3,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-8.1 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8006BC4363C
-	for <xen-devel@archiver.kernel.org>; Mon, 21 Sep 2020 20:35:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D9BAFC4363C
+	for <xen-devel@archiver.kernel.org>; Mon, 21 Sep 2020 20:37:43 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 23983218AC
-	for <xen-devel@archiver.kernel.org>; Mon, 21 Sep 2020 20:35:02 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 794F0218AC
+	for <xen-devel@archiver.kernel.org>; Mon, 21 Sep 2020 20:37:43 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="T1FQV4tp"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 23983218AC
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="MyVqHeNK"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 794F0218AC
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kKSWO-0001Sd-9C; Mon, 21 Sep 2020 20:34:48 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kKSYy-0001bI-N9; Mon, 21 Sep 2020 20:37:28 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=qIeE=C6=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1kKSWM-0001S7-RS
- for xen-devel@lists.xenproject.org; Mon, 21 Sep 2020 20:34:46 +0000
-X-Inumbo-ID: 72ba40b8-b8e2-4a29-aebd-e653223906f3
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 72ba40b8-b8e2-4a29-aebd-e653223906f3;
- Mon, 21 Sep 2020 20:34:45 +0000 (UTC)
+ id 1kKSYw-0001bD-Jo
+ for xen-devel@lists.xenproject.org; Mon, 21 Sep 2020 20:37:26 +0000
+X-Inumbo-ID: bff694ab-7bda-4bd1-b4dc-2165245f6b1e
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id bff694ab-7bda-4bd1-b4dc-2165245f6b1e;
+ Mon, 21 Sep 2020 20:37:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1600720486;
+ d=citrix.com; s=securemail; t=1600720645;
  h=subject:to:cc:references:from:message-id:date:
  mime-version:in-reply-to:content-transfer-encoding;
- bh=ZYUvee04j2heAqbtOalg6aDsC6imyQhcvAD3gz1E+5M=;
- b=T1FQV4tpA0XBbOl0eh3SEZqNVLzefR1JMOgH6NO5QuaS7Ot9Xje1fOmY
- I5XdNJMYTIABmuwT1E9sCldO+CmOmUeIKXpk8HhTHZSxuGUkC3GIgiD61
- +Pq0jB/g9j1iGlN/VLMZoJwiL09nJGC5KOLHYIn4F12gpj6PUw5r8B6PA s=;
-Authentication-Results: esa1.hc3370-68.iphmx.com;
+ bh=PI68VIsXDHRlcHcIzjhtlnHbT/WSalbwA0HZLmELt84=;
+ b=MyVqHeNK5j7Xeo5QnoNBceWpXC1y+rsSqjjFYDei5pVpU7g0YU5IY1bk
+ UtesfPSyYJKwW80JwudS4myetDF1IDWaSGdzF26UXOofk71Rrk/Cwoq1K
+ asU8qurVIDDpmdx1thCJmGsY/tE/EsA31vZNYsjgks3LYam7FIGRntLfl Y=;
+Authentication-Results: esa3.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: UklDgMt6pD81Ss8zhelVfAFz+UVPlrEj+1sCKY4EkayatPC8e9nMsk0dz9HBmeVArhaA3LDeqO
- YWVyF4g9v+fAmMnV2LrsgoN8b3gh4wZI6A72VwSGfU61sV6o6N2ejA1lGObDGjdfh3zZS2KBaj
- e0zTvXeBXRyV+jzbS4i4Revy0+Q/FmqvJetqHXiV/RhHbzf3hTwPmipcXoJzByw6lj0mmi+Pp4
- jsm3lHrdbzWpCKHNqDuzNlPYJ+ezLfU47Ikav6ET3+dAX6P0tJ/BMNB8hn/S92KS6INTZCdqrs
- fnA=
+IronPort-SDR: XH5DvnutJNQEf5sPoPe87HAX6MhglH4T+nevu+tZmObEEwXtjeRIbOfUtQFGZqLCYAQ596RgBH
+ 1ayXSDP8Gxy0hBKWz4zKVrdM3/xRu+NMD1TB/sJ7HThGCGNfkpX2Qb5TP4klxRi4orQsoI6fk3
+ WxHK8vj9eIlA0i1vVCT0tMT4KQ9ZGjLzyutebyTQmh4/q5gUfc7900rMxDiZNrZRmar5Uv1Lah
+ CBq5K9r1z25OG2gbUOkeCUVfHK37Q0J5gddrAros+mEOcOWoF0VY6oxj+EF0pW1mOPLuMPhf4n
+ 2MM=
 X-SBRS: 2.7
-X-MesageID: 27537140
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 27175791
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.77,287,1596513600"; d="scan'208";a="27537140"
-Subject: Re: [PATCH v4 3/4] xen: Remove mfn_to_gmfn macro
+X-IronPort-AV: E=Sophos;i="5.77,287,1596513600"; d="scan'208";a="27175791"
+Subject: Re: [PATCH v4 4/4] xen/mm: Provide dummy M2P-related helpers when
+ !CONFIG_HAVE_M2P
 To: Julien Grall <julien@xen.org>, <xen-devel@lists.xenproject.org>
 CC: Julien Grall <julien.grall@arm.com>, Stefano Stabellini
  <sstabellini@kernel.org>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- "Jan Beulich" <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
- <roger.pau@citrix.com>, Wei Liu <wl@xen.org>
+ George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ Jan Beulich <jbeulich@suse.com>, Wei Liu <wl@xen.org>
 References: <20200921180214.4842-1-julien@xen.org>
- <20200921180214.4842-4-julien@xen.org>
+ <20200921180214.4842-5-julien@xen.org>
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-Message-ID: <e0783993-50b0-cdf4-895d-45ef8f40450b@citrix.com>
-Date: Mon, 21 Sep 2020 21:34:38 +0100
+Message-ID: <26a1a029-26ec-51b4-bd1c-a1826f7d1ad7@citrix.com>
+Date: Mon, 21 Sep 2020 21:37:18 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20200921180214.4842-4-julien@xen.org>
+In-Reply-To: <20200921180214.4842-5-julien@xen.org>
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 Content-Language: en-GB
@@ -88,25 +90,32 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 On 21/09/2020 19:02, Julien Grall wrote:
-> From: Julien Grall <julien.grall@arm.com>
->
-> On x86, mfn_to_gmfn can be replaced with mfn_to_gfn. On Arm, there are
-> no more call to mfn_to_gmfn, so the helper can be dropped.
+> diff --git a/xen/include/xen/mm.h b/xen/include/xen/mm.h
+> index 4536a62940a1..15bb0aa30d22 100644
+> --- a/xen/include/xen/mm.h
+> +++ b/xen/include/xen/mm.h
+> @@ -685,4 +685,17 @@ static inline void put_page_alloc_ref(struct page_info *page)
+>      }
+>  }
+>  
+> +/*
+> + * Dummy implementation of M2P-related helpers for common code when
+> + * the architecture doesn't have an M2P.
+> + */
+> +#ifndef CONFIG_HAS_M2P
+> +
+> +#define INVALID_M2P_ENTRY        (~0UL)
+> +#define SHARED_M2P(_e)           false
 
-The previous patch dropped the mfn_to_gmfn() call from the domain shared
-info path, but without a hunk adjusting the innards of
-memory_exchange(), this is going to break the x86 build.
+((void)_e, false)
 
-> At the same time rework a comment in Arm code that does not make sense.
->
-> Signed-off-by: Julien Grall <julien.grall@arm.com>
+Otherwise, Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
-To save a round trip, Acked-by: Andrew Cooper
-<andrew.cooper3@citrix.com> with the appropriate hunk to memory_exchange().
+> +
+> +static inline void set_gpfn_from_mfn(unsigned long mfn, unsigned long pfn) {}
+> +
+> +#endif
+> +
+>  #endif /* __XEN_MM_H__ */
 
-Alternatively, it might make sense to fold the adjustment into patch 1
-which is perhaps more obvious, given the insertion of an is_pv_domain()
-check.
-
-~Andrew
 
