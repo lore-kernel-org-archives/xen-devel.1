@@ -2,71 +2,81 @@ Return-Path: <SRS0=tzN1=C7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-10.1 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_2
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-14.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 27385C4363D
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 14:16:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3F229C4363D
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 14:16:49 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8FA0F2075E
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 14:16:05 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id EBD342076E
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 14:16:48 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=aepfle.de header.i=@aepfle.de header.b="lxfPdj0v"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8FA0F2075E
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
+	dkim=pass (1024-bit key) header.d=amazon.com header.i=@amazon.com header.b="tSGRoKdz"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EBD342076E
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=amazon.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kKj56-0002yz-66; Tue, 22 Sep 2020 14:15:44 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=Js2O=C7=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1kKj54-0002yu-L0
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2020 14:15:43 +0000
-X-Inumbo-ID: f2427c6d-e2ff-4e53-b9cc-7ffb2982ea4e
-Received: from mo4-p00-ob.smtp.rzone.de (unknown [81.169.146.216])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id f2427c6d-e2ff-4e53-b9cc-7ffb2982ea4e;
- Tue, 22 Sep 2020 14:15:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1600784140;
- s=strato-dkim-0002; d=aepfle.de;
- h=References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:
- X-RZG-CLASS-ID:X-RZG-AUTH:From:Subject:Sender;
- bh=0X91Dd5vwO2V1TPQGT83AVfccXZmmlJhlohYr+Aoql8=;
- b=lxfPdj0vXZx5jtRlayxKKmzlb2UApzhuSocxAnUmWAv3K9cJMNL0/7+HVH03VpH/ZT
- aojpnk0rysZAOeFcAA/TdjE/3pCwRrNiuPJtpmu0UFU0kIKdl+4wy/Ejbq4yU2UxLtFv
- 7Mm+SimJeF6zKQ+rvUp2nYmRlwISkkGBezdBU7EIUrvwefk4ObL/HaShNBuzH2eYTjHB
- N8jTv2ukF1VolPFHZqRkTfNGP9JJ9UYKX1VxggNbg57ztBkY9BdCG5ghxbJokVPxpRzx
- ykQV7uccqYVG+ty+lYUBIAm69W6669rdIXQC40mNHoa53pz6lLL7Pmv6C68HFXddfdvE
- fJqA==
-X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QLpd5ylWvMDXdoX8l8pYAcz5OTW+n+/A=="
-X-RZG-CLASS-ID: mo00
-Received: from sender by smtp.strato.de (RZmta 46.10.7 DYNA|AUTH)
- with ESMTPSA id 60ad29w8MEFdElW
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
- (Client did not present a certificate);
- Tue, 22 Sep 2020 16:15:39 +0200 (CEST)
-Date: Tue, 22 Sep 2020 16:15:24 +0200
-From: Olaf Hering <olaf@aepfle.de>
-To: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Cc: xen-devel@lists.xenproject.org
-Subject: Re: races in toolstack build
-Message-ID: <20200922161524.79c01229.olaf@aepfle.de>
-In-Reply-To: <fa2ba088-f95d-ce85-b991-793eb4d98f92@suse.com>
-References: <20200922141700.4627df0d.olaf@aepfle.de>
- <fa2ba088-f95d-ce85-b991-793eb4d98f92@suse.com>
-X-Mailer: Claws Mail 2020.08.19 (GTK+ 2.24.32; x86_64-suse-linux-gnu)
+	id 1kKj5u-00034I-Fh; Tue, 22 Sep 2020 14:16:34 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=pHJL=C7=amazon.com=prvs=5271185ff=sjpark@srs-us1.protection.inumbo.net>)
+ id 1kKj5s-00033O-Nz
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2020 14:16:32 +0000
+X-Inumbo-ID: 13794440-c47b-495a-ad0e-639b9b268985
+Received: from smtp-fw-6002.amazon.com (unknown [52.95.49.90])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 13794440-c47b-495a-ad0e-639b9b268985;
+ Tue, 22 Sep 2020 14:16:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
+ t=1600784189; x=1632320189;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version;
+ bh=I6FWFRPKOvHgCEvGqE3sI6rE2eUEbK6ToJxGZZYg2sI=;
+ b=tSGRoKdzq48Eus/u0ZmdM2tk8rKJO20CgKd1MNUbvtlNPyRKMCWWP0ZV
+ XViq0aPnnE50DKlMs6iRZg5crJGqTgyggyOmI7Q+DzBKLb1XR4NyEGXYI
+ /hjZlqQ45sr3EnSqvDWmL0dbQOqnBIg6tNS3avD3bUnoReqzrJxREMfRS A=;
+X-IronPort-AV: E=Sophos;i="5.77,291,1596499200"; d="scan'208";a="55537286"
+Received: from iad12-co-svc-p1-lb1-vlan3.amazon.com (HELO
+ email-inbound-relay-2b-c300ac87.us-west-2.amazon.com) ([10.43.8.6])
+ by smtp-border-fw-out-6002.iad6.amazon.com with ESMTP;
+ 22 Sep 2020 14:16:26 +0000
+Received: from EX13D31EUA004.ant.amazon.com
+ (pdx4-ws-svc-p6-lb7-vlan2.pdx.amazon.com [10.170.41.162])
+ by email-inbound-relay-2b-c300ac87.us-west-2.amazon.com (Postfix) with ESMTPS
+ id B6EBFA1800; Tue, 22 Sep 2020 14:16:25 +0000 (UTC)
+Received: from u3f2cd687b01c55.ant.amazon.com (10.43.160.137) by
+ EX13D31EUA004.ant.amazon.com (10.43.165.161) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Tue, 22 Sep 2020 14:16:19 +0000
+From: SeongJae Park <sjpark@amazon.com>
+To: <konrad.wilk@oracle.com>, <roger.pau@citrix.com>, <jgross@suse.com>
+CC: SeongJae Park <sjpark@amazon.de>, <axboe@kernel.dk>,
+ <aliguori@amazon.com>, <amit@kernel.org>, <mheyne@amazon.de>,
+ <pdurrant@amazon.co.uk>, <linux-block@vger.kernel.org>,
+ <xen-devel@lists.xenproject.org>, <linux-kernel@vger.kernel.org>
+Subject: [PATCH v3 2/3] xen-blkfront: add a parameter for disabling of
+ persistent grants
+Date: Tue, 22 Sep 2020 16:15:48 +0200
+Message-ID: <20200922141549.26154-3-sjpark@amazon.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200922141549.26154-1-sjpark@amazon.com>
+References: <20200922141549.26154-1-sjpark@amazon.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- boundary="Sig_/uunx4E0Xyv=TK/m6qXBbp6/"; protocol="application/pgp-signature"
+Content-Type: text/plain
+X-Originating-IP: [10.43.160.137]
+X-ClientProxiedBy: EX13D12UWC001.ant.amazon.com (10.43.162.78) To
+ EX13D31EUA004.ant.amazon.com (10.43.165.161)
+Precedence: Bulk
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
-Precedence: list
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -77,44 +87,93 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
---Sig_/uunx4E0Xyv=TK/m6qXBbp6/
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+From: SeongJae Park <sjpark@amazon.de>
 
-Am Tue, 22 Sep 2020 15:51:00 +0200
-schrieb J=C3=BCrgen Gro=C3=9F <jgross@suse.com>:
+Persistent grants feature provides high scalability.  On some small
+systems, however, it could incur data copy overheads[1] and thus it is
+required to be disabled.  It can be disabled from blkback side using a
+module parameter, 'feature_persistent'.  But, it is impossible from
+blkfront side.  For the reason, this commit adds a blkfront module
+parameter for disabling of the feature.
 
-> Is this really a normal upstream build, or do you have any additional
-> patches applied?
+[1] https://wiki.xen.org/wiki/Xen_4.3_Block_Protocol_Scalability
 
-Nothing relevant.
-https://github.com/olafhering/xen/compare/olafhering:olh-base-staging...olh=
--fixes-staging
+Signed-off-by: SeongJae Park <sjpark@amazon.de>
+---
+ .../ABI/testing/sysfs-driver-xen-blkfront     |  9 +++++++++
+ drivers/block/xen-blkfront.c                  | 20 ++++++++++++++-----
+ 2 files changed, 24 insertions(+), 5 deletions(-)
 
-Maybe the build VMs have filesystem issues?
+diff --git a/Documentation/ABI/testing/sysfs-driver-xen-blkfront b/Documentation/ABI/testing/sysfs-driver-xen-blkfront
+index c0a6cb7eb314..9c31334cb2e6 100644
+--- a/Documentation/ABI/testing/sysfs-driver-xen-blkfront
++++ b/Documentation/ABI/testing/sysfs-driver-xen-blkfront
+@@ -8,3 +8,12 @@ Description:
+                 is 32 - higher value means more potential throughput but more
+                 memory usage. The backend picks the minimum of the frontend
+                 and its default backend value.
++
++What:           /sys/module/xen_blkfront/parameters/feature_persistent
++Date:           September 2020
++KernelVersion:  5.10
++Contact:        SeongJae Park <sjpark@amazon.de>
++Description:
++                Whether to enable the persistent grants feature or not.  Note
++                that this option only takes effect on newly created frontends.
++                The default is Y (enable).
+diff --git a/drivers/block/xen-blkfront.c b/drivers/block/xen-blkfront.c
+index 91de2e0755ae..b2d3b1262404 100644
+--- a/drivers/block/xen-blkfront.c
++++ b/drivers/block/xen-blkfront.c
+@@ -1866,8 +1866,8 @@ static int talk_to_blkback(struct xenbus_device *dev,
+ 		message = "writing protocol";
+ 		goto abort_transaction;
+ 	}
+-	err = xenbus_printf(xbt, dev->nodename,
+-			    "feature-persistent", "%u", 1);
++	err = xenbus_printf(xbt, dev->nodename, "feature-persistent", "%u",
++			info->feature_persistent);
+ 	if (err)
+ 		dev_warn(&dev->dev,
+ 			 "writing persistent grants feature to xenbus");
+@@ -1941,6 +1941,13 @@ static int negotiate_mq(struct blkfront_info *info)
+ 	}
+ 	return 0;
+ }
++
++/* Enable the persistent grants feature. */
++static bool feature_persistent = true;
++module_param(feature_persistent, bool, 0644);
++MODULE_PARM_DESC(feature_persistent,
++		"Enables the persistent grants feature");
++
+ /**
+  * Entry point to this code when a new device is created.  Allocate the basic
+  * structures and the ring buffer for communication with the backend, and
+@@ -2007,6 +2014,8 @@ static int blkfront_probe(struct xenbus_device *dev,
+ 	info->vdevice = vdevice;
+ 	info->connected = BLKIF_STATE_DISCONNECTED;
+ 
++	info->feature_persistent = feature_persistent ? 1 : 0;
++
+ 	/* Front end dir is a number, which is used as the id. */
+ 	info->handle = simple_strtoul(strrchr(dev->nodename, '/')+1, NULL, 0);
+ 	dev_set_drvdata(&dev->dev, info);
+@@ -2316,9 +2325,10 @@ static void blkfront_gather_backend_features(struct blkfront_info *info)
+ 	if (xenbus_read_unsigned(info->xbdev->otherend, "feature-discard", 0))
+ 		blkfront_setup_discard(info);
+ 
+-	info->feature_persistent =
+-		!!xenbus_read_unsigned(info->xbdev->otherend,
+-				       "feature-persistent", 0);
++	if (info->feature_persistent)
++		info->feature_persistent =
++			!!xenbus_read_unsigned(info->xbdev->otherend,
++					       "feature-persistent", 0);
+ 
+ 	indirect_segments = xenbus_read_unsigned(info->xbdev->otherend,
+ 					"feature-max-indirect-segments", 0);
+-- 
+2.17.1
 
-Olaf
-
---Sig_/uunx4E0Xyv=TK/m6qXBbp6/
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEE97o7Um30LT3B+5b/86SN7mm1DoAFAl9qBvwACgkQ86SN7mm1
-DoCJRw//UE02ljbgSTWzO5Dk3uNbsvbDKqpFTOVH+brYdx8UmTJRRvkx0TZfBc7l
-74THuuKqYWEEXAAOheLGT9Z1vef7eRKwm+nhQAzgYVM4pGUHuZuN8VJjP/HhxRa9
-IRFWw6e4r3qfm84xmVACyEwjF447AfVJ2N+iStBhPdQDvamaIqt8gCL06I6d03s/
-kMYeYw402EiurwtxRpakJNqzHluq6leJ/dpJeGb8bAn3HwW3SzKw5RmbQmq1RPdY
-dF8/5PNL2HCfynz82026Xe/BjuKHGqF4ZSmZSocUg0ndiUYqpZtqaW2G4hAEgNbS
-L+o872K/cR5vTYP4UKi36GbNfOcaUgdBPdnhTFso1ONuDXf5MhDDe4VszKE0dUcl
-ay84IDIpQj4CBXI75vHOHx+qXQIQDjr9pk2WK57uv2ClLRW8P8teeRnvJSpGEPma
-KPXjZXFywpK8VJxsu41k33ITTAZIlS2WYxym6NutHcV4bd39n/icME5l6qkAsc8G
-uMEjM4k684ToPxPgTf+IatQvA/HJIDVHnqcmOEzgStSZrBWfalz+jwQVj7jFimpn
-gI2IhXLNtb4jLLTsD4AXtVzP7GqUaOLAqgfNpNPmu0sLZ/ETpP5WBzxHbs1Sf0pf
-7saK/OAmyNlNJZ2LuFKTAsbX9/cukPqwY0iGw0Q+Zuuzgh1o+Qw=
-=X8y8
------END PGP SIGNATURE-----
-
---Sig_/uunx4E0Xyv=TK/m6qXBbp6/--
 
