@@ -2,76 +2,69 @@ Return-Path: <SRS0=tzN1=C7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D0AA7C4363D
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 18:25:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D471FC4363D
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 18:34:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 711612085B
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 18:25:46 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 8A67F2065D
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 18:34:57 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="TvcE21Cn"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 711612085B
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="IjSYBNRu"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8A67F2065D
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kKmyu-00008x-0t; Tue, 22 Sep 2020 18:25:36 +0000
+	id 1kKn7i-0001oe-A4; Tue, 22 Sep 2020 18:34:42 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=J35V=C7=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1kKmyt-0008V0-80
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2020 18:25:35 +0000
-X-Inumbo-ID: 48dcaa99-9115-4127-9811-3dcfce06f1bd
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
+ id 1kKn7h-0001oJ-Du
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2020 18:34:41 +0000
+X-Inumbo-ID: 0f8ab936-bd09-49ac-a0c9-1898283fc792
+Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 48dcaa99-9115-4127-9811-3dcfce06f1bd;
- Tue, 22 Sep 2020 18:25:30 +0000 (UTC)
+ id 0f8ab936-bd09-49ac-a0c9-1898283fc792;
+ Tue, 22 Sep 2020 18:34:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1600799131;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=+DQD+d+fvBmJ1gvBN17a246Lozt0hdVhxfIVLanu6Lk=;
- b=TvcE21CnnGpK6skpKAdPPIM7p++CsWPsOJ5VHDJlxs0DrFH3MObqG70v
- +MTpbblsSCjQEAgBILUgT8zniMnPWV1WfsfUHPNx8DtNbDCNO0QvX2Nb0
- w4qJCQBB4KlRlVo6wC7RD7iyoKFqhfXyvKcyERy4MMAbMWvuVB4R1kho8 0=;
-Authentication-Results: esa1.hc3370-68.iphmx.com;
+ d=citrix.com; s=securemail; t=1600799675;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version;
+ bh=ZjmZaUz16Rtfto5cL6MHuLw5U//b1IHlG7ceB93+qBg=;
+ b=IjSYBNRulpdoJGMvasA0etwsBNbs9Fsc8/YHuTPP6lFj+frro2/lgI5k
+ 6aZ7aPrjPNbQyyS/B7RfHDlyMt0G1/EvkVio9kOZCfaRYK192vDjxtvs4
+ WMnRDJ7bejv1z+jKSMoBFVp/fbGMmZ+ErekMECcGHyfDkgMXL0DLcBuY/ k=;
+Authentication-Results: esa2.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: B74LoXN6PKJ0DWkCj+DMON9PaUwJyMVKF84Cd4s+E+c7a/EhVqSrThKDocdMwniWImzEdoMk5m
- 90jqBY5o6FZT1wt9cL2Mdw4+FwQb4p+uKn9su6ZOuvNYjzmJEnNu1QEcpBAz3LpOizEzJYecXw
- NtnB7XRRsKLjWA5xbQMtqWTDTwWdPLgbr7vQc0AMzqD+EBWivrNyH7CP0UWUUGKO4aMYJVysCk
- dOD1mWOgQMyTbTgpbC+QumuM2LjjUtWmI1dnF1VLeWaL4WAj5LsGP2gim9M9cuUQQDIrgvAOi4
- nYo=
+IronPort-SDR: Z8DvEV+6vNjn7RLEMRYOHAc7l24LwDXDKsbrRRhi0mubwKZDtGyT7jT7yMq/bowjp45yGZq+sU
+ bTy14CI8+P08ftLmuCqL9TN4qkCY3PUarm1eKZzUXI0hyM/EwNjh+slc8IgMIi8krkML2CRwtq
+ m5gf8JckQrKJ/LyCQm5sAV/8LisVOoJmGWul76a5kCE363JN4G3vRrLMO3ydG+Da/UMEpoJV5v
+ QGumYmA2y0mUHo94M2XpHKfsW6d4RwoqJBk6c/2UcYt5H6Yu4Ndp67cFKTIa53fmA2p51DbE20
+ w3o=
 X-SBRS: 2.7
-X-MesageID: 27631643
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 27301294
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.77,291,1596513600"; d="scan'208";a="27631643"
+X-IronPort-AV: E=Sophos;i="5.77,291,1596513600"; d="scan'208";a="27301294"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
- <George.Dunlap@eu.citrix.com>, Ian Jackson <iwj@xenproject.org>, Jan Beulich
- <JBeulich@suse.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, "Stefano
- Stabellini" <sstabellini@kernel.org>, Volodymyr Babchuk
- <Volodymyr_Babchuk@epam.com>, Wei Liu <wl@xen.org>,
- =?UTF-8?q?Micha=C5=82=20Leszczy=C5=84ski?= <michal.leszczynski@cert.pl>,
- Hubert Jasudowicz <hubert.jasudowicz@cert.pl>, Tamas K Lengyel
- <tamas@tklengyel.com>
-Subject: [PATCH v2 00/11] Multiple fixes to XENMEM_acquire_resource
-Date: Tue, 22 Sep 2020 19:24:33 +0100
-Message-ID: <20200922182444.12350-1-andrew.cooper3@citrix.com>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH v2 10/11] TESTING dom0
+Date: Tue, 22 Sep 2020 19:24:43 +0100
+Message-ID: <20200922182444.12350-11-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20200922182444.12350-1-andrew.cooper3@citrix.com>
+References: <20200922182444.12350-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -85,60 +78,145 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-I thought this was going to be a very simple small bugfix for Michał's
-Processor Trace series.  Serves me right for expecting it not to be full of
-bear traps...
+Poke xenforeignmemory_map_resource() from userspace.  Confirm that all 40
+grant frames can be mapped.
 
-The sole implementation of acquire_resource never asks for size, so its little
-surprise that Xen is broken for compat callers, and returns incorrect
-information for regular callers.
+Do not apply.
 
-v2 was delayed substantially due to the discovery of XSA-334, but is complete
-now, permitting the mapping of arbitrary sized resouces, along with fixes to
-the compat XLAT logic.
-
-The final two patches are only local testing, and not intended for committing.
-
-A branch can be obtained from:
-
-  https://xenbits.xen.org/gitweb/?p=people/andrewcoop/xen.git;a=shortlog;h=refs/heads/xen-acquire-resource
-
-Andrew Cooper (11):
-  xen/memory: Introduce CONFIG_ARCH_ACQUIRE_RESOURCE
-  xen/gnttab: Rework resource acquisition
-  xen/memory: Fix compat XENMEM_acquire_resource for size requests
-  xen/memory: Fix acquire_resource size semantics
-  tools/foreignmem: Support querying the size of a resource
-  xen/memory: Clarify the XENMEM_acquire_resource ABI description
-  xen/memory: Improve compat XENMEM_acquire_resource handling
-  xen/memory: Indent part of acquire_resource()
-  xen/memory: Fix mapping grant tables with XENMEM_acquire_resource
-  TESTING dom0
-  TESTING XTF
-
- tools/libs/foreignmemory/Makefile                  |   2 +-
- tools/libs/foreignmemory/core.c                    |  14 ++
- .../libs/foreignmemory/include/xenforeignmemory.h  |  15 ++
- tools/libs/foreignmemory/libxenforeignmemory.map   |   4 +
- tools/libs/foreignmemory/linux.c                   |  36 +++
- tools/libs/foreignmemory/private.h                 |  14 ++
- tools/libs/uselibs.mk                              |   2 +-
- tools/misc/Makefile                                |   4 +
- tools/misc/xen-resource.c                          | 106 +++++++++
- xen/arch/x86/Kconfig                               |   1 +
- xen/arch/x86/mm.c                                  |  24 +-
- xen/common/Kconfig                                 |   3 +
- xen/common/compat/memory.c                         | 151 +++++++++----
- xen/common/grant_table.c                           | 128 ++++++++---
- xen/common/memory.c                                | 244 ++++++++++++++-------
- xen/include/asm-arm/mm.h                           |   8 -
- xen/include/asm-x86/mm.h                           |   3 +
- xen/include/public/memory.h                        |  23 +-
- xen/include/xen/grant_table.h                      |  21 +-
- xen/include/xen/mm.h                               |  15 ++
- 20 files changed, 647 insertions(+), 171 deletions(-)
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+ tools/misc/Makefile       |   4 ++
+ tools/misc/xen-resource.c | 106 ++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 110 insertions(+)
  create mode 100644 tools/misc/xen-resource.c
 
+diff --git a/tools/misc/Makefile b/tools/misc/Makefile
+index 7d37f297a9..c1d262c329 100644
+--- a/tools/misc/Makefile
++++ b/tools/misc/Makefile
+@@ -76,6 +76,10 @@ distclean: clean
+ xen-cpuid: xen-cpuid.o
+ 	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS_libxenctrl) $(LDLIBS_libxenguest) $(APPEND_LDFLAGS)
+ 
++xen-resource.o: APPEND_CFLAGS += -Wno-declaration-after-statement
++xen-resource: xen-resource.o
++	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS_libxenctrl) $(LDLIBS_libxenforeignmemory) $(LDLIBS_libxendevicemodel) $(APPEND_LDFLAGS)
++
+ xen-hvmctx: xen-hvmctx.o
+ 	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS_libxenctrl) $(APPEND_LDFLAGS)
+ 
+diff --git a/tools/misc/xen-resource.c b/tools/misc/xen-resource.c
+new file mode 100644
+index 0000000000..3c29d43a35
+--- /dev/null
++++ b/tools/misc/xen-resource.c
+@@ -0,0 +1,106 @@
++#include <err.h>
++#include <error.h>
++#include <errno.h>
++#include <stdio.h>
++#include <sys/mman.h>
++
++#include <xenctrl.h>
++#include <xenforeignmemory.h>
++#include <xendevicemodel.h>
++#include <xen-tools/libs.h>
++
++static xc_interface *xch;
++static xenforeignmemory_handle *fh;
++static xendevicemodel_handle *dh;
++
++static void test(unsigned int domid, unsigned int type, unsigned int id)
++{
++    unsigned long nr = ~0;
++
++    printf("Testing d%u, type %u, id %u\n", domid, type, id);
++
++    int rc = xenforeignmemory_resource_size(fh, domid, type, id, &nr);
++    if ( rc )
++    {
++        printf("  failed %d\n", -errno);
++        return;
++    }
++    else
++        printf("  %lu frames\n", nr);
++
++    printf("  Trying to map\n");
++    void *addr = NULL;
++    xenforeignmemory_resource_handle *res =
++        xenforeignmemory_map_resource(fh, domid, type, id, 0, nr,
++                                      &addr, PROT_READ | PROT_WRITE, 0);
++    if ( !res )
++    {
++        perror("  failed");
++        return;
++    }
++
++    printf("  Success\n");
++    xenforeignmemory_unmap_resource(fh, res);
++}
++
++int main(int argc, char **argv)
++{
++    int rc;
++
++    xch = xc_interface_open(NULL, NULL, 0);
++    fh = xenforeignmemory_open(NULL, 0);
++    dh = xendevicemodel_open(NULL, 0);
++
++    if ( !xch )
++        err(1, "xc_interface_open");
++    if ( !fh )
++        err(1, "xenforeignmemory_open");
++    if ( !dh )
++        err(1, "xendevicemodel_open");
++
++    uint32_t domid = 0;
++    struct xen_domctl_createdomain dom = {
++        .flags = XEN_DOMCTL_CDF_hvm,
++        .max_vcpus = 8,
++        .max_grant_frames = 40,
++
++        .arch = {
++            .emulation_flags = XEN_X86_EMU_LAPIC,
++        },
++    };
++
++    rc = xc_domain_create(xch, &domid, &dom);
++    if ( rc )
++    {
++        perror("xc_domain_create()");
++        goto out;
++    }
++    printf("Created d%u\n", domid);
++
++    ioservid_t id = -1;
++    rc = xendevicemodel_create_ioreq_server(dh, domid, 1, &id);
++    if ( rc )
++    {
++        perror("xendevicemodel_create_ioreq_server()");
++        goto out;
++    }
++    printf("Created ioreq server %u\n", id);
++
++
++    test(domid, XENMEM_resource_ioreq_server, id);
++
++    test(domid, XENMEM_resource_grant_table,
++         XENMEM_resource_grant_table_id_shared);
++    test(domid, XENMEM_resource_grant_table,
++         XENMEM_resource_grant_table_id_status);
++
++    test(domid, 2, 0);
++
++out:
++    if ( id >= 0 )
++        xendevicemodel_destroy_ioreq_server(dh, domid, id);
++    if ( domid )
++        xc_domain_destroy(xch, domid);
++
++    return 0;
++}
 -- 
 2.11.0
 
