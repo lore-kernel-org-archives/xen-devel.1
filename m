@@ -2,79 +2,132 @@ Return-Path: <SRS0=tzN1=C7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7037FC4727F
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 11:35:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 649FBC2D0E2
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 11:36:02 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E647820715
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 11:35:45 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id E6DB320719
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 11:36:01 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="bppjrfv7"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E647820715
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="ERk/iBuK"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E6DB320719
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kKgZw-0006gR-UG; Tue, 22 Sep 2020 11:35:24 +0000
+	id 1kKgaL-0006kb-Fa; Tue, 22 Sep 2020 11:35:49 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=oGvm=C7=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1kKgZv-0006gH-46
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2020 11:35:23 +0000
-X-Inumbo-ID: b32717ac-3ae6-4681-95a6-2377ed82538f
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id b32717ac-3ae6-4681-95a6-2377ed82538f;
- Tue, 22 Sep 2020 11:35:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1600774522;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:content-transfer-encoding:in-reply-to;
- bh=LEpVh9z5B/gjx7BbT67s1F5sJUZuubzPdeIHh8AvYIU=;
- b=bppjrfv7CyU3AxHqw6qskzEWcEuwSSf7/FdprQTtY6x95A1jPPjeZBA6
- xdwC4Px8IzCcOTFdH5jFvEWJyGvEUOsvFIOYpPZWGB7thN6TISGuout/N
- MIgaf10VUOi8h7gBtOggxPNDDRYPp8AM5bwxbB8KfPwujsU7xzok91LIN I=;
-Authentication-Results: esa1.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: GCLSnh8hOs3Ru+ShdXfoPjUH80O9R5XsE/lEZntN3FnkZr1g9JCKxXw2X94MqBmGI2JLO0taMh
- n1Y9VkXYPeXaxZyiZf5xKe/CD00oCtgBkkCLw3vMI9mQftR/SHpgiVGhgga/BlrF83lH/CJfUQ
- rH+ZG5UBlRB969GjJ3qt+gG8R1YpiVSEdg+79iuJ/+UOShlUtWU7eyPFrfzW8wtVVjhbENCt7F
- enBthT9jDzyXT64pUHO+Q0v9P+/9hPrG0BdDZDtsLyscMGnpVv6CQ3AoUcAgh1P7Uxe1mac4Ro
- ztc=
-X-SBRS: 2.7
-X-MesageID: 27578698
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.77,290,1596513600"; d="scan'208";a="27578698"
-Date: Tue, 22 Sep 2020 13:35:11 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: SeongJae Park <sjpark@amazon.com>
-CC: <konrad.wilk@oracle.com>, <jgross@suse.com>, SeongJae Park
- <sjpark@amazon.de>, <axboe@kernel.dk>, <aliguori@amazon.com>,
- <amit@kernel.org>, <mheyne@amazon.de>, <pdurrant@amazon.co.uk>,
- <linux-block@vger.kernel.org>, <xen-devel@lists.xenproject.org>,
- <linux-kernel@vger.kernel.org>
-Subject: Re: [PATCH v2 1/3] xen-blkback: add a parameter for disabling of
- persistent grants
-Message-ID: <20200922113511.GK19254@Air-de-Roger>
-References: <20200922111259.GJ19254@Air-de-Roger>
- <20200922112638.14238-1-sjpark@amazon.com>
+ <SRS0=VADB=C7=redhat.com=pbonzini@srs-us1.protection.inumbo.net>)
+ id 1kKgaK-0006kR-Ly
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2020 11:35:48 +0000
+X-Inumbo-ID: 8e6e3eb2-846f-4589-9f49-5d54be7a6e6b
+Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id 8e6e3eb2-846f-4589-9f49-5d54be7a6e6b;
+ Tue, 22 Sep 2020 11:35:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1600774546;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=iVuM9z2yUr8zyxXYDwbwyPVDW6UrW4ow9wkAb6hmN1A=;
+ b=ERk/iBuKCAPFUQlQ3Otikx+wCNsToH1pYkXQjTPHFA3DdnNOK3V/eH/IILrFYNxsJn9xyc
+ fsV+q8X/yc3nflr2z/ea/WNOTLsvEnYAc5U8sSn9mIzdHQnEQkOcDSoq1grQn4E3c23ndt
+ VEbOaGHWmBAVpblGq3I7Fs5zKx9YezQ=
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-33-egRsHQ8ONES9v-RWVXDFtg-1; Tue, 22 Sep 2020 07:35:42 -0400
+X-MC-Unique: egRsHQ8ONES9v-RWVXDFtg-1
+Received: by mail-wm1-f71.google.com with SMTP id m125so790886wmm.7
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2020 04:35:42 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=iVuM9z2yUr8zyxXYDwbwyPVDW6UrW4ow9wkAb6hmN1A=;
+ b=Vkh+Q6yIA7L0QEF32Y2bIpW6GzAvU9x5gQPLKKDtd4Slv+aBly4hSgDImhJdChQD41
+ GrrKQCz16q8jBa1aqkD+BoQRBSZDTks2aCZmdIdLnn3a4aVxfMrbN+zJcnpUGdcZ2rFK
+ zkQmj63xdFnuEUezf+q3VO0q7ueYgCqfdXVrBQvmgx/FSV15NjC4yYnPg3He0elLoNPF
+ Cxy0mabNIq+t3mRESoz6qZO2BO4AsIvPFJd6LiKb6IqVJzwG9t1CZNi5sdEeL+P6mrNR
+ VVQvp9dko137WOXfe3lS+8TCUxWi6W9jQRbmgypLC0lxw3pEU1LQlp1rNHwncvo3ZXAU
+ pgNg==
+X-Gm-Message-State: AOAM532O/DWYIJsI+TNZScEjtPw4J7QoF4AjY5z1CImNAZXqFA/Xrk2j
+ a2hnoqbRVxjk1QJUOcu8+Vjm5oSf7g4FDEh/Sf9LwWboM1adAH90i3sROPiv/c78K5FPFxdfUs5
+ Lud0CJz0Fa99KKkhS9KIHUelG9W8=
+X-Received: by 2002:a1c:2c0a:: with SMTP id s10mr522280wms.103.1600774540928; 
+ Tue, 22 Sep 2020 04:35:40 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxRA5AQEUn4rCczYkkzXjxs49KTP7PwCp4IUjQhU4ZWgDSvFRTPtzciduuPsGxbrjwX11t5eA==
+X-Received: by 2002:a1c:2c0a:: with SMTP id s10mr522238wms.103.1600774540651; 
+ Tue, 22 Sep 2020 04:35:40 -0700 (PDT)
+Received: from ?IPv6:2001:b07:6468:f312:ec2c:90a9:1236:ebc6?
+ ([2001:b07:6468:f312:ec2c:90a9:1236:ebc6])
+ by smtp.gmail.com with ESMTPSA id m18sm25626053wrx.58.2020.09.22.04.35.38
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 22 Sep 2020 04:35:39 -0700 (PDT)
+Subject: Re: [PATCH v2] qemu/atomic.h: prefix qemu_ to solve <stdatomic.h>
+ collisions
+To: Stefan Hajnoczi <stefanha@redhat.com>, qemu-devel@nongnu.org
+Cc: Max Filippov <jcmvbkbc@gmail.com>, Eric Blake <eblake@redhat.com>,
+ Peter Lieven <pl@kamp.de>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Cornelia Huck <cohuck@redhat.com>, Jason Wang <jasowang@redhat.com>,
+ David Hildenbrand <david@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Alberto Garcia <berto@igalia.com>, qemu-s390x@nongnu.org,
+ kvm@vger.kernel.org, Liu Yuan <namei.unix@gmail.com>,
+ Jiri Slaby <jslaby@suse.cz>, Fam Zheng <fam@euphon.net>,
+ Paul Durrant <paul@xen.org>, Eduardo Habkost <ehabkost@redhat.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Aurelien Jarno
+ <aurelien@aurel32.net>, Max Reitz <mreitz@redhat.com>,
+ Halil Pasic <pasic@linux.ibm.com>, Michael Roth <mdroth@linux.vnet.ibm.com>,
+ Kevin Wolf <kwolf@redhat.com>, Christian Borntraeger
+ <borntraeger@de.ibm.com>, Thomas Huth <thuth@redhat.com>,
+ John Snow <jsnow@redhat.com>, Alistair Francis <Alistair.Francis@wdc.com>,
+ Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>,
+ Anthony Perard <anthony.perard@citrix.com>, qemu-arm@nongnu.org,
+ Yuval Shaia <yuval.shaia.ml@gmail.com>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>, sheepdog@lists.wpkg.org,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Gerd Hoffmann <kraxel@redhat.com>, =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?=
+ <berrange@redhat.com>, Stefano Stabellini <sstabellini@kernel.org>,
+ Juan Quintela <quintela@redhat.com>, qemu-riscv@nongnu.org,
+ "Dr. David Alan Gilbert" <dgilbert@redhat.com>, Stefan Weil
+ <sw@weilnetz.de>, Matthew Rosato <mjrosato@linux.ibm.com>,
+ Sunil Muthuswamy <sunilmut@microsoft.com>,
+ Markus Armbruster <armbru@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ qemu-block@nongnu.org, =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?=
+ <marcandre.lureau@redhat.com>, xen-devel@lists.xenproject.org,
+ Laurent Vivier <laurent@vivier.eu>,
+ Hailiang Zhang <zhang.zhanghailiang@huawei.com>,
+ Richard Henderson <rth@twiddle.net>, Peter Maydell
+ <peter.maydell@linaro.org>, Huacai Chen <chenhc@lemote.com>
+References: <20200922085838.230505-1-stefanha@redhat.com>
+From: Paolo Bonzini <pbonzini@redhat.com>
+Message-ID: <33631340-e3e3-b10f-4f9a-0e1b295d79ef@redhat.com>
+Date: Tue, 22 Sep 2020 13:35:37 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.11.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20200922112638.14238-1-sjpark@amazon.com>
-X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
- FTLPEX02CL06.citrite.net (10.13.108.179)
+In-Reply-To: <20200922085838.230505-1-stefanha@redhat.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=pbonzini@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -88,132 +141,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Tue, Sep 22, 2020 at 01:26:38PM +0200, SeongJae Park wrote:
-> On Tue, 22 Sep 2020 13:12:59 +0200 "Roger Pau Monné" <roger.pau@citrix.com> wrote:
+On 22/09/20 10:58, Stefan Hajnoczi wrote:
+> clang's C11 atomic_fetch_*() functions only take a C11 atomic type
+> pointer argument. QEMU uses direct types (int, etc) and this causes a
+> compiler error when a QEMU code calls these functions in a source file
+> that also included <stdatomic.h> via a system header file:
 > 
-> > On Tue, Sep 22, 2020 at 12:52:07PM +0200, SeongJae Park wrote:
-> > > From: SeongJae Park <sjpark@amazon.de>
-> > > 
-> > > Persistent grants feature provides high scalability.  On some small
-> > > systems, however, it could incur data copy overheads[1] and thus it is
-> > > required to be disabled.  But, there is no option to disable it.  For
-> > > the reason, this commit adds a module parameter for disabling of the
-> > > feature.
-> > > 
-> > > [1] https://wiki.xen.org/wiki/Xen_4.3_Block_Protocol_Scalability
-> > > 
-> > > Signed-off-by: Anthony Liguori <aliguori@amazon.com>
-> > > Signed-off-by: SeongJae Park <sjpark@amazon.de>
-> > > ---
-> > >  .../ABI/testing/sysfs-driver-xen-blkback      |  9 ++++++
-> > >  drivers/block/xen-blkback/xenbus.c            | 28 ++++++++++++++-----
-> > >  2 files changed, 30 insertions(+), 7 deletions(-)
-> > > 
-> > > diff --git a/Documentation/ABI/testing/sysfs-driver-xen-blkback b/Documentation/ABI/testing/sysfs-driver-xen-blkback
-> > > index ecb7942ff146..ac2947b98950 100644
-> > > --- a/Documentation/ABI/testing/sysfs-driver-xen-blkback
-> > > +++ b/Documentation/ABI/testing/sysfs-driver-xen-blkback
-> > > @@ -35,3 +35,12 @@ Description:
-> > >                  controls the duration in milliseconds that blkback will not
-> > >                  cache any page not backed by a grant mapping.
-> > >                  The default is 10ms.
-> > > +
-> > > +What:           /sys/module/xen_blkback/parameters/feature_persistent
-> > > +Date:           September 2020
-> > > +KernelVersion:  5.10
-> > > +Contact:        SeongJae Park <sjpark@amazon.de>
-> > > +Description:
-> > > +                Whether to enable the persistent grants feature or not.  Note
-> > > +                that this option only takes effect on newly created backends.
-> > > +                The default is Y (enable).
-> > > diff --git a/drivers/block/xen-blkback/xenbus.c b/drivers/block/xen-blkback/xenbus.c
-> > > index b9aa5d1ac10b..8a95ddd08b13 100644
-> > > --- a/drivers/block/xen-blkback/xenbus.c
-> > > +++ b/drivers/block/xen-blkback/xenbus.c
-> > > @@ -879,6 +879,12 @@ static void reclaim_memory(struct xenbus_device *dev)
-> > >  
-> > >  /* ** Connection ** */
-> > >  
-> > > +/* Enable the persistent grants feature. */
-> > > +static bool feature_persistent = true;
-> > > +module_param(feature_persistent, bool, 0644);
-> > > +MODULE_PARM_DESC(feature_persistent,
-> > > +		"Enables the persistent grants feature");
-> > > +
-> > >  /*
-> > >   * Write the physical details regarding the block device to the store, and
-> > >   * switch to Connected state.
-> > > @@ -906,11 +912,15 @@ static void connect(struct backend_info *be)
-> > >  
-> > >  	xen_blkbk_barrier(xbt, be, be->blkif->vbd.flush_support);
-> > >  
-> > > -	err = xenbus_printf(xbt, dev->nodename, "feature-persistent", "%u", 1);
-> > > -	if (err) {
-> > > -		xenbus_dev_fatal(dev, err, "writing %s/feature-persistent",
-> > > -				 dev->nodename);
-> > > -		goto abort;
-> > > +	if (feature_persistent) {
-> > > +		err = xenbus_printf(xbt, dev->nodename, "feature-persistent",
-> > > +				"%u", feature_persistent);
-> > > +		if (err) {
-> > > +			xenbus_dev_fatal(dev, err,
-> > > +					"writing %s/feature-persistent",
-> > > +					dev->nodename);
-> > > +			goto abort;
-> > > +		}
-> > >  	}
-> > >  
-> > >  	err = xenbus_printf(xbt, dev->nodename, "sectors", "%llu",
-> > > @@ -1093,8 +1103,12 @@ static int connect_ring(struct backend_info *be)
-> > >  		xenbus_dev_fatal(dev, err, "unknown fe protocol %s", protocol);
-> > >  		return -ENOSYS;
-> > >  	}
-> > > -	pers_grants = xenbus_read_unsigned(dev->otherend, "feature-persistent",
-> > > -					   0);
-> > > +	if (feature_persistent)
-> > > +		pers_grants = xenbus_read_unsigned(dev->otherend,
-> > > +				"feature-persistent", 0);
-> > > +	else
-> > > +		pers_grants = 0;
-> > > +
-> > 
-> > Sorry for not realizing earlier, but looking at it again I think you
-> > need to cache the value of feature_persistent when it's first used in
-> > the blkback state data, so that it's consistent.
-> > 
-> > What would happen for example with the following flow (assume a
-> > persistent grants enabled frontend):
-> > 
-> > feature_persistent = false
-> > 
-> > connect(...)
-> > feature-persistent is not written to xenstore
-> > 
-> > User changes feature_persistent = true
-> > 
-> > connect_ring(...)
-> > pers_grants = true, because feature-persistent is set unconditionally
-> > by the frontend and feature_persistent variable is now true.
-> > 
-> > Then blkback will try to use persistent grants and the whole
-> > connection will malfunction because the frontend won't.
+>   $ CC=clang CXX=clang++ ./configure ... && make
+>   ../util/async.c:79:17: error: address argument to atomic operation must be a pointer to _Atomic type ('unsigned int *' invalid)
 > 
-> Ah, you're right.  I should also catch this before but didn't, sorry.
+> Avoid using atomic_*() names in QEMU's atomic.h since that namespace is
+> used by <stdatomic.h>. Prefix QEMU's APIs with qemu_ so that atomic.h
+> and <stdatomic.h> can co-exist.
 > 
-> > 
-> > The other option is to prevent changing the variable when there are
-> > blkback instances already running.
+> This patch was generated using:
 > 
-> I think storing the option value in xenstore would be simpler.  That said, if
-> you prefer this way, please let me know.
+>   $ git grep -h -o '\<atomic\(64\)\?_[a-z0-9_]\+' include/qemu/atomic.h | \
+>     sort -u >/tmp/changed_identifiers
+>   $ for identifier in $(</tmp/changed_identifiers); do
+>        sed -i "s%\<$identifier\>%qemu_$identifier%g" \
+>            $(git grep -I -l "\<$identifier\>")
+>     done
+> 
+> I manually fixed line-wrap issues and misaligned rST tables.
+> 
+> Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
+> ---
+> v2:
+>  * The diff of my manual fixups is available here:
+>    https://vmsplice.net/~stefan/atomic-namespace-pre-fixups.diff
+>    - Dropping #ifndef qemu_atomic_fetch_add in atomic.h
+>    - atomic_##X(haddr, val) glue macros not caught by grep
+>    - Keep atomic_add-bench name
+>    - C preprocessor backslash-newline ('\') column alignment
+>    - Line wrapping
+>  * Use grep -I to avoid accidentally modifying binary files (RISC-V
+>    OpenSBI ELFs) [Eric Blake]
+>  * Tweak .gitorder to show atomic.h changes first [Eric Blake]
+>  * Update grep commands in commit description so reviewers can reproduce
+>    mechanical changes [Eric Blake]
 
-If possible I prefer to avoid reading from xenstore because it's slow,
-very slow compared to storing this somewhere in the blkback
-structure.
+I think the reviews crossed, are you going to respin using a qatomic_
+prefix?
 
-Could you use the feature_gnt_persistent field in xen_vbd maybe as a
-place to cache the value before it's set with the final negotiated
-value between the frontend and the backend?
+Paolo
 
-Thanks, Roger.
 
