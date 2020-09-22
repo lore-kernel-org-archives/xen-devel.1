@@ -2,81 +2,76 @@ Return-Path: <SRS0=tzN1=C7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-14.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-5.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3F229C4363D
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 14:16:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C0D95C4363D
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 14:18:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EBD342076E
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 14:16:48 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 4F3FC2076E
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 14:18:00 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=amazon.com header.i=@amazon.com header.b="tSGRoKdz"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EBD342076E
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=amazon.com
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="GX5l28Jp"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4F3FC2076E
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kKj5u-00034I-Fh; Tue, 22 Sep 2020 14:16:34 +0000
+	id 1kKj74-0003CA-Qn; Tue, 22 Sep 2020 14:17:46 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=pHJL=C7=amazon.com=prvs=5271185ff=sjpark@srs-us1.protection.inumbo.net>)
- id 1kKj5s-00033O-Nz
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2020 14:16:32 +0000
-X-Inumbo-ID: 13794440-c47b-495a-ad0e-639b9b268985
-Received: from smtp-fw-6002.amazon.com (unknown [52.95.49.90])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=1J9w=C7=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1kKj73-0003Bx-E4
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2020 14:17:45 +0000
+X-Inumbo-ID: 4ab7da6a-2b82-4f2a-bb08-272c37ae7594
+Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 13794440-c47b-495a-ad0e-639b9b268985;
- Tue, 22 Sep 2020 14:16:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
- t=1600784189; x=1632320189;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version;
- bh=I6FWFRPKOvHgCEvGqE3sI6rE2eUEbK6ToJxGZZYg2sI=;
- b=tSGRoKdzq48Eus/u0ZmdM2tk8rKJO20CgKd1MNUbvtlNPyRKMCWWP0ZV
- XViq0aPnnE50DKlMs6iRZg5crJGqTgyggyOmI7Q+DzBKLb1XR4NyEGXYI
- /hjZlqQ45sr3EnSqvDWmL0dbQOqnBIg6tNS3avD3bUnoReqzrJxREMfRS A=;
-X-IronPort-AV: E=Sophos;i="5.77,291,1596499200"; d="scan'208";a="55537286"
-Received: from iad12-co-svc-p1-lb1-vlan3.amazon.com (HELO
- email-inbound-relay-2b-c300ac87.us-west-2.amazon.com) ([10.43.8.6])
- by smtp-border-fw-out-6002.iad6.amazon.com with ESMTP;
- 22 Sep 2020 14:16:26 +0000
-Received: from EX13D31EUA004.ant.amazon.com
- (pdx4-ws-svc-p6-lb7-vlan2.pdx.amazon.com [10.170.41.162])
- by email-inbound-relay-2b-c300ac87.us-west-2.amazon.com (Postfix) with ESMTPS
- id B6EBFA1800; Tue, 22 Sep 2020 14:16:25 +0000 (UTC)
-Received: from u3f2cd687b01c55.ant.amazon.com (10.43.160.137) by
- EX13D31EUA004.ant.amazon.com (10.43.165.161) with Microsoft SMTP Server (TLS)
- id 15.0.1497.2; Tue, 22 Sep 2020 14:16:19 +0000
-From: SeongJae Park <sjpark@amazon.com>
-To: <konrad.wilk@oracle.com>, <roger.pau@citrix.com>, <jgross@suse.com>
-CC: SeongJae Park <sjpark@amazon.de>, <axboe@kernel.dk>,
- <aliguori@amazon.com>, <amit@kernel.org>, <mheyne@amazon.de>,
- <pdurrant@amazon.co.uk>, <linux-block@vger.kernel.org>,
- <xen-devel@lists.xenproject.org>, <linux-kernel@vger.kernel.org>
-Subject: [PATCH v3 2/3] xen-blkfront: add a parameter for disabling of
- persistent grants
-Date: Tue, 22 Sep 2020 16:15:48 +0200
-Message-ID: <20200922141549.26154-3-sjpark@amazon.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200922141549.26154-1-sjpark@amazon.com>
-References: <20200922141549.26154-1-sjpark@amazon.com>
+ id 4ab7da6a-2b82-4f2a-bb08-272c37ae7594;
+ Tue, 22 Sep 2020 14:17:43 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+ t=1600784262;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=+/b8fvvibtxXT6u1u9TDPmBkil4Zo6gAduyXPojkOQ0=;
+ b=GX5l28Jpyss3rkYhvdCNigXoMm2NbVEmQTh1imSbjT+J6lxeP1xaY93lcDp4Z4n1UtL7fK
+ a7U/RXZrfATnU4zCuqTGLHwGbEuXpub/58KZuwv73axhw8YDcuoFMnhZt73FSZAhlu/HOt
+ DjEB/CkTzR3wkSrTrnug0JIgaKSjS+s=
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 8EDD2AC97;
+ Tue, 22 Sep 2020 14:18:19 +0000 (UTC)
+Subject: Re: oxenstored performance issue when starting VMs in parallel
+To: paul@xen.org, 'Edwin Torok' <edvin.torok@citrix.com>,
+ sstabellini@kernel.org, 'Anthony Perard' <anthony.perard@citrix.com>,
+ xen-devel@lists.xenproject.org
+Cc: xen-users@lists.xenproject.org, jerome.leseinne@gmail.com, julien@xen.org
+References: <CAAMaOzi5d7S0qAhBkPTFzNfAWXMuK-JbxtQuyk4hdPcVDUwxQg@mail.gmail.com>
+ <c84155eb-429d-7143-9eb1-3b5a50c6bde5@xen.org>
+ <46f1f50dc02c53391958d9d4bb5fc57d23ba6ede.camel@citrix.com>
+ <CAAMaOzj3eYo=bQgth51f+psR2ZBj+c-2boZy57x2qV2aq0fShQ@mail.gmail.com>
+ <ba74b8225223ba800c38b34ac950283b7b6cb0fe.camel@citrix.com>
+ <00a101d690e6$33a88bd0$9af9a370$@xen.org>
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Message-ID: <816d5bd8-6794-7fcd-bd08-6eb5a2248328@suse.com>
+Date: Tue, 22 Sep 2020 16:17:42 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.0
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.43.160.137]
-X-ClientProxiedBy: EX13D12UWC001.ant.amazon.com (10.43.162.78) To
- EX13D31EUA004.ant.amazon.com (10.43.165.161)
-Precedence: Bulk
+In-Reply-To: <00a101d690e6$33a88bd0$9af9a370$@xen.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
+Precedence: list
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -87,93 +82,59 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: SeongJae Park <sjpark@amazon.de>
+On 22.09.20 15:42, Paul Durrant wrote:
+>> -----Original Message-----
+>> From: Edwin Torok <edvin.torok@citrix.com>
+>> Sent: 22 September 2020 14:29
+>> To: sstabellini@kernel.org; Anthony Perard <anthony.perard@citrix.com>; xen-
+>> devel@lists.xenproject.org; paul@xen.org
+>> Cc: xen-users@lists.xenproject.org; jerome.leseinne@gmail.com; julien@xen.org
+>> Subject: Re: oxenstored performance issue when starting VMs in parallel
+>>
+>> On Tue, 2020-09-22 at 15:17 +0200, jerome leseinne wrote:
+>>> Hi,
+>>>
+>>> Edwin you rock ! This call in qemu is effectively the culprit !
+>>> I have disabled this xen_bus_add_watch call and re-run test on our
+>>> big server:
+>>>
+>>> - oxenstored is now  between 10% to 20%  CPU usage (previously was
+>>> 100% all the time)
+>>> - All our VMs are responsive
+>>> - All our VM start in less than 10 seconds (before the fix some VMs
+>>> could take more than one minute to be fully up
+>>> - Dom0 is more responsive
+>>>
+>>> Disabling the watch may not be the ideal solution ( I let the qemu
+>>> experts answer this and the possible side effects),
+>>
+>> Hi,
+>>
+>> CC-ed Qemu maintainer of Xen code, please see this discussion about
+>> scalability issues with the backend watching code in qemu 4.1+.
+>>
+>> I think the scalability issue is due to this code in qemu, which causes
+>> an instance of qemu to see watches from all devices (even those
+>> belonging to other qemu instances), such that adding a single device
+>> causes N watches to be fired on each N instances of qemu:
+>>        xenbus->backend_watch =
+>>             xen_bus_add_watch(xenbus, "", /* domain root node */
+>>                               "backend", xen_bus_backend_changed,
+>>   &local_err);
+>>
+>> I can understand that for backwards compatibility you might need this
+>> code, but is there a way that an up-to-date (xl) toolstack could tell
+>> qemu what it needs to look at (e.g. via QMP, or other keys in xenstore)
+>> instead of relying on an overly broad watch?
+> 
+> I think this could be made more efficient. The call to "module_call_init(MODULE_INIT_XEN_BACKEND)" just prior to this watch will register backends that do auto-creation so we could register individual watches for the various backend types instead of this single one.
 
-Persistent grants feature provides high scalability.  On some small
-systems, however, it could incur data copy overheads[1] and thus it is
-required to be disabled.  It can be disabled from blkback side using a
-module parameter, 'feature_persistent'.  But, it is impossible from
-blkfront side.  For the reason, this commit adds a blkfront module
-parameter for disabling of the feature.
+The watch should be on guest domain level, e.g. for:
 
-[1] https://wiki.xen.org/wiki/Xen_4.3_Block_Protocol_Scalability
+/local/domain/0/backend/vbd/5
 
-Signed-off-by: SeongJae Park <sjpark@amazon.de>
----
- .../ABI/testing/sysfs-driver-xen-blkfront     |  9 +++++++++
- drivers/block/xen-blkfront.c                  | 20 ++++++++++++++-----
- 2 files changed, 24 insertions(+), 5 deletions(-)
+We have one qemu process per guest, after all.
 
-diff --git a/Documentation/ABI/testing/sysfs-driver-xen-blkfront b/Documentation/ABI/testing/sysfs-driver-xen-blkfront
-index c0a6cb7eb314..9c31334cb2e6 100644
---- a/Documentation/ABI/testing/sysfs-driver-xen-blkfront
-+++ b/Documentation/ABI/testing/sysfs-driver-xen-blkfront
-@@ -8,3 +8,12 @@ Description:
-                 is 32 - higher value means more potential throughput but more
-                 memory usage. The backend picks the minimum of the frontend
-                 and its default backend value.
-+
-+What:           /sys/module/xen_blkfront/parameters/feature_persistent
-+Date:           September 2020
-+KernelVersion:  5.10
-+Contact:        SeongJae Park <sjpark@amazon.de>
-+Description:
-+                Whether to enable the persistent grants feature or not.  Note
-+                that this option only takes effect on newly created frontends.
-+                The default is Y (enable).
-diff --git a/drivers/block/xen-blkfront.c b/drivers/block/xen-blkfront.c
-index 91de2e0755ae..b2d3b1262404 100644
---- a/drivers/block/xen-blkfront.c
-+++ b/drivers/block/xen-blkfront.c
-@@ -1866,8 +1866,8 @@ static int talk_to_blkback(struct xenbus_device *dev,
- 		message = "writing protocol";
- 		goto abort_transaction;
- 	}
--	err = xenbus_printf(xbt, dev->nodename,
--			    "feature-persistent", "%u", 1);
-+	err = xenbus_printf(xbt, dev->nodename, "feature-persistent", "%u",
-+			info->feature_persistent);
- 	if (err)
- 		dev_warn(&dev->dev,
- 			 "writing persistent grants feature to xenbus");
-@@ -1941,6 +1941,13 @@ static int negotiate_mq(struct blkfront_info *info)
- 	}
- 	return 0;
- }
-+
-+/* Enable the persistent grants feature. */
-+static bool feature_persistent = true;
-+module_param(feature_persistent, bool, 0644);
-+MODULE_PARM_DESC(feature_persistent,
-+		"Enables the persistent grants feature");
-+
- /**
-  * Entry point to this code when a new device is created.  Allocate the basic
-  * structures and the ring buffer for communication with the backend, and
-@@ -2007,6 +2014,8 @@ static int blkfront_probe(struct xenbus_device *dev,
- 	info->vdevice = vdevice;
- 	info->connected = BLKIF_STATE_DISCONNECTED;
- 
-+	info->feature_persistent = feature_persistent ? 1 : 0;
-+
- 	/* Front end dir is a number, which is used as the id. */
- 	info->handle = simple_strtoul(strrchr(dev->nodename, '/')+1, NULL, 0);
- 	dev_set_drvdata(&dev->dev, info);
-@@ -2316,9 +2325,10 @@ static void blkfront_gather_backend_features(struct blkfront_info *info)
- 	if (xenbus_read_unsigned(info->xbdev->otherend, "feature-discard", 0))
- 		blkfront_setup_discard(info);
- 
--	info->feature_persistent =
--		!!xenbus_read_unsigned(info->xbdev->otherend,
--				       "feature-persistent", 0);
-+	if (info->feature_persistent)
-+		info->feature_persistent =
-+			!!xenbus_read_unsigned(info->xbdev->otherend,
-+					       "feature-persistent", 0);
- 
- 	indirect_segments = xenbus_read_unsigned(info->xbdev->otherend,
- 					"feature-max-indirect-segments", 0);
--- 
-2.17.1
 
+Juergen
 
