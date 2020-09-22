@@ -2,78 +2,72 @@ Return-Path: <SRS0=tzN1=C7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-3.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 66CE7C4727E
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 11:47:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EC3A5C2D0E2
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 11:59:20 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E14C4221EB
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 11:47:57 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 737F82388B
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 11:59:20 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="GrnOzShw"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E14C4221EB
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="jU08VLY3"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 737F82388B
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kKglk-0007q4-QJ; Tue, 22 Sep 2020 11:47:36 +0000
+	id 1kKgwk-0000La-U4; Tue, 22 Sep 2020 11:58:58 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=ZDRM=C7=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1kKglj-0007pz-OW
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2020 11:47:35 +0000
-X-Inumbo-ID: 2e40ecbd-2f56-4c0c-a6aa-29fccfd84541
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=q32Y=C7=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
+ id 1kKgwj-0000LG-Gl
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2020 11:58:57 +0000
+X-Inumbo-ID: f00c670f-574c-4161-8e2c-8992090d68cf
 Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 2e40ecbd-2f56-4c0c-a6aa-29fccfd84541;
- Tue, 22 Sep 2020 11:47:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
- bh=qdhsqzAq91YdDXn2oSmTdrYYkAuauMI1QZ1Z3nl8E24=; b=GrnOzShwuzgOFPnaLkQN9ZPjtx
- fkEvwSCB/byrBf5ZD4+jZFWvyqLz1J2J9+w+iw5rMPvCMSGLKqYghWwui3EdQccVZOnt+ZuIQjtfY
- dbJg+tFMaT+o+QnZzsHJ5mlAAdjf96mz6ZRBhYdR2isqh/jJ+G2ZzuCpUBlnFIt9b6bg=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
+ id f00c670f-574c-4161-8e2c-8992090d68cf;
+ Tue, 22 Sep 2020 11:58:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+ Content-Transfer-Encoding:Content-Type:Message-ID:To;
+ bh=lgVq08skcEarzItPWWaK3OwxqojF6w+GB3Wf+tJFp18=; b=jU08VLY3kARe+MgAl78eLyTXJ2
+ n8+VRTrZ840vOqHts/LKDjHnJXtYASucMNFCIRjqVAK1DaXpQj/xNkvaWAd6yD2mZORZKF2a2IGLZ
+ /acFbkrnINyYhYmxrkepQvrK3VVBq/kxsbyHc1bZegP6Acb+i1sAU11k7u2qghpjPuQI=;
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1kKglh-0004YC-AY; Tue, 22 Sep 2020 11:47:33 +0000
-Received: from [54.239.6.187] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1kKglg-0003kp-Vg; Tue, 22 Sep 2020 11:47:33 +0000
-Subject: Re: Ping: [PATCH 1/9] build: use if_changed more consistently (and
- correctly) for prelink*.o
-To: Jan Beulich <jbeulich@suse.com>,
- Stefano Stabellini <sstabellini@kernel.org>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
- George Dunlap <George.Dunlap@eu.citrix.com>
-References: <aabca463-21ed-3755-0e8d-908069f40d6e@suse.com>
- <75d94bf1-b419-8a82-2d15-fb02e56109d8@suse.com>
- <de999174-604d-5874-cf11-4fab15c583d4@suse.com>
- <43a4240c-baba-ca52-0a9f-a884c0f297be@xen.org>
- <f6de6cc3-7bde-6f99-1525-cc046a136a19@suse.com>
- <0a0ab7a6-e448-3ffe-3818-4b97edbffb72@xen.org>
- <070a7b89-28c7-a709-660e-97c3a8a93c94@suse.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <d7eb4dce-7f5f-d5de-3b6a-f136f4a7b3b5@xen.org>
-Date: Tue, 22 Sep 2020 12:47:30 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
- Gecko/20100101 Thunderbird/68.12.0
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kKgwc-0004la-Fp; Tue, 22 Sep 2020 11:58:50 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kKgwc-0008Ns-9P; Tue, 22 Sep 2020 11:58:50 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1kKgwc-00050u-8x; Tue, 22 Sep 2020 11:58:50 +0000
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-154609-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-In-Reply-To: <070a7b89-28c7-a709-660e-97c3a8a93c94@suse.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Subject: [xen-unstable-smoke test] 154609: tolerable all pass - PUSHED
+X-Osstest-Failures: xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+ xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+ xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+ xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+ xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This: xen=68a8aa5d7264dcb04b2c56fad24bdd5192fe5394
+X-Osstest-Versions-That: xen=d4ed1d4132f5825a795d5a78505811ecd2717b5e
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Tue, 22 Sep 2020 11:58:50 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -87,47 +81,62 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Hi Jan,
+flight 154609 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/154609/
 
-On 22/09/2020 11:55, Jan Beulich wrote:
-> On 22.09.2020 11:24, Julien Grall wrote:
->> On 22/09/2020 09:28, Jan Beulich wrote:
->>> On 21.09.2020 13:39, Julien Grall wrote:
->>>> On 21/09/2020 11:17, Jan Beulich wrote:
->>>>> On 14.09.2020 12:15, Jan Beulich wrote:
->>>>>> Switch to $(call if_changed,ld) where possible; presumably not doing so
->>>>>> in e321576f4047 ("xen/build: start using if_changed") right away was an
->>>>>> oversight, as it did for Arm in (just) one case. It failed to add
->>>>>> prelink.o to $(targets), though, causing - judging from the observed
->>>>>> behavior on x86 - undue rebuilds of the final binary (because of
->>>>>> prelink.o getting rebuild for $(cmd_prelink.o) being empty, in turn
->>>>>> because of .prelink.o.cmd not getting read) during "make install-xen".
->>>>>>
->>>>>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
->>>>>> ---
->>>>>>     xen/arch/arm/Makefile |  4 +++-
->>>>>>     xen/arch/x86/Makefile | 18 ++++++++++--------
->>>>>>     2 files changed, 13 insertions(+), 9 deletions(-)
->>>>>
->>>>> May I ask for an Arm-side ack (or otherwise) here, please?
->>>>
->>>> Acked-by: Julien Grall <jgrall@amazon.com>
->>>
->>> Thanks. On the Arm side this is actually addressing a (minor) bug,
->>
->> Just to confirm, the bug is: Xen will be rebuilt when it is not
->> necessary, right?
-> 
-> Yes. When building as non-root but installing as root, this would
-> typically involve an owner change of some of the involved files.
-> That's how I did notice the issue on x86 (after switching to
-> if_changed) in the first place.
+Failures :-/ but no regressions.
 
-Thanks for the explanation. I think it would be fine to backport.
-@Stefano, what do you think?
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
 
-Cheers,
+version targeted for testing:
+ xen                  68a8aa5d7264dcb04b2c56fad24bdd5192fe5394
+baseline version:
+ xen                  d4ed1d4132f5825a795d5a78505811ecd2717b5e
 
--- 
-Julien Grall
+Last test of basis   154581  2020-09-21 17:00:25 Z    0 days
+Testing same since   154609  2020-09-22 09:01:22 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Jan Beulich <jbeulich@suse.com>
+  Julien Grall <jgrall@amazon.com>
+  Paul Durrant <pdurrant@amazon.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/xen.git
+   d4ed1d4132..68a8aa5d72  68a8aa5d7264dcb04b2c56fad24bdd5192fe5394 -> smoke
 
