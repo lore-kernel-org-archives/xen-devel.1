@@ -2,78 +2,76 @@ Return-Path: <SRS0=tzN1=C7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-3.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 63823C4727C
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 14:45:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 16E0DC4363D
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 14:46:28 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 127D22395C
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 14:45:00 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id C1D982396D
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 14:46:27 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="SXgQ0J0O"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 127D22395C
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="LndNfaLz"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C1D982396D
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kKjX5-00086a-2n; Tue, 22 Sep 2020 14:44:39 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kKjYf-0008Eg-F4; Tue, 22 Sep 2020 14:46:17 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=oGvm=C7=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1kKjX3-00086F-OG
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2020 14:44:37 +0000
-X-Inumbo-ID: a5828bfc-09c1-4948-94b9-fdde53aecdc3
+ id 1kKjYf-0008EW-15
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2020 14:46:17 +0000
+X-Inumbo-ID: 168527b6-4948-46f1-bc11-db83b80ab355
 Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id a5828bfc-09c1-4948-94b9-fdde53aecdc3;
- Tue, 22 Sep 2020 14:44:36 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 168527b6-4948-46f1-bc11-db83b80ab355;
+ Tue, 22 Sep 2020 14:46:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1600785877;
+ d=citrix.com; s=securemail; t=1600785976;
  h=date:from:to:cc:subject:message-id:references:
  mime-version:content-transfer-encoding:in-reply-to;
- bh=RcSSmcHxzYVbW8kHAuJX8H1PNlflFvFXWb8s0NzusoU=;
- b=SXgQ0J0OH98TslJFNkuVFrVFSaS50sTxVLzvPMpBBdUyR+XLq4QHbwLY
- d9xQRuoweAjTaAM1uz5E69X+l/FqIPM5Ia7zB9j+CpvJdiEXAUIy3vQzB
- cJe+hgJXY2joIas4bbIgGcgWLNZzv8F43hC5ujbn9oYpHHpUI1acoTVc8 U=;
+ bh=EmRqnwZkNjgmrTlp2NTYJohV1w/jVZEYxakF+X9OdtA=;
+ b=LndNfaLzv1GawF/3SBqpcoTfMYVNzYAs83cBhDM4cFtq2L8G0Vhsd4nK
+ 5rNDCorBm9eR8JexeRnMRT9OFiBQF8Afve6hdcmxDeiqoXppeZdLkKzjy
+ OiafakRWPcPE3MWb3q86/XKKKkyc0rlcwG3hw0TRDUSBXyzupjhnX1Zv8 o=;
 Authentication-Results: esa2.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: XBD6INUP8oBB9liQ4LNYA9/wjid0L5qc9+S+Bj5nj22SvUqrjbiv48aVimliGuo4XW45YOe/L8
- kvrGTtwLMBVAB31ShknBlbTGD2gxUQer/zSePc1LKBaUZHM/uEasP72Qb8HwHwgY/E5VM6i2Io
- rXaIG+OVHtmTnzVViuN5kGLgdOX4r5J/USOqp0/qpHsJpcB5c9M0VOEKy8Ifi1MjqDY4Chd/xv
- SdSjiKwB+Ed+Y3eIGopfcVhKMQUl2FtcgVa2gNNC51rZu/16YrVYRWR2I7/hxEwgKWgD+Y9Osz
- 0F4=
+IronPort-SDR: hIkNa/LVZnMu/m3flefxEOm5p2LEvNpZm9vQF2cgCY3qmLAaucY99PGGuxjucQnDOnzrYcqjf9
+ UrUGpN7u83iK25IeZcn/TPhDA2cLJuL70GJKzwGIxnR892Ix45R3jErAUD/tIFYx9KZWf5vEpE
+ 2WQt6QRyF+zZGnJlC8cjn1+D+6c/NgT2c8oxstwNWnEjkxFZq9pEBK8fiu5kf2cU/zS8kCbkn+
+ Q3UIyDTdb9Axkw6l3DMqeZ4NhofBEBCJ/AkQdeJJPyGPm+7XO7PHusiFkaWlzluOySeRwM4vn1
+ m8I=
 X-SBRS: 2.7
-X-MesageID: 27271375
+X-MesageID: 27271531
 X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.77,291,1596513600"; d="scan'208";a="27271375"
-Date: Tue, 22 Sep 2020 16:44:25 +0200
+X-IronPort-AV: E=Sophos;i="5.77,291,1596513600"; d="scan'208";a="27271531"
+Date: Tue, 22 Sep 2020 16:45:56 +0200
 From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: =?utf-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-CC: SeongJae Park <sjpark@amazon.com>, <konrad.wilk@oracle.com>, SeongJae Park
+To: SeongJae Park <sjpark@amazon.com>
+CC: <konrad.wilk@oracle.com>, <jgross@suse.com>, SeongJae Park
  <sjpark@amazon.de>, <axboe@kernel.dk>, <aliguori@amazon.com>,
  <amit@kernel.org>, <mheyne@amazon.de>, <pdurrant@amazon.co.uk>,
  <linux-block@vger.kernel.org>, <xen-devel@lists.xenproject.org>,
  <linux-kernel@vger.kernel.org>
-Subject: Re: [PATCH v3 3/3] xen-blkfront: Apply changed parameter name to the
- document
-Message-ID: <20200922144425.GL19254@Air-de-Roger>
+Subject: Re: [PATCH v3 0/3] xen-blk(back|front): Let users disable persistent
+ grants
+Message-ID: <20200922144556.GM19254@Air-de-Roger>
 References: <20200922141549.26154-1-sjpark@amazon.com>
- <20200922141549.26154-4-sjpark@amazon.com>
- <0171c36f-138b-8f53-7cb7-3b753c7f23dd@suse.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <0171c36f-138b-8f53-7cb7-3b753c7f23dd@suse.com>
-X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
+In-Reply-To: <20200922141549.26154-1-sjpark@amazon.com>
+X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
  FTLPEX02CL06.citrite.net (10.13.108.179)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -88,20 +86,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Tue, Sep 22, 2020 at 04:27:39PM +0200, Jürgen Groß wrote:
-> On 22.09.20 16:15, SeongJae Park wrote:
-> > From: SeongJae Park <sjpark@amazon.de>
-> > 
-> > Commit 14e710fe7897 ("xen-blkfront: rename indirect descriptor
-> > parameter") changed the name of the module parameter for the maximum
-> > amount of segments in indirect requests but missed updating the
-> > document.  This commit updates the document.
-> > 
-> > Signed-off-by: SeongJae Park <sjpark@amazon.de>
+On Tue, Sep 22, 2020 at 04:15:46PM +0200, SeongJae Park wrote:
+> From: SeongJae Park <sjpark@amazon.de>
 > 
-> Reviewed-by: Juergen Gross <jgross@suse.com>
+> Persistent grants feature provides high scalability.  On some small
+> systems, however, it could incur data copy overheads[1] and thus it is
+> required to be disabled.  But, there is no option to disable it.  For
+> the reason, this commit adds module parameters for disabling of the
+> feature.
 
-Does this need to be backported to stable branches?
+With the changes requested by Jürgen you can add my:
+
+Acked-by: Roger Pau Monné <roger.pau@citrix.com>
 
 Thanks, Roger.
 
