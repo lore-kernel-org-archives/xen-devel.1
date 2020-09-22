@@ -7,66 +7,63 @@ X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 54FD3C2D0E2
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 18:25:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ED297C4727D
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 18:25:22 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D12EA239D2
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 18:25:20 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 841FE239D2
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 18:25:22 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="QsGwBhxV"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D12EA239D2
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="WM7GOp3n"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 841FE239D2
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kKmyU-0008Iv-NG; Tue, 22 Sep 2020 18:25:10 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kKmyV-0008JJ-0z; Tue, 22 Sep 2020 18:25:11 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=J35V=C7=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1kKmyT-0008GC-Vo
+ id 1kKmyU-0008GI-76
  for xen-devel@lists.xenproject.org; Tue, 22 Sep 2020 18:25:10 +0000
-X-Inumbo-ID: 14f5c2a9-ff66-451f-8133-86acca0362d2
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 14f5c2a9-ff66-451f-8133-86acca0362d2;
- Tue, 22 Sep 2020 18:25:03 +0000 (UTC)
+X-Inumbo-ID: 819e2044-916c-4164-8bb1-604b2425e6e5
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 819e2044-916c-4164-8bb1-604b2425e6e5;
+ Tue, 22 Sep 2020 18:25:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1600799104;
+ d=citrix.com; s=securemail; t=1600799105;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=VX5HKcJ42GTdKN2aMeeGpC6A33K0f3RBxZiuzBNTlmw=;
- b=QsGwBhxVOY+k9LzkID4g/t49ovXcbQ16WfIioFAnGJNE2P/gMREm1S6j
- MwCSoJHNxEz1jdjA/CbXB6dYsKIdZg8y0wPY9dE7j2BPGbFkpsNkZx68W
- VhpwNAnZtLcHI+AkhRAo9lmbhOSE2ydJjqXcuUvSw0XJ6Jwhh6Ew9THC7 M=;
-Authentication-Results: esa1.hc3370-68.iphmx.com;
+ bh=Z1BzBbvoR0pCwu+iHfP1GCSjSw2toLzM4t1P0GPcqKs=;
+ b=WM7GOp3nASJEHzrCtsc7G8Y9vIhnTlli4ck2UNzgY0WpH+/gnnRL34YN
+ gQANPSEq8kbpOBgrL9LtxGjsZS2LLy9BiUtDic6uEYG8dUJ0Mau0uRiSH
+ HWPJ5dJgL6ipNH2IkGo7n7UQ4ljqpWl5A4Xy/tAsX0qlvVpCnhZhlUb39 I=;
+Authentication-Results: esa4.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: tf2mZ/0twZBgK3V8kEmLi+CzQrtKTFxADKvq2XSj6uKVvcHAR+K1tcVaBtpozVfDlHPgq1Y9DQ
- 0PNC+yVds4MrwjMw/u2T6IaSIDzxI1qiLCRWBTN3uZ0Dg/70t0wBV8NYkt2NH7wyA9tBoWEfjs
- gbvCj9kA83rIZud3e0cA/H8oSGbn6W3/FLFT57BwnOehape1Fyua8Z9Nlu0BlMckFiBs8QpTPN
- fxiiwiTSdrEePuuqO1Azvz6jXBLM8UO0J0GZmRa5OsIQcHc80v7CoUijTLseQy97Tx4tk2SVC/
- Szk=
+IronPort-SDR: YH3FrCHwpp0y+LUFn1op1z8FGYh+origAhEFIzdvSqAXzibCrInD8ce1rZ5mgSBQsfg/C6RGD/
+ hRD7t56+h0F3rwmheB+jkp7EgT5J7cnKfiL39UcxWnScRZ3/3GmRKQQKVeZvlwrdHXtqS3zNC8
+ TmskwGUiiD0HApnr3IeZ2B/1p4T8/bTkeF6OSJTHQRVLSRsFHjFT9927ClyruPwZ9hzQhyNsCU
+ mVLEzcAeXeXkuszncFu6Tn5wFhZ3QufoRKyBBd1qlwGrNN/elLXZuGuwyL+0dFP1Nce/e/pu0E
+ Ebk=
 X-SBRS: 2.7
-X-MesageID: 27631631
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 28290897
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.77,291,1596513600"; d="scan'208";a="27631631"
+X-IronPort-AV: E=Sophos;i="5.77,291,1596513600"; d="scan'208";a="28290897"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
- <George.Dunlap@eu.citrix.com>, Ian Jackson <iwj@xenproject.org>, Jan Beulich
- <JBeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
- <wl@xen.org>, Julien Grall <julien@xen.org>, Paul Durrant <paul@xen.org>,
- =?UTF-8?q?Micha=C5=82=20Leszczy=C5=84ski?= <michal.leszczynski@cert.pl>,
- Hubert Jasudowicz <hubert.jasudowicz@cert.pl>, Tamas K Lengyel
- <tamas@tklengyel.com>
-Subject: [PATCH v2 08/11] xen/memory: Indent part of acquire_resource()
-Date: Tue, 22 Sep 2020 19:24:41 +0100
-Message-ID: <20200922182444.12350-9-andrew.cooper3@citrix.com>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson
+ <iwj@xenproject.org>, =?UTF-8?q?Micha=C5=82=20Leszczy=C5=84ski?=
+ <michal.leszczynski@cert.pl>, Hubert Jasudowicz <hubert.jasudowicz@cert.pl>,
+ Tamas K Lengyel <tamas@tklengyel.com>
+Subject: [PATCH v2 05/11] tools/foreignmem: Support querying the size of a
+ resource
+Date: Tue, 22 Sep 2020 19:24:38 +0100
+Message-ID: <20200922182444.12350-6-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20200922182444.12350-1-andrew.cooper3@citrix.com>
 References: <20200922182444.12350-1-andrew.cooper3@citrix.com>
@@ -86,110 +83,259 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Indent the middle of acquire_resource() inside a do {} while ( 0 ) loop.  This
-is broken out specifically to make the following change readable.
+With the Xen side of this interface fixed to return real sizes, userspace
+needs to be able to make the query.
 
-No functional change.
+Introduce xenforeignmemory_resource_size() for the purpose, bumping the
+library minor version and providing compatibility for the non-Linux builds.
+
+Its not possible to reuse the IOCTL_PRIVCMD_MMAP_RESOURCE infrastructure,
+because it depends on having already mmap()'d a suitably sized region before
+it will make an XENMEM_acquire_resource hypercall to Xen.
+
+Instead, open a xencall handle and make an XENMEM_acquire_resource hypercall
+directly.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Acked-by: Wei Liu <wl@xen.org>
+Reviewed-by: Paul Durrant <paul@xen.org>
 ---
-CC: George Dunlap <George.Dunlap@eu.citrix.com>
 CC: Ian Jackson <iwj@xenproject.org>
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Wei Liu <wl@xen.org>
-CC: Julien Grall <julien@xen.org>
-CC: Paul Durrant <paul@xen.org>
 CC: Michał Leszczyński <michal.leszczynski@cert.pl>
 CC: Hubert Jasudowicz <hubert.jasudowicz@cert.pl>
 CC: Tamas K Lengyel <tamas@tklengyel.com>
----
- xen/common/memory.c | 66 +++++++++++++++++++++++++++--------------------------
- 1 file changed, 34 insertions(+), 32 deletions(-)
 
-diff --git a/xen/common/memory.c b/xen/common/memory.c
-index c559935732..369154b7c0 100644
---- a/xen/common/memory.c
-+++ b/xen/common/memory.c
-@@ -1087,44 +1087,46 @@ static int acquire_resource(
-         goto out;
+v2:
+ * Fix build in some environments.  Extend the rubric for making foreignmem
+   depend on call
+ * Rebase over Juergens library changes.
+ * Spelling fixes.
+---
+ tools/libs/foreignmemory/Makefile                  |  2 +-
+ tools/libs/foreignmemory/core.c                    | 14 +++++++++
+ .../libs/foreignmemory/include/xenforeignmemory.h  | 15 +++++++++
+ tools/libs/foreignmemory/libxenforeignmemory.map   |  4 +++
+ tools/libs/foreignmemory/linux.c                   | 36 ++++++++++++++++++++++
+ tools/libs/foreignmemory/private.h                 | 14 +++++++++
+ tools/libs/uselibs.mk                              |  2 +-
+ 7 files changed, 85 insertions(+), 2 deletions(-)
+
+diff --git a/tools/libs/foreignmemory/Makefile b/tools/libs/foreignmemory/Makefile
+index cf444d3c1a..0ed93edac2 100644
+--- a/tools/libs/foreignmemory/Makefile
++++ b/tools/libs/foreignmemory/Makefile
+@@ -2,7 +2,7 @@ XEN_ROOT = $(CURDIR)/../../..
+ include $(XEN_ROOT)/tools/Rules.mk
+ 
+ MAJOR    = 1
+-MINOR    = 3
++MINOR    = 4
+ 
+ SRCS-y                 += core.c
+ SRCS-$(CONFIG_Linux)   += linux.c
+diff --git a/tools/libs/foreignmemory/core.c b/tools/libs/foreignmemory/core.c
+index 63f12e2450..5d95c59c48 100644
+--- a/tools/libs/foreignmemory/core.c
++++ b/tools/libs/foreignmemory/core.c
+@@ -53,6 +53,10 @@ xenforeignmemory_handle *xenforeignmemory_open(xentoollog_logger *logger,
+         if (!fmem->logger) goto err;
      }
  
--    switch ( xmar.type )
--    {
--    case XENMEM_resource_grant_table:
--        rc = gnttab_acquire_resource(d, xmar.id, xmar.frame, xmar.nr_frames,
--                                     mfn_list);
--        break;
-+    do {
-+        switch ( xmar.type )
-+        {
-+        case XENMEM_resource_grant_table:
-+            rc = gnttab_acquire_resource(d, xmar.id, xmar.frame, xmar.nr_frames,
-+                                         mfn_list);
-+            break;
++    fmem->xcall = xencall_open(fmem->logger, 0);
++    if ( !fmem->xcall )
++        goto err;
++
+     rc = osdep_xenforeignmemory_open(fmem);
+     if ( rc  < 0 ) goto err;
  
--    default:
--        rc = arch_acquire_resource(d, xmar.type, xmar.id, xmar.frame,
--                                   xmar.nr_frames, mfn_list);
--        break;
--    }
-+        default:
-+            rc = arch_acquire_resource(d, xmar.type, xmar.id, xmar.frame,
-+                                       xmar.nr_frames, mfn_list);
-+            break;
-+        }
+@@ -61,6 +65,7 @@ xenforeignmemory_handle *xenforeignmemory_open(xentoollog_logger *logger,
+ err:
+     xentoolcore__deregister_active_handle(&fmem->tc_ah);
+     osdep_xenforeignmemory_close(fmem);
++    xencall_close(fmem->xcall);
+     xtl_logger_destroy(fmem->logger_tofree);
+     free(fmem);
+     return NULL;
+@@ -75,6 +80,7 @@ int xenforeignmemory_close(xenforeignmemory_handle *fmem)
  
--    if ( rc )
--        goto out;
-+        if ( rc )
-+            goto out;
+     xentoolcore__deregister_active_handle(&fmem->tc_ah);
+     rc = osdep_xenforeignmemory_close(fmem);
++    xencall_close(fmem->xcall);
+     xtl_logger_destroy(fmem->logger_tofree);
+     free(fmem);
+     return rc;
+@@ -188,6 +194,14 @@ int xenforeignmemory_unmap_resource(
+     return rc;
+ }
  
--    if ( !paging_mode_translate(currd) )
--    {
--        if ( copy_to_guest(xmar.frame_list, mfn_list, xmar.nr_frames) )
--            rc = -EFAULT;
--    }
--    else
--    {
--        xen_pfn_t gfn_list[ARRAY_SIZE(mfn_list)];
--        unsigned int i;
-+        if ( !paging_mode_translate(currd) )
-+        {
-+            if ( copy_to_guest(xmar.frame_list, mfn_list, xmar.nr_frames) )
-+                rc = -EFAULT;
-+        }
-+        else
-+        {
-+            xen_pfn_t gfn_list[ARRAY_SIZE(mfn_list)];
-+            unsigned int i;
++int xenforeignmemory_resource_size(
++    xenforeignmemory_handle *fmem, domid_t domid, unsigned int type,
++    unsigned int id, unsigned long *nr_frames)
++{
++    return osdep_xenforeignmemory_resource_size(fmem, domid, type,
++                                                id, nr_frames);
++}
++
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/tools/libs/foreignmemory/include/xenforeignmemory.h b/tools/libs/foreignmemory/include/xenforeignmemory.h
+index d594be8df0..1ba2f5316b 100644
+--- a/tools/libs/foreignmemory/include/xenforeignmemory.h
++++ b/tools/libs/foreignmemory/include/xenforeignmemory.h
+@@ -179,6 +179,21 @@ xenforeignmemory_resource_handle *xenforeignmemory_map_resource(
+ int xenforeignmemory_unmap_resource(
+     xenforeignmemory_handle *fmem, xenforeignmemory_resource_handle *fres);
  
--        if ( copy_from_guest(gfn_list, xmar.frame_list, xmar.nr_frames) )
--            rc = -EFAULT;
-+            if ( copy_from_guest(gfn_list, xmar.frame_list, xmar.nr_frames) )
-+                rc = -EFAULT;
++/**
++ * Determine the maximum size of a specific resource.
++ *
++ * @parm fmem handle to the open foreignmemory interface
++ * @parm domid the domain id
++ * @parm type the resource type
++ * @parm id the type-specific resource identifier
++ *
++ * Return 0 on success and fills in *nr_frames.  Sets errno and return -1 on
++ * error.
++ */
++int xenforeignmemory_resource_size(
++    xenforeignmemory_handle *fmem, domid_t domid, unsigned int type,
++    unsigned int id, unsigned long *nr_frames);
++
+ #endif
  
--        for ( i = 0; !rc && i < xmar.nr_frames; i++ )
--        {
--            rc = set_foreign_p2m_entry(currd, gfn_list[i],
--                                       _mfn(mfn_list[i]));
--            /* rc should be -EIO for any iteration other than the first */
--            if ( rc && i )
--                rc = -EIO;
-+            for ( i = 0; !rc && i < xmar.nr_frames; i++ )
-+            {
-+                rc = set_foreign_p2m_entry(currd, gfn_list[i],
-+                                           _mfn(mfn_list[i]));
-+                /* rc should be -EIO for any iteration other than the first */
-+                if ( rc && i )
-+                    rc = -EIO;
-+            }
-         }
--    }
-+    } while ( 0 );
+ /*
+diff --git a/tools/libs/foreignmemory/libxenforeignmemory.map b/tools/libs/foreignmemory/libxenforeignmemory.map
+index d5323c87d9..8aca341b99 100644
+--- a/tools/libs/foreignmemory/libxenforeignmemory.map
++++ b/tools/libs/foreignmemory/libxenforeignmemory.map
+@@ -19,3 +19,7 @@ VERS_1.3 {
+ 		xenforeignmemory_map_resource;
+ 		xenforeignmemory_unmap_resource;
+ } VERS_1.2;
++VERS_1.4 {
++	global:
++		xenforeignmemory_resource_size;
++} VERS_1.3;
+diff --git a/tools/libs/foreignmemory/linux.c b/tools/libs/foreignmemory/linux.c
+index fe73d5ab72..eec089e232 100644
+--- a/tools/libs/foreignmemory/linux.c
++++ b/tools/libs/foreignmemory/linux.c
+@@ -21,12 +21,15 @@
+ #include <errno.h>
+ #include <fcntl.h>
+ #include <unistd.h>
++#include <stdint.h>
+ #include <string.h>
  
-  out:
-     rcu_unlock_domain(d);
+ #include <sys/mman.h>
+ #include <sys/ioctl.h>
+ #include <xen-tools/libs.h>
+ 
++#include <xen/memory.h>
++
+ #include "private.h"
+ 
+ #ifndef O_CLOEXEC
+@@ -339,6 +342,39 @@ int osdep_xenforeignmemory_map_resource(
+     return 0;
+ }
+ 
++int osdep_xenforeignmemory_resource_size(
++    xenforeignmemory_handle *fmem, domid_t domid, unsigned int type,
++    unsigned int id, unsigned long *nr_frames)
++{
++    int rc;
++    struct xen_mem_acquire_resource *xmar =
++        xencall_alloc_buffer(fmem->xcall, sizeof(*xmar));
++
++    if ( !xmar )
++    {
++        PERROR("Could not bounce memory for acquire_resource hypercall");
++        return -1;
++    }
++
++    *xmar = (struct xen_mem_acquire_resource){
++        .domid = domid,
++        .type = type,
++        .id = id,
++    };
++
++    rc = xencall2(fmem->xcall, __HYPERVISOR_memory_op,
++                  XENMEM_acquire_resource, (uintptr_t)xmar);
++    if ( rc )
++        goto out;
++
++    *nr_frames = xmar->nr_frames;
++
++ out:
++    xencall_free_buffer(fmem->xcall, xmar);
++
++    return rc;
++}
++
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/tools/libs/foreignmemory/private.h b/tools/libs/foreignmemory/private.h
+index 8f1bf081ed..1a6b685f45 100644
+--- a/tools/libs/foreignmemory/private.h
++++ b/tools/libs/foreignmemory/private.h
+@@ -4,6 +4,7 @@
+ #include <xentoollog.h>
+ 
+ #include <xenforeignmemory.h>
++#include <xencall.h>
+ 
+ #include <xentoolcore_internal.h>
+ 
+@@ -20,6 +21,7 @@
+ 
+ struct xenforeignmemory_handle {
+     xentoollog_logger *logger, *logger_tofree;
++    xencall_handle *xcall;
+     unsigned flags;
+     int fd;
+     Xentoolcore__Active_Handle tc_ah;
+@@ -74,6 +76,15 @@ static inline int osdep_xenforeignmemory_unmap_resource(
+ {
+     return 0;
+ }
++
++static inline int osdep_xenforeignmemory_resource_size(
++    xenforeignmemory_handle *fmem, domid_t domid, unsigned int type,
++    unsigned int id, unsigned long *nr_frames)
++{
++    errno = EOPNOTSUPP;
++    return -1;
++}
++
+ #else
+ int osdep_xenforeignmemory_restrict(xenforeignmemory_handle *fmem,
+                                     domid_t domid);
+@@ -81,6 +92,9 @@ int osdep_xenforeignmemory_map_resource(
+     xenforeignmemory_handle *fmem, xenforeignmemory_resource_handle *fres);
+ int osdep_xenforeignmemory_unmap_resource(
+     xenforeignmemory_handle *fmem, xenforeignmemory_resource_handle *fres);
++int osdep_xenforeignmemory_resource_size(
++    xenforeignmemory_handle *fmem, domid_t domid, unsigned int type,
++    unsigned int id, unsigned long *nr_frames);
+ #endif
+ 
+ #define PERROR(_f...) \
+diff --git a/tools/libs/uselibs.mk b/tools/libs/uselibs.mk
+index a9dc2ce994..cb09e54de5 100644
+--- a/tools/libs/uselibs.mk
++++ b/tools/libs/uselibs.mk
+@@ -11,7 +11,7 @@ USELIBS_gnttab := toollog toolcore
+ LIBS_LIBS += call
+ USELIBS_call := toollog toolcore
+ LIBS_LIBS += foreignmemory
+-USELIBS_foreignmemory := toollog toolcore
++USELIBS_foreignmemory := toollog toolcore call
+ LIBS_LIBS += devicemodel
+ USELIBS_devicemodel := toollog toolcore call
+ LIBS_LIBS += hypfs
 -- 
 2.11.0
 
