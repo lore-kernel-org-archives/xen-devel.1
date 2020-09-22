@@ -2,54 +2,54 @@ Return-Path: <SRS0=tzN1=C7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-8.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2AE69C2D0E2
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 14:27:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A694FC4363D
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 14:27:53 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D683C20C09
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 14:27:27 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 5422820C09
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 14:27:53 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="lHK/Q++s"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D683C20C09
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="k4kNif04"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5422820C09
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kKjG7-0005M1-O7; Tue, 22 Sep 2020 14:27:07 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kKjGh-0005Qt-1i; Tue, 22 Sep 2020 14:27:43 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=1J9w=C7=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kKjG6-0005Ln-8W
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2020 14:27:06 +0000
-X-Inumbo-ID: 50ff7a2d-ed3a-429d-9740-5d92afe71edd
+ id 1kKjGf-0005Qb-Ez
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2020 14:27:41 +0000
+X-Inumbo-ID: 62d75ccf-74bd-4d2b-924f-4a5529ecf548
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 50ff7a2d-ed3a-429d-9740-5d92afe71edd;
- Tue, 22 Sep 2020 14:27:05 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 62d75ccf-74bd-4d2b-924f-4a5529ecf548;
+ Tue, 22 Sep 2020 14:27:40 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
- t=1600784824;
+ t=1600784859;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=9iap8OhR0mg2o+oQKvKr4dqpchp5k/Qdg/nP8obFaeY=;
- b=lHK/Q++sNDhMHjfjX0PVnGHzyRr4Dmz3rwSIx27UoO/Z2Lj7DKxvtEhgyNqSf7AL0BiHPY
- BnikXzfUR6ktJG5L0tmT+M/3qlgufoXtAj7UgEbRcdZR+58CVor2HlmziILdD7UNQ5Zca+
- LEbsS7eQ/iOnCbOuuBlh2e6jVGEqbaE=
+ bh=tbqvo7jQY7nww+t3e/LQx59i31HUUyEw9SuY710wtGA=;
+ b=k4kNif04DpG6L3exNN7PJsrRETF0KZKPYmSIlKyzefqHP1Apis9604LaPGbhL+9AWsRYJm
+ cOoQi3PxybpnaK0eyYHMkDXJ4a7kgeWaTo3Bm71UILANWhRNPc1YbI3IkDTU4AGxV4GEg7
+ dqebd0HhEQ8YQWpVd8M8PhRNXF+UfGA=
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 39C7EAD20;
- Tue, 22 Sep 2020 14:27:41 +0000 (UTC)
-Subject: Re: [PATCH v3 2/3] xen-blkfront: add a parameter for disabling of
- persistent grants
+ by mx2.suse.de (Postfix) with ESMTP id 6354CACC2;
+ Tue, 22 Sep 2020 14:28:16 +0000 (UTC)
+Subject: Re: [PATCH v3 3/3] xen-blkfront: Apply changed parameter name to the
+ document
 To: SeongJae Park <sjpark@amazon.com>, konrad.wilk@oracle.com,
  roger.pau@citrix.com
 Cc: SeongJae Park <sjpark@amazon.de>, axboe@kernel.dk, aliguori@amazon.com,
@@ -57,14 +57,14 @@ Cc: SeongJae Park <sjpark@amazon.de>, axboe@kernel.dk, aliguori@amazon.com,
  linux-block@vger.kernel.org, xen-devel@lists.xenproject.org,
  linux-kernel@vger.kernel.org
 References: <20200922141549.26154-1-sjpark@amazon.com>
- <20200922141549.26154-3-sjpark@amazon.com>
+ <20200922141549.26154-4-sjpark@amazon.com>
 From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Message-ID: <28773bff-7664-99fa-a542-b87e907bf705@suse.com>
-Date: Tue, 22 Sep 2020 16:27:03 +0200
+Message-ID: <0171c36f-138b-8f53-7cb7-3b753c7f23dd@suse.com>
+Date: Tue, 22 Sep 2020 16:27:39 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.12.0
 MIME-Version: 1.0
-In-Reply-To: <20200922141549.26154-3-sjpark@amazon.com>
+In-Reply-To: <20200922141549.26154-4-sjpark@amazon.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -84,76 +84,12 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 On 22.09.20 16:15, SeongJae Park wrote:
 > From: SeongJae Park <sjpark@amazon.de>
 > 
-> Persistent grants feature provides high scalability.  On some small
-> systems, however, it could incur data copy overheads[1] and thus it is
-> required to be disabled.  It can be disabled from blkback side using a
-> module parameter, 'feature_persistent'.  But, it is impossible from
-> blkfront side.  For the reason, this commit adds a blkfront module
-> parameter for disabling of the feature.
-> 
-> [1] https://wiki.xen.org/wiki/Xen_4.3_Block_Protocol_Scalability
+> Commit 14e710fe7897 ("xen-blkfront: rename indirect descriptor
+> parameter") changed the name of the module parameter for the maximum
+> amount of segments in indirect requests but missed updating the
+> document.  This commit updates the document.
 > 
 > Signed-off-by: SeongJae Park <sjpark@amazon.de>
-> ---
->   .../ABI/testing/sysfs-driver-xen-blkfront     |  9 +++++++++
->   drivers/block/xen-blkfront.c                  | 20 ++++++++++++++-----
->   2 files changed, 24 insertions(+), 5 deletions(-)
-> 
-> diff --git a/Documentation/ABI/testing/sysfs-driver-xen-blkfront b/Documentation/ABI/testing/sysfs-driver-xen-blkfront
-> index c0a6cb7eb314..9c31334cb2e6 100644
-> --- a/Documentation/ABI/testing/sysfs-driver-xen-blkfront
-> +++ b/Documentation/ABI/testing/sysfs-driver-xen-blkfront
-> @@ -8,3 +8,12 @@ Description:
->                   is 32 - higher value means more potential throughput but more
->                   memory usage. The backend picks the minimum of the frontend
->                   and its default backend value.
-> +
-> +What:           /sys/module/xen_blkfront/parameters/feature_persistent
-> +Date:           September 2020
-> +KernelVersion:  5.10
-> +Contact:        SeongJae Park <sjpark@amazon.de>
-> +Description:
-> +                Whether to enable the persistent grants feature or not.  Note
-> +                that this option only takes effect on newly created frontends.
-> +                The default is Y (enable).
-> diff --git a/drivers/block/xen-blkfront.c b/drivers/block/xen-blkfront.c
-> index 91de2e0755ae..b2d3b1262404 100644
-> --- a/drivers/block/xen-blkfront.c
-> +++ b/drivers/block/xen-blkfront.c
-> @@ -1866,8 +1866,8 @@ static int talk_to_blkback(struct xenbus_device *dev,
->   		message = "writing protocol";
->   		goto abort_transaction;
->   	}
-> -	err = xenbus_printf(xbt, dev->nodename,
-> -			    "feature-persistent", "%u", 1);
-> +	err = xenbus_printf(xbt, dev->nodename, "feature-persistent", "%u",
-> +			info->feature_persistent);
->   	if (err)
->   		dev_warn(&dev->dev,
->   			 "writing persistent grants feature to xenbus");
-> @@ -1941,6 +1941,13 @@ static int negotiate_mq(struct blkfront_info *info)
->   	}
->   	return 0;
->   }
-> +
-> +/* Enable the persistent grants feature. */
-> +static bool feature_persistent = true;
-> +module_param(feature_persistent, bool, 0644);
-> +MODULE_PARM_DESC(feature_persistent,
-> +		"Enables the persistent grants feature");
-> +
->   /**
->    * Entry point to this code when a new device is created.  Allocate the basic
->    * structures and the ring buffer for communication with the backend, and
-> @@ -2007,6 +2014,8 @@ static int blkfront_probe(struct xenbus_device *dev,
->   	info->vdevice = vdevice;
->   	info->connected = BLKIF_STATE_DISCONNECTED;
->   
-> +	info->feature_persistent = feature_persistent ? 1 : 0;
-
-Just use the value.
-
-With that changed:
 
 Reviewed-by: Juergen Gross <jgross@suse.com>
 
