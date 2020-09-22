@@ -2,79 +2,80 @@ Return-Path: <SRS0=tzN1=C7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.1 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
+X-Spam-Status: No, score=-14.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4470AC4363D
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 14:18:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 494F8C4363D
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 14:19:31 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CD1842076E
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 14:18:49 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id E089D2076E
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 14:19:30 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="IYphFd04"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CD1842076E
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	dkim=pass (1024-bit key) header.d=amazon.com header.i=@amazon.com header.b="ClnVEWlQ"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E089D2076E
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=amazon.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kKj7u-0003Ju-Lr; Tue, 22 Sep 2020 14:18:38 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kKj8a-0003SK-VY; Tue, 22 Sep 2020 14:19:20 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=J35V=C7=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1kKj7t-0003Jk-GZ
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2020 14:18:37 +0000
-X-Inumbo-ID: 8a8ba69c-e9e5-48cf-9769-b52509a8444b
-Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 8a8ba69c-e9e5-48cf-9769-b52509a8444b;
- Tue, 22 Sep 2020 14:18:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1600784316;
- h=subject:to:references:from:message-id:date:mime-version:
- in-reply-to:content-transfer-encoding;
- bh=N04S7EuyG3e5EFknOWY3nLUTCXtE0CamCIK6TFGNhoQ=;
- b=IYphFd04X6GtqLuZ/unCxD8875j7Vo6LyZoVUZea2FwDb77NnIMa3Z2D
- q6l3SErhg0kT8itK0p2ZGP5CPlXurnsLWZkT5ByYMpWHTgisiS7srMBnC
- Yfv1Iu1x+ZkU2WjCg6hw3k5q09ZC3EWBBKF4CXppAYr8MlpiWami8d+UG g=;
-Authentication-Results: esa3.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: EmrQ4rwBbLVLl+9dLzU3s/DWjdnEp6Rt4dGyTYpdoB9TdZLW6uKCJhAKiTfK7WYjhzsNxB73Ms
- DMgps5uRGU87f6DoP3PrbU4afX6bzNxeP1CsTgbz49LJ0++R9GBl5U1XObi1vZMssUR/PsOKIP
- 3SYy519ROfyJWndnR8dcndGiL/Y+sXOGgzef9crD42ItwDC0pV2AdQB+pZYbHCtyoZRcKOz2lB
- NLUCAIulBykTRZQ6wQSl03ME2tYZu138JBk+G984DS0zEHtkys9m/IQv7jtM9M/VPn7LFn4IRv
- U64=
-X-SBRS: 2.7
-X-MesageID: 27235111
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.77,291,1596513600"; d="scan'208";a="27235111"
-Subject: Re: races in toolstack build
-To: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>, Olaf Hering
- <olaf@aepfle.de>, <xen-devel@lists.xenproject.org>
-References: <20200922141700.4627df0d.olaf@aepfle.de>
- <fa2ba088-f95d-ce85-b991-793eb4d98f92@suse.com>
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Message-ID: <58ec9527-60a0-8815-010f-18f3a8c9df84@citrix.com>
-Date: Tue, 22 Sep 2020 15:18:30 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ <SRS0=pHJL=C7=amazon.com=prvs=5271185ff=sjpark@srs-us1.protection.inumbo.net>)
+ id 1kKj8Z-0003Ru-DJ
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2020 14:19:19 +0000
+X-Inumbo-ID: 5077f38a-f0db-4e7f-b600-e79c408143a1
+Received: from smtp-fw-9101.amazon.com (unknown [207.171.184.25])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 5077f38a-f0db-4e7f-b600-e79c408143a1;
+ Tue, 22 Sep 2020 14:19:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
+ t=1600784358; x=1632320358;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version;
+ bh=+nJu4gS/7OcwzlWUYMHlKyPCjt1XPzaZGoaWTe/XeyE=;
+ b=ClnVEWlQ3xQc5N2NTGk1rqLySR8uk0piGcyn/LBCX6nqzZNGwmaqt0JS
+ VdQhNAX0itD52Zx6c7sZiTMtJRUJ1Ylc/dXwEWS0IXvMaAVvLFGo6xu5F
+ 5fRoQzeKGrHNJxn7Shv7ZSn4gK7Xg36D0Z6yfz7f+c1r4EA0hkAXP69gw k=;
+X-IronPort-AV: E=Sophos;i="5.77,291,1596499200"; d="scan'208";a="70117531"
+Received: from sea32-co-svc-lb4-vlan3.sea.corp.amazon.com (HELO
+ email-inbound-relay-2a-119b4f96.us-west-2.amazon.com) ([10.47.23.38])
+ by smtp-border-fw-out-9101.sea19.amazon.com with ESMTP;
+ 22 Sep 2020 14:16:20 +0000
+Received: from EX13D31EUA004.ant.amazon.com
+ (pdx4-ws-svc-p6-lb7-vlan2.pdx.amazon.com [10.170.41.162])
+ by email-inbound-relay-2a-119b4f96.us-west-2.amazon.com (Postfix) with ESMTPS
+ id 4EDC11A0608; Tue, 22 Sep 2020 14:16:19 +0000 (UTC)
+Received: from u3f2cd687b01c55.ant.amazon.com (10.43.160.137) by
+ EX13D31EUA004.ant.amazon.com (10.43.165.161) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Tue, 22 Sep 2020 14:16:12 +0000
+From: SeongJae Park <sjpark@amazon.com>
+To: <konrad.wilk@oracle.com>, <roger.pau@citrix.com>, <jgross@suse.com>
+CC: SeongJae Park <sjpark@amazon.de>, <axboe@kernel.dk>,
+ <aliguori@amazon.com>, <amit@kernel.org>, <mheyne@amazon.de>,
+ <pdurrant@amazon.co.uk>, <linux-block@vger.kernel.org>,
+ <xen-devel@lists.xenproject.org>, <linux-kernel@vger.kernel.org>
+Subject: [PATCH v3 1/3] xen-blkback: add a parameter for disabling of
+ persistent grants
+Date: Tue, 22 Sep 2020 16:15:47 +0200
+Message-ID: <20200922141549.26154-2-sjpark@amazon.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200922141549.26154-1-sjpark@amazon.com>
+References: <20200922141549.26154-1-sjpark@amazon.com>
 MIME-Version: 1.0
-In-Reply-To: <fa2ba088-f95d-ce85-b991-793eb4d98f92@suse.com>
-Content-Type: text/plain; charset="windows-1252"
-Content-Transfer-Encoding: 8bit
-Content-Language: en-GB
-X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
- FTLPEX02CL05.citrite.net (10.13.108.178)
+Content-Type: text/plain
+X-Originating-IP: [10.43.160.137]
+X-ClientProxiedBy: EX13D12UWC001.ant.amazon.com (10.43.162.78) To
+ EX13D31EUA004.ant.amazon.com (10.43.165.161)
+Precedence: Bulk
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
-Precedence: list
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -85,46 +86,109 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 22/09/2020 14:51, Jürgen Groß wrote:
-> On 22.09.20 14:17, Olaf Hering wrote:
->> With commit 68a8aa5d72 the build randomly fails. Up to commit
->> c7e3021a71 no errors (like this) are seen. For some reason nothing
->> below tools/ was touched in this range, so the bug may already exist
->> for a while.
->>
->> attempt on host#1:
->> [   81s] ln: failed to create symbolic link
->> '/home/abuild/rpmbuild/BUILD/xen-4.15.20200922T102230.68a8aa5d72/non-dbg/tools/libs/ctrl/../../../tools/include/xenctrl_dom.h':
->> File exists
->
-> This is very weird, as the link is created via "ln -sf", so an existing
-> target should not make the command failing.
->
->> [   81s]
->> /home/abuild/rpmbuild/BUILD/xen-4.15.20200922T102230.68a8aa5d72/non-dbg/tools/libs/ctrl/../../../tools/libs/libs.mk:82:
->> recipe for target
->> '/home/abuild/rpmbuild/BUILD/xen-4.15.20200922T102230.68a8aa5d72/non-dbg/tools/libs/ctrl/../../../tools/include/xenctrl_compat.h'
->> failed
->> [   81s] make[6]: ***
->> [/home/abuild/rpmbuild/BUILD/xen-4.15.20200922T102230.68a8aa5d72/non-dbg/tools/libs/ctrl/../../../tools/include/xenctrl_compat.h]
->> Error 1
->>
->> attempt on host#2:
->> [  178s] xenstat_qmp.c:26:10: fatal error: _paths.h: No such file or
->> directory
->> [  178s]
->> me/abuild/rpmbuild/BUILD/xen-4.15.20200922T102230.68a8aa5d72/non-dbg/tools/libs/stat/../../../tools/Rules.mk:153:
->> xenstat_qmp.opic] Error 1
->
-> This shouldn't happen, too.
->
-> Is this really a normal upstream build, or do you have any additional
-> patches applied?
+From: SeongJae Park <sjpark@amazon.de>
 
-I've also observed the first symptom sporadically.  They've all been in
-my main dev tree, which absolutely includes the possibility of an
-unclean tree.  So far I haven't observed it from a clean tarball in a
-mock chroot.
+Persistent grants feature provides high scalability.  On some small
+systems, however, it could incur data copy overheads[1] and thus it is
+required to be disabled.  But, there is no option to disable it.  For
+the reason, this commit adds a module parameter for disabling of the
+feature.
 
-~Andrew
+[1] https://wiki.xen.org/wiki/Xen_4.3_Block_Protocol_Scalability
+
+Signed-off-by: Anthony Liguori <aliguori@amazon.com>
+Signed-off-by: SeongJae Park <sjpark@amazon.de>
+---
+ .../ABI/testing/sysfs-driver-xen-blkback      |  9 ++++++++
+ drivers/block/xen-blkback/xenbus.c            | 22 ++++++++++++++-----
+ 2 files changed, 25 insertions(+), 6 deletions(-)
+
+diff --git a/Documentation/ABI/testing/sysfs-driver-xen-blkback b/Documentation/ABI/testing/sysfs-driver-xen-blkback
+index ecb7942ff146..ac2947b98950 100644
+--- a/Documentation/ABI/testing/sysfs-driver-xen-blkback
++++ b/Documentation/ABI/testing/sysfs-driver-xen-blkback
+@@ -35,3 +35,12 @@ Description:
+                 controls the duration in milliseconds that blkback will not
+                 cache any page not backed by a grant mapping.
+                 The default is 10ms.
++
++What:           /sys/module/xen_blkback/parameters/feature_persistent
++Date:           September 2020
++KernelVersion:  5.10
++Contact:        SeongJae Park <sjpark@amazon.de>
++Description:
++                Whether to enable the persistent grants feature or not.  Note
++                that this option only takes effect on newly created backends.
++                The default is Y (enable).
+diff --git a/drivers/block/xen-blkback/xenbus.c b/drivers/block/xen-blkback/xenbus.c
+index b9aa5d1ac10b..f4c8827fa0ad 100644
+--- a/drivers/block/xen-blkback/xenbus.c
++++ b/drivers/block/xen-blkback/xenbus.c
+@@ -474,6 +474,12 @@ static void xen_vbd_free(struct xen_vbd *vbd)
+ 	vbd->bdev = NULL;
+ }
+ 
++/* Enable the persistent grants feature. */
++static bool feature_persistent = true;
++module_param(feature_persistent, bool, 0644);
++MODULE_PARM_DESC(feature_persistent,
++		"Enables the persistent grants feature");
++
+ static int xen_vbd_create(struct xen_blkif *blkif, blkif_vdev_t handle,
+ 			  unsigned major, unsigned minor, int readonly,
+ 			  int cdrom)
+@@ -519,6 +525,8 @@ static int xen_vbd_create(struct xen_blkif *blkif, blkif_vdev_t handle,
+ 	if (q && blk_queue_secure_erase(q))
+ 		vbd->discard_secure = true;
+ 
++	vbd->feature_gnt_persistent = feature_persistent ? 1 : 0;
++
+ 	pr_debug("Successful creation of handle=%04x (dom=%u)\n",
+ 		handle, blkif->domid);
+ 	return 0;
+@@ -906,7 +914,8 @@ static void connect(struct backend_info *be)
+ 
+ 	xen_blkbk_barrier(xbt, be, be->blkif->vbd.flush_support);
+ 
+-	err = xenbus_printf(xbt, dev->nodename, "feature-persistent", "%u", 1);
++	err = xenbus_printf(xbt, dev->nodename, "feature-persistent", "%u",
++			be->blkif->vbd.feature_gnt_persistent);
+ 	if (err) {
+ 		xenbus_dev_fatal(dev, err, "writing %s/feature-persistent",
+ 				 dev->nodename);
+@@ -1067,7 +1076,6 @@ static int connect_ring(struct backend_info *be)
+ {
+ 	struct xenbus_device *dev = be->dev;
+ 	struct xen_blkif *blkif = be->blkif;
+-	unsigned int pers_grants;
+ 	char protocol[64] = "";
+ 	int err, i;
+ 	char *xspath;
+@@ -1093,9 +1101,11 @@ static int connect_ring(struct backend_info *be)
+ 		xenbus_dev_fatal(dev, err, "unknown fe protocol %s", protocol);
+ 		return -ENOSYS;
+ 	}
+-	pers_grants = xenbus_read_unsigned(dev->otherend, "feature-persistent",
+-					   0);
+-	blkif->vbd.feature_gnt_persistent = pers_grants;
++	if (blkif->vbd.feature_gnt_persistent)
++		blkif->vbd.feature_gnt_persistent =
++			xenbus_read_unsigned(dev->otherend,
++					"feature-persistent", 0);
++
+ 	blkif->vbd.overflow_max_grants = 0;
+ 
+ 	/*
+@@ -1118,7 +1128,7 @@ static int connect_ring(struct backend_info *be)
+ 
+ 	pr_info("%s: using %d queues, protocol %d (%s) %s\n", dev->nodename,
+ 		 blkif->nr_rings, blkif->blk_protocol, protocol,
+-		 pers_grants ? "persistent grants" : "");
++		 blkif->vbd.feature_gnt_persistent ? "persistent grants" : "");
+ 
+ 	ring_page_order = xenbus_read_unsigned(dev->otherend,
+ 					       "ring-page-order", 0);
+-- 
+2.17.1
+
 
