@@ -2,79 +2,100 @@ Return-Path: <SRS0=tzN1=C7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-14.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.3 required=3.0 tests=BAYES_00,DKIM_ADSP_CUSTOM_MED,
+	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E040C4727D
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 14:19:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DC8F8C4363D
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 14:20:14 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 16F202395B
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 14:19:37 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 7A4DA2076E
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 14:20:14 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=amazon.com header.i=@amazon.com header.b="UuJWSHLN"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 16F202395B
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=amazon.com
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="bZEz5ZSO"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7A4DA2076E
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kKj8k-0003Vl-HK; Tue, 22 Sep 2020 14:19:30 +0000
+	id 1kKj9J-0004CG-R7; Tue, 22 Sep 2020 14:20:05 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=pHJL=C7=amazon.com=prvs=5271185ff=sjpark@srs-us1.protection.inumbo.net>)
- id 1kKj8j-0003Ru-7x
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2020 14:19:29 +0000
-X-Inumbo-ID: 912ccf3d-5186-4091-bc31-c320ae2b63b7
-Received: from smtp-fw-9101.amazon.com (unknown [207.171.184.25])
+ <SRS0=wZys=C7=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
+ id 1kKj9J-00044D-2A
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2020 14:20:05 +0000
+X-Inumbo-ID: 878c22f3-c6a0-4a52-aaa1-5bd256a32647
+Received: from mail-wr1-x431.google.com (unknown [2a00:1450:4864:20::431])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 912ccf3d-5186-4091-bc31-c320ae2b63b7;
- Tue, 22 Sep 2020 14:19:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
- t=1600784365; x=1632320365;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version;
- bh=o7irTIbRXOJQafppIl9QY5dF6CNyW4qaMo6zKmMJeVI=;
- b=UuJWSHLN7X9GKJEwZJ9Jp/deCje3pK+WDYjRzmOnH6mx3wUIka6uiXfX
- 2Fm2YsF0mUV27Ipaf1B9DhJI9BwZ4hevHvl3FeOF435clIEUYHF4vZU80
- H52M8RrINeAXp0IXum9A1gyvFgR8blEYLS7ihlxJ2GHVmdM9B1Y3PTD5w I=;
-X-IronPort-AV: E=Sophos;i="5.77,291,1596499200"; d="scan'208";a="70117581"
-Received: from sea32-co-svc-lb4-vlan3.sea.corp.amazon.com (HELO
- email-inbound-relay-2b-8cc5d68b.us-west-2.amazon.com) ([10.47.23.38])
- by smtp-border-fw-out-9101.sea19.amazon.com with ESMTP;
- 22 Sep 2020 14:16:33 +0000
-Received: from EX13D31EUA004.ant.amazon.com
- (pdx4-ws-svc-p6-lb7-vlan3.pdx.amazon.com [10.170.41.166])
- by email-inbound-relay-2b-8cc5d68b.us-west-2.amazon.com (Postfix) with ESMTPS
- id 3B241A1C02; Tue, 22 Sep 2020 14:16:32 +0000 (UTC)
-Received: from u3f2cd687b01c55.ant.amazon.com (10.43.160.137) by
- EX13D31EUA004.ant.amazon.com (10.43.165.161) with Microsoft SMTP Server (TLS)
- id 15.0.1497.2; Tue, 22 Sep 2020 14:16:25 +0000
-From: SeongJae Park <sjpark@amazon.com>
-To: <konrad.wilk@oracle.com>, <roger.pau@citrix.com>, <jgross@suse.com>
-CC: SeongJae Park <sjpark@amazon.de>, <axboe@kernel.dk>,
- <aliguori@amazon.com>, <amit@kernel.org>, <mheyne@amazon.de>,
- <pdurrant@amazon.co.uk>, <linux-block@vger.kernel.org>,
- <xen-devel@lists.xenproject.org>, <linux-kernel@vger.kernel.org>
-Subject: [PATCH v3 3/3] xen-blkfront: Apply changed parameter name to the
- document
-Date: Tue, 22 Sep 2020 16:15:49 +0200
-Message-ID: <20200922141549.26154-4-sjpark@amazon.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200922141549.26154-1-sjpark@amazon.com>
-References: <20200922141549.26154-1-sjpark@amazon.com>
+ id 878c22f3-c6a0-4a52-aaa1-5bd256a32647;
+ Tue, 22 Sep 2020 14:20:03 +0000 (UTC)
+Received: by mail-wr1-x431.google.com with SMTP id j2so17290847wrx.7;
+ Tue, 22 Sep 2020 07:20:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:reply-to:to:cc:references:in-reply-to:subject:date:message-id
+ :mime-version:content-transfer-encoding:content-language
+ :thread-index; bh=wkHCv8F92nzhMr1RHQy8ugQFBMe6EAXcxhpmVIgirJg=;
+ b=bZEz5ZSOdtlw1hbrTRbCt4TQleWCOIrQqCh+zziBxHWn/Y0rHwCD2DqETsuIw6SC/Z
+ Nwx527eMnUlgT1UQhKhP7Sre1nwVc/H/uCCyARnpnduUEqFXuW8PZcmnvSMwgA25VnyZ
+ 50jTfjbzXWOJ0kKCJsHUcNk4wddyijduXNdhp+NkzXvKUiIh+t2UxFhyu2Kl66/LvPFx
+ mwS4SYVojCXTeXgiXOIbcir5lJ40mdIEsCBSs8yQsnThld9PtSwQJOurgPO5tisUdBZu
+ PiTsU/a53PBRrQ/ssZIXIhVd+JmsfG+8g4X+C/WoxY+ndYQLiAWr4CnhAbXajGjoXumo
+ 8C0A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:reply-to:to:cc:references:in-reply-to
+ :subject:date:message-id:mime-version:content-transfer-encoding
+ :content-language:thread-index;
+ bh=wkHCv8F92nzhMr1RHQy8ugQFBMe6EAXcxhpmVIgirJg=;
+ b=krItZQtTWudcYD1bjwR1a46hK54qZ+Jb6i8qLco1cJcaENBRRPcmViCwToCygT/aI7
+ tZZiM2C2smM2l5vcKXo0MVKY8AEeI3cu+lQuvNpvG2fVUJ8y+D9/KInVRoEcAmRBUqS9
+ 0spHTKwV5YN+OXcAt7noC3EhQIR5hGdJcmMqvVAsSJxje32rYvsTU7KztpFzyFG0SWDu
+ obsb9mYhJYPcRd9ue3no8PeYpgrAcK2igJN2rV6YnlhGLQuxnMNcKeRkx0u09ZyRwxG0
+ Q4S6VScY9XNMBb/ZAH871ONUTxpyOzp8L3S3VEdH5fvHtSgAZg7wjIg/6SjjipDDLUe9
+ ewdw==
+X-Gm-Message-State: AOAM533ra1+uDL05d64CeXebEovbExEqjmorJLaPLj6LGUDOeSeiz5/q
+ BJD8/eKBEVT0hvBEb/eMhDM=
+X-Google-Smtp-Source: ABdhPJzMVopL2etqqrOMerK9YUMg+ERAPjQyT1St+WmgTl8JcD5ZXnV+iVmMkZ8BpOR61tk5KR8wuA==
+X-Received: by 2002:adf:fd90:: with SMTP id d16mr5777892wrr.52.1600784402720; 
+ Tue, 22 Sep 2020 07:20:02 -0700 (PDT)
+Received: from CBGR90WXYV0 (host86-176-94-160.range86-176.btcentralplus.com.
+ [86.176.94.160])
+ by smtp.gmail.com with ESMTPSA id h8sm26758632wrw.68.2020.09.22.07.20.01
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Tue, 22 Sep 2020 07:20:01 -0700 (PDT)
+From: Paul Durrant <xadimgnik@gmail.com>
+X-Google-Original-From: "Paul Durrant" <paul@xen.org>
+To: =?utf-8?Q?'J=C3=BCrgen_Gro=C3=9F'?= <jgross@suse.com>,
+ "'Edwin Torok'" <edvin.torok@citrix.com>, <sstabellini@kernel.org>,
+ "'Anthony Perard'" <anthony.perard@citrix.com>,
+ <xen-devel@lists.xenproject.org>
+Cc: <xen-users@lists.xenproject.org>, <jerome.leseinne@gmail.com>,
+ <julien@xen.org>
+References: <CAAMaOzi5d7S0qAhBkPTFzNfAWXMuK-JbxtQuyk4hdPcVDUwxQg@mail.gmail.com>
+ <c84155eb-429d-7143-9eb1-3b5a50c6bde5@xen.org>
+ <46f1f50dc02c53391958d9d4bb5fc57d23ba6ede.camel@citrix.com>
+ <CAAMaOzj3eYo=bQgth51f+psR2ZBj+c-2boZy57x2qV2aq0fShQ@mail.gmail.com>
+ <ba74b8225223ba800c38b34ac950283b7b6cb0fe.camel@citrix.com>
+ <00a101d690e6$33a88bd0$9af9a370$@xen.org>
+ <816d5bd8-6794-7fcd-bd08-6eb5a2248328@suse.com>
+In-Reply-To: <816d5bd8-6794-7fcd-bd08-6eb5a2248328@suse.com>
+Subject: RE: oxenstored performance issue when starting VMs in parallel
+Date: Tue, 22 Sep 2020 15:20:00 +0100
+Message-ID: <00e901d690eb$759ff5a0$60dfe0e0$@xen.org>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.43.160.137]
-X-ClientProxiedBy: EX13D12UWC001.ant.amazon.com (10.43.162.78) To
- EX13D31EUA004.ant.amazon.com (10.43.165.161)
-Precedence: Bulk
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailer: Microsoft Outlook 16.0
+Content-Language: en-gb
+Thread-Index: AQIMrhWN1wQeREaSEc+MmVb+KxeEJQB0POE8AQkglPkA0UpCvgG7bFMSAn0bfWsCYHSeyqjBPSiw
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
+Precedence: list
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -82,32 +103,93 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
+Reply-To: paul@xen.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: SeongJae Park <sjpark@amazon.de>
+> -----Original Message-----
+> From: J=C3=BCrgen Gro=C3=9F <jgross@suse.com>
+> Sent: 22 September 2020 15:18
+> To: paul@xen.org; 'Edwin Torok' <edvin.torok@citrix.com>; =
+sstabellini@kernel.org; 'Anthony Perard'
+> <anthony.perard@citrix.com>; xen-devel@lists.xenproject.org
+> Cc: xen-users@lists.xenproject.org; jerome.leseinne@gmail.com; =
+julien@xen.org
+> Subject: Re: oxenstored performance issue when starting VMs in =
+parallel
+>=20
+> On 22.09.20 15:42, Paul Durrant wrote:
+> >> -----Original Message-----
+> >> From: Edwin Torok <edvin.torok@citrix.com>
+> >> Sent: 22 September 2020 14:29
+> >> To: sstabellini@kernel.org; Anthony Perard =
+<anthony.perard@citrix.com>; xen-
+> >> devel@lists.xenproject.org; paul@xen.org
+> >> Cc: xen-users@lists.xenproject.org; jerome.leseinne@gmail.com; =
+julien@xen.org
+> >> Subject: Re: oxenstored performance issue when starting VMs in =
+parallel
+> >>
+> >> On Tue, 2020-09-22 at 15:17 +0200, jerome leseinne wrote:
+> >>> Hi,
+> >>>
+> >>> Edwin you rock ! This call in qemu is effectively the culprit !
+> >>> I have disabled this xen_bus_add_watch call and re-run test on our
+> >>> big server:
+> >>>
+> >>> - oxenstored is now  between 10% to 20%  CPU usage (previously was
+> >>> 100% all the time)
+> >>> - All our VMs are responsive
+> >>> - All our VM start in less than 10 seconds (before the fix some =
+VMs
+> >>> could take more than one minute to be fully up
+> >>> - Dom0 is more responsive
+> >>>
+> >>> Disabling the watch may not be the ideal solution ( I let the qemu
+> >>> experts answer this and the possible side effects),
+> >>
+> >> Hi,
+> >>
+> >> CC-ed Qemu maintainer of Xen code, please see this discussion about
+> >> scalability issues with the backend watching code in qemu 4.1+.
+> >>
+> >> I think the scalability issue is due to this code in qemu, which =
+causes
+> >> an instance of qemu to see watches from all devices (even those
+> >> belonging to other qemu instances), such that adding a single =
+device
+> >> causes N watches to be fired on each N instances of qemu:
+> >>        xenbus->backend_watch =3D
+> >>             xen_bus_add_watch(xenbus, "", /* domain root node */
+> >>                               "backend", xen_bus_backend_changed,
+> >>   &local_err);
+> >>
+> >> I can understand that for backwards compatibility you might need =
+this
+> >> code, but is there a way that an up-to-date (xl) toolstack could =
+tell
+> >> qemu what it needs to look at (e.g. via QMP, or other keys in =
+xenstore)
+> >> instead of relying on an overly broad watch?
+> >
+> > I think this could be made more efficient. The call to =
+"module_call_init(MODULE_INIT_XEN_BACKEND)"
+> just prior to this watch will register backends that do auto-creation =
+so we could register individual
+> watches for the various backend types instead of this single one.
+>=20
+> The watch should be on guest domain level, e.g. for:
+>=20
+> /local/domain/0/backend/vbd/5
+>=20
+> We have one qemu process per guest, after all.
+>=20
 
-Commit 14e710fe7897 ("xen-blkfront: rename indirect descriptor
-parameter") changed the name of the module parameter for the maximum
-amount of segments in indirect requests but missed updating the
-document.  This commit updates the document.
+I'll see if I can spin a patch this afternoon.
 
-Signed-off-by: SeongJae Park <sjpark@amazon.de>
----
- Documentation/ABI/testing/sysfs-driver-xen-blkfront | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+  Paul
 
-diff --git a/Documentation/ABI/testing/sysfs-driver-xen-blkfront b/Documentation/ABI/testing/sysfs-driver-xen-blkfront
-index 9c31334cb2e6..28008905615f 100644
---- a/Documentation/ABI/testing/sysfs-driver-xen-blkfront
-+++ b/Documentation/ABI/testing/sysfs-driver-xen-blkfront
-@@ -1,4 +1,4 @@
--What:           /sys/module/xen_blkfront/parameters/max
-+What:           /sys/module/xen_blkfront/parameters/max_indirect_segments
- Date:           June 2013
- KernelVersion:  3.11
- Contact:        Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
--- 
-2.17.1
+>=20
+> Juergen
 
 
