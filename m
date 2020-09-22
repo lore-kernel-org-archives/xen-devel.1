@@ -7,66 +7,66 @@ X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4F7A9C2D0E2
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 18:25:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 61A41C4727D
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 18:25:31 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D20D8239D2
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 18:25:27 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 077B120735
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 18:25:30 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="FWWzFI87"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D20D8239D2
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="SXcxF+gp"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 077B120735
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kKmya-0008Mp-Kx; Tue, 22 Sep 2020 18:25:16 +0000
+	id 1kKmyf-0008Py-4R; Tue, 22 Sep 2020 18:25:21 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=J35V=C7=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1kKmyZ-0008GI-7I
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2020 18:25:15 +0000
-X-Inumbo-ID: e493f973-a6de-481c-b043-9d8af8e6b720
+ id 1kKmye-0008GI-7X
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2020 18:25:20 +0000
+X-Inumbo-ID: 635d8d12-cb4f-4e0b-b442-646c3906e749
 Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id e493f973-a6de-481c-b043-9d8af8e6b720;
- Tue, 22 Sep 2020 18:25:06 +0000 (UTC)
+ id 635d8d12-cb4f-4e0b-b442-646c3906e749;
+ Tue, 22 Sep 2020 18:25:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=citrix.com; s=securemail; t=1600799106;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=rU4T0b1gOrbQM5IJxlzUlr+qKaU/UBRT7s0tSb1goJY=;
- b=FWWzFI87tOVq1tJXsTAj/C6PfnaWdfmLVaMf09HzNtAeXZ6ZaRtbt3UP
- TTX2jONv+6y0k8m84KI7pAEJYQolFVTnXwy+PJzfnXEm3njP1mCZQSNzq
- 6swKhkpctxyGopmEYM1Wcs0Oo+lRpATpr+31efqcljldLycaQtmArbxxD k=;
+ bh=pLAgF35adw/kn3WeOYhIg/xCYIoVFVCDELdjZDtTL0c=;
+ b=SXcxF+gpotR8smdrO71mdzRkyIo3SzotYiMka0xg9Iu7thE4W10qRejz
+ vvPd1cQnWNfrdNZlC2lyHQhBAWqTjuObaI8CNWM56U64gu9PAhepR45Ou
+ jfY2j2SkzOVXXCXW05L5e3CJiGKjXAviR83+IVhjZ1FrbruYRcuaR5Frn Y=;
 Authentication-Results: esa4.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: BtEeTIYmEEE0eUHoxJvEe4cCTaaj1CJ0jl3J84aIM+PyauCZuJkj7WWbhF5rosbBTNuFhLB5PU
- mlpSVoO+WxmRnfol5bW5ToCVpD0WIm7W+a7U/xGC0jGw5YkZkqmH7lCyCHPSh9uwy0rCIME9E+
- Avx+J/DTUMcDaSqi5CS01DF4HZMujpWqMgSEFFhsYkW6XEipYLdTOZHbZBQDK40dpVj2ZRCwAG
- qX5M6jvHU5C8BA0kPNZPzOJRDqZz41av37xpQ90ScgeSiE3G9CL8LJFIhuzKbXF36VQfvNTknt
- u1c=
+IronPort-SDR: x4JzTL0cF8XRaqd3vLFHV5fhhcs+rcRu+VvL6j4BG7OCXCwhi8G360HAexdBGRZ7paMNOP8BEt
+ 9qqW1tS6lR97zQLU+4ZUBxhjzrZYN/iUX2jL/1ckImYIRFGX0wawTKjQ2jsjdMI5GM2KOvY+FE
+ G5hZSt6ERK/t0ZqM6q0L4A8glTCxviyHUFRgUReKTYnVJR7czj2HIcwq1eJ4kwIdIY8mK0DUC+
+ eV4Lf35mbVRgxhnp81exSMSck5l+S115dXw/HOnwRRN5FjdkL98cxHFacy3jUIJdEmRPQhiOn8
+ b88=
 X-SBRS: 2.7
-X-MesageID: 28290906
+X-MesageID: 28290908
 X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.77,291,1596513600"; d="scan'208";a="28290906"
+X-IronPort-AV: E=Sophos;i="5.77,291,1596513600"; d="scan'208";a="28290908"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
  <George.Dunlap@eu.citrix.com>, Ian Jackson <iwj@xenproject.org>, Jan Beulich
  <JBeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
- <wl@xen.org>, Julien Grall <julien@xen.org>, Paul Durrant <paul@xen.org>,
+ <wl@xen.org>, Julien Grall <julien@xen.org>,
  =?UTF-8?q?Micha=C5=82=20Leszczy=C5=84ski?= <michal.leszczynski@cert.pl>,
  Hubert Jasudowicz <hubert.jasudowicz@cert.pl>, Tamas K Lengyel
  <tamas@tklengyel.com>
-Subject: [PATCH v2 07/11] xen/memory: Improve compat XENMEM_acquire_resource
- handling
-Date: Tue, 22 Sep 2020 19:24:40 +0100
-Message-ID: <20200922182444.12350-8-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 03/11] xen/memory: Fix compat XENMEM_acquire_resource for
+ size requests
+Date: Tue, 22 Sep 2020 19:24:36 +0100
+Message-ID: <20200922182444.12350-4-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20200922182444.12350-1-andrew.cooper3@citrix.com>
 References: <20200922182444.12350-1-andrew.cooper3@citrix.com>
@@ -86,20 +86,11 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-The frame_list is an input, or an output, depending on whether the calling
-domain is translated or not.  The array does not need marshalling in both
-directions.
-
-Furthermore, the copy-in loop was very inefficient, copying 4 bytes at at
-time.  Rewrite it to copy in all nr_frames at once, and then expand
-compat_pfn_t to xen_pfn_t in place.
-
-Re-position the copy-in loop to simplify continuation support in a future
-patch, and reduce the scope of certain variables.
-
-No change in guest observed behaviour.
+Copy the nr_frames from the structure which actually has the correct value, so
+the caller doesn't unconditionally receive 0.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Reviewed-by: Paul Durrant <paul@xen.org>
 ---
 CC: George Dunlap <George.Dunlap@eu.citrix.com>
 CC: Ian Jackson <iwj@xenproject.org>
@@ -107,136 +98,26 @@ CC: Jan Beulich <JBeulich@suse.com>
 CC: Stefano Stabellini <sstabellini@kernel.org>
 CC: Wei Liu <wl@xen.org>
 CC: Julien Grall <julien@xen.org>
-CC: Paul Durrant <paul@xen.org>
 CC: Michał Leszczyński <michal.leszczynski@cert.pl>
 CC: Hubert Jasudowicz <hubert.jasudowicz@cert.pl>
 CC: Tamas K Lengyel <tamas@tklengyel.com>
 ---
- xen/common/compat/memory.c | 65 ++++++++++++++++++++++++++++------------------
- 1 file changed, 40 insertions(+), 25 deletions(-)
+ xen/common/compat/memory.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/xen/common/compat/memory.c b/xen/common/compat/memory.c
-index ed92e05b08..834c5e19d1 100644
+index 3851f756c7..ed92e05b08 100644
 --- a/xen/common/compat/memory.c
 +++ b/xen/common/compat/memory.c
-@@ -55,6 +55,8 @@ static int get_reserved_device_memory(xen_pfn_t start, xen_ulong_t nr,
- 
- int compat_memory_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) compat)
- {
-+    struct vcpu *curr = current;
-+    struct domain *currd = curr->domain;
-     int split, op = cmd & MEMOP_CMD_MASK;
-     long rc;
-     unsigned int start_extent = cmd >> MEMOP_EXTENT_SHIFT;
-@@ -399,7 +401,7 @@ int compat_memory_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) compat)
- 
-         case XENMEM_acquire_resource:
-         {
--            xen_pfn_t *xen_frame_list;
-+            xen_pfn_t *xen_frame_list = NULL;
-             unsigned int max_nr_frames;
- 
-             if ( copy_from_guest(&cmp.mar, compat, 1) )
-@@ -417,28 +419,10 @@ int compat_memory_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) compat)
-             if ( cmp.mar.nr_frames > max_nr_frames )
-                 return -E2BIG;
- 
--            if ( compat_handle_is_null(cmp.mar.frame_list) )
--                xen_frame_list = NULL;
--            else
--            {
-+            /* Marshal the frame list in the remainder of the xlat space. */
-+            if ( !compat_handle_is_null(cmp.mar.frame_list) )
-                 xen_frame_list = (xen_pfn_t *)(nat.mar + 1);
- 
--                if ( !compat_handle_okay(cmp.mar.frame_list,
--                                         cmp.mar.nr_frames) )
--                    return -EFAULT;
--
--                for ( i = 0; i < cmp.mar.nr_frames; i++ )
--                {
--                    compat_pfn_t frame;
--
--                    if ( __copy_from_compat_offset(
--                             &frame, cmp.mar.frame_list, i, 1) )
--                        return -EFAULT;
--
--                    xen_frame_list[i] = frame;
--                }
--            }
--
- #define XLAT_mem_acquire_resource_HNDL_frame_list(_d_, _s_) \
-             set_xen_guest_handle((_d_)->frame_list, xen_frame_list)
- 
-@@ -446,6 +430,31 @@ int compat_memory_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) compat)
- 
- #undef XLAT_mem_acquire_resource_HNDL_frame_list
- 
-+            if ( xen_frame_list && cmp.mar.nr_frames )
-+            {
-+                /*
-+                 * frame_list is an input for translated guests, and an output
-+                 * for untranslated guests.  Only copy in for translated guests.
-+                 */
-+                if ( paging_mode_translate(currd) )
-+                {
-+                    compat_pfn_t *compat_frame_list = (void *)xen_frame_list;
-+
-+                    if ( !compat_handle_okay(cmp.mar.frame_list,
-+                                             cmp.mar.nr_frames) ||
-+                         __copy_from_compat_offset(
-+                             compat_frame_list, cmp.mar.frame_list,
-+                             0, cmp.mar.nr_frames) )
-+                        return -EFAULT;
-+
-+                    /*
-+                     * Iterate backwards over compat_frame_list[] expanding
-+                     * compat_pfn_t to xen_pfn_t in place.
-+                     */
-+                    for ( int x = cmp.mar.nr_frames - 1; x >= 0; --x )
-+                        xen_frame_list[x] = compat_frame_list[x];
-+                }
-+            }
-             break;
-         }
-         default:
-@@ -590,8 +599,6 @@ int compat_memory_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) compat)
- 
-         case XENMEM_acquire_resource:
-         {
--            const xen_pfn_t *xen_frame_list = (xen_pfn_t *)(nat.mar + 1);
--            compat_pfn_t *compat_frame_list = (compat_pfn_t *)(nat.mar + 1);
-             DEFINE_XEN_GUEST_HANDLE(compat_mem_acquire_resource_t);
- 
-             if ( compat_handle_is_null(cmp.mar.frame_list) )
-@@ -601,9 +608,18 @@ int compat_memory_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) compat)
+@@ -599,7 +599,7 @@ int compat_memory_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) compat)
+                 if ( __copy_field_to_guest(
+                          guest_handle_cast(compat,
                                             compat_mem_acquire_resource_t),
-                          nat.mar, nr_frames) )
-                     return -EFAULT;
-+                break;
-             }
--            else
-+
-+            /*
-+             * frame_list is an input for translated guests, and an output for
-+             * untranslated guests.  Only copy out for untranslated guests.
-+             */
-+            if ( !paging_mode_translate(currd) )
-             {
-+                const xen_pfn_t *xen_frame_list = (xen_pfn_t *)(nat.mar + 1);
-+                compat_pfn_t *compat_frame_list = (compat_pfn_t *)(nat.mar + 1);
-+
-                 /*
-                  * NOTE: the smaller compat array overwrites the native
-                  *       array.
-@@ -625,7 +641,6 @@ int compat_memory_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) compat)
-                                              cmp.mar.nr_frames) )
+-                         &cmp.mar, nr_frames) )
++                         nat.mar, nr_frames) )
                      return -EFAULT;
              }
--
-             break;
-         }
- 
+             else
 -- 
 2.11.0
 
