@@ -2,75 +2,64 @@ Return-Path: <SRS0=tzN1=C7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 72B2FC4727E
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 10:56:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 368FCC4727D
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 10:58:51 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 20E16208A9
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 10:56:00 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id C81D7208A9
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 10:58:50 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="Ib38aDSC"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 20E16208A9
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="fPqa7Nk/"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C81D7208A9
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kKfxd-0002Ux-BF; Tue, 22 Sep 2020 10:55:49 +0000
+	id 1kKg0M-0002fW-4r; Tue, 22 Sep 2020 10:58:38 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=0tL6=C7=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kKfxc-0002Ur-F4
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2020 10:55:48 +0000
-X-Inumbo-ID: 2f66a6df-e2bb-40a4-8785-e7a52fe459dc
+ (envelope-from <SRS0=1J9w=C7=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1kKg0K-0002eH-Gn
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2020 10:58:36 +0000
+X-Inumbo-ID: a67fb3fc-4d5f-4935-b168-97b0d23d49c5
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 2f66a6df-e2bb-40a4-8785-e7a52fe459dc;
- Tue, 22 Sep 2020 10:55:47 +0000 (UTC)
+ id a67fb3fc-4d5f-4935-b168-97b0d23d49c5;
+ Tue, 22 Sep 2020 10:58:29 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
- t=1600772147;
+ t=1600772308;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=WsxmnTpJ9ra2LqLMu+0tjkgsk1No9arrjJKBn1aKa5U=;
- b=Ib38aDSCYPGFatbr7j7I0ST8VSA/iL+1IQfq0ZFeIVDbYB6KUk7Uc9Rz65Wr6bI/Lrx6Dk
- 1SqV7fMDCrnrSiP7h33Vfqr62JNPC4raCUR8rigqwzoYQDzFQnqAZirtJ4hNY+3p5pc7OA
- GJ3qVVtPGa2tbrxrnNOIKnFsWNYoipw=
+ bh=gvV/6AUBRn3iyr7G7MIQr6c1JY593oPOEHum75Oq12E=;
+ b=fPqa7Nk/C5Rdqdxq00C3hckZjNbLUH41347bJRZu1nmecYQjdOqYr5X05x1ajHVG++9udt
+ WOqN9IJj4cuV1Snbcilg1G2FaA76ZCs4zn+KRVYpebDk5qIgSouYNeSiSoUJJ9p2UPxhRG
+ yIGzlQTIpTdY6H8XM9jotsgB8W0mt9s=
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id A50B7B234;
- Tue, 22 Sep 2020 10:56:23 +0000 (UTC)
-Subject: Re: Ping: [PATCH 1/9] build: use if_changed more consistently (and
- correctly) for prelink*.o
-To: Julien Grall <julien@xen.org>
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
- George Dunlap <George.Dunlap@eu.citrix.com>
-References: <aabca463-21ed-3755-0e8d-908069f40d6e@suse.com>
- <75d94bf1-b419-8a82-2d15-fb02e56109d8@suse.com>
- <de999174-604d-5874-cf11-4fab15c583d4@suse.com>
- <43a4240c-baba-ca52-0a9f-a884c0f297be@xen.org>
- <f6de6cc3-7bde-6f99-1525-cc046a136a19@suse.com>
- <0a0ab7a6-e448-3ffe-3818-4b97edbffb72@xen.org>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <070a7b89-28c7-a709-660e-97c3a8a93c94@suse.com>
-Date: Tue, 22 Sep 2020 12:55:47 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.0
+ by mx2.suse.de (Postfix) with ESMTP id 813F0AE09;
+ Tue, 22 Sep 2020 10:59:05 +0000 (UTC)
+From: Juergen Gross <jgross@suse.com>
+To: minios-devel@lists.xenproject.org,
+	xen-devel@lists.xenproject.org
+Cc: samuel.thibault@ens-lyon.org, wl@xen.org, Juergen Gross <jgross@suse.com>
+Subject: [PATCH 1/2] mini-os: netfront: retrieve netmask and gateway via extra
+ function
+Date: Tue, 22 Sep 2020 12:58:25 +0200
+Message-Id: <20200922105826.26274-2-jgross@suse.com>
+X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20200922105826.26274-1-jgross@suse.com>
+References: <20200922105826.26274-1-jgross@suse.com>
 MIME-Version: 1.0
-In-Reply-To: <0a0ab7a6-e448-3ffe-3818-4b97edbffb72@xen.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,38 +73,132 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 22.09.2020 11:24, Julien Grall wrote:
-> On 22/09/2020 09:28, Jan Beulich wrote:
->> On 21.09.2020 13:39, Julien Grall wrote:
->>> On 21/09/2020 11:17, Jan Beulich wrote:
->>>> On 14.09.2020 12:15, Jan Beulich wrote:
->>>>> Switch to $(call if_changed,ld) where possible; presumably not doing so
->>>>> in e321576f4047 ("xen/build: start using if_changed") right away was an
->>>>> oversight, as it did for Arm in (just) one case. It failed to add
->>>>> prelink.o to $(targets), though, causing - judging from the observed
->>>>> behavior on x86 - undue rebuilds of the final binary (because of
->>>>> prelink.o getting rebuild for $(cmd_prelink.o) being empty, in turn
->>>>> because of .prelink.o.cmd not getting read) during "make install-xen".
->>>>>
->>>>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
->>>>> ---
->>>>>    xen/arch/arm/Makefile |  4 +++-
->>>>>    xen/arch/x86/Makefile | 18 ++++++++++--------
->>>>>    2 files changed, 13 insertions(+), 9 deletions(-)
->>>>
->>>> May I ask for an Arm-side ack (or otherwise) here, please?
->>>
->>> Acked-by: Julien Grall <jgrall@amazon.com>
->>
->> Thanks. On the Arm side this is actually addressing a (minor) bug,
-> 
-> Just to confirm, the bug is: Xen will be rebuilt when it is not 
-> necessary, right?
+Commit 1b8ed31f4ce40 ("mini-os: netfront: Read netmask and gateway from
+Xenstore") modified init_netfront() to take two additional parameters.
+This broke the Xen build as init_netfront() is used in grub stubdom,
+too.
 
-Yes. When building as non-root but installing as root, this would
-typically involve an owner change of some of the involved files.
-That's how I did notice the issue on x86 (after switching to
-if_changed) in the first place.
+So instead of tightly coupling Mini-OS and Xen build via this interface
+modification undo this change of init_netfront() and add two other
+functions for retrieving the netmask and gateway for a network device.
 
-Jan
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ include/netfront.h |  4 +++-
+ lwip-net.c         |  4 +++-
+ netfront.c         | 21 +++++++++++++++------
+ test.c             |  2 +-
+ 4 files changed, 22 insertions(+), 9 deletions(-)
+
+diff --git a/include/netfront.h b/include/netfront.h
+index bc3080e..ec641c8 100644
+--- a/include/netfront.h
++++ b/include/netfront.h
+@@ -7,7 +7,9 @@ struct netfront_dev *init_netfront(char *nodename,
+                                    void (*netif_rx)(unsigned char *data,
+                                                     int len, void* arg),
+                                    unsigned char rawmac[6],
+-                                   char **ip, char **mask, char **gw);
++                                   char **ip);
++char *netfront_get_netmask(struct netfront_dev *dev);
++char *netfront_get_gateway(struct netfront_dev *dev);
+ void netfront_xmit(struct netfront_dev *dev, unsigned char* data,int len);
+ void shutdown_netfront(struct netfront_dev *dev);
+ void suspend_netfront(void);
+diff --git a/lwip-net.c b/lwip-net.c
+index 80d1c8f..7e0d871 100644
+--- a/lwip-net.c
++++ b/lwip-net.c
+@@ -347,7 +347,9 @@ void start_networking(void)
+ 
+   tprintk("Waiting for network.\n");
+ 
+-  dev = init_netfront(NULL, NULL, rawmac, &ip, &netmask_str, &gw_str);
++  dev = init_netfront(NULL, NULL, rawmac, &ip);
++  netmask_str = netfront_get_netmask(dev);
++  gw_str = netfront_get_gateway(dev);
+   
+   if (ip) {
+     ipaddr.addr = inet_addr(ip);
+diff --git a/netfront.c b/netfront.c
+index 205484b..9057908 100644
+--- a/netfront.c
++++ b/netfront.c
+@@ -65,6 +65,8 @@ struct netfront_dev {
+ 
+     void (*netif_rx)(unsigned char* data, int len, void* arg);
+     void *netif_rx_arg;
++
++    struct netfront_dev_list *ldev;
+ };
+ 
+ struct netfront_dev_list {
+@@ -303,7 +305,7 @@ struct netfront_dev *init_netfront(char *_nodename,
+                                    void (*thenetif_rx)(unsigned char* data,
+                                                        int len, void* arg),
+                                    unsigned char rawmac[6],
+-                                   char **ip, char **mask, char **gw)
++                                   char **ip)
+ {
+     char nodename[256];
+     struct netfront_dev *dev;
+@@ -347,6 +349,7 @@ struct netfront_dev *init_netfront(char *_nodename,
+     memset(ldev, 0, sizeof(struct netfront_dev_list));
+ 
+     if (_init_netfront(dev, ldev->rawmac, &(ldev->ip), &(ldev->mask), &(ldev->gw))) {
++        dev->ldev = ldev;
+         ldev->dev = dev;
+         ldev->refcount = 1;
+         ldev->next = NULL;
+@@ -376,15 +379,21 @@ out:
+ 	}
+     if (ip)
+         *ip = strdup(ldev->ip);
+-    if (mask)
+-        *mask = strdup(ldev->mask);
+-    if (gw)
+-        *gw = strdup(ldev->gw);
+ 
+ err:
+     return dev;
+ }
+ 
++char *netfront_get_netmask(struct netfront_dev *dev)
++{
++    return dev->ldev->mask ? strdup(dev->ldev->mask) : NULL;
++}
++
++char *netfront_get_gateway(struct netfront_dev *dev)
++{
++    return dev->ldev->gw ? strdup(dev->ldev->gw) : NULL;
++}
++
+ static struct netfront_dev *_init_netfront(struct netfront_dev *dev,
+ 					   unsigned char rawmac[6],
+ 					   char **ip, char **mask, char **gw)
+@@ -576,7 +585,7 @@ error:
+ int netfront_tap_open(char *nodename) {
+     struct netfront_dev *dev;
+ 
+-    dev = init_netfront(nodename, NETIF_SELECT_RX, NULL, NULL, NULL, NULL);
++    dev = init_netfront(nodename, NETIF_SELECT_RX, NULL, NULL);
+     if (!dev) {
+ 	printk("TAP open failed\n");
+ 	errno = EIO;
+diff --git a/test.c b/test.c
+index 2e5f7f9..42a2666 100644
+--- a/test.c
++++ b/test.c
+@@ -91,7 +91,7 @@ static struct semaphore net_sem = __SEMAPHORE_INITIALIZER(net_sem, 0);
+ 
+ static void netfront_thread(void *p)
+ {
+-    net_dev = init_netfront(NULL, NULL, NULL, NULL, NULL, NULL);
++    net_dev = init_netfront(NULL, NULL, NULL, NULL);
+     up(&net_sem);
+ }
+ #endif
+-- 
+2.26.2
+
 
