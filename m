@@ -2,78 +2,119 @@ Return-Path: <SRS0=tzN1=C7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=unavailable
+X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0EB4AC2D0E2
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 11:13:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 358FFC2D0E2
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 11:22:35 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9074220B1F
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 11:13:48 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 9DDCE221EB
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 11:22:34 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="Ad4/KnXY"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9074220B1F
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="hdqyQ0ub"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9DDCE221EB
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kKgEU-0004aL-22; Tue, 22 Sep 2020 11:13:14 +0000
+	id 1kKgNL-0005Vu-8A; Tue, 22 Sep 2020 11:22:23 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=oGvm=C7=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1kKgES-0004aG-U3
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2020 11:13:12 +0000
-X-Inumbo-ID: 153c76df-3a6a-4670-a1ca-0518964fd328
-Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ <SRS0=q32Y=C7=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
+ id 1kKgNK-0005Vn-E3
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2020 11:22:22 +0000
+X-Inumbo-ID: ad1983d5-74bd-4afb-af1c-afdc739d9c4e
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 153c76df-3a6a-4670-a1ca-0518964fd328;
- Tue, 22 Sep 2020 11:13:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1600773190;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=IQMCrguX0Zu48XQzFFouyUahameKH6iitE40YxYZ2Ck=;
- b=Ad4/KnXYjW+8Yfw7MbzJ/pvLwfU4VqvOWI7eqFiULTiLpuhB+6NYmaV/
- Qq+K0lkh886QQweOvvy24RYv5ME28dH6/J1+U+nzz3cxWFkxmIbaF29m/
- vyZzq+v7n7Kx3BbShr2+xDlBgv1l19b3Ez1J/wa40B6RTLK6qIwiixGGv Q=;
-Authentication-Results: esa4.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: BACWPl6ota1d6f9w/PF7Fb0srce6p1w5a0LPM2qpw0Nh3JdwIjbv4W5m581fIlPGTtRhFT1BOu
- I6S6aMcVO8UljCouABphIkOT8Yh5G4dWhmKkhDLGehqv/aF0euEaiJC4GNx/zByi+Dd/PwTwlJ
- BVfr4wg/YLI/HagCZMmRo9D4usP1LXdaKeqdnV7meEsAZweT0EmMW4PqbKXkO8MLUTM+QlW9Ko
- 3XCvEMs5I0KCnA5V9SaRdoeA3+z16mCwaYKo/yRu0g2sFIuFC6WtPRkIvz6M3xxNKRyD3TlSvv
- hAs=
-X-SBRS: 2.7
-X-MesageID: 28235081
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.77,290,1596513600"; d="scan'208";a="28235081"
-Date: Tue, 22 Sep 2020 13:12:59 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: SeongJae Park <sjpark@amazon.com>
-CC: <konrad.wilk@oracle.com>, <jgross@suse.com>, SeongJae Park
- <sjpark@amazon.de>, <axboe@kernel.dk>, <aliguori@amazon.com>,
- <amit@kernel.org>, <mheyne@amazon.de>, <pdurrant@amazon.co.uk>,
- <linux-block@vger.kernel.org>, <xen-devel@lists.xenproject.org>,
- <linux-kernel@vger.kernel.org>
-Subject: Re: [PATCH v2 1/3] xen-blkback: add a parameter for disabling of
- persistent grants
-Message-ID: <20200922111259.GJ19254@Air-de-Roger>
-References: <20200922105209.5284-1-sjpark@amazon.com>
- <20200922105209.5284-2-sjpark@amazon.com>
+ id ad1983d5-74bd-4afb-af1c-afdc739d9c4e;
+ Tue, 22 Sep 2020 11:22:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+ Content-Transfer-Encoding:Content-Type:Message-ID:To;
+ bh=IrzLH+J3kzDx2Ihc/3WgDgMrtZ2C5v9pA5zHpVJdWL0=; b=hdqyQ0ubfeEKMu0gUdeojPJauu
+ /EpKaZGC6CaYKNZ/w6NNzz+drNy47wQobXzf6Qdmwc3kQ4TMafnU6lSMi9pFakOYQEeGebGk2uRhv
+ C+pX32/zN8VKhe50DiLl98XRRete17JBFHyM5eXe1u757+laV5RrjB5RJiJPDpKpdeX4=;
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kKgNH-00041M-3l; Tue, 22 Sep 2020 11:22:19 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kKgNG-0006jm-Pn; Tue, 22 Sep 2020 11:22:18 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1kKgNG-0007UJ-PK; Tue, 22 Sep 2020 11:22:18 +0000
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-154592-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-In-Reply-To: <20200922105209.5284-2-sjpark@amazon.com>
-X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
- FTLPEX02CL06.citrite.net (10.13.108.179)
+Subject: [xen-unstable test] 154592: regressions - FAIL
+X-Osstest-Failures: xen-unstable:test-amd64-amd64-xl-qemuu-debianhvm-amd64:guest-start/debianhvm.repeat:fail:regression
+ xen-unstable:test-amd64-amd64-xl-qemuu-win7-amd64:guest-stop:fail:nonblocking
+ xen-unstable:test-amd64-amd64-xl-qemuu-ws16-amd64:guest-stop:fail:nonblocking
+ xen-unstable:test-amd64-amd64-xl-qemut-win7-amd64:guest-stop:fail:nonblocking
+ xen-unstable:test-amd64-i386-xl-qemut-win7-amd64:guest-stop:fail:nonblocking
+ xen-unstable:test-armhf-armhf-libvirt:saverestore-support-check:fail:nonblocking
+ xen-unstable:test-amd64-i386-xl-qemuu-win7-amd64:guest-stop:fail:nonblocking
+ xen-unstable:test-armhf-armhf-libvirt-raw:saverestore-support-check:fail:nonblocking
+ xen-unstable:test-amd64-amd64-xl-qemut-ws16-amd64:guest-stop:fail:nonblocking
+ xen-unstable:test-amd64-i386-xl-qemuu-ws16-amd64:guest-stop:fail:nonblocking
+ xen-unstable:test-amd64-i386-xl-pvshim:guest-start:fail:nonblocking
+ xen-unstable:test-arm64-arm64-xl-seattle:migrate-support-check:fail:nonblocking
+ xen-unstable:test-arm64-arm64-xl-seattle:saverestore-support-check:fail:nonblocking
+ xen-unstable:test-amd64-i386-libvirt-xsm:migrate-support-check:fail:nonblocking
+ xen-unstable:test-amd64-amd64-libvirt-xsm:migrate-support-check:fail:nonblocking
+ xen-unstable:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+ xen-unstable:test-amd64-i386-libvirt:migrate-support-check:fail:nonblocking
+ xen-unstable:test-arm64-arm64-xl-credit1:migrate-support-check:fail:nonblocking
+ xen-unstable:test-arm64-arm64-xl:migrate-support-check:fail:nonblocking
+ xen-unstable:test-arm64-arm64-xl-credit1:saverestore-support-check:fail:nonblocking
+ xen-unstable:test-arm64-arm64-xl:saverestore-support-check:fail:nonblocking
+ xen-unstable:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+ xen-unstable:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+ xen-unstable:test-arm64-arm64-xl-thunderx:migrate-support-check:fail:nonblocking
+ xen-unstable:test-arm64-arm64-xl-thunderx:saverestore-support-check:fail:nonblocking
+ xen-unstable:test-arm64-arm64-xl-credit2:migrate-support-check:fail:nonblocking
+ xen-unstable:test-arm64-arm64-xl-credit2:saverestore-support-check:fail:nonblocking
+ xen-unstable:test-arm64-arm64-libvirt-xsm:migrate-support-check:fail:nonblocking
+ xen-unstable:test-arm64-arm64-libvirt-xsm:saverestore-support-check:fail:nonblocking
+ xen-unstable:test-armhf-armhf-xl-arndale:migrate-support-check:fail:nonblocking
+ xen-unstable:test-armhf-armhf-xl-arndale:saverestore-support-check:fail:nonblocking
+ xen-unstable:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
+ xen-unstable:test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
+ xen-unstable:test-amd64-amd64-libvirt-vhd:migrate-support-check:fail:nonblocking
+ xen-unstable:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+ xen-unstable:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+ xen-unstable:test-armhf-armhf-xl-rtds:migrate-support-check:fail:nonblocking
+ xen-unstable:test-armhf-armhf-xl-rtds:saverestore-support-check:fail:nonblocking
+ xen-unstable:test-armhf-armhf-xl-credit1:migrate-support-check:fail:nonblocking
+ xen-unstable:test-armhf-armhf-xl-credit1:saverestore-support-check:fail:nonblocking
+ xen-unstable:test-amd64-i386-xl-qemut-ws16-amd64:guest-stop:fail:nonblocking
+ xen-unstable:test-armhf-armhf-xl-multivcpu:migrate-support-check:fail:nonblocking
+ xen-unstable:test-armhf-armhf-xl-multivcpu:saverestore-support-check:fail:nonblocking
+ xen-unstable:test-armhf-armhf-xl-credit2:migrate-support-check:fail:nonblocking
+ xen-unstable:test-armhf-armhf-xl-credit2:saverestore-support-check:fail:nonblocking
+ xen-unstable:test-armhf-armhf-xl-cubietruck:migrate-support-check:fail:nonblocking
+ xen-unstable:test-armhf-armhf-xl-cubietruck:saverestore-support-check:fail:nonblocking
+ xen-unstable:test-armhf-armhf-libvirt:migrate-support-check:fail:nonblocking
+ xen-unstable:test-armhf-armhf-xl-vhd:migrate-support-check:fail:nonblocking
+ xen-unstable:test-armhf-armhf-xl-vhd:saverestore-support-check:fail:nonblocking
+ xen-unstable:test-armhf-armhf-libvirt-raw:migrate-support-check:fail:nonblocking
+ xen-unstable:test-amd64-amd64-qemuu-nested-amd:debian-hvm-install/l1/l2:fail:nonblocking
+X-Osstest-Versions-This: xen=d4ed1d4132f5825a795d5a78505811ecd2717b5e
+X-Osstest-Versions-That: xen=baa4d064e91b6d2bcfe400bdf71f83b961e4c28e
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Tue, 22 Sep 2020 11:22:18 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -87,115 +128,343 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Tue, Sep 22, 2020 at 12:52:07PM +0200, SeongJae Park wrote:
-> From: SeongJae Park <sjpark@amazon.de>
-> 
-> Persistent grants feature provides high scalability.  On some small
-> systems, however, it could incur data copy overheads[1] and thus it is
-> required to be disabled.  But, there is no option to disable it.  For
-> the reason, this commit adds a module parameter for disabling of the
-> feature.
-> 
-> [1] https://wiki.xen.org/wiki/Xen_4.3_Block_Protocol_Scalability
-> 
-> Signed-off-by: Anthony Liguori <aliguori@amazon.com>
-> Signed-off-by: SeongJae Park <sjpark@amazon.de>
-> ---
->  .../ABI/testing/sysfs-driver-xen-blkback      |  9 ++++++
->  drivers/block/xen-blkback/xenbus.c            | 28 ++++++++++++++-----
->  2 files changed, 30 insertions(+), 7 deletions(-)
-> 
-> diff --git a/Documentation/ABI/testing/sysfs-driver-xen-blkback b/Documentation/ABI/testing/sysfs-driver-xen-blkback
-> index ecb7942ff146..ac2947b98950 100644
-> --- a/Documentation/ABI/testing/sysfs-driver-xen-blkback
-> +++ b/Documentation/ABI/testing/sysfs-driver-xen-blkback
-> @@ -35,3 +35,12 @@ Description:
->                  controls the duration in milliseconds that blkback will not
->                  cache any page not backed by a grant mapping.
->                  The default is 10ms.
-> +
-> +What:           /sys/module/xen_blkback/parameters/feature_persistent
-> +Date:           September 2020
-> +KernelVersion:  5.10
-> +Contact:        SeongJae Park <sjpark@amazon.de>
-> +Description:
-> +                Whether to enable the persistent grants feature or not.  Note
-> +                that this option only takes effect on newly created backends.
-> +                The default is Y (enable).
-> diff --git a/drivers/block/xen-blkback/xenbus.c b/drivers/block/xen-blkback/xenbus.c
-> index b9aa5d1ac10b..8a95ddd08b13 100644
-> --- a/drivers/block/xen-blkback/xenbus.c
-> +++ b/drivers/block/xen-blkback/xenbus.c
-> @@ -879,6 +879,12 @@ static void reclaim_memory(struct xenbus_device *dev)
->  
->  /* ** Connection ** */
->  
-> +/* Enable the persistent grants feature. */
-> +static bool feature_persistent = true;
-> +module_param(feature_persistent, bool, 0644);
-> +MODULE_PARM_DESC(feature_persistent,
-> +		"Enables the persistent grants feature");
-> +
->  /*
->   * Write the physical details regarding the block device to the store, and
->   * switch to Connected state.
-> @@ -906,11 +912,15 @@ static void connect(struct backend_info *be)
->  
->  	xen_blkbk_barrier(xbt, be, be->blkif->vbd.flush_support);
->  
-> -	err = xenbus_printf(xbt, dev->nodename, "feature-persistent", "%u", 1);
-> -	if (err) {
-> -		xenbus_dev_fatal(dev, err, "writing %s/feature-persistent",
-> -				 dev->nodename);
-> -		goto abort;
-> +	if (feature_persistent) {
-> +		err = xenbus_printf(xbt, dev->nodename, "feature-persistent",
-> +				"%u", feature_persistent);
-> +		if (err) {
-> +			xenbus_dev_fatal(dev, err,
-> +					"writing %s/feature-persistent",
-> +					dev->nodename);
-> +			goto abort;
-> +		}
->  	}
->  
->  	err = xenbus_printf(xbt, dev->nodename, "sectors", "%llu",
-> @@ -1093,8 +1103,12 @@ static int connect_ring(struct backend_info *be)
->  		xenbus_dev_fatal(dev, err, "unknown fe protocol %s", protocol);
->  		return -ENOSYS;
->  	}
-> -	pers_grants = xenbus_read_unsigned(dev->otherend, "feature-persistent",
-> -					   0);
-> +	if (feature_persistent)
-> +		pers_grants = xenbus_read_unsigned(dev->otherend,
-> +				"feature-persistent", 0);
-> +	else
-> +		pers_grants = 0;
-> +
+flight 154592 xen-unstable real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/154592/
 
-Sorry for not realizing earlier, but looking at it again I think you
-need to cache the value of feature_persistent when it's first used in
-the blkback state data, so that it's consistent.
+Regressions :-(
 
-What would happen for example with the following flow (assume a
-persistent grants enabled frontend):
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64 18 guest-start/debianhvm.repeat fail REGR. vs. 154556
 
-feature_persistent = false
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-xl-qemuu-win7-amd64 17 guest-stop            fail like 154556
+ test-amd64-amd64-xl-qemuu-ws16-amd64 17 guest-stop            fail like 154556
+ test-amd64-amd64-xl-qemut-win7-amd64 17 guest-stop            fail like 154556
+ test-amd64-i386-xl-qemut-win7-amd64 17 guest-stop             fail like 154556
+ test-armhf-armhf-libvirt     14 saverestore-support-check    fail  like 154556
+ test-amd64-i386-xl-qemuu-win7-amd64 17 guest-stop             fail like 154556
+ test-armhf-armhf-libvirt-raw 13 saverestore-support-check    fail  like 154556
+ test-amd64-amd64-xl-qemut-ws16-amd64 17 guest-stop            fail like 154556
+ test-amd64-i386-xl-qemuu-ws16-amd64 17 guest-stop             fail like 154556
+ test-amd64-i386-xl-pvshim    12 guest-start                  fail   never pass
+ test-arm64-arm64-xl-seattle  13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-seattle  14 saverestore-support-check    fail   never pass
+ test-amd64-i386-libvirt-xsm  13 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-amd64-i386-libvirt      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-credit1  13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl          13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-credit1  14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl          14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-thunderx 13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-thunderx 14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-credit2  13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-credit2  14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-xsm 14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-arndale  13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-arndale  14 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
+ test-amd64-amd64-libvirt-vhd 12 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-rtds     13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-rtds     14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-credit1  13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-credit1  14 saverestore-support-check    fail   never pass
+ test-amd64-i386-xl-qemut-ws16-amd64 17 guest-stop              fail never pass
+ test-armhf-armhf-xl-multivcpu 13 migrate-support-check        fail  never pass
+ test-armhf-armhf-xl-multivcpu 14 saverestore-support-check    fail  never pass
+ test-armhf-armhf-xl-credit2  13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-credit2  14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-cubietruck 13 migrate-support-check        fail never pass
+ test-armhf-armhf-xl-cubietruck 14 saverestore-support-check    fail never pass
+ test-armhf-armhf-libvirt     13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-vhd      12 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-vhd      13 saverestore-support-check    fail   never pass
+ test-armhf-armhf-libvirt-raw 12 migrate-support-check        fail   never pass
+ test-amd64-amd64-qemuu-nested-amd 17 debian-hvm-install/l1/l2  fail never pass
 
-connect(...)
-feature-persistent is not written to xenstore
+version targeted for testing:
+ xen                  d4ed1d4132f5825a795d5a78505811ecd2717b5e
+baseline version:
+ xen                  baa4d064e91b6d2bcfe400bdf71f83b961e4c28e
 
-User changes feature_persistent = true
+Last test of basis   154556  2020-09-21 01:52:15 Z    1 days
+Failing since        154576  2020-09-21 15:06:28 Z    0 days    2 attempts
+Testing same since   154592  2020-09-22 00:08:46 Z    0 days    1 attempts
 
-connect_ring(...)
-pers_grants = true, because feature-persistent is set unconditionally
-by the frontend and feature_persistent variable is now true.
+------------------------------------------------------------
+People who touched revisions under test:
+  Jan Beulich <jbeulich@suse.com>
+  Julien Grall <jgrall@amazon.com>
+  Paul Durrant <paul@xen.org>
+  Roger Pau Monné <roger.pau@citrix.com>
+  Stefano Stabellini <sstabellini@kernel.org>
+  Trammell Hudson <hudson@trmm.net>
 
-Then blkback will try to use persistent grants and the whole
-connection will malfunction because the frontend won't.
+jobs:
+ build-amd64-xsm                                              pass    
+ build-arm64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64-xtf                                              pass    
+ build-amd64                                                  pass    
+ build-arm64                                                  pass    
+ build-armhf                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-arm64-libvirt                                          pass    
+ build-armhf-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-prev                                             pass    
+ build-i386-prev                                              pass    
+ build-amd64-pvops                                            pass    
+ build-arm64-pvops                                            pass    
+ build-armhf-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-xtf-amd64-amd64-1                                       pass    
+ test-xtf-amd64-amd64-2                                       pass    
+ test-xtf-amd64-amd64-3                                       pass    
+ test-xtf-amd64-amd64-4                                       pass    
+ test-xtf-amd64-amd64-5                                       pass    
+ test-amd64-amd64-xl                                          pass    
+ test-amd64-coresched-amd64-xl                                pass    
+ test-arm64-arm64-xl                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-amd64-i386-xl                                           pass    
+ test-amd64-coresched-i386-xl                                 pass    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
+ test-amd64-amd64-xl-qemut-stubdom-debianhvm-amd64-xsm        pass    
+ test-amd64-i386-xl-qemut-stubdom-debianhvm-amd64-xsm         pass    
+ test-amd64-amd64-xl-qemut-debianhvm-i386-xsm                 pass    
+ test-amd64-i386-xl-qemut-debianhvm-i386-xsm                  pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-i386-xsm                 pass    
+ test-amd64-i386-xl-qemuu-debianhvm-i386-xsm                  pass    
+ test-amd64-amd64-libvirt-xsm                                 pass    
+ test-arm64-arm64-libvirt-xsm                                 pass    
+ test-amd64-i386-libvirt-xsm                                  pass    
+ test-amd64-amd64-xl-xsm                                      pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-i386-xl-xsm                                       pass    
+ test-amd64-amd64-qemuu-nested-amd                            fail    
+ test-amd64-amd64-xl-pvhv2-amd                                pass    
+ test-amd64-i386-qemut-rhel6hvm-amd                           pass    
+ test-amd64-i386-qemuu-rhel6hvm-amd                           pass    
+ test-amd64-amd64-dom0pvh-xl-amd                              pass    
+ test-amd64-amd64-xl-qemut-debianhvm-amd64                    pass    
+ test-amd64-i386-xl-qemut-debianhvm-amd64                     pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    fail    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64                     pass    
+ test-amd64-i386-freebsd10-amd64                              pass    
+ test-amd64-amd64-qemuu-freebsd11-amd64                       pass    
+ test-amd64-amd64-qemuu-freebsd12-amd64                       pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
+ test-amd64-amd64-xl-qemut-win7-amd64                         fail    
+ test-amd64-i386-xl-qemut-win7-amd64                          fail    
+ test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
+ test-amd64-i386-xl-qemuu-win7-amd64                          fail    
+ test-amd64-amd64-xl-qemut-ws16-amd64                         fail    
+ test-amd64-i386-xl-qemut-ws16-amd64                          fail    
+ test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
+ test-amd64-i386-xl-qemuu-ws16-amd64                          fail    
+ test-armhf-armhf-xl-arndale                                  pass    
+ test-amd64-amd64-xl-credit1                                  pass    
+ test-arm64-arm64-xl-credit1                                  pass    
+ test-armhf-armhf-xl-credit1                                  pass    
+ test-amd64-amd64-xl-credit2                                  pass    
+ test-arm64-arm64-xl-credit2                                  pass    
+ test-armhf-armhf-xl-credit2                                  pass    
+ test-armhf-armhf-xl-cubietruck                               pass    
+ test-amd64-amd64-xl-qemuu-dmrestrict-amd64-dmrestrict        pass    
+ test-amd64-i386-xl-qemuu-dmrestrict-amd64-dmrestrict         pass    
+ test-amd64-amd64-examine                                     pass    
+ test-arm64-arm64-examine                                     pass    
+ test-armhf-armhf-examine                                     pass    
+ test-amd64-i386-examine                                      pass    
+ test-amd64-i386-freebsd10-i386                               pass    
+ test-amd64-amd64-qemuu-nested-intel                          pass    
+ test-amd64-amd64-xl-pvhv2-intel                              pass    
+ test-amd64-i386-qemut-rhel6hvm-intel                         pass    
+ test-amd64-i386-qemuu-rhel6hvm-intel                         pass    
+ test-amd64-amd64-dom0pvh-xl-intel                            pass    
+ test-amd64-amd64-libvirt                                     pass    
+ test-armhf-armhf-libvirt                                     pass    
+ test-amd64-i386-libvirt                                      pass    
+ test-amd64-amd64-livepatch                                   pass    
+ test-amd64-i386-livepatch                                    pass    
+ test-amd64-amd64-migrupgrade                                 pass    
+ test-amd64-i386-migrupgrade                                  pass    
+ test-amd64-amd64-xl-multivcpu                                pass    
+ test-armhf-armhf-xl-multivcpu                                pass    
+ test-amd64-amd64-pair                                        pass    
+ test-amd64-i386-pair                                         pass    
+ test-amd64-amd64-libvirt-pair                                pass    
+ test-amd64-i386-libvirt-pair                                 pass    
+ test-amd64-amd64-amd64-pvgrub                                pass    
+ test-amd64-amd64-i386-pvgrub                                 pass    
+ test-amd64-amd64-xl-pvshim                                   pass    
+ test-amd64-i386-xl-pvshim                                    fail    
+ test-amd64-amd64-pygrub                                      pass    
+ test-amd64-amd64-xl-qcow2                                    pass    
+ test-armhf-armhf-libvirt-raw                                 pass    
+ test-amd64-i386-xl-raw                                       pass    
+ test-amd64-amd64-xl-rtds                                     pass    
+ test-armhf-armhf-xl-rtds                                     pass    
+ test-arm64-arm64-xl-seattle                                  pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64-shadow             pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64-shadow              pass    
+ test-amd64-amd64-xl-shadow                                   pass    
+ test-amd64-i386-xl-shadow                                    pass    
+ test-arm64-arm64-xl-thunderx                                 pass    
+ test-amd64-amd64-libvirt-vhd                                 pass    
+ test-armhf-armhf-xl-vhd                                      pass    
 
-The other option is to prevent changing the variable when there are
-blkback instances already running.
 
-Thanks, Roger.
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+------------------------------------------------------------
+commit d4ed1d4132f5825a795d5a78505811ecd2717b5e
+Author: Julien Grall <jgrall@amazon.com>
+Date:   Sat Apr 4 12:35:28 2020 +0100
+
+    xen/guest_access: Improve coding style in xen/guest_access.h
+    
+        * Add space before and after operator
+        * Align \$
+        * Format comments
+    
+    No functional changes expected.
+    
+    Signed-off-by: Julien Grall <jgrall@amazon.com>
+    Acked-by: Stefano Stabellini <sstabellini@kernel.org>
+    Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
+
+commit 5b619481becfc4681804ea7193a2ee42a50fd468
+Author: Julien Grall <jgrall@amazon.com>
+Date:   Sat Apr 4 12:33:16 2020 +0100
+
+    xen/guest_access: Consolidate guest access helpers in xen/guest_access.h
+    
+    Most of the helpers to access guest memory are implemented the same way
+    on Arm and x86. The only differences are:
+        - guest_handle_to_param(): while on x86 XEN_GUEST_HANDLE()
+          and XEN_GUEST_HANDLE_PARAM() are the same, they are not on Arm. It
+          is still fine to use the Arm implementation on x86.
+        - __clear_guest_offset(): Interestingly the prototype does not match
+          between the x86 and Arm. However, the Arm one is bogus. So the x86
+          implementation can be used.
+        - guest_handle{,_subrange}_okay(): They are validly differing
+          because Arm is only supporting auto-translated guest and therefore
+          handles are always valid.
+    
+    In the past, the ia64 and ppc64 port use a different model to access
+    guest parameter. They have been long gone now.
+    
+    Given Xen currently only support 2 archictures, it is too soon to have a
+    directory asm-generic as it is not possible to differentiate it with the
+    existing directory xen/. If/When there is a 3rd port, we can decide to
+    create the new directory if that new port decide to use a different way
+    to access guest parameter.
+    
+    For now, consolidate it in xen/guest_access.h.
+    
+    While it would be possible to adjust the coding style at the same, this
+    is left for a follow-up patch so 'diff' can be used to check the
+    consolidation was done correctly.
+    
+    Signed-off-by: Julien Grall <jgrall@amazon.com>
+    Reviewed-by: Stefano Stabellini <sttabellini@kernel.org>
+    Acked-by: Jan Beulich <jbeulich@suse.com>
+
+commit 6edcdb4e5716626b2206f2b627e57a38ad2c3f59
+Author: Julien Grall <jgrall@amazon.com>
+Date:   Sat Apr 4 11:56:43 2020 +0100
+
+    xen: include xen/guest_access.h rather than asm/guest_access.h
+    
+    Only a few places are actually including asm/guest_access.h. While this
+    is fine today, a follow-up patch will want to move most of the helpers
+    from asm/guest_access.h to xen/guest_access.h.
+    
+    To prepare the move, everyone should include xen/guest_access.h rather
+    than asm/guest_access.h.
+    
+    Interestingly, asm-arm/guest_access.h includes xen/guest_access.h. The
+    inclusion is now removed as no-one but the latter should include the
+    former.
+    
+    Signed-off-by: Julien Grall <jgrall@amazon.com>
+    Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
+    Acked-by: Jan Beulich <jbeulich@suse.com>
+    Acked-by: Stefano Stabellini <sstabellini@kernel.org>
+    Acked-by: Paul Durrant <paul@xen.org>
+
+commit c7e3021a71fdb4f2d5dbad90ba83ce35bc21cda6
+Author: Trammell Hudson <hudson@trmm.net>
+Date:   Mon Sep 21 12:14:24 2020 +0200
+
+    efi/boot: make file->ptr const void*
+    
+    Other than the config file parser that edits the image inplace,
+    no other users of the file sections requires write access to the
+    data.
+    
+    Signed-off-by: Trammell Hudson <hudson@trmm.net>
+    Reviewed-by: Jan Beulich <jbeulich@suse.com>
+
+commit 5164e44885252ae909977dd3b39c743544f3f5f0
+Author: Roger Pau Monné <roger.pau@citrix.com>
+Date:   Mon Sep 21 12:11:38 2020 +0200
+
+    x86/svm: ignore accesses to EX_CFG
+    
+    Windows 10 will try to unconditionally read (and possibly even adjust)
+    EX_CFG on AMD hardware, despite it being documented only for Fam15 models
+    0xh, and injecting a #GP fault will result in a panic:
+    
+    svm.c:1964:d5v0 RDMSR 0xc001102c unimplemented
+    d5v0 VIRIDIAN CRASH: 7e ffffffffc0000096 fffff8054cbe5ffe fffffa0837a066e8 fffffa0837a05f30
+    
+    Return 0 when trying to read the MSR and drop writes.
+    
+    Fixes: 84e848fd7a16 ('x86/hvm: disallow access to unknown MSRs')
+    Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+    Reviewed-by: Jan Beulich <jbeulich@suse.com>
+
+commit 18063d6377fc40599e06ef9df5b5f0ea369ba83f
+Author: Jan Beulich <jbeulich@suse.com>
+Date:   Mon Sep 21 12:10:26 2020 +0200
+
+    mm: adjust get_page()'s types
+    
+    The passed in domain doesn't get altered and hence can be const. While
+    modifying its prototype anyway, also switch to bool.
+    
+    Signed-off-by: Jan Beulich <jbeulich@suse.com>
+    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+    Reviewed-by: Julien Grall <jgrall@amazon.com>
+(qemu changes not included)
 
