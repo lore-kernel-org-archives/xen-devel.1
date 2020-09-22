@@ -7,66 +7,64 @@ X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D2613C4363D
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 18:25:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A7DA8C4727C
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 18:25:42 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6F8052085B
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 18:25:41 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 4194D2085B
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2020 18:25:42 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="cfjkELq5"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6F8052085B
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="hYCmON/z"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4194D2085B
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kKmyo-0008Vj-DE; Tue, 22 Sep 2020 18:25:30 +0000
+	id 1kKmyp-00005F-ML; Tue, 22 Sep 2020 18:25:31 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=J35V=C7=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1kKmyn-0008V0-BZ
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2020 18:25:29 +0000
-X-Inumbo-ID: 9f7a1f4a-4c4b-44a5-ab12-d566d463e613
+ id 1kKmyo-0008V0-8B
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2020 18:25:30 +0000
+X-Inumbo-ID: c7901009-ebb4-44f8-b1cf-cae236d7e6f0
 Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9f7a1f4a-4c4b-44a5-ab12-d566d463e613;
- Tue, 22 Sep 2020 18:25:28 +0000 (UTC)
+ id c7901009-ebb4-44f8-b1cf-cae236d7e6f0;
+ Tue, 22 Sep 2020 18:25:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1600799129;
+ d=citrix.com; s=securemail; t=1600799130;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=QzVikzTXIrENnpKWbynQkJyOfWkh2lkxwYpfijKtf/0=;
- b=cfjkELq5Zs9EdqDmWRjmYe2SNkMvVWFebo+RwWbto6CccjvHexeo1bTr
- oo5I7Y4fVMFSwNvFdcxbiF5dviTQmfSvuMGI0zy9TCvS1OgRkVUwhN35L
- sFFu1AiedZw7DepUxzDwE/ajRGb6lWjT2dWBz0KKZ8zi35drH0KSztbZo 8=;
+ bh=PemkBKNb12MmUWwvMUvbxamV4GWuBXt6jS2JXhDGXTk=;
+ b=hYCmON/zDE6l+ByI/2O7yFcVHlZhZaDKqrl/BASrxffZxK1HOtP3QPxl
+ ajAT9A5R3z9pTCIE1K7d3shS/W+XQPPlEcQIxIHgzUXZpw6PPABauH4CD
+ zWrjC0U/c9LSVOOw+rjiOl9aZlr2zA++3qDyhzMvYNrwGchbHZjFDyJuw Y=;
 Authentication-Results: esa1.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: ox9Ky0uJZEa6RYONNB1dq0u6kg1zwZNt18Av1jD72N6oKG/HKDzpiS+q5FifRsFQzp+Y9+gB2B
- ygZIbhM0Ewo6WGqcimUaPBgcm96whm1DxbR/Q734qaKJSgf9BpjIjVRXMxoMIpYdnXjBHTnlY4
- wct78+xVFlGg7pDfp9tAIFgx7nTZ6mcFPg2eERqFt4Qt/duSHB+Q6Xj1yGxtEjGUXspB51J9u9
- AHM21dRrJAt6U3gXfMberzhBKwl08OcLehxKq21h+XacFmqpcp4Kssl8NRNicr4JqdM5Zsooxk
- VAw=
+IronPort-SDR: 61Ih/vUJm8RMzRKh9tGGFkyDlwBvALt8VM8HwJ25XC0I2Mfj/iGvmvCvdSzK6qEyRpmFGxLKvu
+ APpU7qvVFNJg9qv3boln7BCSwMDx2BRVCCBJgXJo2xxMw+NVSzoYC6BamfTz/FCM845vDUkDu6
+ FnhoSi7oz05nzCK6+sMpVrDOY5HpcjI4ddoIOJvgbcmEBlVmxpmfDf64oYx1QY5HXDpBmQiLt1
+ YQDlwkIAWvmqEIY3+y8qeY3Ne0WQOi7O8tLyQPT6FSxzhXcVZWt98qForqhGinjmog9rIinaW0
+ Pwk=
 X-SBRS: 2.7
-X-MesageID: 27631635
+X-MesageID: 27631639
 X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.77,291,1596513600"; d="scan'208";a="27631635"
+X-IronPort-AV: E=Sophos;i="5.77,291,1596513600"; d="scan'208";a="27631639"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
- <George.Dunlap@eu.citrix.com>, Ian Jackson <iwj@xenproject.org>, Jan Beulich
- <JBeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
- <wl@xen.org>, Julien Grall <julien@xen.org>, Paul Durrant <paul@xen.org>,
- =?UTF-8?q?Micha=C5=82=20Leszczy=C5=84ski?= <michal.leszczynski@cert.pl>,
- Hubert Jasudowicz <hubert.jasudowicz@cert.pl>, Tamas K Lengyel
- <tamas@tklengyel.com>
-Subject: [PATCH v2 06/11] xen/memory: Clarify the XENMEM_acquire_resource ABI
- description
-Date: Tue, 22 Sep 2020 19:24:39 +0100
-Message-ID: <20200922182444.12350-7-andrew.cooper3@citrix.com>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
+ =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, "Stefano
+ Stabellini" <sstabellini@kernel.org>, Volodymyr Babchuk
+ <Volodymyr_Babchuk@epam.com>, =?UTF-8?q?Micha=C5=82=20Leszczy=C5=84ski?=
+ <michal.leszczynski@cert.pl>, Hubert Jasudowicz <hubert.jasudowicz@cert.pl>,
+ Tamas K Lengyel <tamas@tklengyel.com>
+Subject: [PATCH v2 01/11] xen/memory: Introduce CONFIG_ARCH_ACQUIRE_RESOURCE
+Date: Tue, 22 Sep 2020 19:24:34 +0100
+Message-ID: <20200922182444.12350-2-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20200922182444.12350-1-andrew.cooper3@citrix.com>
 References: <20200922182444.12350-1-andrew.cooper3@citrix.com>
@@ -86,57 +84,96 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This is how similar operations already operate, compatible with the sole
-implementation (in Linux), and explicitly gives us some flexibility.
+New architectures shouldn't be forced to implement no-op stubs for unused
+functionality.
+
+Introduce CONFIG_ARCH_ACQUIRE_RESOURCE which can be opted in to, and provide
+compatibility logic in xen/mm.h
+
+No functional change.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
+Reviewed-by: Paul Durrant <paul@xen.org>
+Acked-by: Julien Grall <jgrall@amazon.com>
 ---
-CC: George Dunlap <George.Dunlap@eu.citrix.com>
-CC: Ian Jackson <iwj@xenproject.org>
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
 CC: Wei Liu <wl@xen.org>
-CC: Julien Grall <julien@xen.org>
-CC: Paul Durrant <paul@xen.org>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 CC: Michał Leszczyński <michal.leszczynski@cert.pl>
 CC: Hubert Jasudowicz <hubert.jasudowicz@cert.pl>
 CC: Tamas K Lengyel <tamas@tklengyel.com>
 ---
- xen/include/public/memory.h | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+ xen/arch/x86/Kconfig     | 1 +
+ xen/common/Kconfig       | 3 +++
+ xen/include/asm-arm/mm.h | 8 --------
+ xen/include/xen/mm.h     | 9 +++++++++
+ 4 files changed, 13 insertions(+), 8 deletions(-)
 
-diff --git a/xen/include/public/memory.h b/xen/include/public/memory.h
-index d7eb34f167..c4c47a0b38 100644
---- a/xen/include/public/memory.h
-+++ b/xen/include/public/memory.h
-@@ -642,6 +642,7 @@ struct xen_mem_acquire_resource {
-      * IN/OUT
-      *
-      * As an IN parameter number of frames of the resource to be mapped.
-+     * This value may be updated during the course of the operation.
-      *
-      * When frame_list is NULL and nr_frames is 0, this is interpreted as a
-      * request for the size of the resource, which shall be returned in the
-@@ -656,7 +657,8 @@ struct xen_mem_acquire_resource {
-     uint32_t pad;
-     /*
-      * IN - the index of the initial frame to be mapped. This parameter
--     *      is ignored if nr_frames is 0.
-+     *      is ignored if nr_frames is 0.  This value may be updated
-+     *      during the course of the operation.
-      */
-     uint64_t frame;
+diff --git a/xen/arch/x86/Kconfig b/xen/arch/x86/Kconfig
+index a636a4bb1e..e7644a0a9d 100644
+--- a/xen/arch/x86/Kconfig
++++ b/xen/arch/x86/Kconfig
+@@ -6,6 +6,7 @@ config X86
+ 	select ACPI
+ 	select ACPI_LEGACY_TABLES_LOOKUP
+ 	select ARCH_SUPPORTS_INT128
++	select ARCH_ACQUIRE_RESOURCE
+ 	select COMPAT
+ 	select CORE_PARKING
+ 	select HAS_ALTERNATIVE
+diff --git a/xen/common/Kconfig b/xen/common/Kconfig
+index 15e3b79ff5..593459ea6e 100644
+--- a/xen/common/Kconfig
++++ b/xen/common/Kconfig
+@@ -22,6 +22,9 @@ config GRANT_TABLE
  
-@@ -672,7 +674,8 @@ struct xen_mem_acquire_resource {
-      *          If -EIO is returned then the frame_list has only been
-      *          partially mapped and it is up to the caller to unmap all
-      *          the GFNs.
--     *          This parameter may be NULL if nr_frames is 0.
-+     *          This parameter may be NULL if nr_frames is 0.  This
-+     *          value may be updated during the course of the operation.
-      */
-     XEN_GUEST_HANDLE(xen_pfn_t) frame_list;
- };
+ 	  If unsure, say Y.
+ 
++config ARCH_ACQUIRE_RESOURCE
++	bool
++
+ config HAS_ALTERNATIVE
+ 	bool
+ 
+diff --git a/xen/include/asm-arm/mm.h b/xen/include/asm-arm/mm.h
+index f8ba49b118..0b7de3102e 100644
+--- a/xen/include/asm-arm/mm.h
++++ b/xen/include/asm-arm/mm.h
+@@ -358,14 +358,6 @@ static inline void put_page_and_type(struct page_info *page)
+ 
+ void clear_and_clean_page(struct page_info *page);
+ 
+-static inline
+-int arch_acquire_resource(struct domain *d, unsigned int type, unsigned int id,
+-                          unsigned long frame, unsigned int nr_frames,
+-                          xen_pfn_t mfn_list[])
+-{
+-    return -EOPNOTSUPP;
+-}
+-
+ unsigned int arch_get_dma_bitsize(void);
+ 
+ #endif /*  __ARCH_ARM_MM__ */
+diff --git a/xen/include/xen/mm.h b/xen/include/xen/mm.h
+index 4536a62940..26a4a3d350 100644
+--- a/xen/include/xen/mm.h
++++ b/xen/include/xen/mm.h
+@@ -685,4 +685,13 @@ static inline void put_page_alloc_ref(struct page_info *page)
+     }
+ }
+ 
++#ifndef CONFIG_ARCH_ACQUIRE_RESOURCE
++static inline int arch_acquire_resource(
++    struct domain *d, unsigned int type, unsigned int id, unsigned long frame,
++    unsigned int nr_frames, xen_pfn_t mfn_list[])
++{
++    return -EOPNOTSUPP;
++}
++#endif /* !CONFIG_ARCH_ACQUIRE_RESOURCE */
++
+ #endif /* __XEN_MM_H__ */
 -- 
 2.11.0
 
