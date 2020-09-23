@@ -2,81 +2,171 @@ Return-Path: <SRS0=1HVP=DA=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,UNPARSEABLE_RELAY,URIBL_BLOCKED
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BDD82C4727E
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2020 10:33:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B3863C2D0A8
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2020 10:51:33 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5F71520C56
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2020 10:33:01 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5F71520C56
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.de
+	by mail.kernel.org (Postfix) with ESMTPS id 1CDCB23119
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2020 10:51:32 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=pass (1024-bit key) header.d=armh.onmicrosoft.com header.i=@armh.onmicrosoft.com header.b="HlKvZatR";
+	dkim=pass (1024-bit key) header.d=armh.onmicrosoft.com header.i=@armh.onmicrosoft.com header.b="HlKvZatR"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1CDCB23119
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kL24y-0000fv-1i; Wed, 23 Sep 2020 10:32:52 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kL2MU-0002dS-SI; Wed, 23 Sep 2020 10:50:58 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=EYdF=DA=suse.de=tzimmermann@srs-us1.protection.inumbo.net>)
- id 1kL1vT-00064P-WF
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2020 10:23:04 +0000
-X-Inumbo-ID: 4b16eca0-88a4-49fd-8f45-5c2b6f574235
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 4b16eca0-88a4-49fd-8f45-5c2b6f574235;
- Wed, 23 Sep 2020 10:22:23 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 0F4B3B295;
- Wed, 23 Sep 2020 10:23:00 +0000 (UTC)
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: alexander.deucher@amd.com, christian.koenig@amd.com, airlied@linux.ie,
- daniel@ffwll.ch, linux@armlinux.org.uk, maarten.lankhorst@linux.intel.com,
- mripard@kernel.org, l.stach@pengutronix.de, christian.gmeiner@gmail.com,
- inki.dae@samsung.com, jy0922.shim@samsung.com, sw0312.kim@samsung.com,
- kyungmin.park@samsung.com, kgene@kernel.org, krzk@kernel.org,
- patrik.r.jakobsson@gmail.com, jani.nikula@linux.intel.com,
- joonas.lahtinen@linux.intel.com, rodrigo.vivi@intel.com,
- chunkuang.hu@kernel.org, p.zabel@pengutronix.de, matthias.bgg@gmail.com,
- robdclark@gmail.com, sean@poorly.run, bskeggs@redhat.com,
- tomi.valkeinen@ti.com, eric@anholt.net, hjc@rock-chips.com,
- heiko@sntech.de, thierry.reding@gmail.com, jonathanh@nvidia.com,
- rodrigosiqueiramelo@gmail.com, hamohammed.sa@gmail.com,
- oleksandr_andrushchenko@epam.com, hyun.kwon@xilinx.com,
- laurent.pinchart@ideasonboard.com, michal.simek@xilinx.com,
- sumit.semwal@linaro.org, evan.quan@amd.com, Hawking.Zhang@amd.com,
- tianci.yin@amd.com, marek.olsak@amd.com, hdegoede@redhat.com,
- andrey.grodzovsky@amd.com, Felix.Kuehling@amd.com, xinhui.pan@amd.com,
- aaron.liu@amd.com, nirmoy.das@amd.com, chris@chris-wilson.co.uk,
- matthew.auld@intel.com, tvrtko.ursulin@linux.intel.com,
- andi.shyti@intel.com, sam@ravnborg.org, miaoqinglang@huawei.com,
- emil.velikov@collabora.com, laurentiu.palcu@oss.nxp.com,
- shawnguo@kernel.org, s.hauer@pengutronix.de, kernel@pengutronix.de,
- festevam@gmail.com, linux-imx@nxp.com
-Cc: amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- etnaviv@lists.freedesktop.org, linux-arm-kernel@lists.infradead.org,
- linux-samsung-soc@vger.kernel.org, intel-gfx@lists.freedesktop.org,
- linux-mediatek@lists.infradead.org, linux-arm-msm@vger.kernel.org,
- freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
- xen-devel@lists.xenproject.org, Thomas Zimmermann <tzimmermann@suse.de>,
- Daniel Vetter <daniel.vetter@ffwll.ch>
-Subject: [PATCH v3 22/22] drm: Remove obsolete GEM and PRIME callbacks from
- struct drm_driver
-Date: Wed, 23 Sep 2020 12:21:59 +0200
-Message-Id: <20200923102159.24084-23-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20200923102159.24084-1-tzimmermann@suse.de>
-References: <20200923102159.24084-1-tzimmermann@suse.de>
+ <SRS0=u6iF=DA=arm.com=bertrand.marquis@srs-us1.protection.inumbo.net>)
+ id 1kL2MT-0002dN-Jy
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2020 10:50:57 +0000
+X-Inumbo-ID: 09fa3ca7-14b5-42d1-8fe4-bb9e3d818b57
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com (unknown
+ [2a01:111:f400:7d00::604])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 09fa3ca7-14b5-42d1-8fe4-bb9e3d818b57;
+ Wed, 23 Sep 2020 10:50:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com; 
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=IYQDhLwYn73lR/b4do0W5uev0Q0pjZWjyyWoemNvoko=;
+ b=HlKvZatRPhnMrc63BqQFfJ9QkmTORX9mOHnGZYTuYUBnX1Nb5dwqIgkeNoR7BxlSkxgqMJqNDezlSsLh1yzI1euRC81LHcqljYdCMtN50j3vNc1OKuOzWFZVUTO/6Vr7HpXr+e1Ab0qXvFKSpxXmPSFFq7TxDp+bJfhrkJMtd9Q=
+Received: from DB6PR0501CA0028.eurprd05.prod.outlook.com (2603:10a6:4:67::14)
+ by PR3PR08MB5676.eurprd08.prod.outlook.com (2603:10a6:102:82::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3412.20; Wed, 23 Sep
+ 2020 10:50:53 +0000
+Received: from DB5EUR03FT009.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:4:67:cafe::2d) by DB6PR0501CA0028.outlook.office365.com
+ (2603:10a6:4:67::14) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3412.20 via Frontend
+ Transport; Wed, 23 Sep 2020 10:50:53 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
+ smtp.mailfrom=arm.com; lists.xenproject.org; dkim=pass (signature was
+ verified) header.d=armh.onmicrosoft.com;lists.xenproject.org;
+ dmarc=bestguesspass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
+ client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
+Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
+ DB5EUR03FT009.mail.protection.outlook.com (10.152.20.117) with
+ Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3412.21 via Frontend Transport; Wed, 23 Sep 2020 10:50:53 +0000
+Received: ("Tessian outbound a0bffebca527:v64");
+ Wed, 23 Sep 2020 10:50:53 +0000
+X-CheckRecipientChecked: true
+X-CR-MTA-CID: 78b153cdb021cd12
+X-CR-MTA-TID: 64aa7808
+Received: from 5bc17875a188.1
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com id
+ E4729A49-CDDE-453D-A12C-2B767C1D8169.1; 
+ Wed, 23 Sep 2020 10:50:46 +0000
+Received: from EUR03-AM5-obe.outbound.protection.outlook.com
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 5bc17875a188.1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
+ Wed, 23 Sep 2020 10:50:46 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=JqS0kBIYdU7//roqa1Llu7FK86H2nM0gLRDhZg+Xz5W7OM4Zi0AnItUy5KW335GZmGQ6YRjgqxw0K27IyOxhP9KUux/h+obafgA7tdPvaw046zuPVLxoW+YIYEoXsHR+YIqpMdTAHYSaUIo49YH0uGllrED6BRT7YOyX7XbfndrtScWWGMHg1I0ggrjJoIwfxj4cTM7/o/wTqUvzNOJNEd19IgNAYTiYhw6vqST67fuOcG0UnxJN9Umgm8ihput1t5JG7vZavFCaYZi7pd0XH/rmBm4UKkG3TmOp7xAFi88MnzxHc1ZfTnPyNNFJ2txYFuD894ht2pcHJuGxtFMw7A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=IYQDhLwYn73lR/b4do0W5uev0Q0pjZWjyyWoemNvoko=;
+ b=h/kZ+z8aBBkTKuAbOosm0ijyk49BNcgZTkavfqbNjP++4VDgWbWhB6lRRKC5iJBuFp2RMeeVTlWBGH/mh6ke53TFM0IhLI8QUBfB0SViuTZzJGYxRh47xPcu09fDqpCoeE2Agx45YPgLFjrwBuaszMI+oTMwhaPEUj8sj/TYbrXmc+LmPJ9GXVvl65zrVTubkDmhgB6SDbqP98IzMtG1ksga3pXJ0l5aUKs4FVNRUoLT2DRx5I6O8J07KHdbPCXYTxv/NYE0UjG3o+xgPeNffamFR9Qq75vRouJTJhby/8EK1Y1edv00wzwH8yeiUkW1cGg1rNdZ+XGNBp8K9rLWtg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com; 
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=IYQDhLwYn73lR/b4do0W5uev0Q0pjZWjyyWoemNvoko=;
+ b=HlKvZatRPhnMrc63BqQFfJ9QkmTORX9mOHnGZYTuYUBnX1Nb5dwqIgkeNoR7BxlSkxgqMJqNDezlSsLh1yzI1euRC81LHcqljYdCMtN50j3vNc1OKuOzWFZVUTO/6Vr7HpXr+e1Ab0qXvFKSpxXmPSFFq7TxDp+bJfhrkJMtd9Q=
+Received: from DB7PR08MB3689.eurprd08.prod.outlook.com (2603:10a6:10:79::16)
+ by DB7PR08MB3161.eurprd08.prod.outlook.com (2603:10a6:5:1d::20) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3391.15; Wed, 23 Sep
+ 2020 10:50:44 +0000
+Received: from DB7PR08MB3689.eurprd08.prod.outlook.com
+ ([fe80::cccc:2933:d4d3:1a9e]) by DB7PR08MB3689.eurprd08.prod.outlook.com
+ ([fe80::cccc:2933:d4d3:1a9e%6]) with mapi id 15.20.3412.020; Wed, 23 Sep 2020
+ 10:50:43 +0000
+From: Bertrand Marquis <Bertrand.Marquis@arm.com>
+To: Julien Grall <julien@xen.org>
+CC: "open list:X86" <xen-devel@lists.xenproject.org>, Julien Grall
+ <jgrall@amazon.com>, Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
+ <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>, Jan Beulich
+ <jbeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
+ <wl@xen.org>
+Subject: Re: [PATCH] SUPPORT.MD: Clarify the support state for the Arm
+ SMMUv{1, 2} drivers
+Thread-Topic: [PATCH] SUPPORT.MD: Clarify the support state for the Arm
+ SMMUv{1, 2} drivers
+Thread-Index: AQHWkYOU18uuLvRXIEaUzkgFl/gQ5Kl2C72A
+Date: Wed, 23 Sep 2020 10:50:43 +0000
+Message-ID: <1D6392F2-F4EC-4025-A793-22EABF85AA0E@arm.com>
+References: <20200923082832.20038-1-julien@xen.org>
+In-Reply-To: <20200923082832.20038-1-julien@xen.org>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Authentication-Results-Original: xen.org; dkim=none (message not signed)
+ header.d=none;xen.org; dmarc=none action=none header.from=arm.com;
+x-originating-ip: [82.24.250.194]
+x-ms-publictraffictype: Email
+X-MS-Office365-Filtering-HT: Tenant
+X-MS-Office365-Filtering-Correlation-Id: 92cb6e39-fd20-41ac-a435-08d85fae8b21
+x-ms-traffictypediagnostic: DB7PR08MB3161:|PR3PR08MB5676:
+X-Microsoft-Antispam-PRVS: <PR3PR08MB567662B69D150BF7470A7ADF9D380@PR3PR08MB5676.eurprd08.prod.outlook.com>
+x-checkrecipientrouted: true
+nodisclaimer: true
+x-ms-oob-tlc-oobclassifiers: OLM:10000;OLM:10000;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam-Untrusted: BCL:0;
+X-Microsoft-Antispam-Message-Info-Original: bFrG3kd4WBIXzGH+3k5BT3s2dTQP2xaVBkkgx6dax8Bd71nnKixprnbhMKymgiTxQ8O9WPkAKUyd/e8qQgo39m8oi6+9A1GHO51nHVSzTb8DnYcW++WIVnbGCsnP2p4bHt0f2B+aadLC3e9QBkB5MisN9mi9CiBBbL7LafW3OB/R6OpDdA1ZLnox9ENvdA/ircuwuXDC4D6Fldu8mVjFQwK3kE2y2cDhuk7mp+THMmM6ZUqQVwQCgkjlzSl3DGo/sIAqcngJKrxSjyiUlx1/WsN91F36nTSZQWv1BnlQ1wPwE64MU7KElR+XB8XHoldZu6gc2Tw/fWMvA0SatydlJg==
+X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
+ SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:DB7PR08MB3689.eurprd08.prod.outlook.com;
+ PTR:; CAT:NONE;
+ SFS:(4636009)(39860400002)(366004)(136003)(376002)(396003)(346002)(54906003)(64756008)(83380400001)(2616005)(478600001)(6916009)(66476007)(66446008)(2906002)(6512007)(8676002)(86362001)(8936002)(6486002)(66556008)(36756003)(5660300002)(26005)(6506007)(71200400001)(91956017)(4326008)(66946007)(316002)(186003)(53546011)(76116006)(33656002);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata: /f/fqFMWyHfZDTTvnCTAhZpL7yOPRofFlT+7kMXQckY60qjvkjVMQ9laU+AIsD9m6b9I4YcWXq39PwxIFclYGS+4P5fsssbFMvKms8gJ1w+7AC/hs/JnEGHNkqIDIWj2bC284pccb2aaTXToR9otmGtRGOz7HKCnCDdMPCJiuxzsMooon3L6JiqofAobBMnaohYraQ69X20ke0M507AaxpGzAFgQmrjM0uhxt4iFrfhu2wpvPyk5OLysSeoDD87hFa+yHG4uv4MdxHE3OZCpeOOT2vE56ik5bFstXxzRP49N3kFdvsHUHvYDTY+4cVBVJ/neBmNfckRKoptPXTDSB++pT3AERAVjICVp2Skyjj0RQUVqf3/1Bx+zLaGFGPYJJci+eepW7KhzeNbe4e7IAKxVjrb8P5jEys//KSebGTFijztoTuAPV52d9ea0qWa2UCyJbpjwMvtfceRaIY8iDZvTcXZBbV/8yOFfFFWkr/2fMrBOHOzF+a57tnqHQaL23nUhklo1JibKni0RGy3WuBEHr8QjZG24p0SHG0Ln4EftHAK9hYK0Jt8zy7vMsjC2Xi6X23JSTRxxtOihe21DzStSqpGj2rC5cpxfn5aENkWsm85vChOCOByHiVw01ohaa9XDxo1gaMtxtzT5sQqqAg==
+x-ms-exchange-transport-forked: True
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <2133F6170A4F384C872D23F5DED92C58@eurprd08.prod.outlook.com>
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB7PR08MB3161
+Original-Authentication-Results: xen.org; dkim=none (message not signed)
+ header.d=none;xen.org; dmarc=none action=none header.from=arm.com;
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: DB5EUR03FT009.eop-EUR03.prod.protection.outlook.com
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 3c26c8a8-7096-4f72-f8d2-08d85fae855c
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: lZSAhJpfUEQWVrU0NwAb7EUOgagmJSMkeEbnkP0yYGtvsIfsxwqEZvSD2ZUyqcCkdRCBh5m/FppH/ND9QbUdjkcgkI9IUCeA0HBE7cKJ8+mjVlwXK3JpICLb/UHmIZ8x4XE2VRr74zbxw9GIHADA144Ni/8/k4QAynXDLbqf+6Tz1YcmnpNmSynkDtvkcNaTFQsEFL3J21f1yrng8uqATHWfN9VMEN1eNBAnNXvWS/cFos4nA/XFWpd56ENDrNVhrlW3hVlrV17pzoLeS65wlD19ZeT6c7HpFgvwfy1OYiExZxl6Q+rx67inYjBeDWMtU/Wkvi8y/ll3uJ4vFFo2hrXepaj2NdwH2rUtW1rsNDg6/cUgxHR8D1fX0i5hkGGEPxAyCtrfslZpEAKg28IbGT8HqFMdKou6zaXFR7SgIoOXyQPCjWitiDVDP1IFd8Ca
+X-Forefront-Antispam-Report: CIP:63.35.35.123; CTRY:IE; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:64aa7808-outbound-1.mta.getcheckrecipient.com;
+ PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com; CAT:NONE;
+ SFS:(4636009)(136003)(39860400002)(396003)(376002)(346002)(46966005)(86362001)(82310400003)(2906002)(54906003)(5660300002)(478600001)(6486002)(70586007)(36756003)(4326008)(6512007)(33656002)(8676002)(82740400003)(83380400001)(336012)(186003)(81166007)(356005)(70206006)(26005)(2616005)(316002)(6506007)(8936002)(53546011)(47076004)(6862004);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Sep 2020 10:50:53.6041 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 92cb6e39-fd20-41ac-a435-08d85fae8b21
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d; Ip=[63.35.35.123];
+ Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
+X-MS-Exchange-CrossTenant-AuthSource: DB5EUR03FT009.eop-EUR03.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3PR08MB5676
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -90,470 +180,55 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Several GEM and PRIME callbacks have been deprecated in favor of
-per-instance GEM object functions. Remove the callbacks as they are
-now unused. The only exception is .gem_prime_mmap, which is still
-in use by several drivers.
+Hi,
 
-What is also gone is gem_vm_ops in struct drm_driver. All drivers now
-use struct drm_gem_object_funcs.vm_ops instead.
+> On 23 Sep 2020, at 09:28, Julien Grall <julien@xen.org> wrote:
+>=20
+> From: Julien Grall <jgrall@amazon.com>
+>=20
+> SMMUv{1, 2} are both marked as security supported, so we would
+> technically have to issue an XSA for any IOMMU security bug.
+>=20
+> However, at the moment, device passthrough is not security supported
+> on Arm and there is no plan to change that in the next few months.
+>=20
+> Therefore, mark Arm SMMUv{1, 2} as supported but not security supported.
+>=20
+> Signed-off-by: Julien Grall <jgrall@amazon.com>
 
-While at it, the patch also improves error handling around calls
-to .free and .get_sg_table callbacks.
+Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
 
-v3:
-	* restore default call to drm_gem_prime_export() in
-	  drm_gem_prime_handle_to_fd()
-	* return -ENOSYS if get_sg_table is not set
-	* drop all checks for obj->funcs
-	* clean up TODO list and documentation
-v2:
-	* update related TODO item (Sam)
+We will publish in the next week a first implementation of SMMUv3 support w=
+hich might make sense to have fully Supported.
 
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-Acked-by: Daniel Vetter <daniel.vetter@ffwll.ch>
----
- Documentation/gpu/drm-mm.rst         |  4 +-
- Documentation/gpu/todo.rst           |  9 +--
- drivers/gpu/drm/drm_gem.c            | 53 ++++++-----------
- drivers/gpu/drm/drm_gem_cma_helper.c |  8 +--
- drivers/gpu/drm/drm_prime.c          | 14 ++---
- include/drm/drm_drv.h                | 85 ++--------------------------
- include/drm/drm_gem.h                |  2 +-
- 7 files changed, 38 insertions(+), 137 deletions(-)
+Cheers,
+Bertrand
 
-diff --git a/Documentation/gpu/drm-mm.rst b/Documentation/gpu/drm-mm.rst
-index 9abee1589c1e..21be6deadc12 100644
---- a/Documentation/gpu/drm-mm.rst
-+++ b/Documentation/gpu/drm-mm.rst
-@@ -182,11 +182,11 @@ acquired and release by calling drm_gem_object_get() and drm_gem_object_put()
- respectively.
- 
- When the last reference to a GEM object is released the GEM core calls
--the :c:type:`struct drm_driver <drm_driver>` gem_free_object_unlocked
-+the :c:type:`struct drm_gem_object_funcs <gem_object_funcs>` free
- operation. That operation is mandatory for GEM-enabled drivers and must
- free the GEM object and all associated resources.
- 
--void (\*gem_free_object) (struct drm_gem_object \*obj); Drivers are
-+void (\*free) (struct drm_gem_object \*obj); Drivers are
- responsible for freeing all GEM object resources. This includes the
- resources created by the GEM core, which need to be released with
- drm_gem_object_release().
-diff --git a/Documentation/gpu/todo.rst b/Documentation/gpu/todo.rst
-index b0ea17da8ff6..3751ac976c3e 100644
---- a/Documentation/gpu/todo.rst
-+++ b/Documentation/gpu/todo.rst
-@@ -149,7 +149,7 @@ have to keep track of that lock and either call ``unreference`` or
- ``unreference_locked`` depending upon context.
- 
- Core GEM doesn't have a need for ``struct_mutex`` any more since kernel 4.8,
--and there's a ``gem_free_object_unlocked`` callback for any drivers which are
-+and there's a GEM object ``free`` callback for any drivers which are
- entirely ``struct_mutex`` free.
- 
- For drivers that need ``struct_mutex`` it should be replaced with a driver-
-@@ -289,11 +289,8 @@ struct drm_gem_object_funcs
- ---------------------------
- 
- GEM objects can now have a function table instead of having the callbacks on the
--DRM driver struct. This is now the preferred way and drivers can be moved over.
--
--We also need a 2nd version of the CMA define that doesn't require the
--vmapping to be present (different hook for prime importing). Plus this needs to
--be rolled out to all drivers using their own implementations, too.
-+DRM driver struct. This is now the preferred way. Callbacks in drivers have been
-+converted, except for struct drm_driver.gem_prime_mmap.
- 
- Level: Intermediate
- 
-diff --git a/drivers/gpu/drm/drm_gem.c b/drivers/gpu/drm/drm_gem.c
-index 19d73868490e..1da67d34e55d 100644
---- a/drivers/gpu/drm/drm_gem.c
-+++ b/drivers/gpu/drm/drm_gem.c
-@@ -247,12 +247,9 @@ drm_gem_object_release_handle(int id, void *ptr, void *data)
- {
- 	struct drm_file *file_priv = data;
- 	struct drm_gem_object *obj = ptr;
--	struct drm_device *dev = obj->dev;
- 
--	if (obj->funcs && obj->funcs->close)
-+	if (obj->funcs->close)
- 		obj->funcs->close(obj, file_priv);
--	else if (dev->driver->gem_close_object)
--		dev->driver->gem_close_object(obj, file_priv);
- 
- 	drm_gem_remove_prime_handles(obj, file_priv);
- 	drm_vma_node_revoke(&obj->vma_node, file_priv);
-@@ -403,14 +400,10 @@ drm_gem_handle_create_tail(struct drm_file *file_priv,
- 	if (ret)
- 		goto err_remove;
- 
--	if (obj->funcs && obj->funcs->open) {
-+	if (obj->funcs->open) {
- 		ret = obj->funcs->open(obj, file_priv);
- 		if (ret)
- 			goto err_revoke;
--	} else if (dev->driver->gem_open_object) {
--		ret = dev->driver->gem_open_object(obj, file_priv);
--		if (ret)
--			goto err_revoke;
- 	}
- 
- 	*handlep = handle;
-@@ -982,12 +975,11 @@ drm_gem_object_free(struct kref *kref)
- {
- 	struct drm_gem_object *obj =
- 		container_of(kref, struct drm_gem_object, refcount);
--	struct drm_device *dev = obj->dev;
- 
--	if (obj->funcs)
--		obj->funcs->free(obj);
--	else if (dev->driver->gem_free_object_unlocked)
--		dev->driver->gem_free_object_unlocked(obj);
-+	if (WARN_ON(!obj->funcs->free))
-+		return;
-+
-+	obj->funcs->free(obj);
- }
- EXPORT_SYMBOL(drm_gem_object_free);
- 
-@@ -1049,9 +1041,9 @@ EXPORT_SYMBOL(drm_gem_vm_close);
-  * @obj_size: the object size to be mapped, in bytes
-  * @vma: VMA for the area to be mapped
-  *
-- * Set up the VMA to prepare mapping of the GEM object using the gem_vm_ops
-- * provided by the driver. Depending on their requirements, drivers can either
-- * provide a fault handler in their gem_vm_ops (in which case any accesses to
-+ * Set up the VMA to prepare mapping of the GEM object using the GEM object's
-+ * vm_ops. Depending on their requirements, GEM objects can either
-+ * provide a fault handler in their vm_ops (in which case any accesses to
-  * the object will be trapped, to perform migration, GTT binding, surface
-  * register allocation, or performance monitoring), or mmap the buffer memory
-  * synchronously after calling drm_gem_mmap_obj.
-@@ -1065,12 +1057,11 @@ EXPORT_SYMBOL(drm_gem_vm_close);
-  * callers must verify access restrictions before calling this helper.
-  *
-  * Return 0 or success or -EINVAL if the object size is smaller than the VMA
-- * size, or if no gem_vm_ops are provided.
-+ * size, or if no vm_ops are provided.
-  */
- int drm_gem_mmap_obj(struct drm_gem_object *obj, unsigned long obj_size,
- 		     struct vm_area_struct *vma)
- {
--	struct drm_device *dev = obj->dev;
- 	int ret;
- 
- 	/* Check for valid size. */
-@@ -1085,7 +1076,7 @@ int drm_gem_mmap_obj(struct drm_gem_object *obj, unsigned long obj_size,
- 	 */
- 	drm_gem_object_get(obj);
- 
--	if (obj->funcs && obj->funcs->mmap) {
-+	if (obj->funcs->mmap) {
- 		ret = obj->funcs->mmap(obj, vma);
- 		if (ret) {
- 			drm_gem_object_put(obj);
-@@ -1093,10 +1084,8 @@ int drm_gem_mmap_obj(struct drm_gem_object *obj, unsigned long obj_size,
- 		}
- 		WARN_ON(!(vma->vm_flags & VM_DONTEXPAND));
- 	} else {
--		if (obj->funcs && obj->funcs->vm_ops)
-+		if (obj->funcs->vm_ops)
- 			vma->vm_ops = obj->funcs->vm_ops;
--		else if (dev->driver->gem_vm_ops)
--			vma->vm_ops = dev->driver->gem_vm_ops;
- 		else {
- 			drm_gem_object_put(obj);
- 			return -EINVAL;
-@@ -1198,36 +1187,30 @@ void drm_gem_print_info(struct drm_printer *p, unsigned int indent,
- 	drm_printf_indent(p, indent, "imported=%s\n",
- 			  obj->import_attach ? "yes" : "no");
- 
--	if (obj->funcs && obj->funcs->print_info)
-+	if (obj->funcs->print_info)
- 		obj->funcs->print_info(p, indent, obj);
- }
- 
- int drm_gem_pin(struct drm_gem_object *obj)
- {
--	if (obj->funcs && obj->funcs->pin)
-+	if (obj->funcs->pin)
- 		return obj->funcs->pin(obj);
--	else if (obj->dev->driver->gem_prime_pin)
--		return obj->dev->driver->gem_prime_pin(obj);
- 	else
- 		return 0;
- }
- 
- void drm_gem_unpin(struct drm_gem_object *obj)
- {
--	if (obj->funcs && obj->funcs->unpin)
-+	if (obj->funcs->unpin)
- 		obj->funcs->unpin(obj);
--	else if (obj->dev->driver->gem_prime_unpin)
--		obj->dev->driver->gem_prime_unpin(obj);
- }
- 
- void *drm_gem_vmap(struct drm_gem_object *obj)
- {
- 	void *vaddr;
- 
--	if (obj->funcs && obj->funcs->vmap)
-+	if (obj->funcs->vmap)
- 		vaddr = obj->funcs->vmap(obj);
--	else if (obj->dev->driver->gem_prime_vmap)
--		vaddr = obj->dev->driver->gem_prime_vmap(obj);
- 	else
- 		vaddr = ERR_PTR(-EOPNOTSUPP);
- 
-@@ -1242,10 +1225,8 @@ void drm_gem_vunmap(struct drm_gem_object *obj, void *vaddr)
- 	if (!vaddr)
- 		return;
- 
--	if (obj->funcs && obj->funcs->vunmap)
-+	if (obj->funcs->vunmap)
- 		obj->funcs->vunmap(obj, vaddr);
--	else if (obj->dev->driver->gem_prime_vunmap)
--		obj->dev->driver->gem_prime_vunmap(obj, vaddr);
- }
- 
- /**
-diff --git a/drivers/gpu/drm/drm_gem_cma_helper.c b/drivers/gpu/drm/drm_gem_cma_helper.c
-index 59b9ca207b42..8247b96babe4 100644
---- a/drivers/gpu/drm/drm_gem_cma_helper.c
-+++ b/drivers/gpu/drm/drm_gem_cma_helper.c
-@@ -171,7 +171,7 @@ drm_gem_cma_create_with_handle(struct drm_file *file_priv,
-  * GEM object state and frees the memory used to store the object itself.
-  * If the buffer is imported and the virtual address is set, it is released.
-  * Drivers using the CMA helpers should set this as their
-- * &drm_driver.gem_free_object_unlocked callback.
-+ * &drm_gem_object_funcs.free callback.
-  */
- void drm_gem_cma_free_object(struct drm_gem_object *gem_obj)
- {
-@@ -419,7 +419,7 @@ EXPORT_SYMBOL(drm_gem_cma_print_info);
-  *
-  * This function exports a scatter/gather table suitable for PRIME usage by
-  * calling the standard DMA mapping API. Drivers using the CMA helpers should
-- * set this as their &drm_driver.gem_prime_get_sg_table callback.
-+ * set this as their &drm_gem_object_funcs.get_sg_table callback.
-  *
-  * Returns:
-  * A pointer to the scatter/gather table of pinned pages or NULL on failure.
-@@ -525,7 +525,7 @@ EXPORT_SYMBOL_GPL(drm_gem_cma_prime_mmap);
-  * virtual address space. Since the CMA buffers are already mapped into the
-  * kernel virtual address space this simply returns the cached virtual
-  * address. Drivers using the CMA helpers should set this as their DRM
-- * driver's &drm_driver.gem_prime_vmap callback.
-+ * driver's &drm_gem_object_funcs.vmap callback.
-  *
-  * Returns:
-  * The kernel virtual address of the CMA GEM object's backing store.
-@@ -547,7 +547,7 @@ EXPORT_SYMBOL_GPL(drm_gem_cma_prime_vmap);
-  * This function removes a buffer exported via DRM PRIME from the kernel's
-  * virtual address space. This is a no-op because CMA buffers cannot be
-  * unmapped from kernel space. Drivers using the CMA helpers should set this
-- * as their &drm_driver.gem_prime_vunmap callback.
-+ * as their &drm_gem_object_funcs.vunmap callback.
-  */
- void drm_gem_cma_prime_vunmap(struct drm_gem_object *obj, void *vaddr)
- {
-diff --git a/drivers/gpu/drm/drm_prime.c b/drivers/gpu/drm/drm_prime.c
-index 11fe9ff76fd5..c0455ad09f3d 100644
---- a/drivers/gpu/drm/drm_prime.c
-+++ b/drivers/gpu/drm/drm_prime.c
-@@ -386,8 +386,6 @@ static struct dma_buf *export_and_register_object(struct drm_device *dev,
- 
- 	if (obj->funcs && obj->funcs->export)
- 		dmabuf = obj->funcs->export(obj, flags);
--	else if (dev->driver->gem_prime_export)
--		dmabuf = dev->driver->gem_prime_export(obj, flags);
- 	else
- 		dmabuf = drm_gem_prime_export(obj, flags);
- 	if (IS_ERR(dmabuf)) {
-@@ -419,7 +417,7 @@ static struct dma_buf *export_and_register_object(struct drm_device *dev,
-  * This is the PRIME export function which must be used mandatorily by GEM
-  * drivers to ensure correct lifetime management of the underlying GEM object.
-  * The actual exporting from GEM object to a dma-buf is done through the
-- * &drm_driver.gem_prime_export driver callback.
-+ * &drm_gem_object_funcs.export callback.
-  */
- int drm_gem_prime_handle_to_fd(struct drm_device *dev,
- 			       struct drm_file *file_priv, uint32_t handle,
-@@ -622,10 +620,12 @@ struct sg_table *drm_gem_map_dma_buf(struct dma_buf_attachment *attach,
- 	if (WARN_ON(dir == DMA_NONE))
- 		return ERR_PTR(-EINVAL);
- 
--	if (obj->funcs)
--		sgt = obj->funcs->get_sg_table(obj);
--	else
--		sgt = obj->dev->driver->gem_prime_get_sg_table(obj);
-+	if (WARN_ON(!obj->funcs->get_sg_table))
-+		return ERR_PTR(-ENOSYS);
-+
-+	sgt = obj->funcs->get_sg_table(obj);
-+	if (IS_ERR(sgt))
-+		return sgt;
- 
- 	ret = dma_map_sgtable(attach->dev, sgt, dir,
- 			      DMA_ATTR_SKIP_CPU_SYNC);
-diff --git a/include/drm/drm_drv.h b/include/drm/drm_drv.h
-index 9b11a2f0babc..240b0eab8018 100644
---- a/include/drm/drm_drv.h
-+++ b/include/drm/drm_drv.h
-@@ -36,10 +36,12 @@ struct drm_file;
- struct drm_gem_object;
- struct drm_master;
- struct drm_minor;
-+struct dma_buf;
- struct dma_buf_attachment;
- struct drm_display_mode;
- struct drm_mode_create_dumb;
- struct drm_printer;
-+struct sg_table;
- 
- /**
-  * enum drm_driver_feature - feature flags
-@@ -326,32 +328,6 @@ struct drm_driver {
- 	 */
- 	void (*debugfs_init)(struct drm_minor *minor);
- 
--	/**
--	 * @gem_free_object_unlocked: deconstructor for drm_gem_objects
--	 *
--	 * This is deprecated and should not be used by new drivers. Use
--	 * &drm_gem_object_funcs.free instead.
--	 */
--	void (*gem_free_object_unlocked) (struct drm_gem_object *obj);
--
--	/**
--	 * @gem_open_object:
--	 *
--	 * This callback is deprecated in favour of &drm_gem_object_funcs.open.
--	 *
--	 * Driver hook called upon gem handle creation
--	 */
--	int (*gem_open_object) (struct drm_gem_object *, struct drm_file *);
--
--	/**
--	 * @gem_close_object:
--	 *
--	 * This callback is deprecated in favour of &drm_gem_object_funcs.close.
--	 *
--	 * Driver hook called upon gem handle release
--	 */
--	void (*gem_close_object) (struct drm_gem_object *, struct drm_file *);
--
- 	/**
- 	 * @gem_create_object: constructor for gem objects
- 	 *
-@@ -360,6 +336,7 @@ struct drm_driver {
- 	 */
- 	struct drm_gem_object *(*gem_create_object)(struct drm_device *dev,
- 						    size_t size);
-+
- 	/**
- 	 * @prime_handle_to_fd:
- 	 *
-@@ -382,14 +359,7 @@ struct drm_driver {
- 	 */
- 	int (*prime_fd_to_handle)(struct drm_device *dev, struct drm_file *file_priv,
- 				int prime_fd, uint32_t *handle);
--	/**
--	 * @gem_prime_export:
--	 *
--	 * Export hook for GEM drivers. Deprecated in favour of
--	 * &drm_gem_object_funcs.export.
--	 */
--	struct dma_buf * (*gem_prime_export)(struct drm_gem_object *obj,
--					     int flags);
-+
- 	/**
- 	 * @gem_prime_import:
- 	 *
-@@ -399,29 +369,6 @@ struct drm_driver {
- 	 */
- 	struct drm_gem_object * (*gem_prime_import)(struct drm_device *dev,
- 				struct dma_buf *dma_buf);
--
--	/**
--	 * @gem_prime_pin:
--	 *
--	 * Deprecated hook in favour of &drm_gem_object_funcs.pin.
--	 */
--	int (*gem_prime_pin)(struct drm_gem_object *obj);
--
--	/**
--	 * @gem_prime_unpin:
--	 *
--	 * Deprecated hook in favour of &drm_gem_object_funcs.unpin.
--	 */
--	void (*gem_prime_unpin)(struct drm_gem_object *obj);
--
--
--	/**
--	 * @gem_prime_get_sg_table:
--	 *
--	 * Deprecated hook in favour of &drm_gem_object_funcs.get_sg_table.
--	 */
--	struct sg_table *(*gem_prime_get_sg_table)(struct drm_gem_object *obj);
--
- 	/**
- 	 * @gem_prime_import_sg_table:
- 	 *
-@@ -432,22 +379,6 @@ struct drm_driver {
- 				struct drm_device *dev,
- 				struct dma_buf_attachment *attach,
- 				struct sg_table *sgt);
--	/**
--	 * @gem_prime_vmap:
--	 *
--	 * Deprecated vmap hook for GEM drivers. Please use
--	 * &drm_gem_object_funcs.vmap instead.
--	 */
--	void *(*gem_prime_vmap)(struct drm_gem_object *obj);
--
--	/**
--	 * @gem_prime_vunmap:
--	 *
--	 * Deprecated vunmap hook for GEM drivers. Please use
--	 * &drm_gem_object_funcs.vunmap instead.
--	 */
--	void (*gem_prime_vunmap)(struct drm_gem_object *obj, void *vaddr);
--
- 	/**
- 	 * @gem_prime_mmap:
- 	 *
-@@ -522,14 +453,6 @@ struct drm_driver {
- 			    struct drm_device *dev,
- 			    uint32_t handle);
- 
--	/**
--	 * @gem_vm_ops: Driver private ops for this object
--	 *
--	 * For GEM drivers this is deprecated in favour of
--	 * &drm_gem_object_funcs.vm_ops.
--	 */
--	const struct vm_operations_struct *gem_vm_ops;
--
- 	/** @major: driver major number */
- 	int major;
- 	/** @minor: driver minor number */
-diff --git a/include/drm/drm_gem.h b/include/drm/drm_gem.h
-index 337a48321705..c38dd35da00b 100644
---- a/include/drm/drm_gem.h
-+++ b/include/drm/drm_gem.h
-@@ -272,7 +272,7 @@ struct drm_gem_object {
- 	 * attachment point for the device. This is invariant over the lifetime
- 	 * of a gem object.
- 	 *
--	 * The &drm_driver.gem_free_object_unlocked callback is responsible for
-+	 * The &drm_gem_object_funcs.free callback is responsible for
- 	 * cleaning up the dma_buf attachment and references acquired at import
- 	 * time.
- 	 *
--- 
-2.28.0
+>=20
+> ---
+>=20
+> Cc: Bertrand Marquis <Bertrand.Marquis@arm.com>
+> ---
+> SUPPORT.md | 4 ++--
+> 1 file changed, 2 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/SUPPORT.md b/SUPPORT.md
+> index 25987ec1dfb6..f35943a432f7 100644
+> --- a/SUPPORT.md
+> +++ b/SUPPORT.md
+> @@ -62,8 +62,8 @@ supported in this document.
+>=20
+>     Status, AMD IOMMU: Supported
+>     Status, Intel VT-d: Supported
+> -    Status, ARM SMMUv1: Supported
+> -    Status, ARM SMMUv2: Supported
+> +    Status, ARM SMMUv1: Supported, not security supported
+> +    Status, ARM SMMUv2: Supported, not security supported
+>     Status, Renesas IPMMU-VMSA: Supported, not security supported
+>=20
+> ### ARM/GICv3 ITS
+> --=20
+> 2.17.1
+>=20
 
 
