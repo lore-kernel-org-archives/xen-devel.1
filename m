@@ -7,34 +7,35 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 76ED3C47431
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2020 10:22:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1B267C4CC62
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2020 10:22:24 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3EC6823119
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2020 10:22:21 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3EC6823119
+	by mail.kernel.org (Postfix) with ESMTPS id D98F1238A1
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2020 10:22:23 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D98F1238A1
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kL1ud-00066w-J3; Wed, 23 Sep 2020 10:22:11 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kL1ug-00068f-UB; Wed, 23 Sep 2020 10:22:14 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=EYdF=DA=suse.de=tzimmermann@srs-us1.protection.inumbo.net>)
- id 1kL1uc-00064a-AJ
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2020 10:22:10 +0000
-X-Inumbo-ID: f272901a-7e10-4a6e-9bb7-84be898d7ae8
+ id 1kL1uf-00064P-U4
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2020 10:22:13 +0000
+X-Inumbo-ID: 884eb3f3-7235-40a5-bd4b-db4e1b96e0c0
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id f272901a-7e10-4a6e-9bb7-84be898d7ae8;
- Wed, 23 Sep 2020 10:22:05 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 884eb3f3-7235-40a5-bd4b-db4e1b96e0c0;
+ Wed, 23 Sep 2020 10:22:10 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 7CE1EB27E;
- Wed, 23 Sep 2020 10:22:41 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 499BEB278;
+ Wed, 23 Sep 2020 10:22:47 +0000 (UTC)
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: alexander.deucher@amd.com, christian.koenig@amd.com, airlied@linux.ie,
  daniel@ffwll.ch, linux@armlinux.org.uk, maarten.lankhorst@linux.intel.com,
@@ -67,9 +68,9 @@ Cc: amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
  linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
  xen-devel@lists.xenproject.org, Thomas Zimmermann <tzimmermann@suse.de>,
  Daniel Vetter <daniel.vetter@ffwll.ch>
-Subject: [PATCH v3 03/22] drm/etnaviv: Introduce GEM object functions
-Date: Wed, 23 Sep 2020 12:21:40 +0200
-Message-Id: <20200923102159.24084-4-tzimmermann@suse.de>
+Subject: [PATCH v3 09/22] drm/msm: Introduce GEM object funcs
+Date: Wed, 23 Sep 2020 12:21:46 +0200
+Message-Id: <20200923102159.24084-10-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200923102159.24084-1-tzimmermann@suse.de>
 References: <20200923102159.24084-1-tzimmermann@suse.de>
@@ -90,27 +91,27 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 GEM object functions deprecate several similar callback interfaces in
 struct drm_driver. This patch replaces the per-driver callbacks with
-per-instance callbacks in etnaviv. The only exception is gem_prime_mmap,
+per-instance callbacks in msm. The only exception is gem_prime_mmap,
 which is non-trivial to convert.
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
 ---
- drivers/gpu/drm/etnaviv/etnaviv_drv.c | 13 -------------
- drivers/gpu/drm/etnaviv/etnaviv_drv.h |  1 -
- drivers/gpu/drm/etnaviv/etnaviv_gem.c | 19 ++++++++++++++++++-
+ drivers/gpu/drm/msm/msm_drv.c | 13 -------------
+ drivers/gpu/drm/msm/msm_drv.h |  1 -
+ drivers/gpu/drm/msm/msm_gem.c | 19 ++++++++++++++++++-
  3 files changed, 18 insertions(+), 15 deletions(-)
 
-diff --git a/drivers/gpu/drm/etnaviv/etnaviv_drv.c b/drivers/gpu/drm/etnaviv/etnaviv_drv.c
-index a9a3afaef9a1..aa270b79e585 100644
---- a/drivers/gpu/drm/etnaviv/etnaviv_drv.c
-+++ b/drivers/gpu/drm/etnaviv/etnaviv_drv.c
-@@ -468,12 +468,6 @@ static const struct drm_ioctl_desc etnaviv_ioctls[] = {
- 	ETNA_IOCTL(PM_QUERY_SIG, pm_query_sig, DRM_RENDER_ALLOW),
+diff --git a/drivers/gpu/drm/msm/msm_drv.c b/drivers/gpu/drm/msm/msm_drv.c
+index 79333842f70a..5952767ea478 100644
+--- a/drivers/gpu/drm/msm/msm_drv.c
++++ b/drivers/gpu/drm/msm/msm_drv.c
+@@ -978,12 +978,6 @@ static const struct drm_ioctl_desc msm_ioctls[] = {
+ 	DRM_IOCTL_DEF_DRV(MSM_SUBMITQUEUE_QUERY, msm_ioctl_submitqueue_query, DRM_RENDER_ALLOW),
  };
  
 -static const struct vm_operations_struct vm_ops = {
--	.fault = etnaviv_gem_fault,
+-	.fault = msm_gem_fault,
 -	.open = drm_gem_vm_open,
 -	.close = drm_gem_vm_close,
 -};
@@ -118,76 +119,78 @@ index a9a3afaef9a1..aa270b79e585 100644
  static const struct file_operations fops = {
  	.owner              = THIS_MODULE,
  	.open               = drm_open,
-@@ -490,16 +484,9 @@ static struct drm_driver etnaviv_drm_driver = {
- 	.driver_features    = DRIVER_GEM | DRIVER_RENDER,
- 	.open               = etnaviv_open,
- 	.postclose           = etnaviv_postclose,
--	.gem_free_object_unlocked = etnaviv_gem_free_object,
+@@ -1009,18 +1003,11 @@ static struct drm_driver msm_driver = {
+ 	.irq_preinstall     = msm_irq_preinstall,
+ 	.irq_postinstall    = msm_irq_postinstall,
+ 	.irq_uninstall      = msm_irq_uninstall,
+-	.gem_free_object_unlocked = msm_gem_free_object,
 -	.gem_vm_ops         = &vm_ops,
+ 	.dumb_create        = msm_gem_dumb_create,
+ 	.dumb_map_offset    = msm_gem_dumb_map_offset,
  	.prime_handle_to_fd = drm_gem_prime_handle_to_fd,
  	.prime_fd_to_handle = drm_gem_prime_fd_to_handle,
--	.gem_prime_pin      = etnaviv_gem_prime_pin,
--	.gem_prime_unpin    = etnaviv_gem_prime_unpin,
--	.gem_prime_get_sg_table = etnaviv_gem_prime_get_sg_table,
- 	.gem_prime_import_sg_table = etnaviv_gem_prime_import_sg_table,
--	.gem_prime_vmap     = etnaviv_gem_prime_vmap,
--	.gem_prime_vunmap   = etnaviv_gem_prime_vunmap,
- 	.gem_prime_mmap     = etnaviv_gem_prime_mmap,
+-	.gem_prime_pin      = msm_gem_prime_pin,
+-	.gem_prime_unpin    = msm_gem_prime_unpin,
+-	.gem_prime_get_sg_table = msm_gem_prime_get_sg_table,
+ 	.gem_prime_import_sg_table = msm_gem_prime_import_sg_table,
+-	.gem_prime_vmap     = msm_gem_prime_vmap,
+-	.gem_prime_vunmap   = msm_gem_prime_vunmap,
+ 	.gem_prime_mmap     = msm_gem_prime_mmap,
  #ifdef CONFIG_DEBUG_FS
- 	.debugfs_init       = etnaviv_debugfs_init,
-diff --git a/drivers/gpu/drm/etnaviv/etnaviv_drv.h b/drivers/gpu/drm/etnaviv/etnaviv_drv.h
-index 4d8dc9236e5f..914f0867ff71 100644
---- a/drivers/gpu/drm/etnaviv/etnaviv_drv.h
-+++ b/drivers/gpu/drm/etnaviv/etnaviv_drv.h
-@@ -49,7 +49,6 @@ int etnaviv_ioctl_gem_submit(struct drm_device *dev, void *data,
- 		struct drm_file *file);
- 
- int etnaviv_gem_mmap(struct file *filp, struct vm_area_struct *vma);
--vm_fault_t etnaviv_gem_fault(struct vm_fault *vmf);
- int etnaviv_gem_mmap_offset(struct drm_gem_object *obj, u64 *offset);
- struct sg_table *etnaviv_gem_prime_get_sg_table(struct drm_gem_object *obj);
- void *etnaviv_gem_prime_vmap(struct drm_gem_object *obj);
-diff --git a/drivers/gpu/drm/etnaviv/etnaviv_gem.c b/drivers/gpu/drm/etnaviv/etnaviv_gem.c
-index d1533bdc1335..67d9a2b9ea6a 100644
---- a/drivers/gpu/drm/etnaviv/etnaviv_gem.c
-+++ b/drivers/gpu/drm/etnaviv/etnaviv_gem.c
-@@ -171,7 +171,7 @@ int etnaviv_gem_mmap(struct file *filp, struct vm_area_struct *vma)
- 	return obj->ops->mmap(obj, vma);
+ 	.debugfs_init       = msm_debugfs_init,
+diff --git a/drivers/gpu/drm/msm/msm_drv.h b/drivers/gpu/drm/msm/msm_drv.h
+index af259b0573ea..7bcea10be81f 100644
+--- a/drivers/gpu/drm/msm/msm_drv.h
++++ b/drivers/gpu/drm/msm/msm_drv.h
+@@ -269,7 +269,6 @@ void msm_gem_shrinker_cleanup(struct drm_device *dev);
+ int msm_gem_mmap_obj(struct drm_gem_object *obj,
+ 			struct vm_area_struct *vma);
+ int msm_gem_mmap(struct file *filp, struct vm_area_struct *vma);
+-vm_fault_t msm_gem_fault(struct vm_fault *vmf);
+ uint64_t msm_gem_mmap_offset(struct drm_gem_object *obj);
+ int msm_gem_get_iova(struct drm_gem_object *obj,
+ 		struct msm_gem_address_space *aspace, uint64_t *iova);
+diff --git a/drivers/gpu/drm/msm/msm_gem.c b/drivers/gpu/drm/msm/msm_gem.c
+index e47958c3704a..3f4a3be53de6 100644
+--- a/drivers/gpu/drm/msm/msm_gem.c
++++ b/drivers/gpu/drm/msm/msm_gem.c
+@@ -244,7 +244,7 @@ int msm_gem_mmap(struct file *filp, struct vm_area_struct *vma)
+ 	return msm_gem_mmap_obj(vma->vm_private_data, vma);
  }
  
--vm_fault_t etnaviv_gem_fault(struct vm_fault *vmf)
-+static vm_fault_t etnaviv_gem_fault(struct vm_fault *vmf)
+-vm_fault_t msm_gem_fault(struct vm_fault *vmf)
++static vm_fault_t msm_gem_fault(struct vm_fault *vmf)
  {
  	struct vm_area_struct *vma = vmf->vma;
  	struct drm_gem_object *obj = vma->vm_private_data;
-@@ -559,6 +559,22 @@ void etnaviv_gem_obj_add(struct drm_device *dev, struct drm_gem_object *obj)
- 	mutex_unlock(&priv->gem_lock);
+@@ -991,6 +991,22 @@ int msm_gem_new_handle(struct drm_device *dev, struct drm_file *file,
+ 	return ret;
  }
  
 +static const struct vm_operations_struct vm_ops = {
-+	.fault = etnaviv_gem_fault,
++	.fault = msm_gem_fault,
 +	.open = drm_gem_vm_open,
 +	.close = drm_gem_vm_close,
 +};
 +
-+static const struct drm_gem_object_funcs etnaviv_gem_object_funcs = {
-+	.free = etnaviv_gem_free_object,
-+	.pin = etnaviv_gem_prime_pin,
-+	.unpin = etnaviv_gem_prime_unpin,
-+	.get_sg_table = etnaviv_gem_prime_get_sg_table,
-+	.vmap = etnaviv_gem_prime_vmap,
-+	.vunmap = etnaviv_gem_prime_vunmap,
++static const struct drm_gem_object_funcs msm_gem_object_funcs = {
++	.free = msm_gem_free_object,
++	.pin = msm_gem_prime_pin,
++	.unpin = msm_gem_prime_unpin,
++	.get_sg_table = msm_gem_prime_get_sg_table,
++	.vmap = msm_gem_prime_vmap,
++	.vunmap = msm_gem_prime_vunmap,
 +	.vm_ops = &vm_ops,
 +};
 +
- static int etnaviv_gem_new_impl(struct drm_device *dev, u32 size, u32 flags,
- 	const struct etnaviv_gem_ops *ops, struct drm_gem_object **obj)
- {
-@@ -593,6 +609,7 @@ static int etnaviv_gem_new_impl(struct drm_device *dev, u32 size, u32 flags,
- 	INIT_LIST_HEAD(&etnaviv_obj->vram_list);
+ static int msm_gem_new_impl(struct drm_device *dev,
+ 		uint32_t size, uint32_t flags,
+ 		struct drm_gem_object **obj)
+@@ -1021,6 +1037,7 @@ static int msm_gem_new_impl(struct drm_device *dev,
+ 	INIT_LIST_HEAD(&msm_obj->vmas);
  
- 	*obj = &etnaviv_obj->base;
-+	(*obj)->funcs = &etnaviv_gem_object_funcs;
+ 	*obj = &msm_obj->base;
++	(*obj)->funcs = &msm_gem_object_funcs;
  
  	return 0;
  }
