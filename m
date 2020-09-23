@@ -2,74 +2,54 @@ Return-Path: <SRS0=1HVP=DA=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-8.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7F63FC4363D
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2020 14:05:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5D3B2C4363D
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2020 14:09:47 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2D7F520719
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2020 14:05:44 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 528DF2220D
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2020 14:09:46 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="H24vrYO/"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2D7F520719
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	dkim=pass (1024-bit key) header.d=protonmail.com header.i=@protonmail.com header.b="Yqty6k33"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 528DF2220D
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=protonmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kL5Oc-0004eM-MG; Wed, 23 Sep 2020 14:05:22 +0000
+	id 1kL5SW-0004o7-7D; Wed, 23 Sep 2020 14:09:24 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=+VqP=DA=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1kL5Ob-0004eH-FZ
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2020 14:05:21 +0000
-X-Inumbo-ID: c5b8d3d9-db49-4e4e-85b0-34efc39e43b9
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=6W+X=DA=protonmail.com=mathieu.tarral@srs-us1.protection.inumbo.net>)
+ id 1kL5SU-0004o2-Si
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2020 14:09:23 +0000
+X-Inumbo-ID: be655d3f-8794-4a3a-9554-c943fcb32bcc
+Received: from mail-40134.protonmail.ch (unknown [185.70.40.134])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id c5b8d3d9-db49-4e4e-85b0-34efc39e43b9;
- Wed, 23 Sep 2020 14:05:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
- bh=jbyWqSUZO/2nKH1ZSR1a+C4Ou9j4V3urIEwohGu9MqU=; b=H24vrYO/aDQZ9DCrLgBH1VU+m7
- WFz+62kUn7ZDZI3rCLpdstpJqLJxkL6BKn9GmbHs459Z9NAVW5jiTWkbC08fx8L33Bp7EtYq5BXiZ
- NHTUs3fHIlw1xT+VCXB+rhE3AaIQb3gUhbzoq5gEQ4uRh4DvPCbjdxTQ8QwOh0O/d2VE=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1kL5OV-0003bm-MR; Wed, 23 Sep 2020 14:05:15 +0000
-Received: from [54.239.6.186] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1kL5OV-0005U1-DP; Wed, 23 Sep 2020 14:05:15 +0000
-Subject: Re: [PATCH] SUPPORT.MD: Clarify the support state for the Arm
- SMMUv{1, 2} drivers
-To: Bertrand Marquis <Bertrand.Marquis@arm.com>
-Cc: "open list:X86" <xen-devel@lists.xenproject.org>,
- Julien Grall <jgrall@amazon.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
- Jan Beulich <jbeulich@suse.com>, Stefano Stabellini
- <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
-References: <20200923082832.20038-1-julien@xen.org>
- <1D6392F2-F4EC-4025-A793-22EABF85AA0E@arm.com>
- <3c64f36f-6b43-6f73-e344-70b084f1f505@xen.org>
- <C14129BD-09F3-4297-BBD6-9F3C5AA82FA7@arm.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <734db015-bbde-bb4a-7826-32ca0744f4e9@xen.org>
-Date: Wed, 23 Sep 2020 15:05:12 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
- Gecko/20100101 Thunderbird/68.12.0
+ id be655d3f-8794-4a3a-9554-c943fcb32bcc;
+ Wed, 23 Sep 2020 14:09:19 +0000 (UTC)
+Date: Wed, 23 Sep 2020 14:09:11 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
+ s=protonmail; t=1600870157;
+ bh=K+wlajLsRA2LV7sdHujyv9aHfWQ4vczpzsQVdblMECQ=;
+ h=Date:To:From:Reply-To:Subject:From;
+ b=Yqty6k33pPp6wFevOrJUtp5b5Bd0jsHZA4NrJvv5EgKGlAUbQWwaWr9otWL/8PnPN
+ ogkZNZH+iaE/Hr3z9kBEv1ArsPFTyIcpbkcgZ95e57ssh6iRtxRQtezhVs5cgnCofb
+ pyh1vTDdI0+8sZJVRtllfbsHfWQNX2TTGaEnPelo=
+To: xen-devel <xen-devel@lists.xenproject.org>
+From: Mathieu Tarral <mathieu.tarral@protonmail.com>
+Subject: [Libvirt] Failed to get udev device for syspath
+ '/sys/devices/virtual/dmi/id'
+Message-ID: <WBFXzWm02qaMoLNSOnDbHmebQchJ7xMXXT6ocR4SZ-6Pw8VClueBmTcHS3xHg_vttQRPdwdaHeNGskEHxHPETSSY03En7rejlTQ4lXhjlZk=@protonmail.com>
 MIME-Version: 1.0
-In-Reply-To: <C14129BD-09F3-4297-BBD6-9F3C5AA82FA7@arm.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,23 +60,37 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
+Reply-To: Mathieu Tarral <mathieu.tarral@protonmail.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
+Hi,
 
+I'm facing an issue with libvirt and the LIBXL driver, failing when searchi=
+ng for DMI data in /sys.
 
-On 23/09/2020 14:55, Bertrand Marquis wrote:
->> On 23 Sep 2020, at 12:17, Julien Grall <julien@xen.org> wrote:
-> More that it make more sense in general to have SMMUv3 with 2 level of page table supporting this then old SMMU versions.
+info : libvirt version: 5.0.0, package: 4+deb10u1 (Guido G=C3=BCnther <agx@=
+sigxcpu.org> Thu, 05 Dec 2019 00:22:14 +0100)
+error : udevGetDMIData:1719 : internal error: Failed to get udev device for=
+ syspath '/sys/devices/virtual/dmi/id' or '/sys/class/dmi/id'
+error : libxlDriverConfigNew:1803 : Unable to configure libxl's memory mana=
+gement parameters
+error : virStateInitialize:662 : Initialization of LIBXL state driver faile=
+d: internal error: Failed to get udev device for syspath '/sys/devices/virt=
+ual/dmi/id' or '/sys/class/dmi/id'
+error : daemonRunStateInit:799 : Driver state initialization failed
 
-Both driver are equally important. I wouldn't discard SMMUv2 just 
-because there is a new shiny version.
+The relevant function udevGetDMIData in libvirt:
+https://github.com/libvirt/libvirt/blob/cb09344a2cccc0cc9bcefa3cb53d7af45ba=
+92631/src/node_device/node_device_udev.c#L1726
 
-I also have some concerns with the SMMUv3. They are pretty similar to 
-the GICv3 ITS as both use a shared ring for the commands.
+I don't understand what's happening, as this initialization failure only ha=
+ppens when I boot on the Xen kernel.
+Also, the /sys/class/dmi* paths are not exposed on Xen. (should they ?)
 
-Cheers,
+Note: Running on Xen 4.12.1
 
--- 
-Julien Grall
+Any ideas ?
+
+Thanks !
 
