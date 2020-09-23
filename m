@@ -2,66 +2,72 @@ Return-Path: <SRS0=1HVP=DA=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-6.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5E7AAC2D0A8
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2020 10:19:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EB247C2D0A8
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2020 10:19:34 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 04D382076E
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2020 10:19:19 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 7E6002076E
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2020 10:19:34 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="DJ775kMY"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 04D382076E
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="QKh70Djg"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7E6002076E
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kL1rc-0004u2-N5; Wed, 23 Sep 2020 10:19:04 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kL1rt-0004vK-Vj; Wed, 23 Sep 2020 10:19:21 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=V3kw=DA=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
- id 1kL1rb-0004ti-7I
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2020 10:19:03 +0000
-X-Inumbo-ID: cf0e5b58-c717-4fde-b778-93005ee58a32
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id cf0e5b58-c717-4fde-b778-93005ee58a32;
- Wed, 23 Sep 2020 10:18:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
- Content-Transfer-Encoding:Content-Type:Message-ID:To;
- bh=1VCbXW0Zr9qGMp9ey7myNCMAzp5bj+n4/Hw7bu9nuuY=; b=DJ775kMYR1Wd5ERVAaSzQaQn+0
- AY+eDHLdVHSBklpge42P6O2bPSF5ZRpa34A93KUmimbTKqbbqS/RzGFJCaj0GECdAPy8/vI6bEw4C
- RQcKbxxYo1C+4RAy1OsOXS5L4Q4+Q91HZboSO+PBoizsyQRDhprcKP5jEcbk3jHivft4=;
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kL1rU-00078e-RV; Wed, 23 Sep 2020 10:18:56 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kL1rU-00049n-HT; Wed, 23 Sep 2020 10:18:56 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1kL1rU-0002o1-H0; Wed, 23 Sep 2020 10:18:56 +0000
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-154638-mainreport@xen.org>
+ <SRS0=wqyB=DA=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1kL1rr-0004v9-Sj
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2020 10:19:19 +0000
+X-Inumbo-ID: b01d076f-62b6-40bc-b648-17519f70000e
+Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id b01d076f-62b6-40bc-b648-17519f70000e;
+ Wed, 23 Sep 2020 10:19:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1600856358;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=F7TG/TteC8REbAvegZm4zjVC/bzlaP7EvWDw3EZZrZE=;
+ b=QKh70DjgzGZs4N/orppATrFd5z9hx87913cCdFwNAK39YE/xjhceopLY
+ H0cgK+0OqNBeF1OR66eXOINDpT/PFE8gqZ10jV8fWpNya4HdI2zppbvNx
+ BC8sqhHj64oXnyzbJ9mw+QlTbpkXjm4IGSSbVizn7rFgEAL1NAVhk09+8 8=;
+Authentication-Results: esa2.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none
+IronPort-SDR: ICeEvJ0CGQjvxQWuQQDQ0Bs0DB7r2iAbrrgk0Tq7T9xDshOIrEvR3XJ6/cNm5lUrULb756qJpk
+ 9b/QhEonRbw+UI0XsNCEugAP49QrOIDBZhf5900kLlMSk0rFSrt2WR8JKY4vdF1kL/Sn0Rr8Dz
+ BsOYPYz4dF51bMTghVelH+zHVlYdOqeVPFiEJXiNFArdw7QcQ9k23j8Fits31J9PaDLaXGVUxQ
+ Ci0uJoJtgmY29CAWMxKXoeKy2SaBBBX3jVCjqcA9DXBtMUJ6q3k/FxAe2y6NCZQ1/8S4dneITE
+ 0Lw=
+X-SBRS: 2.7
+X-MesageID: 27361565
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.77,293,1596513600"; d="scan'208";a="27361565"
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
+ <JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+ <roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Andy Lutomirski
+ <luto@kernel.org>, Manuel Bouyer <bouyer@antioche.eu.org>
+Subject: [PATCH 0/3] x86/pv: Multiple fixes to SYSCALL/SYSENTER handling
+ (XSA-339 followup)
+Date: Wed, 23 Sep 2020 11:18:45 +0100
+Message-ID: <20200923101848.29049-1-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.11.0
+MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-MIME-Version: 1.0
-Subject: [xen-unstable-coverity test] 154638: all pass - PUSHED
-X-Osstest-Versions-This: xen=2785b2a9e04abc148e1c5259f4faee708ea356f4
-X-Osstest-Versions-That: xen=baa4d064e91b6d2bcfe400bdf71f83b961e4c28e
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Wed, 23 Sep 2020 10:18:56 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,53 +81,28 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-flight 154638 xen-unstable-coverity real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/154638/
+Patches 1 and 2 are a consequence of trying to get the Linux x86 selftests to
+pass even when running under Xen.
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- xen                  2785b2a9e04abc148e1c5259f4faee708ea356f4
-baseline version:
- xen                  baa4d064e91b6d2bcfe400bdf71f83b961e4c28e
+Patches 3 and XSA-339 were further fallout from trying to put in place testing
+to cover all aspects of the PV fast system call entrypoints.
 
-Last test of basis   154529  2020-09-20 09:19:32 Z    3 days
-Testing same since   154638  2020-09-23 09:18:27 Z    0 days    1 attempts
+Patch 3 was almost an XSA itself, but was ultimately argued as not affecting
+any known PV guest.  It turns out that this is only true because of c/s
+dba899de14 in 2018, which did fix a real userspace => VM DoS on NetBSD.
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Igor Druzhinin <igor.druzhinin@citrix.com>
-  Jan Beulich <jbeulich@suse.com>
-  Julien Grall <jgrall@amazon.com>
-  Paul Durrant <paul@xen.org>
-  Paul Durrant <pdurrant@amazon.com>
-  Roger Pau Monné <roger.pau@citrix.com>
-  Stefano Stabellini <sstabellini@kernel.org>
-  Trammell Hudson <hudson@trmm.net>
+All fixes need backporting.
 
-jobs:
- coverity-amd64                                               pass    
+Andrew Cooper (3):
+  x86/pv: Don't deliver #GP for a SYSENTER with NT set
+  x86/pv: Don't clobber NT on return-to-guest
+  x86/pv: Inject #UD for missing SYSCALL callbacks
 
+ xen/arch/x86/x86_64/compat/entry.S |  2 +-
+ xen/arch/x86/x86_64/entry.S        | 31 +++++++++++++++++++++----------
+ 2 files changed, 22 insertions(+), 11 deletions(-)
 
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
+-- 
+2.11.0
 
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/xen.git
-   baa4d064e9..2785b2a9e0  2785b2a9e04abc148e1c5259f4faee708ea356f4 -> coverity-tested/smoke
 
