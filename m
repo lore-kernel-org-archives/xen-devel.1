@@ -7,34 +7,34 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BF20EC52D17
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2020 10:22:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8F191C47433
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2020 10:23:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 886CD23787
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2020 10:22:41 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 886CD23787
+	by mail.kernel.org (Postfix) with ESMTPS id 5660B21BE5
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2020 10:23:00 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5660B21BE5
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kL1ux-0006NJ-7b; Wed, 23 Sep 2020 10:22:31 +0000
+	id 1kL1vH-0006oQ-P9; Wed, 23 Sep 2020 10:22:51 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=EYdF=DA=suse.de=tzimmermann@srs-us1.protection.inumbo.net>)
- id 1kL1uw-00064a-As
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2020 10:22:30 +0000
-X-Inumbo-ID: 88f77998-c924-4a76-a00b-eb40b2ca2b1c
+ id 1kL1vG-00064a-BV
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2020 10:22:50 +0000
+X-Inumbo-ID: dea7e9fe-7084-4ec4-885b-48592fb1cd20
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 88f77998-c924-4a76-a00b-eb40b2ca2b1c;
- Wed, 23 Sep 2020 10:22:09 +0000 (UTC)
+ id dea7e9fe-7084-4ec4-885b-48592fb1cd20;
+ Wed, 23 Sep 2020 10:22:16 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 65514B289;
- Wed, 23 Sep 2020 10:22:45 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 2DD48B28F;
+ Wed, 23 Sep 2020 10:22:53 +0000 (UTC)
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: alexander.deucher@amd.com, christian.koenig@amd.com, airlied@linux.ie,
  daniel@ffwll.ch, linux@armlinux.org.uk, maarten.lankhorst@linux.intel.com,
@@ -66,11 +66,10 @@ Cc: amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
  freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
  linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
  xen-devel@lists.xenproject.org, Thomas Zimmermann <tzimmermann@suse.de>,
- kernel test robot <lkp@intel.com>
-Subject: [PATCH v3 07/22] drm/imx/dcss: Initialize DRM driver instance with
- CMA helper macro
-Date: Wed, 23 Sep 2020 12:21:44 +0200
-Message-Id: <20200923102159.24084-8-tzimmermann@suse.de>
+ Thierry Reding <treding@nvidia.com>
+Subject: [PATCH v3 15/22] drm/tegra: Introduce GEM object functions
+Date: Wed, 23 Sep 2020 12:21:52 +0200
+Message-Id: <20200923102159.24084-16-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200923102159.24084-1-tzimmermann@suse.de>
 References: <20200923102159.24084-1-tzimmermann@suse.de>
@@ -89,45 +88,60 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-The i.MX DCSS driver uses CMA helpers with default callback functions.
-Initialize the driver structure with the rsp CMA helper macro. The
-driver is being converted to use GEM object functions as part of
-this change.
-
-Two callbacks, .gem_prime_export and .gem_prime_import, were initialized
-to their default implementations, so they are just kept empty now.
+GEM object functions deprecate several similar callback interfaces in
+struct drm_driver. This patch replaces the per-driver callbacks with
+per-instance callbacks in tegra.
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-Reported-by: kernel test robot <lkp@intel.com>
+Acked-by: Thierry Reding <treding@nvidia.com>
 ---
- drivers/gpu/drm/imx/dcss/dcss-kms.c | 14 +-------------
- 1 file changed, 1 insertion(+), 13 deletions(-)
+ drivers/gpu/drm/tegra/drm.c | 4 ----
+ drivers/gpu/drm/tegra/gem.c | 8 ++++++++
+ 2 files changed, 8 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/gpu/drm/imx/dcss/dcss-kms.c b/drivers/gpu/drm/imx/dcss/dcss-kms.c
-index 135a62366ab8..b72e5cef7e40 100644
---- a/drivers/gpu/drm/imx/dcss/dcss-kms.c
-+++ b/drivers/gpu/drm/imx/dcss/dcss-kms.c
-@@ -28,19 +28,7 @@ static const struct drm_mode_config_funcs dcss_drm_mode_config_funcs = {
+diff --git a/drivers/gpu/drm/tegra/drm.c b/drivers/gpu/drm/tegra/drm.c
+index ba9d1c3e7cac..f0f581cd345e 100644
+--- a/drivers/gpu/drm/tegra/drm.c
++++ b/drivers/gpu/drm/tegra/drm.c
+@@ -858,12 +858,8 @@ static struct drm_driver tegra_drm_driver = {
+ 	.debugfs_init = tegra_debugfs_init,
+ #endif
  
- static struct drm_driver dcss_kms_driver = {
- 	.driver_features	= DRIVER_MODESET | DRIVER_GEM | DRIVER_ATOMIC,
--	.gem_free_object_unlocked = drm_gem_cma_free_object,
--	.gem_vm_ops		= &drm_gem_cma_vm_ops,
--	.dumb_create		= drm_gem_cma_dumb_create,
+-	.gem_free_object_unlocked = tegra_bo_free_object,
+-	.gem_vm_ops = &tegra_bo_vm_ops,
 -
--	.prime_handle_to_fd	= drm_gem_prime_handle_to_fd,
--	.prime_fd_to_handle	= drm_gem_prime_fd_to_handle,
--	.gem_prime_import	= drm_gem_prime_import,
--	.gem_prime_export	= drm_gem_prime_export,
--	.gem_prime_get_sg_table	= drm_gem_cma_prime_get_sg_table,
--	.gem_prime_import_sg_table = drm_gem_cma_prime_import_sg_table,
--	.gem_prime_vmap		= drm_gem_cma_prime_vmap,
--	.gem_prime_vunmap	= drm_gem_cma_prime_vunmap,
--	.gem_prime_mmap		= drm_gem_cma_prime_mmap,
-+	DRM_GEM_CMA_DRIVER_OPS,
- 	.fops			= &dcss_cma_fops,
- 	.name			= "imx-dcss",
- 	.desc			= "i.MX8MQ Display Subsystem",
+ 	.prime_handle_to_fd = drm_gem_prime_handle_to_fd,
+ 	.prime_fd_to_handle = drm_gem_prime_fd_to_handle,
+-	.gem_prime_export = tegra_gem_prime_export,
+ 	.gem_prime_import = tegra_gem_prime_import,
+ 
+ 	.dumb_create = tegra_bo_dumb_create,
+diff --git a/drivers/gpu/drm/tegra/gem.c b/drivers/gpu/drm/tegra/gem.c
+index a2bac20ff19d..794ec2456934 100644
+--- a/drivers/gpu/drm/tegra/gem.c
++++ b/drivers/gpu/drm/tegra/gem.c
+@@ -230,6 +230,12 @@ static int tegra_bo_iommu_unmap(struct tegra_drm *tegra, struct tegra_bo *bo)
+ 	return 0;
+ }
+ 
++static const struct drm_gem_object_funcs tegra_gem_object_funcs = {
++	.free = tegra_bo_free_object,
++	.export = tegra_gem_prime_export,
++	.vm_ops = &tegra_bo_vm_ops,
++};
++
+ static struct tegra_bo *tegra_bo_alloc_object(struct drm_device *drm,
+ 					      size_t size)
+ {
+@@ -240,6 +246,8 @@ static struct tegra_bo *tegra_bo_alloc_object(struct drm_device *drm,
+ 	if (!bo)
+ 		return ERR_PTR(-ENOMEM);
+ 
++	bo->gem.funcs = &tegra_gem_object_funcs;
++
+ 	host1x_bo_init(&bo->base, &tegra_bo_ops);
+ 	size = round_up(size, PAGE_SIZE);
+ 
 -- 
 2.28.0
 
