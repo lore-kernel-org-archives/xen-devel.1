@@ -2,72 +2,71 @@ Return-Path: <SRS0=1HVP=DA=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-3.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=no autolearn_force=no version=3.4.0
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 72D7DC2D0A8
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2020 11:28:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B211EC2D0A8
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2020 11:55:51 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 110A420709
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2020 11:28:19 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 4286720657
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2020 11:55:50 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="4cOpusls"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 110A420709
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="DmafwRh+"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4286720657
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kL2wQ-00061i-Pg; Wed, 23 Sep 2020 11:28:06 +0000
+	id 1kL3Mm-0000Fw-3I; Wed, 23 Sep 2020 11:55:20 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=+VqP=DA=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1kL2wP-00061b-FV
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2020 11:28:05 +0000
-X-Inumbo-ID: 1ce36209-2a08-4fa5-a4d3-c1e886a4040e
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=V3kw=DA=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
+ id 1kL3Mk-0000Fb-Cd
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2020 11:55:18 +0000
+X-Inumbo-ID: 085a3b4b-5562-4127-8bbf-162e5a5e6450
 Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 1ce36209-2a08-4fa5-a4d3-c1e886a4040e;
- Wed, 23 Sep 2020 11:28:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
- bh=84P6DnBnTL/yvmIkqEFujF/5rFjWsuCyFMFkcWAVA0g=; b=4cOpuslsGByhFwRNw5r/VwjXbA
- RnXIGjmog9EsF39nepGr6tXNybmFenYe+obgTMThxCu2IzhZIAxPcOWQ1JipKF9IjYkKZHksYrer0
- sPKF8y2Y9h9udsZY/oJ0zGSnB+5Dgt4oKf8ZwcWhpkFj6F6hZRC49xAaSiCKnuGJTaGg=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
+ id 085a3b4b-5562-4127-8bbf-162e5a5e6450;
+ Wed, 23 Sep 2020 11:55:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+ Content-Transfer-Encoding:Content-Type:Message-ID:To;
+ bh=QyIV4PZje7kWOOMWHvPpGpHUDLxsi8rt/9neAl5RumU=; b=DmafwRh+qRSDZoMFeR7C69GjpB
+ ICt+6j7MBceIk8G3Aqb1f2Dwpe6caP4Qi0XwhbB0phWQJ3CO0qsFMk1s0SbldACcjNL6Ceovl+G89
+ KrcrGNPHxdN/jlLI2NTbYZnMFPJPAH7PhqII9JCV/uFixvrSIKnYDce7bW2cbA3Y+GH0=;
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1kL2wJ-0000Dm-On; Wed, 23 Sep 2020 11:27:59 +0000
-Received: from [54.239.6.186] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1kL2wJ-0003uE-Eu; Wed, 23 Sep 2020 11:27:59 +0000
-Subject: Re: [RESEND][PATCH] xen/arm: sched: Ensure the vCPU context is seen
- before vcpu_pause() returns
-To: Bertrand Marquis <Bertrand.Marquis@arm.com>
-Cc: "open list:X86" <xen-devel@lists.xenproject.org>,
- Julien Grall <jgrall@amazon.com>, Stefano Stabellini
- <sstabellini@kernel.org>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>,
- George Dunlap <george.dunlap@citrix.com>, Dario Faggioli <dfaggioli@suse.com>
-References: <20200922193104.20604-1-julien@xen.org>
- <582CD990-4D6B-4B93-BDB5-C16D5F69A9EB@arm.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <87e6546b-8e3c-35cf-0e99-34575107b2ed@xen.org>
-Date: Wed, 23 Sep 2020 12:27:57 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
- Gecko/20100101 Thunderbird/68.12.0
-MIME-Version: 1.0
-In-Reply-To: <582CD990-4D6B-4B93-BDB5-C16D5F69A9EB@arm.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kL3Mb-0000n9-Jv; Wed, 23 Sep 2020 11:55:09 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kL3Mb-0001ee-C7; Wed, 23 Sep 2020 11:55:09 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1kL3Mb-0006sm-Be; Wed, 23 Sep 2020 11:55:09 +0000
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-154637-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [xen-unstable-smoke test] 154637: tolerable all pass - PUSHED
+X-Osstest-Failures: xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+ xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+ xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+ xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+ xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This: xen=5a37207df52066efefe419c677b089a654d37afc
+X-Osstest-Versions-That: xen=2785b2a9e04abc148e1c5259f4faee708ea356f4
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Wed, 23 Sep 2020 11:55:09 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,42 +80,61 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
+flight 154637 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/154637/
+
+Failures :-/ but no regressions.
+
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+
+version targeted for testing:
+ xen                  5a37207df52066efefe419c677b089a654d37afc
+baseline version:
+ xen                  2785b2a9e04abc148e1c5259f4faee708ea356f4
+
+Last test of basis   154615  2020-09-22 14:00:26 Z    0 days
+Testing same since   154637  2020-09-23 09:01:28 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Julien Grall <jgrall@amazon.com>
+  Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+  Stefano Stabellini <sstabellini@kernel.org>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-libvirt                                     pass    
 
 
-On 23/09/2020 12:08, Bertrand Marquis wrote:
-> Hi Julien,
-> 
->> On 22 Sep 2020, at 20:31, Julien Grall <julien@xen.org> wrote:
->>
->> From: Julien Grall <jgrall@amazon.com>
->>
->> Some callers of vcpu_pause() will expect to access the latest vcpu
->> context when the function returns (see XENDOMCTL_{set,get}vcpucontext}.
->>
->> However, the latest vCPU context can only be observed after
->> v->is_running has been observed to be false.
->>
->> As there is no memory barrier instruction generated, a processor could
->> try to speculatively access the vCPU context before it was observed.
-> 
-> The function vcpu_context_saved does contain a memory barrier already.
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
 
-Memory barriers usually work in pair. We have a write barrier in 
-vcpu_context_saved() but no read barrier in the code relying on the 
-v->is_running.
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
 
-> Shouldn’t we make sure instead that any time is_running is modified to
-> false there is a barrier before (which is the case in vcpu_context_saved) ?
-> 
-> I understand the goal here but the barrier seem very far from the modification
-> of is_running.
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
 
-That's not what I am trying to fix (see above). Instead, this patch will 
-ensure that when a pCPU observe v->is_running = false, then it can rely 
-on the context of the vCPU to be valid.
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
 
-Cheers,
 
--- 
-Julien Grall
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/xen.git
+   2785b2a9e0..5a37207df5  5a37207df52066efefe419c677b089a654d37afc -> smoke
 
