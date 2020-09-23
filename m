@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3DD5FC52D1D
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2020 10:22:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2745BC4742F
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2020 10:22:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 064B123119
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2020 10:22:53 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 064B123119
+	by mail.kernel.org (Postfix) with ESMTPS id E567B21BE5
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2020 10:22:45 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E567B21BE5
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kL1vB-0006eP-4t; Wed, 23 Sep 2020 10:22:45 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kL1v3-0006UE-3a; Wed, 23 Sep 2020 10:22:37 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=EYdF=DA=suse.de=tzimmermann@srs-us1.protection.inumbo.net>)
- id 1kL1v9-00064P-Vp
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2020 10:22:44 +0000
-X-Inumbo-ID: d9b863a4-f56b-4b9b-aa7e-08eefd824ba0
+ id 1kL1v1-00064a-Ay
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2020 10:22:35 +0000
+X-Inumbo-ID: b7a06500-7e19-4c67-b5b6-c10ff7f9a80e
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id d9b863a4-f56b-4b9b-aa7e-08eefd824ba0;
- Wed, 23 Sep 2020 10:22:19 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id b7a06500-7e19-4c67-b5b6-c10ff7f9a80e;
+ Wed, 23 Sep 2020 10:22:10 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 1D0B8B281;
- Wed, 23 Sep 2020 10:22:56 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 5800FB27A;
+ Wed, 23 Sep 2020 10:22:46 +0000 (UTC)
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: alexander.deucher@amd.com, christian.koenig@amd.com, airlied@linux.ie,
  daniel@ffwll.ch, linux@armlinux.org.uk, maarten.lankhorst@linux.intel.com,
@@ -68,10 +67,9 @@ Cc: amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
  linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
  xen-devel@lists.xenproject.org, Thomas Zimmermann <tzimmermann@suse.de>,
  Daniel Vetter <daniel.vetter@ffwll.ch>
-Subject: [PATCH v3 18/22] drm/virtgpu: Set PRIME export function in struct
- drm_gem_object_funcs
-Date: Wed, 23 Sep 2020 12:21:55 +0200
-Message-Id: <20200923102159.24084-19-tzimmermann@suse.de>
+Subject: [PATCH v3 08/22] drm/mediatek: Introduce GEM object functions
+Date: Wed, 23 Sep 2020 12:21:45 +0200
+Message-Id: <20200923102159.24084-9-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200923102159.24084-1-tzimmermann@suse.de>
 References: <20200923102159.24084-1-tzimmermann@suse.de>
@@ -91,40 +89,74 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 GEM object functions deprecate several similar callback interfaces in
-struct drm_driver. This patch replaces virtgpu's per-driver PRIME export
-function with a per-object function.
+struct drm_driver. This patch replaces the per-driver callbacks with
+per-instance callbacks in mediatek. The only exception is gem_prime_mmap,
+which is non-trivial to convert.
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
 ---
- drivers/gpu/drm/virtio/virtgpu_drv.c    | 1 -
- drivers/gpu/drm/virtio/virtgpu_object.c | 1 +
- 2 files changed, 1 insertion(+), 1 deletion(-)
+ drivers/gpu/drm/mediatek/mtk_drm_drv.c |  5 -----
+ drivers/gpu/drm/mediatek/mtk_drm_gem.c | 11 +++++++++++
+ 2 files changed, 11 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/gpu/drm/virtio/virtgpu_drv.c b/drivers/gpu/drm/virtio/virtgpu_drv.c
-index b039f493bda9..1f8d6ed11d21 100644
---- a/drivers/gpu/drm/virtio/virtgpu_drv.c
-+++ b/drivers/gpu/drm/virtio/virtgpu_drv.c
-@@ -203,7 +203,6 @@ static struct drm_driver driver = {
+diff --git a/drivers/gpu/drm/mediatek/mtk_drm_drv.c b/drivers/gpu/drm/mediatek/mtk_drm_drv.c
+index 2d982740b1a4..5899859438e0 100644
+--- a/drivers/gpu/drm/mediatek/mtk_drm_drv.c
++++ b/drivers/gpu/drm/mediatek/mtk_drm_drv.c
+@@ -303,18 +303,13 @@ struct drm_gem_object *mtk_drm_gem_prime_import(struct drm_device *dev,
+ static struct drm_driver mtk_drm_driver = {
+ 	.driver_features = DRIVER_MODESET | DRIVER_GEM | DRIVER_ATOMIC,
+ 
+-	.gem_free_object_unlocked = mtk_drm_gem_free_object,
+-	.gem_vm_ops = &drm_gem_cma_vm_ops,
+ 	.dumb_create = mtk_drm_gem_dumb_create,
+ 
  	.prime_handle_to_fd = drm_gem_prime_handle_to_fd,
  	.prime_fd_to_handle = drm_gem_prime_fd_to_handle,
- 	.gem_prime_mmap = drm_gem_prime_mmap,
--	.gem_prime_export = virtgpu_gem_prime_export,
- 	.gem_prime_import = virtgpu_gem_prime_import,
- 	.gem_prime_import_sg_table = virtgpu_gem_prime_import_sg_table,
+ 	.gem_prime_import = mtk_drm_gem_prime_import,
+-	.gem_prime_get_sg_table = mtk_gem_prime_get_sg_table,
+ 	.gem_prime_import_sg_table = mtk_gem_prime_import_sg_table,
+ 	.gem_prime_mmap = mtk_drm_gem_mmap_buf,
+-	.gem_prime_vmap = mtk_drm_gem_prime_vmap,
+-	.gem_prime_vunmap = mtk_drm_gem_prime_vunmap,
+ 	.fops = &mtk_drm_fops,
  
-diff --git a/drivers/gpu/drm/virtio/virtgpu_object.c b/drivers/gpu/drm/virtio/virtgpu_object.c
-index 00d6b95e259d..42560afc3875 100644
---- a/drivers/gpu/drm/virtio/virtgpu_object.c
-+++ b/drivers/gpu/drm/virtio/virtgpu_object.c
-@@ -107,6 +107,7 @@ static const struct drm_gem_object_funcs virtio_gpu_shmem_funcs = {
- 	.close = virtio_gpu_gem_object_close,
+ 	.name = DRIVER_NAME,
+diff --git a/drivers/gpu/drm/mediatek/mtk_drm_gem.c b/drivers/gpu/drm/mediatek/mtk_drm_gem.c
+index 0583e557ad37..cdd1a6e61564 100644
+--- a/drivers/gpu/drm/mediatek/mtk_drm_gem.c
++++ b/drivers/gpu/drm/mediatek/mtk_drm_gem.c
+@@ -8,11 +8,20 @@
+ #include <drm/drm.h>
+ #include <drm/drm_device.h>
+ #include <drm/drm_gem.h>
++#include <drm/drm_gem_cma_helper.h>
+ #include <drm/drm_prime.h>
  
- 	.print_info = drm_gem_shmem_print_info,
-+	.export = virtgpu_gem_prime_export,
- 	.pin = drm_gem_shmem_pin,
- 	.unpin = drm_gem_shmem_unpin,
- 	.get_sg_table = drm_gem_shmem_get_sg_table,
+ #include "mtk_drm_drv.h"
+ #include "mtk_drm_gem.h"
+ 
++static const struct drm_gem_object_funcs mtk_drm_gem_object_funcs = {
++	.free = mtk_drm_gem_free_object,
++	.get_sg_table = mtk_gem_prime_get_sg_table,
++	.vmap = mtk_drm_gem_prime_vmap,
++	.vunmap = mtk_drm_gem_prime_vunmap,
++	.vm_ops = &drm_gem_cma_vm_ops,
++};
++
+ static struct mtk_drm_gem_obj *mtk_drm_gem_init(struct drm_device *dev,
+ 						unsigned long size)
+ {
+@@ -25,6 +34,8 @@ static struct mtk_drm_gem_obj *mtk_drm_gem_init(struct drm_device *dev,
+ 	if (!mtk_gem_obj)
+ 		return ERR_PTR(-ENOMEM);
+ 
++	mtk_gem_obj->base.funcs = &mtk_drm_gem_object_funcs;
++
+ 	ret = drm_gem_object_init(dev, &mtk_gem_obj->base, size);
+ 	if (ret < 0) {
+ 		DRM_ERROR("failed to initialize gem object\n");
 -- 
 2.28.0
 
