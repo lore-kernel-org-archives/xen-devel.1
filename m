@@ -7,31 +7,32 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F18EEC4363D
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2020 06:46:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EE406C2D0A8
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2020 06:46:13 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9DE8820739
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2020 06:46:12 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id A197E20739
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2020 06:46:13 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="OBoT3hUJ"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9DE8820739
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="f/Ph/ufS"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A197E20739
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kKyXF-0001WW-Dk; Wed, 23 Sep 2020 06:45:49 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kKyXF-0001Wc-Lv; Wed, 23 Sep 2020 06:45:49 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=eB7U=DA=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kKyXD-0001WL-Jh
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2020 06:45:47 +0000
-X-Inumbo-ID: 852c345f-ead3-4ce9-8769-8a80c02d9989
+ id 1kKyXE-0001WR-ED
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2020 06:45:48 +0000
+X-Inumbo-ID: 3fb7b2e5-4c87-41cf-ad32-591d896f3405
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 852c345f-ead3-4ce9-8769-8a80c02d9989;
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 3fb7b2e5-4c87-41cf-ad32-591d896f3405;
  Wed, 23 Sep 2020 06:45:46 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
@@ -40,20 +41,20 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=5TjIt/1n9BC1orQoZ0QREW1u8v4OegKFuF7yOySNGxI=;
- b=OBoT3hUJYZP6rvma/pWNEEeGiUEFhhhBMp4xGdkSoPWvnzdjURa7rgxP2eJAMeajPFA3ZG
- DbFhLINda7AWC1cinRvyjWFE8frxBIZ7sJKVlPy0Q9HFF4j9LBzmyhFPlNDOcq2kO0b1Nb
- 9HytrkQUAxFNNqV+x7OWqLfrV4SJD8I=
+ bh=Sv7P9R7t+6Lz9Xw4HtSzYW6xSNj+0ova4G9FBISr/CY=;
+ b=f/Ph/ufSeI5JvN5e1GEKiiWK7l/HtEb3y6bhLFAZ6tl6zSERQTomGwgsTZmNgzUQj0J0gv
+ oi4C6cMVe4ccIWPqiuyddA/HRj9ktVm3FRn/LXOTrmubd6ApNK15FOJV+6OSidhW5udMnw
+ wq2RjPn/pGKvD0T0p7MQsubLBVGHJ7w=
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 8FB4AAEAA;
+ by mx2.suse.de (Postfix) with ESMTP id 6B2A1AE71;
  Wed, 23 Sep 2020 06:46:22 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>, Ian Jackson <iwj@xenproject.org>,
  Wei Liu <wl@xen.org>
-Subject: [PATCH 2/3] tools/init-xenstore-domain: support xenstore pvh stubdom
-Date: Wed, 23 Sep 2020 08:45:40 +0200
-Message-Id: <20200923064541.19546-3-jgross@suse.com>
+Subject: [PATCH 1/3] tools/init-xenstore-domain: add logging
+Date: Wed, 23 Sep 2020 08:45:39 +0200
+Message-Id: <20200923064541.19546-2-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200923064541.19546-1-jgross@suse.com>
 References: <20200923064541.19546-1-jgross@suse.com>
@@ -72,194 +73,153 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Instead of creating the xenstore-stubdom domain first and parsing the
-kernel later do it the other way round. This enables to probe for the
-domain type supported by the xenstore-stubdom and to support both, pv
-and pvh type stubdoms.
-
-Try to parse the stubdom image first for PV support, if this fails use
-HVM. Then create the domain with the appropriate type selected.
+Add a possibility to do logging in init-xenstore-domain: use -v[...]
+for selecting the log-level as in xl, log to stderr.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- tools/helpers/init-xenstore-domain.c | 119 +++++++++++++++++++--------
- 1 file changed, 85 insertions(+), 34 deletions(-)
+ tools/helpers/init-xenstore-domain.c | 51 ++++++++++++++++++++++------
+ 1 file changed, 40 insertions(+), 11 deletions(-)
 
 diff --git a/tools/helpers/init-xenstore-domain.c b/tools/helpers/init-xenstore-domain.c
-index 22c4be6a3f..c174357c0e 100644
+index 5bdb48dc80..22c4be6a3f 100644
 --- a/tools/helpers/init-xenstore-domain.c
 +++ b/tools/helpers/init-xenstore-domain.c
-@@ -18,6 +18,10 @@
- #include "init-dom-json.h"
- #include "_paths.h"
+@@ -10,6 +10,7 @@
+ #include <xenctrl.h>
+ #include <xenctrl_dom.h>
+ #include <xenstore.h>
++#include <xentoollog.h>
+ #include <xen/sys/xenbus_dev.h>
+ #include <xen-xsm/flask/flask.h>
+ #include <xen/io/xenbus.h>
+@@ -36,6 +37,7 @@ static struct option options[] = {
+     { "param", 1, NULL, 'p' },
+     { "name", 1, NULL, 'n' },
+     { "maxmem", 1, NULL, 'M' },
++    { "verbose", 0, NULL, 'v' },
+     { NULL, 0, NULL, 0 }
+ };
  
-+#define LAPIC_BASE_ADDRESS  0xfee00000UL
-+#define MB(x)               ((uint64_t)x << 20)
-+#define GB(x)               ((uint64_t)x << 30)
+@@ -57,7 +59,8 @@ static void usage(void)
+ "  --maxmem <max size>        maximum memory size in the format:\n"
+ "                             <MB val>|<a>/<b>|<MB val>:<a>/<b>\n"
+ "                             (an absolute value in MB, a fraction a/b of\n"
+-"                             the host memory, or the maximum of both)\n");
++"                             the host memory, or the maximum of both)\n"
++"  -v[v[v]]                   verbosity of domain building\n");
+ }
+ 
+ static int build(xc_interface *xch)
+@@ -349,8 +352,10 @@ int main(int argc, char** argv)
+     char buf[16], be_path[64], fe_path[64];
+     int rv, fd;
+     char *maxmem_str = NULL;
++    xentoollog_level minmsglevel = XTL_PROGRESS;
++    xentoollog_logger *logger = NULL;
+ 
+-    while ( (opt = getopt_long(argc, argv, "", options, NULL)) != -1 )
++    while ( (opt = getopt_long(argc, argv, "v", options, NULL)) != -1 )
+     {
+         switch ( opt )
+         {
+@@ -375,6 +380,10 @@ int main(int argc, char** argv)
+         case 'M':
+             maxmem_str = optarg;
+             break;
++        case 'v':
++            if ( minmsglevel )
++                minmsglevel--;
++            break;
+         default:
+             usage();
+             return 2;
+@@ -387,11 +396,15 @@ int main(int argc, char** argv)
+         return 2;
+     }
+ 
+-    xch = xc_interface_open(NULL, NULL, 0);
++    logger = (xentoollog_logger *)xtl_createlogger_stdiostream(stderr,
++                                                               minmsglevel, 0);
 +
- static uint32_t domid = ~0;
- static char *kernel;
- static char *ramdisk;
-@@ -69,6 +73,8 @@ static int build(xc_interface *xch)
-     int rv, xs_fd;
-     struct xc_dom_image *dom = NULL;
-     int limit_kb = (maxmem ? : (memory + 1)) * 1024;
-+    uint64_t mem_size = MB(memory);
-+    struct e820entry e820[3];
-     struct xen_domctl_createdomain config = {
-         .ssidref = SECINITSID_DOMU,
-         .flags = XEN_DOMCTL_CDF_xs_domain,
-@@ -101,6 +107,66 @@ static int build(xc_interface *xch)
++    xch = xc_interface_open(logger, logger, 0);
+     if ( !xch )
+     {
+         fprintf(stderr, "xc_interface_open() failed\n");
+-        return 1;
++        rv = 1;
++        goto out;
+     }
+ 
+     if ( maxmem_str )
+@@ -400,7 +413,8 @@ int main(int argc, char** argv)
+         if ( maxmem < 0 )
+         {
+             xc_interface_close(xch);
+-            return 1;
++            rv = 1;
++            goto out;
          }
      }
  
-+    dom = xc_dom_allocate(xch, NULL, NULL);
-+    if ( !dom )
-+    {
-+        fprintf(stderr, "xc_dom_allocate failed\n");
-+        rv = -1;
-+        goto err;
-+    }
-+
-+    rv = xc_dom_kernel_file(dom, kernel);
-+    if ( rv )
-+    {
-+        fprintf(stderr, "xc_dom_kernel_file failed\n");
-+        goto err;
-+    }
-+
-+    if ( ramdisk )
-+    {
-+        rv = xc_dom_module_file(dom, ramdisk, NULL);
-+        if ( rv )
-+        {
-+            fprintf(stderr, "xc_dom_module_file failed\n");
-+            goto err;
-+        }
-+    }
-+
-+    dom->container_type = XC_DOM_HVM_CONTAINER;
-+    rv = xc_dom_parse_image(dom);
-+    if ( rv )
-+    {
-+        dom->container_type = XC_DOM_PV_CONTAINER;
-+        rv = xc_dom_parse_image(dom);
-+        if ( rv )
-+        {
-+            fprintf(stderr, "xc_dom_parse_image failed\n");
-+            goto err;
-+        }
-+    }
-+    else
-+    {
-+        config.flags |= XEN_DOMCTL_CDF_hvm | XEN_DOMCTL_CDF_hap;
-+        config.arch.emulation_flags = XEN_X86_EMU_LAPIC;
-+        dom->target_pages = mem_size >> XC_PAGE_SHIFT;
-+        dom->mmio_size = GB(4) - LAPIC_BASE_ADDRESS;
-+        dom->lowmem_end = (mem_size > LAPIC_BASE_ADDRESS) ?
-+                          LAPIC_BASE_ADDRESS : mem_size;
-+        dom->highmem_end = (mem_size > LAPIC_BASE_ADDRESS) ?
-+                           GB(4) + mem_size - LAPIC_BASE_ADDRESS : 0;
-+        dom->mmio_start = LAPIC_BASE_ADDRESS;
-+        dom->max_vcpus = 1;
-+        e820[0].addr = 0;
-+        e820[0].size = dom->lowmem_end;
-+        e820[0].type = E820_RAM;
-+        e820[1].addr = LAPIC_BASE_ADDRESS;
-+        e820[1].size = dom->mmio_size;
-+        e820[1].type = E820_RESERVED;
-+        e820[2].addr = GB(4);
-+        e820[2].size = dom->highmem_end - GB(4);
-+        e820[2].type = E820_RAM;
-+    }
-+
-     rv = xc_domain_create(xch, &domid, &config);
+@@ -414,17 +428,24 @@ int main(int argc, char** argv)
+     xc_interface_close(xch);
+ 
      if ( rv )
+-        return 1;
++    {
++        rv = 1;
++        goto out;
++    }
+ 
+     rv = gen_stub_json_config(domid, NULL);
+     if ( rv )
+-        return 3;
++    {
++        rv = 3;
++        goto out;
++    }
+ 
+     xsh = xs_open(0);
+     if ( !xsh )
      {
-@@ -125,11 +191,15 @@ static int build(xc_interface *xch)
-         fprintf(stderr, "xc_evtchn_alloc_unbound failed\n");
-         goto err;
+         fprintf(stderr, "xs_open() failed.\n");
+-        return 3;
++        rv = 3;
++        goto out;
      }
--    rv = xc_domain_set_memmap_limit(xch, domid, limit_kb);
--    if ( rv )
-+
-+    if ( dom->container_type == XC_DOM_PV_CONTAINER )
+     snprintf(buf, 16, "%d", domid);
+     do_xs_write(xsh, "/tool/xenstored/domid", buf);
+@@ -460,7 +481,8 @@ int main(int argc, char** argv)
+     if ( fd < 0 )
      {
--        fprintf(stderr, "xc_domain_set_memmap_limit failed\n");
--        goto err;
-+        rv = xc_domain_set_memmap_limit(xch, domid, limit_kb);
-+        if ( rv )
-+        {
-+            fprintf(stderr, "xc_domain_set_memmap_limit failed\n");
-+            goto err;
-+        }
+         fprintf(stderr, "Creating " XEN_RUN_DIR "/xenstored.pid failed\n");
+-        return 3;
++        rv = 3;
++        goto out;
+     }
+     rv = snprintf(buf, 16, "domid:%d\n", domid);
+     rv = write(fd, buf, rv);
+@@ -469,10 +491,17 @@ int main(int argc, char** argv)
+     {
+         fprintf(stderr,
+                 "Writing domid to " XEN_RUN_DIR "/xenstored.pid failed\n");
+-        return 3;
++        rv = 3;
++        goto out;
      }
  
-     rv = ioctl(xs_fd, IOCTL_XENBUS_BACKEND_SETUP, domid);
-@@ -144,45 +214,16 @@ static int build(xc_interface *xch)
-     else
-         snprintf(cmdline, 512, "--event %d --internal-db", rv);
+-    return 0;
++    rv = 0;
++
++ out:
++    if ( logger )
++        xtl_logger_destroy(logger);
++
++    return rv;
+ }
  
--    dom = xc_dom_allocate(xch, cmdline, NULL);
--    if ( !dom )
--    {
--        fprintf(stderr, "xc_dom_allocate failed\n");
--        goto err;
--    }
--    dom->container_type = XC_DOM_PV_CONTAINER;
-+    dom->cmdline = xc_dom_strdup(dom, cmdline);
-     dom->xenstore_domid = domid;
-     dom->console_evtchn = console_evtchn;
- 
--    rv = xc_dom_kernel_file(dom, kernel);
--    if ( rv )
--    {
--        fprintf(stderr, "xc_dom_kernel_file failed\n");
--        goto err;
--    }
--
--    if ( ramdisk )
--    {
--        rv = xc_dom_module_file(dom, ramdisk, NULL);
--        if ( rv )
--        {
--            fprintf(stderr, "xc_dom_module_file failed\n");
--            goto err;
--        }
--    }
--
-     rv = xc_dom_boot_xen_init(dom, xch, domid);
-     if ( rv )
-     {
-         fprintf(stderr, "xc_dom_boot_xen_init failed\n");
-         goto err;
-     }
--    rv = xc_dom_parse_image(dom);
--    if ( rv )
--    {
--        fprintf(stderr, "xc_dom_parse_image failed\n");
--        goto err;
--    }
-     rv = xc_dom_mem_init(dom, memory);
-     if ( rv )
-     {
-@@ -195,6 +236,16 @@ static int build(xc_interface *xch)
-         fprintf(stderr, "xc_dom_boot_mem_init failed\n");
-         goto err;
-     }
-+    if ( dom->container_type == XC_DOM_HVM_CONTAINER )
-+    {
-+        rv = xc_domain_set_memory_map(xch, domid, e820,
-+                                      dom->highmem_end ? 3 : 2);
-+        if ( rv )
-+        {
-+            fprintf(stderr, "xc_domain_set_memory_map failed\n");
-+            goto err;
-+        }
-+    }
-     rv = xc_dom_build_image(dom);
-     if ( rv )
-     {
+ /*
 -- 
 2.26.2
 
