@@ -2,72 +2,76 @@ Return-Path: <SRS0=1HVP=DA=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E990EC2D0A8
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2020 10:19:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 29570C47436
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2020 10:22:16 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8E22A2076E
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2020 10:19:45 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="I7ulGumk"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8E22A2076E
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id C2E2B214D8
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2020 10:22:15 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C2E2B214D8
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kL1s8-00050E-3v; Wed, 23 Sep 2020 10:19:36 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kL1uW-00064U-Ju; Wed, 23 Sep 2020 10:22:04 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=wqyB=DA=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1kL1s6-0004wt-Dx
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2020 10:19:34 +0000
-X-Inumbo-ID: f677a8e7-772b-4209-b329-3e3c40dc6464
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id f677a8e7-772b-4209-b329-3e3c40dc6464;
- Wed, 23 Sep 2020 10:19:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1600856368;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=vdI1EYuMaKnA952RMddPTxjBODH98bz5GhMt6TL0KDY=;
- b=I7ulGumk6LGy42y2JdrM6PTOK8VOykk9Z6Ha/E/jpSY7clIlruULYkIn
- JUNakWL7CkLH5sCXpK+cXNgHpkSOkyy9hQhcRlLWY1TgRK2TUGZ0VsWFb
- dxMWXOSGabV55FPw7yVEZ1Q3b1XvRB/38FSpb5eebU3z17TCUdVeNnvBE 8=;
-Authentication-Results: esa6.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: wpBcSvwNPMQOulGJLpOkI4AUEjhdW7DuR24mdmPY5AfrI+jpmnGnDK07/X+FqNkpY8sjmzI44+
- EmhbEyh6zezcj5wmgMCsZ5eJ9vM2BQnF/rIc8QB8NQYWiHkgQqY5lu1PhZ8RzJ/3uk96hWxEOO
- M8167bLM3iSrHd02OSmvQSeTdOEDvZVL1pR88gSHX/Jueh4tFaHYZM0PEt7XT57c79DYvIddTD
- y+zeDxZXyMvJTvY/gQdsVePTcc2EU0bozVA8Tjo6en37SKxaG8/vXpRUcdFhvL6zmiVv8Aapag
- H6E=
-X-SBRS: 2.7
-X-MesageID: 27642194
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.77,293,1596513600"; d="scan'208";a="27642194"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
- <JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
- <roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Andy Lutomirski
- <luto@kernel.org>, Manuel Bouyer <bouyer@antioche.eu.org>
-Subject: [PATCH 3/3] x86/pv: Inject #UD for missing SYSCALL callbacks
-Date: Wed, 23 Sep 2020 11:18:48 +0100
-Message-ID: <20200923101848.29049-4-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20200923101848.29049-1-andrew.cooper3@citrix.com>
-References: <20200923101848.29049-1-andrew.cooper3@citrix.com>
+ <SRS0=EYdF=DA=suse.de=tzimmermann@srs-us1.protection.inumbo.net>)
+ id 1kL1uW-00064P-3Z
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2020 10:22:04 +0000
+X-Inumbo-ID: 7a7b293a-fb35-425a-910b-7c8cda891fad
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 7a7b293a-fb35-425a-910b-7c8cda891fad;
+ Wed, 23 Sep 2020 10:22:03 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 67929B009;
+ Wed, 23 Sep 2020 10:22:39 +0000 (UTC)
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: alexander.deucher@amd.com, christian.koenig@amd.com, airlied@linux.ie,
+ daniel@ffwll.ch, linux@armlinux.org.uk, maarten.lankhorst@linux.intel.com,
+ mripard@kernel.org, l.stach@pengutronix.de, christian.gmeiner@gmail.com,
+ inki.dae@samsung.com, jy0922.shim@samsung.com, sw0312.kim@samsung.com,
+ kyungmin.park@samsung.com, kgene@kernel.org, krzk@kernel.org,
+ patrik.r.jakobsson@gmail.com, jani.nikula@linux.intel.com,
+ joonas.lahtinen@linux.intel.com, rodrigo.vivi@intel.com,
+ chunkuang.hu@kernel.org, p.zabel@pengutronix.de, matthias.bgg@gmail.com,
+ robdclark@gmail.com, sean@poorly.run, bskeggs@redhat.com,
+ tomi.valkeinen@ti.com, eric@anholt.net, hjc@rock-chips.com,
+ heiko@sntech.de, thierry.reding@gmail.com, jonathanh@nvidia.com,
+ rodrigosiqueiramelo@gmail.com, hamohammed.sa@gmail.com,
+ oleksandr_andrushchenko@epam.com, hyun.kwon@xilinx.com,
+ laurent.pinchart@ideasonboard.com, michal.simek@xilinx.com,
+ sumit.semwal@linaro.org, evan.quan@amd.com, Hawking.Zhang@amd.com,
+ tianci.yin@amd.com, marek.olsak@amd.com, hdegoede@redhat.com,
+ andrey.grodzovsky@amd.com, Felix.Kuehling@amd.com, xinhui.pan@amd.com,
+ aaron.liu@amd.com, nirmoy.das@amd.com, chris@chris-wilson.co.uk,
+ matthew.auld@intel.com, tvrtko.ursulin@linux.intel.com,
+ andi.shyti@intel.com, sam@ravnborg.org, miaoqinglang@huawei.com,
+ emil.velikov@collabora.com, laurentiu.palcu@oss.nxp.com,
+ shawnguo@kernel.org, s.hauer@pengutronix.de, kernel@pengutronix.de,
+ festevam@gmail.com, linux-imx@nxp.com
+Cc: amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ etnaviv@lists.freedesktop.org, linux-arm-kernel@lists.infradead.org,
+ linux-samsung-soc@vger.kernel.org, intel-gfx@lists.freedesktop.org,
+ linux-mediatek@lists.infradead.org, linux-arm-msm@vger.kernel.org,
+ freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
+ xen-devel@lists.xenproject.org, Thomas Zimmermann <tzimmermann@suse.de>
+Subject: [PATCH v3 00/22] Convert all remaining drivers to GEM object functions
+Date: Wed, 23 Sep 2020 12:21:37 +0200
+Message-Id: <20200923102159.24084-1-tzimmermann@suse.de>
+X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -82,113 +86,135 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Despite appearing to be a deliberate design choice of early PV64, the
-resulting behaviour for unregistered SYSCALL callbacks creates an untenable
-testability problem for Xen.  Furthermore, the behaviour is undocumented,
-bizarre, and inconsistent with related behaviour in Xen, and very liable
-introduce a security vulnerability into a PV guest if the author hasn't
-studied Xen's assembly code in detail.
+The GEM and PRIME related callbacks in struct drm_driver are deprecated in
+favor of GEM object functions in struct drm_gem_object_funcs. This patchset
+converts the remaining drivers to object functions and removes most of the
+obsolete interfaces.
 
-There are two different bugs here.
+Version 3 of this patchset mostly fixes drm_gem_prime_handle_to_fd and
+updates i.MX's dcss driver. The driver was missing from earlier versions
+and still needs review.
 
-1) The current logic confuses the registered entrypoints, and may deliver a
-   SYSCALL from 32bit userspace to the 64bit entry, when only a 64bit
-   entrypoint is registered.
+Patches #1 to #6, #8 to #17 and #19 to #20 convert DRM drivers to GEM object
+functions, one by one. Each patch moves existing callbacks from struct
+drm_driver to an instance of struct drm_gem_object_funcs, and sets these
+funcs when the GEM object is initialized. The expection is .gem_prime_mmap.
+There are different ways of how drivers implement the callback, and moving
+it to GEM object functions requires a closer review for each.
 
-   This has been the case ever since 2007 (c/s cd75d47348b) but up until
-   2018 (c/s dba899de14) the wrong selectors would be handed to the guest for
-   a 32bit SYSCALL entry, making it appear as if it a 64bit entry all along.
+Patch #18 fixes virtgpu to use GEM object functions where possible. The
+driver recently introduced a function for one of the deprecated callbacks.
 
-   Xen would malfunction under these circumstances, if it were a PV guest.
-   Linux would as well, but PVOps has always registered both entrypoints and
-   discarded the Xen-provided selectors.  NetBSD really does malfunction as a
-   consequence (benignly now, but a VM DoS before the 2018 Xen selector fix).
+Patches #7 and #20 convert i.MX's dcss and xlnx to CMA helper macros. There's
+no apparent reason why the drivers do the GEM setup on their's own. Using CMA
+helper macros adds GEM object functions implicitly.
 
-2) In the case that neither SYSCALL callbacks are registered, the guest will
-   be crashed when userspace executes a SYSCALL instruction, which is a
-   userspace => kernel DoS.
+With most of the GEM and PRIME moved to GEM object functions, related code
+in struct drm_driver and in the DRM core/helpers is being removed by patch
+#22.
 
-   This has been the case ever since the introduction of 64bit PV support, but
-   behaves unlike all other SYSCALL/SYSENTER callbacks in Xen, which yield
-   #GP/#UD in userspace before the callback is registered, and are therefore
-   safe by default.
+Further testing is welcome. I tested the drivers for which I have HW
+available. These are gma500, i915, nouveau, radeon and vc4. The console,
+Weston and Xorg apparently work with the patches applied.
 
-This change does constitute a change in the PV ABI, for corner cases of a PV
-guest kernel registering neither callback, or not registering the 32bit
-callback when running on AMD/Hygon hardware.
+v3:
+	* restore default call to drm_gem_prime_export() in
+	  drm_gem_prime_handle_to_fd()
+	* return -ENOSYS if get_sg_table is not set
+	* drop all checks for obj->funcs
+	* clean up TODO list and documentation
+v2:
+	* moved code in amdgpu and radeon
+	* made several functions static in various drivers
+	* updated TODO-list item
+	* fix virtgpu
 
-It brings the behaviour in line with PV32 SYSCALL/SYSENTER, and PV64
-SYSENTER (safe by default, until explicitly enabled), as well as native
-hardware (always delivered to the single applicable callback).
+Thomas Zimmermann (22):
+  drm/amdgpu: Introduce GEM object functions
+  drm/armada: Introduce GEM object functions
+  drm/etnaviv: Introduce GEM object functions
+  drm/exynos: Introduce GEM object functions
+  drm/gma500: Introduce GEM object functions
+  drm/i915: Introduce GEM object functions
+  drm/imx/dcss: Initialize DRM driver instance with CMA helper macro
+  drm/mediatek: Introduce GEM object functions
+  drm/msm: Introduce GEM object funcs
+  drm/nouveau: Introduce GEM object functions
+  drm/omapdrm: Introduce GEM object functions
+  drm/pl111: Introduce GEM object functions
+  drm/radeon: Introduce GEM object functions
+  drm/rockchip: Convert to drm_gem_object_funcs
+  drm/tegra: Introduce GEM object functions
+  drm/vc4: Introduce GEM object functions
+  drm/vgem: Introduce GEM object functions
+  drm/virtgpu: Set PRIME export function in struct drm_gem_object_funcs
+  drm/vkms: Introduce GEM object functions
+  drm/xen: Introduce GEM object functions
+  drm/xlnx: Initialize DRM driver instance with CMA helper macro
+  drm: Remove obsolete GEM and PRIME callbacks from struct drm_driver
 
-Most importantly however, and the primary reason for the change, is that it
-lets us actually test the PV entrypoints to prove correct behaviour.
+ Documentation/gpu/drm-mm.rst                  |  4 +-
+ Documentation/gpu/todo.rst                    |  9 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c       |  6 --
+ drivers/gpu/drm/amd/amdgpu/amdgpu_gem.c       | 23 +++--
+ drivers/gpu/drm/amd/amdgpu/amdgpu_gem.h       |  5 --
+ drivers/gpu/drm/armada/armada_drv.c           |  3 -
+ drivers/gpu/drm/armada/armada_gem.c           | 12 ++-
+ drivers/gpu/drm/armada/armada_gem.h           |  2 -
+ drivers/gpu/drm/drm_gem.c                     | 53 ++++--------
+ drivers/gpu/drm/drm_gem_cma_helper.c          |  8 +-
+ drivers/gpu/drm/drm_prime.c                   | 14 +--
+ drivers/gpu/drm/etnaviv/etnaviv_drv.c         | 13 ---
+ drivers/gpu/drm/etnaviv/etnaviv_drv.h         |  1 -
+ drivers/gpu/drm/etnaviv/etnaviv_gem.c         | 19 ++++-
+ drivers/gpu/drm/exynos/exynos_drm_drv.c       | 10 ---
+ drivers/gpu/drm/exynos/exynos_drm_gem.c       | 15 ++++
+ drivers/gpu/drm/gma500/framebuffer.c          |  2 +
+ drivers/gpu/drm/gma500/gem.c                  | 18 +++-
+ drivers/gpu/drm/gma500/gem.h                  |  3 +
+ drivers/gpu/drm/gma500/psb_drv.c              |  9 --
+ drivers/gpu/drm/gma500/psb_drv.h              |  2 -
+ drivers/gpu/drm/i915/gem/i915_gem_object.c    | 21 ++++-
+ drivers/gpu/drm/i915/gem/i915_gem_object.h    |  3 -
+ drivers/gpu/drm/i915/i915_drv.c               |  4 -
+ .../gpu/drm/i915/selftests/mock_gem_device.c  |  3 -
+ drivers/gpu/drm/imx/dcss/dcss-kms.c           | 14 +--
+ drivers/gpu/drm/mediatek/mtk_drm_drv.c        |  5 --
+ drivers/gpu/drm/mediatek/mtk_drm_gem.c        | 11 +++
+ drivers/gpu/drm/msm/msm_drv.c                 | 13 ---
+ drivers/gpu/drm/msm/msm_drv.h                 |  1 -
+ drivers/gpu/drm/msm/msm_gem.c                 | 19 ++++-
+ drivers/gpu/drm/nouveau/nouveau_drm.c         |  9 --
+ drivers/gpu/drm/nouveau/nouveau_gem.c         | 13 +++
+ drivers/gpu/drm/nouveau/nouveau_gem.h         |  2 +
+ drivers/gpu/drm/nouveau/nouveau_prime.c       |  2 +
+ drivers/gpu/drm/omapdrm/omap_drv.c            |  9 --
+ drivers/gpu/drm/omapdrm/omap_gem.c            | 18 +++-
+ drivers/gpu/drm/omapdrm/omap_gem.h            |  2 -
+ drivers/gpu/drm/pl111/pl111_drv.c             |  5 +-
+ drivers/gpu/drm/radeon/radeon_drv.c           | 23 +----
+ drivers/gpu/drm/radeon/radeon_gem.c           | 31 ++++++-
+ drivers/gpu/drm/rockchip/rockchip_drm_drv.c   |  5 --
+ drivers/gpu/drm/rockchip/rockchip_drm_gem.c   | 12 ++-
+ drivers/gpu/drm/tegra/drm.c                   |  4 -
+ drivers/gpu/drm/tegra/gem.c                   |  8 ++
+ drivers/gpu/drm/vc4/vc4_bo.c                  | 21 ++++-
+ drivers/gpu/drm/vc4/vc4_drv.c                 | 12 ---
+ drivers/gpu/drm/vc4/vc4_drv.h                 |  1 -
+ drivers/gpu/drm/vgem/vgem_drv.c               | 21 +++--
+ drivers/gpu/drm/virtio/virtgpu_drv.c          |  1 -
+ drivers/gpu/drm/virtio/virtgpu_object.c       |  1 +
+ drivers/gpu/drm/vkms/vkms_drv.c               |  8 --
+ drivers/gpu/drm/vkms/vkms_gem.c               | 13 +++
+ drivers/gpu/drm/xen/xen_drm_front.c           | 44 ++++------
+ drivers/gpu/drm/xen/xen_drm_front.h           |  2 +
+ drivers/gpu/drm/xen/xen_drm_front_gem.c       | 15 ++++
+ drivers/gpu/drm/xlnx/zynqmp_dpsub.c           | 14 +--
+ include/drm/drm_drv.h                         | 85 +------------------
+ include/drm/drm_gem.h                         |  2 +-
+ 59 files changed, 333 insertions(+), 375 deletions(-)
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Wei Liu <wl@xen.org>
-CC: Andy Lutomirski <luto@kernel.org>
-CC: Manuel Bouyer <bouyer@antioche.eu.org>
-
-Manuel: This will result in a corner case change for NetBSD.
-
-At the moment on native, 32bit userspace on 64bit NetBSD will get #UD (Intel,
-etc), or an explicit -ENOSYS (AMD, etc) when trying to execute a 32bit SYSCALL
-instruction.
-
-After this change, a 64bit PV VM will consistently see #UD (like on Intel, etc
-hardware) even when running on AMD/Hygon hardware (as Xsyscall32 isn't
-registered with Xen), rather than following Xsyscall into the proper system
-call path.
----
- xen/arch/x86/x86_64/entry.S | 26 +++++++++++++++++++-------
- 1 file changed, 19 insertions(+), 7 deletions(-)
-
-diff --git a/xen/arch/x86/x86_64/entry.S b/xen/arch/x86/x86_64/entry.S
-index 000eb9722b..baab6d8755 100644
---- a/xen/arch/x86/x86_64/entry.S
-+++ b/xen/arch/x86/x86_64/entry.S
-@@ -26,18 +26,30 @@
- /* %rbx: struct vcpu */
- ENTRY(switch_to_kernel)
-         leaq  VCPU_trap_bounce(%rbx),%rdx
--        /* TB_eip = (32-bit syscall && syscall32_addr) ?
--         *          syscall32_addr : syscall_addr */
--        xor   %eax,%eax
-+
-+        /* TB_eip = 32-bit syscall ? syscall32_addr : syscall_addr */
-+        mov   VCPU_syscall32_addr(%rbx), %ecx
-+        mov   VCPU_syscall_addr(%rbx), %rax
-         cmpw  $FLAT_USER_CS32,UREGS_cs(%rsp)
--        cmoveq VCPU_syscall32_addr(%rbx),%rax
--        testq %rax,%rax
--        cmovzq VCPU_syscall_addr(%rbx),%rax
--        movq  %rax,TRAPBOUNCE_eip(%rdx)
-+        cmove %rcx, %rax
-+
-         /* TB_flags = VGCF_syscall_disables_events ? TBF_INTERRUPT : 0 */
-         btl   $_VGCF_syscall_disables_events,VCPU_guest_context_flags(%rbx)
-         setc  %cl
-         leal  (,%rcx,TBF_INTERRUPT),%ecx
-+
-+        test  %rax, %rax
-+UNLIKELY_START(z, syscall_no_callback) /* TB_eip == 0 => #UD */
-+        movq  VCPU_trap_ctxt(%rbx), %rdi
-+        movl  $X86_EXC_UD, UREGS_entry_vector(%rsp)
-+        subl  $2, UREGS_rip(%rsp)
-+        movl  X86_EXC_UD * TRAPINFO_sizeof + TRAPINFO_eip(%rdi), %eax
-+        testb $4, X86_EXC_UD * TRAPINFO_sizeof + TRAPINFO_flags(%rdi)
-+        setnz %cl
-+        leal  TBF_EXCEPTION(, %rcx, TBF_INTERRUPT), %ecx
-+UNLIKELY_END(syscall_no_callback)
-+
-+        movq  %rax,TRAPBOUNCE_eip(%rdx)
-         movb  %cl,TRAPBOUNCE_flags(%rdx)
-         call  create_bounce_frame
-         andl  $~X86_EFLAGS_DF,UREGS_eflags(%rsp)
--- 
-2.11.0
+--
+2.28.0
 
 
