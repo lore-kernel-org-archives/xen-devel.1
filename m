@@ -5,47 +5,47 @@ X-Spam-Level:
 X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AA562C47420
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Sep 2020 14:00:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1B1F7C47426
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Sep 2020 14:00:12 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 48F3820888
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Sep 2020 14:00:06 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id A80F020888
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Sep 2020 14:00:11 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="Wle5rrsf"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 48F3820888
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="N/ootiBc"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A80F020888
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kLRmv-00019I-35; Thu, 24 Sep 2020 13:59:57 +0000
+	id 1kLRmz-0001Ch-DY; Thu, 24 Sep 2020 14:00:01 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=dG6m=DB=casper.srs.infradead.org=batv+004c9619e75dbad284dd+6241+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1kLRmt-0000ri-8N
- for xen-devel@lists.xenproject.org; Thu, 24 Sep 2020 13:59:55 +0000
-X-Inumbo-ID: 2c97aa37-525c-4eaa-af7a-f370d46b0ea8
+ id 1kLRmy-0000ri-7w
+ for xen-devel@lists.xenproject.org; Thu, 24 Sep 2020 14:00:00 +0000
+X-Inumbo-ID: edad671c-afb5-4c2b-ae8c-b3f1c8c1088e
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 2c97aa37-525c-4eaa-af7a-f370d46b0ea8;
- Thu, 24 Sep 2020 13:59:18 +0000 (UTC)
+ id edad671c-afb5-4c2b-ae8c-b3f1c8c1088e;
+ Thu, 24 Sep 2020 13:59:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description;
- bh=DoQjzQarxloGAmnDI67QP4f0cjzIHBlULRPmusZkYFE=; b=Wle5rrsf+RqFWFUJjUE1hZ+CeZ
- gESFPu3GnpG43g18SN2z5c30lwsCJXPouUI2dOzKKGTOY4iO72QA54PRkRtRNYAMtAhUoVaGNfsAP
- qEUVsmaPq/JprzOd6dGTNyNyIxR4W5PWejpsei3Uuj82SsW7ET4sYAkFsZRjQBtBqwe799KZw1aha
- 7G8PNMRi5V1UH0TNGLwrymdthFBu3HqxsMm8Zxzzs3gza4c11P8o1Ap8kM1EVo++DvMZuKLMq1nmo
- qmJyACVq9ezddAPwb2l/W3GltjZj6sQO1OLZ+iYp/9MgqLxWTTwQx2QmH7Zz8VpZ03Hnv8BGJbsEx
- kQU0B9/Q==;
+ bh=ggovDsPrY2tPPXwEEhp2BvATO0PndCnAzmG0yva7UFo=; b=N/ootiBcR4K2DEtljvLh9Zsz8j
+ DbEFzcIOE0vb5/auxrmD/v7F1fPZyK6x8XevpU2p1+DxFR61Kz4n2BdQhY7PcvEd65yA1YqQ3sAyF
+ pTSgUibK1yPWO1iTqxeBk7th83prf+n0mxbb2hfZMlUdC5/JxXS5ILsH5bRp4j7IOJTV5juCRiNe+
+ wYfsnKqRVMCpAGLavfKGjMYbjftaTIPNfi4cWkqZxIlCFu2SUsHUM8AwGBdjeX/LOliursV56AQzK
+ 2dc+y3VruLMxjnINrAWE9AoEhuzEFO5GRCpDD4ruqfyghrFro3F3Kt6tI6tk5tHePRHDdu3Yi/XUZ
+ /MIWNu0w==;
 Received: from p4fdb0c34.dip0.t-ipconnect.de ([79.219.12.52] helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kLRm7-0003xB-62; Thu, 24 Sep 2020 13:59:07 +0000
+ id 1kLRlz-0003vR-Sq; Thu, 24 Sep 2020 13:59:01 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Andrew Morton <akpm@linux-foundation.org>
 Cc: Peter Zijlstra <peterz@infradead.org>,
@@ -62,9 +62,9 @@ Cc: Peter Zijlstra <peterz@infradead.org>,
  x86@kernel.org, xen-devel@lists.xenproject.org,
  linux-kernel@vger.kernel.org, intel-gfx@lists.freedesktop.org,
  dri-devel@lists.freedesktop.org, linux-mm@kvack.org
-Subject: [PATCH 10/11] x86/xen: open code alloc_vm_area in arch_gnttab_valloc
-Date: Thu, 24 Sep 2020 15:58:52 +0200
-Message-Id: <20200924135853.875294-11-hch@lst.de>
+Subject: [PATCH 05/11] zsmalloc: switch from alloc_vm_area to get_vm_area
+Date: Thu, 24 Sep 2020 15:58:47 +0200
+Message-Id: <20200924135853.875294-6-hch@lst.de>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200924135853.875294-1-hch@lst.de>
 References: <20200924135853.875294-1-hch@lst.de>
@@ -85,66 +85,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Replace the last call to alloc_vm_area with an open coded version using
-an iterator in struct gnttab_vm_area instead of the triple indirection
-magic in alloc_vm_area.
+Just manually pre-fault the PTEs using apply_to_page_range.
 
+Co-developed-by: Minchan Kim <minchan@kernel.org>
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- arch/x86/xen/grant-table.c | 27 ++++++++++++++++++++-------
- 1 file changed, 20 insertions(+), 7 deletions(-)
+ mm/zsmalloc.c | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
 
-diff --git a/arch/x86/xen/grant-table.c b/arch/x86/xen/grant-table.c
-index 4988e19598c8a5..1e681bf62561a0 100644
---- a/arch/x86/xen/grant-table.c
-+++ b/arch/x86/xen/grant-table.c
-@@ -25,6 +25,7 @@
- static struct gnttab_vm_area {
- 	struct vm_struct *area;
- 	pte_t **ptes;
-+	int idx;
- } gnttab_shared_vm_area, gnttab_status_vm_area;
- 
- int arch_gnttab_map_shared(unsigned long *frames, unsigned long nr_gframes,
-@@ -90,19 +91,31 @@ void arch_gnttab_unmap(void *shared, unsigned long nr_gframes)
- 	}
- }
- 
-+static int gnttab_apply(pte_t *pte, unsigned long addr, void *data)
-+{
-+	struct gnttab_vm_area *area = data;
-+
-+	area->ptes[area->idx++] = pte;
-+	return 0;
-+}
-+
- static int arch_gnttab_valloc(struct gnttab_vm_area *area, unsigned nr_frames)
- {
- 	area->ptes = kmalloc_array(nr_frames, sizeof(*area->ptes), GFP_KERNEL);
- 	if (area->ptes == NULL)
+diff --git a/mm/zsmalloc.c b/mm/zsmalloc.c
+index c36fdff9a37131..918c7b019b3d78 100644
+--- a/mm/zsmalloc.c
++++ b/mm/zsmalloc.c
+@@ -1122,10 +1122,16 @@ static inline int __zs_cpu_up(struct mapping_area *area)
+ 	 */
+ 	if (area->vm)
+ 		return 0;
+-	area->vm = alloc_vm_area(PAGE_SIZE * 2, NULL);
++	area->vm = get_vm_area(PAGE_SIZE * 2, 0);
+ 	if (!area->vm)
  		return -ENOMEM;
--
--	area->area = alloc_vm_area(PAGE_SIZE * nr_frames, area->ptes);
--	if (area->area == NULL) {
--		kfree(area->ptes);
--		return -ENOMEM;
--	}
--
-+	area->area = get_vm_area(PAGE_SIZE * nr_frames, VM_IOREMAP);
-+	if (!area->area)
-+		goto out_free_ptes;
-+	if (apply_to_page_range(&init_mm, (unsigned long)area->area->addr,
-+			PAGE_SIZE * nr_frames, gnttab_apply, area))
-+		goto out_free_vm_area;
- 	return 0;
-+out_free_vm_area:
-+	free_vm_area(area->area);
-+out_free_ptes:
-+	kfree(area->ptes);
-+	return -ENOMEM;
+-	return 0;
++
++	/*
++	 * Populate ptes in advance to avoid pte allocation with GFP_KERNEL
++	 * in non-preemtible context of zs_map_object.
++	 */
++	return apply_to_page_range(&init_mm, (unsigned long)area->vm->addr,
++			PAGE_SIZE * 2, NULL, NULL);
  }
  
- static void arch_gnttab_vfree(struct gnttab_vm_area *area)
+ static inline void __zs_cpu_down(struct mapping_area *area)
 -- 
 2.28.0
 
