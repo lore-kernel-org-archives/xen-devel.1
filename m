@@ -2,136 +2,96 @@ Return-Path: <SRS0=okQV=DB=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.5 required=3.0 tests=BAYES_00,DKIM_ADSP_CUSTOM_MED,
+	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 656C5C4363D
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Sep 2020 09:55:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7F36DC4727D
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Sep 2020 10:07:05 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E1AEA23977
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Sep 2020 09:55:25 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 04D9B2396E
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Sep 2020 10:07:04 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="alm8w9eK"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E1AEA23977
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="kmWNkzaq"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 04D9B2396E
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kLNy6-0001Md-UO; Thu, 24 Sep 2020 09:55:14 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=IXt2=DB=redhat.com=david@srs-us1.protection.inumbo.net>)
- id 1kLNy5-0001MY-MV
- for xen-devel@lists.xenproject.org; Thu, 24 Sep 2020 09:55:14 +0000
-X-Inumbo-ID: 3f2902b1-852e-4698-afe0-6f323c0616ee
-Received: from us-smtp-delivery-124.mimecast.com (unknown [63.128.21.124])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id 3f2902b1-852e-4698-afe0-6f323c0616ee;
- Thu, 24 Sep 2020 09:55:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1600941312;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=sGemXayVVcKI7k7rUXtOEXM3ho8iy5RAT6KxodnngbM=;
- b=alm8w9eKhjFuFLV7m3Kc/Hgonw+hRAPZpHdyM1H5Fv37cwdd1MGgPYnN4MuGLGl+PW07Nt
- PT7NblgCWBVeApdDdrgppnDRYeA3OZ/M6nMbZPlCtruLsIBrFvCboExevr2CwdAMVGGhAN
- s0huR5EERJPqjOy3L/M0/Osr47huj9Y=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-390-i46fx_QgM_GO3Wvk61L0Aw-1; Thu, 24 Sep 2020 05:55:07 -0400
-X-MC-Unique: i46fx_QgM_GO3Wvk61L0Aw-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 021821017DC9;
- Thu, 24 Sep 2020 09:55:05 +0000 (UTC)
-Received: from [10.36.114.4] (ovpn-114-4.ams2.redhat.com [10.36.114.4])
- by smtp.corp.redhat.com (Postfix) with ESMTP id AE3166198B;
- Thu, 24 Sep 2020 09:55:00 +0000 (UTC)
-Subject: Re: [PATCH RFC 0/4] mm: place pages to the freelist tail when onling
- and undoing isolation
-To: Mel Gorman <mgorman@techsingularity.net>
-Cc: Vlastimil Babka <vbabka@suse.cz>, osalvador@suse.de,
- linux-kernel@vger.kernel.org, linux-mm@kvack.org,
- linux-hyperv@vger.kernel.org, xen-devel@lists.xenproject.org,
- linux-acpi@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
- Alexander Duyck <alexander.h.duyck@linux.intel.com>,
- Dave Hansen <dave.hansen@intel.com>, Haiyang Zhang <haiyangz@microsoft.com>,
- "K. Y. Srinivasan" <kys@microsoft.com>, Michael Ellerman
- <mpe@ellerman.id.au>, Michal Hocko <mhocko@kernel.org>,
- Mike Rapoport <rppt@kernel.org>, Scott Cheloha <cheloha@linux.ibm.com>,
- Stephen Hemminger <sthemmin@microsoft.com>, Wei Liu <wei.liu@kernel.org>,
- Wei Yang <richard.weiyang@linux.alibaba.com>
-References: <5c0910c2cd0d9d351e509392a45552fb@suse.de>
- <DAC9E747-BDDF-41B6-A89B-604880DD7543@redhat.com>
- <67928cbd-950a-3279-bf9b-29b04c87728b@suse.cz>
- <fee562a3-9f8f-e9b4-68fe-09c5ea885b91@redhat.com>
- <20200924094026.GL3179@techsingularity.net>
-From: David Hildenbrand <david@redhat.com>
-Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
- 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
- WNyWQQ==
-Organization: Red Hat GmbH
-Message-ID: <e2279c19-07aa-81c8-fe8c-c0efa6b982e7@redhat.com>
-Date: Thu, 24 Sep 2020 11:54:59 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.11.0
+	id 1kLO9I-0002Qz-1a; Thu, 24 Sep 2020 10:06:48 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=puVB=DB=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
+ id 1kLO9H-0002Qu-8w
+ for xen-devel@lists.xenproject.org; Thu, 24 Sep 2020 10:06:47 +0000
+X-Inumbo-ID: 62af37fd-f49f-4fc3-8c5a-2398e8195b5c
+Received: from mail-wr1-x442.google.com (unknown [2a00:1450:4864:20::442])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 62af37fd-f49f-4fc3-8c5a-2398e8195b5c;
+ Thu, 24 Sep 2020 10:06:45 +0000 (UTC)
+Received: by mail-wr1-x442.google.com with SMTP id z1so3158903wrt.3
+ for <xen-devel@lists.xenproject.org>; Thu, 24 Sep 2020 03:06:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:reply-to:to:cc:references:in-reply-to:subject:date:message-id
+ :mime-version:content-transfer-encoding:content-language
+ :thread-index; bh=qIENhfjqxBiI5QlG7ZY5YDBwQY5lCW+IF3ZzSo8UkJ0=;
+ b=kmWNkzaq1lTue+8jivrcY0mUyQxOUV8+Pi2DKGD3E0Qm1j/bf0OoEy8IpH00McRdFj
+ vUOFm47f5/0G01Mgc9YeiGYslx6CQ+HbfgKtr9jHK2oMyeYl3+cYu3Co4F4gsE3AXCJ6
+ LzPfdF0h5/yoo/GZSen/XV+Q0OcJIG+hWbkET3z7VVFp19xQDeS5eTDvM2hPET17hF8G
+ 4DqM+ZMh4wmrAg5j2XETiPUuqdXALMU1YMOd/4LbMFkQhZCWkS3bIy6Kor8BwzgvAFiA
+ 1/Z8iLSt1X2DtQJQN3VGMyDarFjCtVIrvm7eyxKPfhmD7HWbU/aCu+i1c3/F5N9+ty7e
+ e2zw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:reply-to:to:cc:references:in-reply-to
+ :subject:date:message-id:mime-version:content-transfer-encoding
+ :content-language:thread-index;
+ bh=qIENhfjqxBiI5QlG7ZY5YDBwQY5lCW+IF3ZzSo8UkJ0=;
+ b=BC20GwJoz5cdAg2te75sqqNPk+FStMteI+fBjpQmmbBgBqZCcPGYbqd5/UIyNPNzhj
+ 2HxqMAqycYrOOXzE6uAjSHoyA+A3msagLxv7Ik526fqDpG8nIQ4YG5YI8BCm2XrMElCn
+ bi61CfSKK2P3cTt+UESbgqtp6Y+f3gkd/n/xzA12vzCBNfcpfByHz0qd5te2QXI2MW2L
+ 0joI677z84qW39jylE/cAOUe5gUw7+bENKd6208CC0jh6qyS+M+kdyxF6BqdGnZYkTTW
+ VXGb6v+o+Do0xCGHM8iC/FT+autM+MdTN2A0K4N+lDIpmNRyd1be6iyXCr/ot4II1hTX
+ 0anQ==
+X-Gm-Message-State: AOAM530CmMaCs6ElNovh/cTrY5UOWq7zHpMMZkJPNimwBJskvqFh6hj4
+ 7178QopyYn9Uno+MNr7DWRI=
+X-Google-Smtp-Source: ABdhPJyx9NXud0vFGJb8fyIfIF4dD0Pz5GjcPwVnIl/Ssgpr9HaZQuc5v+YjbwrNEaX+VnHYjpygNQ==
+X-Received: by 2002:a5d:6552:: with SMTP id z18mr4147517wrv.32.1600942004870; 
+ Thu, 24 Sep 2020 03:06:44 -0700 (PDT)
+Received: from CBGR90WXYV0 (host86-176-94-160.range86-176.btcentralplus.com.
+ [86.176.94.160])
+ by smtp.gmail.com with ESMTPSA id t4sm2968009wrr.26.2020.09.24.03.06.43
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Thu, 24 Sep 2020 03:06:44 -0700 (PDT)
+From: Paul Durrant <xadimgnik@gmail.com>
+X-Google-Original-From: "Paul Durrant" <paul@xen.org>
+To: "'Andrew Cooper'" <andrew.cooper3@citrix.com>,
+ "'Xen-devel'" <xen-devel@lists.xenproject.org>
+Cc: "'George Dunlap'" <George.Dunlap@eu.citrix.com>,
+ "'Ian Jackson'" <iwj@xenproject.org>, "'Jan Beulich'" <JBeulich@suse.com>,
+ "'Stefano Stabellini'" <sstabellini@kernel.org>, "'Wei Liu'" <wl@xen.org>,
+ "'Julien Grall'" <julien@xen.org>,
+ =?utf-8?Q?'Micha=C5=82_Leszczy=C5=84ski'?= <michal.leszczynski@cert.pl>,
+ "'Hubert Jasudowicz'" <hubert.jasudowicz@cert.pl>,
+ "'Tamas K Lengyel'" <tamas@tklengyel.com>
+References: <20200922182444.12350-1-andrew.cooper3@citrix.com>
+ <20200922182444.12350-5-andrew.cooper3@citrix.com>
+In-Reply-To: <20200922182444.12350-5-andrew.cooper3@citrix.com>
+Subject: RE: [PATCH v2 04/11] xen/memory: Fix acquire_resource size semantics
+Date: Thu, 24 Sep 2020 11:06:43 +0100
+Message-ID: <003b01d6925a$67f9e2b0$37eda810$@xen.org>
 MIME-Version: 1.0
-In-Reply-To: <20200924094026.GL3179@techsingularity.net>
-Content-Type: text/plain; charset=iso-8859-15
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailer: Microsoft Outlook 16.0
+Content-Language: en-gb
+Thread-Index: AQIFh6M/JBUQh1P0MghANJzmhArOyAFQUlblqQ8gF4A=
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -142,147 +102,354 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
+Reply-To: paul@xen.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 24.09.20 11:40, Mel Gorman wrote:
-> On Wed, Sep 23, 2020 at 05:26:06PM +0200, David Hildenbrand wrote:
->>>>> ???On 2020-09-16 20:34, David Hildenbrand wrote:
->>>>>> When adding separate memory blocks via add_memory*() and onlining them
->>>>>> immediately, the metadata (especially the memmap) of the next block will be
->>>>>> placed onto one of the just added+onlined block. This creates a chain
->>>>>> of unmovable allocations: If the last memory block cannot get
->>>>>> offlined+removed() so will all dependant ones. We directly have unmovable
->>>>>> allocations all over the place.
->>>>>> This can be observed quite easily using virtio-mem, however, it can also
->>>>>> be observed when using DIMMs. The freshly onlined pages will usually be
->>>>>> placed to the head of the freelists, meaning they will be allocated next,
->>>>>> turning the just-added memory usually immediately un-removable. The
->>>>>> fresh pages are cold, prefering to allocate others (that might be hot)
->>>>>> also feels to be the natural thing to do.
->>>>>> It also applies to the hyper-v balloon xen-balloon, and ppc64 dlpar: when
->>>>>> adding separate, successive memory blocks, each memory block will have
->>>>>> unmovable allocations on them - for example gigantic pages will fail to
->>>>>> allocate.
->>>>>> While the ZONE_NORMAL doesn't provide any guarantees that memory can get
->>>>>> offlined+removed again (any kind of fragmentation with unmovable
->>>>>> allocations is possible), there are many scenarios (hotplugging a lot of
->>>>>> memory, running workload, hotunplug some memory/as much as possible) where
->>>>>> we can offline+remove quite a lot with this patchset.
->>>>>
->>>>> Hi David,
->>>>>
->>>>
->>>> Hi Oscar.
->>>>
->>>>> I did not read through the patchset yet, so sorry if the question is nonsense, but is this not trying to fix the same issue the vmemmap patches did? [1]
->>>>
->>>> Not nonesense at all. It only helps to some degree, though. It solves the dependencies due to the memmap. However, it???s not completely ideal, especially for single memory blocks.
->>>>
->>>> With single memory blocks (virtio-mem, xen-balloon, hv balloon, ppc dlpar) you still have unmovable (vmemmap chunks) all over the physical address space. Consider the gigantic page example after hotplug. You directly fragmented all hotplugged memory.
->>>>
->>>> Of course, there might be (less extreme) dependencies due page tables for the identity mapping, extended struct pages and similar.
->>>>
->>>> Having that said, there are other benefits when preferring other memory over just hotplugged memory. Think about adding+onlining memory during boot (dimms under QEMU, virtio-mem), once the system is up you will have most (all) of that memory completely untouched.
->>>>
->>>> So while vmemmap on hotplugged memory would tackle some part of the issue, there are cases where this approach is better, and there are even benefits when combining both.
->>>
->>
->> Hi Vlastimil,
->>
->>> I see the point, but I don't think the head/tail mechanism is great for this. It
->>> might sort of work, but with other interfering activity there are no guarantees
->>> and it relies on a subtle implementation detail. There are better mechanisms
->>
->> For the specified use case of adding+onlining a whole bunch of memory
->> this works just fine. We don't care too much about "other interfering
->> activity" as you mention here, or about guarantees - this is a pure
->> optimization that seems to work just fine in practice.
->>
->> I'm not sure about the "subtle implementation detail" - buddy merging,
->> and head/tail of buddy lists are a basic concept of our page allocator.
->> If that would ever change, the optimization here would be lost and we
->> would have to think of something else. Nothing would actually break -
->> and it's all kept directly in page_alloc.c
->>
+> -----Original Message-----
+> From: Andrew Cooper <andrew.cooper3@citrix.com>
+> Sent: 22 September 2020 19:25
+> To: Xen-devel <xen-devel@lists.xenproject.org>
+> Cc: Andrew Cooper <andrew.cooper3@citrix.com>; George Dunlap =
+<George.Dunlap@eu.citrix.com>; Ian
+> Jackson <iwj@xenproject.org>; Jan Beulich <JBeulich@suse.com>; Stefano =
+Stabellini
+> <sstabellini@kernel.org>; Wei Liu <wl@xen.org>; Julien Grall =
+<julien@xen.org>; Paul Durrant
+> <paul@xen.org>; Micha=C5=82 Leszczy=C5=84ski =
+<michal.leszczynski@cert.pl>; Hubert Jasudowicz
+> <hubert.jasudowicz@cert.pl>; Tamas K Lengyel <tamas@tklengyel.com>
+> Subject: [PATCH v2 04/11] xen/memory: Fix acquire_resource size =
+semantics
+>=20
+> Calling XENMEM_acquire_resource with a NULL frame_list is a request =
+for the
+> size of the resource, but the returned 32 is bogus.
+>=20
+> If someone tries to follow it for XENMEM_resource_ioreq_server, the =
+acquire
+> call will fail as IOREQ servers currently top out at 2 frames, and it =
+is only
+> half the size of the default grant table limit for guests.
+>=20
+> Also, no users actually request a resource size, because it was never =
+wired up
+> in the sole implementaion of resource acquisition in Linux.
+>=20
+> Introduce a new resource_max_frames() to calculate the size of a =
+resource, and
+> implement it the IOREQ and grant subsystems.
+>=20
+> It is impossible to guarantee that a mapping call following a =
+successful size
+> call will succeed (e.g. The target IOREQ server gets destroyed, or the =
+domain
+> switches from grant v2 to v1).  Document the restriction, and use the
+> flexibility to simplify the paths to be lockless.
+>=20
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+> ---
+> CC: George Dunlap <George.Dunlap@eu.citrix.com>
+> CC: Ian Jackson <iwj@xenproject.org>
+> CC: Jan Beulich <JBeulich@suse.com>
+> CC: Stefano Stabellini <sstabellini@kernel.org>
+> CC: Wei Liu <wl@xen.org>
+> CC: Julien Grall <julien@xen.org>
+> CC: Paul Durrant <paul@xen.org>
+> CC: Micha=C5=82 Leszczy=C5=84ski <michal.leszczynski@cert.pl>
+> CC: Hubert Jasudowicz <hubert.jasudowicz@cert.pl>
+> CC: Tamas K Lengyel <tamas@tklengyel.com>
+>=20
+> v2:
+>  * Spelling fixes
+>  * Add more local variables.
+>  * Don't return any status frames on ARM where v2 support is compiled =
+out.
+> ---
+>  xen/arch/x86/mm.c             | 20 ++++++++++++++++
+>  xen/common/grant_table.c      | 23 ++++++++++++++++++
+>  xen/common/memory.c           | 55 =
++++++++++++++++++++++++++++++++++----------
+>  xen/include/asm-x86/mm.h      |  3 +++
+>  xen/include/public/memory.h   | 16 +++++++++----
+>  xen/include/xen/grant_table.h |  8 +++++++
+>  xen/include/xen/mm.h          |  6 +++++
+>  7 files changed, 114 insertions(+), 17 deletions(-)
+>=20
+> diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+> index d1cfc8fb4a..e82307bdae 100644
+> --- a/xen/arch/x86/mm.c
+> +++ b/xen/arch/x86/mm.c
+> @@ -4591,6 +4591,26 @@ int xenmem_add_to_physmap_one(
+>      return rc;
+>  }
+>=20
+> +unsigned int arch_resource_max_frames(
+> +    struct domain *d, unsigned int type, unsigned int id)
+> +{
+> +    unsigned int nr =3D 0;
+> +
+> +    switch ( type )
+> +    {
+> +#ifdef CONFIG_HVM
+> +    case XENMEM_resource_ioreq_server:
+> +        if ( !is_hvm_domain(d) )
+> +            break;
+> +        /* One frame for the buf-ioreq ring, and one frame per 128 =
+vcpus. */
+> +        nr =3D 1 + DIV_ROUND_UP(d->max_vcpus * sizeof(struct ioreq), =
+PAGE_SIZE);
 
-Hi Mel,
+The buf-ioreq ring is optional so a caller using this value may still =
+get a resource acquisition failure unless the id is used to actually =
+look up and check the ioreq server in question for the actual maximum. =
+So this needs to call into a new function in ioreq.c.
 
-thanks for your reply.
+  Paul
 
-> 
-> It's somewhat subtle because it's relying heavily on the exact ordering
-> of how pages are pulled from the free lists at the moment. Lets say for
-> example that someone was brave enough to tackle the problem of the giant
-> zone lock and split the zone into allocation arenas (like what glibc does
-> to split the lock). Depending on the exact ordering of how pages are
-> added and removed from the list would break your approach. I'm wary of
+> +        break;
+> +#endif
+> +    }
+> +
+> +    return nr;
+> +}
+> +
+>  int arch_acquire_resource(struct domain *d, unsigned int type,
+>                            unsigned int id, unsigned long frame,
+>                            unsigned int nr_frames, xen_pfn_t =
+mfn_list[])
+> diff --git a/xen/common/grant_table.c b/xen/common/grant_table.c
+> index 912f07be47..8c401a5540 100644
+> --- a/xen/common/grant_table.c
+> +++ b/xen/common/grant_table.c
+> @@ -4013,6 +4013,29 @@ static int gnttab_get_shared_frame_mfn(struct =
+domain *d,
+>      return 0;
+>  }
+>=20
+> +unsigned int gnttab_resource_max_frames(struct domain *d, unsigned =
+int id)
+> +{
+> +    const struct grant_table *gt =3D d->grant_table;
+> +    unsigned int nr =3D 0;
+> +
+> +    /* Don't need the grant lock.  This limit is fixed at domain =
+create time. */
+> +    switch ( id )
+> +    {
+> +    case XENMEM_resource_grant_table_id_shared:
+> +        nr =3D gt->max_grant_frames;
+> +        break;
+> +
+> +    case XENMEM_resource_grant_table_id_status:
+> +        if ( GNTTAB_MAX_VERSION < 2 )
+> +            break;
+> +
+> +        nr =3D grant_to_status_frames(gt->max_grant_frames);
+> +        break;
+> +    }
+> +
+> +    return nr;
+> +}
+> +
+>  int gnttab_acquire_resource(
+>      struct domain *d, unsigned int id, unsigned long frame,
+>      unsigned int nr_frames, xen_pfn_t mfn_list[])
+> diff --git a/xen/common/memory.c b/xen/common/memory.c
+> index 177fc378d9..c559935732 100644
+> --- a/xen/common/memory.c
+> +++ b/xen/common/memory.c
+> @@ -1007,6 +1007,26 @@ static long xatp_permission_check(struct domain =
+*d, unsigned int space)
+>      return xsm_add_to_physmap(XSM_TARGET, current->domain, d);
+>  }
+>=20
+> +/*
+> + * Return 0 on any kind of error.  Caller converts to -EINVAL.
+> + *
+> + * All nonzero values should be repeatable (i.e. derived from some =
+fixed
+> + * property of the domain), and describe the full resource (i.e. =
+mapping the
+> + * result of this call will be the entire resource).
+> + */
+> +static unsigned int resource_max_frames(struct domain *d,
+> +                                        unsigned int type, unsigned =
+int id)
+> +{
+> +    switch ( type )
+> +    {
+> +    case XENMEM_resource_grant_table:
+> +        return gnttab_resource_max_frames(d, id);
+> +
+> +    default:
+> +        return arch_resource_max_frames(d, type, id);
+> +    }
+> +}
+> +
+>  static int acquire_resource(
+>      XEN_GUEST_HANDLE_PARAM(xen_mem_acquire_resource_t) arg)
+>  {
+> @@ -1018,6 +1038,7 @@ static int acquire_resource(
+>       * use-cases then per-CPU arrays or heap allocations may be =
+required.
+>       */
+>      xen_pfn_t mfn_list[32];
+> +    unsigned int max_frames;
+>      int rc;
+>=20
+>      /*
+> @@ -1034,19 +1055,6 @@ static int acquire_resource(
+>      if ( xmar.pad !=3D 0 )
+>          return -EINVAL;
+>=20
+> -    if ( guest_handle_is_null(xmar.frame_list) )
+> -    {
+> -        if ( xmar.nr_frames )
+> -            return -EINVAL;
+> -
+> -        xmar.nr_frames =3D ARRAY_SIZE(mfn_list);
+> -
+> -        if ( __copy_field_to_guest(arg, &xmar, nr_frames) )
+> -            return -EFAULT;
+> -
+> -        return 0;
+> -    }
+> -
+>      if ( xmar.nr_frames > ARRAY_SIZE(mfn_list) )
+>          return -E2BIG;
+>=20
+> @@ -1058,6 +1066,27 @@ static int acquire_resource(
+>      if ( rc )
+>          goto out;
+>=20
+> +    max_frames =3D resource_max_frames(d, xmar.type, xmar.id);
+> +
+> +    rc =3D -EINVAL;
+> +    if ( !max_frames )
+> +        goto out;
+> +
+> +    if ( guest_handle_is_null(xmar.frame_list) )
+> +    {
+> +        if ( xmar.nr_frames )
+> +            goto out;
+> +
+> +        xmar.nr_frames =3D max_frames;
+> +
+> +        rc =3D -EFAULT;
+> +        if ( __copy_field_to_guest(arg, &xmar, nr_frames) )
+> +            goto out;
+> +
+> +        rc =3D 0;
+> +        goto out;
+> +    }
+> +
+>      switch ( xmar.type )
+>      {
+>      case XENMEM_resource_grant_table:
+> diff --git a/xen/include/asm-x86/mm.h b/xen/include/asm-x86/mm.h
+> index deeba75a1c..13977652a8 100644
+> --- a/xen/include/asm-x86/mm.h
+> +++ b/xen/include/asm-x86/mm.h
+> @@ -639,6 +639,9 @@ static inline bool arch_mfn_in_directmap(unsigned =
+long mfn)
+>      return mfn <=3D (virt_to_mfn(eva - 1) + 1);
+>  }
+>=20
+> +unsigned int arch_resource_max_frames(struct domain *d,
+> +                                      unsigned int type, unsigned int =
+id);
+> +
+>  int arch_acquire_resource(struct domain *d, unsigned int type,
+>                            unsigned int id, unsigned long frame,
+>                            unsigned int nr_frames, xen_pfn_t =
+mfn_list[]);
+> diff --git a/xen/include/public/memory.h b/xen/include/public/memory.h
+> index 21d483298e..d7eb34f167 100644
+> --- a/xen/include/public/memory.h
+> +++ b/xen/include/public/memory.h
+> @@ -639,10 +639,18 @@ struct xen_mem_acquire_resource {
+>  #define XENMEM_resource_grant_table_id_status 1
+>=20
+>      /*
+> -     * IN/OUT - As an IN parameter number of frames of the resource
+> -     *          to be mapped. However, if the specified value is 0 =
+and
+> -     *          frame_list is NULL then this field will be set to the
+> -     *          maximum value supported by the implementation on =
+return.
+> +     * IN/OUT
+> +     *
+> +     * As an IN parameter number of frames of the resource to be =
+mapped.
+> +     *
+> +     * When frame_list is NULL and nr_frames is 0, this is =
+interpreted as a
+> +     * request for the size of the resource, which shall be returned =
+in the
+> +     * nr_frames field.
+> +     *
+> +     * The size of a resource will never be zero, but a nonzero =
+result doesn't
+> +     * guarantee that a subsequent mapping request will be =
+successful.  There
+> +     * are further type/id specific constraints which may change =
+between the
+> +     * two calls.
+>       */
+>      uint32_t nr_frames;
+>      uint32_t pad;
+> diff --git a/xen/include/xen/grant_table.h =
+b/xen/include/xen/grant_table.h
+> index 5a2c75b880..bae4d79623 100644
+> --- a/xen/include/xen/grant_table.h
+> +++ b/xen/include/xen/grant_table.h
+> @@ -57,6 +57,8 @@ int mem_sharing_gref_to_gfn(struct grant_table *gt, =
+grant_ref_t ref,
+>  int gnttab_map_frame(struct domain *d, unsigned long idx, gfn_t gfn,
+>                       mfn_t *mfn);
+>=20
+> +unsigned int gnttab_resource_max_frames(struct domain *d, unsigned =
+int id);
+> +
+>  int gnttab_acquire_resource(
+>      struct domain *d, unsigned int id, unsigned long frame,
+>      unsigned int nr_frames, xen_pfn_t mfn_list[]);
+> @@ -93,6 +95,12 @@ static inline int gnttab_map_frame(struct domain =
+*d, unsigned long idx,
+>      return -EINVAL;
+>  }
+>=20
+> +static inline unsigned int gnttab_resource_max_frames(
+> +    struct domain *d, unsigned int id)
+> +{
+> +    return 0;
+> +}
+> +
+>  static inline int gnttab_acquire_resource(
+>      struct domain *d, unsigned int id, unsigned long frame,
+>      unsigned int nr_frames, xen_pfn_t mfn_list[])
+> diff --git a/xen/include/xen/mm.h b/xen/include/xen/mm.h
+> index 26a4a3d350..d686876b0e 100644
+> --- a/xen/include/xen/mm.h
+> +++ b/xen/include/xen/mm.h
+> @@ -686,6 +686,12 @@ static inline void put_page_alloc_ref(struct =
+page_info *page)
+>  }
+>=20
+>  #ifndef CONFIG_ARCH_ACQUIRE_RESOURCE
+> +static inline unsigned int arch_resource_max_frames(
+> +    struct domain *d, unsigned int type, unsigned int id)
+> +{
+> +    return 0;
+> +}
+> +
+>  static inline int arch_acquire_resource(
+>      struct domain *d, unsigned int type, unsigned int id, unsigned =
+long frame,
+>      unsigned int nr_frames, xen_pfn_t mfn_list[])
+> --
+> 2.11.0
 
-First of all, it would not break it (as I already said). The
-optimization would be lost. Totally acceptable.
-
-However, I assume we would apply the same technique (optimized buddy
-merging - placing to head/tail, page shuffling) on these allocation
-arenas. So the optimization would still mostly apply, just in different
-granularity - which would be fine.
-
-> anything that relies on the ordering of freelists for correctness becauuse
-> it limits the ability to fix the zone lock (which has been overdue for
-> fixing for years now and getting worse as node sizes increase).
-
-"for correctness" - no, this is an optimization. As I said, there are no
-guarantees. Please keep that in mind.
-
-(also, page shuffling relies on the ordering of freelists right now ...
-for correctness)
-
-> 
-> To be robust, you'd need to do something like early memory bring-up whereby
-> pages are directly allocated from one part of the DIMM (presumably the
-> start) and use that for the metadata -- potentially all the metadata that
-> would be necessary to plug/unplug the entire DIMM. This would effectively
-> be unmovable but if you want to guarantee that all the memory except the
-> metadata can be unplugged, you do not have much alteratives. Playing games
-> with the ordering of the freelists will simply end up as "sometimes works,
-> sometimes does not". 
-
-As answered to Oscar already, while something like that might be
-feasible for DIMMs in the future (and there are still quite some issues
-to be sorted out), it isn't always desired adding separate (small -
-e.g., 128MB) memory blocks.  You - again- have unmovable allocations all
-over the place that won't allow you to allocate any gigantic page.
-
-> 
-> In terms of forcing ranges to be UNMOVABLE or MOVABLE (either via zones
-> or by implementing "sticky" pageblocks which hits complex reclaim-related
-> problems), you start running into problems similar to lowmem starvation
-> where a page cache allocation fails because unmovable metadata cannot
-> be allocated.
-
-Exactly.
-
-> 
-> I suggest you keep it simple -- statically allocate the potential
-> metadata needed in the future even though it limits the maximum amount
-> of memory that can be unplugged. The alternative is unpredictable
-> plug/unplug success rates.
-> 
-
-I'm sorry I can't follow. How is this "simple"?  Or even "simpler" than
-what I suggest?
-
-And as I said, it doesn't always work. Assume I hotplug 128GB to a 2GB
-machine via virtio-mem (which works just fine, as we add+online memory
-in small chunks compared to a single, huge DIMM), I would have to
-pre-allocate 2GB just for the memmap - which obviously doesn't work.
-
-Again, I'd like to stress that this is a pure optimization that I am
-proposing - nothing would "break" when ripping it out again, except that
-we lose the optimizations I mentioned.
-
--- 
-Thanks,
-
-David / dhildenb
 
 
