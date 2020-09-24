@@ -2,50 +2,50 @@ Return-Path: <SRS0=okQV=DB=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 24197C47426
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Sep 2020 13:59:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CD666C4742A
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Sep 2020 13:59:55 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C60F720B1F
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Sep 2020 13:59:49 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 7C66D23741
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Sep 2020 13:59:55 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="bBQO05Vw"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C60F720B1F
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="nRv+YEeY"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7C66D23741
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kLRmf-00010O-77; Thu, 24 Sep 2020 13:59:41 +0000
+	id 1kLRmk-000136-HC; Thu, 24 Sep 2020 13:59:46 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=dG6m=DB=casper.srs.infradead.org=batv+004c9619e75dbad284dd+6241+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1kLRme-0000ri-7F
- for xen-devel@lists.xenproject.org; Thu, 24 Sep 2020 13:59:40 +0000
-X-Inumbo-ID: ee4077a0-2b1f-4858-866b-b015dbc33e21
+ id 1kLRmj-0000ri-7S
+ for xen-devel@lists.xenproject.org; Thu, 24 Sep 2020 13:59:45 +0000
+X-Inumbo-ID: 017df81a-a0b7-4687-a217-e49b3ea7945c
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id ee4077a0-2b1f-4858-866b-b015dbc33e21;
+ id 017df81a-a0b7-4687-a217-e49b3ea7945c;
  Thu, 24 Sep 2020 13:59:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
- Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:In-Reply-To:References;
- bh=dr6dZs3VFHA+kNUsKD0hzBTElVLKOQakCcBlV/ZNErM=; b=bBQO05VwDwAfaDqhekxajuofQQ
- bb+lb4i3TKVtAyCr2iKg1X8aUn1bdOY06BtcZKEUPCPJtazgELgC/vFbSI7vij62OU7cmoS4Lvp4J
- HeFUAy34D9c2sIi29BVo8WSJNoo9JaIHBXsP95f4sWbTsfn3hoxVg4re0K37rJI6FFIX4dKQNQ4qi
- wfy/IU/xQP3fhkdpdco0xb2XcZ5VH/JIoM+BRD8a3NgAFOiUbXH1CBYUN6/Wme9eQ0VGwp1cdaydU
- G8A1Rfo80MP8zwb3Qv4JgG75vxpJs/kFWWto8tgyBgmVyD0urYVmuY8SbsxiVEvcP/dgcqoII8P4f
- gsCE6STw==;
+ References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ Content-Type:Content-ID:Content-Description;
+ bh=UxCKXqRP/rysmc9RNpHAJ/UIhdxbXkB6cd/t5AXU7G8=; b=nRv+YEeYewKaHP55mNdmSAS11o
+ U9Oech0FgjNZcrTrkBpq+PptQaFo5K9CSwvRMPRR6unvlkcxomBoazDNs2zTPspK29D0pMwSAwF1d
+ I8XWMKwIU4mLyZpJsfNQ7mCADzELo7e0Uuvy1qo/0dKVX0wysVaROWYDGLesbntUtF57jiZShbN2g
+ JSHko51TjQMewrRmdZGgaP9DLIOvpQXaaPZFeH+gzjKSJI64DzOKgJ/YdKbaiq9d9k2BY8xAu8bh8
+ Qxpgx24LGKQHMArVnLBE8tlnW3k7KsTMC0zFXGJTBZ0MtGAxNPgo77WCS3ILZmAK9iSVn5tnCYZTb
+ lzuwTvOg==;
 Received: from p4fdb0c34.dip0.t-ipconnect.de ([79.219.12.52] helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kLRlu-0003uT-GF; Thu, 24 Sep 2020 13:58:54 +0000
+ id 1kLRm5-0003wm-QB; Thu, 24 Sep 2020 13:59:06 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Andrew Morton <akpm@linux-foundation.org>
 Cc: Peter Zijlstra <peterz@infradead.org>,
@@ -62,10 +62,13 @@ Cc: Peter Zijlstra <peterz@infradead.org>,
  x86@kernel.org, xen-devel@lists.xenproject.org,
  linux-kernel@vger.kernel.org, intel-gfx@lists.freedesktop.org,
  dri-devel@lists.freedesktop.org, linux-mm@kvack.org
-Subject: remove alloc_vm_area v2
-Date: Thu, 24 Sep 2020 15:58:42 +0200
-Message-Id: <20200924135853.875294-1-hch@lst.de>
+Subject: [PATCH 09/11] xen/xenbus: use apply_to_page_range directly in
+ xenbus_map_ring_pv
+Date: Thu, 24 Sep 2020 15:58:51 +0200
+Message-Id: <20200924135853.875294-10-hch@lst.de>
 X-Mailer: git-send-email 2.28.0
+In-Reply-To: <20200924135853.875294-1-hch@lst.de>
+References: <20200924135853.875294-1-hch@lst.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
@@ -83,45 +86,79 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Hi Andrew,
+Replacing alloc_vm_area with get_vm_area_caller + apply_page_range
+allows to fill put the phys_addr values directly instead of doing
+another loop over all addresses.
 
-this series removes alloc_vm_area, which was left over from the big
-vmalloc interface rework.  It is a rather arkane interface, basicaly
-the equivalent of get_vm_area + actually faulting in all PTEs in
-the allocated area.  It was originally addeds for Xen (which isn't
-modular to start with), and then grew users in zsmalloc and i915
-which seems to mostly qualify as abuses of the interface, especially
-for i915 as a random driver should not set up PTE bits directly.
+Signed-off-by: Christoph Hellwig <hch@lst.de>
+---
+ drivers/xen/xenbus/xenbus_client.c | 30 ++++++++++++++++--------------
+ 1 file changed, 16 insertions(+), 14 deletions(-)
 
-Note that the i915 patches apply to the drm-tip branch of the drm-tip
-tree, as that tree has recent conflicting commits in the same area.
+diff --git a/drivers/xen/xenbus/xenbus_client.c b/drivers/xen/xenbus/xenbus_client.c
+index 2690318ad50f48..fd80e318b99cc7 100644
+--- a/drivers/xen/xenbus/xenbus_client.c
++++ b/drivers/xen/xenbus/xenbus_client.c
+@@ -73,16 +73,13 @@ struct map_ring_valloc {
+ 	struct xenbus_map_node *node;
+ 
+ 	/* Why do we need two arrays? See comment of __xenbus_map_ring */
+-	union {
+-		unsigned long addrs[XENBUS_MAX_RING_GRANTS];
+-		pte_t *ptes[XENBUS_MAX_RING_GRANTS];
+-	};
++	unsigned long addrs[XENBUS_MAX_RING_GRANTS];
+ 	phys_addr_t phys_addrs[XENBUS_MAX_RING_GRANTS];
+ 
+ 	struct gnttab_map_grant_ref map[XENBUS_MAX_RING_GRANTS];
+ 	struct gnttab_unmap_grant_ref unmap[XENBUS_MAX_RING_GRANTS];
+ 
+-	unsigned int idx;	/* HVM only. */
++	unsigned int idx;
+ };
+ 
+ static DEFINE_SPINLOCK(xenbus_valloc_lock);
+@@ -686,6 +683,14 @@ int xenbus_unmap_ring_vfree(struct xenbus_device *dev, void *vaddr)
+ EXPORT_SYMBOL_GPL(xenbus_unmap_ring_vfree);
+ 
+ #ifdef CONFIG_XEN_PV
++static int map_ring_apply(pte_t *pte, unsigned long addr, void *data)
++{
++	struct map_ring_valloc *info = data;
++
++	info->phys_addrs[info->idx++] = arbitrary_virt_to_machine(pte).maddr;
++	return 0;
++}
++
+ static int xenbus_map_ring_pv(struct xenbus_device *dev,
+ 			      struct map_ring_valloc *info,
+ 			      grant_ref_t *gnt_refs,
+@@ -694,18 +699,15 @@ static int xenbus_map_ring_pv(struct xenbus_device *dev,
+ {
+ 	struct xenbus_map_node *node = info->node;
+ 	struct vm_struct *area;
+-	int err = GNTST_okay;
+-	int i;
+-	bool leaked;
++	bool leaked = false;
++	int err = -ENOMEM;
+ 
+-	area = alloc_vm_area(XEN_PAGE_SIZE * nr_grefs, info->ptes);
++	area = get_vm_area(XEN_PAGE_SIZE * nr_grefs, VM_IOREMAP);
+ 	if (!area)
+ 		return -ENOMEM;
+-
+-	for (i = 0; i < nr_grefs; i++)
+-		info->phys_addrs[i] =
+-			arbitrary_virt_to_machine(info->ptes[i]).maddr;
+-
++	if (apply_to_page_range(&init_mm, (unsigned long)area->addr,
++				XEN_PAGE_SIZE * nr_grefs, map_ring_apply, info))
++		goto failed;
+ 	err = __xenbus_map_ring(dev, gnt_refs, nr_grefs, node->handles,
+ 				info, GNTMAP_host_map | GNTMAP_contains_pte,
+ 				&leaked);
+-- 
+2.28.0
 
-A git tree is also available here:
-
-    git://git.infradead.org/users/hch/misc.git alloc_vm_area
-
-Gitweb:
-
-    http://git.infradead.org/users/hch/misc.git/shortlog/refs/heads/alloc_vm_area
-
-Changes since v1:
- - fix a bug in the zsmalloc changes
- - fix a bug and rebase to include the recent changes in i915
- - add a new vmap flag that allows to free the page array and pages
-   using vfree
- - add a vfree documentation updated from Matthew
-
-Diffstat:
- arch/x86/xen/grant-table.c                |   27 ++++--
- drivers/gpu/drm/i915/Kconfig              |    1 
- drivers/gpu/drm/i915/gem/i915_gem_pages.c |  131 +++++++++++++-----------------
- drivers/gpu/drm/i915/gt/shmem_utils.c     |   76 ++++-------------
- drivers/xen/xenbus/xenbus_client.c        |   30 +++---
- include/linux/vmalloc.h                   |    7 -
- mm/Kconfig                                |    3 
- mm/memory.c                               |   16 ++-
- mm/nommu.c                                |    7 -
- mm/vmalloc.c                              |  123 ++++++++++++++--------------
- mm/zsmalloc.c                             |   10 +-
- 11 files changed, 200 insertions(+), 231 deletions(-)
 
