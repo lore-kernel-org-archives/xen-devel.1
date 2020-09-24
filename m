@@ -7,45 +7,45 @@ X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E57FBC4741F
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Sep 2020 13:59:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D77DC4742E
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Sep 2020 13:59:35 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9920720888
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Sep 2020 13:59:45 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 0057B20B1F
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Sep 2020 13:59:34 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="u8zXv86J"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9920720888
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="NUh5M0Va"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0057B20B1F
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kLRma-0000xz-Ro; Thu, 24 Sep 2020 13:59:36 +0000
+	id 1kLRmQ-0000tn-98; Thu, 24 Sep 2020 13:59:26 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=dG6m=DB=casper.srs.infradead.org=batv+004c9619e75dbad284dd+6241+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1kLRmZ-0000ri-78
- for xen-devel@lists.xenproject.org; Thu, 24 Sep 2020 13:59:35 +0000
-X-Inumbo-ID: b680ee6d-9878-49fa-89a9-0dde68e5701f
+ id 1kLRmP-0000ri-6a
+ for xen-devel@lists.xenproject.org; Thu, 24 Sep 2020 13:59:25 +0000
+X-Inumbo-ID: a8bfc786-8dbd-45a6-a153-0a2ec13b42b4
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b680ee6d-9878-49fa-89a9-0dde68e5701f;
- Thu, 24 Sep 2020 13:59:17 +0000 (UTC)
+ id a8bfc786-8dbd-45a6-a153-0a2ec13b42b4;
+ Thu, 24 Sep 2020 13:59:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description;
- bh=egAh0AyaJU/L8zB++A7y8+b+g9+HnktXyv/oSuuetso=; b=u8zXv86Jo0uvHG04wra1Ey2FC5
- 4BmGm5rwILkRlXWjNo27W+sYj1vETLRMbiA4/fWiPqk4byxXZWqRE685R4RRF+w0dgExTfCbVtFh5
- +2RhGbduILeabm6vLx9zVmYo43Px3DA0P2YOCwRFFtS05jzHEf6zcWNFmZOTxI+un96fpjKjEkGLZ
- Z7UQLa0aAVYhycLBRUmZmcNmFbr9EddfkWvsChn0SzDWwK28fb1uUfnti7yy3BPrKuF2lDlN6TeYr
- OjqPvwDRq77s0mmrlrGQup9jWQSEGcRmoDlWfevvV7pax80ghmy8o7JsqBu4tzzebz8Q3owfyJLuS
- oG0ke2LA==;
+ bh=71LvYnHcMs7/rXGs508r2vzZrQvLA4mfS9GwJnz8e8I=; b=NUh5M0VarQIgBQqYaNlO1oJ5uD
+ w8nVLotPmpd4oOZHHmvT2oHT7kVaN0TcgUMi5DUHiHdGTOvq+g3NO/KutuwysCvRae9RwPYp4rIvr
+ iYNqfACDnH46rTLtHfvdsfC5VKzkUhO4F7ry/18RDOE0cR9gOYIJqR61QLO0qCQoj84BLYu10d+QK
+ jc5SfjEAV8jLUC7hFJUbKC2hBzexIDKoQBbp6+XtPVn9ewLvlb4tB3C3LgoKZwg19+/aKKBtYx35D
+ VOCzQ531qSBqmHg9FlZAu3/x99eoa2dKESyDZSZVYteLbCXHwidWSrgcqQ9no1BgOWJ5GpHmtXMo1
+ 1w5Yhf8A==;
 Received: from p4fdb0c34.dip0.t-ipconnect.de ([79.219.12.52] helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kLRm2-0003vy-8W; Thu, 24 Sep 2020 13:59:02 +0000
+ id 1kLRlw-0003uz-IY; Thu, 24 Sep 2020 13:58:56 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Andrew Morton <akpm@linux-foundation.org>
 Cc: Peter Zijlstra <peterz@infradead.org>,
@@ -62,9 +62,9 @@ Cc: Peter Zijlstra <peterz@infradead.org>,
  x86@kernel.org, xen-devel@lists.xenproject.org,
  linux-kernel@vger.kernel.org, intel-gfx@lists.freedesktop.org,
  dri-devel@lists.freedesktop.org, linux-mm@kvack.org
-Subject: [PATCH 06/11] drm/i915: use vmap in shmem_pin_map
-Date: Thu, 24 Sep 2020 15:58:48 +0200
-Message-Id: <20200924135853.875294-7-hch@lst.de>
+Subject: [PATCH 02/11] mm: add a VM_MAP_PUT_PAGES flag for vmap
+Date: Thu, 24 Sep 2020 15:58:44 +0200
+Message-Id: <20200924135853.875294-3-hch@lst.de>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200924135853.875294-1-hch@lst.de>
 References: <20200924135853.875294-1-hch@lst.de>
@@ -85,122 +85,55 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-shmem_pin_map somewhat awkwardly reimplements vmap using
-alloc_vm_area and manual pte setup.  The only practical difference
-is that alloc_vm_area prefeaults the vmalloc area PTEs, which doesn't
-seem to be required here (and could be added to vmap using a flag if
-actually required).  Switch to use vmap, and use vfree to free both the
-vmalloc mapping and the page array, as well as dropping the references
-to each page.
+Add a flag so that vmap takes ownership of the passed in page array.
+When vfree is called on such an allocation it will put one reference
+on each page, and free the page array itself.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/gpu/drm/i915/gt/shmem_utils.c | 76 +++++++--------------------
- 1 file changed, 18 insertions(+), 58 deletions(-)
+ include/linux/vmalloc.h | 1 +
+ mm/vmalloc.c            | 9 +++++++--
+ 2 files changed, 8 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/gpu/drm/i915/gt/shmem_utils.c b/drivers/gpu/drm/i915/gt/shmem_utils.c
-index 43c7acbdc79dea..f011ea42487e11 100644
---- a/drivers/gpu/drm/i915/gt/shmem_utils.c
-+++ b/drivers/gpu/drm/i915/gt/shmem_utils.c
-@@ -49,80 +49,40 @@ struct file *shmem_create_from_object(struct drm_i915_gem_object *obj)
- 	return file;
- }
+diff --git a/include/linux/vmalloc.h b/include/linux/vmalloc.h
+index 0221f852a7e1a3..b899681e3ff9f0 100644
+--- a/include/linux/vmalloc.h
++++ b/include/linux/vmalloc.h
+@@ -24,6 +24,7 @@ struct notifier_block;		/* in notifier.h */
+ #define VM_UNINITIALIZED	0x00000020	/* vm_struct is not fully initialized */
+ #define VM_NO_GUARD		0x00000040      /* don't add guard page */
+ #define VM_KASAN		0x00000080      /* has allocated kasan shadow memory */
++#define VM_MAP_PUT_PAGES	0x00000100	/* put pages and free array in vfree */
  
--static size_t shmem_npte(struct file *file)
--{
--	return file->f_mapping->host->i_size >> PAGE_SHIFT;
--}
--
--static void __shmem_unpin_map(struct file *file, void *ptr, size_t n_pte)
--{
--	unsigned long pfn;
--
--	vunmap(ptr);
--
--	for (pfn = 0; pfn < n_pte; pfn++) {
--		struct page *page;
--
--		page = shmem_read_mapping_page_gfp(file->f_mapping, pfn,
--						   GFP_KERNEL);
--		if (!WARN_ON(IS_ERR(page))) {
--			put_page(page);
--			put_page(page);
--		}
--	}
--}
--
- void *shmem_pin_map(struct file *file)
- {
--	const size_t n_pte = shmem_npte(file);
--	pte_t *stack[32], **ptes, **mem;
--	struct vm_struct *area;
--	unsigned long pfn;
--
--	mem = stack;
--	if (n_pte > ARRAY_SIZE(stack)) {
--		mem = kvmalloc_array(n_pte, sizeof(*mem), GFP_KERNEL);
--		if (!mem)
--			return NULL;
--	}
-+	struct page **pages;
-+	size_t n_pages, i;
-+	void *vaddr;
- 
--	area = alloc_vm_area(n_pte << PAGE_SHIFT, mem);
--	if (!area) {
--		if (mem != stack)
--			kvfree(mem);
-+	n_pages = file->f_mapping->host->i_size >> PAGE_SHIFT;
-+	pages = kvmalloc_array(n_pages, sizeof(*pages), GFP_KERNEL);
-+	if (!pages)
+ /*
+  * VM_KASAN is used slighly differently depending on CONFIG_KASAN_VMALLOC.
+diff --git a/mm/vmalloc.c b/mm/vmalloc.c
+index 8770260419af06..ffad65f052c3f9 100644
+--- a/mm/vmalloc.c
++++ b/mm/vmalloc.c
+@@ -2377,8 +2377,11 @@ EXPORT_SYMBOL(vunmap);
+  * @flags: vm_area->flags
+  * @prot: page protection for the mapping
+  *
+- * Maps @count pages from @pages into contiguous kernel virtual
+- * space.
++ * Maps @count pages from @pages into contiguous kernel virtual space.
++ * If @flags contains %VM_MAP_PUT_PAGES the ownership of the pages array itself
++ * (which must be kmalloc or vmalloc memory) and one reference per pages in it
++ * are transferred from the caller to vmap(), and will be freed / dropped when
++ * vfree() is called on the return value.
+  *
+  * Return: the address of the area or %NULL on failure
+  */
+@@ -2404,6 +2407,8 @@ void *vmap(struct page **pages, unsigned int count,
  		return NULL;
--	}
- 
--	ptes = mem;
--	for (pfn = 0; pfn < n_pte; pfn++) {
--		struct page *page;
--
--		page = shmem_read_mapping_page_gfp(file->f_mapping, pfn,
--						   GFP_KERNEL);
--		if (IS_ERR(page))
-+	for (i = 0; i < n_pages; i++) {
-+		pages[i] = shmem_read_mapping_page_gfp(file->f_mapping, i,
-+						       GFP_KERNEL);
-+		if (IS_ERR(pages[i]))
- 			goto err_page;
--
--		**ptes++ = mk_pte(page,  PAGE_KERNEL);
  	}
  
--	if (mem != stack)
--		kvfree(mem);
--
-+	vaddr = vmap(pages, n_pages, VM_MAP_PUT_PAGES, PAGE_KERNEL);
-+	if (!vaddr)
-+		goto err_page;
- 	mapping_set_unevictable(file->f_mapping);
--	return area->addr;
--
-+	return vaddr;
- err_page:
--	if (mem != stack)
--		kvfree(mem);
--
--	__shmem_unpin_map(file, area->addr, pfn);
-+	while (--i >= 0)
-+		put_page(pages[i]);
-+	kvfree(pages);
- 	return NULL;
++	if (flags & VM_MAP_PUT_PAGES)
++		area->pages = pages;
+ 	return area->addr;
  }
- 
- void shmem_unpin_map(struct file *file, void *ptr)
- {
- 	mapping_clear_unevictable(file->f_mapping);
--	__shmem_unpin_map(file, ptr, shmem_npte(file));
-+	vfree(ptr);
- }
- 
- static int __shmem_rw(struct file *file, loff_t off,
+ EXPORT_SYMBOL(vmap);
 -- 
 2.28.0
 
