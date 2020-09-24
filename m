@@ -2,74 +2,97 @@ Return-Path: <SRS0=okQV=DB=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.5 required=3.0 tests=BAYES_00,DKIM_ADSP_CUSTOM_MED,
+	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1035CC4363D
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Sep 2020 10:07:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EFC61C4727D
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Sep 2020 10:08:54 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9A5BD2396E
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Sep 2020 10:07:28 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 8C6BA2399A
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Sep 2020 10:08:54 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="l2a3ywsJ"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9A5BD2396E
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Ykfq9RhL"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8C6BA2399A
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kLO9h-0002TL-Gh; Thu, 24 Sep 2020 10:07:13 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=UqNy=DB=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kLO9g-0002TC-58
- for xen-devel@lists.xenproject.org; Thu, 24 Sep 2020 10:07:12 +0000
-X-Inumbo-ID: 2e0fde17-65d1-4a00-9777-3dfb464b9d47
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 2e0fde17-65d1-4a00-9777-3dfb464b9d47;
- Thu, 24 Sep 2020 10:07:11 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
- t=1600942030;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Cnz26q+Wgad1fl+1lIDIN/z6TSHQ6Gfj97VLLyLlGgI=;
- b=l2a3ywsJbTP7GZ8SOp/dxfZseMCX366S2+AfBXRF2kLaFLGWvag+E/fr7qVctaDTARbuBK
- sqpcQfWLzRdVCndpBGBj+pImX72S+QsitiUq4DQlHAMYy6Ta7Yg4W9MiYCR3GmVeI2ZtNb
- R/l4H256UNd/7LS1ZwJbWI5BT79q97g=
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 541D5B982;
- Thu, 24 Sep 2020 10:07:48 +0000 (UTC)
-Subject: Re: [PATCH v5 0/4] tools: move most libraries into tools/libs
-To: xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
- Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- Nick Rosbrook <rosbrookn@ainfosec.com>,
- Anthony PERARD <anthony.perard@citrix.com>,
- Shriram Rajagopalan <rshriram@cs.ubc.ca>, Yang Hongyang
- <imhy.yang@gmail.com>, Christian Lindig <christian.lindig@citrix.com>,
- David Scott <dave@recoil.org>
-References: <20200909114645.3709-1-jgross@suse.com>
-From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Message-ID: <822fc6b4-c57e-eb03-b7e8-287ed7d82a11@suse.com>
-Date: Thu, 24 Sep 2020 11:50:34 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.0
+	id 1kLOBA-0002cz-Sl; Thu, 24 Sep 2020 10:08:44 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=puVB=DB=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
+ id 1kLOB9-0002cl-91
+ for xen-devel@lists.xenproject.org; Thu, 24 Sep 2020 10:08:43 +0000
+X-Inumbo-ID: 3f9254da-1043-4c79-8399-3b45552b53b5
+Received: from mail-wr1-x431.google.com (unknown [2a00:1450:4864:20::431])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 3f9254da-1043-4c79-8399-3b45552b53b5;
+ Thu, 24 Sep 2020 10:08:41 +0000 (UTC)
+Received: by mail-wr1-x431.google.com with SMTP id z4so3158790wrr.4
+ for <xen-devel@lists.xenproject.org>; Thu, 24 Sep 2020 03:08:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:reply-to:to:cc:references:in-reply-to:subject:date:message-id
+ :mime-version:content-transfer-encoding:content-language
+ :thread-index; bh=PxjuONuSpgIe0qh4pw3LdtZtlWigqqYRuj4esJeg8Dw=;
+ b=Ykfq9RhLr8rzG/jL62enGpUDm8zzpaKfHsT5eefZxFaPDL6oigZzWoN05tuBIjGEHN
+ PV/YsjImoCr3ZFx24wfIlNk5JMOOqrC0TUX2F1poKERWzqEQ9newG3tyqgVTVAVg6LWN
+ Hp/Re4+ilbMNWChrld2A5qGwychW/d9RWPb1rFuN8wucGsosyleeRLbFBmbMWLa4ry0Q
+ 95C2gtZXVRXt6Q8J9Zuda26WIL+N+jBo2qgeGLXN2jL3GY5lvQ2E2pq4JP8w9hVi4A+H
+ XNAxIe3WZ+rDzMSkZI9wA9b8sGBPcli1yzKadhBraESjPxbkc2YmnxEQX4YyQ2B6UlfG
+ MOzA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:reply-to:to:cc:references:in-reply-to
+ :subject:date:message-id:mime-version:content-transfer-encoding
+ :content-language:thread-index;
+ bh=PxjuONuSpgIe0qh4pw3LdtZtlWigqqYRuj4esJeg8Dw=;
+ b=PBQ1S6zwIc6AiW6/fUOwDT84IymBJa6sIFqEME+OzublWlfv8FDSqrRRRB7OcaMz3H
+ M93gHHT2lz6Yhl6OjfnUhQeAHjFdtO9mLpHKRbEqvJxNe19zhaZ3Hw4YFd0JC558YUBe
+ ZHXNHiW+wxeMKWA91BD813csEgIlq8maJr4ElgOY1lXLKryp/+FbxXuLa7t/C40S7KYn
+ ubqOERh80W/AMXlyRVE6iZuWbRVxNfyu/qHYYObSBJeBAjx+tHaCI+P4AXQlszLeS33B
+ 4RTPWtw48ZttzaklqYl6Ncjv+aOws80gkHaO/hFHq36lSzmBsOxiaJiLS9CFObMIvEnU
+ tuYQ==
+X-Gm-Message-State: AOAM533i/TF79nKAs53cEfz08ENW7qgOneEz638choz26eZ37sEaes5B
+ 8r/h36e1+kOjXA+kQ3f0hmtA6Xgz7kv9mw==
+X-Google-Smtp-Source: ABdhPJzB8Uzo2vxNuj86Wxa9N8o/t3qXnr96rEEZ681vCmWdbNuDWUrv/4USL/eJpw4r0IYagQJNlw==
+X-Received: by 2002:adf:dccd:: with SMTP id x13mr4527492wrm.403.1600942120977; 
+ Thu, 24 Sep 2020 03:08:40 -0700 (PDT)
+Received: from CBGR90WXYV0 (host86-176-94-160.range86-176.btcentralplus.com.
+ [86.176.94.160])
+ by smtp.gmail.com with ESMTPSA id h3sm3267314wrq.0.2020.09.24.03.08.39
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Thu, 24 Sep 2020 03:08:40 -0700 (PDT)
+From: Paul Durrant <xadimgnik@gmail.com>
+X-Google-Original-From: "Paul Durrant" <paul@xen.org>
+To: "'Andrew Cooper'" <andrew.cooper3@citrix.com>,
+ "'Xen-devel'" <xen-devel@lists.xenproject.org>
+Cc: "'George Dunlap'" <George.Dunlap@eu.citrix.com>,
+ "'Ian Jackson'" <iwj@xenproject.org>, "'Jan Beulich'" <JBeulich@suse.com>,
+ "'Stefano Stabellini'" <sstabellini@kernel.org>, "'Wei Liu'" <wl@xen.org>,
+ "'Julien Grall'" <julien@xen.org>,
+ =?utf-8?Q?'Micha=C5=82_Leszczy=C5=84ski'?= <michal.leszczynski@cert.pl>,
+ "'Hubert Jasudowicz'" <hubert.jasudowicz@cert.pl>,
+ "'Tamas K Lengyel'" <tamas@tklengyel.com>
+References: <20200922182444.12350-1-andrew.cooper3@citrix.com>
+ <20200922182444.12350-7-andrew.cooper3@citrix.com>
+In-Reply-To: <20200922182444.12350-7-andrew.cooper3@citrix.com>
+Subject: RE: [PATCH v2 06/11] xen/memory: Clarify the XENMEM_acquire_resource
+ ABI description
+Date: Thu, 24 Sep 2020 11:08:39 +0100
+Message-ID: <003c01d6925a$ad0d99f0$0728cdd0$@xen.org>
 MIME-Version: 1.0
-In-Reply-To: <20200909114645.3709-1-jgross@suse.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailer: Microsoft Outlook 16.0
+Content-Language: en-gb
+Thread-Index: AQIFh6M/JBUQh1P0MghANJzmhArOyAJ/cLEsqQWqE0A=
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,299 +103,89 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
+Reply-To: paul@xen.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Ping?
+> -----Original Message-----
+> From: Andrew Cooper <andrew.cooper3@citrix.com>
+> Sent: 22 September 2020 19:25
+> To: Xen-devel <xen-devel@lists.xenproject.org>
+> Cc: Andrew Cooper <andrew.cooper3@citrix.com>; George Dunlap =
+<George.Dunlap@eu.citrix.com>; Ian
+> Jackson <iwj@xenproject.org>; Jan Beulich <JBeulich@suse.com>; Stefano =
+Stabellini
+> <sstabellini@kernel.org>; Wei Liu <wl@xen.org>; Julien Grall =
+<julien@xen.org>; Paul Durrant
+> <paul@xen.org>; Micha=C5=82 Leszczy=C5=84ski =
+<michal.leszczynski@cert.pl>; Hubert Jasudowicz
+> <hubert.jasudowicz@cert.pl>; Tamas K Lengyel <tamas@tklengyel.com>
+> Subject: [PATCH v2 06/11] xen/memory: Clarify the =
+XENMEM_acquire_resource ABI description
+>=20
+> This is how similar operations already operate, compatible with the =
+sole
+> implementation (in Linux), and explicitly gives us some flexibility.
+>=20
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
-Patches 2-4 could need some Acks...
+Reviewed-by: Paul Durrant <paul@xen.org>
 
+> ---
+> CC: George Dunlap <George.Dunlap@eu.citrix.com>
+> CC: Ian Jackson <iwj@xenproject.org>
+> CC: Jan Beulich <JBeulich@suse.com>
+> CC: Stefano Stabellini <sstabellini@kernel.org>
+> CC: Wei Liu <wl@xen.org>
+> CC: Julien Grall <julien@xen.org>
+> CC: Paul Durrant <paul@xen.org>
+> CC: Micha=C5=82 Leszczy=C5=84ski <michal.leszczynski@cert.pl>
+> CC: Hubert Jasudowicz <hubert.jasudowicz@cert.pl>
+> CC: Tamas K Lengyel <tamas@tklengyel.com>
+> ---
+>  xen/include/public/memory.h | 7 +++++--
+>  1 file changed, 5 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/xen/include/public/memory.h b/xen/include/public/memory.h
+> index d7eb34f167..c4c47a0b38 100644
+> --- a/xen/include/public/memory.h
+> +++ b/xen/include/public/memory.h
+> @@ -642,6 +642,7 @@ struct xen_mem_acquire_resource {
+>       * IN/OUT
+>       *
+>       * As an IN parameter number of frames of the resource to be =
+mapped.
+> +     * This value may be updated during the course of the operation.
+>       *
+>       * When frame_list is NULL and nr_frames is 0, this is =
+interpreted as a
+>       * request for the size of the resource, which shall be returned =
+in the
+> @@ -656,7 +657,8 @@ struct xen_mem_acquire_resource {
+>      uint32_t pad;
+>      /*
+>       * IN - the index of the initial frame to be mapped. This =
+parameter
+> -     *      is ignored if nr_frames is 0.
+> +     *      is ignored if nr_frames is 0.  This value may be updated
+> +     *      during the course of the operation.
+>       */
+>      uint64_t frame;
+>=20
+> @@ -672,7 +674,8 @@ struct xen_mem_acquire_resource {
+>       *          If -EIO is returned then the frame_list has only been
+>       *          partially mapped and it is up to the caller to unmap =
+all
+>       *          the GFNs.
+> -     *          This parameter may be NULL if nr_frames is 0.
+> +     *          This parameter may be NULL if nr_frames is 0.  This
+> +     *          value may be updated during the course of the =
+operation.
+>       */
+>      XEN_GUEST_HANDLE(xen_pfn_t) frame_list;
+>  };
+> --
+> 2.11.0
 
-Juergen
-
-On 09.09.20 13:46, Juergen Gross wrote:
-> The rest batch of the library build rework: the two remaining main
-> libraries libxenlight and libxlutil are moved to tools/libs/ directory.
-> 
-> Changes in V5:
-> - removed already applied patches (1-27)
-> - rebased to current xen staging
-> 
-> Changes in V4:
-> - removed already applied patches (1-8, 10)
-> - added new patches 1, 29
-> - replaced (old) patch 37 with new patch 30
-> - especially fixed qemu build and parallel make
-> - rebased to current staging
-> 
-> Changes in V3:
-> - more cleanup added
-> - added moving libxenguest, libxl and libxlutil
-> - split out dependencies into uselibs.mk
-> - use uselibs.mk for stubdoms build
-> 
-> Juergen Gross (4):
->    tools/libxl: move libxenlight to tools/libs/light
->    tools: rename global libxlutil make variables
->    tools/libs: add option for library names not starting with libxen
->    tools: move libxlutil to tools/libs/util
-> 
->   .gitignore                                    |  37 +-
->   tools/Makefile                                |   1 -
->   tools/Rules.mk                                |  19 +-
->   tools/configure                               |   2 +-
->   tools/configure.ac                            |   2 +-
->   tools/golang/xenlight/Makefile                |   2 +-
->   tools/libs/Makefile                           |   2 +
->   tools/libs/libs.mk                            |  41 +-
->   tools/{libxl => libs/light}/CODING_STYLE      |   0
->   tools/libs/light/Makefile                     | 277 +++++++++++++
->   .../light}/check-libxl-api-rules              |   0
->   tools/{libxl => libs/light}/flexarray.c       |   0
->   tools/{libxl => libs/light}/flexarray.h       |   0
->   tools/{libxl => libs/light}/gentest.py        |   0
->   tools/{libxl => libs/light}/gentypes.py       |   0
->   tools/{libxl => libs/light}/idl.py            |   0
->   tools/{libxl => libs/light}/idl.txt           |   0
->   tools/{libxl => libs/light/include}/libxl.h   |   0
->   .../light/include}/libxl_event.h              |   0
->   .../light/include}/libxl_json.h               |   0
->   .../light/include}/libxl_utils.h              |   0
->   .../light/include}/libxl_uuid.h               |   0
->   tools/{libxl => libs/light}/libxl.c           |   0
->   tools/{libxl => libs/light}/libxl_9pfs.c      |   0
->   tools/{libxl => libs/light}/libxl_aoutils.c   |   0
->   tools/{libxl => libs/light}/libxl_arch.h      |   0
->   tools/{libxl => libs/light}/libxl_arm.c       |   0
->   tools/{libxl => libs/light}/libxl_arm.h       |   0
->   tools/{libxl => libs/light}/libxl_arm_acpi.c  |   0
->   .../{libxl => libs/light}/libxl_arm_no_acpi.c |   0
->   .../{libxl => libs/light}/libxl_bootloader.c  |   0
->   .../light}/libxl_checkpoint_device.c          |   0
->   tools/{libxl => libs/light}/libxl_colo.h      |   0
->   tools/{libxl => libs/light}/libxl_colo_nic.c  |   0
->   .../{libxl => libs/light}/libxl_colo_proxy.c  |   0
->   .../{libxl => libs/light}/libxl_colo_qdisk.c  |   0
->   .../light}/libxl_colo_restore.c               |   0
->   tools/{libxl => libs/light}/libxl_colo_save.c |   0
->   tools/{libxl => libs/light}/libxl_console.c   |   0
->   .../light}/libxl_convert_callout.c            |   0
->   tools/{libxl => libs/light}/libxl_cpuid.c     |   0
->   tools/{libxl => libs/light}/libxl_cpupool.c   |   0
->   tools/{libxl => libs/light}/libxl_create.c    |   0
->   tools/{libxl => libs/light}/libxl_device.c    |   0
->   tools/{libxl => libs/light}/libxl_disk.c      |   0
->   tools/{libxl => libs/light}/libxl_dm.c        |   0
->   tools/{libxl => libs/light}/libxl_dom.c       |   0
->   tools/{libxl => libs/light}/libxl_dom_save.c  |   0
->   .../{libxl => libs/light}/libxl_dom_suspend.c |   0
->   tools/{libxl => libs/light}/libxl_domain.c    |   0
->   tools/{libxl => libs/light}/libxl_event.c     |   0
->   tools/{libxl => libs/light}/libxl_exec.c      |   0
->   tools/{libxl => libs/light}/libxl_flask.c     |   0
->   tools/{libxl => libs/light}/libxl_fork.c      |   0
->   tools/{libxl => libs/light}/libxl_freebsd.c   |   0
->   tools/{libxl => libs/light}/libxl_genid.c     |   0
->   tools/{libxl => libs/light}/libxl_internal.c  |   0
->   tools/{libxl => libs/light}/libxl_internal.h  |   0
->   tools/{libxl => libs/light}/libxl_json.c      |   0
->   .../light}/libxl_libfdt_compat.c              |   0
->   .../light}/libxl_libfdt_compat.h              |   0
->   tools/{libxl => libs/light}/libxl_linux.c     |   0
->   tools/{libxl => libs/light}/libxl_mem.c       |   0
->   tools/{libxl => libs/light}/libxl_netbsd.c    |   0
->   tools/{libxl => libs/light}/libxl_netbuffer.c |   0
->   tools/{libxl => libs/light}/libxl_nic.c       |   0
->   tools/{libxl => libs/light}/libxl_no_colo.c   |   0
->   .../light}/libxl_no_convert_callout.c         |   0
->   tools/{libxl => libs/light}/libxl_nocpuid.c   |   0
->   .../{libxl => libs/light}/libxl_nonetbuffer.c |   0
->   tools/{libxl => libs/light}/libxl_numa.c      |   0
->   tools/{libxl => libs/light}/libxl_osdeps.h    |   0
->   tools/{libxl => libs/light}/libxl_paths.c     |   0
->   tools/{libxl => libs/light}/libxl_pci.c       |   0
->   tools/{libxl => libs/light}/libxl_psr.c       |   0
->   tools/{libxl => libs/light}/libxl_pvcalls.c   |   0
->   tools/{libxl => libs/light}/libxl_qmp.c       |   0
->   tools/{libxl => libs/light}/libxl_remus.c     |   0
->   .../light}/libxl_remus_disk_drbd.c            |   0
->   .../light}/libxl_save_callout.c               |   0
->   .../{libxl => libs/light}/libxl_save_helper.c |   0
->   .../light}/libxl_save_msgs_gen.pl             |   0
->   tools/{libxl => libs/light}/libxl_sched.c     |   0
->   .../light}/libxl_sr_stream_format.h           |   0
->   .../{libxl => libs/light}/libxl_stream_read.c |   0
->   .../light}/libxl_stream_write.c               |   0
->   .../light}/libxl_test_fdevent.c               |   0
->   .../light}/libxl_test_fdevent.h               |   0
->   .../light}/libxl_test_timedereg.c             |   0
->   .../light}/libxl_test_timedereg.h             |   0
->   tools/{libxl => libs/light}/libxl_tmem.c      |   0
->   tools/{libxl => libs/light}/libxl_types.idl   |   0
->   .../light}/libxl_types_internal.idl           |   0
->   tools/{libxl => libs/light}/libxl_usb.c       |   0
->   tools/{libxl => libs/light}/libxl_utils.c     |   0
->   tools/{libxl => libs/light}/libxl_uuid.c      |   0
->   tools/{libxl => libs/light}/libxl_vdispl.c    |   0
->   tools/{libxl => libs/light}/libxl_vkb.c       |   0
->   tools/{libxl => libs/light}/libxl_vnuma.c     |   0
->   tools/{libxl => libs/light}/libxl_vsnd.c      |   0
->   tools/{libxl => libs/light}/libxl_vtpm.c      |   0
->   tools/{libxl => libs/light}/libxl_x86.c       |   0
->   tools/{libxl => libs/light}/libxl_x86_acpi.c  |   0
->   tools/{libxl => libs/light}/libxl_x86_acpi.h  |   0
->   tools/{libxl => libs/light}/libxl_xshelp.c    |   0
->   tools/{libxl => libs/light}/osdeps.c          |   0
->   tools/{libxl => libs/light}/test_common.c     |   0
->   tools/{libxl => libs/light}/test_common.h     |   0
->   .../{libxl => libs/light}/test_fdderegrace.c  |   0
->   tools/{libxl => libs/light}/test_timedereg.c  |   0
->   tools/libs/uselibs.mk                         |   5 +
->   tools/libs/util/CODING_STYLE                  | 330 +++++++++++++++
->   tools/libs/util/Makefile                      |  63 +++
->   .../{libxl => libs/util/include}/libxlutil.h  |   0
->   tools/{libxl => libs/util}/libxlu_cfg.c       |   0
->   tools/{libxl => libs/util}/libxlu_cfg_i.h     |   0
->   tools/{libxl => libs/util}/libxlu_cfg_l.c     |   0
->   tools/{libxl => libs/util}/libxlu_cfg_l.h     |   0
->   tools/{libxl => libs/util}/libxlu_cfg_l.l     |   0
->   tools/{libxl => libs/util}/libxlu_cfg_y.c     |   0
->   tools/{libxl => libs/util}/libxlu_cfg_y.h     |   0
->   tools/{libxl => libs/util}/libxlu_cfg_y.y     |   0
->   tools/{libxl => libs/util}/libxlu_disk.c      |   0
->   tools/{libxl => libs/util}/libxlu_disk_i.h    |   0
->   tools/{libxl => libs/util}/libxlu_disk_l.c    |   0
->   tools/{libxl => libs/util}/libxlu_disk_l.h    |   0
->   tools/{libxl => libs/util}/libxlu_disk_l.l    |   0
->   tools/{libxl => libs/util}/libxlu_internal.h  |   0
->   tools/{libxl => libs/util}/libxlu_pci.c       |   0
->   tools/{libxl => libs/util}/libxlu_vif.c       |   0
->   tools/libxl/Makefile                          | 384 ------------------
->   tools/ocaml/libs/xl/Makefile                  |   8 +-
->   tools/xl/Makefile                             |   4 +-
->   133 files changed, 731 insertions(+), 446 deletions(-)
->   rename tools/{libxl => libs/light}/CODING_STYLE (100%)
->   create mode 100644 tools/libs/light/Makefile
->   rename tools/{libxl => libs/light}/check-libxl-api-rules (100%)
->   rename tools/{libxl => libs/light}/flexarray.c (100%)
->   rename tools/{libxl => libs/light}/flexarray.h (100%)
->   rename tools/{libxl => libs/light}/gentest.py (100%)
->   rename tools/{libxl => libs/light}/gentypes.py (100%)
->   rename tools/{libxl => libs/light}/idl.py (100%)
->   rename tools/{libxl => libs/light}/idl.txt (100%)
->   rename tools/{libxl => libs/light/include}/libxl.h (100%)
->   rename tools/{libxl => libs/light/include}/libxl_event.h (100%)
->   rename tools/{libxl => libs/light/include}/libxl_json.h (100%)
->   rename tools/{libxl => libs/light/include}/libxl_utils.h (100%)
->   rename tools/{libxl => libs/light/include}/libxl_uuid.h (100%)
->   rename tools/{libxl => libs/light}/libxl.c (100%)
->   rename tools/{libxl => libs/light}/libxl_9pfs.c (100%)
->   rename tools/{libxl => libs/light}/libxl_aoutils.c (100%)
->   rename tools/{libxl => libs/light}/libxl_arch.h (100%)
->   rename tools/{libxl => libs/light}/libxl_arm.c (100%)
->   rename tools/{libxl => libs/light}/libxl_arm.h (100%)
->   rename tools/{libxl => libs/light}/libxl_arm_acpi.c (100%)
->   rename tools/{libxl => libs/light}/libxl_arm_no_acpi.c (100%)
->   rename tools/{libxl => libs/light}/libxl_bootloader.c (100%)
->   rename tools/{libxl => libs/light}/libxl_checkpoint_device.c (100%)
->   rename tools/{libxl => libs/light}/libxl_colo.h (100%)
->   rename tools/{libxl => libs/light}/libxl_colo_nic.c (100%)
->   rename tools/{libxl => libs/light}/libxl_colo_proxy.c (100%)
->   rename tools/{libxl => libs/light}/libxl_colo_qdisk.c (100%)
->   rename tools/{libxl => libs/light}/libxl_colo_restore.c (100%)
->   rename tools/{libxl => libs/light}/libxl_colo_save.c (100%)
->   rename tools/{libxl => libs/light}/libxl_console.c (100%)
->   rename tools/{libxl => libs/light}/libxl_convert_callout.c (100%)
->   rename tools/{libxl => libs/light}/libxl_cpuid.c (100%)
->   rename tools/{libxl => libs/light}/libxl_cpupool.c (100%)
->   rename tools/{libxl => libs/light}/libxl_create.c (100%)
->   rename tools/{libxl => libs/light}/libxl_device.c (100%)
->   rename tools/{libxl => libs/light}/libxl_disk.c (100%)
->   rename tools/{libxl => libs/light}/libxl_dm.c (100%)
->   rename tools/{libxl => libs/light}/libxl_dom.c (100%)
->   rename tools/{libxl => libs/light}/libxl_dom_save.c (100%)
->   rename tools/{libxl => libs/light}/libxl_dom_suspend.c (100%)
->   rename tools/{libxl => libs/light}/libxl_domain.c (100%)
->   rename tools/{libxl => libs/light}/libxl_event.c (100%)
->   rename tools/{libxl => libs/light}/libxl_exec.c (100%)
->   rename tools/{libxl => libs/light}/libxl_flask.c (100%)
->   rename tools/{libxl => libs/light}/libxl_fork.c (100%)
->   rename tools/{libxl => libs/light}/libxl_freebsd.c (100%)
->   rename tools/{libxl => libs/light}/libxl_genid.c (100%)
->   rename tools/{libxl => libs/light}/libxl_internal.c (100%)
->   rename tools/{libxl => libs/light}/libxl_internal.h (100%)
->   rename tools/{libxl => libs/light}/libxl_json.c (100%)
->   rename tools/{libxl => libs/light}/libxl_libfdt_compat.c (100%)
->   rename tools/{libxl => libs/light}/libxl_libfdt_compat.h (100%)
->   rename tools/{libxl => libs/light}/libxl_linux.c (100%)
->   rename tools/{libxl => libs/light}/libxl_mem.c (100%)
->   rename tools/{libxl => libs/light}/libxl_netbsd.c (100%)
->   rename tools/{libxl => libs/light}/libxl_netbuffer.c (100%)
->   rename tools/{libxl => libs/light}/libxl_nic.c (100%)
->   rename tools/{libxl => libs/light}/libxl_no_colo.c (100%)
->   rename tools/{libxl => libs/light}/libxl_no_convert_callout.c (100%)
->   rename tools/{libxl => libs/light}/libxl_nocpuid.c (100%)
->   rename tools/{libxl => libs/light}/libxl_nonetbuffer.c (100%)
->   rename tools/{libxl => libs/light}/libxl_numa.c (100%)
->   rename tools/{libxl => libs/light}/libxl_osdeps.h (100%)
->   rename tools/{libxl => libs/light}/libxl_paths.c (100%)
->   rename tools/{libxl => libs/light}/libxl_pci.c (100%)
->   rename tools/{libxl => libs/light}/libxl_psr.c (100%)
->   rename tools/{libxl => libs/light}/libxl_pvcalls.c (100%)
->   rename tools/{libxl => libs/light}/libxl_qmp.c (100%)
->   rename tools/{libxl => libs/light}/libxl_remus.c (100%)
->   rename tools/{libxl => libs/light}/libxl_remus_disk_drbd.c (100%)
->   rename tools/{libxl => libs/light}/libxl_save_callout.c (100%)
->   rename tools/{libxl => libs/light}/libxl_save_helper.c (100%)
->   rename tools/{libxl => libs/light}/libxl_save_msgs_gen.pl (100%)
->   rename tools/{libxl => libs/light}/libxl_sched.c (100%)
->   rename tools/{libxl => libs/light}/libxl_sr_stream_format.h (100%)
->   rename tools/{libxl => libs/light}/libxl_stream_read.c (100%)
->   rename tools/{libxl => libs/light}/libxl_stream_write.c (100%)
->   rename tools/{libxl => libs/light}/libxl_test_fdevent.c (100%)
->   rename tools/{libxl => libs/light}/libxl_test_fdevent.h (100%)
->   rename tools/{libxl => libs/light}/libxl_test_timedereg.c (100%)
->   rename tools/{libxl => libs/light}/libxl_test_timedereg.h (100%)
->   rename tools/{libxl => libs/light}/libxl_tmem.c (100%)
->   rename tools/{libxl => libs/light}/libxl_types.idl (100%)
->   rename tools/{libxl => libs/light}/libxl_types_internal.idl (100%)
->   rename tools/{libxl => libs/light}/libxl_usb.c (100%)
->   rename tools/{libxl => libs/light}/libxl_utils.c (100%)
->   rename tools/{libxl => libs/light}/libxl_uuid.c (100%)
->   rename tools/{libxl => libs/light}/libxl_vdispl.c (100%)
->   rename tools/{libxl => libs/light}/libxl_vkb.c (100%)
->   rename tools/{libxl => libs/light}/libxl_vnuma.c (100%)
->   rename tools/{libxl => libs/light}/libxl_vsnd.c (100%)
->   rename tools/{libxl => libs/light}/libxl_vtpm.c (100%)
->   rename tools/{libxl => libs/light}/libxl_x86.c (100%)
->   rename tools/{libxl => libs/light}/libxl_x86_acpi.c (100%)
->   rename tools/{libxl => libs/light}/libxl_x86_acpi.h (100%)
->   rename tools/{libxl => libs/light}/libxl_xshelp.c (100%)
->   rename tools/{libxl => libs/light}/osdeps.c (100%)
->   rename tools/{libxl => libs/light}/test_common.c (100%)
->   rename tools/{libxl => libs/light}/test_common.h (100%)
->   rename tools/{libxl => libs/light}/test_fdderegrace.c (100%)
->   rename tools/{libxl => libs/light}/test_timedereg.c (100%)
->   create mode 100644 tools/libs/util/CODING_STYLE
->   create mode 100644 tools/libs/util/Makefile
->   rename tools/{libxl => libs/util/include}/libxlutil.h (100%)
->   rename tools/{libxl => libs/util}/libxlu_cfg.c (100%)
->   rename tools/{libxl => libs/util}/libxlu_cfg_i.h (100%)
->   rename tools/{libxl => libs/util}/libxlu_cfg_l.c (100%)
->   rename tools/{libxl => libs/util}/libxlu_cfg_l.h (100%)
->   rename tools/{libxl => libs/util}/libxlu_cfg_l.l (100%)
->   rename tools/{libxl => libs/util}/libxlu_cfg_y.c (100%)
->   rename tools/{libxl => libs/util}/libxlu_cfg_y.h (100%)
->   rename tools/{libxl => libs/util}/libxlu_cfg_y.y (100%)
->   rename tools/{libxl => libs/util}/libxlu_disk.c (100%)
->   rename tools/{libxl => libs/util}/libxlu_disk_i.h (100%)
->   rename tools/{libxl => libs/util}/libxlu_disk_l.c (100%)
->   rename tools/{libxl => libs/util}/libxlu_disk_l.h (100%)
->   rename tools/{libxl => libs/util}/libxlu_disk_l.l (100%)
->   rename tools/{libxl => libs/util}/libxlu_internal.h (100%)
->   rename tools/{libxl => libs/util}/libxlu_pci.c (100%)
->   rename tools/{libxl => libs/util}/libxlu_vif.c (100%)
->   delete mode 100644 tools/libxl/Makefile
-> 
 
 
