@@ -2,56 +2,69 @@ Return-Path: <SRS0=okQV=DB=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+X-Spam-Status: No, score=-5.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 95200C4363D
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Sep 2020 14:39:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 78709C4363D
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Sep 2020 14:56:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1C693238E3
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Sep 2020 14:39:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1C693238E3
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=huawei.com
+	by mail.kernel.org (Postfix) with ESMTPS id E5A01206C3
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Sep 2020 14:56:39 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="iIzVHDh9"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E5A01206C3
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kLSOg-0005yi-VB; Thu, 24 Sep 2020 14:38:58 +0000
+	id 1kLSfQ-0007jz-HD; Thu, 24 Sep 2020 14:56:16 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=va+m=DB=huawei.com=liheng40@srs-us1.protection.inumbo.net>)
- id 1kLSMO-0005s8-QM
- for xen-devel@lists.xenproject.org; Thu, 24 Sep 2020 14:36:36 +0000
-X-Inumbo-ID: 25b912c1-4b4a-4eca-90bb-c1796268c144
-Received: from huawei.com (unknown [45.249.212.191])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=+2aH=DB=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1kLSfP-0007ju-6a
+ for xen-devel@lists.xenproject.org; Thu, 24 Sep 2020 14:56:15 +0000
+X-Inumbo-ID: 9aba906e-df00-464b-a42f-8f7cb7d01de7
+Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 25b912c1-4b4a-4eca-90bb-c1796268c144;
- Thu, 24 Sep 2020 14:36:26 +0000 (UTC)
-Received: from DGGEMS402-HUB.china.huawei.com (unknown [172.30.72.59])
- by Forcepoint Email with ESMTP id AA7356ED7F3D4B87A936;
- Thu, 24 Sep 2020 22:36:19 +0800 (CST)
-Received: from huawei.com (10.175.104.57) by DGGEMS402-HUB.china.huawei.com
- (10.3.19.202) with Microsoft SMTP Server id 14.3.487.0; Thu, 24 Sep 2020
- 22:36:16 +0800
-From: Li Heng <liheng40@huawei.com>
-To: <konrad.wilk@oracle.com>, <bhelgaas@google.com>, <tglx@linutronix.de>,
- <mingo@redhat.com>, <bp@alien8.de>
-CC: <x86@kernel.org>, <hpa@zytor.com>, <xen-devel@lists.xenproject.org>,
- <linux-pci@vger.kernel.org>, <linux-kernel@vger.kernel.org>
-Subject: [PATCH -next] xen: Fix a previous prototype warning in xen.c
-Date: Thu, 24 Sep 2020 22:36:16 +0800
-Message-ID: <1600958176-23406-1-git-send-email-liheng40@huawei.com>
-X-Mailer: git-send-email 2.7.4
+ id 9aba906e-df00-464b-a42f-8f7cb7d01de7;
+ Thu, 24 Sep 2020 14:56:13 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+ t=1600959373;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=8nS6uTdqNs7Mryh1A0MaVtFPBEGII0qtQzfeJFc9wKg=;
+ b=iIzVHDh9Z9LcUmlaTI+0ECD3/26xSEnfU6TiFdTJxA6Hy/D4KrsPEU17VeEF4X0RZNUK3E
+ uUWRLVFS+Wzm2tFy6o+mT8YBYbyWIBF6CWTnfvj34omxN4344ZzfKf6kPArcECQMa8uWe2
+ AugwjeHFMVV3+a7oRf9n96S7btlDH7A=
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 1AEC6B03F;
+ Thu, 24 Sep 2020 14:56:13 +0000 (UTC)
+Subject: Re: [PATCH 3/3] x86/pv: Inject #UD for missing SYSCALL callbacks
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, Wei Liu
+ <wl@xen.org>, Andy Lutomirski <luto@kernel.org>,
+ Manuel Bouyer <bouyer@antioche.eu.org>
+References: <20200923101848.29049-1-andrew.cooper3@citrix.com>
+ <20200923101848.29049-4-andrew.cooper3@citrix.com>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <ed891c94-63a4-496c-6817-1b88ac4c004b@suse.com>
+Date: Thu, 24 Sep 2020 16:56:13 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.175.104.57]
-X-CFilter-Loop: Reflected
-X-Mailman-Approved-At: Thu, 24 Sep 2020 14:38:57 +0000
+In-Reply-To: <20200923101848.29049-4-andrew.cooper3@citrix.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,30 +78,104 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Fix the warning:
-arch/x86/pci/xen.c:423:13: warning:
-no previous prototype for ‘xen_msi_init’ [-Wmissing-prototypes]
+On 23.09.2020 12:18, Andrew Cooper wrote:
+> Despite appearing to be a deliberate design choice of early PV64, the
+> resulting behaviour for unregistered SYSCALL callbacks creates an untenable
+> testability problem for Xen.  Furthermore, the behaviour is undocumented,
+> bizarre, and inconsistent with related behaviour in Xen, and very liable
+> introduce a security vulnerability into a PV guest if the author hasn't
+> studied Xen's assembly code in detail.
+> 
+> There are two different bugs here.
+> 
+> 1) The current logic confuses the registered entrypoints, and may deliver a
+>    SYSCALL from 32bit userspace to the 64bit entry, when only a 64bit
+>    entrypoint is registered.
+> 
+>    This has been the case ever since 2007 (c/s cd75d47348b) but up until
+>    2018 (c/s dba899de14) the wrong selectors would be handed to the guest for
+>    a 32bit SYSCALL entry, making it appear as if it a 64bit entry all along.
 
-Reported-by: Hulk Robot <hulkci@huawei.com>
-Signed-off-by: Li Heng <liheng40@huawei.com>
----
- arch/x86/pci/xen.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+I'm not sure what you derive the last half sentence from. To a 32-bit
+PV guest, nothing can make things look like being 64-bit. And as you
+did say in your 2018 change, FLAT_KERNEL_SS == FLAT_USER_SS32.
 
-diff --git a/arch/x86/pci/xen.c b/arch/x86/pci/xen.c
-index 89395a5..f663a5f 100644
---- a/arch/x86/pci/xen.c
-+++ b/arch/x86/pci/xen.c
-@@ -420,7 +420,7 @@ int __init pci_xen_init(void)
- }
+As to the "confusion" of entry points - before the compat mode entry
+path was introduced, a 64-bit guest could only register a single
+entry point. Hence guests at the time had to multiplex 32- and 64-bit
+user mode entry from this one code path. In order to avoid regressing
+any such guest, the falling back to using the 64-bit entry point was
+chosen. Effectively what you propose is to regress such guests now,
+rather than back then.
 
- #ifdef CONFIG_PCI_MSI
--void __init xen_msi_init(void)
-+static void __init xen_msi_init(void)
- {
- 	if (!disable_apic) {
- 		/*
---
-2.7.4
+>    Xen would malfunction under these circumstances, if it were a PV guest.
+>    Linux would as well, but PVOps has always registered both entrypoints and
+>    discarded the Xen-provided selectors.  NetBSD really does malfunction as a
+>    consequence (benignly now, but a VM DoS before the 2018 Xen selector fix).
+> 
+> 2) In the case that neither SYSCALL callbacks are registered, the guest will
+>    be crashed when userspace executes a SYSCALL instruction, which is a
+>    userspace => kernel DoS.
+> 
+>    This has been the case ever since the introduction of 64bit PV support, but
+>    behaves unlike all other SYSCALL/SYSENTER callbacks in Xen, which yield
+>    #GP/#UD in userspace before the callback is registered, and are therefore
+>    safe by default.
 
+I agree this part is an improvement.
+
+> This change does constitute a change in the PV ABI, for corner cases of a PV
+> guest kernel registering neither callback, or not registering the 32bit
+> callback when running on AMD/Hygon hardware.
+> 
+> It brings the behaviour in line with PV32 SYSCALL/SYSENTER, and PV64
+> SYSENTER (safe by default, until explicitly enabled), as well as native
+> hardware (always delivered to the single applicable callback).
+
+Albeit an OS running natively and setting EFER.SCE is obliged to set both
+entry points; they can't have one without the other (and not be vulnerable).
+Since it's unclear what the PV equivalent of EFER.SCE is, I don't think
+comparing this particular aspect of the behavior makes a lot of sense.
+
+> Most importantly however, and the primary reason for the change, is that it
+> lets us actually test the PV entrypoints to prove correct behaviour.
+
+You mean "test the absence of PV entry points" here?
+
+> --- a/xen/arch/x86/x86_64/entry.S
+> +++ b/xen/arch/x86/x86_64/entry.S
+> @@ -26,18 +26,30 @@
+>  /* %rbx: struct vcpu */
+>  ENTRY(switch_to_kernel)
+>          leaq  VCPU_trap_bounce(%rbx),%rdx
+> -        /* TB_eip = (32-bit syscall && syscall32_addr) ?
+> -         *          syscall32_addr : syscall_addr */
+> -        xor   %eax,%eax
+> +
+> +        /* TB_eip = 32-bit syscall ? syscall32_addr : syscall_addr */
+> +        mov   VCPU_syscall32_addr(%rbx), %ecx
+> +        mov   VCPU_syscall_addr(%rbx), %rax
+>          cmpw  $FLAT_USER_CS32,UREGS_cs(%rsp)
+> -        cmoveq VCPU_syscall32_addr(%rbx),%rax
+> -        testq %rax,%rax
+> -        cmovzq VCPU_syscall_addr(%rbx),%rax
+> -        movq  %rax,TRAPBOUNCE_eip(%rdx)
+> +        cmove %rcx, %rax
+> +
+>          /* TB_flags = VGCF_syscall_disables_events ? TBF_INTERRUPT : 0 */
+>          btl   $_VGCF_syscall_disables_events,VCPU_guest_context_flags(%rbx)
+>          setc  %cl
+>          leal  (,%rcx,TBF_INTERRUPT),%ecx
+> +
+> +        test  %rax, %rax
+> +UNLIKELY_START(z, syscall_no_callback) /* TB_eip == 0 => #UD */
+> +        movq  VCPU_trap_ctxt(%rbx), %rdi
+> +        movl  $X86_EXC_UD, UREGS_entry_vector(%rsp)
+> +        subl  $2, UREGS_rip(%rsp)
+> +        movl  X86_EXC_UD * TRAPINFO_sizeof + TRAPINFO_eip(%rdi), %eax
+
+I guess you mean "movq ..., %rax"? Iirc 32-bit guests don't even get through
+here.
+
+Jan
 
