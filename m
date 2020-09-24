@@ -2,71 +2,63 @@ Return-Path: <SRS0=okQV=DB=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.3 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-11.5 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4AE07C4363D
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Sep 2020 10:16:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 90AC6C4363D
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Sep 2020 10:20:06 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id F164923600
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Sep 2020 10:16:52 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F164923600
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=techsingularity.net
+	by mail.kernel.org (Postfix) with ESMTPS id 4708523600
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Sep 2020 10:20:06 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4708523600
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.cz
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kLOIo-0003or-PV; Thu, 24 Sep 2020 10:16:38 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=legg=DB=techsingularity.net=mgorman@srs-us1.protection.inumbo.net>)
- id 1kLNjs-0000JZ-0C
- for xen-devel@lists.xenproject.org; Thu, 24 Sep 2020 09:40:32 +0000
-X-Inumbo-ID: 68e10c8a-3a96-4dc5-9f54-ecffe3fd9224
-Received: from outbound-smtp47.blacknight.com (unknown [46.22.136.64])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 68e10c8a-3a96-4dc5-9f54-ecffe3fd9224;
- Thu, 24 Sep 2020 09:40:29 +0000 (UTC)
-Received: from mail.blacknight.com (pemlinmail06.blacknight.ie [81.17.255.152])
- by outbound-smtp47.blacknight.com (Postfix) with ESMTPS id D729BFAB68
- for <xen-devel@lists.xenproject.org>; Thu, 24 Sep 2020 10:40:28 +0100 (IST)
-Received: (qmail 3548 invoked from network); 24 Sep 2020 09:40:28 -0000
-Received: from unknown (HELO techsingularity.net)
- (mgorman@techsingularity.net@[84.203.22.4])
- by 81.17.254.9 with ESMTPSA (AES256-SHA encrypted, authenticated);
- 24 Sep 2020 09:40:28 -0000
-Date: Thu, 24 Sep 2020 10:40:27 +0100
-From: Mel Gorman <mgorman@techsingularity.net>
-To: David Hildenbrand <david@redhat.com>
-Cc: Vlastimil Babka <vbabka@suse.cz>, osalvador@suse.de,
- linux-kernel@vger.kernel.org, linux-mm@kvack.org,
- linux-hyperv@vger.kernel.org, xen-devel@lists.xenproject.org,
- linux-acpi@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
+	id 1kLOLv-00042g-Ar; Thu, 24 Sep 2020 10:19:51 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=Y/Bv=DB=suse.cz=vbabka@srs-us1.protection.inumbo.net>)
+ id 1kLOLu-00042T-Gh
+ for xen-devel@lists.xenproject.org; Thu, 24 Sep 2020 10:19:50 +0000
+X-Inumbo-ID: f82bdad7-2bf8-422a-bdfd-5b1942aeddcd
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id f82bdad7-2bf8-422a-bdfd-5b1942aeddcd;
+ Thu, 24 Sep 2020 10:19:49 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 9A3F0AF1F;
+ Thu, 24 Sep 2020 10:20:26 +0000 (UTC)
+Subject: Re: [PATCH RFC 1/4] mm/page_alloc: convert "report" flag of
+ __free_one_page() to a proper flag
+To: David Hildenbrand <david@redhat.com>, linux-kernel@vger.kernel.org
+Cc: linux-mm@kvack.org, linux-hyperv@vger.kernel.org,
+ xen-devel@lists.xenproject.org, linux-acpi@vger.kernel.org,
+ Andrew Morton <akpm@linux-foundation.org>,
  Alexander Duyck <alexander.h.duyck@linux.intel.com>,
+ Mel Gorman <mgorman@techsingularity.net>, Michal Hocko <mhocko@kernel.org>,
  Dave Hansen <dave.hansen@intel.com>,
- Haiyang Zhang <haiyangz@microsoft.com>,
- "K. Y. Srinivasan" <kys@microsoft.com>,
- Michael Ellerman <mpe@ellerman.id.au>,
- Michal Hocko <mhocko@kernel.org>, Mike Rapoport <rppt@kernel.org>,
- Scott Cheloha <cheloha@linux.ibm.com>,
- Stephen Hemminger <sthemmin@microsoft.com>, Wei Liu <wei.liu@kernel.org>,
- Wei Yang <richard.weiyang@linux.alibaba.com>
-Subject: Re: [PATCH RFC 0/4] mm: place pages to the freelist tail when onling
- and undoing isolation
-Message-ID: <20200924094026.GL3179@techsingularity.net>
-References: <5c0910c2cd0d9d351e509392a45552fb@suse.de>
- <DAC9E747-BDDF-41B6-A89B-604880DD7543@redhat.com>
- <67928cbd-950a-3279-bf9b-29b04c87728b@suse.cz>
- <fee562a3-9f8f-e9b4-68fe-09c5ea885b91@redhat.com>
+ Wei Yang <richard.weiyang@linux.alibaba.com>,
+ Oscar Salvador <osalvador@suse.de>, Mike Rapoport <rppt@kernel.org>
+References: <20200916183411.64756-1-david@redhat.com>
+ <20200916183411.64756-2-david@redhat.com>
+From: Vlastimil Babka <vbabka@suse.cz>
+Message-ID: <82ba4aec-0c69-2461-485a-fa4a7777e5c3@suse.cz>
+Date: Thu, 24 Sep 2020 12:19:47 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-15
-Content-Disposition: inline
-In-Reply-To: <fee562a3-9f8f-e9b4-68fe-09c5ea885b91@redhat.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Mailman-Approved-At: Thu, 24 Sep 2020 10:16:37 +0000
+In-Reply-To: <20200916183411.64756-2-david@redhat.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,97 +72,103 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Wed, Sep 23, 2020 at 05:26:06PM +0200, David Hildenbrand wrote:
-> >>> ???On 2020-09-16 20:34, David Hildenbrand wrote:
-> >>>> When adding separate memory blocks via add_memory*() and onlining them
-> >>>> immediately, the metadata (especially the memmap) of the next block will be
-> >>>> placed onto one of the just added+onlined block. This creates a chain
-> >>>> of unmovable allocations: If the last memory block cannot get
-> >>>> offlined+removed() so will all dependant ones. We directly have unmovable
-> >>>> allocations all over the place.
-> >>>> This can be observed quite easily using virtio-mem, however, it can also
-> >>>> be observed when using DIMMs. The freshly onlined pages will usually be
-> >>>> placed to the head of the freelists, meaning they will be allocated next,
-> >>>> turning the just-added memory usually immediately un-removable. The
-> >>>> fresh pages are cold, prefering to allocate others (that might be hot)
-> >>>> also feels to be the natural thing to do.
-> >>>> It also applies to the hyper-v balloon xen-balloon, and ppc64 dlpar: when
-> >>>> adding separate, successive memory blocks, each memory block will have
-> >>>> unmovable allocations on them - for example gigantic pages will fail to
-> >>>> allocate.
-> >>>> While the ZONE_NORMAL doesn't provide any guarantees that memory can get
-> >>>> offlined+removed again (any kind of fragmentation with unmovable
-> >>>> allocations is possible), there are many scenarios (hotplugging a lot of
-> >>>> memory, running workload, hotunplug some memory/as much as possible) where
-> >>>> we can offline+remove quite a lot with this patchset.
-> >>>
-> >>> Hi David,
-> >>>
-> >>
-> >> Hi Oscar.
-> >>
-> >>> I did not read through the patchset yet, so sorry if the question is nonsense, but is this not trying to fix the same issue the vmemmap patches did? [1]
-> >>
-> >> Not nonesense at all. It only helps to some degree, though. It solves the dependencies due to the memmap. However, it???s not completely ideal, especially for single memory blocks.
-> >>
-> >> With single memory blocks (virtio-mem, xen-balloon, hv balloon, ppc dlpar) you still have unmovable (vmemmap chunks) all over the physical address space. Consider the gigantic page example after hotplug. You directly fragmented all hotplugged memory.
-> >>
-> >> Of course, there might be (less extreme) dependencies due page tables for the identity mapping, extended struct pages and similar.
-> >>
-> >> Having that said, there are other benefits when preferring other memory over just hotplugged memory. Think about adding+onlining memory during boot (dimms under QEMU, virtio-mem), once the system is up you will have most (all) of that memory completely untouched.
-> >>
-> >> So while vmemmap on hotplugged memory would tackle some part of the issue, there are cases where this approach is better, and there are even benefits when combining both.
-> > 
+On 9/16/20 8:34 PM, David Hildenbrand wrote:
+> Let's prepare for additional flags and avoid long parameter lists of bools.
+> Follow-up patches will also make use of the flags in __free_pages_ok(),
+> however, I wasn't able to come up with a better name for the type - should
+> be good enough for internal purposes.
 > 
-> Hi Vlastimil,
+> Cc: Andrew Morton <akpm@linux-foundation.org>
+> Cc: Alexander Duyck <alexander.h.duyck@linux.intel.com>
+> Cc: Mel Gorman <mgorman@techsingularity.net>
+> Cc: Michal Hocko <mhocko@kernel.org>
+> Cc: Dave Hansen <dave.hansen@intel.com>
+> Cc: Vlastimil Babka <vbabka@suse.cz>
+> Cc: Wei Yang <richard.weiyang@linux.alibaba.com>
+> Cc: Oscar Salvador <osalvador@suse.de>
+> Cc: Mike Rapoport <rppt@kernel.org>
+> Signed-off-by: David Hildenbrand <david@redhat.com>
+
+Reviewed-by: Vlastimil Babka <vbabka@suse.cz>
+
+> ---
+>  mm/page_alloc.c | 28 ++++++++++++++++++++--------
+>  1 file changed, 20 insertions(+), 8 deletions(-)
 > 
-> > I see the point, but I don't think the head/tail mechanism is great for this. It
-> > might sort of work, but with other interfering activity there are no guarantees
-> > and it relies on a subtle implementation detail. There are better mechanisms
-> 
-> For the specified use case of adding+onlining a whole bunch of memory
-> this works just fine. We don't care too much about "other interfering
-> activity" as you mention here, or about guarantees - this is a pure
-> optimization that seems to work just fine in practice.
-> 
-> I'm not sure about the "subtle implementation detail" - buddy merging,
-> and head/tail of buddy lists are a basic concept of our page allocator.
-> If that would ever change, the optimization here would be lost and we
-> would have to think of something else. Nothing would actually break -
-> and it's all kept directly in page_alloc.c
+> diff --git a/mm/page_alloc.c b/mm/page_alloc.c
+> index 6b699d273d6e..91cefb8157dd 100644
+> --- a/mm/page_alloc.c
+> +++ b/mm/page_alloc.c
+> @@ -77,6 +77,18 @@
+>  #include "shuffle.h"
+>  #include "page_reporting.h"
+>  
+> +/* Free One Page flags: for internal, non-pcp variants of free_pages(). */
+> +typedef int __bitwise fop_t;
+> +
+> +/* No special request */
+> +#define FOP_NONE		((__force fop_t)0)
+> +
+> +/*
+> + * Skip free page reporting notification after buddy merging (will *not* mark
+> + * the page reported, only skip the notification).
+> + */
+> +#define FOP_SKIP_REPORT_NOTIFY	((__force fop_t)BIT(0))
+> +
+>  /* prevent >1 _updater_ of zone percpu pageset ->high and ->batch fields */
+>  static DEFINE_MUTEX(pcp_batch_high_lock);
+>  #define MIN_PERCPU_PAGELIST_FRACTION	(8)
+> @@ -948,10 +960,9 @@ buddy_merge_likely(unsigned long pfn, unsigned long buddy_pfn,
+>   * -- nyc
+>   */
+>  
+> -static inline void __free_one_page(struct page *page,
+> -		unsigned long pfn,
+> -		struct zone *zone, unsigned int order,
+> -		int migratetype, bool report)
+> +static inline void __free_one_page(struct page *page, unsigned long pfn,
+> +				   struct zone *zone, unsigned int order,
+> +				   int migratetype, fop_t fop_flags)
+>  {
+>  	struct capture_control *capc = task_capc(zone);
+>  	unsigned long buddy_pfn;
+> @@ -1038,7 +1049,7 @@ static inline void __free_one_page(struct page *page,
+>  		add_to_free_list(page, zone, order, migratetype);
+>  
+>  	/* Notify page reporting subsystem of freed page */
+> -	if (report)
+> +	if (!(fop_flags & FOP_SKIP_REPORT_NOTIFY))
+>  		page_reporting_notify_free(order);
+>  }
+>  
+> @@ -1368,7 +1379,7 @@ static void free_pcppages_bulk(struct zone *zone, int count,
+>  		if (unlikely(isolated_pageblocks))
+>  			mt = get_pageblock_migratetype(page);
+>  
+> -		__free_one_page(page, page_to_pfn(page), zone, 0, mt, true);
+> +		__free_one_page(page, page_to_pfn(page), zone, 0, mt, FOP_NONE);
+>  		trace_mm_page_pcpu_drain(page, 0, mt);
+>  	}
+>  	spin_unlock(&zone->lock);
+> @@ -1384,7 +1395,7 @@ static void free_one_page(struct zone *zone,
+>  		is_migrate_isolate(migratetype))) {
+>  		migratetype = get_pfnblock_migratetype(page, pfn);
+>  	}
+> -	__free_one_page(page, pfn, zone, order, migratetype, true);
+> +	__free_one_page(page, pfn, zone, order, migratetype, FOP_NONE);
+>  	spin_unlock(&zone->lock);
+>  }
+>  
+> @@ -3277,7 +3288,8 @@ void __putback_isolated_page(struct page *page, unsigned int order, int mt)
+>  	lockdep_assert_held(&zone->lock);
+>  
+>  	/* Return isolated page to tail of freelist. */
+> -	__free_one_page(page, page_to_pfn(page), zone, order, mt, false);
+> +	__free_one_page(page, page_to_pfn(page), zone, order, mt,
+> +			FOP_SKIP_REPORT_NOTIFY);
+>  }
+>  
+>  /*
 > 
 
-It's somewhat subtle because it's relying heavily on the exact ordering
-of how pages are pulled from the free lists at the moment. Lets say for
-example that someone was brave enough to tackle the problem of the giant
-zone lock and split the zone into allocation arenas (like what glibc does
-to split the lock). Depending on the exact ordering of how pages are
-added and removed from the list would break your approach. I'm wary of
-anything that relies on the ordering of freelists for correctness becauuse
-it limits the ability to fix the zone lock (which has been overdue for
-fixing for years now and getting worse as node sizes increase).
-
-To be robust, you'd need to do something like early memory bring-up whereby
-pages are directly allocated from one part of the DIMM (presumably the
-start) and use that for the metadata -- potentially all the metadata that
-would be necessary to plug/unplug the entire DIMM. This would effectively
-be unmovable but if you want to guarantee that all the memory except the
-metadata can be unplugged, you do not have much alteratives. Playing games
-with the ordering of the freelists will simply end up as "sometimes works,
-sometimes does not". 
-
-In terms of forcing ranges to be UNMOVABLE or MOVABLE (either via zones
-or by implementing "sticky" pageblocks which hits complex reclaim-related
-problems), you start running into problems similar to lowmem starvation
-where a page cache allocation fails because unmovable metadata cannot
-be allocated.
-
-I suggest you keep it simple -- statically allocate the potential
-metadata needed in the future even though it limits the maximum amount
-of memory that can be unplugged. The alternative is unpredictable
-plug/unplug success rates.
-
--- 
-Mel Gorman
-SUSE Labs
 
