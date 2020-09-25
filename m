@@ -2,67 +2,61 @@ Return-Path: <SRS0=eoLF=DC=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-8.3 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=unavailable
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A59ADC4363D
-	for <xen-devel@archiver.kernel.org>; Fri, 25 Sep 2020 10:12:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2488BC4363D
+	for <xen-devel@archiver.kernel.org>; Fri, 25 Sep 2020 10:34:47 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2D78621741
-	for <xen-devel@archiver.kernel.org>; Fri, 25 Sep 2020 10:12:14 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="k6k9NIWY"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2D78621741
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id BBD9D21D91
+	for <xen-devel@archiver.kernel.org>; Fri, 25 Sep 2020 10:34:46 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BBD9D21D91
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kLkhm-0002xu-JN; Fri, 25 Sep 2020 10:11:54 +0000
+	id 1kLl3Z-0004tV-Gx; Fri, 25 Sep 2020 10:34:25 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=ocWZ=DC=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kLkhl-0002xp-QS
- for xen-devel@lists.xenproject.org; Fri, 25 Sep 2020 10:11:53 +0000
-X-Inumbo-ID: 56cf123d-6c3e-431c-8234-6cdd97da9110
+ (envelope-from <SRS0=y8Ey=DC=suse.de=osalvador@srs-us1.protection.inumbo.net>)
+ id 1kLl3Y-0004tQ-5r
+ for xen-devel@lists.xenproject.org; Fri, 25 Sep 2020 10:34:24 +0000
+X-Inumbo-ID: 5d66c243-5d94-4c8e-b881-2f1abc4eae20
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 56cf123d-6c3e-431c-8234-6cdd97da9110;
- Fri, 25 Sep 2020 10:11:52 +0000 (UTC)
+ id 5d66c243-5d94-4c8e-b881-2f1abc4eae20;
+ Fri, 25 Sep 2020 10:34:22 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
- t=1601028711;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=NG0OrJgM5uOXfafgj6N9/hIxz/Mxn1NzqyKKMmujJRs=;
- b=k6k9NIWYGUGqjHrkfCWCI0YCOS3zb/9xVYikaeqvqaNL9IdDiu4yiys1lKPv0F8vsItlaG
- RjsujkDUKUOtYVHkr0ofyuZ2UBrbHPj5JnE8M1eCpKBEll0msGPImE0l251H2GLzahDTgl
- QcPuY+dskEla5387e8iQgzprAvBnOa8=
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id C0B23ACBA;
- Fri, 25 Sep 2020 10:11:51 +0000 (UTC)
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org, x86@kernel.org,
- linux-kernel@vger.kernel.org
-Cc: Juergen Gross <jgross@suse.com>,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
- Borislav Petkov <bp@alien8.de>, "H. Peter Anvin" <hpa@zytor.com>,
- stable@vger.kernel.org
-Subject: [PATCH] x86/xen: disable Firmware First mode for correctable memory
- errors
-Date: Fri, 25 Sep 2020 12:11:48 +0200
-Message-Id: <20200925101148.21012-1-jgross@suse.com>
-X-Mailer: git-send-email 2.26.2
+ by mx2.suse.de (Postfix) with ESMTP id 59024ACA1;
+ Fri, 25 Sep 2020 10:34:21 +0000 (UTC)
+Date: Fri, 25 Sep 2020 12:34:18 +0200
+From: Oscar Salvador <osalvador@suse.de>
+To: David Hildenbrand <david@redhat.com>
+Cc: linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+ linux-hyperv@vger.kernel.org, xen-devel@lists.xenproject.org,
+ linux-acpi@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
+ Alexander Duyck <alexander.h.duyck@linux.intel.com>,
+ Mel Gorman <mgorman@techsingularity.net>, Michal Hocko <mhocko@kernel.org>,
+ Dave Hansen <dave.hansen@intel.com>, Vlastimil Babka <vbabka@suse.cz>,
+ Wei Yang <richard.weiyang@linux.alibaba.com>,
+ Mike Rapoport <rppt@kernel.org>
+Subject: Re: [PATCH RFC 1/4] mm/page_alloc: convert "report" flag of
+ __free_one_page() to a proper flag
+Message-ID: <20200925103413.GA32629@linux>
+References: <20200916183411.64756-1-david@redhat.com>
+ <20200916183411.64756-2-david@redhat.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20200916183411.64756-2-david@redhat.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,50 +70,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-When running as Xen dom0 the kernel isn't responsible for selecting the
-error handling mode, this should be handled by the hypervisor.
+On Wed, Sep 16, 2020 at 08:34:08PM +0200, David Hildenbrand wrote:
+> Let's prepare for additional flags and avoid long parameter lists of bools.
+> Follow-up patches will also make use of the flags in __free_pages_ok(),
+> however, I wasn't able to come up with a better name for the type - should
+> be good enough for internal purposes.
+> 
+> Cc: Andrew Morton <akpm@linux-foundation.org>
+> Cc: Alexander Duyck <alexander.h.duyck@linux.intel.com>
+> Cc: Mel Gorman <mgorman@techsingularity.net>
+> Cc: Michal Hocko <mhocko@kernel.org>
+> Cc: Dave Hansen <dave.hansen@intel.com>
+> Cc: Vlastimil Babka <vbabka@suse.cz>
+> Cc: Wei Yang <richard.weiyang@linux.alibaba.com>
+> Cc: Oscar Salvador <osalvador@suse.de>
+> Cc: Mike Rapoport <rppt@kernel.org>
+> Signed-off-by: David Hildenbrand <david@redhat.com>
 
-So disable setting FF mode when running as Xen pv guest. Not doing so
-might result in boot splats like:
+Reviewed-by: Oscar Salvador <osalvador@suse.de>
 
-[    7.509696] HEST: Enabling Firmware First mode for corrected errors.
-[    7.510382] mce: [Firmware Bug]: Ignoring request to disable invalid MCA bank 2.
-[    7.510383] mce: [Firmware Bug]: Ignoring request to disable invalid MCA bank 3.
-[    7.510384] mce: [Firmware Bug]: Ignoring request to disable invalid MCA bank 4.
-[    7.510384] mce: [Firmware Bug]: Ignoring request to disable invalid MCA bank 5.
-[    7.510385] mce: [Firmware Bug]: Ignoring request to disable invalid MCA bank 6.
-[    7.510386] mce: [Firmware Bug]: Ignoring request to disable invalid MCA bank 7.
-[    7.510386] mce: [Firmware Bug]: Ignoring request to disable invalid MCA bank 8.
-
-Reason is that the HEST ACPI table contains the real number of MCA
-banks, while the hypervisor is emulating only 2 banks for guests.
-
-Cc: stable@vger.kernel.org
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
- arch/x86/xen/enlighten_pv.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
-
-diff --git a/arch/x86/xen/enlighten_pv.c b/arch/x86/xen/enlighten_pv.c
-index 22e741e0b10c..065c049d0f3c 100644
---- a/arch/x86/xen/enlighten_pv.c
-+++ b/arch/x86/xen/enlighten_pv.c
-@@ -1296,6 +1296,14 @@ asmlinkage __visible void __init xen_start_kernel(void)
- 
- 	xen_smp_init();
- 
-+#ifdef CONFIG_ACPI
-+	/*
-+	 * Disable selecting "Firmware First mode" for correctable memory
-+	 * errors, as this is the duty of the hypervisor to decide.
-+	 */
-+	acpi_disable_cmcff = 1;
-+#endif
-+
- #ifdef CONFIG_ACPI_NUMA
- 	/*
- 	 * The pages we from Xen are not related to machine pages, so
 -- 
-2.26.2
-
+Oscar Salvador
+SUSE L3
 
