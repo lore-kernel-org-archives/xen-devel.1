@@ -2,100 +2,73 @@ Return-Path: <SRS0=eoLF=DC=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.5 required=3.0 tests=BAYES_00,DKIM_ADSP_CUSTOM_MED,
-	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ECED5C4727D
-	for <xen-devel@archiver.kernel.org>; Fri, 25 Sep 2020 12:49:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C6413C4727D
+	for <xen-devel@archiver.kernel.org>; Fri, 25 Sep 2020 13:16:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A2CEC21D7A
-	for <xen-devel@archiver.kernel.org>; Fri, 25 Sep 2020 12:49:25 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 626542389E
+	for <xen-devel@archiver.kernel.org>; Fri, 25 Sep 2020 13:16:39 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="rU39jGtx"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A2CEC21D7A
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="Wn6sYcTT"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 626542389E
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kLnA3-0000eW-01; Fri, 25 Sep 2020 12:49:15 +0000
+	id 1kLnaD-00062U-9P; Fri, 25 Sep 2020 13:16:17 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=4q2y=DC=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
- id 1kLnA1-0000eR-Ig
- for xen-devel@lists.xenproject.org; Fri, 25 Sep 2020 12:49:13 +0000
-X-Inumbo-ID: 380bd37e-d2eb-4932-9071-3e30c5bba210
-Received: from mail-wm1-x334.google.com (unknown [2a00:1450:4864:20::334])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=O9+A=DC=xen.org=julien@srs-us1.protection.inumbo.net>)
+ id 1kLnaB-00062P-M3
+ for xen-devel@lists.xenproject.org; Fri, 25 Sep 2020 13:16:15 +0000
+X-Inumbo-ID: 6b3d4486-03cf-4d81-921b-9e0b5f8bb296
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 380bd37e-d2eb-4932-9071-3e30c5bba210;
- Fri, 25 Sep 2020 12:49:12 +0000 (UTC)
-Received: by mail-wm1-x334.google.com with SMTP id a9so3177216wmm.2
- for <xen-devel@lists.xenproject.org>; Fri, 25 Sep 2020 05:49:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:reply-to:to:cc:references:in-reply-to:subject:date:message-id
- :mime-version:content-transfer-encoding:content-language
- :thread-index; bh=UyZWxoWtHaf7ml4GMZLnbo6VzUFlyuP7fW8c9SPe4Rs=;
- b=rU39jGtx0F3pgkPEPHiojwbVmWX3W9DaRcQIkfty6TePFXseHnjNtLzimfADpfkqAW
- oTOmoFk7tAA9GImSv1sfHqhqgR9O7+eC2yAqinZh9JdCRz/M+Vw0rym+fDmNBgsbYNpt
- qwhvFXSWENiwyjCRkH0pCDZo8iAW5E6lCcchuKpPK2HAbUKqsduJrHqaswsWDCgP/2vK
- AiLDdGUjzSgDG6X1xNmDtYt2E+J/MjjR8FTqTsDyPEJXXKHsab8N9GKYTOc5de9BvMUD
- Bfm5bvU5SI1jwdULIW5K0+meRSB9hHBBgU3eQVqNz248t0cpQSkF/dPWY/9G7imp6jnl
- kKUg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:reply-to:to:cc:references:in-reply-to
- :subject:date:message-id:mime-version:content-transfer-encoding
- :content-language:thread-index;
- bh=UyZWxoWtHaf7ml4GMZLnbo6VzUFlyuP7fW8c9SPe4Rs=;
- b=PcopeNT6jzu2aE5vwVr78lMJQiLxGISHhSMOka7b3w99snrP9QbS9piDeT1EPzjYmG
- YGY5EdQHMUFtVh8ycKm/W6pbDWGoPiAbyJcR7UE9OFbXey+8ZrxTOHs+nVmKHwb+cV4z
- exSTDe6cWcpDz225sUWfgalK8UBUAGHdeuJE0aJOLyib2EUw2mQ8egkNyYK5K9QvGd1e
- Sh++6kQZQZCHte7YfeylIAzaTnDJirKzmhUBOhs2tfRWIl9UVsO6z3+so3fpLRCobGnA
- 9S/j4G6huj/RkVSuPC9EdKAYdrpuBBsGqoeKNi2CduXytBZflOIkDQ0JmsM0Fw8RAnVP
- mWCQ==
-X-Gm-Message-State: AOAM532SmyTw8XQ1oi13lCb13JOMMExvdrAg3ZuOR+0LD55gj7BOHC1z
- JDmCLYVtsRPKjvALHzleIKk=
-X-Google-Smtp-Source: ABdhPJyMV947Jj4eM1ioc/moeAPPKlPxZmfZBM7y+/lmNFhNz8EmhOQMwDL6zb/HrNZS1nLp1sv1BQ==
-X-Received: by 2002:a7b:cf36:: with SMTP id m22mr3170108wmg.51.1601038151862; 
- Fri, 25 Sep 2020 05:49:11 -0700 (PDT)
-Received: from CBGR90WXYV0 (host86-176-94-160.range86-176.btcentralplus.com.
- [86.176.94.160])
- by smtp.gmail.com with ESMTPSA id v17sm2844416wrc.23.2020.09.25.05.49.10
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Fri, 25 Sep 2020 05:49:11 -0700 (PDT)
-From: Paul Durrant <xadimgnik@gmail.com>
-X-Google-Original-From: "Paul Durrant" <paul@xen.org>
-To: "'Lengyel, Tamas'" <tamas.lengyel@intel.com>,
- <xen-devel@lists.xenproject.org>
-Cc: "'Paul Durrant'" <pdurrant@amazon.com>,
- "'Andrew Cooper'" <andrew.cooper3@citrix.com>,
- "'Daniel De Graaf'" <dgdegra@tycho.nsa.gov>,
- "'George Dunlap'" <george.dunlap@citrix.com>,
- "'Ian Jackson'" <ian.jackson@eu.citrix.com>,
- "'Jan Beulich'" <jbeulich@suse.com>, "'Julien Grall'" <julien@xen.org>,
- =?UTF-8?Q?'Marek_Marczykowski-G=C3=B3recki'?=
- <marmarek@invisiblethingslab.com>, 
- =?UTF-8?Q?'Roger_Pau_Monn=C3=A9'?= <roger.pau@citrix.com>,
- "'Stefano Stabellini'" <sstabellini@kernel.org>,
- "'Volodymyr Babchuk'" <Volodymyr_Babchuk@epam.com>,
- "'Wei Liu'" <wl@xen.org>
-References: <20200924131030.1876-1-paul@xen.org>
- <CY4PR11MB0056034DE1EE8445CE816494FB390@CY4PR11MB0056.namprd11.prod.outlook.com>
-In-Reply-To: <CY4PR11MB0056034DE1EE8445CE816494FB390@CY4PR11MB0056.namprd11.prod.outlook.com>
-Subject: RE: [PATCH v9 0/8] domain context infrastructure
-Date: Fri, 25 Sep 2020 13:49:10 +0100
-Message-ID: <001301d6933a$4409fda0$cc1df8e0$@xen.org>
+ id 6b3d4486-03cf-4d81-921b-9e0b5f8bb296;
+ Fri, 25 Sep 2020 13:16:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+ bh=+MRsefyqsdqmb8KldEibeK4JJOKDVWBsWeZHLgvQ9C4=; b=Wn6sYcTT1YyifpiilyAEoURs7n
+ azk5Kp7L1fsz0Iyk90ien6PvvPNvCDFpwc7r9MntGfCwGoeFc8yHzj3aSjXJNfPKjACRxXrGBT4xW
+ mGdoujwKqL+F7VSYxT/z9G0IUJFny7+mlRWJjZW7eD3SUvcU/DbvEWPdvQkzzyUgz4zM=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1kLna5-00036O-1M; Fri, 25 Sep 2020 13:16:09 +0000
+Received: from [54.239.6.186] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1kLna4-0003e3-Mq; Fri, 25 Sep 2020 13:16:08 +0000
+Subject: Re: [PATCH] evtchn/Flask: pre-allocate node on send path
+To: Jan Beulich <jbeulich@suse.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Daniel de Graaf <dgdegra@tycho.nsa.gov>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <George.Dunlap@eu.citrix.com>, Ian Jackson
+ <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>
+References: <f633e95e-11e7-ccfc-07ce-7cc817fcd7fe@suse.com>
+ <8237e286-168f-a4e7-be8b-aba5ff781e7c@xen.org>
+ <706b94ae-ca05-2218-6025-e5d62297dda6@suse.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <3ad0529d-ad55-8864-1df2-193eaf104c1f@xen.org>
+Date: Fri, 25 Sep 2020 14:16:05 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
+ Gecko/20100101 Thunderbird/68.12.0
 MIME-Version: 1.0
-Content-Type: text/plain;
-	charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailer: Microsoft Outlook 16.0
-Content-Language: en-gb
-Thread-Index: AQHMaZuCwoR0ssB24MBKMpsJEDSJHwGwujGcqYAbJ3A=
+In-Reply-To: <706b94ae-ca05-2218-6025-e5d62297dda6@suse.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -106,79 +79,58 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Reply-To: paul@xen.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-> -----Original Message-----
-> From: Lengyel, Tamas <tamas.lengyel@intel.com>
-> Sent: 24 September 2020 20:36
-> To: Paul Durrant <paul@xen.org>; xen-devel@lists.xenproject.org
-> Cc: Paul Durrant <pdurrant@amazon.com>; Andrew Cooper =
-<andrew.cooper3@citrix.com>; Daniel De Graaf
-> <dgdegra@tycho.nsa.gov>; George Dunlap <george.dunlap@citrix.com>; Ian =
-Jackson
-> <ian.jackson@eu.citrix.com>; Jan Beulich <jbeulich@suse.com>; Julien =
-Grall <julien@xen.org>; Marek
-> Marczykowski-G=C3=B3recki <marmarek@invisiblethingslab.com>; Roger Pau =
-Monn=C3=A9 <roger.pau@citrix.com>;
-> Stefano Stabellini <sstabellini@kernel.org>; Volodymyr Babchuk =
-<Volodymyr_Babchuk@epam.com>; Wei Liu
-> <wl@xen.org>
-> Subject: RE: [PATCH v9 0/8] domain context infrastructure
->=20
->=20
->=20
-> > -----Original Message-----
-> > From: Xen-devel <xen-devel-bounces@lists.xenproject.org> On Behalf =
-Of Paul
-> > Durrant
-> > Sent: Thursday, September 24, 2020 9:10 AM
-> > To: xen-devel@lists.xenproject.org
-> > Cc: Paul Durrant <pdurrant@amazon.com>; Andrew Cooper
-> > <andrew.cooper3@citrix.com>; Daniel De Graaf =
-<dgdegra@tycho.nsa.gov>;
-> > George Dunlap <george.dunlap@citrix.com>; Ian Jackson
-> > <ian.jackson@eu.citrix.com>; Jan Beulich <jbeulich@suse.com>; Julien =
-Grall
-> > <julien@xen.org>; Marek Marczykowski-G=C3=B3recki
-> > <marmarek@invisiblethingslab.com>; Roger Pau Monn=C3=A9
-> > <roger.pau@citrix.com>; Stefano Stabellini <sstabellini@kernel.org>;
-> > Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>; Wei Liu
-> > <wl@xen.org>
-> > Subject: [PATCH v9 0/8] domain context infrastructure
-> >
-> > From: Paul Durrant <pdurrant@amazon.com>
-> >
-> > Paul Durrant (8):
-> >   xen/common: introduce a new framework for save/restore of 'domain'
-> >     context
-> >   xen/common/domctl: introduce XEN_DOMCTL_get/setdomaincontext
-> >   tools/misc: add xen-domctx to present domain context
-> >   docs/specs: add missing definitions to libxc-migration-stream
-> >   docs / tools: specific migration v4 to include DOMAIN_CONTEXT
-> >   common/domain: add a domain context record for shared_info...
-> >   x86/time: add a domain context record for tsc_info...
-> >   tools/libxc: add DOMAIN_CONTEXT records to the migration stream...
->=20
->=20
-> Hi Paul,
-> Could you push a git branch somewhere for this series? I would like to =
-see this being integrated with
-> VM forking and if its not too much effort just create the patch for =
-that so that it could be appended
-> to the series.
->=20
+Hi Jan,
 
-Hi Tamas,
+On 25/09/2020 13:21, Jan Beulich wrote:
+> On 25.09.2020 12:34, Julien Grall wrote:
+>> On 24/09/2020 11:53, Jan Beulich wrote:
+>>> xmalloc() & Co may not be called with IRQs off, or else check_lock()
+>>> will have its assertion trigger about locks getting acquired
+>>> inconsistently. Re-arranging the locking in evtchn_send() doesn't seem
+>>> very reasonable, especially since the per-channel lock was introduced to
+>>> avoid acquiring the per-domain event lock on the send paths. Issue a
+>>> second call to xsm_evtchn_send() instead, before acquiring the lock, to
+>>> give XSM / Flask a chance to pre-allocate whatever it may need.
+>>
+>> This is the sort of fall-out I was expecting when we decide to turn off
+>> the interrupts for big chunk of code. I couldn't find any at the time
+>> though...
+>>
+>> Can you remind which caller of send_guest{global, vcpu}_virq() will call
+>> them with interrupts off?
+> 
+> I don't recall which one of the two it was that I hit; we wanted
+> both to use the lock anyway. send_guest_pirq() very clearly also
+> gets called with IRQs off.
+> 
+>> Would it be possible to consider deferring the call to a softirq
+>> taslket? If so, this would allow us to turn the interrupts again.
+> 
+> Of course this is in principle possible; the question is how
+> involved this is going to get. 
+> However, on x86 oprofile's call to
+> send_guest_vcpu_virq() can't easily be replaced - it's dangerous
+> enough already that in involves locks in NMI context. I don't
+> fancy seeing it use more commonly used ones.
 
-  Done. See =
-https://xenbits.xen.org/gitweb/?p=3Dpeople/pauldu/xen.git;a=3Dshortlog;h=3D=
-refs/heads/domain-save14
+Fair enough. I would still like to consider a way where we could avoid 
+to hack xsm_* because we have the interrupts disabled.
 
-  Cheers,
+AFAICT, we don't need send_guest_global_virq() and evtchn_send() to be 
+mutually exclusive. Is that correct?
 
-    Paul
+So how about splitting the lock in two? One would be used when the 
+interrupts have to be disabled while the other would be used when we can 
+keep interrupts enabled.
 
+The two locks would have to be taken when the event channel needs to be 
+modified.
 
+Cheers,
+
+-- 
+Julien Grall
 
