@@ -2,80 +2,78 @@ Return-Path: <SRS0=eoLF=DC=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.5 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,HK_RANDOM_FROM,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-13.3 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,NICE_REPLY_A,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 47FBDC4363D
-	for <xen-devel@archiver.kernel.org>; Fri, 25 Sep 2020 13:22:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9BB40C4363D
+	for <xen-devel@archiver.kernel.org>; Fri, 25 Sep 2020 13:22:26 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 035B923976
-	for <xen-devel@archiver.kernel.org>; Fri, 25 Sep 2020 13:22:22 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 035B923976
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linux.intel.com
+	by mail.kernel.org (Postfix) with ESMTPS id 40D9523976
+	for <xen-devel@archiver.kernel.org>; Fri, 25 Sep 2020 13:22:26 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="WGu4Sb8A"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 40D9523976
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kLnfe-00073h-UC; Fri, 25 Sep 2020 13:21:54 +0000
+	id 1kLnfy-000779-7Z; Fri, 25 Sep 2020 13:22:14 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=8Inn=DC=linux.intel.com=tvrtko.ursulin@srs-us1.protection.inumbo.net>)
- id 1kLnfd-00073O-90
- for xen-devel@lists.xenproject.org; Fri, 25 Sep 2020 13:21:53 +0000
-X-Inumbo-ID: 164009c7-aca2-4e5f-8bcb-fc221b018831
-Received: from mga09.intel.com (unknown [134.134.136.24])
+ <SRS0=/WGo=DC=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1kLnfx-000773-R5
+ for xen-devel@lists.xenproject.org; Fri, 25 Sep 2020 13:22:13 +0000
+X-Inumbo-ID: 7dcee2b9-85b7-453e-9adc-471088b768b1
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 164009c7-aca2-4e5f-8bcb-fc221b018831;
- Fri, 25 Sep 2020 13:05:49 +0000 (UTC)
-IronPort-SDR: HNPTlGjzuID6UFCPX3jP8hEbAd7UXQlOSQ00AFG/8JpDV7Hk4bSVuGMUOwVnq1p8xZ6j65VKr2
- s+tYJBxotxvg==
-X-IronPort-AV: E=McAfee;i="6000,8403,9754"; a="162417562"
-X-IronPort-AV: E=Sophos;i="5.77,302,1596524400"; d="scan'208";a="162417562"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga004.jf.intel.com ([10.7.209.38])
- by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 25 Sep 2020 06:05:43 -0700
-IronPort-SDR: 5Dwboiqhy5yHPzqfhh5/S6fzq83iIqIUdZO8emD2bnlcA/WE0SaYoeYBpYxDMx5CtVPALBxtts
- ZUeFrbRupJww==
-X-IronPort-AV: E=Sophos;i="5.77,302,1596524400"; d="scan'208";a="455824158"
-Received: from mlevy2-mobl.ger.corp.intel.com (HELO [10.251.176.131])
- ([10.251.176.131])
- by orsmga004-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 25 Sep 2020 06:05:34 -0700
-Subject: Re: [PATCH 06/11] drm/i915: use vmap in shmem_pin_map
-To: Christoph Hellwig <hch@lst.de>, Andrew Morton <akpm@linux-foundation.org>
-Cc: Peter Zijlstra <peterz@infradead.org>,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>, Juergen Gross
- <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>,
- Jani Nikula <jani.nikula@linux.intel.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Chris Wilson <chris@chris-wilson.co.uk>,
- Matthew Auld <matthew.auld@intel.com>, Rodrigo Vivi
- <rodrigo.vivi@intel.com>, Minchan Kim <minchan@kernel.org>,
- Matthew Wilcox <willy@infradead.org>, Nitin Gupta <ngupta@vflare.org>,
- x86@kernel.org, xen-devel@lists.xenproject.org,
- linux-kernel@vger.kernel.org, intel-gfx@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, linux-mm@kvack.org
-References: <20200924135853.875294-1-hch@lst.de>
- <20200924135853.875294-7-hch@lst.de>
-From: Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>
-Organization: Intel Corporation UK Plc
-Message-ID: <9459e195-a412-3357-c53d-4349e600896d@linux.intel.com>
-Date: Fri, 25 Sep 2020 14:05:32 +0100
+ id 7dcee2b9-85b7-453e-9adc-471088b768b1;
+ Fri, 25 Sep 2020 13:22:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1601040133;
+ h=subject:to:cc:references:from:message-id:date:
+ mime-version:in-reply-to:content-transfer-encoding;
+ bh=zFMmj6nJyv0rsQU8Ixp2xzXyzMGqOpH6NuifI93Qw64=;
+ b=WGu4Sb8A7xUqizLTX2wVzVH1EcNi1kfyB/9xtl+Ab+GzQ0kK9fox6Hk2
+ TdMJ4RfinaNLFEMtZuAYCQ9dhAUpgRhA5KkRUSI9Skfpm7M7SVu0hAMmZ
+ yXAEFtN/rjBS6D1uhi2e3MLUbZ9jfTKl265wvcDnu7te3sOg09AyePfAu 8=;
+Authentication-Results: esa1.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none
+IronPort-SDR: JwnUnj1IQzGhCMjXLBqStMHMEjq7gu/7rgtdngdUrw4KH0tTMuT2AswPzjybPmBmyR5fLkrmwP
+ ip1UOITL6iBxp5AGGVREN0MoWDyhNIQu454jRWAEzCQUrSD8ClY6QQyygiivKke2S9EeibY/hT
+ L4VlqwOL2lHT7ubAcZm3Fhhw641wYurfkbvllvfDnZjylhBTq5Pj+udRjTuRBCQ2StmXRVVYJU
+ AE082XhG4j/9BkZuQlieSKdnyxzayi3J5ULJMrJzHbrZwjc0gA1eeOc1fzCMq3Q7nMu9pgCN9d
+ 6T8=
+X-SBRS: None
+X-MesageID: 27924035
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.77,302,1596513600"; d="scan'208";a="27924035"
+Subject: Re: [PATCH] x86: Use LOCK ADD instead of MFENCE for smp_mb()
+To: Jan Beulich <jbeulich@suse.com>
+CC: Xen-devel <xen-devel@lists.xenproject.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, Wei Liu
+ <wl@xen.org>, Ian Jackson <Ian.Jackson@citrix.com>
+References: <20200921130423.8035-1-andrew.cooper3@citrix.com>
+ <aaf209f6-7878-f37d-3c30-c6981e675f6c@suse.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Message-ID: <b4824856-fb54-a5dd-8170-3fdf59927977@citrix.com>
+Date: Fri, 25 Sep 2020 14:22:06 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20200924135853.875294-7-hch@lst.de>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+In-Reply-To: <aaf209f6-7878-f37d-3c30-c6981e675f6c@suse.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Content-Language: en-GB
+X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
+ FTLPEX02CL05.citrite.net (10.13.108.178)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -89,129 +87,115 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
+On 21/09/2020 14:58, Jan Beulich wrote:
+> On 21.09.2020 15:04, Andrew Cooper wrote:
+>> MFENCE is overly heavyweight for SMP semantics on WB memory, because it also
+>> orders weaker cached writes, and flushes the WC buffers.
+>>
+>> This technique was used as an optimisation in Java[1], and later adopted by
+>> Linux[2] where it was measured to have a 60% performance improvement in VirtIO
+>> benchmarks.
+>>
+>> The stack is used because it is hot in the L1 cache, and a -4 offset is used
+>> to avoid creating a false data dependency on live data.  (For 64bit userspace,
+>> the offset needs to be under the red zone to avoid false dependences).
+>>
+>> Fix up the 32 bit definitions in HVMLoader and libxc to avoid a false data
+>> dependency.
+>>
+>> [1] https://shipilev.net/blog/2014/on-the-fence-with-dependencies/
+>> [2] https://git.kernel.org/torvalds/c/450cbdd0125cfa5d7bbf9e2a6b6961cc48d29730
+>>
+>> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+> For the hypervisor and hvmloader part:
+> Reviewed-by: Jan Beulich <jbeulich@suse.com>
+>
+>> --- a/tools/libs/ctrl/include/xenctrl.h
+>> +++ b/tools/libs/ctrl/include/xenctrl.h
+>> @@ -68,11 +68,11 @@
+>>  #define xen_barrier() asm volatile ( "" : : : "memory")
+>>  
+>>  #if defined(__i386__)
+>> -#define xen_mb()  asm volatile ( "lock; addl $0,0(%%esp)" : : : "memory" )
+> If this causes a false dependency (which I agree it does), how
+> come ...
+>
+>> +#define xen_mb()  asm volatile ( "lock addl $0, -4(%%esp)" ::: "memory" )
+>>  #define xen_rmb() xen_barrier()
+>>  #define xen_wmb() xen_barrier()
+>>  #elif defined(__x86_64__)
+>> -#define xen_mb()  asm volatile ( "mfence" : : : "memory")
+>> +#define xen_mb()  asm volatile ( "lock addl $0, -128(%%rsp)" ::: "memory" )
+> ... this doesn't? It accesses the bottom 4 bytes of the redzone,
+> doesn't it?
 
-On 24/09/2020 14:58, Christoph Hellwig wrote:
-> shmem_pin_map somewhat awkwardly reimplements vmap using
-> alloc_vm_area and manual pte setup.  The only practical difference
-> is that alloc_vm_area prefeaults the vmalloc area PTEs, which doesn't
-> seem to be required here (and could be added to vmap using a flag if
-> actually required).  Switch to use vmap, and use vfree to free both the
-> vmalloc mapping and the page array, as well as dropping the references
-> to each page.
-> 
-> Signed-off-by: Christoph Hellwig <hch@lst.de>
-> ---
->   drivers/gpu/drm/i915/gt/shmem_utils.c | 76 +++++++--------------------
->   1 file changed, 18 insertions(+), 58 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/i915/gt/shmem_utils.c b/drivers/gpu/drm/i915/gt/shmem_utils.c
-> index 43c7acbdc79dea..f011ea42487e11 100644
-> --- a/drivers/gpu/drm/i915/gt/shmem_utils.c
-> +++ b/drivers/gpu/drm/i915/gt/shmem_utils.c
-> @@ -49,80 +49,40 @@ struct file *shmem_create_from_object(struct drm_i915_gem_object *obj)
->   	return file;
->   }
->   
-> -static size_t shmem_npte(struct file *file)
-> -{
-> -	return file->f_mapping->host->i_size >> PAGE_SHIFT;
-> -}
-> -
-> -static void __shmem_unpin_map(struct file *file, void *ptr, size_t n_pte)
-> -{
-> -	unsigned long pfn;
-> -
-> -	vunmap(ptr);
-> -
-> -	for (pfn = 0; pfn < n_pte; pfn++) {
-> -		struct page *page;
-> -
-> -		page = shmem_read_mapping_page_gfp(file->f_mapping, pfn,
-> -						   GFP_KERNEL);
-> -		if (!WARN_ON(IS_ERR(page))) {
-> -			put_page(page);
-> -			put_page(page);
-> -		}
-> -	}
-> -}
-> -
->   void *shmem_pin_map(struct file *file)
->   {
-> -	const size_t n_pte = shmem_npte(file);
-> -	pte_t *stack[32], **ptes, **mem;
-> -	struct vm_struct *area;
-> -	unsigned long pfn;
-> -
-> -	mem = stack;
-> -	if (n_pte > ARRAY_SIZE(stack)) {
-> -		mem = kvmalloc_array(n_pte, sizeof(*mem), GFP_KERNEL);
-> -		if (!mem)
-> -			return NULL;
-> -	}
-> +	struct page **pages;
-> +	size_t n_pages, i;
-> +	void *vaddr;
->   
-> -	area = alloc_vm_area(n_pte << PAGE_SHIFT, mem);
-> -	if (!area) {
-> -		if (mem != stack)
-> -			kvfree(mem);
-> +	n_pages = file->f_mapping->host->i_size >> PAGE_SHIFT;
-> +	pages = kvmalloc_array(n_pages, sizeof(*pages), GFP_KERNEL);
-> +	if (!pages)
->   		return NULL;
-> -	}
->   
-> -	ptes = mem;
-> -	for (pfn = 0; pfn < n_pte; pfn++) {
-> -		struct page *page;
-> -
-> -		page = shmem_read_mapping_page_gfp(file->f_mapping, pfn,
-> -						   GFP_KERNEL);
-> -		if (IS_ERR(page))
-> +	for (i = 0; i < n_pages; i++) {
-> +		pages[i] = shmem_read_mapping_page_gfp(file->f_mapping, i,
-> +						       GFP_KERNEL);
-> +		if (IS_ERR(pages[i]))
->   			goto err_page;
-> -
-> -		**ptes++ = mk_pte(page,  PAGE_KERNEL);
->   	}
->   
-> -	if (mem != stack)
-> -		kvfree(mem);
-> -
-> +	vaddr = vmap(pages, n_pages, VM_MAP_PUT_PAGES, PAGE_KERNEL);
-> +	if (!vaddr)
-> +		goto err_page;
->   	mapping_set_unevictable(file->f_mapping);
-> -	return area->addr;
-> -
-> +	return vaddr;
->   err_page:
-> -	if (mem != stack)
-> -		kvfree(mem);
-> -
-> -	__shmem_unpin_map(file, area->addr, pfn);
-> +	while (--i >= 0)
-> +		put_page(pages[i]);
-> +	kvfree(pages);
->   	return NULL;
->   }
->   
->   void shmem_unpin_map(struct file *file, void *ptr)
->   {
->   	mapping_clear_unevictable(file->f_mapping);
-> -	__shmem_unpin_map(file, ptr, shmem_npte(file));
-> +	vfree(ptr);
->   }
->   
->   static int __shmem_rw(struct file *file, loff_t off,
-> 
+I suppose it does.  However, if anything, I'd be tempted to move it
+closer, perhaps even to -32 or so.
 
-Reviewed-by: Tvrtko Ursulin <tvrtko.ursulin@intel.com>
+The red-zone isn't used a great deal to start with.  It is only useful
+for blocks of code with a working set marginally larger than the GPRs,
+and no calls/etc.  This is far more commonly seen in number crunching
+code, and rare in data-marshalling logic around a shared memory buffer.
 
-Regards,
+However, you also don't want the memory operand to hit a cache line
+which isn't in L1, because that will be far slower than any false data
+dependency in the memory order buffer.
 
-Tvrtko
+OTOH, this is userspace, and neither a locked access hitting DRAM, nor a
+false data dependency on the bottom of the red zone are going to be the
+dominating factor in overall performance.
+
+> As a minor other thought for all of its incarnations: Is a 32-bit
+> memory access really the best choice?
+
+Yes.
+
+> Wouldn't an 8-bit access
+> further reduce (albeit not eliminate) the risk of unnecessary
+> dependencies between this memory access and others in functions
+> called from the users of this barrier?
+
+Not really.  The overwhelming majority of stack accesses are full words,
+and would still alias even if the memory order buffer tracks aliasing at
+byte granularity (which it might not, to save silicon area).
+
+8 or 32 bit access are probably identical, based on the arch and uarch
+details I'm aware of.  However, just in case they are not, I'm
+definitely going for the form in common with several other major
+software projects.
+
+> Or actually, in the hypervisor case, since the used stack slot
+> would typically hold the return address of the next level's
+> functions, would a 64-bit access or one further away from the
+> current stack pointer not help avoid partial dependencies?
+
+No.  The follow call instruction is a write onto the stack, and will
+form a write-after-write condition, rather than a false read-after-write
+dependency.
+
+> And finally, already when Linux used this for just 32-bit I've
+> always been wondering why they bother preserving the contents of
+> this piece of memory. How about using NOT (saving the immediate
+> byte) or XCHG (requiring a dead register instead of the saved
+> arithmetic, immediate byte, and lock prefix)?
+
+Because performance is not dictated by the instruction length.
+
+For equivalent instructions, the shorter encoding provides a marginal
+benefit in terms of reduced instruction cache space, compound
+improvements such as possibly being able to relax JMP disp32 to JMP
+disp8, and increased decode bandwidth to a point.  There are some code
+layout patterns where the longer forms are actually faster to decode on
+some microarchitectures.
+
+However, most instructions are not equivalent.
+
+The XCHG plan may force a register to be spilled.  Some processors
+really do track zeroes all the way out into the cache[1] and make
+optimisations based on this knowledge.  ADD $0 is a no-op which can be
+spotted at decode time, by a sufficiently clever pipeline.
+
+~Andrew
+
+[1] https://travisdowns.github.io/blog/2020/05/13/intel-zero-opt.html
 
