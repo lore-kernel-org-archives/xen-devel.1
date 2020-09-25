@@ -2,62 +2,63 @@ Return-Path: <SRS0=eoLF=DC=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4B22BC4363D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D2066C4727F
 	for <xen-devel@archiver.kernel.org>; Fri, 25 Sep 2020 06:20:50 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D5B3B2074B
-	for <xen-devel@archiver.kernel.org>; Fri, 25 Sep 2020 06:20:49 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 705EF2074B
+	for <xen-devel@archiver.kernel.org>; Fri, 25 Sep 2020 06:20:50 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="kAMw646n"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D5B3B2074B
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="IqcoegJc"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 705EF2074B
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kLh5z-0006JQ-LH; Fri, 25 Sep 2020 06:20:39 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kLh5z-0006JW-TY; Fri, 25 Sep 2020 06:20:39 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=ocWZ=DC=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kLh5x-0006JE-VG
- for xen-devel@lists.xenproject.org; Fri, 25 Sep 2020 06:20:37 +0000
-X-Inumbo-ID: cc6fcf9c-8ef9-4873-b457-20cd9ff9e688
+ id 1kLh5y-0006JG-33
+ for xen-devel@lists.xenproject.org; Fri, 25 Sep 2020 06:20:38 +0000
+X-Inumbo-ID: 06953b82-a900-4582-ba40-9116930fd550
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id cc6fcf9c-8ef9-4873-b457-20cd9ff9e688;
- Fri, 25 Sep 2020 06:20:37 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 06953b82-a900-4582-ba40-9116930fd550;
+ Fri, 25 Sep 2020 06:20:36 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
  t=1601014836;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=HydUhBjCQg8PC04q+vrajPyPufEV57CkBmTz06o3YmE=;
- b=kAMw646nXmJU0VIGfX4SqtZezv9rCi2ZaLjDZpvVmAuB8IAE6030dzDTCRAsrodTsv24kL
- 3ewBdEpwjMGI4aGk0+LBGUq0rrGBLnY5fwAAXUnyEhnX4kyrqCYPDYx5kSXs3kdYL1FFQM
- RlAbZLR2LyfNhu7Bfv9TJRfLXFX9BR4=
+ content-transfer-encoding:content-transfer-encoding;
+ bh=mVsee859h8yN/ROdgV5ZHB8aurkrGDMDA/4/tTIMUqw=;
+ b=IqcoegJcy0Ohb+GBusFHL+3E++HPRFGGtoOOK4I4GiFRUuCGvh+MxfnLUHes3N72nZJ12M
+ 4WFE6bswwZ+8OCYNCkV+l9hv9Bx5+9/kEVNCF6HTeyHEGjqh0TZrf3s3jf5gN73eduMZIq
+ 107npKoIVSWdB4Z7AES9wFhOGQgesoA=
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 55F04ABD1;
+ by mx2.suse.de (Postfix) with ESMTP id 0ED63AB91;
  Fri, 25 Sep 2020 06:20:36 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>, Ian Jackson <iwj@xenproject.org>,
- Wei Liu <wl@xen.org>
-Subject: [PATCH v2 2/3] tools/libxenguest: make xc_dom_loader interface
- private to libxenguest
-Date: Fri, 25 Sep 2020 08:20:30 +0200
-Message-Id: <20200925062031.12200-3-jgross@suse.com>
+Cc: Juergen Gross <jgross@suse.com>,
+ Samuel Thibault <samuel.thibault@ens-lyon.org>,
+ Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
+ Anthony PERARD <anthony.perard@citrix.com>,
+ =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: [PATCH v2 0/3] Fix and cleanup xenguest.h
+Date: Fri, 25 Sep 2020 08:20:28 +0200
+Message-Id: <20200925062031.12200-1-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20200925062031.12200-1-jgross@suse.com>
-References: <20200925062031.12200-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
@@ -73,66 +74,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-The pluggable kernel loader interface is used only internally of
-libxenguest, so make it private. This removes a dependency on the Xen
-internal header xen/libelf/libelf.h from xenguest.h.
+This series fixes builds of libxenguest users outside the Xen build
+system and it cleans up the xenguest.h header merging xenctrl_dom.h
+into it.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
- tools/libs/guest/include/xenguest.h | 15 ---------------
- tools/libs/guest/xg_private.h       | 13 +++++++++++++
- 2 files changed, 13 insertions(+), 15 deletions(-)
+Juergen Gross (3):
+  tools/libs: merge xenctrl_dom.h into xenguest.h
+  tools/libxenguest: make xc_dom_loader interface private to libxenguest
+  tools/lixenguest: hide struct elf_dom_parms layout from users
 
-diff --git a/tools/libs/guest/include/xenguest.h b/tools/libs/guest/include/xenguest.h
-index 279f06345c..dba6a21643 100644
---- a/tools/libs/guest/include/xenguest.h
-+++ b/tools/libs/guest/include/xenguest.h
-@@ -247,21 +247,6 @@ struct xc_dom_image {
-     unsigned int max_vcpus;
- };
- 
--/* --- pluggable kernel loader ------------------------------------- */
--
--struct xc_dom_loader {
--    char *name;
--    /* Sadly the error returns from these functions are not consistent: */
--    elf_negerrnoval (*probe) (struct xc_dom_image * dom);
--    elf_negerrnoval (*parser) (struct xc_dom_image * dom);
--    elf_errorstatus (*loader) (struct xc_dom_image * dom);
--
--    struct xc_dom_loader *next;
--};
--
--#define __init __attribute__ ((constructor))
--void xc_dom_register_loader(struct xc_dom_loader *loader);
--
- /* --- arch specific hooks ----------------------------------------- */
- 
- struct xc_dom_arch {
-diff --git a/tools/libs/guest/xg_private.h b/tools/libs/guest/xg_private.h
-index 0000b2b9b6..9940d554ef 100644
---- a/tools/libs/guest/xg_private.h
-+++ b/tools/libs/guest/xg_private.h
-@@ -41,6 +41,19 @@
- #endif
- #endif
- 
-+struct xc_dom_loader {
-+    char *name;
-+    /* Sadly the error returns from these functions are not consistent: */
-+    elf_negerrnoval (*probe) (struct xc_dom_image * dom);
-+    elf_negerrnoval (*parser) (struct xc_dom_image * dom);
-+    elf_errorstatus (*loader) (struct xc_dom_image * dom);
-+
-+    struct xc_dom_loader *next;
-+};
-+
-+#define __init __attribute__ ((constructor))
-+void xc_dom_register_loader(struct xc_dom_loader *loader);
-+
- char *xc_read_image(xc_interface *xch,
-                     const char *filename, unsigned long *size);
- char *xc_inflate_buffer(xc_interface *xch,
+ stubdom/grub/kexec.c                        |  20 +-
+ tools/helpers/init-xenstore-domain.c        |   2 +-
+ tools/libs/ctrl/Makefile                    |   2 +-
+ tools/libs/ctrl/include/xenctrl_dom.h       | 455 --------------------
+ tools/libs/ctrl/xc_private.c                |   1 -
+ tools/libs/guest/include/xenguest.h         | 400 ++++++++++++++++-
+ tools/libs/guest/xg_dom_arm.c               |   1 -
+ tools/libs/guest/xg_dom_armzimageloader.c   |   1 -
+ tools/libs/guest/xg_dom_binloader.c         |   1 -
+ tools/libs/guest/xg_dom_boot.c              |   1 -
+ tools/libs/guest/xg_dom_compat_linux.c      |   1 -
+ tools/libs/guest/xg_dom_core.c              |  86 +++-
+ tools/libs/guest/xg_dom_decompress.h        |   4 +-
+ tools/libs/guest/xg_dom_decompress_unsafe.h |   2 -
+ tools/libs/guest/xg_dom_elfloader.c         |   1 -
+ tools/libs/guest/xg_dom_hvmloader.c         |   1 -
+ tools/libs/guest/xg_dom_x86.c               |   1 -
+ tools/libs/guest/xg_offline_page.c          |   1 -
+ tools/libs/guest/xg_private.h               |  14 +
+ tools/libs/guest/xg_sr_common.h             |   1 -
+ tools/libxl/libxl_arm.c                     |   1 -
+ tools/libxl/libxl_arm.h                     |   2 -
+ tools/libxl/libxl_create.c                  |   1 -
+ tools/libxl/libxl_dm.c                      |   1 -
+ tools/libxl/libxl_dom.c                     |   1 -
+ tools/libxl/libxl_internal.h                |   1 -
+ tools/libxl/libxl_vnuma.c                   |   2 -
+ tools/libxl/libxl_x86.c                     |   2 -
+ tools/libxl/libxl_x86_acpi.c                |   7 +-
+ tools/python/xen/lowlevel/xc/xc.c           |   2 +-
+ 30 files changed, 496 insertions(+), 520 deletions(-)
+ delete mode 100644 tools/libs/ctrl/include/xenctrl_dom.h
+
 -- 
 2.26.2
 
