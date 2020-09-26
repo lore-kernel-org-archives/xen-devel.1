@@ -2,53 +2,52 @@ Return-Path: <SRS0=zz9o=DD=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A4559C2D0A8
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C5DD9C4741F
 	for <xen-devel@archiver.kernel.org>; Sat, 26 Sep 2020 20:56:30 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4B224207F7
+	by mail.kernel.org (Postfix) with ESMTPS id 640C021527
 	for <xen-devel@archiver.kernel.org>; Sat, 26 Sep 2020 20:56:30 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="IMu2zPfl"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4B224207F7
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="LTV2p20s"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 640C021527
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kMHEn-0003jH-6e; Sat, 26 Sep 2020 20:56:09 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kMHEy-0003ky-8D; Sat, 26 Sep 2020 20:56:20 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=a+g/=DD=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1kMHEl-0003jB-RE
- for xen-devel@lists.xenproject.org; Sat, 26 Sep 2020 20:56:07 +0000
-X-Inumbo-ID: 62f6b0cb-6736-4726-bd1e-895d23866b31
+ id 1kMHEx-0003jG-1M
+ for xen-devel@lists.xenproject.org; Sat, 26 Sep 2020 20:56:19 +0000
+X-Inumbo-ID: ef8786d4-b800-44f6-b276-ef25a066fe34
 Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 62f6b0cb-6736-4726-bd1e-895d23866b31;
- Sat, 26 Sep 2020 20:56:04 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id ef8786d4-b800-44f6-b276-ef25a066fe34;
+ Sat, 26 Sep 2020 20:56:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Message-Id:Date:Subject:Cc:To:From;
- bh=V+xG5A7DMztGKIQTC0U2EEPTOOPtgXmNyDJn6bMD3UM=; b=IMu2zPfl7dzaItBRWEgxwExXz6
- ah5gfKDjrE+kcYZQlIIWKZA0wb7PQwGAChAgfsAYVwyM3yEfv7SxBYmX/wORm6ax4kMK77HDvOaiZ
- Kaeh8LCBX0pw4XZ9t+nnJQyTpjW35T2AF7ZcnK/GVVDJQkrNnSY//Yu+FYLmWLieg4Zk=;
+ s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
+ bh=NUzIF6jd0VTOPVLuT+sNzYSm2gJRa4g7nKnovFDCX/4=; b=LTV2p20sIv7akePa3vPAhyBsX
+ 6m1ks6BSd9/ovS4zKP1LFTtQEVcidvgjUs6GPfnq/4ugmsbWZEAR6JM5+bhyZwu3bDry6kMJtc5yt
+ T9Zlm87OqBIeeZpqXwIUfTSzm1ZglFmh4YKYTsxrJ9yrt7J4Vi7UotexGCPPFRZkw8jgM=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1kMHEf-0000C5-O3; Sat, 26 Sep 2020 20:56:01 +0000
+ id 1kMHEj-0000CR-M8; Sat, 26 Sep 2020 20:56:05 +0000
 Received: from 54-240-197-235.amazon.com ([54.240.197.235]
  helo=ufe34d9ed68d054.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1kMHEf-0004I0-8S; Sat, 26 Sep 2020 20:56:01 +0000
+ id 1kMHEj-0004I0-Cz; Sat, 26 Sep 2020 20:56:05 +0000
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: alex.bennee@linaro.org, masami.hiramatsu@linaro.org, ehem+xen@m5p.com,
@@ -56,14 +55,14 @@ Cc: alex.bennee@linaro.org, masami.hiramatsu@linaro.org, ehem+xen@m5p.com,
  Julien Grall <jgrall@amazon.com>,
  Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
  Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
- Jan Beulich <jbeulich@suse.com>, Wei Liu <wl@xen.org>,
- =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 0/4] xen/arm: Unbreak ACPI
-Date: Sat, 26 Sep 2020 21:55:38 +0100
-Message-Id: <20200926205542.9261-1-julien@xen.org>
+ Wei Xu <xuwei5@hisilicon.com>
+Subject: [PATCH 2/4] xen/arm: acpi: The fixmap area should always be cleared
+ during failure/unmap
+Date: Sat, 26 Sep 2020 21:55:40 +0100
+Message-Id: <20200926205542.9261-3-julien@xen.org>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200926205542.9261-1-julien@xen.org>
+References: <20200926205542.9261-1-julien@xen.org>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,37 +78,139 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Julien Grall <jgrall@amazon.com>
 
-Hi all,
+Commit 022387ee1ad3 "xen/arm: mm: Don't open-code Xen PT update in
+{set, clear}_fixmap()" enforced that each set_fixmap() should be
+paired with a clear_fixmap(). Any failure to follow the model would
+result to a platform crash.
 
-Xen on ARM has been broken for quite a while on ACPI systems. This
-series aims to fix it.
+Unfortunately, the use of fixmap in the ACPI code was overlooked as it
+is calling set_fixmap() but not clear_fixmap().
 
-Unfortunately I don't have a system with ACPI v6.0 or later (QEMU seems
-to only support 5.1). So I did only some light testing.
+The function __acpi_os_map_table() is reworked so:
+    - We know before the mapping whether the fixmap region is big
+    enough for the mapping.
+    - It will fail if the fixmap is always inuse.
 
-I have only build tested the x86 side so far.
+The function __acpi_os_unmap_table() will now call clear_fixmap().
 
-Cheers,
+Reported-by: Wei Xu <xuwei5@hisilicon.com>
+Signed-off-by: Julien Grall <jgrall@amazon.com>
 
-*** BLURB HERE ***
+---
 
-Julien Grall (4):
-  xen/acpi: Rework acpi_os_map_memory() and acpi_os_unmap_memory()
-  xen/arm: acpi: The fixmap area should always be cleared during
-    failure/unmap
-  xen/arm: Check if the platform is not using ACPI before initializing
-    Dom0less
-  xen/arm: Introduce fw_unreserved_regions() and use it
+The discussion on the original thread [1] suggested to also zap it on
+x86. This is technically not necessary today, so it is left alone for
+now.
 
- xen/arch/arm/acpi/lib.c     | 79 ++++++++++++++++++++++++++++++-------
- xen/arch/arm/kernel.c       |  2 +-
- xen/arch/arm/setup.c        | 25 +++++++++---
- xen/arch/x86/acpi/lib.c     | 18 +++++++++
- xen/drivers/acpi/osl.c      | 34 ++++++++--------
- xen/include/asm-arm/setup.h |  2 +-
- xen/include/xen/acpi.h      |  1 +
- 7 files changed, 123 insertions(+), 38 deletions(-)
+I looked at making the fixmap code common but the index are inverted
+between Arm and x86.
 
+[1] https://lore.kernel.org/xen-devel/5E26C935.9080107@hisilicon.com/
+---
+ xen/arch/arm/acpi/lib.c | 75 +++++++++++++++++++++++++++++++----------
+ 1 file changed, 58 insertions(+), 17 deletions(-)
+
+diff --git a/xen/arch/arm/acpi/lib.c b/xen/arch/arm/acpi/lib.c
+index 2192a5519171..eebaca695562 100644
+--- a/xen/arch/arm/acpi/lib.c
++++ b/xen/arch/arm/acpi/lib.c
+@@ -25,38 +25,79 @@
+ #include <xen/init.h>
+ #include <xen/mm.h>
+ 
++static bool fixmap_inuse;
++
+ char *__acpi_map_table(paddr_t phys, unsigned long size)
+ {
+-    unsigned long base, offset, mapped_size;
+-    int idx;
++    unsigned long base, offset;
++    mfn_t mfn;
++    unsigned int idx;
+ 
+     /* No arch specific implementation after early boot */
+     if ( system_state >= SYS_STATE_boot )
+         return NULL;
+ 
+     offset = phys & (PAGE_SIZE - 1);
+-    mapped_size = PAGE_SIZE - offset;
+-    set_fixmap(FIXMAP_ACPI_BEGIN, maddr_to_mfn(phys), PAGE_HYPERVISOR);
+-    base = FIXMAP_ADDR(FIXMAP_ACPI_BEGIN);
++    base = FIXMAP_ADDR(FIXMAP_ACPI_BEGIN) + offset;
++
++    /* Check the fixmap is big enough to map the region */
++    if ( (FIXMAP_ADDR(FIXMAP_ACPI_END) + PAGE_SIZE - base) < size )
++        return NULL;
++
++    /* With the fixmap, we can only map one region at the time */
++    if ( fixmap_inuse )
++        return NULL;
+ 
+-    /* Most cases can be covered by the below. */
++    fixmap_inuse = true;
++
++    size += offset;
++    mfn = maddr_to_mfn(phys);
+     idx = FIXMAP_ACPI_BEGIN;
+-    while ( mapped_size < size )
+-    {
+-        if ( ++idx > FIXMAP_ACPI_END )
+-            return NULL;    /* cannot handle this */
+-        phys += PAGE_SIZE;
+-        set_fixmap(idx, maddr_to_mfn(phys), PAGE_HYPERVISOR);
+-        mapped_size += PAGE_SIZE;
+-    }
+ 
+-    return ((char *) base + offset);
++    do {
++        set_fixmap(idx, mfn, PAGE_HYPERVISOR);
++        size -= min(size, (unsigned long)PAGE_SIZE);
++        mfn = mfn_add(mfn, 1);
++        idx++;
++    } while ( size > 0 );
++
++    return (char *)base;
+ }
+ 
+ bool __acpi_unmap_table(void *ptr, unsigned long size)
+ {
+-    return ( vaddr >= FIXMAP_ADDR(FIXMAP_ACPI_BEGIN) &&
+-             vaddr < (FIXMAP_ADDR(FIXMAP_ACPI_END) + PAGE_SIZE) );
++    vaddr_t vaddr = (vaddr_t)ptr;
++    unsigned int idx;
++
++    /* We are only handling fixmap address in the arch code */
++    if ( vaddr < FIXMAP_ADDR(FIXMAP_ACPI_BEGIN) ||
++         vaddr >= FIXMAP_ADDR(FIXMAP_ACPI_END) )
++        return false;
++
++    /*
++     * __acpi_map_table() will always return a pointer in the first page
++     * for the ACPI fixmap region. The caller is expected to free with
++     * the same address.
++     */
++    ASSERT((vaddr & PAGE_MASK) == FIXMAP_ADDR(FIXMAP_ACPI_BEGIN));
++
++    /* The region allocated fit in the ACPI fixmap region. */
++    ASSERT(size < (FIXMAP_ADDR(FIXMAP_ACPI_END) + PAGE_SIZE - vaddr));
++    ASSERT(fixmap_inuse);
++
++    fixmap_inuse = false;
++
++    size += FIXMAP_ADDR(FIXMAP_ACPI_BEGIN) - vaddr;
++    idx = FIXMAP_ACPI_BEGIN;
++
++    do
++    {
++        clear_fixmap(idx);
++        size -= min(size, (unsigned long)PAGE_SIZE);
++        idx++;
++    } while ( size > 0 );
++
++    return true;
+ }
+ 
+ /* True to indicate PSCI 0.2+ is implemented */
 -- 
 2.17.1
 
