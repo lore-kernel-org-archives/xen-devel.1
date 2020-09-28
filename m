@@ -7,40 +7,42 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CF892C2D0A8
-	for <xen-devel@archiver.kernel.org>; Mon, 28 Sep 2020 13:13:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D74C7C47420
+	for <xen-devel@archiver.kernel.org>; Mon, 28 Sep 2020 13:13:16 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 901812076D
-	for <xen-devel@archiver.kernel.org>; Mon, 28 Sep 2020 13:13:15 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 901812076D
+	by mail.kernel.org (Postfix) with ESMTPS id 9C48F2074A
+	for <xen-devel@archiver.kernel.org>; Mon, 28 Sep 2020 13:13:16 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9C48F2074A
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kMsxi-0004Gi-E8; Mon, 28 Sep 2020 13:13:02 +0000
+	id 1kMsxn-0004Ij-NM; Mon, 28 Sep 2020 13:13:07 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=FkWq=DF=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1kMsxg-0004DB-R5
- for xen-devel@lists.xenproject.org; Mon, 28 Sep 2020 13:13:00 +0000
-X-Inumbo-ID: 625c183d-a0c0-400b-aced-525f919c6902
+ id 1kMsxl-0004DB-RR
+ for xen-devel@lists.xenproject.org; Mon, 28 Sep 2020 13:13:05 +0000
+X-Inumbo-ID: 57a42dc6-7aaf-4056-a2c0-c92c55ed05c7
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 625c183d-a0c0-400b-aced-525f919c6902;
- Mon, 28 Sep 2020 13:12:46 +0000 (UTC)
+ id 57a42dc6-7aaf-4056-a2c0-c92c55ed05c7;
+ Mon, 28 Sep 2020 13:12:47 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1kMsxR-0007vv-PR; Mon, 28 Sep 2020 14:12:46 +0100
+ id 1kMsxS-0007vv-Ax; Mon, 28 Sep 2020 14:12:46 +0100
 From: Ian Jackson <iwj@xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH 3/5] TCP fix: Do not wait for ownerdaemon to speak
-Date: Mon, 28 Sep 2020 14:12:39 +0100
-Message-Id: <20200928131241.30278-4-iwj@xenproject.org>
+Cc: Ian Jackson <iwj@xenproject.org>,
+	Jan Beulich <jbeulich@suse.com>
+Subject: [OSSTEST PATCH 4/5] TftiDiVersion: Update to latest installer for
+ stretch
+Date: Mon, 28 Sep 2020 14:12:40 +0100
+Message-Id: <20200928131241.30278-5-iwj@xenproject.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200928131241.30278-1-iwj@xenproject.org>
 References: <20200928131241.30278-1-iwj@xenproject.org>
@@ -59,38 +61,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: Ian Jackson <ian.jackson@eu.citrix.com>
+The stretch (Debian oldstable) kernel has been updated, causing our
+Xen 4.10 tests (which are still using stretch) to break.  This update
+seems to fix it.
 
-Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
+Reported-by: Jan Beulich <jbeulich@suse.com>
+Signed-off-by: Ian Jackson <iwj@xenproject.org>
 ---
- tcl/JobDB-Executive.tcl | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+ production-config | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/tcl/JobDB-Executive.tcl b/tcl/JobDB-Executive.tcl
-index 29c82821..4fe85696 100644
---- a/tcl/JobDB-Executive.tcl
-+++ b/tcl/JobDB-Executive.tcl
-@@ -414,7 +414,20 @@ proc become-task {comment} {
+diff --git a/production-config b/production-config
+index 6055bd18..0c135bcb 100644
+--- a/production-config
++++ b/production-config
+@@ -90,7 +90,7 @@ TftpNetbootGroup osstest
+ # Update with ./mg-debian-installer-update(-all)
+ TftpDiVersion_wheezy 2016-06-08
+ TftpDiVersion_jessie 2018-06-26
+-TftpDiVersion_stretch 2020-02-10
++TftpDiVersion_stretch 2020-09-24
+ TftpDiVersion_buster 2020-05-19
  
-     set ownerqueue [socket $c(OwnerDaemonHost) $c(OwnerDaemonPort)]
-     fconfigure $ownerqueue -buffering line -translation lf
-+
-+    # TCP connections can get into a weird state where the client
-+    # thinks the connection is open but the server has no record
-+    # of it.  To avoid this, have the client speak without waiting
-+    # for the server.  We tolerate "unknown command" errors so
-+    # that it is not necessary to restart the ownerdaemon since
-+    # that is very disruptive.
-+    #
-+    # See A TCP "stuck" connection mystery"
-+    # https://www.evanjones.ca/tcp-stuck-connection-mystery.html
-+    puts $ownerqueue noop
-     must-gets $ownerqueue {^OK ms-ownerdaemon\M}
-+    must-gets $ownerqueue {^OK noop|^ERROR unknown command}
-+
-     puts $ownerqueue create-task
-     must-gets $ownerqueue {^OK created-task (\d+) (\w+ [\[\]:.0-9a-f]+)$} \
-         taskid refinfo
+ DebianSnapshotBackports_jessie http://snapshot.debian.org/archive/debian/20190206T211314Z/
 -- 
 2.20.1
 
