@@ -2,79 +2,64 @@ Return-Path: <SRS0=Jb4W=DF=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.1 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.3 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C97D5C2D0A8
-	for <xen-devel@archiver.kernel.org>; Mon, 28 Sep 2020 12:48:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8896CC2D0A8
+	for <xen-devel@archiver.kernel.org>; Mon, 28 Sep 2020 12:54:27 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 549DA21974
-	for <xen-devel@archiver.kernel.org>; Mon, 28 Sep 2020 12:48:33 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="HC8R9OeC"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 549DA21974
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id 3915F21974
+	for <xen-devel@archiver.kernel.org>; Mon, 28 Sep 2020 12:54:27 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3915F21974
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kMsZd-00011x-KY; Mon, 28 Sep 2020 12:48:09 +0000
+	id 1kMsfG-0001re-Bg; Mon, 28 Sep 2020 12:53:58 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=HPfX=DF=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1kMsZc-00011s-Qy
- for xen-devel@lists.xenproject.org; Mon, 28 Sep 2020 12:48:08 +0000
-X-Inumbo-ID: d65e8350-d4f4-4482-8678-07977a4ae00e
-Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=E1aX=DF=suse.de=osalvador@srs-us1.protection.inumbo.net>)
+ id 1kMsfE-0001rZ-Rh
+ for xen-devel@lists.xenproject.org; Mon, 28 Sep 2020 12:53:56 +0000
+X-Inumbo-ID: b88ea8e3-6389-40d4-a12d-1aba130e7128
+Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id d65e8350-d4f4-4482-8678-07977a4ae00e;
- Mon, 28 Sep 2020 12:48:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1601297286;
- h=subject:to:cc:references:from:message-id:date:
- mime-version:in-reply-to:content-transfer-encoding;
- bh=PBVzVyzYPZC6892HkoORxYNHabSQpp1y2T5oKjMBAu4=;
- b=HC8R9OeCQwYeCQfVBuQUC0859CXd2kyfR9lbjaECG3T3ElGbSxx2S0kK
- +lXvBMkhH/L0sIEBiyD57+LJkalofBjVFQhODvMcPREPts/0TjEHRsOdM
- A4MJCLOijx2JYECj+E9dumUz53eacYvK+dG+w+pE4kxSqH2rJ254vbinH A=;
-Authentication-Results: esa4.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: 21xcia6cEeq6Skj60pG6Du/4WpwJNOoRApc/nL9jQjAKKiTOdfUiw4ofxABEUoywnvz8IdOizo
- VEOjvf63KYq2CpxK1G6bbbtNdBTVyy8n7jA/loMRPJbddSfLBOlWOq5zyAQd9MSKVjH7AKIhB0
- sgF4wNX5yO/Ge5ovnf8TMPI267aAXG4B9pCTzOI8gjEvIDVkFef753Haondiw7TVWMysVR0DuO
- pdRtvSncV5uMclkjb4DUT6IntNif7MQ9MJzRIknKZFP231VgiZqBLoBIthVNFkSiww9idFMI+T
- JhU=
-X-SBRS: None
-X-MesageID: 28754082
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.77,313,1596513600"; d="scan'208";a="28754082"
-Subject: Re: [PATCH 1/5] x86: introduce read_sregs() to allow storing to
- memory directly
-To: Jan Beulich <jbeulich@suse.com>, "xen-devel@lists.xenproject.org"
- <xen-devel@lists.xenproject.org>
-CC: Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
- <roger.pau@citrix.com>
-References: <ec4b451e-2b93-8526-ef98-7a2d502e31c2@suse.com>
- <6cd5dfca-a10c-0847-c084-a511ab2cbb1c@suse.com>
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Message-ID: <46c1f7b6-6c96-9c81-849e-4e44ed341ccb@citrix.com>
-Date: Mon, 28 Sep 2020 13:47:57 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ id b88ea8e3-6389-40d4-a12d-1aba130e7128;
+ Mon, 28 Sep 2020 12:53:55 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 12751AC24;
+ Mon, 28 Sep 2020 12:53:55 +0000 (UTC)
+Date: Mon, 28 Sep 2020 14:53:51 +0200
+From: Oscar Salvador <osalvador@suse.de>
+To: David Hildenbrand <david@redhat.com>
+Cc: linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+ linux-hyperv@vger.kernel.org, xen-devel@lists.xenproject.org,
+ linux-acpi@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
+ Alexander Duyck <alexander.h.duyck@linux.intel.com>,
+ Mel Gorman <mgorman@techsingularity.net>, Michal Hocko <mhocko@kernel.org>,
+ Dave Hansen <dave.hansen@intel.com>, Vlastimil Babka <vbabka@suse.cz>,
+ Wei Yang <richard.weiyang@linux.alibaba.com>,
+ Mike Rapoport <rppt@kernel.org>, "K. Y. Srinivasan" <kys@microsoft.com>,
+ Haiyang Zhang <haiyangz@microsoft.com>,
+ Stephen Hemminger <sthemmin@microsoft.com>, Wei Liu <wei.liu@kernel.org>
+Subject: Re: [PATCH RFC 4/4] mm/page_alloc: place pages to tail in
+ __free_pages_core()
+Message-ID: <20200928125346.GA7703@linux>
+References: <20200916183411.64756-1-david@redhat.com>
+ <20200916183411.64756-5-david@redhat.com>
+ <20200928075820.GA4082@linux>
+ <a18327c0-b86a-df00-e984-27c26468caf7@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <6cd5dfca-a10c-0847-c084-a511ab2cbb1c@suse.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Content-Language: en-GB
-X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
- FTLPEX02CL05.citrite.net (10.13.108.178)
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <a18327c0-b86a-df00-e984-27c26468caf7@redhat.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -88,28 +73,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 28/09/2020 13:05, Jan Beulich wrote:
-> --- a/xen/include/asm-x86/regs.h
-> +++ b/xen/include/asm-x86/regs.h
-> @@ -15,4 +15,18 @@
->      (diff == 0);                                                              \
->  })
->  
-> +#define read_sreg(name) ({                                    \
-> +    unsigned int __sel;                                       \
-> +    asm volatile ( "mov %%" STR(name) ",%0" : "=r" (__sel) ); \
-> +    __sel;                                                    \
-> +})
-> +
-> +static inline void read_sregs(struct cpu_user_regs *regs)
-> +{
-> +    asm volatile ( "mov %%ds, %0" : "=m" (regs->ds) );
-> +    asm volatile ( "mov %%es, %0" : "=m" (regs->es) );
-> +    asm volatile ( "mov %%fs, %0" : "=m" (regs->fs) );
-> +    asm volatile ( "mov %%gs, %0" : "=m" (regs->gs) );
+On Mon, Sep 28, 2020 at 10:36:00AM +0200, David Hildenbrand wrote:
+> Hi Oscar!
 
-It occurs to me that reads don't need to be volatile.  There are no side
-effects.
+Hi David :-)
 
-With that fixed, Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+> 
+> Old code:
+> 
+> set_page_refcounted(): sets the refcount to 1.
+> __free_pages()
+>   -> put_page_testzero(): sets it to 0
+>   -> free_the_page()->__free_pages_ok()
+> 
+> New code:
+> 
+> set_page_refcounted(): sets the refcount to 1.
+> page_ref_dec(page): sets it to 0
+> __free_pages_ok():
+
+bleh, I misread the patch, somehow I managed to not see that you replaced
+__free_pages with __free_pages_ok.
+
+To be honest, now that we do not need the page's refcount to be 1 for the
+put_page_testzero to trigger (and since you are decrementing it anyways),
+I think it would be much clear for those two to be gone.
+
+But not strong, so:
+
+Reviewed-by: Oscar Salvador <osalvador@suse.de>
+
+-- 
+Oscar Salvador
+SUSE L3
 
