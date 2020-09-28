@@ -7,71 +7,73 @@ X-Spam-Status: No, score=-8.1 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 15DDCC2D0A8
-	for <xen-devel@archiver.kernel.org>; Mon, 28 Sep 2020 12:58:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 53EBEC4727C
+	for <xen-devel@archiver.kernel.org>; Mon, 28 Sep 2020 12:59:01 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A821B2068E
-	for <xen-devel@archiver.kernel.org>; Mon, 28 Sep 2020 12:58:03 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id EFCBF206D9
+	for <xen-devel@archiver.kernel.org>; Mon, 28 Sep 2020 12:59:00 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="WgZLefso"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A821B2068E
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="H/b/1kN1"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EFCBF206D9
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kMsj1-00022w-T8; Mon, 28 Sep 2020 12:57:51 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kMsjy-00028A-7D; Mon, 28 Sep 2020 12:58:50 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=HPfX=DF=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1kMsj0-00022r-OB
- for xen-devel@lists.xenproject.org; Mon, 28 Sep 2020 12:57:50 +0000
-X-Inumbo-ID: bae5c5c7-01c8-4f76-bad7-6a8ebd916554
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id bae5c5c7-01c8-4f76-bad7-6a8ebd916554;
- Mon, 28 Sep 2020 12:57:49 +0000 (UTC)
+ id 1kMsjw-000281-HE
+ for xen-devel@lists.xenproject.org; Mon, 28 Sep 2020 12:58:48 +0000
+X-Inumbo-ID: 98bd8f14-0320-4359-a6db-7abf3583d60d
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 98bd8f14-0320-4359-a6db-7abf3583d60d;
+ Mon, 28 Sep 2020 12:58:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1601297869;
+ d=citrix.com; s=securemail; t=1601297927;
  h=subject:to:cc:references:from:message-id:date:
  mime-version:in-reply-to:content-transfer-encoding;
- bh=GV4YafrH2oJutyvYb5GQHndepDcjN54unLyZk55VVZY=;
- b=WgZLefsoMcm314vByExJbCFAwYO07x/jil52ooqAyOBPSoz3JQ42/qST
- dEH3gWJWMQ+poj2Wkuh1FIJACYXs8yC/P6AvVyL7yATCaWzKYMlbaM2QA
- R56wmhc2JfdR7zPisRQdkWi3f+Z3B9szD9XziABoFmufFZyz4McqI/UhR 8=;
-Authentication-Results: esa5.hc3370-68.iphmx.com;
+ bh=CSQQt2W7geUDjIAtTZthgV3Kmtllpk+tjgsXcq1wbaA=;
+ b=H/b/1kN1b3xfWzgHjMtbJjpa+bg2VCjIknLvKX9a4RJVZQBQCkyqzvbL
+ SEqDCNHWF0/OGWF7omE4lNbT7IOu5SbSutnCOYwIyFj0fdq+/uJVfG/j+
+ 7KMEn1b1Bxo1h23p0xJKrIO6FAVP2N+71cNximzmxRoKmuNnAhZx6yIAF 0=;
+Authentication-Results: esa1.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: CslbePiIO81BVd0Rjcrf255i0uExM9DowUiu4u/fPrYuCuNA0CspAO4lQYq31zsQpz/oINrPcR
- sOZ7gM3IXrGbvoozzFaOxtDITTXBBEl1HLK9pGIwX5FgHWIHZg9O9r9xHvRQfdkUO5A2TlDSmr
- HZ19lEV7/7yic/AlzWVMIMNp+68m/XFsJoLR3oWT8IJoHIQjOIjfEig0/ipuFueutLQQBmXIv5
- CqQYe0pti52TUuYKSObWKoM2qFfvNpmaCmjw4Z67OdmVgqCc/Iot4ez0MbAM3K0AoD9u/QvNoL
- 0GI=
+IronPort-SDR: odH9elqLJTQX+mCXMUfImjkEOOWFRH2Ch5apWAVzhoWkItW20MGkTT7AY1yZv6h1phiVw5TahB
+ GL307L3FAiEZwATYK7MFCvBoHT9lQpBTAivbRKzE+/cz0ylsnoGmwI4QubOvUiPso8TIIb8V6Y
+ auf6KtWvilTH7zdyVB9CXG/f6LwzHwJKydAGlOR2l0KqPs39F0BQgwNryzBKnan7ii/crmpU+F
+ G232in4JUqpHk/7jDllmUf/Y6Q1U3L23CgTyExCN2ja+n0JV/xntN+YrijZ8uOrLJCPWJc/WRk
+ rmQ=
 X-SBRS: None
-X-MesageID: 27846183
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 28085932
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.77,313,1596513600"; d="scan'208";a="27846183"
-Subject: Re: [PATCH 2/5] x86/ELF: don't open-code read_sreg()
+X-IronPort-AV: E=Sophos;i="5.77,313,1596513600"; d="scan'208";a="28085932"
+Subject: Re: [PATCH 3/5] x86/ELF: don't store function pointer in
+ elf_core_save_regs()
 To: Jan Beulich <jbeulich@suse.com>, "xen-devel@lists.xenproject.org"
  <xen-devel@lists.xenproject.org>
 CC: Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
  <roger.pau@citrix.com>
 References: <ec4b451e-2b93-8526-ef98-7a2d502e31c2@suse.com>
- <e15d4ed7-4a42-33ac-79ed-171851548a1b@suse.com>
+ <8abe7016-1cd7-246e-24ef-92d92ff27ad3@suse.com>
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-Message-ID: <1bd25aa1-7217-9bbe-6225-5a763b971695@citrix.com>
-Date: Mon, 28 Sep 2020 13:57:43 +0100
+Message-ID: <33b47445-8de4-24f0-69b0-74119f10d7e9@citrix.com>
+Date: Mon, 28 Sep 2020 13:58:40 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <e15d4ed7-4a42-33ac-79ed-171851548a1b@suse.com>
+In-Reply-To: <8abe7016-1cd7-246e-24ef-92d92ff27ad3@suse.com>
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 Content-Language: en-GB
-X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
+X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
  FTLPEX02CL05.citrite.net (10.13.108.178)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -86,46 +88,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 28/09/2020 13:05, Jan Beulich wrote:
+On 28/09/2020 13:06, Jan Beulich wrote:
+> This keeps at least gcc 10 from generating a separate function instance
+> in common/kexec.o alongside the inlining of the function in its sole
+> caller. I also think putting the address of the actual code storing the
+> registers is a better indication to consumers than that of an otherwise
+> unreferenced function.
+
+Hmm - that's unfortunate.
+
+elf_core_save_regs is certainly a useful name to spot in a backtrace.
+
 > Signed-off-by: Jan Beulich <jbeulich@suse.com>
 >
 > --- a/xen/include/asm-x86/x86_64/elf.h
 > +++ b/xen/include/asm-x86/x86_64/elf.h
-> @@ -1,6 +1,8 @@
->  #ifndef __X86_64_ELF_H__
->  #define __X86_64_ELF_H__
->  
-> +#include <asm/regs.h>
-> +
->  typedef struct {
->      unsigned long r15;
->      unsigned long r14;
-> @@ -53,16 +55,16 @@ static inline void elf_core_save_regs(EL
+> @@ -54,7 +54,7 @@ static inline void elf_core_save_regs(EL
+>      asm volatile("movq %%rsi,%0" : "=m"(core_regs->rsi));
 >      asm volatile("movq %%rdi,%0" : "=m"(core_regs->rdi));
 >      /* orig_rax not filled in for now */
->      core_regs->rip = (unsigned long)elf_core_save_regs;
-> -    asm volatile("movl %%cs, %%eax;" :"=a"(core_regs->cs));
-> +    core_regs->cs = read_sreg(cs);
+> -    core_regs->rip = (unsigned long)elf_core_save_regs;
+> +    asm volatile("call 0f; 0: popq %0" : "=m" (core_regs->rip));
+
+lea 0(%rip) will be faster to execute, and this is 64bit code specifically.
+
+Either way, Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+
+>      core_regs->cs = read_sreg(cs);
 >      asm volatile("pushfq; popq %0" :"=m"(core_regs->rflags));
 >      asm volatile("movq %%rsp,%0" : "=m"(core_regs->rsp));
->      asm volatile("movl %%ss, %%eax;" :"=a"(core_regs->ss));
-
-Another one here.
-
-With that fixed, Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
-
->      /* thread_fs not filled in for now */
->      /* thread_gs not filled in for now */
-> -    asm volatile("movl %%ds, %%eax;" :"=a"(core_regs->ds));
-> -    asm volatile("movl %%es, %%eax;" :"=a"(core_regs->es));
-> -    asm volatile("movl %%fs, %%eax;" :"=a"(core_regs->fs));
-> -    asm volatile("movl %%gs, %%eax;" :"=a"(core_regs->gs));
-> +    core_regs->ds = read_sreg(ds);
-> +    core_regs->es = read_sreg(es);
-> +    core_regs->fs = read_sreg(fs);
-> +    core_regs->gs = read_sreg(gs);
->  
->      asm volatile("mov %%cr0, %0" : "=r" (tmp) : );
->      xen_core_regs->cr0 = tmp;
+>
 
 
