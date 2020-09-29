@@ -2,67 +2,88 @@ Return-Path: <SRS0=a+y6=DG=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.3 required=3.0 tests=BAYES_00,DKIM_ADSP_CUSTOM_MED,
+	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A1743C4346E
-	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2020 07:32:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3A9DCC4346E
+	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2020 07:37:53 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 48475207F7
-	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2020 07:32:57 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id CA09F2083B
+	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2020 07:37:52 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="SvFNKU/I"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 48475207F7
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="YJ0njSUJ"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CA09F2083B
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNA7t-00030H-G8; Tue, 29 Sep 2020 07:32:41 +0000
+	id 1kNACi-0003B3-3o; Tue, 29 Sep 2020 07:37:40 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=6Xo+=DG=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kNA7r-00030C-U2
- for xen-devel@lists.xenproject.org; Tue, 29 Sep 2020 07:32:39 +0000
-X-Inumbo-ID: d283ee28-55db-4d30-882a-38decc093444
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=Zis1=DG=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
+ id 1kNACh-0003Ay-2I
+ for xen-devel@lists.xenproject.org; Tue, 29 Sep 2020 07:37:39 +0000
+X-Inumbo-ID: 28569659-a65b-4e60-ac74-65c9860151cb
+Received: from mail-wm1-x333.google.com (unknown [2a00:1450:4864:20::333])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id d283ee28-55db-4d30-882a-38decc093444;
- Tue, 29 Sep 2020 07:32:39 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
- t=1601364758;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=JZBFq7BsdmwSOQJZhkX+TQ7PL/pZIx9aI52x0DHmqhI=;
- b=SvFNKU/INKKBXThsu6gqVM5GLfXCgqrkC0GK6NHuiw7t/8bn1yC8QdSbjYz7PgUe6RyAdo
- UemuCRNV+W66sToaLwhGJ4OC3w0Fp2IwhsLnpJvp5s2NNBFjPmYoeX3+Mk1ldDMKZTvrik
- +EY0qcMWc5qM4Q7dj6pt7iophAvAhxY=
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 340D8AC98;
- Tue, 29 Sep 2020 07:32:38 +0000 (UTC)
-Subject: Re: [PATCH] x86/xen: only unlock when USE_SPLIT_PTE_PTLOCKS is true
-To: Jason Yan <yanaijie@huawei.com>
-References: <20200929064828.3606720-1-yanaijie@huawei.com>
-Cc: boris.ostrovsky@oracle.com, jgross@suse.com, sstabellini@kernel.org,
- tglx@linutronix.de, mingo@redhat.com, bp@alien8.de, x86@kernel.org,
- hpa@zytor.com, xen-devel@lists.xenproject.org
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <afcfc8b1-182d-df7d-7a02-e5e19876e76a@suse.com>
-Date: Tue, 29 Sep 2020 09:32:37 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.0
+ id 28569659-a65b-4e60-ac74-65c9860151cb;
+ Tue, 29 Sep 2020 07:37:38 +0000 (UTC)
+Received: by mail-wm1-x333.google.com with SMTP id w2so3568211wmi.1
+ for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2020 00:37:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:reply-to:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding:thread-index:content-language;
+ bh=+BlHaoelA3/upoGvh6+Yciezwrlus7eXvVe30G+MOC8=;
+ b=YJ0njSUJkM+3JrZuGXybYD2vm/byl2tAJcSMDwNyzJBtX7Elf6CstioNq6iKAR82Ig
+ LBuZDeGwcC2mYPLnrZvy1tnz8K3V3JHJBFnVZDRPKIJ2hVN5VmDmdrm7kOBR0T+EEDb+
+ +bcnJ1GjBncHdbh9bj/R0cfrzXenvPop92QzVr9s6NTtPAS8exDXP1pakvmbUhB6jXE1
+ x7draV6LA8ymOKDTjvI5wNs/J6d0iiO7b9hZ8M6gn/+KmNvRamf434sUMl20kzoz1kgQ
+ C9RuIVS7bbl5cFdWqVGVdrW+MAAl+b0tgZD6R3TBF8TjNqJ3mxsxRUAYSYTlY5SRIzbQ
+ TRfA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:reply-to:to:cc:subject:date:message-id
+ :mime-version:content-transfer-encoding:thread-index
+ :content-language;
+ bh=+BlHaoelA3/upoGvh6+Yciezwrlus7eXvVe30G+MOC8=;
+ b=JHEJF0olFUaO0DIQRmNebac1ULrLykmwczy+WtF7/ECu9m7y765dV4sUuUQBT7wnHY
+ fiAhpYZXd94MOTQ92T8VmLglnpaDtfI1QBmpkAOVRbOEahL+zd+2t+eVEo+AOWIGAR7C
+ f9UMbdMCxrkv77LpD/S3uyoM6+eVv3+gY6qZ+eOUunejSGVTOZvkcLz4GbC+yEB3PKW0
+ 4PeC621KJCMefmauZxT0MyHhzVdRUPwVOEQfBHHDHrf5HSoOROFVZdllL/QqeORW6qDz
+ KBxQk1BjULUNhw0J5HNzmMaA5b8W2/3d+3PDn4NQf3xS6QKaukaDgWjTSKHS7II7B/pc
+ LUlw==
+X-Gm-Message-State: AOAM533mBjTutf1aLbLh7xre5fyrnSxi3GxR9UIO6FeErSj+k7tiFoU6
+ fJeNRlAbJhfbOc5428fm7CU=
+X-Google-Smtp-Source: ABdhPJwJUN1Ye+X19pTSQiRfR0F9C025ODRvvACYGfu8QFJkZ/hII87undBxVOPe7+vLBuTLBERZHg==
+X-Received: by 2002:a1c:dd87:: with SMTP id u129mr3010179wmg.172.1601365057279; 
+ Tue, 29 Sep 2020 00:37:37 -0700 (PDT)
+Received: from CBGR90WXYV0 (54-240-197-233.amazon.com. [54.240.197.233])
+ by smtp.gmail.com with ESMTPSA id e18sm4710456wrx.50.2020.09.29.00.37.36
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Tue, 29 Sep 2020 00:37:36 -0700 (PDT)
+From: Paul Durrant <xadimgnik@gmail.com>
+X-Google-Original-From: "Paul Durrant" <paul@xen.org>
+To: "'Ian Jackson'" <iwj@xenproject.org>,
+	"'Wei Liu'" <wl@xen.org>
+Cc: =?iso-8859-1?Q?'Roger_Pau_Monn=E9'?= <roger.pau@citrix.com>,
+ "'Paul Durrant'" <paul@xen.org>, <xen-devel@lists.xenproject.org>,
+ "'Anthony PERARD'" <anthony.perard@citrix.com>
+Subject: RE: [PATCH 2/2] libxl: do not automatically force detach of block
+ devices
+Date: Tue, 29 Sep 2020 08:37:35 +0100
+Message-ID: <003601d69633$66c0faf0$3442f0d0$@xen.org>
 MIME-Version: 1.0
-In-Reply-To: <20200929064828.3606720-1-yanaijie@huawei.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+X-Mailer: Microsoft Outlook 16.0
+Thread-Index: AdaWM0f1K15UQCVISjCpoxPepwBrjQ==
+Content-Language: en-gb
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,23 +94,79 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
+Reply-To: paul@xen.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 29.09.2020 08:48, Jason Yan wrote:
-> When USE_SPLIT_PTE_PTLOCKS is false, xen_pte_lock() actually do nothing
-> but returns NULL. So xen_pte_unlock() should not actually unlock.
-> Otherwise a NULL pointer dereference will be triggered.
-> 
-> Fixes: 74260714c56d ("xen: lock pte pages while pinning/unpinning")
+> -----Original Message-----
+> From: Ian Jackson <iwj@xenproject.org>
+> Sent: 28 September 2020 14:44
+> To: Wei Liu <wl@xen.org>
+> Cc: Roger Pau Monn=E9 <roger.pau@citrix.com>; Paul Durrant =
+<paul@xen.org>; xen-
+> devel@lists.xenproject.org; Durrant, Paul <pdurrant@amazon.co.uk>; =
+Anthony PERARD
+> <anthony.perard@citrix.com>
+> Subject: RE: [EXTERNAL] [PATCH 2/2] libxl: do not automatically force =
+detach of block devices
+>=20
+> CAUTION: This email originated from outside of the organization. Do =
+not click links or open
+> attachments unless you can confirm the sender and know the content is =
+safe.
+>=20
+>=20
+>=20
+> Wei Liu writes ("Re: [PATCH 2/2] libxl: do not automatically force =
+detach of block devices"):
+> > On Mon, Sep 14, 2020 at 12:41:09PM +0200, Roger Pau Monn=E9 wrote:
+> > > Maybe a new function should be introduced instead, that attempts =
+to
+> > > remove a device gracefully and fail otherwise?
+> > >
+> > > Then none of the current APIs would change, and xl could use this =
+new
+> > > function to handle VBD removal?
+> >
+> > This sounds fine to me.
+>=20
+> I agree.
+>=20
+> If there is going to be different default policy for different devices
+> it ought to be in xl, not libxl, but frankly I think this is an
+> anomaly.
+>=20
+> I suggest we have a new entrypoint that specifies the fallback
+> behaviour explicitly.
 
-I neither see any breakage this commit introduces, nor any NULL
-deref. Both calls to (or arrangements to call) xen_pte_unlock() are
-guarded by a check of the pointer to be non-NULL. Therefore if
-anything this is a cosmetic change, which the description should
-express, and which should have no Fixes: tag. (I would guess the
-intention back then was to avoid #ifdef-ary where possible, at the
-expense of a little bit of dead code.)
+Indeed. See v2 of my series, posted a couple of weeks ago, specifically:
 
-Jan
+https://lists.xenproject.org/archives/html/xen-devel/2020-09/msg01029.htm=
+l
+
+>  ISTM that there are three possible behaviours:
+>  - fail if the guest does not cooperate
+
+That is the newly introduced 'safe_remove'
+
+>  - fall back to force remove
+
+That is the existing 'remove'
+
+>  - rip the device out immediately
+
+That is the existing 'destroy'
+
+> The last of these would be useful only in rare situations.  IDK if the
+> length of the timeout (for the first two cases) ought to be a
+> parameter too.
+>=20
+
+I think that would be a worthy enhancement but above and beyond the aim =
+of this series.
+
+  Paul
+
+
+
 
