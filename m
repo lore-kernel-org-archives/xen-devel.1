@@ -2,26 +2,25 @@ Return-Path: <SRS0=a+y6=DG=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4B419C4727C
-	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2020 15:15:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 316CFC4742F
+	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2020 15:15:01 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DEE7D207F7
-	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2020 15:15:01 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DEE7D207F7
+	by mail.kernel.org (Postfix) with ESMTPS id C194720789
+	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2020 15:15:00 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C194720789
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.251.601 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.249.577 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNHLA-0006v4-E8; Tue, 29 Sep 2020 15:14:52 +0000
+	id 1kNHL4-0006qu-Rk; Tue, 29 Sep 2020 15:14:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 251.601; Tue, 29 Sep 2020 15:14:52 +0000
+Received: by outflank-mailman (output) from mailman id 249.577; Tue, 29 Sep 2020 15:14:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,35 +35,35 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNHLA-0006ux-B3; Tue, 29 Sep 2020 15:14:52 +0000
-Received: by outflank-mailman (input) for mailman id 251;
- Tue, 29 Sep 2020 15:14:51 +0000
+	id 1kNHL4-0006qn-OO; Tue, 29 Sep 2020 15:14:46 +0000
+Received: by outflank-mailman (input) for mailman id 249;
+ Tue, 29 Sep 2020 15:14:46 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5GuN=DG=suse.de=tzimmermann@srs-us1.protection.inumbo.net>)
- id 1kNHL8-0006qd-Ut
- for xen-devel@lists.xenproject.org; Tue, 29 Sep 2020 15:14:50 +0000
+ id 1kNHL4-0006qd-1K
+ for xen-devel@lists.xenproject.org; Tue, 29 Sep 2020 15:14:46 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 834bd61b-db9b-484d-9311-c8499a6b8f77;
+ id ae94a130-7abd-430e-bc9f-34a4c869012a;
  Tue, 29 Sep 2020 15:14:44 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 9C5E9B083;
+ by mx2.suse.de (Postfix) with ESMTP id 9C5B0B053;
  Tue, 29 Sep 2020 15:14:43 +0000 (UTC)
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=5GuN=DG=suse.de=tzimmermann@srs-us1.protection.inumbo.net>)
-	id 1kNHL8-0006qd-Ut
-	for xen-devel@lists.xenproject.org; Tue, 29 Sep 2020 15:14:50 +0000
-X-Inumbo-ID: 834bd61b-db9b-484d-9311-c8499a6b8f77
+	id 1kNHL4-0006qd-1K
+	for xen-devel@lists.xenproject.org; Tue, 29 Sep 2020 15:14:46 +0000
+X-Inumbo-ID: ae94a130-7abd-430e-bc9f-34a4c869012a
 Received: from mx2.suse.de (unknown [195.135.220.15])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 834bd61b-db9b-484d-9311-c8499a6b8f77;
+	id ae94a130-7abd-430e-bc9f-34a4c869012a;
 	Tue, 29 Sep 2020 15:14:44 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 9C5E9B083;
+	by mx2.suse.de (Postfix) with ESMTP id 9C5B0B053;
 	Tue, 29 Sep 2020 15:14:43 +0000 (UTC)
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: maarten.lankhorst@linux.intel.com,
@@ -119,106 +118,111 @@ Cc: dri-devel@lists.freedesktop.org,
 	linux-media@vger.kernel.org,
 	linaro-mm-sig@lists.linaro.org,
 	Thomas Zimmermann <tzimmermann@suse.de>
-Subject: [PATCH v3 2/7] drm/ttm: Add ttm_kmap_obj_to_dma_buf_map() for type conversion
-Date: Tue, 29 Sep 2020 17:14:32 +0200
-Message-Id: <20200929151437.19717-3-tzimmermann@suse.de>
+Subject: [PATCH v3 0/7] Support GEM object mappings from I/O memory
+Date: Tue, 29 Sep 2020 17:14:30 +0200
+Message-Id: <20200929151437.19717-1-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20200929151437.19717-1-tzimmermann@suse.de>
-References: <20200929151437.19717-1-tzimmermann@suse.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The new helper ttm_kmap_obj_to_dma_buf() extracts address and location
-from and instance of TTM's kmap_obj and initializes struct dma_buf_map
-with these values. Helpful for TTM-based drivers.
+DRM's fbdev console uses regular load and store operations to update
+framebuffer memory. The bochs driver on sparc64 requires the use of
+I/O-specific load and store operations. We have a workaround, but need
+a long-term solution to the problem.
 
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
----
- include/drm/ttm/ttm_bo_api.h | 24 ++++++++++++++++++++++++
- include/linux/dma-buf-map.h  | 20 ++++++++++++++++++++
- 2 files changed, 44 insertions(+)
+This patchset changes GEM's vmap/vunmap interfaces to forward pointers
+of type struct dma_buf_map and updates the generic fbdev emulation to
+use them correctly. This enables I/O-memory operations on all framebuffers
+that require and support them.
 
-diff --git a/include/drm/ttm/ttm_bo_api.h b/include/drm/ttm/ttm_bo_api.h
-index c96a25d571c8..62d89f05a801 100644
---- a/include/drm/ttm/ttm_bo_api.h
-+++ b/include/drm/ttm/ttm_bo_api.h
-@@ -34,6 +34,7 @@
- #include <drm/drm_gem.h>
- #include <drm/drm_hashtab.h>
- #include <drm/drm_vma_manager.h>
-+#include <linux/dma-buf-map.h>
- #include <linux/kref.h>
- #include <linux/list.h>
- #include <linux/wait.h>
-@@ -486,6 +487,29 @@ static inline void *ttm_kmap_obj_virtual(struct ttm_bo_kmap_obj *map,
- 	return map->virtual;
- }
- 
-+/**
-+ * ttm_kmap_obj_to_dma_buf_map
-+ *
-+ * @kmap: A struct ttm_bo_kmap_obj returned from ttm_bo_kmap.
-+ * @map: Returns the mapping as struct dma_buf_map
-+ *
-+ * Converts struct ttm_bo_kmap_obj to struct dma_buf_map. If the memory
-+ * is not mapped, the returned mapping is initialized to NULL.
-+ */
-+static inline void ttm_kmap_obj_to_dma_buf_map(struct ttm_bo_kmap_obj *kmap,
-+					       struct dma_buf_map *map)
-+{
-+	bool is_iomem;
-+	void *vaddr = ttm_kmap_obj_virtual(kmap, &is_iomem);
-+
-+	if (!vaddr)
-+		dma_buf_map_clear(map);
-+	else if (is_iomem)
-+		dma_buf_map_set_vaddr_iomem(map, (void __force __iomem *)vaddr);
-+	else
-+		dma_buf_map_set_vaddr(map, vaddr);
-+}
-+
- /**
-  * ttm_bo_kmap
-  *
-diff --git a/include/linux/dma-buf-map.h b/include/linux/dma-buf-map.h
-index fd1aba545fdf..2e8bbecb5091 100644
---- a/include/linux/dma-buf-map.h
-+++ b/include/linux/dma-buf-map.h
-@@ -45,6 +45,12 @@
-  *
-  *	dma_buf_map_set_vaddr(&map. 0xdeadbeaf);
-  *
-+ * To set an address in I/O memory, use dma_buf_map_set_vaddr_iomem().
-+ *
-+ * .. code-block:: c
-+ *
-+ *	dma_buf_map_set_vaddr_iomem(&map. 0xdeadbeaf);
-+ *
-  * Test if a mapping is valid with either dma_buf_map_is_set() or
-  * dma_buf_map_is_null().
-  *
-@@ -118,6 +124,20 @@ static inline void dma_buf_map_set_vaddr(struct dma_buf_map *map, void *vaddr)
- 	map->is_iomem = false;
- }
- 
-+/**
-+ * dma_buf_map_set_vaddr_iomem - Sets a dma-buf mapping structure to an address in I/O memory
-+ * @map:		The dma-buf mapping structure
-+ * @vaddr_iomem:	An I/O-memory address
-+ *
-+ * Sets the address and the I/O-memory flag.
-+ */
-+static inline void dma_buf_map_set_vaddr_iomem(struct dma_buf_map *map,
-+					       void __iomem *vaddr_iomem)
-+{
-+	map->vaddr_iomem = vaddr_iomem;
-+	map->is_iomem = true;
-+}
-+
- /**
-  * dma_buf_map_is_equal - Compares two dma-buf mapping structures for equality
-  * @lhs:	The dma-buf mapping structure
--- 
+Patches #1 and #2 prepare VRAM helpers and TTM for the changes in patch
+#3. Patch #3 updates GEM's vmap/vunmap callback to forward instances of
+type struct dma_buf_map. While the patch touches many files throughout the
+DRM modules, the applied changes are mostly trivial interface fixes.
+
+Patch #4 updates GEM's internal vmap/vunmap functions to forward struct
+dma_buf_map.
+
+Patches #5 and #6 convert DRM clients and generic fbdev emulation to use
+struct dma_buf_map. Updating the fbdev framebuffer will select the correct
+functions, either for system or I/O memory.
+
+The patch set is just enough to fix the bochs issue on sparc64 and a
+correct way. Patch #7 updates the TODO list with ideas for further
+improvements
+
+v3:
+	* recreate the whole patchset on top of struct dma_buf_map
+
+v2:
+	* RFC patchset
+
+Thomas Zimmermann (7):
+  drm/vram-helper: Remove invariant parameters from internal kmap
+    function
+  drm/ttm: Add ttm_kmap_obj_to_dma_buf_map() for type conversion
+  drm/gem: Use struct dma_buf_map in GEM vmap ops and convert GEM
+    backends
+  drm/gem: Update internal GEM vmap/vunmap interfaces to use struct
+    dma_buf_map
+  drm/gem: Store client buffer mappings as struct dma_buf_map
+  drm/fb_helper: Support framebuffers in I/O memory
+  drm/todo: Update entries around struct dma_buf_map
+
+ Documentation/gpu/todo.rst                  |  24 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_dma_buf.c |  14 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_dma_buf.h |   4 +-
+ drivers/gpu/drm/ast/ast_cursor.c            |  29 ++-
+ drivers/gpu/drm/ast/ast_drv.h               |   7 +-
+ drivers/gpu/drm/bochs/bochs_kms.c           |   1 -
+ drivers/gpu/drm/drm_client.c                |  38 ++--
+ drivers/gpu/drm/drm_fb_helper.c             | 238 ++++++++++++++++++--
+ drivers/gpu/drm/drm_gem.c                   |  28 ++-
+ drivers/gpu/drm/drm_gem_cma_helper.c        |  14 +-
+ drivers/gpu/drm/drm_gem_shmem_helper.c      |  48 ++--
+ drivers/gpu/drm/drm_gem_vram_helper.c       |  93 ++++----
+ drivers/gpu/drm/drm_internal.h              |   5 +-
+ drivers/gpu/drm/drm_prime.c                 |  14 +-
+ drivers/gpu/drm/etnaviv/etnaviv_drv.h       |   4 +-
+ drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c |  11 +-
+ drivers/gpu/drm/exynos/exynos_drm_gem.c     |   6 +-
+ drivers/gpu/drm/exynos/exynos_drm_gem.h     |   4 +-
+ drivers/gpu/drm/lima/lima_gem.c             |   6 +-
+ drivers/gpu/drm/lima/lima_sched.c           |  11 +-
+ drivers/gpu/drm/mgag200/mgag200_mode.c      |  12 +-
+ drivers/gpu/drm/nouveau/nouveau_gem.h       |   4 +-
+ drivers/gpu/drm/nouveau/nouveau_prime.c     |   9 +-
+ drivers/gpu/drm/panfrost/panfrost_perfcnt.c |  14 +-
+ drivers/gpu/drm/qxl/qxl_display.c           |  13 +-
+ drivers/gpu/drm/qxl/qxl_draw.c              |  16 +-
+ drivers/gpu/drm/qxl/qxl_drv.h               |   8 +-
+ drivers/gpu/drm/qxl/qxl_object.c            |  23 +-
+ drivers/gpu/drm/qxl/qxl_object.h            |   2 +-
+ drivers/gpu/drm/qxl/qxl_prime.c             |  12 +-
+ drivers/gpu/drm/radeon/radeon_gem.c         |   4 +-
+ drivers/gpu/drm/radeon/radeon_prime.c       |   9 +-
+ drivers/gpu/drm/rockchip/rockchip_drm_gem.c |  22 +-
+ drivers/gpu/drm/rockchip/rockchip_drm_gem.h |   4 +-
+ drivers/gpu/drm/tiny/cirrus.c               |  10 +-
+ drivers/gpu/drm/tiny/gm12u320.c             |  10 +-
+ drivers/gpu/drm/udl/udl_modeset.c           |   8 +-
+ drivers/gpu/drm/vboxvideo/vbox_mode.c       |  11 +-
+ drivers/gpu/drm/vc4/vc4_bo.c                |   6 +-
+ drivers/gpu/drm/vc4/vc4_drv.h               |   2 +-
+ drivers/gpu/drm/vgem/vgem_drv.c             |  16 +-
+ drivers/gpu/drm/xen/xen_drm_front_gem.c     |  18 +-
+ drivers/gpu/drm/xen/xen_drm_front_gem.h     |   6 +-
+ include/drm/drm_client.h                    |   7 +-
+ include/drm/drm_gem.h                       |   5 +-
+ include/drm/drm_gem_cma_helper.h            |   4 +-
+ include/drm/drm_gem_shmem_helper.h          |   4 +-
+ include/drm/drm_gem_vram_helper.h           |   4 +-
+ include/drm/drm_mode_config.h               |  12 -
+ include/drm/ttm/ttm_bo_api.h                |  24 ++
+ include/linux/dma-buf-map.h                 |  92 +++++++-
+ 51 files changed, 685 insertions(+), 305 deletions(-)
+
+--
 2.28.0
 
 
