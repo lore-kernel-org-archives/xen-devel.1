@@ -7,24 +7,24 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,UNPARSEABLE_RELAY,URIBL_BLOCKED
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E3A30C4741F
-	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2020 11:11:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A3BC9C47425
+	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2020 11:14:35 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8703C21941
-	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2020 11:11:15 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 1D3FE208FE
+	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2020 11:14:34 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=armh.onmicrosoft.com header.i=@armh.onmicrosoft.com header.b="mUN5fhLV";
-	dkim=pass (1024-bit key) header.d=armh.onmicrosoft.com header.i=@armh.onmicrosoft.com header.b="mUN5fhLV"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8703C21941
+	dkim=pass (1024-bit key) header.d=armh.onmicrosoft.com header.i=@armh.onmicrosoft.com header.b="r4lXL2iO";
+	dkim=pass (1024-bit key) header.d=armh.onmicrosoft.com header.i=@armh.onmicrosoft.com header.b="r4lXL2iO"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1D3FE208FE
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.35.174 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.56.189 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNDX8-00082P-Nm; Tue, 29 Sep 2020 11:10:58 +0000
+	id 1kNDaC-0008Mu-8W; Tue, 29 Sep 2020 11:14:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 35.174; Tue, 29 Sep 2020 11:10:58 +0000
+Received: by outflank-mailman (output) from mailman id 56.189; Tue, 29 Sep 2020 11:14:08 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,78 +38,77 @@ Precedence: list
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNDX8-000821-CQ; Tue, 29 Sep 2020 11:10:58 +0000
-Received: by outflank-mailman (input) for mailman id 35;
- Tue, 29 Sep 2020 11:10:56 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kNDaC-0008Mm-4u; Tue, 29 Sep 2020 11:14:08 +0000
+Received: by outflank-mailman (input) for mailman id 56;
+ Tue, 29 Sep 2020 11:14:06 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=MQRb=DG=arm.com=rahul.singh@srs-us1.protection.inumbo.net>)
- id 1kNDX6-00081H-F4
- for xen-devel@lists.xenproject.org; Tue, 29 Sep 2020 11:10:56 +0000
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com (unknown
- [40.107.22.79]) by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id c3c84c3a-9ed9-41cf-a4cd-e46b3b0a77c6;
- Tue, 29 Sep 2020 11:10:53 +0000 (UTC)
-Received: from DB6PR0501CA0004.eurprd05.prod.outlook.com (2603:10a6:4:8f::14)
- by AM6PR08MB4518.eurprd08.prod.outlook.com (2603:10a6:20b:b4::10)
- with Microsoft SMTP Server (version=TLS1_2,
+ id 1kNDaA-0008Mg-T0
+ for xen-devel@lists.xenproject.org; Tue, 29 Sep 2020 11:14:06 +0000
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com (unknown
+ [40.107.7.83]) by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id f94868be-c518-4833-98be-54a4c2cd3d7c;
+ Tue, 29 Sep 2020 11:14:05 +0000 (UTC)
+Received: from AM5PR0201CA0011.eurprd02.prod.outlook.com
+ (2603:10a6:203:3d::21) by DB7PR08MB3833.eurprd08.prod.outlook.com
+ (2603:10a6:10:79::17) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3412.24; Tue, 29 Sep
- 2020 11:10:51 +0000
-Received: from DB5EUR03FT035.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:4:8f:cafe::ea) by DB6PR0501CA0004.outlook.office365.com
- (2603:10a6:4:8f::14) with Microsoft SMTP Server (version=TLS1_2,
+ 2020 11:14:02 +0000
+Received: from AM5EUR03FT064.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:203:3d:cafe::a3) by AM5PR0201CA0011.outlook.office365.com
+ (2603:10a6:203:3d::21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3433.32 via Frontend
- Transport; Tue, 29 Sep 2020 11:10:51 +0000
+ Transport; Tue, 29 Sep 2020 11:14:02 +0000
 Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- DB5EUR03FT035.mail.protection.outlook.com (10.152.20.65) with
+ AM5EUR03FT064.mail.protection.outlook.com (10.152.17.53) with
  Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3412.21 via Frontend Transport; Tue, 29 Sep 2020 11:10:50 +0000
-Received: ("Tessian outbound 34b830c8a0ef:v64");
- Tue, 29 Sep 2020 11:10:50 +0000
-Received: from 4c72f0eee717.3
+ 15.20.3412.21 via Frontend Transport; Tue, 29 Sep 2020 11:14:02 +0000
+Received: ("Tessian outbound a0bffebca527:v64");
+ Tue, 29 Sep 2020 11:14:02 +0000
+Received: from 90ca9c3eef6f.2
  by 64aa7808-outbound-1.mta.getcheckrecipient.com id
- 11FEBA59-EF8C-44AE-9B42-CE2CA217966C.1; 
- Tue, 29 Sep 2020 11:10:13 +0000
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 4c72f0eee717.3
+ FE7E19AE-6823-4E00-AF98-A67B191C0470.1; 
+ Tue, 29 Sep 2020 11:13:57 +0000
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 90ca9c3eef6f.2
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
- Tue, 29 Sep 2020 11:10:13 +0000
+ Tue, 29 Sep 2020 11:13:57 +0000
 Received: from DBAPR08MB5702.eurprd08.prod.outlook.com (2603:10a6:10:1a3::14)
- by DB7PR08MB2987.eurprd08.prod.outlook.com (2603:10a6:5:1c::25) with
+ by DB7PR08MB3434.eurprd08.prod.outlook.com (2603:10a6:10:42::15) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3412.20; Tue, 29 Sep
- 2020 11:10:11 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3412.26; Tue, 29 Sep
+ 2020 11:13:54 +0000
 Received: from DBAPR08MB5702.eurprd08.prod.outlook.com
  ([fe80::910f:c3ac:ef51:91ac]) by DBAPR08MB5702.eurprd08.prod.outlook.com
  ([fe80::910f:c3ac:ef51:91ac%4]) with mapi id 15.20.3433.032; Tue, 29 Sep 2020
- 11:10:11 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+ 11:13:54 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=MQRb=DG=arm.com=rahul.singh@srs-us1.protection.inumbo.net>)
-	id 1kNDX6-00081H-F4
-	for xen-devel@lists.xenproject.org; Tue, 29 Sep 2020 11:10:56 +0000
-X-Inumbo-ID: c3c84c3a-9ed9-41cf-a4cd-e46b3b0a77c6
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com (unknown [40.107.22.79])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id c3c84c3a-9ed9-41cf-a4cd-e46b3b0a77c6;
-	Tue, 29 Sep 2020 11:10:53 +0000 (UTC)
+	id 1kNDaA-0008Mg-T0
+	for xen-devel@lists.xenproject.org; Tue, 29 Sep 2020 11:14:06 +0000
+X-Inumbo-ID: f94868be-c518-4833-98be-54a4c2cd3d7c
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com (unknown [40.107.7.83])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id f94868be-c518-4833-98be-54a4c2cd3d7c;
+	Tue, 29 Sep 2020 11:14:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
  s=selector2-armh-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ibCHE4+jSnvlz5Rsnu55g75oNhtwChMB8neQAThfUeA=;
- b=mUN5fhLV6kt8tkyJBUx811+UKpR+DoggTRBpjAe7buqutCuTDW3DKnfHl8tb6dYKK4R3bHmSv3Zohfi5CqDEmk6Fx0iPGe6bF1TfJrjGOLzN4KClUqEb8loXG0KeIeqjtRFOmRhOh5cWjcgu+Dlt1dOYwojwx15zg5wBRbfnY/Y=
-Received: from DB6PR0501CA0004.eurprd05.prod.outlook.com (2603:10a6:4:8f::14)
- by AM6PR08MB4518.eurprd08.prod.outlook.com (2603:10a6:20b:b4::10) with
- Microsoft SMTP Server (version=TLS1_2,
+ bh=KY64bThEoQ45wXpxRhVEap8LYQRwMReVDmAlFxeimoc=;
+ b=r4lXL2iOJhjLIqR9xriUsy0TzcNL9RK0C4Gq+mByZZEjYCJIQZf04D4v1fsuCmWLuHJ3pXSdBPo7Bfa1AfAtbJWdlfOf2NIYC1M1j/qpr8+cFA6bmXCjLL2IMdlMG3kIAl1qy+yl9ddXHcCVqiC79l86P6HOQWRfDEvGskFeukQ=
+Received: from AM5PR0201CA0011.eurprd02.prod.outlook.com
+ (2603:10a6:203:3d::21) by DB7PR08MB3833.eurprd08.prod.outlook.com
+ (2603:10a6:10:79::17) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3412.24; Tue, 29 Sep
- 2020 11:10:51 +0000
-Received: from DB5EUR03FT035.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:4:8f:cafe::ea) by DB6PR0501CA0004.outlook.office365.com
- (2603:10a6:4:8f::14) with Microsoft SMTP Server (version=TLS1_2,
+ 2020 11:14:02 +0000
+Received: from AM5EUR03FT064.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:203:3d:cafe::a3) by AM5PR0201CA0011.outlook.office365.com
+ (2603:10a6:203:3d::21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3433.32 via Frontend
- Transport; Tue, 29 Sep 2020 11:10:51 +0000
+ Transport; Tue, 29 Sep 2020 11:14:02 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
  smtp.mailfrom=arm.com; lists.xenproject.org; dkim=pass (signature was
  verified) header.d=armh.onmicrosoft.com;lists.xenproject.org;
@@ -118,44 +117,44 @@ Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
  63.35.35.123 as permitted sender) receiver=protection.outlook.com;
  client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
 Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- DB5EUR03FT035.mail.protection.outlook.com (10.152.20.65) with Microsoft SMTP
+ AM5EUR03FT064.mail.protection.outlook.com (10.152.17.53) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3412.21 via Frontend Transport; Tue, 29 Sep 2020 11:10:50 +0000
-Received: ("Tessian outbound 34b830c8a0ef:v64"); Tue, 29 Sep 2020 11:10:50 +0000
+ 15.20.3412.21 via Frontend Transport; Tue, 29 Sep 2020 11:14:02 +0000
+Received: ("Tessian outbound a0bffebca527:v64"); Tue, 29 Sep 2020 11:14:02 +0000
 X-CheckRecipientChecked: true
-X-CR-MTA-CID: d5472b697c2c29a0
+X-CR-MTA-CID: 8b6a227dc2e3f481
 X-CR-MTA-TID: 64aa7808
-Received: from 4c72f0eee717.3
-	by 64aa7808-outbound-1.mta.getcheckrecipient.com id 11FEBA59-EF8C-44AE-9B42-CE2CA217966C.1;
-	Tue, 29 Sep 2020 11:10:13 +0000
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
-    by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 4c72f0eee717.3
+Received: from 90ca9c3eef6f.2
+	by 64aa7808-outbound-1.mta.getcheckrecipient.com id FE7E19AE-6823-4E00-AF98-A67B191C0470.1;
+	Tue, 29 Sep 2020 11:13:57 +0000
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com
+    by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 90ca9c3eef6f.2
     (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
-    Tue, 29 Sep 2020 11:10:13 +0000
+    Tue, 29 Sep 2020 11:13:57 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=LDBhofVybdGp1EnsVVs3ZoLjQzSGarOFFMSZn0ICd+A6orgMmT5c29xT+zfmnzDqrXNVANNjQkYy3jOKqPWmaKRp1jhsrhr5oXjzpu6Qd7uFkeTlBckkEZI4FKAIGngLa7T1QARUlYQ7wEoXMjCuefw9w0j/Onqjr1OuY2yOJ8fbwf0U+5I/4UmJ0SmQGTF8dTVxOpXMSZMmz80M9DM8o825KmnWb/hgN3PJUTXVXWkC4O8iU7uDEvYg3xR4De6l8mGyZAT9wq3wTY0AuTFKoMgZqbGe3whqmY2236AbkWg1BdjIh4gSwMkVgrRUeLUYHzxjwyzO/UBH6PJJoq0j7A==
+ b=CDNyAH8nsJUz/IqhdUJOJ19QzLOy2PSre6BouB5AqywnEgTByhMNjb4P/Z4khqNTeGqegZrfeWGhdnz2el3YBudDDPclvUV1mmpGyrqJPvVhvncglBOEg9TGQGJnD7dPA0CNbEUHLHaD2QX2OxM60Rutv0pH/HVs4hKnUBhnzhrV+RYDxDttwIaTjDi4YqIhzrl6nwZcs+PDzBiNfsW62urmYPUmaQrgE19XsWFCMZR8S5uGSOhyazru6n7odafa15nGL1fHYdjpHaFs5e/IIXAjwcbG/px3xX8xaAM1fijDhRsMfKgFmsLIWl9fzvgKTNQ3knEDHeth7Zp3+IJOGA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ibCHE4+jSnvlz5Rsnu55g75oNhtwChMB8neQAThfUeA=;
- b=D09pNS8GA4cG/yvHK2eoYJ8tVHpKNBrBPq8/yQZsdqqok8UgbMI4OOApri32cuwlqDkFNmIvckiAE+N5xgw7lr1ECx4aR0FWRs7DqzoPR77zYhEFQMJDGvh/rOI/OPEbnZOHL0MCLk33RNTwuQioeslh6tAyB1kBGXHr7MrgCL1ZAK/Bvu6wwxc2I/TnEBD+MVIu07Qs9ofMeX/WFo1/i9+3Hi6LfxsOWwx/5MD0bQo5HgzLZD2KO2WlopFz7In0rRTzPq0h4SQ6JrvzkGggB/0e7j9xdv/sVmtzPDJy0Oqso7pEPVzktLTYnYtwltLpVLCSE4wfWdEDDnNGEewMgA==
+ bh=KY64bThEoQ45wXpxRhVEap8LYQRwMReVDmAlFxeimoc=;
+ b=dBBrLyxITIpSikGj7kl49ona0rKluRq9y2jfttRwicLS2FvTeGdIaYFfj1y+7IVmc7SXgtTVm5nnAyWRfg7TYOLzgOTLIt5bJhvZjNqsX7MyVNvBN9hvJ762BWwj+5NtaRXAqc/QXC7cKQriI9hW4seK5WnjBH7c3LJvu2fSbols/Ay7PZwhto8FEesgYNzkLIjZixAOH8Wn8c5A/2GnUyev2yOTJF2gI1niUttEYpMIQb15KEsg7osUSczu7epQHqetj7O16hOwGURuoJIthCu1UURAHehVZ+UJ4BpX3gSQNz1TrfgBFKyw3fNu87B9NPd3XSSHA8/+ZYbNr6GrcA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
  header.d=arm.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
  s=selector2-armh-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ibCHE4+jSnvlz5Rsnu55g75oNhtwChMB8neQAThfUeA=;
- b=mUN5fhLV6kt8tkyJBUx811+UKpR+DoggTRBpjAe7buqutCuTDW3DKnfHl8tb6dYKK4R3bHmSv3Zohfi5CqDEmk6Fx0iPGe6bF1TfJrjGOLzN4KClUqEb8loXG0KeIeqjtRFOmRhOh5cWjcgu+Dlt1dOYwojwx15zg5wBRbfnY/Y=
+ bh=KY64bThEoQ45wXpxRhVEap8LYQRwMReVDmAlFxeimoc=;
+ b=r4lXL2iOJhjLIqR9xriUsy0TzcNL9RK0C4Gq+mByZZEjYCJIQZf04D4v1fsuCmWLuHJ3pXSdBPo7Bfa1AfAtbJWdlfOf2NIYC1M1j/qpr8+cFA6bmXCjLL2IMdlMG3kIAl1qy+yl9ddXHcCVqiC79l86P6HOQWRfDEvGskFeukQ=
 Received: from DBAPR08MB5702.eurprd08.prod.outlook.com (2603:10a6:10:1a3::14)
- by DB7PR08MB2987.eurprd08.prod.outlook.com (2603:10a6:5:1c::25) with
+ by DB7PR08MB3434.eurprd08.prod.outlook.com (2603:10a6:10:42::15) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3412.20; Tue, 29 Sep
- 2020 11:10:11 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3412.26; Tue, 29 Sep
+ 2020 11:13:54 +0000
 Received: from DBAPR08MB5702.eurprd08.prod.outlook.com
  ([fe80::910f:c3ac:ef51:91ac]) by DBAPR08MB5702.eurprd08.prod.outlook.com
  ([fe80::910f:c3ac:ef51:91ac%4]) with mapi id 15.20.3433.032; Tue, 29 Sep 2020
- 11:10:11 +0000
+ 11:13:54 +0000
 From: Rahul Singh <Rahul.Singh@arm.com>
 To: Julien Grall <julien@xen.org>
 CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
@@ -164,20 +163,17 @@ CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
 	"ehem+xen@m5p.com" <ehem+xen@m5p.com>, Bertrand Marquis
 	<Bertrand.Marquis@arm.com>, Andre Przywara <Andre.Przywara@arm.com>, Julien
  Grall <jgrall@amazon.com>, Stefano Stabellini <sstabellini@kernel.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, Ian
- Jackson <iwj@xenproject.org>, Jan Beulich <jbeulich@suse.com>, Wei Liu
-	<wl@xen.org>, =?iso-8859-1?Q?Roger_Pau_Monn=E9?= <roger.pau@citrix.com>
-Subject: Re: [PATCH 1/4] xen/acpi: Rework acpi_os_map_memory() and
- acpi_os_unmap_memory()
-Thread-Topic: [PATCH 1/4] xen/acpi: Rework acpi_os_map_memory() and
- acpi_os_unmap_memory()
-Thread-Index: AQHWlEeqTjM+UnBm00C6Ass2V2ltOKl/ePwA
-Date: Tue, 29 Sep 2020 11:10:11 +0000
-Message-ID: <D668E983-B026-49C1-9FF2-2D45E1B80D02@arm.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Wei Xu <xuwei5@hisilicon.com>
+Subject: Re: [PATCH 2/4] xen/arm: acpi: The fixmap area should always be
+ cleared during failure/unmap
+Thread-Topic: [PATCH 2/4] xen/arm: acpi: The fixmap area should always be
+ cleared during failure/unmap
+Thread-Index: AQHWlEfKCl2/BWPbZ0mt0x0/DJ/LAql/equA
+Date: Tue, 29 Sep 2020 11:13:54 +0000
+Message-ID: <8605B284-1BD7-41C3-8232-E8453A4F0A57@arm.com>
 References: <20200926205542.9261-1-julien@xen.org>
- <20200926205542.9261-2-julien@xen.org>
-In-Reply-To: <20200926205542.9261-2-julien@xen.org>
+ <20200926205542.9261-3-julien@xen.org>
+In-Reply-To: <20200926205542.9261-3-julien@xen.org>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach:
@@ -187,50 +183,50 @@ Authentication-Results-Original: xen.org; dkim=none (message not signed)
 x-originating-ip: [86.26.38.125]
 x-ms-publictraffictype: Email
 X-MS-Office365-Filtering-HT: Tenant
-X-MS-Office365-Filtering-Correlation-Id: 720f931a-5fd5-4586-e8df-08d864685339
-x-ms-traffictypediagnostic: DB7PR08MB2987:|AM6PR08MB4518:
+X-MS-Office365-Filtering-Correlation-Id: 06ff5059-cb4a-4197-0d05-08d86468c591
+x-ms-traffictypediagnostic: DB7PR08MB3434:|DB7PR08MB3833:
 x-ms-exchange-transport-forked: True
 X-Microsoft-Antispam-PRVS:
-	<AM6PR08MB45185D2D3998EEE463F1ACADFC320@AM6PR08MB4518.eurprd08.prod.outlook.com>
+	<DB7PR08MB3833E60DC772550F314E64DFFC320@DB7PR08MB3833.eurprd08.prod.outlook.com>
 x-checkrecipientrouted: true
 nodisclaimer: true
-x-ms-oob-tlc-oobclassifiers: OLM:2657;OLM:2657;
+x-ms-oob-tlc-oobclassifiers: OLM:9508;OLM:9508;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam-Untrusted: BCL:0;
 X-Microsoft-Antispam-Message-Info-Original:
- kUuY4dc8VeZLaRuCKqB3gj69y4vTJ7eKyGDSUa/sUTh8PwLUFEqlBsy56yWxqe+Dn7SFJ3pno45zKArfd6snwEfv5hB3it9/vZxymHBCCxsCfdM6AFURrE538jGN5STsF4HNoyXL41OI8KHdnZkAirhDixtC5hekRVCz6pvaONJ0KDi25lASdxhVlIXc3wruJA7vFmOTkM1vIAHRY6z0MN4VsmUI9YW/YFoX57ZKmBLsUSWMiRsTHcJ32dNhozBTxwRSNGUQrYGx+OM+ipTaPPEBOUGGz8TvThkhJ5R1Juero13MZbSz+2Pn8fU0E90W/zdef4JAZq2fuICCjkwtlWIlovpBCGez4YbJbZShXcIE5hNSXbAi2qMu8gRjzIQr
+ U35QB7SjBzKG6wmqU/LbqMEllk3LBQnSZUI+8uvHlnLcJhAAppaQ0dfsFjYDDvwiV14LQT1NYkbDqmGisJIKeXsoV2pxUHHeouiRD7L6Ix6+ijdME8t2BPTp8FAm1zdbTpcnAEwgLtFVP2wPdIn+oEpouJjis7NUFXB4C5d16dUyuuq3aDh5QU2+XNWuhze/b/TVSFzimQauN1FVYL6sqPpNW1Gc2yZ2ijCJTAuPFLBgNrD3+AOHqRCNwdoa9t5KBpIWbOlL9PkM+XebCunAMqkdWj/bEznNiGzmfinuGa/jhpNbPHwSjx4a43YEB2/uiPgHtAMh3kXt7eBiWaimzzNDNVIZy81TN5IrC2bnAIFLeJN1iUJkv7z7J9r83MthMGTRc8cHBosI5z3JowyTsiRUib0DURyx7XFbUsQv3e9bWG5NRDF7jIxPuTx6vtaPObfy+7CTOqh6qs36hXMLKQ==
 X-Forefront-Antispam-Report-Untrusted:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DBAPR08MB5702.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(366004)(376002)(136003)(39860400002)(346002)(66556008)(76116006)(6506007)(5660300002)(7416002)(54906003)(6512007)(83380400001)(71200400001)(186003)(26005)(55236004)(53546011)(91956017)(2906002)(4326008)(36756003)(86362001)(66946007)(64756008)(66476007)(66446008)(8936002)(478600001)(8676002)(33656002)(6916009)(2616005)(316002)(6486002);DIR:OUT;SFP:1101;
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DBAPR08MB5702.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(346002)(136003)(39840400004)(376002)(366004)(186003)(8936002)(316002)(36756003)(8676002)(54906003)(6506007)(83380400001)(2616005)(33656002)(6916009)(55236004)(53546011)(5660300002)(26005)(478600001)(86362001)(66946007)(76116006)(91956017)(66446008)(64756008)(66556008)(66476007)(71200400001)(6486002)(2906002)(4326008)(6512007)(966005);DIR:OUT;SFP:1101;
 x-ms-exchange-antispam-messagedata:
- Ov7p/XFBI3Co92kBQ+DTtoif4igbqG2kuLiiaLvh9oDqRx6S5Fq95gtIvTflyXmr9GBxLl02X4t+NJQIsRmsLbM3hCoPRCAvnFuCrip3wZP/kkW4ZHAITK41DohXug1CPgyfVYSDsokzOJn59Bir82kV0TiGwJl7qKM36BR+jb6qQ5qWP5SeCm5VObG3Gq75j0Oy5FV9Xgi2SD+bHPvBsb2gOVnxYr2sJfvLRoI8OoyhzEadGm3cnDtPDD5KYEm+5i/7jLPvJMzwFCGiO2kfosalQWpoafTFkeSWGQA4aBj56cm0hUor04C86jOw2Rg/cxJU196/ReLdKlZbOv97mYfcapykLH+slHUZrtQeTra+a0zTr4YCFDuNc+vqH5LOjxvcS6gzbtDlAxZwFN00OQTK2TjBxu85Wj2KXUMf5Yn3CcRHkWjO79Uci5Ok2SkRyloJBdJjlTEkBOxscqE8JcKCPB0JX0FkIWtItRY/eC8L/f5uRYxJmaPx71S2PzgRI+J+JknVITsqIMrtZha1BpTgNqh83avIy7IKMds2pkWRhyun4JuUGGJYYinFQY8RHlv90nJIcOQb1/6jp69AnIBdqH8UYGBWj44xZD8FnSASrNm527H/fzOGeR9JegiwdwtUwPvT8zb/jIYulPuHkA==
-Content-Type: text/plain; charset="iso-8859-1"
-Content-ID: <7FD80E0DE215EA4AB383DDF7B3B3F48D@eurprd08.prod.outlook.com>
+ AfxJg/+nAJFWrL0gk5PKFtlqDP//0basYdC7JDH2Gtiu4b+XoTRpqCfhyq3ynZEktmAZhwah3bjvXNpgR6bRloP0ZHIQpbBUARTX5dfWzQfe6uGXQE1fA3e4Njs7TI/wV/VY6P2/1+x0C9/5yXLJZRYawmRvIBc1fJJtbBKc/cAT2tP02n7fFiaKUt+j6uJ8+rKhc2fy8DEXiuIQzRLMfKzF/0atpwlGj9IEilZ31RAv/1N2Rt6OPc3Hp4UhekUhjdh4oED7eaM3wDK/JTiIgd8PiWnM/opnQpoUwP4UXx7c5XDwtUho5b5S5oCY/o8UbpBp24vbM65E8+HhzBkIqrGMYij0j65peD7BVCegJS6YR8NkAcbD7yY4t9pVcehqKeiB8tM/Okl6pTKH7kYkjwVPn8S6w1w436c2Fw0cYLxRm1zBfocbxClGhk6/ZIXfUaOMrSglkw+DZCVxviFZTfQSGV/jmHanRLt7Fore1JklQqM2FIO6ra4ZE/EjhHi6kBve2rNHjM9kRoDPJbiOGKiDLEkLn9FV0d+/ZpiKSfuZUmxPVMKLxv4tCw5ot3I4DsNxGlLGtMnyIlmSiv7Z2drHt1YLXK/fyLirV+ZzKRFQdgP7z3Mk6aKMKjRLX0OQZlohHuzJCu/fb38aRSWV7A==
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <65539CDB6D9092499E01B844B334D2FF@eurprd08.prod.outlook.com>
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB7PR08MB2987
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB7PR08MB3434
 Original-Authentication-Results: xen.org; dkim=none (message not signed)
  header.d=none;xen.org; dmarc=none action=none header.from=arm.com;
 X-EOPAttributedMessage: 0
 X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- DB5EUR03FT035.eop-EUR03.prod.protection.outlook.com
+ AM5EUR03FT064.eop-EUR03.prod.protection.outlook.com
 X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	dc079551-3848-4f54-0c15-08d864683bab
+	c64379fa-32b2-44ff-6bbc-08d86468c0ae
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	67NUZKvMILBzHmygwsivsdW7XVJ0nlqQs+F0y8PFciG5aHDMgFfZ9e6xDcoaLO4Tpj/zs2boOh+xVVafx4SYluu3Drhw2DcjZqNjhmUr0xwzGsjVbDCNRf+Ii5IjOVqp/nCb9vmQCNb7eQcKhbLLeHtOayFctXspmQ9fZTqEaFcyVUZfQadINZXDP1ehK3WllJptqxSBL77fFWXbyfcP5Z2r964lHlnkNXxem6irEu8mCc2206E/TqDJhVqtiLDOZzrfI89DXSVjE9Nk9fEXbicw9GosGq9GUrfs/kdyQMxTVsFIWJXE7Kch6PDSNO8OeKNPqBR6TZYRpP7gcgwyestuqLZBYnwUMU1qUPw/d/uzZRH29XbPlJsPra7Y5F3xLAvYe4Jgky/G6eAGKTh74mWgoWq4DHGQ5ZDG/230OW4AV5hQzG8CG2z6jsaxCl4S
+	jsdWa4INND5X1CdqXqMKJHUjcFSer3gEs5nuRLg3f0dn2J7xRow8l/6P6EtdBj+SRxiknyIbaD2TrD+1PaeGv5T9icAwwvtDbu1i/crxdTln+WV62iFDoGebQhAOgIsIA+q1Khin90KEEBXd00m+RB1LYYCN3+6bbUkWaBmys7Pcbh8S5sT6+yGLmcSZs3Dl4kHtmvFIPa9+/JJTvJWauLS/FHcvrWu8i6wSVTHEVCLDvBY5yGIfD2UhZDTK/YbK2XBIZDBxMRKmn39ODFqmbG8zTtycKXfXWsLonDO5EZcrSN+ICiS4n5JMEmy9FoNFuiRtMoBralfAL2vEokv59rr43t7VtJaQVnPPGL31218MPjd5vZ0/spfIzGGlf5YH0JqitOvgid+rjUZLDLGCympZ54cJumcHspEUNpvdI7AaERe0OmkQ5jF67BWZnkUr+85AxsmnLi2FObNP392BnotBcH/E1w5UP47w2vNItb3VrWhbPHfDLSdm4E24j9HbVlFQ4TXeAITpThd+/a1fMw==
 X-Forefront-Antispam-Report:
-	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(4636009)(396003)(39840400004)(136003)(346002)(376002)(46966005)(5660300002)(107886003)(82310400003)(47076004)(6486002)(8676002)(70586007)(70206006)(478600001)(83380400001)(6512007)(86362001)(356005)(54906003)(316002)(2906002)(26005)(81166007)(36756003)(186003)(6506007)(53546011)(55236004)(8936002)(2616005)(336012)(4326008)(33656002)(6862004);DIR:OUT;SFP:1101;
+	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(4636009)(346002)(376002)(396003)(39840400004)(136003)(46966005)(36756003)(6862004)(55236004)(81166007)(4326008)(5660300002)(8676002)(8936002)(107886003)(186003)(6506007)(53546011)(26005)(2616005)(356005)(6512007)(83380400001)(336012)(36906005)(478600001)(54906003)(316002)(33656002)(82310400003)(6486002)(966005)(2906002)(47076004)(70206006)(86362001)(70586007);DIR:OUT;SFP:1101;
 X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Sep 2020 11:10:50.8535
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Sep 2020 11:14:02.6369
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 720f931a-5fd5-4586-e8df-08d864685339
+X-MS-Exchange-CrossTenant-Network-Message-Id: 06ff5059-cb4a-4197-0d05-08d86468c591
 X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	DB5EUR03FT035.eop-EUR03.prod.protection.outlook.com
+	AM5EUR03FT064.eop-EUR03.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM6PR08MB4518
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB7PR08MB3833
 
 Hello,
 
@@ -238,166 +234,143 @@ Hello,
 >=20
 > From: Julien Grall <jgrall@amazon.com>
 >=20
-> The functions acpi_os_{un,}map_memory() are meant to be arch-agnostic
-> while the __acpi_os_{un,}map_memory() are meant to be arch-specific.
+> Commit 022387ee1ad3 "xen/arm: mm: Don't open-code Xen PT update in
+> {set, clear}_fixmap()" enforced that each set_fixmap() should be
+> paired with a clear_fixmap(). Any failure to follow the model would
+> result to a platform crash.
 >=20
-> Currently, the former are still containing x86 specific code.
+> Unfortunately, the use of fixmap in the ACPI code was overlooked as it
+> is calling set_fixmap() but not clear_fixmap().
 >=20
-> To avoid this rather strange split, the generic helpers are reworked so
-> they are arch-agnostic. This requires the introduction of a new helper
-> __acpi_os_unmap_memory() that will undo any mapping done by
-> __acpi_os_map_memory().
+> The function __acpi_os_map_table() is reworked so:
+>    - We know before the mapping whether the fixmap region is big
+>    enough for the mapping.
+>    - It will fail if the fixmap is always inuse.
 >=20
-> Currently, the arch-helper for unmap is basically a no-op so it only
-> returns whether the mapping was arch specific. But this will change
-> in the future.
+> The function __acpi_os_unmap_table() will now call clear_fixmap().
 >=20
-> Note that the x86 version of acpi_os_map_memory() was already able to
-> able the 1MB region. Hence why there is no addition of new code.
->=20
+> Reported-by: Wei Xu <xuwei5@hisilicon.com>
 > Signed-off-by: Julien Grall <jgrall@amazon.com>
 
 Reviewed-by: Rahul Singh <rahul.singh@arm.com>
 Tested-by: Rahul Singh <rahul.singh@arm.com>
+
+>=20
 > ---
-> xen/arch/arm/acpi/lib.c | 10 ++++++++++
-> xen/arch/x86/acpi/lib.c | 18 ++++++++++++++++++
-> xen/drivers/acpi/osl.c  | 34 ++++++++++++++++++----------------
-> xen/include/xen/acpi.h  |  1 +
-> 4 files changed, 47 insertions(+), 16 deletions(-)
+>=20
+> The discussion on the original thread [1] suggested to also zap it on
+> x86. This is technically not necessary today, so it is left alone for
+> now.
+>=20
+> I looked at making the fixmap code common but the index are inverted
+> between Arm and x86.
+>=20
+> [1] https://lore.kernel.org/xen-devel/5E26C935.9080107@hisilicon.com/
+> ---
+> xen/arch/arm/acpi/lib.c | 75 +++++++++++++++++++++++++++++++----------
+> 1 file changed, 58 insertions(+), 17 deletions(-)
 >=20
 > diff --git a/xen/arch/arm/acpi/lib.c b/xen/arch/arm/acpi/lib.c
-> index 4fc6e17322c1..2192a5519171 100644
+> index 2192a5519171..eebaca695562 100644
 > --- a/xen/arch/arm/acpi/lib.c
 > +++ b/xen/arch/arm/acpi/lib.c
-> @@ -30,6 +30,10 @@ char *__acpi_map_table(paddr_t phys, unsigned long siz=
-e)
->     unsigned long base, offset, mapped_size;
->     int idx;
+> @@ -25,38 +25,79 @@
+> #include <xen/init.h>
+> #include <xen/mm.h>
 >=20
-> +    /* No arch specific implementation after early boot */
-> +    if ( system_state >=3D SYS_STATE_boot )
+> +static bool fixmap_inuse;
+> +
+> char *__acpi_map_table(paddr_t phys, unsigned long size)
+> {
+> -    unsigned long base, offset, mapped_size;
+> -    int idx;
+> +    unsigned long base, offset;
+> +    mfn_t mfn;
+> +    unsigned int idx;
+>=20
+>     /* No arch specific implementation after early boot */
+>     if ( system_state >=3D SYS_STATE_boot )
+>         return NULL;
+>=20
+>     offset =3D phys & (PAGE_SIZE - 1);
+> -    mapped_size =3D PAGE_SIZE - offset;
+> -    set_fixmap(FIXMAP_ACPI_BEGIN, maddr_to_mfn(phys), PAGE_HYPERVISOR);
+> -    base =3D FIXMAP_ADDR(FIXMAP_ACPI_BEGIN);
+> +    base =3D FIXMAP_ADDR(FIXMAP_ACPI_BEGIN) + offset;
+> +
+> +    /* Check the fixmap is big enough to map the region */
+> +    if ( (FIXMAP_ADDR(FIXMAP_ACPI_END) + PAGE_SIZE - base) < size )
 > +        return NULL;
 > +
->     offset =3D phys & (PAGE_SIZE - 1);
->     mapped_size =3D PAGE_SIZE - offset;
->     set_fixmap(FIXMAP_ACPI_BEGIN, maddr_to_mfn(phys), PAGE_HYPERVISOR);
-> @@ -49,6 +53,12 @@ char *__acpi_map_table(paddr_t phys, unsigned long siz=
-e)
->     return ((char *) base + offset);
+> +    /* With the fixmap, we can only map one region at the time */
+> +    if ( fixmap_inuse )
+> +        return NULL;
+>=20
+> -    /* Most cases can be covered by the below. */
+> +    fixmap_inuse =3D true;
+> +
+> +    size +=3D offset;
+> +    mfn =3D maddr_to_mfn(phys);
+>     idx =3D FIXMAP_ACPI_BEGIN;
+> -    while ( mapped_size < size )
+> -    {
+> -        if ( ++idx > FIXMAP_ACPI_END )
+> -            return NULL;    /* cannot handle this */
+> -        phys +=3D PAGE_SIZE;
+> -        set_fixmap(idx, maddr_to_mfn(phys), PAGE_HYPERVISOR);
+> -        mapped_size +=3D PAGE_SIZE;
+> -    }
+>=20
+> -    return ((char *) base + offset);
+> +    do {
+> +        set_fixmap(idx, mfn, PAGE_HYPERVISOR);
+> +        size -=3D min(size, (unsigned long)PAGE_SIZE);
+> +        mfn =3D mfn_add(mfn, 1);
+> +        idx++;
+> +    } while ( size > 0 );
+> +
+> +    return (char *)base;
 > }
 >=20
-> +bool __acpi_unmap_table(void *ptr, unsigned long size)
-> +{
-> +    return ( vaddr >=3D FIXMAP_ADDR(FIXMAP_ACPI_BEGIN) &&
-> +             vaddr < (FIXMAP_ADDR(FIXMAP_ACPI_END) + PAGE_SIZE) );
-> +}
+> bool __acpi_unmap_table(void *ptr, unsigned long size)
+> {
+> -    return ( vaddr >=3D FIXMAP_ADDR(FIXMAP_ACPI_BEGIN) &&
+> -             vaddr < (FIXMAP_ADDR(FIXMAP_ACPI_END) + PAGE_SIZE) );
+> +    vaddr_t vaddr =3D (vaddr_t)ptr;
+> +    unsigned int idx;
 > +
+> +    /* We are only handling fixmap address in the arch code */
+> +    if ( vaddr < FIXMAP_ADDR(FIXMAP_ACPI_BEGIN) ||
+> +         vaddr >=3D FIXMAP_ADDR(FIXMAP_ACPI_END) )
+> +        return false;
+> +
+> +    /*
+> +     * __acpi_map_table() will always return a pointer in the first page
+> +     * for the ACPI fixmap region. The caller is expected to free with
+> +     * the same address.
+> +     */
+> +    ASSERT((vaddr & PAGE_MASK) =3D=3D FIXMAP_ADDR(FIXMAP_ACPI_BEGIN));
+> +
+> +    /* The region allocated fit in the ACPI fixmap region. */
+> +    ASSERT(size < (FIXMAP_ADDR(FIXMAP_ACPI_END) + PAGE_SIZE - vaddr));
+> +    ASSERT(fixmap_inuse);
+> +
+> +    fixmap_inuse =3D false;
+> +
+> +    size +=3D FIXMAP_ADDR(FIXMAP_ACPI_BEGIN) - vaddr;
+> +    idx =3D FIXMAP_ACPI_BEGIN;
+> +
+> +    do
+> +    {
+> +        clear_fixmap(idx);
+> +        size -=3D min(size, (unsigned long)PAGE_SIZE);
+> +        idx++;
+> +    } while ( size > 0 );
+> +
+> +    return true;
+> }
+>=20
 > /* True to indicate PSCI 0.2+ is implemented */
-> bool __init acpi_psci_present(void)
-> {
-> diff --git a/xen/arch/x86/acpi/lib.c b/xen/arch/x86/acpi/lib.c
-> index 265b9ad81905..77803f4d4c63 100644
-> --- a/xen/arch/x86/acpi/lib.c
-> +++ b/xen/arch/x86/acpi/lib.c
-> @@ -46,6 +46,10 @@ char *__acpi_map_table(paddr_t phys, unsigned long siz=
-e)
-> 	if ((phys + size) <=3D (1 * 1024 * 1024))
-> 		return __va(phys);
->=20
-> +	/* No arch specific implementation after early boot */
-> +	if (system_state >=3D SYS_STATE_boot)
-> +		return NULL;
-> +
-> 	offset =3D phys & (PAGE_SIZE - 1);
-> 	mapped_size =3D PAGE_SIZE - offset;
-> 	set_fixmap(FIX_ACPI_END, phys);
-> @@ -66,6 +70,20 @@ char *__acpi_map_table(paddr_t phys, unsigned long siz=
-e)
-> 	return ((char *) base + offset);
-> }
->=20
-> +bool __acpi_unmap_table(void *ptr, unsigned long size)
-> +{
-> +	unsigned long vaddr =3D (unsigned long)ptr;
-> +
-> +	if (vaddr >=3D DIRECTMAP_VIRT_START &&
-> +	    vaddr < DIRECTMAP_VIRT_END) {
-> +		ASSERT(!((__pa(ptr) + size - 1) >> 20));
-> +		return true;
-> +	}
-> +
-> +	return (vaddr >=3D __fix_to_virt(FIX_ACPI_END)) &&
-> +		(vaddr < (__fix_to_virt(FIX_ACPI_BEGIN) + PAGE_SIZE));
-> +}
-> +
-> unsigned int acpi_get_processor_id(unsigned int cpu)
-> {
-> 	unsigned int acpiid, apicid;
-> diff --git a/xen/drivers/acpi/osl.c b/xen/drivers/acpi/osl.c
-> index 4c8bb7839eda..100eee72def2 100644
-> --- a/xen/drivers/acpi/osl.c
-> +++ b/xen/drivers/acpi/osl.c
-> @@ -92,27 +92,29 @@ acpi_physical_address __init acpi_os_get_root_pointer=
-(void)
-> void __iomem *
-> acpi_os_map_memory(acpi_physical_address phys, acpi_size size)
-> {
-> -	if (system_state >=3D SYS_STATE_boot) {
-> -		mfn_t mfn =3D _mfn(PFN_DOWN(phys));
-> -		unsigned int offs =3D phys & (PAGE_SIZE - 1);
-> -
-> -		/* The low first Mb is always mapped on x86. */
-> -		if (IS_ENABLED(CONFIG_X86) && !((phys + size - 1) >> 20))
-> -			return __va(phys);
-> -		return __vmap(&mfn, PFN_UP(offs + size), 1, 1,
-> -			      ACPI_MAP_MEM_ATTR, VMAP_DEFAULT) + offs;
-> -	}
-> -	return __acpi_map_table(phys, size);
-> +	void *ptr;
-> +	mfn_t mfn =3D _mfn(PFN_DOWN(phys));
-> +	unsigned int offs =3D phys & (PAGE_SIZE - 1);
-> +
-> +	/* Try the arch specific implementation first */
-> +	ptr =3D __acpi_map_table(phys, size);
-> +	if (ptr)
-> +		return ptr;
-> +
-> +	/* No common implementation for early boot map */
-> +	if (unlikely(system_state < SYS_STATE_boot))
-> +	     return NULL;
-> +
-> +	ptr =3D __vmap(&mfn, PFN_UP(offs + size), 1, 1,
-> +		     ACPI_MAP_MEM_ATTR, VMAP_DEFAULT);
-> +
-> +	return !ptr ? NULL : (ptr + offs);
-> }
->=20
-> void acpi_os_unmap_memory(void __iomem * virt, acpi_size size)
-> {
-> -	if (IS_ENABLED(CONFIG_X86) &&
-> -	    (unsigned long)virt >=3D DIRECTMAP_VIRT_START &&
-> -	    (unsigned long)virt < DIRECTMAP_VIRT_END) {
-> -		ASSERT(!((__pa(virt) + size - 1) >> 20));
-> +	if (__acpi_unmap_table(virt, size))
-> 		return;
-> -	}
->=20
-> 	if (system_state >=3D SYS_STATE_boot)
-> 		vunmap((void *)((unsigned long)virt & PAGE_MASK));
-> diff --git a/xen/include/xen/acpi.h b/xen/include/xen/acpi.h
-> index c945ab05c864..5a84a4bf54e0 100644
-> --- a/xen/include/xen/acpi.h
-> +++ b/xen/include/xen/acpi.h
-> @@ -68,6 +68,7 @@ typedef int (*acpi_table_entry_handler) (struct acpi_su=
-btable_header *header, co
->=20
-> unsigned int acpi_get_processor_id (unsigned int cpu);
-> char * __acpi_map_table (paddr_t phys_addr, unsigned long size);
-> +bool __acpi_unmap_table(void *ptr, unsigned long size);
-> int acpi_boot_init (void);
-> int acpi_boot_table_init (void);
-> int acpi_numa_init (void);
 > --=20
 > 2.17.1
 >=20
