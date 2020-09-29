@@ -2,28 +2,26 @@ Return-Path: <SRS0=a+y6=DG=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 55A60C4741F
-	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2020 15:07:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A7524C4742D
+	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2020 15:15:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8E5B82076B
-	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2020 15:07:58 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="vRixopAp"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8E5B82076B
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 4683F207F7
+	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2020 15:14:59 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4683F207F7
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.247.565 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.250.586 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNHDp-0005xp-2D; Tue, 29 Sep 2020 15:07:17 +0000
+	id 1kNHL5-0006rR-A0; Tue, 29 Sep 2020 15:14:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 247.565; Tue, 29 Sep 2020 15:07:17 +0000
+Received: by outflank-mailman (output) from mailman id 250.586; Tue, 29 Sep 2020 15:14:47 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,139 +36,157 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNHDo-0005xi-Ty; Tue, 29 Sep 2020 15:07:16 +0000
-Received: by outflank-mailman (input) for mailman id 247;
- Tue, 29 Sep 2020 15:07:15 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=F2Z1=DG=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kNHDn-0005xd-0k
- for xen-devel@lists.xenproject.org; Tue, 29 Sep 2020 15:07:15 +0000
+	id 1kNHL5-0006rE-1K; Tue, 29 Sep 2020 15:14:47 +0000
+Received: by outflank-mailman (input) for mailman id 250;
+ Tue, 29 Sep 2020 15:14:46 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=5GuN=DG=suse.de=tzimmermann@srs-us1.protection.inumbo.net>)
+ id 1kNHL4-0006qi-AB
+ for xen-devel@lists.xenproject.org; Tue, 29 Sep 2020 15:14:46 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 076badb3-d1ef-4245-ac0d-2d062aa10570;
- Tue, 29 Sep 2020 15:07:13 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 417d5dd7-20b0-47d2-9c18-c0f93ce9a10d;
+ Tue, 29 Sep 2020 15:14:45 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 3C013AC12;
- Tue, 29 Sep 2020 15:07:12 +0000 (UTC)
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+ by mx2.suse.de (Postfix) with ESMTP id 98A25B049;
+ Tue, 29 Sep 2020 15:14:43 +0000 (UTC)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=F2Z1=DG=suse.com=jgross@srs-us1.protection.inumbo.net>)
-	id 1kNHDn-0005xd-0k
-	for xen-devel@lists.xenproject.org; Tue, 29 Sep 2020 15:07:15 +0000
-X-Inumbo-ID: 076badb3-d1ef-4245-ac0d-2d062aa10570
+	(envelope-from <SRS0=5GuN=DG=suse.de=tzimmermann@srs-us1.protection.inumbo.net>)
+	id 1kNHL4-0006qi-AB
+	for xen-devel@lists.xenproject.org; Tue, 29 Sep 2020 15:14:46 +0000
+X-Inumbo-ID: 417d5dd7-20b0-47d2-9c18-c0f93ce9a10d
 Received: from mx2.suse.de (unknown [195.135.220.15])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 076badb3-d1ef-4245-ac0d-2d062aa10570;
-	Tue, 29 Sep 2020 15:07:13 +0000 (UTC)
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id 417d5dd7-20b0-47d2-9c18-c0f93ce9a10d;
+	Tue, 29 Sep 2020 15:14:45 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1601392032;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=dOa0wpuQndgl56eeXdfdwH7arOm2wavoz7azBXHBdGE=;
-	b=vRixopApbbZS3AeOjMp176EyANmmHbQsK72LWM3Wm3UAM5owVpQRl3tEhTyHNaDPV/cA3W
-	of+x7jzOOOLaNcFEmHlnwp4c0Xd+Tm8ikfDOrNmsbEfZjTPvMki2zx2yedMmoQWeATlKnA
-	lib3R8wFPNgWviJfBcY74K44hX913rk=
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 3C013AC12;
-	Tue, 29 Sep 2020 15:07:12 +0000 (UTC)
-Subject: Re: [Xen-devel] Xen crash after S3 suspend - Xen 4.13
-To: =?UTF-8?Q?Marek_Marczykowski-G=c3=b3recki?=
- <marmarek@invisiblethingslab.com>, Juergen Gross <jgross@suse.de>
-Cc: Dario Faggioli <dfaggioli@suse.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- xen-devel <xen-devel@lists.xenproject.org>
-References: <20200318141635.GW7869@mail-itl>
- <fa845540-fd8e-bc63-a3af-50673dede579@citrix.com>
- <20200318221006.GS18599@mail-itl>
- <413cac496e18bcb04b0691ef633d206f3a14a8e3.camel@suse.com>
- <20200323000946.GH18599@mail-itl> <20200929142730.GA25731@mail-itl>
-From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Message-ID: <d243c1b5-712d-a958-0b6c-b232eb4edc80@suse.com>
-Date: Tue, 29 Sep 2020 17:07:11 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.0
+	by mx2.suse.de (Postfix) with ESMTP id 98A25B049;
+	Tue, 29 Sep 2020 15:14:43 +0000 (UTC)
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: maarten.lankhorst@linux.intel.com,
+	mripard@kernel.org,
+	airlied@linux.ie,
+	daniel@ffwll.ch,
+	sam@ravnborg.org,
+	alexander.deucher@amd.com,
+	christian.koenig@amd.com,
+	kraxel@redhat.com,
+	l.stach@pengutronix.de,
+	linux+etnaviv@armlinux.org.uk,
+	christian.gmeiner@gmail.com,
+	inki.dae@samsung.com,
+	jy0922.shim@samsung.com,
+	sw0312.kim@samsung.com,
+	kyungmin.park@samsung.com,
+	kgene@kernel.org,
+	krzk@kernel.org,
+	yuq825@gmail.com,
+	bskeggs@redhat.com,
+	robh@kernel.org,
+	tomeu.vizoso@collabora.com,
+	steven.price@arm.com,
+	alyssa.rosenzweig@collabora.com,
+	hjc@rock-chips.com,
+	heiko@sntech.de,
+	hdegoede@redhat.com,
+	sean@poorly.run,
+	eric@anholt.net,
+	oleksandr_andrushchenko@epam.com,
+	ray.huang@amd.com,
+	sumit.semwal@linaro.org,
+	emil.velikov@collabora.com,
+	luben.tuikov@amd.com,
+	apaneers@amd.com,
+	linus.walleij@linaro.org,
+	melissa.srw@gmail.com,
+	chris@chris-wilson.co.uk,
+	miaoqinglang@huawei.com
+Cc: dri-devel@lists.freedesktop.org,
+	amd-gfx@lists.freedesktop.org,
+	virtualization@lists.linux-foundation.org,
+	etnaviv@lists.freedesktop.org,
+	linux-arm-kernel@lists.infradead.org,
+	linux-samsung-soc@vger.kernel.org,
+	lima@lists.freedesktop.org,
+	nouveau@lists.freedesktop.org,
+	spice-devel@lists.freedesktop.org,
+	linux-rockchip@lists.infradead.org,
+	xen-devel@lists.xenproject.org,
+	linux-media@vger.kernel.org,
+	linaro-mm-sig@lists.linaro.org,
+	Thomas Zimmermann <tzimmermann@suse.de>
+Subject: [PATCH v3 1/7] drm/vram-helper: Remove invariant parameters from internal kmap function
+Date: Tue, 29 Sep 2020 17:14:31 +0200
+Message-Id: <20200929151437.19717-2-tzimmermann@suse.de>
+X-Mailer: git-send-email 2.28.0
+In-Reply-To: <20200929151437.19717-1-tzimmermann@suse.de>
+References: <20200929151437.19717-1-tzimmermann@suse.de>
 MIME-Version: 1.0
-In-Reply-To: <20200929142730.GA25731@mail-itl>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 
-On 29.09.20 16:27, Marek Marczykowski-Górecki wrote:
-> On Mon, Mar 23, 2020 at 01:09:49AM +0100, Marek Marczykowski-Górecki wrote:
->> On Thu, Mar 19, 2020 at 01:28:10AM +0100, Dario Faggioli wrote:
->>> [Adding Juergen]
->>>
->>> On Wed, 2020-03-18 at 23:10 +0100, Marek Marczykowski-Górecki wrote:
->>>> On Wed, Mar 18, 2020 at 02:50:52PM +0000, Andrew Cooper wrote:
->>>>> On 18/03/2020 14:16, Marek Marczykowski-Górecki wrote:
->>>>>> Hi,
->>>>>>
->>>>>> In my test setup (inside KVM with nested virt enabled), I rather
->>>>>> frequently get Xen crash on resume from S3. Full message below.
->>>>>>
->>>>>> This is Xen 4.13.0, with some patches, including "sched: fix
->>>>>> resuming
->>>>>> from S3 with smt=0".
->>>>>>
->>>>>> Contrary to the previous issue, this one does not happen always -
->>>>>> I
->>>>>> would say in about 40% cases on this setup, but very rarely on
->>>>>> physical
->>>>>> setup.
->>>>>>
->>>>>> This is _without_ core scheduling enabled, and also with smt=off.
->>>>>>
->>>>>> Do you think it would be any different on xen-unstable? I cat
->>>>>> try, but
->>>>>> it isn't trivial in this setup, so I'd ask first.
->>>>>>
->>> Well, Juergen has fixed quite a few issues.
->>>
->>> Most of them where triggering with core-scheduling enabled, and I don't
->>> recall any of them which looked similar or related to this.
->>>
->>> Still, it's possible that the same issue causes different symptoms, and
->>> hence that maybe one of the patches would fix this too.
->>
->> I've tested on master (d094e95fb7c), and reproduced exactly the same crash
->> (pasted below for the completeness).
->> But there is more: additionally, in most (all?) cases after resume I've got
->> soft lockup in Linux dom0 in smp_call_function_single() - see below. It
->> didn't happened before and the only change was Xen 4.13 -> master.
->>
->> Xen crash:
->>
->> (XEN) Assertion 'c2rqd(sched_unit_master(unit)) == svc->rqd' failed at credit2.c:2133
-> 
-> Juergen, any idea about this one? This is also happening on the current
-> stable-4.14 (28855ebcdbfa).
-> 
+The parameters map and is_iomem are always of the same value. Removed them
+to prepares the function for conversion to struct dma_buf_map.
 
-Oh, sorry I didn't come back to this issue.
+Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+---
+ drivers/gpu/drm/drm_gem_vram_helper.c | 17 ++++++-----------
+ 1 file changed, 6 insertions(+), 11 deletions(-)
 
-I suspect this is related to stop_machine_run() being called during
-suspend(), as I'm seeing very sporadic issues when offlining and then
-onlining cpus with core scheduling being active (it seems as if the
-dom0 vcpu doing the cpu online activity sometimes is using an old
-vcpu state).
+diff --git a/drivers/gpu/drm/drm_gem_vram_helper.c b/drivers/gpu/drm/drm_gem_vram_helper.c
+index 3fe4b326e18e..256b346664f2 100644
+--- a/drivers/gpu/drm/drm_gem_vram_helper.c
++++ b/drivers/gpu/drm/drm_gem_vram_helper.c
+@@ -382,16 +382,16 @@ int drm_gem_vram_unpin(struct drm_gem_vram_object *gbo)
+ }
+ EXPORT_SYMBOL(drm_gem_vram_unpin);
+ 
+-static void *drm_gem_vram_kmap_locked(struct drm_gem_vram_object *gbo,
+-				      bool map, bool *is_iomem)
++static void *drm_gem_vram_kmap_locked(struct drm_gem_vram_object *gbo)
+ {
+ 	int ret;
+ 	struct ttm_bo_kmap_obj *kmap = &gbo->kmap;
++	bool is_iomem;
+ 
+ 	if (gbo->kmap_use_count > 0)
+ 		goto out;
+ 
+-	if (kmap->virtual || !map)
++	if (kmap->virtual)
+ 		goto out;
+ 
+ 	ret = ttm_bo_kmap(&gbo->bo, 0, gbo->bo.num_pages, kmap);
+@@ -399,15 +399,10 @@ static void *drm_gem_vram_kmap_locked(struct drm_gem_vram_object *gbo,
+ 		return ERR_PTR(ret);
+ 
+ out:
+-	if (!kmap->virtual) {
+-		if (is_iomem)
+-			*is_iomem = false;
++	if (!kmap->virtual)
+ 		return NULL; /* not mapped; don't increment ref */
+-	}
+ 	++gbo->kmap_use_count;
+-	if (is_iomem)
+-		return ttm_kmap_obj_virtual(kmap, is_iomem);
+-	return kmap->virtual;
++	return ttm_kmap_obj_virtual(kmap, &is_iomem);
+ }
+ 
+ static void drm_gem_vram_kunmap_locked(struct drm_gem_vram_object *gbo)
+@@ -452,7 +447,7 @@ void *drm_gem_vram_vmap(struct drm_gem_vram_object *gbo)
+ 	ret = drm_gem_vram_pin_locked(gbo, 0);
+ 	if (ret)
+ 		goto err_ttm_bo_unreserve;
+-	base = drm_gem_vram_kmap_locked(gbo, true, NULL);
++	base = drm_gem_vram_kmap_locked(gbo);
+ 	if (IS_ERR(base)) {
+ 		ret = PTR_ERR(base);
+ 		goto err_drm_gem_vram_unpin_locked;
+-- 
+2.28.0
 
-I wasn't able to catch the real problem despite of having tried lots
-of approaches using debug patches.
-
-Recently I suspected the whole problem could be somehow related to
-RCU handling, as stop_machine_run() is relying on tasklets which are
-executing in idle context, and RCU handling is done in idle context,
-too. So there might be some kind of use after free scenario in case
-some memory is freed via RCU despite it still being used by a tasklet.
-
-I "just" need to find some time to verify this suspicion. Any help doing
-this would be appreciated. :-)
-
-
-Juergen
 
