@@ -2,28 +2,26 @@ Return-Path: <SRS0=a+y6=DG=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2001DC4727C
-	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2020 18:07:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EBBDEC4727C
+	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2020 18:17:52 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7DCFB2145D
-	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2020 18:07:09 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=trmm.net header.i=@trmm.net header.b="c6IwSSXO"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7DCFB2145D
+	by mail.kernel.org (Postfix) with ESMTPS id 89F87208B8
+	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2020 18:17:52 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 89F87208B8
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=trmm.net
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.334.961 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.341.1013 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNK1Y-0008RX-E2; Tue, 29 Sep 2020 18:06:48 +0000
+	id 1kNKC6-00013o-Cn; Tue, 29 Sep 2020 18:17:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 334.961; Tue, 29 Sep 2020 18:06:48 +0000
+Received: by outflank-mailman (output) from mailman id 341.1013; Tue, 29 Sep 2020 18:17:42 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,95 +36,123 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNK1Y-0008RQ-As; Tue, 29 Sep 2020 18:06:48 +0000
-Received: by outflank-mailman (input) for mailman id 334;
- Tue, 29 Sep 2020 18:06:47 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kNKC6-00013f-8h; Tue, 29 Sep 2020 18:17:42 +0000
+Received: by outflank-mailman (input) for mailman id 341;
+ Tue, 29 Sep 2020 18:17:41 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=/JXF=DG=trmm.net=hudson@srs-us1.protection.inumbo.net>)
- id 1kNK1X-0008RL-JR
- for xen-devel@lists.xenproject.org; Tue, 29 Sep 2020 18:06:47 +0000
-Received: from mail-40133.protonmail.ch (unknown [185.70.40.133])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id bd5c730b-46ba-4547-9a54-f87f187f7a66;
- Tue, 29 Sep 2020 18:06:45 +0000 (UTC)
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ id 1kNKC5-000131-8Y
+ for xen-devel@lists.xenproject.org; Tue, 29 Sep 2020 18:17:41 +0000
+Received: from mx1a.swcp.com (unknown [216.184.2.64])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id c7ace055-43ed-4dd9-8aed-47484aca99f0;
+ Tue, 29 Sep 2020 18:17:39 +0000 (UTC)
+Received: from ame7.swcp.com (ame7.swcp.com [216.184.2.70])
+ by mx1a.swcp.com (8.14.4/8.14.4/Debian-4) with ESMTP id 08TIHchD004940;
+ Tue, 29 Sep 2020 12:17:38 -0600
+Received: from diamond.fritz.box (62-251-112-184.ip.xs4all.nl [62.251.112.184])
+ by ame7.swcp.com (8.15.2/8.15.2) with ESMTP id 08TIHJkr051120;
+ Tue, 29 Sep 2020 12:17:35 -0600 (MDT) (envelope-from hudson@trmm.net)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=/JXF=DG=trmm.net=hudson@srs-us1.protection.inumbo.net>)
-	id 1kNK1X-0008RL-JR
-	for xen-devel@lists.xenproject.org; Tue, 29 Sep 2020 18:06:47 +0000
-X-Inumbo-ID: bd5c730b-46ba-4547-9a54-f87f187f7a66
-Received: from mail-40133.protonmail.ch (unknown [185.70.40.133])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id bd5c730b-46ba-4547-9a54-f87f187f7a66;
-	Tue, 29 Sep 2020 18:06:45 +0000 (UTC)
-Date: Tue, 29 Sep 2020 18:06:39 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=trmm.net;
-	s=protonmail; t=1601402803;
-	bh=2EaPzfO1ZSzd1JPW5RS0sn/71OCaAHrquxmaXRoHC/8=;
-	h=Date:To:From:Cc:Reply-To:Subject:In-Reply-To:References:From;
-	b=c6IwSSXOKafFl7b1iFu7gj96hWVWLNHuSvc6jcpLDEYM1AvrNwuFZS2Tos3RCrGUh
-	 L0eswzLO3NMb6/bapVH4yC497KF7llv1oJazQx+7Ye+CF6bppBhJs+PoXMhMHnjM8M
-	 AB79Q64MzjFnai6gQFI+m98wQl5aGbbKHHs7bbmI=
-To: Jan Beulich <jbeulich@suse.com>
+	id 1kNKC5-000131-8Y
+	for xen-devel@lists.xenproject.org; Tue, 29 Sep 2020 18:17:41 +0000
+X-Inumbo-ID: c7ace055-43ed-4dd9-8aed-47484aca99f0
+Received: from mx1a.swcp.com (unknown [216.184.2.64])
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id c7ace055-43ed-4dd9-8aed-47484aca99f0;
+	Tue, 29 Sep 2020 18:17:39 +0000 (UTC)
+Received: from ame7.swcp.com (ame7.swcp.com [216.184.2.70])
+	by mx1a.swcp.com (8.14.4/8.14.4/Debian-4) with ESMTP id 08TIHchD004940;
+	Tue, 29 Sep 2020 12:17:38 -0600
+Received-SPF: neutral (ame7.swcp.com: 62.251.112.184 is neither permitted nor denied by domain of hudson@trmm.net) receiver=ame7.swcp.com; client-ip=62.251.112.184; helo=diamond.fritz.box; envelope-from=hudson@trmm.net; x-software=spfmilter 2.001 http://www.acme.com/software/spfmilter/ with libspf2-1.2.10;
+Received: from diamond.fritz.box (62-251-112-184.ip.xs4all.nl [62.251.112.184])
+	by ame7.swcp.com (8.15.2/8.15.2) with ESMTP id 08TIHJkr051120;
+	Tue, 29 Sep 2020 12:17:35 -0600 (MDT)
+	(envelope-from hudson@trmm.net)
+X-Authentication-Warning: ame7.swcp.com: Host 62-251-112-184.ip.xs4all.nl [62.251.112.184] claimed to be diamond.fritz.box
 From: Trammell Hudson <hudson@trmm.net>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Reply-To: Trammell Hudson <hudson@trmm.net>
-Subject: Re: [PATCH v6 4/5] efi: Enable booting unified hypervisor/kernel/initrd images
-Message-ID: <CYKsqzD4rNFBl3V_4PRVKI1eseJCxmipZTqcV0XBTZ7GS8Kt_Fe-h1gjnjj9R45I9POOSjZxSoauFqrOGlAWb814Oe2kEz4tjs1bn7Zw2kM=@trmm.net>
-In-Reply-To: <6062d534-70b7-d8db-7526-ade453c373f8@suse.com>
-References: <20200921115113.1278655-1-hudson@trmm.net> <20200921115113.1278655-5-hudson@trmm.net> <6062d534-70b7-d8db-7526-ade453c373f8@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: roger.pau@citrix.com, jbeulich@suse.com, andrew.cooper3@citrix.com,
+        wl@xen.org
+Subject: [PATCH v7 3/5] efi/boot.c: wrap PrintStr/PrintErr to allow const CHAR16* arguments
+Date: Tue, 29 Sep 2020 14:17:15 -0400
+Message-Id: <20200929181717.1596965-4-hudson@trmm.net>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20200929181717.1596965-1-hudson@trmm.net>
+References: <20200929181717.1596965-1-hudson@trmm.net>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 2.83
+X-Greylist: Message whitelisted by DRAC access database, not delayed by milter-greylist-4.6.2 (ame7.swcp.com [216.184.2.128]); Tue, 29 Sep 2020 12:17:37 -0600 (MDT)
+X-Virus-Scanned: clamav-milter 0.100.2 at ame7
+X-Virus-Status: Clean
 
-On Tuesday, September 29, 2020 11:37 AM, Jan Beulich <jbeulich@suse.com> wr=
-ote:
-> On 21.09.2020 13:51, Trammell Hudson wrote:
-> [...]
-> > -   file->need_to_free =3D false;
->
-> In patch 2 you don't bother clearing the field, presumably because
-> it's static data and hence zero-filled anyway. This same assumption
-> would then hold here. Or else, to be consistent, the earlier patch
-> would want clearing added.
+This patch wraps the EFI OutputString() method so that they can be
+called with const arguments.  The OutputString method does not modify
+its argument, although the prototype is missing const, so it is necssary
+to cast away the const when calling it.
 
-Removed.
+Signed-off-by: Trammell Hudson <hudson@trmm.net>
+---
+ xen/common/efi/boot.c | 18 ++++++++++++------
+ 1 file changed, 12 insertions(+), 6 deletions(-)
 
-> [...]
-> > -          const char c =3D sect->Name[i];
-> > -          const CHAR16 cw =3D name[i-1];
-> > -          if ( cw =3D=3D 0 && c =3D=3D 0 )
->
-> Blank line between declarations and statements please.
-
-Added.
-
-> [...]
-> > -       if ( name[i-1] < 0 )
-> > -           return -1;
->
-> I'm afraid this is liable to trigger compiler warnings, for checking
-> an unsigned quantity to be negative.
-
-The compare function had strcmp() like semantics, but since it was
-not used, I've modified it to just return a 0 or -1 in all cases.
-So the comparison against < 0 goes away.
-
-> Also throughout here "i-1" wants spelling "i - 1".
-
-Fixed in both places.
-
-> > -   /* PE32+ Subsystem type */
-> > -   if ( pe->FileHeader.Machine !=3D PE_HEADER_MACHINE )
-> > -          return NULL;
->
-> Comment and code don't look to be in line.
-
-Yeah, comment had drifted out of sync as some of the other tests
-moved around.  I've removed it in the v7 version.
-
---
-Trammell
+diff --git a/xen/common/efi/boot.c b/xen/common/efi/boot.c
+index 93cfeba7e1..fc2ea80e43 100644
+--- a/xen/common/efi/boot.c
++++ b/xen/common/efi/boot.c
+@@ -151,10 +151,16 @@ static struct file __initdata cfg;
+ static struct file __initdata kernel;
+ static struct file __initdata ramdisk;
+ static struct file __initdata xsm;
+-static CHAR16 __initdata newline[] = L"\r\n";
++static const CHAR16 __initconst newline[] = L"\r\n";
+ 
+-#define PrintStr(s) StdOut->OutputString(StdOut, s)
+-#define PrintErr(s) StdErr->OutputString(StdErr, s)
++static void __init PrintStr(const CHAR16 *s)
++{
++    StdOut->OutputString(StdOut, (CHAR16 *)s );
++}
++static void __init PrintErr(const CHAR16 *s)
++{
++    StdErr->OutputString(StdErr, (CHAR16 *)s );
++}
+ 
+ /*
+  * Include architecture specific implementation here, which references the
+@@ -275,7 +281,7 @@ static bool __init match_guid(const EFI_GUID *guid1, const EFI_GUID *guid2)
+ void __init noreturn blexit(const CHAR16 *str)
+ {
+     if ( str )
+-        PrintStr((CHAR16 *)str);
++        PrintStr(str);
+     PrintStr(newline);
+ 
+     if ( !efi_bs )
+@@ -540,7 +546,7 @@ static char * __init split_string(char *s)
+     return NULL;
+ }
+ 
+-static void __init handle_file_info(CHAR16 *name,
++static void __init handle_file_info(const CHAR16 *name,
+                                     const struct file *file, const char *options)
+ {
+     if ( file == &cfg )
+@@ -562,7 +568,7 @@ static bool __init read_file(EFI_FILE_HANDLE dir_handle, CHAR16 *name,
+     EFI_FILE_HANDLE FileHandle = NULL;
+     UINT64 size;
+     EFI_STATUS ret;
+-    CHAR16 *what = NULL;
++    const CHAR16 *what = NULL;
+ 
+     if ( !name )
+         PrintErrMesg(L"No filename", EFI_OUT_OF_RESOURCES);
+-- 
+2.25.1
 
 
