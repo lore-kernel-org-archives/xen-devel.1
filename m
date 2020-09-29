@@ -2,28 +2,28 @@ Return-Path: <SRS0=a+y6=DG=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-4.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B5D9BC4346E
-	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2020 11:00:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8C7C2C4741F
+	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2020 11:07:29 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 383CF207C4
-	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2020 11:00:25 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 3DDBE221F0
+	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2020 11:07:29 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="nlaFf7Q0"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 383CF207C4
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
+	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="ZhtQOia8"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3DDBE221F0
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.27.117 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.29.129 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNDMg-0006kU-EQ; Tue, 29 Sep 2020 11:00:10 +0000
+	id 1kNDTT-0006zi-4j; Tue, 29 Sep 2020 11:07:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 27.117; Tue, 29 Sep 2020 11:00:10 +0000
+Received: by outflank-mailman (output) from mailman id 29.129; Tue, 29 Sep 2020 11:07:11 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -37,106 +37,115 @@ Precedence: list
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNDMg-0006kN-BE; Tue, 29 Sep 2020 11:00:10 +0000
-Received: by outflank-mailman (input) for mailman id 27;
- Tue, 29 Sep 2020 11:00:09 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=6Xo+=DG=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kNDMf-0006kI-8B
- for xen-devel@lists.xenproject.org; Tue, 29 Sep 2020 11:00:09 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 3401c1be-fd1d-43d5-9d79-a1551e381d97;
- Tue, 29 Sep 2020 11:00:07 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id A401AB202;
- Tue, 29 Sep 2020 11:00:06 +0000 (UTC)
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+	id 1kNDTT-0006zb-1k; Tue, 29 Sep 2020 11:07:11 +0000
+Received: by outflank-mailman (input) for mailman id 29;
+ Tue, 29 Sep 2020 11:07:10 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=5FnP=DG=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1kNDTS-0006zW-Aa
+ for xen-devel@lists.xenproject.org; Tue, 29 Sep 2020 11:07:10 +0000
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 7e04ddb2-0776-47d6-a975-4f9a288c44c0;
+ Tue, 29 Sep 2020 11:07:08 +0000 (UTC)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=6Xo+=DG=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
-	id 1kNDMf-0006kI-8B
-	for xen-devel@lists.xenproject.org; Tue, 29 Sep 2020 11:00:09 +0000
-X-Inumbo-ID: 3401c1be-fd1d-43d5-9d79-a1551e381d97
-Received: from mx2.suse.de (unknown [195.135.220.15])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 3401c1be-fd1d-43d5-9d79-a1551e381d97;
-	Tue, 29 Sep 2020 11:00:07 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1601377206;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=JYRohR/tddK8sHnwEjvKcaUxPjjDFf7Ongh/WmyqQzE=;
-	b=nlaFf7Q0qdHHcQtsqEYiUCB64ClUEvMSGBd690f/GPWO5/VVPRQlbCtjFpLue3uHlnDqb+
-	rpoNcyqKTKYRUPgiN30ycr3OiKTXjiA5Ee+H8mIPA/arfp6FAOlE4Xl2qboPPzZ2sKn/L6
-	hWa/eKdm9pU2Zj46AWk5lwo/iBx1ERI=
-Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id A401AB202;
-	Tue, 29 Sep 2020 11:00:06 +0000 (UTC)
+	(envelope-from <SRS0=5FnP=DG=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+	id 1kNDTS-0006zW-Aa
+	for xen-devel@lists.xenproject.org; Tue, 29 Sep 2020 11:07:10 +0000
+X-Inumbo-ID: 7e04ddb2-0776-47d6-a975-4f9a288c44c0
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id 7e04ddb2-0776-47d6-a975-4f9a288c44c0;
+	Tue, 29 Sep 2020 11:07:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1601377628;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:content-transfer-encoding:in-reply-to;
+  bh=w77H9d6qvSQFLZKPeI5VuiAxSPdRd6Y75nJL6seS+aI=;
+  b=ZhtQOia8OcUNGZfszZDKJINjCgX6oMssBebAmKJAVkaYAlE9C3/C3d7a
+   5rHdPqga3niLwQxHhcb6Dq3co6BbU0nNzYSND+/ICyLFPOg38NSDEsIEE
+   UXOwXQ+oQNTSECbhH+vaPqZr9XWzunIe6BMa0n84PsHcd8KTtbSufAppX
+   U=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: eSdUnZIV3Xs0ym8BIxviFRvvVwmhcSsGG1GYxJYGyTjcOWXix59fvs0WvF1uMyAkAtbkdolluT
+ 8nk8DBfzx3NnB1YX/Ym3lmjDL4rcikLUqZO8+QsKzRhpNm7fzmm8oEUQzhhDlC7r87OuWGC9uE
+ jucTc4iVYI3MMq2QEKrbIJuu4sjdebHeSE4oxqar34xh8tGvQta3FpfnhBankbiodgpc5PYOdi
+ 8oLpta0wh61FS6sibRQ0VuSC8jvzNqNo9Y1VutWSVX4m36hBmhuv8/SBaz4N1Bx2Zk3f3CxjTu
+ HY8=
+X-SBRS: None
+X-MesageID: 28849224
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.77,318,1596513600"; 
+   d="scan'208";a="28849224"
+Date: Tue, 29 Sep 2020 13:06:57 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Jan Beulich <jbeulich@suse.com>
+CC: Trammell Hudson <hudson@trmm.net>, <xen-devel@lists.xenproject.org>
 Subject: Re: [PATCH v6 2/5] efi/boot.c: add file.need_to_free
-To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-Cc: Trammell Hudson <hudson@trmm.net>, xen-devel@lists.xenproject.org
+Message-ID: <20200929110657.GS19254@Air-de-Roger>
 References: <20200921115113.1278655-1-hudson@trmm.net>
  <20200921115113.1278655-3-hudson@trmm.net>
  <20200929104545.GR19254@Air-de-Roger>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <db4fd689-4f91-8a1e-8f50-8e16af042516@suse.com>
-Date: Tue, 29 Sep 2020 13:00:06 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.0
+ <db4fd689-4f91-8a1e-8f50-8e16af042516@suse.com>
 MIME-Version: 1.0
-In-Reply-To: <20200929104545.GR19254@Air-de-Roger>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <db4fd689-4f91-8a1e-8f50-8e16af042516@suse.com>
+X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
+ FTLPEX02CL06.citrite.net (10.13.108.179)
 
-On 29.09.2020 12:45, Roger Pau Monné wrote:
-> On Mon, Sep 21, 2020 at 07:51:10AM -0400, Trammell Hudson wrote:
->> --- a/xen/common/efi/boot.c
->> +++ b/xen/common/efi/boot.c
->> @@ -102,6 +102,7 @@ union string {
->>  
->>  struct file {
->>      UINTN size;
->> +    bool need_to_free;
->>      union {
->>          EFI_PHYSICAL_ADDRESS addr;
->>          char *str;
->> @@ -280,13 +281,13 @@ void __init noreturn blexit(const CHAR16 *str)
->>      if ( !efi_bs )
->>          efi_arch_halt();
->>  
->> -    if ( cfg.addr )
->> +    if ( cfg.need_to_free )
+On Tue, Sep 29, 2020 at 01:00:06PM +0200, Jan Beulich wrote:
+> On 29.09.2020 12:45, Roger Pau Monné wrote:
+> > On Mon, Sep 21, 2020 at 07:51:10AM -0400, Trammell Hudson wrote:
+> >> --- a/xen/common/efi/boot.c
+> >> +++ b/xen/common/efi/boot.c
+> >> @@ -102,6 +102,7 @@ union string {
+> >>  
+> >>  struct file {
+> >>      UINTN size;
+> >> +    bool need_to_free;
+> >>      union {
+> >>          EFI_PHYSICAL_ADDRESS addr;
+> >>          char *str;
+> >> @@ -280,13 +281,13 @@ void __init noreturn blexit(const CHAR16 *str)
+> >>      if ( !efi_bs )
+> >>          efi_arch_halt();
+> >>  
+> >> -    if ( cfg.addr )
+> >> +    if ( cfg.need_to_free )
+> > 
+> > If you drop the addr check here...
+> > 
+> >>          efi_bs->FreePages(cfg.addr, PFN_UP(cfg.size));
+> >> -    if ( kernel.addr )
+> >> +    if ( kernel.need_to_free )
+> >>          efi_bs->FreePages(kernel.addr, PFN_UP(kernel.size));
+> >> -    if ( ramdisk.addr )
+> >> +    if ( ramdisk.need_to_free )
+> >>          efi_bs->FreePages(ramdisk.addr, PFN_UP(ramdisk.size));
+> >> -    if ( xsm.addr )
+> >> +    if ( xsm.need_to_free )
+> >>          efi_bs->FreePages(xsm.addr, PFN_UP(xsm.size));
+> >>  
+> >>      efi_arch_blexit();
+> >> @@ -581,6 +582,7 @@ static bool __init read_file(EFI_FILE_HANDLE dir_handle, CHAR16 *name,
+> >>      }
+> >>      else
+> >>      {
+> >> +        file->need_to_free = true;
+> > 
+> > ... I think you need to clear need_to_free if AllocatePages fails?
 > 
-> If you drop the addr check here...
-> 
->>          efi_bs->FreePages(cfg.addr, PFN_UP(cfg.size));
->> -    if ( kernel.addr )
->> +    if ( kernel.need_to_free )
->>          efi_bs->FreePages(kernel.addr, PFN_UP(kernel.size));
->> -    if ( ramdisk.addr )
->> +    if ( ramdisk.need_to_free )
->>          efi_bs->FreePages(ramdisk.addr, PFN_UP(ramdisk.size));
->> -    if ( xsm.addr )
->> +    if ( xsm.need_to_free )
->>          efi_bs->FreePages(xsm.addr, PFN_UP(xsm.size));
->>  
->>      efi_arch_blexit();
->> @@ -581,6 +582,7 @@ static bool __init read_file(EFI_FILE_HANDLE dir_handle, CHAR16 *name,
->>      }
->>      else
->>      {
->> +        file->need_to_free = true;
-> 
-> ... I think you need to clear need_to_free if AllocatePages fails?
+> But this has been moved to the success path, or am I overlooking
+> anything?
 
-But this has been moved to the success path, or am I overlooking
-anything?
+Oh yes, sorry, somehow I looked at the wrong context. Please ignore my
+comment.
 
-Jan
+Roger.
 
