@@ -7,21 +7,21 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EBBDEC4727C
-	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2020 18:17:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3EBAAC47426
+	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2020 18:17:53 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 89F87208B8
+	by mail.kernel.org (Postfix) with ESMTPS id BA59920C09
 	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2020 18:17:52 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 89F87208B8
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BA59920C09
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=trmm.net
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.341.1013 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.340.1001 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNKC6-00013o-Cn; Tue, 29 Sep 2020 18:17:42 +0000
+	id 1kNKC3-00010s-1M; Tue, 29 Sep 2020 18:17:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 341.1013; Tue, 29 Sep 2020 18:17:42 +0000
+Received: by outflank-mailman (output) from mailman id 340.1001; Tue, 29 Sep 2020 18:17:39 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,122 +36,114 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNKC6-00013f-8h; Tue, 29 Sep 2020 18:17:42 +0000
-Received: by outflank-mailman (input) for mailman id 341;
- Tue, 29 Sep 2020 18:17:41 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kNKC2-00010l-Tp; Tue, 29 Sep 2020 18:17:38 +0000
+Received: by outflank-mailman (input) for mailman id 340;
+ Tue, 29 Sep 2020 18:17:36 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=/JXF=DG=trmm.net=hudson@srs-us1.protection.inumbo.net>)
- id 1kNKC5-000131-8Y
- for xen-devel@lists.xenproject.org; Tue, 29 Sep 2020 18:17:41 +0000
+ id 1kNKC0-0000xd-SZ
+ for xen-devel@lists.xenproject.org; Tue, 29 Sep 2020 18:17:36 +0000
 Received: from mx1a.swcp.com (unknown [216.184.2.64])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id c7ace055-43ed-4dd9-8aed-47484aca99f0;
- Tue, 29 Sep 2020 18:17:39 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 5ae35d9e-0e0d-4f02-81f1-388e83171a91;
+ Tue, 29 Sep 2020 18:17:36 +0000 (UTC)
 Received: from ame7.swcp.com (ame7.swcp.com [216.184.2.70])
- by mx1a.swcp.com (8.14.4/8.14.4/Debian-4) with ESMTP id 08TIHchD004940;
- Tue, 29 Sep 2020 12:17:38 -0600
+ by mx1a.swcp.com (8.14.4/8.14.4/Debian-4) with ESMTP id 08TIHYrV004934;
+ Tue, 29 Sep 2020 12:17:34 -0600
 Received: from diamond.fritz.box (62-251-112-184.ip.xs4all.nl [62.251.112.184])
- by ame7.swcp.com (8.15.2/8.15.2) with ESMTP id 08TIHJkr051120;
- Tue, 29 Sep 2020 12:17:35 -0600 (MDT) (envelope-from hudson@trmm.net)
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+ by ame7.swcp.com (8.15.2/8.15.2) with ESMTP id 08TIHJkq051120;
+ Tue, 29 Sep 2020 12:17:31 -0600 (MDT) (envelope-from hudson@trmm.net)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=/JXF=DG=trmm.net=hudson@srs-us1.protection.inumbo.net>)
-	id 1kNKC5-000131-8Y
-	for xen-devel@lists.xenproject.org; Tue, 29 Sep 2020 18:17:41 +0000
-X-Inumbo-ID: c7ace055-43ed-4dd9-8aed-47484aca99f0
+	id 1kNKC0-0000xd-SZ
+	for xen-devel@lists.xenproject.org; Tue, 29 Sep 2020 18:17:36 +0000
+X-Inumbo-ID: 5ae35d9e-0e0d-4f02-81f1-388e83171a91
 Received: from mx1a.swcp.com (unknown [216.184.2.64])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id c7ace055-43ed-4dd9-8aed-47484aca99f0;
-	Tue, 29 Sep 2020 18:17:39 +0000 (UTC)
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id 5ae35d9e-0e0d-4f02-81f1-388e83171a91;
+	Tue, 29 Sep 2020 18:17:36 +0000 (UTC)
 Received: from ame7.swcp.com (ame7.swcp.com [216.184.2.70])
-	by mx1a.swcp.com (8.14.4/8.14.4/Debian-4) with ESMTP id 08TIHchD004940;
-	Tue, 29 Sep 2020 12:17:38 -0600
+	by mx1a.swcp.com (8.14.4/8.14.4/Debian-4) with ESMTP id 08TIHYrV004934;
+	Tue, 29 Sep 2020 12:17:34 -0600
 Received-SPF: neutral (ame7.swcp.com: 62.251.112.184 is neither permitted nor denied by domain of hudson@trmm.net) receiver=ame7.swcp.com; client-ip=62.251.112.184; helo=diamond.fritz.box; envelope-from=hudson@trmm.net; x-software=spfmilter 2.001 http://www.acme.com/software/spfmilter/ with libspf2-1.2.10;
 Received: from diamond.fritz.box (62-251-112-184.ip.xs4all.nl [62.251.112.184])
-	by ame7.swcp.com (8.15.2/8.15.2) with ESMTP id 08TIHJkr051120;
-	Tue, 29 Sep 2020 12:17:35 -0600 (MDT)
+	by ame7.swcp.com (8.15.2/8.15.2) with ESMTP id 08TIHJkq051120;
+	Tue, 29 Sep 2020 12:17:31 -0600 (MDT)
 	(envelope-from hudson@trmm.net)
 X-Authentication-Warning: ame7.swcp.com: Host 62-251-112-184.ip.xs4all.nl [62.251.112.184] claimed to be diamond.fritz.box
 From: Trammell Hudson <hudson@trmm.net>
 To: xen-devel@lists.xenproject.org
 Cc: roger.pau@citrix.com, jbeulich@suse.com, andrew.cooper3@citrix.com,
         wl@xen.org
-Subject: [PATCH v7 3/5] efi/boot.c: wrap PrintStr/PrintErr to allow const CHAR16* arguments
-Date: Tue, 29 Sep 2020 14:17:15 -0400
-Message-Id: <20200929181717.1596965-4-hudson@trmm.net>
+Subject: [PATCH v7 2/5] efi/boot.c: add handle_file_info()
+Date: Tue, 29 Sep 2020 14:17:14 -0400
+Message-Id: <20200929181717.1596965-3-hudson@trmm.net>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20200929181717.1596965-1-hudson@trmm.net>
 References: <20200929181717.1596965-1-hudson@trmm.net>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 2.83
-X-Greylist: Message whitelisted by DRAC access database, not delayed by milter-greylist-4.6.2 (ame7.swcp.com [216.184.2.128]); Tue, 29 Sep 2020 12:17:37 -0600 (MDT)
+X-Greylist: Message whitelisted by DRAC access database, not delayed by milter-greylist-4.6.2 (ame7.swcp.com [216.184.2.128]); Tue, 29 Sep 2020 12:17:33 -0600 (MDT)
 X-Virus-Scanned: clamav-milter 0.100.2 at ame7
 X-Virus-Status: Clean
 
-This patch wraps the EFI OutputString() method so that they can be
-called with const arguments.  The OutputString method does not modify
-its argument, although the prototype is missing const, so it is necssary
-to cast away the const when calling it.
+Add a separate function to display the address ranges used by
+the files and call `efi_arch_handle_module()` on the modules.
 
 Signed-off-by: Trammell Hudson <hudson@trmm.net>
+Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
- xen/common/efi/boot.c | 18 ++++++++++++------
- 1 file changed, 12 insertions(+), 6 deletions(-)
+ xen/common/efi/boot.c | 27 +++++++++++++++++----------
+ 1 file changed, 17 insertions(+), 10 deletions(-)
 
 diff --git a/xen/common/efi/boot.c b/xen/common/efi/boot.c
-index 93cfeba7e1..fc2ea80e43 100644
+index c2ce0c7294..93cfeba7e1 100644
 --- a/xen/common/efi/boot.c
 +++ b/xen/common/efi/boot.c
-@@ -151,10 +151,16 @@ static struct file __initdata cfg;
- static struct file __initdata kernel;
- static struct file __initdata ramdisk;
- static struct file __initdata xsm;
--static CHAR16 __initdata newline[] = L"\r\n";
-+static const CHAR16 __initconst newline[] = L"\r\n";
- 
--#define PrintStr(s) StdOut->OutputString(StdOut, s)
--#define PrintErr(s) StdErr->OutputString(StdErr, s)
-+static void __init PrintStr(const CHAR16 *s)
-+{
-+    StdOut->OutputString(StdOut, (CHAR16 *)s );
-+}
-+static void __init PrintErr(const CHAR16 *s)
-+{
-+    StdErr->OutputString(StdErr, (CHAR16 *)s );
-+}
- 
- /*
-  * Include architecture specific implementation here, which references the
-@@ -275,7 +281,7 @@ static bool __init match_guid(const EFI_GUID *guid1, const EFI_GUID *guid2)
- void __init noreturn blexit(const CHAR16 *str)
- {
-     if ( str )
--        PrintStr((CHAR16 *)str);
-+        PrintStr(str);
-     PrintStr(newline);
- 
-     if ( !efi_bs )
-@@ -540,7 +546,7 @@ static char * __init split_string(char *s)
+@@ -540,6 +540,22 @@ static char * __init split_string(char *s)
      return NULL;
  }
  
--static void __init handle_file_info(CHAR16 *name,
-+static void __init handle_file_info(const CHAR16 *name,
-                                     const struct file *file, const char *options)
++static void __init handle_file_info(CHAR16 *name,
++                                    const struct file *file, const char *options)
++{
++    if ( file == &cfg )
++        return;
++
++    PrintStr(name);
++    PrintStr(L": ");
++    DisplayUint(file->addr, 2 * sizeof(file->addr));
++    PrintStr(L"-");
++    DisplayUint(file->addr + file->size, 2 * sizeof(file->addr));
++    PrintStr(newline);
++
++    efi_arch_handle_module(file, name, options);
++}
++
+ static bool __init read_file(EFI_FILE_HANDLE dir_handle, CHAR16 *name,
+                              struct file *file, const char *options)
  {
-     if ( file == &cfg )
-@@ -562,7 +568,7 @@ static bool __init read_file(EFI_FILE_HANDLE dir_handle, CHAR16 *name,
-     EFI_FILE_HANDLE FileHandle = NULL;
-     UINT64 size;
-     EFI_STATUS ret;
--    CHAR16 *what = NULL;
-+    const CHAR16 *what = NULL;
+@@ -584,16 +600,7 @@ static bool __init read_file(EFI_FILE_HANDLE dir_handle, CHAR16 *name,
+     {
+         file->need_to_free = true;
+         file->size = size;
+-        if ( file != &cfg )
+-        {
+-            PrintStr(name);
+-            PrintStr(L": ");
+-            DisplayUint(file->addr, 2 * sizeof(file->addr));
+-            PrintStr(L"-");
+-            DisplayUint(file->addr + size, 2 * sizeof(file->addr));
+-            PrintStr(newline);
+-            efi_arch_handle_module(file, name, options);
+-        }
++        handle_file_info(name, file, options);
  
-     if ( !name )
-         PrintErrMesg(L"No filename", EFI_OUT_OF_RESOURCES);
+         ret = FileHandle->Read(FileHandle, &file->size, file->str);
+         if ( !EFI_ERROR(ret) && file->size != size )
 -- 
 2.25.1
 
