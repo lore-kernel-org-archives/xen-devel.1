@@ -5,25 +5,25 @@ X-Spam-Level:
 X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0B63FC4727C
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 17:52:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2FA4CC4727C
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 17:52:55 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AF34220706
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 17:52:49 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id C399420706
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 17:52:54 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="CpPbN3ix"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AF34220706
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="wRGt4EZ+"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C399420706
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.863.3010 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.864.3023 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNgHP-00063c-ON; Wed, 30 Sep 2020 17:52:39 +0000
+	id 1kNgHV-0006AF-5q; Wed, 30 Sep 2020 17:52:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 863.3010; Wed, 30 Sep 2020 17:52:39 +0000
+Received: by outflank-mailman (output) from mailman id 864.3023; Wed, 30 Sep 2020 17:52:45 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNgHP-00063S-Kf; Wed, 30 Sep 2020 17:52:39 +0000
-Received: by outflank-mailman (input) for mailman id 863;
- Wed, 30 Sep 2020 17:52:38 +0000
+	id 1kNgHV-0006A6-0j; Wed, 30 Sep 2020 17:52:45 +0000
+Received: by outflank-mailman (input) for mailman id 864;
+ Wed, 30 Sep 2020 17:52:43 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=m0D6=DH=casper.srs.infradead.org=batv+fa6e45c137c1199df5c4+6247+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1kNgHO-0005QF-Pd
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 17:52:38 +0000
+ id 1kNgHT-0005QF-Po
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 17:52:43 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 4a108f6e-79c2-453d-8e40-e272d74e46ac;
- Wed, 30 Sep 2020 17:51:59 +0000 (UTC)
+ id 4bcea780-63e7-487d-8d34-970fd9affa36;
+ Wed, 30 Sep 2020 17:51:57 +0000 (UTC)
 Received: from [2001:4bb8:180:7b62:c70:4a89:bc61:4] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kNgGZ-0001D6-Mw; Wed, 30 Sep 2020 17:51:49 +0000
+ id 1kNgGO-0001Bg-9G; Wed, 30 Sep 2020 17:51:36 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=m0D6=DH=casper.srs.infradead.org=batv+fa6e45c137c1199df5c4+6247+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1kNgHO-0005QF-Pd
-	for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 17:52:38 +0000
-X-Inumbo-ID: 4a108f6e-79c2-453d-8e40-e272d74e46ac
+	id 1kNgHT-0005QF-Po
+	for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 17:52:43 +0000
+X-Inumbo-ID: 4bcea780-63e7-487d-8d34-970fd9affa36
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 4a108f6e-79c2-453d-8e40-e272d74e46ac;
-	Wed, 30 Sep 2020 17:51:59 +0000 (UTC)
+	id 4bcea780-63e7-487d-8d34-970fd9affa36;
+	Wed, 30 Sep 2020 17:51:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=aKbcvSTUYHnc5Kwat+nQ3mcktPzxpqXoVaxpdMprQBc=; b=CpPbN3ixHM87YY3u9XM3Qv+U7T
-	1ZWv8GVgV6IxroFPz3OTmX0Pvp+2NDzRr4qI7h1iJaBus5DlsMnTe2D91JP/X3IVr95lVLMJV1nvH
-	D9Os2QRPqW7J6RDHO1kY7okt1bF/FA1lHIbFlVkHQo/rkpDvgaS5aoBM6saFqyGifoYvIjFyGQMzE
-	nCpf/HBAlm8ElQB7pCVubi8N9HqQ1iV6uH3LxWO2hN1BUnaEIDYz76I/QQqBQqiRZ7Q9lYlmRLZ/F
-	73ufU43CuubCJKrxqv+c3PvEcn6kc89SL24CgkYdHvU/uyKb1K6tQ4Inps8UoBNoa+BVSXTsdMGNn
-	1BJqCBzA==;
+	bh=EtVpkGxd0Kyhqnh/t2FVgPRi015JMv+YUxF5ITQDDnw=; b=wRGt4EZ+2E5doJTK4BmkM+D/+o
+	Dw04jnAiVsd8EeZlT/iM7dcBWh9nEdUYaM3QlQFzIBfFUrQz6ym6uMLch3YYJ1gNmWsFeQ+DGI5hA
+	6RbHCb4kh/WuFF20eWHk386XzGBd64UtU3AaFJfDc1tqK479wRzY3Y5P1tuGmg4lRK7xW2DHD8lrC
+	u88YURg64H9BWCOi0q1q70JYWCmlUf5QVubTIUQrp/FKxmiaD8hbc53nc5WN+5oxqt01VyTs0zV2m
+	dBOz8RchoXv6Clq4JpwOKYJcyJmPKZuczxlKVrpSuAR61lRlDRmavVeyDRdv+nI8MiK97msrBVpqE
+	sTeju+vA==;
 Received: from [2001:4bb8:180:7b62:c70:4a89:bc61:4] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1kNgGZ-0001D6-Mw; Wed, 30 Sep 2020 17:51:49 +0000
+	id 1kNgGO-0001Bg-9G; Wed, 30 Sep 2020 17:51:36 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Andrew Morton <akpm@linux-foundation.org>
 Cc: Peter Zijlstra <peterz@infradead.org>,
@@ -97,9 +97,9 @@ Cc: Peter Zijlstra <peterz@infradead.org>,
 	intel-gfx@lists.freedesktop.org,
 	dri-devel@lists.freedesktop.org,
 	linux-mm@kvack.org
-Subject: [PATCH 09/10] x86/xen: open code alloc_vm_area in arch_gnttab_valloc
-Date: Wed, 30 Sep 2020 19:51:32 +0200
-Message-Id: <20200930175133.1252382-10-hch@lst.de>
+Subject: [PATCH 01/10] mm: update the documentation for vfree
+Date: Wed, 30 Sep 2020 19:51:24 +0200
+Message-Id: <20200930175133.1252382-2-hch@lst.de>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200930175133.1252382-1-hch@lst.de>
 References: <20200930175133.1252382-1-hch@lst.de>
@@ -107,67 +107,58 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-Replace the last call to alloc_vm_area with an open coded version using
-an iterator in struct gnttab_vm_area instead of the triple indirection
-magic in alloc_vm_area.
+From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
 
+ * Document that you can call vfree() on an address returned from vmap()
+ * Remove the note about the minimum size -- the minimum size of a vmalloc
+   allocation is one page
+ * Add a Context: section
+ * Fix capitalisation
+ * Reword the prohibition on calling from NMI context to avoid a double
+   negative
+
+Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
 Signed-off-by: Christoph Hellwig <hch@lst.de>
-Reviewed-by: Boris Ostrovsky <boris.ostrovsky@oracle.com>
 ---
- arch/x86/xen/grant-table.c | 27 ++++++++++++++++++++-------
- 1 file changed, 20 insertions(+), 7 deletions(-)
+ mm/vmalloc.c | 21 +++++++++++----------
+ 1 file changed, 11 insertions(+), 10 deletions(-)
 
-diff --git a/arch/x86/xen/grant-table.c b/arch/x86/xen/grant-table.c
-index 4988e19598c8a5..1e681bf62561a0 100644
---- a/arch/x86/xen/grant-table.c
-+++ b/arch/x86/xen/grant-table.c
-@@ -25,6 +25,7 @@
- static struct gnttab_vm_area {
- 	struct vm_struct *area;
- 	pte_t **ptes;
-+	int idx;
- } gnttab_shared_vm_area, gnttab_status_vm_area;
- 
- int arch_gnttab_map_shared(unsigned long *frames, unsigned long nr_gframes,
-@@ -90,19 +91,31 @@ void arch_gnttab_unmap(void *shared, unsigned long nr_gframes)
- 	}
+diff --git a/mm/vmalloc.c b/mm/vmalloc.c
+index be4724b916b3e7..8770260419af06 100644
+--- a/mm/vmalloc.c
++++ b/mm/vmalloc.c
+@@ -2321,20 +2321,21 @@ static void __vfree(const void *addr)
  }
  
-+static int gnttab_apply(pte_t *pte, unsigned long addr, void *data)
-+{
-+	struct gnttab_vm_area *area = data;
-+
-+	area->ptes[area->idx++] = pte;
-+	return 0;
-+}
-+
- static int arch_gnttab_valloc(struct gnttab_vm_area *area, unsigned nr_frames)
+ /**
+- * vfree - release memory allocated by vmalloc()
+- * @addr:  memory base address
++ * vfree - Release memory allocated by vmalloc()
++ * @addr:  Memory base address
+  *
+- * Free the virtually continuous memory area starting at @addr, as
+- * obtained from vmalloc(), vmalloc_32() or __vmalloc(). If @addr is
+- * NULL, no operation is performed.
++ * Free the virtually continuous memory area starting at @addr, as obtained
++ * from one of the vmalloc() family of APIs.  This will usually also free the
++ * physical memory underlying the virtual allocation, but that memory is
++ * reference counted, so it will not be freed until the last user goes away.
+  *
+- * Must not be called in NMI context (strictly speaking, only if we don't
+- * have CONFIG_ARCH_HAVE_NMI_SAFE_CMPXCHG, but making the calling
+- * conventions for vfree() arch-depenedent would be a really bad idea)
++ * If @addr is NULL, no operation is performed.
+  *
++ * Context:
+  * May sleep if called *not* from interrupt context.
+- *
+- * NOTE: assumes that the object at @addr has a size >= sizeof(llist_node)
++ * Must not be called in NMI context (strictly speaking, it could be
++ * if we have CONFIG_ARCH_HAVE_NMI_SAFE_CMPXCHG, but making the calling
++ * conventions for vfree() arch-depenedent would be a really bad idea).
+  */
+ void vfree(const void *addr)
  {
- 	area->ptes = kmalloc_array(nr_frames, sizeof(*area->ptes), GFP_KERNEL);
- 	if (area->ptes == NULL)
- 		return -ENOMEM;
--
--	area->area = alloc_vm_area(PAGE_SIZE * nr_frames, area->ptes);
--	if (area->area == NULL) {
--		kfree(area->ptes);
--		return -ENOMEM;
--	}
--
-+	area->area = get_vm_area(PAGE_SIZE * nr_frames, VM_IOREMAP);
-+	if (!area->area)
-+		goto out_free_ptes;
-+	if (apply_to_page_range(&init_mm, (unsigned long)area->area->addr,
-+			PAGE_SIZE * nr_frames, gnttab_apply, area))
-+		goto out_free_vm_area;
- 	return 0;
-+out_free_vm_area:
-+	free_vm_area(area->area);
-+out_free_ptes:
-+	kfree(area->ptes);
-+	return -ENOMEM;
- }
- 
- static void arch_gnttab_vfree(struct gnttab_vm_area *area)
 -- 
 2.28.0
 
