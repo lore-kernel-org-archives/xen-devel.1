@@ -2,29 +2,28 @@ Return-Path: <SRS0=Shbi=DH=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-13.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1107CC4727E
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 13:39:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 488ECC4727E
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 13:43:26 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id ADCEC206B7
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 13:39:23 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id DE331206B7
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 13:43:25 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="QpUHEc8F"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org ADCEC206B7
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="cYekyCSi"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DE331206B7
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.704.2355 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.708.2367 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNcKA-0003Pi-KR; Wed, 30 Sep 2020 13:39:14 +0000
+	id 1kNcNx-0004K2-7C; Wed, 30 Sep 2020 13:43:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 704.2355; Wed, 30 Sep 2020 13:39:14 +0000
+Received: by outflank-mailman (output) from mailman id 708.2367; Wed, 30 Sep 2020 13:43:09 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,171 +38,110 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNcKA-0003Pb-HD; Wed, 30 Sep 2020 13:39:14 +0000
-Received: by outflank-mailman (input) for mailman id 704;
- Wed, 30 Sep 2020 13:39:13 +0000
+	id 1kNcNx-0004Jv-48; Wed, 30 Sep 2020 13:43:09 +0000
+Received: by outflank-mailman (input) for mailman id 708;
+ Wed, 30 Sep 2020 13:43:08 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=XSKT=DH=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
- id 1kNcK8-0003PO-Uo
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 13:39:13 +0000
-Received: from mail-lf1-x142.google.com (unknown [2a00:1450:4864:20::142])
+ <SRS0=sFQy=DH=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1kNcNw-0004Jq-NE
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 13:43:08 +0000
+Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id a7896829-2002-4ee4-822c-b1816c574fd3;
- Wed, 30 Sep 2020 13:39:12 +0000 (UTC)
-Received: by mail-lf1-x142.google.com with SMTP id y2so2175309lfy.10
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2020 06:39:12 -0700 (PDT)
-Received: from [192.168.1.6] ([212.22.223.21])
- by smtp.gmail.com with ESMTPSA id b7sm196832lfi.123.2020.09.30.06.39.09
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 30 Sep 2020 06:39:10 -0700 (PDT)
+ id 331baf0a-6d0c-4de4-904a-a23335a13515;
+ Wed, 30 Sep 2020 13:43:07 +0000 (UTC)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=XSKT=DH=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
-	id 1kNcK8-0003PO-Uo
-	for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 13:39:13 +0000
-X-Inumbo-ID: a7896829-2002-4ee4-822c-b1816c574fd3
-Received: from mail-lf1-x142.google.com (unknown [2a00:1450:4864:20::142])
+	(envelope-from <SRS0=sFQy=DH=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+	id 1kNcNw-0004Jq-NE
+	for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 13:43:08 +0000
+X-Inumbo-ID: 331baf0a-6d0c-4de4-904a-a23335a13515
+Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id a7896829-2002-4ee4-822c-b1816c574fd3;
-	Wed, 30 Sep 2020 13:39:12 +0000 (UTC)
-Received: by mail-lf1-x142.google.com with SMTP id y2so2175309lfy.10
-        for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2020 06:39:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-transfer-encoding:content-language;
-        bh=gYYiQVB5bAau0SLe67LyF0f3OKYgxH8Mgav77ILWZBA=;
-        b=QpUHEc8FK3whsyID6ND5DdCe7Iw9+oXC1RM2OyRkVtdB1QzaXrt8CMGg6t17u7+7c+
-         FbnW1NX6DlJzVrKPZQgSzdLdXwJhKL/oVR8jpd34BGtXnfgf6fKG0Aok1FZ25wJPN5zg
-         OudC4NAFv/K+Gxby+Smg362JqvzIoHBT/lqMZ8lQu9NAOhuVQq1GCTTMpOHFLZyu1fZy
-         jFcvfTC9ZP5/jcYvi5KqPuwBxAZ4S7lZyScJ5coVFxVntlLop0MfpaRh6XZsHCUKH9gX
-         lLiwy4a8816HeLUai03bVBs4fXFjBPYW7wFU82bUzwgKqGdawFg9UCXfmV+8KRSgTN2p
-         6zWA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-transfer-encoding
-         :content-language;
-        bh=gYYiQVB5bAau0SLe67LyF0f3OKYgxH8Mgav77ILWZBA=;
-        b=blv8ddrwHEbcAVZNYpsDaOFBt9RddfyfBbIIoanDO75ydy78MgfPvB1Jf6os8venzR
-         uGLnskvuIQxSQGRx/EMS/msDCQ26oDMg5pUKRcLzQhpISWkQ6JFcXDZJBEtqR9R4z05E
-         C5CBNl5RyIoOGowD4KfbLJse7TiQDqjrQCqqn0FyUKLpEjCFOPXZPzuRDgx50b2ycFJi
-         CpWgzSLd+ovG7ufeF3Ya7dU+HFHeZsKYmgt84Hw8vlIV/dS6TS84uVtWNkqGAwU9dhgc
-         yz4lUPcCT1g0cwdvjTh2PVKvhsBsqK0RAw/8PBCdgPASEgDpytwFwiLSMbJSdd6q5vAM
-         q51w==
-X-Gm-Message-State: AOAM530BVtPi2xAZLx+h3KTNGz56YOiuH/ynJRn6xs2FtsMt3GOEOgcH
-	W3nVDy64TR/9RTOBTFxRmbQ=
-X-Google-Smtp-Source: ABdhPJzFwf4jfvbaUH4NVC+DFH1MxMC2Yz+APCzy+hGvG3MLQFLg5MDHLDebOrubtGs3bkP+Oz8YIA==
-X-Received: by 2002:ac2:4c19:: with SMTP id t25mr940139lfq.503.1601473150782;
-        Wed, 30 Sep 2020 06:39:10 -0700 (PDT)
-Received: from [192.168.1.6] ([212.22.223.21])
-        by smtp.gmail.com with ESMTPSA id b7sm196832lfi.123.2020.09.30.06.39.09
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 30 Sep 2020 06:39:10 -0700 (PDT)
-Subject: Re: [PATCH V1 02/16] xen/ioreq: Make x86's IOREQ feature common
-To: 'Julien Grall' <julien@xen.org>, xen-devel@lists.xenproject.org
-Cc: paul@xen.org, 'Oleksandr Tyshchenko' <oleksandr_tyshchenko@epam.com>,
- 'Andrew Cooper' <andrew.cooper3@citrix.com>,
- 'George Dunlap' <george.dunlap@citrix.com>,
- 'Ian Jackson' <ian.jackson@eu.citrix.com>, 'Jan Beulich'
- <jbeulich@suse.com>, 'Stefano Stabellini' <sstabellini@kernel.org>,
- 'Wei Liu' <wl@xen.org>, =?UTF-8?B?J1JvZ2VyIFBhdSBNb25uw6kn?=
- <roger.pau@citrix.com>, 'Jun Nakajima' <jun.nakajima@intel.com>,
- 'Kevin Tian' <kevin.tian@intel.com>, 'Tim Deegan' <tim@xen.org>,
- 'Julien Grall' <julien.grall@arm.com>
-References: <1599769330-17656-1-git-send-email-olekstysh@gmail.com>
- <1599769330-17656-3-git-send-email-olekstysh@gmail.com>
- <3997a705-ccb1-4b8f-41ca-c5507360c759@xen.org>
- <000201d69314$97bd8fa0$c738aee0$@xen.org>
-From: Oleksandr <olekstysh@gmail.com>
-Message-ID: <c9131bce-f028-2824-9ffc-b4db08017569@gmail.com>
-Date: Wed, 30 Sep 2020 16:39:09 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+	id 331baf0a-6d0c-4de4-904a-a23335a13515;
+	Wed, 30 Sep 2020 13:43:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1601473388;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=zCgloXqKLi3h4wrtUxAfnK1YiX7r251p1U0n04eKO08=;
+  b=cYekyCSisrLQm7olnlWfioleHr/pr5Xp7ht8HwylE+CWCuoFeRYFOAfG
+   R+c2LTlzdUvScspJZNCGKBM14+tzeycIHpJV5ufxU6YMRwrdfWVW+tNli
+   JVG1XyYor56Tg0ex52t+K4CiTQpW8gxHgZ0cvKzWDOFGnryksF8HHp+KR
+   o=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: hDw4USf9skInVC4gYmFwUFaQnMtcBLlyE2lQvtdpk/Fbyy+COdv4+1+Jb6bkGeP2hjs3JdiUaK
+ R/xAIxBAjIMI5ynGPKjm1uM5cEMhSbncaP/ubPWK7iWdQ5HziW59yAYQFxzPcG/QpIouicau+/
+ vQwq5YWxmiqlkwc6IydrtKV9Vrg0BmRXMg2cuCHpILAMWFnOk/SwYcZ5taAoYiw4MsvTEnHcpQ
+ n0gxtEpz4DsUXuVrBY370AS9eIp57KThzgc+tGU9p/f4Hh56Nz1crwGlsoKf6+RGNQhUtgXo/q
+ zb8=
+X-SBRS: None
+X-MesageID: 27971142
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.77,322,1596513600"; 
+   d="scan'208";a="27971142"
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
+	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH 8/8] x86/cpuid: Move VMX/SVM out of the default policy
+Date: Wed, 30 Sep 2020 14:42:48 +0100
+Message-ID: <20200930134248.4918-9-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20200930134248.4918-1-andrew.cooper3@citrix.com>
+References: <20200930134248.4918-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-In-Reply-To: <000201d69314$97bd8fa0$c738aee0$@xen.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-Content-Language: en-US
 
+Nested virt is still experimental, and requires explicitly opting in to at
+domain create time.  The VMX/SVM features should not be visible by default.
 
-Hi Julien
+Also correct them from all HVM guests, to just HAP-enabled guests.  This has
+been the restriction for SVM right from the outset (c/s e006a0e0aaa), while
+VMX was first introduced supporting shadow mode (c/s 9122c69c8d3) but later
+adjusted to HAP-only (c/s 77751ed79e3).
 
-On 25.09.20 11:19, Paul Durrant wrote:
->> -----Original Message-----
->> From: Julien Grall <julien@xen.org>
->> Sent: 24 September 2020 19:01
->> To: Oleksandr Tyshchenko <olekstysh@gmail.com>; xen-devel@lists.xenproject.org
->> Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>; Andrew Cooper <andrew.cooper3@citrix.com>;
->> George Dunlap <george.dunlap@citrix.com>; Ian Jackson <ian.jackson@eu.citrix.com>; Jan Beulich
->> <jbeulich@suse.com>; Stefano Stabellini <sstabellini@kernel.org>; Wei Liu <wl@xen.org>; Roger Pau
->> Monné <roger.pau@citrix.com>; Paul Durrant <paul@xen.org>; Jun Nakajima <jun.nakajima@intel.com>;
->> Kevin Tian <kevin.tian@intel.com>; Tim Deegan <tim@xen.org>; Julien Grall <julien.grall@arm.com>
->> Subject: Re: [PATCH V1 02/16] xen/ioreq: Make x86's IOREQ feature common
->>
->>
->>
->> On 10/09/2020 21:21, Oleksandr Tyshchenko wrote:
->>> +static bool hvm_wait_for_io(struct hvm_ioreq_vcpu *sv, ioreq_t *p)
->>> +{
->>> +    unsigned int prev_state = STATE_IOREQ_NONE;
->>> +    unsigned int state = p->state;
->>> +    uint64_t data = ~0;
->>> +
->>> +    smp_rmb();
->>> +
->>> +    /*
->>> +     * The only reason we should see this condition be false is when an
->>> +     * emulator dying races with I/O being requested.
->>> +     */
->>> +    while ( likely(state != STATE_IOREQ_NONE) )
->>> +    {
->>> +        if ( unlikely(state < prev_state) )
->>> +        {
->>> +            gdprintk(XENLOG_ERR, "Weird HVM ioreq state transition %u -> %u\n",
->>> +                     prev_state, state);
->>> +            sv->pending = false;
->>> +            domain_crash(sv->vcpu->domain);
->>> +            return false; /* bail */
->>> +        }
->>> +
->>> +        switch ( prev_state = state )
->>> +        {
->>> +        case STATE_IORESP_READY: /* IORESP_READY -> NONE */
->>> +            p->state = STATE_IOREQ_NONE;
->>> +            data = p->data;
->>> +            break;
->>> +
->>> +        case STATE_IOREQ_READY:  /* IOREQ_{READY,INPROCESS} -> IORESP_READY */
->>> +        case STATE_IOREQ_INPROCESS:
->>> +            wait_on_xen_event_channel(sv->ioreq_evtchn,
->>> +                                      ({ state = p->state;
->>> +                                         smp_rmb();
->>> +                                         state != prev_state; }));
->>> +            continue;
->> As I pointed out previously [1], this helper was implemented with the
->> expectation that wait_on_xen_event_channel() will not return if the vCPU
->> got rescheduled.
->>
->> However, this assumption doesn't hold on Arm.
->>
->> I can see two solution:
->>      1) Re-execute the caller
->>      2) Prevent an IOREQ to disappear until the loop finish.
->>
->> @Paul any opinions?
-> The ioreq control plane is largely predicated on there being no pending I/O when the state of a server is modified, and it is assumed that domain_pause() is sufficient to achieve this. If that assumption doesn't hold then we need additional synchronization.
->
->    Paul
->
-May I please clarify whether a concern still stands (with what was said 
-above) and we need an additional synchronization on Arm?
+There is deliberately no adjustment to xc_cpuid_apply_policy() for pre-4.14
+migration compatibility.  The migration stream doesn't contain the required
+architectural state for either VMX/SVM, and a nested virt VM which migrates
+will explode in weird and wonderful ways.
 
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Wei Liu <wl@xen.org>
+---
+ xen/include/public/arch-x86/cpufeatureset.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
+diff --git a/xen/include/public/arch-x86/cpufeatureset.h b/xen/include/public/arch-x86/cpufeatureset.h
+index abd18722ee..ef7cca334d 100644
+--- a/xen/include/public/arch-x86/cpufeatureset.h
++++ b/xen/include/public/arch-x86/cpufeatureset.h
+@@ -127,7 +127,7 @@ XEN_CPUFEATURE(PCLMULQDQ,     1*32+ 1) /*A  Carry-less multiplication */
+ XEN_CPUFEATURE(DTES64,        1*32+ 2) /*   64-bit Debug Store */
+ XEN_CPUFEATURE(MONITOR,       1*32+ 3) /*   Monitor/Mwait support */
+ XEN_CPUFEATURE(DSCPL,         1*32+ 4) /*   CPL Qualified Debug Store */
+-XEN_CPUFEATURE(VMX,           1*32+ 5) /*S  Virtual Machine Extensions */
++XEN_CPUFEATURE(VMX,           1*32+ 5) /*h  Virtual Machine Extensions */
+ XEN_CPUFEATURE(SMX,           1*32+ 6) /*   Safer Mode Extensions */
+ XEN_CPUFEATURE(EIST,          1*32+ 7) /*   Enhanced SpeedStep */
+ XEN_CPUFEATURE(TM2,           1*32+ 8) /*   Thermal Monitor 2 */
+@@ -166,7 +166,7 @@ XEN_CPUFEATURE(3DNOW,         2*32+31) /*A  3DNow! */
+ /* AMD-defined CPU features, CPUID level 0x80000001.ecx, word 3 */
+ XEN_CPUFEATURE(LAHF_LM,       3*32+ 0) /*A  LAHF/SAHF in long mode */
+ XEN_CPUFEATURE(CMP_LEGACY,    3*32+ 1) /*!A If yes HyperThreading not valid */
+-XEN_CPUFEATURE(SVM,           3*32+ 2) /*S  Secure virtual machine */
++XEN_CPUFEATURE(SVM,           3*32+ 2) /*h  Secure virtual machine */
+ XEN_CPUFEATURE(EXTAPIC,       3*32+ 3) /*   Extended APIC space */
+ XEN_CPUFEATURE(CR8_LEGACY,    3*32+ 4) /*S  CR8 in 32-bit mode */
+ XEN_CPUFEATURE(ABM,           3*32+ 5) /*A  Advanced bit manipulation */
 -- 
-Regards,
-
-Oleksandr Tyshchenko
+2.11.0
 
 
