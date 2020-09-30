@@ -2,28 +2,28 @@ Return-Path: <SRS0=Shbi=DH=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 215F1C4727C
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 17:48:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4CF3AC47429
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 17:52:16 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 977512074B
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 17:48:25 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id EB1A920706
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 17:52:15 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="l08q161e"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 977512074B
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="KBWFZCTN"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EB1A920706
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.852.2903 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.855.2927 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNgCy-0004aH-9z; Wed, 30 Sep 2020 17:48:04 +0000
+	id 1kNgGr-0005S9-4D; Wed, 30 Sep 2020 17:52:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 852.2903; Wed, 30 Sep 2020 17:48:04 +0000
+Received: by outflank-mailman (output) from mailman id 855.2927; Wed, 30 Sep 2020 17:52:05 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,185 +38,149 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNgCy-0004aA-6o; Wed, 30 Sep 2020 17:48:04 +0000
-Received: by outflank-mailman (input) for mailman id 852;
- Wed, 30 Sep 2020 17:48:02 +0000
+	id 1kNgGr-0005S2-0t; Wed, 30 Sep 2020 17:52:05 +0000
+Received: by outflank-mailman (input) for mailman id 855;
+ Wed, 30 Sep 2020 17:52:03 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=I3vy=DH=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1kNgCw-0004a5-Gf
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 17:48:02 +0000
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=m0D6=DH=casper.srs.infradead.org=batv+fa6e45c137c1199df5c4+6247+infradead.org+hch@srs-us1.protection.inumbo.net>)
+ id 1kNgGp-0005QF-OQ
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 17:52:03 +0000
+Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 77d811f4-bba5-4057-a351-b1aa34b25e92;
- Wed, 30 Sep 2020 17:48:01 +0000 (UTC)
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1kNgCg-0008LH-Tx; Wed, 30 Sep 2020 17:47:46 +0000
-Received: from [54.239.6.185] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1kNgCg-0004NF-KX; Wed, 30 Sep 2020 17:47:46 +0000
+ id 9da8ae00-4571-4008-b9bb-bffcab56ba27;
+ Wed, 30 Sep 2020 17:51:55 +0000 (UTC)
+Received: from [2001:4bb8:180:7b62:c70:4a89:bc61:4] (helo=localhost)
+ by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+ id 1kNgGY-0001Cn-BM; Wed, 30 Sep 2020 17:51:46 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=I3vy=DH=xen.org=julien@srs-us1.protection.inumbo.net>)
-	id 1kNgCw-0004a5-Gf
-	for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 17:48:02 +0000
-X-Inumbo-ID: 77d811f4-bba5-4057-a351-b1aa34b25e92
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+	(envelope-from <SRS0=m0D6=DH=casper.srs.infradead.org=batv+fa6e45c137c1199df5c4+6247+infradead.org+hch@srs-us1.protection.inumbo.net>)
+	id 1kNgGp-0005QF-OQ
+	for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 17:52:03 +0000
+X-Inumbo-ID: 9da8ae00-4571-4008-b9bb-bffcab56ba27
+Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 77d811f4-bba5-4057-a351-b1aa34b25e92;
-	Wed, 30 Sep 2020 17:48:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=MzGs+t1btdkIXoc1hZnZxaqTvzUwP2Oo8fmnt+tdJco=; b=l08q161ewQQlzFmwxLGWrjQAgZ
-	vUhE3gJb3cmGeUXux8RfzvQ0Gs8CnWTQXm0wGmHRzhRlHhmJIs4kZrWzHZ6VeUo2dVGqugg1SYr1j
-	a+4QjdUtbndqBKNlC+4et4r7vLO2QAKbE3Nvv7SDb3HY6VJ7eLnEtVqZba536pr4oQHs=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
-	by mail.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <julien@xen.org>)
-	id 1kNgCg-0008LH-Tx; Wed, 30 Sep 2020 17:47:46 +0000
-Received: from [54.239.6.185] (helo=a483e7b01a66.ant.amazon.com)
-	by xenbits.xenproject.org with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
-	(Exim 4.92)
-	(envelope-from <julien@xen.org>)
-	id 1kNgCg-0004NF-KX; Wed, 30 Sep 2020 17:47:46 +0000
-Subject: Re: [PATCH V1 02/16] xen/ioreq: Make x86's IOREQ feature common
-To: Oleksandr <olekstysh@gmail.com>, xen-devel@lists.xenproject.org
-Cc: paul@xen.org, 'Oleksandr Tyshchenko' <oleksandr_tyshchenko@epam.com>,
- 'Andrew Cooper' <andrew.cooper3@citrix.com>,
- 'George Dunlap' <george.dunlap@citrix.com>,
- 'Ian Jackson' <ian.jackson@eu.citrix.com>, 'Jan Beulich'
- <jbeulich@suse.com>, 'Stefano Stabellini' <sstabellini@kernel.org>,
- 'Wei Liu' <wl@xen.org>, =?UTF-8?B?J1JvZ2VyIFBhdSBNb25uw6kn?=
- <roger.pau@citrix.com>, 'Jun Nakajima' <jun.nakajima@intel.com>,
- 'Kevin Tian' <kevin.tian@intel.com>, 'Tim Deegan' <tim@xen.org>,
- 'Julien Grall' <julien.grall@arm.com>
-References: <1599769330-17656-1-git-send-email-olekstysh@gmail.com>
- <1599769330-17656-3-git-send-email-olekstysh@gmail.com>
- <3997a705-ccb1-4b8f-41ca-c5507360c759@xen.org>
- <000201d69314$97bd8fa0$c738aee0$@xen.org>
- <c9131bce-f028-2824-9ffc-b4db08017569@gmail.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <2cbe7efd-f356-0f1b-0bb1-bfb2243f180c@xen.org>
-Date: Wed, 30 Sep 2020 18:47:43 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.3.1
+	id 9da8ae00-4571-4008-b9bb-bffcab56ba27;
+	Wed, 30 Sep 2020 17:51:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
+	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+	Content-Type:Content-ID:Content-Description;
+	bh=xnYvbbr90efHFoDVTt6qGpKYl4GIRbFbSmGm2q0tkCk=; b=KBWFZCTNZLSuYgS04nOzQz06zg
+	iDkJxQcVbBokFEgWWXdCe9ESfaBeWIxbzGzZff4SUGcqeqHkpzsN7dmTenlSI91q7a2zSY02a9jXH
+	Ak7Jl3G4PYWbF62vy72xbdSHKUVJLeQbVLveFrSoT8if5aSkLj4691ODUbFRSLTBhRhD7tnTMfGgG
+	HlEREA85fARHi76yzdkL6zUsUF6Qi/EeSDzgfVfxtSyJ5INDSxvZTT2XM4v74lKEg1QEzUDENmidp
+	Mg01aSGkzddIjZVQFma+JQjehLuH+Ctxzf4AIW28h2v7nfy71SPfHeKffF2+p4fV/pMDRMx5tolPn
+	iJPzFoiA==;
+Received: from [2001:4bb8:180:7b62:c70:4a89:bc61:4] (helo=localhost)
+	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+	id 1kNgGY-0001Cn-BM; Wed, 30 Sep 2020 17:51:46 +0000
+From: Christoph Hellwig <hch@lst.de>
+To: Andrew Morton <akpm@linux-foundation.org>
+Cc: Peter Zijlstra <peterz@infradead.org>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Juergen Gross <jgross@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Jani Nikula <jani.nikula@linux.intel.com>,
+	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+	Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+	Chris Wilson <chris@chris-wilson.co.uk>,
+	Matthew Auld <matthew.auld@intel.com>,
+	Rodrigo Vivi <rodrigo.vivi@intel.com>,
+	Minchan Kim <minchan@kernel.org>,
+	Matthew Wilcox <willy@infradead.org>,
+	Nitin Gupta <ngupta@vflare.org>,
+	x86@kernel.org,
+	xen-devel@lists.xenproject.org,
+	linux-kernel@vger.kernel.org,
+	intel-gfx@lists.freedesktop.org,
+	dri-devel@lists.freedesktop.org,
+	linux-mm@kvack.org
+Subject: [PATCH 08/10] xen/xenbus: use apply_to_page_range directly in xenbus_map_ring_pv
+Date: Wed, 30 Sep 2020 19:51:31 +0200
+Message-Id: <20200930175133.1252382-9-hch@lst.de>
+X-Mailer: git-send-email 2.28.0
+In-Reply-To: <20200930175133.1252382-1-hch@lst.de>
+References: <20200930175133.1252382-1-hch@lst.de>
 MIME-Version: 1.0
-In-Reply-To: <c9131bce-f028-2824-9ffc-b4db08017569@gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
 Content-Transfer-Encoding: 8bit
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-Hi,
+Replacing alloc_vm_area with get_vm_area_caller + apply_page_range
+allows to fill put the phys_addr values directly instead of doing
+another loop over all addresses.
 
-On 30/09/2020 14:39, Oleksandr wrote:
-> 
-> Hi Julien
-> 
-> On 25.09.20 11:19, Paul Durrant wrote:
->>> -----Original Message-----
->>> From: Julien Grall <julien@xen.org>
->>> Sent: 24 September 2020 19:01
->>> To: Oleksandr Tyshchenko <olekstysh@gmail.com>; 
->>> xen-devel@lists.xenproject.org
->>> Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>; Andrew 
->>> Cooper <andrew.cooper3@citrix.com>;
->>> George Dunlap <george.dunlap@citrix.com>; Ian Jackson 
->>> <ian.jackson@eu.citrix.com>; Jan Beulich
->>> <jbeulich@suse.com>; Stefano Stabellini <sstabellini@kernel.org>; Wei 
->>> Liu <wl@xen.org>; Roger Pau
->>> Monné <roger.pau@citrix.com>; Paul Durrant <paul@xen.org>; Jun 
->>> Nakajima <jun.nakajima@intel.com>;
->>> Kevin Tian <kevin.tian@intel.com>; Tim Deegan <tim@xen.org>; Julien 
->>> Grall <julien.grall@arm.com>
->>> Subject: Re: [PATCH V1 02/16] xen/ioreq: Make x86's IOREQ feature common
->>>
->>>
->>>
->>> On 10/09/2020 21:21, Oleksandr Tyshchenko wrote:
->>>> +static bool hvm_wait_for_io(struct hvm_ioreq_vcpu *sv, ioreq_t *p)
->>>> +{
->>>> +    unsigned int prev_state = STATE_IOREQ_NONE;
->>>> +    unsigned int state = p->state;
->>>> +    uint64_t data = ~0;
->>>> +
->>>> +    smp_rmb();
->>>> +
->>>> +    /*
->>>> +     * The only reason we should see this condition be false is 
->>>> when an
->>>> +     * emulator dying races with I/O being requested.
->>>> +     */
->>>> +    while ( likely(state != STATE_IOREQ_NONE) )
->>>> +    {
->>>> +        if ( unlikely(state < prev_state) )
->>>> +        {
->>>> +            gdprintk(XENLOG_ERR, "Weird HVM ioreq state transition 
->>>> %u -> %u\n",
->>>> +                     prev_state, state);
->>>> +            sv->pending = false;
->>>> +            domain_crash(sv->vcpu->domain);
->>>> +            return false; /* bail */
->>>> +        }
->>>> +
->>>> +        switch ( prev_state = state )
->>>> +        {
->>>> +        case STATE_IORESP_READY: /* IORESP_READY -> NONE */
->>>> +            p->state = STATE_IOREQ_NONE;
->>>> +            data = p->data;
->>>> +            break;
->>>> +
->>>> +        case STATE_IOREQ_READY:  /* IOREQ_{READY,INPROCESS} -> 
->>>> IORESP_READY */
->>>> +        case STATE_IOREQ_INPROCESS:
->>>> +            wait_on_xen_event_channel(sv->ioreq_evtchn,
->>>> +                                      ({ state = p->state;
->>>> +                                         smp_rmb();
->>>> +                                         state != prev_state; }));
->>>> +            continue;
->>> As I pointed out previously [1], this helper was implemented with the
->>> expectation that wait_on_xen_event_channel() will not return if the vCPU
->>> got rescheduled.
->>>
->>> However, this assumption doesn't hold on Arm.
->>>
->>> I can see two solution:
->>>      1) Re-execute the caller
->>>      2) Prevent an IOREQ to disappear until the loop finish.
->>>
->>> @Paul any opinions?
->> The ioreq control plane is largely predicated on there being no 
->> pending I/O when the state of a server is modified, and it is assumed 
->> that domain_pause() is sufficient to achieve this. If that assumption 
->> doesn't hold then we need additional synchronization.
+Signed-off-by: Christoph Hellwig <hch@lst.de>
+Reviewed-by: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+---
+ drivers/xen/xenbus/xenbus_client.c | 30 ++++++++++++++++--------------
+ 1 file changed, 16 insertions(+), 14 deletions(-)
 
-I don't think this assumption even hold on x86 because domain_pause() 
-will not wait for I/O to finish.
-
-On x86, the context switch will reset the stack and therefore 
-wait_on_xen_event_channel() is not going to return. Instead, 
-handle_hvm_io_completion() will be called from the tail callback in 
-context_switch(). get_pending_vcpu() would return NULL as the IOREQ 
-server disappeared. Although, it is not clear whether the vCPU will 
-continue to run (or not).
-
-Did I miss anything?
-
-Regarding the fix itself, I am not sure what sort of synchronization we 
-can do. Are you suggesting to wait for the I/O to complete? If so, how 
-do we handle the case the IOREQ server died?
-
-> May I please clarify whether a concern still stands (with what was said 
-> above) and we need an additional synchronization on Arm?
-
-Yes the concern is still there (See above).
-
-Cheers,
-
+diff --git a/drivers/xen/xenbus/xenbus_client.c b/drivers/xen/xenbus/xenbus_client.c
+index 2690318ad50f48..fd80e318b99cc7 100644
+--- a/drivers/xen/xenbus/xenbus_client.c
++++ b/drivers/xen/xenbus/xenbus_client.c
+@@ -73,16 +73,13 @@ struct map_ring_valloc {
+ 	struct xenbus_map_node *node;
+ 
+ 	/* Why do we need two arrays? See comment of __xenbus_map_ring */
+-	union {
+-		unsigned long addrs[XENBUS_MAX_RING_GRANTS];
+-		pte_t *ptes[XENBUS_MAX_RING_GRANTS];
+-	};
++	unsigned long addrs[XENBUS_MAX_RING_GRANTS];
+ 	phys_addr_t phys_addrs[XENBUS_MAX_RING_GRANTS];
+ 
+ 	struct gnttab_map_grant_ref map[XENBUS_MAX_RING_GRANTS];
+ 	struct gnttab_unmap_grant_ref unmap[XENBUS_MAX_RING_GRANTS];
+ 
+-	unsigned int idx;	/* HVM only. */
++	unsigned int idx;
+ };
+ 
+ static DEFINE_SPINLOCK(xenbus_valloc_lock);
+@@ -686,6 +683,14 @@ int xenbus_unmap_ring_vfree(struct xenbus_device *dev, void *vaddr)
+ EXPORT_SYMBOL_GPL(xenbus_unmap_ring_vfree);
+ 
+ #ifdef CONFIG_XEN_PV
++static int map_ring_apply(pte_t *pte, unsigned long addr, void *data)
++{
++	struct map_ring_valloc *info = data;
++
++	info->phys_addrs[info->idx++] = arbitrary_virt_to_machine(pte).maddr;
++	return 0;
++}
++
+ static int xenbus_map_ring_pv(struct xenbus_device *dev,
+ 			      struct map_ring_valloc *info,
+ 			      grant_ref_t *gnt_refs,
+@@ -694,18 +699,15 @@ static int xenbus_map_ring_pv(struct xenbus_device *dev,
+ {
+ 	struct xenbus_map_node *node = info->node;
+ 	struct vm_struct *area;
+-	int err = GNTST_okay;
+-	int i;
+-	bool leaked;
++	bool leaked = false;
++	int err = -ENOMEM;
+ 
+-	area = alloc_vm_area(XEN_PAGE_SIZE * nr_grefs, info->ptes);
++	area = get_vm_area(XEN_PAGE_SIZE * nr_grefs, VM_IOREMAP);
+ 	if (!area)
+ 		return -ENOMEM;
+-
+-	for (i = 0; i < nr_grefs; i++)
+-		info->phys_addrs[i] =
+-			arbitrary_virt_to_machine(info->ptes[i]).maddr;
+-
++	if (apply_to_page_range(&init_mm, (unsigned long)area->addr,
++				XEN_PAGE_SIZE * nr_grefs, map_ring_apply, info))
++		goto failed;
+ 	err = __xenbus_map_ring(dev, gnt_refs, nr_grefs, node->handles,
+ 				info, GNTMAP_host_map | GNTMAP_contains_pte,
+ 				&leaked);
 -- 
-Julien Grall
+2.28.0
+
 
