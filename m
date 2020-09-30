@@ -2,28 +2,28 @@ Return-Path: <SRS0=Shbi=DH=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 895E2C4727F
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 08:38:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B9EDC47420
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 08:41:55 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 19F29206B7
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 08:38:18 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id AC495206D4
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 08:41:54 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="GkQ3vFgy"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 19F29206B7
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="ZmrZVWxo"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AC495206D4
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.490.1564 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.493.1577 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNXcm-0004Yd-Qn; Wed, 30 Sep 2020 08:38:08 +0000
+	id 1kNXgF-0005Qb-C1; Wed, 30 Sep 2020 08:41:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 490.1564; Wed, 30 Sep 2020 08:38:08 +0000
+Received: by outflank-mailman (output) from mailman id 493.1577; Wed, 30 Sep 2020 08:41:43 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,126 +38,127 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNXcm-0004YW-No; Wed, 30 Sep 2020 08:38:08 +0000
-Received: by outflank-mailman (input) for mailman id 490;
- Wed, 30 Sep 2020 08:38:06 +0000
+	id 1kNXgF-0005QU-8p; Wed, 30 Sep 2020 08:41:43 +0000
+Received: by outflank-mailman (input) for mailman id 493;
+ Wed, 30 Sep 2020 08:41:41 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=T/h3=DH=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
- id 1kNXck-0004YO-TU
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 08:38:06 +0000
-Received: from mail-wm1-x331.google.com (unknown [2a00:1450:4864:20::331])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=FBlW=DH=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1kNXgD-0005QP-Pw
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 08:41:41 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id a37d56db-1f22-44a7-beaa-9e59eb985c00;
- Wed, 30 Sep 2020 08:38:05 +0000 (UTC)
-Received: by mail-wm1-x331.google.com with SMTP id s13so755774wmh.4
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2020 01:38:05 -0700 (PDT)
-Received: from CBGR90WXYV0 (54-240-197-232.amazon.com. [54.240.197.232])
- by smtp.gmail.com with ESMTPSA id o4sm1668903wru.55.2020.09.30.01.38.03
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Wed, 30 Sep 2020 01:38:04 -0700 (PDT)
+ id f24b9c6f-2f57-4b51-b76c-593640b66fad;
+ Wed, 30 Sep 2020 08:41:40 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 85CE9B2E0;
+ Wed, 30 Sep 2020 08:41:39 +0000 (UTC)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=T/h3=DH=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
-	id 1kNXck-0004YO-TU
-	for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 08:38:06 +0000
-X-Inumbo-ID: a37d56db-1f22-44a7-beaa-9e59eb985c00
-Received: from mail-wm1-x331.google.com (unknown [2a00:1450:4864:20::331])
+	(envelope-from <SRS0=FBlW=DH=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+	id 1kNXgD-0005QP-Pw
+	for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 08:41:41 +0000
+X-Inumbo-ID: f24b9c6f-2f57-4b51-b76c-593640b66fad
+Received: from mx2.suse.de (unknown [195.135.220.15])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id a37d56db-1f22-44a7-beaa-9e59eb985c00;
-	Wed, 30 Sep 2020 08:38:05 +0000 (UTC)
-Received: by mail-wm1-x331.google.com with SMTP id s13so755774wmh.4
-        for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2020 01:38:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:reply-to:to:cc:references:in-reply-to:subject:date:message-id
-         :mime-version:content-transfer-encoding:content-language
-         :thread-index;
-        bh=8zgyNxC9bCWcYFeLXMwfVk81Q2ucwjIx5m9A4HBqwxY=;
-        b=GkQ3vFgy/okJDNYzR8DnsPNFmQ30LFkMNpiPVG8h0m1JqgqqH+TVcS0J2N1+Ko1SKX
-         db2vRX5f6xSqUAiikEyMeAdJPOFTtTZP+Bo54LVnfCgUGgRwDCapUGaYWnbJOyyb4UM9
-         pRKnLyBeBhMVfthOYwGAetLsYnYRB1pnohRnvEJms2jcCVAQToXc7W82c754GdS9+w6f
-         w1Zil/rqawres68UY3HIAhh1excrPvzrHRJ4sspT0bfu9mK8Qf+ayu1egAtQuqZic1ox
-         9RJFx9xMCNMPpfn83aqL7bhMa37YqvWHr2/VgasWE6uSPuN554r5bRs+zs9o9V8ZV9Pf
-         L/uQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:reply-to:to:cc:references:in-reply-to
-         :subject:date:message-id:mime-version:content-transfer-encoding
-         :content-language:thread-index;
-        bh=8zgyNxC9bCWcYFeLXMwfVk81Q2ucwjIx5m9A4HBqwxY=;
-        b=B1SLfhppJAGFBIeNMMfmF/OiLFr/vYnz1AWMhmdo6qxRJk2f6EQhyBOIyGqAoMMESp
-         4aUYN3gJo2mdNXGrH7UR2XU1JUKC2AIlYlzxTUo3v8gN6RGMgjjiZADy18Z9lTx39ZZU
-         qxfaIUX3xVRVAXmOD+Fqhia5JDujcJgt1FQ362BMZGndQp67Gsb45eZZIn4QdKAmEDXM
-         PB3MgUxHPkqAC3FYst08CLmy2qe0IcP8tIZJ9h/Toq75l46TmwP+MRifK5Oylh7eocNJ
-         /fSFdiDHEhJLzC/ofTFHkh/OFpId/j8uwaJgS+gOQv4Hr3ZsjcPbIdSYJgfvz8ZFYrFq
-         Olnw==
-X-Gm-Message-State: AOAM532DsXh+LPohvsQt4CFe9EFsFSDGVUsUJsP3c1vjow9K6UgH2o+o
-	sBR9aMT/BJxmUnmG4adetsY=
-X-Google-Smtp-Source: ABdhPJx62Pfd+08VcmbwlRC2ewSCaTiiaQUiLqhhWbkFTyuCGKrYldbj0ZmmhHffhHrfVbk5kkNhsA==
-X-Received: by 2002:a1c:9d82:: with SMTP id g124mr433465wme.4.1601455084971;
-        Wed, 30 Sep 2020 01:38:04 -0700 (PDT)
-Received: from CBGR90WXYV0 (54-240-197-232.amazon.com. [54.240.197.232])
-        by smtp.gmail.com with ESMTPSA id o4sm1668903wru.55.2020.09.30.01.38.03
-        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Wed, 30 Sep 2020 01:38:04 -0700 (PDT)
-From: Paul Durrant <xadimgnik@gmail.com>
-X-Google-Original-From: "Paul Durrant" <paul@xen.org>
-Reply-To: <paul@xen.org>
-To: "'Jan Beulich'" <jbeulich@suse.com>
-Cc: <xen-devel@lists.xenproject.org>,
-	"'Andrew Cooper'" <andrew.cooper3@citrix.com>,
-	"'George Dunlap'" <George.Dunlap@eu.citrix.com>,
-	"'Ian Jackson'" <iwj@xenproject.org>,
-	"'Julien Grall'" <julien@xen.org>,
-	"'Wei Liu'" <wl@xen.org>,
-	"'Stefano Stabellini'" <sstabellini@kernel.org>
-References: <0d5ffc89-4b04-3e06-e950-f0cb171c7419@suse.com> <ff4c9cc4-c642-2f51-da36-c9883ab65e61@suse.com> <004501d696fc$37c969c0$a75c3d40$@xen.org> <2514b083-8f70-3898-eedb-88419c6f1d63@suse.com>
-In-Reply-To: <2514b083-8f70-3898-eedb-88419c6f1d63@suse.com>
-Subject: RE: [PATCH 10/12] evtchn/fifo: use stable fields when recording "last queue" information
-Date: Wed, 30 Sep 2020 09:38:03 +0100
-Message-ID: <006201d69705$038d9790$0aa8c6b0$@xen.org>
+	id f24b9c6f-2f57-4b51-b76c-593640b66fad;
+	Wed, 30 Sep 2020 08:41:40 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1601455300;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=K6RlJBpbGy9g+6rSsuOsBzSxm+CkzRz7lMr0onfEVqM=;
+	b=ZmrZVWxoI4ZC7qilB+a93R0Ya//hy6EnV9a4nv8vIUQxJPnzGgEWjgoM6Zuk/dMDDv7jLR
+	nk1o9uAO9N/NI3MIN0cCml5WqMX7z0IaqQSu6/NeSedbnL8+UrTH2vFS9Yf2NWmYbsgtLA
+	BWvINUPK6gopLTnfkm4zRK+o3QNL/Lo=
+Received: from relay2.suse.de (unknown [195.135.221.27])
+	by mx2.suse.de (Postfix) with ESMTP id 85CE9B2E0;
+	Wed, 30 Sep 2020 08:41:39 +0000 (UTC)
+Subject: Re: [PATCH 04/12] evtchn: evtchn_set_priority() needs to acquire the
+ per-channel lock
+To: paul@xen.org
+Cc: xen-devel@lists.xenproject.org,
+ 'Andrew Cooper' <andrew.cooper3@citrix.com>,
+ 'George Dunlap' <George.Dunlap@eu.citrix.com>,
+ 'Ian Jackson' <iwj@xenproject.org>, 'Julien Grall' <julien@xen.org>,
+ 'Wei Liu' <wl@xen.org>, 'Stefano Stabellini' <sstabellini@kernel.org>
+References: <0d5ffc89-4b04-3e06-e950-f0cb171c7419@suse.com>
+ <5b1700a8-7900-9450-1c21-323bcde1fccc@suse.com>
+ <004201d696fb$a5bd90b0$f138b210$@xen.org>
+ <7b2c9760-63d4-ce3c-b47f-20827f2049fc@suse.com>
+ <005f01d69704$c0c11130$42433390$@xen.org>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <2d2eb462-bd0e-a467-19a9-2bf2d55adcd8@suse.com>
+Date: Wed, 30 Sep 2020 10:41:39 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.0
 MIME-Version: 1.0
-Content-Type: text/plain;
-	charset="utf-8"
+In-Reply-To: <005f01d69704$c0c11130$42433390$@xen.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-X-Mailer: Microsoft Outlook 16.0
-Content-Language: en-gb
-Thread-Index: AQHyn6bUUfstxLK2yDInWW9SM20ChgLG8CiyAeDVmyICds5PAqkP1a2w
 
-> -----Original Message-----
-> From: Jan Beulich <jbeulich@suse.com>
-> Sent: 30 September 2020 09:35
-> To: paul@xen.org
-> Cc: xen-devel@lists.xenproject.org; 'Andrew Cooper' <andrew.cooper3@citrix.com>; 'George Dunlap'
-> <George.Dunlap@eu.citrix.com>; 'Ian Jackson' <iwj@xenproject.org>; 'Julien Grall' <julien@xen.org>;
-> 'Wei Liu' <wl@xen.org>; 'Stefano Stabellini' <sstabellini@kernel.org>
-> Subject: Re: [PATCH 10/12] evtchn/fifo: use stable fields when recording "last queue" information
+On 30.09.2020 10:36, Paul Durrant wrote:
+>> From: Jan Beulich <jbeulich@suse.com>
+>> Sent: 30 September 2020 09:32
+>>
+>> On 30.09.2020 09:31, Paul Durrant wrote:
+>>>> From: Jan Beulich <jbeulich@suse.com>
+>>>> Sent: 30 September 2020 07:42
+>>>>
+>>>> On 29.09.2020 18:31, Paul Durrant wrote:
+>>>>>> From: Xen-devel <xen-devel-bounces@lists.xenproject.org> On Behalf Of Jan Beulich
+>>>>>> Sent: 28 September 2020 11:58
+>>>>>>
+>>>>>> evtchn_fifo_set_pending() (invoked with the per-channel lock held) has
+>>>>>> two uses of the channel's priority field.
+>>>>>
+>>>>> AFAICT it is invoked with only the sending end's lock held...
+>>>>>
+>>>>>> The field gets updated by
+>>>>>> evtchn_fifo_set_priority() with only the per-domain event_lock held,
+>>>>>> i.e. the two reads may observe two different values. While the 2nd use
+>>>>>> could - afaict - in principle be replaced by q->priority, I think
+>>>>>> evtchn_set_priority() should acquire the per-channel lock in any event.
+>>>>>>
+>>>>>
+>>>>> ... so how is this going to help?
+>>>>
+>>>> I guess the reasoning needs to change here - it should focus solely
+>>>> on using the finer grained lock here (as holding the per-domain one
+>>>> doesn't help anyway). It would then be patch 10 which addresses the
+>>>> (FIFO-specific) concern of possibly reading inconsistent values.
+>>>>
+>>>
+>>> Yes, it looks like patch #10 should ensure consistency.
+>>>
+>>> Prior to ad34d0656fc at least the first layer of calls done in evtchn_send() didn't take the evtchn
+>> itself as an arg. Of course, evtchn_set_pending() then looked up the evtchn and passed it to
+>> evtchn_port_set_pending() without any locking in the interdomain case. I wonder whether, to make
+>> reasoning easier, there ought to be a rule that ABI entry points are always called with the evtchn
+>> lock held?
+>>
+>> What do you mean by "ABI entry points" here? To me this would sound
+>> like what's directly accessible to guests, but that's hardly what
+>> you mean. Do you perhaps mean the hooks in struct evtchn_port_ops?
 > 
-> On 30.09.2020 09:35, Paul Durrant wrote:
-> >> From: Xen-devel <xen-devel-bounces@lists.xenproject.org> On Behalf Of Jan Beulich
-> >> Sent: 28 September 2020 12:02
-> >>
-> >> Both evtchn->priority and evtchn->notify_vcpu_id could, prior to recent
-> >> locking adjustments, change behind the back of
-> >> evtchn_fifo_set_pending(). Neither the queue's priority nor the vCPU's
-> >> vcpu_id fields have similar properties, so they seem better suited for
-> >> the purpose. In particular they reflect the respective evtchn fields'
-> >> values at the time they were used to determine queue and vCPU.
-> >>
-> >> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-> >
-> > I think these changes make the code clearer anyway.
-> >
-> > Reviewed-by: Paul Durrant <paul@xen.org>
+> Yes, by ABI I mean 'fifo' or '2l'. (I guess that 'ABI' is just the name I chose to refer to them in the Windows PV driver code).
 > 
-> Thanks. With the change of description in the earlier patch, and with
-> this one possibly going in ahead of it, I'll massage the description
-> here somewhat, I guess.
+>> As per the comment that got added there recently, the locking
+>> unfortunately is less consistent there.
+>>
 > 
+> I looked to me that most functions were entered with channel lock
+> held so wondered whether it could be a rule.
 
-That's fine.
+Well - especially for the sending paths it may be _a_ per-channel lock,
+not _the_ one. While putting together the XSA fixed I had looked some at
+the possibility of having a simple rule here, but acquiring _the_ lock
+on the interdomain sending path looked to be complicating this path
+quite a bit, when it specifically should be as lightweight as possible.
 
-  Paul
-
+Jan
 
