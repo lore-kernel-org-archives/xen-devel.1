@@ -2,26 +2,25 @@ Return-Path: <SRS0=Shbi=DH=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.5 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-5.5 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 53998C4727E
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 14:46:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2643FC4727E
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 14:49:01 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EB71D2076B
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 14:46:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EB71D2076B
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id D22FF2076B
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 14:49:00 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D22FF2076B
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.788.2627 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.791.2639 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNdMv-0003V0-82; Wed, 30 Sep 2020 14:46:09 +0000
+	id 1kNdPR-0003eI-MA; Wed, 30 Sep 2020 14:48:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 788.2627; Wed, 30 Sep 2020 14:46:09 +0000
+Received: by outflank-mailman (output) from mailman id 791.2639; Wed, 30 Sep 2020 14:48:45 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,86 +35,76 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNdMv-0003Ut-4y; Wed, 30 Sep 2020 14:46:09 +0000
-Received: by outflank-mailman (input) for mailman id 788;
- Wed, 30 Sep 2020 14:46:07 +0000
+	id 1kNdPR-0003eB-Ij; Wed, 30 Sep 2020 14:48:45 +0000
+Received: by outflank-mailman (input) for mailman id 791;
+ Wed, 30 Sep 2020 14:48:44 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=SQnX=DH=gmail.com=wei.liu.xen@srs-us1.protection.inumbo.net>)
- id 1kNdMt-0003Un-M9
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 14:46:07 +0000
-Received: from mail-wr1-f67.google.com (unknown [209.85.221.67])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=rf9I=DH=lst.de=hch@srs-us1.protection.inumbo.net>)
+ id 1kNdPQ-0003e6-KK
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 14:48:44 +0000
+Received: from verein.lst.de (unknown [213.95.11.211])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 5cbe446b-ae96-4c96-87e8-5f24b9f6e30f;
- Wed, 30 Sep 2020 14:46:05 +0000 (UTC)
-Received: by mail-wr1-f67.google.com with SMTP id t10so2134584wrv.1
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2020 07:46:05 -0700 (PDT)
-Received: from liuwe-devbox-debian-v2 ([51.145.34.42])
- by smtp.gmail.com with ESMTPSA id s12sm2961766wmd.20.2020.09.30.07.46.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Sep 2020 07:46:03 -0700 (PDT)
+ id 7015b32e-c46d-4715-a212-62ce281ab1dc;
+ Wed, 30 Sep 2020 14:48:43 +0000 (UTC)
+Received: by verein.lst.de (Postfix, from userid 2407)
+ id 873FE6736F; Wed, 30 Sep 2020 16:48:39 +0200 (CEST)
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=SQnX=DH=gmail.com=wei.liu.xen@srs-us1.protection.inumbo.net>)
-	id 1kNdMt-0003Un-M9
-	for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 14:46:07 +0000
-X-Inumbo-ID: 5cbe446b-ae96-4c96-87e8-5f24b9f6e30f
-Received: from mail-wr1-f67.google.com (unknown [209.85.221.67])
+	(envelope-from <SRS0=rf9I=DH=lst.de=hch@srs-us1.protection.inumbo.net>)
+	id 1kNdPQ-0003e6-KK
+	for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 14:48:44 +0000
+X-Inumbo-ID: 7015b32e-c46d-4715-a212-62ce281ab1dc
+Received: from verein.lst.de (unknown [213.95.11.211])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 5cbe446b-ae96-4c96-87e8-5f24b9f6e30f;
-	Wed, 30 Sep 2020 14:46:05 +0000 (UTC)
-Received: by mail-wr1-f67.google.com with SMTP id t10so2134584wrv.1
-        for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2020 07:46:05 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to:user-agent;
-        bh=Cw/7ZLzVX3TzLqAUggwPXAjDCxUT7OK3tLgh6X+FskA=;
-        b=Xy9vOYDQz4ry6lEWLFX6z2NWQoCaWS7ucnJapa/Ig1mfNSu1n0wOeemdpbmmKW3G5A
-         +gSy+E0i4alv0oamNih8Waj8mZnazcygebdbVh5P2q18uYexAdcQL+naN4s4uuP1Kj8o
-         S+eSEUgnXWi/wY231+CD3mhgDWPR21/IWrUSOLOgpbu5+pHcGZejmSGywTzcMlpkatL3
-         Qz9YSkPjr4sHnbrhk4gLJZoyPOnS4pfKyl2/VKbge8i9d17TIhnV0UoVKtNtmFCwCwsE
-         yC9IE+YtpGfSZIBqcKJ038zmGC84mImfzyZsR7N293hRtAAPlycvi0E1B2msYHVeXqom
-         TDcw==
-X-Gm-Message-State: AOAM532hC0O2mwipPJiv9lfXK5nNHcPWvrIGe/AAUB8KUoF29q+KESJN
-	IPfLDcDH0hTCY6IjuBkTkoc=
-X-Google-Smtp-Source: ABdhPJwFvGmUYxNh3Gao3b9c8mHwE5zLUMIzWiM1b303DjVhLFrpUTxKW+21dQfSiyuQGM5yaSbkTg==
-X-Received: by 2002:a5d:43cf:: with SMTP id v15mr3632088wrr.269.1601477164317;
-        Wed, 30 Sep 2020 07:46:04 -0700 (PDT)
-Received: from liuwe-devbox-debian-v2 ([51.145.34.42])
-        by smtp.gmail.com with ESMTPSA id s12sm2961766wmd.20.2020.09.30.07.46.03
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 30 Sep 2020 07:46:03 -0700 (PDT)
-Date: Wed, 30 Sep 2020 14:46:02 +0000
-From: Wei Liu <wl@xen.org>
-To: Paul Durrant <paul@xen.org>
-Cc: xen-devel@lists.xenproject.org, Paul Durrant <pdurrant@amazon.com>,
-	Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wl@xen.org>
-Subject: Re: [PATCH v9 8/8] tools/libxc: add DOMAIN_CONTEXT records to the
- migration stream...
-Message-ID: <20200930144602.m225dn7t4yajwwi3@liuwe-devbox-debian-v2>
-References: <20200924131030.1876-1-paul@xen.org>
- <20200924131030.1876-9-paul@xen.org>
+	id 7015b32e-c46d-4715-a212-62ce281ab1dc;
+	Wed, 30 Sep 2020 14:48:43 +0000 (UTC)
+Received: by verein.lst.de (Postfix, from userid 2407)
+	id 873FE6736F; Wed, 30 Sep 2020 16:48:39 +0200 (CEST)
+Date: Wed, 30 Sep 2020 16:48:39 +0200
+From: Christoph Hellwig <hch@lst.de>
+To: Joonas Lahtinen <joonas.lahtinen@linux.intel.com>
+Cc: Christoph Hellwig <hch@lst.de>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>,
+	Stephen Rothwell <sfr@canb.auug.org.au>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Juergen Gross <jgross@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Jani Nikula <jani.nikula@linux.intel.com>,
+	Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+	Chris Wilson <chris@chris-wilson.co.uk>,
+	Matthew Auld <matthew.auld@intel.com>,
+	Rodrigo Vivi <rodrigo.vivi@intel.com>,
+	Minchan Kim <minchan@kernel.org>,
+	Matthew Wilcox <willy@infradead.org>,
+	Nitin Gupta <ngupta@vflare.org>, x86@kernel.org,
+	xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org,
+	intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+	linux-mm@kvack.org
+Subject: Re: remove alloc_vm_area v2
+Message-ID: <20200930144839.GA897@lst.de>
+References: <20200924135853.875294-1-hch@lst.de> <20200925194349.d0ee9dbedb2ec48f0bfcd2ec@linux-foundation.org> <20200926062959.GA3427@lst.de> <160128801808.6464.1013594053120198786@jlahtine-mobl.ger.corp.intel.com> <20200928123741.GA4999@lst.de> <160138340987.15771.13645983702040612672@jlahtine-mobl.ger.corp.intel.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20200924131030.1876-9-paul@xen.org>
-User-Agent: NeoMutt/20180716
+In-Reply-To: <160138340987.15771.13645983702040612672@jlahtine-mobl.ger.corp.intel.com>
+User-Agent: Mutt/1.5.17 (2007-11-01)
 
-On Thu, Sep 24, 2020 at 02:10:30PM +0100, Paul Durrant wrote:
-> From: Paul Durrant <pdurrant@amazon.com>
+On Tue, Sep 29, 2020 at 03:43:30PM +0300, Joonas Lahtinen wrote:
+> Hmm, those are both committed after our last -next pull request, so they
+> would normally only target next merge window. drm-next closes the merge
+> window around -rc5 already.
 > 
-> ... and bump the version.
+> But, in this specific case those are both Fixes: patches with Cc: stable,
+> so they should be pulled into drm-intel-next-fixes PR.
 > 
-> This patch implements version 4 of the migration stream by adding the code
-> necessary to save and restore DOMAIN_CONTEXT records, and removing the code
-> to save the SHARED_INFO and TSC_INFO records (as these are deprecated in
-> version 4).
-> 
-> Signed-off-by: Paul Durrant <pdurrant@amazon.com>
+> Rodrigo, can you cherry-pick those patches to -next-fixes that you send
+> to Dave?
 
-Acked-by: Wei Liu <wl@xen.org>
-
-Again, I think Andrew should have a look at this as well.
+They still haven't made it to linux-next.  I think for now I'll just
+rebase without them again and then you can handle the conflicts for
+5.11.
 
