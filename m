@@ -2,28 +2,28 @@ Return-Path: <SRS0=Shbi=DH=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-7.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3B0F4C4727E
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 13:45:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8D559C4727E
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 13:46:09 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C3C63206B7
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 13:45:09 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 2EEE7206C1
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 13:46:08 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="ZepEBaJ0"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C3C63206B7
+	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="YiNM4f/4"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2EEE7206C1
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.717.2427 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.720.2439 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNcPg-0004r9-Ut; Wed, 30 Sep 2020 13:44:56 +0000
+	id 1kNcQh-00053D-A0; Wed, 30 Sep 2020 13:45:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 717.2427; Wed, 30 Sep 2020 13:44:56 +0000
+Received: by outflank-mailman (output) from mailman id 720.2439; Wed, 30 Sep 2020 13:45:59 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,165 +38,108 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNcPg-0004r2-Rm; Wed, 30 Sep 2020 13:44:56 +0000
-Received: by outflank-mailman (input) for mailman id 717;
- Wed, 30 Sep 2020 13:44:56 +0000
+	id 1kNcQh-000536-6T; Wed, 30 Sep 2020 13:45:59 +0000
+Received: by outflank-mailman (input) for mailman id 720;
+ Wed, 30 Sep 2020 13:45:58 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=sFQy=DH=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1kNcPg-0004qv-2Q
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 13:44:56 +0000
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+ id 1kNcQg-00052v-5r
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 13:45:58 +0000
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 084cbfe0-67fa-4484-94f4-a274a3f87eea;
- Wed, 30 Sep 2020 13:44:55 +0000 (UTC)
+ id fe83335b-cb33-4138-add6-4174f5b7dbf7;
+ Wed, 30 Sep 2020 13:45:57 +0000 (UTC)
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=sFQy=DH=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
-	id 1kNcPg-0004qv-2Q
-	for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 13:44:56 +0000
-X-Inumbo-ID: 084cbfe0-67fa-4484-94f4-a274a3f87eea
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+	id 1kNcQg-00052v-5r
+	for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 13:45:58 +0000
+X-Inumbo-ID: fe83335b-cb33-4138-add6-4174f5b7dbf7
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 084cbfe0-67fa-4484-94f4-a274a3f87eea;
-	Wed, 30 Sep 2020 13:44:55 +0000 (UTC)
+	id fe83335b-cb33-4138-add6-4174f5b7dbf7;
+	Wed, 30 Sep 2020 13:45:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1601473495;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version;
-  bh=HC6SnQwiIswEb/tmrOppoZWsZUS9u8+dTDPCo4DGq8I=;
-  b=ZepEBaJ0SJJpzHXcF7EBDR9ROfxHwzpwnm2ICkLY88P8TDeVF4WQ12vz
-   6zthn7K0szMHSjDH0/Cp3Zdl+OBB0Sdq4B239usuj5QGuPpXogctfSCoe
-   l4N1ZjH5OeRkfrVC04N6ya1ryJZ1alhTbsN4xWZsnuYYjLGR56Bdo2MWv
-   Y=;
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: /h0miN674r1cikaV0thv3EGCa7qVSECvQKjDt+gyFnbM0tDhCHMzzCZ5oOeyolWdW/EZupFPYY
- cBnxeC91Cl1glCLnYd8SqT355EnI09UwOjlTU6priH2NmkOeqFfnBIdQ02v/NLj607SnJtLjHW
- oaL2NTx73/HUfWrVr9KLr9NLAbkJh6KG8Z/J32dFzQfmjQ5B48b4v5C9azeqMb6SGCtr7+Ncni
- 6mnK0dPiQRIrg2FC+gAYVAcdg/q6JdRlOG0E9EUKKEJEjxjxg5LJcKI+q34j1JfaA9blqBU9KI
- Okk=
+  d=citrix.com; s=securemail; t=1601473557;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=TZ9x/Ohzoh4n1ndBYbApyLx+gvyJLcECZULnS9hqokI=;
+  b=YiNM4f/4N8nnSf1t2uKyxzRzZENuoe1D+P5CntD4CfAufsJqAAFcoarA
+   J2pLsQA1FwQOGENRQ+NcyzlGe0myCH5vmlt9XLgPrRBY8zANdEjCmFcZv
+   CKDl+JFcavHEViEGoU1GEfhnIhs8rTawNFP6xp71yLTzNd8QpQM1uHDS+
+   k=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: Oqt/MOi9iU3AQhWJHV77xFD9vwCmaApZehT6+VP0GGT7oA1+4mh/Teh1vg4grb/isfar6v3b36
+ f42i52328a5XZ1PT+JfsO+W0ynUjQWN9T9gOLL+UBwlkt4G1txC5hwiVc92jtRnIZARTwSJeNE
+ 9ZxtYD/61tk6eY7ps1CBCYCkg60yC2602ZuXEb3FCnx6eRnj6zI9KLCoUApeLzYZSv3ORcLUS7
+ KmrcJtClzzmp+Yd60r5wsLpf4izAXzEAmAGpitGzAqRlUf9xt72EX0UgiEUfveAi2JiHpu7UWA
+ glo=
 X-SBRS: None
-X-MesageID: 28058130
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 28239629
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
 X-IronPort-AV: E=Sophos;i="5.77,322,1596513600"; 
-   d="scan'208";a="28058130"
+   d="scan'208";a="28239629"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson
-	<iwj@xenproject.org>, Wei Liu <wl@xen.org>, Anthony PERARD
-	<anthony.perard@citrix.com>
-Subject: [PATCH 4/8] tools/cpuid: Plumb nested_virt down into xc_cpuid_apply_policy()
-Date: Wed, 30 Sep 2020 14:42:44 +0100
-Message-ID: <20200930134248.4918-5-andrew.cooper3@citrix.com>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
+	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Ian Jackson
+	<iwj@xenproject.org>, Jun Nakajima <jun.nakajima@intel.com>, Kevin Tian
+	<kevin.tian@intel.com>
+Subject: [PATCH 0/8] x86: Untangle Nested virt and CPUID interactions
+Date: Wed, 30 Sep 2020 14:42:40 +0100
+Message-ID: <20200930134248.4918-1-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20200930134248.4918-1-andrew.cooper3@citrix.com>
-References: <20200930134248.4918-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-Nested Virt is the final special case in legacy CPUID handling.  Pass the
-(poorly named) nested_hvm setting down into xc_cpuid_apply_policy() to break
-the semantic dependency on HVM_PARAM_NESTEDHVM.
+This is the final bit of untangling for existing CPUID handling, as well as
+the logical next step in nested-virt work to start making it usable.
 
-No functional change.
+Patch 4 was previously posted in isolation.  It is unchanged in this series.
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Ian Jackson <iwj@xenproject.org>
-CC: Wei Liu <wl@xen.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>
----
- tools/libs/ctrl/include/xenctrl.h |  4 ++--
- tools/libs/guest/xg_cpuid_x86.c   | 14 +++++---------
- tools/libxl/libxl_cpuid.c         |  3 ++-
- 3 files changed, 9 insertions(+), 12 deletions(-)
+Andrew Cooper (8):
+  tools/libxl: Simplify DOMCTL_CDF_ flags handling in libxl__domain_make()
+  xen/domctl: Simplify DOMCTL_CDF_ checking logic
+  xen/domctl: Introduce and use XEN_DOMCTL_CDF_nested_virt
+  tools/cpuid: Plumb nested_virt down into xc_cpuid_apply_policy()
+  x86/hvm: Obsolete the use of HVM_PARAM_NESTEDHVM
+  xen/xsm: Drop xsm_hvm_param_nested()
+  x86/hvm: Drop restore boolean from hvm_cr4_guest_valid_bits()
+  x86/cpuid: Move VMX/SVM out of the default policy
 
-diff --git a/tools/libs/ctrl/include/xenctrl.h b/tools/libs/ctrl/include/xenctrl.h
-index 73e9535fc8..ba70bec9c4 100644
---- a/tools/libs/ctrl/include/xenctrl.h
-+++ b/tools/libs/ctrl/include/xenctrl.h
-@@ -1826,7 +1826,7 @@ struct xc_xend_cpuid {
-  * cases, and the generated policy must be compatible with a 4.13.
-  *
-  * Either pass a full new @featureset (and @nr_features), or adjust individual
-- * features (@pae, @itsc).
-+ * features (@pae, @itsc, @nested_virt).
-  *
-  * Then (optionally) apply legacy XEND overrides (@xend) to the result.
-  */
-@@ -1834,7 +1834,7 @@ int xc_cpuid_apply_policy(xc_interface *xch,
-                           uint32_t domid, bool restore,
-                           const uint32_t *featureset,
-                           unsigned int nr_features, bool pae, bool itsc,
--                          const struct xc_xend_cpuid *xend);
-+                          bool nested_virt, const struct xc_xend_cpuid *xend);
- int xc_mca_op(xc_interface *xch, struct xen_mc *mc);
- int xc_mca_op_inject_v2(xc_interface *xch, unsigned int flags,
-                         xc_cpumap_t cpumap, unsigned int nr_cpus);
-diff --git a/tools/libs/guest/xg_cpuid_x86.c b/tools/libs/guest/xg_cpuid_x86.c
-index dc50106975..aae6931a11 100644
---- a/tools/libs/guest/xg_cpuid_x86.c
-+++ b/tools/libs/guest/xg_cpuid_x86.c
-@@ -427,7 +427,7 @@ static int xc_cpuid_xend_policy(
- 
- int xc_cpuid_apply_policy(xc_interface *xch, uint32_t domid, bool restore,
-                           const uint32_t *featureset, unsigned int nr_features,
--                          bool pae, bool itsc,
-+                          bool pae, bool itsc, bool nested_virt,
-                           const struct xc_xend_cpuid *xend)
- {
-     int rc;
-@@ -559,7 +559,11 @@ int xc_cpuid_apply_policy(xc_interface *xch, uint32_t domid, bool restore,
-         p->extd.itsc = itsc;
- 
-         if ( di.hvm )
-+        {
-             p->basic.pae = pae;
-+            p->basic.vmx = nested_virt;
-+            p->extd.svm = nested_virt;
-+        }
-     }
- 
-     if ( !di.hvm )
-@@ -625,14 +629,6 @@ int xc_cpuid_apply_policy(xc_interface *xch, uint32_t domid, bool restore,
-             }
-             break;
-         }
--
--        /*
--         * These settings are necessary to cause earlier HVM_PARAM_NESTEDHVM
--         * to be reflected correctly in CPUID.  Xen will discard these bits if
--         * configuration hasn't been set for the domain.
--         */
--        p->basic.vmx = true;
--        p->extd.svm = true;
-     }
- 
-     rc = x86_cpuid_copy_to_buffer(p, leaves, &nr_leaves);
-diff --git a/tools/libxl/libxl_cpuid.c b/tools/libxl/libxl_cpuid.c
-index f54eb83a90..08e85dcffb 100644
---- a/tools/libxl/libxl_cpuid.c
-+++ b/tools/libxl/libxl_cpuid.c
-@@ -422,6 +422,7 @@ void libxl__cpuid_legacy(libxl_ctx *ctx, uint32_t domid, bool restore,
- {
-     bool pae = true;
-     bool itsc;
-+    bool nested_virt = libxl_defbool_val(info->nested_hvm);
- 
-     /*
-      * For PV guests, PAE is Xen-controlled (it is the 'p' that differentiates
-@@ -452,7 +453,7 @@ void libxl__cpuid_legacy(libxl_ctx *ctx, uint32_t domid, bool restore,
-             info->tsc_mode == LIBXL_TSC_MODE_ALWAYS_EMULATE);
- 
-     xc_cpuid_apply_policy(ctx->xch, domid, restore, NULL, 0,
--                          pae, itsc, info->cpuid);
-+                          pae, itsc, nested_virt, info->cpuid);
- }
- 
- static const char *input_names[2] = { "leaf", "subleaf" };
+ tools/flask/policy/modules/xen.if           |  2 +-
+ tools/libs/ctrl/include/xenctrl.h           |  4 +--
+ tools/libs/guest/xg_cpuid_x86.c             | 14 ++++------
+ tools/libxl/libxl_cpuid.c                   |  3 +-
+ tools/libxl/libxl_create.c                  | 13 ++++++---
+ tools/libxl/libxl_x86.c                     |  5 ----
+ tools/ocaml/libs/xc/xenctrl.ml              |  1 +
+ tools/ocaml/libs/xc/xenctrl.mli             |  1 +
+ xen/arch/x86/domain.c                       | 14 ++++++++--
+ xen/arch/x86/hvm/domain.c                   |  2 +-
+ xen/arch/x86/hvm/hvm.c                      | 41 ++++++---------------------
+ xen/arch/x86/hvm/svm/svmdebug.c             |  6 ++--
+ xen/arch/x86/hvm/vmx/vmx.c                  |  2 +-
+ xen/arch/x86/hvm/vmx/vvmx.c                 |  2 +-
+ xen/common/domain.c                         | 43 +++++++++++++++++------------
+ xen/include/asm-x86/hvm/hvm.h               |  2 +-
+ xen/include/asm-x86/hvm/nestedhvm.h         |  5 ++--
+ xen/include/public/arch-x86/cpufeatureset.h |  4 +--
+ xen/include/public/domctl.h                 |  4 ++-
+ xen/include/public/hvm/params.h             |  4 +--
+ xen/include/xsm/dummy.h                     |  6 ----
+ xen/include/xsm/xsm.h                       |  6 ----
+ xen/xsm/dummy.c                             |  1 -
+ xen/xsm/flask/hooks.c                       |  6 ----
+ xen/xsm/flask/policy/access_vectors         |  2 --
+ 25 files changed, 81 insertions(+), 112 deletions(-)
+
 -- 
 2.11.0
 
