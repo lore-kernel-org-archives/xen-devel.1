@@ -2,28 +2,28 @@ Return-Path: <SRS0=Shbi=DH=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=unavailable autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-11.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 441CAC4727C
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 17:52:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 50400C4741F
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 17:52:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EC3DD20706
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 17:52:33 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 086FE20706
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 17:52:39 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="M3Tbb4QD"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EC3DD20706
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="S0V1ilHw"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 086FE20706
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.859.2975 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.860.2987 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNgHA-0005lY-Me; Wed, 30 Sep 2020 17:52:24 +0000
+	id 1kNgHG-0005rU-1k; Wed, 30 Sep 2020 17:52:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 859.2975; Wed, 30 Sep 2020 17:52:24 +0000
+Received: by outflank-mailman (output) from mailman id 860.2987; Wed, 30 Sep 2020 17:52:29 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNgHA-0005lQ-IT; Wed, 30 Sep 2020 17:52:24 +0000
-Received: by outflank-mailman (input) for mailman id 859;
- Wed, 30 Sep 2020 17:52:23 +0000
+	id 1kNgHF-0005rM-TN; Wed, 30 Sep 2020 17:52:29 +0000
+Received: by outflank-mailman (input) for mailman id 860;
+ Wed, 30 Sep 2020 17:52:28 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=m0D6=DH=casper.srs.infradead.org=batv+fa6e45c137c1199df5c4+6247+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1kNgH9-0005QF-P2
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 17:52:23 +0000
+ id 1kNgHE-0005QF-PL
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 17:52:28 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3dccd41c-1fe1-4b8a-add8-0a44d2a61810;
+ id 2f6f9659-0d07-4c54-97ec-383d34969184;
  Wed, 30 Sep 2020 17:51:57 +0000 (UTC)
 Received: from [2001:4bb8:180:7b62:c70:4a89:bc61:4] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kNgGT-0001CE-Ri; Wed, 30 Sep 2020 17:51:42 +0000
+ id 1kNgGM-0001Ax-Rh; Wed, 30 Sep 2020 17:51:35 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=m0D6=DH=casper.srs.infradead.org=batv+fa6e45c137c1199df5c4+6247+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1kNgH9-0005QF-P2
-	for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 17:52:23 +0000
-X-Inumbo-ID: 3dccd41c-1fe1-4b8a-add8-0a44d2a61810
+	id 1kNgHE-0005QF-PL
+	for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 17:52:28 +0000
+X-Inumbo-ID: 2f6f9659-0d07-4c54-97ec-383d34969184
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 3dccd41c-1fe1-4b8a-add8-0a44d2a61810;
+	id 2f6f9659-0d07-4c54-97ec-383d34969184;
 	Wed, 30 Sep 2020 17:51:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
-	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
-	Content-Type:Content-ID:Content-Description;
-	bh=ggovDsPrY2tPPXwEEhp2BvATO0PndCnAzmG0yva7UFo=; b=M3Tbb4QDvZEB1jbyEf0zJWIKkr
-	nsFTLnSIZqI8QYGmIiSkEVuDgyTbX11zpin6j4Xj4PAlzHD6EPbIFh4MYGfKcFDXGaIq9esb38glz
-	BfxJg0Xoz/e4RdpmmFDnE5RCczkS/ME5mvb2gDl9n8kUi1sdaXtqZ5hZECsmk7hMidHWB9u0habxP
-	bp5hPzRBRk4x3Rr8nBHcLZRwnezNOP5GK53mekiKxs7AbqdDPINnDba35L2IW+Wwca7AuUcGDzHpx
-	WSaLvg3gVpyU3iVkbJPZCTDRLYwL+qFsKIZaO3/DfALtS7c3FigAmDk7P1enBSi89Kh7QrWQmC7C8
-	lvDZP1tA==;
+	Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+	Content-Description:In-Reply-To:References;
+	bh=07YiCh12zxNb+LfRUHOuc0cOw1/oVX+fVA/5cFMfxTE=; b=S0V1ilHwkGgbbTo2M350wdoI3C
+	7lLk66poahAwcksIO1u1LSSIxtPdZ4ajUF7mmZOuiAy4VKWO2BOkh4jmJEgoz+vYl+pxKKmn1L62/
+	cR5OxZR0ZcX8CtFM/89ZjqDZ90kkZgAZeV5ujQjb8OMvbUfBgu6ZTJ+NIRxRgtKUnqSF7fUiBFUNQ
+	fR4r0qk8dSD+qYuIsfTRM+UXKnS/TE4Da87IJGDT47CsLpsTEzDQLDabopXoZRINzBGFNcHo0bZYh
+	hOkxAjzXXVDPEnTyi8auHmOSpSvIRbGjcSC4yKDNp4s2Ir9GCQHS7afLyB8VzQkH75/ca3S3ZtESd
+	mLLKt94A==;
 Received: from [2001:4bb8:180:7b62:c70:4a89:bc61:4] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1kNgGT-0001CE-Ri; Wed, 30 Sep 2020 17:51:42 +0000
+	id 1kNgGM-0001Ax-Rh; Wed, 30 Sep 2020 17:51:35 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Andrew Morton <akpm@linux-foundation.org>
 Cc: Peter Zijlstra <peterz@infradead.org>,
@@ -97,48 +97,54 @@ Cc: Peter Zijlstra <peterz@infradead.org>,
 	intel-gfx@lists.freedesktop.org,
 	dri-devel@lists.freedesktop.org,
 	linux-mm@kvack.org
-Subject: [PATCH 05/10] zsmalloc: switch from alloc_vm_area to get_vm_area
-Date: Wed, 30 Sep 2020 19:51:28 +0200
-Message-Id: <20200930175133.1252382-6-hch@lst.de>
+Subject: remove alloc_vm_area v3
+Date: Wed, 30 Sep 2020 19:51:23 +0200
+Message-Id: <20200930175133.1252382-1-hch@lst.de>
 X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20200930175133.1252382-1-hch@lst.de>
-References: <20200930175133.1252382-1-hch@lst.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-Just manually pre-fault the PTEs using apply_to_page_range.
+Hi Andrew,
 
-Co-developed-by: Minchan Kim <minchan@kernel.org>
-Signed-off-by: Christoph Hellwig <hch@lst.de>
----
- mm/zsmalloc.c | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
+this series removes alloc_vm_area, which was left over from the big
+vmalloc interface rework.  It is a rather arkane interface, basicaly
+the equivalent of get_vm_area + actually faulting in all PTEs in
+the allocated area.  It was originally addeds for Xen (which isn't
+modular to start with), and then grew users in zsmalloc and i915
+which seems to mostly qualify as abuses of the interface, especially
+for i915 as a random driver should not set up PTE bits directly.
 
-diff --git a/mm/zsmalloc.c b/mm/zsmalloc.c
-index c36fdff9a37131..918c7b019b3d78 100644
---- a/mm/zsmalloc.c
-+++ b/mm/zsmalloc.c
-@@ -1122,10 +1122,16 @@ static inline int __zs_cpu_up(struct mapping_area *area)
- 	 */
- 	if (area->vm)
- 		return 0;
--	area->vm = alloc_vm_area(PAGE_SIZE * 2, NULL);
-+	area->vm = get_vm_area(PAGE_SIZE * 2, 0);
- 	if (!area->vm)
- 		return -ENOMEM;
--	return 0;
-+
-+	/*
-+	 * Populate ptes in advance to avoid pte allocation with GFP_KERNEL
-+	 * in non-preemtible context of zs_map_object.
-+	 */
-+	return apply_to_page_range(&init_mm, (unsigned long)area->vm->addr,
-+			PAGE_SIZE * 2, NULL, NULL);
- }
- 
- static inline void __zs_cpu_down(struct mapping_area *area)
--- 
-2.28.0
+A git tree is also available here:
 
+    git://git.infradead.org/users/hch/misc.git alloc_vm_area
+
+Gitweb:
+
+    http://git.infradead.org/users/hch/misc.git/shortlog/refs/heads/alloc_vm_area
+
+Changes since v2:
+ - add another missing i initialization
+ - rebased to mainline instead of drm-tip again
+
+Changes since v1:
+ - fix a bug in the zsmalloc changes
+ - fix a bug and rebase to include the recent changes in i915
+ - add a new vmap flag that allows to free the page array and pages
+   using vfree
+ - add a vfree documentation updated from Matthew
+
+Diffstat:
+ arch/x86/xen/grant-table.c                |   27 ++++--
+ drivers/gpu/drm/i915/Kconfig              |    1 
+ drivers/gpu/drm/i915/gem/i915_gem_pages.c |  131 +++++++++++++-----------------
+ drivers/gpu/drm/i915/gt/shmem_utils.c     |   76 ++++-------------
+ drivers/xen/xenbus/xenbus_client.c        |   30 +++---
+ include/linux/vmalloc.h                   |    7 -
+ mm/Kconfig                                |    3 
+ mm/memory.c                               |   16 ++-
+ mm/nommu.c                                |    7 -
+ mm/vmalloc.c                              |  123 ++++++++++++++--------------
+ mm/zsmalloc.c                             |   10 +-
+ 11 files changed, 200 insertions(+), 231 deletions(-)
 
