@@ -2,26 +2,28 @@ Return-Path: <SRS0=Shbi=DH=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.1 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-5.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
-	autolearn_force=no version=3.4.0
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B08FDC4727E
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 09:40:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5D998C4727E
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 09:42:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3D6362075F
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 09:40:03 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3D6362075F
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=epam.com
+	by mail.kernel.org (Postfix) with ESMTPS id E7A462075F
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 09:42:37 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="g4xVF3et"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E7A462075F
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.513.1680 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.522.1693 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNYaP-0002Kj-4k; Wed, 30 Sep 2020 09:39:45 +0000
+	id 1kNYcz-0003An-Ny; Wed, 30 Sep 2020 09:42:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 513.1680; Wed, 30 Sep 2020 09:39:45 +0000
+Received: by outflank-mailman (output) from mailman id 522.1693; Wed, 30 Sep 2020 09:42:25 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,175 +38,182 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNYaP-0002Kc-1d; Wed, 30 Sep 2020 09:39:45 +0000
-Received: by outflank-mailman (input) for mailman id 513;
- Wed, 30 Sep 2020 09:19:01 +0000
+	id 1kNYcz-0003Ag-Kl; Wed, 30 Sep 2020 09:42:25 +0000
+Received: by outflank-mailman (input) for mailman id 522;
+ Wed, 30 Sep 2020 09:42:25 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=H9w3=DH=epam.com=prvs=854240d79b=anastasiia_lukianenko@srs-us1.protection.inumbo.net>)
- id 1kNYGK-0000WB-PY
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 09:19:01 +0000
-Received: from mx0a-0039f301.pphosted.com (unknown [148.163.133.242])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=I3vy=DH=xen.org=julien@srs-us1.protection.inumbo.net>)
+ id 1kNYcy-0003Ab-Qy
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 09:42:24 +0000
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 98f81a11-4272-4b99-920e-0310a9300fbe;
- Wed, 30 Sep 2020 09:18:59 +0000 (UTC)
-Received: from pps.filterd (m0174677.ppops.net [127.0.0.1])
- by mx0a-0039f301.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 08U9FVoD005336; Wed, 30 Sep 2020 09:18:58 GMT
-Received: from eur01-db5-obe.outbound.protection.outlook.com
- (mail-db5eur01lp2058.outbound.protection.outlook.com [104.47.2.58])
- by mx0a-0039f301.pphosted.com with ESMTP id 33v1ddbnc3-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 30 Sep 2020 09:18:58 +0000
-Received: from AM7PR03MB6531.eurprd03.prod.outlook.com (2603:10a6:20b:1c2::6)
- by AM5PR0301MB2530.eurprd03.prod.outlook.com (2603:10a6:203:a::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3433.32; Wed, 30 Sep
- 2020 09:18:55 +0000
-Received: from AM7PR03MB6531.eurprd03.prod.outlook.com
- ([fe80::9439:23f1:1063:ad8]) by AM7PR03MB6531.eurprd03.prod.outlook.com
- ([fe80::9439:23f1:1063:ad8%5]) with mapi id 15.20.3433.035; Wed, 30 Sep 2020
- 09:18:55 +0000
+ id 973297cf-8140-4ba2-a1dd-66a557607573;
+ Wed, 30 Sep 2020 09:42:23 +0000 (UTC)
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1kNYcq-0005t8-3n; Wed, 30 Sep 2020 09:42:16 +0000
+Received: from [54.239.6.187] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1kNYcp-0000RB-Jh; Wed, 30 Sep 2020 09:42:15 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=H9w3=DH=epam.com=prvs=854240d79b=anastasiia_lukianenko@srs-us1.protection.inumbo.net>)
-	id 1kNYGK-0000WB-PY
-	for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 09:19:01 +0000
-X-Inumbo-ID: 98f81a11-4272-4b99-920e-0310a9300fbe
-Received: from mx0a-0039f301.pphosted.com (unknown [148.163.133.242])
+	(envelope-from <SRS0=I3vy=DH=xen.org=julien@srs-us1.protection.inumbo.net>)
+	id 1kNYcy-0003Ab-Qy
+	for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 09:42:24 +0000
+X-Inumbo-ID: 973297cf-8140-4ba2-a1dd-66a557607573
+Received: from mail.xenproject.org (unknown [104.130.215.37])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 98f81a11-4272-4b99-920e-0310a9300fbe;
-	Wed, 30 Sep 2020 09:18:59 +0000 (UTC)
-Received: from pps.filterd (m0174677.ppops.net [127.0.0.1])
-	by mx0a-0039f301.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id 08U9FVoD005336;
-	Wed, 30 Sep 2020 09:18:58 GMT
-Received: from eur01-db5-obe.outbound.protection.outlook.com (mail-db5eur01lp2058.outbound.protection.outlook.com [104.47.2.58])
-	by mx0a-0039f301.pphosted.com with ESMTP id 33v1ddbnc3-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Wed, 30 Sep 2020 09:18:58 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=NgvsGXPi3tGwXADXixORmba78SPKC2pRNXZ8ABjkia5HO68yR+uQYjcAuv2hnx0oc5vBh/6+vRX8g9z8jbA87s2KAs70WkTUfSXuNtoMkPXrnW+XoXACCUHel7Mqi5xUKVWUOg1LfVHeavRTiXeYFc9Ss0/51c9j81i5EYTOWpKGHCYxpPjPBSSLqTQpNadplh2iRYgD19bXe0Bk4cuva9ragvBt4sTXwXSrjYOOgub8xLzAnecKLSvxDJ8Xuhv1gMBVoKTdNBZll6P17xYG1b+ChR66JulJmRZ72RVBKSRprYbMGpSW7N4OVFq2K3BT7bg7Hjn8tIyth2Ek7B4IqA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+en2vUmnSfrEQDW+5ajFkmlchYiLkAw/BRL9zRxswnA=;
- b=j4hgAkf74gMf6vHh7dPtZLcoZUeM0rmN6iYrJnTHlVDdRQuhVO6kz4qdzDPB4lXMlfmEIS8yPhX4fo3afE2CvxnrIemmjiNiY1vXfjfA6f9UKUwwkl1vzymZcQF+Bt9GKWE+rdeDU5Z/HhvAbCVpm0inOeCAxlx60GmpGIWPI3tTvNCIm0FNBdVyKo+CWaQb+gOBGtz40Xutx4ZEqRbpPVfUd3ygVIrAQPwLqwBHjsSku0cZSlQnqfYEDOj3pMInF378r1A0fochoRwOPekTVmo8PZtxxLpwBTXI9d4/Peqk5THSB6p7B+dWdLqCfOw51Wocc1tgijeFa/lw2ozsPA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+en2vUmnSfrEQDW+5ajFkmlchYiLkAw/BRL9zRxswnA=;
- b=xt5erUQByuMcqjJz8OGmKAhqxhjdFK0FeYCfBztoYrn+s7VnGr+CZg31KAMBgjVxS43Ypsoh/fvrN06qqWyHYYjBfghz0QSXIlN3xJb4ZNrbOw0f0MvjjB+trtGwJ7XMC9LHtqtwxP5A3/2KiMbDYLetO3qYvU2wyzIxHuXphYvOiVc8u9SXfy98BhDwtV5RWXqpZYAgPWFf5DyQuit4kCCOGGUOJzqDRw8AoFrgIOdE+x6IYhDTmVPmT1wkQYe7fKSh0HhZVrbXBdP4VnmOoV5BpUFPlycfyDUm8p7XggjXgwz0+LsRsWrMPc5Vz10VNgO6erMwgy65wnWZL48+lg==
-Received: from AM7PR03MB6531.eurprd03.prod.outlook.com (2603:10a6:20b:1c2::6)
- by AM5PR0301MB2530.eurprd03.prod.outlook.com (2603:10a6:203:a::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3433.32; Wed, 30 Sep
- 2020 09:18:55 +0000
-Received: from AM7PR03MB6531.eurprd03.prod.outlook.com
- ([fe80::9439:23f1:1063:ad8]) by AM7PR03MB6531.eurprd03.prod.outlook.com
- ([fe80::9439:23f1:1063:ad8%5]) with mapi id 15.20.3433.035; Wed, 30 Sep 2020
- 09:18:55 +0000
-From: Anastasiia Lukianenko <Anastasiia_Lukianenko@epam.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: Artem Mygaiev <Artem_Mygaiev@epam.com>,
-        "committers@xenproject.org"
-	<committers@xenproject.org>,
-        "julien@xen.org" <julien@xen.org>,
-        "vicooodin@gmail.com" <vicooodin@gmail.com>,
-        "viktor.mitin.19@gmail.com"
-	<viktor.mitin.19@gmail.com>,
-        Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: Xen Coding style and clang-format
-Thread-Topic: Xen Coding style and clang-format
-Thread-Index: AQHWlwq4nKYEhMN38U+xmvwRsutq+Q==
-Date: Wed, 30 Sep 2020 09:18:55 +0000
-Message-ID: <300923eb27aea4d19bff3c21bc51d749c315f8e3.camel@epam.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: lists.xenproject.org; dkim=none (message not signed)
- header.d=none;lists.xenproject.org; dmarc=none action=none
- header.from=epam.com;
-x-originating-ip: [176.36.213.80]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 41803486-9377-4ad6-250c-08d86521db05
-x-ms-traffictypediagnostic: AM5PR0301MB2530:
-x-ms-exchange-transport-forked: True
-x-microsoft-antispam-prvs: 
- <AM5PR0301MB2530F70453613502488C170AF2330@AM5PR0301MB2530.eurprd03.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:10000;
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 
- oyHZzIly8vpbY6snm/UpA1sSWHvtFBMil7OAjqNxfma3uWURsJMPMzN8Bx57olKxLenoGYNgPgcc2xNRWmAWw+302HOtS7SwcfEDnB15Oan11TiZpFf+Izzder6Qb13RvY1yKhkzCMnenxoHKNs/PnwPIiqwVTZmWdO/e5TLT9rkdy+pDLacL6a0JnrVRo4P6BorAxWt0QHZ293X8bHaSw+pxiBxkirng34JFcWQKl6ONrkxVjBQ5jS7pUKtvD/3ZdrymvCFQdbz0DqNO7yCw5wR/XGW17zUfe7zrrIqxMuEqsYEYd/LXCDCm0SbxTZszfXVSKDwHQALmURYvW5p5LEcNear816beeyqauw0XTl/t/bdRtZfeXXhqntd8GvLtWxqLOETRSXvZQQfWZPlYg==
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM7PR03MB6531.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(376002)(39860400002)(366004)(396003)(136003)(76116006)(54906003)(478600001)(26005)(2616005)(966005)(6916009)(5660300002)(186003)(66556008)(66476007)(66946007)(64756008)(66446008)(55236004)(6506007)(86362001)(8936002)(83080400001)(6512007)(71200400001)(316002)(107886003)(4326008)(36756003)(83380400001)(8676002)(2906002)(6486002);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata: 
- P13vsRm6BP6Q8l/OqVrhW+s+/NYLtOCg9EKDLCxXg3nOQ3Jm7FY48SgMv0guGkqX8l3eUwu37MO9/2uNrD6o5YCY0jYqJY2SUh9/M1MfUGUAgRp4dVOOSePdqUyOpuFr6Es1rrk2/6fEBRdJ6NFPJpPU7ri515WHuyXhoHYjksF3jzOyVBqrWWM2bVy/DZtH4aJfzUMudfUj/txQEaIL6uuFjQwH9FdkBCBJwrLlrB9xrJhX5dnEvAQlFsOV+WI8tgfRt17elWSWXQfVArBWHwHwQph8PoesB3/eRpTvDi0mprsEltqk5smGY2td08hiDUYXftwrEZaTgBro12F/vF24rxBqH5Vks+ywSlR43Gf5RJRhGe128fgw967Od7IsgWnygtj8xELzeimyj8Ts9/ZYoSaEy+a6V4jUSrhY0hrt6CL7C+DjW/s86i2nFsFlKfY65Uer+wzwGW6hz7R5+lmmDXWGGndq/JL9TNs2kmdJxtet1nIfhwhNCAXna9+UHORxE0iuhFXjdqR6AK4WuDn7rEwE9BcqWl6K0DmW3yajJWf1vkqjuZQtO8VGD/7hs9epzabaYTnzgAFvR9aCqPHztCjQaJnEI0Vh3xPgPvsqJ8aylxMSRX68Nz1TrblDfCI8CrAt79TyGomNHg1k1g==
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <51338315F8EDD742A2C74624087CF792@eurprd03.prod.outlook.com>
-Content-Transfer-Encoding: base64
+	id 973297cf-8140-4ba2-a1dd-66a557607573;
+	Wed, 30 Sep 2020 09:42:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+	bh=xic4rwKFNSGMZvHHU+BDo4SBCLwhyV/nfqleyVA5Ta4=; b=g4xVF3etM0LpddmrLvybuaV1lR
+	gQsj4GJgJxabjVxwAl2peZZATwMADgWATDvyU4QzQHL0Ouhk1unb1I3Au/bgR9SBmXj4nH3F95uVm
+	ZlyAKF0It49bHCiYrOIYn26GehBkkrZfvYs9xDqpzf7Dwirk3vXzUkakf8WKQcLwSSPU=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+	by mail.xenproject.org with esmtp (Exim 4.92)
+	(envelope-from <julien@xen.org>)
+	id 1kNYcq-0005t8-3n; Wed, 30 Sep 2020 09:42:16 +0000
+Received: from [54.239.6.187] (helo=a483e7b01a66.ant.amazon.com)
+	by xenbits.xenproject.org with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
+	(Exim 4.92)
+	(envelope-from <julien@xen.org>)
+	id 1kNYcp-0000RB-Jh; Wed, 30 Sep 2020 09:42:15 +0000
+Subject: Re: [PATCH 0/4] xen/arm: Unbreak ACPI
+To: =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>
+Cc: xen-devel@lists.xenproject.org, masami.hiramatsu@linaro.org,
+ ehem+xen@m5p.com, bertrand.marquis@arm.com, andre.przywara@arm.com,
+ Julien Grall <jgrall@amazon.com>, Stefano Stabellini
+ <sstabellini@kernel.org>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ Jan Beulich <jbeulich@suse.com>, Wei Liu <wl@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+References: <20200926205542.9261-1-julien@xen.org> <87k0wcppnj.fsf@linaro.org>
+ <5afbce1c-0c45-4b8c-771a-f83b91328e4a@xen.org> <87d024p9tc.fsf@linaro.org>
+From: Julien Grall <julien@xen.org>
+Message-ID: <a42d2724-4d9b-a177-35c7-44bd0250f265@xen.org>
+Date: Wed, 30 Sep 2020 10:42:11 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.1.0
 MIME-Version: 1.0
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AM7PR03MB6531.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 41803486-9377-4ad6-250c-08d86521db05
-X-MS-Exchange-CrossTenant-originalarrivaltime: 30 Sep 2020 09:18:55.5002
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: SkIUqL+CAPhWighVp6oBaxDhXn/IfoxMuv90KP7w5ZNgLy3Afc6ZrGfSK9KwLSIdI+0j/yj/ISMavrN6pFXsKlyOYSNgEM2BhK/ciA/WreA=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM5PR0301MB2530
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235,18.0.687
- definitions=2020-09-30_05:2020-09-29,2020-09-30 signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxlogscore=999
- lowpriorityscore=0 spamscore=0 phishscore=0 malwarescore=0 adultscore=0
- priorityscore=1501 impostorscore=0 suspectscore=0 clxscore=1011
- bulkscore=0 mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2006250000 definitions=main-2009300074
+In-Reply-To: <87d024p9tc.fsf@linaro.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-SGkgYWxsLA0KDQpJIHdvdWxkIGxpa2UgdG8gYnJpbmcgdXAgYSBkaXNjdXNzaW9uIGFib3V0IGEg
-WGVuLWNoZWNrZXIgdG9vbCwgdGhlDQpkZXZlbG9wbWVudCBvZiB3aGljaCBoYXMgYmVlbiB0ZW1w
-b3JhcmlseSBzdXNwZW5kZWQuIFRoZSBpZGVhIG9mIHRoaXMNCnRvb2wgaXMgdG8gdXNlIHRoZSBj
-bGFuZy1mb3JtYXQgYXBwcm9hY2ggYXMgYSBiYXNlIGZvciBYZW4g4oCYY2hlY2twYXRjaOKAmQ0K
-cHJvY2Vzcy4gVGhlIG5ldyB0b29sIGNvbnNpc3RzIG9mIG1vZGlmaWVkIGNsYW5nLWZvcm1hdCBi
-aW5hcnkgYW5kDQptb2RpZmllZCBjbGFuZy1mb3JtYXQtZGlmZi5weSBweXRob24gc2NyaXB0IHRv
-IGF1dG9tYXRlIFhlbiBwYXRjaGVzDQpmb3JtYXQgY2hlY2tpbmcgYW5kIHJlZm9ybWF0dGluZy4g
-VGhlIHRvb2wgY2FuIGJlIHVzZWQgYXMgYSBwcmUtY29tbWl0DQpob29rIHRvIGNoZWNrIGFuZCBm
-b3JtYXQgZXZlcnkgcGF0Y2ggYXV0b21hdGljYWxseS4NClhlbiBjaGVja2VyIGlzIGN1cnJlbnRs
-eSBpbiBhIHN0YXRlIG9mIHRlc3RpbmcsIGJ1dCB0aGVyZSBhcmUNCmNvbnRyb3ZlcnNpYWwgcG9p
-bnRzIHJlZ2FyZGluZyB0aGUgY29kaW5nIHN0eWxlIHRoYXQgSSB3b3VsZCBsaWtlIHRvDQpkaXNj
-dXNzIHdpdGggdGhlIGNvbW11bml0eSBhbmQgbWFrZSBhIHVuYW5pbW91cyBkZWNpc2lvbiBvbiB0
-aGUNCmNvcnJlY3RuZXNzIG9mIHRoZSBmb3JtYXR0aW5nLg0KDQpJIHdvdWxkIGxpa2UgdG8ga25v
-dyB5b3VyIG9waW5pb24gb24gdGhlIGZvbGxvd2luZyBjb2Rpbmcgc3R5bGUgY2FzZXMuDQpXaGlj
-aCBvcHRpb24gZG8geW91IHRoaW5rIGlzIGNvcnJlY3Q/DQoxKSBGdW5jdGlvbiBwcm90b3R5cGUg
-d2hlbiB0aGUgc3RyaW5nIGxlbmd0aCBpcyBsb25nZXIgdGhhbiB0aGUgYWxsb3dlZA0Kb25lDQot
-c3RhdGljIGludCBfX2luaXQNCi1hY3BpX3BhcnNlX2dpY19jcHVfaW50ZXJmYWNlKHN0cnVjdCBh
-Y3BpX3N1YnRhYmxlX2hlYWRlciAqaGVhZGVyLA0KLSAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgY29uc3QgdW5zaWduZWQgbG9uZyBlbmQpDQorc3RhdGljIGludCBfX2luaXQgYWNwaV9wYXJz
-ZV9naWNfY3B1X2ludGVyZmFjZSgNCisgICAgc3RydWN0IGFjcGlfc3VidGFibGVfaGVhZGVyICpo
-ZWFkZXIsIGNvbnN0IHVuc2lnbmVkIGxvbmcgZW5kKQ0KMikgV3JhcHBpbmcgYW4gb3BlcmF0b3Ig
-dG8gYSBuZXcgbGluZSB3aGVuIHRoZSBsZW5ndGggb2YgdGhlIGxpbmUgaXMNCmxvbmdlciB0aGFu
-IHRoZSBhbGxvd2VkIG9uZQ0KLSAgICBpZiAoIHRhYmxlLT5yZXZpc2lvbiA+IDYNCi0gICAgICAg
-ICB8fCAodGFibGUtPnJldmlzaW9uID09IDYgJiYgZmFkdC0+bWlub3JfcmV2aXNpb24gPj0gMCkg
-KQ0KKyAgICBpZiAoIHRhYmxlLT5yZXZpc2lvbiA+IDYgfHwNCisgICAgICAgICAodGFibGUtPnJl
-dmlzaW9uID09IDYgJiYgZmFkdC0+bWlub3JfcmV2aXNpb24gPj0gMCkgKQ0KMykgZGVmaW5lIGNv
-ZGUgc3R5bGUNCi0jZGVmaW5lIEFMTFJFR1MgXA0KLSAgICBDKHIwLHIwX3Vzcik7ICAgQyhyMSxy
-MV91c3IpOyAgIEMocjIscjJfdXNyKTsgICBDKHIzLHIzX3Vzcik7ICAgXA0KLSAgICBDKGNwc3Is
-Y3BzcikNCisjZGVmaW5lIEFMTFJFR1MgICAgICAgICAgICBcDQorICAgIEMocjAsIHIwX3Vzcik7
-ICAgICAgICAgXA0KKyAgICBDKHIxLCByMV91c3IpOyAgICAgICAgIFwNCisgICAgQyhyMiwgcjJf
-dXNyKTsgICAgICAgICBcDQo0KSBDb21tZW50IHN0eWxlDQotICAgIC8qIFBDIHNob3VsZCBiZSBh
-bHdheXMgYSBtdWx0aXBsZSBvZiA0LCBhcyBYZW4gaXMgdXNpbmcgQVJNDQppbnN0cnVjdGlvbiBz
-ZXQgKi8NCisgICAgLyogUEMgc2hvdWxkIGJlIGFsd2F5cyBhIG11bHRpcGxlIG9mIDQsIGFzIFhl
-biBpcyB1c2luZyBBUk0NCmluc3RydWN0aW9uIHNldA0KKyAgICAgKi8NCg0KUGxlYXNlIGZpbmQg
-YmVsb3cgdGhlIHJlcG8gY3JlYXRlZCBieSBWaWt0b3IgTWl0aW4gd2l0aCB4ZW4gY2xhbmctDQpm
-b3JtYXQgdW5kZXIgdGhlIG5leHQgbGluayAoYnJhbmNoIHhlbi1jbGFuZy1mb3JtYXQpOg0KaHR0
-cHM6Ly9naXRodWIuY29tL3hlbi10cm9vcHMvbGx2bS1wcm9qZWN0L3RyZWUveGVuLWNsYW5nLWZv
-cm1hdA0KDQpUaGUgbmV4dCBzY3JpcHQgY2FuIGJlIHVzZWQgYXMgYW4gZXhhbXBsZSBvZiBob3cg
-dG8gYnVpbGQgY2xhbmctZm9ybWF0Og0KDQpodHRwczovL2dpdGh1Yi5jb20vdmlrdG9yLW1pdGlu
-L3hlbi1jbGFuZy1mb3JtYXQtZXhhbXBsZS9ibG9iL21hc3Rlci9idWlsZF9jbGFuZ19mb3JtYXQu
-c2gNCg0KUmVnYXJkcywNCkFuYXN0YXNpaWEgTHVraWFuZW5rbw0K
+Hi Alex,
+
+On 29/09/2020 22:11, Alex Bennée wrote:
+> 
+> Julien Grall <julien@xen.org> writes:
+> 
+>> Hi Alex,
+>>
+>> On 29/09/2020 16:29, Alex Bennée wrote:
+>>>
+>>> Julien Grall <julien@xen.org> writes:
+>>>
+>>>> From: Julien Grall <jgrall@amazon.com>
+>>>>
+>>>> Hi all,
+>>>>
+>>>> Xen on ARM has been broken for quite a while on ACPI systems. This
+>>>> series aims to fix it.
+>>>>
+>>>> Unfortunately I don't have a system with ACPI v6.0 or later (QEMU seems
+>>>> to only support 5.1). So I did only some light testing.
+>>>
+>>> I was hoping to get more diagnostics out to get it working under QEMU
+>>> TCG so I think must of missed a step:
+>>>
+>>>     Loading Xen 4.15-unstable ...
+>>>     Loading Linux 4.19.0-11-arm64 ...
+>>>     Loading initial ramdisk ...
+>>>     Using modules provided by bootloader in FDT
+>>>     Xen 4.15-unstable (c/s Sat Sep 26 21:55:42 2020 +0100 git:72f3d495d0) EFI loader
+>>>     ...silence...
+>>>
+>>> I have a grub installed from testing on a buster base:
+>>>
+>>>     dpkg --status grub-arm64-efi
+>>>     Version: 2.04-8
+>>>
+>>> With:
+>>>
+>>>     GRUB_CMDLINE_LINUX_DEFAULT=""
+>>>     GRUB_CMDLINE_LINUX="console=ttyAMA0"
+>>>     GRUB_CMDLINE_LINUX_XEN_REPLACE="console=hvc0 earlyprintk=xen"
+>>>     GRUB_CMDLINE_XEN="loglvl=all guest_loglvl=all com1=115200,8n1,0x3e8,5console=com1,vg"
+>>>
+>>> And I built Xen with --enable-systemd and tweaked the hypervisor .config:
+>>>
+>>>     CONFIG_EXPERT=y
+>>>     CONFIG_ACPI=y
+>>>
+>>> So any pointers to make it more verbose would be helpful.
+>>
+>> The error is hapenning before Xen setup the console. You can get early
+>> output on QEMU if you rebuild Xen with the following .config options:
+>>
+>> CONFIG_DEBUG=y
+>> CONFIG_EARLY_UART_CHOICE_PL011=y
+>> CONFIG_EARLY_UART_PL011=y
+>> CONFIG_EARLY_PRINTK=y
+>> CONFIG_EARLY_UART_BASE_ADDRESS=0x09000000
+>> CONFIG_EARLY_UART_PL011_BAUD_RATE=0
+>> CONFIG_EARLY_PRINTK_INC="debug-pl011.inc"
+> 
+> OK I can see it fails on the ACPI and then tries to fall back to FDT and
+> then fails to find the GIC:
+> 
+>    (XEN) CMDLINE[00000000f7bbe000]:chosen placeholder root=UUID=cf00cd3a-066b-4146-bedf-f811d3343077 ro console=hvc0 earlyprintk=xen
+>    (XEN)
+>    (XEN) Command line: placeholder loglvl=all guest_loglvl=all com1=115200,8n1,0x3e8,5console=com1,vg no-real-mode edd=off
+>    (XEN) parameter "placeholder" unknown!
+>    (XEN) parameter "no-real-mode" unknown!
+>    (XEN) parameter "edd" unknown!
+>    (XEN) ACPI: RSDP 138560000, 0024 (r2 BOCHS )
+>    (XEN) ACPI: XSDT 138550000, 004C (r1 BOCHS  BXPCFACP        1       1000013)
+>    (XEN) ACPI: FACP 138510000, 010C (r5 BOCHS  BXPCFACP        1 BXPC        1)
+>    (XEN) ACPI: DSDT 138520000, 14A6 (r2 BOCHS  BXPCDSDT        1 BXPC        1)
+>    (XEN) ACPI: APIC 138500000, 018C (r3 BOCHS  BXPCAPIC        1 BXPC        1)
+>    (XEN) ACPI: GTDT 1384F0000, 0060 (r2 BOCHS  BXPCGTDT        1 BXPC        1)
+>    (XEN) ACPI: MCFG 1384E0000, 003C (r1 BOCHS  BXPCMCFG        1 BXPC        1)
+>    (XEN) ACPI: SPCR 1384D0000, 0050 (r2 BOCHS  BXPCSPCR        1 BXPC        1)
+>    (XEN) Unsupported FADT revision 5.1, should be 6.0+, will disable ACPI
+>    (XEN) acpi_boot_table_init: FADT not found (-22)
+>    (XEN) Domain heap initialised
+>    (XEN) Booting using Device Tree
+>    (XEN) Platform: Generic System
+>    (XEN)
+>    (XEN) ****************************************
+>    (XEN) Panic on CPU 0:
+>    (XEN) Unable to find compatible GIC in the device tree
+>    (XEN) ****************************************
+>    (XEN)
+>    (XEN) Reboot in five seconds...
+> 
+> Despite saying it is going to reboot it never manages to. Any idea how
+> it is trying to reset the system?
+
+This is a bit of chicken and eggs problem. To know the reset method, you 
+need to parse the ACPI tables. As we can't parse then we don't know the 
+reset method. So, Xen will just do an infinite loop.
+
+It would probably be good to be more forthcoming with the users and say 
+it will not reboot.
+
+Also, IIRC, the time subsystem is not yet initialized. So it might be 
+possible to mdelay() doesn't work properly.
+
+Cheers,
+
+-- 
+Julien Grall
 
