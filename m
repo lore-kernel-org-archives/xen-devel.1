@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-13.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C9072C4727E
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 13:44:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5DB96C47425
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 13:44:20 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 85499206B7
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 13:44:18 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 0E8AE206B7
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 13:44:19 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="RI/wbZzp"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 85499206B7
+	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="cn6uluEW"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0E8AE206B7
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.714.2415 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.713.2403 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNcOt-0004cD-IY; Wed, 30 Sep 2020 13:44:07 +0000
+	id 1kNcOr-0004Zb-9H; Wed, 30 Sep 2020 13:44:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 714.2415; Wed, 30 Sep 2020 13:44:07 +0000
+Received: by outflank-mailman (output) from mailman id 713.2403; Wed, 30 Sep 2020 13:44:05 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,60 +38,59 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNcOt-0004c6-F8; Wed, 30 Sep 2020 13:44:07 +0000
-Received: by outflank-mailman (input) for mailman id 714;
- Wed, 30 Sep 2020 13:44:06 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kNcOr-0004ZR-4Z; Wed, 30 Sep 2020 13:44:05 +0000
+Received: by outflank-mailman (input) for mailman id 713;
+ Wed, 30 Sep 2020 13:44:03 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=sFQy=DH=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1kNcOs-0004XG-M4
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 13:44:06 +0000
+ id 1kNcOp-0004YJ-DI
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 13:44:03 +0000
 Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id a22d1d71-d2b5-4b7d-be5f-3cba54ee3e0c;
- Wed, 30 Sep 2020 13:44:01 +0000 (UTC)
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id dfcfd5d9-4c79-41bb-b3ef-ece8d0941c31;
+ Wed, 30 Sep 2020 13:44:02 +0000 (UTC)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=sFQy=DH=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
-	id 1kNcOs-0004XG-M4
-	for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 13:44:06 +0000
-X-Inumbo-ID: a22d1d71-d2b5-4b7d-be5f-3cba54ee3e0c
+	id 1kNcOp-0004YJ-DI
+	for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 13:44:03 +0000
+X-Inumbo-ID: dfcfd5d9-4c79-41bb-b3ef-ece8d0941c31
 Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id a22d1d71-d2b5-4b7d-be5f-3cba54ee3e0c;
-	Wed, 30 Sep 2020 13:44:01 +0000 (UTC)
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id dfcfd5d9-4c79-41bb-b3ef-ece8d0941c31;
+	Wed, 30 Sep 2020 13:44:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=citrix.com; s=securemail; t=1601473443;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=NPZHvV7WercRVJvbGr8hSw3MlS+5rPwGf4cgVL7SwpY=;
-  b=RI/wbZzp7gqW3EIUxIASZMXvRGKTEgU5d2ZBtFPr8Bm3X5QD8plSJ+eG
-   DgfS/hak0S9prGa7cZg6xUfjOyKnIsljC/Pw1IPioKl8mPb66ZnnqSD7a
-   kFZEAZhLDWtL6Vm9itDzeUaBVGjsr5TISx92y43iHMNVNMHB9/fo5HQwV
-   A=;
+  bh=tthMpROINA5RAkSPIiMBl10BH/IKTfi+k+TFtLZ7eE4=;
+  b=cn6uluEWpO06EjSC0oj6JxIQlKBwhn3GAUG1fFymHjyCSSbjPxGLkz/b
+   xnZiPIopWWXGR7JnzmCDD5mWo2gjN1C9tomVNX4M+Ca39oOK3MJkPR6G5
+   QZMsMw126raWQ5y61lCNUfcqqyRA0k2EuGGXNri1SdZsVIH9s8Zsa0f3C
+   g=;
 Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: a6x58zNrPSi7fF0Odnji6cHgo3gjdaHN/R9Iwjt3tGJ8sOvFYpkKZG31dpV01LURqicrzQmN8G
- 5BanRU9OgXtAzlGGeMrid+9FnPA7N7T9RP+zWOc18fE+ZKK86YUFeo1492bcjXpvjjUULfYETE
- Ll6LzkdtiKEayVR/+yja9uBH6AB9CWCSLDEO+kAVUQ9Hv/vzuvTOFzXsqyAht7/QQ0sSmIOSpM
- IyR0Oc66yWxvyoVap87d8T6mCQOU3UByXBE0MsRVEMBe9kQAGKD9enywGPpmrz8HZxMMQyegqC
- UVk=
+IronPort-SDR: Ezf7PnSO3XtkQbnhDGOuxIvvef5jaBsUxNk488ciVVYvHxJgzLzOrb2VUhm5McXgGYqwpv5pi0
+ 4npkJvY+5xLbYutMTxJXugTYnznLbOWYpwmzYZS3mMrfCD7/1xIrn2R9ZHqq/WmD73KAF1XfjS
+ JsVDKSCJiWtS7y6Fq5nVc06nCh/C4xb5HfqFvIs5VLLaXhGUXPi8zuVkgEh2hd/3SMwR5TBbWg
+ HzXQUOfSBIJWRTA9VYaWQ8jNppRcDwJTX0jcIYpbIiA2if+wtTw4YcXbaC7H4xaCJeTEbkFBkk
+ nsU=
 X-SBRS: None
-X-MesageID: 28300090
+X-MesageID: 28300093
 X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
 X-IronPort-AV: E=Sophos;i="5.77,322,1596513600"; 
-   d="scan'208";a="28300090"
+   d="scan'208";a="28300093"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Ian Jackson
-	<iwj@xenproject.org>, Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH 5/8] x86/hvm: Obsolete the use of HVM_PARAM_NESTEDHVM
-Date: Wed, 30 Sep 2020 14:42:45 +0100
-Message-ID: <20200930134248.4918-6-andrew.cooper3@citrix.com>
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Jun Nakajima
+	<jun.nakajima@intel.com>, Kevin Tian <kevin.tian@intel.com>
+Subject: [PATCH 7/8] x86/hvm: Drop restore boolean from hvm_cr4_guest_valid_bits()
+Date: Wed, 30 Sep 2020 14:42:47 +0100
+Message-ID: <20200930134248.4918-8-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20200930134248.4918-1-andrew.cooper3@citrix.com>
 References: <20200930134248.4918-1-andrew.cooper3@citrix.com>
@@ -99,153 +98,146 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-With XEN_DOMCTL_CDF_nested_virt now passed properly to domain_create(),
-reimplement nestedhvm_enabled() to use the property which is fixed for the
-lifetime of the domain.
+Previously, migration was reordered so the CPUID data was available before
+register state.  nestedhvm_enabled() has recently been made accurate for the
+entire lifetime of the domain.
 
-This makes the call to nestedhvm_vcpu_initialise() from hvm_vcpu_initialise()
-no longer dead.  It became logically dead with the Xend => XL transition, as
-they initialise HVM_PARAM_NESTEDHVM in opposite orders with respect to
-XEN_DOMCTL_max_vcpus.
-
-There is one opencoded user of nestedhvm_enabled() in HVM_PARAM_ALTP2M's
-safety check.
+Therefore, we can drop the bodge in hvm_cr4_guest_valid_bits() which existed
+previously to tolerate a guests' CR4 being set/restored before
+HVM_PARAM_NESTEDHVM.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Wei Liu <wl@xen.org>
-CC: Ian Jackson <iwj@xenproject.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>
-
-The redunction in complexity of nestedhvm_enabled() has a substantial effect:
-
-  add/remove: 1/0 grow/shrink: 2/37 up/down: 669/-2095 (-1426)
+CC: Jun Nakajima <jun.nakajima@intel.com>
+CC: Kevin Tian <kevin.tian@intel.com>
 ---
- tools/libxl/libxl_x86.c             |  5 -----
- xen/arch/x86/hvm/hvm.c              | 33 ++++-----------------------------
- xen/include/asm-x86/hvm/nestedhvm.h |  5 ++---
- xen/include/public/hvm/params.h     |  4 +---
- 4 files changed, 7 insertions(+), 40 deletions(-)
+ xen/arch/x86/hvm/domain.c       | 2 +-
+ xen/arch/x86/hvm/hvm.c          | 8 ++++----
+ xen/arch/x86/hvm/svm/svmdebug.c | 6 ++++--
+ xen/arch/x86/hvm/vmx/vmx.c      | 2 +-
+ xen/arch/x86/hvm/vmx/vvmx.c     | 2 +-
+ xen/include/asm-x86/hvm/hvm.h   | 2 +-
+ 6 files changed, 12 insertions(+), 10 deletions(-)
 
-diff --git a/tools/libxl/libxl_x86.c b/tools/libxl/libxl_x86.c
-index 7d95506e00..72777fcaad 100644
---- a/tools/libxl/libxl_x86.c
-+++ b/tools/libxl/libxl_x86.c
-@@ -428,11 +428,6 @@ static int hvm_set_conf_params(libxl__gc *gc, uint32_t domid,
-             LOG(ERROR, "Couldn't set HVM_PARAM_TIMER_MODE");
-             goto out;
-         }
--        if (xc_hvm_param_set(xch, domid, HVM_PARAM_NESTEDHVM,
--                             libxl_defbool_val(info->nested_hvm))) {
--            LOG(ERROR, "Couldn't set HVM_PARAM_NESTEDHVM");
--            goto out;
--        }
-         if (xc_hvm_param_set(xch, domid, HVM_PARAM_ALTP2M, altp2m)) {
-             LOG(ERROR, "Couldn't set HVM_PARAM_ALTP2M");
-             goto out;
+diff --git a/xen/arch/x86/hvm/domain.c b/xen/arch/x86/hvm/domain.c
+index 8e3375265c..0ce132b308 100644
+--- a/xen/arch/x86/hvm/domain.c
++++ b/xen/arch/x86/hvm/domain.c
+@@ -275,7 +275,7 @@ int arch_set_info_hvm_guest(struct vcpu *v, const vcpu_hvm_context_t *ctx)
+     if ( v->arch.hvm.guest_efer & EFER_LME )
+         v->arch.hvm.guest_efer |= EFER_LMA;
+ 
+-    if ( v->arch.hvm.guest_cr[4] & ~hvm_cr4_guest_valid_bits(d, false) )
++    if ( v->arch.hvm.guest_cr[4] & ~hvm_cr4_guest_valid_bits(d) )
+     {
+         gprintk(XENLOG_ERR, "Bad CR4 value: %#016lx\n",
+                 v->arch.hvm.guest_cr[4]);
 diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index 2dfda93e09..101a739952 100644
+index 101a739952..54e32e4fe8 100644
 --- a/xen/arch/x86/hvm/hvm.c
 +++ b/xen/arch/x86/hvm/hvm.c
-@@ -4086,6 +4086,7 @@ static int hvm_allow_set_param(struct domain *d,
-     case HVM_PARAM_MEMORY_EVENT_CR3:
-     case HVM_PARAM_MEMORY_EVENT_CR4:
-     case HVM_PARAM_MEMORY_EVENT_INT3:
-+    case HVM_PARAM_NESTEDHVM:
-     case HVM_PARAM_MEMORY_EVENT_SINGLE_STEP:
-     case HVM_PARAM_BUFIOREQ_EVTCHN:
-     case HVM_PARAM_MEMORY_EVENT_MSR:
-@@ -4204,39 +4205,12 @@ static int hvm_set_param(struct domain *d, uint32_t index, uint64_t value)
-     case HVM_PARAM_ACPI_IOPORTS_LOCATION:
-         rc = pmtimer_change_ioport(d, value);
-         break;
--    case HVM_PARAM_NESTEDHVM:
--        rc = xsm_hvm_param_nested(XSM_PRIV, d);
--        if ( rc )
--            break;
--        if ( value > 1 )
--            rc = -EINVAL;
--        /*
--         * Remove the check below once we have
--         * shadow-on-shadow.
--         */
--        if ( !paging_mode_hap(d) && value )
--            rc = -EINVAL;
--        if ( value &&
--             d->arch.hvm.params[HVM_PARAM_ALTP2M] )
--            rc = -EINVAL;
--        /* Set up NHVM state for any vcpus that are already up. */
--        if ( value &&
--             !d->arch.hvm.params[HVM_PARAM_NESTEDHVM] )
--            for_each_vcpu(d, v)
--                if ( rc == 0 )
--                    rc = nestedhvm_vcpu_initialise(v);
--        if ( !value || rc )
--            for_each_vcpu(d, v)
--                nestedhvm_vcpu_destroy(v);
--        break;
-     case HVM_PARAM_ALTP2M:
-         rc = xsm_hvm_param_altp2mhvm(XSM_PRIV, d);
-         if ( rc )
-             break;
--        if ( value > XEN_ALTP2M_limited )
--            rc = -EINVAL;
--        if ( value &&
--             d->arch.hvm.params[HVM_PARAM_NESTEDHVM] )
-+        if ( (value > XEN_ALTP2M_limited) ||
-+             (value && nestedhvm_enabled(d)) )
-             rc = -EINVAL;
-         break;
-     case HVM_PARAM_TRIPLE_FAULT_REASON:
-@@ -4390,6 +4364,7 @@ static int hvm_allow_get_param(struct domain *d,
-     case HVM_PARAM_MEMORY_EVENT_CR3:
-     case HVM_PARAM_MEMORY_EVENT_CR4:
-     case HVM_PARAM_MEMORY_EVENT_INT3:
-+    case HVM_PARAM_NESTEDHVM:
-     case HVM_PARAM_MEMORY_EVENT_SINGLE_STEP:
-     case HVM_PARAM_BUFIOREQ_EVTCHN:
-     case HVM_PARAM_MEMORY_EVENT_MSR:
-diff --git a/xen/include/asm-x86/hvm/nestedhvm.h b/xen/include/asm-x86/hvm/nestedhvm.h
-index d9784a2e0b..385cb708a3 100644
---- a/xen/include/asm-x86/hvm/nestedhvm.h
-+++ b/xen/include/asm-x86/hvm/nestedhvm.h
-@@ -34,10 +34,9 @@ enum nestedhvm_vmexits {
- };
+@@ -972,14 +972,14 @@ const char *hvm_efer_valid(const struct vcpu *v, uint64_t value,
+         X86_CR0_CD | X86_CR0_PG)))
  
- /* Nested HVM on/off per domain */
--static always_inline bool nestedhvm_enabled(const struct domain *d)
-+static inline bool nestedhvm_enabled(const struct domain *d)
+ /* These bits in CR4 can be set by the guest. */
+-unsigned long hvm_cr4_guest_valid_bits(const struct domain *d, bool restore)
++unsigned long hvm_cr4_guest_valid_bits(const struct domain *d)
  {
--    return is_hvm_domain(d) && d->arch.hvm.params &&
--        d->arch.hvm.params[HVM_PARAM_NESTEDHVM];
-+    return d->options & XEN_DOMCTL_CDF_nested_virt;
- }
+     const struct cpuid_policy *p = d->arch.cpuid;
+     bool mce, vmxe;
  
- /* Nested VCPU */
-diff --git a/xen/include/public/hvm/params.h b/xen/include/public/hvm/params.h
-index 0a91bfa749..0e3fdca096 100644
---- a/xen/include/public/hvm/params.h
-+++ b/xen/include/public/hvm/params.h
-@@ -34,6 +34,7 @@
- #define HVM_PARAM_MEMORY_EVENT_CR3          21
- #define HVM_PARAM_MEMORY_EVENT_CR4          22
- #define HVM_PARAM_MEMORY_EVENT_INT3         23
-+#define HVM_PARAM_NESTEDHVM                 24
- #define HVM_PARAM_MEMORY_EVENT_SINGLE_STEP  25
- #define HVM_PARAM_BUFIOREQ_EVTCHN           26
- #define HVM_PARAM_MEMORY_EVENT_MSR          30
-@@ -232,9 +233,6 @@
-  */
- #define HVM_PARAM_ACPI_IOPORTS_LOCATION 19
+     /* Logic broken out simply to aid readability below. */
+     mce  = p->basic.mce || p->basic.mca;
+-    vmxe = p->basic.vmx && (restore || nestedhvm_enabled(d));
++    vmxe = p->basic.vmx && nestedhvm_enabled(d);
  
--/* Boolean: Enable nestedhvm (hvm only) */
--#define HVM_PARAM_NESTEDHVM    24
--
- /* Params for the mem event rings */
- #define HVM_PARAM_PAGING_RING_PFN   27
- #define HVM_PARAM_MONITOR_RING_PFN  28
+     return ((p->basic.vme     ? X86_CR4_VME | X86_CR4_PVI : 0) |
+             (p->basic.tsc     ? X86_CR4_TSD               : 0) |
+@@ -1033,7 +1033,7 @@ static int hvm_load_cpu_ctxt(struct domain *d, hvm_domain_context_t *h)
+         return -EINVAL;
+     }
+ 
+-    if ( ctxt.cr4 & ~hvm_cr4_guest_valid_bits(d, true) )
++    if ( ctxt.cr4 & ~hvm_cr4_guest_valid_bits(d) )
+     {
+         printk(XENLOG_G_ERR "HVM%d restore: bad CR4 %#" PRIx64 "\n",
+                d->domain_id, ctxt.cr4);
+@@ -2425,7 +2425,7 @@ int hvm_set_cr4(unsigned long value, bool may_defer)
+     struct vcpu *v = current;
+     unsigned long old_cr;
+ 
+-    if ( value & ~hvm_cr4_guest_valid_bits(v->domain, false) )
++    if ( value & ~hvm_cr4_guest_valid_bits(v->domain) )
+     {
+         HVM_DBG_LOG(DBG_LEVEL_1,
+                     "Guest attempts to set reserved bit in CR4: %lx",
+diff --git a/xen/arch/x86/hvm/svm/svmdebug.c b/xen/arch/x86/hvm/svm/svmdebug.c
+index ba26b6a80b..f450391df4 100644
+--- a/xen/arch/x86/hvm/svm/svmdebug.c
++++ b/xen/arch/x86/hvm/svm/svmdebug.c
+@@ -106,6 +106,7 @@ bool svm_vmcb_isvalid(const char *from, const struct vmcb_struct *vmcb,
+     unsigned long cr0 = vmcb_get_cr0(vmcb);
+     unsigned long cr3 = vmcb_get_cr3(vmcb);
+     unsigned long cr4 = vmcb_get_cr4(vmcb);
++    unsigned long valid;
+     uint64_t efer = vmcb_get_efer(vmcb);
+ 
+ #define PRINTF(fmt, args...) do { \
+@@ -130,9 +131,10 @@ bool svm_vmcb_isvalid(const char *from, const struct vmcb_struct *vmcb,
+            (cr3 >> v->domain->arch.cpuid->extd.maxphysaddr))) )
+         PRINTF("CR3: MBZ bits are set (%#"PRIx64")\n", cr3);
+ 
+-    if ( cr4 & ~hvm_cr4_guest_valid_bits(v->domain, false) )
++    valid = hvm_cr4_guest_valid_bits(v->domain);
++    if ( cr4 & ~valid )
+         PRINTF("CR4: invalid bits are set (%#"PRIx64", valid: %#"PRIx64")\n",
+-               cr4, hvm_cr4_guest_valid_bits(v->domain, false));
++               cr4, valid);
+ 
+     if ( vmcb_get_dr6(vmcb) >> 32 )
+         PRINTF("DR6: bits [63:32] are not zero (%#"PRIx64")\n",
+diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
+index 95d109f962..86b8916a5d 100644
+--- a/xen/arch/x86/hvm/vmx/vmx.c
++++ b/xen/arch/x86/hvm/vmx/vmx.c
+@@ -1529,7 +1529,7 @@ static void vmx_update_guest_cr(struct vcpu *v, unsigned int cr,
+              */
+             v->arch.hvm.vmx.cr4_host_mask =
+                 (HVM_CR4_HOST_MASK | X86_CR4_PKE |
+-                 ~hvm_cr4_guest_valid_bits(v->domain, false));
++                 ~hvm_cr4_guest_valid_bits(v->domain));
+ 
+             v->arch.hvm.vmx.cr4_host_mask |= v->arch.hvm.vmx.vmx_realmode ?
+                                              X86_CR4_VME : 0;
+diff --git a/xen/arch/x86/hvm/vmx/vvmx.c b/xen/arch/x86/hvm/vmx/vvmx.c
+index 1e51689ef3..3a37e9ebea 100644
+--- a/xen/arch/x86/hvm/vmx/vvmx.c
++++ b/xen/arch/x86/hvm/vmx/vvmx.c
+@@ -2323,7 +2323,7 @@ int nvmx_msr_read_intercept(unsigned int msr, u64 *msr_content)
+         data = X86_CR4_VMXE;
+         break;
+     case MSR_IA32_VMX_CR4_FIXED1:
+-        data = hvm_cr4_guest_valid_bits(d, false);
++        data = hvm_cr4_guest_valid_bits(d);
+         break;
+     case MSR_IA32_VMX_MISC:
+         /* Do not support CR3-target feature now */
+diff --git a/xen/include/asm-x86/hvm/hvm.h b/xen/include/asm-x86/hvm/hvm.h
+index be0d8b0a4d..334bd573b9 100644
+--- a/xen/include/asm-x86/hvm/hvm.h
++++ b/xen/include/asm-x86/hvm/hvm.h
+@@ -334,7 +334,7 @@ int hvm_hap_nested_page_fault(paddr_t gpa, unsigned long gla,
+ /* Check CR4/EFER values */
+ const char *hvm_efer_valid(const struct vcpu *v, uint64_t value,
+                            signed int cr0_pg);
+-unsigned long hvm_cr4_guest_valid_bits(const struct domain *d, bool restore);
++unsigned long hvm_cr4_guest_valid_bits(const struct domain *d);
+ 
+ int hvm_copy_context_and_params(struct domain *src, struct domain *dst);
+ 
 -- 
 2.11.0
 
