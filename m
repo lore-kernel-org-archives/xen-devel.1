@@ -5,25 +5,25 @@ X-Spam-Level:
 X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=unavailable autolearn_force=no version=3.4.0
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DF537C4727E
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 17:52:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0B63FC4727C
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 17:52:50 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 95A4B20706
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 17:52:44 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id AF34220706
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 17:52:49 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="irffWdqg"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 95A4B20706
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="CpPbN3ix"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AF34220706
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.862.2999 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.863.3010 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNgHK-0005x1-Bx; Wed, 30 Sep 2020 17:52:34 +0000
+	id 1kNgHP-00063c-ON; Wed, 30 Sep 2020 17:52:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 862.2999; Wed, 30 Sep 2020 17:52:34 +0000
+Received: by outflank-mailman (output) from mailman id 863.3010; Wed, 30 Sep 2020 17:52:39 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNgHK-0005wu-7W; Wed, 30 Sep 2020 17:52:34 +0000
-Received: by outflank-mailman (input) for mailman id 862;
- Wed, 30 Sep 2020 17:52:33 +0000
+	id 1kNgHP-00063S-Kf; Wed, 30 Sep 2020 17:52:39 +0000
+Received: by outflank-mailman (input) for mailman id 863;
+ Wed, 30 Sep 2020 17:52:38 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=m0D6=DH=casper.srs.infradead.org=batv+fa6e45c137c1199df5c4+6247+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1kNgHJ-0005QF-PN
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 17:52:33 +0000
+ id 1kNgHO-0005QF-Pd
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 17:52:38 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 4e7d0968-b1d5-45d0-8723-5d399b08aad2;
- Wed, 30 Sep 2020 17:51:57 +0000 (UTC)
+ id 4a108f6e-79c2-453d-8e40-e272d74e46ac;
+ Wed, 30 Sep 2020 17:51:59 +0000 (UTC)
 Received: from [2001:4bb8:180:7b62:c70:4a89:bc61:4] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kNgGV-0001CN-3O; Wed, 30 Sep 2020 17:51:43 +0000
+ id 1kNgGZ-0001D6-Mw; Wed, 30 Sep 2020 17:51:49 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=m0D6=DH=casper.srs.infradead.org=batv+fa6e45c137c1199df5c4+6247+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1kNgHJ-0005QF-PN
-	for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 17:52:33 +0000
-X-Inumbo-ID: 4e7d0968-b1d5-45d0-8723-5d399b08aad2
+	id 1kNgHO-0005QF-Pd
+	for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 17:52:38 +0000
+X-Inumbo-ID: 4a108f6e-79c2-453d-8e40-e272d74e46ac
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 4e7d0968-b1d5-45d0-8723-5d399b08aad2;
-	Wed, 30 Sep 2020 17:51:57 +0000 (UTC)
+	id 4a108f6e-79c2-453d-8e40-e272d74e46ac;
+	Wed, 30 Sep 2020 17:51:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=FBifTnPA+3ODKD/Pp+vW9/Ge5GD+C3AXZd2dc0iyUCM=; b=irffWdqgufF/sWH2p3nzwLxebz
-	+W5xC88NFo2tHNxggYCSPvv6ZVXliMqnTe53iafY6xTKcxeuEfNdYBIDP7p9k5WY6i2G17z59YVCa
-	1q9ya/k4ZYc44/RoxiDLw5zXh0bSXeVOasWsZ/4dvbLIwEM/M40okD5Pia8MOjV4X4r9DGI5/OyGx
-	k38RlfoHj5GBiCqnoSluQb+pc2BUJ8GtWFYfqA9s7ypbvnAQpeC0ZFS2x//BoNN9bwP0GaPp4DOt0
-	ysMoDdazmturHTmsDPiDGk4XtPMsPCWfi/dJfo9YXQTgUSFHs8mq2MxDvfzz7o4AbukdtQxpo8gM9
-	s8IAq6UA==;
+	bh=aKbcvSTUYHnc5Kwat+nQ3mcktPzxpqXoVaxpdMprQBc=; b=CpPbN3ixHM87YY3u9XM3Qv+U7T
+	1ZWv8GVgV6IxroFPz3OTmX0Pvp+2NDzRr4qI7h1iJaBus5DlsMnTe2D91JP/X3IVr95lVLMJV1nvH
+	D9Os2QRPqW7J6RDHO1kY7okt1bF/FA1lHIbFlVkHQo/rkpDvgaS5aoBM6saFqyGifoYvIjFyGQMzE
+	nCpf/HBAlm8ElQB7pCVubi8N9HqQ1iV6uH3LxWO2hN1BUnaEIDYz76I/QQqBQqiRZ7Q9lYlmRLZ/F
+	73ufU43CuubCJKrxqv+c3PvEcn6kc89SL24CgkYdHvU/uyKb1K6tQ4Inps8UoBNoa+BVSXTsdMGNn
+	1BJqCBzA==;
 Received: from [2001:4bb8:180:7b62:c70:4a89:bc61:4] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1kNgGV-0001CN-3O; Wed, 30 Sep 2020 17:51:43 +0000
+	id 1kNgGZ-0001D6-Mw; Wed, 30 Sep 2020 17:51:49 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Andrew Morton <akpm@linux-foundation.org>
 Cc: Peter Zijlstra <peterz@infradead.org>,
@@ -96,11 +96,10 @@ Cc: Peter Zijlstra <peterz@infradead.org>,
 	linux-kernel@vger.kernel.org,
 	intel-gfx@lists.freedesktop.org,
 	dri-devel@lists.freedesktop.org,
-	linux-mm@kvack.org,
-	Tvrtko Ursulin <tvrtko.ursulin@intel.com>
-Subject: [PATCH 06/10] drm/i915: use vmap in shmem_pin_map
-Date: Wed, 30 Sep 2020 19:51:29 +0200
-Message-Id: <20200930175133.1252382-7-hch@lst.de>
+	linux-mm@kvack.org
+Subject: [PATCH 09/10] x86/xen: open code alloc_vm_area in arch_gnttab_valloc
+Date: Wed, 30 Sep 2020 19:51:32 +0200
+Message-Id: <20200930175133.1252382-10-hch@lst.de>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200930175133.1252382-1-hch@lst.de>
 References: <20200930175133.1252382-1-hch@lst.de>
@@ -108,123 +107,67 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-shmem_pin_map somewhat awkwardly reimplements vmap using
-alloc_vm_area and manual pte setup.  The only practical difference
-is that alloc_vm_area prefeaults the vmalloc area PTEs, which doesn't
-seem to be required here (and could be added to vmap using a flag if
-actually required).  Switch to use vmap, and use vfree to free both the
-vmalloc mapping and the page array, as well as dropping the references
-to each page.
+Replace the last call to alloc_vm_area with an open coded version using
+an iterator in struct gnttab_vm_area instead of the triple indirection
+magic in alloc_vm_area.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
-Reviewed-by: Tvrtko Ursulin <tvrtko.ursulin@intel.com>
+Reviewed-by: Boris Ostrovsky <boris.ostrovsky@oracle.com>
 ---
- drivers/gpu/drm/i915/gt/shmem_utils.c | 76 +++++++--------------------
- 1 file changed, 18 insertions(+), 58 deletions(-)
+ arch/x86/xen/grant-table.c | 27 ++++++++++++++++++++-------
+ 1 file changed, 20 insertions(+), 7 deletions(-)
 
-diff --git a/drivers/gpu/drm/i915/gt/shmem_utils.c b/drivers/gpu/drm/i915/gt/shmem_utils.c
-index 43c7acbdc79dea..f011ea42487e11 100644
---- a/drivers/gpu/drm/i915/gt/shmem_utils.c
-+++ b/drivers/gpu/drm/i915/gt/shmem_utils.c
-@@ -49,80 +49,40 @@ struct file *shmem_create_from_object(struct drm_i915_gem_object *obj)
- 	return file;
- }
+diff --git a/arch/x86/xen/grant-table.c b/arch/x86/xen/grant-table.c
+index 4988e19598c8a5..1e681bf62561a0 100644
+--- a/arch/x86/xen/grant-table.c
++++ b/arch/x86/xen/grant-table.c
+@@ -25,6 +25,7 @@
+ static struct gnttab_vm_area {
+ 	struct vm_struct *area;
+ 	pte_t **ptes;
++	int idx;
+ } gnttab_shared_vm_area, gnttab_status_vm_area;
  
--static size_t shmem_npte(struct file *file)
--{
--	return file->f_mapping->host->i_size >> PAGE_SHIFT;
--}
--
--static void __shmem_unpin_map(struct file *file, void *ptr, size_t n_pte)
--{
--	unsigned long pfn;
--
--	vunmap(ptr);
--
--	for (pfn = 0; pfn < n_pte; pfn++) {
--		struct page *page;
--
--		page = shmem_read_mapping_page_gfp(file->f_mapping, pfn,
--						   GFP_KERNEL);
--		if (!WARN_ON(IS_ERR(page))) {
--			put_page(page);
--			put_page(page);
--		}
--	}
--}
--
- void *shmem_pin_map(struct file *file)
- {
--	const size_t n_pte = shmem_npte(file);
--	pte_t *stack[32], **ptes, **mem;
--	struct vm_struct *area;
--	unsigned long pfn;
--
--	mem = stack;
--	if (n_pte > ARRAY_SIZE(stack)) {
--		mem = kvmalloc_array(n_pte, sizeof(*mem), GFP_KERNEL);
--		if (!mem)
--			return NULL;
--	}
-+	struct page **pages;
-+	size_t n_pages, i;
-+	void *vaddr;
- 
--	area = alloc_vm_area(n_pte << PAGE_SHIFT, mem);
--	if (!area) {
--		if (mem != stack)
--			kvfree(mem);
-+	n_pages = file->f_mapping->host->i_size >> PAGE_SHIFT;
-+	pages = kvmalloc_array(n_pages, sizeof(*pages), GFP_KERNEL);
-+	if (!pages)
- 		return NULL;
--	}
- 
--	ptes = mem;
--	for (pfn = 0; pfn < n_pte; pfn++) {
--		struct page *page;
--
--		page = shmem_read_mapping_page_gfp(file->f_mapping, pfn,
--						   GFP_KERNEL);
--		if (IS_ERR(page))
-+	for (i = 0; i < n_pages; i++) {
-+		pages[i] = shmem_read_mapping_page_gfp(file->f_mapping, i,
-+						       GFP_KERNEL);
-+		if (IS_ERR(pages[i]))
- 			goto err_page;
--
--		**ptes++ = mk_pte(page,  PAGE_KERNEL);
+ int arch_gnttab_map_shared(unsigned long *frames, unsigned long nr_gframes,
+@@ -90,19 +91,31 @@ void arch_gnttab_unmap(void *shared, unsigned long nr_gframes)
  	}
- 
--	if (mem != stack)
--		kvfree(mem);
--
-+	vaddr = vmap(pages, n_pages, VM_MAP_PUT_PAGES, PAGE_KERNEL);
-+	if (!vaddr)
-+		goto err_page;
- 	mapping_set_unevictable(file->f_mapping);
--	return area->addr;
--
-+	return vaddr;
- err_page:
--	if (mem != stack)
--		kvfree(mem);
--
--	__shmem_unpin_map(file, area->addr, pfn);
-+	while (--i >= 0)
-+		put_page(pages[i]);
-+	kvfree(pages);
- 	return NULL;
  }
  
- void shmem_unpin_map(struct file *file, void *ptr)
++static int gnttab_apply(pte_t *pte, unsigned long addr, void *data)
++{
++	struct gnttab_vm_area *area = data;
++
++	area->ptes[area->idx++] = pte;
++	return 0;
++}
++
+ static int arch_gnttab_valloc(struct gnttab_vm_area *area, unsigned nr_frames)
  {
- 	mapping_clear_unevictable(file->f_mapping);
--	__shmem_unpin_map(file, ptr, shmem_npte(file));
-+	vfree(ptr);
+ 	area->ptes = kmalloc_array(nr_frames, sizeof(*area->ptes), GFP_KERNEL);
+ 	if (area->ptes == NULL)
+ 		return -ENOMEM;
+-
+-	area->area = alloc_vm_area(PAGE_SIZE * nr_frames, area->ptes);
+-	if (area->area == NULL) {
+-		kfree(area->ptes);
+-		return -ENOMEM;
+-	}
+-
++	area->area = get_vm_area(PAGE_SIZE * nr_frames, VM_IOREMAP);
++	if (!area->area)
++		goto out_free_ptes;
++	if (apply_to_page_range(&init_mm, (unsigned long)area->area->addr,
++			PAGE_SIZE * nr_frames, gnttab_apply, area))
++		goto out_free_vm_area;
+ 	return 0;
++out_free_vm_area:
++	free_vm_area(area->area);
++out_free_ptes:
++	kfree(area->ptes);
++	return -ENOMEM;
  }
  
- static int __shmem_rw(struct file *file, loff_t off,
+ static void arch_gnttab_vfree(struct gnttab_vm_area *area)
 -- 
 2.28.0
 
