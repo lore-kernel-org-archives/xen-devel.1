@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4CF3AC47429
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B4191C4727C
 	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 17:52:16 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EB1A920706
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 17:52:15 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 5B92720706
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 17:52:16 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="KBWFZCTN"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EB1A920706
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="oIbNov1y"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5B92720706
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.855.2927 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.854.2915 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNgGr-0005S9-4D; Wed, 30 Sep 2020 17:52:05 +0000
+	id 1kNgGo-0005QR-Rb; Wed, 30 Sep 2020 17:52:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 855.2927; Wed, 30 Sep 2020 17:52:05 +0000
+Received: by outflank-mailman (output) from mailman id 854.2915; Wed, 30 Sep 2020 17:52:02 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNgGr-0005S2-0t; Wed, 30 Sep 2020 17:52:05 +0000
-Received: by outflank-mailman (input) for mailman id 855;
- Wed, 30 Sep 2020 17:52:03 +0000
+	id 1kNgGo-0005QK-OT; Wed, 30 Sep 2020 17:52:02 +0000
+Received: by outflank-mailman (input) for mailman id 854;
+ Wed, 30 Sep 2020 17:52:01 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=m0D6=DH=casper.srs.infradead.org=batv+fa6e45c137c1199df5c4+6247+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1kNgGp-0005QF-OQ
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 17:52:03 +0000
+ id 1kNgGk-0005QF-Po
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 17:52:01 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9da8ae00-4571-4008-b9bb-bffcab56ba27;
- Wed, 30 Sep 2020 17:51:55 +0000 (UTC)
+ id 39d71b1d-1a81-4cba-a0b3-c56972417afa;
+ Wed, 30 Sep 2020 17:51:56 +0000 (UTC)
 Received: from [2001:4bb8:180:7b62:c70:4a89:bc61:4] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kNgGY-0001Cn-BM; Wed, 30 Sep 2020 17:51:46 +0000
+ id 1kNgGR-0001Bv-8l; Wed, 30 Sep 2020 17:51:39 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=m0D6=DH=casper.srs.infradead.org=batv+fa6e45c137c1199df5c4+6247+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1kNgGp-0005QF-OQ
-	for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 17:52:03 +0000
-X-Inumbo-ID: 9da8ae00-4571-4008-b9bb-bffcab56ba27
+	id 1kNgGk-0005QF-Po
+	for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 17:52:01 +0000
+X-Inumbo-ID: 39d71b1d-1a81-4cba-a0b3-c56972417afa
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 9da8ae00-4571-4008-b9bb-bffcab56ba27;
-	Wed, 30 Sep 2020 17:51:55 +0000 (UTC)
+	id 39d71b1d-1a81-4cba-a0b3-c56972417afa;
+	Wed, 30 Sep 2020 17:51:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=xnYvbbr90efHFoDVTt6qGpKYl4GIRbFbSmGm2q0tkCk=; b=KBWFZCTNZLSuYgS04nOzQz06zg
-	iDkJxQcVbBokFEgWWXdCe9ESfaBeWIxbzGzZff4SUGcqeqHkpzsN7dmTenlSI91q7a2zSY02a9jXH
-	Ak7Jl3G4PYWbF62vy72xbdSHKUVJLeQbVLveFrSoT8if5aSkLj4691ODUbFRSLTBhRhD7tnTMfGgG
-	HlEREA85fARHi76yzdkL6zUsUF6Qi/EeSDzgfVfxtSyJ5INDSxvZTT2XM4v74lKEg1QEzUDENmidp
-	Mg01aSGkzddIjZVQFma+JQjehLuH+Ctxzf4AIW28h2v7nfy71SPfHeKffF2+p4fV/pMDRMx5tolPn
-	iJPzFoiA==;
+	bh=cxDf+nMgR/LOq5Vlf/2efNcelt6NT7vAwUR//5r7v5s=; b=oIbNov1yr7qopxOY0Au4jvEsdK
+	7bue1e+CqD8gaid60++NSJbw8dKsKhgJV5OlIs4HYzIAnz0SkWmAXE87RWoUPGI/kYTJxn3sUhlEg
+	3f7sdlFNrjb5IbY4ChhuhAZFxXgHQ3ij8YTJ7ltX6zy1iyDYPSjxQ8kb2JiLJNZAZMMZ0NeB+OIXb
+	/Zyt4LeJocN4doFnDh6aDHwEvg1uaikYeDNU09gRcviPalqMuK7x2RDGwcIQJAkFbfkl+Oyh7gjEh
+	gQDGwjP0PaYPey4sImu7Knye+XoWXan8+84cVPE9TYHiU8cuDBP+6Tdpjwh2JeSPCmbaw+91IgtQ0
+	fOFxmfEg==;
 Received: from [2001:4bb8:180:7b62:c70:4a89:bc61:4] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1kNgGY-0001Cn-BM; Wed, 30 Sep 2020 17:51:46 +0000
+	id 1kNgGR-0001Bv-8l; Wed, 30 Sep 2020 17:51:39 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Andrew Morton <akpm@linux-foundation.org>
 Cc: Peter Zijlstra <peterz@infradead.org>,
@@ -97,9 +97,9 @@ Cc: Peter Zijlstra <peterz@infradead.org>,
 	intel-gfx@lists.freedesktop.org,
 	dri-devel@lists.freedesktop.org,
 	linux-mm@kvack.org
-Subject: [PATCH 08/10] xen/xenbus: use apply_to_page_range directly in xenbus_map_ring_pv
-Date: Wed, 30 Sep 2020 19:51:31 +0200
-Message-Id: <20200930175133.1252382-9-hch@lst.de>
+Subject: [PATCH 03/10] mm: add a vmap_pfn function
+Date: Wed, 30 Sep 2020 19:51:26 +0200
+Message-Id: <20200930175133.1252382-4-hch@lst.de>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200930175133.1252382-1-hch@lst.de>
 References: <20200930175133.1252382-1-hch@lst.de>
@@ -107,79 +107,99 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-Replacing alloc_vm_area with get_vm_area_caller + apply_page_range
-allows to fill put the phys_addr values directly instead of doing
-another loop over all addresses.
+Add a proper helper to remap PFNs into kernel virtual space so that
+drivers don't have to abuse alloc_vm_area and open coded PTE
+manipulation for it.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
-Reviewed-by: Boris Ostrovsky <boris.ostrovsky@oracle.com>
 ---
- drivers/xen/xenbus/xenbus_client.c | 30 ++++++++++++++++--------------
- 1 file changed, 16 insertions(+), 14 deletions(-)
+ include/linux/vmalloc.h |  1 +
+ mm/Kconfig              |  3 +++
+ mm/vmalloc.c            | 45 +++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 49 insertions(+)
 
-diff --git a/drivers/xen/xenbus/xenbus_client.c b/drivers/xen/xenbus/xenbus_client.c
-index 2690318ad50f48..fd80e318b99cc7 100644
---- a/drivers/xen/xenbus/xenbus_client.c
-+++ b/drivers/xen/xenbus/xenbus_client.c
-@@ -73,16 +73,13 @@ struct map_ring_valloc {
- 	struct xenbus_map_node *node;
+diff --git a/include/linux/vmalloc.h b/include/linux/vmalloc.h
+index b899681e3ff9f0..c77efeac242514 100644
+--- a/include/linux/vmalloc.h
++++ b/include/linux/vmalloc.h
+@@ -122,6 +122,7 @@ extern void vfree_atomic(const void *addr);
  
- 	/* Why do we need two arrays? See comment of __xenbus_map_ring */
--	union {
--		unsigned long addrs[XENBUS_MAX_RING_GRANTS];
--		pte_t *ptes[XENBUS_MAX_RING_GRANTS];
--	};
-+	unsigned long addrs[XENBUS_MAX_RING_GRANTS];
- 	phys_addr_t phys_addrs[XENBUS_MAX_RING_GRANTS];
+ extern void *vmap(struct page **pages, unsigned int count,
+ 			unsigned long flags, pgprot_t prot);
++void *vmap_pfn(unsigned long *pfns, unsigned int count, pgprot_t prot);
+ extern void vunmap(const void *addr);
  
- 	struct gnttab_map_grant_ref map[XENBUS_MAX_RING_GRANTS];
- 	struct gnttab_unmap_grant_ref unmap[XENBUS_MAX_RING_GRANTS];
+ extern int remap_vmalloc_range_partial(struct vm_area_struct *vma,
+diff --git a/mm/Kconfig b/mm/Kconfig
+index 6c974888f86f97..6fa7ba1199eb1e 100644
+--- a/mm/Kconfig
++++ b/mm/Kconfig
+@@ -815,6 +815,9 @@ config DEVICE_PRIVATE
+ 	  memory; i.e., memory that is only accessible from the device (or
+ 	  group of devices). You likely also want to select HMM_MIRROR.
  
--	unsigned int idx;	/* HVM only. */
-+	unsigned int idx;
- };
- 
- static DEFINE_SPINLOCK(xenbus_valloc_lock);
-@@ -686,6 +683,14 @@ int xenbus_unmap_ring_vfree(struct xenbus_device *dev, void *vaddr)
- EXPORT_SYMBOL_GPL(xenbus_unmap_ring_vfree);
- 
- #ifdef CONFIG_XEN_PV
-+static int map_ring_apply(pte_t *pte, unsigned long addr, void *data)
-+{
-+	struct map_ring_valloc *info = data;
++config VMAP_PFN
++	bool
 +
-+	info->phys_addrs[info->idx++] = arbitrary_virt_to_machine(pte).maddr;
+ config FRAME_VECTOR
+ 	bool
+ 
+diff --git a/mm/vmalloc.c b/mm/vmalloc.c
+index ffad65f052c3f9..e2a2ded8d93478 100644
+--- a/mm/vmalloc.c
++++ b/mm/vmalloc.c
+@@ -2413,6 +2413,51 @@ void *vmap(struct page **pages, unsigned int count,
+ }
+ EXPORT_SYMBOL(vmap);
+ 
++#ifdef CONFIG_VMAP_PFN
++struct vmap_pfn_data {
++	unsigned long	*pfns;
++	pgprot_t	prot;
++	unsigned int	idx;
++};
++
++static int vmap_pfn_apply(pte_t *pte, unsigned long addr, void *private)
++{
++	struct vmap_pfn_data *data = private;
++
++	if (WARN_ON_ONCE(pfn_valid(data->pfns[data->idx])))
++		return -EINVAL;
++	*pte = pte_mkspecial(pfn_pte(data->pfns[data->idx++], data->prot));
 +	return 0;
 +}
 +
- static int xenbus_map_ring_pv(struct xenbus_device *dev,
- 			      struct map_ring_valloc *info,
- 			      grant_ref_t *gnt_refs,
-@@ -694,18 +699,15 @@ static int xenbus_map_ring_pv(struct xenbus_device *dev,
- {
- 	struct xenbus_map_node *node = info->node;
- 	struct vm_struct *area;
--	int err = GNTST_okay;
--	int i;
--	bool leaked;
-+	bool leaked = false;
-+	int err = -ENOMEM;
- 
--	area = alloc_vm_area(XEN_PAGE_SIZE * nr_grefs, info->ptes);
-+	area = get_vm_area(XEN_PAGE_SIZE * nr_grefs, VM_IOREMAP);
- 	if (!area)
- 		return -ENOMEM;
--
--	for (i = 0; i < nr_grefs; i++)
--		info->phys_addrs[i] =
--			arbitrary_virt_to_machine(info->ptes[i]).maddr;
--
++/**
++ * vmap_pfn - map an array of PFNs into virtually contiguous space
++ * @pfns: array of PFNs
++ * @count: number of pages to map
++ * @prot: page protection for the mapping
++ *
++ * Maps @count PFNs from @pfns into contiguous kernel virtual space and returns
++ * the start address of the mapping.
++ */
++void *vmap_pfn(unsigned long *pfns, unsigned int count, pgprot_t prot)
++{
++	struct vmap_pfn_data data = { .pfns = pfns, .prot = pgprot_nx(prot) };
++	struct vm_struct *area;
++
++	area = get_vm_area_caller(count * PAGE_SIZE, VM_IOREMAP,
++			__builtin_return_address(0));
++	if (!area)
++		return NULL;
 +	if (apply_to_page_range(&init_mm, (unsigned long)area->addr,
-+				XEN_PAGE_SIZE * nr_grefs, map_ring_apply, info))
-+		goto failed;
- 	err = __xenbus_map_ring(dev, gnt_refs, nr_grefs, node->handles,
- 				info, GNTMAP_host_map | GNTMAP_contains_pte,
- 				&leaked);
++			count * PAGE_SIZE, vmap_pfn_apply, &data)) {
++		free_vm_area(area);
++		return NULL;
++	}
++	return area->addr;
++}
++EXPORT_SYMBOL_GPL(vmap_pfn);
++#endif /* CONFIG_VMAP_PFN */
++
+ static void *__vmalloc_area_node(struct vm_struct *area, gfp_t gfp_mask,
+ 				 pgprot_t prot, int node)
+ {
 -- 
 2.28.0
 
