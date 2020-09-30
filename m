@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2FA4CC4727C
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 17:52:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DC487C4727C
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 17:57:11 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C399420706
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 17:52:54 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 8AE1B2074B
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2020 17:57:11 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="wRGt4EZ+"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C399420706
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="o71az0TA"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8AE1B2074B
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.864.3023 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.877.3035 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNgHV-0006AF-5q; Wed, 30 Sep 2020 17:52:45 +0000
+	id 1kNgLY-0006h5-Ur; Wed, 30 Sep 2020 17:56:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 864.3023; Wed, 30 Sep 2020 17:52:45 +0000
+Received: by outflank-mailman (output) from mailman id 877.3035; Wed, 30 Sep 2020 17:56:56 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNgHV-0006A6-0j; Wed, 30 Sep 2020 17:52:45 +0000
-Received: by outflank-mailman (input) for mailman id 864;
- Wed, 30 Sep 2020 17:52:43 +0000
+	id 1kNgLY-0006gy-Rp; Wed, 30 Sep 2020 17:56:56 +0000
+Received: by outflank-mailman (input) for mailman id 877;
+ Wed, 30 Sep 2020 17:56:56 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=m0D6=DH=casper.srs.infradead.org=batv+fa6e45c137c1199df5c4+6247+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1kNgHT-0005QF-Po
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 17:52:43 +0000
+ id 1kNgHY-0005QF-Q4
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 17:52:48 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 4bcea780-63e7-487d-8d34-970fd9affa36;
- Wed, 30 Sep 2020 17:51:57 +0000 (UTC)
+ id ff48d49e-23ae-4a95-8d7b-d03db52e643a;
+ Wed, 30 Sep 2020 17:51:59 +0000 (UTC)
 Received: from [2001:4bb8:180:7b62:c70:4a89:bc61:4] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kNgGO-0001Bg-9G; Wed, 30 Sep 2020 17:51:36 +0000
+ id 1kNgGc-0001DO-6R; Wed, 30 Sep 2020 17:51:50 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=m0D6=DH=casper.srs.infradead.org=batv+fa6e45c137c1199df5c4+6247+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1kNgHT-0005QF-Po
-	for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 17:52:43 +0000
-X-Inumbo-ID: 4bcea780-63e7-487d-8d34-970fd9affa36
+	id 1kNgHY-0005QF-Q4
+	for xen-devel@lists.xenproject.org; Wed, 30 Sep 2020 17:52:48 +0000
+X-Inumbo-ID: ff48d49e-23ae-4a95-8d7b-d03db52e643a
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 4bcea780-63e7-487d-8d34-970fd9affa36;
-	Wed, 30 Sep 2020 17:51:57 +0000 (UTC)
+	id ff48d49e-23ae-4a95-8d7b-d03db52e643a;
+	Wed, 30 Sep 2020 17:51:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=EtVpkGxd0Kyhqnh/t2FVgPRi015JMv+YUxF5ITQDDnw=; b=wRGt4EZ+2E5doJTK4BmkM+D/+o
-	Dw04jnAiVsd8EeZlT/iM7dcBWh9nEdUYaM3QlQFzIBfFUrQz6ym6uMLch3YYJ1gNmWsFeQ+DGI5hA
-	6RbHCb4kh/WuFF20eWHk386XzGBd64UtU3AaFJfDc1tqK479wRzY3Y5P1tuGmg4lRK7xW2DHD8lrC
-	u88YURg64H9BWCOi0q1q70JYWCmlUf5QVubTIUQrp/FKxmiaD8hbc53nc5WN+5oxqt01VyTs0zV2m
-	dBOz8RchoXv6Clq4JpwOKYJcyJmPKZuczxlKVrpSuAR61lRlDRmavVeyDRdv+nI8MiK97msrBVpqE
-	sTeju+vA==;
+	bh=ix+nhROFgS2R/TvryqxFuXEm6pOX6uuPKFVKed32kPg=; b=o71az0TAGIt+o23t9vEEPg9kBX
+	49t5J7kjHFOTFFFV1reywEKaB+iF5d6lYqgVAc7lLH43QPfngUbCNFDu6idG354NtO0I20tYUmc/S
+	ZNAXVCDrReTupKXsw6F5l3EHk46VQsKDWXEuoaEZwsGrnxoyazLXMES+Zm9kzi1lpuCrDw+OOKSKn
+	N9e7DoOAmhqH/Xf3idF4DAirJzTM4dZVdj0+5Xss/2Veo4YkuL/fEADv9DU6/Q4fO8Mv09yhcRXRO
+	AJrpiNZlL0BIfp1/UyxfaKevrL7DT2VegvYl4HXyjB6G5Xg6D8J438SNVin3yQs9fbhbLooyU+aY6
+	Vr5NdFSA==;
 Received: from [2001:4bb8:180:7b62:c70:4a89:bc61:4] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1kNgGO-0001Bg-9G; Wed, 30 Sep 2020 17:51:36 +0000
+	id 1kNgGc-0001DO-6R; Wed, 30 Sep 2020 17:51:50 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Andrew Morton <akpm@linux-foundation.org>
 Cc: Peter Zijlstra <peterz@infradead.org>,
@@ -97,9 +97,9 @@ Cc: Peter Zijlstra <peterz@infradead.org>,
 	intel-gfx@lists.freedesktop.org,
 	dri-devel@lists.freedesktop.org,
 	linux-mm@kvack.org
-Subject: [PATCH 01/10] mm: update the documentation for vfree
-Date: Wed, 30 Sep 2020 19:51:24 +0200
-Message-Id: <20200930175133.1252382-2-hch@lst.de>
+Subject: [PATCH 10/10] mm: remove alloc_vm_area
+Date: Wed, 30 Sep 2020 19:51:33 +0200
+Message-Id: <20200930175133.1252382-11-hch@lst.de>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20200930175133.1252382-1-hch@lst.de>
 References: <20200930175133.1252382-1-hch@lst.de>
@@ -107,58 +107,115 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
+All users are gone now.
 
- * Document that you can call vfree() on an address returned from vmap()
- * Remove the note about the minimum size -- the minimum size of a vmalloc
-   allocation is one page
- * Add a Context: section
- * Fix capitalisation
- * Reword the prohibition on calling from NMI context to avoid a double
-   negative
-
-Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- mm/vmalloc.c | 21 +++++++++++----------
- 1 file changed, 11 insertions(+), 10 deletions(-)
+ include/linux/vmalloc.h |  5 +----
+ mm/nommu.c              |  7 ------
+ mm/vmalloc.c            | 48 -----------------------------------------
+ 3 files changed, 1 insertion(+), 59 deletions(-)
 
+diff --git a/include/linux/vmalloc.h b/include/linux/vmalloc.h
+index c77efeac242514..938eaf9517e266 100644
+--- a/include/linux/vmalloc.h
++++ b/include/linux/vmalloc.h
+@@ -169,6 +169,7 @@ extern struct vm_struct *__get_vm_area_caller(unsigned long size,
+ 					unsigned long flags,
+ 					unsigned long start, unsigned long end,
+ 					const void *caller);
++void free_vm_area(struct vm_struct *area);
+ extern struct vm_struct *remove_vm_area(const void *addr);
+ extern struct vm_struct *find_vm_area(const void *addr);
+ 
+@@ -204,10 +205,6 @@ static inline void set_vm_flush_reset_perms(void *addr)
+ }
+ #endif
+ 
+-/* Allocate/destroy a 'vmalloc' VM area. */
+-extern struct vm_struct *alloc_vm_area(size_t size, pte_t **ptes);
+-extern void free_vm_area(struct vm_struct *area);
+-
+ /* for /dev/kmem */
+ extern long vread(char *buf, char *addr, unsigned long count);
+ extern long vwrite(char *buf, char *addr, unsigned long count);
+diff --git a/mm/nommu.c b/mm/nommu.c
+index 75a327149af127..9272f30e4c4726 100644
+--- a/mm/nommu.c
++++ b/mm/nommu.c
+@@ -354,13 +354,6 @@ void vm_unmap_aliases(void)
+ }
+ EXPORT_SYMBOL_GPL(vm_unmap_aliases);
+ 
+-struct vm_struct *alloc_vm_area(size_t size, pte_t **ptes)
+-{
+-	BUG();
+-	return NULL;
+-}
+-EXPORT_SYMBOL_GPL(alloc_vm_area);
+-
+ void free_vm_area(struct vm_struct *area)
+ {
+ 	BUG();
 diff --git a/mm/vmalloc.c b/mm/vmalloc.c
-index be4724b916b3e7..8770260419af06 100644
+index e2a2ded8d93478..3bc5b832451ef2 100644
 --- a/mm/vmalloc.c
 +++ b/mm/vmalloc.c
-@@ -2321,20 +2321,21 @@ static void __vfree(const void *addr)
+@@ -3083,54 +3083,6 @@ int remap_vmalloc_range(struct vm_area_struct *vma, void *addr,
  }
+ EXPORT_SYMBOL(remap_vmalloc_range);
  
- /**
-- * vfree - release memory allocated by vmalloc()
-- * @addr:  memory base address
-+ * vfree - Release memory allocated by vmalloc()
-+ * @addr:  Memory base address
-  *
-- * Free the virtually continuous memory area starting at @addr, as
-- * obtained from vmalloc(), vmalloc_32() or __vmalloc(). If @addr is
-- * NULL, no operation is performed.
-+ * Free the virtually continuous memory area starting at @addr, as obtained
-+ * from one of the vmalloc() family of APIs.  This will usually also free the
-+ * physical memory underlying the virtual allocation, but that memory is
-+ * reference counted, so it will not be freed until the last user goes away.
-  *
-- * Must not be called in NMI context (strictly speaking, only if we don't
-- * have CONFIG_ARCH_HAVE_NMI_SAFE_CMPXCHG, but making the calling
-- * conventions for vfree() arch-depenedent would be a really bad idea)
-+ * If @addr is NULL, no operation is performed.
-  *
-+ * Context:
-  * May sleep if called *not* from interrupt context.
+-static int f(pte_t *pte, unsigned long addr, void *data)
+-{
+-	pte_t ***p = data;
+-
+-	if (p) {
+-		*(*p) = pte;
+-		(*p)++;
+-	}
+-	return 0;
+-}
+-
+-/**
+- * alloc_vm_area - allocate a range of kernel address space
+- * @size:	   size of the area
+- * @ptes:	   returns the PTEs for the address space
 - *
-- * NOTE: assumes that the object at @addr has a size >= sizeof(llist_node)
-+ * Must not be called in NMI context (strictly speaking, it could be
-+ * if we have CONFIG_ARCH_HAVE_NMI_SAFE_CMPXCHG, but making the calling
-+ * conventions for vfree() arch-depenedent would be a really bad idea).
-  */
- void vfree(const void *addr)
+- * Returns:	NULL on failure, vm_struct on success
+- *
+- * This function reserves a range of kernel address space, and
+- * allocates pagetables to map that range.  No actual mappings
+- * are created.
+- *
+- * If @ptes is non-NULL, pointers to the PTEs (in init_mm)
+- * allocated for the VM area are returned.
+- */
+-struct vm_struct *alloc_vm_area(size_t size, pte_t **ptes)
+-{
+-	struct vm_struct *area;
+-
+-	area = get_vm_area_caller(size, VM_IOREMAP,
+-				__builtin_return_address(0));
+-	if (area == NULL)
+-		return NULL;
+-
+-	/*
+-	 * This ensures that page tables are constructed for this region
+-	 * of kernel virtual address space and mapped into init_mm.
+-	 */
+-	if (apply_to_page_range(&init_mm, (unsigned long)area->addr,
+-				size, f, ptes ? &ptes : NULL)) {
+-		free_vm_area(area);
+-		return NULL;
+-	}
+-
+-	return area;
+-}
+-EXPORT_SYMBOL_GPL(alloc_vm_area);
+-
+ void free_vm_area(struct vm_struct *area)
  {
+ 	struct vm_struct *ret;
 -- 
 2.28.0
 
