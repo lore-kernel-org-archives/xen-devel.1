@@ -2,28 +2,25 @@ Return-Path: <SRS0=IV2x=DI=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.2 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 026B5C4727F
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2020 10:40:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 07930C4727C
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2020 10:46:18 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8245220719
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2020 10:40:37 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="hCz7Kqa/"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8245220719
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id A3126207DE
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2020 10:46:17 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A3126207DE
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.1179.3897 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1181.3909 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNw0X-0007Wu-Fk; Thu, 01 Oct 2020 10:40:17 +0000
+	id 1kNw68-0007jg-3W; Thu, 01 Oct 2020 10:46:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1179.3897; Thu, 01 Oct 2020 10:40:17 +0000
+Received: by outflank-mailman (output) from mailman id 1181.3909; Thu, 01 Oct 2020 10:46:04 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,126 +35,97 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNw0X-0007Wn-Cd; Thu, 01 Oct 2020 10:40:17 +0000
-Received: by outflank-mailman (input) for mailman id 1179;
- Thu, 01 Oct 2020 10:40:15 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=9aU5=DI=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kNw0V-0007Wi-TR
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2020 10:40:15 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id f5a1c4db-e72b-480c-afe3-55a1b5a76587;
- Thu, 01 Oct 2020 10:40:14 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id E4F3AABBD;
- Thu,  1 Oct 2020 10:40:13 +0000 (UTC)
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+	id 1kNw68-0007jZ-0W; Thu, 01 Oct 2020 10:46:04 +0000
+Received: by outflank-mailman (input) for mailman id 1181;
+ Thu, 01 Oct 2020 10:46:01 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=Tj+q=DI=gmail.com=wei.liu.xen@srs-us1.protection.inumbo.net>)
+ id 1kNw65-0007jU-St
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2020 10:46:01 +0000
+Received: from mail-wr1-f65.google.com (unknown [209.85.221.65])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 03c6abc4-b95a-4d27-b81a-d4e5c923de3e;
+ Thu, 01 Oct 2020 10:46:01 +0000 (UTC)
+Received: by mail-wr1-f65.google.com with SMTP id z4so5120985wrr.4
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2020 03:46:00 -0700 (PDT)
+Received: from liuwe-devbox-debian-v2 ([51.145.34.42])
+ by smtp.gmail.com with ESMTPSA id q12sm8370065wrs.48.2020.10.01.03.45.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 01 Oct 2020 03:45:59 -0700 (PDT)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=9aU5=DI=suse.com=jgross@srs-us1.protection.inumbo.net>)
-	id 1kNw0V-0007Wi-TR
-	for xen-devel@lists.xenproject.org; Thu, 01 Oct 2020 10:40:15 +0000
-X-Inumbo-ID: f5a1c4db-e72b-480c-afe3-55a1b5a76587
-Received: from mx2.suse.de (unknown [195.135.220.15])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id f5a1c4db-e72b-480c-afe3-55a1b5a76587;
-	Thu, 01 Oct 2020 10:40:14 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1601548814;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=vdMeXAVxFJALT1KETj5jBE9MDFZXtlda6dsqMXQoKoQ=;
-	b=hCz7Kqa/ySLuLCaUAZHgklGIXsktJvnRCnqxcgmRewjGvU9X6OPmXXprz0Qs1B3/1iUfeP
-	S79yTKJV5aNsDLr0ZbrXKMblKIEtJtqApuGM2PWlorFy2RcZtsIcYGbdMtCPWcxRx283jw
-	9TBbSucwzuiwgDnAkRQPpGxskQr8Am8=
-Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id E4F3AABBD;
-	Thu,  1 Oct 2020 10:40:13 +0000 (UTC)
-Subject: Re: [PATCH 2/3] tools/init-xenstore-domain: support xenstore pvh
- stubdom
-To: Wei Liu <wl@xen.org>
-Cc: xen-devel@lists.xenproject.org, Ian Jackson <iwj@xenproject.org>
-References: <20200923064541.19546-1-jgross@suse.com>
- <20200923064541.19546-3-jgross@suse.com>
- <20200930154611.xqzdumwec7nlnidl@liuwe-devbox-debian-v2>
-From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Message-ID: <38de2f90-d6b6-af4b-2653-58119cef927d@suse.com>
-Date: Thu, 1 Oct 2020 12:40:13 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.0
+	(envelope-from <SRS0=Tj+q=DI=gmail.com=wei.liu.xen@srs-us1.protection.inumbo.net>)
+	id 1kNw65-0007jU-St
+	for xen-devel@lists.xenproject.org; Thu, 01 Oct 2020 10:46:01 +0000
+X-Inumbo-ID: 03c6abc4-b95a-4d27-b81a-d4e5c923de3e
+Received: from mail-wr1-f65.google.com (unknown [209.85.221.65])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id 03c6abc4-b95a-4d27-b81a-d4e5c923de3e;
+	Thu, 01 Oct 2020 10:46:01 +0000 (UTC)
+Received: by mail-wr1-f65.google.com with SMTP id z4so5120985wrr.4
+        for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2020 03:46:00 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:content-transfer-encoding
+         :in-reply-to:user-agent;
+        bh=1w/r3HI2q9NYFccaKwJBM3EJgliC7iBndo7ofno+z6E=;
+        b=UHWLEyBs4C2yB/dDiJHNMZLTNgabzWG7wJ6WS1yk7tUbUgqIC4b6+ATsgd0AyQiIt0
+         hi4Lz9ShUNEuKkBXfKGA02Q9hyX4RZ/mknDI8jhprLNKn/MmLR0O5Wbw0stN8YDv2IcS
+         Wm1fdmrIleSxZNENxrBUJ5hcWMu8R1/G2eKsZQ1CdD28w9KfI5WPZDf6Z12/wU6bnALc
+         HaHX0PHD0Qb0cJUQ8aClsTEI4PYVfttMyr2DkTzLS+QdsEkCCM75TkYELPc7oltzMivn
+         BsvLkKquvvKdcaVpNADGtxPf1kg7lCLpQoj63gUqzhTPVvP6FOsDN4lJ0t/c8k08cB5I
+         sfAw==
+X-Gm-Message-State: AOAM532/2w1IE75HMGKobigwemgNZn7ve56aHnyXoKUbdRb4j2ConRCy
+	4J/BSNPJq+tkniHBDDb+N48=
+X-Google-Smtp-Source: ABdhPJxzjIK4hfFjtzblzYemBPxNxr75vZfECxRUpb4oxofsmcJ96ZvfWlIt+Mjl7ODRkKWqQXfMwg==
+X-Received: by 2002:a5d:44cc:: with SMTP id z12mr8445689wrr.189.1601549160198;
+        Thu, 01 Oct 2020 03:46:00 -0700 (PDT)
+Received: from liuwe-devbox-debian-v2 ([51.145.34.42])
+        by smtp.gmail.com with ESMTPSA id q12sm8370065wrs.48.2020.10.01.03.45.59
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 01 Oct 2020 03:45:59 -0700 (PDT)
+Date: Thu, 1 Oct 2020 10:45:57 +0000
+From: Wei Liu <wl@xen.org>
+To: =?utf-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Cc: Wei Liu <wl@xen.org>, xen-devel@lists.xenproject.org,
+	Ian Jackson <iwj@xenproject.org>,
+	Anthony PERARD <anthony.perard@citrix.com>
+Subject: Re: [PATCH v4 29/31] tools: rename global libxlutil make variables
+Message-ID: <20201001104557.5scj3po3s3fsx6tx@liuwe-devbox-debian-v2>
+References: <20200828150747.25305-1-jgross@suse.com>
+ <20200828150747.25305-30-jgross@suse.com>
+ <20200907155511.jhpucgrvmthhzlmv@liuwe-devbox-debian-v2>
+ <c908bdee-3ab6-6a4b-0c93-e38116a98a5c@suse.com>
 MIME-Version: 1.0
-In-Reply-To: <20200930154611.xqzdumwec7nlnidl@liuwe-devbox-debian-v2>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <c908bdee-3ab6-6a4b-0c93-e38116a98a5c@suse.com>
+User-Agent: NeoMutt/20180716
 
-On 30.09.20 17:46, Wei Liu wrote:
-> On Wed, Sep 23, 2020 at 08:45:40AM +0200, Juergen Gross wrote:
->> Instead of creating the xenstore-stubdom domain first and parsing the
->> kernel later do it the other way round. This enables to probe for the
->> domain type supported by the xenstore-stubdom and to support both, pv
->> and pvh type stubdoms.
->>
->> Try to parse the stubdom image first for PV support, if this fails use
->> HVM. Then create the domain with the appropriate type selected.
->>
->> Signed-off-by: Juergen Gross <jgross@suse.com>
-> [...]
->> +    dom->container_type = XC_DOM_HVM_CONTAINER;
->> +    rv = xc_dom_parse_image(dom);
->> +    if ( rv )
->> +    {
->> +        dom->container_type = XC_DOM_PV_CONTAINER;
->> +        rv = xc_dom_parse_image(dom);
->> +        if ( rv )
->> +        {
->> +            fprintf(stderr, "xc_dom_parse_image failed\n");
->> +            goto err;
->> +        }
->> +    }
->> +    else
->> +    {
->> +        config.flags |= XEN_DOMCTL_CDF_hvm | XEN_DOMCTL_CDF_hap;
->> +        config.arch.emulation_flags = XEN_X86_EMU_LAPIC;
->> +        dom->target_pages = mem_size >> XC_PAGE_SHIFT;
->> +        dom->mmio_size = GB(4) - LAPIC_BASE_ADDRESS;
->> +        dom->lowmem_end = (mem_size > LAPIC_BASE_ADDRESS) ?
->> +                          LAPIC_BASE_ADDRESS : mem_size;
->> +        dom->highmem_end = (mem_size > LAPIC_BASE_ADDRESS) ?
->> +                           GB(4) + mem_size - LAPIC_BASE_ADDRESS : 0;
->> +        dom->mmio_start = LAPIC_BASE_ADDRESS;
->> +        dom->max_vcpus = 1;
->> +        e820[0].addr = 0;
->> +        e820[0].size = dom->lowmem_end;
->> +        e820[0].type = E820_RAM;
->> +        e820[1].addr = LAPIC_BASE_ADDRESS;
->> +        e820[1].size = dom->mmio_size;
->> +        e820[1].type = E820_RESERVED;
->> +        e820[2].addr = GB(4);
->> +        e820[2].size = dom->highmem_end - GB(4);
+On Mon, Sep 07, 2020 at 06:16:32PM +0200, Jürgen Groß wrote:
+> On 07.09.20 17:55, Wei Liu wrote:
+> > On Fri, Aug 28, 2020 at 05:07:45PM +0200, Juergen Gross wrote:
+> > > Rename *_libxlutil make variables to *_libxenutil in order to avoid
+> > > nasty indirections when moving libxlutil under the tools/libs
+> > > infrastructure.
+> > 
+> > xl means xenlight.
+> > 
+> > So I think the name should be libxenlightutil here.
 > 
-> Do you not want to check if highmem_end is larger than GB(4) before
-> putting in this region?
+> I don't really mind, but given that the name is completely internal
+> to the build system I wonder whether the shorter name isn't more
+> pleasant.
 
-Oh, indeed I should.
+Oh, yes. It is just an internal name. That's fine then. There is no
+point in quibbling about this further.
+
+Acked-by: Wei Liu <wl@xen.org>
 
 > 
->> +        e820[2].type = E820_RAM;
->> +    }
 > 
-> This hardcoded e820 map doesn't seem very flexible, but we
-> control the guest kernel anyway so I think this should be fine.
-> 
-> The rest of this patch looks okay to me.
-
-Thanks.
-
-
-Juergen
-
+> Juergen
 
