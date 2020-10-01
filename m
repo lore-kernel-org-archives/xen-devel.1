@@ -2,29 +2,28 @@ Return-Path: <SRS0=IV2x=DI=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SIGNED_OFF_BY,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-5.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 17B1DC4741F
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2020 15:17:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 32C73C4727C
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2020 15:35:03 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7AB66208B6
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2020 15:17:45 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id D71532074B
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2020 15:35:02 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="RCbvnkVz"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7AB66208B6
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="rBm2fsaH"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D71532074B
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.1341.4451 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1347.4469 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kO0Ks-0002Cu-Li; Thu, 01 Oct 2020 15:17:34 +0000
+	id 1kO0bT-0003xg-6m; Thu, 01 Oct 2020 15:34:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1341.4451; Thu, 01 Oct 2020 15:17:34 +0000
+Received: by outflank-mailman (output) from mailman id 1347.4469; Thu, 01 Oct 2020 15:34:43 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,169 +38,90 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kO0Ks-0002Cn-HZ; Thu, 01 Oct 2020 15:17:34 +0000
-Received: by outflank-mailman (input) for mailman id 1341;
- Thu, 01 Oct 2020 15:17:32 +0000
+	id 1kO0bT-0003xZ-3Z; Thu, 01 Oct 2020 15:34:43 +0000
+Received: by outflank-mailman (input) for mailman id 1347;
+ Thu, 01 Oct 2020 15:34:41 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=uQij=DI=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1kO0Kq-0002Ch-Rz
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2020 15:17:32 +0000
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=gWzX=DI=xen.org=julien@srs-us1.protection.inumbo.net>)
+ id 1kO0bR-0003xU-3C
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2020 15:34:41 +0000
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 2180623e-ab2a-449f-a41e-227a19856e5b;
- Thu, 01 Oct 2020 15:17:31 +0000 (UTC)
+ id 070ba41b-fccf-438a-89ec-5929db84264a;
+ Thu, 01 Oct 2020 15:34:40 +0000 (UTC)
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1kO0bM-0000ul-23; Thu, 01 Oct 2020 15:34:36 +0000
+Received: from [54.239.6.185] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1kO0bL-00054I-OW; Thu, 01 Oct 2020 15:34:35 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=uQij=DI=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
-	id 1kO0Kq-0002Ch-Rz
-	for xen-devel@lists.xenproject.org; Thu, 01 Oct 2020 15:17:32 +0000
-X-Inumbo-ID: 2180623e-ab2a-449f-a41e-227a19856e5b
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
+	(envelope-from <SRS0=gWzX=DI=xen.org=julien@srs-us1.protection.inumbo.net>)
+	id 1kO0bR-0003xU-3C
+	for xen-devel@lists.xenproject.org; Thu, 01 Oct 2020 15:34:41 +0000
+X-Inumbo-ID: 070ba41b-fccf-438a-89ec-5929db84264a
+Received: from mail.xenproject.org (unknown [104.130.215.37])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 2180623e-ab2a-449f-a41e-227a19856e5b;
-	Thu, 01 Oct 2020 15:17:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1601565452;
-  h=subject:to:cc:references:from:message-id:date:
-   mime-version:in-reply-to:content-transfer-encoding;
-  bh=jBL60SOOVhAJRYV/tE73mmneTV6ZR28dsmbeF/fyPAQ=;
-  b=RCbvnkVz8mOHj9BCTPVo/vkjYNjhAv7iO+/YUjgmpFHt3gVAQdxAOhL8
-   KMGNA2FLjHsNmjWiwx7y/rDt7twSCwaL8Y9vkwB9tVR43qH33OcbsdVRE
-   ARdXWvcm4KeXo4QzbfgiYnEEBHtgUr4hDkUlLZua47zQdzLKIRG3IFcRf
-   g=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: orGed4YpnhoXaCuiVmgKLT/A7L1lNC2kERQQDbDg5XF8v36HP3fXjdg1PYGZxpcyi0PqFtovW/
- fJadu9LobTE+A4POn6qfm93wwnIKLxXoV4xNqQZJNwVLfqTJmAEMUDRlIk0/7Gqu/f4JReSOmT
- LXaoSa6IWcDnuvG+h8QzsoLdFNp68egJ+a+6WUlzLpvuuvWbo7kjbn+NXnigXf4+GZEWP45yuO
- xXIANfE44XXRET1g1WzReomWVnuNX6Z98oY/7a08KjOUdIWlVSK0B1l8FZmmSoA18AgGeN33sG
- 2SI=
-X-SBRS: None
-X-MesageID: 28420544
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.77,323,1596513600"; 
-   d="scan'208";a="28420544"
-Subject: Re: [PATCH v9 8/8] tools/libxc: add DOMAIN_CONTEXT records to the
- migration stream...
-To: Paul Durrant <paul@xen.org>, <xen-devel@lists.xenproject.org>
-CC: Paul Durrant <pdurrant@amazon.com>, Ian Jackson
-	<ian.jackson@eu.citrix.com>, Wei Liu <wl@xen.org>
-References: <20200924131030.1876-1-paul@xen.org>
- <20200924131030.1876-9-paul@xen.org>
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Message-ID: <2d6ac6ea-a312-6bac-bc7b-ea26541c1168@citrix.com>
-Date: Thu, 1 Oct 2020 16:17:25 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+	id 070ba41b-fccf-438a-89ec-5929db84264a;
+	Thu, 01 Oct 2020 15:34:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+	bh=IHj7Ual2gVJMYG9+yiC0YLQbptxHutGKeHtZpaT2xRA=; b=rBm2fsaHkw++l9kbtpPtkqaYIK
+	sqXGBQOKc0OQOk0NHSTfXDZY7nfv5kH9lSZjzSLyW0j8PPvEOrtPIuQmSoasPkt+Om32MbuL98ieW
+	s3IBxUhYHqbPiqdW7VrcxJb2S29twqHgZZZ+ezs2Q1enzFhSOrH72ur0lBMxUKOaUDcc=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+	by mail.xenproject.org with esmtp (Exim 4.92)
+	(envelope-from <julien@xen.org>)
+	id 1kO0bM-0000ul-23; Thu, 01 Oct 2020 15:34:36 +0000
+Received: from [54.239.6.185] (helo=a483e7b01a66.ant.amazon.com)
+	by xenbits.xenproject.org with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
+	(Exim 4.92)
+	(envelope-from <julien@xen.org>)
+	id 1kO0bL-00054I-OW; Thu, 01 Oct 2020 15:34:35 +0000
+Subject: Re: [PATCH 4/4] xen/arm: Introduce fw_unreserved_regions() and use it
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: xen-devel@lists.xenproject.org, alex.bennee@linaro.org,
+ masami.hiramatsu@linaro.org, ehem+xen@m5p.com, bertrand.marquis@arm.com,
+ andre.przywara@arm.com, Julien Grall <jgrall@amazon.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+References: <20200926205542.9261-1-julien@xen.org>
+ <20200926205542.9261-5-julien@xen.org>
+ <alpine.DEB.2.21.2009301630250.10908@sstabellini-ThinkPad-T480s>
+From: Julien Grall <julien@xen.org>
+Message-ID: <32212198-886c-4a44-ab27-8c650777b8d1@xen.org>
+Date: Thu, 1 Oct 2020 16:34:33 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.3.1
 MIME-Version: 1.0
-In-Reply-To: <20200924131030.1876-9-paul@xen.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <alpine.DEB.2.21.2009301630250.10908@sstabellini-ThinkPad-T480s>
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-GB
-X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
- FTLPEX02CL05.citrite.net (10.13.108.178)
+Content-Transfer-Encoding: 7bit
 
-On 24/09/2020 14:10, Paul Durrant wrote:
-> From: Paul Durrant <pdurrant@amazon.com>
->
-> ... and bump the version.
->
-> This patch implements version 4 of the migration stream by adding the code
-> necessary to save and restore DOMAIN_CONTEXT records, and removing the code
-> to save the SHARED_INFO and TSC_INFO records (as these are deprecated in
-> version 4).
->
-> Signed-off-by: Paul Durrant <pdurrant@amazon.com>
+Hi Stefano,
 
-This really needs to be at least 3 patches.
+On 01/10/2020 00:40, Stefano Stabellini wrote:
+> On Sat, 26 Sep 2020, Julien Grall wrote:
+> I have a small suggestion for improvement that could be done on commit:
+> given that bootinfo is actually used on EFI systems (granted, not
+> bootinfo.reserved_mem but bootinfo.mem, see
+> xen/arch/arm/efi/efi-boot.h:efi_process_memory_map_bootinfo) so
+> technically bootinfo could be in-use with ACPI, maybe we could add a
+> comment on top of xen/include/asm-arm/setup.h:bootinfo to say that
+> reserved_mem is device tree only?
 
-First to adjust tools/python/scripts/verify-stream-v2 to understand the
-new changes in the stream.
+That's fine with me. I will need to resend the rest of the series, so I 
+will update it at the same time.
 
-My testing tends to include running the script over the result of `xl
-save`, and using a script in place of libxl-save-helper which tee's the
-stream through the script, which lets you test in-line migrate.  (I
-wonder if it would be better to add a pass-through mode to the script
-and give libxl a way of running it in the same way as it currently runs
-covert-legacy-stream.)
+Cheers,
 
-Next, a patch updating the receive side only to understand the new
-changes in the stream.  In particular, this makes it far easier to
-confirm that backwards compatibility is maintained.
-
-Finally, a patch updating the sending side, if applicable.  (I've got an
-alternative suggestion to avoid burning a load of major version numbers,
-but will follow up on a different patch with that).
-
-> ---
-> Cc: Ian Jackson <ian.jackson@eu.citrix.com>
-> Cc: Wei Liu <wl@xen.org>
->
-> v7:
->  - New in v7
-> ---
->  tools/libs/guest/xg_sr_common.h       |  3 ++
->  tools/libs/guest/xg_sr_common_x86.c   | 20 -----------
->  tools/libs/guest/xg_sr_common_x86.h   |  6 ----
->  tools/libs/guest/xg_sr_restore.c      | 45 +++++++++++++++++++++--
->  tools/libs/guest/xg_sr_save.c         | 52 ++++++++++++++++++++++++++-
->  tools/libs/guest/xg_sr_save_x86_hvm.c |  5 ---
->  tools/libs/guest/xg_sr_save_x86_pv.c  | 22 ------------
->  7 files changed, 97 insertions(+), 56 deletions(-)
->
-> diff --git a/tools/libs/guest/xg_sr_common.h b/tools/libs/guest/xg_sr_common.h
-> index 13fcc47420..d440281cc1 100644
-> --- a/tools/libs/guest/xg_sr_common.h
-> +++ b/tools/libs/guest/xg_sr_common.h
-> @@ -298,6 +298,9 @@ struct xc_sr_context
->  
->              /* Sender has invoked verify mode on the stream. */
->              bool verify;
-> +
-> +            /* Domain context blob. */
-> +            struct xc_sr_blob context;
-
-We already have
-
-ctx->x86.hvm.restore.context
-
-and are now gaining
-
-ctx->restore.context
-
-This is concerning close to being ambiguous.  How about dom_context ?
-
-Also, you leak the memory allocation.  Free it in xg_sr_restore.c:cleanup().
-
-> diff --git a/tools/libs/guest/xg_sr_restore.c b/tools/libs/guest/xg_sr_restore.c
-> index b57a787519..453a383ba4 100644
-> --- a/tools/libs/guest/xg_sr_restore.c
-> +++ b/tools/libs/guest/xg_sr_restore.c
-> @@ -529,6 +529,20 @@ static int send_checkpoint_dirty_pfn_list(struct xc_sr_context *ctx)
->      return rc;
->  }
->  
-> +static int stream_complete(struct xc_sr_context *ctx)
-> +{
-> +    xc_interface *xch = ctx->xch;
-> +    int rc;
-> +
-> +    rc = xc_domain_setcontext(xch, ctx->domid,
-> +                              ctx->restore.context.ptr,
-> +                              ctx->restore.context.size);
-> +    if ( rc < 0 )
-> +        PERROR("Unable to restore domain context");
-> +
-> +    return rc;
-> +}
-
-Please put this in the PV and HVM stream_complete() hooks.
-
-This is somewhat of a layering violation and enforcing an order which
-might not be appropriate in all cases.
-
-~Andrew
+-- 
+Julien Grall
 
