@@ -2,28 +2,28 @@ Return-Path: <SRS0=IV2x=DI=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
 	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B8D1EC47425
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2020 11:02:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4FF6DC4727C
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2020 11:06:26 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6941521707
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2020 11:02:58 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id D569A2087D
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2020 11:06:25 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="IeuA8tmc"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6941521707
+	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="BzlBUeeC"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D569A2087D
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.1206.4052 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1209.4064 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNwMJ-0002Lb-K0; Thu, 01 Oct 2020 11:02:47 +0000
+	id 1kNwPY-0002XV-C4; Thu, 01 Oct 2020 11:06:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1206.4052; Thu, 01 Oct 2020 11:02:47 +0000
+Received: by outflank-mailman (output) from mailman id 1209.4064; Thu, 01 Oct 2020 11:06:08 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,94 +38,84 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNwMJ-0002LU-Gz; Thu, 01 Oct 2020 11:02:47 +0000
-Received: by outflank-mailman (input) for mailman id 1206;
- Thu, 01 Oct 2020 11:02:45 +0000
+	id 1kNwPY-0002XO-8k; Thu, 01 Oct 2020 11:06:08 +0000
+Received: by outflank-mailman (input) for mailman id 1209;
+ Thu, 01 Oct 2020 11:06:07 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=uQij=DI=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1kNwMH-0002LP-Mg
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2020 11:02:45 +0000
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+ <SRS0=jQH2=DI=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1kNwPX-0002XI-F5
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2020 11:06:07 +0000
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 288b56f7-752b-4029-a158-64a97d0ea117;
- Thu, 01 Oct 2020 11:02:44 +0000 (UTC)
+ id 2bb6d98a-9eba-4b87-972e-f5e9c7ad2ef1;
+ Thu, 01 Oct 2020 11:06:06 +0000 (UTC)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=uQij=DI=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
-	id 1kNwMH-0002LP-Mg
-	for xen-devel@lists.xenproject.org; Thu, 01 Oct 2020 11:02:45 +0000
-X-Inumbo-ID: 288b56f7-752b-4029-a158-64a97d0ea117
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+	(envelope-from <SRS0=jQH2=DI=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+	id 1kNwPX-0002XI-F5
+	for xen-devel@lists.xenproject.org; Thu, 01 Oct 2020 11:06:07 +0000
+X-Inumbo-ID: 2bb6d98a-9eba-4b87-972e-f5e9c7ad2ef1
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 288b56f7-752b-4029-a158-64a97d0ea117;
-	Thu, 01 Oct 2020 11:02:44 +0000 (UTC)
+	id 2bb6d98a-9eba-4b87-972e-f5e9c7ad2ef1;
+	Thu, 01 Oct 2020 11:06:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1601550164;
-  h=subject:to:cc:references:from:message-id:date:
-   mime-version:in-reply-to:content-transfer-encoding;
-  bh=XmSD0smz/pk8Ati3b8Dzz9Mct/ibGnDTXyZisU7AXgQ=;
-  b=IeuA8tmchugigdcFZSGLHNSjmPKbYJYHtFS6PjcEwBBy7OhehVQ8+kP5
-   rBUB3JrFljr59n7Tm4Bbjq7e+LiS0KSucna5htLYvHi+wkYa/DZ20JdlT
-   uoq1mX20kfKLxdzi/13Z5VBkiKBw0f8FkR6FfYoENMdJoHTXPuUVPm5oz
-   g=;
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: cro7dUeUxmZSoDaz9kczXxIT6905YTfydMRownwBVdbW+To5OxBBS+IyZ2cSRSxN0WemvhJd6d
- 04GETImC/F1H4gH3JtHAlKeZ6v//6mqQ0bLL/NVNLbxFfHdxQnOSo2i/4lm6O78jiWGhDOuqDE
- 9yMJW8lIE8qpQDcCaWHTm27PiDYoCkMzRs4gAl1uCfsuUePvwmfmxqM+mwk1GXhUeN7zYSk+eq
- Pi906Adolxm40XMNA3fv1twxTUzRn6F3p/WbxWRuPq99GLILyYliO4pQ7tdjfzTtXvrUQkvWpP
- YUI=
+  d=citrix.com; s=securemail; t=1601550367;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:content-transfer-encoding:in-reply-to;
+  bh=WFxzw03ykNV/tSUsQJQrg4smpq/kZ88dl3LIJ7m3gco=;
+  b=BzlBUeeC1KI/L+zXJrd3O8nVFHgSf4WqV9v4ZsjWS5Rb3rVqkNYuYNjb
+   sEVyD0IqPAawLNRTYsA63+pTUiA4nvTDSHo1mcJeuAqFn5NdBweRCH+KZ
+   ftWZ5bIAEbYDCnrZGVY6r/KwY8W2Fd4f4x55evJIB6/8ubZehzhKKTf/w
+   k=;
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: u8/irix7pqyCTWtGfl8AH+40goQQGWiUhwUQISqQf0FLUVAp+68pOxHlEjNUPYedgxNobgSZLz
+ Vw7N9tNGqUbRnS9UTiS26jchyseetwmSjHmo+tNdH3DnXlJ9T5if3uAzu/CMtrF7axrfnu/2sX
+ i5YgGYUXCAXwlOnf3VTFxv6dLxIPEImUn+sxqsqz7tOddQ44Rpv3ZXHeclOXfF6y2A5cwlHU7H
+ xkAC7qXEs/FWI5xRrc4M27nj7JNUn42xtXfsbJ786j/gEjdXv1nTMuPh0ma+y/jQ3AoXhD97Z/
+ K/E=
 X-SBRS: None
-X-MesageID: 28147959
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 28037187
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
 X-IronPort-AV: E=Sophos;i="5.77,323,1596513600"; 
-   d="scan'208";a="28147959"
-Subject: Re: [PATCH 3/8] xen/domctl: Introduce and use
- XEN_DOMCTL_CDF_nested_virt
-To: Jan Beulich <jbeulich@suse.com>
-CC: Xen-devel <xen-devel@lists.xenproject.org>,
-	=?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, Wei Liu
-	<wl@xen.org>, Ian Jackson <iwj@xenproject.org>, Christian Lindig
-	<christian.lindig@citrix.com>, =?UTF-8?B?RWR3aW4gVMO2csO2aw==?=
-	<edvin.torok@citrix.com>, Rob Hoes <Rob.Hoes@citrix.com>
+   d="scan'208";a="28037187"
+Date: Thu, 1 Oct 2020 13:04:59 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+CC: Xen-devel <xen-devel@lists.xenproject.org>, Jan Beulich
+	<JBeulich@suse.com>, Wei Liu <wl@xen.org>
+Subject: Re: [PATCH 8/8] x86/cpuid: Move VMX/SVM out of the default policy
+Message-ID: <20201001110459.GF19254@Air-de-Roger>
 References: <20200930134248.4918-1-andrew.cooper3@citrix.com>
- <20200930134248.4918-4-andrew.cooper3@citrix.com>
- <32a955ad-9995-6df2-3d7b-6b3eb7b1d656@suse.com>
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Message-ID: <8e25a67b-21f1-5203-6531-4ed378a74bfb@citrix.com>
-Date: Thu, 1 Oct 2020 12:02:37 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ <20200930134248.4918-9-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-In-Reply-To: <32a955ad-9995-6df2-3d7b-6b3eb7b1d656@suse.com>
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Content-Language: en-GB
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20200930134248.4918-9-andrew.cooper3@citrix.com>
 X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
- FTLPEX02CL05.citrite.net (10.13.108.178)
+ FTLPEX02CL06.citrite.net (10.13.108.179)
 
-On 01/10/2020 11:23, Jan Beulich wrote:
-> On 30.09.2020 15:42, Andrew Cooper wrote:
->> @@ -667,6 +668,12 @@ int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
->>           */
->>          config->flags |= XEN_DOMCTL_CDF_oos_off;
->>  
->> +    if ( nested_virt && !hap )
->> +    {
->> +        dprintk(XENLOG_INFO, "Nested virt not supported without HAP\n");
->> +        return -EINVAL;
->> +    }
-> Initially I was merely puzzled by this not being accompanied by
-> any removal of code elsewhere. But when I started looking I couldn't
-> find any such enforcement, but e.g. did find nsvm_vcpu_hostrestore()
-> covering the shadow mode case. For this to be "No functional change
-> yet" as the description claims, could you point me at where this
-> restriction is currently enforced?
+On Wed, Sep 30, 2020 at 02:42:48PM +0100, Andrew Cooper wrote:
+> Nested virt is still experimental, and requires explicitly opting in to at
+> domain create time.  The VMX/SVM features should not be visible by default.
+> 
+> Also correct them from all HVM guests, to just HAP-enabled guests.  This has
+> been the restriction for SVM right from the outset (c/s e006a0e0aaa), while
+> VMX was first introduced supporting shadow mode (c/s 9122c69c8d3) but later
+> adjusted to HAP-only (c/s 77751ed79e3).
+> 
+> There is deliberately no adjustment to xc_cpuid_apply_policy() for pre-4.14
+> migration compatibility.  The migration stream doesn't contain the required
+> architectural state for either VMX/SVM, and a nested virt VM which migrates
+> will explode in weird and wonderful ways.
+> 
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
-Currently enforced in the HVM_PARAM_NESTEDHVM write side effect, which
-is deleted in patch 5.
+Acked-by: Roger Pau Monné <roger.pau@citrix.com>
 
-~Andrew
+Thanks, Roger.
 
