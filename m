@@ -2,28 +2,28 @@ Return-Path: <SRS0=IV2x=DI=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5374CC4727F
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2020 11:09:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A5AB4C4727C
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2020 11:22:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id F27B82087D
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2020 11:09:43 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 4BD02208B6
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2020 11:22:38 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="cSdfnUOD"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F27B82087D
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="cCpQkg5m"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4BD02208B6
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.1214.4090 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1221.4111 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNwSs-0002pC-3T; Thu, 01 Oct 2020 11:09:34 +0000
+	id 1kNwf8-0004Ya-CG; Thu, 01 Oct 2020 11:22:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1214.4090; Thu, 01 Oct 2020 11:09:34 +0000
+Received: by outflank-mailman (output) from mailman id 1221.4111; Thu, 01 Oct 2020 11:22:14 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,225 +38,87 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNwSs-0002p5-0X; Thu, 01 Oct 2020 11:09:34 +0000
-Received: by outflank-mailman (input) for mailman id 1214;
- Thu, 01 Oct 2020 11:09:32 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kNwf8-0004YT-8n; Thu, 01 Oct 2020 11:22:14 +0000
+Received: by outflank-mailman (input) for mailman id 1221;
+ Thu, 01 Oct 2020 11:22:12 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=GG2I=DI=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
- id 1kNwSq-0002nk-NJ
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2020 11:09:32 +0000
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id ccf22787-0452-4d0d-97e7-2e8b7c63eb13;
- Thu, 01 Oct 2020 11:09:26 +0000 (UTC)
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kNwSj-0003kO-OT; Thu, 01 Oct 2020 11:09:25 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kNwSj-0005mE-Hu; Thu, 01 Oct 2020 11:09:25 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1kNwSj-0005Ui-Gv; Thu, 01 Oct 2020 11:09:25 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ <SRS0=LTW6=DI=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
+ id 1kNwf6-0004YO-DT
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2020 11:22:12 +0000
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 17e36e31-a73e-40f2-b3d5-a46f68827c57;
+ Thu, 01 Oct 2020 11:22:10 +0000 (UTC)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=GG2I=DI=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
-	id 1kNwSq-0002nk-NJ
-	for xen-devel@lists.xenproject.org; Thu, 01 Oct 2020 11:09:32 +0000
-X-Inumbo-ID: ccf22787-0452-4d0d-97e7-2e8b7c63eb13
-Received: from mail.xenproject.org (unknown [104.130.215.37])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id ccf22787-0452-4d0d-97e7-2e8b7c63eb13;
-	Thu, 01 Oct 2020 11:09:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=NvxmvG4fbOWjfswkrc9poPXMiGTXq9RAWyh6Q5SCr6M=; b=cSdfnUODN3RHYdqQxeDIdT1WBd
-	+MNQ4/yND8XFs0/r3AYxRWRiIiCOzvii9nKutIzLeAx8JrkLFKFBDPSGAuKC2JTZU951xSLSevjtC
-	pWCbMn20DOeKJ7oGbe/AMlt6VE2pnllhRScLy+sLJ395PXJunLzgj0kHADKW1CW5xB6E=;
-Received: from host146.205.237.98.conversent.net ([205.237.98.146] helo=infra.test-lab.xenproject.org)
-	by mail.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <osstest-admin@xenproject.org>)
-	id 1kNwSj-0003kO-OT; Thu, 01 Oct 2020 11:09:25 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
-	by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <osstest-admin@xenproject.org>)
-	id 1kNwSj-0005mE-Hu; Thu, 01 Oct 2020 11:09:25 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim 4.92)
-	(envelope-from <osstest-admin@xenproject.org>)
-	id 1kNwSj-0005Ui-Gv; Thu, 01 Oct 2020 11:09:25 +0000
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-155213-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+	(envelope-from <SRS0=LTW6=DI=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
+	id 1kNwf6-0004YO-DT
+	for xen-devel@lists.xenproject.org; Thu, 01 Oct 2020 11:22:12 +0000
+X-Inumbo-ID: 17e36e31-a73e-40f2-b3d5-a46f68827c57
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id 17e36e31-a73e-40f2-b3d5-a46f68827c57;
+	Thu, 01 Oct 2020 11:22:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1601551330;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=qnExyjv72xS4XPByzvVUXHpFl+5PJR+AivecgqaXQ5o=;
+  b=cCpQkg5mtQKecwDAIG0g8bjptfBRflNiI+6YHzcXSSPk6K55c6xu934n
+   c9QH/qYt6NravygJqMDQ2Uq4MOX2j1Fu9R7mo4b5qdnXoLmYPqW5+u1l0
+   4Vp6yqf4akiysCVltlXs/JLYI38GdmeYyJ1Q11ndL4lzBDmDO25sKEJ4a
+   U=;
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: pVs85hELVVepnvZSSMzlegb7wyVcQz9y9CR7mht92eybKcAka+cvI+/dTnHazZuU+Lcmo+QTz+
+ ogfjKeXQANkkK3NqDNws5mJBLZXe8qjb7jT4r4gAJaoFJs6zt1JoOR7cbin/SWiI0bm25C5xzL
+ Kr7mf+FIs9T2qJjnRUvz200nRwfx9qM0xNrRo+QoDBfJwZ3l3tZ/nEvYvf3CACmHopNedTsQje
+ OoPALkS7I4q8xQiQsik1Zs8s/d9Bc6ZS7tlu65NLJLOo/3XqhJMOThrPIwq30g4VmWwLLdxCmK
+ Jn0=
+X-SBRS: None
+X-MesageID: 28038335
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.77,323,1596513600"; 
+   d="scan'208";a="28038335"
+Date: Thu, 1 Oct 2020 12:22:03 +0100
+From: Anthony PERARD <anthony.perard@citrix.com>
+To: Paul Durrant <paul@xen.org>
+CC: <xen-devel@lists.xenproject.org>, <qemu-devel@nongnu.org>, Paul Durrant
+	<pdurrant@amazon.com>, Jerome Leseinne <jerome.leseinne@gmail.com>, "Edwin
+ Torok" <edvin.torok@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH v2] xen-bus: reduce scope of backend watch
+Message-ID: <20201001112203.GM2024@perard.uk.xensource.com>
+References: <20201001081500.1026-1-paul@xen.org>
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 155213: regressions - FAIL
-X-Osstest-Failures:
-    xen-unstable-smoke:test-amd64-amd64-libvirt:guest-start:fail:regression
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This:
-    xen=11852c7bb070a18c3708b4c001772a23e7d4fc27
-X-Osstest-Versions-That:
-    xen=c73952831f0fc63a984e0d07dff1d20f8617b81f
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Thu, 01 Oct 2020 11:09:25 +0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20201001081500.1026-1-paul@xen.org>
 
-flight 155213 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/155213/
+On Thu, Oct 01, 2020 at 09:15:00AM +0100, Paul Durrant wrote:
+> From: Paul Durrant <pdurrant@amazon.com>
+> 
+> Currently a single watch on /local/domain/X/backend is registered by each
+> QEMU process running in service domain X (where X is usually 0). The purpose
+> of this watch is to ensure that QEMU is notified when the Xen toolstack
+> creates a new device backend area.
+> Such a backend area is specific to a single frontend area created for a
+> specific guest domain and, since each QEMU process is also created to service
+> a specfic guest domain, it is unnecessary and inefficient to notify all QEMU
+> processes.
+> Only the QEMU process associated with the same guest domain need
+> receive the notification. This patch re-factors the watch registration code
+> such that notifications are targetted appropriately.
+> 
+> Reported-by: Jerome Leseinne <jerome.leseinne@gmail.com>
+> Signed-off-by: Paul Durrant <pdurrant@amazon.com>
 
-Regressions :-(
+Reviewed-by: Anthony PERARD <anthony.perard@citrix.com>
 
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- test-amd64-amd64-libvirt     12 guest-start              fail REGR. vs. 155128
+Thanks,
 
-Tests which did not succeed, but are not blocking:
- test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
-
-version targeted for testing:
- xen                  11852c7bb070a18c3708b4c001772a23e7d4fc27
-baseline version:
- xen                  c73952831f0fc63a984e0d07dff1d20f8617b81f
-
-Last test of basis   155128  2020-09-30 08:01:25 Z    1 days
-Testing same since   155144  2020-09-30 16:01:24 Z    0 days    6 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Anthony PERARD <anthony.perard@citrix.com>
-  Juergen Gross <jgross@suse.com>
-  Olaf Hering <olaf@aepfle.de>
-  Paul Durrant <paul@xen.org>
-  Wei Liu <wl@xen.org>
-
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-libvirt                                     fail    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Not pushing.
-
-------------------------------------------------------------
-commit 11852c7bb070a18c3708b4c001772a23e7d4fc27
-Author: Juergen Gross <jgross@suse.com>
-Date:   Thu Sep 24 16:36:48 2020 +0200
-
-    tools/xenstore: set maximum number of grants needed
-    
-    When running as a stubdom Xenstore should set the maximum number of
-    grants needed via a call of xengnttab_set_max_grants(), as otherwise
-    the number of domains which can be supported will be 128 only (the
-    default number of grants supported by Mini-OS).
-    
-    We use one grant per domain so the theoretical maximum number is
-    DOMID_FIRST_RESERVED.
-    
-    Signed-off-by: Juergen Gross <jgross@suse.com>
-    Acked-by: Wei Liu <wl@xen.org>
-
-commit bfcc97c08c2258316d1cd92c23a441d97ad6ff4e
-Author: Andrew Cooper <andrew.cooper3@citrix.com>
-Date:   Tue Sep 29 14:48:52 2020 +0100
-
-    tools/cpuid: Plumb nested_virt down into xc_cpuid_apply_policy()
-    
-    Nested Virt is the final special case in legacy CPUID handling.  Pass the
-    (poorly named) nested_hvm setting down into xc_cpuid_apply_policy() to break
-    the semantic dependency on HVM_PARAM_NESTEDHVM.
-    
-    No functional change.
-    
-    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-    Acked-by: Wei Liu <wl@xen.org>
-
-commit 50a5215f30e964a6f16165ab57925ca39f31a849
-Author: Olaf Hering <olaf@aepfle.de>
-Date:   Thu Sep 24 20:08:43 2020 +0200
-
-    libxc/bitops: increase potential size of bitmaps
-    
-    If the bitmap is used to represent domU pages, the amount of memory is
-    limited to 8TB due to the 32bit value. Adjust the code to use 64bit
-    values as input. All callers already use some form of 64bit as input,
-    so no further adjustment is required.
-    
-    Signed-off-by: Olaf Hering <olaf@aepfle.de>
-    Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
-    Acked-by: Wei Liu <wl@xen.org>
-
-commit 27de84d3ae462bd8311c8267c642ec95afdcf47c
-Author: Anthony PERARD <anthony.perard@citrix.com>
-Date:   Wed Sep 23 12:03:23 2020 +0100
-
-    tools: Fix configure of upstream QEMU
-    
-    QEMU as recently switch its build system to use meson and the
-    ./configure step with meson is more restrictive that the step used to
-    be, most installation path wants to be within prefix, otherwise we
-    have this error message:
-    
-        ERROR: The value of the 'datadir' option is '/usr/share/qemu-xen' which must be a subdir of the prefix '/usr/lib/xen'.
-    
-    In order to workaround the limitation, we will set prefix to the same
-    one as for the rest of Xen installation, and set all the other paths.
-    
-    For reference, a thread in qemu-devel:
-        "configure with datadir outside of --prefix fails with meson"
-        https://lore.kernel.org/qemu-devel/20200918133012.GH2024@perard.uk.xensource.com/t/
-    
-    And an issue in meson:
-        "artificial limitation of directories (forced to be in prefix)"
-        https://github.com/mesonbuild/meson/issues/2561
-    
-    Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
-    Tested-by: Paul Durrant <paul@xen.org>
-    Acked-by: Wei Liu <wl@xen.org>
-
-commit 0d8d289af7a679c028462c4ed5d98586f9ef9648
-Author: Olaf Hering <olaf@aepfle.de>
-Date:   Wed Sep 23 08:48:40 2020 +0200
-
-    tools/libxc: report malloc errors in writev_exact
-    
-    The caller of writev_exact should be notified about malloc errors
-    when dealing with partial writes.
-    
-    Signed-off-by: Olaf Hering <olaf@aepfle.de>
-    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
-    Acked-by: Wei Liu <wl@xen.org>
-(qemu changes not included)
+-- 
+Anthony PERARD
 
