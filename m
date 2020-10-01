@@ -2,28 +2,25 @@ Return-Path: <SRS0=IV2x=DI=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.2 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4FF6DC4727C
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2020 11:06:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6393BC4727F
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2020 11:09:27 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D569A2087D
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2020 11:06:25 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="BzlBUeeC"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D569A2087D
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id 1F2502087D
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2020 11:09:26 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1F2502087D
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.1209.4064 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1212.4077 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNwPY-0002XV-C4; Thu, 01 Oct 2020 11:06:08 +0000
+	id 1kNwSY-0002k5-Qi; Thu, 01 Oct 2020 11:09:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1209.4064; Thu, 01 Oct 2020 11:06:08 +0000
+Received: by outflank-mailman (output) from mailman id 1212.4077; Thu, 01 Oct 2020 11:09:14 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,84 +35,83 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNwPY-0002XO-8k; Thu, 01 Oct 2020 11:06:08 +0000
-Received: by outflank-mailman (input) for mailman id 1209;
- Thu, 01 Oct 2020 11:06:07 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kNwSY-0002jy-NY; Thu, 01 Oct 2020 11:09:14 +0000
+Received: by outflank-mailman (input) for mailman id 1212;
+ Thu, 01 Oct 2020 11:09:13 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=jQH2=DI=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1kNwPX-0002XI-F5
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2020 11:06:07 +0000
-Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 2bb6d98a-9eba-4b87-972e-f5e9c7ad2ef1;
- Thu, 01 Oct 2020 11:06:06 +0000 (UTC)
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ <SRS0=Tj+q=DI=gmail.com=wei.liu.xen@srs-us1.protection.inumbo.net>)
+ id 1kNwSX-0002jt-GP
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2020 11:09:13 +0000
+Received: from mail-wr1-f67.google.com (unknown [209.85.221.67])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 6fc8a135-3b0e-45df-acdc-e2f0ec0d9e73;
+ Thu, 01 Oct 2020 11:09:12 +0000 (UTC)
+Received: by mail-wr1-f67.google.com with SMTP id w5so5181897wrp.8
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2020 04:09:12 -0700 (PDT)
+Received: from liuwe-devbox-debian-v2 ([51.145.34.42])
+ by smtp.gmail.com with ESMTPSA id y6sm8582534wrn.41.2020.10.01.04.09.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 01 Oct 2020 04:09:10 -0700 (PDT)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=jQH2=DI=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
-	id 1kNwPX-0002XI-F5
-	for xen-devel@lists.xenproject.org; Thu, 01 Oct 2020 11:06:07 +0000
-X-Inumbo-ID: 2bb6d98a-9eba-4b87-972e-f5e9c7ad2ef1
-Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 2bb6d98a-9eba-4b87-972e-f5e9c7ad2ef1;
-	Thu, 01 Oct 2020 11:06:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1601550367;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:content-transfer-encoding:in-reply-to;
-  bh=WFxzw03ykNV/tSUsQJQrg4smpq/kZ88dl3LIJ7m3gco=;
-  b=BzlBUeeC1KI/L+zXJrd3O8nVFHgSf4WqV9v4ZsjWS5Rb3rVqkNYuYNjb
-   sEVyD0IqPAawLNRTYsA63+pTUiA4nvTDSHo1mcJeuAqFn5NdBweRCH+KZ
-   ftWZ5bIAEbYDCnrZGVY6r/KwY8W2Fd4f4x55evJIB6/8ubZehzhKKTf/w
-   k=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: u8/irix7pqyCTWtGfl8AH+40goQQGWiUhwUQISqQf0FLUVAp+68pOxHlEjNUPYedgxNobgSZLz
- Vw7N9tNGqUbRnS9UTiS26jchyseetwmSjHmo+tNdH3DnXlJ9T5if3uAzu/CMtrF7axrfnu/2sX
- i5YgGYUXCAXwlOnf3VTFxv6dLxIPEImUn+sxqsqz7tOddQ44Rpv3ZXHeclOXfF6y2A5cwlHU7H
- xkAC7qXEs/FWI5xRrc4M27nj7JNUn42xtXfsbJ786j/gEjdXv1nTMuPh0ma+y/jQ3AoXhD97Z/
- K/E=
-X-SBRS: None
-X-MesageID: 28037187
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.77,323,1596513600"; 
-   d="scan'208";a="28037187"
-Date: Thu, 1 Oct 2020 13:04:59 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-CC: Xen-devel <xen-devel@lists.xenproject.org>, Jan Beulich
-	<JBeulich@suse.com>, Wei Liu <wl@xen.org>
-Subject: Re: [PATCH 8/8] x86/cpuid: Move VMX/SVM out of the default policy
-Message-ID: <20201001110459.GF19254@Air-de-Roger>
-References: <20200930134248.4918-1-andrew.cooper3@citrix.com>
- <20200930134248.4918-9-andrew.cooper3@citrix.com>
+	(envelope-from <SRS0=Tj+q=DI=gmail.com=wei.liu.xen@srs-us1.protection.inumbo.net>)
+	id 1kNwSX-0002jt-GP
+	for xen-devel@lists.xenproject.org; Thu, 01 Oct 2020 11:09:13 +0000
+X-Inumbo-ID: 6fc8a135-3b0e-45df-acdc-e2f0ec0d9e73
+Received: from mail-wr1-f67.google.com (unknown [209.85.221.67])
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id 6fc8a135-3b0e-45df-acdc-e2f0ec0d9e73;
+	Thu, 01 Oct 2020 11:09:12 +0000 (UTC)
+Received: by mail-wr1-f67.google.com with SMTP id w5so5181897wrp.8
+        for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2020 04:09:12 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to:user-agent;
+        bh=BBC6qGccP+Ahz8ySynzSc+nxZwUQo0EtEHZiNRfDzg4=;
+        b=DvHd+EydUN4HcA9VhOp7x4jyIgS/I/H9Qz7bhSI++HcfM57mmC7XmsK5kzdO54Aij5
+         urlEBGKSJe0UojNTCAvLGlzIQt5KPMIAaIEOeWkXOd+gvSVpNLGGASDsFXDyeDc6FrKp
+         sXqwhiazQDnb7PqZXYR0rwY4qEHPfPi0BJUBtB9a/BQOPBqw7Z/59dUGIzwhw0aZseX2
+         VIgSzyWIFGHf1yLV4aFZHxaJbXIFBAMJO5bVxzOP+41mcEfNyczogojIaHDKx05XGfO4
+         /DtHE9KBPZ7aPY9WUGJN2EmVnvxkZL2vH8lkHaKto0WmYjfMgFwzAX1LnY76ZuPfqlK9
+         8luQ==
+X-Gm-Message-State: AOAM532f4bLkGNFAr8IAW7mmwYknmxEZOOapECsUv6DIVJIreDbcLcvv
+	AWutb6ZHS+VhoxZvy4oV100=
+X-Google-Smtp-Source: ABdhPJyHKjMmpiHBTt9+mp8HApLeCYs+jv/ifZ3LgII3as7ROD0o41hOyAp+hdwQS7zpglzwALhBAg==
+X-Received: by 2002:adf:f903:: with SMTP id b3mr8580081wrr.142.1601550551801;
+        Thu, 01 Oct 2020 04:09:11 -0700 (PDT)
+Received: from liuwe-devbox-debian-v2 ([51.145.34.42])
+        by smtp.gmail.com with ESMTPSA id y6sm8582534wrn.41.2020.10.01.04.09.10
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 01 Oct 2020 04:09:10 -0700 (PDT)
+Date: Thu, 1 Oct 2020 11:09:09 +0000
+From: Wei Liu <wl@xen.org>
+To: Juergen Gross <jgross@suse.com>
+Cc: xen-devel@lists.xenproject.org,
+	Samuel Thibault <samuel.thibault@ens-lyon.org>,
+	Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>,
+	Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Subject: Re: [PATCH v2 0/3] Fix and cleanup xenguest.h
+Message-ID: <20201001110909.hcmtwajognnegkqf@liuwe-devbox-debian-v2>
+References: <20200925062031.12200-1-jgross@suse.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20200930134248.4918-9-andrew.cooper3@citrix.com>
-X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
- FTLPEX02CL06.citrite.net (10.13.108.179)
+In-Reply-To: <20200925062031.12200-1-jgross@suse.com>
+User-Agent: NeoMutt/20180716
 
-On Wed, Sep 30, 2020 at 02:42:48PM +0100, Andrew Cooper wrote:
-> Nested virt is still experimental, and requires explicitly opting in to at
-> domain create time.  The VMX/SVM features should not be visible by default.
+On Fri, Sep 25, 2020 at 08:20:28AM +0200, Juergen Gross wrote:
+> This series fixes builds of libxenguest users outside the Xen build
+> system and it cleans up the xenguest.h header merging xenctrl_dom.h
+> into it.
 > 
-> Also correct them from all HVM guests, to just HAP-enabled guests.  This has
-> been the restriction for SVM right from the outset (c/s e006a0e0aaa), while
-> VMX was first introduced supporting shadow mode (c/s 9122c69c8d3) but later
-> adjusted to HAP-only (c/s 77751ed79e3).
-> 
-> There is deliberately no adjustment to xc_cpuid_apply_policy() for pre-4.14
-> migration compatibility.  The migration stream doesn't contain the required
-> architectural state for either VMX/SVM, and a nested virt VM which migrates
-> will explode in weird and wonderful ways.
-> 
-> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+> Juergen Gross (3):
+>   tools/libs: merge xenctrl_dom.h into xenguest.h
+>   tools/libxenguest: make xc_dom_loader interface private to libxenguest
+>   tools/lixenguest: hide struct elf_dom_parms layout from users
 
-Acked-by: Roger Pau Monné <roger.pau@citrix.com>
-
-Thanks, Roger.
+Acked-by: Wei Liu <wl@xen.org>
 
