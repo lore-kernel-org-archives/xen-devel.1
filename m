@@ -7,21 +7,21 @@ X-Spam-Status: No, score=-12.7 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5D230C4727E
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2020 16:25:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9B0F8C4727E
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2020 16:25:27 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1292020848
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2020 16:25:23 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1292020848
+	by mail.kernel.org (Postfix) with ESMTPS id 56A7520848
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2020 16:25:27 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 56A7520848
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.1458.4617 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1459.4629 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kO1OK-0001a4-C1; Thu, 01 Oct 2020 16:25:12 +0000
+	id 1kO1OO-0001eU-M6; Thu, 01 Oct 2020 16:25:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1458.4617; Thu, 01 Oct 2020 16:25:12 +0000
+Received: by outflank-mailman (output) from mailman id 1459.4629; Thu, 01 Oct 2020 16:25:16 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,67 +36,75 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kO1OK-0001Zt-7X; Thu, 01 Oct 2020 16:25:12 +0000
-Received: by outflank-mailman (input) for mailman id 1458;
- Thu, 01 Oct 2020 16:25:10 +0000
+	id 1kO1OO-0001eN-Ie; Thu, 01 Oct 2020 16:25:16 +0000
+Received: by outflank-mailman (input) for mailman id 1459;
+ Thu, 01 Oct 2020 16:25:15 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=j0qz=DI=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1kO1OI-0001JL-K1
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2020 16:25:10 +0000
+ id 1kO1ON-0001JL-K9
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2020 16:25:15 +0000
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3e49779b-04c5-4b07-8019-bb35150fe206;
- Thu, 01 Oct 2020 16:24:49 +0000 (UTC)
+ id 827dfb01-4f3e-43a8-bbd4-e111ff0eb190;
+ Thu, 01 Oct 2020 16:24:50 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1kO1Nw-00029L-TM; Thu, 01 Oct 2020 17:24:49 +0100
+ id 1kO1Ny-00029L-37; Thu, 01 Oct 2020 17:24:50 +0100
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=j0qz=DI=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
-	id 1kO1OI-0001JL-K1
-	for xen-devel@lists.xenproject.org; Thu, 01 Oct 2020 16:25:10 +0000
-X-Inumbo-ID: 3e49779b-04c5-4b07-8019-bb35150fe206
+	id 1kO1ON-0001JL-K9
+	for xen-devel@lists.xenproject.org; Thu, 01 Oct 2020 16:25:15 +0000
+X-Inumbo-ID: 827dfb01-4f3e-43a8-bbd4-e111ff0eb190
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 3e49779b-04c5-4b07-8019-bb35150fe206;
-	Thu, 01 Oct 2020 16:24:49 +0000 (UTC)
+	id 827dfb01-4f3e-43a8-bbd4-e111ff0eb190;
+	Thu, 01 Oct 2020 16:24:50 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
 	by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
 	(return-path ijackson@chiark.greenend.org.uk)
-	id 1kO1Nw-00029L-TM; Thu, 01 Oct 2020 17:24:49 +0100
+	id 1kO1Ny-00029L-37; Thu, 01 Oct 2020 17:24:50 +0100
 From: Ian Jackson <iwj@xenproject.org>
 To: xen-devel@lists.xenproject.org
 Cc: Ian Jackson <iwj@xenproject.org>
-Subject: [OSSTEST PATCH 1/8] Executive: Fix an undef warning message
-Date: Thu,  1 Oct 2020 17:24:32 +0100
-Message-Id: <20201001162439.18160-1-iwj@xenproject.org>
+Subject: [OSSTEST PATCH 6/8] cri-getplatforms: Honour new MF_SIMULATE_PLATFORMS env var
+Date: Thu,  1 Oct 2020 17:24:37 +0100
+Message-Id: <20201001162439.18160-6-iwj@xenproject.org>
 X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20201001162439.18160-1-iwj@xenproject.org>
+References: <20201001162439.18160-1-iwj@xenproject.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-$onhost can be undef too
+This is to be expanded by the shell, using eval, so that it can refer
+to $xenarch, $suite and $blessing.
+
+No functional change if this variable is unset, or empty.  If it is
+set to a single space, cri-getplatforms produces no output (as it does
+anyway in standalone mode).
 
 Signed-off-by: Ian Jackson <iwj@xenproject.org>
 ---
- Osstest/Executive.pm | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ cri-getplatforms | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/Osstest/Executive.pm b/Osstest/Executive.pm
-index 80e70070..a0d9f81e 100644
---- a/Osstest/Executive.pm
-+++ b/Osstest/Executive.pm
-@@ -1283,7 +1283,8 @@ END
-     return sub {
-         my ($job, $hostidname, $onhost, $uptoincl_testid) = @_;
- 
--	my $memokey = "$job $hostidname $onhost ".($uptoincl_testid//"");
-+	my $memokey = "$job $hostidname "
-+	  .($onhost//"")." ".($uptoincl_testid//"");
- 	my $memo = $our_memo->{$memokey};
- 	return @$memo if $memo;
- 
+diff --git a/cri-getplatforms b/cri-getplatforms
+index 1f206908..9f4cae56 100755
+--- a/cri-getplatforms
++++ b/cri-getplatforms
+@@ -19,6 +19,10 @@
+ getplatforms () {
+ 	local xenarch=$1
+ 	local suite=$2
++	if [ "x$MF_SIMULATE_PLATFORMS" != x ]; then
++		eval "echo $MF_SIMULATE_PLATFORMS"
++		return
++	fi
+         perl -e '
+                 use Osstest;
+                 csreadconfig();
 -- 
 2.20.1
 
