@@ -2,28 +2,26 @@ Return-Path: <SRS0=IV2x=DI=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-8.2 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 27EAFC4727C
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2020 10:55:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2898AC4727C
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2020 10:55:33 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BFB67207DE
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2020 10:55:12 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="NAvhKYCa"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BFB67207DE
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id C75BA206C1
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2020 10:55:32 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C75BA206C1
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.1189.3969 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1191.3980 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNwEp-0000fW-3o; Thu, 01 Oct 2020 10:55:03 +0000
+	id 1kNwFA-0000lx-Hr; Thu, 01 Oct 2020 10:55:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1189.3969; Thu, 01 Oct 2020 10:55:03 +0000
+Received: by outflank-mailman (output) from mailman id 1191.3980; Thu, 01 Oct 2020 10:55:24 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,73 +36,81 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNwEp-0000fP-0j; Thu, 01 Oct 2020 10:55:03 +0000
-Received: by outflank-mailman (input) for mailman id 1189;
- Thu, 01 Oct 2020 10:55:02 +0000
+	id 1kNwFA-0000lq-Ep; Thu, 01 Oct 2020 10:55:24 +0000
+Received: by outflank-mailman (input) for mailman id 1191;
+ Thu, 01 Oct 2020 10:55:23 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=jQH2=DI=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1kNwEo-0000fG-Jh
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2020 10:55:02 +0000
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ <SRS0=Tj+q=DI=gmail.com=wei.liu.xen@srs-us1.protection.inumbo.net>)
+ id 1kNwF8-0000lb-Vu
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2020 10:55:23 +0000
+Received: from mail-wr1-f66.google.com (unknown [209.85.221.66])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3224e030-c294-42e1-9b8c-c9e573b2e348;
- Thu, 01 Oct 2020 10:55:01 +0000 (UTC)
+ id 63d146d4-b5be-4c8c-b82d-01a716981bf8;
+ Thu, 01 Oct 2020 10:55:22 +0000 (UTC)
+Received: by mail-wr1-f66.google.com with SMTP id k15so5125258wrn.10
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2020 03:55:22 -0700 (PDT)
+Received: from liuwe-devbox-debian-v2 ([51.145.34.42])
+ by smtp.gmail.com with ESMTPSA id t16sm2977793wmi.18.2020.10.01.03.55.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 01 Oct 2020 03:55:20 -0700 (PDT)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=jQH2=DI=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
-	id 1kNwEo-0000fG-Jh
-	for xen-devel@lists.xenproject.org; Thu, 01 Oct 2020 10:55:02 +0000
-X-Inumbo-ID: 3224e030-c294-42e1-9b8c-c9e573b2e348
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+	(envelope-from <SRS0=Tj+q=DI=gmail.com=wei.liu.xen@srs-us1.protection.inumbo.net>)
+	id 1kNwF8-0000lb-Vu
+	for xen-devel@lists.xenproject.org; Thu, 01 Oct 2020 10:55:23 +0000
+X-Inumbo-ID: 63d146d4-b5be-4c8c-b82d-01a716981bf8
+Received: from mail-wr1-f66.google.com (unknown [209.85.221.66])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 3224e030-c294-42e1-9b8c-c9e573b2e348;
-	Thu, 01 Oct 2020 10:55:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1601549701;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:content-transfer-encoding:in-reply-to;
-  bh=c8WJl4FCPhwG3wElqcuyPsTZPYQsAKsKXAsqf6rKdYs=;
-  b=NAvhKYCaPjsza2Ev4zuVDqvNLtx1N+E+E5koNybfXDKxbd3k2D5a19wc
-   Mr3KQ0TfzfRQtXrc6DQSZatTtQWPfP1udVP1x4qucON74+Kdz8Cu1QuqZ
-   LgW+NGy5M5NVqxdlOHIgj40HFz1lfVzMiQexHtOzMoQ+cK2CLETSwimMi
-   w=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: QgiMuZgrebGWDPm9zs87Pe4SM90UdhXPtn0f6GTAohN3O2jqqJsg57tUn4yv5O2i7ypZSbpOIi
- dE3Yj6Q8NGni7jFtHJGDRPF5n5fmDcgBdMojQAipzxcg2X8AuntWWhyGwDyFxZ5j7cMxoyi3di
- rZjGQPBGeMoOQKXiCuFcoR2rmDfLfc7KjTPzympfDxBlle1a39xEDq+xKMfsFknxweFESRHP1P
- x4yPtGbyUuaR7e2+sZ8LdcgseDTNFVvA67fYMaGteI7P60d3rjMcmQ5MXMhpUjGfYvinca8lqq
- nuM=
-X-SBRS: None
-X-MesageID: 28328134
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.77,323,1596513600"; 
-   d="scan'208";a="28328134"
-Date: Thu, 1 Oct 2020 12:54:53 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+	id 63d146d4-b5be-4c8c-b82d-01a716981bf8;
+	Thu, 01 Oct 2020 10:55:22 +0000 (UTC)
+Received: by mail-wr1-f66.google.com with SMTP id k15so5125258wrn.10
+        for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2020 03:55:22 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to:user-agent;
+        bh=7NEmW18qKW/Lt+bOZTfoQ7sXNngWHPAc1cKQm0Bllf4=;
+        b=gtFWXPzzP1QV9XoORSr23bJN9J2QO2Fe1IxB7GkNPUkCKf2/1jC4082ffPA8tTJmMa
+         LvCkuCZNXhC5wG2YSZgwHriwg4Ln5DQYp5RksyzWfxlfSi12EsfPn4KUqyxOGnRxW/H0
+         ZM3jBDK3r8sDUEX2C4QNtcagbLp+YgCSodkxHRaQ3ip9DQyeyEpi+24rUsCcDgGEqIC3
+         4qhOOuBEIJSa1URsU+meeSm+4D1mAjNU/wTulg+7qgpUcXlsaU81z0ZNbfO4FI7Uvis/
+         g46Z3NTgL/nrij2aC+08mA3+RskEuyQUB06NRjZEuVhSigid4socBtXPXhowpkdjgJQs
+         /bWQ==
+X-Gm-Message-State: AOAM53063HVm6az9zv9qKqKd16TUBSQ0TTCanX9AO55G12odvfby7kA9
+	tKVKirH7pCS8BHNn3lSvqIg=
+X-Google-Smtp-Source: ABdhPJzAvaNwaA2eDu6aLqCQgdSsWIX2fX85ot72QR93lbKv0BNQOVqnzJnprfe5H57cVzQmjs8TNg==
+X-Received: by 2002:adf:a3d4:: with SMTP id m20mr8835398wrb.29.1601549721445;
+        Thu, 01 Oct 2020 03:55:21 -0700 (PDT)
+Received: from liuwe-devbox-debian-v2 ([51.145.34.42])
+        by smtp.gmail.com with ESMTPSA id t16sm2977793wmi.18.2020.10.01.03.55.20
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 01 Oct 2020 03:55:20 -0700 (PDT)
+Date: Thu, 1 Oct 2020 10:55:19 +0000
+From: Wei Liu <wl@xen.org>
 To: Andrew Cooper <andrew.cooper3@citrix.com>
-CC: Xen-devel <xen-devel@lists.xenproject.org>, Jan Beulich
-	<JBeulich@suse.com>, Wei Liu <wl@xen.org>
-Subject: Re: [PATCH 6/8] xen/xsm: Drop xsm_hvm_param_nested()
-Message-ID: <20201001105453.GD19254@Air-de-Roger>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>,
+	Jan Beulich <JBeulich@suse.com>,
+	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>
+Subject: Re: [PATCH 2/8] xen/domctl: Simplify DOMCTL_CDF_ checking logic
+Message-ID: <20201001105519.mqguww6gqk5rwasy@liuwe-devbox-debian-v2>
 References: <20200930134248.4918-1-andrew.cooper3@citrix.com>
- <20200930134248.4918-7-andrew.cooper3@citrix.com>
+ <20200930134248.4918-3-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20200930134248.4918-7-andrew.cooper3@citrix.com>
-X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
- FTLPEX02CL06.citrite.net (10.13.108.179)
+In-Reply-To: <20200930134248.4918-3-andrew.cooper3@citrix.com>
+User-Agent: NeoMutt/20180716
 
-On Wed, Sep 30, 2020 at 02:42:46PM +0100, Andrew Cooper wrote:
-> The sole caller has been removed.
+On Wed, Sep 30, 2020 at 02:42:42PM +0100, Andrew Cooper wrote:
+> Introduce some local variables to make the resulting logic easier to follow.
+> Join the two IOMMU checks in sanitise_domain_config().  Tweak some of the
+> terminology for better accuracy.
+> 
+> No functional change.
 > 
 > Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
-Acked-by: Roger Pau Monné <roger.pau@citrix.com>
-
-Thanks, Roger.
+Reviewed-by: Wei Liu <wl@xen.org>
 
