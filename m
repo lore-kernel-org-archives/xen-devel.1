@@ -2,28 +2,28 @@ Return-Path: <SRS0=IV2x=DI=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
+X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
 	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9D4E0C4727C
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2020 09:08:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B690FC47420
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2020 09:27:35 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3EAFE20B1F
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2020 09:08:40 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 5CD2B21481
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2020 09:27:35 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="ANoD8lf7"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3EAFE20B1F
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
+	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="HfeP5JsT"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5CD2B21481
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.1136.3733 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1140.3749 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNuZf-00068q-Hy; Thu, 01 Oct 2020 09:08:27 +0000
+	id 1kNuro-0007xM-TQ; Thu, 01 Oct 2020 09:27:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1136.3733; Thu, 01 Oct 2020 09:08:27 +0000
+Received: by outflank-mailman (output) from mailman id 1140.3749; Thu, 01 Oct 2020 09:27:12 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,98 +38,80 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kNuZf-00068j-Eo; Thu, 01 Oct 2020 09:08:27 +0000
-Received: by outflank-mailman (input) for mailman id 1136;
- Thu, 01 Oct 2020 09:08:26 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=bOcq=DI=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kNuZe-00068c-Bi
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2020 09:08:26 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9d6b89f3-251c-41a2-a226-27f398b3a356;
- Thu, 01 Oct 2020 09:08:25 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id AA725AD49;
- Thu,  1 Oct 2020 09:08:24 +0000 (UTC)
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kNuro-0007xF-QC; Thu, 01 Oct 2020 09:27:12 +0000
+Received: by outflank-mailman (input) for mailman id 1140;
+ Thu, 01 Oct 2020 09:27:11 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=jQH2=DI=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1kNurn-0007xA-AU
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2020 09:27:11 +0000
+Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 58dceebb-06ad-476e-98f3-24ae2b48aa2b;
+ Thu, 01 Oct 2020 09:27:07 +0000 (UTC)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=bOcq=DI=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
-	id 1kNuZe-00068c-Bi
-	for xen-devel@lists.xenproject.org; Thu, 01 Oct 2020 09:08:26 +0000
-X-Inumbo-ID: 9d6b89f3-251c-41a2-a226-27f398b3a356
-Received: from mx2.suse.de (unknown [195.135.220.15])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 9d6b89f3-251c-41a2-a226-27f398b3a356;
-	Thu, 01 Oct 2020 09:08:25 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1601543304;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=GkpkHDPoQcdt8alyC1VjT+FnO+DiQ4YeDc5Nv31DKPE=;
-	b=ANoD8lf7ad8iCbzaG+rl0esRDtyb8rBqVhN9ubdJaV9VxOqON+K/5HNsbQdclwJxrpae8i
-	p6+8C0cTPN5m5ej2ykkpfkdk8xDmz53eWSP+fHD7ZevkXpWB2q92v+RlYrMmWXJLAURmN6
-	bJbIMYrWDxjdAVmvTtg8PD1n8XSYbSc=
-Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id AA725AD49;
-	Thu,  1 Oct 2020 09:08:24 +0000 (UTC)
-Subject: Re: [xen-unstable-smoke test] 155187: regressions - FAIL
-To: osstest service owner <osstest-admin@xenproject.org>,
- xen-devel@lists.xenproject.org
-References: <osstest-155187-mainreport@xen.org>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <3d90fa45-9097-f58c-f9b3-818bf0dd0be4@suse.com>
-Date: Thu, 1 Oct 2020 11:08:25 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.0
+	(envelope-from <SRS0=jQH2=DI=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+	id 1kNurn-0007xA-AU
+	for xen-devel@lists.xenproject.org; Thu, 01 Oct 2020 09:27:11 +0000
+X-Inumbo-ID: 58dceebb-06ad-476e-98f3-24ae2b48aa2b
+Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id 58dceebb-06ad-476e-98f3-24ae2b48aa2b;
+	Thu, 01 Oct 2020 09:27:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1601544428;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:content-transfer-encoding:in-reply-to;
+  bh=hF4JWm2e7NDZ5Xh7ZZWnWl0AevZZigjbED9dD/hQ5oU=;
+  b=HfeP5JsT/unY+4e5+iQyB04IyvXALOX1l4v0dJtx7x7R2eFUQ9GvRYAo
+   ZvS0zMmEzCRa4e81rleLW6GW4MJBlnZVOSOuQ1chjbKvBSzL9v0UhRlW1
+   wgzlNG7GJxhePjUjybYzbR+jvghneVm0mGfHyIe+QH+SCYo/RVufGLV2S
+   8=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: YLR2UGa1tE/4RMGxGxWxNWWSOwGUipKOqwsyH3eBqcYZjFEq6f63Dql0AuQVpWWc8J5UVkWSdj
+ 08njLDOgm0tgc62yUVqmg3zOEZ3E2+FUFUyYtucP/bO6tM6nzLIz9YeiZf/V1XOuBt9Mc59Bke
+ tPLBAOyw1Fpdi608BbI8st/nsxAPQffcqHvudLfS+PDU4ujYohsT6s9Z/5OeP0S/xhAILZSqT6
+ /zdmADLoNm4tgPXNHSRAEKgdUIcaiNBqetH+bvISmUDaf6KZcCbH9KN5vIwD1GiiWrwpIu5PNW
+ PWY=
+X-SBRS: None
+X-MesageID: 28055755
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.77,323,1596513600"; 
+   d="scan'208";a="28055755"
+Date: Thu, 1 Oct 2020 11:26:58 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+CC: Xen-devel <xen-devel@lists.xenproject.org>, Ian Jackson
+	<iwj@xenproject.org>, Wei Liu <wl@xen.org>, Anthony PERARD
+	<anthony.perard@citrix.com>
+Subject: Re: [PATCH 1/8] tools/libxl: Simplify DOMCTL_CDF_ flags handling in
+ libxl__domain_make()
+Message-ID: <20201001092658.GY19254@Air-de-Roger>
+References: <20200930134248.4918-1-andrew.cooper3@citrix.com>
+ <20200930134248.4918-2-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-In-Reply-To: <osstest-155187-mainreport@xen.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20200930134248.4918-2-andrew.cooper3@citrix.com>
+X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
+ FTLPEX02CL06.citrite.net (10.13.108.179)
 
-On 01.10.2020 07:11, osstest service owner wrote:
-> flight 155187 xen-unstable-smoke real [real]
-> http://logs.test-lab.xenproject.org/osstest/logs/155187/
+On Wed, Sep 30, 2020 at 02:42:41PM +0100, Andrew Cooper wrote:
+> The use of the ternary operator serves only to obfuscate the code.  Rewrite it
+> in more simple terms, avoiding the need to conditionally OR zero into the
+> flags.
 > 
-> Regressions :-(
-> 
-> Tests which did not succeed and are blocking,
-> including tests which could not be run:
->  test-amd64-amd64-libvirt     12 guest-start              fail REGR. vs. 155128
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
-All I can see in the serial log is
+Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
 
-Oct  1 03:49:33.145346 [   16.993554] virbr0: port 1(virbr0-nic) entered disabled state
-Oct  1 03:49:33.145426 [   16.993584] device virbr0-nic entered promiscuous mode
-Oct  1 03:49:33.157353 [   16.993662] systemd-udevd[1538]: link_config: autonegotiation is unset or enabled, the speed and duplex are not writable.
-Oct  1 03:49:33.169370 [   16.993840] systemd-udevd[1541]: Using default interface naming scheme 'v240'.
-Oct  1 03:49:33.169467 [   16.998341] systemd-udevd[1538]: Process 'ifupdown-hotplug' failed with exit code 1.
-Oct  1 03:49:33.181371 [   16.999735] systemd-udevd[1541]: Process 'ifupdown-hotplug' failed with exit code 1.
-Oct  1 03:49:33.193293 [   17.287282] device virbr0-nic left promiscuous mode
-Oct  1 03:49:33.433389 [   17.287356] virbr0: port 1(virbr0-nic) entered disabled state
-Oct  1 03:49:33.433466 [   17.289383] systemd-udevd[1541]: Process 'ifupdown-hotplug' failed with exit code 1.
-Oct  1 03:49:33.445371 [   17.294929] systemd-udevd[1541]: Process 'ifupdown-hotplug' failed with exit code 1.
+Might be worth adding to the log that it's a non-functional change.
 
-accompanied by multiple instances of
-
-# Warning: iptables-legacy tables present, use iptables-legacy to see them
-iptables: Operation not supported.
-
-and
-
-# Warning: iptables-legacy tables present, use iptables-legacy to see them
-iptables: Invalid argument. Run `dmesg' for more information.
-
-in libvirtd.log. What I can't tell is whether this is the cause of the
-test failure. In any event the domain was (still?) paused at the time
-the debug keys got sent. What I also can't guess at all is which of the
-five commits in question might be responsible here (or whether the issue
-is an environment one).
-
-Jan
+Thanks, Roger.
 
