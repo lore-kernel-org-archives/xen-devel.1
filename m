@@ -7,21 +7,21 @@ X-Spam-Status: No, score=-12.7 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0DE28C4727E
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2020 16:25:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9604CC4727E
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2020 16:25:35 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C2B3320848
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2020 16:25:30 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C2B3320848
+	by mail.kernel.org (Postfix) with ESMTPS id 464DD20759
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2020 16:25:35 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 464DD20759
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.1460.4641 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1461.4653 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kO1OU-0001k1-0i; Thu, 01 Oct 2020 16:25:22 +0000
+	id 1kO1OZ-0001qQ-Di; Thu, 01 Oct 2020 16:25:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1460.4641; Thu, 01 Oct 2020 16:25:21 +0000
+Received: by outflank-mailman (output) from mailman id 1461.4653; Thu, 01 Oct 2020 16:25:27 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,81 +36,107 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kO1OT-0001jq-SK; Thu, 01 Oct 2020 16:25:21 +0000
-Received: by outflank-mailman (input) for mailman id 1460;
- Thu, 01 Oct 2020 16:25:20 +0000
+	id 1kO1OZ-0001qG-85; Thu, 01 Oct 2020 16:25:27 +0000
+Received: by outflank-mailman (input) for mailman id 1461;
+ Thu, 01 Oct 2020 16:25:25 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=j0qz=DI=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1kO1OS-0001JL-KK
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2020 16:25:20 +0000
+ id 1kO1OX-0001JL-KY
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2020 16:25:25 +0000
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 809d7148-c8f6-4f44-bfcf-d302cb04b56d;
- Thu, 01 Oct 2020 16:24:51 +0000 (UTC)
+ id a44ed8a7-3c40-49e2-905e-6951fcd05921;
+ Thu, 01 Oct 2020 16:24:52 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1kO1Ny-00029L-Ao; Thu, 01 Oct 2020 17:24:50 +0100
+ id 1kO1Ny-00029L-Gk; Thu, 01 Oct 2020 17:24:50 +0100
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=j0qz=DI=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
-	id 1kO1OS-0001JL-KK
-	for xen-devel@lists.xenproject.org; Thu, 01 Oct 2020 16:25:20 +0000
-X-Inumbo-ID: 809d7148-c8f6-4f44-bfcf-d302cb04b56d
+	id 1kO1OX-0001JL-KY
+	for xen-devel@lists.xenproject.org; Thu, 01 Oct 2020 16:25:25 +0000
+X-Inumbo-ID: a44ed8a7-3c40-49e2-905e-6951fcd05921
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 809d7148-c8f6-4f44-bfcf-d302cb04b56d;
-	Thu, 01 Oct 2020 16:24:51 +0000 (UTC)
+	id a44ed8a7-3c40-49e2-905e-6951fcd05921;
+	Thu, 01 Oct 2020 16:24:52 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
 	by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
 	(return-path ijackson@chiark.greenend.org.uk)
-	id 1kO1Ny-00029L-Ao; Thu, 01 Oct 2020 17:24:50 +0100
+	id 1kO1Ny-00029L-Gk; Thu, 01 Oct 2020 17:24:50 +0100
 From: Ian Jackson <iwj@xenproject.org>
 To: xen-devel@lists.xenproject.org
 Cc: Ian Jackson <iwj@xenproject.org>
-Subject: [OSSTEST PATCH 7/8] standalone-generate-dump-flight-runvars: Simulate cri-getplatforms
-Date: Thu,  1 Oct 2020 17:24:38 +0100
-Message-Id: <20201001162439.18160-7-iwj@xenproject.org>
+Subject: [OSSTEST PATCH 8/8] Tolerate lack of platform-specific hosts in old Xen branches
+Date: Thu,  1 Oct 2020 17:24:39 +0100
+Message-Id: <20201001162439.18160-8-iwj@xenproject.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20201001162439.18160-1-iwj@xenproject.org>
 References: <20201001162439.18160-1-iwj@xenproject.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Set MF_SIMULATE_PLATFORMS to a suitable value if it is
-not *set*.  (Distinguishing unset from set to empty.)
+Right now we have a situation where these can't all be made to work
+because because some older Xen branches are hard to make work on
+current Debian stable, and we have some hardware (which we have tagged
+as specific "platforms") which doesn't work with oldstable.
 
-I have verified that this, plus the preceding commits to
-cri-getplatforms, produces no change in the output of
-  MF_SIMULATE_PLATFORMS='' OSSTEST_CONFIG=standalone-config-example eatmydata ./standalone-generate-dump-flight-runvars
+This seems like a general problem, so fix it this way.
 
-Without the MF_SIMULATE_PLATFORMS setting it adds several new jobs to
-each flight, name things like this:
-  test-amd64-$arch1-xl-simplat-$arch2-$suite
+Note that we still treat these failed allocations as failures, so they
+are subject to regression analysis and ought not to appear willy-nilly
+on existing branches.
 
-The purpose of this right now is to provide a way to dry-run test the
-next change.
+Runvar dump shows the addition of this runvar
+   hostalloc_missing_expected=1
+to
+   qemu-upstream-4.6-testing
+   xen-4.6-testing
+   ...
+   qemu-upstream-4.14-testing
+   xen-4.14-testing
+inclusive.
 
 Signed-off-by: Ian Jackson <iwj@xenproject.org>
 ---
- standalone-generate-dump-flight-runvars | 3 +++
- 1 file changed, 3 insertions(+)
+ make-flight | 16 +++++++++++++++-
+ 1 file changed, 15 insertions(+), 1 deletion(-)
 
-diff --git a/standalone-generate-dump-flight-runvars b/standalone-generate-dump-flight-runvars
-index 5c93b0af..07b9c126 100755
---- a/standalone-generate-dump-flight-runvars
-+++ b/standalone-generate-dump-flight-runvars
-@@ -45,6 +45,9 @@ fi
- : ${AP_FETCH_PLACEHOLDERS:=y}
- export AP_FETCH_PLACEHOLDERS
+diff --git a/make-flight b/make-flight
+index d5a3d99a..fb38bc50 100755
+--- a/make-flight
++++ b/make-flight
+@@ -643,13 +643,27 @@ do_pv_debian_tests () {
+   for xsm in $xsms ; do
+     # Basic PV Linux test with xl
+     for platform in '' `getplatforms $xenarch $defsuite` ; do
++      platform_runvars=''
  
-+: ${MF_SIMULATE_PLATFORMS='simplat-$xenarch-$suite'}
-+export MF_SIMULATE_PLATFORMS
+       # xsm test is not platform specific
+       if [ x$xsm = xtrue -a x$platform != x ]; then
+           continue
+       fi
+ 
+-      do_pv_debian_test_one xl '' xl "$platform" enable_xsm=$xsm
++      missing_expected=false
++      if [ x$platform != x ]; then
++        case "$xenbranch" in
++          xen-3.*-testing)  missing_expected=true ;;
++          xen-4.*-testing)  missing_expected=true ;;
++          *) ;;
++        esac
++      fi
++      if $missing_expected; then
++        platform_runvars+=hostalloc_missing_expected=1
++      fi
 +
- export OSSTEST_HOSTSLIST_DUMMY=1
++      do_pv_debian_test_one xl '' xl "$platform" enable_xsm=$xsm \
++                            $platform_runvars
  
- if [ "x$AP_FETCH_PLACEHOLDERS" != xy ]; then
+     done
+   done
 -- 
 2.20.1
 
