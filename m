@@ -2,28 +2,28 @@ Return-Path: <SRS0=mHc1=DJ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-12.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=no
-	autolearn_force=no version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 519E8C47423
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D6A5EC4727D
 	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2020 13:39:54 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EFE5A20795
+	by mail.kernel.org (Postfix) with ESMTPS id 805B020719
 	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2020 13:39:53 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="jI1Qp3NS"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EFE5A20795
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="Uu3UBB/e"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 805B020719
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.2121.6290 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.2123.6314 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kOLHY-0001mL-EW; Fri, 02 Oct 2020 13:39:32 +0000
+	id 1kOLHk-0001rR-7d; Fri, 02 Oct 2020 13:39:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 2121.6290; Fri, 02 Oct 2020 13:39:32 +0000
+Received: by outflank-mailman (output) from mailman id 2123.6314; Fri, 02 Oct 2020 13:39:44 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,77 +38,77 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kOLHY-0001mE-BJ; Fri, 02 Oct 2020 13:39:32 +0000
-Received: by outflank-mailman (input) for mailman id 2121;
- Fri, 02 Oct 2020 13:39:31 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kOLHk-0001rJ-3h; Fri, 02 Oct 2020 13:39:44 +0000
+Received: by outflank-mailman (input) for mailman id 2123;
+ Fri, 02 Oct 2020 13:39:43 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=vuVU=DJ=redhat.com=philmd@srs-us1.protection.inumbo.net>)
- id 1kOLHW-0001m9-Uu
- for xen-devel@lists.xenproject.org; Fri, 02 Oct 2020 13:39:31 +0000
-Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id 77bda39c-0282-427d-baa6-7e104d0205b8;
- Fri, 02 Oct 2020 13:39:29 +0000 (UTC)
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-537-Dq-uan-7NGKD4Nj_AWAQFg-1; Fri, 02 Oct 2020 09:39:27 -0400
-Received: by mail-wm1-f70.google.com with SMTP id x6so540382wmi.1
- for <xen-devel@lists.xenproject.org>; Fri, 02 Oct 2020 06:39:27 -0700 (PDT)
+ id 1kOLHj-0001o1-7l
+ for xen-devel@lists.xenproject.org; Fri, 02 Oct 2020 13:39:43 +0000
+Received: from us-smtp-delivery-124.mimecast.com (unknown [63.128.21.124])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+ id bfb246c0-b6fd-40ae-bcf1-97b5a21e218e;
+ Fri, 02 Oct 2020 13:39:40 +0000 (UTC)
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-484-8QquVv6XN-WG38wS1ghzDg-1; Fri, 02 Oct 2020 09:39:38 -0400
+Received: by mail-wm1-f69.google.com with SMTP id i9so95878wml.2
+ for <xen-devel@lists.xenproject.org>; Fri, 02 Oct 2020 06:39:38 -0700 (PDT)
 Received: from localhost.localdomain (74.red-83-53-161.dynamicip.rima-tde.net.
  [83.53.161.74])
- by smtp.gmail.com with ESMTPSA id k8sm1632520wrl.42.2020.10.02.06.39.25
+ by smtp.gmail.com with ESMTPSA id r19sm1784306wmh.7.2020.10.02.06.39.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Oct 2020 06:39:25 -0700 (PDT)
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+ Fri, 02 Oct 2020 06:39:36 -0700 (PDT)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=vuVU=DJ=redhat.com=philmd@srs-us1.protection.inumbo.net>)
-	id 1kOLHW-0001m9-Uu
-	for xen-devel@lists.xenproject.org; Fri, 02 Oct 2020 13:39:31 +0000
-X-Inumbo-ID: 77bda39c-0282-427d-baa6-7e104d0205b8
-Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
-	id 77bda39c-0282-427d-baa6-7e104d0205b8;
-	Fri, 02 Oct 2020 13:39:29 +0000 (UTC)
+	id 1kOLHj-0001o1-7l
+	for xen-devel@lists.xenproject.org; Fri, 02 Oct 2020 13:39:43 +0000
+X-Inumbo-ID: bfb246c0-b6fd-40ae-bcf1-97b5a21e218e
+Received: from us-smtp-delivery-124.mimecast.com (unknown [63.128.21.124])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+	id bfb246c0-b6fd-40ae-bcf1-97b5a21e218e;
+	Fri, 02 Oct 2020 13:39:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1601645969;
+	s=mimecast20190719; t=1601645980;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=gJa6lLjujz4Z6eodBHhDkQDnUdrQBiirVQpBE1f30O0=;
-	b=jI1Qp3NSAg5mIkSR+LFYc60ABOHs570gXQRDW19u7oOFbWo6dc1mTLPNHlyE6CpZz5BoZ1
-	/prq3xjomuOpGFXNgXhSJbZ41V1JgNVilznBxvg4i2K97T8xqzGuDljO/Mm8Bvx2Z8K7RD
-	IFnFmVdqaCgOSoyom9DAQUmWOwV0+Hc=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-537-Dq-uan-7NGKD4Nj_AWAQFg-1; Fri, 02 Oct 2020 09:39:27 -0400
-X-MC-Unique: Dq-uan-7NGKD4Nj_AWAQFg-1
-Received: by mail-wm1-f70.google.com with SMTP id x6so540382wmi.1
-        for <xen-devel@lists.xenproject.org>; Fri, 02 Oct 2020 06:39:27 -0700 (PDT)
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=kbK1m63mIh7G9YoSTt+lY9Rt1IngmCv52ys5F1Xv+Ck=;
+	b=Uu3UBB/eBIZLRBxr/GKPc14VcSn2csCaxmXks06WflkrmIpYV2LU+DmKnQ+akzhTI+nipx
+	QuR9bXjyODJjqrv8WyqmIQw0oopDoIHWDh/3k5bJcmDoTSjvROhQFa82GfXqqxp+Vhecey
+	Cff8hZKjnDACwarcTk8YZGmgaNWQclc=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-484-8QquVv6XN-WG38wS1ghzDg-1; Fri, 02 Oct 2020 09:39:38 -0400
+X-MC-Unique: 8QquVv6XN-WG38wS1ghzDg-1
+Received: by mail-wm1-f69.google.com with SMTP id i9so95878wml.2
+        for <xen-devel@lists.xenproject.org>; Fri, 02 Oct 2020 06:39:38 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=gJa6lLjujz4Z6eodBHhDkQDnUdrQBiirVQpBE1f30O0=;
-        b=X5Kcelz8jKgrACm6S6oQqX3mnpHWEGi4GqOblFijlqHSOeNwBxDTgbW7N058HxG+0Y
-         /ltr2/GZ59qqpeT6HfYg4eiIAg3l7TcIYWdCi+foJeaUu0MPDKDbumJnY0f5LbxVilBk
-         9aaO/i6f8OSBSDG6NW0bEUqvU4dXcZHydlO56DEV+HOu6Jj14LMGARYs+ZEUz/goXMLn
-         P2OshggXhtBFqoMdTsqh/oxSe+p6Yutq02nEwMOz2gIr9+KckByY/HhBTVYDXhVDG8Hp
-         2xYvvuXq1bFuzdo0NS0i0Gv8QSi/4cNK8Ufp/qTovZJ0nQu8Nl66C8kVVVQztZRQ+oyx
-         KjEg==
-X-Gm-Message-State: AOAM530nSUPAqkmIyquGttjD/ccSQAHr4+JjHAWqB0GEIiGpU5U7a4xe
-	+lg0vGDIifR5GJkIXmsutcrmtH0habpDrabAv+l11P9gMpvLytOCY4E7Q/Pg3X0sbtvgkHU84xS
-	fuSAhGKfp5ipwjJCuB1km21B3Tgk=
-X-Received: by 2002:adf:a418:: with SMTP id d24mr3198323wra.80.1601645966803;
-        Fri, 02 Oct 2020 06:39:26 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJwtxtNy6fW+4PHTbuPzJPXeHOxCiDquXwGv5njMeErxQZK42D+who95M+frGMmK92H78CfTVA==
-X-Received: by 2002:adf:a418:: with SMTP id d24mr3198294wra.80.1601645966623;
-        Fri, 02 Oct 2020 06:39:26 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=kbK1m63mIh7G9YoSTt+lY9Rt1IngmCv52ys5F1Xv+Ck=;
+        b=lc4bklQB/9mlIdD253n0ziNqrLJ2/OXTx8wk1FNM0UB8xR8mE5kkizU8f4WKYl5Z+Z
+         NfUleXm6S6/fC3lNQADHNgAjJpGBhBGVJLvn85c0cSt39f2qL6epWwDHGmoKTb2hEzCB
+         akkgxtMTth+KUrVtQoUZM5NGb6ACWU0UMHtYrWNDHRHFL70fBeR+/+dzqDDJ/HSyX6Ei
+         VqZMOIA56UXy75fYOXQukbN4s5mGg2psRTw/EnDtMAY3t7yt3ERq0GIEv+ivZtIuG6wY
+         lS1uqfh7fAg8qtqXW9/N16Czv1r81PaIeYFeUp1S5c/piN01cAn/XEFHbvRXajBIYgzK
+         aqWQ==
+X-Gm-Message-State: AOAM531w7h/gP5lYIIlEgiBEMsikbjCDKksU3W9wGaz4CEvXR0wB7PJW
+	z1oQrvyG74XwsS9l+9oiVO5ZfAffeTjaTAfgFSMLL+R3tVljx6Pj1+o0qRnCCCsKZ7dHjQHoT/U
+	jXS8osdorQHDwCdBEwF1sKeCoZ4A=
+X-Received: by 2002:a1c:63c1:: with SMTP id x184mr3042796wmb.138.1601645977326;
+        Fri, 02 Oct 2020 06:39:37 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJwD/heYmqaLVMQtumsMQOWyseI2hOgaXTBn2HXZs+0th/9VfQZ/6fqWSoQPr8a9Q2Va+FrerA==
+X-Received: by 2002:a1c:63c1:: with SMTP id x184mr3042765wmb.138.1601645977099;
+        Fri, 02 Oct 2020 06:39:37 -0700 (PDT)
 Received: from localhost.localdomain (74.red-83-53-161.dynamicip.rima-tde.net. [83.53.161.74])
-        by smtp.gmail.com with ESMTPSA id k8sm1632520wrl.42.2020.10.02.06.39.25
+        by smtp.gmail.com with ESMTPSA id r19sm1784306wmh.7.2020.10.02.06.39.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 02 Oct 2020 06:39:25 -0700 (PDT)
+        Fri, 02 Oct 2020 06:39:36 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <rth@twiddle.net>,
@@ -127,10 +127,12 @@ Cc: Richard Henderson <rth@twiddle.net>,
 	"Michael S. Tsirkin" <mst@redhat.com>,
 	Eduardo Habkost <ehabkost@redhat.com>,
 	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
-Subject: [PATCH 0/5] qapi: Restrict machine (and migration) specific commands
-Date: Fri,  2 Oct 2020 15:39:18 +0200
-Message-Id: <20201002133923.1716645-1-philmd@redhat.com>
+Subject: [PATCH 2/5] qapi: Restrict 'system wakeup/reset/powerdown' commands to machine.json
+Date: Fri,  2 Oct 2020 15:39:20 +0200
+Message-Id: <20201002133923.1716645-3-philmd@redhat.com>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20201002133923.1716645-1-philmd@redhat.com>
+References: <20201002133923.1716645-1-philmd@redhat.com>
 MIME-Version: 1.0
 Authentication-Results: relay.mimecast.com;
 	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=philmd@redhat.com
@@ -139,27 +141,185 @@ X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
-Reduce the machine code pulled into qemu-storage-daemon.
+Restricting system_wakeup/system_reset/system_powerdown to
+machine.json pulls slightly less QAPI-generated code into
+user-mode and tools.
 
-Philippe Mathieu-Daudé (5):
-  qapi: Restrict 'inject-nmi' command to machine code
-  qapi: Restrict 'system wakeup/reset/powerdown' commands to
-    machine.json
-  qapi: Restrict '(p)memsave' command to machine code
-  qapi: Restrict 'query-kvm' command to machine code
-  qapi: Restrict Xen migration commands to migration.json
+Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+---
+ qapi/machine.json | 57 +++++++++++++++++++++++++++++++++++++++++++++++
+ qapi/misc.json    | 57 -----------------------------------------------
+ ui/gtk.c          |  1 +
+ ui/cocoa.m        |  1 +
+ 4 files changed, 59 insertions(+), 57 deletions(-)
 
- qapi/machine.json      | 168 +++++++++++++++++++++++++++++++++
- qapi/migration.json    |  41 ++++++++
- qapi/misc.json         | 209 -----------------------------------------
- accel/stubs/xen-stub.c |   2 +-
- hw/i386/xen/xen-hvm.c  |   2 +-
- migration/savevm.c     |   1 -
- softmmu/cpus.c         |   1 +
- ui/gtk.c               |   1 +
- ui/cocoa.m             |   1 +
- 9 files changed, 214 insertions(+), 212 deletions(-)
-
+diff --git a/qapi/machine.json b/qapi/machine.json
+index 073b1c98b2..55328d4f3c 100644
+--- a/qapi/machine.json
++++ b/qapi/machine.json
+@@ -452,6 +452,63 @@
+ ##
+ { 'command': 'query-vm-generation-id', 'returns': 'GuidInfo' }
+ 
++##
++# @system_reset:
++#
++# Performs a hard reset of a guest.
++#
++# Since: 0.14.0
++#
++# Example:
++#
++# -> { "execute": "system_reset" }
++# <- { "return": {} }
++#
++##
++{ 'command': 'system_reset' }
++
++##
++# @system_powerdown:
++#
++# Requests that a guest perform a powerdown operation.
++#
++# Since: 0.14.0
++#
++# Notes: A guest may or may not respond to this command.  This command
++#        returning does not indicate that a guest has accepted the request or
++#        that it has shut down.  Many guests will respond to this command by
++#        prompting the user in some way.
++# Example:
++#
++# -> { "execute": "system_powerdown" }
++# <- { "return": {} }
++#
++##
++{ 'command': 'system_powerdown' }
++
++##
++# @system_wakeup:
++#
++# Wake up guest from suspend. If the guest has wake-up from suspend
++# support enabled (wakeup-suspend-support flag from
++# query-current-machine), wake-up guest from suspend if the guest is
++# in SUSPENDED state. Return an error otherwise.
++#
++# Since:  1.1
++#
++# Returns:  nothing.
++#
++# Note: prior to 4.0, this command does nothing in case the guest
++#       isn't suspended.
++#
++# Example:
++#
++# -> { "execute": "system_wakeup" }
++# <- { "return": {} }
++#
++##
++{ 'command': 'system_wakeup' }
++
+ ##
+ # @LostTickPolicy:
+ #
+diff --git a/qapi/misc.json b/qapi/misc.json
+index 37b3e04cec..cce2e71e9c 100644
+--- a/qapi/misc.json
++++ b/qapi/misc.json
+@@ -177,40 +177,6 @@
+ ##
+ { 'command': 'stop' }
+ 
+-##
+-# @system_reset:
+-#
+-# Performs a hard reset of a guest.
+-#
+-# Since: 0.14.0
+-#
+-# Example:
+-#
+-# -> { "execute": "system_reset" }
+-# <- { "return": {} }
+-#
+-##
+-{ 'command': 'system_reset' }
+-
+-##
+-# @system_powerdown:
+-#
+-# Requests that a guest perform a powerdown operation.
+-#
+-# Since: 0.14.0
+-#
+-# Notes: A guest may or may not respond to this command.  This command
+-#        returning does not indicate that a guest has accepted the request or
+-#        that it has shut down.  Many guests will respond to this command by
+-#        prompting the user in some way.
+-# Example:
+-#
+-# -> { "execute": "system_powerdown" }
+-# <- { "return": {} }
+-#
+-##
+-{ 'command': 'system_powerdown' }
+-
+ ##
+ # @memsave:
+ #
+@@ -318,29 +284,6 @@
+ ##
+ { 'command': 'x-exit-preconfig', 'allow-preconfig': true }
+ 
+-##
+-# @system_wakeup:
+-#
+-# Wake up guest from suspend. If the guest has wake-up from suspend
+-# support enabled (wakeup-suspend-support flag from
+-# query-current-machine), wake-up guest from suspend if the guest is
+-# in SUSPENDED state. Return an error otherwise.
+-#
+-# Since:  1.1
+-#
+-# Returns:  nothing.
+-#
+-# Note: prior to 4.0, this command does nothing in case the guest
+-#       isn't suspended.
+-#
+-# Example:
+-#
+-# -> { "execute": "system_wakeup" }
+-# <- { "return": {} }
+-#
+-##
+-{ 'command': 'system_wakeup' }
+-
+ ##
+ # @human-monitor-command:
+ #
+diff --git a/ui/gtk.c b/ui/gtk.c
+index b11594d817..a752aa22be 100644
+--- a/ui/gtk.c
++++ b/ui/gtk.c
+@@ -33,6 +33,7 @@
+ #include "qemu/osdep.h"
+ #include "qapi/error.h"
+ #include "qapi/qapi-commands-control.h"
++#include "qapi/qapi-commands-machine.h"
+ #include "qapi/qapi-commands-misc.h"
+ #include "qemu/cutils.h"
+ 
+diff --git a/ui/cocoa.m b/ui/cocoa.m
+index 0910b4a716..f32adc3074 100644
+--- a/ui/cocoa.m
++++ b/ui/cocoa.m
+@@ -35,6 +35,7 @@
+ #include "sysemu/cpu-throttle.h"
+ #include "qapi/error.h"
+ #include "qapi/qapi-commands-block.h"
++#include "qapi/qapi-commands-machine.h"
+ #include "qapi/qapi-commands-misc.h"
+ #include "sysemu/blockdev.h"
+ #include "qemu-version.h"
 -- 
 2.26.2
 
