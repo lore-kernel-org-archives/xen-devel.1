@@ -5,25 +5,25 @@ X-Spam-Level:
 X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 577F4C47427
-	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2020 12:22:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AA2C4C47426
+	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2020 12:23:01 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 152602074B
-	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2020 12:22:58 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 6D46820665
+	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2020 12:23:01 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="X1Hf2bS6"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 152602074B
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="Tj33JCJU"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6D46820665
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.2017.6021 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.2018.6034 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kOK5H-0001PA-LR; Fri, 02 Oct 2020 12:22:47 +0000
+	id 1kOK5N-0001Uz-0i; Fri, 02 Oct 2020 12:22:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 2017.6021; Fri, 02 Oct 2020 12:22:47 +0000
+Received: by outflank-mailman (output) from mailman id 2018.6034; Fri, 02 Oct 2020 12:22:52 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kOK5H-0001P0-HU; Fri, 02 Oct 2020 12:22:47 +0000
-Received: by outflank-mailman (input) for mailman id 2017;
- Fri, 02 Oct 2020 12:22:46 +0000
+	id 1kOK5M-0001Up-Sz; Fri, 02 Oct 2020 12:22:52 +0000
+Received: by outflank-mailman (input) for mailman id 2018;
+ Fri, 02 Oct 2020 12:22:51 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Wm18=DJ=casper.srs.infradead.org=batv+27a5ecbc8e1e54150000+6249+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1kOK5G-00017n-Ae
- for xen-devel@lists.xenproject.org; Fri, 02 Oct 2020 12:22:46 +0000
+ id 1kOK5L-00017n-Ac
+ for xen-devel@lists.xenproject.org; Fri, 02 Oct 2020 12:22:51 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id aae1feaa-e1bd-4984-8c6f-e553fa319250;
+ id 2104f18a-e603-4c19-991c-da1cb83a157d;
  Fri, 02 Oct 2020 12:22:26 +0000 (UTC)
 Received: from [2001:4bb8:180:7b62:f738:1861:1acc:15c8] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kOK4l-0003Lt-Ax; Fri, 02 Oct 2020 12:22:15 +0000
+ id 1kOK4i-0003LQ-O5; Fri, 02 Oct 2020 12:22:13 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=Wm18=DJ=casper.srs.infradead.org=batv+27a5ecbc8e1e54150000+6249+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1kOK5G-00017n-Ae
-	for xen-devel@lists.xenproject.org; Fri, 02 Oct 2020 12:22:46 +0000
-X-Inumbo-ID: aae1feaa-e1bd-4984-8c6f-e553fa319250
+	id 1kOK5L-00017n-Ac
+	for xen-devel@lists.xenproject.org; Fri, 02 Oct 2020 12:22:51 +0000
+X-Inumbo-ID: 2104f18a-e603-4c19-991c-da1cb83a157d
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id aae1feaa-e1bd-4984-8c6f-e553fa319250;
+	id 2104f18a-e603-4c19-991c-da1cb83a157d;
 	Fri, 02 Oct 2020 12:22:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=PSl4e4bvc0UrKwYaparRx8nOFITZgZOLYb17gUiAPo4=; b=X1Hf2bS6r1+v79yUY1wuVYC3Gq
-	MDZqVWuDYZIWaD+3Zo3tFXAHdjNllVDLCvouVYbnYiYiXGQ1VMywtp0KVLqWzFw02dYW0sL98F1By
-	IaoTnx4rLl+ffDuiMESwxTkw6+rvS6LQPkgODQZJYZ+judGYGe4IYI4IRSyuGRNM0L6mNqjh1X8Kq
-	TtgiXyGM6+W2jZDvV/4Ky5QmllYMo81DYxgnngX4OU0qbM/sHtVWe2BAT+k5Otq1Xp/wS3yDw8Yz+
-	mG7pmSLrSYvwpUf06azhbpWXvpjo2QwON7nRAHpYbHal6VH5+vW1Zj+MUB5KqTriVc7BOpXyqBaOt
-	Y7hhMztw==;
+	bh=ggovDsPrY2tPPXwEEhp2BvATO0PndCnAzmG0yva7UFo=; b=Tj33JCJUX19+gC9K2zBUyM8lNn
+	7XlD88P+JGNEKhd/mdMC9AiMPqnZSBlOBX690hs6gCM3ciOXom3s2u8Ke0OjaLx3YinIgLt7mImm8
+	UmjTvrKNrSJYGEVTht5vkZgfbNFTsKzLIt4H4yJRQkSZ3GDvS1aeS1MkChysP6OZqNpza2Wl8qG1y
+	02oWiQAil8ZxcXE/BzMpRO3LwlTESNaZROOSlh6z+eO2Wj/NYpc0NqRPw6TMjrzU0yqzYvy1/oCBt
+	SUQqJ/8eIxAUEAVMv2l1zNgwum1Gn/b4cxLdXsSFWojo5hZJcx/OEXTBbmeKA2LtfYkYsVcdXDxh/
+	FCkcqWfA==;
 Received: from [2001:4bb8:180:7b62:f738:1861:1acc:15c8] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1kOK4l-0003Lt-Ax; Fri, 02 Oct 2020 12:22:15 +0000
+	id 1kOK4i-0003LQ-O5; Fri, 02 Oct 2020 12:22:13 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Andrew Morton <akpm@linux-foundation.org>
 Cc: Peter Zijlstra <peterz@infradead.org>,
@@ -96,11 +96,10 @@ Cc: Peter Zijlstra <peterz@infradead.org>,
 	linux-kernel@vger.kernel.org,
 	intel-gfx@lists.freedesktop.org,
 	dri-devel@lists.freedesktop.org,
-	linux-mm@kvack.org,
-	Tvrtko Ursulin <tvrtko.ursulin@intel.com>
-Subject: [PATCH 07/11] drm/i915: stop using kmap in i915_gem_object_map
-Date: Fri,  2 Oct 2020 14:22:00 +0200
-Message-Id: <20201002122204.1534411-8-hch@lst.de>
+	linux-mm@kvack.org
+Subject: [PATCH 05/11] zsmalloc: switch from alloc_vm_area to get_vm_area
+Date: Fri,  2 Oct 2020 14:21:58 +0200
+Message-Id: <20201002122204.1534411-6-hch@lst.de>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20201002122204.1534411-1-hch@lst.de>
 References: <20201002122204.1534411-1-hch@lst.de>
@@ -108,42 +107,37 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-kmap for !PageHighmem is just a convoluted way to say page_address,
-and kunmap is a no-op in that case.
+Just manually pre-fault the PTEs using apply_to_page_range.
 
+Co-developed-by: Minchan Kim <minchan@kernel.org>
 Signed-off-by: Christoph Hellwig <hch@lst.de>
-Reviewed-by: Tvrtko Ursulin <tvrtko.ursulin@intel.com>
 ---
- drivers/gpu/drm/i915/gem/i915_gem_pages.c | 7 ++-----
- 1 file changed, 2 insertions(+), 5 deletions(-)
+ mm/zsmalloc.c | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/gpu/drm/i915/gem/i915_gem_pages.c b/drivers/gpu/drm/i915/gem/i915_gem_pages.c
-index d6eeefab3d018b..6550c0bc824ea2 100644
---- a/drivers/gpu/drm/i915/gem/i915_gem_pages.c
-+++ b/drivers/gpu/drm/i915/gem/i915_gem_pages.c
-@@ -162,8 +162,6 @@ static void unmap_object(struct drm_i915_gem_object *obj, void *ptr)
- {
- 	if (is_vmalloc_addr(ptr))
- 		vunmap(ptr);
--	else
--		kunmap(kmap_to_page(ptr));
+diff --git a/mm/zsmalloc.c b/mm/zsmalloc.c
+index c36fdff9a37131..918c7b019b3d78 100644
+--- a/mm/zsmalloc.c
++++ b/mm/zsmalloc.c
+@@ -1122,10 +1122,16 @@ static inline int __zs_cpu_up(struct mapping_area *area)
+ 	 */
+ 	if (area->vm)
+ 		return 0;
+-	area->vm = alloc_vm_area(PAGE_SIZE * 2, NULL);
++	area->vm = get_vm_area(PAGE_SIZE * 2, 0);
+ 	if (!area->vm)
+ 		return -ENOMEM;
+-	return 0;
++
++	/*
++	 * Populate ptes in advance to avoid pte allocation with GFP_KERNEL
++	 * in non-preemtible context of zs_map_object.
++	 */
++	return apply_to_page_range(&init_mm, (unsigned long)area->vm->addr,
++			PAGE_SIZE * 2, NULL, NULL);
  }
  
- struct sg_table *
-@@ -277,11 +275,10 @@ static void *i915_gem_object_map(struct drm_i915_gem_object *obj,
- 		 * forever.
- 		 *
- 		 * So if the page is beyond the 32b boundary, make an explicit
--		 * vmap. On 64b, this check will be optimised away as we can
--		 * directly kmap any page on the system.
-+		 * vmap.
- 		 */
- 		if (!PageHighMem(page))
--			return kmap(page);
-+			return page_address(page);
- 	}
- 
- 	mem = stack;
+ static inline void __zs_cpu_down(struct mapping_area *area)
 -- 
 2.28.0
 
