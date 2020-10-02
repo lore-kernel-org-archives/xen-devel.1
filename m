@@ -2,28 +2,28 @@ Return-Path: <SRS0=mHc1=DJ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-11.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E5310C4363D
-	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2020 13:40:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BB743C47423
+	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2020 13:41:32 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9F779206E3
-	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2020 13:40:08 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 6B6E62074B
+	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2020 13:41:32 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="I7tw93m2"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9F779206E3
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="odvEcVR3"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6B6E62074B
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.2127.6362 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.2140.6374 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kOLHz-0002Be-UF; Fri, 02 Oct 2020 13:39:59 +0000
+	id 1kOLJI-0003Ed-CO; Fri, 02 Oct 2020 13:41:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 2127.6362; Fri, 02 Oct 2020 13:39:59 +0000
+Received: by outflank-mailman (output) from mailman id 2140.6374; Fri, 02 Oct 2020 13:41:20 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,269 +38,251 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kOLHz-0002BS-PY; Fri, 02 Oct 2020 13:39:59 +0000
-Received: by outflank-mailman (input) for mailman id 2127;
- Fri, 02 Oct 2020 13:39:58 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kOLJI-0003EW-8P; Fri, 02 Oct 2020 13:41:20 +0000
+Received: by outflank-mailman (input) for mailman id 2140;
+ Fri, 02 Oct 2020 13:41:18 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=vuVU=DJ=redhat.com=philmd@srs-us1.protection.inumbo.net>)
- id 1kOLHy-0002AB-Hy
- for xen-devel@lists.xenproject.org; Fri, 02 Oct 2020 13:39:58 +0000
-Received: from us-smtp-delivery-124.mimecast.com (unknown [63.128.21.124])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id 23309c66-c2e2-446e-8bd4-41bf2412830e;
- Fri, 02 Oct 2020 13:39:57 +0000 (UTC)
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-426-8CPeljkbOza0gEeRdeNhlA-1; Fri, 02 Oct 2020 09:39:55 -0400
-Received: by mail-wm1-f69.google.com with SMTP id 13so437872wmf.0
- for <xen-devel@lists.xenproject.org>; Fri, 02 Oct 2020 06:39:55 -0700 (PDT)
-Received: from localhost.localdomain (74.red-83-53-161.dynamicip.rima-tde.net.
- [83.53.161.74])
- by smtp.gmail.com with ESMTPSA id f6sm1818116wro.5.2020.10.02.06.39.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Oct 2020 06:39:52 -0700 (PDT)
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ (envelope-from <SRS0=c/W5=DJ=suse.com=mhocko@srs-us1.protection.inumbo.net>)
+ id 1kOLJG-0003EC-BP
+ for xen-devel@lists.xenproject.org; Fri, 02 Oct 2020 13:41:18 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 117bebe5-2da1-4548-87ea-cbd6c1e09877;
+ Fri, 02 Oct 2020 13:41:16 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id F40DAAD12;
+ Fri,  2 Oct 2020 13:41:15 +0000 (UTC)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=vuVU=DJ=redhat.com=philmd@srs-us1.protection.inumbo.net>)
-	id 1kOLHy-0002AB-Hy
-	for xen-devel@lists.xenproject.org; Fri, 02 Oct 2020 13:39:58 +0000
-X-Inumbo-ID: 23309c66-c2e2-446e-8bd4-41bf2412830e
-Received: from us-smtp-delivery-124.mimecast.com (unknown [63.128.21.124])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTP
-	id 23309c66-c2e2-446e-8bd4-41bf2412830e;
-	Fri, 02 Oct 2020 13:39:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1601645997;
+	(envelope-from <SRS0=c/W5=DJ=suse.com=mhocko@srs-us1.protection.inumbo.net>)
+	id 1kOLJG-0003EC-BP
+	for xen-devel@lists.xenproject.org; Fri, 02 Oct 2020 13:41:18 +0000
+X-Inumbo-ID: 117bebe5-2da1-4548-87ea-cbd6c1e09877
+Received: from mx2.suse.de (unknown [195.135.220.15])
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id 117bebe5-2da1-4548-87ea-cbd6c1e09877;
+	Fri, 02 Oct 2020 13:41:16 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1601646076;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=8IRn/Y0aJt1eGijTbQmkn/6JoyPalvnCOEAPCHm0k58=;
-	b=I7tw93m2OGcrMYGGWQLAFY0xbZJnomqp+6GXbHzFOIipZtec+FuqDQUVgXrsLshYvZ6r9C
-	LvjkQDUVl9gAR6Fw3k9JNT7UnC5z/lrt/p4EaQsratPdhuE8jU12H2scPyePYlHFBYZOD6
-	WbXFW7Os8Qn3R2hwv99SAJSbTy0At7E=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-426-8CPeljkbOza0gEeRdeNhlA-1; Fri, 02 Oct 2020 09:39:55 -0400
-X-MC-Unique: 8CPeljkbOza0gEeRdeNhlA-1
-Received: by mail-wm1-f69.google.com with SMTP id 13so437872wmf.0
-        for <xen-devel@lists.xenproject.org>; Fri, 02 Oct 2020 06:39:55 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=8IRn/Y0aJt1eGijTbQmkn/6JoyPalvnCOEAPCHm0k58=;
-        b=PwZzHvpZk/1VvvaYlJkBaea/N/LqGBLLcVNb+VY1UKJ+mbca3e1qjISqOKDxAfFlDI
-         PwcCVUpl8gnLu9WYRs6DVfwZdAgvQ+JdE5l7paN85nf0xdx394t5Kh1/VhXGfnkoYPN+
-         ztnLTmCCCbxrlzOCwDLj8sIBBZSONf5O8X2ufGUcUa97siliXFwvqUAj859cg2kROe2y
-         kX+YdGFQA1ztPkPXLMmcOqIgZhpXeDQX/MSUGHqrBl1qcfHrbh8AFViRse34LqcVM62f
-         1Gt0lZe4mVgCT0cw4vPF015aR5lAG0kucP4QAtGHXUWJTTxSj1HLcF7gxEGcNhfdiyNL
-         pgHg==
-X-Gm-Message-State: AOAM5300aRY+Bbj+0og9u66Lf3/SNTuqmnuCFrkN2tKMglBb7WNoAV42
-	i8TRxzLojydRJ/fbh5psuIsbZw5rVho68zMsKhJdz5oz/qIqdr7XrRGh6C9dFokPHL8ojVLpC49
-	VGaYsUp6ZYx95/oc+PujAZ5rvoms=
-X-Received: by 2002:a5d:43cf:: with SMTP id v15mr3203831wrr.269.1601645993157;
-        Fri, 02 Oct 2020 06:39:53 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJyrtjDxbvNT2qZx2AnpZX/U8SDHXTxctCni5ZD+jg0EWfaGOVq2AOPJli+/iQHk1imFPhnyVw==
-X-Received: by 2002:a5d:43cf:: with SMTP id v15mr3203803wrr.269.1601645992898;
-        Fri, 02 Oct 2020 06:39:52 -0700 (PDT)
-Received: from localhost.localdomain (74.red-83-53-161.dynamicip.rima-tde.net. [83.53.161.74])
-        by smtp.gmail.com with ESMTPSA id f6sm1818116wro.5.2020.10.02.06.39.51
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 02 Oct 2020 06:39:52 -0700 (PDT)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
-To: qemu-devel@nongnu.org
-Cc: Richard Henderson <rth@twiddle.net>,
-	Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
-	"Dr. David Alan Gilbert" <dgilbert@redhat.com>,
-	xen-devel@lists.xenproject.org,
-	Gerd Hoffmann <kraxel@redhat.com>,
-	Markus Armbruster <armbru@redhat.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Juan Quintela <quintela@redhat.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony Perard <anthony.perard@citrix.com>,
-	Eric Blake <eblake@redhat.com>,
-	Paul Durrant <paul@xen.org>,
-	Peter Maydell <peter.maydell@linaro.org>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Eduardo Habkost <ehabkost@redhat.com>,
-	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
-Subject: [PATCH 5/5] qapi: Restrict Xen migration commands to migration.json
-Date: Fri,  2 Oct 2020 15:39:23 +0200
-Message-Id: <20201002133923.1716645-6-philmd@redhat.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20201002133923.1716645-1-philmd@redhat.com>
-References: <20201002133923.1716645-1-philmd@redhat.com>
+	bh=Z3ByYrh+VAhRxeH0eK8Na0KVOwY/vMeBd7zzpOzuyh8=;
+	b=odvEcVR3MGe4ScG+CTx7+dM1KQK8SJGRd5CwKYZrKZOXio34wK3PH2wl9CUz9kMHYeYQk3
+	BZPLzK9nIIqiothIjrit3Slk86uffisO5vN5J/leVvbHUXfwbIMT2Ft1ZKqM3IeJkWjqwQ
+	TOwk2hwVtjDVFO77HnCPzt1saLmpGVM=
+Received: from relay2.suse.de (unknown [195.135.221.27])
+	by mx2.suse.de (Postfix) with ESMTP id F40DAAD12;
+	Fri,  2 Oct 2020 13:41:15 +0000 (UTC)
+Date: Fri, 2 Oct 2020 15:41:15 +0200
+From: Michal Hocko <mhocko@suse.com>
+To: David Hildenbrand <david@redhat.com>
+Cc: linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+	linux-hyperv@vger.kernel.org, xen-devel@lists.xenproject.org,
+	linux-acpi@vger.kernel.org,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Vlastimil Babka <vbabka@suse.cz>,
+	Oscar Salvador <osalvador@suse.de>,
+	Alexander Duyck <alexander.h.duyck@linux.intel.com>,
+	Mel Gorman <mgorman@techsingularity.net>,
+	Dave Hansen <dave.hansen@intel.com>,
+	Wei Yang <richard.weiyang@linux.alibaba.com>,
+	Mike Rapoport <rppt@kernel.org>,
+	"K. Y. Srinivasan" <kys@microsoft.com>,
+	Haiyang Zhang <haiyangz@microsoft.com>,
+	Stephen Hemminger <sthemmin@microsoft.com>,
+	Wei Liu <wei.liu@kernel.org>
+Subject: Re: [PATCH v1 4/5] mm/page_alloc: place pages to tail in
+ __free_pages_core()
+Message-ID: <20201002134115.GJ4555@dhcp22.suse.cz>
+References: <20200928182110.7050-1-david@redhat.com>
+ <20200928182110.7050-5-david@redhat.com>
 MIME-Version: 1.0
-Authentication-Results: relay.mimecast.com;
-	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=philmd@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20200928182110.7050-5-david@redhat.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 
-Restricting xen-set-global-dirty-log and xen-load-devices-state
-commands migration.json pulls slightly less QAPI-generated code
-into user-mode and tools.
+On Mon 28-09-20 20:21:09, David Hildenbrand wrote:
+> __free_pages_core() is used when exposing fresh memory to the buddy
+> during system boot and when onlining memory in generic_online_page().
+> 
+> generic_online_page() is used in two cases:
+> 
+> 1. Direct memory onlining in online_pages().
+> 2. Deferred memory onlining in memory-ballooning-like mechanisms (HyperV
+>    balloon and virtio-mem), when parts of a section are kept
+>    fake-offline to be fake-onlined later on.
+> 
+> In 1, we already place pages to the tail of the freelist. Pages will be
+> freed to MIGRATE_ISOLATE lists first and moved to the tail of the freelists
+> via undo_isolate_page_range().
+> 
+> In 2, we currently don't implement a proper rule. In case of virtio-mem,
+> where we currently always online MAX_ORDER - 1 pages, the pages will be
+> placed to the HEAD of the freelist - undesireable. While the hyper-v
+> balloon calls generic_online_page() with single pages, usually it will
+> call it on successive single pages in a larger block.
+> 
+> The pages are fresh, so place them to the tail of the freelists and avoid
+> the PCP. In __free_pages_core(), remove the now superflouos call to
+> set_page_refcounted() and add a comment regarding page initialization and
+> the refcount.
+> 
+> Note: In 2. we currently don't shuffle. If ever relevant (page shuffling
+> is usually of limited use in virtualized environments), we might want to
+> shuffle after a sequence of generic_online_page() calls in the
+> relevant callers.
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
----
- qapi/migration.json    | 41 +++++++++++++++++++++++++++++++++++++++++
- qapi/misc.json         | 41 -----------------------------------------
- accel/stubs/xen-stub.c |  2 +-
- hw/i386/xen/xen-hvm.c  |  2 +-
- migration/savevm.c     |  1 -
- 5 files changed, 43 insertions(+), 44 deletions(-)
+It took some time to get through all the freeing paths with subtle
+differences but this looks reasonable. You are mentioning that this
+influences a boot time free memory ordering as well but only very
+briefly. I do not expect this to make a huge difference but who knows.
+It makes some sense to add pages in the order they show up in the
+physical address ordering.
 
-diff --git a/qapi/migration.json b/qapi/migration.json
-index 7f5e6fd681..cb30f4c729 100644
---- a/qapi/migration.json
-+++ b/qapi/migration.json
-@@ -1551,6 +1551,47 @@
- { 'command': 'xen-save-devices-state',
-   'data': {'filename': 'str', '*live':'bool' } }
- 
-+##
-+# @xen-set-global-dirty-log:
-+#
-+# Enable or disable the global dirty log mode.
-+#
-+# @enable: true to enable, false to disable.
-+#
-+# Returns: nothing
-+#
-+# Since: 1.3
-+#
-+# Example:
-+#
-+# -> { "execute": "xen-set-global-dirty-log",
-+#      "arguments": { "enable": true } }
-+# <- { "return": {} }
-+#
-+##
-+{ 'command': 'xen-set-global-dirty-log', 'data': { 'enable': 'bool' } }
-+
-+##
-+# @xen-load-devices-state:
-+#
-+# Load the state of all devices from file. The RAM and the block devices
-+# of the VM are not loaded by this command.
-+#
-+# @filename: the file to load the state of the devices from as binary
-+#            data. See xen-save-devices-state.txt for a description of the binary
-+#            format.
-+#
-+# Since: 2.7
-+#
-+# Example:
-+#
-+# -> { "execute": "xen-load-devices-state",
-+#      "arguments": { "filename": "/tmp/resume" } }
-+# <- { "return": {} }
-+#
-+##
-+{ 'command': 'xen-load-devices-state', 'data': {'filename': 'str'} }
-+
- ##
- # @xen-set-replication:
- #
-diff --git a/qapi/misc.json b/qapi/misc.json
-index 9813893269..afe936b45b 100644
---- a/qapi/misc.json
-+++ b/qapi/misc.json
-@@ -287,26 +287,6 @@
-   'data': {'device': 'str', 'target': 'str', '*arg': 'str'},
-   'features': [ 'deprecated' ] }
- 
--##
--# @xen-set-global-dirty-log:
--#
--# Enable or disable the global dirty log mode.
--#
--# @enable: true to enable, false to disable.
--#
--# Returns: nothing
--#
--# Since: 1.3
--#
--# Example:
--#
--# -> { "execute": "xen-set-global-dirty-log",
--#      "arguments": { "enable": true } }
--# <- { "return": {} }
--#
--##
--{ 'command': 'xen-set-global-dirty-log', 'data': { 'enable': 'bool' } }
--
- ##
- # @getfd:
- #
-@@ -606,24 +586,3 @@
- ##
- { 'enum': 'ReplayMode',
-   'data': [ 'none', 'record', 'play' ] }
--
--##
--# @xen-load-devices-state:
--#
--# Load the state of all devices from file. The RAM and the block devices
--# of the VM are not loaded by this command.
--#
--# @filename: the file to load the state of the devices from as binary
--#            data. See xen-save-devices-state.txt for a description of the binary
--#            format.
--#
--# Since: 2.7
--#
--# Example:
--#
--# -> { "execute": "xen-load-devices-state",
--#      "arguments": { "filename": "/tmp/resume" } }
--# <- { "return": {} }
--#
--##
--{ 'command': 'xen-load-devices-state', 'data': {'filename': 'str'} }
-diff --git a/accel/stubs/xen-stub.c b/accel/stubs/xen-stub.c
-index 7ba0b697f4..7054965c48 100644
---- a/accel/stubs/xen-stub.c
-+++ b/accel/stubs/xen-stub.c
-@@ -7,7 +7,7 @@
- 
- #include "qemu/osdep.h"
- #include "sysemu/xen.h"
--#include "qapi/qapi-commands-misc.h"
-+#include "qapi/qapi-commands-migration.h"
- 
- bool xen_allowed;
- 
-diff --git a/hw/i386/xen/xen-hvm.c b/hw/i386/xen/xen-hvm.c
-index f3ababf33b..9519c33c09 100644
---- a/hw/i386/xen/xen-hvm.c
-+++ b/hw/i386/xen/xen-hvm.c
-@@ -24,7 +24,7 @@
- #include "hw/xen/xen-bus.h"
- #include "hw/xen/xen-x86.h"
- #include "qapi/error.h"
--#include "qapi/qapi-commands-misc.h"
-+#include "qapi/qapi-commands-migration.h"
- #include "qemu/error-report.h"
- #include "qemu/main-loop.h"
- #include "qemu/range.h"
-diff --git a/migration/savevm.c b/migration/savevm.c
-index 34e4b71052..1fdf3f76c2 100644
---- a/migration/savevm.c
-+++ b/migration/savevm.c
-@@ -42,7 +42,6 @@
- #include "postcopy-ram.h"
- #include "qapi/error.h"
- #include "qapi/qapi-commands-migration.h"
--#include "qapi/qapi-commands-misc.h"
- #include "qapi/qmp/qerror.h"
- #include "qemu/error-report.h"
- #include "sysemu/cpus.h"
+> Reviewed-by: Vlastimil Babka <vbabka@suse.cz>
+> Reviewed-by: Oscar Salvador <osalvador@suse.de>
+> Cc: Andrew Morton <akpm@linux-foundation.org>
+> Cc: Alexander Duyck <alexander.h.duyck@linux.intel.com>
+> Cc: Mel Gorman <mgorman@techsingularity.net>
+> Cc: Michal Hocko <mhocko@kernel.org>
+> Cc: Dave Hansen <dave.hansen@intel.com>
+> Cc: Vlastimil Babka <vbabka@suse.cz>
+> Cc: Wei Yang <richard.weiyang@linux.alibaba.com>
+> Cc: Oscar Salvador <osalvador@suse.de>
+> Cc: Mike Rapoport <rppt@kernel.org>
+> Cc: "K. Y. Srinivasan" <kys@microsoft.com>
+> Cc: Haiyang Zhang <haiyangz@microsoft.com>
+> Cc: Stephen Hemminger <sthemmin@microsoft.com>
+> Cc: Wei Liu <wei.liu@kernel.org>
+> Signed-off-by: David Hildenbrand <david@redhat.com>
+
+That being said I do not see any fundamental problems.
+Acked-by: Michal Hocko <mhocko@suse.com>
+
+> ---
+>  mm/page_alloc.c | 37 ++++++++++++++++++++++++-------------
+>  1 file changed, 24 insertions(+), 13 deletions(-)
+> 
+> diff --git a/mm/page_alloc.c b/mm/page_alloc.c
+> index d5a5f528b8ca..8a2134fe9947 100644
+> --- a/mm/page_alloc.c
+> +++ b/mm/page_alloc.c
+> @@ -270,7 +270,8 @@ bool pm_suspended_storage(void)
+>  unsigned int pageblock_order __read_mostly;
+>  #endif
+>  
+> -static void __free_pages_ok(struct page *page, unsigned int order);
+> +static void __free_pages_ok(struct page *page, unsigned int order,
+> +			    fop_t fop_flags);
+>  
+>  /*
+>   * results with 256, 32 in the lowmem_reserve sysctl:
+> @@ -682,7 +683,7 @@ static void bad_page(struct page *page, const char *reason)
+>  void free_compound_page(struct page *page)
+>  {
+>  	mem_cgroup_uncharge(page);
+> -	__free_pages_ok(page, compound_order(page));
+> +	__free_pages_ok(page, compound_order(page), FOP_NONE);
+>  }
+>  
+>  void prep_compound_page(struct page *page, unsigned int order)
+> @@ -1419,17 +1420,15 @@ static void free_pcppages_bulk(struct zone *zone, int count,
+>  	spin_unlock(&zone->lock);
+>  }
+>  
+> -static void free_one_page(struct zone *zone,
+> -				struct page *page, unsigned long pfn,
+> -				unsigned int order,
+> -				int migratetype)
+> +static void free_one_page(struct zone *zone, struct page *page, unsigned long pfn,
+> +			  unsigned int order, int migratetype, fop_t fop_flags)
+>  {
+>  	spin_lock(&zone->lock);
+>  	if (unlikely(has_isolate_pageblock(zone) ||
+>  		is_migrate_isolate(migratetype))) {
+>  		migratetype = get_pfnblock_migratetype(page, pfn);
+>  	}
+> -	__free_one_page(page, pfn, zone, order, migratetype, FOP_NONE);
+> +	__free_one_page(page, pfn, zone, order, migratetype, fop_flags);
+>  	spin_unlock(&zone->lock);
+>  }
+>  
+> @@ -1507,7 +1506,8 @@ void __meminit reserve_bootmem_region(phys_addr_t start, phys_addr_t end)
+>  	}
+>  }
+>  
+> -static void __free_pages_ok(struct page *page, unsigned int order)
+> +static void __free_pages_ok(struct page *page, unsigned int order,
+> +			    fop_t fop_flags)
+>  {
+>  	unsigned long flags;
+>  	int migratetype;
+> @@ -1519,7 +1519,8 @@ static void __free_pages_ok(struct page *page, unsigned int order)
+>  	migratetype = get_pfnblock_migratetype(page, pfn);
+>  	local_irq_save(flags);
+>  	__count_vm_events(PGFREE, 1 << order);
+> -	free_one_page(page_zone(page), page, pfn, order, migratetype);
+> +	free_one_page(page_zone(page), page, pfn, order, migratetype,
+> +		      fop_flags);
+>  	local_irq_restore(flags);
+>  }
+>  
+> @@ -1529,6 +1530,11 @@ void __free_pages_core(struct page *page, unsigned int order)
+>  	struct page *p = page;
+>  	unsigned int loop;
+>  
+> +	/*
+> +	 * When initializing the memmap, init_single_page() sets the refcount
+> +	 * of all pages to 1 ("allocated"/"not free"). We have to set the
+> +	 * refcount of all involved pages to 0.
+> +	 */
+>  	prefetchw(p);
+>  	for (loop = 0; loop < (nr_pages - 1); loop++, p++) {
+>  		prefetchw(p + 1);
+> @@ -1539,8 +1545,12 @@ void __free_pages_core(struct page *page, unsigned int order)
+>  	set_page_count(p, 0);
+>  
+>  	atomic_long_add(nr_pages, &page_zone(page)->managed_pages);
+> -	set_page_refcounted(page);
+> -	__free_pages(page, order);
+> +
+> +	/*
+> +	 * Bypass PCP and place fresh pages right to the tail, primarily
+> +	 * relevant for memory onlining.
+> +	 */
+> +	__free_pages_ok(page, order, FOP_TO_TAIL);
+>  }
+>  
+>  #ifdef CONFIG_NEED_MULTIPLE_NODES
+> @@ -3171,7 +3181,8 @@ static void free_unref_page_commit(struct page *page, unsigned long pfn)
+>  	 */
+>  	if (migratetype >= MIGRATE_PCPTYPES) {
+>  		if (unlikely(is_migrate_isolate(migratetype))) {
+> -			free_one_page(zone, page, pfn, 0, migratetype);
+> +			free_one_page(zone, page, pfn, 0, migratetype,
+> +				      FOP_NONE);
+>  			return;
+>  		}
+>  		migratetype = MIGRATE_MOVABLE;
+> @@ -5063,7 +5074,7 @@ static inline void free_the_page(struct page *page, unsigned int order)
+>  	if (order == 0)		/* Via pcp? */
+>  		free_unref_page(page);
+>  	else
+> -		__free_pages_ok(page, order);
+> +		__free_pages_ok(page, order, FOP_NONE);
+>  }
+>  
+>  void __free_pages(struct page *page, unsigned int order)
+> -- 
+> 2.26.2
+> 
+
 -- 
-2.26.2
-
+Michal Hocko
+SUSE Labs
 
