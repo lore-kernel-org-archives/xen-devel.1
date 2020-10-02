@@ -2,28 +2,28 @@ Return-Path: <SRS0=mHc1=DJ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6DAAFC4363C
-	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2020 15:42:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1C936C35257
+	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2020 15:42:08 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 04A7820795
-	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2020 15:42:06 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id A64C620795
+	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2020 15:42:07 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="OmTqquRr"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 04A7820795
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="kO9YB7cX"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A64C620795
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.2232.6604 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.2230.6590 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kONBu-0006xa-Ux; Fri, 02 Oct 2020 15:41:50 +0000
+	id 1kONBs-0006vP-Fb; Fri, 02 Oct 2020 15:41:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 2232.6604; Fri, 02 Oct 2020 15:41:50 +0000
+Received: by outflank-mailman (output) from mailman id 2230.6590; Fri, 02 Oct 2020 15:41:48 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,45 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kONBu-0006xT-Qj; Fri, 02 Oct 2020 15:41:50 +0000
-Received: by outflank-mailman (input) for mailman id 2232;
- Fri, 02 Oct 2020 15:41:48 +0000
+	id 1kONBs-0006vI-Cb; Fri, 02 Oct 2020 15:41:48 +0000
+Received: by outflank-mailman (input) for mailman id 2230;
+ Fri, 02 Oct 2020 15:41:46 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=2E3y=DJ=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kONBs-0006v4-SS
- for xen-devel@lists.xenproject.org; Fri, 02 Oct 2020 15:41:48 +0000
+ id 1kONBq-0006v4-NJ
+ for xen-devel@lists.xenproject.org; Fri, 02 Oct 2020 15:41:46 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id e1913937-ddf9-40d7-ae63-0f09078a303c;
- Fri, 02 Oct 2020 15:41:46 +0000 (UTC)
+ id a9cfa185-7e39-4417-9dfb-6b072cc7461f;
+ Fri, 02 Oct 2020 15:41:45 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 992C7B264;
+ by mx2.suse.de (Postfix) with ESMTP id 2180AB260;
  Fri,  2 Oct 2020 15:41:45 +0000 (UTC)
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=2E3y=DJ=suse.com=jgross@srs-us1.protection.inumbo.net>)
-	id 1kONBs-0006v4-SS
-	for xen-devel@lists.xenproject.org; Fri, 02 Oct 2020 15:41:48 +0000
-X-Inumbo-ID: e1913937-ddf9-40d7-ae63-0f09078a303c
+	id 1kONBq-0006v4-NJ
+	for xen-devel@lists.xenproject.org; Fri, 02 Oct 2020 15:41:46 +0000
+X-Inumbo-ID: a9cfa185-7e39-4417-9dfb-6b072cc7461f
 Received: from mx2.suse.de (unknown [195.135.220.15])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id e1913937-ddf9-40d7-ae63-0f09078a303c;
-	Fri, 02 Oct 2020 15:41:46 +0000 (UTC)
+	id a9cfa185-7e39-4417-9dfb-6b072cc7461f;
+	Fri, 02 Oct 2020 15:41:45 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	t=1601653305;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=KbrEsrqdNvWQhuDT/WAXgzByQyKfzuLyEZut1PWtipw=;
-	b=OmTqquRryuHi+lVJnfyqJwl4ttcKsNieBVa6/IZlRTuW2hu1FvWSMDDifafqjMjySb+fDx
-	qfjonnZ17444IlZXaT9sRUEs1vKQZ0jjZrBzGWEo3BjNFWavlgE87Ddek5RdPaX1quKESc
-	SrJmjjR+SjnFYQ5qXk91H/qR0eMGWIw=
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=oIK93nxrDael7j58S693ug7pAufuwxo+3VASfk/e1JA=;
+	b=kO9YB7cXFNm5J4pvSpdHHYbuW0pNHvZZGX3lrQWMOtSEe85+YlX5W5rc29lD/7Z8BVPeCQ
+	oJrB0/WznV4DUGhLL+NYOGO3TVFSBbrS/0ZN1JHNrXehJJoXJeaYbNeWoOf2XwNDd8yIBY
+	R9oYp0WugEp1qHPHVNGewYKn2WR2ngA=
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 992C7B264;
+	by mx2.suse.de (Postfix) with ESMTP id 2180AB260;
 	Fri,  2 Oct 2020 15:41:45 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
@@ -84,323 +83,55 @@ Cc: Juergen Gross <jgross@suse.com>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>,
 	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Subject: [PATCH 4/5] tools: drop all deprecated usages of xs_*_open() and friends in tools
-Date: Fri,  2 Oct 2020 17:41:40 +0200
-Message-Id: <20201002154141.11677-5-jgross@suse.com>
+Subject: [PATCH 0/5] tools/xenstore: remove read-only socket
+Date: Fri,  2 Oct 2020 17:41:36 +0200
+Message-Id: <20201002154141.11677-1-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20201002154141.11677-1-jgross@suse.com>
-References: <20201002154141.11677-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Switch all usages of xs_daemon_open*() and xs_domain_open() to use
-xs_open() instead. While at it switch xs_daemon_close() users to
-xs_close().
+The read-only socket of Xenstore is usable for the daemon case only
+and even there it is not really worth to be kept, as not all
+Xesntore operations changing the state of Xenstore are blocked,
+oxenstored ignoring the read-only semantics completely, and the
+privileges for using the ro-socket being the same as for the normal
+rw-socket.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
+So remove this feature with switching the related use cases to the
+Xenstore-type agnostic open- and close-functions..
+
+Juergen Gross (5):
+  tools/xenstore: remove socket-only option from xenstore client
+  tools/libs/store: ignore XS_OPEN_SOCKETONLY flag
+  tools/libs/store: drop read-only functionality
+  tools: drop all deprecated usages of xs_*_open() and friends in tools
+  tools/xenstore: drop creation of read-only socket in xenstored
+
+ docs/man/xenstore-chmod.1.pod           |  4 --
+ docs/man/xenstore-ls.1.pod              |  4 --
+ docs/man/xenstore-read.1.pod            |  4 --
+ docs/man/xenstore-write.1.pod           |  4 --
  tools/console/client/main.c             |  2 +-
- tools/console/daemon/utils.c            |  4 ++--
- tools/libs/light/libxl.c                |  6 ++----
- tools/libs/light/libxl_exec.c           |  6 +++---
+ tools/console/daemon/utils.c            |  4 +-
+ tools/libs/light/libxl.c                |  6 +--
+ tools/libs/light/libxl_exec.c           |  6 +--
  tools/libs/light/libxl_fork.c           |  2 +-
- tools/libs/stat/xenstat.c               |  4 ++--
- tools/libs/vchan/init.c                 | 10 ++++------
- tools/misc/xen-lowmemd.c                |  4 ++--
- tools/python/xen/lowlevel/xs/xs.c       |  6 +++---
- tools/tests/mce-test/tools/xen-mceinj.c |  4 ++--
- tools/xenbackendd/xenbackendd.c         |  4 ++--
- tools/xenpmd/xenpmd.c                   |  6 +++---
- 12 files changed, 27 insertions(+), 31 deletions(-)
+ tools/libs/stat/xenstat.c               |  4 +-
+ tools/libs/store/include/xenstore.h     | 10 -----
+ tools/libs/store/xs.c                   |  9 ++--
+ tools/libs/vchan/init.c                 | 10 ++---
+ tools/misc/xen-lowmemd.c                |  4 +-
+ tools/python/xen/lowlevel/xs/xs.c       |  6 +--
+ tools/tests/mce-test/tools/xen-mceinj.c |  4 +-
+ tools/xenbackendd/xenbackendd.c         |  4 +-
+ tools/xenpmd/xenpmd.c                   |  6 +--
+ tools/xenstore/xenstore_client.c        |  8 +---
+ tools/xenstore/xenstored_core.c         | 55 +++++--------------------
+ tools/xenstore/xenstored_core.h         |  3 --
+ tools/xenstore/xenstored_domain.c       |  4 +-
+ tools/xenstore/xs_lib.c                 |  8 +---
+ 23 files changed, 46 insertions(+), 125 deletions(-)
 
-diff --git a/tools/console/client/main.c b/tools/console/client/main.c
-index f92ad3d8cf..088be28dff 100644
---- a/tools/console/client/main.c
-+++ b/tools/console/client/main.c
-@@ -398,7 +398,7 @@ int main(int argc, char **argv)
- 		exit(EINVAL);
- 	}
- 
--	xs = xs_daemon_open();
-+	xs = xs_open(0);
- 	if (xs == NULL) {
- 		err(errno, "Could not contact XenStore");
- 	}
-diff --git a/tools/console/daemon/utils.c b/tools/console/daemon/utils.c
-index 97d7798b33..f9dd8a60c5 100644
---- a/tools/console/daemon/utils.c
-+++ b/tools/console/daemon/utils.c
-@@ -104,7 +104,7 @@ void daemonize(const char *pidfile)
- bool xen_setup(void)
- {
- 	
--	xs = xs_daemon_open();
-+	xs = xs_open(0);
- 	if (xs == NULL) {
- 		dolog(LOG_ERR,
- 		      "Failed to contact xenstore (%m).  Is it running?");
-@@ -131,7 +131,7 @@ bool xen_setup(void)
- 
-  out:
- 	if (xs)
--		xs_daemon_close(xs);
-+		xs_close(xs);
- 	if (xc)
- 		xc_interface_close(xc);
- 	return false;
-diff --git a/tools/libs/light/libxl.c b/tools/libs/light/libxl.c
-index 621acc88f3..d2a87157a2 100644
---- a/tools/libs/light/libxl.c
-+++ b/tools/libs/light/libxl.c
-@@ -103,9 +103,7 @@ int libxl_ctx_alloc(libxl_ctx **pctx, int version,
-         rc = ERROR_FAIL; goto out;
-     }
- 
--    ctx->xsh = xs_daemon_open();
--    if (!ctx->xsh)
--        ctx->xsh = xs_domain_open();
-+    ctx->xsh = xs_open(0);
-     if (!ctx->xsh) {
-         LOGEV(ERROR, errno, "cannot connect to xenstore");
-         rc = ERROR_FAIL; goto out;
-@@ -171,7 +169,7 @@ int libxl_ctx_free(libxl_ctx *ctx)
- 
-     if (ctx->xch) xc_interface_close(ctx->xch);
-     libxl_version_info_dispose(&ctx->version_info);
--    if (ctx->xsh) xs_daemon_close(ctx->xsh);
-+    if (ctx->xsh) xs_close(ctx->xsh);
-     if (ctx->xce) xenevtchn_close(ctx->xce);
- 
-     libxl__poller_put(ctx, ctx->poller_app);
-diff --git a/tools/libs/light/libxl_exec.c b/tools/libs/light/libxl_exec.c
-index 47c9c8f1ba..a8b949b193 100644
---- a/tools/libs/light/libxl_exec.c
-+++ b/tools/libs/light/libxl_exec.c
-@@ -178,7 +178,7 @@ int libxl__xenstore_child_wait_deprecated(libxl__gc *gc,
-     unsigned int num;
-     char **l = NULL;
- 
--    xsh = xs_daemon_open();
-+    xsh = xs_open(0);
-     if (xsh == NULL) {
-         LOG(ERROR, "Unable to open xenstore connection");
-         goto err;
-@@ -206,7 +206,7 @@ int libxl__xenstore_child_wait_deprecated(libxl__gc *gc,
- 
-         free(p);
-         xs_unwatch(xsh, path, path);
--        xs_daemon_close(xsh);
-+        xs_close(xsh);
-         return rc;
- again:
-         free(p);
-@@ -226,7 +226,7 @@ again:
-     LOG(ERROR, "%s not ready", what);
- 
-     xs_unwatch(xsh, path, path);
--    xs_daemon_close(xsh);
-+    xs_close(xsh);
- err:
-     return -1;
- }
-diff --git a/tools/libs/light/libxl_fork.c b/tools/libs/light/libxl_fork.c
-index 9a4709b9a4..5d47dceb8a 100644
---- a/tools/libs/light/libxl_fork.c
-+++ b/tools/libs/light/libxl_fork.c
-@@ -663,7 +663,7 @@ int libxl__ev_child_xenstore_reopen(libxl__gc *gc, const char *what) {
-     int rc;
- 
-     assert(!CTX->xsh);
--    CTX->xsh = xs_daemon_open();
-+    CTX->xsh = xs_open(0);
-     if (!CTX->xsh) {
-         LOGE(ERROR, "%s: xenstore reopen failed", what);
-         rc = ERROR_FAIL;  goto out;
-diff --git a/tools/libs/stat/xenstat.c b/tools/libs/stat/xenstat.c
-index 6f93d4e982..e49689aa2d 100644
---- a/tools/libs/stat/xenstat.c
-+++ b/tools/libs/stat/xenstat.c
-@@ -107,7 +107,7 @@ xenstat_handle *xenstat_init(void)
- 		return NULL;
- 	}
- 
--	handle->xshandle = xs_daemon_open_readonly(); /* open handle to xenstore*/
-+	handle->xshandle = xs_open(0); /* open handle to xenstore*/
- 	if (handle->xshandle == NULL) {
- 		perror("unable to open xenstore");
- 		xc_interface_close(handle->xc_handle);
-@@ -125,7 +125,7 @@ void xenstat_uninit(xenstat_handle * handle)
- 		for (i = 0; i < NUM_COLLECTORS; i++)
- 			collectors[i].uninit(handle);
- 		xc_interface_close(handle->xc_handle);
--		xs_daemon_close(handle->xshandle);
-+		xs_close(handle->xshandle);
- 		free(handle->priv);
- 		free(handle);
- 	}
-diff --git a/tools/libs/vchan/init.c b/tools/libs/vchan/init.c
-index ad4b64fbe3..c8510e6ce9 100644
---- a/tools/libs/vchan/init.c
-+++ b/tools/libs/vchan/init.c
-@@ -251,7 +251,7 @@ static int init_xs_srv(struct libxenvchan *ctrl, int domain, const char* xs_base
- 	char ref[16];
- 	char* domid_str = NULL;
- 	xs_transaction_t xs_trans = XBT_NULL;
--	xs = xs_domain_open();
-+	xs = xs_open(0);
- 	if (!xs)
- 		goto fail;
- 	domid_str = xs_read(xs, 0, "domid", NULL);
-@@ -293,7 +293,7 @@ retry_transaction:
- 	}
-  fail_xs_open:
- 	free(domid_str);
--	xs_daemon_close(xs);
-+	xs_close(xs);
-  fail:
- 	return ret;
- }
-@@ -408,9 +408,7 @@ struct libxenvchan *libxenvchan_client_init(struct xentoollog_logger *logger,
- 	ctrl->write.order = ctrl->read.order = 0;
- 	ctrl->is_server = 0;
- 
--	xs = xs_daemon_open();
--	if (!xs)
--		xs = xs_domain_open();
-+	xs = xs_open(0);
- 	if (!xs)
- 		goto fail;
- 
-@@ -452,7 +450,7 @@ struct libxenvchan *libxenvchan_client_init(struct xentoollog_logger *logger,
- 
-  out:
- 	if (xs)
--		xs_daemon_close(xs);
-+		xs_close(xs);
- 	return ctrl;
-  fail:
- 	libxenvchan_close(ctrl);
-diff --git a/tools/misc/xen-lowmemd.c b/tools/misc/xen-lowmemd.c
-index 79ad34cb4a..a3a2741242 100644
---- a/tools/misc/xen-lowmemd.c
-+++ b/tools/misc/xen-lowmemd.c
-@@ -24,7 +24,7 @@ void cleanup(void)
-     if (xch)
-         xc_interface_close(xch);
-     if (xs_handle)
--        xs_daemon_close(xs_handle);
-+        xs_close(xs_handle);
- }
- 
- /* Never shrink dom0 below 1 GiB */
-@@ -102,7 +102,7 @@ int main(int argc, char *argv[])
-         return 2;
-     }
- 
--    xs_handle = xs_daemon_open();
-+    xs_handle = xs_open(0);
-     if (xs_handle == NULL)
-     {
-         perror("Failed to open xenstore connection");
-diff --git a/tools/python/xen/lowlevel/xs/xs.c b/tools/python/xen/lowlevel/xs/xs.c
-index b7d4b6ef5d..0dad7fa5f2 100644
---- a/tools/python/xen/lowlevel/xs/xs.c
-+++ b/tools/python/xen/lowlevel/xs/xs.c
-@@ -791,7 +791,7 @@ static PyObject *xspy_close(XsHandle *self)
-         PySequence_SetItem(self->watches, i, Py_None);
-     }
- 
--    xs_daemon_close(xh);
-+    xs_close(xh);
-     self->xh = NULL;
- 
-     Py_INCREF(Py_None);
-@@ -985,7 +985,7 @@ xshandle_init(XsHandle *self, PyObject *args, PyObject *kwds)
-                                      &readonly))
-         goto fail;
- 
--    self->xh = (readonly ? xs_daemon_open_readonly() : xs_daemon_open());
-+    self->xh = xs_open(0);
-     if (!self->xh)
-         goto fail;
- 
-@@ -999,7 +999,7 @@ xshandle_init(XsHandle *self, PyObject *args, PyObject *kwds)
- static void xshandle_dealloc(XsHandle *self)
- {
-     if (self->xh) {
--        xs_daemon_close(self->xh);
-+        xs_close(self->xh);
-         self->xh = NULL;
-     }
- 
-diff --git a/tools/tests/mce-test/tools/xen-mceinj.c b/tools/tests/mce-test/tools/xen-mceinj.c
-index 380e42190c..1187d01e5f 100644
---- a/tools/tests/mce-test/tools/xen-mceinj.c
-+++ b/tools/tests/mce-test/tools/xen-mceinj.c
-@@ -411,13 +411,13 @@ static long xs_get_dom_mem(int domid)
-     unsigned int plen;
-     struct xs_handle *xs;
- 
--    xs = xs_daemon_open();
-+    xs = xs_open(0);
-     if (!xs)
-         return -1;
- 
-     sprintf(path, "/local/domain/%d/memory/target", domid);
-     memstr = xs_read(xs, XBT_NULL, path, &plen);
--    xs_daemon_close(xs);
-+    xs_close(xs);
- 
-     if (!memstr || !plen)
-         return -1;
-diff --git a/tools/xenbackendd/xenbackendd.c b/tools/xenbackendd/xenbackendd.c
-index b6d92984e0..21884af772 100644
---- a/tools/xenbackendd/xenbackendd.c
-+++ b/tools/xenbackendd/xenbackendd.c
-@@ -122,7 +122,7 @@ usage(void)
- static int
- xen_setup(void)
- {
--	xs = xs_daemon_open();
-+	xs = xs_open(0);
- 	if (xs == NULL) {
- 		dolog(LOG_ERR,
- 		    "Failed to contact xenstore (%s).  Is it running?",
-@@ -138,7 +138,7 @@ xen_setup(void)
- 
-  out:
- 	if (xs) {
--		xs_daemon_close(xs);
-+		xs_close(xs);
- 		xs = NULL;
- 	}
- 	return -1;
-diff --git a/tools/xenpmd/xenpmd.c b/tools/xenpmd/xenpmd.c
-index 1c801caa71..35fd1c931a 100644
---- a/tools/xenpmd/xenpmd.c
-+++ b/tools/xenpmd/xenpmd.c
-@@ -502,18 +502,18 @@ int main(int argc, char *argv[])
- #ifndef RUN_STANDALONE
-     daemonize();
- #endif
--    xs = (struct xs_handle *)xs_daemon_open();
-+    xs = xs_open(0);
-     if ( xs == NULL ) 
-         return -1;
- 
-     if ( write_one_time_battery_info() == 0 ) 
-     {
--        xs_daemon_close(xs);
-+        xs_close(xs);
-         return -1;
-     }
- 
-     wait_for_and_update_battery_status_request();
--    xs_daemon_close(xs);
-+    xs_close(xs);
-     return 0;
- }
- 
 -- 
 2.26.2
 
