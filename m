@@ -5,25 +5,25 @@ X-Spam-Level:
 X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B91D8C4742A
-	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2020 12:22:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1662DC47428
+	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2020 12:22:47 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 710FA20665
-	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2020 12:22:44 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id CAD0020665
+	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2020 12:22:46 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="Fz/pOMH6"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 710FA20665
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="CwHiRIYo"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CAD0020665
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.2014.5986 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.2015.5997 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kOK52-0001BZ-K9; Fri, 02 Oct 2020 12:22:32 +0000
+	id 1kOK57-0001FS-TY; Fri, 02 Oct 2020 12:22:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 2014.5986; Fri, 02 Oct 2020 12:22:32 +0000
+Received: by outflank-mailman (output) from mailman id 2015.5997; Fri, 02 Oct 2020 12:22:37 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kOK52-0001BO-Gc; Fri, 02 Oct 2020 12:22:32 +0000
-Received: by outflank-mailman (input) for mailman id 2014;
- Fri, 02 Oct 2020 12:22:31 +0000
+	id 1kOK57-0001FL-QG; Fri, 02 Oct 2020 12:22:37 +0000
+Received: by outflank-mailman (input) for mailman id 2015;
+ Fri, 02 Oct 2020 12:22:36 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Wm18=DJ=casper.srs.infradead.org=batv+27a5ecbc8e1e54150000+6249+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1kOK51-00017n-AC
- for xen-devel@lists.xenproject.org; Fri, 02 Oct 2020 12:22:31 +0000
+ id 1kOK56-00017n-AK
+ for xen-devel@lists.xenproject.org; Fri, 02 Oct 2020 12:22:36 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 33e35223-29dd-4193-bab3-92d155df5e4b;
- Fri, 02 Oct 2020 12:22:24 +0000 (UTC)
+ id 7bda441c-bf52-4162-be6f-03adaa8d9a51;
+ Fri, 02 Oct 2020 12:22:25 +0000 (UTC)
 Received: from [2001:4bb8:180:7b62:f738:1861:1acc:15c8] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kOK4e-0003KI-Qf; Fri, 02 Oct 2020 12:22:09 +0000
+ id 1kOK4h-0003Kw-HE; Fri, 02 Oct 2020 12:22:11 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=Wm18=DJ=casper.srs.infradead.org=batv+27a5ecbc8e1e54150000+6249+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1kOK51-00017n-AC
-	for xen-devel@lists.xenproject.org; Fri, 02 Oct 2020 12:22:31 +0000
-X-Inumbo-ID: 33e35223-29dd-4193-bab3-92d155df5e4b
+	id 1kOK56-00017n-AK
+	for xen-devel@lists.xenproject.org; Fri, 02 Oct 2020 12:22:36 +0000
+X-Inumbo-ID: 7bda441c-bf52-4162-be6f-03adaa8d9a51
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 33e35223-29dd-4193-bab3-92d155df5e4b;
-	Fri, 02 Oct 2020 12:22:24 +0000 (UTC)
+	id 7bda441c-bf52-4162-be6f-03adaa8d9a51;
+	Fri, 02 Oct 2020 12:22:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=71LvYnHcMs7/rXGs508r2vzZrQvLA4mfS9GwJnz8e8I=; b=Fz/pOMH6+ie/e1OSMd6JkfXPQC
-	JC5co7zAbmFu2k8+DrdE5486C8h+YCa1pn1Er8OGy8W+fjduwDJ6SfjCMYntlhgAc7GV7WLJPQnLV
-	tzwMDO1lMTe11hfYJrkRsnUwp7CQ8EmZBLhkvWMNMm4+v8ISlzfj3Y20uMh1T6tF4J6ngyYK4FcLe
-	qEuFVI944dPgAm4aI1KxiQu6NSETk1qw4RVOc+zM8uSpTHd/IT/VtB2Qxcbes3rwO8SoDqfr16DLT
-	+r0rTdtFHGOSLhe4UYcXEzoVUwdRYJOrErYqhu1cWi57CeoX1M2VxX5KVZ/orcBMld06RXibyZiwb
-	9onDIZrw==;
+	bh=/d6+Dk3KKsbjd+NK9IaRJO1MZ62p/5JmeyWovJ8r20c=; b=CwHiRIYoh86oLfT/E7Hp6PlAXn
+	orneAaYjAGFE5y7mA+d1X4uG3djweEapj8WoFYECeAJwsEW7kqTUhv/7X6Cxi4VXQqnhsZK6xA4iG
+	z0i0gVSNX4dhHQRq1mS97BxZRRMmWtUjIsKZl3cHjILQLLgcM+qyqasKpJ8OkRF+TMmebC6MB2b4q
+	aSpnR/qzjMeFBmuZQ3BxBaHDmIP4RRFFvbNmwYunJ5/JDM1a7UjbmMd6OlyGEDVf1vpMpQJrsymWx
+	aPexCjXV64HyyK3H2T4hCNQ3yO9v52ScOVGEBxP4zFAnbZbGyzlMIdkPbA8QzzziWEjPWem3uhkF+
+	iFNoe1Ug==;
 Received: from [2001:4bb8:180:7b62:f738:1861:1acc:15c8] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1kOK4e-0003KI-Qf; Fri, 02 Oct 2020 12:22:09 +0000
+	id 1kOK4h-0003Kw-HE; Fri, 02 Oct 2020 12:22:11 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Andrew Morton <akpm@linux-foundation.org>
 Cc: Peter Zijlstra <peterz@infradead.org>,
@@ -97,9 +97,9 @@ Cc: Peter Zijlstra <peterz@infradead.org>,
 	intel-gfx@lists.freedesktop.org,
 	dri-devel@lists.freedesktop.org,
 	linux-mm@kvack.org
-Subject: [PATCH 02/11] mm: add a VM_MAP_PUT_PAGES flag for vmap
-Date: Fri,  2 Oct 2020 14:21:55 +0200
-Message-Id: <20201002122204.1534411-3-hch@lst.de>
+Subject: [PATCH 04/11] mm: allow a NULL fn callback in apply_to_page_range
+Date: Fri,  2 Oct 2020 14:21:57 +0200
+Message-Id: <20201002122204.1534411-5-hch@lst.de>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20201002122204.1534411-1-hch@lst.de>
 References: <20201002122204.1534411-1-hch@lst.de>
@@ -107,55 +107,44 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-Add a flag so that vmap takes ownership of the passed in page array.
-When vfree is called on such an allocation it will put one reference
-on each page, and free the page array itself.
+Besides calling the callback on each page, apply_to_page_range also has
+the effect of pre-faulting all PTEs for the range.  To support callers
+that only need the pre-faulting, make the callback optional.
+
+Based on a patch from Minchan Kim <minchan@kernel.org>.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- include/linux/vmalloc.h | 1 +
- mm/vmalloc.c            | 9 +++++++--
- 2 files changed, 8 insertions(+), 2 deletions(-)
+ mm/memory.c | 16 +++++++++-------
+ 1 file changed, 9 insertions(+), 7 deletions(-)
 
-diff --git a/include/linux/vmalloc.h b/include/linux/vmalloc.h
-index 0221f852a7e1a3..b899681e3ff9f0 100644
---- a/include/linux/vmalloc.h
-+++ b/include/linux/vmalloc.h
-@@ -24,6 +24,7 @@ struct notifier_block;		/* in notifier.h */
- #define VM_UNINITIALIZED	0x00000020	/* vm_struct is not fully initialized */
- #define VM_NO_GUARD		0x00000040      /* don't add guard page */
- #define VM_KASAN		0x00000080      /* has allocated kasan shadow memory */
-+#define VM_MAP_PUT_PAGES	0x00000100	/* put pages and free array in vfree */
+diff --git a/mm/memory.c b/mm/memory.c
+index fcfc4ca36eba80..dcf2bb69fbf847 100644
+--- a/mm/memory.c
++++ b/mm/memory.c
+@@ -2420,13 +2420,15 @@ static int apply_to_pte_range(struct mm_struct *mm, pmd_t *pmd,
  
- /*
-  * VM_KASAN is used slighly differently depending on CONFIG_KASAN_VMALLOC.
-diff --git a/mm/vmalloc.c b/mm/vmalloc.c
-index 8770260419af06..ffad65f052c3f9 100644
---- a/mm/vmalloc.c
-+++ b/mm/vmalloc.c
-@@ -2377,8 +2377,11 @@ EXPORT_SYMBOL(vunmap);
-  * @flags: vm_area->flags
-  * @prot: page protection for the mapping
-  *
-- * Maps @count pages from @pages into contiguous kernel virtual
-- * space.
-+ * Maps @count pages from @pages into contiguous kernel virtual space.
-+ * If @flags contains %VM_MAP_PUT_PAGES the ownership of the pages array itself
-+ * (which must be kmalloc or vmalloc memory) and one reference per pages in it
-+ * are transferred from the caller to vmap(), and will be freed / dropped when
-+ * vfree() is called on the return value.
-  *
-  * Return: the address of the area or %NULL on failure
-  */
-@@ -2404,6 +2407,8 @@ void *vmap(struct page **pages, unsigned int count,
- 		return NULL;
- 	}
+ 	arch_enter_lazy_mmu_mode();
  
-+	if (flags & VM_MAP_PUT_PAGES)
-+		area->pages = pages;
- 	return area->addr;
- }
- EXPORT_SYMBOL(vmap);
+-	do {
+-		if (create || !pte_none(*pte)) {
+-			err = fn(pte++, addr, data);
+-			if (err)
+-				break;
+-		}
+-	} while (addr += PAGE_SIZE, addr != end);
++	if (fn) {
++		do {
++			if (create || !pte_none(*pte)) {
++				err = fn(pte++, addr, data);
++				if (err)
++					break;
++			}
++		} while (addr += PAGE_SIZE, addr != end);
++	}
+ 	*mask |= PGTBL_PTE_MODIFIED;
+ 
+ 	arch_leave_lazy_mmu_mode();
 -- 
 2.28.0
 
