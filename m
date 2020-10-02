@@ -5,25 +5,25 @@ X-Spam-Level:
 X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=unavailable autolearn_force=no version=3.4.0
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A7981C4727D
-	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2020 12:23:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CADEAC47426
+	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2020 12:26:56 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 67CE020665
-	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2020 12:23:25 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 86B022311B
+	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2020 12:26:56 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="YWVEcg8r"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 67CE020665
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="B5KIXiMO"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 86B022311B
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.2022.6070 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.2036.6094 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kOK5c-0001nE-Bw; Fri, 02 Oct 2020 12:23:08 +0000
+	id 1kOK94-0002Pe-69; Fri, 02 Oct 2020 12:26:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 2022.6070; Fri, 02 Oct 2020 12:23:08 +0000
+Received: by outflank-mailman (output) from mailman id 2036.6094; Fri, 02 Oct 2020 12:26:42 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kOK5c-0001n2-6k; Fri, 02 Oct 2020 12:23:08 +0000
-Received: by outflank-mailman (input) for mailman id 2022;
- Fri, 02 Oct 2020 12:23:06 +0000
+	id 1kOK94-0002PX-2n; Fri, 02 Oct 2020 12:26:42 +0000
+Received: by outflank-mailman (input) for mailman id 2036;
+ Fri, 02 Oct 2020 12:26:41 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Wm18=DJ=casper.srs.infradead.org=batv+27a5ecbc8e1e54150000+6249+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1kOK5a-00017n-B4
- for xen-devel@lists.xenproject.org; Fri, 02 Oct 2020 12:23:06 +0000
+ id 1kOK5k-00017n-BT
+ for xen-devel@lists.xenproject.org; Fri, 02 Oct 2020 12:23:16 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id c6b44618-3e4c-4ac2-8e7b-d11f3a1d5c89;
- Fri, 02 Oct 2020 12:22:26 +0000 (UTC)
+ id a3cb94ff-30c9-4a7c-bb16-9f9603b5c507;
+ Fri, 02 Oct 2020 12:22:29 +0000 (UTC)
 Received: from [2001:4bb8:180:7b62:f738:1861:1acc:15c8] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kOK4g-0003Ka-6R; Fri, 02 Oct 2020 12:22:10 +0000
+ id 1kOK4p-0003NC-E7; Fri, 02 Oct 2020 12:22:19 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=Wm18=DJ=casper.srs.infradead.org=batv+27a5ecbc8e1e54150000+6249+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1kOK5a-00017n-B4
-	for xen-devel@lists.xenproject.org; Fri, 02 Oct 2020 12:23:06 +0000
-X-Inumbo-ID: c6b44618-3e4c-4ac2-8e7b-d11f3a1d5c89
+	id 1kOK5k-00017n-BT
+	for xen-devel@lists.xenproject.org; Fri, 02 Oct 2020 12:23:16 +0000
+X-Inumbo-ID: a3cb94ff-30c9-4a7c-bb16-9f9603b5c507
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id c6b44618-3e4c-4ac2-8e7b-d11f3a1d5c89;
-	Fri, 02 Oct 2020 12:22:26 +0000 (UTC)
+	id a3cb94ff-30c9-4a7c-bb16-9f9603b5c507;
+	Fri, 02 Oct 2020 12:22:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=cxDf+nMgR/LOq5Vlf/2efNcelt6NT7vAwUR//5r7v5s=; b=YWVEcg8rBuVcb/YCFrZd73afgv
-	8kolTlJ8R1RDS3A0cxYp59Z9H2fZ+Hjonp8ijA1/VZEo6qEkS3vqATvBIAhoKIE6J9A9oSJ1a42/Q
-	TSf8rRuHIPTZZvnJCiioCHfyVHDOgG+xW0uE1iLjeFwb0p+E4moW9CYRlGQbP87UVhWqAdrioH4iI
-	OxqSCaozeYCqqo4NTY4zOI04hXGmIpjZY/WikJC07xo/QZrnRlEUfhKeDqsHj05nW0XTHD714Ug7d
-	iQ8YZwg1G5Wsgtl/Ut6unH3VppjZUzCpijkq8iyJWKWmzLpogAjAl2rTfrTAUMuS15swV9Ex8RbpY
-	YrfWcXcw==;
+	bh=aKbcvSTUYHnc5Kwat+nQ3mcktPzxpqXoVaxpdMprQBc=; b=B5KIXiMOT+bUgSt1GIGcOgCEjp
+	KxrLVOKXkjiZh9nsUjXrZIlf4IkgoawYmYAki6NhuzjSiIFsxcxlaCsOvoZlGkgbjTPrXr3wsU70G
+	py1rrHtiaqjQaApAFvYoihjieul5RVuE7O+6SjJioBBfm+PIwZYdtR+2SMdjuYu1Sp4n+FsVejSyL
+	UXdlLjQD/rxohxIguUWxxVAkVtqjw1uHGlM1swtKpIiApsFHYCGukN/6ttSaUKj1/R8XhI+9c7kr2
+	CHlBs2NnJcbjsxHWA7WSo2qepwoMiF6W71c/naCdia2qhrwSV7pd55VEB5WyfMw+C7q+NXxIYTfma
+	JMbWWlRA==;
 Received: from [2001:4bb8:180:7b62:f738:1861:1acc:15c8] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1kOK4g-0003Ka-6R; Fri, 02 Oct 2020 12:22:10 +0000
+	id 1kOK4p-0003NC-E7; Fri, 02 Oct 2020 12:22:19 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Andrew Morton <akpm@linux-foundation.org>
 Cc: Peter Zijlstra <peterz@infradead.org>,
@@ -97,9 +97,9 @@ Cc: Peter Zijlstra <peterz@infradead.org>,
 	intel-gfx@lists.freedesktop.org,
 	dri-devel@lists.freedesktop.org,
 	linux-mm@kvack.org
-Subject: [PATCH 03/11] mm: add a vmap_pfn function
-Date: Fri,  2 Oct 2020 14:21:56 +0200
-Message-Id: <20201002122204.1534411-4-hch@lst.de>
+Subject: [PATCH 10/11] x86/xen: open code alloc_vm_area in arch_gnttab_valloc
+Date: Fri,  2 Oct 2020 14:22:03 +0200
+Message-Id: <20201002122204.1534411-11-hch@lst.de>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20201002122204.1534411-1-hch@lst.de>
 References: <20201002122204.1534411-1-hch@lst.de>
@@ -107,99 +107,67 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-Add a proper helper to remap PFNs into kernel virtual space so that
-drivers don't have to abuse alloc_vm_area and open coded PTE
-manipulation for it.
+Replace the last call to alloc_vm_area with an open coded version using
+an iterator in struct gnttab_vm_area instead of the triple indirection
+magic in alloc_vm_area.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
+Reviewed-by: Boris Ostrovsky <boris.ostrovsky@oracle.com>
 ---
- include/linux/vmalloc.h |  1 +
- mm/Kconfig              |  3 +++
- mm/vmalloc.c            | 45 +++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 49 insertions(+)
+ arch/x86/xen/grant-table.c | 27 ++++++++++++++++++++-------
+ 1 file changed, 20 insertions(+), 7 deletions(-)
 
-diff --git a/include/linux/vmalloc.h b/include/linux/vmalloc.h
-index b899681e3ff9f0..c77efeac242514 100644
---- a/include/linux/vmalloc.h
-+++ b/include/linux/vmalloc.h
-@@ -122,6 +122,7 @@ extern void vfree_atomic(const void *addr);
+diff --git a/arch/x86/xen/grant-table.c b/arch/x86/xen/grant-table.c
+index 4988e19598c8a5..1e681bf62561a0 100644
+--- a/arch/x86/xen/grant-table.c
++++ b/arch/x86/xen/grant-table.c
+@@ -25,6 +25,7 @@
+ static struct gnttab_vm_area {
+ 	struct vm_struct *area;
+ 	pte_t **ptes;
++	int idx;
+ } gnttab_shared_vm_area, gnttab_status_vm_area;
  
- extern void *vmap(struct page **pages, unsigned int count,
- 			unsigned long flags, pgprot_t prot);
-+void *vmap_pfn(unsigned long *pfns, unsigned int count, pgprot_t prot);
- extern void vunmap(const void *addr);
- 
- extern int remap_vmalloc_range_partial(struct vm_area_struct *vma,
-diff --git a/mm/Kconfig b/mm/Kconfig
-index 6c974888f86f97..6fa7ba1199eb1e 100644
---- a/mm/Kconfig
-+++ b/mm/Kconfig
-@@ -815,6 +815,9 @@ config DEVICE_PRIVATE
- 	  memory; i.e., memory that is only accessible from the device (or
- 	  group of devices). You likely also want to select HMM_MIRROR.
- 
-+config VMAP_PFN
-+	bool
-+
- config FRAME_VECTOR
- 	bool
- 
-diff --git a/mm/vmalloc.c b/mm/vmalloc.c
-index ffad65f052c3f9..e2a2ded8d93478 100644
---- a/mm/vmalloc.c
-+++ b/mm/vmalloc.c
-@@ -2413,6 +2413,51 @@ void *vmap(struct page **pages, unsigned int count,
+ int arch_gnttab_map_shared(unsigned long *frames, unsigned long nr_gframes,
+@@ -90,19 +91,31 @@ void arch_gnttab_unmap(void *shared, unsigned long nr_gframes)
+ 	}
  }
- EXPORT_SYMBOL(vmap);
  
-+#ifdef CONFIG_VMAP_PFN
-+struct vmap_pfn_data {
-+	unsigned long	*pfns;
-+	pgprot_t	prot;
-+	unsigned int	idx;
-+};
-+
-+static int vmap_pfn_apply(pte_t *pte, unsigned long addr, void *private)
++static int gnttab_apply(pte_t *pte, unsigned long addr, void *data)
 +{
-+	struct vmap_pfn_data *data = private;
++	struct gnttab_vm_area *area = data;
 +
-+	if (WARN_ON_ONCE(pfn_valid(data->pfns[data->idx])))
-+		return -EINVAL;
-+	*pte = pte_mkspecial(pfn_pte(data->pfns[data->idx++], data->prot));
++	area->ptes[area->idx++] = pte;
 +	return 0;
 +}
 +
-+/**
-+ * vmap_pfn - map an array of PFNs into virtually contiguous space
-+ * @pfns: array of PFNs
-+ * @count: number of pages to map
-+ * @prot: page protection for the mapping
-+ *
-+ * Maps @count PFNs from @pfns into contiguous kernel virtual space and returns
-+ * the start address of the mapping.
-+ */
-+void *vmap_pfn(unsigned long *pfns, unsigned int count, pgprot_t prot)
-+{
-+	struct vmap_pfn_data data = { .pfns = pfns, .prot = pgprot_nx(prot) };
-+	struct vm_struct *area;
-+
-+	area = get_vm_area_caller(count * PAGE_SIZE, VM_IOREMAP,
-+			__builtin_return_address(0));
-+	if (!area)
-+		return NULL;
-+	if (apply_to_page_range(&init_mm, (unsigned long)area->addr,
-+			count * PAGE_SIZE, vmap_pfn_apply, &data)) {
-+		free_vm_area(area);
-+		return NULL;
-+	}
-+	return area->addr;
-+}
-+EXPORT_SYMBOL_GPL(vmap_pfn);
-+#endif /* CONFIG_VMAP_PFN */
-+
- static void *__vmalloc_area_node(struct vm_struct *area, gfp_t gfp_mask,
- 				 pgprot_t prot, int node)
+ static int arch_gnttab_valloc(struct gnttab_vm_area *area, unsigned nr_frames)
  {
+ 	area->ptes = kmalloc_array(nr_frames, sizeof(*area->ptes), GFP_KERNEL);
+ 	if (area->ptes == NULL)
+ 		return -ENOMEM;
+-
+-	area->area = alloc_vm_area(PAGE_SIZE * nr_frames, area->ptes);
+-	if (area->area == NULL) {
+-		kfree(area->ptes);
+-		return -ENOMEM;
+-	}
+-
++	area->area = get_vm_area(PAGE_SIZE * nr_frames, VM_IOREMAP);
++	if (!area->area)
++		goto out_free_ptes;
++	if (apply_to_page_range(&init_mm, (unsigned long)area->area->addr,
++			PAGE_SIZE * nr_frames, gnttab_apply, area))
++		goto out_free_vm_area;
+ 	return 0;
++out_free_vm_area:
++	free_vm_area(area->area);
++out_free_ptes:
++	kfree(area->ptes);
++	return -ENOMEM;
+ }
+ 
+ static void arch_gnttab_vfree(struct gnttab_vm_area *area)
 -- 
 2.28.0
 
