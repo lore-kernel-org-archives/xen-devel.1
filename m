@@ -2,28 +2,28 @@ Return-Path: <SRS0=mHc1=DJ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E36B8C4363C
-	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2020 15:42:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 72C99C4363C
+	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2020 15:43:17 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 848B42074B
-	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2020 15:42:18 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 09FF62074B
+	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2020 15:43:17 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="s3zAfuAk"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 848B42074B
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
+	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="dtowS8WR"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 09FF62074B
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.2236.6652 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.2239.6664 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kONC7-0007Dh-Jl; Fri, 02 Oct 2020 15:42:03 +0000
+	id 1kOND2-0007Zy-0t; Fri, 02 Oct 2020 15:43:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 2236.6652; Fri, 02 Oct 2020 15:42:03 +0000
+Received: by outflank-mailman (output) from mailman id 2239.6664; Fri, 02 Oct 2020 15:42:59 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,134 +38,142 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kONC7-0007DU-FH; Fri, 02 Oct 2020 15:42:03 +0000
-Received: by outflank-mailman (input) for mailman id 2236;
- Fri, 02 Oct 2020 15:42:02 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=2E3y=DJ=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kONC6-0006vD-9v
- for xen-devel@lists.xenproject.org; Fri, 02 Oct 2020 15:42:02 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id f0fb1f41-52ea-41f8-ad4f-6c9b0555a9f3;
- Fri, 02 Oct 2020 15:41:46 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 79682B269;
- Fri,  2 Oct 2020 15:41:45 +0000 (UTC)
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kOND1-0007Zr-U1; Fri, 02 Oct 2020 15:42:59 +0000
+Received: by outflank-mailman (input) for mailman id 2239;
+ Fri, 02 Oct 2020 15:42:58 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=iJBK=DJ=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1kOND0-0007ZV-0w
+ for xen-devel@lists.xenproject.org; Fri, 02 Oct 2020 15:42:58 +0000
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 8458d17a-c2e9-4f3a-8306-311a986c7892;
+ Fri, 02 Oct 2020 15:42:56 +0000 (UTC)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=2E3y=DJ=suse.com=jgross@srs-us1.protection.inumbo.net>)
-	id 1kONC6-0006vD-9v
-	for xen-devel@lists.xenproject.org; Fri, 02 Oct 2020 15:42:02 +0000
-X-Inumbo-ID: f0fb1f41-52ea-41f8-ad4f-6c9b0555a9f3
-Received: from mx2.suse.de (unknown [195.135.220.15])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id f0fb1f41-52ea-41f8-ad4f-6c9b0555a9f3;
-	Fri, 02 Oct 2020 15:41:46 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1601653305;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=FNF+aRfDbKHMZCseaVDAhmaSRPG1QxwjSNnLmsmdBpU=;
-	b=s3zAfuAk3ObNwVSkUaMaGpk4An9Odhdv0ughwfA6YdsIF1MFhYKHPsYLqpmhPVWfui+5p/
-	TKm1nFm2CI/IkuxovkbX7hD3Rup6TTu9giyVecUuqTnPGZRkDFesJzFKGmQHfOg9p3BfSU
-	5UAlA7q0eJySJUqoxPrndPrgGACaNs0=
-Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 79682B269;
-	Fri,  2 Oct 2020 15:41:45 +0000 (UTC)
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH 3/5] tools/libs/store: drop read-only functionality
-Date: Fri,  2 Oct 2020 17:41:39 +0200
-Message-Id: <20201002154141.11677-4-jgross@suse.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20201002154141.11677-1-jgross@suse.com>
-References: <20201002154141.11677-1-jgross@suse.com>
+	(envelope-from <SRS0=iJBK=DJ=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+	id 1kOND0-0007ZV-0w
+	for xen-devel@lists.xenproject.org; Fri, 02 Oct 2020 15:42:58 +0000
+X-Inumbo-ID: 8458d17a-c2e9-4f3a-8306-311a986c7892
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id 8458d17a-c2e9-4f3a-8306-311a986c7892;
+	Fri, 02 Oct 2020 15:42:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1601653376;
+  h=subject:to:cc:references:from:message-id:date:
+   mime-version:in-reply-to:content-transfer-encoding;
+  bh=2vB/BhgmcK/033yAkis2WFflAsrHtymEDb+pmWYoL2o=;
+  b=dtowS8WRLEXGxqd8C02Y+S2IfGjviDsqJApFM1qehE/x0TUdGTazemjg
+   yNeA7RsWuPcnBpjnVruR2N5TzvqflUVo7Z4iGcTLSZItrmOnP1XUrGjZK
+   cvi6PgPkNUh109g/E8DDMT+sus3B5DCWdEPLo45udxv4iRQMaPAj7tnSr
+   c=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: nd7SNFVxjW5sRcXrQRWBKfq5bq1a61ky3GiRdH5dh+nokrGVxvpLLORvv6oJFes4fAKeHJKH7G
+ FObcTadzFUsgQHvrmzvgnQ5pw3YcBWMmTeXYkVR41vjBlZ4tgw6kCoJ/Oi33UWfuQSb+SUq0b4
+ xWIpgEyVpWAyX32iAfNY5cDPQYlJ3YzO3Ph1cbWeveQIJCkYkBqyfHGbzLPkBYy5m9CGug14CK
+ 1S65GYSgu+A/SpnWLKWMJ9o17/Y6ACkZ3pH8k5k/pDoC7uI85JRXv0ox8v4KZY7MjkugiCK4uu
+ 6AY=
+X-SBRS: None
+X-MesageID: 28440549
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.77,328,1596513600"; 
+   d="scan'208";a="28440549"
+Subject: Re: Yet another S3 issue in Xen 4.14
+To: Jan Beulich <jbeulich@suse.com>,
+	=?UTF-8?Q?Marek_Marczykowski-G=c3=b3recki?= <marmarek@invisiblethingslab.com>
+CC: xen-devel <xen-devel@lists.xenproject.org>
+References: <20201001011245.GL3962@mail-itl>
+ <a80ad59b-feb1-01c8-2b14-dbf6568d0ff5@suse.com>
+ <20201001123129.GJ1482@mail-itl>
+ <1e596ccc-a875-93f1-2619-e4dbcbd88b4d@citrix.com>
+ <20201002150859.GM3962@mail-itl>
+ <454ac9ce-012f-f2e7-722d-c5304fd3146f@suse.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Message-ID: <aa5e1a7b-3724-bdc1-a313-0598aabd181f@citrix.com>
+Date: Fri, 2 Oct 2020 16:42:50 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
+In-Reply-To: <454ac9ce-012f-f2e7-722d-c5304fd3146f@suse.com>
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
+Content-Language: en-GB
+X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
+ FTLPEX02CL05.citrite.net (10.13.108.178)
 
-Today it is possible to open the connection in read-only mode via
-xs_daemon_open_readonly(). This is working only with Xenstore running
-as a daemon in the same domain as the user. Additionally it doesn't
-add any security as accessing the socket used for that functionality
-requires the same privileges as the socket used for full Xenstore
-access.
+On 02/10/2020 16:39, Jan Beulich wrote:
+> On 02.10.2020 17:08, Marek Marczykowski-Górecki wrote:
+>> I've done another bisect on the commit broken up in separate changes
+>> (https://xenbits.xen.org/gitweb/?p=people/andrewcoop/xen.git;a=shortlog;h=refs/heads/dbg-s3)
+>> and the bad part seems to be this:
+>>
+>> From dbdb32f8c265295d6af7cd4cd0aa12b6d04a0430 Mon Sep 17 00:00:00 2001
+>> From: Andrew Cooper <andrew.cooper3@citrix.com>
+>> Date: Fri, 2 Oct 2020 15:40:22 +0100
+>> Subject: [PATCH 1/1] CR4
+> Interesting - I was wild guessing so yesterday, but couldn't come
+> up with even a vague reason why this would be. I think you could
+> further split it up:
+>
+>> --- a/xen/arch/x86/acpi/power.c
+>> +++ b/xen/arch/x86/acpi/power.c
+>> @@ -195,7 +195,6 @@ static int enter_state(u32 state)
+>>      unsigned long flags;
+>>      int error;
+>>      struct cpu_info *ci;
+>> -    unsigned long cr4;
+>>  
+>>      if ( (state <= ACPI_STATE_S0) || (state > ACPI_S_STATES_MAX) )
+>>          return -EINVAL;
+>> @@ -270,15 +269,15 @@ static int enter_state(u32 state)
+>>  
+>>      system_state = SYS_STATE_resume;
+>>  
+>> -    /* Restore CR4 and EFER from cached values. */
+>> -    cr4 = read_cr4();
+>> -    write_cr4(cr4 & ~X86_CR4_MCE);
+>> +    /* Restore EFER from cached value. */
+>>      write_efer(read_efer());
+> This one should be possible to leave in place despite ...
+>
+>>      device_power_up(SAVED_ALL);
+>>  
+>>      mcheck_init(&boot_cpu_data, false);
+>> -    write_cr4(cr4);
+>> +
+>> +    /* Restore CR4 from cached value, now MCE is set up. */
+>> +    write_cr4(read_cr4());
+> ... this change.
+>
+> Further, while I can't see how the set_in_cr4() in mcheck_init()
+> could badly interact with the CR4 writes here, another option
+> might be to suppress it when system_state == SYS_STATE_resume
+> && c == &boot_cpu_data (or !bsp && c == &boot_cpu_data).
+>
+>> --- a/xen/arch/x86/acpi/suspend.c
+>> +++ b/xen/arch/x86/acpi/suspend.c
+>> @@ -23,7 +23,4 @@ void save_rest_processor_state(void)
+>>  void restore_rest_processor_state(void)
+>>  {
+>>      load_system_tables();
+>> -
+>> -    /* Restore full CR4 (inc MCE) now that the IDT is in place. */
+>> -    write_cr4(mmu_cr4_features);
+>>  }
+> This one should be possible to leave in place despite the other
+> changes.
 
-So just drop the read-only semantics in all cases, leaving the
-interface existing only for compatibility reasons. This in turn
-requires to just ignore the XS_OPEN_READONLY flag.
+We're continuing to debug in private.  mmu_cr4_features and read_cr4()
+are equivalent (as expected), but very different from MINIMAL_CR4 which
+is what the trampoline configures, so I think we're suffering a
+CR4-related #UD/#GP somewhere in device_power_up() or mcheck_init().
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
- tools/libs/store/include/xenstore.h | 8 --------
- tools/libs/store/xs.c               | 7 ++-----
- 2 files changed, 2 insertions(+), 13 deletions(-)
+Its not INVPCID.  Trying others.
 
-diff --git a/tools/libs/store/include/xenstore.h b/tools/libs/store/include/xenstore.h
-index cbc7206a0f..158e69ef83 100644
---- a/tools/libs/store/include/xenstore.h
-+++ b/tools/libs/store/include/xenstore.h
-@@ -60,15 +60,12 @@ typedef uint32_t xs_transaction_t;
- /* Open a connection to the xs daemon.
-  * Attempts to make a connection over the socket interface,
-  * and if it fails, then over the  xenbus interface.
-- * Mode 0 specifies read-write access, XS_OPEN_READONLY for
-- * read-only access.
-  *
-  * * Connections made with xs_open(0) (which might be shared page or
-  *   socket based) are only guaranteed to work in the parent after
-  *   fork.
-  * * xs_daemon_open*() and xs_domain_open() are deprecated synonyms
-  *   for xs_open(0).
-- * * XS_OPEN_READONLY has no bearing on any of this.
-  *
-  * Returns a handle or NULL.
-  */
-@@ -83,11 +80,6 @@ void xs_close(struct xs_handle *xsh /* NULL ok */);
-  */
- struct xs_handle *xs_daemon_open(void);
- struct xs_handle *xs_domain_open(void);
--
--/* Connect to the xs daemon (readonly for non-root clients).
-- * Returns a handle or NULL.
-- * Deprecated, please use xs_open(XS_OPEN_READONLY) instead
-- */
- struct xs_handle *xs_daemon_open_readonly(void);
- 
- /* Close the connection to the xs daemon.
-diff --git a/tools/libs/store/xs.c b/tools/libs/store/xs.c
-index 320734416f..4ac73ec317 100644
---- a/tools/libs/store/xs.c
-+++ b/tools/libs/store/xs.c
-@@ -302,7 +302,7 @@ struct xs_handle *xs_daemon_open(void)
- 
- struct xs_handle *xs_daemon_open_readonly(void)
- {
--	return xs_open(XS_OPEN_READONLY);
-+	return xs_open(0);
- }
- 
- struct xs_handle *xs_domain_open(void)
-@@ -314,10 +314,7 @@ struct xs_handle *xs_open(unsigned long flags)
- {
- 	struct xs_handle *xsh = NULL;
- 
--	if (flags & XS_OPEN_READONLY)
--		xsh = get_handle(xs_daemon_socket_ro());
--	else
--		xsh = get_handle(xs_daemon_socket());
-+	xsh = get_handle(xs_daemon_socket());
- 
- 	if (!xsh)
- 		xsh = get_handle(xs_domain_dev());
--- 
-2.26.2
-
+~Andrew
 
