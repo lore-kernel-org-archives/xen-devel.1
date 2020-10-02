@@ -2,28 +2,28 @@ Return-Path: <SRS0=mHc1=DJ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7F8C4C47423
-	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2020 14:22:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 95BF5C4363D
+	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2020 14:48:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 284E1206A5
-	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2020 14:22:39 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 42B3E2065D
+	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2020 14:48:46 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="Q/soOzGR"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 284E1206A5
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="Fk5HKHa9"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 42B3E2065D
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.2190.6475 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.2207.6492 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kOLx4-0007QO-93; Fri, 02 Oct 2020 14:22:26 +0000
+	id 1kOMM4-0001BY-Gb; Fri, 02 Oct 2020 14:48:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 2190.6475; Fri, 02 Oct 2020 14:22:26 +0000
+Received: by outflank-mailman (output) from mailman id 2207.6492; Fri, 02 Oct 2020 14:48:16 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,103 +38,219 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kOLx3-0007QC-Vg; Fri, 02 Oct 2020 14:22:25 +0000
-Received: by outflank-mailman (input) for mailman id 2190;
- Fri, 02 Oct 2020 14:22:23 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kOMM4-0001BR-DZ; Fri, 02 Oct 2020 14:48:16 +0000
+Received: by outflank-mailman (input) for mailman id 2207;
+ Fri, 02 Oct 2020 14:48:15 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=2E3y=DJ=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kOLx1-0007Lm-Lf
- for xen-devel@lists.xenproject.org; Fri, 02 Oct 2020 14:22:23 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 6bcd64eb-b6be-4a07-a4af-1257aa1a8d7a;
- Fri, 02 Oct 2020 14:22:17 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id E0646AF9E;
- Fri,  2 Oct 2020 14:22:16 +0000 (UTC)
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+ (envelope-from <SRS0=sK/c=DJ=redhat.com=david@srs-us1.protection.inumbo.net>)
+ id 1kOMM3-0001BL-4I
+ for xen-devel@lists.xenproject.org; Fri, 02 Oct 2020 14:48:15 +0000
+Received: from us-smtp-delivery-124.mimecast.com (unknown [63.128.21.124])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+ id 044dae2d-a4af-478f-b111-0a1570f5d0d9;
+ Fri, 02 Oct 2020 14:48:13 +0000 (UTC)
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-342-GAWETC74OFW0LAD_iYSeKQ-1; Fri, 02 Oct 2020 10:48:12 -0400
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+ [10.5.11.11])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id EF4995705A;
+ Fri,  2 Oct 2020 14:48:08 +0000 (UTC)
+Received: from [10.36.113.228] (ovpn-113-228.ams2.redhat.com [10.36.113.228])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 81D7C78803;
+ Fri,  2 Oct 2020 14:48:05 +0000 (UTC)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=2E3y=DJ=suse.com=jgross@srs-us1.protection.inumbo.net>)
-	id 1kOLx1-0007Lm-Lf
-	for xen-devel@lists.xenproject.org; Fri, 02 Oct 2020 14:22:23 +0000
-X-Inumbo-ID: 6bcd64eb-b6be-4a07-a4af-1257aa1a8d7a
-Received: from mx2.suse.de (unknown [195.135.220.15])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 6bcd64eb-b6be-4a07-a4af-1257aa1a8d7a;
-	Fri, 02 Oct 2020 14:22:17 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1601648537;
+	(envelope-from <SRS0=sK/c=DJ=redhat.com=david@srs-us1.protection.inumbo.net>)
+	id 1kOMM3-0001BL-4I
+	for xen-devel@lists.xenproject.org; Fri, 02 Oct 2020 14:48:15 +0000
+X-Inumbo-ID: 044dae2d-a4af-478f-b111-0a1570f5d0d9
+Received: from us-smtp-delivery-124.mimecast.com (unknown [63.128.21.124])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+	id 044dae2d-a4af-478f-b111-0a1570f5d0d9;
+	Fri, 02 Oct 2020 14:48:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1601650093;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=B0hKhMItdbTVWeOo4rAaRHPuJTQcqrPyKeVdwhrfnHU=;
-	b=Q/soOzGRi3o/4B1TWIxWhWnRfSHi5vETOP8P1RfBQ25k4cokrJjYEKMawPAlwKR16XGPjf
-	xvc4fVhl7zsCYwrchgZ9U2EEXsHASH/AEm+OX4Nxj4tGpGC6FSgmdVackChNa+CiPlnY+x
-	mpT4/nEVfo0xEiIaazk+bCZsV2Tv9EA=
-Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id E0646AF9E;
-	Fri,  2 Oct 2020 14:22:16 +0000 (UTC)
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH 2/3] tools/libs/guest: don't use symbolic links for xenctrl headers
-Date: Fri,  2 Oct 2020 16:22:13 +0200
-Message-Id: <20201002142214.3438-3-jgross@suse.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20201002142214.3438-1-jgross@suse.com>
-References: <20201002142214.3438-1-jgross@suse.com>
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=IM4pBIGYx/SKM1Dy3xGL2Rgl9xgWx7mTiMJTemJf/pE=;
+	b=Fk5HKHa9A14CVtiB0XFYC/JobBoBQCVJekuDAfrW5dUm2I1MId5ti0RQpIDMn5gYUVTG6I
+	iJfz8SMSFtFwig2ke2v7NvkZ7bMzg4At1qAeblo2J2SKpVRQnOeg8G+ZjxfvLfALOE7IW8
+	kNdSmFbe3FKmbuCpcZQQ+UnOAoCdb+I=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-342-GAWETC74OFW0LAD_iYSeKQ-1; Fri, 02 Oct 2020 10:48:12 -0400
+X-MC-Unique: GAWETC74OFW0LAD_iYSeKQ-1
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.11])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id EF4995705A;
+	Fri,  2 Oct 2020 14:48:08 +0000 (UTC)
+Received: from [10.36.113.228] (ovpn-113-228.ams2.redhat.com [10.36.113.228])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 81D7C78803;
+	Fri,  2 Oct 2020 14:48:05 +0000 (UTC)
+Subject: Re: [PATCH v1 1/5] mm/page_alloc: convert "report" flag of
+ __free_one_page() to a proper flag
+To: Matthew Wilcox <willy@infradead.org>
+Cc: linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+ linux-hyperv@vger.kernel.org, xen-devel@lists.xenproject.org,
+ linux-acpi@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
+ Alexander Duyck <alexander.h.duyck@linux.intel.com>,
+ Vlastimil Babka <vbabka@suse.cz>, Oscar Salvador <osalvador@suse.de>,
+ Mel Gorman <mgorman@techsingularity.net>, Michal Hocko <mhocko@kernel.org>,
+ Dave Hansen <dave.hansen@intel.com>,
+ Wei Yang <richard.weiyang@linux.alibaba.com>, Mike Rapoport <rppt@kernel.org>
+References: <20200928182110.7050-1-david@redhat.com>
+ <20200928182110.7050-2-david@redhat.com>
+ <20201002134118.GA20115@casper.infradead.org>
+From: David Hildenbrand <david@redhat.com>
+Autocrypt: addr=david@redhat.com; prefer-encrypt=mutual; keydata=
+ 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
+ WNyWQQ==
+Organization: Red Hat GmbH
+Message-ID: <2b1baab8-861d-06a3-8eab-75c4e9e1b19d@redhat.com>
+Date: Fri, 2 Oct 2020 16:48:04 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.11.0
 MIME-Version: 1.0
+In-Reply-To: <20201002134118.GA20115@casper.infradead.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
 
-Instead of using symbolic links for accessing the xenctrl private
-headers use an include path instead.
+On 02.10.20 15:41, Matthew Wilcox wrote:
+> On Mon, Sep 28, 2020 at 08:21:06PM +0200, David Hildenbrand wrote:
+>> Let's prepare for additional flags and avoid long parameter lists of bools.
+>> Follow-up patches will also make use of the flags in __free_pages_ok(),
+>> however, I wasn't able to come up with a better name for the type - should
+>> be good enough for internal purposes.
+> 
+>> +/* Free One Page flags: for internal, non-pcp variants of free_pages(). */
+>> +typedef int __bitwise fop_t;
+> 
+> That invites confusion with f_op.  There's no reason to use _t as a suffix
+> here ... why not free_f?
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
- tools/libs/guest/Makefile | 9 ++-------
- 1 file changed, 2 insertions(+), 7 deletions(-)
+git grep "bitwise" | grep typedef | grep include/linux
 
-diff --git a/tools/libs/guest/Makefile b/tools/libs/guest/Makefile
-index 5b4ad313cc..1c729040b3 100644
---- a/tools/libs/guest/Makefile
-+++ b/tools/libs/guest/Makefile
-@@ -6,11 +6,6 @@ ifeq ($(CONFIG_LIBXC_MINIOS),y)
- override CONFIG_MIGRATE := n
- endif
- 
--LINK_FILES := xc_private.h xc_core.h xc_core_x86.h xc_core_arm.h xc_bitops.h
--
--$(LINK_FILES):
--	ln -sf $(XEN_ROOT)/tools/libs/ctrl/$(notdir $@) $@
--
- SRCS-y += xg_private.c
- SRCS-y += xg_domain.c
- SRCS-y += xg_suspend.c
-@@ -29,6 +24,8 @@ else
- SRCS-y += xg_nomigrate.c
- endif
- 
-+CFLAGS += -I$(XEN_libxenctrl)
-+
- vpath %.c ../../../xen/common/libelf
- CFLAGS += -I../../../xen/common/libelf
- 
-@@ -111,8 +108,6 @@ $(eval $(genpath-target))
- 
- xc_private.h: _paths.h
- 
--$(LIB_OBJS) $(PIC_OBJS): $(LINK_FILES)
--
- .PHONY: cleanlocal
- cleanlocal:
- 	rm -f libxenguest.map
+indicates that "_t" it the right thing to do.
+
+I want a name that highlights that is is for the internal variants of
+free_page(), free_f / free_t is too generic.
+
+fpi_t (Free Page Internal) ?
+
+> 
+>> +/*
+>> + * Skip free page reporting notification for the (possibly merged) page. (will
+>> + * *not* mark the page reported, only skip the notification).
+> 
+> ... Don't you mean "will not skip marking the page as reported, only
+> skip the notification"?
+
+Yeah, I can use that.
+
+The way free page reporting works is that
+
+1. Free page reporting infrastructure will get notified after buddy
+merging about a newly freed page.
+
+2. Once a certain threshold of free pages is reached, it will pull pages
+from the freelist, report them, and mark them as reported. (see
+mm/page_reporting.c)
+
+During 2., we didn't actually free a "new page", we only temporarily
+removed it from the list, that's why we have to skip the notification.
+
+What we do here is skip 1., not 2.
+
+> 
+> *reads code*
+> 
+> No, I'm still confused.  What does this sentence mean?
+> 
+> Would it help to have a FOP_DEFAULT that has FOP_REPORT_NOTIFY set and
+> then a FOP_SKIP_REPORT_NOTIFY define that is 0?
+
+Hmm, I'm not entirely sure if that improves the situation. Then, I need
+3 defines instead of two, and an "inverse" documentation for
+FOP_REPORT_NOTIFY.
+
+> 
+>> -static inline void __free_one_page(struct page *page,
+>> -		unsigned long pfn,
+>> -		struct zone *zone, unsigned int order,
+>> -		int migratetype, bool report)
+>> +static inline void __free_one_page(struct page *page, unsigned long pfn,
+>> +				   struct zone *zone, unsigned int order,
+>> +				   int migratetype, fop_t fop_flags)
+> 
+> Please don't over-indent like this.
+> 
+> static inline void __free_one_page(struct page *page, unsigned long pfn,
+> 		struct zone *zone, unsigned int order, int migratetype,
+> 		fop_t fop_flags)
+> 
+> reads just as well and then if someone needs to delete the 'static'
+> later, they don't need to fiddle around with subsequent lines getting
+> the whitespace to line up again.
+> 
+
+I don't care too much about this specific instance and can fix it up.
+(this is clearly a matter of personal taste)
+
+Thanks!
+
 -- 
-2.26.2
+Thanks,
+
+David / dhildenb
 
 
