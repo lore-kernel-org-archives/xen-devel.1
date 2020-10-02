@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 00BF9C4363D
-	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2020 15:42:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D181DC35257
+	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2020 15:42:13 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A3B2D20795
-	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2020 15:42:11 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 8442220795
+	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2020 15:42:13 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="lGKrfw3o"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A3B2D20795
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="cXGOQcxR"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8442220795
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.2233.6616 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.2235.6640 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kONBx-000708-8i; Fri, 02 Oct 2020 15:41:53 +0000
+	id 1kONC3-00077l-2Y; Fri, 02 Oct 2020 15:41:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 2233.6616; Fri, 02 Oct 2020 15:41:53 +0000
+Received: by outflank-mailman (output) from mailman id 2235.6640; Fri, 02 Oct 2020 15:41:59 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,32 +38,31 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kONBx-000700-43; Fri, 02 Oct 2020 15:41:53 +0000
-Received: by outflank-mailman (input) for mailman id 2233;
- Fri, 02 Oct 2020 15:41:51 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kONC2-00077c-Td; Fri, 02 Oct 2020 15:41:58 +0000
+Received: by outflank-mailman (input) for mailman id 2235;
+ Fri, 02 Oct 2020 15:41:57 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=2E3y=DJ=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kONBv-0006v4-Lm
- for xen-devel@lists.xenproject.org; Fri, 02 Oct 2020 15:41:51 +0000
+ id 1kONC1-0006vD-9j
+ for xen-devel@lists.xenproject.org; Fri, 02 Oct 2020 15:41:57 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id d6be06e3-4dd6-46e8-99d2-81f82e469325;
- Fri, 02 Oct 2020 15:41:47 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id d4c67228-f86e-46c4-a739-4b1b0520460d;
+ Fri, 02 Oct 2020 15:41:46 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id B62D0B26A;
+ by mx2.suse.de (Postfix) with ESMTP id 5D3F0B265;
  Fri,  2 Oct 2020 15:41:45 +0000 (UTC)
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=2E3y=DJ=suse.com=jgross@srs-us1.protection.inumbo.net>)
-	id 1kONBv-0006v4-Lm
-	for xen-devel@lists.xenproject.org; Fri, 02 Oct 2020 15:41:51 +0000
-X-Inumbo-ID: d6be06e3-4dd6-46e8-99d2-81f82e469325
+	id 1kONC1-0006vD-9j
+	for xen-devel@lists.xenproject.org; Fri, 02 Oct 2020 15:41:57 +0000
+X-Inumbo-ID: d4c67228-f86e-46c4-a739-4b1b0520460d
 Received: from mx2.suse.de (unknown [195.135.220.15])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id d6be06e3-4dd6-46e8-99d2-81f82e469325;
-	Fri, 02 Oct 2020 15:41:47 +0000 (UTC)
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id d4c67228-f86e-46c4-a739-4b1b0520460d;
+	Fri, 02 Oct 2020 15:41:46 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	t=1601653305;
@@ -71,272 +70,63 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=IVXyqd8+BJ9r6/80OoSoimGVYzfPs4ujpYo9jzSMuLs=;
-	b=lGKrfw3ovFXY/f0HnxIqVDT9WUvjzxqKl5mkUEO2DdqbN7vwbeFGwpigFPMLDAIq8iQHxh
-	2BgPOERbcaKx/yQJxlihiJIPA2K/9pohTxv68O+RxGDgtUBu8bnJ6DWOkbb59nQj8lUi1+
-	MMCN6fS6iw7rzh31iqkZ/2m7gjLkzAQ=
+	bh=gcLMBVGwJcyyJDDSc6Pbxmq7yh49BQo92DhFtrzVoNM=;
+	b=cXGOQcxRf2cFvKIIkdGEJ5gTvTQYqgbCwNcJpjgsizwJvcz+x7s2n3yA7QRwCR214ol4s5
+	g06OLukDAvd++ZJxbOoRL8KLOxK6gl0AzQaQJb7XPTs5pmp49iVC07/ifS/gu7+6doJxe3
+	Ry/QPwjF2Z2YjFj2uQmn8KcNSdl/Hrc=
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id B62D0B26A;
+	by mx2.suse.de (Postfix) with ESMTP id 5D3F0B265;
 	Fri,  2 Oct 2020 15:41:45 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH 5/5] tools/xenstore: drop creation of read-only socket in xenstored
-Date: Fri,  2 Oct 2020 17:41:41 +0200
-Message-Id: <20201002154141.11677-6-jgross@suse.com>
+Subject: [PATCH 2/5] tools/libs/store: ignore XS_OPEN_SOCKETONLY flag
+Date: Fri,  2 Oct 2020 17:41:38 +0200
+Message-Id: <20201002154141.11677-3-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20201002154141.11677-1-jgross@suse.com>
 References: <20201002154141.11677-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-With xs_daemon_open_readonly() now no longer using the read-only socket
-the creation of that socket can be dropped.
+When opening the connection to Xenstore via xs_open() it makes no
+sense to limit the connection to the socket based one. So just ignore
+the XS_OPEN_SOCKETONLY flag.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- tools/xenstore/xenstored_core.c   | 55 +++++++------------------------
- tools/xenstore/xenstored_core.h   |  3 --
- tools/xenstore/xenstored_domain.c |  4 +--
- tools/xenstore/xs_lib.c           |  8 +----
- 4 files changed, 14 insertions(+), 56 deletions(-)
+ tools/libs/store/include/xenstore.h | 2 --
+ tools/libs/store/xs.c               | 2 +-
+ 2 files changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
-index 9700772d40..b4be374d3f 100644
---- a/tools/xenstore/xenstored_core.c
-+++ b/tools/xenstore/xenstored_core.c
-@@ -71,7 +71,6 @@ static unsigned int current_array_size;
- static unsigned int nr_fds;
+diff --git a/tools/libs/store/include/xenstore.h b/tools/libs/store/include/xenstore.h
+index 25b31881c8..cbc7206a0f 100644
+--- a/tools/libs/store/include/xenstore.h
++++ b/tools/libs/store/include/xenstore.h
+@@ -66,8 +66,6 @@ typedef uint32_t xs_transaction_t;
+  * * Connections made with xs_open(0) (which might be shared page or
+  *   socket based) are only guaranteed to work in the parent after
+  *   fork.
+- * * Connections made with xs_open(XS_OPEN_SOCKETONLY) will be usable
+- *   in either the parent or the child after fork, but not both.
+  * * xs_daemon_open*() and xs_domain_open() are deprecated synonyms
+  *   for xs_open(0).
+  * * XS_OPEN_READONLY has no bearing on any of this.
+diff --git a/tools/libs/store/xs.c b/tools/libs/store/xs.c
+index aa1d24b8b9..320734416f 100644
+--- a/tools/libs/store/xs.c
++++ b/tools/libs/store/xs.c
+@@ -319,7 +319,7 @@ struct xs_handle *xs_open(unsigned long flags)
+ 	else
+ 		xsh = get_handle(xs_daemon_socket());
  
- static int sock = -1;
--static int ro_sock = -1;
+-	if (!xsh && !(flags & XS_OPEN_SOCKETONLY))
++	if (!xsh)
+ 		xsh = get_handle(xs_domain_dev());
  
- static bool verbose = false;
- LIST_HEAD(connections);
-@@ -311,8 +310,7 @@ fail:
- 	return -1;
- }
- 
--static void initialize_fds(int *p_sock_pollfd_idx, int *p_ro_sock_pollfd_idx,
--			   int *ptimeout)
-+static void initialize_fds(int *p_sock_pollfd_idx, int *ptimeout)
- {
- 	struct connection *conn;
- 	struct wrl_timestampt now;
-@@ -325,8 +323,6 @@ static void initialize_fds(int *p_sock_pollfd_idx, int *p_ro_sock_pollfd_idx,
- 
- 	if (sock != -1)
- 		*p_sock_pollfd_idx = set_fd(sock, POLLIN|POLLPRI);
--	if (ro_sock != -1)
--		*p_ro_sock_pollfd_idx = set_fd(ro_sock, POLLIN|POLLPRI);
- 	if (reopen_log_pipe[0] != -1)
- 		reopen_log_pipe0_pollfd_idx =
- 			set_fd(reopen_log_pipe[0], POLLIN|POLLPRI);
-@@ -472,9 +468,6 @@ static enum xs_perm_type perm_for_conn(struct connection *conn,
- 	unsigned int i;
- 	enum xs_perm_type mask = XS_PERM_READ|XS_PERM_WRITE|XS_PERM_OWNER;
- 
--	if (!conn->can_write)
--		mask &= ~XS_PERM_WRITE;
--
- 	/* Owners and tools get it all... */
- 	if (!domain_is_unprivileged(conn) || perms[0].id == conn->id
-                 || (conn->target && perms[0].id == conn->target->id))
-@@ -1422,7 +1415,6 @@ struct connection *new_connection(connwritefn_t *write, connreadfn_t *read)
- 	new->pollfd_idx = -1;
- 	new->write = write;
- 	new->read = read;
--	new->can_write = true;
- 	new->transaction_started = 0;
- 	INIT_LIST_HEAD(&new->out_list);
- 	INIT_LIST_HEAD(&new->watches);
-@@ -1435,7 +1427,7 @@ struct connection *new_connection(connwritefn_t *write, connreadfn_t *read)
- }
- 
- #ifdef NO_SOCKETS
--static void accept_connection(int sock, bool canwrite)
-+static void accept_connection(int sock)
- {
- }
- #else
-@@ -1477,7 +1469,7 @@ static int readfd(struct connection *conn, void *data, unsigned int len)
- 	return rc;
- }
- 
--static void accept_connection(int sock, bool canwrite)
-+static void accept_connection(int sock)
- {
- 	int fd;
- 	struct connection *conn;
-@@ -1487,10 +1479,9 @@ static void accept_connection(int sock, bool canwrite)
- 		return;
- 
- 	conn = new_connection(writefd, readfd);
--	if (conn) {
-+	if (conn)
- 		conn->fd = fd;
--		conn->can_write = canwrite;
--	} else
-+	else
- 		close(fd);
- }
- #endif
-@@ -1794,28 +1785,21 @@ static void destroy_fds(void)
- {
- 	if (sock >= 0)
- 		close(sock);
--	if (ro_sock >= 0)
--		close(ro_sock);
- }
- 
- static void init_sockets(void)
- {
- 	struct sockaddr_un addr;
- 	const char *soc_str = xs_daemon_socket();
--	const char *soc_str_ro = xs_daemon_socket_ro();
- 
- 	/* Create sockets for them to listen to. */
- 	atexit(destroy_fds);
- 	sock = socket(PF_UNIX, SOCK_STREAM, 0);
- 	if (sock < 0)
- 		barf_perror("Could not create socket");
--	ro_sock = socket(PF_UNIX, SOCK_STREAM, 0);
--	if (ro_sock < 0)
--		barf_perror("Could not create socket");
- 
- 	/* FIXME: Be more sophisticated, don't mug running daemon. */
- 	unlink(soc_str);
--	unlink(soc_str_ro);
- 
- 	addr.sun_family = AF_UNIX;
- 
-@@ -1825,17 +1809,10 @@ static void init_sockets(void)
- 	if (bind(sock, (struct sockaddr *)&addr, sizeof(addr)) != 0)
- 		barf_perror("Could not bind socket to %s", soc_str);
- 
--	if(strlen(soc_str_ro) >= sizeof(addr.sun_path))
--		barf_perror("socket string '%s' too long", soc_str_ro);
--	strcpy(addr.sun_path, soc_str_ro);
--	if (bind(ro_sock, (struct sockaddr *)&addr, sizeof(addr)) != 0)
--		barf_perror("Could not bind socket to %s", soc_str_ro);
--
--	if (chmod(soc_str, 0600) != 0
--	    || chmod(soc_str_ro, 0660) != 0)
-+	if (chmod(soc_str, 0600) != 0)
- 		barf_perror("Could not chmod sockets");
- 
--	if (listen(sock, 1) != 0 || listen(ro_sock, 1) != 0)
-+	if (listen(sock, 1) != 0)
- 		barf_perror("Could not listen on sockets");
- }
- #endif
-@@ -1893,7 +1870,7 @@ int priv_domid = 0;
- int main(int argc, char *argv[])
- {
- 	int opt;
--	int sock_pollfd_idx = -1, ro_sock_pollfd_idx = -1;
-+	int sock_pollfd_idx = -1;
- 	bool dofork = true;
- 	bool outputpid = false;
- 	bool no_domain_init = false;
-@@ -2010,7 +1987,7 @@ int main(int argc, char *argv[])
- 		tracefile = talloc_strdup(NULL, tracefile);
- 
- 	/* Get ready to listen to the tools. */
--	initialize_fds(&sock_pollfd_idx, &ro_sock_pollfd_idx, &timeout);
-+	initialize_fds(&sock_pollfd_idx, &timeout);
- 
- 	/* Tell the kernel we're up and running. */
- 	xenbus_notify_running();
-@@ -2051,21 +2028,11 @@ int main(int argc, char *argv[])
- 				barf_perror("sock poll failed");
- 				break;
- 			} else if (fds[sock_pollfd_idx].revents & POLLIN) {
--				accept_connection(sock, true);
-+				accept_connection(sock);
- 				sock_pollfd_idx = -1;
- 			}
- 		}
- 
--		if (ro_sock_pollfd_idx != -1) {
--			if (fds[ro_sock_pollfd_idx].revents & ~POLLIN) {
--				barf_perror("ro sock poll failed");
--				break;
--			} else if (fds[ro_sock_pollfd_idx].revents & POLLIN) {
--				accept_connection(ro_sock, false);
--				ro_sock_pollfd_idx = -1;
--			}
--		}
--
- 		if (xce_pollfd_idx != -1) {
- 			if (fds[xce_pollfd_idx].revents & ~POLLIN) {
- 				barf_perror("xce_handle poll failed");
-@@ -2128,7 +2095,7 @@ int main(int argc, char *argv[])
- 			}
- 		}
- 
--		initialize_fds(&sock_pollfd_idx, &ro_sock_pollfd_idx, &timeout);
-+		initialize_fds(&sock_pollfd_idx, &timeout);
- 	}
- }
- 
-diff --git a/tools/xenstore/xenstored_core.h b/tools/xenstore/xenstored_core.h
-index c4c32bc88f..1df6ad94ab 100644
---- a/tools/xenstore/xenstored_core.h
-+++ b/tools/xenstore/xenstored_core.h
-@@ -77,9 +77,6 @@ struct connection
- 	/* Who am I? 0 for socket connections. */
- 	unsigned int id;
- 
--	/* Is this a read-only connection? */
--	bool can_write;
--
- 	/* Buffered incoming data. */
- 	struct buffered_data *in;
- 
-diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstored_domain.c
-index 0d5495745b..a2f144f6dd 100644
---- a/tools/xenstore/xenstored_domain.c
-+++ b/tools/xenstore/xenstored_domain.c
-@@ -372,7 +372,7 @@ int do_introduce(struct connection *conn, struct buffered_data *in)
- 	if (get_strings(in, vec, ARRAY_SIZE(vec)) < ARRAY_SIZE(vec))
- 		return EINVAL;
- 
--	if (domain_is_unprivileged(conn) || !conn->can_write)
-+	if (domain_is_unprivileged(conn))
- 		return EACCES;
- 
- 	domid = atoi(vec[0]);
-@@ -438,7 +438,7 @@ int do_set_target(struct connection *conn, struct buffered_data *in)
- 	if (get_strings(in, vec, ARRAY_SIZE(vec)) < ARRAY_SIZE(vec))
- 		return EINVAL;
- 
--	if (domain_is_unprivileged(conn) || !conn->can_write)
-+	if (domain_is_unprivileged(conn))
- 		return EACCES;
- 
- 	domid = atoi(vec[0]);
-diff --git a/tools/xenstore/xs_lib.c b/tools/xenstore/xs_lib.c
-index 3e43f8809d..9f1dc6d559 100644
---- a/tools/xenstore/xs_lib.c
-+++ b/tools/xenstore/xs_lib.c
-@@ -63,13 +63,7 @@ const char *xs_daemon_socket(void)
- 
- const char *xs_daemon_socket_ro(void)
- {
--	static char buf[PATH_MAX];
--	const char *s = xs_daemon_path();
--	if (s == NULL)
--		return NULL;
--	if (snprintf(buf, sizeof(buf), "%s_ro", s) >= PATH_MAX)
--		return NULL;
--	return buf;
-+	return xs_daemon_path();
- }
- 
- const char *xs_domain_dev(void)
+ 	if (xsh && (flags & XS_UNWATCH_FILTER))
 -- 
 2.26.2
 
