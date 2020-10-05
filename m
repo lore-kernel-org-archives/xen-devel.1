@@ -2,29 +2,28 @@ Return-Path: <SRS0=LTrL=DM=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-10.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SIGNED_OFF_BY,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B59DC4363D
-	for <xen-devel@archiver.kernel.org>; Mon,  5 Oct 2020 11:08:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DF893C4727D
+	for <xen-devel@archiver.kernel.org>; Mon,  5 Oct 2020 12:16:30 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BB87C20774
-	for <xen-devel@archiver.kernel.org>; Mon,  5 Oct 2020 11:08:26 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 778162078D
+	for <xen-devel@archiver.kernel.org>; Mon,  5 Oct 2020 12:16:30 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="Ij8yW9FG"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BB87C20774
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="FaCqxhCK"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 778162078D
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.2972.8538 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.2991.8570 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kPOLg-0000No-4b; Mon, 05 Oct 2020 11:08:08 +0000
+	id 1kPPPV-0006hK-CV; Mon, 05 Oct 2020 12:16:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 2972.8538; Mon, 05 Oct 2020 11:08:08 +0000
+Received: by outflank-mailman (output) from mailman id 2991.8570; Mon, 05 Oct 2020 12:16:09 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,171 +38,188 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kPOLg-0000Nh-10; Mon, 05 Oct 2020 11:08:08 +0000
-Received: by outflank-mailman (input) for mailman id 2972;
- Mon, 05 Oct 2020 11:08:07 +0000
+	id 1kPPPV-0006hD-8j; Mon, 05 Oct 2020 12:16:09 +0000
+Received: by outflank-mailman (input) for mailman id 2991;
+ Mon, 05 Oct 2020 12:16:07 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=sJhL=DM=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1kPOLf-0000Nc-69
- for xen-devel@lists.xenproject.org; Mon, 05 Oct 2020 11:08:07 +0000
-Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 3fb8e2cf-4f88-4555-a609-829ab9b14a00;
- Mon, 05 Oct 2020 11:08:04 +0000 (UTC)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=c+yv=DM=redhat.com=david@srs-us1.protection.inumbo.net>)
+ id 1kPPPT-0006gw-SM
+ for xen-devel@lists.xenproject.org; Mon, 05 Oct 2020 12:16:07 +0000
+Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id 39a9e146-f421-44ff-b35f-6cb9296d79f3;
+ Mon, 05 Oct 2020 12:16:05 +0000 (UTC)
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-389-Y1IAhXxZNuKk3UjduWcrDg-1; Mon, 05 Oct 2020 08:16:01 -0400
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id B695D107ACF5;
+ Mon,  5 Oct 2020 12:15:58 +0000 (UTC)
+Received: from t480s.redhat.com (ovpn-114-222.ams2.redhat.com [10.36.114.222])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 0F7A01A913;
+ Mon,  5 Oct 2020 12:15:51 +0000 (UTC)
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=sJhL=DM=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
-	id 1kPOLf-0000Nc-69
-	for xen-devel@lists.xenproject.org; Mon, 05 Oct 2020 11:08:07 +0000
-X-Inumbo-ID: 3fb8e2cf-4f88-4555-a609-829ab9b14a00
-Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 3fb8e2cf-4f88-4555-a609-829ab9b14a00;
-	Mon, 05 Oct 2020 11:08:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1601896085;
-  h=subject:to:cc:references:from:message-id:date:
-   mime-version:in-reply-to:content-transfer-encoding;
-  bh=2oqGIF+RPbEV9LC+XbTk9RHebwJC93BbN0vGQTsrcug=;
-  b=Ij8yW9FGVHNuzj3uI3DlGEZ9Zn7sCh5i9NuEoza9ZenvSRYm7+5Vn01b
-   /1sayXeYnIFQXuE4VOTtxvw2jZc5lLp2XOWnA5MNN4YekOV2hDf8DgdQS
-   MvQV74EbhxFbekEnnnlGEUYDeqK8SwYSw7I0ap+bgI7rmGtYtb02ZiN5k
-   c=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: tM0DIien0snYoU20+2830JM6Bq02tA1Tah1giYqW/Wv9DcdcaYz+GbTMcy1wruIMq1REzzwVh6
- x6vfabkEzy5IPr/O8GUfnQBsIcwAHoEWooq2rta3eG2SX9zaUd6Dr3XvR1RYn0gtWJBu9n19O3
- it7spY0KtAlByKC1SpJDjPeF1udresv5M2069oHWPhCIdDxja7XbTw/rJZqDTkosTbOXpniCAW
- b5LpmAhdAxJzEXVmGVeyHIqcJEd0CBRuHefWSeGbJFd4axPHcOHP7BrbUDyxEnYluv4bxiWA9/
- zHs=
-X-SBRS: None
-X-MesageID: 28253952
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.77,338,1596513600"; 
-   d="scan'208";a="28253952"
-Subject: Re: [PATCH 7/8] x86/hvm: Drop restore boolean from
- hvm_cr4_guest_valid_bits()
-To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-CC: Xen-devel <xen-devel@lists.xenproject.org>, Jan Beulich
-	<JBeulich@suse.com>, Wei Liu <wl@xen.org>, Jun Nakajima
-	<jun.nakajima@intel.com>, Kevin Tian <kevin.tian@intel.com>
-References: <20200930134248.4918-1-andrew.cooper3@citrix.com>
- <20200930134248.4918-8-andrew.cooper3@citrix.com>
- <20201001110003.GE19254@Air-de-Roger>
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Message-ID: <9c502782-0484-7939-0c97-fe12a94ea2a7@citrix.com>
-Date: Mon, 5 Oct 2020 12:07:16 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+	(envelope-from <SRS0=c+yv=DM=redhat.com=david@srs-us1.protection.inumbo.net>)
+	id 1kPPPT-0006gw-SM
+	for xen-devel@lists.xenproject.org; Mon, 05 Oct 2020 12:16:07 +0000
+X-Inumbo-ID: 39a9e146-f421-44ff-b35f-6cb9296d79f3
+Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+	id 39a9e146-f421-44ff-b35f-6cb9296d79f3;
+	Mon, 05 Oct 2020 12:16:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1601900165;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=3jnWAK3O4yILdw4ZP0mQyIXKP0/Hh52uEJ+0mn35WIQ=;
+	b=FaCqxhCKW1Gu1JSOMoatETAbCAz+HmGzA5k6KPvnhCKRg3jgAPZSIdQLhzddxm61xQPW9w
+	r/u/Z3Ie8zGqhH78rKHcy8VB4PSntlLaGMpMFeRvOe0RbygCJ1X5k7pw+dTP7q+USi2syz
+	Z9m328UQPpa+AiKh2PzZAY1rDVKs04Y=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-389-Y1IAhXxZNuKk3UjduWcrDg-1; Mon, 05 Oct 2020 08:16:01 -0400
+X-MC-Unique: Y1IAhXxZNuKk3UjduWcrDg-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com [10.5.11.23])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id B695D107ACF5;
+	Mon,  5 Oct 2020 12:15:58 +0000 (UTC)
+Received: from t480s.redhat.com (ovpn-114-222.ams2.redhat.com [10.36.114.222])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 0F7A01A913;
+	Mon,  5 Oct 2020 12:15:51 +0000 (UTC)
+From: David Hildenbrand <david@redhat.com>
+To: linux-kernel@vger.kernel.org
+Cc: linux-mm@kvack.org,
+	linux-hyperv@vger.kernel.org,
+	xen-devel@lists.xenproject.org,
+	linux-acpi@vger.kernel.org,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Matthew Wilcox <willy@infradead.org>,
+	David Hildenbrand <david@redhat.com>,
+	Alexander Duyck <alexander.h.duyck@linux.intel.com>,
+	Vlastimil Babka <vbabka@suse.cz>,
+	Oscar Salvador <osalvador@suse.de>,
+	Wei Yang <richard.weiyang@linux.alibaba.com>,
+	Pankaj Gupta <pankaj.gupta.linux@gmail.com>,
+	Michal Hocko <mhocko@suse.com>,
+	Mel Gorman <mgorman@techsingularity.net>,
+	Michal Hocko <mhocko@kernel.org>,
+	Dave Hansen <dave.hansen@intel.com>,
+	Mike Rapoport <rppt@kernel.org>
+Subject: [PATCH v2 1/5] mm/page_alloc: convert "report" flag of __free_one_page() to a proper flag
+Date: Mon,  5 Oct 2020 14:15:30 +0200
+Message-Id: <20201005121534.15649-2-david@redhat.com>
+In-Reply-To: <20201005121534.15649-1-david@redhat.com>
+References: <20201005121534.15649-1-david@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20201001110003.GE19254@Air-de-Roger>
-Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Content-Language: en-GB
-X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
- FTLPEX02CL05.citrite.net (10.13.108.178)
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
 
-On 01/10/2020 12:00, Roger Pau Monné wrote:
-> On Wed, Sep 30, 2020 at 02:42:47PM +0100, Andrew Cooper wrote:
->> Previously, migration was reordered so the CPUID data was available before
->> register state.  nestedhvm_enabled() has recently been made accurate for the
->> entire lifetime of the domain.
->>
->> Therefore, we can drop the bodge in hvm_cr4_guest_valid_bits() which existed
->> previously to tolerate a guests' CR4 being set/restored before
->> HVM_PARAM_NESTEDHVM.
->>
->> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-> Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+Let's prepare for additional flags and avoid long parameter lists of bools.
+Follow-up patches will also make use of the flags in __free_pages_ok().
 
-Thanks,
+Reviewed-by: Alexander Duyck <alexander.h.duyck@linux.intel.com>
+Reviewed-by: Vlastimil Babka <vbabka@suse.cz>
+Reviewed-by: Oscar Salvador <osalvador@suse.de>
+Reviewed-by: Wei Yang <richard.weiyang@linux.alibaba.com>
+Reviewed-by: Pankaj Gupta <pankaj.gupta.linux@gmail.com>
+Acked-by: Michal Hocko <mhocko@suse.com>
+Cc: Andrew Morton <akpm@linux-foundation.org>
+Cc: Alexander Duyck <alexander.h.duyck@linux.intel.com>
+Cc: Mel Gorman <mgorman@techsingularity.net>
+Cc: Michal Hocko <mhocko@kernel.org>
+Cc: Dave Hansen <dave.hansen@intel.com>
+Cc: Vlastimil Babka <vbabka@suse.cz>
+Cc: Wei Yang <richard.weiyang@linux.alibaba.com>
+Cc: Oscar Salvador <osalvador@suse.de>
+Cc: Mike Rapoport <rppt@kernel.org>
+Signed-off-by: David Hildenbrand <david@redhat.com>
+---
+ mm/page_alloc.c | 27 ++++++++++++++++++++++-----
+ 1 file changed, 22 insertions(+), 5 deletions(-)
 
->
-> Thanks, just one nit below.
->
->> ---
->> CC: Jan Beulich <JBeulich@suse.com>
->> CC: Roger Pau Monné <roger.pau@citrix.com>
->> CC: Wei Liu <wl@xen.org>
->> CC: Jun Nakajima <jun.nakajima@intel.com>
->> CC: Kevin Tian <kevin.tian@intel.com>
->> ---
->>  xen/arch/x86/hvm/domain.c       | 2 +-
->>  xen/arch/x86/hvm/hvm.c          | 8 ++++----
->>  xen/arch/x86/hvm/svm/svmdebug.c | 6 ++++--
->>  xen/arch/x86/hvm/vmx/vmx.c      | 2 +-
->>  xen/arch/x86/hvm/vmx/vvmx.c     | 2 +-
->>  xen/include/asm-x86/hvm/hvm.h   | 2 +-
->>  6 files changed, 12 insertions(+), 10 deletions(-)
->>
->> diff --git a/xen/arch/x86/hvm/domain.c b/xen/arch/x86/hvm/domain.c
->> index 8e3375265c..0ce132b308 100644
->> --- a/xen/arch/x86/hvm/domain.c
->> +++ b/xen/arch/x86/hvm/domain.c
->> @@ -275,7 +275,7 @@ int arch_set_info_hvm_guest(struct vcpu *v, const vcpu_hvm_context_t *ctx)
->>      if ( v->arch.hvm.guest_efer & EFER_LME )
->>          v->arch.hvm.guest_efer |= EFER_LMA;
->>  
->> -    if ( v->arch.hvm.guest_cr[4] & ~hvm_cr4_guest_valid_bits(d, false) )
->> +    if ( v->arch.hvm.guest_cr[4] & ~hvm_cr4_guest_valid_bits(d) )
->>      {
->>          gprintk(XENLOG_ERR, "Bad CR4 value: %#016lx\n",
->>                  v->arch.hvm.guest_cr[4]);
->> diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
->> index 101a739952..54e32e4fe8 100644
->> --- a/xen/arch/x86/hvm/hvm.c
->> +++ b/xen/arch/x86/hvm/hvm.c
->> @@ -972,14 +972,14 @@ const char *hvm_efer_valid(const struct vcpu *v, uint64_t value,
->>          X86_CR0_CD | X86_CR0_PG)))
->>  
->>  /* These bits in CR4 can be set by the guest. */
->> -unsigned long hvm_cr4_guest_valid_bits(const struct domain *d, bool restore)
->> +unsigned long hvm_cr4_guest_valid_bits(const struct domain *d)
->>  {
->>      const struct cpuid_policy *p = d->arch.cpuid;
->>      bool mce, vmxe;
->>  
->>      /* Logic broken out simply to aid readability below. */
->>      mce  = p->basic.mce || p->basic.mca;
->> -    vmxe = p->basic.vmx && (restore || nestedhvm_enabled(d));
->> +    vmxe = p->basic.vmx && nestedhvm_enabled(d);
->>  
->>      return ((p->basic.vme     ? X86_CR4_VME | X86_CR4_PVI : 0) |
->>              (p->basic.tsc     ? X86_CR4_TSD               : 0) |
->> @@ -1033,7 +1033,7 @@ static int hvm_load_cpu_ctxt(struct domain *d, hvm_domain_context_t *h)
->>          return -EINVAL;
->>      }
->>  
->> -    if ( ctxt.cr4 & ~hvm_cr4_guest_valid_bits(d, true) )
->> +    if ( ctxt.cr4 & ~hvm_cr4_guest_valid_bits(d) )
->>      {
->>          printk(XENLOG_G_ERR "HVM%d restore: bad CR4 %#" PRIx64 "\n",
->>                 d->domain_id, ctxt.cr4);
->> @@ -2425,7 +2425,7 @@ int hvm_set_cr4(unsigned long value, bool may_defer)
->>      struct vcpu *v = current;
->>      unsigned long old_cr;
->>  
->> -    if ( value & ~hvm_cr4_guest_valid_bits(v->domain, false) )
->> +    if ( value & ~hvm_cr4_guest_valid_bits(v->domain) )
->>      {
->>          HVM_DBG_LOG(DBG_LEVEL_1,
->>                      "Guest attempts to set reserved bit in CR4: %lx",
->> diff --git a/xen/arch/x86/hvm/svm/svmdebug.c b/xen/arch/x86/hvm/svm/svmdebug.c
->> index ba26b6a80b..f450391df4 100644
->> --- a/xen/arch/x86/hvm/svm/svmdebug.c
->> +++ b/xen/arch/x86/hvm/svm/svmdebug.c
->> @@ -106,6 +106,7 @@ bool svm_vmcb_isvalid(const char *from, const struct vmcb_struct *vmcb,
->>      unsigned long cr0 = vmcb_get_cr0(vmcb);
->>      unsigned long cr3 = vmcb_get_cr3(vmcb);
->>      unsigned long cr4 = vmcb_get_cr4(vmcb);
->> +    unsigned long valid;
-> Could you init valid here at definition time? Also cr4_valid might be
-> a better name since the sacope of the variable is quite wide.
+diff --git a/mm/page_alloc.c b/mm/page_alloc.c
+index 7012d67a302d..2bf235b1953f 100644
+--- a/mm/page_alloc.c
++++ b/mm/page_alloc.c
+@@ -78,6 +78,22 @@
+ #include "shuffle.h"
+ #include "page_reporting.h"
+ 
++/* Free Page Internal flags: for internal, non-pcp variants of free_pages(). */
++typedef int __bitwise fpi_t;
++
++/* No special request */
++#define FPI_NONE		((__force fpi_t)0)
++
++/*
++ * Skip free page reporting notification for the (possibly merged) page.
++ * This does not hinder free page reporting from grabbing the page,
++ * reporting it and marking it "reported" -  it only skips notifying
++ * the free page reporting infrastructure about a newly freed page. For
++ * example, used when temporarily pulling a page from a freelist and
++ * putting it back unmodified.
++ */
++#define FPI_SKIP_REPORT_NOTIFY	((__force fpi_t)BIT(0))
++
+ /* prevent >1 _updater_ of zone percpu pageset ->high and ->batch fields */
+ static DEFINE_MUTEX(pcp_batch_high_lock);
+ #define MIN_PERCPU_PAGELIST_FRACTION	(8)
+@@ -952,7 +968,7 @@ buddy_merge_likely(unsigned long pfn, unsigned long buddy_pfn,
+ static inline void __free_one_page(struct page *page,
+ 		unsigned long pfn,
+ 		struct zone *zone, unsigned int order,
+-		int migratetype, bool report)
++		int migratetype, fpi_t fpi_flags)
+ {
+ 	struct capture_control *capc = task_capc(zone);
+ 	unsigned long buddy_pfn;
+@@ -1039,7 +1055,7 @@ static inline void __free_one_page(struct page *page,
+ 		add_to_free_list(page, zone, order, migratetype);
+ 
+ 	/* Notify page reporting subsystem of freed page */
+-	if (report)
++	if (!(fpi_flags & FPI_SKIP_REPORT_NOTIFY))
+ 		page_reporting_notify_free(order);
+ }
+ 
+@@ -1380,7 +1396,7 @@ static void free_pcppages_bulk(struct zone *zone, int count,
+ 		if (unlikely(isolated_pageblocks))
+ 			mt = get_pageblock_migratetype(page);
+ 
+-		__free_one_page(page, page_to_pfn(page), zone, 0, mt, true);
++		__free_one_page(page, page_to_pfn(page), zone, 0, mt, FPI_NONE);
+ 		trace_mm_page_pcpu_drain(page, 0, mt);
+ 	}
+ 	spin_unlock(&zone->lock);
+@@ -1396,7 +1412,7 @@ static void free_one_page(struct zone *zone,
+ 		is_migrate_isolate(migratetype))) {
+ 		migratetype = get_pfnblock_migratetype(page, pfn);
+ 	}
+-	__free_one_page(page, pfn, zone, order, migratetype, true);
++	__free_one_page(page, pfn, zone, order, migratetype, FPI_NONE);
+ 	spin_unlock(&zone->lock);
+ }
+ 
+@@ -3289,7 +3305,8 @@ void __putback_isolated_page(struct page *page, unsigned int order, int mt)
+ 	lockdep_assert_held(&zone->lock);
+ 
+ 	/* Return isolated page to tail of freelist. */
+-	__free_one_page(page, page_to_pfn(page), zone, order, mt, false);
++	__free_one_page(page, page_to_pfn(page), zone, order, mt,
++			FPI_SKIP_REPORT_NOTIFY);
+ }
+ 
+ /*
+-- 
+2.26.2
 
-I have some further cleanup in mind, which is why I did it like this.
-
-~Andrew
 
