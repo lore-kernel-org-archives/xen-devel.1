@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E5309C4363A
-	for <xen-devel@archiver.kernel.org>; Mon,  5 Oct 2020 09:49:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0FC28C4363A
+	for <xen-devel@archiver.kernel.org>; Mon,  5 Oct 2020 09:49:44 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8F4FF20776
-	for <xen-devel@archiver.kernel.org>; Mon,  5 Oct 2020 09:49:39 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id B438920776
+	for <xen-devel@archiver.kernel.org>; Mon,  5 Oct 2020 09:49:43 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="DI9ymTP2"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8F4FF20776
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="zeEgrm+x"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B438920776
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.2949.8460 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.2950.8472 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kPN7U-0000ld-JA; Mon, 05 Oct 2020 09:49:24 +0000
+	id 1kPN7Z-0000rq-T4; Mon, 05 Oct 2020 09:49:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 2949.8460; Mon, 05 Oct 2020 09:49:24 +0000
+Received: by outflank-mailman (output) from mailman id 2950.8472; Mon, 05 Oct 2020 09:49:29 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,70 +38,64 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kPN7U-0000lS-Fn; Mon, 05 Oct 2020 09:49:24 +0000
-Received: by outflank-mailman (input) for mailman id 2949;
- Mon, 05 Oct 2020 09:49:23 +0000
+	id 1kPN7Z-0000rh-PE; Mon, 05 Oct 2020 09:49:29 +0000
+Received: by outflank-mailman (input) for mailman id 2950;
+ Mon, 05 Oct 2020 09:49:28 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=GPX8=DM=xen.org=paul@srs-us1.protection.inumbo.net>)
- id 1kPN7T-0000a7-9N
- for xen-devel@lists.xenproject.org; Mon, 05 Oct 2020 09:49:23 +0000
+ id 1kPN7Y-0000a7-9c
+ for xen-devel@lists.xenproject.org; Mon, 05 Oct 2020 09:49:28 +0000
 Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 66d5992c-4a93-4e63-a402-3dcd90abad74;
- Mon, 05 Oct 2020 09:49:14 +0000 (UTC)
+ id ccbdfe1a-3095-42d9-b8c2-8552cdbb2387;
+ Mon, 05 Oct 2020 09:49:15 +0000 (UTC)
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kPN7I-00018e-Ki; Mon, 05 Oct 2020 09:49:12 +0000
+ id 1kPN7K-00018v-Ha; Mon, 05 Oct 2020 09:49:14 +0000
 Received: from host109-146-187-185.range109-146.btcentralplus.com
  ([109.146.187.185] helo=u2f063a87eabd5f.home)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kPN7I-0007gW-C8; Mon, 05 Oct 2020 09:49:12 +0000
+ id 1kPN7K-0007gW-92; Mon, 05 Oct 2020 09:49:14 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=GPX8=DM=xen.org=paul@srs-us1.protection.inumbo.net>)
-	id 1kPN7T-0000a7-9N
-	for xen-devel@lists.xenproject.org; Mon, 05 Oct 2020 09:49:23 +0000
-X-Inumbo-ID: 66d5992c-4a93-4e63-a402-3dcd90abad74
+	id 1kPN7Y-0000a7-9c
+	for xen-devel@lists.xenproject.org; Mon, 05 Oct 2020 09:49:28 +0000
+X-Inumbo-ID: ccbdfe1a-3095-42d9-b8c2-8552cdbb2387
 Received: from mail.xenproject.org (unknown [104.130.215.37])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 66d5992c-4a93-4e63-a402-3dcd90abad74;
-	Mon, 05 Oct 2020 09:49:14 +0000 (UTC)
+	id ccbdfe1a-3095-42d9-b8c2-8552cdbb2387;
+	Mon, 05 Oct 2020 09:49:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=/aaR7886EUtZE6QjtNx8lerjhqgir9MSpy1XgMZF4CQ=; b=DI9ymTP2D65+vmiOYBjbM//YKo
-	UEJWIwtLaTCuNuH8oEgzyJs2GxIops+nzfjC+uJUuZMZXYdP6tlLXMss/APAlfHH5UukDZkx9Odyt
-	W7aLmasRZAfakrHvBpaHu1lwvzZGq3x3qRe+XIPgerBnpJ1KZ5BJSRExOy7wiq6r4Hqw=;
+	bh=786CYGhqhj0G7twgI0F8WxticlI/nilf3doZC+/fM1I=; b=zeEgrm+xJUjmFaVxTi0jW2I0O7
+	rxetauyJtbYfDQWFYKaA+/TGZmY4aSvvCVKV91LiD42COv9zL3Ithov3ykjT/LZitIF8OSPYbAgt0
+	RvkupNDYE7bYXUT34TPwrxMf2Xooec3tcP+wqS0cALKda2CDCeDOX3H6aYIAUV4ieMSE=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
 	by mail.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1kPN7I-00018e-Ki; Mon, 05 Oct 2020 09:49:12 +0000
+	id 1kPN7K-00018v-Ha; Mon, 05 Oct 2020 09:49:14 +0000
 Received: from host109-146-187-185.range109-146.btcentralplus.com ([109.146.187.185] helo=u2f063a87eabd5f.home)
 	by xenbits.xenproject.org with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
 	(Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1kPN7I-0007gW-C8; Mon, 05 Oct 2020 09:49:12 +0000
+	id 1kPN7K-0007gW-92; Mon, 05 Oct 2020 09:49:14 +0000
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: Paul Durrant <pdurrant@amazon.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 3/5] libxl / iommu / domctl: introduce XEN_DOMCTL_IOMMU_SET_ALLOCATION...
-Date: Mon,  5 Oct 2020 10:49:03 +0100
-Message-Id: <20201005094905.2929-4-paul@xen.org>
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH 5/5] x86 / iommu: create a dedicated pool of page-table pages
+Date: Mon,  5 Oct 2020 10:49:05 +0100
+Message-Id: <20201005094905.2929-6-paul@xen.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20201005094905.2929-1-paul@xen.org>
 References: <20201005094905.2929-1-paul@xen.org>
@@ -111,198 +105,254 @@ Content-Transfer-Encoding: 8bit
 
 From: Paul Durrant <pdurrant@amazon.com>
 
-... sub-operation of XEN_DOMCTL_iommu_ctl.
+This patch, in a way analogous to HAP page allocation, creates a pool of
+pages for use as IOMMU page-tables when the size of that pool is configured
+by a call to iommu_set_allocation(). That call occurs when the tool-stack
+has calculates the size of the pool and issues the
+XEN_DOMCTL_IOMMU_SET_ALLOCATION sub-operation of the XEN_DOMCTL_iommu_ctl
+domctl. However, some IOMMU mappings must be set up during domain_create(),
+before the tool-stack has had a chance to make its calculation and issue the
+domctl. Hence an initial hard-coded pool size of 256 is set for domains
+not sharing EPT during the call to arch_iommu_domain_init().
 
-This patch adds a new sub-operation into the domctl. The code in iommu_ctl()
-is extended to call a new arch-specific iommu_set_allocation() function which
-will be called with the IOMMU page-table overhead (in 4k pages) in response
-to libxl issuing a new domctl via the xc_iommu_set_allocation() helper
-function.
-
-The helper function is only called in the x86 implementation of
-libxl__arch_domain_create() when the calculated 'iommu_memkb' value is
-non-zero. Hence the ARM implementation of iommu_set_allocation() simply
-returns -EOPNOTSUPP.
-
-NOTE: The implementation of the IOMMU page-table memory pool will be added in
-      a subsequent patch and so the x86 implementation of
-      iommu_set_allocation() currently does nothing other than return 0 (to
-      indicate success) thereby ensuring that the new call in
-      libxl__arch_domain_create() always succeeds.
+NOTE: No pool is configured for the hardware or quarantine domains. They
+      continue to allocate page-table pages on demand.
+      The prototype of iommu_free_pgtables() is change to void return as
+      it no longer needs to be re-startable.
 
 Signed-off-by: Paul Durrant <pdurrant@amazon.com>
 ---
-Cc: Ian Jackson <iwj@xenproject.org>
-Cc: Wei Liu <wl@xen.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: George Dunlap <george.dunlap@citrix.com>
 Cc: Jan Beulich <jbeulich@suse.com>
-Cc: Julien Grall <julien@xen.org>
-Cc: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Anthony PERARD <anthony.perard@citrix.com>
-Cc: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>
 Cc: "Roger Pau Monné" <roger.pau@citrix.com>
+Cc: Wei Liu <wl@xen.org>
 ---
- tools/libs/ctrl/include/xenctrl.h   |  5 +++++
- tools/libs/ctrl/xc_domain.c         | 16 ++++++++++++++++
- tools/libs/light/libxl_x86.c        | 10 ++++++++++
- xen/drivers/passthrough/iommu.c     |  8 ++++++++
- xen/drivers/passthrough/x86/iommu.c |  5 +++++
- xen/include/asm-arm/iommu.h         |  6 ++++++
- xen/include/asm-x86/iommu.h         |  2 ++
- xen/include/public/domctl.h         |  8 ++++++++
- 8 files changed, 60 insertions(+)
+ xen/arch/x86/domain.c               |   4 +-
+ xen/drivers/passthrough/x86/iommu.c | 129 ++++++++++++++++++++++++----
+ xen/include/asm-x86/iommu.h         |   5 +-
+ 3 files changed, 116 insertions(+), 22 deletions(-)
 
-diff --git a/tools/libs/ctrl/include/xenctrl.h b/tools/libs/ctrl/include/xenctrl.h
-index 3796425e1e..4d6c9d44bc 100644
---- a/tools/libs/ctrl/include/xenctrl.h
-+++ b/tools/libs/ctrl/include/xenctrl.h
-@@ -2650,6 +2650,11 @@ int xc_livepatch_replace(xc_interface *xch, char *name, uint32_t timeout, uint32
- int xc_domain_cacheflush(xc_interface *xch, uint32_t domid,
-                          xen_pfn_t start_pfn, xen_pfn_t nr_pfns);
+diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
+index 7e16d49bfd..101ef4aba5 100644
+--- a/xen/arch/x86/domain.c
++++ b/xen/arch/x86/domain.c
+@@ -2304,7 +2304,9 @@ int domain_relinquish_resources(struct domain *d)
  
-+/* IOMMU control operations */
-+
-+int xc_iommu_set_allocation(xc_interface *xch, uint32_t domid,
-+                            unsigned int nr_pages);
-+
- /* Compat shims */
- #include "xenctrl_compat.h"
+     PROGRESS(iommu_pagetables):
  
-diff --git a/tools/libs/ctrl/xc_domain.c b/tools/libs/ctrl/xc_domain.c
-index e7cea4a17d..0b20a8f2ee 100644
---- a/tools/libs/ctrl/xc_domain.c
-+++ b/tools/libs/ctrl/xc_domain.c
-@@ -2185,6 +2185,22 @@ int xc_domain_soft_reset(xc_interface *xch,
-     domctl.domain = domid;
-     return do_domctl(xch, &domctl);
- }
+-        ret = iommu_free_pgtables(d);
++        iommu_free_pgtables(d);
 +
-+int xc_iommu_set_allocation(xc_interface *xch, uint32_t domid,
-+                            unsigned int nr_pages)
-+{
-+    DECLARE_DOMCTL;
-+
-+    memset(&domctl, 0, sizeof(domctl));
-+
-+    domctl.cmd = XEN_DOMCTL_iommu_ctl;
-+    domctl.domain = domid;
-+    domctl.u.iommu_ctl.op = XEN_DOMCTL_IOMMU_SET_ALLOCATION;
-+    domctl.u.iommu_ctl.u.set_allocation.nr_pages = nr_pages;
-+
-+    return do_domctl(xch, &domctl);
-+}
-+
- /*
-  * Local variables:
-  * mode: C
-diff --git a/tools/libs/light/libxl_x86.c b/tools/libs/light/libxl_x86.c
-index 6ec6c27c83..9631974dd6 100644
---- a/tools/libs/light/libxl_x86.c
-+++ b/tools/libs/light/libxl_x86.c
-@@ -520,6 +520,16 @@ int libxl__arch_domain_create(libxl__gc *gc, libxl_domain_config *d_config,
-                           NULL, 0, &shadow, 0, NULL);
-     }
++        ret = iommu_set_allocation(d, 0);
+         if ( ret )
+             return ret;
  
-+    if (d_config->b_info.iommu_memkb) {
-+        unsigned int nr_pages = DIV_ROUNDUP(d_config->b_info.iommu_memkb, 4);
-+
-+        ret = xc_iommu_set_allocation(ctx->xch, domid, nr_pages);
-+        if (ret) {
-+            LOGED(ERROR, domid, "Failed to set IOMMU allocation");
-+            goto out;
-+        }
-+    }
-+
-     if (d_config->c_info.type == LIBXL_DOMAIN_TYPE_PV &&
-             libxl_defbool_val(d_config->b_info.u.pv.e820_host)) {
-         ret = libxl__e820_alloc(gc, domid, d_config);
-diff --git a/xen/drivers/passthrough/iommu.c b/xen/drivers/passthrough/iommu.c
-index bef0405984..642d5c8331 100644
---- a/xen/drivers/passthrough/iommu.c
-+++ b/xen/drivers/passthrough/iommu.c
-@@ -515,6 +515,14 @@ static int iommu_ctl(
- 
-     switch ( ctl->op )
-     {
-+    case XEN_DOMCTL_IOMMU_SET_ALLOCATION:
-+    {
-+        struct xen_domctl_iommu_set_allocation *set_allocation =
-+            &ctl->u.set_allocation;
-+
-+        rc = iommu_set_allocation(d, set_allocation->nr_pages);
-+        break;
-+    }
-     default:
-         rc = -EOPNOTSUPP;
-         break;
 diff --git a/xen/drivers/passthrough/x86/iommu.c b/xen/drivers/passthrough/x86/iommu.c
-index f17b1820f4..b168073f10 100644
+index b168073f10..de0cc52489 100644
 --- a/xen/drivers/passthrough/x86/iommu.c
 +++ b/xen/drivers/passthrough/x86/iommu.c
-@@ -134,6 +134,11 @@ void __hwdom_init arch_iommu_check_autotranslated_hwdom(struct domain *d)
+@@ -134,21 +134,106 @@ void __hwdom_init arch_iommu_check_autotranslated_hwdom(struct domain *d)
          panic("PVH hardware domain iommu must be set in 'strict' mode\n");
  }
  
-+int iommu_set_allocation(struct domain *d, unsigned nr_pages)
+-int iommu_set_allocation(struct domain *d, unsigned nr_pages)
++static int destroy_pgtable(struct domain *d)
+ {
++    struct domain_iommu *hd = dom_iommu(d);
++    struct page_info *pg;
++
++    if ( !hd->arch.pgtables.nr )
++    {
++        ASSERT_UNREACHABLE();
++        return -ENOENT;
++    }
++
++    pg = page_list_remove_head(&hd->arch.pgtables.free_list);
++    if ( !pg )
++        return -EBUSY;
++
++    hd->arch.pgtables.nr--;
++    free_domheap_page(pg);
++
+     return 0;
+ }
+ 
++static int create_pgtable(struct domain *d)
 +{
++    struct domain_iommu *hd = dom_iommu(d);
++    unsigned int memflags = 0;
++    struct page_info *pg;
++
++#ifdef CONFIG_NUMA
++    if ( hd->node != NUMA_NO_NODE )
++        memflags = MEMF_node(hd->node);
++#endif
++
++    pg = alloc_domheap_page(NULL, memflags);
++    if ( !pg )
++        return -ENOMEM;
++
++    page_list_add(pg, &hd->arch.pgtables.free_list);
++    hd->arch.pgtables.nr++;
++
 +    return 0;
 +}
++
++static int set_allocation(struct domain *d, unsigned int nr_pages,
++                          bool allow_preempt)
++{
++    struct domain_iommu *hd = dom_iommu(d);
++    unsigned int done = 0;
++    int rc = 0;
++
++    spin_lock(&hd->arch.pgtables.lock);
++
++    while ( !rc )
++    {
++        if ( hd->arch.pgtables.nr < nr_pages )
++            rc = create_pgtable(d);
++        else if ( hd->arch.pgtables.nr > nr_pages )
++            rc = destroy_pgtable(d);
++        else
++            break;
++
++        if ( allow_preempt && !rc && !(++done & 0xff) &&
++             general_preempt_check() )
++            rc = -ERESTART;
++    }
++
++    spin_unlock(&hd->arch.pgtables.lock);
++
++    return rc;
++}
++
++int iommu_set_allocation(struct domain *d, unsigned int nr_pages)
++{
++    return set_allocation(d, nr_pages, true);
++}
++
++/*
++ * Some IOMMU mappings are set up during domain_create() before the tool-
++ * stack has a chance to calculate and set the appropriate page-table
++ * allocation. A hard-coded initial allocation covers this gap.
++ */
++#define INITIAL_ALLOCATION 256
 +
  int arch_iommu_domain_init(struct domain *d)
  {
      struct domain_iommu *hd = dom_iommu(d);
-diff --git a/xen/include/asm-arm/iommu.h b/xen/include/asm-arm/iommu.h
-index 937edc8373..2e4735bace 100644
---- a/xen/include/asm-arm/iommu.h
-+++ b/xen/include/asm-arm/iommu.h
-@@ -33,6 +33,12 @@ int __must_check arm_iommu_map_page(struct domain *d, dfn_t dfn, mfn_t mfn,
- int __must_check arm_iommu_unmap_page(struct domain *d, dfn_t dfn,
-                                       unsigned int *flush_flags);
  
-+static inline int iommu_set_allocation(struct domain *d,
-+                                       unsigned int nr_pages)
-+{
-+    return -EOPNOTSUPP;
-+}
+     spin_lock_init(&hd->arch.mapping_lock);
+ 
++    INIT_PAGE_LIST_HEAD(&hd->arch.pgtables.free_list);
+     INIT_PAGE_LIST_HEAD(&hd->arch.pgtables.list);
+     spin_lock_init(&hd->arch.pgtables.lock);
+ 
+-    return 0;
++    /*
++     * The hardware and quarantine domains are not subject to a quota
++     * and domains sharing EPT do not require any allocation.
++     */
++    if ( is_hardware_domain(d) || d == dom_io || iommu_use_hap_pt(d) )
++        return 0;
 +
- #endif /* __ARCH_ARM_IOMMU_H__ */
++    return set_allocation(d, INITIAL_ALLOCATION, false);
+ }
  
- /*
+ void arch_iommu_domain_destroy(struct domain *d)
+@@ -265,38 +350,45 @@ void __hwdom_init arch_iommu_hwdom_init(struct domain *d)
+         return;
+ }
+ 
+-int iommu_free_pgtables(struct domain *d)
++void iommu_free_pgtables(struct domain *d)
+ {
+     struct domain_iommu *hd = dom_iommu(d);
+-    struct page_info *pg;
+-    unsigned int done = 0;
+ 
+-    while ( (pg = page_list_remove_head(&hd->arch.pgtables.list)) )
+-    {
+-        free_domheap_page(pg);
++    spin_lock(&hd->arch.pgtables.lock);
+ 
+-        if ( !(++done & 0xff) && general_preempt_check() )
+-            return -ERESTART;
+-    }
++    page_list_splice(&hd->arch.pgtables.list, &hd->arch.pgtables.free_list);
++    INIT_PAGE_LIST_HEAD(&hd->arch.pgtables.list);
+ 
+-    return 0;
++    spin_unlock(&hd->arch.pgtables.lock);
+ }
+ 
+ struct page_info *iommu_alloc_pgtable(struct domain *d)
+ {
+     struct domain_iommu *hd = dom_iommu(d);
+-    unsigned int memflags = 0;
+     struct page_info *pg;
+     void *p;
+ 
+-#ifdef CONFIG_NUMA
+-    if ( hd->node != NUMA_NO_NODE )
+-        memflags = MEMF_node(hd->node);
+-#endif
++    spin_lock(&hd->arch.pgtables.lock);
+ 
+-    pg = alloc_domheap_page(NULL, memflags);
++ again:
++    pg = page_list_remove_head(&hd->arch.pgtables.free_list);
+     if ( !pg )
++    {
++        /*
++         * The hardware and quarantine domains are not subject to a quota
++         * so create page-table pages on demand.
++         */
++        if ( is_hardware_domain(d) || d == dom_io )
++        {
++            int rc = create_pgtable(d);
++
++            if ( !rc )
++                goto again;
++        }
++
++        spin_unlock(&hd->arch.pgtables.lock);
+         return NULL;
++    }
+ 
+     p = __map_domain_page(pg);
+     clear_page(p);
+@@ -306,7 +398,6 @@ struct page_info *iommu_alloc_pgtable(struct domain *d)
+ 
+     unmap_domain_page(p);
+ 
+-    spin_lock(&hd->arch.pgtables.lock);
+     page_list_add(pg, &hd->arch.pgtables.list);
+     spin_unlock(&hd->arch.pgtables.lock);
+ 
 diff --git a/xen/include/asm-x86/iommu.h b/xen/include/asm-x86/iommu.h
-index 970eb06ffa..d086f564af 100644
+index d086f564af..3991b5601b 100644
 --- a/xen/include/asm-x86/iommu.h
 +++ b/xen/include/asm-x86/iommu.h
-@@ -138,6 +138,8 @@ int pi_update_irte(const struct pi_desc *pi_desc, const struct pirq *pirq,
- int __must_check iommu_free_pgtables(struct domain *d);
+@@ -47,7 +47,8 @@ struct arch_iommu
+ {
+     spinlock_t mapping_lock; /* io page table lock */
+     struct {
+-        struct page_list_head list;
++        struct page_list_head list, free_list;
++        unsigned int nr;
+         spinlock_t lock;
+     } pgtables;
+ 
+@@ -135,7 +136,7 @@ int pi_update_irte(const struct pi_desc *pi_desc, const struct pirq *pirq,
+         iommu_vcall(ops, sync_cache, addr, size);       \
+ })
+ 
+-int __must_check iommu_free_pgtables(struct domain *d);
++void iommu_free_pgtables(struct domain *d);
  struct page_info *__must_check iommu_alloc_pgtable(struct domain *d);
  
-+int __must_check iommu_set_allocation(struct domain *d, unsigned int nr_pages);
-+
- #endif /* !__ARCH_X86_IOMMU_H__ */
- /*
-  * Local variables:
-diff --git a/xen/include/public/domctl.h b/xen/include/public/domctl.h
-index 75e855625a..6402678838 100644
---- a/xen/include/public/domctl.h
-+++ b/xen/include/public/domctl.h
-@@ -1138,8 +1138,16 @@ struct xen_domctl_vuart_op {
- 
- #define XEN_DOMCTL_IOMMU_INVALID 0
- 
-+#define XEN_DOMCTL_IOMMU_SET_ALLOCATION 1
-+struct xen_domctl_iommu_set_allocation {
-+    uint32_t nr_pages;
-+};
-+
- struct xen_domctl_iommu_ctl {
-     uint32_t op; /* XEN_DOMCTL_IOMMU_* */
-+    union {
-+        struct xen_domctl_iommu_set_allocation set_allocation;
-+    } u;
- };
- 
- struct xen_domctl {
+ int __must_check iommu_set_allocation(struct domain *d, unsigned int nr_pages);
 -- 
 2.20.1
 
