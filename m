@@ -2,28 +2,28 @@ Return-Path: <SRS0=LTrL=DM=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-10.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
-	version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CA309C4727E
-	for <xen-devel@archiver.kernel.org>; Mon,  5 Oct 2020 12:16:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 198F8C4363A
+	for <xen-devel@archiver.kernel.org>; Mon,  5 Oct 2020 12:16:35 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4037A2085B
-	for <xen-devel@archiver.kernel.org>; Mon,  5 Oct 2020 12:16:31 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id C254920774
+	for <xen-devel@archiver.kernel.org>; Mon,  5 Oct 2020 12:16:34 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="fvHmXnd/"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4037A2085B
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="X00Ze5uW"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C254920774
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.2990.8557 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.2992.8582 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kPPPN-0006fZ-20; Mon, 05 Oct 2020 12:16:01 +0000
+	id 1kPPPj-0006mz-Ki; Mon, 05 Oct 2020 12:16:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 2990.8557; Mon, 05 Oct 2020 12:16:01 +0000
+Received: by outflank-mailman (output) from mailman id 2992.8582; Mon, 05 Oct 2020 12:16:23 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,62 +38,63 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kPPPM-0006fS-VN; Mon, 05 Oct 2020 12:16:00 +0000
-Received: by outflank-mailman (input) for mailman id 2990;
- Mon, 05 Oct 2020 12:16:00 +0000
+	id 1kPPPj-0006ms-HZ; Mon, 05 Oct 2020 12:16:23 +0000
+Received: by outflank-mailman (input) for mailman id 2992;
+ Mon, 05 Oct 2020 12:16:21 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=c+yv=DM=redhat.com=david@srs-us1.protection.inumbo.net>)
- id 1kPPPL-0006fN-OP
- for xen-devel@lists.xenproject.org; Mon, 05 Oct 2020 12:16:00 +0000
-Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
+ id 1kPPPh-0006mJ-Ib
+ for xen-devel@lists.xenproject.org; Mon, 05 Oct 2020 12:16:21 +0000
+Received: from us-smtp-delivery-124.mimecast.com (unknown [63.128.21.124])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id a9f24d00-0c45-465e-827f-79b04c7606f5;
- Mon, 05 Oct 2020 12:15:58 +0000 (UTC)
+ id 12eb9e65-9c79-4b0b-b19c-23bbb64c80a9;
+ Mon, 05 Oct 2020 12:16:20 +0000 (UTC)
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-587-BY-7UwbeNrSQH1yvi3bonA-1; Mon, 05 Oct 2020 08:15:54 -0400
+ us-mta-416-a6njIh0COVKiFYMipVIPug-1; Mon, 05 Oct 2020 08:16:16 -0400
 Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
  [10.5.11.23])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 110A38030CD;
- Mon,  5 Oct 2020 12:15:51 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 13F738030AA;
+ Mon,  5 Oct 2020 12:16:13 +0000 (UTC)
 Received: from t480s.redhat.com (ovpn-114-222.ams2.redhat.com [10.36.114.222])
- by smtp.corp.redhat.com (Postfix) with ESMTP id ACE6D277C6;
- Mon,  5 Oct 2020 12:15:36 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id B73DF27CC6;
+ Mon,  5 Oct 2020 12:15:59 +0000 (UTC)
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=c+yv=DM=redhat.com=david@srs-us1.protection.inumbo.net>)
-	id 1kPPPL-0006fN-OP
-	for xen-devel@lists.xenproject.org; Mon, 05 Oct 2020 12:16:00 +0000
-X-Inumbo-ID: a9f24d00-0c45-465e-827f-79b04c7606f5
-Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
+	id 1kPPPh-0006mJ-Ib
+	for xen-devel@lists.xenproject.org; Mon, 05 Oct 2020 12:16:21 +0000
+X-Inumbo-ID: 12eb9e65-9c79-4b0b-b19c-23bbb64c80a9
+Received: from us-smtp-delivery-124.mimecast.com (unknown [63.128.21.124])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
-	id a9f24d00-0c45-465e-827f-79b04c7606f5;
-	Mon, 05 Oct 2020 12:15:58 +0000 (UTC)
+	id 12eb9e65-9c79-4b0b-b19c-23bbb64c80a9;
+	Mon, 05 Oct 2020 12:16:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1601900158;
+	s=mimecast20190719; t=1601900180;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=KBX1TXpOrcsq29GpOBaph461kpBMaGykfCUU1aPiYHU=;
-	b=fvHmXnd/fhhhC3C85g5BFdrmIpJzZWl5CQY8AFLn5GsGl0KDJ3JJSe4R3ZvDt25eNjR9m5
-	xo8z6DUemt8FrHNcCRD5m8SUc+Mwt/J4VIvIrWXNXAGx2CNk1585qZjzFvUewNG6lU/qI9
-	K/+lR5RrkkZmAC3aPnEaNTgZhZOnKDQ=
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=tgT/XV/JOTuCj2JcNLuFxyO0AHRuTyQafR/eZPht6eo=;
+	b=X00Ze5uW7fEZc9MPbuvq1LLwxa6i91hwBHi/1sxEuQb9sufA5EAIkQlzm10bFpH+RC+E+C
+	SB5DADdctN9JNu7kNydQsv7ShdtD6yXWWyx/uy0tX+XqjAXiVjFtwHFoeeITK/KvQtisd2
+	BoGX5R/s+hpPKZHHZueVqD0zgbdaucc=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-587-BY-7UwbeNrSQH1yvi3bonA-1; Mon, 05 Oct 2020 08:15:54 -0400
-X-MC-Unique: BY-7UwbeNrSQH1yvi3bonA-1
+ us-mta-416-a6njIh0COVKiFYMipVIPug-1; Mon, 05 Oct 2020 08:16:16 -0400
+X-MC-Unique: a6njIh0COVKiFYMipVIPug-1
 Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com [10.5.11.23])
 	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 110A38030CD;
-	Mon,  5 Oct 2020 12:15:51 +0000 (UTC)
+	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 13F738030AA;
+	Mon,  5 Oct 2020 12:16:13 +0000 (UTC)
 Received: from t480s.redhat.com (ovpn-114-222.ams2.redhat.com [10.36.114.222])
-	by smtp.corp.redhat.com (Postfix) with ESMTP id ACE6D277C6;
-	Mon,  5 Oct 2020 12:15:36 +0000 (UTC)
+	by smtp.corp.redhat.com (Postfix) with ESMTP id B73DF27CC6;
+	Mon,  5 Oct 2020 12:15:59 +0000 (UTC)
 From: David Hildenbrand <david@redhat.com>
 To: linux-kernel@vger.kernel.org
 Cc: linux-mm@kvack.org,
@@ -104,208 +105,128 @@ Cc: linux-mm@kvack.org,
 	Matthew Wilcox <willy@infradead.org>,
 	David Hildenbrand <david@redhat.com>,
 	Alexander Duyck <alexander.h.duyck@linux.intel.com>,
-	Dave Hansen <dave.hansen@intel.com>,
-	Haiyang Zhang <haiyangz@microsoft.com>,
-	"K. Y. Srinivasan" <kys@microsoft.com>,
-	Mel Gorman <mgorman@techsingularity.net>,
-	Michael Ellerman <mpe@ellerman.id.au>,
-	Michal Hocko <mhocko@kernel.org>,
-	Michal Hocko <mhocko@suse.com>,
-	Mike Rapoport <rppt@kernel.org>,
 	Oscar Salvador <osalvador@suse.de>,
+	Wei Yang <richard.weiyang@linux.alibaba.com>,
 	Pankaj Gupta <pankaj.gupta.linux@gmail.com>,
-	Scott Cheloha <cheloha@linux.ibm.com>,
-	Stephen Hemminger <sthemmin@microsoft.com>,
+	Michal Hocko <mhocko@suse.com>,
+	Mel Gorman <mgorman@techsingularity.net>,
+	Michal Hocko <mhocko@kernel.org>,
+	Dave Hansen <dave.hansen@intel.com>,
 	Vlastimil Babka <vbabka@suse.cz>,
-	Wei Liu <wei.liu@kernel.org>,
-	Wei Yang <richard.weiyang@linux.alibaba.com>
-Subject: [PATCH v2 0/5] mm: place pages to the freelist tail when onlining and undoing isolation
-Date: Mon,  5 Oct 2020 14:15:29 +0200
-Message-Id: <20201005121534.15649-1-david@redhat.com>
+	Mike Rapoport <rppt@kernel.org>,
+	Scott Cheloha <cheloha@linux.ibm.com>,
+	Michael Ellerman <mpe@ellerman.id.au>
+Subject: [PATCH v2 2/5] mm/page_alloc: place pages to tail in __putback_isolated_page()
+Date: Mon,  5 Oct 2020 14:15:31 +0200
+Message-Id: <20201005121534.15649-3-david@redhat.com>
+In-Reply-To: <20201005121534.15649-1-david@redhat.com>
+References: <20201005121534.15649-1-david@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
 
-When adding separate memory blocks via add_memory*() and onlining them
-immediately, the metadata (especially the memmap) of the next block will be
-placed onto one of the just added+onlined block. This creates a chain
-of unmovable allocations: If the last memory block cannot get
-offlined+removed() so will all dependent ones. We directly have unmovable
-allocations all over the place.
+__putback_isolated_page() already documents that pages will be placed to
+the tail of the freelist - this is, however, not the case for
+"order >= MAX_ORDER - 2" (see buddy_merge_likely()) - which should be
+the case for all existing users.
 
-This can be observed quite easily using virtio-mem, however, it can also
-be observed when using DIMMs. The freshly onlined pages will usually be
-placed to the head of the freelists, meaning they will be allocated next,
-turning the just-added memory usually immediately un-removable. The
-fresh pages are cold, prefering to allocate others (that might be hot)
-also feels to be the natural thing to do.
+This change affects two users:
+- free page reporting
+- page isolation, when undoing the isolation (including memory onlining).
 
-It also applies to the hyper-v balloon xen-balloon, and ppc64 dlpar: when
-adding separate, successive memory blocks, each memory block will have
-unmovable allocations on them - for example gigantic pages will fail to
-allocate.
+This behavior is desireable for pages that haven't really been touched
+lately, so exactly the two users that don't actually read/write page
+content, but rather move untouched pages.
 
-While the ZONE_NORMAL doesn't provide any guarantees that memory can get
-offlined+removed again (any kind of fragmentation with unmovable
-allocations is possible), there are many scenarios (hotplugging a lot of
-memory, running workload, hotunplug some memory/as much as possible) where
-we can offline+remove quite a lot with this patchset.
+The new behavior is especially desirable for memory onlining, where we
+allow allocation of newly onlined pages via undo_isolate_page_range()
+in online_pages(). Right now, we always place them to the head of the
+freelist, resulting in undesireable behavior: Assume we add
+individual memory chunks via add_memory() and online them right away to
+the NORMAL zone. We create a dependency chain of unmovable allocations
+e.g., via the memmap. The memmap of the next chunk will be placed onto
+previous chunks - if the last block cannot get offlined+removed, all
+dependent ones cannot get offlined+removed. While this can already be
+observed with individual DIMMs, it's more of an issue for virtio-mem
+(and I suspect also ppc DLPAR).
 
-a) To visualize the problem, a very simple example:
+Document that this should only be used for optimizations, and no code
+should rely on this behavior for correction (if the order of the
+freelists ever changes).
 
-Start a VM with 4GB and 8GB of virtio-mem memory:
+We won't care about page shuffling: memory onlining already properly
+shuffles after onlining. free page reporting doesn't care about
+physically contiguous ranges, and there are already cases where page
+isolation will simply move (physically close) free pages to (currently)
+the head of the freelists via move_freepages_block() instead of
+shuffling. If this becomes ever relevant, we should shuffle the whole
+zone when undoing isolation of larger ranges, and after
+free_contig_range().
 
- [root@localhost ~]# lsmem
- RANGE                                 SIZE  STATE REMOVABLE  BLOCK
- 0x0000000000000000-0x00000000bfffffff   3G online       yes   0-23
- 0x0000000100000000-0x000000033fffffff   9G online       yes 32-103
+Reviewed-by: Alexander Duyck <alexander.h.duyck@linux.intel.com>
+Reviewed-by: Oscar Salvador <osalvador@suse.de>
+Reviewed-by: Wei Yang <richard.weiyang@linux.alibaba.com>
+Reviewed-by: Pankaj Gupta <pankaj.gupta.linux@gmail.com>
+Acked-by: Michal Hocko <mhocko@suse.com>
+Cc: Andrew Morton <akpm@linux-foundation.org>
+Cc: Alexander Duyck <alexander.h.duyck@linux.intel.com>
+Cc: Mel Gorman <mgorman@techsingularity.net>
+Cc: Michal Hocko <mhocko@kernel.org>
+Cc: Dave Hansen <dave.hansen@intel.com>
+Cc: Vlastimil Babka <vbabka@suse.cz>
+Cc: Wei Yang <richard.weiyang@linux.alibaba.com>
+Cc: Oscar Salvador <osalvador@suse.de>
+Cc: Mike Rapoport <rppt@kernel.org>
+Cc: Scott Cheloha <cheloha@linux.ibm.com>
+Cc: Michael Ellerman <mpe@ellerman.id.au>
+Signed-off-by: David Hildenbrand <david@redhat.com>
+---
+ mm/page_alloc.c | 18 ++++++++++++++++--
+ 1 file changed, 16 insertions(+), 2 deletions(-)
 
- Memory block size:       128M
- Total online memory:      12G
- Total offline memory:      0B
-
-Then try to unplug as much as possible using virtio-mem. Observe which
-memory blocks are still around. Without this patch set:
-
- [root@localhost ~]# lsmem
- RANGE                                  SIZE  STATE REMOVABLE   BLOCK
- 0x0000000000000000-0x00000000bfffffff    3G online       yes    0-23
- 0x0000000100000000-0x000000013fffffff    1G online       yes   32-39
- 0x0000000148000000-0x000000014fffffff  128M online       yes      41
- 0x0000000158000000-0x000000015fffffff  128M online       yes      43
- 0x0000000168000000-0x000000016fffffff  128M online       yes      45
- 0x0000000178000000-0x000000017fffffff  128M online       yes      47
- 0x0000000188000000-0x0000000197ffffff  256M online       yes   49-50
- 0x00000001a0000000-0x00000001a7ffffff  128M online       yes      52
- 0x00000001b0000000-0x00000001b7ffffff  128M online       yes      54
- 0x00000001c0000000-0x00000001c7ffffff  128M online       yes      56
- 0x00000001d0000000-0x00000001d7ffffff  128M online       yes      58
- 0x00000001e0000000-0x00000001e7ffffff  128M online       yes      60
- 0x00000001f0000000-0x00000001f7ffffff  128M online       yes      62
- 0x0000000200000000-0x0000000207ffffff  128M online       yes      64
- 0x0000000210000000-0x0000000217ffffff  128M online       yes      66
- 0x0000000220000000-0x0000000227ffffff  128M online       yes      68
- 0x0000000230000000-0x0000000237ffffff  128M online       yes      70
- 0x0000000240000000-0x0000000247ffffff  128M online       yes      72
- 0x0000000250000000-0x0000000257ffffff  128M online       yes      74
- 0x0000000260000000-0x0000000267ffffff  128M online       yes      76
- 0x0000000270000000-0x0000000277ffffff  128M online       yes      78
- 0x0000000280000000-0x0000000287ffffff  128M online       yes      80
- 0x0000000290000000-0x0000000297ffffff  128M online       yes      82
- 0x00000002a0000000-0x00000002a7ffffff  128M online       yes      84
- 0x00000002b0000000-0x00000002b7ffffff  128M online       yes      86
- 0x00000002c0000000-0x00000002c7ffffff  128M online       yes      88
- 0x00000002d0000000-0x00000002d7ffffff  128M online       yes      90
- 0x00000002e0000000-0x00000002e7ffffff  128M online       yes      92
- 0x00000002f0000000-0x00000002f7ffffff  128M online       yes      94
- 0x0000000300000000-0x0000000307ffffff  128M online       yes      96
- 0x0000000310000000-0x0000000317ffffff  128M online       yes      98
- 0x0000000320000000-0x0000000327ffffff  128M online       yes     100
- 0x0000000330000000-0x000000033fffffff  256M online       yes 102-103
-
- Memory block size:       128M
- Total online memory:     8.1G
- Total offline memory:      0B
-
-With this patch set:
-
- [root@localhost ~]# lsmem
- RANGE                                 SIZE  STATE REMOVABLE BLOCK
- 0x0000000000000000-0x00000000bfffffff   3G online       yes  0-23
- 0x0000000100000000-0x000000013fffffff   1G online       yes 32-39
-
- Memory block size:       128M
- Total online memory:       4G
- Total offline memory:      0B
-
-All memory can get unplugged, all memory block can get removed. Of course,
-no workload ran and the system was basically idle, but it highlights the
-issue - the fairly deterministic chain of unmovable allocations. When a
-huge page for the 2MB memmap is needed, a just-onlined 4MB page will
-be split. The remaining 2MB page will be used for the memmap of the next
-memory block. So one memory block will hold the memmap of the two following
-memory blocks. Finally the pages of the last-onlined memory block will get
-used for the next bigger allocations - if any allocation is unmovable,
-all dependent memory blocks cannot get unplugged and removed until that
-allocation is gone.
-
-Note that with bigger memory blocks (e.g., 256MB), *all* memory
-blocks are dependent and none can get unplugged again!
-
-b) Experiment with memory intensive workload
-
-I performed an experiment with an older version of this patch set
-(before we used undo_isolate_page_range() in online_pages():
-Hotplug 56GB to a VM with an initial 4GB, onlining all memory to
-ZONE_NORMAL right from the kernel when adding it. I then run various
-memory intensive workloads that consume most system memory for a total of
-45 minutes. Once finished, I try to unplug as much memory as possible.
-
-With this change, I am able to remove via virtio-mem (adding individual
-128MB memory blocks) 413 out of 448 added memory blocks. Via individual
-(256MB) DIMMs 380 out of 448 added memory blocks. (I don't have any numbers
-without this patchset, but looking at the above example, it's at most half
-of the 448 memory blocks for virtio-mem, and most probably none for DIMMs).
-
-Again, there are workloads that might behave very differently due to the
-nature of ZONE_NORMAL.
-
-This change also affects (besodes memory onlining):
-- Other users of undo_isolate_page_range(): Pages are always placed to the
-  tail.
--- When memory offlining fails
--- When memory isolation fails after having isolated some pageblocks
--- When alloc_contig_range() either succeeds or fails
-- Other users of __putback_isolated_page(): Pages are always placed to the
-  tail.
--- Free page reporting
-- Other users of __free_pages_core()
--- AFAIKs, any memory that is getting exposed to the buddy during boot.
-   IIUC we will now usually allocate memory from lower addresses within
-   a zone first (especially during boot).
-- Other users of generic_online_page()
--- Hyper-V balloon
-
-v1 -> v2:
-- Avoid changing indentation/alignment of function parameters
-- Minor spelling fixes
-- "mm/page_alloc: convert "report" flag of __free_one_page() to a proper
-   flag"
--- fop_t -> fpi_t
--- Clarify/extend documentation of FPI_SKIP_REPORT_NOTIFY
-- "mm/page_alloc: move pages to tail in move_to_free_list()"
--- Perform change for all move_to_free_list()/move_freepages_block() users
-   to simplify.
--- Adjust subject/description accordingly.
-- "mm/page_alloc: place pages to tail in __free_pages_core()"
--- s/init_single_page/__init_single_page/
-
-RFC -> v1:
-- Tweak some patch descriptions
-- "mm/page_alloc: place pages to tail in __putback_isolated_page()"
--- FOP_TO_TAIL now has higher precedence than page shuffling
--- Add a note that nothing should rely on FOP_TO_TAIL for correctness
-- "mm/page_alloc: always move pages to the tail of the freelist in
-   unset_migratetype_isolate()"
--- Use "bool" parameter for move_freepages_block() as requested
-- "mm/page_alloc: place pages to tail in __free_pages_core()"
--- Eliminate set_page_refcounted() + page_ref_dec() and add a comment
-- "mm/memory_hotplug: update comment regarding zone shuffling"
--- Added
-
-David Hildenbrand (5):
-  mm/page_alloc: convert "report" flag of __free_one_page() to a proper
-    flag
-  mm/page_alloc: place pages to tail in __putback_isolated_page()
-  mm/page_alloc: move pages to tail in move_to_free_list()
-  mm/page_alloc: place pages to tail in __free_pages_core()
-  mm/memory_hotplug: update comment regarding zone shuffling
-
- mm/memory_hotplug.c | 11 +++---
- mm/page_alloc.c     | 84 +++++++++++++++++++++++++++++++++++----------
- mm/page_isolation.c |  5 +++
- 3 files changed, 75 insertions(+), 25 deletions(-)
-
+diff --git a/mm/page_alloc.c b/mm/page_alloc.c
+index 2bf235b1953f..df5ff0cd6df1 100644
+--- a/mm/page_alloc.c
++++ b/mm/page_alloc.c
+@@ -94,6 +94,18 @@ typedef int __bitwise fpi_t;
+  */
+ #define FPI_SKIP_REPORT_NOTIFY	((__force fpi_t)BIT(0))
+ 
++/*
++ * Place the (possibly merged) page to the tail of the freelist. Will ignore
++ * page shuffling (relevant code - e.g., memory onlining - is expected to
++ * shuffle the whole zone).
++ *
++ * Note: No code should rely on this flag for correctness - it's purely
++ *       to allow for optimizations when handing back either fresh pages
++ *       (memory onlining) or untouched pages (page isolation, free page
++ *       reporting).
++ */
++#define FPI_TO_TAIL		((__force fpi_t)BIT(1))
++
+ /* prevent >1 _updater_ of zone percpu pageset ->high and ->batch fields */
+ static DEFINE_MUTEX(pcp_batch_high_lock);
+ #define MIN_PERCPU_PAGELIST_FRACTION	(8)
+@@ -1044,7 +1056,9 @@ static inline void __free_one_page(struct page *page,
+ done_merging:
+ 	set_page_order(page, order);
+ 
+-	if (is_shuffle_order(order))
++	if (fpi_flags & FPI_TO_TAIL)
++		to_tail = true;
++	else if (is_shuffle_order(order))
+ 		to_tail = shuffle_pick_tail();
+ 	else
+ 		to_tail = buddy_merge_likely(pfn, buddy_pfn, page, order);
+@@ -3306,7 +3320,7 @@ void __putback_isolated_page(struct page *page, unsigned int order, int mt)
+ 
+ 	/* Return isolated page to tail of freelist. */
+ 	__free_one_page(page, page_to_pfn(page), zone, order, mt,
+-			FPI_SKIP_REPORT_NOTIFY);
++			FPI_SKIP_REPORT_NOTIFY | FPI_TO_TAIL);
+ }
+ 
+ /*
 -- 
 2.26.2
 
