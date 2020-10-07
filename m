@@ -2,28 +2,26 @@ Return-Path: <SRS0=B7KG=DO=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3385BC4363C
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:02:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0AD3DC4363C
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:18:21 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AF2812168B
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:02:02 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="PciKDSt4"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AF2812168B
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id 8F6F02173E
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:18:20 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8F6F02173E
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.3616.10439 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.3637.10471 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQDl9-0004pK-SG; Wed, 07 Oct 2020 18:01:51 +0000
+	id 1kQE0t-0006Vt-Kq; Wed, 07 Oct 2020 18:18:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 3616.10439; Wed, 07 Oct 2020 18:01:51 +0000
+Received: by outflank-mailman (output) from mailman id 3637.10471; Wed, 07 Oct 2020 18:18:07 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,205 +36,108 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQDl9-0004pC-PD; Wed, 07 Oct 2020 18:01:51 +0000
-Received: by outflank-mailman (input) for mailman id 3616;
- Wed, 07 Oct 2020 18:01:51 +0000
+	id 1kQE0t-0006Vk-Hn; Wed, 07 Oct 2020 18:18:07 +0000
+Received: by outflank-mailman (input) for mailman id 3637;
+ Wed, 07 Oct 2020 18:18:05 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=01DM=DO=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1kQDl9-0004ov-3x
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:01:51 +0000
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ <SRS0=1qty=DO=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
+ id 1kQE0r-0006UA-RO
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:18:05 +0000
+Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 1d99c4ae-0f97-4f2c-8f85-87f864b84b6e;
- Wed, 07 Oct 2020 18:01:49 +0000 (UTC)
+ id bb70c138-20c1-4e8d-987d-9f2ded624cf7;
+ Wed, 07 Oct 2020 18:18:03 +0000 (UTC)
+Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
+ by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
+ (return-path ijackson@chiark.greenend.org.uk)
+ id 1kQDk7-0007CF-Ge; Wed, 07 Oct 2020 19:00:47 +0100
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=01DM=DO=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
-	id 1kQDl9-0004ov-3x
-	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:01:51 +0000
-X-Inumbo-ID: 1d99c4ae-0f97-4f2c-8f85-87f864b84b6e
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+	(envelope-from <SRS0=1qty=DO=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
+	id 1kQE0r-0006UA-RO
+	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:18:05 +0000
+X-Inumbo-ID: bb70c138-20c1-4e8d-987d-9f2ded624cf7
+Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 1d99c4ae-0f97-4f2c-8f85-87f864b84b6e;
-	Wed, 07 Oct 2020 18:01:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1602093709;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=sKrFXatEEq5DqK+cx9YnltRr6D+EMF7PGcHSzrSySec=;
-  b=PciKDSt472tfF64m7UjHPgyj2hM13CQvFzJmPP/3hhODNgEGnaNk7dHS
-   +H4bU7ZPFIZUpN2XB39rQsbfO10KXwLK973s2dLZqBQYczIOVJgGyYHO6
-   6XaDVdswe1KlaXonPj0DG9SFkLcSl6QtTYGx5Omsru+/qDo1HJ4jM2AHW
-   8=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: V1uCHVTavA80cRQ7zMOl16lNe7ZtZdcmLaxOW/s3OB6o+2VQ0R6hveNDy/1UOPuAggBjH2NFWs
- H47HMYBM57uoDVZ6bVaBK0B+jteu5RZGjSP+ZKf5ZrM5KoX7xt5SzOi/msEchQHcfcjoZagikX
- AI9DC/bLVfHEa+cxQH4xG3k+KmJENfQoFrwmeWOk3YmXFEahshIc23GVp2m77DPQu+3v2eSzFP
- Y1pSlzrS7xat0W8PH+Oa8o9kHb5Df+hQGdA8qqbpJABICHDR6Kkq3nYuS21reZzM4t2whdAWeq
- o4w=
-X-SBRS: None
-X-MesageID: 28774375
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.77,347,1596513600"; 
-   d="scan'208";a="28774375"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH] x86/ucode: Trivial further cleanup
-Date: Wed, 7 Oct 2020 19:01:20 +0100
-Message-ID: <20201007180120.27203-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.11.0
+	id bb70c138-20c1-4e8d-987d-9f2ded624cf7;
+	Wed, 07 Oct 2020 18:18:03 +0000 (UTC)
+Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
+	by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
+	(return-path ijackson@chiark.greenend.org.uk)
+	id 1kQDk7-0007CF-Ge; Wed, 07 Oct 2020 19:00:47 +0100
+From: Ian Jackson <iwj@xenproject.org>
+To: xen-devel@lists.xenproject.org
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 57/82] TestSupport: Provide runvar_is_synth
+Date: Wed,  7 Oct 2020 18:59:59 +0100
+Message-Id: <20201007180024.7932-58-iwj@xenproject.org>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20201007180024.7932-1-iwj@xenproject.org>
+References: <20201007180024.7932-1-iwj@xenproject.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
- * Drop unused include in private.h.
- * Used explicit width integers for Intel header fields.
- * Adjust comment to better describe the extended header.
- * Drop unnecessary __packed attribute for AMD header.
- * Switch mc_patch_data_id to being uint16_t, which is how it is more commonly
-   referred to.
- * Fix types and style.
+From: Ian Jackson <ian.jackson@eu.citrix.com>
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Wei Liu <wl@xen.org>
----
- xen/arch/x86/cpu/microcode/amd.c     | 10 +++++-----
- xen/arch/x86/cpu/microcode/intel.c   | 34 +++++++++++++++++-----------------
- xen/arch/x86/cpu/microcode/private.h |  2 --
- 3 files changed, 22 insertions(+), 24 deletions(-)
+Internally we use an array %r_notsynth.  This allows us to avoid
+adding code to store_runvar etc.
 
-diff --git a/xen/arch/x86/cpu/microcode/amd.c b/xen/arch/x86/cpu/microcode/amd.c
-index cd532321e8..e913232067 100644
---- a/xen/arch/x86/cpu/microcode/amd.c
-+++ b/xen/arch/x86/cpu/microcode/amd.c
-@@ -24,7 +24,7 @@
+Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
+---
+ Osstest/TestSupport.pm | 12 +++++++++---
+ 1 file changed, 9 insertions(+), 3 deletions(-)
+
+diff --git a/Osstest/TestSupport.pm b/Osstest/TestSupport.pm
+index 634d6d2e..ce13d3a6 100644
+--- a/Osstest/TestSupport.pm
++++ b/Osstest/TestSupport.pm
+@@ -52,7 +52,7 @@ BEGIN {
+                       store_runvar get_runvar get_runvar_maybe
+                       get_runvar_default need_runvars
+                       unique_incrementing_runvar next_unique_name
+-                      stashfilecontents
++                      stashfilecontents runvar_is_synth
  
- #define pr_debug(x...) ((void)0)
- 
--struct __packed equiv_cpu_entry {
-+struct equiv_cpu_entry {
-     uint32_t installed_cpu;
-     uint32_t fixed_errata_mask;
-     uint32_t fixed_errata_compare;
-@@ -35,7 +35,7 @@ struct __packed equiv_cpu_entry {
- struct microcode_patch {
-     uint32_t data_code;
-     uint32_t patch_id;
--    uint8_t  mc_patch_data_id[2];
-+    uint16_t mc_patch_data_id;
-     uint8_t  mc_patch_data_len;
-     uint8_t  init_flag;
-     uint32_t mc_patch_data_checksum;
-@@ -102,7 +102,7 @@ static void collect_cpu_info(void)
-              smp_processor_id(), csig->rev);
+                       target_cmd_root_status target_cmd_output_root_status
+                       target_cmd_root target_cmd target_cmd_build
+@@ -147,7 +147,7 @@ BEGIN {
+     @EXPORT_OK   = qw();
  }
  
--static bool_t verify_patch_size(uint32_t patch_size)
-+static bool verify_patch_size(uint32_t patch_size)
- {
-     uint32_t max_size;
+-our (%r,$flight,$job,$stash);
++our (%r,$flight,$job,$stash,%r_,%r_notsynth);
  
-@@ -113,7 +113,7 @@ static bool_t verify_patch_size(uint32_t patch_size)
- #define F17H_MPB_MAX_SIZE 3200
- #define F19H_MPB_MAX_SIZE 4800
+ our %timeout= qw(RebootDown   100
+                  RebootUp     400
+@@ -178,12 +178,13 @@ sub tsreadconfig () {
+         logm("starting $flight.$job");
  
--    switch (boot_cpu_data.x86)
-+    switch ( boot_cpu_data.x86 )
-     {
-     case 0x14:
-         max_size = F14H_MPB_MAX_SIZE;
-@@ -135,7 +135,7 @@ static bool_t verify_patch_size(uint32_t patch_size)
-         break;
-     }
- 
--    return (patch_size <= max_size);
-+    return patch_size <= max_size;
+         my $q= $dbh_tests->prepare(<<END);
+-            SELECT name, val FROM runvars WHERE flight=? AND job=?
++            SELECT name, val, synth FROM runvars WHERE flight=? AND job=?
+ END
+         $q->execute($flight, $job);
+         my $row;
+         while ($row= $q->fetchrow_hashref()) {
+             $r{ $row->{name} }= $row->{val};
++	    $r_notsynth{ $row->{name} }= !$row->{synth};
+             logm("setting $row->{name}=$row->{val}");
+         }
+         $q->finish();
+@@ -434,6 +435,11 @@ END
+     return $value;
  }
  
- static bool check_final_patch_levels(const struct cpu_signature *sig)
-diff --git a/xen/arch/x86/cpu/microcode/intel.c b/xen/arch/x86/cpu/microcode/intel.c
-index d031196d4c..d9bb1bc10e 100644
---- a/xen/arch/x86/cpu/microcode/intel.c
-+++ b/xen/arch/x86/cpu/microcode/intel.c
-@@ -32,38 +32,38 @@
- #define pr_debug(x...) ((void)0)
- 
- struct microcode_patch {
--    unsigned int hdrver;
--    unsigned int rev;
-+    uint32_t hdrver;
-+    uint32_t rev;
-     uint16_t year;
-     uint8_t  day;
-     uint8_t  month;
--    unsigned int sig;
--    unsigned int cksum;
--    unsigned int ldrver;
-+    uint32_t sig;
-+    uint32_t cksum;
-+    uint32_t ldrver;
- 
-     /*
-      * Microcode for the Pentium Pro and II had all further fields in the
-      * header reserved, had a fixed datasize of 2000 and totalsize of 2048,
-      * and didn't use platform flags despite the availability of the MSR.
-      */
--    unsigned int pf;
--    unsigned int datasize;
--    unsigned int totalsize;
--    unsigned int reserved[3];
-+    uint32_t pf;
-+    uint32_t datasize;
-+    uint32_t totalsize;
-+    uint32_t reserved[3];
- 
-     /* Microcode payload.  Format is propriety and encrypted. */
-     uint8_t data[];
--};
- 
--/* microcode format is extended from prescott processors */
-+    /* Extended header (iff totalsize > datasize, P4 Prescott and later) */
-+};
- struct extended_sigtable {
--    unsigned int count;
--    unsigned int cksum;
--    unsigned int reserved[3];
-+    uint32_t count;
-+    uint32_t cksum;
-+    uint32_t rsvd[3];
-     struct {
--        unsigned int sig;
--        unsigned int pf;
--        unsigned int cksum;
-+        uint32_t sig;
-+        uint32_t pf;
-+        uint32_t cksum;
-     } sigs[];
- };
- 
-diff --git a/xen/arch/x86/cpu/microcode/private.h b/xen/arch/x86/cpu/microcode/private.h
-index c00ba590d1..9a15cdc879 100644
---- a/xen/arch/x86/cpu/microcode/private.h
-+++ b/xen/arch/x86/cpu/microcode/private.h
-@@ -1,8 +1,6 @@
- #ifndef ASM_X86_MICROCODE_PRIVATE_H
- #define ASM_X86_MICROCODE_PRIVATE_H
- 
--#include <xen/types.h>
--
- #include <asm/microcode.h>
- 
- enum microcode_match_result {
++sub runvar_is_synth ($) {
++    my ($key) = @_;
++    return !$r_notsynth{$key};
++}
++
+ sub target_adjust_timeout ($$) {
+     my ($ho,$timeoutref) = @_; # $ho might be a $gho
+     my $nestinglvl = $ho->{NestingLevel} // $ho->{Host}{NestingLevel};
 -- 
-2.11.0
+2.20.1
 
 
