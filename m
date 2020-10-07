@@ -2,28 +2,28 @@ Return-Path: <SRS0=B7KG=DO=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8EA9FC4363D
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 13:30:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BFB65C47095
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 13:30:34 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 139A4206DD
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 13:30:32 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 4F596206DD
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 13:30:34 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="TEdU2k07"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 139A4206DD
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="hm0W1oNI"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4F596206DD
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.3508.10054 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.3509.10067 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQ9WL-0007qG-Kn; Wed, 07 Oct 2020 13:30:17 +0000
+	id 1kQ9WQ-0007s5-Us; Wed, 07 Oct 2020 13:30:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 3508.10054; Wed, 07 Oct 2020 13:30:17 +0000
+Received: by outflank-mailman (output) from mailman id 3509.10067; Wed, 07 Oct 2020 13:30:22 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,43 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQ9WL-0007q9-Hm; Wed, 07 Oct 2020 13:30:17 +0000
-Received: by outflank-mailman (input) for mailman id 3508;
- Wed, 07 Oct 2020 13:30:16 +0000
+	id 1kQ9WQ-0007rx-QJ; Wed, 07 Oct 2020 13:30:22 +0000
+Received: by outflank-mailman (input) for mailman id 3509;
+ Wed, 07 Oct 2020 13:30:20 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Gg45=DO=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kQ9WJ-0007q4-VW
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 13:30:15 +0000
+ id 1kQ9WO-0007q4-Sg
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 13:30:20 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 5771a15b-b98b-4cad-8cce-ad1e87e22a25;
+ id 5e65c696-701d-43f3-aeca-ad359a51a758;
  Wed, 07 Oct 2020 13:30:15 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 757FCB234;
+ by mx2.suse.de (Postfix) with ESMTP id 24A25AC6D;
  Wed,  7 Oct 2020 13:30:14 +0000 (UTC)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=Gg45=DO=suse.com=jgross@srs-us1.protection.inumbo.net>)
-	id 1kQ9WJ-0007q4-VW
-	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 13:30:15 +0000
-X-Inumbo-ID: 5771a15b-b98b-4cad-8cce-ad1e87e22a25
+	id 1kQ9WO-0007q4-Sg
+	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 13:30:20 +0000
+X-Inumbo-ID: 5e65c696-701d-43f3-aeca-ad359a51a758
 Received: from mx2.suse.de (unknown [195.135.220.15])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 5771a15b-b98b-4cad-8cce-ad1e87e22a25;
+	id 5e65c696-701d-43f3-aeca-ad359a51a758;
 	Wed, 07 Oct 2020 13:30:15 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	t=1602077414;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=A/ul8OKsqutALOib25CsZA6bXQqNHW0GneGeZqHG7q8=;
-	b=TEdU2k071jf8kt1UTSAibopkjVoC1AFCBimdUlaguWnZ/OSyCXE/vMqE3ye6u+nlZBzIr3
-	EJvc4PEbA7d4Sqakuk2YxQXNpdFyYtT3LrlEiIufiegDeKc0eap+JumxzHIcNhnCajiZt9
-	eDofBqBFBltEK+umlJCJWiuwPpjk3v4=
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=B547wPgCpWoZcZKQSWOEnN4FxgmeBKDw7JxS9keaVX0=;
+	b=hm0W1oNIiSpPYNZ+t0FJ4+RG+ngqa0FrDLozYjkzzoErJ9Ujz/mio2FBFS61/jHXt66AmI
+	+8PqVxeilEl4s4N1KOFekgfFZxQmMY0dhoYe7FYxR0T2b6+dSntNTfGne+JDO1OTwpYYul
+	Ns+J0mQYiQ9fqhXNWIrhNKsBqxzT3HY=
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 757FCB234;
+	by mx2.suse.de (Postfix) with ESMTP id 24A25AC6D;
 	Wed,  7 Oct 2020 13:30:14 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
@@ -83,51 +82,37 @@ Cc: Juergen Gross <jgross@suse.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v2 2/2] xen/oprofile: use set_nmi_continuation() for sending virq to guest
-Date: Wed,  7 Oct 2020 15:30:11 +0200
-Message-Id: <20201007133011.18871-3-jgross@suse.com>
+	Wei Liu <wl@xen.org>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Ian Jackson <iwj@xenproject.org>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v2 0/2] xen/x86: implement NMI continuation as softirq
+Date: Wed,  7 Oct 2020 15:30:09 +0200
+Message-Id: <20201007133011.18871-1-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20201007133011.18871-1-jgross@suse.com>
-References: <20201007133011.18871-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Instead of calling send_guest_vcpu_virq() from NMI context use the
-NMI continuation framework for that purpose.
+Move sending of a virq event for oprofile to the local vcpu from NMI
+to softirq context.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
- xen/arch/x86/oprofile/nmi_int.c | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+This has been tested with a small test patch using the continuation
+framework of patch 1 for all NMIs and doing a print to console in
+the continuation handler.
 
-diff --git a/xen/arch/x86/oprofile/nmi_int.c b/xen/arch/x86/oprofile/nmi_int.c
-index 0f103d80a6..659e31fe19 100644
---- a/xen/arch/x86/oprofile/nmi_int.c
-+++ b/xen/arch/x86/oprofile/nmi_int.c
-@@ -83,6 +83,13 @@ void passive_domain_destroy(struct vcpu *v)
- 		model->free_msr(v);
- }
- 
-+static void nmi_oprofile_send_virq(void *par)
-+{
-+	struct vcpu *v = par;
-+
-+	send_guest_vcpu_virq(v, VIRQ_XENOPROF);
-+}
-+
- static int nmi_callback(const struct cpu_user_regs *regs, int cpu)
- {
- 	int xen_mode, ovf;
-@@ -90,7 +97,7 @@ static int nmi_callback(const struct cpu_user_regs *regs, int cpu)
- 	ovf = model->check_ctrs(cpu, &cpu_msrs[cpu], regs);
- 	xen_mode = ring_0(regs);
- 	if ( ovf && is_active(current->domain) && !xen_mode )
--		send_guest_vcpu_virq(current, VIRQ_XENOPROF);
-+		set_nmi_continuation(nmi_oprofile_send_virq, current);
- 
- 	if ( ovf == 2 )
- 		current->arch.nmi_pending = true;
+Version 1 of this small series was sent to the security list before.
+
+Juergen Gross (2):
+  xen/x86: add nmi continuation framework
+  xen/oprofile: use set_nmi_continuation() for sending virq to guest
+
+ xen/arch/x86/oprofile/nmi_int.c |  9 +++++++-
+ xen/arch/x86/traps.c            | 37 +++++++++++++++++++++++++++++++++
+ xen/include/asm-x86/nmi.h       |  8 ++++++-
+ xen/include/xen/softirq.h       |  5 ++++-
+ 4 files changed, 56 insertions(+), 3 deletions(-)
+
 -- 
 2.26.2
 
