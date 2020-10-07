@@ -7,21 +7,21 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 17E73C4727E
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:27:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 010C3C4363C
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:28:01 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B70FA2176B
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:27:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B70FA2176B
+	by mail.kernel.org (Postfix) with ESMTPS id 89A592168B
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:28:00 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 89A592168B
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.3705.11027 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.3706.11047 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQEAD-0003RO-S6; Wed, 07 Oct 2020 18:27:45 +0000
+	id 1kQEAI-0003hH-BP; Wed, 07 Oct 2020 18:27:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 3705.11027; Wed, 07 Oct 2020 18:27:45 +0000
+Received: by outflank-mailman (output) from mailman id 3706.11047; Wed, 07 Oct 2020 18:27:50 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,43 +36,43 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQEAC-0003Pd-Fp; Wed, 07 Oct 2020 18:27:44 +0000
-Received: by outflank-mailman (input) for mailman id 3705;
- Wed, 07 Oct 2020 18:27:41 +0000
+	id 1kQEAI-0003gt-2V; Wed, 07 Oct 2020 18:27:50 +0000
+Received: by outflank-mailman (input) for mailman id 3706;
+ Wed, 07 Oct 2020 18:27:48 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1qty=DO=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1kQE2g-00072Q-Hx
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:19:58 +0000
+ id 1kQE35-00072Q-Ii
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:20:23 +0000
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 1118d174-7391-494e-9ba2-91552627002b;
- Wed, 07 Oct 2020 18:19:26 +0000 (UTC)
+ id 754cadb0-7421-45fd-92c0-5f4f9ff11a16;
+ Wed, 07 Oct 2020 18:19:39 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1kQDkB-0007CF-Gj; Wed, 07 Oct 2020 19:00:51 +0100
+ id 1kQDjz-0007CF-Ty; Wed, 07 Oct 2020 19:00:40 +0100
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=1qty=DO=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
-	id 1kQE2g-00072Q-Hx
-	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:19:58 +0000
-X-Inumbo-ID: 1118d174-7391-494e-9ba2-91552627002b
+	id 1kQE35-00072Q-Ii
+	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:20:23 +0000
+X-Inumbo-ID: 754cadb0-7421-45fd-92c0-5f4f9ff11a16
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 1118d174-7391-494e-9ba2-91552627002b;
-	Wed, 07 Oct 2020 18:19:26 +0000 (UTC)
+	id 754cadb0-7421-45fd-92c0-5f4f9ff11a16;
+	Wed, 07 Oct 2020 18:19:39 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
 	by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
 	(return-path ijackson@chiark.greenend.org.uk)
-	id 1kQDkB-0007CF-Gj; Wed, 07 Oct 2020 19:00:51 +0100
+	id 1kQDjz-0007CF-Ty; Wed, 07 Oct 2020 19:00:40 +0100
 From: Ian Jackson <iwj@xenproject.org>
 To: xen-devel@lists.xenproject.org
 Cc: Ian Jackson <ian.jackson@eu.citrix.com>,
-	Ian Jackson <iwj@xenproject.org>
-Subject: [OSSTEST PATCH 74/82] host reuse: ts-host-reuse: Prepare for argument handling
-Date: Wed,  7 Oct 2020 19:00:16 +0100
-Message-Id: <20201007180024.7932-75-iwj@xenproject.org>
+	Ian Jackson <Ian.Jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 27/82] host allocation: *_shared_mark_ready: allow alternative $oldtypes
+Date: Wed,  7 Oct 2020 18:59:29 +0100
+Message-Id: <20201007180024.7932-28-iwj@xenproject.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20201007180024.7932-1-iwj@xenproject.org>
 References: <20201007180024.7932-1-iwj@xenproject.org>
@@ -81,54 +81,40 @@ Content-Transfer-Encoding: 8bit
 
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 
-No functional change.
+$oldtype may now be a hashref, where keys mapping to truthy values are
+permitted for the sharetype precondition.
 
-Signed-off-by: Ian Jackson <iwj@xenproject.org>
+No functional change for existing callers.
+
+Signed-off-by: Ian Jackson <Ian.Jackson@eu.citrix.com>
 ---
- ts-host-reuse | 9 ++++++---
- 1 file changed, 6 insertions(+), 3 deletions(-)
+ Osstest/Executive.pm | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/ts-host-reuse b/ts-host-reuse
-index aad45bdd..21d77500 100755
---- a/ts-host-reuse
-+++ b/ts-host-reuse
-@@ -48,9 +48,9 @@ use Osstest::TestSupport;
+diff --git a/Osstest/Executive.pm b/Osstest/Executive.pm
+index fd975590..f2d43464 100644
+--- a/Osstest/Executive.pm
++++ b/Osstest/Executive.pm
+@@ -1056,6 +1056,7 @@ sub executive_resource_shared_mark_ready ($$$;$$) {
  
- tsreadconfig();
+     my $oldshr;
+     $oldstate //= 'prep';
++    $oldstate = { $oldstate => 1 } unless ref $oldstate;
+     $newstate //= 'ready';
  
--die unless @ARGV==2;
--
--our ($action, $whhost) = @ARGV;
-+die unless @ARGV>=2;
-+our $action = shift @ARGV;
-+our $whhost = shift @ARGV;
- 
- our $ho;
- 
-@@ -137,6 +137,7 @@ sub noop_if_playing () {
- #---------- actions ----------
- 
- sub act_prealloc () {
-+    die if @ARGV;
-     noop_if_playing();
-     compute_test_sharetype();
-     $ho = selecthost($whhost, undef, 1);
-@@ -145,6 +146,7 @@ sub act_prealloc () {
- }
- 
- sub act_start_test () {
-+    die if @ARGV;
-     compute_test_sharetype();
-     $ho = selecthost($whhost);
-     return unless $ho->{Shared};
-@@ -153,6 +155,7 @@ sub act_start_test () {
- }
- 
- sub act_post_test_ok () {
-+    die if @ARGV;
-     compute_test_sharetype();
-     $ho = selecthost($whhost);
-     return unless $ho->{Shared};
+     my $what= "resource $restype $resname";
+@@ -1070,8 +1071,9 @@ sub executive_resource_shared_mark_ready ($$$;$$) {
+         if (defined $oldshr) {
+             die "$what shared $oldshr->{Type} not $sharetype"
+                 unless !defined $sharetype or $oldshr->{Type} eq $sharetype;
+-            die "$what shared state $oldshr->{State} not $oldstate"
+-                unless $oldshr->{State} eq $oldstate;
++            die "$what shared state $oldshr->{State} not".
++		" one of ".(join ' ', sort keys %$oldstate)
++                unless $oldstate->{ $oldshr->{State} };
+             my $nrows= $dbh_tests->do(<<END,{}, $newstate, $restype,$resname);
+                 UPDATE resource_sharing
+                    SET state=?
 -- 
 2.20.1
 
