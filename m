@@ -7,21 +7,21 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AE6F2C41604
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:27:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8D42CC4727E
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:27:12 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 562E12168B
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:27:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 562E12168B
+	by mail.kernel.org (Postfix) with ESMTPS id 270EA2168B
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:27:12 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 270EA2168B
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.3682.10759 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.3683.10771 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQE9S-0001Ga-G2; Wed, 07 Oct 2020 18:26:58 +0000
+	id 1kQE9V-0001OK-5I; Wed, 07 Oct 2020 18:27:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 3682.10759; Wed, 07 Oct 2020 18:26:58 +0000
+Received: by outflank-mailman (output) from mailman id 3683.10771; Wed, 07 Oct 2020 18:27:01 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,42 +36,43 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQE9S-0001GC-Av; Wed, 07 Oct 2020 18:26:58 +0000
-Received: by outflank-mailman (input) for mailman id 3682;
- Wed, 07 Oct 2020 18:26:57 +0000
+	id 1kQE9U-0001Nt-SZ; Wed, 07 Oct 2020 18:27:00 +0000
+Received: by outflank-mailman (input) for mailman id 3683;
+ Wed, 07 Oct 2020 18:26:59 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1qty=DO=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1kQE4h-00072Q-M9
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:22:03 +0000
+ id 1kQE3e-00072Q-JS
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:20:58 +0000
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id e10c92d9-2c86-48a5-a857-634025a4b23d;
- Wed, 07 Oct 2020 18:20:26 +0000 (UTC)
+ id 20f74aeb-50d8-4880-8daf-80bf69bbf6f1;
+ Wed, 07 Oct 2020 18:19:52 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1kQDkA-0007CF-6l; Wed, 07 Oct 2020 19:00:50 +0100
+ id 1kQDk1-0007CF-5n; Wed, 07 Oct 2020 19:00:41 +0100
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=1qty=DO=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
-	id 1kQE4h-00072Q-M9
-	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:22:03 +0000
-X-Inumbo-ID: e10c92d9-2c86-48a5-a857-634025a4b23d
+	id 1kQE3e-00072Q-JS
+	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:20:58 +0000
+X-Inumbo-ID: 20f74aeb-50d8-4880-8daf-80bf69bbf6f1
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id e10c92d9-2c86-48a5-a857-634025a4b23d;
-	Wed, 07 Oct 2020 18:20:26 +0000 (UTC)
+	id 20f74aeb-50d8-4880-8daf-80bf69bbf6f1;
+	Wed, 07 Oct 2020 18:19:52 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
 	by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
 	(return-path ijackson@chiark.greenend.org.uk)
-	id 1kQDkA-0007CF-6l; Wed, 07 Oct 2020 19:00:50 +0100
+	id 1kQDk1-0007CF-5n; Wed, 07 Oct 2020 19:00:41 +0100
 From: Ian Jackson <iwj@xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH 68/82] host lifecycle: Prevent referential integrity violation
-Date: Wed,  7 Oct 2020 19:00:10 +0100
-Message-Id: <20201007180024.7932-69-iwj@xenproject.org>
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>,
+	Ian Jackson <Ian.Jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 31/82] plan_search: Improve debugging of $share_compat_ok->()
+Date: Wed,  7 Oct 2020 18:59:33 +0100
+Message-Id: <20201007180024.7932-32-iwj@xenproject.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20201007180024.7932-1-iwj@xenproject.org>
 References: <20201007180024.7932-1-iwj@xenproject.org>
@@ -80,58 +81,38 @@ Content-Transfer-Encoding: 8bit
 
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 
-We can't use normal constraints for either of these, sadly.
+No change other than to debugging output.
 
-We can make the constraints into a single query which says "OK".
-
-Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
+Signed-off-by: Ian Jackson <Ian.Jackson@eu.citrix.com>
 ---
- Osstest/JobDB/Executive.pm | 25 +++++++++++++++++++++++++
- 1 file changed, 25 insertions(+)
+ Osstest/Executive.pm | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/Osstest/JobDB/Executive.pm b/Osstest/JobDB/Executive.pm
-index 3a8308e9..f69ce277 100644
---- a/Osstest/JobDB/Executive.pm
-+++ b/Osstest/JobDB/Executive.pm
-@@ -553,6 +553,28 @@ END
-                ON h.taskid = t.taskid
-             WHERE h.hostname = ?
-          ORDER BY h.lcseq;
-+END
-+    # We simulate two foreign key constraints which can't be in the
-+    # db schema, by checking the values we are going to insert.
-+    #
-+    # For "resources" we would need a foreign key constraint
-+    # with a literal value as part of the foreign key, which is
-+    # not supported until PostgreSQL 13.
-+    #
-+    # For "tasks" we only want to apply the constraint on inserts into
-+    # "host_lifecycle" - in particular, we want to allow delet6ions
-+    # from "tasks" to render the taskid foreign key unresolvable.
-+    # This could be done with a trigger, but since here is the only
-+    # place we do insertions into host_lifecycle, this seems easier.
-+    my $constraintsq = $dbh_tests->prepare(<<END);
-+           SELECT * FROM
-+	     (SELECT 1 AS ok
-+	        FROM resources where restype='host' and resname=?) 
-+              hostname_ok
-+             NATURAL JOIN
-+             (SELECT 1 AS ok
-+                FROM tasks where taskid=? AND live)
-+              taskid_ok;
- END
-     my $insertq = $dbh_tests->prepare(<<END);
-         INSERT INTO host_lifecycle
-@@ -632,6 +654,9 @@ END
- 		push @lifecycle, "$omarks$otj:$o->{stepno}$osuffix";
- 	    }
- 	}
-+	$constraintsq->execute($hostname, $ttaskid);
-+	$constraintsq->fetchrow_array() or confess "$hostname ?";
-+
- 	if (defined $flight) {
- 	    $insertq->execute($hostname, $ttaskid,
- 			      $flight, $job,
+diff --git a/Osstest/Executive.pm b/Osstest/Executive.pm
+index e4bb0868..dfa3710a 100644
+--- a/Osstest/Executive.pm
++++ b/Osstest/Executive.pm
+@@ -702,6 +702,12 @@ sub plan_search ($$$$) {
+ 
+ 	    my $share_compat_ok = sub {
+ 		my ($eshare) = @_;
++		$dbgprint->("PLAN LOOP   SHARE-COMPAT-OK ".
++		    "type $eshare->{Type} vs. ".
++			($req->{Shared} // '<undef>')." ".
++		    "wear $eshare->{Wear} ".
++		    "shares $eshare->{Shares} vs. ".
++			($req->{SharedMaxTasks}//'<undef>'));
+ 		return 0 unless defined $req->{Shared};
+ 		return 0 unless $req->{Shared} eq $eshare->{Type};
+ 		if (defined $share_wear) {
+@@ -711,6 +717,7 @@ sub plan_search ($$$$) {
+ 		}
+ 		return 0 if $share_wear > $req->{SharedMaxWear};
+ 		return 0 if $eshare->{Shares} != $req->{SharedMaxTasks};
++		$dbgprint->("PLAN LOOP   SHARE-COMPAT-OK Y");
+ 		return 1;
+ 	    };
+ 
 -- 
 2.20.1
 
