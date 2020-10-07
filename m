@@ -2,26 +2,28 @@ Return-Path: <SRS0=B7KG=DO=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-11.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7EF42C41604
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:29:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 121F6C4363C
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:41:26 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0FCC52168B
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:29:07 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0FCC52168B
+	by mail.kernel.org (Postfix) with ESMTPS id 7E56521707
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:41:25 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="zxML+KMW"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7E56521707
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.3771.11326 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.3805.11353 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQEBN-0006j9-25; Wed, 07 Oct 2020 18:28:57 +0000
+	id 1kQEN6-00014c-Ty; Wed, 07 Oct 2020 18:41:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 3771.11326; Wed, 07 Oct 2020 18:28:56 +0000
+Received: by outflank-mailman (output) from mailman id 3805.11353; Wed, 07 Oct 2020 18:41:04 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,164 +38,201 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQEBM-0006i9-Cp; Wed, 07 Oct 2020 18:28:56 +0000
-Received: by outflank-mailman (input) for mailman id 3771;
- Wed, 07 Oct 2020 18:28:54 +0000
+	id 1kQEN6-00014V-Qr; Wed, 07 Oct 2020 18:41:04 +0000
+Received: by outflank-mailman (input) for mailman id 3805;
+ Wed, 07 Oct 2020 18:41:04 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=1qty=DO=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1kQE64-00072Q-Py
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:23:28 +0000
-Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
+ <SRS0=xB9j=DO=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
+ id 1kQEN6-00013t-39
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:41:04 +0000
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 029da054-f876-40dd-a094-2e3f3d07448a;
- Wed, 07 Oct 2020 18:21:29 +0000 (UTC)
-Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
- by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
- (return-path ijackson@chiark.greenend.org.uk)
- id 1kQDk6-0007CF-BH; Wed, 07 Oct 2020 19:00:46 +0100
+ id 40d4bb9d-5e4f-4c64-91bf-4a88d914e1f9;
+ Wed, 07 Oct 2020 18:40:57 +0000 (UTC)
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kQEMy-0003iW-Rw; Wed, 07 Oct 2020 18:40:56 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kQEMy-0005BS-K4; Wed, 07 Oct 2020 18:40:56 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1kQEMy-0005fo-JX; Wed, 07 Oct 2020 18:40:56 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=1qty=DO=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
-	id 1kQE64-00072Q-Py
-	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:23:28 +0000
-X-Inumbo-ID: 029da054-f876-40dd-a094-2e3f3d07448a
-Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
+	(envelope-from <SRS0=xB9j=DO=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
+	id 1kQEN6-00013t-39
+	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:41:04 +0000
+X-Inumbo-ID: 40d4bb9d-5e4f-4c64-91bf-4a88d914e1f9
+Received: from mail.xenproject.org (unknown [104.130.215.37])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 029da054-f876-40dd-a094-2e3f3d07448a;
-	Wed, 07 Oct 2020 18:21:29 +0000 (UTC)
-Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
-	by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
-	(return-path ijackson@chiark.greenend.org.uk)
-	id 1kQDk6-0007CF-BH; Wed, 07 Oct 2020 19:00:46 +0100
-From: Ian Jackson <iwj@xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>,
-	Ian Jackson <Ian.Jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH 52/82] host allocation: Group jobs by their reuse parameters
-Date: Wed,  7 Oct 2020 18:59:54 +0100
-Message-Id: <20201007180024.7932-53-iwj@xenproject.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20201007180024.7932-1-iwj@xenproject.org>
-References: <20201007180024.7932-1-iwj@xenproject.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+	id 40d4bb9d-5e4f-4c64-91bf-4a88d914e1f9;
+	Wed, 07 Oct 2020 18:40:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Message-Id:Subject:To;
+	bh=vQ3WMdtua64mU/eCMTrAqRNOOnZGhr6kTxh9C1ZvNec=; b=zxML+KMW3p6QmYo/rorgC/j17S
+	MOFJSBH7eyNgZSGf7DHa22W2ViujDxN2tF03M95+0vNvEI+e/uBiTsh0KRk19fgrcy0lFtbVTHsgg
+	hvidImfqemn3VEajhQEQ2zQmrFf2TqA2x0PZMFoKyFehTBP6fNFj3Wvzg71NYBJ7bWDE=;
+Received: from host146.205.237.98.conversent.net ([205.237.98.146] helo=infra.test-lab.xenproject.org)
+	by mail.xenproject.org with esmtp (Exim 4.92)
+	(envelope-from <osstest-admin@xenproject.org>)
+	id 1kQEMy-0003iW-Rw; Wed, 07 Oct 2020 18:40:56 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+	by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+	(envelope-from <osstest-admin@xenproject.org>)
+	id 1kQEMy-0005BS-K4; Wed, 07 Oct 2020 18:40:56 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim 4.92)
+	(envelope-from <osstest-admin@xenproject.org>)
+	id 1kQEMy-0005fo-JX; Wed, 07 Oct 2020 18:40:56 +0000
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Subject: [xen-unstable-smoke bisection] complete build-amd64
+Message-Id: <E1kQEMy-0005fo-JX@osstest.test-lab.xenproject.org>
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Wed, 07 Oct 2020 18:40:56 +0000
 
-From: Ian Jackson <ian.jackson@eu.citrix.com>
+branch xen-unstable-smoke
+xenbranch xen-unstable-smoke
+job build-amd64
+testid xen-build
 
-This promotes reuse by arranging that jobs that can reuse a host get
-to run consecutively.
+Tree: qemuu git://xenbits.xen.org/qemu-xen.git
+Tree: xen git://xenbits.xen.org/xen.git
 
-Signed-off-by: Ian Jackson <Ian.Jackson@eu.citrix.com>
----
- Osstest/JobDB/Executive.pm  | 47 +++++++++++++++++++++++++++++++++++++
- Osstest/JobDB/Standalone.pm |  2 ++
- ts-host-reuse               |  1 +
- ts-hosts-allocate-Executive |  4 ++++
- 4 files changed, 54 insertions(+)
+*** Found and reproduced problem changeset ***
 
-diff --git a/Osstest/JobDB/Executive.pm b/Osstest/JobDB/Executive.pm
-index 30629572..8c235d45 100644
---- a/Osstest/JobDB/Executive.pm
-+++ b/Osstest/JobDB/Executive.pm
-@@ -389,6 +389,53 @@ END
-     }
- }
- 
-+sub jobdb_set_hosts_infraprioritygroup ($$$$;$) { # method
-+    my ($mo, $flight, $job, $group_key, $rref) = @_;
-+    # Sets the runvar hosts_infraprioritygroup in $flight,$job
-+    # The runvar values are NUM:GROUPKEY
-+    # such that each GROUPKEY always has the same NUM, within the flight
-+    # $rref is \%r (for use within a ts-*) or undef
-+
-+    my $vn = 'hosts_infraprioritygroup';
-+
-+    my $queryq = $dbh_tests->prepare(<<END);
-+        SELECT job, val,
-+               (job = ?) AS thisjob
-+          FROM runvars
-+         WHERE flight=?
-+           AND name=?
-+      ORDER BY thisjob DESC
-+END
-+    my $insertq = $dbh_tests->prepare(<<END);
-+        INSERT INTO runvars (flight,job, name,val, synth)
-+                     VALUES (?,     ?,   ?,   ?,   't')
-+END
-+
-+    my $resulting;
-+    db_retry($dbh_tests,[],sub {
-+	my $use = 1;
-+	$resulting = undef;
-+        $queryq->execute($job, $flight, $vn);
-+	while (my ($tjob, $tval, $thisjob) = $queryq->fetchrow_array()) {
-+	    if ($thisjob) {
-+		logm("$vn: job is already in group $tval");
-+		return;
-+	    }
-+	    $tval =~ m/^(\d+)\:/ or die "$flight $job $tval ?";
-+	    if ($' eq $group_key) {
-+		$use = $1;
-+		last;
-+	    } elsif ($1 >= $use) {
-+		$use = $1 + 1;
-+	    }
-+	}
-+	$resulting = "$use:$group_key";
-+	logm("$vn: inserting job into group $resulting");
-+	$insertq->execute($flight,$job,$vn, $resulting);
-+    });
-+    $rref->{$vn} = $resulting if $rref && defined $resulting;
-+}
-+
- sub jobdb_flight_started_for_log_capture ($$) { #method
-     my ($mo, $flight) = @_;
-     my $started= $dbh_tests->selectrow_array(<<END);
-diff --git a/Osstest/JobDB/Standalone.pm b/Osstest/JobDB/Standalone.pm
-index 4f320ccf..1db4dc78 100644
---- a/Osstest/JobDB/Standalone.pm
-+++ b/Osstest/JobDB/Standalone.pm
-@@ -118,6 +118,8 @@ sub jobdb_resource_shared_mark_ready { } #method
- 
- sub jobdb_check_other_job { } #method
- 
-+sub jobdb_set_hosts_infraprioritygroup { } # method
-+
- sub jobdb_flight_started_for_log_capture ($$) { #method
-     my ($mo, $flight) = @_;
-     return time - 60*60; # just the most recent serial log then,
-diff --git a/ts-host-reuse b/ts-host-reuse
-index 5bdb07d1..29abe987 100755
---- a/ts-host-reuse
-+++ b/ts-host-reuse
-@@ -141,6 +141,7 @@ sub act_prealloc () {
-     compute_test_sharetype();
-     $ho = selecthost($whhost, undef, 1);
-     set_runtime_hostflag($ho->{Ident}, "reuse-$sharetype");
-+    $mjobdb->jobdb_set_hosts_infraprioritygroup($flight, $job, $sharetype, \%r);
- }
- 
- sub act_start_test () {
-diff --git a/ts-hosts-allocate-Executive b/ts-hosts-allocate-Executive
-index fc107c08..a50f8bf3 100755
---- a/ts-hosts-allocate-Executive
-+++ b/ts-hosts-allocate-Executive
-@@ -733,9 +733,13 @@ sub alloc_hosts () {
-         ? -10000
-         : -10 * @hids;
- 
-+    my $infrapriority =
-+	($r{hosts_infraprioritygroup} // '') =~ m/^(\d+):/ ? $1 : undef;
-+
-     my $ok = alloc_resources(WaitStart =>
-                     ($ENV{OSSTEST_RESOURCE_WAITSTART} || $fi->{started}),
-                     WaitStartAdjust => $waitstartadjust,
-+                    InfraPriority => $infrapriority,
- 		    DebugFh => \*DEBUG,
-                     \&attempt_allocation);
- 
--- 
-2.20.1
+  Bug is in tree:  xen git://xenbits.xen.org/xen.git
+  Bug introduced:  e4e64408f5c755da3bf7bfd78e70ad9f6c448376
+  Bug not present: 93508595d588afe9dca087f95200effb7cedc81f
+  Last fail repro: http://logs.test-lab.xenproject.org/osstest/logs/155530/
+
+
+  commit e4e64408f5c755da3bf7bfd78e70ad9f6c448376
+  Author: Bertrand Marquis <bertrand.marquis@arm.com>
+  Date:   Fri Oct 2 11:42:09 2020 +0100
+  
+      build: always use BASEDIR for xen sub-directory
+      
+      Modify Makefiles using $(XEN_ROOT)/xen to use $(BASEDIR) instead.
+      
+      This is removing the dependency to xen subdirectory preventing using a
+      wrong configuration file when xen subdirectory is duplicated for
+      compilation tests.
+      
+      Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
+      Acked-by: Jan Beulich <jbeulich@suse.com>
+
+
+For bisection revision-tuple graph see:
+   http://logs.test-lab.xenproject.org/osstest/results/bisect/xen-unstable-smoke/build-amd64.xen-build.html
+Revision IDs in each graph node refer, respectively, to the Trees above.
+
+----------------------------------------
+Running cs-bisection-step --graph-out=/home/logs/results/bisect/xen-unstable-smoke/build-amd64.xen-build --summary-out=tmp/155530.bisection-summary --basis-template=155495 --blessings=real,real-bisect xen-unstable-smoke build-amd64 xen-build
+Searching for failure / basis pass:
+ 155517 fail [host=himrod1] / 155495 [host=himrod2] 155349 [host=himrod2] 155327 ok.
+Failure / basis pass flights: 155517 / 155327
+(tree with no url: minios)
+(tree in basispass but not in latest: ovmf)
+(tree in basispass but not in latest: qemu)
+(tree in basispass but not in latest: seabios)
+Tree: qemuu git://xenbits.xen.org/qemu-xen.git
+Tree: xen git://xenbits.xen.org/xen.git
+Latest ea6d3cd1ed79d824e605a70c3626bc437c386260 e4e64408f5c755da3bf7bfd78e70ad9f6c448376
+Basis pass ea6d3cd1ed79d824e605a70c3626bc437c386260 59b27f360e3d9dc0378c1288e67a91fa41a77158
+Generating revisions with ./adhoc-revtuple-generator  git://xenbits.xen.org/qemu-xen.git#ea6d3cd1ed79d824e605a70c3626bc437c386260-ea6d3cd1ed79d824e605a70c3626bc437c386260 git://xenbits.xen.org/xen.git#59b27f360e3d9dc0378c1288e67a91fa41a77158-e4e64408f5c755da3bf7bfd78e70ad9f6c448376
+Loaded 5001 nodes in revision graph
+Searching for test results:
+ 155310 [host=himrod2]
+ 155321 [host=albana1]
+ 155327 pass ea6d3cd1ed79d824e605a70c3626bc437c386260 59b27f360e3d9dc0378c1288e67a91fa41a77158
+ 155349 [host=himrod2]
+ 155495 [host=himrod2]
+ 155517 fail ea6d3cd1ed79d824e605a70c3626bc437c386260 e4e64408f5c755da3bf7bfd78e70ad9f6c448376
+ 155519 pass ea6d3cd1ed79d824e605a70c3626bc437c386260 59b27f360e3d9dc0378c1288e67a91fa41a77158
+ 155520 fail ea6d3cd1ed79d824e605a70c3626bc437c386260 e4e64408f5c755da3bf7bfd78e70ad9f6c448376
+ 155522 pass ea6d3cd1ed79d824e605a70c3626bc437c386260 3600118a52e75e10800806fdd05eba13adc87347
+ 155523 pass ea6d3cd1ed79d824e605a70c3626bc437c386260 1bc30c076a7f1678166934c080e1bf94b2c189af
+ 155524 pass ea6d3cd1ed79d824e605a70c3626bc437c386260 7f66c0dc41ae5f770c614e516810eb1f336e2470
+ 155525 pass ea6d3cd1ed79d824e605a70c3626bc437c386260 93508595d588afe9dca087f95200effb7cedc81f
+ 155526 fail ea6d3cd1ed79d824e605a70c3626bc437c386260 e4e64408f5c755da3bf7bfd78e70ad9f6c448376
+ 155527 pass ea6d3cd1ed79d824e605a70c3626bc437c386260 93508595d588afe9dca087f95200effb7cedc81f
+ 155528 fail ea6d3cd1ed79d824e605a70c3626bc437c386260 e4e64408f5c755da3bf7bfd78e70ad9f6c448376
+ 155529 pass ea6d3cd1ed79d824e605a70c3626bc437c386260 93508595d588afe9dca087f95200effb7cedc81f
+ 155530 fail ea6d3cd1ed79d824e605a70c3626bc437c386260 e4e64408f5c755da3bf7bfd78e70ad9f6c448376
+Searching for interesting versions
+ Result found: flight 155327 (pass), for basis pass
+ For basis failure, parent search stopping at ea6d3cd1ed79d824e605a70c3626bc437c386260 93508595d588afe9dca087f95200effb7cedc81f, results HASH(0x55f3dbade518) HASH(0x55f3dbae5e48) HASH(0x55f3dbae9b58) For basis failure, parent search stopping at ea6d3cd1ed79d824e605a70c3626bc437c386260 7f66c0dc41ae5f770c614e516810eb1f336e2470, results HASH(0x55f3dbad0e18) For basis failure, parent search stopping at ea6d3cd1ed79d824e605a70c3626bc437c386260 1bc30c076a7f1678166934c080e1bf94b2c189af, results HASH(0x\
+ 55f3dbad9760) For basis failure, parent search stopping at ea6d3cd1ed79d824e605a70c3626bc437c386260 3600118a52e75e10800806fdd05eba13adc87347, results HASH(0x55f3dbadb2e8) For basis failure, parent search stopping at ea6d3cd1ed79d824e605a70c3626bc437c386260 59b27f360e3d9dc0378c1288e67a91fa41a77158, results HASH(0x55f3dbad1118) HASH(0x55f3dbad9460) Result found: flight 155517 (fail), for basis failure (at ancestor ~407)
+ Repro found: flight 155519 (pass), for basis pass
+ Repro found: flight 155520 (fail), for basis failure
+ 0 revisions at ea6d3cd1ed79d824e605a70c3626bc437c386260 93508595d588afe9dca087f95200effb7cedc81f
+No revisions left to test, checking graph state.
+ Result found: flight 155525 (pass), for last pass
+ Result found: flight 155526 (fail), for first failure
+ Repro found: flight 155527 (pass), for last pass
+ Repro found: flight 155528 (fail), for first failure
+ Repro found: flight 155529 (pass), for last pass
+ Repro found: flight 155530 (fail), for first failure
+
+*** Found and reproduced problem changeset ***
+
+  Bug is in tree:  xen git://xenbits.xen.org/xen.git
+  Bug introduced:  e4e64408f5c755da3bf7bfd78e70ad9f6c448376
+  Bug not present: 93508595d588afe9dca087f95200effb7cedc81f
+  Last fail repro: http://logs.test-lab.xenproject.org/osstest/logs/155530/
+
+
+  commit e4e64408f5c755da3bf7bfd78e70ad9f6c448376
+  Author: Bertrand Marquis <bertrand.marquis@arm.com>
+  Date:   Fri Oct 2 11:42:09 2020 +0100
+  
+      build: always use BASEDIR for xen sub-directory
+      
+      Modify Makefiles using $(XEN_ROOT)/xen to use $(BASEDIR) instead.
+      
+      This is removing the dependency to xen subdirectory preventing using a
+      wrong configuration file when xen subdirectory is duplicated for
+      compilation tests.
+      
+      Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
+      Acked-by: Jan Beulich <jbeulich@suse.com>
+
+Revision graph left in /home/logs/results/bisect/xen-unstable-smoke/build-amd64.xen-build.{dot,ps,png,html,svg}.
+----------------------------------------
+155530: tolerable ALL FAIL
+
+flight 155530 xen-unstable-smoke real-bisect [real]
+http://logs.test-lab.xenproject.org/osstest/logs/155530/
+
+Failures :-/ but no regressions.
+
+Tests which did not succeed,
+including tests which could not be run:
+ build-amd64                   6 xen-build               fail baseline untested
+
+
+jobs:
+ build-amd64                                                  fail    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
 
 
