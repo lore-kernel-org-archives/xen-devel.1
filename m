@@ -7,21 +7,21 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 27C55C41604
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BDC03C4727F
 	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:27:03 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CAEA82168B
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:27:02 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CAEA82168B
+	by mail.kernel.org (Postfix) with ESMTPS id 5E6A72168B
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:27:03 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5E6A72168B
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.3679.10718 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.3680.10727 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQE9M-00011E-W3; Wed, 07 Oct 2020 18:26:53 +0000
+	id 1kQE9N-00013R-Ma; Wed, 07 Oct 2020 18:26:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 3679.10718; Wed, 07 Oct 2020 18:26:52 +0000
+Received: by outflank-mailman (output) from mailman id 3680.10727; Wed, 07 Oct 2020 18:26:53 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,69 +36,86 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQE9M-000110-J9; Wed, 07 Oct 2020 18:26:52 +0000
-Received: by outflank-mailman (input) for mailman id 3679;
+	id 1kQE9N-00012c-6T; Wed, 07 Oct 2020 18:26:53 +0000
+Received: by outflank-mailman (input) for mailman id 3680;
  Wed, 07 Oct 2020 18:26:50 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1qty=DO=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1kQE4r-00072Q-Ma
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:22:13 +0000
+ id 1kQE3F-00072Q-JI
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:20:33 +0000
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 63f7e1ad-c494-4b89-b87a-6c792056477b;
- Wed, 07 Oct 2020 18:20:30 +0000 (UTC)
+ id a795a7b0-ab03-49c3-846d-640a676d8665;
+ Wed, 07 Oct 2020 18:19:42 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1kQDkC-0007CF-V0; Wed, 07 Oct 2020 19:00:53 +0100
+ id 1kQDjx-0007CF-CF; Wed, 07 Oct 2020 19:00:37 +0100
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=1qty=DO=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
-	id 1kQE4r-00072Q-Ma
-	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:22:13 +0000
-X-Inumbo-ID: 63f7e1ad-c494-4b89-b87a-6c792056477b
+	id 1kQE3F-00072Q-JI
+	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:20:33 +0000
+X-Inumbo-ID: a795a7b0-ab03-49c3-846d-640a676d8665
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 63f7e1ad-c494-4b89-b87a-6c792056477b;
-	Wed, 07 Oct 2020 18:20:30 +0000 (UTC)
+	id a795a7b0-ab03-49c3-846d-640a676d8665;
+	Wed, 07 Oct 2020 18:19:42 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
 	by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
 	(return-path ijackson@chiark.greenend.org.uk)
-	id 1kQDkC-0007CF-V0; Wed, 07 Oct 2020 19:00:53 +0100
+	id 1kQDjx-0007CF-CF; Wed, 07 Oct 2020 19:00:37 +0100
 From: Ian Jackson <iwj@xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: Ian Jackson <iwj@xenproject.org>
-Subject: [OSSTEST PATCH 80/82] tsreadconfig: Change misleading "setting" message
-Date: Wed,  7 Oct 2020 19:00:22 +0100
-Message-Id: <20201007180024.7932-81-iwj@xenproject.org>
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 17/82] Debian: osstest-erase-other-disks: Slightly guard against races
+Date: Wed,  7 Oct 2020 18:59:19 +0100
+Message-Id: <20201007180024.7932-18-iwj@xenproject.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20201007180024.7932-1-iwj@xenproject.org>
 References: <20201007180024.7932-1-iwj@xenproject.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-These are the *existing* runvars and it is confusing that we print
-"setting" for them.
+From: Ian Jackson <ian.jackson@eu.citrix.com>
 
-Signed-off-by: Ian Jackson <iwj@xenproject.org>
+Apparently it can happen that something decides to rescan a partition
+table, removing a partition block device, while it is being zeroed:
+
+ osstest-erase-other-disks-6081: hd devices present after: /dev/hd*
+ osstest-erase-other-disks-6081: Erasing /dev/sda
+ osstest-erase-other-disks-6081: Erasing /dev/sda1
+ osstest-erase-other-disks-6081: /dev/sda1 is no longer a block device!
+
+To try to narrow the window during which this race occurs, do not care
+if the thing we just zeroed no longer exists after we zeroed it.
+
+We still bomb out if it exists but is not a block device - that would
+probably mean we had written it out as a file.
+
+This is all quite unfortunate.
+
+Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- Osstest/TestSupport.pm | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ Osstest/Debian.pm | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/Osstest/TestSupport.pm b/Osstest/TestSupport.pm
-index 163862f8..f2d8a0e1 100644
---- a/Osstest/TestSupport.pm
-+++ b/Osstest/TestSupport.pm
-@@ -210,7 +210,7 @@ END
-         while ($row= $q->fetchrow_hashref()) {
-             $r{ $row->{name} }= $row->{val};
- 	    $r_notsynth{ $row->{name} }= !$row->{synth};
--            logm("setting $row->{name}=$row->{val}");
-+            logm("runvar $row->{name}=$row->{val}");
-         }
-         $q->finish();
-     });
+diff --git a/Osstest/Debian.pm b/Osstest/Debian.pm
+index 85fd16da..3fa26e45 100644
+--- a/Osstest/Debian.pm
++++ b/Osstest/Debian.pm
+@@ -1211,8 +1211,8 @@ zero () {
+     if test -b \$dev; then
+         log "Erasing \$dev"
+         dd if=/dev/zero of=\$dev count=64 ||:
+-        if ! test -b \$dev; then
+-            log "\$dev is no longer a block device!"
++        if test -e \$dev && ! test -b \$dev; then
++            log "\$dev still exists but is no longer a block device!"
+             exit 1
+         fi
+     else
 -- 
 2.20.1
 
