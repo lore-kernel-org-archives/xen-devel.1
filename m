@@ -7,21 +7,21 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 58BABC41604
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DCDAEC4727E
 	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:26:59 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E2DB32168B
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:26:58 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E2DB32168B
+	by mail.kernel.org (Postfix) with ESMTPS id 75D132168B
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:26:59 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 75D132168B
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.3676.10687 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.3675.10675 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQE9K-0000w3-KL; Wed, 07 Oct 2020 18:26:50 +0000
+	id 1kQE9J-0000sM-AJ; Wed, 07 Oct 2020 18:26:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 3676.10687; Wed, 07 Oct 2020 18:26:50 +0000
+Received: by outflank-mailman (output) from mailman id 3675.10675; Wed, 07 Oct 2020 18:26:49 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,42 +36,42 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQE9K-0000vs-FS; Wed, 07 Oct 2020 18:26:50 +0000
-Received: by outflank-mailman (input) for mailman id 3676;
- Wed, 07 Oct 2020 18:26:49 +0000
+	id 1kQE9J-0000sE-63; Wed, 07 Oct 2020 18:26:49 +0000
+Received: by outflank-mailman (input) for mailman id 3675;
+ Wed, 07 Oct 2020 18:26:48 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1qty=DO=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1kQE2v-00072Q-I7
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:20:13 +0000
+ id 1kQE69-00072Q-QI
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:23:33 +0000
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id bd8824be-dd5e-4d5c-867b-b0c62c0c400f;
- Wed, 07 Oct 2020 18:19:33 +0000 (UTC)
+ id 305c7497-7824-4566-bea9-54b5df9ad956;
+ Wed, 07 Oct 2020 18:21:31 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1kQDjy-0007CF-Ob; Wed, 07 Oct 2020 19:00:38 +0100
+ id 1kQDju-0007CF-Sy; Wed, 07 Oct 2020 19:00:35 +0100
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=1qty=DO=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
-	id 1kQE2v-00072Q-I7
-	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:20:13 +0000
-X-Inumbo-ID: bd8824be-dd5e-4d5c-867b-b0c62c0c400f
+	id 1kQE69-00072Q-QI
+	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:23:33 +0000
+X-Inumbo-ID: 305c7497-7824-4566-bea9-54b5df9ad956
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id bd8824be-dd5e-4d5c-867b-b0c62c0c400f;
-	Wed, 07 Oct 2020 18:19:33 +0000 (UTC)
+	id 305c7497-7824-4566-bea9-54b5df9ad956;
+	Wed, 07 Oct 2020 18:21:31 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
 	by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
 	(return-path ijackson@chiark.greenend.org.uk)
-	id 1kQDjy-0007CF-Ob; Wed, 07 Oct 2020 19:00:38 +0100
+	id 1kQDju-0007CF-Sy; Wed, 07 Oct 2020 19:00:35 +0100
 From: Ian Jackson <iwj@xenproject.org>
 To: xen-devel@lists.xenproject.org
 Cc: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH 22/82] sg-run-job: Use +! in per-host-ts implementation
-Date: Wed,  7 Oct 2020 18:59:24 +0100
-Message-Id: <20201007180024.7932-23-iwj@xenproject.org>
+Subject: [OSSTEST PATCH 11/82] cr-publish-flight-logs: Fix abs_time calls
+Date: Wed,  7 Oct 2020 18:59:13 +0100
+Message-Id: <20201007180024.7932-12-iwj@xenproject.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20201007180024.7932-1-iwj@xenproject.org>
 References: <20201007180024.7932-1-iwj@xenproject.org>
@@ -80,35 +80,28 @@ Content-Transfer-Encoding: 8bit
 
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 
-This makes this slightly clearer, even more so in a moment.
-
-No functional change.
+There was a missing space in these messages, since they were
+introduced in 31b7cae19fe1
+  timing traces: cr-publish-flight-logs: Report more progress
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- sg-run-job | 9 ++++-----
- 1 file changed, 4 insertions(+), 5 deletions(-)
+ cr-publish-flight-logs | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/sg-run-job b/sg-run-job
-index 3ca725e7..3f44cae7 100755
---- a/sg-run-job
-+++ b/sg-run-job
-@@ -458,11 +458,10 @@ proc per-host-ts {iffail ident script args} {
-     set awaitl {}
-     foreach host $need_xen_hosts {
-         set hostargs {}
--        if {![string compare $host host]} {
--            lappend hostargs + $host
--        } else {
--            lappend hostargs $host +
--        }
-+	if {[string compare $host host]} {
-+	    lappend hostargs +! $host
-+	}
-+	lappend hostargs + $host
-         lappend awaitl [eval spawn-ts $iffail $ident $script $hostargs $args]
-     }
+diff --git a/cr-publish-flight-logs b/cr-publish-flight-logs
+index 63c47d9f..c570dfaf 100755
+--- a/cr-publish-flight-logs
++++ b/cr-publish-flight-logs
+@@ -43,7 +43,7 @@ die unless $flight =~ m/^\d*$/;
  
+ die "usage: ./cr-publish-flight-logs [flight]" unless @ARGV==0;
+ 
+-sub progress { print +(show_abs_time time), @_, "\n" }
++sub progress { print +(show_abs_time time), " ", @_, "\n" }
+ 
+ progress("acquiring publish-lock...");
+ open LOCK, "> $c{GlobalLockDir}/publish-lock" or die $!;
 -- 
 2.20.1
 
