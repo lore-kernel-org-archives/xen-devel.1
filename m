@@ -7,21 +7,21 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7C25CC4363C
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:28:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 59A79C41604
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:28:09 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 143002176B
+	by mail.kernel.org (Postfix) with ESMTPS id ED69F21789
 	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:28:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 143002176B
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org ED69F21789
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.3709.11071 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.3710.11077 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQEAO-0003zw-Hl; Wed, 07 Oct 2020 18:27:56 +0000
+	id 1kQEAP-00042s-Of; Wed, 07 Oct 2020 18:27:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 3709.11071; Wed, 07 Oct 2020 18:27:56 +0000
+Received: by outflank-mailman (output) from mailman id 3710.11077; Wed, 07 Oct 2020 18:27:57 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,43 +36,43 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQEAO-0003zT-3y; Wed, 07 Oct 2020 18:27:56 +0000
-Received: by outflank-mailman (input) for mailman id 3709;
+	id 1kQEAO-00041g-Ns; Wed, 07 Oct 2020 18:27:56 +0000
+Received: by outflank-mailman (input) for mailman id 3710;
  Wed, 07 Oct 2020 18:27:55 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1qty=DO=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1kQE4S-00072Q-Lc
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:21:48 +0000
+ id 1kQE5f-00072Q-Ol
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:23:03 +0000
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id ddcc62eb-6ded-4054-be0f-ede0730b6969;
- Wed, 07 Oct 2020 18:20:19 +0000 (UTC)
+ id 2d13658e-fba9-4421-9b68-f8e723a3e629;
+ Wed, 07 Oct 2020 18:21:16 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1kQDk2-0007CF-1d; Wed, 07 Oct 2020 19:00:42 +0100
+ id 1kQDjz-0007CF-GO; Wed, 07 Oct 2020 19:00:39 +0100
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=1qty=DO=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
-	id 1kQE4S-00072Q-Lc
-	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:21:48 +0000
-X-Inumbo-ID: ddcc62eb-6ded-4054-be0f-ede0730b6969
+	id 1kQE5f-00072Q-Ol
+	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:23:03 +0000
+X-Inumbo-ID: 2d13658e-fba9-4421-9b68-f8e723a3e629
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id ddcc62eb-6ded-4054-be0f-ede0730b6969;
-	Wed, 07 Oct 2020 18:20:19 +0000 (UTC)
+	id 2d13658e-fba9-4421-9b68-f8e723a3e629;
+	Wed, 07 Oct 2020 18:21:16 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
 	by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
 	(return-path ijackson@chiark.greenend.org.uk)
-	id 1kQDk2-0007CF-1d; Wed, 07 Oct 2020 19:00:42 +0100
+	id 1kQDjz-0007CF-GO; Wed, 07 Oct 2020 19:00:39 +0100
 From: Ian Jackson <iwj@xenproject.org>
 To: xen-devel@lists.xenproject.org
 Cc: Ian Jackson <ian.jackson@eu.citrix.com>,
 	Ian Jackson <Ian.Jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH 34/82] plan_search: Track last sharing state to determine $share_reuse
-Date: Wed,  7 Oct 2020 18:59:36 +0100
-Message-Id: <20201007180024.7932-35-iwj@xenproject.org>
+Subject: [OSSTEST PATCH 25/82] host allocation: *_shared_mark_ready: Make $sharetype check optional
+Date: Wed,  7 Oct 2020 18:59:27 +0100
+Message-Id: <20201007180024.7932-26-iwj@xenproject.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20201007180024.7932-1-iwj@xenproject.org>
 References: <20201007180024.7932-1-iwj@xenproject.org>
@@ -81,57 +81,55 @@ Content-Transfer-Encoding: 8bit
 
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 
-What matters for the purpose of $share_reuse is not whether the host
-is actually being _shared_ (ie, there are other concurrent allocations
-and therefore a concurrent Event with Share information).  What we
-really want to know is whether the *last* use of this host was a
-suitable sharing setup - because we actually want to know if we will
-be able to skip our setup.
+We are going to want to be able to set shares to other than ready,
+without double-checking the sharetype.
 
-So track that explicitly.  (The slightly odd structure, where there
-are two loops in one, means that we reset $last_eshare when we go onto
-the next $req ie the next host to check.)
+The change to the UPDATE statement makes no difference because
+resource_check_allocated_core has just got that sharetype out of the
+db.  (This does remove one safety check against bugs, sadly.)
+
+No functional change for existing callers.
 
 Signed-off-by: Ian Jackson <Ian.Jackson@eu.citrix.com>
 ---
- Osstest/Executive.pm | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+ Osstest/Executive.pm | 14 +++++++++-----
+ 1 file changed, 9 insertions(+), 5 deletions(-)
 
 diff --git a/Osstest/Executive.pm b/Osstest/Executive.pm
-index 4083ae6b..5f59c44e 100644
+index f0038f6b..fd975590 100644
 --- a/Osstest/Executive.pm
 +++ b/Osstest/Executive.pm
-@@ -676,6 +676,7 @@ sub plan_search ($$$$) {
-     my $try_time= 0;
-     my $confirmedok= 0;
-     my $share_reuse= 0;
-+    my $last_eshare;
+@@ -1059,21 +1059,25 @@ sub executive_resource_shared_mark_ready ($$$;$$) {
+     $newstate //= 'ready';
  
-     for (;;) {
- 	my $req= $requestlist->[$reqix];
-@@ -715,6 +716,10 @@ sub plan_search ($$$$) {
-             # this period is entirely after the proposed slot;
-             # so no need to check this or any later periods
+     my $what= "resource $restype $resname";
+-    $sharetype .= ' '.get_harness_rev();
++    if (defined $sharetype) {
++	$sharetype .= ' '.get_harness_rev();
++    } else {
++	die if $newstate eq 'ready';
++    }
  
-+	    $last_eshare = $startevt->{
-+                $startevt->{Type} eq 'Unshare' ? 'PreviousShare' : 'Share'
-+				      };
-+
- 	    next PERIOD if $endevt->{Time} <= $try_time;
-             # this period is entirely before the proposed slot;
-             # it doesn't overlap, but must check subsequent periods
-@@ -743,9 +748,10 @@ sub plan_search ($$$$) {
- 	    " try=$try_time confirmed=$confirmedok reuse=$share_reuse");
+     db_retry($dbh_tests, [qw(resources)], sub {
+         $oldshr= resource_check_allocated_core($restype, $resname);
+         if (defined $oldshr) {
+             die "$what shared $oldshr->{Type} not $sharetype"
+-                unless $oldshr->{Type} eq $sharetype;
++                unless !defined $sharetype or $oldshr->{Type} eq $sharetype;
+             die "$what shared state $oldshr->{State} not $oldstate"
+                 unless $oldshr->{State} eq $oldstate;
+-            my $nrows= $dbh_tests->do(<<END,{}, $newstate, $restype,$resname,$sharetype);
++            my $nrows= $dbh_tests->do(<<END,{}, $newstate, $restype,$resname);
+                 UPDATE resource_sharing
+                    SET state=?
+-                 WHERE restype=? AND resname=? AND sharetype=?
++                 WHERE restype=? AND resname=?
+ END
+-            die "unexpected not updated state $what $sharetype $nrows"
++            die "unexpected not updated state $what $nrows"
+                 unless $nrows==1;
  
- 	$confirmedok++;
--	$share_reuse++ if defined $share_wear;
-+	$share_reuse++ if $last_eshare and $share_compat_ok->($last_eshare);
- 	$reqix++;
- 	$reqix %= @$requestlist;
-+	undef $last_eshare;
- 	last if $confirmedok==@$requestlist;
-     }
- 
+             $dbh_tests->do(<<END,{}, $oldshr->{ResType}, $resname);
 -- 
 2.20.1
 
