@@ -7,21 +7,21 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 87BAEC4363C
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:27:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AE6F2C41604
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:27:08 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2C60821707
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:27:06 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2C60821707
+	by mail.kernel.org (Postfix) with ESMTPS id 562E12168B
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:27:08 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 562E12168B
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.3681.10747 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.3682.10759 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQE9Q-0001AU-1U; Wed, 07 Oct 2020 18:26:56 +0000
+	id 1kQE9S-0001Ga-G2; Wed, 07 Oct 2020 18:26:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 3681.10747; Wed, 07 Oct 2020 18:26:55 +0000
+Received: by outflank-mailman (output) from mailman id 3682.10759; Wed, 07 Oct 2020 18:26:58 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,42 +36,42 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQE9P-0001AE-Si; Wed, 07 Oct 2020 18:26:55 +0000
-Received: by outflank-mailman (input) for mailman id 3681;
- Wed, 07 Oct 2020 18:26:54 +0000
+	id 1kQE9S-0001GC-Av; Wed, 07 Oct 2020 18:26:58 +0000
+Received: by outflank-mailman (input) for mailman id 3682;
+ Wed, 07 Oct 2020 18:26:57 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1qty=DO=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1kQE5k-00072Q-Op
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:23:08 +0000
+ id 1kQE4h-00072Q-M9
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:22:03 +0000
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b7be757a-7ef1-4450-aafd-609299bbaff6;
- Wed, 07 Oct 2020 18:21:19 +0000 (UTC)
+ id e10c92d9-2c86-48a5-a857-634025a4b23d;
+ Wed, 07 Oct 2020 18:20:26 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1kQDk7-0007CF-AN; Wed, 07 Oct 2020 19:00:47 +0100
+ id 1kQDkA-0007CF-6l; Wed, 07 Oct 2020 19:00:50 +0100
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=1qty=DO=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
-	id 1kQE5k-00072Q-Op
-	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:23:08 +0000
-X-Inumbo-ID: b7be757a-7ef1-4450-aafd-609299bbaff6
+	id 1kQE4h-00072Q-M9
+	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:22:03 +0000
+X-Inumbo-ID: e10c92d9-2c86-48a5-a857-634025a4b23d
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id b7be757a-7ef1-4450-aafd-609299bbaff6;
-	Wed, 07 Oct 2020 18:21:19 +0000 (UTC)
+	id e10c92d9-2c86-48a5-a857-634025a4b23d;
+	Wed, 07 Oct 2020 18:20:26 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
 	by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
 	(return-path ijackson@chiark.greenend.org.uk)
-	id 1kQDk7-0007CF-AN; Wed, 07 Oct 2020 19:00:47 +0100
+	id 1kQDkA-0007CF-6l; Wed, 07 Oct 2020 19:00:50 +0100
 From: Ian Jackson <iwj@xenproject.org>
 To: xen-devel@lists.xenproject.org
 Cc: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH 56/82] subst_netboot_template: Do not use all of %r
-Date: Wed,  7 Oct 2020 18:59:58 +0100
-Message-Id: <20201007180024.7932-57-iwj@xenproject.org>
+Subject: [OSSTEST PATCH 68/82] host lifecycle: Prevent referential integrity violation
+Date: Wed,  7 Oct 2020 19:00:10 +0100
+Message-Id: <20201007180024.7932-69-iwj@xenproject.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20201007180024.7932-1-iwj@xenproject.org>
 References: <20201007180024.7932-1-iwj@xenproject.org>
@@ -80,38 +80,58 @@ Content-Transfer-Encoding: 8bit
 
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 
-Instead of copying all of %r into %v, have the template substitutor
-fall back to %r from %v.
+We can't use normal constraints for either of these, sadly.
 
-This is going to be important when we have host-reuse-related access
-control to %r.
+We can make the constraints into a single query which says "OK".
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- Osstest/TestSupport.pm | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ Osstest/JobDB/Executive.pm | 25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
 
-diff --git a/Osstest/TestSupport.pm b/Osstest/TestSupport.pm
-index be6b7119..634d6d2e 100644
---- a/Osstest/TestSupport.pm
-+++ b/Osstest/TestSupport.pm
-@@ -2876,6 +2876,7 @@ sub subst_netboot_template ($$$) {
- 	$pat =~ s{\%(\w*)\%}{
- 		    $1 eq '' ? '%' :
- 		    defined($v->{$1}) ? $v->{$1} :
-+		    defined($r{$1}) ? $r{$1} :
- 		    next;
- 		 }ge;
- 	# and return the first pattern we managed to completely substitute
-@@ -2890,7 +2891,7 @@ sub host_netboot_file ($;$) {
-     # returns the full netboot filename path
-     # in array context, returns (dir, pathtail)
-     #  where dir does not depend on $templatekeytail
--    my %v = %r;
-+    my %v;
-     my $firmware = get_host_property($ho, "firmware");
-     my $templatekeybase = $firmware eq 'uefi' ? 'NetGrub' : 'Pxe';
-     $templatekeytail //= 'Templates';
+diff --git a/Osstest/JobDB/Executive.pm b/Osstest/JobDB/Executive.pm
+index 3a8308e9..f69ce277 100644
+--- a/Osstest/JobDB/Executive.pm
++++ b/Osstest/JobDB/Executive.pm
+@@ -553,6 +553,28 @@ END
+                ON h.taskid = t.taskid
+             WHERE h.hostname = ?
+          ORDER BY h.lcseq;
++END
++    # We simulate two foreign key constraints which can't be in the
++    # db schema, by checking the values we are going to insert.
++    #
++    # For "resources" we would need a foreign key constraint
++    # with a literal value as part of the foreign key, which is
++    # not supported until PostgreSQL 13.
++    #
++    # For "tasks" we only want to apply the constraint on inserts into
++    # "host_lifecycle" - in particular, we want to allow delet6ions
++    # from "tasks" to render the taskid foreign key unresolvable.
++    # This could be done with a trigger, but since here is the only
++    # place we do insertions into host_lifecycle, this seems easier.
++    my $constraintsq = $dbh_tests->prepare(<<END);
++           SELECT * FROM
++	     (SELECT 1 AS ok
++	        FROM resources where restype='host' and resname=?) 
++              hostname_ok
++             NATURAL JOIN
++             (SELECT 1 AS ok
++                FROM tasks where taskid=? AND live)
++              taskid_ok;
+ END
+     my $insertq = $dbh_tests->prepare(<<END);
+         INSERT INTO host_lifecycle
+@@ -632,6 +654,9 @@ END
+ 		push @lifecycle, "$omarks$otj:$o->{stepno}$osuffix";
+ 	    }
+ 	}
++	$constraintsq->execute($hostname, $ttaskid);
++	$constraintsq->fetchrow_array() or confess "$hostname ?";
++
+ 	if (defined $flight) {
+ 	    $insertq->execute($hostname, $ttaskid,
+ 			      $flight, $job,
 -- 
 2.20.1
 
