@@ -2,28 +2,26 @@ Return-Path: <SRS0=B7KG=DO=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A07A0C4363C
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:22:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4F98DC4363C
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:26:58 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1F7752173E
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:22:26 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="bS7lIOhu"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1F7752173E
+	by mail.kernel.org (Postfix) with ESMTPS id C92F32168B
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:26:57 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C92F32168B
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.3671.10650 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.3674.10663 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQE4r-0000cW-4m; Wed, 07 Oct 2020 18:22:13 +0000
+	id 1kQE9C-0000oz-U6; Wed, 07 Oct 2020 18:26:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 3671.10650; Wed, 07 Oct 2020 18:22:13 +0000
+Received: by outflank-mailman (output) from mailman id 3674.10663; Wed, 07 Oct 2020 18:26:42 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,93 +36,95 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQE4r-0000cP-1m; Wed, 07 Oct 2020 18:22:13 +0000
-Received: by outflank-mailman (input) for mailman id 3671;
- Wed, 07 Oct 2020 18:22:11 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kQE9C-0000os-Pz; Wed, 07 Oct 2020 18:26:42 +0000
+Received: by outflank-mailman (input) for mailman id 3674;
+ Wed, 07 Oct 2020 18:26:41 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ECWb=DO=xenproject.org=iwj@srs-us1.protection.inumbo.net>)
- id 1kQE4p-0000cJ-QQ
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:22:11 +0000
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 199ec08b-e3d9-4eff-ac34-2b47fbd4bdc4;
- Wed, 07 Oct 2020 18:22:10 +0000 (UTC)
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1kQE4o-0003L3-Lz
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:22:10 +0000
-Received: from iwj (helo=mynotebook.example.org)
- by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1kQE4o-0008Vi-JA
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:22:10 +0000
-Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
- (envelope-from <iwj@xenproject.org>) id 1kQE4m-0003SW-Po
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 19:22:08 +0100
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+ <SRS0=1qty=DO=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
+ id 1kQE2W-00072Q-HT
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:19:48 +0000
+Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 9dc5c5b6-8d1c-43ed-a943-f114e0982010;
+ Wed, 07 Oct 2020 18:19:21 +0000 (UTC)
+Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
+ by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
+ (return-path ijackson@chiark.greenend.org.uk)
+ id 1kQDk7-0007CF-UQ; Wed, 07 Oct 2020 19:00:48 +0100
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=ECWb=DO=xenproject.org=iwj@srs-us1.protection.inumbo.net>)
-	id 1kQE4p-0000cJ-QQ
-	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:22:11 +0000
-X-Inumbo-ID: 199ec08b-e3d9-4eff-ac34-2b47fbd4bdc4
-Received: from mail.xenproject.org (unknown [104.130.215.37])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 199ec08b-e3d9-4eff-ac34-2b47fbd4bdc4;
-	Wed, 07 Oct 2020 18:22:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:To:Date:
-	Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
-	bh=q6Lhchrp5WV/uDmtgyM8+fXp02ox19ZzxjNkpYIlJB0=; b=bS7lIOhubmgmZbfwrAnRPc15QF
-	JCX3OzhMrOwqII1MLP01fd3qlmcLmXC384wIKp9qZ2jSTqAXpZWSeS54RMyheb0CjQxrx7M6fPz4o
-	ZFwJnhBe2iWvXVZVpDNUaH+I+wf118iCw92aN0C7ujIpygKUhJ4L3c80gJ3nokWIRQh0=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
-	by mail.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <iwj@xenproject.org>)
-	id 1kQE4o-0003L3-Lz
-	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:22:10 +0000
-Received: from iwj (helo=mynotebook.example.org)
-	by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
-	(envelope-from <iwj@xenproject.org>)
-	id 1kQE4o-0008Vi-JA
-	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:22:10 +0000
-Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
-	(envelope-from <iwj@xenproject.org>)
-	id 1kQE4m-0003SW-Po
-	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 19:22:08 +0100
+	(envelope-from <SRS0=1qty=DO=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
+	id 1kQE2W-00072Q-HT
+	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:19:48 +0000
+X-Inumbo-ID: 9dc5c5b6-8d1c-43ed-a943-f114e0982010
+Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id 9dc5c5b6-8d1c-43ed-a943-f114e0982010;
+	Wed, 07 Oct 2020 18:19:21 +0000 (UTC)
+Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
+	by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
+	(return-path ijackson@chiark.greenend.org.uk)
+	id 1kQDk7-0007CF-UQ; Wed, 07 Oct 2020 19:00:48 +0100
 From: Ian Jackson <iwj@xenproject.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
-Message-ID: <24446.1872.406679.996085@mariner.uk.xensource.com>
-Date: Wed, 7 Oct 2020 19:22:08 +0100
 To: xen-devel@lists.xenproject.org
-Subject: Re: [OSSTEST PATCH 00/82] Reuse test hosts
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 59/82] runvar access: Provide runvar_glob
+Date: Wed,  7 Oct 2020 19:00:01 +0100
+Message-Id: <20201007180024.7932-60-iwj@xenproject.org>
+X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20201007180024.7932-1-iwj@xenproject.org>
 References: <20201007180024.7932-1-iwj@xenproject.org>
-X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-Ian Jackson writes ("[OSSTEST PATCH 00/82] Reuse test hosts"):
-> This series arranges to save on host setup by reusing a test host, if
-> the previous test passed.  Care is taken to make sure that a host is
-> only reused in this way if the new test would have set it up
-> identically.
-> 
-> I have had this branch in preparation since November 2017...
+From: Ian Jackson <ian.jackson@eu.citrix.com>
 
-Many of the earlier commits in this series had my Citrix address as
-the author.  My setup was not configured to deliver these mails
-correctly (ie, via the Citrix mail servers), so those messages will
-generally have been blocked as spam.  Additionally, even the mails
-which were From: iwj@xenproject were delivered via my colo mail server
-which is not really right.  So some of those might also get blocked.
+We will need this because when runvar access is restricted, accessing
+via %r directly won't work.  We want to see what patterns the code is
+interested in (so that interest in a nonexistent runvar is properly
+tracked).
 
-I don't propose to resend the mailbomb.  You can find the complete
-series here:
-  https://xenbits.xen.org/gitweb/?p=people/iwj/osstest.git;a=shortlog;h=refs/heads/test-host-reuse-v1
-  https://xenbits.xen.org/git-http/people/iwj/osstest.git#test-host-reuse-v1
+Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
+---
+ Osstest/TestSupport.pm | 16 +++++++++++++++-
+ 1 file changed, 15 insertions(+), 1 deletion(-)
 
-It's in osstest pretest now.
+diff --git a/Osstest/TestSupport.pm b/Osstest/TestSupport.pm
+index b1eca0a9..6403e52b 100644
+--- a/Osstest/TestSupport.pm
++++ b/Osstest/TestSupport.pm
+@@ -53,7 +53,7 @@ BEGIN {
+                       store_runvar get_runvar get_runvar_maybe
+                       get_runvar_default need_runvars
+                       unique_incrementing_runvar next_unique_name
+-                      stashfilecontents runvar_is_synth
++                      stashfilecontents runvar_is_synth runvar_glob
+ 
+                       target_cmd_root_status target_cmd_output_root_status
+                       target_cmd_root target_cmd target_cmd_build
+@@ -3187,6 +3187,20 @@ sub runvar_access_check ($$) {
+     Carp::cluck $m;
+ }
+ 
++sub runvar_glob {
++    my $monitor = tied %r;
++    my $realr = $monitor || \%r;
++    my @out;
++    foreach my $pat (@_) {
++	if ($monitor) { runvar_access_check($pat, 'scan') }
++	foreach my $key (sort keys %$realr) {
++	    next unless fnmatch $pat, $key;
++	    push @out, $key;
++	}
++    }
++    @out;
++}
++
+ package RunvarMonitor;
+ use Carp;
+ use Osstest;
+-- 
+2.20.1
 
-Ian.
 
