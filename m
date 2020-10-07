@@ -7,21 +7,21 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 39A1BC41604
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:18:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 14FD5C41604
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:18:32 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D854C2173E
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:18:26 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D854C2173E
+	by mail.kernel.org (Postfix) with ESMTPS id A7BF12173E
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:18:31 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A7BF12173E
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.3639.10495 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.3640.10506 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQE13-0006dD-Bh; Wed, 07 Oct 2020 18:18:17 +0000
+	id 1kQE18-0006ik-LG; Wed, 07 Oct 2020 18:18:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 3639.10495; Wed, 07 Oct 2020 18:18:17 +0000
+Received: by outflank-mailman (output) from mailman id 3640.10506; Wed, 07 Oct 2020 18:18:22 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,42 +36,42 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQE13-0006d5-7Q; Wed, 07 Oct 2020 18:18:17 +0000
-Received: by outflank-mailman (input) for mailman id 3639;
- Wed, 07 Oct 2020 18:18:15 +0000
+	id 1kQE18-0006ia-HY; Wed, 07 Oct 2020 18:18:22 +0000
+Received: by outflank-mailman (input) for mailman id 3640;
+ Wed, 07 Oct 2020 18:18:20 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1qty=DO=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1kQE11-0006UA-Rv
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:18:15 +0000
+ id 1kQE16-0006UA-SC
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:18:20 +0000
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 05ce08a0-9e4a-472a-ab00-cff487857eab;
- Wed, 07 Oct 2020 18:18:12 +0000 (UTC)
+ id 9e994920-52a7-45e0-a646-0d04426bbfe9;
+ Wed, 07 Oct 2020 18:18:17 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1kQDjv-0007CF-MO; Wed, 07 Oct 2020 19:00:35 +0100
+ id 1kQDk5-0007CF-0w; Wed, 07 Oct 2020 19:00:45 +0100
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=1qty=DO=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
-	id 1kQE11-0006UA-Rv
-	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:18:15 +0000
-X-Inumbo-ID: 05ce08a0-9e4a-472a-ab00-cff487857eab
+	id 1kQE16-0006UA-SC
+	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:18:20 +0000
+X-Inumbo-ID: 9e994920-52a7-45e0-a646-0d04426bbfe9
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 05ce08a0-9e4a-472a-ab00-cff487857eab;
-	Wed, 07 Oct 2020 18:18:12 +0000 (UTC)
+	id 9e994920-52a7-45e0-a646-0d04426bbfe9;
+	Wed, 07 Oct 2020 18:18:17 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
 	by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
 	(return-path ijackson@chiark.greenend.org.uk)
-	id 1kQDjv-0007CF-MO; Wed, 07 Oct 2020 19:00:35 +0100
+	id 1kQDk5-0007CF-0w; Wed, 07 Oct 2020 19:00:45 +0100
 From: Ian Jackson <iwj@xenproject.org>
 To: xen-devel@lists.xenproject.org
 Cc: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH 14/82] target setup refactoring: Merge target_kernkind_*
-Date: Wed,  7 Oct 2020 18:59:16 +0100
-Message-Id: <20201007180024.7932-15-iwj@xenproject.org>
+Subject: [OSSTEST PATCH 46/82] shared/reuse: Use @ for ts-xen-build-prep
+Date: Wed,  7 Oct 2020 18:59:48 +0100
+Message-Id: <20201007180024.7932-47-iwj@xenproject.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20201007180024.7932-1-iwj@xenproject.org>
 References: <20201007180024.7932-1-iwj@xenproject.org>
@@ -80,82 +80,40 @@ Content-Transfer-Encoding: 8bit
 
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 
-Combine these two functions.  Rename them to a name which doesn't
-mention "kernkind".
-
-No functional change.
+Pass @ from sg-run-job.  This is the only call site for
+ts-xen-build-prep, so it can lose the open-coded test for SharedReady.
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- Osstest/Debian.pm      |  3 +--
- Osstest/TestSupport.pm | 11 ++++-------
- ts-debian-fixup        |  3 +--
- 3 files changed, 6 insertions(+), 11 deletions(-)
+ sg-run-job        | 2 +-
+ ts-xen-build-prep | 1 -
+ 2 files changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/Osstest/Debian.pm b/Osstest/Debian.pm
-index b140ede2..85fd16da 100644
---- a/Osstest/Debian.pm
-+++ b/Osstest/Debian.pm
-@@ -68,8 +68,7 @@ sub debian_boot_setup ($$$$$;$) {
-     # $xenhopt==undef => is actually a guest, do not set up a hypervisor
-     my ($ho, $want_kernver, $want_xsm, $xenhopt, $distpath, $hooks) = @_;
- 
--    target_kernkind_check($ho);
--    target_kernkind_console_inittab($ho,$ho,"/");
-+    target_setup_rootdev_console_inittab($ho,$ho,"/");
- 
-     my $kopt;
-     my $console= target_var($ho,'console');
-diff --git a/Osstest/TestSupport.pm b/Osstest/TestSupport.pm
-index faac106f..fd7b238b 100644
---- a/Osstest/TestSupport.pm
-+++ b/Osstest/TestSupport.pm
-@@ -105,7 +105,7 @@ BEGIN {
-                       host_get_free_memory
- 
-                       target_ping_check_down target_ping_check_up
--                      target_kernkind_check target_kernkind_console_inittab
-+                      target_setup_rootdev_console_inittab
-                       target_var target_var_prefix
-                       selectguest prepareguest more_prepareguest_hvm
- 		      guest_template
-@@ -2562,8 +2562,9 @@ sub target_var ($$) {
-     return undef;
+diff --git a/sg-run-job b/sg-run-job
+index 067b28db..d46a3a62 100755
+--- a/sg-run-job
++++ b/sg-run-job
+@@ -753,7 +753,7 @@ proc allocate-build-host {ostype} {
+ proc prepare-build-host-linux {} {
+     global jobinfo
+     run-ts broken host-install(*) ts-host-install-twice + --build
+-    run-ts . host-build-prep ts-xen-build-prep
++    run-ts . host-build-prep ts-xen-build-prep + @host
  }
  
--sub target_kernkind_check ($) {
--    my ($gho) = @_;
-+sub target_setup_rootdev_console_inittab ($$$) {
-+    my ($ho, $gho, $root) = @_;
-+
-     my $pfx= target_var_prefix($gho);
-     my $kernkind= $r{$pfx."kernkind"} // 'pvops';
-     my $isguest= exists $gho->{Guest};
-@@ -2573,10 +2574,6 @@ sub target_kernkind_check ($) {
-     } elsif ($kernkind !~ m/2618/) {
-         store_runvar($pfx."console", 'xvc0') if $isguest;
-     }
--}
--
--sub target_kernkind_console_inittab ($$$) {
--    my ($ho, $gho, $root) = @_;
+ proc prepare-build-host-freebsd {} {
+diff --git a/ts-xen-build-prep b/ts-xen-build-prep
+index dabb9921..092bbffe 100755
+--- a/ts-xen-build-prep
++++ b/ts-xen-build-prep
+@@ -28,7 +28,6 @@ tsreadconfig();
+ our ($whhost) = @ARGV;
+ $whhost ||= 'host';
+ our $ho= selecthost($whhost);
+-exit 0 if $ho->{SharedReady};
  
-     my $inittabpath= "$root/etc/inittab";
-     my $console= target_var($gho,'console');
-diff --git a/ts-debian-fixup b/ts-debian-fixup
-index 2184212b..a878fe50 100755
---- a/ts-debian-fixup
-+++ b/ts-debian-fixup
-@@ -209,8 +209,7 @@ sub writecfg () {
- savecfg();
- ether();
- access();
--target_kernkind_check($gho);
--$console = target_kernkind_console_inittab($ho,$gho,"$mountpoint");
-+$console = target_setup_rootdev_console_inittab($ho,$gho,"$mountpoint");
+ our ($vg,$lv);
  
- debian_overlays($ho, \&overlay);
- target_cmd_root($ho, <<END.debian_overlays_fixup_cmd($ho, $mountpoint));
 -- 
 2.20.1
 
