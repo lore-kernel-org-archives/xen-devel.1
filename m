@@ -7,21 +7,21 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0AD3DC4363C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C001EC4727E
 	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:18:21 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8F6F02173E
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:18:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8F6F02173E
+	by mail.kernel.org (Postfix) with ESMTPS id 442FD2173E
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:18:21 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 442FD2173E
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.3637.10471 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.3638.10483 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQE0t-0006Vt-Kq; Wed, 07 Oct 2020 18:18:07 +0000
+	id 1kQE0x-0006Yn-UF; Wed, 07 Oct 2020 18:18:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 3637.10471; Wed, 07 Oct 2020 18:18:07 +0000
+Received: by outflank-mailman (output) from mailman id 3638.10483; Wed, 07 Oct 2020 18:18:11 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,42 +36,43 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQE0t-0006Vk-Hn; Wed, 07 Oct 2020 18:18:07 +0000
-Received: by outflank-mailman (input) for mailman id 3637;
- Wed, 07 Oct 2020 18:18:05 +0000
+	id 1kQE0x-0006Yf-Qg; Wed, 07 Oct 2020 18:18:11 +0000
+Received: by outflank-mailman (input) for mailman id 3638;
+ Wed, 07 Oct 2020 18:18:10 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1qty=DO=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1kQE0r-0006UA-RO
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:18:05 +0000
+ id 1kQE0w-0006UA-Ra
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:18:10 +0000
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id bb70c138-20c1-4e8d-987d-9f2ded624cf7;
- Wed, 07 Oct 2020 18:18:03 +0000 (UTC)
+ id 1901b5e8-0928-4160-9047-aaf276f7001d;
+ Wed, 07 Oct 2020 18:18:08 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1kQDk7-0007CF-Ge; Wed, 07 Oct 2020 19:00:47 +0100
+ id 1kQDk0-0007CF-Aq; Wed, 07 Oct 2020 19:00:40 +0100
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=1qty=DO=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
-	id 1kQE0r-0006UA-RO
-	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:18:05 +0000
-X-Inumbo-ID: bb70c138-20c1-4e8d-987d-9f2ded624cf7
+	id 1kQE0w-0006UA-Ra
+	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:18:10 +0000
+X-Inumbo-ID: 1901b5e8-0928-4160-9047-aaf276f7001d
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id bb70c138-20c1-4e8d-987d-9f2ded624cf7;
-	Wed, 07 Oct 2020 18:18:03 +0000 (UTC)
+	id 1901b5e8-0928-4160-9047-aaf276f7001d;
+	Wed, 07 Oct 2020 18:18:08 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
 	by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
 	(return-path ijackson@chiark.greenend.org.uk)
-	id 1kQDk7-0007CF-Ge; Wed, 07 Oct 2020 19:00:47 +0100
+	id 1kQDk0-0007CF-Aq; Wed, 07 Oct 2020 19:00:40 +0100
 From: Ian Jackson <iwj@xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH 57/82] TestSupport: Provide runvar_is_synth
-Date: Wed,  7 Oct 2020 18:59:59 +0100
-Message-Id: <20201007180024.7932-58-iwj@xenproject.org>
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>,
+	Ian Jackson <Ian.Jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 28/82] host allocation: Support new reuse-* magic hostflag
+Date: Wed,  7 Oct 2020 18:59:30 +0100
+Message-Id: <20201007180024.7932-29-iwj@xenproject.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20201007180024.7932-1-iwj@xenproject.org>
 References: <20201007180024.7932-1-iwj@xenproject.org>
@@ -80,63 +81,66 @@ Content-Transfer-Encoding: 8bit
 
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 
-Internally we use an array %r_notsynth.  This allows us to avoid
-adding code to store_runvar etc.
+This is like share-* except it has different MaxTasks and MaxWear
+parameters.
 
-Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
+Signed-off-by: Ian Jackson <Ian.Jackson@eu.citrix.com>
 ---
- Osstest/TestSupport.pm | 12 +++++++++---
- 1 file changed, 9 insertions(+), 3 deletions(-)
+ README.planner              |  7 +++++++
+ ts-hosts-allocate-Executive | 15 +++++++++++++++
+ 2 files changed, 22 insertions(+)
 
-diff --git a/Osstest/TestSupport.pm b/Osstest/TestSupport.pm
-index 634d6d2e..ce13d3a6 100644
---- a/Osstest/TestSupport.pm
-+++ b/Osstest/TestSupport.pm
-@@ -52,7 +52,7 @@ BEGIN {
-                       store_runvar get_runvar get_runvar_maybe
-                       get_runvar_default need_runvars
-                       unique_incrementing_runvar next_unique_name
--                      stashfilecontents
-+                      stashfilecontents runvar_is_synth
+diff --git a/README.planner b/README.planner
+index f134d716..a9275f12 100644
+--- a/README.planner
++++ b/README.planner
+@@ -230,6 +230,13 @@ hostflag:
+     identically.  The osstest test harness revision is automatically
+     appended and therefore does not need to be included.
  
-                       target_cmd_root_status target_cmd_output_root_status
-                       target_cmd_root target_cmd target_cmd_build
-@@ -147,7 +147,7 @@ BEGIN {
-     @EXPORT_OK   = qw();
- }
- 
--our (%r,$flight,$job,$stash);
-+our (%r,$flight,$job,$stash,%r_,%r_notsynth);
- 
- our %timeout= qw(RebootDown   100
-                  RebootUp     400
-@@ -178,12 +178,13 @@ sub tsreadconfig () {
-         logm("starting $flight.$job");
- 
-         my $q= $dbh_tests->prepare(<<END);
--            SELECT name, val FROM runvars WHERE flight=? AND job=?
-+            SELECT name, val, synth FROM runvars WHERE flight=? AND job=?
- END
-         $q->execute($flight, $job);
-         my $row;
-         while ($row= $q->fetchrow_hashref()) {
-             $r{ $row->{name} }= $row->{val};
-+	    $r_notsynth{ $row->{name} }= !$row->{synth};
-             logm("setting $row->{name}=$row->{val}");
-         }
-         $q->finish();
-@@ -434,6 +435,11 @@ END
-     return $value;
- }
- 
-+sub runvar_is_synth ($) {
-+    my ($key) = @_;
-+    return !$r_notsynth{$key};
-+}
++  reuse-SHARING
 +
- sub target_adjust_timeout ($$) {
-     my ($ho,$timeoutref) = @_; # $ho might be a $gho
-     my $nestinglvl = $ho->{NestingLevel} // $ho->{Host}{NestingLevel};
++    The host may be reused, one job after another.  Like share- but
++    only permits one job at a time, and has a much higher limit for
++    the number of successive jobs.  ts-host-test-share should be used
++    to arrange for the host's state to be recorded appropriately.
++
+   equiv-FORMALTOKEN
+ 
+     For each equiv-FORMALTOKEN job flag set on one or more IDENTs, a
+diff --git a/ts-hosts-allocate-Executive b/ts-hosts-allocate-Executive
+index 2c18a739..6fcfd2e3 100755
+--- a/ts-hosts-allocate-Executive
++++ b/ts-hosts-allocate-Executive
+@@ -279,6 +279,16 @@ sub compute_hids () {
+                     " $hid->{DefaultSharedMaxTasks}".
+                     " $hid->{DefaultSharedMaxWear}\n";
+                 next;
++            } elsif ($flag =~ m/^reuse-/) {
++                die if exists $hid->{Shared};
++                my $shr= $'; #'
++                $hid->{Shared}= $shr." ".get_harness_rev();
++                $hid->{SharedMaxTasks}= 1;
++		$hid->{SharedMaxWear}= 10;
++                print DEBUG "HID $ident FLAG $flag SHARE-REUSE $shr".
++                    " $hid->{SharedMaxTasks}".
++                    " $hid->{SharedMaxWear}\n";
++                next;
+             } elsif ($flag =~ m/^equiv-/) {
+                 my $formalclass= $'; #'
+                 die if exists $hid->{Equiv};
+@@ -484,6 +494,11 @@ END
+         foreach my $kcomb (qw(Shared-Max-Wear Shared-Max-Tasks)) {
+             my $kdb= $kcomb;  $kdb =~ y/-A-Z/ a-z/;
+             my $khash= $kcomb;  $khash =~ y/-//d;
++	    if ($hid->{$khash}) {
++		$candrow->{$khash} = $hid->{$khash};
++                print DEBUG "$dbg $khash FROM-HID\n";
++		next;
++	    }
+             $resprop_q->execute($candrow->{restype},$candrow->{resname},$kdb);
+             my $proprow= $resprop_q->fetchrow_hashref();
+             my $val= $proprow->{val};
 -- 
 2.20.1
 
