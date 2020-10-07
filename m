@@ -7,21 +7,21 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 14FD5C41604
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:18:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5FF0BC4363C
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:18:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A7BF12173E
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:18:31 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A7BF12173E
+	by mail.kernel.org (Postfix) with ESMTPS id 072B72173E
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:18:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 072B72173E
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.3640.10506 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.3641.10519 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQE18-0006ik-LG; Wed, 07 Oct 2020 18:18:22 +0000
+	id 1kQE1E-0006oy-Vz; Wed, 07 Oct 2020 18:18:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 3640.10506; Wed, 07 Oct 2020 18:18:22 +0000
+Received: by outflank-mailman (output) from mailman id 3641.10519; Wed, 07 Oct 2020 18:18:28 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,42 +36,42 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQE18-0006ia-HY; Wed, 07 Oct 2020 18:18:22 +0000
-Received: by outflank-mailman (input) for mailman id 3640;
- Wed, 07 Oct 2020 18:18:20 +0000
+	id 1kQE1E-0006op-Rh; Wed, 07 Oct 2020 18:18:28 +0000
+Received: by outflank-mailman (input) for mailman id 3641;
+ Wed, 07 Oct 2020 18:18:27 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1qty=DO=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1kQE16-0006UA-SC
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:18:20 +0000
+ id 1kQE1C-0006nN-UK
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:18:26 +0000
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9e994920-52a7-45e0-a646-0d04426bbfe9;
- Wed, 07 Oct 2020 18:18:17 +0000 (UTC)
+ id 102b99e3-6c34-4092-a542-156eab1bd2f5;
+ Wed, 07 Oct 2020 18:18:19 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1kQDk5-0007CF-0w; Wed, 07 Oct 2020 19:00:45 +0100
+ id 1kQDk9-0007CF-H3; Wed, 07 Oct 2020 19:00:49 +0100
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=1qty=DO=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
-	id 1kQE16-0006UA-SC
-	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:18:20 +0000
-X-Inumbo-ID: 9e994920-52a7-45e0-a646-0d04426bbfe9
+	id 1kQE1C-0006nN-UK
+	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:18:26 +0000
+X-Inumbo-ID: 102b99e3-6c34-4092-a542-156eab1bd2f5
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 9e994920-52a7-45e0-a646-0d04426bbfe9;
-	Wed, 07 Oct 2020 18:18:17 +0000 (UTC)
+	id 102b99e3-6c34-4092-a542-156eab1bd2f5;
+	Wed, 07 Oct 2020 18:18:19 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
 	by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
 	(return-path ijackson@chiark.greenend.org.uk)
-	id 1kQDk5-0007CF-0w; Wed, 07 Oct 2020 19:00:45 +0100
+	id 1kQDk9-0007CF-H3; Wed, 07 Oct 2020 19:00:49 +0100
 From: Ian Jackson <iwj@xenproject.org>
 To: xen-devel@lists.xenproject.org
 Cc: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH 46/82] shared/reuse: Use @ for ts-xen-build-prep
-Date: Wed,  7 Oct 2020 18:59:48 +0100
-Message-Id: <20201007180024.7932-47-iwj@xenproject.org>
+Subject: [OSSTEST PATCH 65/82] hsot reuse: Make share type hash more easily greppable
+Date: Wed,  7 Oct 2020 19:00:07 +0100
+Message-Id: <20201007180024.7932-66-iwj@xenproject.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20201007180024.7932-1-iwj@xenproject.org>
 References: <20201007180024.7932-1-iwj@xenproject.org>
@@ -80,40 +80,25 @@ Content-Transfer-Encoding: 8bit
 
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 
-Pass @ from sg-run-job.  This is the only call site for
-ts-xen-build-prep, so it can lose the open-coded test for SharedReady.
+Use - and _ to make up the base64 alphabet instead of + and /
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- sg-run-job        | 2 +-
- ts-xen-build-prep | 1 -
- 2 files changed, 1 insertion(+), 2 deletions(-)
+ ts-host-reuse | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/sg-run-job b/sg-run-job
-index 067b28db..d46a3a62 100755
---- a/sg-run-job
-+++ b/sg-run-job
-@@ -753,7 +753,7 @@ proc allocate-build-host {ostype} {
- proc prepare-build-host-linux {} {
-     global jobinfo
-     run-ts broken host-install(*) ts-host-install-twice + --build
--    run-ts . host-build-prep ts-xen-build-prep
-+    run-ts . host-build-prep ts-xen-build-prep + @host
- }
- 
- proc prepare-build-host-freebsd {} {
-diff --git a/ts-xen-build-prep b/ts-xen-build-prep
-index dabb9921..092bbffe 100755
---- a/ts-xen-build-prep
-+++ b/ts-xen-build-prep
-@@ -28,7 +28,6 @@ tsreadconfig();
- our ($whhost) = @ARGV;
- $whhost ||= 'host';
- our $ho= selecthost($whhost);
--exit 0 if $ho->{SharedReady};
- 
- our ($vg,$lv);
- 
+diff --git a/ts-host-reuse b/ts-host-reuse
+index 701070b2..0ecbb0bd 100755
+--- a/ts-host-reuse
++++ b/ts-host-reuse
+@@ -75,6 +75,7 @@ sub compute_test_sharetype () {
+ 	push @runvartexts, "$key=$r{$key}";
+     }
+     my $digest = sha224_base64("@runvartexts");
++    $digest =~ y{/+}{-_};
+     $sharetype = "test-$flight-$digest";
+     logm "share type $sharetype; hash is of: @runvartexts";
+     return $sharetype;
 -- 
 2.20.1
 
