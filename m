@@ -7,21 +7,21 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B8B04C4363C
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:27:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 62765C4363C
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:27:44 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5D3342168B
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:27:40 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5D3342168B
+	by mail.kernel.org (Postfix) with ESMTPS id 06D472168B
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:27:43 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 06D472168B
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.3696.10921 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.3699.10955 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQE9w-0002dG-DA; Wed, 07 Oct 2020 18:27:28 +0000
+	id 1kQEA1-0002pX-2v; Wed, 07 Oct 2020 18:27:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 3696.10921; Wed, 07 Oct 2020 18:27:28 +0000
+Received: by outflank-mailman (output) from mailman id 3699.10955; Wed, 07 Oct 2020 18:27:32 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,43 +36,43 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQE9v-0002c7-Gj; Wed, 07 Oct 2020 18:27:27 +0000
-Received: by outflank-mailman (input) for mailman id 3696;
- Wed, 07 Oct 2020 18:27:25 +0000
+	id 1kQE9z-0002oK-PO; Wed, 07 Oct 2020 18:27:31 +0000
+Received: by outflank-mailman (input) for mailman id 3699;
+ Wed, 07 Oct 2020 18:27:27 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1qty=DO=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1kQE77-00072Q-S8
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:24:33 +0000
+ id 1kQE2b-00072Q-Hn
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:19:53 +0000
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id cff2d2c9-adb1-41e0-ab49-5bf585595830;
- Wed, 07 Oct 2020 18:22:05 +0000 (UTC)
+ id 1ecb5c37-fa98-4803-bc1c-312631f56aa1;
+ Wed, 07 Oct 2020 18:19:24 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1kQDk4-0007CF-AH; Wed, 07 Oct 2020 19:00:44 +0100
+ id 1kQDkB-0007CF-8n; Wed, 07 Oct 2020 19:00:51 +0100
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=1qty=DO=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
-	id 1kQE77-00072Q-S8
-	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:24:33 +0000
-X-Inumbo-ID: cff2d2c9-adb1-41e0-ab49-5bf585595830
+	id 1kQE2b-00072Q-Hn
+	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:19:53 +0000
+X-Inumbo-ID: 1ecb5c37-fa98-4803-bc1c-312631f56aa1
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id cff2d2c9-adb1-41e0-ab49-5bf585595830;
-	Wed, 07 Oct 2020 18:22:05 +0000 (UTC)
+	id 1ecb5c37-fa98-4803-bc1c-312631f56aa1;
+	Wed, 07 Oct 2020 18:19:24 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
 	by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
 	(return-path ijackson@chiark.greenend.org.uk)
-	id 1kQDk4-0007CF-AH; Wed, 07 Oct 2020 19:00:44 +0100
+	id 1kQDkB-0007CF-8n; Wed, 07 Oct 2020 19:00:51 +0100
 From: Ian Jackson <iwj@xenproject.org>
 To: xen-devel@lists.xenproject.org
 Cc: Ian Jackson <ian.jackson@eu.citrix.com>,
-	Ian Jackson <Ian.Jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH 43/82] ts-hosts-allocate-Executive print sharing info in debug output
-Date: Wed,  7 Oct 2020 18:59:45 +0100
-Message-Id: <20201007180024.7932-44-iwj@xenproject.org>
+	Ian Jackson <iwj@xenproject.org>
+Subject: [OSSTEST PATCH 73/82] host reuse: sg-run-job: Reanme post-test-ok parameter
+Date: Wed,  7 Oct 2020 19:00:15 +0100
+Message-Id: <20201007180024.7932-74-iwj@xenproject.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20201007180024.7932-1-iwj@xenproject.org>
 References: <20201007180024.7932-1-iwj@xenproject.org>
@@ -81,26 +81,42 @@ Content-Transfer-Encoding: 8bit
 
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 
-Signed-off-by: Ian Jackson <Ian.Jackson@eu.citrix.com>
----
- ts-hosts-allocate-Executive | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+This is more accurate.
 
-diff --git a/ts-hosts-allocate-Executive b/ts-hosts-allocate-Executive
-index 58e9f891..fc107c08 100755
---- a/ts-hosts-allocate-Executive
-+++ b/ts-hosts-allocate-Executive
-@@ -691,7 +691,9 @@ sub hid_recurse ($$) {
-     print DEBUG "$dbg FINAL start=$start_time va=$variation_age".
- 	" variation_bonus=$variation_bonus".
-         " previously_failed=$previously_failed".
--	" previously_failed_equiv=$previously_failed_equiv cost=$cost\n";
-+	" previously_failed_equiv=$previously_failed_equiv".
-+	" eff.share_bonus=$share_reuse*$share_reuse_bonus".
-+	" cost=$cost\n";
+No overall functional change.
+
+Signed-off-by: Ian Jackson <iwj@xenproject.org>
+---
+ sg-run-job    | 2 +-
+ ts-host-reuse | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/sg-run-job b/sg-run-job
+index 1e2fcfee..2feb67d9 100755
+--- a/sg-run-job
++++ b/sg-run-job
+@@ -124,7 +124,7 @@ proc run-job {job} {
+        set ok 0
+     }
  
-     if (!defined $best || $cost < $best->{Cost}) {
-         print DEBUG "$dbg FINAL BEST: ".
+-    if {$ok} { per-host-ts .  =            { ts-host-reuse post-test }    }
++    if {$ok} { per-host-ts .  =            { ts-host-reuse post-test-ok } }
+     if {$ok} { setstatus pass                                             }
+ 
+     if {[llength $need_build_host] && $ok} { jobdb::preserve-task 90 }
+diff --git a/ts-host-reuse b/ts-host-reuse
+index 85beb51e..aad45bdd 100755
+--- a/ts-host-reuse
++++ b/ts-host-reuse
+@@ -152,7 +152,7 @@ sub act_start_test () {
+     host_shared_mark_ready($ho, $sharetype, \%oldstate, 'mid-test');
+ }
+ 
+-sub act_post_test () {
++sub act_post_test_ok () {
+     compute_test_sharetype();
+     $ho = selecthost($whhost);
+     return unless $ho->{Shared};
 -- 
 2.20.1
 
