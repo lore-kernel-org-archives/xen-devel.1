@@ -7,21 +7,21 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ABBF7C41604
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:28:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7C25CC4363C
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:28:08 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 41EC42173E
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:28:03 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 41EC42173E
+	by mail.kernel.org (Postfix) with ESMTPS id 143002176B
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:28:08 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 143002176B
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.3708.11053 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.3709.11071 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQEAJ-0003kF-Ug; Wed, 07 Oct 2020 18:27:52 +0000
+	id 1kQEAO-0003zw-Hl; Wed, 07 Oct 2020 18:27:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 3708.11053; Wed, 07 Oct 2020 18:27:51 +0000
+Received: by outflank-mailman (output) from mailman id 3709.11071; Wed, 07 Oct 2020 18:27:56 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,106 +36,102 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQEAI-0003j1-PV; Wed, 07 Oct 2020 18:27:50 +0000
-Received: by outflank-mailman (input) for mailman id 3708;
- Wed, 07 Oct 2020 18:27:49 +0000
+	id 1kQEAO-0003zT-3y; Wed, 07 Oct 2020 18:27:56 +0000
+Received: by outflank-mailman (input) for mailman id 3709;
+ Wed, 07 Oct 2020 18:27:55 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1qty=DO=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1kQE6i-00072Q-RM
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:24:08 +0000
+ id 1kQE4S-00072Q-Lc
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:21:48 +0000
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9e085007-4ceb-414a-9a23-2ce256872ea1;
- Wed, 07 Oct 2020 18:21:52 +0000 (UTC)
+ id ddcc62eb-6ded-4054-be0f-ede0730b6969;
+ Wed, 07 Oct 2020 18:20:19 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1kQDk9-0007CF-W7; Wed, 07 Oct 2020 19:00:50 +0100
+ id 1kQDk2-0007CF-1d; Wed, 07 Oct 2020 19:00:42 +0100
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=1qty=DO=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
-	id 1kQE6i-00072Q-RM
-	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:24:08 +0000
-X-Inumbo-ID: 9e085007-4ceb-414a-9a23-2ce256872ea1
+	id 1kQE4S-00072Q-Lc
+	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:21:48 +0000
+X-Inumbo-ID: ddcc62eb-6ded-4054-be0f-ede0730b6969
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 9e085007-4ceb-414a-9a23-2ce256872ea1;
-	Wed, 07 Oct 2020 18:21:52 +0000 (UTC)
+	id ddcc62eb-6ded-4054-be0f-ede0730b6969;
+	Wed, 07 Oct 2020 18:20:19 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
 	by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
 	(return-path ijackson@chiark.greenend.org.uk)
-	id 1kQDk9-0007CF-W7; Wed, 07 Oct 2020 19:00:50 +0100
+	id 1kQDk2-0007CF-1d; Wed, 07 Oct 2020 19:00:42 +0100
 From: Ian Jackson <iwj@xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: Ian Jackson <iwj@xenproject.org>
-Subject: [OSSTEST PATCH 67/82] host lifecycle: Fix detection of concurrent jobs
-Date: Wed,  7 Oct 2020 19:00:09 +0100
-Message-Id: <20201007180024.7932-68-iwj@xenproject.org>
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>,
+	Ian Jackson <Ian.Jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 34/82] plan_search: Track last sharing state to determine $share_reuse
+Date: Wed,  7 Oct 2020 18:59:36 +0100
+Message-Id: <20201007180024.7932-35-iwj@xenproject.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20201007180024.7932-1-iwj@xenproject.org>
 References: <20201007180024.7932-1-iwj@xenproject.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The previous algorithm was wrong here.
+From: Ian Jackson <ian.jackson@eu.citrix.com>
 
-This commit was originally considerably later than the previous one.
-I'm avoiding squshing this commit, to make future archaeology easier.
-The effect of the bug is to report other tasks as live too often, so
-hosts show up as shared rather than reused.
+What matters for the purpose of $share_reuse is not whether the host
+is actually being _shared_ (ie, there are other concurrent allocations
+and therefore a concurrent Event with Share information).  What we
+really want to know is whether the *last* use of this host was a
+suitable sharing setup - because we actually want to know if we will
+be able to skip our setup.
 
-Signed-off-by: Ian Jackson <iwj@xenproject.org>
+So track that explicitly.  (The slightly odd structure, where there
+are two loops in one, means that we reset $last_eshare when we go onto
+the next $req ie the next host to check.)
+
+Signed-off-by: Ian Jackson <Ian.Jackson@eu.citrix.com>
 ---
- Osstest/JobDB/Executive.pm | 13 ++++++-------
- 1 file changed, 6 insertions(+), 7 deletions(-)
+ Osstest/Executive.pm | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
 
-diff --git a/Osstest/JobDB/Executive.pm b/Osstest/JobDB/Executive.pm
-index cf82b4cf..3a8308e9 100644
---- a/Osstest/JobDB/Executive.pm
-+++ b/Osstest/JobDB/Executive.pm
-@@ -561,17 +561,15 @@ END
- END
+diff --git a/Osstest/Executive.pm b/Osstest/Executive.pm
+index 4083ae6b..5f59c44e 100644
+--- a/Osstest/Executive.pm
++++ b/Osstest/Executive.pm
+@@ -676,6 +676,7 @@ sub plan_search ($$$$) {
+     my $try_time= 0;
+     my $confirmedok= 0;
+     my $share_reuse= 0;
++    my $last_eshare;
  
-     my $ojvn = "$ho->{Ident}_lifecycle";
--    my $firstrun;
+     for (;;) {
+ 	my $req= $requestlist->[$reqix];
+@@ -715,6 +716,10 @@ sub plan_search ($$$$) {
+             # this period is entirely after the proposed slot;
+             # so no need to check this or any later periods
  
-     if (length $r{$ojvn}) {
- 	my ($oldsigil,) = reverse split / /, $r{$ojvn};
- 	$oldsigil = '' unless $oldsigil =~ m/^\W$/;
- 	return if $newsigil ne '' && $oldsigil eq $newsigil;
--    } else {
--	$firstrun = 1;
++	    $last_eshare = $startevt->{
++                $startevt->{Type} eq 'Unshare' ? 'PreviousShare' : 'Share'
++				      };
++
+ 	    next PERIOD if $endevt->{Time} <= $try_time;
+             # this period is entirely before the proposed slot;
+             # it doesn't overlap, but must check subsequent periods
+@@ -743,9 +748,10 @@ sub plan_search ($$$$) {
+ 	    " try=$try_time confirmed=$confirmedok reuse=$share_reuse");
+ 
+ 	$confirmedok++;
+-	$share_reuse++ if defined $share_wear;
++	$share_reuse++ if $last_eshare and $share_compat_ok->($last_eshare);
+ 	$reqix++;
+ 	$reqix %= @$requestlist;
++	undef $last_eshare;
+ 	last if $confirmedok==@$requestlist;
      }
  
-     my @lifecycle;
-+    my $seen_us;
-     db_retry($dbh_tests,[], sub {
- 	my $elided;
- 	@lifecycle = ();
-@@ -581,10 +579,10 @@ END
- 
- 	while (my $o = $scanq->fetchrow_hashref()) {
- 	    my $olive =
--	      # Any job which appeared since we started thinking
--	      # about this must have been concurrent with us,
--	      # even if it is dead now.
--	      (!$firstrun || $o->{live}) &&
-+	      # Any job with any entry after we put ourselves in the
-+	      # table must have been concurrent with us, even if it is
-+	      # dead now.
-+	      ($seen_us || $o->{live}) &&
- 	      # If this task is still live, we need to have something
- 	      # with a live mark, generally all the prep will have
- 	      # occurred already, so we don't mark the prep as live
-@@ -597,6 +595,7 @@ END
- 		$o->{job} eq $job) {
- 		# Don't put the + mark on our own entries.
- 		$olivemark = '';
-+		$seen_us = 1;
- 	    }
- 
- 	    my $oisprepmark = !!$o->{isprep} && '@';
 -- 
 2.20.1
 
