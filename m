@@ -7,21 +7,21 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DCDAEC4727E
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:26:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 85B8FC4741F
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:27:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 75D132168B
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:26:59 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 75D132168B
+	by mail.kernel.org (Postfix) with ESMTPS id 1466E21707
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:27:00 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1466E21707
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.3675.10675 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.3677.10695 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQE9J-0000sM-AJ; Wed, 07 Oct 2020 18:26:49 +0000
+	id 1kQE9L-0000wu-47; Wed, 07 Oct 2020 18:26:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 3675.10675; Wed, 07 Oct 2020 18:26:49 +0000
+Received: by outflank-mailman (output) from mailman id 3677.10695; Wed, 07 Oct 2020 18:26:51 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,42 +36,43 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQE9J-0000sE-63; Wed, 07 Oct 2020 18:26:49 +0000
-Received: by outflank-mailman (input) for mailman id 3675;
- Wed, 07 Oct 2020 18:26:48 +0000
+	id 1kQE9K-0000wd-Ps; Wed, 07 Oct 2020 18:26:50 +0000
+Received: by outflank-mailman (input) for mailman id 3677;
+ Wed, 07 Oct 2020 18:26:49 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1qty=DO=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1kQE69-00072Q-QI
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:23:33 +0000
+ id 1kQE5B-00072Q-Nf
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:22:33 +0000
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 305c7497-7824-4566-bea9-54b5df9ad956;
- Wed, 07 Oct 2020 18:21:31 +0000 (UTC)
+ id 5aab6441-1978-40d2-b11a-5aa8d7b68ec3;
+ Wed, 07 Oct 2020 18:20:59 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1kQDju-0007CF-Sy; Wed, 07 Oct 2020 19:00:35 +0100
+ id 1kQDkC-0007CF-Nl; Wed, 07 Oct 2020 19:00:52 +0100
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=1qty=DO=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
-	id 1kQE69-00072Q-QI
-	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:23:33 +0000
-X-Inumbo-ID: 305c7497-7824-4566-bea9-54b5df9ad956
+	id 1kQE5B-00072Q-Nf
+	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:22:33 +0000
+X-Inumbo-ID: 5aab6441-1978-40d2-b11a-5aa8d7b68ec3
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 305c7497-7824-4566-bea9-54b5df9ad956;
-	Wed, 07 Oct 2020 18:21:31 +0000 (UTC)
+	id 5aab6441-1978-40d2-b11a-5aa8d7b68ec3;
+	Wed, 07 Oct 2020 18:20:59 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
 	by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
 	(return-path ijackson@chiark.greenend.org.uk)
-	id 1kQDju-0007CF-Sy; Wed, 07 Oct 2020 19:00:35 +0100
+	id 1kQDkC-0007CF-Nl; Wed, 07 Oct 2020 19:00:52 +0100
 From: Ian Jackson <iwj@xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH 11/82] cr-publish-flight-logs: Fix abs_time calls
-Date: Wed,  7 Oct 2020 18:59:13 +0100
-Message-Id: <20201007180024.7932-12-iwj@xenproject.org>
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>,
+	Ian Jackson <iwj@xenproject.org>
+Subject: [OSSTEST PATCH 79/82] flight other job reporting: Further improvements to ordering
+Date: Wed,  7 Oct 2020 19:00:21 +0100
+Message-Id: <20201007180024.7932-80-iwj@xenproject.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20201007180024.7932-1-iwj@xenproject.org>
 References: <20201007180024.7932-1-iwj@xenproject.org>
@@ -80,28 +81,39 @@ Content-Transfer-Encoding: 8bit
 
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 
-There was a missing space in these messages, since they were
-introduced in 31b7cae19fe1
-  timing traces: cr-publish-flight-logs: Report more progress
+We want to definitely put these NULLs last.
 
-Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
+Signed-off-by: Ian Jackson <iwj@xenproject.org>
 ---
- cr-publish-flight-logs | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ sg-report-flight | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
 
-diff --git a/cr-publish-flight-logs b/cr-publish-flight-logs
-index 63c47d9f..c570dfaf 100755
---- a/cr-publish-flight-logs
-+++ b/cr-publish-flight-logs
-@@ -43,7 +43,7 @@ die unless $flight =~ m/^\d*$/;
+diff --git a/sg-report-flight b/sg-report-flight
+index d8829932..8f99bb69 100755
+--- a/sg-report-flight
++++ b/sg-report-flight
+@@ -1389,7 +1389,9 @@ END
+       r_main AS
+       (SELECT tident, hostname,
+               bool_or(olive)                     AS olive,
+-              1                                  AS kind_sort,
++              CASE WHEN min(prep_started)
++                   IS NOT NULL
++                   THEN 1 ELSE 3 END             AS kind_sort,
+               flight, job,
+ 	      (SELECT status
+ 		 FROM jobs
+@@ -1416,7 +1418,9 @@ END
  
- die "usage: ./cr-publish-flight-logs [flight]" unless @ARGV==0;
- 
--sub progress { print +(show_abs_time time), @_, "\n" }
-+sub progress { print +(show_abs_time time), " ", @_, "\n" }
- 
- progress("acquiring publish-lock...");
- open LOCK, "> $c{GlobalLockDir}/publish-lock" or die $!;
+       r_elided AS
+       (SELECT tident, hostname, FALSE as olive,
+-              2                                  AS kind_sort,
++              CASE WHEN count
++                   IS NOT NULL
++                   THEN 2 ELSE 4 END             AS kind_sort,
+               $nullcols_main,
+               $nullcols_tasks,
+               count                              AS elided,
 -- 
 2.20.1
 
