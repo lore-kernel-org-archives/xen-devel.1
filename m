@@ -7,21 +7,21 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2236CC4363C
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:27:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0555DC41604
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:27:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B90822168B
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:27:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B90822168B
+	by mail.kernel.org (Postfix) with ESMTPS id A672B2168B
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:27:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A672B2168B
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.3694.10896 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.3695.10915 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQE9r-0002PT-FK; Wed, 07 Oct 2020 18:27:23 +0000
+	id 1kQE9u-0002Zw-Sj; Wed, 07 Oct 2020 18:27:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 3694.10896; Wed, 07 Oct 2020 18:27:23 +0000
+Received: by outflank-mailman (output) from mailman id 3695.10915; Wed, 07 Oct 2020 18:27:26 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,43 +36,42 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQE9q-0002Od-V2; Wed, 07 Oct 2020 18:27:22 +0000
-Received: by outflank-mailman (input) for mailman id 3694;
- Wed, 07 Oct 2020 18:27:19 +0000
+	id 1kQE9u-0002ZD-DM; Wed, 07 Oct 2020 18:27:26 +0000
+Received: by outflank-mailman (input) for mailman id 3695;
+ Wed, 07 Oct 2020 18:27:24 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1qty=DO=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1kQE3t-00072Q-Jv
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:21:13 +0000
+ id 1kQE5V-00072Q-OH
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:22:53 +0000
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id ace94ed7-c910-40bb-bbf1-9495690a4b88;
- Wed, 07 Oct 2020 18:20:00 +0000 (UTC)
+ id f414edb5-514b-4fae-969b-d7da8e64f6e4;
+ Wed, 07 Oct 2020 18:21:12 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1kQDjy-0007CF-8H; Wed, 07 Oct 2020 19:00:38 +0100
+ id 1kQDk5-0007CF-Sz; Wed, 07 Oct 2020 19:00:45 +0100
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=1qty=DO=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
-	id 1kQE3t-00072Q-Jv
-	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:21:13 +0000
-X-Inumbo-ID: ace94ed7-c910-40bb-bbf1-9495690a4b88
+	id 1kQE5V-00072Q-OH
+	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:22:53 +0000
+X-Inumbo-ID: f414edb5-514b-4fae-969b-d7da8e64f6e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id ace94ed7-c910-40bb-bbf1-9495690a4b88;
-	Wed, 07 Oct 2020 18:20:00 +0000 (UTC)
+	id f414edb5-514b-4fae-969b-d7da8e64f6e4;
+	Wed, 07 Oct 2020 18:21:12 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
 	by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
 	(return-path ijackson@chiark.greenend.org.uk)
-	id 1kQDjy-0007CF-8H; Wed, 07 Oct 2020 19:00:38 +0100
+	id 1kQDk5-0007CF-Sz; Wed, 07 Oct 2020 19:00:45 +0100
 From: Ian Jackson <iwj@xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>,
-	Ian Jackson <Ian.Jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH 20/82] ts-hosts-allocate-Executive: Fix handling of failed preps for same sharing
-Date: Wed,  7 Oct 2020 18:59:22 +0100
-Message-Id: <20201007180024.7932-21-iwj@xenproject.org>
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 50/82] shared/reuse: Rely on @ for ts-host-ping-check
+Date: Wed,  7 Oct 2020 18:59:52 +0100
+Message-Id: <20201007180024.7932-51-iwj@xenproject.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20201007180024.7932-1-iwj@xenproject.org>
 References: <20201007180024.7932-1-iwj@xenproject.org>
@@ -81,37 +80,39 @@ Content-Transfer-Encoding: 8bit
 
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 
-This code was previously unreachable.  It ought to be executed when
-all the shares are allocatable or prep: in that case, we can unshare
-and re-share the host.
+Remove the check for SharedReady.
 
-Signed-off-by: Ian Jackson <Ian.Jackson@eu.citrix.com>
+The existence of this check is perplexing.  It was introduced in
+  ts-host-ping-check: Do not run if host is being reused
+in 8f1dc3f7c401 (from 2015).
+
+At that time we only share build hosts, and build hosts never ran this
+script.  So I don't understand what that was hoping to achieve.  Maybe
+it made some difference in a now-lost pre-rebase situation.
+
+Anyway, in our current tree I think we want to rerun the
+ts-host-ping-check when we reuse a test host.  My change to add @ to
+parts of per-host-prep in sg-run-job deliberately omitted the step
+with testid host-ping-check-xen/@.
+
+Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- ts-hosts-allocate-Executive | 11 +++++------
- 1 file changed, 5 insertions(+), 6 deletions(-)
+ ts-host-ping-check | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/ts-hosts-allocate-Executive b/ts-hosts-allocate-Executive
-index 78b94c6d..2c18a739 100755
---- a/ts-hosts-allocate-Executive
-+++ b/ts-hosts-allocate-Executive
-@@ -1044,12 +1044,11 @@ sub actual_allocation ($) {
- 		# now-dead task.  If so that share will become allocatable
- 		# (and therefore not be counted in `ntasks') in due course.
- 		return undef;
--
--                # someone was preparing it but they aren't any more
--                push @allocwarnings,
--                    "previous preparation apparently abandoned";
--                $allocatable= 1;
--            }
-+	    }
-+	    # someone was preparing it but they aren't any more
-+	    push @allocwarnings,
-+		"previous preparation apparently abandoned";
-+	    $allocatable= 1;
-         }
-     }
+diff --git a/ts-host-ping-check b/ts-host-ping-check
+index a670680c..512aaec3 100755
+--- a/ts-host-ping-check
++++ b/ts-host-ping-check
+@@ -27,8 +27,6 @@ our ($whhost) = @ARGV;
+ $whhost ||= 'host';
+ our $ho= selecthost($whhost);
  
+-exit 0 if $ho->{SharedReady};
+-
+ $_ = `ping -D -i 0.2 -c 100 $ho->{Ip} | tee -a /dev/stderr`;
+ 
+ m/\b([0-9.]+)% packet loss\b/ or die "$_ ?";
 -- 
 2.20.1
 
