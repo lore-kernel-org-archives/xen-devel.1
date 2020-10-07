@@ -7,21 +7,21 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0D9D9C4363C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C4560C4727E
 	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:27:22 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A4E162168B
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:27:21 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A4E162168B
+	by mail.kernel.org (Postfix) with ESMTPS id 662702168B
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2020 18:27:22 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 662702168B
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.3689.10834 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.3690.10846 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQE9e-0001oJ-Hb; Wed, 07 Oct 2020 18:27:10 +0000
+	id 1kQE9g-0001sB-3E; Wed, 07 Oct 2020 18:27:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 3689.10834; Wed, 07 Oct 2020 18:27:10 +0000
+Received: by outflank-mailman (output) from mailman id 3690.10846; Wed, 07 Oct 2020 18:27:11 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,43 +36,42 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQE9d-0001n3-Kz; Wed, 07 Oct 2020 18:27:09 +0000
-Received: by outflank-mailman (input) for mailman id 3689;
- Wed, 07 Oct 2020 18:27:03 +0000
+	id 1kQE9e-0001ql-VR; Wed, 07 Oct 2020 18:27:10 +0000
+Received: by outflank-mailman (input) for mailman id 3690;
+ Wed, 07 Oct 2020 18:27:07 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1qty=DO=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1kQE6E-00072Q-QR
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:23:38 +0000
+ id 1kQE6s-00072Q-Ro
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:24:18 +0000
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id f2b79de9-1655-40fe-9954-e6f3aa7c5974;
- Wed, 07 Oct 2020 18:21:33 +0000 (UTC)
+ id 6a26448e-ebaa-49d8-a387-8b29faaad382;
+ Wed, 07 Oct 2020 18:21:56 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1kQDjx-0007CF-P2; Wed, 07 Oct 2020 19:00:37 +0100
+ id 1kQDk2-0007CF-Gl; Wed, 07 Oct 2020 19:00:42 +0100
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=1qty=DO=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
-	id 1kQE6E-00072Q-QR
-	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:23:38 +0000
-X-Inumbo-ID: f2b79de9-1655-40fe-9954-e6f3aa7c5974
+	id 1kQE6s-00072Q-Ro
+	for xen-devel@lists.xenproject.org; Wed, 07 Oct 2020 18:24:18 +0000
+X-Inumbo-ID: 6a26448e-ebaa-49d8-a387-8b29faaad382
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id f2b79de9-1655-40fe-9954-e6f3aa7c5974;
-	Wed, 07 Oct 2020 18:21:33 +0000 (UTC)
+	id 6a26448e-ebaa-49d8-a387-8b29faaad382;
+	Wed, 07 Oct 2020 18:21:56 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
 	by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
 	(return-path ijackson@chiark.greenend.org.uk)
-	id 1kQDjx-0007CF-P2; Wed, 07 Oct 2020 19:00:37 +0100
+	id 1kQDk2-0007CF-Gl; Wed, 07 Oct 2020 19:00:42 +0100
 From: Ian Jackson <iwj@xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>,
-	Ian Jackson <Ian.Jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH 18/82] host allocation: Remove some unnecessary definedness tests
-Date: Wed,  7 Oct 2020 18:59:20 +0100
-Message-Id: <20201007180024.7932-19-iwj@xenproject.org>
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 36/82] resource reporting, nfc: Break out report_rogue_task_description
+Date: Wed,  7 Oct 2020 18:59:38 +0100
+Message-Id: <20201007180024.7932-37-iwj@xenproject.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20201007180024.7932-1-iwj@xenproject.org>
 References: <20201007180024.7932-1-iwj@xenproject.org>
@@ -81,38 +80,61 @@ Content-Transfer-Encoding: 8bit
 
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 
-$set_info->() already checkes for undef, and returns immediately in
-that case.  So there is no point checking at the call site.
-
-No functional change.
-
-Signed-off-by: Ian Jackson <Ian.Jackson@eu.citrix.com>
+Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- Osstest/Executive.pm | 11 ++---------
- 1 file changed, 2 insertions(+), 9 deletions(-)
+ Osstest/Executive.pm | 14 ++++++++++++++
+ ms-planner           |  6 +-----
+ 2 files changed, 15 insertions(+), 5 deletions(-)
 
 diff --git a/Osstest/Executive.pm b/Osstest/Executive.pm
-index f17e7b70..5d71d08c 100644
+index 5f59c44e..e3ab1dc3 100644
 --- a/Osstest/Executive.pm
 +++ b/Osstest/Executive.pm
-@@ -849,15 +849,8 @@ sub alloc_resources {
-                 $set_info->('sub-priority',$ENV{OSSTEST_RESOURCE_SUBPRIORITY});
-                 $set_info->('preinfo',     $ENV{OSSTEST_RESOURCE_PREINFO});
- 		$set_info->('feature-noalloc', 1);
--
--                if (defined $waitstart) {
--                    $set_info->('wait-start',$waitstart);
--                }
--
--                my $adjust= $xparams{WaitStartAdjust};
--                if (defined $adjust) {
--                    $set_info->('wait-start-adjust',$adjust);
--                }
-+		$set_info->('wait-start',$waitstart);
-+		$set_info->('wait-start-adjust',$xparams{WaitStartAdjust});
+@@ -51,6 +51,7 @@ BEGIN {
+                       report_run_getinfo report_altcolour
+                       report_altchangecolour opendb_tests
+                       report_blessingscond report_find_push_age_info
++		      report_rogue_task_description
+ 		      log_stderr_timestamped
+                       tcpconnect_queuedaemon plan_search
+                       manual_allocation_base_jobinfo
+@@ -418,6 +419,19 @@ sub report_blessingscond ($) {
+     return $blessingscond;
+ }
  
-                 my $jobinfo= $xparams{JobInfo};
-                 if (!defined $jobinfo and defined $flight and defined $job) {
++sub report_rogue_task_description ($) {
++    my ($arow) = @_;
++    # should have the fields from tasks, except taskid which
++    #  caller must print if they want it.
++    # may also have fields from resources (eg subtask)
++    my $info= "rogue task ";
++    $info .= " $arow->{type} $arow->{refkey}";
++    $info .= " ($arow->{comment})" if defined $arow->{comment};
++    $info .= " $arow->{subtask}";
++    $info .= " (user $arow->{username})";
++    return $info;
++}
++
+ sub report__find_test ($$$$$$$) {
+     my ($blessings, $branches, $tree,
+ 	$revision, $selection, $extracond, $sortlimit) = @_;
+diff --git a/ms-planner b/ms-planner
+index 41f27fa0..4b970730 100755
+--- a/ms-planner
++++ b/ms-planner
+@@ -321,11 +321,7 @@ END
+ 	    $info= "(preparing)";
+ 	} else {
+ 	    print DEBUG "rogue $reso $shareix: $arow->{owntaskid}\n";
+-	    $info= "rogue task";
+-	    $info .= " $arow->{type} $arow->{refkey}";
+-	    $info .= " ($arow->{comment})" if defined $arow->{comment};
+-	    $info .= " $arow->{subtask}";
+-	    $info .= " (user $arow->{username})";
++	    $info= report_rogue_task_description($arow);
+ 	}
+ 	$plan->{Allocations}{$reskey}= {
+             Task => $arow->{owntaskid},
 -- 
 2.20.1
 
