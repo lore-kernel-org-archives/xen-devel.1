@@ -2,25 +2,28 @@ Return-Path: <SRS0=UaJJ=DP=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.7 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D2BA5C433DF
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Oct 2020 18:39:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5F49AC433E7
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Oct 2020 18:58:17 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 50152221FE
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Oct 2020 18:39:47 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 50152221FE
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=m5p.com
+	by mail.kernel.org (Postfix) with ESMTPS id C07A3206A1
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Oct 2020 18:58:16 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="CXLvN0UY"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C07A3206A1
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.4552.11906 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.4559.11942 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQap9-0003cU-0e; Thu, 08 Oct 2020 18:39:31 +0000
+	id 1kQb6s-0005Ue-6r; Thu, 08 Oct 2020 18:57:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 4552.11906; Thu, 08 Oct 2020 18:39:30 +0000
+Received: by outflank-mailman (output) from mailman id 4559.11942; Thu, 08 Oct 2020 18:57:50 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -35,106 +38,142 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQap8-0003cN-Tx; Thu, 08 Oct 2020 18:39:30 +0000
-Received: by outflank-mailman (input) for mailman id 4552;
- Thu, 08 Oct 2020 18:39:29 +0000
+	id 1kQb6s-0005UX-2u; Thu, 08 Oct 2020 18:57:50 +0000
+Received: by outflank-mailman (input) for mailman id 4559;
+ Thu, 08 Oct 2020 18:57:48 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=Ogxi=DP=m5p.com=ehem@srs-us1.protection.inumbo.net>)
- id 1kQap6-0003cI-Un
- for xen-devel@lists.xenproject.org; Thu, 08 Oct 2020 18:39:28 +0000
-Received: from mailhost.m5p.com (unknown [74.104.188.4])
+ (envelope-from <SRS0=3RzB=DP=xen.org=paul@srs-us1.protection.inumbo.net>)
+ id 1kQb6q-0005RO-OX
+ for xen-devel@lists.xenproject.org; Thu, 08 Oct 2020 18:57:48 +0000
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id d7b1e3e3-711c-4c1f-ba9e-a206fff3f1b6;
- Thu, 08 Oct 2020 18:39:27 +0000 (UTC)
-Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:1f07:15ff:0:0:0:f7])
- by mailhost.m5p.com (8.15.2/8.15.2) with ESMTPS id 098Id4eR056821
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
- Thu, 8 Oct 2020 14:39:10 -0400 (EDT) (envelope-from ehem@m5p.com)
-Received: (from ehem@localhost)
- by m5p.com (8.15.2/8.15.2/Submit) id 098Id4tw056820;
- Thu, 8 Oct 2020 11:39:04 -0700 (PDT) (envelope-from ehem)
+ id d15dbb8b-9b40-4fbc-a5ba-a99a04bb68db;
+ Thu, 08 Oct 2020 18:57:43 +0000 (UTC)
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <paul@xen.org>)
+ id 1kQb6g-000417-Lg; Thu, 08 Oct 2020 18:57:38 +0000
+Received: from host109-146-187-185.range109-146.btcentralplus.com
+ ([109.146.187.185] helo=u2f063a87eabd5f.home)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+ (envelope-from <paul@xen.org>)
+ id 1kQb6g-0002P9-9v; Thu, 08 Oct 2020 18:57:38 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=Ogxi=DP=m5p.com=ehem@srs-us1.protection.inumbo.net>)
-	id 1kQap6-0003cI-Un
-	for xen-devel@lists.xenproject.org; Thu, 08 Oct 2020 18:39:28 +0000
-X-Inumbo-ID: d7b1e3e3-711c-4c1f-ba9e-a206fff3f1b6
-Received: from mailhost.m5p.com (unknown [74.104.188.4])
+	(envelope-from <SRS0=3RzB=DP=xen.org=paul@srs-us1.protection.inumbo.net>)
+	id 1kQb6q-0005RO-OX
+	for xen-devel@lists.xenproject.org; Thu, 08 Oct 2020 18:57:48 +0000
+X-Inumbo-ID: d15dbb8b-9b40-4fbc-a5ba-a99a04bb68db
+Received: from mail.xenproject.org (unknown [104.130.215.37])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id d7b1e3e3-711c-4c1f-ba9e-a206fff3f1b6;
-	Thu, 08 Oct 2020 18:39:27 +0000 (UTC)
-Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:1f07:15ff:0:0:0:f7])
-	by mailhost.m5p.com (8.15.2/8.15.2) with ESMTPS id 098Id4eR056821
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
-	Thu, 8 Oct 2020 14:39:10 -0400 (EDT)
-	(envelope-from ehem@m5p.com)
-Received: (from ehem@localhost)
-	by m5p.com (8.15.2/8.15.2/Submit) id 098Id4tw056820;
-	Thu, 8 Oct 2020 11:39:04 -0700 (PDT)
-	(envelope-from ehem)
-Date: Thu, 8 Oct 2020 11:39:04 -0700
-From: Elliott Mitchell <ehem+xen@m5p.com>
-To: Masami Hiramatsu <masami.hiramatsu@linaro.org>
-Cc: Julien Grall <julien@xen.org>, xen-devel@lists.xenproject.org,
-        Alex Benn??e <alex.bennee@linaro.org>, bertrand.marquis@arm.com,
-        andre.przywara@arm.com, Julien Grall <jgrall@amazon.com>,
-        Stefano Stabellini <sstabellini@kernel.org>,
-        Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-        Andrew Cooper <andrew.cooper3@citrix.com>,
-        George Dunlap <george.dunlap@citrix.com>,
-        Ian Jackson <iwj@xenproject.org>, Jan Beulich <jbeulich@suse.com>,
-        Wei Liu <wl@xen.org>, Roger Pau Monn?? <roger.pau@citrix.com>
-Subject: Re: [PATCH 0/4] xen/arm: Unbreak ACPI
-Message-ID: <20201008183904.GA56716@mattapan.m5p.com>
-References: <20200926205542.9261-1-julien@xen.org>
- <CAA93ih3-gTAEzV=yYS-9cHGyN9rfAC28Xeyk8Gsmi7D2BS_OWQ@mail.gmail.com>
+	id d15dbb8b-9b40-4fbc-a5ba-a99a04bb68db;
+	Thu, 08 Oct 2020 18:57:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:MIME-Version:
+	Message-Id:Date:Subject:Cc:To:From;
+	bh=nLbQbDyKtmQ0zyuBxr1DU07QHvJLOR8wLN3+oQCa8vE=; b=CXLvN0UYgu8NTpeor46WvaZ7CK
+	2gVN5A7Hwl32wXCnUGBbzo0+mqyJsgrgX/X+xggKKkL3pEvTvv7h0BRxWyr6GxoRxrTGXaiemq8LV
+	Qp0FgTBnzcCG1xv4nKEsorfpZ9NjjICL9rlESpR6FmGZHE5geWtoHjcT15rGHAO7weyE=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+	by mail.xenproject.org with esmtp (Exim 4.92)
+	(envelope-from <paul@xen.org>)
+	id 1kQb6g-000417-Lg; Thu, 08 Oct 2020 18:57:38 +0000
+Received: from host109-146-187-185.range109-146.btcentralplus.com ([109.146.187.185] helo=u2f063a87eabd5f.home)
+	by xenbits.xenproject.org with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.92)
+	(envelope-from <paul@xen.org>)
+	id 1kQb6g-0002P9-9v; Thu, 08 Oct 2020 18:57:38 +0000
+From: Paul Durrant <paul@xen.org>
+To: xen-devel@lists.xenproject.org
+Cc: Paul Durrant <pdurrant@amazon.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Daniel De Graaf <dgdegra@tycho.nsa.gov>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Ian Jackson <iwj@xenproject.org>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v10 00/11] domain context infrastructure
+Date: Thu,  8 Oct 2020 19:57:24 +0100
+Message-Id: <20201008185735.29875-1-paul@xen.org>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAA93ih3-gTAEzV=yYS-9cHGyN9rfAC28Xeyk8Gsmi7D2BS_OWQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Mon, Sep 28, 2020 at 03:47:52PM +0900, Masami Hiramatsu wrote:
-> This made progress with my Xen boot on DeveloperBox (
-> https://www.96boards.org/product/developerbox/ ) with ACPI.
+From: Paul Durrant <pdurrant@amazon.com>
 
-Adding your patch on top of Julien Grall's patch appears to push the Xen
-boot of my target device (Raspberry PI 4B with Tianocore) further.  Still
-yet to see any output attributable to the Domain 0 kernel though.
+Paul Durrant (11):
+  docs / include: introduce a new framework for 'domain context' records
+  xen: introduce implementation of save/restore of 'domain context'
+  xen/common/domctl: introduce XEN_DOMCTL_get/set_domain_context
+  tools/misc: add xen-domctx to present domain context
+  common/domain: add a domain context record for shared_info...
+  x86/time: add a domain context record for tsc_info...
+  docs/specs: add missing definitions to libxc-migration-stream
+  docs / tools: specify migration v4 to include DOMAIN_CONTEXT
+  tools/python: modify libxc.py to verify v4 stream
+  tools/libs/guest: add code to restore a v4 libxc stream
+  tools/libs/guest: add code to save a v4 libxc stream
 
-(XEN) *** LOADING DOMAIN 0 ***
-(XEN) Loading d0 kernel from boot module @ 0000000032234000
-(XEN) Loading ramdisk from boot module @ 0000000031747000
-(XEN) Allocating 1:1 mappings totalling 2048MB for dom0:
-(XEN) BANK[0] 0x00000020000000-0x00000030000000 (256MB)
-(XEN) BANK[1] 0x00000040000000-0x000000b0000000 (1792MB)
-(XEN) Grant table range: 0x000000315f3000-0x00000031633000
-(XEN) Allocating PPI 16 for event channel interrupt
-(XEN) Loading zImage from 0000000032234000 to 0000000020080000-0000000021359200
-(XEN) Loading d0 initrd from 0000000031747000 to 0x0000000028200000-0x0000000028cebfe4
-(XEN) Loading d0 DTB to 0x0000000028000000-0x0000000028000273
-(XEN) Initial low memory virq threshold set at 0x4000 pages.
-(XEN) Scrubbing Free RAM in background
-(XEN) Std. Loglevel: All
-(XEN) Guest Loglevel: All
-(XEN) *** Serial input to DOM0 (type 'CTRL-a' three times to switch input)
-(XEN) Freed 396kB init memory.
-
-The line, "Loading d0 DTB to 0x0000000028000000-0x0000000028000273" seems
-rather suspicious as I would expect Domain 0 to see ACPI tables, not a
-device tree.
-
-Your (Masami Hiramatsu) patch seems plausible, but things haven't
-progressed enough for me to endorse it.  Looks like something closer to
-the core of ACPI still needs further work, Julien Grall?
-
-
+ .gitignore                               |   1 +
+ docs/specs/domain-context.md             | 198 +++++++++++++
+ docs/specs/libxc-migration-stream.pandoc |  69 ++++-
+ tools/flask/policy/modules/xen.if        |   4 +-
+ tools/libs/ctrl/include/xenctrl.h        |   5 +
+ tools/libs/ctrl/xc_domain.c              |  56 ++++
+ tools/libs/guest/xg_sr_common.c          |   1 +
+ tools/libs/guest/xg_sr_common.h          |   3 +
+ tools/libs/guest/xg_sr_common_x86.c      |  20 --
+ tools/libs/guest/xg_sr_common_x86.h      |   6 -
+ tools/libs/guest/xg_sr_restore.c         |  24 +-
+ tools/libs/guest/xg_sr_restore_x86_hvm.c |   9 +
+ tools/libs/guest/xg_sr_restore_x86_pv.c  |   9 +
+ tools/libs/guest/xg_sr_save.c            |  52 +++-
+ tools/libs/guest/xg_sr_save_x86_hvm.c    |   5 -
+ tools/libs/guest/xg_sr_save_x86_pv.c     |  22 --
+ tools/libs/guest/xg_sr_stream_format.h   |   1 +
+ tools/misc/Makefile                      |   4 +
+ tools/misc/xen-domctx.c                  | 264 ++++++++++++++++++
+ tools/python/xen/migration/libxc.py      |  22 +-
+ xen/arch/x86/time.c                      |  30 ++
+ xen/common/Makefile                      |   1 +
+ xen/common/domain.c                      | 113 ++++++++
+ xen/common/domctl.c                      | 173 ++++++++++++
+ xen/common/save.c                        | 339 +++++++++++++++++++++++
+ xen/include/public/arch-arm/hvm/save.h   |   5 +
+ xen/include/public/arch-x86/hvm/save.h   |   5 +
+ xen/include/public/domctl.h              |  39 +++
+ xen/include/public/save.h                |  85 ++++++
+ xen/include/xen/save.h                   | 160 +++++++++++
+ xen/xsm/flask/hooks.c                    |   6 +
+ xen/xsm/flask/policy/access_vectors      |   4 +
+ 32 files changed, 1661 insertions(+), 74 deletions(-)
+ create mode 100644 docs/specs/domain-context.md
+ create mode 100644 tools/misc/xen-domctx.c
+ create mode 100644 xen/common/save.c
+ create mode 100644 xen/include/public/save.h
+ create mode 100644 xen/include/xen/save.h
+---
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Daniel De Graaf <dgdegra@tycho.nsa.gov>
+Cc: George Dunlap <george.dunlap@citrix.com>
+Cc: Ian Jackson <iwj@xenproject.org>
+Cc: Jan Beulich <jbeulich@suse.com>
+Cc: Julien Grall <julien@xen.org>
+Cc: "Marek Marczykowski-Górecki" <marmarek@invisiblethingslab.com>
+Cc: "Roger Pau Monné" <roger.pau@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Cc: Wei Liu <wl@xen.org>
 -- 
-(\___(\___(\______          --=> 8-) EHM <=--          ______/)___/)___/)
- \BS (    |         ehem+sigmsg@m5p.com  PGP 87145445         |    )   /
-  \_CS\   |  _____  -O #include <stddisclaimer.h> O-   _____  |   /  _/
-8A19\___\_|_/58D2 7E3D DDF4 7BA6 <-PGP-> 41D1 B375 37D0 8714\_|_/___/5445
-
+2.20.1
 
 
