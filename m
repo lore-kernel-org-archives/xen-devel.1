@@ -2,28 +2,28 @@ Return-Path: <SRS0=UaJJ=DP=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 67FE9C433DF
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Oct 2020 19:14:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 18AC0C2BD0C
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Oct 2020 19:14:55 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E3FC921789
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Oct 2020 19:14:53 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 9F2DB21789
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Oct 2020 19:14:54 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="OkRPZXNg"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E3FC921789
+	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="HVb4luVk"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9F2DB21789
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.4586.12038 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.4589.12067 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQbN5-0008M1-Kf; Thu, 08 Oct 2020 19:14:35 +0000
+	id 1kQbNB-0008Q4-Je; Thu, 08 Oct 2020 19:14:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 4586.12038; Thu, 08 Oct 2020 19:14:35 +0000
+Received: by outflank-mailman (output) from mailman id 4589.12067; Thu, 08 Oct 2020 19:14:41 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,92 +38,101 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQbN5-0008Lu-HF; Thu, 08 Oct 2020 19:14:35 +0000
-Received: by outflank-mailman (input) for mailman id 4586;
- Thu, 08 Oct 2020 19:14:34 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kQbNB-0008Pu-Cp; Thu, 08 Oct 2020 19:14:41 +0000
+Received: by outflank-mailman (input) for mailman id 4589;
+ Thu, 08 Oct 2020 19:14:40 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ViHE=DP=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1kQbN4-0008Lk-Dr
- for xen-devel@lists.xenproject.org; Thu, 08 Oct 2020 19:14:34 +0000
+ id 1kQbNA-0008Lp-70
+ for xen-devel@lists.xenproject.org; Thu, 08 Oct 2020 19:14:40 +0000
 Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 0144c565-3c22-414f-b139-cf38414afbf5;
- Thu, 08 Oct 2020 19:14:33 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 5df7ad22-b9f2-4ff2-9714-6aae44ef43a1;
+ Thu, 08 Oct 2020 19:14:34 +0000 (UTC)
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kQbN3-0004R0-Hp
- for xen-devel@lists.xenproject.org; Thu, 08 Oct 2020 19:14:33 +0000
+ (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kQbN4-0004R6-Fx
+ for xen-devel@lists.xenproject.org; Thu, 08 Oct 2020 19:14:34 +0000
 Received: from iwj (helo=mynotebook.example.org)
  by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kQbN3-0003pX-G5
- for xen-devel@lists.xenproject.org; Thu, 08 Oct 2020 19:14:33 +0000
+ (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kQbN4-0003q2-DN
+ for xen-devel@lists.xenproject.org; Thu, 08 Oct 2020 19:14:34 +0000
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by mariner.uk.xensource.com with esmtp (Exim 4.89)
  (envelope-from <ijackson@chiark.greenend.org.uk>)
- id 1kQbN1-0006So-Jc; Thu, 08 Oct 2020 20:14:31 +0100
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ id 1kQbN2-0006So-J0; Thu, 08 Oct 2020 20:14:32 +0100
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=ViHE=DP=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
-	id 1kQbN4-0008Lk-Dr
-	for xen-devel@lists.xenproject.org; Thu, 08 Oct 2020 19:14:34 +0000
-X-Inumbo-ID: 0144c565-3c22-414f-b139-cf38414afbf5
+	id 1kQbNA-0008Lp-70
+	for xen-devel@lists.xenproject.org; Thu, 08 Oct 2020 19:14:40 +0000
+X-Inumbo-ID: 5df7ad22-b9f2-4ff2-9714-6aae44ef43a1
 Received: from mail.xenproject.org (unknown [104.130.215.37])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 0144c565-3c22-414f-b139-cf38414afbf5;
-	Thu, 08 Oct 2020 19:14:33 +0000 (UTC)
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id 5df7ad22-b9f2-4ff2-9714-6aae44ef43a1;
+	Thu, 08 Oct 2020 19:14:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
-	Message-Id:Date:Subject:Cc:To:From;
-	bh=K5qarsK62Og7Ss+hbnvf8Yalf+UlShpHtXrprG47jgU=; b=OkRPZXNg3ZqMCsVsp0ZH8rq+D/
-	JJo6Nr/IEHm5KutUTroBv3kBaGGTtYOGy4QVevrM5Ff4YPJtzFZXlWX7ibUhgTv5xAnlbdHd77j+D
-	BTLLv3P5OmTqT6XvuOmTwLdT9mVCmWsj/0RCd/QglH8qPT/3jdA38gL0QkvHdNKrWKXY=;
+	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
+	bh=ChVOyZirwRN6GYYGaNTGSTLn1c+zNQzFzRYYMg92a3g=; b=HVb4luVkT4nDBJNxgkuiziSfyB
+	H/FFq85YUFlxAz1yUwwmlaRA/axLnjcqwmyq1oFZ9NrYNP55r5b0hKatkOXo3vMQKtmOH4VeJuNTF
+	ksINsB/0CGPboMAeDleV2LNmtCk6H4gwzBmT/AEiZHWnngiDwW9bNR/teod6tCCieV0E=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
 	by mail.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <ijackson@chiark.greenend.org.uk>)
-	id 1kQbN3-0004R0-Hp
-	for xen-devel@lists.xenproject.org; Thu, 08 Oct 2020 19:14:33 +0000
+	id 1kQbN4-0004R6-Fx
+	for xen-devel@lists.xenproject.org; Thu, 08 Oct 2020 19:14:34 +0000
 Received: from iwj (helo=mynotebook.example.org)
 	by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
 	(envelope-from <ijackson@chiark.greenend.org.uk>)
-	id 1kQbN3-0003pX-G5
-	for xen-devel@lists.xenproject.org; Thu, 08 Oct 2020 19:14:33 +0000
+	id 1kQbN4-0003q2-DN
+	for xen-devel@lists.xenproject.org; Thu, 08 Oct 2020 19:14:34 +0000
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
 	by mariner.uk.xensource.com with esmtp (Exim 4.89)
 	(envelope-from <ijackson@chiark.greenend.org.uk>)
-	id 1kQbN1-0006So-Jc; Thu, 08 Oct 2020 20:14:31 +0100
+	id 1kQbN2-0006So-J0; Thu, 08 Oct 2020 20:14:32 +0100
 From: Ian Jackson <iwj@xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: Ian Jackson <iwj@xenproject.org>,
-	committers@xenproject.org
-Subject: [OSSTEST PATCH 00/13] Immediately retry failing tests
-Date: Thu,  8 Oct 2020 20:14:09 +0100
-Message-Id: <20201008191422.5683-1-iwj@xenproject.org>
+Cc: Ian Jackson <iwj@xenproject.org>
+Subject: [OSSTEST PATCH 02/13] Honour OSSTEST_SIMULATE_FAIL in sg-run-job
+Date: Thu,  8 Oct 2020 20:14:11 +0100
+Message-Id: <20201008191422.5683-3-iwj@xenproject.org>
 X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20201008191422.5683-1-iwj@xenproject.org>
+References: <20201008191422.5683-1-iwj@xenproject.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-We discussed this at the Xen Summit.  What I do here is immediate
-retry the jobs with regressions, and then reanalyse the original full
-flight.  If the retries showed the failures were heisenbugs, this will
-let them though.
+This is a Tcl list of globs for <job>.<step>, and allows for
+simulating particular test failures.
 
-This should reduce the negative impact on development, of heisenbugs,
-but it won't do anything to help keep them out of the tree.
+Signed-off-by: Ian Jackson <iwj@xenproject.org>
+---
+ sg-run-job | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
 
-I think this approach was basically already agreed, but I'm CCing the
-committers here for form's sake.
-
- README.dev          |  9 +++----
- cr-daily-branch     | 58 ++++++++++++++++++++++++++++++++++++++++++---
- cr-disk-report      |  2 +-
- cr-try-bisect-adhoc |  2 +-
- cri-args-hostlists  | 28 +++++++++++++++-------
- cs-bisection-step   |  4 ++--
- sg-report-flight    | 35 +++++++++++++++++++++++----
- sg-run-job          |  9 ++++++-
- 8 files changed, 121 insertions(+), 26 deletions(-)
-
+diff --git a/sg-run-job b/sg-run-job
+index dd76d4f2..c64ae026 100755
+--- a/sg-run-job
++++ b/sg-run-job
+@@ -406,7 +406,14 @@ proc spawn-ts {iffail testid args} {
+     jobdb::spawn-step-commit $flight $jobinfo(job) $stepno $testid
+ 
+     set xprefix {}
+-    if {[var-or-default env(OSSTEST_SIMULATE) 0]} { set xprefix echo }
++    if {[var-or-default env(OSSTEST_SIMULATE) 0]} {
++	set xprefix echo
++	foreach ent [var-or-default env(OSSTEST_SIMULATE_FAIL) {}] {
++	    if {[string match $ent $jobinfo(job).$testid]} {
++		set xprefix OSSTEST_SIMULATE_FAIL
++	    }
++	}
++    }
+ 
+     set log [jobdb::step-log-filename $flight $jobinfo(job) $stepno $ts]
+     set redirects {}
 -- 
 2.20.1
 
