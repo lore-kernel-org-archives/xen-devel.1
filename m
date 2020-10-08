@@ -2,27 +2,28 @@ Return-Path: <SRS0=UaJJ=DP=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
-	SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EE333C433DF
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Oct 2020 19:21:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A40FC433DF
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Oct 2020 19:23:15 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7B18B2184D
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Oct 2020 19:21:03 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id CE07621789
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Oct 2020 19:23:14 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="r83oyq+s"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7B18B2184D
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="df3O5q3+"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CE07621789
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.4610.12158 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.4612.12169 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQbT5-0001uP-Ke; Thu, 08 Oct 2020 19:20:47 +0000
+	id 1kQbVG-000230-0n; Thu, 08 Oct 2020 19:23:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 4610.12158; Thu, 08 Oct 2020 19:20:47 +0000
+Received: by outflank-mailman (output) from mailman id 4612.12169; Thu, 08 Oct 2020 19:23:01 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -37,62 +38,216 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQbT5-0001uI-Gn; Thu, 08 Oct 2020 19:20:47 +0000
-Received: by outflank-mailman (input) for mailman id 4610;
- Thu, 08 Oct 2020 19:20:46 +0000
+	id 1kQbVF-00022t-Ty; Thu, 08 Oct 2020 19:23:01 +0000
+Received: by outflank-mailman (input) for mailman id 4612;
+ Thu, 08 Oct 2020 19:22:59 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=R/F0=DP=kernel.org=pr-tracker-bot@srs-us1.protection.inumbo.net>)
- id 1kQbT4-0001uD-62
- for xen-devel@lists.xenproject.org; Thu, 08 Oct 2020 19:20:46 +0000
-Received: from mail.kernel.org (unknown [198.145.29.99])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=3RzB=DP=xen.org=paul@srs-us1.protection.inumbo.net>)
+ id 1kQbVD-00022n-0J
+ for xen-devel@lists.xenproject.org; Thu, 08 Oct 2020 19:22:59 +0000
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 685cba4c-56c4-458a-aed8-d539b026cfcb;
- Thu, 08 Oct 2020 19:20:45 +0000 (UTC)
+ id 5ca40446-ffd0-4a4d-8213-18c2ccb5eaf2;
+ Thu, 08 Oct 2020 19:22:58 +0000 (UTC)
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <paul@xen.org>)
+ id 1kQbVA-0004dz-OJ; Thu, 08 Oct 2020 19:22:56 +0000
+Received: from host109-146-187-185.range109-146.btcentralplus.com
+ ([109.146.187.185] helo=u2f063a87eabd5f.home)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+ (envelope-from <paul@xen.org>)
+ id 1kQb6t-0002P9-WA; Thu, 08 Oct 2020 18:57:52 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=R/F0=DP=kernel.org=pr-tracker-bot@srs-us1.protection.inumbo.net>)
-	id 1kQbT4-0001uD-62
-	for xen-devel@lists.xenproject.org; Thu, 08 Oct 2020 19:20:46 +0000
-X-Inumbo-ID: 685cba4c-56c4-458a-aed8-d539b026cfcb
-Received: from mail.kernel.org (unknown [198.145.29.99])
+	(envelope-from <SRS0=3RzB=DP=xen.org=paul@srs-us1.protection.inumbo.net>)
+	id 1kQbVD-00022n-0J
+	for xen-devel@lists.xenproject.org; Thu, 08 Oct 2020 19:22:59 +0000
+X-Inumbo-ID: 5ca40446-ffd0-4a4d-8213-18c2ccb5eaf2
+Received: from mail.xenproject.org (unknown [104.130.215.37])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 685cba4c-56c4-458a-aed8-d539b026cfcb;
-	Thu, 08 Oct 2020 19:20:45 +0000 (UTC)
-Subject: Re: [GIT PULL] xen: branch for v5.9-rc9
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1602184844;
-	bh=QKVreTOtOfv+UqyeLrweLlXPIWls8Uj8qpGVUvUyd6M=;
-	h=From:In-Reply-To:References:Date:To:Cc:From;
-	b=r83oyq+sD2C9B6GiqlVxUhMtlPEL0uJbZBF6cHRxmtQ6KkwackHEu4wJ5tTsTxjte
-	 PeNdnKbY93WfqSfWqOSyGfwFt8dS4iLvvRnSE9wnsLaph8VBREichGxONHUkZMH7Z7
-	 KqZuIWrdD6V8J5lj2M58M1NHeEvfj4wJ6Jx88Bhc=
-From: pr-tracker-bot@kernel.org
-In-Reply-To: <20201007063804.21597-1-jgross@suse.com>
-References: <20201007063804.21597-1-jgross@suse.com>
-X-PR-Tracked-List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
-X-PR-Tracked-Message-Id: <20201007063804.21597-1-jgross@suse.com>
-X-PR-Tracked-Remote: git://git.kernel.org/pub/scm/linux/kernel/git/xen/tip.git for-linus-5.9b-rc9-tag
-X-PR-Tracked-Commit-Id: 5a0677110b73dd3e1766f89159701bfe8ac06808
-X-PR-Merge-Tree: torvalds/linux.git
-X-PR-Merge-Refname: refs/heads/master
-X-PR-Merge-Commit-Id: 86f0a5fb1b98e993fd43899d6640c7b9eec5000a
-Message-Id: <160218484456.22350.13183729801289360481.pr-tracker-bot@kernel.org>
-Date: Thu, 08 Oct 2020 19:20:44 +0000
-To: Juergen Gross <jgross@suse.com>
-Cc: torvalds@linux-foundation.org, linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org, boris.ostrovsky@oracle.com
+	id 5ca40446-ffd0-4a4d-8213-18c2ccb5eaf2;
+	Thu, 08 Oct 2020 19:22:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
+	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
+	bh=Ci9ElP7+t6nSyjJlvsrEVOvf1v3Xr2+ABAE93SLLx1k=; b=df3O5q3+SZF71Hv5AwwF8CGSdI
+	wpSBcvUqgbAeFlsZ3g1+teZRisgnU6KTJuwHTayscSaZuy/sNf4CoFaHS19JHzR1+9LijZ/RL61d5
+	b4azNpI0UfcLk7/yCx98fieKlZW8hjhZwvfylZag2Qun96m+8xX+BW85SeahnMilBHns=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+	by mail.xenproject.org with esmtp (Exim 4.92)
+	(envelope-from <paul@xen.org>)
+	id 1kQbVA-0004dz-OJ; Thu, 08 Oct 2020 19:22:56 +0000
+Received: from host109-146-187-185.range109-146.btcentralplus.com ([109.146.187.185] helo=u2f063a87eabd5f.home)
+	by xenbits.xenproject.org with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.92)
+	(envelope-from <paul@xen.org>)
+	id 1kQb6t-0002P9-WA; Thu, 08 Oct 2020 18:57:52 +0000
+From: Paul Durrant <paul@xen.org>
+To: xen-devel@lists.xenproject.org
+Cc: Paul Durrant <pdurrant@amazon.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Ian Jackson <iwj@xenproject.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v10 10/11] tools/libs/guest: add code to restore a v4 libxc stream
+Date: Thu,  8 Oct 2020 19:57:34 +0100
+Message-Id: <20201008185735.29875-11-paul@xen.org>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20201008185735.29875-1-paul@xen.org>
+References: <20201008185735.29875-1-paul@xen.org>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-The pull request you sent on Wed,  7 Oct 2020 08:38:04 +0200:
+From: Paul Durrant <pdurrant@amazon.com>
 
-> git://git.kernel.org/pub/scm/linux/kernel/git/xen/tip.git for-linus-5.9b-rc9-tag
+This patch adds the necessary code to accept a v4 stream, and to recognise and
+restore a REC_TYPE_DOMAIN_CONTEXT record.
 
-has been merged into torvalds/linux.git:
-https://git.kernel.org/torvalds/c/86f0a5fb1b98e993fd43899d6640c7b9eec5000a
+Signed-off-by: Paul Durrant <pdurrant@amazon.com>
+---
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Ian Jackson <iwj@xenproject.org>
+Cc: Wei Liu <wl@xen.org>
 
-Thank you!
+v10:
+ - New in v10
+ - Derived from patch #8 of the v9 series
+ - Fix memory leak
+---
+ tools/libs/guest/xg_sr_common.c          |  1 +
+ tools/libs/guest/xg_sr_common.h          |  3 +++
+ tools/libs/guest/xg_sr_restore.c         | 24 ++++++++++++++++++++++--
+ tools/libs/guest/xg_sr_restore_x86_hvm.c |  9 +++++++++
+ tools/libs/guest/xg_sr_restore_x86_pv.c  |  9 +++++++++
+ 5 files changed, 44 insertions(+), 2 deletions(-)
 
+diff --git a/tools/libs/guest/xg_sr_common.c b/tools/libs/guest/xg_sr_common.c
+index 17567ab133..f813320202 100644
+--- a/tools/libs/guest/xg_sr_common.c
++++ b/tools/libs/guest/xg_sr_common.c
+@@ -39,6 +39,7 @@ static const char *const mandatory_rec_types[] =
+     [REC_TYPE_STATIC_DATA_END]              = "Static data end",
+     [REC_TYPE_X86_CPUID_POLICY]             = "x86 CPUID policy",
+     [REC_TYPE_X86_MSR_POLICY]               = "x86 MSR policy",
++    [REC_TYPE_DOMAIN_CONTEXT]               = "Domain context",
+ };
+ 
+ const char *rec_type_to_str(uint32_t type)
+diff --git a/tools/libs/guest/xg_sr_common.h b/tools/libs/guest/xg_sr_common.h
+index cc3ad1c394..ba9e5b0a84 100644
+--- a/tools/libs/guest/xg_sr_common.h
++++ b/tools/libs/guest/xg_sr_common.h
+@@ -297,6 +297,9 @@ struct xc_sr_context
+ 
+             /* Sender has invoked verify mode on the stream. */
+             bool verify;
++
++            /* Domain context blob. */
++            struct xc_sr_blob dom_ctx;
+         } restore;
+     };
+ 
+diff --git a/tools/libs/guest/xg_sr_restore.c b/tools/libs/guest/xg_sr_restore.c
+index b57a787519..9d2bbdfaa3 100644
+--- a/tools/libs/guest/xg_sr_restore.c
++++ b/tools/libs/guest/xg_sr_restore.c
+@@ -35,9 +35,9 @@ static int read_headers(struct xc_sr_context *ctx)
+         return -1;
+     }
+ 
+-    if ( ihdr.version < 2 || ihdr.version > 3 )
++    if ( ihdr.version < 2 || ihdr.version > 4 )
+     {
+-        ERROR("Invalid Version: Expected 2 <= ver <= 3, Got %d",
++        ERROR("Invalid Version: Expected 2 <= ver <= 4, Got %d",
+               ihdr.version);
+         return -1;
+     }
+@@ -682,6 +682,21 @@ int handle_static_data_end(struct xc_sr_context *ctx)
+     return rc;
+ }
+ 
++/*
++ * Process a DOMAIN_CONTEXT record from the stream.
++ */
++static int handle_domain_context(struct xc_sr_context *ctx,
++                                 struct xc_sr_record *rec)
++{
++    xc_interface *xch = ctx->xch;
++    int rc = update_blob(&ctx->restore.dom_ctx, rec->data, rec->length);
++
++    if ( rc )
++        ERROR("Unable to allocate %u bytes for domain context", rec->length);
++
++    return rc;
++}
++
+ static int process_record(struct xc_sr_context *ctx, struct xc_sr_record *rec)
+ {
+     xc_interface *xch = ctx->xch;
+@@ -709,6 +724,10 @@ static int process_record(struct xc_sr_context *ctx, struct xc_sr_record *rec)
+         rc = handle_static_data_end(ctx);
+         break;
+ 
++    case REC_TYPE_DOMAIN_CONTEXT:
++        rc = handle_domain_context(ctx, rec);
++        break;
++
+     default:
+         rc = ctx->restore.ops.process_record(ctx, rec);
+         break;
+@@ -784,6 +803,7 @@ static void cleanup(struct xc_sr_context *ctx)
+ 
+     free(ctx->restore.buffered_records);
+     free(ctx->restore.populated_pfns);
++    free(ctx->restore.dom_ctx.ptr);
+ 
+     if ( ctx->restore.ops.cleanup(ctx) )
+         PERROR("Failed to clean up");
+diff --git a/tools/libs/guest/xg_sr_restore_x86_hvm.c b/tools/libs/guest/xg_sr_restore_x86_hvm.c
+index d6ea6f3012..6bb164b9f0 100644
+--- a/tools/libs/guest/xg_sr_restore_x86_hvm.c
++++ b/tools/libs/guest/xg_sr_restore_x86_hvm.c
+@@ -225,6 +225,15 @@ static int x86_hvm_stream_complete(struct xc_sr_context *ctx)
+         return rc;
+     }
+ 
++    rc = xc_domain_set_context(xch, ctx->domid,
++                               ctx->restore.dom_ctx.ptr,
++                               ctx->restore.dom_ctx.size);
++    if ( rc )
++    {
++        PERROR("Unable to restore Domain context");
++        return rc;
++    }
++
+     rc = xc_dom_gnttab_seed(xch, ctx->domid, true,
+                             ctx->restore.console_gfn,
+                             ctx->restore.xenstore_gfn,
+diff --git a/tools/libs/guest/xg_sr_restore_x86_pv.c b/tools/libs/guest/xg_sr_restore_x86_pv.c
+index dc50b0f5a8..2dafad7b83 100644
+--- a/tools/libs/guest/xg_sr_restore_x86_pv.c
++++ b/tools/libs/guest/xg_sr_restore_x86_pv.c
+@@ -1134,6 +1134,15 @@ static int x86_pv_stream_complete(struct xc_sr_context *ctx)
+     if ( rc )
+         return rc;
+ 
++    rc = xc_domain_set_context(xch, ctx->domid,
++                               ctx->restore.dom_ctx.ptr,
++                               ctx->restore.dom_ctx.size);
++    if ( rc )
++    {
++        PERROR("Unable to restore Domain context");
++        return rc;
++    }
++
+     rc = xc_dom_gnttab_seed(xch, ctx->domid, false,
+                             ctx->restore.console_gfn,
+                             ctx->restore.xenstore_gfn,
 -- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/prtracker.html
+2.20.1
+
 
