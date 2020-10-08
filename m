@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 19C43C433DF
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Oct 2020 18:58:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5AC37C43457
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Oct 2020 18:58:22 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 97322206A1
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Oct 2020 18:58:18 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 10A5D206A1
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Oct 2020 18:58:22 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="4BKw2EiL"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 97322206A1
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="rAfksRyR"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 10A5D206A1
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.4560.11954 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.4564.11995 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQb6t-0005WP-GA; Thu, 08 Oct 2020 18:57:51 +0000
+	id 1kQb73-0005kM-7I; Thu, 08 Oct 2020 18:58:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 4560.11954; Thu, 08 Oct 2020 18:57:51 +0000
+Received: by outflank-mailman (output) from mailman id 4564.11995; Thu, 08 Oct 2020 18:58:01 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,308 +38,265 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQb6t-0005WH-C3; Thu, 08 Oct 2020 18:57:51 +0000
-Received: by outflank-mailman (input) for mailman id 4560;
- Thu, 08 Oct 2020 18:57:49 +0000
+	id 1kQb72-0005k6-UT; Thu, 08 Oct 2020 18:58:00 +0000
+Received: by outflank-mailman (input) for mailman id 4564;
+ Thu, 08 Oct 2020 18:57:59 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=3RzB=DP=xen.org=paul@srs-us1.protection.inumbo.net>)
- id 1kQb6r-0005Rd-Gs
- for xen-devel@lists.xenproject.org; Thu, 08 Oct 2020 18:57:49 +0000
+ id 1kQb71-0005Rd-HC
+ for xen-devel@lists.xenproject.org; Thu, 08 Oct 2020 18:57:59 +0000
 Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 08ecb7e3-5169-43f5-968b-d4e3676090eb;
- Thu, 08 Oct 2020 18:57:45 +0000 (UTC)
+ id 9873da21-24d2-457c-af46-bf5823508cc0;
+ Thu, 08 Oct 2020 18:57:51 +0000 (UTC)
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kQb6m-00041U-9S; Thu, 08 Oct 2020 18:57:44 +0000
+ id 1kQb6s-00042L-4O; Thu, 08 Oct 2020 18:57:50 +0000
 Received: from host109-146-187-185.range109-146.btcentralplus.com
  ([109.146.187.185] helo=u2f063a87eabd5f.home)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kQb6m-0002P9-1o; Thu, 08 Oct 2020 18:57:44 +0000
+ id 1kQb6r-0002P9-RT; Thu, 08 Oct 2020 18:57:50 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=3RzB=DP=xen.org=paul@srs-us1.protection.inumbo.net>)
-	id 1kQb6r-0005Rd-Gs
-	for xen-devel@lists.xenproject.org; Thu, 08 Oct 2020 18:57:49 +0000
-X-Inumbo-ID: 08ecb7e3-5169-43f5-968b-d4e3676090eb
+	id 1kQb71-0005Rd-HC
+	for xen-devel@lists.xenproject.org; Thu, 08 Oct 2020 18:57:59 +0000
+X-Inumbo-ID: 9873da21-24d2-457c-af46-bf5823508cc0
 Received: from mail.xenproject.org (unknown [104.130.215.37])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 08ecb7e3-5169-43f5-968b-d4e3676090eb;
-	Thu, 08 Oct 2020 18:57:45 +0000 (UTC)
+	id 9873da21-24d2-457c-af46-bf5823508cc0;
+	Thu, 08 Oct 2020 18:57:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
-	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=KuTv/AiA3AykRxQcQYe5kZtE2uGaDTe4ZnjePHv8ems=; b=4BKw2EiLnQterbDLN/hAsmx+RQ
-	yybqjdsv86n0liKGgrRVdDL5IzIPhMQ+5z5x+mfhCgck5YKQ2ldcRbynxBmSL7K5KJwzddY2gLGaH
-	Sbhkze0q4Ugn46LP7bOymaTZKGdy4R8KpkBDizxL84lCzG8T/CBnT1uK4VapD+g/30WA=;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:MIME-Version:
+	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
+	bh=RXDGKqvarznbbGXJp5zFlQUMeIoJk0IJ8cYPeqwtqQs=; b=rAfksRyRfbM1+KyVINSizjKsW7
+	s5ZYQtUw+GOOJZCSzw5hYA6ljgkke3rzD0gwKzLnGthpgP2tGuCHbmeGbgATInoETkuNNvJmdhG35
+	hqVaY2FjQBaANGFUy6bky3cOyVEFeTGprgfM9LU6N+s93WuFwHRk7yURWou6zR2Y6yOQ=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
 	by mail.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1kQb6m-00041U-9S; Thu, 08 Oct 2020 18:57:44 +0000
+	id 1kQb6s-00042L-4O; Thu, 08 Oct 2020 18:57:50 +0000
 Received: from host109-146-187-185.range109-146.btcentralplus.com ([109.146.187.185] helo=u2f063a87eabd5f.home)
 	by xenbits.xenproject.org with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
 	(Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1kQb6m-0002P9-1o; Thu, 08 Oct 2020 18:57:44 +0000
+	id 1kQb6r-0002P9-RT; Thu, 08 Oct 2020 18:57:50 +0000
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: Paul Durrant <pdurrant@amazon.com>,
-	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v10 04/11] tools/misc: add xen-domctx to present domain context
-Date: Thu,  8 Oct 2020 19:57:28 +0100
-Message-Id: <20201008185735.29875-5-paul@xen.org>
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Ian Jackson <iwj@xenproject.org>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Subject: [PATCH v10 08/11] docs / tools: specify migration v4 to include DOMAIN_CONTEXT
+Date: Thu,  8 Oct 2020 19:57:32 +0100
+Message-Id: <20201008185735.29875-9-paul@xen.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20201008185735.29875-1-paul@xen.org>
 References: <20201008185735.29875-1-paul@xen.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-This tool is analogous to 'xen-hvmctx' which presents HVM context.
-Subsequent patches will add 'dump' functions when new records are
-introduced.
+From: Paul Durrant <pdurrant@amazon.com>
+
+A new 'domain context' framework was recently introduced to facilitate
+transfer of state for both PV and HVM guests. Hence this patch mandates the
+presence of a new DOMAIN_CONTEXT record in version 4 of the libxc migration
+stream.
+This record will incorprate the content of the domain's 'shared_info' page
+and the TSC informition so the SHARED_INFO and TSC_INFO records are deprecated.
+It is intended that, in future, this record will contain state currently
+present in the HVM_CONTEXT record. However, for compatibility with earlier
+migration streams, the version 4 stream format continues to specify an
+HVM_CONTEXT record and XEN_DOMCTL_sethvmcontext will continue to accept all
+content of that record that may be present in a version 3 stream.
 
 Signed-off-by: Paul Durrant <pdurrant@amazon.com>
-Acked-by: Ian Jackson <iwj@xenproject.org>
-Acked-by: Wei Liu <wl@xen.org>
 ---
+Cc: Wei Liu <wl@xen.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: George Dunlap <george.dunlap@citrix.com>
+Cc: Ian Jackson <iwj@xenproject.org>
+Cc: Jan Beulich <jbeulich@suse.com>
+Cc: Julien Grall <julien@xen.org>
+Cc: Stefano Stabellini <sstabellini@kernel.org>
+Cc: "Marek Marczykowski-Górecki" <marmarek@invisiblethingslab.com>
+
+NOTE: Wei requested ack from Andrew
 
 v10:
- - Re-base
- - Use err[x]()
- - Keep existing A-b since modifications are trivial
+ - Removed changes to xg_sr_common.c and libxc.py to make this a just
+   documentation and header patch
+ - Dropped Wei's A-b in light of change
 
-v3:
- - Re-worked to avoid copying onto stack
- - Added optional typecode and instance arguments
-
-v2:
- - Change name from 'xen-ctx' to 'xen-domctx'
+v7:
+ - New in v7
 ---
- .gitignore              |   1 +
- tools/misc/Makefile     |   4 +
- tools/misc/xen-domctx.c | 172 ++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 177 insertions(+)
- create mode 100644 tools/misc/xen-domctx.c
+ docs/specs/libxc-migration-stream.pandoc | 62 ++++++++++++++++++------
+ tools/libs/guest/xg_sr_stream_format.h   |  1 +
+ 2 files changed, 49 insertions(+), 14 deletions(-)
 
-diff --git a/.gitignore b/.gitignore
-index 188495783e..4d9a61124d 100644
---- a/.gitignore
-+++ b/.gitignore
-@@ -243,6 +243,7 @@ tools/misc/xen_cpuperf
- tools/misc/xen-cpuid
- tools/misc/xen-detect
- tools/misc/xen-diag
-+tools/misc/xen-domctx
- tools/misc/xen-tmem-list-parse
- tools/misc/xen-livepatch
- tools/misc/xenperf
-diff --git a/tools/misc/Makefile b/tools/misc/Makefile
-index 7d37f297a9..fb673d0ff6 100644
---- a/tools/misc/Makefile
-+++ b/tools/misc/Makefile
-@@ -32,6 +32,7 @@ INSTALL_SBIN                   += xenpm
- INSTALL_SBIN                   += xenwatchdogd
- INSTALL_SBIN                   += xen-livepatch
- INSTALL_SBIN                   += xen-diag
-+INSTALL_SBIN                   += xen-domctx
- INSTALL_SBIN += $(INSTALL_SBIN-y)
+diff --git a/docs/specs/libxc-migration-stream.pandoc b/docs/specs/libxc-migration-stream.pandoc
+index 8aeab3b11b..aa6fe284f3 100644
+--- a/docs/specs/libxc-migration-stream.pandoc
++++ b/docs/specs/libxc-migration-stream.pandoc
+@@ -3,7 +3,7 @@
+   Andrew Cooper <<andrew.cooper3@citrix.com>>
+   Wen Congyang <<wency@cn.fujitsu.com>>
+   Yang Hongyang <<hongyang.yang@easystack.cn>>
+-% Revision 3
++% Revision 4
  
- # Everything to be installed in a private bin/
-@@ -111,6 +112,9 @@ xen-livepatch: xen-livepatch.o
- xen-diag: xen-diag.o
- 	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS_libxenctrl) $(APPEND_LDFLAGS)
+ Introduction
+ ============
+@@ -127,7 +127,7 @@ marker      0xFFFFFFFFFFFFFFFF.
  
-+xen-domctx: xen-domctx.o
-+	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS_libxenctrl) $(APPEND_LDFLAGS)
-+
- xen-lowmemd: xen-lowmemd.o
- 	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS_libxenevtchn) $(LDLIBS_libxenctrl) $(LDLIBS_libxenstore) $(APPEND_LDFLAGS)
+ id          0x58454E46 ("XENF" in ASCII).
  
-diff --git a/tools/misc/xen-domctx.c b/tools/misc/xen-domctx.c
-new file mode 100644
-index 0000000000..ca135b9a28
---- /dev/null
-+++ b/tools/misc/xen-domctx.c
-@@ -0,0 +1,172 @@
-+/*
-+ * xen-domctx.c
-+ *
-+ * Print out domain save records in a human-readable way.
-+ *
-+ * Copyright Amazon.com Inc. or its affiliates.
-+ *
-+ * Permission is hereby granted, free of charge, to any person obtaining a
-+ * copy of this software and associated documentation files (the "Software"),
-+ * to deal in the Software without restriction, including without limitation
-+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
-+ * and/or sell copies of the Software, and to permit persons to whom the
-+ * Software is furnished to do so, subject to the following conditions:
-+ *
-+ * The above copyright notice and this permission notice shall be included in
-+ * all copies or substantial portions of the Software.
-+ *
-+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-+ * DEALINGS IN THE SOFTWARE.
-+ */
+-version     0x00000003.  The version of this specification.
++version     0x00000004.  The version of this specification.
+ 
+ options     bit 0: Endianness.  0 = little-endian, 1 = big-endian.
+ 
+@@ -209,9 +209,9 @@ type         0x00000000: END
+ 
+              0x00000006: X86_PV_VCPU_XSAVE
+ 
+-             0x00000007: SHARED_INFO
++             0x00000007: SHARED_INFO (deprecated)
+ 
+-             0x00000008: X86_TSC_INFO
++             0x00000008: X86_TSC_INFO (deprecated)
+ 
+              0x00000009: HVM_CONTEXT
+ 
+@@ -233,7 +233,9 @@ type         0x00000000: END
+ 
+              0x00000012: X86_MSR_POLICY
+ 
+-             0x00000013 - 0x7FFFFFFF: Reserved for future _mandatory_
++             0x00000013: DOMAIN_CONTEXT
 +
-+#include <inttypes.h>
-+#include <stdio.h>
-+#include <stdlib.h>
-+#include <string.h>
-+#include <errno.h>
-+#include <err.h>
++             0x00000014 - 0x7FFFFFFF: Reserved for future _mandatory_
+              records.
+ 
+              0x80000000 - 0xFFFFFFFF: Reserved for future _optional_
+@@ -442,10 +444,11 @@ X86_PV_VCPU_MSRS             XEN_DOMCTL_{get,set}\_vcpu_msrs
+ 
+ \clearpage
+ 
+-SHARED_INFO
+------------
++SHARED_INFO (deprecated)
++------------------------
+ 
+-The content of the Shared Info page.
++The content of the Shared Info page. This is incorporated into the
++DOMAIN_CONTEXT record as of specification version 4.
+ 
+      0     1     2     3     4     5     6     7 octet
+     +-------------------------------------------------+
+@@ -462,11 +465,12 @@ shared_info      Contents of the shared info page.  This record
+ 
+ \clearpage
+ 
+-X86_TSC_INFO
+-------------
++X86_TSC_INFO (deprecated)
++-------------------------
+ 
+ Domain TSC information, as accessed by the
+-XEN_DOMCTL_{get,set}tscinfo hypercall sub-ops.
++XEN_DOMCTL_{get,set}tscinfo hypercall sub-ops. This is incorporated into the
++DOMAIN_CONTEXT record as of specification version 4.
+ 
+      0     1     2     3     4     5     6     7 octet
+     +------------------------+------------------------+
+@@ -680,6 +684,25 @@ MSR_policy       Array of xen_msr_entry_t[]'s
+ 
+ \clearpage
+ 
++DOMAIN_CONTEXT
++--------------
 +
-+#include <xenctrl.h>
-+#include <xen-tools/libs.h>
-+#include <xen/xen.h>
-+#include <xen/domctl.h>
-+#include <xen/save.h>
++Domain context, as accessed by the
++XEN_DOMCTL_{get,set}_domain_context hypercall sub-ops.
 +
-+static void *buf = NULL;
-+static size_t len, off;
++     0     1     2     3     4     5     6     7 octet
++    +-------------------------------------------------+
++    | dom_ctx                                         |
++    ...
++    +-------------------------------------------------+
 +
-+#define GET_PTR(_x)                                                        \
-+    do {                                                                   \
-+        if ( len - off < sizeof(*(_x)) )                                   \
-+            errx(1, "error: need another %lu bytes, only %lu available",   \
-+                    sizeof(*(_x)), len - off);                             \
-+        (_x) = buf + off;                                                  \
-+    } while (false);
++--------------------------------------------------------------------
++Field            Description
++-----------      ---------------------------------------------------
++dom_ctx          The Domain Context blob from Xen.
++--------------------------------------------------------------------
 +
-+static void dump_start(void)
-+{
-+    struct domain_context_start *s;
++\clearpage
+ 
+ Layout
+ ======
+@@ -706,8 +729,7 @@ A typical save record for an x86 PV guest image would look like:
+     * STATIC_DATA_END
+ * X86_PV_P2M_FRAMES record
+ * Many PAGE_DATA records
+-* X86_TSC_INFO
+-* SHARED_INFO record
++* DOMAIN_CONTEXT
+ * VCPU context records for each online VCPU
+     * X86_PV_VCPU_BASIC record
+     * X86_PV_VCPU_EXTENDED record
+@@ -735,7 +757,7 @@ A typical save record for an x86 HVM guest image would look like:
+     * X86_{CPUID,MSR}_POLICY
+     * STATIC_DATA_END
+ * Many PAGE_DATA records
+-* X86_TSC_INFO
++* DOMAIN_CONTEXT
+ * HVM_PARAMS
+ * HVM_CONTEXT
+ * END record
+@@ -746,6 +768,18 @@ the validity of architectural state in the context.
+ Compatibility with older versions
+ =================================
+ 
++v4 compat with v3
++-----------------
 +
-+    GET_PTR(s);
++A v4 stream is compatible with a v3 stream, but mandates the presence of a
++DOMAIN_CONTEXT record. This incorporates context such as the content of
++the domain's Shared Info page and the TSC information, hence the SHARED_INFO
++and TSC_INFO records are deprecated.
++It also supercedes HVM_CONTEXT and, over time, data that is currently part of
++the HVM_CONTEXT blob will move to the DOMAIN_CONTEXT blob. Xen, however, will
++continue to accept all defined HVM_CONTEXT records so a v4-compatible
++receiver can still accept an unmodified v3 stream.
 +
-+    printf("    START: Xen %u.%u\n", s->xen_major, s->xen_minor);
-+}
-+
-+static void dump_end(void)
-+{
-+    struct domain_context_end *e;
-+
-+    GET_PTR(e);
-+
-+    printf("    END\n");
-+}
-+
-+static void usage(void)
-+{
-+    errx(1, "usage: <domid> [ <type> [ <instance> ]]");
-+}
-+
-+int main(int argc, char **argv)
-+{
-+    char *s, *e;
-+    long domid;
-+    long type = -1;
-+    long instance = -1;
-+    unsigned int entry;
-+    xc_interface *xch;
-+    int rc;
-+
-+    if ( argc < 2 || argc > 4 )
-+        usage();
-+
-+    s = e = argv[1];
-+    domid = strtol(s, &e, 0);
-+
-+    if ( *s == '\0' || *e != '\0' ||
-+         domid < 0 || domid >= DOMID_FIRST_RESERVED )
-+        errx(1, "invalid domid '%s'", s);
-+
-+    if ( argc >= 3 )
-+    {
-+        s = e = argv[2];
-+        type = strtol(s, &e, 0);
-+
-+        if ( *s == '\0' || *e != '\0' )
-+            errx(1, "invalid type '%s'", s);
-+    }
-+
-+    if ( argc == 4 )
-+    {
-+        s = e = argv[3];
-+        instance = strtol(s, &e, 0);
-+
-+        if ( *s == '\0' || *e != '\0' )
-+            errx(1, "invalid instance '%s'", s);
-+    }
-+
-+    xch = xc_interface_open(0, 0, 0);
-+    if ( !xch )
-+        err(1, "can't open libxc handle");
-+
-+    rc = xc_domain_get_context(xch, domid, NULL, &len);
-+    if ( rc < 0 )
-+        err(1, "can't get context length for dom %lu", domid);
-+
-+    buf = malloc(len);
-+    if ( !buf )
-+        err(1, "can't allocate %lu bytes", len);
-+
-+    rc = xc_domain_get_context(xch, domid, buf, &len);
-+    if ( rc < 0 )
-+        err(1, "can't get context for dom %lu", domid);
-+
-+    off = 0;
-+
-+    entry = 0;
-+    for ( ;; )
-+    {
-+        struct domain_context_record *rec;
-+
-+        GET_PTR(rec);
-+
-+        off += sizeof(*rec);
-+
-+        if ( (type < 0 || type == rec->type) &&
-+             (instance < 0 || instance == rec->instance) )
-+        {
-+            printf("[%u] type: %u instance: %u length: %"PRIu64"\n", entry++,
-+                   rec->type, rec->instance, rec->length);
-+
-+            switch (rec->type)
-+            {
-+            case DOMAIN_CONTEXT_START: dump_start(); break;
-+            case DOMAIN_CONTEXT_END: dump_end(); break;
-+            default:
-+                printf("Unknown type %u: skipping\n", rec->type);
-+                break;
-+            }
-+        }
-+
-+        if ( rec->type == DOMAIN_CONTEXT_END )
-+            break;
-+
-+        off += ROUNDUP(rec->length, _DOMAIN_CONTEXT_RECORD_ALIGN);
-+    }
-+
-+    return 0;
-+}
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * tab-width: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
+ v3 compat with v2
+ -----------------
+ 
+diff --git a/tools/libs/guest/xg_sr_stream_format.h b/tools/libs/guest/xg_sr_stream_format.h
+index 8a0da26f75..bc538bc192 100644
+--- a/tools/libs/guest/xg_sr_stream_format.h
++++ b/tools/libs/guest/xg_sr_stream_format.h
+@@ -76,6 +76,7 @@ struct xc_sr_rhdr
+ #define REC_TYPE_STATIC_DATA_END            0x00000010U
+ #define REC_TYPE_X86_CPUID_POLICY           0x00000011U
+ #define REC_TYPE_X86_MSR_POLICY             0x00000012U
++#define REC_TYPE_DOMAIN_CONTEXT             0x00000013U
+ 
+ #define REC_TYPE_OPTIONAL             0x80000000U
+ 
 -- 
 2.20.1
 
