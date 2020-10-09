@@ -7,21 +7,21 @@ X-Spam-Status: No, score=-12.7 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 47B19C9DCB1
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 19:54:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C3183C2D0A1
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 19:56:58 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 13A6422CAE
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 19:54:22 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 13A6422CAE
+	by mail.kernel.org (Postfix) with ESMTPS id 8305A225A9
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 19:56:58 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8305A225A9
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=intel.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.5148.13464 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.5169.13481 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQyT0-0006Jx-FD; Fri, 09 Oct 2020 19:54:14 +0000
+	id 1kQyVR-00075G-5M; Fri, 09 Oct 2020 19:56:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 5148.13464; Fri, 09 Oct 2020 19:54:14 +0000
+Received: by outflank-mailman (output) from mailman id 5169.13481; Fri, 09 Oct 2020 19:56:45 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,49 +36,49 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQyT0-0006JE-31; Fri, 09 Oct 2020 19:54:14 +0000
-Received: by outflank-mailman (input) for mailman id 5148;
- Fri, 09 Oct 2020 19:54:12 +0000
+	id 1kQyVR-000757-2F; Fri, 09 Oct 2020 19:56:45 +0000
+Received: by outflank-mailman (input) for mailman id 5169;
+ Fri, 09 Oct 2020 19:56:43 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=lMaC=DQ=intel.com=ira.weiny@srs-us1.protection.inumbo.net>)
- id 1kQySy-0005x6-7b
- for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 19:54:12 +0000
-Received: from mga03.intel.com (unknown [134.134.136.65])
+ id 1kQySP-0003VG-6N
+ for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 19:53:37 +0000
+Received: from mga09.intel.com (unknown [134.134.136.24])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 8081570c-b6c3-4219-88e1-68789d0e79c4;
- Fri, 09 Oct 2020 19:54:11 +0000 (UTC)
-Received: from fmsmga004.fm.intel.com ([10.253.24.48])
- by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Oct 2020 12:54:10 -0700
+ id bb1a64dd-e4c8-4906-97c2-1fdc3985d221;
+ Fri, 09 Oct 2020 19:53:27 +0000 (UTC)
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+ by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 Oct 2020 12:53:26 -0700
 Received: from iweiny-desk2.sc.intel.com (HELO localhost) ([10.3.52.147])
- by fmsmga004-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Oct 2020 12:54:09 -0700
+ by orsmga002-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 Oct 2020 12:53:25 -0700
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=lMaC=DQ=intel.com=ira.weiny@srs-us1.protection.inumbo.net>)
-	id 1kQySy-0005x6-7b
-	for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 19:54:12 +0000
-X-Inumbo-ID: 8081570c-b6c3-4219-88e1-68789d0e79c4
-Received: from mga03.intel.com (unknown [134.134.136.65])
+	id 1kQySP-0003VG-6N
+	for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 19:53:37 +0000
+X-Inumbo-ID: bb1a64dd-e4c8-4906-97c2-1fdc3985d221
+Received: from mga09.intel.com (unknown [134.134.136.24])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 8081570c-b6c3-4219-88e1-68789d0e79c4;
-	Fri, 09 Oct 2020 19:54:11 +0000 (UTC)
-IronPort-SDR: c08hdHvc6ybHobwQ+D0UVX/9ZHOzfQiZb2ianlX2khVfGVs+sgixO1byrqO2vOAn/X1rge7y3h
- hITAoUY46rQg==
-X-IronPort-AV: E=McAfee;i="6000,8403,9769"; a="165592594"
+	id bb1a64dd-e4c8-4906-97c2-1fdc3985d221;
+	Fri, 09 Oct 2020 19:53:27 +0000 (UTC)
+IronPort-SDR: XekXSL8XDIzS4z8DlhwRK7mwt6lTeWdTniQtHCkXg5m/Za1sv6ctOaMcXkcX0ONfiLAaB2or/0
+ E0lSeMRBqvaQ==
+X-IronPort-AV: E=McAfee;i="6000,8403,9769"; a="165643304"
 X-IronPort-AV: E=Sophos;i="5.77,355,1596524400"; 
-   d="scan'208";a="165592594"
+   d="scan'208";a="165643304"
 X-Amp-Result: SKIPPED(no attachment in message)
 X-Amp-File-Uploaded: False
-Received: from fmsmga004.fm.intel.com ([10.253.24.48])
-  by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:54:10 -0700
-IronPort-SDR: LoljxrxdEbdUiebRGt6guGtjo6SPfpWGHMJuLgTgYB7BeDU8CJtiGau7DzbQyZ+Y5gpHVnCtT5
- urTwCEpflSRg==
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:53:26 -0700
+IronPort-SDR: 2ROrwlCi2HA6jb/vbADUiWNpPA9fz//CxLO3iPg6ChQCY2CkDUKdp2BuOf7Z0K54YjJfUTECcl
+ a5kJtnEVjTKQ==
 X-IronPort-AV: E=Sophos;i="5.77,355,1596524400"; 
-   d="scan'208";a="343972696"
+   d="scan'208";a="329006788"
 Received: from iweiny-desk2.sc.intel.com (HELO localhost) ([10.3.52.147])
-  by fmsmga004-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:54:09 -0700
+  by orsmga002-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:53:25 -0700
 From: ira.weiny@intel.com
 To: Andrew Morton <akpm@linux-foundation.org>,
 	Thomas Gleixner <tglx@linutronix.de>,
@@ -87,6 +87,7 @@ To: Andrew Morton <akpm@linux-foundation.org>,
 	Andy Lutomirski <luto@kernel.org>,
 	Peter Zijlstra <peterz@infradead.org>
 Cc: Ira Weiny <ira.weiny@intel.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
 	x86@kernel.org,
 	Dave Hansen <dave.hansen@linux.intel.com>,
 	Dan Williams <dan.j.williams@intel.com>,
@@ -135,9 +136,9 @@ Cc: Ira Weiny <ira.weiny@intel.com>,
 	linux-cachefs@redhat.com,
 	samba-technical@lists.samba.org,
 	intel-wired-lan@lists.osuosl.org
-Subject: [PATCH RFC PKS/PMEM 58/58] [dax|pmem]: Enable stray access protection
-Date: Fri,  9 Oct 2020 12:50:33 -0700
-Message-Id: <20201009195033.3208459-59-ira.weiny@intel.com>
+Subject: [PATCH RFC PKS/PMEM 44/58] drivers/xen: Utilize new kmap_thread()
+Date: Fri,  9 Oct 2020 12:50:19 -0700
+Message-Id: <20201009195033.3208459-45-ira.weiny@intel.com>
 X-Mailer: git-send-email 2.28.0.rc0.12.gb6a658bd00c9
 In-Reply-To: <20201009195033.3208459-1-ira.weiny@intel.com>
 References: <20201009195033.3208459-1-ira.weiny@intel.com>
@@ -146,52 +147,31 @@ Content-Transfer-Encoding: 8bit
 
 From: Ira Weiny <ira.weiny@intel.com>
 
-Protecting against stray writes is particularly important for PMEM
-because, unlike writes to anonymous memory, writes to PMEM persists
-across a reboot.  Thus data corruption could result in permanent loss of
-data.
+These kmap() calls are localized to a single thread.  To avoid the over
+head of global PKRS updates use the new kmap_thread() call.
 
-While stray writes are more serious than reads, protection is also
-enabled for reads.  This helps to detect bugs in code which would
-incorrectly access device memory and prevents a more serious machine
-checks should those bug reads from a poison page.
-
-Enable stray access protection by setting the flag in pgmap which
-requests it.  There is no option presented to the user.  If Zone Device
-Access Protection not be supported this flag will have no affect.
-
+Cc: Stefano Stabellini <sstabellini@kernel.org>
 Signed-off-by: Ira Weiny <ira.weiny@intel.com>
 ---
- drivers/dax/device.c  | 2 ++
- drivers/nvdimm/pmem.c | 2 ++
- 2 files changed, 4 insertions(+)
+ drivers/xen/gntalloc.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/dax/device.c b/drivers/dax/device.c
-index 1e89513f3c59..e6fb35b4f0fb 100644
---- a/drivers/dax/device.c
-+++ b/drivers/dax/device.c
-@@ -430,6 +430,8 @@ int dev_dax_probe(struct device *dev)
+diff --git a/drivers/xen/gntalloc.c b/drivers/xen/gntalloc.c
+index 3fa40c723e8e..3b78e055feff 100644
+--- a/drivers/xen/gntalloc.c
++++ b/drivers/xen/gntalloc.c
+@@ -184,9 +184,9 @@ static int add_grefs(struct ioctl_gntalloc_alloc_gref *op,
+ static void __del_gref(struct gntalloc_gref *gref)
+ {
+ 	if (gref->notify.flags & UNMAP_NOTIFY_CLEAR_BYTE) {
+-		uint8_t *tmp = kmap(gref->page);
++		uint8_t *tmp = kmap_thread(gref->page);
+ 		tmp[gref->notify.pgoff] = 0;
+-		kunmap(gref->page);
++		kunmap_thread(gref->page);
  	}
- 
- 	dev_dax->pgmap.type = MEMORY_DEVICE_GENERIC;
-+	dev_dax->pgmap.flags |= PGMAP_PROT_ENABLED;
-+
- 	addr = devm_memremap_pages(dev, &dev_dax->pgmap);
- 	if (IS_ERR(addr))
- 		return PTR_ERR(addr);
-diff --git a/drivers/nvdimm/pmem.c b/drivers/nvdimm/pmem.c
-index e4dc1ae990fc..9fcd8338e23f 100644
---- a/drivers/nvdimm/pmem.c
-+++ b/drivers/nvdimm/pmem.c
-@@ -426,6 +426,8 @@ static int pmem_attach_disk(struct device *dev,
- 		return -EBUSY;
- 	}
- 
-+	pmem->pgmap.flags |= PGMAP_PROT_ENABLED;
-+
- 	q = blk_alloc_queue(dev_to_node(dev));
- 	if (!q)
- 		return -ENOMEM;
+ 	if (gref->notify.flags & UNMAP_NOTIFY_SEND_EVENT) {
+ 		notify_remote_via_evtchn(gref->notify.event);
 -- 
 2.28.0.rc0.12.gb6a658bd00c9
 
