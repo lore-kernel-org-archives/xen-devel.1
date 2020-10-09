@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-12.7 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CA081C43457
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 20:03:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B81C3C43467
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 20:04:15 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 630112225B
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 20:03:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 630112225B
+	by mail.kernel.org (Postfix) with ESMTPS id 5F311222C8
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 20:04:15 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5F311222C8
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=intel.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.5180.13528 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.5181.13540 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQybb-00008o-QJ; Fri, 09 Oct 2020 20:03:07 +0000
+	id 1kQycZ-0000IW-4a; Fri, 09 Oct 2020 20:04:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 5180.13528; Fri, 09 Oct 2020 20:03:07 +0000
+Received: by outflank-mailman (output) from mailman id 5181.13540; Fri, 09 Oct 2020 20:04:07 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,49 +36,49 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQybb-00008h-Mx; Fri, 09 Oct 2020 20:03:07 +0000
-Received: by outflank-mailman (input) for mailman id 5180;
- Fri, 09 Oct 2020 20:03:05 +0000
+	id 1kQycZ-0000IM-1U; Fri, 09 Oct 2020 20:04:07 +0000
+Received: by outflank-mailman (input) for mailman id 5181;
+ Fri, 09 Oct 2020 20:04:06 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=lMaC=DQ=intel.com=ira.weiny@srs-us1.protection.inumbo.net>)
- id 1kQySK-0003VG-68
- for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 19:53:32 +0000
+ id 1kQySe-0003VG-7G
+ for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 19:53:52 +0000
 Received: from mga07.intel.com (unknown [134.134.136.100])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id f3a4d526-b774-45b6-986a-8c76e30921b9;
- Fri, 09 Oct 2020 19:53:23 +0000 (UTC)
-Received: from orsmga007.jf.intel.com ([10.7.209.58])
+ id bf38be33-9ae8-4546-b721-bdb4d3e8e31a;
+ Fri, 09 Oct 2020 19:53:35 +0000 (UTC)
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Oct 2020 12:53:23 -0700
+ 09 Oct 2020 12:53:35 -0700
 Received: from iweiny-desk2.sc.intel.com (HELO localhost) ([10.3.52.147])
- by orsmga007-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Oct 2020 12:53:21 -0700
+ by orsmga008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 Oct 2020 12:53:34 -0700
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=lMaC=DQ=intel.com=ira.weiny@srs-us1.protection.inumbo.net>)
-	id 1kQySK-0003VG-68
-	for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 19:53:32 +0000
-X-Inumbo-ID: f3a4d526-b774-45b6-986a-8c76e30921b9
+	id 1kQySe-0003VG-7G
+	for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 19:53:52 +0000
+X-Inumbo-ID: bf38be33-9ae8-4546-b721-bdb4d3e8e31a
 Received: from mga07.intel.com (unknown [134.134.136.100])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id f3a4d526-b774-45b6-986a-8c76e30921b9;
-	Fri, 09 Oct 2020 19:53:23 +0000 (UTC)
-IronPort-SDR: GhVMyiL9zhS2aRTAKOr+xl1SDa/QOf9DA/kKt55l4IUXUjm24NizN6Sb+9ifvZUj0phLSipFoi
- wYk7MinVHiCQ==
-X-IronPort-AV: E=McAfee;i="6000,8403,9769"; a="229715329"
+	id bf38be33-9ae8-4546-b721-bdb4d3e8e31a;
+	Fri, 09 Oct 2020 19:53:35 +0000 (UTC)
+IronPort-SDR: sBe4qza1ii/MGc30I0htHBYySTCcdoQh3ck1mtlQblZ2QOG0ARGVBMIJlxmelbFm4XO7kCrmPA
+ KKTQ1obXbEpA==
+X-IronPort-AV: E=McAfee;i="6000,8403,9769"; a="229715352"
 X-IronPort-AV: E=Sophos;i="5.77,355,1596524400"; 
-   d="scan'208";a="229715329"
+   d="scan'208";a="229715352"
 X-Amp-Result: SKIPPED(no attachment in message)
 X-Amp-File-Uploaded: False
-Received: from orsmga007.jf.intel.com ([10.7.209.58])
-  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:53:23 -0700
-IronPort-SDR: 1WKybDcesSB1sLOn62ClPw5Oz5roBPmtIQsa1XcymP/Rm5On5MJ4hIzRHLHnwze0O/9dY0G7BT
- oI/HBaoknNhQ==
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:53:35 -0700
+IronPort-SDR: 1BDjhBWRiZHjmax0H5jHPL9Ee2R7VPzFxt4XNyUZ5d5LafdvLgy40B0wtQFVU3AX2TCQgDyRso
+ HhmDRI33qIDA==
 X-IronPort-AV: E=Sophos;i="5.77,355,1596524400"; 
-   d="scan'208";a="355863255"
+   d="scan'208";a="345148602"
 Received: from iweiny-desk2.sc.intel.com (HELO localhost) ([10.3.52.147])
-  by orsmga007-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:53:21 -0700
+  by orsmga008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:53:34 -0700
 From: ira.weiny@intel.com
 To: Andrew Morton <akpm@linux-foundation.org>,
 	Thomas Gleixner <tglx@linutronix.de>,
@@ -87,8 +87,9 @@ To: Andrew Morton <akpm@linux-foundation.org>,
 	Andy Lutomirski <luto@kernel.org>,
 	Peter Zijlstra <peterz@infradead.org>
 Cc: Ira Weiny <ira.weiny@intel.com>,
-	Ulf Hansson <ulf.hansson@linaro.org>,
-	Sascha Sommer <saschasommer@freenet.de>,
+	Miquel Raynal <miquel.raynal@bootlin.com>,
+	Richard Weinberger <richard@nod.at>,
+	Vignesh Raghavendra <vigneshr@ti.com>,
 	x86@kernel.org,
 	Dave Hansen <dave.hansen@linux.intel.com>,
 	Dan Williams <dan.j.williams@intel.com>,
@@ -137,9 +138,9 @@ Cc: Ira Weiny <ira.weiny@intel.com>,
 	linux-cachefs@redhat.com,
 	samba-technical@lists.samba.org,
 	intel-wired-lan@lists.osuosl.org
-Subject: [PATCH RFC PKS/PMEM 43/58] drivers/mmc: Utilize new kmap_thread()
-Date: Fri,  9 Oct 2020 12:50:18 -0700
-Message-Id: <20201009195033.3208459-44-ira.weiny@intel.com>
+Subject: [PATCH RFC PKS/PMEM 47/58] drivers/mtd: Utilize new kmap_thread()
+Date: Fri,  9 Oct 2020 12:50:22 -0700
+Message-Id: <20201009195033.3208459-48-ira.weiny@intel.com>
 X-Mailer: git-send-email 2.28.0.rc0.12.gb6a658bd00c9
 In-Reply-To: <20201009195033.3208459-1-ira.weiny@intel.com>
 References: <20201009195033.3208459-1-ira.weiny@intel.com>
@@ -151,54 +152,54 @@ From: Ira Weiny <ira.weiny@intel.com>
 These kmap() calls are localized to a single thread.  To avoid the over
 head of global PKRS updates use the new kmap_thread() call.
 
-Cc: Ulf Hansson <ulf.hansson@linaro.org>
-Cc: Sascha Sommer <saschasommer@freenet.de>
+Cc: Miquel Raynal <miquel.raynal@bootlin.com>
+Cc: Richard Weinberger <richard@nod.at>
+Cc: Vignesh Raghavendra <vigneshr@ti.com>
 Signed-off-by: Ira Weiny <ira.weiny@intel.com>
 ---
- drivers/mmc/host/mmc_spi.c    | 4 ++--
- drivers/mmc/host/sdricoh_cs.c | 4 ++--
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ drivers/mtd/mtd_blkdevs.c | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/drivers/mmc/host/mmc_spi.c b/drivers/mmc/host/mmc_spi.c
-index 18a850f37ddc..ab28e7103b8d 100644
---- a/drivers/mmc/host/mmc_spi.c
-+++ b/drivers/mmc/host/mmc_spi.c
-@@ -918,7 +918,7 @@ mmc_spi_data_do(struct mmc_spi_host *host, struct mmc_command *cmd,
+diff --git a/drivers/mtd/mtd_blkdevs.c b/drivers/mtd/mtd_blkdevs.c
+index 0c05f77f9b21..4b18998273fa 100644
+--- a/drivers/mtd/mtd_blkdevs.c
++++ b/drivers/mtd/mtd_blkdevs.c
+@@ -88,14 +88,14 @@ static blk_status_t do_blktrans_request(struct mtd_blktrans_ops *tr,
+ 			return BLK_STS_IOERR;
+ 		return BLK_STS_OK;
+ 	case REQ_OP_READ:
+-		buf = kmap(bio_page(req->bio)) + bio_offset(req->bio);
++		buf = kmap_thread(bio_page(req->bio)) + bio_offset(req->bio);
+ 		for (; nsect > 0; nsect--, block++, buf += tr->blksize) {
+ 			if (tr->readsect(dev, block, buf)) {
+-				kunmap(bio_page(req->bio));
++				kunmap_thread(bio_page(req->bio));
+ 				return BLK_STS_IOERR;
+ 			}
  		}
+-		kunmap(bio_page(req->bio));
++		kunmap_thread(bio_page(req->bio));
+ 		rq_flush_dcache_pages(req);
+ 		return BLK_STS_OK;
+ 	case REQ_OP_WRITE:
+@@ -103,14 +103,14 @@ static blk_status_t do_blktrans_request(struct mtd_blktrans_ops *tr,
+ 			return BLK_STS_IOERR;
  
- 		/* allow pio too; we don't allow highmem */
--		kmap_addr = kmap(sg_page(sg));
-+		kmap_addr = kmap_thread(sg_page(sg));
- 		if (direction == DMA_TO_DEVICE)
- 			t->tx_buf = kmap_addr + sg->offset;
- 		else
-@@ -950,7 +950,7 @@ mmc_spi_data_do(struct mmc_spi_host *host, struct mmc_command *cmd,
- 		/* discard mappings */
- 		if (direction == DMA_FROM_DEVICE)
- 			flush_kernel_dcache_page(sg_page(sg));
--		kunmap(sg_page(sg));
-+		kunmap_thread(sg_page(sg));
- 		if (dma_dev)
- 			dma_unmap_page(dma_dev, dma_addr, PAGE_SIZE, dir);
- 
-diff --git a/drivers/mmc/host/sdricoh_cs.c b/drivers/mmc/host/sdricoh_cs.c
-index 76a8cd3a186f..7806bc69c4f1 100644
---- a/drivers/mmc/host/sdricoh_cs.c
-+++ b/drivers/mmc/host/sdricoh_cs.c
-@@ -312,11 +312,11 @@ static void sdricoh_request(struct mmc_host *mmc, struct mmc_request *mrq)
- 			int result;
- 			page = sg_page(data->sg);
- 
--			buf = kmap(page) + data->sg->offset + (len * i);
-+			buf = kmap_thread(page) + data->sg->offset + (len * i);
- 			result =
- 				sdricoh_blockio(host,
- 					data->flags & MMC_DATA_READ, buf, len);
--			kunmap(page);
-+			kunmap_thread(page);
- 			flush_dcache_page(page);
- 			if (result) {
- 				dev_err(dev, "sdricoh_request: cmd %i "
+ 		rq_flush_dcache_pages(req);
+-		buf = kmap(bio_page(req->bio)) + bio_offset(req->bio);
++		buf = kmap_thread(bio_page(req->bio)) + bio_offset(req->bio);
+ 		for (; nsect > 0; nsect--, block++, buf += tr->blksize) {
+ 			if (tr->writesect(dev, block, buf)) {
+-				kunmap(bio_page(req->bio));
++				kunmap_thread(bio_page(req->bio));
+ 				return BLK_STS_IOERR;
+ 			}
+ 		}
+-		kunmap(bio_page(req->bio));
++		kunmap_thread(bio_page(req->bio));
+ 		return BLK_STS_OK;
+ 	default:
+ 		return BLK_STS_IOERR;
 -- 
 2.28.0.rc0.12.gb6a658bd00c9
 
