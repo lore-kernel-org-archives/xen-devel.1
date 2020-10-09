@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-12.7 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C0F7EC388EB
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 19:51:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 76FEAC83BAA
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 19:52:06 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8A1A222282
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 19:51:38 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8A1A222282
+	by mail.kernel.org (Postfix) with ESMTPS id 358E1223FB
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 19:52:06 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 358E1223FB
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=intel.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.5059.12989 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.5067.13072 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQyQM-0001oZ-OX; Fri, 09 Oct 2020 19:51:30 +0000
+	id 1kQyQm-0002UV-Nq; Fri, 09 Oct 2020 19:51:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 5059.12989; Fri, 09 Oct 2020 19:51:30 +0000
+Received: by outflank-mailman (output) from mailman id 5067.13072; Fri, 09 Oct 2020 19:51:56 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,49 +36,49 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQyQM-0001oQ-Jl; Fri, 09 Oct 2020 19:51:30 +0000
-Received: by outflank-mailman (input) for mailman id 5059;
- Fri, 09 Oct 2020 19:51:29 +0000
+	id 1kQyQm-0002UI-JZ; Fri, 09 Oct 2020 19:51:56 +0000
+Received: by outflank-mailman (input) for mailman id 5067;
+ Fri, 09 Oct 2020 19:51:55 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=lMaC=DQ=intel.com=ira.weiny@srs-us1.protection.inumbo.net>)
- id 1kQyQL-0001nZ-SQ
- for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 19:51:29 +0000
-Received: from mga18.intel.com (unknown [134.134.136.126])
+ id 1kQyQl-0002Bq-8L
+ for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 19:51:55 +0000
+Received: from mga09.intel.com (unknown [134.134.136.24])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id ea353239-8838-4285-98ec-2159d2193702;
- Fri, 09 Oct 2020 19:51:27 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
- by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Oct 2020 12:51:27 -0700
+ id 04e64965-0a39-4d97-830b-bac4dbf46a56;
+ Fri, 09 Oct 2020 19:51:51 +0000 (UTC)
+Received: from orsmga005.jf.intel.com ([10.7.209.41])
+ by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 Oct 2020 12:51:51 -0700
 Received: from iweiny-desk2.sc.intel.com (HELO localhost) ([10.3.52.147])
- by orsmga002-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Oct 2020 12:51:25 -0700
+ by orsmga005-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 Oct 2020 12:51:50 -0700
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=lMaC=DQ=intel.com=ira.weiny@srs-us1.protection.inumbo.net>)
-	id 1kQyQL-0001nZ-SQ
-	for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 19:51:29 +0000
-X-Inumbo-ID: ea353239-8838-4285-98ec-2159d2193702
-Received: from mga18.intel.com (unknown [134.134.136.126])
+	id 1kQyQl-0002Bq-8L
+	for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 19:51:55 +0000
+X-Inumbo-ID: 04e64965-0a39-4d97-830b-bac4dbf46a56
+Received: from mga09.intel.com (unknown [134.134.136.24])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id ea353239-8838-4285-98ec-2159d2193702;
-	Fri, 09 Oct 2020 19:51:27 +0000 (UTC)
-IronPort-SDR: zN+BPdbSz58gNhMlaTO57LfM2A3FvsmcOIfqRBDPJG4d31G/7sexBRpKrLNyZv1BkBWUCIjw0p
- nEaUVK7qAHXA==
-X-IronPort-AV: E=McAfee;i="6000,8403,9769"; a="153363415"
+	id 04e64965-0a39-4d97-830b-bac4dbf46a56;
+	Fri, 09 Oct 2020 19:51:51 +0000 (UTC)
+IronPort-SDR: Vg6H/NGB8J5Ehxvg1pw4k6uX/FOFO7IaaMQWcLb+ZPBjPHmCDv/mS18CNcnuQjMfWklg0jZ54S
+ cteYccC27MEA==
+X-IronPort-AV: E=McAfee;i="6000,8403,9769"; a="165642974"
 X-IronPort-AV: E=Sophos;i="5.77,355,1596524400"; 
-   d="scan'208";a="153363415"
+   d="scan'208";a="165642974"
 X-Amp-Result: SKIPPED(no attachment in message)
 X-Amp-File-Uploaded: False
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-  by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:51:27 -0700
-IronPort-SDR: zNYl6viNpTmcuoOUFeW6ebDlF6mcWw7xHrLDRpkX9eSJEFyww70EqY5cZFdXSl9ODsqjoVqJW/
- EpbiFUFW5goQ==
+Received: from orsmga005.jf.intel.com ([10.7.209.41])
+  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:51:51 -0700
+IronPort-SDR: OASmflq+Rx+yTtbdwfMJ0o3fYX/22afbp7t4aASuh19KdC4DJdh+fKQIdVVFr7y3ZwUlZzPFTz
+ pRsXSfU26jow==
 X-IronPort-AV: E=Sophos;i="5.77,355,1596524400"; 
-   d="scan'208";a="329006240"
+   d="scan'208";a="529053257"
 Received: from iweiny-desk2.sc.intel.com (HELO localhost) ([10.3.52.147])
-  by orsmga002-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:51:25 -0700
+  by orsmga005-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:51:50 -0700
 From: ira.weiny@intel.com
 To: Andrew Morton <akpm@linux-foundation.org>,
 	Thomas Gleixner <tglx@linutronix.de>,
@@ -87,9 +87,6 @@ To: Andrew Morton <akpm@linux-foundation.org>,
 	Andy Lutomirski <luto@kernel.org>,
 	Peter Zijlstra <peterz@infradead.org>
 Cc: Ira Weiny <ira.weiny@intel.com>,
-	"David S. Miller" <davem@davemloft.net>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Jesse Brandeburg <jesse.brandeburg@intel.com>,
 	x86@kernel.org,
 	Dave Hansen <dave.hansen@linux.intel.com>,
 	Dan Williams <dan.j.williams@intel.com>,
@@ -138,9 +135,9 @@ Cc: Ira Weiny <ira.weiny@intel.com>,
 	linux-cachefs@redhat.com,
 	samba-technical@lists.samba.org,
 	intel-wired-lan@lists.osuosl.org
-Subject: [PATCH RFC PKS/PMEM 11/58] drivers/net: Utilize new kmap_thread()
-Date: Fri,  9 Oct 2020 12:49:46 -0700
-Message-Id: <20201009195033.3208459-12-ira.weiny@intel.com>
+Subject: [PATCH RFC PKS/PMEM 18/58] fs/hfs: Utilize new kmap_thread()
+Date: Fri,  9 Oct 2020 12:49:53 -0700
+Message-Id: <20201009195033.3208459-19-ira.weiny@intel.com>
 X-Mailer: git-send-email 2.28.0.rc0.12.gb6a658bd00c9
 In-Reply-To: <20201009195033.3208459-1-ira.weiny@intel.com>
 References: <20201009195033.3208459-1-ira.weiny@intel.com>
@@ -149,61 +146,140 @@ Content-Transfer-Encoding: 8bit
 
 From: Ira Weiny <ira.weiny@intel.com>
 
-The kmap() calls in these drivers are localized to a single thread.  To
-avoid the over head of global PKRS updates use the new kmap_thread()
-call.
+The kmap() calls in this FS are localized to a single thread.  To avoid
+the over head of global PKRS updates use the new kmap_thread() call.
 
-Cc: "David S. Miller" <davem@davemloft.net>
-Cc: Jakub Kicinski <kuba@kernel.org>
-Cc: Jesse Brandeburg <jesse.brandeburg@intel.com>
 Signed-off-by: Ira Weiny <ira.weiny@intel.com>
 ---
- drivers/net/ethernet/intel/igb/igb_ethtool.c     | 4 ++--
- drivers/net/ethernet/intel/ixgbe/ixgbe_ethtool.c | 4 ++--
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ fs/hfs/bnode.c | 14 +++++++-------
+ fs/hfs/btree.c | 20 ++++++++++----------
+ 2 files changed, 17 insertions(+), 17 deletions(-)
 
-diff --git a/drivers/net/ethernet/intel/igb/igb_ethtool.c b/drivers/net/ethernet/intel/igb/igb_ethtool.c
-index 6e8231c1ddf0..ac9189752012 100644
---- a/drivers/net/ethernet/intel/igb/igb_ethtool.c
-+++ b/drivers/net/ethernet/intel/igb/igb_ethtool.c
-@@ -1794,14 +1794,14 @@ static int igb_check_lbtest_frame(struct igb_rx_buffer *rx_buffer,
+diff --git a/fs/hfs/bnode.c b/fs/hfs/bnode.c
+index b63a4df7327b..8b4d02576405 100644
+--- a/fs/hfs/bnode.c
++++ b/fs/hfs/bnode.c
+@@ -23,8 +23,8 @@ void hfs_bnode_read(struct hfs_bnode *node, void *buf,
+ 	off += node->page_offset;
+ 	page = node->page[0];
  
- 	frame_size >>= 1;
- 
--	data = kmap(rx_buffer->page);
-+	data = kmap_thread(rx_buffer->page);
- 
- 	if (data[3] != 0xFF ||
- 	    data[frame_size + 10] != 0xBE ||
- 	    data[frame_size + 12] != 0xAF)
- 		match = false;
- 
--	kunmap(rx_buffer->page);
-+	kunmap_thread(rx_buffer->page);
- 
- 	return match;
+-	memcpy(buf, kmap(page) + off, len);
+-	kunmap(page);
++	memcpy(buf, kmap_thread(page) + off, len);
++	kunmap_thread(page);
  }
-diff --git a/drivers/net/ethernet/intel/ixgbe/ixgbe_ethtool.c b/drivers/net/ethernet/intel/ixgbe/ixgbe_ethtool.c
-index 71ec908266a6..7d469425f8b4 100644
---- a/drivers/net/ethernet/intel/ixgbe/ixgbe_ethtool.c
-+++ b/drivers/net/ethernet/intel/ixgbe/ixgbe_ethtool.c
-@@ -1963,14 +1963,14 @@ static bool ixgbe_check_lbtest_frame(struct ixgbe_rx_buffer *rx_buffer,
  
- 	frame_size >>= 1;
+ u16 hfs_bnode_read_u16(struct hfs_bnode *node, int off)
+@@ -108,9 +108,9 @@ void hfs_bnode_copy(struct hfs_bnode *dst_node, int dst,
+ 	src_page = src_node->page[0];
+ 	dst_page = dst_node->page[0];
  
--	data = kmap(rx_buffer->page) + rx_buffer->page_offset;
-+	data = kmap_thread(rx_buffer->page) + rx_buffer->page_offset;
- 
- 	if (data[3] != 0xFF ||
- 	    data[frame_size + 10] != 0xBE ||
- 	    data[frame_size + 12] != 0xAF)
- 		match = false;
- 
--	kunmap(rx_buffer->page);
-+	kunmap_thread(rx_buffer->page);
- 
- 	return match;
+-	memcpy(kmap(dst_page) + dst, kmap(src_page) + src, len);
+-	kunmap(src_page);
+-	kunmap(dst_page);
++	memcpy(kmap_thread(dst_page) + dst, kmap_thread(src_page) + src, len);
++	kunmap_thread(src_page);
++	kunmap_thread(dst_page);
+ 	set_page_dirty(dst_page);
  }
+ 
+@@ -125,9 +125,9 @@ void hfs_bnode_move(struct hfs_bnode *node, int dst, int src, int len)
+ 	src += node->page_offset;
+ 	dst += node->page_offset;
+ 	page = node->page[0];
+-	ptr = kmap(page);
++	ptr = kmap_thread(page);
+ 	memmove(ptr + dst, ptr + src, len);
+-	kunmap(page);
++	kunmap_thread(page);
+ 	set_page_dirty(page);
+ }
+ 
+diff --git a/fs/hfs/btree.c b/fs/hfs/btree.c
+index 19017d296173..bd4a6d35e361 100644
+--- a/fs/hfs/btree.c
++++ b/fs/hfs/btree.c
+@@ -80,7 +80,7 @@ struct hfs_btree *hfs_btree_open(struct super_block *sb, u32 id, btree_keycmp ke
+ 		goto free_inode;
+ 
+ 	/* Load the header */
+-	head = (struct hfs_btree_header_rec *)(kmap(page) + sizeof(struct hfs_bnode_desc));
++	head = (struct hfs_btree_header_rec *)(kmap_thread(page) + sizeof(struct hfs_bnode_desc));
+ 	tree->root = be32_to_cpu(head->root);
+ 	tree->leaf_count = be32_to_cpu(head->leaf_count);
+ 	tree->leaf_head = be32_to_cpu(head->leaf_head);
+@@ -119,7 +119,7 @@ struct hfs_btree *hfs_btree_open(struct super_block *sb, u32 id, btree_keycmp ke
+ 	tree->node_size_shift = ffs(size) - 1;
+ 	tree->pages_per_bnode = (tree->node_size + PAGE_SIZE - 1) >> PAGE_SHIFT;
+ 
+-	kunmap(page);
++	kunmap_thread(page);
+ 	put_page(page);
+ 	return tree;
+ 
+@@ -268,7 +268,7 @@ struct hfs_bnode *hfs_bmap_alloc(struct hfs_btree *tree)
+ 
+ 	off += node->page_offset;
+ 	pagep = node->page + (off >> PAGE_SHIFT);
+-	data = kmap(*pagep);
++	data = kmap_thread(*pagep);
+ 	off &= ~PAGE_MASK;
+ 	idx = 0;
+ 
+@@ -281,7 +281,7 @@ struct hfs_bnode *hfs_bmap_alloc(struct hfs_btree *tree)
+ 						idx += i;
+ 						data[off] |= m;
+ 						set_page_dirty(*pagep);
+-						kunmap(*pagep);
++						kunmap_thread(*pagep);
+ 						tree->free_nodes--;
+ 						mark_inode_dirty(tree->inode);
+ 						hfs_bnode_put(node);
+@@ -290,14 +290,14 @@ struct hfs_bnode *hfs_bmap_alloc(struct hfs_btree *tree)
+ 				}
+ 			}
+ 			if (++off >= PAGE_SIZE) {
+-				kunmap(*pagep);
+-				data = kmap(*++pagep);
++				kunmap_thread(*pagep);
++				data = kmap_thread(*++pagep);
+ 				off = 0;
+ 			}
+ 			idx += 8;
+ 			len--;
+ 		}
+-		kunmap(*pagep);
++		kunmap_thread(*pagep);
+ 		nidx = node->next;
+ 		if (!nidx) {
+ 			printk(KERN_DEBUG "create new bmap node...\n");
+@@ -313,7 +313,7 @@ struct hfs_bnode *hfs_bmap_alloc(struct hfs_btree *tree)
+ 		off = off16;
+ 		off += node->page_offset;
+ 		pagep = node->page + (off >> PAGE_SHIFT);
+-		data = kmap(*pagep);
++		data = kmap_thread(*pagep);
+ 		off &= ~PAGE_MASK;
+ 	}
+ }
+@@ -360,7 +360,7 @@ void hfs_bmap_free(struct hfs_bnode *node)
+ 	}
+ 	off += node->page_offset + nidx / 8;
+ 	page = node->page[off >> PAGE_SHIFT];
+-	data = kmap(page);
++	data = kmap_thread(page);
+ 	off &= ~PAGE_MASK;
+ 	m = 1 << (~nidx & 7);
+ 	byte = data[off];
+@@ -373,7 +373,7 @@ void hfs_bmap_free(struct hfs_bnode *node)
+ 	}
+ 	data[off] = byte & ~m;
+ 	set_page_dirty(page);
+-	kunmap(page);
++	kunmap_thread(page);
+ 	hfs_bnode_put(node);
+ 	tree->free_nodes++;
+ 	mark_inode_dirty(tree->inode);
 -- 
 2.28.0.rc0.12.gb6a658bd00c9
 
