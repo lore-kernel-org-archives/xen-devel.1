@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-12.7 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5CA7DC388CC
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 19:52:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 76E8CC83014
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 19:53:18 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0EC852237B
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 19:52:17 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0EC852237B
+	by mail.kernel.org (Postfix) with ESMTPS id 46B612240A
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 19:53:18 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 46B612240A
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=intel.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.5073.13109 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.5103.13301 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQyQy-0002oJ-41; Fri, 09 Oct 2020 19:52:08 +0000
+	id 1kQyRw-0004c0-KS; Fri, 09 Oct 2020 19:53:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 5073.13109; Fri, 09 Oct 2020 19:52:08 +0000
+Received: by outflank-mailman (output) from mailman id 5103.13301; Fri, 09 Oct 2020 19:53:08 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,50 +36,50 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQyQx-0002o5-V3; Fri, 09 Oct 2020 19:52:07 +0000
-Received: by outflank-mailman (input) for mailman id 5073;
- Fri, 09 Oct 2020 19:52:06 +0000
+	id 1kQyRw-0004bp-FX; Fri, 09 Oct 2020 19:53:08 +0000
+Received: by outflank-mailman (input) for mailman id 5103;
+ Fri, 09 Oct 2020 19:53:07 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=lMaC=DQ=intel.com=ira.weiny@srs-us1.protection.inumbo.net>)
- id 1kQyQw-0002d3-IT
- for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 19:52:06 +0000
-Received: from mga05.intel.com (unknown [192.55.52.43])
+ id 1kQyRv-0004ON-7c
+ for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 19:53:07 +0000
+Received: from mga01.intel.com (unknown [192.55.52.88])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 96fa9753-0987-4330-bb12-b2e8a3f54d44;
- Fri, 09 Oct 2020 19:52:01 +0000 (UTC)
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
- by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Oct 2020 12:51:59 -0700
+ id bd56cfaa-a4a4-4ffa-82cb-2d312625fe16;
+ Fri, 09 Oct 2020 19:53:03 +0000 (UTC)
+Received: from fmsmga005.fm.intel.com ([10.253.24.32])
+ by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 Oct 2020 12:53:02 -0700
 Received: from iweiny-desk2.sc.intel.com (HELO localhost) ([10.3.52.147])
- by orsmga008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Oct 2020 12:51:37 -0700
+ by fmsmga005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 Oct 2020 12:53:02 -0700
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=lMaC=DQ=intel.com=ira.weiny@srs-us1.protection.inumbo.net>)
-	id 1kQyQw-0002d3-IT
-	for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 19:52:06 +0000
-X-Inumbo-ID: 96fa9753-0987-4330-bb12-b2e8a3f54d44
-Received: from mga05.intel.com (unknown [192.55.52.43])
+	id 1kQyRv-0004ON-7c
+	for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 19:53:07 +0000
+X-Inumbo-ID: bd56cfaa-a4a4-4ffa-82cb-2d312625fe16
+Received: from mga01.intel.com (unknown [192.55.52.88])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 96fa9753-0987-4330-bb12-b2e8a3f54d44;
-	Fri, 09 Oct 2020 19:52:01 +0000 (UTC)
-IronPort-SDR: qLhhMoyOBDZc/+AW2KGKEP3DfAdFgCaVCOKSxpoyj0Rq/JOYiMVt1e1Bz+zJx2rL+dAIaT43P/
- HJ5I4RTHpJEQ==
-X-IronPort-AV: E=McAfee;i="6000,8403,9769"; a="250226062"
+	id bd56cfaa-a4a4-4ffa-82cb-2d312625fe16;
+	Fri, 09 Oct 2020 19:53:03 +0000 (UTC)
+IronPort-SDR: ilAjpYQOlagkaK3s2lWXgwZ4mxD8/Q0nrhm0bep1pVX2urdzS2DtXs212b0Vzf9ZPZ1iRD7cd2
+ IiSUoPsX2lSA==
+X-IronPort-AV: E=McAfee;i="6000,8403,9769"; a="182976383"
 X-IronPort-AV: E=Sophos;i="5.77,355,1596524400"; 
-   d="scan'208";a="250226062"
+   d="scan'208";a="182976383"
 X-Amp-Result: SKIPPED(no attachment in message)
 X-Amp-File-Uploaded: False
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
-  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:51:59 -0700
-IronPort-SDR: 6nDyG/rNIU8VCp7PRxt8N7VM6Ts7FaR6Cq3BMAOPdzxAbIieQhQY1hWISzmf8TSYIGXE2cP/wS
- 1DDas2UbMNkw==
+Received: from fmsmga005.fm.intel.com ([10.253.24.32])
+  by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:53:02 -0700
+IronPort-SDR: bH2kRxXxeY8kuFBN5R8RneSpQbEQLW5eawptefbcIpm8xkU067aWcbaReXxx6/6TDXgDaxiIQ5
+ 8lenxDucas2g==
 X-IronPort-AV: E=Sophos;i="5.77,355,1596524400"; 
-   d="scan'208";a="345147432"
+   d="scan'208";a="519847131"
 Received: from iweiny-desk2.sc.intel.com (HELO localhost) ([10.3.52.147])
-  by orsmga008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:51:37 -0700
+  by fmsmga005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:53:02 -0700
 From: ira.weiny@intel.com
 To: Andrew Morton <akpm@linux-foundation.org>,
 	Thomas Gleixner <tglx@linutronix.de>,
@@ -88,7 +88,7 @@ To: Andrew Morton <akpm@linux-foundation.org>,
 	Andy Lutomirski <luto@kernel.org>,
 	Peter Zijlstra <peterz@infradead.org>
 Cc: Ira Weiny <ira.weiny@intel.com>,
-	Steve French <sfrench@samba.org>,
+	Jan Kara <jack@suse.com>,
 	x86@kernel.org,
 	Dave Hansen <dave.hansen@linux.intel.com>,
 	Dan Williams <dan.j.williams@intel.com>,
@@ -137,9 +137,9 @@ Cc: Ira Weiny <ira.weiny@intel.com>,
 	linux-cachefs@redhat.com,
 	samba-technical@lists.samba.org,
 	intel-wired-lan@lists.osuosl.org
-Subject: [PATCH RFC PKS/PMEM 14/58] fs/cifs: Utilize new kmap_thread()
-Date: Fri,  9 Oct 2020 12:49:49 -0700
-Message-Id: <20201009195033.3208459-15-ira.weiny@intel.com>
+Subject: [PATCH RFC PKS/PMEM 37/58] fs/ext2: Utilize new kmap_thread()
+Date: Fri,  9 Oct 2020 12:50:12 -0700
+Message-Id: <20201009195033.3208459-38-ira.weiny@intel.com>
 X-Mailer: git-send-email 2.28.0.rc0.12.gb6a658bd00c9
 In-Reply-To: <20201009195033.3208459-1-ira.weiny@intel.com>
 References: <20201009195033.3208459-1-ira.weiny@intel.com>
@@ -148,127 +148,41 @@ Content-Transfer-Encoding: 8bit
 
 From: Ira Weiny <ira.weiny@intel.com>
 
-The kmap() calls in this FS are localized to a single thread.  To avoid
-the over head of global PKRS updates use the new kmap_thread() call.
+These kmap() calls are localized to a single thread.  To avoid the over
+head of global PKRS update use the new kmap_thread() call instead.
 
-Cc: Steve French <sfrench@samba.org>
+Cc: Jan Kara <jack@suse.com>
 Signed-off-by: Ira Weiny <ira.weiny@intel.com>
 ---
- fs/cifs/cifsencrypt.c |  6 +++---
- fs/cifs/file.c        | 16 ++++++++--------
- fs/cifs/smb2ops.c     |  8 ++++----
- 3 files changed, 15 insertions(+), 15 deletions(-)
+ fs/ext2/dir.c  | 2 +-
+ fs/ext2/ext2.h | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/fs/cifs/cifsencrypt.c b/fs/cifs/cifsencrypt.c
-index 9daa256f69d4..2f8232d01a56 100644
---- a/fs/cifs/cifsencrypt.c
-+++ b/fs/cifs/cifsencrypt.c
-@@ -82,17 +82,17 @@ int __cifs_calc_signature(struct smb_rqst *rqst,
- 
- 		rqst_page_get_length(rqst, i, &len, &offset);
- 
--		kaddr = (char *) kmap(rqst->rq_pages[i]) + offset;
-+		kaddr = (char *) kmap_thread(rqst->rq_pages[i]) + offset;
- 
- 		rc = crypto_shash_update(shash, kaddr, len);
- 		if (rc) {
- 			cifs_dbg(VFS, "%s: Could not update with payload\n",
- 				 __func__);
--			kunmap(rqst->rq_pages[i]);
-+			kunmap_thread(rqst->rq_pages[i]);
- 			return rc;
- 		}
- 
--		kunmap(rqst->rq_pages[i]);
-+		kunmap_thread(rqst->rq_pages[i]);
- 	}
- 
- 	rc = crypto_shash_final(shash, signature);
-diff --git a/fs/cifs/file.c b/fs/cifs/file.c
-index be46fab4c96d..6db2caab8852 100644
---- a/fs/cifs/file.c
-+++ b/fs/cifs/file.c
-@@ -2145,17 +2145,17 @@ static int cifs_partialpagewrite(struct page *page, unsigned from, unsigned to)
- 	inode = page->mapping->host;
- 
- 	offset += (loff_t)from;
--	write_data = kmap(page);
-+	write_data = kmap_thread(page);
- 	write_data += from;
- 
- 	if ((to > PAGE_SIZE) || (from > to)) {
--		kunmap(page);
-+		kunmap_thread(page);
- 		return -EIO;
- 	}
- 
- 	/* racing with truncate? */
- 	if (offset > mapping->host->i_size) {
--		kunmap(page);
-+		kunmap_thread(page);
- 		return 0; /* don't care */
- 	}
- 
-@@ -2183,7 +2183,7 @@ static int cifs_partialpagewrite(struct page *page, unsigned from, unsigned to)
- 			rc = -EIO;
- 	}
- 
+diff --git a/fs/ext2/dir.c b/fs/ext2/dir.c
+index f3194bf20733..abe97ba458c8 100644
+--- a/fs/ext2/dir.c
++++ b/fs/ext2/dir.c
+@@ -196,7 +196,7 @@ static struct page * ext2_get_page(struct inode *dir, unsigned long n,
+ 	struct address_space *mapping = dir->i_mapping;
+ 	struct page *page = read_mapping_page(mapping, n, NULL);
+ 	if (!IS_ERR(page)) {
+-		kmap(page);
++		kmap_thread(page);
+ 		if (unlikely(!PageChecked(page))) {
+ 			if (PageError(page) || !ext2_check_page(page, quiet))
+ 				goto fail;
+diff --git a/fs/ext2/ext2.h b/fs/ext2/ext2.h
+index 021ec8b42ac3..9bcb6714c255 100644
+--- a/fs/ext2/ext2.h
++++ b/fs/ext2/ext2.h
+@@ -749,7 +749,7 @@ extern struct ext2_dir_entry_2 * ext2_dotdot (struct inode *, struct page **);
+ extern void ext2_set_link(struct inode *, struct ext2_dir_entry_2 *, struct page *, struct inode *, int);
+ static inline void ext2_put_page(struct page *page)
+ {
 -	kunmap(page);
 +	kunmap_thread(page);
- 	return rc;
+ 	put_page(page);
  }
- 
-@@ -2559,10 +2559,10 @@ static int cifs_write_end(struct file *file, struct address_space *mapping,
- 		   known which we might as well	leverage */
- 		/* BB check if anything else missing out of ppw
- 		   such as updating last write time */
--		page_data = kmap(page);
-+		page_data = kmap_thread(page);
- 		rc = cifs_write(cfile, pid, page_data + offset, copied, &pos);
- 		/* if (rc < 0) should we set writebehind rc? */
--		kunmap(page);
-+		kunmap_thread(page);
- 
- 		free_xid(xid);
- 	} else {
-@@ -4511,7 +4511,7 @@ static int cifs_readpage_worker(struct file *file, struct page *page,
- 	if (rc == 0)
- 		goto read_complete;
- 
--	read_data = kmap(page);
-+	read_data = kmap_thread(page);
- 	/* for reads over a certain size could initiate async read ahead */
- 
- 	rc = cifs_read(file, read_data, PAGE_SIZE, poffset);
-@@ -4540,7 +4540,7 @@ static int cifs_readpage_worker(struct file *file, struct page *page,
- 	rc = 0;
- 
- io_error:
--	kunmap(page);
-+	kunmap_thread(page);
- 	unlock_page(page);
- 
- read_complete:
-diff --git a/fs/cifs/smb2ops.c b/fs/cifs/smb2ops.c
-index 32f90dc82c84..a3e7ebab38b6 100644
---- a/fs/cifs/smb2ops.c
-+++ b/fs/cifs/smb2ops.c
-@@ -4068,12 +4068,12 @@ smb3_init_transform_rq(struct TCP_Server_Info *server, int num_rqst,
- 
- 			rqst_page_get_length(&new_rq[i], j, &len, &offset);
- 
--			dst = (char *) kmap(new_rq[i].rq_pages[j]) + offset;
--			src = (char *) kmap(old_rq[i - 1].rq_pages[j]) + offset;
-+			dst = (char *) kmap_thread(new_rq[i].rq_pages[j]) + offset;
-+			src = (char *) kmap_thread(old_rq[i - 1].rq_pages[j]) + offset;
- 
- 			memcpy(dst, src, len);
--			kunmap(new_rq[i].rq_pages[j]);
--			kunmap(old_rq[i - 1].rq_pages[j]);
-+			kunmap_thread(new_rq[i].rq_pages[j]);
-+			kunmap_thread(old_rq[i - 1].rq_pages[j]);
- 		}
- 	}
  
 -- 
 2.28.0.rc0.12.gb6a658bd00c9
