@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-12.7 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B3E91C9DCA5
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 19:54:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3BBEDC9DC9B
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 19:54:14 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 818CD22CAD
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 19:54:18 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 818CD22CAD
+	by mail.kernel.org (Postfix) with ESMTPS id 0713422B51
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 19:54:13 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0713422B51
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=intel.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.5144.13441 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.5138.13409 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQySv-00068x-CN; Fri, 09 Oct 2020 19:54:09 +0000
+	id 1kQySp-0005xh-Og; Fri, 09 Oct 2020 19:54:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 5144.13441; Fri, 09 Oct 2020 19:54:09 +0000
+Received: by outflank-mailman (output) from mailman id 5138.13409; Fri, 09 Oct 2020 19:54:03 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,49 +36,50 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQySu-00068W-U6; Fri, 09 Oct 2020 19:54:08 +0000
-Received: by outflank-mailman (input) for mailman id 5144;
- Fri, 09 Oct 2020 19:54:07 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kQySp-0005xW-Gv; Fri, 09 Oct 2020 19:54:03 +0000
+Received: by outflank-mailman (input) for mailman id 5138;
+ Fri, 09 Oct 2020 19:54:02 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=lMaC=DQ=intel.com=ira.weiny@srs-us1.protection.inumbo.net>)
- id 1kQySt-0005x6-77
- for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 19:54:07 +0000
-Received: from mga01.intel.com (unknown [192.55.52.88])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b5bc4318-9a41-4b0b-bc6e-214ad03ae863;
- Fri, 09 Oct 2020 19:54:06 +0000 (UTC)
-Received: from orsmga004.jf.intel.com ([10.7.209.38])
- by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Oct 2020 12:54:04 -0700
+ id 1kQySn-0005Ps-V7
+ for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 19:54:01 +0000
+Received: from mga06.intel.com (unknown [134.134.136.31])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 661d6fbc-7671-45ed-9247-8eec879818b0;
+ Fri, 09 Oct 2020 19:53:55 +0000 (UTC)
+Received: from fmsmga005.fm.intel.com ([10.253.24.32])
+ by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 Oct 2020 12:53:54 -0700
 Received: from iweiny-desk2.sc.intel.com (HELO localhost) ([10.3.52.147])
- by orsmga004-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Oct 2020 12:54:03 -0700
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by fmsmga005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 Oct 2020 12:53:53 -0700
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=lMaC=DQ=intel.com=ira.weiny@srs-us1.protection.inumbo.net>)
-	id 1kQySt-0005x6-77
-	for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 19:54:07 +0000
-X-Inumbo-ID: b5bc4318-9a41-4b0b-bc6e-214ad03ae863
-Received: from mga01.intel.com (unknown [192.55.52.88])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id b5bc4318-9a41-4b0b-bc6e-214ad03ae863;
-	Fri, 09 Oct 2020 19:54:06 +0000 (UTC)
-IronPort-SDR: c5c8lWx53OKNfJTf5ukBb57x4xGzHo3/RsCiYSxlMsrD0E9zKISdhlW1OfiP938gwC0kIn9Ony
- mzjXzkcVlXMQ==
-X-IronPort-AV: E=McAfee;i="6000,8403,9769"; a="182976549"
+	id 1kQySn-0005Ps-V7
+	for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 19:54:01 +0000
+X-Inumbo-ID: 661d6fbc-7671-45ed-9247-8eec879818b0
+Received: from mga06.intel.com (unknown [134.134.136.31])
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id 661d6fbc-7671-45ed-9247-8eec879818b0;
+	Fri, 09 Oct 2020 19:53:55 +0000 (UTC)
+IronPort-SDR: qAwk0eQ+X+LCpDWx3sefcn5lu/8xvuqCwVCgM1HthVzDQ0OnqVQX6aby7qQJevD7rkG95HexiI
+ CPFDGhVgYKVg==
+X-IronPort-AV: E=McAfee;i="6000,8403,9769"; a="227179201"
 X-IronPort-AV: E=Sophos;i="5.77,355,1596524400"; 
-   d="scan'208";a="182976549"
+   d="scan'208";a="227179201"
 X-Amp-Result: SKIPPED(no attachment in message)
 X-Amp-File-Uploaded: False
-Received: from orsmga004.jf.intel.com ([10.7.209.38])
-  by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:54:04 -0700
-IronPort-SDR: NEiErKYZfPZGqrWyxIZ0z43ef9+IKjrcXd9NJIRckxXQwdDEMd5poh/dknsqhifod6Ym/UoaZd
- Mu4h9c7DJvbA==
+Received: from fmsmga005.fm.intel.com ([10.253.24.32])
+  by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:53:54 -0700
+IronPort-SDR: bZn0Zma13YkX7FJFkNsCYMjMNff2FSiB/MgoUwYT50qMOfu0yRYfZtOtUYx1uwuwPtN+tdFX+r
+ hwly4wq6Ikyg==
 X-IronPort-AV: E=Sophos;i="5.77,355,1596524400"; 
-   d="scan'208";a="462301216"
+   d="scan'208";a="519847271"
 Received: from iweiny-desk2.sc.intel.com (HELO localhost) ([10.3.52.147])
-  by orsmga004-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:54:03 -0700
+  by fmsmga005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:53:53 -0700
 From: ira.weiny@intel.com
 To: Andrew Morton <akpm@linux-foundation.org>,
 	Thomas Gleixner <tglx@linutronix.de>,
@@ -87,6 +88,14 @@ To: Andrew Morton <akpm@linux-foundation.org>,
 	Andy Lutomirski <luto@kernel.org>,
 	Peter Zijlstra <peterz@infradead.org>
 Cc: Ira Weiny <ira.weiny@intel.com>,
+	Alexander Viro <viro@zeniv.linux.org.uk>,
+	=?UTF-8?q?J=C3=A9r=C3=B4me=20Glisse?= <jglisse@redhat.com>,
+	Martin KaFai Lau <kafai@fb.com>,
+	Song Liu <songliubraving@fb.com>,
+	Yonghong Song <yhs@fb.com>,
+	Andrii Nakryiko <andriin@fb.com>,
+	John Fastabend <john.fastabend@gmail.com>,
+	KP Singh <kpsingh@chromium.org>,
 	x86@kernel.org,
 	Dave Hansen <dave.hansen@linux.intel.com>,
 	Dan Williams <dan.j.williams@intel.com>,
@@ -135,53 +144,135 @@ Cc: Ira Weiny <ira.weiny@intel.com>,
 	linux-cachefs@redhat.com,
 	samba-technical@lists.samba.org,
 	intel-wired-lan@lists.osuosl.org
-Subject: [PATCH RFC PKS/PMEM 56/58] dax: Stray access protection for dax_direct_access()
-Date: Fri,  9 Oct 2020 12:50:31 -0700
-Message-Id: <20201009195033.3208459-57-ira.weiny@intel.com>
+Subject: [PATCH RFC PKS/PMEM 53/58] lib: Utilize new kmap_thread()
+Date: Fri,  9 Oct 2020 12:50:28 -0700
+Message-Id: <20201009195033.3208459-54-ira.weiny@intel.com>
 X-Mailer: git-send-email 2.28.0.rc0.12.gb6a658bd00c9
 In-Reply-To: <20201009195033.3208459-1-ira.weiny@intel.com>
 References: <20201009195033.3208459-1-ira.weiny@intel.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 From: Ira Weiny <ira.weiny@intel.com>
 
-dax_direct_access() is a special case of accessing pmem via a page
-offset and without a struct page.
+These kmap() calls are localized to a single thread.  To avoid the over
+head of global PKRS updates use the new kmap_thread() call.
 
-Because the dax driver is well aware of the special protections it has
-mapped memory with, call dev_access_[en|dis]able() directly instead of
-the unnecessary overhead of trying to get a page to kmap.
-
-Similar to kmap, we leverage existing functions, dax_read_[un]lock(),
-because they are already required to surround the use of the memory
-returned from dax_direct_access().
-
+Cc: Alexander Viro <viro@zeniv.linux.org.uk>
+Cc: "Jérôme Glisse" <jglisse@redhat.com>
+Cc: Martin KaFai Lau <kafai@fb.com>
+Cc: Song Liu <songliubraving@fb.com>
+Cc: Yonghong Song <yhs@fb.com>
+Cc: Andrii Nakryiko <andriin@fb.com>
+Cc: John Fastabend <john.fastabend@gmail.com>
+Cc: KP Singh <kpsingh@chromium.org>
 Signed-off-by: Ira Weiny <ira.weiny@intel.com>
 ---
- drivers/dax/super.c | 2 ++
- 1 file changed, 2 insertions(+)
+ lib/iov_iter.c | 12 ++++++------
+ lib/test_bpf.c |  4 ++--
+ lib/test_hmm.c |  8 ++++----
+ 3 files changed, 12 insertions(+), 12 deletions(-)
 
-diff --git a/drivers/dax/super.c b/drivers/dax/super.c
-index e84070b55463..0ddb3ee73e36 100644
---- a/drivers/dax/super.c
-+++ b/drivers/dax/super.c
-@@ -30,6 +30,7 @@ static DEFINE_SPINLOCK(dax_host_lock);
+diff --git a/lib/iov_iter.c b/lib/iov_iter.c
+index 5e40786c8f12..1d47f957cf95 100644
+--- a/lib/iov_iter.c
++++ b/lib/iov_iter.c
+@@ -208,7 +208,7 @@ static size_t copy_page_to_iter_iovec(struct page *page, size_t offset, size_t b
+ 	}
+ 	/* Too bad - revert to non-atomic kmap */
  
- int dax_read_lock(void)
- {
-+	dev_access_enable(false);
- 	return srcu_read_lock(&dax_srcu);
- }
- EXPORT_SYMBOL_GPL(dax_read_lock);
-@@ -37,6 +38,7 @@ EXPORT_SYMBOL_GPL(dax_read_lock);
- void dax_read_unlock(int id)
- {
- 	srcu_read_unlock(&dax_srcu, id);
-+	dev_access_disable(false);
- }
- EXPORT_SYMBOL_GPL(dax_read_unlock);
+-	kaddr = kmap(page);
++	kaddr = kmap_thread(page);
+ 	from = kaddr + offset;
+ 	left = copyout(buf, from, copy);
+ 	copy -= left;
+@@ -225,7 +225,7 @@ static size_t copy_page_to_iter_iovec(struct page *page, size_t offset, size_t b
+ 		from += copy;
+ 		bytes -= copy;
+ 	}
+-	kunmap(page);
++	kunmap_thread(page);
  
+ done:
+ 	if (skip == iov->iov_len) {
+@@ -292,7 +292,7 @@ static size_t copy_page_from_iter_iovec(struct page *page, size_t offset, size_t
+ 	}
+ 	/* Too bad - revert to non-atomic kmap */
+ 
+-	kaddr = kmap(page);
++	kaddr = kmap_thread(page);
+ 	to = kaddr + offset;
+ 	left = copyin(to, buf, copy);
+ 	copy -= left;
+@@ -309,7 +309,7 @@ static size_t copy_page_from_iter_iovec(struct page *page, size_t offset, size_t
+ 		to += copy;
+ 		bytes -= copy;
+ 	}
+-	kunmap(page);
++	kunmap_thread(page);
+ 
+ done:
+ 	if (skip == iov->iov_len) {
+@@ -1742,10 +1742,10 @@ int iov_iter_for_each_range(struct iov_iter *i, size_t bytes,
+ 		return 0;
+ 
+ 	iterate_all_kinds(i, bytes, v, -EINVAL, ({
+-		w.iov_base = kmap(v.bv_page) + v.bv_offset;
++		w.iov_base = kmap_thread(v.bv_page) + v.bv_offset;
+ 		w.iov_len = v.bv_len;
+ 		err = f(&w, context);
+-		kunmap(v.bv_page);
++		kunmap_thread(v.bv_page);
+ 		err;}), ({
+ 		w = v;
+ 		err = f(&w, context);})
+diff --git a/lib/test_bpf.c b/lib/test_bpf.c
+index ca7d635bccd9..441f822f56ba 100644
+--- a/lib/test_bpf.c
++++ b/lib/test_bpf.c
+@@ -6506,11 +6506,11 @@ static void *generate_test_data(struct bpf_test *test, int sub)
+ 		if (!page)
+ 			goto err_kfree_skb;
+ 
+-		ptr = kmap(page);
++		ptr = kmap_thread(page);
+ 		if (!ptr)
+ 			goto err_free_page;
+ 		memcpy(ptr, test->frag_data, MAX_DATA);
+-		kunmap(page);
++		kunmap_thread(page);
+ 		skb_add_rx_frag(skb, 0, page, 0, MAX_DATA, MAX_DATA);
+ 	}
+ 
+diff --git a/lib/test_hmm.c b/lib/test_hmm.c
+index e7dc3de355b7..e40d26f97f45 100644
+--- a/lib/test_hmm.c
++++ b/lib/test_hmm.c
+@@ -329,9 +329,9 @@ static int dmirror_do_read(struct dmirror *dmirror, unsigned long start,
+ 		if (!page)
+ 			return -ENOENT;
+ 
+-		tmp = kmap(page);
++		tmp = kmap_thread(page);
+ 		memcpy(ptr, tmp, PAGE_SIZE);
+-		kunmap(page);
++		kunmap_thread(page);
+ 
+ 		ptr += PAGE_SIZE;
+ 		bounce->cpages++;
+@@ -398,9 +398,9 @@ static int dmirror_do_write(struct dmirror *dmirror, unsigned long start,
+ 		if (!page || xa_pointer_tag(entry) != DPT_XA_TAG_WRITE)
+ 			return -ENOENT;
+ 
+-		tmp = kmap(page);
++		tmp = kmap_thread(page);
+ 		memcpy(tmp, ptr, PAGE_SIZE);
+-		kunmap(page);
++		kunmap_thread(page);
+ 
+ 		ptr += PAGE_SIZE;
+ 		bounce->cpages++;
 -- 
 2.28.0.rc0.12.gb6a658bd00c9
 
