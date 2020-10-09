@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-12.7 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D119CC55185
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 19:59:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CA081C43457
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 20:03:20 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 890B722267
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 19:59:28 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 890B722267
+	by mail.kernel.org (Postfix) with ESMTPS id 630112225B
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 20:03:20 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 630112225B
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=intel.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.5173.13517 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.5180.13528 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQyXv-0007Xy-8k; Fri, 09 Oct 2020 19:59:19 +0000
+	id 1kQybb-00008o-QJ; Fri, 09 Oct 2020 20:03:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 5173.13517; Fri, 09 Oct 2020 19:59:19 +0000
+Received: by outflank-mailman (output) from mailman id 5180.13528; Fri, 09 Oct 2020 20:03:07 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,49 +36,49 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQyXv-0007Xq-5M; Fri, 09 Oct 2020 19:59:19 +0000
-Received: by outflank-mailman (input) for mailman id 5173;
- Fri, 09 Oct 2020 19:59:18 +0000
+	id 1kQybb-00008h-Mx; Fri, 09 Oct 2020 20:03:07 +0000
+Received: by outflank-mailman (input) for mailman id 5180;
+ Fri, 09 Oct 2020 20:03:05 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=lMaC=DQ=intel.com=ira.weiny@srs-us1.protection.inumbo.net>)
- id 1kQySU-0003VG-6W
- for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 19:53:42 +0000
-Received: from mga03.intel.com (unknown [134.134.136.65])
+ id 1kQySK-0003VG-68
+ for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 19:53:32 +0000
+Received: from mga07.intel.com (unknown [134.134.136.100])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 30caa391-3e96-48cc-9fcb-f4823c84ce0d;
- Fri, 09 Oct 2020 19:53:30 +0000 (UTC)
-Received: from fmsmga007.fm.intel.com ([10.253.24.52])
- by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Oct 2020 12:53:29 -0700
+ id f3a4d526-b774-45b6-986a-8c76e30921b9;
+ Fri, 09 Oct 2020 19:53:23 +0000 (UTC)
+Received: from orsmga007.jf.intel.com ([10.7.209.58])
+ by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 Oct 2020 12:53:23 -0700
 Received: from iweiny-desk2.sc.intel.com (HELO localhost) ([10.3.52.147])
- by fmsmga007-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Oct 2020 12:53:28 -0700
+ by orsmga007-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 Oct 2020 12:53:21 -0700
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=lMaC=DQ=intel.com=ira.weiny@srs-us1.protection.inumbo.net>)
-	id 1kQySU-0003VG-6W
-	for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 19:53:42 +0000
-X-Inumbo-ID: 30caa391-3e96-48cc-9fcb-f4823c84ce0d
-Received: from mga03.intel.com (unknown [134.134.136.65])
+	id 1kQySK-0003VG-68
+	for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 19:53:32 +0000
+X-Inumbo-ID: f3a4d526-b774-45b6-986a-8c76e30921b9
+Received: from mga07.intel.com (unknown [134.134.136.100])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 30caa391-3e96-48cc-9fcb-f4823c84ce0d;
-	Fri, 09 Oct 2020 19:53:30 +0000 (UTC)
-IronPort-SDR: kaVSwKYO/oBj40XBBm1bm6G1A1++4hOplAS3cyXyq2u2UFdJSJ887QaOjSj9FhCnDez5pzPD9U
- QFqmpzx346Pg==
-X-IronPort-AV: E=McAfee;i="6000,8403,9769"; a="165592493"
+	id f3a4d526-b774-45b6-986a-8c76e30921b9;
+	Fri, 09 Oct 2020 19:53:23 +0000 (UTC)
+IronPort-SDR: GhVMyiL9zhS2aRTAKOr+xl1SDa/QOf9DA/kKt55l4IUXUjm24NizN6Sb+9ifvZUj0phLSipFoi
+ wYk7MinVHiCQ==
+X-IronPort-AV: E=McAfee;i="6000,8403,9769"; a="229715329"
 X-IronPort-AV: E=Sophos;i="5.77,355,1596524400"; 
-   d="scan'208";a="165592493"
+   d="scan'208";a="229715329"
 X-Amp-Result: SKIPPED(no attachment in message)
 X-Amp-File-Uploaded: False
-Received: from fmsmga007.fm.intel.com ([10.253.24.52])
-  by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:53:29 -0700
-IronPort-SDR: BOVOU8SHaQbMr+qBBSrCzuqbJHuQd4ndzwss05aaSC7o5I30ANXdekITPCnqmJ5xtHPcWbAp0e
- 1H/r6jgeLwtA==
+Received: from orsmga007.jf.intel.com ([10.7.209.58])
+  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:53:23 -0700
+IronPort-SDR: 1WKybDcesSB1sLOn62ClPw5Oz5roBPmtIQsa1XcymP/Rm5On5MJ4hIzRHLHnwze0O/9dY0G7BT
+ oI/HBaoknNhQ==
 X-IronPort-AV: E=Sophos;i="5.77,355,1596524400"; 
-   d="scan'208";a="298419945"
+   d="scan'208";a="355863255"
 Received: from iweiny-desk2.sc.intel.com (HELO localhost) ([10.3.52.147])
-  by fmsmga007-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:53:28 -0700
+  by orsmga007-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:53:21 -0700
 From: ira.weiny@intel.com
 To: Andrew Morton <akpm@linux-foundation.org>,
 	Thomas Gleixner <tglx@linutronix.de>,
@@ -87,7 +87,8 @@ To: Andrew Morton <akpm@linux-foundation.org>,
 	Andy Lutomirski <luto@kernel.org>,
 	Peter Zijlstra <peterz@infradead.org>
 Cc: Ira Weiny <ira.weiny@intel.com>,
-	Ard Biesheuvel <ardb@kernel.org>,
+	Ulf Hansson <ulf.hansson@linaro.org>,
+	Sascha Sommer <saschasommer@freenet.de>,
 	x86@kernel.org,
 	Dave Hansen <dave.hansen@linux.intel.com>,
 	Dan Williams <dan.j.williams@intel.com>,
@@ -136,9 +137,9 @@ Cc: Ira Weiny <ira.weiny@intel.com>,
 	linux-cachefs@redhat.com,
 	samba-technical@lists.samba.org,
 	intel-wired-lan@lists.osuosl.org
-Subject: [PATCH RFC PKS/PMEM 45/58] drivers/firmware: Utilize new kmap_thread()
-Date: Fri,  9 Oct 2020 12:50:20 -0700
-Message-Id: <20201009195033.3208459-46-ira.weiny@intel.com>
+Subject: [PATCH RFC PKS/PMEM 43/58] drivers/mmc: Utilize new kmap_thread()
+Date: Fri,  9 Oct 2020 12:50:18 -0700
+Message-Id: <20201009195033.3208459-44-ira.weiny@intel.com>
 X-Mailer: git-send-email 2.28.0.rc0.12.gb6a658bd00c9
 In-Reply-To: <20201009195033.3208459-1-ira.weiny@intel.com>
 References: <20201009195033.3208459-1-ira.weiny@intel.com>
@@ -150,66 +151,54 @@ From: Ira Weiny <ira.weiny@intel.com>
 These kmap() calls are localized to a single thread.  To avoid the over
 head of global PKRS updates use the new kmap_thread() call.
 
-Cc: Ard Biesheuvel <ardb@kernel.org>
+Cc: Ulf Hansson <ulf.hansson@linaro.org>
+Cc: Sascha Sommer <saschasommer@freenet.de>
 Signed-off-by: Ira Weiny <ira.weiny@intel.com>
 ---
- drivers/firmware/efi/capsule-loader.c | 6 +++---
- drivers/firmware/efi/capsule.c        | 4 ++--
- 2 files changed, 5 insertions(+), 5 deletions(-)
+ drivers/mmc/host/mmc_spi.c    | 4 ++--
+ drivers/mmc/host/sdricoh_cs.c | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/firmware/efi/capsule-loader.c b/drivers/firmware/efi/capsule-loader.c
-index 4dde8edd53b6..aa2e0b5940fd 100644
---- a/drivers/firmware/efi/capsule-loader.c
-+++ b/drivers/firmware/efi/capsule-loader.c
-@@ -197,7 +197,7 @@ static ssize_t efi_capsule_write(struct file *file, const char __user *buff,
- 		page = cap_info->pages[cap_info->index - 1];
- 	}
+diff --git a/drivers/mmc/host/mmc_spi.c b/drivers/mmc/host/mmc_spi.c
+index 18a850f37ddc..ab28e7103b8d 100644
+--- a/drivers/mmc/host/mmc_spi.c
++++ b/drivers/mmc/host/mmc_spi.c
+@@ -918,7 +918,7 @@ mmc_spi_data_do(struct mmc_spi_host *host, struct mmc_command *cmd,
+ 		}
  
--	kbuff = kmap(page);
-+	kbuff = kmap_thread(page);
- 	kbuff += PAGE_SIZE - cap_info->page_bytes_remain;
- 
- 	/* Copy capsule binary data from user space to kernel space buffer */
-@@ -217,7 +217,7 @@ static ssize_t efi_capsule_write(struct file *file, const char __user *buff,
- 	}
- 
- 	cap_info->count += write_byte;
--	kunmap(page);
-+	kunmap_thread(page);
- 
- 	/* Submit the full binary to efi_capsule_update() API */
- 	if (cap_info->header.headersize > 0 &&
-@@ -236,7 +236,7 @@ static ssize_t efi_capsule_write(struct file *file, const char __user *buff,
- 	return write_byte;
- 
- fail_unmap:
--	kunmap(page);
-+	kunmap_thread(page);
- failed:
- 	efi_free_all_buff_pages(cap_info);
- 	return ret;
-diff --git a/drivers/firmware/efi/capsule.c b/drivers/firmware/efi/capsule.c
-index 598b7800d14e..edb7797b0e4f 100644
---- a/drivers/firmware/efi/capsule.c
-+++ b/drivers/firmware/efi/capsule.c
-@@ -244,7 +244,7 @@ int efi_capsule_update(efi_capsule_header_t *capsule, phys_addr_t *pages)
- 	for (i = 0; i < sg_count; i++) {
- 		efi_capsule_block_desc_t *sglist;
- 
--		sglist = kmap(sg_pages[i]);
-+		sglist = kmap_thread(sg_pages[i]);
- 
- 		for (j = 0; j < SGLIST_PER_PAGE && count > 0; j++) {
- 			u64 sz = min_t(u64, imagesize,
-@@ -265,7 +265,7 @@ int efi_capsule_update(efi_capsule_header_t *capsule, phys_addr_t *pages)
+ 		/* allow pio too; we don't allow highmem */
+-		kmap_addr = kmap(sg_page(sg));
++		kmap_addr = kmap_thread(sg_page(sg));
+ 		if (direction == DMA_TO_DEVICE)
+ 			t->tx_buf = kmap_addr + sg->offset;
  		else
- 			sglist[j].data = page_to_phys(sg_pages[i + 1]);
+@@ -950,7 +950,7 @@ mmc_spi_data_do(struct mmc_spi_host *host, struct mmc_command *cmd,
+ 		/* discard mappings */
+ 		if (direction == DMA_FROM_DEVICE)
+ 			flush_kernel_dcache_page(sg_page(sg));
+-		kunmap(sg_page(sg));
++		kunmap_thread(sg_page(sg));
+ 		if (dma_dev)
+ 			dma_unmap_page(dma_dev, dma_addr, PAGE_SIZE, dir);
  
--		kunmap(sg_pages[i]);
-+		kunmap_thread(sg_pages[i]);
- 	}
+diff --git a/drivers/mmc/host/sdricoh_cs.c b/drivers/mmc/host/sdricoh_cs.c
+index 76a8cd3a186f..7806bc69c4f1 100644
+--- a/drivers/mmc/host/sdricoh_cs.c
++++ b/drivers/mmc/host/sdricoh_cs.c
+@@ -312,11 +312,11 @@ static void sdricoh_request(struct mmc_host *mmc, struct mmc_request *mrq)
+ 			int result;
+ 			page = sg_page(data->sg);
  
- 	mutex_lock(&capsule_mutex);
+-			buf = kmap(page) + data->sg->offset + (len * i);
++			buf = kmap_thread(page) + data->sg->offset + (len * i);
+ 			result =
+ 				sdricoh_blockio(host,
+ 					data->flags & MMC_DATA_READ, buf, len);
+-			kunmap(page);
++			kunmap_thread(page);
+ 			flush_dcache_page(page);
+ 			if (result) {
+ 				dev_err(dev, "sdricoh_request: cmd %i "
 -- 
 2.28.0.rc0.12.gb6a658bd00c9
 
