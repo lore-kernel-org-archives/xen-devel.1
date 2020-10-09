@@ -2,28 +2,25 @@ Return-Path: <SRS0=FjyW=DQ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-3.7 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BB837C433DF
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 21:32:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 080AEC433DF
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 21:50:23 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 598B221D6C
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 21:32:59 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="Se6O5xZX"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 598B221D6C
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id A94732225B
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 21:50:22 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A94732225B
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=m5p.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.5220.13639 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.5226.13653 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kR009-00029M-Q7; Fri, 09 Oct 2020 21:32:33 +0000
+	id 1kR0Gz-0003XU-9z; Fri, 09 Oct 2020 21:49:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 5220.13639; Fri, 09 Oct 2020 21:32:33 +0000
+Received: by outflank-mailman (output) from mailman id 5226.13653; Fri, 09 Oct 2020 21:49:57 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,120 +35,85 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kR009-00029F-Mx; Fri, 09 Oct 2020 21:32:33 +0000
-Received: by outflank-mailman (input) for mailman id 5220;
- Fri, 09 Oct 2020 21:32:33 +0000
+	id 1kR0Gz-0003XN-6m; Fri, 09 Oct 2020 21:49:57 +0000
+Received: by outflank-mailman (input) for mailman id 5226;
+ Fri, 09 Oct 2020 21:49:56 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=VNj9=DQ=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
- id 1kR008-00029A-VA
- for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 21:32:32 +0000
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=bBQf=DQ=m5p.com=ehem@srs-us1.protection.inumbo.net>)
+ id 1kR0Gy-0003XI-0B
+ for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 21:49:56 +0000
+Received: from mailhost.m5p.com (unknown [74.104.188.4])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 5a3a0136-83fd-4827-9a2e-82c3571ccd32;
- Fri, 09 Oct 2020 21:32:30 +0000 (UTC)
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kR006-00074c-EJ; Fri, 09 Oct 2020 21:32:30 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kR006-00047s-4H; Fri, 09 Oct 2020 21:32:30 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1kR006-0001a9-3q; Fri, 09 Oct 2020 21:32:30 +0000
+ id f2c6a3b9-a27c-4970-86f4-80d1f94261da;
+ Fri, 09 Oct 2020 21:49:54 +0000 (UTC)
+Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:1f07:15ff:0:0:0:f7])
+ by mailhost.m5p.com (8.15.2/8.15.2) with ESMTPS id 099LnVFL066278
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
+ Fri, 9 Oct 2020 17:49:37 -0400 (EDT) (envelope-from ehem@m5p.com)
+Received: (from ehem@localhost)
+ by m5p.com (8.15.2/8.15.2/Submit) id 099LnUET066277;
+ Fri, 9 Oct 2020 14:49:30 -0700 (PDT) (envelope-from ehem)
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=VNj9=DQ=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
-	id 1kR008-00029A-VA
-	for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 21:32:32 +0000
-X-Inumbo-ID: 5a3a0136-83fd-4827-9a2e-82c3571ccd32
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+	(envelope-from <SRS0=bBQf=DQ=m5p.com=ehem@srs-us1.protection.inumbo.net>)
+	id 1kR0Gy-0003XI-0B
+	for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 21:49:56 +0000
+X-Inumbo-ID: f2c6a3b9-a27c-4970-86f4-80d1f94261da
+Received: from mailhost.m5p.com (unknown [74.104.188.4])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 5a3a0136-83fd-4827-9a2e-82c3571ccd32;
-	Fri, 09 Oct 2020 21:32:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=NyTuRXjDfm7TCuqhsiTQ17bVnMWKWbbjI9YSBB17sww=; b=Se6O5xZXf+tUufYgZqTJpeIRdI
-	yuV8WevKx4hhN6qI6iFQjKlFwaHzbtJKIGH9YTwoJjde60sbV4yyJcLHtJZGfp/9YSOl+ReHnqDgD
-	UKeu4X+1cTdxP8DrI5LrKqdKITymq4SONO0mny3sg4V111T4162A5ZqvYm8/dGDajzHk=;
-Received: from host146.205.237.98.conversent.net ([205.237.98.146] helo=infra.test-lab.xenproject.org)
-	by mail.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <osstest-admin@xenproject.org>)
-	id 1kR006-00074c-EJ; Fri, 09 Oct 2020 21:32:30 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
-	by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <osstest-admin@xenproject.org>)
-	id 1kR006-00047s-4H; Fri, 09 Oct 2020 21:32:30 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim 4.92)
-	(envelope-from <osstest-admin@xenproject.org>)
-	id 1kR006-0001a9-3q; Fri, 09 Oct 2020 21:32:30 +0000
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-155594-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+	id f2c6a3b9-a27c-4970-86f4-80d1f94261da;
+	Fri, 09 Oct 2020 21:49:54 +0000 (UTC)
+Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:1f07:15ff:0:0:0:f7])
+	by mailhost.m5p.com (8.15.2/8.15.2) with ESMTPS id 099LnVFL066278
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
+	Fri, 9 Oct 2020 17:49:37 -0400 (EDT)
+	(envelope-from ehem@m5p.com)
+Received: (from ehem@localhost)
+	by m5p.com (8.15.2/8.15.2/Submit) id 099LnUET066277;
+	Fri, 9 Oct 2020 14:49:30 -0700 (PDT)
+	(envelope-from ehem)
+Date: Fri, 9 Oct 2020 14:49:30 -0700
+From: Elliott Mitchell <ehem+xen@m5p.com>
+To: Masami Hiramatsu <masami.hiramatsu@linaro.org>
+Cc: Julien Grall <julien@xen.org>, xen-devel@lists.xenproject.org,
+        Alex Benn??e <alex.bennee@linaro.org>, bertrand.marquis@arm.com,
+        andre.przywara@arm.com, Julien Grall <jgrall@amazon.com>,
+        Stefano Stabellini <sstabellini@kernel.org>,
+        Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+        Andrew Cooper <andrew.cooper3@citrix.com>,
+        George Dunlap <george.dunlap@citrix.com>,
+        Ian Jackson <iwj@xenproject.org>, Jan Beulich <jbeulich@suse.com>,
+        Wei Liu <wl@xen.org>, Roger Pau Monn?? <roger.pau@citrix.com>
+Subject: Re: [PATCH 0/4] xen/arm: Unbreak ACPI
+Message-ID: <20201009214930.GB65219@mattapan.m5p.com>
+References: <20200926205542.9261-1-julien@xen.org>
+ <CAA93ih3-gTAEzV=yYS-9cHGyN9rfAC28Xeyk8Gsmi7D2BS_OWQ@mail.gmail.com>
 MIME-Version: 1.0
-Subject: [ovmf test] 155594: all pass - PUSHED
-X-Osstest-Versions-This:
-    ovmf=091ab12b340a05c99ce0e31d29293ce58c7014e2
-X-Osstest-Versions-That:
-    ovmf=69e95b9efed520e643b9e5b0573180aa7c5ecaca
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Fri, 09 Oct 2020 21:32:30 +0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAA93ih3-gTAEzV=yYS-9cHGyN9rfAC28Xeyk8Gsmi7D2BS_OWQ@mail.gmail.com>
 
-flight 155594 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/155594/
+On Mon, Sep 28, 2020 at 03:47:52PM +0900, Masami Hiramatsu wrote:
+> This made progress with my Xen boot on DeveloperBox (
+> https://www.96boards.org/product/developerbox/ ) with ACPI.
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- ovmf                 091ab12b340a05c99ce0e31d29293ce58c7014e2
-baseline version:
- ovmf                 69e95b9efed520e643b9e5b0573180aa7c5ecaca
+Now things have progressed a bit more and I can confirm the patch
+provides useful progress.  I cannot say whether there is a better way
+since I'm not familiar enough with the code.
 
-Last test of basis   155548  2020-10-08 13:39:54 Z    1 days
-Testing same since   155594  2020-10-09 09:11:36 Z    0 days    1 attempts
+As such, for both Masami Hiramatsu's "Hide UART address only if STAO..."
+and Julien Grall's set of four:
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Maciej Rabeda <maciej.rabeda@linux.intel.com>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
+Tested-by: Elliott Mitchell <ehem+xen@m5p.com>
 
 
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+-- 
+(\___(\___(\______          --=> 8-) EHM <=--          ______/)___/)___/)
+ \BS (    |         ehem+sigmsg@m5p.com  PGP 87145445         |    )   /
+  \_CS\   |  _____  -O #include <stddisclaimer.h> O-   _____  |   /  _/
+8A19\___\_|_/58D2 7E3D DDF4 7BA6 <-PGP-> 41D1 B375 37D0 8714\_|_/___/5445
 
 
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
-   69e95b9efe..091ab12b34  091ab12b340a05c99ce0e31d29293ce58c7014e2 -> xen-tested-master
 
