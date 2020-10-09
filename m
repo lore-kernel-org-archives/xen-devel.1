@@ -7,21 +7,21 @@ X-Spam-Status: No, score=-12.7 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BC9DCC832FA
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 19:52:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D9E4DC832C7
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 19:52:26 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8652C2242F
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 19:52:41 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8652C2242F
+	by mail.kernel.org (Postfix) with ESMTPS id A1141223AC
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 19:52:26 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A1141223AC
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=intel.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.5081.13180 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.5076.13145 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQyRN-0003Wh-7O; Fri, 09 Oct 2020 19:52:33 +0000
+	id 1kQyR7-00035l-RV; Fri, 09 Oct 2020 19:52:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 5081.13180; Fri, 09 Oct 2020 19:52:33 +0000
+Received: by outflank-mailman (output) from mailman id 5076.13145; Fri, 09 Oct 2020 19:52:17 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,50 +36,50 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQyRN-0003WZ-3i; Fri, 09 Oct 2020 19:52:33 +0000
-Received: by outflank-mailman (input) for mailman id 5081;
- Fri, 09 Oct 2020 19:52:31 +0000
+	id 1kQyR7-00035S-Lg; Fri, 09 Oct 2020 19:52:17 +0000
+Received: by outflank-mailman (input) for mailman id 5076;
+ Fri, 09 Oct 2020 19:52:16 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=lMaC=DQ=intel.com=ira.weiny@srs-us1.protection.inumbo.net>)
- id 1kQyRL-0002d3-JS
- for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 19:52:31 +0000
-Received: from mga18.intel.com (unknown [134.134.136.126])
+ id 1kQyR6-0002d3-Ip
+ for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 19:52:16 +0000
+Received: from mga01.intel.com (unknown [192.55.52.88])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id c7d70813-3935-4011-8eb3-d3dc4f9da9a3;
- Fri, 09 Oct 2020 19:52:23 +0000 (UTC)
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
- by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Oct 2020 12:52:22 -0700
+ id 25d30baa-8627-4539-9a37-76ca83e75cd5;
+ Fri, 09 Oct 2020 19:52:05 +0000 (UTC)
+Received: from fmsmga004.fm.intel.com ([10.253.24.48])
+ by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 Oct 2020 12:52:05 -0700
 Received: from iweiny-desk2.sc.intel.com (HELO localhost) ([10.3.52.147])
- by fmsmga003-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Oct 2020 12:52:21 -0700
+ by fmsmga004-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 Oct 2020 12:52:04 -0700
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=lMaC=DQ=intel.com=ira.weiny@srs-us1.protection.inumbo.net>)
-	id 1kQyRL-0002d3-JS
-	for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 19:52:31 +0000
-X-Inumbo-ID: c7d70813-3935-4011-8eb3-d3dc4f9da9a3
-Received: from mga18.intel.com (unknown [134.134.136.126])
+	id 1kQyR6-0002d3-Ip
+	for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 19:52:16 +0000
+X-Inumbo-ID: 25d30baa-8627-4539-9a37-76ca83e75cd5
+Received: from mga01.intel.com (unknown [192.55.52.88])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id c7d70813-3935-4011-8eb3-d3dc4f9da9a3;
-	Fri, 09 Oct 2020 19:52:23 +0000 (UTC)
-IronPort-SDR: nMC9K3ubWzfvYuZ7DSyCCO9Sbt6ISBPe0BjddKTp38eJH4KzOv9asRhjkuiaQ6OmoyxfQFymq/
- fyG07zfZVnFQ==
-X-IronPort-AV: E=McAfee;i="6000,8403,9769"; a="153363585"
+	id 25d30baa-8627-4539-9a37-76ca83e75cd5;
+	Fri, 09 Oct 2020 19:52:05 +0000 (UTC)
+IronPort-SDR: JxxB9TTBSbIEnWjpq1IRg59LzNcV9PhmlWv9G263YWDUYkGI1BEGNxnTI82gi7w7iw/d3BJ8F5
+ +pbmiyGJD+OQ==
+X-IronPort-AV: E=McAfee;i="6000,8403,9769"; a="182976229"
 X-IronPort-AV: E=Sophos;i="5.77,355,1596524400"; 
-   d="scan'208";a="153363585"
+   d="scan'208";a="182976229"
 X-Amp-Result: SKIPPED(no attachment in message)
 X-Amp-File-Uploaded: False
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-  by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:52:22 -0700
-IronPort-SDR: 66NbHcTTg+QzLX/XjjZVbeOCocpzHQlXc/1uyGjsCwgKA6U0t9qDgsp0fGjjJhdH2o4WKM8nKt
- 1m4fFh6MimYQ==
+Received: from fmsmga004.fm.intel.com ([10.253.24.48])
+  by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:52:05 -0700
+IronPort-SDR: UirI0CQIu4U61+QlSzJhUSBnMwMbOjm+hcyTouEwvOwx6I0trp+50TKD6KEUa5cRPFVp+hPY69
+ eHlTO5RS+u4A==
 X-IronPort-AV: E=Sophos;i="5.77,355,1596524400"; 
-   d="scan'208";a="354959189"
+   d="scan'208";a="343972211"
 Received: from iweiny-desk2.sc.intel.com (HELO localhost) ([10.3.52.147])
-  by fmsmga003-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:52:21 -0700
+  by fmsmga004-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:52:04 -0700
 From: ira.weiny@intel.com
 To: Andrew Morton <akpm@linux-foundation.org>,
 	Thomas Gleixner <tglx@linutronix.de>,
@@ -88,8 +88,8 @@ To: Andrew Morton <akpm@linux-foundation.org>,
 	Andy Lutomirski <luto@kernel.org>,
 	Peter Zijlstra <peterz@infradead.org>
 Cc: Ira Weiny <ira.weiny@intel.com>,
-	Damien Le Moal <damien.lemoal@wdc.com>,
-	Naohiro Aota <naohiro.aota@wdc.com>,
+	Jaegeuk Kim <jaegeuk@kernel.org>,
+	Chao Yu <chao@kernel.org>,
 	x86@kernel.org,
 	Dave Hansen <dave.hansen@linux.intel.com>,
 	Dan Williams <dan.j.williams@intel.com>,
@@ -138,9 +138,9 @@ Cc: Ira Weiny <ira.weiny@intel.com>,
 	linux-cachefs@redhat.com,
 	samba-technical@lists.samba.org,
 	intel-wired-lan@lists.osuosl.org
-Subject: [PATCH RFC PKS/PMEM 26/58] fs/zonefs: Utilize new kmap_thread()
-Date: Fri,  9 Oct 2020 12:50:01 -0700
-Message-Id: <20201009195033.3208459-27-ira.weiny@intel.com>
+Subject: [PATCH RFC PKS/PMEM 22/58] fs/f2fs: Utilize new kmap_thread()
+Date: Fri,  9 Oct 2020 12:49:57 -0700
+Message-Id: <20201009195033.3208459-23-ira.weiny@intel.com>
 X-Mailer: git-send-email 2.28.0.rc0.12.gb6a658bd00c9
 In-Reply-To: <20201009195033.3208459-1-ira.weiny@intel.com>
 References: <20201009195033.3208459-1-ira.weiny@intel.com>
@@ -152,35 +152,34 @@ From: Ira Weiny <ira.weiny@intel.com>
 The kmap() calls in this FS are localized to a single thread.  To avoid
 the over head of global PKRS updates use the new kmap_thread() call.
 
-Cc: Damien Le Moal <damien.lemoal@wdc.com>
-Cc: Naohiro Aota <naohiro.aota@wdc.com>
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+Cc: Chao Yu <chao@kernel.org>
 Signed-off-by: Ira Weiny <ira.weiny@intel.com>
 ---
- fs/zonefs/super.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ fs/f2fs/f2fs.h | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/fs/zonefs/super.c b/fs/zonefs/super.c
-index 8ec7c8f109d7..2fd6c86beee1 100644
---- a/fs/zonefs/super.c
-+++ b/fs/zonefs/super.c
-@@ -1297,7 +1297,7 @@ static int zonefs_read_super(struct super_block *sb)
- 	if (ret)
- 		goto free_page;
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index d9e52a7f3702..ff72a45a577e 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -2410,12 +2410,12 @@ static inline struct page *f2fs_pagecache_get_page(
  
--	super = kmap(page);
-+	super = kmap_thread(page);
+ static inline void f2fs_copy_page(struct page *src, struct page *dst)
+ {
+-	char *src_kaddr = kmap(src);
+-	char *dst_kaddr = kmap(dst);
++	char *src_kaddr = kmap_thread(src);
++	char *dst_kaddr = kmap_thread(dst);
  
- 	ret = -EINVAL;
- 	if (le32_to_cpu(super->s_magic) != ZONEFS_MAGIC)
-@@ -1349,7 +1349,7 @@ static int zonefs_read_super(struct super_block *sb)
- 	ret = 0;
+ 	memcpy(dst_kaddr, src_kaddr, PAGE_SIZE);
+-	kunmap(dst);
+-	kunmap(src);
++	kunmap_thread(dst);
++	kunmap_thread(src);
+ }
  
- unmap:
--	kunmap(page);
-+	kunmap_thread(page);
- free_page:
- 	__free_page(page);
- 
+ static inline void f2fs_put_page(struct page *page, int unlock)
 -- 
 2.28.0.rc0.12.gb6a658bd00c9
 
