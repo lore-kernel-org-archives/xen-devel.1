@@ -2,25 +2,28 @@ Return-Path: <SRS0=FjyW=DQ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.7 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 571A6C433DF
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 14:23:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 280ECC433DF
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 14:42:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E79892222F
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 14:23:06 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E79892222F
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=m5p.com
+	by mail.kernel.org (Postfix) with ESMTPS id AF5E222260
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 14:42:56 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="hWIW3Uxj"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AF5E222260
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.4781.12584 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.4783.12596 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQtI5-00010V-7m; Fri, 09 Oct 2020 14:22:37 +0000
+	id 1kQtbN-0002uf-TE; Fri, 09 Oct 2020 14:42:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 4781.12584; Fri, 09 Oct 2020 14:22:37 +0000
+Received: by outflank-mailman (output) from mailman id 4783.12596; Fri, 09 Oct 2020 14:42:33 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -35,109 +38,107 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQtI5-00010O-4L; Fri, 09 Oct 2020 14:22:37 +0000
-Received: by outflank-mailman (input) for mailman id 4781;
- Fri, 09 Oct 2020 14:22:35 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kQtbN-0002uY-Q8; Fri, 09 Oct 2020 14:42:33 +0000
+Received: by outflank-mailman (input) for mailman id 4783;
+ Fri, 09 Oct 2020 14:42:32 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=bBQf=DQ=m5p.com=ehem@srs-us1.protection.inumbo.net>)
- id 1kQtI3-00010J-Nj
- for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 14:22:35 +0000
-Received: from mailhost.m5p.com (unknown [74.104.188.4])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id c9d0aeb7-6b76-4e93-8c59-c3284f96d9cb;
- Fri, 09 Oct 2020 14:22:34 +0000 (UTC)
-Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:1f07:15ff:0:0:0:f7])
- by mailhost.m5p.com (8.15.2/8.15.2) with ESMTPS id 099EM9Eo063688
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
- Fri, 9 Oct 2020 10:22:15 -0400 (EDT) (envelope-from ehem@m5p.com)
-Received: (from ehem@localhost)
- by m5p.com (8.15.2/8.15.2/Submit) id 099EM8Rk063687;
- Fri, 9 Oct 2020 07:22:08 -0700 (PDT) (envelope-from ehem)
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+ (envelope-from <SRS0=gROa=DQ=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1kQtbM-0002uT-05
+ for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 14:42:32 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id b55b9195-e2b9-4385-9a97-de4bb1c7c545;
+ Fri, 09 Oct 2020 14:42:30 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id E8F0CAE2C;
+ Fri,  9 Oct 2020 14:42:29 +0000 (UTC)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=bBQf=DQ=m5p.com=ehem@srs-us1.protection.inumbo.net>)
-	id 1kQtI3-00010J-Nj
-	for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 14:22:35 +0000
-X-Inumbo-ID: c9d0aeb7-6b76-4e93-8c59-c3284f96d9cb
-Received: from mailhost.m5p.com (unknown [74.104.188.4])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id c9d0aeb7-6b76-4e93-8c59-c3284f96d9cb;
-	Fri, 09 Oct 2020 14:22:34 +0000 (UTC)
-Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:1f07:15ff:0:0:0:f7])
-	by mailhost.m5p.com (8.15.2/8.15.2) with ESMTPS id 099EM9Eo063688
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
-	Fri, 9 Oct 2020 10:22:15 -0400 (EDT)
-	(envelope-from ehem@m5p.com)
-Received: (from ehem@localhost)
-	by m5p.com (8.15.2/8.15.2/Submit) id 099EM8Rk063687;
-	Fri, 9 Oct 2020 07:22:08 -0700 (PDT)
-	(envelope-from ehem)
-Date: Fri, 9 Oct 2020 07:22:08 -0700
-From: Elliott Mitchell <ehem+xen@m5p.com>
-To: Julien Grall <julien@xen.org>
-Cc: Elliott Mitchell <ehem+xen@m5p.com>,
-        Masami Hiramatsu <masami.hiramatsu@linaro.org>,
-        xen-devel@lists.xenproject.org, Alex Benn??e <alex.bennee@linaro.org>,
-        bertrand.marquis@arm.com, andre.przywara@arm.com,
-        Julien Grall <jgrall@amazon.com>,
-        Stefano Stabellini <sstabellini@kernel.org>,
-        Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-        Andrew Cooper <andrew.cooper3@citrix.com>,
-        George Dunlap <george.dunlap@citrix.com>,
-        Ian Jackson <iwj@xenproject.org>, Jan Beulich <jbeulich@suse.com>,
-        Wei Liu <wl@xen.org>, Roger Pau Monn?? <roger.pau@citrix.com>
-Subject: Re: [PATCH 0/4] xen/arm: Unbreak ACPI
-Message-ID: <20201009142208.GA63582@mattapan.m5p.com>
-References: <20200926205542.9261-1-julien@xen.org>
- <CAA93ih3-gTAEzV=yYS-9cHGyN9rfAC28Xeyk8Gsmi7D2BS_OWQ@mail.gmail.com>
- <20201008183904.GA56716@mattapan.m5p.com>
- <f0976c17-ad36-847b-7868-f6bb13948368@xen.org>
+	(envelope-from <SRS0=gROa=DQ=suse.com=jgross@srs-us1.protection.inumbo.net>)
+	id 1kQtbM-0002uT-05
+	for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 14:42:32 +0000
+X-Inumbo-ID: b55b9195-e2b9-4385-9a97-de4bb1c7c545
+Received: from mx2.suse.de (unknown [195.135.220.15])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id b55b9195-e2b9-4385-9a97-de4bb1c7c545;
+	Fri, 09 Oct 2020 14:42:30 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1602254550;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=Mf9G95BFIif8P4JOo8vFEGHaFCuDzB5d2ITiJa6fvhQ=;
+	b=hWIW3UxjjlHedkBjscX2/oMZBiqp8cMgbM5bV0NCuQYPfsNOtHucN61nhTHeTWM/sa/i8N
+	bFbDMkKpRE+iGrAeCuYdUClZo3vcbJlPsqnB+JDYS54Jzgb0ekl4iudUBLU/kUI503bLol
+	WkWWXUua7KDrPPiTrIomxXNLksFUXZo=
+Received: from relay2.suse.de (unknown [195.135.221.27])
+	by mx2.suse.de (Postfix) with ESMTP id E8F0CAE2C;
+	Fri,  9 Oct 2020 14:42:29 +0000 (UTC)
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org,
+	x86@kernel.org,
+	linux-kernel@vger.kernel.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Andy Lutomirski <luto@kernel.org>
+Subject: [PATCH] x86/alternative: don't call text_poke() in lazy TLB mode
+Date: Fri,  9 Oct 2020 16:42:25 +0200
+Message-Id: <20201009144225.12019-1-jgross@suse.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <f0976c17-ad36-847b-7868-f6bb13948368@xen.org>
+Content-Transfer-Encoding: 8bit
 
-On Fri, Oct 09, 2020 at 10:39:26AM +0100, Julien Grall wrote:
-> On 08/10/2020 19:39, Elliott Mitchell wrote:
-> > Your (Masami Hiramatsu) patch seems plausible, but things haven't
-> > progressed enough for me to endorse it.  Looks like something closer to
-> > the core of ACPI still needs further work, Julien Grall?
-> 
-> I didn't go very far during my testing because QEMU is providing ACPI 
-> 5.1 (Xen only supports 6.0+ so far).
-> 
-> For your log above, Xen finished to boot and now dom0 should start 
-> booting. The lack of console output may be because of a crash in Linux 
-> during earlyboot.
-> 
-> Do you have the early console enabled Linux? This can be done by adding 
-> earlycon=xenboot on the Linux command line.
+When running in lazy TLB mode the currently active page tables might
+be the ones of a previous process, e.g. when running a kernel thread.
 
-Finding all the command-line console settings can be a challenge.  I had
-thought it was supposed to be "console=hvc0 earlycon=hvc0".
+This can be problematic in case kernel code is being modified via
+text_poke() in a kernel thread, and on another processor exit_mmap()
+is active for the process which was running on the first cpu before
+the kernel thread.
 
-With that though I finally have some output which claims to come from the
-Linux kernel (yay! finally hit this point!).  As we were both guessing,
-very early kernel panic:
+As text_poke() is using a temporary address space and the former
+address space (obtained via cpu_tlbstate.loaded_mm) is restored
+afterwards, there is a race possible in case the cpu on which
+exit_mmap() is running wants to make sure there are no stale
+references to that address space on any cpu active (this e.g. is
+required when running as a Xen PV guest, where this problem has been
+observed and analyzed).
 
-[    0.000000] efi: Getting EFI parameters from FDT:
-[    0.000000] efi: Can't find 'System Table' in device tree!
-[    0.000000] cma: Failed to reserve 64 MiB
-[    0.000000] Kernel panic - not syncing: Failed to allocate page table page
+In order to avoid that, drop off TLB lazy mode before switching to the
+temporary address space.
 
-I don't know whether this is a problem with the mini-DT which was passed
-in versus ACPI tables.  I note a complete lack of ACPI table information.
-The kernel is from a 5.6-based kernel tree.  I'm unsure which portion to
-try updating next.
+Fixes: cefa929c034eb5d ("x86/mm: Introduce temporary mm structs")
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ arch/x86/kernel/alternative.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-
+diff --git a/arch/x86/kernel/alternative.c b/arch/x86/kernel/alternative.c
+index cdaab30880b9..cd6be6f143e8 100644
+--- a/arch/x86/kernel/alternative.c
++++ b/arch/x86/kernel/alternative.c
+@@ -807,6 +807,15 @@ static inline temp_mm_state_t use_temporary_mm(struct mm_struct *mm)
+ 	temp_mm_state_t temp_state;
+ 
+ 	lockdep_assert_irqs_disabled();
++
++	/*
++	 * Make sure not to be in TLB lazy mode, as otherwise we'll end up
++	 * with a stale address space WITHOUT being in lazy mode after
++	 * restoring the previous mm.
++	 */
++	if (this_cpu_read(cpu_tlbstate.is_lazy))
++		leave_mm(smp_processor_id());
++
+ 	temp_state.mm = this_cpu_read(cpu_tlbstate.loaded_mm);
+ 	switch_mm_irqs_off(NULL, mm, current);
+ 
 -- 
-(\___(\___(\______          --=> 8-) EHM <=--          ______/)___/)___/)
- \BS (    |         ehem+sigmsg@m5p.com  PGP 87145445         |    )   /
-  \_CS\   |  _____  -O #include <stddisclaimer.h> O-   _____  |   /  _/
-8A19\___\_|_/58D2 7E3D DDF4 7BA6 <-PGP-> 41D1 B375 37D0 8714\_|_/___/5445
-
+2.26.2
 
 
