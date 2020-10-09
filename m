@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-12.7 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 406A4C8A852
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 19:53:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C0349C83B95
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 19:54:01 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D821422475
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 19:53:28 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D821422475
+	by mail.kernel.org (Postfix) with ESMTPS id 86E6B22B4E
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 19:54:01 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 86E6B22B4E
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=intel.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.5110.13343 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.5132.13385 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQyS7-0004yG-M0; Fri, 09 Oct 2020 19:53:19 +0000
+	id 1kQySe-0005gX-PR; Fri, 09 Oct 2020 19:53:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 5110.13343; Fri, 09 Oct 2020 19:53:19 +0000
+Received: by outflank-mailman (output) from mailman id 5132.13385; Fri, 09 Oct 2020 19:53:52 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,50 +36,50 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQyS7-0004xg-0a; Fri, 09 Oct 2020 19:53:19 +0000
-Received: by outflank-mailman (input) for mailman id 5110;
- Fri, 09 Oct 2020 19:53:17 +0000
+	id 1kQySe-0005gP-MD; Fri, 09 Oct 2020 19:53:52 +0000
+Received: by outflank-mailman (input) for mailman id 5132;
+ Fri, 09 Oct 2020 19:53:52 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=lMaC=DQ=intel.com=ira.weiny@srs-us1.protection.inumbo.net>)
- id 1kQyS5-0004ON-7z
- for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 19:53:17 +0000
-Received: from mga14.intel.com (unknown [192.55.52.115])
+ id 1kQySd-0005Ps-Uk
+ for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 19:53:51 +0000
+Received: from mga11.intel.com (unknown [192.55.52.93])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id f03ed1fc-ba08-4b52-9477-109773b6b938;
- Fri, 09 Oct 2020 19:53:14 +0000 (UTC)
-Received: from orsmga003.jf.intel.com ([10.7.209.27])
- by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Oct 2020 12:53:13 -0700
+ id 681c2b85-c394-4b4c-8973-c2248e976f5a;
+ Fri, 09 Oct 2020 19:53:44 +0000 (UTC)
+Received: from fmsmga008.fm.intel.com ([10.253.24.58])
+ by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 Oct 2020 12:53:44 -0700
 Received: from iweiny-desk2.sc.intel.com (HELO localhost) ([10.3.52.147])
- by orsmga003-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Oct 2020 12:53:12 -0700
+ by fmsmga008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 Oct 2020 12:53:43 -0700
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=lMaC=DQ=intel.com=ira.weiny@srs-us1.protection.inumbo.net>)
-	id 1kQyS5-0004ON-7z
-	for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 19:53:17 +0000
-X-Inumbo-ID: f03ed1fc-ba08-4b52-9477-109773b6b938
-Received: from mga14.intel.com (unknown [192.55.52.115])
+	id 1kQySd-0005Ps-Uk
+	for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 19:53:51 +0000
+X-Inumbo-ID: 681c2b85-c394-4b4c-8973-c2248e976f5a
+Received: from mga11.intel.com (unknown [192.55.52.93])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id f03ed1fc-ba08-4b52-9477-109773b6b938;
-	Fri, 09 Oct 2020 19:53:14 +0000 (UTC)
-IronPort-SDR: rLwBuegh++hAKCzvTNH0V2C7ctpRPmWJhLoyXE9txrbFSA+IbwRe8Ph37uZqORvr5UbNRmBny4
- V5oIamHelu8A==
-X-IronPort-AV: E=McAfee;i="6000,8403,9769"; a="164744028"
+	id 681c2b85-c394-4b4c-8973-c2248e976f5a;
+	Fri, 09 Oct 2020 19:53:44 +0000 (UTC)
+IronPort-SDR: YziJI3PlJBzliL0ylJRMcYbG2UKox1qqh1obzhf8msK3M9/YjZBsW9yMJC4UnilOh3SrEyGsaD
+ oNcf5vpnJ9Og==
+X-IronPort-AV: E=McAfee;i="6000,8403,9769"; a="162068173"
 X-IronPort-AV: E=Sophos;i="5.77,355,1596524400"; 
-   d="scan'208";a="164744028"
+   d="scan'208";a="162068173"
 X-Amp-Result: SKIPPED(no attachment in message)
 X-Amp-File-Uploaded: False
-Received: from orsmga003.jf.intel.com ([10.7.209.27])
-  by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:53:13 -0700
-IronPort-SDR: kHLawvWt7hk0hVI10Fetwn7tOzYF5yIQvhqqrAQq3flxek1V3ypdWT/2gH8vwQndln/BZvc5kH
- kTRjULDVKoGw==
+Received: from fmsmga008.fm.intel.com ([10.253.24.58])
+  by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:53:44 -0700
+IronPort-SDR: Uit4axCqwtogby85Iv/hBLI1Moj4COtsBpPB5jXSVWpuENwpihzSQwSQg3nZnBMabzVvybSK2I
+ 1kQ4taZ9oZgQ==
 X-IronPort-AV: E=Sophos;i="5.77,355,1596524400"; 
-   d="scan'208";a="312652948"
+   d="scan'208";a="298531484"
 Received: from iweiny-desk2.sc.intel.com (HELO localhost) ([10.3.52.147])
-  by orsmga003-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:53:12 -0700
+  by fmsmga008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:53:43 -0700
 From: ira.weiny@intel.com
 To: Andrew Morton <akpm@linux-foundation.org>,
 	Thomas Gleixner <tglx@linutronix.de>,
@@ -88,16 +88,7 @@ To: Andrew Morton <akpm@linux-foundation.org>,
 	Andy Lutomirski <luto@kernel.org>,
 	Peter Zijlstra <peterz@infradead.org>
 Cc: Ira Weiny <ira.weiny@intel.com>,
-	"David S. Miller" <davem@davemloft.net>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Alexey Kuznetsov <kuznet@ms2.inr.ac.ru>,
-	Hideaki YOSHIFUJI <yoshfuji@linux-ipv6.org>,
-	Trond Myklebust <trond.myklebust@hammerspace.com>,
-	Anna Schumaker <anna.schumaker@netapp.com>,
-	Boris Pismenny <borisp@nvidia.com>,
-	Aviad Yehezkel <aviadye@nvidia.com>,
-	John Fastabend <john.fastabend@gmail.com>,
-	Daniel Borkmann <daniel@iogearbox.net>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
 	x86@kernel.org,
 	Dave Hansen <dave.hansen@linux.intel.com>,
 	Dan Williams <dan.j.williams@intel.com>,
@@ -146,9 +137,9 @@ Cc: Ira Weiny <ira.weiny@intel.com>,
 	linux-cachefs@redhat.com,
 	samba-technical@lists.samba.org,
 	intel-wired-lan@lists.osuosl.org
-Subject: [PATCH RFC PKS/PMEM 40/58] net: Utilize new kmap_thread()
-Date: Fri,  9 Oct 2020 12:50:15 -0700
-Message-Id: <20201009195033.3208459-41-ira.weiny@intel.com>
+Subject: [PATCH RFC PKS/PMEM 50/58] drivers/android: Utilize new kmap_thread()
+Date: Fri,  9 Oct 2020 12:50:25 -0700
+Message-Id: <20201009195033.3208459-51-ira.weiny@intel.com>
 X-Mailer: git-send-email 2.28.0.rc0.12.gb6a658bd00c9
 In-Reply-To: <20201009195033.3208459-1-ira.weiny@intel.com>
 References: <20201009195033.3208459-1-ira.weiny@intel.com>
@@ -157,188 +148,31 @@ Content-Transfer-Encoding: 8bit
 
 From: Ira Weiny <ira.weiny@intel.com>
 
-These kmap() calls in these drivers are localized to a single thread.
-To avoid the over head of global PKRS updates use the new kmap_thread()
-call.
+These kmap() calls are localized to a single thread.  To avoid the over
+head of global PKRS updates use the new kmap_thread() call.
 
-Cc: "David S. Miller" <davem@davemloft.net>
-Cc: Jakub Kicinski <kuba@kernel.org>
-Cc: Alexey Kuznetsov <kuznet@ms2.inr.ac.ru>
-Cc: Hideaki YOSHIFUJI <yoshfuji@linux-ipv6.org>
-Cc: Trond Myklebust <trond.myklebust@hammerspace.com>
-Cc: Anna Schumaker <anna.schumaker@netapp.com>
-Cc: Boris Pismenny <borisp@nvidia.com>
-Cc: Aviad Yehezkel <aviadye@nvidia.com>
-Cc: John Fastabend <john.fastabend@gmail.com>
-Cc: Daniel Borkmann <daniel@iogearbox.net>
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 Signed-off-by: Ira Weiny <ira.weiny@intel.com>
 ---
- net/ceph/messenger.c | 4 ++--
- net/core/datagram.c  | 4 ++--
- net/core/sock.c      | 8 ++++----
- net/ipv4/ip_output.c | 4 ++--
- net/sunrpc/cache.c   | 4 ++--
- net/sunrpc/xdr.c     | 8 ++++----
- net/tls/tls_device.c | 4 ++--
- 7 files changed, 18 insertions(+), 18 deletions(-)
+ drivers/android/binder_alloc.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/net/ceph/messenger.c b/net/ceph/messenger.c
-index d4d7a0e52491..0c49b8e333da 100644
---- a/net/ceph/messenger.c
-+++ b/net/ceph/messenger.c
-@@ -1535,10 +1535,10 @@ static u32 ceph_crc32c_page(u32 crc, struct page *page,
- {
- 	char *kaddr;
- 
--	kaddr = kmap(page);
-+	kaddr = kmap_thread(page);
- 	BUG_ON(kaddr == NULL);
- 	crc = crc32c(crc, kaddr + page_offset, length);
--	kunmap(page);
-+	kunmap_thread(page);
- 
- 	return crc;
- }
-diff --git a/net/core/datagram.c b/net/core/datagram.c
-index 639745d4f3b9..cbd0a343074a 100644
---- a/net/core/datagram.c
-+++ b/net/core/datagram.c
-@@ -441,14 +441,14 @@ static int __skb_datagram_iter(const struct sk_buff *skb, int offset,
- 		end = start + skb_frag_size(frag);
- 		if ((copy = end - offset) > 0) {
- 			struct page *page = skb_frag_page(frag);
--			u8 *vaddr = kmap(page);
-+			u8 *vaddr = kmap_thread(page);
- 
- 			if (copy > len)
- 				copy = len;
- 			n = INDIRECT_CALL_1(cb, simple_copy_to_iter,
- 					vaddr + skb_frag_off(frag) + offset - start,
- 					copy, data, to);
--			kunmap(page);
-+			kunmap_thread(page);
- 			offset += n;
- 			if (n != copy)
- 				goto short_copy;
-diff --git a/net/core/sock.c b/net/core/sock.c
-index 6c5c6b18eff4..9b46a75cd8c1 100644
---- a/net/core/sock.c
-+++ b/net/core/sock.c
-@@ -2846,11 +2846,11 @@ ssize_t sock_no_sendpage(struct socket *sock, struct page *page, int offset, siz
- 	ssize_t res;
- 	struct msghdr msg = {.msg_flags = flags};
- 	struct kvec iov;
--	char *kaddr = kmap(page);
-+	char *kaddr = kmap_thread(page);
- 	iov.iov_base = kaddr + offset;
- 	iov.iov_len = size;
- 	res = kernel_sendmsg(sock, &msg, &iov, 1, size);
--	kunmap(page);
-+	kunmap_thread(page);
- 	return res;
- }
- EXPORT_SYMBOL(sock_no_sendpage);
-@@ -2861,12 +2861,12 @@ ssize_t sock_no_sendpage_locked(struct sock *sk, struct page *page,
- 	ssize_t res;
- 	struct msghdr msg = {.msg_flags = flags};
- 	struct kvec iov;
--	char *kaddr = kmap(page);
-+	char *kaddr = kmap_thread(page);
- 
- 	iov.iov_base = kaddr + offset;
- 	iov.iov_len = size;
- 	res = kernel_sendmsg_locked(sk, &msg, &iov, 1, size);
--	kunmap(page);
-+	kunmap_thread(page);
- 	return res;
- }
- EXPORT_SYMBOL(sock_no_sendpage_locked);
-diff --git a/net/ipv4/ip_output.c b/net/ipv4/ip_output.c
-index e6f2ada9e7d5..05304fb251a4 100644
---- a/net/ipv4/ip_output.c
-+++ b/net/ipv4/ip_output.c
-@@ -949,9 +949,9 @@ csum_page(struct page *page, int offset, int copy)
- {
- 	char *kaddr;
- 	__wsum csum;
--	kaddr = kmap(page);
-+	kaddr = kmap_thread(page);
- 	csum = csum_partial(kaddr + offset, copy, 0);
--	kunmap(page);
-+	kunmap_thread(page);
- 	return csum;
- }
- 
-diff --git a/net/sunrpc/cache.c b/net/sunrpc/cache.c
-index baef5ee43dbb..88193f2a8e6f 100644
---- a/net/sunrpc/cache.c
-+++ b/net/sunrpc/cache.c
-@@ -935,9 +935,9 @@ static ssize_t cache_downcall(struct address_space *mapping,
- 	if (!page)
- 		goto out_slow;
- 
--	kaddr = kmap(page);
-+	kaddr = kmap_thread(page);
- 	ret = cache_do_downcall(kaddr, buf, count, cd);
--	kunmap(page);
-+	kunmap_thread(page);
- 	unlock_page(page);
- 	put_page(page);
- 	return ret;
-diff --git a/net/sunrpc/xdr.c b/net/sunrpc/xdr.c
-index be11d672b5b9..00afbb48fb0a 100644
---- a/net/sunrpc/xdr.c
-+++ b/net/sunrpc/xdr.c
-@@ -1353,7 +1353,7 @@ xdr_xcode_array2(struct xdr_buf *buf, unsigned int base,
- 		base &= ~PAGE_MASK;
- 		avail_page = min_t(unsigned int, PAGE_SIZE - base,
- 					avail_here);
--		c = kmap(*ppages) + base;
-+		c = kmap_thread(*ppages) + base;
- 
- 		while (avail_here) {
- 			avail_here -= avail_page;
-@@ -1429,9 +1429,9 @@ xdr_xcode_array2(struct xdr_buf *buf, unsigned int base,
- 				}
- 			}
- 			if (avail_here) {
--				kunmap(*ppages);
-+				kunmap_thread(*ppages);
- 				ppages++;
--				c = kmap(*ppages);
-+				c = kmap_thread(*ppages);
- 			}
- 
- 			avail_page = min(avail_here,
-@@ -1471,7 +1471,7 @@ xdr_xcode_array2(struct xdr_buf *buf, unsigned int base,
- out:
- 	kfree(elem);
- 	if (ppages)
--		kunmap(*ppages);
-+		kunmap_thread(*ppages);
- 	return err;
- }
- 
-diff --git a/net/tls/tls_device.c b/net/tls/tls_device.c
-index b74e2741f74f..ead5b1c485f8 100644
---- a/net/tls/tls_device.c
-+++ b/net/tls/tls_device.c
-@@ -576,13 +576,13 @@ int tls_device_sendpage(struct sock *sk, struct page *page,
- 		goto out;
- 	}
- 
--	kaddr = kmap(page);
-+	kaddr = kmap_thread(page);
- 	iov.iov_base = kaddr + offset;
- 	iov.iov_len = size;
- 	iov_iter_kvec(&msg_iter, WRITE, &iov, 1, size);
- 	rc = tls_push_data(sk, &msg_iter, size,
- 			   flags, TLS_RECORD_TYPE_DATA);
--	kunmap(page);
-+	kunmap_thread(page);
- 
- out:
- 	release_sock(sk);
+diff --git a/drivers/android/binder_alloc.c b/drivers/android/binder_alloc.c
+index 69609696a843..5f50856caad7 100644
+--- a/drivers/android/binder_alloc.c
++++ b/drivers/android/binder_alloc.c
+@@ -1118,9 +1118,9 @@ binder_alloc_copy_user_to_buffer(struct binder_alloc *alloc,
+ 		page = binder_alloc_get_page(alloc, buffer,
+ 					     buffer_offset, &pgoff);
+ 		size = min_t(size_t, bytes, PAGE_SIZE - pgoff);
+-		kptr = kmap(page) + pgoff;
++		kptr = kmap_thread(page) + pgoff;
+ 		ret = copy_from_user(kptr, from, size);
+-		kunmap(page);
++		kunmap_thread(page);
+ 		if (ret)
+ 			return bytes - size + ret;
+ 		bytes -= size;
 -- 
 2.28.0.rc0.12.gb6a658bd00c9
 
