@@ -7,21 +7,21 @@ X-Spam-Status: No, score=-12.7 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 58DCFC6377D
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 19:52:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1221AC83BA2
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 19:52:03 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 150682225D
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 19:52:22 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 150682225D
+	by mail.kernel.org (Postfix) with ESMTPS id BBAF922282
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2020 19:52:00 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BBAF922282
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=intel.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.5074.13120 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.5065.13061 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQyR2-0002up-Db; Fri, 09 Oct 2020 19:52:12 +0000
+	id 1kQyQh-0002Lq-Cc; Fri, 09 Oct 2020 19:51:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 5074.13120; Fri, 09 Oct 2020 19:52:12 +0000
+Received: by outflank-mailman (output) from mailman id 5065.13061; Fri, 09 Oct 2020 19:51:51 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,50 +36,49 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kQyR2-0002uf-A1; Fri, 09 Oct 2020 19:52:12 +0000
-Received: by outflank-mailman (input) for mailman id 5074;
- Fri, 09 Oct 2020 19:52:11 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kQyQh-0002Lc-6C; Fri, 09 Oct 2020 19:51:51 +0000
+Received: by outflank-mailman (input) for mailman id 5065;
+ Fri, 09 Oct 2020 19:51:50 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=lMaC=DQ=intel.com=ira.weiny@srs-us1.protection.inumbo.net>)
- id 1kQyR1-0002d3-Im
- for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 19:52:11 +0000
-Received: from mga01.intel.com (unknown [192.55.52.88])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 30150e07-14e3-48da-a02e-f5f16bf31f29;
- Fri, 09 Oct 2020 19:52:02 +0000 (UTC)
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
- by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Oct 2020 12:52:01 -0700
+ id 1kQyQg-0002Bq-8P
+ for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 19:51:50 +0000
+Received: from mga09.intel.com (unknown [134.134.136.24])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id ba2ac356-7bb9-4d72-9a7f-6522fc6dc35b;
+ Fri, 09 Oct 2020 19:51:48 +0000 (UTC)
+Received: from fmsmga008.fm.intel.com ([10.253.24.58])
+ by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 Oct 2020 12:51:47 -0700
 Received: from iweiny-desk2.sc.intel.com (HELO localhost) ([10.3.52.147])
- by fmsmga005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Oct 2020 12:52:01 -0700
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+ by fmsmga008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 Oct 2020 12:51:47 -0700
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=lMaC=DQ=intel.com=ira.weiny@srs-us1.protection.inumbo.net>)
-	id 1kQyR1-0002d3-Im
-	for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 19:52:11 +0000
-X-Inumbo-ID: 30150e07-14e3-48da-a02e-f5f16bf31f29
-Received: from mga01.intel.com (unknown [192.55.52.88])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 30150e07-14e3-48da-a02e-f5f16bf31f29;
-	Fri, 09 Oct 2020 19:52:02 +0000 (UTC)
-IronPort-SDR: CwCqh1jTT86tyWyXIuTm8S1/lWi685IvGTH5/sYLRrcdqRctlM76XwR4KnDXsehQEdaeq4f1lR
- nQoAjJpJtE4Q==
-X-IronPort-AV: E=McAfee;i="6000,8403,9769"; a="182976218"
+	id 1kQyQg-0002Bq-8P
+	for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 19:51:50 +0000
+X-Inumbo-ID: ba2ac356-7bb9-4d72-9a7f-6522fc6dc35b
+Received: from mga09.intel.com (unknown [134.134.136.24])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id ba2ac356-7bb9-4d72-9a7f-6522fc6dc35b;
+	Fri, 09 Oct 2020 19:51:48 +0000 (UTC)
+IronPort-SDR: GL0kvQxLfLtsDzjy4D+FvX3Chw3kJv7t6m4P2AbNpnvwFrw1C68Yk0M/7BsBYGABt5ftzzfmc0
+ Fu9XjRCurzpQ==
+X-IronPort-AV: E=McAfee;i="6000,8403,9769"; a="165642963"
 X-IronPort-AV: E=Sophos;i="5.77,355,1596524400"; 
-   d="scan'208";a="182976218"
+   d="scan'208";a="165642963"
 X-Amp-Result: SKIPPED(no attachment in message)
 X-Amp-File-Uploaded: False
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
-  by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:52:01 -0700
-IronPort-SDR: tVhE30/49ehqkoc80ZCcDXB4dMTZze5YTnWPIjaBRWP4P6o/AEUDuRNENWQluyt3yOqCx99fob
- q9C+vTCoMURQ==
+Received: from fmsmga008.fm.intel.com ([10.253.24.58])
+  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:51:47 -0700
+IronPort-SDR: vdHXKYZiEWUJ0fN4OExd2VqdiXE9aYdlaLF6p7mD2X3g24JwvvcNWIkVlfM1uW7/GA3kn+ap6+
+ Rex2Wyxl2AaA==
 X-IronPort-AV: E=Sophos;i="5.77,355,1596524400"; 
-   d="scan'208";a="519846944"
+   d="scan'208";a="298531066"
 Received: from iweiny-desk2.sc.intel.com (HELO localhost) ([10.3.52.147])
-  by fmsmga005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:52:01 -0700
+  by fmsmga008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:51:47 -0700
 From: ira.weiny@intel.com
 To: Andrew Morton <akpm@linux-foundation.org>,
 	Thomas Gleixner <tglx@linutronix.de>,
@@ -88,8 +87,7 @@ To: Andrew Morton <akpm@linux-foundation.org>,
 	Andy Lutomirski <luto@kernel.org>,
 	Peter Zijlstra <peterz@infradead.org>
 Cc: Ira Weiny <ira.weiny@intel.com>,
-	Trond Myklebust <trond.myklebust@hammerspace.com>,
-	Anna Schumaker <anna.schumaker@netapp.com>,
+	Ryusuke Konishi <konishi.ryusuke@gmail.com>,
 	x86@kernel.org,
 	Dave Hansen <dave.hansen@linux.intel.com>,
 	Dan Williams <dan.j.williams@intel.com>,
@@ -138,9 +136,9 @@ Cc: Ira Weiny <ira.weiny@intel.com>,
 	linux-cachefs@redhat.com,
 	samba-technical@lists.samba.org,
 	intel-wired-lan@lists.osuosl.org
-Subject: [PATCH RFC PKS/PMEM 21/58] fs/nfs: Utilize new kmap_thread()
-Date: Fri,  9 Oct 2020 12:49:56 -0700
-Message-Id: <20201009195033.3208459-22-ira.weiny@intel.com>
+Subject: [PATCH RFC PKS/PMEM 17/58] fs/nilfs2: Utilize new kmap_thread()
+Date: Fri,  9 Oct 2020 12:49:52 -0700
+Message-Id: <20201009195033.3208459-18-ira.weiny@intel.com>
 X-Mailer: git-send-email 2.28.0.rc0.12.gb6a658bd00c9
 In-Reply-To: <20201009195033.3208459-1-ira.weiny@intel.com>
 References: <20201009195033.3208459-1-ira.weiny@intel.com>
@@ -152,102 +150,154 @@ From: Ira Weiny <ira.weiny@intel.com>
 The kmap() calls in this FS are localized to a single thread.  To avoid
 the over head of global PKRS updates use the new kmap_thread() call.
 
-Cc: Trond Myklebust <trond.myklebust@hammerspace.com>
-Cc: Anna Schumaker <anna.schumaker@netapp.com>
+Cc: Ryusuke Konishi <konishi.ryusuke@gmail.com>
 Signed-off-by: Ira Weiny <ira.weiny@intel.com>
 ---
- fs/nfs/dir.c | 20 ++++++++++----------
- 1 file changed, 10 insertions(+), 10 deletions(-)
+ fs/nilfs2/alloc.c  | 34 +++++++++++++++++-----------------
+ fs/nilfs2/cpfile.c |  4 ++--
+ 2 files changed, 19 insertions(+), 19 deletions(-)
 
-diff --git a/fs/nfs/dir.c b/fs/nfs/dir.c
-index cb52db9a0cfb..fee321acccb4 100644
---- a/fs/nfs/dir.c
-+++ b/fs/nfs/dir.c
-@@ -213,7 +213,7 @@ int nfs_readdir_make_qstr(struct qstr *string, const char *name, unsigned int le
- static
- int nfs_readdir_add_to_array(struct nfs_entry *entry, struct page *page)
- {
--	struct nfs_cache_array *array = kmap(page);
-+	struct nfs_cache_array *array = kmap_thread(page);
- 	struct nfs_cache_array_entry *cache_entry;
- 	int ret;
+diff --git a/fs/nilfs2/alloc.c b/fs/nilfs2/alloc.c
+index adf3bb0a8048..2aa4c34094ef 100644
+--- a/fs/nilfs2/alloc.c
++++ b/fs/nilfs2/alloc.c
+@@ -524,7 +524,7 @@ int nilfs_palloc_prepare_alloc_entry(struct inode *inode,
+ 		ret = nilfs_palloc_get_desc_block(inode, group, 1, &desc_bh);
+ 		if (ret < 0)
+ 			return ret;
+-		desc_kaddr = kmap(desc_bh->b_page);
++		desc_kaddr = kmap_thread(desc_bh->b_page);
+ 		desc = nilfs_palloc_block_get_group_desc(
+ 			inode, group, desc_bh, desc_kaddr);
+ 		n = nilfs_palloc_rest_groups_in_desc_block(inode, group,
+@@ -536,7 +536,7 @@ int nilfs_palloc_prepare_alloc_entry(struct inode *inode,
+ 					inode, group, 1, &bitmap_bh);
+ 				if (ret < 0)
+ 					goto out_desc;
+-				bitmap_kaddr = kmap(bitmap_bh->b_page);
++				bitmap_kaddr = kmap_thread(bitmap_bh->b_page);
+ 				bitmap = bitmap_kaddr + bh_offset(bitmap_bh);
+ 				pos = nilfs_palloc_find_available_slot(
+ 					bitmap, group_offset,
+@@ -547,21 +547,21 @@ int nilfs_palloc_prepare_alloc_entry(struct inode *inode,
+ 						desc, lock, -1);
+ 					req->pr_entry_nr =
+ 						entries_per_group * group + pos;
+-					kunmap(desc_bh->b_page);
+-					kunmap(bitmap_bh->b_page);
++					kunmap_thread(desc_bh->b_page);
++					kunmap_thread(bitmap_bh->b_page);
  
-@@ -235,7 +235,7 @@ int nfs_readdir_add_to_array(struct nfs_entry *entry, struct page *page)
- 	if (entry->eof != 0)
- 		array->eof_index = array->size;
- out:
--	kunmap(page);
-+	kunmap_thread(page);
+ 					req->pr_desc_bh = desc_bh;
+ 					req->pr_bitmap_bh = bitmap_bh;
+ 					return 0;
+ 				}
+-				kunmap(bitmap_bh->b_page);
++				kunmap_thread(bitmap_bh->b_page);
+ 				brelse(bitmap_bh);
+ 			}
+ 
+ 			group_offset = 0;
+ 		}
+ 
+-		kunmap(desc_bh->b_page);
++		kunmap_thread(desc_bh->b_page);
+ 		brelse(desc_bh);
+ 	}
+ 
+@@ -569,7 +569,7 @@ int nilfs_palloc_prepare_alloc_entry(struct inode *inode,
+ 	return -ENOSPC;
+ 
+  out_desc:
+-	kunmap(desc_bh->b_page);
++	kunmap_thread(desc_bh->b_page);
+ 	brelse(desc_bh);
  	return ret;
  }
+@@ -605,10 +605,10 @@ void nilfs_palloc_commit_free_entry(struct inode *inode,
+ 	spinlock_t *lock;
  
-@@ -347,7 +347,7 @@ int nfs_readdir_search_array(nfs_readdir_descriptor_t *desc)
- 	struct nfs_cache_array *array;
- 	int status;
+ 	group = nilfs_palloc_group(inode, req->pr_entry_nr, &group_offset);
+-	desc_kaddr = kmap(req->pr_desc_bh->b_page);
++	desc_kaddr = kmap_thread(req->pr_desc_bh->b_page);
+ 	desc = nilfs_palloc_block_get_group_desc(inode, group,
+ 						 req->pr_desc_bh, desc_kaddr);
+-	bitmap_kaddr = kmap(req->pr_bitmap_bh->b_page);
++	bitmap_kaddr = kmap_thread(req->pr_bitmap_bh->b_page);
+ 	bitmap = bitmap_kaddr + bh_offset(req->pr_bitmap_bh);
+ 	lock = nilfs_mdt_bgl_lock(inode, group);
  
--	array = kmap(desc->page);
-+	array = kmap_thread(desc->page);
+@@ -620,8 +620,8 @@ void nilfs_palloc_commit_free_entry(struct inode *inode,
+ 	else
+ 		nilfs_palloc_group_desc_add_entries(desc, lock, 1);
  
- 	if (*desc->dir_cookie == 0)
- 		status = nfs_readdir_search_for_pos(array, desc);
-@@ -359,7 +359,7 @@ int nfs_readdir_search_array(nfs_readdir_descriptor_t *desc)
- 		desc->current_index += array->size;
- 		desc->page_index++;
- 	}
--	kunmap(desc->page);
-+	kunmap_thread(desc->page);
- 	return status;
- }
+-	kunmap(req->pr_bitmap_bh->b_page);
+-	kunmap(req->pr_desc_bh->b_page);
++	kunmap_thread(req->pr_bitmap_bh->b_page);
++	kunmap_thread(req->pr_desc_bh->b_page);
  
-@@ -602,10 +602,10 @@ int nfs_readdir_page_filler(nfs_readdir_descriptor_t *desc, struct nfs_entry *en
+ 	mark_buffer_dirty(req->pr_desc_bh);
+ 	mark_buffer_dirty(req->pr_bitmap_bh);
+@@ -646,10 +646,10 @@ void nilfs_palloc_abort_alloc_entry(struct inode *inode,
+ 	spinlock_t *lock;
  
- out_nopages:
- 	if (count == 0 || (status == -EBADCOOKIE && entry->eof != 0)) {
--		array = kmap(page);
-+		array = kmap_thread(page);
- 		array->eof_index = array->size;
- 		status = 0;
--		kunmap(page);
-+		kunmap_thread(page);
- 	}
+ 	group = nilfs_palloc_group(inode, req->pr_entry_nr, &group_offset);
+-	desc_kaddr = kmap(req->pr_desc_bh->b_page);
++	desc_kaddr = kmap_thread(req->pr_desc_bh->b_page);
+ 	desc = nilfs_palloc_block_get_group_desc(inode, group,
+ 						 req->pr_desc_bh, desc_kaddr);
+-	bitmap_kaddr = kmap(req->pr_bitmap_bh->b_page);
++	bitmap_kaddr = kmap_thread(req->pr_bitmap_bh->b_page);
+ 	bitmap = bitmap_kaddr + bh_offset(req->pr_bitmap_bh);
+ 	lock = nilfs_mdt_bgl_lock(inode, group);
  
- 	put_page(scratch);
-@@ -669,7 +669,7 @@ int nfs_readdir_xdr_to_array(nfs_readdir_descriptor_t *desc, struct page *page,
- 		goto out;
- 	}
+@@ -661,8 +661,8 @@ void nilfs_palloc_abort_alloc_entry(struct inode *inode,
+ 	else
+ 		nilfs_palloc_group_desc_add_entries(desc, lock, 1);
  
--	array = kmap(page);
-+	array = kmap_thread(page);
+-	kunmap(req->pr_bitmap_bh->b_page);
+-	kunmap(req->pr_desc_bh->b_page);
++	kunmap_thread(req->pr_bitmap_bh->b_page);
++	kunmap_thread(req->pr_desc_bh->b_page);
  
- 	status = nfs_readdir_alloc_pages(pages, array_size);
- 	if (status < 0)
-@@ -691,7 +691,7 @@ int nfs_readdir_xdr_to_array(nfs_readdir_descriptor_t *desc, struct page *page,
+ 	brelse(req->pr_bitmap_bh);
+ 	brelse(req->pr_desc_bh);
+@@ -754,7 +754,7 @@ int nilfs_palloc_freev(struct inode *inode, __u64 *entry_nrs, size_t nitems)
+ 		/* Get the first entry number of the group */
+ 		group_min_nr = (__u64)group * epg;
  
- 	nfs_readdir_free_pages(pages, array_size);
- out_release_array:
--	kunmap(page);
-+	kunmap_thread(page);
- 	nfs4_label_free(entry.label);
- out:
- 	nfs_free_fattr(entry.fattr);
-@@ -803,7 +803,7 @@ int nfs_do_filldir(nfs_readdir_descriptor_t *desc)
- 	struct nfs_cache_array *array = NULL;
- 	struct nfs_open_dir_context *ctx = file->private_data;
+-		bitmap_kaddr = kmap(bitmap_bh->b_page);
++		bitmap_kaddr = kmap_thread(bitmap_bh->b_page);
+ 		bitmap = bitmap_kaddr + bh_offset(bitmap_bh);
+ 		lock = nilfs_mdt_bgl_lock(inode, group);
  
--	array = kmap(desc->page);
-+	array = kmap_thread(desc->page);
- 	for (i = desc->cache_entry_index; i < array->size; i++) {
- 		struct nfs_cache_array_entry *ent;
+@@ -800,7 +800,7 @@ int nilfs_palloc_freev(struct inode *inode, __u64 *entry_nrs, size_t nitems)
+ 			entry_start = rounddown(group_offset, epb);
+ 		} while (true);
  
-@@ -827,7 +827,7 @@ int nfs_do_filldir(nfs_readdir_descriptor_t *desc)
- 	if (array->eof_index >= 0)
- 		desc->eof = true;
+-		kunmap(bitmap_bh->b_page);
++		kunmap_thread(bitmap_bh->b_page);
+ 		mark_buffer_dirty(bitmap_bh);
+ 		brelse(bitmap_bh);
  
--	kunmap(desc->page);
-+	kunmap_thread(desc->page);
- 	dfprintk(DIRCACHE, "NFS: nfs_do_filldir() filling ended @ cookie %Lu; returning = %d\n",
- 			(unsigned long long)*desc->dir_cookie, res);
- 	return res;
+diff --git a/fs/nilfs2/cpfile.c b/fs/nilfs2/cpfile.c
+index 86d4d850d130..402ab8bfce29 100644
+--- a/fs/nilfs2/cpfile.c
++++ b/fs/nilfs2/cpfile.c
+@@ -235,11 +235,11 @@ int nilfs_cpfile_get_checkpoint(struct inode *cpfile,
+ 	ret = nilfs_cpfile_get_checkpoint_block(cpfile, cno, create, &cp_bh);
+ 	if (ret < 0)
+ 		goto out_header;
+-	kaddr = kmap(cp_bh->b_page);
++	kaddr = kmap_thread(cp_bh->b_page);
+ 	cp = nilfs_cpfile_block_get_checkpoint(cpfile, cno, cp_bh, kaddr);
+ 	if (nilfs_checkpoint_invalid(cp)) {
+ 		if (!create) {
+-			kunmap(cp_bh->b_page);
++			kunmap_thread(cp_bh->b_page);
+ 			brelse(cp_bh);
+ 			ret = -ENOENT;
+ 			goto out_header;
 -- 
 2.28.0.rc0.12.gb6a658bd00c9
 
