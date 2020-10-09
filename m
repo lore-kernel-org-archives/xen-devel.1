@@ -2,27 +2,28 @@ Return-Path: <SRS0=K75F=DR=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-10.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=unavailable
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D843C433DF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A5E9DC433E7
 	for <xen-devel@archiver.kernel.org>; Sat, 10 Oct 2020 04:34:33 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AFC0D21D46
-	for <xen-devel@archiver.kernel.org>; Sat, 10 Oct 2020 04:34:32 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 4DB8021D46
+	for <xen-devel@archiver.kernel.org>; Sat, 10 Oct 2020 04:34:33 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="kwaFsg+F"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AFC0D21D46
+	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="mAKgXcy5"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4DB8021D46
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.5253.13886 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.5223.13879 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kR6a3-0004r7-Tb; Sat, 10 Oct 2020 04:34:03 +0000
+	id 1kR6a3-0004qg-IA; Sat, 10 Oct 2020 04:34:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 5253.13886; Sat, 10 Oct 2020 04:34:03 +0000
+Received: by outflank-mailman (output) from mailman id 5223.13879; Sat, 10 Oct 2020 04:34:03 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -37,50 +38,51 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kR6a3-0004qx-MD; Sat, 10 Oct 2020 04:34:03 +0000
-Received: by outflank-mailman (input) for mailman id 5253;
- Sat, 10 Oct 2020 01:30:41 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kR6a3-0004qZ-E6; Sat, 10 Oct 2020 04:34:03 +0000
+Received: by outflank-mailman (input) for mailman id 5223;
+ Fri, 09 Oct 2020 21:34:38 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Nh66=DR=kernel.org=ebiggers@srs-us1.protection.inumbo.net>)
- id 1kR3ib-0002Rw-2y
- for xen-devel@lists.xenproject.org; Sat, 10 Oct 2020 01:30:41 +0000
+ <SRS0=2fBY=DQ=kernel.org=ebiggers@srs-us1.protection.inumbo.net>)
+ id 1kR02A-0002Ir-QK
+ for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 21:34:38 +0000
 Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 6a389ba4-6669-4d82-8249-0dc5fd61c70f;
- Sat, 10 Oct 2020 01:30:40 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 8d3fe240-07e7-4666-9565-bbcad7bef198;
+ Fri, 09 Oct 2020 21:34:38 +0000 (UTC)
 Received: from sol.localdomain (172-10-235-113.lightspeed.sntcca.sbcglobal.net
  [172.10.235.113])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 4E006206D9;
- Sat, 10 Oct 2020 01:30:38 +0000 (UTC)
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by mail.kernel.org (Postfix) with ESMTPSA id 44F7C21D6C;
+ Fri,  9 Oct 2020 21:34:36 +0000 (UTC)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=Nh66=DR=kernel.org=ebiggers@srs-us1.protection.inumbo.net>)
-	id 1kR3ib-0002Rw-2y
-	for xen-devel@lists.xenproject.org; Sat, 10 Oct 2020 01:30:41 +0000
-X-Inumbo-ID: 6a389ba4-6669-4d82-8249-0dc5fd61c70f
+	(envelope-from <SRS0=2fBY=DQ=kernel.org=ebiggers@srs-us1.protection.inumbo.net>)
+	id 1kR02A-0002Ir-QK
+	for xen-devel@lists.xenproject.org; Fri, 09 Oct 2020 21:34:38 +0000
+X-Inumbo-ID: 8d3fe240-07e7-4666-9565-bbcad7bef198
 Received: from mail.kernel.org (unknown [198.145.29.99])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 6a389ba4-6669-4d82-8249-0dc5fd61c70f;
-	Sat, 10 Oct 2020 01:30:40 +0000 (UTC)
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id 8d3fe240-07e7-4666-9565-bbcad7bef198;
+	Fri, 09 Oct 2020 21:34:38 +0000 (UTC)
 Received: from sol.localdomain (172-10-235-113.lightspeed.sntcca.sbcglobal.net [172.10.235.113])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id 4E006206D9;
-	Sat, 10 Oct 2020 01:30:38 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPSA id 44F7C21D6C;
+	Fri,  9 Oct 2020 21:34:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1602293439;
-	bh=sHFyDh52gnsvc+uI8yhUC5uDYbYkQCvra+rDiRMmAvs=;
+	s=default; t=1602279277;
+	bh=af4HYKUXjfzQEnpRkoqrLOtb/VuZgD2GaaA85DESAB8=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=kwaFsg+FwkcbT1hA6vX2rbzC7SEHg0ckV7q6+TfKUuTYp7lijGzsxhx1D9MfT9qZg
-	 puzd9VwNUhNC7pSZTswv9TmxeVvsyOKe33XMZMPqVG5rfdvIuh+YhVfWI5Z4mrkh0S
-	 V8+sp7izCEY2Jms4cmTCzh86mPIYz7uaZ6k3dzLQ=
-Date: Fri, 9 Oct 2020 18:30:36 -0700
+	b=mAKgXcy5CifgRYN2i2C2c94+Jg5oLVaoZk49jTIFxseeqdMtEOOqP5cL66hXhKNTI
+	 eNSQDBkgqgAc1Wd7XIXje+joGiBVI4yatMIDb1+kpBlSLeGvwRiFFGcw+A+0IeryZM
+	 wi38bfOOqpr1rBlahq6SJoGGKG4xvvKCLXOhXA9s=
+Date: Fri, 9 Oct 2020 14:34:34 -0700
 From: Eric Biggers <ebiggers@kernel.org>
-To: Matthew Wilcox <willy@infradead.org>
-Cc: ira.weiny@intel.com, Andrew Morton <akpm@linux-foundation.org>,
+To: ira.weiny@intel.com
+Cc: Andrew Morton <akpm@linux-foundation.org>,
 	Thomas Gleixner <tglx@linutronix.de>,
 	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
 	Andy Lutomirski <luto@kernel.org>,
@@ -112,55 +114,49 @@ Cc: ira.weiny@intel.com, Andrew Morton <akpm@linux-foundation.org>,
 	linux-fsdevel@vger.kernel.org, bpf@vger.kernel.org,
 	linuxppc-dev@lists.ozlabs.org, linux-btrfs@vger.kernel.org
 Subject: Re: [PATCH RFC PKS/PMEM 22/58] fs/f2fs: Utilize new kmap_thread()
-Message-ID: <20201010013036.GD1122@sol.localdomain>
+Message-ID: <20201009213434.GA839@sol.localdomain>
 References: <20201009195033.3208459-1-ira.weiny@intel.com>
  <20201009195033.3208459-23-ira.weiny@intel.com>
- <20201009213434.GA839@sol.localdomain>
- <20201010003954.GW20115@casper.infradead.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20201010003954.GW20115@casper.infradead.org>
+In-Reply-To: <20201009195033.3208459-23-ira.weiny@intel.com>
 
-On Sat, Oct 10, 2020 at 01:39:54AM +0100, Matthew Wilcox wrote:
-> On Fri, Oct 09, 2020 at 02:34:34PM -0700, Eric Biggers wrote:
-> > On Fri, Oct 09, 2020 at 12:49:57PM -0700, ira.weiny@intel.com wrote:
-> > > The kmap() calls in this FS are localized to a single thread.  To avoid
-> > > the over head of global PKRS updates use the new kmap_thread() call.
-> > >
-> > > @@ -2410,12 +2410,12 @@ static inline struct page *f2fs_pagecache_get_page(
-> > >  
-> > >  static inline void f2fs_copy_page(struct page *src, struct page *dst)
-> > >  {
-> > > -	char *src_kaddr = kmap(src);
-> > > -	char *dst_kaddr = kmap(dst);
-> > > +	char *src_kaddr = kmap_thread(src);
-> > > +	char *dst_kaddr = kmap_thread(dst);
-> > >  
-> > >  	memcpy(dst_kaddr, src_kaddr, PAGE_SIZE);
-> > > -	kunmap(dst);
-> > > -	kunmap(src);
-> > > +	kunmap_thread(dst);
-> > > +	kunmap_thread(src);
-> > >  }
-> > 
-> > Wouldn't it make more sense to switch cases like this to kmap_atomic()?
-> > The pages are only mapped to do a memcpy(), then they're immediately unmapped.
+On Fri, Oct 09, 2020 at 12:49:57PM -0700, ira.weiny@intel.com wrote:
+> From: Ira Weiny <ira.weiny@intel.com>
 > 
-> Maybe you missed the earlier thread from Thomas trying to do something
-> similar for rather different reasons ...
+> The kmap() calls in this FS are localized to a single thread.  To avoid
+> the over head of global PKRS updates use the new kmap_thread() call.
 > 
-> https://lore.kernel.org/lkml/20200919091751.011116649@linutronix.de/
+> Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+> Cc: Chao Yu <chao@kernel.org>
+> Signed-off-by: Ira Weiny <ira.weiny@intel.com>
+> ---
+>  fs/f2fs/f2fs.h | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
+> 
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index d9e52a7f3702..ff72a45a577e 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -2410,12 +2410,12 @@ static inline struct page *f2fs_pagecache_get_page(
+>  
+>  static inline void f2fs_copy_page(struct page *src, struct page *dst)
+>  {
+> -	char *src_kaddr = kmap(src);
+> -	char *dst_kaddr = kmap(dst);
+> +	char *src_kaddr = kmap_thread(src);
+> +	char *dst_kaddr = kmap_thread(dst);
+>  
+>  	memcpy(dst_kaddr, src_kaddr, PAGE_SIZE);
+> -	kunmap(dst);
+> -	kunmap(src);
+> +	kunmap_thread(dst);
+> +	kunmap_thread(src);
+>  }
 
-I did miss it.  I'm not subscribed to any of the mailing lists it was sent to.
-
-Anyway, it shouldn't matter.  Patchsets should be standalone, and not require
-reading random prior threads on linux-kernel to understand.
-
-And I still don't really understand.  After this patchset, there is still code
-nearly identical to the above (doing a temporary mapping just for a memcpy) that
-would still be using kmap_atomic().  Is the idea that later, such code will be
-converted to use kmap_thread() instead?  If not, why use one over the other?
+Wouldn't it make more sense to switch cases like this to kmap_atomic()?
+The pages are only mapped to do a memcpy(), then they're immediately unmapped.
 
 - Eric
 
