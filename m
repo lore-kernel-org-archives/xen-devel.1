@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-12.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 636D7C433DF
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2020 12:45:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BAC7DC433E7
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2020 12:45:42 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 125AB2076E
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2020 12:45:40 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 70B8C2076E
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2020 12:45:42 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="LoZqtaFZ"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 125AB2076E
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="J9B7H7Lr"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 70B8C2076E
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.5925.15387 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.5927.15411 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kRxCd-0002e1-VB; Mon, 12 Oct 2020 12:45:23 +0000
+	id 1kRxCm-0002lW-K9; Mon, 12 Oct 2020 12:45:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 5925.15387; Mon, 12 Oct 2020 12:45:23 +0000
+Received: by outflank-mailman (output) from mailman id 5927.15411; Mon, 12 Oct 2020 12:45:32 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,77 +38,77 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kRxCd-0002dq-R3; Mon, 12 Oct 2020 12:45:23 +0000
-Received: by outflank-mailman (input) for mailman id 5925;
- Mon, 12 Oct 2020 12:45:22 +0000
+	id 1kRxCm-0002lN-Gi; Mon, 12 Oct 2020 12:45:32 +0000
+Received: by outflank-mailman (input) for mailman id 5927;
+ Mon, 12 Oct 2020 12:45:32 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=3Icg=DT=redhat.com=philmd@srs-us1.protection.inumbo.net>)
- id 1kRxCc-0002cA-QF
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2020 12:45:22 +0000
-Received: from us-smtp-delivery-124.mimecast.com (unknown [63.128.21.124])
+ id 1kRxCl-0002kr-Us
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2020 12:45:31 +0000
+Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id 47b22cc0-726e-4604-916d-836074c798f4;
- Mon, 12 Oct 2020 12:45:18 +0000 (UTC)
+ id e9d0eca7-a567-4ea2-b67c-45a220f9f8aa;
+ Mon, 12 Oct 2020 12:45:31 +0000 (UTC)
 Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
  [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-146-ZTed8B7mMT2VgJR1qKIMtQ-1; Mon, 12 Oct 2020 08:45:16 -0400
-Received: by mail-wr1-f69.google.com with SMTP id r8so1941961wrp.5
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2020 05:45:16 -0700 (PDT)
+ us-mta-301-8UvaL3I4NoeFMoWYH2yU_A-1; Mon, 12 Oct 2020 08:45:27 -0400
+Received: by mail-wr1-f69.google.com with SMTP id q15so428804wrw.8
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2020 05:45:27 -0700 (PDT)
 Received: from localhost.localdomain
  (106.red-83-59-162.dynamicip.rima-tde.net. [83.59.162.106])
- by smtp.gmail.com with ESMTPSA id f6sm11016383wru.50.2020.10.12.05.45.12
+ by smtp.gmail.com with ESMTPSA id d2sm14916896wrq.34.2020.10.12.05.45.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Oct 2020 05:45:14 -0700 (PDT)
+ Mon, 12 Oct 2020 05:45:25 -0700 (PDT)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=3Icg=DT=redhat.com=philmd@srs-us1.protection.inumbo.net>)
-	id 1kRxCc-0002cA-QF
-	for xen-devel@lists.xenproject.org; Mon, 12 Oct 2020 12:45:22 +0000
-X-Inumbo-ID: 47b22cc0-726e-4604-916d-836074c798f4
-Received: from us-smtp-delivery-124.mimecast.com (unknown [63.128.21.124])
+	id 1kRxCl-0002kr-Us
+	for xen-devel@lists.xenproject.org; Mon, 12 Oct 2020 12:45:31 +0000
+X-Inumbo-ID: e9d0eca7-a567-4ea2-b67c-45a220f9f8aa
+Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTP
-	id 47b22cc0-726e-4604-916d-836074c798f4;
-	Mon, 12 Oct 2020 12:45:18 +0000 (UTC)
+	id e9d0eca7-a567-4ea2-b67c-45a220f9f8aa;
+	Mon, 12 Oct 2020 12:45:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1602506718;
+	s=mimecast20190719; t=1602506731;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=bwG8iSHLZW0tTYCnl2ic6/t6qmfYl8jGlMpgEnOotCs=;
-	b=LoZqtaFZ14PMiVG5YwWZDLriI0xjyU7gGSiWQDnxzOKLHb3cwadDmXh61qzcP0A40ySUE2
-	MdBHKQ2YyjyqH2/HvUpEO+g/Lj8MJVewGgFov7OAbbgBhTP9E7hVojhpHOr9/MiNsDaQfr
-	5mQmXpW3qfQOevb7Xa+m/mWEKiM/jJg=
+	bh=afTxi5eJGUK9TCxtbNIddaNUCDX7pFC3c3DvHTcAqpY=;
+	b=J9B7H7LrBwwINvhmbA0l+GyBcrAWdBztzvrutX5qL9WpBHgXY5E3f50Ir4hPrPx7EdgzIn
+	kR4x/qEi2is+WKZzD/VYzwSh6LAbviPzQByxNB409OF7AU6CG3ut1GZi4KTvieb3f//Fg0
+	EhfteZwtpEqiSFfOuc1YT8KEBIDC8Po=
 Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
  [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-146-ZTed8B7mMT2VgJR1qKIMtQ-1; Mon, 12 Oct 2020 08:45:16 -0400
-X-MC-Unique: ZTed8B7mMT2VgJR1qKIMtQ-1
-Received: by mail-wr1-f69.google.com with SMTP id r8so1941961wrp.5
-        for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2020 05:45:16 -0700 (PDT)
+ us-mta-301-8UvaL3I4NoeFMoWYH2yU_A-1; Mon, 12 Oct 2020 08:45:27 -0400
+X-MC-Unique: 8UvaL3I4NoeFMoWYH2yU_A-1
+Received: by mail-wr1-f69.google.com with SMTP id q15so428804wrw.8
+        for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2020 05:45:27 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=bwG8iSHLZW0tTYCnl2ic6/t6qmfYl8jGlMpgEnOotCs=;
-        b=PEGS2VG6nLVSQGMPuYGKhrprPynHlFS9z2eO3q7PdJhSCQ2Buud0LMRy/R7lEFasOY
-         mboqhm5t2SboNEjnwmcu2eiN8fygnEDXoQB0U0yX0AwdEi/J7ovI4ANov3gcSMsTI3oS
-         lhEBla/YNRydoMF6R5QB55oJPuFFFW2V1/eidXxRGSqsRZJFtL+hgb4exIeHkTbLlpE3
-         3/dhY6ZFeZzu9CrhaHmomO76lz5yiBG72NLEg0ALr9NXtEyL703uRELeyz6tqcz5lTuN
-         A1CyqLDQkPeBWDqpUQ8uWIO0wJImQ5hmQQCHQxsH0+P/V2HWw9fsRITsboQ66j8pIcDm
-         0SyA==
-X-Gm-Message-State: AOAM532qndwIchDvDaxB/ZBwbTM20TLzhmh79FFxoBluYBG68dXdaAof
-	5Dy7aexgAHo7qdEv34JZzVH1OuY9Af0kIe/0Tb7lljW0JDyxyE/42Re4fZ8dJIyOZlWu8GkaAr9
-	7iOzXDwoMnkDtVmuI+/hISbf/5N0=
-X-Received: by 2002:adf:dd46:: with SMTP id u6mr29753240wrm.295.1602506715238;
-        Mon, 12 Oct 2020 05:45:15 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJyueR4JjpNH2sLzfTjSqD0R65Ts5ka4vohHBW3dn4ShgyH1BUlk0MTIhNUHnqavD80ySjglhw==
-X-Received: by 2002:adf:dd46:: with SMTP id u6mr29753217wrm.295.1602506715091;
-        Mon, 12 Oct 2020 05:45:15 -0700 (PDT)
+        bh=afTxi5eJGUK9TCxtbNIddaNUCDX7pFC3c3DvHTcAqpY=;
+        b=SGEzAkeueYgh1Hdl9rnkhIP18i9616ASlF36+VdljJtVtzRVAUQ3a/RPKQ5Su7hc5a
+         +ujUMfIsvgEfW2HDoie/XHyMufSRNfkuFwWljUXgF3By+kbakcgePCW42VhrrpLIXgUN
+         qHRy6Urn2i3HTQf9xPnD62CJlKzg6wMGLO82BXSJBlvsYl1Vj0eezxu2iaCp3Bcu8MN+
+         sezXXycjRWhAtXx3SHF+BwG4gago6CTIpXz90pelp7CELxjRXvMOWZdyhHU5q+ULUjFN
+         prlh7pyoWv5FQo3aA+hvzCyXL4XLTrfA6l+DiW6sT+yRTo1uSChDP6PxfvEM/7epXnDl
+         OL8w==
+X-Gm-Message-State: AOAM531xFIwIiXpe8mxKCUapgmDLG7TN69MqAvVW3a3P22eTG3XJD6Ny
+	FzfJP92lltqux3nVk2OyyNaHvIsYX5DkJorPLtZ/9hNZT2ci9Egn8nREPnk8eHm7e/l3gOu+EWt
+	H9wYRfd8fr1mQcN7xSMLJ3EBVBt8=
+X-Received: by 2002:adf:df03:: with SMTP id y3mr10299478wrl.70.1602506726315;
+        Mon, 12 Oct 2020 05:45:26 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxpp+5kB0ZYqB04uT+WIG2a4k9Wmj2oRtvHubS3HvdSiiZu7CRJnV3hLF0c9e7ixdPrjPJpoQ==
+X-Received: by 2002:adf:df03:: with SMTP id y3mr10299453wrl.70.1602506726102;
+        Mon, 12 Oct 2020 05:45:26 -0700 (PDT)
 Received: from localhost.localdomain (106.red-83-59-162.dynamicip.rima-tde.net. [83.59.162.106])
-        by smtp.gmail.com with ESMTPSA id f6sm11016383wru.50.2020.10.12.05.45.12
+        by smtp.gmail.com with ESMTPSA id d2sm14916896wrq.34.2020.10.12.05.45.24
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 12 Oct 2020 05:45:14 -0700 (PDT)
+        Mon, 12 Oct 2020 05:45:25 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -135,9 +135,9 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
 	Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
 	Paolo Bonzini <pbonzini@redhat.com>,
 	Huacai Chen <chenhc@lemote.com>
-Subject: [PATCH 1/5] hw/pci-host/bonito: Make PCI_ADDR() macro more readable
-Date: Mon, 12 Oct 2020 14:45:02 +0200
-Message-Id: <20201012124506.3406909-2-philmd@redhat.com>
+Subject: [PATCH 3/5] hw/pci-host/uninorth: Use the PCI_FUNC() macro from 'hw/pci/pci.h'
+Date: Mon, 12 Oct 2020 14:45:04 +0200
+Message-Id: <20201012124506.3406909-4-philmd@redhat.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20201012124506.3406909-1-philmd@redhat.com>
 References: <20201012124506.3406909-1-philmd@redhat.com>
@@ -151,29 +151,27 @@ Content-Transfer-Encoding: 8bit
 
 From: Philippe Mathieu-Daudé <f4bug@amsat.org>
 
-The PCI_ADDR() macro use generic PCI fields shifted by 8-bit.
-Rewrite it extracting the shift operation one layer.
+We already have a generic PCI_FUNC() macro in "hw/pci/pci.h" to
+extract the PCI function identifier, use it.
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- hw/pci-host/bonito.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ hw/pci-host/uninorth.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/hw/pci-host/bonito.c b/hw/pci-host/bonito.c
-index a99eced0657..abb3ee86769 100644
---- a/hw/pci-host/bonito.c
-+++ b/hw/pci-host/bonito.c
-@@ -196,8 +196,8 @@ FIELD(BONGENCFG, PCIQUEUE,      12, 1)
- #define PCI_IDSEL_VIA686B          (1 << PCI_IDSEL_VIA686B_BIT)
+diff --git a/hw/pci-host/uninorth.c b/hw/pci-host/uninorth.c
+index 1ed1072eeb5..c21de0ab805 100644
+--- a/hw/pci-host/uninorth.c
++++ b/hw/pci-host/uninorth.c
+@@ -65,7 +65,7 @@ static uint32_t unin_get_config_reg(uint32_t reg, uint32_t addr)
+         if (slot == 32) {
+             slot = -1; /* XXX: should this be 0? */
+         }
+-        func = (reg >> 8) & 7;
++        func = PCI_FUNC(reg >> 8);
  
- #define PCI_ADDR(busno , devno , funno , regno)  \
--    ((((busno) << 16) & 0xff0000) + (((devno) << 11) & 0xf800) + \
--    (((funno) << 8) & 0x700) + (regno))
-+    ((((busno) << 8) & 0xff00) + (((devno) << 3) & 0xf8) + \
-+    (((funno) & 0x7) << 8) + (regno))
- 
- typedef struct BonitoState BonitoState;
- 
+         /* ... and then convert them to x86 format */
+         /* config pointer */
 -- 
 2.26.2
 
