@@ -1,30 +1,27 @@
-Return-Path: <SRS0=Fsqj=DS=lists.xenproject.org=xen-devel-bounces@kernel.org>
+Return-Path: <SRS0=s5AT=DT=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+X-Spam-Status: No, score=-9.7 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BB820C43457
-	for <xen-devel@archiver.kernel.org>; Sun, 11 Oct 2020 23:32:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B7CF0C433DF
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2020 01:12:29 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 63E1E207D3
-	for <xen-devel@archiver.kernel.org>; Sun, 11 Oct 2020 23:32:01 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="SKP6EWyk"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 63E1E207D3
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id 57DFB2074D
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2020 01:12:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 57DFB2074D
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=m5p.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.5741.14882 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.5752.14914 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kRkoP-0002M3-Jh; Sun, 11 Oct 2020 23:31:33 +0000
+	id 1kRmNT-00051F-Qa; Mon, 12 Oct 2020 01:11:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 5741.14882; Sun, 11 Oct 2020 23:31:33 +0000
+Received: by outflank-mailman (output) from mailman id 5752.14914; Mon, 12 Oct 2020 01:11:51 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,129 +36,150 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kRkoP-0002Lw-Gi; Sun, 11 Oct 2020 23:31:33 +0000
-Received: by outflank-mailman (input) for mailman id 5741;
- Sun, 11 Oct 2020 23:31:31 +0000
+	id 1kRmNT-000518-NZ; Mon, 12 Oct 2020 01:11:51 +0000
+Received: by outflank-mailman (input) for mailman id 5752;
+ Mon, 12 Oct 2020 01:11:51 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=0GLi=DS=gmail.com=rosbrookn@srs-us1.protection.inumbo.net>)
- id 1kRkoN-0002Lo-RF
- for xen-devel@lists.xenproject.org; Sun, 11 Oct 2020 23:31:31 +0000
-Received: from mail-qk1-x731.google.com (unknown [2607:f8b0:4864:20::731])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=w0qL=DT=m5p.com=ehem@srs-us1.protection.inumbo.net>)
+ id 1kRmNT-000513-3x
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2020 01:11:51 +0000
+Received: from mailhost.m5p.com (unknown [74.104.188.4])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 4bced579-d309-47f4-84b2-311d75545f4f;
- Sun, 11 Oct 2020 23:31:30 +0000 (UTC)
-Received: by mail-qk1-x731.google.com with SMTP id 188so16252314qkk.12
- for <xen-devel@lists.xenproject.org>; Sun, 11 Oct 2020 16:31:30 -0700 (PDT)
-Received: from six.home (cpe-67-241-56-252.twcny.res.rr.com. [67.241.56.252])
- by smtp.gmail.com with ESMTPSA id
- j88sm11321663qte.96.2020.10.11.16.31.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 11 Oct 2020 16:31:28 -0700 (PDT)
+ id 24d1fd8b-5620-40ed-9387-23f8e9a20eaa;
+ Mon, 12 Oct 2020 01:11:49 +0000 (UTC)
+Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:1f07:15ff:0:0:0:f7])
+ by mailhost.m5p.com (8.15.2/8.15.2) with ESMTPS id 09C1BdHI082874
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
+ Sun, 11 Oct 2020 21:11:45 -0400 (EDT) (envelope-from ehem@m5p.com)
+Received: (from ehem@localhost)
+ by m5p.com (8.15.2/8.15.2/Submit) id 09C1BdwK082873;
+ Sun, 11 Oct 2020 18:11:39 -0700 (PDT) (envelope-from ehem)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=0GLi=DS=gmail.com=rosbrookn@srs-us1.protection.inumbo.net>)
-	id 1kRkoN-0002Lo-RF
-	for xen-devel@lists.xenproject.org; Sun, 11 Oct 2020 23:31:31 +0000
-X-Inumbo-ID: 4bced579-d309-47f4-84b2-311d75545f4f
-Received: from mail-qk1-x731.google.com (unknown [2607:f8b0:4864:20::731])
+	(envelope-from <SRS0=w0qL=DT=m5p.com=ehem@srs-us1.protection.inumbo.net>)
+	id 1kRmNT-000513-3x
+	for xen-devel@lists.xenproject.org; Mon, 12 Oct 2020 01:11:51 +0000
+X-Inumbo-ID: 24d1fd8b-5620-40ed-9387-23f8e9a20eaa
+Received: from mailhost.m5p.com (unknown [74.104.188.4])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 4bced579-d309-47f4-84b2-311d75545f4f;
-	Sun, 11 Oct 2020 23:31:30 +0000 (UTC)
-Received: by mail-qk1-x731.google.com with SMTP id 188so16252314qkk.12
-        for <xen-devel@lists.xenproject.org>; Sun, 11 Oct 2020 16:31:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id;
-        bh=S6paNgzd2Tf+FILweikzjEXvaD1XAePsH8bNyZZsa2Y=;
-        b=SKP6EWykOTvWJlShn8HrHbgxaG577VSQcIrDuXhwHXrLpUxhWEWC5Nzhm3I87hNsRY
-         aHrKCupp5AK9+D8MT3Gh1lxb5/R1iljFUGLkksHNvoQe9pJX1p7OSl/GXwrWTDwj/+/w
-         oAC0SL7Y6mfuC7b4xkIpwY5FYmx22SePwbxUTaWvE6rEDZ3+lHE4t1O3zZn20GU+r/Xh
-         9tec04fSclONj8uWUqdDVCaJepZp+0tuH4tPWKRWkQk5bMQe/F1Of1sM0zRBhz8F9Sik
-         MYbWQxSXUycXVk1s0b28zYXn6kzI5kSfZLSQpt3yQHSmoYjCV50wJdVRdpQyajz794XC
-         7DRg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=S6paNgzd2Tf+FILweikzjEXvaD1XAePsH8bNyZZsa2Y=;
-        b=MkirZ9iQ+aTbOkV6xAGYMAc2NPgnjjAjuvs14L+kOT/rFfM6y1Oa7NhjLWZIBKmtmA
-         XJ4UNqoQUIJ0JbB0NuW3of9zgpI/Lv1Vn9SwrTW2Pm9PdxPGI0PiZt4FfTIUAmvHGo38
-         z2DEduQvd6Z5twYJ43L0Z7tcn2wsTcRWpH01lmjaqJeHusY8ZIfGwKWB0yJVrgTDdQOv
-         ka52/LUBpObEcyI02TnYQG47/Ar4ss4SNcuFCokHaOn98x+nItmoDxp04XwpgSO7pwjR
-         FmC4FcOp6HlkuY2JnL1o/Fd6a6QXFOje8h7FrifV9cw2+tydHPFIuyKd2xBehoDD4LOK
-         T8tg==
-X-Gm-Message-State: AOAM530E4oLglEDLH2aWIcg7HFaauVdfLSImYVXT7LNbTz9upasdCfWR
-	l1a2XDhaSf8CzQgHWFouE7I1nXuthdY=
-X-Google-Smtp-Source: ABdhPJxXrSmqR/mmdlfiMXv7kMhwPsWW1gIISvYdFwOWJSsv4iGOhFneN+X4Ng+95JwwiGWae1XoOg==
-X-Received: by 2002:a05:620a:159b:: with SMTP id d27mr7482994qkk.28.1602459089711;
-        Sun, 11 Oct 2020 16:31:29 -0700 (PDT)
-Received: from six.home (cpe-67-241-56-252.twcny.res.rr.com. [67.241.56.252])
-        by smtp.gmail.com with ESMTPSA id j88sm11321663qte.96.2020.10.11.16.31.27
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 11 Oct 2020 16:31:28 -0700 (PDT)
-From: Nick Rosbrook <rosbrookn@gmail.com>
-X-Google-Original-From: Nick Rosbrook <rosbrookn@ainfosec.com>
+	id 24d1fd8b-5620-40ed-9387-23f8e9a20eaa;
+	Mon, 12 Oct 2020 01:11:49 +0000 (UTC)
+Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:1f07:15ff:0:0:0:f7])
+	by mailhost.m5p.com (8.15.2/8.15.2) with ESMTPS id 09C1BdHI082874
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
+	Sun, 11 Oct 2020 21:11:45 -0400 (EDT)
+	(envelope-from ehem@m5p.com)
+Received: (from ehem@localhost)
+	by m5p.com (8.15.2/8.15.2/Submit) id 09C1BdwK082873;
+	Sun, 11 Oct 2020 18:11:39 -0700 (PDT)
+	(envelope-from ehem)
+Date: Sun, 11 Oct 2020 18:11:39 -0700
+From: Elliott Mitchell <ehem+xen@m5p.com>
 To: xen-devel@lists.xenproject.org
-Cc: Nick Rosbrook <rosbrookn@ainfosec.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH 1/2] golang/xenlight: do not hard code libxl dir in gengotypes.py
-Date: Sun, 11 Oct 2020 19:31:24 -0400
-Message-Id: <8e66cd2d53bb9f14bdfa0a2539773f3a6a3526b6.1602458773.git.rosbrookn@ainfosec.com>
-X-Mailer: git-send-email 2.17.1
+Cc: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
+        Marek =?unknown-8bit?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Subject: [SECOND RESEND] [PATCH] tools/python: Pass linker to Python build
+ process
+Message-ID: <20201012011139.GA82449@mattapan.m5p.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Currently, in order to 'import idl' in gengotypes.py, we derive the path
-of the libxl source directory from the XEN_ROOT environment variable, and
-append that to sys.path so python can see idl.py. Since the the recent move of
-libxl to tools/libs/light, this hard coding breaks the build.
+Unexpectedly the environment variable which needs to be passed is
+$LDSHARED and not $LD.  Otherwise Python may find the build `ld` instead
+of the host `ld`.
 
-Instead, check for the environment variable LIBXL_SRC_DIR, but move this
-check to a try-except block (with empty except). This simply makes the
-real error more visible, and does not strictly require that
-LIBXL_SRC_DIR is used. Finally, update the Makefile to set LIBXL_SRC_DIR
-rather than XEN_ROOT when calling gengotypes.py.
+Replace $(LDFLAGS) with $(SHLIB_LDFLAGS) as Python needs shared objects
+it can load at runtime, not executables.
 
-Signed-off-by: Nick Rosbrook <rosbrookn@ainfosec.com>
+This uses $(CC) instead of $(LD) since Python distutils appends $CFLAGS
+to $LDFLAGS which breaks many linkers.
+
+Signed-off-by: Elliott Mitchell <ehem+xen@m5p.com>
 ---
- tools/golang/xenlight/Makefile      | 2 +-
- tools/golang/xenlight/gengotypes.py | 9 ++++++++-
- 2 files changed, 9 insertions(+), 2 deletions(-)
+This is now the *third* time this has been sent to the list.  Mark Pryor
+has tested and confirms Python cross-building is working.  There is one
+wart left which I'm unsure of the best approach for.
 
-diff --git a/tools/golang/xenlight/Makefile b/tools/golang/xenlight/Makefile
-index fd8e4893db..e394ef9b2b 100644
---- a/tools/golang/xenlight/Makefile
-+++ b/tools/golang/xenlight/Makefile
-@@ -16,7 +16,7 @@ all: build
- GOXL_GEN_FILES = types.gen.go helpers.gen.go
+Having looked around a bit, I believe this is a Python 2/3 compatibility
+issue.  "distutils" for Python 2 likely lacked a separate $LDSHARED or
+$LD variable, whereas Python 3 does have this.  Alas this is pointless
+due to the above (unless you can cause distutils.py to do the final link
+step separately).
+---
+ tools/pygrub/Makefile | 9 +++++----
+ tools/python/Makefile | 9 +++++----
+ 2 files changed, 10 insertions(+), 8 deletions(-)
+
+diff --git a/tools/pygrub/Makefile b/tools/pygrub/Makefile
+index 3063c4998f..37b2146214 100644
+--- a/tools/pygrub/Makefile
++++ b/tools/pygrub/Makefile
+@@ -3,20 +3,21 @@ XEN_ROOT = $(CURDIR)/../..
+ include $(XEN_ROOT)/tools/Rules.mk
  
- %.gen.go: gengotypes.py $(LIBXL_SRC_DIR)/libxl_types.idl $(LIBXL_SRC_DIR)/idl.py
--	XEN_ROOT=$(XEN_ROOT) $(PYTHON) gengotypes.py $(LIBXL_SRC_DIR)/libxl_types.idl
-+	LIBXL_SRC_DIR=$(LIBXL_SRC_DIR) $(PYTHON) gengotypes.py $(LIBXL_SRC_DIR)/libxl_types.idl
+ PY_CFLAGS = $(CFLAGS) $(PY_NOOPT_CFLAGS)
+-PY_LDFLAGS = $(LDFLAGS) $(APPEND_LDFLAGS)
++PY_LDFLAGS = $(SHLIB_LDFLAGS) $(APPEND_LDFLAGS)
+ INSTALL_LOG = build/installed_files.txt
  
- # Go will do its own dependency checking, and not actuall go through
- # with the build if none of the input files have changed.
-diff --git a/tools/golang/xenlight/gengotypes.py b/tools/golang/xenlight/gengotypes.py
-index ebec938224..4ac181ae47 100644
---- a/tools/golang/xenlight/gengotypes.py
-+++ b/tools/golang/xenlight/gengotypes.py
-@@ -3,7 +3,14 @@
- import os
- import sys
+ .PHONY: all
+ all: build
+ .PHONY: build
+ build:
+-	CC="$(CC)" CFLAGS="$(PY_CFLAGS)" LDFLAGS="$(PY_LDFLAGS)" $(PYTHON) setup.py build
++	CC="$(CC)" CFLAGS="$(PY_CFLAGS)" LDSHARED="$(CC)" LDFLAGS="$(PY_LDFLAGS)" $(PYTHON) setup.py build
  
--sys.path.append('{0}/tools/libxl'.format(os.environ['XEN_ROOT']))
-+try:
-+    sys.path.append(os.environ['LIBXL_SRC_DIR'])
-+except:
-+    # If we get here, then we expect the 'import idl'
-+    # expression to fail. That error is more informative,
-+    # so let it happen.
-+    pass
-+
- import idl
+ .PHONY: install
+ install: all
+ 	$(INSTALL_DIR) $(DESTDIR)/$(bindir)
+-	CC="$(CC)" CFLAGS="$(PY_CFLAGS)" LDFLAGS="$(PY_LDFLAGS)" $(PYTHON) \
+-		setup.py install --record $(INSTALL_LOG) $(PYTHON_PREFIX_ARG) \
++	CC="$(CC)" CFLAGS="$(PY_CFLAGS)" LDSHARED="$(CC)" \
++		LDFLAGS="$(PY_LDFLAGS)" $(PYTHON) setup.py install \
++		--record $(INSTALL_LOG) $(PYTHON_PREFIX_ARG) \
+ 		 --root="$(DESTDIR)" --install-scripts=$(LIBEXEC_BIN) --force
+ 	set -e; if [ $(bindir) != $(LIBEXEC_BIN) -a \
+ 	             "`readlink -f $(DESTDIR)/$(bindir)`" != \
+diff --git a/tools/python/Makefile b/tools/python/Makefile
+index 8d22c03676..b675f5b4de 100644
+--- a/tools/python/Makefile
++++ b/tools/python/Makefile
+@@ -5,19 +5,20 @@ include $(XEN_ROOT)/tools/Rules.mk
+ all: build
  
- # Go versions of some builtin types.
+ PY_CFLAGS = $(CFLAGS) $(PY_NOOPT_CFLAGS)
+-PY_LDFLAGS = $(LDFLAGS) $(APPEND_LDFLAGS)
++PY_LDFLAGS = $(SHLIB_LDFLAGS) $(APPEND_LDFLAGS)
+ INSTALL_LOG = build/installed_files.txt
+ 
+ .PHONY: build
+ build:
+-	CC="$(CC)" CFLAGS="$(PY_CFLAGS)" $(PYTHON) setup.py build
++	CC="$(CC)" CFLAGS="$(PY_CFLAGS)" LDSHARED="$(CC)" LDFLAGS="$(PY_LDFLAGS)" $(PYTHON) setup.py build
+ 
+ .PHONY: install
+ install:
+ 	$(INSTALL_DIR) $(DESTDIR)$(LIBEXEC_BIN)
+ 
+-	CC="$(CC)" CFLAGS="$(PY_CFLAGS)" LDFLAGS="$(PY_LDFLAGS)" $(PYTHON) \
+-		setup.py install --record $(INSTALL_LOG) $(PYTHON_PREFIX_ARG) \
++	CC="$(CC)" CFLAGS="$(PY_CFLAGS)" LDSHARED="$(CC)" \
++		LDFLAGS="$(PY_LDFLAGS)" $(PYTHON) setup.py install \
++		--record $(INSTALL_LOG) $(PYTHON_PREFIX_ARG) \
+ 		--root="$(DESTDIR)" --force
+ 
+ 	$(INSTALL_PYTHON_PROG) scripts/convert-legacy-stream $(DESTDIR)$(LIBEXEC_BIN)
 -- 
-2.17.1
+2.20.1
+
+
+-- 
+(\___(\___(\______          --=> 8-) EHM <=--          ______/)___/)___/)
+ \BS (    |         ehem+sigmsg@m5p.com  PGP 87145445         |    )   /
+  \_CS\   |  _____  -O #include <stddisclaimer.h> O-   _____  |   /  _/
+8A19\___\_|_/58D2 7E3D DDF4 7BA6 <-PGP-> 41D1 B375 37D0 8714\_|_/___/5445
+
 
 
