@@ -2,29 +2,25 @@ Return-Path: <SRS0=s5AT=DT=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A8337C433DF
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2020 20:08:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E1FB1C433E7
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2020 21:35:50 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1C1E3206D4
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2020 20:08:14 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="rYtSPe2K"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1C1E3206D4
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id 4906320797
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2020 21:35:49 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4906320797
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=m5p.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.6023.15781 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.6034.15797 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kS470-000779-0N; Mon, 12 Oct 2020 20:08:02 +0000
+	id 1kS5TO-0007U7-0q; Mon, 12 Oct 2020 21:35:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 6023.15781; Mon, 12 Oct 2020 20:08:01 +0000
+Received: by outflank-mailman (output) from mailman id 6034.15797; Mon, 12 Oct 2020 21:35:13 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,148 +35,103 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kS46z-000772-TP; Mon, 12 Oct 2020 20:08:01 +0000
-Received: by outflank-mailman (input) for mailman id 6023;
- Mon, 12 Oct 2020 20:08:00 +0000
+	id 1kS5TN-0007U0-U7; Mon, 12 Oct 2020 21:35:13 +0000
+Received: by outflank-mailman (input) for mailman id 6034;
+ Mon, 12 Oct 2020 21:35:12 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=CKVJ=DT=gmail.com=jandryuk@srs-us1.protection.inumbo.net>)
- id 1kS46y-00073L-CB
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2020 20:08:00 +0000
-Received: from mail-qv1-xf44.google.com (unknown [2607:f8b0:4864:20::f44])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=w0qL=DT=m5p.com=ehem@srs-us1.protection.inumbo.net>)
+ id 1kS5TM-0007Tv-KN
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2020 21:35:12 +0000
+Received: from mailhost.m5p.com (unknown [74.104.188.4])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9d8cb4da-0b8c-45fe-83b2-8d614af9c96d;
- Mon, 12 Oct 2020 20:07:59 +0000 (UTC)
-Received: by mail-qv1-xf44.google.com with SMTP id b10so6713792qvf.0
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2020 13:07:59 -0700 (PDT)
-Received: from shine.lan ([2001:470:8:67e:9802:d83e:b724:7fdf])
- by smtp.gmail.com with ESMTPSA id d129sm13418350qkg.127.2020.10.12.13.07.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Oct 2020 13:07:58 -0700 (PDT)
+ id 44a200bb-fba6-4669-ae4e-e0c31806915c;
+ Mon, 12 Oct 2020 21:35:11 +0000 (UTC)
+Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:1f07:15ff:0:0:0:f7])
+ by mailhost.m5p.com (8.15.2/8.15.2) with ESMTPS id 09CLYqhX089433
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
+ Mon, 12 Oct 2020 17:34:58 -0400 (EDT) (envelope-from ehem@m5p.com)
+Received: (from ehem@localhost)
+ by m5p.com (8.15.2/8.15.2/Submit) id 09CLYpGX089432;
+ Mon, 12 Oct 2020 14:34:51 -0700 (PDT) (envelope-from ehem)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=CKVJ=DT=gmail.com=jandryuk@srs-us1.protection.inumbo.net>)
-	id 1kS46y-00073L-CB
-	for xen-devel@lists.xenproject.org; Mon, 12 Oct 2020 20:08:00 +0000
-X-Inumbo-ID: 9d8cb4da-0b8c-45fe-83b2-8d614af9c96d
-Received: from mail-qv1-xf44.google.com (unknown [2607:f8b0:4864:20::f44])
+	(envelope-from <SRS0=w0qL=DT=m5p.com=ehem@srs-us1.protection.inumbo.net>)
+	id 1kS5TM-0007Tv-KN
+	for xen-devel@lists.xenproject.org; Mon, 12 Oct 2020 21:35:12 +0000
+X-Inumbo-ID: 44a200bb-fba6-4669-ae4e-e0c31806915c
+Received: from mailhost.m5p.com (unknown [74.104.188.4])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 9d8cb4da-0b8c-45fe-83b2-8d614af9c96d;
-	Mon, 12 Oct 2020 20:07:59 +0000 (UTC)
-Received: by mail-qv1-xf44.google.com with SMTP id b10so6713792qvf.0
-        for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2020 13:07:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=QY2243JX786fdUoHzoK1Y6Kh1lJrJoZtoq/K0Z9ICJs=;
-        b=rYtSPe2K/v1dU7vZsTf27LfQRM1ImXctJlIOG3nIN7IH978uvQVPQCjWOd6D6XniNU
-         mKQg27mvMRIXMCi4AnPhtDNCrMgkF9YnvVLyst07RQa3J7AoDV9twIKB9nD75/WM1SXf
-         si7oE4eTR1Vtlc59TMUo6Ns6acrzagC9QRh6ajVF6vQJKUtHM3bRSpHWKiraNSDp0oTx
-         PbbHDxkBMZjQDCuFP0KNmVOHAEZYT4PS/s0QVTFGjQsKkfTJRLfrtGTHABYgGkfMvWX9
-         PaucQ1LQGfo7nU2F3n7cPK94O3Z3cTejLMuXEXktHME0VdOtuuhg8oNV+MVp3QdHgj+c
-         eaiA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=QY2243JX786fdUoHzoK1Y6Kh1lJrJoZtoq/K0Z9ICJs=;
-        b=N5vQNLrLjLwDg8/qdiFNllK7Dch672r2qLfcGFy+NfatUkDUVJZqqY7uVPaRdSekqQ
-         oPV/WWtZTTWZPRZEZWcZr88j06siplWo/MOrTpfcccIwI5nQ+vSloXnhoxqz3bkGTU8p
-         UvF2gMzqjmmXVh2fwglszh2Zqy+Pb53xsMvft2lJq8eJlwXeNR7Aay0VvhKPckfyWsFX
-         j7VvpuG8lfiolcSIZFS+kVlP/1zi3Rjo1xuRI2GIwIYIgGaMEK/wk0SgGygiW/yYCCEf
-         9JXCx0/BnaGR31zR6atHZzlfZ+cEzfhON94l3fOHanMDTENR+6HWZnfb3KKvYfko9FgV
-         yp3A==
-X-Gm-Message-State: AOAM531FZCITL/VqLXKLmq3mWocvuwU/yCb9SwQlywdZiG3TPM9ZkJ5W
-	XblesAUJ7SoF2wjVHklah+I=
-X-Google-Smtp-Source: ABdhPJw3I51kN+J+TGXLaLkJTSdYuDYY97kg7N1G1MUPkpX1p5tdCYS7ebkzO/aJ0SAisDXB4fym3w==
-X-Received: by 2002:a0c:b29e:: with SMTP id r30mr27540725qve.38.1602533279090;
-        Mon, 12 Oct 2020 13:07:59 -0700 (PDT)
-Received: from shine.lan ([2001:470:8:67e:9802:d83e:b724:7fdf])
-        by smtp.gmail.com with ESMTPSA id d129sm13418350qkg.127.2020.10.12.13.07.57
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 12 Oct 2020 13:07:58 -0700 (PDT)
-From: Jason Andryuk <jandryuk@gmail.com>
-To: qemu-devel@nongnu.org
-Cc: Jason Andryuk <jandryuk@gmail.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony Perard <anthony.perard@citrix.com>,
-	Paul Durrant <paul@xen.org>,
-	xen-devel@lists.xenproject.org (open list:X86 Xen CPUs)
-Subject: [PATCH 2/2] accel: Add xen CpusAccel using dummy-cpu
-Date: Mon, 12 Oct 2020 16:07:24 -0400
-Message-Id: <20201012200725.64137-3-jandryuk@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20201012200725.64137-1-jandryuk@gmail.com>
-References: <20201012200725.64137-1-jandryuk@gmail.com>
+	id 44a200bb-fba6-4669-ae4e-e0c31806915c;
+	Mon, 12 Oct 2020 21:35:11 +0000 (UTC)
+Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:1f07:15ff:0:0:0:f7])
+	by mailhost.m5p.com (8.15.2/8.15.2) with ESMTPS id 09CLYqhX089433
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
+	Mon, 12 Oct 2020 17:34:58 -0400 (EDT)
+	(envelope-from ehem@m5p.com)
+Received: (from ehem@localhost)
+	by m5p.com (8.15.2/8.15.2/Submit) id 09CLYpGX089432;
+	Mon, 12 Oct 2020 14:34:51 -0700 (PDT)
+	(envelope-from ehem)
+Date: Mon, 12 Oct 2020 14:34:51 -0700
+From: Elliott Mitchell <ehem+xen@m5p.com>
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Julien Grall <julien@xen.org>,
+        Masami Hiramatsu <masami.hiramatsu@linaro.org>,
+        xen-devel@lists.xenproject.org, Alex Benn??e <alex.bennee@linaro.org>,
+        bertrand.marquis@arm.com, andre.przywara@arm.com,
+        Julien Grall <jgrall@amazon.com>,
+        Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: Re: [PATCH 0/4] xen/arm: Unbreak ACPI
+Message-ID: <20201012213451.GA89158@mattapan.m5p.com>
+References: <20200926205542.9261-1-julien@xen.org>
+ <CAA93ih3-gTAEzV=yYS-9cHGyN9rfAC28Xeyk8Gsmi7D2BS_OWQ@mail.gmail.com>
+ <1a7b5a14-7d21-b067-a80b-27d963f9798a@xen.org>
+ <alpine.DEB.2.21.2010121157350.10386@sstabellini-ThinkPad-T480s>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <alpine.DEB.2.21.2010121157350.10386@sstabellini-ThinkPad-T480s>
 
-Xen was broken by commit 1583a3898853 ("cpus: extract out qtest-specific
-code to accel/qtest").  Xen relied on qemu_init_vcpu() calling
-qemu_dummy_start_vcpu() in the default case, but that was replaced by
-g_assert_not_reached().
+On Mon, Oct 12, 2020 at 12:02:14PM -0700, Stefano Stabellini wrote:
+> On Sat, 10 Oct 2020, Julien Grall wrote:
+> > Therefore, I think the code should not try to find the STAO. Instead, it
+> > should check whether the SPCR table is present.
+> 
+> Yes, that makes sense, but that brings me to the next question.
+> 
+> SPCR seems to be required by SBBR, however, Masami wrote that he could
+> boot on a system without SPCR, which gets me very confused for two
+> reasons:
+> 
+> 1) Why there is no SPCR? Isn't it supposed to be mandatory? Is it
+> because there no UART on Masami's system?
 
-Add a minimal "CpusAccel" for xen using the dummy-cpu implementation
-used by qtest.
+I'm on different hardware, but some folks have setup Tianocore for it.
+According to Documentation/arm64/acpi_object_usage.rst,
+"Required: DSDT, FADT, GTDT, MADT, MCFG, RSDP, SPCR, XSDT".  Yet when
+booting a Linux kernel directly on the hardware it lists APIC, BGRT,
+CSRT, DSDT, DBG2, FACP, GTDT, PPTT, RSDP, and XSDT.
 
-Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
----
- accel/dummy/meson.build |  1 +
- accel/xen/xen-all.c     | 10 ++++++++++
- 2 files changed, 11 insertions(+)
+I don't know whether Linux's ACPI code omits mention of some required
+tables and merely panics if they're absent.  Yet I'm speculating the list
+of required tables has shrunk, SPCR is no longer required, and the
+documentation is out of date.  Perhaps SPCR was required in early Linux
+ACPI implementations, but more recent ones removed that requirement?
 
-diff --git a/accel/dummy/meson.build b/accel/dummy/meson.build
-index 5fbe27de90..cdff0ba746 100644
---- a/accel/dummy/meson.build
-+++ b/accel/dummy/meson.build
-@@ -4,3 +4,4 @@ dummy_ss.add(files(
- ))
- 
- specific_ss.add_all(when: ['CONFIG_SOFTMMU', 'CONFIG_POSIX'], if_true: dummy_ss)
-+specific_ss.add_all(when: ['CONFIG_XEN'], if_true: dummy_ss)
-diff --git a/accel/xen/xen-all.c b/accel/xen/xen-all.c
-index 60b971d0a8..2d243c58d4 100644
---- a/accel/xen/xen-all.c
-+++ b/accel/xen/xen-all.c
-@@ -16,12 +16,15 @@
- #include "hw/xen/xen_pt.h"
- #include "chardev/char.h"
- #include "sysemu/accel.h"
-+#include "sysemu/cpus.h"
- #include "sysemu/xen.h"
- #include "sysemu/runstate.h"
- #include "migration/misc.h"
- #include "migration/global_state.h"
- #include "hw/boards.h"
- 
-+#include "accel/dummy/dummy-cpus.h"
-+
- //#define DEBUG_XEN
- 
- #ifdef DEBUG_XEN
-@@ -153,6 +156,10 @@ static void xen_setup_post(MachineState *ms, AccelState *accel)
-     }
- }
- 
-+const CpusAccel xen_cpus = {
-+    .create_vcpu_thread = dummy_start_vcpu_thread,
-+};
-+
- static int xen_init(MachineState *ms)
- {
-     MachineClass *mc = MACHINE_GET_CLASS(ms);
-@@ -180,6 +187,9 @@ static int xen_init(MachineState *ms)
-      * opt out of system RAM being allocated by generic code
-      */
-     mc->default_ram_id = NULL;
-+
-+    cpus_register_accel(&xen_cpus);
-+
-     return 0;
- }
- 
+> 2) If there is no SPCR, how did Masami manage to boot Xen?
+> I take without any serial output? Just with the framebuffer?
+
+On my board the provided tables are sufficient to let Linux identify
+ttyAMA0.  Linux's efifb driver finds the framebuffer and apparently has
+it usable.
+
+
 -- 
-2.25.1
+(\___(\___(\______          --=> 8-) EHM <=--          ______/)___/)___/)
+ \BS (    |         ehem+sigmsg@m5p.com  PGP 87145445         |    )   /
+  \_CS\   |  _____  -O #include <stddisclaimer.h> O-   _____  |   /  _/
+8A19\___\_|_/58D2 7E3D DDF4 7BA6 <-PGP-> 41D1 B375 37D0 8714\_|_/___/5445
+
 
 
