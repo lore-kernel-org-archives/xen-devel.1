@@ -2,28 +2,28 @@ Return-Path: <SRS0=s5AT=DT=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-12.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=no
-	autolearn_force=no version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CF9E4C433E7
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 85608C433DF
 	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2020 12:45:37 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3E30B208FE
+	by mail.kernel.org (Postfix) with ESMTPS id 0DBFA20776
 	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2020 12:45:37 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="YChWZiyC"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3E30B208FE
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="UkT5GRgF"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0DBFA20776
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.5924.15374 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.5926.15399 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kRxCZ-0002cM-Lo; Mon, 12 Oct 2020 12:45:19 +0000
+	id 1kRxCh-0002gn-Av; Mon, 12 Oct 2020 12:45:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 5924.15374; Mon, 12 Oct 2020 12:45:19 +0000
+Received: by outflank-mailman (output) from mailman id 5926.15399; Mon, 12 Oct 2020 12:45:27 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,76 +38,78 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kRxCZ-0002cF-Iw; Mon, 12 Oct 2020 12:45:19 +0000
-Received: by outflank-mailman (input) for mailman id 5924;
- Mon, 12 Oct 2020 12:45:18 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kRxCh-0002gf-7Z; Mon, 12 Oct 2020 12:45:27 +0000
+Received: by outflank-mailman (input) for mailman id 5926;
+ Mon, 12 Oct 2020 12:45:25 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=3Icg=DT=redhat.com=philmd@srs-us1.protection.inumbo.net>)
- id 1kRxCX-0002cA-W8
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2020 12:45:18 +0000
-Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id f8c5287d-de03-4165-b360-1c43f7f32b1f;
- Mon, 12 Oct 2020 12:45:16 +0000 (UTC)
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-51-puG-AytJPlqu3n4nFyTAxA-1; Mon, 12 Oct 2020 08:45:10 -0400
-Received: by mail-wr1-f69.google.com with SMTP id x16so8849260wrg.7
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2020 05:45:10 -0700 (PDT)
+ id 1kRxCf-0002fQ-6i
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2020 12:45:25 +0000
+Received: from us-smtp-delivery-124.mimecast.com (unknown [63.128.21.124])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id 51cfb409-301b-4ac3-abae-5168facf7e27;
+ Mon, 12 Oct 2020 12:45:23 +0000 (UTC)
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-32-wim6cHprMSa0X9dzGXdizw-1; Mon, 12 Oct 2020 08:45:22 -0400
+Received: by mail-wr1-f70.google.com with SMTP id t3so2761638wrq.2
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2020 05:45:21 -0700 (PDT)
 Received: from localhost.localdomain
  (106.red-83-59-162.dynamicip.rima-tde.net. [83.59.162.106])
- by smtp.gmail.com with ESMTPSA id d2sm14916054wrq.34.2020.10.12.05.45.07
+ by smtp.gmail.com with ESMTPSA id b5sm2564766wrs.97.2020.10.12.05.45.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Oct 2020 05:45:08 -0700 (PDT)
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ Mon, 12 Oct 2020 05:45:20 -0700 (PDT)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=3Icg=DT=redhat.com=philmd@srs-us1.protection.inumbo.net>)
-	id 1kRxCX-0002cA-W8
-	for xen-devel@lists.xenproject.org; Mon, 12 Oct 2020 12:45:18 +0000
-X-Inumbo-ID: f8c5287d-de03-4165-b360-1c43f7f32b1f
-Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTP
-	id f8c5287d-de03-4165-b360-1c43f7f32b1f;
-	Mon, 12 Oct 2020 12:45:16 +0000 (UTC)
+	id 1kRxCf-0002fQ-6i
+	for xen-devel@lists.xenproject.org; Mon, 12 Oct 2020 12:45:25 +0000
+X-Inumbo-ID: 51cfb409-301b-4ac3-abae-5168facf7e27
+Received: from us-smtp-delivery-124.mimecast.com (unknown [63.128.21.124])
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+	id 51cfb409-301b-4ac3-abae-5168facf7e27;
+	Mon, 12 Oct 2020 12:45:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1602506716;
+	s=mimecast20190719; t=1602506723;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=0VfM6Y1Z4oOM9AviCLT3C6cOeCH1n4rJ8RPo235glro=;
-	b=YChWZiyCrsTVXV90QgJvNNBOvbWmNrcisjkDZE+iere73iZTsm7TJ2pTMqDpRu+8fQJuea
-	9r9LqP5y3v5OPpW1gjFd18lJNIgm9drxFwPLh7WE7VfhU7na6x9n48/PpnNnFFy0ONhQAJ
-	JydRwPt8pZUAtDKIWgUvPaEh3J4xwpk=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-51-puG-AytJPlqu3n4nFyTAxA-1; Mon, 12 Oct 2020 08:45:10 -0400
-X-MC-Unique: puG-AytJPlqu3n4nFyTAxA-1
-Received: by mail-wr1-f69.google.com with SMTP id x16so8849260wrg.7
-        for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2020 05:45:10 -0700 (PDT)
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=uEfJTmQm7IfbaNLnhhKiUk3mZKxHaYrO9aWEgNYf1LY=;
+	b=UkT5GRgFttURbsFo2rWy98QsdLC50MaBIDAzU5UWSFUhgBNTQldOvYSB9THd7uq+93GcS5
+	czDI0G+LNyv5f/pMHDFSmXdyaE+aJQnkejwqseA5HD/TCcd5HnLx4Boqw0vLyrOXK87naf
+	XfRFI8vg6bA4w+5pGzvN/eyqefgNc8I=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-32-wim6cHprMSa0X9dzGXdizw-1; Mon, 12 Oct 2020 08:45:22 -0400
+X-MC-Unique: wim6cHprMSa0X9dzGXdizw-1
+Received: by mail-wr1-f70.google.com with SMTP id t3so2761638wrq.2
+        for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2020 05:45:21 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=UtSObLJfNIzbJcrgKRU5Cu+zNLd9lEQsFGBvfOC7Lok=;
-        b=ihjbmfyF4AADUD1jmre+K6hMUPGDsvdq4zcOhn8pE42kiBRHIh9sDQDEMnn1HJGvyl
-         Z7uetkgNGw3OU0Q1jEW8FVHornjJkEs+oDgyQISl2UfH1I/FDxttnnz+rDgukRESiLWW
-         ijAxfek61N8A5KNO2GIf6uynh0Go4NwMrCIDLlR2gwQ4dHMWKG2gA87buvFJWeN3xUUD
-         6CEofdu9KwUQgS54KSNWPLurjK+f60RZeC3wkqvB6Wr7gxcfmiWYhq/16LbHqpFWYA1m
-         q2klXPoEfvcGMhGFn3sOaInFWqEBy5qv13S3xzyT+WJYHPYk6lk7zDuZM1C3moNTrw5/
-         wRpw==
-X-Gm-Message-State: AOAM530gePNyIgE+eTQ/deE+kk0p7MDmZzK3RtJc8oiY1okK46WM2Mbq
-	sYT8klMcVek+jMxjT9DhED8pN+WNP35BHQGPyoq2xVQYns4zCjAw+9xT9cP2/Je+w7oVr5moDpG
-	XRT4p0UAMBUE5lDR6EvnCBsRJK5k=
-X-Received: by 2002:a5d:46c1:: with SMTP id g1mr9137839wrs.101.1602506709326;
-        Mon, 12 Oct 2020 05:45:09 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJyz6hFiVJHdaU7cfa/kbxEMNRyQTLhhCcs5f5STC6wr7DnE8rXhJdscPh109XPd+XACdRYSYQ==
-X-Received: by 2002:a5d:46c1:: with SMTP id g1mr9137815wrs.101.1602506709130;
-        Mon, 12 Oct 2020 05:45:09 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=uEfJTmQm7IfbaNLnhhKiUk3mZKxHaYrO9aWEgNYf1LY=;
+        b=TMzkmyvMMihEIwhfSYFEXtWS/J4ZWNtK6jqW5V6qStU2kRx4miIw4KlXXeWsk/9j2x
+         pFGl/eYtxUaJb/5zkeLwLO3kiux3EQ8Zw3jsSIoHuDAWcQsteqdDltw3/hU8qbbR0Ix3
+         K/EZKpbngfgecccPhodAHYWgelyyA1Z9zcsFHNLKqZ9n4hlxIIGItJ1t6rRr+YEh+HOo
+         vYVg9nl8GnIcH1Gm1V46JoN8xstaRRAcm7mUAgAboblwwe7vI4LKxvYwITsimW9Gq61X
+         1dFzkmzNIpsioiWGZlTDIKXAGkKwJu3fpbolxVr740m5V4/ySZ81UKSHfGROPY2d6xTC
+         iaBg==
+X-Gm-Message-State: AOAM530yMK/z4j+/tYHqn+6pr5d4aeZO8m0BNk5HKN6qADSdlrNubrje
+	Tz44AvrrudjqqDRTBm/N32097TPdgZ3VUMpQF++rFBJQV/ztJ67C16Q/WE6VsXIMApu1XuFIEyL
+	DwDLgC/H1r8LdZit5BsUBjb2I8Zc=
+X-Received: by 2002:adf:8b85:: with SMTP id o5mr16319167wra.104.1602506720840;
+        Mon, 12 Oct 2020 05:45:20 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzUet7a3+icknkdXIUBYsqHO/fz4MbL6X5ByiZqEc6CjjMuhyc0L0IjJS+YtIXZM/ET90duwQ==
+X-Received: by 2002:adf:8b85:: with SMTP id o5mr16319151wra.104.1602506720677;
+        Mon, 12 Oct 2020 05:45:20 -0700 (PDT)
 Received: from localhost.localdomain (106.red-83-59-162.dynamicip.rima-tde.net. [83.59.162.106])
-        by smtp.gmail.com with ESMTPSA id d2sm14916054wrq.34.2020.10.12.05.45.07
+        by smtp.gmail.com with ESMTPSA id b5sm2564766wrs.97.2020.10.12.05.45.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 12 Oct 2020 05:45:08 -0700 (PDT)
+        Mon, 12 Oct 2020 05:45:20 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -133,44 +135,60 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
 	Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
 	Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
 	Paolo Bonzini <pbonzini@redhat.com>,
-	Huacai Chen <chenhc@lemote.com>,
-	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
-Subject: [PATCH 0/5] hw: Use PCI macros from 'hw/pci/pci.h'
-Date: Mon, 12 Oct 2020 14:45:01 +0200
-Message-Id: <20201012124506.3406909-1-philmd@redhat.com>
+	Huacai Chen <chenhc@lemote.com>
+Subject: [PATCH 2/5] hw/pci-host: Use the PCI_BUILD_BDF() macro from 'hw/pci/pci.h'
+Date: Mon, 12 Oct 2020 14:45:03 +0200
+Message-Id: <20201012124506.3406909-3-philmd@redhat.com>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20201012124506.3406909-1-philmd@redhat.com>
+References: <20201012124506.3406909-1-philmd@redhat.com>
 MIME-Version: 1.0
 Authentication-Results: relay.mimecast.com;
 	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=philmd@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Trivial patches using the generic PCI macros from "hw/pci/pci.h".=0D
-=0D
-Philippe Mathieu-Daud=C3=A9 (5):=0D
-  hw/pci-host/bonito: Make PCI_ADDR() macro more readable=0D
-  hw/pci-host: Use the PCI_BUILD_BDF() macro from 'hw/pci/pci.h'=0D
-  hw/pci-host/uninorth: Use the PCI_FUNC() macro from 'hw/pci/pci.h'=0D
-  hw: Use the PCI_SLOT() macro from 'hw/pci/pci.h'=0D
-  hw: Use the PCI_DEVFN() macro from 'hw/pci/pci.h'=0D
-=0D
- hw/arm/virt.c          | 3 ++-=0D
- hw/hppa/dino.c         | 2 +-=0D
- hw/i386/xen/xen-hvm.c  | 2 +-=0D
- hw/isa/piix3.c         | 2 +-=0D
- hw/mips/gt64xxx_pci.c  | 2 +-=0D
- hw/pci-host/bonito.c   | 5 ++---=0D
- hw/pci-host/pnv_phb4.c | 2 +-=0D
- hw/pci-host/ppce500.c  | 2 +-=0D
- hw/pci-host/uninorth.c | 8 +++-----=0D
- hw/ppc/ppc4xx_pci.c    | 2 +-=0D
- hw/sh4/sh_pci.c        | 2 +-=0D
- 11 files changed, 15 insertions(+), 17 deletions(-)=0D
-=0D
---=20=0D
-2.26.2=0D
-=0D
+From: Philippe Mathieu-Daudé <f4bug@amsat.org>
+
+We already have a generic PCI_BUILD_BDF() macro in "hw/pci/pci.h"
+to pack these values, use it.
+
+Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+---
+ hw/pci-host/bonito.c   | 3 +--
+ hw/pci-host/pnv_phb4.c | 2 +-
+ 2 files changed, 2 insertions(+), 3 deletions(-)
+
+diff --git a/hw/pci-host/bonito.c b/hw/pci-host/bonito.c
+index abb3ee86769..b05295639a6 100644
+--- a/hw/pci-host/bonito.c
++++ b/hw/pci-host/bonito.c
+@@ -196,8 +196,7 @@ FIELD(BONGENCFG, PCIQUEUE,      12, 1)
+ #define PCI_IDSEL_VIA686B          (1 << PCI_IDSEL_VIA686B_BIT)
+ 
+ #define PCI_ADDR(busno , devno , funno , regno)  \
+-    ((((busno) << 8) & 0xff00) + (((devno) << 3) & 0xf8) + \
+-    (((funno) & 0x7) << 8) + (regno))
++    ((PCI_BUILD_BDF(busno, PCI_DEVFN(devno , funno)) << 8) + (regno))
+ 
+ typedef struct BonitoState BonitoState;
+ 
+diff --git a/hw/pci-host/pnv_phb4.c b/hw/pci-host/pnv_phb4.c
+index 03daf40a237..6328e985f81 100644
+--- a/hw/pci-host/pnv_phb4.c
++++ b/hw/pci-host/pnv_phb4.c
+@@ -889,7 +889,7 @@ static bool pnv_phb4_resolve_pe(PnvPhb4DMASpace *ds)
+     /* Read RTE */
+     bus_num = pci_bus_num(ds->bus);
+     addr = rtt & PHB_RTT_BASE_ADDRESS_MASK;
+-    addr += 2 * ((bus_num << 8) | ds->devfn);
++    addr += 2 * PCI_BUILD_BDF(bus_num, ds->devfn);
+     if (dma_memory_read(&address_space_memory, addr, &rte, sizeof(rte))) {
+         phb_error(ds->phb, "Failed to read RTT entry at 0x%"PRIx64, addr);
+         /* Set error bits ? fence ? ... */
+-- 
+2.26.2
 
 
