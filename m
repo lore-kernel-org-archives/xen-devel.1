@@ -4,26 +4,26 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-13.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3A6EDC43457
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2020 19:03:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8DB9BC433DF
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2020 19:03:45 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E0182221FC
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2020 19:03:20 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 46B3021D7F
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2020 19:03:45 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="zHzruLaI"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E0182221FC
+	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="gqnNWgll"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 46B3021D7F
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.5999.15679 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.6000.15691 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kS36E-0000D9-E5; Mon, 12 Oct 2020 19:03:10 +0000
+	id 1kS36d-0000SI-ND; Mon, 12 Oct 2020 19:03:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 5999.15679; Mon, 12 Oct 2020 19:03:10 +0000
+Received: by outflank-mailman (output) from mailman id 6000.15691; Mon, 12 Oct 2020 19:03:35 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,47 +38,47 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kS36E-0000D2-Au; Mon, 12 Oct 2020 19:03:10 +0000
-Received: by outflank-mailman (input) for mailman id 5999;
- Mon, 12 Oct 2020 19:03:09 +0000
+	id 1kS36d-0000SA-K2; Mon, 12 Oct 2020 19:03:35 +0000
+Received: by outflank-mailman (input) for mailman id 6000;
+ Mon, 12 Oct 2020 19:03:34 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=2065=DT=kernel.org=sashal@srs-us1.protection.inumbo.net>)
- id 1kS36D-0000Cx-4t
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2020 19:03:09 +0000
+ id 1kS36b-0000Ry-Vo
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2020 19:03:34 +0000
 Received: from mail.kernel.org (unknown [198.145.29.99])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 8c784db3-55b0-49e8-86ac-de4b27c36edc;
- Mon, 12 Oct 2020 19:03:08 +0000 (UTC)
+ id b2501ca2-c80b-4412-9d83-b2a9bf0bd5a8;
+ Mon, 12 Oct 2020 19:03:33 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 36220214DB;
- Mon, 12 Oct 2020 19:03:06 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 7670D21D6C;
+ Mon, 12 Oct 2020 19:03:31 +0000 (UTC)
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=2065=DT=kernel.org=sashal@srs-us1.protection.inumbo.net>)
-	id 1kS36D-0000Cx-4t
-	for xen-devel@lists.xenproject.org; Mon, 12 Oct 2020 19:03:09 +0000
-X-Inumbo-ID: 8c784db3-55b0-49e8-86ac-de4b27c36edc
+	id 1kS36b-0000Ry-Vo
+	for xen-devel@lists.xenproject.org; Mon, 12 Oct 2020 19:03:34 +0000
+X-Inumbo-ID: b2501ca2-c80b-4412-9d83-b2a9bf0bd5a8
 Received: from mail.kernel.org (unknown [198.145.29.99])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 8c784db3-55b0-49e8-86ac-de4b27c36edc;
-	Mon, 12 Oct 2020 19:03:08 +0000 (UTC)
+	id b2501ca2-c80b-4412-9d83-b2a9bf0bd5a8;
+	Mon, 12 Oct 2020 19:03:33 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net [73.47.72.35])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id 36220214DB;
-	Mon, 12 Oct 2020 19:03:06 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPSA id 7670D21D6C;
+	Mon, 12 Oct 2020 19:03:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1602529387;
-	bh=Mk2zB7GUesBDYX/zhV/qiZ/j3XQWk09LyphfX7ZQ4G0=;
+	s=default; t=1602529412;
+	bh=nNU22ATOyX0rO71abqxBczKhJEmToH6ypOzPEkNK30I=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=zHzruLaIlY8n78tf4+6ZSR0ph95e7glUVoCh/WJ/hSu2BxXmN/eo7rcFSRsZGW7t5
-	 lLTk1V1Jvr4NlBP7ZKyJo2p8bb/rsQWz5xFPW9GRb2H2JUpTtTB7iHAK0/zQ+9CcLQ
-	 nwfgeGzGxO5S9NhgUGtQV09jsFHY8EkJBsK9sBbo=
+	b=gqnNWglldvu2yfFXX1+YKvL60Ip8Zyp0eBCmHvFggDgVYW2DBPJPzWZgEmGDoEAJ/
+	 vPP5RXk3N5LQaTBNZReq5fvyjnRpIrilN3QhqbYIs9/1yYJtv424X2BkZv5LCv+g46
+	 IOcVJ6eBZnJxHPQ/7fm+GlChi1zQmVJ/bvYjGEss=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
@@ -88,12 +88,12 @@ Cc: Masami Hiramatsu <mhiramat@kernel.org>,
 	Sasha Levin <sashal@kernel.org>,
 	xen-devel@lists.xenproject.org,
 	linux-arm-kernel@lists.infradead.org
-Subject: [PATCH AUTOSEL 5.8 21/24] arm/arm64: xen: Fix to convert percpu address to gfn correctly
-Date: Mon, 12 Oct 2020 15:02:36 -0400
-Message-Id: <20201012190239.3279198-21-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 5.4 14/15] arm/arm64: xen: Fix to convert percpu address to gfn correctly
+Date: Mon, 12 Oct 2020 15:03:11 -0400
+Message-Id: <20201012190313.3279397-14-sashal@kernel.org>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20201012190239.3279198-1-sashal@kernel.org>
-References: <20201012190239.3279198-1-sashal@kernel.org>
+In-Reply-To: <20201012190313.3279397-1-sashal@kernel.org>
+References: <20201012190313.3279397-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -213,7 +213,7 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  2 files changed, 4 insertions(+), 1 deletion(-)
 
 diff --git a/arch/arm/xen/enlighten.c b/arch/arm/xen/enlighten.c
-index e93145d72c26e..a6ab3689b2f4a 100644
+index dd6804a64f1a0..a019490c4ec3e 100644
 --- a/arch/arm/xen/enlighten.c
 +++ b/arch/arm/xen/enlighten.c
 @@ -150,7 +150,7 @@ static int xen_starting_cpu(unsigned int cpu)
@@ -226,7 +226,7 @@ index e93145d72c26e..a6ab3689b2f4a 100644
  
  	err = HYPERVISOR_vcpu_op(VCPUOP_register_vcpu_info, xen_vcpu_nr(cpu),
 diff --git a/include/xen/arm/page.h b/include/xen/arm/page.h
-index d7f6af50e200b..0bd3967f6df1e 100644
+index f77dcbcba5a60..27d08d4a853c2 100644
 --- a/include/xen/arm/page.h
 +++ b/include/xen/arm/page.h
 @@ -79,6 +79,9 @@ static inline unsigned long bfn_to_pfn(unsigned long bfn)
