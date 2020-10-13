@@ -2,28 +2,28 @@ Return-Path: <SRS0=QJhb=DU=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-8.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+	NICE_REPLY_A,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AE3D5C433E7
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2020 14:02:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9E24EC433DF
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2020 14:04:24 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 24C5624790
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2020 14:02:40 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id F3E752479D
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2020 14:04:23 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="RMecgYoy"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 24C5624790
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="hVkyavPP"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F3E752479D
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.6226.16533 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.6227.16545 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kSKsi-0007EY-Pj; Tue, 13 Oct 2020 14:02:24 +0000
+	id 1kSKuI-0007O8-4Q; Tue, 13 Oct 2020 14:04:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 6226.16533; Tue, 13 Oct 2020 14:02:24 +0000
+Received: by outflank-mailman (output) from mailman id 6227.16545; Tue, 13 Oct 2020 14:04:02 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,83 +38,76 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kSKsi-0007ER-Mo; Tue, 13 Oct 2020 14:02:24 +0000
-Received: by outflank-mailman (input) for mailman id 6226;
- Tue, 13 Oct 2020 14:02:23 +0000
+	id 1kSKuI-0007O1-1a; Tue, 13 Oct 2020 14:04:02 +0000
+Received: by outflank-mailman (input) for mailman id 6227;
+ Tue, 13 Oct 2020 14:04:01 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=VY8U=DU=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kSKsh-0007EM-Ll
- for xen-devel@lists.xenproject.org; Tue, 13 Oct 2020 14:02:23 +0000
+ id 1kSKuH-0007Nw-A3
+ for xen-devel@lists.xenproject.org; Tue, 13 Oct 2020 14:04:01 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 970a5cd2-25e3-4fbc-865c-fa55bbafd943;
- Tue, 13 Oct 2020 14:02:23 +0000 (UTC)
+ id 65cb9423-5efa-4b64-bc24-df7fb6ed62d0;
+ Tue, 13 Oct 2020 14:04:00 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 2D49AAC82;
- Tue, 13 Oct 2020 14:02:22 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id BB98DAC2F;
+ Tue, 13 Oct 2020 14:03:59 +0000 (UTC)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=VY8U=DU=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
-	id 1kSKsh-0007EM-Ll
-	for xen-devel@lists.xenproject.org; Tue, 13 Oct 2020 14:02:23 +0000
-X-Inumbo-ID: 970a5cd2-25e3-4fbc-865c-fa55bbafd943
+	id 1kSKuH-0007Nw-A3
+	for xen-devel@lists.xenproject.org; Tue, 13 Oct 2020 14:04:01 +0000
+X-Inumbo-ID: 65cb9423-5efa-4b64-bc24-df7fb6ed62d0
 Received: from mx2.suse.de (unknown [195.135.220.15])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 970a5cd2-25e3-4fbc-865c-fa55bbafd943;
-	Tue, 13 Oct 2020 14:02:23 +0000 (UTC)
+	id 65cb9423-5efa-4b64-bc24-df7fb6ed62d0;
+	Tue, 13 Oct 2020 14:04:00 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1602597742;
+	t=1602597839;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=ZTMb8P3RFOYYRXGyxDpKdMUHUSlVSwvG1R2W7s/1H4g=;
-	b=RMecgYoymqF44kWIXrvOlavRoB4icldnKtXAeGWHvennoW1TDVSM+L6lGEz2YJkj6Qo0Pd
-	tuNbvAlJe2I65tH2iv71wFkvWLgExWNUra6C8S4MxiIRETusrFgqALUqLog2sUznFrBAsA
-	Y+0Nybry2P7cTocR3j19SgPiR3A63Nc=
+	bh=xGGF/KIIYFeZDMZNq0z7ds2K46CBuGaxaLzBLu3vtJQ=;
+	b=hVkyavPPQQkIjnvenVxmRsDRObNJciGiTq0PqPoLA330zMJFlpYwMs4lIgZIHecAYKREXi
+	l9mudO1CYfQk2Sa/YcYe9R4NTTJO7P2SBHcD09IgrPVEmdtVRZzI5AEhp62n5fvQT475Yb
+	IaZ8HUdcpC4bJLu7qK5+EFDo5CEWL30=
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 2D49AAC82;
-	Tue, 13 Oct 2020 14:02:22 +0000 (UTC)
-Subject: Re: [PATCH v2 2/2] xen/evtchn: rework per event channel lock
-To: Juergen Gross <jgross@suse.com>
+	by mx2.suse.de (Postfix) with ESMTP id BB98DAC2F;
+	Tue, 13 Oct 2020 14:03:59 +0000 (UTC)
+Subject: Re: [PATCH] x86/msr: handle IA32_THERM_STATUS
+To: Roger Pau Monne <roger.pau@citrix.com>
 Cc: xen-devel@lists.xenproject.org, Andrew Cooper
- <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
- <roger.pau@citrix.com>, Wei Liu <wl@xen.org>,
- George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
- Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>
-References: <20201012092740.1617-1-jgross@suse.com>
- <20201012092740.1617-3-jgross@suse.com>
+ <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>
+References: <20201007102032.98565-1-roger.pau@citrix.com>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <3a15ba70-c6b1-dd07-12fe-f8d7a1e6c4d9@suse.com>
-Date: Tue, 13 Oct 2020 16:02:19 +0200
+Message-ID: <7d2b0176-f976-5f39-903b-89c5d001fe3d@suse.com>
+Date: Tue, 13 Oct 2020 16:03:56 +0200
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.12.0
 MIME-Version: 1.0
-In-Reply-To: <20201012092740.1617-3-jgross@suse.com>
+In-Reply-To: <20201007102032.98565-1-roger.pau@citrix.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 12.10.2020 11:27, Juergen Gross wrote:
-> Currently the lock for a single event channel needs to be taken with
-> interrupts off, which causes deadlocks in some cases.
+On 07.10.2020 12:20, Roger Pau Monne wrote:
+> Windows 8 will attempt to read MSR_IA32_THERM_STATUS and panic if a
+> #GP fault is injected as a result:
 > 
-> Rework the per event channel lock to be non-blocking for the case of
-> sending an event and removing the need for disabling interrupts for
-> taking the lock.
+> vmx.c:3035:d8v0 RDMSR 0x0000019c unimplemented
+> d8v0 VIRIDIAN CRASH: 3b c0000096 fffff8061de31651 fffff4088a613720 0
 > 
-> The lock is needed for avoiding races between sending an event or
-> querying the channel's state against removal of the event channel.
+> So handle the MSR and return 0 instead.
 > 
-> Use a locking scheme similar to a rwlock, but with some modifications:
+> Note that this is done on the generic MSR handler, and PV guest will
+> also get 0 back when trying to read the MSR. There doesn't seem to be
+> much value in handling the MSR for HVM guests only.
 > 
-> - sending an event or querying the event channel's state uses an
->   operation similar to read_trylock(), in case of not obtaining the
->   lock the sending is omitted or a default state is returned
+> Fixes: 84e848fd7a1 ('x86/hvm: disallow access to unknown MSRs')
+> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 
-And how come omitting the send or returning default state is valid?
-
-Jan
+Acked-by: Jan Beulich <jbeulich@suse.com>
 
