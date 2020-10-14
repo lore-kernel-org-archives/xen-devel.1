@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-8.4 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	MAILING_LIST_MULTI,NICE_REPLY_A,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C30F5C433E7
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2020 07:24:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 607A6C43457
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2020 07:27:14 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3D54620878
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2020 07:24:25 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id D481020878
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2020 07:27:13 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="Rvmd0/EA"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3D54620878
+	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="D7M/h1F7"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D481020878
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.6458.17253 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.6462.17269 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kSb8k-0002Bj-3s; Wed, 14 Oct 2020 07:24:02 +0000
+	id 1kSbBe-0002LX-Kt; Wed, 14 Oct 2020 07:27:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 6458.17253; Wed, 14 Oct 2020 07:24:02 +0000
+Received: by outflank-mailman (output) from mailman id 6462.17269; Wed, 14 Oct 2020 07:27:02 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,74 +38,81 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kSb8k-0002Bc-0y; Wed, 14 Oct 2020 07:24:02 +0000
-Received: by outflank-mailman (input) for mailman id 6458;
- Wed, 14 Oct 2020 07:24:01 +0000
+	id 1kSbBe-0002LQ-He; Wed, 14 Oct 2020 07:27:02 +0000
+Received: by outflank-mailman (input) for mailman id 6462;
+ Wed, 14 Oct 2020 07:27:01 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=aNf1=DV=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1kSb8i-0002BX-TS
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2020 07:24:01 +0000
+ id 1kSbBd-0002LL-FY
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2020 07:27:01 +0000
 Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id ee3b042a-6037-40f7-991b-2b49f9c04d0c;
- Wed, 14 Oct 2020 07:23:59 +0000 (UTC)
+ id c922892e-4ce5-44bc-a104-776455766291;
+ Wed, 14 Oct 2020 07:27:00 +0000 (UTC)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=aNf1=DV=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
-	id 1kSb8i-0002BX-TS
-	for xen-devel@lists.xenproject.org; Wed, 14 Oct 2020 07:24:01 +0000
-X-Inumbo-ID: ee3b042a-6037-40f7-991b-2b49f9c04d0c
+	id 1kSbBd-0002LL-FY
+	for xen-devel@lists.xenproject.org; Wed, 14 Oct 2020 07:27:01 +0000
+X-Inumbo-ID: c922892e-4ce5-44bc-a104-776455766291
 Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id ee3b042a-6037-40f7-991b-2b49f9c04d0c;
-	Wed, 14 Oct 2020 07:23:59 +0000 (UTC)
+	id c922892e-4ce5-44bc-a104-776455766291;
+	Wed, 14 Oct 2020 07:27:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1602660239;
+  d=citrix.com; s=securemail; t=1602660420;
   h=subject:to:cc:references:from:message-id:date:
    mime-version:in-reply-to:content-transfer-encoding;
-  bh=pNqNcRkuwbTFB10l6Qhk3A06eyWK8JbrjaTDj3AQDdg=;
-  b=Rvmd0/EABjO5im4S3k0nrsEhU9DRqqd2mFy0OHVRtwyjvT4LEUVCmWAB
-   HXCoZlhiPFOwgJKC3t29nvAcHPqWCni2BdkKbZmLcT2547TeJpHkpL2s0
-   SjtH74fEIMeSPiPo2xbceiYicbD7vQOxm/fo/QOx+xeefAb9cI6n9dLlH
-   0=;
+  bh=IY90oTO/XQ2Xn0kKiPXT1+zqd4KPsoyyBd43FnKJ+Kc=;
+  b=D7M/h1F7RgzYZB+cCCyEXriIHDuZbDKap8MykgKAC70etlcju3IkEp/r
+   FqI0MCbgKK5X5S9XzhbJe7GylkvPiLxJKbbyMREQ0BQNy8OvQ3swuP6eA
+   NQ8pPPqMvtUUtSHkGlc16HTI5bbOVdrN78GQxEKQEgf0KcCzNgUZ2DxBb
+   4=;
 Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: CRjuGkHC4wz7MnVSM7ARhAaC3WQ8hKET1hs1dFUZz6GhXbxnmpbznyOPUarAQp4U2UnuNu0yrg
- 4ZWTFYcS5QntHpgnDkw0ury+gfXH+1NX6F1YRNcWQt+VaVZJAX6rfB865gMJ2d2XKQRZ4lyHfM
- Yow5FXcv52Hb7wn1FAyRwdmH6UG4X1U5V2YALIPNuWIHdM/8ZlhWVVXUU7CyUlw36a6chiiOV3
- 5xD6CclW1yFyMZDXRv3eDZ7WnDmBXSt9reSYCaH2P4VE8YJyin24m9llzUvSbf3Cp9OZ2gaknb
- IYs=
+IronPort-SDR: p/uXqkSUDTUMmxjK3WMwSIhyUmptY2jWQ5yFTnoHv9h2/JDBmP4ZPkj+/qscwjA5eS+Jep+/vQ
+ 05zdHIL4GxVQyfRvUgMUkN1UkQTa+I7moq/R607wUuBPNz/f5ZhcztgvHe2gOniwYLgs/z2Fb2
+ ETR8UmbN3kOpo+r1lm6HQTkTFQxs8KCvEI0yWJgjIcc2fwq/+uaaVv0evymiwIqSBOClEdKKCa
+ Ewwl/gzhWD8IRJIU2ZqxBXcv9nVeJHh+qd75Ocma3FIKCiIHFBHR0/L5IXEhZcQtDalPuUWBR1
+ lDY=
 X-SBRS: 2.5
-X-MesageID: 29023393
+X-MesageID: 29023519
 X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
 X-IronPort-AV: E=Sophos;i="5.77,374,1596513600"; 
-   d="scan'208";a="29023393"
-Subject: Re: [PATCH] drop xen/hash.h
+   d="scan'208";a="29023519"
+Subject: Re: [PATCH] kexec: some #include adjustments
 To: Jan Beulich <jbeulich@suse.com>, "xen-devel@lists.xenproject.org"
 	<xen-devel@lists.xenproject.org>
-CC: George Dunlap <George.Dunlap@eu.citrix.com>, Ian Jackson
-	<iwj@xenproject.org>, Julien Grall <julien@xen.org>, Wei Liu <wl@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-References: <c398362b-6a09-a67f-50a9-b43b73fbd265@suse.com>
+CC: Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
+	<roger.pau@citrix.com>
+References: <c786bd7e-960a-6496-ec9a-4e04a771b80a@suse.com>
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-Message-ID: <62bdf46f-e60f-d0e4-afc0-5955dc7d073e@citrix.com>
-Date: Wed, 14 Oct 2020 08:23:41 +0100
+Message-ID: <f00f10d5-96bd-d3f1-0800-a2415233265f@citrix.com>
+Date: Wed, 14 Oct 2020 08:26:46 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <c398362b-6a09-a67f-50a9-b43b73fbd265@suse.com>
+In-Reply-To: <c786bd7e-960a-6496-ec9a-4e04a771b80a@suse.com>
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 Content-Language: en-GB
-X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
+X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
  FTLPEX02CL05.citrite.net (10.13.108.178)
 
-On 14/10/2020 08:04, Jan Beulich wrote:
-> It has no users and hasn't been touched in 10 years.
+On 14/10/2020 08:05, Jan Beulich wrote:
+> In the context of working on x86's elf_core_save_regs() I noticed there
+> were far more source files getting rebuilt than I would have expected.
+> While the main offender looks to have been fixmap.h including kexec.h,
+> also drop use of elfcore.h from kexec.h.
+>
+> While adjusting machine_kexec.c also replace use of guest_access.h by
+> domain_page.h.
 >
 > Signed-off-by: Jan Beulich <jbeulich@suse.com>
+
+Perhaps best not to ask why it was like that...
 
 Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
