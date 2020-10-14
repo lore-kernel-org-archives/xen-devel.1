@@ -2,28 +2,26 @@ Return-Path: <SRS0=XJfI=DV=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AEAFFC433E7
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2020 10:43:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D2828C433E7
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2020 10:48:02 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 303DD2173E
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2020 10:43:10 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="mDwuiKBu"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 303DD2173E
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 523BD20878
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2020 10:48:02 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 523BD20878
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.6527.17427 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.6531.17439 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kSeFH-00049v-55; Wed, 14 Oct 2020 10:42:59 +0000
+	id 1kSeJl-0004Oz-NW; Wed, 14 Oct 2020 10:47:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 6527.17427; Wed, 14 Oct 2020 10:42:59 +0000
+Received: by outflank-mailman (output) from mailman id 6531.17439; Wed, 14 Oct 2020 10:47:37 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,114 +36,96 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kSeFH-00049n-1Z; Wed, 14 Oct 2020 10:42:59 +0000
-Received: by outflank-mailman (input) for mailman id 6527;
- Wed, 14 Oct 2020 10:42:57 +0000
+	id 1kSeJl-0004Os-K5; Wed, 14 Oct 2020 10:47:37 +0000
+Received: by outflank-mailman (input) for mailman id 6531;
+ Wed, 14 Oct 2020 10:47:36 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=VoTD=DV=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kSeFF-00048h-IK
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2020 10:42:57 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 9f6a0da1-2f6b-4cdf-87e6-5ab004594f8c;
- Wed, 14 Oct 2020 10:42:56 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 1E6C2ACDB;
- Wed, 14 Oct 2020 10:42:56 +0000 (UTC)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=JG+m=DV=arm.com=bertrand.marquis@srs-us1.protection.inumbo.net>)
+ id 1kSeJk-0004Ok-9H
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2020 10:47:36 +0000
+Received: from foss.arm.com (unknown [217.140.110.172])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id 8a24443c-6692-483a-9be1-8d4dd2dde916;
+ Wed, 14 Oct 2020 10:47:35 +0000 (UTC)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6164E1FB;
+ Wed, 14 Oct 2020 03:47:35 -0700 (PDT)
+Received: from e109506-lin.cambridge.arm.com (e109506-lin.cambridge.arm.com
+ [10.1.198.23])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C73133F66B;
+ Wed, 14 Oct 2020 03:47:34 -0700 (PDT)
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=VoTD=DV=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
-	id 1kSeFF-00048h-IK
-	for xen-devel@lists.xenproject.org; Wed, 14 Oct 2020 10:42:57 +0000
-X-Inumbo-ID: 9f6a0da1-2f6b-4cdf-87e6-5ab004594f8c
-Received: from mx2.suse.de (unknown [195.135.220.15])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 9f6a0da1-2f6b-4cdf-87e6-5ab004594f8c;
-	Wed, 14 Oct 2020 10:42:56 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1602672176;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=0GKitqh2GXUK2H77YhdL4MLcrHgQv70vW5uQkhiCEro=;
-	b=mDwuiKBum9y3/EzdWK472TyufrXaCbvtJg4bp73d2uny/EjE9UEFZ0CxxXWu7FhUI8HlBV
-	fI+JM8hs8OF1Crb2RSwL/9CEQ1NM3MsSts5oZjZWAo8Cvg+/sBy9s3phdZeB91pR9/3hHw
-	mM81Bvdr2n3Zlr42Xx2gmrNTW0sAocQ=
-Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 1E6C2ACDB;
-	Wed, 14 Oct 2020 10:42:56 +0000 (UTC)
-Subject: [PATCH 2/2] EFI: further "need_to_free" adjustments
-From: Jan Beulich <jbeulich@suse.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <George.Dunlap@eu.citrix.com>, Ian Jackson
- <iwj@xenproject.org>, Julien Grall <julien@xen.org>, Wei Liu <wl@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Trammell Hudson <hudson@trmm.net>
-References: <dd26ba44-66e4-8870-3359-efe93ab28f64@suse.com>
-Message-ID: <a0e76e78-1f66-9825-b35b-86caed7da961@suse.com>
-Date: Wed, 14 Oct 2020 12:42:55 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.1
-MIME-Version: 1.0
-In-Reply-To: <dd26ba44-66e4-8870-3359-efe93ab28f64@suse.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+	(envelope-from <SRS0=JG+m=DV=arm.com=bertrand.marquis@srs-us1.protection.inumbo.net>)
+	id 1kSeJk-0004Ok-9H
+	for xen-devel@lists.xenproject.org; Wed, 14 Oct 2020 10:47:36 +0000
+X-Inumbo-ID: 8a24443c-6692-483a-9be1-8d4dd2dde916
+Received: from foss.arm.com (unknown [217.140.110.172])
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+	id 8a24443c-6692-483a-9be1-8d4dd2dde916;
+	Wed, 14 Oct 2020 10:47:35 +0000 (UTC)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6164E1FB;
+	Wed, 14 Oct 2020 03:47:35 -0700 (PDT)
+Received: from e109506-lin.cambridge.arm.com (e109506-lin.cambridge.arm.com [10.1.198.23])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C73133F66B;
+	Wed, 14 Oct 2020 03:47:34 -0700 (PDT)
+From: Bertrand Marquis <bertrand.marquis@arm.com>
+To: xen-devel@lists.xenproject.org
+Cc: Ian Jackson <iwj@xenproject.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH] tools/xenmpd: Fix gcc10 snprintf warning
+Date: Wed, 14 Oct 2020 11:47:23 +0100
+Message-Id: <0ade4264c537819c3dd45179fcea2723df66b045.1602672245.git.bertrand.marquis@arm.com>
+X-Mailer: git-send-email 2.17.1
 
-When processing "chain" directives, the previously loaded config file
-gets freed. This needs to be recorded accordingly such that no error
-path would try to free the same block of memory a 2nd time.
+Add a check for snprintf return code and ignore the entry if we get an
+error. This should in fact never happen and is more a trick to make gcc
+happy and prevent compilation errors.
 
-Furthermore, neither .addr nor .size being zero has any meaning towards
-the need to free an allocated chunk anymore. Drop (from read_file()) and
-replace (in Arm's efi_arch_use_config_file(), to sensibly retain the
-comment) respective assignments.
+This is solving the gcc warning:
+xenpmd.c:92:37: error: '%s' directive output may be truncated writing
+between 4 and 2147483645 bytes into a region of size 271
+[-Werror=format-truncation=]
 
-Fixes: 04be2c3a0678 ("efi/boot.c: add file.need_to_free")
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
+Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
+---
+ tools/xenpmd/xenpmd.c | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
---- a/xen/arch/arm/efi/efi-boot.h
-+++ b/xen/arch/arm/efi/efi-boot.h
-@@ -591,7 +591,7 @@ static bool __init efi_arch_use_config_f
+diff --git a/tools/xenpmd/xenpmd.c b/tools/xenpmd/xenpmd.c
+index 35fd1c931a..12b82cf43e 100644
+--- a/tools/xenpmd/xenpmd.c
++++ b/tools/xenpmd/xenpmd.c
+@@ -102,6 +102,7 @@ FILE *get_next_battery_file(DIR *battery_dir,
+     FILE *file = 0;
+     struct dirent *dir_entries;
+     char file_name[284];
++    int ret;
+     
+     do 
+     {
+@@ -111,11 +112,15 @@ FILE *get_next_battery_file(DIR *battery_dir,
+         if ( strlen(dir_entries->d_name) < 4 )
+             continue;
+         if ( battery_info_type == BIF ) 
+-            snprintf(file_name, sizeof(file_name), BATTERY_INFO_FILE_PATH,
++            ret = snprintf(file_name, sizeof(file_name), BATTERY_INFO_FILE_PATH,
+                      dir_entries->d_name);
+         else 
+-            snprintf(file_name, sizeof(file_name), BATTERY_STATE_FILE_PATH,
++            ret = snprintf(file_name, sizeof(file_name), BATTERY_STATE_FILE_PATH,
+                      dir_entries->d_name);
++        /* This should not happen but is needed to pass gcc checks */
++        if (ret < 0)
++            continue;
++        file_name[sizeof(file_name) - 1] = '\0';
+         file = fopen(file_name, "r");
+     } while ( !file );
  
-     fdt = lookup_fdt_config_table(SystemTable);
-     dtbfile.ptr = fdt;
--    dtbfile.size = 0;  /* Config table memory can't be freed, so set size to 0 */
-+    dtbfile.need_to_free = false; /* Config table memory can't be freed. */
-     if ( !fdt || fdt_node_offset_by_compatible(fdt, 0, "multiboot,module") < 0 )
-     {
-         /*
---- a/xen/common/efi/boot.c
-+++ b/xen/common/efi/boot.c
-@@ -601,10 +601,7 @@ static bool __init read_file(EFI_FILE_HA
-                                     PFN_UP(size), &file->addr);
-     }
-     if ( EFI_ERROR(ret) )
--    {
--        file->addr = 0;
-         what = what ?: L"Allocation";
--    }
-     else
-     {
-         file->need_to_free = true;
-@@ -1271,8 +1268,11 @@ efi_start(EFI_HANDLE ImageHandle, EFI_SY
-             name.s = get_value(&cfg, "global", "chain");
-             if ( !name.s )
-                 break;
--            efi_bs->FreePages(cfg.addr, PFN_UP(cfg.size));
--            cfg.addr = 0;
-+            if ( cfg.need_to_free )
-+            {
-+                efi_bs->FreePages(cfg.addr, PFN_UP(cfg.size));
-+                cfg.need_to_free = false;
-+            }
-             if ( !read_file(dir_handle, s2w(&name), &cfg, NULL) )
-             {
-                 PrintStr(L"Chained configuration file '");
+-- 
+2.17.1
 
 
