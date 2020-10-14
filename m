@@ -2,28 +2,28 @@ Return-Path: <SRS0=XJfI=DV=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.4 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 700F4C433DF
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2020 19:31:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 52717C433DF
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2020 19:37:33 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DC9BC22246
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2020 19:31:37 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id C0718214D8
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2020 19:37:32 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="rNxdRPuk"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DC9BC22246
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="B1WKLAp+"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C0718214D8
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.6984.18277 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.6987.18289 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kSmUi-0006ly-4h; Wed, 14 Oct 2020 19:31:28 +0000
+	id 1kSmaL-0006zV-R6; Wed, 14 Oct 2020 19:37:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 6984.18277; Wed, 14 Oct 2020 19:31:28 +0000
+Received: by outflank-mailman (output) from mailman id 6987.18289; Wed, 14 Oct 2020 19:37:17 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,90 +38,126 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kSmUi-0006lr-1j; Wed, 14 Oct 2020 19:31:28 +0000
-Received: by outflank-mailman (input) for mailman id 6984;
- Wed, 14 Oct 2020 19:31:26 +0000
+	id 1kSmaL-0006zO-MC; Wed, 14 Oct 2020 19:37:17 +0000
+Received: by outflank-mailman (input) for mailman id 6987;
+ Wed, 14 Oct 2020 19:37:16 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=x6PD=DV=gmail.com=jandryuk@srs-us1.protection.inumbo.net>)
- id 1kSmUg-0006lk-EV
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2020 19:31:26 +0000
-Received: from mail-lj1-x243.google.com (unknown [2a00:1450:4864:20::243])
+ <SRS0=aNf1=DV=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1kSmaK-0006zJ-9M
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2020 19:37:16 +0000
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 749f7d32-3890-4b02-a482-08344a67e536;
- Wed, 14 Oct 2020 19:31:25 +0000 (UTC)
-Received: by mail-lj1-x243.google.com with SMTP id f21so643647ljh.7
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2020 12:31:25 -0700 (PDT)
+ id c630df3c-658a-4627-971f-6a46212fdd1c;
+ Wed, 14 Oct 2020 19:37:14 +0000 (UTC)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=x6PD=DV=gmail.com=jandryuk@srs-us1.protection.inumbo.net>)
-	id 1kSmUg-0006lk-EV
-	for xen-devel@lists.xenproject.org; Wed, 14 Oct 2020 19:31:26 +0000
-X-Inumbo-ID: 749f7d32-3890-4b02-a482-08344a67e536
-Received: from mail-lj1-x243.google.com (unknown [2a00:1450:4864:20::243])
+	(envelope-from <SRS0=aNf1=DV=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+	id 1kSmaK-0006zJ-9M
+	for xen-devel@lists.xenproject.org; Wed, 14 Oct 2020 19:37:16 +0000
+X-Inumbo-ID: c630df3c-658a-4627-971f-6a46212fdd1c
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 749f7d32-3890-4b02-a482-08344a67e536;
-	Wed, 14 Oct 2020 19:31:25 +0000 (UTC)
-Received: by mail-lj1-x243.google.com with SMTP id f21so643647ljh.7
-        for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2020 12:31:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=/sQlbZjIbCkTXYZuFjyqLr22q7RrXyITM6aG6gZEwQM=;
-        b=rNxdRPukI2aQeQhs80XN7ERXfk63ATqoDHdvm4y6fcPdYqooy40XCDG+mjGJ1quewV
-         z7av/j5tnGBmHnG6b58/4GDRUNcAgs5ydoPZ9E65HRy+GSHu7NynekJ6n0UfxHO64cPP
-         vpSR9bJAwVJwNKyx2CSNOfRFVfGK0NTYhHySkYSscCpeUkzlpa5aCXDOL8kPOSr3pCsv
-         nuZdBCNCy3LfrfJsxa8DHTQOUKl5pgQL09i0xx1efDyg+ZdQ2v+CruYimYf1CV0V9A1J
-         rCBtMBXat2nRuhcVRshcQQtmEWHiUqRPBZ4uyw/Cr/yv546I2OcqKsI36wi+SQw98Xov
-         Y5OA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=/sQlbZjIbCkTXYZuFjyqLr22q7RrXyITM6aG6gZEwQM=;
-        b=L5++wcSnv+VYE6GtKWALA+sIkfQgbovshEeJSUMfkqYnGvlf0wPT55haOfOvYxnsdx
-         SOO6FSiykdhrNfdELeezFxHZ2zc5KCCdsQv/XQcnFIrsheIXuaIMdN8q15u8kO57s//c
-         nUgahJG588YcXrtcsFDeoI6ndzLUxnbUn35AkV31Dd3Ytn2lPpHyU/a6bnoQIM3dvSTo
-         7GO/RuBii/QUK+dJ12XJEIbzZsPHToeHk0rRflcVbJtfcbVG5a2XbNjkmX4jhPqVbT7O
-         U5fIUEAAw/DH3MMkEmxld3T7Kq85iTe3SJ8awfW3M/bpraA9/+uIjhgmfp1BeYbQsrKB
-         8FmA==
-X-Gm-Message-State: AOAM532wkzkwYlaEtw9Jro+FChyqP/LSOH6tq5bTCdarWffKpLEwtgr5
-	e0+iB6HCm3b38CFwyiVGlJaukHmzKwgCoIEh4ns=
-X-Google-Smtp-Source: ABdhPJzxtIT/fRFaxw4POtgjFD2lu3ZKUpuH6kSY1wBzaGoIgufVPV+KqKbHVmfWxJGA9ncNLpIa+gGMVDT1QoDcz2Q=
-X-Received: by 2002:a2e:96d2:: with SMTP id d18mr67974ljj.407.1602703884588;
- Wed, 14 Oct 2020 12:31:24 -0700 (PDT)
+	id c630df3c-658a-4627-971f-6a46212fdd1c;
+	Wed, 14 Oct 2020 19:37:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1602704235;
+  h=subject:to:references:from:message-id:date:mime-version:
+   in-reply-to:content-transfer-encoding;
+  bh=1NquZVhKtHgIfSXsdXr9x93CbiYIcEFDLKC5Qh1YrSE=;
+  b=B1WKLAp+2C0MEZVwyYSHRK9noA5XzEpn+IwwGfbhGxb8Z6uf97FI7No+
+   NwJYl7hY0PWVwj6it/SsX78bHskgQ8WMvymwrnykSqp/FRi8/fCnakcyh
+   LzE03BfrEgFh/envKPe/EBdzNASrk+tusYXl+I/4II12LwYHZgvu2hvnY
+   Y=;
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: bNF8p36IWhINFjAdplWDNjC82HQGJ6T8P9UbrPg5fzoF5Xgs/BfMZs0U8j4V310+KGmyMNy+Pg
+ oVvIXPELkru50vfUzuSMbMp8EiD/TP1QpNU1xhQZJRl6fLht9x+e7rdUL6rinuoIv+AxUZ8W99
+ ffbKxuBvbCNIkVgPWLcSreojgAsqabHuhXMxm68GF9n9JWcKnFK+UXb8/uKOBhrYUB6JV6qOxP
+ mtjGdMbN0h1lazGpmokmxrUhIo+9L49JhyP4AenCXqrY6xAqDTp5pT2tBOO6t8iwwJ+4PZ6tAn
+ K88=
+X-SBRS: 2.5
+X-MesageID: 29351929
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.77,375,1596513600"; 
+   d="scan'208";a="29351929"
+Subject: Re: i915 dma faults on Xen
+To: Jason Andryuk <jandryuk@gmail.com>, <intel-gfx@lists.freedesktop.org>,
+	xen-devel <xen-devel@lists.xenproject.org>
+References: <CAKf6xpv-LRCuo-qHHWMuukYtvJiR-i+-YhLUOZeqoAFd-=swEQ@mail.gmail.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Message-ID: <1a3b90f4-564e-84d3-fd6a-3454e8753579@citrix.com>
+Date: Wed, 14 Oct 2020 20:37:06 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-References: <20201014175342.152712-1-jandryuk@gmail.com> <4973553f-fad2-83b9-fa19-26370ced2c2d@citrix.com>
-In-Reply-To: <4973553f-fad2-83b9-fa19-26370ced2c2d@citrix.com>
-From: Jason Andryuk <jandryuk@gmail.com>
-Date: Wed, 14 Oct 2020 15:31:13 -0400
-Message-ID: <CAKf6xpvg0sk4V_txu-RYhK8cO4kLNSm8dFjEOCm38phMSYSorg@mail.gmail.com>
-Subject: Re: [SUSPECTED SPAM][PATCH 0/2] Remove Xen PVH dependency on PCI
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>, Juergen Gross <jgross@suse.com>, 
-	Stefano Stabellini <sstabellini@kernel.org>, xen-devel <xen-devel@lists.xenproject.org>, 
-	"H. Peter Anvin" <hpa@zytor.com>, open list <linux-kernel@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <CAKf6xpv-LRCuo-qHHWMuukYtvJiR-i+-YhLUOZeqoAFd-=swEQ@mail.gmail.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Content-Language: en-GB
+X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
+ FTLPEX02CL05.citrite.net (10.13.108.178)
 
-On Wed, Oct 14, 2020 at 2:04 PM Andrew Cooper <andrew.cooper3@citrix.com> wrote:
+On 14/10/2020 20:28, Jason Andryuk wrote:
+> Hi,
 >
-> On 14/10/2020 18:53, Jason Andryuk wrote:
-> > A Xen PVH domain doesn't have a PCI bus or devices,
+> Bug opened at https://gitlab.freedesktop.org/drm/intel/-/issues/2576
 >
-> [*] Yet.
-
-:)
-
-> > so it doesn't need PCI support built in.
+> I'm seeing DMA faults for the i915 graphics hardware on a Dell
+> Latitude 5500. These were captured when I plugged into a Dell
+> Thunderbolt dock with two DisplayPort monitors attached.  Xen 4.12.4
+> staging and Linux 5.4.70 (and some earlier versions).
 >
-> Untangling the dependences is a good thing, but eventually we plan to
-> put an optional PCI bus back in, e.g. for SRIOV usecases.
+> Oct 14 18:41:49.056490 kernel:[   85.570347] [drm:gen8_de_irq_handler
+> [i915]] *ERROR* Fault errors on pipe A: 0x00000080
+> Oct 14 18:41:49.056494 kernel:[   85.570395] [drm:gen8_de_irq_handler
+> [i915]] *ERROR* Fault errors on pipe A: 0x00000080
+> Oct 14 18:41:49.056589 VM hypervisor: (XEN) [VT-D]DMAR:[DMA Read]
+> Request device [0000:00:02.0] fault addr 39b5845000, iommu reg =
+> ffff82c00021d000
+> Oct 14 18:41:49.056594 VM hypervisor: (XEN) [VT-D]DMAR: reason 06 -
+> PTE Read access is not set
+> Oct 14 18:41:49.056784 kernel:[   85.570668] [drm:gen8_de_irq_handler
+> [i915]] *ERROR* Fault errors on pipe A: 0x00000080
+> Oct 14 18:41:49.056789 kernel:[   85.570687] [drm:gen8_de_irq_handler
+> [i915]] *ERROR* Fault errors on pipe A: 0x00000080
+> Oct 14 18:41:49.056885 VM hypervisor: (XEN) [VT-D]DMAR:[DMA Read]
+> Request device [0000:00:02.0] fault addr 4238d0a000, iommu reg =
+> ffff82c00021d000
+> Oct 14 18:41:49.056890 VM hypervisor: (XEN) [VT-D]DMAR: reason 06 -
+> PTE Read access is not set
+>
+> They repeat. In the log attached to
+> https://gitlab.freedesktop.org/drm/intel/-/issues/2576, they start at
+> "Oct 14 18:41:49.056589" and continue until I unplug the dock around
+> "Oct 14 18:41:54.801802".
+>
+> I've also seen similar messages when attaching the laptop's HDMI port
+> to a 4k monitor. The eDP display by itself seems okay.
+>
+> I tried Fedora 31 & 32 live images with intel_iommu=on, so no Xen, and
+> didn't see any errors
+>
+> This is a kernel & xen log with drm.debug=0x1e. It also includes some
+> application (glass) logging when it changes resolutions which seems to
+> set off the DMA faults. 5500-igfx-messages-kern-xen-glass
+>
+> Running xen with iommu=no-igfx disables the iommu for the i915
+> graphics and no faults are reported. However, that breaks some other
+> devices (Dell Latitude 7200 and 5580) giving a black screen with:
+>
+> Oct 10 13:24:37.022117 kernel:[   14.884759] i915 0000:00:02.0: Failed
+> to idle engines, declaring wedged!
+> Oct 10 13:24:37.022118 kernel:[   14.964794] i915 0000:00:02.0: Failed
+> to initialize GPU, declaring it wedged!
+>
+> Any suggestions welcome.
 
-Yes, and to be clear this change doesn't preclude including the PCI
-code.  I was just looking to remove code from my VMs that aren't using
-PCI devices.
+Presumably this is with a PV dom0.  What are 39b5845000 and 4238d0a000
+in the machine memory map?
 
-Regards,
-Jason
+This smells like a missing RMRR in the ACPI tables.
+
+~Andrew
 
