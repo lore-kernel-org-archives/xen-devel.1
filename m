@@ -2,26 +2,28 @@ Return-Path: <SRS0=XJfI=DV=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 15102C43457
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2020 10:06:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B3B76C433E7
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2020 10:40:51 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 90BF62080A
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2020 10:06:19 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 90BF62080A
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
+	by mail.kernel.org (Postfix) with ESMTPS id 3898320878
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2020 10:40:50 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="VkTBwq3m"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3898320878
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.6519.17374 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.6523.17391 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kSdfS-0000SR-K2; Wed, 14 Oct 2020 10:05:58 +0000
+	id 1kSeCt-0003qB-74; Wed, 14 Oct 2020 10:40:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 6519.17374; Wed, 14 Oct 2020 10:05:58 +0000
+Received: by outflank-mailman (output) from mailman id 6523.17391; Wed, 14 Oct 2020 10:40:31 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,100 +38,69 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kSdfS-0000SK-Gz; Wed, 14 Oct 2020 10:05:58 +0000
-Received: by outflank-mailman (input) for mailman id 6519;
- Wed, 14 Oct 2020 10:05:56 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=PlF3=DV=arm.com=michal.orzel@srs-us1.protection.inumbo.net>)
- id 1kSdfQ-0000SF-Bh
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2020 10:05:56 +0000
-Received: from foss.arm.com (unknown [217.140.110.172])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id 15fefb76-0b92-48dc-a36a-97eb20914a5c;
- Wed, 14 Oct 2020 10:05:54 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A3F7B30E;
- Wed, 14 Oct 2020 03:05:53 -0700 (PDT)
-Received: from e123311-lin.arm.com (unknown [10.57.15.192])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 8E7773F73C;
- Wed, 14 Oct 2020 03:05:52 -0700 (PDT)
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kSeCt-0003q4-45; Wed, 14 Oct 2020 10:40:31 +0000
+Received: by outflank-mailman (input) for mailman id 6523;
+ Wed, 14 Oct 2020 10:40:30 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=VoTD=DV=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1kSeCs-0003pz-5Q
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2020 10:40:30 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 2ebfe3c7-d529-4fb6-9efb-da78cc0d9b95;
+ Wed, 14 Oct 2020 10:40:28 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 672FDACDB;
+ Wed, 14 Oct 2020 10:40:27 +0000 (UTC)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=PlF3=DV=arm.com=michal.orzel@srs-us1.protection.inumbo.net>)
-	id 1kSdfQ-0000SF-Bh
-	for xen-devel@lists.xenproject.org; Wed, 14 Oct 2020 10:05:56 +0000
-X-Inumbo-ID: 15fefb76-0b92-48dc-a36a-97eb20914a5c
-Received: from foss.arm.com (unknown [217.140.110.172])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTP
-	id 15fefb76-0b92-48dc-a36a-97eb20914a5c;
-	Wed, 14 Oct 2020 10:05:54 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A3F7B30E;
-	Wed, 14 Oct 2020 03:05:53 -0700 (PDT)
-Received: from e123311-lin.arm.com (unknown [10.57.15.192])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 8E7773F73C;
-	Wed, 14 Oct 2020 03:05:52 -0700 (PDT)
-From: Michal Orzel <michal.orzel@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Bertrand Marquis <bertrand.marquis@arm.com>
-Subject: [PATCH] xen/arm: Document the erratum #853709 related to Cortex A72
-Date: Wed, 14 Oct 2020 12:05:41 +0200
-Message-Id: <20201014100541.11687-1-michal.orzel@arm.com>
-X-Mailer: git-send-email 2.28.0
+	(envelope-from <SRS0=VoTD=DV=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+	id 1kSeCs-0003pz-5Q
+	for xen-devel@lists.xenproject.org; Wed, 14 Oct 2020 10:40:30 +0000
+X-Inumbo-ID: 2ebfe3c7-d529-4fb6-9efb-da78cc0d9b95
+Received: from mx2.suse.de (unknown [195.135.220.15])
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id 2ebfe3c7-d529-4fb6-9efb-da78cc0d9b95;
+	Wed, 14 Oct 2020 10:40:28 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1602672027;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=ZeDaxzox18EA90MQXGDuuH+u33d5yeG2bASj7X/xAu8=;
+	b=VkTBwq3m+c/b66+cF/FkPgtOPibVNRpAEyJ/4/Gn9iQA2v/dTxZUANLpeYA85cVsKNd2XM
+	+b4ovW9FrF3AiSghYyd/9bo32O1xS1dcdOYx42iGGqyF5v6QUx+tG42MuCtny3RdtoAz7U
+	qwcupAFKBE7hlpMUqKpviEcW+L4GQVA=
+Received: from relay2.suse.de (unknown [195.135.221.27])
+	by mx2.suse.de (Postfix) with ESMTP id 672FDACDB;
+	Wed, 14 Oct 2020 10:40:27 +0000 (UTC)
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <George.Dunlap@eu.citrix.com>, Ian Jackson
+ <iwj@xenproject.org>, Julien Grall <julien@xen.org>, Wei Liu <wl@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Trammell Hudson <hudson@trmm.net>
+From: Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH 0/2] EFI: adjustments after "Unified Xen
+ hypervisor/kernel/initrd images"
+Message-ID: <dd26ba44-66e4-8870-3359-efe93ab28f64@suse.com>
+Date: Wed, 14 Oct 2020 12:40:26 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-Workaround for Cortex-A57 erratum #852523 is already
-in Xen but Cortex-A72 erratum #853709 is not although
-it applies to the same issue.
+The first change is, I believe, addressing the regression spotted by
+osstest. The second change is simply a result of me going over the
+involved code in, effectively, a re-review of the original changes.
 
-Signed-off-by: Michal Orzel <michal.orzel@arm.com>
----
- docs/misc/arm/silicon-errata.txt | 1 +
- xen/arch/arm/domain.c            | 6 ++++--
- 2 files changed, 5 insertions(+), 2 deletions(-)
+1: EFI/Arm64: don't clobber DTB pointer
+2: EFI: further "need_to_free" adjustments
 
-diff --git a/docs/misc/arm/silicon-errata.txt b/docs/misc/arm/silicon-errata.txt
-index e15d0923e9..1f18a9df58 100644
---- a/docs/misc/arm/silicon-errata.txt
-+++ b/docs/misc/arm/silicon-errata.txt
-@@ -50,6 +50,7 @@ stable hypervisors.
- | ARM            | Cortex-A57      | #834220         | ARM64_ERRATUM_834220    |
- | ARM            | Cortex-A57      | #1319537        | N/A                     |
- | ARM            | Cortex-A72      | #1319367        | N/A                     |
-+| ARM            | Cortex-A72      | #853709         | N/A                     |
- | ARM            | Cortex-A76      | #1165522        | N/A                     |
- | ARM            | Neoverse-N1     | #1165522        | N/A
- | ARM            | MMU-500         | #842869         | N/A                     |
-diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
-index 3b37f899b9..18cafcdda7 100644
---- a/xen/arch/arm/domain.c
-+++ b/xen/arch/arm/domain.c
-@@ -216,7 +216,8 @@ static void ctxt_switch_to(struct vcpu *n)
-     WRITE_SYSREG64(n->arch.ttbr1, TTBR1_EL1);
- 
-     /*
--     * Erratum #852523: DACR32_EL2 must be restored before one of the
-+     * Erratum #852523 (Cortex-A57) or erratum #853709 (Cortex-A72):
-+     * DACR32_EL2 must be restored before one of the
-      * following sysregs: SCTLR_EL1, TCR_EL1, TTBR0_EL1, TTBR1_EL1 or
-      * CONTEXTIDR_EL1.
-      */
-@@ -245,7 +246,8 @@ static void ctxt_switch_to(struct vcpu *n)
- 
-     /*
-      * This write to sysreg CONTEXTIDR_EL1 ensures we don't hit erratum
--     * #852523. I.e DACR32_EL2 is not correctly synchronized.
-+     * #852523 (Cortex-A57) or #853709 (Cortex-A72).
-+     * I.e DACR32_EL2 is not correctly synchronized.
-      */
-     WRITE_SYSREG(n->arch.contextidr, CONTEXTIDR_EL1);
-     WRITE_SYSREG(n->arch.tpidr_el0, TPIDR_EL0);
--- 
-2.28.0
-
+Jan
 
