@@ -2,26 +2,28 @@ Return-Path: <SRS0=XJfI=DV=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 581D0C433E7
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2020 16:15:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4E267C433E7
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2020 16:28:30 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DBAEA206F4
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2020 16:15:01 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DBAEA206F4
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
+	by mail.kernel.org (Postfix) with ESMTPS id AF0C4214D8
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2020 16:28:29 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="LVJuC5Dx"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AF0C4214D8
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.6854.18001 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.6860.18012 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kSjQP-0004CH-PE; Wed, 14 Oct 2020 16:14:49 +0000
+	id 1kSjd5-0005Ag-Va; Wed, 14 Oct 2020 16:27:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 6854.18001; Wed, 14 Oct 2020 16:14:49 +0000
+Received: by outflank-mailman (output) from mailman id 6860.18012; Wed, 14 Oct 2020 16:27:55 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,100 +38,114 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kSjQP-0004CA-LO; Wed, 14 Oct 2020 16:14:49 +0000
-Received: by outflank-mailman (input) for mailman id 6854;
- Wed, 14 Oct 2020 16:14:48 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kSjd5-0005AZ-Sd; Wed, 14 Oct 2020 16:27:55 +0000
+Received: by outflank-mailman (input) for mailman id 6860;
+ Wed, 14 Oct 2020 16:27:55 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=JG+m=DV=arm.com=bertrand.marquis@srs-us1.protection.inumbo.net>)
- id 1kSjQO-0004C5-MX
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2020 16:14:48 +0000
-Received: from foss.arm.com (unknown [217.140.110.172])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id f5ef3c6f-8320-4c70-94c2-87b521c2e66e;
- Wed, 14 Oct 2020 16:14:47 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 83DB8D6E;
- Wed, 14 Oct 2020 09:14:47 -0700 (PDT)
-Received: from e109506-lin.cambridge.arm.com (e109506-lin.cambridge.arm.com
- [10.1.198.23])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id EC7313F71F;
- Wed, 14 Oct 2020 09:14:46 -0700 (PDT)
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+ <SRS0=x6PD=DV=gmail.com=jandryuk@srs-us1.protection.inumbo.net>)
+ id 1kSjd5-0005AU-0n
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2020 16:27:55 +0000
+Received: from mail-lj1-x243.google.com (unknown [2a00:1450:4864:20::243])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 6765579f-1f39-483b-92da-b6e6a98d28be;
+ Wed, 14 Oct 2020 16:27:54 +0000 (UTC)
+Received: by mail-lj1-x243.google.com with SMTP id d24so58351ljg.10
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2020 09:27:54 -0700 (PDT)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=JG+m=DV=arm.com=bertrand.marquis@srs-us1.protection.inumbo.net>)
-	id 1kSjQO-0004C5-MX
-	for xen-devel@lists.xenproject.org; Wed, 14 Oct 2020 16:14:48 +0000
-X-Inumbo-ID: f5ef3c6f-8320-4c70-94c2-87b521c2e66e
-Received: from foss.arm.com (unknown [217.140.110.172])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
-	id f5ef3c6f-8320-4c70-94c2-87b521c2e66e;
-	Wed, 14 Oct 2020 16:14:47 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 83DB8D6E;
-	Wed, 14 Oct 2020 09:14:47 -0700 (PDT)
-Received: from e109506-lin.cambridge.arm.com (e109506-lin.cambridge.arm.com [10.1.198.23])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id EC7313F71F;
-	Wed, 14 Oct 2020 09:14:46 -0700 (PDT)
-From: Bertrand Marquis <bertrand.marquis@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v2] tools/xenmpd: Fix gcc10 snprintf warning
-Date: Wed, 14 Oct 2020 17:14:29 +0100
-Message-Id: <005bd16161fe803e9c2805bddc440db31c46169b.1602692002.git.bertrand.marquis@arm.com>
-X-Mailer: git-send-email 2.17.1
+	(envelope-from <SRS0=x6PD=DV=gmail.com=jandryuk@srs-us1.protection.inumbo.net>)
+	id 1kSjd5-0005AU-0n
+	for xen-devel@lists.xenproject.org; Wed, 14 Oct 2020 16:27:55 +0000
+X-Inumbo-ID: 6765579f-1f39-483b-92da-b6e6a98d28be
+Received: from mail-lj1-x243.google.com (unknown [2a00:1450:4864:20::243])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id 6765579f-1f39-483b-92da-b6e6a98d28be;
+	Wed, 14 Oct 2020 16:27:54 +0000 (UTC)
+Received: by mail-lj1-x243.google.com with SMTP id d24so58351ljg.10
+        for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2020 09:27:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=7WRe1XAt+nB86rUXoXv+uMmWylO352IQALVwPEQlFTU=;
+        b=LVJuC5DxeSO5i+lwK+GtVemtgt1WUYJSXj7bQIngLKRJ75gDUAPTXtTik2tKXKThMj
+         Ch8AlUEp3yuUSXxvyBQOIqs/lPwlBFqCSZL0RYXtGzMosh1KsjOYhCVLaCWc2qsqL0Fd
+         znqwvaCa4njLy4l+WQ7CppjbmO1fMN5H+JkqKyt66JTvzkOpqf8KyGslFIFpai1swlYx
+         tVEFVy+NmuLVTGES+9alg7d/5/QAcEiMcaZ7PfNmpQRzNJt6he6OXlPmR699rUoxBopR
+         ix0qsqRw8DSUtGOROiNTtD/VThOLiMJsQ2ErF0C47VEZbRUG6UmS9elpLxHQt9p9m++k
+         C+vw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=7WRe1XAt+nB86rUXoXv+uMmWylO352IQALVwPEQlFTU=;
+        b=LZriZqKnaNonjXd4M4p4BmnbkxJJ2M/ZdWg+Hpy7gROmGe5clzVCegBIecS+rssOk7
+         P0RGGlBF74hEH4VGDkaBS/ydBnKdLQyGdk5jpmcj/lngiYsSJyWurTYx243vU6DF4FUM
+         zrCnvAB0+ETRTUgbdgPYZPE1SKjdz/0WFLVIbl4VDEPRLT6I/4eayRtmCwtiygudMCR1
+         GBsCGA+pcuPAPyYEaPJpA+ZQg+uEy20Jo2hAGlLeJzOHeDTDBvSd4rliigIiE5lejzZG
+         uZRW1MQ4WUTuPR38tht2jckj/XGu3dXDPMoIsFiNeXEAWqXT0APaN7+T+uCCBrgI8H/O
+         nLBg==
+X-Gm-Message-State: AOAM531jHZ5i9hqstB2M+5U0mo4OynDZFOQJngak2cAYT/M6sA0k7MAK
+	f7n5oOHWqCE6R9iBLmFaWhBPMaAlq5cdRCd7/cQ=
+X-Google-Smtp-Source: ABdhPJwy7DZ4YGbH1j/s6TMHWgFw9mRRWW8xYK3ks+AR9JtSocHTkaqyomYOLUhlZkBsYDxkr2jjzh38I2Imd2v4k+g=
+X-Received: by 2002:a2e:924b:: with SMTP id v11mr19704ljg.262.1602692872999;
+ Wed, 14 Oct 2020 09:27:52 -0700 (PDT)
+MIME-Version: 1.0
+References: <20201014153150.83875-1-jandryuk@gmail.com> <6d373cae-c7dc-e109-1df3-ccbbe4bdd9c8@suse.com>
+In-Reply-To: <6d373cae-c7dc-e109-1df3-ccbbe4bdd9c8@suse.com>
+From: Jason Andryuk <jandryuk@gmail.com>
+Date: Wed, 14 Oct 2020 12:27:40 -0400
+Message-ID: <CAKf6xpv5GNjw0pjOxEqdVj2+C6v+O5PDZG5yYkNfytDjUT_r5w@mail.gmail.com>
+Subject: Re: [PATCH] libelf: Handle PVH kernels lacking ENTRY elfnote
+To: Jan Beulich <jbeulich@suse.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, 
+	Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, 
+	Ian Jackson <iwj@xenproject.org>, Julien Grall <julien@xen.org>, 
+	Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 
-Add a check for snprintf return code and ignore the entry if we get an
-error. This should in fact never happen and is more a trick to make gcc
-happy and prevent compilation errors.
+On Wed, Oct 14, 2020 at 12:02 PM Jan Beulich <jbeulich@suse.com> wrote:
+>
+> On 14.10.2020 17:31, Jason Andryuk wrote:
+> > Linux kernels only have an ENTRY elfnote when built with CONFIG_PV.  A
+> > kernel build CONFIG_PVH=y CONFIG_PV=n lacks the note.  In this case,
+> > virt_entry will be UNSET_ADDR, overwritten by the ELF header e_entry,
+> > and fail the check against the virt address range.
 
-This is solving the following gcc warning when compiling for arm32 host
-platforms with optimization activated:
-xenpmd.c:92:37: error: '%s' directive output may be truncated writing
-between 4 and 2147483645 bytes into a region of size 271
-[-Werror=format-truncation=]
+Oh, these should be CONFIG_XEN_PVH=y and CONFIG_XEN_PV=n
 
-This is also solving the following Debian bug:
-https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=970802
+> > Change the code to only check virt_entry against the virtual address
+> > range if it was set upon entry to the function.
+>
+> Not checking at all seems wrong to me. The ELF spec anyway says
+> "virtual address", so an out of bounds value is at least suspicious.
+>
+> > Maybe the overwriting of virt_entry could be removed, but I don't know
+> > if there would be unintended consequences where (old?) kernels don't
+> > have an elfnote, but do have an in-range e_entry?  The failing kernel I
+> > just looked at has an e_entry of 0x1000000.
+>
+> And if you dropped the overwriting, what entry point would we use
+> in the absence of an ELF note?
 
-Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
----
- tools/xenpmd/xenpmd.c | 9 +++++++--
- 1 file changed, 7 insertions(+), 2 deletions(-)
+elf_xen_note_check currently has:
 
-diff --git a/tools/xenpmd/xenpmd.c b/tools/xenpmd/xenpmd.c
-index 35fd1c931a..12b82cf43e 100644
---- a/tools/xenpmd/xenpmd.c
-+++ b/tools/xenpmd/xenpmd.c
-@@ -102,6 +102,7 @@ FILE *get_next_battery_file(DIR *battery_dir,
-     FILE *file = 0;
-     struct dirent *dir_entries;
-     char file_name[284];
-+    int ret;
-     
-     do 
-     {
-@@ -111,11 +112,15 @@ FILE *get_next_battery_file(DIR *battery_dir,
-         if ( strlen(dir_entries->d_name) < 4 )
-             continue;
-         if ( battery_info_type == BIF ) 
--            snprintf(file_name, sizeof(file_name), BATTERY_INFO_FILE_PATH,
-+            ret = snprintf(file_name, sizeof(file_name), BATTERY_INFO_FILE_PATH,
-                      dir_entries->d_name);
-         else 
--            snprintf(file_name, sizeof(file_name), BATTERY_STATE_FILE_PATH,
-+            ret = snprintf(file_name, sizeof(file_name), BATTERY_STATE_FILE_PATH,
-                      dir_entries->d_name);
-+        /* This should not happen but is needed to pass gcc checks */
-+        if (ret < 0)
-+            continue;
-+        file_name[sizeof(file_name) - 1] = '\0';
-         file = fopen(file_name, "r");
-     } while ( !file );
- 
--- 
-2.17.1
+    /* PVH only requires one ELF note to be set */
+    if ( parms->phys_entry != UNSET_ADDR32 )
+    {
+        elf_msg(elf, "ELF: Found PVH image\n");
+        return 0;
+    }
 
+> I'd rather put up the option of adjusting the entry (or the check),
+> if it looks like a valid physical address.
+
+The function doesn't know if the image will be booted PV or PVH, so I
+guess we do all the checks, but use 'parms->phys_entry != UNSET_ADDR32
+&& parms->virt_entry == UNSET_ADDR' to conditionally skip checking
+virt?
+
+Regards,
+Jason
 
