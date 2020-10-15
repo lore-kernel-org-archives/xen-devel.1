@@ -8,23 +8,23 @@ X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AE9D9C2D0A4
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 16:53:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 46770C43467
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 16:53:37 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 46A6E206CA
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 16:53:39 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id CFC572068D
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 16:53:36 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="CeJiG4Nb"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 46A6E206CA
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="HitaxQWE"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CFC572068D
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.7621.20162 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.7620.20150 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kT6VM-0007c1-0X; Thu, 15 Oct 2020 16:53:28 +0000
+	id 1kT6VJ-0007Wf-TW; Thu, 15 Oct 2020 16:53:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 7621.20162; Thu, 15 Oct 2020 16:53:27 +0000
+Received: by outflank-mailman (output) from mailman id 7620.20150; Thu, 15 Oct 2020 16:53:25 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,305 +39,298 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kT6VK-0007ah-U9; Thu, 15 Oct 2020 16:53:26 +0000
-Received: by outflank-mailman (input) for mailman id 7621;
+	id 1kT6VJ-0007VA-3n; Thu, 15 Oct 2020 16:53:25 +0000
+Received: by outflank-mailman (input) for mailman id 7620;
  Thu, 15 Oct 2020 16:53:16 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YEeM=DW=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
- id 1kT6OX-0004yr-7t
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:46:25 +0000
-Received: from mail-lf1-x144.google.com (unknown [2a00:1450:4864:20::144])
+ id 1kT6ON-0004yr-89
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:46:15 +0000
+Received: from mail-lj1-x241.google.com (unknown [2a00:1450:4864:20::241])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 495c746c-867e-4b9f-bfdc-3ebc58d73db7;
- Thu, 15 Oct 2020 16:45:12 +0000 (UTC)
-Received: by mail-lf1-x144.google.com with SMTP id b1so4320376lfp.11
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2020 09:45:12 -0700 (PDT)
+ id 46fd3a8f-55f0-4ee0-8179-f6bd7276b904;
+ Thu, 15 Oct 2020 16:45:10 +0000 (UTC)
+Received: by mail-lj1-x241.google.com with SMTP id h20so3822805lji.9
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2020 09:45:10 -0700 (PDT)
 Received: from otyshchenko.www.tendawifi.com ([212.22.223.21])
- by smtp.gmail.com with ESMTPSA id v13sm1482495ljh.66.2020.10.15.09.45.10
+ by smtp.gmail.com with ESMTPSA id v13sm1482495ljh.66.2020.10.15.09.45.08
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 15 Oct 2020 09:45:10 -0700 (PDT)
+ Thu, 15 Oct 2020 09:45:08 -0700 (PDT)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=YEeM=DW=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
-	id 1kT6OX-0004yr-7t
-	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:46:25 +0000
-X-Inumbo-ID: 495c746c-867e-4b9f-bfdc-3ebc58d73db7
-Received: from mail-lf1-x144.google.com (unknown [2a00:1450:4864:20::144])
+	id 1kT6ON-0004yr-89
+	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:46:15 +0000
+X-Inumbo-ID: 46fd3a8f-55f0-4ee0-8179-f6bd7276b904
+Received: from mail-lj1-x241.google.com (unknown [2a00:1450:4864:20::241])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 495c746c-867e-4b9f-bfdc-3ebc58d73db7;
-	Thu, 15 Oct 2020 16:45:12 +0000 (UTC)
-Received: by mail-lf1-x144.google.com with SMTP id b1so4320376lfp.11
-        for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2020 09:45:12 -0700 (PDT)
+	id 46fd3a8f-55f0-4ee0-8179-f6bd7276b904;
+	Thu, 15 Oct 2020 16:45:10 +0000 (UTC)
+Received: by mail-lj1-x241.google.com with SMTP id h20so3822805lji.9
+        for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2020 09:45:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=HaoSNmuxwJzJR/fKLMbZwT91GS4ftwQys6lt/km7J2g=;
-        b=CeJiG4Nb1/Pb2sgz3TGnNpjrTYoj+Xr3WHwfBpq5V6VWIWlkhvHc7IQUISflX9dJj7
-         if3zUD6eV9aAWdcwjWmJPw//abOUNr0ZKgvyO5Ahb5dHFjnfkUGa/8P03fJX30cM3k9p
-         g+vGnWOZF7yWTckBaAA7IvsqTmBw5fkEe4Z0P36cfABlNKjsyTWMWnqKrcYtsJJPeqG4
-         TmK6f6Fq3KY1RzealYEn3Suy9d5vzktZxa5nr6CWeX7Xl1sZfLhuU9U7B0j4jl6UHtYf
-         jr/QLcxoOytiBaF6DvLENgCoD3tY4r62xmGOzwSeXVZUr1w8IAkZk3/5/KV+OYebiibl
-         M2oQ==
+        bh=/fPLWXB55C3rjnJr1JaRD7nWk5g9/E1PMqJP4mwbwZc=;
+        b=HitaxQWEsvEv9/Rz9DvKDF6ecJ85ZC9GLKwviZZplNEQWjYaIpccBmQeTM19Dd2R7V
+         1kXh8VU1tQevPtf26zRsdREGD2tfhx9Qn0YmijO+CiC1k/LFBEWMmWGSuhn1SgRLP6mf
+         BJ8w5GOQ8D7jhxMIdYZn32MP8QoAlExjpexjxUFolKpCck8Dleo5k/g6bNNhzFkdBw9X
+         8KqHNDMzkdG5LTGvJQcIU/Cd93rdALS/sUUTISGKgIg0yABiL4kOEV1qSVfhxAQ5kCVb
+         Wz8RupR+PmexrOcxslMMqtAGhd2qdvc8FL7x6FTbyxqnYdi/U57R7JsiM74qVDbe7abw
+         UAgg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=HaoSNmuxwJzJR/fKLMbZwT91GS4ftwQys6lt/km7J2g=;
-        b=cccfG/8y+r747gyUUQ3ncLm3JtEl2qs7ESVhRqVsPq0FTOXg85PedmnTRI3+uCwFAx
-         xHl/ywfcLjqRTjcIFyX9dt2tZSGakaxMMJkZLb1b/OLvsy7bxle7SGW4j07Ri3LryMNK
-         96xL9PywSQsVwHVrcwUVgGPJJYagnIzOQlETwehp2ywzkg9HyftM3eHjXMM7KtlKiG6g
-         7xY9DAzRcp/+JBsUyvG+pkzx90+bLi9iKb7zEy0NmtPpBriG0N+arUuQyXGgIMtRptrd
-         QXkozgVZ2Wxb0BroDRFYY+te2bL4uB3wiDbcPeLMLNAWjOsW39ozlQ+nz6OtWn/TWpEs
-         ycmQ==
-X-Gm-Message-State: AOAM5321bnqy8wPj76WWE0Nnoti+dttpk85ZUwWg/7gmgUfHWfn5JVb5
-	X7p3wfKhzUgcawUYQ0L6zJNMKtXXYC9BPQ==
-X-Google-Smtp-Source: ABdhPJxxnhYf1jU2Q+ohzP7ySf8wbYADbqSgg/hOvijB/xB3BRucdTDPEe7sx0CDqgM+hg30Trv1Pg==
-X-Received: by 2002:ac2:5449:: with SMTP id d9mr1270229lfn.546.1602780311348;
-        Thu, 15 Oct 2020 09:45:11 -0700 (PDT)
+        bh=/fPLWXB55C3rjnJr1JaRD7nWk5g9/E1PMqJP4mwbwZc=;
+        b=eQtLWMdwwU43KvqCGiox2k6wrW2v1iOR+GtsQmO4Mz0kDu/0AW8GmLdRNtuKWU2nAw
+         ua0FfUsLMQupEAf4ghskU256974DysqHkKGGujzREf6o8cBUF2bnzQ2dcr0oP2CtIxuA
+         jl3KdvLL4PNtoU/50IPAL78ZUJ5x7bvJdsIMm+8C26usr37am970DNDRSk9lYXYHcixf
+         8UguEjEZuYGMJSl8j0KNy0PkpDGLamoNkcE95/HO9IeI6Y16tLklGsDZHuvirxJlUd2B
+         QZy7b3xGUnAwG4FUJTneRLM6Ittl8NQd+60w5eJUxjaOmU5lcFkAbQcgaxYxg+hveb2j
+         3ERg==
+X-Gm-Message-State: AOAM531DRggBqNyEd8lbJ4+Vd5JRA76zBoVRbf3z9IqepOolcUx4+Qg8
+	fxpVpURNZntciKtL6IhY/SlA2l3qZtK5FQ==
+X-Google-Smtp-Source: ABdhPJwACpsMFGhkuraX68uLZBKp6BNDpiiOkvIcf85E72rgjoANcmS+h8Z4oafvGu1h220iQ29gKw==
+X-Received: by 2002:a2e:9618:: with SMTP id v24mr1687846ljh.191.1602780309232;
+        Thu, 15 Oct 2020 09:45:09 -0700 (PDT)
 Received: from otyshchenko.www.tendawifi.com ([212.22.223.21])
-        by smtp.gmail.com with ESMTPSA id v13sm1482495ljh.66.2020.10.15.09.45.10
+        by smtp.gmail.com with ESMTPSA id v13sm1482495ljh.66.2020.10.15.09.45.08
         (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Thu, 15 Oct 2020 09:45:10 -0700 (PDT)
+        Thu, 15 Oct 2020 09:45:08 -0700 (PDT)
 From: Oleksandr Tyshchenko <olekstysh@gmail.com>
 To: xen-devel@lists.xenproject.org
-Cc: Julien Grall <julien.grall@arm.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>,
+Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	George Dunlap <george.dunlap@citrix.com>,
+	Ian Jackson <iwj@xenproject.org>,
 	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Subject: [PATCH V2 18/23] xen/dm: Introduce xendevicemodel_set_irq_level DM op
-Date: Thu, 15 Oct 2020 19:44:29 +0300
-Message-Id: <1602780274-29141-19-git-send-email-olekstysh@gmail.com>
+	Wei Liu <wl@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Julien Grall <julien.grall@arm.com>
+Subject: [PATCH V2 16/23] xen/mm: Handle properly reference in set_foreign_p2m_entry() on Arm
+Date: Thu, 15 Oct 2020 19:44:27 +0300
+Message-Id: <1602780274-29141-17-git-send-email-olekstysh@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1602780274-29141-1-git-send-email-olekstysh@gmail.com>
 References: <1602780274-29141-1-git-send-email-olekstysh@gmail.com>
 
-From: Julien Grall <julien.grall@arm.com>
+From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 
-This patch adds ability to the device emulator to notify otherend
-(some entity running in the guest) using a SPI and implements Arm
-specific bits for it. Proposed interface allows emulator to set
-the logical level of a one of a domain's IRQ lines.
+This patch implements reference counting of foreign entries in
+in set_foreign_p2m_entry() on Arm. This is a mandatory action if
+we want to run emulator (IOREQ server) in other than dom0 domain,
+as we can't trust it to do the right thing if it is not running
+in dom0. So we need to grab a reference on the page to avoid it
+disappearing.
 
-We can't reuse the existing DM op (xen_dm_op_set_isa_irq_level)
-to inject an interrupt as the "isa_irq" field is only 8-bit and
-able to cover IRQ 0 - 255, whereas we need a wider range (0 - 1020).
+It is valid to always pass "p2m_map_foreign_rw" type to
+guest_physmap_add_entry() since the current and foreign domains
+would be always different. A case when they are equal would be
+rejected by rcu_lock_remote_domain_by_id().
 
-Signed-off-by: Julien Grall <julien.grall@arm.com>
+It was tested with IOREQ feature to confirm that all the pages given
+to this function belong to a domain, so we can use the same approach
+as for XENMAPSPACE_gmfn_foreign handling in xenmem_add_to_physmap_one().
+
+This involves adding an extra parameter for the foreign domain to
+set_foreign_p2m_entry() and a helper to indicate whether the arch
+supports the reference counting of foreign entries and the restriction
+for the hardware domain in the common code can be skipped for it.
+
 Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+CC: Julien Grall <julien.grall@arm.com>
 
 ---
 Please note, this is a split/cleanup/hardening of Julien's PoC:
 "Add support for Guest IO forwarding to a device emulator"
 
-***
-Please note, I left interface untouched since there is still
-an open discussion what interface to use/what information to pass
-to the hypervisor. The question whether we should abstract away
-the state of the line or not.
-***
-
 Changes RFC -> V1:
-   - check incoming parameters in arch_dm_op()
-   - add explicit padding to struct xen_dm_op_set_irq_level
+   - new patch, was split from:
+     "[RFC PATCH V1 04/12] xen/arm: Introduce arch specific bits for IOREQ/DM features"
+   - rewrite a logic to handle properly reference in set_foreign_p2m_entry()
+     instead of treating foreign entries as p2m_ram_rw
 
 Changes V1 -> V2:
-   - update the author of a patch
+   - rebase according to the recent changes to acquire_resource()
    - update patch description
-   - check that padding is always 0
-   - mention that interface is Arm only and only SPIs are
-     supported for now
-   - allow to set the logical level of a line for non-allocated
-     interrupts only
-   - add xen_dm_op_set_irq_level_t
+   - introduce arch_refcounts_p2m()
+   - add an explanation why p2m_map_foreign_rw is valid
+   - move set_foreign_p2m_entry() to p2m-common.h
+   - add const to new parameter
 ---
- tools/libs/devicemodel/core.c                   | 18 ++++++++
- tools/libs/devicemodel/include/xendevicemodel.h |  4 ++
- tools/libs/devicemodel/libxendevicemodel.map    |  1 +
- xen/arch/arm/dm.c                               | 57 ++++++++++++++++++++++++-
- xen/common/dm.c                                 |  1 +
- xen/include/public/hvm/dm_op.h                  | 16 +++++++
- 6 files changed, 96 insertions(+), 1 deletion(-)
+ xen/arch/arm/p2m.c           | 21 +++++++++++++++++++++
+ xen/arch/x86/mm/p2m.c        |  5 +++--
+ xen/common/memory.c          |  5 +++--
+ xen/include/asm-arm/p2m.h    | 19 +++++++++----------
+ xen/include/asm-x86/p2m.h    | 12 +++++++++---
+ xen/include/xen/p2m-common.h |  4 ++++
+ 6 files changed, 49 insertions(+), 17 deletions(-)
 
-diff --git a/tools/libs/devicemodel/core.c b/tools/libs/devicemodel/core.c
-index 4d40639..30bd79f 100644
---- a/tools/libs/devicemodel/core.c
-+++ b/tools/libs/devicemodel/core.c
-@@ -430,6 +430,24 @@ int xendevicemodel_set_isa_irq_level(
-     return xendevicemodel_op(dmod, domid, 1, &op, sizeof(op));
+diff --git a/xen/arch/arm/p2m.c b/xen/arch/arm/p2m.c
+index 4eeb867..370173c 100644
+--- a/xen/arch/arm/p2m.c
++++ b/xen/arch/arm/p2m.c
+@@ -1380,6 +1380,27 @@ int guest_physmap_remove_page(struct domain *d, gfn_t gfn, mfn_t mfn,
+     return p2m_remove_mapping(d, gfn, (1 << page_order), mfn);
  }
  
-+int xendevicemodel_set_irq_level(
-+    xendevicemodel_handle *dmod, domid_t domid, uint32_t irq,
-+    unsigned int level)
++int set_foreign_p2m_entry(struct domain *d, const struct domain *fd,
++                          unsigned long gfn, mfn_t mfn)
 +{
-+    struct xen_dm_op op;
-+    struct xen_dm_op_set_irq_level *data;
-+
-+    memset(&op, 0, sizeof(op));
-+
-+    op.op = XEN_DMOP_set_irq_level;
-+    data = &op.u.set_irq_level;
-+
-+    data->irq = irq;
-+    data->level = level;
-+
-+    return xendevicemodel_op(dmod, domid, 1, &op, sizeof(op));
-+}
-+
- int xendevicemodel_set_pci_link_route(
-     xendevicemodel_handle *dmod, domid_t domid, uint8_t link, uint8_t irq)
- {
-diff --git a/tools/libs/devicemodel/include/xendevicemodel.h b/tools/libs/devicemodel/include/xendevicemodel.h
-index e877f5c..c06b3c8 100644
---- a/tools/libs/devicemodel/include/xendevicemodel.h
-+++ b/tools/libs/devicemodel/include/xendevicemodel.h
-@@ -209,6 +209,10 @@ int xendevicemodel_set_isa_irq_level(
-     xendevicemodel_handle *dmod, domid_t domid, uint8_t irq,
-     unsigned int level);
- 
-+int xendevicemodel_set_irq_level(
-+    xendevicemodel_handle *dmod, domid_t domid, unsigned int irq,
-+    unsigned int level);
-+
- /**
-  * This function maps a PCI INTx line to a an IRQ line.
-  *
-diff --git a/tools/libs/devicemodel/libxendevicemodel.map b/tools/libs/devicemodel/libxendevicemodel.map
-index 561c62d..a0c3012 100644
---- a/tools/libs/devicemodel/libxendevicemodel.map
-+++ b/tools/libs/devicemodel/libxendevicemodel.map
-@@ -32,6 +32,7 @@ VERS_1.2 {
- 	global:
- 		xendevicemodel_relocate_memory;
- 		xendevicemodel_pin_memory_cacheattr;
-+		xendevicemodel_set_irq_level;
- } VERS_1.1;
- 
- VERS_1.3 {
-diff --git a/xen/arch/arm/dm.c b/xen/arch/arm/dm.c
-index 5d3da37..e4bb233 100644
---- a/xen/arch/arm/dm.c
-+++ b/xen/arch/arm/dm.c
-@@ -17,10 +17,65 @@
- #include <xen/dm.h>
- #include <xen/hypercall.h>
- 
-+#include <asm/vgic.h>
-+
- int arch_dm_op(struct xen_dm_op *op, struct domain *d,
-                const struct dmop_args *op_args, bool *const_op)
- {
--    return -EOPNOTSUPP;
++    struct page_info *page = mfn_to_page(mfn);
 +    int rc;
 +
-+    switch ( op->op )
-+    {
-+    case XEN_DMOP_set_irq_level:
-+    {
-+        const struct xen_dm_op_set_irq_level *data =
-+            &op->u.set_irq_level;
-+        unsigned int i;
++    if ( !get_page(page, fd) )
++        return -EINVAL;
 +
-+        /* Only SPIs are supported */
-+        if ( (data->irq < NR_LOCAL_IRQS) || (data->irq >= vgic_num_irqs(d)) )
-+        {
-+            rc = -EINVAL;
-+            break;
-+        }
++    /*
++     * It is valid to always use p2m_map_foreign_rw here as if this gets
++     * called that d != fd. A case when d == fd would be rejected by
++     * rcu_lock_remote_domain_by_id() earlier.
++     */
++    rc = guest_physmap_add_entry(d, _gfn(gfn), mfn, 0, p2m_map_foreign_rw);
++    if ( rc )
++        put_page(page);
 +
-+        if ( data->level != 0 && data->level != 1 )
-+        {
-+            rc = -EINVAL;
-+            break;
-+        }
++    return 0;
++}
 +
-+        /* Check that padding is always 0 */
-+        for ( i = 0; i < sizeof(data->pad); i++ )
-+        {
-+            if ( data->pad[i] )
-+            {
-+                rc = -EINVAL;
-+                break;
-+            }
-+        }
-+
-+        /*
-+         * Allow to set the logical level of a line for non-allocated
-+         * interrupts only.
-+         */
-+        if ( test_bit(data->irq, d->arch.vgic.allocated_irqs) )
-+        {
-+            rc = -EINVAL;
-+            break;
-+        }
-+
-+        vgic_inject_irq(d, NULL, data->irq, data->level);
-+        rc = 0;
-+        break;
-+    }
-+
-+    default:
-+        rc = -EOPNOTSUPP;
-+        break;
-+    }
-+
-+    return rc;
+ static struct page_info *p2m_allocate_root(void)
+ {
+     struct page_info *page;
+diff --git a/xen/arch/x86/mm/p2m.c b/xen/arch/x86/mm/p2m.c
+index 6102771..8d03ab4 100644
+--- a/xen/arch/x86/mm/p2m.c
++++ b/xen/arch/x86/mm/p2m.c
+@@ -1320,7 +1320,8 @@ static int set_typed_p2m_entry(struct domain *d, unsigned long gfn_l,
  }
  
+ /* Set foreign mfn in the given guest's p2m table. */
+-int set_foreign_p2m_entry(struct domain *d, unsigned long gfn, mfn_t mfn)
++int set_foreign_p2m_entry(struct domain *d, const struct domain *fd,
++                          unsigned long gfn, mfn_t mfn)
+ {
+     return set_typed_p2m_entry(d, gfn, mfn, PAGE_ORDER_4K, p2m_map_foreign,
+                                p2m_get_hostp2m(d)->default_access);
+@@ -2620,7 +2621,7 @@ int p2m_add_foreign(struct domain *tdom, unsigned long fgfn,
+      * will update the m2p table which will result in  mfn -> gpfn of dom0
+      * and not fgfn of domU.
+      */
+-    rc = set_foreign_p2m_entry(tdom, gpfn, mfn);
++    rc = set_foreign_p2m_entry(tdom, fdom, gpfn, mfn);
+     if ( rc )
+         gdprintk(XENLOG_WARNING, "set_foreign_p2m_entry failed. "
+                  "gpfn:%lx mfn:%lx fgfn:%lx td:%d fd:%d\n",
+diff --git a/xen/common/memory.c b/xen/common/memory.c
+index cf53ca3..fb9ea96 100644
+--- a/xen/common/memory.c
++++ b/xen/common/memory.c
+@@ -1099,7 +1099,8 @@ static int acquire_resource(
+      *        reference counted, it is unsafe to allow mapping of
+      *        resource pages unless the caller is the hardware domain.
+      */
+-    if ( paging_mode_translate(currd) && !is_hardware_domain(currd) )
++    if ( paging_mode_translate(currd) && !is_hardware_domain(currd) &&
++         !arch_refcounts_p2m() )
+         return -EACCES;
+ 
+     if ( copy_from_guest(&xmar, arg, 1) )
+@@ -1168,7 +1169,7 @@ static int acquire_resource(
+ 
+         for ( i = 0; !rc && i < xmar.nr_frames; i++ )
+         {
+-            rc = set_foreign_p2m_entry(currd, gfn_list[i],
++            rc = set_foreign_p2m_entry(currd, d, gfn_list[i],
+                                        _mfn(mfn_list[i]));
+             /* rc should be -EIO for any iteration other than the first */
+             if ( rc && i )
+diff --git a/xen/include/asm-arm/p2m.h b/xen/include/asm-arm/p2m.h
+index 28ca9a8..d11be80 100644
+--- a/xen/include/asm-arm/p2m.h
++++ b/xen/include/asm-arm/p2m.h
+@@ -161,6 +161,15 @@ typedef enum {
+ #endif
+ #include <xen/p2m-common.h>
+ 
++static inline bool arch_refcounts_p2m(void)
++{
++    /*
++     * The reference counting of foreign entries in set_foreign_p2m_entry()
++     * is supported on Arm.
++     */
++    return true;
++}
++
+ static inline
+ void p2m_altp2m_check(struct vcpu *v, uint16_t idx)
+ {
+@@ -392,16 +401,6 @@ static inline gfn_t gfn_next_boundary(gfn_t gfn, unsigned int order)
+     return gfn_add(gfn, 1UL << order);
+ }
+ 
+-static inline int set_foreign_p2m_entry(struct domain *d, unsigned long gfn,
+-                                        mfn_t mfn)
+-{
+-    /*
+-     * NOTE: If this is implemented then proper reference counting of
+-     *       foreign entries will need to be implemented.
+-     */
+-    return -EOPNOTSUPP;
+-}
+-
  /*
-diff --git a/xen/common/dm.c b/xen/common/dm.c
-index f3a8353..5f23420 100644
---- a/xen/common/dm.c
-+++ b/xen/common/dm.c
-@@ -48,6 +48,7 @@ static int dm_op(const struct dmop_args *op_args)
-         [XEN_DMOP_remote_shutdown]                  = sizeof(struct xen_dm_op_remote_shutdown),
-         [XEN_DMOP_relocate_memory]                  = sizeof(struct xen_dm_op_relocate_memory),
-         [XEN_DMOP_pin_memory_cacheattr]             = sizeof(struct xen_dm_op_pin_memory_cacheattr),
-+        [XEN_DMOP_set_irq_level]                    = sizeof(struct xen_dm_op_set_irq_level),
-     };
+  * A vCPU has cache enabled only when the MMU is enabled and data cache
+  * is enabled.
+diff --git a/xen/include/asm-x86/p2m.h b/xen/include/asm-x86/p2m.h
+index 5f7ba31..6c42022 100644
+--- a/xen/include/asm-x86/p2m.h
++++ b/xen/include/asm-x86/p2m.h
+@@ -369,6 +369,15 @@ struct p2m_domain {
+ #endif
+ #include <xen/p2m-common.h>
  
-     rc = rcu_lock_remote_domain_by_id(op_args->domid, &d);
-diff --git a/xen/include/public/hvm/dm_op.h b/xen/include/public/hvm/dm_op.h
-index 66cae1a..1f70d58 100644
---- a/xen/include/public/hvm/dm_op.h
-+++ b/xen/include/public/hvm/dm_op.h
-@@ -434,6 +434,21 @@ struct xen_dm_op_pin_memory_cacheattr {
- };
- typedef struct xen_dm_op_pin_memory_cacheattr xen_dm_op_pin_memory_cacheattr_t;
++static inline bool arch_refcounts_p2m(void)
++{
++    /*
++     * The reference counting of foreign entries in set_foreign_p2m_entry()
++     * is not supported on x86.
++     */
++    return false;
++}
++
+ /*
+  * Updates vCPU's n2pm to match its np2m_base in VMCx12 and returns that np2m.
+  */
+@@ -634,9 +643,6 @@ int p2m_finish_type_change(struct domain *d,
+ int p2m_is_logdirty_range(struct p2m_domain *, unsigned long start,
+                           unsigned long end);
  
-+/*
-+ * XEN_DMOP_set_irq_level: Set the logical level of a one of a domain's
-+ *                         IRQ lines (currently Arm only).
-+ * Only SPIs are supported.
-+ */
-+#define XEN_DMOP_set_irq_level 19
+-/* Set foreign entry in the p2m table (for priv-mapping) */
+-int set_foreign_p2m_entry(struct domain *d, unsigned long gfn, mfn_t mfn);
+-
+ /* Set mmio addresses in the p2m table (for pass-through) */
+ int set_mmio_p2m_entry(struct domain *d, gfn_t gfn, mfn_t mfn,
+                        unsigned int order);
+diff --git a/xen/include/xen/p2m-common.h b/xen/include/xen/p2m-common.h
+index 58031a6..b4bc709 100644
+--- a/xen/include/xen/p2m-common.h
++++ b/xen/include/xen/p2m-common.h
+@@ -3,6 +3,10 @@
+ 
+ #include <xen/mm.h>
+ 
++/* Set foreign entry in the p2m table */
++int set_foreign_p2m_entry(struct domain *d, const struct domain *fd,
++                          unsigned long gfn, mfn_t mfn);
 +
-+struct xen_dm_op_set_irq_level {
-+    uint32_t irq;
-+    /* IN - Level: 0 -> deasserted, 1 -> asserted */
-+    uint8_t level;
-+    uint8_t pad[3];
-+};
-+typedef struct xen_dm_op_set_irq_level xen_dm_op_set_irq_level_t;
-+
- struct xen_dm_op {
-     uint32_t op;
-     uint32_t pad;
-@@ -447,6 +462,7 @@ struct xen_dm_op {
-         xen_dm_op_track_dirty_vram_t track_dirty_vram;
-         xen_dm_op_set_pci_intx_level_t set_pci_intx_level;
-         xen_dm_op_set_isa_irq_level_t set_isa_irq_level;
-+        xen_dm_op_set_irq_level_t set_irq_level;
-         xen_dm_op_set_pci_link_route_t set_pci_link_route;
-         xen_dm_op_modified_memory_t modified_memory;
-         xen_dm_op_set_mem_type_t set_mem_type;
+ /* Remove a page from a domain's p2m table */
+ int __must_check
+ guest_physmap_remove_page(struct domain *d, gfn_t gfn, mfn_t mfn,
 -- 
 2.7.4
 
