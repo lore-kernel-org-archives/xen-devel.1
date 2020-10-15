@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-12.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9B68DC433DF
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 15:50:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 17144C433E7
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 15:50:55 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2ECCA22254
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 15:50:50 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 9DFA322254
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 15:50:54 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="CXoc1/pu"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2ECCA22254
+	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="xwf0V06E"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9DFA322254
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.7519.19702 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.7520.19718 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kT5Wb-0006Rr-8z; Thu, 15 Oct 2020 15:50:41 +0000
+	id 1kT5Wf-0006ZF-Ib; Thu, 15 Oct 2020 15:50:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 7519.19702; Thu, 15 Oct 2020 15:50:41 +0000
+Received: by outflank-mailman (output) from mailman id 7520.19718; Thu, 15 Oct 2020 15:50:45 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,94 +38,114 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kT5Wa-0006RO-VD; Thu, 15 Oct 2020 15:50:40 +0000
-Received: by outflank-mailman (input) for mailman id 7519;
- Thu, 15 Oct 2020 15:50:39 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kT5Wf-0006Yy-DG; Thu, 15 Oct 2020 15:50:45 +0000
+Received: by outflank-mailman (input) for mailman id 7520;
+ Thu, 15 Oct 2020 15:50:44 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=/DR3=DW=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1kT5WZ-0006GR-RD
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:39 +0000
+ id 1kT5We-0006GM-1H
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:44 +0000
 Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 319bc935-827b-4bc2-a804-a0d3a64e1b32;
- Thu, 15 Oct 2020 15:50:29 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 4208f03d-7c5c-4660-a429-de645d2d7303;
+ Thu, 15 Oct 2020 15:50:30 +0000 (UTC)
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kT5WP-00087u-3W
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:29 +0000
+ (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kT5WQ-00088E-7q
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:30 +0000
 Received: from iwj (helo=mynotebook.example.org)
  by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kT5WP-0005FC-1D
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:29 +0000
+ (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kT5WQ-0005Gg-6t
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:30 +0000
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by mariner.uk.xensource.com with esmtp (Exim 4.89)
  (envelope-from <ijackson@chiark.greenend.org.uk>)
- id 1kT5WN-0000oB-7F; Thu, 15 Oct 2020 16:50:27 +0100
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+ id 1kT5WO-0000oB-Gu; Thu, 15 Oct 2020 16:50:28 +0100
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=/DR3=DW=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
-	id 1kT5WZ-0006GR-RD
-	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:39 +0000
-X-Inumbo-ID: 319bc935-827b-4bc2-a804-a0d3a64e1b32
+	id 1kT5We-0006GM-1H
+	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:44 +0000
+X-Inumbo-ID: 4208f03d-7c5c-4660-a429-de645d2d7303
 Received: from mail.xenproject.org (unknown [104.130.215.37])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 319bc935-827b-4bc2-a804-a0d3a64e1b32;
-	Thu, 15 Oct 2020 15:50:29 +0000 (UTC)
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id 4208f03d-7c5c-4660-a429-de645d2d7303;
+	Thu, 15 Oct 2020 15:50:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=jMrPuRfDpr5F+mH23YfeFKCRSJQrvgGxKa9leTchrQs=; b=CXoc1/puYuanYGZwuMzekdpowu
-	8Rr6FPbGx+mQf1rceLB8ZdAcoj2yjyXt2pUuCdc0pU5DcrgN85o5JNGpciFEQH6ny7CQBmAO3RdFX
-	OyY5lxg5eNxls6XlyA4ZznHZo3n7jE2uIvDjy0x5FUGDpta0EvjRgYIDZvCKrOVl27Ig=;
+	bh=gfMUQl6jqji00/zUqCTGBQAbnUbgIuHTcubMdohdrgs=; b=xwf0V06ExMj7gdaT7ohYraVscw
+	Y6PoRK4crIguLGtGiO4j13aC03h3Pg/hckM43upCinIYFy/GXS6kK34FHpvdOL/85cNzzpt/ODbEl
+	9Op/eRjF8ShNMQ1np7pq4VkhMf7vXxDMyPPEwL2XgFEOfo2r5ZFUUL9KpBNqzQ939HMY=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
 	by mail.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <ijackson@chiark.greenend.org.uk>)
-	id 1kT5WP-00087u-3W
-	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:29 +0000
+	id 1kT5WQ-00088E-7q
+	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:30 +0000
 Received: from iwj (helo=mynotebook.example.org)
 	by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
 	(envelope-from <ijackson@chiark.greenend.org.uk>)
-	id 1kT5WP-0005FC-1D
-	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:29 +0000
+	id 1kT5WQ-0005Gg-6t
+	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:30 +0000
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
 	by mariner.uk.xensource.com with esmtp (Exim 4.89)
 	(envelope-from <ijackson@chiark.greenend.org.uk>)
-	id 1kT5WN-0000oB-7F; Thu, 15 Oct 2020 16:50:27 +0100
+	id 1kT5WO-0000oB-Gu; Thu, 15 Oct 2020 16:50:28 +0100
 From: Ian Jackson <iwj@xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: Ian Jackson <iwj@xenproject.org>
-Subject: [OSSTEST PATCH v2 04/17] mg-execute-flight: Do not include the transcript in reports
-Date: Thu, 15 Oct 2020 16:50:06 +0100
-Message-Id: <20201015155019.20705-5-iwj@xenproject.org>
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH v2 08/17] sg-report-flight: Break out printout_flightheader
+Date: Thu, 15 Oct 2020 16:50:10 +0100
+Message-Id: <20201015155019.20705-9-iwj@xenproject.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20201015155019.20705-1-iwj@xenproject.org>
 References: <20201015155019.20705-1-iwj@xenproject.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-These are large and not very useful.  A copy is in the tree if needed.
+From: Ian Jackson <ian.jackson@eu.citrix.com>
 
-Signed-off-by: Ian Jackson <iwj@xenproject.org>
+No functional change.
+
+Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- mg-execute-flight | 3 ---
- 1 file changed, 3 deletions(-)
+ sg-report-flight | 15 +++++++++++----
+ 1 file changed, 11 insertions(+), 4 deletions(-)
 
-diff --git a/mg-execute-flight b/mg-execute-flight
-index 391f4810..bef8dab6 100755
---- a/mg-execute-flight
-+++ b/mg-execute-flight
-@@ -101,9 +101,6 @@ echo
+diff --git a/sg-report-flight b/sg-report-flight
+index 15631001..2ab1637f 100755
+--- a/sg-report-flight
++++ b/sg-report-flight
+@@ -783,6 +783,14 @@ sub includes ($) {
+     }
+ }    
  
- ./cr-fold-long-lines <tmp/$flight.report
- 
--echo ============================================================
--./cr-fold-long-lines <tmp/$flight.transcript
--
- exec >&2
- 
- if $publish; then
++sub printout_flightheader ($) {
++    my ($r) = @_;
++    bodyprint <<END;
++flight $r->{Flight} $branch $r->{FlightInfo}{blessing} [$r->{FlightInfo}{intended}]
++$c{ReportHtmlPubBaseUrl}/$r->{Flight}/
++END
++}
++
+ sub printout {
+     my ($r, @failures) = @_;
+     $header_text = '';
+@@ -793,10 +801,9 @@ sub printout {
+ $r->{Flight}: $r->{OutcomeSummary}
+ END
+     includes(\@includebeginfiles);
+-    bodyprint <<END;
+-flight $r->{Flight} $branch $r->{FlightInfo}{blessing} [$r->{FlightInfo}{intended}]
+-$c{ReportHtmlPubBaseUrl}/$r->{Flight}/
+-END
++
++    printout_flightheader($r);
++
+     if (defined $r->{Overall}) {
+         bodyprint "\n";
+         bodyprint $r->{Overall};
 -- 
 2.20.1
 
