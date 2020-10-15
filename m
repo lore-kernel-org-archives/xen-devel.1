@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-12.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CC232C433DF
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 15:50:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A8E8C43467
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 15:50:49 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5A47422255
+	by mail.kernel.org (Postfix) with ESMTPS id F063322254
 	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 15:50:48 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="Q/8ZYg2r"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5A47422255
+	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="5uRoQMzX"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F063322254
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.7515.19654 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.7516.19670 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kT5WR-0006H6-0V; Thu, 15 Oct 2020 15:50:31 +0000
+	id 1kT5WV-0006Jy-67; Thu, 15 Oct 2020 15:50:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 7515.19654; Thu, 15 Oct 2020 15:50:30 +0000
+Received: by outflank-mailman (output) from mailman id 7516.19670; Thu, 15 Oct 2020 15:50:35 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,106 +38,92 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kT5WQ-0006Gu-OB; Thu, 15 Oct 2020 15:50:30 +0000
-Received: by outflank-mailman (input) for mailman id 7515;
- Thu, 15 Oct 2020 15:50:30 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kT5WV-0006Jp-1C; Thu, 15 Oct 2020 15:50:35 +0000
+Received: by outflank-mailman (input) for mailman id 7516;
+ Thu, 15 Oct 2020 15:50:34 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=/DR3=DW=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1kT5WP-0006GR-Ub
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:29 +0000
+ id 1kT5WU-0006GM-0o
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:34 +0000
 Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 8c9d18f5-3706-4452-bb2e-3b894d5a3882;
- Thu, 15 Oct 2020 15:50:29 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 733865e4-7403-49ce-adca-e4676c5d0d6c;
+ Thu, 15 Oct 2020 15:50:28 +0000 (UTC)
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kT5WO-00087r-QW
+ (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kT5WO-00087l-DE
  for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:28 +0000
 Received: from iwj (helo=mynotebook.example.org)
  by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kT5WO-0005Ey-Oo
+ (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kT5WO-0005EZ-B1
  for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:28 +0000
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by mariner.uk.xensource.com with esmtp (Exim 4.89)
  (envelope-from <ijackson@chiark.greenend.org.uk>)
- id 1kT5WN-0000oB-0F; Thu, 15 Oct 2020 16:50:27 +0100
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+ id 1kT5WM-0000oB-Fn; Thu, 15 Oct 2020 16:50:26 +0100
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=/DR3=DW=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
-	id 1kT5WP-0006GR-Ub
-	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:29 +0000
-X-Inumbo-ID: 8c9d18f5-3706-4452-bb2e-3b894d5a3882
+	id 1kT5WU-0006GM-0o
+	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:34 +0000
+X-Inumbo-ID: 733865e4-7403-49ce-adca-e4676c5d0d6c
 Received: from mail.xenproject.org (unknown [104.130.215.37])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 8c9d18f5-3706-4452-bb2e-3b894d5a3882;
-	Thu, 15 Oct 2020 15:50:29 +0000 (UTC)
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id 733865e4-7403-49ce-adca-e4676c5d0d6c;
+	Thu, 15 Oct 2020 15:50:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=GKNUYQeiTTAK8ez/vVJcZ2hoW8Ug+I9meJLpgJqBeIU=; b=Q/8ZYg2rwXY9YNgyMWTqtdK71s
-	Hnuv+uKXW4Y5/kNa24G4vbTHCC4kUxl0kAcWsbflvzZG+PKjMMND9O8uijMOaUI0WHyZEgdRDbgkK
-	7r9RQqayc3e1qLH40ULry3k2bNV2W+sHp68N9Rp1NsMFipf4vagcjcVua7bKdRxT4WoI=;
+	bh=Ib9u1KozgEMCg0jCGLWPWL8C4aZzOGRCjREpAAS7g4Y=; b=5uRoQMzX8oU6XFYbtTezweKWbT
+	rbMo9yOrAT5Pxnp+T9kmCHM10GgixrtLQ/Lr53QdVadPIXx2+ryUcYpracwnk6PdJ86qH6O7RfuMF
+	o3tRVc4O8qdjJ0q/8TPh6sMfIwwR8O2qCLF9zoS9V+ZjIjP+DAQxJ7MVmCtaEE3Pk+5c=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
 	by mail.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <ijackson@chiark.greenend.org.uk>)
-	id 1kT5WO-00087r-QW
+	id 1kT5WO-00087l-DE
 	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:28 +0000
 Received: from iwj (helo=mynotebook.example.org)
 	by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
 	(envelope-from <ijackson@chiark.greenend.org.uk>)
-	id 1kT5WO-0005Ey-Oo
+	id 1kT5WO-0005EZ-B1
 	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:28 +0000
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
 	by mariner.uk.xensource.com with esmtp (Exim 4.89)
 	(envelope-from <ijackson@chiark.greenend.org.uk>)
-	id 1kT5WN-0000oB-0F; Thu, 15 Oct 2020 16:50:27 +0100
+	id 1kT5WM-0000oB-Fn; Thu, 15 Oct 2020 16:50:26 +0100
 From: Ian Jackson <iwj@xenproject.org>
 To: xen-devel@lists.xenproject.org
 Cc: Ian Jackson <iwj@xenproject.org>
-Subject: [OSSTEST PATCH v2 03/17] sg-report-flight: Consider all blessings for "never pass"
-Date: Thu, 15 Oct 2020 16:50:05 +0100
-Message-Id: <20201015155019.20705-4-iwj@xenproject.org>
+Subject: [OSSTEST PATCH v2 01/17] Honour OSSTEST_SIMULATE=2 to actually run dummy flight
+Date: Thu, 15 Oct 2020 16:50:03 +0100
+Message-Id: <20201015155019.20705-2-iwj@xenproject.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20201015155019.20705-1-iwj@xenproject.org>
 References: <20201015155019.20705-1-iwj@xenproject.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-$anypassq is used for the "never pass" check; the distinction between
-this and simply "fail" is cosmetic (although it can be informative).
-
-On non-"real" flights, it can easily happen that the flight never
-passed *on this branch with this blessing* but has passed on real.  So
-the steps subquery does not find us an answer within reasonable time.
-
-Work around this by always searching for "real".  This keeps the
-performance within acceptable bounds even during ad-hoc testing.
-
-We don't actually use the row from this query, so the only effect is
-that when the job passed in a "real" flight, we go on to the full
-regresson analysis rather than short-circuiting and reporting "never
-pass".
-
 Signed-off-by: Ian Jackson <iwj@xenproject.org>
 ---
- sg-report-flight | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ cri-args-hostlists | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/sg-report-flight b/sg-report-flight
-index a07e03cb..15631001 100755
---- a/sg-report-flight
-+++ b/sg-report-flight
-@@ -935,7 +935,7 @@ sub justifyfailures ($;$) {
-         )
-         SELECT * FROM flights JOIN s USING (flight)
-             WHERE $branches_cond_q
--              AND $blessingscond
-+              AND ($blessingscond) OR blessing = 'real'
-             LIMIT 1
- END
-     $anypassq= db_prepare($anypassq);
+diff --git a/cri-args-hostlists b/cri-args-hostlists
+index 994e00c0..6cdff53f 100644
+--- a/cri-args-hostlists
++++ b/cri-args-hostlists
+@@ -68,8 +68,8 @@ fi
+ 
+ execute_flight () {
+         case "x$OSSTEST_SIMULATE" in
+-        x|x0)   ;;
+-        *)      echo SIMULATING - NOT EXECUTING $1 $2
++        x|x0|x2)   ;;
++        *)      echo SIMULATING $OSSTEST_SIMULATE - NOT EXECUTING $1 $2
+                 return
+                 ;;
+         esac
 -- 
 2.20.1
 
