@@ -2,26 +2,28 @@ Return-Path: <SRS0=IsAa=DW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+X-Spam-Status: No, score=-6.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1BC9FC433E7
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 09:16:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0AF8FC433E7
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 09:20:44 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A16362222E
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 09:16:40 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A16362222E
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
+	by mail.kernel.org (Postfix) with ESMTPS id 87EC22224A
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 09:20:43 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="cf5J2IiM"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 87EC22224A
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.7163.18803 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.7180.18815 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kSzN9-0006lL-1p; Thu, 15 Oct 2020 09:16:31 +0000
+	id 1kSzQx-0007hi-Jy; Thu, 15 Oct 2020 09:20:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 7163.18803; Thu, 15 Oct 2020 09:16:31 +0000
+Received: by outflank-mailman (output) from mailman id 7180.18815; Thu, 15 Oct 2020 09:20:27 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,100 +38,79 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kSzN8-0006lC-Ui; Thu, 15 Oct 2020 09:16:30 +0000
-Received: by outflank-mailman (input) for mailman id 7163;
- Thu, 15 Oct 2020 09:16:29 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ehY9=DW=arm.com=bertrand.marquis@srs-us1.protection.inumbo.net>)
- id 1kSzN7-0006kj-Hr
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 09:16:29 +0000
-Received: from foss.arm.com (unknown [217.140.110.172])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id c9d6dfcc-03f4-45c6-8752-cdef913e6fba;
- Thu, 15 Oct 2020 09:16:29 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id DADA813D5;
- Thu, 15 Oct 2020 02:16:28 -0700 (PDT)
-Received: from e109506-lin.cambridge.arm.com (e109506-lin.cambridge.arm.com
- [10.1.198.23])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 504323F66B;
- Thu, 15 Oct 2020 02:16:28 -0700 (PDT)
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+	id 1kSzQx-0007hb-FR; Thu, 15 Oct 2020 09:20:27 +0000
+Received: by outflank-mailman (input) for mailman id 7180;
+ Thu, 15 Oct 2020 09:20:26 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=MKI8=DW=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1kSzQw-0007hW-G3
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 09:20:26 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 2658bd47-bd55-496a-a07f-dba18147df3e;
+ Thu, 15 Oct 2020 09:20:25 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id E4D25AF16;
+ Thu, 15 Oct 2020 09:20:24 +0000 (UTC)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=ehY9=DW=arm.com=bertrand.marquis@srs-us1.protection.inumbo.net>)
-	id 1kSzN7-0006kj-Hr
-	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 09:16:29 +0000
-X-Inumbo-ID: c9d6dfcc-03f4-45c6-8752-cdef913e6fba
-Received: from foss.arm.com (unknown [217.140.110.172])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
-	id c9d6dfcc-03f4-45c6-8752-cdef913e6fba;
-	Thu, 15 Oct 2020 09:16:29 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id DADA813D5;
-	Thu, 15 Oct 2020 02:16:28 -0700 (PDT)
-Received: from e109506-lin.cambridge.arm.com (e109506-lin.cambridge.arm.com [10.1.198.23])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 504323F66B;
-	Thu, 15 Oct 2020 02:16:28 -0700 (PDT)
-From: Bertrand Marquis <bertrand.marquis@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v3] tools/xenpmd: Fix gcc10 snprintf warning
-Date: Thu, 15 Oct 2020 10:16:09 +0100
-Message-Id: <14ac4900dcf4fb9b45ce4f5e3d60de7f7e3602ab.1602753323.git.bertrand.marquis@arm.com>
-X-Mailer: git-send-email 2.17.1
+	(envelope-from <SRS0=MKI8=DW=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+	id 1kSzQw-0007hW-G3
+	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 09:20:26 +0000
+X-Inumbo-ID: 2658bd47-bd55-496a-a07f-dba18147df3e
+Received: from mx2.suse.de (unknown [195.135.220.15])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id 2658bd47-bd55-496a-a07f-dba18147df3e;
+	Thu, 15 Oct 2020 09:20:25 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1602753625;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=QMv7UBCOvFBSjIe6lxfS+zRlNYNSopMWBW8nh0iSO2k=;
+	b=cf5J2IiMXlLYUlzoCWwW7KWh9DPz1TbBslSxPpFHWEghaDFQvO203IrRgPHGT+gy85WKXx
+	wdStFKlLLEsHTpGeheZh6I2fV6Fdw/Fykw7PYgGEkQ3bYxW0iE0s4M/iSXg1bokQuXr5kK
+	1m+e8PsTpstUOKLtE9Yc35MBoUkkWtM=
+Received: from relay2.suse.de (unknown [195.135.221.27])
+	by mx2.suse.de (Postfix) with ESMTP id E4D25AF16;
+	Thu, 15 Oct 2020 09:20:24 +0000 (UTC)
+Subject: Re: Ryzen 4000 (Mobile) Softlocks/Micro-stutters
+To: Dylanger Daly <dylangerdaly@protonmail.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <9lQU_gCfRzGyyNb2j86pxTMi1IET1Iq7iK3994agUZPrTI5Xd-aCJAaRYuJlD3L5LT2WaV4N3-YF4xKl5ukialT0M_YD0ve6gmDFFfatpXw=@protonmail.com>
+ <72589937-a918-96c8-4589-6d30efaead9a@suse.com>
+ <U00A4lb9CgpRhV9huYxk5kvyAAam9UcFJ7h2K1a6-M84ef8W58V4Shq7hmU5WKh3rKaVRl6EiTXVmDc-czrBJvyf7h1mjh3Dc3SPvj8qIog=@protonmail.com>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <5db65e32-31aa-57a5-f82b-ebe497f493f5@suse.com>
+Date: Thu, 15 Oct 2020 11:20:25 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.1
+MIME-Version: 1.0
+In-Reply-To: <U00A4lb9CgpRhV9huYxk5kvyAAam9UcFJ7h2K1a6-M84ef8W58V4Shq7hmU5WKh3rKaVRl6EiTXVmDc-czrBJvyf7h1mjh3Dc3SPvj8qIog=@protonmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-Add a check for snprintf return code and ignore the entry if we get an
-error. This should in fact never happen and is more a trick to make gcc
-happy and prevent compilation errors.
+On 15.10.2020 11:14, Dylanger Daly wrote:
+> Indeed this is for dom0, I only recently tried limiting a domU to 1 core and observed absolutely no softlocks, UI animations are smooth as butter with 1 core only.
+> 
+> Indeed I believe this is a CPU Scheduling issue, I've tried both the older credit and RTDS however both don't boot correctly.
 
-This is solving the following gcc warning when compiling for arm32 host
-platforms with optimization activated:
-xenpmd.c:92:37: error: '%s' directive output may be truncated writing
-between 4 and 2147483645 bytes into a region of size 271
-[-Werror=format-truncation=]
+This wants reporting (with sufficient data, i.e. at least a serial log)
+as separate issues.
 
-This is also solving the following Debian bug:
-https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=970802
+> The number of cores on this CPU is 8, 16 threads however Qubes by default disables SMT, sched_credit2_max_cpus_runqueue is 16 by default, I've tried testing with setting this to 7 or 8 however it'll either not boot, or nothing will change.
 
-Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
----
- tools/xenpmd/xenpmd.c | 9 +++++++--
- 1 file changed, 7 insertions(+), 2 deletions(-)
+Failure to boot, unless with insane command line options, should always
+be reported to it can be fixed.
 
-diff --git a/tools/xenpmd/xenpmd.c b/tools/xenpmd/xenpmd.c
-index 35fd1c931a..12b82cf43e 100644
---- a/tools/xenpmd/xenpmd.c
-+++ b/tools/xenpmd/xenpmd.c
-@@ -102,6 +102,7 @@ FILE *get_next_battery_file(DIR *battery_dir,
-     FILE *file = 0;
-     struct dirent *dir_entries;
-     char file_name[284];
-+    int ret;
-     
-     do 
-     {
-@@ -111,11 +112,15 @@ FILE *get_next_battery_file(DIR *battery_dir,
-         if ( strlen(dir_entries->d_name) < 4 )
-             continue;
-         if ( battery_info_type == BIF ) 
--            snprintf(file_name, sizeof(file_name), BATTERY_INFO_FILE_PATH,
-+            ret = snprintf(file_name, sizeof(file_name), BATTERY_INFO_FILE_PATH,
-                      dir_entries->d_name);
-         else 
--            snprintf(file_name, sizeof(file_name), BATTERY_STATE_FILE_PATH,
-+            ret = snprintf(file_name, sizeof(file_name), BATTERY_STATE_FILE_PATH,
-                      dir_entries->d_name);
-+        /* This should not happen but is needed to pass gcc checks */
-+        if (ret < 0)
-+            continue;
-+        file_name[sizeof(file_name) - 1] = '\0';
-         file = fopen(file_name, "r");
-     } while ( !file );
- 
--- 
-2.17.1
+I'm afraid neither part of the reply gets you/us any closer to an
+understanding of your softlockup issues. As a random thought, have you
+tried disabling use of (deep) C-states? This is known to have helped
+to work around errata on other hardware, so may be worth a try.
 
+Jan
 
