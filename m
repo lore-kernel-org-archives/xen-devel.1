@@ -2,28 +2,28 @@ Return-Path: <SRS0=IsAa=DW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D6D9EC43457
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 15:50:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C5E90C433E7
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 15:50:51 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6856F22255
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 15:50:50 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 5B0D122255
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 15:50:51 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="sOco/NYN"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6856F22255
+	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="VtqZkfNS"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5B0D122255
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.7518.19694 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.7514.19646 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kT5Wa-0006Qk-NY; Thu, 15 Oct 2020 15:50:40 +0000
+	id 1kT5WQ-0006Gd-Jn; Thu, 15 Oct 2020 15:50:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 7518.19694; Thu, 15 Oct 2020 15:50:40 +0000
+Received: by outflank-mailman (output) from mailman id 7514.19646; Thu, 15 Oct 2020 15:50:30 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,97 +38,112 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kT5Wa-0006Qb-JJ; Thu, 15 Oct 2020 15:50:40 +0000
-Received: by outflank-mailman (input) for mailman id 7518;
- Thu, 15 Oct 2020 15:50:39 +0000
+	id 1kT5WQ-0006GW-GC; Thu, 15 Oct 2020 15:50:30 +0000
+Received: by outflank-mailman (input) for mailman id 7514;
+ Thu, 15 Oct 2020 15:50:29 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=/DR3=DW=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1kT5WZ-0006GM-11
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:39 +0000
+ id 1kT5WP-0006GM-50
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:29 +0000
 Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 39964fa8-4653-494f-9ed6-c44f232c5b55;
- Thu, 15 Oct 2020 15:50:29 +0000 (UTC)
+ id 1c08dda8-552f-4602-b07d-4671cb82684d;
+ Thu, 15 Oct 2020 15:50:28 +0000 (UTC)
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kT5WP-00087x-7D
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:29 +0000
+ (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kT5WO-00087i-0F
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:28 +0000
 Received: from iwj (helo=mynotebook.example.org)
  by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kT5WP-0005FQ-6O
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:29 +0000
+ (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kT5WN-0005EJ-Vi
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:27 +0000
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by mariner.uk.xensource.com with esmtp (Exim 4.89)
  (envelope-from <ijackson@chiark.greenend.org.uk>)
- id 1kT5WN-0000oB-GH; Thu, 15 Oct 2020 16:50:27 +0100
+ id 1kT5WM-0000oB-8D; Thu, 15 Oct 2020 16:50:26 +0100
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=/DR3=DW=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
-	id 1kT5WZ-0006GM-11
-	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:39 +0000
-X-Inumbo-ID: 39964fa8-4653-494f-9ed6-c44f232c5b55
+	id 1kT5WP-0006GM-50
+	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:29 +0000
+X-Inumbo-ID: 1c08dda8-552f-4602-b07d-4671cb82684d
 Received: from mail.xenproject.org (unknown [104.130.215.37])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 39964fa8-4653-494f-9ed6-c44f232c5b55;
-	Thu, 15 Oct 2020 15:50:29 +0000 (UTC)
+	id 1c08dda8-552f-4602-b07d-4671cb82684d;
+	Thu, 15 Oct 2020 15:50:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
-	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=02bnAe8Pk+WQt+MbpE+lK1JlJkiQs50S4+SkvCn1WvQ=; b=sOco/NYNjydGO2EzHcka/1MPPg
-	V80yd2kaHgCE8uDjurbLWMIQ5GUy60sKXV6nxpbq6lHuN2OmXx2r/gP5AwQvmz3Tf9+rxHHPfpHqc
-	8eaI7mYQ7ol9nV2c12KuyQ+Ej9z3Zft1UdVFW0F8p49Zn4FiX9t/CzZeTDd7/o5YAfgI=;
+	Message-Id:Date:Subject:Cc:To:From;
+	bh=0cu1fQEr/YhhkV7d6ryfyU30np6PR4Bzu+bivwbzW74=; b=VtqZkfNS9vcK3jAnRQM0G5IL/A
+	CHimD6YIZx6fT4+B4mhrnvuFWIxdNDeaGv15+aUsp3uogOHjQm/5LrFt4oA1DISvou14V6q8/q+Wi
+	RE0EA3ohdR1TQNaho8Fh4zjWU1w/1vHklPylyCYS7MOybVvbuodNrQxqTPy6NKFLMcDc=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
 	by mail.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <ijackson@chiark.greenend.org.uk>)
-	id 1kT5WP-00087x-7D
-	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:29 +0000
+	id 1kT5WO-00087i-0F
+	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:28 +0000
 Received: from iwj (helo=mynotebook.example.org)
 	by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
 	(envelope-from <ijackson@chiark.greenend.org.uk>)
-	id 1kT5WP-0005FQ-6O
-	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:29 +0000
+	id 1kT5WN-0005EJ-Vi
+	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:27 +0000
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
 	by mariner.uk.xensource.com with esmtp (Exim 4.89)
 	(envelope-from <ijackson@chiark.greenend.org.uk>)
-	id 1kT5WN-0000oB-GH; Thu, 15 Oct 2020 16:50:27 +0100
+	id 1kT5WM-0000oB-8D; Thu, 15 Oct 2020 16:50:26 +0100
 From: Ian Jackson <iwj@xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>,
-	Ian Jackson <iwj@xenproject.org>
-Subject: [OSSTEST PATCH v2 05/17] sg-report-job-history: eval $DAILY_BRANCH_PREEXEC_HOOK
-Date: Thu, 15 Oct 2020 16:50:07 +0100
-Message-Id: <20201015155019.20705-6-iwj@xenproject.org>
+Cc: Ian Jackson <iwj@xenproject.org>
+Subject: [OSSTEST PATCH v2 00/13] Immediately retry failing tests
+Date: Thu, 15 Oct 2020 16:50:02 +0100
+Message-Id: <20201015155019.20705-1-iwj@xenproject.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20201015155019.20705-1-iwj@xenproject.org>
-References: <20201015155019.20705-1-iwj@xenproject.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Ian Jackson <ian.jackson@eu.citrix.com>
+We discussed this at the Xen Summit.  What I do here is immediate
+retry the jobs with regressions, and then reanalyse the original full
+flight.  If the retries showed the failures were heisenbugs, this will
+let them though.
 
-Put the call to this debugging/testing variable inside an eval.  This
-allows a wider variety of stunts.  The one in-tree reference is
-already compatible with this new semantics.
+This should reduce the negative impact on development, of heisenbugs,
+but it won't do anything to help keep them out of the tree.
 
-Signed-off-by: Ian Jackson <iwj@xenproject.org>
----
- cr-daily-branch | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+This series has now had proper dev testing (insofar as possible for
+something of this nature) and I will be pushing it to pretest shortly.
 
-diff --git a/cr-daily-branch b/cr-daily-branch
-index b8f221ee..23060588 100755
---- a/cr-daily-branch
-+++ b/cr-daily-branch
-@@ -472,7 +472,7 @@ sgr_args+=" $EXTRA_SGR_ARGS"
- 
- date >&2
- : $flight $branch $OSSTEST_BLESSING $sgr_args
--$DAILY_BRANCH_PREEXEC_HOOK
-+eval "$DAILY_BRANCH_PREEXEC_HOOK"
- execute_flight $flight $OSSTEST_BLESSING
- date >&2
- 
+Ian Jackson (17):
+  Honour OSSTEST_SIMULATE=2 to actually run dummy flight
+  Honour OSSTEST_SIMULATE_FAIL in sg-run-job
+  sg-report-flight: Consider all blessings for "never pass"
+  mg-execute-flight: Do not include the transcript in reports
+  sg-report-job-history: eval $DAILY_BRANCH_PREEXEC_HOOK
+  cri-args-hostlists: New debug var $OSSTEST_REPORT_JOB_HISTORY_RUN
+  cri-args-hostlists: Break out report_flight and publish_logs
+  sg-report-flight: Break out printout_flightheader
+  sg-report-flight: Provide --refer-to-flight option
+  sg-report-flight: Nicer output for --refer-to-flight option
+  Introduce real-retry blessing
+  cri-args-hostlists: Move flight_html_dir variable
+  cr-daily-branch: Immediately retry failing tests
+  Honour OSSTEST_SIMULATE_FAIL_RETRY for immediate retries
+  cr-daily-branch: Do not do immediate retry of failing xtf flights
+  sg-report-flight: Include count of blockers, and of jobs, in mro
+  cr-daily-branch: Heuristics for when to do immediate retest flight
+
+ README.dev          |  9 +++---
+ cr-daily-branch     | 73 +++++++++++++++++++++++++++++++++++++++++++--
+ cr-disk-report      |  2 +-
+ cr-try-bisect       |  4 +--
+ cr-try-bisect-adhoc |  2 +-
+ cri-args-hostlists  | 28 +++++++++++------
+ cs-bisection-step   |  4 +--
+ mg-execute-flight   |  3 --
+ sg-report-flight    | 42 +++++++++++++++++++++-----
+ sg-run-job          |  9 +++++-
+ 10 files changed, 143 insertions(+), 33 deletions(-)
+
 -- 
 2.20.1
 
