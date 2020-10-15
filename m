@@ -2,28 +2,29 @@ Return-Path: <SRS0=IsAa=DW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-8.4 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
-	autolearn_force=no version=3.4.0
+	HTML_MESSAGE,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,NICE_REPLY_A,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E4A02C433E7
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 11:32:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3D36BC43457
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 11:58:11 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 523D12073A
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 11:32:10 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id BBE48212CC
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 11:58:10 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="NkMTXy6Y"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 523D12073A
+	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="U3/+27u4"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BBE48212CC
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.7273.18970 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.7276.18982 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kT1Tz-0003HR-Tq; Thu, 15 Oct 2020 11:31:43 +0000
+	id 1kT1t5-00058C-1U; Thu, 15 Oct 2020 11:57:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 7273.18970; Thu, 15 Oct 2020 11:31:43 +0000
+Received: by outflank-mailman (output) from mailman id 7276.18982; Thu, 15 Oct 2020 11:57:39 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,135 +39,147 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kT1Tz-0003HK-Ql; Thu, 15 Oct 2020 11:31:43 +0000
-Received: by outflank-mailman (input) for mailman id 7273;
- Thu, 15 Oct 2020 11:31:43 +0000
+	id 1kT1t4-000585-UV; Thu, 15 Oct 2020 11:57:38 +0000
+Received: by outflank-mailman (input) for mailman id 7276;
+ Thu, 15 Oct 2020 11:57:38 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=bKTB=DW=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1kT1Tz-0003HF-Bn
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 11:31:43 +0000
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ <SRS0=LoCs=DW=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1kT1t4-000580-41
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 11:57:38 +0000
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id bb00959c-74d3-4245-8149-5e6e3c81f928;
- Thu, 15 Oct 2020 11:31:41 +0000 (UTC)
+ id 4f82852d-5414-4c48-86ed-039df559f224;
+ Thu, 15 Oct 2020 11:57:36 +0000 (UTC)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=bKTB=DW=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
-	id 1kT1Tz-0003HF-Bn
-	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 11:31:43 +0000
-X-Inumbo-ID: bb00959c-74d3-4245-8149-5e6e3c81f928
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+	(envelope-from <SRS0=LoCs=DW=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+	id 1kT1t4-000580-41
+	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 11:57:38 +0000
+X-Inumbo-ID: 4f82852d-5414-4c48-86ed-039df559f224
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id bb00959c-74d3-4245-8149-5e6e3c81f928;
-	Thu, 15 Oct 2020 11:31:41 +0000 (UTC)
+	id 4f82852d-5414-4c48-86ed-039df559f224;
+	Thu, 15 Oct 2020 11:57:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1602761501;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:content-transfer-encoding:in-reply-to;
-  bh=JaKKGt3d+i+nh0Sf/oHSA2TVHCS6q9lA/II9WTvsiHI=;
-  b=NkMTXy6YUvAk3MKvr2cb5u5/tW5f15ePiJkQ+UOKrEqb86t0BBWBgW48
-   pkQILHik67WuZc06GzfhHn2tP6CG8Gzor+W5wTamjD9UO2wyIhiYXV2ux
-   avRYXSdVcpdOgGommbZeqGeGKhFkIAnAwjdidYw+W2J8Xl381+FGUmEiz
-   g=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: RTxSUs8l+PfyoDrEqhblrAMlIjAPi4B35dQozjF52rakKudSspVBFEp++RApEw57Kq1MBrOhEv
- +y/JW6VwM0kfES4d7GN7Chx049SKFoCm1kP/XsuxrdjXwWr8Jr1J7vre3OX7pUyK3CJDpRrfeM
- XpdLLcgLEcJZ6iKbTGh5hfGgYma7ILqJ7iDP1T9/5l8Q84yk0xnTb6ZY3cliTNTNlemZyHOV+B
- 6cf+bd3v+W7xz/eK69xtYZ/na3uJdT5RwfAjVAXhGE4Jp93Ad141PASZsyN+ntBcYvXuhHauRx
- 1Ug=
+  d=citrix.com; s=securemail; t=1602763056;
+  h=subject:to:references:from:message-id:date:mime-version:
+   in-reply-to;
+  bh=p5jFLXPkePOi3rvQj8z0hA6OfTK1Oc2PnfKQR1b0BNs=;
+  b=U3/+27u43PVDMRwJny+8NMayfwI0S+TXP5sxt09HbCcd0ZNWT4h+nkBR
+   ia6Ww+TWScercgFm4DuMDtfEkNBTydxeVZyoj6+eiIbHsyVYhFet1gibV
+   odGGgGQcH3fA/Pnlmh1zFMENIR2tHkIga/Q7fEml7BgdR6Rkb37cd/rda
+   U=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: +COeSubuh7AKluxEmgAOVNOt0ijioLPIFs1FUE9jRg+SygzzHXfi1KTzG8hwBNHhaQwblyYz+S
+ lI+nGRPLxqvawSAjDUenXdLxjsrXu77m3JENtL4vZ24c9DYgQADa3k6yrNYsYEmQ9lgWw2B3JJ
+ cQr+JTxwD/hB+XadJZzmUjfCMcF/MGcaJU48TGAjc4qV4eivcFNIdn4xVe/2snXNCorkTTGD0d
+ a+pE9hC/wQoEeqCRHxAC7z9PiRZfz0gtl71kdN3L8hnqcyqBlJjC8TtjUNysn6ZOhJa2VsesQI
+ fPs=
 X-SBRS: 2.5
-X-MesageID: 29314360
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 30108690
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
 X-IronPort-AV: E=Sophos;i="5.77,378,1596513600"; 
-   d="scan'208";a="29314360"
-Date: Thu, 15 Oct 2020 13:31:33 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Jason Andryuk <jandryuk@gmail.com>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>,
-	<intel-gfx@lists.freedesktop.org>, xen-devel <xen-devel@lists.xenproject.org>
-Subject: Re: i915 dma faults on Xen
-Message-ID: <20201015113109.GA68032@Air-de-Roger>
-References: <CAKf6xpv-LRCuo-qHHWMuukYtvJiR-i+-YhLUOZeqoAFd-=swEQ@mail.gmail.com>
- <1a3b90f4-564e-84d3-fd6a-3454e8753579@citrix.com>
+   d="scan'208,217";a="30108690"
+Subject: Re: Ryzen 4000 (Mobile) Softlocks/Micro-stutters
+To: Dylanger Daly <dylangerdaly@protonmail.com>,
+	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <9lQU_gCfRzGyyNb2j86pxTMi1IET1Iq7iK3994agUZPrTI5Xd-aCJAaRYuJlD3L5LT2WaV4N3-YF4xKl5ukialT0M_YD0ve6gmDFFfatpXw=@protonmail.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Message-ID: <2cc5da3e-0ad0-4647-f1ca-190788c2910b@citrix.com>
+Date: Thu, 15 Oct 2020 12:57:30 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <1a3b90f4-564e-84d3-fd6a-3454e8753579@citrix.com>
+In-Reply-To: <9lQU_gCfRzGyyNb2j86pxTMi1IET1Iq7iK3994agUZPrTI5Xd-aCJAaRYuJlD3L5LT2WaV4N3-YF4xKl5ukialT0M_YD0ve6gmDFFfatpXw=@protonmail.com>
+Content-Type: multipart/alternative;
+	boundary="------------6A7E07F0E413729C47F15F11"
+Content-Language: en-GB
 X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
- FTLPEX02CL06.citrite.net (10.13.108.179)
+ FTLPEX02CL05.citrite.net (10.13.108.178)
 
-On Wed, Oct 14, 2020 at 08:37:06PM +0100, Andrew Cooper wrote:
-> On 14/10/2020 20:28, Jason Andryuk wrote:
-> > Hi,
-> >
-> > Bug opened at https://gitlab.freedesktop.org/drm/intel/-/issues/2576
-> >
-> > I'm seeing DMA faults for the i915 graphics hardware on a Dell
-> > Latitude 5500. These were captured when I plugged into a Dell
-> > Thunderbolt dock with two DisplayPort monitors attached.  Xen 4.12.4
-> > staging and Linux 5.4.70 (and some earlier versions).
-> >
-> > Oct 14 18:41:49.056490 kernel:[   85.570347] [drm:gen8_de_irq_handler
-> > [i915]] *ERROR* Fault errors on pipe A: 0x00000080
-> > Oct 14 18:41:49.056494 kernel:[   85.570395] [drm:gen8_de_irq_handler
-> > [i915]] *ERROR* Fault errors on pipe A: 0x00000080
-> > Oct 14 18:41:49.056589 VM hypervisor: (XEN) [VT-D]DMAR:[DMA Read]
-> > Request device [0000:00:02.0] fault addr 39b5845000, iommu reg =
-> > ffff82c00021d000
-> > Oct 14 18:41:49.056594 VM hypervisor: (XEN) [VT-D]DMAR: reason 06 -
-> > PTE Read access is not set
-> > Oct 14 18:41:49.056784 kernel:[   85.570668] [drm:gen8_de_irq_handler
-> > [i915]] *ERROR* Fault errors on pipe A: 0x00000080
-> > Oct 14 18:41:49.056789 kernel:[   85.570687] [drm:gen8_de_irq_handler
-> > [i915]] *ERROR* Fault errors on pipe A: 0x00000080
-> > Oct 14 18:41:49.056885 VM hypervisor: (XEN) [VT-D]DMAR:[DMA Read]
-> > Request device [0000:00:02.0] fault addr 4238d0a000, iommu reg =
-> > ffff82c00021d000
-> > Oct 14 18:41:49.056890 VM hypervisor: (XEN) [VT-D]DMAR: reason 06 -
-> > PTE Read access is not set
-> >
-> > They repeat. In the log attached to
-> > https://gitlab.freedesktop.org/drm/intel/-/issues/2576, they start at
-> > "Oct 14 18:41:49.056589" and continue until I unplug the dock around
-> > "Oct 14 18:41:54.801802".
-> >
-> > I've also seen similar messages when attaching the laptop's HDMI port
-> > to a 4k monitor. The eDP display by itself seems okay.
-> >
-> > I tried Fedora 31 & 32 live images with intel_iommu=on, so no Xen, and
-> > didn't see any errors
-> >
-> > This is a kernel & xen log with drm.debug=0x1e. It also includes some
-> > application (glass) logging when it changes resolutions which seems to
-> > set off the DMA faults. 5500-igfx-messages-kern-xen-glass
-> >
-> > Running xen with iommu=no-igfx disables the iommu for the i915
-> > graphics and no faults are reported. However, that breaks some other
-> > devices (Dell Latitude 7200 and 5580) giving a black screen with:
-> >
-> > Oct 10 13:24:37.022117 kernel:[   14.884759] i915 0000:00:02.0: Failed
-> > to idle engines, declaring wedged!
-> > Oct 10 13:24:37.022118 kernel:[   14.964794] i915 0000:00:02.0: Failed
-> > to initialize GPU, declaring it wedged!
-> >
-> > Any suggestions welcome.
-> 
-> Presumably this is with a PV dom0.  What are 39b5845000 and 4238d0a000
-> in the machine memory map?
-> 
-> This smells like a missing RMRR in the ACPI tables.
+--------------6A7E07F0E413729C47F15F11
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 
-I agree.
+On 15/10/2020 01:38, Dylanger Daly wrote:
+> Hi All,
+>
+> I'm currently using Xen 4.14 (Qubes 4.1 OS) on a Ryzen 7 4750U PRO, by
+> default I'll experience softlocks where the mouse for example will
+> jolt from time to time, in this state it's not usable.
+>
+> Adding `dom0_max_vcpus=1 dom0_vcpus_pin` to Xen's CMDLINE results in
+> no more jolting however performance isn't what it should be on an 8
+> core CPU, softlocks are still a problem within domU's, any sort of UI
+> animation for example.
+>
+> Reverting this commit (8e2aa76dc1670e82eaa15683353853bc66bf54fc)
+> <https://github.com/xen-project/xen/commit/8e2aa76dc1670e82eaa15683353853bc66bf54fc> results
+> in even worse performance with or without the above changes to
+> CMDLINE, and it's not usable at all.
+>
+> Does anyone have any pointers?
 
-Can you paste the memory map as printed by Xen when booting, and what
-command line are you using to boot Xen.
+Does booting with sched=credit alter the symptoms?
 
-Have you tried adding dom0-iommu=map-inclusive to the Xen command
-line?
+~Andrew
 
-Roger.
+--------------6A7E07F0E413729C47F15F11
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <div class="moz-cite-prefix">On 15/10/2020 01:38, Dylanger Daly
+      wrote:<br>
+    </div>
+    <blockquote type="cite"
+cite="mid:9lQU_gCfRzGyyNb2j86pxTMi1IET1Iq7iK3994agUZPrTI5Xd-aCJAaRYuJlD3L5LT2WaV4N3-YF4xKl5ukialT0M_YD0ve6gmDFFfatpXw=@protonmail.com">
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <div>Hi All,<br>
+      </div>
+      <div><br>
+      </div>
+      <div>I'm currently using Xen 4.14 (Qubes 4.1 OS) on a Ryzen
+        7 4750U PRO, by default I'll experience softlocks where the
+        mouse for example will jolt from time to time, in this state
+        it's not usable.<br>
+      </div>
+      <div><br>
+      </div>
+      <div>Adding `dom0_max_vcpus=1 dom0_vcpus_pin` to Xen's CMDLINE
+        results in no more jolting however performance isn't what it
+        should be on an 8 core CPU, softlocks are still a problem within
+        domU's, any sort of UI animation for example.<br>
+      </div>
+      <div><br>
+      </div>
+      <div>Reverting <a
+href="https://github.com/xen-project/xen/commit/8e2aa76dc1670e82eaa15683353853bc66bf54fc"
+          target="_blank"
+title="https://github.com/xen-project/xen/commit/8e2aa76dc1670e82eaa15683353853bc66bf54fc"
+          rel="nofollow" moz-do-not-send="true">this commit
+          (8e2aa76dc1670e82eaa15683353853bc66bf54fc)</a> results in even
+        worse performance with or without the above changes to CMDLINE,
+        and it's not usable at all.<br>
+      </div>
+      <div><br>
+      </div>
+      <div>Does anyone have any pointers?<br>
+      </div>
+    </blockquote>
+    <br>
+    Does booting with sched=credit alter the symptoms?<br>
+    <br>
+    ~Andrew<br>
+  </body>
+</html>
+
+--------------6A7E07F0E413729C47F15F11--
 
