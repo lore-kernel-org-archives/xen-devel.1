@@ -2,28 +2,28 @@ Return-Path: <SRS0=IsAa=DW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.4 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-11.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=no autolearn_force=no version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E93AC433E7
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 13:17:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5C00FC433DF
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 13:34:47 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B3F1A2225C
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 13:17:58 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id DDA072222B
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 13:34:46 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="VsOcvhb/"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B3F1A2225C
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=oracle.com
+	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="CdnrK1tb"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DDA072222B
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.7365.19228 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.7375.19241 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kT38b-0005td-CQ; Thu, 15 Oct 2020 13:17:45 +0000
+	id 1kT3Oh-0007fw-SI; Thu, 15 Oct 2020 13:34:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 7365.19228; Thu, 15 Oct 2020 13:17:45 +0000
+Received: by outflank-mailman (output) from mailman id 7375.19241; Thu, 15 Oct 2020 13:34:23 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,128 +38,149 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kT38b-0005tW-8v; Thu, 15 Oct 2020 13:17:45 +0000
-Received: by outflank-mailman (input) for mailman id 7365;
- Thu, 15 Oct 2020 13:17:43 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kT3Oh-0007fp-PJ; Thu, 15 Oct 2020 13:34:23 +0000
+Received: by outflank-mailman (input) for mailman id 7375;
+ Thu, 15 Oct 2020 13:34:22 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=TbfH=DW=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
- id 1kT38Z-0005tF-Ot
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 13:17:43 +0000
-Received: from aserp2130.oracle.com (unknown [141.146.126.79])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id a8bd4586-03c1-4799-ac11-383f007489a2;
- Thu, 15 Oct 2020 13:17:42 +0000 (UTC)
-Received: from pps.filterd (aserp2130.oracle.com [127.0.0.1])
- by aserp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 09FDEf3v097962;
- Thu, 15 Oct 2020 13:17:18 GMT
-Received: from userp3030.oracle.com (userp3030.oracle.com [156.151.31.80])
- by aserp2130.oracle.com with ESMTP id 346g8ghsak-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 15 Oct 2020 13:17:18 +0000
-Received: from pps.filterd (userp3030.oracle.com [127.0.0.1])
- by userp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 09FDEdKd025936;
- Thu, 15 Oct 2020 13:17:17 GMT
-Received: from userv0122.oracle.com (userv0122.oracle.com [156.151.31.75])
- by userp3030.oracle.com with ESMTP id 343pw0brsa-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 15 Oct 2020 13:17:17 +0000
-Received: from abhmp0018.oracle.com (abhmp0018.oracle.com [141.146.116.24])
- by userv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 09FDHEhc024698;
- Thu, 15 Oct 2020 13:17:15 GMT
-Received: from [10.39.226.219] (/10.39.226.219)
- by default (Oracle Beehive Gateway v4.0)
- with ESMTP ; Thu, 15 Oct 2020 06:17:14 -0700
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+ <SRS0=bKTB=DW=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1kT3Og-0007fk-NO
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 13:34:22 +0000
+Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id a7aa0491-5d1c-4bd0-8ef4-63e719eba775;
+ Thu, 15 Oct 2020 13:34:21 +0000 (UTC)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=TbfH=DW=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
-	id 1kT38Z-0005tF-Ot
-	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 13:17:43 +0000
-X-Inumbo-ID: a8bd4586-03c1-4799-ac11-383f007489a2
-Received: from aserp2130.oracle.com (unknown [141.146.126.79])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id a8bd4586-03c1-4799-ac11-383f007489a2;
-	Thu, 15 Oct 2020 13:17:42 +0000 (UTC)
-Received: from pps.filterd (aserp2130.oracle.com [127.0.0.1])
-	by aserp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 09FDEf3v097962;
-	Thu, 15 Oct 2020 13:17:18 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=subject : to : cc :
- references : from : message-id : date : mime-version : in-reply-to :
- content-type : content-transfer-encoding; s=corp-2020-01-29;
- bh=dOOcmqv3ORCOAQisi0SZNKKf+PzDDb3epMdS0uvDdiQ=;
- b=VsOcvhb/uE1AkiuqhIwYpyoaN2Y0JlpwCeSOVkau9AH/4eZFn/KDGFORo2EHy2Ivp+0n
- upg8dsUz8m1RWjevnlwLIFlufFPG82PUcLhzD90Kl3KKa22VgxVcHF/wVJ/WJhTOvSwV
- SDt7rKpbcRth3EkaqnpwJweZcYo3ya1njakx1T8bz5ICbfAlJeFtR4UOJrq9WhKjJh9f
- TN9wOifglj3rLEdZdK1rUeKtTFzErdMlr+8sQDGhvcW189z/Lh+fscQ0NYnwW4Pq/rCx
- dkJfm75foKZUPaY1Wx10v/zryN9SqgraHQqv0Bd9vwDhZPga09HMwhxVtPivsGIzdx73 JQ== 
-Received: from userp3030.oracle.com (userp3030.oracle.com [156.151.31.80])
-	by aserp2130.oracle.com with ESMTP id 346g8ghsak-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 15 Oct 2020 13:17:18 +0000
-Received: from pps.filterd (userp3030.oracle.com [127.0.0.1])
-	by userp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 09FDEdKd025936;
-	Thu, 15 Oct 2020 13:17:17 GMT
-Received: from userv0122.oracle.com (userv0122.oracle.com [156.151.31.75])
-	by userp3030.oracle.com with ESMTP id 343pw0brsa-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Thu, 15 Oct 2020 13:17:17 +0000
-Received: from abhmp0018.oracle.com (abhmp0018.oracle.com [141.146.116.24])
-	by userv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 09FDHEhc024698;
-	Thu, 15 Oct 2020 13:17:15 GMT
-Received: from [10.39.226.219] (/10.39.226.219)
-	by default (Oracle Beehive Gateway v4.0)
-	with ESMTP ; Thu, 15 Oct 2020 06:17:14 -0700
-Subject: Re: [PATCH 2/2] xen: Kconfig: nest Xen guest options
-To: Andrew Cooper <andrew.cooper3@citrix.com>,
-        Jason Andryuk <jandryuk@gmail.com>, Juergen Gross <jgross@suse.com>,
-        Stefano Stabellini <sstabellini@kernel.org>
-Cc: Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
-        Borislav Petkov <bp@alien8.de>, x86@kernel.org,
-        "H. Peter Anvin" <hpa@zytor.com>, xen-devel@lists.xenproject.org,
-        linux-kernel@vger.kernel.org
-References: <20201014175342.152712-1-jandryuk@gmail.com>
- <20201014175342.152712-3-jandryuk@gmail.com>
- <6cd9363c-ac0c-ea68-c8e7-9fd3cd30a89b@oracle.com>
- <4e31301b-0e57-ac89-cd71-6ad5e1a66628@citrix.com>
-From: boris.ostrovsky@oracle.com
-Organization: Oracle Corporation
-Message-ID: <b097aec1-e549-a89a-ce43-e9c0a71179f2@oracle.com>
-Date: Thu, 15 Oct 2020 09:17:12 -0400
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.3.2
+	(envelope-from <SRS0=bKTB=DW=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+	id 1kT3Og-0007fk-NO
+	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 13:34:22 +0000
+X-Inumbo-ID: a7aa0491-5d1c-4bd0-8ef4-63e719eba775
+Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id a7aa0491-5d1c-4bd0-8ef4-63e719eba775;
+	Thu, 15 Oct 2020 13:34:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1602768861;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:content-transfer-encoding:in-reply-to;
+  bh=bV4hBDKJJRqjaWnsdEfov1P7Xpzf6TANYNVwNbcq1S8=;
+  b=CdnrK1tb3CvcanFPsAeZBZLRTCwbL5Ka/cgZouPVvCnQQDlcZveslawq
+   QYOcf2FNt7Er8r0nOdqLe2m2eoID1aWQNbsCDKJi5Mz7CWiV2A8vMq6Yu
+   EaFJULzeq9sZAMSB6PA2fHcWEeEVB1db1VxvmGNo0fFJJpmbBDS8XbTVH
+   A=;
+Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: qvHeRrlmREgvUlot+GowN8hNqsH6Ki4z/O5GqfAA3FgsEH4DMHCqJkHJsLuMloBCQhMNARA42o
+ goMyLvR/gVbxjfVlDUUTZXLNj78G4RzChZUfTPMLjncfs7vbOpODJEd43O5v2a6Tt0mNAgy0Rc
+ /LIRkB5luERpY1JKi/w9ZnsIQYffH6DBDpGPIloQnAVxTRYSBIjHp42bdWhmQZpkl2vjwkmN8h
+ Tbje+A8Oid2OnifEVkJXzHKYfJurdpwhKKXqzfDB6i77rAhqjJJxr5lMQsvo9LIrCNajPfkkUu
+ koY=
+X-SBRS: 2.5
+X-MesageID: 29140587
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.77,379,1596513600"; 
+   d="scan'208";a="29140587"
+Date: Thu, 15 Oct 2020 15:34:12 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+CC: <xen-devel@lists.xenproject.org>, Jan Beulich <jbeulich@suse.com>, Wei Liu
+	<wl@xen.org>, George Dunlap <george.dunlap@citrix.com>, Ian Jackson
+	<iwj@xenproject.org>, Julien Grall <julien@xen.org>, Stefano Stabellini
+	<sstabellini@kernel.org>
+Subject: Re: [PATCH] x86/msr: fix handling of MSR_IA32_PERF_{STATUS/CTL}
+Message-ID: <20201015133412.GC68032@Air-de-Roger>
+References: <20201006162327.93055-1-roger.pau@citrix.com>
+ <a98d6cb1-0b1d-8fb8-8718-c65e02e448bb@citrix.com>
+ <20201007164117.GH19254@Air-de-Roger>
 MIME-Version: 1.0
-In-Reply-To: <4e31301b-0e57-ac89-cd71-6ad5e1a66628@citrix.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9774 signatures=668682
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0 mlxscore=0 adultscore=0
- bulkscore=0 mlxlogscore=999 suspectscore=0 malwarescore=0 phishscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2009150000
- definitions=main-2010150094
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9774 signatures=668682
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 impostorscore=0 suspectscore=0
- priorityscore=1501 phishscore=0 clxscore=1015 spamscore=0 adultscore=0
- mlxscore=0 malwarescore=0 bulkscore=0 mlxlogscore=999 lowpriorityscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2009150000
- definitions=main-2010150094
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20201007164117.GH19254@Air-de-Roger>
+X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
+ FTLPEX02CL06.citrite.net (10.13.108.179)
 
+On Wed, Oct 07, 2020 at 06:41:17PM +0200, Roger Pau Monné wrote:
+> On Wed, Oct 07, 2020 at 01:06:08PM +0100, Andrew Cooper wrote:
+> > On 06/10/2020 17:23, Roger Pau Monne wrote:
+> > > Currently a PV hardware domain can also be given control over the CPU
+> > > frequency, and such guest is allowed to write to MSR_IA32_PERF_CTL.
+> > 
+> > This might be how the current logic "works", but its straight up broken.
+> > 
+> > PERF_CTL is thread scope, so unless dom0 is identity pinned and has one
+> > vcpu for every pcpu, it cannot use the interface correctly.
+> 
+> Selecting cpufreq=dom0-kernel will force vCPU pinning. I'm not able
+> however to see anywhere that would force dom0 vCPUs == pCPUs.
+> 
+> > > However since commit 322ec7c89f6 the default behavior has been changed
+> > > to reject accesses to not explicitly handled MSRs, preventing PV
+> > > guests that manage CPU frequency from reading
+> > > MSR_IA32_PERF_{STATUS/CTL}.
+> > >
+> > > Additionally some HVM guests (Windows at least) will attempt to read
+> > > MSR_IA32_PERF_CTL and will panic if given back a #GP fault:
+> > >
+> > > vmx.c:3035:d8v0 RDMSR 0x00000199 unimplemented
+> > > d8v0 VIRIDIAN CRASH: 3b c0000096 fffff806871c1651 ffffda0253683720 0
+> > >
+> > > Move the handling of MSR_IA32_PERF_{STATUS/CTL} to the common MSR
+> > > handling shared between HVM and PV guests, and add an explicit case
+> > > for reads to MSR_IA32_PERF_{STATUS/CTL}.
+> > 
+> > OTOH, PERF_CTL does have a seemingly architectural "please disable turbo
+> > for me" bit, which is supposed to be for calibration loops.  I wonder if
+> > anyone uses this, and whether we ought to honour it (probably not).
+> 
+> If we let guests play with this we would have to save/restore the
+> guest value on context switch. Unless there's a strong case for this,
+> I would say no.
+> 
+> > > diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
+> > > index d8ed83f869..41baa3b7a1 100644
+> > > --- a/xen/include/xen/sched.h
+> > > +++ b/xen/include/xen/sched.h
+> > > @@ -1069,6 +1069,12 @@ extern enum cpufreq_controller {
+> > >      FREQCTL_none, FREQCTL_dom0_kernel, FREQCTL_xen
+> > >  } cpufreq_controller;
+> > >  
+> > > +static inline bool is_cpufreq_controller(const struct domain *d)
+> > > +{
+> > > +    return ((cpufreq_controller == FREQCTL_dom0_kernel) &&
+> > > +            is_hardware_domain(d));
+> > 
+> > This won't compile on !CONFIG_X86, due to CONFIG_HAS_CPUFREQ
+> 
+> It does seem to build on Arm, because this is only used in x86 code:
+> 
+> https://gitlab.com/xen-project/people/royger/xen/-/jobs/778207412
+> 
+> The extern declaration of cpufreq_controller is just above, so if you
+> tried to use is_cpufreq_controller on Arm you would get a link time
+> error, otherwise it builds fine. The compiler removes the function on
+> Arm as it has the inline attribute and it's not used.
+> 
+> Alternatively I could look into moving cpufreq_controller (and
+> is_cpufreq_controller) out of sched.h into somewhere else, I haven't
+> looked at why it needs to live there.
+> 
+> > Honestly - I don't see any point to this code.  Its opt-in via the
+> > command line only, and doesn't provide adequate checks for enablement. 
+> > (It's not as if we're lacking complexity or moving parts when it comes
+> > to power/frequency management).
+> 
+> Right, I could do a pre-patch to remove this, but I also don't think
+> we should block this fix on removing FREQCTL_dom0_kernel, so I would
+> rather fix the regression and then remove the feature if we agree it
+> can be removed.
 
-On 10/15/20 9:10 AM, Andrew Cooper wrote:
-> On 15/10/2020 13:37, boris.ostrovsky@oracle.com wrote:
->> On 10/14/20 1:53 PM, Jason Andryuk wrote:
->>> +config XEN_512GB
->>> +	bool "Limit Xen pv-domain memory to 512GB"
->>> +	depends on XEN_PV && X86_64
->> Why is X86_64 needed here?
->> 512G support was implemented using a direct-mapped P2M, and is rather
-> beyond the virtual address capabilities of 32bit.
->
+Can we get some consensus on what to do next?
 
-Yes, my point was that XEN_PV already depends on X86_64.
+I think I've provided replies to all the points above, and I'm not sure
+what do to next in order to proceed with this patch.
 
-
--boris
-
+Thanks, Roger.
 
