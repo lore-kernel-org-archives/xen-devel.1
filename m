@@ -8,23 +8,23 @@ X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B76CFC43457
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 16:45:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C3CF7C433DF
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 16:45:51 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3703722255
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 16:45:45 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 5B41A22240
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 16:45:51 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="eXOMmNq1"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3703722255
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="NxUSlgwY"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5B41A22240
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.7579.19985 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.7584.20009 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kT6Nf-0005XS-K6; Thu, 15 Oct 2020 16:45:31 +0000
+	id 1kT6Np-0005jA-FV; Thu, 15 Oct 2020 16:45:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 7579.19985; Thu, 15 Oct 2020 16:45:31 +0000
+Received: by outflank-mailman (output) from mailman id 7584.20009; Thu, 15 Oct 2020 16:45:41 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,69 +39,69 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kT6Nf-0005XK-Fh; Thu, 15 Oct 2020 16:45:31 +0000
-Received: by outflank-mailman (input) for mailman id 7579;
- Thu, 15 Oct 2020 16:45:30 +0000
+	id 1kT6Np-0005iv-C9; Thu, 15 Oct 2020 16:45:41 +0000
+Received: by outflank-mailman (input) for mailman id 7584;
+ Thu, 15 Oct 2020 16:45:40 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YEeM=DW=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
- id 1kT6Ne-0004yr-64
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:45:30 +0000
-Received: from mail-lj1-x241.google.com (unknown [2a00:1450:4864:20::241])
+ id 1kT6No-0004yr-6f
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:45:40 +0000
+Received: from mail-lj1-x244.google.com (unknown [2a00:1450:4864:20::244])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 7c3f3660-c6ec-4475-97e7-0649efa3f0a1;
- Thu, 15 Oct 2020 16:45:00 +0000 (UTC)
-Received: by mail-lj1-x241.google.com with SMTP id f29so3870725ljo.3
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2020 09:45:00 -0700 (PDT)
+ id 6ac59395-8402-4d7a-9ad9-0bb685af26e4;
+ Thu, 15 Oct 2020 16:45:04 +0000 (UTC)
+Received: by mail-lj1-x244.google.com with SMTP id a5so3799292ljj.11
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2020 09:45:04 -0700 (PDT)
 Received: from otyshchenko.www.tendawifi.com ([212.22.223.21])
- by smtp.gmail.com with ESMTPSA id v13sm1482495ljh.66.2020.10.15.09.44.58
+ by smtp.gmail.com with ESMTPSA id v13sm1482495ljh.66.2020.10.15.09.45.01
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 15 Oct 2020 09:44:58 -0700 (PDT)
+ Thu, 15 Oct 2020 09:45:02 -0700 (PDT)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=YEeM=DW=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
-	id 1kT6Ne-0004yr-64
-	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:45:30 +0000
-X-Inumbo-ID: 7c3f3660-c6ec-4475-97e7-0649efa3f0a1
-Received: from mail-lj1-x241.google.com (unknown [2a00:1450:4864:20::241])
+	id 1kT6No-0004yr-6f
+	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:45:40 +0000
+X-Inumbo-ID: 6ac59395-8402-4d7a-9ad9-0bb685af26e4
+Received: from mail-lj1-x244.google.com (unknown [2a00:1450:4864:20::244])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 7c3f3660-c6ec-4475-97e7-0649efa3f0a1;
-	Thu, 15 Oct 2020 16:45:00 +0000 (UTC)
-Received: by mail-lj1-x241.google.com with SMTP id f29so3870725ljo.3
-        for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2020 09:45:00 -0700 (PDT)
+	id 6ac59395-8402-4d7a-9ad9-0bb685af26e4;
+	Thu, 15 Oct 2020 16:45:04 +0000 (UTC)
+Received: by mail-lj1-x244.google.com with SMTP id a5so3799292ljj.11
+        for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2020 09:45:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=/4N5432elpoCFCTQOFacUfSDjBxB67QedZM20URUDaY=;
-        b=eXOMmNq1BoDmsLtsgbPKkshMqC5uNq7eP/4RsyTKNtjGB2u1Onj9Rvy9osZjcYZ6lG
-         X8V6fniQ0m9KsZbJ/ohQFnFz55Ot8p7JUpBkpFlC9P+lFK+ndFFktGZorKuy1wW5kcvD
-         Z836JZ3kv2CRw2dWI7IMc7hHmXu35RAJUMsUsejuARTeCgJbhrXwbfJDIocfGj5oBuDk
-         rcvMeLf65qxUwC7pGZxFfyu9C1bOpTBRvjDng4YQPPViDIOB6i3Jnoixdu11en9Lv1SQ
-         1TpqrJde0BzbzuzvtPVbIIvL2iDGFI+NpWWOaMZxcNVefkqqIZPkpk7ZkMEBNinQx3Iq
-         SrIQ==
+        bh=6/1vRBOVhlXpqAFPJrg7onrJHeVZj9qNd2N7AdSm6+I=;
+        b=NxUSlgwYMHInywlP9Vh/osxO+AX5/V1EMzEvRhEhDylOsNg3f8tznfM4IQ5gWoDWVf
+         jDmIUKloygpCypaDkOIuFJm4xP5IDSECifyOO1/hMPSL3xWcvYUk5Lnp7qDdGuCuW2cT
+         KorqU6bNJv3f89ex2T7QTmS0Q1hcAmoFFGZEFlCKovQQpefZd8qogldHxp8KBMK0qjvY
+         PpNL2vNDyzn8VGManvXoUV1jtjzWjsvd/8+2tnT/3zA8xapUUIc6mZyM5kEjy7VcIRwz
+         9MsxvpzMkhSKMqwi9Iku60llBgDVmFVipfxHQMCeU9THU5JLZmtIC0l3pSNw/TwFAxFt
+         orMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=/4N5432elpoCFCTQOFacUfSDjBxB67QedZM20URUDaY=;
-        b=OY3VyiqYSYdPIGs7UVg8fb+USTLowCstxJrNRtjf6aduqyw3ue6b28dDZ5Ys4xkUOd
-         SfUrcyO8fXAylVFsI9pLqi8umlRO5RH4YrqSxzV081MyJHZMJ2oZEG4k231lVg6cmrB2
-         LdAKa4gieQ6v3xagCeyfWNQPEarCsb7H1/P2sIv6c4uHp0U37lbEVHOXrqZcb3QB/acW
-         mwkDLFmPMNb2O+V533u3C+wetDAJfps7lq68XDtZcDycqHQcgdYRf+3vNTCvpM19THbA
-         cHAgRoi60qt/fYDP+u5LzugNyS/L8yfQ7qoYx83Ddw7L9c2m0IJIGZkgzk2IGjt26kaQ
-         rWDg==
-X-Gm-Message-State: AOAM530qlLalFOnfPDdH5FX8jp7mxJowCLG/mO3pHswCEIWYIE74UQk2
-	2a24sd1n25kkQaPxCFt3kC73QYIcy6+AAQ==
-X-Google-Smtp-Source: ABdhPJyGbG38G+DinLf0m/SSKtu4fphOzSZb8YAqDDXWMGNemxvpmbSJY6E4O5YzMID/CuL1sbHY2A==
-X-Received: by 2002:a2e:b557:: with SMTP id a23mr1746654ljn.5.1602780299477;
-        Thu, 15 Oct 2020 09:44:59 -0700 (PDT)
+        bh=6/1vRBOVhlXpqAFPJrg7onrJHeVZj9qNd2N7AdSm6+I=;
+        b=PAa6WKBV1UQJvqAq+OiPKmyOTVB3tXkaB1q3GUEwFOY5kvx6of1wQf9HwxkJ2eGV2X
+         N2Z1PL3wexRGHc0D/zz4AitaasXYmRnqU7gqrGSXOJnfMnfgZ2B3CNGIuYP7Xvm8quXr
+         uD9HRtJBgdTDki+8iIqVfULK7GX6CQ1OsNGOPH/JeNjfkUIQfrEX2ompOoFdMzSGURu3
+         PDb7cGGtGSmG9q4gk7RT1IPshdIfyD27GUvqbfMGtz7rVFkaZptFAiURNJ/KdR2lwulr
+         dxm6FmyDgFKZppFIGSp/FgFw8ZImkyBf5qPUXTYilFUTzyqmvQ43fi1NmWJZc9omcGZ6
+         1CyA==
+X-Gm-Message-State: AOAM530FmC5idStLL4Rahs7VwqKvuN2z1e0f3pd1bcpfbVrL3r+ZmY0C
+	wMa/DB/Ng7CG9w8/S23hBBjAt7K1jYpumA==
+X-Google-Smtp-Source: ABdhPJwtiagApOtfBMwcSILR3Uh9/7kqM7ZaVQuLTRR1ZqApXjgAWKgMdmZDz7fH0K3DqG2SmRW69A==
+X-Received: by 2002:a2e:8645:: with SMTP id i5mr1798706ljj.458.1602780302936;
+        Thu, 15 Oct 2020 09:45:02 -0700 (PDT)
 Received: from otyshchenko.www.tendawifi.com ([212.22.223.21])
-        by smtp.gmail.com with ESMTPSA id v13sm1482495ljh.66.2020.10.15.09.44.58
+        by smtp.gmail.com with ESMTPSA id v13sm1482495ljh.66.2020.10.15.09.45.01
         (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Thu, 15 Oct 2020 09:44:58 -0700 (PDT)
+        Thu, 15 Oct 2020 09:45:02 -0700 (PDT)
 From: Oleksandr Tyshchenko <olekstysh@gmail.com>
 To: xen-devel@lists.xenproject.org
-Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+Cc: Julien Grall <julien.grall@arm.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
@@ -110,456 +110,201 @@ Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
 	Ian Jackson <iwj@xenproject.org>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Paul Durrant <paul@xen.org>,
-	Julien Grall <julien.grall@arm.com>
-Subject: [PATCH V2 07/23] xen/ioreq: Move x86's ioreq_gfn(server) to struct domain
-Date: Thu, 15 Oct 2020 19:44:18 +0300
-Message-Id: <1602780274-29141-8-git-send-email-olekstysh@gmail.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Subject: [PATCH V2 10/23] xen/mm: Make x86's XENMEM_resource_ioreq_server handling common
+Date: Thu, 15 Oct 2020 19:44:21 +0300
+Message-Id: <1602780274-29141-11-git-send-email-olekstysh@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1602780274-29141-1-git-send-email-olekstysh@gmail.com>
 References: <1602780274-29141-1-git-send-email-olekstysh@gmail.com>
 
-From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+From: Julien Grall <julien.grall@arm.com>
 
-The IOREQ is a common feature now and these structs will be used
-on Arm as is. Move them to common struct domain. This also
-significantly reduces the layering violation in the common code
-(*arch.hvm* usage).
+As x86 implementation of XENMEM_resource_ioreq_server can be
+re-used on Arm later on, this patch makes it common and removes
+arch_acquire_resource as unneeded.
 
+This support is going to be used on Arm to be able run device
+emulator outside of Xen hypervisor.
+
+Signed-off-by: Julien Grall <julien.grall@arm.com>
 Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-CC: Julien Grall <julien.grall@arm.com>
 
 ---
 Please note, this is a split/cleanup/hardening of Julien's PoC:
 "Add support for Guest IO forwarding to a device emulator"
 
-Changes V1 -> V2:
-   - new patch
----
- xen/arch/x86/hvm/hvm.c           | 12 +++----
- xen/common/ioreq.c               | 72 ++++++++++++++++++++--------------------
- xen/include/asm-x86/hvm/domain.h | 15 ---------
- xen/include/asm-x86/hvm/ioreq.h  |  4 +--
- xen/include/xen/sched.h          | 17 ++++++++++
- 5 files changed, 61 insertions(+), 59 deletions(-)
+Changes RFC -> V1:
+   - no changes
 
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index 54e32e4..20376ce 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -4218,20 +4218,20 @@ static int hvm_set_param(struct domain *d, uint32_t index, uint64_t value)
-             rc = -EINVAL;
-         break;
-     case HVM_PARAM_IOREQ_SERVER_PFN:
--        d->arch.hvm.ioreq_gfn.base = value;
-+        d->ioreq_gfn.base = value;
-         break;
-     case HVM_PARAM_NR_IOREQ_SERVER_PAGES:
-     {
-         unsigned int i;
- 
-         if ( value == 0 ||
--             value > sizeof(d->arch.hvm.ioreq_gfn.mask) * 8 )
-+             value > sizeof(d->ioreq_gfn.mask) * 8 )
-         {
-             rc = -EINVAL;
-             break;
-         }
-         for ( i = 0; i < value; i++ )
--            set_bit(i, &d->arch.hvm.ioreq_gfn.mask);
-+            set_bit(i, &d->ioreq_gfn.mask);
- 
-         break;
-     }
-@@ -4239,11 +4239,11 @@ static int hvm_set_param(struct domain *d, uint32_t index, uint64_t value)
-     case HVM_PARAM_IOREQ_PFN:
-     case HVM_PARAM_BUFIOREQ_PFN:
-         BUILD_BUG_ON(HVM_PARAM_IOREQ_PFN >
--                     sizeof(d->arch.hvm.ioreq_gfn.legacy_mask) * 8);
-+                     sizeof(d->ioreq_gfn.legacy_mask) * 8);
-         BUILD_BUG_ON(HVM_PARAM_BUFIOREQ_PFN >
--                     sizeof(d->arch.hvm.ioreq_gfn.legacy_mask) * 8);
-+                     sizeof(d->ioreq_gfn.legacy_mask) * 8);
-         if ( value )
--            set_bit(index, &d->arch.hvm.ioreq_gfn.legacy_mask);
-+            set_bit(index, &d->ioreq_gfn.legacy_mask);
-         break;
- 
-     case HVM_PARAM_X87_FIP_WIDTH:
-diff --git a/xen/common/ioreq.c b/xen/common/ioreq.c
-index 1d62d13..7f91bc2 100644
---- a/xen/common/ioreq.c
-+++ b/xen/common/ioreq.c
-@@ -37,13 +37,13 @@ static void set_ioreq_server(struct domain *d, unsigned int id,
-                              struct ioreq_server *s)
- {
-     ASSERT(id < MAX_NR_IOREQ_SERVERS);
--    ASSERT(!s || !d->arch.hvm.ioreq_server.server[id]);
-+    ASSERT(!s || !d->ioreq_server.server[id]);
- 
--    d->arch.hvm.ioreq_server.server[id] = s;
-+    d->ioreq_server.server[id] = s;
- }
- 
- #define GET_IOREQ_SERVER(d, id) \
--    (d)->arch.hvm.ioreq_server.server[id]
-+    (d)->ioreq_server.server[id]
- 
- struct ioreq_server *get_ioreq_server(const struct domain *d,
-                                       unsigned int id)
-@@ -222,7 +222,7 @@ static gfn_t hvm_alloc_legacy_ioreq_gfn(struct ioreq_server *s)
- 
-     for ( i = HVM_PARAM_IOREQ_PFN; i <= HVM_PARAM_BUFIOREQ_PFN; i++ )
-     {
--        if ( !test_and_clear_bit(i, &d->arch.hvm.ioreq_gfn.legacy_mask) )
-+        if ( !test_and_clear_bit(i, &d->ioreq_gfn.legacy_mask) )
-             return _gfn(d->arch.hvm.params[i]);
-     }
- 
-@@ -234,10 +234,10 @@ static gfn_t hvm_alloc_ioreq_gfn(struct ioreq_server *s)
-     struct domain *d = s->target;
-     unsigned int i;
- 
--    for ( i = 0; i < sizeof(d->arch.hvm.ioreq_gfn.mask) * 8; i++ )
-+    for ( i = 0; i < sizeof(d->ioreq_gfn.mask) * 8; i++ )
-     {
--        if ( test_and_clear_bit(i, &d->arch.hvm.ioreq_gfn.mask) )
--            return _gfn(d->arch.hvm.ioreq_gfn.base + i);
-+        if ( test_and_clear_bit(i, &d->ioreq_gfn.mask) )
-+            return _gfn(d->ioreq_gfn.base + i);
-     }
- 
-     /*
-@@ -261,21 +261,21 @@ static bool hvm_free_legacy_ioreq_gfn(struct ioreq_server *s,
-     if ( i > HVM_PARAM_BUFIOREQ_PFN )
-         return false;
- 
--    set_bit(i, &d->arch.hvm.ioreq_gfn.legacy_mask);
-+    set_bit(i, &d->ioreq_gfn.legacy_mask);
-     return true;
- }
- 
- static void hvm_free_ioreq_gfn(struct ioreq_server *s, gfn_t gfn)
- {
-     struct domain *d = s->target;
--    unsigned int i = gfn_x(gfn) - d->arch.hvm.ioreq_gfn.base;
-+    unsigned int i = gfn_x(gfn) - d->ioreq_gfn.base;
- 
-     ASSERT(!gfn_eq(gfn, INVALID_GFN));
- 
-     if ( !hvm_free_legacy_ioreq_gfn(s, gfn) )
-     {
--        ASSERT(i < sizeof(d->arch.hvm.ioreq_gfn.mask) * 8);
--        set_bit(i, &d->arch.hvm.ioreq_gfn.mask);
-+        ASSERT(i < sizeof(d->ioreq_gfn.mask) * 8);
-+        set_bit(i, &d->ioreq_gfn.mask);
-     }
- }
- 
-@@ -400,7 +400,7 @@ bool is_ioreq_server_page(struct domain *d, const struct page_info *page)
-     unsigned int id;
-     bool found = false;
- 
--    spin_lock_recursive(&d->arch.hvm.ioreq_server.lock);
-+    spin_lock_recursive(&d->ioreq_server.lock);
- 
-     FOR_EACH_IOREQ_SERVER(d, id, s)
-     {
-@@ -411,7 +411,7 @@ bool is_ioreq_server_page(struct domain *d, const struct page_info *page)
-         }
-     }
- 
--    spin_unlock_recursive(&d->arch.hvm.ioreq_server.lock);
-+    spin_unlock_recursive(&d->ioreq_server.lock);
- 
-     return found;
- }
-@@ -781,7 +781,7 @@ int hvm_create_ioreq_server(struct domain *d, int bufioreq_handling,
-         return -ENOMEM;
- 
-     domain_pause(d);
--    spin_lock_recursive(&d->arch.hvm.ioreq_server.lock);
-+    spin_lock_recursive(&d->ioreq_server.lock);
- 
-     for ( i = 0; i < MAX_NR_IOREQ_SERVERS; i++ )
-     {
-@@ -809,13 +809,13 @@ int hvm_create_ioreq_server(struct domain *d, int bufioreq_handling,
-     if ( id )
-         *id = i;
- 
--    spin_unlock_recursive(&d->arch.hvm.ioreq_server.lock);
-+    spin_unlock_recursive(&d->ioreq_server.lock);
-     domain_unpause(d);
- 
-     return 0;
- 
-  fail:
--    spin_unlock_recursive(&d->arch.hvm.ioreq_server.lock);
-+    spin_unlock_recursive(&d->ioreq_server.lock);
-     domain_unpause(d);
- 
-     xfree(s);
-@@ -827,7 +827,7 @@ int hvm_destroy_ioreq_server(struct domain *d, ioservid_t id)
-     struct ioreq_server *s;
-     int rc;
- 
--    spin_lock_recursive(&d->arch.hvm.ioreq_server.lock);
-+    spin_lock_recursive(&d->ioreq_server.lock);
- 
-     s = get_ioreq_server(d, id);
- 
-@@ -859,7 +859,7 @@ int hvm_destroy_ioreq_server(struct domain *d, ioservid_t id)
-     rc = 0;
- 
-  out:
--    spin_unlock_recursive(&d->arch.hvm.ioreq_server.lock);
-+    spin_unlock_recursive(&d->ioreq_server.lock);
- 
-     return rc;
- }
-@@ -872,7 +872,7 @@ int hvm_get_ioreq_server_info(struct domain *d, ioservid_t id,
-     struct ioreq_server *s;
-     int rc;
- 
--    spin_lock_recursive(&d->arch.hvm.ioreq_server.lock);
-+    spin_lock_recursive(&d->ioreq_server.lock);
- 
-     s = get_ioreq_server(d, id);
- 
-@@ -906,7 +906,7 @@ int hvm_get_ioreq_server_info(struct domain *d, ioservid_t id,
-     rc = 0;
- 
-  out:
--    spin_unlock_recursive(&d->arch.hvm.ioreq_server.lock);
-+    spin_unlock_recursive(&d->ioreq_server.lock);
- 
-     return rc;
- }
-@@ -919,7 +919,7 @@ int hvm_get_ioreq_server_frame(struct domain *d, ioservid_t id,
- 
-     ASSERT(is_hvm_domain(d));
- 
--    spin_lock_recursive(&d->arch.hvm.ioreq_server.lock);
-+    spin_lock_recursive(&d->ioreq_server.lock);
- 
-     s = get_ioreq_server(d, id);
- 
-@@ -957,7 +957,7 @@ int hvm_get_ioreq_server_frame(struct domain *d, ioservid_t id,
-     }
- 
-  out:
--    spin_unlock_recursive(&d->arch.hvm.ioreq_server.lock);
-+    spin_unlock_recursive(&d->ioreq_server.lock);
- 
-     return rc;
- }
-@@ -973,7 +973,7 @@ int hvm_map_io_range_to_ioreq_server(struct domain *d, ioservid_t id,
-     if ( start > end )
-         return -EINVAL;
- 
--    spin_lock_recursive(&d->arch.hvm.ioreq_server.lock);
-+    spin_lock_recursive(&d->ioreq_server.lock);
- 
-     s = get_ioreq_server(d, id);
- 
-@@ -1009,7 +1009,7 @@ int hvm_map_io_range_to_ioreq_server(struct domain *d, ioservid_t id,
-     rc = rangeset_add_range(r, start, end);
- 
-  out:
--    spin_unlock_recursive(&d->arch.hvm.ioreq_server.lock);
-+    spin_unlock_recursive(&d->ioreq_server.lock);
- 
-     return rc;
- }
-@@ -1025,7 +1025,7 @@ int hvm_unmap_io_range_from_ioreq_server(struct domain *d, ioservid_t id,
-     if ( start > end )
-         return -EINVAL;
- 
--    spin_lock_recursive(&d->arch.hvm.ioreq_server.lock);
-+    spin_lock_recursive(&d->ioreq_server.lock);
- 
-     s = get_ioreq_server(d, id);
- 
-@@ -1061,7 +1061,7 @@ int hvm_unmap_io_range_from_ioreq_server(struct domain *d, ioservid_t id,
-     rc = rangeset_remove_range(r, start, end);
- 
-  out:
--    spin_unlock_recursive(&d->arch.hvm.ioreq_server.lock);
-+    spin_unlock_recursive(&d->ioreq_server.lock);
- 
-     return rc;
- }
-@@ -1072,7 +1072,7 @@ int hvm_set_ioreq_server_state(struct domain *d, ioservid_t id,
-     struct ioreq_server *s;
-     int rc;
- 
--    spin_lock_recursive(&d->arch.hvm.ioreq_server.lock);
-+    spin_lock_recursive(&d->ioreq_server.lock);
- 
-     s = get_ioreq_server(d, id);
- 
-@@ -1096,7 +1096,7 @@ int hvm_set_ioreq_server_state(struct domain *d, ioservid_t id,
-     rc = 0;
- 
-  out:
--    spin_unlock_recursive(&d->arch.hvm.ioreq_server.lock);
-+    spin_unlock_recursive(&d->ioreq_server.lock);
+Changes V1 -> V2:
+   - update the author of a patch
+---
+ xen/arch/x86/mm.c        | 44 --------------------------------------------
+ xen/common/memory.c      | 45 +++++++++++++++++++++++++++++++++++++++++++--
+ xen/include/asm-arm/mm.h |  8 --------
+ xen/include/asm-x86/mm.h |  4 ----
+ 4 files changed, 43 insertions(+), 58 deletions(-)
+
+diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+index b5865ae..df7619d 100644
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -4591,50 +4591,6 @@ int xenmem_add_to_physmap_one(
      return rc;
  }
  
-@@ -1106,7 +1106,7 @@ int hvm_all_ioreq_servers_add_vcpu(struct domain *d, struct vcpu *v)
-     unsigned int id;
-     int rc;
- 
--    spin_lock_recursive(&d->arch.hvm.ioreq_server.lock);
-+    spin_lock_recursive(&d->ioreq_server.lock);
- 
-     FOR_EACH_IOREQ_SERVER(d, id, s)
-     {
-@@ -1115,7 +1115,7 @@ int hvm_all_ioreq_servers_add_vcpu(struct domain *d, struct vcpu *v)
-             goto fail;
-     }
- 
--    spin_unlock_recursive(&d->arch.hvm.ioreq_server.lock);
-+    spin_unlock_recursive(&d->ioreq_server.lock);
- 
-     return 0;
- 
-@@ -1130,7 +1130,7 @@ int hvm_all_ioreq_servers_add_vcpu(struct domain *d, struct vcpu *v)
-         hvm_ioreq_server_remove_vcpu(s, v);
-     }
- 
--    spin_unlock_recursive(&d->arch.hvm.ioreq_server.lock);
-+    spin_unlock_recursive(&d->ioreq_server.lock);
- 
-     return rc;
- }
-@@ -1140,12 +1140,12 @@ void hvm_all_ioreq_servers_remove_vcpu(struct domain *d, struct vcpu *v)
-     struct ioreq_server *s;
-     unsigned int id;
- 
--    spin_lock_recursive(&d->arch.hvm.ioreq_server.lock);
-+    spin_lock_recursive(&d->ioreq_server.lock);
- 
-     FOR_EACH_IOREQ_SERVER(d, id, s)
-         hvm_ioreq_server_remove_vcpu(s, v);
- 
--    spin_unlock_recursive(&d->arch.hvm.ioreq_server.lock);
-+    spin_unlock_recursive(&d->ioreq_server.lock);
- }
- 
- void hvm_destroy_all_ioreq_servers(struct domain *d)
-@@ -1156,7 +1156,7 @@ void hvm_destroy_all_ioreq_servers(struct domain *d)
-     if ( !arch_hvm_ioreq_destroy(d) )
-         return;
- 
--    spin_lock_recursive(&d->arch.hvm.ioreq_server.lock);
-+    spin_lock_recursive(&d->ioreq_server.lock);
- 
-     /* No need to domain_pause() as the domain is being torn down */
- 
-@@ -1174,7 +1174,7 @@ void hvm_destroy_all_ioreq_servers(struct domain *d)
-         xfree(s);
-     }
- 
--    spin_unlock_recursive(&d->arch.hvm.ioreq_server.lock);
-+    spin_unlock_recursive(&d->ioreq_server.lock);
- }
- 
- struct ioreq_server *hvm_select_ioreq_server(struct domain *d,
-@@ -1406,7 +1406,7 @@ unsigned int hvm_broadcast_ioreq(ioreq_t *p, bool buffered)
- 
- void hvm_ioreq_init(struct domain *d)
- {
--    spin_lock_init(&d->arch.hvm.ioreq_server.lock);
-+    spin_lock_init(&d->ioreq_server.lock);
- 
-     arch_hvm_ioreq_init(d);
- }
-diff --git a/xen/include/asm-x86/hvm/domain.h b/xen/include/asm-x86/hvm/domain.h
-index 3b36c2f..5d60737 100644
---- a/xen/include/asm-x86/hvm/domain.h
-+++ b/xen/include/asm-x86/hvm/domain.h
-@@ -63,22 +63,7 @@ struct hvm_pi_ops {
-     void (*vcpu_block)(struct vcpu *);
- };
- 
--#define MAX_NR_IOREQ_SERVERS 8
+-int arch_acquire_resource(struct domain *d, unsigned int type,
+-                          unsigned int id, unsigned long frame,
+-                          unsigned int nr_frames, xen_pfn_t mfn_list[])
+-{
+-    int rc;
 -
- struct hvm_domain {
--    /* Guest page range used for non-default ioreq servers */
--    struct {
--        unsigned long base;
--        unsigned long mask; /* indexed by GFN minus base */
--        unsigned long legacy_mask; /* indexed by HVM param number */
--    } ioreq_gfn;
+-    switch ( type )
+-    {
+-#ifdef CONFIG_HVM
+-    case XENMEM_resource_ioreq_server:
+-    {
+-        ioservid_t ioservid = id;
+-        unsigned int i;
 -
--    /* Lock protects all other values in the sub-struct and the default */
--    struct {
--        spinlock_t              lock;
--        struct ioreq_server     *server[MAX_NR_IOREQ_SERVERS];
--    } ioreq_server;
+-        rc = -EINVAL;
+-        if ( !is_hvm_domain(d) )
+-            break;
 -
-     /* Cached CF8 for guest PCI config cycles */
-     uint32_t                pci_cf8;
- 
-diff --git a/xen/include/asm-x86/hvm/ioreq.h b/xen/include/asm-x86/hvm/ioreq.h
-index d2d64a8..0fccac5 100644
---- a/xen/include/asm-x86/hvm/ioreq.h
-+++ b/xen/include/asm-x86/hvm/ioreq.h
-@@ -77,7 +77,7 @@ static inline int hvm_map_mem_type_to_ioreq_server(struct domain *d,
-     if ( flags & ~XEN_DMOP_IOREQ_MEM_ACCESS_WRITE )
-         return -EINVAL;
- 
--    spin_lock_recursive(&d->arch.hvm.ioreq_server.lock);
-+    spin_lock_recursive(&d->ioreq_server.lock);
- 
-     s = get_ioreq_server(d, id);
- 
-@@ -92,7 +92,7 @@ static inline int hvm_map_mem_type_to_ioreq_server(struct domain *d,
-     rc = p2m_set_ioreq_server(d, flags, s);
- 
-  out:
--    spin_unlock_recursive(&d->arch.hvm.ioreq_server.lock);
-+    spin_unlock_recursive(&d->ioreq_server.lock);
- 
-     if ( rc == 0 && flags == 0 )
-     {
-diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
-index d8ed83f..78761cd 100644
---- a/xen/include/xen/sched.h
-+++ b/xen/include/xen/sched.h
-@@ -314,6 +314,8 @@ struct sched_unit {
- 
- struct evtchn_port_ops;
- 
-+#define MAX_NR_IOREQ_SERVERS 8
-+
- struct domain
+-        if ( id != (unsigned int)ioservid )
+-            break;
+-
+-        rc = 0;
+-        for ( i = 0; i < nr_frames; i++ )
+-        {
+-            mfn_t mfn;
+-
+-            rc = hvm_get_ioreq_server_frame(d, id, frame + i, &mfn);
+-            if ( rc )
+-                break;
+-
+-            mfn_list[i] = mfn_x(mfn);
+-        }
+-        break;
+-    }
+-#endif
+-
+-    default:
+-        rc = -EOPNOTSUPP;
+-        break;
+-    }
+-
+-    return rc;
+-}
+-
+ long arch_memory_op(unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
  {
-     domid_t          domain_id;
-@@ -521,6 +523,21 @@ struct domain
-     /* Argo interdomain communication support */
-     struct argo_domain *argo;
- #endif
-+
+     int rc;
+diff --git a/xen/common/memory.c b/xen/common/memory.c
+index 1bab0e8..83d800f 100644
+--- a/xen/common/memory.c
++++ b/xen/common/memory.c
+@@ -30,6 +30,10 @@
+ #include <public/memory.h>
+ #include <xsm/xsm.h>
+ 
 +#ifdef CONFIG_IOREQ_SERVER
-+    /* Guest page range used for non-default ioreq servers */
-+    struct {
-+        unsigned long base;
-+        unsigned long mask;
-+        unsigned long legacy_mask; /* indexed by HVM param number */
-+    } ioreq_gfn;
-+
-+    /* Lock protects all other values in the sub-struct and the default */
-+    struct {
-+        spinlock_t              lock;
-+        struct ioreq_server     *server[MAX_NR_IOREQ_SERVERS];
-+    } ioreq_server;
++#include <xen/ioreq.h>
 +#endif
- };
++
+ #ifdef CONFIG_X86
+ #include <asm/guest.h>
+ #endif
+@@ -1045,6 +1049,38 @@ static int acquire_grant_table(struct domain *d, unsigned int id,
+     return 0;
+ }
  
- static inline struct page_list_head *page_to_list(
++#ifdef CONFIG_IOREQ_SERVER
++static int acquire_ioreq_server(struct domain *d,
++                                unsigned int id,
++                                unsigned long frame,
++                                unsigned int nr_frames,
++                                xen_pfn_t mfn_list[])
++{
++    ioservid_t ioservid = id;
++    unsigned int i;
++    int rc;
++
++    if ( !is_hvm_domain(d) )
++        return -EINVAL;
++
++    if ( id != (unsigned int)ioservid )
++        return -EINVAL;
++
++    for ( i = 0; i < nr_frames; i++ )
++    {
++        mfn_t mfn;
++
++        rc = hvm_get_ioreq_server_frame(d, id, frame + i, &mfn);
++        if ( rc )
++            return rc;
++
++        mfn_list[i] = mfn_x(mfn);
++    }
++
++    return 0;
++}
++#endif
++
+ static int acquire_resource(
+     XEN_GUEST_HANDLE_PARAM(xen_mem_acquire_resource_t) arg)
+ {
+@@ -1103,9 +1139,14 @@ static int acquire_resource(
+                                  mfn_list);
+         break;
+ 
++#ifdef CONFIG_IOREQ_SERVER
++    case XENMEM_resource_ioreq_server:
++        rc = acquire_ioreq_server(d, xmar.id, xmar.frame, xmar.nr_frames,
++                                  mfn_list);
++        break;
++#endif
+     default:
+-        rc = arch_acquire_resource(d, xmar.type, xmar.id, xmar.frame,
+-                                   xmar.nr_frames, mfn_list);
++        rc = -EOPNOTSUPP;
+         break;
+     }
+ 
+diff --git a/xen/include/asm-arm/mm.h b/xen/include/asm-arm/mm.h
+index f8ba49b..0b7de31 100644
+--- a/xen/include/asm-arm/mm.h
++++ b/xen/include/asm-arm/mm.h
+@@ -358,14 +358,6 @@ static inline void put_page_and_type(struct page_info *page)
+ 
+ void clear_and_clean_page(struct page_info *page);
+ 
+-static inline
+-int arch_acquire_resource(struct domain *d, unsigned int type, unsigned int id,
+-                          unsigned long frame, unsigned int nr_frames,
+-                          xen_pfn_t mfn_list[])
+-{
+-    return -EOPNOTSUPP;
+-}
+-
+ unsigned int arch_get_dma_bitsize(void);
+ 
+ #endif /*  __ARCH_ARM_MM__ */
+diff --git a/xen/include/asm-x86/mm.h b/xen/include/asm-x86/mm.h
+index deeba75..859214e 100644
+--- a/xen/include/asm-x86/mm.h
++++ b/xen/include/asm-x86/mm.h
+@@ -639,8 +639,4 @@ static inline bool arch_mfn_in_directmap(unsigned long mfn)
+     return mfn <= (virt_to_mfn(eva - 1) + 1);
+ }
+ 
+-int arch_acquire_resource(struct domain *d, unsigned int type,
+-                          unsigned int id, unsigned long frame,
+-                          unsigned int nr_frames, xen_pfn_t mfn_list[]);
+-
+ #endif /* __ASM_X86_MM_H__ */
 -- 
 2.7.4
 
