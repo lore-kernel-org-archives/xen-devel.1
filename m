@@ -2,28 +2,28 @@ Return-Path: <SRS0=IsAa=DW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B4A3CC433E7
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 15:00:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0ADEFC433DF
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 15:02:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2202721D7F
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 15:00:22 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 8F14D2222E
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 15:02:39 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="FDot9ShX"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2202721D7F
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="GUhP8sHj"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8F14D2222E
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.7459.19488 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.7464.19514 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kT4jT-0008N3-VV; Thu, 15 Oct 2020 14:59:55 +0000
+	id 1kT4ls-0000pD-Sv; Thu, 15 Oct 2020 15:02:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 7459.19488; Thu, 15 Oct 2020 14:59:55 +0000
+Received: by outflank-mailman (output) from mailman id 7464.19514; Thu, 15 Oct 2020 15:02:24 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,98 +38,90 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kT4jT-0008Mw-SP; Thu, 15 Oct 2020 14:59:55 +0000
-Received: by outflank-mailman (input) for mailman id 7459;
- Thu, 15 Oct 2020 14:59:55 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Un/f=DW=gmail.com=jandryuk@srs-us1.protection.inumbo.net>)
- id 1kT4jS-0008Mr-Sy
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 14:59:54 +0000
-Received: from mail-lf1-x141.google.com (unknown [2a00:1450:4864:20::141])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 1c68e8a5-8ddd-4327-a660-80e7be0e2884;
- Thu, 15 Oct 2020 14:59:54 +0000 (UTC)
-Received: by mail-lf1-x141.google.com with SMTP id h6so3985272lfj.3
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2020 07:59:54 -0700 (PDT)
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kT4ls-0000p6-Pq; Thu, 15 Oct 2020 15:02:24 +0000
+Received: by outflank-mailman (input) for mailman id 7464;
+ Thu, 15 Oct 2020 15:02:24 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=MKI8=DW=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1kT4lr-0000ou-VG
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:02:23 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id a344ae63-f6b5-4bff-81c2-84fdf5653d82;
+ Thu, 15 Oct 2020 15:02:22 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id E8625AF87;
+ Thu, 15 Oct 2020 15:02:21 +0000 (UTC)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=Un/f=DW=gmail.com=jandryuk@srs-us1.protection.inumbo.net>)
-	id 1kT4jS-0008Mr-Sy
-	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 14:59:54 +0000
-X-Inumbo-ID: 1c68e8a5-8ddd-4327-a660-80e7be0e2884
-Received: from mail-lf1-x141.google.com (unknown [2a00:1450:4864:20::141])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 1c68e8a5-8ddd-4327-a660-80e7be0e2884;
-	Thu, 15 Oct 2020 14:59:54 +0000 (UTC)
-Received: by mail-lf1-x141.google.com with SMTP id h6so3985272lfj.3
-        for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2020 07:59:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=Be+an15LrnaPiOtwboSIUoBz1mYy3noplAiogE4hPMs=;
-        b=FDot9ShXu39lveCF+OW0yRUdygZ3wBX/8lxlKrgEBuG5B7eTyrubDH7f7TJSQfo3RR
-         iehEgRownftvmxjDluVRSdsOAElZGd2VrWbbNg8EMGZC09bbj7l3Y/gInN3kObFUKfoP
-         ZwTu3g2/Aau1OV/ovEFWnibmFaOFvNmP4kJve/qVXAutw3AFCoUiWXG3yuPpiu5EMbu1
-         sIqBGWwQZEgq0C9fkY/ARxBVHT+4gXTF37ZLLZ0M0XyPLW7AsgbaqFQ2GHiLrQLnUEDq
-         CinoKqIzX4xb6Ucf/544zW7O4jDBJ/rBMZR/HZtPnrpA3VcMyA64SlCKHzFSRYKXl4vH
-         3o+Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=Be+an15LrnaPiOtwboSIUoBz1mYy3noplAiogE4hPMs=;
-        b=cxfKiF9HSZkqFDjcRTRbDGGoB6ihyEBLZAGFexF/Mv3+Qv/rWrqJC1zxcYPhNibc9U
-         HDpoC7G37oTzKTW6Dt5/Y+TAPhdHM1aYq0TQP9lz7IoYMQPrg8Azu0yF3lFbvrStjb0p
-         dR9NVD9KImI67tCQVnSVpBXWQaRbTif9Xgm8LWdTFL/aM2NgK/1Iw9dWITmbcDiKbWyc
-         aoKZf+2+vQjghQw9QhT5/LCSTb26RDTc99K8/CzwCnlItgp6Ds9s+g+DZ7eyT/gNfWYc
-         q/rxO5Ek844wzz+9c5/GQL+HQPeWP4lCkZ2xef54UE6I8oxYMA2qNIpGwTtYDuGPzZlu
-         4tyw==
-X-Gm-Message-State: AOAM53093qjSN/FrWUI0l7r9GfDnbMXwqHJjtoNxmv3JAeWNA/ZJAlyx
-	XF4xzrCb2SSjxyK+XEN8e5iu399YLnTZ5h3QKfE=
-X-Google-Smtp-Source: ABdhPJx4L4/CQ4jjGqYEQKoZVBxedUwEFtk0SDdes7DwZrBGrzlWTuA3aoI8E4T/46sDTPw9nu3QcwgAWBcqXgEv7L8=
-X-Received: by 2002:ac2:52b7:: with SMTP id r23mr1135747lfm.30.1602773992720;
- Thu, 15 Oct 2020 07:59:52 -0700 (PDT)
-MIME-Version: 1.0
-References: <20201014175342.152712-1-jandryuk@gmail.com> <20201014175342.152712-2-jandryuk@gmail.com>
- <b74a3f83-cd8a-34a3-b436-95141f01cb20@suse.com>
-In-Reply-To: <b74a3f83-cd8a-34a3-b436-95141f01cb20@suse.com>
-From: Jason Andryuk <jandryuk@gmail.com>
-Date: Thu, 15 Oct 2020 10:59:40 -0400
-Message-ID: <CAKf6xps+mAFdfk8uBw=aMsAFNYmt4ETPkB8dwT3sTv-qPbVENw@mail.gmail.com>
+	(envelope-from <SRS0=MKI8=DW=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+	id 1kT4lr-0000ou-VG
+	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:02:23 +0000
+X-Inumbo-ID: a344ae63-f6b5-4bff-81c2-84fdf5653d82
+Received: from mx2.suse.de (unknown [195.135.220.15])
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id a344ae63-f6b5-4bff-81c2-84fdf5653d82;
+	Thu, 15 Oct 2020 15:02:22 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1602774142;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=LOAorilrTXfeOIZQ8lkczi+c0MEjjEKFoJ24vlzPups=;
+	b=GUhP8sHjWJlLvc81IjV2qAGyp9DPLy2UZxvgQrm4q9TjosVlEgw5GsrwMe+FKzcnMzexg/
+	rrpix3Sv2u38vnE0/MQBIunUXc2JdRjV2qrE0Hlt+4wL/k8g2+7Rju4hfLCoOX29S/V/TX
+	bNPmYaPvD8NARY29yRsCwl2nEjfKae0=
+Received: from relay2.suse.de (unknown [195.135.221.27])
+	by mx2.suse.de (Postfix) with ESMTP id E8625AF87;
+	Thu, 15 Oct 2020 15:02:21 +0000 (UTC)
 Subject: Re: [PATCH 1/2] xen: Remove Xen PVH/PVHVM dependency on PCI
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>, Juergen Gross <jgross@suse.com>, 
-	Stefano Stabellini <sstabellini@kernel.org>, Thomas Gleixner <tglx@linutronix.de>, 
-	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, x86@kernel.org, 
-	"H. Peter Anvin" <hpa@zytor.com>, xen-devel <xen-devel@lists.xenproject.org>, 
-	open list <linux-kernel@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+To: Jason Andryuk <jandryuk@gmail.com>
+Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Juergen Gross <jgross@suse.com>, Stefano Stabellini
+ <sstabellini@kernel.org>, Thomas Gleixner <tglx@linutronix.de>,
+ Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+ x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
+ xen-devel <xen-devel@lists.xenproject.org>,
+ open list <linux-kernel@vger.kernel.org>
+References: <20201014175342.152712-1-jandryuk@gmail.com>
+ <20201014175342.152712-2-jandryuk@gmail.com>
+ <b74a3f83-cd8a-34a3-b436-95141f01cb20@suse.com>
+ <CAKf6xps+mAFdfk8uBw=aMsAFNYmt4ETPkB8dwT3sTv-qPbVENw@mail.gmail.com>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <3919ef15-379b-cc1e-994c-c33b23865afd@suse.com>
+Date: Thu, 15 Oct 2020 17:02:21 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.1
+MIME-Version: 1.0
+In-Reply-To: <CAKf6xps+mAFdfk8uBw=aMsAFNYmt4ETPkB8dwT3sTv-qPbVENw@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-On Thu, Oct 15, 2020 at 4:10 AM Jan Beulich <jbeulich@suse.com> wrote:
->
-> On 14.10.2020 19:53, Jason Andryuk wrote:
-> > @@ -76,7 +80,9 @@ config XEN_DEBUG_FS
-> >         Enabling this option may incur a significant performance overhead.
-> >
-> >  config XEN_PVH
-> > -     bool "Support for running as a Xen PVH guest"
-> > +     bool "Xen PVH guest support"
->
-> Tangential question: Is "guest" here still appropriate, i.e.
-> isn't this option also controlling whether the kernel can be
-> used in a PVH Dom0?
+On 15.10.2020 16:59, Jason Andryuk wrote:
+> On Thu, Oct 15, 2020 at 4:10 AM Jan Beulich <jbeulich@suse.com> wrote:
+>>
+>> On 14.10.2020 19:53, Jason Andryuk wrote:
+>>> @@ -76,7 +80,9 @@ config XEN_DEBUG_FS
+>>>         Enabling this option may incur a significant performance overhead.
+>>>
+>>>  config XEN_PVH
+>>> -     bool "Support for running as a Xen PVH guest"
+>>> +     bool "Xen PVH guest support"
+>>
+>> Tangential question: Is "guest" here still appropriate, i.e.
+>> isn't this option also controlling whether the kernel can be
+>> used in a PVH Dom0?
+> 
+> Would you like something more generic like "Xen PVH support" and
+> "Support for running in Xen PVH mode"?
 
-Would you like something more generic like "Xen PVH support" and
-"Support for running in Xen PVH mode"?
+Yeah, just dropping "guest" would be fine with me. No idea how
+to reflect that PVH Dom0 isn't supported, yet.
 
-> >       def_bool n
->
-> And is this default still appropriate?
-
-We probably want to flip it on, yes.  PVH is the future, isn't it?
-
-Regards,
-Jason
+Jan
 
