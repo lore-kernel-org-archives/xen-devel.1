@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-12.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 141FDC433DF
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 15:51:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3A490C433E7
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 16:09:33 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A1D5822254
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 15:51:05 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 9C3B321D7F
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 16:09:32 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="1AN05+e+"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A1D5822254
+	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="ucPB9WYI"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9C3B321D7F
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.7523.19754 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.7545.19808 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kT5Wq-0006sI-6Q; Thu, 15 Oct 2020 15:50:56 +0000
+	id 1kT5oe-0000ep-P1; Thu, 15 Oct 2020 16:09:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 7523.19754; Thu, 15 Oct 2020 15:50:56 +0000
+Received: by outflank-mailman (output) from mailman id 7545.19808; Thu, 15 Oct 2020 16:09:20 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,141 +38,92 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kT5Wq-0006s9-1V; Thu, 15 Oct 2020 15:50:56 +0000
-Received: by outflank-mailman (input) for mailman id 7523;
- Thu, 15 Oct 2020 15:50:54 +0000
+	id 1kT5oe-0000ei-LM; Thu, 15 Oct 2020 16:09:20 +0000
+Received: by outflank-mailman (input) for mailman id 7545;
+ Thu, 15 Oct 2020 16:09:19 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=/DR3=DW=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1kT5Wo-0006GR-Re
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:54 +0000
+ id 1kT5od-0000WV-S0
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:09:19 +0000
 Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id a5e58849-0ead-484c-8253-532dfd143437;
- Thu, 15 Oct 2020 15:50:30 +0000 (UTC)
+ id ad5d6dd0-5b63-453f-b297-7a399c91773d;
+ Thu, 15 Oct 2020 16:09:16 +0000 (UTC)
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kT5WQ-00088L-GG
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:30 +0000
+ (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kT5oa-0000gP-23
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:09:16 +0000
 Received: from iwj (helo=mynotebook.example.org)
  by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kT5WQ-0005H7-FM
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:30 +0000
+ (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kT5oa-0006d2-18
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:09:16 +0000
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by mariner.uk.xensource.com with esmtp (Exim 4.89)
  (envelope-from <ijackson@chiark.greenend.org.uk>)
- id 1kT5WO-0000oB-ON; Thu, 15 Oct 2020 16:50:28 +0100
+ id 1kT5WQ-0000oB-Fn; Thu, 15 Oct 2020 16:50:30 +0100
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=/DR3=DW=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
-	id 1kT5Wo-0006GR-Re
-	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:54 +0000
-X-Inumbo-ID: a5e58849-0ead-484c-8253-532dfd143437
+	id 1kT5od-0000WV-S0
+	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:09:19 +0000
+X-Inumbo-ID: ad5d6dd0-5b63-453f-b297-7a399c91773d
 Received: from mail.xenproject.org (unknown [104.130.215.37])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id a5e58849-0ead-484c-8253-532dfd143437;
-	Thu, 15 Oct 2020 15:50:30 +0000 (UTC)
+	id ad5d6dd0-5b63-453f-b297-7a399c91773d;
+	Thu, 15 Oct 2020 16:09:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=/UKradk/z4OgKrjjcpnOfZ9csQk7I4shSwqTZgX4ibw=; b=1AN05+e+5E0n5jtCCVluZ9s+Mg
-	cACAFIPLJyoHMpAVkpkURdXSZFEhoDC323dAUZNgOanvjicq7WHNVsheb9kCFQKyTH1pv4Pv1VsBK
-	GBWDZEnUyLX7LmsHDOZ4Q8ExvSW7cbzWIYQQY+/RTnbNEq8o7lxwj1TFvSmFFbodPoDc=;
+	bh=uF93lLE6Hujj9HHD1uOcz9Kb2G0DNm7aSbOO3mDjPxk=; b=ucPB9WYIV0ZAF7oH+CGrjitn7Y
+	jOM9r+VrJwVBV1a9GkeV4ypM3hBlEDHCtcji9kMc+BcJ/m1a8iuBWL7WgCbFmfVkX4sPSs3DMMZfU
+	7SVRFn3zPiEKWwyCWOFTkHzmIwiiEa0UhArz6L3LRjp/ZqfpJn+j2RySJ9vrI9Awsg0E=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
 	by mail.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <ijackson@chiark.greenend.org.uk>)
-	id 1kT5WQ-00088L-GG
-	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:30 +0000
+	id 1kT5oa-0000gP-23
+	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:09:16 +0000
 Received: from iwj (helo=mynotebook.example.org)
 	by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
 	(envelope-from <ijackson@chiark.greenend.org.uk>)
-	id 1kT5WQ-0005H7-FM
-	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:30 +0000
+	id 1kT5oa-0006d2-18
+	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:09:16 +0000
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
 	by mariner.uk.xensource.com with esmtp (Exim 4.89)
 	(envelope-from <ijackson@chiark.greenend.org.uk>)
-	id 1kT5WO-0000oB-ON; Thu, 15 Oct 2020 16:50:28 +0100
+	id 1kT5WQ-0000oB-Fn; Thu, 15 Oct 2020 16:50:30 +0100
 From: Ian Jackson <iwj@xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH v2 09/17] sg-report-flight: Provide --refer-to-flight option
-Date: Thu, 15 Oct 2020 16:50:11 +0100
-Message-Id: <20201015155019.20705-10-iwj@xenproject.org>
+Cc: Ian Jackson <iwj@xenproject.org>,
+	Andrew Cooper <Andrew.Cooper3@citrix.com>
+Subject: [OSSTEST PATCH v2 15/17] cr-daily-branch: Do not do immediate retry of failing xtf flights
+Date: Thu, 15 Oct 2020 16:50:17 +0100
+Message-Id: <20201015155019.20705-16-iwj@xenproject.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20201015155019.20705-1-iwj@xenproject.org>
 References: <20201015155019.20705-1-iwj@xenproject.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Ian Jackson <ian.jackson@eu.citrix.com>
-
-This just generates an extra heading and URL at the top of the output.
-In particular, it doesn't affect the algorithms which calculate
-regressions.
-
-Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
+CC: Andrew Cooper <Andrew.Cooper3@citrix.com>
+Signed-off-by: Ian Jackson <iwj@xenproject.org>
 ---
- sg-report-flight | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
+ cr-daily-branch | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/sg-report-flight b/sg-report-flight
-index 2ab1637f..bcd896a8 100755
---- a/sg-report-flight
-+++ b/sg-report-flight
-@@ -42,6 +42,7 @@ our $htmldir;
- our $want_info_headers;
- our ($branch, $branches_cond_q);
- our @allows;
-+our (@refer_to_flights);
- our (@includebeginfiles,@includefiles);
+diff --git a/cr-daily-branch b/cr-daily-branch
+index 3e58d465..9b1961bd 100755
+--- a/cr-daily-branch
++++ b/cr-daily-branch
+@@ -484,6 +484,7 @@ default_immediate_retry=$wantpush
+ case "$branch" in
+ *smoke*)	default_immediate_retry=false ;;
+ osstest)	default_immediate_retry=false ;;
++xtf*)		default_immediate_retry=false ;;
+ *)		;;
+ esac
  
- open DEBUG, ">/dev/null";
-@@ -66,6 +67,8 @@ while (@ARGV && $ARGV[0] =~ m/^-/) {
-         push @includebeginfiles, $1;
-     } elsif (m/^--include=(.*)$/) {
-         push @includefiles, $1;
-+    } elsif (m/^--refer-to-flight=(.*)$/) {
-+        push @refer_to_flights, $1;
-     } elsif (restrictflight_arg($_)) {
-         # Handled by Executive
-     } elsif (m/^--allow=(.*)$/) {
-@@ -504,6 +507,16 @@ END
-         die unless defined $specflight;
-     }
- }
-+sub find_refer_to_flights () {
-+    my $ffq = $dbh_tests->prepare("SELECT * FROM flights WHERE flight=?");
-+    @refer_to_flights = map {
-+	my $flight = $_;
-+	$ffq->execute($flight);
-+	my $row = $ffq->fetchrow_hashref();
-+	die "refer to flight $flight not found\n" unless $row;
-+	{ Flight => $flight, FlightInfo => $row };
-+    } @refer_to_flights;
-+}
- 
- sub examineflight ($) {
-     my ($flight) = @_;
-@@ -804,6 +817,10 @@ END
- 
-     printout_flightheader($r);
- 
-+    foreach my $ref_r (@refer_to_flights) {
-+	printout_flightheader($ref_r);
-+    }
-+
-     if (defined $r->{Overall}) {
-         bodyprint "\n";
-         bodyprint $r->{Overall};
-@@ -1878,6 +1895,7 @@ db_retry($dbh_tests, [], sub {
-     if (defined $mro) {
- 	open MRO, "> $mro.new" or die "$mro.new $!";
-     }
-+    find_refer_to_flights();
-     findspecflight();
-     my $fi= examineflight($specflight);
-     my @fails= justifyfailures($fi);
 -- 
 2.20.1
 
