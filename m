@@ -2,28 +2,28 @@ Return-Path: <SRS0=IsAa=DW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.4 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D911C433DF
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 13:11:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5F0E5C433E7
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 13:17:44 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C3C0E2225C
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 13:11:12 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id CBFCB2225C
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 13:17:43 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="c2vt4C6r"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C3C0E2225C
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="sr6xgljp"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CBFCB2225C
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.7360.19203 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.7363.19215 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kT31x-0005Zx-94; Thu, 15 Oct 2020 13:10:53 +0000
+	id 1kT38H-0005oR-3B; Thu, 15 Oct 2020 13:17:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 7360.19203; Thu, 15 Oct 2020 13:10:53 +0000
+Received: by outflank-mailman (output) from mailman id 7363.19215; Thu, 15 Oct 2020 13:17:25 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,83 +38,84 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kT31x-0005Zq-63; Thu, 15 Oct 2020 13:10:53 +0000
-Received: by outflank-mailman (input) for mailman id 7360;
- Thu, 15 Oct 2020 13:10:51 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kT38H-0005oK-0D; Thu, 15 Oct 2020 13:17:25 +0000
+Received: by outflank-mailman (input) for mailman id 7363;
+ Thu, 15 Oct 2020 13:17:23 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=LoCs=DW=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1kT31v-0005Zl-FB
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 13:10:51 +0000
-Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 5abb5e33-7b0f-437a-a9aa-8e1ca1174325;
- Thu, 15 Oct 2020 13:10:50 +0000 (UTC)
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ <SRS0=sl3P=DW=xenproject.org=iwj@srs-us1.protection.inumbo.net>)
+ id 1kT38F-0005oF-4C
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 13:17:23 +0000
+Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id e806a902-b08e-40e8-b24b-6d9d8d91bf72;
+ Thu, 15 Oct 2020 13:17:22 +0000 (UTC)
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <iwj@xenproject.org>) id 1kT38D-0004hh-St
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 13:17:21 +0000
+Received: from iwj (helo=mynotebook.example.org)
+ by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
+ (envelope-from <iwj@xenproject.org>) id 1kT38D-0001Q0-Rd
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 13:17:21 +0000
+Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
+ (envelope-from <iwj@xenproject.org>)
+ id 1kT38A-0000P7-K1; Thu, 15 Oct 2020 14:17:18 +0100
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=LoCs=DW=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
-	id 1kT31v-0005Zl-FB
-	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 13:10:51 +0000
-X-Inumbo-ID: 5abb5e33-7b0f-437a-a9aa-8e1ca1174325
-Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 5abb5e33-7b0f-437a-a9aa-8e1ca1174325;
-	Thu, 15 Oct 2020 13:10:50 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1602767450;
-  h=subject:to:cc:references:from:message-id:date:
-   mime-version:in-reply-to:content-transfer-encoding;
-  bh=f6Kamy1C8O875JTu/vLF90Ddc8FWBrVKHooa1uTjaeQ=;
-  b=c2vt4C6rqNUF9VdfyCuMKsk1juKOixPSz7EXwnsSpnrpuSppcgHO2Guf
-   IyHizkMxUZHf+wKiv0b202dp3KcKGCBdfepdGOhfYhP1SK8pDO2CLd+cP
-   gq580Wo6KOPHskrPXZc2XVdCcJZZXPz8HnDFD2SomiekpYUwz19qqTRLw
-   Q=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: TsNzbLxMsk384nJy5Ma5vOQoKEjgU+ipNL1nJSmtDZ6qs87H2v+vbvQIN4MbbD72V2Ey2BJWzK
- DJ2By9UKxVmig34H8L3MwHOYlSQxz2DBF8RnLL026OOdZRjfNPY566lXkCEMWpefwuzoeGsvFt
- SnTPGz44+AtTSC4bBi08uZqWHQKJcn+DFJ+74bUEgEdXNlB7yWOUEr2CPons5/qNhxHYKojNNA
- H5bJ7MetpyQXJ0vK5ZCl6jO/6csbfhHTojPmAvbq5tYkHveVjp4yyTrmmaBCv2pnjkGKD8M7ZL
- 4Bg=
-X-SBRS: 2.5
-X-MesageID: 29078535
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.77,379,1596513600"; 
-   d="scan'208";a="29078535"
-Subject: Re: [PATCH 2/2] xen: Kconfig: nest Xen guest options
-To: <boris.ostrovsky@oracle.com>, Jason Andryuk <jandryuk@gmail.com>, "Juergen
- Gross" <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>
-CC: Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
-	Borislav Petkov <bp@alien8.de>, <x86@kernel.org>, "H. Peter Anvin"
-	<hpa@zytor.com>, <xen-devel@lists.xenproject.org>,
-	<linux-kernel@vger.kernel.org>
-References: <20201014175342.152712-1-jandryuk@gmail.com>
- <20201014175342.152712-3-jandryuk@gmail.com>
- <6cd9363c-ac0c-ea68-c8e7-9fd3cd30a89b@oracle.com>
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Message-ID: <4e31301b-0e57-ac89-cd71-6ad5e1a66628@citrix.com>
-Date: Thu, 15 Oct 2020 14:10:40 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+	(envelope-from <SRS0=sl3P=DW=xenproject.org=iwj@srs-us1.protection.inumbo.net>)
+	id 1kT38F-0005oF-4C
+	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 13:17:23 +0000
+X-Inumbo-ID: e806a902-b08e-40e8-b24b-6d9d8d91bf72
+Received: from mail.xenproject.org (unknown [104.130.215.37])
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id e806a902-b08e-40e8-b24b-6d9d8d91bf72;
+	Thu, 15 Oct 2020 13:17:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:Cc:To:Date
+	:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
+	bh=H1KJpw10QLjHojNNuOFi9pGzZtl2DP3GHXC4cJ7LdlE=; b=sr6xgljpk2fT98oIk6E82bGeXl
+	/kAsCZ1uk2oEzWjJ50vQN9pDFl7kL2APdStu73gMK8HfqgHTRywTsVmf6QLFwkevkP+q299JTXnQE
+	buZazHyQV9JGx2K7meLp6cJmy++tBZTDuqyMSDxwa7s4ErOcvd1zTELejMvoGSCyS2KU=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+	by mail.xenproject.org with esmtp (Exim 4.92)
+	(envelope-from <iwj@xenproject.org>)
+	id 1kT38D-0004hh-St
+	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 13:17:21 +0000
+Received: from iwj (helo=mynotebook.example.org)
+	by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
+	(envelope-from <iwj@xenproject.org>)
+	id 1kT38D-0001Q0-Rd
+	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 13:17:21 +0000
+Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
+	(envelope-from <iwj@xenproject.org>)
+	id 1kT38A-0000P7-K1; Thu, 15 Oct 2020 14:17:18 +0100
+From: Ian Jackson <iwj@xenproject.org>
 MIME-Version: 1.0
-In-Reply-To: <6cd9363c-ac0c-ea68-c8e7-9fd3cd30a89b@oracle.com>
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
-Content-Language: en-GB
-X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
- FTLPEX02CL05.citrite.net (10.13.108.178)
+Message-ID: <24456.19422.318790.279648@mariner.uk.xensource.com>
+Date: Thu, 15 Oct 2020 14:17:18 +0100
+To: Jan Beulich <jbeulich@suse.com>
+Cc: "xen-devel\@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+    Elena Ufimtseva <elena.ufimtseva@oracle.com>,
+    Wei Liu <wl@xen.org>
+Subject: Re: [PATCH] tools/gdbsx: drop stray recursion into tools/include/
+In-Reply-To: <ece6c5c2-43f8-36d2-370c-37d988baeb87@suse.com>
+References: <ece6c5c2-43f8-36d2-370c-37d988baeb87@suse.com>
+X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
 
-On 15/10/2020 13:37, boris.ostrovsky@oracle.com wrote:
-> On 10/14/20 1:53 PM, Jason Andryuk wrote:
->> +config XEN_512GB
->> +	bool "Limit Xen pv-domain memory to 512GB"
->> +	depends on XEN_PV && X86_64
->
-> Why is X86_64 needed here?
+Jan Beulich writes ("[PATCH] tools/gdbsx: drop stray recursion into tools/include/"):
+> Doing so isn't appropriate here - this gets done very early in the build
+> process. If the directory is mean to to be buildable on its own,
+> different arrangements would be needed.
+> 
+> The issue has become more pronounced by 47654a0d7320 ("tools/include:
+> fix (drop) dependencies of when to populate xen/"), but was there before
+> afaict.
+> 
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
->512G support was implemented using a direct-mapped P2M, and is rather
-beyond the virtual address capabilities of 32bit.
-
-~Andrew
+Reviewed-by: Ian Jackson <ian.jackson@eu.citrix.com>
 
