@@ -8,23 +8,23 @@ X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D5AAFC43467
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 16:53:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 894B2C433DF
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 16:53:32 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 638002225E
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 16:53:31 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 1DE112068D
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 16:53:32 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="By1+sZx/"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 638002225E
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="qhNGtO5d"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1DE112068D
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.7612.20077 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.7615.20098 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kT6VC-0007Ca-PF; Thu, 15 Oct 2020 16:53:18 +0000
+	id 1kT6VE-0007Gs-D9; Thu, 15 Oct 2020 16:53:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 7612.20077; Thu, 15 Oct 2020 16:53:18 +0000
+Received: by outflank-mailman (output) from mailman id 7615.20098; Thu, 15 Oct 2020 16:53:20 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,155 +39,256 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kT6VC-0007By-AI; Thu, 15 Oct 2020 16:53:18 +0000
-Received: by outflank-mailman (input) for mailman id 7612;
+	id 1kT6VD-0007GR-UG; Thu, 15 Oct 2020 16:53:19 +0000
+Received: by outflank-mailman (input) for mailman id 7615;
  Thu, 15 Oct 2020 16:53:15 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YEeM=DW=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
- id 1kT6O3-0004yr-6v
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:45:55 +0000
-Received: from mail-lf1-x143.google.com (unknown [2a00:1450:4864:20::143])
+ id 1kT6Or-0004yr-8K
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:46:45 +0000
+Received: from mail-lj1-x242.google.com (unknown [2a00:1450:4864:20::242])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id f79a2b4f-f75a-40b3-8756-6dcebdebe072;
- Thu, 15 Oct 2020 16:45:07 +0000 (UTC)
-Received: by mail-lf1-x143.google.com with SMTP id l2so4404508lfk.0
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2020 09:45:07 -0700 (PDT)
+ id 8d4d4140-25ab-4442-9a38-2c66f7862da7;
+ Thu, 15 Oct 2020 16:45:22 +0000 (UTC)
+Received: by mail-lj1-x242.google.com with SMTP id y16so3878109ljk.1
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2020 09:45:16 -0700 (PDT)
 Received: from otyshchenko.www.tendawifi.com ([212.22.223.21])
- by smtp.gmail.com with ESMTPSA id v13sm1482495ljh.66.2020.10.15.09.45.05
+ by smtp.gmail.com with ESMTPSA id v13sm1482495ljh.66.2020.10.15.09.45.14
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 15 Oct 2020 09:45:05 -0700 (PDT)
+ Thu, 15 Oct 2020 09:45:14 -0700 (PDT)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=YEeM=DW=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
-	id 1kT6O3-0004yr-6v
-	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:45:55 +0000
-X-Inumbo-ID: f79a2b4f-f75a-40b3-8756-6dcebdebe072
-Received: from mail-lf1-x143.google.com (unknown [2a00:1450:4864:20::143])
+	id 1kT6Or-0004yr-8K
+	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:46:45 +0000
+X-Inumbo-ID: 8d4d4140-25ab-4442-9a38-2c66f7862da7
+Received: from mail-lj1-x242.google.com (unknown [2a00:1450:4864:20::242])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id f79a2b4f-f75a-40b3-8756-6dcebdebe072;
-	Thu, 15 Oct 2020 16:45:07 +0000 (UTC)
-Received: by mail-lf1-x143.google.com with SMTP id l2so4404508lfk.0
-        for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2020 09:45:07 -0700 (PDT)
+	id 8d4d4140-25ab-4442-9a38-2c66f7862da7;
+	Thu, 15 Oct 2020 16:45:22 +0000 (UTC)
+Received: by mail-lj1-x242.google.com with SMTP id y16so3878109ljk.1
+        for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2020 09:45:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=N4sHZjBrvdP2nIgCwj1N8kQLOeVN1MHVkf9kqSUqzcc=;
-        b=By1+sZx/D6fqGrtAeMnWCLm09vNkxpnpy1Oh0Ydg6B/fHRp9Eviq44+yZSendm4Mlz
-         eClZjLs66cfhBMRPcJRLl3oYkHIXXnFNtscK2P8CI8eyvnAWyra3P/bzaUXqW2CAK8wa
-         QL3Xjbg/T0W2xOI7Ijx+p9QHpNJ28y4Q+89b3dpHDO1RvWmpO94UpPBNC6prmpqpp/oS
-         OxriwipPOOH7AEEe6BkOwWjlIrbAXg8HHRPx+8kh39tJ8GSpnw7HLGZwMpt/Fw8Z5UaE
-         VFbBBQ9Y38smL9Np9XmjvQjiE8qHCySg/II1Rl+LI42vhBJefGorQzGy0B8WJ3TpfiXO
-         Olpg==
+        bh=Io9UJaZa2vr40+lSLt6wvD6ynVflJI9Al4nh6JXoutI=;
+        b=qhNGtO5djVpxpfhukOTWZS1KwYbLm9hZzuRQayLeydkwh1ULMdigrk2cn1jO4BzKSK
+         04TDAvE3r1NZYXaZjTKAPkdRKb0XfMm86Hk4sWaKLsW+43vgLKBG6WA5mrrCxbPEl2Ed
+         DTtxjLAxvWWc9hH9rhgaGU0CvPW+9RdxR5ifbr0hmCppYe3f39dg3C7+N7bOH72v4M97
+         JuiF0VYRZkdKpFXkRt7nazvBhNkipTy4UO0QxRdNM4FU0SmNWUePJIpSGRtZK3vChftW
+         QB9TQZTcsDS8PYE2SuHwA00maz5WuW+G0JIHPR24ZrdxtdsKMfS2drS1ypTIgxsueTfM
+         kgOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=N4sHZjBrvdP2nIgCwj1N8kQLOeVN1MHVkf9kqSUqzcc=;
-        b=IqW703Q9/JUAg1mvP2iG/5Ab0eZ2OEpS+erqwBPKzIa7tudreTRfswHUM+u1AcF+nr
-         RsmckKlxW5CSCsitmOMEwpa3UtKJAqg670FKG1OMY1rDru03GfF1e391gjpXEOzRejaN
-         mqUo+5SHlKPA/uuekd0YySeFnUu6vhd0BI7gJAqLFBEqRRFg97UBssec/O0lQ7iCdFL2
-         VMKEcRAQw8RAwfiz+qIOZKjCz9KDM/ML9OiTeMqmtWoqHVyME1lhFOCJK7Srm5SttXFX
-         jdC+kAXuD+RY1aRLNH8jzn/uDhn/uvX0/5Xj5yUZ/5AS01Th8DYU2AnYgJfE3BIuLuGl
-         C9Dg==
-X-Gm-Message-State: AOAM53196ntoFRXDeQk7WwRt3u7WYmT+uWJlMM0O496JSQxcBP3/6pc4
-	tZbyIzaUw3R0x0zA7zSp3//NPXV5iTAA4w==
-X-Google-Smtp-Source: ABdhPJwhpoAS/UbyhzkuTItYICvt8rJ4Yol/uOLfyGdXlBHd66uiyGvQNddJO4lJY91mCIZH3jo+ww==
-X-Received: by 2002:a19:824f:: with SMTP id e76mr1281242lfd.572.1602780306328;
-        Thu, 15 Oct 2020 09:45:06 -0700 (PDT)
+        bh=Io9UJaZa2vr40+lSLt6wvD6ynVflJI9Al4nh6JXoutI=;
+        b=tkZhrXRhb+ADkMxjDT+fONClS+AQkY9sOQxiNMmkNZYKUhXN8kBeBAlttIc43jd4nr
+         j9LR2yc8XnJrFQ0DbGscYGRTNmbiEl2zUhRBLpmfzsefklRHwYgcZhYSIQnJ/mXW9S7/
+         36YTkyCW5TekPZ7fSOlqQ32rJ3FvkVOHUpGxCMFNG+fwFUe7I0arPqcayMOO0/lPNljo
+         LtdcbUv4+Kjru+wVUePQfJxzIeIz5FpCtmr9vg/LKGJ85djqy8fglcs9wC49iFpOFbB4
+         se4wL+on5vCMqTizFPkVzWAhDhoxKP5QIosIeqEPIDCqBSLHGRcFWuXlDDvCL98dnvbM
+         gfGw==
+X-Gm-Message-State: AOAM530YO7GgLEefH+xjcvUm05FFH1jgDC2zsbRadcW1rrFj0P0Yayk/
+	f2zZWJgfCePdsFoy/25dYYvqP20f0rx8bw==
+X-Google-Smtp-Source: ABdhPJzshDvkHnaoQdkfm6rWN+hXIU4lgONNKaeqyrYRC6gft4yR6POrZRsZUT7Z+40lcLRpxWHafQ==
+X-Received: by 2002:a05:651c:96:: with SMTP id 22mr1712441ljq.76.1602780315241;
+        Thu, 15 Oct 2020 09:45:15 -0700 (PDT)
 Received: from otyshchenko.www.tendawifi.com ([212.22.223.21])
-        by smtp.gmail.com with ESMTPSA id v13sm1482495ljh.66.2020.10.15.09.45.05
+        by smtp.gmail.com with ESMTPSA id v13sm1482495ljh.66.2020.10.15.09.45.14
         (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Thu, 15 Oct 2020 09:45:05 -0700 (PDT)
+        Thu, 15 Oct 2020 09:45:14 -0700 (PDT)
 From: Oleksandr Tyshchenko <olekstysh@gmail.com>
 To: xen-devel@lists.xenproject.org
-Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+Cc: Julien Grall <julien.grall@arm.com>,
+	Ian Jackson <iwj@xenproject.org>,
+	Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Paul Durrant <paul@xen.org>,
-	Julien Grall <julien.grall@arm.com>
-Subject: [PATCH V2 13/23] xen/ioreq: Use guest_cmpxchg64() instead of cmpxchg()
-Date: Thu, 15 Oct 2020 19:44:24 +0300
-Message-Id: <1602780274-29141-14-git-send-email-olekstysh@gmail.com>
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Subject: [PATCH V2 22/23] libxl: Introduce basic virtio-mmio support on Arm
+Date: Thu, 15 Oct 2020 19:44:33 +0300
+Message-Id: <1602780274-29141-23-git-send-email-olekstysh@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1602780274-29141-1-git-send-email-olekstysh@gmail.com>
 References: <1602780274-29141-1-git-send-email-olekstysh@gmail.com>
 
-From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+From: Julien Grall <julien.grall@arm.com>
 
-The cmpxchg() in hvm_send_buffered_ioreq() operates on memory shared
-with the emulator domain (and the target domain if the legacy
-interface is used).
+This patch creates specific device node in the Guest device-tree
+with allocated MMIO range and SPI interrupt if specific 'virtio'
+property is present in domain config.
 
-In order to be on the safe side we need to switch
-to guest_cmpxchg64() to prevent a domain to DoS Xen on Arm.
-
-As there is no plan to support the legacy interface on Arm,
-we will have a page to be mapped in a single domain at the time,
-so we can use s->emulator in guest_cmpxchg64() safely.
-
-Thankfully the only user of the legacy interface is x86 so far
-and there is not concern regarding the atomics operations.
-
-Please note, that the legacy interface *must* not be used on Arm
-without revisiting the code.
-
+Signed-off-by: Julien Grall <julien.grall@arm.com>
 Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-CC: Julien Grall <julien.grall@arm.com>
 
 ---
 Please note, this is a split/cleanup/hardening of Julien's PoC:
 "Add support for Guest IO forwarding to a device emulator"
 
 Changes RFC -> V1:
-   - new patch
+   - was squashed with:
+     "[RFC PATCH V1 09/12] libxl: Handle virtio-mmio irq in more correct way"
+     "[RFC PATCH V1 11/12] libxl: Insert "dma-coherent" property into virtio-mmio device node"
+     "[RFC PATCH V1 12/12] libxl: Fix duplicate memory node in DT"
+   - move VirtIO MMIO #define-s to xen/include/public/arch-arm.h
 
 Changes V1 -> V2:
-   - move earlier to avoid breaking arm32 compilation
-   - add an explanation to commit description and hvm_allow_set_param()
-   - pass s->emulator
+   - update the author of a patch
 ---
- xen/arch/arm/hvm.c | 4 ++++
- xen/common/ioreq.c | 3 ++-
- 2 files changed, 6 insertions(+), 1 deletion(-)
+ tools/libs/light/libxl_arm.c     | 58 ++++++++++++++++++++++++++++++++++++++--
+ tools/libs/light/libxl_types.idl |  1 +
+ tools/xl/xl_parse.c              |  1 +
+ xen/include/public/arch-arm.h    |  5 ++++
+ 4 files changed, 63 insertions(+), 2 deletions(-)
 
-diff --git a/xen/arch/arm/hvm.c b/xen/arch/arm/hvm.c
-index 8951b34..9694e5a 100644
---- a/xen/arch/arm/hvm.c
-+++ b/xen/arch/arm/hvm.c
-@@ -31,6 +31,10 @@
- 
- #include <asm/hypercall.h>
- 
-+/*
-+ * The legacy interface (which involves magic IOREQ pages) *must* not be used
-+ * without revisiting the code.
-+ */
- static int hvm_allow_set_param(const struct domain *d, unsigned int param)
+diff --git a/tools/libs/light/libxl_arm.c b/tools/libs/light/libxl_arm.c
+index 66e8a06..588ee5a 100644
+--- a/tools/libs/light/libxl_arm.c
++++ b/tools/libs/light/libxl_arm.c
+@@ -26,8 +26,8 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
  {
-     switch ( param )
-diff --git a/xen/common/ioreq.c b/xen/common/ioreq.c
-index 98fffae..8612159 100644
---- a/xen/common/ioreq.c
-+++ b/xen/common/ioreq.c
-@@ -28,6 +28,7 @@
- #include <xen/trace.h>
- #include <xen/vpci.h>
+     uint32_t nr_spis = 0;
+     unsigned int i;
+-    uint32_t vuart_irq;
+-    bool vuart_enabled = false;
++    uint32_t vuart_irq, virtio_irq;
++    bool vuart_enabled = false, virtio_enabled = false;
  
-+#include <asm/guest_atomics.h>
- #include <asm/hvm/ioreq.h>
- 
- #include <public/hvm/ioreq.h>
-@@ -1317,7 +1318,7 @@ static int send_buffered_ioreq(struct ioreq_server *s, ioreq_t *p)
- 
-         new.read_pointer = old.read_pointer - n * IOREQ_BUFFER_SLOT_NUM;
-         new.write_pointer = old.write_pointer - n * IOREQ_BUFFER_SLOT_NUM;
--        cmpxchg(&pg->ptrs.full, old.full, new.full);
-+        guest_cmpxchg64(s->emulator, &pg->ptrs.full, old.full, new.full);
+     /*
+      * If pl011 vuart is enabled then increment the nr_spis to allow allocation
+@@ -39,6 +39,17 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
+         vuart_enabled = true;
      }
  
-     notify_via_xen_event_channel(d, s->bufioreq_evtchn);
++    /*
++     * XXX: Handle properly virtio
++     * A proper solution would be the toolstack to allocate the interrupts
++     * used by each virtio backend and let the backend now which one is used
++     */
++    if (libxl_defbool_val(d_config->b_info.arch_arm.virtio)) {
++        nr_spis += (GUEST_VIRTIO_MMIO_SPI - 32) + 1;
++        virtio_irq = GUEST_VIRTIO_MMIO_SPI;
++        virtio_enabled = true;
++    }
++
+     for (i = 0; i < d_config->b_info.num_irqs; i++) {
+         uint32_t irq = d_config->b_info.irqs[i];
+         uint32_t spi;
+@@ -58,6 +69,12 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
+             return ERROR_FAIL;
+         }
+ 
++        /* The same check as for vpl011 */
++        if (virtio_enabled && irq == virtio_irq) {
++            LOG(ERROR, "Physical IRQ %u conflicting with virtio SPI\n", irq);
++            return ERROR_FAIL;
++        }
++
+         if (irq < 32)
+             continue;
+ 
+@@ -658,6 +675,39 @@ static int make_vpl011_uart_node(libxl__gc *gc, void *fdt,
+     return 0;
+ }
+ 
++static int make_virtio_mmio_node(libxl__gc *gc, void *fdt,
++                                 uint64_t base, uint32_t irq)
++{
++    int res;
++    gic_interrupt intr;
++    /* Placeholder for virtio@ + a 64-bit number + \0 */
++    char buf[24];
++
++    snprintf(buf, sizeof(buf), "virtio@%"PRIx64, base);
++    res = fdt_begin_node(fdt, buf);
++    if (res) return res;
++
++    res = fdt_property_compat(gc, fdt, 1, "virtio,mmio");
++    if (res) return res;
++
++    res = fdt_property_regs(gc, fdt, GUEST_ROOT_ADDRESS_CELLS, GUEST_ROOT_SIZE_CELLS,
++                            1, base, GUEST_VIRTIO_MMIO_SIZE);
++    if (res) return res;
++
++    set_interrupt(intr, irq, 0xf, DT_IRQ_TYPE_EDGE_RISING);
++    res = fdt_property_interrupts(gc, fdt, &intr, 1);
++    if (res) return res;
++
++    res = fdt_property(fdt, "dma-coherent", NULL, 0);
++    if (res) return res;
++
++    res = fdt_end_node(fdt);
++    if (res) return res;
++
++    return 0;
++
++}
++
+ static const struct arch_info *get_arch_info(libxl__gc *gc,
+                                              const struct xc_dom_image *dom)
+ {
+@@ -961,6 +1011,9 @@ next_resize:
+         if (info->tee == LIBXL_TEE_TYPE_OPTEE)
+             FDT( make_optee_node(gc, fdt) );
+ 
++        if (libxl_defbool_val(info->arch_arm.virtio))
++            FDT( make_virtio_mmio_node(gc, fdt, GUEST_VIRTIO_MMIO_BASE, GUEST_VIRTIO_MMIO_SPI) );
++
+         if (pfdt)
+             FDT( copy_partial_fdt(gc, fdt, pfdt) );
+ 
+@@ -1178,6 +1231,7 @@ void libxl__arch_domain_build_info_setdefault(libxl__gc *gc,
+ {
+     /* ACPI is disabled by default */
+     libxl_defbool_setdefault(&b_info->acpi, false);
++    libxl_defbool_setdefault(&b_info->arch_arm.virtio, false);
+ 
+     if (b_info->type != LIBXL_DOMAIN_TYPE_PV)
+         return;
+diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
+index 9d3f05f..b054bf9 100644
+--- a/tools/libs/light/libxl_types.idl
++++ b/tools/libs/light/libxl_types.idl
+@@ -639,6 +639,7 @@ libxl_domain_build_info = Struct("domain_build_info",[
+ 
+ 
+     ("arch_arm", Struct(None, [("gic_version", libxl_gic_version),
++                               ("virtio", libxl_defbool),
+                                ("vuart", libxl_vuart_type),
+                               ])),
+     # Alternate p2m is not bound to any architecture or guest type, as it is
+diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
+index cae8eb6..10acf22 100644
+--- a/tools/xl/xl_parse.c
++++ b/tools/xl/xl_parse.c
+@@ -2581,6 +2581,7 @@ skip_usbdev:
+     }
+ 
+     xlu_cfg_get_defbool(config, "dm_restrict", &b_info->dm_restrict, 0);
++    xlu_cfg_get_defbool(config, "virtio", &b_info->arch_arm.virtio, 0);
+ 
+     if (c_info->type == LIBXL_DOMAIN_TYPE_HVM) {
+         if (!xlu_cfg_get_string (config, "vga", &buf, 0)) {
+diff --git a/xen/include/public/arch-arm.h b/xen/include/public/arch-arm.h
+index c365b1b..be7595f 100644
+--- a/xen/include/public/arch-arm.h
++++ b/xen/include/public/arch-arm.h
+@@ -464,6 +464,11 @@ typedef uint64_t xen_callback_t;
+ #define PSCI_cpu_on      2
+ #define PSCI_migrate     3
+ 
++/* VirtIO MMIO definitions */
++#define GUEST_VIRTIO_MMIO_BASE  xen_mk_ullong(0x02000000)
++#define GUEST_VIRTIO_MMIO_SIZE  xen_mk_ullong(0x200)
++#define GUEST_VIRTIO_MMIO_SPI   33
++
+ #endif
+ 
+ #ifndef __ASSEMBLY__
 -- 
 2.7.4
 
