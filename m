@@ -2,28 +2,28 @@ Return-Path: <SRS0=IsAa=DW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.4 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 98C9FC433E7
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 16:09:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C4CBBC433DF
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 16:38:31 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1FC2421D7F
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 16:09:48 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 2B6D022255
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 16:38:31 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="6nBC+4Wr"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1FC2421D7F
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="hnDmHVSL"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2B6D022255
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.7549.19856 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.7564.19877 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kT5ow-0000yr-8R; Thu, 15 Oct 2020 16:09:38 +0000
+	id 1kT6GX-0003zm-Or; Thu, 15 Oct 2020 16:38:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 7549.19856; Thu, 15 Oct 2020 16:09:38 +0000
+Received: by outflank-mailman (output) from mailman id 7564.19877; Thu, 15 Oct 2020 16:38:09 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,149 +38,128 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kT5ow-0000yd-4E; Thu, 15 Oct 2020 16:09:38 +0000
-Received: by outflank-mailman (input) for mailman id 7549;
- Thu, 15 Oct 2020 16:09:37 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kT6GX-0003zf-Lf; Thu, 15 Oct 2020 16:38:09 +0000
+Received: by outflank-mailman (input) for mailman id 7564;
+ Thu, 15 Oct 2020 16:38:08 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=/DR3=DW=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1kT5ov-0000xQ-2W
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:09:37 +0000
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id e17d3cb8-6410-454c-a99e-ac964f8ccf48;
- Thu, 15 Oct 2020 16:09:36 +0000 (UTC)
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kT5ou-0000h7-7W
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:09:36 +0000
-Received: from iwj (helo=mynotebook.example.org)
- by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kT5ou-0006gy-6g
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:09:36 +0000
-Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
- by mariner.uk.xensource.com with esmtp (Exim 4.89)
- (envelope-from <ijackson@chiark.greenend.org.uk>)
- id 1kT5WP-0000oB-Uw; Thu, 15 Oct 2020 16:50:30 +0100
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+ <SRS0=LoCs=DW=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1kT6GW-0003za-GM
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:38:08 +0000
+Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 0573e44a-b5e7-4114-8606-4114c68c410f;
+ Thu, 15 Oct 2020 16:38:07 +0000 (UTC)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=/DR3=DW=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
-	id 1kT5ov-0000xQ-2W
-	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:09:37 +0000
-X-Inumbo-ID: e17d3cb8-6410-454c-a99e-ac964f8ccf48
-Received: from mail.xenproject.org (unknown [104.130.215.37])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id e17d3cb8-6410-454c-a99e-ac964f8ccf48;
-	Thu, 15 Oct 2020 16:09:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
-	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=rKhUBECvH4UVMiFTJmADZZZYMWQOR+f/Us5E4XBbMw4=; b=6nBC+4WrrE9VyBaqiUBy++5BXv
-	PMlM1TTv/orJDF/qEz40NHcR1E9G9v+iv8KKje/8Q/h/hhgArylaZlbZB5cmke+cpuFmzhf7CPJTm
-	EWcp1onyN6frRapjHtWJcV7ZP1MK3pA4e1q/fhVyZgMDLpyexhB6PoKTC0hiLmuoWfRE=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
-	by mail.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <ijackson@chiark.greenend.org.uk>)
-	id 1kT5ou-0000h7-7W
-	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:09:36 +0000
-Received: from iwj (helo=mynotebook.example.org)
-	by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
-	(envelope-from <ijackson@chiark.greenend.org.uk>)
-	id 1kT5ou-0006gy-6g
-	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:09:36 +0000
-Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
-	by mariner.uk.xensource.com with esmtp (Exim 4.89)
-	(envelope-from <ijackson@chiark.greenend.org.uk>)
-	id 1kT5WP-0000oB-Uw; Thu, 15 Oct 2020 16:50:30 +0100
-From: Ian Jackson <iwj@xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>,
-	Ian Jackson <iwj@xenproject.org>
-Subject: [OSSTEST PATCH v2 13/17] cr-daily-branch: Immediately retry failing tests
-Date: Thu, 15 Oct 2020 16:50:15 +0100
-Message-Id: <20201015155019.20705-14-iwj@xenproject.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20201015155019.20705-1-iwj@xenproject.org>
-References: <20201015155019.20705-1-iwj@xenproject.org>
+	(envelope-from <SRS0=LoCs=DW=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+	id 1kT6GW-0003za-GM
+	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:38:08 +0000
+X-Inumbo-ID: 0573e44a-b5e7-4114-8606-4114c68c410f
+Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id 0573e44a-b5e7-4114-8606-4114c68c410f;
+	Thu, 15 Oct 2020 16:38:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1602779888;
+  h=subject:to:cc:references:from:message-id:date:
+   mime-version:in-reply-to:content-transfer-encoding;
+  bh=Qj6daUl3a4L1zT29nMoh4pa8HEVDUNhuxBVEfS5VrR0=;
+  b=hnDmHVSLHLgJVG9K+ZY7BNvKNsE8Vtzug6amD2tWZNFjxtXklTVaQ+WR
+   MxH3aU22Vjjh5c5+J02gcYKbY7GiKKB9yMqAYx+Z5t1qz/0+Ghgx4XGux
+   o0t2CHsX9eKHoZ9zajqyPpoisGnJ2Zziq44JIPLY3KQjlTZWbTYZAt2iN
+   0=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: 1dZCXaNiv6f3fJrYWfHabfZpoSQ/ExdZYjaapkQ0S1kuJwO3sfOM9HbFuNpN/MxAjkAJRJGbk8
+ JPKIVWcaNLrbRS/B/te1m8+nn6O5b8buupV3l4EqsTaN6WSJvDO009kCF8d1YYP7X4QC56oxsn
+ izy8usIuT6AtRVcAJ7v6rkH2REAK18MYeiMiGoceEwOmaV/8ay8fS1rd0lanonjaPlrJ1jb9rv
+ p3cp7bpXy1lH2Fm0Q3LcUQwuZBX4bVCTO9uh2WiVXF2Vf/EeNYBKsdZR7lBoyrZPlztspRrZmM
+ zGo=
+X-SBRS: 2.5
+X-MesageID: 29101339
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.77,379,1596513600"; 
+   d="scan'208";a="29101339"
+Subject: Re: [PATCH v2] x86/smpboot: Don't unconditionally call
+ memguard_guard_stack() in cpu_smpboot_alloc()
+To: Jan Beulich <jbeulich@suse.com>
+CC: Xen-devel <xen-devel@lists.xenproject.org>,
+	=?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, Wei Liu <wl@xen.org>
+References: <20201014184708.17758-1-andrew.cooper3@citrix.com>
+ <0ed412d9-c9a2-194b-c953-c74ee102664f@suse.com>
+ <0a294279-5de5-3b54-b1f9-847de1159447@citrix.com>
+ <578a0afd-693a-c704-317e-477e5e27d497@suse.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Message-ID: <5df2626b-8755-8cdb-7cbc-74d51b569a0b@citrix.com>
+Date: Thu, 15 Oct 2020 17:38:00 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
+In-Reply-To: <578a0afd-693a-c704-317e-477e5e27d497@suse.com>
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
+Content-Language: en-GB
+X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
+ FTLPEX02CL05.citrite.net (10.13.108.178)
 
-From: Ian Jackson <ian.jackson@eu.citrix.com>
+On 15/10/2020 16:16, Jan Beulich wrote:
+> On 15.10.2020 16:02, Andrew Cooper wrote:
+>> On 15/10/2020 09:50, Jan Beulich wrote:
+>>> On 14.10.2020 20:47, Andrew Cooper wrote:
+>>>> cpu_smpboot_alloc() is designed to be idempotent with respect to partially
+>>>> initialised state.  This occurs for S3 and CPU parking, where enough state to
+>>>> handle NMIs/#MCs needs to remain valid for the entire lifetime of Xen, even
+>>>> when we otherwise want to offline the CPU.
+>>>>
+>>>> For simplicity between various configuration, Xen always uses shadow stack
+>>>> mappings (Read-only + Dirty) for the guard page, irrespective of whether
+>>>> CET-SS is enabled.
+>>>>
+>>>> Unfortunately, the CET-SS changes in memguard_guard_stack() broke idempotency
+>>>> by first writing out the supervisor shadow stack tokens with plain writes,
+>>>> then changing the mapping to being read-only.
+>>>>
+>>>> This ordering is strictly necessary to configure the BSP, which cannot have
+>>>> the supervisor tokens be written with WRSS.
+>>>>
+>>>> Instead of calling memguard_guard_stack() unconditionally, call it only when
+>>>> actually allocating a new stack.  Xenheap allocates are guaranteed to be
+>>>> writeable, and the net result is idempotency WRT configuring stack_base[].
+>>>>
+>>>> Fixes: 91d26ed304f ("x86/shstk: Create shadow stacks")
+>>>> Reported-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+>>>> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+>>>> ---
+>>>> CC: Jan Beulich <JBeulich@suse.com>
+>>>> CC: Roger Pau Monné <roger.pau@citrix.com>
+>>>> CC: Wei Liu <wl@xen.org>
+>>>>
+>>>> This can more easily be demonstrated with CPU hotplug than S3, and the absence
+>>>> of bug reports goes to show how rarely hotplug is used.
+>>>>
+>>>> v2:
+>>>>  * Don't break S3/CPU parking in combination with CET-SS.  v1 would, for S3,
+>>>>    turn the BSP shadow stack into regular mappings, and #DF as soon as the TLB
+>>>>    shootdown completes.
+>>> The code change looks correct to me, but since I don't understand
+>>> this part I'm afraid I may be overlooking something. I understand
+>>> the "turn the BSP shadow stack into regular mappings" relates to
+>>> cpu_smpboot_free()'s call to memguard_unguard_stack(), but I
+>>> didn't think we come through cpu_smpboot_free() for the BSP upon
+>>> entering or leaving S3.
+>> The v1 really did fix Marek's repro of the problem.
+>>
+>> The only possible way this can occur is if, somewhere, there is a call
+>> to cpu_smpboot_free() for CPU0 with remove=0 on the S3 path
+> I didn't think it was the BSP's stack that got written to, but the
+> first AP's before letting it run.
 
-We exclude the self-tests because we don't want to miss breakage, and
-the Xen smoke tests because they will be run again RSN anyway.
+Oh yes - my analysis was wrong.  The CPU notifier for CPU 1 to come up
+runs on CPU 0.
 
-Signed-off-by: Ian Jackson <iwj@xenproject.org>
----
- cr-daily-branch | 48 +++++++++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 47 insertions(+), 1 deletion(-)
+So only the --- text was wrong.  Are you happy with the fix now?
 
-diff --git a/cr-daily-branch b/cr-daily-branch
-index 285ea361..bea8734e 100755
---- a/cr-daily-branch
-+++ b/cr-daily-branch
-@@ -472,12 +472,58 @@ esac
- sgr_args+=" $EXTRA_SGR_ARGS"
- 
- date >&2
-+original_start=`date +%s`
-+
- : $flight $branch $OSSTEST_BLESSING $sgr_args
- eval "$DAILY_BRANCH_PREEXEC_HOOK"
- execute_flight $flight $OSSTEST_BLESSING
- date >&2
- 
--start_email $flight $branch "$sgr_args" "$subject_prefix"
-+default_immediate_retry=$wantpush
-+
-+case "$branch" in
-+*smoke*)	default_immediate_retry=false ;;
-+osstest)	default_immediate_retry=false ;;
-+*)		;;
-+esac
-+
-+: ${OSSTEST_IMMEDIATE_RETRY:-$default_immediate_retry}
-+
-+while true; do
-+	start_email $flight $branch "$sgr_args" "$subject_prefix"
-+	if grep '^tolerable$' $mrof >/dev/null 2>&1; then break; fi
-+	if ! $OSSTEST_IMMEDIATE_RETRY; then break; fi
-+	OSSTEST_IMMEDIATE_RETRY=false
-+	retry_jobs=$(
-+		perl <$mrof -wne '
-+			next unless m/^regression (\S+) /;
-+			my $j = $1;
-+			next if $j =~ m/^build/;
-+			$r{$j}++;
-+			END {
-+				print "copy-jobs '$flight' $_ "
-+					foreach sort keys %r;
-+			}'
-+	)
-+	if [ "x$retry_jobs" = x ]; then break; fi
-+
-+	rflight=$(
-+		./cs-adjust-flight new:$OSSTEST_BLESSING \
-+			branch-set $branch \
-+			$retry_jobs
-+	)
-+
-+	./mg-adjust-flight-makexrefs -v $rflight \
-+		--branch=$branch --revision-osstest=$narness_rev \
-+		'^build-*' --debug --blessings=real
-+
-+	export OSSTEST_RESOURCE_WAITSTART=$original_start
-+	execute_flight $rflight $OSSTEST_BLESSING-retest
-+	report_flight $rflight
-+	publish_logs $rflight
-+
-+	sgr_args+=" --refer-to-flight=$rflight"
-+done
- 
- push=false
- if grep '^tolerable$' $mrof >/dev/null 2>&1; then push=$wantpush; fi
--- 
-2.20.1
-
+~Andrew
 
