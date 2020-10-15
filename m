@@ -8,23 +8,23 @@ X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8F986C43457
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 16:53:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AE9D9C2D0A4
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 16:53:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 17272206CA
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 16:53:36 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 46A6E206CA
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 16:53:39 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Avq2Hoh8"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 17272206CA
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="CeJiG4Nb"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 46A6E206CA
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.7607.20033 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.7621.20162 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kT6VA-00078e-KF; Thu, 15 Oct 2020 16:53:16 +0000
+	id 1kT6VM-0007c1-0X; Thu, 15 Oct 2020 16:53:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 7607.20033; Thu, 15 Oct 2020 16:53:16 +0000
+Received: by outflank-mailman (output) from mailman id 7621.20162; Thu, 15 Oct 2020 16:53:27 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,676 +39,305 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kT6VA-00078X-GI; Thu, 15 Oct 2020 16:53:16 +0000
-Received: by outflank-mailman (input) for mailman id 7607;
- Thu, 15 Oct 2020 16:53:14 +0000
+	id 1kT6VK-0007ah-U9; Thu, 15 Oct 2020 16:53:26 +0000
+Received: by outflank-mailman (input) for mailman id 7621;
+ Thu, 15 Oct 2020 16:53:16 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YEeM=DW=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
- id 1kT6Ow-0004yr-8X
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:46:50 +0000
-Received: from mail-lf1-x143.google.com (unknown [2a00:1450:4864:20::143])
+ id 1kT6OX-0004yr-7t
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:46:25 +0000
+Received: from mail-lf1-x144.google.com (unknown [2a00:1450:4864:20::144])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 087e66d4-5203-42f8-bac5-9b88c9992b63;
- Thu, 15 Oct 2020 16:45:22 +0000 (UTC)
-Received: by mail-lf1-x143.google.com with SMTP id 77so4380178lfl.2
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2020 09:45:17 -0700 (PDT)
+ id 495c746c-867e-4b9f-bfdc-3ebc58d73db7;
+ Thu, 15 Oct 2020 16:45:12 +0000 (UTC)
+Received: by mail-lf1-x144.google.com with SMTP id b1so4320376lfp.11
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2020 09:45:12 -0700 (PDT)
 Received: from otyshchenko.www.tendawifi.com ([212.22.223.21])
- by smtp.gmail.com with ESMTPSA id v13sm1482495ljh.66.2020.10.15.09.45.15
+ by smtp.gmail.com with ESMTPSA id v13sm1482495ljh.66.2020.10.15.09.45.10
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 15 Oct 2020 09:45:15 -0700 (PDT)
+ Thu, 15 Oct 2020 09:45:10 -0700 (PDT)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=YEeM=DW=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
-	id 1kT6Ow-0004yr-8X
-	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:46:50 +0000
-X-Inumbo-ID: 087e66d4-5203-42f8-bac5-9b88c9992b63
-Received: from mail-lf1-x143.google.com (unknown [2a00:1450:4864:20::143])
+	id 1kT6OX-0004yr-7t
+	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:46:25 +0000
+X-Inumbo-ID: 495c746c-867e-4b9f-bfdc-3ebc58d73db7
+Received: from mail-lf1-x144.google.com (unknown [2a00:1450:4864:20::144])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 087e66d4-5203-42f8-bac5-9b88c9992b63;
-	Thu, 15 Oct 2020 16:45:22 +0000 (UTC)
-Received: by mail-lf1-x143.google.com with SMTP id 77so4380178lfl.2
-        for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2020 09:45:17 -0700 (PDT)
+	id 495c746c-867e-4b9f-bfdc-3ebc58d73db7;
+	Thu, 15 Oct 2020 16:45:12 +0000 (UTC)
+Received: by mail-lf1-x144.google.com with SMTP id b1so4320376lfp.11
+        for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2020 09:45:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=xCZVPNSd778IcfiDHcmUgV2+bmw+xbtVorY65VaJeGs=;
-        b=Avq2Hoh8lwOMvmjF3c6XbeNBaRbzuWIGIuolr8Q6LaYlBKeZ5kNLVc2aUpijb3psTy
-         DN6QC9HY7KKywU4UFyxH1vsi17nMeIxUJc7/NIpwpSP7V40iUVqB67xCWkSIIezznbnp
-         RooSEoZsgEVMyJN8XD+eM5XdxkykKAJU0W38u2Xtn9HNfF85TllybdvtP6SIETT4l49g
-         Kp6SlzkKaxloTMK6NAxA/SvUzkWctQSwSzekVxUjUws+bsV6zNLkLPoa0j9KW/6fauUH
-         JsZMrbOKj6W4YfppUi6GqH+j5M74GJikLCslEPFNhG8aPhTmWjjx55HIfPXqRj7chLSx
-         w7jA==
+        bh=HaoSNmuxwJzJR/fKLMbZwT91GS4ftwQys6lt/km7J2g=;
+        b=CeJiG4Nb1/Pb2sgz3TGnNpjrTYoj+Xr3WHwfBpq5V6VWIWlkhvHc7IQUISflX9dJj7
+         if3zUD6eV9aAWdcwjWmJPw//abOUNr0ZKgvyO5Ahb5dHFjnfkUGa/8P03fJX30cM3k9p
+         g+vGnWOZF7yWTckBaAA7IvsqTmBw5fkEe4Z0P36cfABlNKjsyTWMWnqKrcYtsJJPeqG4
+         TmK6f6Fq3KY1RzealYEn3Suy9d5vzktZxa5nr6CWeX7Xl1sZfLhuU9U7B0j4jl6UHtYf
+         jr/QLcxoOytiBaF6DvLENgCoD3tY4r62xmGOzwSeXVZUr1w8IAkZk3/5/KV+OYebiibl
+         M2oQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=xCZVPNSd778IcfiDHcmUgV2+bmw+xbtVorY65VaJeGs=;
-        b=ucHXIafUWoHEf7e5HASI8FnPb1tOBqvWwNNvawPCV5Toj4u1JM7qtBqu9CetHHK160
-         +hr69Lr/emaEljwY64NT17CuiDwVt0ZHbDFMEt27QR+cqK9khPzqMe0pW+O11TalOYgH
-         HHCxp7+qZaksC7PAch8ZJf5I42IE2S7+4Js2mMw4lqXi2ByJOEm4+RZDcOrBzEQpC67d
-         s7dk+7+UsVHlrfcbFH78Hu8fdPwpCWz9THGfe1S2rQsHgv5sVJWSd+ZG3iU/oXN4qIOT
-         CFNOPEosjCgnBHIxrfJoMwxDMem5og8lh8w5k54ashs29t8Bmp6H/jAV8SO2U2oSbKgC
-         suYg==
-X-Gm-Message-State: AOAM533D2mw894oN/xz4po9FidTP99avvSd6RDy8VLJBq2b24roIA2Y9
-	OFn4tRfE/xp1Z4EVopTAxpzqWckb1wYifw==
-X-Google-Smtp-Source: ABdhPJxI6QsqQDzvUEy4e89SghbJpt00SiJg6myZgzN0L2sohpMkncs8FuLSnw9POz2gxpNHr2WNZg==
-X-Received: by 2002:ac2:5e6d:: with SMTP id a13mr1495324lfr.514.1602780316173;
-        Thu, 15 Oct 2020 09:45:16 -0700 (PDT)
+        bh=HaoSNmuxwJzJR/fKLMbZwT91GS4ftwQys6lt/km7J2g=;
+        b=cccfG/8y+r747gyUUQ3ncLm3JtEl2qs7ESVhRqVsPq0FTOXg85PedmnTRI3+uCwFAx
+         xHl/ywfcLjqRTjcIFyX9dt2tZSGakaxMMJkZLb1b/OLvsy7bxle7SGW4j07Ri3LryMNK
+         96xL9PywSQsVwHVrcwUVgGPJJYagnIzOQlETwehp2ywzkg9HyftM3eHjXMM7KtlKiG6g
+         7xY9DAzRcp/+JBsUyvG+pkzx90+bLi9iKb7zEy0NmtPpBriG0N+arUuQyXGgIMtRptrd
+         QXkozgVZ2Wxb0BroDRFYY+te2bL4uB3wiDbcPeLMLNAWjOsW39ozlQ+nz6OtWn/TWpEs
+         ycmQ==
+X-Gm-Message-State: AOAM5321bnqy8wPj76WWE0Nnoti+dttpk85ZUwWg/7gmgUfHWfn5JVb5
+	X7p3wfKhzUgcawUYQ0L6zJNMKtXXYC9BPQ==
+X-Google-Smtp-Source: ABdhPJxxnhYf1jU2Q+ohzP7ySf8wbYADbqSgg/hOvijB/xB3BRucdTDPEe7sx0CDqgM+hg30Trv1Pg==
+X-Received: by 2002:ac2:5449:: with SMTP id d9mr1270229lfn.546.1602780311348;
+        Thu, 15 Oct 2020 09:45:11 -0700 (PDT)
 Received: from otyshchenko.www.tendawifi.com ([212.22.223.21])
-        by smtp.gmail.com with ESMTPSA id v13sm1482495ljh.66.2020.10.15.09.45.15
+        by smtp.gmail.com with ESMTPSA id v13sm1482495ljh.66.2020.10.15.09.45.10
         (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Thu, 15 Oct 2020 09:45:15 -0700 (PDT)
+        Thu, 15 Oct 2020 09:45:10 -0700 (PDT)
 From: Oleksandr Tyshchenko <olekstysh@gmail.com>
 To: xen-devel@lists.xenproject.org
-Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+Cc: Julien Grall <julien.grall@arm.com>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH V2 23/23] [RFC] libxl: Add support for virtio-disk configuration
-Date: Thu, 15 Oct 2020 19:44:34 +0300
-Message-Id: <1602780274-29141-24-git-send-email-olekstysh@gmail.com>
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Subject: [PATCH V2 18/23] xen/dm: Introduce xendevicemodel_set_irq_level DM op
+Date: Thu, 15 Oct 2020 19:44:29 +0300
+Message-Id: <1602780274-29141-19-git-send-email-olekstysh@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1602780274-29141-1-git-send-email-olekstysh@gmail.com>
 References: <1602780274-29141-1-git-send-email-olekstysh@gmail.com>
 
-From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+From: Julien Grall <julien.grall@arm.com>
 
-This patch adds basic support for configuring and assisting virtio-disk
-backend (emualator) which is intended to run out of Qemu and could be run
-in any domain.
+This patch adds ability to the device emulator to notify otherend
+(some entity running in the guest) using a SPI and implements Arm
+specific bits for it. Proposed interface allows emulator to set
+the logical level of a one of a domain's IRQ lines.
 
-Xenstore was chosen as a communication interface for the emulator running
-in non-toolstack domain to be able to get configuration either by reading
-Xenstore directly or by receiving command line parameters (an updated 'xl devd'
-running in the same domain would read Xenstore beforehand and call backend
-executable with the required arguments).
+We can't reuse the existing DM op (xen_dm_op_set_isa_irq_level)
+to inject an interrupt as the "isa_irq" field is only 8-bit and
+able to cover IRQ 0 - 255, whereas we need a wider range (0 - 1020).
 
-An example of domain configuration (two disks are assigned to the guest,
-the latter is in readonly mode):
-
-vdisk = [ 'backend=DomD, disks=rw:/dev/mmcblk0p3;ro:/dev/mmcblk1p3' ]
-
-Where per-disk Xenstore entries are:
-- filename and readonly flag (configured via "vdisk" property)
-- base and irq (allocated dynamically)
-
-Besides handling 'visible' params described in configuration file,
-patch also allocates virtio-mmio specific ones for each device and
-writes them into Xenstore. virtio-mmio params (irq and base) are
-unique per guest domain, they allocated at the domain creation time
-and passed through to the emulator. Each VirtIO device has at least
-one pair of these params.
-
-TODO:
-1. An extra "virtio" property could be removed.
-2. Update documentation.
-
+Signed-off-by: Julien Grall <julien.grall@arm.com>
 Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 
 ---
+Please note, this is a split/cleanup/hardening of Julien's PoC:
+"Add support for Guest IO forwarding to a device emulator"
+
+***
+Please note, I left interface untouched since there is still
+an open discussion what interface to use/what information to pass
+to the hypervisor. The question whether we should abstract away
+the state of the line or not.
+***
+
 Changes RFC -> V1:
-   - no changes
+   - check incoming parameters in arch_dm_op()
+   - add explicit padding to struct xen_dm_op_set_irq_level
 
 Changes V1 -> V2:
-   - rebase according to the new location of libxl_virtio_disk.c
-
-Please note, there is a real concern about VirtIO interrupts allocation.
-Just copy here what Stefano said in RFC thread.
-
-So, if we end up allocating let's say 6 virtio interrupts for a domain,
-the chance of a clash with a physical interrupt of a passthrough device is real.
-
-I am not entirely sure how to solve it, but these are a few ideas:
-- choosing virtio interrupts that are less likely to conflict (maybe > 1000)
-- make the virtio irq (optionally) configurable so that a user could
-  override the default irq and specify one that doesn't conflict
-- implementing support for virq != pirq (even the xl interface doesn't
-  allow to specify the virq number for passthrough devices, see "irqs")
-
+   - update the author of a patch
+   - update patch description
+   - check that padding is always 0
+   - mention that interface is Arm only and only SPIs are
+     supported for now
+   - allow to set the logical level of a line for non-allocated
+     interrupts only
+   - add xen_dm_op_set_irq_level_t
 ---
- tools/libs/light/Makefile                 |   1 +
- tools/libs/light/libxl_arm.c              |  56 ++++++++++++---
- tools/libs/light/libxl_create.c           |   1 +
- tools/libs/light/libxl_internal.h         |   1 +
- tools/libs/light/libxl_types.idl          |  15 ++++
- tools/libs/light/libxl_types_internal.idl |   1 +
- tools/libs/light/libxl_virtio_disk.c      | 109 ++++++++++++++++++++++++++++
- tools/xl/Makefile                         |   2 +-
- tools/xl/xl.h                             |   3 +
- tools/xl/xl_cmdtable.c                    |  15 ++++
- tools/xl/xl_parse.c                       | 115 ++++++++++++++++++++++++++++++
- tools/xl/xl_virtio_disk.c                 |  46 ++++++++++++
- 12 files changed, 354 insertions(+), 11 deletions(-)
- create mode 100644 tools/libs/light/libxl_virtio_disk.c
- create mode 100644 tools/xl/xl_virtio_disk.c
+ tools/libs/devicemodel/core.c                   | 18 ++++++++
+ tools/libs/devicemodel/include/xendevicemodel.h |  4 ++
+ tools/libs/devicemodel/libxendevicemodel.map    |  1 +
+ xen/arch/arm/dm.c                               | 57 ++++++++++++++++++++++++-
+ xen/common/dm.c                                 |  1 +
+ xen/include/public/hvm/dm_op.h                  | 16 +++++++
+ 6 files changed, 96 insertions(+), 1 deletion(-)
 
-diff --git a/tools/libs/light/Makefile b/tools/libs/light/Makefile
-index f58a321..2ee388a 100644
---- a/tools/libs/light/Makefile
-+++ b/tools/libs/light/Makefile
-@@ -115,6 +115,7 @@ SRCS-y += libxl_genid.c
- SRCS-y += _libxl_types.c
- SRCS-y += libxl_flask.c
- SRCS-y += _libxl_types_internal.c
-+SRCS-y += libxl_virtio_disk.c
- 
- ifeq ($(CONFIG_LIBNL),y)
- CFLAGS_LIBXL += $(LIBNL3_CFLAGS)
-diff --git a/tools/libs/light/libxl_arm.c b/tools/libs/light/libxl_arm.c
-index 588ee5a..9eb3022 100644
---- a/tools/libs/light/libxl_arm.c
-+++ b/tools/libs/light/libxl_arm.c
-@@ -8,6 +8,12 @@
- #include <assert.h>
- #include <xen/device_tree_defs.h>
- 
-+#ifndef container_of
-+#define container_of(ptr, type, member) ({			\
-+        typeof( ((type *)0)->member ) *__mptr = (ptr);	\
-+        (type *)( (char *)__mptr - offsetof(type,member) );})
-+#endif
-+
- static const char *gicv_to_string(libxl_gic_version gic_version)
- {
-     switch (gic_version) {
-@@ -39,14 +45,32 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
-         vuart_enabled = true;
-     }
- 
--    /*
--     * XXX: Handle properly virtio
--     * A proper solution would be the toolstack to allocate the interrupts
--     * used by each virtio backend and let the backend now which one is used
--     */
-     if (libxl_defbool_val(d_config->b_info.arch_arm.virtio)) {
--        nr_spis += (GUEST_VIRTIO_MMIO_SPI - 32) + 1;
-+        uint64_t virtio_base;
-+        libxl_device_virtio_disk *virtio_disk;
-+
-+        virtio_base = GUEST_VIRTIO_MMIO_BASE;
-         virtio_irq = GUEST_VIRTIO_MMIO_SPI;
-+
-+        if (!d_config->num_virtio_disks) {
-+            LOG(ERROR, "Virtio is enabled, but no Virtio devices present\n");
-+            return ERROR_FAIL;
-+        }
-+        virtio_disk = &d_config->virtio_disks[0];
-+
-+        for (i = 0; i < virtio_disk->num_disks; i++) {
-+            virtio_disk->disks[i].base = virtio_base;
-+            virtio_disk->disks[i].irq = virtio_irq;
-+
-+            LOG(DEBUG, "Allocate Virtio MMIO params: IRQ %u BASE 0x%"PRIx64,
-+                virtio_irq, virtio_base);
-+
-+            virtio_irq ++;
-+            virtio_base += GUEST_VIRTIO_MMIO_SIZE;
-+        }
-+        virtio_irq --;
-+
-+        nr_spis += (virtio_irq - 32) + 1;
-         virtio_enabled = true;
-     }
- 
-@@ -70,8 +94,9 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
-         }
- 
-         /* The same check as for vpl011 */
--        if (virtio_enabled && irq == virtio_irq) {
--            LOG(ERROR, "Physical IRQ %u conflicting with virtio SPI\n", irq);
-+        if (virtio_enabled &&
-+           (irq >= GUEST_VIRTIO_MMIO_SPI && irq <= virtio_irq)) {
-+            LOG(ERROR, "Physical IRQ %u conflicting with Virtio IRQ range\n", irq);
-             return ERROR_FAIL;
-         }
- 
-@@ -1011,8 +1036,19 @@ next_resize:
-         if (info->tee == LIBXL_TEE_TYPE_OPTEE)
-             FDT( make_optee_node(gc, fdt) );
- 
--        if (libxl_defbool_val(info->arch_arm.virtio))
--            FDT( make_virtio_mmio_node(gc, fdt, GUEST_VIRTIO_MMIO_BASE, GUEST_VIRTIO_MMIO_SPI) );
-+        if (libxl_defbool_val(info->arch_arm.virtio)) {
-+            libxl_domain_config *d_config =
-+                container_of(info, libxl_domain_config, b_info);
-+            libxl_device_virtio_disk *virtio_disk = &d_config->virtio_disks[0];
-+            unsigned int i;
-+
-+            for (i = 0; i < virtio_disk->num_disks; i++) {
-+                uint64_t base = virtio_disk->disks[i].base;
-+                uint32_t irq = virtio_disk->disks[i].irq;
-+
-+                FDT( make_virtio_mmio_node(gc, fdt, base, irq) );
-+            }
-+        }
- 
-         if (pfdt)
-             FDT( copy_partial_fdt(gc, fdt, pfdt) );
-diff --git a/tools/libs/light/libxl_create.c b/tools/libs/light/libxl_create.c
-index 321a13e..8da328d 100644
---- a/tools/libs/light/libxl_create.c
-+++ b/tools/libs/light/libxl_create.c
-@@ -1821,6 +1821,7 @@ const libxl__device_type *device_type_tbl[] = {
-     &libxl__dtdev_devtype,
-     &libxl__vdispl_devtype,
-     &libxl__vsnd_devtype,
-+    &libxl__virtio_disk_devtype,
-     NULL
- };
- 
-diff --git a/tools/libs/light/libxl_internal.h b/tools/libs/light/libxl_internal.h
-index e26cda9..ea497bb 100644
---- a/tools/libs/light/libxl_internal.h
-+++ b/tools/libs/light/libxl_internal.h
-@@ -4000,6 +4000,7 @@ extern const libxl__device_type libxl__vdispl_devtype;
- extern const libxl__device_type libxl__p9_devtype;
- extern const libxl__device_type libxl__pvcallsif_devtype;
- extern const libxl__device_type libxl__vsnd_devtype;
-+extern const libxl__device_type libxl__virtio_disk_devtype;
- 
- extern const libxl__device_type *device_type_tbl[];
- 
-diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
-index b054bf9..5f8a3ff 100644
---- a/tools/libs/light/libxl_types.idl
-+++ b/tools/libs/light/libxl_types.idl
-@@ -935,6 +935,20 @@ libxl_device_vsnd = Struct("device_vsnd", [
-     ("pcms", Array(libxl_vsnd_pcm, "num_vsnd_pcms"))
-     ])
- 
-+libxl_virtio_disk_param = Struct("virtio_disk_param", [
-+    ("filename", string),
-+    ("readonly", bool),
-+    ("irq", uint32),
-+    ("base", uint64),
-+    ])
-+
-+libxl_device_virtio_disk = Struct("device_virtio_disk", [
-+    ("backend_domid", libxl_domid),
-+    ("backend_domname", string),
-+    ("devid", libxl_devid),
-+    ("disks", Array(libxl_virtio_disk_param, "num_disks")),
-+    ])
-+
- libxl_domain_config = Struct("domain_config", [
-     ("c_info", libxl_domain_create_info),
-     ("b_info", libxl_domain_build_info),
-@@ -951,6 +965,7 @@ libxl_domain_config = Struct("domain_config", [
-     ("pvcallsifs", Array(libxl_device_pvcallsif, "num_pvcallsifs")),
-     ("vdispls", Array(libxl_device_vdispl, "num_vdispls")),
-     ("vsnds", Array(libxl_device_vsnd, "num_vsnds")),
-+    ("virtio_disks", Array(libxl_device_virtio_disk, "num_virtio_disks")),
-     # a channel manifests as a console with a name,
-     # see docs/misc/channels.txt
-     ("channels", Array(libxl_device_channel, "num_channels")),
-diff --git a/tools/libs/light/libxl_types_internal.idl b/tools/libs/light/libxl_types_internal.idl
-index 3593e21..8f71980 100644
---- a/tools/libs/light/libxl_types_internal.idl
-+++ b/tools/libs/light/libxl_types_internal.idl
-@@ -32,6 +32,7 @@ libxl__device_kind = Enumeration("device_kind", [
-     (14, "PVCALLS"),
-     (15, "VSND"),
-     (16, "VINPUT"),
-+    (17, "VIRTIO_DISK"),
-     ])
- 
- libxl__console_backend = Enumeration("console_backend", [
-diff --git a/tools/libs/light/libxl_virtio_disk.c b/tools/libs/light/libxl_virtio_disk.c
-new file mode 100644
-index 0000000..25e7f1a
---- /dev/null
-+++ b/tools/libs/light/libxl_virtio_disk.c
-@@ -0,0 +1,109 @@
-+/*
-+ * Copyright (C) 2020 EPAM Systems Inc.
-+ *
-+ * This program is free software; you can redistribute it and/or modify
-+ * it under the terms of the GNU Lesser General Public License as published
-+ * by the Free Software Foundation; version 2.1 only. with the special
-+ * exception on linking described in file LICENSE.
-+ *
-+ * This program is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU Lesser General Public License for more details.
-+ */
-+
-+#include "libxl_internal.h"
-+
-+static int libxl__device_virtio_disk_setdefault(libxl__gc *gc, uint32_t domid,
-+                                                libxl_device_virtio_disk *virtio_disk,
-+                                                bool hotplug)
-+{
-+    return libxl__resolve_domid(gc, virtio_disk->backend_domname,
-+                                &virtio_disk->backend_domid);
-+}
-+
-+static int libxl__virtio_disk_from_xenstore(libxl__gc *gc, const char *libxl_path,
-+                                            libxl_devid devid,
-+                                            libxl_device_virtio_disk *virtio_disk)
-+{
-+    const char *be_path;
-+    int rc;
-+
-+    virtio_disk->devid = devid;
-+    rc = libxl__xs_read_mandatory(gc, XBT_NULL,
-+                                  GCSPRINTF("%s/backend", libxl_path),
-+                                  &be_path);
-+    if (rc) return rc;
-+
-+    rc = libxl__backendpath_parse_domid(gc, be_path, &virtio_disk->backend_domid);
-+    if (rc) return rc;
-+
-+    return 0;
-+}
-+
-+static void libxl__update_config_virtio_disk(libxl__gc *gc,
-+                                             libxl_device_virtio_disk *dst,
-+                                             libxl_device_virtio_disk *src)
-+{
-+    dst->devid = src->devid;
-+}
-+
-+static int libxl_device_virtio_disk_compare(libxl_device_virtio_disk *d1,
-+                                            libxl_device_virtio_disk *d2)
-+{
-+    return COMPARE_DEVID(d1, d2);
-+}
-+
-+static void libxl__device_virtio_disk_add(libxl__egc *egc, uint32_t domid,
-+                                          libxl_device_virtio_disk *virtio_disk,
-+                                          libxl__ao_device *aodev)
-+{
-+    libxl__device_add_async(egc, domid, &libxl__virtio_disk_devtype, virtio_disk, aodev);
-+}
-+
-+static int libxl__set_xenstore_virtio_disk(libxl__gc *gc, uint32_t domid,
-+                                           libxl_device_virtio_disk *virtio_disk,
-+                                           flexarray_t *back, flexarray_t *front,
-+                                           flexarray_t *ro_front)
-+{
-+    int rc;
-+    unsigned int i;
-+
-+    for (i = 0; i < virtio_disk->num_disks; i++) {
-+        rc = flexarray_append_pair(ro_front, GCSPRINTF("%d/filename", i),
-+                                   GCSPRINTF("%s", virtio_disk->disks[i].filename));
-+        if (rc) return rc;
-+
-+        rc = flexarray_append_pair(ro_front, GCSPRINTF("%d/readonly", i),
-+                                   GCSPRINTF("%d", virtio_disk->disks[i].readonly));
-+        if (rc) return rc;
-+
-+        rc = flexarray_append_pair(ro_front, GCSPRINTF("%d/base", i),
-+                                   GCSPRINTF("%lu", virtio_disk->disks[i].base));
-+        if (rc) return rc;
-+
-+        rc = flexarray_append_pair(ro_front, GCSPRINTF("%d/irq", i),
-+                                   GCSPRINTF("%u", virtio_disk->disks[i].irq));
-+        if (rc) return rc;
-+    }
-+
-+    return 0;
-+}
-+
-+static LIBXL_DEFINE_UPDATE_DEVID(virtio_disk)
-+static LIBXL_DEFINE_DEVICE_FROM_TYPE(virtio_disk)
-+static LIBXL_DEFINE_DEVICES_ADD(virtio_disk)
-+
-+DEFINE_DEVICE_TYPE_STRUCT(virtio_disk, VIRTIO_DISK,
-+    .update_config = (device_update_config_fn_t) libxl__update_config_virtio_disk,
-+    .from_xenstore = (device_from_xenstore_fn_t) libxl__virtio_disk_from_xenstore,
-+    .set_xenstore_config = (device_set_xenstore_config_fn_t) libxl__set_xenstore_virtio_disk
-+);
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-basic-offset: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
-diff --git a/tools/xl/Makefile b/tools/xl/Makefile
-index bdf67c8..9d8f2aa 100644
---- a/tools/xl/Makefile
-+++ b/tools/xl/Makefile
-@@ -23,7 +23,7 @@ XL_OBJS += xl_vtpm.o xl_block.o xl_nic.o xl_usb.o
- XL_OBJS += xl_sched.o xl_pci.o xl_vcpu.o xl_cdrom.o xl_mem.o
- XL_OBJS += xl_info.o xl_console.o xl_misc.o
- XL_OBJS += xl_vmcontrol.o xl_saverestore.o xl_migrate.o
--XL_OBJS += xl_vdispl.o xl_vsnd.o xl_vkb.o
-+XL_OBJS += xl_vdispl.o xl_vsnd.o xl_vkb.o xl_virtio_disk.o
- 
- $(XL_OBJS): CFLAGS += $(CFLAGS_libxentoollog)
- $(XL_OBJS): CFLAGS += $(CFLAGS_XL)
-diff --git a/tools/xl/xl.h b/tools/xl/xl.h
-index 06569c6..3d26f19 100644
---- a/tools/xl/xl.h
-+++ b/tools/xl/xl.h
-@@ -178,6 +178,9 @@ int main_vsnddetach(int argc, char **argv);
- int main_vkbattach(int argc, char **argv);
- int main_vkblist(int argc, char **argv);
- int main_vkbdetach(int argc, char **argv);
-+int main_virtio_diskattach(int argc, char **argv);
-+int main_virtio_disklist(int argc, char **argv);
-+int main_virtio_diskdetach(int argc, char **argv);
- int main_usbctrl_attach(int argc, char **argv);
- int main_usbctrl_detach(int argc, char **argv);
- int main_usbdev_attach(int argc, char **argv);
-diff --git a/tools/xl/xl_cmdtable.c b/tools/xl/xl_cmdtable.c
-index 7da6c1b..745afab 100644
---- a/tools/xl/xl_cmdtable.c
-+++ b/tools/xl/xl_cmdtable.c
-@@ -435,6 +435,21 @@ struct cmd_spec cmd_table[] = {
-       "Destroy a domain's virtual sound device",
-       "<Domain> <DevId>",
-     },
-+    { "virtio-disk-attach",
-+      &main_virtio_diskattach, 1, 1,
-+      "Create a new virtio block device",
-+      " TBD\n"
-+    },
-+    { "virtio-disk-list",
-+      &main_virtio_disklist, 0, 0,
-+      "List virtio block devices for a domain",
-+      "<Domain(s)>",
-+    },
-+    { "virtio-disk-detach",
-+      &main_virtio_diskdetach, 0, 1,
-+      "Destroy a domain's virtio block device",
-+      "<Domain> <DevId>",
-+    },
-     { "uptime",
-       &main_uptime, 0, 0,
-       "Print uptime for all/some domains",
-diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
-index 10acf22..6cf3524 100644
---- a/tools/xl/xl_parse.c
-+++ b/tools/xl/xl_parse.c
-@@ -1204,6 +1204,120 @@ out:
-     if (rc) exit(EXIT_FAILURE);
+diff --git a/tools/libs/devicemodel/core.c b/tools/libs/devicemodel/core.c
+index 4d40639..30bd79f 100644
+--- a/tools/libs/devicemodel/core.c
++++ b/tools/libs/devicemodel/core.c
+@@ -430,6 +430,24 @@ int xendevicemodel_set_isa_irq_level(
+     return xendevicemodel_op(dmod, domid, 1, &op, sizeof(op));
  }
  
-+#define MAX_VIRTIO_DISKS 4
-+
-+static int parse_virtio_disk_config(libxl_device_virtio_disk *virtio_disk, char *token)
++int xendevicemodel_set_irq_level(
++    xendevicemodel_handle *dmod, domid_t domid, uint32_t irq,
++    unsigned int level)
 +{
-+    char *oparg;
-+    libxl_string_list disks = NULL;
-+    int i, rc;
++    struct xen_dm_op op;
++    struct xen_dm_op_set_irq_level *data;
 +
-+    if (MATCH_OPTION("backend", token, oparg)) {
-+        virtio_disk->backend_domname = strdup(oparg);
-+    } else if (MATCH_OPTION("disks", token, oparg)) {
-+        split_string_into_string_list(oparg, ";", &disks);
++    memset(&op, 0, sizeof(op));
 +
-+        virtio_disk->num_disks = libxl_string_list_length(&disks);
-+        if (virtio_disk->num_disks > MAX_VIRTIO_DISKS) {
-+            fprintf(stderr, "vdisk: currently only %d disks are supported",
-+                    MAX_VIRTIO_DISKS);
-+            return 1;
-+        }
-+        virtio_disk->disks = xcalloc(virtio_disk->num_disks,
-+                                     sizeof(*virtio_disk->disks));
++    op.op = XEN_DMOP_set_irq_level;
++    data = &op.u.set_irq_level;
 +
-+        for(i = 0; i < virtio_disk->num_disks; i++) {
-+            char *disk_opt;
++    data->irq = irq;
++    data->level = level;
 +
-+            rc = split_string_into_pair(disks[i], ":", &disk_opt,
-+                                        &virtio_disk->disks[i].filename);
-+            if (rc) {
-+                fprintf(stderr, "vdisk: failed to split \"%s\" into pair\n",
-+                        disks[i]);
-+                goto out;
-+            }
-+
-+            if (!strcmp(disk_opt, "ro"))
-+                virtio_disk->disks[i].readonly = 1;
-+            else if (!strcmp(disk_opt, "rw"))
-+                virtio_disk->disks[i].readonly = 0;
-+            else {
-+                fprintf(stderr, "vdisk: failed to parse \"%s\" disk option\n",
-+                        disk_opt);
-+                rc = 1;
-+            }
-+            free(disk_opt);
-+
-+            if (rc) goto out;
-+        }
-+    } else {
-+        fprintf(stderr, "Unknown string \"%s\" in vdisk spec\n", token);
-+        rc = 1; goto out;
-+    }
-+
-+    rc = 0;
-+
-+out:
-+    libxl_string_list_dispose(&disks);
-+    return rc;
++    return xendevicemodel_op(dmod, domid, 1, &op, sizeof(op));
 +}
 +
-+static void parse_virtio_disk_list(const XLU_Config *config,
-+                            libxl_domain_config *d_config)
-+{
-+    XLU_ConfigList *virtio_disks;
-+    const char *item;
-+    char *buf = NULL;
+ int xendevicemodel_set_pci_link_route(
+     xendevicemodel_handle *dmod, domid_t domid, uint8_t link, uint8_t irq)
+ {
+diff --git a/tools/libs/devicemodel/include/xendevicemodel.h b/tools/libs/devicemodel/include/xendevicemodel.h
+index e877f5c..c06b3c8 100644
+--- a/tools/libs/devicemodel/include/xendevicemodel.h
++++ b/tools/libs/devicemodel/include/xendevicemodel.h
+@@ -209,6 +209,10 @@ int xendevicemodel_set_isa_irq_level(
+     xendevicemodel_handle *dmod, domid_t domid, uint8_t irq,
+     unsigned int level);
+ 
++int xendevicemodel_set_irq_level(
++    xendevicemodel_handle *dmod, domid_t domid, unsigned int irq,
++    unsigned int level);
++
+ /**
+  * This function maps a PCI INTx line to a an IRQ line.
+  *
+diff --git a/tools/libs/devicemodel/libxendevicemodel.map b/tools/libs/devicemodel/libxendevicemodel.map
+index 561c62d..a0c3012 100644
+--- a/tools/libs/devicemodel/libxendevicemodel.map
++++ b/tools/libs/devicemodel/libxendevicemodel.map
+@@ -32,6 +32,7 @@ VERS_1.2 {
+ 	global:
+ 		xendevicemodel_relocate_memory;
+ 		xendevicemodel_pin_memory_cacheattr;
++		xendevicemodel_set_irq_level;
+ } VERS_1.1;
+ 
+ VERS_1.3 {
+diff --git a/xen/arch/arm/dm.c b/xen/arch/arm/dm.c
+index 5d3da37..e4bb233 100644
+--- a/xen/arch/arm/dm.c
++++ b/xen/arch/arm/dm.c
+@@ -17,10 +17,65 @@
+ #include <xen/dm.h>
+ #include <xen/hypercall.h>
+ 
++#include <asm/vgic.h>
++
+ int arch_dm_op(struct xen_dm_op *op, struct domain *d,
+                const struct dmop_args *op_args, bool *const_op)
+ {
+-    return -EOPNOTSUPP;
 +    int rc;
 +
-+    if (!xlu_cfg_get_list (config, "vdisk", &virtio_disks, 0, 0)) {
-+        libxl_domain_build_info *b_info = &d_config->b_info;
-+        int entry = 0;
++    switch ( op->op )
++    {
++    case XEN_DMOP_set_irq_level:
++    {
++        const struct xen_dm_op_set_irq_level *data =
++            &op->u.set_irq_level;
++        unsigned int i;
 +
-+        /* XXX Remove an extra property */
-+        libxl_defbool_setdefault(&b_info->arch_arm.virtio, false);
-+        if (!libxl_defbool_val(b_info->arch_arm.virtio)) {
-+            fprintf(stderr, "Virtio device requires Virtio property to be set\n");
-+            exit(EXIT_FAILURE);
++        /* Only SPIs are supported */
++        if ( (data->irq < NR_LOCAL_IRQS) || (data->irq >= vgic_num_irqs(d)) )
++        {
++            rc = -EINVAL;
++            break;
 +        }
 +
-+        while ((item = xlu_cfg_get_listitem(virtio_disks, entry)) != NULL) {
-+            libxl_device_virtio_disk *virtio_disk;
-+            char *p;
++        if ( data->level != 0 && data->level != 1 )
++        {
++            rc = -EINVAL;
++            break;
++        }
 +
-+            virtio_disk = ARRAY_EXTEND_INIT(d_config->virtio_disks,
-+                                            d_config->num_virtio_disks,
-+                                            libxl_device_virtio_disk_init);
-+
-+            buf = strdup(item);
-+
-+            p = strtok (buf, ",");
-+            while (p != NULL)
++        /* Check that padding is always 0 */
++        for ( i = 0; i < sizeof(data->pad); i++ )
++        {
++            if ( data->pad[i] )
 +            {
-+                while (*p == ' ') p++;
-+
-+                rc = parse_virtio_disk_config(virtio_disk, p);
-+                if (rc) goto out;
-+
-+                p = strtok (NULL, ",");
-+            }
-+
-+            entry++;
-+
-+            if (virtio_disk->num_disks == 0) {
-+                fprintf(stderr, "At least one virtio disk should be specified\n");
-+                rc = 1; goto out;
++                rc = -EINVAL;
++                break;
 +            }
 +        }
++
++        /*
++         * Allow to set the logical level of a line for non-allocated
++         * interrupts only.
++         */
++        if ( test_bit(data->irq, d->arch.vgic.allocated_irqs) )
++        {
++            rc = -EINVAL;
++            break;
++        }
++
++        vgic_inject_irq(d, NULL, data->irq, data->level);
++        rc = 0;
++        break;
 +    }
 +
-+    rc = 0;
++    default:
++        rc = -EOPNOTSUPP;
++        break;
++    }
 +
-+out:
-+    free(buf);
-+    if (rc) exit(EXIT_FAILURE);
-+}
-+
- void parse_config_data(const char *config_source,
-                        const char *config_data,
-                        int config_len,
-@@ -2734,6 +2848,7 @@ skip_usbdev:
-     }
++    return rc;
+ }
  
-     parse_vkb_list(config, d_config);
-+    parse_virtio_disk_list(config, d_config);
+ /*
+diff --git a/xen/common/dm.c b/xen/common/dm.c
+index f3a8353..5f23420 100644
+--- a/xen/common/dm.c
++++ b/xen/common/dm.c
+@@ -48,6 +48,7 @@ static int dm_op(const struct dmop_args *op_args)
+         [XEN_DMOP_remote_shutdown]                  = sizeof(struct xen_dm_op_remote_shutdown),
+         [XEN_DMOP_relocate_memory]                  = sizeof(struct xen_dm_op_relocate_memory),
+         [XEN_DMOP_pin_memory_cacheattr]             = sizeof(struct xen_dm_op_pin_memory_cacheattr),
++        [XEN_DMOP_set_irq_level]                    = sizeof(struct xen_dm_op_set_irq_level),
+     };
  
-     xlu_cfg_get_defbool(config, "xend_suspend_evtchn_compat",
-                         &c_info->xend_suspend_evtchn_compat, 0);
-diff --git a/tools/xl/xl_virtio_disk.c b/tools/xl/xl_virtio_disk.c
-new file mode 100644
-index 0000000..808a7da
---- /dev/null
-+++ b/tools/xl/xl_virtio_disk.c
-@@ -0,0 +1,46 @@
+     rc = rcu_lock_remote_domain_by_id(op_args->domid, &d);
+diff --git a/xen/include/public/hvm/dm_op.h b/xen/include/public/hvm/dm_op.h
+index 66cae1a..1f70d58 100644
+--- a/xen/include/public/hvm/dm_op.h
++++ b/xen/include/public/hvm/dm_op.h
+@@ -434,6 +434,21 @@ struct xen_dm_op_pin_memory_cacheattr {
+ };
+ typedef struct xen_dm_op_pin_memory_cacheattr xen_dm_op_pin_memory_cacheattr_t;
+ 
 +/*
-+ * Copyright (C) 2020 EPAM Systems Inc.
-+ *
-+ * This program is free software; you can redistribute it and/or modify
-+ * it under the terms of the GNU Lesser General Public License as published
-+ * by the Free Software Foundation; version 2.1 only. with the special
-+ * exception on linking described in file LICENSE.
-+ *
-+ * This program is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU Lesser General Public License for more details.
++ * XEN_DMOP_set_irq_level: Set the logical level of a one of a domain's
++ *                         IRQ lines (currently Arm only).
++ * Only SPIs are supported.
 + */
++#define XEN_DMOP_set_irq_level 19
 +
-+#include <stdlib.h>
++struct xen_dm_op_set_irq_level {
++    uint32_t irq;
++    /* IN - Level: 0 -> deasserted, 1 -> asserted */
++    uint8_t level;
++    uint8_t pad[3];
++};
++typedef struct xen_dm_op_set_irq_level xen_dm_op_set_irq_level_t;
 +
-+#include <libxl.h>
-+#include <libxl_utils.h>
-+#include <libxlutil.h>
-+
-+#include "xl.h"
-+#include "xl_utils.h"
-+#include "xl_parse.h"
-+
-+int main_virtio_diskattach(int argc, char **argv)
-+{
-+    return 0;
-+}
-+
-+int main_virtio_disklist(int argc, char **argv)
-+{
-+   return 0;
-+}
-+
-+int main_virtio_diskdetach(int argc, char **argv)
-+{
-+    return 0;
-+}
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-basic-offset: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
+ struct xen_dm_op {
+     uint32_t op;
+     uint32_t pad;
+@@ -447,6 +462,7 @@ struct xen_dm_op {
+         xen_dm_op_track_dirty_vram_t track_dirty_vram;
+         xen_dm_op_set_pci_intx_level_t set_pci_intx_level;
+         xen_dm_op_set_isa_irq_level_t set_isa_irq_level;
++        xen_dm_op_set_irq_level_t set_irq_level;
+         xen_dm_op_set_pci_link_route_t set_pci_link_route;
+         xen_dm_op_modified_memory_t modified_memory;
+         xen_dm_op_set_mem_type_t set_mem_type;
 -- 
 2.7.4
 
