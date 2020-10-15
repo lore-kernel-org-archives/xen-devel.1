@@ -2,28 +2,28 @@ Return-Path: <SRS0=IsAa=DW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5C22DC433E7
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 15:40:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A7271C433E7
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 15:50:48 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BF7CE22248
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 15:40:07 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 36EFD22254
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 15:50:48 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="LYjl2wlo"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BF7CE22248
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="b2yRrKKC"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 36EFD22254
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.7507.19630 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.7517.19682 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kT5M3-0004cE-Dw; Thu, 15 Oct 2020 15:39:47 +0000
+	id 1kT5WW-0006MD-Dl; Thu, 15 Oct 2020 15:50:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 7507.19630; Thu, 15 Oct 2020 15:39:47 +0000
+Received: by outflank-mailman (output) from mailman id 7517.19682; Thu, 15 Oct 2020 15:50:36 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,112 +38,102 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kT5M3-0004c7-AM; Thu, 15 Oct 2020 15:39:47 +0000
-Received: by outflank-mailman (input) for mailman id 7507;
- Thu, 15 Oct 2020 15:39:46 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kT5WW-0006M4-AO; Thu, 15 Oct 2020 15:50:36 +0000
+Received: by outflank-mailman (input) for mailman id 7517;
+ Thu, 15 Oct 2020 15:50:34 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=bKTB=DW=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1kT5M1-0004c2-OW
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:39:45 +0000
-Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id eb0f99f8-a78a-4c64-8be7-f0808dc7d3ef;
- Thu, 15 Oct 2020 15:39:43 +0000 (UTC)
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ <SRS0=/DR3=DW=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
+ id 1kT5WU-0006GR-Qx
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:34 +0000
+Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id af5f75c7-18ec-4453-a7b3-5bf1a27f9f3d;
+ Thu, 15 Oct 2020 15:50:28 +0000 (UTC)
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kT5WO-00087o-Jw
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:28 +0000
+Received: from iwj (helo=mynotebook.example.org)
+ by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
+ (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kT5WO-0005Em-Is
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:28 +0000
+Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
+ by mariner.uk.xensource.com with esmtp (Exim 4.89)
+ (envelope-from <ijackson@chiark.greenend.org.uk>)
+ id 1kT5WM-0000oB-OA; Thu, 15 Oct 2020 16:50:26 +0100
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=bKTB=DW=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
-	id 1kT5M1-0004c2-OW
-	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:39:45 +0000
-X-Inumbo-ID: eb0f99f8-a78a-4c64-8be7-f0808dc7d3ef
-Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id eb0f99f8-a78a-4c64-8be7-f0808dc7d3ef;
-	Thu, 15 Oct 2020 15:39:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1602776384;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=3t2AkRnvDXjMkreXCytT8+QZNU+r1mf6kfh8YJb7X30=;
-  b=LYjl2wlolBBvhIvD4UvI+0S6fuOD2bobyICQgT6ErLNzoqvwx6y0cJgv
-   crhmryhUyVE8avOnY+JGGBgxhKUigpYMQg7MDGrM5jL8psawAK6xk+jw3
-   PveJR8Q915sjEQ3mDTTCP/KaIAsbrQHjaB8usrjtbkqXW2pE5pN2EsnjE
-   k=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: r4ZRRl8ye/Gofoo68jYCOU4cj6UhnZYJVCFwpuSzcx5TVHXscHypqr0tsrMERfbwM7XTcEAenv
- cceWHYo+0cYrGKAO+9Zq678jLk24DFD6PIzneeHNiGdT7cN2X7oVTngcT7oK+1hJB3mJiJXH+o
- CmF7aLfoXWijJDjcAc+BCGdd7y95yT4ew5MnHM/2Rm7huOVzo76Ls+bA7b0J5+9voEKBgvzJwt
- PFyC/TYhi3AGuIW3EJe96fpIzADAkKmyHgpVaFFl6GMifQWWXDa/G58ifHfdlhLlJ1wANr4k6+
- 9Eo=
-X-SBRS: 2.5
-X-MesageID: 29095576
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.77,379,1596513600"; 
-   d="scan'208";a="29095576"
-Date: Thu, 15 Oct 2020 17:39:28 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Ian Jackson <iwj@xenproject.org>, =?utf-8?B?SsO8cmdlbiBHcm/Dnw==?=
-	<jgross@suse.com>
-CC: <xen-devel@lists.xenproject.org>
-Subject: Re: [linux-linus test] 155829: regressions - FAIL
-Message-ID: <20201015153928.GG68032@Air-de-Roger>
-References: <osstest-155829-mainreport@xen.org>
+	(envelope-from <SRS0=/DR3=DW=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
+	id 1kT5WU-0006GR-Qx
+	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:34 +0000
+X-Inumbo-ID: af5f75c7-18ec-4453-a7b3-5bf1a27f9f3d
+Received: from mail.xenproject.org (unknown [104.130.215.37])
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id af5f75c7-18ec-4453-a7b3-5bf1a27f9f3d;
+	Thu, 15 Oct 2020 15:50:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
+	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
+	bh=ChVOyZirwRN6GYYGaNTGSTLn1c+zNQzFzRYYMg92a3g=; b=b2yRrKKCQz2qK9sK7vrxLr4/Sl
+	1YqLKwjwOa9DxF3CYK3TkhOctsO1LWUAqzohJvLMoNB/eznfYzezv0szba90PNbwE2uRkeYA0WPdL
+	BBzRRRQY22a3bVpRJMKI6m1C1PxsmoyVYtthPKi1qrE6UcZLvsQf9M6Wiqn94Xh6yZ1s=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+	by mail.xenproject.org with esmtp (Exim 4.92)
+	(envelope-from <ijackson@chiark.greenend.org.uk>)
+	id 1kT5WO-00087o-Jw
+	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:28 +0000
+Received: from iwj (helo=mynotebook.example.org)
+	by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
+	(envelope-from <ijackson@chiark.greenend.org.uk>)
+	id 1kT5WO-0005Em-Is
+	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:50:28 +0000
+Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
+	by mariner.uk.xensource.com with esmtp (Exim 4.89)
+	(envelope-from <ijackson@chiark.greenend.org.uk>)
+	id 1kT5WM-0000oB-OA; Thu, 15 Oct 2020 16:50:26 +0100
+From: Ian Jackson <iwj@xenproject.org>
+To: xen-devel@lists.xenproject.org
+Cc: Ian Jackson <iwj@xenproject.org>
+Subject: [OSSTEST PATCH v2 02/17] Honour OSSTEST_SIMULATE_FAIL in sg-run-job
+Date: Thu, 15 Oct 2020 16:50:04 +0100
+Message-Id: <20201015155019.20705-3-iwj@xenproject.org>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20201015155019.20705-1-iwj@xenproject.org>
+References: <20201015155019.20705-1-iwj@xenproject.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-In-Reply-To: <osstest-155829-mainreport@xen.org>
-X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
- FTLPEX02CL06.citrite.net (10.13.108.179)
+Content-Transfer-Encoding: 8bit
 
-On Thu, Oct 15, 2020 at 03:24:34PM +0000, osstest service owner wrote:
-> flight 155829 linux-linus real [real]
-> http://logs.test-lab.xenproject.org/osstest/logs/155829/
-> 
-> Regressions :-(
-> 
-> Tests which did not succeed and are blocking,
-> including tests which could not be run:
->  test-amd64-i386-xl-qemuu-ws16-amd64  7 xen-install       fail REGR. vs. 152332
->  test-amd64-i386-qemut-rhel6hvm-intel  7 xen-install      fail REGR. vs. 152332
->  test-amd64-i386-xl-qemut-debianhvm-amd64  7 xen-install  fail REGR. vs. 152332
->  test-amd64-i386-xl-xsm        7 xen-install              fail REGR. vs. 152332
->  test-amd64-i386-xl-qemuu-dmrestrict-amd64-dmrestrict 7 xen-install fail REGR. vs. 152332
->  test-amd64-i386-xl-qemuu-debianhvm-amd64-shadow 7 xen-install fail REGR. vs. 152332
->  test-amd64-i386-qemuu-rhel6hvm-intel  7 xen-install      fail REGR. vs. 152332
->  test-amd64-i386-examine       6 xen-install              fail REGR. vs. 152332
->  test-amd64-i386-xl-qemuu-debianhvm-i386-xsm 7 xen-install fail REGR. vs. 152332
->  test-amd64-i386-libvirt       7 xen-install              fail REGR. vs. 152332
->  test-amd64-i386-pair         10 xen-install/src_host     fail REGR. vs. 152332
->  test-amd64-i386-pair         11 xen-install/dst_host     fail REGR. vs. 152332
->  test-amd64-i386-qemut-rhel6hvm-amd  7 xen-install        fail REGR. vs. 152332
->  test-amd64-coresched-i386-xl  7 xen-install              fail REGR. vs. 152332
->  test-amd64-i386-qemuu-rhel6hvm-amd  7 xen-install        fail REGR. vs. 152332
->  test-amd64-i386-xl-qemuu-debianhvm-amd64  7 xen-install  fail REGR. vs. 152332
->  test-amd64-i386-xl            7 xen-install              fail REGR. vs. 152332
->  test-amd64-i386-libvirt-xsm   7 xen-install              fail REGR. vs. 152332
->  test-amd64-i386-xl-qemut-ws16-amd64  7 xen-install       fail REGR. vs. 152332
->  test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 7 xen-install fail REGR. vs. 152332
->  test-amd64-i386-xl-pvshim     7 xen-install              fail REGR. vs. 152332
->  test-amd64-i386-xl-raw        7 xen-install              fail REGR. vs. 152332
->  test-amd64-i386-xl-qemut-debianhvm-i386-xsm 7 xen-install fail REGR. vs. 152332
->  test-amd64-i386-freebsd10-amd64  7 xen-install           fail REGR. vs. 152332
->  test-amd64-i386-freebsd10-i386  7 xen-install            fail REGR. vs. 152332
->  test-amd64-i386-xl-qemuu-win7-amd64  7 xen-install       fail REGR. vs. 152332
->  test-amd64-i386-xl-shadow     7 xen-install              fail REGR. vs. 152332
->  test-amd64-i386-xl-qemut-win7-amd64  7 xen-install       fail REGR. vs. 152332
->  test-amd64-i386-xl-qemuu-ovmf-amd64  7 xen-install       fail REGR. vs. 152332
->  test-amd64-i386-xl-qemut-stubdom-debianhvm-amd64-xsm 7 xen-install fail REGR. vs. 152332
->  test-amd64-i386-libvirt-pair 10 xen-install/src_host     fail REGR. vs. 152332
->  test-amd64-i386-libvirt-pair 11 xen-install/dst_host     fail REGR. vs. 152332
+This is a Tcl list of globs for <job>.<step>, and allows for
+simulating particular test failures.
 
-All the above is likely fallout from the removal of i386 PV support?
+Signed-off-by: Ian Jackson <iwj@xenproject.org>
+---
+ sg-run-job | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
 
-I'm not sure how to deal with this, should the jobs be gated on the
-kernel version under test? Would that cause issues to osstest, as
-different Linux kernel hashes would generate different test
-matrices?
+diff --git a/sg-run-job b/sg-run-job
+index dd76d4f2..c64ae026 100755
+--- a/sg-run-job
++++ b/sg-run-job
+@@ -406,7 +406,14 @@ proc spawn-ts {iffail testid args} {
+     jobdb::spawn-step-commit $flight $jobinfo(job) $stepno $testid
+ 
+     set xprefix {}
+-    if {[var-or-default env(OSSTEST_SIMULATE) 0]} { set xprefix echo }
++    if {[var-or-default env(OSSTEST_SIMULATE) 0]} {
++	set xprefix echo
++	foreach ent [var-or-default env(OSSTEST_SIMULATE_FAIL) {}] {
++	    if {[string match $ent $jobinfo(job).$testid]} {
++		set xprefix OSSTEST_SIMULATE_FAIL
++	    }
++	}
++    }
+ 
+     set log [jobdb::step-log-filename $flight $jobinfo(job) $stepno $ts]
+     set redirects {}
+-- 
+2.20.1
 
-Roger.
 
