@@ -8,23 +8,23 @@ X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F04AC2D0A1
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 16:53:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 72D71C43457
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 16:53:45 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A05CA2225A
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 16:53:34 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id E7F71206CA
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 16:53:44 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="jKxOhK8Z"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A05CA2225A
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="XsQT+M7/"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E7F71206CA
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.7616.20109 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.7622.20174 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kT6VF-0007JP-7U; Thu, 15 Oct 2020 16:53:21 +0000
+	id 1kT6VN-0007hV-SU; Thu, 15 Oct 2020 16:53:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 7616.20109; Thu, 15 Oct 2020 16:53:21 +0000
+Received: by outflank-mailman (output) from mailman id 7622.20174; Thu, 15 Oct 2020 16:53:29 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,99 +39,95 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kT6VE-0007IM-OA; Thu, 15 Oct 2020 16:53:20 +0000
-Received: by outflank-mailman (input) for mailman id 7616;
- Thu, 15 Oct 2020 16:53:16 +0000
+	id 1kT6VM-0007fO-Gm; Thu, 15 Oct 2020 16:53:28 +0000
+Received: by outflank-mailman (input) for mailman id 7622;
+ Thu, 15 Oct 2020 16:53:17 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YEeM=DW=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
- id 1kT6Nt-0004yr-6W
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:45:45 +0000
-Received: from mail-lj1-x232.google.com (unknown [2a00:1450:4864:20::232])
+ id 1kT6OI-0004yr-7O
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:46:10 +0000
+Received: from mail-lj1-x242.google.com (unknown [2a00:1450:4864:20::242])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b5450b3d-aa1d-40c6-a3e9-164035a70f80;
- Thu, 15 Oct 2020 16:45:03 +0000 (UTC)
-Received: by mail-lj1-x232.google.com with SMTP id a5so3799244ljj.11
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2020 09:45:03 -0700 (PDT)
+ id 8dbf7494-b1e5-4da9-aef3-a0e8cd19873d;
+ Thu, 15 Oct 2020 16:45:09 +0000 (UTC)
+Received: by mail-lj1-x242.google.com with SMTP id p15so3831734ljj.8
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2020 09:45:09 -0700 (PDT)
 Received: from otyshchenko.www.tendawifi.com ([212.22.223.21])
- by smtp.gmail.com with ESMTPSA id v13sm1482495ljh.66.2020.10.15.09.45.00
+ by smtp.gmail.com with ESMTPSA id v13sm1482495ljh.66.2020.10.15.09.45.06
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 15 Oct 2020 09:45:01 -0700 (PDT)
+ Thu, 15 Oct 2020 09:45:06 -0700 (PDT)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=YEeM=DW=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
-	id 1kT6Nt-0004yr-6W
-	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:45:45 +0000
-X-Inumbo-ID: b5450b3d-aa1d-40c6-a3e9-164035a70f80
-Received: from mail-lj1-x232.google.com (unknown [2a00:1450:4864:20::232])
+	id 1kT6OI-0004yr-7O
+	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:46:10 +0000
+X-Inumbo-ID: 8dbf7494-b1e5-4da9-aef3-a0e8cd19873d
+Received: from mail-lj1-x242.google.com (unknown [2a00:1450:4864:20::242])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id b5450b3d-aa1d-40c6-a3e9-164035a70f80;
-	Thu, 15 Oct 2020 16:45:03 +0000 (UTC)
-Received: by mail-lj1-x232.google.com with SMTP id a5so3799244ljj.11
-        for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2020 09:45:03 -0700 (PDT)
+	id 8dbf7494-b1e5-4da9-aef3-a0e8cd19873d;
+	Thu, 15 Oct 2020 16:45:09 +0000 (UTC)
+Received: by mail-lj1-x242.google.com with SMTP id p15so3831734ljj.8
+        for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2020 09:45:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=sfzmMa9E3DuJZ5oelKOpzY6Iaa3MXyP15AbWJ9Be3Qk=;
-        b=jKxOhK8ZDlH0FqA/Gtr7bY6UBLngn0b5RU37H4EZVxQA3etBXTPTtsrXbdLwuJtUOm
-         AgEBFq9GKaPyRmc2PdODcnrTd5tymGQ73in7CTCj9+iq9gbte9asfLL6TDMBYgt/dxb5
-         xgmFVxZaq+HlSBpDdTWwxGMn+HBtajBgvAWT7rBCej86suzjaUobdm3T6Ggu2ZVWvjl7
-         s22Qyq3O4ViGkQkFVBKUoFkTqhTQ4JR4q5eW83y73DYhz796aIT6PohZt4+hlMsy6poi
-         wR6bZKqaRP1C9zoyRJ1pBrS5KLUwI5FEO6DnUmXqwUHGpaFxh7++LHhk7JWsckdp0WeW
-         9jHA==
+        bh=sOB0KRQzNqQKgBnd+DVp46wCjPUsJTci+TWGlyq6IHk=;
+        b=XsQT+M7/kBteWBIsYxbEXnOvjFm4tf1tIglvblWEBKCE9jmqGtNPZDxBa07y2Byl3c
+         ZfUwLl/xvcX6t5yKY4qkB1ZR7JPmaZ9CYgFpyWrQ9AZKYmgRIlT50R6bdHiNPk1EEmv5
+         tzEdjIrGeE9rjaO6NsbIg9Ssc+QvnMhesOD/GkOye1AINuo5IYqpBuM/VZH1SqIEIs/8
+         iwKPbJdLd78LG/ZknnGhh3JuQP7xBCtHek9neMg7aSauD5ZwU16vluQMW7V+DfypYbMG
+         nFcuIhqsX6YfEx6XmxxoKx/s/rDePKzSm5VR6GAsL+4IYlfncwX7Iv+bG100ly22a0Ce
+         YVfg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=sfzmMa9E3DuJZ5oelKOpzY6Iaa3MXyP15AbWJ9Be3Qk=;
-        b=jDE21zu213w8G9hmC89XwZ04hNXLOTUwJFkBtotw08I8ax60WatfcOk0njQYyhxjbJ
-         eQRXaWFw3TNt1RrPBhjj9Vvd4fjQqJOpi/wXKmTbkiq3wdjVK7AlEBMiJDmSY8k55cCG
-         0dzHDwK+u+U/WBDhrfBlKLIUWvMU8sb7wLzUZgyEDzv6mwrnfPsUqM+v3nB4M0r9n5Ev
-         YenHs5jlRJ6/gmJgZnddXodUmmNt0abxkrjTdaX63Y5LPXZyPDxM+mwc4PMeN8Zf1Jkd
-         Sl6+bXGp4WJGvvzApLE8DZN8Zx6K79qVpgiHdrslHQK4nBAYXHUFcWNi+bdpOZRTu4X3
-         Iypg==
-X-Gm-Message-State: AOAM5329LOoqOmE/o7BKF5KclwuK7WsQvjmQuwKLCnkUtE0w5eqjCLpt
-	pWKFWAMrs3GwpDAJe2xbUC/78vML2zMTzg==
-X-Google-Smtp-Source: ABdhPJzeC6CPrDSrI53xbPKpuh5RjvZblgP7T6mH6J0HyB851OnD3ZFRYihKV1c8ypODydHgu6U6cg==
-X-Received: by 2002:a2e:85cd:: with SMTP id h13mr1789424ljj.345.1602780301733;
-        Thu, 15 Oct 2020 09:45:01 -0700 (PDT)
+        bh=sOB0KRQzNqQKgBnd+DVp46wCjPUsJTci+TWGlyq6IHk=;
+        b=n8TPxujkZPn/VVVsKxLhnbaXjetwxQxcLn6knjxvzQGeF6UUpMMho5+V9i8UY86VCT
+         ohWOd8PNHsWvN5cw87v41kx1ZAqH5rYIEh+EACe5lpbSNrT8lGzAtG+GWKc/mZkMSPM8
+         xdAr/9XgYDDXVfja+sv+I/bHxvup25lP+UEc5KtAn6lUeJj7rriiudd7EJTtvLBEhCzZ
+         XXUIAkxyP1QYjoQ4bzy/XtJVOCuQGU1lSFi3RwO98S0JnLlgcYXwYtocATklu3Vi60n/
+         0cILCKonRu4QUuy2vsxYyaKOE/QQs04zWk1pizKtwc5yStmDiR1TF3jIKp0HaikMlwaD
+         twaw==
+X-Gm-Message-State: AOAM532+NQmMSGUXqckyorzUFz0Aiss28L3BjkzpsOsNFPcyrcAV7YJ2
+	gt8THBMJyjTcxa67yLWENDBgEvZrwPAxIw==
+X-Google-Smtp-Source: ABdhPJwZZv2XOIEHlMZjS7b2fFtS4U+URg/aCid+fgq+JXBnk2tT6Jv191S0C+c6pfQ/2P+NWZ6a5A==
+X-Received: by 2002:a2e:8816:: with SMTP id x22mr1261041ljh.377.1602780307354;
+        Thu, 15 Oct 2020 09:45:07 -0700 (PDT)
 Received: from otyshchenko.www.tendawifi.com ([212.22.223.21])
-        by smtp.gmail.com with ESMTPSA id v13sm1482495ljh.66.2020.10.15.09.45.00
+        by smtp.gmail.com with ESMTPSA id v13sm1482495ljh.66.2020.10.15.09.45.06
         (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Thu, 15 Oct 2020 09:45:01 -0700 (PDT)
+        Thu, 15 Oct 2020 09:45:06 -0700 (PDT)
 From: Oleksandr Tyshchenko <olekstysh@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Julien Grall <julien.grall@arm.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Daniel De Graaf <dgdegra@tycho.nsa.gov>,
+	Julien Grall <julien@xen.org>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Paul Durrant <paul@xen.org>,
 	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Subject: [PATCH V2 09/23] xen/dm: Make x86's DM feature common
-Date: Thu, 15 Oct 2020 19:44:20 +0300
-Message-Id: <1602780274-29141-10-git-send-email-olekstysh@gmail.com>
+Subject: [PATCH V2 14/23] arm/ioreq: Introduce arch specific bits for IOREQ/DM features
+Date: Thu, 15 Oct 2020 19:44:25 +0300
+Message-Id: <1602780274-29141-15-git-send-email-olekstysh@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1602780274-29141-1-git-send-email-olekstysh@gmail.com>
 References: <1602780274-29141-1-git-send-email-olekstysh@gmail.com>
 
 From: Julien Grall <julien.grall@arm.com>
 
-As a lot of x86 code can be re-used on Arm later on, this patch
-splits devicemodel support into common and arch specific parts.
+This patch adds basic IOREQ/DM support on Arm. The subsequent
+patches will improve functionality and add remaining bits.
 
-The common DM feature is supposed to be built with IOREQ_SERVER
-option enabled (as well as the IOREQ feature), which is selected
-for x86's config HVM for now.
+The IOREQ/DM features are supposed to be built with IOREQ_SERVER
+option enabled, which is disabled by default on Arm for now.
 
-Also update XSM code a bit to let DM op be used on Arm.
-
-This support is going to be used on Arm to be able run device
-emulator outside of Xen hypervisor.
+Please note, the "PIO handling" TODO is expected to left unaddressed
+for the current series. It is not an big issue for now while Xen
+doesn't have support for vPCI on Arm. On Arm64 they are only used
+for PCI IO Bar and we would probably want to expose them to emulator
+as PIO access to make a DM completely arch-agnostic. So "PIO handling"
+should be implemented when we add support for vPCI.
 
 Signed-off-by: Julien Grall <julien.grall@arm.com>
 Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
@@ -141,466 +137,434 @@ Please note, this is a split/cleanup/hardening of Julien's PoC:
 "Add support for Guest IO forwarding to a device emulator"
 
 Changes RFC -> V1:
-   - update XSM, related changes were pulled from:
-     [RFC PATCH V1 04/12] xen/arm: Introduce arch specific bits for IOREQ/DM features
+   - was split into:
+     - arm/ioreq: Introduce arch specific bits for IOREQ/DM features
+     - xen/mm: Handle properly reference in set_foreign_p2m_entry() on Arm
+   - update patch description
+   - update asm-arm/hvm/ioreq.h according to the newly introduced arch functions:
+     - arch_hvm_destroy_ioreq_server()
+     - arch_handle_hvm_io_completion()
+   - update arch files to include xen/ioreq.h
+   - remove HVMOP plumbing
+   - rewrite a logic to handle properly case when hvm_send_ioreq() returns IO_RETRY
+   - add a logic to handle properly handle_hvm_io_completion() return value
+   - rename handle_mmio() to ioreq_handle_complete_mmio()
+   - move paging_mark_pfn_dirty() to asm-arm/paging.h
+   - remove forward declaration for hvm_ioreq_server in asm-arm/paging.h
+   - move try_fwd_ioserv() to ioreq.c, provide stubs if !CONFIG_IOREQ_SERVER
+   - do not remove #ifdef CONFIG_IOREQ_SERVER in memory.c for guarding xen/ioreq.h
+   - use gdprintk in try_fwd_ioserv(), remove unneeded prints
+   - update list of #include-s
+   - move has_vpci() to asm-arm/domain.h
+   - add a comment (TODO) to unimplemented yet handle_pio()
+   - remove hvm_mmio_first(last)_byte() and hvm_ioreq_(page/vcpu/server) structs
+     from the arch files, they were already moved to the common code
+   - remove set_foreign_p2m_entry() changes, they will be properly implemented
+     in the follow-up patch
+   - select IOREQ_SERVER for Arm instead of Arm64 in Kconfig
+   - remove x86's realmode and other unneeded stubs from xen/ioreq.h
+   - clafify ioreq_t p.df usage in try_fwd_ioserv()
+   - set ioreq_t p.count to 1 in try_fwd_ioserv()
 
-Changes V1 -> V2:
+Changes V2 -> V1:
+   - was split into:
+     - arm/ioreq: Introduce arch specific bits for IOREQ/DM features
+     - xen/arm: Stick around in leave_hypervisor_to_guest until I/O has completed
    - update the author of a patch
    - update patch description
-   - introduce xen/dm.h and move definitions here
+   - move a loop in leave_hypervisor_to_guest() to a separate patch
+   - set IOREQ_SERVER disabled by default
+   - remove already clarified /* XXX */
+   - replace BUG() by ASSERT_UNREACHABLE() in handle_pio()
+   - remove default case for handling the return value of try_handle_mmio()
+   - remove struct hvm_domain, enum hvm_io_completion, struct hvm_vcpu_io,
+     struct hvm_vcpu from asm-arm/domain.h, these are common materials now
+   - update everything according to the recent changes (IOREQ related function
+     names don't contain "hvm" prefixes/infixes anymore, IOREQ related fields
+     are part of common struct vcpu/domain now, etc)
 ---
- xen/arch/x86/hvm/dm.c   | 291 ++++--------------------------------------------
- xen/common/Makefile     |   1 +
- xen/common/dm.c         | 291 ++++++++++++++++++++++++++++++++++++++++++++++++
- xen/include/xen/dm.h    |  44 ++++++++
- xen/include/xsm/dummy.h |   4 +-
- xen/include/xsm/xsm.h   |   6 +-
- xen/xsm/dummy.c         |   2 +-
- xen/xsm/flask/hooks.c   |   5 +-
- 8 files changed, 364 insertions(+), 280 deletions(-)
- create mode 100644 xen/common/dm.c
- create mode 100644 xen/include/xen/dm.h
+ xen/arch/arm/Makefile           |   2 +
+ xen/arch/arm/dm.c               |  34 ++++++++++
+ xen/arch/arm/domain.c           |   9 +++
+ xen/arch/arm/io.c               |  11 +++-
+ xen/arch/arm/ioreq.c            | 141 ++++++++++++++++++++++++++++++++++++++++
+ xen/arch/arm/traps.c            |  13 ++++
+ xen/common/ioreq.c              |   1 +
+ xen/include/asm-arm/domain.h    |   5 ++
+ xen/include/asm-arm/hvm/ioreq.h | 109 +++++++++++++++++++++++++++++++
+ xen/include/asm-arm/mmio.h      |   1 +
+ xen/include/asm-arm/paging.h    |   4 ++
+ 11 files changed, 329 insertions(+), 1 deletion(-)
+ create mode 100644 xen/arch/arm/dm.c
+ create mode 100644 xen/arch/arm/ioreq.c
+ create mode 100644 xen/include/asm-arm/hvm/ioreq.h
 
-diff --git a/xen/arch/x86/hvm/dm.c b/xen/arch/x86/hvm/dm.c
-index 71f5ca4..35f860a 100644
---- a/xen/arch/x86/hvm/dm.c
-+++ b/xen/arch/x86/hvm/dm.c
-@@ -16,6 +16,7 @@
- 
- #include <xen/event.h>
- #include <xen/guest_access.h>
-+#include <xen/dm.h>
- #include <xen/hypercall.h>
- #include <xen/nospec.h>
- #include <xen/sched.h>
-@@ -29,13 +30,6 @@
- 
- #include <public/hvm/hvm_op.h>
- 
--struct dmop_args {
--    domid_t domid;
--    unsigned int nr_bufs;
--    /* Reserve enough buf elements for all current hypercalls. */
--    struct xen_dm_op_buf buf[2];
--};
--
- static bool _raw_copy_from_guest_buf_offset(void *dst,
-                                             const struct dmop_args *args,
-                                             unsigned int buf_idx,
-@@ -338,148 +332,20 @@ static int inject_event(struct domain *d,
-     return 0;
- }
- 
--static int dm_op(const struct dmop_args *op_args)
-+int arch_dm_op(struct xen_dm_op *op, struct domain *d,
-+               const struct dmop_args *op_args, bool *const_op)
- {
--    struct domain *d;
--    struct xen_dm_op op;
--    bool const_op = true;
-     long rc;
--    size_t offset;
--
--    static const uint8_t op_size[] = {
--        [XEN_DMOP_create_ioreq_server]              = sizeof(struct xen_dm_op_create_ioreq_server),
--        [XEN_DMOP_get_ioreq_server_info]            = sizeof(struct xen_dm_op_get_ioreq_server_info),
--        [XEN_DMOP_map_io_range_to_ioreq_server]     = sizeof(struct xen_dm_op_ioreq_server_range),
--        [XEN_DMOP_unmap_io_range_from_ioreq_server] = sizeof(struct xen_dm_op_ioreq_server_range),
--        [XEN_DMOP_set_ioreq_server_state]           = sizeof(struct xen_dm_op_set_ioreq_server_state),
--        [XEN_DMOP_destroy_ioreq_server]             = sizeof(struct xen_dm_op_destroy_ioreq_server),
--        [XEN_DMOP_track_dirty_vram]                 = sizeof(struct xen_dm_op_track_dirty_vram),
--        [XEN_DMOP_set_pci_intx_level]               = sizeof(struct xen_dm_op_set_pci_intx_level),
--        [XEN_DMOP_set_isa_irq_level]                = sizeof(struct xen_dm_op_set_isa_irq_level),
--        [XEN_DMOP_set_pci_link_route]               = sizeof(struct xen_dm_op_set_pci_link_route),
--        [XEN_DMOP_modified_memory]                  = sizeof(struct xen_dm_op_modified_memory),
--        [XEN_DMOP_set_mem_type]                     = sizeof(struct xen_dm_op_set_mem_type),
--        [XEN_DMOP_inject_event]                     = sizeof(struct xen_dm_op_inject_event),
--        [XEN_DMOP_inject_msi]                       = sizeof(struct xen_dm_op_inject_msi),
--        [XEN_DMOP_map_mem_type_to_ioreq_server]     = sizeof(struct xen_dm_op_map_mem_type_to_ioreq_server),
--        [XEN_DMOP_remote_shutdown]                  = sizeof(struct xen_dm_op_remote_shutdown),
--        [XEN_DMOP_relocate_memory]                  = sizeof(struct xen_dm_op_relocate_memory),
--        [XEN_DMOP_pin_memory_cacheattr]             = sizeof(struct xen_dm_op_pin_memory_cacheattr),
--    };
--
--    rc = rcu_lock_remote_domain_by_id(op_args->domid, &d);
--    if ( rc )
--        return rc;
--
--    if ( !is_hvm_domain(d) )
--        goto out;
--
--    rc = xsm_dm_op(XSM_DM_PRIV, d);
--    if ( rc )
--        goto out;
--
--    offset = offsetof(struct xen_dm_op, u);
--
--    rc = -EFAULT;
--    if ( op_args->buf[0].size < offset )
--        goto out;
--
--    if ( copy_from_guest_offset((void *)&op, op_args->buf[0].h, 0, offset) )
--        goto out;
--
--    if ( op.op >= ARRAY_SIZE(op_size) )
--    {
--        rc = -EOPNOTSUPP;
--        goto out;
--    }
--
--    op.op = array_index_nospec(op.op, ARRAY_SIZE(op_size));
--
--    if ( op_args->buf[0].size < offset + op_size[op.op] )
--        goto out;
--
--    if ( copy_from_guest_offset((void *)&op.u, op_args->buf[0].h, offset,
--                                op_size[op.op]) )
--        goto out;
--
--    rc = -EINVAL;
--    if ( op.pad )
--        goto out;
--
--    switch ( op.op )
--    {
--    case XEN_DMOP_create_ioreq_server:
--    {
--        struct xen_dm_op_create_ioreq_server *data =
--            &op.u.create_ioreq_server;
--
--        const_op = false;
--
--        rc = -EINVAL;
--        if ( data->pad[0] || data->pad[1] || data->pad[2] )
--            break;
--
--        rc = hvm_create_ioreq_server(d, data->handle_bufioreq,
--                                     &data->id);
--        break;
--    }
- 
--    case XEN_DMOP_get_ioreq_server_info:
-+    switch ( op->op )
-     {
--        struct xen_dm_op_get_ioreq_server_info *data =
--            &op.u.get_ioreq_server_info;
--        const uint16_t valid_flags = XEN_DMOP_no_gfns;
--
--        const_op = false;
--
--        rc = -EINVAL;
--        if ( data->flags & ~valid_flags )
--            break;
--
--        rc = hvm_get_ioreq_server_info(d, data->id,
--                                       (data->flags & XEN_DMOP_no_gfns) ?
--                                       NULL : &data->ioreq_gfn,
--                                       (data->flags & XEN_DMOP_no_gfns) ?
--                                       NULL : &data->bufioreq_gfn,
--                                       &data->bufioreq_port);
--        break;
--    }
--
--    case XEN_DMOP_map_io_range_to_ioreq_server:
--    {
--        const struct xen_dm_op_ioreq_server_range *data =
--            &op.u.map_io_range_to_ioreq_server;
--
--        rc = -EINVAL;
--        if ( data->pad )
--            break;
--
--        rc = hvm_map_io_range_to_ioreq_server(d, data->id, data->type,
--                                              data->start, data->end);
--        break;
--    }
--
--    case XEN_DMOP_unmap_io_range_from_ioreq_server:
--    {
--        const struct xen_dm_op_ioreq_server_range *data =
--            &op.u.unmap_io_range_from_ioreq_server;
--
--        rc = -EINVAL;
--        if ( data->pad )
--            break;
--
--        rc = hvm_unmap_io_range_from_ioreq_server(d, data->id, data->type,
--                                                  data->start, data->end);
--        break;
--    }
--
-     case XEN_DMOP_map_mem_type_to_ioreq_server:
-     {
-         struct xen_dm_op_map_mem_type_to_ioreq_server *data =
--            &op.u.map_mem_type_to_ioreq_server;
-+            &op->u.map_mem_type_to_ioreq_server;
-         unsigned long first_gfn = data->opaque;
- 
--        const_op = false;
-+        *const_op = false;
- 
-         rc = -EOPNOTSUPP;
-         if ( !hap_enabled(d) )
-@@ -523,36 +389,10 @@ static int dm_op(const struct dmop_args *op_args)
-         break;
-     }
- 
--    case XEN_DMOP_set_ioreq_server_state:
--    {
--        const struct xen_dm_op_set_ioreq_server_state *data =
--            &op.u.set_ioreq_server_state;
--
--        rc = -EINVAL;
--        if ( data->pad )
--            break;
--
--        rc = hvm_set_ioreq_server_state(d, data->id, !!data->enabled);
--        break;
--    }
--
--    case XEN_DMOP_destroy_ioreq_server:
--    {
--        const struct xen_dm_op_destroy_ioreq_server *data =
--            &op.u.destroy_ioreq_server;
--
--        rc = -EINVAL;
--        if ( data->pad )
--            break;
--
--        rc = hvm_destroy_ioreq_server(d, data->id);
--        break;
--    }
--
-     case XEN_DMOP_track_dirty_vram:
-     {
-         const struct xen_dm_op_track_dirty_vram *data =
--            &op.u.track_dirty_vram;
-+            &op->u.track_dirty_vram;
- 
-         rc = -EINVAL;
-         if ( data->pad )
-@@ -568,7 +408,7 @@ static int dm_op(const struct dmop_args *op_args)
-     case XEN_DMOP_set_pci_intx_level:
-     {
-         const struct xen_dm_op_set_pci_intx_level *data =
--            &op.u.set_pci_intx_level;
-+            &op->u.set_pci_intx_level;
- 
-         rc = set_pci_intx_level(d, data->domain, data->bus,
-                                 data->device, data->intx,
-@@ -579,7 +419,7 @@ static int dm_op(const struct dmop_args *op_args)
-     case XEN_DMOP_set_isa_irq_level:
-     {
-         const struct xen_dm_op_set_isa_irq_level *data =
--            &op.u.set_isa_irq_level;
-+            &op->u.set_isa_irq_level;
- 
-         rc = set_isa_irq_level(d, data->isa_irq, data->level);
-         break;
-@@ -588,7 +428,7 @@ static int dm_op(const struct dmop_args *op_args)
-     case XEN_DMOP_set_pci_link_route:
-     {
-         const struct xen_dm_op_set_pci_link_route *data =
--            &op.u.set_pci_link_route;
-+            &op->u.set_pci_link_route;
- 
-         rc = hvm_set_pci_link_route(d, data->link, data->isa_irq);
-         break;
-@@ -597,19 +437,19 @@ static int dm_op(const struct dmop_args *op_args)
-     case XEN_DMOP_modified_memory:
-     {
-         struct xen_dm_op_modified_memory *data =
--            &op.u.modified_memory;
-+            &op->u.modified_memory;
- 
-         rc = modified_memory(d, op_args, data);
--        const_op = !rc;
-+        *const_op = !rc;
-         break;
-     }
- 
-     case XEN_DMOP_set_mem_type:
-     {
-         struct xen_dm_op_set_mem_type *data =
--            &op.u.set_mem_type;
-+            &op->u.set_mem_type;
- 
--        const_op = false;
-+        *const_op = false;
- 
-         rc = -EINVAL;
-         if ( data->pad )
-@@ -622,7 +462,7 @@ static int dm_op(const struct dmop_args *op_args)
-     case XEN_DMOP_inject_event:
-     {
-         const struct xen_dm_op_inject_event *data =
--            &op.u.inject_event;
-+            &op->u.inject_event;
- 
-         rc = -EINVAL;
-         if ( data->pad0 || data->pad1 )
-@@ -635,7 +475,7 @@ static int dm_op(const struct dmop_args *op_args)
-     case XEN_DMOP_inject_msi:
-     {
-         const struct xen_dm_op_inject_msi *data =
--            &op.u.inject_msi;
-+            &op->u.inject_msi;
- 
-         rc = -EINVAL;
-         if ( data->pad )
-@@ -648,7 +488,7 @@ static int dm_op(const struct dmop_args *op_args)
-     case XEN_DMOP_remote_shutdown:
-     {
-         const struct xen_dm_op_remote_shutdown *data =
--            &op.u.remote_shutdown;
-+            &op->u.remote_shutdown;
- 
-         domain_shutdown(d, data->reason);
-         rc = 0;
-@@ -657,7 +497,7 @@ static int dm_op(const struct dmop_args *op_args)
- 
-     case XEN_DMOP_relocate_memory:
-     {
--        struct xen_dm_op_relocate_memory *data = &op.u.relocate_memory;
-+        struct xen_dm_op_relocate_memory *data = &op->u.relocate_memory;
-         struct xen_add_to_physmap xatp = {
-             .domid = op_args->domid,
-             .size = data->size,
-@@ -680,7 +520,7 @@ static int dm_op(const struct dmop_args *op_args)
-             data->size -= rc;
-             data->src_gfn += rc;
-             data->dst_gfn += rc;
--            const_op = false;
-+            *const_op = false;
-             rc = -ERESTART;
-         }
-         break;
-@@ -689,7 +529,7 @@ static int dm_op(const struct dmop_args *op_args)
-     case XEN_DMOP_pin_memory_cacheattr:
-     {
-         const struct xen_dm_op_pin_memory_cacheattr *data =
--            &op.u.pin_memory_cacheattr;
-+            &op->u.pin_memory_cacheattr;
- 
-         if ( data->pad )
-         {
-@@ -707,97 +547,6 @@ static int dm_op(const struct dmop_args *op_args)
-         break;
-     }
- 
--    if ( (!rc || rc == -ERESTART) &&
--         !const_op && copy_to_guest_offset(op_args->buf[0].h, offset,
--                                           (void *)&op.u, op_size[op.op]) )
--        rc = -EFAULT;
--
-- out:
--    rcu_unlock_domain(d);
--
--    return rc;
--}
--
--#include <compat/hvm/dm_op.h>
--
--CHECK_dm_op_create_ioreq_server;
--CHECK_dm_op_get_ioreq_server_info;
--CHECK_dm_op_ioreq_server_range;
--CHECK_dm_op_set_ioreq_server_state;
--CHECK_dm_op_destroy_ioreq_server;
--CHECK_dm_op_track_dirty_vram;
--CHECK_dm_op_set_pci_intx_level;
--CHECK_dm_op_set_isa_irq_level;
--CHECK_dm_op_set_pci_link_route;
--CHECK_dm_op_modified_memory;
--CHECK_dm_op_set_mem_type;
--CHECK_dm_op_inject_event;
--CHECK_dm_op_inject_msi;
--CHECK_dm_op_map_mem_type_to_ioreq_server;
--CHECK_dm_op_remote_shutdown;
--CHECK_dm_op_relocate_memory;
--CHECK_dm_op_pin_memory_cacheattr;
--
--int compat_dm_op(domid_t domid,
--                 unsigned int nr_bufs,
--                 XEN_GUEST_HANDLE_PARAM(void) bufs)
--{
--    struct dmop_args args;
--    unsigned int i;
--    int rc;
--
--    if ( nr_bufs > ARRAY_SIZE(args.buf) )
--        return -E2BIG;
--
--    args.domid = domid;
--    args.nr_bufs = array_index_nospec(nr_bufs, ARRAY_SIZE(args.buf) + 1);
--
--    for ( i = 0; i < args.nr_bufs; i++ )
--    {
--        struct compat_dm_op_buf cmp;
--
--        if ( copy_from_guest_offset(&cmp, bufs, i, 1) )
--            return -EFAULT;
--
--#define XLAT_dm_op_buf_HNDL_h(_d_, _s_) \
--        guest_from_compat_handle((_d_)->h, (_s_)->h)
--
--        XLAT_dm_op_buf(&args.buf[i], &cmp);
--
--#undef XLAT_dm_op_buf_HNDL_h
--    }
--
--    rc = dm_op(&args);
--
--    if ( rc == -ERESTART )
--        rc = hypercall_create_continuation(__HYPERVISOR_dm_op, "iih",
--                                           domid, nr_bufs, bufs);
--
--    return rc;
--}
--
--long do_dm_op(domid_t domid,
--              unsigned int nr_bufs,
--              XEN_GUEST_HANDLE_PARAM(xen_dm_op_buf_t) bufs)
--{
--    struct dmop_args args;
--    int rc;
--
--    if ( nr_bufs > ARRAY_SIZE(args.buf) )
--        return -E2BIG;
--
--    args.domid = domid;
--    args.nr_bufs = array_index_nospec(nr_bufs, ARRAY_SIZE(args.buf) + 1);
--
--    if ( copy_from_guest_offset(&args.buf[0], bufs, 0, args.nr_bufs) )
--        return -EFAULT;
--
--    rc = dm_op(&args);
--
--    if ( rc == -ERESTART )
--        rc = hypercall_create_continuation(__HYPERVISOR_dm_op, "iih",
--                                           domid, nr_bufs, bufs);
--
-     return rc;
- }
- 
-diff --git a/xen/common/Makefile b/xen/common/Makefile
-index cdb99fb..8c872d3 100644
---- a/xen/common/Makefile
-+++ b/xen/common/Makefile
-@@ -6,6 +6,7 @@ obj-$(CONFIG_CORE_PARKING) += core_parking.o
- obj-y += cpu.o
- obj-$(CONFIG_DEBUG_TRACE) += debugtrace.o
- obj-$(CONFIG_HAS_DEVICE_TREE) += device_tree.o
+diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
+index 296c5e6..c3ff454 100644
+--- a/xen/arch/arm/Makefile
++++ b/xen/arch/arm/Makefile
+@@ -13,6 +13,7 @@ obj-y += cpuerrata.o
+ obj-y += cpufeature.o
+ obj-y += decode.o
+ obj-y += device.o
 +obj-$(CONFIG_IOREQ_SERVER) += dm.o
  obj-y += domain.o
- obj-y += event_2l.o
- obj-y += event_channel.o
-diff --git a/xen/common/dm.c b/xen/common/dm.c
+ obj-y += domain_build.init.o
+ obj-y += domctl.o
+@@ -27,6 +28,7 @@ obj-y += guest_atomics.o
+ obj-y += guest_walk.o
+ obj-y += hvm.o
+ obj-y += io.o
++obj-$(CONFIG_IOREQ_SERVER) += ioreq.o
+ obj-y += irq.o
+ obj-y += kernel.init.o
+ obj-$(CONFIG_LIVEPATCH) += livepatch.o
+diff --git a/xen/arch/arm/dm.c b/xen/arch/arm/dm.c
 new file mode 100644
-index 0000000..36e01a2
+index 0000000..5d3da37
 --- /dev/null
-+++ b/xen/common/dm.c
-@@ -0,0 +1,291 @@
++++ b/xen/arch/arm/dm.c
+@@ -0,0 +1,34 @@
 +/*
++ * Copyright (c) 2019 Arm ltd.
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program; If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#include <xen/dm.h>
++#include <xen/hypercall.h>
++
++int arch_dm_op(struct xen_dm_op *op, struct domain *d,
++               const struct dmop_args *op_args, bool *const_op)
++{
++    return -EOPNOTSUPP;
++}
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * tab-width: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
+diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
+index 3b37f89..ba9b1fb 100644
+--- a/xen/arch/arm/domain.c
++++ b/xen/arch/arm/domain.c
+@@ -15,6 +15,7 @@
+ #include <xen/guest_access.h>
+ #include <xen/hypercall.h>
+ #include <xen/init.h>
++#include <xen/ioreq.h>
+ #include <xen/lib.h>
+ #include <xen/livepatch.h>
+ #include <xen/sched.h>
+@@ -694,6 +695,10 @@ int arch_domain_create(struct domain *d,
+ 
+     ASSERT(config != NULL);
+ 
++#ifdef CONFIG_IOREQ_SERVER
++    ioreq_init(d);
++#endif
++
+     /* p2m_init relies on some value initialized by the IOMMU subsystem */
+     if ( (rc = iommu_domain_init(d, config->iommu_opts)) != 0 )
+         goto fail;
+@@ -1012,6 +1017,10 @@ int domain_relinquish_resources(struct domain *d)
+         if (ret )
+             return ret;
+ 
++#ifdef CONFIG_IOREQ_SERVER
++        destroy_all_ioreq_servers(d);
++#endif
++
+     PROGRESS(xen):
+         ret = relinquish_memory(d, &d->xenpage_list);
+         if ( ret )
+diff --git a/xen/arch/arm/io.c b/xen/arch/arm/io.c
+index ae7ef96..f44cfd4 100644
+--- a/xen/arch/arm/io.c
++++ b/xen/arch/arm/io.c
+@@ -23,6 +23,7 @@
+ #include <asm/cpuerrata.h>
+ #include <asm/current.h>
+ #include <asm/mmio.h>
++#include <asm/hvm/ioreq.h>
+ 
+ #include "decode.h"
+ 
+@@ -123,7 +124,15 @@ enum io_state try_handle_mmio(struct cpu_user_regs *regs,
+ 
+     handler = find_mmio_handler(v->domain, info.gpa);
+     if ( !handler )
+-        return IO_UNHANDLED;
++    {
++        int rc;
++
++        rc = try_fwd_ioserv(regs, v, &info);
++        if ( rc == IO_HANDLED )
++            return handle_ioserv(regs, v);
++
++        return rc;
++    }
+ 
+     /* All the instructions used on emulated MMIO region should be valid */
+     if ( !dabt.valid )
+diff --git a/xen/arch/arm/ioreq.c b/xen/arch/arm/ioreq.c
+new file mode 100644
+index 0000000..da5ceac
+--- /dev/null
++++ b/xen/arch/arm/ioreq.c
+@@ -0,0 +1,141 @@
++/*
++ * arm/ioreq.c: hardware virtual machine I/O emulation
++ *
++ * Copyright (c) 2019 Arm ltd.
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program; If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#include <xen/domain.h>
++#include <xen/ioreq.h>
++
++#include <asm/traps.h>
++
++#include <public/hvm/ioreq.h>
++
++enum io_state handle_ioserv(struct cpu_user_regs *regs, struct vcpu *v)
++{
++    const union hsr hsr = { .bits = regs->hsr };
++    const struct hsr_dabt dabt = hsr.dabt;
++    /* Code is similar to handle_read */
++    uint8_t size = (1 << dabt.size) * 8;
++    register_t r = v->io.io_req.data;
++
++    /* We are done with the IO */
++    v->io.io_req.state = STATE_IOREQ_NONE;
++
++    if ( dabt.write )
++        return IO_HANDLED;
++
++    /*
++     * Sign extend if required.
++     * Note that we expect the read handler to have zeroed the bits
++     * outside the requested access size.
++     */
++    if ( dabt.sign && (r & (1UL << (size - 1))) )
++    {
++        /*
++         * We are relying on register_t using the same as
++         * an unsigned long in order to keep the 32-bit assembly
++         * code smaller.
++         */
++        BUILD_BUG_ON(sizeof(register_t) != sizeof(unsigned long));
++        r |= (~0UL) << size;
++    }
++
++    set_user_reg(regs, dabt.reg, r);
++
++    return IO_HANDLED;
++}
++
++enum io_state try_fwd_ioserv(struct cpu_user_regs *regs,
++                             struct vcpu *v, mmio_info_t *info)
++{
++    struct vcpu_io *vio = &v->io;
++    ioreq_t p = {
++        .type = IOREQ_TYPE_COPY,
++        .addr = info->gpa,
++        .size = 1 << info->dabt.size,
++        .count = 1,
++        .dir = !info->dabt.write,
++        /*
++         * On x86, df is used by 'rep' instruction to tell the direction
++         * to iterate (forward or backward).
++         * On Arm, all the accesses to MMIO region will do a single
++         * memory access. So for now, we can safely always set to 0.
++         */
++        .df = 0,
++        .data = get_user_reg(regs, info->dabt.reg),
++        .state = STATE_IOREQ_READY,
++    };
++    struct ioreq_server *s = NULL;
++    enum io_state rc;
++
++    switch ( vio->io_req.state )
++    {
++    case STATE_IOREQ_NONE:
++        break;
++
++    case STATE_IORESP_READY:
++        return IO_HANDLED;
++
++    default:
++        gdprintk(XENLOG_ERR, "wrong state %u\n", vio->io_req.state);
++        return IO_ABORT;
++    }
++
++    s = select_ioreq_server(v->domain, &p);
++    if ( !s )
++        return IO_UNHANDLED;
++
++    if ( !info->dabt.valid )
++        return IO_ABORT;
++
++    vio->io_req = p;
++
++    rc = send_ioreq(s, &p, 0);
++    if ( rc != IO_RETRY || v->domain->is_shutting_down )
++        vio->io_req.state = STATE_IOREQ_NONE;
++    else if ( !ioreq_needs_completion(&vio->io_req) )
++        rc = IO_HANDLED;
++    else
++        vio->io_completion = IO_mmio_completion;
++
++    return rc;
++}
++
++bool ioreq_complete_mmio(void)
++{
++    struct vcpu *v = current;
++    struct cpu_user_regs *regs = guest_cpu_user_regs();
++    const union hsr hsr = { .bits = regs->hsr };
++    paddr_t addr = v->io.io_req.addr;
++
++    if ( try_handle_mmio(regs, hsr, addr) == IO_HANDLED )
++    {
++        advance_pc(regs, hsr);
++        return true;
++    }
++
++    return false;
++}
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * tab-width: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
+diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
+index 8f40d0e..b154837 100644
+--- a/xen/arch/arm/traps.c
++++ b/xen/arch/arm/traps.c
+@@ -21,6 +21,7 @@
+ #include <xen/hypercall.h>
+ #include <xen/init.h>
+ #include <xen/iocap.h>
++#include <xen/ioreq.h>
+ #include <xen/irq.h>
+ #include <xen/lib.h>
+ #include <xen/mem_access.h>
+@@ -1384,6 +1385,9 @@ static arm_hypercall_t arm_hypercall_table[] = {
+ #ifdef CONFIG_HYPFS
+     HYPERCALL(hypfs_op, 5),
+ #endif
++#ifdef CONFIG_IOREQ_SERVER
++    HYPERCALL(dm_op, 3),
++#endif
+ };
+ 
+ #ifndef NDEBUG
+@@ -1955,6 +1959,9 @@ static void do_trap_stage2_abort_guest(struct cpu_user_regs *regs,
+             case IO_HANDLED:
+                 advance_pc(regs, hsr);
+                 return;
++            case IO_RETRY:
++                /* finish later */
++                return;
+             case IO_UNHANDLED:
+                 /* IO unhandled, try another way to handle it. */
+                 break;
+@@ -2253,6 +2260,12 @@ static void check_for_vcpu_work(void)
+ {
+     struct vcpu *v = current;
+ 
++#ifdef CONFIG_IOREQ_SERVER
++    local_irq_enable();
++    handle_io_completion(v);
++    local_irq_disable();
++#endif
++
+     if ( likely(!v->arch.need_flush_to_ram) )
+         return;
+ 
+diff --git a/xen/common/ioreq.c b/xen/common/ioreq.c
+index 8612159..bcd4961 100644
+--- a/xen/common/ioreq.c
++++ b/xen/common/ioreq.c
+@@ -18,6 +18,7 @@
+ 
+ #include <xen/ctype.h>
+ #include <xen/domain.h>
++#include <xen/domain_page.h>
+ #include <xen/event.h>
+ #include <xen/init.h>
+ #include <xen/irq.h>
+diff --git a/xen/include/asm-arm/domain.h b/xen/include/asm-arm/domain.h
+index 6819a3b..d4c3da5 100644
+--- a/xen/include/asm-arm/domain.h
++++ b/xen/include/asm-arm/domain.h
+@@ -10,6 +10,7 @@
+ #include <asm/gic.h>
+ #include <asm/vgic.h>
+ #include <asm/vpl011.h>
++#include <public/hvm/dm_op.h>
+ #include <public/hvm/params.h>
+ 
+ struct hvm_domain
+@@ -17,6 +18,8 @@ struct hvm_domain
+     uint64_t              params[HVM_NR_PARAMS];
+ };
+ 
++#define ioreq_params(d, i) ((d)->arch.hvm.params[i])
++
+ #ifdef CONFIG_ARM_64
+ enum domain_type {
+     DOMAIN_32BIT,
+@@ -262,6 +265,8 @@ static inline void arch_vcpu_block(struct vcpu *v) {}
+ 
+ #define arch_vm_assist_valid_mask(d) (1UL << VMASST_TYPE_runstate_update_flag)
+ 
++#define has_vpci(d)    ({ (void)(d); false; })
++
+ #endif /* __ASM_DOMAIN_H__ */
+ 
+ /*
+diff --git a/xen/include/asm-arm/hvm/ioreq.h b/xen/include/asm-arm/hvm/ioreq.h
+new file mode 100644
+index 0000000..9f59f23
+--- /dev/null
++++ b/xen/include/asm-arm/hvm/ioreq.h
+@@ -0,0 +1,109 @@
++/*
++ * hvm.h: Hardware virtual machine assist interface definitions.
++ *
 + * Copyright (c) 2016 Citrix Systems Inc.
 + * Copyright (c) 2019 Arm ltd.
 + *
@@ -617,320 +581,86 @@ index 0000000..36e01a2
 + * this program; If not, see <http://www.gnu.org/licenses/>.
 + */
 +
-+#include <xen/guest_access.h>
-+#include <xen/dm.h>
-+#include <xen/hypercall.h>
++#ifndef __ASM_ARM_HVM_IOREQ_H__
++#define __ASM_ARM_HVM_IOREQ_H__
++
 +#include <xen/ioreq.h>
-+#include <xen/nospec.h>
 +
-+static int dm_op(const struct dmop_args *op_args)
++#include <public/hvm/ioreq.h>
++
++#ifdef CONFIG_IOREQ_SERVER
++enum io_state handle_ioserv(struct cpu_user_regs *regs, struct vcpu *v);
++enum io_state try_fwd_ioserv(struct cpu_user_regs *regs,
++                             struct vcpu *v, mmio_info_t *info);
++#else
++static inline enum io_state handle_ioserv(struct cpu_user_regs *regs,
++                                          struct vcpu *v)
 +{
-+    struct domain *d;
-+    struct xen_dm_op op;
-+    long rc;
-+    bool const_op = true;
-+    const size_t offset = offsetof(struct xen_dm_op, u);
-+
-+    static const uint8_t op_size[] = {
-+        [XEN_DMOP_create_ioreq_server]              = sizeof(struct xen_dm_op_create_ioreq_server),
-+        [XEN_DMOP_get_ioreq_server_info]            = sizeof(struct xen_dm_op_get_ioreq_server_info),
-+        [XEN_DMOP_map_io_range_to_ioreq_server]     = sizeof(struct xen_dm_op_ioreq_server_range),
-+        [XEN_DMOP_unmap_io_range_from_ioreq_server] = sizeof(struct xen_dm_op_ioreq_server_range),
-+        [XEN_DMOP_set_ioreq_server_state]           = sizeof(struct xen_dm_op_set_ioreq_server_state),
-+        [XEN_DMOP_destroy_ioreq_server]             = sizeof(struct xen_dm_op_destroy_ioreq_server),
-+        [XEN_DMOP_track_dirty_vram]                 = sizeof(struct xen_dm_op_track_dirty_vram),
-+        [XEN_DMOP_set_pci_intx_level]               = sizeof(struct xen_dm_op_set_pci_intx_level),
-+        [XEN_DMOP_set_isa_irq_level]                = sizeof(struct xen_dm_op_set_isa_irq_level),
-+        [XEN_DMOP_set_pci_link_route]               = sizeof(struct xen_dm_op_set_pci_link_route),
-+        [XEN_DMOP_modified_memory]                  = sizeof(struct xen_dm_op_modified_memory),
-+        [XEN_DMOP_set_mem_type]                     = sizeof(struct xen_dm_op_set_mem_type),
-+        [XEN_DMOP_inject_event]                     = sizeof(struct xen_dm_op_inject_event),
-+        [XEN_DMOP_inject_msi]                       = sizeof(struct xen_dm_op_inject_msi),
-+        [XEN_DMOP_map_mem_type_to_ioreq_server]     = sizeof(struct xen_dm_op_map_mem_type_to_ioreq_server),
-+        [XEN_DMOP_remote_shutdown]                  = sizeof(struct xen_dm_op_remote_shutdown),
-+        [XEN_DMOP_relocate_memory]                  = sizeof(struct xen_dm_op_relocate_memory),
-+        [XEN_DMOP_pin_memory_cacheattr]             = sizeof(struct xen_dm_op_pin_memory_cacheattr),
-+    };
-+
-+    rc = rcu_lock_remote_domain_by_id(op_args->domid, &d);
-+    if ( rc )
-+        return rc;
-+
-+    if ( !is_hvm_domain(d) )
-+        goto out;
-+
-+    rc = xsm_dm_op(XSM_DM_PRIV, d);
-+    if ( rc )
-+        goto out;
-+
-+    rc = -EFAULT;
-+    if ( op_args->buf[0].size < offset )
-+        goto out;
-+
-+    if ( copy_from_guest_offset((void *)&op, op_args->buf[0].h, 0, offset) )
-+        goto out;
-+
-+    if ( op.op >= ARRAY_SIZE(op_size) )
-+    {
-+        rc = -EOPNOTSUPP;
-+        goto out;
-+    }
-+
-+    op.op = array_index_nospec(op.op, ARRAY_SIZE(op_size));
-+
-+    if ( op_args->buf[0].size < offset + op_size[op.op] )
-+        goto out;
-+
-+    if ( copy_from_guest_offset((void *)&op.u, op_args->buf[0].h, offset,
-+                                op_size[op.op]) )
-+        goto out;
-+
-+    rc = -EINVAL;
-+    if ( op.pad )
-+        goto out;
-+
-+    switch ( op.op )
-+    {
-+    case XEN_DMOP_create_ioreq_server:
-+    {
-+        struct xen_dm_op_create_ioreq_server *data =
-+            &op.u.create_ioreq_server;
-+
-+        const_op = false;
-+
-+        rc = -EINVAL;
-+        if ( data->pad[0] || data->pad[1] || data->pad[2] )
-+            break;
-+
-+        rc = hvm_create_ioreq_server(d, data->handle_bufioreq,
-+                                     &data->id);
-+        break;
-+    }
-+
-+    case XEN_DMOP_get_ioreq_server_info:
-+    {
-+        struct xen_dm_op_get_ioreq_server_info *data =
-+            &op.u.get_ioreq_server_info;
-+        const uint16_t valid_flags = XEN_DMOP_no_gfns;
-+
-+        const_op = false;
-+
-+        rc = -EINVAL;
-+        if ( data->flags & ~valid_flags )
-+            break;
-+
-+        rc = hvm_get_ioreq_server_info(d, data->id,
-+                                       (data->flags & XEN_DMOP_no_gfns) ?
-+                                       NULL : (unsigned long *)&data->ioreq_gfn,
-+                                       (data->flags & XEN_DMOP_no_gfns) ?
-+                                       NULL : (unsigned long *)&data->bufioreq_gfn,
-+                                       &data->bufioreq_port);
-+        break;
-+    }
-+
-+    case XEN_DMOP_map_io_range_to_ioreq_server:
-+    {
-+        const struct xen_dm_op_ioreq_server_range *data =
-+            &op.u.map_io_range_to_ioreq_server;
-+
-+        rc = -EINVAL;
-+        if ( data->pad )
-+            break;
-+
-+        rc = hvm_map_io_range_to_ioreq_server(d, data->id, data->type,
-+                                              data->start, data->end);
-+        break;
-+    }
-+
-+    case XEN_DMOP_unmap_io_range_from_ioreq_server:
-+    {
-+        const struct xen_dm_op_ioreq_server_range *data =
-+            &op.u.unmap_io_range_from_ioreq_server;
-+
-+        rc = -EINVAL;
-+        if ( data->pad )
-+            break;
-+
-+        rc = hvm_unmap_io_range_from_ioreq_server(d, data->id, data->type,
-+                                                  data->start, data->end);
-+        break;
-+    }
-+
-+    case XEN_DMOP_set_ioreq_server_state:
-+    {
-+        const struct xen_dm_op_set_ioreq_server_state *data =
-+            &op.u.set_ioreq_server_state;
-+
-+        rc = -EINVAL;
-+        if ( data->pad )
-+            break;
-+
-+        rc = hvm_set_ioreq_server_state(d, data->id, !!data->enabled);
-+        break;
-+    }
-+
-+    case XEN_DMOP_destroy_ioreq_server:
-+    {
-+        const struct xen_dm_op_destroy_ioreq_server *data =
-+            &op.u.destroy_ioreq_server;
-+
-+        rc = -EINVAL;
-+        if ( data->pad )
-+            break;
-+
-+        rc = hvm_destroy_ioreq_server(d, data->id);
-+        break;
-+    }
-+
-+    default:
-+        rc = arch_dm_op(&op, d, op_args, &const_op);
-+    }
-+
-+    if ( (!rc || rc == -ERESTART) &&
-+         !const_op && copy_to_guest_offset(op_args->buf[0].h, offset,
-+                                           (void *)&op.u, op_size[op.op]) )
-+        rc = -EFAULT;
-+
-+ out:
-+    rcu_unlock_domain(d);
-+
-+    return rc;
++    return IO_UNHANDLED;
 +}
 +
-+#ifdef CONFIG_COMPAT
-+#include <compat/hvm/dm_op.h>
-+
-+CHECK_dm_op_create_ioreq_server;
-+CHECK_dm_op_get_ioreq_server_info;
-+CHECK_dm_op_ioreq_server_range;
-+CHECK_dm_op_set_ioreq_server_state;
-+CHECK_dm_op_destroy_ioreq_server;
-+CHECK_dm_op_track_dirty_vram;
-+CHECK_dm_op_set_pci_intx_level;
-+CHECK_dm_op_set_isa_irq_level;
-+CHECK_dm_op_set_pci_link_route;
-+CHECK_dm_op_modified_memory;
-+CHECK_dm_op_set_mem_type;
-+CHECK_dm_op_inject_event;
-+CHECK_dm_op_inject_msi;
-+CHECK_dm_op_map_mem_type_to_ioreq_server;
-+CHECK_dm_op_remote_shutdown;
-+CHECK_dm_op_relocate_memory;
-+CHECK_dm_op_pin_memory_cacheattr;
-+
-+int compat_dm_op(domid_t domid,
-+                 unsigned int nr_bufs,
-+                 XEN_GUEST_HANDLE_PARAM(void) bufs)
++static inline enum io_state try_fwd_ioserv(struct cpu_user_regs *regs,
++                                           struct vcpu *v, mmio_info_t *info)
 +{
-+    struct dmop_args args;
-+    unsigned int i;
-+    int rc;
-+
-+    if ( nr_bufs > ARRAY_SIZE(args.buf) )
-+        return -E2BIG;
-+
-+    args.domid = domid;
-+    args.nr_bufs = array_index_nospec(nr_bufs, ARRAY_SIZE(args.buf) + 1);
-+
-+    for ( i = 0; i < args.nr_bufs; i++ )
-+    {
-+        struct compat_dm_op_buf cmp;
-+
-+        if ( copy_from_guest_offset(&cmp, bufs, i, 1) )
-+            return -EFAULT;
-+
-+#define XLAT_dm_op_buf_HNDL_h(_d_, _s_) \
-+        guest_from_compat_handle((_d_)->h, (_s_)->h)
-+
-+        XLAT_dm_op_buf(&args.buf[i], &cmp);
-+
-+#undef XLAT_dm_op_buf_HNDL_h
-+    }
-+
-+    rc = dm_op(&args);
-+
-+    if ( rc == -ERESTART )
-+        rc = hypercall_create_continuation(__HYPERVISOR_dm_op, "iih",
-+                                           domid, nr_bufs, bufs);
-+
-+    return rc;
++    return IO_UNHANDLED;
 +}
 +#endif
 +
-+long do_dm_op(domid_t domid,
-+              unsigned int nr_bufs,
-+              XEN_GUEST_HANDLE_PARAM(xen_dm_op_buf_t) bufs)
++bool ioreq_complete_mmio(void);
++
++static inline bool handle_pio(uint16_t port, unsigned int size, int dir)
 +{
-+    struct dmop_args args;
-+    int rc;
-+
-+    if ( nr_bufs > ARRAY_SIZE(args.buf) )
-+        return -E2BIG;
-+
-+    args.domid = domid;
-+    args.nr_bufs = array_index_nospec(nr_bufs, ARRAY_SIZE(args.buf) + 1);
-+
-+    if ( copy_from_guest_offset(&args.buf[0], bufs, 0, args.nr_bufs) )
-+        return -EFAULT;
-+
-+    rc = dm_op(&args);
-+
-+    if ( rc == -ERESTART )
-+        rc = hypercall_create_continuation(__HYPERVISOR_dm_op, "iih",
-+                                           domid, nr_bufs, bufs);
-+
-+    return rc;
++    /*
++     * TODO: For Arm64, the main user will be PCI. So this should be
++     * implemented when we add support for vPCI.
++     */
++    ASSERT_UNREACHABLE();
++    return true;
 +}
 +
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * tab-width: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
-diff --git a/xen/include/xen/dm.h b/xen/include/xen/dm.h
-new file mode 100644
-index 0000000..ef15edf
---- /dev/null
-+++ b/xen/include/xen/dm.h
-@@ -0,0 +1,44 @@
-+/*
-+ * Copyright (c) 2016 Citrix Systems Inc.
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program; If not, see <http://www.gnu.org/licenses/>.
-+ */
++static inline void arch_destroy_ioreq_server(struct ioreq_server *s)
++{
++}
 +
-+#ifndef __XEN_DM_H__
-+#define __XEN_DM_H__
++static inline void msix_write_completion(struct vcpu *v)
++{
++}
 +
-+#include <xen/sched.h>
++static inline bool arch_io_completion(enum io_completion io_completion)
++{
++    ASSERT_UNREACHABLE();
++    return true;
++}
 +
-+struct dmop_args {
-+    domid_t domid;
-+    unsigned int nr_bufs;
-+    /* Reserve enough buf elements for all current hypercalls. */
-+    struct xen_dm_op_buf buf[2];
-+};
++static inline int ioreq_server_get_type_addr(const struct domain *d,
++                                             const ioreq_t *p,
++                                             uint8_t *type,
++                                             uint64_t *addr)
++{
++    if ( p->type != IOREQ_TYPE_COPY && p->type != IOREQ_TYPE_PIO )
++        return -EINVAL;
 +
-+int arch_dm_op(struct xen_dm_op *op,
-+               struct domain *d,
-+               const struct dmop_args *op_args,
-+               bool *const_op);
++    *type = (p->type == IOREQ_TYPE_PIO) ?
++             XEN_DMOP_IO_RANGE_PORT : XEN_DMOP_IO_RANGE_MEMORY;
++    *addr = p->addr;
 +
-+#endif /* __XEN_DM_H__ */
++    return 0;
++}
++
++static inline void arch_ioreq_init(struct domain *d)
++{
++}
++
++static inline bool arch_ioreq_destroy(struct domain *d)
++{
++    return true;
++}
++
++#define IOREQ_STATUS_HANDLED     IO_HANDLED
++#define IOREQ_STATUS_UNHANDLED   IO_UNHANDLED
++#define IOREQ_STATUS_RETRY       IO_RETRY
++
++#endif /* __ASM_ARM_HVM_IOREQ_H__ */
 +
 +/*
 + * Local variables:
@@ -941,101 +671,33 @@ index 0000000..ef15edf
 + * indent-tabs-mode: nil
 + * End:
 + */
-diff --git a/xen/include/xsm/dummy.h b/xen/include/xsm/dummy.h
-index 7ae3c40..5c61d8e 100644
---- a/xen/include/xsm/dummy.h
-+++ b/xen/include/xsm/dummy.h
-@@ -707,14 +707,14 @@ static XSM_INLINE int xsm_pmu_op (XSM_DEFAULT_ARG struct domain *d, unsigned int
-     }
- }
+diff --git a/xen/include/asm-arm/mmio.h b/xen/include/asm-arm/mmio.h
+index 8dbfb27..7ab873c 100644
+--- a/xen/include/asm-arm/mmio.h
++++ b/xen/include/asm-arm/mmio.h
+@@ -37,6 +37,7 @@ enum io_state
+     IO_ABORT,       /* The IO was handled by the helper and led to an abort. */
+     IO_HANDLED,     /* The IO was successfully handled by the helper. */
+     IO_UNHANDLED,   /* The IO was not handled by the helper. */
++    IO_RETRY,       /* Retry the emulation for some reason */
+ };
  
-+#endif /* CONFIG_X86 */
+ typedef int (*mmio_read_t)(struct vcpu *v, mmio_info_t *info,
+diff --git a/xen/include/asm-arm/paging.h b/xen/include/asm-arm/paging.h
+index 6d1a000..0550c55 100644
+--- a/xen/include/asm-arm/paging.h
++++ b/xen/include/asm-arm/paging.h
+@@ -4,6 +4,10 @@
+ #define paging_mode_translate(d)              (1)
+ #define paging_mode_external(d)               (1)
+ 
++static inline void paging_mark_pfn_dirty(struct domain *d, pfn_t pfn)
++{
++}
 +
- static XSM_INLINE int xsm_dm_op(XSM_DEFAULT_ARG struct domain *d)
- {
-     XSM_ASSERT_ACTION(XSM_DM_PRIV);
-     return xsm_default_action(action, current->domain, d);
- }
+ #endif /* XEN_PAGING_H */
  
--#endif /* CONFIG_X86 */
--
- #ifdef CONFIG_ARGO
- static XSM_INLINE int xsm_argo_enable(const struct domain *d)
- {
-diff --git a/xen/include/xsm/xsm.h b/xen/include/xsm/xsm.h
-index 358ec13..517f78a 100644
---- a/xen/include/xsm/xsm.h
-+++ b/xen/include/xsm/xsm.h
-@@ -177,8 +177,8 @@ struct xsm_operations {
-     int (*ioport_permission) (struct domain *d, uint32_t s, uint32_t e, uint8_t allow);
-     int (*ioport_mapping) (struct domain *d, uint32_t s, uint32_t e, uint8_t allow);
-     int (*pmu_op) (struct domain *d, unsigned int op);
--    int (*dm_op) (struct domain *d);
- #endif
-+    int (*dm_op) (struct domain *d);
-     int (*xen_version) (uint32_t cmd);
-     int (*domain_resource_map) (struct domain *d);
- #ifdef CONFIG_ARGO
-@@ -683,13 +683,13 @@ static inline int xsm_pmu_op (xsm_default_t def, struct domain *d, unsigned int
-     return xsm_ops->pmu_op(d, op);
- }
- 
-+#endif /* CONFIG_X86 */
-+
- static inline int xsm_dm_op(xsm_default_t def, struct domain *d)
- {
-     return xsm_ops->dm_op(d);
- }
- 
--#endif /* CONFIG_X86 */
--
- static inline int xsm_xen_version (xsm_default_t def, uint32_t op)
- {
-     return xsm_ops->xen_version(op);
-diff --git a/xen/xsm/dummy.c b/xen/xsm/dummy.c
-index 9e09512..8bdffe7 100644
---- a/xen/xsm/dummy.c
-+++ b/xen/xsm/dummy.c
-@@ -147,8 +147,8 @@ void __init xsm_fixup_ops (struct xsm_operations *ops)
-     set_to_dummy_if_null(ops, ioport_permission);
-     set_to_dummy_if_null(ops, ioport_mapping);
-     set_to_dummy_if_null(ops, pmu_op);
--    set_to_dummy_if_null(ops, dm_op);
- #endif
-+    set_to_dummy_if_null(ops, dm_op);
-     set_to_dummy_if_null(ops, xen_version);
-     set_to_dummy_if_null(ops, domain_resource_map);
- #ifdef CONFIG_ARGO
-diff --git a/xen/xsm/flask/hooks.c b/xen/xsm/flask/hooks.c
-index de050cc..8f3f182 100644
---- a/xen/xsm/flask/hooks.c
-+++ b/xen/xsm/flask/hooks.c
-@@ -1666,14 +1666,13 @@ static int flask_pmu_op (struct domain *d, unsigned int op)
-         return -EPERM;
-     }
- }
-+#endif /* CONFIG_X86 */
- 
- static int flask_dm_op(struct domain *d)
- {
-     return current_has_perm(d, SECCLASS_HVM, HVM__DM);
- }
- 
--#endif /* CONFIG_X86 */
--
- static int flask_xen_version (uint32_t op)
- {
-     u32 dsid = domain_sid(current->domain);
-@@ -1875,8 +1874,8 @@ static struct xsm_operations flask_ops = {
-     .ioport_permission = flask_ioport_permission,
-     .ioport_mapping = flask_ioport_mapping,
-     .pmu_op = flask_pmu_op,
--    .dm_op = flask_dm_op,
- #endif
-+    .dm_op = flask_dm_op,
-     .xen_version = flask_xen_version,
-     .domain_resource_map = flask_domain_resource_map,
- #ifdef CONFIG_ARGO
+ /*
 -- 
 2.7.4
 
