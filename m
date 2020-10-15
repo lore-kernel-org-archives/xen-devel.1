@@ -2,28 +2,28 @@ Return-Path: <SRS0=IsAa=DW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-3.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 95753C43457
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 15:02:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DA301C433DF
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 15:04:12 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 202842222E
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 15:02:40 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 479A02222E
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 15:04:12 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="5TJtqgKY"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 202842222E
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="K2bU8O/Z"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 479A02222E
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.7462.19500 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.7468.19526 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kT4lh-0000lj-Do; Thu, 15 Oct 2020 15:02:13 +0000
+	id 1kT4nQ-00012X-7z; Thu, 15 Oct 2020 15:04:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 7462.19500; Thu, 15 Oct 2020 15:02:13 +0000
+Received: by outflank-mailman (output) from mailman id 7468.19526; Thu, 15 Oct 2020 15:04:00 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,154 +38,140 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kT4lh-0000lc-Ac; Thu, 15 Oct 2020 15:02:13 +0000
-Received: by outflank-mailman (input) for mailman id 7462;
- Thu, 15 Oct 2020 15:02:11 +0000
+	id 1kT4nQ-00012Q-4x; Thu, 15 Oct 2020 15:04:00 +0000
+Received: by outflank-mailman (input) for mailman id 7468;
+ Thu, 15 Oct 2020 15:03:58 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=pHSr=DW=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
- id 1kT4lf-0000lX-O8
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:02:11 +0000
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+ <SRS0=bKTB=DW=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1kT4nO-00012I-NH
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:03:58 +0000
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id e95a8884-7c50-489d-880d-aeb685c9c06f;
- Thu, 15 Oct 2020 15:02:10 +0000 (UTC)
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kT4le-00075M-0d; Thu, 15 Oct 2020 15:02:10 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kT4ld-0006Eh-RS; Thu, 15 Oct 2020 15:02:09 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1kT4ld-00044P-Qx; Thu, 15 Oct 2020 15:02:09 +0000
+ id b7ea9203-85da-498a-a4fe-86851bc1865d;
+ Thu, 15 Oct 2020 15:03:57 +0000 (UTC)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=pHSr=DW=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
-	id 1kT4lf-0000lX-O8
-	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:02:11 +0000
-X-Inumbo-ID: e95a8884-7c50-489d-880d-aeb685c9c06f
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+	(envelope-from <SRS0=bKTB=DW=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+	id 1kT4nO-00012I-NH
+	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 15:03:58 +0000
+X-Inumbo-ID: b7ea9203-85da-498a-a4fe-86851bc1865d
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id e95a8884-7c50-489d-880d-aeb685c9c06f;
-	Thu, 15 Oct 2020 15:02:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=r5BMwGfG0lbeS4mprBv5xIF5Y8QSFwrVoZSMDWk0O+o=; b=5TJtqgKYKT4UTWkvTRmSvlOQC6
-	gPygZUPeJ1DCiMpP3wPomaDIVaPESj0nD63G1gVqm2GQFOohC756/1bqsJEsjnj9cegn3OhbI9I7b
-	e0GOfp+tXoJRA7DaR430jiY5+TvN8Igt2Dbmlqzfq2v+gulceuBqHB5O+TBQhFZiZr2E=;
-Received: from host146.205.237.98.conversent.net ([205.237.98.146] helo=infra.test-lab.xenproject.org)
-	by mail.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <osstest-admin@xenproject.org>)
-	id 1kT4le-00075M-0d; Thu, 15 Oct 2020 15:02:10 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
-	by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <osstest-admin@xenproject.org>)
-	id 1kT4ld-0006Eh-RS; Thu, 15 Oct 2020 15:02:09 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim 4.92)
-	(envelope-from <osstest-admin@xenproject.org>)
-	id 1kT4ld-00044P-Qx; Thu, 15 Oct 2020 15:02:09 +0000
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-155839-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+	id b7ea9203-85da-498a-a4fe-86851bc1865d;
+	Thu, 15 Oct 2020 15:03:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1602774237;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:content-transfer-encoding:in-reply-to;
+  bh=AmVOV8edVjCau6Ds8dmXzC4qa5h7gP2n9yy/6GpM2t0=;
+  b=K2bU8O/Zei2+PtRwS8I7V+1h0Ep7f0+lh19wriJL8qbQ8uONtKa/TCFp
+   5l16qaz+IudWxMSyflf4aTlZ0QjIm+ZmDS5z6m6lgEPbJ0To9hyCzdgyG
+   c6Z7A6WqsgCDZTbSkBdwi5+YifabMK9Vvm5USbyw3IbKl+iqDXlVkI2TM
+   w=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: MRlUvHr24y02n57VARV8YpZ941IgLFI4mLFLOVFgb3OsZHBBEucJvbb4MbXdyGE5/OqaUPmA9g
+ n3C4G2+iV/wNRuIO0Va0WiNwWC8eLvBH+i7yRrktub9UkCBnHiMKBSehgJnQTAT9T329VkYJ99
+ WbqzP8Er6NMZ6A2vY28pb7djUqot+h1pyoQk523K4x8yCCB+QwdqhsP7aX2YzTgKBXDA7DgwS7
+ dp3jMko5dRTF2ziY698mYNw+BtcOpoVpmP9p3xQ9Bw9YnISHnKmrQf2xZIZL002WHMb4tCr73C
+ Fys=
+X-SBRS: 2.5
+X-MesageID: 29336058
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.77,379,1596513600"; 
+   d="scan'208";a="29336058"
+Date: Thu, 15 Oct 2020 17:03:26 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Jan Beulich <jbeulich@suse.com>, Jason Andryuk <jandryuk@gmail.com>
+CC: xen-devel <xen-devel@lists.xenproject.org>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "Ian
+ Jackson" <iwj@xenproject.org>, Julien Grall <julien@xen.org>, "Stefano
+ Stabellini" <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
+Subject: Re: [PATCH] libelf: Handle PVH kernels lacking ENTRY elfnote
+Message-ID: <20201015150326.GE68032@Air-de-Roger>
+References: <20201014153150.83875-1-jandryuk@gmail.com>
+ <6d373cae-c7dc-e109-1df3-ccbbe4bdd9c8@suse.com>
+ <CAKf6xpv5GNjw0pjOxEqdVj2+C6v+O5PDZG5yYkNfytDjUT_r5w@mail.gmail.com>
+ <4229544b-e98d-6f3c-14aa-a884c403ba74@suse.com>
 MIME-Version: 1.0
-Subject: [seabios test] 155839: tolerable FAIL - PUSHED
-X-Osstest-Failures:
-    seabios:test-amd64-amd64-xl-qemuu-win7-amd64:guest-stop:fail:nonblocking
-    seabios:test-amd64-amd64-xl-qemuu-ws16-amd64:guest-stop:fail:nonblocking
-    seabios:test-amd64-i386-xl-qemuu-win7-amd64:guest-stop:fail:nonblocking
-    seabios:test-amd64-i386-xl-qemuu-ws16-amd64:guest-stop:fail:nonblocking
-    seabios:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
-    seabios:test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
-    seabios:test-amd64-amd64-qemuu-nested-amd:debian-hvm-install/l1/l2:fail:nonblocking
-X-Osstest-Versions-This:
-    seabios=58a44be024f69d2e4d2b58553529230abdd3935e
-X-Osstest-Versions-That:
-    seabios=c685fe3ff2d402caefc1487d99bb486c4a510b8b
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Thu, 15 Oct 2020 15:02:09 +0000
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <4229544b-e98d-6f3c-14aa-a884c403ba74@suse.com>
+X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
+ FTLPEX02CL06.citrite.net (10.13.108.179)
 
-flight 155839 seabios real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/155839/
+On Thu, Oct 15, 2020 at 09:00:09AM +0200, Jan Beulich wrote:
+> On 14.10.2020 18:27, Jason Andryuk wrote:
+> > On Wed, Oct 14, 2020 at 12:02 PM Jan Beulich <jbeulich@suse.com> wrote:
+> >>
+> >> On 14.10.2020 17:31, Jason Andryuk wrote:
+> >>> Linux kernels only have an ENTRY elfnote when built with CONFIG_PV.  A
+> >>> kernel build CONFIG_PVH=y CONFIG_PV=n lacks the note.  In this case,
+> >>> virt_entry will be UNSET_ADDR, overwritten by the ELF header e_entry,
+> >>> and fail the check against the virt address range.
+> > 
+> > Oh, these should be CONFIG_XEN_PVH=y and CONFIG_XEN_PV=n
+> > 
+> >>> Change the code to only check virt_entry against the virtual address
+> >>> range if it was set upon entry to the function.
+> >>
+> >> Not checking at all seems wrong to me. The ELF spec anyway says
+> >> "virtual address", so an out of bounds value is at least suspicious.
+> >>
+> >>> Maybe the overwriting of virt_entry could be removed, but I don't know
+> >>> if there would be unintended consequences where (old?) kernels don't
+> >>> have an elfnote, but do have an in-range e_entry?  The failing kernel I
+> >>> just looked at has an e_entry of 0x1000000.
+> >>
+> >> And if you dropped the overwriting, what entry point would we use
+> >> in the absence of an ELF note?
+> > 
+> > elf_xen_note_check currently has:
+> > 
+> >     /* PVH only requires one ELF note to be set */
+> >     if ( parms->phys_entry != UNSET_ADDR32 )
+> >     {
+> >         elf_msg(elf, "ELF: Found PVH image\n");
+> >         return 0;
+> >     }
+> > 
+> >> I'd rather put up the option of adjusting the entry (or the check),
+> >> if it looks like a valid physical address.
+> > 
+> > The function doesn't know if the image will be booted PV or PVH, so I
+> > guess we do all the checks, but use 'parms->phys_entry != UNSET_ADDR32
+> > && parms->virt_entry == UNSET_ADDR' to conditionally skip checking
+> > virt?
+> 
+> Like Jürgen, the purpose of the patch hadn't become clear to me
+> from reading the description. As I understand it now, we're currently
+> refusing to boot such a kernel for no reason. If that's correct,
+> perhaps you could say so in the description in a more direct way?
+> 
+> As far as actual code adjustments go - how much of
+> elf_xen_addr_calc_check() is actually applicable when booting PVH?
 
-Failures :-/ but no regressions.
+I think the only relevant check for PVH would be the symtab loading
+(XEN_ELFNOTE_BSD_SYMTAB).
 
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-xl-qemuu-win7-amd64 19 guest-stop            fail like 155770
- test-amd64-amd64-xl-qemuu-ws16-amd64 19 guest-stop            fail like 155770
- test-amd64-i386-xl-qemuu-win7-amd64 19 guest-stop             fail like 155770
- test-amd64-i386-xl-qemuu-ws16-amd64 19 guest-stop             fail like 155770
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
- test-amd64-amd64-qemuu-nested-amd 20 debian-hvm-install/l1/l2  fail never pass
+> And why is there no bounds check of ->phys_entry paralleling the
+> ->virt_entry one?
+> 
+> On the whole, as long as we don't know what mode we're planning to
+> boot in, we can't skip any checks, as the mere presence of
+> XEN_ELFNOTE_PHYS32_ENTRY doesn't mean that's also what gets used.
+> Therefore simply bypassing any of the checks is not an option. In
+> particular what you suggest would lead to failure to check
+> e_entry-derived ->virt_entry when the PVH-specific note is
+> present but we're booting in PV mode. For now I don't see how to
+> address this without making the function aware of the intended
+> booting mode.
 
-version targeted for testing:
- seabios              58a44be024f69d2e4d2b58553529230abdd3935e
-baseline version:
- seabios              c685fe3ff2d402caefc1487d99bb486c4a510b8b
+That seems the only viable approach. Maybe an intended mode field could
+be added to elf_dom_parms in order to signal this?
 
-Last test of basis   155770  2020-10-13 09:10:37 Z    2 days
-Testing same since   155839  2020-10-15 09:39:29 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Gerd Hoffmann <kraxel@redhat.com>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
- test-amd64-amd64-xl-qemuu-debianhvm-i386-xsm                 pass    
- test-amd64-i386-xl-qemuu-debianhvm-i386-xsm                  pass    
- test-amd64-amd64-qemuu-nested-amd                            fail    
- test-amd64-i386-qemuu-rhel6hvm-amd                           pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-i386-xl-qemuu-debianhvm-amd64                     pass    
- test-amd64-amd64-qemuu-freebsd11-amd64                       pass    
- test-amd64-amd64-qemuu-freebsd12-amd64                       pass    
- test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
- test-amd64-i386-xl-qemuu-win7-amd64                          fail    
- test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
- test-amd64-i386-xl-qemuu-ws16-amd64                          fail    
- test-amd64-amd64-xl-qemuu-dmrestrict-amd64-dmrestrict        pass    
- test-amd64-i386-xl-qemuu-dmrestrict-amd64-dmrestrict         pass    
- test-amd64-amd64-qemuu-nested-intel                          pass    
- test-amd64-i386-qemuu-rhel6hvm-intel                         pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64-shadow             pass    
- test-amd64-i386-xl-qemuu-debianhvm-amd64-shadow              pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/osstest/seabios.git
-   c685fe3..58a44be  58a44be024f69d2e4d2b58553529230abdd3935e -> xen-tested-master
+Thanks, Roger.
 
