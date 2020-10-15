@@ -1,29 +1,30 @@
-Return-Path: <SRS0=XJfI=DV=lists.xenproject.org=xen-devel-bounces@kernel.org>
+Return-Path: <SRS0=IsAa=DW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9B87CC433DF
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2020 23:21:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C5DFC433DF
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 00:38:53 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 067A0218AC
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2020 23:21:54 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 10F1E22242
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 00:38:51 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="tpWxYuiB"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 067A0218AC
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	dkim=pass (1024-bit key) header.d=protonmail.com header.i=@protonmail.com header.b="MNyNJ6f1"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 10F1E22242
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=protonmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.7043.18423 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.7049.18440 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kSq5J-00026L-ON; Wed, 14 Oct 2020 23:21:29 +0000
+	id 1kSrHf-0000KL-6X; Thu, 15 Oct 2020 00:38:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 7043.18423; Wed, 14 Oct 2020 23:21:29 +0000
+Received: by outflank-mailman (output) from mailman id 7049.18440; Thu, 15 Oct 2020 00:38:19 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,154 +39,90 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kSq5J-00026E-L4; Wed, 14 Oct 2020 23:21:29 +0000
-Received: by outflank-mailman (input) for mailman id 7043;
- Wed, 14 Oct 2020 23:21:27 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kSrHf-0000KE-3f; Thu, 15 Oct 2020 00:38:19 +0000
+Received: by outflank-mailman (input) for mailman id 7049;
+ Thu, 15 Oct 2020 00:38:17 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=mg0A=DV=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
- id 1kSq5H-000269-P9
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2020 23:21:27 +0000
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 481c11cf-106a-4008-b9c0-4f2d10e61224;
- Wed, 14 Oct 2020 23:21:26 +0000 (UTC)
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kSq5F-0001XH-Ji; Wed, 14 Oct 2020 23:21:25 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kSq5F-0002Xt-7J; Wed, 14 Oct 2020 23:21:25 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1kSq5F-0006iA-6n; Wed, 14 Oct 2020 23:21:25 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+ <SRS0=0U26=DW=protonmail.com=dylangerdaly@srs-us1.protection.inumbo.net>)
+ id 1kSrHd-0000K9-5n
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 00:38:17 +0000
+Received: from mail-40131.protonmail.ch (unknown [185.70.40.131])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id e283bce3-2633-4cf9-b245-c34d745a5b1b;
+ Thu, 15 Oct 2020 00:38:14 +0000 (UTC)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=mg0A=DV=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
-	id 1kSq5H-000269-P9
-	for xen-devel@lists.xenproject.org; Wed, 14 Oct 2020 23:21:27 +0000
-X-Inumbo-ID: 481c11cf-106a-4008-b9c0-4f2d10e61224
-Received: from mail.xenproject.org (unknown [104.130.215.37])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 481c11cf-106a-4008-b9c0-4f2d10e61224;
-	Wed, 14 Oct 2020 23:21:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=Rf5d2ak+R1dXzNSlSFRLWuSqrBqHA1E/Q3sVeC/1ORM=; b=tpWxYuiBVvPtm88aQ5LpPGjCgq
-	Ue7m4dEhBbUIBrAF2QMjeqt3w7ux1gU1dfFOrplHp3ByIzVNkwPJVdiTNzgVraWEl6oNxE4MiTlbq
-	zXZuzOl3P801IbNRBALk9IM33svz2QMcKesycVZH2o/NayAghPGjIWRKqIkjCw1NbAJ4=;
-Received: from host146.205.237.98.conversent.net ([205.237.98.146] helo=infra.test-lab.xenproject.org)
-	by mail.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <osstest-admin@xenproject.org>)
-	id 1kSq5F-0001XH-Ji; Wed, 14 Oct 2020 23:21:25 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
-	by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <osstest-admin@xenproject.org>)
-	id 1kSq5F-0002Xt-7J; Wed, 14 Oct 2020 23:21:25 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim 4.92)
-	(envelope-from <osstest-admin@xenproject.org>)
-	id 1kSq5F-0006iA-6n; Wed, 14 Oct 2020 23:21:25 +0000
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-155818-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+	(envelope-from <SRS0=0U26=DW=protonmail.com=dylangerdaly@srs-us1.protection.inumbo.net>)
+	id 1kSrHd-0000K9-5n
+	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 00:38:17 +0000
+X-Inumbo-ID: e283bce3-2633-4cf9-b245-c34d745a5b1b
+Received: from mail-40131.protonmail.ch (unknown [185.70.40.131])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id e283bce3-2633-4cf9-b245-c34d745a5b1b;
+	Thu, 15 Oct 2020 00:38:14 +0000 (UTC)
+Date: Thu, 15 Oct 2020 00:38:05 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
+	s=protonmail; t=1602722292;
+	bh=/fqAIMxPWPvzaXeK8gBlRXsB72ne3oC35pwC7ZnmDbM=;
+	h=Date:To:From:Reply-To:Subject:From;
+	b=MNyNJ6f163HsWWNZga8uncBJHsFuX2ma55N+Z33YlxQQA+XqnrlgV3Z45hLFSJ1AA
+	 Z7T7uG+YN3+O2V4VrMU1rdBETDjAbWs0tndhRlniuL8V2BCC0RcvTcCgxWCPPJihje
+	 u/cApWv+/BF59J4qoyI1IT+iyORuWshCFkaUa4W4=
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+From: Dylanger Daly <dylangerdaly@protonmail.com>
+Reply-To: Dylanger Daly <dylangerdaly@protonmail.com>
+Subject: Ryzen 4000 (Mobile) Softlocks/Micro-stutters
+Message-ID: <9lQU_gCfRzGyyNb2j86pxTMi1IET1Iq7iK3994agUZPrTI5Xd-aCJAaRYuJlD3L5LT2WaV4N3-YF4xKl5ukialT0M_YD0ve6gmDFFfatpXw=@protonmail.com>
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 155818: regressions - FAIL
-X-Osstest-Failures:
-    xen-unstable-smoke:build-amd64:xen-build:fail:regression
-    xen-unstable-smoke:build-amd64-libvirt:build-check(1):blocked:nonblocking
-    xen-unstable-smoke:test-amd64-amd64-libvirt:build-check(1):blocked:nonblocking
-    xen-unstable-smoke:test-amd64-amd64-xl-qemuu-debianhvm-amd64:build-check(1):blocked:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This:
-    xen=f776e5fb3ee699745f6442ec8c47d0fa647e0575
-X-Osstest-Versions-That:
-    xen=884ef07f4f66b9d12fc4811047db95ba649db85c
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Wed, 14 Oct 2020 23:21:25 +0000
+Content-Type: multipart/alternative;
+ boundary="b1_0o8C518sVj5uzonzPIXYDTCbYqkejcC6SFvq1G2c"
 
-flight 155818 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/155818/
+This is a multi-part message in MIME format.
 
-Regressions :-(
+--b1_0o8C518sVj5uzonzPIXYDTCbYqkejcC6SFvq1G2c
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: base64
 
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- build-amd64                   6 xen-build                fail REGR. vs. 155805
+SGkgQWxsLAoKSSdtIGN1cnJlbnRseSB1c2luZyBYZW4gNC4xNCAoUXViZXMgNC4xIE9TKSBvbiBh
+IFJ5emVuIDcgNDc1MFUgUFJPLCBieSBkZWZhdWx0IEknbGwgZXhwZXJpZW5jZSBzb2Z0bG9ja3Mg
+d2hlcmUgdGhlIG1vdXNlIGZvciBleGFtcGxlIHdpbGwgam9sdCBmcm9tIHRpbWUgdG8gdGltZSwg
+aW4gdGhpcyBzdGF0ZSBpdCdzIG5vdCB1c2FibGUuCgpBZGRpbmcgYGRvbTBfbWF4X3ZjcHVzPTEg
+ZG9tMF92Y3B1c19waW5gIHRvIFhlbidzIENNRExJTkUgcmVzdWx0cyBpbiBubyBtb3JlIGpvbHRp
+bmcgaG93ZXZlciBwZXJmb3JtYW5jZSBpc24ndCB3aGF0IGl0IHNob3VsZCBiZSBvbiBhbiA4IGNv
+cmUgQ1BVLCBzb2Z0bG9ja3MgYXJlIHN0aWxsIGEgcHJvYmxlbSB3aXRoaW4gZG9tVSdzLCBhbnkg
+c29ydCBvZiBVSSBhbmltYXRpb24gZm9yIGV4YW1wbGUuCgpSZXZlcnRpbmcgW3RoaXMgY29tbWl0
+ICg4ZTJhYTc2ZGMxNjcwZTgyZWFhMTU2ODMzNTM4NTNiYzY2YmY1NGZjKV0oaHR0cHM6Ly9naXRo
+dWIuY29tL3hlbi1wcm9qZWN0L3hlbi9jb21taXQvOGUyYWE3NmRjMTY3MGU4MmVhYTE1NjgzMzUz
+ODUzYmM2NmJmNTRmYykgcmVzdWx0cyBpbiBldmVuIHdvcnNlIHBlcmZvcm1hbmNlIHdpdGggb3Ig
+d2l0aG91dCB0aGUgYWJvdmUgY2hhbmdlcyB0byBDTURMSU5FLCBhbmQgaXQncyBub3QgdXNhYmxl
+IGF0IGFsbC4KCkRvZXMgYW55b25lIGhhdmUgYW55IHBvaW50ZXJzPwoKQ2hlZXJz
 
-Tests which did not succeed, but are not blocking:
- build-amd64-libvirt           1 build-check(1)               blocked  n/a
- test-amd64-amd64-libvirt      1 build-check(1)               blocked  n/a
- test-amd64-amd64-xl-qemuu-debianhvm-amd64  1 build-check(1)        blocked n/a
- test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
+--b1_0o8C518sVj5uzonzPIXYDTCbYqkejcC6SFvq1G2c
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: base64
 
-version targeted for testing:
- xen                  f776e5fb3ee699745f6442ec8c47d0fa647e0575
-baseline version:
- xen                  884ef07f4f66b9d12fc4811047db95ba649db85c
-
-Last test of basis   155805  2020-10-14 13:00:28 Z    0 days
-Testing same since   155811  2020-10-14 18:03:04 Z    0 days    2 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Michal Orzel <michal.orzel@arm.com>
-
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  fail    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          blocked 
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    blocked 
- test-amd64-amd64-libvirt                                     blocked 
+PGRpdj5IaSBBbGwsPGJyPjwvZGl2PjxkaXY+PGJyPjwvZGl2PjxkaXY+SSdtIGN1cnJlbnRseSB1
+c2luZyBYZW4gNC4xNCAoUXViZXMgNC4xIE9TKSBvbiBhIFJ5emVuIDcmbmJzcDs0NzUwVSBQUk8s
+IGJ5IGRlZmF1bHQgSSdsbCBleHBlcmllbmNlIHNvZnRsb2NrcyB3aGVyZSB0aGUgbW91c2UgZm9y
+IGV4YW1wbGUgd2lsbCBqb2x0IGZyb20gdGltZSB0byB0aW1lLCBpbiB0aGlzIHN0YXRlIGl0J3Mg
+bm90IHVzYWJsZS48YnI+PC9kaXY+PGRpdj48YnI+PC9kaXY+PGRpdj5BZGRpbmcgYGRvbTBfbWF4
+X3ZjcHVzPTEgZG9tMF92Y3B1c19waW5gIHRvIFhlbidzIENNRExJTkUgcmVzdWx0cyBpbiBubyBt
+b3JlIGpvbHRpbmcgaG93ZXZlciBwZXJmb3JtYW5jZSBpc24ndCB3aGF0IGl0IHNob3VsZCBiZSBv
+biBhbiA4IGNvcmUgQ1BVLCBzb2Z0bG9ja3MgYXJlIHN0aWxsIGEgcHJvYmxlbSB3aXRoaW4gZG9t
+VSdzLCBhbnkgc29ydCBvZiBVSSBhbmltYXRpb24gZm9yIGV4YW1wbGUuPGJyPjwvZGl2PjxkaXY+
+PGJyPjwvZGl2PjxkaXY+UmV2ZXJ0aW5nJm5ic3A7PGEgaHJlZj0iaHR0cHM6Ly9naXRodWIuY29t
+L3hlbi1wcm9qZWN0L3hlbi9jb21taXQvOGUyYWE3NmRjMTY3MGU4MmVhYTE1NjgzMzUzODUzYmM2
+NmJmNTRmYyIgdGFyZ2V0PSJfYmxhbmsiIHRpdGxlPSJodHRwczovL2dpdGh1Yi5jb20veGVuLXBy
+b2plY3QveGVuL2NvbW1pdC84ZTJhYTc2ZGMxNjcwZTgyZWFhMTU2ODMzNTM4NTNiYzY2YmY1NGZj
+IiByZWw9Im5vZm9sbG93Ij50aGlzIGNvbW1pdCAoOGUyYWE3NmRjMTY3MGU4MmVhYTE1NjgzMzUz
+ODUzYmM2NmJmNTRmYyk8L2E+Jm5ic3A7cmVzdWx0cyBpbiBldmVuIHdvcnNlIHBlcmZvcm1hbmNl
+IHdpdGggb3Igd2l0aG91dCB0aGUgYWJvdmUgY2hhbmdlcyB0byBDTURMSU5FLCBhbmQgaXQncyBu
+b3QgdXNhYmxlIGF0IGFsbC48YnI+PC9kaXY+PGRpdj48YnI+PC9kaXY+PGRpdj5Eb2VzIGFueW9u
+ZSBoYXZlIGFueSBwb2ludGVycz88YnI+PC9kaXY+PGRpdj48YnI+PC9kaXY+PGRpdj5DaGVlcnM8
+L2Rpdj4=
 
 
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
+--b1_0o8C518sVj5uzonzPIXYDTCbYqkejcC6SFvq1G2c--
 
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Not pushing.
-
-------------------------------------------------------------
-commit f776e5fb3ee699745f6442ec8c47d0fa647e0575
-Author: Michal Orzel <michal.orzel@arm.com>
-Date:   Wed Oct 14 12:05:41 2020 +0200
-
-    xen/arm: Document the erratum #853709 related to Cortex A72
-    
-    The Cortex-A72 erratum #853709 is the same as the Cortex-A57
-    erratum #852523. As the latter is already workaround, we only
-    need to update the documentation.
-    
-    Signed-off-by: Michal Orzel <michal.orzel@arm.com>
-    [julieng: Reworded the commit message]
-    Reviewed-by: Julien Grall <jgrall@amazon.com>
-    Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
-(qemu changes not included)
 
