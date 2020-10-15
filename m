@@ -4,26 +4,26 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-6.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=no autolearn_force=no version=3.4.0
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 98E6DC433E7
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 07:00:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C58B4C433DF
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 07:11:58 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 097EE22247
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 07:00:43 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 3B54A22243
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 07:11:57 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="GoiSPSAL"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 097EE22247
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="GAA8+mXr"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3B54A22243
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.7108.18625 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.7112.18637 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kSxFF-00027v-1H; Thu, 15 Oct 2020 07:00:13 +0000
+	id 1kSxQD-00036V-0L; Thu, 15 Oct 2020 07:11:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 7108.18625; Thu, 15 Oct 2020 07:00:13 +0000
+Received: by outflank-mailman (output) from mailman id 7112.18637; Thu, 15 Oct 2020 07:11:32 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,128 +38,91 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kSxFE-00027o-Tu; Thu, 15 Oct 2020 07:00:12 +0000
-Received: by outflank-mailman (input) for mailman id 7108;
- Thu, 15 Oct 2020 07:00:11 +0000
+	id 1kSxQC-00036O-TV; Thu, 15 Oct 2020 07:11:32 +0000
+Received: by outflank-mailman (input) for mailman id 7112;
+ Thu, 15 Oct 2020 07:11:31 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=MKI8=DW=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kSxFD-00027j-L1
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 07:00:11 +0000
+ id 1kSxQB-00036F-Ik
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 07:11:31 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id f1e7be84-3501-444e-b44b-ac9151109f10;
- Thu, 15 Oct 2020 07:00:10 +0000 (UTC)
+ id 95f3307b-82c9-4a3c-a69a-291fda1b08bb;
+ Thu, 15 Oct 2020 07:11:30 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 52FC8AD83;
- Thu, 15 Oct 2020 07:00:09 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 99D3DAC24;
+ Thu, 15 Oct 2020 07:11:29 +0000 (UTC)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=MKI8=DW=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
-	id 1kSxFD-00027j-L1
-	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 07:00:11 +0000
-X-Inumbo-ID: f1e7be84-3501-444e-b44b-ac9151109f10
+	id 1kSxQB-00036F-Ik
+	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 07:11:31 +0000
+X-Inumbo-ID: 95f3307b-82c9-4a3c-a69a-291fda1b08bb
 Received: from mx2.suse.de (unknown [195.135.220.15])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id f1e7be84-3501-444e-b44b-ac9151109f10;
-	Thu, 15 Oct 2020 07:00:10 +0000 (UTC)
+	id 95f3307b-82c9-4a3c-a69a-291fda1b08bb;
+	Thu, 15 Oct 2020 07:11:30 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1602745209;
+	t=1602745889;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=stXzUWWNNn0tlYniH0/+yke3yDVk8S39bV2uE3ntIgc=;
-	b=GoiSPSALtfp/uFpw8+LcU0TRAdcuBcEoQlikDW7cWDqBLxvZD7zfSMY9QXM+6vumg2WGHE
-	7e4Hs4JFbvg18QxBT45Tz/S0JReTZKlCi2t5B3h1h5RLx8hNj1PQp7aX4bcnx1pQHn1LGj
-	078BOWyRNhkLuWechv9gpKESz08raic=
+	bh=3D1rJEdDtfrGwBnMAHJ2Ueb32PjJSc4BSKbXBS3PCFk=;
+	b=GAA8+mXr1m/g89JLb7UjsDlPKIADzmF6pG/luWgArmvILNwiy/Ac2WZMmH/3nVlH3Y2OTo
+	Z4FcSrEXSD6ClylncaE09z553+JUSREgwYo7vh3l138aRvI0czL6Fn/4i3REA109sEHIAD
+	DAgKtgsKlxR+Yc9ykb4Fo2fE2YwSeH8=
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 52FC8AD83;
-	Thu, 15 Oct 2020 07:00:09 +0000 (UTC)
-Subject: Re: [PATCH] libelf: Handle PVH kernels lacking ENTRY elfnote
-To: Jason Andryuk <jandryuk@gmail.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
- Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
- Wei Liu <wl@xen.org>
-References: <20201014153150.83875-1-jandryuk@gmail.com>
- <6d373cae-c7dc-e109-1df3-ccbbe4bdd9c8@suse.com>
- <CAKf6xpv5GNjw0pjOxEqdVj2+C6v+O5PDZG5yYkNfytDjUT_r5w@mail.gmail.com>
+	by mx2.suse.de (Postfix) with ESMTP id 99D3DAC24;
+	Thu, 15 Oct 2020 07:11:29 +0000 (UTC)
+Subject: Re: [PATCH 1/2] x86/intel: insert Ice Lake X (server) model numbers
+To: Igor Druzhinin <igor.druzhinin@citrix.com>
+Cc: xen-devel@lists.xenproject.org, andrew.cooper3@citrix.com,
+ roger.pau@citrix.com, wl@xen.org, jun.nakajima@intel.com,
+ kevin.tian@intel.com
+References: <1602558169-23140-1-git-send-email-igor.druzhinin@citrix.com>
+ <ca9a1cce-1e51-0f55-4527-42f48bc7d6ab@suse.com>
+ <e30f7f98-ee1a-1a24-0496-01911a79c861@citrix.com>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <4229544b-e98d-6f3c-14aa-a884c403ba74@suse.com>
-Date: Thu, 15 Oct 2020 09:00:09 +0200
+Message-ID: <9c208aa0-ec20-7ee5-38ac-faaf1fef5aee@suse.com>
+Date: Thu, 15 Oct 2020 09:11:29 +0200
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.12.1
 MIME-Version: 1.0
-In-Reply-To: <CAKf6xpv5GNjw0pjOxEqdVj2+C6v+O5PDZG5yYkNfytDjUT_r5w@mail.gmail.com>
+In-Reply-To: <e30f7f98-ee1a-1a24-0496-01911a79c861@citrix.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-On 14.10.2020 18:27, Jason Andryuk wrote:
-> On Wed, Oct 14, 2020 at 12:02 PM Jan Beulich <jbeulich@suse.com> wrote:
+On 14.10.2020 18:42, Igor Druzhinin wrote:
+> On 14/10/2020 16:47, Jan Beulich wrote:
+>> On 13.10.2020 05:02, Igor Druzhinin wrote:
+>>> LBR, C-state MSRs and if_pschange_mc erratum applicability should correspond
+>>> to Ice Lake desktop according to External Design Specification vol.2.
 >>
->> On 14.10.2020 17:31, Jason Andryuk wrote:
->>> Linux kernels only have an ENTRY elfnote when built with CONFIG_PV.  A
->>> kernel build CONFIG_PVH=y CONFIG_PV=n lacks the note.  In this case,
->>> virt_entry will be UNSET_ADDR, overwritten by the ELF header e_entry,
->>> and fail the check against the virt address range.
+>> Could you tell me where this is publicly available? Even after spending
+>> quite a bit of time on searching for it, I can't seem to be able to
+>> find it. And the SDM doesn't have enough information (yet).
 > 
-> Oh, these should be CONFIG_XEN_PVH=y and CONFIG_XEN_PV=n
+> True that SDM doesn't have this data. As I mentioned that data is taken from
+> External Design Specification for Ice Lake server which is accessed using Intel
+> account. I'm not completely sure it is right to make changes in open source
+> project like Linux or Xen based on information which is not publicly available
+> yet. But Intel is frequently doing this with Linux : even my second patch uses
+> data taken from one of these documents and was committed by Intel to Linux first.
 > 
->>> Change the code to only check virt_entry against the virtual address
->>> range if it was set upon entry to the function.
->>
->> Not checking at all seems wrong to me. The ELF spec anyway says
->> "virtual address", so an out of bounds value is at least suspicious.
->>
->>> Maybe the overwriting of virt_entry could be removed, but I don't know
->>> if there would be unintended consequences where (old?) kernels don't
->>> have an elfnote, but do have an in-range e_entry?  The failing kernel I
->>> just looked at has an e_entry of 0x1000000.
->>
->> And if you dropped the overwriting, what entry point would we use
->> in the absence of an ELF note?
-> 
-> elf_xen_note_check currently has:
-> 
->     /* PVH only requires one ELF note to be set */
->     if ( parms->phys_entry != UNSET_ADDR32 )
->     {
->         elf_msg(elf, "ELF: Found PVH image\n");
->         return 0;
->     }
-> 
->> I'd rather put up the option of adjusting the entry (or the check),
->> if it looks like a valid physical address.
-> 
-> The function doesn't know if the image will be booted PV or PVH, so I
-> guess we do all the checks, but use 'parms->phys_entry != UNSET_ADDR32
-> && parms->virt_entry == UNSET_ADDR' to conditionally skip checking
-> virt?
+> Do we need the information publicly available to commit these changes as well?
 
-Like Jürgen, the purpose of the patch hadn't become clear to me
-from reading the description. As I understand it now, we're currently
-refusing to boot such a kernel for no reason. If that's correct,
-perhaps you could say so in the description in a more direct way?
+Not necessarily, but it means this patch needs to be acked by someone
+having access to the doc, which hence isn't me. Given the last SDM
+update was in May, I'm expecting a refresh any day now. Iirc updates
+where frequently done on a roughly quarterly basis.
 
-As far as actual code adjustments go - how much of
-elf_xen_addr_calc_check() is actually applicable when booting PVH?
+> If not, we can run with these changes in our patchqueue until it gets out properly.
 
-And why is there no bounds check of ->phys_entry paralleling the
-->virt_entry one?
-
-On the whole, as long as we don't know what mode we're planning to
-boot in, we can't skip any checks, as the mere presence of
-XEN_ELFNOTE_PHYS32_ENTRY doesn't mean that's also what gets used.
-Therefore simply bypassing any of the checks is not an option. In
-particular what you suggest would lead to failure to check
-e_entry-derived ->virt_entry when the PVH-specific note is
-present but we're booting in PV mode. For now I don't see how to
-address this without making the function aware of the intended
-booting mode.
+Well, I'm all for having such changes upstream as early as possible.
 
 Jan
 
