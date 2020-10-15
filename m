@@ -2,28 +2,29 @@ Return-Path: <SRS0=IsAa=DW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
-	autolearn=no autolearn_force=no version=3.4.0
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A4D44C433E7
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 16:39:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D1E06C433E7
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 16:45:17 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2EEE722210
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 16:39:22 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 4687622269
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 16:45:16 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="bvxmMSh9"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2EEE722210
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ZsOiFQnp"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4687622269
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.7566.19889 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.7572.19925 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kT6HY-000464-2g; Thu, 15 Oct 2020 16:39:12 +0000
+	id 1kT6NG-00054s-EU; Thu, 15 Oct 2020 16:45:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 7566.19889; Thu, 15 Oct 2020 16:39:12 +0000
+Received: by outflank-mailman (output) from mailman id 7572.19925; Thu, 15 Oct 2020 16:45:06 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,84 +39,209 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kT6HX-00045x-Vq; Thu, 15 Oct 2020 16:39:11 +0000
-Received: by outflank-mailman (input) for mailman id 7566;
- Thu, 15 Oct 2020 16:39:10 +0000
+	id 1kT6NG-00054h-AJ; Thu, 15 Oct 2020 16:45:06 +0000
+Received: by outflank-mailman (input) for mailman id 7572;
+ Thu, 15 Oct 2020 16:45:05 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=VKkI=DW=gmail.com=tamas.k.lengyel@srs-us1.protection.inumbo.net>)
- id 1kT6HW-00045r-R8
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:39:10 +0000
-Received: from mail-wm1-x331.google.com (unknown [2a00:1450:4864:20::331])
+ <SRS0=YEeM=DW=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
+ id 1kT6NF-0004yr-54
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:45:05 +0000
+Received: from mail-lf1-x142.google.com (unknown [2a00:1450:4864:20::142])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 80e109db-455d-485e-896b-56324b9a02b6;
- Thu, 15 Oct 2020 16:39:10 +0000 (UTC)
-Received: by mail-wm1-x331.google.com with SMTP id d3so4453774wma.4
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2020 09:39:10 -0700 (PDT)
+ id 57abc5f2-97a3-41c2-8c74-148dd32caf9d;
+ Thu, 15 Oct 2020 16:44:56 +0000 (UTC)
+Received: by mail-lf1-x142.google.com with SMTP id c141so4370022lfg.5
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2020 09:44:56 -0700 (PDT)
+Received: from otyshchenko.www.tendawifi.com ([212.22.223.21])
+ by smtp.gmail.com with ESMTPSA id v13sm1482495ljh.66.2020.10.15.09.44.54
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Thu, 15 Oct 2020 09:44:54 -0700 (PDT)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=VKkI=DW=gmail.com=tamas.k.lengyel@srs-us1.protection.inumbo.net>)
-	id 1kT6HW-00045r-R8
-	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:39:10 +0000
-X-Inumbo-ID: 80e109db-455d-485e-896b-56324b9a02b6
-Received: from mail-wm1-x331.google.com (unknown [2a00:1450:4864:20::331])
+	(envelope-from <SRS0=YEeM=DW=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
+	id 1kT6NF-0004yr-54
+	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:45:05 +0000
+X-Inumbo-ID: 57abc5f2-97a3-41c2-8c74-148dd32caf9d
+Received: from mail-lf1-x142.google.com (unknown [2a00:1450:4864:20::142])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 80e109db-455d-485e-896b-56324b9a02b6;
-	Thu, 15 Oct 2020 16:39:10 +0000 (UTC)
-Received: by mail-wm1-x331.google.com with SMTP id d3so4453774wma.4
-        for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2020 09:39:10 -0700 (PDT)
+	id 57abc5f2-97a3-41c2-8c74-148dd32caf9d;
+	Thu, 15 Oct 2020 16:44:56 +0000 (UTC)
+Received: by mail-lf1-x142.google.com with SMTP id c141so4370022lfg.5
+        for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2020 09:44:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=4t3gw4yWmAQOQyd6UUTc0220EM21Rw8nlfAG9nvqlYk=;
-        b=bvxmMSh9hdYzR5Aai56AVw9UTe98y68mbRJMHnMNLxpagXf7jNetayLprkr9u3aoLw
-         mTgInE8Yz/DERCDve3upRRQpxjv0058NrIBd+ILJvR4KAPc1XLH8/8m6Gn02Sq9XDbBg
-         HISI3+7vFYpCiyL0Uz8gaU9F7EssFKTlKP/jEo3/lnk2t7WA2+7h70P23hl/Go/g4jKt
-         a7YyVV8bjqzLR6b7Y6c/mFYzx/dykfXA9RSFuPnIbnQVQbIiZ7Z0DOzmS7Wis85Eec1d
-         ELv2+xSjCv3OflZ9CVajGZm1AqK5e/XjEpcRwMQ0IXyUXEEbty9sFP9S0JDwvuBmNk6x
-         Kakg==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references;
+        bh=mmqWLOWImzeNp56Irm3zs3dKXoDrkJx4SfyF9oEDLUs=;
+        b=ZsOiFQnpPnZdCYSQBVWu3vFDVo/kvZhqIi2OHTmpT5tDFt99YhqKH/TTcZ2CmHnvT/
+         j+ie9IoJGAMqfAnD7BO4U9HVeu5a1tz8O+qkaP6ETO1Dq0KY6FL0rMWiJhWNFq30gRRP
+         f6NnvRtAot/LJ68p4cMTYOKKI01Ki1/v5/qLYmIMzQTwjs+Qe4CVbS3ZI6blpFSuq3La
+         knvLm2FlC7vCBLYhWPhJtGuBFSKeb76qg5H7YSOpPQzZnIBOCPxHvgXzEopSM1iYGnVl
+         W10ihqrjlvYE4AiawmqyIUKaVJDUo6CdwyEF3/1ddzxDIBk6yOyem5tnwsWhuMPE+clD
+         3+zw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=4t3gw4yWmAQOQyd6UUTc0220EM21Rw8nlfAG9nvqlYk=;
-        b=ayZNxeTpScOlF6wP3f19aGiZxXso0Lr0OP8DmlGRbR18ih9DYKZk2PW72DfH5BFKFR
-         4ngPuH84V7ywMhMdzM4EYWoi8YHf5SD3gMxZ5R3Is3Y6zgHNv9zR4MOK72tvm7jFJwLS
-         gV5BAWWPAEyiSBlwvU/4JbjhKXKy+mFxuBb+fSd+GdrOKEF2VYwmbZpONfhnDwC9Vk/C
-         CM4wjBWrjFDP+hQNPGIYrqtlkk7/VwEe+/PLYcg+qEE4LoX9apoXgaJetLL0dd2VCAWV
-         rn6H3xvONcRC6Hj+1OPPkkrswREpYUbkMcUxO9+c2imvV2dvuM037e7xVbl1C+hWmBFv
-         Z3YA==
-X-Gm-Message-State: AOAM5302T8v9F2KWCmq8RBtTdFhgScc5AWixgxaoSPS0HNCSjDD9G6uA
-	QDGnT6gZWNZkWrSUSaIhZ0L1Z4JxXoD5+OzhwrE=
-X-Google-Smtp-Source: ABdhPJx5MLKwCgbdSGo9DPo2IbDvS7j6x2uRxd46dPkJThVy3wsb/cRbLucl0ZdGavyJb23nk5v5sYWMFwecz0ziIqc=
-X-Received: by 2002:a1c:32c6:: with SMTP id y189mr5145549wmy.51.1602779949175;
- Thu, 15 Oct 2020 09:39:09 -0700 (PDT)
-MIME-Version: 1.0
-References: <CAKf6xpv-LRCuo-qHHWMuukYtvJiR-i+-YhLUOZeqoAFd-=swEQ@mail.gmail.com>
- <1a3b90f4-564e-84d3-fd6a-3454e8753579@citrix.com> <20201015113109.GA68032@Air-de-Roger>
- <CAKf6xpsJYT7VCeaf6TxPNK1QD+3U9E8ST7E+mWtfDjw0k9L9dA@mail.gmail.com>
-In-Reply-To: <CAKf6xpsJYT7VCeaf6TxPNK1QD+3U9E8ST7E+mWtfDjw0k9L9dA@mail.gmail.com>
-From: Tamas K Lengyel <tamas.k.lengyel@gmail.com>
-Date: Thu, 15 Oct 2020 12:38:33 -0400
-Message-ID: <CABfawhnwdkB01LKYbcNhyyhFXF2LbLFFmeN5kqh7VaYPevjzuw@mail.gmail.com>
-Subject: Re: i915 dma faults on Xen
-To: Jason Andryuk <jandryuk@gmail.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
-	Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
-Content-Type: text/plain; charset="UTF-8"
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references;
+        bh=mmqWLOWImzeNp56Irm3zs3dKXoDrkJx4SfyF9oEDLUs=;
+        b=koR69UWYrvIDJAwXrafEG34W9LbwtPc732jE4KyayubzVJCoftIif2oQ/5IPoj1w0z
+         7dbUBYwp7kqXjQ22owbN0Z2cumgeO3GJwjl/S71luwMXOy/JNgnD1MGj0y+tvMHe/yCv
+         I2AygLM3duQzcvlSq9+zWqEm5ufm/MHY0HTSvlQ9Uqc1QGx72soOp8WLLc/gOWeOIB56
+         Sx23zMddAdpkICeUrT0yoOBNRnfAsE2o1GZss+HR+hyuJxBXuIciAdLZaAr09Fb+/U5L
+         CNV9n8HMpSuvxFTcNOYg58tfdyEIGXjNxYd9qGnsqDQTZl4TNdLakB3L4M9n+jsVQVSg
+         f2JQ==
+X-Gm-Message-State: AOAM533waJkx7bqfe+y66XDkQTgwP0nyaXfvjcc7/dPm/7k3WpbL2OYu
+	FbBqj6CF84jvPAzXsgmfRVRqCpEorEshlA==
+X-Google-Smtp-Source: ABdhPJy6EuL1uoUXZSQ5V/dK7lmolV1NcGlO5kNY6cD6uQs/KAZrdgDN68W8RZBxYvyVnopQ63KKng==
+X-Received: by 2002:ac2:5699:: with SMTP id 25mr1486368lfr.396.1602780295173;
+        Thu, 15 Oct 2020 09:44:55 -0700 (PDT)
+Received: from otyshchenko.www.tendawifi.com ([212.22.223.21])
+        by smtp.gmail.com with ESMTPSA id v13sm1482495ljh.66.2020.10.15.09.44.54
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Thu, 15 Oct 2020 09:44:54 -0700 (PDT)
+From: Oleksandr Tyshchenko <olekstysh@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+	Paul Durrant <paul@xen.org>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien.grall@arm.com>
+Subject: [PATCH V2 03/23] xen/ioreq: Make x86's hvm_ioreq_needs_completion() common
+Date: Thu, 15 Oct 2020 19:44:14 +0300
+Message-Id: <1602780274-29141-4-git-send-email-olekstysh@gmail.com>
+X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1602780274-29141-1-git-send-email-olekstysh@gmail.com>
+References: <1602780274-29141-1-git-send-email-olekstysh@gmail.com>
 
-> > Can you paste the memory map as printed by Xen when booting, and what
-> > command line are you using to boot Xen.
->
-> So this is OpenXT, and it's booting EFI -> xen -> tboot -> xen
+From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 
-Unrelated comment: since tboot now has a PE build
-(http://hg.code.sf.net/p/tboot/code/rev/5c68f0963a78) I think it would
-be time for OpenXT to drop the weird efi->xen->tboot->xen flow and
-just do efi->tboot->xen. Only reason we did efi->xen->tboot was
-because tboot didn't have a PE build at the time. It's a very hackish
-solution that's no longer needed.
+The IOREQ is a common feature now and this helper will be used
+on Arm as is. Move it to xen/ioreq.h and remove "hvm" prefix.
 
-Tamas
+Although PIO handling on Arm is not introduced with the current series
+(it will be implemented when we add support for vPCI), technically
+the PIOs exist on Arm (however they are accessed the same way as MMIO)
+and it would be better not to diverge now.
+
+Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+CC: Julien Grall <julien.grall@arm.com>
+
+---
+Please note, this is a split/cleanup/hardening of Julien's PoC:
+"Add support for Guest IO forwarding to a device emulator"
+
+Changes RFC -> V1:
+   - new patch, was split from:
+     "[RFC PATCH V1 01/12] hvm/ioreq: Make x86's IOREQ feature common"
+
+Changes V1 -> V2:
+   - remove "hvm" prefix
+---
+ xen/arch/x86/hvm/emulate.c     | 4 ++--
+ xen/arch/x86/hvm/io.c          | 2 +-
+ xen/common/ioreq.c             | 4 ++--
+ xen/include/asm-x86/hvm/vcpu.h | 7 -------
+ xen/include/xen/ioreq.h        | 7 +++++++
+ 5 files changed, 12 insertions(+), 12 deletions(-)
+
+diff --git a/xen/arch/x86/hvm/emulate.c b/xen/arch/x86/hvm/emulate.c
+index 24cf85f..5700274 100644
+--- a/xen/arch/x86/hvm/emulate.c
++++ b/xen/arch/x86/hvm/emulate.c
+@@ -336,7 +336,7 @@ static int hvmemul_do_io(
+             rc = hvm_send_ioreq(s, &p, 0);
+             if ( rc != X86EMUL_RETRY || currd->is_shutting_down )
+                 vio->io_req.state = STATE_IOREQ_NONE;
+-            else if ( !hvm_ioreq_needs_completion(&vio->io_req) )
++            else if ( !ioreq_needs_completion(&vio->io_req) )
+                 rc = X86EMUL_OKAY;
+         }
+         break;
+@@ -2649,7 +2649,7 @@ static int _hvm_emulate_one(struct hvm_emulate_ctxt *hvmemul_ctxt,
+     if ( rc == X86EMUL_OKAY && vio->mmio_retry )
+         rc = X86EMUL_RETRY;
+ 
+-    if ( !hvm_ioreq_needs_completion(&vio->io_req) )
++    if ( !ioreq_needs_completion(&vio->io_req) )
+         completion = HVMIO_no_completion;
+     else if ( completion == HVMIO_no_completion )
+         completion = (vio->io_req.type != IOREQ_TYPE_PIO ||
+diff --git a/xen/arch/x86/hvm/io.c b/xen/arch/x86/hvm/io.c
+index 3e09d9b..b220d6b 100644
+--- a/xen/arch/x86/hvm/io.c
++++ b/xen/arch/x86/hvm/io.c
+@@ -135,7 +135,7 @@ bool handle_pio(uint16_t port, unsigned int size, int dir)
+ 
+     rc = hvmemul_do_pio_buffer(port, size, dir, &data);
+ 
+-    if ( hvm_ioreq_needs_completion(&vio->io_req) )
++    if ( ioreq_needs_completion(&vio->io_req) )
+         vio->io_completion = HVMIO_pio_completion;
+ 
+     switch ( rc )
+diff --git a/xen/common/ioreq.c b/xen/common/ioreq.c
+index d3433d7..c89df7a 100644
+--- a/xen/common/ioreq.c
++++ b/xen/common/ioreq.c
+@@ -159,7 +159,7 @@ static bool hvm_wait_for_io(struct hvm_ioreq_vcpu *sv, ioreq_t *p)
+     }
+ 
+     p = &sv->vcpu->arch.hvm.hvm_io.io_req;
+-    if ( hvm_ioreq_needs_completion(p) )
++    if ( ioreq_needs_completion(p) )
+         p->data = data;
+ 
+     sv->pending = false;
+@@ -185,7 +185,7 @@ bool handle_hvm_io_completion(struct vcpu *v)
+     if ( sv && !hvm_wait_for_io(sv, get_ioreq(s, v)) )
+         return false;
+ 
+-    vio->io_req.state = hvm_ioreq_needs_completion(&vio->io_req) ?
++    vio->io_req.state = ioreq_needs_completion(&vio->io_req) ?
+         STATE_IORESP_READY : STATE_IOREQ_NONE;
+ 
+     msix_write_completion(v);
+diff --git a/xen/include/asm-x86/hvm/vcpu.h b/xen/include/asm-x86/hvm/vcpu.h
+index 5ccd075..6c1feda 100644
+--- a/xen/include/asm-x86/hvm/vcpu.h
++++ b/xen/include/asm-x86/hvm/vcpu.h
+@@ -91,13 +91,6 @@ struct hvm_vcpu_io {
+     const struct g2m_ioport *g2m_ioport;
+ };
+ 
+-static inline bool hvm_ioreq_needs_completion(const ioreq_t *ioreq)
+-{
+-    return ioreq->state == STATE_IOREQ_READY &&
+-           !ioreq->data_is_ptr &&
+-           (ioreq->type != IOREQ_TYPE_PIO || ioreq->dir != IOREQ_WRITE);
+-}
+-
+ struct nestedvcpu {
+     bool_t nv_guestmode; /* vcpu in guestmode? */
+     void *nv_vvmcx; /* l1 guest virtual VMCB/VMCS */
+diff --git a/xen/include/xen/ioreq.h b/xen/include/xen/ioreq.h
+index 6db4392..8e1603c 100644
+--- a/xen/include/xen/ioreq.h
++++ b/xen/include/xen/ioreq.h
+@@ -24,6 +24,13 @@
+ struct hvm_ioreq_server *get_ioreq_server(const struct domain *d,
+                                           unsigned int id);
+ 
++static inline bool ioreq_needs_completion(const ioreq_t *ioreq)
++{
++    return ioreq->state == STATE_IOREQ_READY &&
++           !ioreq->data_is_ptr &&
++           (ioreq->type != IOREQ_TYPE_PIO || ioreq->dir != IOREQ_WRITE);
++}
++
+ bool hvm_io_pending(struct vcpu *v);
+ bool handle_hvm_io_completion(struct vcpu *v);
+ bool is_ioreq_server_page(struct domain *d, const struct page_info *page);
+-- 
+2.7.4
+
 
