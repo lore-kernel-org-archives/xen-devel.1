@@ -8,23 +8,23 @@ X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B22BC433E7
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8F986C43457
 	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 16:53:36 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E54CE2068D
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 16:53:35 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 17272206CA
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2020 16:53:36 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="UB0MpQUy"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E54CE2068D
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Avq2Hoh8"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 17272206CA
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.7619.20131 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.7607.20033 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kT6VH-0007Pk-Hs; Thu, 15 Oct 2020 16:53:23 +0000
+	id 1kT6VA-00078e-KF; Thu, 15 Oct 2020 16:53:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 7619.20131; Thu, 15 Oct 2020 16:53:23 +0000
+Received: by outflank-mailman (output) from mailman id 7607.20033; Thu, 15 Oct 2020 16:53:16 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,513 +39,676 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kT6VG-0007OG-Oj; Thu, 15 Oct 2020 16:53:22 +0000
-Received: by outflank-mailman (input) for mailman id 7619;
- Thu, 15 Oct 2020 16:53:16 +0000
+	id 1kT6VA-00078X-GI; Thu, 15 Oct 2020 16:53:16 +0000
+Received: by outflank-mailman (input) for mailman id 7607;
+ Thu, 15 Oct 2020 16:53:14 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YEeM=DW=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
- id 1kT6Ny-0004yr-6m
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:45:50 +0000
-Received: from mail-lf1-x142.google.com (unknown [2a00:1450:4864:20::142])
+ id 1kT6Ow-0004yr-8X
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:46:50 +0000
+Received: from mail-lf1-x143.google.com (unknown [2a00:1450:4864:20::143])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 82abcbad-658a-46ea-bdc7-8244eb16a9ab;
- Thu, 15 Oct 2020 16:45:05 +0000 (UTC)
-Received: by mail-lf1-x142.google.com with SMTP id r127so4314370lff.12
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2020 09:45:05 -0700 (PDT)
+ id 087e66d4-5203-42f8-bac5-9b88c9992b63;
+ Thu, 15 Oct 2020 16:45:22 +0000 (UTC)
+Received: by mail-lf1-x143.google.com with SMTP id 77so4380178lfl.2
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2020 09:45:17 -0700 (PDT)
 Received: from otyshchenko.www.tendawifi.com ([212.22.223.21])
- by smtp.gmail.com with ESMTPSA id v13sm1482495ljh.66.2020.10.15.09.45.03
+ by smtp.gmail.com with ESMTPSA id v13sm1482495ljh.66.2020.10.15.09.45.15
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 15 Oct 2020 09:45:03 -0700 (PDT)
+ Thu, 15 Oct 2020 09:45:15 -0700 (PDT)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=YEeM=DW=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
-	id 1kT6Ny-0004yr-6m
-	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:45:50 +0000
-X-Inumbo-ID: 82abcbad-658a-46ea-bdc7-8244eb16a9ab
-Received: from mail-lf1-x142.google.com (unknown [2a00:1450:4864:20::142])
+	id 1kT6Ow-0004yr-8X
+	for xen-devel@lists.xenproject.org; Thu, 15 Oct 2020 16:46:50 +0000
+X-Inumbo-ID: 087e66d4-5203-42f8-bac5-9b88c9992b63
+Received: from mail-lf1-x143.google.com (unknown [2a00:1450:4864:20::143])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 82abcbad-658a-46ea-bdc7-8244eb16a9ab;
-	Thu, 15 Oct 2020 16:45:05 +0000 (UTC)
-Received: by mail-lf1-x142.google.com with SMTP id r127so4314370lff.12
-        for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2020 09:45:05 -0700 (PDT)
+	id 087e66d4-5203-42f8-bac5-9b88c9992b63;
+	Thu, 15 Oct 2020 16:45:22 +0000 (UTC)
+Received: by mail-lf1-x143.google.com with SMTP id 77so4380178lfl.2
+        for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2020 09:45:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=GIFa+EcRcUxKPr2Jpa1jfhOfy5HsLRU2xEhliboMdRU=;
-        b=UB0MpQUyBFx0qhLWnadeL1UXzp33IaWRUriTv4CK4hiHV8QQsOhShN8Ry5bycZ1ocz
-         jI21J4JlDvFJFXsLeNaZmAdZKDkTAvst9UHyKM+KpsM88AgFv72UYLYFZXJVSpOuIpwE
-         mO7hMeygJpeQHd0gG0nPK1I2BNoC4s9H55wHOrLmT/iLpfWBvgQLKWDlM7YQWwnRwAuz
-         ndxe5JxiZ3uxrlMBciaKrbKQXqf1dE5shLh/Hi3xpMsF9i1WkW5+aUUQz6sYbta+hor7
-         LX3BpM/wrnxfFoXQisKl81neK5J8XQzerMW+yquGpT0YWmf98XhB3+7SIfLfDLZQQ220
-         fIdQ==
+        bh=xCZVPNSd778IcfiDHcmUgV2+bmw+xbtVorY65VaJeGs=;
+        b=Avq2Hoh8lwOMvmjF3c6XbeNBaRbzuWIGIuolr8Q6LaYlBKeZ5kNLVc2aUpijb3psTy
+         DN6QC9HY7KKywU4UFyxH1vsi17nMeIxUJc7/NIpwpSP7V40iUVqB67xCWkSIIezznbnp
+         RooSEoZsgEVMyJN8XD+eM5XdxkykKAJU0W38u2Xtn9HNfF85TllybdvtP6SIETT4l49g
+         Kp6SlzkKaxloTMK6NAxA/SvUzkWctQSwSzekVxUjUws+bsV6zNLkLPoa0j9KW/6fauUH
+         JsZMrbOKj6W4YfppUi6GqH+j5M74GJikLCslEPFNhG8aPhTmWjjx55HIfPXqRj7chLSx
+         w7jA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=GIFa+EcRcUxKPr2Jpa1jfhOfy5HsLRU2xEhliboMdRU=;
-        b=Vow/5GMxmh6oOrjDBsxYZVaPxivClyY2yNKxHzkunOxnorg09L7jBm8sEtYnL43t6L
-         jolmCte2+gvw0STRH+eR4H+C4Iwz8Jwd9seVZ8N3odPM5k80joBKspbbDFIoqSPveRLS
-         UiorDTGDIjGtD1HTUxeFwigR4SL3G/xg7CuR/HWmfe/jtDvCV0bkiyOhpK8NO2fEFk6n
-         kHQCC9h7yNBJXYtTlfJ5x00yj8P5acX0UyEuxlNsJjCzQPlyJMWyevFcgG8dGbcsCtDo
-         LhQc9nkUy8WHE05IIDIDi7FZzbEWAV0vuaO2qzlprixonWYLj7EB+p96V+pLzsq+g/iv
-         c1KA==
-X-Gm-Message-State: AOAM533bHk5b217HLIkkxVUIyDjbQAOiHFblf2Mnwz17R81aCkcDVnV2
-	qI7EAHWIcWcIK/LbvbIqa9fXd5vQq6pMGQ==
-X-Google-Smtp-Source: ABdhPJxuegf36jDJMZnb4uqeaF5mSemQuPEeLn4XCufxv1K20iqFeDNtPrA2vNZhJzFktUL0chy2hw==
-X-Received: by 2002:ac2:4dad:: with SMTP id h13mr1457757lfe.351.1602780304203;
-        Thu, 15 Oct 2020 09:45:04 -0700 (PDT)
+        bh=xCZVPNSd778IcfiDHcmUgV2+bmw+xbtVorY65VaJeGs=;
+        b=ucHXIafUWoHEf7e5HASI8FnPb1tOBqvWwNNvawPCV5Toj4u1JM7qtBqu9CetHHK160
+         +hr69Lr/emaEljwY64NT17CuiDwVt0ZHbDFMEt27QR+cqK9khPzqMe0pW+O11TalOYgH
+         HHCxp7+qZaksC7PAch8ZJf5I42IE2S7+4Js2mMw4lqXi2ByJOEm4+RZDcOrBzEQpC67d
+         s7dk+7+UsVHlrfcbFH78Hu8fdPwpCWz9THGfe1S2rQsHgv5sVJWSd+ZG3iU/oXN4qIOT
+         CFNOPEosjCgnBHIxrfJoMwxDMem5og8lh8w5k54ashs29t8Bmp6H/jAV8SO2U2oSbKgC
+         suYg==
+X-Gm-Message-State: AOAM533D2mw894oN/xz4po9FidTP99avvSd6RDy8VLJBq2b24roIA2Y9
+	OFn4tRfE/xp1Z4EVopTAxpzqWckb1wYifw==
+X-Google-Smtp-Source: ABdhPJxI6QsqQDzvUEy4e89SghbJpt00SiJg6myZgzN0L2sohpMkncs8FuLSnw9POz2gxpNHr2WNZg==
+X-Received: by 2002:ac2:5e6d:: with SMTP id a13mr1495324lfr.514.1602780316173;
+        Thu, 15 Oct 2020 09:45:16 -0700 (PDT)
 Received: from otyshchenko.www.tendawifi.com ([212.22.223.21])
-        by smtp.gmail.com with ESMTPSA id v13sm1482495ljh.66.2020.10.15.09.45.03
+        by smtp.gmail.com with ESMTPSA id v13sm1482495ljh.66.2020.10.15.09.45.15
         (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Thu, 15 Oct 2020 09:45:03 -0700 (PDT)
+        Thu, 15 Oct 2020 09:45:15 -0700 (PDT)
 From: Oleksandr Tyshchenko <olekstysh@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Paul Durrant <paul@xen.org>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>,
-	George Dunlap <george.dunlap@citrix.com>,
 	Ian Jackson <iwj@xenproject.org>,
+	Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>,
 	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Jun Nakajima <jun.nakajima@intel.com>,
-	Kevin Tian <kevin.tian@intel.com>,
-	Julien Grall <julien.grall@arm.com>
-Subject: [PATCH V2 11/23] xen/ioreq: Move x86's io_completion/io_req fields to struct vcpu
-Date: Thu, 15 Oct 2020 19:44:22 +0300
-Message-Id: <1602780274-29141-12-git-send-email-olekstysh@gmail.com>
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH V2 23/23] [RFC] libxl: Add support for virtio-disk configuration
+Date: Thu, 15 Oct 2020 19:44:34 +0300
+Message-Id: <1602780274-29141-24-git-send-email-olekstysh@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1602780274-29141-1-git-send-email-olekstysh@gmail.com>
 References: <1602780274-29141-1-git-send-email-olekstysh@gmail.com>
 
 From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 
-The IOREQ is a common feature now and these fields will be used
-on Arm as is. Move them to common struct vcpu as a part of new
-struct vcpu_io. Also move enum hvm_io_completion to xen/sched.h
-and remove "hvm" prefixes.
+This patch adds basic support for configuring and assisting virtio-disk
+backend (emualator) which is intended to run out of Qemu and could be run
+in any domain.
 
-This patch completely removes layering violation in the common code.
+Xenstore was chosen as a communication interface for the emulator running
+in non-toolstack domain to be able to get configuration either by reading
+Xenstore directly or by receiving command line parameters (an updated 'xl devd'
+running in the same domain would read Xenstore beforehand and call backend
+executable with the required arguments).
+
+An example of domain configuration (two disks are assigned to the guest,
+the latter is in readonly mode):
+
+vdisk = [ 'backend=DomD, disks=rw:/dev/mmcblk0p3;ro:/dev/mmcblk1p3' ]
+
+Where per-disk Xenstore entries are:
+- filename and readonly flag (configured via "vdisk" property)
+- base and irq (allocated dynamically)
+
+Besides handling 'visible' params described in configuration file,
+patch also allocates virtio-mmio specific ones for each device and
+writes them into Xenstore. virtio-mmio params (irq and base) are
+unique per guest domain, they allocated at the domain creation time
+and passed through to the emulator. Each VirtIO device has at least
+one pair of these params.
+
+TODO:
+1. An extra "virtio" property could be removed.
+2. Update documentation.
 
 Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-CC: Julien Grall <julien.grall@arm.com>
 
 ---
-Please note, this is a split/cleanup/hardening of Julien's PoC:
-"Add support for Guest IO forwarding to a device emulator"
-
-***
-I was thinking that it may be better to place these two fields
-into struct vcpu directly (without intermediate "io" struct).
-I think, this way the code which operates with these fields
-would become cleaner. Another possible option would be either
-to rename "io" struct (I failed to think of a better name) or
-to drop(replace?) duplicating "io" prefixes from these fields.
-***
+Changes RFC -> V1:
+   - no changes
 
 Changes V1 -> V2:
-   - new patch
----
- xen/arch/x86/hvm/emulate.c        | 50 +++++++++++++++++++--------------------
- xen/arch/x86/hvm/hvm.c            |  2 +-
- xen/arch/x86/hvm/io.c             |  6 ++---
- xen/arch/x86/hvm/svm/nestedsvm.c  |  2 +-
- xen/arch/x86/hvm/vmx/realmode.c   |  6 ++---
- xen/common/ioreq.c                | 14 +++++------
- xen/include/asm-x86/hvm/emulate.h |  2 +-
- xen/include/asm-x86/hvm/ioreq.h   |  4 ++--
- xen/include/asm-x86/hvm/vcpu.h    | 11 ---------
- xen/include/xen/sched.h           | 17 +++++++++++++
- 10 files changed, 60 insertions(+), 54 deletions(-)
+   - rebase according to the new location of libxl_virtio_disk.c
 
-diff --git a/xen/arch/x86/hvm/emulate.c b/xen/arch/x86/hvm/emulate.c
-index 4746d5a..f6a4eef 100644
---- a/xen/arch/x86/hvm/emulate.c
-+++ b/xen/arch/x86/hvm/emulate.c
-@@ -142,8 +142,8 @@ void hvmemul_cancel(struct vcpu *v)
- {
-     struct hvm_vcpu_io *vio = &v->arch.hvm.hvm_io;
+Please note, there is a real concern about VirtIO interrupts allocation.
+Just copy here what Stefano said in RFC thread.
+
+So, if we end up allocating let's say 6 virtio interrupts for a domain,
+the chance of a clash with a physical interrupt of a passthrough device is real.
+
+I am not entirely sure how to solve it, but these are a few ideas:
+- choosing virtio interrupts that are less likely to conflict (maybe > 1000)
+- make the virtio irq (optionally) configurable so that a user could
+  override the default irq and specify one that doesn't conflict
+- implementing support for virq != pirq (even the xl interface doesn't
+  allow to specify the virq number for passthrough devices, see "irqs")
+
+---
+ tools/libs/light/Makefile                 |   1 +
+ tools/libs/light/libxl_arm.c              |  56 ++++++++++++---
+ tools/libs/light/libxl_create.c           |   1 +
+ tools/libs/light/libxl_internal.h         |   1 +
+ tools/libs/light/libxl_types.idl          |  15 ++++
+ tools/libs/light/libxl_types_internal.idl |   1 +
+ tools/libs/light/libxl_virtio_disk.c      | 109 ++++++++++++++++++++++++++++
+ tools/xl/Makefile                         |   2 +-
+ tools/xl/xl.h                             |   3 +
+ tools/xl/xl_cmdtable.c                    |  15 ++++
+ tools/xl/xl_parse.c                       | 115 ++++++++++++++++++++++++++++++
+ tools/xl/xl_virtio_disk.c                 |  46 ++++++++++++
+ 12 files changed, 354 insertions(+), 11 deletions(-)
+ create mode 100644 tools/libs/light/libxl_virtio_disk.c
+ create mode 100644 tools/xl/xl_virtio_disk.c
+
+diff --git a/tools/libs/light/Makefile b/tools/libs/light/Makefile
+index f58a321..2ee388a 100644
+--- a/tools/libs/light/Makefile
++++ b/tools/libs/light/Makefile
+@@ -115,6 +115,7 @@ SRCS-y += libxl_genid.c
+ SRCS-y += _libxl_types.c
+ SRCS-y += libxl_flask.c
+ SRCS-y += _libxl_types_internal.c
++SRCS-y += libxl_virtio_disk.c
  
--    vio->io_req.state = STATE_IOREQ_NONE;
--    vio->io_completion = HVMIO_no_completion;
-+    v->io.io_req.state = STATE_IOREQ_NONE;
-+    v->io.io_completion = IO_no_completion;
-     vio->mmio_cache_count = 0;
-     vio->mmio_insn_bytes = 0;
-     vio->mmio_access = (struct npfec){};
-@@ -159,7 +159,7 @@ static int hvmemul_do_io(
- {
-     struct vcpu *curr = current;
-     struct domain *currd = curr->domain;
--    struct hvm_vcpu_io *vio = &curr->arch.hvm.hvm_io;
-+    struct vcpu_io *vio = &curr->io;
-     ioreq_t p = {
-         .type = is_mmio ? IOREQ_TYPE_COPY : IOREQ_TYPE_PIO,
-         .addr = addr,
-@@ -1854,7 +1854,7 @@ static int hvmemul_rep_movs(
-           * cheaper than multiple round trips through the device model. Yet
-           * when processing a response we can always re-use the translation.
-           */
--         (vio->io_req.state == STATE_IORESP_READY ||
-+         (curr->io.io_req.state == STATE_IORESP_READY ||
-           ((!df || *reps == 1) &&
-            PAGE_SIZE - (saddr & ~PAGE_MASK) >= *reps * bytes_per_rep)) )
-         sgpa = pfn_to_paddr(vio->mmio_gpfn) | (saddr & ~PAGE_MASK);
-@@ -1870,7 +1870,7 @@ static int hvmemul_rep_movs(
-     if ( vio->mmio_access.write_access &&
-          (vio->mmio_gla == (daddr & PAGE_MASK)) &&
-          /* See comment above. */
--         (vio->io_req.state == STATE_IORESP_READY ||
-+         (curr->io.io_req.state == STATE_IORESP_READY ||
-           ((!df || *reps == 1) &&
-            PAGE_SIZE - (daddr & ~PAGE_MASK) >= *reps * bytes_per_rep)) )
-         dgpa = pfn_to_paddr(vio->mmio_gpfn) | (daddr & ~PAGE_MASK);
-@@ -2007,7 +2007,7 @@ static int hvmemul_rep_stos(
-     if ( vio->mmio_access.write_access &&
-          (vio->mmio_gla == (addr & PAGE_MASK)) &&
-          /* See respective comment in MOVS processing. */
--         (vio->io_req.state == STATE_IORESP_READY ||
-+         (curr->io.io_req.state == STATE_IORESP_READY ||
-           ((!df || *reps == 1) &&
-            PAGE_SIZE - (addr & ~PAGE_MASK) >= *reps * bytes_per_rep)) )
-         gpa = pfn_to_paddr(vio->mmio_gpfn) | (addr & ~PAGE_MASK);
-@@ -2613,13 +2613,13 @@ static const struct x86_emulate_ops hvm_emulate_ops_no_write = {
- };
+ ifeq ($(CONFIG_LIBNL),y)
+ CFLAGS_LIBXL += $(LIBNL3_CFLAGS)
+diff --git a/tools/libs/light/libxl_arm.c b/tools/libs/light/libxl_arm.c
+index 588ee5a..9eb3022 100644
+--- a/tools/libs/light/libxl_arm.c
++++ b/tools/libs/light/libxl_arm.c
+@@ -8,6 +8,12 @@
+ #include <assert.h>
+ #include <xen/device_tree_defs.h>
  
- /*
-- * Note that passing HVMIO_no_completion into this function serves as kind
-+ * Note that passing IO_no_completion into this function serves as kind
-  * of (but not fully) an "auto select completion" indicator.  When there's
-  * no completion needed, the passed in value will be ignored in any case.
-  */
- static int _hvm_emulate_one(struct hvm_emulate_ctxt *hvmemul_ctxt,
-     const struct x86_emulate_ops *ops,
--    enum hvm_io_completion completion)
-+    enum io_completion completion)
- {
-     const struct cpu_user_regs *regs = hvmemul_ctxt->ctxt.regs;
-     struct vcpu *curr = current;
-@@ -2634,11 +2634,11 @@ static int _hvm_emulate_one(struct hvm_emulate_ctxt *hvmemul_ctxt,
-      */
-     if ( vio->cache->num_ents > vio->cache->max_ents )
-     {
--        ASSERT(vio->io_req.state == STATE_IOREQ_NONE);
-+        ASSERT(curr->io.io_req.state == STATE_IOREQ_NONE);
-         vio->cache->num_ents = 0;
-     }
-     else
--        ASSERT(vio->io_req.state == STATE_IORESP_READY);
-+        ASSERT(curr->io.io_req.state == STATE_IORESP_READY);
- 
-     hvm_emulate_init_per_insn(hvmemul_ctxt, vio->mmio_insn,
-                               vio->mmio_insn_bytes);
-@@ -2649,25 +2649,25 @@ static int _hvm_emulate_one(struct hvm_emulate_ctxt *hvmemul_ctxt,
-     if ( rc == X86EMUL_OKAY && vio->mmio_retry )
-         rc = X86EMUL_RETRY;
- 
--    if ( !ioreq_needs_completion(&vio->io_req) )
--        completion = HVMIO_no_completion;
--    else if ( completion == HVMIO_no_completion )
--        completion = (vio->io_req.type != IOREQ_TYPE_PIO ||
--                      hvmemul_ctxt->is_mem_access) ? HVMIO_mmio_completion
--                                                   : HVMIO_pio_completion;
-+    if ( !ioreq_needs_completion(&curr->io.io_req) )
-+        completion = IO_no_completion;
-+    else if ( completion == IO_no_completion )
-+        completion = (curr->io.io_req.type != IOREQ_TYPE_PIO ||
-+                      hvmemul_ctxt->is_mem_access) ? IO_mmio_completion
-+                                                   : IO_pio_completion;
- 
--    switch ( vio->io_completion = completion )
-+    switch ( curr->io.io_completion = completion )
-     {
--    case HVMIO_no_completion:
--    case HVMIO_pio_completion:
-+    case IO_no_completion:
-+    case IO_pio_completion:
-         vio->mmio_cache_count = 0;
-         vio->mmio_insn_bytes = 0;
-         vio->mmio_access = (struct npfec){};
-         hvmemul_cache_disable(curr);
-         break;
- 
--    case HVMIO_mmio_completion:
--    case HVMIO_realmode_completion:
-+    case IO_mmio_completion:
-+    case IO_realmode_completion:
-         BUILD_BUG_ON(sizeof(vio->mmio_insn) < sizeof(hvmemul_ctxt->insn_buf));
-         vio->mmio_insn_bytes = hvmemul_ctxt->insn_buf_bytes;
-         memcpy(vio->mmio_insn, hvmemul_ctxt->insn_buf, vio->mmio_insn_bytes);
-@@ -2716,7 +2716,7 @@ static int _hvm_emulate_one(struct hvm_emulate_ctxt *hvmemul_ctxt,
- 
- int hvm_emulate_one(
-     struct hvm_emulate_ctxt *hvmemul_ctxt,
--    enum hvm_io_completion completion)
-+    enum io_completion completion)
- {
-     return _hvm_emulate_one(hvmemul_ctxt, &hvm_emulate_ops, completion);
- }
-@@ -2754,7 +2754,7 @@ int hvm_emulate_one_mmio(unsigned long mfn, unsigned long gla)
-                           guest_cpu_user_regs());
-     ctxt.ctxt.data = &mmio_ro_ctxt;
- 
--    switch ( rc = _hvm_emulate_one(&ctxt, ops, HVMIO_no_completion) )
-+    switch ( rc = _hvm_emulate_one(&ctxt, ops, IO_no_completion) )
-     {
-     case X86EMUL_UNHANDLEABLE:
-     case X86EMUL_UNIMPLEMENTED:
-@@ -2782,7 +2782,7 @@ void hvm_emulate_one_vm_event(enum emul_kind kind, unsigned int trapnr,
-     {
-     case EMUL_KIND_NOWRITE:
-         rc = _hvm_emulate_one(&ctx, &hvm_emulate_ops_no_write,
--                              HVMIO_no_completion);
-+                              IO_no_completion);
-         break;
-     case EMUL_KIND_SET_CONTEXT_INSN: {
-         struct vcpu *curr = current;
-@@ -2803,7 +2803,7 @@ void hvm_emulate_one_vm_event(enum emul_kind kind, unsigned int trapnr,
-     /* Fall-through */
-     default:
-         ctx.set_context = (kind == EMUL_KIND_SET_CONTEXT_DATA);
--        rc = hvm_emulate_one(&ctx, HVMIO_no_completion);
-+        rc = hvm_emulate_one(&ctx, IO_no_completion);
-     }
- 
-     switch ( rc )
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index 20376ce..341093b 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -3800,7 +3800,7 @@ void hvm_ud_intercept(struct cpu_user_regs *regs)
-         return;
-     }
- 
--    switch ( hvm_emulate_one(&ctxt, HVMIO_no_completion) )
-+    switch ( hvm_emulate_one(&ctxt, IO_no_completion) )
-     {
-     case X86EMUL_UNHANDLEABLE:
-     case X86EMUL_UNIMPLEMENTED:
-diff --git a/xen/arch/x86/hvm/io.c b/xen/arch/x86/hvm/io.c
-index b220d6b..36584de 100644
---- a/xen/arch/x86/hvm/io.c
-+++ b/xen/arch/x86/hvm/io.c
-@@ -85,7 +85,7 @@ bool hvm_emulate_one_insn(hvm_emulate_validate_t *validate, const char *descr)
- 
-     hvm_emulate_init_once(&ctxt, validate, guest_cpu_user_regs());
- 
--    switch ( rc = hvm_emulate_one(&ctxt, HVMIO_no_completion) )
-+    switch ( rc = hvm_emulate_one(&ctxt, IO_no_completion) )
-     {
-     case X86EMUL_UNHANDLEABLE:
-         hvm_dump_emulation_state(XENLOG_G_WARNING, descr, &ctxt, rc);
-@@ -122,7 +122,7 @@ bool handle_mmio_with_translation(unsigned long gla, unsigned long gpfn,
- bool handle_pio(uint16_t port, unsigned int size, int dir)
- {
-     struct vcpu *curr = current;
--    struct hvm_vcpu_io *vio = &curr->arch.hvm.hvm_io;
-+    struct vcpu_io *vio = &curr->io;
-     unsigned int data;
-     int rc;
- 
-@@ -136,7 +136,7 @@ bool handle_pio(uint16_t port, unsigned int size, int dir)
-     rc = hvmemul_do_pio_buffer(port, size, dir, &data);
- 
-     if ( ioreq_needs_completion(&vio->io_req) )
--        vio->io_completion = HVMIO_pio_completion;
-+        vio->io_completion = IO_pio_completion;
- 
-     switch ( rc )
-     {
-diff --git a/xen/arch/x86/hvm/svm/nestedsvm.c b/xen/arch/x86/hvm/svm/nestedsvm.c
-index fcfccf7..787d4a0 100644
---- a/xen/arch/x86/hvm/svm/nestedsvm.c
-+++ b/xen/arch/x86/hvm/svm/nestedsvm.c
-@@ -1266,7 +1266,7 @@ enum hvm_intblk nsvm_intr_blocked(struct vcpu *v)
-          * Delay the injection because this would result in delivering
-          * an interrupt *within* the execution of an instruction.
-          */
--        if ( v->arch.hvm.hvm_io.io_req.state != STATE_IOREQ_NONE )
-+        if ( v->io.io_req.state != STATE_IOREQ_NONE )
-             return hvm_intblk_shadow;
- 
-         if ( !nv->nv_vmexit_pending && n2vmcb->exit_int_info.v )
-diff --git a/xen/arch/x86/hvm/vmx/realmode.c b/xen/arch/x86/hvm/vmx/realmode.c
-index 768f01e..f5832a0 100644
---- a/xen/arch/x86/hvm/vmx/realmode.c
-+++ b/xen/arch/x86/hvm/vmx/realmode.c
-@@ -101,7 +101,7 @@ void vmx_realmode_emulate_one(struct hvm_emulate_ctxt *hvmemul_ctxt)
- 
-     perfc_incr(realmode_emulations);
- 
--    rc = hvm_emulate_one(hvmemul_ctxt, HVMIO_realmode_completion);
-+    rc = hvm_emulate_one(hvmemul_ctxt, IO_realmode_completion);
- 
-     if ( rc == X86EMUL_UNHANDLEABLE )
-     {
-@@ -188,7 +188,7 @@ void vmx_realmode(struct cpu_user_regs *regs)
- 
-         vmx_realmode_emulate_one(&hvmemul_ctxt);
- 
--        if ( vio->io_req.state != STATE_IOREQ_NONE || vio->mmio_retry )
-+        if ( curr->io.io_req.state != STATE_IOREQ_NONE || vio->mmio_retry )
-             break;
- 
-         /* Stop emulating unless our segment state is not safe */
-@@ -202,7 +202,7 @@ void vmx_realmode(struct cpu_user_regs *regs)
-     }
- 
-     /* Need to emulate next time if we've started an IO operation */
--    if ( vio->io_req.state != STATE_IOREQ_NONE )
-+    if ( curr->io.io_req.state != STATE_IOREQ_NONE )
-         curr->arch.hvm.vmx.vmx_emulate = 1;
- 
-     if ( !curr->arch.hvm.vmx.vmx_emulate && !curr->arch.hvm.vmx.vmx_realmode )
-diff --git a/xen/common/ioreq.c b/xen/common/ioreq.c
-index a07f1d7..57ddaaa 100644
---- a/xen/common/ioreq.c
-+++ b/xen/common/ioreq.c
-@@ -158,7 +158,7 @@ static bool hvm_wait_for_io(struct ioreq_vcpu *sv, ioreq_t *p)
-         break;
-     }
- 
--    p = &sv->vcpu->arch.hvm.hvm_io.io_req;
-+    p = &sv->vcpu->io.io_req;
-     if ( ioreq_needs_completion(p) )
-         p->data = data;
- 
-@@ -170,10 +170,10 @@ static bool hvm_wait_for_io(struct ioreq_vcpu *sv, ioreq_t *p)
- bool handle_hvm_io_completion(struct vcpu *v)
- {
-     struct domain *d = v->domain;
--    struct hvm_vcpu_io *vio = &v->arch.hvm.hvm_io;
-+    struct vcpu_io *vio = &v->io;
-     struct ioreq_server *s;
-     struct ioreq_vcpu *sv;
--    enum hvm_io_completion io_completion;
-+    enum io_completion io_completion;
- 
-     if ( has_vpci(d) && vpci_process_pending(v) )
-     {
-@@ -192,17 +192,17 @@ bool handle_hvm_io_completion(struct vcpu *v)
-     vcpu_end_shutdown_deferral(v);
- 
-     io_completion = vio->io_completion;
--    vio->io_completion = HVMIO_no_completion;
-+    vio->io_completion = IO_no_completion;
- 
-     switch ( io_completion )
-     {
--    case HVMIO_no_completion:
-+    case IO_no_completion:
-         break;
- 
--    case HVMIO_mmio_completion:
-+    case IO_mmio_completion:
-         return ioreq_complete_mmio();
- 
--    case HVMIO_pio_completion:
-+    case IO_pio_completion:
-         return handle_pio(vio->io_req.addr, vio->io_req.size,
-                           vio->io_req.dir);
- 
-diff --git a/xen/include/asm-x86/hvm/emulate.h b/xen/include/asm-x86/hvm/emulate.h
-index 1620cc7..131cdf4 100644
---- a/xen/include/asm-x86/hvm/emulate.h
-+++ b/xen/include/asm-x86/hvm/emulate.h
-@@ -65,7 +65,7 @@ bool __nonnull(1, 2) hvm_emulate_one_insn(
-     const char *descr);
- int hvm_emulate_one(
-     struct hvm_emulate_ctxt *hvmemul_ctxt,
--    enum hvm_io_completion completion);
-+    enum io_completion completion);
- void hvm_emulate_one_vm_event(enum emul_kind kind,
-     unsigned int trapnr,
-     unsigned int errcode);
-diff --git a/xen/include/asm-x86/hvm/ioreq.h b/xen/include/asm-x86/hvm/ioreq.h
-index 0fccac5..5ed977e 100644
---- a/xen/include/asm-x86/hvm/ioreq.h
-+++ b/xen/include/asm-x86/hvm/ioreq.h
-@@ -26,11 +26,11 @@
- 
- #include <public/hvm/params.h>
- 
--static inline bool arch_hvm_io_completion(enum hvm_io_completion io_completion)
-+static inline bool arch_hvm_io_completion(enum io_completion io_completion)
- {
-     switch ( io_completion )
-     {
--    case HVMIO_realmode_completion:
-+    case IO_realmode_completion:
-     {
-         struct hvm_emulate_ctxt ctxt;
- 
-diff --git a/xen/include/asm-x86/hvm/vcpu.h b/xen/include/asm-x86/hvm/vcpu.h
-index 6c1feda..8adf455 100644
---- a/xen/include/asm-x86/hvm/vcpu.h
-+++ b/xen/include/asm-x86/hvm/vcpu.h
-@@ -28,13 +28,6 @@
- #include <asm/mtrr.h>
- #include <public/hvm/ioreq.h>
- 
--enum hvm_io_completion {
--    HVMIO_no_completion,
--    HVMIO_mmio_completion,
--    HVMIO_pio_completion,
--    HVMIO_realmode_completion
--};
--
- struct hvm_vcpu_asid {
-     uint64_t generation;
-     uint32_t asid;
-@@ -52,10 +45,6 @@ struct hvm_mmio_cache {
- };
- 
- struct hvm_vcpu_io {
--    /* I/O request in flight to device model. */
--    enum hvm_io_completion io_completion;
--    ioreq_t                io_req;
--
-     /*
-      * HVM emulation:
-      *  Linear address @mmio_gla maps to MMIO physical frame @mmio_gpfn.
-diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
-index 78761cd..f9ce14c 100644
---- a/xen/include/xen/sched.h
-+++ b/xen/include/xen/sched.h
-@@ -143,6 +143,19 @@ void evtchn_destroy_final(struct domain *d); /* from complete_domain_destroy */
- 
- struct waitqueue_vcpu;
- 
-+enum io_completion {
-+    IO_no_completion,
-+    IO_mmio_completion,
-+    IO_pio_completion,
-+    IO_realmode_completion
-+};
-+
-+struct vcpu_io {
-+    /* I/O request in flight to device model. */
-+    enum io_completion   io_completion;
-+    ioreq_t              io_req;
-+};
-+
- struct vcpu
- {
-     int              vcpu_id;
-@@ -254,6 +267,10 @@ struct vcpu
-     struct vpci_vcpu vpci;
- 
-     struct arch_vcpu arch;
-+
-+#ifdef CONFIG_IOREQ_SERVER
-+    struct vcpu_io io;
++#ifndef container_of
++#define container_of(ptr, type, member) ({			\
++        typeof( ((type *)0)->member ) *__mptr = (ptr);	\
++        (type *)( (char *)__mptr - offsetof(type,member) );})
 +#endif
++
+ static const char *gicv_to_string(libxl_gic_version gic_version)
+ {
+     switch (gic_version) {
+@@ -39,14 +45,32 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
+         vuart_enabled = true;
+     }
+ 
+-    /*
+-     * XXX: Handle properly virtio
+-     * A proper solution would be the toolstack to allocate the interrupts
+-     * used by each virtio backend and let the backend now which one is used
+-     */
+     if (libxl_defbool_val(d_config->b_info.arch_arm.virtio)) {
+-        nr_spis += (GUEST_VIRTIO_MMIO_SPI - 32) + 1;
++        uint64_t virtio_base;
++        libxl_device_virtio_disk *virtio_disk;
++
++        virtio_base = GUEST_VIRTIO_MMIO_BASE;
+         virtio_irq = GUEST_VIRTIO_MMIO_SPI;
++
++        if (!d_config->num_virtio_disks) {
++            LOG(ERROR, "Virtio is enabled, but no Virtio devices present\n");
++            return ERROR_FAIL;
++        }
++        virtio_disk = &d_config->virtio_disks[0];
++
++        for (i = 0; i < virtio_disk->num_disks; i++) {
++            virtio_disk->disks[i].base = virtio_base;
++            virtio_disk->disks[i].irq = virtio_irq;
++
++            LOG(DEBUG, "Allocate Virtio MMIO params: IRQ %u BASE 0x%"PRIx64,
++                virtio_irq, virtio_base);
++
++            virtio_irq ++;
++            virtio_base += GUEST_VIRTIO_MMIO_SIZE;
++        }
++        virtio_irq --;
++
++        nr_spis += (virtio_irq - 32) + 1;
+         virtio_enabled = true;
+     }
+ 
+@@ -70,8 +94,9 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
+         }
+ 
+         /* The same check as for vpl011 */
+-        if (virtio_enabled && irq == virtio_irq) {
+-            LOG(ERROR, "Physical IRQ %u conflicting with virtio SPI\n", irq);
++        if (virtio_enabled &&
++           (irq >= GUEST_VIRTIO_MMIO_SPI && irq <= virtio_irq)) {
++            LOG(ERROR, "Physical IRQ %u conflicting with Virtio IRQ range\n", irq);
+             return ERROR_FAIL;
+         }
+ 
+@@ -1011,8 +1036,19 @@ next_resize:
+         if (info->tee == LIBXL_TEE_TYPE_OPTEE)
+             FDT( make_optee_node(gc, fdt) );
+ 
+-        if (libxl_defbool_val(info->arch_arm.virtio))
+-            FDT( make_virtio_mmio_node(gc, fdt, GUEST_VIRTIO_MMIO_BASE, GUEST_VIRTIO_MMIO_SPI) );
++        if (libxl_defbool_val(info->arch_arm.virtio)) {
++            libxl_domain_config *d_config =
++                container_of(info, libxl_domain_config, b_info);
++            libxl_device_virtio_disk *virtio_disk = &d_config->virtio_disks[0];
++            unsigned int i;
++
++            for (i = 0; i < virtio_disk->num_disks; i++) {
++                uint64_t base = virtio_disk->disks[i].base;
++                uint32_t irq = virtio_disk->disks[i].irq;
++
++                FDT( make_virtio_mmio_node(gc, fdt, base, irq) );
++            }
++        }
+ 
+         if (pfdt)
+             FDT( copy_partial_fdt(gc, fdt, pfdt) );
+diff --git a/tools/libs/light/libxl_create.c b/tools/libs/light/libxl_create.c
+index 321a13e..8da328d 100644
+--- a/tools/libs/light/libxl_create.c
++++ b/tools/libs/light/libxl_create.c
+@@ -1821,6 +1821,7 @@ const libxl__device_type *device_type_tbl[] = {
+     &libxl__dtdev_devtype,
+     &libxl__vdispl_devtype,
+     &libxl__vsnd_devtype,
++    &libxl__virtio_disk_devtype,
+     NULL
  };
  
- struct sched_unit {
+diff --git a/tools/libs/light/libxl_internal.h b/tools/libs/light/libxl_internal.h
+index e26cda9..ea497bb 100644
+--- a/tools/libs/light/libxl_internal.h
++++ b/tools/libs/light/libxl_internal.h
+@@ -4000,6 +4000,7 @@ extern const libxl__device_type libxl__vdispl_devtype;
+ extern const libxl__device_type libxl__p9_devtype;
+ extern const libxl__device_type libxl__pvcallsif_devtype;
+ extern const libxl__device_type libxl__vsnd_devtype;
++extern const libxl__device_type libxl__virtio_disk_devtype;
+ 
+ extern const libxl__device_type *device_type_tbl[];
+ 
+diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
+index b054bf9..5f8a3ff 100644
+--- a/tools/libs/light/libxl_types.idl
++++ b/tools/libs/light/libxl_types.idl
+@@ -935,6 +935,20 @@ libxl_device_vsnd = Struct("device_vsnd", [
+     ("pcms", Array(libxl_vsnd_pcm, "num_vsnd_pcms"))
+     ])
+ 
++libxl_virtio_disk_param = Struct("virtio_disk_param", [
++    ("filename", string),
++    ("readonly", bool),
++    ("irq", uint32),
++    ("base", uint64),
++    ])
++
++libxl_device_virtio_disk = Struct("device_virtio_disk", [
++    ("backend_domid", libxl_domid),
++    ("backend_domname", string),
++    ("devid", libxl_devid),
++    ("disks", Array(libxl_virtio_disk_param, "num_disks")),
++    ])
++
+ libxl_domain_config = Struct("domain_config", [
+     ("c_info", libxl_domain_create_info),
+     ("b_info", libxl_domain_build_info),
+@@ -951,6 +965,7 @@ libxl_domain_config = Struct("domain_config", [
+     ("pvcallsifs", Array(libxl_device_pvcallsif, "num_pvcallsifs")),
+     ("vdispls", Array(libxl_device_vdispl, "num_vdispls")),
+     ("vsnds", Array(libxl_device_vsnd, "num_vsnds")),
++    ("virtio_disks", Array(libxl_device_virtio_disk, "num_virtio_disks")),
+     # a channel manifests as a console with a name,
+     # see docs/misc/channels.txt
+     ("channels", Array(libxl_device_channel, "num_channels")),
+diff --git a/tools/libs/light/libxl_types_internal.idl b/tools/libs/light/libxl_types_internal.idl
+index 3593e21..8f71980 100644
+--- a/tools/libs/light/libxl_types_internal.idl
++++ b/tools/libs/light/libxl_types_internal.idl
+@@ -32,6 +32,7 @@ libxl__device_kind = Enumeration("device_kind", [
+     (14, "PVCALLS"),
+     (15, "VSND"),
+     (16, "VINPUT"),
++    (17, "VIRTIO_DISK"),
+     ])
+ 
+ libxl__console_backend = Enumeration("console_backend", [
+diff --git a/tools/libs/light/libxl_virtio_disk.c b/tools/libs/light/libxl_virtio_disk.c
+new file mode 100644
+index 0000000..25e7f1a
+--- /dev/null
++++ b/tools/libs/light/libxl_virtio_disk.c
+@@ -0,0 +1,109 @@
++/*
++ * Copyright (C) 2020 EPAM Systems Inc.
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU Lesser General Public License as published
++ * by the Free Software Foundation; version 2.1 only. with the special
++ * exception on linking described in file LICENSE.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU Lesser General Public License for more details.
++ */
++
++#include "libxl_internal.h"
++
++static int libxl__device_virtio_disk_setdefault(libxl__gc *gc, uint32_t domid,
++                                                libxl_device_virtio_disk *virtio_disk,
++                                                bool hotplug)
++{
++    return libxl__resolve_domid(gc, virtio_disk->backend_domname,
++                                &virtio_disk->backend_domid);
++}
++
++static int libxl__virtio_disk_from_xenstore(libxl__gc *gc, const char *libxl_path,
++                                            libxl_devid devid,
++                                            libxl_device_virtio_disk *virtio_disk)
++{
++    const char *be_path;
++    int rc;
++
++    virtio_disk->devid = devid;
++    rc = libxl__xs_read_mandatory(gc, XBT_NULL,
++                                  GCSPRINTF("%s/backend", libxl_path),
++                                  &be_path);
++    if (rc) return rc;
++
++    rc = libxl__backendpath_parse_domid(gc, be_path, &virtio_disk->backend_domid);
++    if (rc) return rc;
++
++    return 0;
++}
++
++static void libxl__update_config_virtio_disk(libxl__gc *gc,
++                                             libxl_device_virtio_disk *dst,
++                                             libxl_device_virtio_disk *src)
++{
++    dst->devid = src->devid;
++}
++
++static int libxl_device_virtio_disk_compare(libxl_device_virtio_disk *d1,
++                                            libxl_device_virtio_disk *d2)
++{
++    return COMPARE_DEVID(d1, d2);
++}
++
++static void libxl__device_virtio_disk_add(libxl__egc *egc, uint32_t domid,
++                                          libxl_device_virtio_disk *virtio_disk,
++                                          libxl__ao_device *aodev)
++{
++    libxl__device_add_async(egc, domid, &libxl__virtio_disk_devtype, virtio_disk, aodev);
++}
++
++static int libxl__set_xenstore_virtio_disk(libxl__gc *gc, uint32_t domid,
++                                           libxl_device_virtio_disk *virtio_disk,
++                                           flexarray_t *back, flexarray_t *front,
++                                           flexarray_t *ro_front)
++{
++    int rc;
++    unsigned int i;
++
++    for (i = 0; i < virtio_disk->num_disks; i++) {
++        rc = flexarray_append_pair(ro_front, GCSPRINTF("%d/filename", i),
++                                   GCSPRINTF("%s", virtio_disk->disks[i].filename));
++        if (rc) return rc;
++
++        rc = flexarray_append_pair(ro_front, GCSPRINTF("%d/readonly", i),
++                                   GCSPRINTF("%d", virtio_disk->disks[i].readonly));
++        if (rc) return rc;
++
++        rc = flexarray_append_pair(ro_front, GCSPRINTF("%d/base", i),
++                                   GCSPRINTF("%lu", virtio_disk->disks[i].base));
++        if (rc) return rc;
++
++        rc = flexarray_append_pair(ro_front, GCSPRINTF("%d/irq", i),
++                                   GCSPRINTF("%u", virtio_disk->disks[i].irq));
++        if (rc) return rc;
++    }
++
++    return 0;
++}
++
++static LIBXL_DEFINE_UPDATE_DEVID(virtio_disk)
++static LIBXL_DEFINE_DEVICE_FROM_TYPE(virtio_disk)
++static LIBXL_DEFINE_DEVICES_ADD(virtio_disk)
++
++DEFINE_DEVICE_TYPE_STRUCT(virtio_disk, VIRTIO_DISK,
++    .update_config = (device_update_config_fn_t) libxl__update_config_virtio_disk,
++    .from_xenstore = (device_from_xenstore_fn_t) libxl__virtio_disk_from_xenstore,
++    .set_xenstore_config = (device_set_xenstore_config_fn_t) libxl__set_xenstore_virtio_disk
++);
++
++/*
++ * Local variables:
++ * mode: C
++ * c-basic-offset: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
+diff --git a/tools/xl/Makefile b/tools/xl/Makefile
+index bdf67c8..9d8f2aa 100644
+--- a/tools/xl/Makefile
++++ b/tools/xl/Makefile
+@@ -23,7 +23,7 @@ XL_OBJS += xl_vtpm.o xl_block.o xl_nic.o xl_usb.o
+ XL_OBJS += xl_sched.o xl_pci.o xl_vcpu.o xl_cdrom.o xl_mem.o
+ XL_OBJS += xl_info.o xl_console.o xl_misc.o
+ XL_OBJS += xl_vmcontrol.o xl_saverestore.o xl_migrate.o
+-XL_OBJS += xl_vdispl.o xl_vsnd.o xl_vkb.o
++XL_OBJS += xl_vdispl.o xl_vsnd.o xl_vkb.o xl_virtio_disk.o
+ 
+ $(XL_OBJS): CFLAGS += $(CFLAGS_libxentoollog)
+ $(XL_OBJS): CFLAGS += $(CFLAGS_XL)
+diff --git a/tools/xl/xl.h b/tools/xl/xl.h
+index 06569c6..3d26f19 100644
+--- a/tools/xl/xl.h
++++ b/tools/xl/xl.h
+@@ -178,6 +178,9 @@ int main_vsnddetach(int argc, char **argv);
+ int main_vkbattach(int argc, char **argv);
+ int main_vkblist(int argc, char **argv);
+ int main_vkbdetach(int argc, char **argv);
++int main_virtio_diskattach(int argc, char **argv);
++int main_virtio_disklist(int argc, char **argv);
++int main_virtio_diskdetach(int argc, char **argv);
+ int main_usbctrl_attach(int argc, char **argv);
+ int main_usbctrl_detach(int argc, char **argv);
+ int main_usbdev_attach(int argc, char **argv);
+diff --git a/tools/xl/xl_cmdtable.c b/tools/xl/xl_cmdtable.c
+index 7da6c1b..745afab 100644
+--- a/tools/xl/xl_cmdtable.c
++++ b/tools/xl/xl_cmdtable.c
+@@ -435,6 +435,21 @@ struct cmd_spec cmd_table[] = {
+       "Destroy a domain's virtual sound device",
+       "<Domain> <DevId>",
+     },
++    { "virtio-disk-attach",
++      &main_virtio_diskattach, 1, 1,
++      "Create a new virtio block device",
++      " TBD\n"
++    },
++    { "virtio-disk-list",
++      &main_virtio_disklist, 0, 0,
++      "List virtio block devices for a domain",
++      "<Domain(s)>",
++    },
++    { "virtio-disk-detach",
++      &main_virtio_diskdetach, 0, 1,
++      "Destroy a domain's virtio block device",
++      "<Domain> <DevId>",
++    },
+     { "uptime",
+       &main_uptime, 0, 0,
+       "Print uptime for all/some domains",
+diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
+index 10acf22..6cf3524 100644
+--- a/tools/xl/xl_parse.c
++++ b/tools/xl/xl_parse.c
+@@ -1204,6 +1204,120 @@ out:
+     if (rc) exit(EXIT_FAILURE);
+ }
+ 
++#define MAX_VIRTIO_DISKS 4
++
++static int parse_virtio_disk_config(libxl_device_virtio_disk *virtio_disk, char *token)
++{
++    char *oparg;
++    libxl_string_list disks = NULL;
++    int i, rc;
++
++    if (MATCH_OPTION("backend", token, oparg)) {
++        virtio_disk->backend_domname = strdup(oparg);
++    } else if (MATCH_OPTION("disks", token, oparg)) {
++        split_string_into_string_list(oparg, ";", &disks);
++
++        virtio_disk->num_disks = libxl_string_list_length(&disks);
++        if (virtio_disk->num_disks > MAX_VIRTIO_DISKS) {
++            fprintf(stderr, "vdisk: currently only %d disks are supported",
++                    MAX_VIRTIO_DISKS);
++            return 1;
++        }
++        virtio_disk->disks = xcalloc(virtio_disk->num_disks,
++                                     sizeof(*virtio_disk->disks));
++
++        for(i = 0; i < virtio_disk->num_disks; i++) {
++            char *disk_opt;
++
++            rc = split_string_into_pair(disks[i], ":", &disk_opt,
++                                        &virtio_disk->disks[i].filename);
++            if (rc) {
++                fprintf(stderr, "vdisk: failed to split \"%s\" into pair\n",
++                        disks[i]);
++                goto out;
++            }
++
++            if (!strcmp(disk_opt, "ro"))
++                virtio_disk->disks[i].readonly = 1;
++            else if (!strcmp(disk_opt, "rw"))
++                virtio_disk->disks[i].readonly = 0;
++            else {
++                fprintf(stderr, "vdisk: failed to parse \"%s\" disk option\n",
++                        disk_opt);
++                rc = 1;
++            }
++            free(disk_opt);
++
++            if (rc) goto out;
++        }
++    } else {
++        fprintf(stderr, "Unknown string \"%s\" in vdisk spec\n", token);
++        rc = 1; goto out;
++    }
++
++    rc = 0;
++
++out:
++    libxl_string_list_dispose(&disks);
++    return rc;
++}
++
++static void parse_virtio_disk_list(const XLU_Config *config,
++                            libxl_domain_config *d_config)
++{
++    XLU_ConfigList *virtio_disks;
++    const char *item;
++    char *buf = NULL;
++    int rc;
++
++    if (!xlu_cfg_get_list (config, "vdisk", &virtio_disks, 0, 0)) {
++        libxl_domain_build_info *b_info = &d_config->b_info;
++        int entry = 0;
++
++        /* XXX Remove an extra property */
++        libxl_defbool_setdefault(&b_info->arch_arm.virtio, false);
++        if (!libxl_defbool_val(b_info->arch_arm.virtio)) {
++            fprintf(stderr, "Virtio device requires Virtio property to be set\n");
++            exit(EXIT_FAILURE);
++        }
++
++        while ((item = xlu_cfg_get_listitem(virtio_disks, entry)) != NULL) {
++            libxl_device_virtio_disk *virtio_disk;
++            char *p;
++
++            virtio_disk = ARRAY_EXTEND_INIT(d_config->virtio_disks,
++                                            d_config->num_virtio_disks,
++                                            libxl_device_virtio_disk_init);
++
++            buf = strdup(item);
++
++            p = strtok (buf, ",");
++            while (p != NULL)
++            {
++                while (*p == ' ') p++;
++
++                rc = parse_virtio_disk_config(virtio_disk, p);
++                if (rc) goto out;
++
++                p = strtok (NULL, ",");
++            }
++
++            entry++;
++
++            if (virtio_disk->num_disks == 0) {
++                fprintf(stderr, "At least one virtio disk should be specified\n");
++                rc = 1; goto out;
++            }
++        }
++    }
++
++    rc = 0;
++
++out:
++    free(buf);
++    if (rc) exit(EXIT_FAILURE);
++}
++
+ void parse_config_data(const char *config_source,
+                        const char *config_data,
+                        int config_len,
+@@ -2734,6 +2848,7 @@ skip_usbdev:
+     }
+ 
+     parse_vkb_list(config, d_config);
++    parse_virtio_disk_list(config, d_config);
+ 
+     xlu_cfg_get_defbool(config, "xend_suspend_evtchn_compat",
+                         &c_info->xend_suspend_evtchn_compat, 0);
+diff --git a/tools/xl/xl_virtio_disk.c b/tools/xl/xl_virtio_disk.c
+new file mode 100644
+index 0000000..808a7da
+--- /dev/null
++++ b/tools/xl/xl_virtio_disk.c
+@@ -0,0 +1,46 @@
++/*
++ * Copyright (C) 2020 EPAM Systems Inc.
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU Lesser General Public License as published
++ * by the Free Software Foundation; version 2.1 only. with the special
++ * exception on linking described in file LICENSE.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU Lesser General Public License for more details.
++ */
++
++#include <stdlib.h>
++
++#include <libxl.h>
++#include <libxl_utils.h>
++#include <libxlutil.h>
++
++#include "xl.h"
++#include "xl_utils.h"
++#include "xl_parse.h"
++
++int main_virtio_diskattach(int argc, char **argv)
++{
++    return 0;
++}
++
++int main_virtio_disklist(int argc, char **argv)
++{
++   return 0;
++}
++
++int main_virtio_diskdetach(int argc, char **argv)
++{
++    return 0;
++}
++
++/*
++ * Local variables:
++ * mode: C
++ * c-basic-offset: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
 -- 
 2.7.4
 
