@@ -2,28 +2,26 @@ Return-Path: <SRS0=yWKO=DX=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.7 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=unavailable autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 73563C433DF
-	for <xen-devel@archiver.kernel.org>; Fri, 16 Oct 2020 09:52:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 90705C433E7
+	for <xen-devel@archiver.kernel.org>; Fri, 16 Oct 2020 10:09:30 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D54EA2072C
-	for <xen-devel@archiver.kernel.org>; Fri, 16 Oct 2020 09:52:16 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="c3fHHpfg"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D54EA2072C
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 26FBC20848
+	for <xen-devel@archiver.kernel.org>; Fri, 16 Oct 2020 10:09:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 26FBC20848
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=ravnborg.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.7866.20737 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.7870.20748 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kTMP1-0008Me-5n; Fri, 16 Oct 2020 09:51:59 +0000
+	id 1kTMfe-00015u-MK; Fri, 16 Oct 2020 10:09:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 7866.20737; Fri, 16 Oct 2020 09:51:59 +0000
+Received: by outflank-mailman (output) from mailman id 7870.20748; Fri, 16 Oct 2020 10:09:10 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,159 +36,197 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kTMP1-0008MX-2D; Fri, 16 Oct 2020 09:51:59 +0000
-Received: by outflank-mailman (input) for mailman id 7866;
- Fri, 16 Oct 2020 09:51:58 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kTMfe-00015n-J9; Fri, 16 Oct 2020 10:09:10 +0000
+Received: by outflank-mailman (input) for mailman id 7870;
+ Fri, 16 Oct 2020 10:09:08 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=VWaZ=DX=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1kTMP0-0008MS-0k
- for xen-devel@lists.xenproject.org; Fri, 16 Oct 2020 09:51:58 +0000
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 08496328-16b9-4bd0-9ae4-24bd755f4584;
- Fri, 16 Oct 2020 09:51:56 +0000 (UTC)
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1kTMOv-0000ER-W6; Fri, 16 Oct 2020 09:51:53 +0000
-Received: from [54.239.6.187] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1kTMOv-0004Av-OG; Fri, 16 Oct 2020 09:51:53 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+ (envelope-from <SRS0=YFnv=DX=ravnborg.org=sam@srs-us1.protection.inumbo.net>)
+ id 1kTMfc-00015i-Lq
+ for xen-devel@lists.xenproject.org; Fri, 16 Oct 2020 10:09:08 +0000
+Received: from asavdk3.altibox.net (unknown [109.247.116.14])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id cc6680c5-20dc-4e99-95ac-c747aa491c1d;
+ Fri, 16 Oct 2020 10:09:06 +0000 (UTC)
+Received: from ravnborg.org (unknown [188.228.123.71])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by asavdk3.altibox.net (Postfix) with ESMTPS id DC35220027;
+ Fri, 16 Oct 2020 12:08:55 +0200 (CEST)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=VWaZ=DX=xen.org=julien@srs-us1.protection.inumbo.net>)
-	id 1kTMP0-0008MS-0k
-	for xen-devel@lists.xenproject.org; Fri, 16 Oct 2020 09:51:58 +0000
-X-Inumbo-ID: 08496328-16b9-4bd0-9ae4-24bd755f4584
-Received: from mail.xenproject.org (unknown [104.130.215.37])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 08496328-16b9-4bd0-9ae4-24bd755f4584;
-	Fri, 16 Oct 2020 09:51:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=bL9WSIRH/SISe4Ipc18xF683oHqDGoGyeZXxSZi2kno=; b=c3fHHpfgZGt81zWS9pyxXRzW55
-	lssBM9+3yH5I0OgSsKdWWd8pplTbS/JMGjAqoK/H/ZJ2b27Ig6ii2662zgDB4pbMGv6V6mhUDVjsy
-	G1Kd1FJgQZMCoNQ5IgsTH2gcNcjwMo9cQPwmU4hdqU5dZRE1mKhPeY5TTn2tDNb6OB6M=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
-	by mail.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <julien@xen.org>)
-	id 1kTMOv-0000ER-W6; Fri, 16 Oct 2020 09:51:53 +0000
-Received: from [54.239.6.187] (helo=a483e7b01a66.ant.amazon.com)
-	by xenbits.xenproject.org with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
-	(Exim 4.92)
-	(envelope-from <julien@xen.org>)
-	id 1kTMOv-0004Av-OG; Fri, 16 Oct 2020 09:51:53 +0000
-Subject: Re: [PATCH v2 2/2] xen/evtchn: rework per event channel lock
-To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>, Andrew Cooper
- <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
- <roger.pau@citrix.com>, Wei Liu <wl@xen.org>,
- George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>
-References: <20201012092740.1617-1-jgross@suse.com>
- <20201012092740.1617-3-jgross@suse.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <c97130a4-3ba0-3fbf-f10d-761c6bb51e1e@xen.org>
-Date: Fri, 16 Oct 2020 10:51:51 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.3.2
+	(envelope-from <SRS0=YFnv=DX=ravnborg.org=sam@srs-us1.protection.inumbo.net>)
+	id 1kTMfc-00015i-Lq
+	for xen-devel@lists.xenproject.org; Fri, 16 Oct 2020 10:09:08 +0000
+X-Inumbo-ID: cc6680c5-20dc-4e99-95ac-c747aa491c1d
+Received: from asavdk3.altibox.net (unknown [109.247.116.14])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id cc6680c5-20dc-4e99-95ac-c747aa491c1d;
+	Fri, 16 Oct 2020 10:09:06 +0000 (UTC)
+Received: from ravnborg.org (unknown [188.228.123.71])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by asavdk3.altibox.net (Postfix) with ESMTPS id DC35220027;
+	Fri, 16 Oct 2020 12:08:55 +0200 (CEST)
+Date: Fri, 16 Oct 2020 12:08:54 +0200
+From: Sam Ravnborg <sam@ravnborg.org>
+To: Thomas Zimmermann <tzimmermann@suse.de>
+Cc: maarten.lankhorst@linux.intel.com, mripard@kernel.org, airlied@linux.ie,
+	daniel@ffwll.ch, alexander.deucher@amd.com,
+	christian.koenig@amd.com, kraxel@redhat.com, l.stach@pengutronix.de,
+	linux+etnaviv@armlinux.org.uk, christian.gmeiner@gmail.com,
+	inki.dae@samsung.com, jy0922.shim@samsung.com,
+	sw0312.kim@samsung.com, kyungmin.park@samsung.com, kgene@kernel.org,
+	krzk@kernel.org, yuq825@gmail.com, bskeggs@redhat.com,
+	robh@kernel.org, tomeu.vizoso@collabora.com, steven.price@arm.com,
+	alyssa.rosenzweig@collabora.com, hjc@rock-chips.com,
+	heiko@sntech.de, hdegoede@redhat.com, sean@poorly.run,
+	eric@anholt.net, oleksandr_andrushchenko@epam.com,
+	ray.huang@amd.com, sumit.semwal@linaro.org,
+	emil.velikov@collabora.com, luben.tuikov@amd.com, apaneers@amd.com,
+	linus.walleij@linaro.org, melissa.srw@gmail.com,
+	chris@chris-wilson.co.uk, miaoqinglang@huawei.com,
+	dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
+	virtualization@lists.linux-foundation.org,
+	etnaviv@lists.freedesktop.org, linux-arm-kernel@lists.infradead.org,
+	linux-samsung-soc@vger.kernel.org, lima@lists.freedesktop.org,
+	nouveau@lists.freedesktop.org, spice-devel@lists.freedesktop.org,
+	linux-rockchip@lists.infradead.org, xen-devel@lists.xenproject.org,
+	linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+Subject: Re: [PATCH v4 09/10] dma-buf-map: Add memcpy and pointer-increment
+ interfaces
+Message-ID: <20201016100854.GA1042954@ravnborg.org>
+References: <20201015123806.32416-1-tzimmermann@suse.de>
+ <20201015123806.32416-10-tzimmermann@suse.de>
 MIME-Version: 1.0
-In-Reply-To: <20201012092740.1617-3-jgross@suse.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20201015123806.32416-10-tzimmermann@suse.de>
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.3 cv=S433PrkP c=1 sm=1 tr=0
+	a=S6zTFyMACwkrwXSdXUNehg==:117 a=S6zTFyMACwkrwXSdXUNehg==:17
+	a=kj9zAlcOel0A:10 a=7gkXJVJtAAAA:8 a=0A2xud3A4b7FAmx5SMIA:9
+	a=7a1rlSNJFqSX5uOf:21 a=OU_kl8OV53ZSq-ss:21 a=CjuIK1q_8ugA:10
+	a=E9Po1WZjFZOl8hwRPBS3:22
 
-Hi Juergen,
+Hi Thomas.
 
-On 12/10/2020 10:27, Juergen Gross wrote:
-> Currently the lock for a single event channel needs to be taken with
-> interrupts off, which causes deadlocks in some cases.
+On Thu, Oct 15, 2020 at 02:38:05PM +0200, Thomas Zimmermann wrote:
+> To do framebuffer updates, one needs memcpy from system memory and a
+> pointer-increment function. Add both interfaces with documentation.
 > 
-> Rework the per event channel lock to be non-blocking for the case of
-> sending an event and removing the need for disabling interrupts for
-> taking the lock.
-> 
-> The lock is needed for avoiding races between sending an event or
-> querying the channel's state against removal of the event channel.
-> 
-> Use a locking scheme similar to a rwlock, but with some modifications:
-> 
-> - sending an event or querying the event channel's state uses an
->    operation similar to read_trylock(), in case of not obtaining the
->    lock the sending is omitted or a default state is returned
-> 
-> - closing an event channel is similar to write_lock(), but without
->    real fairness regarding multiple writers (this saves some space in
->    the event channel structure and multiple writers are impossible as
->    closing an event channel requires the domain's event_lock to be
->    held).
-> 
-> With this locking scheme it is mandatory that a writer will always
-> either start with an unbound or free event channel or will end with
-> an unbound or free event channel, as otherwise the reaction of a reader
-> not getting the lock would be wrong.
-> 
-> Fixes: e045199c7c9c54 ("evtchn: address races with evtchn_reset()")
-> Signed-off-by: Juergen Gross <jgross@suse.com>
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 
-The approach looks ok to me. I have a couple of remarks below.
+Looks good.
+Reviewed-by: Sam Ravnborg <sam@ravnborg.org>
 
-[...]
-
-> diff --git a/xen/include/xen/event.h b/xen/include/xen/event.h
-> index 509d3ae861..39a93f7556 100644
-> --- a/xen/include/xen/event.h
-> +++ b/xen/include/xen/event.h
-> @@ -105,6 +105,45 @@ void notify_via_xen_event_channel(struct domain *ld, int lport);
->   #define bucket_from_port(d, p) \
->       ((group_from_port(d, p))[((p) % EVTCHNS_PER_GROUP) / EVTCHNS_PER_BUCKET])
->   
-> +#define EVENT_WRITE_LOCK_INC    MAX_VIRT_CPUS
-> +static inline void evtchn_write_lock(struct evtchn *evtchn)
-
-I think it would be good to describe the locking expectation in-code.
-
+> ---
+>  include/linux/dma-buf-map.h | 72 +++++++++++++++++++++++++++++++------
+>  1 file changed, 62 insertions(+), 10 deletions(-)
+> 
+> diff --git a/include/linux/dma-buf-map.h b/include/linux/dma-buf-map.h
+> index 2e8bbecb5091..6ca0f304dda2 100644
+> --- a/include/linux/dma-buf-map.h
+> +++ b/include/linux/dma-buf-map.h
+> @@ -32,6 +32,14 @@
+>   * accessing the buffer. Use the returned instance and the helper functions
+>   * to access the buffer's memory in the correct way.
+>   *
+> + * The type :c:type:`struct dma_buf_map <dma_buf_map>` and its helpers are
+> + * actually independent from the dma-buf infrastructure. When sharing buffers
+> + * among devices, drivers have to know the location of the memory to access
+> + * the buffers in a safe way. :c:type:`struct dma_buf_map <dma_buf_map>`
+> + * solves this problem for dma-buf and its users. If other drivers or
+> + * sub-systems require similar functionality, the type could be generalized
+> + * and moved to a more prominent header file.
+> + *
+>   * Open-coding access to :c:type:`struct dma_buf_map <dma_buf_map>` is
+>   * considered bad style. Rather then accessing its fields directly, use one
+>   * of the provided helper functions, or implement your own. For example,
+> @@ -51,6 +59,14 @@
+>   *
+>   *	dma_buf_map_set_vaddr_iomem(&map. 0xdeadbeaf);
+>   *
+> + * Instances of struct dma_buf_map do not have to be cleaned up, but
+> + * can be cleared to NULL with dma_buf_map_clear(). Cleared mappings
+> + * always refer to system memory.
+> + *
+> + * .. code-block:: c
+> + *
+> + *	dma_buf_map_clear(&map);
+> + *
+>   * Test if a mapping is valid with either dma_buf_map_is_set() or
+>   * dma_buf_map_is_null().
+>   *
+> @@ -73,17 +89,19 @@
+>   *	if (dma_buf_map_is_equal(&sys_map, &io_map))
+>   *		// always false
+>   *
+> - * Instances of struct dma_buf_map do not have to be cleaned up, but
+> - * can be cleared to NULL with dma_buf_map_clear(). Cleared mappings
+> - * always refer to system memory.
+> + * A set up instance of struct dma_buf_map can be used to access or manipulate
+> + * the buffer memory. Depending on the location of the memory, the provided
+> + * helpers will pick the correct operations. Data can be copied into the memory
+> + * with dma_buf_map_memcpy_to(). The address can be manipulated with
+> + * dma_buf_map_incr().
+>   *
+> - * The type :c:type:`struct dma_buf_map <dma_buf_map>` and its helpers are
+> - * actually independent from the dma-buf infrastructure. When sharing buffers
+> - * among devices, drivers have to know the location of the memory to access
+> - * the buffers in a safe way. :c:type:`struct dma_buf_map <dma_buf_map>`
+> - * solves this problem for dma-buf and its users. If other drivers or
+> - * sub-systems require similar functionality, the type could be generalized
+> - * and moved to a more prominent header file.
+> + * .. code-block:: c
+> + *
+> + *	const void *src = ...; // source buffer
+> + *	size_t len = ...; // length of src
+> + *
+> + *	dma_buf_map_memcpy_to(&map, src, len);
+> + *	dma_buf_map_incr(&map, len); // go to first byte after the memcpy
+>   */
+>  
+>  /**
+> @@ -210,4 +228,38 @@ static inline void dma_buf_map_clear(struct dma_buf_map *map)
+>  	}
+>  }
+>  
+> +/**
+> + * dma_buf_map_memcpy_to - Memcpy into dma-buf mapping
+> + * @dst:	The dma-buf mapping structure
+> + * @src:	The source buffer
+> + * @len:	The number of byte in src
+> + *
+> + * Copies data into a dma-buf mapping. The source buffer is in system
+> + * memory. Depending on the buffer's location, the helper picks the correct
+> + * method of accessing the memory.
+> + */
+> +static inline void dma_buf_map_memcpy_to(struct dma_buf_map *dst, const void *src, size_t len)
 > +{
-> +    int val;
-> +
-> +    /* No barrier needed, atomic_add_return() is full barrier. */
-> +    for ( val = atomic_add_return(EVENT_WRITE_LOCK_INC, &evtchn->lock);
-> +          val != EVENT_WRITE_LOCK_INC;
-> +          val = atomic_read(&evtchn->lock) )
-> +        cpu_relax();
+> +	if (dst->is_iomem)
+> +		memcpy_toio(dst->vaddr_iomem, src, len);
+> +	else
+> +		memcpy(dst->vaddr, src, len);
 > +}
 > +
-> +static inline void evtchn_write_unlock(struct evtchn *evtchn)
+> +/**
+> + * dma_buf_map_incr - Increments the address stored in a dma-buf mapping
+> + * @map:	The dma-buf mapping structure
+> + * @incr:	The number of bytes to increment
+> + *
+> + * Increments the address stored in a dma-buf mapping. Depending on the
+> + * buffer's location, the correct value will be updated.
+> + */
+> +static inline void dma_buf_map_incr(struct dma_buf_map *map, size_t incr)
 > +{
-> +    arch_lock_release_barrier();
-> +
-> +    atomic_sub(EVENT_WRITE_LOCK_INC, &evtchn->lock);
+> +	if (map->is_iomem)
+> +		map->vaddr_iomem += incr;
+> +	else
+> +		map->vaddr += incr;
 > +}
 > +
-> +static inline bool evtchn_tryread_lock(struct evtchn *evtchn)
-> +{
-> +    if ( atomic_read(&evtchn->lock) >= EVENT_WRITE_LOCK_INC )
-> +        return false;
-> +
-> +    /* No barrier needed, atomic_inc_return() is full barrier. */
-> +    if ( atomic_inc_return(&evtchn->lock) < EVENT_WRITE_LOCK_INC )
-> +        return true;
-> +
-> +    atomic_dec(&evtchn->lock);
-
-NIT: Can you add a newline here?
-
-> +    return false;
-> +}
-> +
-
-Cheers,
-
--- 
-Julien Grall
+>  #endif /* __DMA_BUF_MAP_H__ */
+> -- 
+> 2.28.0
 
