@@ -2,28 +2,25 @@ Return-Path: <SRS0=quZ/=DY=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-3.7 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 49B19C433DF
-	for <xen-devel@archiver.kernel.org>; Sat, 17 Oct 2020 14:19:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 024C0C433E7
+	for <xen-devel@archiver.kernel.org>; Sat, 17 Oct 2020 16:25:43 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D986220714
-	for <xen-devel@archiver.kernel.org>; Sat, 17 Oct 2020 14:19:56 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="h1LYgTLb"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D986220714
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 920C92074A
+	for <xen-devel@archiver.kernel.org>; Sat, 17 Oct 2020 16:25:42 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 920C92074A
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=perches.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.8309.22117 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.8401.22460 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kTn3Y-00065f-0T; Sat, 17 Oct 2020 14:19:36 +0000
+	id 1kTp0u-0002Ra-67; Sat, 17 Oct 2020 16:25:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 8309.22117; Sat, 17 Oct 2020 14:19:35 +0000
+Received: by outflank-mailman (output) from mailman id 8401.22460; Sat, 17 Oct 2020 16:25:00 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,363 +35,411 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kTn3X-00065Y-TZ; Sat, 17 Oct 2020 14:19:35 +0000
-Received: by outflank-mailman (input) for mailman id 8309;
- Sat, 17 Oct 2020 14:19:34 +0000
+	id 1kTp0u-0002RT-32; Sat, 17 Oct 2020 16:25:00 +0000
+Received: by outflank-mailman (input) for mailman id 8401;
+ Sat, 17 Oct 2020 16:24:59 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=QMVr=DY=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
- id 1kTn3W-00065T-5p
- for xen-devel@lists.xenproject.org; Sat, 17 Oct 2020 14:19:34 +0000
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=WdE0=DY=perches.com=joe@srs-us1.protection.inumbo.net>)
+ id 1kTp0t-0002RO-5m
+ for xen-devel@lists.xenproject.org; Sat, 17 Oct 2020 16:24:59 +0000
+Received: from smtprelay.hostedemail.com (unknown [216.40.44.90])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id d557fb36-7150-4a5d-96e1-bafdcf3bc8c0;
- Sat, 17 Oct 2020 14:19:30 +0000 (UTC)
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kTn3S-0005D9-5p; Sat, 17 Oct 2020 14:19:30 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kTn3R-0006HU-TD; Sat, 17 Oct 2020 14:19:29 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1kTn3R-0002lG-Se; Sat, 17 Oct 2020 14:19:29 +0000
+ id fc975ec2-092d-4e57-a368-891660857f6e;
+ Sat, 17 Oct 2020 16:24:56 +0000 (UTC)
+Received: from filter.hostedemail.com (clb03-v110.bra.tucows.net
+ [216.40.38.60])
+ by smtprelay05.hostedemail.com (Postfix) with ESMTP id E0A6918029120;
+ Sat, 17 Oct 2020 16:24:55 +0000 (UTC)
+Received: from XPS-9350.home (unknown [47.151.133.149])
+ (Authenticated sender: joe@perches.com)
+ by omf13.hostedemail.com (Postfix) with ESMTPA;
+ Sat, 17 Oct 2020 16:24:48 +0000 (UTC)
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=QMVr=DY=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
-	id 1kTn3W-00065T-5p
-	for xen-devel@lists.xenproject.org; Sat, 17 Oct 2020 14:19:34 +0000
-X-Inumbo-ID: d557fb36-7150-4a5d-96e1-bafdcf3bc8c0
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+	(envelope-from <SRS0=WdE0=DY=perches.com=joe@srs-us1.protection.inumbo.net>)
+	id 1kTp0t-0002RO-5m
+	for xen-devel@lists.xenproject.org; Sat, 17 Oct 2020 16:24:59 +0000
+X-Inumbo-ID: fc975ec2-092d-4e57-a368-891660857f6e
+Received: from smtprelay.hostedemail.com (unknown [216.40.44.90])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id d557fb36-7150-4a5d-96e1-bafdcf3bc8c0;
-	Sat, 17 Oct 2020 14:19:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=3J2Pz7vYcb9QQQABvFWaZdjLFnfIGBMf0IOF/X/wL3c=; b=h1LYgTLbdPUlkhBxR9y8Nr9azr
-	Uwq8/W6AIMoygvoKx96fxdzER0QXYSW5JDjjZq1m+cRUzFpTETVOTA/hjc51L5rCLszJ7vR2MyY7r
-	FGIxLyN7XzccyNXUzjntqOBl0P4nVP2yz49U/ZrKrUnStmR7bPTuIKO9gcLTmHo5qWe8=;
-Received: from host146.205.237.98.conversent.net ([205.237.98.146] helo=infra.test-lab.xenproject.org)
-	by mail.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <osstest-admin@xenproject.org>)
-	id 1kTn3S-0005D9-5p; Sat, 17 Oct 2020 14:19:30 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
-	by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <osstest-admin@xenproject.org>)
-	id 1kTn3R-0006HU-TD; Sat, 17 Oct 2020 14:19:29 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim 4.92)
-	(envelope-from <osstest-admin@xenproject.org>)
-	id 1kTn3R-0002lG-Se; Sat, 17 Oct 2020 14:19:29 +0000
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-155914-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+	id fc975ec2-092d-4e57-a368-891660857f6e;
+	Sat, 17 Oct 2020 16:24:56 +0000 (UTC)
+Received: from filter.hostedemail.com (clb03-v110.bra.tucows.net [216.40.38.60])
+	by smtprelay05.hostedemail.com (Postfix) with ESMTP id E0A6918029120;
+	Sat, 17 Oct 2020 16:24:55 +0000 (UTC)
+X-Session-Marker: 6A6F6540706572636865732E636F6D
+X-HE-Tag: soap40_350edcc27227
+X-Filterd-Recvd-Size: 36889
+Received: from XPS-9350.home (unknown [47.151.133.149])
+	(Authenticated sender: joe@perches.com)
+	by omf13.hostedemail.com (Postfix) with ESMTPA;
+	Sat, 17 Oct 2020 16:24:48 +0000 (UTC)
+Message-ID: <f530b7aeecbbf9654b4540cfa20023a4c2a11889.camel@perches.com>
+Subject: Re: [RFC] treewide: cleanup unreachable breaks
+From: Joe Perches <joe@perches.com>
+To: trix@redhat.com, linux-kernel@vger.kernel.org, cocci
+ <cocci@systeme.lip6.fr>
+Cc: linux-edac@vger.kernel.org, linux-acpi@vger.kernel.org, 
+ linux-pm@vger.kernel.org, xen-devel@lists.xenproject.org, 
+ linux-block@vger.kernel.org, openipmi-developer@lists.sourceforge.net, 
+ linux-crypto@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+ linux-power@fi.rohmeurope.com, linux-gpio@vger.kernel.org, 
+ amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, 
+ nouveau@lists.freedesktop.org, virtualization@lists.linux-foundation.org, 
+ spice-devel@lists.freedesktop.org, linux-iio@vger.kernel.org, 
+ linux-amlogic@lists.infradead.org,
+ industrypack-devel@lists.sourceforge.net,  linux-media@vger.kernel.org,
+ MPT-FusionLinux.pdl@broadcom.com,  linux-scsi@vger.kernel.org,
+ linux-mtd@lists.infradead.org,  linux-can@vger.kernel.org,
+ netdev@vger.kernel.org,  intel-wired-lan@lists.osuosl.org,
+ ath10k@lists.infradead.org,  linux-wireless@vger.kernel.org,
+ linux-stm32@st-md-mailman.stormreply.com,  linux-nfc@lists.01.org,
+ linux-nvdimm@lists.01.org, linux-pci@vger.kernel.org, 
+ linux-samsung-soc@vger.kernel.org, platform-driver-x86@vger.kernel.org, 
+ patches@opensource.cirrus.com, storagedev@microchip.com, 
+ devel@driverdev.osuosl.org, linux-serial@vger.kernel.org, 
+ linux-usb@vger.kernel.org, usb-storage@lists.one-eyed-alien.net, 
+ linux-watchdog@vger.kernel.org, ocfs2-devel@oss.oracle.com,
+ bpf@vger.kernel.org,  linux-integrity@vger.kernel.org,
+ linux-security-module@vger.kernel.org,  keyrings@vger.kernel.org,
+ alsa-devel@alsa-project.org,  clang-built-linux@googlegroups.com
+Date: Sat, 17 Oct 2020 09:24:47 -0700
+In-Reply-To: <20201017160928.12698-1-trix@redhat.com>
+References: <20201017160928.12698-1-trix@redhat.com>
+Content-Type: text/plain; charset="ISO-8859-1"
+User-Agent: Evolution 3.36.4-0ubuntu1 
 MIME-Version: 1.0
-Subject: [qemu-upstream-4.14-testing test] 155914: tolerable FAIL - PUSHED
-X-Osstest-Failures:
-    qemu-upstream-4.14-testing:test-amd64-amd64-libvirt-vhd:debian-di-install:fail:heisenbug
-    qemu-upstream-4.14-testing:test-armhf-armhf-xl-rtds:guest-start/debian.repeat:fail:heisenbug
-    qemu-upstream-4.14-testing:test-armhf-armhf-libvirt:saverestore-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-amd64-amd64-xl-qemuu-win7-amd64:guest-stop:fail:nonblocking
-    qemu-upstream-4.14-testing:test-amd64-amd64-qemuu-nested-amd:debian-hvm-install/l1/l2:fail:nonblocking
-    qemu-upstream-4.14-testing:test-amd64-amd64-xl-qemuu-ws16-amd64:guest-stop:fail:nonblocking
-    qemu-upstream-4.14-testing:test-amd64-i386-xl-qemuu-ws16-amd64:guest-stop:fail:nonblocking
-    qemu-upstream-4.14-testing:test-amd64-i386-xl-qemuu-win7-amd64:guest-stop:fail:nonblocking
-    qemu-upstream-4.14-testing:test-armhf-armhf-libvirt-raw:saverestore-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-amd64-i386-libvirt-xsm:migrate-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-armhf-armhf-xl-multivcpu:migrate-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-armhf-armhf-xl-multivcpu:saverestore-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-amd64-i386-xl-pvshim:guest-start:fail:nonblocking
-    qemu-upstream-4.14-testing:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-amd64-amd64-libvirt-xsm:migrate-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-amd64-i386-libvirt:migrate-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-arm64-arm64-xl-credit1:migrate-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-arm64-arm64-xl-credit1:saverestore-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-arm64-arm64-xl-seattle:migrate-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-arm64-arm64-xl-seattle:saverestore-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-arm64-arm64-xl-thunderx:migrate-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-arm64-arm64-xl-thunderx:saverestore-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-arm64-arm64-libvirt-xsm:migrate-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-arm64-arm64-libvirt-xsm:saverestore-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-armhf-armhf-xl-arndale:migrate-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-armhf-armhf-libvirt:migrate-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-armhf-armhf-xl-arndale:saverestore-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-armhf-armhf-xl-credit1:migrate-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-armhf-armhf-xl-credit1:saverestore-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-arm64-arm64-xl:migrate-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-arm64-arm64-xl:saverestore-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-arm64-arm64-xl-credit2:migrate-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-arm64-arm64-xl-credit2:saverestore-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-armhf-armhf-xl-rtds:migrate-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-armhf-armhf-xl-rtds:saverestore-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-amd64-amd64-libvirt-vhd:migrate-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-armhf-armhf-xl-credit2:migrate-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-armhf-armhf-xl-credit2:saverestore-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-armhf-armhf-xl-cubietruck:migrate-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-armhf-armhf-xl-cubietruck:saverestore-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-armhf-armhf-xl-vhd:migrate-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-armhf-armhf-xl-vhd:saverestore-support-check:fail:nonblocking
-    qemu-upstream-4.14-testing:test-armhf-armhf-libvirt-raw:migrate-support-check:fail:nonblocking
-X-Osstest-Versions-This:
-    qemuu=e6a4cbe48cfca6adbe4e7acdf7e405c8315facaa
-X-Osstest-Versions-That:
-    qemuu=ea6d3cd1ed79d824e605a70c3626bc437c386260
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Sat, 17 Oct 2020 14:19:29 +0000
+Content-Transfer-Encoding: 7bit
 
-flight 155914 qemu-upstream-4.14-testing real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/155914/
+On Sat, 2020-10-17 at 09:09 -0700, trix@redhat.com wrote:
+> From: Tom Rix <trix@redhat.com>
+> 
+> This is a upcoming change to clean up a new warning treewide.
+> I am wondering if the change could be one mega patch (see below) or
+> normal patch per file about 100 patches or somewhere half way by collecting
+> early acks.
+> 
+> clang has a number of useful, new warnings see
+> https://clang.llvm.org/docs/DiagnosticsReference.html
+> 
+> This change cleans up -Wunreachable-code-break
+> https://clang.llvm.org/docs/DiagnosticsReference.html#wunreachable-code-break
+> for 266 of 485 warnings in this week's linux-next, allyesconfig on x86_64.
 
-Failures :-/ but no regressions.
+Early acks/individual patches by subsystem would be good.
+Better still would be an automated cocci script.
 
-Tests which are failing intermittently (not blocking):
- test-amd64-amd64-libvirt-vhd 12 debian-di-install fail in 155892 pass in 155914
- test-armhf-armhf-xl-rtds     18 guest-start/debian.repeat  fail pass in 155892
+The existing checkpatch test for UNNECESSARY_BREAK
+has a few too many false positives.
 
-Tests which did not succeed, but are not blocking:
- test-armhf-armhf-libvirt     16 saverestore-support-check    fail  like 151900
- test-amd64-amd64-xl-qemuu-win7-amd64 19 guest-stop            fail like 151900
- test-amd64-amd64-qemuu-nested-amd 20 debian-hvm-install/l1/l2 fail like 151900
- test-amd64-amd64-xl-qemuu-ws16-amd64 19 guest-stop            fail like 151900
- test-amd64-i386-xl-qemuu-ws16-amd64 19 guest-stop             fail like 151900
- test-amd64-i386-xl-qemuu-win7-amd64 19 guest-stop             fail like 151900
- test-armhf-armhf-libvirt-raw 15 saverestore-support-check    fail  like 151900
- test-amd64-i386-libvirt-xsm  15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl-multivcpu 15 migrate-support-check        fail  never pass
- test-armhf-armhf-xl-multivcpu 16 saverestore-support-check    fail  never pass
- test-amd64-i386-xl-pvshim    14 guest-start                  fail   never pass
- test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
- test-amd64-amd64-libvirt-xsm 15 migrate-support-check        fail   never pass
- test-amd64-i386-libvirt      15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-credit1  15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-credit1  16 saverestore-support-check    fail   never pass
- test-arm64-arm64-xl-seattle  15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-seattle  16 saverestore-support-check    fail   never pass
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
- test-arm64-arm64-xl-thunderx 15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-thunderx 16 saverestore-support-check    fail   never pass
- test-arm64-arm64-libvirt-xsm 15 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt-xsm 16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl-arndale  15 migrate-support-check        fail   never pass
- test-armhf-armhf-libvirt     15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-arndale  16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl-credit1  15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-credit1  16 saverestore-support-check    fail   never pass
- test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
- test-arm64-arm64-xl          15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl          16 saverestore-support-check    fail   never pass
- test-arm64-arm64-xl-credit2  15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-credit2  16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl-rtds     15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-rtds     16 saverestore-support-check    fail   never pass
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
- test-amd64-amd64-libvirt-vhd 14 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-credit2  15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-credit2  16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl-cubietruck 15 migrate-support-check        fail never pass
- test-armhf-armhf-xl-cubietruck 16 saverestore-support-check    fail never pass
- test-armhf-armhf-xl-vhd      14 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-vhd      15 saverestore-support-check    fail   never pass
- test-armhf-armhf-libvirt-raw 14 migrate-support-check        fail   never pass
+From a script run on next on July 28th:
 
-version targeted for testing:
- qemuu                e6a4cbe48cfca6adbe4e7acdf7e405c8315facaa
-baseline version:
- qemuu                ea6d3cd1ed79d824e605a70c3626bc437c386260
+arch/arm/mach-s3c24xx/mach-rx1950.c:266: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+arch/arm/nwfpe/fpa11_cprt.c:38: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+arch/arm/nwfpe/fpa11_cprt.c:41: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+arch/mips/include/asm/mach-au1x00/au1000.h:684: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+arch/mips/include/asm/mach-au1x00/au1000.h:687: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+arch/mips/include/asm/mach-au1x00/au1000.h:690: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+arch/mips/include/asm/mach-au1x00/au1000.h:693: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+arch/mips/include/asm/mach-au1x00/au1000.h:697: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+arch/mips/include/asm/mach-au1x00/au1000.h:700: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+arch/mips/loongson2ef/common/cs5536/cs5536_isa.c:276: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+arch/mips/loongson2ef/common/cs5536/cs5536_isa.c:279: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+arch/mips/loongson2ef/common/cs5536/cs5536_isa.c:282: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+arch/mips/loongson2ef/common/cs5536/cs5536_isa.c:287: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+arch/mips/loongson2ef/common/cs5536/cs5536_isa.c:290: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+arch/mips/rb532/setup.c:76: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+arch/mips/rb532/setup.c:79: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+arch/powerpc/include/asm/kvm_book3s_64.h:231: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+arch/powerpc/include/asm/kvm_book3s_64.h:234: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+arch/powerpc/include/asm/kvm_book3s_64.h:237: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+arch/powerpc/include/asm/kvm_book3s_64.h:240: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+arch/powerpc/net/bpf_jit_comp.c:455: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+arch/powerpc/platforms/cell/spufs/switch.c:2047: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+arch/powerpc/platforms/cell/spufs/switch.c:2077: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+arch/sh/boards/mach-landisk/gio.c:111: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+arch/x86/kernel/cpu/mce/core.c:1734: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+arch/x86/kernel/cpu/mce/core.c:1738: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+arch/x86/kernel/cpu/microcode/amd.c:218: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/acpi/utils.c:107: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/acpi/utils.c:132: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/acpi/utils.c:147: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/acpi/utils.c:158: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/ata/libata-scsi.c:3973: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/base/power/main.c:366: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/block/xen-blkback/blkback.c:1272: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/char/ipmi/ipmi_devintf.c:493: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/char/lp.c:625: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/char/mwave/mwavedd.c:406: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/cpufreq/e_powersaver.c:226: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/cpufreq/longhaul.c:596: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/crypto/atmel-sha.c:462: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/edac/amd64_edac.c:2464: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/edac/amd64_edac.c:2468: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/edac/amd64_edac.c:2471: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/edac/amd64_edac.c:2481: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/edac/amd64_edac.c:2485: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/edac/amd64_edac.c:2488: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/edac/amd64_edac.c:2491: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/gpu/drm/amd/amdgpu/atombios_encoders.c:505: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/gpu/drm/amd/amdgpu/atombios_encoders.c:528: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/gpu/drm/amd/amdgpu/dce_v10_0.c:2220: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/gpu/drm/amd/amdgpu/dce_v11_0.c:2253: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/gpu/drm/amd/amdgpu/dce_v8_0.c:2110: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/gpu/drm/gma500/cdv_intel_hdmi.c:346: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/gpu/drm/mgag200/mgag200_mode.c:723: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/gpu/drm/mgag200/mgag200_mode.c:727: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/gpu/drm/mgag200/mgag200_mode.c:730: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/gpu/drm/mgag200/mgag200_mode.c:734: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/gpu/drm/mgag200/mgag200_mode.c:737: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/gpu/drm/nouveau/nvkm/subdev/bios/pll.c:126: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/gpu/drm/nouveau/nvkm/subdev/clk/mcp77.c:143: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/gpu/drm/nouveau/nvkm/subdev/clk/mcp77.c:150: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/gpu/drm/nouveau/nvkm/subdev/clk/mcp77.c:153: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramnv50.c:174: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/gpu/drm/qxl/qxl_ioctl.c:163: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/gpu/drm/radeon/atombios_encoders.c:749: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/gpu/drm/radeon/atombios_encoders.c:780: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/gpu/drm/radeon/r300.c:1160: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/gpu/drm/radeon/radeon_i2c.c:462: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/infiniband/hw/cxgb4/qp.c:1972: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/infiniband/hw/cxgb4/qp.c:2021: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/infiniband/hw/cxgb4/qp.c:2026: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/input/mouse/synaptics_usb.c:207: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/ipack/devices/ipoctal.c:547: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/irqchip/irq-crossbar.c:291: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/irqchip/irq-mips-gic.c:643: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/isdn/mISDN/dsp_dtmf.c:174: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/macintosh/via-pmu-led.c:65: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/dvb-frontends/cx24117.c:1175: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/dvb-frontends/dib0090.c:407: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/dvb-frontends/dib0090.c:497: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/dvb-frontends/drxd_hard.c:1625: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/dvb-frontends/drx39xyj/drxj.c:2328: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/dvb-frontends/drx39xyj/drxj.c:2655: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/dvb-frontends/drx39xyj/drxj.c:3597: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/dvb-frontends/drx39xyj/drxj.c:3621: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/dvb-frontends/drx39xyj/drxj.c:3645: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/dvb-frontends/drx39xyj/drxj.c:10947: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/dvb-frontends/drx39xyj/drxj.c:11068: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/dvb-frontends/drx39xyj/drxj.c:11890: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/dvb-frontends/nxt200x.c:171: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/dvb-frontends/nxt200x.c:193: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/dvb-frontends/nxt200x.c:219: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/dvb-frontends/nxt200x.c:242: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/dvb-frontends/nxt200x.c:245: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/dvb-frontends/nxt200x.c:377: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/dvb-frontends/nxt200x.c:558: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/dvb-frontends/nxt200x.c:583: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/dvb-frontends/nxt200x.c:597: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/dvb-frontends/nxt200x.c:613: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/dvb-frontends/nxt200x.c:629: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/dvb-frontends/nxt200x.c:641: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/dvb-frontends/nxt200x.c:667: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/dvb-frontends/nxt200x.c:723: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/dvb-frontends/nxt200x.c:745: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/dvb-frontends/nxt200x.c:1117: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/dvb-frontends/si21xx.c:467: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/dvb-frontends/si21xx.c:470: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/dvb-frontends/stv0900_core.c:1948: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/tuners/mt2063.c:1852: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/usb/b2c2/flexcop-usb.c:198: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/usb/b2c2/flexcop-usb.c:521: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/usb/gspca/pac_common.h:105: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/usb/pwc/pwc-if.c:860: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/usb/pwc/pwc-if.c:872: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/usb/pwc/pwc-if.c:931: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/usb/pwc/pwc-if.c:957: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/usb/pwc/pwc-if.c:976: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/usb/pwc/pwc-if.c:988: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/usb/pwc/pwc-if.c:1001: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/usb/pwc/pwc-if.c:1019: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/usb/tm6000/tm6000-core.c:674: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/usb/tm6000/tm6000-core.c:696: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/usb/tm6000/tm6000-core.c:761: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/usb/ttusb-dec/ttusb_dec.c:1105: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/usb/ttusb-dec/ttusb_dec.c:1109: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/usb/ttusb-dec/ttusb_dec.c:1160: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/media/usb/ttusb-dec/ttusb_dec.c:1164: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/message/fusion/mptbase.c:476: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/misc/mei/hbm.c:1307: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/mmc/host/atmel-mci.c:1919: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/mtd/devices/ms02-nv.c:289: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/mtd/mtdchar.c:884: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/mtd/mtdchar.c:894: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/net/ethernet/8390/mac8390.c:193: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/net/ethernet/8390/mac8390.c:206: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/net/ethernet/cisco/enic/enic_ethtool.c:437: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/net/ethernet/intel/ixgbe/ixgbe_x540.c:353: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/net/wireless/ath/ath9k/hw.c:2311: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/net/wireless/realtek/rtlwifi/rtl8188ee/hw.c:1230: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/net/wireless/realtek/rtlwifi/rtl8723ae/hw.c:1135: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/nfc/trf7970a.c:1385: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/nvdimm/claim.c:205: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/parport/parport_ip32.c:1862: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/pci/controller/pci-v3-semi.c:664: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/pci/hotplug/ibmphp_pci.c:297: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/pci/hotplug/ibmphp_pci.c:1512: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/pinctrl/pinctrl-rockchip.c:2718: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/pinctrl/pinctrl-rockchip.c:2788: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/pinctrl/samsung/pinctrl-s3c24xx.c:111: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/pinctrl/samsung/pinctrl-s3c24xx.c:114: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/pinctrl/samsung/pinctrl-s3c24xx.c:117: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/pinctrl/samsung/pinctrl-s3c24xx.c:120: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/pinctrl/samsung/pinctrl-s3c24xx.c:123: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/platform/x86/acer-wmi.c:795: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/platform/x86/sony-laptop.c:2470: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/platform/x86/sony-laptop.c:2476: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/platform/x86/wmi.c:1263: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/platform/x86/wmi.c:1266: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/platform/x86/wmi.c:1269: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/pnp/pnpbios/rsparser.c:192: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/pnp/pnpbios/rsparser.c:476: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/pnp/pnpbios/rsparser.c:745: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/power/supply/ipaq_micro_battery.c:98: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/power/supply/ipaq_micro_battery.c:101: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/power/supply/ipaq_micro_battery.c:104: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/power/supply/wm831x_power.c:671: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/s390/char/tape_34xx.c:654: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/s390/char/tape_3590.c:946: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/s390/scsi/zfcp_fc.c:980: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/s390/scsi/zfcp_fc.c:983: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/scsi/aic94xx/aic94xx_task.c:272: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/scsi/arcmsr/arcmsr_hba.c:2702: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/scsi/arcmsr/arcmsr_hba.c:2705: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/scsi/be2iscsi/be_mgmt.c:1251: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/scsi/be2iscsi/be_mgmt.c:1254: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/scsi/bfa/bfa_ioc.h:1001: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/scsi/bfa/bfa_ioc.h:1004: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/scsi/bfa/bfa_ioc.h:1007: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/scsi/bfa/bfa_ioc.h:1019: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/scsi/bfa/bfa_ioc.h:1022: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/scsi/bfa/bfa_ioc.h:1025: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/scsi/bnx2fc/bnx2fc_hwi.c:773: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/scsi/fcoe/fcoe.c:1897: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/scsi/hptiop.c:761: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/scsi/hpsa.c:7443: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/scsi/isci/phy.c:756: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/scsi/isci/phy.c:961: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/scsi/ipr.c:9490: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/scsi/lpfc/lpfc_debugfs.c:3347: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/scsi/lpfc/lpfc_debugfs.c:4387: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/scsi/lpfc/lpfc_debugfs.c:4439: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/scsi/lpfc/lpfc_debugfs.c:4453: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/scsi/lpfc/lpfc_debugfs.c:4495: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/scsi/lpfc/lpfc_debugfs.c:4520: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/scsi/lpfc/lpfc_debugfs.c:4523: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/scsi/lpfc/lpfc_scsi.c:4287: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/scsi/lpfc/lpfc_init.c:7189: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/scsi/lpfc/lpfc_sli.c:9192: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/scsi/lpfc/lpfc_sli.c:10075: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/scsi/lpfc/lpfc_sli.c:10237: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/scsi/mvumi.c:2299: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/scsi/nsp32.c:2114: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/scsi/nsp32.c:2125: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/scsi/qla2xxx/qla_mbx.c:4026: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/scsi/st.c:2849: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/scsi/sym53c8xx_2/sym_hipd.c:4599: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/staging/media/atomisp/pci/hive_isp_css_common/host/input_system.c:907: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/staging/media/atomisp/pci/hive_isp_css_common/host/input_system.c:910: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/staging/media/atomisp/pci/hive_isp_css_common/host/input_system.c:913: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/staging/media/atomisp/pci/hive_isp_css_common/host/input_system.c:916: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/staging/media/atomisp/pci/hive_isp_css_common/host/input_system.c:998: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/staging/media/atomisp/pci/hive_isp_css_common/host/input_system.c:1035: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/staging/media/atomisp/pci/hive_isp_css_common/host/input_system.c:1322: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/staging/media/atomisp/pci/hive_isp_css_common/host/input_system.c:1699: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/staging/media/atomisp/pci/hive_isp_css_common/host/input_system.c:1702: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/staging/media/atomisp/pci/hive_isp_css_common/host/input_system.c:1705: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/staging/media/atomisp/pci/hive_isp_css_common/host/input_system.c:1708: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/tty/nozomi.c:417: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/tty/nozomi.c:421: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/tty/nozomi.c:463: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/tty/nozomi.c:471: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/tty/serial/imx.c:323: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/tty/serial/imx.c:334: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/tty/serial/imx.c:337: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/tty/serial/imx.c:340: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/tty/serial/imx.c:343: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/usb/gadget/function/f_hid.c:516: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/usb/gadget/function/f_hid.c:524: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/usb/gadget/function/f_hid.c:530: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/usb/gadget/function/f_hid.c:547: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/usb/gadget/function/f_hid.c:565: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/usb/gadget/function/f_hid.c:573: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/usb/gadget/function/f_hid.c:579: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/usb/gadget/function/f_hid.c:587: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/usb/host/xhci-mem.c:1147: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/usb/image/microtek.c:294: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/usb/misc/iowarrior.c:387: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/usb/misc/iowarrior.c:457: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/usb/misc/iowarrior.c:464: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/usb/misc/usblcd.c:190: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/usb/serial/iuu_phoenix.c:853: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/usb/serial/iuu_phoenix.c:867: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/usb/storage/freecom.c:434: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/video/fbdev/amifb.c:1212: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/video/fbdev/core/fbcon.c:1915: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/video/fbdev/core/fbcon.c:2006: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/vme/bridges/vme_ca91cx42.c:372: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/vme/bridges/vme_ca91cx42.c:681: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/vme/bridges/vme_ca91cx42.c:713: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/vme/bridges/vme_ca91cx42.c:1126: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/vme/bridges/vme_ca91cx42.c:1338: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/vme/bridges/vme_tsi148.c:509: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/vme/bridges/vme_tsi148.c:998: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/vme/bridges/vme_tsi148.c:1506: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/vme/bridges/vme_tsi148.c:1606: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/vme/bridges/vme_tsi148.c:1704: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/vme/bridges/vme_tsi148.c:1741: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/vme/bridges/vme_tsi148.c:1967: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/vme/vme.c:71: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/vme/vme.c:182: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/vme/vme.c:190: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/vme/vme.c:193: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+drivers/vme/vme.c:197: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+fs/efs/inode.c:166: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+fs/ocfs2/cluster/tcp.c:1201: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+kernel/bpf/syscall.c:2786: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+samples/hidraw/hid-example.c:168: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+samples/hidraw/hid-example.c:171: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+samples/hidraw/hid-example.c:174: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+samples/hidraw/hid-example.c:177: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+samples/hidraw/hid-example.c:180: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+security/integrity/ima/ima_appraise.c:173: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+security/keys/trusted-keys/trusted_tpm1.c:904: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+sound/oss/dmasound/dmasound_core.c:1002: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+sound/oss/dmasound/dmasound_core.c:1006: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+sound/oss/dmasound/dmasound_core.c:1023: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+sound/oss/dmasound/dmasound_core.c:1047: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+sound/oss/dmasound/dmasound_core.c:1126: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+sound/oss/dmasound/dmasound_core.c:1261: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+sound/pci/echoaudio/midi.c:100: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+sound/pci/echoaudio/midi.c:104: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+sound/pci/rme32.c:471: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+sound/pci/rme9652/rme9652.c:735: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+sound/pci/rme9652/rme9652.c:739: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+sound/pci/rme9652/rme9652.c:743: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+sound/pci/rme9652/rme9652.c:747: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+sound/pci/rme9652/rme9652.c:751: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+sound/pci/rme9652/rme9652.c:755: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+sound/pci/rme9652/rme9652.c:762: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+sound/pci/rme9652/hdspm.c:2289: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+sound/pci/rme9652/hdspm.c:2315: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+sound/pci/rme9652/hdspm.c:2341: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+sound/pci/rme9652/hdspm.c:2361: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+sound/pci/rme9652/hdspm.c:3848: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+sound/pci/rme9652/hdspm.c:3859: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+sound/soc/codecs/wl1273.c:314: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+sound/soc/intel/skylake/skl-pcm.c:505: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+sound/soc/sh/hac.c:254: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+sound/soc/ti/davinci-mcasp.c:2388: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+tools/perf/ui/stdio/hist.c:401: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+tools/perf/ui/stdio/hist.c:404: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+tools/perf/util/probe-event.c:1516: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+tools/power/acpi/tools/acpidbg/acpidbg.c:412: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
+tools/power/acpi/tools/acpidbg/acpidbg.c:418: WARNING:UNNECESSARY_BREAK: break is not useful after a goto or return
 
-Last test of basis   151900  2020-07-14 18:08:51 Z   94 days
-Testing same since   155892  2020-10-16 11:08:26 Z    1 days    2 attempts
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Alexander Bulekov <alxndr@bu.edu>
-  Alexander Duyck <alexander.h.duyck@linux.intel.com>
-  Alistair Francis <alistair.francis@wdc.com>
-  Allan Peramaki <aperamak@pp1.inet.fi>
-  Andrew Melnychenko <andrew@daynix.com>
-  Anthony PERARD <anthony.perard@citrix.com>
-  Bruce Rogers <brogers@suse.com>
-  Christian Ehrhardt <christian.ehrhardt@canonical.com>
-  Christian Schoenebeck <qemu_oss@crudebyte.com>
-  Claudio Fontana <cfontana@suse.de>
-  Cleber Rosa <crosa@redhat.com>
-  Cornelia Huck <cohuck@redhat.com>
-  Dan Robertson <dan@dlrobertson.com>
-  David Gibson <david@gibson.dropbear.id.au>
-  David Hildenbrand <david@redhat.com>
-  Dr. David Alan Gilbert <dgilbert@redhat.com>
-  Eduardo Habkost <ehabkost@redhat.com>
-  Eric Blake <eblake@redhat.com>
-  Gerd Hoffmann <kraxel@redhat.com>
-  Gonglei <arei.gonglei@huawei.com>
-  Graeme Gregory <graeme@nuviainc.com>
-  Greg Kurz <groug@kaod.org>
-  Halil Pasic <pasic@linux.ibm.com>
-  Helge Deller <deller@gmx.de>
-  Igor Mammedov <imammedo@redhat.com>
-  Jason Wang <jasowang@redhat.com>
-  Kevin Wolf <kwolf@redhat.com>
-  Laurent Vivier <laurent@vivier.eu>
-  Laurent Vivier <lvivier@redhat.com>
-  lichun <lichun@ruijie.com.cn>
-  Liu Yi L <yi.l.liu@intel.com>
-  Marc-André Lureau <marcandre.lureau@redhat.com>
-  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
-  Markus Armbruster <armbru@redhat.com>
-  Max Reitz <mreitz@redhat.com>
-  Michael Roth <mdroth@linux.vnet.ibm.com>
-  Michael S. Tsirkin <mst@redhat.com>
-  Michael Tokarev <mjt@tls.msk.ru>
-  Michal Privoznik <mprivozn@redhat.com>
-  Nathan Chancellor <natechancellor@gmail.com>
-  Niek Linnenbank <nieklinnenbank@gmail.com>
-  Oleksandr Natalenko <oleksandr@redhat.com>
-  Omar Sandoval <osandov@fb.com>
-  Paolo Bonzini <pbonzini@redhat.com>
-  Pavel Dovgalyuk <Pavel.Dovgaluk@gmail.com>
-  Pavel Dovgalyuk <Pavel.Dovgaluk@ispras.ru>
-  Peter Maydell <peter.maydell@linaro.org>
-  Philippe Mathieu-Daudé <f4bug@amsat.org>
-  Philippe Mathieu-Daudé <philmd@redhat.com>
-  Prasad J Pandit <pjp@fedoraproject.org>
-  Raphael Pour <raphael.pour@hetzner.com>
-  Richard Henderson <richard.henderson@linaro.org>
-  Sergei Trofimovich <slyfox@gentoo.org>
-  Stefan Berger <stefanb@linux.ibm.com>
-  Stefan Berger <stefanb@linux.vnet.ibm.com>
-  Stefan Hajnoczi <stefanha@redhat.com>
-  Stefano Stabellini <sstabellini@kernel.org>
-  Stefano Stabellini <stefano.stabellini@xilinx.com>
-  Sven Schnelle <svens@stackframe.org>
-  Thomas Huth <thuth@redhat.com>
-  Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
-  Volker Rümelin <vr_qemu@t-online.de>
-  Yuri Benditovich <yuri.benditovich@daynix.com>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-arm64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-arm64                                                  pass    
- build-armhf                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-arm64-libvirt                                          pass    
- build-armhf-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-arm64-pvops                                            pass    
- build-armhf-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl                                          pass    
- test-amd64-coresched-amd64-xl                                pass    
- test-arm64-arm64-xl                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-amd64-i386-xl                                           pass    
- test-amd64-coresched-i386-xl                                 pass    
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
- test-amd64-amd64-xl-qemuu-debianhvm-i386-xsm                 pass    
- test-amd64-i386-xl-qemuu-debianhvm-i386-xsm                  pass    
- test-amd64-amd64-libvirt-xsm                                 pass    
- test-arm64-arm64-libvirt-xsm                                 pass    
- test-amd64-i386-libvirt-xsm                                  pass    
- test-amd64-amd64-xl-xsm                                      pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-i386-xl-xsm                                       pass    
- test-amd64-amd64-qemuu-nested-amd                            fail    
- test-amd64-amd64-xl-pvhv2-amd                                pass    
- test-amd64-i386-qemuu-rhel6hvm-amd                           pass    
- test-amd64-amd64-dom0pvh-xl-amd                              pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-i386-xl-qemuu-debianhvm-amd64                     pass    
- test-amd64-i386-freebsd10-amd64                              pass    
- test-amd64-amd64-qemuu-freebsd11-amd64                       pass    
- test-amd64-amd64-qemuu-freebsd12-amd64                       pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
- test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
- test-amd64-i386-xl-qemuu-win7-amd64                          fail    
- test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
- test-amd64-i386-xl-qemuu-ws16-amd64                          fail    
- test-armhf-armhf-xl-arndale                                  pass    
- test-amd64-amd64-xl-credit1                                  pass    
- test-arm64-arm64-xl-credit1                                  pass    
- test-armhf-armhf-xl-credit1                                  pass    
- test-amd64-amd64-xl-credit2                                  pass    
- test-arm64-arm64-xl-credit2                                  pass    
- test-armhf-armhf-xl-credit2                                  pass    
- test-armhf-armhf-xl-cubietruck                               pass    
- test-amd64-amd64-xl-qemuu-dmrestrict-amd64-dmrestrict        pass    
- test-amd64-i386-xl-qemuu-dmrestrict-amd64-dmrestrict         pass    
- test-amd64-i386-freebsd10-i386                               pass    
- test-amd64-amd64-qemuu-nested-intel                          pass    
- test-amd64-amd64-xl-pvhv2-intel                              pass    
- test-amd64-i386-qemuu-rhel6hvm-intel                         pass    
- test-amd64-amd64-dom0pvh-xl-intel                            pass    
- test-amd64-amd64-libvirt                                     pass    
- test-armhf-armhf-libvirt                                     pass    
- test-amd64-i386-libvirt                                      pass    
- test-amd64-amd64-xl-multivcpu                                pass    
- test-armhf-armhf-xl-multivcpu                                pass    
- test-amd64-amd64-pair                                        pass    
- test-amd64-i386-pair                                         pass    
- test-amd64-amd64-libvirt-pair                                pass    
- test-amd64-i386-libvirt-pair                                 pass    
- test-amd64-amd64-amd64-pvgrub                                pass    
- test-amd64-amd64-i386-pvgrub                                 pass    
- test-amd64-amd64-xl-pvshim                                   pass    
- test-amd64-i386-xl-pvshim                                    fail    
- test-amd64-amd64-pygrub                                      pass    
- test-amd64-amd64-xl-qcow2                                    pass    
- test-armhf-armhf-libvirt-raw                                 pass    
- test-amd64-i386-xl-raw                                       pass    
- test-amd64-amd64-xl-rtds                                     pass    
- test-armhf-armhf-xl-rtds                                     fail    
- test-arm64-arm64-xl-seattle                                  pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64-shadow             pass    
- test-amd64-i386-xl-qemuu-debianhvm-amd64-shadow              pass    
- test-amd64-amd64-xl-shadow                                   pass    
- test-amd64-i386-xl-shadow                                    pass    
- test-arm64-arm64-xl-thunderx                                 pass    
- test-amd64-amd64-libvirt-vhd                                 pass    
- test-armhf-armhf-xl-vhd                                      pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/qemu-xen.git
-   ea6d3cd1ed..e6a4cbe48c  e6a4cbe48cfca6adbe4e7acdf7e405c8315facaa -> stable-4.14
 
