@@ -4,26 +4,26 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-8.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=3.4.0
+	NICE_REPLY_A,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DA7D5C43467
-	for <xen-devel@archiver.kernel.org>; Mon, 19 Oct 2020 08:45:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0D957C433E7
+	for <xen-devel@archiver.kernel.org>; Mon, 19 Oct 2020 09:09:19 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 44A8A22257
-	for <xen-devel@archiver.kernel.org>; Mon, 19 Oct 2020 08:45:15 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 923F82225F
+	for <xen-devel@archiver.kernel.org>; Mon, 19 Oct 2020 09:09:18 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="D+IIQ7/B"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 44A8A22257
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="fe6eBpj6"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 923F82225F
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.8667.23215 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.8677.23239 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kUQmu-0005rt-62; Mon, 19 Oct 2020 08:45:04 +0000
+	id 1kURA9-0007q1-H8; Mon, 19 Oct 2020 09:09:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 8667.23215; Mon, 19 Oct 2020 08:45:04 +0000
+Received: by outflank-mailman (output) from mailman id 8677.23239; Mon, 19 Oct 2020 09:09:05 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,428 +38,187 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kUQmu-0005rm-2P; Mon, 19 Oct 2020 08:45:04 +0000
-Received: by outflank-mailman (input) for mailman id 8667;
- Mon, 19 Oct 2020 08:45:03 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kURA9-0007pu-Ds; Mon, 19 Oct 2020 09:09:05 +0000
+Received: by outflank-mailman (input) for mailman id 8677;
+ Mon, 19 Oct 2020 09:09:04 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=nhcc=D2=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kUQmt-0005re-Bq
- for xen-devel@lists.xenproject.org; Mon, 19 Oct 2020 08:45:03 +0000
+ id 1kURA8-0007pe-IU
+ for xen-devel@lists.xenproject.org; Mon, 19 Oct 2020 09:09:04 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 13766e3a-8a20-45ae-8533-faba3f602fd7;
- Mon, 19 Oct 2020 08:45:01 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 8e6ba33b-a0b9-4a3a-b173-5386f6458568;
+ Mon, 19 Oct 2020 09:09:02 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id EAD76AC19;
- Mon, 19 Oct 2020 08:45:00 +0000 (UTC)
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by mx2.suse.de (Postfix) with ESMTP id 7E45EB290;
+ Mon, 19 Oct 2020 09:09:01 +0000 (UTC)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=nhcc=D2=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
-	id 1kUQmt-0005re-Bq
-	for xen-devel@lists.xenproject.org; Mon, 19 Oct 2020 08:45:03 +0000
-X-Inumbo-ID: 13766e3a-8a20-45ae-8533-faba3f602fd7
+	id 1kURA8-0007pe-IU
+	for xen-devel@lists.xenproject.org; Mon, 19 Oct 2020 09:09:04 +0000
+X-Inumbo-ID: 8e6ba33b-a0b9-4a3a-b173-5386f6458568
 Received: from mx2.suse.de (unknown [195.135.220.15])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 13766e3a-8a20-45ae-8533-faba3f602fd7;
-	Mon, 19 Oct 2020 08:45:01 +0000 (UTC)
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id 8e6ba33b-a0b9-4a3a-b173-5386f6458568;
+	Mon, 19 Oct 2020 09:09:02 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1603097101;
+	t=1603098541;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=0wq4/U2npj/ohoEwA/sWA4Jd1CxybC1RMbF7I0BG8rk=;
-	b=D+IIQ7/BACLyKcfr6fujM8A5D1rK1yNb0h6lYf2Py990qHKg67uB8COCnrA0fCysGoUgrK
-	tZOCMDDuZ5uZPSnMOGYf3HP/MKgvU42Mb7e0l4UEpTZjR192tfrHT2Nqp3kEoFLFRls4Tu
-	Kd1O7eqRJrqd3TzAePlq8VH1j2EV+Bc=
+	bh=ldr9vP5enLyLasdYmjZrwcRMN/AHiax7zlq6K/z5+0k=;
+	b=fe6eBpj6EXE+FDHeLRlspMLdjYW4QogZGp1qr4s/XX8MhgO41iDwu+M139Wvy2bnZ9VvuW
+	TNOGEafp9VCiYZW5tmVXV9SAc3j4Uc2PS9HJyxn18smJfkE3kG6MqI9Pvf1lSI8zY/Asu7
+	48PqwT+Pm8Lvc5KoyQ8onJVGVcgdshg=
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id EAD76AC19;
-	Mon, 19 Oct 2020 08:45:00 +0000 (UTC)
-Subject: [PATCH v3 3/3] x86/shadow: sh_{make,destroy}_monitor_table() are
- "even more" HVM-only
+	by mx2.suse.de (Postfix) with ESMTP id 7E45EB290;
+	Mon, 19 Oct 2020 09:09:01 +0000 (UTC)
+Subject: Re: [PATCH] x86/vmx: Revert "x86/VMX: sanitize rIP before re-entering
+ guest"
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, Wei Liu
+ <wl@xen.org>, Jun Nakajima <jun.nakajima@intel.com>,
+ Kevin Tian <kevin.tian@intel.com>
+References: <20201009150948.31063-1-andrew.cooper3@citrix.com>
+ <fb4a7a1d-95ad-0b59-7cb9-4a94c3600960@suse.com>
+ <01bb2f27-4e0b-3637-e456-09eb7b9b233e@citrix.com>
+ <1786f728-15c2-3877-c01a-035b11bd8504@suse.com>
+ <82e64d10-50be-68ab-127b-99d205a0a768@citrix.com>
 From: Jan Beulich <jbeulich@suse.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
- George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>
-References: <d09b0690-c5e0-a90b-b4c0-4396a5f62c59@suse.com>
-Message-ID: <cd39abe3-5a5c-6ebc-a11e-3d4ed1d74907@suse.com>
-Date: Mon, 19 Oct 2020 10:45:00 +0200
+Message-ID: <6430fef8-23f1-f4ef-8741-5e089eaa0df9@suse.com>
+Date: Mon, 19 Oct 2020 11:09:00 +0200
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.12.1
 MIME-Version: 1.0
-In-Reply-To: <d09b0690-c5e0-a90b-b4c0-4396a5f62c59@suse.com>
+In-Reply-To: <82e64d10-50be-68ab-127b-99d205a0a768@citrix.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-With them depending on just the number of shadow levels, there's no need
-for more than one instance of them, and hence no need for any hook (IOW
-452219e24648 ["x86/shadow: monitor table is HVM-only"] didn't go quite
-far enough). Move the functions to hvm.c while dropping the dead
-is_pv_32bit_domain() code paths.
+On 16.10.2020 17:38, Andrew Cooper wrote:
+> On 15/10/2020 09:01, Jan Beulich wrote:
+>> On 14.10.2020 15:57, Andrew Cooper wrote:
+>>> On 13/10/2020 16:58, Jan Beulich wrote:
+>>>> On 09.10.2020 17:09, Andrew Cooper wrote:
+>>>>> At the time of XSA-170, the x86 instruction emulator really was broken, and
+>>>>> would allow arbitrary non-canonical values to be loaded into %rip.  This was
+>>>>> fixed after the embargo by c/s 81d3a0b26c1 "x86emul: limit-check branch
+>>>>> targets".
+>>>>>
+>>>>> However, in a demonstration that off-by-one errors really are one of the
+>>>>> hardest programming issues we face, everyone involved with XSA-170, myself
+>>>>> included, mistook the statement in the SDM which says:
+>>>>>
+>>>>>   If the processor supports N < 64 linear-address bits, bits 63:N must be identical
+>>>>>
+>>>>> to mean "must be canonical".  A real canonical check is bits 63:N-1.
+>>>>>
+>>>>> VMEntries really do tolerate a not-quite-canonical %rip, specifically to cater
+>>>>> to the boundary condition at 0x0000800000000000.
+>>>>>
+>>>>> Now that the emulator has been fixed, revert the XSA-170 change to fix
+>>>>> architectural behaviour at the boundary case.  The XTF test case for XSA-170
+>>>>> exercises this corner case, and still passes.
+>>>>>
+>>>>> Fixes: ffbbfda377 ("x86/VMX: sanitize rIP before re-entering guest")
+>>>>> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+>>>> But why revert the change rather than fix ...
+>>>>
+>>>>> @@ -4280,38 +4280,6 @@ void vmx_vmexit_handler(struct cpu_user_regs *regs)
+>>>>>  out:
+>>>>>      if ( nestedhvm_vcpu_in_guestmode(v) )
+>>>>>          nvmx_idtv_handling();
+>>>>> -
+>>>>> -    /*
+>>>>> -     * VM entry will fail (causing the guest to get crashed) if rIP (and
+>>>>> -     * rFLAGS, but we don't have an issue there) doesn't meet certain
+>>>>> -     * criteria. As we must not allow less than fully privileged mode to have
+>>>>> -     * such an effect on the domain, we correct rIP in that case (accepting
+>>>>> -     * this not being architecturally correct behavior, as the injected #GP
+>>>>> -     * fault will then not see the correct [invalid] return address).
+>>>>> -     * And since we know the guest will crash, we crash it right away if it
+>>>>> -     * already is in most privileged mode.
+>>>>> -     */
+>>>>> -    mode = vmx_guest_x86_mode(v);
+>>>>> -    if ( mode == 8 ? !is_canonical_address(regs->rip)
+>>>> ... the wrong use of is_canonical_address() here? By reverting
+>>>> you open up avenues for XSAs in case we get things wrong elsewhere,
+>>>> including ...
+>>>>
+>>>>> -                   : regs->rip != regs->eip )
+>>>> ... for 32-bit guests.
+>>> Because the only appropriate alternative would be ASSERT_UNREACHABLE()
+>>> and domain crash.
+>>>
+>>> This logic corrupts guest state.
+>>>
+>>> Running with corrupt state is every bit an XSA as hitting a VMEntry
+>>> failure if it can be triggered by userspace, but the latter safer and
+>>> much more obvious.
+>> I disagree. For CPL > 0 we don't "corrupt" guest state any more
+>> than reporting a #GP fault when one is going to be reported
+>> anyway (as long as the VM entry doesn't fail, and hence the
+>> guest won't get crashed). IOW this raising of #GP actually is a
+>> precautionary measure to _avoid_ XSAs.
+> 
+> It does not remove any XSAs.  It merely hides them.
 
-While moving the code, replace a stale comment reference to
-sh_install_xen_entries_in_l4(). Doing so made me notice the function
-also didn't have its prototype dropped in 8d7b633adab7 ("x86/mm:
-Consolidate all Xen L4 slot writing into init_xen_l4_slots()"), which
-gets done here as well.
+How that? If we convert the ability of guest user mode to crash
+the guest into deliver of #GP(0), how is there a hidden XSA then?
 
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
----
-v3: New.
----
-TBD: In principle both functions could have their first parameter
-     constified. In fact, "destroy" doesn't depend on the vCPU at all
-     and hence could be passed a struct domain *. Not sure whether such
-     an asymmetry would be acceptable.
-     In principle "make" would also not need passing of the number of
-     shadow levels (can be derived from v), which would result in yet
-     another asymmetry.
-     If these asymmetries were acceptable, "make" could then also update
-     v->arch.hvm.monitor_table, instead of doing so at both call sites.
-TBD: Collides with Andrew's "xen/x86: Fix memory leak in vcpu_create()
-     error path".
+> There are legal states where RIP is 0x0000800000000000 and #GP is the
+> wrong thing to do.  Any async VMExit (Processor Trace Prefetch in
+> particular), or with debug traps pending.
 
---- a/xen/arch/x86/mm/shadow/common.c
-+++ b/xen/arch/x86/mm/shadow/common.c
-@@ -2467,7 +2467,9 @@ static void sh_update_paging_modes(struc
- 
-         if ( pagetable_is_null(v->arch.hvm.monitor_table) )
-         {
--            mfn_t mmfn = v->arch.paging.mode->shadow.make_monitor_table(v);
-+            mfn_t mmfn = sh_make_monitor_table(
-+                             v, v->arch.paging.mode->shadow.shadow_levels);
-+
-             v->arch.hvm.monitor_table = pagetable_from_mfn(mmfn);
-             make_cr3(v, mmfn);
-             hvm_update_host_cr3(v);
-@@ -2504,7 +2506,8 @@ static void sh_update_paging_modes(struc
- 
-                 old_mfn = pagetable_get_mfn(v->arch.hvm.monitor_table);
-                 v->arch.hvm.monitor_table = pagetable_null();
--                new_mfn = v->arch.paging.mode->shadow.make_monitor_table(v);
-+                new_mfn = sh_make_monitor_table(
-+                              v, v->arch.paging.mode->shadow.shadow_levels);
-                 v->arch.hvm.monitor_table = pagetable_from_mfn(new_mfn);
-                 SHADOW_PRINTK("new monitor table %"PRI_mfn "\n",
-                                mfn_x(new_mfn));
-@@ -2516,7 +2519,8 @@ static void sh_update_paging_modes(struc
-                 if ( v == current )
-                     write_ptbase(v);
-                 hvm_update_host_cr3(v);
--                old_mode->shadow.destroy_monitor_table(v, old_mfn);
-+                sh_destroy_monitor_table(v, old_mfn,
-+                                         old_mode->shadow.shadow_levels);
-             }
-         }
- 
-@@ -2801,7 +2805,9 @@ void shadow_teardown(struct domain *d, b
-                     mfn_t mfn = pagetable_get_mfn(v->arch.hvm.monitor_table);
- 
-                     if ( mfn_valid(mfn) && (mfn_x(mfn) != 0) )
--                        v->arch.paging.mode->shadow.destroy_monitor_table(v, mfn);
-+                        sh_destroy_monitor_table(
-+                            v, mfn,
-+                            v->arch.paging.mode->shadow.shadow_levels);
-                     v->arch.hvm.monitor_table = pagetable_null();
-                 }
- #endif /* CONFIG_HVM */
---- a/xen/arch/x86/mm/shadow/hvm.c
-+++ b/xen/arch/x86/mm/shadow/hvm.c
-@@ -691,6 +691,88 @@ static void sh_emulate_unmap_dest(struct
-     atomic_inc(&v->domain->arch.paging.shadow.gtable_dirty_version);
- }
- 
-+mfn_t sh_make_monitor_table(struct vcpu *v, unsigned int shadow_levels)
-+{
-+    struct domain *d = v->domain;
-+    mfn_t m4mfn;
-+    l4_pgentry_t *l4e;
-+
-+    ASSERT(!pagetable_get_pfn(v->arch.hvm.monitor_table));
-+
-+    /* Guarantee we can get the memory we need */
-+    shadow_prealloc(d, SH_type_monitor_table, CONFIG_PAGING_LEVELS);
-+    m4mfn = shadow_alloc(d, SH_type_monitor_table, 0);
-+    mfn_to_page(m4mfn)->shadow_flags = 4;
-+
-+    l4e = map_domain_page(m4mfn);
-+
-+    /*
-+     * Create a self-linear mapping, but no shadow-linear mapping.  A
-+     * shadow-linear mapping will either be inserted below when creating
-+     * lower level monitor tables, or later in sh_update_cr3().
-+     */
-+    init_xen_l4_slots(l4e, m4mfn, d, INVALID_MFN, false);
-+
-+    if ( shadow_levels < 4 )
-+    {
-+        mfn_t m3mfn, m2mfn;
-+        l3_pgentry_t *l3e;
-+
-+        /*
-+         * Install an l3 table and an l2 table that will hold the shadow
-+         * linear map entries.  This overrides the empty entry that was
-+         * installed by init_xen_l4_slots().
-+         */
-+        m3mfn = shadow_alloc(d, SH_type_monitor_table, 0);
-+        mfn_to_page(m3mfn)->shadow_flags = 3;
-+        l4e[l4_table_offset(SH_LINEAR_PT_VIRT_START)]
-+            = l4e_from_mfn(m3mfn, __PAGE_HYPERVISOR_RW);
-+
-+        m2mfn = shadow_alloc(d, SH_type_monitor_table, 0);
-+        mfn_to_page(m2mfn)->shadow_flags = 2;
-+        l3e = map_domain_page(m3mfn);
-+        l3e[0] = l3e_from_mfn(m2mfn, __PAGE_HYPERVISOR_RW);
-+        unmap_domain_page(l3e);
-+    }
-+
-+    unmap_domain_page(l4e);
-+
-+    return m4mfn;
-+}
-+
-+void sh_destroy_monitor_table(struct vcpu *v, mfn_t mmfn,
-+                              unsigned int shadow_levels)
-+{
-+    struct domain *d = v->domain;
-+
-+    ASSERT(mfn_to_page(mmfn)->u.sh.type == SH_type_monitor_table);
-+
-+    if ( shadow_levels < 4 )
-+    {
-+        mfn_t m3mfn;
-+        l4_pgentry_t *l4e = map_domain_page(mmfn);
-+        l3_pgentry_t *l3e;
-+        unsigned int linear_slot = l4_table_offset(SH_LINEAR_PT_VIRT_START);
-+
-+        /*
-+         * Need to destroy the l3 and l2 monitor pages used
-+         * for the linear map.
-+         */
-+        ASSERT(l4e_get_flags(l4e[linear_slot]) & _PAGE_PRESENT);
-+        m3mfn = l4e_get_mfn(l4e[linear_slot]);
-+        l3e = map_domain_page(m3mfn);
-+        ASSERT(l3e_get_flags(l3e[0]) & _PAGE_PRESENT);
-+        shadow_free(d, l3e_get_mfn(l3e[0]));
-+        unmap_domain_page(l3e);
-+        shadow_free(d, m3mfn);
-+
-+        unmap_domain_page(l4e);
-+    }
-+
-+    /* Put the memory back in the pool */
-+    shadow_free(d, mmfn);
-+}
-+
- /**************************************************************************/
- /* VRAM dirty tracking support */
- int shadow_track_dirty_vram(struct domain *d,
---- a/xen/arch/x86/mm/shadow/multi.c
-+++ b/xen/arch/x86/mm/shadow/multi.c
-@@ -1405,84 +1405,6 @@ make_fl1_shadow(struct domain *d, gfn_t
- }
- 
- 
--#if SHADOW_PAGING_LEVELS == GUEST_PAGING_LEVELS && defined(CONFIG_HVM)
--mfn_t
--sh_make_monitor_table(struct vcpu *v)
--{
--    struct domain *d = v->domain;
--
--    ASSERT(pagetable_get_pfn(v->arch.hvm.monitor_table) == 0);
--
--    /* Guarantee we can get the memory we need */
--    shadow_prealloc(d, SH_type_monitor_table, CONFIG_PAGING_LEVELS);
--
--    {
--        mfn_t m4mfn;
--        l4_pgentry_t *l4e;
--
--        m4mfn = shadow_alloc(d, SH_type_monitor_table, 0);
--        mfn_to_page(m4mfn)->shadow_flags = 4;
--
--        l4e = map_domain_page(m4mfn);
--
--        /*
--         * Create a self-linear mapping, but no shadow-linear mapping.  A
--         * shadow-linear mapping will either be inserted below when creating
--         * lower level monitor tables, or later in sh_update_cr3().
--         */
--        init_xen_l4_slots(l4e, m4mfn, d, INVALID_MFN, false);
--
--#if SHADOW_PAGING_LEVELS < 4
--        {
--            mfn_t m3mfn, m2mfn;
--            l3_pgentry_t *l3e;
--            /* Install an l3 table and an l2 table that will hold the shadow
--             * linear map entries.  This overrides the linear map entry that
--             * was installed by sh_install_xen_entries_in_l4. */
--
--            m3mfn = shadow_alloc(d, SH_type_monitor_table, 0);
--            mfn_to_page(m3mfn)->shadow_flags = 3;
--            l4e[shadow_l4_table_offset(SH_LINEAR_PT_VIRT_START)]
--                = l4e_from_mfn(m3mfn, __PAGE_HYPERVISOR_RW);
--
--            m2mfn = shadow_alloc(d, SH_type_monitor_table, 0);
--            mfn_to_page(m2mfn)->shadow_flags = 2;
--            l3e = map_domain_page(m3mfn);
--            l3e[0] = l3e_from_mfn(m2mfn, __PAGE_HYPERVISOR_RW);
--            unmap_domain_page(l3e);
--
--            if ( is_pv_32bit_domain(d) )
--            {
--                l2_pgentry_t *l2t;
--
--                /* For 32-bit PV guests, we need to map the 32-bit Xen
--                 * area into its usual VAs in the monitor tables */
--                m3mfn = shadow_alloc(d, SH_type_monitor_table, 0);
--                mfn_to_page(m3mfn)->shadow_flags = 3;
--                l4e[0] = l4e_from_mfn(m3mfn, __PAGE_HYPERVISOR_RW);
--
--                m2mfn = shadow_alloc(d, SH_type_monitor_table, 0);
--                mfn_to_page(m2mfn)->shadow_flags = 2;
--                l3e = map_domain_page(m3mfn);
--                l3e[3] = l3e_from_mfn(m2mfn, _PAGE_PRESENT);
--
--                l2t = map_domain_page(m2mfn);
--                init_xen_pae_l2_slots(l2t, d);
--                unmap_domain_page(l2t);
--
--                unmap_domain_page(l3e);
--            }
--
--        }
--#endif /* SHADOW_PAGING_LEVELS < 4 */
--
--        unmap_domain_page(l4e);
--
--        return m4mfn;
--    }
--}
--#endif /* SHADOW_PAGING_LEVELS == GUEST_PAGING_LEVELS */
--
- /**************************************************************************/
- /* These functions also take a virtual address and return the level-N
-  * shadow table mfn and entry, but they create the shadow pagetables if
-@@ -1860,50 +1782,6 @@ void sh_destroy_l1_shadow(struct domain
-     shadow_free(d, smfn);
- }
- 
--#if SHADOW_PAGING_LEVELS == GUEST_PAGING_LEVELS && defined(CONFIG_HVM)
--void sh_destroy_monitor_table(struct vcpu *v, mfn_t mmfn)
--{
--    struct domain *d = v->domain;
--    ASSERT(mfn_to_page(mmfn)->u.sh.type == SH_type_monitor_table);
--
--#if SHADOW_PAGING_LEVELS != 4
--    {
--        mfn_t m3mfn;
--        l4_pgentry_t *l4e = map_domain_page(mmfn);
--        l3_pgentry_t *l3e;
--        int linear_slot = shadow_l4_table_offset(SH_LINEAR_PT_VIRT_START);
--
--        /* Need to destroy the l3 and l2 monitor pages used
--         * for the linear map */
--        ASSERT(l4e_get_flags(l4e[linear_slot]) & _PAGE_PRESENT);
--        m3mfn = l4e_get_mfn(l4e[linear_slot]);
--        l3e = map_domain_page(m3mfn);
--        ASSERT(l3e_get_flags(l3e[0]) & _PAGE_PRESENT);
--        shadow_free(d, l3e_get_mfn(l3e[0]));
--        unmap_domain_page(l3e);
--        shadow_free(d, m3mfn);
--
--        if ( is_pv_32bit_domain(d) )
--        {
--            /* Need to destroy the l3 and l2 monitor pages that map the
--             * Xen VAs at 3GB-4GB */
--            ASSERT(l4e_get_flags(l4e[0]) & _PAGE_PRESENT);
--            m3mfn = l4e_get_mfn(l4e[0]);
--            l3e = map_domain_page(m3mfn);
--            ASSERT(l3e_get_flags(l3e[3]) & _PAGE_PRESENT);
--            shadow_free(d, l3e_get_mfn(l3e[3]));
--            unmap_domain_page(l3e);
--            shadow_free(d, m3mfn);
--        }
--        unmap_domain_page(l4e);
--    }
--#endif
--
--    /* Put the memory back in the pool */
--    shadow_free(d, mmfn);
--}
--#endif
--
- /**************************************************************************/
- /* Functions to destroy non-Xen mappings in a pagetable hierarchy.
-  * These are called from common code when we are running out of shadow
-@@ -4705,8 +4583,6 @@ const struct paging_mode sh_paging_mode
-     .shadow.cmpxchg_guest_entry    = sh_cmpxchg_guest_entry,
- #endif
- #ifdef CONFIG_HVM
--    .shadow.make_monitor_table     = sh_make_monitor_table,
--    .shadow.destroy_monitor_table  = sh_destroy_monitor_table,
- #if SHADOW_OPTIMIZATIONS & SHOPT_WRITABLE_HEURISTIC
-     .shadow.guess_wrmap            = sh_guess_wrmap,
- #endif
---- a/xen/arch/x86/mm/shadow/private.h
-+++ b/xen/arch/x86/mm/shadow/private.h
-@@ -366,9 +366,6 @@ void sh_set_toplevel_shadow(struct vcpu
-                                                  mfn_t gmfn,
-                                                  uint32_t shadow_type));
- 
--/* Install the xen mappings in various flavours of shadow */
--void sh_install_xen_entries_in_l4(struct domain *, mfn_t gl4mfn, mfn_t sl4mfn);
--
- /* Update the shadows in response to a pagetable write from Xen */
- int sh_validate_guest_entry(struct vcpu *v, mfn_t gmfn, void *entry, u32 size);
- 
-@@ -410,6 +407,14 @@ void shadow_update_paging_modes(struct v
-  * With user_only == 1, unhooks only the user-mode mappings. */
- void shadow_unhook_mappings(struct domain *d, mfn_t smfn, int user_only);
- 
-+/*
-+ * sh_{make,destroy}_monitor_table() depend only on the number of shadow
-+ * levels.
-+ */
-+mfn_t sh_make_monitor_table(struct vcpu *v, unsigned int shadow_levels);
-+void sh_destroy_monitor_table(struct vcpu *v, mfn_t mmfn,
-+                              unsigned int shadow_levels);
-+
- /* VRAM dirty tracking helpers. */
- void shadow_vram_get_mfn(mfn_t mfn, unsigned int l1f,
-                          mfn_t sl1mfn, const void *sl1e,
---- a/xen/arch/x86/mm/shadow/types.h
-+++ b/xen/arch/x86/mm/shadow/types.h
-@@ -262,15 +262,6 @@ static inline shadow_l4e_t shadow_l4e_fr
- #define sh_rm_write_access_from_sl1p INTERNAL_NAME(sh_rm_write_access_from_sl1p)
- #endif
- 
--/* sh_make_monitor_table depends only on the number of shadow levels */
--#define sh_make_monitor_table \
--        SHADOW_SH_NAME(sh_make_monitor_table, SHADOW_PAGING_LEVELS)
--#define sh_destroy_monitor_table \
--        SHADOW_SH_NAME(sh_destroy_monitor_table, SHADOW_PAGING_LEVELS)
--
--mfn_t sh_make_monitor_table(struct vcpu *v);
--void sh_destroy_monitor_table(struct vcpu *v, mfn_t mmfn);
--
- #if SHADOW_PAGING_LEVELS == 3
- #define MFN_FITS_IN_HVM_CR3(_MFN) !(mfn_x(_MFN) >> 20)
- #endif
---- a/xen/include/asm-x86/paging.h
-+++ b/xen/include/asm-x86/paging.h
-@@ -107,8 +107,6 @@ struct shadow_paging_mode {
-                                             mfn_t gmfn);
- #endif
- #ifdef CONFIG_HVM
--    mfn_t         (*make_monitor_table    )(struct vcpu *v);
--    void          (*destroy_monitor_table )(struct vcpu *v, mfn_t mmfn);
-     int           (*guess_wrmap           )(struct vcpu *v, 
-                                             unsigned long vaddr, mfn_t gmfn);
-     void          (*pagetable_dying       )(paddr_t gpa);
+You realize we're in agreement about this pseudo-canonical check
+needing fixing?
 
+>> Nor do I agree with the "much more obvious" aspect:
+> 
+> A domain crash is far more likely to be reported to xen-devel/security
+> than something which bodges state in an almost-silent way.
+> 
+>> A VM entry
+>> failure requires quite a bit of analysis to recognize what has
+>> caused it; whether a non-pseudo-canonical RIP is what catches your
+>> eye right away is simply unknown. The gprintk() that you delete,
+>> otoh, says very clearly what we have found to be wrong.
+> 
+> Non-canonical values are easier to spot than most of the other rules, IMO.
+
+Which will get less obvious with 5-level paging capable hardware
+in mind.
+
+>>> It was the appropriate security fix (give or take the functional bug in
+>>> it) at the time, given the complexity of retrofitting zero length
+>>> instruction fetches to the emulator.
+>>>
+>>> However, it is one of a very long list of guest-state-induced VMEntry
+>>> failures, with non-trivial logic which we assert will pass, on a
+>>> fastpath, where hardware also performs the same checks and we already
+>>> have a runtime safe way of dealing with errors.  (Hence not actually
+>>> using ASSERT_UNREACHABLE() here.)
+>> "Runtime safe" as far as Xen is concerned, I take it. This isn't safe
+>> for the guest at all, as vmx_failed_vmentry() results in an
+>> unconditional domain_crash().
+> 
+> Any VMEntry failure is a bug in Xen.  If userspace can trigger it, it is
+> an XSA, *irrespective* of whether we crash the domain then and there, or
+> whether we let it try and limp on with corrupted state.
+
+Allowing the guest to continue with corrupted state is not a
+useful thing to do, I agree. However, what falls under
+"corrupted" seems to be different for you and me. I'd not call
+delivery of #GP "corruption" in any way. The primary goal ought
+to be that we don't corrupt the guest kernel view of the world.
+It may then have the opportunity to kill the offending user
+mode process.
+
+Jan
 
