@@ -2,26 +2,28 @@ Return-Path: <SRS0=rP1u=D2=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.2 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=unavailable autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 17D64C433DF
-	for <xen-devel@archiver.kernel.org>; Mon, 19 Oct 2020 09:09:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 40F1CC433DF
+	for <xen-devel@archiver.kernel.org>; Mon, 19 Oct 2020 09:20:25 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9617922268
-	for <xen-devel@archiver.kernel.org>; Mon, 19 Oct 2020 09:09:18 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9617922268
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.de
+	by mail.kernel.org (Postfix) with ESMTPS id 018AF22200
+	for <xen-devel@archiver.kernel.org>; Mon, 19 Oct 2020 09:20:23 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="sGsXv0TY"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 018AF22200
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.8676.23227 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.8683.23254 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kURA2-0007o8-8Z; Mon, 19 Oct 2020 09:08:58 +0000
+	id 1kURKl-0000fN-IO; Mon, 19 Oct 2020 09:20:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 8676.23227; Mon, 19 Oct 2020 09:08:58 +0000
+Received: by outflank-mailman (output) from mailman id 8683.23254; Mon, 19 Oct 2020 09:20:03 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,397 +38,346 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kURA2-0007o1-5d; Mon, 19 Oct 2020 09:08:58 +0000
-Received: by outflank-mailman (input) for mailman id 8676;
- Mon, 19 Oct 2020 09:08:56 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kURKl-0000fG-Ev; Mon, 19 Oct 2020 09:20:03 +0000
+Received: by outflank-mailman (input) for mailman id 8683;
+ Mon, 19 Oct 2020 09:20:02 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=cRFv=D2=suse.de=tzimmermann@srs-us1.protection.inumbo.net>)
- id 1kURA0-0007nw-FS
- for xen-devel@lists.xenproject.org; Mon, 19 Oct 2020 09:08:56 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 440fc63b-2afa-4e34-950c-39a79c973e54;
- Mon, 19 Oct 2020 09:08:54 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id D8DEBB298;
- Mon, 19 Oct 2020 09:08:53 +0000 (UTC)
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ <SRS0=zzxy=D2=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
+ id 1kURKk-0000R4-3G
+ for xen-devel@lists.xenproject.org; Mon, 19 Oct 2020 09:20:02 +0000
+Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 0633b052-48aa-4e61-b613-b5a9444bdc8f;
+ Mon, 19 Oct 2020 09:19:55 +0000 (UTC)
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kURKc-0005os-Ji; Mon, 19 Oct 2020 09:19:54 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kURKc-0003uf-A9; Mon, 19 Oct 2020 09:19:54 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1kURKc-0000Hm-9f; Mon, 19 Oct 2020 09:19:54 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=cRFv=D2=suse.de=tzimmermann@srs-us1.protection.inumbo.net>)
-	id 1kURA0-0007nw-FS
-	for xen-devel@lists.xenproject.org; Mon, 19 Oct 2020 09:08:56 +0000
-X-Inumbo-ID: 440fc63b-2afa-4e34-950c-39a79c973e54
-Received: from mx2.suse.de (unknown [195.135.220.15])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 440fc63b-2afa-4e34-950c-39a79c973e54;
-	Mon, 19 Oct 2020 09:08:54 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id D8DEBB298;
-	Mon, 19 Oct 2020 09:08:53 +0000 (UTC)
-Subject: Re: [PATCH v4 05/10] drm/ttm: Add vmap/vunmap to TTM and TTM GEM
- helpers
-To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- maarten.lankhorst@linux.intel.com, mripard@kernel.org, airlied@linux.ie,
- daniel@ffwll.ch, sam@ravnborg.org, alexander.deucher@amd.com,
- kraxel@redhat.com, l.stach@pengutronix.de, linux+etnaviv@armlinux.org.uk,
- christian.gmeiner@gmail.com, inki.dae@samsung.com, jy0922.shim@samsung.com,
- sw0312.kim@samsung.com, kyungmin.park@samsung.com, kgene@kernel.org,
- krzk@kernel.org, yuq825@gmail.com, bskeggs@redhat.com, robh@kernel.org,
- tomeu.vizoso@collabora.com, steven.price@arm.com,
- alyssa.rosenzweig@collabora.com, hjc@rock-chips.com, heiko@sntech.de,
- hdegoede@redhat.com, sean@poorly.run, eric@anholt.net,
- oleksandr_andrushchenko@epam.com, ray.huang@amd.com,
- sumit.semwal@linaro.org, emil.velikov@collabora.com, luben.tuikov@amd.com,
- apaneers@amd.com, linus.walleij@linaro.org, melissa.srw@gmail.com,
- chris@chris-wilson.co.uk, miaoqinglang@huawei.com
-Cc: linux-samsung-soc@vger.kernel.org, lima@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, etnaviv@lists.freedesktop.org,
- amd-gfx@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
- linaro-mm-sig@lists.linaro.org, linux-rockchip@lists.infradead.org,
- dri-devel@lists.freedesktop.org, xen-devel@lists.xenproject.org,
- spice-devel@lists.freedesktop.org, linux-arm-kernel@lists.infradead.org,
- linux-media@vger.kernel.org
-References: <20201015123806.32416-1-tzimmermann@suse.de>
- <20201015123806.32416-6-tzimmermann@suse.de>
- <935d5771-5645-62a6-849c-31e286db1e30@amd.com>
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Message-ID: <87c7c342-88dc-9a36-31f7-dae6edd34626@suse.de>
-Date: Mon, 19 Oct 2020 11:08:51 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.3.2
-MIME-Version: 1.0
-In-Reply-To: <935d5771-5645-62a6-849c-31e286db1e30@amd.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+	(envelope-from <SRS0=zzxy=D2=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
+	id 1kURKk-0000R4-3G
+	for xen-devel@lists.xenproject.org; Mon, 19 Oct 2020 09:20:02 +0000
+X-Inumbo-ID: 0633b052-48aa-4e61-b613-b5a9444bdc8f
+Received: from mail.xenproject.org (unknown [104.130.215.37])
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id 0633b052-48aa-4e61-b613-b5a9444bdc8f;
+	Mon, 19 Oct 2020 09:19:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=JUXoSKE9CsmtueRk0IT+rpt4VEnNlS6KNZlbtHn8mCc=; b=sGsXv0TYOCrfFtq8PMWlX0M037
+	Xn7YYGP7bVw8sVscaO1neLrAxj4aRLFkKMZLl03RdgOXYofU3ZLF3w6QGv3rgk5F8j8ovl2zBP0er
+	dhQktNCwr6SC/E3BcBBvZR8afjgWCq5rf15hKeaav9HNbdzZXc5XX4uSI5k0BNFSlC4Y=;
+Received: from host146.205.237.98.conversent.net ([205.237.98.146] helo=infra.test-lab.xenproject.org)
+	by mail.xenproject.org with esmtp (Exim 4.92)
+	(envelope-from <osstest-admin@xenproject.org>)
+	id 1kURKc-0005os-Ji; Mon, 19 Oct 2020 09:19:54 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+	by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+	(envelope-from <osstest-admin@xenproject.org>)
+	id 1kURKc-0003uf-A9; Mon, 19 Oct 2020 09:19:54 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim 4.92)
+	(envelope-from <osstest-admin@xenproject.org>)
+	id 1kURKc-0000Hm-9f; Mon, 19 Oct 2020 09:19:54 +0000
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-155965-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [linux-linus test] 155965: regressions - FAIL
+X-Osstest-Failures:
+    linux-linus:test-amd64-i386-xl-qemuu-ws16-amd64:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-xsm:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-qemut-debianhvm-amd64:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-qemuu-dmrestrict-amd64-dmrestrict:xen-install:fail:regression
+    linux-linus:test-amd64-i386-qemut-rhel6hvm-intel:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-qemuu-debianhvm-amd64-shadow:xen-install:fail:regression
+    linux-linus:test-amd64-i386-qemuu-rhel6hvm-intel:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-qemuu-debianhvm-i386-xsm:xen-install:fail:regression
+    linux-linus:test-amd64-i386-examine:xen-install:fail:regression
+    linux-linus:test-amd64-i386-libvirt:xen-install:fail:regression
+    linux-linus:test-amd64-i386-pair:xen-install/src_host:fail:regression
+    linux-linus:test-amd64-i386-pair:xen-install/dst_host:fail:regression
+    linux-linus:test-amd64-i386-qemut-rhel6hvm-amd:xen-install:fail:regression
+    linux-linus:test-amd64-coresched-i386-xl:xen-install:fail:regression
+    linux-linus:test-amd64-i386-qemuu-rhel6hvm-amd:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-qemuu-debianhvm-amd64:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl:xen-install:fail:regression
+    linux-linus:test-amd64-i386-libvirt-xsm:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-qemut-ws16-amd64:xen-install:fail:regression
+    linux-linus:test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-pvshim:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-raw:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-qemut-debianhvm-i386-xsm:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-shadow:xen-install:fail:regression
+    linux-linus:test-amd64-i386-freebsd10-amd64:xen-install:fail:regression
+    linux-linus:test-amd64-i386-freebsd10-i386:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-qemuu-win7-amd64:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-qemut-win7-amd64:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-qemuu-ovmf-amd64:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-qemut-stubdom-debianhvm-amd64-xsm:xen-install:fail:regression
+    linux-linus:test-amd64-i386-libvirt-pair:xen-install/src_host:fail:regression
+    linux-linus:test-amd64-i386-libvirt-pair:xen-install/dst_host:fail:regression
+    linux-linus:test-arm64-arm64-examine:reboot:fail:regression
+    linux-linus:test-arm64-arm64-xl:host-ping-check-xen:fail:regression
+    linux-linus:test-arm64-arm64-xl-credit1:xen-boot:fail:regression
+    linux-linus:test-armhf-armhf-xl-vhd:xen-boot:fail:regression
+    linux-linus:test-armhf-armhf-xl-credit2:xen-boot:fail:regression
+    linux-linus:test-armhf-armhf-xl-cubietruck:xen-boot:fail:regression
+    linux-linus:test-armhf-armhf-libvirt:xen-boot:fail:regression
+    linux-linus:test-armhf-armhf-examine:reboot:fail:regression
+    linux-linus:test-armhf-armhf-xl-multivcpu:xen-boot:fail:regression
+    linux-linus:test-arm64-arm64-xl-seattle:host-ping-check-xen:fail:regression
+    linux-linus:test-arm64-arm64-xl-credit2:xen-boot:fail:regression
+    linux-linus:test-armhf-armhf-xl-credit1:xen-boot:fail:regression
+    linux-linus:test-armhf-armhf-xl:xen-boot:fail:regression
+    linux-linus:test-armhf-armhf-libvirt-raw:xen-boot:fail:regression
+    linux-linus:test-armhf-armhf-xl-rtds:xen-boot:fail:allowable
+    linux-linus:test-arm64-arm64-xl-xsm:leak-check/basis(11):fail:nonblocking
+    linux-linus:test-arm64-arm64-libvirt-xsm:leak-check/basis(11):fail:nonblocking
+    linux-linus:test-amd64-amd64-xl-qemut-win7-amd64:guest-stop:fail:nonblocking
+    linux-linus:test-amd64-amd64-xl-qemuu-win7-amd64:guest-stop:fail:nonblocking
+    linux-linus:test-amd64-amd64-xl-qemut-ws16-amd64:guest-stop:fail:nonblocking
+    linux-linus:test-amd64-amd64-qemuu-nested-amd:debian-hvm-install/l1/l2:fail:nonblocking
+    linux-linus:test-amd64-amd64-xl-qemuu-ws16-amd64:guest-stop:fail:nonblocking
+    linux-linus:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-libvirt-xsm:migrate-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-libvirt-vhd:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-thunderx:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-thunderx:saverestore-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-arndale:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-arndale:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    linux=9453b2d4694c2cb6c30d99e65d4a3deb09e94ac3
+X-Osstest-Versions-That:
+    linux=deacdb3e3979979016fcd0ffd518c320a62ad166
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Mon, 19 Oct 2020 09:19:54 +0000
 
-Hi Christian
+flight 155965 linux-linus real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/155965/
 
-On 15.10.20 16:08, Christian König wrote:
-> Am 15.10.20 um 14:38 schrieb Thomas Zimmermann:
->> The new functions ttm_bo_{vmap,vunmap}() map and unmap a TTM BO in kernel
->> address space. The mapping's address is returned as struct dma_buf_map.
->> Each function is a simplified version of TTM's existing kmap code. Both
->> functions respect the memory's location ani/or writecombine flags.
->>
->> On top TTM's functions, GEM TTM helpers got drm_gem_ttm_{vmap,vunmap}(),
->> two helpers that convert a GEM object into the TTM BO and forward the
->> call
->> to TTM's vmap/vunmap. These helpers can be dropped into the rsp GEM
->> object
->> callbacks.
->>
->> v4:
->>     * drop ttm_kmap_obj_to_dma_buf() in favor of vmap helpers (Daniel,
->>       Christian)
-> 
-> Bunch of minor comments below, but over all look very solid to me.
-> 
->>
->> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
->> ---
->>   drivers/gpu/drm/drm_gem_ttm_helper.c | 38 +++++++++++++++
->>   drivers/gpu/drm/ttm/ttm_bo_util.c    | 72 ++++++++++++++++++++++++++++
->>   include/drm/drm_gem_ttm_helper.h     |  6 +++
->>   include/drm/ttm/ttm_bo_api.h         | 28 +++++++++++
->>   include/linux/dma-buf-map.h          | 20 ++++++++
->>   5 files changed, 164 insertions(+)
->>
->> diff --git a/drivers/gpu/drm/drm_gem_ttm_helper.c
->> b/drivers/gpu/drm/drm_gem_ttm_helper.c
->> index 0e4fb9ba43ad..db4c14d78a30 100644
->> --- a/drivers/gpu/drm/drm_gem_ttm_helper.c
->> +++ b/drivers/gpu/drm/drm_gem_ttm_helper.c
->> @@ -49,6 +49,44 @@ void drm_gem_ttm_print_info(struct drm_printer *p,
->> unsigned int indent,
->>   }
->>   EXPORT_SYMBOL(drm_gem_ttm_print_info);
->>   +/**
->> + * drm_gem_ttm_vmap() - vmap &ttm_buffer_object
->> + * @gem: GEM object.
->> + * @map: [out] returns the dma-buf mapping.
->> + *
->> + * Maps a GEM object with ttm_bo_vmap(). This function can be used as
->> + * &drm_gem_object_funcs.vmap callback.
->> + *
->> + * Returns:
->> + * 0 on success, or a negative errno code otherwise.
->> + */
->> +int drm_gem_ttm_vmap(struct drm_gem_object *gem,
->> +             struct dma_buf_map *map)
->> +{
->> +    struct ttm_buffer_object *bo = drm_gem_ttm_of_gem(gem);
->> +
->> +    return ttm_bo_vmap(bo, map);
->> +
->> +}
->> +EXPORT_SYMBOL(drm_gem_ttm_vmap);
->> +
->> +/**
->> + * drm_gem_ttm_vunmap() - vunmap &ttm_buffer_object
->> + * @gem: GEM object.
->> + * @map: dma-buf mapping.
->> + *
->> + * Unmaps a GEM object with ttm_bo_vunmap(). This function can be
->> used as
->> + * &drm_gem_object_funcs.vmap callback.
->> + */
->> +void drm_gem_ttm_vunmap(struct drm_gem_object *gem,
->> +            struct dma_buf_map *map)
->> +{
->> +    struct ttm_buffer_object *bo = drm_gem_ttm_of_gem(gem);
->> +
->> +    ttm_bo_vunmap(bo, map);
->> +}
->> +EXPORT_SYMBOL(drm_gem_ttm_vunmap);
->> +
->>   /**
->>    * drm_gem_ttm_mmap() - mmap &ttm_buffer_object
->>    * @gem: GEM object.
->> diff --git a/drivers/gpu/drm/ttm/ttm_bo_util.c
->> b/drivers/gpu/drm/ttm/ttm_bo_util.c
->> index bdee4df1f3f2..80c42c774c7d 100644
->> --- a/drivers/gpu/drm/ttm/ttm_bo_util.c
->> +++ b/drivers/gpu/drm/ttm/ttm_bo_util.c
->> @@ -32,6 +32,7 @@
->>   #include <drm/ttm/ttm_bo_driver.h>
->>   #include <drm/ttm/ttm_placement.h>
->>   #include <drm/drm_vma_manager.h>
->> +#include <linux/dma-buf-map.h>
->>   #include <linux/io.h>
->>   #include <linux/highmem.h>
->>   #include <linux/wait.h>
->> @@ -526,6 +527,77 @@ void ttm_bo_kunmap(struct ttm_bo_kmap_obj *map)
->>   }
->>   EXPORT_SYMBOL(ttm_bo_kunmap);
->>   +int ttm_bo_vmap(struct ttm_buffer_object *bo, struct dma_buf_map *map)
->> +{
->> +    struct ttm_resource *mem = &bo->mem;
->> +    int ret;
->> +
->> +    ret = ttm_mem_io_reserve(bo->bdev, mem);
->> +    if (ret)
->> +        return ret;
->> +
->> +    if (mem->bus.is_iomem) {
->> +        void __iomem *vaddr_iomem;
->> +        unsigned long size = bo->num_pages << PAGE_SHIFT;
-> 
-> Please use uint64_t here and make sure to cast bo->num_pages before
-> shifting.
+Regressions :-(
 
-I thought the rule of thumb is to use u64 in source code. Yet TTM only
-uses uint*_t types. Is there anything special about TTM?
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ test-amd64-i386-xl-qemuu-ws16-amd64  7 xen-install       fail REGR. vs. 152332
+ test-amd64-i386-xl-xsm        7 xen-install              fail REGR. vs. 152332
+ test-amd64-i386-xl-qemut-debianhvm-amd64  7 xen-install  fail REGR. vs. 152332
+ test-amd64-i386-xl-qemuu-dmrestrict-amd64-dmrestrict 7 xen-install fail REGR. vs. 152332
+ test-amd64-i386-qemut-rhel6hvm-intel  7 xen-install      fail REGR. vs. 152332
+ test-amd64-i386-xl-qemuu-debianhvm-amd64-shadow 7 xen-install fail REGR. vs. 152332
+ test-amd64-i386-qemuu-rhel6hvm-intel  7 xen-install      fail REGR. vs. 152332
+ test-amd64-i386-xl-qemuu-debianhvm-i386-xsm 7 xen-install fail REGR. vs. 152332
+ test-amd64-i386-examine       6 xen-install              fail REGR. vs. 152332
+ test-amd64-i386-libvirt       7 xen-install              fail REGR. vs. 152332
+ test-amd64-i386-pair         10 xen-install/src_host     fail REGR. vs. 152332
+ test-amd64-i386-pair         11 xen-install/dst_host     fail REGR. vs. 152332
+ test-amd64-i386-qemut-rhel6hvm-amd  7 xen-install        fail REGR. vs. 152332
+ test-amd64-coresched-i386-xl  7 xen-install              fail REGR. vs. 152332
+ test-amd64-i386-qemuu-rhel6hvm-amd  7 xen-install        fail REGR. vs. 152332
+ test-amd64-i386-xl-qemuu-debianhvm-amd64  7 xen-install  fail REGR. vs. 152332
+ test-amd64-i386-xl            7 xen-install              fail REGR. vs. 152332
+ test-amd64-i386-libvirt-xsm   7 xen-install              fail REGR. vs. 152332
+ test-amd64-i386-xl-qemut-ws16-amd64  7 xen-install       fail REGR. vs. 152332
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 7 xen-install fail REGR. vs. 152332
+ test-amd64-i386-xl-pvshim     7 xen-install              fail REGR. vs. 152332
+ test-amd64-i386-xl-raw        7 xen-install              fail REGR. vs. 152332
+ test-amd64-i386-xl-qemut-debianhvm-i386-xsm 7 xen-install fail REGR. vs. 152332
+ test-amd64-i386-xl-shadow     7 xen-install              fail REGR. vs. 152332
+ test-amd64-i386-freebsd10-amd64  7 xen-install           fail REGR. vs. 152332
+ test-amd64-i386-freebsd10-i386  7 xen-install            fail REGR. vs. 152332
+ test-amd64-i386-xl-qemuu-win7-amd64  7 xen-install       fail REGR. vs. 152332
+ test-amd64-i386-xl-qemut-win7-amd64  7 xen-install       fail REGR. vs. 152332
+ test-amd64-i386-xl-qemuu-ovmf-amd64  7 xen-install       fail REGR. vs. 152332
+ test-amd64-i386-xl-qemut-stubdom-debianhvm-amd64-xsm 7 xen-install fail REGR. vs. 152332
+ test-amd64-i386-libvirt-pair 10 xen-install/src_host     fail REGR. vs. 152332
+ test-amd64-i386-libvirt-pair 11 xen-install/dst_host     fail REGR. vs. 152332
+ test-arm64-arm64-examine      8 reboot                   fail REGR. vs. 152332
+ test-arm64-arm64-xl          10 host-ping-check-xen      fail REGR. vs. 152332
+ test-arm64-arm64-xl-credit1   8 xen-boot                 fail REGR. vs. 152332
+ test-armhf-armhf-xl-vhd       8 xen-boot                 fail REGR. vs. 152332
+ test-armhf-armhf-xl-credit2   8 xen-boot                 fail REGR. vs. 152332
+ test-armhf-armhf-xl-cubietruck  8 xen-boot               fail REGR. vs. 152332
+ test-armhf-armhf-libvirt      8 xen-boot                 fail REGR. vs. 152332
+ test-armhf-armhf-examine      8 reboot                   fail REGR. vs. 152332
+ test-armhf-armhf-xl-multivcpu  8 xen-boot                fail REGR. vs. 152332
+ test-arm64-arm64-xl-seattle  10 host-ping-check-xen      fail REGR. vs. 152332
+ test-arm64-arm64-xl-credit2   8 xen-boot                 fail REGR. vs. 152332
+ test-armhf-armhf-xl-credit1   8 xen-boot                 fail REGR. vs. 152332
+ test-armhf-armhf-xl           8 xen-boot                 fail REGR. vs. 152332
+ test-armhf-armhf-libvirt-raw  8 xen-boot                 fail REGR. vs. 152332
 
-> 
-> We have an unit tests of allocating a 8GB BO and that should work on a
-> 32bit machine as well :)
-> 
->> +
->> +        if (mem->bus.addr)
->> +            vaddr_iomem = (void *)(((u8 *)mem->bus.addr));
+Regressions which are regarded as allowable (not blocking):
+ test-armhf-armhf-xl-rtds      8 xen-boot                 fail REGR. vs. 152332
 
-I after reading the patch again, I realized that this is the
-'ttm_bo_map_premapped' case and it's missing from _vunmap(). I see two
-options here: ignore this case in _vunmap(), or do an ioremap()
-unconditionally. Which one is preferable?
+Tests which did not succeed, but are not blocking:
+ test-arm64-arm64-xl-xsm      11 leak-check/basis(11)    fail blocked in 152332
+ test-arm64-arm64-libvirt-xsm 11 leak-check/basis(11)    fail blocked in 152332
+ test-amd64-amd64-xl-qemut-win7-amd64 19 guest-stop            fail like 152332
+ test-amd64-amd64-xl-qemuu-win7-amd64 19 guest-stop            fail like 152332
+ test-amd64-amd64-xl-qemut-ws16-amd64 19 guest-stop            fail like 152332
+ test-amd64-amd64-qemuu-nested-amd 20 debian-hvm-install/l1/l2 fail like 152332
+ test-amd64-amd64-xl-qemuu-ws16-amd64 19 guest-stop            fail like 152332
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt-xsm 15 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
+ test-amd64-amd64-libvirt-vhd 14 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-thunderx 15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-thunderx 16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-arndale  15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-arndale  16 saverestore-support-check    fail   never pass
 
-Best regards
-Thomas
+version targeted for testing:
+ linux                9453b2d4694c2cb6c30d99e65d4a3deb09e94ac3
+baseline version:
+ linux                deacdb3e3979979016fcd0ffd518c320a62ad166
 
->> +        else if (mem->placement & TTM_PL_FLAG_WC)
-> 
-> I've just nuked the TTM_PL_FLAG_WC flag in drm-misc-next. There is a new
-> mem->bus.caching enum as replacement.
-> 
->> +            vaddr_iomem = ioremap_wc(mem->bus.offset, size);
->> +        else
->> +            vaddr_iomem = ioremap(mem->bus.offset, size);
->> +
->> +        if (!vaddr_iomem)
->> +            return -ENOMEM;
->> +
->> +        dma_buf_map_set_vaddr_iomem(map, vaddr_iomem);
->> +
->> +    } else {
->> +        struct ttm_operation_ctx ctx = {
->> +            .interruptible = false,
->> +            .no_wait_gpu = false
->> +        };
->> +        struct ttm_tt *ttm = bo->ttm;
->> +        pgprot_t prot;
->> +        void *vaddr;
->> +
->> +        BUG_ON(!ttm);
-> 
-> I think we can drop this, populate will just crash badly anyway.
-> 
->> +
->> +        ret = ttm_tt_populate(bo->bdev, ttm, &ctx);
->> +        if (ret)
->> +            return ret;
->> +
->> +        /*
->> +         * We need to use vmap to get the desired page protection
->> +         * or to make the buffer object look contiguous.
->> +         */
->> +        prot = ttm_io_prot(mem->placement, PAGE_KERNEL);
-> 
-> The calling convention has changed on drm-misc-next as well, but should
-> be trivial to adapt.
-> 
-> Regards,
-> Christian.
-> 
->> +        vaddr = vmap(ttm->pages, bo->num_pages, 0, prot);
->> +        if (!vaddr)
->> +            return -ENOMEM;
->> +
->> +        dma_buf_map_set_vaddr(map, vaddr);
->> +    }
->> +
->> +    return 0;
->> +}
->> +EXPORT_SYMBOL(ttm_bo_vmap);
->> +
->> +void ttm_bo_vunmap(struct ttm_buffer_object *bo, struct dma_buf_map
->> *map)
->> +{
->> +    if (dma_buf_map_is_null(map))
->> +        return;
->> +
->> +    if (map->is_iomem)
->> +        iounmap(map->vaddr_iomem);
->> +    else
->> +        vunmap(map->vaddr);
->> +    dma_buf_map_clear(map);
->> +
->> +    ttm_mem_io_free(bo->bdev, &bo->mem);
->> +}
->> +EXPORT_SYMBOL(ttm_bo_vunmap);
->> +
->>   static int ttm_bo_wait_free_node(struct ttm_buffer_object *bo,
->>                    bool dst_use_tt)
->>   {
->> diff --git a/include/drm/drm_gem_ttm_helper.h
->> b/include/drm/drm_gem_ttm_helper.h
->> index 118cef76f84f..7c6d874910b8 100644
->> --- a/include/drm/drm_gem_ttm_helper.h
->> +++ b/include/drm/drm_gem_ttm_helper.h
->> @@ -10,11 +10,17 @@
->>   #include <drm/ttm/ttm_bo_api.h>
->>   #include <drm/ttm/ttm_bo_driver.h>
->>   +struct dma_buf_map;
->> +
->>   #define drm_gem_ttm_of_gem(gem_obj) \
->>       container_of(gem_obj, struct ttm_buffer_object, base)
->>     void drm_gem_ttm_print_info(struct drm_printer *p, unsigned int
->> indent,
->>                   const struct drm_gem_object *gem);
->> +int drm_gem_ttm_vmap(struct drm_gem_object *gem,
->> +             struct dma_buf_map *map);
->> +void drm_gem_ttm_vunmap(struct drm_gem_object *gem,
->> +            struct dma_buf_map *map);
->>   int drm_gem_ttm_mmap(struct drm_gem_object *gem,
->>                struct vm_area_struct *vma);
->>   diff --git a/include/drm/ttm/ttm_bo_api.h
->> b/include/drm/ttm/ttm_bo_api.h
->> index 37102e45e496..2c59a785374c 100644
->> --- a/include/drm/ttm/ttm_bo_api.h
->> +++ b/include/drm/ttm/ttm_bo_api.h
->> @@ -48,6 +48,8 @@ struct ttm_bo_global;
->>     struct ttm_bo_device;
->>   +struct dma_buf_map;
->> +
->>   struct drm_mm_node;
->>     struct ttm_placement;
->> @@ -494,6 +496,32 @@ int ttm_bo_kmap(struct ttm_buffer_object *bo,
->> unsigned long start_page,
->>    */
->>   void ttm_bo_kunmap(struct ttm_bo_kmap_obj *map);
->>   +/**
->> + * ttm_bo_vmap
->> + *
->> + * @bo: The buffer object.
->> + * @map: pointer to a struct dma_buf_map representing the map.
->> + *
->> + * Sets up a kernel virtual mapping, using ioremap or vmap to the
->> + * data in the buffer object. The parameter @map returns the virtual
->> + * address as struct dma_buf_map. Unmap the buffer with ttm_bo_vunmap().
->> + *
->> + * Returns
->> + * -ENOMEM: Out of memory.
->> + * -EINVAL: Invalid range.
->> + */
->> +int ttm_bo_vmap(struct ttm_buffer_object *bo, struct dma_buf_map *map);
->> +
->> +/**
->> + * ttm_bo_vunmap
->> + *
->> + * @bo: The buffer object.
->> + * @map: Object describing the map to unmap.
->> + *
->> + * Unmaps a kernel map set up by ttm_bo_vmap().
->> + */
->> +void ttm_bo_vunmap(struct ttm_buffer_object *bo, struct dma_buf_map
->> *map);
->> +
->>   /**
->>    * ttm_bo_mmap_obj - mmap memory backed by a ttm buffer object.
->>    *
->> diff --git a/include/linux/dma-buf-map.h b/include/linux/dma-buf-map.h
->> index fd1aba545fdf..2e8bbecb5091 100644
->> --- a/include/linux/dma-buf-map.h
->> +++ b/include/linux/dma-buf-map.h
->> @@ -45,6 +45,12 @@
->>    *
->>    *    dma_buf_map_set_vaddr(&map. 0xdeadbeaf);
->>    *
->> + * To set an address in I/O memory, use dma_buf_map_set_vaddr_iomem().
->> + *
->> + * .. code-block:: c
->> + *
->> + *    dma_buf_map_set_vaddr_iomem(&map. 0xdeadbeaf);
->> + *
->>    * Test if a mapping is valid with either dma_buf_map_is_set() or
->>    * dma_buf_map_is_null().
->>    *
->> @@ -118,6 +124,20 @@ static inline void dma_buf_map_set_vaddr(struct
->> dma_buf_map *map, void *vaddr)
->>       map->is_iomem = false;
->>   }
->>   +/**
->> + * dma_buf_map_set_vaddr_iomem - Sets a dma-buf mapping structure to
->> an address in I/O memory
->> + * @map:        The dma-buf mapping structure
->> + * @vaddr_iomem:    An I/O-memory address
->> + *
->> + * Sets the address and the I/O-memory flag.
->> + */
->> +static inline void dma_buf_map_set_vaddr_iomem(struct dma_buf_map *map,
->> +                           void __iomem *vaddr_iomem)
->> +{
->> +    map->vaddr_iomem = vaddr_iomem;
->> +    map->is_iomem = true;
->> +}
->> +
->>   /**
->>    * dma_buf_map_is_equal - Compares two dma-buf mapping structures
->> for equality
->>    * @lhs:    The dma-buf mapping structure
-> 
-> _______________________________________________
-> dri-devel mailing list
-> dri-devel@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/dri-devel
+Last test of basis   152332  2020-07-31 19:41:23 Z   79 days
+Failing since        152366  2020-08-01 20:49:34 Z   78 days  133 attempts
+Testing same since   155965  2020-10-18 19:40:17 Z    0 days    1 attempts
 
--- 
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Maxfeldstr. 5, 90409 Nürnberg, Germany
-(HRB 36809, AG Nürnberg)
-Geschäftsführer: Felix Imendörffer
+------------------------------------------------------------
+3213 people touched revisions under test,
+not listing them all
+
+jobs:
+ build-amd64-xsm                                              pass    
+ build-arm64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-arm64                                                  pass    
+ build-armhf                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-arm64-libvirt                                          pass    
+ build-armhf-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-arm64-pvops                                            pass    
+ build-armhf-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl                                          pass    
+ test-amd64-coresched-amd64-xl                                pass    
+ test-arm64-arm64-xl                                          fail    
+ test-armhf-armhf-xl                                          fail    
+ test-amd64-i386-xl                                           fail    
+ test-amd64-coresched-i386-xl                                 fail    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            fail    
+ test-amd64-amd64-xl-qemut-stubdom-debianhvm-amd64-xsm        pass    
+ test-amd64-i386-xl-qemut-stubdom-debianhvm-amd64-xsm         fail    
+ test-amd64-amd64-xl-qemut-debianhvm-i386-xsm                 pass    
+ test-amd64-i386-xl-qemut-debianhvm-i386-xsm                  fail    
+ test-amd64-amd64-xl-qemuu-debianhvm-i386-xsm                 pass    
+ test-amd64-i386-xl-qemuu-debianhvm-i386-xsm                  fail    
+ test-amd64-amd64-libvirt-xsm                                 pass    
+ test-arm64-arm64-libvirt-xsm                                 fail    
+ test-amd64-i386-libvirt-xsm                                  fail    
+ test-amd64-amd64-xl-xsm                                      pass    
+ test-arm64-arm64-xl-xsm                                      fail    
+ test-amd64-i386-xl-xsm                                       fail    
+ test-amd64-amd64-qemuu-nested-amd                            fail    
+ test-amd64-amd64-xl-pvhv2-amd                                pass    
+ test-amd64-i386-qemut-rhel6hvm-amd                           fail    
+ test-amd64-i386-qemuu-rhel6hvm-amd                           fail    
+ test-amd64-amd64-dom0pvh-xl-amd                              pass    
+ test-amd64-amd64-xl-qemut-debianhvm-amd64                    pass    
+ test-amd64-i386-xl-qemut-debianhvm-amd64                     fail    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64                     fail    
+ test-amd64-i386-freebsd10-amd64                              fail    
+ test-amd64-amd64-qemuu-freebsd11-amd64                       pass    
+ test-amd64-amd64-qemuu-freebsd12-amd64                       pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          fail    
+ test-amd64-amd64-xl-qemut-win7-amd64                         fail    
+ test-amd64-i386-xl-qemut-win7-amd64                          fail    
+ test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
+ test-amd64-i386-xl-qemuu-win7-amd64                          fail    
+ test-amd64-amd64-xl-qemut-ws16-amd64                         fail    
+ test-amd64-i386-xl-qemut-ws16-amd64                          fail    
+ test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
+ test-amd64-i386-xl-qemuu-ws16-amd64                          fail    
+ test-armhf-armhf-xl-arndale                                  pass    
+ test-amd64-amd64-xl-credit1                                  pass    
+ test-arm64-arm64-xl-credit1                                  fail    
+ test-armhf-armhf-xl-credit1                                  fail    
+ test-amd64-amd64-xl-credit2                                  pass    
+ test-arm64-arm64-xl-credit2                                  fail    
+ test-armhf-armhf-xl-credit2                                  fail    
+ test-armhf-armhf-xl-cubietruck                               fail    
+ test-amd64-amd64-xl-qemuu-dmrestrict-amd64-dmrestrict        pass    
+ test-amd64-i386-xl-qemuu-dmrestrict-amd64-dmrestrict         fail    
+ test-amd64-amd64-examine                                     pass    
+ test-arm64-arm64-examine                                     fail    
+ test-armhf-armhf-examine                                     fail    
+ test-amd64-i386-examine                                      fail    
+ test-amd64-i386-freebsd10-i386                               fail    
+ test-amd64-amd64-qemuu-nested-intel                          pass    
+ test-amd64-amd64-xl-pvhv2-intel                              pass    
+ test-amd64-i386-qemut-rhel6hvm-intel                         fail    
+ test-amd64-i386-qemuu-rhel6hvm-intel                         fail    
+ test-amd64-amd64-dom0pvh-xl-intel                            pass    
+ test-amd64-amd64-libvirt                                     pass    
+ test-armhf-armhf-libvirt                                     fail    
+ test-amd64-i386-libvirt                                      fail    
+ test-amd64-amd64-xl-multivcpu                                pass    
+ test-armhf-armhf-xl-multivcpu                                fail    
+ test-amd64-amd64-pair                                        pass    
+ test-amd64-i386-pair                                         fail    
+ test-amd64-amd64-libvirt-pair                                pass    
+ test-amd64-i386-libvirt-pair                                 fail    
+ test-amd64-amd64-amd64-pvgrub                                pass    
+ test-amd64-amd64-i386-pvgrub                                 pass    
+ test-amd64-amd64-xl-pvshim                                   pass    
+ test-amd64-i386-xl-pvshim                                    fail    
+ test-amd64-amd64-pygrub                                      pass    
+ test-amd64-amd64-xl-qcow2                                    pass    
+ test-armhf-armhf-libvirt-raw                                 fail    
+ test-amd64-i386-xl-raw                                       fail    
+ test-amd64-amd64-xl-rtds                                     pass    
+ test-armhf-armhf-xl-rtds                                     fail    
+ test-arm64-arm64-xl-seattle                                  fail    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64-shadow             pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64-shadow              fail    
+ test-amd64-amd64-xl-shadow                                   pass    
+ test-amd64-i386-xl-shadow                                    fail    
+ test-arm64-arm64-xl-thunderx                                 pass    
+ test-amd64-amd64-libvirt-vhd                                 pass    
+ test-armhf-armhf-xl-vhd                                      fail    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+(No revision log; it would be 585086 lines long.)
 
