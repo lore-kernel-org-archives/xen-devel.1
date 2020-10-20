@@ -7,21 +7,21 @@ X-Spam-Status: No, score=-12.7 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 54680C64E75
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D400C6379F
 	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2020 12:21:12 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0337E22404
+	by mail.kernel.org (Postfix) with ESMTPS id C9C0922253
 	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2020 12:21:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0337E22404
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C9C0922253
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.9464.24820 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.9465.24827 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kUqdQ-0004Ol-LR; Tue, 20 Oct 2020 12:21:00 +0000
+	id 1kUqdR-0004PW-1P; Tue, 20 Oct 2020 12:21:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 9464.24820; Tue, 20 Oct 2020 12:21:00 +0000
+Received: by outflank-mailman (output) from mailman id 9465.24827; Tue, 20 Oct 2020 12:21:00 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,36 +36,35 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kUqdQ-0004OZ-GM; Tue, 20 Oct 2020 12:21:00 +0000
-Received: by outflank-mailman (input) for mailman id 9464;
+	id 1kUqdQ-0004PK-Px; Tue, 20 Oct 2020 12:21:00 +0000
+Received: by outflank-mailman (input) for mailman id 9465;
  Tue, 20 Oct 2020 12:20:59 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=wemb=D3=suse.de=tzimmermann@srs-us1.protection.inumbo.net>)
- id 1kUqdP-0004KG-48
+ id 1kUqdP-0004KL-T4
  for xen-devel@lists.xenproject.org; Tue, 20 Oct 2020 12:20:59 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 295c6168-8e3e-49e3-9f17-132fa31bf4c2;
- Tue, 20 Oct 2020 12:20:53 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id a7d1e691-2c59-49f5-b17a-210fc1f92d92;
+ Tue, 20 Oct 2020 12:20:54 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id EA87BB1C8;
- Tue, 20 Oct 2020 12:20:51 +0000 (UTC)
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+ by mx2.suse.de (Postfix) with ESMTP id 6E2A2B1AC;
+ Tue, 20 Oct 2020 12:20:52 +0000 (UTC)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=wemb=D3=suse.de=tzimmermann@srs-us1.protection.inumbo.net>)
-	id 1kUqdP-0004KG-48
+	id 1kUqdP-0004KL-T4
 	for xen-devel@lists.xenproject.org; Tue, 20 Oct 2020 12:20:59 +0000
-X-Inumbo-ID: 295c6168-8e3e-49e3-9f17-132fa31bf4c2
+X-Inumbo-ID: a7d1e691-2c59-49f5-b17a-210fc1f92d92
 Received: from mx2.suse.de (unknown [195.135.220.15])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 295c6168-8e3e-49e3-9f17-132fa31bf4c2;
-	Tue, 20 Oct 2020 12:20:53 +0000 (UTC)
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id a7d1e691-2c59-49f5-b17a-210fc1f92d92;
+	Tue, 20 Oct 2020 12:20:54 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id EA87BB1C8;
-	Tue, 20 Oct 2020 12:20:51 +0000 (UTC)
+	by mx2.suse.de (Postfix) with ESMTP id 6E2A2B1AC;
+	Tue, 20 Oct 2020 12:20:52 +0000 (UTC)
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: maarten.lankhorst@linux.intel.com,
 	mripard@kernel.org,
@@ -119,9 +118,9 @@ Cc: dri-devel@lists.freedesktop.org,
 	linux-media@vger.kernel.org,
 	linaro-mm-sig@lists.linaro.org,
 	Thomas Zimmermann <tzimmermann@suse.de>
-Subject: [PATCH v5 02/10] drm/cma-helper: Remove empty drm_gem_cma_prime_vunmap()
-Date: Tue, 20 Oct 2020 14:20:38 +0200
-Message-Id: <20201020122046.31167-3-tzimmermann@suse.de>
+Subject: [PATCH v5 04/10] drm/exynos: Remove empty exynos_drm_gem_prime_{vmap,vunmap}()
+Date: Tue, 20 Oct 2020 14:20:40 +0200
+Message-Id: <20201020122046.31167-5-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20201020122046.31167-1-tzimmermann@suse.de>
 References: <20201020122046.31167-1-tzimmermann@suse.de>
@@ -129,70 +128,62 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The function drm_gem_cma_prime_vunmap() is empty. Remove it before
-changing the interface to use struct drm_buf_map.
+The functions exynos_drm_gem_prime_{vmap,vunmap}() are empty. Remove
+them before changing the interface to use struct drm_buf_map. As a side
+effect of removing drm_gem_prime_vmap(), the error code changes from
+ENOMEM to EOPNOTSUPP.
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-Reviewed-by: Christian König <christian.koenig@amd.com>
+Acked-by: Christian König <christian.koenig@amd.com>
 Tested-by: Sam Ravnborg <sam@ravnborg.org>
 ---
- drivers/gpu/drm/drm_gem_cma_helper.c | 17 -----------------
- drivers/gpu/drm/vc4/vc4_bo.c         |  1 -
- include/drm/drm_gem_cma_helper.h     |  1 -
- 3 files changed, 19 deletions(-)
+ drivers/gpu/drm/exynos/exynos_drm_gem.c | 12 ------------
+ drivers/gpu/drm/exynos/exynos_drm_gem.h |  2 --
+ 2 files changed, 14 deletions(-)
 
-diff --git a/drivers/gpu/drm/drm_gem_cma_helper.c b/drivers/gpu/drm/drm_gem_cma_helper.c
-index 2165633c9b9e..d527485ea0b7 100644
---- a/drivers/gpu/drm/drm_gem_cma_helper.c
-+++ b/drivers/gpu/drm/drm_gem_cma_helper.c
-@@ -537,23 +537,6 @@ void *drm_gem_cma_prime_vmap(struct drm_gem_object *obj)
- }
- EXPORT_SYMBOL_GPL(drm_gem_cma_prime_vmap);
+diff --git a/drivers/gpu/drm/exynos/exynos_drm_gem.c b/drivers/gpu/drm/exynos/exynos_drm_gem.c
+index e7a6eb96f692..13a35623ac04 100644
+--- a/drivers/gpu/drm/exynos/exynos_drm_gem.c
++++ b/drivers/gpu/drm/exynos/exynos_drm_gem.c
+@@ -137,8 +137,6 @@ static const struct vm_operations_struct exynos_drm_gem_vm_ops = {
+ static const struct drm_gem_object_funcs exynos_drm_gem_object_funcs = {
+ 	.free = exynos_drm_gem_free_object,
+ 	.get_sg_table = exynos_drm_gem_prime_get_sg_table,
+-	.vmap = exynos_drm_gem_prime_vmap,
+-	.vunmap	= exynos_drm_gem_prime_vunmap,
+ 	.vm_ops = &exynos_drm_gem_vm_ops,
+ };
  
--/**
-- * drm_gem_cma_prime_vunmap - unmap a CMA GEM object from the kernel's virtual
-- *     address space
-- * @obj: GEM object
-- * @vaddr: kernel virtual address where the CMA GEM object was mapped
-- *
-- * This function removes a buffer exported via DRM PRIME from the kernel's
-- * virtual address space. This is a no-op because CMA buffers cannot be
-- * unmapped from kernel space. Drivers using the CMA helpers should set this
-- * as their &drm_gem_object_funcs.vunmap callback.
-- */
--void drm_gem_cma_prime_vunmap(struct drm_gem_object *obj, void *vaddr)
+@@ -471,16 +469,6 @@ exynos_drm_gem_prime_import_sg_table(struct drm_device *dev,
+ 	return &exynos_gem->base;
+ }
+ 
+-void *exynos_drm_gem_prime_vmap(struct drm_gem_object *obj)
+-{
+-	return NULL;
+-}
+-
+-void exynos_drm_gem_prime_vunmap(struct drm_gem_object *obj, void *vaddr)
 -{
 -	/* Nothing to do */
 -}
--EXPORT_SYMBOL_GPL(drm_gem_cma_prime_vunmap);
 -
- static const struct drm_gem_object_funcs drm_gem_cma_default_funcs = {
- 	.free = drm_gem_cma_free_object,
- 	.print_info = drm_gem_cma_print_info,
-diff --git a/drivers/gpu/drm/vc4/vc4_bo.c b/drivers/gpu/drm/vc4/vc4_bo.c
-index f432278173cd..557f0d1e6437 100644
---- a/drivers/gpu/drm/vc4/vc4_bo.c
-+++ b/drivers/gpu/drm/vc4/vc4_bo.c
-@@ -387,7 +387,6 @@ static const struct drm_gem_object_funcs vc4_gem_object_funcs = {
- 	.export = vc4_prime_export,
- 	.get_sg_table = drm_gem_cma_prime_get_sg_table,
- 	.vmap = vc4_prime_vmap,
--	.vunmap = drm_gem_cma_prime_vunmap,
- 	.vm_ops = &vc4_vm_ops,
- };
+ int exynos_drm_gem_prime_mmap(struct drm_gem_object *obj,
+ 			      struct vm_area_struct *vma)
+ {
+diff --git a/drivers/gpu/drm/exynos/exynos_drm_gem.h b/drivers/gpu/drm/exynos/exynos_drm_gem.h
+index 74e926abeff0..a23272fb96fb 100644
+--- a/drivers/gpu/drm/exynos/exynos_drm_gem.h
++++ b/drivers/gpu/drm/exynos/exynos_drm_gem.h
+@@ -107,8 +107,6 @@ struct drm_gem_object *
+ exynos_drm_gem_prime_import_sg_table(struct drm_device *dev,
+ 				     struct dma_buf_attachment *attach,
+ 				     struct sg_table *sgt);
+-void *exynos_drm_gem_prime_vmap(struct drm_gem_object *obj);
+-void exynos_drm_gem_prime_vunmap(struct drm_gem_object *obj, void *vaddr);
+ int exynos_drm_gem_prime_mmap(struct drm_gem_object *obj,
+ 			      struct vm_area_struct *vma);
  
-diff --git a/include/drm/drm_gem_cma_helper.h b/include/drm/drm_gem_cma_helper.h
-index 2bfa2502607a..a064b0d1c480 100644
---- a/include/drm/drm_gem_cma_helper.h
-+++ b/include/drm/drm_gem_cma_helper.h
-@@ -104,7 +104,6 @@ drm_gem_cma_prime_import_sg_table(struct drm_device *dev,
- int drm_gem_cma_prime_mmap(struct drm_gem_object *obj,
- 			   struct vm_area_struct *vma);
- void *drm_gem_cma_prime_vmap(struct drm_gem_object *obj);
--void drm_gem_cma_prime_vunmap(struct drm_gem_object *obj, void *vaddr);
- 
- struct drm_gem_object *
- drm_gem_cma_create_object_default_funcs(struct drm_device *dev, size_t size);
 -- 
 2.28.0
 
