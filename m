@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-13.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7C1E7C388F2
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D8C85C4363D
 	for <xen-devel@archiver.kernel.org>; Wed, 21 Oct 2020 00:00:34 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id F28952076A
-	for <xen-devel@archiver.kernel.org>; Wed, 21 Oct 2020 00:00:33 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 640E22225F
+	for <xen-devel@archiver.kernel.org>; Wed, 21 Oct 2020 00:00:34 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="A2hg26Sn"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F28952076A
+	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="FhgXC9FX"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 640E22225F
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.9796.25851 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.9794.25827 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kV1YA-00081R-Te; Wed, 21 Oct 2020 00:00:18 +0000
+	id 1kV1Y8-0007yH-9z; Wed, 21 Oct 2020 00:00:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 9796.25851; Wed, 21 Oct 2020 00:00:18 +0000
+Received: by outflank-mailman (output) from mailman id 9794.25827; Wed, 21 Oct 2020 00:00:16 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,46 +38,47 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kV1YA-00081J-Pa; Wed, 21 Oct 2020 00:00:18 +0000
-Received: by outflank-mailman (input) for mailman id 9796;
- Wed, 21 Oct 2020 00:00:17 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kV1Y8-0007yA-6O; Wed, 21 Oct 2020 00:00:16 +0000
+Received: by outflank-mailman (input) for mailman id 9794;
+ Wed, 21 Oct 2020 00:00:15 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=01QD=D4=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1kV1Y9-0007y0-3G
- for xen-devel@lists.xenproject.org; Wed, 21 Oct 2020 00:00:17 +0000
+ id 1kV1Y7-0007xs-8i
+ for xen-devel@lists.xenproject.org; Wed, 21 Oct 2020 00:00:15 +0000
 Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 60d0a6a7-e295-4694-9898-cc8ffab891de;
- Wed, 21 Oct 2020 00:00:16 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 83671988-2886-4227-9646-90ec5a7dc997;
+ Wed, 21 Oct 2020 00:00:14 +0000 (UTC)
 Received: from sstabellini-ThinkPad-T480s.hsd1.ca.comcast.net
  (c-24-130-65-46.hsd1.ca.comcast.net [24.130.65.46])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 45FD02242F;
- Wed, 21 Oct 2020 00:00:15 +0000 (UTC)
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by mail.kernel.org (Postfix) with ESMTPSA id 9986F2076A;
+ Wed, 21 Oct 2020 00:00:12 +0000 (UTC)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=01QD=D4=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
-	id 1kV1Y9-0007y0-3G
-	for xen-devel@lists.xenproject.org; Wed, 21 Oct 2020 00:00:17 +0000
-X-Inumbo-ID: 60d0a6a7-e295-4694-9898-cc8ffab891de
+	id 1kV1Y7-0007xs-8i
+	for xen-devel@lists.xenproject.org; Wed, 21 Oct 2020 00:00:15 +0000
+X-Inumbo-ID: 83671988-2886-4227-9646-90ec5a7dc997
 Received: from mail.kernel.org (unknown [198.145.29.99])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 60d0a6a7-e295-4694-9898-cc8ffab891de;
-	Wed, 21 Oct 2020 00:00:16 +0000 (UTC)
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id 83671988-2886-4227-9646-90ec5a7dc997;
+	Wed, 21 Oct 2020 00:00:14 +0000 (UTC)
 Received: from sstabellini-ThinkPad-T480s.hsd1.ca.comcast.net (c-24-130-65-46.hsd1.ca.comcast.net [24.130.65.46])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id 45FD02242F;
-	Wed, 21 Oct 2020 00:00:15 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPSA id 9986F2076A;
+	Wed, 21 Oct 2020 00:00:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1603238415;
-	bh=GUNzRumMSHbwvq+jjIpryPQ6OW8c5fAFKRBl0mSCZ28=;
+	s=default; t=1603238413;
+	bh=ZAlufUARB+MO+hXOZ2+s0SU7+f17uYJTPwjBRMscVvo=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=A2hg26SnrRkSfiixGzeHd7k87Ufua+YcqZoi9h8pM4WTmc5pZrI7BxMqTC9ivMhqp
-	 tuWvtkqpA2xbX3phw49dpbMnuSjx5uibCqqvezrJTn0BPT93Qr5rHAtSK0GPxzOgEb
-	 zkw8MGJRLZna5KvY17zOXThQqkaUfqpk/hyohl0Y=
+	b=FhgXC9FX40tFcNlZf6C6aZksWsXnRjInguehqK+hTOgWCHUZCIoF2oDc9uHPOUVyG
+	 Zbt5OYxarr4QlfO5uOsZi/WDAJEcHqNzypnCUpnojASzzz4UL2gF2IUfQcVMLrB3Oi
+	 kaEyrrrfEL3YAs0sjHxL1vaTJZ/oJvXTS0+W2hKs=
 From: Stefano Stabellini <sstabellini@kernel.org>
 To: xen-devel@lists.xenproject.org
 Cc: sstabellini@kernel.org,
@@ -89,9 +90,9 @@ Cc: sstabellini@kernel.org,
 	wl@xen.org,
 	Bertrand.Marquis@arm.com,
 	Stefano Stabellini <stefano.stabellini@xilinx.com>
-Subject: [PATCH v2 05/14] kernel-doc: public/features.h
-Date: Tue, 20 Oct 2020 17:00:02 -0700
-Message-Id: <20201021000011.15351-5-sstabellini@kernel.org>
+Subject: [PATCH v2 01/14] kernel-doc: public/arch-arm.h
+Date: Tue, 20 Oct 2020 16:59:58 -0700
+Message-Id: <20201021000011.15351-1-sstabellini@kernel.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <alpine.DEB.2.21.2010201646370.12247@sstabellini-ThinkPad-T480s>
 References: <alpine.DEB.2.21.2010201646370.12247@sstabellini-ThinkPad-T480s>
@@ -100,153 +101,104 @@ Convert in-code comments to kernel-doc format wherever possible.
 
 Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
 ---
- xen/include/public/features.h | 78 ++++++++++++++++++++++++++---------
- 1 file changed, 59 insertions(+), 19 deletions(-)
+ xen/include/public/arch-arm.h | 43 ++++++++++++++++++++++-------------
+ 1 file changed, 27 insertions(+), 16 deletions(-)
 
-diff --git a/xen/include/public/features.h b/xen/include/public/features.h
-index 1613b2aab8..524d1758c4 100644
---- a/xen/include/public/features.h
-+++ b/xen/include/public/features.h
+diff --git a/xen/include/public/arch-arm.h b/xen/include/public/arch-arm.h
+index c365b1b39e..409697dede 100644
+--- a/xen/include/public/arch-arm.h
++++ b/xen/include/public/arch-arm.h
 @@ -27,8 +27,8 @@
- #ifndef __XEN_PUBLIC_FEATURES_H__
- #define __XEN_PUBLIC_FEATURES_H__
+ #ifndef __XEN_PUBLIC_ARCH_ARM_H__
+ #define __XEN_PUBLIC_ARCH_ARM_H__
  
 -/*
-- * `incontents 200 elfnotes_features XEN_ELFNOTE_FEATURES
+- * `incontents 50 arm_abi Hypercall Calling Convention
 +/**
-+ * DOC: XEN_ELFNOTE_FEATURES
++ * DOC: Hypercall Calling Convention
   *
-  * The list of all the features the guest supports. They are set by
-  * parsing the XEN_ELFNOTE_FEATURES and XEN_ELFNOTE_SUPPORTED_FEATURES
-@@ -41,19 +41,25 @@
-  * XENFEAT_dom0 MUST be set if the guest is to be booted as dom0,
+  * A hypercall is issued using the ARM HVC instruction.
+  *
+@@ -72,8 +72,8 @@
+  * Any cache allocation hints are acceptable.
   */
  
 -/*
-- * If set, the guest does not need to write-protect its pagetables, and can
-- * update them via direct writes.
+- * `incontents 55 arm_hcall Supported Hypercalls
 +/**
-+ * DOC: XENFEAT_writable_page_tables
-+ *
-+ * If set, the guest does not need to write-protect its pagetables, and
-+ * can update them via direct writes.
-  */
- #define XENFEAT_writable_page_tables       0
++ * DOC: Supported Hypercalls
+  *
+  * Xen on ARM makes extensive use of hardware facilities and therefore
+  * only a subset of the potential hypercalls are required.
+@@ -175,10 +175,17 @@
+     typedef union { type *p; uint64_aligned_t q; }              \
+         __guest_handle_64_ ## name
  
 -/*
 +/**
-+ * DOC: XENFEAT_writable_descriptor_tables
++ * DOC: XEN_GUEST_HANDLE - a guest pointer in a struct
 + *
-  * If set, the guest does not need to write-protect its segment descriptor
-  * tables, and can update them via direct writes.
+  * XEN_GUEST_HANDLE represents a guest pointer, when passed as a field
+  * in a struct in memory. On ARM is always 8 bytes sizes and 8 bytes
+  * aligned.
++ */
++
++/**
++ * DOC: XEN_GUEST_HANDLE_PARAM - a guest pointer as a hypercall arg
++ *
+  * XEN_GUEST_HANDLE_PARAM represents a guest pointer, when passed as an
+  * hypercall argument. It is 4 bytes on aarch32 and 8 bytes on aarch64.
   */
- #define XENFEAT_writable_descriptor_tables 1
+@@ -201,7 +208,9 @@ typedef uint64_t xen_pfn_t;
+ #define PRI_xen_pfn PRIx64
+ #define PRIu_xen_pfn PRIu64
  
 -/*
 +/**
-+ * DOC: XENFEAT_auto_translated_physmap
++ * DOC: XEN_LEGACY_MAX_VCPUS
 + *
-  * If set, translation between the guest's 'pseudo-physical' address space
-  * and the host's machine address space are handled by the hypervisor. In this
-  * mode the guest does not need to perform phys-to/from-machine translations
-@@ -61,37 +67,63 @@
+  * Maximum number of virtual CPUs in legacy multi-processor guests.
+  * Only one. All other VCPUS must use VCPUOP_register_vcpu_info.
   */
- #define XENFEAT_auto_translated_physmap    2
- 
--/* If set, the guest is running in supervisor mode (e.g., x86 ring 0). */
-+/**
-+ * DOC: XENFEAT_supervisor_mode_kernel
-+ *
-+ * If set, the guest is running in supervisor mode (e.g., x86 ring 0).
-+ */
- #define XENFEAT_supervisor_mode_kernel     3
+@@ -299,26 +308,28 @@ struct vcpu_guest_context {
+ typedef struct vcpu_guest_context vcpu_guest_context_t;
+ DEFINE_XEN_GUEST_HANDLE(vcpu_guest_context_t);
  
 -/*
++
 +/**
-+ * DOC: XENFEAT_pae_pgdir_above_4gb
++ * struct xen_arch_domainconfig - arch-specific domain creation params
 + *
-  * If set, the guest does not need to allocate x86 PAE page directories
-  * below 4GB. This flag is usually implied by auto_translated_physmap.
+  * struct xen_arch_domainconfig's ABI is covered by
+  * XEN_DOMCTL_INTERFACE_VERSION.
   */
- #define XENFEAT_pae_pgdir_above_4gb        4
- 
--/* x86: Does this Xen host support the MMU_PT_UPDATE_PRESERVE_AD hypercall? */
-+/**
-+ * DOC: XENFEAT_mmu_pt_update_preserve_ad
-+ * x86: Does this Xen host support the MMU_PT_UPDATE_PRESERVE_AD hypercall?
-+ */
- #define XENFEAT_mmu_pt_update_preserve_ad  5
- 
--/* x86: Does this Xen host support the MMU_{CLEAR,COPY}_PAGE hypercall? */
-+/**
-+ * DOC: XENFEAT_highmem_assist
-+ * x86: Does this Xen host support the MMU_{CLEAR,COPY}_PAGE hypercall?
-+ */
- #define XENFEAT_highmem_assist             6
- 
--/*
-+/**
-+ * DOC: XENFEAT_gnttab_map_avail_bits
-+ *
-  * If set, GNTTABOP_map_grant_ref honors flags to be placed into guest kernel
-  * available pte bits.
-  */
- #define XENFEAT_gnttab_map_avail_bits      7
- 
--/* x86: Does this Xen host support the HVM callback vector type? */
-+/**
-+ * DOC: XENFEAT_hvm_callback_vector
-+ * x86: Does this Xen host support the HVM callback vector type?
-+ */
- #define XENFEAT_hvm_callback_vector        8
- 
--/* x86: pvclock algorithm is safe to use on HVM */
-+/**
-+ * DOC: XENFEAT_hvm_safe_pvclock
-+ * x86: pvclock algorithm is safe to use on HVM
-+ */
- #define XENFEAT_hvm_safe_pvclock           9
- 
--/* x86: pirq can be used by HVM guests */
-+/**
-+ * DOC: XENFEAT_hvm_pirqs
-+ * x86: pirq can be used by HVM guests
-+ */
- #define XENFEAT_hvm_pirqs                 10
- 
--/* operation as Dom0 is supported */
-+/**
-+ * DOC: XENFEAT_dom0
-+ * operation as Dom0 is supported
-+ */
- #define XENFEAT_dom0                      11
- 
- /* Xen also maps grant references at pfn = mfn.
-@@ -99,13 +131,21 @@
- #define XENFEAT_grant_map_identity        12
-  */
- 
--/* Guest can use XENMEMF_vnode to specify virtual node for memory op. */
-+/**
-+ * DOC: XENFEAT_memory_op_vnode_supported
-+ * Guest can use XENMEMF_vnode to specify virtual node for memory op.
-+ */
- #define XENFEAT_memory_op_vnode_supported 13
- 
--/* arm: Hypervisor supports ARM SMC calling convention. */
-+/**
-+ * DOC: XENFEAT_ARM_SMCCC_supported
-+ * arm: Hypervisor supports ARM SMC calling convention.
-+ */
- #define XENFEAT_ARM_SMCCC_supported       14
- 
--/*
-+/**
-+ * DOC: XENFEAT_linux_rsdp_unrestricted
-+ *
-  * x86/PVH: If set, ACPI RSDP can be placed at any address. Otherwise RSDP
-  * must be located in lower 1MB, as required by ACPI Specification for IA-PC
-  * systems.
++struct xen_arch_domainconfig {
++    /** @gic_version: IN/OUT parameter */
+ #define XEN_DOMCTL_CONFIG_GIC_NATIVE    0
+ #define XEN_DOMCTL_CONFIG_GIC_V2        1
+ #define XEN_DOMCTL_CONFIG_GIC_V3        2
+-
++    uint8_t gic_version;
++    /** @tee_type: IN parameter */
+ #define XEN_DOMCTL_CONFIG_TEE_NONE      0
+ #define XEN_DOMCTL_CONFIG_TEE_OPTEE     1
+-
+-struct xen_arch_domainconfig {
+-    /* IN/OUT */
+-    uint8_t gic_version;
+-    /* IN */
+     uint16_t tee_type;
+-    /* IN */
++    /** @nr_spis: IN parameter */
+     uint32_t nr_spis;
+-    /*
+-     * OUT
++    /**
++     * @clock_frequency: OUT parameter
++     *
+      * Based on the property clock-frequency in the DT timer node.
+      * The property may be present when the bootloader/firmware doesn't
+      * set correctly CNTFRQ which hold the timer frequency.
 -- 
 2.17.1
 
