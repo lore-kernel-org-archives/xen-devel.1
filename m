@@ -2,28 +2,28 @@ Return-Path: <SRS0=90EN=D4=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-13.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3FDAAC388F7
-	for <xen-devel@archiver.kernel.org>; Wed, 21 Oct 2020 00:00:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5D262C54FB2
+	for <xen-devel@archiver.kernel.org>; Wed, 21 Oct 2020 00:00:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B60602225F
-	for <xen-devel@archiver.kernel.org>; Wed, 21 Oct 2020 00:00:38 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id DED7C223BF
+	for <xen-devel@archiver.kernel.org>; Wed, 21 Oct 2020 00:00:39 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="nC17O/yO"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B60602225F
+	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="oT2Eb14O"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DED7C223BF
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.9798.25869 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.9800.25895 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kV1YE-00086M-ML; Wed, 21 Oct 2020 00:00:22 +0000
+	id 1kV1YJ-0008FE-SI; Wed, 21 Oct 2020 00:00:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 9798.25869; Wed, 21 Oct 2020 00:00:22 +0000
+Received: by outflank-mailman (output) from mailman id 9800.25895; Wed, 21 Oct 2020 00:00:27 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,46 +38,46 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kV1YE-00086B-CB; Wed, 21 Oct 2020 00:00:22 +0000
-Received: by outflank-mailman (input) for mailman id 9798;
- Wed, 21 Oct 2020 00:00:20 +0000
+	id 1kV1YJ-0008En-In; Wed, 21 Oct 2020 00:00:27 +0000
+Received: by outflank-mailman (input) for mailman id 9800;
+ Wed, 21 Oct 2020 00:00:25 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=01QD=D4=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1kV1YC-0007y0-Np
- for xen-devel@lists.xenproject.org; Wed, 21 Oct 2020 00:00:20 +0000
+ id 1kV1YH-0007y0-O7
+ for xen-devel@lists.xenproject.org; Wed, 21 Oct 2020 00:00:25 +0000
 Received: from mail.kernel.org (unknown [198.145.29.99])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 1b007146-9efb-40e7-b4a0-3ffe504a0327;
- Wed, 21 Oct 2020 00:00:17 +0000 (UTC)
+ id d5df9fff-7601-44a0-8d02-1977402000d7;
+ Wed, 21 Oct 2020 00:00:18 +0000 (UTC)
 Received: from sstabellini-ThinkPad-T480s.hsd1.ca.comcast.net
  (c-24-130-65-46.hsd1.ca.comcast.net [24.130.65.46])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id EF39E22453;
- Wed, 21 Oct 2020 00:00:15 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 4D9652245C;
+ Wed, 21 Oct 2020 00:00:17 +0000 (UTC)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=01QD=D4=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
-	id 1kV1YC-0007y0-Np
-	for xen-devel@lists.xenproject.org; Wed, 21 Oct 2020 00:00:20 +0000
-X-Inumbo-ID: 1b007146-9efb-40e7-b4a0-3ffe504a0327
+	id 1kV1YH-0007y0-O7
+	for xen-devel@lists.xenproject.org; Wed, 21 Oct 2020 00:00:25 +0000
+X-Inumbo-ID: d5df9fff-7601-44a0-8d02-1977402000d7
 Received: from mail.kernel.org (unknown [198.145.29.99])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 1b007146-9efb-40e7-b4a0-3ffe504a0327;
-	Wed, 21 Oct 2020 00:00:17 +0000 (UTC)
+	id d5df9fff-7601-44a0-8d02-1977402000d7;
+	Wed, 21 Oct 2020 00:00:18 +0000 (UTC)
 Received: from sstabellini-ThinkPad-T480s.hsd1.ca.comcast.net (c-24-130-65-46.hsd1.ca.comcast.net [24.130.65.46])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id EF39E22453;
-	Wed, 21 Oct 2020 00:00:15 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPSA id 4D9652245C;
+	Wed, 21 Oct 2020 00:00:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1603238416;
-	bh=lGAJw225AnfmH/iLrtmRBGy8z5pR0eJow9EFtjbC/ag=;
+	s=default; t=1603238417;
+	bh=xqaH5TgPPZ9KHmziprJ9oKvkdhKN8THAHA2Rd9MFVnA=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=nC17O/yOYMTgsZw0VmmMORL3fzcYjL0M8tCaYzntP3Su6MbxMAF7KxsnGzNKpbAS5
-	 InbPQQYVgXPiRlaO7236mKgLKy/pN8eTrDWaXnZhvyK4yrxk0WcziThhky8iNz985z
-	 xu32sI/I26dI1D6yKXt617bcMpMTt7oesWwF3Y24=
+	b=oT2Eb14OUu8Wct/ws0+QiOv/GxNv40sJrTxT2MIh+0o+JrkLTBBxnwXpMM/kzVT6O
+	 vdnTCbMIxbmcG/gmYOGRHLa7bHNlYuNMSAaOpSa0ldRg8X3GRhsHu6xRixIMZDScps
+	 iF41l+q6TODQU6zjdkFnKM0D1ZaCSoSQOUW+TdII=
 From: Stefano Stabellini <sstabellini@kernel.org>
 To: xen-devel@lists.xenproject.org
 Cc: sstabellini@kernel.org,
@@ -89,9 +89,9 @@ Cc: sstabellini@kernel.org,
 	wl@xen.org,
 	Bertrand.Marquis@arm.com,
 	Stefano Stabellini <stefano.stabellini@xilinx.com>
-Subject: [PATCH v2 06/14] kernel-doc: public/grant_table.h
-Date: Tue, 20 Oct 2020 17:00:03 -0700
-Message-Id: <20201021000011.15351-6-sstabellini@kernel.org>
+Subject: [PATCH v2 08/14] kernel-doc: public/memory.h
+Date: Tue, 20 Oct 2020 17:00:05 -0700
+Message-Id: <20201021000011.15351-8-sstabellini@kernel.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <alpine.DEB.2.21.2010201646370.12247@sstabellini-ThinkPad-T480s>
 References: <alpine.DEB.2.21.2010201646370.12247@sstabellini-ThinkPad-T480s>
@@ -102,777 +102,485 @@ Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
 ---
 Changes in v2:
 - remove "enum" comments
-- typedef grant_ref_t in the comment
-- remove "New guests should use version 2."
-- remove two redundant blanks
+- fix line too long
+- remove stray blank line
 ---
- xen/include/public/grant_table.h | 447 ++++++++++++++++++-------------
- 1 file changed, 256 insertions(+), 191 deletions(-)
+ xen/include/public/memory.h | 236 ++++++++++++++++++++++++------------
+ 1 file changed, 156 insertions(+), 80 deletions(-)
 
-diff --git a/xen/include/public/grant_table.h b/xen/include/public/grant_table.h
-index 3b7bf93d74..2fd50cc46f 100644
---- a/xen/include/public/grant_table.h
-+++ b/xen/include/public/grant_table.h
-@@ -30,8 +30,8 @@
- 
+diff --git a/xen/include/public/memory.h b/xen/include/public/memory.h
+index 21d483298e..3a8f668f5f 100644
+--- a/xen/include/public/memory.h
++++ b/xen/include/public/memory.h
+@@ -30,7 +30,9 @@
  #include "xen.h"
+ #include "physdev.h"
  
 -/*
-- * `incontents 150 gnttab Grant Tables
 +/**
-+ * DOC: Grant Tables
-  *
-  * Xen's grant tables provide a generic mechanism to memory sharing
-  * between domains. This shared memory interface underpins the split
-@@ -53,11 +53,10 @@
-  * fully virtualised memory.
-  */
- 
--/***********************************
-- * GRANT TABLE REPRESENTATION
-- */
--
--/* Some rough guidelines on accessing and updating grant-table entries
-+/**
-+ * DOC: GRANT TABLE REPRESENTATION
++ * DOC: XENMEM_increase_reservation and XENMEM_decrease_reservation
 + *
-+ * Some rough guidelines on accessing and updating grant-table entries
-  * in a concurrency-safe manner. For more information, Linux contains a
-  * reference implementation for guest OSes (drivers/xen/grant_table.c, see
-  * http://git.kernel.org/?p=linux/kernel/git/torvalds/linux.git;a=blob;f=drivers/xen/grant-table.c;hb=HEAD
-@@ -108,56 +107,66 @@
-  *  Use SMP-safe bit-setting instruction.
-  */
+  * Increase or decrease the specified domain's memory reservation. Returns the
+  * number of extents successfully allocated or freed.
+  * arg == addr of struct xen_memory_reservation.
+@@ -40,29 +42,37 @@
+ #define XENMEM_populate_physmap     6
  
+ #if __XEN_INTERFACE_VERSION__ >= 0x00030209
 -/*
+- * Maximum # bits addressable by the user of the allocated region (e.g., I/O
+- * devices often have a 32-bit limitation even in 64-bit systems). If zero
+- * then the user has no addressing restriction. This field is not used by
+- * XENMEM_decrease_reservation.
 +/**
-+ * typedef grant_ref_t
-  * Reference to a grant entry in a specified domain's grant table.
-  */
- typedef uint32_t grant_ref_t;
- 
--/*
-+/**
-+ * DOC: grant table
++ * DOC: XENMEMF_*
 + *
-  * A grant table comprises a packed array of grant entries in one or more
-  * page frames shared between Xen and a guest.
-  * [XEN]: This field is written by Xen and read by the sharing guest.
-  * [GST]: This field is written by the guest and read by Xen.
++ * - XENMEMF_address_bits, XENMEMF_get_address_bits:
++ *       Maximum # bits addressable by the user of the allocated region
++ *       (e.g., I/O devices often have a 32-bit limitation even in 64-bit
++ *       systems). If zero then the user has no addressing restriction. This
++ *       field is not used by XENMEM_decrease_reservation.
++ * - XENMEMF_node, XENMEMF_get_node: NUMA node to allocate from
++ * - XENMEMF_populate_on_demand: Flag to populate physmap with populate-on-demand entries
++ * - XENMEMF_exact_node_request, XENMEMF_exact_node: Flag to request allocation
++ *       only from the node specified
++ * - XENMEMF_vnode: Flag to indicate the node specified is virtual node
   */
- 
--/*
-- * Version 1 of the grant table entry structure is maintained purely
-- * for backwards compatibility.  New guests should use version 2.
-- */
- #if __XEN_INTERFACE_VERSION__ < 0x0003020a
- #define grant_entry_v1 grant_entry
- #define grant_entry_v1_t grant_entry_t
+ #define XENMEMF_address_bits(x)     (x)
+ #define XENMEMF_get_address_bits(x) ((x) & 0xffu)
+-/* NUMA node to allocate from. */
+ #define XENMEMF_node(x)     (((x) + 1) << 8)
+ #define XENMEMF_get_node(x) ((((x) >> 8) - 1) & 0xffu)
+-/* Flag to populate physmap with populate-on-demand entries */
+ #define XENMEMF_populate_on_demand (1<<16)
+-/* Flag to request allocation only from the node specified */
+ #define XENMEMF_exact_node_request  (1<<17)
+ #define XENMEMF_exact_node(n) (XENMEMF_node(n) | XENMEMF_exact_node_request)
+-/* Flag to indicate the node specified is virtual node */
+ #define XENMEMF_vnode  (1<<18)
  #endif
+ 
 +/**
-+ * struct grant_entry_v1
-+ *
-+ * Version 1 of the grant table entry structure is maintained purely
-+ * for backwards compatibility.
++ * struct xen_memory_reservation
 + */
- struct grant_entry_v1 {
--    /* GTF_xxx: various type and flag information.  [XEN,GST] */
-+    /** @flags: GTF_xxx, various type and flag information.  [XEN,GST] */
-     uint16_t flags;
--    /* The domain being granted foreign privileges. [GST] */
-+    /** @domid: The domain being granted foreign privileges. [GST] */
-     domid_t  domid;
+ struct xen_memory_reservation {
+-
 -    /*
--     * GTF_permit_access: GFN that @domid is allowed to map and access. [GST]
--     * GTF_accept_transfer: GFN that @domid is allowed to transfer into. [GST]
--     * GTF_transfer_completed: MFN whose ownership transferred by @domid
--     *                         (non-translated guests only). [XEN]
 +    /**
-+     * @frame:
-+     * - GTF_permit_access: GFN that @domid is allowed to map and access. [GST]
-+     * - GTF_accept_transfer: GFN that @domid is allowed to transfer into. [GST]
-+     * - GTF_transfer_completed: MFN whose ownership transferred by @domid
-+     *                           (non-translated guests only). [XEN]
++     * @extent_start:
++     *
+      * XENMEM_increase_reservation:
+      *   OUT: MFN (*not* GMFN) bases of extents that were allocated
+      * XENMEM_decrease_reservation:
+@@ -76,18 +86,20 @@ struct xen_memory_reservation {
       */
-     uint32_t frame;
- };
- typedef struct grant_entry_v1 grant_entry_v1_t;
+     XEN_GUEST_HANDLE(xen_pfn_t) extent_start;
  
--/* The first few grant table entries will be preserved across grant table
-+/**
-+ * DOC: GNTTAB_NR_RESERVED_ENTRIES
-+ *
-+ * The first few grant table entries will be preserved across grant table
-  * version changes and may be pre-populated at domain creation by tools.
-  */
- #define GNTTAB_NR_RESERVED_ENTRIES     8
- #define GNTTAB_RESERVED_CONSOLE        0
- #define GNTTAB_RESERVED_XENSTORE       1
+-    /* Number of extents, and size/alignment of each (2^extent_order pages). */
++    /** @nr_extents: Number of extents, and size/alignment of each (2^extent_order pages). */
+     xen_ulong_t    nr_extents;
+     unsigned int   extent_order;
  
--/*
-- * Type of grant entry.
-- *  GTF_invalid: This grant entry grants no privileges.
-- *  GTF_permit_access: Allow @domid to map/access @frame.
-- *  GTF_accept_transfer: Allow @domid to transfer ownership of one page frame
-- *                       to this guest. Xen writes the page number to @frame.
-- *  GTF_transitive: Allow @domid to transitively access a subrange of
-- *                  @trans_grant in @trans_domid.  No mappings are allowed.
-+/**
-+ * DOC: Type of grant entry.
-+ *
-+ * - GTF_invalid: This grant entry grants no privileges.
-+ * - GTF_permit_access: Allow @domid to map/access @frame.
-+ * - GTF_accept_transfer: Allow @domid to transfer ownership of one page frame
-+ *                        to this guest. Xen writes the page number to @frame.
-+ * - GTF_transitive: Allow @domid to transitively access a subrange of
-+ *                   @trans_grant in @trans_domid.  No mappings are allowed.
-  */
- #define GTF_invalid         (0U<<0)
- #define GTF_permit_access   (1U<<0)
-@@ -165,15 +174,16 @@ typedef struct grant_entry_v1 grant_entry_v1_t;
- #define GTF_transitive      (3U<<0)
- #define GTF_type_mask       (3U<<0)
- 
--/*
-- * Subflags for GTF_permit_access.
-- *  GTF_readonly: Restrict @domid to read-only mappings and accesses. [GST]
-- *  GTF_reading: Grant entry is currently mapped for reading by @domid. [XEN]
-- *  GTF_writing: Grant entry is currently mapped for writing by @domid. [XEN]
-- *  GTF_PAT, GTF_PWT, GTF_PCD: (x86) cache attribute flags for the grant [GST]
-- *  GTF_sub_page: Grant access to only a subrange of the page.  @domid
-- *                will only be allowed to copy from the grant, and not
-- *                map it. [GST]
-+/**
-+ * DOC: Subflags for GTF_permit_access.
-+ *
-+ * - GTF_readonly: Restrict @domid to read-only mappings and accesses. [GST]
-+ * - GTF_reading: Grant entry is currently mapped for reading by @domid. [XEN]
-+ * - GTF_writing: Grant entry is currently mapped for writing by @domid. [XEN]
-+ * - GTF_PAT, GTF_PWT, GTF_PCD: (x86) cache attribute flags for the grant [GST]
-+ * - GTF_sub_page: Grant access to only a subrange of the page.  @domid
-+ *                 will only be allowed to copy from the grant, and not
-+ *                 map it. [GST]
-  */
- #define _GTF_readonly       (2)
- #define GTF_readonly        (1U<<_GTF_readonly)
-@@ -190,8 +200,9 @@ typedef struct grant_entry_v1 grant_entry_v1_t;
- #define _GTF_sub_page       (8)
- #define GTF_sub_page        (1U<<_GTF_sub_page)
- 
--/*
-- * Subflags for GTF_accept_transfer:
-+/**
-+ * DOC: Subflags for GTF_accept_transfer:
-+ *
-  *  GTF_transfer_committed: Xen sets this flag to indicate that it is committed
-  *      to transferring ownership of a page frame. When a guest sees this flag
-  *      it must /not/ modify the grant entry until GTF_transfer_completed is
-@@ -205,38 +216,43 @@ typedef struct grant_entry_v1 grant_entry_v1_t;
- #define _GTF_transfer_completed (3)
- #define GTF_transfer_completed  (1U<<_GTF_transfer_completed)
- 
--/*
-- * Version 2 grant table entries.  These fulfil the same role as
-- * version 1 entries, but can represent more complicated operations.
-- * Any given domain will have either a version 1 or a version 2 table,
-- * and every entry in the table will be the same version.
-+#if __XEN_INTERFACE_VERSION__ >= 0x0003020a
-+/**
-+ * DOC: Version 2 grant table entries
-+ *
-+ * These fulfil the same role as version 1 entries, but can represent
-+ * more complicated operations.  Any given domain will have either a
-+ * version 1 or a version 2 table, and every entry in the table will be
-+ * the same version.
-  *
-  * The interface by which domains use grant references does not depend
-  * on the grant table version in use by the other domain.
-- */
--#if __XEN_INTERFACE_VERSION__ >= 0x0003020a
--/*
-+ *
-  * Version 1 and version 2 grant entries share a common prefix.  The
-  * fields of the prefix are documented as part of struct
-  * grant_entry_v1.
-  */
-+/**
-+ * struct grant_entry_header
-+ */
- struct grant_entry_header {
-     uint16_t flags;
-     domid_t  domid;
- };
- typedef struct grant_entry_header grant_entry_header_t;
- 
--/*
-- * Version 2 of the grant entry structure.
-+/**
-+ * union grant_entry_v2 - Version 2 of the grant entry structure.
-  */
- union grant_entry_v2 {
-     grant_entry_header_t hdr;
- 
--    /*
-+    /**
-+     * @full_page:
-      * This member is used for V1-style full page grants, where either:
-      *
--     * -- hdr.type is GTF_accept_transfer, or
--     * -- hdr.type is GTF_permit_access and GTF_sub_page is not set.
-+     * - hdr.type is GTF_accept_transfer, or
-+     * - hdr.type is GTF_permit_access and GTF_sub_page is not set.
-      *
-      * In that case, the frame field has the same semantics as the
-      * field of the same name in the V1 entry structure.
-@@ -247,7 +263,9 @@ union grant_entry_v2 {
-         uint64_t frame;
-     } full_page;
- 
--    /*
-+    /**
-+     * @sub_page:
-+     *
-      * If the grant type is GTF_grant_access and GTF_sub_page is set,
-      * @domid is allowed to access bytes [@page_off,@page_off+@length)
-      * in frame @frame.
-@@ -259,7 +277,9 @@ union grant_entry_v2 {
-         uint64_t frame;
-     } sub_page;
- 
--    /*
-+    /**
-+     * @transitive:
-+     *
-      * If the grant is GTF_transitive, @domid is allowed to use the
-      * grant @gref in domain @trans_domid, as if it was the local
-      * domain.  Obviously, the transitive access must be compatible
-@@ -275,7 +295,8 @@ union grant_entry_v2 {
-         grant_ref_t gref;
-     } transitive;
- 
--    uint32_t __spacer[4]; /* Pad to a power of two */
-+    /** @__spacer: Pad to a power of two */
-+    uint32_t __spacer[4];
- };
- typedef union grant_entry_v2 grant_entry_v2_t;
- 
-@@ -283,21 +304,17 @@ typedef uint16_t grant_status_t;
- 
- #endif /* __XEN_INTERFACE_VERSION__ */
- 
--/***********************************
-- * GRANT TABLE QUERIES AND USES
-- */
--
--/* ` enum neg_errnoval
-- * ` HYPERVISOR_grant_table_op(enum grant_table_op cmd,
-- * `                           void *args,
-- * `                           unsigned int count)
-- * `
-+/**
-+ * DOC: GRANT TABLE QUERIES AND USES
-  *
-+ * enum neg_errnoval
-+ * HYPERVISOR_grant_table_op(enum grant_table_op cmd,
-+ *                           void *args,
-+ *                           unsigned int count)
-+ *  
-  * @args points to an array of a per-command data structure. The array
-  * has @count members
-  */
--
--/* ` enum grant_table_op { // GNTTABOP_* => struct gnttab_* */
- #define GNTTABOP_map_grant_ref        0
- #define GNTTABOP_unmap_grant_ref      1
- #define GNTTABOP_setup_table          2
-@@ -313,18 +330,20 @@ typedef uint16_t grant_status_t;
- #define GNTTABOP_swap_grant_ref	      11
- #define GNTTABOP_cache_flush	      12
- #endif /* __XEN_INTERFACE_VERSION__ */
--/* ` } */
- 
--/*
-+/**
-+ * typedef
-  * Handle to track a mapping created via a grant reference.
-  */
- typedef uint32_t grant_handle_t;
- 
--/*
-- * GNTTABOP_map_grant_ref: Map the grant entry (<dom>,<ref>) for access
-- * by devices and/or host CPUs. If successful, <handle> is a tracking number
-- * that must be presented later to destroy the mapping(s). On error, <status>
-- * is a negative status code.
-+/**
-+ * struct gnttab_map_grant_ref - GNTTABOP_map_grant_ref
-+ *
-+ * Map the grant entry (<dom>,<ref>) for access by devices and/or host
-+ * CPUs. If successful, <handle> is a tracking number that must be
-+ * presented later to destroy the mapping(s). On error, <status> is a
-+ * negative status code.
-  * NOTES:
-  *  1. If GNTMAP_device_map is specified then <dev_bus_addr> is the address
-  *     via which I/O devices may access the granted frame.
-@@ -338,24 +357,31 @@ typedef uint32_t grant_handle_t;
-  *     to be accounted to the correct grant reference!
-  */
- struct gnttab_map_grant_ref {
--    /* IN parameters. */
-+    /** @host_addr: IN parameter */
-     uint64_t host_addr;
--    uint32_t flags;               /* GNTMAP_* */
-+    /** @flags: IN parameter, GNTMAP_* */
-+    uint32_t flags;
-+    /** @ref: IN parameter */
-     grant_ref_t ref;
-+    /** @dom: IN parameter */
-     domid_t  dom;
--    /* OUT parameters. */
--    int16_t  status;              /* => enum grant_status */
-+    /** @status: OUT parameter, enum grant_status */
-+    int16_t  status;
-+    /** @handle: OUT parameter */
-     grant_handle_t handle;
-+    /** @dev_bus_addr: OUT parameter */
-     uint64_t dev_bus_addr;
- };
- typedef struct gnttab_map_grant_ref gnttab_map_grant_ref_t;
- DEFINE_XEN_GUEST_HANDLE(gnttab_map_grant_ref_t);
- 
--/*
-- * GNTTABOP_unmap_grant_ref: Destroy one or more grant-reference mappings
-- * tracked by <handle>. If <host_addr> or <dev_bus_addr> is zero, that
-- * field is ignored. If non-zero, they must refer to a device/host mapping
-- * that is tracked by <handle>
-+/**
-+ * struct gnttab_unmap_grant_ref - GNTTABOP_unmap_grant_ref
-+ *
-+ * Destroy one or more grant-reference mappings tracked by <handle>. If
-+ * <host_addr> or <dev_bus_addr> is zero, that field is ignored. If
-+ * non-zero, they must refer to a device/host mapping that is tracked by
-+ * <handle>
-  * NOTES:
-  *  1. The call may fail in an undefined manner if either mapping is not
-  *     tracked by <handle>.
-@@ -363,31 +389,37 @@ DEFINE_XEN_GUEST_HANDLE(gnttab_map_grant_ref_t);
-  *     mappings will remain in the device or host TLBs.
-  */
- struct gnttab_unmap_grant_ref {
--    /* IN parameters. */
-+    /** @host_addr: IN parameter */
-     uint64_t host_addr;
-+    /** @dev_bus_addr: IN parameter */
-     uint64_t dev_bus_addr;
-+    /** @handle: IN parameter */
-     grant_handle_t handle;
--    /* OUT parameters. */
--    int16_t  status;              /* => enum grant_status */
-+    /** @status: OUT parameter, enum grant_status */
-+    int16_t  status;
- };
- typedef struct gnttab_unmap_grant_ref gnttab_unmap_grant_ref_t;
- DEFINE_XEN_GUEST_HANDLE(gnttab_unmap_grant_ref_t);
- 
--/*
-- * GNTTABOP_setup_table: Set up a grant table for <dom> comprising at least
-- * <nr_frames> pages. The frame addresses are written to the <frame_list>.
-- * Only <nr_frames> addresses are written, even if the table is larger.
-+/**
-+ * struct gnttab_setup_table - GNTTABOP_setup_table
-+ *
-+ * Set up a grant table for <dom> comprising at least <nr_frames> pages.
-+ * The frame addresses are written to the <frame_list>.  Only
-+ * <nr_frames> addresses are written, even if the table is larger.
-  * NOTES:
-  *  1. <dom> may be specified as DOMID_SELF.
-  *  2. Only a sufficiently-privileged domain may specify <dom> != DOMID_SELF.
-  *  3. Xen may not support more than a single grant-table page per domain.
-  */
- struct gnttab_setup_table {
--    /* IN parameters. */
-+    /** @dom: IN parameter */
-     domid_t  dom;
-+    /** @nr_frames: IN parameter */
-     uint32_t nr_frames;
--    /* OUT parameters. */
-+    /** @status: OUT parameter */
-     int16_t  status;              /* => enum grant_status */
-+    /** @frame_list: OUT parameter */
- #if __XEN_INTERFACE_VERSION__ < 0x00040300
-     XEN_GUEST_HANDLE(ulong) frame_list;
+ #if __XEN_INTERFACE_VERSION__ >= 0x00030209
+-    /* XENMEMF flags. */
++    /** @mem_flags: XENMEMF flags. */
+     unsigned int   mem_flags;
  #else
-@@ -397,21 +429,25 @@ struct gnttab_setup_table {
- typedef struct gnttab_setup_table gnttab_setup_table_t;
- DEFINE_XEN_GUEST_HANDLE(gnttab_setup_table_t);
+     unsigned int   address_bits;
+ #endif
+ 
+-    /*
++    /**
++     * @domid:
++     *
+      * Domain whose reservation is being changed.
+      * Unprivileged domains can specify only DOMID_SELF.
+      */
+@@ -96,7 +108,10 @@ struct xen_memory_reservation {
+ typedef struct xen_memory_reservation xen_memory_reservation_t;
+ DEFINE_XEN_GUEST_HANDLE(xen_memory_reservation_t);
  
 -/*
-- * GNTTABOP_dump_table: Dump the contents of the grant table to the
-- * xen console. Debugging use only.
++#define XENMEM_exchange             11
 +/**
-+ * struct gnttab_dump_table - GNTTABOP_dump_table
-+ * 
-+ * Dump the contents of the grant table to the xen console. Debugging
-+ * use only.
-  */
- struct gnttab_dump_table {
--    /* IN parameters. */
-+    /** @dom: IN parameter */
-     domid_t dom;
--    /* OUT parameters. */
--    int16_t status;               /* => enum grant_status */
-+    /** @status: OUT parameter, enum grant_status */
-+    int16_t status;
- };
- typedef struct gnttab_dump_table gnttab_dump_table_t;
- DEFINE_XEN_GUEST_HANDLE(gnttab_dump_table_t);
- 
--/*
-- * GNTTABOP_transfer: Transfer <frame> to a foreign domain. The foreign domain
-+/**
-+ * struct gnttab_transfer - GNTTABOP_transfer
++ * struct xen_memory_exchange - XENMEM_exchange
 + *
-+ * Transfer <frame> to a foreign domain. The foreign domain
-  * has previously registered its interest in the transfer via <domid, ref>.
+  * An atomic exchange of memory pages. If return code is zero then
+  * @out.extent_list provides GMFNs of the newly-allocated memory.
+  * Returns zero on complete success, otherwise a negative error code.
+@@ -105,15 +120,18 @@ DEFINE_XEN_GUEST_HANDLE(xen_memory_reservation_t);
   *
-  * Note that, even if the transfer fails, the specified page no longer belongs
-@@ -420,19 +456,26 @@ DEFINE_XEN_GUEST_HANDLE(gnttab_dump_table_t);
-  * Note further that only PV guests can use this operation.
+  * Note that only PV guests can use this operation.
   */
- struct gnttab_transfer {
--    /* IN parameters. */
-+    /** @mfn: IN parameter */
-     xen_pfn_t     mfn;
-+    /** @domid: IN parameter */
-     domid_t       domid;
-+    /** @ref: IN parameter */
-     grant_ref_t   ref;
--    /* OUT parameters. */
-+    /** @status: OUT parameter */
-     int16_t       status;
+-#define XENMEM_exchange             11
+ struct xen_memory_exchange {
+-    /*
++    /**
++     * @in:
++     *
+      * [IN] Details of memory extents to be exchanged (GMFN bases).
+      * Note that @in.address_bits is ignored and unused.
+      */
+     struct xen_memory_reservation in;
+ 
+-    /*
++    /**
++     * @out:
++     *
+      * [IN/OUT] Details of new memory extents.
+      * We require that:
+      *  1. @in.domid == @out.domid
+@@ -125,7 +143,9 @@ struct xen_memory_exchange {
+      */
+     struct xen_memory_reservation out;
+ 
+-    /*
++    /**
++     * @nr_exchanged:
++     *
+      * [OUT] Number of input extents that were successfully exchanged:
+      *  1. The first @nr_exchanged input extents were successfully
+      *     deallocated.
+@@ -141,14 +161,18 @@ struct xen_memory_exchange {
+ typedef struct xen_memory_exchange xen_memory_exchange_t;
+ DEFINE_XEN_GUEST_HANDLE(xen_memory_exchange_t);
+ 
+-/*
++/**
++ * DOC: XENMEM_maximum_ram_page
++ *
+  * Returns the maximum machine frame number of mapped RAM in this system.
+  * This command always succeeds (it never returns an error code).
+  * arg == NULL.
+  */
+ #define XENMEM_maximum_ram_page     2
+ 
+-/*
++/**
++ * DOC: XENMEM_current_reservation and XENMEM_maximum_reservation
++ *
+  * Returns the current or maximum memory reservation, in pages, of the
+  * specified domain (may be DOMID_SELF). Returns -ve errcode on failure.
+  * arg == addr of domid_t.
+@@ -156,33 +180,43 @@ DEFINE_XEN_GUEST_HANDLE(xen_memory_exchange_t);
+ #define XENMEM_current_reservation  3
+ #define XENMEM_maximum_reservation  4
+ 
+-/*
++/**
++ * DOC: XENMEM_maximum_gpfn
++ *
+  * Returns the maximum GPFN in use by the guest, or -ve errcode on failure.
+  */
+ #define XENMEM_maximum_gpfn         14
+ 
+-/*
++#define XENMEM_machphys_mfn_list    5
++/**
++ * struct xen_machphys_mfn_list - XENMEM_machphys_mfn_list
++ *
+  * Returns a list of MFN bases of 2MB extents comprising the machine_to_phys
+  * mapping table. Architectures which do not have a m2p table do not implement
+  * this command.
+  * arg == addr of xen_machphys_mfn_list_t.
+  */
+-#define XENMEM_machphys_mfn_list    5
+ struct xen_machphys_mfn_list {
+-    /*
++    /**
++     * @max_extents:
++     *
+      * Size of the 'extent_start' array. Fewer entries will be filled if the
+      * machphys table is smaller than max_extents * 2MB.
+      */
+     unsigned int max_extents;
+ 
+-    /*
++    /**
++     * @extent_start:
++     *
+      * Pointer to buffer to fill with list of extent starts. If there are
+      * any large discontiguities in the machine address space, 2MB gaps in
+      * the machphys table will be represented by an MFN base of zero.
+      */
+     XEN_GUEST_HANDLE(xen_pfn_t) extent_start;
+ 
+-    /*
++    /**
++     * @nr_extents:
++     *
+      * Number of extents written to the above array. This will be smaller
+      * than 'max_extents' if the machphys table is smaller than max_e * 2MB.
+      */
+@@ -191,7 +225,9 @@ struct xen_machphys_mfn_list {
+ typedef struct xen_machphys_mfn_list xen_machphys_mfn_list_t;
+ DEFINE_XEN_GUEST_HANDLE(xen_machphys_mfn_list_t);
+ 
+-/*
++/**
++ * DOC: XENMEM_machphys_compat_mfn_list
++ *
+  * For a compat caller, this is identical to XENMEM_machphys_mfn_list.
+  *
+  * For a non compat caller, this functions similarly to
+@@ -200,90 +236,113 @@ DEFINE_XEN_GUEST_HANDLE(xen_machphys_mfn_list_t);
+  */
+ #define XENMEM_machphys_compat_mfn_list     25
+ 
+-/*
++#define XENMEM_machphys_mapping     12
++/**
++ * struct xen_machphys_mapping - XENMEM_machphys_mapping
++ *
+  * Returns the location in virtual address space of the machine_to_phys
+  * mapping table. Architectures which do not have a m2p table, or which do not
+  * map it by default into guest address space, do not implement this command.
+  * arg == addr of xen_machphys_mapping_t.
+  */
+-#define XENMEM_machphys_mapping     12
+ struct xen_machphys_mapping {
++    /** @v_start: Start virtual address */
+     xen_ulong_t v_start, v_end; /* Start and end virtual addresses.   */
+-    xen_ulong_t max_mfn;        /* Maximum MFN that can be looked up. */
++    /** @v_end: End virtual addresses */
++    xen_ulong_t v_end;
++    /** @max_mfn: Maximum MFN that can be looked up */
++    xen_ulong_t max_mfn;
  };
- typedef struct gnttab_transfer gnttab_transfer_t;
- DEFINE_XEN_GUEST_HANDLE(gnttab_transfer_t);
+ typedef struct xen_machphys_mapping xen_machphys_mapping_t;
+ DEFINE_XEN_GUEST_HANDLE(xen_machphys_mapping_t);
  
- 
--/*
-- * GNTTABOP_copy: Hypervisor based copy
-+#define _GNTCOPY_source_gref      (0)
-+#define GNTCOPY_source_gref       (1<<_GNTCOPY_source_gref)
-+#define _GNTCOPY_dest_gref        (1)
-+#define GNTCOPY_dest_gref         (1<<_GNTCOPY_dest_gref)
-+/**
-+ * struct gnttab_copy - GNTTABOP_copy, Hypervisor based copy
-+ *
-  * source and destinations can be eithers MFNs or, for foreign domains,
-  * grant references. the foreign domain has to grant read/write access
-  * in its grant table.
-@@ -448,14 +491,9 @@ DEFINE_XEN_GUEST_HANDLE(gnttab_transfer_t);
-  * the offset in the target frame and  len specifies the number of
-  * bytes to be copied.
-  */
--
--#define _GNTCOPY_source_gref      (0)
--#define GNTCOPY_source_gref       (1<<_GNTCOPY_source_gref)
--#define _GNTCOPY_dest_gref        (1)
--#define GNTCOPY_dest_gref         (1<<_GNTCOPY_dest_gref)
--
- struct gnttab_copy {
--    /* IN parameters. */
-+    /** @source: IN parameter */
-+    /** @dest: IN parameter */
-     struct gnttab_copy_ptr {
-         union {
-             grant_ref_t ref;
-@@ -464,37 +502,44 @@ struct gnttab_copy {
-         domid_t  domid;
-         uint16_t offset;
-     } source, dest;
-+    /** @len: IN parameter */
-     uint16_t      len;
--    uint16_t      flags;          /* GNTCOPY_* */
--    /* OUT parameters. */
-+    /** @flags: IN parameter, GNTCOPY_* */
-+    uint16_t      flags;
-+    /** @status: OUT parameters. */
-     int16_t       status;
- };
- typedef struct gnttab_copy  gnttab_copy_t;
- DEFINE_XEN_GUEST_HANDLE(gnttab_copy_t);
- 
--/*
-- * GNTTABOP_query_size: Query the current and maximum sizes of the shared
-- * grant table.
-+/**
-+ * struct gnttab_query_size - GNTTABOP_query_size
-+ *
-+ * Query the current and maximum sizes of the shared grant table.
-  * NOTES:
-  *  1. <dom> may be specified as DOMID_SELF.
-  *  2. Only a sufficiently-privileged domain may specify <dom> != DOMID_SELF.
-  */
- struct gnttab_query_size {
--    /* IN parameters. */
-+    /** @dom: IN parameter */
-     domid_t  dom;
--    /* OUT parameters. */
-+    /** @nr_frames: OUT parameter */
-     uint32_t nr_frames;
-+    /** @max_nr_frames: OUT parameter */
-     uint32_t max_nr_frames;
--    int16_t  status;              /* => enum grant_status */
-+    /** @status: OUT parameter, enum grant_status */
-+    int16_t  status;
- };
- typedef struct gnttab_query_size gnttab_query_size_t;
- DEFINE_XEN_GUEST_HANDLE(gnttab_query_size_t);
- 
--/*
-- * GNTTABOP_unmap_and_replace: Destroy one or more grant-reference mappings
-- * tracked by <handle> but atomically replace the page table entry with one
-- * pointing to the machine address under <new_addr>.  <new_addr> will be
-- * redirected to the null entry.
-+/**
-+ * struct gnttab_unmap_and_replace - GNTTABOP_unmap_and_replace
-+ *
-+ * Destroy one or more grant-reference mappings tracked by <handle> but
-+ * atomically replace the page table entry with one pointing to the
-+ * machine address under <new_addr>.  <new_addr> will be redirected to
-+ * the null entry.
-  * NOTES:
-  *  1. The call may fail in an undefined manner if either mapping is not
-  *     tracked by <handle>.
-@@ -502,36 +547,42 @@ DEFINE_XEN_GUEST_HANDLE(gnttab_query_size_t);
-  *     mappings will remain in the device or host TLBs.
-  */
- struct gnttab_unmap_and_replace {
--    /* IN parameters. */
-+    /** @host_addr: IN parameter */
-     uint64_t host_addr;
-+    /** @new_addr: IN parameter */
-     uint64_t new_addr;
-+    /** @handle: IN parameter */
-     grant_handle_t handle;
--    /* OUT parameters. */
--    int16_t  status;              /* => enum grant_status */
-+    /** @status: OUT parameter, enum grant_status */
-+    int16_t  status;
- };
- typedef struct gnttab_unmap_and_replace gnttab_unmap_and_replace_t;
- DEFINE_XEN_GUEST_HANDLE(gnttab_unmap_and_replace_t);
- 
- #if __XEN_INTERFACE_VERSION__ >= 0x0003020a
--/*
-- * GNTTABOP_set_version: Request a particular version of the grant
-- * table shared table structure.  This operation may be used to toggle
-- * between different versions, but must be performed while no grants
-- * are active.  The only defined versions are 1 and 2.
-+/**
-+ * struct gnttab_set_version - GNTTABOP_set_version
-+ *
-+ * Request a particular version of the grant table shared table
-+ * structure.  This operation may be used to toggle between different
-+ * versions, but must be performed while no grants are active.  The only
-+ * defined versions are 1 and 2.
-  */
- struct gnttab_set_version {
--    /* IN/OUT parameters */
-+    /** @version: IN/OUT parameter */
-     uint32_t version;
- };
- typedef struct gnttab_set_version gnttab_set_version_t;
- DEFINE_XEN_GUEST_HANDLE(gnttab_set_version_t);
- 
- 
--/*
-- * GNTTABOP_get_status_frames: Get the list of frames used to store grant
-- * status for <dom>. In grant format version 2, the status is separated
-- * from the other shared grant fields to allow more efficient synchronization
-- * using barriers instead of atomic cmpexch operations.
-+/**
-+ * struct gnttab_get_status_frames - GNTTABOP_get_status_frames
-+ *
-+ * Get the list of frames used to store grant status for <dom>. In grant
-+ * format version 2, the status is separated from the other shared grant
-+ * fields to allow more efficient synchronization using barriers instead
-+ * of atomic cmpexch operations.
-  * <nr_frames> specify the size of vector <frame_list>.
-  * The frame addresses are returned in the <frame_list>.
-  * Only <nr_frames> addresses are returned, even if the table is larger.
-@@ -540,44 +591,53 @@ DEFINE_XEN_GUEST_HANDLE(gnttab_set_version_t);
-  *  2. Only a sufficiently-privileged domain may specify <dom> != DOMID_SELF.
-  */
- struct gnttab_get_status_frames {
--    /* IN parameters. */
-+    /** @nr_frames: IN parameter */
-     uint32_t nr_frames;
-+    /** @dom: IN parameter */
-     domid_t  dom;
--    /* OUT parameters. */
--    int16_t  status;              /* => enum grant_status */
-+    /** @status: OUT parameter, enum grant_status */
-+    int16_t  status;
-+    /** @frame_list: OUT parameter */
-     XEN_GUEST_HANDLE(uint64_t) frame_list;
- };
- typedef struct gnttab_get_status_frames gnttab_get_status_frames_t;
- DEFINE_XEN_GUEST_HANDLE(gnttab_get_status_frames_t);
- 
--/*
-- * GNTTABOP_get_version: Get the grant table version which is in
-- * effect for domain <dom>.
-+/**
-+ * struct gnttab_get_version - GNTTABOP_get_version
-+ *
-+ * Get the grant table version which is in effect for domain <dom>.
-  */
- struct gnttab_get_version {
--    /* IN parameters */
-+    /** @dom: IN parameters */
-     domid_t dom;
-+    /** @pad: padding */
-     uint16_t pad;
--    /* OUT parameters */
-+    /** @version: OUT parameter */
-     uint32_t version;
- };
- typedef struct gnttab_get_version gnttab_get_version_t;
- DEFINE_XEN_GUEST_HANDLE(gnttab_get_version_t);
- 
--/*
-- * GNTTABOP_swap_grant_ref: Swap the contents of two grant entries.
-+/**
-+ * struct gnttab_swap_grant_ref - GNTTABOP_swap_grant_ref
-+ *
-+ * Swap the contents of two grant entries.
-  */
- struct gnttab_swap_grant_ref {
--    /* IN parameters */
-+    /** @ref_a: IN parameter */
-     grant_ref_t ref_a;
-+    /** @ref_b: IN parameter */
-     grant_ref_t ref_b;
--    /* OUT parameters */
--    int16_t status;             /* => enum grant_status */
-+    /** @status: OUT parameter, enum grant_status */
-+    int16_t status;
- };
- typedef struct gnttab_swap_grant_ref gnttab_swap_grant_ref_t;
- DEFINE_XEN_GUEST_HANDLE(gnttab_swap_grant_ref_t);
- 
--/*
-+/**
-+ * struct gnttab_cache_flush - GNTTABOP_cache_flush
-+ *
-  * Issue one or more cache maintenance operations on a portion of a
-  * page granted to the calling domain by a foreign domain.
-  */
-@@ -598,62 +658,67 @@ DEFINE_XEN_GUEST_HANDLE(gnttab_cache_flush_t);
- 
- #endif /* __XEN_INTERFACE_VERSION__ */
- 
--/*
-- * Bitfield values for gnttab_map_grant_ref.flags.
-+/**
-+ * DOC: Bitfield values for gnttab_map_grant_ref.flags.
-+ *
-+ * - GNTMAP_device_map: Map the grant entry for access by I/O devices.
-+ * - GNTMAP_host_map: Map the grant entry for access by host CPUs.
-+ * - GNTMAP_readonly: Accesses to the granted frame will be restricted to read-only access.
-+ * - GNTMAP_host_map: 0 => The host mapping is usable only by the guest OS
-+ *                    1 => The host mapping is usable by guest OS + current application.
-+ * - GNTMAP_contains_pte: 0 => This map request contains a host virtual address.
-+ *                        1 => This map request contains the machine addess of the PTE to update.
-+ * - GNTMAP_can_fail
-+ * - GNTMAP_guest_avail_mask: Bits to be placed in guest kernel available PTE bits
-+ *                            (architecture dependent; only supported when
-+ *                             XENFEAT_gnttab_map_avail_bits is set).
-  */
-- /* Map the grant entry for access by I/O devices. */
- #define _GNTMAP_device_map      (0)
- #define GNTMAP_device_map       (1<<_GNTMAP_device_map)
-- /* Map the grant entry for access by host CPUs. */
- #define _GNTMAP_host_map        (1)
- #define GNTMAP_host_map         (1<<_GNTMAP_host_map)
-- /* Accesses to the granted frame will be restricted to read-only access. */
- #define _GNTMAP_readonly        (2)
- #define GNTMAP_readonly         (1<<_GNTMAP_readonly)
-- /*
--  * GNTMAP_host_map subflag:
--  *  0 => The host mapping is usable only by the guest OS.
--  *  1 => The host mapping is usable by guest OS + current application.
--  */
- #define _GNTMAP_application_map (3)
- #define GNTMAP_application_map  (1<<_GNTMAP_application_map)
--
-- /*
--  * GNTMAP_contains_pte subflag:
--  *  0 => This map request contains a host virtual address.
--  *  1 => This map request contains the machine addess of the PTE to update.
--  */
- #define _GNTMAP_contains_pte    (4)
- #define GNTMAP_contains_pte     (1<<_GNTMAP_contains_pte)
--
- #define _GNTMAP_can_fail        (5)
- #define GNTMAP_can_fail         (1<<_GNTMAP_can_fail)
--
--/*
-- * Bits to be placed in guest kernel available PTE bits (architecture
-- * dependent; only supported when XENFEAT_gnttab_map_avail_bits is set).
-- */
- #define _GNTMAP_guest_avail0    (16)
- #define GNTMAP_guest_avail_mask ((uint32_t)~0 << _GNTMAP_guest_avail0)
- 
--/*
-- * Values for error status returns. All errors are -ve.
-+/**
-+ * DOC: Values for error status returns. All errors are -ve.
-+ *
-+ * - GNTST_okay: Normal return.
-+ * - GNTST_general_error: General undefined error.
-+ * - GNTST_bad_domain: Unrecognsed domain id.
-+ * - GNTST_bad_gntref: Unrecognised or inappropriate gntref.
-+ * - GNTST_bad_handle: Unrecognised or inappropriate handle.
-+ * - GNTST_bad_virt_addr: Inappropriate virtual address to map.
-+ * - GNTST_bad_dev_addr: Inappropriate device address to unmap.
-+ * - GNTST_no_device_space: Out of space in I/O MMU.
-+ * - GNTST_permission_denied: Not enough privilege for operation.
-+ * - GNTST_bad_page: Specified page was invalid for op.
-+ * - GNTST_bad_copy_arg: copy arguments cross page boundary.
-+ * - GNTST_address_too_big: transfer page address too large.
-+ * - GNTST_eagain: Operation not done; try again.
-+ *
-  */
--/* ` enum grant_status { */
--#define GNTST_okay             (0)  /* Normal return.                        */
--#define GNTST_general_error    (-1) /* General undefined error.              */
--#define GNTST_bad_domain       (-2) /* Unrecognsed domain id.                */
--#define GNTST_bad_gntref       (-3) /* Unrecognised or inappropriate gntref. */
--#define GNTST_bad_handle       (-4) /* Unrecognised or inappropriate handle. */
--#define GNTST_bad_virt_addr    (-5) /* Inappropriate virtual address to map. */
--#define GNTST_bad_dev_addr     (-6) /* Inappropriate device address to unmap.*/
--#define GNTST_no_device_space  (-7) /* Out of space in I/O MMU.              */
--#define GNTST_permission_denied (-8) /* Not enough privilege for operation.  */
--#define GNTST_bad_page         (-9) /* Specified page was invalid for op.    */
--#define GNTST_bad_copy_arg    (-10) /* copy arguments cross page boundary.   */
--#define GNTST_address_too_big (-11) /* transfer page address too large.      */
--#define GNTST_eagain          (-12) /* Operation not done; try again.        */
+-/* Source mapping space. */
+-/* ` enum phys_map_space { */
+-#define XENMAPSPACE_shared_info  0 /* shared info page */
+-#define XENMAPSPACE_grant_table  1 /* grant table page */
+-#define XENMAPSPACE_gmfn         2 /* GMFN */
+-#define XENMAPSPACE_gmfn_range   3 /* GMFN range, XENMEM_add_to_physmap only. */
+-#define XENMAPSPACE_gmfn_foreign 4 /* GMFN from another dom,
+-                                    * XENMEM_add_to_physmap_batch only. */
+-#define XENMAPSPACE_dev_mmio     5 /* device mmio region
+-                                      ARM only; the region is mapped in
+-                                      Stage-2 using the Normal Memory
+-                                      Inner/Outer Write-Back Cacheable
+-                                      memory attribute. */
 -/* ` } */
-+#define GNTST_okay             (0)
-+#define GNTST_general_error    (-1)
-+#define GNTST_bad_domain       (-2)
-+#define GNTST_bad_gntref       (-3)
-+#define GNTST_bad_handle       (-4)
-+#define GNTST_bad_virt_addr    (-5)
-+#define GNTST_bad_dev_addr     (-6)
-+#define GNTST_no_device_space  (-7)
-+#define GNTST_permission_denied (-8)
-+#define GNTST_bad_page         (-9)
-+#define GNTST_bad_copy_arg    (-10)
-+#define GNTST_address_too_big (-11)
-+#define GNTST_eagain          (-12)
++/**
++ * DOC: Source mapping space.
++ *
++ * - XENMAPSPACE_shared_info:  shared info page
++ * - XENMAPSPACE_grant_table:  grant table page
++ * - XENMAPSPACE_gmfn:         GMFN
++ * - XENMAPSPACE_gmfn_range:   GMFN range, XENMEM_add_to_physmap only.
++ * - XENMAPSPACE_gmfn_foreign: GMFN from another dom,
++ *                             XENMEM_add_to_physmap_batch only.
++ * - XENMAPSPACE_dev_mmio:     device mmio region ARM only; the region is mapped
++ *                             in Stage-2 using the Normal MemoryInner/Outer
++ *                             Write-Back Cacheable memory attribute.
++ */
++#define XENMAPSPACE_shared_info  0
++#define XENMAPSPACE_grant_table  1
++#define XENMAPSPACE_gmfn         2
++#define XENMAPSPACE_gmfn_range   3
++#define XENMAPSPACE_gmfn_foreign 4
++#define XENMAPSPACE_dev_mmio     5
  
- #define GNTTABOP_error_msgs {                   \
-     "okay",                                     \
+-/*
++#define XENMEM_add_to_physmap      7
++/**
++ * struct xen_add_to_physmap - XENMEM_add_to_physmap
++ *
+  * Sets the GPFN at which a particular page appears in the specified guest's
+  * physical address space (translated guests only).
+  * arg == addr of xen_add_to_physmap_t.
+  */
+-#define XENMEM_add_to_physmap      7
+ struct xen_add_to_physmap {
+-    /* Which domain to change the mapping for. */
++    /** @domid: Which domain to change the mapping for. */
+     domid_t domid;
+ 
+-    /* Number of pages to go through for gmfn_range */
++    /** @size: Number of pages to go through for gmfn_range */
+     uint16_t    size;
+ 
+-    unsigned int space; /* => enum phys_map_space */
++    /** @space: enum phys_map_space */
++    unsigned int space;
+ 
+ #define XENMAPIDX_grant_table_status 0x80000000
+ 
+-    /* Index into space being mapped. */
++    /** @idx: Index into space being mapped. */
+     xen_ulong_t idx;
+ 
+-    /* GPFN in domid where the source mapping page should appear. */
++    /** @gpfn: GPFN in domid where the source mapping page should appear. */
+     xen_pfn_t     gpfn;
+ };
+ typedef struct xen_add_to_physmap xen_add_to_physmap_t;
+ DEFINE_XEN_GUEST_HANDLE(xen_add_to_physmap_t);
+ 
+-/* A batched version of add_to_physmap. */
+ #define XENMEM_add_to_physmap_batch 23
++/**
++ * struct xen_add_to_physmap_batch - XENMEM_add_to_physmap_batch
++ *
++ * A batched version of add_to_physmap.
++ */
+ struct xen_add_to_physmap_batch {
+-    /* IN */
+-    /* Which domain to change the mapping for. */
++    /** @domid: IN, which domain to change the mapping for */
+     domid_t domid;
+-    uint16_t space; /* => enum phys_map_space */
++    /** @space: IN, enum phys_map_space */
++    uint16_t space;
+ 
+-    /* Number of pages to go through */
++    /** @size: IN, Number of pages to go through */
+     uint16_t size;
+ 
+ #if __XEN_INTERFACE_VERSION__ < 0x00040700
+-    domid_t foreign_domid; /* IFF gmfn_foreign. Should be 0 for other spaces. */
++    /** @foreign_domid: IN, iff gmfn_foreign. Should be 0 for other spaces. */
++    domid_t foreign_domid;
+ #else
++    /**
++     * @u: IN
++     *
++     * - u.foreign_domid: gmfn_foreign
++     * - u.res0: All the other spaces. Should be 0
++     */
+     union xen_add_to_physmap_batch_extra {
+-        domid_t foreign_domid; /* gmfn_foreign */
+-        uint16_t res0;  /* All the other spaces. Should be 0 */
++        domid_t foreign_domid;
++        uint16_t res0;
+     } u;
+ #endif
+ 
+-    /* Indexes into space being mapped. */
++    /** @idxs: IN, Indexes into space being mapped. */
+     XEN_GUEST_HANDLE(xen_ulong_t) idxs;
+ 
+-    /* GPFN in domid where the source mapping page should appear. */
++    /** @gpfns: IN, GPFN in domid where the source mapping page should appear. */
+     XEN_GUEST_HANDLE(xen_pfn_t) gpfns;
+ 
+-    /* OUT */
+-
+-    /* Per index error code. */
++    /** @errs: OUT, Per index error code. */
+     XEN_GUEST_HANDLE(int) errs;
+ };
+ typedef struct xen_add_to_physmap_batch xen_add_to_physmap_batch_t;
+@@ -296,17 +355,19 @@ typedef struct xen_add_to_physmap_batch xen_add_to_physmap_range_t;
+ DEFINE_XEN_GUEST_HANDLE(xen_add_to_physmap_range_t);
+ #endif
+ 
+-/*
++#define XENMEM_remove_from_physmap      15
++/**
++ * struct xen_remove_from_physmap - XENMEM_remove_from_physmap
++ *
+  * Unmaps the page appearing at a particular GPFN from the specified guest's
+  * physical address space (translated guests only).
+  * arg == addr of xen_remove_from_physmap_t.
+  */
+-#define XENMEM_remove_from_physmap      15
+ struct xen_remove_from_physmap {
+-    /* Which domain to change the mapping for. */
++    /** @domid: Which domain to change the mapping for. */
+     domid_t domid;
+ 
+-    /* GPFN of the current mapping of the page. */
++    /** @gpfn: GPFN of the current mapping of the page. */
+     xen_pfn_t     gpfn;
+ };
+ typedef struct xen_remove_from_physmap xen_remove_from_physmap_t;
+@@ -315,21 +376,27 @@ DEFINE_XEN_GUEST_HANDLE(xen_remove_from_physmap_t);
+ /*** REMOVED ***/
+ /*#define XENMEM_translate_gpfn_list  8*/
+ 
+-/*
++#define XENMEM_memory_map           9
++/**
++ * struct xen_memory_map - XENMEM_memory_map
++ *
+  * Returns the pseudo-physical memory map as it was when the domain
+  * was started (specified by XENMEM_set_memory_map).
+  * arg == addr of xen_memory_map_t.
+  */
+-#define XENMEM_memory_map           9
+ struct xen_memory_map {
+-    /*
++    /**
++     * @nr_entries:
++     *
+      * On call the number of entries which can be stored in buffer. On
+      * return the number of entries which have been stored in
+      * buffer.
+      */
+     unsigned int nr_entries;
+ 
+-    /*
++    /**
++     * @buffer:
++     *
+      * Entries in the buffer are in the same format as returned by the
+      * BIOS INT 0x15 EAX=0xE820 call.
+      */
+@@ -338,7 +405,9 @@ struct xen_memory_map {
+ typedef struct xen_memory_map xen_memory_map_t;
+ DEFINE_XEN_GUEST_HANDLE(xen_memory_map_t);
+ 
+-/*
++/**
++ * DOC: XENMEM_machine_memory_map
++ *
+  * Returns the real physical memory map. Passes the same structure as
+  * XENMEM_memory_map.
+  * Specifying buffer as NULL will return the number of entries required
+@@ -347,12 +416,14 @@ DEFINE_XEN_GUEST_HANDLE(xen_memory_map_t);
+  */
+ #define XENMEM_machine_memory_map   10
+ 
+-/*
++#define XENMEM_set_memory_map       13
++/**
++ * struct xen_foreign_memory_map - XENMEM_set_memory_map
++ *
+  * Set the pseudo-physical memory map of a domain, as returned by
+  * XENMEM_memory_map.
+  * arg == addr of xen_foreign_memory_map_t.
+  */
+-#define XENMEM_set_memory_map       13
+ struct xen_foreign_memory_map {
+     domid_t domid;
+     struct xen_memory_map map;
+@@ -362,14 +433,19 @@ DEFINE_XEN_GUEST_HANDLE(xen_foreign_memory_map_t);
+ 
+ #define XENMEM_set_pod_target       16
+ #define XENMEM_get_pod_target       17
++/**
++ * struct xen_pod_target - XENMEM_set_pod_target and XENMEM_get_pod_target
++ */
+ struct xen_pod_target {
+-    /* IN */
++    /** @target_pages: IN */
+     uint64_t target_pages;
+-    /* OUT */
++    /** @tot_pages: OUT */
+     uint64_t tot_pages;
++    /** @pod_cache_pages: OUT */
+     uint64_t pod_cache_pages;
++    /** @pod_entries: OUT */
+     uint64_t pod_entries;
+-    /* IN */
++    /** @domid: IN */
+     domid_t domid;
+ };
+ typedef struct xen_pod_target xen_pod_target_t;
 -- 
 2.17.1
 
