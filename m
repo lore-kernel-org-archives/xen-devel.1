@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-13.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 16C9BC388F9
-	for <xen-devel@archiver.kernel.org>; Wed, 21 Oct 2020 00:00:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AFA92C5517A
+	for <xen-devel@archiver.kernel.org>; Wed, 21 Oct 2020 00:00:43 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9F7222076A
-	for <xen-devel@archiver.kernel.org>; Wed, 21 Oct 2020 00:00:41 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 48B882076A
+	for <xen-devel@archiver.kernel.org>; Wed, 21 Oct 2020 00:00:43 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="EJ8nE7nm"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9F7222076A
+	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="Ul49e6Ly"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 48B882076A
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.9801.25911 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.9802.25917 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kV1YO-0008Od-Eg; Wed, 21 Oct 2020 00:00:32 +0000
+	id 1kV1YP-0008Pr-0Y; Wed, 21 Oct 2020 00:00:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 9801.25911; Wed, 21 Oct 2020 00:00:32 +0000
+Received: by outflank-mailman (output) from mailman id 9802.25917; Wed, 21 Oct 2020 00:00:32 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,47 +38,46 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kV1YO-0008OJ-9C; Wed, 21 Oct 2020 00:00:32 +0000
-Received: by outflank-mailman (input) for mailman id 9801;
+	id 1kV1YO-0008PT-Mr; Wed, 21 Oct 2020 00:00:32 +0000
+Received: by outflank-mailman (input) for mailman id 9802;
  Wed, 21 Oct 2020 00:00:30 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=01QD=D4=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1kV1YM-0007xs-4E
+ id 1kV1YM-0007y0-OR
  for xen-devel@lists.xenproject.org; Wed, 21 Oct 2020 00:00:30 +0000
 Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 8554e9df-0934-4c6d-bbff-85f9cf6d6015;
- Wed, 21 Oct 2020 00:00:17 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 6989bcbe-7596-4718-b401-affd15347489;
+ Wed, 21 Oct 2020 00:00:19 +0000 (UTC)
 Received: from sstabellini-ThinkPad-T480s.hsd1.ca.comcast.net
  (c-24-130-65-46.hsd1.ca.comcast.net [24.130.65.46])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id BB2D422456;
- Wed, 21 Oct 2020 00:00:16 +0000 (UTC)
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+ by mail.kernel.org (Postfix) with ESMTPSA id E49FC2245D;
+ Wed, 21 Oct 2020 00:00:17 +0000 (UTC)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=01QD=D4=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
-	id 1kV1YM-0007xs-4E
+	id 1kV1YM-0007y0-OR
 	for xen-devel@lists.xenproject.org; Wed, 21 Oct 2020 00:00:30 +0000
-X-Inumbo-ID: 8554e9df-0934-4c6d-bbff-85f9cf6d6015
+X-Inumbo-ID: 6989bcbe-7596-4718-b401-affd15347489
 Received: from mail.kernel.org (unknown [198.145.29.99])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 8554e9df-0934-4c6d-bbff-85f9cf6d6015;
-	Wed, 21 Oct 2020 00:00:17 +0000 (UTC)
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id 6989bcbe-7596-4718-b401-affd15347489;
+	Wed, 21 Oct 2020 00:00:19 +0000 (UTC)
 Received: from sstabellini-ThinkPad-T480s.hsd1.ca.comcast.net (c-24-130-65-46.hsd1.ca.comcast.net [24.130.65.46])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id BB2D422456;
-	Wed, 21 Oct 2020 00:00:16 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPSA id E49FC2245D;
+	Wed, 21 Oct 2020 00:00:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1603238417;
-	bh=FBjcGWAj+YnmSwU5NH4MugavkY7ULNZqmOgxz/8AjMg=;
+	s=default; t=1603238418;
+	bh=+o3KM9eZPxssF3KyIcRr2NiHUn2Ukmo/akFdy6ptlI4=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=EJ8nE7nmg0R8bp2UE3eF9iTeyPeZGBY7QS8au/ZP4etB/s3I+4VBscy1Lv5K1du+M
-	 g1rIUsKiqPLYzkzGYH65C/al2KaJplssCLQGh3BbE4uXqst82392N+/fizDmdpovRD
-	 Ikutmgt+D/FIFkaMUAPIfcGLBBXtKrewjoIZLfdA=
+	b=Ul49e6LyZaclVsTzUS9MSVuAdLgHPJlt/ZvsjYVo0l+1v09h46ZOrYOH5jXkC71Pu
+	 8DoiFejXSpB8yUZ5fKNb1WdsgwsQtdNHCvvwKnwSGnctO4+nI+OqE2KvGzskamB4cF
+	 vj6XUUSXug0/tNelrhV4lxFxfCPBevRfxWjY754A=
 From: Stefano Stabellini <sstabellini@kernel.org>
 To: xen-devel@lists.xenproject.org
 Cc: sstabellini@kernel.org,
@@ -90,9 +89,9 @@ Cc: sstabellini@kernel.org,
 	wl@xen.org,
 	Bertrand.Marquis@arm.com,
 	Stefano Stabellini <stefano.stabellini@xilinx.com>
-Subject: [PATCH v2 07/14] kernel-doc: public/hypfs.h
-Date: Tue, 20 Oct 2020 17:00:04 -0700
-Message-Id: <20201021000011.15351-7-sstabellini@kernel.org>
+Subject: [PATCH v2 09/14] kernel-doc: public/sched.h
+Date: Tue, 20 Oct 2020 17:00:06 -0700
+Message-Id: <20201021000011.15351-9-sstabellini@kernel.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <alpine.DEB.2.21.2010201646370.12247@sstabellini-ThinkPad-T480s>
 References: <alpine.DEB.2.21.2010201646370.12247@sstabellini-ThinkPad-T480s>
@@ -101,145 +100,259 @@ Convert in-code comments to kernel-doc format wherever possible.
 
 Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
 ---
- xen/include/public/hypfs.h | 72 ++++++++++++++++++++++++--------------
- 1 file changed, 45 insertions(+), 27 deletions(-)
+Changes in v2:
+- remove "enum" comments
+---
+ xen/include/public/sched.h | 134 +++++++++++++++++++++++++------------
+ 1 file changed, 92 insertions(+), 42 deletions(-)
 
-diff --git a/xen/include/public/hypfs.h b/xen/include/public/hypfs.h
-index 2b7a66d68d..62a33a1646 100644
---- a/xen/include/public/hypfs.h
-+++ b/xen/include/public/hypfs.h
-@@ -32,12 +32,21 @@
-  * Definitions for the __HYPERVISOR_hypfs_op hypercall.
+diff --git a/xen/include/public/sched.h b/xen/include/public/sched.h
+index 811bd87c82..f6f0263569 100644
+--- a/xen/include/public/sched.h
++++ b/xen/include/public/sched.h
+@@ -29,41 +29,48 @@
+ 
+ #include "event_channel.h"
+ 
+-/*
+- * `incontents 150 sched Guest Scheduler Operations
++/**
++ * DOC: Guest Scheduler Operations
+  *
+  * The SCHEDOP interface provides mechanisms for a guest to interact
+  * with the scheduler, including yield, blocking and shutting itself
+  * down.
   */
  
--/* Highest version number of the hypfs interface currently defined. */
+-/*
 +/**
-+ * DOC: XEN_HYPFS_VERSION
-+ * Highest version number of the hypfs interface currently defined.
-+ */
- #define XEN_HYPFS_VERSION      1
++ * DOC: HYPERVISOR_sched_op
++ *
+  * The prototype for this hypercall is:
+- * ` long HYPERVISOR_sched_op(enum sched_op cmd, void *arg, ...)
+  *
+- * @cmd == SCHEDOP_??? (scheduler operation).
+- * @arg == Operation-specific extra argument(s), as described below.
+- * ...  == Additional Operation-specific extra arguments, described below.
++ * long HYPERVISOR_sched_op(enum sched_op cmd, void *arg, ...)
++ *
++ * - @cmd == SCHEDOP_??? (scheduler operation).
++ * - @arg == Operation-specific extra argument(s), as described below.
++ * - ...  == Additional Operation-specific extra arguments, described below.
+  *
+  * Versions of Xen prior to 3.0.2 provided only the following legacy version
+  * of this hypercall, supporting only the commands yield, block and shutdown:
++ *
+  *  long sched_op(int cmd, unsigned long arg)
+- * @cmd == SCHEDOP_??? (scheduler operation).
+- * @arg == 0               (SCHEDOP_yield and SCHEDOP_block)
+- *      == SHUTDOWN_* code (SCHEDOP_shutdown)
++ *
++ * - @cmd == SCHEDOP_??? (scheduler operation).
++ * - @arg == 0               (SCHEDOP_yield and SCHEDOP_block)
++ * -      == SHUTDOWN_* code (SCHEDOP_shutdown)
+  *
+  * This legacy version is available to new guests as:
+- * ` long HYPERVISOR_sched_op_compat(enum sched_op cmd, unsigned long arg)
++ *
++ * long HYPERVISOR_sched_op_compat(enum sched_op cmd, unsigned long arg)
+  */
  
--/* Maximum length of a path in the filesystem. */
+-/* ` enum sched_op { // SCHEDOP_* => struct sched_* */
+-/*
+- * Voluntarily yield the CPU.
+- * @arg == NULL.
 +/**
-+ * DOC: XEN_HYPFS_MAX_PATHLEN
-+ * Maximum length of a path in the filesystem.
-+ */
- #define XEN_HYPFS_MAX_PATHLEN  1024
++ * DOC: SCHEDOP_yield
++ * Voluntarily yield the CPU. @arg == NULL.
+  */
+ #define SCHEDOP_yield       0
+ 
+-/*
++/**
++ * DOC: SCHEDOP_block
++ *
+  * Block execution of this VCPU until an event is received for processing.
+  * If called with event upcalls masked, this operation will atomically
+  * reenable event delivery and check for pending events before blocking the
+@@ -72,7 +79,9 @@
+  */
+ #define SCHEDOP_block       1
+ 
+-/*
++/**
++ * DOC: SCHEDOP_shutdown
++ *
+  * Halt execution of this domain (all VCPUs) and notify the system controller.
+  * @arg == pointer to sched_shutdown_t structure.
+  *
+@@ -87,14 +96,18 @@
+  */
+ #define SCHEDOP_shutdown    2
+ 
+-/*
++/**
++ * DOC: SCHEDOP_poll
++ *
+  * Poll a set of event-channel ports. Return when one or more are pending. An
+  * optional timeout may be specified.
+  * @arg == pointer to sched_poll_t structure.
+  */
+ #define SCHEDOP_poll        3
+ 
+-/*
++/**
++ * DOC: SCHEDOP_remote_shutdown
++ *
+  * Declare a shutdown for another domain. The main use of this function is
+  * in interpreting shutdown requests and reasons for fully-virtualized
+  * domains.  A para-virtualized domain may use SCHEDOP_shutdown directly.
+@@ -102,14 +115,18 @@
+  */
+ #define SCHEDOP_remote_shutdown        4
+ 
+-/*
++/**
++ * DOC: SCHEDOP_shutdown_code
++ *
+  * Latch a shutdown code, so that when the domain later shuts down it
+  * reports this code to the control tools.
+  * @arg == sched_shutdown_t, as for SCHEDOP_shutdown.
+  */
+ #define SCHEDOP_shutdown_code 5
+ 
+-/*
++/**
++ * DOC: SCHEDOP_watchdog
++ *
+  * Setup, poke and destroy a domain watchdog timer.
+  * @arg == pointer to sched_watchdog_t structure.
+  * With id == 0, setup a domain watchdog timer to cause domain shutdown
+@@ -119,7 +136,9 @@
+  */
+ #define SCHEDOP_watchdog    6
+ 
+-/*
++/**
++ * DOC: SCHEDOP_pin_override
++ *
+  * Override the current vcpu affinity by pinning it to one physical cpu or
+  * undo this override restoring the previous affinity.
+  * @arg == pointer to sched_pin_override_t structure.
+@@ -130,14 +149,20 @@
+  * to be part of the domain's cpupool.
+  */
+ #define SCHEDOP_pin_override 7
+-/* ` } */
  
 +/**
-+ * struct xen_hypfs_direntry
++ * struct sched_shutdown
 + */
- struct xen_hypfs_direntry {
-     uint8_t type;
- #define XEN_HYPFS_TYPE_DIR     0
-@@ -49,17 +58,23 @@ struct xen_hypfs_direntry {
-     uint8_t encoding;
- #define XEN_HYPFS_ENC_PLAIN    0
- #define XEN_HYPFS_ENC_GZIP     1
--    uint16_t pad;              /* Returned as 0. */
--    uint32_t content_len;      /* Current length of data. */
--    uint32_t max_write_len;    /* Max. length for writes (0 if read-only). */
-+    /** @pad: Returned as 0. */
-+    uint16_t pad;
-+    /** @content_len: Current length of data. */
-+    uint32_t content_len;
-+    /** @max_write_len: Max. length for writes (0 if read-only). */
-+    uint32_t max_write_len;
+ struct sched_shutdown {
+-    unsigned int reason; /* SHUTDOWN_* => enum sched_shutdown_reason */
++    /** @reason: SHUTDOWN_* => enum sched_shutdown_reason */
++    unsigned int reason;
  };
- typedef struct xen_hypfs_direntry xen_hypfs_direntry_t;
+ typedef struct sched_shutdown sched_shutdown_t;
+ DEFINE_XEN_GUEST_HANDLE(sched_shutdown_t);
  
 +/**
-+ * struct xen_hypfs_dirlistentry
++ * struct sched_poll
 + */
- struct xen_hypfs_dirlistentry {
-     xen_hypfs_direntry_t e;
--    /* Offset in bytes to next entry (0 == this is the last entry). */
-+    /** @off_next: Offset in bytes to next entry (0 == this is the last entry). */
-     uint16_t off_next;
--    /* Zero terminated entry name, possibly with some padding for alignment. */
-+    /** @name: Zero terminated entry name, possibly with some padding for alignment. */
-     char name[XEN_FLEX_ARRAY_DIM];
+ struct sched_poll {
+     XEN_GUEST_HANDLE(evtchn_port_t) ports;
+     unsigned int nr_ports;
+@@ -146,39 +171,61 @@ struct sched_poll {
+ typedef struct sched_poll sched_poll_t;
+ DEFINE_XEN_GUEST_HANDLE(sched_poll_t);
+ 
++/**
++ * struct sched_remote_shutdown
++ */
+ struct sched_remote_shutdown {
+-    domid_t domain_id;         /* Remote domain ID */
+-    unsigned int reason;       /* SHUTDOWN_* => enum sched_shutdown_reason */
++    /** @domain_id: Remote domain ID */
++    domid_t domain_id;
++    /** @reason: SHUTDOWN_* => enum sched_shutdown_reason */
++    unsigned int reason;
  };
+ typedef struct sched_remote_shutdown sched_remote_shutdown_t;
+ DEFINE_XEN_GUEST_HANDLE(sched_remote_shutdown_t);
  
-@@ -67,21 +82,22 @@ struct xen_hypfs_dirlistentry {
-  * Hypercall operations.
-  */
++/**
++ * struct sched_watchdog
++ */
+ struct sched_watchdog {
+-    uint32_t id;                /* watchdog ID */
+-    uint32_t timeout;           /* timeout */
++    /** @id: watchdog ID */
++    uint32_t id;
++    /** @timeout: timeout */
++    uint32_t timeout;
+ };
+ typedef struct sched_watchdog sched_watchdog_t;
+ DEFINE_XEN_GUEST_HANDLE(sched_watchdog_t);
+ 
++/**
++ * struct sched_pin_override
++ */
+ struct sched_pin_override {
+     int32_t pcpu;
+ };
+ typedef struct sched_pin_override sched_pin_override_t;
+ DEFINE_XEN_GUEST_HANDLE(sched_pin_override_t);
  
 -/*
-- * XEN_HYPFS_OP_get_version
+- * Reason codes for SCHEDOP_shutdown. These may be interpreted by control
+- * software to determine the appropriate action. For the most part, Xen does
+- * not care about the shutdown code.
 +/**
-+ * DOC: XEN_HYPFS_OP_get_version
-  *
-  * Read highest interface version supported by the hypervisor.
-  *
-  * arg1 - arg4: all 0/NULL
-  *
-  * Possible return values:
-- * >0: highest supported interface version
-- * <0: negative Xen errno value
++ * DOC: Reason codes for SCHEDOP_shutdown
 + *
-+ * - >0: highest supported interface version
-+ * - <0: negative Xen errno value
++ * These may be interpreted by control software to determine the
++ * appropriate action. For the most part, Xen does not care about the
++ * shutdown code.
++ *
++ * - SHUTDOWN_poweroff: Domain exited normally. Clean up and kill.
++ * - SHUTDOWN_reboot:   Clean up, kill, and then restart.
++ * - SHUTDOWN_suspend:  Clean up, save suspend info, kill.
++ * - SHUTDOWN_crash:    Tell controller we've crashed.
++ * - SHUTDOWN_watchdog: Restart because watchdog time expired.
   */
- #define XEN_HYPFS_OP_get_version     0
- 
+-/* ` enum sched_shutdown_reason { */
+-#define SHUTDOWN_poweroff   0  /* Domain exited normally. Clean up and kill. */
+-#define SHUTDOWN_reboot     1  /* Clean up, kill, and then restart.          */
+-#define SHUTDOWN_suspend    2  /* Clean up, save suspend info, kill.         */
+-#define SHUTDOWN_crash      3  /* Tell controller we've crashed.             */
+-#define SHUTDOWN_watchdog   4  /* Restart because watchdog time expired.     */
+-
 -/*
-- * XEN_HYPFS_OP_read
++#define SHUTDOWN_poweroff   0
++#define SHUTDOWN_reboot     1
++#define SHUTDOWN_suspend    2
++#define SHUTDOWN_crash      3
++#define SHUTDOWN_watchdog   4
++
 +/**
-+ * DOC: XEN_HYPFS_OP_read
-  *
-  * Read a filesystem entry.
-  *
-@@ -96,19 +112,20 @@ struct xen_hypfs_dirlistentry {
-  * The contents of a directory are multiple struct xen_hypfs_dirlistentry
-  * items.
-  *
-- * arg1: XEN_GUEST_HANDLE(path name)
-- * arg2: length of path name (including trailing zero byte)
-- * arg3: XEN_GUEST_HANDLE(data buffer written by hypervisor)
-- * arg4: data buffer size
-+ * - arg1: XEN_GUEST_HANDLE(path name)
-+ * - arg2: length of path name (including trailing zero byte)
-+ * - arg3: XEN_GUEST_HANDLE(data buffer written by hypervisor)
-+ * - arg4: data buffer size
-  *
-  * Possible return values:
-- * 0: success
-- * <0 : negative Xen errno value
++ * DOC: SHUTDOWN_soft_reset
 + *
-+ * - 0: success
-+ * - <0 : negative Xen errno value
+  * Domain asked to perform 'soft reset' for it. The expected behavior is to
+  * reset internal Xen state for the domain returning it to the point where it
+  * was created but leaving the domain's memory contents and vCPU contexts
+@@ -186,8 +233,11 @@ DEFINE_XEN_GUEST_HANDLE(sched_pin_override_t);
+  * interfaces again.
   */
- #define XEN_HYPFS_OP_read              1
+ #define SHUTDOWN_soft_reset 5
+-#define SHUTDOWN_MAX        5  /* Maximum valid shutdown reason.             */
+-/* ` } */
++/**
++ * DOC: SHUTDOWN_MAX
++ * Maximum valid shutdown reason
++ */
++#define SHUTDOWN_MAX        5
  
--/*
-- * XEN_HYPFS_OP_write_contents
-+/**
-+ * DOC: XEN_HYPFS_OP_write_contents
-  *
-  * Write contents of a filesystem entry.
-  *
-@@ -116,14 +133,15 @@ struct xen_hypfs_dirlistentry {
-  * The data type and encoding can't be changed. The size can be changed only
-  * for blobs and strings.
-  *
-- * arg1: XEN_GUEST_HANDLE(path name)
-- * arg2: length of path name (including trailing zero byte)
-- * arg3: XEN_GUEST_HANDLE(content buffer read by hypervisor)
-- * arg4: content buffer size
-+ * - arg1: XEN_GUEST_HANDLE(path name)
-+ * - arg2: length of path name (including trailing zero byte)
-+ * - arg3: XEN_GUEST_HANDLE(content buffer read by hypervisor)
-+ * - arg4: content buffer size
-  *
-  * Possible return values:
-- * 0: success
-- * <0 : negative Xen errno value
-+ *
-+ * - 0: success
-+ * - <0: negative Xen errno value
-  */
- #define XEN_HYPFS_OP_write_contents    2
+ #endif /* __XEN_PUBLIC_SCHED_H__ */
  
 -- 
 2.17.1
