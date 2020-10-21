@@ -2,28 +2,29 @@ Return-Path: <SRS0=90EN=D4=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
+X-Spam-Status: No, score=-9.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=unavailable autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A8DA0C4363A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DF3E0C561F8
 	for <xen-devel@archiver.kernel.org>; Wed, 21 Oct 2020 10:59:09 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2C85C21707
-	for <xen-devel@archiver.kernel.org>; Wed, 21 Oct 2020 10:59:08 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 6DD222173E
+	for <xen-devel@archiver.kernel.org>; Wed, 21 Oct 2020 10:59:09 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="ewhVWz7i"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2C85C21707
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ENzNLNVw"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6DD222173E
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.10014.26391 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.10015.26404 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kVBpX-0000bA-RX; Wed, 21 Oct 2020 10:58:55 +0000
+	id 1kVBpa-0000cO-3W; Wed, 21 Oct 2020 10:58:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 10014.26391; Wed, 21 Oct 2020 10:58:55 +0000
+Received: by outflank-mailman (output) from mailman id 10015.26404; Wed, 21 Oct 2020 10:58:58 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,111 +39,122 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kVBpX-0000b3-OM; Wed, 21 Oct 2020 10:58:55 +0000
-Received: by outflank-mailman (input) for mailman id 10014;
- Wed, 21 Oct 2020 10:58:54 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kVBpa-0000cG-06; Wed, 21 Oct 2020 10:58:58 +0000
+Received: by outflank-mailman (input) for mailman id 10015;
+ Wed, 21 Oct 2020 10:58:57 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Hwko=D4=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1kVBpW-0000ay-9F
- for xen-devel@lists.xenproject.org; Wed, 21 Oct 2020 10:58:54 +0000
-Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id a51e6f7a-89d1-4fc3-ba3d-148d59eece99;
- Wed, 21 Oct 2020 10:58:53 +0000 (UTC)
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+ <SRS0=zsxo=D4=gmail.com=pankaj.gupta.linux@srs-us1.protection.inumbo.net>)
+ id 1kVBpZ-0000c1-Dw
+ for xen-devel@lists.xenproject.org; Wed, 21 Oct 2020 10:58:57 +0000
+Received: from mail-io1-xd42.google.com (unknown [2607:f8b0:4864:20::d42])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id fd35d6ce-8b8d-43aa-9446-57d42f91c94d;
+ Wed, 21 Oct 2020 10:58:56 +0000 (UTC)
+Received: by mail-io1-xd42.google.com with SMTP id p15so2697393ioh.0
+ for <xen-devel@lists.xenproject.org>; Wed, 21 Oct 2020 03:58:56 -0700 (PDT)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=Hwko=D4=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
-	id 1kVBpW-0000ay-9F
-	for xen-devel@lists.xenproject.org; Wed, 21 Oct 2020 10:58:54 +0000
-X-Inumbo-ID: a51e6f7a-89d1-4fc3-ba3d-148d59eece99
-Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id a51e6f7a-89d1-4fc3-ba3d-148d59eece99;
-	Wed, 21 Oct 2020 10:58:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1603277934;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:content-transfer-encoding:in-reply-to;
-  bh=4iSsupOD6Q4gc152pUGIf39Oy9WL839bdkn4POmCRe8=;
-  b=ewhVWz7iiiy6kqMoALQGiYMfhrSIRSD7xzFAveKdAVIuZdgBqYovJG8t
-   UFCEYueCnz48FzBXn0SGzkMd2apj/DlKh3737pv9P+djmUmVEco2yXrQr
-   pbszDxjegU3ZBW/Gn3dy7Y8KtL4ETy2Xwlsw0/e/65N663BJWMzCuGoKa
-   o=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: Abx5GA9fO+utGWBYzMaxwLe+qjMt0rrBzzDV383h303FqESbIrdEq9BZqvUIZUodt6aPVybGnL
- BsxayAldXeSqpMVJfhjmzq5yCv+qCz/8Gc3Ds67QpL3tDgeRoekZDIWG2qbI0MNdGQeyHCozhD
- PBJyknQHZR7q6k19N2W15bCU8uckNOPnb19Hdj3CjOIEhJPgAhllApScmdrzx+y0tILg7IcDBh
- InVSVIRLzW7EKLW/TTjdyQ9T5d74O3LV3Y3ISB3zKG/m32zCD/7r7DFBcBQlbO8kIgPqYXCIK+
- qFU=
-X-SBRS: 2.5
-X-MesageID: 29441339
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.77,401,1596513600"; 
-   d="scan'208";a="29441339"
-Date: Wed, 21 Oct 2020 12:58:41 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Jan Beulich <jbeulich@suse.com>
-CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "Andrew
- Cooper" <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>, George Dunlap
-	<George.Dunlap@eu.citrix.com>
-Subject: Re: [PATCH] x86: XENMAPSPACE_gmfn{,_batch,_range} want to special
- case idx == gpfn
-Message-ID: <20201021105841.dqx3tnw3pkys5mun@Air-de-Roger>
-References: <920fa307-190e-dc11-f338-5b44a2126050@suse.com>
- <20201021093958.e4kopykalddam7pk@Air-de-Roger>
- <a979d21d-efed-9493-efd1-2643bddbbdd9@suse.com>
+	(envelope-from <SRS0=zsxo=D4=gmail.com=pankaj.gupta.linux@srs-us1.protection.inumbo.net>)
+	id 1kVBpZ-0000c1-Dw
+	for xen-devel@lists.xenproject.org; Wed, 21 Oct 2020 10:58:57 +0000
+X-Inumbo-ID: fd35d6ce-8b8d-43aa-9446-57d42f91c94d
+Received: from mail-io1-xd42.google.com (unknown [2607:f8b0:4864:20::d42])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id fd35d6ce-8b8d-43aa-9446-57d42f91c94d;
+	Wed, 21 Oct 2020 10:58:56 +0000 (UTC)
+Received: by mail-io1-xd42.google.com with SMTP id p15so2697393ioh.0
+        for <xen-devel@lists.xenproject.org>; Wed, 21 Oct 2020 03:58:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=GICSwgN3sNFkPLzb9ZiuRIa+ZIKU5hbtJb9zZM8PdNs=;
+        b=ENzNLNVw380JSauwEXTsNIwfSS+Pfic6wIwk3mcDkx2ZI8vSJTG9T4To95nV5K++3S
+         wXrPtza7/nKOZyWO6GUYg/19vJCSiI3irHrOtUq4HfvmyEmN9+Er/0f8hl5JC3NY9rCU
+         4VXyirx16ZxcwPrFkWNc5+fdgPzJzwoqh23QZ4siuTOAmG7kAyniMqDNFkdjAyBLV9KU
+         6xUTE1fU2WS7Y2iHpg238szVhAOmVhcjtjhCua1z7pgont9fb1+CXR9apRekKvjEBXQ4
+         Mjsvsuixy9gpE8FbEhU64igpCUNBdcJC/8ogPwXvQvXYuRk8lqRCeWNgGrCpzH1AQQOC
+         Q+4Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=GICSwgN3sNFkPLzb9ZiuRIa+ZIKU5hbtJb9zZM8PdNs=;
+        b=N8iTpknxlkPHFXddK9SpLj1ELntD/L7k/W4hwUs1zNjMbU+AYB+Z9dQEZIZFVAvyca
+         tei2OaBzX9qT9umrygjef+g7nRWcnVc5RRA4sQrbdByUVxTC0pxRYd6PyhPHo4m5oVIc
+         Ke5rnnjfqEd1nSw76MGbTIKZik/W3872MsZbrgqwxcSU25tHq2n+DmZ7/lzaQrS7owJ9
+         SKZoxMlIcbZoAaYBzM2ec9F33Ypd1WSsXfAmagxeAYqtDjAVaW9tAq4fHs0PcbCJ44h2
+         OY5F/C9mHpXyPx8PopSytsBnpbGd81oXur6p8yWTapnVuCZYCZmtknZGtLVw2LiOSYoz
+         fgnA==
+X-Gm-Message-State: AOAM530CjFXKJf/P9swbZCxCId1xxZzwi+FchSE3R2gqhSgc2HZ7GMdB
+	lffRzOdw41SnA01O/SPhT+E7WYI31IzImvl43FQ=
+X-Google-Smtp-Source: ABdhPJxVGoa8oGWf7NMjH5r135bL5msWqxriS77JIexiAMhTvnG4ddTh5FYX+VcY2vpk3tlFdrFb/MgirSrWDhsBaEo=
+X-Received: by 2002:a5d:87c7:: with SMTP id q7mr2174472ios.162.1603277936222;
+ Wed, 21 Oct 2020 03:58:56 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <a979d21d-efed-9493-efd1-2643bddbbdd9@suse.com>
-X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
- FTLPEX02CL06.citrite.net (10.13.108.179)
+References: <20201005121534.15649-1-david@redhat.com> <20201005121534.15649-6-david@redhat.com>
+In-Reply-To: <20201005121534.15649-6-david@redhat.com>
+From: Pankaj Gupta <pankaj.gupta.linux@gmail.com>
+Date: Wed, 21 Oct 2020 12:58:45 +0200
+Message-ID: <CAM9Jb+jXR6iPvSxExaEJvm90mqRozh1wcJ6ukEmDy_pqc-37oQ@mail.gmail.com>
+Subject: Re: [PATCH v2 5/5] mm/memory_hotplug: update comment regarding zone shuffling
+To: David Hildenbrand <david@redhat.com>
+Cc: LKML <linux-kernel@vger.kernel.org>, Linux MM <linux-mm@kvack.org>, 
+	linux-hyperv@vger.kernel.org, xen-devel@lists.xenproject.org, 
+	linux-acpi@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>, 
+	Matthew Wilcox <willy@infradead.org>, Wei Yang <richard.weiyang@linux.alibaba.com>, 
+	Michal Hocko <mhocko@suse.com>, Alexander Duyck <alexander.h.duyck@linux.intel.com>, 
+	Mel Gorman <mgorman@techsingularity.net>, Michal Hocko <mhocko@kernel.org>, 
+	Dave Hansen <dave.hansen@intel.com>, Vlastimil Babka <vbabka@suse.cz>, 
+	Oscar Salvador <osalvador@suse.de>, Mike Rapoport <rppt@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 
-On Wed, Oct 21, 2020 at 12:38:48PM +0200, Jan Beulich wrote:
-> On 21.10.2020 11:39, Roger Pau Monné wrote:
-> > On Fri, Oct 16, 2020 at 08:44:10AM +0200, Jan Beulich wrote:
-> >> --- a/xen/arch/x86/mm.c
-> >> +++ b/xen/arch/x86/mm.c
-> >> @@ -4555,7 +4555,7 @@ int xenmem_add_to_physmap_one(
-> >>          if ( is_special_page(mfn_to_page(prev_mfn)) )
-> >>              /* Special pages are simply unhooked from this phys slot. */
-> >>              rc = guest_physmap_remove_page(d, gpfn, prev_mfn, PAGE_ORDER_4K);
-> >> -        else
-> >> +        else if ( !mfn_eq(mfn, prev_mfn) )
-> >>              /* Normal domain memory is freed, to avoid leaking memory. */
-> >>              rc = guest_remove_page(d, gfn_x(gpfn));
-> > 
-> > What about the access differing between the old and the new entries,
-> > while pointing to the same mfn, would Xen install the new entry
-> > successfully?
-> 
-> Yes - guest_physmap_add_page() doesn't get bypassed.
+> As we no longer shuffle via generic_online_page() and when undoing
+> isolation, we can simplify the comment.
+>
+> We now effectively shuffle only once (properly) when onlining new
+> memory.
+>
+> Reviewed-by: Wei Yang <richard.weiyang@linux.alibaba.com>
+> Acked-by: Michal Hocko <mhocko@suse.com>
+> Cc: Andrew Morton <akpm@linux-foundation.org>
+> Cc: Alexander Duyck <alexander.h.duyck@linux.intel.com>
+> Cc: Mel Gorman <mgorman@techsingularity.net>
+> Cc: Michal Hocko <mhocko@kernel.org>
+> Cc: Dave Hansen <dave.hansen@intel.com>
+> Cc: Vlastimil Babka <vbabka@suse.cz>
+> Cc: Wei Yang <richard.weiyang@linux.alibaba.com>
+> Cc: Oscar Salvador <osalvador@suse.de>
+> Cc: Mike Rapoport <rppt@kernel.org>
+> Cc: Pankaj Gupta <pankaj.gupta.linux@gmail.com>
+> Signed-off-by: David Hildenbrand <david@redhat.com>
+> ---
+>  mm/memory_hotplug.c | 11 ++++-------
+>  1 file changed, 4 insertions(+), 7 deletions(-)
+>
+> diff --git a/mm/memory_hotplug.c b/mm/memory_hotplug.c
+> index 03a00cb68bf7..b44d4c7ba73b 100644
+> --- a/mm/memory_hotplug.c
+> +++ b/mm/memory_hotplug.c
+> @@ -858,13 +858,10 @@ int __ref online_pages(unsigned long pfn, unsigned long nr_pages,
+>         undo_isolate_page_range(pfn, pfn + nr_pages, MIGRATE_MOVABLE);
+>
+>         /*
+> -        * When exposing larger, physically contiguous memory areas to the
+> -        * buddy, shuffling in the buddy (when freeing onlined pages, putting
+> -        * them either to the head or the tail of the freelist) is only helpful
+> -        * for maintaining the shuffle, but not for creating the initial
+> -        * shuffle. Shuffle the whole zone to make sure the just onlined pages
+> -        * are properly distributed across the whole freelist. Make sure to
+> -        * shuffle once pageblocks are no longer isolated.
+> +        * Freshly onlined pages aren't shuffled (e.g., all pages are placed to
+> +        * the tail of the freelist when undoing isolation). Shuffle the whole
+> +        * zone to make sure the just onlined pages are properly distributed
+> +        * across the whole freelist - to create an initial shuffle.
+>          */
+>         shuffle_zone(zone);
+>
 
-But will it succeed if the default access is different from the one
-the installed entry currently has? Will it update the access bits
-to match the new ones?
-
-> 
-> > Seems easier to me to use guest_physmap_remove_page in that case to
-> > remove the entry from the p2m without freeing the page.
-> 
-> Why do any removal when none is really needed? I also don't see
-> this fit the "special pages" clause and comment very well. I'd
-> question the other way around whether guest_physmap_remove_page()
-> needs calling at all (the instance above; the other one of course
-> is needed).
-
-Right, replying to my question above: it will succeed, since
-guest_physmap_add_entry will overwrite the previous entry.
-
-I agree, it looks like the guest_physmap_remove_page call done for
-special pages is not really needed, as guest_physmap_add_entry would
-already overwrite such entries and not free the associated mfn?
-
-Roger.
+Acked-by: Pankaj Gupta <pankaj.gupta.linux@gmail.com>
 
