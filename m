@@ -2,28 +2,28 @@ Return-Path: <SRS0=90EN=D4=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 223FFC4363A
-	for <xen-devel@archiver.kernel.org>; Wed, 21 Oct 2020 10:39:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9D508C4363A
+	for <xen-devel@archiver.kernel.org>; Wed, 21 Oct 2020 10:46:22 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7E48822249
-	for <xen-devel@archiver.kernel.org>; Wed, 21 Oct 2020 10:39:22 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 06A9220795
+	for <xen-devel@archiver.kernel.org>; Wed, 21 Oct 2020 10:46:21 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="R7jsosuK"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7E48822249
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
+	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="E+6uRVVB"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 06A9220795
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.9995.26344 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.9998.26356 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kVBW8-0006ma-9p; Wed, 21 Oct 2020 10:38:52 +0000
+	id 1kVBd7-0007ip-2g; Wed, 21 Oct 2020 10:46:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 9995.26344; Wed, 21 Oct 2020 10:38:52 +0000
+Received: by outflank-mailman (output) from mailman id 9998.26356; Wed, 21 Oct 2020 10:46:05 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,92 +38,100 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kVBW8-0006mT-6d; Wed, 21 Oct 2020 10:38:52 +0000
-Received: by outflank-mailman (input) for mailman id 9995;
- Wed, 21 Oct 2020 10:38:50 +0000
+	id 1kVBd6-0007ii-V8; Wed, 21 Oct 2020 10:46:04 +0000
+Received: by outflank-mailman (input) for mailman id 9998;
+ Wed, 21 Oct 2020 10:46:04 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=JBpP=D4=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kVBW6-0006mO-9T
- for xen-devel@lists.xenproject.org; Wed, 21 Oct 2020 10:38:50 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=Hwko=D4=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1kVBd6-0007id-Af
+ for xen-devel@lists.xenproject.org; Wed, 21 Oct 2020 10:46:04 +0000
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 7628a35e-a96c-4fc0-ac80-7b6528cfb389;
- Wed, 21 Oct 2020 10:38:49 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 935A3B2D9;
- Wed, 21 Oct 2020 10:38:48 +0000 (UTC)
+ id ff526090-a319-40e3-b1a6-e6954c111253;
+ Wed, 21 Oct 2020 10:46:03 +0000 (UTC)
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=JBpP=D4=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
-	id 1kVBW6-0006mO-9T
-	for xen-devel@lists.xenproject.org; Wed, 21 Oct 2020 10:38:50 +0000
-X-Inumbo-ID: 7628a35e-a96c-4fc0-ac80-7b6528cfb389
-Received: from mx2.suse.de (unknown [195.135.220.15])
+	(envelope-from <SRS0=Hwko=D4=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+	id 1kVBd6-0007id-Af
+	for xen-devel@lists.xenproject.org; Wed, 21 Oct 2020 10:46:04 +0000
+X-Inumbo-ID: ff526090-a319-40e3-b1a6-e6954c111253
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 7628a35e-a96c-4fc0-ac80-7b6528cfb389;
-	Wed, 21 Oct 2020 10:38:49 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1603276728;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=XgubHRqIfP0cibpTbKfPdLKpJXoVZgrOsEZpWcsiIO8=;
-	b=R7jsosuKkk62/+XRaS84e0U/6Pc4tIDvC6SgwCJgQ78aFgW6eC6ZeuakNqFv0StgoWILwx
-	E8PItOIN247TBrx+fyJBhypYupwxIuaXiFkXmiJ5WvOg9hUZ6NhqyPoJs19K9Eai7iFstM
-	IpKZDBcceQc9kiIvEvc8EoHM5RlEr90=
-Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 935A3B2D9;
-	Wed, 21 Oct 2020 10:38:48 +0000 (UTC)
-Subject: Re: [PATCH] x86: XENMAPSPACE_gmfn{,_batch,_range} want to special
- case idx == gpfn
-To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- George Dunlap <George.Dunlap@eu.citrix.com>
-References: <920fa307-190e-dc11-f338-5b44a2126050@suse.com>
- <20201021093958.e4kopykalddam7pk@Air-de-Roger>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <a979d21d-efed-9493-efd1-2643bddbbdd9@suse.com>
-Date: Wed, 21 Oct 2020 12:38:48 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.1
+	id ff526090-a319-40e3-b1a6-e6954c111253;
+	Wed, 21 Oct 2020 10:46:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1603277164;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:content-transfer-encoding:in-reply-to;
+  bh=gIEQ33dXgjTvkAJ6j0Oyq0xbArK2F/V3iU4JiWwzL+U=;
+  b=E+6uRVVBQm9FmHmszj/ChnMSpOAGQIkdO/uy5uOnHj0WxGTwJ7/pKDVC
+   YCTPlvo1AMxOTlCnxxD7cy8HkQCbvy2ixICyszZqnvF2NtH/b8iKIl1aq
+   I3492Z06HuqjuJ1E+MswPQd1CZMlU+EbIVZF3pnSlESWOwjU4WcLDstK9
+   U=;
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: axAjVyzTwrXwLLDYdBja0/JJm//svAONa2OIk52CGar0CNjnvRBdcQtyn2XD3PGBbMTcQqxVBl
+ fA4JFPaK1nb9Wvpv8NQnTi2JQt0QSxnJ9cTV0OBwkNGYx0B4QZVslGaOOl2Ixoguv1kYaHk4gp
+ bDC6XxoFcSyds2Szblb93b1ssLNcY+UyAea15/cyt7A+gaH4ERDpuo2jomkA9rySpmjg6r0Bze
+ p0xZX5mciKE2EexMZilStEh/lKu/4lWMLcFwwjLIS76UkY0EYAnztn1nQT+2nmKdW2p405dKui
+ XMg=
+X-SBRS: 2.5
+X-MesageID: 29799057
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.77,401,1596513600"; 
+   d="scan'208";a="29799057"
+Date: Wed, 21 Oct 2020 12:45:50 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Jan Beulich <jbeulich@suse.com>
+CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "Andrew
+ Cooper" <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>, George Dunlap
+	<George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>
+Subject: Re: [PATCH v3 3/3] x86/shadow: sh_{make,destroy}_monitor_table() are
+ "even more" HVM-only
+Message-ID: <20201021104550.zhlxcqia3cqwmyju@Air-de-Roger>
+References: <d09b0690-c5e0-a90b-b4c0-4396a5f62c59@suse.com>
+ <cd39abe3-5a5c-6ebc-a11e-3d4ed1d74907@suse.com>
 MIME-Version: 1.0
-In-Reply-To: <20201021093958.e4kopykalddam7pk@Air-de-Roger>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <cd39abe3-5a5c-6ebc-a11e-3d4ed1d74907@suse.com>
+X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
+ FTLPEX02CL06.citrite.net (10.13.108.179)
 
-On 21.10.2020 11:39, Roger Pau Monné wrote:
-> On Fri, Oct 16, 2020 at 08:44:10AM +0200, Jan Beulich wrote:
->> --- a/xen/arch/x86/mm.c
->> +++ b/xen/arch/x86/mm.c
->> @@ -4555,7 +4555,7 @@ int xenmem_add_to_physmap_one(
->>          if ( is_special_page(mfn_to_page(prev_mfn)) )
->>              /* Special pages are simply unhooked from this phys slot. */
->>              rc = guest_physmap_remove_page(d, gpfn, prev_mfn, PAGE_ORDER_4K);
->> -        else
->> +        else if ( !mfn_eq(mfn, prev_mfn) )
->>              /* Normal domain memory is freed, to avoid leaking memory. */
->>              rc = guest_remove_page(d, gfn_x(gpfn));
+On Mon, Oct 19, 2020 at 10:45:00AM +0200, Jan Beulich wrote:
+> With them depending on just the number of shadow levels, there's no need
+> for more than one instance of them, and hence no need for any hook (IOW
+> 452219e24648 ["x86/shadow: monitor table is HVM-only"] didn't go quite
+> far enough). Move the functions to hvm.c while dropping the dead
+> is_pv_32bit_domain() code paths.
 > 
-> What about the access differing between the old and the new entries,
-> while pointing to the same mfn, would Xen install the new entry
-> successfully?
+> While moving the code, replace a stale comment reference to
+> sh_install_xen_entries_in_l4(). Doing so made me notice the function
+> also didn't have its prototype dropped in 8d7b633adab7 ("x86/mm:
+> Consolidate all Xen L4 slot writing into init_xen_l4_slots()"), which
+> gets done here as well.
+> 
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-Yes - guest_physmap_add_page() doesn't get bypassed.
+Acked-by: Roger Pau Monné <roger.pau@citrix.com>
 
-> Seems easier to me to use guest_physmap_remove_page in that case to
-> remove the entry from the p2m without freeing the page.
+> ---
+> v3: New.
+> ---
+> TBD: In principle both functions could have their first parameter
+>      constified. In fact, "destroy" doesn't depend on the vCPU at all
+>      and hence could be passed a struct domain *. Not sure whether such
+>      an asymmetry would be acceptable.
+>      In principle "make" would also not need passing of the number of
+>      shadow levels (can be derived from v), which would result in yet
+>      another asymmetry.
 
-Why do any removal when none is really needed? I also don't see
-this fit the "special pages" clause and comment very well. I'd
-question the other way around whether guest_physmap_remove_page()
-needs calling at all (the instance above; the other one of course
-is needed).
+I'm not specially fuzzed either way - having const v would be good
+IMO.
 
-Jan
+Thanks, Roger.
 
