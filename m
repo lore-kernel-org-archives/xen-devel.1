@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-13.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AFA92C5517A
-	for <xen-devel@archiver.kernel.org>; Wed, 21 Oct 2020 00:00:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8CAF1C4363D
+	for <xen-devel@archiver.kernel.org>; Wed, 21 Oct 2020 00:00:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 48B882076A
-	for <xen-devel@archiver.kernel.org>; Wed, 21 Oct 2020 00:00:43 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 173552076A
+	for <xen-devel@archiver.kernel.org>; Wed, 21 Oct 2020 00:00:46 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="Ul49e6Ly"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 48B882076A
+	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="xgRCeKVD"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 173552076A
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.9802.25917 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.9803.25935 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kV1YP-0008Pr-0Y; Wed, 21 Oct 2020 00:00:33 +0000
+	id 1kV1YT-00007S-IW; Wed, 21 Oct 2020 00:00:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 9802.25917; Wed, 21 Oct 2020 00:00:32 +0000
+Received: by outflank-mailman (output) from mailman id 9803.25935; Wed, 21 Oct 2020 00:00:37 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,46 +38,47 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kV1YO-0008PT-Mr; Wed, 21 Oct 2020 00:00:32 +0000
-Received: by outflank-mailman (input) for mailman id 9802;
- Wed, 21 Oct 2020 00:00:30 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kV1YT-00007F-D9; Wed, 21 Oct 2020 00:00:37 +0000
+Received: by outflank-mailman (input) for mailman id 9803;
+ Wed, 21 Oct 2020 00:00:35 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=01QD=D4=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1kV1YM-0007y0-OR
- for xen-devel@lists.xenproject.org; Wed, 21 Oct 2020 00:00:30 +0000
+ id 1kV1YR-0007xs-4O
+ for xen-devel@lists.xenproject.org; Wed, 21 Oct 2020 00:00:35 +0000
 Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 6989bcbe-7596-4718-b401-affd15347489;
- Wed, 21 Oct 2020 00:00:19 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 62713062-16e8-4abe-8186-a32cb459fbc1;
+ Wed, 21 Oct 2020 00:00:21 +0000 (UTC)
 Received: from sstabellini-ThinkPad-T480s.hsd1.ca.comcast.net
  (c-24-130-65-46.hsd1.ca.comcast.net [24.130.65.46])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id E49FC2245D;
- Wed, 21 Oct 2020 00:00:17 +0000 (UTC)
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by mail.kernel.org (Postfix) with ESMTPSA id A53AE22460;
+ Wed, 21 Oct 2020 00:00:20 +0000 (UTC)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=01QD=D4=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
-	id 1kV1YM-0007y0-OR
-	for xen-devel@lists.xenproject.org; Wed, 21 Oct 2020 00:00:30 +0000
-X-Inumbo-ID: 6989bcbe-7596-4718-b401-affd15347489
+	id 1kV1YR-0007xs-4O
+	for xen-devel@lists.xenproject.org; Wed, 21 Oct 2020 00:00:35 +0000
+X-Inumbo-ID: 62713062-16e8-4abe-8186-a32cb459fbc1
 Received: from mail.kernel.org (unknown [198.145.29.99])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 6989bcbe-7596-4718-b401-affd15347489;
-	Wed, 21 Oct 2020 00:00:19 +0000 (UTC)
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id 62713062-16e8-4abe-8186-a32cb459fbc1;
+	Wed, 21 Oct 2020 00:00:21 +0000 (UTC)
 Received: from sstabellini-ThinkPad-T480s.hsd1.ca.comcast.net (c-24-130-65-46.hsd1.ca.comcast.net [24.130.65.46])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id E49FC2245D;
-	Wed, 21 Oct 2020 00:00:17 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPSA id A53AE22460;
+	Wed, 21 Oct 2020 00:00:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1603238418;
-	bh=+o3KM9eZPxssF3KyIcRr2NiHUn2Ukmo/akFdy6ptlI4=;
+	s=default; t=1603238421;
+	bh=bil3zAxsGICVbiRPDFmg+ayhtYh9RfCEVPeAMVzrx8M=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=Ul49e6LyZaclVsTzUS9MSVuAdLgHPJlt/ZvsjYVo0l+1v09h46ZOrYOH5jXkC71Pu
-	 8DoiFejXSpB8yUZ5fKNb1WdsgwsQtdNHCvvwKnwSGnctO4+nI+OqE2KvGzskamB4cF
-	 vj6XUUSXug0/tNelrhV4lxFxfCPBevRfxWjY754A=
+	b=xgRCeKVDWkdw2RJzOkHoOiYzXysCK/qN0WUW+w6BH/XZUptpE6CEdklalskokdaJ7
+	 Z85gjqjeKCBr4A+0W1IJ9aNLMZSebReoZnLVqMoyy2IaU5Iw40+BQBxrdPCr/aqRmn
+	 H7KyAi5GIhWCKWMe3BjvlcZDP/4BcHJrZRQ+xHqE=
 From: Stefano Stabellini <sstabellini@kernel.org>
 To: xen-devel@lists.xenproject.org
 Cc: sstabellini@kernel.org,
@@ -89,9 +90,9 @@ Cc: sstabellini@kernel.org,
 	wl@xen.org,
 	Bertrand.Marquis@arm.com,
 	Stefano Stabellini <stefano.stabellini@xilinx.com>
-Subject: [PATCH v2 09/14] kernel-doc: public/sched.h
-Date: Tue, 20 Oct 2020 17:00:06 -0700
-Message-Id: <20201021000011.15351-9-sstabellini@kernel.org>
+Subject: [PATCH v2 13/14] kernel-doc: public/elfnote.h
+Date: Tue, 20 Oct 2020 17:00:10 -0700
+Message-Id: <20201021000011.15351-13-sstabellini@kernel.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <alpine.DEB.2.21.2010201646370.12247@sstabellini-ThinkPad-T480s>
 References: <alpine.DEB.2.21.2010201646370.12247@sstabellini-ThinkPad-T480s>
@@ -100,260 +101,295 @@ Convert in-code comments to kernel-doc format wherever possible.
 
 Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
 ---
-Changes in v2:
-- remove "enum" comments
----
- xen/include/public/sched.h | 134 +++++++++++++++++++++++++------------
- 1 file changed, 92 insertions(+), 42 deletions(-)
+ xen/include/public/elfnote.h | 109 ++++++++++++++++++++++++++---------
+ 1 file changed, 81 insertions(+), 28 deletions(-)
 
-diff --git a/xen/include/public/sched.h b/xen/include/public/sched.h
-index 811bd87c82..f6f0263569 100644
---- a/xen/include/public/sched.h
-+++ b/xen/include/public/sched.h
-@@ -29,41 +29,48 @@
- 
- #include "event_channel.h"
+diff --git a/xen/include/public/elfnote.h b/xen/include/public/elfnote.h
+index 181cbc4ec7..1dd567a6f1 100644
+--- a/xen/include/public/elfnote.h
++++ b/xen/include/public/elfnote.h
+@@ -27,8 +27,8 @@
+ #ifndef __XEN_PUBLIC_ELFNOTE_H__
+ #define __XEN_PUBLIC_ELFNOTE_H__
  
 -/*
-- * `incontents 150 sched Guest Scheduler Operations
+- * `incontents 200 elfnotes ELF notes
 +/**
-+ * DOC: Guest Scheduler Operations
++ * DOC: ELF notes
   *
-  * The SCHEDOP interface provides mechanisms for a guest to interact
-  * with the scheduler, including yield, blocking and shutting itself
-  * down.
+  * The notes should live in a PT_NOTE segment and have "Xen" in the
+  * name field.
+@@ -43,26 +43,35 @@
+  * as ASCIZ type.
   */
  
 -/*
 +/**
-+ * DOC: HYPERVISOR_sched_op
++ * DOC: XEN_ELFNOTE_INFO
+  * NAME=VALUE pair (string).
+  */
+ #define XEN_ELFNOTE_INFO           0
+ 
+-/*
++/**
++ * DOC: XEN_ELFNOTE_ENTRY
 + *
-  * The prototype for this hypercall is:
-- * ` long HYPERVISOR_sched_op(enum sched_op cmd, void *arg, ...)
+  * The virtual address of the entry point (numeric).
   *
-- * @cmd == SCHEDOP_??? (scheduler operation).
-- * @arg == Operation-specific extra argument(s), as described below.
-- * ...  == Additional Operation-specific extra arguments, described below.
-+ * long HYPERVISOR_sched_op(enum sched_op cmd, void *arg, ...)
+  * LEGACY: VIRT_ENTRY
+  */
+ #define XEN_ELFNOTE_ENTRY          1
+ 
+-/* The virtual address of the hypercall transfer page (numeric).
++/**
++ * DOC: XEN_ELFNOTE_HYPERCALL_PAGE
 + *
-+ * - @cmd == SCHEDOP_??? (scheduler operation).
-+ * - @arg == Operation-specific extra argument(s), as described below.
-+ * - ...  == Additional Operation-specific extra arguments, described below.
++ * The virtual address of the hypercall transfer page (numeric).
   *
-  * Versions of Xen prior to 3.0.2 provided only the following legacy version
-  * of this hypercall, supporting only the commands yield, block and shutdown:
+  * LEGACY: HYPERCALL_PAGE. (n.b. legacy value is a physical page
+  * number not a virtual address)
+  */
+ #define XEN_ELFNOTE_HYPERCALL_PAGE 2
+ 
+-/* The virtual address where the kernel image should be mapped (numeric).
++/**
++ * DOC: XEN_ELFNOTE_VIRT_BASE
 + *
-  *  long sched_op(int cmd, unsigned long arg)
-- * @cmd == SCHEDOP_??? (scheduler operation).
-- * @arg == 0               (SCHEDOP_yield and SCHEDOP_block)
-- *      == SHUTDOWN_* code (SCHEDOP_shutdown)
-+ *
-+ * - @cmd == SCHEDOP_??? (scheduler operation).
-+ * - @arg == 0               (SCHEDOP_yield and SCHEDOP_block)
-+ * -      == SHUTDOWN_* code (SCHEDOP_shutdown)
++ * The virtual address where the kernel image should be mapped (numeric).
   *
-  * This legacy version is available to new guests as:
-- * ` long HYPERVISOR_sched_op_compat(enum sched_op cmd, unsigned long arg)
-+ *
-+ * long HYPERVISOR_sched_op_compat(enum sched_op cmd, unsigned long arg)
-  */
- 
--/* ` enum sched_op { // SCHEDOP_* => struct sched_* */
--/*
-- * Voluntarily yield the CPU.
-- * @arg == NULL.
-+/**
-+ * DOC: SCHEDOP_yield
-+ * Voluntarily yield the CPU. @arg == NULL.
-  */
- #define SCHEDOP_yield       0
- 
--/*
-+/**
-+ * DOC: SCHEDOP_block
-+ *
-  * Block execution of this VCPU until an event is received for processing.
-  * If called with event upcalls masked, this operation will atomically
-  * reenable event delivery and check for pending events before blocking the
-@@ -72,7 +79,9 @@
-  */
- #define SCHEDOP_block       1
- 
--/*
-+/**
-+ * DOC: SCHEDOP_shutdown
-+ *
-  * Halt execution of this domain (all VCPUs) and notify the system controller.
-  * @arg == pointer to sched_shutdown_t structure.
+  * Defaults to 0.
   *
-@@ -87,14 +96,18 @@
+@@ -70,7 +79,9 @@
   */
- #define SCHEDOP_shutdown    2
+ #define XEN_ELFNOTE_VIRT_BASE      3
  
 -/*
 +/**
-+ * DOC: SCHEDOP_poll
++ * DOC: XEN_ELFNOTE_PADDR_OFFSET
 + *
-  * Poll a set of event-channel ports. Return when one or more are pending. An
-  * optional timeout may be specified.
-  * @arg == pointer to sched_poll_t structure.
+  * The offset of the ELF paddr field from the actual required
+  * pseudo-physical address (numeric).
+  *
+@@ -82,35 +93,45 @@
   */
- #define SCHEDOP_poll        3
+ #define XEN_ELFNOTE_PADDR_OFFSET   4
  
 -/*
 +/**
-+ * DOC: SCHEDOP_remote_shutdown
++ * DOC: XEN_ELFNOTE_XEN_VERSION
 + *
-  * Declare a shutdown for another domain. The main use of this function is
-  * in interpreting shutdown requests and reasons for fully-virtualized
-  * domains.  A para-virtualized domain may use SCHEDOP_shutdown directly.
-@@ -102,14 +115,18 @@
+  * The version of Xen that we work with (string).
+  *
+  * LEGACY: XEN_VER
   */
- #define SCHEDOP_remote_shutdown        4
+ #define XEN_ELFNOTE_XEN_VERSION    5
  
 -/*
 +/**
-+ * DOC: SCHEDOP_shutdown_code
++ * DOC: XEN_ELFNOTE_GUEST_OS
 + *
-  * Latch a shutdown code, so that when the domain later shuts down it
-  * reports this code to the control tools.
-  * @arg == sched_shutdown_t, as for SCHEDOP_shutdown.
+  * The name of the guest operating system (string).
+  *
+  * LEGACY: GUEST_OS
   */
- #define SCHEDOP_shutdown_code 5
+ #define XEN_ELFNOTE_GUEST_OS       6
  
 -/*
 +/**
-+ * DOC: SCHEDOP_watchdog
++ * DOC: XEN_ELFNOTE_GUEST_VERSION
 + *
-  * Setup, poke and destroy a domain watchdog timer.
-  * @arg == pointer to sched_watchdog_t structure.
-  * With id == 0, setup a domain watchdog timer to cause domain shutdown
-@@ -119,7 +136,9 @@
+  * The version of the guest operating system (string).
+  *
+  * LEGACY: GUEST_VER
   */
- #define SCHEDOP_watchdog    6
+ #define XEN_ELFNOTE_GUEST_VERSION  7
  
 -/*
 +/**
-+ * DOC: SCHEDOP_pin_override
++ * DOC: XEN_ELFNOTE_LOADER
 + *
-  * Override the current vcpu affinity by pinning it to one physical cpu or
-  * undo this override restoring the previous affinity.
-  * @arg == pointer to sched_pin_override_t structure.
-@@ -130,14 +149,20 @@
-  * to be part of the domain's cpupool.
+  * The loader type (string).
+  *
+  * LEGACY: LOADER
   */
- #define SCHEDOP_pin_override 7
--/* ` } */
- 
-+/**
-+ * struct sched_shutdown
-+ */
- struct sched_shutdown {
--    unsigned int reason; /* SHUTDOWN_* => enum sched_shutdown_reason */
-+    /** @reason: SHUTDOWN_* => enum sched_shutdown_reason */
-+    unsigned int reason;
- };
- typedef struct sched_shutdown sched_shutdown_t;
- DEFINE_XEN_GUEST_HANDLE(sched_shutdown_t);
- 
-+/**
-+ * struct sched_poll
-+ */
- struct sched_poll {
-     XEN_GUEST_HANDLE(evtchn_port_t) ports;
-     unsigned int nr_ports;
-@@ -146,39 +171,61 @@ struct sched_poll {
- typedef struct sched_poll sched_poll_t;
- DEFINE_XEN_GUEST_HANDLE(sched_poll_t);
- 
-+/**
-+ * struct sched_remote_shutdown
-+ */
- struct sched_remote_shutdown {
--    domid_t domain_id;         /* Remote domain ID */
--    unsigned int reason;       /* SHUTDOWN_* => enum sched_shutdown_reason */
-+    /** @domain_id: Remote domain ID */
-+    domid_t domain_id;
-+    /** @reason: SHUTDOWN_* => enum sched_shutdown_reason */
-+    unsigned int reason;
- };
- typedef struct sched_remote_shutdown sched_remote_shutdown_t;
- DEFINE_XEN_GUEST_HANDLE(sched_remote_shutdown_t);
- 
-+/**
-+ * struct sched_watchdog
-+ */
- struct sched_watchdog {
--    uint32_t id;                /* watchdog ID */
--    uint32_t timeout;           /* timeout */
-+    /** @id: watchdog ID */
-+    uint32_t id;
-+    /** @timeout: timeout */
-+    uint32_t timeout;
- };
- typedef struct sched_watchdog sched_watchdog_t;
- DEFINE_XEN_GUEST_HANDLE(sched_watchdog_t);
- 
-+/**
-+ * struct sched_pin_override
-+ */
- struct sched_pin_override {
-     int32_t pcpu;
- };
- typedef struct sched_pin_override sched_pin_override_t;
- DEFINE_XEN_GUEST_HANDLE(sched_pin_override_t);
+ #define XEN_ELFNOTE_LOADER         8
  
 -/*
-- * Reason codes for SCHEDOP_shutdown. These may be interpreted by control
-- * software to determine the appropriate action. For the most part, Xen does
-- * not care about the shutdown code.
 +/**
-+ * DOC: Reason codes for SCHEDOP_shutdown
++ * DOC: XEN_ELFNOTE_PAE_MODE
 + *
-+ * These may be interpreted by control software to determine the
-+ * appropriate action. For the most part, Xen does not care about the
-+ * shutdown code.
-+ *
-+ * - SHUTDOWN_poweroff: Domain exited normally. Clean up and kill.
-+ * - SHUTDOWN_reboot:   Clean up, kill, and then restart.
-+ * - SHUTDOWN_suspend:  Clean up, save suspend info, kill.
-+ * - SHUTDOWN_crash:    Tell controller we've crashed.
-+ * - SHUTDOWN_watchdog: Restart because watchdog time expired.
+  * The kernel supports PAE (x86/32 only, string = "yes", "no" or
+  * "bimodal").
+  *
+@@ -126,7 +147,9 @@
   */
--/* ` enum sched_shutdown_reason { */
--#define SHUTDOWN_poweroff   0  /* Domain exited normally. Clean up and kill. */
--#define SHUTDOWN_reboot     1  /* Clean up, kill, and then restart.          */
--#define SHUTDOWN_suspend    2  /* Clean up, save suspend info, kill.         */
--#define SHUTDOWN_crash      3  /* Tell controller we've crashed.             */
--#define SHUTDOWN_watchdog   4  /* Restart because watchdog time expired.     */
--
+ #define XEN_ELFNOTE_PAE_MODE       9
+ 
 -/*
-+#define SHUTDOWN_poweroff   0
-+#define SHUTDOWN_reboot     1
-+#define SHUTDOWN_suspend    2
-+#define SHUTDOWN_crash      3
-+#define SHUTDOWN_watchdog   4
-+
 +/**
-+ * DOC: SHUTDOWN_soft_reset
++ * DOC: XEN_ELFNOTE_FEATURES
 + *
-  * Domain asked to perform 'soft reset' for it. The expected behavior is to
-  * reset internal Xen state for the domain returning it to the point where it
-  * was created but leaving the domain's memory contents and vCPU contexts
-@@ -186,8 +233,11 @@ DEFINE_XEN_GUEST_HANDLE(sched_pin_override_t);
-  * interfaces again.
+  * The features supported/required by this kernel (string).
+  *
+  * The string must consist of a list of feature names (as given in
+@@ -138,7 +161,9 @@
   */
- #define SHUTDOWN_soft_reset 5
--#define SHUTDOWN_MAX        5  /* Maximum valid shutdown reason.             */
--/* ` } */
+ #define XEN_ELFNOTE_FEATURES      10
+ 
+-/*
 +/**
-+ * DOC: SHUTDOWN_MAX
-+ * Maximum valid shutdown reason
-+ */
-+#define SHUTDOWN_MAX        5
++ * DOC: XEN_ELFNOTE_BSD_SYMTAB
++ *
+  * The kernel requires the symbol table to be loaded (string = "yes" or "no")
+  * LEGACY: BSD_SYMTAB (n.b. The legacy treated the presence or absence
+  * of this string as a boolean flag rather than requiring "yes" or
+@@ -146,7 +171,9 @@
+  */
+ #define XEN_ELFNOTE_BSD_SYMTAB    11
  
- #endif /* __XEN_PUBLIC_SCHED_H__ */
+-/*
++/**
++ * DOC: XEN_ELFNOTE_HV_START_LOW
++ *
+  * The lowest address the hypervisor hole can begin at (numeric).
+  *
+  * This must not be set higher than HYPERVISOR_VIRT_START. Its presence
+@@ -155,13 +182,17 @@
+  */
+ #define XEN_ELFNOTE_HV_START_LOW  12
  
+-/*
++/**
++ * DOC: XEN_ELFNOTE_L1_MFN_VALID
++ *
+  * List of maddr_t-sized mask/value pairs describing how to recognize
+  * (non-present) L1 page table entries carrying valid MFNs (numeric).
+  */
+ #define XEN_ELFNOTE_L1_MFN_VALID  13
+ 
+-/*
++/**
++ * DOC: XEN_ELFNOTE_SUSPEND_CANCEL
++ *
+  * Whether or not the guest supports cooperative suspend cancellation.
+  * This is a numeric value.
+  *
+@@ -169,7 +200,9 @@
+  */
+ #define XEN_ELFNOTE_SUSPEND_CANCEL 14
+ 
+-/*
++/**
++ * DOC: XEN_ELFNOTE_INIT_P2M
++ *
+  * The (non-default) location the initial phys-to-machine map should be
+  * placed at by the hypervisor (Dom0) or the tools (DomU).
+  * The kernel must be prepared for this mapping to be established using
+@@ -182,13 +215,17 @@
+  */
+ #define XEN_ELFNOTE_INIT_P2M      15
+ 
+-/*
++/**
++ * DOC: XEN_ELFNOTE_MOD_START_PFN
++ *
+  * Whether or not the guest can deal with being passed an initrd not
+  * mapped through its initial page tables.
+  */
+ #define XEN_ELFNOTE_MOD_START_PFN 16
+ 
+-/*
++/**
++ * DOC: XEN_ELFNOTE_SUPPORTED_FEATURES
++ *
+  * The features supported by this kernel (numeric).
+  *
+  * Other than XEN_ELFNOTE_FEATURES on pre-4.2 Xen, this note allows a
+@@ -201,7 +238,9 @@
+  */
+ #define XEN_ELFNOTE_SUPPORTED_FEATURES 17
+ 
+-/*
++/**
++ * DOC: XEN_ELFNOTE_PHYS32_ENTRY
++ *
+  * Physical entry point into the kernel.
+  *
+  * 32bit entry point into the kernel. When requested to launch the
+@@ -211,12 +250,16 @@
+  */
+ #define XEN_ELFNOTE_PHYS32_ENTRY 18
+ 
+-/*
++/**
++ * DOC: XEN_ELFNOTE_MAX
++ *
+  * The number of the highest elfnote defined.
+  */
+ #define XEN_ELFNOTE_MAX XEN_ELFNOTE_PHYS32_ENTRY
+ 
+-/*
++/**
++ * DOC: XEN_ELFNOTE_CRASH_INFO
++ *
+  * System information exported through crash notes.
+  *
+  * The kexec / kdump code will create one XEN_ELFNOTE_CRASH_INFO
+@@ -225,7 +268,9 @@
+  */
+ #define XEN_ELFNOTE_CRASH_INFO 0x1000001
+ 
+-/*
++/**
++ * DOC: XEN_ELFNOTE_CRASH_REGS
++ *
+  * System registers exported through crash notes.
+  *
+  * The kexec / kdump code will create one XEN_ELFNOTE_CRASH_REGS
+@@ -236,7 +281,9 @@
+ #define XEN_ELFNOTE_CRASH_REGS 0x1000002
+ 
+ 
+-/*
++/**
++ * DOC: XEN_ELFNOTE_DUMPCORE_NONE
++ *
+  * xen dump-core none note.
+  * xm dump-core code will create one XEN_ELFNOTE_DUMPCORE_NONE
+  * in its dump file to indicate that the file is xen dump-core
+@@ -245,7 +292,9 @@
+  */
+ #define XEN_ELFNOTE_DUMPCORE_NONE               0x2000000
+ 
+-/*
++/**
++ * DOC: XEN_ELFNOTE_DUMPCORE_HEADER
++ *
+  * xen dump-core header note.
+  * xm dump-core code will create one XEN_ELFNOTE_DUMPCORE_HEADER
+  * in its dump file.
+@@ -253,7 +302,9 @@
+  */
+ #define XEN_ELFNOTE_DUMPCORE_HEADER             0x2000001
+ 
+-/*
++/**
++ * DOC: XEN_ELFNOTE_DUMPCORE_XEN_VERSION
++ *
+  * xen dump-core xen version note.
+  * xm dump-core code will create one XEN_ELFNOTE_DUMPCORE_XEN_VERSION
+  * in its dump file. It contains the xen version obtained via the
+@@ -262,7 +313,9 @@
+  */
+ #define XEN_ELFNOTE_DUMPCORE_XEN_VERSION        0x2000002
+ 
+-/*
++/**
++ * DOC: XEN_ELFNOTE_DUMPCORE_FORMAT_VERSION
++ *
+  * xen dump-core format version note.
+  * xm dump-core code will create one XEN_ELFNOTE_DUMPCORE_FORMAT_VERSION
+  * in its dump file. It contains a format version identifier.
 -- 
 2.17.1
 
