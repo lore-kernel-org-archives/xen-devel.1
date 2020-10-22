@@ -2,28 +2,25 @@ Return-Path: <SRS0=UfNL=D5=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.5 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.7 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A5477C4363A
-	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 18:44:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 66B24C388F9
+	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 19:19:30 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0777524630
-	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 18:44:47 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="IvwEonIy"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0777524630
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id C42E524656
+	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 19:19:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C42E524656
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=m5p.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.10637.28381 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.10641.28394 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kVfZh-0004I0-5W; Thu, 22 Oct 2020 18:44:33 +0000
+	id 1kVg6z-0007G3-RC; Thu, 22 Oct 2020 19:18:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 10637.28381; Thu, 22 Oct 2020 18:44:33 +0000
+Received: by outflank-mailman (output) from mailman id 10641.28394; Thu, 22 Oct 2020 19:18:57 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,122 +35,109 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kVfZh-0004Ht-2Q; Thu, 22 Oct 2020 18:44:33 +0000
-Received: by outflank-mailman (input) for mailman id 10637;
- Thu, 22 Oct 2020 18:44:31 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kVg6z-0007Fw-OD; Thu, 22 Oct 2020 19:18:57 +0000
+Received: by outflank-mailman (input) for mailman id 10641;
+ Thu, 22 Oct 2020 19:18:57 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=GjE6=D5=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1kVfZf-0004Ho-A4
- for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 18:44:31 +0000
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 6212469c-41fc-4145-ac83-55828beeed68;
- Thu, 22 Oct 2020 18:44:30 +0000 (UTC)
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1kVfZc-0007vV-PU; Thu, 22 Oct 2020 18:44:28 +0000
-Received: from 54-240-197-227.amazon.com ([54.240.197.227]
- helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1kVfZc-0006PY-H3; Thu, 22 Oct 2020 18:44:28 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+ (envelope-from <SRS0=JUr7=D5=m5p.com=ehem@srs-us1.protection.inumbo.net>)
+ id 1kVg6z-0007Fr-1N
+ for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 19:18:57 +0000
+Received: from mailhost.m5p.com (unknown [74.104.188.4])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 34ca4d40-ad36-46f5-a35e-bab1a3cc54a7;
+ Thu, 22 Oct 2020 19:18:56 +0000 (UTC)
+Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:1f07:15ff:0:0:0:f7])
+ by mailhost.m5p.com (8.15.2/8.15.2) with ESMTPS id 09MJIfm6082609
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
+ Thu, 22 Oct 2020 15:18:47 -0400 (EDT) (envelope-from ehem@m5p.com)
+Received: (from ehem@localhost)
+ by m5p.com (8.15.2/8.15.2/Submit) id 09MJIeBP082608;
+ Thu, 22 Oct 2020 12:18:40 -0700 (PDT) (envelope-from ehem)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=GjE6=D5=xen.org=julien@srs-us1.protection.inumbo.net>)
-	id 1kVfZf-0004Ho-A4
-	for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 18:44:31 +0000
-X-Inumbo-ID: 6212469c-41fc-4145-ac83-55828beeed68
-Received: from mail.xenproject.org (unknown [104.130.215.37])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 6212469c-41fc-4145-ac83-55828beeed68;
-	Thu, 22 Oct 2020 18:44:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=zKRIqE5QdB44gNecpq9/v2buwXY54W2I5s/epMF+zfY=; b=IvwEonIy05AykSGlxgHqIkYYMb
-	UP4kh8NlEu7yrH5Gs9nYjF/r+v7zHHg9OjdMwmrDCfB9noT9cIPmzzfmiuDnUwOIbVyRbpC/jRBRe
-	avS92hDWPNMsGTF+J6fogLWdRWb6rqkaWTKIXKQBP/xir9x6M26i3Rj1t4d3yrEbBgjY=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
-	by mail.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <julien@xen.org>)
-	id 1kVfZc-0007vV-PU; Thu, 22 Oct 2020 18:44:28 +0000
-Received: from 54-240-197-227.amazon.com ([54.240.197.227] helo=a483e7b01a66.ant.amazon.com)
-	by xenbits.xenproject.org with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
-	(Exim 4.92)
-	(envelope-from <julien@xen.org>)
-	id 1kVfZc-0006PY-H3; Thu, 22 Oct 2020 18:44:28 +0000
+	(envelope-from <SRS0=JUr7=D5=m5p.com=ehem@srs-us1.protection.inumbo.net>)
+	id 1kVg6z-0007Fr-1N
+	for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 19:18:57 +0000
+X-Inumbo-ID: 34ca4d40-ad36-46f5-a35e-bab1a3cc54a7
+Received: from mailhost.m5p.com (unknown [74.104.188.4])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id 34ca4d40-ad36-46f5-a35e-bab1a3cc54a7;
+	Thu, 22 Oct 2020 19:18:56 +0000 (UTC)
+Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:1f07:15ff:0:0:0:f7])
+	by mailhost.m5p.com (8.15.2/8.15.2) with ESMTPS id 09MJIfm6082609
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
+	Thu, 22 Oct 2020 15:18:47 -0400 (EDT)
+	(envelope-from ehem@m5p.com)
+Received: (from ehem@localhost)
+	by m5p.com (8.15.2/8.15.2/Submit) id 09MJIeBP082608;
+	Thu, 22 Oct 2020 12:18:40 -0700 (PDT)
+	(envelope-from ehem)
+Date: Thu, 22 Oct 2020 12:18:40 -0700
+From: Elliott Mitchell <ehem+xen@m5p.com>
+To: Julien Grall <julien@xen.org>
+Cc: xen-devel@lists.xenproject.org,
+        Stefano Stabellini <sstabellini@kernel.org>,
+        Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 Subject: Re: [PATCH] xen/acpi: Don't fail if SPCR table is absent
-To: Elliott Mitchell <ehem+xen@m5p.com>, xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Message-ID: <20201022191840.GB81455@mattapan.m5p.com>
 References: <20201021221253.GA73207@mattapan.m5p.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <930267bd-5442-3ff0-bb5b-1ed8e2ebe37c@xen.org>
-Date: Thu, 22 Oct 2020 19:44:26 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.3.3
+ <930267bd-5442-3ff0-bb5b-1ed8e2ebe37c@xen.org>
 MIME-Version: 1.0
-In-Reply-To: <20201021221253.GA73207@mattapan.m5p.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <930267bd-5442-3ff0-bb5b-1ed8e2ebe37c@xen.org>
 
-Hi,
-
-Thank you for the patch. FIY I tweak a bit the commit title before 
-committing.
-
-The title is now: "xen/arm: acpi: Don't fail it SPCR table is absent".
-
-Cheers,
-
-On 21/10/2020 23:12, Elliott Mitchell wrote:
-> Absence of a SPCR table likely means the console is a framebuffer.  In
-> such case acpi_iomem_deny_access() should NOT fail.
+On Thu, Oct 22, 2020 at 07:38:26PM +0100, Julien Grall wrote:
+> I don't think we are very consistent here... I would not add them 
+> myself, but I don't particularly mind them (I know some editors will add 
+> them automatically).
 > 
-> Signed-off-by: Elliott Mitchell <ehem+xen@m5p.com>
-> ---
->   xen/arch/arm/acpi/domain_build.c | 19 ++++++++++---------
->   1 file changed, 10 insertions(+), 9 deletions(-)
+> I will keep them while committing. For the patch:
+
+I would tend to remove them on commit since I dislike them.  Just as
+stated, I was unsure.
+
+On default settings, clang-format will object to:
+
+if(thing)
+{
+	foo
+}
+else
+	bar
+
+Or
+
+if(thing)
+	foo
+else
+{
+	bar
+}
+
+I *like* those formats, but was under the impression most people did not.
+The indentation is the more visually obvious indicator, just the compiler
+actually uses the brackets.  As such I *like* the misleading indentation
+warnings as those seemed to have a fairly high true-positive rate.
+
+
+On Thu, Oct 22, 2020 at 07:44:26PM +0100, Julien Grall wrote:
+> Thank you for the patch. FIY I tweak a bit the commit title before 
+> committing.
 > 
-> diff --git a/xen/arch/arm/acpi/domain_build.c b/xen/arch/arm/acpi/domain_build.c
-> index 1b1cfabb00..bbdc90f92c 100644
-> --- a/xen/arch/arm/acpi/domain_build.c
-> +++ b/xen/arch/arm/acpi/domain_build.c
-> @@ -42,17 +42,18 @@ static int __init acpi_iomem_deny_access(struct domain *d)
->       status = acpi_get_table(ACPI_SIG_SPCR, 0,
->                               (struct acpi_table_header **)&spcr);
->   
-> -    if ( ACPI_FAILURE(status) )
-> +    if ( ACPI_SUCCESS(status) )
->       {
-> -        printk("Failed to get SPCR table\n");
-> -        return -EINVAL;
-> +        mfn = spcr->serial_port.address >> PAGE_SHIFT;
-> +        /* Deny MMIO access for UART */
-> +        rc = iomem_deny_access(d, mfn, mfn + 1);
-> +        if ( rc )
-> +            return rc;
-> +    }
-> +    else
-> +    {
-> +        printk("Failed to get SPCR table, Xen console may be unavailable\n");
->       }
-> -
-> -    mfn = spcr->serial_port.address >> PAGE_SHIFT;
-> -    /* Deny MMIO access for UART */
-> -    rc = iomem_deny_access(d, mfn, mfn + 1);
-> -    if ( rc )
-> -        return rc;
->   
->       /* Deny MMIO access for GIC regions */
->       return gic_iomem_deny_access(d);
-> 
+> The title is now: "xen/arm: acpi: Don't fail it SPCR table is absent".
+
+Perhaps "xen/arm: acpi: Don't fail on absent SPCR table"?
+
+What you're suggesting doesn't read well to me.
+
 
 -- 
-Julien Grall
+(\___(\___(\______          --=> 8-) EHM <=--          ______/)___/)___/)
+ \BS (    |         ehem+sigmsg@m5p.com  PGP 87145445         |    )   /
+  \_CS\   |  _____  -O #include <stddisclaimer.h> O-   _____  |   /  _/
+8A19\___\_|_/58D2 7E3D DDF4 7BA6 <-PGP-> 41D1 B375 37D0 8714\_|_/___/5445
+
+
 
