@@ -2,28 +2,28 @@ Return-Path: <SRS0=UfNL=D5=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.5 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-8.5 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+	NICE_REPLY_A,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C39CBC388F7
-	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 13:18:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CA334C388F7
+	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 13:34:36 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 48E7024178
-	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 13:18:12 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 5517420BED
+	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 13:34:36 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="R/lMCrLL"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 48E7024178
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="PdrPb2nh"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5517420BED
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.10429.27708 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.10435.27727 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kVaTa-0001R1-IP; Thu, 22 Oct 2020 13:17:54 +0000
+	id 1kVajR-0003Kx-2i; Thu, 22 Oct 2020 13:34:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 10429.27708; Thu, 22 Oct 2020 13:17:54 +0000
+Received: by outflank-mailman (output) from mailman id 10435.27727; Thu, 22 Oct 2020 13:34:17 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,94 +38,89 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kVaTa-0001Qu-FG; Thu, 22 Oct 2020 13:17:54 +0000
-Received: by outflank-mailman (input) for mailman id 10429;
- Thu, 22 Oct 2020 13:17:53 +0000
+	id 1kVajQ-0003Kq-Va; Thu, 22 Oct 2020 13:34:16 +0000
+Received: by outflank-mailman (input) for mailman id 10435;
+ Thu, 22 Oct 2020 13:34:16 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Z30Q=D5=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kVaTZ-0001Qp-OT
- for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 13:17:53 +0000
+ id 1kVajP-0003Kl-Us
+ for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 13:34:15 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 42b9b724-3785-4a91-a4ff-79ba6fac635a;
- Thu, 22 Oct 2020 13:17:52 +0000 (UTC)
+ id c42782b7-6341-4e94-a04b-5afd271f396b;
+ Thu, 22 Oct 2020 13:34:15 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 0FCABAE35;
- Thu, 22 Oct 2020 13:17:52 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 4B4D7AC2F;
+ Thu, 22 Oct 2020 13:34:14 +0000 (UTC)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=Z30Q=D5=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
-	id 1kVaTZ-0001Qp-OT
-	for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 13:17:53 +0000
-X-Inumbo-ID: 42b9b724-3785-4a91-a4ff-79ba6fac635a
+	id 1kVajP-0003Kl-Us
+	for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 13:34:15 +0000
+X-Inumbo-ID: c42782b7-6341-4e94-a04b-5afd271f396b
 Received: from mx2.suse.de (unknown [195.135.220.15])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 42b9b724-3785-4a91-a4ff-79ba6fac635a;
-	Thu, 22 Oct 2020 13:17:52 +0000 (UTC)
+	id c42782b7-6341-4e94-a04b-5afd271f396b;
+	Thu, 22 Oct 2020 13:34:15 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1603372672;
+	t=1603373654;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=q3XLuJAiAJI40OqF2MlzN6uIGy9R9OJtoodmMnAlqVA=;
-	b=R/lMCrLLsJ9oxMG8VYEjoj5XbtqmyCxxnkVfZT529iQ9EyrPI8NQo9Ft0fvftXIwPN/QRw
-	WuR6R+i/DjPdKXhmnkCtsIeWGL+zxgLuHolPEnxjO0iiZcsdVvaHoZZg8tE+obiBqgPbb8
-	ioZMsgIylAxUhxAT7O3IyhVn5ER3N4w=
+	bh=0QZIsBzvdYvQS6Vp6oOgnBeT+8YzewYeHdSYJwOlnQo=;
+	b=PdrPb2nhcVeXpnsDu1mKva6XijwalG7ehExyqPcpgVQFVuAMrssdgM4P+h3BVCeXZBW0fD
+	tPH/YP6k401iW2TVc9xZMOSqLM8iqxyIYZe22bW5tc9CUDK/EZguq0VDSwGPTCRtIWdSmf
+	leUphOKxhy3rRCP58dT5d4u58i2sqRI=
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 0FCABAE35;
-	Thu, 22 Oct 2020 13:17:52 +0000 (UTC)
-Subject: Re: [PATCH v2 3/5] xen/events: only register debug interrupt for
- 2-level events
-To: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Cc: xen-devel@lists.xenproject.org, x86@kernel.org,
- linux-kernel@vger.kernel.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
- Borislav Petkov <bp@alien8.de>, "H. Peter Anvin" <hpa@zytor.com>
-References: <20201022094907.28560-1-jgross@suse.com>
- <20201022094907.28560-4-jgross@suse.com>
- <1de24e42-6cb7-4ecb-0eb2-c4a15dc8afc9@suse.com>
- <98f76c98-00d5-3238-a54f-cce52419160f@suse.com>
+	by mx2.suse.de (Postfix) with ESMTP id 4B4D7AC2F;
+	Thu, 22 Oct 2020 13:34:14 +0000 (UTC)
+Subject: Re: [PATCH v2 4/8] evtchn: let evtchn_set_priority() acquire the
+ per-channel lock
+To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <George.Dunlap@eu.citrix.com>, Ian Jackson
+ <iwj@xenproject.org>, Julien Grall <julien@xen.org>, Wei Liu <wl@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>
+References: <19babf20-3649-5c63-44a9-7edfa81835aa@suse.com>
+ <266c9178-700b-5663-4b5f-69f160a165ab@suse.com>
+ <20201022111712.g7kvaducfgwa6whn@Air-de-Roger>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <b21d3544-2257-dee5-222d-f4dade94d167@suse.com>
-Date: Thu, 22 Oct 2020 15:17:52 +0200
+Message-ID: <36e0adac-21e7-235b-c569-54d9c97f3e77@suse.com>
+Date: Thu, 22 Oct 2020 15:34:14 +0200
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.12.1
 MIME-Version: 1.0
-In-Reply-To: <98f76c98-00d5-3238-a54f-cce52419160f@suse.com>
+In-Reply-To: <20201022111712.g7kvaducfgwa6whn@Air-de-Roger>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 
-On 22.10.2020 15:09, Jürgen Groß wrote:
-> On 22.10.20 12:35, Jan Beulich wrote:
->> On 22.10.2020 11:49, Juergen Gross wrote:
->>> @@ -2080,10 +2080,12 @@ void __init xen_init_IRQ(void)
->>>   	int ret = -EINVAL;
->>>   	evtchn_port_t evtchn;
->>>   
->>> -	if (fifo_events)
->>> +	if (xen_fifo_events)
->>>   		ret = xen_evtchn_fifo_init();
->>> -	if (ret < 0)
->>> +	if (ret < 0) {
->>>   		xen_evtchn_2l_init();
->>> +		xen_fifo_events = false;
->>> +	}
->>
->> Another note: While it may not matter right here, maybe better
->> first set the variable and the call the function?
+On 22.10.2020 13:17, Roger Pau Monné wrote:
+> On Tue, Oct 20, 2020 at 04:09:41PM +0200, Jan Beulich wrote:
+>> Some lock wants to be held to make sure the port doesn't change state,
+>> but there's no point holding the per-domain event lock here. Switch to
+>> using the finer grained per-channel lock instead.
 > 
-> I don't think this is really important, TBH.
-> 
-> This code is executed before other cpus are up and we'd have major
-> other problems in case the sequence would really matter here.
+> While true that's a fine grained lock, it also disables interrupts,
+> which the global event_lock didn't.
 
-Fair enough; I was thinking in particular that it ought to be
-legitimate for xen_evtchn_2l_init() to BUG_ON(xen_fifo_events).
+True, yet we're aiming at dropping this aspect again. Hence I've
+added "(albeit as a downside for the time being this requires
+disabling interrupts for a short period of time)".
+
+>> FAOD this doesn't guarantee anything towards in particular
+>> evtchn_fifo_set_pending(), as for interdomain channels that function
+>> would be called with the remote side's per-channel lock held.
+>>
+>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> 
+> Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+
+Thanks.
 
 Jan
 
