@@ -2,28 +2,28 @@ Return-Path: <SRS0=UfNL=D5=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.5 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 305E7C4363A
-	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 07:33:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9CC3FC388F2
+	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 07:42:41 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A679220BED
-	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 07:33:41 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 34D89223FB
+	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 07:42:41 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="t2kBQLDF"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A679220BED
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="WUkn4x9r"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 34D89223FB
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.10193.26998 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.10197.27022 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kVV6H-0005O8-36; Thu, 22 Oct 2020 07:33:29 +0000
+	id 1kVVEz-0006K3-73; Thu, 22 Oct 2020 07:42:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 10193.26998; Thu, 22 Oct 2020 07:33:29 +0000
+Received: by outflank-mailman (output) from mailman id 10197.27022; Thu, 22 Oct 2020 07:42:29 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,116 +38,133 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kVV6G-0005O1-W6; Thu, 22 Oct 2020 07:33:28 +0000
-Received: by outflank-mailman (input) for mailman id 10193;
- Thu, 22 Oct 2020 07:33:27 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kVVEz-0006Jv-2j; Thu, 22 Oct 2020 07:42:29 +0000
+Received: by outflank-mailman (input) for mailman id 10197;
+ Thu, 22 Oct 2020 07:42:27 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=Z30Q=D5=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kVV6F-0005Nw-KF
- for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 07:33:27 +0000
+ (envelope-from <SRS0=dfvK=D5=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1kVVEx-0006JP-9I
+ for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 07:42:27 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b8a15e05-b9ae-4383-bd6d-8c37c3d3e435;
- Thu, 22 Oct 2020 07:33:26 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id f0acf22e-8065-4816-b469-dc09b6d636cf;
+ Thu, 22 Oct 2020 07:42:26 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 0746FABB2;
- Thu, 22 Oct 2020 07:33:26 +0000 (UTC)
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by mx2.suse.de (Postfix) with ESMTP id AC1DCB19E;
+ Thu, 22 Oct 2020 07:42:25 +0000 (UTC)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=Z30Q=D5=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
-	id 1kVV6F-0005Nw-KF
-	for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 07:33:27 +0000
-X-Inumbo-ID: b8a15e05-b9ae-4383-bd6d-8c37c3d3e435
+	(envelope-from <SRS0=dfvK=D5=suse.com=jgross@srs-us1.protection.inumbo.net>)
+	id 1kVVEx-0006JP-9I
+	for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 07:42:27 +0000
+X-Inumbo-ID: f0acf22e-8065-4816-b469-dc09b6d636cf
 Received: from mx2.suse.de (unknown [195.135.220.15])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id b8a15e05-b9ae-4383-bd6d-8c37c3d3e435;
-	Thu, 22 Oct 2020 07:33:26 +0000 (UTC)
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id f0acf22e-8065-4816-b469-dc09b6d636cf;
+	Thu, 22 Oct 2020 07:42:26 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1603352006;
+	t=1603352545;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=jZmrjZSUnLgn7qREAUQyzOG+LZUm0ECb13lDvq/bEYE=;
-	b=t2kBQLDFxQqZ7ChAZlR/Lq9sxFhOms9xLFsOMVe0yHQeBzlZHAgYnhkhDJ4n+1rmQ5KYqn
-	EqYjtpNywvTaUvGcdUSyFp+upImx+R2vWqgasPtUOIHiot2frDR9faC3C53aP9hwjNAaNK
-	znUKMoJb7dV10wa8+m0b6Gec8Ge57yE=
+	bh=8+gXPSZ4YK0mj6VX7zgMh/c3+7HoLEk5WluQT9Z0yeU=;
+	b=WUkn4x9r0qlY9xTRnQ8DIhORZkjrTb516b1OQh3oXGCkHDoEK3O35H4KKsTIbKvF0ysIp7
+	8PWXisHXPbb1IzERtCyrFPHmdmq7qQs5zbXO6stE4UHq13ZKspWu1Okwvlc+eT5RG12i72
+	XabaRzfVA7Um6FUlRe41BIpTyRf6tvY=
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 0746FABB2;
-	Thu, 22 Oct 2020 07:33:26 +0000 (UTC)
-Subject: Re: [PATCH v2 1/8] evtchn: avoid race in get_xen_consumer()
-To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <George.Dunlap@eu.citrix.com>, Ian Jackson
- <iwj@xenproject.org>, Julien Grall <julien@xen.org>, Wei Liu <wl@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>
-References: <19babf20-3649-5c63-44a9-7edfa81835aa@suse.com>
- <9ecafa4d-db5b-20a2-3a9d-6a6cda91252c@suse.com>
- <20201021154650.zz77ircyuedr7gpm@Air-de-Roger>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <3fd4c197-617e-dd48-6781-9ff0b1a82bf8@suse.com>
-Date: Thu, 22 Oct 2020 09:33:27 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.1
+	by mx2.suse.de (Postfix) with ESMTP id AC1DCB19E;
+	Thu, 22 Oct 2020 07:42:25 +0000 (UTC)
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org,
+	linux-kernel@vger.kernel.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH 1/5] xen: remove no longer used functions
+Date: Thu, 22 Oct 2020 09:42:10 +0200
+Message-Id: <20201022074214.21693-2-jgross@suse.com>
+X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20201022074214.21693-1-jgross@suse.com>
+References: <20201022074214.21693-1-jgross@suse.com>
 MIME-Version: 1.0
-In-Reply-To: <20201021154650.zz77ircyuedr7gpm@Air-de-Roger>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 
-On 21.10.2020 17:46, Roger Pau Monné wrote:
-> On Tue, Oct 20, 2020 at 04:08:13PM +0200, Jan Beulich wrote:
->> There's no global lock around the updating of this global piece of data.
->> Make use of cmpxchgptr() to avoid two entities racing with their
->> updates.
->>
->> While touching the functionality, mark xen_consumers[] read-mostly (or
->> else the if() condition could use the result of cmpxchgptr(), writing to
->> the slot unconditionally).
-> 
-> I'm not sure I get this, likely related to the comment I have below.
+With the switch to the lateeoi model for interdomain event channels
+some functions are no longer in use. Remove them.
 
-This is about the alternative case of invoking cmpxchgptr()
-without the if() around it. On x86 this would mean always
-writing the field, even if the designated value is already in
-place.
+Suggested-by: Jan Beulich <jbeulich@suse.com>
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ drivers/xen/events/events_base.c | 21 ---------------------
+ include/xen/events.h             |  8 --------
+ 2 files changed, 29 deletions(-)
 
->> --- a/xen/common/event_channel.c
->> +++ b/xen/common/event_channel.c
->> @@ -57,7 +57,8 @@
->>   * with a pointer, we stash them dynamically in a small lookup array which
->>   * can be indexed by a small integer.
->>   */
->> -static xen_event_channel_notification_t xen_consumers[NR_XEN_CONSUMERS];
->> +static xen_event_channel_notification_t __read_mostly
->> +    xen_consumers[NR_XEN_CONSUMERS];
->>  
->>  /* Default notification action: wake up from wait_on_xen_event_channel(). */
->>  static void default_xen_notification_fn(struct vcpu *v, unsigned int port)
->> @@ -80,8 +81,9 @@ static uint8_t get_xen_consumer(xen_even
->>  
->>      for ( i = 0; i < ARRAY_SIZE(xen_consumers); i++ )
->>      {
->> +        /* Use cmpxchgptr() in lieu of a global lock. */
->>          if ( xen_consumers[i] == NULL )
->> -            xen_consumers[i] = fn;
->> +            cmpxchgptr(&xen_consumers[i], NULL, fn);
->>          if ( xen_consumers[i] == fn )
->>              break;
-> 
-> I think you could join it as:
-> 
-> if ( !xen_consumers[i] &&
->      !cmpxchgptr(&xen_consumers[i], NULL, fn) )
->     break;
-> 
-> As cmpxchgptr will return the previous value of &xen_consumers[i]?
+diff --git a/drivers/xen/events/events_base.c b/drivers/xen/events/events_base.c
+index cc317739e786..436682db41c5 100644
+--- a/drivers/xen/events/events_base.c
++++ b/drivers/xen/events/events_base.c
+@@ -1145,14 +1145,6 @@ static int bind_interdomain_evtchn_to_irq_chip(unsigned int remote_domain,
+ 					       chip);
+ }
+ 
+-int bind_interdomain_evtchn_to_irq(unsigned int remote_domain,
+-				   evtchn_port_t remote_port)
+-{
+-	return bind_interdomain_evtchn_to_irq_chip(remote_domain, remote_port,
+-						   &xen_dynamic_chip);
+-}
+-EXPORT_SYMBOL_GPL(bind_interdomain_evtchn_to_irq);
+-
+ int bind_interdomain_evtchn_to_irq_lateeoi(unsigned int remote_domain,
+ 					   evtchn_port_t remote_port)
+ {
+@@ -1320,19 +1312,6 @@ static int bind_interdomain_evtchn_to_irqhandler_chip(
+ 	return irq;
+ }
+ 
+-int bind_interdomain_evtchn_to_irqhandler(unsigned int remote_domain,
+-					  evtchn_port_t remote_port,
+-					  irq_handler_t handler,
+-					  unsigned long irqflags,
+-					  const char *devname,
+-					  void *dev_id)
+-{
+-	return bind_interdomain_evtchn_to_irqhandler_chip(remote_domain,
+-				remote_port, handler, irqflags, devname,
+-				dev_id, &xen_dynamic_chip);
+-}
+-EXPORT_SYMBOL_GPL(bind_interdomain_evtchn_to_irqhandler);
+-
+ int bind_interdomain_evtchn_to_irqhandler_lateeoi(unsigned int remote_domain,
+ 						  evtchn_port_t remote_port,
+ 						  irq_handler_t handler,
+diff --git a/include/xen/events.h b/include/xen/events.h
+index 3b8155c2ea03..8ec418e30c7f 100644
+--- a/include/xen/events.h
++++ b/include/xen/events.h
+@@ -35,16 +35,8 @@ int bind_ipi_to_irqhandler(enum ipi_vector ipi,
+ 			   unsigned long irqflags,
+ 			   const char *devname,
+ 			   void *dev_id);
+-int bind_interdomain_evtchn_to_irq(unsigned int remote_domain,
+-				   evtchn_port_t remote_port);
+ int bind_interdomain_evtchn_to_irq_lateeoi(unsigned int remote_domain,
+ 					   evtchn_port_t remote_port);
+-int bind_interdomain_evtchn_to_irqhandler(unsigned int remote_domain,
+-					  evtchn_port_t remote_port,
+-					  irq_handler_t handler,
+-					  unsigned long irqflags,
+-					  const char *devname,
+-					  void *dev_id);
+ int bind_interdomain_evtchn_to_irqhandler_lateeoi(unsigned int remote_domain,
+ 						  evtchn_port_t remote_port,
+ 						  irq_handler_t handler,
+-- 
+2.26.2
 
-But then you also have to check whether the returned value is
-fn (or retain the 2nd if()).
-
-Jan
 
