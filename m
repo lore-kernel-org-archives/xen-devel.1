@@ -2,28 +2,28 @@ Return-Path: <SRS0=UfNL=D5=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 23F20C388F7
-	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 16:45:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8A016C56201
+	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 17:00:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A45B922267
-	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 16:45:58 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 0635024630
+	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 17:00:03 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="2iAOwRku"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A45B922267
+	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="dHZRRh1O"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0635024630
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.10571.28201 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.10588.28213 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kVdin-00080J-0g; Thu, 22 Oct 2020 16:45:49 +0000
+	id 1kVdwH-00014R-A3; Thu, 22 Oct 2020 16:59:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 10571.28201; Thu, 22 Oct 2020 16:45:48 +0000
+Received: by outflank-mailman (output) from mailman id 10588.28213; Thu, 22 Oct 2020 16:59:45 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,116 +38,121 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kVdim-000808-SN; Thu, 22 Oct 2020 16:45:48 +0000
-Received: by outflank-mailman (input) for mailman id 10571;
- Thu, 22 Oct 2020 16:45:47 +0000
+	id 1kVdwH-00014K-6A; Thu, 22 Oct 2020 16:59:45 +0000
+Received: by outflank-mailman (input) for mailman id 10588;
+ Thu, 22 Oct 2020 16:59:43 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=A04T=D5=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1kVdil-0007J4-Gg
- for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 16:45:47 +0000
+ <SRS0=A75Z=D5=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
+ id 1kVdwF-00014F-IP
+ for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 16:59:43 +0000
 Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id a3e2e9d0-401e-4da9-ab8f-1d6bb4e73d93;
- Thu, 22 Oct 2020 16:45:17 +0000 (UTC)
-Received: from xenbits.xenproject.org ([104.239.192.120])
+ id d9f40cf1-d127-440f-8766-7d7d834824ed;
+ Thu, 22 Oct 2020 16:59:41 +0000 (UTC)
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kVdiG-0005KR-RH
- for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 16:45:16 +0000
-Received: from iwj (helo=mynotebook.example.org)
- by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kVdiG-0007SA-QQ
- for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 16:45:16 +0000
-Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
- by mariner.uk.xensource.com with esmtp (Exim 4.89)
- (envelope-from <ijackson@chiark.greenend.org.uk>)
- id 1kVdiF-00059e-47; Thu, 22 Oct 2020 17:45:15 +0100
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kVdwD-0005fF-FR; Thu, 22 Oct 2020 16:59:41 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kVdwD-0007tB-92; Thu, 22 Oct 2020 16:59:41 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1kVdwD-0008Cf-8Z; Thu, 22 Oct 2020 16:59:41 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=A04T=D5=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
-	id 1kVdil-0007J4-Gg
-	for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 16:45:47 +0000
-X-Inumbo-ID: a3e2e9d0-401e-4da9-ab8f-1d6bb4e73d93
+	(envelope-from <SRS0=A75Z=D5=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
+	id 1kVdwF-00014F-IP
+	for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 16:59:43 +0000
+X-Inumbo-ID: d9f40cf1-d127-440f-8766-7d7d834824ed
 Received: from mail.xenproject.org (unknown [104.130.215.37])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id a3e2e9d0-401e-4da9-ab8f-1d6bb4e73d93;
-	Thu, 22 Oct 2020 16:45:17 +0000 (UTC)
+	id d9f40cf1-d127-440f-8766-7d7d834824ed;
+	Thu, 22 Oct 2020 16:59:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
-	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=ntqiqHkBhbltgpOYvMT5RzXTVuOOnIgx7foXFuhot5c=; b=2iAOwRkuvPW0EZagl7nN9EmOth
-	fYgb6YvbHkqltJgvB032wVCXk+SgeIcmILNyTSzp6sCwpCV7qZGG7BzlFHxHNq2p0/fQWCaa/D1E0
-	Fr1hLOBwZ2ek6j0hsJE7X1HlC6Cb0ycgBO0dO7A+2gvlLuhm/APGHU9o7sDDnNEpkKg4=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=JouCDd3T+gOmQVrPKpo8QoSC12ze1pGsPmknQWbddSM=; b=dHZRRh1OWfuxZkGjVbheN3Moyo
+	E3Ii7zYDliRpElQsKH9YkntrknhIlnttpvC9Hp5hCFn9PDlb8jz6Gse/oczFHiFfJCilxTSFpvxr0
+	ho+9EWfiha+FcwfnTqJdqzgOkRa6Liu5J5nF5hLY6WbsBvLaOyW8oNTVqOrU/vBf3c1k=;
+Received: from host146.205.237.98.conversent.net ([205.237.98.146] helo=infra.test-lab.xenproject.org)
 	by mail.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <ijackson@chiark.greenend.org.uk>)
-	id 1kVdiG-0005KR-RH
-	for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 16:45:16 +0000
-Received: from iwj (helo=mynotebook.example.org)
-	by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
-	(envelope-from <ijackson@chiark.greenend.org.uk>)
-	id 1kVdiG-0007SA-QQ
-	for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 16:45:16 +0000
-Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
-	by mariner.uk.xensource.com with esmtp (Exim 4.89)
-	(envelope-from <ijackson@chiark.greenend.org.uk>)
-	id 1kVdiF-00059e-47; Thu, 22 Oct 2020 17:45:15 +0100
-From: Ian Jackson <iwj@xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Ian Jackson <iwj@xenproject.org>
-Subject: [OSSTEST PATCH 06/16] PDU/MSW: Break out action_value()
-Date: Thu, 22 Oct 2020 17:44:56 +0100
-Message-Id: <20201022164506.1552-7-iwj@xenproject.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20201022164506.1552-1-iwj@xenproject.org>
-References: <20201022164506.1552-1-iwj@xenproject.org>
-MIME-Version: 1.0
+	(envelope-from <osstest-admin@xenproject.org>)
+	id 1kVdwD-0005fF-FR; Thu, 22 Oct 2020 16:59:41 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+	by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+	(envelope-from <osstest-admin@xenproject.org>)
+	id 1kVdwD-0007tB-92; Thu, 22 Oct 2020 16:59:41 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim 4.92)
+	(envelope-from <osstest-admin@xenproject.org>)
+	id 1kVdwD-0008Cf-8Z; Thu, 22 Oct 2020 16:59:41 +0000
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-156091-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [ovmf test] 156091: all pass - PUSHED
+X-Osstest-Versions-This:
+    ovmf=24cf72726564eac7ba9abb24f3d05795164d0a70
+X-Osstest-Versions-That:
+    ovmf=26442d11e620a9e81c019a24a4ff38441c64ba10
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Thu, 22 Oct 2020 16:59:41 +0000
 
-This is going to be useful in a moment.
+flight 156091 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/156091/
 
-Signed-off-by: Ian Jackson <iwj@xenproject.org>
----
- pdu-msw | 11 ++++++++---
- 1 file changed, 8 insertions(+), 3 deletions(-)
+Perfect :-)
+All tests in this flight passed as required
+version targeted for testing:
+ ovmf                 24cf72726564eac7ba9abb24f3d05795164d0a70
+baseline version:
+ ovmf                 26442d11e620a9e81c019a24a4ff38441c64ba10
 
-diff --git a/pdu-msw b/pdu-msw
-index 58c33952..03b0f342 100755
---- a/pdu-msw
-+++ b/pdu-msw
-@@ -121,13 +121,17 @@ sub show () {
-     printf "pdu-msw $dnsname: #%s \"%s\" = %s\n", $useport, $usename, $mean;
- }
- 
--sub set () {
-+sub action_value () {
-     my $delayadd= ($action =~ s/^delayed-// ? 3 : 0);
-     my $valset= ($action =~ m/^(?:0|off)$/ ? 2 :
-                  $action =~ m/^(?:1|on)$/ ? 1 :
-                  $action =~ m/^(?:reboot)$/ ? 3 :
-                  die "unknown action $action\n$usagemsg");
--        
-+    return $valset;
-+}
-+
-+sub set ($) {
-+    my ($valset) = @_;
-     my $res= $session->set_request(-varbindlist => [ $write_oid, INTEGER, $valset ]);
-     die "SNMP set ".$session->error()." " unless $res;
- }
-@@ -135,8 +139,9 @@ sub set () {
- if (!defined $action) {
-     show();
- } else {
-+    my $valset = action_value();
-     print "was: "; show();
--    set();
-+    set($valset);
-     print "now: "; show();
-     print "^ note, PDUs often do not update returned info immediately\n";
- }
--- 
-2.20.1
+Last test of basis   156065  2020-10-21 06:40:48 Z    1 days
+Testing same since   156091  2020-10-22 14:14:55 Z    0 days    1 attempts
 
+------------------------------------------------------------
+People who touched revisions under test:
+  Pete Batard <pete@akeo.ie>
+  Sami Mujawar <sami.mujawar@arm.com>
+
+jobs:
+ build-amd64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
+   26442d11e6..24cf727265  24cf72726564eac7ba9abb24f3d05795164d0a70 -> xen-tested-master
 
