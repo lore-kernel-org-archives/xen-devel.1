@@ -2,28 +2,28 @@ Return-Path: <SRS0=UfNL=D5=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
+X-Spam-Status: No, score=-5.5 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
 	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 72D3FC388F7
-	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 15:18:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 195E7C388F9
+	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 15:30:22 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DFC50223BF
-	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 15:18:18 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 8F7CC24630
+	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 15:30:21 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="o1F6tn88"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DFC50223BF
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="a/GsyZaZ"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8F7CC24630
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.10534.27993 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.10539.28012 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kVcLX-0006FC-9L; Thu, 22 Oct 2020 15:17:43 +0000
+	id 1kVcXO-0007KZ-H5; Thu, 22 Oct 2020 15:29:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 10534.27993; Thu, 22 Oct 2020 15:17:43 +0000
+Received: by outflank-mailman (output) from mailman id 10539.28012; Thu, 22 Oct 2020 15:29:58 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,108 +38,141 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kVcLX-0006F5-6J; Thu, 22 Oct 2020 15:17:43 +0000
-Received: by outflank-mailman (input) for mailman id 10534;
- Thu, 22 Oct 2020 15:17:41 +0000
+	id 1kVcXO-0007KS-Co; Thu, 22 Oct 2020 15:29:58 +0000
+Received: by outflank-mailman (input) for mailman id 10539;
+ Thu, 22 Oct 2020 15:29:57 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=DPUU=D5=gmail.com=jandryuk@srs-us1.protection.inumbo.net>)
- id 1kVcLV-0006F0-9t
- for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 15:17:41 +0000
-Received: from mail-lj1-x244.google.com (unknown [2a00:1450:4864:20::244])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 028d8250-ae10-472c-9432-f31a0e5ddf58;
- Thu, 22 Oct 2020 15:17:40 +0000 (UTC)
-Received: by mail-lj1-x244.google.com with SMTP id d24so2332163ljg.10
- for <xen-devel@lists.xenproject.org>; Thu, 22 Oct 2020 08:17:40 -0700 (PDT)
+ <SRS0=IPEr=D5=redhat.com=pbonzini@srs-us1.protection.inumbo.net>)
+ id 1kVcXN-0007KM-Nj
+ for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 15:29:57 +0000
+Received: from us-smtp-delivery-124.mimecast.com (unknown [63.128.21.124])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+ id 8f014c1e-fbef-437e-907e-68fe43588320;
+ Thu, 22 Oct 2020 15:29:56 +0000 (UTC)
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-556-edzr7LrEMiKA4AuumLr6vQ-1; Thu, 22 Oct 2020 11:29:53 -0400
+Received: by mail-wr1-f72.google.com with SMTP id f11so759361wro.15
+ for <xen-devel@lists.xenproject.org>; Thu, 22 Oct 2020 08:29:52 -0700 (PDT)
+Received: from ?IPv6:2001:b07:6468:f312:c8dd:75d4:99ab:290a?
+ ([2001:b07:6468:f312:c8dd:75d4:99ab:290a])
+ by smtp.gmail.com with ESMTPSA id h7sm4766264wrt.45.2020.10.22.08.29.50
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 22 Oct 2020 08:29:50 -0700 (PDT)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=DPUU=D5=gmail.com=jandryuk@srs-us1.protection.inumbo.net>)
-	id 1kVcLV-0006F0-9t
-	for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 15:17:41 +0000
-X-Inumbo-ID: 028d8250-ae10-472c-9432-f31a0e5ddf58
-Received: from mail-lj1-x244.google.com (unknown [2a00:1450:4864:20::244])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 028d8250-ae10-472c-9432-f31a0e5ddf58;
-	Thu, 22 Oct 2020 15:17:40 +0000 (UTC)
-Received: by mail-lj1-x244.google.com with SMTP id d24so2332163ljg.10
-        for <xen-devel@lists.xenproject.org>; Thu, 22 Oct 2020 08:17:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=aytwR5IL9OS0QKf9b+p2KT2CU6QbBd6febiqArxDsfs=;
-        b=o1F6tn88p06VknvNMv7p3t1B7lxIT2SpksabxDLA6YW1NknghJFih4Q/8LRdLGsXvm
-         +AAURNpxNyA9F4esCWet0LRP00jLElfOYszZ/BpslWrEEVmDmOLYcHgzXdVYpKo3Ukr7
-         sUVVaUuUnwGoScwwr6QzaQU456Mvr743poQ29MzGeo8ydnPATQluWMPUagKC8mF7aXkR
-         9ACVkixvjrdrEKQqGZ4CuKzvwy5Zlxw1pcpVIpXazrdM0/VP5hP3rIB1JmPO87m0fK19
-         shrqu1JFDDnBINUxOqEIdDSKLHDr7D8li6HdA1wLpVGzwkbxsL9JENLAxI1WZuVc16G8
-         HM3w==
+	(envelope-from <SRS0=IPEr=D5=redhat.com=pbonzini@srs-us1.protection.inumbo.net>)
+	id 1kVcXN-0007KM-Nj
+	for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 15:29:57 +0000
+X-Inumbo-ID: 8f014c1e-fbef-437e-907e-68fe43588320
+Received: from us-smtp-delivery-124.mimecast.com (unknown [63.128.21.124])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+	id 8f014c1e-fbef-437e-907e-68fe43588320;
+	Thu, 22 Oct 2020 15:29:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1603380596;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=jkiSTsiwDrNQ72v/SazVSSbk21cua5TJ5JZP+u5sNmw=;
+	b=a/GsyZaZiSCMqT8jswn81KuhUYvtVyfDsEaerdErUo0jsdFHJUOZgei8468Hkni8SOjb5c
+	hehLdXwkMxUzH8FWolEr+m+B/CqdAOIBnz7AwNGC1Cc6RzterqMYCE0vRvdQOnfSC9iZqw
+	Ule4N0f+8r0Nn56Y0V/S8AmIplGSauM=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-556-edzr7LrEMiKA4AuumLr6vQ-1; Thu, 22 Oct 2020 11:29:53 -0400
+X-MC-Unique: edzr7LrEMiKA4AuumLr6vQ-1
+Received: by mail-wr1-f72.google.com with SMTP id f11so759361wro.15
+        for <xen-devel@lists.xenproject.org>; Thu, 22 Oct 2020 08:29:52 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=aytwR5IL9OS0QKf9b+p2KT2CU6QbBd6febiqArxDsfs=;
-        b=EG+OaQgENyPzyxA9RbivLKF3y++hQNzbr7lC9jygNhKAad4akWqw5T6pwd+tMnhPWx
-         ZYdoy8jb4v+JTMx+eRI3mtSWpCNxhXKUs76Xkp7/CbTAPYH3tmT3Rrh9NWjkSy2W/ZdB
-         9iKYi24a4GuZZ2ZpcA+FLHl54ibCTobsjR+lofQ08BEUalCphBV8tOhy/5n6W4H3Udp7
-         Ne+oE7rERXpPaCEMqLceSruXgHzkuzS5SdZxSr6TpS0v0Sj3ryul/M5PNIErpFYDszYH
-         ojTSetEdHviUodomWNafqPUF1DQnuA9SX2U2hgcVLhdXlSQpyKxTEMyLaLunaOWgwseE
-         erRA==
-X-Gm-Message-State: AOAM533tJxu0HeELbGPThA40nlDXtwEvFs+FNzdYv6m11zPTdDyB+1aE
-	lIMgk2jQN/QLHpD1z0ICQ9nEWbrXmQSSEOrOW28=
-X-Google-Smtp-Source: ABdhPJw0h2w2fU5fufpA8MMTD61ePZqo/Hxao/L0FiX3RbIRviCcHhHIA/vc7KyVeYNssrZwXiP9KmHAaf52SkQ7Kaw=
-X-Received: by 2002:a2e:b0c7:: with SMTP id g7mr1123806ljl.433.1603379859164;
- Thu, 22 Oct 2020 08:17:39 -0700 (PDT)
-MIME-Version: 1.0
-References: <20201013140511.5681-1-jandryuk@gmail.com> <ddb5c9c2-c206-28d6-2d9d-7954e7022c23@redhat.com>
-In-Reply-To: <ddb5c9c2-c206-28d6-2d9d-7954e7022c23@redhat.com>
-From: Jason Andryuk <jandryuk@gmail.com>
-Date: Thu, 22 Oct 2020 11:17:26 -0400
-Message-ID: <CAKf6xpvpuG1jVdf3+heXzHFd_kc5kVHYdJgC+8iazFLciqOMZw@mail.gmail.com>
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=jkiSTsiwDrNQ72v/SazVSSbk21cua5TJ5JZP+u5sNmw=;
+        b=jnC8KbUxSAlkI4fdY16hrFmw9F4IGUL8S+KJcy+L+4Q00Q3LvDbZqxDsq7CNvV2/yJ
+         mBqSQdgRGQ7qiv8rAo47eoaTVjEopkcv/Yfw/rZ7/Tyn4v6l5OuRJkDZUhXTtxFFxvtB
+         zQ2oapbZ0QjnUPFXuCS4xrx418Clb2TcDQ+cC+dNQz3HuiLGHfuZaPsHIexSaPAPRgFI
+         CvGNThrb7JflmSXQEmW+BitT2T0X9yhpeTkWvRNT7/hs+hmrHHmR+Sswtg6ODFkaR2Um
+         tQyAZbBkt0mkMoq7zU66bYUlNg0/v816aNM9zQ6WIxhrB+Vgo2yF8+5/Oqr/oRtocGTz
+         KI2Q==
+X-Gm-Message-State: AOAM53286CQylzc50V33HmHyinTVPyFLQ6Q6Nb1cBN8z89bND8F5Bkdi
+	DivhGnP30qjXcv91PBzl9Eg25uSAnVMcb/dTrQx3MjDH+xvPZYBsu/12SN6/gmjrO/UbeqQDD0V
+	PDQCOdb1+DUEy/5y5VMKg7RdSRLE=
+X-Received: by 2002:a1c:7ec7:: with SMTP id z190mr3064252wmc.8.1603380591398;
+        Thu, 22 Oct 2020 08:29:51 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJwGX5JjI76ENng2y9LttGQf7DnpCKaOVKsBzUv2Ybaho8Ek92Wpmo5+190HqXDZuCF8ZiFmCQ==
+X-Received: by 2002:a1c:7ec7:: with SMTP id z190mr3064228wmc.8.1603380591192;
+        Thu, 22 Oct 2020 08:29:51 -0700 (PDT)
+Received: from ?IPv6:2001:b07:6468:f312:c8dd:75d4:99ab:290a? ([2001:b07:6468:f312:c8dd:75d4:99ab:290a])
+        by smtp.gmail.com with ESMTPSA id h7sm4766264wrt.45.2020.10.22.08.29.50
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 22 Oct 2020 08:29:50 -0700 (PDT)
 Subject: Re: [PATCH v2 0/3] Add Xen CpusAccel
-To: Paolo Bonzini <pbonzini@redhat.com>
-Cc: QEMU <qemu-devel@nongnu.org>, Claudio Fontana <cfontana@suse.de>, 
-	Thomas Huth <thuth@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
-	Stefano Stabellini <sstabellini@kernel.org>, Anthony Perard <anthony.perard@citrix.com>, 
-	Paul Durrant <paul@xen.org>, xen-devel <xen-devel@lists.xenproject.org>
-Content-Type: text/plain; charset="UTF-8"
+To: Jason Andryuk <jandryuk@gmail.com>
+Cc: QEMU <qemu-devel@nongnu.org>, Claudio Fontana <cfontana@suse.de>,
+ Thomas Huth <thuth@redhat.com>, Laurent Vivier <lvivier@redhat.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>,
+ xen-devel <xen-devel@lists.xenproject.org>
+References: <20201013140511.5681-1-jandryuk@gmail.com>
+ <ddb5c9c2-c206-28d6-2d9d-7954e7022c23@redhat.com>
+ <CAKf6xpvpuG1jVdf3+heXzHFd_kc5kVHYdJgC+8iazFLciqOMZw@mail.gmail.com>
+From: Paolo Bonzini <pbonzini@redhat.com>
+Message-ID: <d9f23eee-c0af-d2dd-9b9d-f0255fc8e3d1@redhat.com>
+Date: Thu, 22 Oct 2020 17:29:49 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.3.1
+MIME-Version: 1.0
+In-Reply-To: <CAKf6xpvpuG1jVdf3+heXzHFd_kc5kVHYdJgC+8iazFLciqOMZw@mail.gmail.com>
+Authentication-Results: relay.mimecast.com;
+	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=pbonzini@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-On Tue, Oct 13, 2020 at 1:16 PM Paolo Bonzini <pbonzini@redhat.com> wrote:
->
-> On 13/10/20 16:05, Jason Andryuk wrote:
-> > Xen was left behind when CpusAccel became mandatory and fails the assert
-> > in qemu_init_vcpu().  It relied on the same dummy cpu threads as qtest.
-> > Move the qtest cpu functions to a common location and reuse them for
-> > Xen.
-> >
-> > v2:
-> >   New patch "accel: Remove _WIN32 ifdef from qtest-cpus.c"
-> >   Use accel/dummy-cpus.c for filename
-> >   Put prototype in include/sysemu/cpus.h
-> >
-> > Jason Andryuk (3):
-> >   accel: Remove _WIN32 ifdef from qtest-cpus.c
-> >   accel: move qtest CpusAccel functions to a common location
-> >   accel: Add xen CpusAccel using dummy-cpus
-> >
-> >  accel/{qtest/qtest-cpus.c => dummy-cpus.c} | 27 ++++------------------
-> >  accel/meson.build                          |  8 +++++++
-> >  accel/qtest/meson.build                    |  1 -
-> >  accel/qtest/qtest-cpus.h                   | 17 --------------
-> >  accel/qtest/qtest.c                        |  5 +++-
-> >  accel/xen/xen-all.c                        |  8 +++++++
-> >  include/sysemu/cpus.h                      |  3 +++
-> >  7 files changed, 27 insertions(+), 42 deletions(-)
-> >  rename accel/{qtest/qtest-cpus.c => dummy-cpus.c} (71%)
-> >  delete mode 100644 accel/qtest/qtest-cpus.h
-> >
->
-> Acked-by: Paolo Bonzini <pbonzini@redhat.com>
+On 22/10/20 17:17, Jason Andryuk wrote:
+> On Tue, Oct 13, 2020 at 1:16 PM Paolo Bonzini <pbonzini@redhat.com> wrote:
+>>
+>> On 13/10/20 16:05, Jason Andryuk wrote:
+>>> Xen was left behind when CpusAccel became mandatory and fails the assert
+>>> in qemu_init_vcpu().  It relied on the same dummy cpu threads as qtest.
+>>> Move the qtest cpu functions to a common location and reuse them for
+>>> Xen.
+>>>
+>>> v2:
+>>>   New patch "accel: Remove _WIN32 ifdef from qtest-cpus.c"
+>>>   Use accel/dummy-cpus.c for filename
+>>>   Put prototype in include/sysemu/cpus.h
+>>>
+>>> Jason Andryuk (3):
+>>>   accel: Remove _WIN32 ifdef from qtest-cpus.c
+>>>   accel: move qtest CpusAccel functions to a common location
+>>>   accel: Add xen CpusAccel using dummy-cpus
+>>>
+>>>  accel/{qtest/qtest-cpus.c => dummy-cpus.c} | 27 ++++------------------
+>>>  accel/meson.build                          |  8 +++++++
+>>>  accel/qtest/meson.build                    |  1 -
+>>>  accel/qtest/qtest-cpus.h                   | 17 --------------
+>>>  accel/qtest/qtest.c                        |  5 +++-
+>>>  accel/xen/xen-all.c                        |  8 +++++++
+>>>  include/sysemu/cpus.h                      |  3 +++
+>>>  7 files changed, 27 insertions(+), 42 deletions(-)
+>>>  rename accel/{qtest/qtest-cpus.c => dummy-cpus.c} (71%)
+>>>  delete mode 100644 accel/qtest/qtest-cpus.h
+>>>
+>>
+>> Acked-by: Paolo Bonzini <pbonzini@redhat.com>
+> 
+> Thank you, Paolo.  Also Anthony Acked and Claudio Reviewed patch 3.
+> How can we get this into the tree?
 
-Thank you, Paolo.  Also Anthony Acked and Claudio Reviewed patch 3.
-How can we get this into the tree?
+I think Anthony should send a pull request?
 
-Regards,
-Jason
+Paolo
+
 
