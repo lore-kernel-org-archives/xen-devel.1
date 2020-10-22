@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 02F2CC388F9
-	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 16:45:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 23F20C388F7
+	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 16:45:59 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7D81F22267
-	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 16:45:52 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id A45B922267
+	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 16:45:58 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="vkinM3MI"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7D81F22267
+	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="2iAOwRku"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A45B922267
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.10568.28189 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.10571.28201 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kVdih-0007sb-KI; Thu, 22 Oct 2020 16:45:43 +0000
+	id 1kVdin-00080J-0g; Thu, 22 Oct 2020 16:45:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 10568.28189; Thu, 22 Oct 2020 16:45:43 +0000
+Received: by outflank-mailman (output) from mailman id 10571.28201; Thu, 22 Oct 2020 16:45:48 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,114 +38,115 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kVdih-0007sR-FR; Thu, 22 Oct 2020 16:45:43 +0000
-Received: by outflank-mailman (input) for mailman id 10568;
- Thu, 22 Oct 2020 16:45:42 +0000
+	id 1kVdim-000808-SN; Thu, 22 Oct 2020 16:45:48 +0000
+Received: by outflank-mailman (input) for mailman id 10571;
+ Thu, 22 Oct 2020 16:45:47 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=A04T=D5=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1kVdig-0007J4-GN
- for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 16:45:42 +0000
+ id 1kVdil-0007J4-Gg
+ for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 16:45:47 +0000
 Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 16143a18-e853-431d-a4a4-b49a52ec336c;
- Thu, 22 Oct 2020 16:45:15 +0000 (UTC)
+ id a3e2e9d0-401e-4da9-ab8f-1d6bb4e73d93;
+ Thu, 22 Oct 2020 16:45:17 +0000 (UTC)
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kVdiF-0005KC-J3
- for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 16:45:15 +0000
+ (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kVdiG-0005KR-RH
+ for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 16:45:16 +0000
 Received: from iwj (helo=mynotebook.example.org)
  by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kVdiF-0007Qi-H8
- for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 16:45:15 +0000
+ (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kVdiG-0007SA-QQ
+ for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 16:45:16 +0000
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by mariner.uk.xensource.com with esmtp (Exim 4.89)
  (envelope-from <ijackson@chiark.greenend.org.uk>)
- id 1kVdiD-00059e-Pb; Thu, 22 Oct 2020 17:45:13 +0100
+ id 1kVdiF-00059e-47; Thu, 22 Oct 2020 17:45:15 +0100
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=A04T=D5=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
-	id 1kVdig-0007J4-GN
-	for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 16:45:42 +0000
-X-Inumbo-ID: 16143a18-e853-431d-a4a4-b49a52ec336c
+	id 1kVdil-0007J4-Gg
+	for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 16:45:47 +0000
+X-Inumbo-ID: a3e2e9d0-401e-4da9-ab8f-1d6bb4e73d93
 Received: from mail.xenproject.org (unknown [104.130.215.37])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 16143a18-e853-431d-a4a4-b49a52ec336c;
-	Thu, 22 Oct 2020 16:45:15 +0000 (UTC)
+	id a3e2e9d0-401e-4da9-ab8f-1d6bb4e73d93;
+	Thu, 22 Oct 2020 16:45:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=V79wG/LQmL2k7Tyv4zkT6Uv1QsFd5R/iMJN6smjFWKQ=; b=vkinM3MIoJN07Athigc4mvVWxC
-	LGxBzYZc9nN3fYT4Uo3b7H2XpVHUb/Lp5P4IPZ6nGxlfUxmWKZcRHQ2WnV7jbl/ZNGlRpu20EX1sk
-	qFAyyFWk3kKPSsraoAWMq2uzY5Y40a8wcuMUDsqJOC6a4j1oo8Mbb5kB+HokgSVMO7Is=;
+	bh=ntqiqHkBhbltgpOYvMT5RzXTVuOOnIgx7foXFuhot5c=; b=2iAOwRkuvPW0EZagl7nN9EmOth
+	fYgb6YvbHkqltJgvB032wVCXk+SgeIcmILNyTSzp6sCwpCV7qZGG7BzlFHxHNq2p0/fQWCaa/D1E0
+	Fr1hLOBwZ2ek6j0hsJE7X1HlC6Cb0ycgBO0dO7A+2gvlLuhm/APGHU9o7sDDnNEpkKg4=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
 	by mail.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <ijackson@chiark.greenend.org.uk>)
-	id 1kVdiF-0005KC-J3
-	for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 16:45:15 +0000
+	id 1kVdiG-0005KR-RH
+	for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 16:45:16 +0000
 Received: from iwj (helo=mynotebook.example.org)
 	by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
 	(envelope-from <ijackson@chiark.greenend.org.uk>)
-	id 1kVdiF-0007Qi-H8
-	for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 16:45:15 +0000
+	id 1kVdiG-0007SA-QQ
+	for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 16:45:16 +0000
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
 	by mariner.uk.xensource.com with esmtp (Exim 4.89)
 	(envelope-from <ijackson@chiark.greenend.org.uk>)
-	id 1kVdiD-00059e-Pb; Thu, 22 Oct 2020 17:45:13 +0100
+	id 1kVdiF-00059e-47; Thu, 22 Oct 2020 17:45:15 +0100
 From: Ian Jackson <iwj@xenproject.org>
 To: xen-devel@lists.xenproject.org
 Cc: Ian Jackson <iwj@xenproject.org>
-Subject: [OSSTEST PATCH 01/16] share in jobdb: Break out $checkconstraints and move call
-Date: Thu, 22 Oct 2020 17:44:51 +0100
-Message-Id: <20201022164506.1552-2-iwj@xenproject.org>
+Subject: [OSSTEST PATCH 06/16] PDU/MSW: Break out action_value()
+Date: Thu, 22 Oct 2020 17:44:56 +0100
+Message-Id: <20201022164506.1552-7-iwj@xenproject.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20201022164506.1552-1-iwj@xenproject.org>
 References: <20201022164506.1552-1-iwj@xenproject.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This must happen after we introduce our new row or it is not
-effective!
+This is going to be useful in a moment.
 
 Signed-off-by: Ian Jackson <iwj@xenproject.org>
 ---
- Osstest/JobDB/Executive.pm | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+ pdu-msw | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
 
-diff --git a/Osstest/JobDB/Executive.pm b/Osstest/JobDB/Executive.pm
-index f69ce277..071f31f1 100644
---- a/Osstest/JobDB/Executive.pm
-+++ b/Osstest/JobDB/Executive.pm
-@@ -582,6 +582,11 @@ END
-           VALUES (?,        ?,      ?,      ?,   ?,      ?,     ?     )
- END
+diff --git a/pdu-msw b/pdu-msw
+index 58c33952..03b0f342 100755
+--- a/pdu-msw
++++ b/pdu-msw
+@@ -121,13 +121,17 @@ sub show () {
+     printf "pdu-msw $dnsname: #%s \"%s\" = %s\n", $useport, $usename, $mean;
+ }
  
-+    my $checkconstraints = sub {
-+	$constraintsq->execute($hostname, $ttaskid);
-+	$constraintsq->fetchrow_array() or confess "$hostname ?";
-+    };
+-sub set () {
++sub action_value () {
+     my $delayadd= ($action =~ s/^delayed-// ? 3 : 0);
+     my $valset= ($action =~ m/^(?:0|off)$/ ? 2 :
+                  $action =~ m/^(?:1|on)$/ ? 1 :
+                  $action =~ m/^(?:reboot)$/ ? 3 :
+                  die "unknown action $action\n$usagemsg");
+-        
++    return $valset;
++}
 +
-     my $ojvn = "$ho->{Ident}_lifecycle";
- 
-     if (length $r{$ojvn}) {
-@@ -654,8 +659,6 @@ END
- 		push @lifecycle, "$omarks$otj:$o->{stepno}$osuffix";
- 	    }
- 	}
--	$constraintsq->execute($hostname, $ttaskid);
--	$constraintsq->fetchrow_array() or confess "$hostname ?";
- 
- 	if (defined $flight) {
- 	    $insertq->execute($hostname, $ttaskid,
-@@ -670,6 +673,7 @@ END
- 			      undef,
- 			      undef,undef);
- 	}
-+	$checkconstraints->();
-     });
- 
-     if (defined $flight) {
++sub set ($) {
++    my ($valset) = @_;
+     my $res= $session->set_request(-varbindlist => [ $write_oid, INTEGER, $valset ]);
+     die "SNMP set ".$session->error()." " unless $res;
+ }
+@@ -135,8 +139,9 @@ sub set () {
+ if (!defined $action) {
+     show();
+ } else {
++    my $valset = action_value();
+     print "was: "; show();
+-    set();
++    set($valset);
+     print "now: "; show();
+     print "^ note, PDUs often do not update returned info immediately\n";
+ }
 -- 
 2.20.1
 
