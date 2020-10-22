@@ -2,25 +2,27 @@ Return-Path: <SRS0=UfNL=D5=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.7 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 66B24C388F9
-	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 19:19:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5B681C388F7
+	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 21:17:48 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C42E524656
-	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 19:19:29 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C42E524656
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=m5p.com
+	by mail.kernel.org (Postfix) with ESMTPS id D5A4E21D43
+	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 21:17:47 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="pB07Fpdt"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D5A4E21D43
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.10641.28394 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.10649.28409 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kVg6z-0007G3-RC; Thu, 22 Oct 2020 19:18:57 +0000
+	id 1kVhxV-0001YO-O6; Thu, 22 Oct 2020 21:17:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 10641.28394; Thu, 22 Oct 2020 19:18:57 +0000
+Received: by outflank-mailman (output) from mailman id 10649.28409; Thu, 22 Oct 2020 21:17:17 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -35,109 +37,118 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kVg6z-0007Fw-OD; Thu, 22 Oct 2020 19:18:57 +0000
-Received: by outflank-mailman (input) for mailman id 10641;
- Thu, 22 Oct 2020 19:18:57 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=JUr7=D5=m5p.com=ehem@srs-us1.protection.inumbo.net>)
- id 1kVg6z-0007Fr-1N
- for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 19:18:57 +0000
-Received: from mailhost.m5p.com (unknown [74.104.188.4])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 34ca4d40-ad36-46f5-a35e-bab1a3cc54a7;
- Thu, 22 Oct 2020 19:18:56 +0000 (UTC)
-Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:1f07:15ff:0:0:0:f7])
- by mailhost.m5p.com (8.15.2/8.15.2) with ESMTPS id 09MJIfm6082609
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
- Thu, 22 Oct 2020 15:18:47 -0400 (EDT) (envelope-from ehem@m5p.com)
-Received: (from ehem@localhost)
- by m5p.com (8.15.2/8.15.2/Submit) id 09MJIeBP082608;
- Thu, 22 Oct 2020 12:18:40 -0700 (PDT) (envelope-from ehem)
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kVhxV-0001YH-L8; Thu, 22 Oct 2020 21:17:17 +0000
+Received: by outflank-mailman (input) for mailman id 10649;
+ Thu, 22 Oct 2020 21:17:16 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=WvX7=D5=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1kVhxU-0001YC-4Y
+ for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 21:17:16 +0000
+Received: from mail.kernel.org (unknown [198.145.29.99])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 569779f4-b278-434b-8817-4aed74fc5a68;
+ Thu, 22 Oct 2020 21:17:15 +0000 (UTC)
+Received: from sstabellini-ThinkPad-T480s (c-24-130-65-46.hsd1.ca.comcast.net
+ [24.130.65.46])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 10F1A21D43;
+ Thu, 22 Oct 2020 21:17:14 +0000 (UTC)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=JUr7=D5=m5p.com=ehem@srs-us1.protection.inumbo.net>)
-	id 1kVg6z-0007Fr-1N
-	for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 19:18:57 +0000
-X-Inumbo-ID: 34ca4d40-ad36-46f5-a35e-bab1a3cc54a7
-Received: from mailhost.m5p.com (unknown [74.104.188.4])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 34ca4d40-ad36-46f5-a35e-bab1a3cc54a7;
-	Thu, 22 Oct 2020 19:18:56 +0000 (UTC)
-Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:1f07:15ff:0:0:0:f7])
-	by mailhost.m5p.com (8.15.2/8.15.2) with ESMTPS id 09MJIfm6082609
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
-	Thu, 22 Oct 2020 15:18:47 -0400 (EDT)
-	(envelope-from ehem@m5p.com)
-Received: (from ehem@localhost)
-	by m5p.com (8.15.2/8.15.2/Submit) id 09MJIeBP082608;
-	Thu, 22 Oct 2020 12:18:40 -0700 (PDT)
-	(envelope-from ehem)
-Date: Thu, 22 Oct 2020 12:18:40 -0700
-From: Elliott Mitchell <ehem+xen@m5p.com>
+	(envelope-from <SRS0=WvX7=D5=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+	id 1kVhxU-0001YC-4Y
+	for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 21:17:16 +0000
+X-Inumbo-ID: 569779f4-b278-434b-8817-4aed74fc5a68
+Received: from mail.kernel.org (unknown [198.145.29.99])
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id 569779f4-b278-434b-8817-4aed74fc5a68;
+	Thu, 22 Oct 2020 21:17:15 +0000 (UTC)
+Received: from sstabellini-ThinkPad-T480s (c-24-130-65-46.hsd1.ca.comcast.net [24.130.65.46])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by mail.kernel.org (Postfix) with ESMTPSA id 10F1A21D43;
+	Thu, 22 Oct 2020 21:17:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=default; t=1603401434;
+	bh=HFynRJdHj89IlpNM0UxHVn/4elj4VJ9eirdXAUSC+g4=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=pB07Fpdt98P61ESMPoZa9B2F+TQ3XRiBI9XwAQkRs4mzPJ9NDFBknabIJy8BMFnla
+	 u0DyLy9c251ImqWwsykbX2RYbiRESzH0jj6ixNp/22AgmWoiUHK4Oj0mKvIhEOYHn+
+	 11xdoAxPSHCGfxRvpj/FoQUeR9qfqtQ991bYVvns=
+Date: Thu, 22 Oct 2020 14:17:13 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
 To: Julien Grall <julien@xen.org>
-Cc: xen-devel@lists.xenproject.org,
-        Stefano Stabellini <sstabellini@kernel.org>,
-        Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: Re: [PATCH] xen/acpi: Don't fail if SPCR table is absent
-Message-ID: <20201022191840.GB81455@mattapan.m5p.com>
-References: <20201021221253.GA73207@mattapan.m5p.com>
- <930267bd-5442-3ff0-bb5b-1ed8e2ebe37c@xen.org>
+cc: Elliott Mitchell <ehem+xen@m5p.com>, xen-devel@lists.xenproject.org, 
+    Stefano Stabellini <sstabellini@kernel.org>, 
+    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: Re: [PATCH] xen/arm: Remove EXPERT dependancy
+In-Reply-To: <7bf92deb-b1ba-31b2-0357-2639cd2a1bca@xen.org>
+Message-ID: <alpine.DEB.2.21.2010221403570.12247@sstabellini-ThinkPad-T480s>
+References: <20201022014310.GA70872@mattapan.m5p.com> <7bf92deb-b1ba-31b2-0357-2639cd2a1bca@xen.org>
+User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <930267bd-5442-3ff0-bb5b-1ed8e2ebe37c@xen.org>
+Content-Type: text/plain; charset=US-ASCII
 
-On Thu, Oct 22, 2020 at 07:38:26PM +0100, Julien Grall wrote:
-> I don't think we are very consistent here... I would not add them 
-> myself, but I don't particularly mind them (I know some editors will add 
-> them automatically).
+On Thu, 22 Oct 2020, Julien Grall wrote:
+> On 22/10/2020 02:43, Elliott Mitchell wrote:
+> > Linux requires UEFI support to be enabled on ARM64 devices.  While many
+> > ARM64 devices lack ACPI, the writing seems to be on the wall of UEFI/ACPI
+> > potentially taking over.  Some common devices may need ACPI table
+> > support.
+> > 
+> > Presently I think it is worth removing the dependancy on CONFIG_EXPERT.
 > 
-> I will keep them while committing. For the patch:
+> The idea behind EXPERT is to gate any feature that is not considered to be
+> stable/complete enough to be used in production.
 
-I would tend to remove them on commit since I dislike them.  Just as
-stated, I was unsure.
+Yes, and from that point of view I don't think we want to remove EXPERT
+from ACPI yet. However, the idea of hiding things behind EXPERT works
+very well for new esoteric features, something like memory introspection
+or memory overcommit. It does not work well for things that are actually
+required to boot on the platform.
 
-On default settings, clang-format will object to:
+Typically ACPI systems don't come with device tree at all (RPi4 being an
+exception), so users don't really have much of a choice in the matter.
 
-if(thing)
-{
-	foo
-}
-else
-	bar
+From that point of view, it would be better to remove EXPERT from ACPI,
+maybe even build ACPI by default, *but* to add a warning at boot saying
+something like:
 
-Or
-
-if(thing)
-	foo
-else
-{
-	bar
-}
-
-I *like* those formats, but was under the impression most people did not.
-The indentation is the more visually obvious indicator, just the compiler
-actually uses the brackets.  As such I *like* the misleading indentation
-warnings as those seemed to have a fairly high true-positive rate.
+"ACPI support is experimental. Boot using Device Tree if you can."
 
 
-On Thu, Oct 22, 2020 at 07:44:26PM +0100, Julien Grall wrote:
-> Thank you for the patch. FIY I tweak a bit the commit title before 
-> committing.
+That would better convey the risks of using ACPI, while at the same time
+making it a bit easier for users to boot on their ACPI-only platforms.
+
+
+> I don't consider the ACPI complete because the parsing of the IORT (used to
+> discover SMMU and GICv3 ITS) is not there yet.
 > 
-> The title is now: "xen/arm: acpi: Don't fail it SPCR table is absent".
+> I vaguely remember some issues on system using SMMU (e.g. Thunder-X) because
+> Dom0 will try to use the IOMMU and this would break PV drivers.
 
-Perhaps "xen/arm: acpi: Don't fail on absent SPCR table"?
-
-What you're suggesting doesn't read well to me.
-
-
--- 
-(\___(\___(\______          --=> 8-) EHM <=--          ______/)___/)___/)
- \BS (    |         ehem+sigmsg@m5p.com  PGP 87145445         |    )   /
-  \_CS\   |  _____  -O #include <stddisclaimer.h> O-   _____  |   /  _/
-8A19\___\_|_/58D2 7E3D DDF4 7BA6 <-PGP-> 41D1 B375 37D0 8714\_|_/___/5445
+I am not sure why Dom0 using the IOMMU would break PV drivers? Is it
+because the pagetable is not properly updated when mapping foreign
+pages?
 
 
+> Therefore I think we at least want to consider to hide SMMUs from dom0 before
+> removing EXPERT. Ideally, I would also like the feature to be tested in
+> Osstest.
+> 
+> The good news is Xen Project already has systems (e.g. Thunder-X, Softiron)
+> that can supported ACPI. So it should hopefully be a matter to tell them to
+> boot with ACPI rather than DT.
+
+I agree that we want to keep ACPI "expert/experimental" given its
+current state but maybe we can find a better way to carry that message
+than to set EXPERT in Kconfig.
+
+And yes, if we wanted to make ACPI less "expert/experimental" we
+definitely need some testing in OSSTest and any critical bugs (e.g. PV
+drivers not working) addressed.
 
