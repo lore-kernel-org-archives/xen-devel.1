@@ -2,28 +2,25 @@ Return-Path: <SRS0=UfNL=D5=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.7 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9E736C4363A
-	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 17:09:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A4081C388F9
+	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 17:13:59 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 26B7F24630
-	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 17:09:41 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="l85ZnbYz"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 26B7F24630
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 3D5AC24630
+	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 17:13:59 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3D5AC24630
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=m5p.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.10603.28312 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.10617.28324 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kVe5i-0002eH-I7; Thu, 22 Oct 2020 17:09:30 +0000
+	id 1kVe9s-0003nv-5Y; Thu, 22 Oct 2020 17:13:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 10603.28312; Thu, 22 Oct 2020 17:09:30 +0000
+Received: by outflank-mailman (output) from mailman id 10617.28324; Thu, 22 Oct 2020 17:13:48 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,153 +35,103 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kVe5i-0002e6-E9; Thu, 22 Oct 2020 17:09:30 +0000
-Received: by outflank-mailman (input) for mailman id 10603;
- Thu, 22 Oct 2020 17:09:29 +0000
+	id 1kVe9s-0003no-2Z; Thu, 22 Oct 2020 17:13:48 +0000
+Received: by outflank-mailman (input) for mailman id 10617;
+ Thu, 22 Oct 2020 17:13:47 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=A04T=D5=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1kVe5h-0002cx-1W
- for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 17:09:29 +0000
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=JUr7=D5=m5p.com=ehem@srs-us1.protection.inumbo.net>)
+ id 1kVe9r-0003nj-0j
+ for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 17:13:47 +0000
+Received: from mailhost.m5p.com (unknown [74.104.188.4])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 7a78ae94-1a34-442e-8627-7d4668985e07;
- Thu, 22 Oct 2020 17:09:28 +0000 (UTC)
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kVe5f-0005uZ-Vr
- for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 17:09:27 +0000
-Received: from iwj (helo=mynotebook.example.org)
- by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kVe5f-0005aW-UB
- for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 17:09:27 +0000
-Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
- by mariner.uk.xensource.com with esmtp (Exim 4.89)
- (envelope-from <ijackson@chiark.greenend.org.uk>)
- id 1kVdiG-00059e-T6; Thu, 22 Oct 2020 17:45:16 +0100
+ id 8f37ddf2-425e-488f-abae-491b82ac0e9e;
+ Thu, 22 Oct 2020 17:13:44 +0000 (UTC)
+Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:1f07:15ff:0:0:0:f7])
+ by mailhost.m5p.com (8.15.2/8.15.2) with ESMTPS id 09MHDSPX081607
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
+ Thu, 22 Oct 2020 13:13:34 -0400 (EDT) (envelope-from ehem@m5p.com)
+Received: (from ehem@localhost)
+ by m5p.com (8.15.2/8.15.2/Submit) id 09MHDS9Z081606;
+ Thu, 22 Oct 2020 10:13:28 -0700 (PDT) (envelope-from ehem)
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=A04T=D5=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
-	id 1kVe5h-0002cx-1W
-	for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 17:09:29 +0000
-X-Inumbo-ID: 7a78ae94-1a34-442e-8627-7d4668985e07
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+	(envelope-from <SRS0=JUr7=D5=m5p.com=ehem@srs-us1.protection.inumbo.net>)
+	id 1kVe9r-0003nj-0j
+	for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 17:13:47 +0000
+X-Inumbo-ID: 8f37ddf2-425e-488f-abae-491b82ac0e9e
+Received: from mailhost.m5p.com (unknown [74.104.188.4])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 7a78ae94-1a34-442e-8627-7d4668985e07;
-	Thu, 22 Oct 2020 17:09:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
-	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=tffHUjllB3zjo74/ONxS2tl01DELgFF4aymKZDnBl6s=; b=l85ZnbYzAVvw+Bl6L2MKk6LvYa
-	Mhia8nAexPHBnkeZ12z2yFLRT95RfIt9lqPu2MoOpFIa63aCS+hhE6ZIUX/utCtFQW+4k7mIPTW+t
-	fThutrSQocFtDz3ne6Q+u4ffmox/Au1esazD7tKyZblx7uLUUkW0WlyMH0rP+mOxErCU=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
-	by mail.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <ijackson@chiark.greenend.org.uk>)
-	id 1kVe5f-0005uZ-Vr
-	for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 17:09:27 +0000
-Received: from iwj (helo=mynotebook.example.org)
-	by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
-	(envelope-from <ijackson@chiark.greenend.org.uk>)
-	id 1kVe5f-0005aW-UB
-	for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 17:09:27 +0000
-Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
-	by mariner.uk.xensource.com with esmtp (Exim 4.89)
-	(envelope-from <ijackson@chiark.greenend.org.uk>)
-	id 1kVdiG-00059e-T6; Thu, 22 Oct 2020 17:45:16 +0100
-From: Ian Jackson <iwj@xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Ian Jackson <iwj@xenproject.org>
-Subject: [OSSTEST PATCH 13/16] Prefix guest LV names with the job name
-Date: Thu, 22 Oct 2020 17:45:03 +0100
-Message-Id: <20201022164506.1552-14-iwj@xenproject.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20201022164506.1552-1-iwj@xenproject.org>
-References: <20201022164506.1552-1-iwj@xenproject.org>
+	id 8f37ddf2-425e-488f-abae-491b82ac0e9e;
+	Thu, 22 Oct 2020 17:13:44 +0000 (UTC)
+Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:1f07:15ff:0:0:0:f7])
+	by mailhost.m5p.com (8.15.2/8.15.2) with ESMTPS id 09MHDSPX081607
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
+	Thu, 22 Oct 2020 13:13:34 -0400 (EDT)
+	(envelope-from ehem@m5p.com)
+Received: (from ehem@localhost)
+	by m5p.com (8.15.2/8.15.2/Submit) id 09MHDS9Z081606;
+	Thu, 22 Oct 2020 10:13:28 -0700 (PDT)
+	(envelope-from ehem)
+Date: Thu, 22 Oct 2020 10:13:28 -0700
+From: Elliott Mitchell <ehem+xen@m5p.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: xen-devel@lists.xenproject.org,
+        Stefano Stabellini <sstabellini@kernel.org>,
+        Julien Grall <julien@xen.org>,
+        Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: Re: [PATCH] xen/acpi: Don't fail if SPCR table is absent
+Message-ID: <20201022171328.GA81455@mattapan.m5p.com>
+References: <20201021221253.GA73207@mattapan.m5p.com>
+ <a960dd45-2867-5ef6-970c-952c03aa8cef@suse.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <a960dd45-2867-5ef6-970c-952c03aa8cef@suse.com>
 
-This means that a subsequent test which reuses the same host will not
-use the same LVs.  This is a good idea because reusing the same LV
-names in a subsequent job means relying on the "ad hoc run" cleanup
-code.  This is a bad idea because that code is rarely tested.
+On Thu, Oct 22, 2020 at 09:42:17AM +0200, Jan Beulich wrote:
+> On 22.10.2020 00:12, Elliott Mitchell wrote:
+> > --- a/xen/arch/arm/acpi/domain_build.c
+> > +++ b/xen/arch/arm/acpi/domain_build.c
+> > @@ -42,17 +42,18 @@ static int __init acpi_iomem_deny_access(struct domain *d)
+> >      status = acpi_get_table(ACPI_SIG_SPCR, 0,
+> >                              (struct acpi_table_header **)&spcr);
+> >  
+> > -    if ( ACPI_FAILURE(status) )
+> > +    if ( ACPI_SUCCESS(status) )
+> >      {
+> > -        printk("Failed to get SPCR table\n");
+> > -        return -EINVAL;
+> > +        mfn = spcr->serial_port.address >> PAGE_SHIFT;
+> > +        /* Deny MMIO access for UART */
+> > +        rc = iomem_deny_access(d, mfn, mfn + 1);
+> > +        if ( rc )
+> > +            return rc;
+> > +    }
+> > +    else
+> > +    {
+> > +        printk("Failed to get SPCR table, Xen console may be unavailable\n");
+> >      }
+> 
+> Nit: While I see you've got Stefano's R-b already, I Xen we typically
+> omit the braces here.
 
-And because, depending on the situation, the old LVs may even still be
-in use.  For example, in a pair test, the guest's LVs will still be
-set up for use with nbd.
+Personally, I prefer that myself, but was unsure of the preference here.
+I've seen multiple projects which *really* dislike using having brackets
+for some clauses, but not others (ie they want either all clauses with or
+all clauses without; instead of only if required).
 
-It seems better to fix this by using a fresh LV rather than adding
-more teardown code.
+I sent what I thought was the more often used format.  (I also like tabs,
+and dislike having so many spaces; alas my preferences are apparently
+uncommon)
 
-The "wear limit" on host reuse is what prevents the disk filling up
-with LVs from old guests.
 
-ts-debian-fixup needs special handling, because Debian's xen-tools'
-xen-create-image utility hardcodes its notion of LV name construction.
-We need to rename the actual LVs (perhaps overwriting old ones from a
-previous ad-hoc run) and also update the config.
-
-Signed-off-by: Ian Jackson <iwj@xenproject.org>
----
- Osstest/TestSupport.pm |  2 +-
- ts-debian-fixup        | 22 ++++++++++++++++++++++
- 2 files changed, 23 insertions(+), 1 deletion(-)
-
-diff --git a/Osstest/TestSupport.pm b/Osstest/TestSupport.pm
-index 12aaba79..9362a865 100644
---- a/Osstest/TestSupport.pm
-+++ b/Osstest/TestSupport.pm
-@@ -2179,7 +2179,7 @@ sub guest_var_commalist ($$) {
- 
- sub guest_mk_lv_name ($$) {
-     my ($gho, $suffix) = @_;
--    return "$gho->{Name}".$suffix;
-+    return $job."_$gho->{Name}".$suffix;
- }
- 
- sub prepareguest ($$$$$$) {
-diff --git a/ts-debian-fixup b/ts-debian-fixup
-index a878fe50..810b3aba 100755
---- a/ts-debian-fixup
-+++ b/ts-debian-fixup
-@@ -37,6 +37,27 @@ sub savecfg () {
-     $cfg= get_filecontents("$cfgstash.orig");
- }
- 
-+sub lvnames () {
-+    my $lvs = target_cmd_output_root($ho, "lvdisplay --colon", 30);
-+    foreach my $suffix (qw(disk swap)) {
-+	my $old = "$gho->{Name}-$suffix";
-+	my $new = "${job}_${old}";
-+	my $full_old = "/dev/$gho->{Vg}/$old";
-+	my $full_new = "/dev/$gho->{Vg}/$new";
-+	$cfg =~ s{\Q$full_old\E(?![0-9a-zA-Z/_.-])}{
-+            logm "Replacing in domain config \`$&' with \`$full_new'";
-+            $full_new;
-+        }ge;
-+	if ($lvs =~ m{^ *\Q$full_old\E}m) {
-+	    if ($lvs =~ m{^ *\Q$full_new\E}m) {
-+		# In case we are re-running (eg, adhoc)
-+		target_cmd_root($ho, "lvremove -f $full_new", 30);
-+	    }
-+	    target_cmd_root($ho, "lvrename $full_old $new", 30);
-+	}
-+    }
-+}
-+
- sub ether () {
- #    $cfg =~ s/^ [ \t]*
- #        ( vif [ \t]* \= [ \t]* \[ [ \t]* [\'\"]
-@@ -207,6 +228,7 @@ sub writecfg () {
- }
- 
- savecfg();
-+lvnames();
- ether();
- access();
- $console = target_setup_rootdev_console_inittab($ho,$gho,"$mountpoint");
 -- 
-2.20.1
+(\___(\___(\______          --=> 8-) EHM <=--          ______/)___/)___/)
+ \BS (    |         ehem+sigmsg@m5p.com  PGP 87145445         |    )   /
+  \_CS\   |  _____  -O #include <stddisclaimer.h> O-   _____  |   /  _/
+8A19\___\_|_/58D2 7E3D DDF4 7BA6 <-PGP-> 41D1 B375 37D0 8714\_|_/___/5445
+
 
 
