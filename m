@@ -2,28 +2,28 @@ Return-Path: <SRS0=UfNL=D5=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-11.5 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E3E3CC4363A
-	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 09:21:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8FCAEC4363A
+	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 09:24:59 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 683672419B
-	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 09:21:41 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 0BD442417D
+	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 09:24:58 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="WQnYZYle"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 683672419B
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="qHxb0cXD"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0BD442417D
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.10295.27334 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.10298.27346 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kVWmp-00026o-4N; Thu, 22 Oct 2020 09:21:31 +0000
+	id 1kVWpv-0002Mb-J4; Thu, 22 Oct 2020 09:24:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 10295.27334; Thu, 22 Oct 2020 09:21:31 +0000
+Received: by outflank-mailman (output) from mailman id 10298.27346; Thu, 22 Oct 2020 09:24:43 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,87 +38,116 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kVWmp-00026h-0T; Thu, 22 Oct 2020 09:21:31 +0000
-Received: by outflank-mailman (input) for mailman id 10295;
- Thu, 22 Oct 2020 09:21:29 +0000
+	id 1kVWpv-0002MU-Fo; Thu, 22 Oct 2020 09:24:43 +0000
+Received: by outflank-mailman (input) for mailman id 10298;
+ Thu, 22 Oct 2020 09:24:42 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=mO8V=D5=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1kVWmn-00026b-PR
- for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 09:21:29 +0000
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=dfvK=D5=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1kVWpu-0002MO-AZ
+ for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 09:24:42 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 0478d580-44dc-40c7-8dce-2c237b880a2a;
- Thu, 22 Oct 2020 09:21:28 +0000 (UTC)
+ id b05557c5-060e-4f8c-898c-6b503bf7bbc2;
+ Thu, 22 Oct 2020 09:24:41 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 8F8D1AC3C;
+ Thu, 22 Oct 2020 09:24:40 +0000 (UTC)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=mO8V=D5=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
-	id 1kVWmn-00026b-PR
-	for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 09:21:29 +0000
-X-Inumbo-ID: 0478d580-44dc-40c7-8dce-2c237b880a2a
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+	(envelope-from <SRS0=dfvK=D5=suse.com=jgross@srs-us1.protection.inumbo.net>)
+	id 1kVWpu-0002MO-AZ
+	for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 09:24:42 +0000
+X-Inumbo-ID: b05557c5-060e-4f8c-898c-6b503bf7bbc2
+Received: from mx2.suse.de (unknown [195.135.220.15])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 0478d580-44dc-40c7-8dce-2c237b880a2a;
-	Thu, 22 Oct 2020 09:21:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1603358488;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:content-transfer-encoding:in-reply-to;
-  bh=C9aqx/jjtwxMn9vAhpNQPx4C33vcoB8dih4gv2oWmT0=;
-  b=WQnYZYleHNmYc7bL/gPOuftZkn8yTxyu8JGr094ibMOI77KE4A5xo0BY
-   vvflK0ukEYGS1yrkx4J5tjyg+l4I6oCjZNjHzHC2qAy0TCGv36yF965L4
-   9YogE3IAPeCQduybIXt+hDS3LEVPQPeFHFqQkuumEtZ0lDxUwjxcDL60q
-   8=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: kc51BmvvoDlcX8H+s15aRLIDcnoWU9hX00MmrF9NuEuAwhoa98UlGweTntLtzSJNZBYC4TObxV
- bVZ/6LuRPfS8Sg2/LnH5HchSSBoKrWB5ZZcU2Wwyfe6f90rjlOP0RVkkXCHxAdILG5MHvWtZlA
- G2DctSc7095U7pou1ObfgXyK6BoZEt7oCJ0KWpR+MkWk5QvTz4LqQ3EjwipK5M8sR8zSbygRh2
- kxF9OK3k/Z7o4SLbBOz0b2O/QhZjYot9FLmKXDJZmOorV1GLHL2LN01Hkg8U639gSRqveDYfuo
- 6Rs=
-X-SBRS: 2.5
-X-MesageID: 29794353
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.77,404,1596513600"; 
-   d="scan'208";a="29794353"
-Date: Thu, 22 Oct 2020 11:21:19 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Jan Beulich <jbeulich@suse.com>
-CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "Andrew
- Cooper" <andrew.cooper3@citrix.com>, George Dunlap
-	<George.Dunlap@eu.citrix.com>, Ian Jackson <iwj@xenproject.org>, Julien Grall
-	<julien@xen.org>, Wei Liu <wl@xen.org>, Stefano Stabellini
-	<sstabellini@kernel.org>
-Subject: Re: [PATCH v2 1/8] evtchn: avoid race in get_xen_consumer()
-Message-ID: <20201022092119.kgm3nrwuwjhphcc7@Air-de-Roger>
-References: <19babf20-3649-5c63-44a9-7edfa81835aa@suse.com>
- <9ecafa4d-db5b-20a2-3a9d-6a6cda91252c@suse.com>
+	id b05557c5-060e-4f8c-898c-6b503bf7bbc2;
+	Thu, 22 Oct 2020 09:24:41 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1603358680;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=CvoA3+uVzibS3Bv3IS1AE3ffCg+FdCpAtcx7xV/jTjQ=;
+	b=qHxb0cXD8V947WK/zTGCy4JRPTiiPnWbfjoUGIGDV7kIGwcQV3wtHATNop4KSafd8Iyz7r
+	dBJYSt86g9B3azGQnNR+okxaki8tQWdFxwj+3+cWV+URNQDUZ0IsvxcYdKnXDvEJFSlUs+
+	jbrllajztgztGwWmyQ26pACn0y2fEX0=
+Received: from relay2.suse.de (unknown [195.135.221.27])
+	by mx2.suse.de (Postfix) with ESMTP id 8F8D1AC3C;
+	Thu, 22 Oct 2020 09:24:40 +0000 (UTC)
+Subject: Re: [PATCH] x86/alternative: don't call text_poke() in lazy TLB mode
+To: xen-devel@lists.xenproject.org, x86@kernel.org,
+ linux-kernel@vger.kernel.org
+Cc: Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
+ Borislav Petkov <bp@alien8.de>, "H. Peter Anvin" <hpa@zytor.com>,
+ Andy Lutomirski <luto@kernel.org>
+References: <20201009144225.12019-1-jgross@suse.com>
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Message-ID: <28ccccfe-b95b-5c4d-af27-5004e9f02c40@suse.com>
+Date: Thu, 22 Oct 2020 11:24:39 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <9ecafa4d-db5b-20a2-3a9d-6a6cda91252c@suse.com>
-X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
- FTLPEX02CL06.citrite.net (10.13.108.179)
+In-Reply-To: <20201009144225.12019-1-jgross@suse.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-On Tue, Oct 20, 2020 at 04:08:13PM +0200, Jan Beulich wrote:
-> There's no global lock around the updating of this global piece of data.
-> Make use of cmpxchgptr() to avoid two entities racing with their
-> updates.
+On 09.10.20 16:42, Juergen Gross wrote:
+> When running in lazy TLB mode the currently active page tables might
+> be the ones of a previous process, e.g. when running a kernel thread.
 > 
-> While touching the functionality, mark xen_consumers[] read-mostly (or
-> else the if() condition could use the result of cmpxchgptr(), writing to
-> the slot unconditionally).
+> This can be problematic in case kernel code is being modified via
+> text_poke() in a kernel thread, and on another processor exit_mmap()
+> is active for the process which was running on the first cpu before
+> the kernel thread.
 > 
-> The use of cmpxchgptr() here points out (by way of clang warning about
-> it) that its original use of const was slightly wrong. Adjust the
-> placement, or else undefined behavior of const qualifying a function
-> type will result.
+> As text_poke() is using a temporary address space and the former
+> address space (obtained via cpu_tlbstate.loaded_mm) is restored
+> afterwards, there is a race possible in case the cpu on which
+> exit_mmap() is running wants to make sure there are no stale
+> references to that address space on any cpu active (this e.g. is
+> required when running as a Xen PV guest, where this problem has been
+> observed and analyzed).
 > 
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> In order to avoid that, drop off TLB lazy mode before switching to the
+> temporary address space.
+> 
+> Fixes: cefa929c034eb5d ("x86/mm: Introduce temporary mm structs")
+> Signed-off-by: Juergen Gross <jgross@suse.com>
 
-Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+Can anyone look at this, please? It is fixing a real problem which has
+been seen several times.
 
-Thanks, Roger.
+
+Juergen
+
+> ---
+>   arch/x86/kernel/alternative.c | 9 +++++++++
+>   1 file changed, 9 insertions(+)
+> 
+> diff --git a/arch/x86/kernel/alternative.c b/arch/x86/kernel/alternative.c
+> index cdaab30880b9..cd6be6f143e8 100644
+> --- a/arch/x86/kernel/alternative.c
+> +++ b/arch/x86/kernel/alternative.c
+> @@ -807,6 +807,15 @@ static inline temp_mm_state_t use_temporary_mm(struct mm_struct *mm)
+>   	temp_mm_state_t temp_state;
+>   
+>   	lockdep_assert_irqs_disabled();
+> +
+> +	/*
+> +	 * Make sure not to be in TLB lazy mode, as otherwise we'll end up
+> +	 * with a stale address space WITHOUT being in lazy mode after
+> +	 * restoring the previous mm.
+> +	 */
+> +	if (this_cpu_read(cpu_tlbstate.is_lazy))
+> +		leave_mm(smp_processor_id());
+> +
+>   	temp_state.mm = this_cpu_read(cpu_tlbstate.loaded_mm);
+>   	switch_mm_irqs_off(NULL, mm, current);
+>   
+> 
+
 
