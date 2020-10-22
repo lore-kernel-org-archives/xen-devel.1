@@ -2,28 +2,28 @@ Return-Path: <SRS0=UfNL=D5=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.5 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D83BCC388F2
-	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 07:42:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C421FC4363A
+	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 07:46:49 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6673C21707
-	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 07:42:52 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 5A76921707
+	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2020 07:46:49 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="buOqT8or"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6673C21707
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="TZ8Sbw7N"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5A76921707
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.10202.27081 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.10220.27097 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kVVFA-0006cj-Ry; Thu, 22 Oct 2020 07:42:40 +0000
+	id 1kVVIz-0007G6-Et; Thu, 22 Oct 2020 07:46:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 10202.27081; Thu, 22 Oct 2020 07:42:40 +0000
+Received: by outflank-mailman (output) from mailman id 10220.27097; Thu, 22 Oct 2020 07:46:37 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,145 +38,82 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kVVFA-0006cX-ND; Thu, 22 Oct 2020 07:42:40 +0000
-Received: by outflank-mailman (input) for mailman id 10202;
- Thu, 22 Oct 2020 07:42:39 +0000
+	id 1kVVIz-0007Fz-Bc; Thu, 22 Oct 2020 07:46:37 +0000
+Received: by outflank-mailman (input) for mailman id 10220;
+ Thu, 22 Oct 2020 07:46:36 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=dfvK=D5=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kVVF9-0006JP-SE
- for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 07:42:39 +0000
+ (envelope-from <SRS0=Z30Q=D5=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1kVVIy-0007Fu-JG
+ for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 07:46:36 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 88c88692-d876-4f25-8902-6597f0279a03;
- Thu, 22 Oct 2020 07:42:26 +0000 (UTC)
+ id 93429545-b353-43ee-99f1-b5abfa3916bc;
+ Thu, 22 Oct 2020 07:46:35 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 1902BB1A5;
- Thu, 22 Oct 2020 07:42:26 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 3BB6BB1BF;
+ Thu, 22 Oct 2020 07:46:34 +0000 (UTC)
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=dfvK=D5=suse.com=jgross@srs-us1.protection.inumbo.net>)
-	id 1kVVF9-0006JP-SE
-	for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 07:42:39 +0000
-X-Inumbo-ID: 88c88692-d876-4f25-8902-6597f0279a03
+	(envelope-from <SRS0=Z30Q=D5=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+	id 1kVVIy-0007Fu-JG
+	for xen-devel@lists.xenproject.org; Thu, 22 Oct 2020 07:46:36 +0000
+X-Inumbo-ID: 93429545-b353-43ee-99f1-b5abfa3916bc
 Received: from mx2.suse.de (unknown [195.135.220.15])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 88c88692-d876-4f25-8902-6597f0279a03;
-	Thu, 22 Oct 2020 07:42:26 +0000 (UTC)
+	id 93429545-b353-43ee-99f1-b5abfa3916bc;
+	Thu, 22 Oct 2020 07:46:35 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1603352546;
+	t=1603352794;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=8iyLraNh4qsC0U9VAH0jIutbMoqMZ9rCRdDLW3b+ghk=;
-	b=buOqT8orNctDSPPfKDdZ4gitpMoJYnx0HWmUlC1aRgdx74mP95sctuaKXF+JzlM36uSGkM
-	p2xDJuqhtNo9VidkxVxYCRBcdUEkPOHDAmCxRS5Po5/c6d4/HReu+Z5NA3SH8iV7C+p2/I
-	wrRCy+A/tIGlAMKNWyXwFMUaHgLtNRc=
+	bh=0rHay0Yz4ByTnjfExn9doWqVZCdz4OQaLOPgGx0TQtM=;
+	b=TZ8Sbw7NuXy2WDdTPXB9xnXSDAhWQfSQsAZrJpodQ+ujN8XUtHPfWd79KC0R5EZ1wr9iu9
+	r8lJtM/XhO/nAwiCUVavBIiqh0GBtfrmqqVWzbkhXcalNAtJ5fZBD0M32RxBbxS8UjFhCU
+	bfuiubesHfbVeGLvFXS6ZsWx/QcEDDw=
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 1902BB1A5;
-	Thu, 22 Oct 2020 07:42:26 +0000 (UTC)
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org,
-	x86@kernel.org,
-	linux-kernel@vger.kernel.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Ingo Molnar <mingo@redhat.com>,
-	Borislav Petkov <bp@alien8.de>,
-	"H. Peter Anvin" <hpa@zytor.com>
-Subject: [PATCH 3/5] xen/events: only register debug interrupt for 2-level events
-Date: Thu, 22 Oct 2020 09:42:12 +0200
-Message-Id: <20201022074214.21693-4-jgross@suse.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20201022074214.21693-1-jgross@suse.com>
-References: <20201022074214.21693-1-jgross@suse.com>
+	by mx2.suse.de (Postfix) with ESMTP id 3BB6BB1BF;
+	Thu, 22 Oct 2020 07:46:34 +0000 (UTC)
+Subject: Re: [xen-unstable test] 156050: regressions - FAIL
+To: xen-devel@lists.xenproject.org
+References: <osstest-156050-mainreport@xen.org>
+Cc: osstest service owner <osstest-admin@xenproject.org>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <c38b0b70-b85c-6a5c-6a94-d4845d59a9dd@suse.com>
+Date: Thu, 22 Oct 2020 09:46:35 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <osstest-156050-mainreport@xen.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-xen_debug_interrupt() is specific to 2-level event handling. So don't
-register it with fifo event handling being active.
+On 22.10.2020 07:58, osstest service owner wrote:
+> flight 156050 xen-unstable real [real]
+> flight 156084 xen-unstable real-retest [real]
+> http://logs.test-lab.xenproject.org/osstest/logs/156050/
+> http://logs.test-lab.xenproject.org/osstest/logs/156084/
+> 
+> Regressions :-(
+> 
+> Tests which did not succeed and are blocking,
+> including tests which could not be run:
+>  test-amd64-amd64-xl-qemut-debianhvm-i386-xsm 12 debian-hvm-install fail REGR. vs. 156013
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
- arch/x86/xen/smp.c               | 19 +++++++++++--------
- arch/x86/xen/xen-ops.h           |  2 ++
- drivers/xen/events/events_base.c |  6 ++++--
- 3 files changed, 17 insertions(+), 10 deletions(-)
+Continuing from my reply to the earlier flight yesterday I'm
+meanwhile even more puzzled because 4.12 and earlier have had
+pushes, i.e. the tests were successful there that have been
+failing for 4.13 and newer. It's further suspicious (to me)
+that in each case it's just one of the qemu{u,t} tests which
+fails, while its sibling is successful. This may mean a
+dependency on the particular hardware we're running on, but
+again I wouldn't be able to make a connection of such
+behavior to the commits under test.
 
-diff --git a/arch/x86/xen/smp.c b/arch/x86/xen/smp.c
-index 2097fa0ebdb5..b544e511b3c2 100644
---- a/arch/x86/xen/smp.c
-+++ b/arch/x86/xen/smp.c
-@@ -88,14 +88,17 @@ int xen_smp_intr_init(unsigned int cpu)
- 	per_cpu(xen_callfunc_irq, cpu).irq = rc;
- 	per_cpu(xen_callfunc_irq, cpu).name = callfunc_name;
- 
--	debug_name = kasprintf(GFP_KERNEL, "debug%d", cpu);
--	rc = bind_virq_to_irqhandler(VIRQ_DEBUG, cpu, xen_debug_interrupt,
--				     IRQF_PERCPU | IRQF_NOBALANCING,
--				     debug_name, NULL);
--	if (rc < 0)
--		goto fail;
--	per_cpu(xen_debug_irq, cpu).irq = rc;
--	per_cpu(xen_debug_irq, cpu).name = debug_name;
-+	if (!fifo_events) {
-+		debug_name = kasprintf(GFP_KERNEL, "debug%d", cpu);
-+		rc = bind_virq_to_irqhandler(VIRQ_DEBUG, cpu,
-+					     xen_debug_interrupt,
-+					     IRQF_PERCPU | IRQF_NOBALANCING,
-+					     debug_name, NULL);
-+		if (rc < 0)
-+			goto fail;
-+		per_cpu(xen_debug_irq, cpu).irq = rc;
-+		per_cpu(xen_debug_irq, cpu).name = debug_name;
-+	}
- 
- 	callfunc_name = kasprintf(GFP_KERNEL, "callfuncsingle%d", cpu);
- 	rc = bind_ipi_to_irqhandler(XEN_CALL_FUNCTION_SINGLE_VECTOR,
-diff --git a/arch/x86/xen/xen-ops.h b/arch/x86/xen/xen-ops.h
-index 45d556f71858..e444c78b6e2b 100644
---- a/arch/x86/xen/xen-ops.h
-+++ b/arch/x86/xen/xen-ops.h
-@@ -29,6 +29,8 @@ extern struct start_info *xen_start_info;
- extern struct shared_info xen_dummy_shared_info;
- extern struct shared_info *HYPERVISOR_shared_info;
- 
-+extern bool fifo_events;
-+
- void xen_setup_mfn_list_list(void);
- void xen_build_mfn_list_list(void);
- void xen_setup_machphys_mapping(void);
-diff --git a/drivers/xen/events/events_base.c b/drivers/xen/events/events_base.c
-index 1c25580c7691..bb18cce4db06 100644
---- a/drivers/xen/events/events_base.c
-+++ b/drivers/xen/events/events_base.c
-@@ -2050,7 +2050,7 @@ void xen_setup_callback_vector(void) {}
- static inline void xen_alloc_callback_vector(void) {}
- #endif
- 
--static bool fifo_events = true;
-+bool fifo_events = true;
- module_param(fifo_events, bool, 0);
- 
- static int xen_evtchn_cpu_prepare(unsigned int cpu)
-@@ -2082,8 +2082,10 @@ void __init xen_init_IRQ(void)
- 
- 	if (fifo_events)
- 		ret = xen_evtchn_fifo_init();
--	if (ret < 0)
-+	if (ret < 0) {
- 		xen_evtchn_2l_init();
-+		fifo_events = false;
-+	}
- 
- 	xen_cpu_init_eoi(smp_processor_id());
- 
--- 
-2.26.2
-
+Jan
 
