@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EC35BC55179
-	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2020 16:26:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1DD22C388F9
+	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2020 16:26:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7CF752192A
-	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2020 16:26:35 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id A782321D47
+	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2020 16:26:38 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="tT2ajUVt"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7CF752192A
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="h5SsgST+"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A782321D47
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.11199.29693 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.11201.29717 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kVztY-0000vQ-3Z; Fri, 23 Oct 2020 16:26:24 +0000
+	id 1kVztc-00010u-Qf; Fri, 23 Oct 2020 16:26:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 11199.29693; Fri, 23 Oct 2020 16:26:24 +0000
+Received: by outflank-mailman (output) from mailman id 11201.29717; Fri, 23 Oct 2020 16:26:28 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,128 +38,150 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kVztX-0000vJ-W8; Fri, 23 Oct 2020 16:26:23 +0000
-Received: by outflank-mailman (input) for mailman id 11199;
- Fri, 23 Oct 2020 16:26:22 +0000
+	id 1kVztc-00010m-N8; Fri, 23 Oct 2020 16:26:28 +0000
+Received: by outflank-mailman (input) for mailman id 11201;
+ Fri, 23 Oct 2020 16:26:27 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=X6LH=D6=xen.org=paul@srs-us1.protection.inumbo.net>)
- id 1kVztW-0000v2-HW
- for xen-devel@lists.xenproject.org; Fri, 23 Oct 2020 16:26:22 +0000
+ id 1kVztb-0000v2-GB
+ for xen-devel@lists.xenproject.org; Fri, 23 Oct 2020 16:26:27 +0000
 Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 72fc22ac-891f-40a4-86ba-576ef68e6381;
+ id 897b0fc5-8dbf-4bc1-a5d7-e01dd3117c9b;
  Fri, 23 Oct 2020 16:26:21 +0000 (UTC)
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kVztU-0008NU-Mf; Fri, 23 Oct 2020 16:26:20 +0000
+ id 1kVztU-0008NQ-Iu; Fri, 23 Oct 2020 16:26:20 +0000
 Received: from ec2-18-200-132-236.eu-west-1.compute.amazonaws.com
  ([18.200.132.236] helo=ip-10-0-185-232.eu-west-1.compute.internal)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kVzqv-000376-Fq; Fri, 23 Oct 2020 16:23:41 +0000
+ id 1kVzqp-000376-2n; Fri, 23 Oct 2020 16:23:35 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=X6LH=D6=xen.org=paul@srs-us1.protection.inumbo.net>)
-	id 1kVztW-0000v2-HW
-	for xen-devel@lists.xenproject.org; Fri, 23 Oct 2020 16:26:22 +0000
-X-Inumbo-ID: 72fc22ac-891f-40a4-86ba-576ef68e6381
+	id 1kVztb-0000v2-GB
+	for xen-devel@lists.xenproject.org; Fri, 23 Oct 2020 16:26:27 +0000
+X-Inumbo-ID: 897b0fc5-8dbf-4bc1-a5d7-e01dd3117c9b
 Received: from mail.xenproject.org (unknown [104.130.215.37])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 72fc22ac-891f-40a4-86ba-576ef68e6381;
+	id 897b0fc5-8dbf-4bc1-a5d7-e01dd3117c9b;
 	Fri, 23 Oct 2020 16:26:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	 bh=z+TBph7KfTXS8lKGFLMVlUTRo1VQXbbt6hL6Ha7NBXk=; b=tT2ajUVtGFDsgz52kOM43g3eY
-	0D0fZHUPN6CUpJgKqD7RFc01dSyQKnlo3Bgx79oQ0D+1OVNet5uw3aPCIWVDhAOHc+d2dQAb5uUbO
-	BFvszb4tWpOjnr6NcjSUm65EtKkJ1MoSkYqNxSDmZvW7u06HHdHaFS+rQTSc2uh0VbM60=;
+	 bh=um7JEb+Wnwt5fiP5c5wstzbmPuQS6pAhcCxDSP4apgk=; b=h5SsgST+sCAoFHA0FZRabee9q
+	wdqGgTts8Q9LxErYlEfoXtNMvcoMJhvNZ4RqeFk5rNDVjjVyjcTwXGc5dXCmRcc98y0a9vjvMksym
+	7Zg1ekeRnIeRPdDR8jUG672LLSFypFD7c+SRhcNBHhmJY9ZUp5Il4+ifEae8unb1nexQ4=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
 	by mail.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1kVztU-0008NU-Mf; Fri, 23 Oct 2020 16:26:20 +0000
+	id 1kVztU-0008NQ-Iu; Fri, 23 Oct 2020 16:26:20 +0000
 Received: from ec2-18-200-132-236.eu-west-1.compute.amazonaws.com ([18.200.132.236] helo=ip-10-0-185-232.eu-west-1.compute.internal)
 	by xenbits.xenproject.org with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
 	(Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1kVzqv-000376-Fq; Fri, 23 Oct 2020 16:23:41 +0000
+	id 1kVzqp-000376-2n; Fri, 23 Oct 2020 16:23:35 +0000
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: Paul Durrant <pdurrant@amazon.com>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH 24/25] docs/man: modify xl-pci-configuration(5) to add 'name' field to PCI_SPEC_STRING
-Date: Fri, 23 Oct 2020 16:23:13 +0000
-Message-Id: <20201023162314.2235-25-paul@xen.org>
+Subject: [PATCH 18/25] docs/man: fix xl(1) documentation for 'pci' operations
+Date: Fri, 23 Oct 2020 16:23:07 +0000
+Message-Id: <20201023162314.2235-19-paul@xen.org>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20201023162314.2235-1-paul@xen.org>
 References: <20201023162314.2235-1-paul@xen.org>
 
 From: Paul Durrant <pdurrant@amazon.com>
 
-Since assignable devices can be named, a subsequent patch will support use
-of a PCI_SPEC_STRING containing a 'name' parameter instead of a 'bdf'. In
-this case the name will be used to look up the 'bdf' in the list of assignable
-(or assigned) devices.
+Currently the documentation completely fails to mention the existence of
+PCI_SPEC_STRING. This patch tidies things up, specifically clarifying that
+'pci-assignable-add/remove' take <BDF> arguments where as 'pci-attach/detach'
+take <PCI_SPEC_STRING> arguments (which will be enforced in a subsequent
+patch).
 
 Signed-off-by: Paul Durrant <pdurrant@amazon.com>
 ---
 Cc: Ian Jackson <iwj@xenproject.org>
 Cc: Wei Liu <wl@xen.org>
 ---
- docs/man/xl-pci-configuration.5.pod | 25 +++++++++++++++++++++++--
- 1 file changed, 23 insertions(+), 2 deletions(-)
+ docs/man/xl.1.pod.in | 28 +++++++++++++++++-----------
+ 1 file changed, 17 insertions(+), 11 deletions(-)
 
-diff --git a/docs/man/xl-pci-configuration.5.pod b/docs/man/xl-pci-configuration.5.pod
-index 4dd73bc498..db3360307c 100644
---- a/docs/man/xl-pci-configuration.5.pod
-+++ b/docs/man/xl-pci-configuration.5.pod
-@@ -51,7 +51,7 @@ is not specified, or if it is specified with an empty value (whether
- positionally or explicitly).
+diff --git a/docs/man/xl.1.pod.in b/docs/man/xl.1.pod.in
+index 5f7d3a7134..373a52839d 100644
+--- a/docs/man/xl.1.pod.in
++++ b/docs/man/xl.1.pod.in
+@@ -1597,14 +1597,18 @@ List virtual network interfaces for a domain.
  
- B<NOTE>: In context of B<xl pci-detach> (see L<xl(1)>), parameters other than
--B<bdf> will be ignored.
-+B<bdf> or B<name> will be ignored.
+ =item B<pci-assignable-list>
  
- =head1 Positional Parameters
+-List all the assignable PCI devices.
++List all the B<BDF> of assignable PCI devices. See
++L<xl-pci-configuration(5)> for more information.
++
+ These are devices in the system which are configured to be
+ available for passthrough and are bound to a suitable PCI
+ backend driver in domain 0 rather than a real driver.
  
-@@ -70,7 +70,11 @@ B<*> to indicate all functions of a multi-function device.
+ =item B<pci-assignable-add> I<BDF>
  
- =item Default Value
+-Make the device at PCI Bus/Device/Function BDF assignable to guests.
++Make the device at B<BDF> assignable to guests. See
++L<xl-pci-configuration(5)> for more information.
++
+ This will bind the device to the pciback driver and assign it to the
+ "quarantine domain".  If it is already bound to a driver, it will
+ first be unbound, and the original driver stored so that it can be
+@@ -1620,8 +1624,10 @@ being used.
  
--None. This parameter is mandatory as it identifies the device.
-+None. This parameter is mandatory in its positional form. As a non-positional
-+parameter it is also mandatory unless a B<name> parameter is present, in
-+which case B<bdf> must not be present since the B<name> will be used to find
-+the B<bdf> in the list of assignable devices. See L<xl(1)> for more information
-+on naming assignable devices.
+ =item B<pci-assignable-remove> [I<-r>] I<BDF>
+ 
+-Make the device at PCI Bus/Device/Function BDF not assignable to
+-guests.  This will at least unbind the device from pciback, and
++Make the device at B<BDF> not assignable to guests. See
++L<xl-pci-configuration(5)> for more information.
++
++This will at least unbind the device from pciback, and
+ re-assign it from the "quarantine domain" back to domain 0.  If the -r
+ option is specified, it will also attempt to re-bind the device to its
+ original driver, making it usable by Domain 0 again.  If the device is
+@@ -1637,15 +1643,15 @@ As always, this should only be done if you trust the guest, or are
+ confident that the particular device you're re-assigning to dom0 will
+ cancel all in-flight DMA on FLR.
+ 
+-=item B<pci-attach> I<domain-id> I<BDF>
++=item B<pci-attach> I<domain-id> I<PCI_SPEC_STRING>
+ 
+-Hot-plug a new pass-through pci device to the specified domain.
+-B<BDF> is the PCI Bus/Device/Function of the physical device to pass-through.
++Hot-plug a new pass-through pci device to the specified domain. See
++L<xl-pci-configuration(5)> for more information.
+ 
+-=item B<pci-detach> [I<OPTIONS>] I<domain-id> I<BDF>
++=item B<pci-detach> [I<OPTIONS>] I<domain-id> I<PCI_SPEC_STRING>
+ 
+-Hot-unplug a previously assigned pci device from a domain. B<BDF> is the PCI
+-Bus/Device/Function of the physical device to be removed from the guest domain.
++Hot-unplug a pci device that was previously passed through to a domain. See
++L<xl-pci-configuration(5)> for more information.
+ 
+ B<OPTIONS>
+ 
+@@ -1660,7 +1666,7 @@ even without guest domain's collaboration.
+ 
+ =item B<pci-list> I<domain-id>
+ 
+-List pass-through pci devices for a domain.
++List the B<BDF> of pci devices passed through to a domain.
  
  =back
  
-@@ -194,4 +198,21 @@ B<NOTE>: This overrides the global B<rdm> option.
- 
- =back
- 
-+=item B<name>=I<STRING>
-+
-+=over 4
-+
-+=item Description
-+
-+This is the name given when the B<BDF> was made assignable. See L<xl(1)> for
-+more information on naming assignable devices.
-+
-+=item Default Value
-+
-+None. This parameter must not be present if a B<bdf> parameter is present.
-+If a B<bdf> parameter is not present then B<name> is mandatory as it is
-+required to look up the B<BDF> in the list of assignable devices.
-+
-+=back
-+
- =back
 -- 
 2.11.0
 
