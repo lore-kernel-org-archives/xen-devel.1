@@ -2,27 +2,28 @@ Return-Path: <SRS0=ydFR=D6=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D0AAC4363A
-	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2020 16:25:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A2DE7C4363A
+	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2020 16:26:34 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AFF572192A
-	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2020 16:25:30 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 2DBF72192A
+	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2020 16:26:34 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="DZt87/4/"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AFF572192A
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="NkS5oRBE"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2DBF72192A
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.11193.29681 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.11200.29698 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kVzsW-0000mD-Pa; Fri, 23 Oct 2020 16:25:20 +0000
+	id 1kVztY-0000vt-De; Fri, 23 Oct 2020 16:26:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 11193.29681; Fri, 23 Oct 2020 16:25:20 +0000
+Received: by outflank-mailman (output) from mailman id 11200.29698; Fri, 23 Oct 2020 16:26:24 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -37,154 +38,226 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kVzsW-0000m5-LQ; Fri, 23 Oct 2020 16:25:20 +0000
-Received: by outflank-mailman (input) for mailman id 11193;
- Fri, 23 Oct 2020 16:25:18 +0000
+	id 1kVztY-0000vi-7Z; Fri, 23 Oct 2020 16:26:24 +0000
+Received: by outflank-mailman (input) for mailman id 11200;
+ Fri, 23 Oct 2020 16:26:22 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=3H45=D6=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1kVzsU-0000lt-Ss
- for xen-devel@lists.xenproject.org; Fri, 23 Oct 2020 16:25:18 +0000
-Received: from mail.kernel.org (unknown [198.145.29.99])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=X6LH=D6=xen.org=paul@srs-us1.protection.inumbo.net>)
+ id 1kVztW-0000v3-JG
+ for xen-devel@lists.xenproject.org; Fri, 23 Oct 2020 16:26:22 +0000
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id a79096c1-eee4-47b9-aa28-7bcc11430077;
- Fri, 23 Oct 2020 16:25:18 +0000 (UTC)
-Received: from sstabellini-ThinkPad-T480s (c-24-130-65-46.hsd1.ca.comcast.net
- [24.130.65.46])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id E26E42192A;
- Fri, 23 Oct 2020 16:25:16 +0000 (UTC)
+ id 27f1b87b-7c40-4f94-ba01-9684c636cdd7;
+ Fri, 23 Oct 2020 16:26:21 +0000 (UTC)
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <paul@xen.org>)
+ id 1kVztU-0008NS-LH; Fri, 23 Oct 2020 16:26:20 +0000
+Received: from ec2-18-200-132-236.eu-west-1.compute.amazonaws.com
+ ([18.200.132.236] helo=ip-10-0-185-232.eu-west-1.compute.internal)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <paul@xen.org>)
+ id 1kVzqm-000376-LC; Fri, 23 Oct 2020 16:23:32 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=3H45=D6=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
-	id 1kVzsU-0000lt-Ss
-	for xen-devel@lists.xenproject.org; Fri, 23 Oct 2020 16:25:18 +0000
-X-Inumbo-ID: a79096c1-eee4-47b9-aa28-7bcc11430077
-Received: from mail.kernel.org (unknown [198.145.29.99])
+	(envelope-from <SRS0=X6LH=D6=xen.org=paul@srs-us1.protection.inumbo.net>)
+	id 1kVztW-0000v3-JG
+	for xen-devel@lists.xenproject.org; Fri, 23 Oct 2020 16:26:22 +0000
+X-Inumbo-ID: 27f1b87b-7c40-4f94-ba01-9684c636cdd7
+Received: from mail.xenproject.org (unknown [104.130.215.37])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id a79096c1-eee4-47b9-aa28-7bcc11430077;
-	Fri, 23 Oct 2020 16:25:18 +0000 (UTC)
-Received: from sstabellini-ThinkPad-T480s (c-24-130-65-46.hsd1.ca.comcast.net [24.130.65.46])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id E26E42192A;
-	Fri, 23 Oct 2020 16:25:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1603470317;
-	bh=PAR2NkJcyGWUrf2r1igze2t3rx5eT74HdkfAQ2uSaTs=;
-	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=DZt87/4/pJZT/AwsmR3amWr6W0YM+4uZfglT+lyMoe3tU0+gcmPBE15p9anqNawx1
-	 dfpsTk0jv0vviF8lg162HUpV0xinaBHSnqeZifPp52zhQmz4tgP4ZQu4HMHZKCb2L0
-	 XIFo2uRIAeT1Q2zxbo6kYLKh71iv+amD1KYZO1ek=
-Date: Fri, 23 Oct 2020 09:25:15 -0700 (PDT)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
-To: Julien Grall <julien@xen.org>
-cc: Stefano Stabellini <sstabellini@kernel.org>, 
-    Rahul Singh <Rahul.Singh@arm.com>, 
-    "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
-    Bertrand Marquis <Bertrand.Marquis@arm.com>, 
-    Jan Beulich <jbeulich@suse.com>, Paul Durrant <paul@xen.org>, 
-    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: Re: [XEN PATCH v1] xen/arm : Add support for SMMUv3 driver
-In-Reply-To: <d4be5451-809b-c793-8b6a-9e9bace0a52e@xen.org>
-Message-ID: <alpine.DEB.2.21.2010230920060.12247@sstabellini-ThinkPad-T480s>
-References: <b085e894773842ac320b818aa6f84289d0a128ed.1602591365.git.rahul.singh@arm.com> <cd433f0a-ed0b-ce82-c356-d6deaa053a30@xen.org> <BBF09ABE-29A6-4990-8DA2-B44086E9C88C@arm.com> <1082f30e-0ce8-00b1-e120-194ff874a9ba@xen.org>
- <alpine.DEB.2.21.2010221631440.12247@sstabellini-ThinkPad-T480s> <d4be5451-809b-c793-8b6a-9e9bace0a52e@xen.org>
-User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
-MIME-Version: 1.0
-Content-Type: multipart/mixed; BOUNDARY="8323329-1071560962-1603470205=:12247"
-Content-ID: <alpine.DEB.2.21.2010230923450.12247@sstabellini-ThinkPad-T480s>
+	id 27f1b87b-7c40-4f94-ba01-9684c636cdd7;
+	Fri, 23 Oct 2020 16:26:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
+	 bh=+xRHgG/V1V6jdrFunRi9DByLVqbO+8Hy1Wezh0jszpM=; b=NkS5oRBEuIIoyTRowqey4tbzc
+	k7H9ApuLG8+2rlTdwtjzRw9hxVTW+OnH4/Pg22zcQk2rwzYu6fsYNHCztfy2E6OtGo+OKH/KBtXKS
+	MKaIjOp5uCu8CKbLbUfSaaiUYgrFO1ijieApbV9Tch6gld8WZWZBkRvQwg40HFvYzyRO4=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+	by mail.xenproject.org with esmtp (Exim 4.92)
+	(envelope-from <paul@xen.org>)
+	id 1kVztU-0008NS-LH; Fri, 23 Oct 2020 16:26:20 +0000
+Received: from ec2-18-200-132-236.eu-west-1.compute.amazonaws.com ([18.200.132.236] helo=ip-10-0-185-232.eu-west-1.compute.internal)
+	by xenbits.xenproject.org with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+	(Exim 4.92)
+	(envelope-from <paul@xen.org>)
+	id 1kVzqm-000376-LC; Fri, 23 Oct 2020 16:23:32 +0000
+From: Paul Durrant <paul@xen.org>
+To: xen-devel@lists.xenproject.org
+Cc: Paul Durrant <pdurrant@amazon.com>,
+	Ian Jackson <iwj@xenproject.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH 15/25] libxl: Make sure devices added by pci-attach are reflected in the config
+Date: Fri, 23 Oct 2020 16:23:04 +0000
+Message-Id: <20201023162314.2235-16-paul@xen.org>
+X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20201023162314.2235-1-paul@xen.org>
+References: <20201023162314.2235-1-paul@xen.org>
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
+From: Paul Durrant <pdurrant@amazon.com>
 
---8323329-1071560962-1603470205=:12247
-Content-Type: text/plain; CHARSET=UTF-8
-Content-Transfer-Encoding: 8BIT
-Content-ID: <alpine.DEB.2.21.2010230923451.12247@sstabellini-ThinkPad-T480s>
+Currently libxl__device_pci_add_xenstore() is broken in that does not
+update the domain's configuration for the first device added (which causes
+creation of the overall backend area in xenstore). This can be easily observed
+by running 'xl list -l' after adding a single device: the device will be
+missing.
 
-On Fri, 23 Oct 2020, Julien Grall wrote:
-> On 23/10/2020 01:02, Stefano Stabellini wrote:
-> > On Thu, 22 Oct 2020, Julien Grall wrote:
-> > > > > On 20/10/2020 16:25, Rahul Singh wrote:
-> > > > > > Add support for ARM architected SMMUv3 implementations. It is based
-> > > > > > on
-> > > > > > the Linux SMMUv3 driver.
-> > > > > > Major differences between the Linux driver are as follows:
-> > > > > > 1. Only Stage-2 translation is supported as compared to the Linux
-> > > > > > driver
-> > > > > >      that supports both Stage-1 and Stage-2 translations.
-> > > > > > 2. Use P2M  page table instead of creating one as SMMUv3 has the
-> > > > > >      capability to share the page tables with the CPU.
-> > > > > > 3. Tasklets is used in place of threaded IRQ's in Linux for event
-> > > > > > queue
-> > > > > >      and priority queue IRQ handling.
-> > > > > 
-> > > > > Tasklets are not a replacement for threaded IRQ. In particular, they
-> > > > > will
-> > > > > have priority over anything else (IOW nothing will run on the pCPU
-> > > > > until
-> > > > > they are done).
-> > > > > 
-> > > > > Do you know why Linux is using thread. Is it because of long running
-> > > > > operations?
-> > > > 
-> > > > Yes you are right because of long running operations Linux is using the
-> > > > threaded IRQs.
-> > > > 
-> > > > SMMUv3 reports fault/events bases on memory-based circular buffer queues
-> > > > not
-> > > > based on the register. As per my understanding, it is time-consuming to
-> > > > process the memory based queues in interrupt context because of that
-> > > > Linux
-> > > > is using threaded IRQ to process the faults/events from SMMU.
-> > > > 
-> > > > I didn’t find any other solution in XEN in place of tasklet to defer the
-> > > > work, that’s why I used tasklet in XEN in replacement of threaded IRQs.
-> > > > If
-> > > > we do all work in interrupt context we will make XEN less responsive.
-> > > 
-> > > So we need to make sure that Xen continue to receives interrupts, but we
-> > > also
-> > > need to make sure that a vCPU bound to the pCPU is also responsive.
-> > > 
-> > > > 
-> > > > If you know another solution in XEN that will be used to defer the work
-> > > > in
-> > > > the interrupt please let me know I will try to use that.
-> > > 
-> > > One of my work colleague encountered a similar problem recently. He had a
-> > > long
-> > > running tasklet and wanted to be broken down in smaller chunk.
-> > > 
-> > > We decided to use a timer to reschedule the taslket in the future. This
-> > > allows
-> > > the scheduler to run other loads (e.g. vCPU) for some time.
-> > > 
-> > > This is pretty hackish but I couldn't find a better solution as tasklet
-> > > have
-> > > high priority.
-> > > 
-> > > Maybe the other will have a better idea.
-> > 
-> > Julien's suggestion is a good one.
-> > 
-> > But I think tasklets can be configured to be called from the idle_loop,
-> > in which case they are not run in interrupt context?
-> 
-> Tasklets can either run from the IDLE loop or from a softirq context.
-> 
-> When running from a softirq context is may happen on return from receiving an
-> interrupt. However, interrupts will always be enabled.
-> 
-> So I am not sure what concern you are trying to raise here.
+This patch fixes the problem and adds a DEBUG log line to allow easy
+verification that the domain configuration is being modified.
 
-Not raising any concerns :-)
+Signed-off-by: Paul Durrant <pdurrant@amazon.com>
+---
+Cc: Ian Jackson <iwj@xenproject.org>
+Cc: Wei Liu <wl@xen.org>
+---
+ tools/libs/light/libxl_pci.c | 68 +++++++++++++++++++++++---------------------
+ 1 file changed, 35 insertions(+), 33 deletions(-)
 
-I thought one of the previous statements in this thread implied that
-tasklets are run in interrupt context -- I just wanted to go into
-details on that point as it is relevant.
---8323329-1071560962-1603470205=:12247--
+diff --git a/tools/libs/light/libxl_pci.c b/tools/libs/light/libxl_pci.c
+index c5d73133eb..45685ebec2 100644
+--- a/tools/libs/light/libxl_pci.c
++++ b/tools/libs/light/libxl_pci.c
+@@ -79,39 +79,18 @@ static void libxl__device_from_pci(libxl__gc *gc, uint32_t domid,
+     device->kind = LIBXL__DEVICE_KIND_PCI;
+ }
+ 
+-static int libxl__create_pci_backend(libxl__gc *gc, uint32_t domid,
+-                                     const libxl_device_pci *pci,
+-                                     int num)
++static void libxl__create_pci_backend(libxl__gc *gc, uint32_t domid,
++                                      flexarray_t *front, flexarray_t *back)
+ {
+-    flexarray_t *front = NULL;
+-    flexarray_t *back = NULL;
+-    libxl__device device;
+-    int i;
+-
+-    front = flexarray_make(gc, 16, 1);
+-    back = flexarray_make(gc, 16, 1);
+-
+     LOGD(DEBUG, domid, "Creating pci backend");
+ 
+-    /* add pci device */
+-    libxl__device_from_pci(gc, domid, pci, &device);
+-
+     flexarray_append_pair(back, "frontend-id", GCSPRINTF("%d", domid));
+-    flexarray_append_pair(back, "online", "1");
++    flexarray_append_pair(back, "online", GCSPRINTF("%d", 1));
+     flexarray_append_pair(back, "state", GCSPRINTF("%d", XenbusStateInitialising));
+     flexarray_append_pair(back, "domain", libxl__domid_to_name(gc, domid));
+ 
+-    for (i = 0; i < num; i++, pci++)
+-        libxl_create_pci_backend_device(gc, back, i, pci);
+-
+-    flexarray_append_pair(back, "num_devs", GCSPRINTF("%d", num));
+     flexarray_append_pair(front, "backend-id", GCSPRINTF("%d", 0));
+     flexarray_append_pair(front, "state", GCSPRINTF("%d", XenbusStateInitialising));
+-
+-    return libxl__device_generic_add(gc, XBT_NULL, &device,
+-                                     libxl__xs_kvs_of_flexarray(gc, back),
+-                                     libxl__xs_kvs_of_flexarray(gc, front),
+-                                     NULL);
+ }
+ 
+ static int libxl__device_pci_add_xenstore(libxl__gc *gc,
+@@ -119,7 +98,7 @@ static int libxl__device_pci_add_xenstore(libxl__gc *gc,
+                                           const libxl_device_pci *pci,
+                                           bool starting)
+ {
+-    flexarray_t *back;
++    flexarray_t *front, *back;
+     char *num_devs, *be_path;
+     int num = 0;
+     xs_transaction_t t = XBT_NULL;
+@@ -127,16 +106,22 @@ static int libxl__device_pci_add_xenstore(libxl__gc *gc,
+     libxl_domain_config d_config;
+     libxl__flock *lock = NULL;
+     bool is_stubdomain = libxl_is_stubdom(CTX, domid, NULL);
++    libxl__device device;
++
++    libxl__device_from_pci(gc, domid, pci, &device);
+ 
+     /* Stubdomain doesn't have own config. */
+     if (!is_stubdomain)
+         libxl_domain_config_init(&d_config);
+ 
++    front = flexarray_make(gc, 16, 1);
++    back = flexarray_make(gc, 16, 1);
++
+     be_path = libxl__domain_device_backend_path(gc, 0, domid, 0,
+                                                 LIBXL__DEVICE_KIND_PCI);
+     num_devs = libxl__xs_read(gc, XBT_NULL, GCSPRINTF("%s/num_devs", be_path));
+     if (!num_devs)
+-        return libxl__create_pci_backend(gc, domid, pci, 1);
++        libxl__create_pci_backend(gc, domid, front, back);
+ 
+     libxl_domain_type domtype = libxl__domain_type(gc, domid);
+     if (domtype == LIBXL_DOMAIN_TYPE_INVALID)
+@@ -147,13 +132,11 @@ static int libxl__device_pci_add_xenstore(libxl__gc *gc,
+             return ERROR_FAIL;
+     }
+ 
+-    back = flexarray_make(gc, 16, 1);
+-
+     LOGD(DEBUG, domid, "Adding new pci device to xenstore");
+-    num = atoi(num_devs);
++    num = num_devs ? atoi(num_devs) : 0;
+     libxl_create_pci_backend_device(gc, back, num, pci);
+     flexarray_append_pair(back, "num_devs", GCSPRINTF("%d", num + 1));
+-    if (!starting)
++    if (num && !starting)
+         flexarray_append_pair(back, "state", GCSPRINTF("%d", XenbusStateReconfiguring));
+ 
+     /*
+@@ -170,6 +153,7 @@ static int libxl__device_pci_add_xenstore(libxl__gc *gc,
+         rc = libxl__get_domain_configuration(gc, domid, &d_config);
+         if (rc) goto out;
+ 
++        LOGD(DEBUG, domid, "Adding new pci device to config");
+         device_add_domain_config(gc, &d_config, &libxl__pci_devtype,
+                                  pci);
+ 
+@@ -186,7 +170,10 @@ static int libxl__device_pci_add_xenstore(libxl__gc *gc,
+             if (rc) goto out;
+         }
+ 
+-        libxl__xs_writev(gc, t, be_path, libxl__xs_kvs_of_flexarray(gc, back));
++        libxl__device_generic_add(gc, t, &device,
++                                  libxl__xs_kvs_of_flexarray(gc, back),
++                                  libxl__xs_kvs_of_flexarray(gc, front),
++                                  NULL);
+ 
+         rc = libxl__xs_transaction_commit(gc, &t);
+         if (!rc) break;
+@@ -1711,8 +1698,23 @@ static void add_pcis_done(libxl__egc *egc, libxl__multidev *multidev,
+     if (rc) goto out;
+ 
+     if (d_config->num_pcis > 0 && !libxl_get_stubdom_id(CTX, domid)) {
+-        rc = libxl__create_pci_backend(gc, domid, d_config->pcis,
+-                                       d_config->num_pcis);
++        flexarray_t *front, *back;
++        unsigned int i;
++        libxl__device device;
++
++        libxl__device_from_pci(gc, domid, &d_config->pcis[0], &device);
++
++        front = flexarray_make(gc, 16, 1);
++        back = flexarray_make(gc, 16, 1);
++
++        libxl__create_pci_backend(gc, domid, front, back);
++        for (i = 0; i < d_config->num_pcis; i++)
++            libxl_create_pci_backend_device(gc, back, i, &d_config->pcis[i]);
++
++        rc = libxl__device_generic_add(gc, XBT_NULL, &device,
++                                       libxl__xs_kvs_of_flexarray(gc, back),
++                                       libxl__xs_kvs_of_flexarray(gc, front),
++                                       NULL);
+         if (rc < 0) {
+             LOGD(ERROR, domid, "libxl_create_pci_backend failed: %d", rc);
+             goto out;
+-- 
+2.11.0
+
 
