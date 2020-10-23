@@ -2,28 +2,29 @@ Return-Path: <SRS0=ydFR=D6=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,UNPARSEABLE_RELAY,URIBL_BLOCKED autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D0ED6C388F9
-	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2020 14:20:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B7D2C4363A
+	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2020 14:28:31 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4CC0121527
-	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2020 14:20:02 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id B688321527
+	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2020 14:28:30 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="PJVlFY6x"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4CC0121527
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
+	dkim=pass (1024-bit key) header.d=armh.onmicrosoft.com header.i=@armh.onmicrosoft.com header.b="sCJOz2AJ";
+	dkim=pass (1024-bit key) header.d=armh.onmicrosoft.com header.i=@armh.onmicrosoft.com header.b="sCJOz2AJ"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B688321527
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.11014.29241 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.11029.29277 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kVxuw-0000np-K4; Fri, 23 Oct 2020 14:19:42 +0000
+	id 1kVy37-0002Bd-6w; Fri, 23 Oct 2020 14:28:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 11014.29241; Fri, 23 Oct 2020 14:19:42 +0000
+Received: by outflank-mailman (output) from mailman id 11029.29277; Fri, 23 Oct 2020 14:28:09 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,700 +39,286 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kVxuw-0000ni-Gl; Fri, 23 Oct 2020 14:19:42 +0000
-Received: by outflank-mailman (input) for mailman id 11014;
- Fri, 23 Oct 2020 14:19:41 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=H00l=D6=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kVxuv-0000nb-9H
- for xen-devel@lists.xenproject.org; Fri, 23 Oct 2020 14:19:41 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 0940eab8-7c47-487b-90cb-c3622471516b;
- Fri, 23 Oct 2020 14:19:38 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 2CDCCB2A4;
- Fri, 23 Oct 2020 14:19:37 +0000 (UTC)
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+	id 1kVy37-0002BW-2w; Fri, 23 Oct 2020 14:28:09 +0000
+Received: by outflank-mailman (input) for mailman id 11029;
+ Fri, 23 Oct 2020 14:28:07 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=SP8M=D6=arm.com=rahul.singh@srs-us1.protection.inumbo.net>)
+ id 1kVy35-0002BR-CW
+ for xen-devel@lists.xenproject.org; Fri, 23 Oct 2020 14:28:07 +0000
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com (unknown
+ [40.107.20.82]) by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id aea0c86f-7828-475e-99ee-edcdfdce41c3;
+ Fri, 23 Oct 2020 14:28:04 +0000 (UTC)
+Received: from AM0PR03CA0075.eurprd03.prod.outlook.com (2603:10a6:208:69::16)
+ by DB7PR08MB4217.eurprd08.prod.outlook.com (2603:10a6:10:7d::27) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3477.25; Fri, 23 Oct
+ 2020 14:28:02 +0000
+Received: from AM5EUR03FT057.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:208:69:cafe::6b) by AM0PR03CA0075.outlook.office365.com
+ (2603:10a6:208:69::16) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3499.18 via Frontend
+ Transport; Fri, 23 Oct 2020 14:28:02 +0000
+Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
+ AM5EUR03FT057.mail.protection.outlook.com (10.152.17.44) with
+ Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3499.18 via Frontend Transport; Fri, 23 Oct 2020 14:28:02 +0000
+Received: ("Tessian outbound c189680f801b:v64");
+ Fri, 23 Oct 2020 14:28:01 +0000
+Received: from 9d30bc132b10.1
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com id
+ ECE2E7B6-E366-48D1-86B3-E0CCFAF129CA.1; 
+ Fri, 23 Oct 2020 14:27:56 +0000
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 9d30bc132b10.1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
+ Fri, 23 Oct 2020 14:27:56 +0000
+Received: from AM0PR08MB3490.eurprd08.prod.outlook.com (2603:10a6:208:e4::28)
+ by AM0PR08MB4322.eurprd08.prod.outlook.com (2603:10a6:208:148::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3477.21; Fri, 23 Oct
+ 2020 14:27:54 +0000
+Received: from AM0PR08MB3490.eurprd08.prod.outlook.com
+ ([fe80::49fa:5525:9ab4:edd5]) by AM0PR08MB3490.eurprd08.prod.outlook.com
+ ([fe80::49fa:5525:9ab4:edd5%7]) with mapi id 15.20.3477.028; Fri, 23 Oct 2020
+ 14:27:54 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=H00l=D6=suse.com=jgross@srs-us1.protection.inumbo.net>)
-	id 1kVxuv-0000nb-9H
-	for xen-devel@lists.xenproject.org; Fri, 23 Oct 2020 14:19:41 +0000
-X-Inumbo-ID: 0940eab8-7c47-487b-90cb-c3622471516b
-Received: from mx2.suse.de (unknown [195.135.220.15])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 0940eab8-7c47-487b-90cb-c3622471516b;
-	Fri, 23 Oct 2020 14:19:38 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1603462777;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=iY9Qn8kSLsYhVemyYxA+92+y1Yj78ZJBQagEpKpdTSU=;
-	b=PJVlFY6xGJL5feekzk/MDJOPK7IQQ0Lq91cCqNE5NDSNzB5fbH+j1ZvcgfJ30gMRrqzNZy
-	TZkCog/srgpj6QIPv+Y/R3AVf97Zn/YT0XdU8NAwxvqYddu3Ac+ylgbabO4nQzi7mjs810
-	cAHMPnkoqBUyoPWHh7RoqcxbxwqCV+Q=
-Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 2CDCCB2A4;
-	Fri, 23 Oct 2020 14:19:37 +0000 (UTC)
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>,
-	Samuel Thibault <samuel.thibault@ens-lyon.org>,
-	Christian Lindig <christian.lindig@citrix.com>,
-	David Scott <dave@recoil.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>
-Subject: [PATCH v2 1/3] tools/libs: move official headers to common directory
-Date: Fri, 23 Oct 2020 16:19:32 +0200
-Message-Id: <20201023141934.20062-2-jgross@suse.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20201023141934.20062-1-jgross@suse.com>
-References: <20201023141934.20062-1-jgross@suse.com>
+	(envelope-from <SRS0=SP8M=D6=arm.com=rahul.singh@srs-us1.protection.inumbo.net>)
+	id 1kVy35-0002BR-CW
+	for xen-devel@lists.xenproject.org; Fri, 23 Oct 2020 14:28:07 +0000
+X-Inumbo-ID: aea0c86f-7828-475e-99ee-edcdfdce41c3
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com (unknown [40.107.20.82])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id aea0c86f-7828-475e-99ee-edcdfdce41c3;
+	Fri, 23 Oct 2020 14:28:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=vm9mTcOrrvUkLftjAZ0Ecc6q0i/efpX7Re7SPqS6ZFw=;
+ b=sCJOz2AJh7tFjENTkJzWE9m8IVdp2csvjDrwLGCMeobIr9mGGTNr/qRpSWd13apt/qmOPjx2RsuJO4L0xIqzr/EPwBfbWDxYkzv3qbpHf3yYuUpuS6jmcWPpW+V1ZbpV3P7H50i30iXTRV6InmGYscvoL2BiNikRtQ9NvgZwg1M=
+Received: from AM0PR03CA0075.eurprd03.prod.outlook.com (2603:10a6:208:69::16)
+ by DB7PR08MB4217.eurprd08.prod.outlook.com (2603:10a6:10:7d::27) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3477.25; Fri, 23 Oct
+ 2020 14:28:02 +0000
+Received: from AM5EUR03FT057.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:208:69:cafe::6b) by AM0PR03CA0075.outlook.office365.com
+ (2603:10a6:208:69::16) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3499.18 via Frontend
+ Transport; Fri, 23 Oct 2020 14:28:02 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
+ smtp.mailfrom=arm.com; lists.xenproject.org; dkim=pass (signature was
+ verified) header.d=armh.onmicrosoft.com;lists.xenproject.org; dmarc=pass
+ action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
+ client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
+Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
+ AM5EUR03FT057.mail.protection.outlook.com (10.152.17.44) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3499.18 via Frontend Transport; Fri, 23 Oct 2020 14:28:02 +0000
+Received: ("Tessian outbound c189680f801b:v64"); Fri, 23 Oct 2020 14:28:01 +0000
+X-CheckRecipientChecked: true
+X-CR-MTA-CID: 95dcc42c71afbb43
+X-CR-MTA-TID: 64aa7808
+Received: from 9d30bc132b10.1
+	by 64aa7808-outbound-1.mta.getcheckrecipient.com id ECE2E7B6-E366-48D1-86B3-E0CCFAF129CA.1;
+	Fri, 23 Oct 2020 14:27:56 +0000
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+    by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 9d30bc132b10.1
+    (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
+    Fri, 23 Oct 2020 14:27:56 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=eQnfDxitdb1NmqiLIAqWan3L5rLfXTiTMr8lgd10kYtl/eSk2t8BpkR53gkFa3Ug48FVdQY1qpFEpfdOu1DOfW3mpkrMX94gq5/tIVVVecElDXL0fbbcBNrzRnPkujEVREJxMYHq2ZOX5jb1fQSlycdFjEZpCf9N9iOdklqRYen0+KthKu8/YzK+Q6bCXvBc/7X1CEY42NW0S+obGLi9+CIDzVv3WLW9zafrIGmHIwXtQxVjySoQRTGOQo/qrzCDdwCfCGCGPYNGTiD1AlDO4oqaqy4uwc824sW45TnupbAPpWRmByLDG8V8IN8wuFoC53waKj1JS2Yb3lj3//TGIw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=vm9mTcOrrvUkLftjAZ0Ecc6q0i/efpX7Re7SPqS6ZFw=;
+ b=m2snCqoMsgKggrG4u7Vsbo/JUneq7422mYyZy/8qzbHFGzz4y7kx3WGM8zqVU0M37WCfqlNqm1wcvrocUqILSyrwrSVrK4NTua9rPl3zhLowxW5gmH4bjM6oUzIC0VHPEGN828N/hFZMhmZ60CibqqB9MQJWP31BXA9/SHEpTQvlohutKzKOgVrUxmKu6Sp0sySeMfarswbH7z6b1G1RX/0n+BSQJMJFnfLQmW6lG8QoPajrn146HzC/WliOAWPtWsw6x5O89lmqvFp/MCqOT1xQ9VtzwkZ0vwGXPJ9CmwpE8M9/1TbvbfJSyOGJrMNqYTq3wCgUxyXlm1PSLDwKxA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=vm9mTcOrrvUkLftjAZ0Ecc6q0i/efpX7Re7SPqS6ZFw=;
+ b=sCJOz2AJh7tFjENTkJzWE9m8IVdp2csvjDrwLGCMeobIr9mGGTNr/qRpSWd13apt/qmOPjx2RsuJO4L0xIqzr/EPwBfbWDxYkzv3qbpHf3yYuUpuS6jmcWPpW+V1ZbpV3P7H50i30iXTRV6InmGYscvoL2BiNikRtQ9NvgZwg1M=
+Received: from AM0PR08MB3490.eurprd08.prod.outlook.com (2603:10a6:208:e4::28)
+ by AM0PR08MB4322.eurprd08.prod.outlook.com (2603:10a6:208:148::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3477.21; Fri, 23 Oct
+ 2020 14:27:54 +0000
+Received: from AM0PR08MB3490.eurprd08.prod.outlook.com
+ ([fe80::49fa:5525:9ab4:edd5]) by AM0PR08MB3490.eurprd08.prod.outlook.com
+ ([fe80::49fa:5525:9ab4:edd5%7]) with mapi id 15.20.3477.028; Fri, 23 Oct 2020
+ 14:27:54 +0000
+From: Rahul Singh <Rahul.Singh@arm.com>
+To: Julien Grall <julien@xen.org>
+CC: Stefano Stabellini <sstabellini@kernel.org>,
+	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Bertrand
+ Marquis <Bertrand.Marquis@arm.com>, Jan Beulich <jbeulich@suse.com>, Paul
+ Durrant <paul@xen.org>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: Re: [XEN PATCH v1] xen/arm : Add support for SMMUv3 driver
+Thread-Topic: [XEN PATCH v1] xen/arm : Add support for SMMUv3 driver
+Thread-Index:
+ AQHWoVvrkmJwOYERdUOadvid1OghFamgw0AAgAEzsQCAAWIugIABA+CAgADBXICAABfBAIAAGI6A
+Date: Fri, 23 Oct 2020 14:27:54 +0000
+Message-ID: <D9F93137-412F-47E5-A55C-85D1F3745618@arm.com>
+References:
+ <b085e894773842ac320b818aa6f84289d0a128ed.1602591365.git.rahul.singh@arm.com>
+ <cd433f0a-ed0b-ce82-c356-d6deaa053a30@xen.org>
+ <BBF09ABE-29A6-4990-8DA2-B44086E9C88C@arm.com>
+ <1082f30e-0ce8-00b1-e120-194ff874a9ba@xen.org>
+ <alpine.DEB.2.21.2010221631440.12247@sstabellini-ThinkPad-T480s>
+ <D8EF4B06-B64D-4264-8C86-DA1B5A1146D2@arm.com>
+ <7314936f-6c1e-5ca6-a33b-973c8e61ba3b@xen.org>
+In-Reply-To: <7314936f-6c1e-5ca6-a33b-973c8e61ba3b@xen.org>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+Authentication-Results-Original: xen.org; dkim=none (message not signed)
+ header.d=none;xen.org; dmarc=none action=none header.from=arm.com;
+x-originating-ip: [217.140.99.251]
+x-ms-publictraffictype: Email
+X-MS-Office365-Filtering-HT: Tenant
+X-MS-Office365-Filtering-Correlation-Id: ed7a999a-4689-488e-96ab-08d8775fd93a
+x-ms-traffictypediagnostic: AM0PR08MB4322:|DB7PR08MB4217:
+x-ms-exchange-transport-forked: True
+X-Microsoft-Antispam-PRVS:
+	<DB7PR08MB4217C089031383681F8117D1FC1A0@DB7PR08MB4217.eurprd08.prod.outlook.com>
+x-checkrecipientrouted: true
+nodisclaimer: true
+x-ms-oob-tlc-oobclassifiers: OLM:10000;OLM:10000;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam-Untrusted: BCL:0;
+X-Microsoft-Antispam-Message-Info-Original:
+ yl6yeMhhbpT5rqmoZgVnP/vXCG1FYuZHmtTjjQ/05gHKLZLoKvfGLFfrhbpKID47TpN0RpgDIKd72gCPsaC62WfjqVB42x+dzTNHoy8kX7UwDWJ5TWre0b+bfzTs8Qm1FF/mkKA2UpdK5+K9KzU5VF6ekfTuBaeEp6eL2pG/d6UjEqL9c3bI6FX3E3w1II+VW3qP0ccomrEYK+nT4ehCGfWbXV982pQ8ePB5/ac3nSAMYnuTz9XbC8DqGJkCbh7rqaspr+g8l1KlarE5hIz55Mc8vYfKhNaDiLvOJBUqXfXv/LSJVbgP19gS/+wAs+rfCYc1jfKYB9nM7jyt5HNoyA==
+X-Forefront-Antispam-Report-Untrusted:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM0PR08MB3490.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39860400002)(366004)(396003)(136003)(346002)(376002)(2616005)(36756003)(8676002)(54906003)(86362001)(8936002)(4326008)(2906002)(26005)(316002)(6506007)(6916009)(53546011)(186003)(33656002)(5660300002)(64756008)(76116006)(478600001)(6512007)(71200400001)(66446008)(66946007)(83380400001)(66476007)(66556008)(6486002)(91956017);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata:
+ lNFhFvFqf3Bd9uZQO2NguR9nZ6bgiegq9vSpvVGH/DorY10dKD5a58/XED+CfbTlhawV2Wd/5VNVhfxj8+Lb1Xb2+QwaC3HpZONNZcFPqnqXqbHul+1eGfLKbhwUbdNn+Lt9+jWSWalX0bJNJH3Xd6HwSCs+WDbMMNpycfivzMvXBkjd3PXYhmd+2fTt7AHIaDoWBxHBAey/EnAPyTqg7agBzY0YlfxlPjAc2GtGM2FV3/jSKjRqg6qoZNSvN4BvVwvX0sriY8qC7Jt1yX0vRF4sXrtdqMNUr7ChmjIyknWoI9QvDyXuI/jNrveKF3ZRAnL5xCtkEkoe9UF0v9uuGXrtk1+eIN0JEKzcHpf9GhrxZkNhGqX3I+2y445qvMuliFl/5JK7xTgMw9E5SE996pjU8NZwiSwXfOMR8rfVOdPCxdaew8zyQi7iQMPPhaVmSv26YP3vNeKAL5HX1xW4z6K/2ZFAg+mo3j9vkKewoZdvpnvM1A/7RTfr3aG0/+56Ja/iVSa7VTEC/T8nauVQ8vU+jaH9BPR9PgofCnGgOOgAVffzWvAjMWHnSaO3OUxSKLKXGXQcBeBjKYyRWHzWqcMZaV71JwiYB4bgeY0wHWIjHUzBk37ohZFNfRLvg5LoJa3KIxrdo9BzOiQgbYwozQ==
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <1A1FFAA1CE5D894696315E8CEFF931E1@eurprd08.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR08MB4322
+Original-Authentication-Results: xen.org; dkim=none (message not signed)
+ header.d=none;xen.org; dmarc=none action=none header.from=arm.com;
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped:
+ AM5EUR03FT057.eop-EUR03.prod.protection.outlook.com
+X-MS-Office365-Filtering-Correlation-Id-Prvs:
+	6548902c-6b5e-481c-4439-08d8775fd4a9
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	Z0NMmMIiAPztH2hCYrE5Zw6jOxiOrvPobLq5cuc2TPxiYVTF1q7qkiOzFGcenT7UCnxx3ZMgbIzIuuMgZbfI5FbBpgUvtWGBSGhX4TdSCY0m5tZOb0dxQjuO1F3DvAN9smQb5FEsG2PZrPXnEaxb6AK9TMF5h3iqklvVBgf3hpj5DhtuGwyrRV/RdRXgjbhYKO5HFcUJoN88HxQVQ23V+f/mlOYrT2y6a1EVtFhbVILnd1y3CBP6vFk6Nr3UmoOgf8tFB/R+thu2rdpzjBpSPKyGscNR/mLOzL17L+x5Ij4e4V3KJSEV+0vrrfc+zbF3WhMoUYOrKTPF9PI32Ggxt4sjY6/ZdIHVu00CTcNVOFiR7hC8SWX9a0XPUkYJ/Da9q1KWYwE63r0UsWFdNZsbmw==
+X-Forefront-Antispam-Report:
+	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(4636009)(136003)(39850400004)(396003)(346002)(376002)(46966005)(316002)(6862004)(186003)(54906003)(2906002)(478600001)(6506007)(33656002)(36906005)(26005)(53546011)(2616005)(336012)(83380400001)(6512007)(8936002)(47076004)(81166007)(36756003)(70206006)(107886003)(5660300002)(356005)(70586007)(8676002)(6486002)(4326008)(82310400003)(82740400003)(86362001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Oct 2020 14:28:02.2445
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: ed7a999a-4689-488e-96ab-08d8775fd93a
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	AM5EUR03FT057.eop-EUR03.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB7PR08MB4217
 
-Instead of each library having an own include directory move the
-official headers to tools/include instead. This will drop the need to
-link those headers to tools/include and there is no need any longer
-to have library-specific include paths when building Xen.
-
-While at it remove setting of the unused variable
-PKG_CONFIG_CFLAGS_LOCAL in libs/*/Makefile.
-
-Signed-off-by: Juergen Gross <jgross@suse.com>
-Acked-by: Christian Lindig <christian.lindig@citrix.com>
-Tested-by: Bertrand Marquis <bertrand.marquis@arm.com>
----
- .gitignore                                    |  5 ++--
- stubdom/mini-os.mk                            |  2 +-
- tools/Rules.mk                                |  5 ++--
- tools/include/Makefile                        |  6 ++++
- tools/{libs/vchan => }/include/libxenvchan.h  |  0
- tools/{libs/light => }/include/libxl.h        |  0
- tools/{libs/light => }/include/libxl_event.h  |  0
- tools/{libs/light => }/include/libxl_json.h   |  0
- tools/{libs/light => }/include/libxl_utils.h  |  0
- tools/{libs/light => }/include/libxl_uuid.h   |  0
- tools/{libs/util => }/include/libxlutil.h     |  0
- tools/{libs/call => }/include/xencall.h       |  0
- tools/{libs/ctrl => }/include/xenctrl.h       |  0
- .../{libs/ctrl => }/include/xenctrl_compat.h  |  0
- .../devicemodel => }/include/xendevicemodel.h |  0
- tools/{libs/evtchn => }/include/xenevtchn.h   |  0
- .../include/xenforeignmemory.h                |  0
- tools/{libs/gnttab => }/include/xengnttab.h   |  0
- tools/{libs/guest => }/include/xenguest.h     |  0
- tools/{libs/hypfs => }/include/xenhypfs.h     |  0
- tools/{libs/stat => }/include/xenstat.h       |  0
- .../compat => include/xenstore-compat}/xs.h   |  0
- .../xenstore-compat}/xs_lib.h                 |  0
- tools/{libs/store => }/include/xenstore.h     |  0
- tools/{xenstore => include}/xenstore_lib.h    |  0
- .../{libs/toolcore => }/include/xentoolcore.h |  0
- .../include/xentoolcore_internal.h            |  0
- tools/{libs/toollog => }/include/xentoollog.h |  0
- tools/libs/call/Makefile                      |  3 --
- tools/libs/ctrl/Makefile                      |  3 --
- tools/libs/devicemodel/Makefile               |  3 --
- tools/libs/evtchn/Makefile                    |  2 --
- tools/libs/foreignmemory/Makefile             |  3 --
- tools/libs/gnttab/Makefile                    |  3 --
- tools/libs/guest/Makefile                     |  3 --
- tools/libs/hypfs/Makefile                     |  3 --
- tools/libs/libs.mk                            | 10 ++-----
- tools/libs/light/Makefile                     | 28 ++++++++-----------
- tools/libs/stat/Makefile                      |  2 --
- tools/libs/store/Makefile                     | 11 +++-----
- tools/libs/toolcore/Makefile                  |  9 +++---
- tools/libs/toollog/Makefile                   |  2 --
- tools/libs/util/Makefile                      |  3 --
- tools/libs/vchan/Makefile                     |  3 --
- tools/ocaml/libs/xentoollog/Makefile          |  2 +-
- tools/ocaml/libs/xentoollog/genlevels.py      |  2 +-
- 46 files changed, 36 insertions(+), 77 deletions(-)
- rename tools/{libs/vchan => }/include/libxenvchan.h (100%)
- rename tools/{libs/light => }/include/libxl.h (100%)
- rename tools/{libs/light => }/include/libxl_event.h (100%)
- rename tools/{libs/light => }/include/libxl_json.h (100%)
- rename tools/{libs/light => }/include/libxl_utils.h (100%)
- rename tools/{libs/light => }/include/libxl_uuid.h (100%)
- rename tools/{libs/util => }/include/libxlutil.h (100%)
- rename tools/{libs/call => }/include/xencall.h (100%)
- rename tools/{libs/ctrl => }/include/xenctrl.h (100%)
- rename tools/{libs/ctrl => }/include/xenctrl_compat.h (100%)
- rename tools/{libs/devicemodel => }/include/xendevicemodel.h (100%)
- rename tools/{libs/evtchn => }/include/xenevtchn.h (100%)
- rename tools/{libs/foreignmemory => }/include/xenforeignmemory.h (100%)
- rename tools/{libs/gnttab => }/include/xengnttab.h (100%)
- rename tools/{libs/guest => }/include/xenguest.h (100%)
- rename tools/{libs/hypfs => }/include/xenhypfs.h (100%)
- rename tools/{libs/stat => }/include/xenstat.h (100%)
- rename tools/{libs/store/include/compat => include/xenstore-compat}/xs.h (100%)
- rename tools/{libs/store/include/compat => include/xenstore-compat}/xs_lib.h (100%)
- rename tools/{libs/store => }/include/xenstore.h (100%)
- rename tools/{xenstore => include}/xenstore_lib.h (100%)
- rename tools/{libs/toolcore => }/include/xentoolcore.h (100%)
- rename tools/{libs/toolcore => }/include/xentoolcore_internal.h (100%)
- rename tools/{libs/toollog => }/include/xentoollog.h (100%)
-
-diff --git a/.gitignore b/.gitignore
-index f6865c9cd8..b346a2abf6 100644
---- a/.gitignore
-+++ b/.gitignore
-@@ -143,7 +143,6 @@ tools/libs/light/test_timedereg
- tools/libs/light/test_fdderegrace
- tools/libs/light/tmp.*
- tools/libs/light/xenlight.pc
--tools/libs/light/include/_*.h
- tools/libs/stat/_paths.h
- tools/libs/stat/headers.chk
- tools/libs/stat/libxenstat.map
-@@ -153,7 +152,6 @@ tools/libs/store/list.h
- tools/libs/store/utils.h
- tools/libs/store/xenstore.pc
- tools/libs/store/xs_lib.c
--tools/libs/store/include/xenstore_lib.h
- tools/libs/util/*.pc
- tools/libs/util/_paths.h
- tools/libs/util/libxlu_cfg_y.output
-@@ -231,7 +229,8 @@ tools/hotplug/Linux/xendomains
- tools/hotplug/NetBSD/rc.d/xencommons
- tools/hotplug/NetBSD/rc.d/xendriverdomain
- tools/include/acpi
--tools/include/*.h
-+tools/include/_libxl*.h
-+tools/include/_xentoolcore_list.h
- tools/include/xen/*
- tools/include/xen-xsm/*
- tools/include/xen-foreign/*.(c|h|size)
-diff --git a/stubdom/mini-os.mk b/stubdom/mini-os.mk
-index 420e9a8771..7e4968e026 100644
---- a/stubdom/mini-os.mk
-+++ b/stubdom/mini-os.mk
-@@ -5,7 +5,7 @@
- # XEN_ROOT
- # MINIOS_TARGET_ARCH
- 
--XENSTORE_CPPFLAGS = -isystem $(XEN_ROOT)/tools/libs/store/include
-+XENSTORE_CPPFLAGS = -isystem $(XEN_ROOT)/tools/include
- TOOLCORE_PATH = $(XEN_ROOT)/stubdom/libs-$(MINIOS_TARGET_ARCH)/toolcore
- TOOLLOG_PATH = $(XEN_ROOT)/stubdom/libs-$(MINIOS_TARGET_ARCH)/toollog
- EVTCHN_PATH = $(XEN_ROOT)/stubdom/libs-$(MINIOS_TARGET_ARCH)/evtchn
-diff --git a/tools/Rules.mk b/tools/Rules.mk
-index f3e0078927..f61da81f4a 100644
---- a/tools/Rules.mk
-+++ b/tools/Rules.mk
-@@ -87,7 +87,7 @@ endif
- define LIB_defs
-  FILENAME_$(1) ?= xen$(1)
-  XEN_libxen$(1) = $$(XEN_ROOT)/tools/libs/$(1)
-- CFLAGS_libxen$(1) = -I$$(XEN_libxen$(1))/include $$(CFLAGS_xeninclude)
-+ CFLAGS_libxen$(1) = $$(CFLAGS_xeninclude)
-  SHDEPS_libxen$(1) = $$(foreach use,$$(USELIBS_$(1)),$$(SHLIB_libxen$$(use)))
-  LDLIBS_libxen$(1) = $$(SHDEPS_libxen$(1)) $$(XEN_libxen$(1))/lib$$(FILENAME_$(1))$$(libextension)
-  SHLIB_libxen$(1) = $$(SHDEPS_libxen$(1)) -Wl,-rpath-link=$$(XEN_libxen$(1))
-@@ -97,8 +97,7 @@ $(foreach lib,$(LIBS_LIBS),$(eval $(call LIB_defs,$(lib))))
- 
- # code which compiles against libxenctrl get __XEN_TOOLS__ and
- # therefore sees the unstable hypercall interfaces.
--CFLAGS_libxenctrl += $(CFLAGS_libxentoollog) $(CFLAGS_libxenforeignmemory) $(CFLAGS_libxendevicemodel) -D__XEN_TOOLS__
--CFLAGS_libxenguest += $(CFLAGS_libxenevtchn) $(CFLAGS_libxenforeignmemory)
-+CFLAGS_libxenctrl += -D__XEN_TOOLS__
- 
- ifeq ($(CONFIG_Linux),y)
- LDLIBS_libxenstore += -ldl
-diff --git a/tools/include/Makefile b/tools/include/Makefile
-index 4d4313b60d..4d4ec5f974 100644
---- a/tools/include/Makefile
-+++ b/tools/include/Makefile
-@@ -1,6 +1,12 @@
- XEN_ROOT = $(CURDIR)/../..
- include $(XEN_ROOT)/tools/Rules.mk
- 
-+# Caution: some tools/libs/*/Makefile generate header files directly in
-+# tools/include, and they do the [un]install actions for those, too.
-+# In case other headers need to be built cwin tools/include this should be
-+# taken into account, i.e. there should be no rules added here for generating
-+# any tools/include/*.h files.
-+
- # Relative to $(XEN_ROOT)/xen/xsm/flask
- FLASK_H_DEPEND := policy/initial_sids
- 
-diff --git a/tools/libs/vchan/include/libxenvchan.h b/tools/include/libxenvchan.h
-similarity index 100%
-rename from tools/libs/vchan/include/libxenvchan.h
-rename to tools/include/libxenvchan.h
-diff --git a/tools/libs/light/include/libxl.h b/tools/include/libxl.h
-similarity index 100%
-rename from tools/libs/light/include/libxl.h
-rename to tools/include/libxl.h
-diff --git a/tools/libs/light/include/libxl_event.h b/tools/include/libxl_event.h
-similarity index 100%
-rename from tools/libs/light/include/libxl_event.h
-rename to tools/include/libxl_event.h
-diff --git a/tools/libs/light/include/libxl_json.h b/tools/include/libxl_json.h
-similarity index 100%
-rename from tools/libs/light/include/libxl_json.h
-rename to tools/include/libxl_json.h
-diff --git a/tools/libs/light/include/libxl_utils.h b/tools/include/libxl_utils.h
-similarity index 100%
-rename from tools/libs/light/include/libxl_utils.h
-rename to tools/include/libxl_utils.h
-diff --git a/tools/libs/light/include/libxl_uuid.h b/tools/include/libxl_uuid.h
-similarity index 100%
-rename from tools/libs/light/include/libxl_uuid.h
-rename to tools/include/libxl_uuid.h
-diff --git a/tools/libs/util/include/libxlutil.h b/tools/include/libxlutil.h
-similarity index 100%
-rename from tools/libs/util/include/libxlutil.h
-rename to tools/include/libxlutil.h
-diff --git a/tools/libs/call/include/xencall.h b/tools/include/xencall.h
-similarity index 100%
-rename from tools/libs/call/include/xencall.h
-rename to tools/include/xencall.h
-diff --git a/tools/libs/ctrl/include/xenctrl.h b/tools/include/xenctrl.h
-similarity index 100%
-rename from tools/libs/ctrl/include/xenctrl.h
-rename to tools/include/xenctrl.h
-diff --git a/tools/libs/ctrl/include/xenctrl_compat.h b/tools/include/xenctrl_compat.h
-similarity index 100%
-rename from tools/libs/ctrl/include/xenctrl_compat.h
-rename to tools/include/xenctrl_compat.h
-diff --git a/tools/libs/devicemodel/include/xendevicemodel.h b/tools/include/xendevicemodel.h
-similarity index 100%
-rename from tools/libs/devicemodel/include/xendevicemodel.h
-rename to tools/include/xendevicemodel.h
-diff --git a/tools/libs/evtchn/include/xenevtchn.h b/tools/include/xenevtchn.h
-similarity index 100%
-rename from tools/libs/evtchn/include/xenevtchn.h
-rename to tools/include/xenevtchn.h
-diff --git a/tools/libs/foreignmemory/include/xenforeignmemory.h b/tools/include/xenforeignmemory.h
-similarity index 100%
-rename from tools/libs/foreignmemory/include/xenforeignmemory.h
-rename to tools/include/xenforeignmemory.h
-diff --git a/tools/libs/gnttab/include/xengnttab.h b/tools/include/xengnttab.h
-similarity index 100%
-rename from tools/libs/gnttab/include/xengnttab.h
-rename to tools/include/xengnttab.h
-diff --git a/tools/libs/guest/include/xenguest.h b/tools/include/xenguest.h
-similarity index 100%
-rename from tools/libs/guest/include/xenguest.h
-rename to tools/include/xenguest.h
-diff --git a/tools/libs/hypfs/include/xenhypfs.h b/tools/include/xenhypfs.h
-similarity index 100%
-rename from tools/libs/hypfs/include/xenhypfs.h
-rename to tools/include/xenhypfs.h
-diff --git a/tools/libs/stat/include/xenstat.h b/tools/include/xenstat.h
-similarity index 100%
-rename from tools/libs/stat/include/xenstat.h
-rename to tools/include/xenstat.h
-diff --git a/tools/libs/store/include/compat/xs.h b/tools/include/xenstore-compat/xs.h
-similarity index 100%
-rename from tools/libs/store/include/compat/xs.h
-rename to tools/include/xenstore-compat/xs.h
-diff --git a/tools/libs/store/include/compat/xs_lib.h b/tools/include/xenstore-compat/xs_lib.h
-similarity index 100%
-rename from tools/libs/store/include/compat/xs_lib.h
-rename to tools/include/xenstore-compat/xs_lib.h
-diff --git a/tools/libs/store/include/xenstore.h b/tools/include/xenstore.h
-similarity index 100%
-rename from tools/libs/store/include/xenstore.h
-rename to tools/include/xenstore.h
-diff --git a/tools/xenstore/xenstore_lib.h b/tools/include/xenstore_lib.h
-similarity index 100%
-rename from tools/xenstore/xenstore_lib.h
-rename to tools/include/xenstore_lib.h
-diff --git a/tools/libs/toolcore/include/xentoolcore.h b/tools/include/xentoolcore.h
-similarity index 100%
-rename from tools/libs/toolcore/include/xentoolcore.h
-rename to tools/include/xentoolcore.h
-diff --git a/tools/libs/toolcore/include/xentoolcore_internal.h b/tools/include/xentoolcore_internal.h
-similarity index 100%
-rename from tools/libs/toolcore/include/xentoolcore_internal.h
-rename to tools/include/xentoolcore_internal.h
-diff --git a/tools/libs/toollog/include/xentoollog.h b/tools/include/xentoollog.h
-similarity index 100%
-rename from tools/libs/toollog/include/xentoollog.h
-rename to tools/include/xentoollog.h
-diff --git a/tools/libs/call/Makefile b/tools/libs/call/Makefile
-index 81c7478efd..4ed201b3b3 100644
---- a/tools/libs/call/Makefile
-+++ b/tools/libs/call/Makefile
-@@ -12,6 +12,3 @@ SRCS-$(CONFIG_NetBSD)  += netbsd.c
- SRCS-$(CONFIG_MiniOS)  += minios.c
- 
- include $(XEN_ROOT)/tools/libs/libs.mk
--
--$(PKG_CONFIG_LOCAL): PKG_CONFIG_INCDIR = $(XEN_libxencall)/include
--$(PKG_CONFIG_LOCAL): PKG_CONFIG_CFLAGS_LOCAL = $(CFLAGS_xeninclude)
-diff --git a/tools/libs/ctrl/Makefile b/tools/libs/ctrl/Makefile
-index 0071226d2a..4185dc3f22 100644
---- a/tools/libs/ctrl/Makefile
-+++ b/tools/libs/ctrl/Makefile
-@@ -62,9 +62,6 @@ $(eval $(genpath-target))
- 
- $(LIB_OBJS) $(PIC_OBJS): _paths.h
- 
--$(PKG_CONFIG_LOCAL): PKG_CONFIG_INCDIR = $(XEN_libxenctrl)/include
--$(PKG_CONFIG_LOCAL): PKG_CONFIG_CFLAGS_LOCAL = $(CFLAGS_xeninclude)
--
- clean: cleanlocal
- 
- .PHONY: cleanlocal
-diff --git a/tools/libs/devicemodel/Makefile b/tools/libs/devicemodel/Makefile
-index 42417958f2..b67fc0fac1 100644
---- a/tools/libs/devicemodel/Makefile
-+++ b/tools/libs/devicemodel/Makefile
-@@ -12,6 +12,3 @@ SRCS-$(CONFIG_NetBSD)  += compat.c
- SRCS-$(CONFIG_MiniOS)  += compat.c
- 
- include $(XEN_ROOT)/tools/libs/libs.mk
--
--$(PKG_CONFIG_LOCAL): PKG_CONFIG_INCDIR = $(XEN_libxendevicemodel)/include
--$(PKG_CONFIG_LOCAL): PKG_CONFIG_CFLAGS_LOCAL = $(CFLAGS_xeninclude)
-diff --git a/tools/libs/evtchn/Makefile b/tools/libs/evtchn/Makefile
-index aec76641e8..ad01a17b3d 100644
---- a/tools/libs/evtchn/Makefile
-+++ b/tools/libs/evtchn/Makefile
-@@ -12,5 +12,3 @@ SRCS-$(CONFIG_NetBSD)  += netbsd.c
- SRCS-$(CONFIG_MiniOS)  += minios.c
- 
- include $(XEN_ROOT)/tools/libs/libs.mk
--
--$(PKG_CONFIG_LOCAL): PKG_CONFIG_INCDIR = $(XEN_libxenevtchn)/include
-diff --git a/tools/libs/foreignmemory/Makefile b/tools/libs/foreignmemory/Makefile
-index cf444d3c1a..13850f7988 100644
---- a/tools/libs/foreignmemory/Makefile
-+++ b/tools/libs/foreignmemory/Makefile
-@@ -12,6 +12,3 @@ SRCS-$(CONFIG_NetBSD)  += compat.c netbsd.c
- SRCS-$(CONFIG_MiniOS)  += minios.c
- 
- include $(XEN_ROOT)/tools/libs/libs.mk
--
--$(PKG_CONFIG_LOCAL): PKG_CONFIG_INCDIR = $(XEN_libxenforeignmemory)/include
--$(PKG_CONFIG_LOCAL): PKG_CONFIG_CFLAGS_LOCAL = $(CFLAGS_xeninclude)
-diff --git a/tools/libs/gnttab/Makefile b/tools/libs/gnttab/Makefile
-index d8d4d55e27..d86c49d243 100644
---- a/tools/libs/gnttab/Makefile
-+++ b/tools/libs/gnttab/Makefile
-@@ -14,6 +14,3 @@ SRCS-$(CONFIG_SunOS)   += gnttab_unimp.c gntshr_unimp.c
- SRCS-$(CONFIG_NetBSD)  += gnttab_unimp.c gntshr_unimp.c
- 
- include $(XEN_ROOT)/tools/libs/libs.mk
--
--$(PKG_CONFIG_LOCAL): PKG_CONFIG_INCDIR = $(XEN_libxengnttab)/include
--$(PKG_CONFIG_LOCAL): PKG_CONFIG_CFLAGS_LOCAL = $(CFLAGS_xeninclude)
-diff --git a/tools/libs/guest/Makefile b/tools/libs/guest/Makefile
-index f24732fbcd..5b4ad313cc 100644
---- a/tools/libs/guest/Makefile
-+++ b/tools/libs/guest/Makefile
-@@ -113,9 +113,6 @@ xc_private.h: _paths.h
- 
- $(LIB_OBJS) $(PIC_OBJS): $(LINK_FILES)
- 
--$(PKG_CONFIG_LOCAL): PKG_CONFIG_INCDIR = $(XEN_libxenctrl)/include
--$(PKG_CONFIG_LOCAL): PKG_CONFIG_CFLAGS_LOCAL = $(CFLAGS_xeninclude)
--
- .PHONY: cleanlocal
- cleanlocal:
- 	rm -f libxenguest.map
-diff --git a/tools/libs/hypfs/Makefile b/tools/libs/hypfs/Makefile
-index 668d68853f..39feca87e8 100644
---- a/tools/libs/hypfs/Makefile
-+++ b/tools/libs/hypfs/Makefile
-@@ -9,6 +9,3 @@ APPEND_LDFLAGS += -lz
- SRCS-y                 += core.c
- 
- include ../libs.mk
--
--$(PKG_CONFIG_LOCAL): PKG_CONFIG_INCDIR = $(XEN_libxenhypfs)/include
--$(PKG_CONFIG_LOCAL): PKG_CONFIG_CFLAGS_LOCAL = $(CFLAGS_xeninclude)
-diff --git a/tools/libs/libs.mk b/tools/libs/libs.mk
-index 325b7b7cea..959ff91a56 100644
---- a/tools/libs/libs.mk
-+++ b/tools/libs/libs.mk
-@@ -47,10 +47,10 @@ endif
- PKG_CONFIG_LOCAL := $(PKG_CONFIG_DIR)/$(PKG_CONFIG)
- 
- LIBHEADER ?= $(LIB_FILE_NAME).h
--LIBHEADERS = $(foreach h, $(LIBHEADER), include/$(h))
--LIBHEADERSGLOB = $(foreach h, $(LIBHEADER), $(XEN_ROOT)/tools/include/$(h))
-+LIBHEADERS = $(foreach h, $(LIBHEADER), $(XEN_INCLUDE)/$(h))
- 
- $(PKG_CONFIG_LOCAL): PKG_CONFIG_PREFIX = $(XEN_ROOT)
-+$(PKG_CONFIG_LOCAL): PKG_CONFIG_INCDIR = $(XEN_INCLUDE)
- $(PKG_CONFIG_LOCAL): PKG_CONFIG_LIBDIR = $(CURDIR)
- 
- .PHONY: all
-@@ -74,14 +74,11 @@ else
- .PHONY: headers.chk
- endif
- 
--headers.chk: $(LIBHEADERSGLOB) $(AUTOINCS)
-+headers.chk: $(AUTOINCS)
- 
- libxen$(LIBNAME).map:
- 	echo 'VERS_$(MAJOR).$(MINOR) { global: *; };' >$@
- 
--$(LIBHEADERSGLOB): $(LIBHEADERS)
--	for i in $(realpath $(LIBHEADERS)); do ln -sf $$i $(XEN_ROOT)/tools/include; done
--
- lib$(LIB_FILE_NAME).a: $(LIB_OBJS)
- 	$(AR) rc $@ $^
- 
-@@ -123,7 +120,6 @@ clean:
- 	rm -f lib$(LIB_FILE_NAME).so.$(MAJOR).$(MINOR) lib$(LIB_FILE_NAME).so.$(MAJOR)
- 	rm -f headers.chk
- 	rm -f $(PKG_CONFIG)
--	rm -f $(LIBHEADERSGLOB)
- 	rm -f _paths.h
- 
- .PHONY: distclean
-diff --git a/tools/libs/light/Makefile b/tools/libs/light/Makefile
-index f58a3214e5..3424fdb61b 100644
---- a/tools/libs/light/Makefile
-+++ b/tools/libs/light/Makefile
-@@ -152,7 +152,7 @@ LIBXL_TEST_OBJS += $(foreach t, $(LIBXL_TESTS_INSIDE),libxl_test_$t.opic)
- TEST_PROG_OBJS += $(foreach t, $(LIBXL_TESTS_PROGS),test_$t.o) test_common.o
- TEST_PROGS += $(foreach t, $(LIBXL_TESTS_PROGS),test_$t)
- 
--AUTOINCS = _libxl_list.h _paths.h _libxl_save_msgs_callout.h _libxl_save_msgs_helper.h
-+AUTOINCS = $(XEN_INCLUDE)/_libxl_list.h _paths.h _libxl_save_msgs_callout.h _libxl_save_msgs_helper.h
- AUTOSRCS = _libxl_save_msgs_callout.c _libxl_save_msgs_helper.c
- 
- CLIENTS = testidl libxl-save-helper
-@@ -165,9 +165,6 @@ NO_HEADERS_CHK := y
- 
- include $(XEN_ROOT)/tools/libs/libs.mk
- 
--$(PKG_CONFIG_LOCAL): PKG_CONFIG_INCDIR = $(CURDIR)
--$(PKG_CONFIG_LOCAL): PKG_CONFIG_CFLAGS_LOCAL = $(CFLAGS_xeninclude)
--
- LDUSELIBS-y += $(PTYFUNCS_LIBS)
- LDUSELIBS-$(CONFIG_LIBNL) += $(LIBNL3_LIBS)
- LDUSELIBS-$(CONFIG_Linux) += -luuid
-@@ -185,7 +182,7 @@ libxl_x86_acpi.o libxl_x86_acpi.opic: CFLAGS += -I$(XEN_ROOT)/tools
- $(SAVE_HELPER_OBJS): CFLAGS += $(CFLAGS_libxenctrl) $(CFLAGS_libxenevtchn) $(CFLAGS_libxenguest)
- 
- testidl.o: CFLAGS += $(CFLAGS_libxenctrl) $(CFLAGS_libxenlight)
--testidl.c: libxl_types.idl gentest.py include/libxl.h $(AUTOINCS)
-+testidl.c: libxl_types.idl gentest.py $(XEN_INCLUDE)/libxl.h $(AUTOINCS)
- 	$(PYTHON) gentest.py libxl_types.idl testidl.c.new
- 	mv testidl.c.new testidl.c
- 
-@@ -200,15 +197,15 @@ libxl.api-ok: check-libxl-api-rules _libxl.api-for-check
- 	$(PERL) $^
- 	touch $@
- 
--_%.api-for-check: include/%.h $(AUTOINCS)
--	$(CC) $(CPPFLAGS) $(CFLAGS) $(CFLAGS_$*.o) -c -E $< $(APPEND_CFLAGS) \
-+_libxl.api-for-check: $(XEN_INCLUDE)/libxl.h $(AUTOINCS)
-+	$(CC) $(CPPFLAGS) $(CFLAGS) $(CFLAGS_libxl.o) -c -E $< $(APPEND_CFLAGS) \
- 		-DLIBXL_EXTERNAL_CALLERS_ONLY=LIBXL_EXTERNAL_CALLERS_ONLY \
- 		>$@.new
- 	mv -f $@.new $@
- 
--_libxl_list.h: $(XEN_INCLUDE)/xen-external/bsd-sys-queue-h-seddery $(XEN_INCLUDE)/xen-external/bsd-sys-queue.h
--	$(PERL) $^ --prefix=libxl >$@.new
--	$(call move-if-changed,$@.new,$@)
-+$(XEN_INCLUDE)/_libxl_list.h: $(XEN_INCLUDE)/xen-external/bsd-sys-queue-h-seddery $(XEN_INCLUDE)/xen-external/bsd-sys-queue.h
-+	$(PERL) $^ --prefix=libxl >$(notdir $@).new
-+	$(call move-if-changed,$(notdir $@).new,$@)
- 
- _libxl_save_msgs_helper.c _libxl_save_msgs_callout.c \
- _libxl_save_msgs_helper.h _libxl_save_msgs_callout.h: \
-@@ -216,13 +213,13 @@ _libxl_save_msgs_helper.h _libxl_save_msgs_callout.h: \
- 	$(PERL) -w $< $@ >$@.new
- 	$(call move-if-changed,$@.new,$@)
- 
--include/libxl.h: _libxl_types.h _libxl_list.h
--include/libxl_json.h: _libxl_types_json.h
-+$(XEN_INCLUDE)/libxl.h: $(XEN_INCLUDE)/_libxl_types.h $(XEN_INCLUDE)/_libxl_list.h
-+$(XEN_INCLUDE)/libxl_json.h: $(XEN_INCLUDE)/_libxl_types_json.h
- libxl_internal.h: _libxl_types_internal.h _libxl_types_private.h _libxl_types_internal_private.h _paths.h
- libxl_internal_json.h: _libxl_types_internal_json.h
- xl.h: _paths.h
- 
--$(LIB_OBJS) $(PIC_OBJS) $(LIBXL_TEST_OBJS) $(TEST_PROG_OBJS) $(SAVE_HELPER_OBJS): include/libxl.h
-+$(LIB_OBJS) $(PIC_OBJS) $(LIBXL_TEST_OBJS) $(TEST_PROG_OBJS) $(SAVE_HELPER_OBJS): $(XEN_INCLUDE)/libxl.h
- $(LIB_OBJS) $(PIC_OBJS) $(LIBXL_TEST_OBJS): libxl_internal.h
- 
- _libxl_type%.h _libxl_type%_json.h _libxl_type%_private.h _libxl_type%.c: libxl_type%.idl gentypes.py idl.py
-@@ -234,8 +231,8 @@ _libxl_type%.h _libxl_type%_json.h _libxl_type%_private.h _libxl_type%.c: libxl_
- 	$(call move-if-changed,__libxl_type$(stem)_json.h,_libxl_type$(stem)_json.h)
- 	$(call move-if-changed,__libxl_type$(stem).c,_libxl_type$(stem).c)
- 
--include/_%.h: _%.h
--	cp $< $@
-+$(XEN_INCLUDE)/_%.h: _%.h
-+	$(call move-if-changed,_$*.h,$(XEN_INCLUDE)/_$*.h)
- 
- libxenlight_test.so: $(PIC_OBJS) $(LIBXL_TEST_OBJS)
- 	$(CC) $(LDFLAGS) -Wl,$(SONAME_LDFLAG) -Wl,libxenlight.so.$(MAJOR) $(SHLIB_LDFLAGS) -o $@ $^ $(LDUSELIBS) $(APPEND_LDFLAGS)
-@@ -271,7 +268,6 @@ cleanlocal:
- 	$(RM) -f testidl.c.new testidl.c *.api-ok
- 	$(RM) -f $(TEST_PROGS)
- 	$(RM) -rf __pycache__
--	$(RM) -f include/_*.h
- 	$(RM) -f libxenlight.map
- 	$(RM) -f $(AUTOSRCS) $(AUTOINCS)
- 	$(MAKE) -C $(ACPI_PATH) ACPI_BUILD_DIR=$(CURDIR) clean
-diff --git a/tools/libs/stat/Makefile b/tools/libs/stat/Makefile
-index 5463f5f7ca..8353e96946 100644
---- a/tools/libs/stat/Makefile
-+++ b/tools/libs/stat/Makefile
-@@ -30,8 +30,6 @@ APPEND_LDFLAGS += $(LDLIBS-y)
- 
- include $(XEN_ROOT)/tools/libs/libs.mk
- 
--$(PKG_CONFIG_LOCAL): PKG_CONFIG_INCDIR = $(XEN_libxenstat)/include
--
- $(LIB_OBJS): _paths.h
- 
- PYLIB=bindings/swig/python/_xenstat.so
-diff --git a/tools/libs/store/Makefile b/tools/libs/store/Makefile
-index 4da502646e..930e763de9 100644
---- a/tools/libs/store/Makefile
-+++ b/tools/libs/store/Makefile
-@@ -21,12 +21,12 @@ CFLAGS += $(CFLAGS_libxentoolcore)
- CFLAGS += -DXEN_LIB_STORED="\"$(XEN_LIB_STORED)\""
- CFLAGS += -DXEN_RUN_STORED="\"$(XEN_RUN_STORED)\""
- 
--LINK_FILES = xs_lib.c include/xenstore_lib.h list.h utils.h
-+LINK_FILES = xs_lib.c list.h utils.h
- 
- $(LIB_OBJS): $(LINK_FILES)
- 
- $(LINK_FILES):
--	ln -sf $(XEN_ROOT)/tools/xenstore/$(notdir $@) $@
-+	ln -sf $(XEN_ROOT)/tools/xenstore/$@ $@
- 
- xs.opic: CFLAGS += -DUSE_PTHREAD
- ifeq ($(CONFIG_Linux),y)
-@@ -35,9 +35,6 @@ else
- PKG_CONFIG_REMOVE += -ldl
- endif
- 
--$(PKG_CONFIG_LOCAL): PKG_CONFIG_INCDIR = $(XEN_libxenstore)/include
--$(PKG_CONFIG_LOCAL): PKG_CONFIG_CFLAGS_LOCAL = $(CFLAGS_xeninclude)
--
- .PHONY: install
- install: install-headers
- 
-@@ -45,8 +42,8 @@ install: install-headers
- install-headers:
- 	$(INSTALL_DIR) $(DESTDIR)$(includedir)
- 	$(INSTALL_DIR) $(DESTDIR)$(includedir)/xenstore-compat
--	$(INSTALL_DATA) include/compat/xs.h $(DESTDIR)$(includedir)/xenstore-compat/xs.h
--	$(INSTALL_DATA) include/compat/xs_lib.h $(DESTDIR)$(includedir)/xenstore-compat/xs_lib.h
-+	$(INSTALL_DATA) $(XEN_INCLUDE)/xenstore-compat/xs.h $(DESTDIR)$(includedir)/xenstore-compat/xs.h
-+	$(INSTALL_DATA) $(XEN_INCLUDE)/xenstore-compat/xs_lib.h $(DESTDIR)$(includedir)/xenstore-compat/xs_lib.h
- 	ln -sf xenstore-compat/xs.h  $(DESTDIR)$(includedir)/xs.h
- 	ln -sf xenstore-compat/xs_lib.h $(DESTDIR)$(includedir)/xs_lib.h
- 
-diff --git a/tools/libs/toolcore/Makefile b/tools/libs/toolcore/Makefile
-index 5819bbc8ee..1cf30733c9 100644
---- a/tools/libs/toolcore/Makefile
-+++ b/tools/libs/toolcore/Makefile
-@@ -3,18 +3,17 @@ include $(XEN_ROOT)/tools/Rules.mk
- 
- MAJOR	= 1
- MINOR	= 0
--AUTOINCS := include/_xentoolcore_list.h
-+AUTOINCS := $(XEN_INCLUDE)/_xentoolcore_list.h
- 
- SRCS-y	+= handlereg.c
- 
- include $(XEN_ROOT)/tools/libs/libs.mk
- 
- PKG_CONFIG_DESC := Central support for Xen Hypervisor userland libraries
--$(PKG_CONFIG_LOCAL): PKG_CONFIG_INCDIR = $(XEN_libxentoolcore)/include
- 
- $(LIB_OBJS): $(AUTOINCS)
- $(PIC_OBJS): $(AUTOINCS)
- 
--include/_xentoolcore_list.h: $(XEN_INCLUDE)/xen-external/bsd-sys-queue-h-seddery $(XEN_INCLUDE)/xen-external/bsd-sys-queue.h
--	$(PERL) $^ --prefix=xentoolcore >$@.new
--	$(call move-if-changed,$@.new,$@)
-+$(XEN_INCLUDE)/_xentoolcore_list.h: $(XEN_INCLUDE)/xen-external/bsd-sys-queue-h-seddery $(XEN_INCLUDE)/xen-external/bsd-sys-queue.h
-+	$(PERL) $^ --prefix=xentoolcore >$(notdir $@).new
-+	$(call move-if-changed,$(notdir $@).new,$@)
-diff --git a/tools/libs/toollog/Makefile b/tools/libs/toollog/Makefile
-index 3f986835d6..dce1b2de85 100644
---- a/tools/libs/toollog/Makefile
-+++ b/tools/libs/toollog/Makefile
-@@ -8,5 +8,3 @@ SRCS-y	+= xtl_core.c
- SRCS-y	+= xtl_logger_stdio.c
- 
- include $(XEN_ROOT)/tools/libs/libs.mk
--
--$(PKG_CONFIG_LOCAL): PKG_CONFIG_INCDIR = $(XEN_libxentoollog)/include
-diff --git a/tools/libs/util/Makefile b/tools/libs/util/Makefile
-index 0c9db8027d..b739360be7 100644
---- a/tools/libs/util/Makefile
-+++ b/tools/libs/util/Makefile
-@@ -39,9 +39,6 @@ NO_HEADERS_CHK := y
- 
- include $(XEN_ROOT)/tools/libs/libs.mk
- 
--$(PKG_CONFIG_LOCAL): PKG_CONFIG_INCDIR = $(XEN_libxenutil)/include
--$(PKG_CONFIG_LOCAL): PKG_CONFIG_CFLAGS_LOCAL = $(CFLAGS_xeninclude)
--
- $(LIB_OBJS) $(PIC_OBJS): $(AUTOINCS) _paths.h
- 
- %.c %.h:: %.y
-diff --git a/tools/libs/vchan/Makefile b/tools/libs/vchan/Makefile
-index 5e18d5b196..83a45d2817 100644
---- a/tools/libs/vchan/Makefile
-+++ b/tools/libs/vchan/Makefile
-@@ -12,9 +12,6 @@ NO_HEADERS_CHK := y
- 
- include $(XEN_ROOT)/tools/libs/libs.mk
- 
--$(PKG_CONFIG_LOCAL): PKG_CONFIG_INCDIR = $(XEN_libxenvchan)/include
--$(PKG_CONFIG_LOCAL): PKG_CONFIG_CFLAGS_LOCAL = $(CFLAGS_xeninclude)
--
- clean: cleanlocal
- 
- .PHONY: cleanlocal
-diff --git a/tools/ocaml/libs/xentoollog/Makefile b/tools/ocaml/libs/xentoollog/Makefile
-index 8ae0a784fd..593f9e9e9d 100644
---- a/tools/ocaml/libs/xentoollog/Makefile
-+++ b/tools/ocaml/libs/xentoollog/Makefile
-@@ -49,7 +49,7 @@ xentoollog.mli: xentoollog.mli.in _xtl_levels.mli.in
- 
- libs: $(LIBS)
- 
--_xtl_levels.ml.in _xtl_levels.mli.in _xtl_levels.inc: genlevels.py $(XEN_ROOT)/tools/libs/toollog/include/xentoollog.h
-+_xtl_levels.ml.in _xtl_levels.mli.in _xtl_levels.inc: genlevels.py $(XEN_INCLUDE)/xentoollog.h
- 	$(PYTHON) genlevels.py _xtl_levels.mli.in _xtl_levels.ml.in _xtl_levels.inc
- 
- .PHONY: install
-diff --git a/tools/ocaml/libs/xentoollog/genlevels.py b/tools/ocaml/libs/xentoollog/genlevels.py
-index f9cf853e26..11a623e459 100755
---- a/tools/ocaml/libs/xentoollog/genlevels.py
-+++ b/tools/ocaml/libs/xentoollog/genlevels.py
-@@ -6,7 +6,7 @@ import sys
- from functools import reduce
- 
- def read_levels():
--	f = open('../../../libs/toollog/include/xentoollog.h', 'r')
-+	f = open('../../../include/xentoollog.h', 'r')
- 
- 	levels = []
- 	record = False
--- 
-2.26.2
-
+SGVsbG8gSnVsaWVuLA0KDQo+IE9uIDIzIE9jdCAyMDIwLCBhdCAyOjAwIHBtLCBKdWxpZW4gR3Jh
+bGwgPGp1bGllbkB4ZW4ub3JnPiB3cm90ZToNCj4gDQo+IA0KPiANCj4gT24gMjMvMTAvMjAyMCAx
+MjozNSwgUmFodWwgU2luZ2ggd3JvdGU6DQo+PiBIZWxsbywNCj4+PiBPbiAyMyBPY3QgMjAyMCwg
+YXQgMTowMiBhbSwgU3RlZmFubyBTdGFiZWxsaW5pIDxzc3RhYmVsbGluaUBrZXJuZWwub3JnPiB3
+cm90ZToNCj4+PiANCj4+PiBPbiBUaHUsIDIyIE9jdCAyMDIwLCBKdWxpZW4gR3JhbGwgd3JvdGU6
+DQo+Pj4+Pj4gT24gMjAvMTAvMjAyMCAxNjoyNSwgUmFodWwgU2luZ2ggd3JvdGU6DQo+Pj4+Pj4+
+IEFkZCBzdXBwb3J0IGZvciBBUk0gYXJjaGl0ZWN0ZWQgU01NVXYzIGltcGxlbWVudGF0aW9ucy4g
+SXQgaXMgYmFzZWQgb24NCj4+Pj4+Pj4gdGhlIExpbnV4IFNNTVV2MyBkcml2ZXIuDQo+Pj4+Pj4+
+IE1ham9yIGRpZmZlcmVuY2VzIGJldHdlZW4gdGhlIExpbnV4IGRyaXZlciBhcmUgYXMgZm9sbG93
+czoNCj4+Pj4+Pj4gMS4gT25seSBTdGFnZS0yIHRyYW5zbGF0aW9uIGlzIHN1cHBvcnRlZCBhcyBj
+b21wYXJlZCB0byB0aGUgTGludXggZHJpdmVyDQo+Pj4+Pj4+ICAgIHRoYXQgc3VwcG9ydHMgYm90
+aCBTdGFnZS0xIGFuZCBTdGFnZS0yIHRyYW5zbGF0aW9ucy4NCj4+Pj4+Pj4gMi4gVXNlIFAyTSAg
+cGFnZSB0YWJsZSBpbnN0ZWFkIG9mIGNyZWF0aW5nIG9uZSBhcyBTTU1VdjMgaGFzIHRoZQ0KPj4+
+Pj4+PiAgICBjYXBhYmlsaXR5IHRvIHNoYXJlIHRoZSBwYWdlIHRhYmxlcyB3aXRoIHRoZSBDUFUu
+DQo+Pj4+Pj4+IDMuIFRhc2tsZXRzIGlzIHVzZWQgaW4gcGxhY2Ugb2YgdGhyZWFkZWQgSVJRJ3Mg
+aW4gTGludXggZm9yIGV2ZW50IHF1ZXVlDQo+Pj4+Pj4+ICAgIGFuZCBwcmlvcml0eSBxdWV1ZSBJ
+UlEgaGFuZGxpbmcuDQo+Pj4+Pj4gDQo+Pj4+Pj4gVGFza2xldHMgYXJlIG5vdCBhIHJlcGxhY2Vt
+ZW50IGZvciB0aHJlYWRlZCBJUlEuIEluIHBhcnRpY3VsYXIsIHRoZXkgd2lsbA0KPj4+Pj4+IGhh
+dmUgcHJpb3JpdHkgb3ZlciBhbnl0aGluZyBlbHNlIChJT1cgbm90aGluZyB3aWxsIHJ1biBvbiB0
+aGUgcENQVSB1bnRpbA0KPj4+Pj4+IHRoZXkgYXJlIGRvbmUpLg0KPj4+Pj4+IA0KPj4+Pj4+IERv
+IHlvdSBrbm93IHdoeSBMaW51eCBpcyB1c2luZyB0aHJlYWQuIElzIGl0IGJlY2F1c2Ugb2YgbG9u
+ZyBydW5uaW5nDQo+Pj4+Pj4gb3BlcmF0aW9ucz8NCj4+Pj4+IA0KPj4+Pj4gWWVzIHlvdSBhcmUg
+cmlnaHQgYmVjYXVzZSBvZiBsb25nIHJ1bm5pbmcgb3BlcmF0aW9ucyBMaW51eCBpcyB1c2luZyB0
+aGUNCj4+Pj4+IHRocmVhZGVkIElSUXMuDQo+Pj4+PiANCj4+Pj4+IFNNTVV2MyByZXBvcnRzIGZh
+dWx0L2V2ZW50cyBiYXNlcyBvbiBtZW1vcnktYmFzZWQgY2lyY3VsYXIgYnVmZmVyIHF1ZXVlcyBu
+b3QNCj4+Pj4+IGJhc2VkIG9uIHRoZSByZWdpc3Rlci4gQXMgcGVyIG15IHVuZGVyc3RhbmRpbmcs
+IGl0IGlzIHRpbWUtY29uc3VtaW5nIHRvDQo+Pj4+PiBwcm9jZXNzIHRoZSBtZW1vcnkgYmFzZWQg
+cXVldWVzIGluIGludGVycnVwdCBjb250ZXh0IGJlY2F1c2Ugb2YgdGhhdCBMaW51eA0KPj4+Pj4g
+aXMgdXNpbmcgdGhyZWFkZWQgSVJRIHRvIHByb2Nlc3MgdGhlIGZhdWx0cy9ldmVudHMgZnJvbSBT
+TU1VLg0KPj4+Pj4gDQo+Pj4+PiBJIGRpZG7igJl0IGZpbmQgYW55IG90aGVyIHNvbHV0aW9uIGlu
+IFhFTiBpbiBwbGFjZSBvZiB0YXNrbGV0IHRvIGRlZmVyIHRoZQ0KPj4+Pj4gd29yaywgdGhhdOKA
+mXMgd2h5IEkgdXNlZCB0YXNrbGV0IGluIFhFTiBpbiByZXBsYWNlbWVudCBvZiB0aHJlYWRlZCBJ
+UlFzLiBJZg0KPj4+Pj4gd2UgZG8gYWxsIHdvcmsgaW4gaW50ZXJydXB0IGNvbnRleHQgd2Ugd2ls
+bCBtYWtlIFhFTiBsZXNzIHJlc3BvbnNpdmUuDQo+Pj4+IA0KPj4+PiBTbyB3ZSBuZWVkIHRvIG1h
+a2Ugc3VyZSB0aGF0IFhlbiBjb250aW51ZSB0byByZWNlaXZlcyBpbnRlcnJ1cHRzLCBidXQgd2Ug
+YWxzbw0KPj4+PiBuZWVkIHRvIG1ha2Ugc3VyZSB0aGF0IGEgdkNQVSBib3VuZCB0byB0aGUgcENQ
+VSBpcyBhbHNvIHJlc3BvbnNpdmUuDQo+Pj4+IA0KPj4+Pj4gDQo+Pj4+PiBJZiB5b3Uga25vdyBh
+bm90aGVyIHNvbHV0aW9uIGluIFhFTiB0aGF0IHdpbGwgYmUgdXNlZCB0byBkZWZlciB0aGUgd29y
+ayBpbg0KPj4+Pj4gdGhlIGludGVycnVwdCBwbGVhc2UgbGV0IG1lIGtub3cgSSB3aWxsIHRyeSB0
+byB1c2UgdGhhdC4NCj4+Pj4gDQo+Pj4+IE9uZSBvZiBteSB3b3JrIGNvbGxlYWd1ZSBlbmNvdW50
+ZXJlZCBhIHNpbWlsYXIgcHJvYmxlbSByZWNlbnRseS4gSGUgaGFkIGEgbG9uZw0KPj4+PiBydW5u
+aW5nIHRhc2tsZXQgYW5kIHdhbnRlZCB0byBiZSBicm9rZW4gZG93biBpbiBzbWFsbGVyIGNodW5r
+Lg0KPj4+PiANCj4+Pj4gV2UgZGVjaWRlZCB0byB1c2UgYSB0aW1lciB0byByZXNjaGVkdWxlIHRo
+ZSB0YXNsa2V0IGluIHRoZSBmdXR1cmUuIFRoaXMgYWxsb3dzDQo+Pj4+IHRoZSBzY2hlZHVsZXIg
+dG8gcnVuIG90aGVyIGxvYWRzIChlLmcuIHZDUFUpIGZvciBzb21lIHRpbWUuDQo+Pj4+IA0KPj4+
+PiBUaGlzIGlzIHByZXR0eSBoYWNraXNoIGJ1dCBJIGNvdWxkbid0IGZpbmQgYSBiZXR0ZXIgc29s
+dXRpb24gYXMgdGFza2xldCBoYXZlDQo+Pj4+IGhpZ2ggcHJpb3JpdHkuDQo+Pj4+IA0KPj4+PiBN
+YXliZSB0aGUgb3RoZXIgd2lsbCBoYXZlIGEgYmV0dGVyIGlkZWEuDQo+Pj4gDQo+Pj4gSnVsaWVu
+J3Mgc3VnZ2VzdGlvbiBpcyBhIGdvb2Qgb25lLg0KPj4+IA0KPj4+IEJ1dCBJIHRoaW5rIHRhc2ts
+ZXRzIGNhbiBiZSBjb25maWd1cmVkIHRvIGJlIGNhbGxlZCBmcm9tIHRoZSBpZGxlX2xvb3AsDQo+
+Pj4gaW4gd2hpY2ggY2FzZSB0aGV5IGFyZSBub3QgcnVuIGluIGludGVycnVwdCBjb250ZXh0Pw0K
+Pj4+IA0KPj4gIFllcyB5b3UgYXJlIHJpZ2h0IHRhc2tsZXQgd2lsbCBiZSBzY2hlZHVsZWQgZnJv
+bSB0aGUgaWRsZV9sb29wIHRoYXQgaXMgbm90IGludGVycnVwdCBjb25leHQuDQo+IA0KPiBUaGlz
+IGRlcGVuZHMgb24geW91ciB0YXNrbGV0LiBTb21lIHdpbGwgcnVuIGZyb20gdGhlIHNvZnRpcnEg
+Y29udGV4dCB3aGljaCBpcyB1c3VhbGx5IChmb3IgQXJtKSBvbiB0aGUgcmV0dXJuIG9mIGFuIGV4
+Y2VwdGlvbi4NCj4gDQoNClRoYW5rcyBmb3IgdGhlIGluZm8uIEkgd2lsbCBjaGVjayBhbmQgd2ls
+bCBnZXQgYmV0dGVyIHVuZGVyc3RhbmRpbmcgb2YgdGhlIHRhc2tsZXQgaG93IGl0IHdpbGwgcnVu
+IGluIFhFTi4NCg0KPj4+IA0KPj4+Pj4+PiA0LiBMYXRlc3QgdmVyc2lvbiBvZiB0aGUgTGludXgg
+U01NVXYzIGNvZGUgaW1wbGVtZW50cyB0aGUgY29tbWFuZHMgcXVldWUNCj4+Pj4+Pj4gICAgYWNj
+ZXNzIGZ1bmN0aW9ucyBiYXNlZCBvbiBhdG9taWMgb3BlcmF0aW9ucyBpbXBsZW1lbnRlZCBpbiBM
+aW51eC4NCj4+Pj4+PiANCj4+Pj4+PiBDYW4geW91IHByb3ZpZGUgbW9yZSBkZXRhaWxzPw0KPj4+
+Pj4gDQo+Pj4+PiBJIHRyaWVkIHRvIHBvcnQgdGhlIGxhdGVzdCB2ZXJzaW9uIG9mIHRoZSBTTU1V
+djMgY29kZSB0aGFuIEkgb2JzZXJ2ZWQgdGhhdA0KPj4+Pj4gaW4gb3JkZXIgdG8gcG9ydCB0aGF0
+IGNvZGUgSSBoYXZlIHRvIGFsc28gcG9ydCBhdG9taWMgb3BlcmF0aW9uIGltcGxlbWVudGVkDQo+
+Pj4+PiBpbiBMaW51eCB0byBYRU4uIEFzIGxhdGVzdCBMaW51eCBjb2RlIHVzZXMgYXRvbWljIG9w
+ZXJhdGlvbiB0byBwcm9jZXNzIHRoZQ0KPj4+Pj4gY29tbWFuZCBxdWV1ZXMgKGF0b21pY19jb25k
+X3JlYWRfcmVsYXhlZCgpLGF0b21pY19sb25nX2NvbmRfcmVhZF9yZWxheGVkKCkgLA0KPj4+Pj4g
+YXRvbWljX2ZldGNoX2FuZG5vdF9yZWxheGVkKCkpIC4NCj4+Pj4gDQo+Pj4+IFRoYW5rIHlvdSBm
+b3IgdGhlIGV4cGxhbmF0aW9uLiBJIHRoaW5rIGl0IHdvdWxkIGJlIGJlc3QgdG8gaW1wb3J0IHRo
+ZSBhdG9taWMNCj4+Pj4gaGVscGVycyBhbmQgdXNlIHRoZSBsYXRlc3QgY29kZS4NCj4+Pj4gDQo+
+Pj4+IFRoaXMgd2lsbCBlbnN1cmUgdGhhdCB3ZSBkb24ndCByZS1pbnRyb2R1Y2UgYnVncyBhbmQg
+YWxzbyBidXkgdXMgc29tZSB0aW1lDQo+Pj4+IGJlZm9yZSB0aGUgTGludXggYW5kIFhlbiBkcml2
+ZXIgZGl2ZXJnZSBhZ2FpbiB0b28gbXVjaC4NCj4+Pj4gDQo+Pj4+IFN0ZWZhbm8sIHdoYXQgZG8g
+eW91IHRoaW5rPw0KPj4+IA0KPj4+IEkgdGhpbmsgeW91IGFyZSByaWdodC4NCj4+IFllcywgSSBh
+Z3JlZSB3aXRoIHlvdSB0byBoYXZlIFhFTiBjb2RlIGluIHN5bmMgd2l0aCBMaW51eCBjb2RlIHRo
+YXQncyB3aHkgSSBzdGFydGVkIHdpdGggdG8gcG9ydCB0aGUgTGludXggYXRvbWljIG9wZXJhdGlv
+bnMgdG8gWEVOICB0aGVuIEkgcmVhbGlzZWQgdGhhdCBpdCBpcyBub3Qgc3RyYWlnaHRmb3J3YXJk
+IHRvIHBvcnQgYXRvbWljIG9wZXJhdGlvbnMgYW5kIGl0IHJlcXVpcmVzIGxvdHMgb2YgZWZmb3J0
+IGFuZCB0ZXN0aW5nLiBUaGVyZWZvcmUgSSBkZWNpZGVkIHRvIHBvcnQgdGhlIGNvZGUgYmVmb3Jl
+IHRoZSBhdG9taWMgb3BlcmF0aW9uIGlzIGludHJvZHVjZWQgaW4gTGludXguDQo+IA0KPiBIbW1t
+Li4uIEkgd291bGQgbm90IGhhdmUgZXhwZWN0ZWQgYSBsb3Qgb2YgZWZmb3J0IHJlcXVpcmVkIHRv
+IGFkZCB0aGUgMyBhdG9taWNzIG9wZXJhdGlvbnMgYWJvdmUuIEFyZSB5b3UgdHJ5aW5nIHRvIGFs
+c28gcG9ydCB0aGUgTFNFIHN1cHBvcnQgYXQgdGhlIHNhbWUgdGltZT8NCg0KVGhlcmUgYXJlIG90
+aGVyIGF0b21pYyBvcGVyYXRpb25zIHVzZWQgaW4gdGhlIFNNTVV2MyBjb2RlIGFwYXJ0IGZyb20g
+dGhlIDMgYXRvbWljIG9wZXJhdGlvbiBJIG1lbnRpb24uIEkganVzdCBtZW50aW9uIDMgb3BlcmF0
+aW9uIGFzIGFuIGV4YW1wbGUuIEkgdHJpZWQgdG8gcG9ydCBhdCB0aGF0IHRpbWUgYnV0IHdoZW4g
+SSBzdGFydCBwb3J0aW5nIEkgcmVhbGlzZWQgdGhhdCBvbmUgYXRvbWljIG9wZXJhdGlvbiBkZXBl
+bmQgb24gYW5vdGhlciBvbmUgc28gSSBkZWNpZGVkIG5vdCB0byBwcm9jZWVkIGZ1cnRoZXIuDQoN
+Cj4gDQo+IENoZWVycywNCj4gDQo+IC0tIA0KPiBKdWxpZW4gR3JhbGwNCg0KDQpSZWdhcmRzLA0K
+UmFodWw=
 
