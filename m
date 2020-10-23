@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DA68AC4363A
-	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2020 15:42:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A2D4BC55179
+	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2020 15:42:26 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5725020E65
-	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2020 15:42:24 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 2994220E65
+	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2020 15:42:25 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="nwHVoFWs"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5725020E65
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="Ex15/X/y"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2994220E65
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.11090.29389 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.11092.29413 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kVzCi-0001ub-N3; Fri, 23 Oct 2020 15:42:08 +0000
+	id 1kVzCo-00020v-HM; Fri, 23 Oct 2020 15:42:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 11090.29389; Fri, 23 Oct 2020 15:42:08 +0000
+Received: by outflank-mailman (output) from mailman id 11092.29413; Fri, 23 Oct 2020 15:42:14 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,52 +38,52 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kVzCi-0001uT-JT; Fri, 23 Oct 2020 15:42:08 +0000
-Received: by outflank-mailman (input) for mailman id 11090;
- Fri, 23 Oct 2020 15:42:06 +0000
+	id 1kVzCo-00020m-Dh; Fri, 23 Oct 2020 15:42:14 +0000
+Received: by outflank-mailman (input) for mailman id 11092;
+ Fri, 23 Oct 2020 15:42:13 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=nEE3=D6=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1kVzCg-0001tF-NH
- for xen-devel@lists.xenproject.org; Fri, 23 Oct 2020 15:42:06 +0000
+ id 1kVzCn-000207-Fv
+ for xen-devel@lists.xenproject.org; Fri, 23 Oct 2020 15:42:13 +0000
 Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b82c153b-1e68-4902-b1fc-9280c714a7cb;
- Fri, 23 Oct 2020 15:42:05 +0000 (UTC)
+ id eb530848-315a-4f24-8da9-04ff76f25cbb;
+ Fri, 23 Oct 2020 15:42:12 +0000 (UTC)
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1kVzCd-0006qO-Oh; Fri, 23 Oct 2020 15:42:03 +0000
+ id 1kVzCl-0006r5-V8; Fri, 23 Oct 2020 15:42:11 +0000
 Received: from 54-240-197-235.amazon.com ([54.240.197.235]
  helo=ufe34d9ed68d054.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1kVzCd-0007wb-E2; Fri, 23 Oct 2020 15:42:03 +0000
+ id 1kVzCl-0007wb-L8; Fri, 23 Oct 2020 15:42:11 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=nEE3=D6=xen.org=julien@srs-us1.protection.inumbo.net>)
-	id 1kVzCg-0001tF-NH
-	for xen-devel@lists.xenproject.org; Fri, 23 Oct 2020 15:42:06 +0000
-X-Inumbo-ID: b82c153b-1e68-4902-b1fc-9280c714a7cb
+	id 1kVzCn-000207-Fv
+	for xen-devel@lists.xenproject.org; Fri, 23 Oct 2020 15:42:13 +0000
+X-Inumbo-ID: eb530848-315a-4f24-8da9-04ff76f25cbb
 Received: from mail.xenproject.org (unknown [104.130.215.37])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id b82c153b-1e68-4902-b1fc-9280c714a7cb;
-	Fri, 23 Oct 2020 15:42:05 +0000 (UTC)
+	id eb530848-315a-4f24-8da9-04ff76f25cbb;
+	Fri, 23 Oct 2020 15:42:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	 bh=5sAqH1p7E9o/e3huPMn1JHSLfgrcyUzmCSK/8SVUy1U=; b=nwHVoFWswujMk2ZQTQyCNN4bd
-	NuokyUNJAPDY8glIgM1ehxPo2tRO6ZlkbldJpeTiD+3Oe6kqdQ2h86fHpkARJneWsZu6P0NxBmUfW
-	Kz63m2Irep3sVriPLjeObGK7tS0nCs3OVNUNbEWBqcVno3un9BX+8nRmToKvsqx5eN6pY=;
+	 bh=3b+zUC4rUGoRV/bU3U7XTe8hxIwKqKy/A0anE7Xt22g=; b=Ex15/X/yHkm5VcqouUFLOTVy2
+	GjAr5mN3s7s1NO5KlyhbJPi3JBiSWWOGhwHextGMcqmtQ3f5SmArE0zeJnS0LygZo9+oSD2M3jQcb
+	ECX6CjrkpWg9hBAsPW4DNfNfbmt2qPrknD9dwVZLJ+XUafyOc6C3Q0WD8H8oy2zuwJvZo=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
 	by mail.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <julien@xen.org>)
-	id 1kVzCd-0006qO-Oh; Fri, 23 Oct 2020 15:42:03 +0000
+	id 1kVzCl-0006r5-V8; Fri, 23 Oct 2020 15:42:11 +0000
 Received: from 54-240-197-235.amazon.com ([54.240.197.235] helo=ufe34d9ed68d054.ant.amazon.com)
 	by xenbits.xenproject.org with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
 	(Exim 4.92)
 	(envelope-from <julien@xen.org>)
-	id 1kVzCd-0007wb-E2; Fri, 23 Oct 2020 15:42:03 +0000
+	id 1kVzCl-0007wb-L8; Fri, 23 Oct 2020 15:42:11 +0000
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: alex.bennee@linaro.org,
@@ -92,189 +92,105 @@ Cc: alex.bennee@linaro.org,
 	bertrand.marquis@arm.com,
 	andre.przywara@arm.com,
 	Rahul.Singh@arm.com,
-	Julien Grall <jgrall@amazon.com>,
+	Julien Grall <julien.grall@arm.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Jan Beulich <jbeulich@suse.com>,
-	Wei Liu <wl@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Rahul Singh <rahul.singh@arm.com>
-Subject: [PATCH v2 1/7] xen/acpi: Rework acpi_os_map_memory() and acpi_os_unmap_memory()
-Date: Fri, 23 Oct 2020 16:41:50 +0100
-Message-Id: <20201023154156.6593-2-julien@xen.org>
+	Julien Grall <jgrall@amazon.com>
+Subject: [PATCH v2 5/7] xen/arm: acpi: add BAD_MADT_GICC_ENTRY() macro
+Date: Fri, 23 Oct 2020 16:41:54 +0100
+Message-Id: <20201023154156.6593-6-julien@xen.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20201023154156.6593-1-julien@xen.org>
 References: <20201023154156.6593-1-julien@xen.org>
 
-From: Julien Grall <jgrall@amazon.com>
+From: Julien Grall <julien.grall@arm.com>
 
-The functions acpi_os_{un,}map_memory() are meant to be arch-agnostic
-while the __acpi_os_{un,}map_memory() are meant to be arch-specific.
+Imported from Linux commit b6cfb277378ef831c0fa84bcff5049307294adc6:
 
-Currently, the former are still containing x86 specific code.
+    The BAD_MADT_ENTRY() macro is designed to work for all of the subtables
+    of the MADT.  In the ACPI 5.1 version of the spec, the struct for the
+    GICC subtable (struct acpi_madt_generic_interrupt) is 76 bytes long; in
+    ACPI 6.0, the struct is 80 bytes long.  But, there is only one definition
+    in ACPICA for this struct -- and that is the 6.0 version.  Hence, when
+    BAD_MADT_ENTRY() compares the struct size to the length in the GICC
+    subtable, it fails if 5.1 structs are in use, and there are systems in
+    the wild that have them.
 
-To avoid this rather strange split, the generic helpers are reworked so
-they are arch-agnostic. This requires the introduction of a new helper
-__acpi_os_unmap_memory() that will undo any mapping done by
-__acpi_os_map_memory().
+    This patch adds the BAD_MADT_GICC_ENTRY() that checks the GICC subtable
+    only, accounting for the difference in specification versions that are
+    possible.  The BAD_MADT_ENTRY() will continue to work as is for all other
+    MADT subtables.
 
-Currently, the arch-helper for unmap is basically a no-op so it only
-returns whether the mapping was arch specific. But this will change
-in the future.
+    This code is being added to an arm64 header file since that is currently
+    the only architecture using the GICC subtable of the MADT.  As a GIC is
+    specific to ARM, it is also unlikely the subtable will be used elsewhere.
 
-Note that the x86 version of acpi_os_map_memory() was already able to
-able the 1MB region. Hence why there is no addition of new code.
+    Fixes: aeb823bbacc2 ("ACPICA: ACPI 6.0: Add changes for FADT table.")
+    Signed-off-by: Al Stone <al.stone@linaro.org>
+    Acked-by: Will Deacon <will.deacon@arm.com>
+    Acked-by: "Rafael J. Wysocki" <rjw@rjwysocki.net>
+    [catalin.marinas@arm.com: extra brackets around macro arguments]
+    Signed-off-by: Catalin Marinas <catalin.marinas@arm.com>
 
+Signed-off-by: Julien Grall <julien.grall@arm.com>
+Signed-off-by: Andre Przywara <andre.przywara@arm.com>
 Signed-off-by: Julien Grall <jgrall@amazon.com>
-Reviewed-by: Rahul Singh <rahul.singh@arm.com>
-Tested-by: Rahul Singh <rahul.singh@arm.com>
 
 ---
-    Changes in v2:
-        - Constify ptr in __acpi_unmap_table()
-        - Coding style fixes
-        - Fix build on arm64
-        - Use PAGE_OFFSET() rather than open-coding it
-        - Add Rahul's tested-by and reviewed-by
----
- xen/arch/arm/acpi/lib.c | 12 ++++++++++++
- xen/arch/x86/acpi/lib.c | 18 ++++++++++++++++++
- xen/drivers/acpi/osl.c  | 34 ++++++++++++++++++----------------
- xen/include/xen/acpi.h  |  1 +
- 4 files changed, 49 insertions(+), 16 deletions(-)
 
-diff --git a/xen/arch/arm/acpi/lib.c b/xen/arch/arm/acpi/lib.c
-index 4fc6e17322c1..fcc186b03399 100644
---- a/xen/arch/arm/acpi/lib.c
-+++ b/xen/arch/arm/acpi/lib.c
-@@ -30,6 +30,10 @@ char *__acpi_map_table(paddr_t phys, unsigned long size)
-     unsigned long base, offset, mapped_size;
-     int idx;
+Changes in v2:
+    - Patch added
+
+We may want to consider to also import:
+
+commit 9eb1c92b47c73249465d388eaa394fe436a3b489
+Author: Jeremy Linton <jeremy.linton@arm.com>
+Date:   Tue Nov 27 17:59:12 2018 +0000
+
+    arm64: acpi: Prepare for longer MADTs
+
+    The BAD_MADT_GICC_ENTRY check is a little too strict because
+    it rejects MADT entries that don't match the currently known
+    lengths. We should remove this restriction to avoid problems
+    if the table length changes. Future code which might depend on
+    additional fields should be written to validate those fields
+    before using them, rather than trying to globally check
+    known MADT version lengths.
+
+    Link: https://lkml.kernel.org/r/20181012192937.3819951-1-jeremy.linton@arm.com
+    Signed-off-by: Jeremy Linton <jeremy.linton@arm.com>
+    [lorenzo.pieralisi@arm.com: added MADT macro comments]
+    Signed-off-by: Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>
+    Acked-by: Sudeep Holla <sudeep.holla@arm.com>
+    Cc: Will Deacon <will.deacon@arm.com>
+    Cc: Catalin Marinas <catalin.marinas@arm.com>
+    Cc: Al Stone <ahs3@redhat.com>
+    Cc: "Rafael J. Wysocki" <rjw@rjwysocki.net>
+    Signed-off-by: Will Deacon <will.deacon@arm.com>
+---
+ xen/include/asm-arm/acpi.h | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/xen/include/asm-arm/acpi.h b/xen/include/asm-arm/acpi.h
+index 50340281a917..b52ae2d6ef72 100644
+--- a/xen/include/asm-arm/acpi.h
++++ b/xen/include/asm-arm/acpi.h
+@@ -54,6 +54,14 @@ void acpi_smp_init_cpus(void);
+  */
+ paddr_t acpi_get_table_offset(struct membank tbl_add[], EFI_MEM_RES index);
  
-+    /* No arch specific implementation after early boot */
-+    if ( system_state >= SYS_STATE_boot )
-+        return NULL;
++/* Macros for consistency checks of the GICC subtable of MADT */
++#define ACPI_MADT_GICC_LENGTH	\
++    (acpi_gbl_FADT.header.revision < 6 ? 76 : 80)
 +
-     offset = phys & (PAGE_SIZE - 1);
-     mapped_size = PAGE_SIZE - offset;
-     set_fixmap(FIXMAP_ACPI_BEGIN, maddr_to_mfn(phys), PAGE_HYPERVISOR);
-@@ -49,6 +53,14 @@ char *__acpi_map_table(paddr_t phys, unsigned long size)
-     return ((char *) base + offset);
- }
- 
-+bool __acpi_unmap_table(const void *ptr, unsigned long size)
-+{
-+    vaddr_t vaddr = (vaddr_t)ptr;
++#define BAD_MADT_GICC_ENTRY(entry, end)						\
++    (!(entry) || (unsigned long)(entry) + sizeof(*(entry)) > (end) ||	\
++     (entry)->header.length != ACPI_MADT_GICC_LENGTH)
 +
-+    return ((vaddr >= FIXMAP_ADDR(FIXMAP_ACPI_BEGIN)) &&
-+            (vaddr < (FIXMAP_ADDR(FIXMAP_ACPI_END) + PAGE_SIZE)));
-+}
-+
- /* True to indicate PSCI 0.2+ is implemented */
- bool __init acpi_psci_present(void)
- {
-diff --git a/xen/arch/x86/acpi/lib.c b/xen/arch/x86/acpi/lib.c
-index 265b9ad81905..a22414a05c13 100644
---- a/xen/arch/x86/acpi/lib.c
-+++ b/xen/arch/x86/acpi/lib.c
-@@ -46,6 +46,10 @@ char *__acpi_map_table(paddr_t phys, unsigned long size)
- 	if ((phys + size) <= (1 * 1024 * 1024))
- 		return __va(phys);
- 
-+	/* No further arch specific implementation after early boot */
-+	if (system_state >= SYS_STATE_boot)
-+		return NULL;
-+
- 	offset = phys & (PAGE_SIZE - 1);
- 	mapped_size = PAGE_SIZE - offset;
- 	set_fixmap(FIX_ACPI_END, phys);
-@@ -66,6 +70,20 @@ char *__acpi_map_table(paddr_t phys, unsigned long size)
- 	return ((char *) base + offset);
- }
- 
-+bool __acpi_unmap_table(const void *ptr, unsigned long size)
-+{
-+	unsigned long vaddr = (unsigned long)ptr;
-+
-+	if ((vaddr >= DIRECTMAP_VIRT_START) &&
-+	    (vaddr < DIRECTMAP_VIRT_END)) {
-+		ASSERT(!((__pa(ptr) + size - 1) >> 20));
-+		return true;
-+	}
-+
-+	return ((vaddr >= __fix_to_virt(FIX_ACPI_END)) &&
-+		(vaddr < (__fix_to_virt(FIX_ACPI_BEGIN) + PAGE_SIZE)));
-+}
-+
- unsigned int acpi_get_processor_id(unsigned int cpu)
- {
- 	unsigned int acpiid, apicid;
-diff --git a/xen/drivers/acpi/osl.c b/xen/drivers/acpi/osl.c
-index 4c8bb7839eda..389505f78666 100644
---- a/xen/drivers/acpi/osl.c
-+++ b/xen/drivers/acpi/osl.c
-@@ -92,27 +92,29 @@ acpi_physical_address __init acpi_os_get_root_pointer(void)
- void __iomem *
- acpi_os_map_memory(acpi_physical_address phys, acpi_size size)
- {
--	if (system_state >= SYS_STATE_boot) {
--		mfn_t mfn = _mfn(PFN_DOWN(phys));
--		unsigned int offs = phys & (PAGE_SIZE - 1);
--
--		/* The low first Mb is always mapped on x86. */
--		if (IS_ENABLED(CONFIG_X86) && !((phys + size - 1) >> 20))
--			return __va(phys);
--		return __vmap(&mfn, PFN_UP(offs + size), 1, 1,
--			      ACPI_MAP_MEM_ATTR, VMAP_DEFAULT) + offs;
--	}
--	return __acpi_map_table(phys, size);
-+	void *ptr;
-+	mfn_t mfn = _mfn(PFN_DOWN(phys));
-+	unsigned int offs = PAGE_OFFSET(phys);
-+
-+	/* Try the arch specific implementation first */
-+	ptr = __acpi_map_table(phys, size);
-+	if (ptr)
-+		return ptr;
-+
-+	/* No common implementation for early boot map */
-+	if (unlikely(system_state < SYS_STATE_boot))
-+		return NULL;
-+
-+	ptr = __vmap(&mfn, PFN_UP(offs + size), 1, 1,
-+		     ACPI_MAP_MEM_ATTR, VMAP_DEFAULT);
-+
-+	return !ptr ? NULL : (ptr + offs);
- }
- 
- void acpi_os_unmap_memory(void __iomem * virt, acpi_size size)
- {
--	if (IS_ENABLED(CONFIG_X86) &&
--	    (unsigned long)virt >= DIRECTMAP_VIRT_START &&
--	    (unsigned long)virt < DIRECTMAP_VIRT_END) {
--		ASSERT(!((__pa(virt) + size - 1) >> 20));
-+	if (__acpi_unmap_table(virt, size))
- 		return;
--	}
- 
- 	if (system_state >= SYS_STATE_boot)
- 		vunmap((void *)((unsigned long)virt & PAGE_MASK));
-diff --git a/xen/include/xen/acpi.h b/xen/include/xen/acpi.h
-index c945ab05c864..21d5e9feb5ae 100644
---- a/xen/include/xen/acpi.h
-+++ b/xen/include/xen/acpi.h
-@@ -68,6 +68,7 @@ typedef int (*acpi_table_entry_handler) (struct acpi_subtable_header *header, co
- 
- unsigned int acpi_get_processor_id (unsigned int cpu);
- char * __acpi_map_table (paddr_t phys_addr, unsigned long size);
-+bool __acpi_unmap_table(const void *ptr, unsigned long size);
- int acpi_boot_init (void);
- int acpi_boot_table_init (void);
- int acpi_numa_init (void);
+ #ifdef CONFIG_ACPI
+ extern bool acpi_disabled;
+ /* Basic configuration for ACPI */
 -- 
 2.17.1
 
