@@ -2,28 +2,28 @@ Return-Path: <SRS0=ydFR=D6=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.5 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-8.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4241FC388F9
-	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2020 07:24:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 10768C388F9
+	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2020 08:03:06 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CB75020936
-	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2020 07:24:22 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 8F8A82192A
+	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2020 08:03:05 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="F3++9Q6C"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CB75020936
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="XyI2w/gL"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8F8A82192A
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.10741.28639 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.10753.28651 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kVrQa-0006ke-H5; Fri, 23 Oct 2020 07:23:56 +0000
+	id 1kVs25-0002Xh-TM; Fri, 23 Oct 2020 08:02:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 10741.28639; Fri, 23 Oct 2020 07:23:56 +0000
+Received: by outflank-mailman (output) from mailman id 10753.28651; Fri, 23 Oct 2020 08:02:41 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,110 +38,75 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kVrQa-0006kX-E9; Fri, 23 Oct 2020 07:23:56 +0000
-Received: by outflank-mailman (input) for mailman id 10741;
- Fri, 23 Oct 2020 07:23:55 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kVs25-0002Xa-QO; Fri, 23 Oct 2020 08:02:41 +0000
+Received: by outflank-mailman (input) for mailman id 10753;
+ Fri, 23 Oct 2020 08:02:41 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=gNxR=D6=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kVrQZ-0006jo-5U
- for xen-devel@lists.xenproject.org; Fri, 23 Oct 2020 07:23:55 +0000
+ id 1kVs25-0002XV-Cj
+ for xen-devel@lists.xenproject.org; Fri, 23 Oct 2020 08:02:41 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3572783e-1b9d-4ce2-b6d9-c24579dccee8;
- Fri, 23 Oct 2020 07:23:54 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 8668d801-06ee-4a06-999d-cd941e1340f2;
+ Fri, 23 Oct 2020 08:02:39 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 303B9ACC4;
- Fri, 23 Oct 2020 07:23:53 +0000 (UTC)
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by mx2.suse.de (Postfix) with ESMTP id 73A80AC83;
+ Fri, 23 Oct 2020 08:02:38 +0000 (UTC)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=gNxR=D6=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
-	id 1kVrQZ-0006jo-5U
-	for xen-devel@lists.xenproject.org; Fri, 23 Oct 2020 07:23:55 +0000
-X-Inumbo-ID: 3572783e-1b9d-4ce2-b6d9-c24579dccee8
+	id 1kVs25-0002XV-Cj
+	for xen-devel@lists.xenproject.org; Fri, 23 Oct 2020 08:02:41 +0000
+X-Inumbo-ID: 8668d801-06ee-4a06-999d-cd941e1340f2
 Received: from mx2.suse.de (unknown [195.135.220.15])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 3572783e-1b9d-4ce2-b6d9-c24579dccee8;
-	Fri, 23 Oct 2020 07:23:54 +0000 (UTC)
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id 8668d801-06ee-4a06-999d-cd941e1340f2;
+	Fri, 23 Oct 2020 08:02:39 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1603437833;
+	t=1603440158;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=XKi9lIqkUcYox5yJhEdLIRNbCvTjIhSfcdCdbLv9Dxs=;
-	b=F3++9Q6CAXssj7ySAz86mgcxN2wY4jEUZHrE9a6jLaZc/pkcomxYxeVhpdyhZlqGQDT6X/
-	7tE2xEngsLZibVmfPPX01Ou+ytTqW1U7u+BfPUd72WbJTHMLIxrNmhWaSj54vaCG7i6hV7
-	6ykzzRAFTNZPiBruXQ9VEl10J9gfTa4=
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=wWIMTLf4j3BA6CNc85qVTx7LGobZs+V9mQFsSd1mJyg=;
+	b=XyI2w/gLt44KYYIk3/hehBDbA5w1VsrrOhm2oDSi47n1w++adySVjFVaW9S+f9/XAxgQWp
+	G9yINnXVbZIIY2YJhXxhL3YiVvBsWojD4l+60JtpyaRKZHdqnAn0lu9JZ83dVF0oG24gI0
+	YEYkBQCiWBmIHBR09O99n55GaWtJLo0=
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 303B9ACC4;
-	Fri, 23 Oct 2020 07:23:53 +0000 (UTC)
-Subject: Re: [PATCH] xen/arm: ACPI: Remove EXPERT dependancy, default on for
- ARM64
-To: Elliott Mitchell <ehem+xen@m5p.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
- <julien@xen.org>, xen-devel@lists.xenproject.org,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-References: <20201022014310.GA70872@mattapan.m5p.com>
- <7bf92deb-b1ba-31b2-0357-2639cd2a1bca@xen.org>
- <alpine.DEB.2.21.2010221403570.12247@sstabellini-ThinkPad-T480s>
- <20201023033506.GC83870@mattapan.m5p.com>
+	by mx2.suse.de (Postfix) with ESMTP id 73A80AC83;
+	Fri, 23 Oct 2020 08:02:38 +0000 (UTC)
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <George.Dunlap@eu.citrix.com>, Ian Jackson
+ <iwj@xenproject.org>, Julien Grall <julien@xen.org>, Wei Liu <wl@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <e9b6138a-e42c-a8d8-e07f-243ac6bc8d23@suse.com>
-Date: Fri, 23 Oct 2020 09:23:55 +0200
+Subject: [PATCH] PCI: drop dead pci_lock_*pdev() declarations
+Message-ID: <cb644565-92c9-8dbe-8c36-54e8b6b722ad@suse.com>
+Date: Fri, 23 Oct 2020 10:02:39 +0200
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.12.1
 MIME-Version: 1.0
-In-Reply-To: <20201023033506.GC83870@mattapan.m5p.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
-On 23.10.2020 05:35, Elliott Mitchell wrote:
-> --- a/xen/arch/arm/Kconfig
-> +++ b/xen/arch/arm/Kconfig
-> @@ -32,13 +32,18 @@ menu "Architecture Features"
->  source "arch/Kconfig"
->  
->  config ACPI
-> -	bool "ACPI (Advanced Configuration and Power Interface) Support" if EXPERT
-> +	bool "ACPI (Advanced Configuration and Power Interface) Support"
->  	depends on ARM_64
-> +	default y if ARM_64
+They have no definitions, and hence users, anywhere.
 
-The "if" is pointless with the "depends on".
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-> --- a/xen/arch/arm/acpi/boot.c
-> +++ b/xen/arch/arm/acpi/boot.c
-> @@ -254,6 +254,15 @@ int __init acpi_boot_table_init(void)
->                                     dt_scan_depth1_nodes, NULL) )
->          goto disable;
->  
-> +    printk("\n"
-> +"*************************************************************************\n"
-> +"*    WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING    *\n"
-> +"*                                                                       *\n"
-> +"* Xen-ARM ACPI support is EXPERIMENTAL.  It is presently (October 2020) *\n"
-> +"* recommended you boot your system in device-tree mode if you can.      *\n"
-> +"*************************************************************************\n"
-> +            "\n");
-> +
-
-We have an abstraction for such warnings, causing them to appear
-later in the boot process and then consistently all in one place
-(both increasing, as we believe, the chances of being noticed):
-warning_add(). There's a delay accompanied with this, so I think
-you will want to also have a command line option allowing to
-silence this warning. "acpi=on" or "acpi=force", as available on
-x86 and (possibly wrongly right now) not documented as
-x86-specific, may be (re-)usable, i.e. to avoid having to
-introduce some entirely new option.
-
-Also a few formal nits: The subject tag should have been [PATCH v2],
-there should have been a short revision log outside of the commit
-message area, and new patch versione would better start their own
-new threads than being in-reply-to the earlier version's one.
-
-Jan
+--- a/xen/include/xen/pci.h
++++ b/xen/include/xen/pci.h
+@@ -155,9 +155,6 @@ bool_t pci_device_detect(u16 seg, u8 bus
+ int scan_pci_devices(void);
+ enum pdev_type pdev_type(u16 seg, u8 bus, u8 devfn);
+ int find_upstream_bridge(u16 seg, u8 *bus, u8 *devfn, u8 *secbus);
+-struct pci_dev *pci_lock_pdev(int seg, int bus, int devfn);
+-struct pci_dev *pci_lock_domain_pdev(
+-    struct domain *, int seg, int bus, int devfn);
+ 
+ void setup_hwdom_pci_devices(struct domain *,
+                             int (*)(u8 devfn, struct pci_dev *));
 
