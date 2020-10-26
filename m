@@ -2,28 +2,28 @@ Return-Path: <SRS0=Fpha=EB=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6369AC2D0A3
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2020 09:14:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DEB66C2D0A3
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2020 09:17:09 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 029BE2076D
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2020 09:14:04 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 5F43F2076D
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2020 09:17:09 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="NL/En86Z"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 029BE2076D
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
+	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="XMyzgXFt"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5F43F2076D
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.12094.31771 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.12125.31783 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kWyZc-0005YX-CE; Mon, 26 Oct 2020 09:13:52 +0000
+	id 1kWycY-0006Ec-VR; Mon, 26 Oct 2020 09:16:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 12094.31771; Mon, 26 Oct 2020 09:13:52 +0000
+Received: by outflank-mailman (output) from mailman id 12125.31783; Mon, 26 Oct 2020 09:16:54 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,477 +38,299 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kWyZc-0005YM-7e; Mon, 26 Oct 2020 09:13:52 +0000
-Received: by outflank-mailman (input) for mailman id 12094;
- Mon, 26 Oct 2020 09:13:50 +0000
+	id 1kWycY-0006EV-SR; Mon, 26 Oct 2020 09:16:54 +0000
+Received: by outflank-mailman (input) for mailman id 12125;
+ Mon, 26 Oct 2020 09:16:53 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=l58c=EB=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kWyZa-0004f1-SN
- for xen-devel@lists.xenproject.org; Mon, 26 Oct 2020 09:13:50 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=WRSk=EB=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
+ id 1kWycX-0006EQ-F6
+ for xen-devel@lists.xenproject.org; Mon, 26 Oct 2020 09:16:53 +0000
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id f9b3da22-e431-4730-8a0f-bb74a709d485;
- Mon, 26 Oct 2020 09:13:21 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 6BF8CB243;
- Mon, 26 Oct 2020 09:13:20 +0000 (UTC)
+ id aa4d873c-c7d4-48e8-81bd-2aec74265b51;
+ Mon, 26 Oct 2020 09:16:50 +0000 (UTC)
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kWycU-0007SW-01; Mon, 26 Oct 2020 09:16:50 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kWycT-0002VG-Nv; Mon, 26 Oct 2020 09:16:49 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1kWycT-0001WY-NU; Mon, 26 Oct 2020 09:16:49 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=l58c=EB=suse.com=jgross@srs-us1.protection.inumbo.net>)
-	id 1kWyZa-0004f1-SN
-	for xen-devel@lists.xenproject.org; Mon, 26 Oct 2020 09:13:50 +0000
-X-Inumbo-ID: f9b3da22-e431-4730-8a0f-bb74a709d485
-Received: from mx2.suse.de (unknown [195.135.220.15])
+	(envelope-from <SRS0=WRSk=EB=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
+	id 1kWycX-0006EQ-F6
+	for xen-devel@lists.xenproject.org; Mon, 26 Oct 2020 09:16:53 +0000
+X-Inumbo-ID: aa4d873c-c7d4-48e8-81bd-2aec74265b51
+Received: from mail.xenproject.org (unknown [104.130.215.37])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id f9b3da22-e431-4730-8a0f-bb74a709d485;
-	Mon, 26 Oct 2020 09:13:21 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1603703600;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=wzVfNJp5CakgtQPXKcxiHB74zrzQZ4Nkcj6JZDwDa6k=;
-	b=NL/En86Zerx/XqAPLdxbToE9TgYiblPWaYJYlvTQW/RutFLZdUPGjUNGDbRYDww7CLqc7r
-	X2yqGr+HsQeFQdmmqvJebYLtfoEo0/6ClP/pPX9+Irr9DTLuodyTR9hf7mFBCBOhSVbTNl
-	ZZq/IZykawDZMb56HpOMdFrv1W4coS0=
-Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 6BF8CB243;
-	Mon, 26 Oct 2020 09:13:20 +0000 (UTC)
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH 08/12] xen/hypfs: support dynamic hypfs nodes
-Date: Mon, 26 Oct 2020 10:13:12 +0100
-Message-Id: <20201026091316.25680-9-jgross@suse.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20201026091316.25680-1-jgross@suse.com>
-References: <20201026091316.25680-1-jgross@suse.com>
-MIME-Version: 1.0
+	id aa4d873c-c7d4-48e8-81bd-2aec74265b51;
+	Mon, 26 Oct 2020 09:16:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=LHVGQkeZMShKVXyJ+zz75hHsfXBF+MjXVc8Auk8SprY=; b=XMyzgXFtUI7mhwzK26OfbvCu0M
+	TBHWU8jjYKmO7OIKzM9JUBYH0+eUtoq6UeKHWyVUHp7eXhnWRj4L3SfEGF7d7Dur3X5E2JFTttUqt
+	GkvhG7lL1I0f+gZn13O7gKUA1HBaKoMQnuble4b7VAtF4YlzYSmPKkMQxdPN5IH2VTmw=;
+Received: from host146.205.237.98.conversent.net ([205.237.98.146] helo=infra.test-lab.xenproject.org)
+	by mail.xenproject.org with esmtp (Exim 4.92)
+	(envelope-from <osstest-admin@xenproject.org>)
+	id 1kWycU-0007SW-01; Mon, 26 Oct 2020 09:16:50 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+	by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+	(envelope-from <osstest-admin@xenproject.org>)
+	id 1kWycT-0002VG-Nv; Mon, 26 Oct 2020 09:16:49 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim 4.92)
+	(envelope-from <osstest-admin@xenproject.org>)
+	id 1kWycT-0001WY-NU; Mon, 26 Oct 2020 09:16:49 +0000
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-156237-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [xen-unstable-smoke test] 156237: regressions - trouble: blocked/fail
+X-Osstest-Failures:
+    xen-unstable-smoke:build-amd64:xen-build:fail:regression
+    xen-unstable-smoke:build-arm64-xsm:xen-build:fail:regression
+    xen-unstable-smoke:build-armhf:xen-build:fail:regression
+    xen-unstable-smoke:build-amd64-libvirt:build-check(1):blocked:nonblocking
+    xen-unstable-smoke:test-amd64-amd64-libvirt:build-check(1):blocked:nonblocking
+    xen-unstable-smoke:test-amd64-amd64-xl-qemuu-debianhvm-amd64:build-check(1):blocked:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:build-check(1):blocked:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:build-check(1):blocked:nonblocking
+X-Osstest-Versions-This:
+    xen=4ddd6499d999a7d08cabfda5b0262e473dd5beed
+X-Osstest-Versions-That:
+    xen=6ca70821b59849ad97c3fadc47e63c1a4af1a78c
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Mon, 26 Oct 2020 09:16:49 +0000
 
-Add a getsize() function pointer to struct hypfs_funcs for being able
-to have dynamically filled entries without the need to take the hypfs
-lock each time the contents are being generated.
+flight 156237 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/156237/
 
-For directories add a findentry callback to the vector and modify
-hypfs_get_entry_rel() to use it.
+Regressions :-(
 
-Add a HYPFS_VARDIR_INIT() macro for intializing such a directory
-statically, taking a struct hypfs_funcs pointer as parameter additional
-to those of HYPFS_DIR_INIT().
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-amd64                   6 xen-build                fail REGR. vs. 156117
+ build-arm64-xsm               6 xen-build                fail REGR. vs. 156117
+ build-armhf                   6 xen-build                fail REGR. vs. 156117
 
-Modify HYPFS_VARSIZE_INIT() to take the function vector pointer as an
-additional parameter as this will be needed for dynamical entries.
+Tests which did not succeed, but are not blocking:
+ build-amd64-libvirt           1 build-check(1)               blocked  n/a
+ test-amd64-amd64-libvirt      1 build-check(1)               blocked  n/a
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64  1 build-check(1)        blocked n/a
+ test-arm64-arm64-xl-xsm       1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl           1 build-check(1)               blocked  n/a
 
-Move DIRENTRY_SIZE() macro to hypfs.h as it will be needed by the read
-function of a directory with dynamically generated entries.
+version targeted for testing:
+ xen                  4ddd6499d999a7d08cabfda5b0262e473dd5beed
+baseline version:
+ xen                  6ca70821b59849ad97c3fadc47e63c1a4af1a78c
 
-For being able to let the generic hypfs coding continue to work on
-normal struct hypfs_entry entities even for dynamical nodes add some
-infrastructure for allocating a working area for the current hypfs
-request in order to store needed information for traversing the tree.
-This area is anchored in a percpu pointer and can be retrieved by any
-level of the dynamic entries. It will be freed automatically when
-dropping the hypfs lock.
+Last test of basis   156117  2020-10-23 09:01:23 Z    3 days
+Failing since        156120  2020-10-23 14:01:24 Z    2 days   34 attempts
+Testing same since   156129  2020-10-23 18:01:24 Z    2 days   33 attempts
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
- xen/common/hypfs.c      | 124 +++++++++++++++++++++++++---------------
- xen/include/xen/hypfs.h |  39 +++++++++----
- 2 files changed, 108 insertions(+), 55 deletions(-)
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  Bertrand Marquis <bertrand.marquis@arm.com>
+  Christian Lindig <christian.lindig@citrix.com>
+  George Dunlap <george.dunlap@citrix.com>
+  Ian Jackson <ian.jackson@eu.citrix.com>
+  Ian Jackson <iwj@xenproject.org>
+  Jan Beulich <jbeulich@suse.com>
+  Jason Andryuk <jandryuk@gmail.com>
+  Juergen Gross <jgross@suse.com>
+  Wei Liu <wl@xen.org>
 
-diff --git a/xen/common/hypfs.c b/xen/common/hypfs.c
-index 97260bd4a3..4c226a06b4 100644
---- a/xen/common/hypfs.c
-+++ b/xen/common/hypfs.c
-@@ -19,28 +19,29 @@
- CHECK_hypfs_dirlistentry;
- #endif
- 
--#define DIRENTRY_NAME_OFF offsetof(struct xen_hypfs_dirlistentry, name)
--#define DIRENTRY_SIZE(name_len) \
--    (DIRENTRY_NAME_OFF +        \
--     ROUNDUP((name_len) + 1, alignof(struct xen_hypfs_direntry)))
--
- struct hypfs_funcs hypfs_dir_funcs = {
-     .read = hypfs_read_dir,
-+    .getsize = hypfs_getsize,
-+    .findentry = hypfs_dir_findentry,
- };
- struct hypfs_funcs hypfs_leaf_ro_funcs = {
-     .read = hypfs_read_leaf,
-+    .getsize = hypfs_getsize,
- };
- struct hypfs_funcs hypfs_leaf_wr_funcs = {
-     .read = hypfs_read_leaf,
-     .write = hypfs_write_leaf,
-+    .getsize = hypfs_getsize,
- };
- struct hypfs_funcs hypfs_bool_wr_funcs = {
-     .read = hypfs_read_leaf,
-     .write = hypfs_write_bool,
-+    .getsize = hypfs_getsize,
- };
- struct hypfs_funcs hypfs_custom_wr_funcs = {
-     .read = hypfs_read_leaf,
-     .write = hypfs_write_custom,
-+    .getsize = hypfs_getsize,
- };
- 
- static DEFINE_RWLOCK(hypfs_lock);
-@@ -50,6 +51,7 @@ enum hypfs_lock_state {
-     hypfs_write_locked
- };
- static DEFINE_PER_CPU(enum hypfs_lock_state, hypfs_locked);
-+static DEFINE_PER_CPU(void *, hypfs_dyndata);
- 
- HYPFS_DIR_INIT(hypfs_root, "");
- 
-@@ -71,9 +73,12 @@ static void hypfs_write_lock(void)
- 
- static void hypfs_unlock(void)
- {
--    enum hypfs_lock_state locked = this_cpu(hypfs_locked);
-+    unsigned int cpu = smp_processor_id();
-+    enum hypfs_lock_state locked = per_cpu(hypfs_locked, cpu);
-+
-+    XFREE(per_cpu(hypfs_dyndata, cpu));
- 
--    this_cpu(hypfs_locked) = hypfs_unlocked;
-+    per_cpu(hypfs_locked, cpu) = hypfs_unlocked;
- 
-     switch ( locked )
-     {
-@@ -88,6 +93,23 @@ static void hypfs_unlock(void)
-     }
- }
- 
-+void *hypfs_alloc_dyndata(unsigned long size, unsigned long align)
-+{
-+    unsigned int cpu = smp_processor_id();
-+
-+    ASSERT(per_cpu(hypfs_locked, cpu) != hypfs_unlocked);
-+    ASSERT(per_cpu(hypfs_dyndata, cpu) == NULL);
-+
-+    per_cpu(hypfs_dyndata, cpu) = _xzalloc(size, align);
-+
-+    return per_cpu(hypfs_dyndata, cpu);
-+}
-+
-+void *hypfs_get_dyndata(void)
-+{
-+    return this_cpu(hypfs_dyndata);
-+}
-+
- static int add_entry(struct hypfs_entry_dir *parent, struct hypfs_entry *new)
- {
-     int ret = -ENOENT;
-@@ -122,7 +144,7 @@ static int add_entry(struct hypfs_entry_dir *parent, struct hypfs_entry *new)
-     {
-         unsigned int sz = strlen(new->name);
- 
--        parent->e.size += DIRENTRY_SIZE(sz);
-+        parent->e.size += HYPFS_DIRENTRY_SIZE(sz);
-     }
- 
-     hypfs_unlock();
-@@ -171,15 +193,34 @@ static int hypfs_get_path_user(char *buf,
-     return 0;
- }
- 
-+struct hypfs_entry *hypfs_dir_findentry(struct hypfs_entry_dir *dir,
-+                                        const char *name,
-+                                        unsigned int name_len)
-+{
-+    struct hypfs_entry *entry;
-+
-+    list_for_each_entry ( entry, &dir->dirlist, list )
-+    {
-+        int cmp = strncmp(name, entry->name, name_len);
-+
-+        if ( cmp < 0 )
-+            return ERR_PTR(-ENOENT);
-+
-+        if ( !cmp && strlen(entry->name) == name_len )
-+            return entry;
-+    }
-+
-+    return ERR_PTR(-ENOENT);
-+}
-+
- static struct hypfs_entry *hypfs_get_entry_rel(struct hypfs_entry_dir *dir,
-                                                const char *path)
- {
-     const char *end;
-     struct hypfs_entry *entry;
-     unsigned int name_len;
--    bool again = true;
- 
--    while ( again )
-+    for ( ;; )
-     {
-         if ( dir->e.type != XEN_HYPFS_TYPE_DIR )
-             return ERR_PTR(-ENOENT);
-@@ -192,28 +233,12 @@ static struct hypfs_entry *hypfs_get_entry_rel(struct hypfs_entry_dir *dir,
-             end = strchr(path, '\0');
-         name_len = end - path;
- 
--        again = false;
-+        entry = dir->e.funcs->findentry(dir, path, name_len);
-+        if ( IS_ERR(entry) || !*end )
-+            return entry;
- 
--        list_for_each_entry ( entry, &dir->dirlist, list )
--        {
--            int cmp = strncmp(path, entry->name, name_len);
--            struct hypfs_entry_dir *d = container_of(entry,
--                                                     struct hypfs_entry_dir, e);
--
--            if ( cmp < 0 )
--                return ERR_PTR(-ENOENT);
--            if ( !cmp && strlen(entry->name) == name_len )
--            {
--                if ( !*end )
--                    return entry;
--
--                again = true;
--                dir = d;
--                path = end + 1;
--
--                break;
--            }
--        }
-+        path = end + 1;
-+        dir = container_of(entry, struct hypfs_entry_dir, e);
-     }
- 
-     return ERR_PTR(-ENOENT);
-@@ -227,12 +252,17 @@ static struct hypfs_entry *hypfs_get_entry(const char *path)
-     return hypfs_get_entry_rel(&hypfs_root, path + 1);
- }
- 
-+unsigned int hypfs_getsize(const struct hypfs_entry *entry)
-+{
-+    return entry->size;
-+}
-+
- int hypfs_read_dir(const struct hypfs_entry *entry,
-                    XEN_GUEST_HANDLE_PARAM(void) uaddr)
- {
-     const struct hypfs_entry_dir *d;
-     const struct hypfs_entry *e;
--    unsigned int size = entry->size;
-+    unsigned int size = entry->funcs->getsize(entry);
- 
-     ASSERT(this_cpu(hypfs_locked) != hypfs_unlocked);
- 
-@@ -242,18 +272,18 @@ int hypfs_read_dir(const struct hypfs_entry *entry,
-     {
-         struct xen_hypfs_dirlistentry direntry;
-         unsigned int e_namelen = strlen(e->name);
--        unsigned int e_len = DIRENTRY_SIZE(e_namelen);
-+        unsigned int e_len = HYPFS_DIRENTRY_SIZE(e_namelen);
- 
-         direntry.e.pad = 0;
-         direntry.e.type = e->type;
-         direntry.e.encoding = e->encoding;
--        direntry.e.content_len = e->size;
-+        direntry.e.content_len = e->funcs->getsize(e);
-         direntry.e.max_write_len = e->max_size;
-         direntry.off_next = list_is_last(&e->list, &d->dirlist) ? 0 : e_len;
-         if ( copy_to_guest(uaddr, &direntry, 1) )
-             return -EFAULT;
- 
--        if ( copy_to_guest_offset(uaddr, DIRENTRY_NAME_OFF,
-+        if ( copy_to_guest_offset(uaddr, HYPFS_DIRENTRY_NAME_OFF,
-                                   e->name, e_namelen + 1) )
-             return -EFAULT;
- 
-@@ -275,22 +305,25 @@ int hypfs_read_leaf(const struct hypfs_entry *entry,
- 
-     l = container_of(entry, const struct hypfs_entry_leaf, e);
- 
--    return copy_to_guest(uaddr, l->u.content, entry->size) ? -EFAULT: 0;
-+    return copy_to_guest(uaddr, l->u.content, entry->funcs->getsize(entry)) ?
-+                                              -EFAULT : 0;
- }
- 
- static int hypfs_read(const struct hypfs_entry *entry,
-                       XEN_GUEST_HANDLE_PARAM(void) uaddr, unsigned long ulen)
- {
-     struct xen_hypfs_direntry e;
-+    unsigned int size;
-     long ret = -EINVAL;
- 
-     if ( ulen < sizeof(e) )
-         goto out;
- 
-+    size = entry->funcs->getsize(entry);
-     e.pad = 0;
-     e.type = entry->type;
-     e.encoding = entry->encoding;
--    e.content_len = entry->size;
-+    e.content_len = size;
-     e.max_write_len = entry->max_size;
- 
-     ret = -EFAULT;
-@@ -298,7 +331,7 @@ static int hypfs_read(const struct hypfs_entry *entry,
-         goto out;
- 
-     ret = -ENOBUFS;
--    if ( ulen < entry->size + sizeof(e) )
-+    if ( ulen < size + sizeof(e) )
-         goto out;
- 
-     guest_handle_add_offset(uaddr, sizeof(e));
-@@ -314,14 +347,15 @@ int hypfs_write_leaf(struct hypfs_entry_leaf *leaf,
- {
-     char *buf;
-     int ret;
-+    struct hypfs_entry *e = &leaf->e;
- 
-     ASSERT(this_cpu(hypfs_locked) == hypfs_write_locked);
- 
--    if ( ulen > leaf->e.max_size )
-+    if ( ulen > e->max_size )
-         return -ENOSPC;
- 
--    if ( leaf->e.type != XEN_HYPFS_TYPE_STRING &&
--         leaf->e.type != XEN_HYPFS_TYPE_BLOB && ulen != leaf->e.size )
-+    if ( e->type != XEN_HYPFS_TYPE_STRING &&
-+         e->type != XEN_HYPFS_TYPE_BLOB && ulen != e->funcs->getsize(e) )
-         return -EDOM;
- 
-     buf = xmalloc_array(char, ulen);
-@@ -333,14 +367,14 @@ int hypfs_write_leaf(struct hypfs_entry_leaf *leaf,
-         goto out;
- 
-     ret = -EINVAL;
--    if ( leaf->e.type == XEN_HYPFS_TYPE_STRING &&
--         leaf->e.encoding == XEN_HYPFS_ENC_PLAIN &&
-+    if ( e->type == XEN_HYPFS_TYPE_STRING &&
-+         e->encoding == XEN_HYPFS_ENC_PLAIN &&
-          memchr(buf, 0, ulen) != (buf + ulen - 1) )
-         goto out;
- 
-     ret = 0;
-     memcpy(leaf->u.write_ptr, buf, ulen);
--    leaf->e.size = ulen;
-+    e->size = ulen;
- 
-  out:
-     xfree(buf);
-@@ -354,7 +388,7 @@ int hypfs_write_bool(struct hypfs_entry_leaf *leaf,
- 
-     ASSERT(this_cpu(hypfs_locked) == hypfs_write_locked);
-     ASSERT(leaf->e.type == XEN_HYPFS_TYPE_BOOL &&
--           leaf->e.size == sizeof(bool) &&
-+           leaf->e.funcs->getsize(&leaf->e) == sizeof(bool) &&
-            leaf->e.max_size == sizeof(bool) );
- 
-     if ( ulen != leaf->e.max_size )
-diff --git a/xen/include/xen/hypfs.h b/xen/include/xen/hypfs.h
-index 77916ebb58..c8999b5381 100644
---- a/xen/include/xen/hypfs.h
-+++ b/xen/include/xen/hypfs.h
-@@ -2,11 +2,13 @@
- #define __XEN_HYPFS_H__
- 
- #ifdef CONFIG_HYPFS
-+#include <xen/lib.h>
- #include <xen/list.h>
- #include <xen/string.h>
- #include <public/hypfs.h>
- 
- struct hypfs_entry_leaf;
-+struct hypfs_entry_dir;
- struct hypfs_entry;
- 
- struct hypfs_funcs {
-@@ -14,6 +16,9 @@ struct hypfs_funcs {
-                 XEN_GUEST_HANDLE_PARAM(void) uaddr);
-     int (*write)(struct hypfs_entry_leaf *leaf,
-                  XEN_GUEST_HANDLE_PARAM(void) uaddr, unsigned int ulen);
-+    unsigned int (*getsize)(const struct hypfs_entry *entry);
-+    struct hypfs_entry *(*findentry)(struct hypfs_entry_dir *dir,
-+                                     const char *name, unsigned int name_len);
- };
- 
- extern struct hypfs_funcs hypfs_dir_funcs;
-@@ -45,7 +50,12 @@ struct hypfs_entry_dir {
-     struct list_head dirlist;
- };
- 
--#define HYPFS_DIR_INIT(var, nam)                  \
-+#define HYPFS_DIRENTRY_NAME_OFF offsetof(struct xen_hypfs_dirlistentry, name)
-+#define HYPFS_DIRENTRY_SIZE(name_len) \
-+    (HYPFS_DIRENTRY_NAME_OFF +        \
-+     ROUNDUP((name_len) + 1, alignof(struct xen_hypfs_direntry)))
-+
-+#define HYPFS_VARDIR_INIT(var, nam, fn)           \
-     struct hypfs_entry_dir __read_mostly var = {  \
-         .e.type = XEN_HYPFS_TYPE_DIR,             \
-         .e.encoding = XEN_HYPFS_ENC_PLAIN,        \
-@@ -53,22 +63,25 @@ struct hypfs_entry_dir {
-         .e.size = 0,                              \
-         .e.max_size = 0,                          \
-         .e.list = LIST_HEAD_INIT(var.e.list),     \
--        .e.funcs = &hypfs_dir_funcs,              \
-+        .e.funcs = (fn),                          \
-         .dirlist = LIST_HEAD_INIT(var.dirlist),   \
-     }
- 
--#define HYPFS_VARSIZE_INIT(var, typ, nam, msz)    \
--    struct hypfs_entry_leaf __read_mostly var = { \
--        .e.type = (typ),                          \
--        .e.encoding = XEN_HYPFS_ENC_PLAIN,        \
--        .e.name = (nam),                          \
--        .e.max_size = (msz),                      \
--        .e.funcs = &hypfs_leaf_ro_funcs,          \
-+#define HYPFS_DIR_INIT(var, nam)                  \
-+    HYPFS_VARDIR_INIT(var, nam, &hypfs_dir_funcs)
-+
-+#define HYPFS_VARSIZE_INIT(var, typ, nam, msz, fn) \
-+    struct hypfs_entry_leaf __read_mostly var = {  \
-+        .e.type = (typ),                           \
-+        .e.encoding = XEN_HYPFS_ENC_PLAIN,         \
-+        .e.name = (nam),                           \
-+        .e.max_size = (msz),                       \
-+        .e.funcs = (fn),                           \
-     }
- 
- /* Content and size need to be set via hypfs_string_set_reference(). */
- #define HYPFS_STRING_INIT(var, nam)               \
--    HYPFS_VARSIZE_INIT(var, XEN_HYPFS_TYPE_STRING, nam, 0)
-+    HYPFS_VARSIZE_INIT(var, XEN_HYPFS_TYPE_STRING, nam, 0, &hypfs_leaf_ro_funcs)
- 
- /*
-  * Set content and size of a XEN_HYPFS_TYPE_STRING node. The node will point
-@@ -131,6 +144,12 @@ int hypfs_write_bool(struct hypfs_entry_leaf *leaf,
-                      XEN_GUEST_HANDLE_PARAM(void) uaddr, unsigned int ulen);
- int hypfs_write_custom(struct hypfs_entry_leaf *leaf,
-                        XEN_GUEST_HANDLE_PARAM(void) uaddr, unsigned int ulen);
-+unsigned int hypfs_getsize(const struct hypfs_entry *entry);
-+struct hypfs_entry *hypfs_dir_findentry(struct hypfs_entry_dir *dir,
-+                                        const char *name,
-+                                        unsigned int name_len);
-+void *hypfs_alloc_dyndata(unsigned long size, unsigned long align);
-+void *hypfs_get_dyndata(void);
- #endif
- 
- #endif /* __XEN_HYPFS_H__ */
--- 
-2.26.2
+jobs:
+ build-arm64-xsm                                              fail    
+ build-amd64                                                  fail    
+ build-armhf                                                  fail    
+ build-amd64-libvirt                                          blocked 
+ test-armhf-armhf-xl                                          blocked 
+ test-arm64-arm64-xl-xsm                                      blocked 
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    blocked 
+ test-amd64-amd64-libvirt                                     blocked 
 
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+------------------------------------------------------------
+commit 4ddd6499d999a7d08cabfda5b0262e473dd5beed
+Author: Jason Andryuk <jandryuk@gmail.com>
+Date:   Sun May 24 22:55:06 2020 -0400
+
+    SUPPORT: Add linux device model stubdom to Toolstack
+    
+    Add qemu-xen linux device model stubdomain to the Toolstack section as a
+    Tech Preview.
+    
+    Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
+    Acked-by: George Dunlap <george.dunlap@citrix.com>
+    Acked-by: Ian Jackson <ian.jackson@eu.citrix.com>
+
+commit 06f0598b41f23c9e4cf7d8c5a05b282de92f3a35
+Author: Jan Beulich <jbeulich@suse.com>
+Date:   Fri Oct 23 18:03:18 2020 +0200
+
+    x86emul: fix PINSRW and adjust other {,V}PINSR*
+    
+    The use of simd_packed_int together with no further update to op_bytes
+    has lead to wrong signaling of #GP(0) for PINSRW without a 16-byte
+    aligned memory operand. Use simd_none instead and override it after
+    general decoding with simd_other, like is done for the B/D/Q siblings.
+    
+    While benign, for consistency also use DstImplicit instead of DstReg
+    in x86_decode_twobyte().
+    
+    PINSR{B,D,Q} also had a stray (redundant) get_fpu() invocation, which
+    gets dropped.
+    
+    For further consistency also
+    - use src.bytes instead of op_bytes in relevant memcpy() invocations,
+    - avoid the pointless updating of op_bytes (all we care about later is
+      that the value be less than 16).
+    
+    Signed-off-by: Jan Beulich <jbeulich@suse.com>
+    Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
+
+commit 9af5e2b31b4e6f3892b4614ecd0a619af5d64d7e
+Author: Juergen Gross <jgross@suse.com>
+Date:   Mon Oct 19 17:27:54 2020 +0200
+
+    tools/libs/store: don't use symbolic links for external files
+    
+    Instead of using symbolic links to include files from xenstored use
+    the vpath directive and an include path.
+    
+    Signed-off-by: Juergen Gross <jgross@suse.com>
+    Acked-by: Christian Lindig <christian.lindig@citrix.com>
+    Tested-by: Bertrand Marquis <bertrand.marquis@arm.com>
+    Acked-by: Ian Jackson <iwj@xenproject.org>
+
+commit 588756db020e73e6f5e4407bbf78fbd53f15b731
+Author: Juergen Gross <jgross@suse.com>
+Date:   Mon Oct 19 17:27:54 2020 +0200
+
+    tools/libs/guest: don't use symbolic links for xenctrl headers
+    
+    Instead of using symbolic links for accessing the xenctrl private
+    headers use an include path instead.
+    
+    Signed-off-by: Juergen Gross <jgross@suse.com>
+    Acked-by: Christian Lindig <christian.lindig@citrix.com>
+    Tested-by: Bertrand Marquis <bertrand.marquis@arm.com>
+    Acked-by: Ian Jackson <iwj@xenproject.org>
+
+commit 4664034cdc720a52913bc26358240bb9d3798527
+Author: Juergen Gross <jgross@suse.com>
+Date:   Mon Oct 19 17:27:54 2020 +0200
+
+    tools/libs: move official headers to common directory
+    
+    Instead of each library having an own include directory move the
+    official headers to tools/include instead. This will drop the need to
+    link those headers to tools/include and there is no need any longer
+    to have library-specific include paths when building Xen.
+    
+    While at it remove setting of the unused variable
+    PKG_CONFIG_CFLAGS_LOCAL in libs/*/Makefile.
+    
+    Signed-off-by: Juergen Gross <jgross@suse.com>
+    Acked-by: Christian Lindig <christian.lindig@citrix.com>
+    Tested-by: Bertrand Marquis <bertrand.marquis@arm.com>
+    Acked-by: Ian Jackson <iwj@xenproject.org>
+
+commit 154137dfdba334348887baf0be9693c407f7cef3
+Author: Juergen Gross <jgross@suse.com>
+Date:   Wed Oct 7 08:50:03 2020 +0200
+
+    stubdom: add xenstore pvh stubdom
+    
+    Add a PVH xenstore stubdom in order to support a Xenstore stubdom on
+    a hypervisor built without PV-support.
+    
+    Signed-off-by: Juergen Gross <jgross@suse.com>
+    Reviewed-by: Samuel Thibault <samuel.thibault@ens-lyon.org>
+    Acked-by: Wei Liu <wl@xen.org>
+
+commit f89955449c5a47ff688e91873bbce4c3670ed9fe
+Author: Juergen Gross <jgross@suse.com>
+Date:   Fri Oct 23 15:53:10 2020 +0200
+
+    tools/init-xenstore-domain: support xenstore pvh stubdom
+    
+    Instead of creating the xenstore-stubdom domain first and parsing the
+    kernel later do it the other way round. This enables to probe for the
+    domain type supported by the xenstore-stubdom and to support both, pv
+    and pvh type stubdoms.
+    
+    Try to parse the stubdom image first for PV support, if this fails use
+    HVM. Then create the domain with the appropriate type selected.
+    
+    Signed-off-by: Juergen Gross <jgross@suse.com>
+    Acked-by: Wei Liu <wl@xen.org>
+
+commit 56c1aca6a2bc013f45e7af2fa88605a693402770
+Author: Juergen Gross <jgross@suse.com>
+Date:   Fri Oct 23 15:53:09 2020 +0200
+
+    tools/init-xenstore-domain: add logging
+    
+    Add a possibility to do logging in init-xenstore-domain: use -v[...]
+    for selecting the log-level as in xl, log to stderr.
+    
+    Signed-off-by: Juergen Gross <jgross@suse.com>
+    Acked-by: Wei Liu <wl@xen.org>
+
+commit 70cf8e9acada638f68c1c597d7580500d9f21c91
+Author: Juergen Gross <jgross@suse.com>
+Date:   Wed Sep 9 13:59:44 2020 +0200
+
+    maintainers: remove unreachable remus maintainer
+    
+    The mails for Yang Hongyang are bouncing, remove him from MAINTAINERS
+    file.
+    
+    Signed-off-by: Juergen Gross <jgross@suse.com>
+    Acked-by: Ian Jackson <ian.jackson@eu.citrix.com>
+
+commit 032a96e5ef38f96eccfebbf8a0dbd83dc7beb625
+Author: Juergen Gross <jgross@suse.com>
+Date:   Wed Sep 9 13:59:43 2020 +0200
+
+    maintainers: fix libxl paths
+    
+    Fix the paths of libxl in the MAINTAINERS file.
+    
+    Signed-off-by: Juergen Gross <jgross@suse.com>
+    Acked-by: Ian Jackson <ian.jackson@eu.citrix.com>
+(qemu changes not included)
 
