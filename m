@@ -2,26 +2,28 @@ Return-Path: <SRS0=Fpha=EB=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F2188C4363A
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2020 17:18:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5778AC4363A
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2020 17:26:03 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 93A1A20882
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2020 17:18:58 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 93A1A20882
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
+	by mail.kernel.org (Postfix) with ESMTPS id EBB0021D7B
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2020 17:26:02 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="Uh4dyZYi"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EBB0021D7B
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.12480.32522 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.12499.32546 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kX68v-0003Gz-Ms; Mon, 26 Oct 2020 17:18:49 +0000
+	id 1kX6Fi-0004Nj-P0; Mon, 26 Oct 2020 17:25:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 12480.32522; Mon, 26 Oct 2020 17:18:49 +0000
+Received: by outflank-mailman (output) from mailman id 12499.32546; Mon, 26 Oct 2020 17:25:50 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,91 +38,178 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kX68v-0003Gr-JE; Mon, 26 Oct 2020 17:18:49 +0000
-Received: by outflank-mailman (input) for mailman id 12480;
- Mon, 26 Oct 2020 17:18:48 +0000
+	id 1kX6Fi-0004Nc-KQ; Mon, 26 Oct 2020 17:25:50 +0000
+Received: by outflank-mailman (input) for mailman id 12499;
+ Mon, 26 Oct 2020 17:25:49 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=0Yhc=EB=arm.com=rahul.singh@srs-us1.protection.inumbo.net>)
- id 1kX68u-00032c-MT
- for xen-devel@lists.xenproject.org; Mon, 26 Oct 2020 17:18:48 +0000
-Received: from foss.arm.com (unknown [217.140.110.172])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id bc3f38fb-0759-475f-96b7-c29d22c77b32;
- Mon, 26 Oct 2020 17:18:40 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0CA6213A1;
- Mon, 26 Oct 2020 10:18:40 -0700 (PDT)
-Received: from scm-wfh-server-rahsin01.stack04.eu02.mi.arm.com (unknown
- [10.58.246.76])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 5D0DA3F719;
- Mon, 26 Oct 2020 10:18:39 -0700 (PDT)
+ <SRS0=Dsar=EB=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1kX6Fh-0004NA-MW
+ for xen-devel@lists.xenproject.org; Mon, 26 Oct 2020 17:25:49 +0000
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 59c0ae4d-2f47-4978-a159-0144a4da89a4;
+ Mon, 26 Oct 2020 17:25:47 +0000 (UTC)
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=0Yhc=EB=arm.com=rahul.singh@srs-us1.protection.inumbo.net>)
-	id 1kX68u-00032c-MT
-	for xen-devel@lists.xenproject.org; Mon, 26 Oct 2020 17:18:48 +0000
-X-Inumbo-ID: bc3f38fb-0759-475f-96b7-c29d22c77b32
-Received: from foss.arm.com (unknown [217.140.110.172])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
-	id bc3f38fb-0759-475f-96b7-c29d22c77b32;
-	Mon, 26 Oct 2020 17:18:40 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0CA6213A1;
-	Mon, 26 Oct 2020 10:18:40 -0700 (PDT)
-Received: from scm-wfh-server-rahsin01.stack04.eu02.mi.arm.com (unknown [10.58.246.76])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 5D0DA3F719;
-	Mon, 26 Oct 2020 10:18:39 -0700 (PDT)
-From: Rahul Singh <rahul.singh@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: bertrand.marquis@arm.com,
-	Jan Beulich <jbeulich@suse.com>,
-	Paul Durrant <paul@xen.org>
-Subject: [PATCH v1 4/4] xen/pci: solve compilation error when memory paging is not enabled.
-Date: Mon, 26 Oct 2020 17:17:54 +0000
-Message-Id: <dc85bb73ca4b6ab8b4a2370f2db7700445fbc5f8.1603731279.git.rahul.singh@arm.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <cover.1603731279.git.rahul.singh@arm.com>
-References: <cover.1603731279.git.rahul.singh@arm.com>
-In-Reply-To: <cover.1603731279.git.rahul.singh@arm.com>
-References: <cover.1603731279.git.rahul.singh@arm.com>
+	(envelope-from <SRS0=Dsar=EB=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+	id 1kX6Fh-0004NA-MW
+	for xen-devel@lists.xenproject.org; Mon, 26 Oct 2020 17:25:49 +0000
+X-Inumbo-ID: 59c0ae4d-2f47-4978-a159-0144a4da89a4
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id 59c0ae4d-2f47-4978-a159-0144a4da89a4;
+	Mon, 26 Oct 2020 17:25:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1603733147;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=pP9bPZd+ynQusPsRE1lR+uMStanSY8oC7KNbBWD1tII=;
+  b=Uh4dyZYiCXoJg+b8OAn2ERcRImgIT943j+YsjVwht5EEnUGWA1DYN5Fq
+   ORm4OGBqorTF+cD6gQicvosBbz3IeRwhKj8HrYqA+CCa2TCdPe5SKzGj8
+   KGVEleTIC3wz2v/Wiv9v30sx2DT/DqNS4cfGRvF3ookQPRYzeWtaVR7c2
+   M=;
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: RUsuTg5n0SgumsZ62WO1pyNzSxgWv6VSNF0gBpmjjULpYbEvVn0fhZLozwiYoFH6OzFQjnPU+q
+ c8PW/1DYgS8JEo08Q80+Ihob7HfZv9aJ12MqIIACSav2MbERYXFyUHaMCZXVwowpFxQtqcLGMn
+ yqKiT0eC/NVTl3V48LnvuzFZZbWSKa0QUG4YY5ifplRZpNtop2o+p/oxehzxuxyoUx6ww41xmJ
+ 0NZJbiBrPGfgyuP2EpMW9OZv3puioYDSuWRdH//cVaaKVEcGH3KwdQ38q9HrF33JbZZG1zgnZH
+ tKE=
+X-SBRS: None
+X-MesageID: 30138949
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.77,420,1596513600"; 
+   d="scan'208";a="30138949"
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
+	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Juergen Gross
+	<jgross@suse.com>, Igor Druzhinin <igor.druzhinin@citrix.com>
+Subject: [PATCH 1/3] x86/ucode: Break out compare_revisions() from existing infrastructure
+Date: Mon, 26 Oct 2020 17:25:17 +0000
+Message-ID: <20201026172519.17881-2-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20201026172519.17881-1-andrew.cooper3@citrix.com>
+References: <20201026172519.17881-1-andrew.cooper3@citrix.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-d->vm_event_paging struct is defined under CONFIG_HAS_MEM_PAGING in
-sched.h but referenced in passthrough/pci.c directly.
-
-If CONFIG_HAS_MEM_PAGING is not enabled for architecture, compiler will
-throws an error.
+Drop some unnecesserily verbose pr_debug()'s on the AMD side.
 
 No functional change.
 
-Signed-off-by: Rahul Singh <rahul.singh@arm.com>
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
- xen/drivers/passthrough/pci.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Wei Liu <wl@xen.org>
+CC: Juergen Gross <jgross@suse.com>
+CC: Igor Druzhinin <igor.druzhinin@citrix.com>
+---
+ xen/arch/x86/cpu/microcode/amd.c   | 22 +++++++++++-----------
+ xen/arch/x86/cpu/microcode/intel.c | 15 ++++++++++++---
+ 2 files changed, 23 insertions(+), 14 deletions(-)
 
-diff --git a/xen/drivers/passthrough/pci.c b/xen/drivers/passthrough/pci.c
-index c6fbb7172c..3125c23e87 100644
---- a/xen/drivers/passthrough/pci.c
-+++ b/xen/drivers/passthrough/pci.c
-@@ -1419,13 +1419,15 @@ static int assign_device(struct domain *d, u16 seg, u8 bus, u8 devfn, u32 flag)
-     if ( !is_iommu_enabled(d) )
-         return 0;
+diff --git a/xen/arch/x86/cpu/microcode/amd.c b/xen/arch/x86/cpu/microcode/amd.c
+index e80f7cd3e4..7d2f57c4cb 100644
+--- a/xen/arch/x86/cpu/microcode/amd.c
++++ b/xen/arch/x86/cpu/microcode/amd.c
+@@ -168,6 +168,15 @@ static bool check_final_patch_levels(const struct cpu_signature *sig)
+     return false;
+ }
  
--    /* Prevent device assign if mem paging or mem sharing have been 
-+#if defined(CONFIG_HAS_MEM_PAGING) || defined(CONFIG_MEM_SHARING)
-+    /* Prevent device assign if mem paging or mem sharing have been
-      * enabled for this domain */
-     if ( d != dom_io &&
-          unlikely(mem_sharing_enabled(d) ||
-                   vm_event_check_ring(d->vm_event_paging) ||
-                   p2m_get_hostp2m(d)->global_logdirty) )
-         return -EXDEV;
-+#endif
++static enum microcode_match_result compare_revisions(
++    uint32_t old_rev, uint32_t new_rev)
++{
++    if ( new_rev > old_rev )
++        return NEW_UCODE;
++
++    return OLD_UCODE;
++}
++
+ static enum microcode_match_result microcode_fits(
+     const struct microcode_patch *patch)
+ {
+@@ -178,16 +187,7 @@ static enum microcode_match_result microcode_fits(
+          equiv.id  != patch->processor_rev_id )
+         return MIS_UCODE;
  
-     /* device_assigned() should already have cleared the device for assignment */
-     ASSERT(pcidevs_locked());
+-    if ( patch->patch_id <= sig->rev )
+-    {
+-        pr_debug("microcode: patch is already at required level or greater.\n");
+-        return OLD_UCODE;
+-    }
+-
+-    pr_debug("microcode: CPU%d found a matching microcode update with version %#x (current=%#x)\n",
+-             cpu, patch->patch_id, sig->rev);
+-
+-    return NEW_UCODE;
++    return compare_revisions(sig->rev, patch->patch_id);
+ }
+ 
+ static enum microcode_match_result compare_header(
+@@ -196,7 +196,7 @@ static enum microcode_match_result compare_header(
+     if ( new->processor_rev_id != old->processor_rev_id )
+         return MIS_UCODE;
+ 
+-    return new->patch_id > old->patch_id ? NEW_UCODE : OLD_UCODE;
++    return compare_revisions(old->patch_id, new->patch_id);
+ }
+ 
+ static enum microcode_match_result compare_patch(
+diff --git a/xen/arch/x86/cpu/microcode/intel.c b/xen/arch/x86/cpu/microcode/intel.c
+index 72c07fcd1d..e1ccb5d232 100644
+--- a/xen/arch/x86/cpu/microcode/intel.c
++++ b/xen/arch/x86/cpu/microcode/intel.c
+@@ -222,6 +222,15 @@ static int microcode_sanity_check(const struct microcode_patch *patch)
+     return 0;
+ }
+ 
++static enum microcode_match_result compare_revisions(
++    uint32_t old_rev, uint32_t new_rev)
++{
++    if ( new_rev > old_rev )
++        return NEW_UCODE;
++
++    return OLD_UCODE;
++}
++
+ /* Check an update against the CPU signature and current update revision */
+ static enum microcode_match_result microcode_update_match(
+     const struct microcode_patch *mc)
+@@ -245,7 +254,7 @@ static enum microcode_match_result microcode_update_match(
+     return MIS_UCODE;
+ 
+  found:
+-    return mc->rev > cpu_sig->rev ? NEW_UCODE : OLD_UCODE;
++    return compare_revisions(cpu_sig->rev, mc->rev);
+ }
+ 
+ static enum microcode_match_result compare_patch(
+@@ -258,7 +267,7 @@ static enum microcode_match_result compare_patch(
+     ASSERT(microcode_update_match(old) != MIS_UCODE);
+     ASSERT(microcode_update_match(new) != MIS_UCODE);
+ 
+-    return new->rev > old->rev ? NEW_UCODE : OLD_UCODE;
++    return compare_revisions(old->rev, new->rev);
+ }
+ 
+ static int apply_microcode(const struct microcode_patch *patch)
+@@ -332,7 +341,7 @@ static struct microcode_patch *cpu_request_microcode(const void *buf,
+          * one with higher revision.
+          */
+         if ( (microcode_update_match(mc) != MIS_UCODE) &&
+-             (!saved || (mc->rev > saved->rev)) )
++             (!saved || compare_revisions(saved->rev, mc->rev) == NEW_UCODE) )
+             saved = mc;
+ 
+         buf  += blob_size;
 -- 
-2.17.1
+2.11.0
 
 
