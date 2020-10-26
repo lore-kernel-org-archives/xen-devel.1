@@ -7,21 +7,21 @@ X-Spam-Status: No, score=-8.2 required=3.0 tests=BAYES_00,
 	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C8518C4363A
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2020 16:00:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BAD66C4363A
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2020 16:00:37 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7A243217A0
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2020 16:00:02 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7A243217A0
+	by mail.kernel.org (Postfix) with ESMTPS id 65E56217A0
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2020 16:00:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 65E56217A0
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.12401.32283 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.12402.32295 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kX4uS-0002Q2-C7; Mon, 26 Oct 2020 15:59:48 +0000
+	id 1kX4v4-0003iN-LS; Mon, 26 Oct 2020 16:00:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 12401.32283; Mon, 26 Oct 2020 15:59:48 +0000
+Received: by outflank-mailman (output) from mailman id 12402.32295; Mon, 26 Oct 2020 16:00:26 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,74 +36,76 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kX4uS-0002Pv-8r; Mon, 26 Oct 2020 15:59:48 +0000
-Received: by outflank-mailman (input) for mailman id 12401;
- Mon, 26 Oct 2020 15:59:47 +0000
+	id 1kX4v4-0003iG-Hb; Mon, 26 Oct 2020 16:00:26 +0000
+Received: by outflank-mailman (input) for mailman id 12402;
+ Mon, 26 Oct 2020 16:00:25 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=kDWn=EB=gmail.com=wei.liu.xen@srs-us1.protection.inumbo.net>)
- id 1kX4uR-0002Pq-AZ
- for xen-devel@lists.xenproject.org; Mon, 26 Oct 2020 15:59:47 +0000
-Received: from mail-wr1-f66.google.com (unknown [209.85.221.66])
+ id 1kX4v3-0003i9-B5
+ for xen-devel@lists.xenproject.org; Mon, 26 Oct 2020 16:00:25 +0000
+Received: from mail-wr1-f67.google.com (unknown [209.85.221.67])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id a231f8f2-9a30-4314-9927-513498c579b0;
- Mon, 26 Oct 2020 15:59:45 +0000 (UTC)
-Received: by mail-wr1-f66.google.com with SMTP id j7so13196048wrt.9
- for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2020 08:59:45 -0700 (PDT)
+ id 715b8c0e-c71d-45b7-ad28-33a4f958c1d6;
+ Mon, 26 Oct 2020 16:00:24 +0000 (UTC)
+Received: by mail-wr1-f67.google.com with SMTP id x7so13270900wrl.3
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2020 09:00:24 -0700 (PDT)
 Received: from liuwe-devbox-debian-v2 ([51.145.34.42])
- by smtp.gmail.com with ESMTPSA id a3sm24261537wrh.94.2020.10.26.08.59.43
+ by smtp.gmail.com with ESMTPSA id l11sm22384427wro.89.2020.10.26.09.00.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Oct 2020 08:59:44 -0700 (PDT)
+ Mon, 26 Oct 2020 09:00:17 -0700 (PDT)
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=kDWn=EB=gmail.com=wei.liu.xen@srs-us1.protection.inumbo.net>)
-	id 1kX4uR-0002Pq-AZ
-	for xen-devel@lists.xenproject.org; Mon, 26 Oct 2020 15:59:47 +0000
-X-Inumbo-ID: a231f8f2-9a30-4314-9927-513498c579b0
-Received: from mail-wr1-f66.google.com (unknown [209.85.221.66])
+	id 1kX4v3-0003i9-B5
+	for xen-devel@lists.xenproject.org; Mon, 26 Oct 2020 16:00:25 +0000
+X-Inumbo-ID: 715b8c0e-c71d-45b7-ad28-33a4f958c1d6
+Received: from mail-wr1-f67.google.com (unknown [209.85.221.67])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id a231f8f2-9a30-4314-9927-513498c579b0;
-	Mon, 26 Oct 2020 15:59:45 +0000 (UTC)
-Received: by mail-wr1-f66.google.com with SMTP id j7so13196048wrt.9
-        for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2020 08:59:45 -0700 (PDT)
+	id 715b8c0e-c71d-45b7-ad28-33a4f958c1d6;
+	Mon, 26 Oct 2020 16:00:24 +0000 (UTC)
+Received: by mail-wr1-f67.google.com with SMTP id x7so13270900wrl.3
+        for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2020 09:00:24 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:date:from:to:cc:subject:message-id:references
          :mime-version:content-disposition:in-reply-to:user-agent;
-        bh=KLQHujeknDHRw2OOFJwGw/YxyPHbgCfirQBM51Dl8uQ=;
-        b=FIFP48+EfXofAB+5gtp7/Uz9HsycISUvD2Pv/jnRfzvg0hIu13k1B1KDRHGVCfViln
-         gQV8ZWDAIgGip5KjcPL8uFPBdYBIEMM1CIOKzOYkM1zs7rxR7MMggapuZUDc8H8eoqNs
-         FClSM6P12QoNMe6Vi+pjYi4C/QVonHo9e9uWVO+0SC8WGxKIMQdu8RGTBT01EkcSjbnN
-         ucSy08M8KMjTWd2/CHTsdszw4n8WI60IBFl2e4da0bibTcDIMKVFJFCgrEw9JCConBT1
-         XJu0/0iYb5Y+MnZTE4DGzwZcSQlawFLCeYiguIJ1uynQJimIG5o031iIIJmxJXnYtR3e
-         UmPQ==
-X-Gm-Message-State: AOAM531KuuaGhnslteCvYj1AH2FeZkfVeU+Ftu63osB59MBMig+YBNeU
-	EfRjIAyEbjfkvCQxptZ7p/A=
-X-Google-Smtp-Source: ABdhPJzidQ6TCBptpVg7zevTuXmVzifC9efFXiyZ15Qa1nhrhKIH9sqxy4JESEqoyVzq0+ELKrhXhw==
-X-Received: by 2002:adf:cd87:: with SMTP id q7mr18420442wrj.169.1603727984575;
-        Mon, 26 Oct 2020 08:59:44 -0700 (PDT)
+        bh=ouk3eT1qAU6Yio8PImrLhRW689YzO30DOS3jAJ6J78c=;
+        b=gnIBRmrXnlufffhvfwb7QiWkzD9wuXoUuGHm5uhROYB19mafSQNYXTqW2LzLFYTlnP
+         GGcHpSo3e4uWoJ5+iSLE2MnK1qSV2sNcE+U4ML5T3HQpxv7TvlNjALZHyBUhAjySH1cQ
+         RJ3XI42kwUJi7YJGJ+t9xI3pebcF+RY7lMN3AXKTx3lZpiVqCsj1v/ek3x3gK5cyomFC
+         0W1G6/5pCrLDZEiF5hAhJXC1pMaRub31YJDrpOPh75I8zZyLHPSw/pt2dHBThSCPu/tG
+         lU/gCKK+o1VNFZYIs/Atx+ywSe9jI6dmZo8oyXFyDCgRv4clow6WNqaeVW2dEdbhX7hf
+         syEw==
+X-Gm-Message-State: AOAM532betHmNFfFOM5vOmG01/qS2OaaHOq4WazUo07f5Hy3chdKcXHz
+	Ht0Q687OfWdf5Olj74vDehU=
+X-Google-Smtp-Source: ABdhPJzh/kueoRKN97FQmG7HEQuJjEWtR6wCmayPYYvQV5nOME9V93Vd9kcyRrkZr3K1RHR5OioI4g==
+X-Received: by 2002:a05:6000:18d:: with SMTP id p13mr18511512wrx.248.1603728018071;
+        Mon, 26 Oct 2020 09:00:18 -0700 (PDT)
 Received: from liuwe-devbox-debian-v2 ([51.145.34.42])
-        by smtp.gmail.com with ESMTPSA id a3sm24261537wrh.94.2020.10.26.08.59.43
+        by smtp.gmail.com with ESMTPSA id l11sm22384427wro.89.2020.10.26.09.00.17
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 26 Oct 2020 08:59:44 -0700 (PDT)
-Date: Mon, 26 Oct 2020 15:59:42 +0000
+        Mon, 26 Oct 2020 09:00:17 -0700 (PDT)
+Date: Mon, 26 Oct 2020 16:00:16 +0000
 From: Wei Liu <wl@xen.org>
 To: Jan Beulich <jbeulich@suse.com>
 Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
 	Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
-	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: [PATCH] x86: don't open-code vmap_to_mfn()
-Message-ID: <20201026155942.d3f2vxrspyexye2v@liuwe-devbox-debian-v2>
-References: <d1aeb904-6ae1-2ca8-220a-920f2be5416d@suse.com>
+	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>,
+	George Dunlap <George.Dunlap@eu.citrix.com>
+Subject: Re: [PATCH] x86: don't open-code l<N>e_to_mfn()
+Message-ID: <20201026160016.o5ovilcqvsku5s2d@liuwe-devbox-debian-v2>
+References: <2c72239a-46e9-4822-fa4b-5a0155c5c5e5@suse.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <d1aeb904-6ae1-2ca8-220a-920f2be5416d@suse.com>
+In-Reply-To: <2c72239a-46e9-4822-fa4b-5a0155c5c5e5@suse.com>
 User-Agent: NeoMutt/20180716
 
-On Mon, Oct 26, 2020 at 04:53:58PM +0100, Jan Beulich wrote:
+On Mon, Oct 26, 2020 at 04:47:43PM +0100, Jan Beulich wrote:
 > Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> 
 
 Reviewed-by: Wei Liu <wl@xen.org>
 
