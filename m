@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-13.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 596D6C55178
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2020 23:50:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DE67BC4363A
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2020 23:53:27 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1120221BE5
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2020 23:50:39 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 8DCD8218AC
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2020 23:53:27 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="uhJHajN0"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1120221BE5
+	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="hMDjDuYt"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8DCD8218AC
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.12584.32742 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.12588.32753 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kXCFu-00050u-N3; Mon, 26 Oct 2020 23:50:26 +0000
+	id 1kXCIf-0005Ba-3K; Mon, 26 Oct 2020 23:53:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 12584.32742; Mon, 26 Oct 2020 23:50:26 +0000
+Received: by outflank-mailman (output) from mailman id 12588.32753; Mon, 26 Oct 2020 23:53:17 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,47 +38,46 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kXCFu-00050n-Ht; Mon, 26 Oct 2020 23:50:26 +0000
-Received: by outflank-mailman (input) for mailman id 12584;
- Mon, 26 Oct 2020 23:50:25 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kXCIf-0005BT-0A; Mon, 26 Oct 2020 23:53:17 +0000
+Received: by outflank-mailman (input) for mailman id 12588;
+ Mon, 26 Oct 2020 23:53:15 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=lBFa=EB=kernel.org=sashal@srs-us1.protection.inumbo.net>)
- id 1kXCFt-00050i-1d
- for xen-devel@lists.xenproject.org; Mon, 26 Oct 2020 23:50:25 +0000
+ id 1kXCId-0005BL-DT
+ for xen-devel@lists.xenproject.org; Mon, 26 Oct 2020 23:53:15 +0000
 Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 5d372090-6b0f-4f73-86a4-14570f3c3254;
- Mon, 26 Oct 2020 23:50:23 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 8cdd4db8-6b51-46da-a296-c15c1e9f3f43;
+ Mon, 26 Oct 2020 23:53:13 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 16B1B2075B;
- Mon, 26 Oct 2020 23:50:22 +0000 (UTC)
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+ by mail.kernel.org (Postfix) with ESMTPSA id D86B722202;
+ Mon, 26 Oct 2020 23:53:11 +0000 (UTC)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=lBFa=EB=kernel.org=sashal@srs-us1.protection.inumbo.net>)
-	id 1kXCFt-00050i-1d
-	for xen-devel@lists.xenproject.org; Mon, 26 Oct 2020 23:50:25 +0000
-X-Inumbo-ID: 5d372090-6b0f-4f73-86a4-14570f3c3254
+	id 1kXCId-0005BL-DT
+	for xen-devel@lists.xenproject.org; Mon, 26 Oct 2020 23:53:15 +0000
+X-Inumbo-ID: 8cdd4db8-6b51-46da-a296-c15c1e9f3f43
 Received: from mail.kernel.org (unknown [198.145.29.99])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 5d372090-6b0f-4f73-86a4-14570f3c3254;
-	Mon, 26 Oct 2020 23:50:23 +0000 (UTC)
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id 8cdd4db8-6b51-46da-a296-c15c1e9f3f43;
+	Mon, 26 Oct 2020 23:53:13 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net [73.47.72.35])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id 16B1B2075B;
-	Mon, 26 Oct 2020 23:50:22 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPSA id D86B722202;
+	Mon, 26 Oct 2020 23:53:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1603756222;
+	s=default; t=1603756392;
 	bh=j8+aveAqrJQEVzbm2fQkpi44naYHrixzixT0DdUmo5A=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=uhJHajN05XdyKQNP3gZpGIRZiFVOsNjDBVOIJHE6npc+ADEGGTWD4twcXlr//Gzw+
-	 63SpAPUMffktbH4QiOwm90Tizcrla1eYVBT7x1XbQcoWH3bWSmu1JLCuDZarx7Gqrr
-	 P4ToM9QncBvJWQbimTSHHt60lvgcP6vyoqa1XUMM=
+	b=hMDjDuYtIUSPBB9B21/4bfkTHLyW6e8q+6pzDlVwQZtGtKTsoUYGPD0YYYZmihC5U
+	 l4AXo+sqP6cf37YCIqdwqF0VwUmATsw0NAqs9E51pAneZNAFjYXnlryUjmpDmHsqU6
+	 ZP6YauC5AYL556Q9tQ3qmDbCROVimmHwqRP0ncT0=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
@@ -86,12 +85,12 @@ Cc: Marek Szyprowski <m.szyprowski@samsung.com>,
 	Juergen Gross <jgross@suse.com>,
 	Sasha Levin <sashal@kernel.org>,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH AUTOSEL 5.9 062/147] xen: gntdev: fix common struct sg_table related issues
-Date: Mon, 26 Oct 2020 19:47:40 -0400
-Message-Id: <20201026234905.1022767-62-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 5.8 054/132] xen: gntdev: fix common struct sg_table related issues
+Date: Mon, 26 Oct 2020 19:50:46 -0400
+Message-Id: <20201026235205.1023962-54-sashal@kernel.org>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20201026234905.1022767-1-sashal@kernel.org>
-References: <20201026234905.1022767-1-sashal@kernel.org>
+In-Reply-To: <20201026235205.1023962-1-sashal@kernel.org>
+References: <20201026235205.1023962-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
