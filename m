@@ -2,25 +2,26 @@ Return-Path: <SRS0=Fpha=EB=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A5F5CC4363A
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2020 16:21:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0F0AFC2D0A3
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2020 16:22:32 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 69C2324650
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2020 16:21:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 69C2324650
+	by mail.kernel.org (Postfix) with ESMTPS id AC1DC223B0
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2020 16:22:31 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AC1DC223B0
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.12427.32354 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.12430.32366 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kX5F4-0005vm-Dx; Mon, 26 Oct 2020 16:21:06 +0000
+	id 1kX5GH-00062f-P0; Mon, 26 Oct 2020 16:22:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 12427.32354; Mon, 26 Oct 2020 16:21:06 +0000
+Received: by outflank-mailman (output) from mailman id 12430.32366; Mon, 26 Oct 2020 16:22:21 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -35,77 +36,92 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kX5F4-0005vf-B1; Mon, 26 Oct 2020 16:21:06 +0000
-Received: by outflank-mailman (input) for mailman id 12427;
- Mon, 26 Oct 2020 16:21:04 +0000
+	id 1kX5GH-00062Y-M0; Mon, 26 Oct 2020 16:22:21 +0000
+Received: by outflank-mailman (input) for mailman id 12430;
+ Mon, 26 Oct 2020 16:22:19 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Ht1Y=EB=arm.com=bertrand.marquis@srs-us1.protection.inumbo.net>)
- id 1kX5F2-0005va-RK
- for xen-devel@lists.xenproject.org; Mon, 26 Oct 2020 16:21:04 +0000
+ id 1kX5GF-00062L-PW
+ for xen-devel@lists.xenproject.org; Mon, 26 Oct 2020 16:22:19 +0000
 Received: from foss.arm.com (unknown [217.140.110.172])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id 7c77dcec-9fc8-4869-807b-b29d31f37240;
- Mon, 26 Oct 2020 16:21:03 +0000 (UTC)
+ id 99e5f00d-760e-4ee2-b636-b0d79a51e480;
+ Mon, 26 Oct 2020 16:22:18 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A82F01042;
- Mon, 26 Oct 2020 09:21:02 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 8E33C1042;
+ Mon, 26 Oct 2020 09:22:18 -0700 (PDT)
 Received: from e109506-lin.cambridge.arm.com (e109506-lin.cambridge.arm.com
  [10.1.198.23])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 6D63D3F719;
- Mon, 26 Oct 2020 09:21:01 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id DE9023F719;
+ Mon, 26 Oct 2020 09:22:17 -0700 (PDT)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=Ht1Y=EB=arm.com=bertrand.marquis@srs-us1.protection.inumbo.net>)
-	id 1kX5F2-0005va-RK
-	for xen-devel@lists.xenproject.org; Mon, 26 Oct 2020 16:21:04 +0000
-X-Inumbo-ID: 7c77dcec-9fc8-4869-807b-b29d31f37240
+	id 1kX5GF-00062L-PW
+	for xen-devel@lists.xenproject.org; Mon, 26 Oct 2020 16:22:19 +0000
+X-Inumbo-ID: 99e5f00d-760e-4ee2-b636-b0d79a51e480
 Received: from foss.arm.com (unknown [217.140.110.172])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTP
-	id 7c77dcec-9fc8-4869-807b-b29d31f37240;
-	Mon, 26 Oct 2020 16:21:03 +0000 (UTC)
+	id 99e5f00d-760e-4ee2-b636-b0d79a51e480;
+	Mon, 26 Oct 2020 16:22:18 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A82F01042;
-	Mon, 26 Oct 2020 09:21:02 -0700 (PDT)
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 8E33C1042;
+	Mon, 26 Oct 2020 09:22:18 -0700 (PDT)
 Received: from e109506-lin.cambridge.arm.com (e109506-lin.cambridge.arm.com [10.1.198.23])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 6D63D3F719;
-	Mon, 26 Oct 2020 09:21:01 -0700 (PDT)
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id DE9023F719;
+	Mon, 26 Oct 2020 09:22:17 -0700 (PDT)
 From: Bertrand Marquis <bertrand.marquis@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Jan Beulich <jbeulich@suse.com>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v2 0/3] xen/arm: Warn user on cpu errata 832075
-Date: Mon, 26 Oct 2020 16:20:36 +0000
-Message-Id: <cover.1603728729.git.bertrand.marquis@arm.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v2 1/3] xen/arm: use printk_once for errata warning prints
+Date: Mon, 26 Oct 2020 16:21:31 +0000
+Message-Id: <a6fc6cfd71d6d53cf89bf533a348bda799b25d7d.1603728729.git.bertrand.marquis@arm.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <cover.1603728729.git.bertrand.marquis@arm.com>
+References: <cover.1603728729.git.bertrand.marquis@arm.com>
 
-This serie is a v2 after a discussion of [1] to introduce several
-changes to handle properly the warning for Arm cpu errata 832075:
-- use printk_once instead of warning add
-- introduce a tainted type "Unsecure"
+Replace usage of warning_add by printk_once with a **** prefix and
+suffix for errata related warnings.
 
-The last patch is adding the warning and flags A57 core affected as
-unsupported.
+This prevents the need for the assert which is not secure enough to
+protect this print against wrong usage.
 
-[1] https://lists.xenproject.org/archives/html/xen-devel/2020-10/msg00896.html
+Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
+---
+ xen/arch/arm/cpuerrata.c | 10 ++--------
+ 1 file changed, 2 insertions(+), 8 deletions(-)
 
-Bertrand Marquis (3):
-  xen/arm: use printk_once for errata warning prints
-  xen: Add an unsecure Taint type
-  xen/arm: Warn user on cpu errata 832075
-
- SUPPORT.md               |  1 +
- xen/arch/arm/cpuerrata.c | 23 +++++++++++++++--------
- xen/common/kernel.c      |  4 +++-
- xen/include/xen/lib.h    |  1 +
- 4 files changed, 20 insertions(+), 9 deletions(-)
-
+diff --git a/xen/arch/arm/cpuerrata.c b/xen/arch/arm/cpuerrata.c
+index 0c63dfa779..0430069a84 100644
+--- a/xen/arch/arm/cpuerrata.c
++++ b/xen/arch/arm/cpuerrata.c
+@@ -157,7 +157,6 @@ extern char __smccc_workaround_1_smc_start[], __smccc_workaround_1_smc_end[];
+ static int enable_smccc_arch_workaround_1(void *data)
+ {
+     struct arm_smccc_res res;
+-    static bool warned = false;
+     const struct arm_cpu_capabilities *entry = data;
+ 
+     /*
+@@ -182,13 +181,8 @@ static int enable_smccc_arch_workaround_1(void *data)
+                                      "call ARM_SMCCC_ARCH_WORKAROUND_1");
+ 
+ warn:
+-    if ( !warned )
+-    {
+-        ASSERT(system_state < SYS_STATE_active);
+-        warning_add("No support for ARM_SMCCC_ARCH_WORKAROUND_1.\n"
+-                    "Please update your firmware.\n");
+-        warned = true;
+-    }
++    printk_once("**** No support for ARM_SMCCC_ARCH_WORKAROUND_1. ****\n"
++                "**** Please update your firmware.                ****\n");
+ 
+     return 0;
+ }
 -- 
 2.17.1
 
