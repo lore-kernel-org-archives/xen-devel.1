@@ -2,28 +2,28 @@ Return-Path: <SRS0=J13s=EC=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-10.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 38A8EC55179
-	for <xen-devel@archiver.kernel.org>; Tue, 27 Oct 2020 14:12:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 00F2CC388F9
+	for <xen-devel@archiver.kernel.org>; Tue, 27 Oct 2020 14:13:08 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DD8C32072D
-	for <xen-devel@archiver.kernel.org>; Tue, 27 Oct 2020 14:12:20 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id A34E022264
+	for <xen-devel@archiver.kernel.org>; Tue, 27 Oct 2020 14:13:07 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="WnLJiyel"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DD8C32072D
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	dkim=pass (2048-bit key) header.d=lucina.net header.i=@lucina.net header.b="TvSzT6I5"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A34E022264
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=lucina.net
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.12898.33367 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.12902.33379 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kXPhl-0005El-Us; Tue, 27 Oct 2020 14:12:05 +0000
+	id 1kXPic-0005PO-9O; Tue, 27 Oct 2020 14:12:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 12898.33367; Tue, 27 Oct 2020 14:12:05 +0000
+Received: by outflank-mailman (output) from mailman id 12902.33379; Tue, 27 Oct 2020 14:12:58 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,78 +38,136 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kXPhl-0005Ee-QK; Tue, 27 Oct 2020 14:12:05 +0000
-Received: by outflank-mailman (input) for mailman id 12898;
- Tue, 27 Oct 2020 14:12:05 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=OCGY=EC=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1kXPhl-0005EU-42
- for xen-devel@lists.xenproject.org; Tue, 27 Oct 2020 14:12:05 +0000
-Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 59c09a57-d156-4a7a-a13c-46552d1189e0;
- Tue, 27 Oct 2020 14:12:03 +0000 (UTC)
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+	id 1kXPic-0005PH-4S; Tue, 27 Oct 2020 14:12:58 +0000
+Received: by outflank-mailman (input) for mailman id 12902;
+ Tue, 27 Oct 2020 14:12:56 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=bP4d=EC=lucina.net=martin@srs-us1.protection.inumbo.net>)
+ id 1kXPia-0005Ng-NF
+ for xen-devel@lists.xenproject.org; Tue, 27 Oct 2020 14:12:56 +0000
+Received: from smtp.lucina.net (unknown [62.176.169.44])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 4d17d290-c339-455e-ab5a-8dac409db236;
+ Tue, 27 Oct 2020 14:12:55 +0000 (UTC)
+Received: from nodbug.lucina.net (93-137-71-201.adsl.net.t-com.hr
+ [93.137.71.201])
+ by smtp.lucina.net (Postfix) with ESMTPSA id 4ECDC122804;
+ Tue, 27 Oct 2020 15:12:54 +0100 (CET)
+Received: by nodbug.lucina.net (Postfix, from userid 1000)
+ id 5939A2683D52; Tue, 27 Oct 2020 15:12:53 +0100 (CET)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=OCGY=EC=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
-	id 1kXPhl-0005EU-42
-	for xen-devel@lists.xenproject.org; Tue, 27 Oct 2020 14:12:05 +0000
-X-Inumbo-ID: 59c09a57-d156-4a7a-a13c-46552d1189e0
-Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 59c09a57-d156-4a7a-a13c-46552d1189e0;
-	Tue, 27 Oct 2020 14:12:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1603807923;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=aa/4vWnGY2t+XfGcpzdER28PO2XLmOedn3YHehVXRLo=;
-  b=WnLJiyelaAFlMG5zIUJj/ySROi5HZB8MJJe3dwqecWJzzHEdQyYVmJeK
-   qliwqVPAteBdeOgtkc+o0HblhhmXM+3vKog6bGLphu51RLAoreNyRIIb3
-   bnTDa9FXkylPftTeHI251QRLXsRKxvtsJ4Yb+7Yvpot+w/gXvGteilIPX
-   g=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: v/+EfdVrloK5LeCEzi/Fv1PLsbcad73XHtmN4+2W+ispExyB9W5lmOK/e9gwkbVYN0GkAajM+l
- Wa8d54ST17aNpIswZLmcAQbVARFvwT6o6ROdZhHm3523vEiAUPEim8t7QxO7QA1G1eeksmYt5u
- 7JpNKWXKeh7rJrUJQx6tX8m2pyB4cWwOCCJB1U4flrvrUqqLUw1pqoRD+LltDwNmmkNgsbqpZv
- FUEWgLE4Jrs+L8xoEWA95NLkALP2n0Kr0lYElvdvhIyhRr1QFrnrNRJkuUuLCsCRI7cY+SnIzq
- 008=
-X-SBRS: None
-X-MesageID: 29875501
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.77,424,1596513600"; 
-   d="scan'208";a="29875501"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH v3 0/2] x86/pv: Alternative XSA-286 fix
-Date: Tue, 27 Oct 2020 14:10:35 +0000
-Message-ID: <20201027141037.27357-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.11.0
+	(envelope-from <SRS0=bP4d=EC=lucina.net=martin@srs-us1.protection.inumbo.net>)
+	id 1kXPia-0005Ng-NF
+	for xen-devel@lists.xenproject.org; Tue, 27 Oct 2020 14:12:56 +0000
+X-Inumbo-ID: 4d17d290-c339-455e-ab5a-8dac409db236
+Received: from smtp.lucina.net (unknown [62.176.169.44])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id 4d17d290-c339-455e-ab5a-8dac409db236;
+	Tue, 27 Oct 2020 14:12:55 +0000 (UTC)
+Received: from nodbug.lucina.net (93-137-71-201.adsl.net.t-com.hr [93.137.71.201])
+	by smtp.lucina.net (Postfix) with ESMTPSA id 4ECDC122804;
+	Tue, 27 Oct 2020 15:12:54 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=lucina.net;
+	s=dkim-201811; t=1603807974;
+	bh=h2OzsMInKjif+yY3DceG3feD9iaBujgGV9ZwqWPl4jw=;
+	h=Date:From:To:Cc:Subject:From;
+	b=TvSzT6I5LPOSShABikOcf1ng7ddfFojtXjZOuHBIObybR5blM90Blu3SVDy/SlQIj
+	 O8otzo1Xh+cL6zpO/31kx5ZAOAce/0gac1H4/AgBC06ZARSezcKMm03YaU72jBQ9DJ
+	 q15gt4ygSiuCK95TZriJLNPV6/6kZTQssh3/rk1IymeAK2wZjLPTBkxMs+cCAPRUwK
+	 cyQlI/FkW0cfgqWTafIw4q4/oJnO9HUAKeHW/F+fUFjGBHwRTCYfCPIlaFSwO/uwrd
+	 4D3x7q1RcyythveykijyiDYhA4zWOA/iE2O/Pig7JJh2POz+fh4wyAEaGMQs2Bun3+
+	 MbskA8aOJ4QvA==
+Received: by nodbug.lucina.net (Postfix, from userid 1000)
+	id 5939A2683D52; Tue, 27 Oct 2020 15:12:53 +0100 (CET)
+Date: Tue, 27 Oct 2020 15:12:53 +0100
+From: Martin Lucina <martin@lucina.net>
+To: mirageos-devel@lists.xenproject.org
+Cc: xen-devel@lists.xenproject.org
+Subject: [ANN] MirageOS 3.9.0 released
+Message-ID: <20201027141253.GA14637@nodbug.lucina.net>
+Mail-Followup-To: Martin Lucina <martin@lucina.net>,
+	mirageos-devel@lists.xenproject.org, xen-devel@lists.xenproject.org
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+User-Agent: Mutt/1.10.1 (2018-07-13)
 
-Alternative XSA-286 fix, with far less of a performance hit.
+Dear all,
 
-v3:
- * Split into two patches, to try and make the TLB flushing in do_mmu_update()
-   a tractable problem to solve.
+We are pleased to announce the release of MirageOS 3.9.0.
 
-Andrew Cooper (2):
-  x86/pv: Drop FLUSH_TLB_GLOBAL in do_mmu_update() for XPTI
-  x86/pv: Flush TLB in response to paging structure changes
+Our last release announcement was for [MirageOS
+3.6.0](https://mirage.io/blog/announcing-mirage-36-release), so we will
+also cover changes since 3.7.x and 3.8.x in this announcement.
 
- xen/arch/x86/mm.c | 69 +++++++++++++++++++++++++++++++++++++++++++++++--------
- 1 file changed, 59 insertions(+), 10 deletions(-)
+New features:
 
--- 
-2.11.0
+- The Xen backend has been [re-written from
+  scratch](https://github.com/mirage/mirage/issues/1159) to be based on
+  Solo5, and now supports PVHv2 on Xen 4.10 or higher, and QubesOS 4.0.
+- As part of this re-write, the existing Mini-OS based implementation has
+  been retired, and all non-UNIX backends now use a unified OCaml runtime
+  based on `ocaml-freestanding`.
+- OCaml runtime settings settable via the `OCAMLRUNPARAM` environment
+  variable are now exposed as unikernel boot parameters. For details, refer
+  to [#1180](https://github.com/mirage/mirage/pull/1180).
 
+Security posture improvements:
+
+- With the move to a unified Solo5 and ocaml-freestanding base MirageOS
+  unikernels on Xen gain several notable improvements to their overall
+  security posture such as SSP for all C code, W^X, and malloc heap
+  canaries. For details, refer to the mirage-xen 6.0.0 release
+  [announcement](https://github.com/mirage/mirage-xen/releases/tag/v6.0.0).
+
+API breaking changes:
+
+- Several Xen-specific APIs have been removed or replaced, unikernels using
+  these may need to be updated. For details, refer to the mirage-xen 6.0.0
+  release
+  [announcement](https://github.com/mirage/mirage-xen/releases/tag/v6.0.0).
+
+Other notable changes:
+
+- `Mirage_runtime` provides event loop enter and exit hook registration
+  ([#1010](https://github.com/mirage/mirage/pull/1010)).
+- All MirageOS backends now behave similarly on a successful exit of the
+  unikernel: they call `exit` with the return value 0, thus `at_exit`
+  handlers are now executed
+  ([#1011](https://github.com/mirage/mirage/pull/1011)).
+- The unix backend used a toplevel exception handler, which has been
+  removed. All backends now behave equally with respect to exceptions.
+- Please note that the `Mirage_net.listen` function still installs an
+  exception handler, which will be removed in a future release. The out of
+  memory exception is no longer caught by `Mirage_net.listen`
+  ([#1036](https://github.com/mirage/mirage/issues/1036)).
+- To reduce the number of OPAM packages, the `mirage-*-lwt` packages are
+  now deprecated. `Mirage_net` (and others) now use `Lwt.t` directly, and
+  their `buffer` type is `Cstruct.t`
+  ([#1004](https://github.com/mirage/mirage/issues/1004)).
+- OPAM files generated by `mirage configure` now include opam build and
+  installation instructions, and also an URL to the Git `origin`
+  ([#1022](https://github.com/mirage/mirage/pull/1022)).
+
+Known issues:
+
+- `mirage configure` fails if the unikernel is under version control and no
+  `origin` remote is present
+  ([#1188](https://github.com/mirage/mirage/issues/1188)).
+- The Xen backend has issues with event delivery if built with an Alpine
+  Linux GCC toolchain. As a work-around, please use a Fedora or Debian
+  based toolchain.
+
+Acknowledgements:
+
+- Thanks to Roger Pau Monné, Andrew Cooper and other core Xen developers
+  for help with understanding the specifics of how Xen PVHv2 works, and how
+  to write an implementation from scratch.
+- Thanks to Marek Marczykowski-Górecki for help with the QubesOS specifics,
+  and for forward-porting some missing parts of PVHv2 to QubesOS version of
+  Xen.
+- Thanks to @palainp on Github for help with testing on QubesOS.
 
