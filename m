@@ -2,28 +2,28 @@ Return-Path: <SRS0=J13s=EC=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 90E2DC388F9
-	for <xen-devel@archiver.kernel.org>; Tue, 27 Oct 2020 13:44:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6937DC55178
+	for <xen-devel@archiver.kernel.org>; Tue, 27 Oct 2020 14:11:55 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2AAAF21707
-	for <xen-devel@archiver.kernel.org>; Tue, 27 Oct 2020 13:44:52 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 1537F223AB
+	for <xen-devel@archiver.kernel.org>; Tue, 27 Oct 2020 14:11:54 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="KFP2JGzn"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2AAAF21707
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="foyHneP8"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1537F223AB
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.12863.33331 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.12894.33355 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kXPHH-00027f-2C; Tue, 27 Oct 2020 13:44:43 +0000
+	id 1kXPhE-000558-KC; Tue, 27 Oct 2020 14:11:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 12863.33331; Tue, 27 Oct 2020 13:44:43 +0000
+Received: by outflank-mailman (output) from mailman id 12894.33355; Tue, 27 Oct 2020 14:11:32 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,182 +38,229 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kXPHG-00027W-TS; Tue, 27 Oct 2020 13:44:42 +0000
-Received: by outflank-mailman (input) for mailman id 12863;
- Tue, 27 Oct 2020 13:44:41 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kXPhE-000551-GL; Tue, 27 Oct 2020 14:11:32 +0000
+Received: by outflank-mailman (input) for mailman id 12894;
+ Tue, 27 Oct 2020 14:11:31 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=txzK=EC=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1kXPHF-0001b2-7f
- for xen-devel@lists.xenproject.org; Tue, 27 Oct 2020 13:44:41 +0000
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 2ba1eb07-fff5-4634-a0eb-c9e6eb2c3882;
- Tue, 27 Oct 2020 13:44:05 +0000 (UTC)
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kXPGe-0007w9-TI
- for xen-devel@lists.xenproject.org; Tue, 27 Oct 2020 13:44:04 +0000
-Received: from iwj (helo=mynotebook.example.org)
- by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kXPGe-00025I-RV
- for xen-devel@lists.xenproject.org; Tue, 27 Oct 2020 13:44:04 +0000
-Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
- by mariner.uk.xensource.com with esmtp (Exim 4.89)
- (envelope-from <ijackson@chiark.greenend.org.uk>)
- id 1kXPGd-0002Uo-4S; Tue, 27 Oct 2020 13:44:03 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+ <SRS0=OCGY=EC=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1kXPhD-00053N-In
+ for xen-devel@lists.xenproject.org; Tue, 27 Oct 2020 14:11:31 +0000
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 24476384-a21d-491e-94b1-b4ca6fb47bf9;
+ Tue, 27 Oct 2020 14:11:26 +0000 (UTC)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=txzK=EC=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
-	id 1kXPHF-0001b2-7f
-	for xen-devel@lists.xenproject.org; Tue, 27 Oct 2020 13:44:41 +0000
-X-Inumbo-ID: 2ba1eb07-fff5-4634-a0eb-c9e6eb2c3882
-Received: from mail.xenproject.org (unknown [104.130.215.37])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 2ba1eb07-fff5-4634-a0eb-c9e6eb2c3882;
-	Tue, 27 Oct 2020 13:44:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
-	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=wq7mzu+ToDMU3LijsJ/aE5ctMgAPIjBlbDtSDRbuAHo=; b=KFP2JGznwmC3nlWKz5vo4yJ1xs
-	6OHQE5SgihgX6Hoqr5tqEy/obBhH63LYdRCir5GTNPytlIkCZBBP7/Qewo4NfqlBJG0H/VvenCK2A
-	da5yPGEz31JU6hu9nMFwqZqL7rCQW0je8S55Va7sUVMEocySGzQX0xqFnsnrdT3e8RPA=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
-	by mail.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <ijackson@chiark.greenend.org.uk>)
-	id 1kXPGe-0007w9-TI
-	for xen-devel@lists.xenproject.org; Tue, 27 Oct 2020 13:44:04 +0000
-Received: from iwj (helo=mynotebook.example.org)
-	by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
-	(envelope-from <ijackson@chiark.greenend.org.uk>)
-	id 1kXPGe-00025I-RV
-	for xen-devel@lists.xenproject.org; Tue, 27 Oct 2020 13:44:04 +0000
-Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
-	by mariner.uk.xensource.com with esmtp (Exim 4.89)
-	(envelope-from <ijackson@chiark.greenend.org.uk>)
-	id 1kXPGd-0002Uo-4S; Tue, 27 Oct 2020 13:44:03 +0000
-From: Ian Jackson <iwj@xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Ian Jackson <iwj@xenproject.org>
-Subject: [OSSTEST PATCH 6/7] PDU::snmp, PDU::msw: Rename from msw to snmp
-Date: Tue, 27 Oct 2020 13:43:53 +0000
-Message-Id: <20201027134354.25561-7-iwj@xenproject.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20201027134354.25561-1-iwj@xenproject.org>
-References: <20201027134354.25561-1-iwj@xenproject.org>
+	(envelope-from <SRS0=OCGY=EC=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+	id 1kXPhD-00053N-In
+	for xen-devel@lists.xenproject.org; Tue, 27 Oct 2020 14:11:31 +0000
+X-Inumbo-ID: 24476384-a21d-491e-94b1-b4ca6fb47bf9
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id 24476384-a21d-491e-94b1-b4ca6fb47bf9;
+	Tue, 27 Oct 2020 14:11:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1603807886;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=569KM2uHTxkxXUk0wQS7+jSoZw4XOaNwLw4aKbluc9Q=;
+  b=foyHneP8l7UvBClRox4rU4K7L0y+JXEHa+93fhIGjUYKW8zQb8D4TzKD
+   hxFzE8KoWW4/wmu4Kti34uakVq+gWULmjVLnBlv4bqH4l844vcC2PSmUG
+   my6n2axE4aMQwe32eUTeO+jD2USuSNObDgYbKMlVsRGMcv2udzyRXSF1M
+   o=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: Y8PQGjjVLkgnsWJYE/hJLFKUz4ieiFNndYKnktFXYdCh6bRgaJtQzJtkmKMvO0dhyzd9F5++Kj
+ Xjg2q7CoLK1lfPfo9gpuS/Osx0/q3Knt1GnyIBMRGs5Jq5qQs+iR8TfZtzaQ4wruwbM8DBC3Z0
+ 8rzv98DFLeo2g8ylDqPH3kR5cFpsQ1Q5NSkjSguGYvT3YGm0ZfAZoGj1SJ4u1mk2h5scMM5Ris
+ 5n/rw3FFC7rqAc+2FzP9BYs9a/062a2NAeIcH8Y0j4e0ZUQi1vzxM+AROOPwoaFHsCdaPgQOf6
+ s74=
+X-SBRS: None
+X-MesageID: 30949886
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.77,424,1596513600"; 
+   d="scan'208";a="30949886"
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
+	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH v3 2/2] x86/pv: Flush TLB in response to paging structure changes
+Date: Tue, 27 Oct 2020 14:10:37 +0000
+Message-ID: <20201027141037.27357-3-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20201027141037.27357-1-andrew.cooper3@citrix.com>
+References: <20201027141037.27357-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-Retain the old name for compatibility with existing configuration.
+With MMU_UPDATE, a PV guest can make changes to higher level pagetables.  This
+is safe from Xen's point of view (as the update only affects guest mappings),
+and the guest is required to flush (if necessary) after making updates.
 
-No change other than to messages.
+However, Xen's use of linear pagetables (UPDATE_VA_MAPPING, GNTTABOP_map,
+writeable pagetables, etc.) is an implementation detail outside of the
+API/ABI.
 
-Signed-off-by: Ian Jackson <iwj@xenproject.org>
+Changes in the paging structure require invalidations in the linear pagetable
+range for subsequent accesses into the linear pagetables to access non-stale
+mappings.  Xen must provide suitable flushing to prevent intermixed guest
+actions from accidentally accessing/modifying the wrong pagetable.
+
+For all L2 and higher modifications, flush the TLB.  PV guests cannot create
+L2 or higher entries with the Global bit set, so no mappings established in
+the linear range can be global.  (This could in principle be an order 39 flush
+starting at LINEAR_PT_VIRT_START, but no such mechanism exists in practice.)
+
+Express the necessary flushes as a set of booleans which accumulate across the
+operation.  Comment the flushing logic extensively.
+
+This is XSA-286
+
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
- Osstest/PDU/msw.pm  | 14 +-------------
- Osstest/PDU/snmp.pm | 39 +++++++++++++++++++++++++++++++++++++++
- README              |  9 ++++++---
- 3 files changed, 46 insertions(+), 16 deletions(-)
- create mode 100644 Osstest/PDU/snmp.pm
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Wei Liu <wl@xen.org>
 
-diff --git a/Osstest/PDU/msw.pm b/Osstest/PDU/msw.pm
-index 614216d4..099ef778 100644
---- a/Osstest/PDU/msw.pm
-+++ b/Osstest/PDU/msw.pm
-@@ -22,18 +22,6 @@ use warnings;
+v3:
+ * Rework from scratch vs v2.
+---
+ xen/arch/x86/mm.c | 69 +++++++++++++++++++++++++++++++++++++++++++++++--------
+ 1 file changed, 59 insertions(+), 10 deletions(-)
+
+diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+index 38168189aa..a3704ef648 100644
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -3891,7 +3891,8 @@ long do_mmu_update(
+     struct vcpu *curr = current, *v = curr;
+     struct domain *d = v->domain, *pt_owner = d, *pg_owner;
+     mfn_t map_mfn = INVALID_MFN, mfn;
+-    bool sync_guest = false;
++    bool flush_linear_pt = false, flush_root_pt_local = false,
++        flush_root_pt_others = false;
+     uint32_t xsm_needed = 0;
+     uint32_t xsm_checked = 0;
+     int rc = put_old_guest_table(curr);
+@@ -4041,6 +4042,8 @@ long do_mmu_update(
+                         break;
+                     rc = mod_l2_entry(va, l2e_from_intpte(req.val), mfn,
+                                       cmd == MMU_PT_UPDATE_PRESERVE_AD, v);
++                    if ( !rc )
++                        flush_linear_pt = true;
+                     break;
  
- use Osstest;
+                 case PGT_l3_page_table:
+@@ -4048,6 +4051,8 @@ long do_mmu_update(
+                         break;
+                     rc = mod_l3_entry(va, l3e_from_intpte(req.val), mfn,
+                                       cmd == MMU_PT_UPDATE_PRESERVE_AD, v);
++                    if ( !rc )
++                        flush_linear_pt = true;
+                     break;
  
--use parent qw(Osstest::PDU::unsupported);
--
--sub new {
--    my ($class, $ho, $methname, @args) = @_;
--
--    return bless { Args => \@args }, $class;
--}
--
--sub pdu_power_state {
--    my ($mo, $on) = @_;
--    my $onoff= $on ? "on" : "off";
--    system_checked("./pdu-snmp @{ $mo->{Args} } $onoff");
--}
-+use parent qw(Osstest::PDU::snmp);
+                 case PGT_l4_page_table:
+@@ -4055,6 +4060,8 @@ long do_mmu_update(
+                         break;
+                     rc = mod_l4_entry(va, l4e_from_intpte(req.val), mfn,
+                                       cmd == MMU_PT_UPDATE_PRESERVE_AD, v);
++                    if ( !rc )
++                        flush_linear_pt = true;
+                     if ( !rc && pt_owner->arch.pv.xpti )
+                     {
+                         bool local_in_use = false;
+@@ -4063,7 +4070,7 @@ long do_mmu_update(
+                                     mfn) )
+                         {
+                             local_in_use = true;
+-                            get_cpu_info()->root_pgt_changed = true;
++                            flush_root_pt_local = true;
+                         }
  
- 1;
-diff --git a/Osstest/PDU/snmp.pm b/Osstest/PDU/snmp.pm
-new file mode 100644
-index 00000000..dca60df7
---- /dev/null
-+++ b/Osstest/PDU/snmp.pm
-@@ -0,0 +1,39 @@
-+# This is part of "osstest", an automated testing framework for Xen.
-+# Copyright (C) 2009-2013 Citrix Inc.
-+# 
-+# This program is free software: you can redistribute it and/or modify
-+# it under the terms of the GNU Affero General Public License as published by
-+# the Free Software Foundation, either version 3 of the License, or
-+# (at your option) any later version.
-+# 
-+# This program is distributed in the hope that it will be useful,
-+# but WITHOUT ANY WARRANTY; without even the implied warranty of
-+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+# GNU Affero General Public License for more details.
-+# 
-+# You should have received a copy of the GNU Affero General Public License
-+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+
-+
-+package Osstest::PDU::snmp;
-+
-+use strict;
-+use warnings;
-+
-+use Osstest;
-+
-+use parent qw(Osstest::PDU::unsupported);
-+
-+sub new {
-+    my ($class, $ho, $methname, @args) = @_;
-+
-+    return bless { Args => \@args }, $class;
-+}
-+
-+sub pdu_power_state {
-+    my ($mo, $on) = @_;
-+    my $onoff= $on ? "on" : "off";
-+    system_checked("./pdu-snmp @{ $mo->{Args} } $onoff");
-+}
-+
-+1;
-diff --git a/README b/README
-index 70f8ae73..33c4d2cc 100644
---- a/README
-+++ b/README
-@@ -654,9 +654,9 @@ HostProp_<host>_PowerILOM
-         manual          Asks the user on the controlling terminal
-         unsupported     Fails whenever a power operation is needed
+                         /*
+@@ -4075,7 +4082,7 @@ long do_mmu_update(
+                              (1 + !!(page->u.inuse.type_info & PGT_pinned) +
+                               mfn_eq(pagetable_get_mfn(curr->arch.guest_table_user),
+                                      mfn) + local_in_use) )
+-                            sync_guest = true;
++                            flush_root_pt_others = true;
+                     }
+                     break;
  
--        msw [--apc6] <pdu> <port-name-regexp|port-num>
--             Control an APC masterswitch via SNMP.  The SNMP
--             community is `private'.  See the `pdu-snmp' script.
-+        snmp --<model> <pdu> <port-name-regexp|port-num>
-+             Control a PDU via SNMP.  The SNMP community is `private'.
-+             See the `pdu-snmp' script for supported model names.
+@@ -4177,19 +4184,61 @@ long do_mmu_update(
+     if ( va )
+         unmap_domain_page(va);
  
-         ipmi <mgmt> [<user> [<pass> [<ipmitool options...>]]]
-              Use IPMI by (by running ipmitool).  <mgmt> is the name or
-@@ -667,6 +667,9 @@ HostProp_<host>_PowerILOM
-              Does nothing if `on|off|both' is inapplicable, and has
-              less error checking and less defaulting than ipmi.
- 
-+        msw ....
-+             Deprecated alias for snmp.
+-    if ( sync_guest )
++    /*
++     * Perform required TLB maintenance.
++     *
++     * This logic currently depend on flush_linear_pt being a superset of the
++     * flush_root_pt_* conditions.
++     *
++     * pt_owner may not be current->domain.  This may occur during
++     * construction of 32bit PV guests, or debugging of PV guests.  The
++     * behaviour cannot be correct with domain unpaused.  We therefore expect
++     * pt_owner->dirty_cpumask to be empty, but it is a waste of effort to
++     * explicitly check for an exclude this corner case.
++     *
++     * flush_linear_pt requires a FLUSH_TLB to all dirty CPUs.  The flush must
++     * be performed now to maintain correct behaviour across a multicall.
++     * i.e. we cannot relax FLUSH_TLB to FLUSH_ROOT_PGTBL, given that the
++     * former is a side effect of the latter, because the resync (which is in
++     * the return-to-guest path) happens too late.
++     *
++     * flush_root_pt_* requires FLUSH_ROOT_PGTBL on either the local CPU
++     * (implies pt_owner == current->domain and current->processor set in
++     * pt_owner->dirty_cpumask), and/or all *other* dirty CPUs as there are
++     * references we can't account for locally.
++     */
++    if ( flush_linear_pt /* || flush_root_pt_local || flush_root_pt_others */ )
+     {
++        unsigned int cpu = smp_processor_id();
++        cpumask_t *mask = pt_owner->dirty_cpumask;
 +
-         Supported specially are:
+         /*
+-         * Force other vCPU-s of the affected guest to pick up L4 entry
+-         * changes (if any).
++         * Always handle local flushing separately (if applicable), to
++         * separate the flush invocations appropriately for scope of the two
++         * flush_root_pt_* variables.
+          */
+-        unsigned int cpu = smp_processor_id();
+-        cpumask_t *mask = per_cpu(scratch_cpumask, cpu);
++        if ( likely(cpumask_test_cpu(cpu, mask)) )
++        {
++            mask = per_cpu(scratch_cpumask, cpu);
  
-         <delay>
+-        cpumask_andnot(mask, pt_owner->dirty_cpumask, cpumask_of(cpu));
++            cpumask_copy(mask, pt_owner->dirty_cpumask);
++            __cpumask_clear_cpu(cpu, mask);
++
++            flush_local(FLUSH_TLB |
++                        (flush_root_pt_local ? FLUSH_ROOT_PGTBL : 0));
++        }
++        else
++            /* Sanity check.  flush_root_pt_local implies local cpu is dirty. */
++            ASSERT(!flush_root_pt_local);
++
++        /* Flush the remote dirty CPUs.  Does not include the local CPU. */
+         if ( !cpumask_empty(mask) )
+-            flush_mask(mask, FLUSH_ROOT_PGTBL);
++            flush_mask(mask, FLUSH_TLB |
++                       (flush_root_pt_others ? FLUSH_ROOT_PGTBL : 0));
+     }
++    else
++        /* Sanity check.  flush_root_pt_* implies flush_linear_pt. */
++        ASSERT(!flush_root_pt_local && !flush_root_pt_others);
+ 
+     perfc_add(num_page_updates, i);
+ 
 -- 
-2.20.1
+2.11.0
 
 
