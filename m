@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7FB75C55178
-	for <xen-devel@archiver.kernel.org>; Tue, 27 Oct 2020 13:44:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 95367C388F9
+	for <xen-devel@archiver.kernel.org>; Tue, 27 Oct 2020 13:44:31 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2B162218AC
-	for <xen-devel@archiver.kernel.org>; Tue, 27 Oct 2020 13:44:27 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 31A1621707
+	for <xen-devel@archiver.kernel.org>; Tue, 27 Oct 2020 13:44:31 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="cfmBjS2V"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2B162218AC
+	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="QERZ262V"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 31A1621707
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.12856.33271 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.12857.33283 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kXPGr-0001gR-E6; Tue, 27 Oct 2020 13:44:17 +0000
+	id 1kXPGw-0001ky-MR; Tue, 27 Oct 2020 13:44:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 12856.33271; Tue, 27 Oct 2020 13:44:17 +0000
+Received: by outflank-mailman (output) from mailman id 12857.33283; Tue, 27 Oct 2020 13:44:22 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,116 +38,146 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kXPGr-0001gG-9w; Tue, 27 Oct 2020 13:44:17 +0000
-Received: by outflank-mailman (input) for mailman id 12856;
- Tue, 27 Oct 2020 13:44:16 +0000
+	id 1kXPGw-0001kn-JI; Tue, 27 Oct 2020 13:44:22 +0000
+Received: by outflank-mailman (input) for mailman id 12857;
+ Tue, 27 Oct 2020 13:44:21 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=txzK=EC=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1kXPGq-0001b2-78
- for xen-devel@lists.xenproject.org; Tue, 27 Oct 2020 13:44:16 +0000
+ id 1kXPGv-0001b2-7P
+ for xen-devel@lists.xenproject.org; Tue, 27 Oct 2020 13:44:21 +0000
 Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id ca71bba4-5000-4fcb-9d25-00ed036ea09f;
+ id a14440a3-c76a-4308-aae1-ceb979216295;
  Tue, 27 Oct 2020 13:44:04 +0000 (UTC)
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kXPGe-0007w0-7T
- for xen-devel@lists.xenproject.org; Tue, 27 Oct 2020 13:44:04 +0000
+ (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kXPGd-0007vx-UJ
+ for xen-devel@lists.xenproject.org; Tue, 27 Oct 2020 13:44:03 +0000
 Received: from iwj (helo=mynotebook.example.org)
  by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kXPGe-00024D-5h
- for xen-devel@lists.xenproject.org; Tue, 27 Oct 2020 13:44:04 +0000
+ (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kXPGd-00023g-TN
+ for xen-devel@lists.xenproject.org; Tue, 27 Oct 2020 13:44:03 +0000
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by mariner.uk.xensource.com with esmtp (Exim 4.89)
  (envelope-from <ijackson@chiark.greenend.org.uk>)
- id 1kXPGc-0002Uo-Eu; Tue, 27 Oct 2020 13:44:02 +0000
+ id 1kXPGc-0002Uo-7J; Tue, 27 Oct 2020 13:44:02 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=txzK=EC=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
-	id 1kXPGq-0001b2-78
-	for xen-devel@lists.xenproject.org; Tue, 27 Oct 2020 13:44:16 +0000
-X-Inumbo-ID: ca71bba4-5000-4fcb-9d25-00ed036ea09f
+	id 1kXPGv-0001b2-7P
+	for xen-devel@lists.xenproject.org; Tue, 27 Oct 2020 13:44:21 +0000
+X-Inumbo-ID: a14440a3-c76a-4308-aae1-ceb979216295
 Received: from mail.xenproject.org (unknown [104.130.215.37])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id ca71bba4-5000-4fcb-9d25-00ed036ea09f;
+	id a14440a3-c76a-4308-aae1-ceb979216295;
 	Tue, 27 Oct 2020 13:44:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=juiCgnMY9/QgNhWg1mZv5w6KyG10Ju4wvLuPHHdxwak=; b=cfmBjS2VvCrPXT2Enw1FWAmqvT
-	+e13+JUKzFNeQ7nHxEEzB4eNuVRR8UJNo70aN+Eb7Hnpjqlp6KZ34HUA1tdHOYrsO9AbQMLpAiy85
-	+LT8/tLo2aelV1/pvS+qUY3siqYvkVbzKFZyHjhviEhlv5ANufpOWqQivOU37qULxlCA=;
+	bh=xllzJu2rVf2X8UnmOfyzoIVs8umEVd2ts2o3jPuGX7A=; b=QERZ262VuOMUg98KAxp3jEQxUj
+	OcoMDfabWuGwEjNd/YgRs/CfWLM8/rKXq6mRNfOSyJu3PW2z8p1uNTZTZFRb3LBsJ0VB6w67d6IeN
+	u4h7mudX1C74P9dWyiYR7M/U5DXd6cP92v/zxswYvUuwdxvxbVLMG63H7inddR5jhbXg=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
 	by mail.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <ijackson@chiark.greenend.org.uk>)
-	id 1kXPGe-0007w0-7T
-	for xen-devel@lists.xenproject.org; Tue, 27 Oct 2020 13:44:04 +0000
+	id 1kXPGd-0007vx-UJ
+	for xen-devel@lists.xenproject.org; Tue, 27 Oct 2020 13:44:03 +0000
 Received: from iwj (helo=mynotebook.example.org)
 	by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
 	(envelope-from <ijackson@chiark.greenend.org.uk>)
-	id 1kXPGe-00024D-5h
-	for xen-devel@lists.xenproject.org; Tue, 27 Oct 2020 13:44:04 +0000
+	id 1kXPGd-00023g-TN
+	for xen-devel@lists.xenproject.org; Tue, 27 Oct 2020 13:44:03 +0000
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
 	by mariner.uk.xensource.com with esmtp (Exim 4.89)
 	(envelope-from <ijackson@chiark.greenend.org.uk>)
-	id 1kXPGc-0002Uo-Eu; Tue, 27 Oct 2020 13:44:02 +0000
+	id 1kXPGc-0002Uo-7J; Tue, 27 Oct 2020 13:44:02 +0000
 From: Ian Jackson <iwj@xenproject.org>
 To: xen-devel@lists.xenproject.org
 Cc: Ian Jackson <iwj@xenproject.org>
-Subject: [OSSTEST PATCH 3/7] pdu-snmp: Centralise base OIDs
-Date: Tue, 27 Oct 2020 13:43:50 +0000
-Message-Id: <20201027134354.25561-4-iwj@xenproject.org>
+Subject: [OSSTEST PATCH 2/7] pdu-snmp: Rename from pdu-msw
+Date: Tue, 27 Oct 2020 13:43:49 +0000
+Message-Id: <20201027134354.25561-3-iwj@xenproject.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20201027134354.25561-1-iwj@xenproject.org>
 References: <20201027134354.25561-1-iwj@xenproject.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Do not hardcoode .3 and .4 in the main logic.
+We are going to make this script control PDUs other than APC ones.
 
-No functional change.
+No overall functional change for internal callers.  Anyone out-of-tree
+using this script will need to change the name of the program they run.
 
 Signed-off-by: Ian Jackson <iwj@xenproject.org>
 ---
- pdu-snmp | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+ Osstest/PDU/msw.pm  | 2 +-
+ README              | 2 +-
+ pdu-msw => pdu-snmp | 6 +++---
+ 3 files changed, 5 insertions(+), 5 deletions(-)
+ rename pdu-msw => pdu-snmp (95%)
 
-diff --git a/pdu-snmp b/pdu-snmp
-index 581a60b0..a4918f53 100755
---- a/pdu-snmp
-+++ b/pdu-snmp
-@@ -27,8 +27,11 @@ use Net::SNMP;
- use Data::Dumper;
- 
- my $community= 'private';
-+
- my $baseoid= '.1.3.6.1.4.1.318.1.1.4.4.2.1';
- my $baseoid_write= "$baseoid.3";
-+my $baseoid_name= "$baseoid.4";
-+my $baseoid_read= "$baseoid.3";
- 
- while (@ARGV && $ARGV[0] =~ m/^-/) {
-     $_ = shift @ARGV;
-@@ -52,7 +55,7 @@ die "SNMP error $error " unless defined $session;
- 
- sub getname ($) {
-     my ($port) = @_;
--    my $oid= "$baseoid.4.$port";
-+    my $oid= "$baseoid_name.$port";
-     my $res= $session->get_request($oid);
-     if ($res) {
-         my $name= $res->{$oid};
-@@ -96,7 +99,7 @@ if ($outlet =~ m/^\d+$/) {
-     ($useport,$usename)= @{ $found[0] };
+diff --git a/Osstest/PDU/msw.pm b/Osstest/PDU/msw.pm
+index 19d9f56b..614216d4 100644
+--- a/Osstest/PDU/msw.pm
++++ b/Osstest/PDU/msw.pm
+@@ -33,7 +33,7 @@ sub new {
+ sub pdu_power_state {
+     my ($mo, $on) = @_;
+     my $onoff= $on ? "on" : "off";
+-    system_checked("./pdu-msw @{ $mo->{Args} } $onoff");
++    system_checked("./pdu-snmp @{ $mo->{Args} } $onoff");
  }
  
--my $read_oid= "$baseoid.3.$useport";
-+my $read_oid= "$baseoid_read.$useport";
- my $write_oid= "$baseoid_write.$useport";
+ 1;
+diff --git a/README b/README
+index ef6c4e60..70f8ae73 100644
+--- a/README
++++ b/README
+@@ -656,7 +656,7 @@ HostProp_<host>_PowerILOM
  
- my @map= (undef, qw(
+         msw [--apc6] <pdu> <port-name-regexp|port-num>
+              Control an APC masterswitch via SNMP.  The SNMP
+-             community is `private'.  See the `pdu-msw' script.
++             community is `private'.  See the `pdu-snmp' script.
+ 
+         ipmi <mgmt> [<user> [<pass> [<ipmitool options...>]]]
+              Use IPMI by (by running ipmitool).  <mgmt> is the name or
+diff --git a/pdu-msw b/pdu-snmp
+similarity index 95%
+rename from pdu-msw
+rename to pdu-snmp
+index c57f9f7c..581a60b0 100755
+--- a/pdu-msw
++++ b/pdu-snmp
+@@ -19,7 +19,7 @@
+ 
+ my $usagemsg= <<END;
+ usage:
+-  pdu-msw SWITCH-DNS-NAME PORT-NAME-REGEXP|PORT [[delayed-]on|off|0|1|reboot]
++  pdu-snmp SWITCH-DNS-NAME PORT-NAME-REGEXP|PORT [[delayed-]on|off|0|1|reboot]
+ END
+ 
+ use strict qw(refs vars);
+@@ -89,7 +89,7 @@ if ($outlet =~ m/^\d+$/) {
+                    ($t->[2] ? '*' : ''),
+                    $t->[0], $t->[1]);
+         }
+-        die "pdu-msw $dnsname: ".
++        die "pdu-snmp $dnsname: ".
+             (@found ? "multiple ports match" : "no ports match").
+             "\n";
+     }
+@@ -119,7 +119,7 @@ sub get () {
+ 
+ sub show () {
+     my $mean = get();
+-    printf "pdu-msw $dnsname: #%s \"%s\" = %s\n", $useport, $usename, $mean;
++    printf "pdu-snmp $dnsname: #%s \"%s\" = %s\n", $useport, $usename, $mean;
+     return $mean;
+ }
+ 
 -- 
 2.20.1
 
