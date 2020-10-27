@@ -1,29 +1,29 @@
-Return-Path: <SRS0=Fpha=EB=lists.xenproject.org=xen-devel-bounces@kernel.org>
+Return-Path: <SRS0=J13s=EC=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-11.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DE67BC4363A
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2020 23:53:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BCEFCC4363A
+	for <xen-devel@archiver.kernel.org>; Tue, 27 Oct 2020 00:02:34 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8DCD8218AC
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2020 23:53:27 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 738FA20674
+	for <xen-devel@archiver.kernel.org>; Tue, 27 Oct 2020 00:02:34 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="hMDjDuYt"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8DCD8218AC
+	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="L1iKctRV"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 738FA20674
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.12588.32753 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.12593.32766 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kXCIf-0005Ba-3K; Mon, 26 Oct 2020 23:53:17 +0000
+	id 1kXCRO-0006ht-S2; Tue, 27 Oct 2020 00:02:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 12588.32753; Mon, 26 Oct 2020 23:53:17 +0000
+Received: by outflank-mailman (output) from mailman id 12593.32766; Tue, 27 Oct 2020 00:02:18 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,137 +38,118 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kXCIf-0005BT-0A; Mon, 26 Oct 2020 23:53:17 +0000
-Received: by outflank-mailman (input) for mailman id 12588;
- Mon, 26 Oct 2020 23:53:15 +0000
+	id 1kXCRO-0006hm-P0; Tue, 27 Oct 2020 00:02:18 +0000
+Received: by outflank-mailman (input) for mailman id 12593;
+ Tue, 27 Oct 2020 00:02:17 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=lBFa=EB=kernel.org=sashal@srs-us1.protection.inumbo.net>)
- id 1kXCId-0005BL-DT
- for xen-devel@lists.xenproject.org; Mon, 26 Oct 2020 23:53:15 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=C1L6=EC=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1kXCRM-0006hh-Tm
+ for xen-devel@lists.xenproject.org; Tue, 27 Oct 2020 00:02:16 +0000
 Received: from mail.kernel.org (unknown [198.145.29.99])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 8cdd4db8-6b51-46da-a296-c15c1e9f3f43;
- Mon, 26 Oct 2020 23:53:13 +0000 (UTC)
-Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
- [73.47.72.35])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ id f55fbabc-cc91-45b8-9c03-fbc316abb7b5;
+ Tue, 27 Oct 2020 00:02:16 +0000 (UTC)
+Received: from sstabellini-ThinkPad-T480s (c-24-130-65-46.hsd1.ca.comcast.net
+ [24.130.65.46])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id D86B722202;
- Mon, 26 Oct 2020 23:53:11 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 53D6520773;
+ Tue, 27 Oct 2020 00:02:15 +0000 (UTC)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=lBFa=EB=kernel.org=sashal@srs-us1.protection.inumbo.net>)
-	id 1kXCId-0005BL-DT
-	for xen-devel@lists.xenproject.org; Mon, 26 Oct 2020 23:53:15 +0000
-X-Inumbo-ID: 8cdd4db8-6b51-46da-a296-c15c1e9f3f43
+	(envelope-from <SRS0=C1L6=EC=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+	id 1kXCRM-0006hh-Tm
+	for xen-devel@lists.xenproject.org; Tue, 27 Oct 2020 00:02:16 +0000
+X-Inumbo-ID: f55fbabc-cc91-45b8-9c03-fbc316abb7b5
 Received: from mail.kernel.org (unknown [198.145.29.99])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 8cdd4db8-6b51-46da-a296-c15c1e9f3f43;
-	Mon, 26 Oct 2020 23:53:13 +0000 (UTC)
-Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net [73.47.72.35])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	id f55fbabc-cc91-45b8-9c03-fbc316abb7b5;
+	Tue, 27 Oct 2020 00:02:16 +0000 (UTC)
+Received: from sstabellini-ThinkPad-T480s (c-24-130-65-46.hsd1.ca.comcast.net [24.130.65.46])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id D86B722202;
-	Mon, 26 Oct 2020 23:53:11 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPSA id 53D6520773;
+	Tue, 27 Oct 2020 00:02:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1603756392;
-	bh=j8+aveAqrJQEVzbm2fQkpi44naYHrixzixT0DdUmo5A=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=hMDjDuYtIUSPBB9B21/4bfkTHLyW6e8q+6pzDlVwQZtGtKTsoUYGPD0YYYZmihC5U
-	 l4AXo+sqP6cf37YCIqdwqF0VwUmATsw0NAqs9E51pAneZNAFjYXnlryUjmpDmHsqU6
-	 ZP6YauC5AYL556Q9tQ3qmDbCROVimmHwqRP0ncT0=
-From: Sasha Levin <sashal@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Cc: Marek Szyprowski <m.szyprowski@samsung.com>,
-	Juergen Gross <jgross@suse.com>,
-	Sasha Levin <sashal@kernel.org>,
-	xen-devel@lists.xenproject.org
-Subject: [PATCH AUTOSEL 5.8 054/132] xen: gntdev: fix common struct sg_table related issues
-Date: Mon, 26 Oct 2020 19:50:46 -0400
-Message-Id: <20201026235205.1023962-54-sashal@kernel.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20201026235205.1023962-1-sashal@kernel.org>
-References: <20201026235205.1023962-1-sashal@kernel.org>
+	s=default; t=1603756935;
+	bh=S2fWz7i/YT4lvIbM2qM9onXOHifLeu3fj+WHAM6/Uic=;
+	h=Date:From:To:cc:Subject:From;
+	b=L1iKctRVl+HbjZOuleP6fj+u871oq3QJwoicqf8T9s77ZZfViR4y4lgH0KRvluXXE
+	 7HFEZzg/saCMcBDD3TkhqW7EZrHaEYEnFTIS3Cl1IUMxL3LX1kr+N2tNI8mguV1DC9
+	 Mu+SdZmJhL00T7eivPsMxiectmupJ6g6BRr5e3Xo=
+Date: Mon, 26 Oct 2020 17:02:14 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
+To: iommu@lists.linux-foundation.org, linux-kernel@vger.kernel.org
+cc: sstabellini@kernel.org, xen-devel@lists.xenproject.org, 
+    konrad.wilk@oracle.com, hch@lst.de
+Subject: [PATCH] fix swiotlb panic on Xen
+Message-ID: <alpine.DEB.2.21.2010261653320.12247@sstabellini-ThinkPad-T480s>
+User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
-X-stable: review
-X-Patchwork-Hint: Ignore
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
 
-From: Marek Szyprowski <m.szyprowski@samsung.com>
+From: Stefano Stabellini <stefano.stabellini@xilinx.com>
 
-[ Upstream commit d1749eb1ab85e04e58c29e58900e3abebbdd6e82 ]
+kernel/dma/swiotlb.c:swiotlb_init gets called first and tries to
+allocate a buffer for the swiotlb. It does so by calling
 
-The Documentation/DMA-API-HOWTO.txt states that the dma_map_sg() function
-returns the number of the created entries in the DMA address space.
-However the subsequent calls to the dma_sync_sg_for_{device,cpu}() and
-dma_unmap_sg must be called with the original number of the entries
-passed to the dma_map_sg().
+  memblock_alloc_low(PAGE_ALIGN(bytes), PAGE_SIZE);
 
-struct sg_table is a common structure used for describing a non-contiguous
-memory buffer, used commonly in the DRM and graphics subsystems. It
-consists of a scatterlist with memory pages and DMA addresses (sgl entry),
-as well as the number of scatterlist entries: CPU pages (orig_nents entry)
-and DMA mapped pages (nents entry).
+If the allocation must fail, no_iotlb_memory is set.
 
-It turned out that it was a common mistake to misuse nents and orig_nents
-entries, calling DMA-mapping functions with a wrong number of entries or
-ignoring the number of mapped entries returned by the dma_map_sg()
-function.
 
-To avoid such issues, lets use a common dma-mapping wrappers operating
-directly on the struct sg_table objects and use scatterlist page
-iterators where possible. This, almost always, hides references to the
-nents and orig_nents entries, making the code robust, easier to follow
-and copy/paste safe.
+Later during initialization swiotlb-xen comes in
+(drivers/xen/swiotlb-xen.c:xen_swiotlb_init) and given that io_tlb_start
+is != 0, it thinks the memory is ready to use when actually it is not.
 
-Signed-off-by: Marek Szyprowski <m.szyprowski@samsung.com>
-Acked-by: Juergen Gross <jgross@suse.com>
-Signed-off-by: Sasha Levin <sashal@kernel.org>
----
- drivers/xen/gntdev-dmabuf.c | 13 ++++++-------
- 1 file changed, 6 insertions(+), 7 deletions(-)
+When the swiotlb is actually needed, swiotlb_tbl_map_single gets called
+and since no_iotlb_memory is set the kernel panics.
 
-diff --git a/drivers/xen/gntdev-dmabuf.c b/drivers/xen/gntdev-dmabuf.c
-index b1b6eebafd5de..4c13cbc99896a 100644
---- a/drivers/xen/gntdev-dmabuf.c
-+++ b/drivers/xen/gntdev-dmabuf.c
-@@ -247,10 +247,9 @@ static void dmabuf_exp_ops_detach(struct dma_buf *dma_buf,
+Instead, if swiotlb-xen.c:xen_swiotlb_init knew the swiotlb hadn't been
+initialized, it would do the initialization itself, which might still
+succeed.
+
+
+Fix the panic by setting io_tlb_start to 0 on swiotlb initialization
+failure, and also by setting no_iotlb_memory to false on swiotlb
+initialization success.
+
+Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
+
+
+diff --git a/kernel/dma/swiotlb.c b/kernel/dma/swiotlb.c
+index c19379fabd20..9924214df60a 100644
+--- a/kernel/dma/swiotlb.c
++++ b/kernel/dma/swiotlb.c
+@@ -231,6 +231,7 @@ int __init swiotlb_init_with_tbl(char *tlb, unsigned long nslabs, int verbose)
+ 		io_tlb_orig_addr[i] = INVALID_PHYS_ADDR;
+ 	}
+ 	io_tlb_index = 0;
++	no_iotlb_memory = false;
  
- 		if (sgt) {
- 			if (gntdev_dmabuf_attach->dir != DMA_NONE)
--				dma_unmap_sg_attrs(attach->dev, sgt->sgl,
--						   sgt->nents,
--						   gntdev_dmabuf_attach->dir,
--						   DMA_ATTR_SKIP_CPU_SYNC);
-+				dma_unmap_sgtable(attach->dev, sgt,
-+						  gntdev_dmabuf_attach->dir,
-+						  DMA_ATTR_SKIP_CPU_SYNC);
- 			sg_free_table(sgt);
- 		}
+ 	if (verbose)
+ 		swiotlb_print_info();
+@@ -262,9 +263,11 @@ swiotlb_init(int verbose)
+ 	if (vstart && !swiotlb_init_with_tbl(vstart, io_tlb_nslabs, verbose))
+ 		return;
  
-@@ -288,8 +287,8 @@ dmabuf_exp_ops_map_dma_buf(struct dma_buf_attachment *attach,
- 	sgt = dmabuf_pages_to_sgt(gntdev_dmabuf->pages,
- 				  gntdev_dmabuf->nr_pages);
- 	if (!IS_ERR(sgt)) {
--		if (!dma_map_sg_attrs(attach->dev, sgt->sgl, sgt->nents, dir,
--				      DMA_ATTR_SKIP_CPU_SYNC)) {
-+		if (dma_map_sgtable(attach->dev, sgt, dir,
-+				    DMA_ATTR_SKIP_CPU_SYNC)) {
- 			sg_free_table(sgt);
- 			kfree(sgt);
- 			sgt = ERR_PTR(-ENOMEM);
-@@ -633,7 +632,7 @@ dmabuf_imp_to_refs(struct gntdev_dmabuf_priv *priv, struct device *dev,
+-	if (io_tlb_start)
++	if (io_tlb_start) {
+ 		memblock_free_early(io_tlb_start,
+ 				    PAGE_ALIGN(io_tlb_nslabs << IO_TLB_SHIFT));
++		io_tlb_start = 0;
++	}
+ 	pr_warn("Cannot allocate buffer");
+ 	no_iotlb_memory = true;
+ }
+@@ -362,6 +365,7 @@ swiotlb_late_init_with_tbl(char *tlb, unsigned long nslabs)
+ 		io_tlb_orig_addr[i] = INVALID_PHYS_ADDR;
+ 	}
+ 	io_tlb_index = 0;
++	no_iotlb_memory = false;
  
- 	/* Now convert sgt to array of pages and check for page validity. */
- 	i = 0;
--	for_each_sg_page(sgt->sgl, &sg_iter, sgt->nents, 0) {
-+	for_each_sgtable_page(sgt, &sg_iter, 0) {
- 		struct page *page = sg_page_iter_page(&sg_iter);
- 		/*
- 		 * Check if page is valid: this can happen if we are given
--- 
-2.25.1
-
+ 	swiotlb_print_info();
+ 
 
