@@ -2,28 +2,29 @@ Return-Path: <SRS0=61/H=ED=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-8.1 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 994EBC388F7
-	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2020 15:57:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4174CC55178
+	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2020 17:44:47 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0DC69247D2
-	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2020 15:57:34 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id C1949247E4
+	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2020 17:44:46 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="a7vzjdit"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0DC69247D2
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="InpLHLru"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C1949247E4
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.13754.34508 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.13807.34531 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kXnp3-0000SV-7O; Wed, 28 Oct 2020 15:57:13 +0000
+	id 1kXpUz-0001u0-E3; Wed, 28 Oct 2020 17:44:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 13754.34508; Wed, 28 Oct 2020 15:57:13 +0000
+Received: by outflank-mailman (output) from mailman id 13807.34531; Wed, 28 Oct 2020 17:44:37 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,130 +39,177 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kXnp3-0000SO-4S; Wed, 28 Oct 2020 15:57:13 +0000
-Received: by outflank-mailman (input) for mailman id 13754;
- Wed, 28 Oct 2020 15:57:11 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kXpUz-0001tt-B4; Wed, 28 Oct 2020 17:44:37 +0000
+Received: by outflank-mailman (input) for mailman id 13807;
+ Wed, 28 Oct 2020 17:44:36 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=61hT=ED=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1kXnp1-0000SJ-N8
- for xen-devel@lists.xenproject.org; Wed, 28 Oct 2020 15:57:11 +0000
-Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id fe21a166-a0ac-47b0-9ecb-1e632dd5374e;
- Wed, 28 Oct 2020 15:57:10 +0000 (UTC)
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+ <SRS0=m2Gk=ED=gmail.com=richardcochran@srs-us1.protection.inumbo.net>)
+ id 1kXpUy-0001tm-Fq
+ for xen-devel@lists.xenproject.org; Wed, 28 Oct 2020 17:44:36 +0000
+Received: from mail-pf1-x444.google.com (unknown [2607:f8b0:4864:20::444])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 5c361b3e-38cf-401a-978e-43b2fa062533;
+ Wed, 28 Oct 2020 17:44:35 +0000 (UTC)
+Received: by mail-pf1-x444.google.com with SMTP id c20so46886pfr.8
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2020 10:44:35 -0700 (PDT)
+Received: from hoboy.vegasvil.org (c-73-241-114-122.hsd1.ca.comcast.net.
+ [73.241.114.122])
+ by smtp.gmail.com with ESMTPSA id d26sm224049pfo.82.2020.10.28.10.44.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 28 Oct 2020 10:44:34 -0700 (PDT)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=61hT=ED=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
-	id 1kXnp1-0000SJ-N8
-	for xen-devel@lists.xenproject.org; Wed, 28 Oct 2020 15:57:11 +0000
-X-Inumbo-ID: fe21a166-a0ac-47b0-9ecb-1e632dd5374e
-Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id fe21a166-a0ac-47b0-9ecb-1e632dd5374e;
-	Wed, 28 Oct 2020 15:57:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1603900630;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=zDU992cp5Ht454n786TTTtaGj5ZbiRftTeUs1bN4v+g=;
-  b=a7vzjditLZ/WTRFp8KVfDoMP6Ja0jikuESlAGVtQbHjGVdVOENeuOFJU
-   hRLSOKhadkt8NrIA2W8ZnkJPSBei5tPZEfkGcxp05oYFxv+Y4AM4jXEp/
-   HmPCWzaE9XXr87GBo7tjvXOAMyigG81fkiku94gEStVAS9XKQeylv0LrK
-   0=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: oBq1SNoZ9u8Ky4rpMZ7lCGTuYwvzjZ4XAFarFF+kRX0zegxUsMUEZxK4f7vsnRvY8Cntlf7DmV
- 3T60L4MajibiqTIPCEdqtab4XcURprScAIq26w91qgCzwTxZxqXb+UdHgOXzJHa9gkqlOy7P4g
- i4Lf3ZoqqerI6NqQWZ/ZrmsaYGhESIDXw7PzD6PP/7mclj7M1RUqugQiXCa7RVRbJvKlxII8lx
- 2xt6O1f/u4FTJ4Sde4KCcAJ6PFhr+PMv9zWvQlBeQibZ/aI0mXMrifgIKMT7GWx8vr5sidq7E8
- VSU=
-X-SBRS: None
-X-MesageID: 31069753
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.77,427,1596513600"; 
-   d="scan'208";a="31069753"
-Date: Wed, 28 Oct 2020 15:57:06 +0000
-From: Anthony PERARD <anthony.perard@citrix.com>
-To: Julien Grall <julien@xen.org>
-CC: Jason Andryuk <jandryuk@gmail.com>, osstest service owner
-	<osstest-admin@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>,
-	xen-devel <xen-devel@lists.xenproject.org>
-Subject: Re: [qemu-mainline test] 156257: regressions - FAIL
-Message-ID: <20201028155706.GE2214@perard.uk.xensource.com>
-References: <osstest-156257-mainreport@xen.org>
- <CAKf6xpss8KpGOvZrKiTPz63bhBVbjxRTYWdHEkzUo2q1KEMjhg@mail.gmail.com>
- <70d87480-6fcf-9fe0-34c0-30bd711406a4@xen.org>
+	(envelope-from <SRS0=m2Gk=ED=gmail.com=richardcochran@srs-us1.protection.inumbo.net>)
+	id 1kXpUy-0001tm-Fq
+	for xen-devel@lists.xenproject.org; Wed, 28 Oct 2020 17:44:36 +0000
+X-Inumbo-ID: 5c361b3e-38cf-401a-978e-43b2fa062533
+Received: from mail-pf1-x444.google.com (unknown [2607:f8b0:4864:20::444])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id 5c361b3e-38cf-401a-978e-43b2fa062533;
+	Wed, 28 Oct 2020 17:44:35 +0000 (UTC)
+Received: by mail-pf1-x444.google.com with SMTP id c20so46886pfr.8
+        for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2020 10:44:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to:user-agent;
+        bh=GeMX+k14VhxeG76k1/qSlgb4+cXieu72K4e08pwdt1o=;
+        b=InpLHLruF700Q395/JUSDPFi5ct3Q0NFGhIrDU/UmIhGdDThKH8GKD+cw6T2N6QNcD
+         PUvF0K87ShFDKaAjJCfvpeMCAaEiJ8eHb269GNLlCVUSVFBQarvkQDFEeK2v65rPe7+J
+         tC/1aFfwnYWg9j8u/6Ud/Yyen1uhouxurM0nLvzz3MYFdzPpthJUWusVU6lftQoy21uA
+         qiW9X1ZTMFe3cniRtPQ+TCgotIme378DGRcyAXvYYZgBHvV1ur7fGjNBhSILa0vbkqSM
+         tRUkeNha3rVBlOMkNme6QRGiAF7X/US6S2FlZ9tPWrsV95ioL0sZyvBU99MP8xfC1Ema
+         woPg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to:user-agent;
+        bh=GeMX+k14VhxeG76k1/qSlgb4+cXieu72K4e08pwdt1o=;
+        b=sn+m+5GF+Yh/tHLzNoBwmOz8s+oaTjBF77eOMWtLfh3AR/3n+WPoAp3/raCdcfQo6F
+         CiWOKjQg0IOLh+CRGkZg6yXFcXpoYtQJGxaoHP4pI/zNjnMj7b2gtIA6s5PK4lP3gO9u
+         6Ov2BS0dlSKw8uA/bQggOrz2L/AdOC6HvbyzDGzS+bgUbN1ZdQmk6myPuwSVgPNJCvWd
+         YQ3kfKxz+KI6j2nCzqj5MfL92y/9AVnWawDt+KGQbzG3YTPYPx5+Muj18Am7wSY5fEoh
+         xGCSn0ONkv6TvDmUTPR0zu4xxxxdmYp4Rqzd5UiziKnFFqR+e2BXN7xB7flRmOz0wynL
+         A3Sg==
+X-Gm-Message-State: AOAM532o2T7mDknJZn1jVZn5aVcjF7KdGoRQtkEqSpXhiIC2DNh3YPX7
+	/X5lREjh54SrAGnLy6M+ZIQ=
+X-Google-Smtp-Source: ABdhPJw+P7PZ1ANDYILo79Hsg7TsK8M0hrdd6+wFNAfXxYnBAlE0Wr2vQTH+qAkmHlbh1+XaD9f7GA==
+X-Received: by 2002:a63:78c3:: with SMTP id t186mr490857pgc.12.1603907075050;
+        Wed, 28 Oct 2020 10:44:35 -0700 (PDT)
+Received: from hoboy.vegasvil.org (c-73-241-114-122.hsd1.ca.comcast.net. [73.241.114.122])
+        by smtp.gmail.com with ESMTPSA id d26sm224049pfo.82.2020.10.28.10.44.29
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 28 Oct 2020 10:44:34 -0700 (PDT)
+Date: Wed, 28 Oct 2020 10:44:27 -0700
+From: Richard Cochran <richardcochran@gmail.com>
+To: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+	"Gautham R. Shenoy" <ego@linux.vnet.ibm.com>,
+	"Jason A. Donenfeld" <Jason@zx2c4.com>,
+	Javier =?iso-8859-1?Q?Gonz=E1lez?= <javier@javigon.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	"Martin K. Petersen" <martin.petersen@oracle.com>,
+	"Rafael J. Wysocki" <rjw@rjwysocki.net>,
+	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+	Alexandre Belloni <alexandre.belloni@bootlin.com>,
+	Alexandre Torgue <alexandre.torgue@st.com>,
+	Andrew Donnellan <ajd@linux.ibm.com>,
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+	Baolin Wang <baolin.wang7@gmail.com>,
+	Benson Leung <bleung@chromium.org>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Bruno Meneguele <bmeneg@redhat.com>,
+	Chunyan Zhang <zhang.lyra@gmail.com>, Dan Murphy <dmurphy@ti.com>,
+	Dan Williams <dan.j.williams@intel.com>,
+	Enric Balletbo i Serra <enric.balletbo@collabora.com>,
+	Fabrice Gasnier <fabrice.gasnier@st.com>,
+	Felipe Balbi <balbi@kernel.org>,
+	Frederic Barrat <fbarrat@linux.ibm.com>,
+	Guenter Roeck <groeck@chromium.org>,
+	Hanjun Guo <guohanjun@huawei.com>,
+	Heikki Krogerus <heikki.krogerus@linux.intel.com>,
+	Jens Axboe <axboe@kernel.dk>,
+	Johannes Thumshirn <johannes.thumshirn@wdc.com>,
+	Jonathan Cameron <jic23@kernel.org>,
+	Juergen Gross <jgross@suse.com>,
+	Konstantin Khlebnikov <koct9i@gmail.com>,
+	Kranthi Kuntala <kranthi.kuntala@intel.com>,
+	Lakshmi Ramasubramanian <nramas@linux.microsoft.com>,
+	Lars-Peter Clausen <lars@metafoo.de>, Len Brown <lenb@kernel.org>,
+	Leonid Maksymchuk <leonmaxx@gmail.com>,
+	Ludovic Desroches <ludovic.desroches@microchip.com>,
+	Mario Limonciello <mario.limonciello@dell.com>,
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+	Michael Ellerman <mpe@ellerman.id.au>,
+	Mika Westerberg <mika.westerberg@linux.intel.com>,
+	Mike Kravetz <mike.kravetz@oracle.com>,
+	Mimi Zohar <zohar@linux.ibm.com>, Nayna Jain <nayna@linux.ibm.com>,
+	Nicolas Ferre <nicolas.ferre@microchip.com>,
+	Niklas Cassel <niklas.cassel@wdc.com>,
+	Oleh Kravchenko <oleg@kaa.org.ua>, Orson Zhai <orsonzhai@gmail.com>,
+	Pavel Machek <pavel@ucw.cz>,
+	Pawan Gupta <pawan.kumar.gupta@linux.intel.com>,
+	Peter Meerwald-Stadler <pmeerw@pmeerw.net>,
+	Peter Rosin <peda@axentia.se>, Petr Mladek <pmladek@suse.com>,
+	Philippe Bergheaud <felix@linux.ibm.com>,
+	Sebastian Reichel <sre@kernel.org>,
+	Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Thinh Nguyen <Thinh.Nguyen@synopsys.com>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Vineela Tummalapalli <vineela.tummalapalli@intel.com>,
+	Vishal Verma <vishal.l.verma@intel.com>, linux-acpi@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org, linux-iio@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+	linux-pm@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com,
+	linux-usb@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
+	netdev@vger.kernel.org, xen-devel@lists.xenproject.org
+Subject: Re: [PATCH 20/33] docs: ABI: testing: make the files compatible with
+ ReST output
+Message-ID: <20201028174427.GE9364@hoboy.vegasvil.org>
+References: <cover.1603893146.git.mchehab+huawei@kernel.org>
+ <4ebaaa0320101479e392ce2db4b62e24fdf15ef1.1603893146.git.mchehab+huawei@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <70d87480-6fcf-9fe0-34c0-30bd711406a4@xen.org>
+In-Reply-To: <4ebaaa0320101479e392ce2db4b62e24fdf15ef1.1603893146.git.mchehab+huawei@kernel.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 
-On Wed, Oct 28, 2020 at 02:49:15PM +0000, Julien Grall wrote:
-> (+ Anthony and Stefano,)
-> 
-> Hi Jason,
-> 
-> On 28/10/2020 13:37, Jason Andryuk wrote:
-> > On Tue, Oct 27, 2020 at 5:23 PM osstest service owner
-> > <osstest-admin@xenproject.org> wrote:
-> > > 
-> > > flight 156257 qemu-mainline real [real]
-> > > flight 156266 qemu-mainline real-retest [real]
-> > > http://logs.test-lab.xenproject.org/osstest/logs/156257/
-> > > http://logs.test-lab.xenproject.org/osstest/logs/156266/
-> > > 
-> > > Regressions :-(
-> > > 
-> > > Tests which did not succeed and are blocking,
-> > > including tests which could not be run:
-> > >   test-arm64-arm64-libvirt-xsm 14 guest-start              fail REGR. vs. 152631
-> > 
-> > QEMU doesn't start with "qemu-system-i386: -xen-domid 1: Option not
-> > supported for this target"
-> > 
-> > This happens if CONFIG_XEN isn't set.
-> > 
-> > QEMU is built with:
-> >                    host CPU: aarch64
-> >             host endianness: little
-> >                 target list: i386-softmmu
-> > 
-> > commit 8a19980e3fc4 "configure: move accelerator logic to meson"
-> > introduced this logic:
-> > +accelerator_targets = { 'CONFIG_KVM': kvm_targets }
-> > +if cpu in ['x86', 'x86_64']
-> > +  accelerator_targets += {
-> > +    'CONFIG_HAX': ['i386-softmmu', 'x86_64-softmmu'],
-> > +    'CONFIG_XEN': ['i386-softmmu', 'x86_64-softmmu'],
-> > +    'CONFIG_HVF': ['x86_64-softmmu'],
-> > +    'CONFIG_WHPX': ['i386-softmmu', 'x86_64-softmmu'],
-> > +  }
-> > +endif
-> 
-> I always wondered when this would come to bite us :). I am surprised it took
-> so long.
-> 
-> > 
-> > I guess something like this would fix it:
-> > if cpu in ['aarch64', 'arm']
-> >    accelerator_targets += { 'CONFIG_XEN': ['i386-softmmu'], }
-> > endif
-> 
-> Per the logic above, I think this correct. @Stefano, @Anthony, can you have
-> a look?
+On Wed, Oct 28, 2020 at 03:23:18PM +0100, Mauro Carvalho Chehab wrote:
 
-Yes, that would probably do the trick and restrict to x86 and arm rather
-than any host with xen support. I think this would need a comment
-explaining why we enable xen for i386 target on arm (or at least a
-comment that we use i386 target on arm).
+> diff --git a/Documentation/ABI/testing/sysfs-uevent b/Documentation/ABI/testing/sysfs-uevent
+> index aa39f8d7bcdf..d0893dad3f38 100644
+> --- a/Documentation/ABI/testing/sysfs-uevent
+> +++ b/Documentation/ABI/testing/sysfs-uevent
+> @@ -19,7 +19,8 @@ Description:
+>                  a transaction identifier so it's possible to use the same UUID
+>                  value for one or more synthetic uevents in which case we
+>                  logically group these uevents together for any userspace
+> -                listeners. The UUID value appears in uevent as
+> +                listeners. The UUID value appears in uevent as:
 
-Thanks for the investigation.
+I know almost nothing about Sphinx, but why have one colon here ^^^ and ...
 
-Cheers,
+> +
+>                  "SYNTH_UUID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" environment
+>                  variable.
+>  
+> @@ -30,18 +31,19 @@ Description:
+>                  It's possible to define zero or more pairs - each pair is then
+>                  delimited by a space character ' '. Each pair appears in
+>                  synthetic uevent as "SYNTH_ARG_KEY=VALUE". That means the KEY
+> -                name gains "SYNTH_ARG_" prefix to avoid possible collisions
+> +                name gains `SYNTH_ARG_` prefix to avoid possible collisions
+>                  with existing variables.
+>  
+> -                Example of valid sequence written to the uevent file:
+> +                Example of valid sequence written to the uevent file::
 
--- 
-Anthony PERARD
+... two here?
+
+Thanks,
+Richard
 
