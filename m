@@ -2,28 +2,28 @@ Return-Path: <SRS0=61/H=ED=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-8.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=no autolearn_force=no version=3.4.0
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8A7A7C388F7
-	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2020 15:37:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 853EAC388F7
+	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2020 15:43:16 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 07F5D246AD
-	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2020 15:37:34 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id F2354247CF
+	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2020 15:43:15 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="Myo5jgkC"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 07F5D246AD
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="lTJoXbgM"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F2354247CF
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.13709.34437 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.13714.34449 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kXnVj-0006YB-8V; Wed, 28 Oct 2020 15:37:15 +0000
+	id 1kXnb7-0007QT-Ti; Wed, 28 Oct 2020 15:42:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 13709.34437; Wed, 28 Oct 2020 15:37:15 +0000
+Received: by outflank-mailman (output) from mailman id 13714.34449; Wed, 28 Oct 2020 15:42:49 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,82 +38,87 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kXnVj-0006Y4-4h; Wed, 28 Oct 2020 15:37:15 +0000
-Received: by outflank-mailman (input) for mailman id 13709;
- Wed, 28 Oct 2020 15:37:13 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kXnb7-0007QM-Pk; Wed, 28 Oct 2020 15:42:49 +0000
+Received: by outflank-mailman (input) for mailman id 13714;
+ Wed, 28 Oct 2020 15:42:48 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=dk2S=ED=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kXnVh-0006XK-Ok
- for xen-devel@lists.xenproject.org; Wed, 28 Oct 2020 15:37:13 +0000
+ id 1kXnb5-0007QH-VL
+ for xen-devel@lists.xenproject.org; Wed, 28 Oct 2020 15:42:47 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id d6a7d713-23b2-45f3-9d49-2ebdd3068012;
- Wed, 28 Oct 2020 15:37:12 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id ddcbab9d-85b1-4c18-8a39-29bf2a172c4c;
+ Wed, 28 Oct 2020 15:42:47 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id E0E8BADF5;
- Wed, 28 Oct 2020 15:37:11 +0000 (UTC)
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+ by mx2.suse.de (Postfix) with ESMTP id 4136FADCC;
+ Wed, 28 Oct 2020 15:42:46 +0000 (UTC)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=dk2S=ED=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
-	id 1kXnVh-0006XK-Ok
-	for xen-devel@lists.xenproject.org; Wed, 28 Oct 2020 15:37:13 +0000
-X-Inumbo-ID: d6a7d713-23b2-45f3-9d49-2ebdd3068012
+	id 1kXnb5-0007QH-VL
+	for xen-devel@lists.xenproject.org; Wed, 28 Oct 2020 15:42:47 +0000
+X-Inumbo-ID: ddcbab9d-85b1-4c18-8a39-29bf2a172c4c
 Received: from mx2.suse.de (unknown [195.135.220.15])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id d6a7d713-23b2-45f3-9d49-2ebdd3068012;
-	Wed, 28 Oct 2020 15:37:12 +0000 (UTC)
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id ddcbab9d-85b1-4c18-8a39-29bf2a172c4c;
+	Wed, 28 Oct 2020 15:42:47 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1603899432;
+	t=1603899766;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Lgefu7BR1euqQczOJFI6qiOrCVTqTjJPUkUuvPBsnHY=;
-	b=Myo5jgkCI1f+9XbsYHvKMeS3Ot6h0iyk5loqJEpJqsojarUDpSQyVE57uV04Z8gccFac6W
-	tV8xNXgEZ4HVeu4JSA58//HFhyMcCPDJkt8uyvHVFdvwyN5xRcasIHstOPlMyidcBYTQX7
-	d/ah5/dUHAQOi0KF5RIrGmEESd6aAks=
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=m+osU/Ke31c9xIOQYci1sX4iSdMIFcxvQe6MCm+EGgI=;
+	b=lTJoXbgMtrDo87BTgiuq8CwRqC9wH+HjpjWWGtoLD9mRVbfbOYF/vWX2eTGm13ZcQI1xqr
+	9kdggn7thjRK+E06fu4wUpIQStRyieIpxMG25Aczr0JHXS8kifSPGuZ0DmNfiKmYowVb2b
+	7NeDg6zmPELCC9/4y1V0iWnnDiMM5zk=
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id E0E8BADF5;
-	Wed, 28 Oct 2020 15:37:11 +0000 (UTC)
-Subject: Re: [PATCH v1 3/4] xen/pci: Move x86 specific code to x86 directory.
-To: Rahul Singh <Rahul.Singh@arm.com>
-Cc: Bertrand Marquis <Bertrand.Marquis@arm.com>, Paul Durrant <paul@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
- Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
- Wei Liu <wl@xen.org>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <cover.1603731279.git.rahul.singh@arm.com>
- <70029e8904170c4f19d9f521847050cd00c6e39d.1603731279.git.rahul.singh@arm.com>
- <301405a2-9ec1-847d-6f61-1067a225a3a9@suse.com>
- <4F4C34EE-7035-4931-9C65-13CCFEF52D18@arm.com>
+	by mx2.suse.de (Postfix) with ESMTP id 4136FADCC;
+	Wed, 28 Oct 2020 15:42:46 +0000 (UTC)
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Tim Deegan <tim@xen.org>, George Dunlap <george.dunlap@citrix.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <0a1b3e93-2f24-d377-0753-313b3773efd8@suse.com>
-Date: Wed, 28 Oct 2020 16:37:11 +0100
+Subject: [PATCH] x86/shadow: correct GFN use by sh_unshadow_for_p2m_change()
+Message-ID: <888b8f2b-4368-6179-25c5-dc3eb6acbf3d@suse.com>
+Date: Wed, 28 Oct 2020 16:42:45 +0100
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.4.0
 MIME-Version: 1.0
-In-Reply-To: <4F4C34EE-7035-4931-9C65-13CCFEF52D18@arm.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
-On 28.10.2020 16:20, Rahul Singh wrote:
->> On 28 Oct 2020, at 11:51 am, Jan Beulich <jbeulich@suse.com> wrote:
->> On 26.10.2020 18:17, Rahul Singh wrote:
->>> +int arch_pci_release_devices(struct domain *d)
->>> +{
->>> +    return pci_clean_dpci_irqs(d);
->>> +}
->>
->> Why the extra function layer?
-> 
-> Is that ok if I rename the function pci_clean_dpci_irqs() to arch_pci_clean_pirqs() ?
+Luckily sh_remove_all_mappings()'s use of the parameter is limited to
+generation of log messages. Nevertheless we'd better pass correct GFNs
+around:
+- the incoming GFN, when replacing a large page, may not be large page
+  aligned,
+- incrementing by page-size-scaled values can't be right.
 
-I see no problem with you doing so.
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-Jan
+--- a/xen/arch/x86/mm/shadow/common.c
++++ b/xen/arch/x86/mm/shadow/common.c
+@@ -3115,6 +3115,8 @@ static void sh_unshadow_for_p2m_change(s
+                  && mfn_valid(nmfn) )
+                 npte = map_domain_page(nmfn);
+ 
++            gfn &= ~(L1_PAGETABLE_ENTRIES - 1);
++
+             for ( i = 0; i < L1_PAGETABLE_ENTRIES; i++ )
+             {
+                 if ( !npte
+@@ -3123,8 +3125,7 @@ static void sh_unshadow_for_p2m_change(s
+                 {
+                     /* This GFN->MFN mapping has gone away */
+                     sh_remove_all_shadows_and_parents(d, omfn);
+-                    if ( sh_remove_all_mappings(d, omfn,
+-                                                _gfn(gfn + (i << PAGE_SHIFT))) )
++                    if ( sh_remove_all_mappings(d, omfn, _gfn(gfn + i)) )
+                         cpumask_or(&flushmask, &flushmask, d->dirty_cpumask);
+                 }
+                 omfn = mfn_add(omfn, 1);
 
