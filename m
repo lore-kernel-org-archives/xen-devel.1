@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-12.7 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E601CC6379F
-	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2020 19:35:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3359EC56202
+	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2020 19:35:54 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 77FB6247D4
-	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2020 19:35:49 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 77FB6247D4
+	by mail.kernel.org (Postfix) with ESMTPS id C7DF2247D4
+	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2020 19:35:53 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C7DF2247D4
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.13839.34620 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.13841.34644 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kXrEN-0003S6-AE; Wed, 28 Oct 2020 19:35:35 +0000
+	id 1kXrET-0003aJ-4S; Wed, 28 Oct 2020 19:35:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 13839.34620; Wed, 28 Oct 2020 19:35:35 +0000
+Received: by outflank-mailman (output) from mailman id 13841.34644; Wed, 28 Oct 2020 19:35:41 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,35 +36,35 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kXrEN-0003Rw-62; Wed, 28 Oct 2020 19:35:35 +0000
-Received: by outflank-mailman (input) for mailman id 13839;
- Wed, 28 Oct 2020 19:35:34 +0000
+	id 1kXrET-0003aA-0b; Wed, 28 Oct 2020 19:35:41 +0000
+Received: by outflank-mailman (input) for mailman id 13841;
+ Wed, 28 Oct 2020 19:35:39 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ICLB=ED=suse.de=tzimmermann@srs-us1.protection.inumbo.net>)
- id 1kXrEM-0003Op-HF
- for xen-devel@lists.xenproject.org; Wed, 28 Oct 2020 19:35:34 +0000
+ id 1kXrER-0003Op-HP
+ for xen-devel@lists.xenproject.org; Wed, 28 Oct 2020 19:35:39 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id a82aa3c7-7635-4cd2-9372-e2b875948661;
- Wed, 28 Oct 2020 19:35:30 +0000 (UTC)
+ id 5f309d61-3868-4453-9b06-73d64d7204cd;
+ Wed, 28 Oct 2020 19:35:31 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id BDAC6B916;
- Wed, 28 Oct 2020 19:35:27 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 981D5B91E;
+ Wed, 28 Oct 2020 19:35:30 +0000 (UTC)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=ICLB=ED=suse.de=tzimmermann@srs-us1.protection.inumbo.net>)
-	id 1kXrEM-0003Op-HF
-	for xen-devel@lists.xenproject.org; Wed, 28 Oct 2020 19:35:34 +0000
-X-Inumbo-ID: a82aa3c7-7635-4cd2-9372-e2b875948661
+	id 1kXrER-0003Op-HP
+	for xen-devel@lists.xenproject.org; Wed, 28 Oct 2020 19:35:39 +0000
+X-Inumbo-ID: 5f309d61-3868-4453-9b06-73d64d7204cd
 Received: from mx2.suse.de (unknown [195.135.220.15])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id a82aa3c7-7635-4cd2-9372-e2b875948661;
-	Wed, 28 Oct 2020 19:35:30 +0000 (UTC)
+	id 5f309d61-3868-4453-9b06-73d64d7204cd;
+	Wed, 28 Oct 2020 19:35:31 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id BDAC6B916;
-	Wed, 28 Oct 2020 19:35:27 +0000 (UTC)
+	by mx2.suse.de (Postfix) with ESMTP id 981D5B91E;
+	Wed, 28 Oct 2020 19:35:30 +0000 (UTC)
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: maarten.lankhorst@linux.intel.com,
 	mripard@kernel.org,
@@ -117,294 +117,140 @@ Cc: dri-devel@lists.freedesktop.org,
 	xen-devel@lists.xenproject.org,
 	linux-media@vger.kernel.org,
 	linaro-mm-sig@lists.linaro.org,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	Daniel Vetter <daniel.vetter@ffwll.ch>
-Subject: [PATCH v6 05/10] drm/ttm: Add vmap/vunmap to TTM and TTM GEM helpers
-Date: Wed, 28 Oct 2020 20:35:16 +0100
-Message-Id: <20201028193521.2489-6-tzimmermann@suse.de>
+	Thomas Zimmermann <tzimmermann@suse.de>
+Subject: [PATCH v6 09/10] dma-buf-map: Add memcpy and pointer-increment interfaces
+Date: Wed, 28 Oct 2020 20:35:20 +0100
+Message-Id: <20201028193521.2489-10-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.29.0
 In-Reply-To: <20201028193521.2489-1-tzimmermann@suse.de>
 References: <20201028193521.2489-1-tzimmermann@suse.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The new functions ttm_bo_{vmap,vunmap}() map and unmap a TTM BO in kernel
-address space. The mapping's address is returned as struct dma_buf_map.
-Each function is a simplified version of TTM's existing kmap code. Both
-functions respect the memory's location ani/or writecombine flags.
-
-On top TTM's functions, GEM TTM helpers got drm_gem_ttm_{vmap,vunmap}(),
-two helpers that convert a GEM object into the TTM BO and forward the call
-to TTM's vmap/vunmap. These helpers can be dropped into the rsp GEM object
-callbacks.
+To do framebuffer updates, one needs memcpy from system memory and a
+pointer-increment function. Add both interfaces with documentation.
 
 v5:
-	* use size_t for storing mapping size (Christian)
-	* ignore premapped memory areas correctly in ttm_bo_vunmap()
-	* rebase onto latest TTM interfaces (Christian)
-	* remove BUG() from ttm_bo_vmap() (Christian)
-v4:
-	* drop ttm_kmap_obj_to_dma_buf() in favor of vmap helpers (Daniel,
-	  Christian)
+	* include <linux/string.h> to build on sparc64 (Sam)
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-Reviewed-by: Christian König <christian.koenig@amd.com>
-Acked-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+Reviewed-by: Sam Ravnborg <sam@ravnborg.org>
 Tested-by: Sam Ravnborg <sam@ravnborg.org>
 ---
- drivers/gpu/drm/drm_gem_ttm_helper.c | 38 +++++++++++++++
- drivers/gpu/drm/ttm/ttm_bo_util.c    | 72 ++++++++++++++++++++++++++++
- include/drm/drm_gem_ttm_helper.h     |  6 +++
- include/drm/ttm/ttm_bo_api.h         | 28 +++++++++++
- include/linux/dma-buf-map.h          | 20 ++++++++
- 5 files changed, 164 insertions(+)
+ include/linux/dma-buf-map.h | 73 ++++++++++++++++++++++++++++++++-----
+ 1 file changed, 63 insertions(+), 10 deletions(-)
 
-diff --git a/drivers/gpu/drm/drm_gem_ttm_helper.c b/drivers/gpu/drm/drm_gem_ttm_helper.c
-index 0e4fb9ba43ad..db4c14d78a30 100644
---- a/drivers/gpu/drm/drm_gem_ttm_helper.c
-+++ b/drivers/gpu/drm/drm_gem_ttm_helper.c
-@@ -49,6 +49,44 @@ void drm_gem_ttm_print_info(struct drm_printer *p, unsigned int indent,
- }
- EXPORT_SYMBOL(drm_gem_ttm_print_info);
- 
-+/**
-+ * drm_gem_ttm_vmap() - vmap &ttm_buffer_object
-+ * @gem: GEM object.
-+ * @map: [out] returns the dma-buf mapping.
-+ *
-+ * Maps a GEM object with ttm_bo_vmap(). This function can be used as
-+ * &drm_gem_object_funcs.vmap callback.
-+ *
-+ * Returns:
-+ * 0 on success, or a negative errno code otherwise.
-+ */
-+int drm_gem_ttm_vmap(struct drm_gem_object *gem,
-+		     struct dma_buf_map *map)
-+{
-+	struct ttm_buffer_object *bo = drm_gem_ttm_of_gem(gem);
-+
-+	return ttm_bo_vmap(bo, map);
-+
-+}
-+EXPORT_SYMBOL(drm_gem_ttm_vmap);
-+
-+/**
-+ * drm_gem_ttm_vunmap() - vunmap &ttm_buffer_object
-+ * @gem: GEM object.
-+ * @map: dma-buf mapping.
-+ *
-+ * Unmaps a GEM object with ttm_bo_vunmap(). This function can be used as
-+ * &drm_gem_object_funcs.vmap callback.
-+ */
-+void drm_gem_ttm_vunmap(struct drm_gem_object *gem,
-+			struct dma_buf_map *map)
-+{
-+	struct ttm_buffer_object *bo = drm_gem_ttm_of_gem(gem);
-+
-+	ttm_bo_vunmap(bo, map);
-+}
-+EXPORT_SYMBOL(drm_gem_ttm_vunmap);
-+
- /**
-  * drm_gem_ttm_mmap() - mmap &ttm_buffer_object
-  * @gem: GEM object.
-diff --git a/drivers/gpu/drm/ttm/ttm_bo_util.c b/drivers/gpu/drm/ttm/ttm_bo_util.c
-index ecb54415d1ca..7ccb2295cac1 100644
---- a/drivers/gpu/drm/ttm/ttm_bo_util.c
-+++ b/drivers/gpu/drm/ttm/ttm_bo_util.c
-@@ -32,6 +32,7 @@
- #include <drm/ttm/ttm_bo_driver.h>
- #include <drm/ttm/ttm_placement.h>
- #include <drm/drm_vma_manager.h>
-+#include <linux/dma-buf-map.h>
- #include <linux/io.h>
- #include <linux/highmem.h>
- #include <linux/wait.h>
-@@ -471,6 +472,77 @@ void ttm_bo_kunmap(struct ttm_bo_kmap_obj *map)
- }
- EXPORT_SYMBOL(ttm_bo_kunmap);
- 
-+int ttm_bo_vmap(struct ttm_buffer_object *bo, struct dma_buf_map *map)
-+{
-+	struct ttm_resource *mem = &bo->mem;
-+	int ret;
-+
-+	ret = ttm_mem_io_reserve(bo->bdev, mem);
-+	if (ret)
-+		return ret;
-+
-+	if (mem->bus.is_iomem) {
-+		void __iomem *vaddr_iomem;
-+		size_t size = bo->num_pages << PAGE_SHIFT;
-+
-+		if (mem->bus.addr)
-+			vaddr_iomem = (void __iomem *)mem->bus.addr;
-+		else if (mem->bus.caching == ttm_write_combined)
-+			vaddr_iomem = ioremap_wc(mem->bus.offset, size);
-+		else
-+			vaddr_iomem = ioremap(mem->bus.offset, size);
-+
-+		if (!vaddr_iomem)
-+			return -ENOMEM;
-+
-+		dma_buf_map_set_vaddr_iomem(map, vaddr_iomem);
-+
-+	} else {
-+		struct ttm_operation_ctx ctx = {
-+			.interruptible = false,
-+			.no_wait_gpu = false
-+		};
-+		struct ttm_tt *ttm = bo->ttm;
-+		pgprot_t prot;
-+		void *vaddr;
-+
-+		ret = ttm_tt_populate(bo->bdev, ttm, &ctx);
-+		if (ret)
-+			return ret;
-+
-+		/*
-+		 * We need to use vmap to get the desired page protection
-+		 * or to make the buffer object look contiguous.
-+		 */
-+		prot = ttm_io_prot(bo, mem, PAGE_KERNEL);
-+		vaddr = vmap(ttm->pages, bo->num_pages, 0, prot);
-+		if (!vaddr)
-+			return -ENOMEM;
-+
-+		dma_buf_map_set_vaddr(map, vaddr);
-+	}
-+
-+	return 0;
-+}
-+EXPORT_SYMBOL(ttm_bo_vmap);
-+
-+void ttm_bo_vunmap(struct ttm_buffer_object *bo, struct dma_buf_map *map)
-+{
-+	struct ttm_resource *mem = &bo->mem;
-+
-+	if (dma_buf_map_is_null(map))
-+		return;
-+
-+	if (!map->is_iomem)
-+		vunmap(map->vaddr);
-+	else if (!mem->bus.addr)
-+		iounmap(map->vaddr_iomem);
-+	dma_buf_map_clear(map);
-+
-+	ttm_mem_io_free(bo->bdev, &bo->mem);
-+}
-+EXPORT_SYMBOL(ttm_bo_vunmap);
-+
- static int ttm_bo_wait_free_node(struct ttm_buffer_object *bo,
- 				 bool dst_use_tt)
- {
-diff --git a/include/drm/drm_gem_ttm_helper.h b/include/drm/drm_gem_ttm_helper.h
-index 118cef76f84f..7c6d874910b8 100644
---- a/include/drm/drm_gem_ttm_helper.h
-+++ b/include/drm/drm_gem_ttm_helper.h
-@@ -10,11 +10,17 @@
- #include <drm/ttm/ttm_bo_api.h>
- #include <drm/ttm/ttm_bo_driver.h>
- 
-+struct dma_buf_map;
-+
- #define drm_gem_ttm_of_gem(gem_obj) \
- 	container_of(gem_obj, struct ttm_buffer_object, base)
- 
- void drm_gem_ttm_print_info(struct drm_printer *p, unsigned int indent,
- 			    const struct drm_gem_object *gem);
-+int drm_gem_ttm_vmap(struct drm_gem_object *gem,
-+		     struct dma_buf_map *map);
-+void drm_gem_ttm_vunmap(struct drm_gem_object *gem,
-+			struct dma_buf_map *map);
- int drm_gem_ttm_mmap(struct drm_gem_object *gem,
- 		     struct vm_area_struct *vma);
- 
-diff --git a/include/drm/ttm/ttm_bo_api.h b/include/drm/ttm/ttm_bo_api.h
-index 37102e45e496..2c59a785374c 100644
---- a/include/drm/ttm/ttm_bo_api.h
-+++ b/include/drm/ttm/ttm_bo_api.h
-@@ -48,6 +48,8 @@ struct ttm_bo_global;
- 
- struct ttm_bo_device;
- 
-+struct dma_buf_map;
-+
- struct drm_mm_node;
- 
- struct ttm_placement;
-@@ -494,6 +496,32 @@ int ttm_bo_kmap(struct ttm_buffer_object *bo, unsigned long start_page,
-  */
- void ttm_bo_kunmap(struct ttm_bo_kmap_obj *map);
- 
-+/**
-+ * ttm_bo_vmap
-+ *
-+ * @bo: The buffer object.
-+ * @map: pointer to a struct dma_buf_map representing the map.
-+ *
-+ * Sets up a kernel virtual mapping, using ioremap or vmap to the
-+ * data in the buffer object. The parameter @map returns the virtual
-+ * address as struct dma_buf_map. Unmap the buffer with ttm_bo_vunmap().
-+ *
-+ * Returns
-+ * -ENOMEM: Out of memory.
-+ * -EINVAL: Invalid range.
-+ */
-+int ttm_bo_vmap(struct ttm_buffer_object *bo, struct dma_buf_map *map);
-+
-+/**
-+ * ttm_bo_vunmap
-+ *
-+ * @bo: The buffer object.
-+ * @map: Object describing the map to unmap.
-+ *
-+ * Unmaps a kernel map set up by ttm_bo_vmap().
-+ */
-+void ttm_bo_vunmap(struct ttm_buffer_object *bo, struct dma_buf_map *map);
-+
- /**
-  * ttm_bo_mmap_obj - mmap memory backed by a ttm buffer object.
-  *
 diff --git a/include/linux/dma-buf-map.h b/include/linux/dma-buf-map.h
-index fd1aba545fdf..2e8bbecb5091 100644
+index 2e8bbecb5091..583a3a1f9447 100644
 --- a/include/linux/dma-buf-map.h
 +++ b/include/linux/dma-buf-map.h
-@@ -45,6 +45,12 @@
+@@ -7,6 +7,7 @@
+ #define __DMA_BUF_MAP_H__
+ 
+ #include <linux/io.h>
++#include <linux/string.h>
+ 
+ /**
+  * DOC: overview
+@@ -32,6 +33,14 @@
+  * accessing the buffer. Use the returned instance and the helper functions
+  * to access the buffer's memory in the correct way.
   *
-  *	dma_buf_map_set_vaddr(&map. 0xdeadbeaf);
++ * The type :c:type:`struct dma_buf_map <dma_buf_map>` and its helpers are
++ * actually independent from the dma-buf infrastructure. When sharing buffers
++ * among devices, drivers have to know the location of the memory to access
++ * the buffers in a safe way. :c:type:`struct dma_buf_map <dma_buf_map>`
++ * solves this problem for dma-buf and its users. If other drivers or
++ * sub-systems require similar functionality, the type could be generalized
++ * and moved to a more prominent header file.
++ *
+  * Open-coding access to :c:type:`struct dma_buf_map <dma_buf_map>` is
+  * considered bad style. Rather then accessing its fields directly, use one
+  * of the provided helper functions, or implement your own. For example,
+@@ -51,6 +60,14 @@
   *
-+ * To set an address in I/O memory, use dma_buf_map_set_vaddr_iomem().
+  *	dma_buf_map_set_vaddr_iomem(&map. 0xdeadbeaf);
+  *
++ * Instances of struct dma_buf_map do not have to be cleaned up, but
++ * can be cleared to NULL with dma_buf_map_clear(). Cleared mappings
++ * always refer to system memory.
 + *
 + * .. code-block:: c
 + *
-+ *	dma_buf_map_set_vaddr_iomem(&map. 0xdeadbeaf);
++ *	dma_buf_map_clear(&map);
 + *
   * Test if a mapping is valid with either dma_buf_map_is_set() or
   * dma_buf_map_is_null().
   *
-@@ -118,6 +124,20 @@ static inline void dma_buf_map_set_vaddr(struct dma_buf_map *map, void *vaddr)
- 	map->is_iomem = false;
+@@ -73,17 +90,19 @@
+  *	if (dma_buf_map_is_equal(&sys_map, &io_map))
+  *		// always false
+  *
+- * Instances of struct dma_buf_map do not have to be cleaned up, but
+- * can be cleared to NULL with dma_buf_map_clear(). Cleared mappings
+- * always refer to system memory.
++ * A set up instance of struct dma_buf_map can be used to access or manipulate
++ * the buffer memory. Depending on the location of the memory, the provided
++ * helpers will pick the correct operations. Data can be copied into the memory
++ * with dma_buf_map_memcpy_to(). The address can be manipulated with
++ * dma_buf_map_incr().
+  *
+- * The type :c:type:`struct dma_buf_map <dma_buf_map>` and its helpers are
+- * actually independent from the dma-buf infrastructure. When sharing buffers
+- * among devices, drivers have to know the location of the memory to access
+- * the buffers in a safe way. :c:type:`struct dma_buf_map <dma_buf_map>`
+- * solves this problem for dma-buf and its users. If other drivers or
+- * sub-systems require similar functionality, the type could be generalized
+- * and moved to a more prominent header file.
++ * .. code-block:: c
++ *
++ *	const void *src = ...; // source buffer
++ *	size_t len = ...; // length of src
++ *
++ *	dma_buf_map_memcpy_to(&map, src, len);
++ *	dma_buf_map_incr(&map, len); // go to first byte after the memcpy
+  */
+ 
+ /**
+@@ -210,4 +229,38 @@ static inline void dma_buf_map_clear(struct dma_buf_map *map)
+ 	}
  }
  
 +/**
-+ * dma_buf_map_set_vaddr_iomem - Sets a dma-buf mapping structure to an address in I/O memory
-+ * @map:		The dma-buf mapping structure
-+ * @vaddr_iomem:	An I/O-memory address
++ * dma_buf_map_memcpy_to - Memcpy into dma-buf mapping
++ * @dst:	The dma-buf mapping structure
++ * @src:	The source buffer
++ * @len:	The number of byte in src
 + *
-+ * Sets the address and the I/O-memory flag.
++ * Copies data into a dma-buf mapping. The source buffer is in system
++ * memory. Depending on the buffer's location, the helper picks the correct
++ * method of accessing the memory.
 + */
-+static inline void dma_buf_map_set_vaddr_iomem(struct dma_buf_map *map,
-+					       void __iomem *vaddr_iomem)
++static inline void dma_buf_map_memcpy_to(struct dma_buf_map *dst, const void *src, size_t len)
 +{
-+	map->vaddr_iomem = vaddr_iomem;
-+	map->is_iomem = true;
++	if (dst->is_iomem)
++		memcpy_toio(dst->vaddr_iomem, src, len);
++	else
++		memcpy(dst->vaddr, src, len);
 +}
 +
- /**
-  * dma_buf_map_is_equal - Compares two dma-buf mapping structures for equality
-  * @lhs:	The dma-buf mapping structure
++/**
++ * dma_buf_map_incr - Increments the address stored in a dma-buf mapping
++ * @map:	The dma-buf mapping structure
++ * @incr:	The number of bytes to increment
++ *
++ * Increments the address stored in a dma-buf mapping. Depending on the
++ * buffer's location, the correct value will be updated.
++ */
++static inline void dma_buf_map_incr(struct dma_buf_map *map, size_t incr)
++{
++	if (map->is_iomem)
++		map->vaddr_iomem += incr;
++	else
++		map->vaddr += incr;
++}
++
+ #endif /* __DMA_BUF_MAP_H__ */
 -- 
 2.29.0
 
