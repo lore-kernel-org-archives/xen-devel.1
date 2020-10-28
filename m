@@ -2,28 +2,28 @@ Return-Path: <SRS0=61/H=ED=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C9100C388F7
-	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2020 17:44:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 50FF3C388F7
+	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2020 18:14:13 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4FC02247E8
-	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2020 17:44:47 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id AC1B2247FE
+	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2020 18:14:12 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="zeafB7Z4"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4FC02247E8
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linaro.org
+	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="ejuqCs2C"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AC1B2247FE
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.13806.34520 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.13813.34544 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kXpUc-0001pO-64; Wed, 28 Oct 2020 17:44:14 +0000
+	id 1kXpxH-0004dH-R0; Wed, 28 Oct 2020 18:13:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 13806.34520; Wed, 28 Oct 2020 17:44:14 +0000
+Received: by outflank-mailman (output) from mailman id 13813.34544; Wed, 28 Oct 2020 18:13:51 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,118 +38,102 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kXpUc-0001pH-2u; Wed, 28 Oct 2020 17:44:14 +0000
-Received: by outflank-mailman (input) for mailman id 13806;
- Wed, 28 Oct 2020 17:44:13 +0000
+	id 1kXpxH-0004dA-Nt; Wed, 28 Oct 2020 18:13:51 +0000
+Received: by outflank-mailman (input) for mailman id 13813;
+ Wed, 28 Oct 2020 18:13:50 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=i5Ob=ED=linaro.org=alex.bennee@srs-us1.protection.inumbo.net>)
- id 1kXpUa-0001pC-Ur
- for xen-devel@lists.xenproject.org; Wed, 28 Oct 2020 17:44:13 +0000
-Received: from mail-wr1-x443.google.com (unknown [2a00:1450:4864:20::443])
+ <SRS0=61hT=ED=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
+ id 1kXpxG-0004d5-5H
+ for xen-devel@lists.xenproject.org; Wed, 28 Oct 2020 18:13:50 +0000
+Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 10680334-cc58-45a8-af22-9be9db772c0d;
- Wed, 28 Oct 2020 17:44:11 +0000 (UTC)
-Received: by mail-wr1-x443.google.com with SMTP id m13so2361383wrj.7
- for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2020 10:44:11 -0700 (PDT)
-Received: from zen.linaroharston ([51.148.130.216])
- by smtp.gmail.com with ESMTPSA id f13sm438798wrp.12.2020.10.28.10.44.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Oct 2020 10:44:09 -0700 (PDT)
-Received: from zen.lan (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 5827D1FF7E;
- Wed, 28 Oct 2020 17:44:08 +0000 (GMT)
+ id 16e3adbb-f6b6-41cd-860c-2dec95519e15;
+ Wed, 28 Oct 2020 18:13:49 +0000 (UTC)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=i5Ob=ED=linaro.org=alex.bennee@srs-us1.protection.inumbo.net>)
-	id 1kXpUa-0001pC-Ur
-	for xen-devel@lists.xenproject.org; Wed, 28 Oct 2020 17:44:13 +0000
-X-Inumbo-ID: 10680334-cc58-45a8-af22-9be9db772c0d
-Received: from mail-wr1-x443.google.com (unknown [2a00:1450:4864:20::443])
+	(envelope-from <SRS0=61hT=ED=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
+	id 1kXpxG-0004d5-5H
+	for xen-devel@lists.xenproject.org; Wed, 28 Oct 2020 18:13:50 +0000
+X-Inumbo-ID: 16e3adbb-f6b6-41cd-860c-2dec95519e15
+Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 10680334-cc58-45a8-af22-9be9db772c0d;
-	Wed, 28 Oct 2020 17:44:11 +0000 (UTC)
-Received: by mail-wr1-x443.google.com with SMTP id m13so2361383wrj.7
-        for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2020 10:44:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=YAl0tecVsURCuewdLjQ48RaCrF96ohlsENSIUfpsU+w=;
-        b=zeafB7Z4qJnIB81bJuKqrWyMO9ds5lDP45CKMEw/pVonwKm9jJoDyipd2H3Vc+mIDd
-         2TKaS8P/pMN1ta1Letyd3LaSmJzn9UmePXvDdcM9gP7wyfaCO0OoNAqNi7MhEYY2hvlE
-         wn2dugs4oD/TNrUzhgBHo79XxSxR+3Fme57x5yWtFr3WksdfLEeu3SK5r6xrVaUnA+Ij
-         rXw2stqIYJj813rwwTXgDnkGdUyC2/vQFSSecLN2D6JQwTuhLJDvU7/T0PwbBnDpaz5x
-         FdHjmjsQkKB3lBqpPZJz4p3gQXTawl7x3qiYhlwGLR031uQS5i3qtFFCh8LpzPDPpwoy
-         JPMA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=YAl0tecVsURCuewdLjQ48RaCrF96ohlsENSIUfpsU+w=;
-        b=PVeu1RrS5wsW6RsRE//yy/wabhRCm9xHXkCXSilM/pxVVspNw2uJJrtImkmFaVkeHh
-         AbMakfFctuwdA732ltM6VKzVJQmPoqz3AfHrJNLaWJhb1sWRK4pjEsYBmYq445kFFcqX
-         a6As7FEr1tQVLZ7YocbNYTH1o4vlCgdiBFXMbdiuRvVmgy2Mc1+Ifh59LFtl8M83h/OC
-         a59uQRckqpC6xEI3S6VbWmiL5btBks3qk91AEqiYuv6tbCRAyizxdnT3zPNOVaCEfpFk
-         kzJVlxoqkclVWUJRkGfLd8fRTALS1zSv3qR9wT9Sr6c+vc80c05IV1zBI7afSc8s2JWH
-         FS1A==
-X-Gm-Message-State: AOAM532EwLrGjRjih1PS0N58ZN603iFN5Gsp68oJiW4SiBN9cu0UOzQo
-	jQ1rHfvXWcaWCwDh8HwzDC3h8Q==
-X-Google-Smtp-Source: ABdhPJxtamYIDVXm4aGyKgQ9cjhesv/FKnN4U2mpSB4roy/h9H0baZIpnVLxCyBEEchu2j6Kvww+UA==
-X-Received: by 2002:a5d:4051:: with SMTP id w17mr531965wrp.24.1603907050586;
-        Wed, 28 Oct 2020 10:44:10 -0700 (PDT)
-Received: from zen.linaroharston ([51.148.130.216])
-        by smtp.gmail.com with ESMTPSA id f13sm438798wrp.12.2020.10.28.10.44.09
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 28 Oct 2020 10:44:09 -0700 (PDT)
-Received: from zen.lan (localhost [127.0.0.1])
-	by zen.linaroharston (Postfix) with ESMTP id 5827D1FF7E;
-	Wed, 28 Oct 2020 17:44:08 +0000 (GMT)
-From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: xen-devel@lists.xenproject.org,
-	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
-	Masami Hiramatsu <masami.hiramatsu@linaro.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony Perard <anthony.perard@citrix.com>,
-	Paul Durrant <paul@xen.org>
-Subject: [PATCH] meson.build: fix building of Xen support for aarch64
-Date: Wed, 28 Oct 2020 17:44:06 +0000
-Message-Id: <20201028174406.23424-1-alex.bennee@linaro.org>
-X-Mailer: git-send-email 2.20.1
+	id 16e3adbb-f6b6-41cd-860c-2dec95519e15;
+	Wed, 28 Oct 2020 18:13:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1603908829;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=iJRY66IfuqDwktqFQFJqHM15N+oXk8Kse5TIrgqQc/w=;
+  b=ejuqCs2C8Ws0WOawEQLOX+bfGA6c8x1eHrxoLVdzPSM4QrWV6Oybfwr/
+   c9ts+75jXC4wOF+cUgLZYe9JFR890NIjknv0+QqxmlkhwKIOTB74lck/9
+   mv+0UJpKAKxuPu74uNKClmKHEhdccviQVRTCJ1DzLSb+hl7LdvLrQCm60
+   o=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: EP5JZDbke5FPw731Eg1l8W+oCE7VrAssW9K+/7chfRPmLOd6M1U4OdmFfdebedk/DUYFQVMtT4
+ LAt+FolsY0LRCBLFqTu+koHCGnw2hFZXPd0cvoJ4sDS/Wj23onJqojKAs4OR1MD3I5pHczOTxl
+ v3FhKcXatoe13erkiJP2Li9lFK7KR3vTQz2Apkb61zQ1TWGS96iE88qynTGJ5d2X1nAyMQRIWu
+ sbNmvr7wXrbvMwU7Ce6kPJp/T4oSjYgCURfhvFyQEgowBYHi0vHIGxRzpfPtcH99lLVmHnAYaq
+ VN4=
+X-SBRS: None
+X-MesageID: 30004285
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.77,427,1596513600"; 
+   d="scan'208";a="30004285"
+Date: Wed, 28 Oct 2020 18:13:44 +0000
+From: Anthony PERARD <anthony.perard@citrix.com>
+To: Jan Beulich <jbeulich@suse.com>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson
+	<iwj@xenproject.org>, Wei Liu <wl@xen.org>, <xen-devel@lists.xenproject.org>,
+	Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH v1] libacpi: use temporary files for generated files
+Message-ID: <20201028181344.GA273696@perard.uk.xensource.com>
+References: <20201026204151.23459-1-olaf@aepfle.de>
+ <68312718-c8ad-040b-be45-192d2c91ba8f@suse.com>
+ <20201027112703.24d55a50.olaf@aepfle.de>
+ <bc7a5e73-af27-45ae-5d82-f53176cd43a9@suse.com>
+ <24025dd2-2c61-7e92-a9b1-2433eea2e909@citrix.com>
+ <3880bcbd-9281-10a5-7de5-f73bcf74557a@suse.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <3880bcbd-9281-10a5-7de5-f73bcf74557a@suse.com>
 
-Xen is supported on aarch64 although weirdly using the i386-softmmu
-model. Checking based on the host CPU meant we never enabled Xen
-support. It would be nice to enable CONFIG_XEN for aarch64-softmmu to
-make it not seem weird but that will require further build surgery.
+On Tue, Oct 27, 2020 at 12:06:56PM +0100, Jan Beulich wrote:
+> On 27.10.2020 11:57, Andrew Cooper wrote:
+> > On 27/10/2020 10:37, Jan Beulich wrote:
+> >> On 27.10.2020 11:27, Olaf Hering wrote:
+> >>> Am Tue, 27 Oct 2020 11:16:04 +0100
+> >>> schrieb Jan Beulich <jbeulich@suse.com>:
+> >>>
+> >>>> This pattern is used when a rule consists of multiple commands
+> >>>> having their output appended to one another's.
+> >>> My understanding is: a rule is satisfied as soon as the file exists.
+> >> No - once make has found that a rule's commands need running, it'll
+> >> run the full set and only check again afterwards.
+> > 
+> > It stops at the first command which fails.
+> > 
+> > Olaf is correct, but the problem here is an incremental build issue, not
+> > a parallel build issue.
+> > 
+> > Intermediate files must not use the name of the target, or a failure and
+> > re-build will use the (bogus) intermediate state rather than rebuilding it.
+> 
+> But there's no intermediate file here - the file gets created in one
+> go. Furthermore doesn't make delete the target file(s) when a rule
+> fails? (One may not want to rely on this, and hence indeed keep multi-
+> part rules update intermediate files of different names.)
 
-Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Cc: Masami Hiramatsu <masami.hiramatsu@linaro.org>
-Cc: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Anthony Perard <anthony.perard@citrix.com>
-Cc: Paul Durrant <paul@xen.org>
-Fixes: 8a19980e3f ("configure: move accelerator logic to meson")
----
- meson.build | 2 ++
- 1 file changed, 2 insertions(+)
+What if something went badly enough and sed didn't managed to write the
+whole file and make never had a chance to remove the bogus file?
 
-diff --git a/meson.build b/meson.build
-index 835424999d..f1fcbfed4c 100644
---- a/meson.build
-+++ b/meson.build
-@@ -81,6 +81,8 @@ if cpu in ['x86', 'x86_64']
-     'CONFIG_HVF': ['x86_64-softmmu'],
-     'CONFIG_WHPX': ['i386-softmmu', 'x86_64-softmmu'],
-   }
-+elif cpu in [ 'arm', 'aarch64' ]
-+  accelerator_targets += { 'CONFIG_XEN': ['i386-softmmu'] }
- endif
- 
- ##################
+Surely, this patch is a strict improvement to the build system.
+
+Cheers,
+
 -- 
-2.20.1
-
+Anthony PERARD
 
