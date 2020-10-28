@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-8.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 56599C4363A
-	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2020 09:23:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E6B6DC4363A
+	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2020 09:24:24 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CCB7124691
-	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2020 09:23:55 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 67A8324691
+	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2020 09:24:24 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="d1ADUAQy"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CCB7124691
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="VJI6vy9R"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 67A8324691
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.13426.34058 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.13431.34069 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kXhgI-0005SF-2J; Wed, 28 Oct 2020 09:23:46 +0000
+	id 1kXhgk-0005Z6-BI; Wed, 28 Oct 2020 09:24:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 13426.34058; Wed, 28 Oct 2020 09:23:46 +0000
+Received: by outflank-mailman (output) from mailman id 13431.34069; Wed, 28 Oct 2020 09:24:14 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,54 +38,55 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kXhgH-0005S7-Uo; Wed, 28 Oct 2020 09:23:45 +0000
-Received: by outflank-mailman (input) for mailman id 13426;
- Wed, 28 Oct 2020 09:23:44 +0000
+	id 1kXhgk-0005Yz-8I; Wed, 28 Oct 2020 09:24:14 +0000
+Received: by outflank-mailman (input) for mailman id 13431;
+ Wed, 28 Oct 2020 09:24:13 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=dk2S=ED=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kXhgG-0005Ry-Jg
- for xen-devel@lists.xenproject.org; Wed, 28 Oct 2020 09:23:44 +0000
+ id 1kXhgj-0005Yr-IG
+ for xen-devel@lists.xenproject.org; Wed, 28 Oct 2020 09:24:13 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 51916575-9bb7-4837-a3e0-4485b7de8df7;
- Wed, 28 Oct 2020 09:23:42 +0000 (UTC)
+ id ca21e3f6-7e57-4e2c-be35-2f85bffc0e51;
+ Wed, 28 Oct 2020 09:24:12 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 8D7D9AE55;
- Wed, 28 Oct 2020 09:23:41 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 14286ACAC;
+ Wed, 28 Oct 2020 09:24:12 +0000 (UTC)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=dk2S=ED=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
-	id 1kXhgG-0005Ry-Jg
-	for xen-devel@lists.xenproject.org; Wed, 28 Oct 2020 09:23:44 +0000
-X-Inumbo-ID: 51916575-9bb7-4837-a3e0-4485b7de8df7
+	id 1kXhgj-0005Yr-IG
+	for xen-devel@lists.xenproject.org; Wed, 28 Oct 2020 09:24:13 +0000
+X-Inumbo-ID: ca21e3f6-7e57-4e2c-be35-2f85bffc0e51
 Received: from mx2.suse.de (unknown [195.135.220.15])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 51916575-9bb7-4837-a3e0-4485b7de8df7;
-	Wed, 28 Oct 2020 09:23:42 +0000 (UTC)
+	id ca21e3f6-7e57-4e2c-be35-2f85bffc0e51;
+	Wed, 28 Oct 2020 09:24:12 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1603877021;
+	t=1603877052;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=Ldwy/42iIo0sCTIc18oLAOIhkEM9oMjLPSiF7ItDO6A=;
-	b=d1ADUAQyyFUI5XPvjZrMvxa7fbW5nx6uYZ2x76+G4OxQVF6a/8D3953Der42YgiufWgwaq
-	pU0gZg+yCkDQoGRT/GV7jDbhARuDfrvBelfA2iO2aEMUrv31G0NowcZvsRrb5+c6yx2bvQ
-	j77ku8ZK5XWVCUFY5OpYz89d0hzj+co=
+	bh=JtLLY79rVz1/b+gt5Ib9A6igOOIy5NEZdkH5oVbCQnk=;
+	b=VJI6vy9R90Vs2E3wVekuCxGJTGtQbMA4OcA0MkysEL29mIv9ddl22Dg2FTzRuu9F7+yyZf
+	YZXwFWeCwK6agSPEID1Bc/CPdV4b0T3p8fvmZN/JucbKeOGA2IhHk3RlzULuld3IebIm4u
+	DDcocneMpPBPVgjW78gYTUevI12lO4Q=
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 8D7D9AE55;
-	Wed, 28 Oct 2020 09:23:41 +0000 (UTC)
-Subject: [PATCH 3/5] x86/p2m: suppress audit_p2m hook when possible
+	by mx2.suse.de (Postfix) with ESMTP id 14286ACAC;
+	Wed, 28 Oct 2020 09:24:12 +0000 (UTC)
+Subject: [PATCH 4/5] x86/HAP: move nested-P2M flush calculations out of locked
+ region
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
  =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
  George Dunlap <George.Dunlap@eu.citrix.com>
 References: <29d30de1-2a8d-aee2-d3c3-331758766fc9@suse.com>
-Message-ID: <722cf75e-da6a-49c5-472a-898796c9030e@suse.com>
-Date: Wed, 28 Oct 2020 10:23:42 +0100
+Message-ID: <551dc0a2-f5ef-a646-26eb-8a67ae428745@suse.com>
+Date: Wed, 28 Oct 2020 10:24:12 +0100
 User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.4.0
 MIME-Version: 1.0
@@ -94,120 +95,63 @@ Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
-When P2M_AUDIT is false, it's unused, so instead of having a dangling
-NULL pointer sit there, omit the field altogether.
-
-Instead of adding "#if P2M_AUDIT && defined(CONFIG_HVM)" in even more
-places, fold the latter part right into the definition of P2M_AUDIT.
+By latching the old MFN into a local variable, these calculations don't
+depend on anything but local variables anymore. Hence the point in time
+when they get performed doesn't matter anymore, so they can be moved
+past the locked region.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
---- a/xen/arch/x86/domctl.c
-+++ b/xen/arch/x86/domctl.c
-@@ -1012,7 +1012,7 @@ long arch_do_domctl(
-         break;
- #endif
- 
--#if P2M_AUDIT && defined(CONFIG_HVM)
-+#if P2M_AUDIT
-     case XEN_DOMCTL_audit_p2m:
-         if ( d == currd )
-             ret = -EPERM;
---- a/xen/arch/x86/mm/p2m-ept.c
-+++ b/xen/arch/x86/mm/p2m-ept.c
-@@ -1260,7 +1260,9 @@ int ept_p2m_init(struct p2m_domain *p2m)
-     p2m->change_entry_type_global = ept_change_entry_type_global;
-     p2m->change_entry_type_range = ept_change_entry_type_range;
-     p2m->memory_type_changed = ept_memory_type_changed;
-+#if P2M_AUDIT
-     p2m->audit_p2m = NULL;
-+#endif
-     p2m->tlb_flush = ept_tlb_flush;
- 
-     /* Set the memory type used when accessing EPT paging structures. */
---- a/xen/arch/x86/mm/p2m-pt.c
-+++ b/xen/arch/x86/mm/p2m-pt.c
-@@ -971,8 +971,8 @@ static int p2m_pt_change_entry_type_rang
-     return err;
- }
- 
--#if P2M_AUDIT && defined(CONFIG_HVM)
--long p2m_pt_audit_p2m(struct p2m_domain *p2m)
-+#if P2M_AUDIT
-+static long p2m_pt_audit_p2m(struct p2m_domain *p2m)
+--- a/xen/arch/x86/mm/hap/hap.c
++++ b/xen/arch/x86/mm/hap/hap.c
+@@ -780,7 +780,7 @@ hap_write_p2m_entry(struct p2m_domain *p
  {
-     unsigned long entry_count = 0, pmbad = 0;
-     unsigned long mfn, gfn, m2pfn;
-@@ -1120,8 +1120,6 @@ long p2m_pt_audit_p2m(struct p2m_domain
+     struct domain *d = p2m->domain;
+     uint32_t old_flags;
+-    bool_t flush_nestedp2m = 0;
++    mfn_t omfn;
+     int rc;
  
-     return pmbad;
- }
--#else
--# define p2m_pt_audit_p2m NULL
- #endif /* P2M_AUDIT */
+     /* We know always use the host p2m here, regardless if the vcpu
+@@ -790,21 +790,11 @@ hap_write_p2m_entry(struct p2m_domain *p
  
- /* Set up the p2m function pointers for pagetable format */
-@@ -1141,8 +1139,6 @@ void p2m_pt_init(struct p2m_domain *p2m)
- 
- #if P2M_AUDIT
-     p2m->audit_p2m = p2m_pt_audit_p2m;
--#else
--    p2m->audit_p2m = NULL;
- #endif
- }
- 
---- a/xen/arch/x86/mm/p2m.c
-+++ b/xen/arch/x86/mm/p2m.c
-@@ -2435,7 +2435,7 @@ int p2m_altp2m_propagate_change(struct d
- 
- /*** Audit ***/
- 
--#if P2M_AUDIT && defined(CONFIG_HVM)
-+#if P2M_AUDIT
- void audit_p2m(struct domain *d,
-                uint64_t *orphans,
-                 uint64_t *m2p_bad,
---- a/xen/include/asm-x86/p2m.h
-+++ b/xen/include/asm-x86/p2m.h
-@@ -31,6 +31,14 @@
- #include <asm/mem_sharing.h>
- #include <asm/page.h>    /* for pagetable_t */
- 
-+/* Debugging and auditing of the P2M code? */
-+#ifndef NDEBUG
-+#define P2M_AUDIT     defined(CONFIG_HVM)
-+#else
-+#define P2M_AUDIT     0
-+#endif
-+#define P2M_DEBUGGING 0
-+
- extern bool_t opt_hap_1gb, opt_hap_2mb;
- 
- /*
-@@ -268,7 +276,9 @@ struct p2m_domain {
-     int                (*write_p2m_entry)(struct p2m_domain *p2m,
-                                           unsigned long gfn, l1_pgentry_t *p,
-                                           l1_pgentry_t new, unsigned int level);
-+#if P2M_AUDIT
-     long               (*audit_p2m)(struct p2m_domain *p2m);
-+#endif
- 
-     /*
-      * P2M updates may require TLBs to be flushed (invalidated).
-@@ -758,14 +768,6 @@ extern void p2m_pt_init(struct p2m_domai
- void *map_domain_gfn(struct p2m_domain *p2m, gfn_t gfn, mfn_t *mfn,
-                      p2m_query_t q, uint32_t *pfec);
- 
--/* Debugging and auditing of the P2M code? */
--#ifndef NDEBUG
--#define P2M_AUDIT     1
--#else
--#define P2M_AUDIT     0
--#endif
--#define P2M_DEBUGGING 0
+     paging_lock(d);
+     old_flags = l1e_get_flags(*p);
 -
- #if P2M_AUDIT
- extern void audit_p2m(struct domain *d,
-                       uint64_t *orphans,
+-    if ( nestedhvm_enabled(d) && (old_flags & _PAGE_PRESENT) 
+-         && !p2m_get_hostp2m(d)->defer_nested_flush ) {
+-        /* We are replacing a valid entry so we need to flush nested p2ms,
+-         * unless the only change is an increase in access rights. */
+-        mfn_t omfn = l1e_get_mfn(*p);
+-        mfn_t nmfn = l1e_get_mfn(new);
+-
+-        flush_nestedp2m = !(mfn_eq(omfn, nmfn)
+-            && perms_strictly_increased(old_flags, l1e_get_flags(new)) );
+-    }
++    omfn = l1e_get_mfn(*p);
+ 
+     rc = p2m_entry_modify(p2m, p2m_flags_to_type(l1e_get_flags(new)),
+                           p2m_flags_to_type(old_flags), l1e_get_mfn(new),
+-                          l1e_get_mfn(*p), level);
++                          omfn, level);
+     if ( rc )
+     {
+         paging_unlock(d);
+@@ -817,7 +807,14 @@ hap_write_p2m_entry(struct p2m_domain *p
+ 
+     paging_unlock(d);
+ 
+-    if ( flush_nestedp2m )
++    if ( nestedhvm_enabled(d) && (old_flags & _PAGE_PRESENT) &&
++         !p2m_get_hostp2m(d)->defer_nested_flush &&
++         /*
++          * We are replacing a valid entry so we need to flush nested p2ms,
++          * unless the only change is an increase in access rights.
++          */
++         (!mfn_eq(omfn, l1e_get_mfn(new)) ||
++          !perms_strictly_increased(old_flags, l1e_get_flags(new))) )
+         p2m_flush_nestedp2m(d);
+ 
+     return 0;
 
 
