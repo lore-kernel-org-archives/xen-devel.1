@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A9C1C2D0A3
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 17:20:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4FFEFC55179
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 17:20:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1645420759
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 17:20:44 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id E63C720759
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 17:20:45 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=aepfle.de header.i=@aepfle.de header.b="jfXAXmLL"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1645420759
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=aepfle.de header.i=@aepfle.de header.b="JOaVgOC3"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E63C720759
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.14417.35650 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.14418.35667 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kYBbB-0003ZV-1p; Thu, 29 Oct 2020 17:20:29 +0000
+	id 1kYBbF-0003hR-DM; Thu, 29 Oct 2020 17:20:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 14417.35650; Thu, 29 Oct 2020 17:20:28 +0000
+Received: by outflank-mailman (output) from mailman id 14418.35667; Thu, 29 Oct 2020 17:20:33 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,177 +38,126 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kYBbA-0003Yy-Mp; Thu, 29 Oct 2020 17:20:28 +0000
-Received: by outflank-mailman (input) for mailman id 14417;
- Thu, 29 Oct 2020 17:20:26 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kYBbF-0003hG-8P; Thu, 29 Oct 2020 17:20:33 +0000
+Received: by outflank-mailman (input) for mailman id 14418;
+ Thu, 29 Oct 2020 17:20:31 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=u/HF=EE=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1kYBb8-0003MD-Mf
- for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 17:20:26 +0000
-Received: from mo4-p01-ob.smtp.rzone.de (unknown [81.169.146.167])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 40a0b57d-7dc9-4a68-8ead-9123909cb445;
- Thu, 29 Oct 2020 17:20:17 +0000 (UTC)
+ id 1kYBbD-0003MC-LT
+ for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 17:20:31 +0000
+Received: from mo4-p02-ob.smtp.rzone.de (unknown [81.169.146.168])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 16a7cb04-a854-45a3-a90c-5042f3c0a328;
+ Thu, 29 Oct 2020 17:20:18 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.3.0 DYNA|AUTH)
- with ESMTPSA id j0b1afw9THKA3fA
+ with ESMTPSA id j0b1afw9THKB3fE
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256 bits))
  (Client did not present a certificate);
- Thu, 29 Oct 2020 18:20:10 +0100 (CET)
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ Thu, 29 Oct 2020 18:20:11 +0100 (CET)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=u/HF=EE=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
-	id 1kYBb8-0003MD-Mf
-	for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 17:20:26 +0000
-X-Inumbo-ID: 40a0b57d-7dc9-4a68-8ead-9123909cb445
-Received: from mo4-p01-ob.smtp.rzone.de (unknown [81.169.146.167])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 40a0b57d-7dc9-4a68-8ead-9123909cb445;
-	Thu, 29 Oct 2020 17:20:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1603992016;
+	id 1kYBbD-0003MC-LT
+	for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 17:20:31 +0000
+X-Inumbo-ID: 16a7cb04-a854-45a3-a90c-5042f3c0a328
+Received: from mo4-p02-ob.smtp.rzone.de (unknown [81.169.146.168])
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id 16a7cb04-a854-45a3-a90c-5042f3c0a328;
+	Thu, 29 Oct 2020 17:20:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1603992018;
 	s=strato-dkim-0002; d=aepfle.de;
 	h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
 	X-RZG-CLASS-ID:X-RZG-AUTH:From:Subject:Sender;
-	bh=aHhooxXlVtScSWow8fmwlUPLQUlpWTQjy90bGrDLuPg=;
-	b=jfXAXmLLWiSnWD9wSRj3VcpPbKP02MIv9DSYJN1AR/tj6RQIJ7LMgiMz0Ul+tUkyqe
-	IznA81YexYkgrNm+pToGKZEKf9WQbVlJbRdjewTT73yFfQC+dzNdrghhAWKFLQ803B4+
-	3gyxAez5E1i9SJsJ2PTMslnvDg8WrupjzZ4k8SqusjS6F4HSo5Lfu2pBjr/8VOn6/+8K
-	L0gh+09w3CriRYmKbgpC7RY6DcPnALGjEuwR5BMgRxnnDtg/ln9feJxu0+K2fTFgVhH5
-	3i+/O49sc+0BRFtozeqMZc14brss4rXu7cro/llkMj1+enpGghxSd8lUrbnINkvfFW6q
-	3Akw==
+	bh=kQfsNVsKk3NxmO3L5ZaWoX8Fyv7MojyLwaUWzvd0rkk=;
+	b=JOaVgOC3U0ye2T8Mnibg30o5Jl8LZLeoDlyFpQLyZUKZFpI1iVDy7YlGuUBHw7k7pJ
+	lEBMhciP8OGN8a5nfrNQk4oCPIgo5zi6pddlxJGdYLZWlDJaEi2Xa8HVMo1rIj9r34w6
+	MKK6aDe3IpPqQipPLV1/ZVSyXj/+ypvK9Hx1nYvNdDEmaZTzFehzTUQagbUWpLfFIjRh
+	rGmfWtMa4cuprrWipm6rfNzoRwQYolDgKdx76KZC22iwTfhDkWK5dcerSup7q1xAgAAq
+	N0wtO9sckmXzuzqgbrSaKdEmzPeUv+JDqwpRBlsNLjN/LFOAZCOk1dlhf5EWaF3UhfIg
+	tUsA==
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzBW/OdlBZQ4AHSS3G1Jjw=="
 X-RZG-CLASS-ID: mo00
 Received: from sender
 	by smtp.strato.de (RZmta 47.3.0 DYNA|AUTH)
-	with ESMTPSA id j0b1afw9THKA3fA
+	with ESMTPSA id j0b1afw9THKB3fE
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256 bits))
 	(Client did not present a certificate);
-	Thu, 29 Oct 2020 18:20:10 +0100 (CET)
+	Thu, 29 Oct 2020 18:20:11 +0100 (CET)
 From: Olaf Hering <olaf@aepfle.de>
 To: xen-devel@lists.xenproject.org
 Cc: Olaf Hering <olaf@aepfle.de>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v1 05/23] tools: show migration transfer rate in send_dirty_pages
-Date: Thu, 29 Oct 2020 18:19:45 +0100
-Message-Id: <20201029172004.17219-6-olaf@aepfle.de>
+Subject: [PATCH v1 09/23] tools/guest: save: move types array
+Date: Thu, 29 Oct 2020 18:19:49 +0100
+Message-Id: <20201029172004.17219-10-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20201029172004.17219-1-olaf@aepfle.de>
 References: <20201029172004.17219-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Show how fast domU pages are transferred in each iteration.
-
-The relevant data is how fast the pfns travel, not so much how much
-protocol overhead exists. So the reported MiB/sec is just for pfns.
+Remove allocation from hotpath, move types array into preallocated space.
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
 ---
- tools/libs/guest/xg_sr_common.h |  2 ++
- tools/libs/guest/xg_sr_save.c   | 47 +++++++++++++++++++++++++++++++++
- 2 files changed, 49 insertions(+)
+ tools/libs/guest/xg_sr_common.h | 2 ++
+ tools/libs/guest/xg_sr_save.c   | 7 ++-----
+ 2 files changed, 4 insertions(+), 5 deletions(-)
 
 diff --git a/tools/libs/guest/xg_sr_common.h b/tools/libs/guest/xg_sr_common.h
-index 70e328e951..f3a7a29298 100644
+index 0c2bef8f78..3cbadb607b 100644
 --- a/tools/libs/guest/xg_sr_common.h
 +++ b/tools/libs/guest/xg_sr_common.h
-@@ -238,6 +238,8 @@ struct xc_sr_context
-             bool debug;
+@@ -215,6 +215,8 @@ struct xc_sr_save_arrays {
+     xen_pfn_t batch_pfns[MAX_BATCH_SIZE];
+     /* write_batch: Mfns of the batch pfns. */
+     xen_pfn_t mfns[MAX_BATCH_SIZE];
++    /* write_batch: Types of the batch pfns. */
++    xen_pfn_t types[MAX_BATCH_SIZE];
+ };
  
-             unsigned long p2m_size;
-+            size_t pages_sent;
-+            size_t overhead_sent;
- 
-             struct precopy_stats stats;
- 
+ struct xc_sr_restore_arrays {
 diff --git a/tools/libs/guest/xg_sr_save.c b/tools/libs/guest/xg_sr_save.c
-index 0546d3d9e6..f58a35ddde 100644
+index cdab288c3f..6678df95b8 100644
 --- a/tools/libs/guest/xg_sr_save.c
 +++ b/tools/libs/guest/xg_sr_save.c
-@@ -1,5 +1,6 @@
- #include <assert.h>
- #include <arpa/inet.h>
-+#include <time.h>
+@@ -88,7 +88,7 @@ static int write_checkpoint_record(struct xc_sr_context *ctx)
+ static int write_batch(struct xc_sr_context *ctx)
+ {
+     xc_interface *xch = ctx->xch;
+-    xen_pfn_t *mfns = ctx->save.m->mfns, *types = NULL;
++    xen_pfn_t *mfns = ctx->save.m->mfns, *types = ctx->save.m->types;
+     void *guest_mapping = NULL;
+     void **guest_data = NULL;
+     void **local_pages = NULL;
+@@ -105,8 +105,6 @@ static int write_batch(struct xc_sr_context *ctx)
  
- #include "xg_sr_common.h"
+     assert(nr_pfns != 0);
  
-@@ -238,6 +239,8 @@ static int write_batch(struct xc_sr_context *ctx)
-     iov[3].iov_len = nr_pfns * sizeof(*rec_pfns);
+-    /* Types of the batch pfns. */
+-    types = malloc(nr_pfns * sizeof(*types));
+     /* Errors from attempting to map the gfns. */
+     errors = malloc(nr_pfns * sizeof(*errors));
+     /* Pointers to page data to send.  Mapped gfns or local allocations. */
+@@ -116,7 +114,7 @@ static int write_batch(struct xc_sr_context *ctx)
+     /* iovec[] for writev(). */
+     iov = malloc((nr_pfns + 4) * sizeof(*iov));
  
-     iovcnt = 4;
-+    ctx->save.pages_sent += nr_pages;
-+    ctx->save.overhead_sent += sizeof(rec) + sizeof(hdr) + nr_pfns * sizeof(*rec_pfns);
- 
-     if ( nr_pages )
+-    if ( !types || !errors || !guest_data || !local_pages || !iov )
++    if ( !errors || !guest_data || !local_pages || !iov )
      {
-@@ -357,6 +360,43 @@ static int suspend_domain(struct xc_sr_context *ctx)
-     return 0;
+         ERROR("Unable to allocate arrays for a batch of %u pages",
+               nr_pfns);
+@@ -274,7 +272,6 @@ static int write_batch(struct xc_sr_context *ctx)
+     free(local_pages);
+     free(guest_data);
+     free(errors);
+-    free(types);
+ 
+     return rc;
  }
- 
-+static void show_transfer_rate(struct xc_sr_context *ctx, struct timespec *start)
-+{
-+    xc_interface *xch = ctx->xch;
-+    struct timespec end = {}, diff = {};
-+    size_t ms, MiB_sec = ctx->save.pages_sent * PAGE_SIZE;
-+
-+    if (!MiB_sec)
-+        return;
-+
-+    if ( clock_gettime(CLOCK_MONOTONIC, &end) )
-+        PERROR("clock_gettime");
-+
-+    if ( (end.tv_nsec - start->tv_nsec) < 0 )
-+    {
-+        diff.tv_sec = end.tv_sec - start->tv_sec - 1;
-+        diff.tv_nsec = end.tv_nsec - start->tv_nsec + (1000U*1000U*1000U);
-+    }
-+    else
-+    {
-+        diff.tv_sec = end.tv_sec - start->tv_sec;
-+        diff.tv_nsec = end.tv_nsec - start->tv_nsec;
-+    }
-+
-+    ms = (diff.tv_nsec / (1000U*1000U));
-+    if (!ms)
-+        ms = 1;
-+    ms += (diff.tv_sec * 1000U);
-+
-+    MiB_sec *= 1000U;
-+    MiB_sec /= ms;
-+    MiB_sec /= 1024U*1024U;
-+
-+    errno = 0;
-+    ERROR("%s: %zu bytes + %zu pages in %ld.%09ld sec, %zu MiB/sec", __func__,
-+          ctx->save.overhead_sent, ctx->save.pages_sent, diff.tv_sec, diff.tv_nsec, MiB_sec);
-+}
-+
- /*
-  * Send a subset of pages in the guests p2m, according to the dirty bitmap.
-  * Used for each subsequent iteration of the live migration loop.
-@@ -370,9 +410,15 @@ static int send_dirty_pages(struct xc_sr_context *ctx,
-     xen_pfn_t p;
-     unsigned long written;
-     int rc;
-+    struct timespec start = {};
-     DECLARE_HYPERCALL_BUFFER_SHADOW(unsigned long, dirty_bitmap,
-                                     &ctx->save.dirty_bitmap_hbuf);
- 
-+    ctx->save.pages_sent = 0;
-+    ctx->save.overhead_sent = 0;
-+    if ( clock_gettime(CLOCK_MONOTONIC, &start) )
-+        PERROR("clock_gettime");
-+
-     for ( p = 0, written = 0; p < ctx->save.p2m_size; ++p )
-     {
-         if ( !test_bit(p, dirty_bitmap) )
-@@ -396,6 +442,7 @@ static int send_dirty_pages(struct xc_sr_context *ctx,
-     if ( written > entries )
-         DPRINTF("Bitmap contained more entries than expected...");
- 
-+    show_transfer_rate(ctx, &start);
-     xc_report_progress_step(xch, entries, entries);
- 
-     return ctx->save.ops.check_vm_state(ctx);
 
