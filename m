@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 80B7EC55179
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 17:20:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E0EE6C55179
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 17:20:52 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2D93220759
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 17:20:49 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 41E7C20759
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 17:20:51 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=aepfle.de header.i=@aepfle.de header.b="cyiChVrN"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2D93220759
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=aepfle.de header.i=@aepfle.de header.b="TkkWMSXe"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 41E7C20759
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.14423.35697 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.14427.35715 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kYBbK-0003sh-HP; Thu, 29 Oct 2020 17:20:38 +0000
+	id 1kYBbO-000427-Tz; Thu, 29 Oct 2020 17:20:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 14423.35697; Thu, 29 Oct 2020 17:20:38 +0000
+Received: by outflank-mailman (output) from mailman id 14427.35715; Thu, 29 Oct 2020 17:20:42 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,181 +38,123 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kYBbK-0003sA-3H; Thu, 29 Oct 2020 17:20:38 +0000
-Received: by outflank-mailman (input) for mailman id 14423;
- Thu, 29 Oct 2020 17:20:36 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kYBbO-00041n-OI; Thu, 29 Oct 2020 17:20:42 +0000
+Received: by outflank-mailman (input) for mailman id 14427;
+ Thu, 29 Oct 2020 17:20:41 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=u/HF=EE=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1kYBbI-0003MD-ND
- for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 17:20:36 +0000
+ id 1kYBbN-0003MC-Li
+ for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 17:20:41 +0000
 Received: from mo4-p02-ob.smtp.rzone.de (unknown [85.215.255.82])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id da89125b-8752-45de-bff5-641a8ac91f59;
- Thu, 29 Oct 2020 17:20:18 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id b1211aba-36a0-4d14-9c12-d0ef84df3695;
+ Thu, 29 Oct 2020 17:20:19 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.3.0 DYNA|AUTH)
- with ESMTPSA id j0b1afw9THKA3fB
+ with ESMTPSA id j0b1afw9THKD3fH
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256 bits))
  (Client did not present a certificate);
- Thu, 29 Oct 2020 18:20:10 +0100 (CET)
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ Thu, 29 Oct 2020 18:20:13 +0100 (CET)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=u/HF=EE=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
-	id 1kYBbI-0003MD-ND
-	for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 17:20:36 +0000
-X-Inumbo-ID: da89125b-8752-45de-bff5-641a8ac91f59
+	id 1kYBbN-0003MC-Li
+	for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 17:20:41 +0000
+X-Inumbo-ID: b1211aba-36a0-4d14-9c12-d0ef84df3695
 Received: from mo4-p02-ob.smtp.rzone.de (unknown [85.215.255.82])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id da89125b-8752-45de-bff5-641a8ac91f59;
-	Thu, 29 Oct 2020 17:20:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1603992017;
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id b1211aba-36a0-4d14-9c12-d0ef84df3695;
+	Thu, 29 Oct 2020 17:20:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1603992018;
 	s=strato-dkim-0002; d=aepfle.de;
 	h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
 	X-RZG-CLASS-ID:X-RZG-AUTH:From:Subject:Sender;
-	bh=LTn6Zyyvrx+7UIt94Limr5RoX+Df4LpsEj+n6P0mPjI=;
-	b=cyiChVrN7bX7kbJ1XJcd0kh4utBwBfFXspgce7T2qyODlrBf9aVGxzZ9XMD+AK6/mv
-	bkx0vDZIqyZrhkHQqd+NGt5i1M7IIUjM46XuSeQGy3CdJJCs/Nu5mlv1rT/eFY2GBJcZ
-	Lzaz/QieYwv7V/uyX3dXLNs6GYHUJ5zOXG5Jkr+q8TGkE/JZuMbghh15jbeiqTV+bWfh
-	mESHS2Wu+iVmkVZRb3Ez+jrlvw7JQodkJCPqh72/Vmn/J/FWQH6DRYZs1FuZG8AT4i9Q
-	BjKQ/W+HuxmqsXvrnS1ue/YTAp13nb6tW0epcjq6L3LJTkeVS3r5R+MSZh0mpH69Zm8m
-	vP5A==
+	bh=VVfW+oAH1Frox7ej6KApgNQS/Q90zBjaSWimvZM/Rz8=;
+	b=TkkWMSXeFN2eROBRvYQywqH0q0qV5fFJK7u/XrU/lNwp2dPTpeaAsEx2FJNQzWfMC3
+	NDTxq9YTAmUp6nQDyAHjWRJlTn1XaODMO0lhzm9VrpQjQIRTKfJZCWLEEeD8JXzXaRMn
+	PTOkpnCh0HneHbEaPr0fXD3M1P3rF+rMwSa3EPUWjpv5kBbsu/2i+87lfSaYRGrBcY49
+	+0wS65vNO5hVmAszhdW8WnhWK2GDZxJb7CmYSu6FgCH6AbHxVvUnhl3kkg+oVru0ibC0
+	nGJrLNRSvHN2Y/hJ+6ctaCyIuZY/WuIiI+nrjkLctW/dX81kQV6CFfX2nGQLbnkLedsp
+	oLxQ==
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzBW/OdlBZQ4AHSS3G1Jjw=="
 X-RZG-CLASS-ID: mo00
 Received: from sender
 	by smtp.strato.de (RZmta 47.3.0 DYNA|AUTH)
-	with ESMTPSA id j0b1afw9THKA3fB
+	with ESMTPSA id j0b1afw9THKD3fH
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256 bits))
 	(Client did not present a certificate);
-	Thu, 29 Oct 2020 18:20:10 +0100 (CET)
+	Thu, 29 Oct 2020 18:20:13 +0100 (CET)
 From: Olaf Hering <olaf@aepfle.de>
 To: xen-devel@lists.xenproject.org
 Cc: Olaf Hering <olaf@aepfle.de>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v1 06/23] tools/guest: prepare to allocate arrays once
-Date: Thu, 29 Oct 2020 18:19:46 +0100
-Message-Id: <20201029172004.17219-7-olaf@aepfle.de>
+Subject: [PATCH v1 12/23] tools/guest: save: move rec_pfns array
+Date: Thu, 29 Oct 2020 18:19:52 +0100
+Message-Id: <20201029172004.17219-13-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20201029172004.17219-1-olaf@aepfle.de>
 References: <20201029172004.17219-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The hotpath 'send_dirty_pages' is supposed to do just one thing: sending.
-The other end 'handle_page_data' is supposed to do just receiving.
-
-But instead both do other costly work like memory allocations and data moving.
-Do the allocations once, the array sizes are a compiletime constant.
-Avoid unneeded copying of data by receiving data directly into mapped guest memory.
-
-This patch is just prepartion, subsequent changes will populate the arrays.
-
-Once all changes are applied, migration of a busy HVM domU changes like that:
-
-Without this series, from sr650 to sr950 (xen-4.15.20201027T173911.16a20963b3 xen_testing):
-2020-10-29 10:23:10.711+0000: xc: show_transfer_rate: 23663128 bytes + 2879563 pages in 55.324905335 sec, 203 MiB/sec: Internal error
-2020-10-29 10:23:35.115+0000: xc: show_transfer_rate: 16829632 bytes + 2097552 pages in 24.401179720 sec, 335 MiB/sec: Internal error
-2020-10-29 10:23:59.436+0000: xc: show_transfer_rate: 16829032 bytes + 2097478 pages in 24.319025928 sec, 336 MiB/sec: Internal error
-2020-10-29 10:24:23.844+0000: xc: show_transfer_rate: 16829024 bytes + 2097477 pages in 24.406992500 sec, 335 MiB/sec: Internal error
-2020-10-29 10:24:48.292+0000: xc: show_transfer_rate: 16828912 bytes + 2097463 pages in 24.446489027 sec, 335 MiB/sec: Internal error
-2020-10-29 10:25:01.816+0000: xc: show_transfer_rate: 16836080 bytes + 2098356 pages in 13.447091818 sec, 609 MiB/sec: Internal error
-
-With this series, from sr650 to sr950 (xen-4.15.20201027T173911.16a20963b3 xen_unstable):
-2020-10-28 21:26:05.074+0000: xc: show_transfer_rate: 23663128 bytes + 2879563 pages in 52.564054368 sec, 213 MiB/sec: Internal error
-2020-10-28 21:26:23.527+0000: xc: show_transfer_rate: 16830040 bytes + 2097603 pages in 18.450592015 sec, 444 MiB/sec: Internal error
-2020-10-28 21:26:41.926+0000: xc: show_transfer_rate: 16830944 bytes + 2097717 pages in 18.397862306 sec, 445 MiB/sec: Internal error
-2020-10-28 21:27:00.339+0000: xc: show_transfer_rate: 16829176 bytes + 2097498 pages in 18.411973339 sec, 445 MiB/sec: Internal error
-2020-10-28 21:27:18.643+0000: xc: show_transfer_rate: 16828592 bytes + 2097425 pages in 18.303326695 sec, 447 MiB/sec: Internal error
-2020-10-28 21:27:26.289+0000: xc: show_transfer_rate: 16835952 bytes + 2098342 pages in 7.579846749 sec, 1081 MiB/sec: Internal error
+Remove allocation from hotpath, move rec_pfns array into preallocated space.
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
 ---
- tools/libs/guest/xg_sr_common.h  | 8 ++++++++
- tools/libs/guest/xg_sr_restore.c | 8 ++++++++
- tools/libs/guest/xg_sr_save.c    | 4 +++-
- 3 files changed, 19 insertions(+), 1 deletion(-)
+ tools/libs/guest/xg_sr_common.h |  2 ++
+ tools/libs/guest/xg_sr_save.c   | 11 +----------
+ 2 files changed, 3 insertions(+), 10 deletions(-)
 
 diff --git a/tools/libs/guest/xg_sr_common.h b/tools/libs/guest/xg_sr_common.h
-index f3a7a29298..62bc87b5f4 100644
+index f315b4f526..81158a4f4d 100644
 --- a/tools/libs/guest/xg_sr_common.h
 +++ b/tools/libs/guest/xg_sr_common.h
-@@ -211,6 +211,12 @@ static inline int update_blob(struct xc_sr_blob *blob,
-     return 0;
- }
+@@ -221,6 +221,8 @@ struct xc_sr_save_arrays {
+     int errors[MAX_BATCH_SIZE];
+     /* write_batch: iovec[] for writev(). */
+     struct iovec iov[MAX_BATCH_SIZE + 4];
++    /* write_batch */
++    uint64_t rec_pfns[MAX_BATCH_SIZE];
+ };
  
-+struct xc_sr_save_arrays {
-+};
-+
-+struct xc_sr_restore_arrays {
-+};
-+
- struct xc_sr_context
- {
-     xc_interface *xch;
-@@ -248,6 +254,7 @@ struct xc_sr_context
-             unsigned long *deferred_pages;
-             unsigned long nr_deferred_pages;
-             xc_hypercall_buffer_t dirty_bitmap_hbuf;
-+            struct xc_sr_save_arrays *m;
-         } save;
- 
-         struct /* Restore data. */
-@@ -299,6 +306,7 @@ struct xc_sr_context
- 
-             /* Sender has invoked verify mode on the stream. */
-             bool verify;
-+            struct xc_sr_restore_arrays *m;
-         } restore;
-     };
- 
-diff --git a/tools/libs/guest/xg_sr_restore.c b/tools/libs/guest/xg_sr_restore.c
-index 0332ae9f32..4a9ece9681 100644
---- a/tools/libs/guest/xg_sr_restore.c
-+++ b/tools/libs/guest/xg_sr_restore.c
-@@ -739,6 +739,13 @@ static int setup(struct xc_sr_context *ctx)
-     }
-     ctx->restore.allocated_rec_num = DEFAULT_BUF_RECORDS;
- 
-+    ctx->restore.m = malloc(sizeof(*ctx->restore.m));
-+    if ( !ctx->restore.m ) {
-+        ERROR("Unable to allocate memory for arrays");
-+        rc = -1;
-+        goto err;
-+    }
-+
-  err:
-     return rc;
- }
-@@ -757,6 +764,7 @@ static void cleanup(struct xc_sr_context *ctx)
-         xc_hypercall_buffer_free_pages(
-             xch, dirty_bitmap, NRPAGES(bitmap_size(ctx->restore.p2m_size)));
- 
-+    free(ctx->restore.m);
-     free(ctx->restore.buffered_records);
-     free(ctx->restore.populated_pfns);
- 
+ struct xc_sr_restore_arrays {
 diff --git a/tools/libs/guest/xg_sr_save.c b/tools/libs/guest/xg_sr_save.c
-index f58a35ddde..1e3c8eff2f 100644
+index 385a591332..4d7fbe09ed 100644
 --- a/tools/libs/guest/xg_sr_save.c
 +++ b/tools/libs/guest/xg_sr_save.c
-@@ -853,8 +853,9 @@ static int setup(struct xc_sr_context *ctx)
-     ctx->save.batch_pfns = malloc(MAX_BATCH_SIZE *
-                                   sizeof(*ctx->save.batch_pfns));
-     ctx->save.deferred_pages = bitmap_alloc(ctx->save.p2m_size);
-+    ctx->save.m = malloc(sizeof(*ctx->save.m));
+@@ -96,7 +96,7 @@ static int write_batch(struct xc_sr_context *ctx)
+     unsigned int i, p, nr_pages = 0, nr_pages_mapped = 0;
+     unsigned int nr_pfns = ctx->save.nr_batch_pfns;
+     void *page, *orig_page;
+-    uint64_t *rec_pfns = NULL;
++    uint64_t *rec_pfns = ctx->save.m->rec_pfns;
+     struct iovec *iov = ctx->save.m->iov; int iovcnt = 0;
+     struct xc_sr_rec_page_data_header hdr = { 0 };
+     struct xc_sr_record rec = {
+@@ -201,14 +201,6 @@ static int write_batch(struct xc_sr_context *ctx)
+         }
+     }
  
--    if ( !ctx->save.batch_pfns || !dirty_bitmap || !ctx->save.deferred_pages )
-+    if ( !ctx->save.m || !ctx->save.batch_pfns || !dirty_bitmap || !ctx->save.deferred_pages )
-     {
-         ERROR("Unable to allocate memory for dirty bitmaps, batch pfns and"
-               " deferred pages");
-@@ -886,6 +887,7 @@ static void cleanup(struct xc_sr_context *ctx)
-                                    NRPAGES(bitmap_size(ctx->save.p2m_size)));
-     free(ctx->save.deferred_pages);
-     free(ctx->save.batch_pfns);
-+    free(ctx->save.m);
- }
+-    rec_pfns = malloc(nr_pfns * sizeof(*rec_pfns));
+-    if ( !rec_pfns )
+-    {
+-        ERROR("Unable to allocate %zu bytes of memory for page data pfn list",
+-              nr_pfns * sizeof(*rec_pfns));
+-        goto err;
+-    }
+-
+     hdr.count = nr_pfns;
  
- /*
+     rec.length = sizeof(hdr);
+@@ -259,7 +251,6 @@ static int write_batch(struct xc_sr_context *ctx)
+     rc = ctx->save.nr_batch_pfns = 0;
+ 
+  err:
+-    free(rec_pfns);
+     if ( guest_mapping )
+         xenforeignmemory_unmap(xch->fmem, guest_mapping, nr_pages_mapped);
+     for ( i = 0; local_pages && i < nr_pfns; ++i )
 
