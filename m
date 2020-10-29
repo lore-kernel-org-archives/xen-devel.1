@@ -2,28 +2,28 @@ Return-Path: <SRS0=SN9p=EE=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F2B08C4363A
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 17:00:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CE165C4363A
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 17:08:20 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7AE7120747
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 17:00:14 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 40C8A20759
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 17:08:19 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="dSWCbKpj"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7AE7120747
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="UbRDxNJd"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 40C8A20759
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.14373.35520 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.14386.35535 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kYBHO-0000Ke-Se; Thu, 29 Oct 2020 17:00:02 +0000
+	id 1kYBP3-0001Cn-Mq; Thu, 29 Oct 2020 17:07:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 14373.35520; Thu, 29 Oct 2020 17:00:02 +0000
+Received: by outflank-mailman (output) from mailman id 14386.35535; Thu, 29 Oct 2020 17:07:57 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,129 +38,65 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kYBHO-0000KA-OO; Thu, 29 Oct 2020 17:00:02 +0000
-Received: by outflank-mailman (input) for mailman id 14373;
- Thu, 29 Oct 2020 17:00:01 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=2HK/=EE=redhat.com=pbonzini@srs-us1.protection.inumbo.net>)
- id 1kYBHN-0000Bc-Jb
- for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 17:00:01 +0000
-Received: from us-smtp-delivery-124.mimecast.com (unknown [63.128.21.124])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id a4719388-7c24-45c1-a71b-5d60c346accc;
- Thu, 29 Oct 2020 17:00:00 +0000 (UTC)
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-18-QcIn_t-uP3268TnP8ugTDA-1; Thu, 29 Oct 2020 12:59:58 -0400
-Received: by mail-wr1-f71.google.com with SMTP id 2so1530694wrd.14
- for <xen-devel@lists.xenproject.org>; Thu, 29 Oct 2020 09:59:58 -0700 (PDT)
-Received: from ?IPv6:2001:b07:6468:f312:c8dd:75d4:99ab:290a?
- ([2001:b07:6468:f312:c8dd:75d4:99ab:290a])
- by smtp.gmail.com with ESMTPSA id f17sm6577560wrm.27.2020.10.29.09.59.55
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 29 Oct 2020 09:59:56 -0700 (PDT)
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kYBP3-0001Cb-Jn; Thu, 29 Oct 2020 17:07:57 +0000
+Received: by outflank-mailman (input) for mailman id 14386;
+ Thu, 29 Oct 2020 17:07:55 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=o7xP=EE=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1kYBP1-0001Bl-Mr
+ for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 17:07:55 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id ae50ef18-0294-4033-ae69-3f325dc3fbfb;
+ Thu, 29 Oct 2020 17:07:54 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id CDD10ACDF;
+ Thu, 29 Oct 2020 17:07:53 +0000 (UTC)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=2HK/=EE=redhat.com=pbonzini@srs-us1.protection.inumbo.net>)
-	id 1kYBHN-0000Bc-Jb
-	for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 17:00:01 +0000
-X-Inumbo-ID: a4719388-7c24-45c1-a71b-5d60c346accc
-Received: from us-smtp-delivery-124.mimecast.com (unknown [63.128.21.124])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTP
-	id a4719388-7c24-45c1-a71b-5d60c346accc;
-	Thu, 29 Oct 2020 17:00:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1603990800;
+	(envelope-from <SRS0=o7xP=EE=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+	id 1kYBP1-0001Bl-Mr
+	for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 17:07:55 +0000
+X-Inumbo-ID: ae50ef18-0294-4033-ae69-3f325dc3fbfb
+Received: from mx2.suse.de (unknown [195.135.220.15])
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id ae50ef18-0294-4033-ae69-3f325dc3fbfb;
+	Thu, 29 Oct 2020 17:07:54 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1603991273;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=LFIk1KDbaI+imFseS7EgKO+PMROEHyYFYHvDyMX5vJs=;
-	b=dSWCbKpj2w6DFFmHob56gvbFpNw5b2wuB7FI2aaN0gcPaWz67Xsjhd029zbGGIsAkH1DOL
-	nrgPEx8hTWdobVXvAKIn2j9+E0w3+9yhrQV3MGVouJolKdnLKLMTUf47z6tOcMYN/3FVcP
-	7M4GYkPPTuWbrqcApUVZhcQLZGTI3M4=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-18-QcIn_t-uP3268TnP8ugTDA-1; Thu, 29 Oct 2020 12:59:58 -0400
-X-MC-Unique: QcIn_t-uP3268TnP8ugTDA-1
-Received: by mail-wr1-f71.google.com with SMTP id 2so1530694wrd.14
-        for <xen-devel@lists.xenproject.org>; Thu, 29 Oct 2020 09:59:58 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=LFIk1KDbaI+imFseS7EgKO+PMROEHyYFYHvDyMX5vJs=;
-        b=ixM1eHdh38UpLKV0YEZBjsREbPt24UxImEl+shehwM3zEtn8fX/R+4hYbK6xi18VeB
-         A410cyEuiyfaNEZvSaUDsDws/lvRMBIvN9kf/lcRyZC78c0nrfVcrbsFuBrAfxiBFin7
-         /g9EPcbuvNtD8iNiNP9sPlktuPDjUZHKrOy7EcZNZWSx05clSEiMZkdhXkZG4oNAH49X
-         xzaVtyW6+QYsnVH/V6K+SiJ7oVioANUPIwG7VIUldz02Frtd5D0cWhqJFyctwZunIV0z
-         wBVxz3ZplrkxI+36CEL/Kj86z14qY5TQo0ZYyjERI6DmYRi1SQocRRUTSV5899S46JBn
-         EflQ==
-X-Gm-Message-State: AOAM531pjGPpPvZsxqNobZWHjoSZvBn/IPFdIT5fnLZZqlCXuuYn168G
-	qPzTCwzwJCMlLHLAEXnALuZHQiBux4Nos2RWSmTPBB/FNXPGE9L8yqmVqNwlLNgHz/XxJagVi23
-	DVWazCOPEf54ss+/VfCddtIh3mnc=
-X-Received: by 2002:a5d:4e8d:: with SMTP id e13mr6897938wru.368.1603990797493;
-        Thu, 29 Oct 2020 09:59:57 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxIJpY7s5tS16KM1jeRqPRytnQIFiA4jNhSDraUoIgQqWjC9ew8fh0YJ62Gxk2fkrYU/ZAcRw==
-X-Received: by 2002:a5d:4e8d:: with SMTP id e13mr6897898wru.368.1603990797308;
-        Thu, 29 Oct 2020 09:59:57 -0700 (PDT)
-Received: from ?IPv6:2001:b07:6468:f312:c8dd:75d4:99ab:290a? ([2001:b07:6468:f312:c8dd:75d4:99ab:290a])
-        by smtp.gmail.com with ESMTPSA id f17sm6577560wrm.27.2020.10.29.09.59.55
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 29 Oct 2020 09:59:56 -0700 (PDT)
-Subject: Re: [PATCH] [v2] x86: apic: avoid -Wshadow warning in header
-To: Arvind Sankar <nivedita@alum.mit.edu>,
- David Laight <David.Laight@ACULAB.COM>
-Cc: 'Arnd Bergmann' <arnd@kernel.org>, Thomas Gleixner <tglx@linutronix.de>,
- Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
- "x86@kernel.org" <x86@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
- "K. Y. Srinivasan" <kys@microsoft.com>,
- Haiyang Zhang <haiyangz@microsoft.com>,
- Stephen Hemminger <sthemmin@microsoft.com>, "H. Peter Anvin"
- <hpa@zytor.com>, "Rafael J. Wysocki" <rjw@rjwysocki.net>,
- Vitaly Kuznetsov <vkuznets@redhat.com>, Wanpeng Li <wanpengli@tencent.com>,
- Jim Mattson <jmattson@google.com>, Joerg Roedel <joro@8bytes.org>,
- "linux-hyperv@vger.kernel.org" <linux-hyperv@vger.kernel.org>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
- "platform-driver-x86@vger.kernel.org" <platform-driver-x86@vger.kernel.org>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- "iommu@lists.linux-foundation.org" <iommu@lists.linux-foundation.org>
-References: <20201028212417.3715575-1-arnd@kernel.org>
- <38b11ed3fec64ebd82d6a92834a4bebe@AcuMS.aculab.com>
- <20201029165611.GA2557691@rani.riverdale.lan>
-From: Paolo Bonzini <pbonzini@redhat.com>
-Message-ID: <93180c2d-268c-3c33-7c54-4221dfe0d7ad@redhat.com>
-Date: Thu, 29 Oct 2020 17:59:54 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.3.1
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=fiK9X/wvAAM8i0u+8KFD3nOrXT+gEzyAGqGIL6zpRJk=;
+	b=UbRDxNJdobdbOGPeJcV1Weur0qpCxoNe7g15zYZhhUNfii9r9Ow1GPTIkozDZRB4OzBEw+
+	eUH6k8JJby129Tz7H35Bxau7wAVpx7FwDSpHKlZFgXhIIQWiAFZjTlFfSzXc7yXC7grQTX
+	EdtZQSXceE3G3WtqqstLC1L0jUPezNo=
+Received: from relay2.suse.de (unknown [195.135.221.27])
+	by mx2.suse.de (Postfix) with ESMTP id CDD10ACDF;
+	Thu, 29 Oct 2020 17:07:53 +0000 (UTC)
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+From: Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH 0/2] x86: PV shim vs grant table
+Message-ID: <94c18ebf-632d-8a2c-220c-c31d6e37eb55@suse.com>
+Date: Thu, 29 Oct 2020 18:07:54 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.4.0
 MIME-Version: 1.0
-In-Reply-To: <20201029165611.GA2557691@rani.riverdale.lan>
-Authentication-Results: relay.mimecast.com;
-	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=pbonzini@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
-On 29/10/20 17:56, Arvind Sankar wrote:
->> For those two just add:
->> 	struct apic *apic = x86_system_apic;
->> before all the assignments.
->> Less churn and much better code.
->>
-> Why would it be better code?
-> 
+While Andrew reported a randconfig build failure, I started wondering
+why we'd ever build in a way different from what had failed to build.
+Fix the build and then switch the shim config file accordingly.
 
-I think he means the compiler produces better code, because it won't
-read the global variable repeatedly.  Not sure if that's true,(*) but I
-think I do prefer that version if Arnd wants to do that tweak.
+1: fix build of PV shim when !GRANT_TABLE
+2: PV shim doesn't need GRANT_TABLE
 
-Paolo
-
-(*) if it is, it might also be due to Linux using -fno-strict-aliasing
-
+Jan
 
