@@ -2,28 +2,26 @@ Return-Path: <SRS0=SN9p=EE=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-8.2 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5A042C2D0A3
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 20:41:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 24335C2D0A3
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 20:47:05 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C6AC220790
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 20:41:33 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="zq8OmPxE";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="0iX007DA"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C6AC220790
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
+	by mail.kernel.org (Postfix) with ESMTPS id A3D242076E
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 20:47:02 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A3D242076E
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.14716.36405 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.14737.36482 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kYEjV-0001uV-UQ; Thu, 29 Oct 2020 20:41:17 +0000
+	id 1kYEos-0002Tl-BF; Thu, 29 Oct 2020 20:46:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 14716.36405; Thu, 29 Oct 2020 20:41:17 +0000
+Received: by outflank-mailman (output) from mailman id 14737.36482; Thu, 29 Oct 2020 20:46:50 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,90 +36,76 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kYEjV-0001uO-RN; Thu, 29 Oct 2020 20:41:17 +0000
-Received: by outflank-mailman (input) for mailman id 14716;
- Thu, 29 Oct 2020 20:41:17 +0000
+	id 1kYEos-0002Td-7u; Thu, 29 Oct 2020 20:46:50 +0000
+Received: by outflank-mailman (input) for mailman id 14737;
+ Thu, 29 Oct 2020 20:46:49 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=l+xb=EE=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1kYEjV-0001uJ-05
- for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 20:41:17 +0000
-Received: from galois.linutronix.de (unknown [2a0a:51c0:0:12e:550::1])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=1VJZ=EE=xen.org=tim@srs-us1.protection.inumbo.net>)
+ id 1kYEor-0002TX-0Q
+ for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 20:46:49 +0000
+Received: from deinos.phlegethon.org (unknown [2001:41d0:8:b1d7::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 8a434d79-33f8-4cc0-8048-6e6dde7f122e;
- Thu, 29 Oct 2020 20:41:15 +0000 (UTC)
+ id 93f3cfd3-0c49-4615-969e-7806f7b833ab;
+ Thu, 29 Oct 2020 20:46:48 +0000 (UTC)
+Received: from tjd by deinos.phlegethon.org with local (Exim 4.92.3 (FreeBSD))
+ (envelope-from <tim@xen.org>)
+ id 1kYEon-000LO7-M6; Thu, 29 Oct 2020 20:46:45 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=l+xb=EE=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
-	id 1kYEjV-0001uJ-05
-	for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 20:41:17 +0000
-X-Inumbo-ID: 8a434d79-33f8-4cc0-8048-6e6dde7f122e
-Received: from galois.linutronix.de (unknown [2a0a:51c0:0:12e:550::1])
+	(envelope-from <SRS0=1VJZ=EE=xen.org=tim@srs-us1.protection.inumbo.net>)
+	id 1kYEor-0002TX-0Q
+	for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 20:46:49 +0000
+X-Inumbo-ID: 93f3cfd3-0c49-4615-969e-7806f7b833ab
+Received: from deinos.phlegethon.org (unknown [2001:41d0:8:b1d7::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 8a434d79-33f8-4cc0-8048-6e6dde7f122e;
-	Thu, 29 Oct 2020 20:41:15 +0000 (UTC)
-From: Thomas Gleixner <tglx@linutronix.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1604004074;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=atBWSsg54EdElpQmxIGprMythfayvCfZuL6C0LobpJM=;
-	b=zq8OmPxEES1sHwpepW8vzEe0jYTTlYtXV12+hxY9jzb3tYWHhm/ZdTBMeg3suW0uXnI22o
-	QRfyl9qohhkGLsu5YphvfKNBGVVDQawQCEUKIkYyS9kHIx+egw2JhKwPfjRd0CQcLbf0Ma
-	0+PC2RmqmSccZCm0+EePmF3HtanM8DIlixTveKLP2V0Ksru8Qhe9ajxfSPkPPl0uWvBwkU
-	CZwbIAvCZIttVS0GI97ynyZTPYQQIOv8hYusYoSjZ4dO50yoSQ3YCiIbnrq6RPIo7I7h9P
-	itJ4XgJrsTvo9TskPmCZoEXzffgEzSJ6VbIxGy8NcIttwKKxU5XG9VypabrK6g==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1604004074;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=atBWSsg54EdElpQmxIGprMythfayvCfZuL6C0LobpJM=;
-	b=0iX007DAMCgsp9VjWAMG/D89r7Kujao6BFenyKLGjjTNx6nxedksxtcAkjsrsCDNJr2Ram
-	K5nPYTQvIUbyR9CA==
-To: Paolo Bonzini <pbonzini@redhat.com>, Arvind Sankar <nivedita@alum.mit.edu>, David Laight <David.Laight@ACULAB.COM>
-Cc: 'Arnd Bergmann' <arnd@kernel.org>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, "x86\@kernel.org" <x86@kernel.org>, Arnd Bergmann <arnd@arndb.de>, "K. Y. Srinivasan" <kys@microsoft.com>, Haiyang Zhang <haiyangz@microsoft.com>, Stephen Hemminger <sthemmin@microsoft.com>, "H. Peter Anvin" <hpa@zytor.com>, "Rafael J. Wysocki" <rjw@rjwysocki.net>, Vitaly Kuznetsov <vkuznets@redhat.com>, Wanpeng Li <wanpengli@tencent.com>, Jim Mattson <jmattson@google.com>, Joerg Roedel <joro@8bytes.org>, "linux-hyperv\@vger.kernel.org" <linux-hyperv@vger.kernel.org>, "linux-kernel\@vger.kernel.org" <linux-kernel@vger.kernel.org>, "kvm\@vger.kernel.org" <kvm@vger.kernel.org>, "platform-driver-x86\@vger.kernel.org" <platform-driver-x86@vger.kernel.org>, "xen-devel\@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "iommu\@lists.linux-foundation.org" <iommu@lists.linux-foundation.org>
-Subject: Re: [PATCH] [v2] x86: apic: avoid -Wshadow warning in header
-In-Reply-To: <93180c2d-268c-3c33-7c54-4221dfe0d7ad@redhat.com>
-References: <20201028212417.3715575-1-arnd@kernel.org> <38b11ed3fec64ebd82d6a92834a4bebe@AcuMS.aculab.com> <20201029165611.GA2557691@rani.riverdale.lan> <93180c2d-268c-3c33-7c54-4221dfe0d7ad@redhat.com>
-Date: Thu, 29 Oct 2020 21:41:13 +0100
-Message-ID: <87v9esojdi.fsf@nanos.tec.linutronix.de>
+	id 93f3cfd3-0c49-4615-969e-7806f7b833ab;
+	Thu, 29 Oct 2020 20:46:48 +0000 (UTC)
+Received: from tjd by deinos.phlegethon.org with local (Exim 4.92.3 (FreeBSD))
+	(envelope-from <tim@xen.org>)
+	id 1kYEon-000LO7-M6; Thu, 29 Oct 2020 20:46:45 +0000
+Date: Thu, 29 Oct 2020 20:46:45 +0000
+From: Tim Deegan <tim@xen.org>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
+	Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>,
+	George Dunlap <George.Dunlap@eu.citrix.com>
+Subject: Re: [PATCH 5/5] x86/p2m: split write_p2m_entry() hook
+Message-ID: <20201029204645.GD81685@deinos.phlegethon.org>
+References: <29d30de1-2a8d-aee2-d3c3-331758766fc9@suse.com>
+ <7b2b7cc9-8828-41bd-7949-764161bbe7ff@suse.com>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+In-Reply-To: <7b2b7cc9-8828-41bd-7949-764161bbe7ff@suse.com>
+User-Agent: Mutt/1.11.1 (2018-12-01)
+X-SA-Known-Good: Yes
+X-SA-Exim-Connect-IP: <locally generated>
+X-SA-Exim-Mail-From: tim@xen.org
+X-SA-Exim-Scanned: No (on deinos.phlegethon.org); SAEximRunCond expanded to false
 
-On Thu, Oct 29 2020 at 17:59, Paolo Bonzini wrote:
-> On 29/10/20 17:56, Arvind Sankar wrote:
->>> For those two just add:
->>> 	struct apic *apic = x86_system_apic;
->>> before all the assignments.
->>> Less churn and much better code.
->>>
->> Why would it be better code?
->> 
->
-> I think he means the compiler produces better code, because it won't
-> read the global variable repeatedly.  Not sure if that's true,(*) but I
-> think I do prefer that version if Arnd wants to do that tweak.
+At 10:24 +0100 on 28 Oct (1603880693), Jan Beulich wrote:
+> Fair parts of the present handlers are identical; in fact
+> nestedp2m_write_p2m_entry() lacks a call to p2m_entry_modify(). Move
+> common parts right into write_p2m_entry(), splitting the hooks into a
+> "pre" one (needed just by shadow code) and a "post" one.
+> 
+> For the common parts moved I think that the p2m_flush_nestedp2m() is,
+> at least from an abstract perspective, also applicable in the shadow
+> case. Hence it doesn't get a 3rd hook put in place.
+> 
+> The initial comment that was in hap_write_p2m_entry() gets dropped: Its
+> placement was bogus, and looking back the the commit introducing it
+> (dd6de3ab9985 "Implement Nested-on-Nested") I can't see either what use
+> of a p2m it was meant to be associated with.
+> 
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-It's not true.
+This seems like a good approach to me.  I'm happy with the shadow
+parts but am not confident enough on nested p2m any more to have an
+opinion on that side. 
 
-     foo *p = bar;
+Acked-by: Tim Deegan <tim@xen.org>
 
-     p->a = 1;
-     p->b = 2;
-
-The compiler is free to reload bar after accessing p->a and with
-
-    bar->a = 1;
-    bar->b = 1;
-
-it can either cache bar in a register or reread it after bar->a
-
-The generated code is the same as long as there is no reason to reload,
-e.g. register pressure.
-
-Thanks,
-
-        tglx
 
