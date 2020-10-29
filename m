@@ -2,28 +2,28 @@ Return-Path: <SRS0=SN9p=EE=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_2
-	autolearn=unavailable autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 58C14C4363A
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 14:52:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 77E28C4363A
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 14:58:24 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B940B20738
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 14:52:20 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id E1903206E9
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 14:58:23 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="VwKBRazZ"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B940B20738
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="kUx9JMth"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E1903206E9
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.14238.35319 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.14248.35331 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kY9He-0004EX-9f; Thu, 29 Oct 2020 14:52:10 +0000
+	id 1kY9NO-0004Va-4L; Thu, 29 Oct 2020 14:58:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 14238.35319; Thu, 29 Oct 2020 14:52:10 +0000
+Received: by outflank-mailman (output) from mailman id 14248.35331; Thu, 29 Oct 2020 14:58:06 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,302 +38,95 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kY9He-0004EQ-6e; Thu, 29 Oct 2020 14:52:10 +0000
-Received: by outflank-mailman (input) for mailman id 14238;
- Thu, 29 Oct 2020 14:49:30 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kY9NO-0004VT-1P; Thu, 29 Oct 2020 14:58:06 +0000
+Received: by outflank-mailman (input) for mailman id 14248;
+ Thu, 29 Oct 2020 14:58:05 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=waTM=EE=kernel.org=jic23@srs-us1.protection.inumbo.net>)
- id 1kY9F4-0003Py-HQ
- for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 14:49:30 +0000
-Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 01b6ca57-2a07-43f2-badf-e1784f66c6f1;
- Thu, 29 Oct 2020 14:49:29 +0000 (UTC)
-Received: from archlinux (cpc149474-cmbg20-2-0-cust94.5-4.cable.virginm.net
- [82.4.196.95])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 029F1206E3;
- Thu, 29 Oct 2020 14:49:14 +0000 (UTC)
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+ (envelope-from <SRS0=o7xP=EE=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1kY9NN-0004VO-K2
+ for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 14:58:05 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 3d658816-b8f8-4ab3-9c98-c373480a6ad4;
+ Thu, 29 Oct 2020 14:58:04 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 03EB5AC1F;
+ Thu, 29 Oct 2020 14:58:04 +0000 (UTC)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=waTM=EE=kernel.org=jic23@srs-us1.protection.inumbo.net>)
-	id 1kY9F4-0003Py-HQ
-	for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 14:49:30 +0000
-X-Inumbo-ID: 01b6ca57-2a07-43f2-badf-e1784f66c6f1
-Received: from mail.kernel.org (unknown [198.145.29.99])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 01b6ca57-2a07-43f2-badf-e1784f66c6f1;
-	Thu, 29 Oct 2020 14:49:29 +0000 (UTC)
-Received: from archlinux (cpc149474-cmbg20-2-0-cust94.5-4.cable.virginm.net [82.4.196.95])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id 029F1206E3;
-	Thu, 29 Oct 2020 14:49:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1603982968;
-	bh=1M8zHKAHm8tfB8AOV5kFGjQ5L8HBiwt2lqvdGfEDgxQ=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=VwKBRazZTJNx5ayevPifAIJt6BcELHVSflPv1Pz3hhkIRLQu/hpqVx9zq6UOPHYwi
-	 1Cr/eBqf+UTruLweRPs1uluGBSsUp8XS5oIZwMoDI9YYtGpTUHifWPeFkCnRe78Q3+
-	 9acepxXtiAj1lspr5f5lKQxsgHU3+k3h2anx8nNM=
-Date: Thu, 29 Oct 2020 14:49:12 +0000
-From: Jonathan Cameron <jic23@kernel.org>
-To: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Cc: Linux Doc Mailing List <linux-doc@vger.kernel.org>, Greg Kroah-Hartman
- <gregkh@linuxfoundation.org>, Mauro Carvalho Chehab
- <mchehab+samsung@kernel.org>, "Gautham R. Shenoy" <ego@linux.vnet.ibm.com>,
- "Jason A. Donenfeld" <Jason@zx2c4.com>, Javier =?UTF-8?B?R29uesOhbGV6?=
- <javier@javigon.com>, "Jonathan Corbet" <corbet@lwn.net>, "Martin K.
- Petersen" <martin.petersen@oracle.com>, "Rafael J. Wysocki"
- <rjw@rjwysocki.net>, Alexander Shishkin
- <alexander.shishkin@linux.intel.com>, Alexandre Belloni
- <alexandre.belloni@bootlin.com>, Alexandre Torgue
- <alexandre.torgue@st.com>, Andrew Donnellan <ajd@linux.ibm.com>, Andy
- Shevchenko <andriy.shevchenko@linux.intel.com>, Baolin Wang
- <baolin.wang7@gmail.com>, Benson Leung <bleung@chromium.org>, Boris
- Ostrovsky <boris.ostrovsky@oracle.com>, Bruno Meneguele
- <bmeneg@redhat.com>, Chunyan Zhang <zhang.lyra@gmail.com>, Dan Murphy
- <dmurphy@ti.com>, Dan Williams <dan.j.williams@intel.com>, Enric Balletbo i
- Serra <enric.balletbo@collabora.com>, Fabrice Gasnier
- <fabrice.gasnier@st.com>, Felipe Balbi <balbi@kernel.org>, Frederic Barrat
- <fbarrat@linux.ibm.com>, Guenter Roeck <groeck@chromium.org>, Hanjun Guo
- <guohanjun@huawei.com>, Heikki Krogerus <heikki.krogerus@linux.intel.com>,
- Jens Axboe <axboe@kernel.dk>, Johannes Thumshirn
- <johannes.thumshirn@wdc.com>, Juergen Gross <jgross@suse.com>, Konstantin
- Khlebnikov <koct9i@gmail.com>, Kranthi Kuntala <kranthi.kuntala@intel.com>,
- Lakshmi Ramasubramanian <nramas@linux.microsoft.com>, Lars-Peter Clausen
- <lars@metafoo.de>, Len Brown <lenb@kernel.org>, Leonid Maksymchuk
- <leonmaxx@gmail.com>, Ludovic Desroches <ludovic.desroches@microchip.com>,
- Mario Limonciello <mario.limonciello@dell.com>, Maxime Coquelin
- <mcoquelin.stm32@gmail.com>, Michael Ellerman <mpe@ellerman.id.au>, Mika
- Westerberg <mika.westerberg@linux.intel.com>, Mike Kravetz
- <mike.kravetz@oracle.com>, Mimi Zohar <zohar@linux.ibm.com>, Nayna Jain
- <nayna@linux.ibm.com>, Nicolas Ferre <nicolas.ferre@microchip.com>, Niklas
- Cassel <niklas.cassel@wdc.com>, Oleh Kravchenko <oleg@kaa.org.ua>, Orson
- Zhai <orsonzhai@gmail.com>, Pavel Machek <pavel@ucw.cz>, Pawan Gupta
- <pawan.kumar.gupta@linux.intel.com>, Peter Meerwald-Stadler
- <pmeerw@pmeerw.net>, Peter Rosin <peda@axentia.se>, Petr Mladek
- <pmladek@suse.com>, Philippe Bergheaud <felix@linux.ibm.com>, Richard
- Cochran <richardcochran@gmail.com>, Sebastian Reichel <sre@kernel.org>,
- Sergey Senozhatsky <sergey.senozhatsky@gmail.com>, Stefano Stabellini
- <sstabellini@kernel.org>, Thinh Nguyen <Thinh.Nguyen@synopsys.com>, Thomas
- Gleixner <tglx@linutronix.de>, Vineela Tummalapalli
- <vineela.tummalapalli@intel.com>, Vishal Verma <vishal.l.verma@intel.com>,
- linux-acpi@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
- linux-iio@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-mm@kvack.org, linux-pm@vger.kernel.org,
- linux-stm32@st-md-mailman.stormreply.com, linux-usb@vger.kernel.org,
- linuxppc-dev@lists.ozlabs.org, netdev@vger.kernel.org,
+	(envelope-from <SRS0=o7xP=EE=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+	id 1kY9NN-0004VO-K2
+	for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 14:58:05 +0000
+X-Inumbo-ID: 3d658816-b8f8-4ab3-9c98-c373480a6ad4
+Received: from mx2.suse.de (unknown [195.135.220.15])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id 3d658816-b8f8-4ab3-9c98-c373480a6ad4;
+	Thu, 29 Oct 2020 14:58:04 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1603983484;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=L3YiefnC/CQma9gjKaC1uS383M6pQmnClZZjwUeKzuc=;
+	b=kUx9JMth1tmSQ0eWpKUEhCRwD6Pdt+GaHONo2BxZWFd7qXfl742bo/PttazrVaK5LzJ3vl
+	q99JVwIP4eiMrFToSP6lzPM/fMFuNhs07aMcXPi4H3z0Rml7ZvB2VwaPvhWaUh7FS5LoY6
+	m4/8E8YuiM9jMvtOnO71/B2KcPPDch4=
+Received: from relay2.suse.de (unknown [195.135.221.27])
+	by mx2.suse.de (Postfix) with ESMTP id 03EB5AC1F;
+	Thu, 29 Oct 2020 14:58:04 +0000 (UTC)
+Subject: Re: [PATCH 12/12] xen/cpupool: make per-cpupool sched-gran hypfs node
+ writable
+To: Juergen Gross <jgross@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Wei Liu <wl@xen.org>, Dario Faggioli <dfaggioli@suse.com>,
  xen-devel@lists.xenproject.org
-Subject: Re: [PATCH 20/33] docs: ABI: testing: make the files compatible
- with ReST output
-Message-ID: <20201029144912.3c0a239b@archlinux>
-In-Reply-To: <4ebaaa0320101479e392ce2db4b62e24fdf15ef1.1603893146.git.mchehab+huawei@kernel.org>
-References: <cover.1603893146.git.mchehab+huawei@kernel.org>
-	<4ebaaa0320101479e392ce2db4b62e24fdf15ef1.1603893146.git.mchehab+huawei@kernel.org>
-X-Mailer: Claws Mail 3.17.7 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
+References: <20201026091316.25680-1-jgross@suse.com>
+ <20201026091316.25680-13-jgross@suse.com>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <18acae1b-eebc-26db-e11c-1847e4221e69@suse.com>
+Date: Thu, 29 Oct 2020 15:58:04 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.4.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+In-Reply-To: <20201026091316.25680-13-jgross@suse.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
-On Wed, 28 Oct 2020 15:23:18 +0100
-Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
-
-> From: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
-> 
-> Some files over there won't parse well by Sphinx.
-> 
-> Fix them.
-> 
-> Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
-> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-
-Query below...  I'm going to guess a rebase issue?
-
-Other than that
-Acked-by: Jonathan Cameron <Jonathan.Cameron@huawei.com> # for IIO
-
-
-> diff --git a/Documentation/ABI/testing/sysfs-bus-iio-timer-stm32 b/Documentation/ABI/testing/sysfs-bus-iio-timer-stm32
-> index b7259234ad70..a10a4de3e5fe 100644
-> --- a/Documentation/ABI/testing/sysfs-bus-iio-timer-stm32
-> +++ b/Documentation/ABI/testing/sysfs-bus-iio-timer-stm32
-> @@ -3,67 +3,85 @@ KernelVersion:	4.11
->  Contact:	benjamin.gaignard@st.com
->  Description:
->  		Reading returns the list possible master modes which are:
-> -		- "reset"     :	The UG bit from the TIMx_EGR register is
-> +
-> +
-> +		- "reset"
-> +				The UG bit from the TIMx_EGR register is
->  				used as trigger output (TRGO).
-> -		- "enable"    : The Counter Enable signal CNT_EN is used
-> +		- "enable"
-> +				The Counter Enable signal CNT_EN is used
->  				as trigger output.
-> -		- "update"    : The update event is selected as trigger output.
-> +		- "update"
-> +				The update event is selected as trigger output.
->  				For instance a master timer can then be used
->  				as a prescaler for a slave timer.
-> -		- "compare_pulse" : The trigger output send a positive pulse
-> -				    when the CC1IF flag is to be set.
-> -		- "OC1REF"    : OC1REF signal is used as trigger output.
-> -		- "OC2REF"    : OC2REF signal is used as trigger output.
-> -		- "OC3REF"    : OC3REF signal is used as trigger output.
-> -		- "OC4REF"    : OC4REF signal is used as trigger output.
-> +		- "compare_pulse"
-> +				The trigger output send a positive pulse
-> +				when the CC1IF flag is to be set.
-> +		- "OC1REF"
-> +				OC1REF signal is used as trigger output.
-> +		- "OC2REF"
-> +				OC2REF signal is used as trigger output.
-> +		- "OC3REF"
-> +				OC3REF signal is used as trigger output.
-> +		- "OC4REF"
-> +				OC4REF signal is used as trigger output.
-> +
->  		Additional modes (on TRGO2 only):
-> -		- "OC5REF"    : OC5REF signal is used as trigger output.
-> -		- "OC6REF"    : OC6REF signal is used as trigger output.
-> +
-> +		- "OC5REF"
-> +				OC5REF signal is used as trigger output.
-> +		- "OC6REF"
-> +				OC6REF signal is used as trigger output.
->  		- "compare_pulse_OC4REF":
-> -		  OC4REF rising or falling edges generate pulses.
-> +				OC4REF rising or falling edges generate pulses.
->  		- "compare_pulse_OC6REF":
-> -		  OC6REF rising or falling edges generate pulses.
-> +				OC6REF rising or falling edges generate pulses.
->  		- "compare_pulse_OC4REF_r_or_OC6REF_r":
-> -		  OC4REF or OC6REF rising edges generate pulses.
-> +				OC4REF or OC6REF rising edges generate pulses.
->  		- "compare_pulse_OC4REF_r_or_OC6REF_f":
-> -		  OC4REF rising or OC6REF falling edges generate pulses.
-> +				OC4REF rising or OC6REF falling edges generate
-> +				pulses.
->  		- "compare_pulse_OC5REF_r_or_OC6REF_r":
-> -		  OC5REF or OC6REF rising edges generate pulses.
-> +				OC5REF or OC6REF rising edges generate pulses.
->  		- "compare_pulse_OC5REF_r_or_OC6REF_f":
-> -		  OC5REF rising or OC6REF falling edges generate pulses.
-> +				OC5REF rising or OC6REF falling edges generate
-> +				pulses.
+On 26.10.2020 10:13, Juergen Gross wrote:
+> @@ -1088,13 +1098,58 @@ static int cpupool_gran_read(const struct hypfs_entry *entry,
+>      return copy_to_guest(uaddr, name, strlen(name) + 1) ? -EFAULT : 0;
+>  }
 >  
-> -		+-----------+   +-------------+            +---------+
-> -		| Prescaler +-> | Counter     |        +-> | Master  | TRGO(2)
-> -		+-----------+   +--+--------+-+        |-> | Control +-->
-> -		                   |        |          ||  +---------+
-> -		                +--v--------+-+ OCxREF ||  +---------+
-> -		                | Chx compare +----------> | Output  | ChX
-> -		                +-----------+-+         |  | Control +-->
-> -		                      .     |           |  +---------+
-> -		                      .     |           |    .
-> -		                +-----------v-+ OC6REF  |    .
-> -		                | Ch6 compare +---------+>
-> -		                +-------------+
-> +		::
->  
-> -		Example with: "compare_pulse_OC4REF_r_or_OC6REF_r":
-> +		  +-----------+   +-------------+            +---------+
-> +		  | Prescaler +-> | Counter     |        +-> | Master  | TRGO(2)
-> +		  +-----------+   +--+--------+-+        |-> | Control +-->
-> +		                     |        |          ||  +---------+
-> +		                  +--v--------+-+ OCxREF ||  +---------+
-> +		                  | Chx compare +----------> | Output  | ChX
-> +		                  +-----------+-+         |  | Control +-->
-> +		                        .     |           |  +---------+
-> +		                        .     |           |    .
-> +		                  +-----------v-+ OC6REF  |    .
-> +		                  | Ch6 compare +---------+>
-> +		                  +-------------+
->  
-> -		                X
-> -		              X   X
-> -		            X .   . X
-> -		          X   .   .   X
-> -		        X     .   .     X
-> -		count X .     .   .     . X
-> -		        .     .   .     .
-> -		        .     .   .     .
-> -		        +---------------+
-> -		OC4REF  |     .   .     |
-> -		      +-+     .   .     +-+
-> -		        .     +---+     .
-> -		OC6REF  .     |   |     .
-> -		      +-------+   +-------+
-> -		        +-+   +-+
-> -		TRGO2   | |   | |
-> -		      +-+ +---+ +---------+
-> +		Example with: "compare_pulse_OC4REF_r_or_OC6REF_r"::
+> +static int cpupool_gran_write(struct hypfs_entry_leaf *leaf,
+> +                              XEN_GUEST_HANDLE_PARAM(void) uaddr,
+> +                              unsigned int ulen)
+> +{
+> +    const struct hypfs_dyndir_id *data;
+> +    struct cpupool *cpupool;
+> +    enum sched_gran gran;
+> +    unsigned int sched_gran;
+> +    char name[SCHED_GRAN_NAME_LEN];
+> +    int ret = 0;
 > +
-> +		                  X
-> +		                X   X
-> +		              X .   . X
-> +		            X   .   .   X
-> +		          X     .   .     X
-> +		  count X .     .   .     . X
-> +		          .     .   .     .
-> +		          .     .   .     .
-> +		          +---------------+
-> +		  OC4REF  |     .   .     |
-> +		        +-+     .   .     +-+
-> +		          .     +---+     .
-> +		  OC6REF  .     |   |     .
-> +		        +-------+   +-------+
-> +		          +-+   +-+
-> +		  TRGO2   | |   | |
-> +		        +-+ +---+ +---------+
->  
->  What:		/sys/bus/iio/devices/triggerX/master_mode
->  KernelVersion:	4.11
-> @@ -91,6 +109,30 @@ Description:
->  		When counting down the counter start from preset value
->  		and fire event when reach 0.
->  
+> +    if ( ulen > SCHED_GRAN_NAME_LEN )
+> +        return -ENOSPC;
+> +
+> +    if ( copy_from_guest(name, uaddr, ulen) )
+> +        return -EFAULT;
+> +
+> +    sched_gran = sched_gran_get(name, &gran) ? 0
+> +                                             : cpupool_check_granularity(gran);
+> +    if ( memchr(name, 0, ulen) != (name + ulen - 1) || sched_gran == 0 )
+> +        return -EINVAL;
 
-Where did these come from?
+I guess the memchr() check wants to happen before the call to
+sched_gran_get()?
 
-> +What:		/sys/bus/iio/devices/iio:deviceX/in_count_quadrature_mode_available
-> +KernelVersion:	4.12
-> +Contact:	benjamin.gaignard@st.com
-> +Description:
-> +		Reading returns the list possible quadrature modes.
-> +
-> +What:		/sys/bus/iio/devices/iio:deviceX/in_count0_quadrature_mode
-> +KernelVersion:	4.12
-> +Contact:	benjamin.gaignard@st.com
-> +Description:
-> +		Configure the device counter quadrature modes:
-> +
-> +		channel_A:
-> +			Encoder A input servers as the count input and B as
-> +			the UP/DOWN direction control input.
-> +
-> +		channel_B:
-> +			Encoder B input serves as the count input and A as
-> +			the UP/DOWN direction control input.
-> +
-> +		quadrature:
-> +			Encoder A and B inputs are mixed to get direction
-> +			and count with a scale of 0.25.
-> +
->  What:		/sys/bus/iio/devices/iio:deviceX/in_count_enable_mode_available
->  KernelVersion:	4.12
->  Contact:	benjamin.gaignard@st.com
-> @@ -104,6 +146,7 @@ Description:
->  		Configure the device counter enable modes, in all case
->  		counting direction is set by in_count0_count_direction
->  		attribute and the counter is clocked by the internal clock.
-> +
->  		always:
->  			Counter is always ON.
->  
+Jan
 
