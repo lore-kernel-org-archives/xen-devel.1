@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D99DBC4363A
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 17:20:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F92DC4363A
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 17:20:37 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 68AC620790
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 17:20:34 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id B328420759
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 17:20:36 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=aepfle.de header.i=@aepfle.de header.b="fd+jqgrB"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 68AC620790
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=aepfle.de header.i=@aepfle.de header.b="qh2TZXRz"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B328420759
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.14415.35627 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.14416.35643 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kYBb6-0003Rm-1J; Thu, 29 Oct 2020 17:20:24 +0000
+	id 1kYBbA-0003YI-Ec; Thu, 29 Oct 2020 17:20:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 14415.35627; Thu, 29 Oct 2020 17:20:23 +0000
+Received: by outflank-mailman (output) from mailman id 14416.35643; Thu, 29 Oct 2020 17:20:28 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,207 +38,196 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kYBb5-0003RS-Os; Thu, 29 Oct 2020 17:20:23 +0000
-Received: by outflank-mailman (input) for mailman id 14415;
- Thu, 29 Oct 2020 17:20:21 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kYBbA-0003Y9-AY; Thu, 29 Oct 2020 17:20:28 +0000
+Received: by outflank-mailman (input) for mailman id 14416;
+ Thu, 29 Oct 2020 17:20:26 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=u/HF=EE=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1kYBb3-0003MD-MS
- for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 17:20:21 +0000
-Received: from mo4-p01-ob.smtp.rzone.de (unknown [85.215.255.53])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id a2754cbc-b397-40ad-98e1-d30c24dfef73;
- Thu, 29 Oct 2020 17:20:17 +0000 (UTC)
+ id 1kYBb8-0003MC-LG
+ for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 17:20:26 +0000
+Received: from mo4-p02-ob.smtp.rzone.de (unknown [85.215.255.80])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 694b2120-ffda-4093-b495-670ba2163d55;
+ Thu, 29 Oct 2020 17:20:18 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.3.0 DYNA|AUTH)
- with ESMTPSA id j0b1afw9THK93f9
+ with ESMTPSA id j0b1afw9THKA3fC
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256 bits))
  (Client did not present a certificate);
- Thu, 29 Oct 2020 18:20:09 +0100 (CET)
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ Thu, 29 Oct 2020 18:20:10 +0100 (CET)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=u/HF=EE=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
-	id 1kYBb3-0003MD-MS
-	for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 17:20:21 +0000
-X-Inumbo-ID: a2754cbc-b397-40ad-98e1-d30c24dfef73
-Received: from mo4-p01-ob.smtp.rzone.de (unknown [85.215.255.53])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id a2754cbc-b397-40ad-98e1-d30c24dfef73;
-	Thu, 29 Oct 2020 17:20:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1603992016;
+	id 1kYBb8-0003MC-LG
+	for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 17:20:26 +0000
+X-Inumbo-ID: 694b2120-ffda-4093-b495-670ba2163d55
+Received: from mo4-p02-ob.smtp.rzone.de (unknown [85.215.255.80])
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id 694b2120-ffda-4093-b495-670ba2163d55;
+	Thu, 29 Oct 2020 17:20:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1603992017;
 	s=strato-dkim-0002; d=aepfle.de;
 	h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
 	X-RZG-CLASS-ID:X-RZG-AUTH:From:Subject:Sender;
-	bh=yv4/vNzbLjhhKaj2O8jZKB9GBNc7GvmmLKVV7dABzFU=;
-	b=fd+jqgrBJT5aK88Qi2z21JZDs9LRityC/r22lmSVsVIZ6FbWPBDATcwEeIje6ECCll
-	Vxq6lfCa64Vg2/JdeQEojiDDgKlADOQK/d9CZ8wtrX0vHclBRXwmXoQ8vFarwhKUdr1A
-	QcvAoon4MJHY4kujwQlf7YdJmXVqpmeFnMTuiR5jKNInz1dT+JmafrMnGqOSN1Y01qrX
-	YUefPoCd3tMTCAH95ngRFNgmmdDem0HeqZ0RvrPv7u6sMLEZ7/EBChhJcyiPVmgi8nhe
-	dUcMGPMQxBFsd/xw6tWz3XA1a3PidbsFisvtkxhFn+UwjvL40reNj6JUXG4oOtzjLspa
-	LwhQ==
+	bh=s6U8mXu6k+6wrCilP+jHEKI7OfSE2V+H39V5VeQDOaY=;
+	b=qh2TZXRzZOzPKSr3D4EgM+qiL5MOJM9yXCQmI5+7JzmNbWXfcgswCnujKQLgtnRP4u
+	ZiE6mkGd0FGFAk3zqxXi4njEhwNugU7ZJTjMlkWzARPSNshC3JNeKSRaSMv9zgthSVwv
+	gW06sSBDWgTZtg9Wtc3f8+mnfk7tlX24tvrJ0uYqGMdmLnlT3aItA4WupjhEZAS45E+K
+	8Ht7fktlshpTQp5FK6614uaCuNo1AlC3ZfaE1R/BYpSePbtL4BPOZ+zn9GXy7jXG4w9x
+	FUvETc8roCyzp/F2GlWiUuINx+o60tlacAMmMQWP97zMtOPxJlkMzMth/+4oZ4FxJjdx
+	xp6w==
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzBW/OdlBZQ4AHSS3G1Jjw=="
 X-RZG-CLASS-ID: mo00
 Received: from sender
 	by smtp.strato.de (RZmta 47.3.0 DYNA|AUTH)
-	with ESMTPSA id j0b1afw9THK93f9
+	with ESMTPSA id j0b1afw9THKA3fC
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256 bits))
 	(Client did not present a certificate);
-	Thu, 29 Oct 2020 18:20:09 +0100 (CET)
+	Thu, 29 Oct 2020 18:20:10 +0100 (CET)
 From: Olaf Hering <olaf@aepfle.de>
 To: xen-devel@lists.xenproject.org
 Cc: Olaf Hering <olaf@aepfle.de>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v1 04/23] tools: unify type checking for data pfns in migration stream
-Date: Thu, 29 Oct 2020 18:19:44 +0100
-Message-Id: <20201029172004.17219-5-olaf@aepfle.de>
+Subject: [PATCH v1 07/23] tools/guest: save: move batch_pfns
+Date: Thu, 29 Oct 2020 18:19:47 +0100
+Message-Id: <20201029172004.17219-8-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20201029172004.17219-1-olaf@aepfle.de>
 References: <20201029172004.17219-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Introduce a helper which decides if a given pfn type has data
-for the migration stream.
-
-No change in behavior intended.
+The batch_pfns array is already allocated in advance.
+Move it into the preallocated area.
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
 ---
- tools/libs/guest/xg_sr_common.h  | 17 ++++++++++++++++
- tools/libs/guest/xg_sr_restore.c | 34 +++++---------------------------
- tools/libs/guest/xg_sr_save.c    | 14 ++-----------
- 3 files changed, 24 insertions(+), 41 deletions(-)
+ tools/libs/guest/xg_sr_common.h |  2 +-
+ tools/libs/guest/xg_sr_save.c   | 25 +++++++++++--------------
+ 2 files changed, 12 insertions(+), 15 deletions(-)
 
 diff --git a/tools/libs/guest/xg_sr_common.h b/tools/libs/guest/xg_sr_common.h
-index cc3ad1c394..70e328e951 100644
+index 62bc87b5f4..c78a07b8f8 100644
 --- a/tools/libs/guest/xg_sr_common.h
 +++ b/tools/libs/guest/xg_sr_common.h
-@@ -455,6 +455,23 @@ int populate_pfns(struct xc_sr_context *ctx, unsigned int count,
- /* Handle a STATIC_DATA_END record. */
- int handle_static_data_end(struct xc_sr_context *ctx);
+@@ -212,6 +212,7 @@ static inline int update_blob(struct xc_sr_blob *blob,
+ }
  
-+static inline bool page_type_has_stream_data(uint32_t type)
-+{
-+    bool ret;
-+
-+    switch (type)
-+    {
-+    case XEN_DOMCTL_PFINFO_XTAB:
-+    case XEN_DOMCTL_PFINFO_XALLOC:
-+    case XEN_DOMCTL_PFINFO_BROKEN:
-+        ret = false;
-+        break;
-+    default:
-+        ret = true;
-+        break;
-+    }
-+    return ret;
-+}
- #endif
- /*
-  * Local variables:
-diff --git a/tools/libs/guest/xg_sr_restore.c b/tools/libs/guest/xg_sr_restore.c
-index f1c3169229..0332ae9f32 100644
---- a/tools/libs/guest/xg_sr_restore.c
-+++ b/tools/libs/guest/xg_sr_restore.c
-@@ -152,9 +152,8 @@ int populate_pfns(struct xc_sr_context *ctx, unsigned int count,
+ struct xc_sr_save_arrays {
++    xen_pfn_t batch_pfns[MAX_BATCH_SIZE];
+ };
  
-     for ( i = 0; i < count; ++i )
-     {
--        if ( (!types || (types &&
--                         (types[i] != XEN_DOMCTL_PFINFO_XTAB &&
--                          types[i] != XEN_DOMCTL_PFINFO_BROKEN))) &&
-+        if ( (!types ||
-+              (types && page_type_has_stream_data(types[i]) == true)) &&
-              !pfn_is_populated(ctx, original_pfns[i]) )
-         {
-             rc = pfn_set_populated(ctx, original_pfns[i]);
-@@ -233,25 +232,8 @@ static int process_page_data(struct xc_sr_context *ctx, unsigned int count,
-     {
-         ctx->restore.ops.set_page_type(ctx, pfns[i], types[i]);
+ struct xc_sr_restore_arrays {
+@@ -249,7 +250,6 @@ struct xc_sr_context
  
--        switch ( types[i] )
--        {
--        case XEN_DOMCTL_PFINFO_NOTAB:
--
--        case XEN_DOMCTL_PFINFO_L1TAB:
--        case XEN_DOMCTL_PFINFO_L1TAB | XEN_DOMCTL_PFINFO_LPINTAB:
--
--        case XEN_DOMCTL_PFINFO_L2TAB:
--        case XEN_DOMCTL_PFINFO_L2TAB | XEN_DOMCTL_PFINFO_LPINTAB:
--
--        case XEN_DOMCTL_PFINFO_L3TAB:
--        case XEN_DOMCTL_PFINFO_L3TAB | XEN_DOMCTL_PFINFO_LPINTAB:
--
--        case XEN_DOMCTL_PFINFO_L4TAB:
--        case XEN_DOMCTL_PFINFO_L4TAB | XEN_DOMCTL_PFINFO_LPINTAB:
--
-+        if ( page_type_has_stream_data(types[i]) == true )
-             mfns[nr_pages++] = ctx->restore.ops.pfn_to_gfn(ctx, pfns[i]);
--            break;
--        }
-     }
+             struct precopy_stats stats;
  
-     /* Nothing to do? */
-@@ -271,14 +253,8 @@ static int process_page_data(struct xc_sr_context *ctx, unsigned int count,
- 
-     for ( i = 0, j = 0; i < count; ++i )
-     {
--        switch ( types[i] )
--        {
--        case XEN_DOMCTL_PFINFO_XTAB:
--        case XEN_DOMCTL_PFINFO_BROKEN:
--        case XEN_DOMCTL_PFINFO_XALLOC:
--            /* No page data to deal with. */
-+        if ( page_type_has_stream_data(types[i]) == false )
-             continue;
--        }
- 
-         if ( map_errs[j] )
-         {
-@@ -413,7 +389,7 @@ static int handle_page_data(struct xc_sr_context *ctx, struct xc_sr_record *rec)
-             goto err;
-         }
- 
--        if ( type < XEN_DOMCTL_PFINFO_BROKEN )
-+        if ( page_type_has_stream_data(type) == true )
-             /* NOTAB and all L1 through L4 tables (including pinned) should
-              * have a page worth of data in the record. */
-             pages_of_data++;
+-            xen_pfn_t *batch_pfns;
+             unsigned int nr_batch_pfns;
+             unsigned long *deferred_pages;
+             unsigned long nr_deferred_pages;
 diff --git a/tools/libs/guest/xg_sr_save.c b/tools/libs/guest/xg_sr_save.c
-index 044d0ae3aa..0546d3d9e6 100644
+index 1e3c8eff2f..597e638c59 100644
 --- a/tools/libs/guest/xg_sr_save.c
 +++ b/tools/libs/guest/xg_sr_save.c
-@@ -153,13 +153,8 @@ static int write_batch(struct xc_sr_context *ctx)
-             goto err;
-         }
+@@ -77,7 +77,7 @@ static int write_checkpoint_record(struct xc_sr_context *ctx)
  
--        switch ( types[i] )
--        {
--        case XEN_DOMCTL_PFINFO_BROKEN:
--        case XEN_DOMCTL_PFINFO_XALLOC:
--        case XEN_DOMCTL_PFINFO_XTAB:
-+        if ( page_type_has_stream_data(types[i]) == false )
-             continue;
--        }
+ /*
+  * Writes a batch of memory as a PAGE_DATA record into the stream.  The batch
+- * is constructed in ctx->save.batch_pfns.
++ * is constructed in ctx->save.m->batch_pfns.
+  *
+  * This function:
+  * - gets the types for each pfn in the batch.
+@@ -128,12 +128,12 @@ static int write_batch(struct xc_sr_context *ctx)
+     for ( i = 0; i < nr_pfns; ++i )
+     {
+         types[i] = mfns[i] = ctx->save.ops.pfn_to_gfn(ctx,
+-                                                      ctx->save.batch_pfns[i]);
++                                                      ctx->save.m->batch_pfns[i]);
  
-         mfns[nr_pages++] = mfns[i];
-     }
-@@ -177,13 +172,8 @@ static int write_batch(struct xc_sr_context *ctx)
- 
-         for ( i = 0, p = 0; i < nr_pfns; ++i )
+         /* Likely a ballooned page. */
+         if ( mfns[i] == INVALID_MFN )
          {
--            switch ( types[i] )
--            {
--            case XEN_DOMCTL_PFINFO_BROKEN:
--            case XEN_DOMCTL_PFINFO_XALLOC:
--            case XEN_DOMCTL_PFINFO_XTAB:
-+            if ( page_type_has_stream_data(types[i]) == false )
-                 continue;
--            }
- 
+-            set_bit(ctx->save.batch_pfns[i], ctx->save.deferred_pages);
++            set_bit(ctx->save.m->batch_pfns[i], ctx->save.deferred_pages);
+             ++ctx->save.nr_deferred_pages;
+         }
+     }
+@@ -179,7 +179,7 @@ static int write_batch(struct xc_sr_context *ctx)
              if ( errors[p] )
              {
+                 ERROR("Mapping of pfn %#"PRIpfn" (mfn %#"PRIpfn") failed %d",
+-                      ctx->save.batch_pfns[i], mfns[p], errors[p]);
++                      ctx->save.m->batch_pfns[i], mfns[p], errors[p]);
+                 goto err;
+             }
+ 
+@@ -193,7 +193,7 @@ static int write_batch(struct xc_sr_context *ctx)
+             {
+                 if ( rc == -1 && errno == EAGAIN )
+                 {
+-                    set_bit(ctx->save.batch_pfns[i], ctx->save.deferred_pages);
++                    set_bit(ctx->save.m->batch_pfns[i], ctx->save.deferred_pages);
+                     ++ctx->save.nr_deferred_pages;
+                     types[i] = XEN_DOMCTL_PFINFO_XTAB;
+                     --nr_pages;
+@@ -224,7 +224,7 @@ static int write_batch(struct xc_sr_context *ctx)
+     rec.length += nr_pages * PAGE_SIZE;
+ 
+     for ( i = 0; i < nr_pfns; ++i )
+-        rec_pfns[i] = ((uint64_t)(types[i]) << 32) | ctx->save.batch_pfns[i];
++        rec_pfns[i] = ((uint64_t)(types[i]) << 32) | ctx->save.m->batch_pfns[i];
+ 
+     iov[0].iov_base = &rec.type;
+     iov[0].iov_len = sizeof(rec.type);
+@@ -296,9 +296,9 @@ static int flush_batch(struct xc_sr_context *ctx)
+ 
+     if ( !rc )
+     {
+-        VALGRIND_MAKE_MEM_UNDEFINED(ctx->save.batch_pfns,
++        VALGRIND_MAKE_MEM_UNDEFINED(ctx->save.m->batch_pfns,
+                                     MAX_BATCH_SIZE *
+-                                    sizeof(*ctx->save.batch_pfns));
++                                    sizeof(*ctx->save.m->batch_pfns));
+     }
+ 
+     return rc;
+@@ -315,7 +315,7 @@ static int add_to_batch(struct xc_sr_context *ctx, xen_pfn_t pfn)
+         rc = flush_batch(ctx);
+ 
+     if ( rc == 0 )
+-        ctx->save.batch_pfns[ctx->save.nr_batch_pfns++] = pfn;
++        ctx->save.m->batch_pfns[ctx->save.nr_batch_pfns++] = pfn;
+ 
+     return rc;
+ }
+@@ -850,14 +850,12 @@ static int setup(struct xc_sr_context *ctx)
+ 
+     dirty_bitmap = xc_hypercall_buffer_alloc_pages(
+         xch, dirty_bitmap, NRPAGES(bitmap_size(ctx->save.p2m_size)));
+-    ctx->save.batch_pfns = malloc(MAX_BATCH_SIZE *
+-                                  sizeof(*ctx->save.batch_pfns));
+     ctx->save.deferred_pages = bitmap_alloc(ctx->save.p2m_size);
+     ctx->save.m = malloc(sizeof(*ctx->save.m));
+ 
+-    if ( !ctx->save.m || !ctx->save.batch_pfns || !dirty_bitmap || !ctx->save.deferred_pages )
++    if ( !ctx->save.m || !dirty_bitmap || !ctx->save.deferred_pages )
+     {
+-        ERROR("Unable to allocate memory for dirty bitmaps, batch pfns and"
++        ERROR("Unable to allocate memory for dirty bitmaps and"
+               " deferred pages");
+         rc = -1;
+         errno = ENOMEM;
+@@ -886,7 +884,6 @@ static void cleanup(struct xc_sr_context *ctx)
+     xc_hypercall_buffer_free_pages(xch, dirty_bitmap,
+                                    NRPAGES(bitmap_size(ctx->save.p2m_size)));
+     free(ctx->save.deferred_pages);
+-    free(ctx->save.batch_pfns);
+     free(ctx->save.m);
+ }
+ 
 
