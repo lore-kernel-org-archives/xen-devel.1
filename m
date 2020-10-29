@@ -2,28 +2,28 @@ Return-Path: <SRS0=SN9p=EE=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 87A54C4363A
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 13:54:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D5760C4363A
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 14:02:02 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id F1BA720791
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 13:54:27 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 431792076A
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 14:02:00 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="TyGlzbCk"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F1BA720791
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
+	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="Tkicl1Pw"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 431792076A
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.14189.35221 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.14195.35241 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kY8NC-0006gK-Uj; Thu, 29 Oct 2020 13:53:50 +0000
+	id 1kY8Uf-0007g1-Qw; Thu, 29 Oct 2020 14:01:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 14189.35221; Thu, 29 Oct 2020 13:53:50 +0000
+Received: by outflank-mailman (output) from mailman id 14195.35241; Thu, 29 Oct 2020 14:01:33 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,110 +38,96 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kY8NC-0006gD-Rh; Thu, 29 Oct 2020 13:53:50 +0000
-Received: by outflank-mailman (input) for mailman id 14189;
- Thu, 29 Oct 2020 13:53:49 +0000
+	id 1kY8Uf-0007fu-Nv; Thu, 29 Oct 2020 14:01:33 +0000
+Received: by outflank-mailman (input) for mailman id 14195;
+ Thu, 29 Oct 2020 14:01:32 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=o7xP=EE=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kY8NB-0006fU-J3
- for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 13:53:49 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=hwhy=EE=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1kY8Ue-0007fp-KE
+ for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 14:01:32 +0000
+Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id c8941dbe-b15e-406d-abae-65774beb4612;
- Thu, 29 Oct 2020 13:53:48 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 962FDAFB1;
- Thu, 29 Oct 2020 13:53:47 +0000 (UTC)
+ id 6b261967-038a-452e-a746-fb7780b2e5e9;
+ Thu, 29 Oct 2020 14:01:30 +0000 (UTC)
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=o7xP=EE=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
-	id 1kY8NB-0006fU-J3
-	for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 13:53:49 +0000
-X-Inumbo-ID: c8941dbe-b15e-406d-abae-65774beb4612
-Received: from mx2.suse.de (unknown [195.135.220.15])
+	(envelope-from <SRS0=hwhy=EE=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+	id 1kY8Ue-0007fp-KE
+	for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 14:01:32 +0000
+X-Inumbo-ID: 6b261967-038a-452e-a746-fb7780b2e5e9
+Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id c8941dbe-b15e-406d-abae-65774beb4612;
-	Thu, 29 Oct 2020 13:53:48 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1603979627;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=qcmxnvRUtgd5pwtZDJYRsRYYJtUit4eLtWDDXvSIsZA=;
-	b=TyGlzbCkfrF50ZvWzg7t9ja1xNxsHc92k1r9iD/dDoAeBYlmV054eEvVjnpLSs2Dx+RHV3
-	HsPqYAayMtG2EpBnDEIfMwVncrlWTM8iduIJnGBM0xDtA+yv7qzbi4AHiO70SpJ9JRhCop
-	iUZb6ZBXTFvbTOhsDFu5op0IEeEQKvU=
-Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 962FDAFB1;
-	Thu, 29 Oct 2020 13:53:47 +0000 (UTC)
-From: Jan Beulich <jbeulich@suse.com>
-Subject: =?UTF-8?Q?Ping=c2=b2=3a_=5bPATCH=5d_x86/PV=3a_make_post-migration_p?=
- =?UTF-8?Q?age_state_consistent?=
-To: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Wei Liu <wl@xen.org>
-References: <f7ed53c1-768c-cc71-a432-553b56f7f0a7@suse.com>
-Message-ID: <d1e9190e-a3be-8500-41f7-406af18458fc@suse.com>
-Date: Thu, 29 Oct 2020 14:53:48 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.4.0
+	id 6b261967-038a-452e-a746-fb7780b2e5e9;
+	Thu, 29 Oct 2020 14:01:30 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1603980090;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=0C2T7H5utLXNgmzYD5sBnHV5mV4tc2r1W12ZbIfWW4U=;
+  b=Tkicl1PwrkkbCOOJSqTj6ycb00e64Ez3vhN0k9sZAVpQDTIL3BHH3kUl
+   YlEzHrt8lw1AcKtSkAEhca3ndvymFK99QcQCYltHGG0DxXJYSyZNBBmRJ
+   YfS+l3B92y10o7mTsccX4roSGoJ9g3hSPHM+62GwlgjlzwJv7mYOggvVQ
+   U=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: u1wlRsvtVKk7DFfUXO06V3DGPG2mjL+Sawr5OB3JUIpJCRSSOXvUbWc2GjiGog3WStqg+Poslj
+ 0etr4Z1TuZXgSgGvCU0tpqM8a9II9yE0sKuJV0yJRTpAZlXuVG0a9hOQyt6ekuM4HsAu4Iwr1l
+ 7/kVipOaE+mEyljWIkdNhRumdLb2RVZ+TPiwPeerS8W7NI3tClAwfZduRuccDT458svBRizfYG
+ ifxOZc8WqrfhoVtKAwD/LZhMlc7vmyISpU1xyhJJviScqR11B2gUASKL8xDKkf99Ii33bIyOrx
+ bKs=
+X-SBRS: None
+X-MesageID: 30067431
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.77,430,1596513600"; 
+   d="scan'208";a="30067431"
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
+	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH] x86/pv: Drop stale comment in dom0_construct_pv()
+Date: Thu, 29 Oct 2020 14:00:41 +0000
+Message-ID: <20201029140041.18343-1-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.11.0
 MIME-Version: 1.0
-In-Reply-To: <f7ed53c1-768c-cc71-a432-553b56f7f0a7@suse.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-On 11.09.2020 12:34, Jan Beulich wrote:
-> When a page table page gets de-validated, its type reference count drops
-> to zero (and PGT_validated gets cleared), but its type remains intact.
-> XEN_DOMCTL_getpageframeinfo3, therefore, so far reported prior usage for
-> such pages. An intermediate write to such a page via e.g.
-> MMU_NORMAL_PT_UPDATE, however, would transition the page's type to
-> PGT_writable_page, thus altering what XEN_DOMCTL_getpageframeinfo3 would
-> return. In libxc the decision which pages to normalize / localize
-> depends solely on the type returned from the domctl. As a result without
-> further precautions the guest won't be able to tell whether such a page
-> has had its (apparent) PTE entries transitioned to the new MFNs.
-> 
-> Add a check of PGT_validated, thus consistently avoiding normalization /
-> localization in the tool stack.
-> 
-> Alongside using XEN_DOMCTL_PFINFO_NOTAB instead of plain zero for the
-> change at hand, also change the variable's initializer to use this
-> constant, too. Take the opportunity and also adjust its type.
-> 
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+This comment has been around since c/s 1372bca0615 in 2004.  It is stale, as
+it predates the introduction of struct vcpu.
 
-I think I did address all questions here.
+It is not obvious that it was even correct at the time.  Where a vcpu (domain
+at the time) has been configured to run is unrelated to construct the domain's
+initial pagetables, etc.
 
-Jan
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Wei Liu <wl@xen.org>
 
-> --- a/xen/arch/x86/domctl.c
-> +++ b/xen/arch/x86/domctl.c
-> @@ -215,7 +215,8 @@ long arch_do_domctl(
->  
->          for ( i = 0; i < num; ++i )
->          {
-> -            unsigned long gfn = 0, type = 0;
-> +            unsigned long gfn = 0;
-> +            unsigned int type = XEN_DOMCTL_PFINFO_NOTAB;
->              struct page_info *page;
->              p2m_type_t t;
->  
-> @@ -255,6 +256,8 @@ long arch_do_domctl(
->  
->                  if ( page->u.inuse.type_info & PGT_pinned )
->                      type |= XEN_DOMCTL_PFINFO_LPINTAB;
-> +                else if ( !(page->u.inuse.type_info & PGT_validated) )
-> +                    type = XEN_DOMCTL_PFINFO_NOTAB;
->  
->                  if ( page->count_info & PGC_broken )
->                      type = XEN_DOMCTL_PFINFO_BROKEN;
-> 
+Almost...  I'm not entirely sure NUMA memory allocation is plumbed through
+correctly, but even that still has nothing to do with v->processor
+---
+ xen/arch/x86/pv/dom0_build.c | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/xen/arch/x86/pv/dom0_build.c b/xen/arch/x86/pv/dom0_build.c
+index d79503d6a9..f7165309a2 100644
+--- a/xen/arch/x86/pv/dom0_build.c
++++ b/xen/arch/x86/pv/dom0_build.c
+@@ -616,7 +616,6 @@ int __init dom0_construct_pv(struct domain *d,
+         v->arch.pv.event_callback_cs    = FLAT_COMPAT_KERNEL_CS;
+     }
+ 
+-    /* WARNING: The new domain must have its 'processor' field filled in! */
+     if ( !is_pv_32bit_domain(d) )
+     {
+         maddr_to_page(mpt_alloc)->u.inuse.type_info = PGT_l4_page_table;
+-- 
+2.11.0
 
 
