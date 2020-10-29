@@ -2,27 +2,28 @@ Return-Path: <SRS0=SN9p=EE=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C2112C4363A
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 17:24:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C2AFBC4363A
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 17:25:03 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 20B6D206CB
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 17:24:51 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 56B8E206CA
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 17:25:03 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="kCwHtNb0"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 20B6D206CB
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=alum.mit.edu
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=aepfle.de header.i=@aepfle.de header.b="pYItbwo0"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 56B8E206CA
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.14507.35863 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.14512.35875 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kYBfA-00063S-52; Thu, 29 Oct 2020 17:24:36 +0000
+	id 1kYBfJ-00068T-Dd; Thu, 29 Oct 2020 17:24:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 14507.35863; Thu, 29 Oct 2020 17:24:36 +0000
+Received: by outflank-mailman (output) from mailman id 14512.35875; Thu, 29 Oct 2020 17:24:45 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -33,127 +34,343 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
+Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kYBfA-00063L-1u; Thu, 29 Oct 2020 17:24:36 +0000
-Received: by outflank-mailman (input) for mailman id 14507;
- Thu, 29 Oct 2020 17:24:34 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=iFbr=EE=gmail.com=niveditas98@srs-us1.protection.inumbo.net>)
- id 1kYBc6-0003MD-P8
- for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 17:21:26 +0000
-Received: from mail-qk1-x736.google.com (unknown [2607:f8b0:4864:20::736])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id ec327819-3ee6-4007-a9f6-2165b14effc9;
- Thu, 29 Oct 2020 17:20:51 +0000 (UTC)
-Received: by mail-qk1-x736.google.com with SMTP id s14so2560047qkg.11
- for <xen-devel@lists.xenproject.org>; Thu, 29 Oct 2020 10:20:51 -0700 (PDT)
-Received: from rani.riverdale.lan ([2001:470:1f07:5f3::b55f])
- by smtp.gmail.com with ESMTPSA id m33sm1432097qtb.65.2020.10.29.10.20.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 29 Oct 2020 10:20:50 -0700 (PDT)
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kYBfJ-00068L-AL; Thu, 29 Oct 2020 17:24:45 +0000
+Received: by outflank-mailman (input) for mailman id 14512;
+ Thu, 29 Oct 2020 17:24:44 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=u/HF=EE=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1kYBbr-0003MC-N9
+ for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 17:21:11 +0000
+Received: from mo4-p03-ob.smtp.rzone.de (unknown [81.169.146.174])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id b0bcea0f-e8b5-44b9-9aff-c228c6f43efc;
+ Thu, 29 Oct 2020 17:20:24 +0000 (UTC)
+Received: from sender by smtp.strato.de (RZmta 47.3.0 DYNA|AUTH)
+ with ESMTPSA id j0b1afw9THKG3fT
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256 bits))
+ (Client did not present a certificate);
+ Thu, 29 Oct 2020 18:20:16 +0100 (CET)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=iFbr=EE=gmail.com=niveditas98@srs-us1.protection.inumbo.net>)
-	id 1kYBc6-0003MD-P8
-	for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 17:21:26 +0000
-X-Inumbo-ID: ec327819-3ee6-4007-a9f6-2165b14effc9
-Received: from mail-qk1-x736.google.com (unknown [2607:f8b0:4864:20::736])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id ec327819-3ee6-4007-a9f6-2165b14effc9;
-	Thu, 29 Oct 2020 17:20:51 +0000 (UTC)
-Received: by mail-qk1-x736.google.com with SMTP id s14so2560047qkg.11
-        for <xen-devel@lists.xenproject.org>; Thu, 29 Oct 2020 10:20:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=sender:from:date:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=bgET2vKXyCysvHtuVXHC8x2bsoHr9I9pVPGZuJ2I2ok=;
-        b=kCwHtNb0aDqVERdhKoxZMhicLRZ2QR3PolGpflI38e1AZzBFPmngVCvkULn12HaIpd
-         xNZsE0KTf8SFsTeciNeDfLB2b8eo7aWwi+oWAp/jGZANfyHEmSTDAiXW3x245FjthbK+
-         cNyymvnYwa4RgDaOm832TsIoNGN5VteNRutW9xIM3LOXzwfrz3rFIbB2qhaahGSK3KWZ
-         rcjSGv+Lrv3xXtp7IhxItj2ThU4R1TxkB1brB4zm0qayhFjR52RmdpupiWUa8/437Az6
-         Z5hmy1fEbRMjrq5fMw2J1qv+hvc2qIZX/q2dYGHrv1hoTM8Kgy/UG1ajYtjFlzWenf9F
-         /BdA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:sender:from:date:to:cc:subject:message-id
-         :references:mime-version:content-disposition:in-reply-to;
-        bh=bgET2vKXyCysvHtuVXHC8x2bsoHr9I9pVPGZuJ2I2ok=;
-        b=IuxqC6fCv9b7mVDGfgQYwtFqtcaXDbsEhHrWITqCjE/kUmTRAbDIy1XaCSnKXUsyMt
-         Kj64Jww9MzeLsPpzczPyhR7US+qtgxvwo1SgYxA+D7xOG1tlPMINwDPn3a0SNhaXJOjE
-         urkXazEqrCl++mQPHwra57UuUD2uVzi7DdNOTZ62t13K2eZjAUf0nSfbLqQ6ZIOuy4FC
-         qWzKmo0eF6E0CvUy1FPABrUCBm5HA9M7qZmpxAZcxuZHwfC+WkWECJQXRLOC5CcXDKLJ
-         kX1MvM4BH0LXlP/TOvok31Nx53AB9J8oi9UKBPOj/j5++Fml8tr6CNWhPSPB/pKcNXOv
-         GKUg==
-X-Gm-Message-State: AOAM531Ji7tgk5jb6HDV5MuDsCNiEXnn+JPOoFS/iitQv26srSAxTQNP
-	R/YHCz9r+FLSYXK88hqm1pc=
-X-Google-Smtp-Source: ABdhPJxpj2lHqddfkMCdJsg7kjoxJdmwW/wIVKjCyqCU3W25AK0ciYoXUlV7HQMe/OgzwbBLEfxGlQ==
-X-Received: by 2002:a05:620a:130a:: with SMTP id o10mr4612780qkj.63.1603992050890;
-        Thu, 29 Oct 2020 10:20:50 -0700 (PDT)
-Received: from rani.riverdale.lan ([2001:470:1f07:5f3::b55f])
-        by smtp.gmail.com with ESMTPSA id m33sm1432097qtb.65.2020.10.29.10.20.49
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 29 Oct 2020 10:20:50 -0700 (PDT)
-Sender: Arvind Sankar <niveditas98@gmail.com>
-From: Arvind Sankar <nivedita@alum.mit.edu>
-X-Google-Original-From: Arvind Sankar <arvind@rani.riverdale.lan>
-Date: Thu, 29 Oct 2020 13:20:48 -0400
-To: Paolo Bonzini <pbonzini@redhat.com>
-Cc: Arvind Sankar <nivedita@alum.mit.edu>,
-	David Laight <David.Laight@ACULAB.COM>,
-	'Arnd Bergmann' <arnd@kernel.org>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-	"x86@kernel.org" <x86@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
-	"K. Y. Srinivasan" <kys@microsoft.com>,
-	Haiyang Zhang <haiyangz@microsoft.com>,
-	Stephen Hemminger <sthemmin@microsoft.com>,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	"Rafael J. Wysocki" <rjw@rjwysocki.net>,
-	Vitaly Kuznetsov <vkuznets@redhat.com>,
-	Wanpeng Li <wanpengli@tencent.com>,
-	Jim Mattson <jmattson@google.com>, Joerg Roedel <joro@8bytes.org>,
-	"linux-hyperv@vger.kernel.org" <linux-hyperv@vger.kernel.org>,
-	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-	"kvm@vger.kernel.org" <kvm@vger.kernel.org>,
-	"platform-driver-x86@vger.kernel.org" <platform-driver-x86@vger.kernel.org>,
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-	"iommu@lists.linux-foundation.org" <iommu@lists.linux-foundation.org>
-Subject: Re: [PATCH] [v2] x86: apic: avoid -Wshadow warning in header
-Message-ID: <20201029172048.GA2571425@rani.riverdale.lan>
-References: <20201028212417.3715575-1-arnd@kernel.org>
- <38b11ed3fec64ebd82d6a92834a4bebe@AcuMS.aculab.com>
- <20201029165611.GA2557691@rani.riverdale.lan>
- <93180c2d-268c-3c33-7c54-4221dfe0d7ad@redhat.com>
+	(envelope-from <SRS0=u/HF=EE=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+	id 1kYBbr-0003MC-N9
+	for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 17:21:11 +0000
+X-Inumbo-ID: b0bcea0f-e8b5-44b9-9aff-c228c6f43efc
+Received: from mo4-p03-ob.smtp.rzone.de (unknown [81.169.146.174])
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id b0bcea0f-e8b5-44b9-9aff-c228c6f43efc;
+	Thu, 29 Oct 2020 17:20:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1603992023;
+	s=strato-dkim-0002; d=aepfle.de;
+	h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
+	X-RZG-CLASS-ID:X-RZG-AUTH:From:Subject:Sender;
+	bh=vDSMlFXnzPOXkYBGrnj7LwkLFSBsc9LnEOe7WzFsods=;
+	b=pYItbwo0qq88TgAn5HU4aLCh4QxzQogCseTejXzbnL0cbd20RgqH38jj2mJtia1c3v
+	y+yCnu9G1+2TtlSGdgB49SL4/J6gxS1DRNN0byKMgN4bnbzK3+E0IsXVlmvxmoMRMjOQ
+	uxNmi4/LYnJ1hSVdRZg1QtxE59bjusMXx5eye3qcRfuC3cUkRFCF+d3rer9FExlodscC
+	cOx5bWAnf4x4q1jvkSlvEzRNVNfiHIKxigAwCyILxoycLHS3+2RW98Fokt8oTZxqjfga
+	H8GFbybybV4huVmGx05OnrDJdu83Tm9YKgfNI//z4y0nMaaDrxTbmMrRmo74m8dJ4uux
+	ufVw==
+X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzBW/OdlBZQ4AHSS3G1Jjw=="
+X-RZG-CLASS-ID: mo00
+Received: from sender
+	by smtp.strato.de (RZmta 47.3.0 DYNA|AUTH)
+	with ESMTPSA id j0b1afw9THKG3fT
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256 bits))
+	(Client did not present a certificate);
+	Thu, 29 Oct 2020 18:20:16 +0100 (CET)
+From: Olaf Hering <olaf@aepfle.de>
+To: xen-devel@lists.xenproject.org
+Cc: Olaf Hering <olaf@aepfle.de>,
+	Ian Jackson <iwj@xenproject.org>,
+	Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH v1 21/23] tools/guest: restore: split record processing
+Date: Thu, 29 Oct 2020 18:20:01 +0100
+Message-Id: <20201029172004.17219-22-olaf@aepfle.de>
+X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20201029172004.17219-1-olaf@aepfle.de>
+References: <20201029172004.17219-1-olaf@aepfle.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <93180c2d-268c-3c33-7c54-4221dfe0d7ad@redhat.com>
+Content-Transfer-Encoding: 8bit
 
-On Thu, Oct 29, 2020 at 05:59:54PM +0100, Paolo Bonzini wrote:
-> On 29/10/20 17:56, Arvind Sankar wrote:
-> >> For those two just add:
-> >> 	struct apic *apic = x86_system_apic;
-> >> before all the assignments.
-> >> Less churn and much better code.
-> >>
-> > Why would it be better code?
-> > 
-> 
-> I think he means the compiler produces better code, because it won't
-> read the global variable repeatedly.  Not sure if that's true,(*) but I
-> think I do prefer that version if Arnd wants to do that tweak.
-> 
-> Paolo
-> 
-> (*) if it is, it might also be due to Linux using -fno-strict-aliasing
-> 
+handle_page_data must be able to read directly into mapped guest memory.
+This will avoid unneccesary memcpy calls for data which can be consumed verbatim.
 
-Nope, it doesn't read it multiple times. I guess it still assumes that
-apic isn't in the middle of what it points to: it would reload the
-address if the first element of *apic was modified, but doesn't for
-other elements. Interesting.
+Rearrange the code to allow decisions based on the incoming record.
+
+This change is preparation for future changes in handle_page_data,
+no change in behavior is intended.
+
+Signed-off-by: Olaf Hering <olaf@aepfle.de>
+---
+ tools/libs/guest/xg_sr_common.c  | 33 ++++++++++++---------
+ tools/libs/guest/xg_sr_common.h  |  4 ++-
+ tools/libs/guest/xg_sr_restore.c | 49 ++++++++++++++++++++++----------
+ tools/libs/guest/xg_sr_save.c    |  7 ++++-
+ 4 files changed, 63 insertions(+), 30 deletions(-)
+
+diff --git a/tools/libs/guest/xg_sr_common.c b/tools/libs/guest/xg_sr_common.c
+index 17567ab133..cabde4ef74 100644
+--- a/tools/libs/guest/xg_sr_common.c
++++ b/tools/libs/guest/xg_sr_common.c
+@@ -91,26 +91,33 @@ int write_split_record(struct xc_sr_context *ctx, struct xc_sr_record *rec,
+     return -1;
+ }
+ 
+-int read_record(struct xc_sr_context *ctx, int fd, struct xc_sr_record *rec)
++int read_record_header(struct xc_sr_context *ctx, int fd, struct xc_sr_rhdr *rhdr)
+ {
+     xc_interface *xch = ctx->xch;
+-    struct xc_sr_rhdr rhdr;
+-    size_t datasz;
+ 
+-    if ( read_exact(fd, &rhdr, sizeof(rhdr)) )
++    if ( read_exact(fd, rhdr, sizeof(*rhdr)) )
+     {
+         PERROR("Failed to read Record Header from stream");
+         return -1;
+     }
+ 
+-    if ( rhdr.length > REC_LENGTH_MAX )
++    if ( rhdr->length > REC_LENGTH_MAX )
+     {
+-        ERROR("Record (0x%08x, %s) length %#x exceeds max (%#x)", rhdr.type,
+-              rec_type_to_str(rhdr.type), rhdr.length, REC_LENGTH_MAX);
++        ERROR("Record (0x%08x, %s) length %#x exceeds max (%#x)", rhdr->type,
++              rec_type_to_str(rhdr->type), rhdr->length, REC_LENGTH_MAX);
+         return -1;
+     }
+ 
+-    datasz = ROUNDUP(rhdr.length, REC_ALIGN_ORDER);
++    return 0;
++}
++
++int read_record_data(struct xc_sr_context *ctx, int fd, struct xc_sr_rhdr *rhdr,
++                     struct xc_sr_record *rec)
++{
++    xc_interface *xch = ctx->xch;
++    size_t datasz;
++
++    datasz = ROUNDUP(rhdr->length, REC_ALIGN_ORDER);
+ 
+     if ( datasz )
+     {
+@@ -119,7 +126,7 @@ int read_record(struct xc_sr_context *ctx, int fd, struct xc_sr_record *rec)
+         if ( !rec->data )
+         {
+             ERROR("Unable to allocate %zu bytes for record data (0x%08x, %s)",
+-                  datasz, rhdr.type, rec_type_to_str(rhdr.type));
++                  datasz, rhdr->type, rec_type_to_str(rhdr->type));
+             return -1;
+         }
+ 
+@@ -128,18 +135,18 @@ int read_record(struct xc_sr_context *ctx, int fd, struct xc_sr_record *rec)
+             free(rec->data);
+             rec->data = NULL;
+             PERROR("Failed to read %zu bytes of data for record (0x%08x, %s)",
+-                   datasz, rhdr.type, rec_type_to_str(rhdr.type));
++                   datasz, rhdr->type, rec_type_to_str(rhdr->type));
+             return -1;
+         }
+     }
+     else
+         rec->data = NULL;
+ 
+-    rec->type   = rhdr.type;
+-    rec->length = rhdr.length;
++    rec->type   = rhdr->type;
++    rec->length = rhdr->length;
+ 
+     return 0;
+-};
++}
+ 
+ static void __attribute__((unused)) build_assertions(void)
+ {
+diff --git a/tools/libs/guest/xg_sr_common.h b/tools/libs/guest/xg_sr_common.h
+index 3fe665b91d..66d1b0dfe6 100644
+--- a/tools/libs/guest/xg_sr_common.h
++++ b/tools/libs/guest/xg_sr_common.h
+@@ -475,7 +475,9 @@ static inline int write_record(struct xc_sr_context *ctx,
+  *
+  * On failure, the contents of the record structure are undefined.
+  */
+-int read_record(struct xc_sr_context *ctx, int fd, struct xc_sr_record *rec);
++int read_record_header(struct xc_sr_context *ctx, int fd, struct xc_sr_rhdr *rhdr);
++int read_record_data(struct xc_sr_context *ctx, int fd, struct xc_sr_rhdr *rhdr,
++                     struct xc_sr_record *rec);
+ 
+ /*
+  * This would ideally be private in restore.c, but is needed by
+diff --git a/tools/libs/guest/xg_sr_restore.c b/tools/libs/guest/xg_sr_restore.c
+index 71b39612ee..93f69b9ba8 100644
+--- a/tools/libs/guest/xg_sr_restore.c
++++ b/tools/libs/guest/xg_sr_restore.c
+@@ -471,7 +471,7 @@ static int send_checkpoint_dirty_pfn_list(struct xc_sr_context *ctx)
+     return rc;
+ }
+ 
+-static int process_record(struct xc_sr_context *ctx, struct xc_sr_record *rec);
++static int process_buffered_record(struct xc_sr_context *ctx, struct xc_sr_record *rec);
+ static int handle_checkpoint(struct xc_sr_context *ctx)
+ {
+     xc_interface *xch = ctx->xch;
+@@ -510,7 +510,7 @@ static int handle_checkpoint(struct xc_sr_context *ctx)
+ 
+         for ( i = 0; i < ctx->restore.buffered_rec_num; i++ )
+         {
+-            rc = process_record(ctx, &ctx->restore.buffered_records[i]);
++            rc = process_buffered_record(ctx, &ctx->restore.buffered_records[i]);
+             if ( rc )
+                 goto err;
+         }
+@@ -571,10 +571,11 @@ static int handle_checkpoint(struct xc_sr_context *ctx)
+     return rc;
+ }
+ 
+-static int buffer_record(struct xc_sr_context *ctx, struct xc_sr_record *rec)
++static int buffer_record(struct xc_sr_context *ctx, struct xc_sr_rhdr *rhdr)
+ {
+     xc_interface *xch = ctx->xch;
+     unsigned int new_alloc_num;
++    struct xc_sr_record rec;
+     struct xc_sr_record *p;
+ 
+     if ( ctx->restore.buffered_rec_num >= ctx->restore.allocated_rec_num )
+@@ -592,8 +593,13 @@ static int buffer_record(struct xc_sr_context *ctx, struct xc_sr_record *rec)
+         ctx->restore.allocated_rec_num = new_alloc_num;
+     }
+ 
++    if ( read_record_data(ctx, ctx->fd, rhdr, &rec) )
++    {
++        return -1;
++    }
++
+     memcpy(&ctx->restore.buffered_records[ctx->restore.buffered_rec_num++],
+-           rec, sizeof(*rec));
++           &rec, sizeof(rec));
+ 
+     return 0;
+ }
+@@ -624,7 +630,7 @@ int handle_static_data_end(struct xc_sr_context *ctx)
+     return rc;
+ }
+ 
+-static int process_record(struct xc_sr_context *ctx, struct xc_sr_record *rec)
++static int process_buffered_record(struct xc_sr_context *ctx, struct xc_sr_record *rec)
+ {
+     xc_interface *xch = ctx->xch;
+     int rc = 0;
+@@ -662,6 +668,19 @@ static int process_record(struct xc_sr_context *ctx, struct xc_sr_record *rec)
+     return rc;
+ }
+ 
++static int process_incoming_record_header(struct xc_sr_context *ctx, struct xc_sr_rhdr *rhdr)
++{
++    struct xc_sr_record rec;
++    int rc;
++
++    rc = read_record_data(ctx, ctx->fd, rhdr, &rec);
++    if ( rc )
++        return rc;
++
++    return process_buffered_record(ctx, &rec);
++}
++
++
+ static int setup(struct xc_sr_context *ctx)
+ {
+     xc_interface *xch = ctx->xch;
+@@ -745,7 +764,7 @@ static void cleanup(struct xc_sr_context *ctx)
+ static int restore(struct xc_sr_context *ctx)
+ {
+     xc_interface *xch = ctx->xch;
+-    struct xc_sr_record rec;
++    struct xc_sr_rhdr rhdr;
+     int rc, saved_rc = 0, saved_errno = 0;
+ 
+     IPRINTF("Restoring domain");
+@@ -756,7 +775,7 @@ static int restore(struct xc_sr_context *ctx)
+ 
+     do
+     {
+-        rc = read_record(ctx, ctx->fd, &rec);
++        rc = read_record_header(ctx, ctx->fd, &rhdr);
+         if ( rc )
+         {
+             if ( ctx->restore.buffer_all_records )
+@@ -766,25 +785,25 @@ static int restore(struct xc_sr_context *ctx)
+         }
+ 
+         if ( ctx->restore.buffer_all_records &&
+-             rec.type != REC_TYPE_END &&
+-             rec.type != REC_TYPE_CHECKPOINT )
++             rhdr.type != REC_TYPE_END &&
++             rhdr.type != REC_TYPE_CHECKPOINT )
+         {
+-            rc = buffer_record(ctx, &rec);
++            rc = buffer_record(ctx, &rhdr);
+             if ( rc )
+                 goto err;
+         }
+         else
+         {
+-            rc = process_record(ctx, &rec);
++            rc = process_incoming_record_header(ctx, &rhdr);
+             if ( rc == RECORD_NOT_PROCESSED )
+             {
+-                if ( rec.type & REC_TYPE_OPTIONAL )
++                if ( rhdr.type & REC_TYPE_OPTIONAL )
+                     DPRINTF("Ignoring optional record %#x (%s)",
+-                            rec.type, rec_type_to_str(rec.type));
++                            rhdr.type, rec_type_to_str(rhdr.type));
+                 else
+                 {
+                     ERROR("Mandatory record %#x (%s) not handled",
+-                          rec.type, rec_type_to_str(rec.type));
++                          rhdr.type, rec_type_to_str(rhdr.type));
+                     rc = -1;
+                     goto err;
+                 }
+@@ -795,7 +814,7 @@ static int restore(struct xc_sr_context *ctx)
+                 goto err;
+         }
+ 
+-    } while ( rec.type != REC_TYPE_END );
++    } while ( rhdr.type != REC_TYPE_END );
+ 
+  remus_failover:
+     if ( ctx->stream_type == XC_STREAM_COLO )
+diff --git a/tools/libs/guest/xg_sr_save.c b/tools/libs/guest/xg_sr_save.c
+index 804e4ccb3a..9be5e8c52b 100644
+--- a/tools/libs/guest/xg_sr_save.c
++++ b/tools/libs/guest/xg_sr_save.c
+@@ -590,6 +590,7 @@ static int send_memory_live(struct xc_sr_context *ctx)
+ static int colo_merge_secondary_dirty_bitmap(struct xc_sr_context *ctx)
+ {
+     xc_interface *xch = ctx->xch;
++    struct xc_sr_rhdr rhdr;
+     struct xc_sr_record rec;
+     uint64_t *pfns = NULL;
+     uint64_t pfn;
+@@ -598,7 +599,11 @@ static int colo_merge_secondary_dirty_bitmap(struct xc_sr_context *ctx)
+     DECLARE_HYPERCALL_BUFFER_SHADOW(unsigned long, dirty_bitmap,
+                                     &ctx->save.dirty_bitmap_hbuf);
+ 
+-    rc = read_record(ctx, ctx->save.recv_fd, &rec);
++    rc = read_record_header(ctx, ctx->save.recv_fd, &rhdr);
++    if ( rc )
++        goto err;
++
++    rc = read_record_data(ctx, ctx->save.recv_fd, &rhdr, &rec);
+     if ( rc )
+         goto err;
+ 
 
