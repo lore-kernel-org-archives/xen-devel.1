@@ -2,28 +2,27 @@ Return-Path: <SRS0=SN9p=EE=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6D32EC55179
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 17:24:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C2112C4363A
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 17:24:51 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DC760206CA
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 17:24:12 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 20B6D206CB
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 17:24:51 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=aepfle.de header.i=@aepfle.de header.b="IjVk1PEg"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DC760206CA
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="kCwHtNb0"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 20B6D206CB
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=alum.mit.edu
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.14495.35839 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.14507.35863 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kYBeX-0005pA-IQ; Thu, 29 Oct 2020 17:23:57 +0000
+	id 1kYBfA-00063S-52; Thu, 29 Oct 2020 17:24:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 14495.35839; Thu, 29 Oct 2020 17:23:57 +0000
+Received: by outflank-mailman (output) from mailman id 14507.35863; Thu, 29 Oct 2020 17:24:36 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -34,119 +33,127 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kYBeX-0005p1-FN; Thu, 29 Oct 2020 17:23:57 +0000
-Received: by outflank-mailman (input) for mailman id 14495;
- Thu, 29 Oct 2020 17:23:56 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=u/HF=EE=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1kYBbm-0003MC-Mt
- for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 17:21:06 +0000
-Received: from mo4-p02-ob.smtp.rzone.de (unknown [85.215.255.84])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 6679421a-6802-44fa-a291-31bfe98f6a5f;
- Thu, 29 Oct 2020 17:20:22 +0000 (UTC)
-Received: from sender by smtp.strato.de (RZmta 47.3.0 DYNA|AUTH)
- with ESMTPSA id j0b1afw9THKG3fR
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256 bits))
- (Client did not present a certificate);
- Thu, 29 Oct 2020 18:20:16 +0100 (CET)
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+	id 1kYBfA-00063L-1u; Thu, 29 Oct 2020 17:24:36 +0000
+Received: by outflank-mailman (input) for mailman id 14507;
+ Thu, 29 Oct 2020 17:24:34 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=iFbr=EE=gmail.com=niveditas98@srs-us1.protection.inumbo.net>)
+ id 1kYBc6-0003MD-P8
+ for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 17:21:26 +0000
+Received: from mail-qk1-x736.google.com (unknown [2607:f8b0:4864:20::736])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id ec327819-3ee6-4007-a9f6-2165b14effc9;
+ Thu, 29 Oct 2020 17:20:51 +0000 (UTC)
+Received: by mail-qk1-x736.google.com with SMTP id s14so2560047qkg.11
+ for <xen-devel@lists.xenproject.org>; Thu, 29 Oct 2020 10:20:51 -0700 (PDT)
+Received: from rani.riverdale.lan ([2001:470:1f07:5f3::b55f])
+ by smtp.gmail.com with ESMTPSA id m33sm1432097qtb.65.2020.10.29.10.20.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 29 Oct 2020 10:20:50 -0700 (PDT)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=u/HF=EE=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
-	id 1kYBbm-0003MC-Mt
-	for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 17:21:06 +0000
-X-Inumbo-ID: 6679421a-6802-44fa-a291-31bfe98f6a5f
-Received: from mo4-p02-ob.smtp.rzone.de (unknown [85.215.255.84])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 6679421a-6802-44fa-a291-31bfe98f6a5f;
-	Thu, 29 Oct 2020 17:20:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1603992021;
-	s=strato-dkim-0002; d=aepfle.de;
-	h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
-	X-RZG-CLASS-ID:X-RZG-AUTH:From:Subject:Sender;
-	bh=fJgEN/Sdwhd/b4yPCS/UDhsI4V1GTM00uHRSqwAWm0w=;
-	b=IjVk1PEgemRk3g/+LcWdQ9aonZPORdQ2b+s2uZPEM6Hx2TOAe2MuO7Ep+0wSbYj4Km
-	pXjg8y/C7hpw78RY1DYFwKOPZDEdpt6IflhlkLyq/qxx9GcF8YKDoRpWzbaFIlgLV8qM
-	4+oS9o6+fa7jxZ6IISDEYeBxeFt2tRHHg1/QTXgdpb6yeD5F4cgebDuzponeBSefrjDN
-	rlgNz31WfZ4+fhIWxuT6vkGNkGXAzBA49rYadTHwTG49fmp9QRPnuAhaI2MlmoBSqnL4
-	ODCYnoMyOLmInMCnUIzzuijTGPS9ph5l8H33XIJ7n6CG3yNnCMIYO0TCe1dxLJIK9FvP
-	B0Yg==
-X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzBW/OdlBZQ4AHSS3G1Jjw=="
-X-RZG-CLASS-ID: mo00
-Received: from sender
-	by smtp.strato.de (RZmta 47.3.0 DYNA|AUTH)
-	with ESMTPSA id j0b1afw9THKG3fR
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256 bits))
-	(Client did not present a certificate);
-	Thu, 29 Oct 2020 18:20:16 +0100 (CET)
-From: Olaf Hering <olaf@aepfle.de>
-To: xen-devel@lists.xenproject.org
-Cc: Olaf Hering <olaf@aepfle.de>,
-	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v1 19/23] tools/guest: restore: move mfns array in populate_pfns
-Date: Thu, 29 Oct 2020 18:19:59 +0100
-Message-Id: <20201029172004.17219-20-olaf@aepfle.de>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20201029172004.17219-1-olaf@aepfle.de>
-References: <20201029172004.17219-1-olaf@aepfle.de>
+	(envelope-from <SRS0=iFbr=EE=gmail.com=niveditas98@srs-us1.protection.inumbo.net>)
+	id 1kYBc6-0003MD-P8
+	for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 17:21:26 +0000
+X-Inumbo-ID: ec327819-3ee6-4007-a9f6-2165b14effc9
+Received: from mail-qk1-x736.google.com (unknown [2607:f8b0:4864:20::736])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id ec327819-3ee6-4007-a9f6-2165b14effc9;
+	Thu, 29 Oct 2020 17:20:51 +0000 (UTC)
+Received: by mail-qk1-x736.google.com with SMTP id s14so2560047qkg.11
+        for <xen-devel@lists.xenproject.org>; Thu, 29 Oct 2020 10:20:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=sender:from:date:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=bgET2vKXyCysvHtuVXHC8x2bsoHr9I9pVPGZuJ2I2ok=;
+        b=kCwHtNb0aDqVERdhKoxZMhicLRZ2QR3PolGpflI38e1AZzBFPmngVCvkULn12HaIpd
+         xNZsE0KTf8SFsTeciNeDfLB2b8eo7aWwi+oWAp/jGZANfyHEmSTDAiXW3x245FjthbK+
+         cNyymvnYwa4RgDaOm832TsIoNGN5VteNRutW9xIM3LOXzwfrz3rFIbB2qhaahGSK3KWZ
+         rcjSGv+Lrv3xXtp7IhxItj2ThU4R1TxkB1brB4zm0qayhFjR52RmdpupiWUa8/437Az6
+         Z5hmy1fEbRMjrq5fMw2J1qv+hvc2qIZX/q2dYGHrv1hoTM8Kgy/UG1ajYtjFlzWenf9F
+         /BdA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:sender:from:date:to:cc:subject:message-id
+         :references:mime-version:content-disposition:in-reply-to;
+        bh=bgET2vKXyCysvHtuVXHC8x2bsoHr9I9pVPGZuJ2I2ok=;
+        b=IuxqC6fCv9b7mVDGfgQYwtFqtcaXDbsEhHrWITqCjE/kUmTRAbDIy1XaCSnKXUsyMt
+         Kj64Jww9MzeLsPpzczPyhR7US+qtgxvwo1SgYxA+D7xOG1tlPMINwDPn3a0SNhaXJOjE
+         urkXazEqrCl++mQPHwra57UuUD2uVzi7DdNOTZ62t13K2eZjAUf0nSfbLqQ6ZIOuy4FC
+         qWzKmo0eF6E0CvUy1FPABrUCBm5HA9M7qZmpxAZcxuZHwfC+WkWECJQXRLOC5CcXDKLJ
+         kX1MvM4BH0LXlP/TOvok31Nx53AB9J8oi9UKBPOj/j5++Fml8tr6CNWhPSPB/pKcNXOv
+         GKUg==
+X-Gm-Message-State: AOAM531Ji7tgk5jb6HDV5MuDsCNiEXnn+JPOoFS/iitQv26srSAxTQNP
+	R/YHCz9r+FLSYXK88hqm1pc=
+X-Google-Smtp-Source: ABdhPJxpj2lHqddfkMCdJsg7kjoxJdmwW/wIVKjCyqCU3W25AK0ciYoXUlV7HQMe/OgzwbBLEfxGlQ==
+X-Received: by 2002:a05:620a:130a:: with SMTP id o10mr4612780qkj.63.1603992050890;
+        Thu, 29 Oct 2020 10:20:50 -0700 (PDT)
+Received: from rani.riverdale.lan ([2001:470:1f07:5f3::b55f])
+        by smtp.gmail.com with ESMTPSA id m33sm1432097qtb.65.2020.10.29.10.20.49
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 29 Oct 2020 10:20:50 -0700 (PDT)
+Sender: Arvind Sankar <niveditas98@gmail.com>
+From: Arvind Sankar <nivedita@alum.mit.edu>
+X-Google-Original-From: Arvind Sankar <arvind@rani.riverdale.lan>
+Date: Thu, 29 Oct 2020 13:20:48 -0400
+To: Paolo Bonzini <pbonzini@redhat.com>
+Cc: Arvind Sankar <nivedita@alum.mit.edu>,
+	David Laight <David.Laight@ACULAB.COM>,
+	'Arnd Bergmann' <arnd@kernel.org>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+	"x86@kernel.org" <x86@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
+	"K. Y. Srinivasan" <kys@microsoft.com>,
+	Haiyang Zhang <haiyangz@microsoft.com>,
+	Stephen Hemminger <sthemmin@microsoft.com>,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	"Rafael J. Wysocki" <rjw@rjwysocki.net>,
+	Vitaly Kuznetsov <vkuznets@redhat.com>,
+	Wanpeng Li <wanpengli@tencent.com>,
+	Jim Mattson <jmattson@google.com>, Joerg Roedel <joro@8bytes.org>,
+	"linux-hyperv@vger.kernel.org" <linux-hyperv@vger.kernel.org>,
+	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+	"kvm@vger.kernel.org" <kvm@vger.kernel.org>,
+	"platform-driver-x86@vger.kernel.org" <platform-driver-x86@vger.kernel.org>,
+	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+	"iommu@lists.linux-foundation.org" <iommu@lists.linux-foundation.org>
+Subject: Re: [PATCH] [v2] x86: apic: avoid -Wshadow warning in header
+Message-ID: <20201029172048.GA2571425@rani.riverdale.lan>
+References: <20201028212417.3715575-1-arnd@kernel.org>
+ <38b11ed3fec64ebd82d6a92834a4bebe@AcuMS.aculab.com>
+ <20201029165611.GA2557691@rani.riverdale.lan>
+ <93180c2d-268c-3c33-7c54-4221dfe0d7ad@redhat.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <93180c2d-268c-3c33-7c54-4221dfe0d7ad@redhat.com>
 
-Remove allocation from hotpath, move populate_pfns mfns array into preallocated space.
-Use some prefix to avoid conflict with an array used in handle_page_data.
+On Thu, Oct 29, 2020 at 05:59:54PM +0100, Paolo Bonzini wrote:
+> On 29/10/20 17:56, Arvind Sankar wrote:
+> >> For those two just add:
+> >> 	struct apic *apic = x86_system_apic;
+> >> before all the assignments.
+> >> Less churn and much better code.
+> >>
+> > Why would it be better code?
+> > 
+> 
+> I think he means the compiler produces better code, because it won't
+> read the global variable repeatedly.  Not sure if that's true,(*) but I
+> think I do prefer that version if Arnd wants to do that tweak.
+> 
+> Paolo
+> 
+> (*) if it is, it might also be due to Linux using -fno-strict-aliasing
+> 
 
-Signed-off-by: Olaf Hering <olaf@aepfle.de>
----
- tools/libs/guest/xg_sr_common.h  | 2 ++
- tools/libs/guest/xg_sr_restore.c | 5 ++---
- 2 files changed, 4 insertions(+), 3 deletions(-)
-
-diff --git a/tools/libs/guest/xg_sr_common.h b/tools/libs/guest/xg_sr_common.h
-index eba3a49877..96a77b5969 100644
---- a/tools/libs/guest/xg_sr_common.h
-+++ b/tools/libs/guest/xg_sr_common.h
-@@ -230,6 +230,8 @@ struct xc_sr_restore_arrays {
-     /* process_page_data */
-     xen_pfn_t mfns[MAX_BATCH_SIZE];
-     int map_errs[MAX_BATCH_SIZE];
-+    /* populate_pfns */
-+    xen_pfn_t pp_mfns[MAX_BATCH_SIZE];
- };
- 
- struct xc_sr_context
-diff --git a/tools/libs/guest/xg_sr_restore.c b/tools/libs/guest/xg_sr_restore.c
-index 94c329032f..85a32aaed2 100644
---- a/tools/libs/guest/xg_sr_restore.c
-+++ b/tools/libs/guest/xg_sr_restore.c
-@@ -138,12 +138,12 @@ int populate_pfns(struct xc_sr_context *ctx, unsigned int count,
-                   const xen_pfn_t *original_pfns, const uint32_t *types)
- {
-     xc_interface *xch = ctx->xch;
--    xen_pfn_t *mfns = malloc(count * sizeof(*mfns)),
-+    xen_pfn_t *mfns = ctx->restore.m->pp_mfns,
-         *pfns = malloc(count * sizeof(*pfns));
-     unsigned int i, nr_pfns = 0;
-     int rc = -1;
- 
--    if ( !mfns || !pfns )
-+    if ( !pfns )
-     {
-         ERROR("Failed to allocate %zu bytes for populating the physmap",
-               2 * count * sizeof(*mfns));
-@@ -191,7 +191,6 @@ int populate_pfns(struct xc_sr_context *ctx, unsigned int count,
- 
-  err:
-     free(pfns);
--    free(mfns);
- 
-     return rc;
- }
+Nope, it doesn't read it multiple times. I guess it still assumes that
+apic isn't in the middle of what it points to: it would reload the
+address if the first element of *apic was modified, but doesn't for
+other elements. Interesting.
 
