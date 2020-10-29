@@ -2,28 +2,29 @@ Return-Path: <SRS0=SN9p=EE=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F0FF5C4363A
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 18:49:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 275E7C4363A
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 19:04:14 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 61BE32075E
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 18:49:19 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 8DA8A20756
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2020 19:04:12 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Pmc7WdVt"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 61BE32075E
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="D4vmX/hV"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8DA8A20756
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.14574.35973 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.14582.35993 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kYCyj-0005e4-9B; Thu, 29 Oct 2020 18:48:53 +0000
+	id 1kYDDD-0007Ol-M8; Thu, 29 Oct 2020 19:03:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 14574.35973; Thu, 29 Oct 2020 18:48:53 +0000
+Received: by outflank-mailman (output) from mailman id 14582.35993; Thu, 29 Oct 2020 19:03:51 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,203 +39,123 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kYCyj-0005dx-5Q; Thu, 29 Oct 2020 18:48:53 +0000
-Received: by outflank-mailman (input) for mailman id 14574;
- Thu, 29 Oct 2020 18:48:51 +0000
+	id 1kYDDD-0007Oe-J5; Thu, 29 Oct 2020 19:03:51 +0000
+Received: by outflank-mailman (input) for mailman id 14582;
+ Thu, 29 Oct 2020 19:03:50 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Wm+X=EE=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
- id 1kYCyh-0005ds-L2
- for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 18:48:51 +0000
-Received: from mail-wm1-x341.google.com (unknown [2a00:1450:4864:20::341])
+ <SRS0=/pEi=EE=gmail.com=jandryuk@srs-us1.protection.inumbo.net>)
+ id 1kYDDC-0007OZ-9F
+ for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 19:03:50 +0000
+Received: from mail-io1-xd41.google.com (unknown [2607:f8b0:4864:20::d41])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 55e4c43a-eabd-457b-889b-0ad6f0345e5f;
- Thu, 29 Oct 2020 18:48:50 +0000 (UTC)
-Received: by mail-wm1-x341.google.com with SMTP id a72so784205wme.5
- for <xen-devel@lists.xenproject.org>; Thu, 29 Oct 2020 11:48:50 -0700 (PDT)
+ id d77ef8ef-a576-42f2-bd4f-ebcbb3d3e1f8;
+ Thu, 29 Oct 2020 19:03:49 +0000 (UTC)
+Received: by mail-io1-xd41.google.com with SMTP id u62so4708732iod.8
+ for <xen-devel@lists.xenproject.org>; Thu, 29 Oct 2020 12:03:49 -0700 (PDT)
+Received: from shine.lan ([2001:470:8:67e:fcfe:e213:efe5:2016])
+ by smtp.gmail.com with ESMTPSA id g185sm2958818ilh.35.2020.10.29.12.03.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 29 Oct 2020 12:03:47 -0700 (PDT)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=Wm+X=EE=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
-	id 1kYCyh-0005ds-L2
-	for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 18:48:51 +0000
-X-Inumbo-ID: 55e4c43a-eabd-457b-889b-0ad6f0345e5f
-Received: from mail-wm1-x341.google.com (unknown [2a00:1450:4864:20::341])
+	(envelope-from <SRS0=/pEi=EE=gmail.com=jandryuk@srs-us1.protection.inumbo.net>)
+	id 1kYDDC-0007OZ-9F
+	for xen-devel@lists.xenproject.org; Thu, 29 Oct 2020 19:03:50 +0000
+X-Inumbo-ID: d77ef8ef-a576-42f2-bd4f-ebcbb3d3e1f8
+Received: from mail-io1-xd41.google.com (unknown [2607:f8b0:4864:20::d41])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 55e4c43a-eabd-457b-889b-0ad6f0345e5f;
-	Thu, 29 Oct 2020 18:48:50 +0000 (UTC)
-Received: by mail-wm1-x341.google.com with SMTP id a72so784205wme.5
-        for <xen-devel@lists.xenproject.org>; Thu, 29 Oct 2020 11:48:50 -0700 (PDT)
+	id d77ef8ef-a576-42f2-bd4f-ebcbb3d3e1f8;
+	Thu, 29 Oct 2020 19:03:49 +0000 (UTC)
+Received: by mail-io1-xd41.google.com with SMTP id u62so4708732iod.8
+        for <xen-devel@lists.xenproject.org>; Thu, 29 Oct 2020 12:03:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=N4de3iPKUftnlFpf5FnF9kPaolR5meis5keMRhND+JY=;
-        b=Pmc7WdVth87fJUeF9gvezBoM39x722fkjjp2rwBe4iDwf1FKYDFuDqevwYlvdDwg+1
-         Uk/mQ8eAGsGNjIV5+g5lRDS1HxrCrklwdMUXkfHs5F8eGt28QKghvcWMpiYIm9tmT+GD
-         kylGlJzWM10+5K3VLC6wR6Swnwub+VnL1NqrGrplOG7+/CbMsYzyVrEJJDnP4l5t9jP2
-         APoyUa4NAYiEdONV/VgUZGdYHJ0Xdv0VigkimLvQkcQNPpnb5n3sTJ7CRpTAVqqapfmU
-         K8lbl1NePf1qIENQ+4FgoUsxkl7k2edi1ReMcFwz9ZPJLkjunXJiDdQEE+fXWACGOdwP
-         p7tg==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=PjoN1VtNrqCy9Sd+SGhiFGDyT8M6kw114LQQ5wrE1Lk=;
+        b=D4vmX/hVLY7pNXdyr/ARgCUQIxYP/peLKolCkz11AlYWKAV6E9FliRldyvgKm2W5RJ
+         uWy81iRgo1aX5zEBx0XYHgTYskhIC/fsuHpZ7JTm/H8/9cm8G9jkt2Hqjr3VYhh6D0Ps
+         G8WFwGj3kxrucyjP0lhi4AimJgd839QVFVgZJTC9HeaLHjuKqOxRmRSgj28ByEnfht/5
+         SAoVWBoKT+aNuKZLyclqBnm44XpLVadCcr216ap5SfflL8QMsZ6I+AOdV5xCpMsRqPF0
+         OQ4iLkV5G2zIAUf6fKAgCG4cgvMosGZfKGXkz9pbjPyNIWuLCQq3P3qtFtukLKvCBbzn
+         YK4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=N4de3iPKUftnlFpf5FnF9kPaolR5meis5keMRhND+JY=;
-        b=ge73Udl2FRYRaCfo0zGyvuztSQL6MJT7+YLaer1+dRArS+WvKUKugK+tNA6UOHNN1w
-         w9zMjXLDn77/NNe0r8VCNsqo5y2OaRZ108z7JkEr23/dm5QThdEiz/cbsbj68+HFu33Q
-         0rfvGyCDzDMIl9jwb3UOFx4SLgfEuf7zGLmXuiccLC3qBWl5Su/RT0d9McAfJ8Hd7gK+
-         P2G6mHukq51VUwRPGCyGQ56TQShB5JzPcLPqYHo603GJuBfHtGvz86XBfkYK4j/bSRBN
-         jPEbefgVSV8Eih7IorsEkzJ7tbdJWnWVhxMpAkZcRQbiEA35JOVLHFHgOU+/d2v5Z1s3
-         ajFw==
-X-Gm-Message-State: AOAM5337WE38lc2fGfHvHhwGiPSZt1cpAr7dxWJP8Z8WNLVyTrNhYkBc
-	JdpLlquPwZjCGkans0uYZfVvkwxt5Os7mUvDk9Y=
-X-Google-Smtp-Source: ABdhPJy//taBYNrhU1ensXWXY2Tv5+OM89IPdVdRGTvQl3nVRLm4AbABsDjwxZE2bwTmElAaJNjlgLCcO0lkBd8+Ex0=
-X-Received: by 2002:a1c:acc1:: with SMTP id v184mr223201wme.63.1603997329636;
- Thu, 29 Oct 2020 11:48:49 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=PjoN1VtNrqCy9Sd+SGhiFGDyT8M6kw114LQQ5wrE1Lk=;
+        b=pfXwWHsMtSHS2u3hk9+cFFCAyl+0wqyeYiPeOwYphrSCGIxyOUByqL7DPiVcERM7lX
+         e8Ww40TLUzVak9T+xERtABIAYDBBYXgV+5uYn0CjSeqY1u5JHl+uh0l1xQdRCNVCvFfq
+         8OCoY+/InI8+hqEOononNU15LmOHSvPhdDUmyTJAuqizd+Q7NAH0JvAFzSwc0J/PjNZw
+         27rdJ5b0oJfPHYYsB9tOy8JmpcCslncpZ5surf42zbuOdznLmT28i/xRMniaBfNThe8a
+         3IQPDIJFT+UR23hTVzEEOuYEwaYGUD/z7rEPoRzRnIOP5yJfCiVBS1sXre6FVdtXmy+W
+         eqWQ==
+X-Gm-Message-State: AOAM5305oB/iXwsAprNSUMJ6tSfw+MqctH2shOivbnW6tKRROyO66zkQ
+	pQYVwx2tuO/DjOgCPQm7eFWNiJpAkjQ=
+X-Google-Smtp-Source: ABdhPJzOhp5U22ALopDDwWzUDzIt6Hf9u9tG4Ta9al7tHl/lc6geiR7/6WbaApxLlPxn4MzcDPMGGA==
+X-Received: by 2002:a02:48:: with SMTP id 69mr4618562jaa.108.1603998228652;
+        Thu, 29 Oct 2020 12:03:48 -0700 (PDT)
+Received: from shine.lan ([2001:470:8:67e:fcfe:e213:efe5:2016])
+        by smtp.gmail.com with ESMTPSA id g185sm2958818ilh.35.2020.10.29.12.03.46
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 29 Oct 2020 12:03:47 -0700 (PDT)
+From: Jason Andryuk <jandryuk@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Anthony PERARD <anthony.perard@citrix.com>,
+	Jason Andryuk <jandryuk@gmail.com>,
+	Ian Jackson <iwj@xenproject.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v2] libxl: Add suppress-vmdesc to QEMU machine
+Date: Thu, 29 Oct 2020 15:03:32 -0400
+Message-Id: <20201029190332.31161-1-jandryuk@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <1602780274-29141-1-git-send-email-olekstysh@gmail.com> <CAA93ih0o3XmD9neBu1fAkP1iBETu1-4qaQaEsZfEWRfYo7VCZA@mail.gmail.com>
-In-Reply-To: <CAA93ih0o3XmD9neBu1fAkP1iBETu1-4qaQaEsZfEWRfYo7VCZA@mail.gmail.com>
-From: Oleksandr Tyshchenko <olekstysh@gmail.com>
-Date: Thu, 29 Oct 2020 20:48:38 +0200
-Message-ID: <CAPD2p-npnQz+7NtMH81s2C3dsAt_6kxQ68n7LhwYbOuTFaUEvw@mail.gmail.com>
-Subject: Re: [PATCH V2 00/23] IOREQ feature (+ virtio-mmio) on Arm
-To: Masami Hiramatsu <masami.hiramatsu@linaro.org>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, 
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, Paul Durrant <paul@xen.org>, 
-	Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, 
-	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu <wl@xen.org>, 
-	Julien Grall <julien.grall@arm.com>, George Dunlap <george.dunlap@citrix.com>, 
-	Ian Jackson <iwj@xenproject.org>, Julien Grall <julien@xen.org>, 
-	Stefano Stabellini <sstabellini@kernel.org>, Tim Deegan <tim@xen.org>, 
-	Daniel De Graaf <dgdegra@tycho.nsa.gov>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, 
-	Jun Nakajima <jun.nakajima@intel.com>, Kevin Tian <kevin.tian@intel.com>, 
-	Anthony PERARD <anthony.perard@citrix.com>, Bertrand Marquis <bertrand.marquis@arm.com>
-Content-Type: multipart/alternative; boundary="0000000000000dc0df05b2d3bb4e"
+Content-Transfer-Encoding: 8bit
 
---0000000000000dc0df05b2d3bb4e
-Content-Type: text/plain; charset="UTF-8"
+The device model state saved by QMP xen-save-devices-state doesn't
+include the vmdesc json.  When restoring an HVM, xen-load-devices-state
+always triggers "Expected vmdescription section, but got 0".  This is
+not a problem when restore comes from a file.  However, when QEMU runs
+in a linux stubdom and comes over a console, EOF is not received.  This
+causes a delay restoring - though it does restore.
 
-On Thu, Oct 29, 2020 at 9:42 AM Masami Hiramatsu <
-masami.hiramatsu@linaro.org> wrote:
+Setting suppress-vmdesc skips looking for the vmdesc during restore and
+avoids the wait.
 
-> Hi Oleksandr,
->
-Hi Masami
+QEMU 5.2 enables suppress-vmdesc by default for xenfv, but this change
+sets it manually for xenfv and xen_platform_pci=0 when -machine pc is
+use.
 
-[sorry for the possible format issue]
+QEMU commit 9850c6047b8b "migration: Allow to suppress vmdesc
+submission" added suppress-vmdesc in QEMU 2.3.
 
+Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
 
->
-> I would like to try this on my arm64 board.
->
-Glad to hear you are interested in this topic.
+---
+QEMU 2.3 came out in 2015, so setting suppress-vmdesc unilaterally
+should be okay...  Is this okay?
+---
+ tools/libs/light/libxl_dm.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-
->
-> According to your comments in the patch, I made this config file.
-> # cat debian.conf
-> name = "debian"
-> type = "pvh"
-> vcpus = 8
-> memory = 512
-> kernel = "/opt/agl/vmlinuz-5.9.0-1-arm64"
-> ramdisk = "/opt/agl/initrd.img-5.9.0-1-arm64"
-> cmdline= "console=hvc0 earlyprintk=xen root=/dev/xvda1 rw"
-> disk = [ '/opt/agl/debian.qcow2,qcow2,hda' ]
-> vif = [ 'mac=00:16:3E:74:3d:76,bridge=xenbr0' ]
-> virtio = 1
-> vdisk = [ 'backend=Dom0, disks=ro:/dev/sda1' ]
->
-> And tried to boot a DomU, but I got below error.
->
-> # xl create -c debian.conf
-> Parsing config from debian.conf
-> libxl: error: libxl_create.c:1863:domcreate_attach_devices: Domain
-> 1:unable to add virtio_disk devices
-> libxl: error: libxl_domain.c:1218:destroy_domid_pci_done: Domain
-> 1:xc_domain_pause failed
-> libxl: error: libxl_dom.c:39:libxl__domain_type: unable to get domain
-> type for domid=1
-> libxl: error: libxl_domain.c:1136:domain_destroy_callback: Domain
-> 1:Unable to destroy guest
-> libxl: error: libxl_domain.c:1063:domain_destroy_cb: Domain
-> 1:Destruction of domain failed
->
->
-> Could you tell me how can I test it?
->
-
-I assume it is due to the lack of the virtio-disk backend (which I haven't
-shared yet as I focused on the IOREQ/DM support on Arm in the first place).
-Could you wait a little bit, I am going to share it soon.
-
-
+diff --git a/tools/libs/light/libxl_dm.c b/tools/libs/light/libxl_dm.c
+index d1ff35dda3..3da83259c0 100644
+--- a/tools/libs/light/libxl_dm.c
++++ b/tools/libs/light/libxl_dm.c
+@@ -1778,9 +1778,9 @@ static int libxl__build_device_model_args_new(libxl__gc *gc,
+             /* Switching here to the machine "pc" which does not add
+              * the xen-platform device instead of the default "xenfv" machine.
+              */
+-            machinearg = libxl__strdup(gc, "pc,accel=xen");
++            machinearg = libxl__strdup(gc, "pc,accel=xen,suppress-vmdesc=on");
+         } else {
+-            machinearg = libxl__strdup(gc, "xenfv");
++            machinearg = libxl__strdup(gc, "xenfv,suppress-vmdesc=on");
+         }
+         if (b_info->u.hvm.mmio_hole_memkb) {
+             uint64_t max_ram_below_4g = (1ULL << 32) -
 -- 
-Regards,
+2.25.1
 
-Oleksandr Tyshchenko
-
---0000000000000dc0df05b2d3bb4e
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Thu, Oct 29, 2020 at 9:42 AM Masam=
-i Hiramatsu &lt;<a href=3D"mailto:masami.hiramatsu@linaro.org">masami.hiram=
-atsu@linaro.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" s=
-tyle=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);pad=
-ding-left:1ex">Hi Oleksandr,<br></blockquote><div>Hi Masami</div><div><br><=
-/div><div>[sorry for the possible format issue]</div><div>=C2=A0</div><bloc=
-kquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:=
-1px solid rgb(204,204,204);padding-left:1ex">
-<br>
-I would like to try this on my arm64 board.<br></blockquote><div>Glad to he=
-ar you are interested in this topic.=C2=A0</div><div>=C2=A0</div><blockquot=
-e class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px s=
-olid rgb(204,204,204);padding-left:1ex">
-<br>
-According to your comments in the patch, I made this config file.<br>
-# cat debian.conf<br>
-name =3D &quot;debian&quot;<br>
-type =3D &quot;pvh&quot;<br>
-vcpus =3D 8<br>
-memory =3D 512<br>
-kernel =3D &quot;/opt/agl/vmlinuz-5.9.0-1-arm64&quot;<br>
-ramdisk =3D &quot;/opt/agl/initrd.img-5.9.0-1-arm64&quot;<br>
-cmdline=3D &quot;console=3Dhvc0 earlyprintk=3Dxen root=3D/dev/xvda1 rw&quot=
-;<br>
-disk =3D [ &#39;/opt/agl/debian.qcow2,qcow2,hda&#39; ]<br>
-vif =3D [ &#39;mac=3D00:16:3E:74:3d:76,bridge=3Dxenbr0&#39; ]<br>
-virtio =3D 1<br>
-vdisk =3D [ &#39;backend=3DDom0, disks=3Dro:/dev/sda1&#39; ]<br>
-<br>
-And tried to boot a DomU, but I got below error.<br>
-<br>
-# xl create -c debian.conf<br>
-Parsing config from debian.conf<br>
-libxl: error: libxl_create.c:1863:domcreate_attach_devices: Domain<br>
-1:unable to add virtio_disk devices<br>
-libxl: error: libxl_domain.c:1218:destroy_domid_pci_done: Domain<br>
-1:xc_domain_pause failed<br>
-libxl: error: libxl_dom.c:39:libxl__domain_type: unable to get domain<br>
-type for domid=3D1<br>
-libxl: error: libxl_domain.c:1136:domain_destroy_callback: Domain<br>
-1:Unable to destroy guest<br>
-libxl: error: libxl_domain.c:1063:domain_destroy_cb: Domain<br>
-1:Destruction of domain failed<br>
-<br>
-<br>
-Could you tell me how can I test it?<br></blockquote><div><br></div><div>I =
-assume it is due to the lack of the virtio-disk backend (which I haven&#39;=
-t shared yet as I focused on the IOREQ/DM support on Arm in the first place=
-).</div><div>Could you wait a little bit, I am going to share it soon.=C2=
-=A0</div></div><br clear=3D"all"><div><br></div>-- <br><div dir=3D"ltr" cla=
-ss=3D"gmail_signature"><div dir=3D"ltr"><div><div dir=3D"ltr"><div><div dir=
-=3D"ltr"><span style=3D"background-color:rgb(255,255,255)"><font size=3D"2"=
-><span style=3D"color:rgb(51,51,51);font-family:Arial,sans-serif">Regards,<=
-/span></font></span></div><div dir=3D"ltr"><br></div><div dir=3D"ltr"><div>=
-<span style=3D"background-color:rgb(255,255,255)"><font size=3D"2">Oleksand=
-r Tyshchenko</font></span></div></div></div></div></div></div></div></div>
-
---0000000000000dc0df05b2d3bb4e--
 
