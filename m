@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-8.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	NICE_REPLY_A,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 21D18C4363A
-	for <xen-devel@archiver.kernel.org>; Fri, 30 Oct 2020 10:21:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9D333C4363A
+	for <xen-devel@archiver.kernel.org>; Fri, 30 Oct 2020 10:21:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 894B620825
-	for <xen-devel@archiver.kernel.org>; Fri, 30 Oct 2020 10:21:32 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 1401320825
+	for <xen-devel@archiver.kernel.org>; Fri, 30 Oct 2020 10:21:37 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="lhW4cJ1c"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 894B620825
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="B9rJTdT0"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1401320825
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.15612.38613 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.15591.38625 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kYRX2-0000yq-UP; Fri, 30 Oct 2020 10:21:16 +0000
+	id 1kYRXB-00011i-7F; Fri, 30 Oct 2020 10:21:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 15612.38613; Fri, 30 Oct 2020 10:21:16 +0000
+Received: by outflank-mailman (output) from mailman id 15591.38625; Fri, 30 Oct 2020 10:21:25 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,96 +38,134 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kYRX2-0000yj-Q5; Fri, 30 Oct 2020 10:21:16 +0000
-Received: by outflank-mailman (input) for mailman id 15612;
- Fri, 30 Oct 2020 10:21:14 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=pDD0=EF=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1kYRX0-0000yd-RQ
- for xen-devel@lists.xenproject.org; Fri, 30 Oct 2020 10:21:14 +0000
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id a2b54742-748d-44ab-b478-b1543c195c5f;
- Fri, 30 Oct 2020 10:21:13 +0000 (UTC)
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1kYRWx-0005Py-4m; Fri, 30 Oct 2020 10:21:11 +0000
-Received: from [54.239.6.188] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1kYRWw-0005n7-Rt; Fri, 30 Oct 2020 10:21:10 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+	id 1kYRXB-00011b-30; Fri, 30 Oct 2020 10:21:25 +0000
+Received: by outflank-mailman (input) for mailman id 15591;
+ Fri, 30 Oct 2020 10:04:18 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=Dn1q=EF=linaro.org=srinivas.kandagatla@srs-us1.protection.inumbo.net>)
+ id 1kYRGc-0007SB-H0
+ for xen-devel@lists.xenproject.org; Fri, 30 Oct 2020 10:04:18 +0000
+Received: from mail-wr1-x441.google.com (unknown [2a00:1450:4864:20::441])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 67b18d79-1c8a-4e79-9e70-07f2f4091bd2;
+ Fri, 30 Oct 2020 10:04:17 +0000 (UTC)
+Received: by mail-wr1-x441.google.com with SMTP id t9so5737967wrq.11
+ for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2020 03:04:17 -0700 (PDT)
+Received: from [192.168.86.34]
+ (cpc86377-aztw32-2-0-cust226.18-1.cable.virginm.net. [92.233.226.227])
+ by smtp.googlemail.com with ESMTPSA id h8sm7699531wro.14.2020.10.30.03.04.14
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Fri, 30 Oct 2020 03:04:15 -0700 (PDT)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=pDD0=EF=xen.org=julien@srs-us1.protection.inumbo.net>)
-	id 1kYRX0-0000yd-RQ
-	for xen-devel@lists.xenproject.org; Fri, 30 Oct 2020 10:21:14 +0000
-X-Inumbo-ID: a2b54742-748d-44ab-b478-b1543c195c5f
-Received: from mail.xenproject.org (unknown [104.130.215.37])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id a2b54742-748d-44ab-b478-b1543c195c5f;
-	Fri, 30 Oct 2020 10:21:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=DpagRUoaWOiZtLNNsCwYXCTH2dY4fG6an5igMXxemW0=; b=lhW4cJ1cvYWJn/8qBC4mSCBJAq
-	TQMxKDqB+mZmbOBVb1hD8BciacFx9dj9bunCl/5/ljTDg61p5MiPoB3UY/y7ipcn+FgREUzHYBmw4
-	+saTN3EBD7ObFQI03gM8TueVjng/6Y/PqyYcNY8HWMp6HKbC8R65du9YiAOp0OwaOzFI=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
-	by mail.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <julien@xen.org>)
-	id 1kYRWx-0005Py-4m; Fri, 30 Oct 2020 10:21:11 +0000
-Received: from [54.239.6.188] (helo=a483e7b01a66.ant.amazon.com)
-	by xenbits.xenproject.org with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
-	(Exim 4.92)
-	(envelope-from <julien@xen.org>)
-	id 1kYRWw-0005n7-Rt; Fri, 30 Oct 2020 10:21:10 +0000
-Subject: Re: [PATCH v2 2/8] evtchn: replace FIFO-specific header by generic
- private one
-To: Jan Beulich <jbeulich@suse.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <George.Dunlap@eu.citrix.com>, Ian Jackson
- <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>
-References: <19babf20-3649-5c63-44a9-7edfa81835aa@suse.com>
- <3fea358e-d6d1-21d4-2d83-d9bd457ba3b5@suse.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <c330d6e3-04da-9bf2-5634-b6b2961c18db@xen.org>
-Date: Fri, 30 Oct 2020 10:21:09 +0000
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.4.0
+	(envelope-from <SRS0=Dn1q=EF=linaro.org=srinivas.kandagatla@srs-us1.protection.inumbo.net>)
+	id 1kYRGc-0007SB-H0
+	for xen-devel@lists.xenproject.org; Fri, 30 Oct 2020 10:04:18 +0000
+X-Inumbo-ID: 67b18d79-1c8a-4e79-9e70-07f2f4091bd2
+Received: from mail-wr1-x441.google.com (unknown [2a00:1450:4864:20::441])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id 67b18d79-1c8a-4e79-9e70-07f2f4091bd2;
+	Fri, 30 Oct 2020 10:04:17 +0000 (UTC)
+Received: by mail-wr1-x441.google.com with SMTP id t9so5737967wrq.11
+        for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2020 03:04:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google;
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=gQH8tfnS5gABqR+rI2vYNKDqWdjjH0cmP3e9KTBgftU=;
+        b=B9rJTdT06fBjkoaC4E33GsRL6XklEaCtgE6RSNGKr1R6NIN6tshFsvlrm73+qDotTs
+         TgtMR2VLSrECST5bfnSTgKL7Wgi9dLvx0b+wOp98ZwTdU4Ui8lhbwxRwAvAFaXlLlBUv
+         kIF79xh7rAnLeAmFUb7OH8iS2qmajJB6f90j1t67g5Zqi8ZvFcvZqslE0Nw79PSToAvD
+         N9OdQRnS+ec6wQ18zcvo4xYOB+MrwDVlSeHj5ODLObBC4OqIgDsKYG4VpZ7Zwf1s+0XG
+         E8uv8pTzD1YjF2GLDWWylcwx+GDZ++SmMtTJoKDLvlekOLEjOvRKbLbn1NSmNnF0g7r5
+         ocZw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=gQH8tfnS5gABqR+rI2vYNKDqWdjjH0cmP3e9KTBgftU=;
+        b=oUhSup3NYXi5nvqmRLfl9GEzUZgcDAzfK5FPd3YumNOQkqdxMquh0lrycpSBPLkMmH
+         uUJ0RRe+AyZGi0zdcOufkbGBhqNg/6HeE+5Evk9OSZRUjw809LsxihdZJTXREcvzM9LO
+         DvSu1j2HK6RSCj3QIwZWjop8zHNZX1ERmBHPWqX//3dvlGRqUPM0VGLgaS1mZIZJOZB7
+         QNDeEo1lFqU2iFKg8lkvy8FhUjaXa6dhinf/XUjoHfpDvt2kUpyp6BMkHB+FOV/swxWr
+         2yWXQAFL1Wr0qENlnIxl08Qa9n2+WlzN2/QYRISMShRziwAlLIA49kiIcaLP/WiesvgS
+         1APg==
+X-Gm-Message-State: AOAM533TVwWRhnAIk2WasG0V41pLxyhfUriCC7VlX+IjbQkg+2rnUXVV
+	U8g6fI2q2AVulx5adAnIuripTUMyKKQIPg==
+X-Google-Smtp-Source: ABdhPJyiqwsuWF8oCOJ2p5mgrL1UOBEF3qjVNKqZ9hb80Q/uxO4LXY5WvIi3i2M6psl12Cn+2MTVIQ==
+X-Received: by 2002:a5d:40c3:: with SMTP id b3mr2187416wrq.157.1604052256376;
+        Fri, 30 Oct 2020 03:04:16 -0700 (PDT)
+Received: from [192.168.86.34] (cpc86377-aztw32-2-0-cust226.18-1.cable.virginm.net. [92.233.226.227])
+        by smtp.googlemail.com with ESMTPSA id h8sm7699531wro.14.2020.10.30.03.04.14
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Fri, 30 Oct 2020 03:04:15 -0700 (PDT)
+Subject: Re: [PATCH v2 19/39] docs: ABI: stable: make files ReST compatible
+To: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+ Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Cc: Jonathan Corbet <corbet@lwn.net>,
+ Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Daniel Thompson <daniel.thompson@linaro.org>,
+ Jarkko Sakkinen <jarkko@kernel.org>, Jason Gunthorpe <jgg@ziepe.ca>,
+ Jerry Snitselaar <jsnitsel@redhat.com>, Jingoo Han <jingoohan1@gmail.com>,
+ Johannes Berg <johannes@sipsolutions.net>,
+ Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+ Juergen Gross <jgross@suse.com>, Lee Jones <lee.jones@linaro.org>,
+ Michael Ellerman <mpe@ellerman.id.au>, Oded Gabbay <oded.gabbay@gmail.com>,
+ Paul Mackerras <paulus@samba.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, Tom Rix <trix@redhat.com>,
+ Vaibhav Jain <vaibhav@linux.ibm.com>, dri-devel@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, linux-wireless@vger.kernel.org,
+ linuxppc-dev@lists.ozlabs.org, xen-devel@lists.xenproject.org
+References: <cover.1604042072.git.mchehab+huawei@kernel.org>
+ <467a0dfbcdf00db710a629d3fe4a2563750339d8.1604042072.git.mchehab+huawei@kernel.org>
+From: Srinivas Kandagatla <srinivas.kandagatla@linaro.org>
+Message-ID: <bc393307-d7dc-1666-f25c-6d756ebf5993@linaro.org>
+Date: Fri, 30 Oct 2020 10:04:13 +0000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <3fea358e-d6d1-21d4-2d83-d9bd457ba3b5@suse.com>
+In-Reply-To: <467a0dfbcdf00db710a629d3fe4a2563750339d8.1604042072.git.mchehab+huawei@kernel.org>
 Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
+Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
-Hi Jan,
 
-On 20/10/2020 15:08, Jan Beulich wrote:
-> Having a FIFO specific header is not (or at least no longer) warranted
-> with just three function declarations left there. Introduce a private
-> header instead, moving there some further items from xen/event.h.
+
+On 30/10/2020 07:40, Mauro Carvalho Chehab wrote:
+> Several entries at the stable ABI files won't parse if we pass
+> them directly to the ReST output.
 > 
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-
-Acked-by: Julien Grall <jgrall@amazon.com>
-
+> Adjust them, in order to allow adding their contents as-is at
+> the stable ABI book.
+> 
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 > ---
-> v2: New.
-> ---
-> TBD: If - considering the layering violation that's there anyway - we
->       allowed PV shim code to make use of this header, a few more items
->       could be moved out of "public sight".
+>   Documentation/ABI/stable/firewire-cdev        |  4 +
+>   Documentation/ABI/stable/sysfs-acpi-pmprofile | 22 +++--
+>   Documentation/ABI/stable/sysfs-bus-firewire   |  3 +
+>   Documentation/ABI/stable/sysfs-bus-nvmem      | 19 ++--
 
-Are you referring to PV shim calling function such as evtchn_bind_vcpu()?
+for nvmem parts:
 
-Cheers,
+Acked-by: Srinivas Kandagatla <srinivas.kandagatla@linaro.org>
 
--- 
-Julien Grall
+--srini
+
+>   Documentation/ABI/stable/sysfs-bus-usb        |  6 +-
+>   .../ABI/stable/sysfs-class-backlight          |  1 +
+>   .../ABI/stable/sysfs-class-infiniband         | 93 +++++++++++++------
+>   Documentation/ABI/stable/sysfs-class-rfkill   | 13 ++-
+>   Documentation/ABI/stable/sysfs-class-tpm      | 90 +++++++++---------
+>   Documentation/ABI/stable/sysfs-devices        |  5 +-
+>   Documentation/ABI/stable/sysfs-driver-ib_srp  |  1 +
+>   .../ABI/stable/sysfs-firmware-efi-vars        |  4 +
+>   .../ABI/stable/sysfs-firmware-opal-dump       |  5 +
+>   .../ABI/stable/sysfs-firmware-opal-elog       |  2 +
+>   Documentation/ABI/stable/sysfs-hypervisor-xen |  3 +
+>   Documentation/ABI/stable/vdso                 |  5 +-
+>   16 files changed, 176 insertions(+), 100 deletions(-)
+> 
 
