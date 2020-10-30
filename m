@@ -2,25 +2,28 @@ Return-Path: <SRS0=Brpk=EF=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D76BEC4363A
-	for <xen-devel@archiver.kernel.org>; Fri, 30 Oct 2020 12:23:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 98D7EC4363A
+	for <xen-devel@archiver.kernel.org>; Fri, 30 Oct 2020 12:25:26 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4899C20727
-	for <xen-devel@archiver.kernel.org>; Fri, 30 Oct 2020 12:23:44 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4899C20727
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=invisiblethingslab.com
+	by mail.kernel.org (Postfix) with ESMTPS id 1160220727
+	for <xen-devel@archiver.kernel.org>; Fri, 30 Oct 2020 12:25:25 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="OB0sht1N"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1160220727
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.15771.38907 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.15776.38919 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kYTRH-0005Uf-B7; Fri, 30 Oct 2020 12:23:27 +0000
+	id 1kYTT0-0005cK-NW; Fri, 30 Oct 2020 12:25:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 15771.38907; Fri, 30 Oct 2020 12:23:27 +0000
+Received: by outflank-mailman (output) from mailman id 15776.38919; Fri, 30 Oct 2020 12:25:14 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -35,157 +38,113 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kYTRH-0005UY-7t; Fri, 30 Oct 2020 12:23:27 +0000
-Received: by outflank-mailman (input) for mailman id 15771;
- Fri, 30 Oct 2020 12:23:25 +0000
+	id 1kYTT0-0005cD-KQ; Fri, 30 Oct 2020 12:25:14 +0000
+Received: by outflank-mailman (input) for mailman id 15776;
+ Fri, 30 Oct 2020 12:25:14 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=e1N+=EF=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
- id 1kYTRF-0005UT-9A
- for xen-devel@lists.xenproject.org; Fri, 30 Oct 2020 12:23:25 +0000
-Received: from out5-smtp.messagingengine.com (unknown [66.111.4.29])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=2BB6=EF=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1kYTT0-0005c1-36
+ for xen-devel@lists.xenproject.org; Fri, 30 Oct 2020 12:25:14 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3ec2294a-fc3b-4917-821d-2e6810213d68;
- Fri, 30 Oct 2020 12:23:24 +0000 (UTC)
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailout.nyi.internal (Postfix) with ESMTP id 686D45C00F8;
- Fri, 30 Oct 2020 08:23:24 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute3.internal (MEProxy); Fri, 30 Oct 2020 08:23:24 -0400
-Received: from mail-itl (ip5b40aa59.dynamic.kabel-deutschland.de
- [91.64.170.89])
- by mail.messagingengine.com (Postfix) with ESMTPA id 309943064680;
- Fri, 30 Oct 2020 08:23:23 -0400 (EDT)
+ id 0986b4f2-a403-4778-9033-1e188fc9905d;
+ Fri, 30 Oct 2020 12:25:13 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 783E7ACAC;
+ Fri, 30 Oct 2020 12:25:12 +0000 (UTC)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=e1N+=EF=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
-	id 1kYTRF-0005UT-9A
-	for xen-devel@lists.xenproject.org; Fri, 30 Oct 2020 12:23:25 +0000
-X-Inumbo-ID: 3ec2294a-fc3b-4917-821d-2e6810213d68
-Received: from out5-smtp.messagingengine.com (unknown [66.111.4.29])
+	(envelope-from <SRS0=2BB6=EF=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+	id 1kYTT0-0005c1-36
+	for xen-devel@lists.xenproject.org; Fri, 30 Oct 2020 12:25:14 +0000
+X-Inumbo-ID: 0986b4f2-a403-4778-9033-1e188fc9905d
+Received: from mx2.suse.de (unknown [195.135.220.15])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 3ec2294a-fc3b-4917-821d-2e6810213d68;
-	Fri, 30 Oct 2020 12:23:24 +0000 (UTC)
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
-	by mailout.nyi.internal (Postfix) with ESMTP id 686D45C00F8;
-	Fri, 30 Oct 2020 08:23:24 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
-  by compute3.internal (MEProxy); Fri, 30 Oct 2020 08:23:24 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to:x-me-proxy
-	:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; bh=pYlWoI
-	HBkx76rcoqE72ZS3cHrDn/k/jdYN8WkyOhYOg=; b=C4AJSjmLgNRYmLCN3koEyK
-	JIJ4P1WtJBvOrV+jCFnxYIjC6wf4kB76ht7kwHSQSZYfm/8v16IW3zdZV2JnvBfm
-	u+hWpSme6giyWIKxmDY9vA0hHjUNoqJQMvlfzcMN0b3JhbGCEIF1oAlMVwSJIqa1
-	Et0j9QJKKfdsl7oKMi0foZupWwZpXSSnmCWH2i9dcXuV/a2UqzFJ8pCceV/gFAqA
-	fMBG+L1RKkYU+BLNyf3ObzGiTWoaH9GbNVh5inzEp0DqHgQ8HB0Ky5AHAOhNuX+Q
-	5NVVVmqMKn3eK1e7DQR5S6e5c0fllw8YSi2K3OgOZ1Agph9Uc4Gag1RMgLF0o95w
-	==
-X-ME-Sender: <xms:vAWcXxchoVnHUzTrsxsZaW3zMddJq411tkCdK0gryC3MO05-cPPLyA>
-    <xme:vAWcX_Pcf6gLSIPSkCryJ5nOvdX9T52Es5nSm_e6Iltdf-6cSvMfcfNK39TP5Wcpq
-    MA5H0fwDlz4ZQ>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedujedrleehgdefjecutefuodetggdotefrodftvf
-    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
-    uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
-    fjughrpeffhffvuffkfhggtggujgesghdtreertddtjeenucfhrhhomhepofgrrhgvkhcu
-    ofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuceomhgrrhhmrghrvghksehinhhvih
-    hsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepgeetvefh
-    ueefueevkeduvdfftefhueetuddvkeehtdelvdevudffvefhteeluefgnecuffhomhgrih
-    hnpehrvghprhhoughutghisghlvgdqsghuihhlughsrdhorhhgnecukfhppeeluddrieeg
-    rddujedtrdekleenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfh
-    hrohhmpehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhm
-X-ME-Proxy: <xmx:vAWcX6i9VwAk9Baqn3zHD-uPgN5PktAkGcMMWedWp76JeYnKVRhf-w>
-    <xmx:vAWcX68chMXxVS6UBu18UzDgiMCAWRLQpEQq1P4VaM1XJWLjT6a1_g>
-    <xmx:vAWcX9s0nTp-YK-4T5kbC84UaWASG-PbV4bxBlW9rOVwxGjPxQP3Bw>
-    <xmx:vAWcX27iiZeQpMaAz8T5O3nr8qzZuAmbySGnIT7fKp7oZpoNGc95qg>
-Received: from mail-itl (ip5b40aa59.dynamic.kabel-deutschland.de [91.64.170.89])
-	by mail.messagingengine.com (Postfix) with ESMTPA id 309943064680;
-	Fri, 30 Oct 2020 08:23:23 -0400 (EDT)
-Date: Fri, 30 Oct 2020 13:23:19 +0100
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: =?utf-8?Q?Fr=C3=A9d=C3=A9ric_Pierret_=28fepitre=29?= <frederic.pierret@qubes-os.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
-	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>,
-	xen-devel@lists.xenproject.org
-Subject: Re: [PATCH v1 1/2] No insert of the build timestamp into the x86 xen
- efi binary
-Message-ID: <20201030122319.GA16953@mail-itl>
-References: <cover.1603725003.git.frederic.pierret@qubes-os.org>
- <64fc67bc2227d6cf92e079228c9f8d2d6404b001.1603725003.git.frederic.pierret@qubes-os.org>
- <93b0b06e-cb73-66eb-3535-e7ab2ca60bf8@suse.com>
+	id 0986b4f2-a403-4778-9033-1e188fc9905d;
+	Fri, 30 Oct 2020 12:25:13 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1604060712;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=fY5MJPEehqjsdGHD3mqEvqZ1bxezrK0uVUdXe0GmyF8=;
+	b=OB0sht1NH9jT7eTWqtPO7ySIMgoxBDuspfJ+SNL+xEbDPxb0VfGo6Nzyt3xIjNBnr6otUF
+	VsCNAwhfBD4kZ5kdlGWGLddxmLpi3EtWDtl0S6l135Hcu2GO5Au9Fg8KxlqAK61UdvmwpI
+	XgrrWnODbhd7Fnj9nkkRz28IrBARaik=
+Received: from relay2.suse.de (unknown [195.135.221.27])
+	by mx2.suse.de (Postfix) with ESMTP id 783E7ACAC;
+	Fri, 30 Oct 2020 12:25:12 +0000 (UTC)
+Subject: Re: [PATCH v2 6/8] evtchn: convert vIRQ lock to an r/w one
+To: Julien Grall <julien@xen.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <George.Dunlap@eu.citrix.com>, Ian Jackson
+ <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <19babf20-3649-5c63-44a9-7edfa81835aa@suse.com>
+ <53a2fc39-1bf1-38ce-bbdf-b512c5279b4f@suse.com>
+ <6dec1d48-b8c8-6122-087c-38f36f30596e@xen.org>
+ <33ff45e9-d869-9262-29e0-fa66e3ffb726@suse.com>
+ <60559ccf-f8f5-4c54-0867-b8a893df3f0c@xen.org>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <478e8353-e8f9-4cee-20d6-50e1619ac680@suse.com>
+Date: Fri, 30 Oct 2020 13:25:11 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.4.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="wRRV7LY7NUeQGEoC"
-Content-Disposition: inline
-In-Reply-To: <93b0b06e-cb73-66eb-3535-e7ab2ca60bf8@suse.com>
+In-Reply-To: <60559ccf-f8f5-4c54-0867-b8a893df3f0c@xen.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
+On 30.10.2020 13:08, Julien Grall wrote:
+> On 30/10/2020 12:00, Jan Beulich wrote:
+>> On 30.10.2020 11:57, Julien Grall wrote:
+>>> On 20/10/2020 15:10, Jan Beulich wrote:
+>>>> --- a/xen/common/event_channel.c
+>>>> +++ b/xen/common/event_channel.c
+>>>> @@ -449,6 +449,13 @@ int evtchn_bind_virq(evtchn_bind_virq_t
+>>>>    
+>>>>        spin_unlock_irqrestore(&chn->lock, flags);
+>>>>    
+>>>> +    /*
+>>>> +     * If by any, the update of virq_to_evtchn[] would need guarding by
+>>>> +     * virq_lock, but since this is the last action here, there's no strict
+>>>> +     * need to acquire the lock. Hnece holding event_lock isn't helpful
+>>>
+>>> s/Hnece/Hence/
+>>>
+>>>> +     * anymore at this point, but utilize that its unlocking acts as the
+>>>> +     * otherwise necessary smp_wmb() here.
+>>>> +     */
+>>>>        v->virq_to_evtchn[virq] = bind->port = port;
+>>>
+>>> I think all access to v->virq_to_evtchn[virq] should use ACCESS_ONCE()
+>>> or {read, write}_atomic() to avoid any store/load tearing.
+>>
+>> IOW you're suggesting this to be the subject of a separate patch?
+>> I don't think such a conversion belongs here (nor even in this
+>> series, seeing the much wider applicability of such a change
+>> throughout the code base).
+>> Or are you seeing anything here which
+>> would require such a conversion to be done as a prereq?
+> 
+> Yes, your comment implies that it is fine to write to virq_to_evtchn[] 
+> without the lock taken. However, this is *only* valid if the compiler 
+> doesn't tear down load/store.
+> 
+> So this is a pre-req to get your comment valid.
 
---wRRV7LY7NUeQGEoC
-Content-Type: text/plain; protected-headers=v1; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH v1 1/2] No insert of the build timestamp into the x86 xen
- efi binary
+That's an interesting way to view it. I'm only adding the comment,
+without changing the code here. Iirc it was you who asked me to
+add the comment. And now this is leading to you wanting me to do
+entirely unrelated changes, when the code base is full of similar
+assumptions towards no torn accesses? (Yes, I certainly can add
+such a patch, but no, I don't think this should be a requirement
+here.)
 
-On Fri, Oct 30, 2020 at 01:08:44PM +0100, Jan Beulich wrote:
-> On 30.10.2020 13:03, Fr=C3=A9d=C3=A9ric Pierret (fepitre) wrote:
->=20
-> > --- a/xen/arch/x86/Makefile
-> > +++ b/xen/arch/x86/Makefile
-> > @@ -170,6 +170,7 @@ EFI_LDFLAGS +=3D --major-image-version=3D$(XEN_VERS=
-ION)
-> >  EFI_LDFLAGS +=3D --minor-image-version=3D$(XEN_SUBVERSION)
-> >  EFI_LDFLAGS +=3D --major-os-version=3D2 --minor-os-version=3D0
-> >  EFI_LDFLAGS +=3D --major-subsystem-version=3D2 --minor-subsystem-versi=
-on=3D0
-> > +EFI_LDFLAGS +=3D --no-insert-timestamp
->=20
-> Generally I prefer binaries to carry timestamps, when they are
-> intended to do so (i.e. when they have a respective field). So
-> I think if no timestamp is wanted, it should be as an option
-> (not sure about the default).
-
-What about setting it to the SOURCE_DATE_EPOCH[1] variable value, if
-present? Of course if there is an option to set explicit timestamp
-value.
-
-[1] https://reproducible-builds.org/docs/source-date-epoch/
-
-> This said, I didn't think time stamps got meaningfully in the
-> way of reproducible builds - ignoring the minor differences
-> cause by them, especially when they sit at well known offsets
-> in the binaries, shouldn't be a big deal.
-
-It is a big deal. There is a huge difference between running sha256sum
-(or your other favorite hash) on two build artifacts, and using a
-specialized tool/script to compare each file separately. Note the
-xen.efi may be buried very deep in the thing you compare, for example
-inside deb/rpm and then ISO image (installation image), at which point
-it's far from "they sit at well known offsets".
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-A: Because it messes up the order in which people normally read text.
-Q: Why is top-posting such a bad thing?
-
---wRRV7LY7NUeQGEoC
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAl+cBbYACgkQ24/THMrX
-1yy9QAf+MMtxtyqczE/lrrkRz58C6qrJyls5kWd5ZSkOjaSkkHkEgyAphd99EX9v
-iSdMjCvpXWlvRnA1YzZ74fBMgnPEOZd88bKM05MohotmoAsMbFUnHAFPDKb2H+P5
-nvdpd6hYinqVZ+OJdW8covmH/gEu1dXV3ZH+2C0WM2OVpKtkpv2yxm6WoBpHN5Lq
-xjB9uxsXjiT+a+IsEe6GpGRCjU2jvCO5bjA3OapyWLbMTr/hPIhXbG6pcACexAfr
-i/LNx2FWoew2a6LcrBFLt3982b7rfHxz6uk162MGzHdQ3QD+86RIJwSYqkYDewCd
-cpZcrR+RJ/FMGe9Ol43uMv7T69BvxA==
-=JH4j
------END PGP SIGNATURE-----
-
---wRRV7LY7NUeQGEoC--
+Jan
 
