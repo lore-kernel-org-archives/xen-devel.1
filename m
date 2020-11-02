@@ -2,28 +2,28 @@ Return-Path: <SRS0=5c5y=EI=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9F13BC388F2
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2020 13:13:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DD8B6C4742C
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2020 13:13:08 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2D98521D40
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2020 13:13:06 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 6D3BD21D40
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2020 13:13:08 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="g2SX6IO7"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2D98521D40
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="JJDx9OQI"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6D3BD21D40
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.17641.42403 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.17643.42428 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kZZdd-0007rW-58; Mon, 02 Nov 2020 13:12:45 +0000
+	id 1kZZdh-0007uT-Lx; Mon, 02 Nov 2020 13:12:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 17641.42403; Mon, 02 Nov 2020 13:12:45 +0000
+Received: by outflank-mailman (output) from mailman id 17643.42428; Mon, 02 Nov 2020 13:12:49 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,45 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kZZdd-0007rP-28; Mon, 02 Nov 2020 13:12:45 +0000
-Received: by outflank-mailman (input) for mailman id 17641;
- Mon, 02 Nov 2020 13:12:43 +0000
+	id 1kZZdh-0007uM-IH; Mon, 02 Nov 2020 13:12:49 +0000
+Received: by outflank-mailman (input) for mailman id 17643;
+ Mon, 02 Nov 2020 13:12:48 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=2ZVo=EI=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kZZdb-0007rF-9m
- for xen-devel@lists.xenproject.org; Mon, 02 Nov 2020 13:12:43 +0000
+ id 1kZZdg-0007rF-5g
+ for xen-devel@lists.xenproject.org; Mon, 02 Nov 2020 13:12:48 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id e6f08998-ba57-4cb0-b617-e8048056c0f4;
+ id c5cd9084-e640-4889-ab05-49d381c193a2;
  Mon, 02 Nov 2020 13:12:42 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 98FD6B8E4;
+ by mx2.suse.de (Postfix) with ESMTP id C226AB8EC;
  Mon,  2 Nov 2020 13:12:41 +0000 (UTC)
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=2ZVo=EI=suse.com=jgross@srs-us1.protection.inumbo.net>)
-	id 1kZZdb-0007rF-9m
-	for xen-devel@lists.xenproject.org; Mon, 02 Nov 2020 13:12:43 +0000
-X-Inumbo-ID: e6f08998-ba57-4cb0-b617-e8048056c0f4
+	id 1kZZdg-0007rF-5g
+	for xen-devel@lists.xenproject.org; Mon, 02 Nov 2020 13:12:48 +0000
+X-Inumbo-ID: c5cd9084-e640-4889-ab05-49d381c193a2
 Received: from mx2.suse.de (unknown [195.135.220.15])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
-	id e6f08998-ba57-4cb0-b617-e8048056c0f4;
+	id c5cd9084-e640-4889-ab05-49d381c193a2;
 	Mon, 02 Nov 2020 13:12:42 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	t=1604322761;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=2E8DyD98Ac4pDiAkzO0onJ0vvorQRsLItcjw4sbcAOA=;
-	b=g2SX6IO7NtiWY/T/JCrKCwH/FknIsXtCCowAfOc8vFserqcrfAErCX8WJX9sMP9dJ332mf
-	8q2jgNwf1UECS/tlrRK30ZpXHX6FWgeUpGF8msz/YdzLLyt0xvRxwzv4oFlpF6D9gvEkOD
-	u2TTxW6Ye2/aFyx75jZXDsjKJZxCMvE=
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=SMWFDeqyO4Bqdr2XBTO3XuyCVTVJJjcu3BY2gEaI7+0=;
+	b=JJDx9OQIvSVxsESeXmi9zIcNr8tsUuIarqK6CP/0pAG4ox1NPFkoPUl92GKoGN1awPs6va
+	QLETHCgUOgD5qVHaXfXZu+GUBWq5RJE19pfDqzTVLrbPTzjKJEFbl8giH0jwd7Gk/NRfzw
+	ZclF903txCmPv+XjdDooLn8+i+qrvkw=
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 98FD6B8E4;
+	by mx2.suse.de (Postfix) with ESMTP id C226AB8EC;
 	Mon,  2 Nov 2020 13:12:41 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
@@ -87,25 +88,108 @@ Cc: Juergen Gross <jgross@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v2 0/2] xen/locking: fix and enhance lock debugging
-Date: Mon,  2 Nov 2020 14:12:37 +0100
-Message-Id: <20201102131239.14134-1-jgross@suse.com>
+Subject: [PATCH v2 1/2] xen/spinlocks: spin_trylock with interrupts off is always fine
+Date: Mon,  2 Nov 2020 14:12:38 +0100
+Message-Id: <20201102131239.14134-2-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20201102131239.14134-1-jgross@suse.com>
+References: <20201102131239.14134-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This small series fixes two issues with spinlock debug code and adds
-lock debug code to rwlocks in order to catch IRQ violations.
+Even if a spinlock was taken with interrupts on before calling
+spin_trylock() with interrupts off is fine, as it can't block.
 
-Juergen Gross (2):
-  xen/spinlocks: spin_trylock with interrupts off is always fine
-  xen/rwlock: add check_lock() handling to rwlocks
+Add a bool parameter "try" to check_lock() for handling this case.
 
- xen/common/spinlock.c      | 17 ++++++++++-------
- xen/include/xen/rwlock.h   | 11 +++++++++++
- xen/include/xen/spinlock.h |  2 ++
- 3 files changed, 23 insertions(+), 7 deletions(-)
+Remove the call of check_lock() from _spin_is_locked(), as it really
+serves no purpose and it can even lead to false crashes, e.g. when
+a lock was taken correctly with interrupts enabled and the call of
+_spin_is_locked() happened with interrupts off. In case the lock is
+taken with wrong interrupt flags this will be catched when taking
+the lock.
 
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+---
+V2:
+- corrected comment (Jan Beulich)
+---
+ xen/common/spinlock.c | 18 +++++++++++-------
+ 1 file changed, 11 insertions(+), 7 deletions(-)
+
+diff --git a/xen/common/spinlock.c b/xen/common/spinlock.c
+index ce3106e2d3..b4aaf6bce6 100644
+--- a/xen/common/spinlock.c
++++ b/xen/common/spinlock.c
+@@ -13,7 +13,7 @@
+ 
+ static atomic_t spin_debug __read_mostly = ATOMIC_INIT(0);
+ 
+-static void check_lock(union lock_debug *debug)
++static void check_lock(union lock_debug *debug, bool try)
+ {
+     bool irq_safe = !local_irq_is_enabled();
+ 
+@@ -42,7 +42,13 @@ static void check_lock(union lock_debug *debug)
+      * 
+      * To guard against this subtle bug we latch the IRQ safety of every
+      * spinlock in the system, on first use.
++     *
++     * A spin_trylock() with interrupts off is always fine, as this can't
++     * block and above deadlock scenario doesn't apply.
+      */
++    if ( try && irq_safe )
++        return;
++
+     if ( unlikely(debug->irq_safe != irq_safe) )
+     {
+         union lock_debug seen, new = { 0 };
+@@ -102,7 +108,7 @@ void spin_debug_disable(void)
+ 
+ #else /* CONFIG_DEBUG_LOCKS */
+ 
+-#define check_lock(l) ((void)0)
++#define check_lock(l, t) ((void)0)
+ #define check_barrier(l) ((void)0)
+ #define got_lock(l) ((void)0)
+ #define rel_lock(l) ((void)0)
+@@ -159,7 +165,7 @@ void inline _spin_lock_cb(spinlock_t *lock, void (*cb)(void *), void *data)
+     spinlock_tickets_t tickets = SPINLOCK_TICKET_INC;
+     LOCK_PROFILE_VAR;
+ 
+-    check_lock(&lock->debug);
++    check_lock(&lock->debug, false);
+     preempt_disable();
+     tickets.head_tail = arch_fetch_and_add(&lock->tickets.head_tail,
+                                            tickets.head_tail);
+@@ -220,8 +226,6 @@ void _spin_unlock_irqrestore(spinlock_t *lock, unsigned long flags)
+ 
+ int _spin_is_locked(spinlock_t *lock)
+ {
+-    check_lock(&lock->debug);
+-
+     /*
+      * Recursive locks may be locked by another CPU, yet we return
+      * "false" here, making this function suitable only for use in
+@@ -236,7 +240,7 @@ int _spin_trylock(spinlock_t *lock)
+ {
+     spinlock_tickets_t old, new;
+ 
+-    check_lock(&lock->debug);
++    check_lock(&lock->debug, true);
+     old = observe_lock(&lock->tickets);
+     if ( old.head != old.tail )
+         return 0;
+@@ -294,7 +298,7 @@ int _spin_trylock_recursive(spinlock_t *lock)
+     BUILD_BUG_ON(NR_CPUS > SPINLOCK_NO_CPU);
+     BUILD_BUG_ON(SPINLOCK_RECURSE_BITS < 3);
+ 
+-    check_lock(&lock->debug);
++    check_lock(&lock->debug, true);
+ 
+     if ( likely(lock->recurse_cpu != cpu) )
+     {
 -- 
 2.26.2
 
