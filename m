@@ -2,28 +2,28 @@ Return-Path: <SRS0=JyiM=EJ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-11.4 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SIGNED_OFF_BY,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B1FFC2D0A3
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2020 20:06:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4954DC2D0A3
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2020 20:32:16 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id ED53920674
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2020 20:06:01 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id E20D121556
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2020 20:32:15 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="nh29CwME"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org ED53920674
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="PaFtiWAB"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E20D121556
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.18678.43676 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.18695.43687 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ka2Yf-0006ZB-KY; Tue, 03 Nov 2020 20:05:33 +0000
+	id 1ka2yB-0000iI-LZ; Tue, 03 Nov 2020 20:31:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 18678.43676; Tue, 03 Nov 2020 20:05:33 +0000
+Received: by outflank-mailman (output) from mailman id 18695.43687; Tue, 03 Nov 2020 20:31:55 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,180 +38,178 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ka2Yf-0006Z4-HQ; Tue, 03 Nov 2020 20:05:33 +0000
-Received: by outflank-mailman (input) for mailman id 18678;
- Tue, 03 Nov 2020 20:05:32 +0000
+	id 1ka2yB-0000iB-IF; Tue, 03 Nov 2020 20:31:55 +0000
+Received: by outflank-mailman (input) for mailman id 18695;
+ Tue, 03 Nov 2020 20:31:53 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=9NW0=EJ=gmail.com=persaur@srs-us1.protection.inumbo.net>)
- id 1ka2Yd-0006Yz-TU
- for xen-devel@lists.xenproject.org; Tue, 03 Nov 2020 20:05:32 +0000
-Received: from mail-qk1-x742.google.com (unknown [2607:f8b0:4864:20::742])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 06068785-d566-466f-89da-6d579dc82a36;
- Tue, 03 Nov 2020 20:05:30 +0000 (UTC)
-Received: by mail-qk1-x742.google.com with SMTP id 12so12391830qkl.8
- for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2020 12:05:30 -0800 (PST)
-Received: from [100.64.74.11] ([173.245.215.240])
- by smtp.gmail.com with ESMTPSA id 19sm11824433qkf.93.2020.11.03.12.05.29
+ (envelope-from <SRS0=3DNo=EJ=redhat.com=philmd@srs-us1.protection.inumbo.net>)
+ id 1ka2y9-0000i6-Ln
+ for xen-devel@lists.xenproject.org; Tue, 03 Nov 2020 20:31:53 +0000
+Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+ id 4df526e7-acc7-48ef-abe8-4c17ac596221;
+ Tue, 03 Nov 2020 20:31:52 +0000 (UTC)
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-541-elD9pKsNO8aUM0MPiXE0Dw-1; Tue, 03 Nov 2020 15:31:50 -0500
+Received: by mail-wm1-f72.google.com with SMTP id t201so249853wmt.1
+ for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2020 12:31:50 -0800 (PST)
+Received: from [192.168.1.36] (234.red-83-42-66.dynamicip.rima-tde.net.
+ [83.42.66.234])
+ by smtp.gmail.com with ESMTPSA id x10sm26462274wrp.62.2020.11.03.12.31.47
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 03 Nov 2020 12:05:29 -0800 (PST)
+ Tue, 03 Nov 2020 12:31:48 -0800 (PST)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=9NW0=EJ=gmail.com=persaur@srs-us1.protection.inumbo.net>)
-	id 1ka2Yd-0006Yz-TU
-	for xen-devel@lists.xenproject.org; Tue, 03 Nov 2020 20:05:32 +0000
-X-Inumbo-ID: 06068785-d566-466f-89da-6d579dc82a36
-Received: from mail-qk1-x742.google.com (unknown [2607:f8b0:4864:20::742])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 06068785-d566-466f-89da-6d579dc82a36;
-	Tue, 03 Nov 2020 20:05:30 +0000 (UTC)
-Received: by mail-qk1-x742.google.com with SMTP id 12so12391830qkl.8
-        for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2020 12:05:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=content-transfer-encoding:from:mime-version:subject:date:message-id
-         :references:cc:in-reply-to:to;
-        bh=/K+j6MUmo9QZfRRtW1WN2ZHDw+ebAOYRkq1Ti/Y24Ik=;
-        b=nh29CwME8VFbRKAYPXiIXq5Ys6YNYEpDegukX1cgSStgq6X8+HjJc+ymKQXGxEo2IM
-         wcF3DZs5P5qtCiGu5Qn8E5HHRm0lORadA4HaStMdOx09Zx8y7Gy3ZKHyJuBccldlTMS9
-         33Q6shvKQ+g/AvmPMIABAyjDEdsUX++8sIfdGFCq3wGOl5wa2hPt9Lzvlc4rl2U3Emoz
-         FtVzi933+yAgpYML7j8hZR4GCzPJXiOC5iEXecG++hTH/eyEQZHVSrTdZTDZBUQXv8Wn
-         I/PVv0i2H1wK8jeomTHUyk1qXbfUZryjN2vayU9UIqWY7Yj0pzEtlXE5YJAnVGrJ39zP
-         D7nw==
+	(envelope-from <SRS0=3DNo=EJ=redhat.com=philmd@srs-us1.protection.inumbo.net>)
+	id 1ka2y9-0000i6-Ln
+	for xen-devel@lists.xenproject.org; Tue, 03 Nov 2020 20:31:53 +0000
+X-Inumbo-ID: 4df526e7-acc7-48ef-abe8-4c17ac596221
+Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+	id 4df526e7-acc7-48ef-abe8-4c17ac596221;
+	Tue, 03 Nov 2020 20:31:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1604435512;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=W2xoQMtcZ45M2FDoabAb+oIuMsPmr+LIxDstfsaLsQQ=;
+	b=PaFtiWABs/hju6rEiVxiwFwvi8p0nxvCyqd6C+UnXMW6h9Ui7sudt53kCUL5m6hNcBdJjP
+	ADhzP26AYryahEj0+EJcZgag9AFIDo7LsBoTtcAJBhUb8VuWcIc0d2dAqJzJlISc7PFSsL
+	/85ec3wJIOi51sZevWxlXXD9vih4GyA=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-541-elD9pKsNO8aUM0MPiXE0Dw-1; Tue, 03 Nov 2020 15:31:50 -0500
+X-MC-Unique: elD9pKsNO8aUM0MPiXE0Dw-1
+Received: by mail-wm1-f72.google.com with SMTP id t201so249853wmt.1
+        for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2020 12:31:50 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:content-transfer-encoding:from:mime-version
-         :subject:date:message-id:references:cc:in-reply-to:to;
-        bh=/K+j6MUmo9QZfRRtW1WN2ZHDw+ebAOYRkq1Ti/Y24Ik=;
-        b=H5+Hhb+DvENB9NsKzMymjwM92Tl18Oq11UKnPgmxKRmcdMCM/MNtE2CzXvVDSGFBKS
-         1IAFSlmTDscgapxi1mKzjK/qAO07Xh3THMoY0FN1G7cChe0v6VrCRDP4YJV3eOGlBmEV
-         VlEBfuULsGcLMGPDgUeC10/oTuelo06xRf6Jd0w0vN0vkdMxjRv+aMZLGneRsAX4+RIr
-         7+Cy3HJxFmRa+Xhv/kw6VNYBt8FBnp5tjRkZ5hAQm9eoObiHmRiNBSrLFzhJdM21P+ud
-         rnA46nJyf/7PF/BVGfsPZPsmPo6OdrnIfaUavCP1eSKIl5Yp3IZK/MjYi0cfNsfvHj6i
-         Dx3A==
-X-Gm-Message-State: AOAM5303xG2kbt1NWEJlEMoecoxUR77GnkMJGb0l88yNqmnD4Y3r9euE
-	BDg9eg6/6NTTOOebOrmFGeAQGO4HqBSECA==
-X-Google-Smtp-Source: ABdhPJzq8RXLBFiye+POImtg2s5h98c8xut2WGrsrtC+NCMPi3n1i+wQTpceCeg3xgDhSSPosO21qQ==
-X-Received: by 2002:a37:4692:: with SMTP id t140mr22333513qka.275.1604433930209;
-        Tue, 03 Nov 2020 12:05:30 -0800 (PST)
-Received: from [100.64.74.11] ([173.245.215.240])
-        by smtp.gmail.com with ESMTPSA id 19sm11824433qkf.93.2020.11.03.12.05.29
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=W2xoQMtcZ45M2FDoabAb+oIuMsPmr+LIxDstfsaLsQQ=;
+        b=ZOygKLayUn8dbz27XUEIDvqC4GvmERtb25NBtb6zUyWIYHSLRFWk3UUyVrpilWk/rI
+         6jIZQjG46AZAgch1NYiIBkPp1kxLrXvKvldd7JpHAjirtOWBIcWsqwFKn2UG6eAQltHm
+         9HI7C9FMOwQV57LDLHddJh+yiRBIGS+wE0KSrm60GNvJED9sxjTjgCp1DC5QaLBPAb+n
+         jPenYT0xdoBA+AkJ23LPZswGuTJsXD5DyBrj7KkUo8REMUNrBFPe63jlX682QEasx6/u
+         5p98AdmuCsxecJZsG0usiD75oH+reA//gVeft57YeRvdN5YIo9o6jQNCKKeAViPcLo7T
+         ZeCw==
+X-Gm-Message-State: AOAM5308FWoML/qu9FZWhkeqDIqEe7heL48oMNHEs+5Gba1Kk7PfPDJm
+	JNN1EZrY5p3qJ/6Rc3ewqsZjKsw1SuQAFH74j6ZLtl54Uju7IUiB9fTVM6IXH1tZr4YNFNUbpyF
+	w2ZB3zboOhHBpfPI37DRXwyAptok=
+X-Received: by 2002:adf:e892:: with SMTP id d18mr29946474wrm.103.1604435509296;
+        Tue, 03 Nov 2020 12:31:49 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJz5Kal2Q2BqN2crCt7Phj5MtwdE1YSjlg+L4Ckbm8BNES6hH2qy/addHtnYSbGKkq4WxUWSBQ==
+X-Received: by 2002:adf:e892:: with SMTP id d18mr29946459wrm.103.1604435509125;
+        Tue, 03 Nov 2020 12:31:49 -0800 (PST)
+Received: from [192.168.1.36] (234.red-83-42-66.dynamicip.rima-tde.net. [83.42.66.234])
+        by smtp.gmail.com with ESMTPSA id x10sm26462274wrp.62.2020.11.03.12.31.47
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 03 Nov 2020 12:05:29 -0800 (PST)
+        Tue, 03 Nov 2020 12:31:48 -0800 (PST)
+Subject: Re: [Qemu-devel] [PULL 09/36] 9p: simplify source file selection
+To: Paolo Bonzini <pbonzini@redhat.com>, qemu-devel@nongnu.org,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?= <marcandre.lureau@redhat.com>,
+ "Daniel P . Berrange" <berrange@redhat.com>,
+ Cornelia Huck <cohuck@redhat.com>, Greg Kurz <groug@kaod.org>,
+ Christian Schoenebeck <qemu_oss@crudebyte.com>
+References: <1566284395-30287-1-git-send-email-pbonzini@redhat.com>
+ <1566284395-30287-10-git-send-email-pbonzini@redhat.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
+Message-ID: <ab9a47b9-8ac5-c8f1-b035-b8b812551b3b@redhat.com>
+Date: Tue, 3 Nov 2020 21:31:47 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.3.1
+MIME-Version: 1.0
+In-Reply-To: <1566284395-30287-10-git-send-email-pbonzini@redhat.com>
+Authentication-Results: relay.mimecast.com;
+	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=philmd@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-From: Rich Persaud <persaur@gmail.com>
-Mime-Version: 1.0 (1.0)
-Subject: Re: [RFC PATCH] xen: EXPERT clean-up
-Date: Tue, 3 Nov 2020 15:05:28 -0500
-Message-Id: <E359BD65-2917-4087-A6E1-0AD5521CF823@gmail.com>
-References: <alpine.DEB.2.21.2011031123420.5812@sstabellini-ThinkPad-T480s>
-Cc: Jan Beulich <jbeulich@suse.com>,
- Stefano Stabellini <stefano.stabellini@xilinx.com>,
- andrew.cooper3@citrix.com, george.dunlap@citrix.com, iwj@xenproject.org,
- julien@xen.org, wl@xen.org, xen-devel@lists.xenproject.org,
- Daniel DeGraaf <dgdegra@tycho.nsa.gov>,
- Daniel Smith <dpsmith@apertussolutions.com>,
- Roman Shaposhnik <roman@zededa.com>,
- =?utf-8?Q?Marek_Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-In-Reply-To: <alpine.DEB.2.21.2011031123420.5812@sstabellini-ThinkPad-T480s>
-To: Stefano Stabellini <sstabellini@kernel.org>
-X-Mailer: iPad Mail (18A8395)
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-On Nov 3, 2020, at 14:37, Stefano Stabellini <sstabellini@kernel.org> wrote:=
+Hi Paolo,
 
->=20
-> =EF=BB=BFOn Tue, 3 Nov 2020, Jan Beulich wrote:
->>> On 02.11.2020 22:41, Stefano Stabellini wrote:
->>> On Mon, 2 Nov 2020, Jan Beulich wrote:
->>>> On 31.10.2020 01:24, Stefano Stabellini wrote:
->>>>> @@ -79,8 +79,8 @@ config SBSA_VUART_CONSOLE
->>>>>      SBSA Generic UART implements a subset of ARM PL011 UART.
->>>>>=20
->>>>> config ARM_SSBD
->>>>> -    bool "Speculative Store Bypass Disable" if EXPERT
->>>>> -    depends on HAS_ALTERNATIVE
->>>>> +    bool "Speculative Store Bypass Disable"
->>>>> +    depends on HAS_ALTERNATIVE && EXPERT
->>>>>    default y
->>>>=20
->>>> At the example of this, I'm afraid when the default isn't "n"
->>>> (or there's no default directive at all, as ought to be
->>>> equivalent to and preferred over "default n"), such a
->>>> transformation is not functionally identical: Before your
->>>> change, with !EXPERT this option defaults to y. After your
->>>> change this option is unavailable (which resolves to it being
->>>> off for all consuming purposes).
->>>>=20
->>>> IOW there are reasons to have "if ..." attached to the prompts
->>>> (for this construct indeed only making the prompt conditional,
->>>> not the entire option), but there are also cases where the
->>>> cleanup you do is indeed desirable / helpful.
->>>=20
->>> Yeah, thanks for catching it, it is obviously a problem.
->>>=20
->>> My intention was just to "tag" somehow the options to EXPERT so that it
->>> would show on the menu. Maybe a better, simpler, way to do it is
->>> to add the word "EXPERT" to the one line prompt:
->>>=20
->>> config ARM_SSBD
->>> -    bool "Speculative Store Bypass Disable" if EXPERT
->>> +    bool "Speculative Store Bypass Disable (EXPERT)" if EXPERT
->>>    depends on HAS_ALTERNATIVE
->>>    default y
->>>    help
->>>=20
->>>=20
->>> What do you think?
->>=20
->> While on the surface this may look like an improvement, I don't
->> see how it would actually help: If you read the Kconfig file
->> itself, the dependency is seen anyway. And on the menu I don't
->> see the point of telling someone who has enabled EXPERT that a
->> certain option is (or is not) an expert one. If they think
->> they're experts, so should they be treated. (It was, after all,
->> a deliberate decision to make enabling expert mode easier, and
->> hence easier to use for what one might consider not-really-
->> experts. I realize saying so may be considered tendentious; I
->> mean it in a purely technical sense, and I'd like to apologize
->> in advance to anyone not sharing this as a possible perspective
->> to take.)
->>=20
->> Plus, of course, the addition of such (EXPERT) markers to
->> future options' prompts is liable to get forgotten now and then,
->> so sooner or later we'd likely end up with an inconsistent
->> mixture anyway.
->=20
-> I tend to agree with you on everything you wrote. The fundamental issue
-> is that we are (mis)using EXPERT to tag features that are experimental,
-> as defined by SUPPORT.md.
->=20
-> It is important to be able to distinguish clearly at the kconfig level
-> options that are (security) supported from options that are
-> unsupported/experimental. Today the only way to do it is with EXPERT
-> which is not great because:
->=20
-> - it doesn't convey the idea that it is for unsupported/experimental
->  features
-> - if you want to enable one unsupported feature, it is not clear what
->  you have to do
->=20
-> So maybe we should replace EXPERT with UNSUPPORTED (or EXPERIMENTAL) in
-> the Kconfig menu?
->=20
-> It would make it clearer that by enabling UNSUPPORTED you are going to
-> get a configuration that is not security supported.
+On 8/20/19 8:59 AM, Paolo Bonzini wrote:
+> Express the complex conditions in Kconfig rather than Makefiles, since Kconfig
+> is better suited at expressing dependencies and detecting contradictions.
+> 
+> Cc: Marc-André Lureau <marcandre.lureau@redhat.com>
+> Signed-off-by: Paolo Bonzini <pbonzini@redhat.com>
+> ---
+>  Kconfig.host        | 1 +
+>  fsdev/Makefile.objs | 2 +-
+>  hw/9pfs/Kconfig     | 5 +++++
+>  3 files changed, 7 insertions(+), 1 deletion(-)
+> 
+> diff --git a/Kconfig.host b/Kconfig.host
+> index aec9536..bb6e116 100644
+> --- a/Kconfig.host
+> +++ b/Kconfig.host
+> @@ -28,6 +28,7 @@ config VHOST_USER
+>  
+>  config XEN
+>      bool
+> +    select FSDEV_9P if VIRTFS
 
-If going down this path, there should be one, authoritative, in-tree definit=
-ion of feature-level support from which Kconfig (build-time policy enforceme=
-nt) and SUPPORT.md (documentation) can be derived.  Later, even run-time enf=
-orcement can be similarly classified.  FuSA may also wish for documented pol=
-icy to align with enforcement.
+There is something odd with CONFIG_XEN, as it is used
+to select accelerator and hardware.
 
-Rich
+>  
+>  config VIRTFS
+>      bool
+> diff --git a/fsdev/Makefile.objs b/fsdev/Makefile.objs
+> index 24bbb3e..42cd70c 100644
+> --- a/fsdev/Makefile.objs
+> +++ b/fsdev/Makefile.objs
+> @@ -1,6 +1,6 @@
+>  # Lots of the fsdev/9pcode is pulled in by vl.c via qemu_fsdev_add.
+>  # only pull in the actual 9p backend if we also enabled virtio or xen.
+> -ifeq ($(call land,$(CONFIG_VIRTFS),$(call lor,$(CONFIG_VIRTIO_9P),$(CONFIG_XEN))),y)
+> +ifeq ($(CONFIG_FSDEV_9P),y)
+>  common-obj-y = qemu-fsdev.o 9p-marshal.o 9p-iov-marshal.o
+>  else
+>  common-obj-y = qemu-fsdev-dummy.o
+> diff --git a/hw/9pfs/Kconfig b/hw/9pfs/Kconfig
+> index 8c5032c..3ae5749 100644
+> --- a/hw/9pfs/Kconfig
+> +++ b/hw/9pfs/Kconfig
+> @@ -1,4 +1,9 @@
+> +config FSDEV_9P
+> +    bool
+> +    depends on VIRTFS
 
-> And ideally we would
-> also tag features like ACPI as UNSUPPORTED as I suggested above.
->=20
+Using "depends on VIRTFS && 9PFS" instead helps to
+reduce the link failure using --without-default-devices.
+
+> +
+>  config VIRTIO_9P
+>      bool
+>      default y
+>      depends on VIRTFS && VIRTIO
+> +    select FSDEV_9P
+
+Here I used "depends on FSDEV_9P && VIRTIO" but this
+doesn't look right...
+
+Is it possible to include "config-devices.h" in
+hw/xen/xen-legacy-backend.c to use CONFIG_9PFS?
+
+xen_be_register_common() unconditionally calls:
+
+  xen_be_register("9pfs", &xen_9pfs_ops);
+
+As I have no much idea about Xen & 9pfs, I'm a bit
+lost here (regarding the dependencies order).
+
+Thanks,
+
+Phil.
+
 
