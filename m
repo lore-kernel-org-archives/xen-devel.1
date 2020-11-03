@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-12.7 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 01528C2D0A3
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2020 09:30:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9981AC63798
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2020 09:30:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7BDE022403
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2020 09:30:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7BDE022403
+	by mail.kernel.org (Postfix) with ESMTPS id 348AB2242A
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2020 09:30:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 348AB2242A
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.18074.42844 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.18075.42856 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kZsdy-0003LM-3p; Tue, 03 Nov 2020 09:30:22 +0000
+	id 1kZsdz-0003ME-Cw; Tue, 03 Nov 2020 09:30:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 18074.42844; Tue, 03 Nov 2020 09:30:22 +0000
+Received: by outflank-mailman (output) from mailman id 18075.42856; Tue, 03 Nov 2020 09:30:23 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,35 +36,36 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kZsdx-0003LF-Vs; Tue, 03 Nov 2020 09:30:21 +0000
-Received: by outflank-mailman (input) for mailman id 18074;
- Tue, 03 Nov 2020 09:30:20 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kZsdz-0003M7-8A; Tue, 03 Nov 2020 09:30:23 +0000
+Received: by outflank-mailman (input) for mailman id 18075;
+ Tue, 03 Nov 2020 09:30:21 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=xrPR=EJ=suse.de=tzimmermann@srs-us1.protection.inumbo.net>)
- id 1kZsdw-0003L5-Fc
- for xen-devel@lists.xenproject.org; Tue, 03 Nov 2020 09:30:20 +0000
+ id 1kZsdx-0003LA-Su
+ for xen-devel@lists.xenproject.org; Tue, 03 Nov 2020 09:30:21 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id 80e816b4-7c1e-46e0-a62b-57310a1ac20d;
- Tue, 03 Nov 2020 09:30:19 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id fa5de9f4-1ba5-4022-85a8-5d65f79434e3;
+ Tue, 03 Nov 2020 09:30:20 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id AEAE2AF4F;
- Tue,  3 Nov 2020 09:30:18 +0000 (UTC)
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by mx2.suse.de (Postfix) with ESMTP id 08299B119;
+ Tue,  3 Nov 2020 09:30:20 +0000 (UTC)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=xrPR=EJ=suse.de=tzimmermann@srs-us1.protection.inumbo.net>)
-	id 1kZsdw-0003L5-Fc
-	for xen-devel@lists.xenproject.org; Tue, 03 Nov 2020 09:30:20 +0000
-X-Inumbo-ID: 80e816b4-7c1e-46e0-a62b-57310a1ac20d
+	id 1kZsdx-0003LA-Su
+	for xen-devel@lists.xenproject.org; Tue, 03 Nov 2020 09:30:21 +0000
+X-Inumbo-ID: fa5de9f4-1ba5-4022-85a8-5d65f79434e3
 Received: from mx2.suse.de (unknown [195.135.220.15])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTP
-	id 80e816b4-7c1e-46e0-a62b-57310a1ac20d;
-	Tue, 03 Nov 2020 09:30:19 +0000 (UTC)
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+	id fa5de9f4-1ba5-4022-85a8-5d65f79434e3;
+	Tue, 03 Nov 2020 09:30:20 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id AEAE2AF4F;
-	Tue,  3 Nov 2020 09:30:18 +0000 (UTC)
+	by mx2.suse.de (Postfix) with ESMTP id 08299B119;
+	Tue,  3 Nov 2020 09:30:20 +0000 (UTC)
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: maarten.lankhorst@linux.intel.com,
 	mripard@kernel.org,
@@ -117,11 +118,10 @@ Cc: dri-devel@lists.freedesktop.org,
 	xen-devel@lists.xenproject.org,
 	linux-media@vger.kernel.org,
 	linaro-mm-sig@lists.linaro.org,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	Daniel Vetter <daniel.vetter@ffwll.ch>
-Subject: [PATCH v7 01/10] drm/vram-helper: Remove invariant parameters from internal kmap function
-Date: Tue,  3 Nov 2020 10:30:06 +0100
-Message-Id: <20201103093015.1063-2-tzimmermann@suse.de>
+	Thomas Zimmermann <tzimmermann@suse.de>
+Subject: [PATCH v7 03/10] drm/etnaviv: Remove empty etnaviv_gem_prime_vunmap()
+Date: Tue,  3 Nov 2020 10:30:08 +0100
+Message-Id: <20201103093015.1063-4-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.29.0
 In-Reply-To: <20201103093015.1063-1-tzimmermann@suse.de>
 References: <20201103093015.1063-1-tzimmermann@suse.de>
@@ -129,69 +129,58 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The parameters map and is_iomem are always of the same value. Removed them
-to prepares the function for conversion to struct dma_buf_map.
-
-v4:
-	* don't check for !kmap->virtual; will always be false
+The function etnaviv_gem_prime_vunmap() is empty. Remove it before
+changing the interface to use struct drm_buf_map.
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
-Reviewed-by: Christian König <christian.koenig@amd.com>
+Acked-by: Christian König <christian.koenig@amd.com>
 Tested-by: Sam Ravnborg <sam@ravnborg.org>
 ---
- drivers/gpu/drm/drm_gem_vram_helper.c | 18 ++++--------------
- 1 file changed, 4 insertions(+), 14 deletions(-)
+ drivers/gpu/drm/etnaviv/etnaviv_drv.h       | 1 -
+ drivers/gpu/drm/etnaviv/etnaviv_gem.c       | 1 -
+ drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c | 5 -----
+ 3 files changed, 7 deletions(-)
 
-diff --git a/drivers/gpu/drm/drm_gem_vram_helper.c b/drivers/gpu/drm/drm_gem_vram_helper.c
-index 16d68c04ea5d..e305fadb8bc8 100644
---- a/drivers/gpu/drm/drm_gem_vram_helper.c
-+++ b/drivers/gpu/drm/drm_gem_vram_helper.c
-@@ -378,32 +378,22 @@ int drm_gem_vram_unpin(struct drm_gem_vram_object *gbo)
+diff --git a/drivers/gpu/drm/etnaviv/etnaviv_drv.h b/drivers/gpu/drm/etnaviv/etnaviv_drv.h
+index 914f0867ff71..9682c26d89bb 100644
+--- a/drivers/gpu/drm/etnaviv/etnaviv_drv.h
++++ b/drivers/gpu/drm/etnaviv/etnaviv_drv.h
+@@ -52,7 +52,6 @@ int etnaviv_gem_mmap(struct file *filp, struct vm_area_struct *vma);
+ int etnaviv_gem_mmap_offset(struct drm_gem_object *obj, u64 *offset);
+ struct sg_table *etnaviv_gem_prime_get_sg_table(struct drm_gem_object *obj);
+ void *etnaviv_gem_prime_vmap(struct drm_gem_object *obj);
+-void etnaviv_gem_prime_vunmap(struct drm_gem_object *obj, void *vaddr);
+ int etnaviv_gem_prime_mmap(struct drm_gem_object *obj,
+ 			   struct vm_area_struct *vma);
+ struct drm_gem_object *etnaviv_gem_prime_import_sg_table(struct drm_device *dev,
+diff --git a/drivers/gpu/drm/etnaviv/etnaviv_gem.c b/drivers/gpu/drm/etnaviv/etnaviv_gem.c
+index 67d9a2b9ea6a..bbd235473645 100644
+--- a/drivers/gpu/drm/etnaviv/etnaviv_gem.c
++++ b/drivers/gpu/drm/etnaviv/etnaviv_gem.c
+@@ -571,7 +571,6 @@ static const struct drm_gem_object_funcs etnaviv_gem_object_funcs = {
+ 	.unpin = etnaviv_gem_prime_unpin,
+ 	.get_sg_table = etnaviv_gem_prime_get_sg_table,
+ 	.vmap = etnaviv_gem_prime_vmap,
+-	.vunmap = etnaviv_gem_prime_vunmap,
+ 	.vm_ops = &vm_ops,
+ };
+ 
+diff --git a/drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c b/drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c
+index 135fbff6fecf..a6d9932a32ae 100644
+--- a/drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c
++++ b/drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c
+@@ -27,11 +27,6 @@ void *etnaviv_gem_prime_vmap(struct drm_gem_object *obj)
+ 	return etnaviv_gem_vmap(obj);
  }
- EXPORT_SYMBOL(drm_gem_vram_unpin);
  
--static void *drm_gem_vram_kmap_locked(struct drm_gem_vram_object *gbo,
--				      bool map, bool *is_iomem)
-+static void *drm_gem_vram_kmap_locked(struct drm_gem_vram_object *gbo)
- {
- 	int ret;
- 	struct ttm_bo_kmap_obj *kmap = &gbo->kmap;
-+	bool is_iomem;
- 
- 	if (gbo->kmap_use_count > 0)
- 		goto out;
- 
--	if (kmap->virtual || !map)
--		goto out;
+-void etnaviv_gem_prime_vunmap(struct drm_gem_object *obj, void *vaddr)
+-{
+-	/* TODO msm_gem_vunmap() */
+-}
 -
- 	ret = ttm_bo_kmap(&gbo->bo, 0, gbo->bo.num_pages, kmap);
- 	if (ret)
- 		return ERR_PTR(ret);
- 
- out:
--	if (!kmap->virtual) {
--		if (is_iomem)
--			*is_iomem = false;
--		return NULL; /* not mapped; don't increment ref */
--	}
- 	++gbo->kmap_use_count;
--	if (is_iomem)
--		return ttm_kmap_obj_virtual(kmap, is_iomem);
--	return kmap->virtual;
-+	return ttm_kmap_obj_virtual(kmap, &is_iomem);
- }
- 
- static void drm_gem_vram_kunmap_locked(struct drm_gem_vram_object *gbo)
-@@ -448,7 +438,7 @@ void *drm_gem_vram_vmap(struct drm_gem_vram_object *gbo)
- 	ret = drm_gem_vram_pin_locked(gbo, 0);
- 	if (ret)
- 		goto err_ttm_bo_unreserve;
--	base = drm_gem_vram_kmap_locked(gbo, true, NULL);
-+	base = drm_gem_vram_kmap_locked(gbo);
- 	if (IS_ERR(base)) {
- 		ret = PTR_ERR(base);
- 		goto err_drm_gem_vram_unpin_locked;
+ int etnaviv_gem_prime_mmap(struct drm_gem_object *obj,
+ 			   struct vm_area_struct *vma)
+ {
 -- 
 2.29.0
 
