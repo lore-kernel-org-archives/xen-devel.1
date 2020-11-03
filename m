@@ -2,28 +2,28 @@ Return-Path: <SRS0=JyiM=EJ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-8.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
-	version=3.4.0
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D6EA2C4742C
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2020 10:55:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F3A2FC2D0A3
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2020 10:56:30 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 67BDF223BF
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2020 10:55:15 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 7AFBA20719
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2020 10:56:30 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="KxhMsVlV"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 67BDF223BF
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="s9Bbik8y"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7AFBA20719
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.18223.43150 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.18226.43162 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kZtxr-0004l5-6V; Tue, 03 Nov 2020 10:54:59 +0000
+	id 1kZtz8-0004rW-J9; Tue, 03 Nov 2020 10:56:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 18223.43150; Tue, 03 Nov 2020 10:54:59 +0000
+Received: by outflank-mailman (output) from mailman id 18226.43162; Tue, 03 Nov 2020 10:56:18 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,70 +38,108 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kZtxr-0004ky-3U; Tue, 03 Nov 2020 10:54:59 +0000
-Received: by outflank-mailman (input) for mailman id 18223;
- Tue, 03 Nov 2020 10:54:57 +0000
+	id 1kZtz8-0004rP-Ec; Tue, 03 Nov 2020 10:56:18 +0000
+Received: by outflank-mailman (input) for mailman id 18226;
+ Tue, 03 Nov 2020 10:56:17 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=xm8A=EJ=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kZtxp-0004kt-AE
- for xen-devel@lists.xenproject.org; Tue, 03 Nov 2020 10:54:57 +0000
+ id 1kZtz7-0004rK-Og
+ for xen-devel@lists.xenproject.org; Tue, 03 Nov 2020 10:56:17 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id 3930e305-901e-4d5c-9c4b-75858e291101;
- Tue, 03 Nov 2020 10:54:55 +0000 (UTC)
+ id cb50a6d0-afb3-4660-b2f5-dc039872bad7;
+ Tue, 03 Nov 2020 10:56:16 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 4BFD6ACA3;
- Tue,  3 Nov 2020 10:54:55 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 202A3ACC6;
+ Tue,  3 Nov 2020 10:56:16 +0000 (UTC)
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=xm8A=EJ=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
-	id 1kZtxp-0004kt-AE
-	for xen-devel@lists.xenproject.org; Tue, 03 Nov 2020 10:54:57 +0000
-X-Inumbo-ID: 3930e305-901e-4d5c-9c4b-75858e291101
+	id 1kZtz7-0004rK-Og
+	for xen-devel@lists.xenproject.org; Tue, 03 Nov 2020 10:56:17 +0000
+X-Inumbo-ID: cb50a6d0-afb3-4660-b2f5-dc039872bad7
 Received: from mx2.suse.de (unknown [195.135.220.15])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
-	id 3930e305-901e-4d5c-9c4b-75858e291101;
-	Tue, 03 Nov 2020 10:54:55 +0000 (UTC)
+	id cb50a6d0-afb3-4660-b2f5-dc039872bad7;
+	Tue, 03 Nov 2020 10:56:16 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1604400895;
+	t=1604400976;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=oV/mDKp+mMMwMLDcuxuCHfmSupqxXZf2vCXQnS4sp20=;
-	b=KxhMsVlVWGe3m5z1HBJ6pWdybTdrSCA67i4+8zFNF+cb3KdKiqSotJlAjYctt8F6fWVPXF
-	J5edqeKWycetFymAJ1QtlYUxM/Qjm9vIz0w6+22RVyURlnz0YieYY43qddMt8jwLf3KgM0
-	jQ5ZGyAGlhcBGRX5yi5aZ7KFfcjRr6o=
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=DSYgoCWg+O2ARrh9htTTAYEpYfiAsuVOPNb70f//H6g=;
+	b=s9Bbik8yGbntPDPFJ8VUPmUuRKNRuIEOCYWZsvuqIgaELjQRoHeS9yZ/ecGduHlfTW1bX0
+	M6caXtlTchlls2cy4SPMZmyIwIuJ9u0S3U3fPFu+eH/qbS5N6T0kN+g7nu/bDI/ouhaJ3T
+	7P7pDMZe/LS/eLaSsevLDt6yas55ouY=
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 4BFD6ACA3;
-	Tue,  3 Nov 2020 10:54:55 +0000 (UTC)
+	by mx2.suse.de (Postfix) with ESMTP id 202A3ACC6;
+	Tue,  3 Nov 2020 10:56:16 +0000 (UTC)
+Subject: [PATCH 1/5] x86/PV: consistently inline {,un}adjust_guest_l<N>e()
+From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
  =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
  George Dunlap <george.dunlap@citrix.com>
-From: Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH 0/5] x86/PV: memory management consistency and minor
- relaxations
-Message-ID: <10a01f61-197b-7df4-192d-917fe135df70@suse.com>
-Date: Tue, 3 Nov 2020 11:54:55 +0100
+References: <10a01f61-197b-7df4-192d-917fe135df70@suse.com>
+Message-ID: <686d7f09-6313-6dd0-2133-8646308aea5b@suse.com>
+Date: Tue, 3 Nov 2020 11:56:16 +0100
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.4.0
 MIME-Version: 1.0
+In-Reply-To: <10a01f61-197b-7df4-192d-917fe135df70@suse.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
-Especially the latter three patches provide only small possible
-gains, from all I can tell. I nevertheless wanted to put up the
-entire set for consideration.
+Commit 8a74707a7c ("x86/nospec: Use always_inline to fix code gen for
+evaluate_nospec") converted inline to always_inline for
+adjust_guest_l[134]e(), but left adjust_guest_l2e() and
+unadjust_guest_l3e() alone without saying why these two would differ in
+the needed / wanted treatment. Adjust these two as well.
 
-1: consistently inline {,un}adjust_guest_l<N>e()
-2: fold redundant calls to adjust_guest_l<N>e()
-3: _PAGE_RW changes may take fast path of mod_l[234]_entry()
-4: restrict TLB flushing after mod_l[234]_entry()
-5: avoid TLB flushing after mod_l3_entry()
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
+---
+Actually I question the need for always_inline here, for two reasons:
+1) All that's guarded are updates to local variables, depending on
+   merely the values held by these local variables (really: function
+   arguments) on input. As a result it would look to me as if we wanted
+   evaluate_nospec()-free variants of is_pv{,_32bit}_domain() and alike,
+   to be used e.g. here.
+2) These functions don't act as predicates, and hence the concern
+   expressed in said commit doesn't apply here: Callers wouldn't observe
+   misplaced LFENCEs, as they don't use the results of these helpers for
+   further (direct) code flow control.
+---
+So far I've observed only clang to not inline the two functions when
+just "inline" is in place.
 
-Jan
+--- a/xen/arch/x86/pv/mm.h
++++ b/xen/arch/x86/pv/mm.h
+@@ -99,8 +99,8 @@ static always_inline l1_pgentry_t adjust
+     return l1e;
+ }
+ 
+-static inline l2_pgentry_t adjust_guest_l2e(l2_pgentry_t l2e,
+-                                            const struct domain *d)
++static always_inline l2_pgentry_t adjust_guest_l2e(l2_pgentry_t l2e,
++                                                   const struct domain *d)
+ {
+     if ( likely(l2e_get_flags(l2e) & _PAGE_PRESENT) &&
+          likely(!is_pv_32bit_domain(d)) )
+@@ -119,8 +119,8 @@ static always_inline l3_pgentry_t adjust
+     return l3e;
+ }
+ 
+-static inline l3_pgentry_t unadjust_guest_l3e(l3_pgentry_t l3e,
+-                                              const struct domain *d)
++static always_inline l3_pgentry_t unadjust_guest_l3e(l3_pgentry_t l3e,
++                                                     const struct domain *d)
+ {
+     if ( unlikely(is_pv_32bit_domain(d)) &&
+          likely(l3e_get_flags(l3e) & _PAGE_PRESENT) )
+
 
