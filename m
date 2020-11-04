@@ -2,28 +2,28 @@ Return-Path: <SRS0=nsPS=EK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CC21FC388F7
-	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2020 08:16:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ABE5FC2D0A3
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2020 08:16:07 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 64D4622384
-	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2020 08:16:04 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 486BB22384
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2020 08:16:07 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="n6NChhe8"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 64D4622384
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="blLJjIxB"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 486BB22384
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.18836.43862 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.18835.43850 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kaDxT-0000Rb-Ug; Wed, 04 Nov 2020 08:15:55 +0000
+	id 1kaDxS-0000Pw-HF; Wed, 04 Nov 2020 08:15:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 18836.43862; Wed, 04 Nov 2020 08:15:55 +0000
+Received: by outflank-mailman (output) from mailman id 18835.43850; Wed, 04 Nov 2020 08:15:54 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kaDxT-0000RU-Qm; Wed, 04 Nov 2020 08:15:55 +0000
-Received: by outflank-mailman (input) for mailman id 18836;
- Wed, 04 Nov 2020 08:15:54 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kaDxS-0000Pp-E7; Wed, 04 Nov 2020 08:15:54 +0000
+Received: by outflank-mailman (input) for mailman id 18835;
+ Wed, 04 Nov 2020 08:15:53 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=2Coh=EK=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kaDxS-0000Pk-3t
- for xen-devel@lists.xenproject.org; Wed, 04 Nov 2020 08:15:54 +0000
+ id 1kaDxR-0000Pf-Eu
+ for xen-devel@lists.xenproject.org; Wed, 04 Nov 2020 08:15:53 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id 06b591f8-6124-46e8-9693-126333d10666;
- Wed, 04 Nov 2020 08:15:51 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+ id db0330c7-59ee-4464-9368-ed68852fb91b;
+ Wed, 04 Nov 2020 08:15:52 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 4DA8DACB6;
+ by mx2.suse.de (Postfix) with ESMTP id F1F17ACF1;
  Wed,  4 Nov 2020 08:15:51 +0000 (UTC)
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=2Coh=EK=suse.com=jgross@srs-us1.protection.inumbo.net>)
-	id 1kaDxS-0000Pk-3t
-	for xen-devel@lists.xenproject.org; Wed, 04 Nov 2020 08:15:54 +0000
-X-Inumbo-ID: 06b591f8-6124-46e8-9693-126333d10666
+	id 1kaDxR-0000Pf-Eu
+	for xen-devel@lists.xenproject.org; Wed, 04 Nov 2020 08:15:53 +0000
+X-Inumbo-ID: db0330c7-59ee-4464-9368-ed68852fb91b
 Received: from mx2.suse.de (unknown [195.135.220.15])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
-	id 06b591f8-6124-46e8-9693-126333d10666;
-	Wed, 04 Nov 2020 08:15:51 +0000 (UTC)
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+	id db0330c7-59ee-4464-9368-ed68852fb91b;
+	Wed, 04 Nov 2020 08:15:52 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1604477751;
+	t=1604477752;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=t0nui2j85lczmOaB6wvrDxMdOES61kNj5LWlu/C7qc0=;
-	b=n6NChhe8h/R0Eli5x84sYWWmkbcjIZvdWwYZY/We62l16UTqmbbV7McACk35CFCye39EMF
-	kp4CBCXxdsBCHFC0dpUPqrja7jnhBS2SVV1RlgxYWMmqHY2OxYi/I6hl9+m9XCXpdd3+0b
-	udN9I2E78uWUwIWzuor4bj5rfnuWG5I=
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=cUZq7FUinpan5b+B+0dHzJT3VyvkdYgZhHV/8DJXZyg=;
+	b=blLJjIxBcUI0qmfuYyhXcjdGGlT5FjKf8X35uuEDD//NMLqxn0iA//AtqHCnHU7Wx+mR9i
+	iEaP2cc8sb/dzVK0wgPyvh//ILZEY0V97pKU/5MB47bklfQlLk4XN1dv6cvuBBxxubbnKy
+	PxkV2Ri4dXuBSogT/nzxTGuydug2Dm4=
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 4DA8DACB6;
+	by mx2.suse.de (Postfix) with ESMTP id F1F17ACF1;
 	Wed,  4 Nov 2020 08:15:51 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
@@ -87,26 +87,132 @@ Cc: Juergen Gross <jgross@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v3 0/3] xen/locking: fix and enhance lock debugging
-Date: Wed,  4 Nov 2020 09:15:46 +0100
-Message-Id: <20201104081549.3712-1-jgross@suse.com>
+Subject: [PATCH v3 3/3] xen/rwlock: add check_lock() handling to rwlocks
+Date: Wed,  4 Nov 2020 09:15:49 +0100
+Message-Id: <20201104081549.3712-4-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20201104081549.3712-1-jgross@suse.com>
+References: <20201104081549.3712-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This small series fixes two issues with spinlock debug code and adds
-lock debug code to rwlocks in order to catch IRQ violations.
+Checking whether a lock is consistently used regarding interrupts on
+or off is beneficial for rwlocks, too.
 
-Juergen Gross (3):
-  xen/spinlocks: spin_trylock with interrupts off is always fine
-  xen/locking: harmonize spinlocks and rwlocks regarding preemption
-  xen/rwlock: add check_lock() handling to rwlocks
+So add check_lock() calls to rwlock functions. For this purpose make
+check_lock() globally accessible.
 
- xen/common/spinlock.c      | 22 ++++++++++++++--------
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+V2:
+- call check_lock() unconditionally in try_lock variants (Jan Beulich)
+
+V3:
+- add comments (Jan Beulich)
+- place check_lock() calls inside preempt-off region (Jan Beulich)
+
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ xen/common/spinlock.c      |  3 +--
  xen/include/xen/rwlock.h   | 15 +++++++++++++++
  xen/include/xen/spinlock.h |  2 ++
- 3 files changed, 31 insertions(+), 8 deletions(-)
+ 3 files changed, 18 insertions(+), 2 deletions(-)
 
+diff --git a/xen/common/spinlock.c b/xen/common/spinlock.c
+index f4eb50f030..b90981bb27 100644
+--- a/xen/common/spinlock.c
++++ b/xen/common/spinlock.c
+@@ -13,7 +13,7 @@
+ 
+ static atomic_t spin_debug __read_mostly = ATOMIC_INIT(0);
+ 
+-static void check_lock(union lock_debug *debug, bool try)
++void check_lock(union lock_debug *debug, bool try)
+ {
+     bool irq_safe = !local_irq_is_enabled();
+ 
+@@ -108,7 +108,6 @@ void spin_debug_disable(void)
+ 
+ #else /* CONFIG_DEBUG_LOCKS */
+ 
+-#define check_lock(l, t) ((void)0)
+ #define check_barrier(l) ((void)0)
+ #define got_lock(l) ((void)0)
+ #define rel_lock(l) ((void)0)
+diff --git a/xen/include/xen/rwlock.h b/xen/include/xen/rwlock.h
+index 427664037a..0cc9167715 100644
+--- a/xen/include/xen/rwlock.h
++++ b/xen/include/xen/rwlock.h
+@@ -56,6 +56,7 @@ static inline int _read_trylock(rwlock_t *lock)
+     u32 cnts;
+ 
+     preempt_disable();
++    check_lock(&lock->lock.debug, true);
+     cnts = atomic_read(&lock->cnts);
+     if ( likely(_can_read_lock(cnts)) )
+     {
+@@ -87,7 +88,11 @@ static inline void _read_lock(rwlock_t *lock)
+      * arch_lock_acquire_barrier().
+      */
+     if ( likely(_can_read_lock(cnts)) )
++    {
++        /* The slow path calls check_lock() via spin_lock(). */
++        check_lock(&lock->lock.debug, false);
+         return;
++    }
+ 
+     /* The slowpath will decrement the reader count, if necessary. */
+     queue_read_lock_slowpath(lock);
+@@ -162,7 +167,11 @@ static inline void _write_lock(rwlock_t *lock)
+      * arch_lock_acquire_barrier().
+      */
+     if ( atomic_cmpxchg(&lock->cnts, 0, _write_lock_val()) == 0 )
++    {
++        /* The slow path calls check_lock() via spin_lock(). */
++        check_lock(&lock->lock.debug, false);
+         return;
++    }
+ 
+     queue_write_lock_slowpath(lock);
+     /*
+@@ -197,6 +206,7 @@ static inline int _write_trylock(rwlock_t *lock)
+     u32 cnts;
+ 
+     preempt_disable();
++    check_lock(&lock->lock.debug, true);
+     cnts = atomic_read(&lock->cnts);
+     if ( unlikely(cnts) ||
+          unlikely(atomic_cmpxchg(&lock->cnts, 0, _write_lock_val()) != 0) )
+@@ -328,6 +338,11 @@ static inline void _percpu_read_lock(percpu_rwlock_t **per_cpudata,
+         /* Drop the read lock because we don't need it anymore. */
+         read_unlock(&percpu_rwlock->rwlock);
+     }
++    else
++    {
++        /* All other paths have implicit check_lock() calls via read_lock(). */
++        check_lock(&percpu_rwlock->rwlock.lock.debug, false);
++    }
+ }
+ 
+ static inline void _percpu_read_unlock(percpu_rwlock_t **per_cpudata,
+diff --git a/xen/include/xen/spinlock.h b/xen/include/xen/spinlock.h
+index ca13b600a0..9fa4e600c1 100644
+--- a/xen/include/xen/spinlock.h
++++ b/xen/include/xen/spinlock.h
+@@ -21,11 +21,13 @@ union lock_debug {
+     };
+ };
+ #define _LOCK_DEBUG { LOCK_DEBUG_INITVAL }
++void check_lock(union lock_debug *debug, bool try);
+ void spin_debug_enable(void);
+ void spin_debug_disable(void);
+ #else
+ union lock_debug { };
+ #define _LOCK_DEBUG { }
++#define check_lock(l, t) ((void)0)
+ #define spin_debug_enable() ((void)0)
+ #define spin_debug_disable() ((void)0)
+ #endif
 -- 
 2.26.2
 
