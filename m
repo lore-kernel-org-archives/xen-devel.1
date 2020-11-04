@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ABE5FC2D0A3
-	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2020 08:16:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B988C388F7
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2020 08:16:11 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 486BB22384
-	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2020 08:16:07 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id EF98222384
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2020 08:16:10 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="blLJjIxB"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 486BB22384
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="dQMJ2oPy"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EF98222384
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.18835.43850 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.18837.43874 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kaDxS-0000Pw-HF; Wed, 04 Nov 2020 08:15:54 +0000
+	id 1kaDxY-0000VD-9d; Wed, 04 Nov 2020 08:16:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 18835.43850; Wed, 04 Nov 2020 08:15:54 +0000
+Received: by outflank-mailman (output) from mailman id 18837.43874; Wed, 04 Nov 2020 08:16:00 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,45 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kaDxS-0000Pp-E7; Wed, 04 Nov 2020 08:15:54 +0000
-Received: by outflank-mailman (input) for mailman id 18835;
- Wed, 04 Nov 2020 08:15:53 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kaDxY-0000V1-5H; Wed, 04 Nov 2020 08:16:00 +0000
+Received: by outflank-mailman (input) for mailman id 18837;
+ Wed, 04 Nov 2020 08:15:59 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=2Coh=EK=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kaDxR-0000Pf-Eu
- for xen-devel@lists.xenproject.org; Wed, 04 Nov 2020 08:15:53 +0000
+ id 1kaDxW-0000Pk-Vc
+ for xen-devel@lists.xenproject.org; Wed, 04 Nov 2020 08:15:59 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id db0330c7-59ee-4464-9368-ed68852fb91b;
- Wed, 04 Nov 2020 08:15:52 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id b17a3e08-d071-4107-9a9a-62c7dbc0f131;
+ Wed, 04 Nov 2020 08:15:51 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id F1F17ACF1;
+ by mx2.suse.de (Postfix) with ESMTP id 7FB21AC23;
  Wed,  4 Nov 2020 08:15:51 +0000 (UTC)
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=2Coh=EK=suse.com=jgross@srs-us1.protection.inumbo.net>)
-	id 1kaDxR-0000Pf-Eu
-	for xen-devel@lists.xenproject.org; Wed, 04 Nov 2020 08:15:53 +0000
-X-Inumbo-ID: db0330c7-59ee-4464-9368-ed68852fb91b
+	id 1kaDxW-0000Pk-Vc
+	for xen-devel@lists.xenproject.org; Wed, 04 Nov 2020 08:15:59 +0000
+X-Inumbo-ID: b17a3e08-d071-4107-9a9a-62c7dbc0f131
 Received: from mx2.suse.de (unknown [195.135.220.15])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTP
-	id db0330c7-59ee-4464-9368-ed68852fb91b;
-	Wed, 04 Nov 2020 08:15:52 +0000 (UTC)
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+	id b17a3e08-d071-4107-9a9a-62c7dbc0f131;
+	Wed, 04 Nov 2020 08:15:51 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1604477752;
+	t=1604477751;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=cUZq7FUinpan5b+B+0dHzJT3VyvkdYgZhHV/8DJXZyg=;
-	b=blLJjIxBcUI0qmfuYyhXcjdGGlT5FjKf8X35uuEDD//NMLqxn0iA//AtqHCnHU7Wx+mR9i
-	iEaP2cc8sb/dzVK0wgPyvh//ILZEY0V97pKU/5MB47bklfQlLk4XN1dv6cvuBBxxubbnKy
-	PxkV2Ri4dXuBSogT/nzxTGuydug2Dm4=
+	bh=SMWFDeqyO4Bqdr2XBTO3XuyCVTVJJjcu3BY2gEaI7+0=;
+	b=dQMJ2oPyWtwflpsHfulQPgBtMzNX2MQIF21kPA26/35M0xKeNVqjfq6c1xWMK+m7FDKPmO
+	zTkXnEpzbTzej/zjlWVmri5+f9+2ho75oKOVO5iLV2UpYlv0DIsdpbOhc4fbUE+C2eYeKV
+	FCc72zmaABiCECj/knpDXrloiKhgKD0=
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id F1F17ACF1;
+	by mx2.suse.de (Postfix) with ESMTP id 7FB21AC23;
 	Wed,  4 Nov 2020 08:15:51 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
@@ -87,132 +88,108 @@ Cc: Juergen Gross <jgross@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v3 3/3] xen/rwlock: add check_lock() handling to rwlocks
-Date: Wed,  4 Nov 2020 09:15:49 +0100
-Message-Id: <20201104081549.3712-4-jgross@suse.com>
+Subject: [PATCH v3 1/3] xen/spinlocks: spin_trylock with interrupts off is always fine
+Date: Wed,  4 Nov 2020 09:15:47 +0100
+Message-Id: <20201104081549.3712-2-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20201104081549.3712-1-jgross@suse.com>
 References: <20201104081549.3712-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Checking whether a lock is consistently used regarding interrupts on
-or off is beneficial for rwlocks, too.
+Even if a spinlock was taken with interrupts on before calling
+spin_trylock() with interrupts off is fine, as it can't block.
 
-So add check_lock() calls to rwlock functions. For this purpose make
-check_lock() globally accessible.
+Add a bool parameter "try" to check_lock() for handling this case.
+
+Remove the call of check_lock() from _spin_is_locked(), as it really
+serves no purpose and it can even lead to false crashes, e.g. when
+a lock was taken correctly with interrupts enabled and the call of
+_spin_is_locked() happened with interrupts off. In case the lock is
+taken with wrong interrupt flags this will be catched when taking
+the lock.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
 V2:
-- call check_lock() unconditionally in try_lock variants (Jan Beulich)
-
-V3:
-- add comments (Jan Beulich)
-- place check_lock() calls inside preempt-off region (Jan Beulich)
-
-Signed-off-by: Juergen Gross <jgross@suse.com>
+- corrected comment (Jan Beulich)
 ---
- xen/common/spinlock.c      |  3 +--
- xen/include/xen/rwlock.h   | 15 +++++++++++++++
- xen/include/xen/spinlock.h |  2 ++
- 3 files changed, 18 insertions(+), 2 deletions(-)
+ xen/common/spinlock.c | 18 +++++++++++-------
+ 1 file changed, 11 insertions(+), 7 deletions(-)
 
 diff --git a/xen/common/spinlock.c b/xen/common/spinlock.c
-index f4eb50f030..b90981bb27 100644
+index ce3106e2d3..b4aaf6bce6 100644
 --- a/xen/common/spinlock.c
 +++ b/xen/common/spinlock.c
 @@ -13,7 +13,7 @@
  
  static atomic_t spin_debug __read_mostly = ATOMIC_INIT(0);
  
--static void check_lock(union lock_debug *debug, bool try)
-+void check_lock(union lock_debug *debug, bool try)
+-static void check_lock(union lock_debug *debug)
++static void check_lock(union lock_debug *debug, bool try)
  {
      bool irq_safe = !local_irq_is_enabled();
  
-@@ -108,7 +108,6 @@ void spin_debug_disable(void)
+@@ -42,7 +42,13 @@ static void check_lock(union lock_debug *debug)
+      * 
+      * To guard against this subtle bug we latch the IRQ safety of every
+      * spinlock in the system, on first use.
++     *
++     * A spin_trylock() with interrupts off is always fine, as this can't
++     * block and above deadlock scenario doesn't apply.
+      */
++    if ( try && irq_safe )
++        return;
++
+     if ( unlikely(debug->irq_safe != irq_safe) )
+     {
+         union lock_debug seen, new = { 0 };
+@@ -102,7 +108,7 @@ void spin_debug_disable(void)
  
  #else /* CONFIG_DEBUG_LOCKS */
  
--#define check_lock(l, t) ((void)0)
+-#define check_lock(l) ((void)0)
++#define check_lock(l, t) ((void)0)
  #define check_barrier(l) ((void)0)
  #define got_lock(l) ((void)0)
  #define rel_lock(l) ((void)0)
-diff --git a/xen/include/xen/rwlock.h b/xen/include/xen/rwlock.h
-index 427664037a..0cc9167715 100644
---- a/xen/include/xen/rwlock.h
-+++ b/xen/include/xen/rwlock.h
-@@ -56,6 +56,7 @@ static inline int _read_trylock(rwlock_t *lock)
-     u32 cnts;
+@@ -159,7 +165,7 @@ void inline _spin_lock_cb(spinlock_t *lock, void (*cb)(void *), void *data)
+     spinlock_tickets_t tickets = SPINLOCK_TICKET_INC;
+     LOCK_PROFILE_VAR;
  
+-    check_lock(&lock->debug);
++    check_lock(&lock->debug, false);
      preempt_disable();
-+    check_lock(&lock->lock.debug, true);
-     cnts = atomic_read(&lock->cnts);
-     if ( likely(_can_read_lock(cnts)) )
-     {
-@@ -87,7 +88,11 @@ static inline void _read_lock(rwlock_t *lock)
-      * arch_lock_acquire_barrier().
-      */
-     if ( likely(_can_read_lock(cnts)) )
-+    {
-+        /* The slow path calls check_lock() via spin_lock(). */
-+        check_lock(&lock->lock.debug, false);
-         return;
-+    }
+     tickets.head_tail = arch_fetch_and_add(&lock->tickets.head_tail,
+                                            tickets.head_tail);
+@@ -220,8 +226,6 @@ void _spin_unlock_irqrestore(spinlock_t *lock, unsigned long flags)
  
-     /* The slowpath will decrement the reader count, if necessary. */
-     queue_read_lock_slowpath(lock);
-@@ -162,7 +167,11 @@ static inline void _write_lock(rwlock_t *lock)
-      * arch_lock_acquire_barrier().
-      */
-     if ( atomic_cmpxchg(&lock->cnts, 0, _write_lock_val()) == 0 )
-+    {
-+        /* The slow path calls check_lock() via spin_lock(). */
-+        check_lock(&lock->lock.debug, false);
-         return;
-+    }
- 
-     queue_write_lock_slowpath(lock);
+ int _spin_is_locked(spinlock_t *lock)
+ {
+-    check_lock(&lock->debug);
+-
      /*
-@@ -197,6 +206,7 @@ static inline int _write_trylock(rwlock_t *lock)
-     u32 cnts;
+      * Recursive locks may be locked by another CPU, yet we return
+      * "false" here, making this function suitable only for use in
+@@ -236,7 +240,7 @@ int _spin_trylock(spinlock_t *lock)
+ {
+     spinlock_tickets_t old, new;
  
-     preempt_disable();
-+    check_lock(&lock->lock.debug, true);
-     cnts = atomic_read(&lock->cnts);
-     if ( unlikely(cnts) ||
-          unlikely(atomic_cmpxchg(&lock->cnts, 0, _write_lock_val()) != 0) )
-@@ -328,6 +338,11 @@ static inline void _percpu_read_lock(percpu_rwlock_t **per_cpudata,
-         /* Drop the read lock because we don't need it anymore. */
-         read_unlock(&percpu_rwlock->rwlock);
-     }
-+    else
-+    {
-+        /* All other paths have implicit check_lock() calls via read_lock(). */
-+        check_lock(&percpu_rwlock->rwlock.lock.debug, false);
-+    }
- }
+-    check_lock(&lock->debug);
++    check_lock(&lock->debug, true);
+     old = observe_lock(&lock->tickets);
+     if ( old.head != old.tail )
+         return 0;
+@@ -294,7 +298,7 @@ int _spin_trylock_recursive(spinlock_t *lock)
+     BUILD_BUG_ON(NR_CPUS > SPINLOCK_NO_CPU);
+     BUILD_BUG_ON(SPINLOCK_RECURSE_BITS < 3);
  
- static inline void _percpu_read_unlock(percpu_rwlock_t **per_cpudata,
-diff --git a/xen/include/xen/spinlock.h b/xen/include/xen/spinlock.h
-index ca13b600a0..9fa4e600c1 100644
---- a/xen/include/xen/spinlock.h
-+++ b/xen/include/xen/spinlock.h
-@@ -21,11 +21,13 @@ union lock_debug {
-     };
- };
- #define _LOCK_DEBUG { LOCK_DEBUG_INITVAL }
-+void check_lock(union lock_debug *debug, bool try);
- void spin_debug_enable(void);
- void spin_debug_disable(void);
- #else
- union lock_debug { };
- #define _LOCK_DEBUG { }
-+#define check_lock(l, t) ((void)0)
- #define spin_debug_enable() ((void)0)
- #define spin_debug_disable() ((void)0)
- #endif
+-    check_lock(&lock->debug);
++    check_lock(&lock->debug, true);
+ 
+     if ( likely(lock->recurse_cpu != cpu) )
+     {
 -- 
 2.26.2
 
