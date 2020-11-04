@@ -2,28 +2,28 @@ Return-Path: <SRS0=nsPS=EK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.1 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A9E41C55178
-	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2020 09:06:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 07CA4C4741F
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2020 09:06:48 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3B92C2222C
-	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2020 09:06:45 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 8F9812236F
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2020 09:06:47 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="pzS7j4KK"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3B92C2222C
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="K1+Rdz5o"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8F9812236F
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.18909.44012 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.18908.44000 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kaEkR-00062b-Vj; Wed, 04 Nov 2020 09:06:31 +0000
+	id 1kaEkM-000611-Md; Wed, 04 Nov 2020 09:06:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 18909.44012; Wed, 04 Nov 2020 09:06:31 +0000
+Received: by outflank-mailman (output) from mailman id 18908.44000; Wed, 04 Nov 2020 09:06:26 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,191 +38,227 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kaEkR-00062Q-Rm; Wed, 04 Nov 2020 09:06:31 +0000
-Received: by outflank-mailman (input) for mailman id 18909;
- Wed, 04 Nov 2020 09:06:29 +0000
+	id 1kaEkM-00060u-JS; Wed, 04 Nov 2020 09:06:26 +0000
+Received: by outflank-mailman (input) for mailman id 18908;
+ Wed, 04 Nov 2020 09:06:25 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=d6HI=EK=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
- id 1kaEkP-00060O-Qb
- for xen-devel@lists.xenproject.org; Wed, 04 Nov 2020 09:06:29 +0000
-Received: from mail-lf1-x142.google.com (unknown [2a00:1450:4864:20::142])
+ <SRS0=okXs=EK=linaro.org=lee.jones@srs-us1.protection.inumbo.net>)
+ id 1kaEkL-00060O-1U
+ for xen-devel@lists.xenproject.org; Wed, 04 Nov 2020 09:06:25 +0000
+Received: from mail-wr1-x441.google.com (unknown [2a00:1450:4864:20::441])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 13280b07-5125-48ab-9d03-1b5a2930a113;
+ id 1abe8c56-48e0-488e-b8cf-7aec765fbb93;
  Wed, 04 Nov 2020 09:06:23 +0000 (UTC)
-Received: by mail-lf1-x142.google.com with SMTP id s30so3861232lfc.4
+Received: by mail-wr1-x441.google.com with SMTP id b8so21210001wrn.0
  for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2020 01:06:23 -0800 (PST)
-Received: from [100.64.112.11] (ll-18.209.223.85.sovam.net.ua. [85.223.209.18])
- by smtp.gmail.com with ESMTPSA id n23sm349389lfe.210.2020.11.04.01.06.21
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+Received: from dell.default ([91.110.221.242])
+ by smtp.gmail.com with ESMTPSA id e25sm1607823wrc.76.2020.11.04.01.06.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Wed, 04 Nov 2020 01:06:22 -0800 (PST)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=d6HI=EK=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
-	id 1kaEkP-00060O-Qb
-	for xen-devel@lists.xenproject.org; Wed, 04 Nov 2020 09:06:29 +0000
-X-Inumbo-ID: 13280b07-5125-48ab-9d03-1b5a2930a113
-Received: from mail-lf1-x142.google.com (unknown [2a00:1450:4864:20::142])
+	(envelope-from <SRS0=okXs=EK=linaro.org=lee.jones@srs-us1.protection.inumbo.net>)
+	id 1kaEkL-00060O-1U
+	for xen-devel@lists.xenproject.org; Wed, 04 Nov 2020 09:06:25 +0000
+X-Inumbo-ID: 1abe8c56-48e0-488e-b8cf-7aec765fbb93
+Received: from mail-wr1-x441.google.com (unknown [2a00:1450:4864:20::441])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 13280b07-5125-48ab-9d03-1b5a2930a113;
+	id 1abe8c56-48e0-488e-b8cf-7aec765fbb93;
 	Wed, 04 Nov 2020 09:06:23 +0000 (UTC)
-Received: by mail-lf1-x142.google.com with SMTP id s30so3861232lfc.4
+Received: by mail-wr1-x441.google.com with SMTP id b8so21210001wrn.0
         for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2020 01:06:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-transfer-encoding:content-language;
-        bh=axTLjJW9pP5qcu9UM7eUKbFLNLSswfMDMuK1tEN4aa8=;
-        b=pzS7j4KK5si2KPo7uwgcoPd9rlGFqnz1LjGZtCazdpSnZx9nuoC205qSJm7vlWdFuh
-         8wILrkB9eKslJG6NctTJ61K5gSdMYNUdiFpGfwI3FkpbekuwTNtPgdyoC7nCFRRnf3qI
-         YrvWZNy4PZhEgd5skCPvpyIQwip1Y0v1EE2C2iPkay2Tv2BgCfBwlgbxdPXQlTbWmMCN
-         HWYEYj2UKpFpDYxJbivMtBZsur7jVgAKR4exPIC+lufI2Zv7EWHheqz9ScAzjoi8LbU9
-         m9FpBmOq6f535rOPbia126aHQao88T0ZkDg8EY5mb11nkyy3faa7sBwtZsqlpr5GS5o2
-         ITpw==
+        d=linaro.org; s=google;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=ZVySsFYAxVyvKjZwFTKaFMnVATseHBsi4tJ0dIp9TLE=;
+        b=K1+Rdz5ogf/5T2jMdF3v9m88jLY/gNqsMKJm061QdgaEQGjK4st39GT4kTZK6c7eAv
+         3cJicgPoZBh9YEvxLFGZcZyHE0XnNqBy1XOiWQuoMPDL9faO4RhxQ9VP++HCtvthQR9S
+         799P3oQD3ZEWTAn8Z+1PDWW2WOSIRjZ/YNizWauRHAov45YgSsQGFvDCGkpGdXI1KiOg
+         QyMiZ+qAf84rNKlDHGrCMb3Z298LfBhK4STT2/MKrClXtDUj1+DxmNn50j9f2xT6h0lS
+         2FLRla4Vx5B06Pb85+k62n0XQr8agXXsfRziu37OjAXEKgzSYzjV1kzmZ4S3HLfgeg3X
+         jRpA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-transfer-encoding
-         :content-language;
-        bh=axTLjJW9pP5qcu9UM7eUKbFLNLSswfMDMuK1tEN4aa8=;
-        b=teZGehzjYRexU0VAwLxl09bxUpyqsy6ayHxwgx/IodTzpJEeg2cDsgbbQKz2/CZ3Q4
-         c3WGTkCROJH4g/TfP9QUH39Us6MC4cR58S7vz8MKjvNM7TsvYaFRjd/QTRgjUjSsq3/P
-         tSVnZuoLq6F5NaFJwDXcH3SN0CPgFadN00GumI0H6mcpcquEu1fYWO3AICCIlzjhpS/A
-         FDkP5wQGwZ3+wt533i5wNd23fZ4zYUOcKTimeQvkWXFcsTWrX1rgBLFMysW4kfhfLcAL
-         9TF7QnNgK9rBmekOswJ4OT6sNvSF4fRLULZOJPi+L3Qx7waZx09LXNIcZSRZ5BywvFBp
-         T77w==
-X-Gm-Message-State: AOAM531R9foCBQEXpWf/Y0LKsmRNG7B8C3hzLxMIOUSq6xmOjmlkSeFo
-	9cxLelZ1SVygfrrwunHsOIU=
-X-Google-Smtp-Source: ABdhPJytUl2YF8xoDU181hAQYEzfF9rGbPL42yGnM/scNRtyLavk99yogN8o1jzsIt/ZnLJPDA5ykA==
-X-Received: by 2002:a05:6512:3052:: with SMTP id b18mr8239333lfb.505.1604480782765;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=ZVySsFYAxVyvKjZwFTKaFMnVATseHBsi4tJ0dIp9TLE=;
+        b=a1FL8GsqSgKe+OKFkJ/NQsP76ZngEhsvjj7uLBLzTq4Vr+2xRo87W02QehvV8tjKm9
+         YbRF+W9ToOlITbapt9Z2sB/1DOfHVXYCMgOZNjiWKVdIQYpsvskRN6fZiwBrE59se+Su
+         iulQSS1FRfgj+fRq1rYG8WL3lnxlP1bgDCbZea/k6+zoQi9YxJPuUo0Qz4+Bhr/1qXAa
+         a48SxaBR5BgzcfLWGmvwYKp3SVGkxTgEGdMpRFUNRpcxqZ3d8pRPhvNkKHBbuUc1IHXw
+         7OoZAPgnY/EMpeMj/T7s8Matc4qUNG5R1wxruxEDSlJ8JrU4Hog6AphMG39OjW7JQnmv
+         WHPg==
+X-Gm-Message-State: AOAM5318znZdnGV2yF086E/PsziplpR4VVnVrcKeG2gdYEowbTdGStYH
+	vhp8UEunn1r8ZCCRu8OFHmX2Bg==
+X-Google-Smtp-Source: ABdhPJzn8d8Abh2QVS+FdXToKUqdpB6TwiMSAYlD5+ls0hMcq+h/pWmcBsJhdaEKInesWzdpNiQxsw==
+X-Received: by 2002:adf:e384:: with SMTP id e4mr31089426wrm.227.1604480782887;
         Wed, 04 Nov 2020 01:06:22 -0800 (PST)
-Received: from [100.64.112.11] (ll-18.209.223.85.sovam.net.ua. [85.223.209.18])
-        by smtp.gmail.com with ESMTPSA id n23sm349389lfe.210.2020.11.04.01.06.21
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+Received: from dell.default ([91.110.221.242])
+        by smtp.gmail.com with ESMTPSA id e25sm1607823wrc.76.2020.11.04.01.06.20
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Wed, 04 Nov 2020 01:06:22 -0800 (PST)
-Subject: Re: [PATCH V2 01/23] x86/ioreq: Prepare IOREQ feature for making it
- common
-To: paul@xen.org, xen-devel@lists.xenproject.org
-Cc: 'Oleksandr Tyshchenko' <oleksandr_tyshchenko@epam.com>,
- 'Jan Beulich' <jbeulich@suse.com>,
- 'Andrew Cooper' <andrew.cooper3@citrix.com>,
- =?UTF-8?B?J1JvZ2VyIFBhdSBNb25uw6kn?= <roger.pau@citrix.com>,
- 'Julien Grall' <julien@xen.org>,
- 'Stefano Stabellini' <sstabellini@kernel.org>, 'Wei Liu' <wl@xen.org>,
- 'Julien Grall' <julien.grall@arm.com>
-References: <1602780274-29141-1-git-send-email-olekstysh@gmail.com>
- <1602780274-29141-2-git-send-email-olekstysh@gmail.com>
- <003c01d6a6b0$8c418f50$a4c4adf0$@xen.org>
-From: Oleksandr <olekstysh@gmail.com>
-Message-ID: <3dd55087-0c07-c9f3-e80a-8b136c226475@gmail.com>
-Date: Wed, 4 Nov 2020 11:06:11 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+From: Lee Jones <lee.jones@linaro.org>
+To: davem@davemloft.net,
+	kuba@kernel.org
+Cc: linux-arm-kernel@lists.infradead.org,
+	linux-kernel@vger.kernel.org,
+	Lee Jones <lee.jones@linaro.org>,
+	Alexei Starovoitov <ast@kernel.org>,
+	Andrii Nakryiko <andrii@kernel.org>,
+	Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	bpf@vger.kernel.org,
+	Daniel Borkmann <daniel@iogearbox.net>,
+	Dany Madden <drt@linux.ibm.com>,
+	Daris A Nevil <dnevil@snmc.com>,
+	Dustin McIntire <dustin@sensoria.com>,
+	Erik Stahlman <erik@vt.edu>,
+	Geoff Levand <geoff@infradead.org>,
+	Grygorii Strashko <grygorii.strashko@ti.com>,
+	"Gustavo A. R. Silva" <gustavoars@kernel.org>,
+	Ishizaki Kou <kou.ishizaki@toshiba.co.jp>,
+	Ivan Khoronzhuk <ivan.khoronzhuk@linaro.org>,
+	Jens Osterkamp <Jens.Osterkamp@de.ibm.com>,
+	Jesper Dangaard Brouer <hawk@kernel.org>,
+	John Allen <jallen@linux.vnet.ibm.com>,
+	John Fastabend <john.fastabend@gmail.com>,
+	John Williams <john.williams@xilinx.com>,
+	Juergen Gross <jgross@suse.com>,
+	KP Singh <kpsingh@chromium.org>,
+	Kurt Kanzenbach <kurt@linutronix.de>,
+	Lijun Pan <ljp@linux.ibm.com>,
+	linuxppc-dev@lists.ozlabs.org,
+	linux-usb@vger.kernel.org,
+	Martin Habets <mhabets@solarflare.com>,
+	Martin KaFai Lau <kafai@fb.com>,
+	Michael Ellerman <mpe@ellerman.id.au>,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	Michal Simek <michal.simek@xilinx.com>,
+	Microchip Linux Driver Support <UNGLinuxDriver@microchip.com>,
+	netdev@vger.kernel.org,
+	Nicolas Pitre <nico@fluxnic.net>,
+	Paul Durrant <paul@xen.org>,
+	Paul Mackerras <paulus@samba.org>,
+	Peter Cammaert <pc@denkart.be>,
+	Russell King <rmk@arm.linux.org.uk>,
+	Rusty Russell <rusty@rustcorp.com.au>,
+	Santiago Leon <santi_leon@yahoo.com>,
+	Shannon Nelson <snelson@pensando.io>,
+	Song Liu <songliubraving@fb.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Sukadev Bhattiprolu <sukadev@linux.ibm.com>,
+	Thomas Falcon <tlfalcon@linux.vnet.ibm.com>,
+	Utz Bacher <utz.bacher@de.ibm.com>,
+	Wei Liu <wei.liu@kernel.org>,
+	Woojung Huh <woojung.huh@microchip.com>,
+	xen-devel@lists.xenproject.org,
+	Yonghong Song <yhs@fb.com>
+Subject: [PATCH 00/12] [Set 2] Rid W=1 warnings in Net
+Date: Wed,  4 Nov 2020 09:05:58 +0000
+Message-Id: <20201104090610.1446616-1-lee.jones@linaro.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-In-Reply-To: <003c01d6a6b0$8c418f50$a4c4adf0$@xen.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Language: en-US
 
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 20.10.20 10:13, Paul Durrant wrote:
+This set is part of a larger effort attempting to clean-up W=1
+kernel builds, which are currently overwhelmingly riddled with
+niggly little warnings.
 
-Hi Paul.
+This is the last set.
 
-Sorry for the late response.
+Lee Jones (12):
+  net: usb: lan78xx: Remove lots of set but unused 'ret' variables
+  net: ethernet: smsc: smc911x: Mark 'status' as __maybe_unused
+  net: ethernet: xilinx: xilinx_emaclite: Document 'txqueue' even if it
+    is unused
+  net: ethernet: smsc: smc91x: Demote non-conformant kernel function
+    header
+  net: xen-netback: xenbus: Demote nonconformant kernel-doc headers
+  net: ethernet: ti: am65-cpsw-qos: Demote non-conformant function
+    header
+  net: ethernet: ti: am65-cpts: Document am65_cpts_rx_enable()'s 'en'
+    parameter
+  net: xen-netfront: Demote non-kernel-doc headers to standard comment
+    blocks
+  net: ethernet: ibm: ibmvnic: Fix some kernel-doc misdemeanours
+  net: ethernet: toshiba: ps3_gelic_net: Fix some kernel-doc
+    misdemeanours
+  net: ethernet: toshiba: spider_net: Document a whole bunch of function
+    parameters
+  net: ethernet: ibm: ibmvnic: Fix some kernel-doc issues
 
->> +
->> +/* Called when target domain is paused */
->> +static inline void arch_hvm_destroy_ioreq_server(struct hvm_ioreq_server *s)
->> +{
->> +    p2m_set_ioreq_server(s->target, 0, s);
->> +}
->> +
->> +/*
->> + * Map or unmap an ioreq server to specific memory type. For now, only
->> + * HVMMEM_ioreq_server is supported, and in the future new types can be
->> + * introduced, e.g. HVMMEM_ioreq_serverX mapped to ioreq server X. And
->> + * currently, only write operations are to be forwarded to an ioreq server.
->> + * Support for the emulation of read operations can be added when an ioreq
->> + * server has such requirement in the future.
->> + */
->> +static inline int hvm_map_mem_type_to_ioreq_server(struct domain *d,
->> +                                                   ioservid_t id,
->> +                                                   uint32_t type,
->> +                                                   uint32_t flags)
->> +{
->> +    struct hvm_ioreq_server *s;
->> +    int rc;
->> +
->> +    if ( type != HVMMEM_ioreq_server )
->> +        return -EINVAL;
->> +
->> +    if ( flags & ~XEN_DMOP_IOREQ_MEM_ACCESS_WRITE )
->> +        return -EINVAL;
->> +
->> +    spin_lock_recursive(&d->arch.hvm.ioreq_server.lock);
->> +
->> +    s = get_ioreq_server(d, id);
->> +
->> +    rc = -ENOENT;
->> +    if ( !s )
->> +        goto out;
->> +
->> +    rc = -EPERM;
->> +    if ( s->emulator != current->domain )
->> +        goto out;
->> +
->> +    rc = p2m_set_ioreq_server(d, flags, s);
->> +
->> + out:
->> +    spin_unlock_recursive(&d->arch.hvm.ioreq_server.lock);
->> +
->> +    if ( rc == 0 && flags == 0 )
->> +    {
->> +        struct p2m_domain *p2m = p2m_get_hostp2m(d);
->> +
->> +        if ( read_atomic(&p2m->ioreq.entry_count) )
->> +            p2m_change_entry_type_global(d, p2m_ioreq_server, p2m_ram_rw);
->> +    }
->> +
->> +    return rc;
->> +}
->> +
-> The above doesn't really feel right to me. It's really an entry point into the ioreq server code and as such I think it ought to be left in the common code. I suggest replacing the p2m_set_ioreq_server() function with an arch specific function (also taking the type) which you can then implement here.
+ drivers/net/ethernet/ibm/ibmvnic.c            |  27 ++-
+ drivers/net/ethernet/smsc/smc911x.c           |   6 +-
+ drivers/net/ethernet/smsc/smc91x.c            |   2 +-
+ drivers/net/ethernet/ti/am65-cpsw-qos.c       |   2 +-
+ drivers/net/ethernet/ti/am65-cpts.c           |   2 +-
+ drivers/net/ethernet/toshiba/ps3_gelic_net.c  |   9 +-
+ drivers/net/ethernet/toshiba/spider_net.c     |  18 +-
+ drivers/net/ethernet/xilinx/xilinx_emaclite.c |   1 +
+ drivers/net/usb/lan78xx.c                     | 212 +++++++++---------
+ drivers/net/xen-netback/xenbus.c              |   4 +-
+ drivers/net/xen-netfront.c                    |   6 +-
+ 11 files changed, 141 insertions(+), 148 deletions(-)
 
-Agree that it ought to be left in the common code.
-
-However, I am afraid I didn't entirely get you suggestion how this 
-function could be split. On Arm struct p2m_domain doesn't contain IOREQ 
-fields (p2m->ioreq.XXX), nor p2m_change_entry_type_global() is used, so 
-they should be abstracted together with p2m_set_ioreq_server().
-
-So the whole "if ( rc == 0 && flags == 0 )" check should be folded into 
-arch_p2m_set_ioreq_server implementation on x86? This in turn raises a 
-question can we put a spin_unlock after.
-
-I am wondering would it be acceptable to replace 
-hvm_map_mem_type_to_ioreq_server by 
-arch_hvm_map_mem_type_to_ioreq_server here and have the following in the 
-common code:
-
-int hvm_map_mem_type_to_ioreq_server(struct domain *d,
-                                      ioservid_t id,
-                                      uint32_t type,
-                                      uint32_t flags)
-{
-     return arch_hvm_map_mem_type_to_ioreq_server(d, id, type, flags);
-}
-
-
->
-> The rest of the patch looks ok.
-
-Thank you.
-
+Cc: Alexei Starovoitov <ast@kernel.org>
+Cc: Andrii Nakryiko <andrii@kernel.org>
+Cc: Benjamin Herrenschmidt <benh@kernel.crashing.org>
+Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Cc: bpf@vger.kernel.org
+Cc: Daniel Borkmann <daniel@iogearbox.net>
+Cc: Dany Madden <drt@linux.ibm.com>
+Cc: Daris A Nevil <dnevil@snmc.com>
+Cc: "David S. Miller" <davem@davemloft.net>
+Cc: Dustin McIntire <dustin@sensoria.com>
+Cc: Erik Stahlman <erik@vt.edu>
+Cc: Geoff Levand <geoff@infradead.org>
+Cc: Grygorii Strashko <grygorii.strashko@ti.com>
+Cc: "Gustavo A. R. Silva" <gustavoars@kernel.org>
+Cc: Ishizaki Kou <kou.ishizaki@toshiba.co.jp>
+Cc: Ivan Khoronzhuk <ivan.khoronzhuk@linaro.org>
+Cc: Jakub Kicinski <kuba@kernel.org>
+Cc: Jens Osterkamp <Jens.Osterkamp@de.ibm.com>
+Cc: Jesper Dangaard Brouer <hawk@kernel.org>
+Cc: John Allen <jallen@linux.vnet.ibm.com>
+Cc: John Fastabend <john.fastabend@gmail.com>
+Cc: John Williams <john.williams@xilinx.com>
+Cc: Juergen Gross <jgross@suse.com>
+Cc: KP Singh <kpsingh@chromium.org>
+Cc: Kurt Kanzenbach <kurt@linutronix.de>
+Cc: Lijun Pan <ljp@linux.ibm.com>
+Cc: linuxppc-dev@lists.ozlabs.org
+Cc: linux-usb@vger.kernel.org
+Cc: Martin Habets <mhabets@solarflare.com>
+Cc: Martin KaFai Lau <kafai@fb.com>
+Cc: Michael Ellerman <mpe@ellerman.id.au>
+Cc: "Michael S. Tsirkin" <mst@redhat.com>
+Cc: Michal Simek <michal.simek@xilinx.com>
+Cc: Microchip Linux Driver Support <UNGLinuxDriver@microchip.com>
+Cc: netdev@vger.kernel.org
+Cc: Nicolas Pitre <nico@fluxnic.net>
+Cc: Paul Durrant <paul@xen.org>
+Cc: Paul Mackerras <paulus@samba.org>
+Cc: Peter Cammaert <pc@denkart.be>
+Cc: Russell King <rmk@arm.linux.org.uk>
+Cc: Rusty Russell <rusty@rustcorp.com.au>
+Cc: Santiago Leon <santi_leon@yahoo.com>
+Cc: Shannon Nelson <snelson@pensando.io>
+Cc: Song Liu <songliubraving@fb.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Sukadev Bhattiprolu <sukadev@linux.ibm.com>
+Cc: Thomas Falcon <tlfalcon@linux.vnet.ibm.com>
+Cc: Utz Bacher <utz.bacher@de.ibm.com>
+Cc: Wei Liu <wei.liu@kernel.org>
+Cc: Woojung Huh <woojung.huh@microchip.com>
+Cc: xen-devel@lists.xenproject.org
+Cc: Yonghong Song <yhs@fb.com>
 -- 
-Regards,
-
-Oleksandr Tyshchenko
+2.25.1
 
 
