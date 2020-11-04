@@ -2,28 +2,28 @@ Return-Path: <SRS0=nsPS=EK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 71B11C2D0A3
-	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2020 08:44:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E5946C2D0A3
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2020 09:06:44 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D84FE208C7
-	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2020 08:44:10 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 663D320BED
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2020 09:06:44 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="JlOwjAsB"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D84FE208C7
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="O+gghJDv"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 663D320BED
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.18891.43968 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.18910.44024 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kaEOQ-00040w-FT; Wed, 04 Nov 2020 08:43:46 +0000
+	id 1kaEkV-00065M-83; Wed, 04 Nov 2020 09:06:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 18891.43968; Wed, 04 Nov 2020 08:43:46 +0000
+Received: by outflank-mailman (output) from mailman id 18910.44024; Wed, 04 Nov 2020 09:06:35 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,169 +38,139 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kaEOQ-00040p-Bv; Wed, 04 Nov 2020 08:43:46 +0000
-Received: by outflank-mailman (input) for mailman id 18891;
- Wed, 04 Nov 2020 08:43:45 +0000
+	id 1kaEkV-00065D-4S; Wed, 04 Nov 2020 09:06:35 +0000
+Received: by outflank-mailman (input) for mailman id 18910;
+ Wed, 04 Nov 2020 09:06:34 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=Ed9z=EK=redhat.com=philmd@srs-us1.protection.inumbo.net>)
- id 1kaEOP-00040k-Ky
- for xen-devel@lists.xenproject.org; Wed, 04 Nov 2020 08:43:45 +0000
-Received: from us-smtp-delivery-124.mimecast.com (unknown [63.128.21.124])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id 68352186-03c0-4acc-91a3-a38114ed8126;
- Wed, 04 Nov 2020 08:43:44 +0000 (UTC)
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-524-RJP7EuIzPaOQZilfVSpIUQ-1; Wed, 04 Nov 2020 03:43:42 -0500
-Received: by mail-wr1-f71.google.com with SMTP id p12so1453748wrx.3
- for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2020 00:43:42 -0800 (PST)
-Received: from localhost.localdomain (234.red-83-42-66.dynamicip.rima-tde.net.
- [83.42.66.234])
- by smtp.gmail.com with ESMTPSA id u5sm1311657wml.13.2020.11.04.00.43.39
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=okXs=EK=linaro.org=lee.jones@srs-us1.protection.inumbo.net>)
+ id 1kaEkU-00060O-Qw
+ for xen-devel@lists.xenproject.org; Wed, 04 Nov 2020 09:06:34 +0000
+Received: from mail-wr1-x443.google.com (unknown [2a00:1450:4864:20::443])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id ee51d789-2cc9-4a37-83c3-5fba1d2b78c6;
+ Wed, 04 Nov 2020 09:06:30 +0000 (UTC)
+Received: by mail-wr1-x443.google.com with SMTP id x7so21205841wrl.3
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2020 01:06:30 -0800 (PST)
+Received: from dell.default ([91.110.221.242])
+ by smtp.gmail.com with ESMTPSA id e25sm1607823wrc.76.2020.11.04.01.06.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Nov 2020 00:43:40 -0800 (PST)
+ Wed, 04 Nov 2020 01:06:29 -0800 (PST)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=Ed9z=EK=redhat.com=philmd@srs-us1.protection.inumbo.net>)
-	id 1kaEOP-00040k-Ky
-	for xen-devel@lists.xenproject.org; Wed, 04 Nov 2020 08:43:45 +0000
-X-Inumbo-ID: 68352186-03c0-4acc-91a3-a38114ed8126
-Received: from us-smtp-delivery-124.mimecast.com (unknown [63.128.21.124])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTP
-	id 68352186-03c0-4acc-91a3-a38114ed8126;
-	Wed, 04 Nov 2020 08:43:44 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1604479424;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=AINBmnp1bWLA1LEpK/rcM7CoffR1YWyCikg181rfSi4=;
-	b=JlOwjAsBoxX4KdjWUg+aAwhAOsmaDxiv5iMXa7iMHzscaHs6ktPZv0PLMXhj3YIWPQAgFe
-	JKTBnlHNknkrG+1/5NffNkmMm+jf7KYPp2MrZOp6/dThVfZ+gREr8rReCfiD2ugFAuit3B
-	7qBOFg4YntVyxXIirTBD8Wzm8DH9xBs=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-524-RJP7EuIzPaOQZilfVSpIUQ-1; Wed, 04 Nov 2020 03:43:42 -0500
-X-MC-Unique: RJP7EuIzPaOQZilfVSpIUQ-1
-Received: by mail-wr1-f71.google.com with SMTP id p12so1453748wrx.3
-        for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2020 00:43:42 -0800 (PST)
+	(envelope-from <SRS0=okXs=EK=linaro.org=lee.jones@srs-us1.protection.inumbo.net>)
+	id 1kaEkU-00060O-Qw
+	for xen-devel@lists.xenproject.org; Wed, 04 Nov 2020 09:06:34 +0000
+X-Inumbo-ID: ee51d789-2cc9-4a37-83c3-5fba1d2b78c6
+Received: from mail-wr1-x443.google.com (unknown [2a00:1450:4864:20::443])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id ee51d789-2cc9-4a37-83c3-5fba1d2b78c6;
+	Wed, 04 Nov 2020 09:06:30 +0000 (UTC)
+Received: by mail-wr1-x443.google.com with SMTP id x7so21205841wrl.3
+        for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2020 01:06:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=PvDQ8jiSdggfocg7QevhSStHyCThX2E8vELTACyHnVM=;
+        b=O+gghJDvfp86xHKWNgfCUbwJBZer6plfg8irRb7mhXGvdo7nvbxcHUd63h6bvqOdkS
+         tSUboDCoCYlt9DCY7qiK941vY9cWWcrT5dhUFhaoj+IwczKKPvBRX+IcCuLvSThGRsjC
+         D58ezTytuMvEmOQY2bTv2oJzSy7M8A1Ra31v/4WhDJ/gdw2Ed9Acb+z0jHdgaSO/RfzF
+         aUbBPxkvtygM9zIr6Vg1dDhySOxbbryxrnmEFSg9EURVG1o51j2usPgmkNmwHgmn7/fp
+         pBtT9CLc2nU/2WTyzWyLqGfkFnDvqMLpQf/WYFc17TlKpg2vLmamvONRa7oY8mjJW1dG
+         wp2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=AINBmnp1bWLA1LEpK/rcM7CoffR1YWyCikg181rfSi4=;
-        b=b0wDPtauIvQG5ODGzeD11rOdnmZu03SCZWvs9rsWlgVs6qD6jlcDxbaVVeaaK5t47E
-         w2ASsy8p/lKJVIp26Rb/Ur5BDpKadeCDsWYH12uYkDreLG0eKpkneODVaGkMwy+0MJkz
-         BC+jiMaMq/BATCyelTJCnGo+/SgiBCJ0e58j1k/XJZJUONmBmMECbaBfi6bK4hOkngRq
-         nKgIhtyiQ1kNni44wli5Qqdyti/vHHXisCEMmNq5b6UtB7M8gM/Za/DlVulzPfmT+Tza
-         qu8Dbj8AY+yvM+hZlynMrm2nWobx0XlRMuPravOGNb6decsHtoT7CLV441mh3QRqz7K8
-         2dFA==
-X-Gm-Message-State: AOAM532aHFpx5fPjazEi5WA8FyCDGBliOBIBub3RddYD5C+fOfubmMV9
-	Elrm/E0B/kJ4roGEGVMTmZmHxYuNjgZT4wzOd8ZsOvD7etEJOvpFSD7w32zRa3J1SRSq/XAlS+Q
-	NOZwiZLCZOLk1TJQTdHkpTnevPKY=
-X-Received: by 2002:a1c:6782:: with SMTP id b124mr3528113wmc.117.1604479421393;
-        Wed, 04 Nov 2020 00:43:41 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJyO4zhDM8ZE9YI+Bb3lljj4jjXBr4C5MlBdNUU1BGAXUMIJaqRRVxrwdwAf4OskguQTBvWGag==
-X-Received: by 2002:a1c:6782:: with SMTP id b124mr3528078wmc.117.1604479421239;
-        Wed, 04 Nov 2020 00:43:41 -0800 (PST)
-Received: from localhost.localdomain (234.red-83-42-66.dynamicip.rima-tde.net. [83.42.66.234])
-        by smtp.gmail.com with ESMTPSA id u5sm1311657wml.13.2020.11.04.00.43.39
+        bh=PvDQ8jiSdggfocg7QevhSStHyCThX2E8vELTACyHnVM=;
+        b=Mlm/QNeibY56rRST5gEBt26H2PqzvCEguOAB3sBSsvoTva3kzD/WKdEFsKmOpCPnGw
+         L3z+uzxxRxDDgN1h6d6nKgCC8DMoj9nuJvRzDoKyiz912V4VzVr44XONmKO+d40ry6qo
+         V1Z+A3CowaKmbTd5/m5bNhON20YahMmkQf7kntzU00/Oyvex/eoxYhAZNXktPDJaUB3/
+         pQBd4OXSZYBYEWBSuqoKVBKlV8uh3GA4TVrr4uNySzxNl5YVlHGT2ROkvUz/G2MnWy+G
+         jmC9hf0cgVF2Av8c4hnm3QDiWzF2op//4LlZfp+jlVFNKIhDMH0puDt5yukCfV5q0TJD
+         vxyQ==
+X-Gm-Message-State: AOAM531kpivMTCTeLo+AAZZ37yNYVqe+RTmXYXxfAgFQrqMHsFDz7cpM
+	WQnyWkz4TPltLVjuTtXQ54TNAQ==
+X-Google-Smtp-Source: ABdhPJxJr4EKzyziM/kfu7bfvSRJog/0BPh5wKW3PHtRCRM2FSGZw1LpbirvmDeO5VkFIi4ChKf8FQ==
+X-Received: by 2002:a5d:490a:: with SMTP id x10mr30228709wrq.289.1604480789629;
+        Wed, 04 Nov 2020 01:06:29 -0800 (PST)
+Received: from dell.default ([91.110.221.242])
+        by smtp.gmail.com with ESMTPSA id e25sm1607823wrc.76.2020.11.04.01.06.28
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 04 Nov 2020 00:43:40 -0800 (PST)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
-To: qemu-devel@nongnu.org
-Cc: Christian Borntraeger <borntraeger@de.ibm.com>,
-	Greg Kurz <groug@kaod.org>,
-	Fam Zheng <fam@euphon.net>,
-	Richard Henderson <rth@twiddle.net>,
-	Cornelia Huck <cohuck@redhat.com>,
-	Halil Pasic <pasic@linux.ibm.com>,
-	qemu-s390x@nongnu.org,
-	Matthew Rosato <mjrosato@linux.ibm.com>,
-	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Christian Schoenebeck <qemu_oss@crudebyte.com>,
-	Wainer dos Santos Moschetta <wainersm@redhat.com>,
-	"Daniel P . Berrange" <berrange@redhat.com>,
-	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
-	David Hildenbrand <david@redhat.com>,
-	Thomas Huth <thuth@redhat.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony Perard <anthony.perard@citrix.com>,
+        Wed, 04 Nov 2020 01:06:29 -0800 (PST)
+From: Lee Jones <lee.jones@linaro.org>
+To: davem@davemloft.net,
+	kuba@kernel.org
+Cc: linux-arm-kernel@lists.infradead.org,
+	linux-kernel@vger.kernel.org,
+	Lee Jones <lee.jones@linaro.org>,
+	Wei Liu <wei.liu@kernel.org>,
 	Paul Durrant <paul@xen.org>,
-	xen-devel@lists.xenproject.org
-Subject: [PATCH-for-5.2 v2 2/4] hw/9pfs: Fix Kconfig dependency problem between 9pfs and Xen
-Date: Wed,  4 Nov 2020 09:43:25 +0100
-Message-Id: <20201104084327.3010593-3-philmd@redhat.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20201104084327.3010593-1-philmd@redhat.com>
-References: <20201104084327.3010593-1-philmd@redhat.com>
+	Alexei Starovoitov <ast@kernel.org>,
+	Daniel Borkmann <daniel@iogearbox.net>,
+	Jesper Dangaard Brouer <hawk@kernel.org>,
+	John Fastabend <john.fastabend@gmail.com>,
+	Rusty Russell <rusty@rustcorp.com.au>,
+	xen-devel@lists.xenproject.org,
+	netdev@vger.kernel.org,
+	bpf@vger.kernel.org
+Subject: [PATCH 05/12] net: xen-netback: xenbus: Demote nonconformant kernel-doc headers
+Date: Wed,  4 Nov 2020 09:06:03 +0000
+Message-Id: <20201104090610.1446616-6-lee.jones@linaro.org>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20201104090610.1446616-1-lee.jones@linaro.org>
+References: <20201104090610.1446616-1-lee.jones@linaro.org>
 MIME-Version: 1.0
-Authentication-Results: relay.mimecast.com;
-	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=philmd@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Fixes './configure --without-default-devices --enable-xen' build:
+Fixes the following W=1 kernel build warning(s):
 
-  /usr/bin/ld: libcommon.fa.p/hw_xen_xen-legacy-backend.c.o: in function `xen_be_register_common':
-  hw/xen/xen-legacy-backend.c:754: undefined reference to `xen_9pfs_ops'
-  /usr/bin/ld: libcommon.fa.p/fsdev_qemu-fsdev.c.o:(.data.rel+0x8): undefined reference to `local_ops'
-  /usr/bin/ld: libcommon.fa.p/fsdev_qemu-fsdev.c.o:(.data.rel+0x20): undefined reference to `synth_ops'
-  /usr/bin/ld: libcommon.fa.p/fsdev_qemu-fsdev.c.o:(.data.rel+0x38): undefined reference to `proxy_ops'
-  collect2: error: ld returned 1 exit status
+ drivers/net/xen-netback/xenbus.c:419: warning: Function parameter or member 'dev' not described in 'frontend_changed'
+ drivers/net/xen-netback/xenbus.c:419: warning: Function parameter or member 'frontend_state' not described in 'frontend_changed'
+ drivers/net/xen-netback/xenbus.c:1001: warning: Function parameter or member 'dev' not described in 'netback_probe'
+ drivers/net/xen-netback/xenbus.c:1001: warning: Function parameter or member 'id' not described in 'netback_probe'
 
-Fixes: b2c00bce54c ("meson: convert hw/9pfs, cleanup")
-Suggested-by: Paolo Bonzini <pbonzini@redhat.com>
-Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
----
-I'm not sure b2c00bce54c is the real culprit
-
-Cc: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Anthony Perard <anthony.perard@citrix.com>
+Cc: Wei Liu <wei.liu@kernel.org>
 Cc: Paul Durrant <paul@xen.org>
+Cc: "David S. Miller" <davem@davemloft.net>
+Cc: Jakub Kicinski <kuba@kernel.org>
+Cc: Alexei Starovoitov <ast@kernel.org>
+Cc: Daniel Borkmann <daniel@iogearbox.net>
+Cc: Jesper Dangaard Brouer <hawk@kernel.org>
+Cc: John Fastabend <john.fastabend@gmail.com>
+Cc: Rusty Russell <rusty@rustcorp.com.au>
 Cc: xen-devel@lists.xenproject.org
-Cc: Greg Kurz <groug@kaod.org>
-Cc: Christian Schoenebeck <qemu_oss@crudebyte.com>
+Cc: netdev@vger.kernel.org
+Cc: bpf@vger.kernel.org
+Signed-off-by: Lee Jones <lee.jones@linaro.org>
 ---
- hw/9pfs/Kconfig     | 4 ----
- hw/9pfs/meson.build | 2 +-
- 2 files changed, 1 insertion(+), 5 deletions(-)
+ drivers/net/xen-netback/xenbus.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/hw/9pfs/Kconfig b/hw/9pfs/Kconfig
-index d3ebd737301..3ae57496613 100644
---- a/hw/9pfs/Kconfig
-+++ b/hw/9pfs/Kconfig
-@@ -2,12 +2,8 @@ config FSDEV_9P
-     bool
-     depends on VIRTFS
+diff --git a/drivers/net/xen-netback/xenbus.c b/drivers/net/xen-netback/xenbus.c
+index f1c1624cec8f5..de1b5471d929b 100644
+--- a/drivers/net/xen-netback/xenbus.c
++++ b/drivers/net/xen-netback/xenbus.c
+@@ -411,7 +411,7 @@ static void read_xenbus_frontend_xdp(struct backend_info *be,
+ 	vif->xdp_headroom = headroom;
+ }
  
--config 9PFS
--    bool
--
- config VIRTIO_9P
-     bool
-     default y
-     depends on VIRTFS && VIRTIO
-     select FSDEV_9P
--    select 9PFS
-diff --git a/hw/9pfs/meson.build b/hw/9pfs/meson.build
-index cc094262122..99be5d91196 100644
---- a/hw/9pfs/meson.build
-+++ b/hw/9pfs/meson.build
-@@ -15,6 +15,6 @@
-   'coxattr.c',
- ))
- fs_ss.add(when: 'CONFIG_XEN', if_true: files('xen-9p-backend.c'))
--softmmu_ss.add_all(when: 'CONFIG_9PFS', if_true: fs_ss)
-+softmmu_ss.add_all(when: 'CONFIG_FSDEV_9P', if_true: fs_ss)
+-/**
++/*
+  * Callback received when the frontend's state changes.
+  */
+ static void frontend_changed(struct xenbus_device *dev,
+@@ -992,7 +992,7 @@ static int netback_remove(struct xenbus_device *dev)
+ 	return 0;
+ }
  
- specific_ss.add(when: 'CONFIG_VIRTIO_9P', if_true: files('virtio-9p-device.c'))
+-/**
++/*
+  * Entry point to this code when a new device is created.  Allocate the basic
+  * structures and switch to InitWait.
+  */
 -- 
-2.26.2
+2.25.1
 
 
