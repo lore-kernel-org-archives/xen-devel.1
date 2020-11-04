@@ -2,28 +2,28 @@ Return-Path: <SRS0=nsPS=EK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.1 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E5946C2D0A3
-	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2020 09:06:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A9E41C55178
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2020 09:06:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 663D320BED
-	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2020 09:06:44 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 3B92C2222C
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2020 09:06:45 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="O+gghJDv"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 663D320BED
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linaro.org
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="pzS7j4KK"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3B92C2222C
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.18910.44024 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.18909.44012 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kaEkV-00065M-83; Wed, 04 Nov 2020 09:06:35 +0000
+	id 1kaEkR-00062b-Vj; Wed, 04 Nov 2020 09:06:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 18910.44024; Wed, 04 Nov 2020 09:06:35 +0000
+Received: by outflank-mailman (output) from mailman id 18909.44012; Wed, 04 Nov 2020 09:06:31 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,139 +38,191 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kaEkV-00065D-4S; Wed, 04 Nov 2020 09:06:35 +0000
-Received: by outflank-mailman (input) for mailman id 18910;
- Wed, 04 Nov 2020 09:06:34 +0000
+	id 1kaEkR-00062Q-Rm; Wed, 04 Nov 2020 09:06:31 +0000
+Received: by outflank-mailman (input) for mailman id 18909;
+ Wed, 04 Nov 2020 09:06:29 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=okXs=EK=linaro.org=lee.jones@srs-us1.protection.inumbo.net>)
- id 1kaEkU-00060O-Qw
- for xen-devel@lists.xenproject.org; Wed, 04 Nov 2020 09:06:34 +0000
-Received: from mail-wr1-x443.google.com (unknown [2a00:1450:4864:20::443])
+ <SRS0=d6HI=EK=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
+ id 1kaEkP-00060O-Qb
+ for xen-devel@lists.xenproject.org; Wed, 04 Nov 2020 09:06:29 +0000
+Received: from mail-lf1-x142.google.com (unknown [2a00:1450:4864:20::142])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id ee51d789-2cc9-4a37-83c3-5fba1d2b78c6;
- Wed, 04 Nov 2020 09:06:30 +0000 (UTC)
-Received: by mail-wr1-x443.google.com with SMTP id x7so21205841wrl.3
- for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2020 01:06:30 -0800 (PST)
-Received: from dell.default ([91.110.221.242])
- by smtp.gmail.com with ESMTPSA id e25sm1607823wrc.76.2020.11.04.01.06.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Nov 2020 01:06:29 -0800 (PST)
+ id 13280b07-5125-48ab-9d03-1b5a2930a113;
+ Wed, 04 Nov 2020 09:06:23 +0000 (UTC)
+Received: by mail-lf1-x142.google.com with SMTP id s30so3861232lfc.4
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2020 01:06:23 -0800 (PST)
+Received: from [100.64.112.11] (ll-18.209.223.85.sovam.net.ua. [85.223.209.18])
+ by smtp.gmail.com with ESMTPSA id n23sm349389lfe.210.2020.11.04.01.06.21
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 04 Nov 2020 01:06:22 -0800 (PST)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=okXs=EK=linaro.org=lee.jones@srs-us1.protection.inumbo.net>)
-	id 1kaEkU-00060O-Qw
-	for xen-devel@lists.xenproject.org; Wed, 04 Nov 2020 09:06:34 +0000
-X-Inumbo-ID: ee51d789-2cc9-4a37-83c3-5fba1d2b78c6
-Received: from mail-wr1-x443.google.com (unknown [2a00:1450:4864:20::443])
+	(envelope-from <SRS0=d6HI=EK=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
+	id 1kaEkP-00060O-Qb
+	for xen-devel@lists.xenproject.org; Wed, 04 Nov 2020 09:06:29 +0000
+X-Inumbo-ID: 13280b07-5125-48ab-9d03-1b5a2930a113
+Received: from mail-lf1-x142.google.com (unknown [2a00:1450:4864:20::142])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id ee51d789-2cc9-4a37-83c3-5fba1d2b78c6;
-	Wed, 04 Nov 2020 09:06:30 +0000 (UTC)
-Received: by mail-wr1-x443.google.com with SMTP id x7so21205841wrl.3
-        for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2020 01:06:30 -0800 (PST)
+	id 13280b07-5125-48ab-9d03-1b5a2930a113;
+	Wed, 04 Nov 2020 09:06:23 +0000 (UTC)
+Received: by mail-lf1-x142.google.com with SMTP id s30so3861232lfc.4
+        for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2020 01:06:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=PvDQ8jiSdggfocg7QevhSStHyCThX2E8vELTACyHnVM=;
-        b=O+gghJDvfp86xHKWNgfCUbwJBZer6plfg8irRb7mhXGvdo7nvbxcHUd63h6bvqOdkS
-         tSUboDCoCYlt9DCY7qiK941vY9cWWcrT5dhUFhaoj+IwczKKPvBRX+IcCuLvSThGRsjC
-         D58ezTytuMvEmOQY2bTv2oJzSy7M8A1Ra31v/4WhDJ/gdw2Ed9Acb+z0jHdgaSO/RfzF
-         aUbBPxkvtygM9zIr6Vg1dDhySOxbbryxrnmEFSg9EURVG1o51j2usPgmkNmwHgmn7/fp
-         pBtT9CLc2nU/2WTyzWyLqGfkFnDvqMLpQf/WYFc17TlKpg2vLmamvONRa7oY8mjJW1dG
-         wp2w==
+        d=gmail.com; s=20161025;
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-transfer-encoding:content-language;
+        bh=axTLjJW9pP5qcu9UM7eUKbFLNLSswfMDMuK1tEN4aa8=;
+        b=pzS7j4KK5si2KPo7uwgcoPd9rlGFqnz1LjGZtCazdpSnZx9nuoC205qSJm7vlWdFuh
+         8wILrkB9eKslJG6NctTJ61K5gSdMYNUdiFpGfwI3FkpbekuwTNtPgdyoC7nCFRRnf3qI
+         YrvWZNy4PZhEgd5skCPvpyIQwip1Y0v1EE2C2iPkay2Tv2BgCfBwlgbxdPXQlTbWmMCN
+         HWYEYj2UKpFpDYxJbivMtBZsur7jVgAKR4exPIC+lufI2Zv7EWHheqz9ScAzjoi8LbU9
+         m9FpBmOq6f535rOPbia126aHQao88T0ZkDg8EY5mb11nkyy3faa7sBwtZsqlpr5GS5o2
+         ITpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=PvDQ8jiSdggfocg7QevhSStHyCThX2E8vELTACyHnVM=;
-        b=Mlm/QNeibY56rRST5gEBt26H2PqzvCEguOAB3sBSsvoTva3kzD/WKdEFsKmOpCPnGw
-         L3z+uzxxRxDDgN1h6d6nKgCC8DMoj9nuJvRzDoKyiz912V4VzVr44XONmKO+d40ry6qo
-         V1Z+A3CowaKmbTd5/m5bNhON20YahMmkQf7kntzU00/Oyvex/eoxYhAZNXktPDJaUB3/
-         pQBd4OXSZYBYEWBSuqoKVBKlV8uh3GA4TVrr4uNySzxNl5YVlHGT2ROkvUz/G2MnWy+G
-         jmC9hf0cgVF2Av8c4hnm3QDiWzF2op//4LlZfp+jlVFNKIhDMH0puDt5yukCfV5q0TJD
-         vxyQ==
-X-Gm-Message-State: AOAM531kpivMTCTeLo+AAZZ37yNYVqe+RTmXYXxfAgFQrqMHsFDz7cpM
-	WQnyWkz4TPltLVjuTtXQ54TNAQ==
-X-Google-Smtp-Source: ABdhPJxJr4EKzyziM/kfu7bfvSRJog/0BPh5wKW3PHtRCRM2FSGZw1LpbirvmDeO5VkFIi4ChKf8FQ==
-X-Received: by 2002:a5d:490a:: with SMTP id x10mr30228709wrq.289.1604480789629;
-        Wed, 04 Nov 2020 01:06:29 -0800 (PST)
-Received: from dell.default ([91.110.221.242])
-        by smtp.gmail.com with ESMTPSA id e25sm1607823wrc.76.2020.11.04.01.06.28
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 04 Nov 2020 01:06:29 -0800 (PST)
-From: Lee Jones <lee.jones@linaro.org>
-To: davem@davemloft.net,
-	kuba@kernel.org
-Cc: linux-arm-kernel@lists.infradead.org,
-	linux-kernel@vger.kernel.org,
-	Lee Jones <lee.jones@linaro.org>,
-	Wei Liu <wei.liu@kernel.org>,
-	Paul Durrant <paul@xen.org>,
-	Alexei Starovoitov <ast@kernel.org>,
-	Daniel Borkmann <daniel@iogearbox.net>,
-	Jesper Dangaard Brouer <hawk@kernel.org>,
-	John Fastabend <john.fastabend@gmail.com>,
-	Rusty Russell <rusty@rustcorp.com.au>,
-	xen-devel@lists.xenproject.org,
-	netdev@vger.kernel.org,
-	bpf@vger.kernel.org
-Subject: [PATCH 05/12] net: xen-netback: xenbus: Demote nonconformant kernel-doc headers
-Date: Wed,  4 Nov 2020 09:06:03 +0000
-Message-Id: <20201104090610.1446616-6-lee.jones@linaro.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20201104090610.1446616-1-lee.jones@linaro.org>
-References: <20201104090610.1446616-1-lee.jones@linaro.org>
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-transfer-encoding
+         :content-language;
+        bh=axTLjJW9pP5qcu9UM7eUKbFLNLSswfMDMuK1tEN4aa8=;
+        b=teZGehzjYRexU0VAwLxl09bxUpyqsy6ayHxwgx/IodTzpJEeg2cDsgbbQKz2/CZ3Q4
+         c3WGTkCROJH4g/TfP9QUH39Us6MC4cR58S7vz8MKjvNM7TsvYaFRjd/QTRgjUjSsq3/P
+         tSVnZuoLq6F5NaFJwDXcH3SN0CPgFadN00GumI0H6mcpcquEu1fYWO3AICCIlzjhpS/A
+         FDkP5wQGwZ3+wt533i5wNd23fZ4zYUOcKTimeQvkWXFcsTWrX1rgBLFMysW4kfhfLcAL
+         9TF7QnNgK9rBmekOswJ4OT6sNvSF4fRLULZOJPi+L3Qx7waZx09LXNIcZSRZ5BywvFBp
+         T77w==
+X-Gm-Message-State: AOAM531R9foCBQEXpWf/Y0LKsmRNG7B8C3hzLxMIOUSq6xmOjmlkSeFo
+	9cxLelZ1SVygfrrwunHsOIU=
+X-Google-Smtp-Source: ABdhPJytUl2YF8xoDU181hAQYEzfF9rGbPL42yGnM/scNRtyLavk99yogN8o1jzsIt/ZnLJPDA5ykA==
+X-Received: by 2002:a05:6512:3052:: with SMTP id b18mr8239333lfb.505.1604480782765;
+        Wed, 04 Nov 2020 01:06:22 -0800 (PST)
+Received: from [100.64.112.11] (ll-18.209.223.85.sovam.net.ua. [85.223.209.18])
+        by smtp.gmail.com with ESMTPSA id n23sm349389lfe.210.2020.11.04.01.06.21
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 04 Nov 2020 01:06:22 -0800 (PST)
+Subject: Re: [PATCH V2 01/23] x86/ioreq: Prepare IOREQ feature for making it
+ common
+To: paul@xen.org, xen-devel@lists.xenproject.org
+Cc: 'Oleksandr Tyshchenko' <oleksandr_tyshchenko@epam.com>,
+ 'Jan Beulich' <jbeulich@suse.com>,
+ 'Andrew Cooper' <andrew.cooper3@citrix.com>,
+ =?UTF-8?B?J1JvZ2VyIFBhdSBNb25uw6kn?= <roger.pau@citrix.com>,
+ 'Julien Grall' <julien@xen.org>,
+ 'Stefano Stabellini' <sstabellini@kernel.org>, 'Wei Liu' <wl@xen.org>,
+ 'Julien Grall' <julien.grall@arm.com>
+References: <1602780274-29141-1-git-send-email-olekstysh@gmail.com>
+ <1602780274-29141-2-git-send-email-olekstysh@gmail.com>
+ <003c01d6a6b0$8c418f50$a4c4adf0$@xen.org>
+From: Oleksandr <olekstysh@gmail.com>
+Message-ID: <3dd55087-0c07-c9f3-e80a-8b136c226475@gmail.com>
+Date: Wed, 4 Nov 2020 11:06:11 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
+In-Reply-To: <003c01d6a6b0$8c418f50$a4c4adf0$@xen.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-Fixes the following W=1 kernel build warning(s):
 
- drivers/net/xen-netback/xenbus.c:419: warning: Function parameter or member 'dev' not described in 'frontend_changed'
- drivers/net/xen-netback/xenbus.c:419: warning: Function parameter or member 'frontend_state' not described in 'frontend_changed'
- drivers/net/xen-netback/xenbus.c:1001: warning: Function parameter or member 'dev' not described in 'netback_probe'
- drivers/net/xen-netback/xenbus.c:1001: warning: Function parameter or member 'id' not described in 'netback_probe'
+On 20.10.20 10:13, Paul Durrant wrote:
 
-Cc: Wei Liu <wei.liu@kernel.org>
-Cc: Paul Durrant <paul@xen.org>
-Cc: "David S. Miller" <davem@davemloft.net>
-Cc: Jakub Kicinski <kuba@kernel.org>
-Cc: Alexei Starovoitov <ast@kernel.org>
-Cc: Daniel Borkmann <daniel@iogearbox.net>
-Cc: Jesper Dangaard Brouer <hawk@kernel.org>
-Cc: John Fastabend <john.fastabend@gmail.com>
-Cc: Rusty Russell <rusty@rustcorp.com.au>
-Cc: xen-devel@lists.xenproject.org
-Cc: netdev@vger.kernel.org
-Cc: bpf@vger.kernel.org
-Signed-off-by: Lee Jones <lee.jones@linaro.org>
----
- drivers/net/xen-netback/xenbus.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Hi Paul.
 
-diff --git a/drivers/net/xen-netback/xenbus.c b/drivers/net/xen-netback/xenbus.c
-index f1c1624cec8f5..de1b5471d929b 100644
---- a/drivers/net/xen-netback/xenbus.c
-+++ b/drivers/net/xen-netback/xenbus.c
-@@ -411,7 +411,7 @@ static void read_xenbus_frontend_xdp(struct backend_info *be,
- 	vif->xdp_headroom = headroom;
- }
- 
--/**
-+/*
-  * Callback received when the frontend's state changes.
-  */
- static void frontend_changed(struct xenbus_device *dev,
-@@ -992,7 +992,7 @@ static int netback_remove(struct xenbus_device *dev)
- 	return 0;
- }
- 
--/**
-+/*
-  * Entry point to this code when a new device is created.  Allocate the basic
-  * structures and switch to InitWait.
-  */
+Sorry for the late response.
+
+>> +
+>> +/* Called when target domain is paused */
+>> +static inline void arch_hvm_destroy_ioreq_server(struct hvm_ioreq_server *s)
+>> +{
+>> +    p2m_set_ioreq_server(s->target, 0, s);
+>> +}
+>> +
+>> +/*
+>> + * Map or unmap an ioreq server to specific memory type. For now, only
+>> + * HVMMEM_ioreq_server is supported, and in the future new types can be
+>> + * introduced, e.g. HVMMEM_ioreq_serverX mapped to ioreq server X. And
+>> + * currently, only write operations are to be forwarded to an ioreq server.
+>> + * Support for the emulation of read operations can be added when an ioreq
+>> + * server has such requirement in the future.
+>> + */
+>> +static inline int hvm_map_mem_type_to_ioreq_server(struct domain *d,
+>> +                                                   ioservid_t id,
+>> +                                                   uint32_t type,
+>> +                                                   uint32_t flags)
+>> +{
+>> +    struct hvm_ioreq_server *s;
+>> +    int rc;
+>> +
+>> +    if ( type != HVMMEM_ioreq_server )
+>> +        return -EINVAL;
+>> +
+>> +    if ( flags & ~XEN_DMOP_IOREQ_MEM_ACCESS_WRITE )
+>> +        return -EINVAL;
+>> +
+>> +    spin_lock_recursive(&d->arch.hvm.ioreq_server.lock);
+>> +
+>> +    s = get_ioreq_server(d, id);
+>> +
+>> +    rc = -ENOENT;
+>> +    if ( !s )
+>> +        goto out;
+>> +
+>> +    rc = -EPERM;
+>> +    if ( s->emulator != current->domain )
+>> +        goto out;
+>> +
+>> +    rc = p2m_set_ioreq_server(d, flags, s);
+>> +
+>> + out:
+>> +    spin_unlock_recursive(&d->arch.hvm.ioreq_server.lock);
+>> +
+>> +    if ( rc == 0 && flags == 0 )
+>> +    {
+>> +        struct p2m_domain *p2m = p2m_get_hostp2m(d);
+>> +
+>> +        if ( read_atomic(&p2m->ioreq.entry_count) )
+>> +            p2m_change_entry_type_global(d, p2m_ioreq_server, p2m_ram_rw);
+>> +    }
+>> +
+>> +    return rc;
+>> +}
+>> +
+> The above doesn't really feel right to me. It's really an entry point into the ioreq server code and as such I think it ought to be left in the common code. I suggest replacing the p2m_set_ioreq_server() function with an arch specific function (also taking the type) which you can then implement here.
+
+Agree that it ought to be left in the common code.
+
+However, I am afraid I didn't entirely get you suggestion how this 
+function could be split. On Arm struct p2m_domain doesn't contain IOREQ 
+fields (p2m->ioreq.XXX), nor p2m_change_entry_type_global() is used, so 
+they should be abstracted together with p2m_set_ioreq_server().
+
+So the whole "if ( rc == 0 && flags == 0 )" check should be folded into 
+arch_p2m_set_ioreq_server implementation on x86? This in turn raises a 
+question can we put a spin_unlock after.
+
+I am wondering would it be acceptable to replace 
+hvm_map_mem_type_to_ioreq_server by 
+arch_hvm_map_mem_type_to_ioreq_server here and have the following in the 
+common code:
+
+int hvm_map_mem_type_to_ioreq_server(struct domain *d,
+                                      ioservid_t id,
+                                      uint32_t type,
+                                      uint32_t flags)
+{
+     return arch_hvm_map_mem_type_to_ioreq_server(d, id, type, flags);
+}
+
+
+>
+> The rest of the patch looks ok.
+
+Thank you.
+
 -- 
-2.25.1
+Regards,
+
+Oleksandr Tyshchenko
 
 
