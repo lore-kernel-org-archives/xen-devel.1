@@ -2,28 +2,28 @@ Return-Path: <SRS0=nsPS=EK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-8.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CD57FC55178
-	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2020 09:06:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8FBADC4741F
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2020 09:32:08 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4D5F8223FD
-	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2020 09:06:51 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 13B79221F8
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2020 09:32:07 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="Vy0ifnFN"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4D5F8223FD
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linaro.org
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="SZrkiHwW"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 13B79221F8
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.18911.44036 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.18934.44048 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kaEka-00069i-I6; Wed, 04 Nov 2020 09:06:40 +0000
+	id 1kaF8t-0000YD-M8; Wed, 04 Nov 2020 09:31:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 18911.44036; Wed, 04 Nov 2020 09:06:40 +0000
+Received: by outflank-mailman (output) from mailman id 18934.44048; Wed, 04 Nov 2020 09:31:47 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,162 +38,107 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kaEka-00069W-Dl; Wed, 04 Nov 2020 09:06:40 +0000
-Received: by outflank-mailman (input) for mailman id 18911;
- Wed, 04 Nov 2020 09:06:39 +0000
+	id 1kaF8t-0000Y6-JE; Wed, 04 Nov 2020 09:31:47 +0000
+Received: by outflank-mailman (input) for mailman id 18934;
+ Wed, 04 Nov 2020 09:31:46 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=okXs=EK=linaro.org=lee.jones@srs-us1.protection.inumbo.net>)
- id 1kaEkZ-00060O-Qw
- for xen-devel@lists.xenproject.org; Wed, 04 Nov 2020 09:06:39 +0000
-Received: from mail-wm1-x344.google.com (unknown [2a00:1450:4864:20::344])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id bf22235b-69f8-49d6-8865-f0aaba7ab350;
- Wed, 04 Nov 2020 09:06:34 +0000 (UTC)
-Received: by mail-wm1-x344.google.com with SMTP id 13so1627471wmf.0
- for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2020 01:06:34 -0800 (PST)
-Received: from dell.default ([91.110.221.242])
- by smtp.gmail.com with ESMTPSA id e25sm1607823wrc.76.2020.11.04.01.06.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Nov 2020 01:06:33 -0800 (PST)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=2Coh=EK=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1kaF8s-0000Y1-CV
+ for xen-devel@lists.xenproject.org; Wed, 04 Nov 2020 09:31:46 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+ id 56fbde74-ca87-4682-a618-b7c6c0b3dac8;
+ Wed, 04 Nov 2020 09:31:45 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 0BAD1AC0C;
+ Wed,  4 Nov 2020 09:31:45 +0000 (UTC)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=okXs=EK=linaro.org=lee.jones@srs-us1.protection.inumbo.net>)
-	id 1kaEkZ-00060O-Qw
-	for xen-devel@lists.xenproject.org; Wed, 04 Nov 2020 09:06:39 +0000
-X-Inumbo-ID: bf22235b-69f8-49d6-8865-f0aaba7ab350
-Received: from mail-wm1-x344.google.com (unknown [2a00:1450:4864:20::344])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id bf22235b-69f8-49d6-8865-f0aaba7ab350;
-	Wed, 04 Nov 2020 09:06:34 +0000 (UTC)
-Received: by mail-wm1-x344.google.com with SMTP id 13so1627471wmf.0
-        for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2020 01:06:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=kRmJDRZK6hYnZwsJWtSyII6GRFG28FGG7WVn2jtoat0=;
-        b=Vy0ifnFNZsdam2EYQqrtqEkqnpo+nDE+vtZ1Exog/zDTxcDNqjIjGsjIU1pi4kN3El
-         WJb+mUgrcdzGRp3ibB8ikQUE/nHlWxpqRKWFVzAojniHotRo1+HOdbKPDVdxQrzIx6sR
-         o5bH/KMSqaIrUmQaZkvfPrv1gFxI//c+XLeUSm9xVA3kwk7Z26qKNIX1zX0RkPnJ08Uu
-         3N/AsWZ+Jl5bU+SZ4vt/SsxAgf4VmWQbEcGIUXSUX2VSwqItVn590AY7hkgF110FhA9z
-         j+QBoryGrshn3GGWS2c27qqPt497aXTtIabvKKAeyhw/gsk+3P4aFPmg5/JE0C/2HE/p
-         rbiQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=kRmJDRZK6hYnZwsJWtSyII6GRFG28FGG7WVn2jtoat0=;
-        b=TxOpx8nGQPg3i9XE4R4Njwwol0rz66uGwQ38vi3jhfV4YmPvnsrHviVQLdW3LDsNqM
-         jVblj0y1MxiRzqvjjs9tM5GGytrkcr5PUASro1aRmMe9DhWFtiQp31Vq7dJmxpFxjmC1
-         kTUUdwN4Sw7JTbJvyli0BYqpma3Aqed8oIm0JC6TeGRYxMofwqlpzSolf9H4G1sEUWZh
-         Yq82Rk7Msou0dHffQgjjfwzUCetKiDYgAqM3gwNW8KYBPEczxzFgswIzB+C1aN/0ElCX
-         nHR7oCGfn/GlIjSnkB1N/X/OBy4DsKJgrGAa67oTj1o3G0wnOPuH23UGVBHsPYgN5pE9
-         dkZQ==
-X-Gm-Message-State: AOAM5309+Dl7AA+g55cNfb0HzGvBduHK0bPuvy/2+wIFmW4F3UmFBk/Y
-	5NSf47DIASmhJAzwH6T//TgvBQ==
-X-Google-Smtp-Source: ABdhPJwqi0yB/+B9/s0ULCABSavH/6P6SV0tchgnVRlqqMJnN0CKjV/Hb1Yj3pHPlBIYEvJ5zSVeQA==
-X-Received: by 2002:a1c:1dc1:: with SMTP id d184mr3360241wmd.169.1604480793874;
-        Wed, 04 Nov 2020 01:06:33 -0800 (PST)
-Received: from dell.default ([91.110.221.242])
-        by smtp.gmail.com with ESMTPSA id e25sm1607823wrc.76.2020.11.04.01.06.32
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 04 Nov 2020 01:06:33 -0800 (PST)
-From: Lee Jones <lee.jones@linaro.org>
-To: davem@davemloft.net,
-	kuba@kernel.org
-Cc: linux-arm-kernel@lists.infradead.org,
-	linux-kernel@vger.kernel.org,
-	Lee Jones <lee.jones@linaro.org>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Alexei Starovoitov <ast@kernel.org>,
-	Daniel Borkmann <daniel@iogearbox.net>,
-	Jesper Dangaard Brouer <hawk@kernel.org>,
-	John Fastabend <john.fastabend@gmail.com>,
-	Martin KaFai Lau <kafai@fb.com>,
-	Song Liu <songliubraving@fb.com>,
-	Yonghong Song <yhs@fb.com>,
-	Andrii Nakryiko <andrii@kernel.org>,
-	KP Singh <kpsingh@chromium.org>,
-	xen-devel@lists.xenproject.org,
-	netdev@vger.kernel.org,
-	bpf@vger.kernel.org
-Subject: [PATCH 08/12] net: xen-netfront: Demote non-kernel-doc headers to standard comment blocks
-Date: Wed,  4 Nov 2020 09:06:06 +0000
-Message-Id: <20201104090610.1446616-9-lee.jones@linaro.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20201104090610.1446616-1-lee.jones@linaro.org>
+	(envelope-from <SRS0=2Coh=EK=suse.com=jgross@srs-us1.protection.inumbo.net>)
+	id 1kaF8s-0000Y1-CV
+	for xen-devel@lists.xenproject.org; Wed, 04 Nov 2020 09:31:46 +0000
+X-Inumbo-ID: 56fbde74-ca87-4682-a618-b7c6c0b3dac8
+Received: from mx2.suse.de (unknown [195.135.220.15])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+	id 56fbde74-ca87-4682-a618-b7c6c0b3dac8;
+	Wed, 04 Nov 2020 09:31:45 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1604482305;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=fUfLaQh80kHxebGdmT1vb0kxk26aLHgtzDNP5/t+WZE=;
+	b=SZrkiHwWie88Qb3OFFLiaA9/AhqXOuvNgLEitRn+N6FRqb9Uh3EsjZ9d0S49sjR2FlKuFc
+	Bhtfq6Pd4C+GZFy4DoiO71w7l6VdgfborjXI8SLvgNczSGRmD48czMgilXZc3JYKIq6TPt
+	1eA2iBb0G+GKtbJz5IFM8r33XkRQ8iU=
+Received: from relay2.suse.de (unknown [195.135.221.27])
+	by mx2.suse.de (Postfix) with ESMTP id 0BAD1AC0C;
+	Wed,  4 Nov 2020 09:31:45 +0000 (UTC)
+Subject: Re: [PATCH 08/12] net: xen-netfront: Demote non-kernel-doc headers to
+ standard comment blocks
+To: Lee Jones <lee.jones@linaro.org>, davem@davemloft.net, kuba@kernel.org
+Cc: linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Alexei Starovoitov <ast@kernel.org>, Daniel Borkmann <daniel@iogearbox.net>,
+ Jesper Dangaard Brouer <hawk@kernel.org>,
+ John Fastabend <john.fastabend@gmail.com>, Martin KaFai Lau <kafai@fb.com>,
+ Song Liu <songliubraving@fb.com>, Yonghong Song <yhs@fb.com>,
+ Andrii Nakryiko <andrii@kernel.org>, KP Singh <kpsingh@chromium.org>,
+ xen-devel@lists.xenproject.org, netdev@vger.kernel.org, bpf@vger.kernel.org
 References: <20201104090610.1446616-1-lee.jones@linaro.org>
+ <20201104090610.1446616-9-lee.jones@linaro.org>
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Message-ID: <9ba500df-9d22-3a4e-056f-9bb5f2b42440@suse.com>
+Date: Wed, 4 Nov 2020 10:31:43 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+In-Reply-To: <20201104090610.1446616-9-lee.jones@linaro.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 
-Fixes the following W=1 kernel build warning(s):
+On 04.11.20 10:06, Lee Jones wrote:
+> Fixes the following W=1 kernel build warning(s):
+> 
+>   drivers/net/xen-netfront.c: In function ‘store_rxbuf’:
+>   drivers/net/xen-netfront.c:2416:16: warning: variable ‘target’ set but not used [-Wunused-but-set-variable]
 
- drivers/net/xen-netfront.c: In function ‘store_rxbuf’:
- drivers/net/xen-netfront.c:2416:16: warning: variable ‘target’ set but not used [-Wunused-but-set-variable]
- drivers/net/xen-netfront.c:1592: warning: Function parameter or member 'dev' not described in 'netfront_probe'
- drivers/net/xen-netfront.c:1592: warning: Function parameter or member 'id' not described in 'netfront_probe'
- drivers/net/xen-netfront.c:1669: warning: Function parameter or member 'dev' not described in 'netfront_resume'
- drivers/net/xen-netfront.c:2313: warning: Function parameter or member 'dev' not described in 'netback_changed'
- drivers/net/xen-netfront.c:2313: warning: Function parameter or member 'backend_state' not described in 'netback_changed'
+Those two warnings are not fixed by the patch.
 
-Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Cc: Juergen Gross <jgross@suse.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>
-Cc: "David S. Miller" <davem@davemloft.net>
-Cc: Jakub Kicinski <kuba@kernel.org>
-Cc: Alexei Starovoitov <ast@kernel.org>
-Cc: Daniel Borkmann <daniel@iogearbox.net>
-Cc: Jesper Dangaard Brouer <hawk@kernel.org>
-Cc: John Fastabend <john.fastabend@gmail.com>
-Cc: Martin KaFai Lau <kafai@fb.com>
-Cc: Song Liu <songliubraving@fb.com>
-Cc: Yonghong Song <yhs@fb.com>
-Cc: Andrii Nakryiko <andrii@kernel.org>
-Cc: KP Singh <kpsingh@chromium.org>
-Cc: xen-devel@lists.xenproject.org
-Cc: netdev@vger.kernel.org
-Cc: bpf@vger.kernel.org
-Signed-off-by: Lee Jones <lee.jones@linaro.org>
----
- drivers/net/xen-netfront.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+>   drivers/net/xen-netfront.c:1592: warning: Function parameter or member 'dev' not described in 'netfront_probe'
+>   drivers/net/xen-netfront.c:1592: warning: Function parameter or member 'id' not described in 'netfront_probe'
+>   drivers/net/xen-netfront.c:1669: warning: Function parameter or member 'dev' not described in 'netfront_resume'
+>   drivers/net/xen-netfront.c:2313: warning: Function parameter or member 'dev' not described in 'netback_changed'
+>   drivers/net/xen-netfront.c:2313: warning: Function parameter or member 'backend_state' not described in 'netback_changed'
+> 
+> Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+> Cc: Juergen Gross <jgross@suse.com>
+> Cc: Stefano Stabellini <sstabellini@kernel.org>
+> Cc: "David S. Miller" <davem@davemloft.net>
+> Cc: Jakub Kicinski <kuba@kernel.org>
+> Cc: Alexei Starovoitov <ast@kernel.org>
+> Cc: Daniel Borkmann <daniel@iogearbox.net>
+> Cc: Jesper Dangaard Brouer <hawk@kernel.org>
+> Cc: John Fastabend <john.fastabend@gmail.com>
+> Cc: Martin KaFai Lau <kafai@fb.com>
+> Cc: Song Liu <songliubraving@fb.com>
+> Cc: Yonghong Song <yhs@fb.com>
+> Cc: Andrii Nakryiko <andrii@kernel.org>
+> Cc: KP Singh <kpsingh@chromium.org>
+> Cc: xen-devel@lists.xenproject.org
+> Cc: netdev@vger.kernel.org
+> Cc: bpf@vger.kernel.org
+> Signed-off-by: Lee Jones <lee.jones@linaro.org>
 
-diff --git a/drivers/net/xen-netfront.c b/drivers/net/xen-netfront.c
-index 920cac4385bf7..93740ef4cf1b4 100644
---- a/drivers/net/xen-netfront.c
-+++ b/drivers/net/xen-netfront.c
-@@ -1582,7 +1582,7 @@ static struct net_device *xennet_create_dev(struct xenbus_device *dev)
- 	return ERR_PTR(err);
- }
- 
--/**
-+/*
-  * Entry point to this code when a new device is created.  Allocate the basic
-  * structures and the ring buffers for communication with the backend, and
-  * inform the backend of the appropriate details for those.
-@@ -1659,7 +1659,7 @@ static void xennet_disconnect_backend(struct netfront_info *info)
- 	}
- }
- 
--/**
-+/*
-  * We are reconnecting to the backend, due to a suspend/resume, or a backend
-  * driver restart.  We tear down our netif structure and recreate it, but
-  * leave the device-layer structures intact so that this is transparent to the
-@@ -2305,7 +2305,7 @@ static int xennet_connect(struct net_device *dev)
- 	return 0;
- }
- 
--/**
-+/*
-  * Callback received when the backend's state changes.
-  */
- static void netback_changed(struct xenbus_device *dev,
--- 
-2.25.1
+With the commit message fixed you can have my:
 
+Reviewed-by: Juergen Gross <jgross@suse.com>
+
+
+Juergen
 
