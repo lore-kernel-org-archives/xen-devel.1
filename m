@@ -2,28 +2,28 @@ Return-Path: <SRS0=o2nd=EL=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 48646C55179
-	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2020 17:58:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C6BDEC4741F
+	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2020 18:21:54 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B11FB20936
-	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2020 17:58:46 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 26A3F2078E
+	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2020 18:21:53 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="IHQhRMPb"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B11FB20936
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linaro.org
+	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="vqMAA/NZ"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 26A3F2078E
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.19984.45549 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.20000.45576 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kajWr-0000xG-I2; Thu, 05 Nov 2020 17:58:33 +0000
+	id 1kajsw-0003ar-LY; Thu, 05 Nov 2020 18:21:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 19984.45549; Thu, 05 Nov 2020 17:58:33 +0000
+Received: by outflank-mailman (output) from mailman id 20000.45576; Thu, 05 Nov 2020 18:21:22 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,118 +38,133 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kajWr-0000x9-Eu; Thu, 05 Nov 2020 17:58:33 +0000
-Received: by outflank-mailman (input) for mailman id 19984;
- Thu, 05 Nov 2020 17:58:31 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kajsw-0003ak-HV; Thu, 05 Nov 2020 18:21:22 +0000
+Received: by outflank-mailman (input) for mailman id 20000;
+ Thu, 05 Nov 2020 18:21:21 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=aWoZ=EL=linaro.org=alex.bennee@srs-us1.protection.inumbo.net>)
- id 1kajWp-0000x3-Ph
- for xen-devel@lists.xenproject.org; Thu, 05 Nov 2020 17:58:31 +0000
-Received: from mail-wm1-x343.google.com (unknown [2a00:1450:4864:20::343])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 22d79325-16cd-4ab9-a26b-e15f256cb57f;
- Thu, 05 Nov 2020 17:58:31 +0000 (UTC)
-Received: by mail-wm1-x343.google.com with SMTP id p19so1628514wmg.0
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2020 09:58:31 -0800 (PST)
-Received: from zen.linaroharston ([51.148.130.216])
- by smtp.gmail.com with ESMTPSA id l16sm3421423wrr.83.2020.11.05.09.58.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Nov 2020 09:58:29 -0800 (PST)
-Received: from zen.lan (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id BDA3B1FF9A;
- Thu,  5 Nov 2020 17:51:54 +0000 (GMT)
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ <SRS0=NZd0=EL=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
+ id 1kajsv-0003Ze-Ir
+ for xen-devel@lists.xenproject.org; Thu, 05 Nov 2020 18:21:21 +0000
+Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id e2cecc96-017b-4c9e-8cb5-9285c380a33b;
+ Thu, 05 Nov 2020 18:21:14 +0000 (UTC)
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kajso-00071x-3Q; Thu, 05 Nov 2020 18:21:14 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kajsn-00031B-Sn; Thu, 05 Nov 2020 18:21:13 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1kajsn-0003bB-SN; Thu, 05 Nov 2020 18:21:13 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=aWoZ=EL=linaro.org=alex.bennee@srs-us1.protection.inumbo.net>)
-	id 1kajWp-0000x3-Ph
-	for xen-devel@lists.xenproject.org; Thu, 05 Nov 2020 17:58:31 +0000
-X-Inumbo-ID: 22d79325-16cd-4ab9-a26b-e15f256cb57f
-Received: from mail-wm1-x343.google.com (unknown [2a00:1450:4864:20::343])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 22d79325-16cd-4ab9-a26b-e15f256cb57f;
-	Thu, 05 Nov 2020 17:58:31 +0000 (UTC)
-Received: by mail-wm1-x343.google.com with SMTP id p19so1628514wmg.0
-        for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2020 09:58:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=e1CT0XOx8Vvy8O4jAkV/r0nsAlwbNsoMSDp0qZ+mwlI=;
-        b=IHQhRMPbEglYB1FwSKkG+NGlzWF9RwV19ldmzO/oohRLPXz1nJLWx5YunHxGWGRPxo
-         /Aqz0lTJ/nD7arDBcf0sbMwranwxpNdfVLle85fnpiHqG1927kcijKhgq1httip10pAa
-         KdTz6HLhjzWm0b0qNDlogU0/nN1mAGqhYE2bd3V5QGsXt52QdnSO9PaAy82oAt43TSN+
-         IX8ENd//l1b1wJ2d9sbQ3iK8byU9/O/Q37z6PNy87kYYDQnEJtW9ygaJU0DTlRjf22vW
-         toaG/0eERqixQ/tBJ3vBkMO1QSBse5bEngAD3ByWZ3P4n9rTt9XiI6N7lU+jtJE3csbr
-         9Iwg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=e1CT0XOx8Vvy8O4jAkV/r0nsAlwbNsoMSDp0qZ+mwlI=;
-        b=a4+ggfAL34+oul7gwx2mrE6zW/SQblJsMruScPHMoE/1qspwATGLJLRKx0lIzBEk6Z
-         vLCJHSrNEzaDD5RRC6la87SwzZLtpYlTJrOai42F/xyW0XCtcyUwtiJGAS9d7VyPOKps
-         jWYR359P0AmUX+FRUg5rBb0HLZrEZxJqsbN4JOfSvGR9prfdaymeH/1g4kxu/ZXDrMb/
-         4rnRYJ0qOAImdB1A5EDoYqRsyhz2sj++BMnCyVQTEPtdO49Ol9viilHjrcTtrUCN8yxB
-         606TXkj0xM/FhvSXx9/WaCtJkjNtOfr+Kg4es28Tt4gSB9CVmExAjuSh80jUsuwh8Qn9
-         bD+A==
-X-Gm-Message-State: AOAM530dy7QEbNWhRwPxMtrES/r+6aKzGyRP0P1WAPLwaBgM5hcc01yZ
-	TBuxqlwSnYNqFSihuwLBuqXizg==
-X-Google-Smtp-Source: ABdhPJzeGNAWfHzipdSqUYwax9p+jCiQ9HF7pckIJMTgj1GksFvaLT2Ts2O4bY3gUQ2QwqxRyqJ0jg==
-X-Received: by 2002:a1c:9d08:: with SMTP id g8mr3981235wme.171.1604599110309;
-        Thu, 05 Nov 2020 09:58:30 -0800 (PST)
-Received: from zen.linaroharston ([51.148.130.216])
-        by smtp.gmail.com with ESMTPSA id l16sm3421423wrr.83.2020.11.05.09.58.29
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 05 Nov 2020 09:58:29 -0800 (PST)
-Received: from zen.lan (localhost [127.0.0.1])
-	by zen.linaroharston (Postfix) with ESMTP id BDA3B1FF9A;
-	Thu,  5 Nov 2020 17:51:54 +0000 (GMT)
-From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: julien@xen.org,
-	stefano.stabellini@linaro.org,
-	stefano.stabellini@xilinx.com,
-	masami.hiramatsu@linaro.org,
-	takahiro.akashi@linaro.org,
-	andre.przywara@arm.com,
-	stratos-dev@op-lists.linaro.org,
-	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony Perard <anthony.perard@citrix.com>,
-	Paul Durrant <paul@xen.org>,
-	xen-devel@lists.xenproject.org (open list:X86 Xen CPUs)
-Subject: [RFC PATCH  11/15] include/hw/xen.h: drop superfluous struct
-Date: Thu,  5 Nov 2020 17:51:49 +0000
-Message-Id: <20201105175153.30489-12-alex.bennee@linaro.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20201105175153.30489-1-alex.bennee@linaro.org>
-References: <20201105175153.30489-1-alex.bennee@linaro.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+	(envelope-from <SRS0=NZd0=EL=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
+	id 1kajsv-0003Ze-Ir
+	for xen-devel@lists.xenproject.org; Thu, 05 Nov 2020 18:21:21 +0000
+X-Inumbo-ID: e2cecc96-017b-4c9e-8cb5-9285c380a33b
+Received: from mail.xenproject.org (unknown [104.130.215.37])
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id e2cecc96-017b-4c9e-8cb5-9285c380a33b;
+	Thu, 05 Nov 2020 18:21:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=ZYCz7L8P3iUSQjB7P92erWsatO8NNesl1Kssu51zA1E=; b=vqMAA/NZJezC5qj8m+e/6ygTAh
+	g/SlaWemaBMy9fTasaUsqB+mT1THoPS5d+JQMda012PvMWMRfQpmQQIVBOh/42jzxmxRqrzDzxMIH
+	HCyHPvKD0IulnKJTV1RbNDaCm9YCdQ4vDzhr7ho3cZRRPZ6NtMYx2cqcMKl2sgeSWSyY=;
+Received: from host146.205.237.98.conversent.net ([205.237.98.146] helo=infra.test-lab.xenproject.org)
+	by mail.xenproject.org with esmtp (Exim 4.92)
+	(envelope-from <osstest-admin@xenproject.org>)
+	id 1kajso-00071x-3Q; Thu, 05 Nov 2020 18:21:14 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+	by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+	(envelope-from <osstest-admin@xenproject.org>)
+	id 1kajsn-00031B-Sn; Thu, 05 Nov 2020 18:21:13 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim 4.92)
+	(envelope-from <osstest-admin@xenproject.org>)
+	id 1kajsn-0003bB-SN; Thu, 05 Nov 2020 18:21:13 +0000
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-156444-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [xen-unstable-smoke test] 156444: tolerable all pass - PUSHED
+X-Osstest-Failures:
+    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    xen=e006b2e3be72e502b86bd9e1405417abd87bdfed
+X-Osstest-Versions-That:
+    xen=9ff9705647646aa937b5f5c1426a64c69a62b3bd
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Thu, 05 Nov 2020 18:21:13 +0000
 
-Chardev is already a typedef'ed struct.
+flight 156444 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/156444/
 
-Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
----
- include/hw/xen/xen.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Failures :-/ but no regressions.
 
-diff --git a/include/hw/xen/xen.h b/include/hw/xen/xen.h
-index 1406648ca5..0f9962b1c1 100644
---- a/include/hw/xen/xen.h
-+++ b/include/hw/xen/xen.h
-@@ -28,7 +28,7 @@ int xen_is_pirq_msi(uint32_t msi_data);
- 
- qemu_irq *xen_interrupt_controller_init(void);
- 
--void xenstore_store_pv_console_info(int i, struct Chardev *chr);
-+void xenstore_store_pv_console_info(int i, Chardev *chr);
- 
- void xen_register_framebuffer(struct MemoryRegion *mr);
- 
--- 
-2.20.1
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
 
+version targeted for testing:
+ xen                  e006b2e3be72e502b86bd9e1405417abd87bdfed
+baseline version:
+ xen                  9ff9705647646aa937b5f5c1426a64c69a62b3bd
+
+Last test of basis   156395  2020-11-04 09:00:24 Z    1 days
+Testing same since   156444  2020-11-05 16:00:29 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Jan Beulich <jbeulich@suse.com>
+  Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+  Wei Liu <wl@xen.org>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/xen.git
+   9ff9705647..e006b2e3be  e006b2e3be72e502b86bd9e1405417abd87bdfed -> smoke
 
