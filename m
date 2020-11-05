@@ -2,29 +2,28 @@ Return-Path: <SRS0=o2nd=EL=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,MAILING_LIST_MULTI,
-	MIME_QP_LONG_LINE,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B0D27C4741F
-	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2020 17:10:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 27B5AC4741F
+	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2020 17:52:49 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CD238206F9
-	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2020 17:10:38 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 88A8420709
+	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2020 17:52:48 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="jahJVK41"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CD238206F9
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="sKuBjdxg"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 88A8420709
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.19945.45465 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.19960.45494 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kaim3-0005BL-9N; Thu, 05 Nov 2020 17:10:11 +0000
+	id 1kajQz-0000KL-Nd; Thu, 05 Nov 2020 17:52:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 19945.45465; Thu, 05 Nov 2020 17:10:11 +0000
+Received: by outflank-mailman (output) from mailman id 19960.45494; Thu, 05 Nov 2020 17:52:29 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,208 +38,217 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kaim3-0005BE-6H; Thu, 05 Nov 2020 17:10:11 +0000
-Received: by outflank-mailman (input) for mailman id 19945;
- Thu, 05 Nov 2020 17:10:10 +0000
+	id 1kajQz-0000KE-KU; Thu, 05 Nov 2020 17:52:29 +0000
+Received: by outflank-mailman (input) for mailman id 19960;
+ Thu, 05 Nov 2020 17:52:28 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=dB6v=EL=gmail.com=persaur@srs-us1.protection.inumbo.net>)
- id 1kaim2-0005B9-5E
- for xen-devel@lists.xenproject.org; Thu, 05 Nov 2020 17:10:10 +0000
-Received: from mail-qv1-xf29.google.com (unknown [2607:f8b0:4864:20::f29])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=aWoZ=EL=linaro.org=alex.bennee@srs-us1.protection.inumbo.net>)
+ id 1kajQy-0000K9-GG
+ for xen-devel@lists.xenproject.org; Thu, 05 Nov 2020 17:52:28 +0000
+Received: from mail-wr1-x444.google.com (unknown [2a00:1450:4864:20::444])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 40d07617-8e2c-4002-9d6f-809dcf8c70dc;
- Thu, 05 Nov 2020 17:10:09 +0000 (UTC)
-Received: by mail-qv1-xf29.google.com with SMTP id t20so1023270qvv.8
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2020 09:10:09 -0800 (PST)
-Received: from [100.64.72.123] ([173.245.215.240])
- by smtp.gmail.com with ESMTPSA id e186sm974816qkd.117.2020.11.05.09.10.08
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 05 Nov 2020 09:10:08 -0800 (PST)
+ id 02f3b7a5-5495-46fd-b349-d5c92d25a256;
+ Thu, 05 Nov 2020 17:52:27 +0000 (UTC)
+Received: by mail-wr1-x444.google.com with SMTP id g12so2774371wrp.10
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2020 09:52:27 -0800 (PST)
+Received: from zen.linaroharston ([51.148.130.216])
+ by smtp.gmail.com with ESMTPSA id a185sm3323029wmf.24.2020.11.05.09.52.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 05 Nov 2020 09:52:15 -0800 (PST)
+Received: from zen.lan (localhost [127.0.0.1])
+ by zen.linaroharston (Postfix) with ESMTP id 154F51FF9D;
+ Thu,  5 Nov 2020 17:51:55 +0000 (GMT)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=dB6v=EL=gmail.com=persaur@srs-us1.protection.inumbo.net>)
-	id 1kaim2-0005B9-5E
-	for xen-devel@lists.xenproject.org; Thu, 05 Nov 2020 17:10:10 +0000
-X-Inumbo-ID: 40d07617-8e2c-4002-9d6f-809dcf8c70dc
-Received: from mail-qv1-xf29.google.com (unknown [2607:f8b0:4864:20::f29])
+	(envelope-from <SRS0=aWoZ=EL=linaro.org=alex.bennee@srs-us1.protection.inumbo.net>)
+	id 1kajQy-0000K9-GG
+	for xen-devel@lists.xenproject.org; Thu, 05 Nov 2020 17:52:28 +0000
+X-Inumbo-ID: 02f3b7a5-5495-46fd-b349-d5c92d25a256
+Received: from mail-wr1-x444.google.com (unknown [2a00:1450:4864:20::444])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 40d07617-8e2c-4002-9d6f-809dcf8c70dc;
-	Thu, 05 Nov 2020 17:10:09 +0000 (UTC)
-Received: by mail-qv1-xf29.google.com with SMTP id t20so1023270qvv.8
-        for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2020 09:10:09 -0800 (PST)
+	id 02f3b7a5-5495-46fd-b349-d5c92d25a256;
+	Thu, 05 Nov 2020 17:52:27 +0000 (UTC)
+Received: by mail-wr1-x444.google.com with SMTP id g12so2774371wrp.10
+        for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2020 09:52:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=content-transfer-encoding:from:mime-version:subject:date:message-id
-         :references:cc:in-reply-to:to;
-        bh=1MfltUYu4JYwmtLM9x0pvlw+JF0xlahDh+KM1a24aic=;
-        b=jahJVK41WT6o6pxs8NJeRMRUfna/GTPGrfJlajqI/QY3GA29NLhl4va3Gt9FrGnP2m
-         V4GYtTSjaOqDNIe8OJrJKKxXQHE5VZmTMhKcI6FbeMy+Q7NzgEYqYZXRL571e6d9es5a
-         7An7LZpKc2W9Y/XLT+IEZG8p/NDKxwwokKkdDDQHML8zqTjsoIEjbfK4EWV0D3hmLmO8
-         HmSJmILdUtLfXx59CJReegXc/n6K6jHqMJ4uSq3NST/2mE5btuG6W4OdO3UE22FmtHsJ
-         rvKGgrcLPJ3dhnqe2KVBYr6UaIbq5me0YfpHpeAEGusqHjvhRsZ2LMJdjsqh4wfbUwQS
-         CinA==
+        d=linaro.org; s=google;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=PWX79l8aK71+AYI8WeJL1C20BLKUbqb3b0w9LAzwhV8=;
+        b=sKuBjdxgzO5u9D8pgwF/tGU3Jl9e9kVQLXkjUZin+MoLsmfLdqrVeqhqiki4zrHNmt
+         5hy7oStzIxiY+o16gdITJ6d17aQlrLazLaOKd1So+BBwfe/FRh1q20LBPkyH1CYBKIBc
+         89BFyfERsJdvAKbEqLP1/bDRte++Si1BFXcV5wA53Yg3P8t5AiT8ptxNXg/9K4dFdUJ5
+         sPXa8twvD5cGmJ5dvqqFdwnTja/ybh6DzAOswcsvh1WULOZk8Tif6W1wiM9fUjihlpqK
+         kiMe6f4QE/wGEOHChHWXznLNi+6OKoDNmYdzcJDS8aOMnUWcpxcWrDD/Hk5hUq8sEImR
+         ikkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:content-transfer-encoding:from:mime-version
-         :subject:date:message-id:references:cc:in-reply-to:to;
-        bh=1MfltUYu4JYwmtLM9x0pvlw+JF0xlahDh+KM1a24aic=;
-        b=J0HAR8x7YLNNRfbggmHiSkoerVYeswZViKdpVtoqa/E/1WHoCGEsHy86OJl1cqxKpr
-         2ni2XVgpF/jfkTxWVexCeBmfRxonvD7If86cLjSiu65TUG7mleKaiHnafuIlt09Chp1w
-         VbpbdGk4toz0302ON1APXi1CX24yY7WaXUHDjDRkn1o8X1WKuHtusdrHj1Ry1S/iNXwZ
-         myqlb/s1HO6QwujdepQr5na+NrABt8pCcMpMzWfrXgBG6jNvHCqlNg6Y1910PsnpY4Xy
-         SHM/JbhOgPWwcCHRMTxKDS/S3doFznwrffoOJ+HwLunmlioJYgvtjjzULgqkmE1kX9XD
-         +DgQ==
-X-Gm-Message-State: AOAM5335wmAtGkE+afA4s2ivdzw1COHOeWapCcHN0I1FoDiqo9w8+B6o
-	XkS7ZAVui1j/xeG/WTpxO9naB1Y+Sbs=
-X-Google-Smtp-Source: ABdhPJwp0H98O4ZUkioRarX30v5n+oA/aphQk+8XyC9rqbS4fCFdrsJvqTnJs8ueNbCO1RhCy8ppHg==
-X-Received: by 2002:ad4:472c:: with SMTP id l12mr2981964qvz.42.1604596208784;
-        Thu, 05 Nov 2020 09:10:08 -0800 (PST)
-Received: from [100.64.72.123] ([173.245.215.240])
-        by smtp.gmail.com with ESMTPSA id e186sm974816qkd.117.2020.11.05.09.10.08
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 05 Nov 2020 09:10:08 -0800 (PST)
-Content-Type: multipart/alternative; boundary=Apple-Mail-199D7F37-FF39-44C7-9AFD-02B8F8DB1304
-Content-Transfer-Encoding: 7bit
-From: Rich Persaud <persaur@gmail.com>
-Mime-Version: 1.0 (1.0)
-Subject: Re: [ANNOUNCE] Call for agenda items for 5 November 2020 Community Call @ 16:00 UTC
-Date: Thu, 5 Nov 2020 12:10:07 -0500
-Message-Id: <BDAC6E73-9375-48E3-9840-4E990F01E165@gmail.com>
-References: <50195240-8375-5f9b-d5b7-2a89ec8c99d0@suse.com>
-Cc: George Dunlap <George.Dunlap@citrix.com>,
- xen-devel@lists.xenproject.org
-In-Reply-To: <50195240-8375-5f9b-d5b7-2a89ec8c99d0@suse.com>
-To: Jan Beulich <jbeulich@suse.com>
-X-Mailer: iPad Mail (18A8395)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=PWX79l8aK71+AYI8WeJL1C20BLKUbqb3b0w9LAzwhV8=;
+        b=l93Kg90nRJu20jRooqwyZ1DWg2j8+W76gO7/wzUC/XaNcmycjpcBJjiY6XPFw1Drc3
+         dV+gVXYxGD2j+PWCWPWzI34+5L/K0K4+qj9gfSJ3Yzu0GeLvXgOskohu+QqxVJEImHb4
+         UdjKbX1C9rZWCqkO93ojH484gGHIQrfOgT1r3jePnVt1YCVBtwGiKp+lanGUGWYUlniF
+         QqZL747Rfr7zBCiDfBcm86NIE9K/XjPlpWooPYpkH4E+2+tGICFl/p60NWNKWLh3Bmpi
+         8XcwlW7okmvSbE6ZgemwSy6eVv1CQCTGYZBeOqzP8XmpIyRGW5HGQq8moEl1P1StewJ2
+         CCNQ==
+X-Gm-Message-State: AOAM5308b1ppuTNkXw20n0dTnqp1wqeiPYYlqCXTJp8fmhSmVnWnoEQh
+	wij/AW6Fs7z1S/Xm40gLaBzXnA==
+X-Google-Smtp-Source: ABdhPJykPmP1sXUte37eZYccOK8QD1oW46dCne80dIEM79/5lUgUNgxRnHI2ok44wyDkI60skFiMrA==
+X-Received: by 2002:adf:eb4c:: with SMTP id u12mr4588066wrn.73.1604598746349;
+        Thu, 05 Nov 2020 09:52:26 -0800 (PST)
+Received: from zen.linaroharston ([51.148.130.216])
+        by smtp.gmail.com with ESMTPSA id a185sm3323029wmf.24.2020.11.05.09.52.06
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 05 Nov 2020 09:52:15 -0800 (PST)
+Received: from zen.lan (localhost [127.0.0.1])
+	by zen.linaroharston (Postfix) with ESMTP id 154F51FF9D;
+	Thu,  5 Nov 2020 17:51:55 +0000 (GMT)
+From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: julien@xen.org,
+	stefano.stabellini@linaro.org,
+	stefano.stabellini@xilinx.com,
+	masami.hiramatsu@linaro.org,
+	takahiro.akashi@linaro.org,
+	andre.przywara@arm.com,
+	stratos-dev@op-lists.linaro.org,
+	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Anthony Perard <anthony.perard@citrix.com>,
+	Paul Durrant <paul@xen.org>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Richard Henderson <rth@twiddle.net>,
+	Eduardo Habkost <ehabkost@redhat.com>,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+	xen-devel@lists.xenproject.org (open list:X86 Xen CPUs)
+Subject: [RFC PATCH  14/15] xen: only build HVM support under CONFIG_XEN_HVM
+Date: Thu,  5 Nov 2020 17:51:52 +0000
+Message-Id: <20201105175153.30489-15-alex.bennee@linaro.org>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20201105175153.30489-1-alex.bennee@linaro.org>
+References: <20201105175153.30489-1-alex.bennee@linaro.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
+When running on non-x86 systems there is no point building HVM support
+because we will never see such things. To achieve this we need to
+shuffle a little bit of the inline and other stubs about.
 
---Apple-Mail-199D7F37-FF39-44C7-9AFD-02B8F8DB1304
-Content-Type: text/plain;
-	charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+---
+ include/sysemu/xen-mapcache.h |  2 +-
+ include/sysemu/xen.h          |  9 +++++----
+ accel/stubs/xen-all-stub.c    | 11 +++++++++++
+ accel/stubs/xen-stub.c        |  2 --
+ accel/stubs/meson.build       |  3 ++-
+ hw/i386/xen/meson.build       |  2 +-
+ 6 files changed, 20 insertions(+), 9 deletions(-)
+ create mode 100644 accel/stubs/xen-all-stub.c
 
-> On Nov 5, 2020, at 11:01, Jan Beulich <jbeulich@suse.com> wrote:
-> =EF=BB=BFOn 30.10.2020 15:47, George Dunlap wrote:
->> Hi all,
->>=20
->> The proposed agenda is in https://cryptpad.fr/pad/#/2/pad/edit/k-0Aj+Sxb5=
-SliLWrFRBwx49V/ and you can edit to add items.  Alternatively, you can reply=
- to this mail directly.
->>=20
->> Agenda items appreciated a few days before the call: please put your name=
- besides items if you edit the document.
->>=20
->> Note the following administrative conventions for the call:
->> * Unless, agreed in the pervious meeting otherwise, the call is on the 1s=
-t Thursday of each month at 1600 British Time (either GMT or BST)
->> * I usually send out a meeting reminder a few days before with a provisio=
-nal agenda
->>=20
->> * To allow time to switch between meetings, we'll plan on starting the ag=
-enda at 16:05 sharp.  Aim to join by 16:03 if possible to allocate time to s=
-ort out technical difficulties &c
->>=20
->> * If you want to be CC'ed please add or remove yourself from the sign-up-=
-sheet at https://cryptpad.fr/pad/#/2/pad/edit/D9vGzihPxxAOe6RFPz0sRCf+/
->>=20
->> Best Regards
->> George
->>=20
->>=20
->>=20
->> =3D=3D Dial-in Information =3D=3D
->> ## Meeting time
->> 16:00 - 17:00 UTC
->> Further International meeting times: https://www.timeanddate.com/worldclo=
-ck/meetingdetails.html?year=3D2020&month=3D11&day=3D5&hour=3D16&min=3D0&sec=3D=
-0&p1=3D1234&p2=3D37&p3=3D224&p4=3D179
->>=20
->>=20
->> ## Dial in details
->> Web: https://www.gotomeet.me/GeorgeDunlap
->>=20
->> You can also dial in using your phone.
->> Access Code: 168-682-109
->>=20
->> China (Toll Free): 4008 811084
->> Germany: +49 692 5736 7317
->=20
-> FYI: This number continues to not work.
->=20
-> Jan
+diff --git a/include/sysemu/xen-mapcache.h b/include/sysemu/xen-mapcache.h
+index c8e7c2f6cf..4bba764745 100644
+--- a/include/sysemu/xen-mapcache.h
++++ b/include/sysemu/xen-mapcache.h
+@@ -13,7 +13,7 @@
+ 
+ typedef hwaddr (*phys_offset_to_gaddr_t)(hwaddr phys_offset,
+                                          ram_addr_t size);
+-#ifdef CONFIG_XEN
++#ifdef CONFIG_XEN_HVM
+ 
+ void xen_map_cache_init(phys_offset_to_gaddr_t f,
+                         void *opaque);
+diff --git a/include/sysemu/xen.h b/include/sysemu/xen.h
+index 0ca25697e4..43d2314441 100644
+--- a/include/sysemu/xen.h
++++ b/include/sysemu/xen.h
+@@ -24,7 +24,7 @@ extern bool xen_allowed;
+ 
+ #define xen_enabled()           (xen_allowed)
+ 
+-#ifndef CONFIG_USER_ONLY
++#ifdef CONFIG_XEN_HVM
+ void xen_hvm_modified_memory(ram_addr_t start, ram_addr_t length);
+ void xen_ram_alloc(ram_addr_t ram_addr, ram_addr_t size,
+                    struct MemoryRegion *mr, Error **errp);
+@@ -33,7 +33,10 @@ void xen_ram_alloc(ram_addr_t ram_addr, ram_addr_t size,
+ #else /* !CONFIG_XEN_IS_POSSIBLE */
+ 
+ #define xen_enabled() 0
+-#ifndef CONFIG_USER_ONLY
++
++#endif /* CONFIG_XEN_IS_POSSIBLE */
++
++#if !defined(CONFIG_XEN_HVM) && !defined(CONFIG_USER_ONLY)
+ static inline void xen_hvm_modified_memory(ram_addr_t start, ram_addr_t length)
+ {
+     /* nothing */
+@@ -45,6 +48,4 @@ static inline void xen_ram_alloc(ram_addr_t ram_addr, ram_addr_t size,
+ }
+ #endif
+ 
+-#endif /* CONFIG_XEN_IS_POSSIBLE */
+-
+ #endif
+diff --git a/accel/stubs/xen-all-stub.c b/accel/stubs/xen-all-stub.c
+new file mode 100644
+index 0000000000..597c5789cc
+--- /dev/null
++++ b/accel/stubs/xen-all-stub.c
+@@ -0,0 +1,11 @@
++/*
++ * Copyright (C) 2014       Citrix Systems UK Ltd.
++ *
++ * This work is licensed under the terms of the GNU GPL, version 2 or later.
++ * See the COPYING file in the top-level directory.
++ */
++
++#include "qemu/osdep.h"
++#include "sysemu/xen.h"
++
++bool xen_allowed;
+diff --git a/accel/stubs/xen-stub.c b/accel/stubs/xen-stub.c
+index 7054965c48..6bc9906239 100644
+--- a/accel/stubs/xen-stub.c
++++ b/accel/stubs/xen-stub.c
+@@ -9,8 +9,6 @@
+ #include "sysemu/xen.h"
+ #include "qapi/qapi-commands-migration.h"
+ 
+-bool xen_allowed;
+-
+ void qmp_xen_set_global_dirty_log(bool enable, Error **errp)
+ {
+ }
+diff --git a/accel/stubs/meson.build b/accel/stubs/meson.build
+index d65cb6a5e1..dca468c82a 100644
+--- a/accel/stubs/meson.build
++++ b/accel/stubs/meson.build
+@@ -1,7 +1,8 @@
+ softmmu_stub_ss = ss.source_set()
+ 
+ softmmu_stub_ss.add(when: 'CONFIG_HAX', if_false: files('hax-stub.c'))
+-softmmu_stub_ss.add(when: 'CONFIG_XEN', if_false: files('xen-stub.c'))
++softmmu_stub_ss.add(when: 'CONFIG_XEN', if_false: files('xen-all-stub.c'))
++softmmu_stub_ss.add(when: 'CONFIG_XEN_HVM', if_false: files('xen-stub.c'))
+ softmmu_stub_ss.add(when: 'CONFIG_KVM', if_false: files('kvm-stub.c'))
+ softmmu_stub_ss.add(when: 'CONFIG_TCG', if_false: files('tcg-stub.c'))
+ 
+diff --git a/hw/i386/xen/meson.build b/hw/i386/xen/meson.build
+index be84130300..576e2cc5dc 100644
+--- a/hw/i386/xen/meson.build
++++ b/hw/i386/xen/meson.build
+@@ -1,4 +1,4 @@
+-i386_ss.add(when: 'CONFIG_XEN', if_true: files(
++i386_ss.add(when: 'CONFIG_XEN_HVM', if_true: files(
+   'xen-hvm.c',
+   'xen-mapcache.c',
+   'xen_apic.c',
+-- 
+2.20.1
 
-This appears to be the new number since May 2020, based on [0].  I called an=
-d confirmed that the number works and is expecting a number to be input, but=
- can't otherwise verify the German prompts:
-
-   Germany: +49 721 9881 4161
-
-Rich
-
-[0] https://www.youtube.com/watch?v=3DEmbn9_JEqRo=
-
---Apple-Mail-199D7F37-FF39-44C7-9AFD-02B8F8DB1304
-Content-Type: text/html;
-	charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-
-<html><head><meta http-equiv=3D"content-type" content=3D"text/html; charset=3D=
-utf-8"></head><body dir=3D"auto"><div dir=3D"ltr"><blockquote type=3D"cite">=
-On Nov 5, 2020, at 11:01, Jan Beulich &lt;jbeulich@suse.com&gt; wrote:<br></=
-blockquote></div><blockquote type=3D"cite"><div dir=3D"ltr">=EF=BB=BF<span>O=
-n 30.10.2020 15:47, George Dunlap wrote:</span><br><blockquote type=3D"cite"=
-><span>Hi all,</span><br></blockquote><blockquote type=3D"cite"><span></span=
-><br></blockquote><blockquote type=3D"cite"><span>The proposed agenda is in h=
-ttps://cryptpad.fr/pad/#/2/pad/edit/k-0Aj+Sxb5SliLWrFRBwx49V/ and you can ed=
-it to add items. &nbsp;Alternatively, you can reply to this mail directly.</=
-span><br></blockquote><blockquote type=3D"cite"><span></span><br></blockquot=
-e><blockquote type=3D"cite"><span>Agenda items appreciated a few days before=
- the call: please put your name besides items if you edit the document.</spa=
-n><br></blockquote><blockquote type=3D"cite"><span></span><br></blockquote><=
-blockquote type=3D"cite"><span>Note the following administrative conventions=
- for the call:</span><br></blockquote><blockquote type=3D"cite"><span>* Unle=
-ss, agreed in the pervious meeting otherwise, the call is on the 1st Thursda=
-y of each month at 1600 British Time (either GMT or BST)</span><br></blockqu=
-ote><blockquote type=3D"cite"><span>* I usually send out a meeting reminder a=
- few days before with a provisional agenda</span><br></blockquote><blockquot=
-e type=3D"cite"><span></span><br></blockquote><blockquote type=3D"cite"><spa=
-n>* To allow time to switch between meetings, we'll plan on starting the age=
-nda at 16:05 sharp. &nbsp;Aim to join by 16:03 if possible to allocate time t=
-o sort out technical difficulties &amp;c</span><br></blockquote><blockquote t=
-ype=3D"cite"><span></span><br></blockquote><blockquote type=3D"cite"><span>*=
- If you want to be CC'ed please add or remove yourself from the sign-up-shee=
-t at https://cryptpad.fr/pad/#/2/pad/edit/D9vGzihPxxAOe6RFPz0sRCf+/</span><b=
-r></blockquote><blockquote type=3D"cite"><span></span><br></blockquote><bloc=
-kquote type=3D"cite"><span>Best Regards</span><br></blockquote><blockquote t=
-ype=3D"cite"><span>George</span><br></blockquote><blockquote type=3D"cite"><=
-span></span><br></blockquote><blockquote type=3D"cite"><span></span><br></bl=
-ockquote><blockquote type=3D"cite"><span></span><br></blockquote><blockquote=
- type=3D"cite"><span>=3D=3D Dial-in Information =3D=3D</span><br></blockquot=
-e><blockquote type=3D"cite"><span>## Meeting time</span><br></blockquote><bl=
-ockquote type=3D"cite"><span>16:00 - 17:00 UTC</span><br></blockquote><block=
-quote type=3D"cite"><span>Further International meeting times: https://www.t=
-imeanddate.com/worldclock/meetingdetails.html?year=3D2020&amp;month=3D11&amp=
-;day=3D5&amp;hour=3D16&amp;min=3D0&amp;sec=3D0&amp;p1=3D1234&amp;p2=3D37&amp=
-;p3=3D224&amp;p4=3D179</span><br></blockquote><blockquote type=3D"cite"><spa=
-n></span><br></blockquote><blockquote type=3D"cite"><span></span><br></block=
-quote><blockquote type=3D"cite"><span>## Dial in details</span><br></blockqu=
-ote><blockquote type=3D"cite"><span>Web: https://www.gotomeet.me/GeorgeDunla=
-p</span><br></blockquote><blockquote type=3D"cite"><span></span><br></blockq=
-uote><blockquote type=3D"cite"><span>You can also dial in using your phone.<=
-/span><br></blockquote><blockquote type=3D"cite"><span>Access Code: 168-682-=
-109</span><br></blockquote><blockquote type=3D"cite"><span></span><br></bloc=
-kquote><blockquote type=3D"cite"><span>China (Toll Free): 4008 811084</span>=
-<br></blockquote><blockquote type=3D"cite"><span>Germany: +49 692 5736 7317<=
-/span><br></blockquote><span></span><br><span>FYI: This number continues to n=
-ot work.</span><br><span></span><br><span>Jan</span><br></div></blockquote><=
-br><div>This appears to be the new number since May 2020, based on [0]. &nbs=
-p;I called and confirmed that the number works and is expecting a number to b=
-e input, but can't otherwise verify the German prompts:</div><div><br></div>=
-<div>&nbsp; &nbsp;Germany: +49 721 9881 4161</div><div><br></div><div>Rich</=
-div><div><br></div><div>[0] <a href=3D"https://www.youtube.com/watch?v=3DEmb=
-n9_JEqRo&amp;feature=3Demb_title">https://www.youtube.com/watch?v=3DEmbn9_JE=
-qRo</a></div></body></html>=
-
---Apple-Mail-199D7F37-FF39-44C7-9AFD-02B8F8DB1304--
 
