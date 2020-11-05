@@ -2,28 +2,29 @@ Return-Path: <SRS0=o2nd=EL=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E54FDC55178
-	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2020 18:57:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DFEF7C55179
+	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2020 18:57:16 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6AF99206F4
-	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2020 18:57:15 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 5CC29206F4
+	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2020 18:57:16 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="aQ86Z3gC"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6AF99206F4
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="dn2Sdwt7"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5CC29206F4
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.20049.45633 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.20051.45657 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kakRN-0006eL-GC; Thu, 05 Nov 2020 18:56:57 +0000
+	id 1kakRZ-0006jG-3J; Thu, 05 Nov 2020 18:57:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 20049.45633; Thu, 05 Nov 2020 18:56:57 +0000
+Received: by outflank-mailman (output) from mailman id 20051.45657; Thu, 05 Nov 2020 18:57:09 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,207 +39,141 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kakRN-0006eE-Cb; Thu, 05 Nov 2020 18:56:57 +0000
-Received: by outflank-mailman (input) for mailman id 20049;
- Thu, 05 Nov 2020 18:56:56 +0000
+	id 1kakRY-0006j6-Tv; Thu, 05 Nov 2020 18:57:08 +0000
+Received: by outflank-mailman (input) for mailman id 20051;
+ Thu, 05 Nov 2020 18:57:07 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1kakRM-0006e9-R2
- for xen-devel@lists.xenproject.org; Thu, 05 Nov 2020 18:56:56 +0000
-Received: from mail-wr1-x441.google.com (unknown [2a00:1450:4864:20::441])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1kakRX-0006gr-Hb
+ for xen-devel@lists.xenproject.org; Thu, 05 Nov 2020 18:57:07 +0000
+Received: from mail-wr1-x443.google.com (unknown [2a00:1450:4864:20::443])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 03f5b427-568c-49fc-a385-3ec145cd49a3;
- Thu, 05 Nov 2020 18:56:55 +0000 (UTC)
-Received: by mail-wr1-x441.google.com with SMTP id w1so3008867wrm.4
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2020 10:56:55 -0800 (PST)
+ id cd5a5f0a-c5e6-447d-9134-36238ffbd79f;
+ Thu, 05 Nov 2020 18:57:06 +0000 (UTC)
+Received: by mail-wr1-x443.google.com with SMTP id b8so3013984wrn.0
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2020 10:57:06 -0800 (PST)
 Received: from C02ZJ1BNLVDN.emea.arm.com (0547a297.skybroadband.com.
  [5.71.162.151])
- by smtp.gmail.com with ESMTPSA id n14sm3451536wrt.8.2020.11.05.10.56.53
+ by smtp.gmail.com with ESMTPSA id n14sm3451536wrt.8.2020.11.05.10.57.04
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 05 Nov 2020 10:56:53 -0800 (PST)
+ Thu, 05 Nov 2020 10:57:04 -0800 (PST)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	id 1kakRM-0006e9-R2
-	for xen-devel@lists.xenproject.org; Thu, 05 Nov 2020 18:56:56 +0000
-X-Inumbo-ID: 03f5b427-568c-49fc-a385-3ec145cd49a3
-Received: from mail-wr1-x441.google.com (unknown [2a00:1450:4864:20::441])
+	id 1kakRX-0006gr-Hb
+	for xen-devel@lists.xenproject.org; Thu, 05 Nov 2020 18:57:07 +0000
+X-Inumbo-ID: cd5a5f0a-c5e6-447d-9134-36238ffbd79f
+Received: from mail-wr1-x443.google.com (unknown [2a00:1450:4864:20::443])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 03f5b427-568c-49fc-a385-3ec145cd49a3;
-	Thu, 05 Nov 2020 18:56:55 +0000 (UTC)
-Received: by mail-wr1-x441.google.com with SMTP id w1so3008867wrm.4
-        for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2020 10:56:55 -0800 (PST)
+	id cd5a5f0a-c5e6-447d-9134-36238ffbd79f;
+	Thu, 05 Nov 2020 18:57:06 +0000 (UTC)
+Received: by mail-wr1-x443.google.com with SMTP id b8so3013984wrn.0
+        for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2020 10:57:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=hfScFRyc+sSjBIArHw1y0ULwQ0XgOh8QIfTfRbg6KTQ=;
-        b=aQ86Z3gCyi9d7H6PiZXHmAxYcTzwQit7blu5nXVyFZkyPZCu7lni92eRg1zWDIUlAm
-         U6ZjtFQy2fhzV1wk97ur+WxBA57x0vdYRFiZ9mTg5SzoU+lAK1eiC6IGrDnvjd7XjxQP
-         gEfJD6/jJwlkdrZTVE2tes5k8yR8mighXhnQJJydpo75f8YKs9G5kwRrXXfbZKXyeJQC
-         jzGFM6I4ZOh8RfZNdxi5MD3fqjf00njBQD16nHGrCNutH0tFl/AglpixV0XT5JQsCsfm
-         qvrICzrkS48/wR7HuF7ztX1DjzZxdzSJGgTzActg81ilzJMKU7qznEVy+tCh2Riukzc6
-         2+vg==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=1cxZBd9UtbAwSXXwBERB1exoaCA+r5xNDHyZ9ab9j0k=;
+        b=dn2Sdwt7lDaVlJ36tXFutn/QDnyBoZUaQBm3vtVJR3qQIR4BcilQE16TK0PqCNRMX5
+         x+nO8UUCrLJ3hZUYmFe7hUunJEx5yyuPk2L4Hs887M5FTxQNQ9W0h9gL0w3DKqgNGE8l
+         qbi1dU0GQocRhOABQ1wg7Yh3azozTFGBhKbM1n7Rq52zQRBl9IaDukFFZwCmAyL0FLci
+         ZZAJsJSPYcvpj9s2ON5W/JgSmFey8rKcwthoVAHzB5U8XJtcWhCrgAN5ePYH/jPcinwi
+         P5pq13bukcF6y+IIPY5tWV+RAcpch3a+dMx0wwCNBomVmvc0yyOCSZmD4MhKguXPkomS
+         h9vg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=hfScFRyc+sSjBIArHw1y0ULwQ0XgOh8QIfTfRbg6KTQ=;
-        b=QcFr6dOK00GMf3F/yX+pCvcjc2GF2RnZpG4H/Z4XKxbK0i2Ix71B69GN66POenJX/d
-         SOrZFIqnalESspArn+kA/LwUqwE8DXNHJdMNQFZk+TUh1o5zVNtcp98GEfonURiyvI5B
-         Uw8eSyi3y4MYx2FcBtyYrk8UtnAaQ3Cq958PLxVrK8tmrGmj1YDqQuKjhrjRudmvATVg
-         rcVxBKF1PGyw8BCtGgwwqfOsHKPxntha3KPLXyOWh6IIBFIyM5jNLpcz5Lek7KsTVjbK
-         cUvCxXByDcN6K69JEuFR3Pcu92ZLtdrt0tnMDnPcE15wfrWHIYJ4zzuuc3whqG5S54dU
-         a4Zw==
-X-Gm-Message-State: AOAM532y6/+a+7s+0Ajm8w0cOP0NGEE0F/Jb5IteydE9IMgTiXAt3cgB
-	uid7K7UBJLopYTU8JRc0WxuIlAd8HHg=
-X-Google-Smtp-Source: ABdhPJyq3eVqOAyUJxBTKS5sW8I8V0MbjGQRL7nSksSQBVrHpSjp8wo70Pt5cGi3EcSiv0DBChpPWQ==
-X-Received: by 2002:a5d:4d0d:: with SMTP id z13mr4427411wrt.23.1604602614536;
-        Thu, 05 Nov 2020 10:56:54 -0800 (PST)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=1cxZBd9UtbAwSXXwBERB1exoaCA+r5xNDHyZ9ab9j0k=;
+        b=fhdLF+qtSki9TQiouQtC3LPNjksMmqbVjNLW0F1Uc0cdP0AJY8tKHUA0QpsnEpLmWg
+         ewbxZyJ6dBci+Yua58fIwuuSY9gHITgTxiG9dA3Gls5Qm7MRNkBK6AUjf7Z5E7KEGzZu
+         NX3U2A5PCHk+XuS3mlihNqfv6gE4GwwQn5Kc395l3GoG1HRVSCgKEJo2jqdC1EEjFBB7
+         v8ZViLLRDSoi+142FFYX5BR9W2MPJM0J+eRKYGXtuobeE2OD68pWNMhymkdm7NQgwJMc
+         woqhZ763zGy8nehBVv3/Z+ToDYudWuH0YFAuX3wtbKEZFjpxRESweqIhabCfgRHFcFBi
+         jEVA==
+X-Gm-Message-State: AOAM530DgMKclVLAIMgZKoh1XgHVCXKVNp6+N3CWTnNwX3jua8lrqQ1C
+	KrGbhniPFizzSw8VE9pIqtyWbvZOooE=
+X-Google-Smtp-Source: ABdhPJyaKSWUq4UC8sHcV/FCKE6XLTUJDppDVYkUNwm0rWqZzMuRQz8ZP2rFjmFOFazXw8vjLY2WAw==
+X-Received: by 2002:a5d:474f:: with SMTP id o15mr4446221wrs.377.1604602625681;
+        Thu, 05 Nov 2020 10:57:05 -0800 (PST)
 Received: from C02ZJ1BNLVDN.emea.arm.com (0547a297.skybroadband.com. [5.71.162.151])
-        by smtp.gmail.com with ESMTPSA id n14sm3451536wrt.8.2020.11.05.10.56.53
+        by smtp.gmail.com with ESMTPSA id n14sm3451536wrt.8.2020.11.05.10.57.04
         (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Thu, 05 Nov 2020 10:56:53 -0800 (PST)
+        Thu, 05 Nov 2020 10:57:04 -0800 (PST)
 From: Ash Wilding <ash.j.wilding@gmail.com>
 X-Google-Original-From: Ash Wilding
 To: xen-devel@lists.xenproject.org
 Cc: julien@xen.org,
 	bertrand.marquis@arm.com,
-	rahul.singh@arm.com
-Subject: [RFC PATCH 0/6] Port Linux LL/SC and LSE atomics to Xen
-Date: Thu,  5 Nov 2020 18:55:57 +0000
-Message-Id: <20201105185603.24149-1-ash.j.wilding@gmail.com>
+	rahul.singh@arm.com,
+	Ash Wilding <ash.j.wilding@gmail.com>
+Subject: [RFC PATCH 2/6] xen/arm: Add detection of Armv8.1-LSE atomic instructions
+Date: Thu,  5 Nov 2020 18:55:59 +0000
+Message-Id: <20201105185603.24149-3-ash.j.wilding@gmail.com>
 X-Mailer: git-send-email 2.24.3 (Apple Git-128)
+In-Reply-To: <20201105185603.24149-1-ash.j.wilding@gmail.com>
+References: <20201105185603.24149-1-ash.j.wilding@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-[this is my personal account, opinions expressed are entirely my own]
+Use the new infrastructure for detecting CPU features in other ID
+registers to detect the presence of Armv8.1-LSE atomic instructions,
+as reported by ID_AA64ISAR0_EL1.Atomic.
 
-Hi,
+While we're here, print detection of these instructions in setup.c's
+processor_id().
 
-I'm starting this new series thread to discuss how Linux's LL/SC and LSE
-atomics helpers may best be ported to Xen, as per the discussion at [1].
+Signed-off-by: Ash Wilding <ash.j.wilding@gmail.com>
+---
+ xen/arch/arm/setup.c             |  5 +++--
+ xen/include/asm-arm/cpufeature.h | 10 +++++++++-
+ 2 files changed, 12 insertions(+), 3 deletions(-)
 
-
-Arguments in favour of doing this
-=================================
-
-    - Lets SMMUv3 driver switch to using <asm/atomic.h> rather than
-      maintaining its own implementation of the helpers.
-
-    - Provides mitigation against XSA-295 [2], which affects both arm32
-      and arm64, across all versions of Xen, and may allow a domU to
-      maliciously or erroneously DoS the hypervisor.
-
-    - All Armv8-A core implementations since ~2017 implement LSE so
-      there is an argument to be made we are long overdue support in
-      Xen. This is compounded by LSE atomics being more performant than
-      LL/SC atomics in most real-world applications, especially at high
-      core counts.
-
-    - We may be able to get improved performance when using LL/SC too
-      as Linux provides helpers with relaxed ordering requirements which
-      are currently not available in Xen, though for this we would need
-      to go back through existing code to see where the more relaxed
-      versions can be safely used.
-
-    - Anything else?
-
-
-Arguments against doing this
-============================
-
-    - Limited testing infrastructure in place to ensure use of new
-      atomics helpers does not introduce new bugs and regressions. This
-      is a particularly strong argument given how difficult it can be to
-      identify and debug malfunctioning atomics. The old adage applies,
-      "If it ain't broke, don't fix it."
-
-    - Anything else?
-
-
-Disclaimers
-===========
-
-    - This is a very rough first-pass effort intended to spur the
-      discussions along.
-
-    - Only build-tested on arm64 and arm32, *not* run-tested. I did also
-      build for x86_64 just to make I didn't inadvertently break that.
-
-    - This version only tackles atomics and cmpxchg; I've not yet had a
-      chance to look at locks so those are still using LL/SC.
-
-
-Series contents
-===============
-
-    - Patch #1 allows for detecting architectural features advertised
-      in ID registers other than ID_AA64PFR{0,1}_EL1 and ID_PFR{0,1}.
-
-    - Patch #2 uses the new infrastructure above to detect the presence
-      of Armv8.1-LSE atomic instructions, as advertised by ID register
-      ID_AA64ISAR0_EL1.
-
-    - Patch #3 introduces the ARM64_HAS_LSE_ATOMICS hwcap, as well as
-      the new Kconfig CONFIG_ARM64_LSE_ATOMICS, which enables runtime
-      detection and setting of this hwcap.
-
-    - Patch #4 pulls in the Linux LL/SC and LSE atomics helpers for
-      arm64, using the new ARM64_HAS_LSE_ATOMICS hwcap to patch itself
-      at runtime to use LSE where available and otherwise falling back
-      on LL/SC.
-
-        !! NB: Patch #4 breaks arm32 builds until Patch #5 ports
-           Linux's 32-bit LL/SC helpers. I split the patches up
-           to make them easier to review and discuss.
-
-    - Patch #5 pulls in the Linux LL/SC atomics helpers for arm32.
-
-    - Finally, Patch #6 removes Xen's dependency on gcc's built-in
-      __sync_fetch_and_add() helper, instead using the ported Linux
-      atomic_fetch_add() helper.
-
-
-Any comments, guidance, and discussion on how to improve this first-pass
-approach to get LSE atomics support merged into Xen would be greatly
-appreciated.
-
-Thanks!
-Ash.
-
-[1] https://lore.kernel.org/xen-devel/13baac40-8b10-0def-4e44-0d8f655fcaf1@xen.org/
-[2] https://xenbits.xen.org/xsa/advisory-295.txt
-
-Ash Wilding (6):
-  xen/arm: Support detection of CPU features in other ID registers
-  xen/arm: Add detection of Armv8.1-LSE atomic instructions
-  xen/arm: Add ARM64_HAS_LSE_ATOMICS hwcap
-  xen/arm64: Port Linux LL/SC and LSE atomics helpers to Xen
-  xen/arm32: Port Linux LL/SC atomics helpers to Xen
-  xen/arm: Remove dependency on gcc builtin __sync_fetch_and_add()
-
- xen/arch/arm/Kconfig                     |  11 +
- xen/arch/arm/Makefile                    |   1 +
- xen/arch/arm/lse.c                       |  13 +
- xen/arch/arm/setup.c                     |  13 +-
- xen/include/asm-arm/arm32/atomic.h       | 261 +++++++-----
- xen/include/asm-arm/arm32/cmpxchg.h      | 403 +++++++++++-------
- xen/include/asm-arm/arm32/system.h       |   2 +-
- xen/include/asm-arm/arm64/atomic.h       | 242 +++++------
- xen/include/asm-arm/arm64/atomic_ll_sc.h | 236 +++++++++++
- xen/include/asm-arm/arm64/atomic_lse.h   | 251 +++++++++++
- xen/include/asm-arm/arm64/cmpxchg.h      | 505 ++++++++++++++++-------
- xen/include/asm-arm/arm64/lse.h          |  53 +++
- xen/include/asm-arm/arm64/system.h       |   2 +-
- xen/include/asm-arm/atomic.h             |  15 +-
- xen/include/asm-arm/cpufeature.h         |  57 +--
- xen/include/asm-arm/system.h             |  10 +-
- xen/include/xen/compiler.h               |   3 +
- 17 files changed, 1506 insertions(+), 572 deletions(-)
- create mode 100644 xen/arch/arm/lse.c
- create mode 100644 xen/include/asm-arm/arm64/atomic_ll_sc.h
- create mode 100644 xen/include/asm-arm/arm64/atomic_lse.h
- create mode 100644 xen/include/asm-arm/arm64/lse.h
-
+diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
+index 5121f06fc5..138e1957c5 100644
+--- a/xen/arch/arm/setup.c
++++ b/xen/arch/arm/setup.c
+@@ -128,10 +128,11 @@ static void __init processor_id(void)
+            cpu_has_el2_32 ? "64+32" : cpu_has_el2_64 ? "64" : "No",
+            cpu_has_el1_32 ? "64+32" : cpu_has_el1_64 ? "64" : "No",
+            cpu_has_el0_32 ? "64+32" : cpu_has_el0_64 ? "64" : "No");
+-    printk("    Extensions:%s%s%s\n",
++    printk("    Extensions:%s%s%s%s\n",
+            cpu_has_fp ? " FloatingPoint" : "",
+            cpu_has_simd ? " AdvancedSIMD" : "",
+-           cpu_has_gicv3 ? " GICv3-SysReg" : "");
++           cpu_has_gicv3 ? " GICv3-SysReg" : "",
++           cpu_has_lse_atomics ? " LSE-Atomics" : "");
+ 
+     /* Warn user if we find unknown floating-point features */
+     if ( cpu_has_fp && (boot_cpu_feature(pfr64, fp) >= 2) )
+diff --git a/xen/include/asm-arm/cpufeature.h b/xen/include/asm-arm/cpufeature.h
+index f9281ea343..2366926e82 100644
+--- a/xen/include/asm-arm/cpufeature.h
++++ b/xen/include/asm-arm/cpufeature.h
+@@ -15,6 +15,7 @@
+ #define cpu_has_fp              (boot_cpu_feature(pfr64, fp) < 8)
+ #define cpu_has_simd            (boot_cpu_feature(pfr64, simd) < 8)
+ #define cpu_has_gicv3           (boot_cpu_feature(pfr64, gic) == 1)
++#define cpu_has_lse_atomics     (boot_cpu_feature(isa64, atomic) == 2)
+ #endif
+ 
+ #define cpu_has_arm       (boot_cpu_feature(pfr32, arm) == 1)
+@@ -187,8 +188,15 @@ struct cpuinfo_arm {
+         };
+     } mm64;
+ 
+-    struct {
++    union {
+         uint64_t bits[2];
++        struct {
++            unsigned long __res0 : 20;
++            unsigned long atomic : 4;
++            unsigned long __res1 : 40;
++
++            unsigned long __res2 : 64;
++        };
+     } isa64;
+ 
+ #endif
 -- 
 2.24.3 (Apple Git-128)
 
