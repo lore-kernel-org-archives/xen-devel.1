@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 72A81C2D0A3
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2020 19:13:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A395DC388F2
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2020 19:13:43 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 07F0D21556
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2020 19:13:39 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 2A92B21556
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2020 19:13:43 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="iiGVfdCI"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 07F0D21556
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="d0t0faqK"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2A92B21556
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.21047.47272 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.21049.47284 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kb7Av-00072n-AY; Fri, 06 Nov 2020 19:13:29 +0000
+	id 1kb7B0-000795-Lv; Fri, 06 Nov 2020 19:13:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 21047.47272; Fri, 06 Nov 2020 19:13:29 +0000
+Received: by outflank-mailman (output) from mailman id 21049.47284; Fri, 06 Nov 2020 19:13:34 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kb7Av-00072X-6x; Fri, 06 Nov 2020 19:13:29 +0000
-Received: by outflank-mailman (input) for mailman id 21047;
- Fri, 06 Nov 2020 19:13:27 +0000
+	id 1kb7B0-00078v-Ii; Fri, 06 Nov 2020 19:13:34 +0000
+Received: by outflank-mailman (input) for mailman id 21049;
+ Fri, 06 Nov 2020 19:13:33 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=VpbQ=EM=casper.srs.infradead.org=batv+cc05c5534fc856bb48c0+6284+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1kb73j-0004zS-Uc
- for xen-devel@lists.xenproject.org; Fri, 06 Nov 2020 19:06:03 +0000
+ id 1kb73U-0004zS-U7
+ for xen-devel@lists.xenproject.org; Fri, 06 Nov 2020 19:05:48 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 671ed6c6-ed7f-496a-86e9-f374c89d5dce;
- Fri, 06 Nov 2020 19:04:50 +0000 (UTC)
+ id ee1a3226-5aa0-467c-9c10-0510578b1254;
+ Fri, 06 Nov 2020 19:04:43 +0000 (UTC)
 Received: from [2001:4bb8:184:9a8d:9e34:f7f4:e59e:ad6f] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kb72H-00017b-Qy; Fri, 06 Nov 2020 19:04:34 +0000
+ id 1kb72A-00013z-Vd; Fri, 06 Nov 2020 19:04:27 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=VpbQ=EM=casper.srs.infradead.org=batv+cc05c5534fc856bb48c0+6284+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1kb73j-0004zS-Uc
-	for xen-devel@lists.xenproject.org; Fri, 06 Nov 2020 19:06:03 +0000
-X-Inumbo-ID: 671ed6c6-ed7f-496a-86e9-f374c89d5dce
+	id 1kb73U-0004zS-U7
+	for xen-devel@lists.xenproject.org; Fri, 06 Nov 2020 19:05:48 +0000
+X-Inumbo-ID: ee1a3226-5aa0-467c-9c10-0510578b1254
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 671ed6c6-ed7f-496a-86e9-f374c89d5dce;
-	Fri, 06 Nov 2020 19:04:50 +0000 (UTC)
+	id ee1a3226-5aa0-467c-9c10-0510578b1254;
+	Fri, 06 Nov 2020 19:04:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=MupYDI4l/YovZ7RWUiZbIkKTEoIVA+KjloyNnUiTimo=; b=iiGVfdCIPPX+IkfTbBzmxkNClz
-	t982+XiX0rLzTMHY8HFo1Fp5Mtn7rK+diWNO+RHxxMdKcJUTti2/wcEDk1JuKfU/o4+K8dKleodTE
-	HTiaGtNCpYoo9vb3GGX4aLbLQQjLGGtNWkpDZpYqEwfuTn9hbBczupYDxFhREBpBASbSx6M7Lze9e
-	iKaTzCv7Ayt/qABbDvowSzznAcYB/VzFYgYnipTJO4suLkefkpjbVL2Cs7whyJwZIOchXyT0sQa+l
-	gQuWBa19/ZwoPZGFHeWQytUlRCgvx6EJq35hta2jU2txOK4i/ZI7bcgxRU7PROSuEa2OkMTwR08Xi
-	9io2po4w==;
+	bh=WS/5HaJpXF8+Aj3VZ2GQ3e6HnWhXjc79y2mDNxe6L1Y=; b=d0t0faqKeh0diZy5D+3oFd7PUF
+	TCyCK8sa/DuNKYU0jeT8wTyRvaiEBKDnaS6SEkdUTuybDBsIgoIeRPsAlzl5bKXOe6SmughSQbIEP
+	KkykvrhSx4ccDUXIrBKyrD0p4JiXqCPHgPeWfj3mWbknoX/XAnoyioec4TemaKCqv4ah93+QLH5cg
+	9/RsZdWQzxsF1SLgUEW0HOn02HqxzKnJlnn0keo28vvDdvLYdDXii4E52+MkqA7lju2awVWXrKJL6
+	ATVrFBAnHLMBbHBOSnGGHyMGWAswR83/TC1I7JT5bKbjrfZ4wEjHnEBd8a7RQ1Qnb4mvA0vQ78WTS
+	P88M1meg==;
 Received: from [2001:4bb8:184:9a8d:9e34:f7f4:e59e:ad6f] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1kb72H-00017b-Qy; Fri, 06 Nov 2020 19:04:34 +0000
+	id 1kb72A-00013z-Vd; Fri, 06 Nov 2020 19:04:27 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -102,9 +102,9 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-nvme@lists.infradead.org,
 	linux-scsi@vger.kernel.org,
 	linux-fsdevel@vger.kernel.org
-Subject: [PATCH 23/24] virtio-blk: remove a spurious call to revalidate_disk_size
-Date: Fri,  6 Nov 2020 20:03:35 +0100
-Message-Id: <20201106190337.1973127-24-hch@lst.de>
+Subject: [PATCH 20/24] dm-raid: use set_capacity_and_notify
+Date: Fri,  6 Nov 2020 20:03:32 +0100
+Message-Id: <20201106190337.1973127-21-hch@lst.de>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20201106190337.1973127-1-hch@lst.de>
 References: <20201106190337.1973127-1-hch@lst.de>
@@ -112,27 +112,28 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-revalidate_disk_size just updates the block device size from the disk
-size.  Thus calling it from revalidate_disk_size doesn't actually do
-anything.
+Use set_capacity_and_notify to set the size of both the disk and block
+device.  This also gets the uevent notifications for the resize for free.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/block/virtio_blk.c | 1 -
- 1 file changed, 1 deletion(-)
+ drivers/md/dm-raid.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/drivers/block/virtio_blk.c b/drivers/block/virtio_blk.c
-index 3e812b4c32e669..145606dc52db1e 100644
---- a/drivers/block/virtio_blk.c
-+++ b/drivers/block/virtio_blk.c
-@@ -598,7 +598,6 @@ static void virtblk_update_cache_mode(struct virtio_device *vdev)
- 	struct virtio_blk *vblk = vdev->priv;
+diff --git a/drivers/md/dm-raid.c b/drivers/md/dm-raid.c
+index 9c1f7c4de65b35..294f34d2d61bae 100644
+--- a/drivers/md/dm-raid.c
++++ b/drivers/md/dm-raid.c
+@@ -700,8 +700,7 @@ static void rs_set_capacity(struct raid_set *rs)
+ {
+ 	struct gendisk *gendisk = dm_disk(dm_table_get_md(rs->ti->table));
  
- 	blk_queue_write_cache(vblk->disk->queue, writeback, false);
--	revalidate_disk_size(vblk->disk, true);
+-	set_capacity(gendisk, rs->md.array_sectors);
+-	revalidate_disk_size(gendisk, true);
++	set_capacity_and_notify(gendisk, rs->md.array_sectors);
  }
  
- static const char *const virtblk_cache_types[] = {
+ /*
 -- 
 2.28.0
 
