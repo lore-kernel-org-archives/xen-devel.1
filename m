@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2A08BC55178
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2020 19:13:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 72A81C2D0A3
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2020 19:13:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 970CD21D46
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2020 19:13:33 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 07F0D21556
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2020 19:13:39 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="SSYTvNNJ"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 970CD21D46
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="iiGVfdCI"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 07F0D21556
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.21046.47260 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.21047.47272 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kb7Ar-0006yH-Rt; Fri, 06 Nov 2020 19:13:25 +0000
+	id 1kb7Av-00072n-AY; Fri, 06 Nov 2020 19:13:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 21046.47260; Fri, 06 Nov 2020 19:13:25 +0000
+Received: by outflank-mailman (output) from mailman id 21047.47272; Fri, 06 Nov 2020 19:13:29 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kb7Ar-0006yA-OT; Fri, 06 Nov 2020 19:13:25 +0000
-Received: by outflank-mailman (input) for mailman id 21046;
- Fri, 06 Nov 2020 19:13:24 +0000
+	id 1kb7Av-00072X-6x; Fri, 06 Nov 2020 19:13:29 +0000
+Received: by outflank-mailman (input) for mailman id 21047;
+ Fri, 06 Nov 2020 19:13:27 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=VpbQ=EM=casper.srs.infradead.org=batv+cc05c5534fc856bb48c0+6284+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1kb73P-0004zS-Tw
- for xen-devel@lists.xenproject.org; Fri, 06 Nov 2020 19:05:43 +0000
+ id 1kb73j-0004zS-Uc
+ for xen-devel@lists.xenproject.org; Fri, 06 Nov 2020 19:06:03 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 8ba95349-51b4-4797-960b-afe7b81c8d69;
- Fri, 06 Nov 2020 19:04:41 +0000 (UTC)
+ id 671ed6c6-ed7f-496a-86e9-f374c89d5dce;
+ Fri, 06 Nov 2020 19:04:50 +0000 (UTC)
 Received: from [2001:4bb8:184:9a8d:9e34:f7f4:e59e:ad6f] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kb727-00012z-Nb; Fri, 06 Nov 2020 19:04:24 +0000
+ id 1kb72H-00017b-Qy; Fri, 06 Nov 2020 19:04:34 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=VpbQ=EM=casper.srs.infradead.org=batv+cc05c5534fc856bb48c0+6284+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1kb73P-0004zS-Tw
-	for xen-devel@lists.xenproject.org; Fri, 06 Nov 2020 19:05:43 +0000
-X-Inumbo-ID: 8ba95349-51b4-4797-960b-afe7b81c8d69
+	id 1kb73j-0004zS-Uc
+	for xen-devel@lists.xenproject.org; Fri, 06 Nov 2020 19:06:03 +0000
+X-Inumbo-ID: 671ed6c6-ed7f-496a-86e9-f374c89d5dce
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 8ba95349-51b4-4797-960b-afe7b81c8d69;
-	Fri, 06 Nov 2020 19:04:41 +0000 (UTC)
+	id 671ed6c6-ed7f-496a-86e9-f374c89d5dce;
+	Fri, 06 Nov 2020 19:04:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=PHuhBTY1ouZHYZght48HNcRnOQ9ETUZCJ1FQTXf/EwQ=; b=SSYTvNNJNXE2eq2vgVj6+p7+Gh
-	FYbkDj8JGnpdrmz5g60TezXk1nZ8IK6aSEC63V47GcMNDVRD2b07nZboOupLzX5aEBbXOf1qNk/q1
-	85ByLUNa/iIkjS2bTnTwLGX4qg1UIhlVWKfoDdV2GRo/nM9hbu38kygTHxbko2gZVtT2bUrzYPu48
-	BSOQzEY1WiSKBkKLQhDgeyv8+72t+hzcZogXCmIx1Wruxn/wT/qwIItixospXcqe+3ImMT6BtwjcV
-	45CMr1jmOsAd8Z/iT1swy0pwYtf88g1VIvuMcKaCvasjmy8HQRqOo3zeFNgUjbePxjiAerJHobf4V
-	AcdZg19g==;
+	bh=MupYDI4l/YovZ7RWUiZbIkKTEoIVA+KjloyNnUiTimo=; b=iiGVfdCIPPX+IkfTbBzmxkNClz
+	t982+XiX0rLzTMHY8HFo1Fp5Mtn7rK+diWNO+RHxxMdKcJUTti2/wcEDk1JuKfU/o4+K8dKleodTE
+	HTiaGtNCpYoo9vb3GGX4aLbLQQjLGGtNWkpDZpYqEwfuTn9hbBczupYDxFhREBpBASbSx6M7Lze9e
+	iKaTzCv7Ayt/qABbDvowSzznAcYB/VzFYgYnipTJO4suLkefkpjbVL2Cs7whyJwZIOchXyT0sQa+l
+	gQuWBa19/ZwoPZGFHeWQytUlRCgvx6EJq35hta2jU2txOK4i/ZI7bcgxRU7PROSuEa2OkMTwR08Xi
+	9io2po4w==;
 Received: from [2001:4bb8:184:9a8d:9e34:f7f4:e59e:ad6f] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1kb727-00012z-Nb; Fri, 06 Nov 2020 19:04:24 +0000
+	id 1kb72H-00017b-Qy; Fri, 06 Nov 2020 19:04:34 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -102,9 +102,9 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-nvme@lists.infradead.org,
 	linux-scsi@vger.kernel.org,
 	linux-fsdevel@vger.kernel.org
-Subject: [PATCH 18/24] rnbd: use set_capacity_and_notify
-Date: Fri,  6 Nov 2020 20:03:30 +0100
-Message-Id: <20201106190337.1973127-19-hch@lst.de>
+Subject: [PATCH 23/24] virtio-blk: remove a spurious call to revalidate_disk_size
+Date: Fri,  6 Nov 2020 20:03:35 +0100
+Message-Id: <20201106190337.1973127-24-hch@lst.de>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20201106190337.1973127-1-hch@lst.de>
 References: <20201106190337.1973127-1-hch@lst.de>
@@ -112,28 +112,27 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-Use set_capacity_and_notify to set the size of both the disk and block
-device.  This also gets the uevent notifications for the resize for free.
+revalidate_disk_size just updates the block device size from the disk
+size.  Thus calling it from revalidate_disk_size doesn't actually do
+anything.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/block/rnbd/rnbd-clt.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ drivers/block/virtio_blk.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/drivers/block/rnbd/rnbd-clt.c b/drivers/block/rnbd/rnbd-clt.c
-index 8b2411ccbda97c..bb13d7dd195a08 100644
---- a/drivers/block/rnbd/rnbd-clt.c
-+++ b/drivers/block/rnbd/rnbd-clt.c
-@@ -100,8 +100,7 @@ static int rnbd_clt_change_capacity(struct rnbd_clt_dev *dev,
- 	rnbd_clt_info(dev, "Device size changed from %zu to %zu sectors\n",
- 		       dev->nsectors, new_nsectors);
- 	dev->nsectors = new_nsectors;
--	set_capacity(dev->gd, dev->nsectors);
--	revalidate_disk_size(dev->gd, true);
-+	set_capacity_and_notify(dev->gd, dev->nsectors);
- 	return 0;
+diff --git a/drivers/block/virtio_blk.c b/drivers/block/virtio_blk.c
+index 3e812b4c32e669..145606dc52db1e 100644
+--- a/drivers/block/virtio_blk.c
++++ b/drivers/block/virtio_blk.c
+@@ -598,7 +598,6 @@ static void virtblk_update_cache_mode(struct virtio_device *vdev)
+ 	struct virtio_blk *vblk = vdev->priv;
+ 
+ 	blk_queue_write_cache(vblk->disk->queue, writeback, false);
+-	revalidate_disk_size(vblk->disk, true);
  }
  
+ static const char *const virtblk_cache_types[] = {
 -- 
 2.28.0
 
