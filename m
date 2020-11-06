@@ -2,28 +2,28 @@ Return-Path: <SRS0=Kis3=EM=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.7 required=3.0 tests=BAYES_00,DKIM_INVALID,
+X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,UNWANTED_LANGUAGE_BODY,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A3295C61DD8
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2020 19:04:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 48AA0C2D0A3
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2020 19:04:48 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 27606208C7
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2020 19:04:34 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id CEBCB20882
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2020 19:04:47 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="kl8AxnoJ"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 27606208C7
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="N/BTEsal"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CEBCB20882
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.20995.47128 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.20999.47176 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kb71z-0004zf-Qd; Fri, 06 Nov 2020 19:04:15 +0000
+	id 1kb72I-0005Ev-Td; Fri, 06 Nov 2020 19:04:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 20995.47128; Fri, 06 Nov 2020 19:04:15 +0000
+Received: by outflank-mailman (output) from mailman id 20999.47176; Fri, 06 Nov 2020 19:04:34 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kb71z-0004zY-Nh; Fri, 06 Nov 2020 19:04:15 +0000
-Received: by outflank-mailman (input) for mailman id 20995;
- Fri, 06 Nov 2020 19:04:14 +0000
+	id 1kb72I-0005Ek-P8; Fri, 06 Nov 2020 19:04:34 +0000
+Received: by outflank-mailman (input) for mailman id 20999;
+ Fri, 06 Nov 2020 19:04:33 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=VpbQ=EM=casper.srs.infradead.org=batv+cc05c5534fc856bb48c0+6284+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1kb71x-0004zS-Ut
- for xen-devel@lists.xenproject.org; Fri, 06 Nov 2020 19:04:14 +0000
+ id 1kb72H-0004zS-Rg
+ for xen-devel@lists.xenproject.org; Fri, 06 Nov 2020 19:04:33 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 2f568806-9fc9-4ed7-9c94-aa81e8b6f44a;
- Fri, 06 Nov 2020 19:04:11 +0000 (UTC)
+ id 0dad4b59-1b73-467f-827d-6f2a3aa13aa0;
+ Fri, 06 Nov 2020 19:04:17 +0000 (UTC)
 Received: from [2001:4bb8:184:9a8d:9e34:f7f4:e59e:ad6f] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kb71b-0000th-31; Fri, 06 Nov 2020 19:03:52 +0000
+ id 1kb71f-0000uK-9c; Fri, 06 Nov 2020 19:03:56 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=VpbQ=EM=casper.srs.infradead.org=batv+cc05c5534fc856bb48c0+6284+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1kb71x-0004zS-Ut
-	for xen-devel@lists.xenproject.org; Fri, 06 Nov 2020 19:04:14 +0000
-X-Inumbo-ID: 2f568806-9fc9-4ed7-9c94-aa81e8b6f44a
+	id 1kb72H-0004zS-Rg
+	for xen-devel@lists.xenproject.org; Fri, 06 Nov 2020 19:04:33 +0000
+X-Inumbo-ID: 0dad4b59-1b73-467f-827d-6f2a3aa13aa0
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 2f568806-9fc9-4ed7-9c94-aa81e8b6f44a;
-	Fri, 06 Nov 2020 19:04:11 +0000 (UTC)
+	id 0dad4b59-1b73-467f-827d-6f2a3aa13aa0;
+	Fri, 06 Nov 2020 19:04:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=GTpuLBfYyo8TaeZo/z07ad7aIfYXt5VjexG6J+Un22Y=; b=kl8AxnoJUKENxdqbmGjtDUBKGr
-	4VvvwsWDbIWXpjZUE80AyVmG5Pw1VqJDYsJwtH7NNnxp0mOGVXqwKxHaePcIX2QLEgCS8sFueGPzE
-	AiTGABB6Xp+kXJg8ish427RVP/SfCFu0d17IOJ1V1HiYBELRoZFB92ZTq6pCfkW0lsJkkJrifhsmZ
-	pmg+34MTaZP2+QSox6FaZ3V/B2bz9YfsUA2FysiawKz4wfLjLQFNhJ856xgqwRX1KDIB3yvZOlRbF
-	NcZ4l5avCx+EDEjbrxqOm6DFPEMZDdVeorTynAxTtJLBiF/5eE5hDbP4cAerzfFjspBXGft5tkdz/
-	xM4wPyUw==;
+	bh=z4FJvyEBdJUNH2ICfgDhXYhI93Iugb+FUQTixBMdEJs=; b=N/BTEsalf53sWMF1NynFhjnBWQ
+	uMEzJhDiUhbdgTn6HR32ujb4p0zRiPS+sOoVdEnyZv+Dij8IJUweK1eMVi2RBr1hXUSEwwavtHExg
+	sNr9j1HAVcinwU0zvVZ9QarhyRI4g+YDE9woukNnt8R+toHJE6Yyj0N6xE2RsmnTfWYuqVKiRBcdc
+	C+RJ0pjKXC9y7PJrEmbrlFyzinEMuLJP5ArJM2hoiLEKHH5IAxDcyRZUkdM+9P4+gn1Pn36IKFZYO
+	AdL3p37VKRLnvBgnAkwYvUIBdzrmEngx2OqoC8PTe/8DN9HA5diR/JaO+uxOByGNXLNxU91/DaxUA
+	FUf64JDg==;
 Received: from [2001:4bb8:184:9a8d:9e34:f7f4:e59e:ad6f] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1kb71b-0000th-31; Fri, 06 Nov 2020 19:03:52 +0000
+	id 1kb71f-0000uK-9c; Fri, 06 Nov 2020 19:03:56 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -102,9 +102,9 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-nvme@lists.infradead.org,
 	linux-scsi@vger.kernel.org,
 	linux-fsdevel@vger.kernel.org
-Subject: [PATCH 02/24] loop: remove loop_set_size
-Date: Fri,  6 Nov 2020 20:03:14 +0100
-Message-Id: <20201106190337.1973127-3-hch@lst.de>
+Subject: [PATCH 04/24] sd: update the bdev size in sd_revalidate_disk
+Date: Fri,  6 Nov 2020 20:03:16 +0100
+Message-Id: <20201106190337.1973127-5-hch@lst.de>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20201106190337.1973127-1-hch@lst.de>
 References: <20201106190337.1973127-1-hch@lst.de>
@@ -112,93 +112,49 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-Just use set_capacity_revalidate_and_notify directly, as this function
-can update the block device size as well when the last parameter is set
-to true.
+This avoids the extra call to revalidate_disk_size in sd_rescan and
+is otherwise a no-op because the size did not change, or we are in
+the probe path.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/block/loop.c | 37 +++++++------------------------------
- 1 file changed, 7 insertions(+), 30 deletions(-)
+ drivers/scsi/sd.c | 8 +++-----
+ 1 file changed, 3 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/block/loop.c b/drivers/block/loop.c
-index cb1191d6e945f2..86eb7e0691eef5 100644
---- a/drivers/block/loop.c
-+++ b/drivers/block/loop.c
-@@ -241,23 +241,6 @@ loop_validate_block_size(unsigned short bsize)
- 	return 0;
- }
- 
--/**
-- * loop_set_size() - sets device size and notifies userspace
-- * @lo: struct loop_device to set the size for
-- * @size: new size of the loop device
-- *
-- * Callers must validate that the size passed into this function fits into
-- * a sector_t, eg using loop_validate_size()
-- */
--static void loop_set_size(struct loop_device *lo, loff_t size)
--{
--	struct block_device *bdev = lo->lo_device;
--
--	bd_set_nr_sectors(bdev, size);
--
--	set_capacity_revalidate_and_notify(lo->lo_disk, size, false);
--}
--
- static inline int
- lo_do_transfer(struct loop_device *lo, int cmd,
- 	       struct page *rpage, unsigned roffs,
-@@ -1076,7 +1059,6 @@ static int loop_configure(struct loop_device *lo, fmode_t mode,
- 	struct address_space *mapping;
- 	struct block_device *claimed_bdev = NULL;
- 	int		error;
--	loff_t		size;
- 	bool		partscan;
- 	unsigned short  bsize;
- 
-@@ -1164,9 +1146,8 @@ static int loop_configure(struct loop_device *lo, fmode_t mode,
- 	loop_update_dio(lo);
- 	loop_sysfs_init(lo);
- 
--	size = get_loop_size(lo, file);
--	loop_set_size(lo, size);
--
-+	set_capacity_revalidate_and_notify(lo->lo_disk, get_loop_size(lo, file),
-+			true);
- 	set_blocksize(bdev, S_ISBLK(inode->i_mode) ?
- 		      block_size(inode->i_bdev) : PAGE_SIZE);
- 
-@@ -1402,9 +1383,9 @@ loop_set_status(struct loop_device *lo, const struct loop_info64 *info)
- 	lo->lo_flags |= prev_lo_flags & ~LOOP_SET_STATUS_CLEARABLE_FLAGS;
- 
- 	if (size_changed) {
--		loff_t new_size = get_size(lo->lo_offset, lo->lo_sizelimit,
--					   lo->lo_backing_file);
--		loop_set_size(lo, new_size);
-+		set_capacity_revalidate_and_notify(lo->lo_disk,
-+				get_size(lo->lo_offset, lo->lo_sizelimit,
-+					 lo->lo_backing_file), true);
- 	}
- 
- 	loop_config_discard(lo);
-@@ -1580,14 +1561,10 @@ loop_get_status64(struct loop_device *lo, struct loop_info64 __user *arg) {
- 
- static int loop_set_capacity(struct loop_device *lo)
+diff --git a/drivers/scsi/sd.c b/drivers/scsi/sd.c
+index 656bcf4940d6d1..4a34dd5b153196 100644
+--- a/drivers/scsi/sd.c
++++ b/drivers/scsi/sd.c
+@@ -1750,10 +1750,8 @@ static int sd_sync_cache(struct scsi_disk *sdkp, struct scsi_sense_hdr *sshdr)
+ static void sd_rescan(struct device *dev)
  {
--	loff_t size;
--
- 	if (unlikely(lo->lo_state != Lo_bound))
- 		return -ENXIO;
--
--	size = get_loop_size(lo, lo->lo_backing_file);
--	loop_set_size(lo, size);
--
-+	set_capacity_revalidate_and_notify(lo->lo_disk,
-+			get_loop_size(lo, lo->lo_backing_file), true);
- 	return 0;
+ 	struct scsi_disk *sdkp = dev_get_drvdata(dev);
+-	int ret;
+ 
+-	ret = sd_revalidate_disk(sdkp->disk);
+-	revalidate_disk_size(sdkp->disk, ret == 0);
++	sd_revalidate_disk(sdkp->disk);
  }
  
+ static int sd_ioctl(struct block_device *bdev, fmode_t mode,
+@@ -3266,7 +3264,7 @@ static int sd_revalidate_disk(struct gendisk *disk)
+ 	sdkp->first_scan = 0;
+ 
+ 	set_capacity_revalidate_and_notify(disk,
+-		logical_to_sectors(sdp, sdkp->capacity), false);
++		logical_to_sectors(sdp, sdkp->capacity), true);
+ 	sd_config_write_same(sdkp);
+ 	kfree(buffer);
+ 
+@@ -3276,7 +3274,7 @@ static int sd_revalidate_disk(struct gendisk *disk)
+ 	 * capacity to 0.
+ 	 */
+ 	if (sd_zbc_revalidate_zones(sdkp))
+-		set_capacity_revalidate_and_notify(disk, 0, false);
++		set_capacity_revalidate_and_notify(disk, 0, true);
+ 
+  out:
+ 	return 0;
 -- 
 2.28.0
 
