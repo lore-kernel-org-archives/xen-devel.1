@@ -5,25 +5,25 @@ X-Spam-Level:
 X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 13546C55178
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2020 19:13:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F6BDC2D0A3
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2020 19:13:47 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9F77621556
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2020 19:13:44 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id BD4092151B
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2020 19:13:46 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="tVd8geFS"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9F77621556
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="oAMtLVxz"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BD4092151B
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.21051.47302 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.21050.47296 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kb7B2-0007Ci-GJ; Fri, 06 Nov 2020 19:13:36 +0000
+	id 1kb7B2-0007Bo-1Y; Fri, 06 Nov 2020 19:13:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 21051.47302; Fri, 06 Nov 2020 19:13:36 +0000
+Received: by outflank-mailman (output) from mailman id 21050.47296; Fri, 06 Nov 2020 19:13:36 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kb7B2-0007CU-8h; Fri, 06 Nov 2020 19:13:36 +0000
-Received: by outflank-mailman (input) for mailman id 21051;
- Fri, 06 Nov 2020 19:13:35 +0000
+	id 1kb7B1-0007Bb-Tb; Fri, 06 Nov 2020 19:13:35 +0000
+Received: by outflank-mailman (input) for mailman id 21050;
+ Fri, 06 Nov 2020 19:13:34 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=VpbQ=EM=casper.srs.infradead.org=batv+cc05c5534fc856bb48c0+6284+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1kb73Z-0004zS-U8
- for xen-devel@lists.xenproject.org; Fri, 06 Nov 2020 19:05:53 +0000
+ id 1kb73A-0004zS-TU
+ for xen-devel@lists.xenproject.org; Fri, 06 Nov 2020 19:05:28 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 01e1f1af-4970-4177-b232-31b43ea69eec;
- Fri, 06 Nov 2020 19:04:43 +0000 (UTC)
+ id 11ce5153-c32d-4c37-88c2-d52cee2f7f95;
+ Fri, 06 Nov 2020 19:04:35 +0000 (UTC)
 Received: from [2001:4bb8:184:9a8d:9e34:f7f4:e59e:ad6f] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kb729-00013h-89; Fri, 06 Nov 2020 19:04:25 +0000
+ id 1kb71t-0000x7-8S; Fri, 06 Nov 2020 19:04:10 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=VpbQ=EM=casper.srs.infradead.org=batv+cc05c5534fc856bb48c0+6284+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1kb73Z-0004zS-U8
-	for xen-devel@lists.xenproject.org; Fri, 06 Nov 2020 19:05:53 +0000
-X-Inumbo-ID: 01e1f1af-4970-4177-b232-31b43ea69eec
+	id 1kb73A-0004zS-TU
+	for xen-devel@lists.xenproject.org; Fri, 06 Nov 2020 19:05:28 +0000
+X-Inumbo-ID: 11ce5153-c32d-4c37-88c2-d52cee2f7f95
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 01e1f1af-4970-4177-b232-31b43ea69eec;
-	Fri, 06 Nov 2020 19:04:43 +0000 (UTC)
+	id 11ce5153-c32d-4c37-88c2-d52cee2f7f95;
+	Fri, 06 Nov 2020 19:04:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=4bS/eZqoJAQR/DSs9IGqi2g9LCY9L0WWDnWefDh2k5M=; b=tVd8geFSv+/a4ICZqJ4miUgAZr
-	bSnQVkuUj9Q1sOtmlqt7w1/fnbDPR0IyuD7NylvEPospNvxVXib/Q1nUDuQNSaWDRFbsRXA9dbw6O
-	R/GqSzwPpwI2zGGmixd50oCio/LgvmNAgH3JNK5kktQ8eJb8dFVZtMV8LOVf1+XaUk33UAT4qwsbd
-	gO37JazEvqPXopiAzJkFz2g/BDk5ZGRZJMue7aCghVAZN1rAh3Kp+t7apQN+sU6hGH5YlyzTNFcs+
-	V0tQaIvP9jr1OAo1S5SMYXLTVLk25tGMl0HLivTuYcN5VAr0bXyzDQ4D/TX6qd2S5zUuUJoLnnNDa
-	VVQ+Kqmw==;
+	bh=9taUiqSTACcH2Z0NVyYeu1wIyxjTgsg3N9q7Quy2bf8=; b=oAMtLVxzr+OO0PcilibN4J+7cY
+	A6aOsonM11li6ilkHUPp8kBC6QK8Ku1WKyvUPQIIKS3Yr6ShhFM9rGgNGOqajADhudPZ+3vFzZY6G
+	+awcIimxh/Z01UGkGMBjmo+ldoYOMeGf99KhzTGQ+98goXtxgdupqyVgT6d6XIW8QFrnGYE8B3eI/
+	NdxJOwyx/XyOCFGOvQCYVgahj/lrrL/KLrr4bytAMgZd96iY0MMc/Ta+sFWjeoqP7n+5l0TOF6jMP
+	v4PEZnAOD042+hSq/ZESdR+3iJ6Oge2OfUHEz6Jei3G3ygfq/wegQ3JrDRIV0DxROiAOfQJF8vFZL
+	LUGQzlHA==;
 Received: from [2001:4bb8:184:9a8d:9e34:f7f4:e59e:ad6f] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1kb729-00013h-89; Fri, 06 Nov 2020 19:04:25 +0000
+	id 1kb71t-0000x7-8S; Fri, 06 Nov 2020 19:04:10 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -102,9 +102,9 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-nvme@lists.infradead.org,
 	linux-scsi@vger.kernel.org,
 	linux-fsdevel@vger.kernel.org
-Subject: [PATCH 19/24] zram: use set_capacity_and_notify
-Date: Fri,  6 Nov 2020 20:03:31 +0100
-Message-Id: <20201106190337.1973127-20-hch@lst.de>
+Subject: [PATCH 11/24] nbd: use set_capacity_and_notify
+Date: Fri,  6 Nov 2020 20:03:23 +0100
+Message-Id: <20201106190337.1973127-12-hch@lst.de>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20201106190337.1973127-1-hch@lst.de>
 References: <20201106190337.1973127-1-hch@lst.de>
@@ -112,46 +112,49 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-Use set_capacity_and_notify to set the size of both the disk and block
-device.  This also gets the uevent notifications for the resize for free.
+Use set_capacity_and_notify to update the disk and block device sizes and
+send a RESIZE uevent to userspace.  Note that blktests relies on uevents
+being sent also for updates that did not change the device size, so the
+explicit kobject_uevent remains for that case.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/block/zram/zram_drv.c | 7 ++-----
- 1 file changed, 2 insertions(+), 5 deletions(-)
+ drivers/block/nbd.c | 15 +++------------
+ 1 file changed, 3 insertions(+), 12 deletions(-)
 
-diff --git a/drivers/block/zram/zram_drv.c b/drivers/block/zram/zram_drv.c
-index 1b697208d66157..6d15d51cee2b7e 100644
---- a/drivers/block/zram/zram_drv.c
-+++ b/drivers/block/zram/zram_drv.c
-@@ -1695,7 +1695,7 @@ static void zram_reset_device(struct zram *zram)
- 	disksize = zram->disksize;
- 	zram->disksize = 0;
- 
--	set_capacity(zram->disk, 0);
-+	set_capacity_and_notify(zram->disk, 0);
- 	part_stat_set_all(&zram->disk->part0, 0);
- 
- 	up_write(&zram->init_lock);
-@@ -1741,9 +1741,7 @@ static ssize_t disksize_store(struct device *dev,
- 
- 	zram->comp = comp;
- 	zram->disksize = disksize;
--	set_capacity(zram->disk, zram->disksize >> SECTOR_SHIFT);
+diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
+index 327060e01ad58e..a6f51934391edb 100644
+--- a/drivers/block/nbd.c
++++ b/drivers/block/nbd.c
+@@ -299,8 +299,6 @@ static void nbd_size_clear(struct nbd_device *nbd)
+ static int nbd_set_size(struct nbd_device *nbd, loff_t bytesize,
+ 		loff_t blksize)
+ {
+-	struct block_device *bdev;
 -
--	revalidate_disk_size(zram->disk, true);
-+	set_capacity_and_notify(zram->disk, zram->disksize >> SECTOR_SHIFT);
- 	up_write(&zram->init_lock);
+ 	if (!blksize)
+ 		blksize = NBD_DEF_BLKSIZE;
+ 	if (blksize < 512 || blksize > PAGE_SIZE || !is_power_of_2(blksize))
+@@ -320,16 +318,9 @@ static int nbd_set_size(struct nbd_device *nbd, loff_t bytesize,
+ 	blk_queue_logical_block_size(nbd->disk->queue, blksize);
+ 	blk_queue_physical_block_size(nbd->disk->queue, blksize);
  
- 	return len;
-@@ -1790,7 +1788,6 @@ static ssize_t reset_store(struct device *dev,
- 	/* Make sure all the pending I/O are finished */
- 	fsync_bdev(bdev);
- 	zram_reset_device(zram);
--	revalidate_disk_size(zram->disk, true);
- 	bdput(bdev);
+-	set_capacity(nbd->disk, bytesize >> 9);
+-	bdev = bdget_disk(nbd->disk, 0);
+-	if (bdev) {
+-		if (bdev->bd_disk)
+-			bd_set_nr_sectors(bdev, bytesize >> 9);
+-		else
+-			set_bit(GD_NEED_PART_SCAN, &nbd->disk->state);
+-		bdput(bdev);
+-	}
+-	kobject_uevent(&nbd_to_dev(nbd)->kobj, KOBJ_CHANGE);
++	set_bit(GD_NEED_PART_SCAN, &nbd->disk->state);
++	if (!set_capacity_and_notify(nbd->disk, bytesize >> 9))
++		kobject_uevent(&nbd_to_dev(nbd)->kobj, KOBJ_CHANGE);
+ 	return 0;
+ }
  
- 	mutex_lock(&bdev->bd_mutex);
 -- 
 2.28.0
 
