@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 900E7C2D0A3
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2020 19:13:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B5EBC55178
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2020 19:13:52 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2AB592151B
+	by mail.kernel.org (Postfix) with ESMTPS id 0078A2151B
 	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2020 19:13:51 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="EbShoq0e"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2AB592151B
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="LnYE9NNr"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0078A2151B
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.21054.47320 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.21057.47355 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kb7B5-0007Jj-Qf; Fri, 06 Nov 2020 19:13:39 +0000
+	id 1kb7B9-0007TV-II; Fri, 06 Nov 2020 19:13:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 21054.47320; Fri, 06 Nov 2020 19:13:39 +0000
+Received: by outflank-mailman (output) from mailman id 21057.47355; Fri, 06 Nov 2020 19:13:43 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kb7B5-0007JV-LP; Fri, 06 Nov 2020 19:13:39 +0000
-Received: by outflank-mailman (input) for mailman id 21054;
- Fri, 06 Nov 2020 19:13:38 +0000
+	id 1kb7B9-0007Sw-3R; Fri, 06 Nov 2020 19:13:43 +0000
+Received: by outflank-mailman (input) for mailman id 21057;
+ Fri, 06 Nov 2020 19:13:40 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=VpbQ=EM=casper.srs.infradead.org=batv+cc05c5534fc856bb48c0+6284+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1kb73e-0004zS-UN
- for xen-devel@lists.xenproject.org; Fri, 06 Nov 2020 19:05:58 +0000
+ id 1kb72v-0004zS-Sm
+ for xen-devel@lists.xenproject.org; Fri, 06 Nov 2020 19:05:13 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id e2d2a0a4-76e6-42f3-b969-4861d3bd38cf;
- Fri, 06 Nov 2020 19:04:44 +0000 (UTC)
+ id 14588f48-cf1a-4061-8386-a5acd3f7e2f8;
+ Fri, 06 Nov 2020 19:04:32 +0000 (UTC)
 Received: from [2001:4bb8:184:9a8d:9e34:f7f4:e59e:ad6f] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kb725-00012H-Kj; Fri, 06 Nov 2020 19:04:22 +0000
+ id 1kb71x-0000yK-56; Fri, 06 Nov 2020 19:04:13 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=VpbQ=EM=casper.srs.infradead.org=batv+cc05c5534fc856bb48c0+6284+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1kb73e-0004zS-UN
-	for xen-devel@lists.xenproject.org; Fri, 06 Nov 2020 19:05:58 +0000
-X-Inumbo-ID: e2d2a0a4-76e6-42f3-b969-4861d3bd38cf
+	id 1kb72v-0004zS-Sm
+	for xen-devel@lists.xenproject.org; Fri, 06 Nov 2020 19:05:13 +0000
+X-Inumbo-ID: 14588f48-cf1a-4061-8386-a5acd3f7e2f8
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id e2d2a0a4-76e6-42f3-b969-4861d3bd38cf;
-	Fri, 06 Nov 2020 19:04:44 +0000 (UTC)
+	id 14588f48-cf1a-4061-8386-a5acd3f7e2f8;
+	Fri, 06 Nov 2020 19:04:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=N8UuGGw9lDirN906bdHNl2lOQB2uewg0ZSFqxQb7Dc4=; b=EbShoq0e9ZdxuHzJ//Stacuw58
-	fWC0EbT3bDkc4a76CHYJxCWttwRI59GvoSaEU0SW0M22mNQkH3EhRrAKd+QvVHizyPlJeJ0kMVJ4i
-	zHx7ItnO6W/fLLrYnw+S/gSCKqgdFCCws7Nqwvf507VfDEMI+rvO4uJnsRlROtxVrdeIy2E7YL3TL
-	S7BmHPSe96rpbKQWzhRBiwcBzWjvB4sisrJVYeefsUF98+rDlF7LunTgLETgKBtlqQ1KRVmOxV937
-	0aBRSGfCuluO2qQ6XYWclmFOBtO86wc6DyjOSAZKELdbbXCgn+Cmrf4JQhJv1RVmx1A2l424dcPHJ
-	70sIudTA==;
+	bh=aTYccYixW8gbHYOBakp7ukQbj8m53SZz7oZSluFWVGc=; b=LnYE9NNrzBcSdLeVcZBzoAaV9A
+	uBqspcv2x3EvPgOaxWI5LYyJW/YTXavMBXM3sUYHJRIqR/GBbUv2TMuEif5qVKCdbNs5boXd/tlu1
+	i9ZpkVaVjZ95cFBJaS5LHF2B5Qw8ZTXlY24kp5olWZsCnxbatdNJzNq9Z/G1Bfi6VVVBZh8uPvXRL
+	QHLDSm+Ihgns2dqqVayBftULu0+xgED+EQMMzCK1KKvCC/AsUyHDQT50m0VDiBnghRP+3/XgY6N/U
+	mN5su9mIlSc1rb8vVG2g+AL/GZzogA+3RlBH7EfGt4UNPK9HYdGZ84tPQiw8sFHXONEErgYmD4BQ2
+	654UeKyQ==;
 Received: from [2001:4bb8:184:9a8d:9e34:f7f4:e59e:ad6f] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1kb725-00012H-Kj; Fri, 06 Nov 2020 19:04:22 +0000
+	id 1kb71x-0000yK-56; Fri, 06 Nov 2020 19:04:13 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -102,9 +102,9 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-nvme@lists.infradead.org,
 	linux-scsi@vger.kernel.org,
 	linux-fsdevel@vger.kernel.org
-Subject: [PATCH 17/24] rbd: use set_capacity_and_notify
-Date: Fri,  6 Nov 2020 20:03:29 +0100
-Message-Id: <20201106190337.1973127-18-hch@lst.de>
+Subject: [PATCH 13/24] dm: use set_capacity_and_notify
+Date: Fri,  6 Nov 2020 20:03:25 +0100
+Message-Id: <20201106190337.1973127-14-hch@lst.de>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20201106190337.1973127-1-hch@lst.de>
 References: <20201106190337.1973127-1-hch@lst.de>
@@ -117,22 +117,22 @@ device.  This also gets the uevent notifications for the resize for free.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/block/rbd.c | 3 +--
+ drivers/md/dm.c | 3 +--
  1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/drivers/block/rbd.c b/drivers/block/rbd.c
-index f84128abade319..b7a194ffda55b4 100644
---- a/drivers/block/rbd.c
-+++ b/drivers/block/rbd.c
-@@ -4920,8 +4920,7 @@ static void rbd_dev_update_size(struct rbd_device *rbd_dev)
- 	    !test_bit(RBD_DEV_FLAG_REMOVING, &rbd_dev->flags)) {
- 		size = (sector_t)rbd_dev->mapping.size / SECTOR_SIZE;
- 		dout("setting size to %llu sectors", (unsigned long long)size);
--		set_capacity(rbd_dev->disk, size);
--		revalidate_disk_size(rbd_dev->disk, true);
-+		set_capacity_and_notify(rbd_dev->disk, size);
- 	}
- }
+diff --git a/drivers/md/dm.c b/drivers/md/dm.c
+index c18fc25485186d..62ad44925e73ec 100644
+--- a/drivers/md/dm.c
++++ b/drivers/md/dm.c
+@@ -1971,8 +1971,7 @@ static struct dm_table *__bind(struct mapped_device *md, struct dm_table *t,
+ 	if (size != dm_get_size(md))
+ 		memset(&md->geometry, 0, sizeof(md->geometry));
+ 
+-	set_capacity(md->disk, size);
+-	bd_set_nr_sectors(md->bdev, size);
++	set_capacity_and_notify(md->disk, size);
+ 
+ 	dm_table_event_callback(t, event_callback, md);
  
 -- 
 2.28.0
