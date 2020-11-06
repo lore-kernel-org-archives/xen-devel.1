@@ -2,28 +2,28 @@ Return-Path: <SRS0=Kis3=EM=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-5.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 26611C55178
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2020 12:19:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 03B8CC2D0A3
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2020 12:48:52 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A11D720715
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2020 12:19:10 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 81615206B7
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2020 12:48:51 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="dbr0tw0b"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A11D720715
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="ZDYhx+cO"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 81615206B7
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.20726.46729 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.20733.46741 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kb0hY-0008O1-Cw; Fri, 06 Nov 2020 12:18:44 +0000
+	id 1kb1AQ-0002aD-Mf; Fri, 06 Nov 2020 12:48:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 20726.46729; Fri, 06 Nov 2020 12:18:44 +0000
+Received: by outflank-mailman (output) from mailman id 20733.46741; Fri, 06 Nov 2020 12:48:34 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,131 +38,137 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kb0hY-0008Nu-9v; Fri, 06 Nov 2020 12:18:44 +0000
-Received: by outflank-mailman (input) for mailman id 20726;
- Fri, 06 Nov 2020 12:18:42 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=pfqN=EM=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
- id 1kb0hW-0008NM-G5
- for xen-devel@lists.xenproject.org; Fri, 06 Nov 2020 12:18:42 +0000
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id d0b9e5bc-4b64-4c8f-a261-b18fd0210ed0;
- Fri, 06 Nov 2020 12:18:35 +0000 (UTC)
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kb0hO-0001zs-W9; Fri, 06 Nov 2020 12:18:34 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kb0hO-0003sD-N5; Fri, 06 Nov 2020 12:18:34 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1kb0hO-0004ir-Mb; Fri, 06 Nov 2020 12:18:34 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+	id 1kb1AQ-0002a6-Iw; Fri, 06 Nov 2020 12:48:34 +0000
+Received: by outflank-mailman (input) for mailman id 20733;
+ Fri, 06 Nov 2020 12:48:33 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=DqEO=EM=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1kb1AP-0002a1-61
+ for xen-devel@lists.xenproject.org; Fri, 06 Nov 2020 12:48:33 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id abb86215-f62f-47e1-b118-499187f904a3;
+ Fri, 06 Nov 2020 12:48:32 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 103F5ABDE;
+ Fri,  6 Nov 2020 12:48:31 +0000 (UTC)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=pfqN=EM=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
-	id 1kb0hW-0008NM-G5
-	for xen-devel@lists.xenproject.org; Fri, 06 Nov 2020 12:18:42 +0000
-X-Inumbo-ID: d0b9e5bc-4b64-4c8f-a261-b18fd0210ed0
-Received: from mail.xenproject.org (unknown [104.130.215.37])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id d0b9e5bc-4b64-4c8f-a261-b18fd0210ed0;
-	Fri, 06 Nov 2020 12:18:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=QofY3N9C3RVicqPHDN09y/199t+HLZrkoqc2OK2bktE=; b=dbr0tw0bXyEHWXGxGoNmgIhFZX
-	NKVMERL1J9CsKgl0TRPxqQmTH5vZuzVbcZGUsq/kW67/Com830MgAO989FMci7hoyr79JsQBEe19z
-	bDWZ1MPZJqZ06IgTaEAWMf5GFBwxOfKzHbVpaLsq2mCZZIwnqpkvPU69DyyoykqtfFlE=;
-Received: from host146.205.237.98.conversent.net ([205.237.98.146] helo=infra.test-lab.xenproject.org)
-	by mail.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <osstest-admin@xenproject.org>)
-	id 1kb0hO-0001zs-W9; Fri, 06 Nov 2020 12:18:34 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
-	by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <osstest-admin@xenproject.org>)
-	id 1kb0hO-0003sD-N5; Fri, 06 Nov 2020 12:18:34 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim 4.92)
-	(envelope-from <osstest-admin@xenproject.org>)
-	id 1kb0hO-0004ir-Mb; Fri, 06 Nov 2020 12:18:34 +0000
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-156523-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+	(envelope-from <SRS0=DqEO=EM=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+	id 1kb1AP-0002a1-61
+	for xen-devel@lists.xenproject.org; Fri, 06 Nov 2020 12:48:33 +0000
+X-Inumbo-ID: abb86215-f62f-47e1-b118-499187f904a3
+Received: from mx2.suse.de (unknown [195.135.220.15])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id abb86215-f62f-47e1-b118-499187f904a3;
+	Fri, 06 Nov 2020 12:48:32 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1604666911;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=QjH8qlKKtvwtdr/8PQ5bf4BBJvKDVNwlvbztpTDPSrQ=;
+	b=ZDYhx+cOt3tVxiRISqyJtKuCaWqIcf81w7EQPjreEiZxFmvufGYYA5ktXWzJB12eva8eDD
+	vNSITNdNtVdPJNmpIXHUN7LUTpc+DDl8EQvnCpUVRXto9HvWBZKQu5ANwx+KvDzoqrgIBb
+	zBOQYYbAwFrmrXZY6jlhE6G6dsNYHac=
+Received: from relay2.suse.de (unknown [195.135.221.27])
+	by mx2.suse.de (Postfix) with ESMTP id 103F5ABDE;
+	Fri,  6 Nov 2020 12:48:31 +0000 (UTC)
+Subject: Re: [PATCH v2 2/4] xen/pci: Introduce new CONFIG_PCI_ATS flag for PCI
+ ATS functionality.
+To: Rahul Singh <Rahul.Singh@arm.com>
+Cc: Bertrand Marquis <Bertrand.Marquis@arm.com>, Paul Durrant <paul@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Wei Liu <wl@xen.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <cover.1604417224.git.rahul.singh@arm.com>
+ <27814e614618c413ac61a9f7a48d795c557bfe5c.1604417224.git.rahul.singh@arm.com>
+ <c9874396-44d2-b969-104f-eb40b4e107c9@suse.com>
+ <4598bf81-5802-93b8-e160-05c139a6d4cf@suse.com>
+ <73189992-EC5B-493D-BB23-6DFB2F11A580@arm.com>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <b0f9c2db-a58c-b1d3-9e1a-09b994f1b1d3@suse.com>
+Date: Fri, 6 Nov 2020 13:48:30 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.4.0
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 156523: tolerable all pass - PUSHED
-X-Osstest-Failures:
-    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This:
-    xen=2a5f9f6a6932214fda76b9b3c03e024772882d34
-X-Osstest-Versions-That:
-    xen=957708c2d1ae25d7375abd5e5e70c3043d64f1f1
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Fri, 06 Nov 2020 12:18:34 +0000
+In-Reply-To: <73189992-EC5B-493D-BB23-6DFB2F11A580@arm.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-flight 156523 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/156523/
+On 06.11.2020 12:43, Rahul Singh wrote:
+> Hello Jan,
+> 
+>> On 4 Nov 2020, at 3:49 pm, Jan Beulich <jbeulich@suse.com> wrote:
+>>
+>> On 04.11.2020 16:43, Jan Beulich wrote:
+>>> On 03.11.2020 16:59, Rahul Singh wrote:
+>>>> --- a/xen/drivers/pci/Kconfig
+>>>> +++ b/xen/drivers/pci/Kconfig
+>>>> @@ -1,3 +1,12 @@
+>>>>
+>>>> config HAS_PCI
+>>>> 	bool
+>>>> +
+>>>> +config PCI_ATS
+>>>> +	bool "PCI ATS support"
+>>>> +	default y
+>>>> +	depends on X86 && HAS_PCI
+>>>> +	---help---
+>>>> +	 Enable PCI Address Translation Services.
+>>>> +
+>>>> +	 If unsure, say Y.
+>>>
+>>> Support for "---help---" having gone away in Linux, I think we'd
+>>> better not add new instances. Also indentation of help content
+>>> typically is by a tab and two spaces. With these two adjusted
+>>>
+>>> Reviewed-by: Jan Beulich <jbeulich@suse.com>
+>>
+>> Initially I wanted to merely reply indicating I'd be fine making
+>> these changes while committing, but there are two more things
+>> (and I withdraw my R-b): For one, isn't strict pci_dev's ats
+>> field now unused when !PCI_ATS? If so, if should get an #ifdef
+>> added.
+> 
+> Yes, I tried to #ifdef ats field in struct pci_dev but after doing that I found that I have to modify the 
+> code related to x86  iotlb flush, as I have limited knowledge about how iotlb flush works for 
+> x86 so I decided not to modify that part of the code. 
+> 
+> I already compiled the x86 with !PCI_ATS and is having same behaviour as command line options "ats=false” with unused struct pci_dev ats field.
+> 
+>> And then, what exactly is it in ats.c that's x86-specific?
+>> Shouldn't the whole file instead be moved one level up, and be
+>> usable by Arm right away?
+> 
+> Yes, you are right ats.c file is not x86 specific, but not tested for ARM so I thought we will move the ats.c file to common code once ATS code is tested/implemented for ARM.
+> 
+> disable_ats_device() is referenced in common "passthrough/pci.c" file  and defined in "x86/ats.c" therefore I decided to introduce the PCI_ATS option for X86. 
+> As I am not sure on ARM how the ATS functionality is going to be implemented. 
+> 
+> There are three ways to fix the compilation error for ARM related to disable_ats_device() function.
+> 
+> 1. Introduce the PCI_ATS config option for x86 and enabled it by default for X86 and having same behaviour as  command line options for !PCi_ATS  as "ats=false”
 
-Failures :-/ but no regressions.
+I'll be happy to see the config option retained, but that's
+orthogonal to the goals here.
 
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
+> 2. disable_ats_device() is called by iommu_dev_iotlb_flush_timeout () that is as per my understanding is x86 specific ( not sure please confirm).
+> Move iommu_dev_iotlb_flush_timeout () to "passthrough/x86/iommu.c” now and move the ats.c file to common code once ATS code is tested for ARM.
 
-version targeted for testing:
- xen                  2a5f9f6a6932214fda76b9b3c03e024772882d34
-baseline version:
- xen                  957708c2d1ae25d7375abd5e5e70c3043d64f1f1
+While the function is currently used by VT-d code only, I again
+don't see what's x86-specific about it. Hence ...
 
-Last test of basis   156502  2020-11-06 03:01:22 Z    0 days
-Testing same since   156523  2020-11-06 10:00:26 Z    0 days    1 attempts
+> 3. Move x86/ats.c file one level up , fixed compilation error now and if on ARM platforms going to implement the ATS functionality different from
+> x86 we have to move ats.c file back to x86 directory 
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Juergen Gross <jgross@suse.com>
+... I view this as the only "option" among the ones you name.
 
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-libvirt                                     pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/xen.git
-   957708c2d1..2a5f9f6a69  2a5f9f6a6932214fda76b9b3c03e024772882d34 -> smoke
+Jan
 
