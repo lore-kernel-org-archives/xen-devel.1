@@ -2,29 +2,28 @@ Return-Path: <SRS0=Pc9a=EP=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+X-Spam-Status: No, score=-5.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0E496C2D0A3
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2020 12:59:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 446B1C4741F
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2020 13:06:18 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A43BF208FE
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2020 12:59:57 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id C6A3D21D40
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2020 13:06:17 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="iVAQBM0O"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A43BF208FE
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="GibwIyrK"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C6A3D21D40
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.22530.48890 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.22540.48902 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kc6lq-0005HW-Oi; Mon, 09 Nov 2020 12:59:42 +0000
+	id 1kc6ro-0006C7-El; Mon, 09 Nov 2020 13:05:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 22530.48890; Mon, 09 Nov 2020 12:59:42 +0000
+Received: by outflank-mailman (output) from mailman id 22540.48902; Mon, 09 Nov 2020 13:05:52 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,153 +38,239 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kc6lq-0005HP-Lf; Mon, 09 Nov 2020 12:59:42 +0000
-Received: by outflank-mailman (input) for mailman id 22530;
- Mon, 09 Nov 2020 12:59:41 +0000
+	id 1kc6ro-0006C0-Ao; Mon, 09 Nov 2020 13:05:52 +0000
+Received: by outflank-mailman (input) for mailman id 22540;
+ Mon, 09 Nov 2020 13:05:51 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=zl3J=EP=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
- id 1kc6dq-0003tf-HT
- for xen-devel@lists.xenproject.org; Mon, 09 Nov 2020 12:51:26 +0000
-Received: from mail-lj1-x243.google.com (unknown [2a00:1450:4864:20::243])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=sEkb=EP=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1kc6rn-0006Bv-Br
+ for xen-devel@lists.xenproject.org; Mon, 09 Nov 2020 13:05:51 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 82cd251f-0a00-4bda-afad-5c275205e25e;
- Mon, 09 Nov 2020 12:50:46 +0000 (UTC)
-Received: by mail-lj1-x243.google.com with SMTP id s9so8391861ljo.11
- for <xen-devel@lists.xenproject.org>; Mon, 09 Nov 2020 04:50:46 -0800 (PST)
-Received: from a2klaptop.localdomain ([185.199.97.5])
- by smtp.gmail.com with ESMTPSA id i1sm1736447lfr.176.2020.11.09.04.50.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Nov 2020 04:50:44 -0800 (PST)
+ id d56a37ee-06c8-4ee2-ab5c-ea2b9d3598b3;
+ Mon, 09 Nov 2020 13:05:50 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 8CE9CABAE;
+ Mon,  9 Nov 2020 13:05:49 +0000 (UTC)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=zl3J=EP=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
-	id 1kc6dq-0003tf-HT
-	for xen-devel@lists.xenproject.org; Mon, 09 Nov 2020 12:51:26 +0000
-X-Inumbo-ID: 82cd251f-0a00-4bda-afad-5c275205e25e
-Received: from mail-lj1-x243.google.com (unknown [2a00:1450:4864:20::243])
+	(envelope-from <SRS0=sEkb=EP=suse.com=jgross@srs-us1.protection.inumbo.net>)
+	id 1kc6rn-0006Bv-Br
+	for xen-devel@lists.xenproject.org; Mon, 09 Nov 2020 13:05:51 +0000
+X-Inumbo-ID: d56a37ee-06c8-4ee2-ab5c-ea2b9d3598b3
+Received: from mx2.suse.de (unknown [195.135.220.15])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 82cd251f-0a00-4bda-afad-5c275205e25e;
-	Mon, 09 Nov 2020 12:50:46 +0000 (UTC)
-Received: by mail-lj1-x243.google.com with SMTP id s9so8391861ljo.11
-        for <xen-devel@lists.xenproject.org>; Mon, 09 Nov 2020 04:50:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=LgLl6GM036W1KRVdmwK/U4Ej5BMvrSeEvhXdIuom+ac=;
-        b=iVAQBM0OfQj5dQiwPcEeoDLByL/4ourFSArcjdgeei6AGbR9xIJ9A6b1V7HKm4Sa1G
-         6CFmgvdfXlktq0S1j7o3FB+nxuUnNv13LHnW7nWGaD7A37gu5gowSHhDfeP6x5TwXooG
-         h8DGnR36m1NMJUxH74sENUrm9yHZenghpc8Sbe87gsrDe0s984czdwWuN3wxA7/nRtMU
-         eMYusiu0i0FP63MKqiNSFKmnZdTZWL465Ie/ggj2VLUR28u0HXtd+LFWQmX8Aqr32yJH
-         svYFxvWVec3cKbaOJI46lOvsWbfsZkaC+8LWH9DEYGsOGHjkGXH2W7E3XZe/B4EsRbmS
-         cwqQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references;
-        bh=LgLl6GM036W1KRVdmwK/U4Ej5BMvrSeEvhXdIuom+ac=;
-        b=g8f2/DTfwYzBF6jXtYvfbksz3V9YKuMmDvfPphjeXHG6lD8xHNVy0kxhIbbTLrOMUh
-         K1jqBQHYEpmo0jlyyaEe9BQuxxGBwK9teGRyudV7zx+WZFCPuBYuXHspO+kaYWq5BwHy
-         EPvC3BmCc+huB5Kz7aEcXtGx89zyHgXGDXCiqnCLQgePOY2iyJ40j5Q/cwjTgIbbpPMm
-         vNDcjtYqanp9+biC3RpsnTZjhbJ1PIDJLeJUZ9ZGpl5NdMOwKo0WJGZu4KdT8qvqAYyz
-         LM9D+GykJOk9AYvwvaPdAj2OaTzW+l7Vao8+9mF0NiYq6lUamzWmwmGn5/32OfW3HBgU
-         rgtw==
-X-Gm-Message-State: AOAM530GcDFmANHKeM8zbGaOsOcyzLYaqUnwf0fu2u/hW/FMxHUtC1mj
-	o5Q/lNhaE5LzqBACtCtT4y4=
-X-Google-Smtp-Source: ABdhPJy6R+2G+Qrko7GXDmhFwZ5TybTy9d9/cnVEZZCiAFf7wsNOj+yFYPCBcswfB0YeugnM8l8ntg==
-X-Received: by 2002:a2e:9ad0:: with SMTP id p16mr1347028ljj.424.1604926245382;
-        Mon, 09 Nov 2020 04:50:45 -0800 (PST)
-Received: from a2klaptop.localdomain ([185.199.97.5])
-        by smtp.gmail.com with ESMTPSA id i1sm1736447lfr.176.2020.11.09.04.50.44
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 09 Nov 2020 04:50:44 -0800 (PST)
-From: Oleksandr Andrushchenko <andr2000@gmail.com>
-To: Rahul.Singh@arm.com,
-	Bertrand.Marquis@arm.com,
-	julien.grall@arm.com,
-	jbeulich@suse.com,
-	roger.pau@citrix.com,
-	sstabellini@kernel.org,
-	xen-devel@lists.xenproject.org
-Cc: iwj@xenproject.org,
-	wl@xen.org,
-	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Subject: [PATCH 10/10] [HACK] vpci/rcar: Make vPCI know DomD is hardware domain
-Date: Mon,  9 Nov 2020 14:50:31 +0200
-Message-Id: <20201109125031.26409-11-andr2000@gmail.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20201109125031.26409-1-andr2000@gmail.com>
-References: <20201109125031.26409-1-andr2000@gmail.com>
+	id d56a37ee-06c8-4ee2-ab5c-ea2b9d3598b3;
+	Mon, 09 Nov 2020 13:05:50 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1604927149;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=U/55AuPuvYJH5yF3KbYVD4llOq1t8Ht16pu3so/uKXk=;
+	b=GibwIyrKtTw9XEt5e0zI8B+KXYUT1NJUu5Db4H1Bcj/l7RXv3ktSSwVYnz+RUubMyJgBRO
+	N7c6QZgF2PdlCPtLhiapRX/OZHJuDSwXMVo4EFd9Qorpfx9NGM2hvFJCthJjbUqsoYyofI
+	psIaEVGbKbcBqcdnmqZTags2KguKs8Q=
+Received: from relay2.suse.de (unknown [195.135.221.27])
+	by mx2.suse.de (Postfix) with ESMTP id 8CE9CABAE;
+	Mon,  9 Nov 2020 13:05:49 +0000 (UTC)
+Subject: Re: [PATCH v5 0/2] XSA-343 followup patches
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
+ <roger.pau@citrix.com>, xen-devel@lists.xenproject.org
+References: <20201109064128.3908-1-jgross@suse.com>
+ <e9326609-0808-8f0b-6cb9-3ed4401b9f1d@suse.com>
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Message-ID: <54840a9d-8fc4-e97e-8c97-3fdad8d273fd@suse.com>
+Date: Mon, 9 Nov 2020 14:05:48 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.4.0
+MIME-Version: 1.0
+In-Reply-To: <e9326609-0808-8f0b-6cb9-3ed4401b9f1d@suse.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="128oblLcpeljJaao10Lw3Se9IcigBrpp3"
 
-From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--128oblLcpeljJaao10Lw3Se9IcigBrpp3
+Content-Type: multipart/mixed; boundary="OF7iSyQ0yH2W8xlIizqcMkaWZtRX83APi";
+ protected-headers="v1"
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
+ <roger.pau@citrix.com>, xen-devel@lists.xenproject.org
+Message-ID: <54840a9d-8fc4-e97e-8c97-3fdad8d273fd@suse.com>
+Subject: Re: [PATCH v5 0/2] XSA-343 followup patches
+References: <20201109064128.3908-1-jgross@suse.com>
+ <e9326609-0808-8f0b-6cb9-3ed4401b9f1d@suse.com>
+In-Reply-To: <e9326609-0808-8f0b-6cb9-3ed4401b9f1d@suse.com>
 
-Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
----
- xen/drivers/vpci/header.c | 16 +++++++++++-----
- 1 file changed, 11 insertions(+), 5 deletions(-)
+--OF7iSyQ0yH2W8xlIizqcMkaWZtRX83APi
+Content-Type: multipart/mixed;
+ boundary="------------4F25DD51BE6063AE65733C2F"
+Content-Language: en-US
 
-diff --git a/xen/drivers/vpci/header.c b/xen/drivers/vpci/header.c
-index 1f326c894d16..d5738ecca93d 100644
---- a/xen/drivers/vpci/header.c
-+++ b/xen/drivers/vpci/header.c
-@@ -34,13 +34,19 @@ struct map_data {
-     struct pci_dev *pdev;
- };
- 
-+static bool is_hardware_domain_DomD(const struct domain *d)
-+{
-+    return d->domain_id == 1;
-+}
-+
- static struct vpci_header *get_vpci_header(struct domain *d,
-                                            const struct pci_dev *pdev);
- 
- static struct vpci_header *get_hwdom_vpci_header(const struct pci_dev *pdev)
- {
-+    /* TODO: this should be for the hardware_domain, not current->domain. */
-     if ( unlikely(list_empty(&pdev->vpci->headers)) )
--        return get_vpci_header(hardware_domain, pdev);
-+        return get_vpci_header(current->domain, pdev);
- 
-     /* hwdom's header is always the very first entry. */
-     return list_first_entry(&pdev->vpci->headers, struct vpci_header, node);
-@@ -74,7 +80,7 @@ static struct vpci_header *get_vpci_header(struct domain *d,
-         return NULL;
-     }
- 
--    if ( !is_hardware_domain(d) )
-+    if ( !is_hardware_domain_DomD(d) )
-     {
-         struct vpci_header *hwdom_header = get_hwdom_vpci_header(pdev);
- #ifdef CONFIG_ARM
-@@ -304,7 +310,7 @@ static int modify_bars(const struct pci_dev *pdev, uint16_t cmd, bool rom_only)
-     if ( !mem )
-         return -ENOMEM;
- 
--    if ( is_hardware_domain(current->domain) )
-+    if ( is_hardware_domain_DomD(current->domain) )
-         header = get_hwdom_vpci_header(pdev);
-     else
-         header = get_vpci_header(current->domain, pdev);
-@@ -641,7 +647,7 @@ static uint32_t bar_read_dispatch(const struct pci_dev *pdev, unsigned int reg,
- {
-     struct vpci_bar *vbar, *bar = data;
- 
--    if ( is_hardware_domain(current->domain) )
-+    if ( is_hardware_domain_DomD(current->domain) )
-         return bar_read_hwdom(pdev, reg, data);
- 
-     vbar = get_vpci_bar(current->domain, pdev, bar->index);
-@@ -656,7 +662,7 @@ static void bar_write_dispatch(const struct pci_dev *pdev, unsigned int reg,
- {
-     struct vpci_bar *bar = data;
- 
--    if ( is_hardware_domain(current->domain) )
-+    if ( is_hardware_domain_DomD(current->domain) )
-         bar_write_hwdom(pdev, reg, val, data);
-     else
-     {
--- 
-2.17.1
+This is a multi-part message in MIME format.
+--------------4F25DD51BE6063AE65733C2F
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
+On 09.11.20 13:00, Jan Beulich wrote:
+> On 09.11.2020 07:41, Juergen Gross wrote:
+>> The patches for XSA-343 produced some fallout, especially the event
+>> channel locking has shown to be problematic.
+>>
+>> Patch 1 is targeting fifo event channels for avoiding any races for th=
+e
+>> case that the fifo queue has been changed for a specific event channel=
+=2E
+>>
+>> The second patch is modifying the per event channel locking scheme in
+>> order to avoid deadlocks and problems due to the event channel lock
+>> having been changed to require IRQs off by the XSA-343 patches.
+>>
+>> Changes in V5:
+>> - moved evtchn_write_[un]lock() to event_channel.c (Jan Beulich)
+>> - used normal read_lock() in some cases (Jan Beulich)
+>>
+>> Changes in V4:
+>> - switched to real rwlock
+>>
+>> Changes in V3:
+>> - addressed comments
+>>
+>> Juergen Gross (2):
+>>    xen/events: access last_priority and last_vcpu_id together
+>>    xen/evtchn: rework per event channel lock
+>=20
+> Didn't you mean to add a 3rd patch here to drop the 2nd call to
+> xsm_evtchn_send() again?
+
+I wanted to that after this series has been accepted, but I can include
+it here, of course.
+
+
+Juergen
+
+
+--------------4F25DD51BE6063AE65733C2F
+Content-Type: application/pgp-keys;
+ name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+ filename="OpenPGP_0xB0DE9DD628BF132F.asc"
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOBy=
+cWx
+w3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJvedYm8O=
+f8Z
+d621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJNwQpd369y=
+9bf
+IhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvxXP3FAp2pkW0xq=
+G7/
+377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEBAAHNHEp1ZXJnZW4gR=
+3Jv
+c3MgPGpnQHBmdXBmLm5ldD7CwHkEEwECACMFAlOMcBYCGwMHCwkIBwMCAQYVCAIJCgsEFgIDA=
+QIe
+AQIXgAAKCRCw3p3WKL8TL0KdB/93FcIZ3GCNwFU0u3EjNbNjmXBKDY4FUGNQH2lvWAUy+dnyT=
+hpw
+dtF/jQ6j9RwE8VP0+NXcYpGJDWlNb9/JmYqLiX2Q3TyevpB0CA3dbBQp0OW0fgCetToGIQrg0=
+MbD
+1C/sEOv8Mr4NAfbauXjZlvTj30H2jO0u+6WGM6nHwbh2l5O8ZiHkH32iaSTfN7Eu5RnNVUJbv=
+oPH
+Z8SlM4KWm8rG+lIkGurqqu5gu8q8ZMKdsdGC4bBxdQKDKHEFExLJK/nRPFmAuGlId1E3fe10v=
+5QL
++qHI3EIPtyfE7i9Hz6rVwi7lWKgh7pe0ZvatAudZ+JNIlBKptb64FaiIOAWDCx1SzR9KdWVyZ=
+2Vu
+IEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+wsB5BBMBAgAjBQJTjHCvAhsDBwsJCAcDAgEGFQgCC=
+QoL
+BBYCAwECHgECF4AACgkQsN6d1ii/Ey/HmQf/RtI7kv5A2PS4RF7HoZhPVPogNVbC4YA6lW7Dr=
+Wf0
+teC0RR3MzXfy6pJ+7KLgkqMlrAbN/8Dvjoz78X+5vhH/rDLa9BuZQlhFmvcGtCF8eR0T1v0nC=
+/nu
+AFVGy+67q2DH8As3KPu0344TBDpAvr2uYM4tSqxK4DURx5INz4ZZ0WNFHcqsfvlGJALDeE0Lh=
+ITT
+d9jLzdDad1pQSToCnLl6SBJZjDOX9QQcyUigZFtCXFst4dlsvddrxyqT1f17+2cFSdu7+ynLm=
+XBK
+7abQ3rwJY8SbRO2iRulogc5vr/RLMMlscDAiDkaFQWLoqHHOdfO9rURssHNN8WkMnQfvUewRz=
+80h
+SnVlcmdlbiBHcm9zcyA8amdyb3NzQG5vdmVsbC5jb20+wsB5BBMBAgAjBQJTjHDXAhsDBwsJC=
+AcD
+AgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey8PUQf/ehmgCI9jB9hlgexLvgOtf7PJn=
+FOX
+gMLdBQgBlVPO3/D9R8LtF9DBAFPNhlrsfIG/SqICoRCqUcJ96Pn3P7UUinFG/I0ECGF4EvTE1=
+jnD
+kfJZr6jrbjgyoZHiw/4BNwSTL9rWASyLgqlA8u1mf+c2yUwcGhgkRAd1gOwungxcwzwqgljf0=
+N51
+N5JfVRHRtyfwq/ge+YEkDGcTU6Y0sPOuj4Dyfm8fJzdfHNQsWq3PnczLVELStJNdapwPOoE+l=
+otu
+fe3AM2vAEYJ9rTz3Cki4JFUsgLkHFqGZarrPGi1eyQcXeluldO3m91NK/1xMI3/+8jbO0tsn1=
+tqS
+EUGIJi7ox80eSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuZGU+wsB5BBMBAgAjBQJTjHDrA=
+hsD
+BwsJCAcDAgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey+LhQf9GL45eU5vOowA2u5N3=
+g3O
+ZUEBmDHVVbqMtzwlmNC4k9Kx39r5s2vcFl4tXqW7g9/ViXYuiDXb0RfUpZiIUW89siKrkzmQ5=
+dM7
+wRqzgJpJwK8Bn2MIxAKArekWpiCKvBOB/Cc+3EXE78XdlxLyOi/NrmSGRIov0karw2RzMNOu5=
+D+j
+LRZQd1Sv27AR+IP3I8U4aqnhLpwhK7MEy9oCILlgZ1QZe49kpcumcZKORmzBTNh30FVKK1Evm=
+V2x
+AKDoaEOgQB4iFQLhJCdP1I5aSgM5IVFdn7v5YgEYuJYx37IoN1EblHI//x/e2AaIHpzK5h88N=
+Eaw
+QsaNRpNSrcfbFmAg987ATQRTjHAWAQgAyzH6AOODMBjgfWE9VeCgsrwH3exNAU32gLq2xvjpW=
+nHI
+s98ndPUDpnoxWQugJ6MpMncr0xSwFmHEgnSEjK/PAjppgmyc57BwKII3sV4on+gDVFJR6Y8ZR=
+wgn
+BC5mVM6JjQ5xDk8WRXljExRfUX9pNhdE5eBOZJrDRoLUmmjDtKzWaDhIg/+1Hzz93X4fCQkNV=
+bVF
+LELU9bMaLPBG/x5q4iYZ2k2ex6d47YE1ZFdMm6YBYMOljGkZKwYde5ldM9mo45mmwe0icXKLk=
+pEd
+IXKTZeKDO+Hdv1aqFuAcccTg9RXDQjmwhC3yEmrmcfl0+rPghO0Iv3OOImwTEe4co3c1mwARA=
+QAB
+wsBfBBgBAgAJBQJTjHAWAhsMAAoJELDendYovxMvQ/gH/1ha96vm4P/L+bQpJwrZ/dneZcmEw=
+Tbe
+8YFsw2V/Buv6Z4Mysln3nQK5ZadD534CF7TDVft7fC4tU4PONxF5D+/tvgkPfDAfF77zy2AH1=
+vJz
+Q1fOU8lYFpZXTXIHb+559UqvIB8AdgR3SAJGHHt4RKA0F7f5ipYBBrC6cyXJyyoprT10EMvU8=
+VGi
+wXvTyJz3fjoYsdFzpWPlJEBRMedCot60g5dmbdrZ5DWClAr0yau47zpWj3enf1tLWaqcsuylW=
+svi
+uGjKGw7KHQd3bxALOknAp4dN3QwBYCKuZ7AddY9yjynVaD5X7nF9nO5BjR/i1DG86lem3iBDX=
+zXs
+ZDn8R38=3D
+=3D2wuH
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------4F25DD51BE6063AE65733C2F--
+
+--OF7iSyQ0yH2W8xlIizqcMkaWZtRX83APi--
+
+--128oblLcpeljJaao10Lw3Se9IcigBrpp3
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAl+pPqwFAwAAAAAACgkQsN6d1ii/Ey8w
+jwf/adhJcRo5OAbOsxNU1KwhFbrwEJNDhYjXptg1my4woYWfw1XlAB/XzhcFTlBdksYumdWm/uz9
+uN6HuWHsiuvcGDB8p2/TwcWEk9RNbnUdy4BcpjT76uFHWmmnrivL7lOAmphGortLLO7fddGt+8bd
+fOAHx9rtxf+2EqG5Tpw5/BJJz7NxG8ZP8CjPmzF3dc8ZEx/HYJaqX4X2DJPtb4rM9z2PverZPCci
+KX5s25sNWYWzXe0BvQdzExClqQTNw+1oNcxJhUI1a34U8R9V1ycoqeJ8HqYF2u4d+loThiyN3E6m
+fkt/+D6K5/m0C7p9JEbVGzN16MDbsMp8LCRqLIo5Jw==
+=pl9p
+-----END PGP SIGNATURE-----
+
+--128oblLcpeljJaao10Lw3Se9IcigBrpp3--
 
