@@ -2,28 +2,28 @@ Return-Path: <SRS0=Pc9a=EP=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-8.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+	NICE_REPLY_A,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1CB43C388F7
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2020 12:00:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5CB1DC2D0A3
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2020 12:04:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AD41720789
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2020 12:00:52 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id C389E20789
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2020 12:04:45 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="HhOXk9vF"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AD41720789
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="gPnVfG4m"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C389E20789
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.22432.48736 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.22442.48748 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kc5qg-0007of-Lc; Mon, 09 Nov 2020 12:00:38 +0000
+	id 1kc5uS-000815-5T; Mon, 09 Nov 2020 12:04:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 22432.48736; Mon, 09 Nov 2020 12:00:38 +0000
+Received: by outflank-mailman (output) from mailman id 22442.48748; Mon, 09 Nov 2020 12:04:32 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,92 +38,96 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kc5qg-0007oY-If; Mon, 09 Nov 2020 12:00:38 +0000
-Received: by outflank-mailman (input) for mailman id 22432;
- Mon, 09 Nov 2020 12:00:37 +0000
+	id 1kc5uS-00080y-2d; Mon, 09 Nov 2020 12:04:32 +0000
+Received: by outflank-mailman (input) for mailman id 22442;
+ Mon, 09 Nov 2020 12:04:31 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=a0OZ=EP=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kc5qf-0007oS-DG
- for xen-devel@lists.xenproject.org; Mon, 09 Nov 2020 12:00:37 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ (envelope-from <SRS0=5wB/=EP=xen.org=julien@srs-us1.protection.inumbo.net>)
+ id 1kc5uQ-00080t-UQ
+ for xen-devel@lists.xenproject.org; Mon, 09 Nov 2020 12:04:31 +0000
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id b195b27e-0cb2-406d-8028-a2793837a169;
- Mon, 09 Nov 2020 12:00:36 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id A2F3EABF4;
- Mon,  9 Nov 2020 12:00:35 +0000 (UTC)
+ id 3aa2d892-0ce4-4532-8e64-ea4ae77dfc23;
+ Mon, 09 Nov 2020 12:04:30 +0000 (UTC)
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1kc5uP-0003ow-PA; Mon, 09 Nov 2020 12:04:29 +0000
+Received: from 54-240-197-230.amazon.com ([54.240.197.230]
+ helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1kc5uP-0004Gd-Ha; Mon, 09 Nov 2020 12:04:29 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=a0OZ=EP=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
-	id 1kc5qf-0007oS-DG
-	for xen-devel@lists.xenproject.org; Mon, 09 Nov 2020 12:00:37 +0000
-X-Inumbo-ID: b195b27e-0cb2-406d-8028-a2793837a169
-Received: from mx2.suse.de (unknown [195.135.220.15])
+	(envelope-from <SRS0=5wB/=EP=xen.org=julien@srs-us1.protection.inumbo.net>)
+	id 1kc5uQ-00080t-UQ
+	for xen-devel@lists.xenproject.org; Mon, 09 Nov 2020 12:04:31 +0000
+X-Inumbo-ID: 3aa2d892-0ce4-4532-8e64-ea4ae77dfc23
+Received: from mail.xenproject.org (unknown [104.130.215.37])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id b195b27e-0cb2-406d-8028-a2793837a169;
-	Mon, 09 Nov 2020 12:00:36 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1604923235;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=6O/AVKJogNb2qz7BW4zQQMiP0+DrfWq/tB9FKD/VZn4=;
-	b=HhOXk9vFP7qqyNkvuk2EoY2KXhHEGANfR/4XNwhsWyb1CkWpbV7TSu1kBwPfiFOsZ1Gaet
-	MmdamZXoxSADwL201C3bGfLZxCC6TbNKYFwq/EPiSVLHBFDRccW/tj5XieU1rBEfkPXDvp
-	azZqvk7dctoD8w+ASTrFtyrl90M6LAw=
-Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id A2F3EABF4;
-	Mon,  9 Nov 2020 12:00:35 +0000 (UTC)
-Subject: Re: [PATCH v5 0/2] XSA-343 followup patches
-To: Juergen Gross <jgross@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
- Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
- Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
- <roger.pau@citrix.com>, xen-devel@lists.xenproject.org
-References: <20201109064128.3908-1-jgross@suse.com>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <e9326609-0808-8f0b-6cb9-3ed4401b9f1d@suse.com>
-Date: Mon, 9 Nov 2020 13:00:34 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.4.1
+	id 3aa2d892-0ce4-4532-8e64-ea4ae77dfc23;
+	Mon, 09 Nov 2020 12:04:30 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+	bh=UdtPmwE9gqG0N+a8baZ0Ckhctdo1DjlL50gRRn6LQIk=; b=gPnVfG4m8BamYNYvctZijbMowS
+	xHSDKehEGPzpMZHG9y/CWOczPtJbbMZP+q9z7pcvQjCTagQTYgRg3NCdkAcV0XhYvzguE9MS6TsuW
+	kQnQpewrA9NCpKyr2UNbN3JaMNl0KKlklDaIbf/sm7EGnSl8BLmcEtRwfJKa/qb/ST94=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+	by mail.xenproject.org with esmtp (Exim 4.92)
+	(envelope-from <julien@xen.org>)
+	id 1kc5uP-0003ow-PA; Mon, 09 Nov 2020 12:04:29 +0000
+Received: from 54-240-197-230.amazon.com ([54.240.197.230] helo=a483e7b01a66.ant.amazon.com)
+	by xenbits.xenproject.org with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
+	(Exim 4.92)
+	(envelope-from <julien@xen.org>)
+	id 1kc5uP-0004Gd-Ha; Mon, 09 Nov 2020 12:04:29 +0000
+Subject: Re: [PATCH] xen/arm: Add Cortex-A73 erratum 858921 workaround
+To: Penny Zheng <penny.zheng@arm.com>, xen-devel@lists.xenproject.org,
+ sstabellini@kernel.org
+Cc: Andre.Przywara@arm.com, Bertrand.Marquis@arm.com, Wei.Chen@arm.com,
+ Kaly.Xin@arm.com, nd@arm.com
+References: <20201109082110.1133996-1-penny.zheng@arm.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <cfa63398-8182-b79f-1602-ed068e2319ad@xen.org>
+Date: Mon, 9 Nov 2020 12:04:27 +0000
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.4.0
 MIME-Version: 1.0
-In-Reply-To: <20201109064128.3908-1-jgross@suse.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+In-Reply-To: <20201109082110.1133996-1-penny.zheng@arm.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
 Content-Transfer-Encoding: 7bit
 
-On 09.11.2020 07:41, Juergen Gross wrote:
-> The patches for XSA-343 produced some fallout, especially the event
-> channel locking has shown to be problematic.
-> 
-> Patch 1 is targeting fifo event channels for avoiding any races for the
-> case that the fifo queue has been changed for a specific event channel.
-> 
-> The second patch is modifying the per event channel locking scheme in
-> order to avoid deadlocks and problems due to the event channel lock
-> having been changed to require IRQs off by the XSA-343 patches.
-> 
-> Changes in V5:
-> - moved evtchn_write_[un]lock() to event_channel.c (Jan Beulich)
-> - used normal read_lock() in some cases (Jan Beulich)
-> 
-> Changes in V4:
-> - switched to real rwlock
-> 
-> Changes in V3:
-> - addressed comments
-> 
-> Juergen Gross (2):
->   xen/events: access last_priority and last_vcpu_id together
->   xen/evtchn: rework per event channel lock
+Hi,
 
-Didn't you mean to add a 3rd patch here to drop the 2nd call to
-xsm_evtchn_send() again?
+On 09/11/2020 08:21, Penny Zheng wrote:
+> CNTVCT_EL0 or CNTPCT_EL0 counter read in Cortex-A73 (all versions)
+> might return a wrong value when the counter crosses a 32bit boundary.
+> 
+> Until now, there is no case for Xen itself to access CNTVCT_EL0,
+> and it also should be the Guest OS's responsibility to deal with
+> this part.
+> 
+> But for CNTPCT, there exists several cases in Xen involving reading
+> CNTPCT, so a possible workaround is that performing the read twice,
+> and to return one or the other depending on whether a transition has
+> taken place.
+> 
+> Signed-off-by: Penny Zheng <penny.zheng@arm.com>
 
-Jan
+Acked-by: Julien Grall <jgrall@amazon.com>
+
+On a related topic, do we need a fix similar to Linux commit 
+75a19a0202db "arm64: arch_timer: Ensure counter register reads occur 
+with seqlock held"?
+
+Cheers,
+
+-- 
+Julien Grall
 
