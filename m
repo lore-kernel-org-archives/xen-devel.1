@@ -8,23 +8,23 @@ X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B8D5C388F7
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2020 12:51:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A26A9C2D0A3
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2020 12:51:28 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EDBDE20657
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2020 12:51:19 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 2F55920684
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2020 12:51:28 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="nuwE9B9b"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EDBDE20657
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="BhLucB5u"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2F55920684
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.22475.48842 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.22485.48866 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kc6dX-0004JH-PX; Mon, 09 Nov 2020 12:51:07 +0000
+	id 1kc6di-0004XL-Mf; Mon, 09 Nov 2020 12:51:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 22475.48842; Mon, 09 Nov 2020 12:51:07 +0000
+Received: by outflank-mailman (output) from mailman id 22485.48866; Mon, 09 Nov 2020 12:51:18 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,66 +39,66 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kc6dX-0004J9-Lg; Mon, 09 Nov 2020 12:51:07 +0000
-Received: by outflank-mailman (input) for mailman id 22475;
- Mon, 09 Nov 2020 12:51:06 +0000
+	id 1kc6di-0004X6-IX; Mon, 09 Nov 2020 12:51:18 +0000
+Received: by outflank-mailman (input) for mailman id 22485;
+ Mon, 09 Nov 2020 12:51:16 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=zl3J=EP=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
- id 1kc6dW-0003tf-Gq
- for xen-devel@lists.xenproject.org; Mon, 09 Nov 2020 12:51:06 +0000
-Received: from mail-lj1-x242.google.com (unknown [2a00:1450:4864:20::242])
+ id 1kc6dg-0003tf-HB
+ for xen-devel@lists.xenproject.org; Mon, 09 Nov 2020 12:51:16 +0000
+Received: from mail-lf1-x143.google.com (unknown [2a00:1450:4864:20::143])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9df39a4f-6d66-4634-bf58-8d1c09321705;
- Mon, 09 Nov 2020 12:50:41 +0000 (UTC)
-Received: by mail-lj1-x242.google.com with SMTP id r17so4485213ljg.5
- for <xen-devel@lists.xenproject.org>; Mon, 09 Nov 2020 04:50:41 -0800 (PST)
+ id 9373c888-deb2-488e-818e-fa0740b97367;
+ Mon, 09 Nov 2020 12:50:44 +0000 (UTC)
+Received: by mail-lf1-x143.google.com with SMTP id f11so5953619lfs.3
+ for <xen-devel@lists.xenproject.org>; Mon, 09 Nov 2020 04:50:44 -0800 (PST)
 Received: from a2klaptop.localdomain ([185.199.97.5])
- by smtp.gmail.com with ESMTPSA id i1sm1736447lfr.176.2020.11.09.04.50.39
+ by smtp.gmail.com with ESMTPSA id i1sm1736447lfr.176.2020.11.09.04.50.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Nov 2020 04:50:40 -0800 (PST)
+ Mon, 09 Nov 2020 04:50:42 -0800 (PST)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=zl3J=EP=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
-	id 1kc6dW-0003tf-Gq
-	for xen-devel@lists.xenproject.org; Mon, 09 Nov 2020 12:51:06 +0000
-X-Inumbo-ID: 9df39a4f-6d66-4634-bf58-8d1c09321705
-Received: from mail-lj1-x242.google.com (unknown [2a00:1450:4864:20::242])
+	id 1kc6dg-0003tf-HB
+	for xen-devel@lists.xenproject.org; Mon, 09 Nov 2020 12:51:16 +0000
+X-Inumbo-ID: 9373c888-deb2-488e-818e-fa0740b97367
+Received: from mail-lf1-x143.google.com (unknown [2a00:1450:4864:20::143])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 9df39a4f-6d66-4634-bf58-8d1c09321705;
-	Mon, 09 Nov 2020 12:50:41 +0000 (UTC)
-Received: by mail-lj1-x242.google.com with SMTP id r17so4485213ljg.5
-        for <xen-devel@lists.xenproject.org>; Mon, 09 Nov 2020 04:50:41 -0800 (PST)
+	id 9373c888-deb2-488e-818e-fa0740b97367;
+	Mon, 09 Nov 2020 12:50:44 +0000 (UTC)
+Received: by mail-lf1-x143.google.com with SMTP id f11so5953619lfs.3
+        for <xen-devel@lists.xenproject.org>; Mon, 09 Nov 2020 04:50:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=4uUYf7LbdujIXi0hlvWg2yt1O+62hgozBNucQm/XVxE=;
-        b=nuwE9B9bn+tdWxbabj0uNIsC6wr3xTqxw523yvetQHGv9ujFCwj5IpveMzBLiEuxW5
-         CzBHsvYtNJNSfdoCNVPN2gibjCnBV8cmoZ/G182Pq7LZ/B6bSc4p46PfxWc20qhTq4bf
-         yJ5H6rcqP5nWWjUHaiFILNhnbohX21o/MgrRAUU9q3byvwB4QQlNfCcalA2T4plp6Mry
-         czXMqb2Yt3f0tjy9mMUWuTWC8I8AFmbkZoRFT/pprF5e0ye9ZfPZedRyyewF7DGHSvz+
-         xFNpUVJW6vsMfeXp/zN/ln613ZS9gXC5/BwunyyBjkN6wxXaIA1M1qDBwisLr3i3yREW
-         L5fg==
+        bh=nvNmRBs0yMdCUG+5+G3i3M5jvG9+T7PAVH/ULtYwZd8=;
+        b=BhLucB5unsgmpqCexxIviXoItX2knYBdsgr+yYELfc6dr8nME0oNQOEI3yc8ktBgNQ
+         j5qG9gXFioPOtAz9b1XK70s8Q7w3Qo+on1JDA/vcCoN1xAwNuClbRiCFKnIpiKdJ/2bK
+         fGyPd6VUEqYTvU9skirT/6Fp6HSM6ToAyr52K+IoSd8ASPbwjfS4EiYUIrBFa6m9ZA4B
+         Reext1joqqooXwsl7kXl7+z2os2td3jxJkZlcBWSrQcGrT2tX8xo18fauv0twLpimoY8
+         WojJROH0jW7I9TJnPUy8gNbladV7e9Oz9GkwPe5VVe+QHLcX6aw+rG7/46lOqMPmbeY8
+         SN5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=4uUYf7LbdujIXi0hlvWg2yt1O+62hgozBNucQm/XVxE=;
-        b=tGA1NsK2O635NrFwhsWnHTHJKbbs6b067pV9K8s+DGJoSdby3N54iy9wlncmhtK+PT
-         +IhrmiHmDEKhkHFXc/cUYhxTC4OPhdYpu0hqFZ0pmoLX4G29iwpZ2JFMqt7ig/Jxd6j/
-         DbRQISp0HZ3eIxfSLXfUKSlQkmcAjK8ZjGVXQVe/o1urdo35vq74upQ1WhytXkcMMWQn
-         58vKLkwSPGAsZ4jx5TqgU9QcPPuaNBJenqSPl2HFWLxzfwOXUUCBwu5ieP5I/GKSWXF7
-         62+P5b2YwNNv9uVRzj5vGof7Talwc9YU4lY9TgjuYVjdFjWS1fopqhK+O4xFjzJr3Fth
-         VC6A==
-X-Gm-Message-State: AOAM5339VLqtFA/TXl2oWsuZcwg+1rO2EbTCqMc3LLkGUI0RogmCRcAW
-	xDNsld7jwa/3h8v0K6gN+eM=
-X-Google-Smtp-Source: ABdhPJzEeHBOgXtCrM/P1zLK3bmDqq8tzFO+IcwdqhxWfb94Tao7VH7AAbtiw041BJADLaam0L9ihA==
-X-Received: by 2002:a2e:b54a:: with SMTP id a10mr5764786ljn.139.1604926240752;
-        Mon, 09 Nov 2020 04:50:40 -0800 (PST)
+        bh=nvNmRBs0yMdCUG+5+G3i3M5jvG9+T7PAVH/ULtYwZd8=;
+        b=WXirXJ3Slfo/KxpylhnAgvXlFO8qIn479DhhaM7jHHnU0nNOsecY5K+i1FHRLeDbqd
+         iFnPIJ1cGSTANWq6CEz1Exe1TYdGQ8wC1udjsbQ1kILx3DwhQ6aDxsNR7GWcwRNpsiO9
+         kExnRtwJ3+latMRh6r8no/agu965hLcq9xH8XooQWq2ybfbkzJ/j9AuEK+OQfkYxUiU5
+         MbUldKT9zoJt/FunsRiFt8v2u9udiBhy6Y02pG88MWt/JoakDTuUiied51TA9ex1e9Uy
+         H77rR01TPYPH5zYx4/YPiDPlxhfLeaADKelyQNzARgalDz/nz6sFC8zmkx3jIXLg7KsW
+         1LOg==
+X-Gm-Message-State: AOAM531q+C3dP2JhgSn+vzeohBvBKv0XXmPlxjAccgirkgbnbN893Vzm
+	9yd1TCEZVtMKx5X5m1BNKnA=
+X-Google-Smtp-Source: ABdhPJwIxNZ+eFf7k5nHNhhjoeffUH3DJiF6DgEDs7OPTcsBJLtqcKWT+tf2/kVSMShVjyHxOj/DWw==
+X-Received: by 2002:ac2:57d3:: with SMTP id k19mr6188423lfo.386.1604926243125;
+        Mon, 09 Nov 2020 04:50:43 -0800 (PST)
 Received: from a2klaptop.localdomain ([185.199.97.5])
-        by smtp.gmail.com with ESMTPSA id i1sm1736447lfr.176.2020.11.09.04.50.39
+        by smtp.gmail.com with ESMTPSA id i1sm1736447lfr.176.2020.11.09.04.50.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 09 Nov 2020 04:50:40 -0800 (PST)
+        Mon, 09 Nov 2020 04:50:42 -0800 (PST)
 From: Oleksandr Andrushchenko <andr2000@gmail.com>
 To: Rahul.Singh@arm.com,
 	Bertrand.Marquis@arm.com,
@@ -110,541 +110,109 @@ To: Rahul.Singh@arm.com,
 Cc: iwj@xenproject.org,
 	wl@xen.org,
 	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Subject: [PATCH 06/10] vpci: Make every domain handle its own BARs
-Date: Mon,  9 Nov 2020 14:50:27 +0200
-Message-Id: <20201109125031.26409-7-andr2000@gmail.com>
+Subject: [PATCH 08/10] vpci/arm: Allow updating BAR's header for non-ECAM bridges
+Date: Mon,  9 Nov 2020 14:50:29 +0200
+Message-Id: <20201109125031.26409-9-andr2000@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20201109125031.26409-1-andr2000@gmail.com>
 References: <20201109125031.26409-1-andr2000@gmail.com>
 
 From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 
-At the moment there is an identity mapping between how a guest sees its
-BARs and how they are programmed into guest domain's p2m. This is not
-going to work as guest domains have their own view on the BARs.
-Extend existing vPCI BAR handling to allow every domain to have its own
-view of the BARs: only hardware domain sees physical memory addresses in
-this case and for the rest those are emulated, including logic required
-for the guests to detect memory sizes and properties.
+Non-ECAM host bridges in hwdom go directly to PCI config space,
+not through vpci (they use their specific method for accessing PCI
+configuration, e.g. dedicated registers etc.). Thus hwdom's vpci BARs are
+never updated via vPCI MMIO handlers, so implement a dedicated method
+for a PCI host bridge, so it has a chance to update the initial state of
+the device BARs.
 
-While emulating BAR access for the guests create a link between the
-virtual BAR address and physical one: use full memory address while
-creating range sets used to map/unmap corresponding address spaces and
-exploit the fact that PCI BAR value doesn't use 8 lower bits of the
-memory address. Use those bits to pass physical BAR's index, so we can
-build/remove proper p2m mappings.
+Note, we rely on the fact that control/hardware domain will not update
+physical BAR locations for the given devices.
 
 Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 ---
- xen/drivers/vpci/header.c | 276 ++++++++++++++++++++++++++++++++++----
- xen/drivers/vpci/vpci.c   |   1 +
- xen/include/xen/vpci.h    |  24 ++--
- 3 files changed, 265 insertions(+), 36 deletions(-)
+ xen/arch/arm/pci/pci-host-common.c | 13 +++++++++++++
+ xen/drivers/vpci/header.c          |  9 ++++++++-
+ xen/include/asm-arm/pci.h          |  8 ++++++++
+ 3 files changed, 29 insertions(+), 1 deletion(-)
 
+diff --git a/xen/arch/arm/pci/pci-host-common.c b/xen/arch/arm/pci/pci-host-common.c
+index b6c4d7b636b1..5f4239afa41f 100644
+--- a/xen/arch/arm/pci/pci-host-common.c
++++ b/xen/arch/arm/pci/pci-host-common.c
+@@ -250,6 +250,19 @@ int pci_host_bridge_update_mappings(struct domain *d)
+     return pci_host_iterate_bridges(d, pci_host_bridge_update_mapping);
+ }
+ 
++void pci_host_bridge_update_bar_header(const struct pci_dev *pdev,
++                                       struct vpci_header *header)
++{
++    struct pci_host_bridge *bridge;
++
++    bridge = pci_find_host_bridge(pdev->seg, pdev->bus);
++    if ( unlikely(!bridge) )
++        return;
++
++    if ( bridge->ops->update_bar_header )
++        bridge->ops->update_bar_header(pdev, header);
++}
++
+ /*
+  * Local variables:
+  * mode: C
 diff --git a/xen/drivers/vpci/header.c b/xen/drivers/vpci/header.c
-index f74f728884c0..7dc7c70e24f2 100644
+index 7dc7c70e24f2..1f326c894d16 100644
 --- a/xen/drivers/vpci/header.c
 +++ b/xen/drivers/vpci/header.c
-@@ -31,14 +31,87 @@
- struct map_data {
-     struct domain *d;
-     bool map;
-+    struct pci_dev *pdev;
+@@ -77,7 +77,14 @@ static struct vpci_header *get_vpci_header(struct domain *d,
+     if ( !is_hardware_domain(d) )
+     {
+         struct vpci_header *hwdom_header = get_hwdom_vpci_header(pdev);
+-
++#ifdef CONFIG_ARM
++        /*
++         * Non-ECAM host bridges in hwdom go directly to PCI
++         * config space, not through vpci. Thus hwdom's vpci BARs are
++         * never updated.
++         */
++        pci_host_bridge_update_bar_header(pdev, hwdom_header);
++#endif
+         /* Make a copy of the hwdom's BARs as the initial state for vBARs. */
+         memcpy(header, hwdom_header, sizeof(*header));
+     }
+diff --git a/xen/include/asm-arm/pci.h b/xen/include/asm-arm/pci.h
+index d94e8a6628de..723b2a99b6e1 100644
+--- a/xen/include/asm-arm/pci.h
++++ b/xen/include/asm-arm/pci.h
+@@ -60,6 +60,9 @@ struct pci_config_window {
+ /* Forward declaration as pci_host_bridge and pci_ops depend on each other. */
+ struct pci_host_bridge;
+ 
++struct pci_dev;
++struct vpci_header;
++
+ struct pci_ops {
+     int (*read)(struct pci_host_bridge *bridge,
+                     uint32_t sbdf, int where, int size, u32 *val);
+@@ -69,6 +72,8 @@ struct pci_ops {
+     int (*register_mmio_handler)(struct domain *d,
+                                  struct pci_host_bridge *bridge,
+                                  const struct mmio_handler_ops *ops);
++    void (*update_bar_header)(const struct pci_dev *pdev,
++                              struct vpci_header *header);
  };
  
-+static struct vpci_header *get_vpci_header(struct domain *d,
-+                                           const struct pci_dev *pdev);
+ /*
+@@ -110,6 +115,9 @@ int pci_host_iterate_bridges(struct domain *d,
+                              int (*clb)(struct domain *d,
+                                         struct pci_host_bridge *bridge));
+ int pci_host_bridge_update_mappings(struct domain *d);
++void pci_host_bridge_update_bar_header(const struct pci_dev *pdev,
++                                       struct vpci_header *header);
 +
-+static struct vpci_header *get_hwdom_vpci_header(const struct pci_dev *pdev)
-+{
-+    if ( unlikely(list_empty(&pdev->vpci->headers)) )
-+        return get_vpci_header(hardware_domain, pdev);
-+
-+    /* hwdom's header is always the very first entry. */
-+    return list_first_entry(&pdev->vpci->headers, struct vpci_header, node);
-+}
-+
-+static struct vpci_header *get_vpci_header(struct domain *d,
-+                                           const struct pci_dev *pdev)
-+{
-+    struct list_head *prev;
-+    struct vpci_header *header;
-+    struct vpci *vpci = pdev->vpci;
-+
-+    list_for_each( prev, &vpci->headers )
-+    {
-+        struct vpci_header *this = list_entry(prev, struct vpci_header, node);
-+
-+        if ( this->domain_id == d->domain_id )
-+            return this;
-+    }
-+    printk(XENLOG_DEBUG "--------------------------------------" \
-+           "Adding new vPCI BAR headers for domain %d: " PRI_pci" \n",
-+           d->domain_id, pdev->sbdf.seg, pdev->sbdf.bus,
-+           pdev->sbdf.dev, pdev->sbdf.fn);
-+    header = xzalloc(struct vpci_header);
-+    if ( !header )
-+    {
-+        printk(XENLOG_ERR
-+               "Failed to add new vPCI BAR headers for domain %d: " PRI_pci" \n",
-+               d->domain_id, pdev->sbdf.seg, pdev->sbdf.bus,
-+               pdev->sbdf.dev, pdev->sbdf.fn);
-+        return NULL;
-+    }
-+
-+    if ( !is_hardware_domain(d) )
-+    {
-+        struct vpci_header *hwdom_header = get_hwdom_vpci_header(pdev);
-+
-+        /* Make a copy of the hwdom's BARs as the initial state for vBARs. */
-+        memcpy(header, hwdom_header, sizeof(*header));
-+    }
-+
-+    header->domain_id = d->domain_id;
-+    list_add_tail(&header->node, &vpci->headers);
-+    return header;
-+}
-+
-+static struct vpci_bar *get_vpci_bar(struct domain *d,
-+                                     const struct pci_dev *pdev,
-+                                     int bar_idx)
-+{
-+    struct vpci_header *vheader;
-+
-+    vheader = get_vpci_header(d, pdev);
-+    if ( !vheader )
-+        return NULL;
-+
-+    return &vheader->bars[bar_idx];
-+}
-+
- static int map_range(unsigned long s, unsigned long e, void *data,
-                      unsigned long *c)
- {
-     const struct map_data *map = data;
--    int rc;
--
-+    unsigned long mfn;
-+    int rc, bar_idx;
-+    struct vpci_header *header = get_hwdom_vpci_header(map->pdev);
-+
-+    bar_idx = s & ~PCI_BASE_ADDRESS_MEM_MASK;
-+    s = PFN_DOWN(s);
-+    e = PFN_DOWN(e);
-+    mfn = _mfn(PFN_DOWN(header->bars[bar_idx].addr));
-     for ( ; ; )
-     {
-         unsigned long size = e - s + 1;
-@@ -52,11 +125,15 @@ static int map_range(unsigned long s, unsigned long e, void *data,
-          * - {un}map_mmio_regions doesn't support preemption.
-          */
- 
--        rc = map->map ? map_mmio_regions(map->d, _gfn(s), size, _mfn(s))
--                      : unmap_mmio_regions(map->d, _gfn(s), size, _mfn(s));
-+        rc = map->map ? map_mmio_regions(map->d, _gfn(s), size, mfn)
-+                      : unmap_mmio_regions(map->d, _gfn(s), size, mfn);
-         if ( rc == 0 )
-         {
--            *c += size;
-+            /*
-+             * Range set is not expressed in frame numbers and the size
-+             * is the number of frames, so update accordingly.
-+             */
-+            *c += size << PAGE_SHIFT;
-             break;
-         }
-         if ( rc < 0 )
-@@ -67,8 +144,9 @@ static int map_range(unsigned long s, unsigned long e, void *data,
-             break;
-         }
-         ASSERT(rc < size);
--        *c += rc;
-+        *c += rc << PAGE_SHIFT;
-         s += rc;
-+        mfn += rc;
-         if ( general_preempt_check() )
-                 return -ERESTART;
-     }
-@@ -84,7 +162,7 @@ static int map_range(unsigned long s, unsigned long e, void *data,
- static void modify_decoding(const struct pci_dev *pdev, uint16_t cmd,
-                             bool rom_only)
- {
--    struct vpci_header *header = &pdev->vpci->header;
-+    struct vpci_header *header = get_hwdom_vpci_header(pdev);
-     bool map = cmd & PCI_COMMAND_MEMORY;
-     unsigned int i;
- 
-@@ -136,6 +214,7 @@ bool vpci_process_pending(struct vcpu *v)
-         struct map_data data = {
-             .d = v->domain,
-             .map = v->vpci.cmd & PCI_COMMAND_MEMORY,
-+            .pdev = v->vpci.pdev,
-         };
-         int rc = rangeset_consume_ranges(v->vpci.mem, map_range, &data);
- 
-@@ -168,7 +247,8 @@ bool vpci_process_pending(struct vcpu *v)
- static int __init apply_map(struct domain *d, const struct pci_dev *pdev,
-                             struct rangeset *mem, uint16_t cmd)
- {
--    struct map_data data = { .d = d, .map = true };
-+    struct map_data data = { .d = d, .map = true,
-+        .pdev = (struct pci_dev *)pdev };
-     int rc;
- 
-     while ( (rc = rangeset_consume_ranges(mem, map_range, &data)) == -ERESTART )
-@@ -205,7 +285,7 @@ static void defer_map(struct domain *d, struct pci_dev *pdev,
- 
- static int modify_bars(const struct pci_dev *pdev, uint16_t cmd, bool rom_only)
- {
--    struct vpci_header *header = &pdev->vpci->header;
-+    struct vpci_header *header;
-     struct rangeset *mem = rangeset_new(NULL, NULL, 0);
-     struct pci_dev *tmp, *dev = NULL;
- #ifdef CONFIG_X86
-@@ -217,6 +297,11 @@ static int modify_bars(const struct pci_dev *pdev, uint16_t cmd, bool rom_only)
-     if ( !mem )
-         return -ENOMEM;
- 
-+    if ( is_hardware_domain(current->domain) )
-+        header = get_hwdom_vpci_header(pdev);
-+    else
-+        header = get_vpci_header(current->domain, pdev);
-+
-     /*
-      * Create a rangeset that represents the current device BARs memory region
-      * and compare it against all the currently active BAR memory regions. If
-@@ -225,12 +310,15 @@ static int modify_bars(const struct pci_dev *pdev, uint16_t cmd, bool rom_only)
-      * First fill the rangeset with all the BARs of this device or with the ROM
-      * BAR only, depending on whether the guest is toggling the memory decode
-      * bit of the command register, or the enable bit of the ROM BAR register.
-+     *
-+     * Use the PCI reserved bits of the BAR to pass BAR's index.
-      */
-     for ( i = 0; i < ARRAY_SIZE(header->bars); i++ )
-     {
-         const struct vpci_bar *bar = &header->bars[i];
--        unsigned long start = PFN_DOWN(bar->addr);
--        unsigned long end = PFN_DOWN(bar->addr + bar->size - 1);
-+        unsigned long start = (bar->addr & PCI_BASE_ADDRESS_MEM_MASK) | i;
-+        unsigned long end = (bar->addr & PCI_BASE_ADDRESS_MEM_MASK) +
-+            bar->size - 1;
- 
-         if ( !MAPPABLE_BAR(bar) ||
-              (rom_only ? bar->type != VPCI_BAR_ROM
-@@ -251,9 +339,11 @@ static int modify_bars(const struct pci_dev *pdev, uint16_t cmd, bool rom_only)
-     /* Remove any MSIX regions if present. */
-     for ( i = 0; msix && i < ARRAY_SIZE(msix->tables); i++ )
-     {
--        unsigned long start = PFN_DOWN(vmsix_table_addr(pdev->vpci, i));
--        unsigned long end = PFN_DOWN(vmsix_table_addr(pdev->vpci, i) +
--                                     vmsix_table_size(pdev->vpci, i) - 1);
-+        unsigned long start = (vmsix_table_addr(pdev->vpci, i) &
-+                               PCI_BASE_ADDRESS_MEM_MASK) | i;
-+        unsigned long end = (vmsix_table_addr(pdev->vpci, i) &
-+                             PCI_BASE_ADDRESS_MEM_MASK ) +
-+                             vmsix_table_size(pdev->vpci, i) - 1;
- 
-         rc = rangeset_remove_range(mem, start, end);
-         if ( rc )
-@@ -273,6 +363,8 @@ static int modify_bars(const struct pci_dev *pdev, uint16_t cmd, bool rom_only)
-      */
-     for_each_pdev ( pdev->domain, tmp )
-     {
-+        struct vpci_header *header;
-+
-         if ( tmp == pdev )
-         {
-             /*
-@@ -289,11 +381,14 @@ static int modify_bars(const struct pci_dev *pdev, uint16_t cmd, bool rom_only)
-                 continue;
-         }
- 
--        for ( i = 0; i < ARRAY_SIZE(tmp->vpci->header.bars); i++ )
-+        header = get_vpci_header(tmp->domain, pdev);
-+
-+        for ( i = 0; i < ARRAY_SIZE(header->bars); i++ )
-         {
--            const struct vpci_bar *bar = &tmp->vpci->header.bars[i];
--            unsigned long start = PFN_DOWN(bar->addr);
--            unsigned long end = PFN_DOWN(bar->addr + bar->size - 1);
-+            const struct vpci_bar *bar = &header->bars[i];
-+            unsigned long start = (bar->addr & PCI_BASE_ADDRESS_MEM_MASK) | i;
-+            unsigned long end = (bar->addr & PCI_BASE_ADDRESS_MEM_MASK)
-+                + bar->size - 1;
- 
-             if ( !bar->enabled || !rangeset_overlaps_range(mem, start, end) ||
-                  /*
-@@ -357,7 +452,7 @@ static void cmd_write(const struct pci_dev *pdev, unsigned int reg,
-         pci_conf_write16(pdev->sbdf, reg, cmd);
- }
- 
--static void bar_write(const struct pci_dev *pdev, unsigned int reg,
-+static void bar_write_hwdom(const struct pci_dev *pdev, unsigned int reg,
-                       uint32_t val, void *data)
- {
-     struct vpci_bar *bar = data;
-@@ -377,14 +472,17 @@ static void bar_write(const struct pci_dev *pdev, unsigned int reg,
-     {
-         /* If the value written is the current one avoid printing a warning. */
-         if ( val != (uint32_t)(bar->addr >> (hi ? 32 : 0)) )
-+        {
-+            struct vpci_header *header = get_hwdom_vpci_header(pdev);
-+
-             gprintk(XENLOG_WARNING,
-                     "%04x:%02x:%02x.%u: ignored BAR %lu write with memory decoding enabled\n",
-                     pdev->seg, pdev->bus, slot, func,
--                    bar - pdev->vpci->header.bars + hi);
-+                    bar - header->bars + hi);
-+        }
-         return;
-     }
- 
--
-     /*
-      * Update the cached address, so that when memory decoding is enabled
-      * Xen can map the BAR into the guest p2m.
-@@ -403,10 +501,89 @@ static void bar_write(const struct pci_dev *pdev, unsigned int reg,
-     pci_conf_write32(pdev->sbdf, reg, val);
- }
- 
-+static uint32_t bar_read_hwdom(const struct pci_dev *pdev, unsigned int reg,
-+                               void *data)
-+{
-+    return vpci_hw_read32(pdev, reg, data);
-+}
-+
-+static void bar_write_guest(const struct pci_dev *pdev, unsigned int reg,
-+                            uint32_t val, void *data)
-+{
-+    struct vpci_bar *vbar = data;
-+    bool hi = false;
-+
-+    if ( vbar->type == VPCI_BAR_MEM64_HI )
-+    {
-+        ASSERT(reg > PCI_BASE_ADDRESS_0);
-+        vbar--;
-+        hi = true;
-+    }
-+    vbar->addr &= ~(0xffffffffull << (hi ? 32 : 0));
-+    vbar->addr |= (uint64_t)val << (hi ? 32 : 0);
-+}
-+
-+static uint32_t bar_read_guest(const struct pci_dev *pdev, unsigned int reg,
-+                               void *data)
-+{
-+    struct vpci_bar *vbar = data;
-+    uint32_t val;
-+    bool hi = false;
-+
-+    if ( vbar->type == VPCI_BAR_MEM64_HI )
-+    {
-+        ASSERT(reg > PCI_BASE_ADDRESS_0);
-+        vbar--;
-+        hi = true;
-+    }
-+
-+    if ( vbar->type == VPCI_BAR_MEM64_LO || vbar->type == VPCI_BAR_MEM64_HI )
-+    {
-+        if ( hi )
-+            val = vbar->addr >> 32;
-+        else
-+            val = vbar->addr & 0xffffffff;
-+        if ( val == ~0 )
-+        {
-+            /* Guests detects BAR's properties and sizes. */
-+            if ( !hi )
-+            {
-+                val = 0xffffffff & ~(vbar->size - 1);
-+                val |= vbar->type == VPCI_BAR_MEM32 ? PCI_BASE_ADDRESS_MEM_TYPE_32
-+                                                    : PCI_BASE_ADDRESS_MEM_TYPE_64;
-+                val |= vbar->prefetchable ? PCI_BASE_ADDRESS_MEM_PREFETCH : 0;
-+            }
-+            else
-+                val = vbar->size >> 32;
-+            vbar->addr &= ~(0xffffffffull << (hi ? 32 : 0));
-+            vbar->addr |= (uint64_t)val << (hi ? 32 : 0);
-+        }
-+    }
-+    else if ( vbar->type == VPCI_BAR_MEM32 )
-+    {
-+        val = vbar->addr;
-+        if ( val == ~0 )
-+        {
-+            if ( !hi )
-+            {
-+                val = 0xffffffff & ~(vbar->size - 1);
-+                val |= vbar->type == VPCI_BAR_MEM32 ? PCI_BASE_ADDRESS_MEM_TYPE_32
-+                                                    : PCI_BASE_ADDRESS_MEM_TYPE_64;
-+                val |= vbar->prefetchable ? PCI_BASE_ADDRESS_MEM_PREFETCH : 0;
-+            }
-+        }
-+    }
-+    else
-+    {
-+        val = vbar->addr;
-+    }
-+    return val;
-+}
-+
- static void rom_write(const struct pci_dev *pdev, unsigned int reg,
-                       uint32_t val, void *data)
- {
--    struct vpci_header *header = &pdev->vpci->header;
-+    struct vpci_header *header = get_hwdom_vpci_header(pdev);
-     struct vpci_bar *rom = data;
-     uint8_t slot = PCI_SLOT(pdev->devfn), func = PCI_FUNC(pdev->devfn);
-     uint16_t cmd = pci_conf_read16(pdev->sbdf, PCI_COMMAND);
-@@ -452,15 +629,56 @@ static void rom_write(const struct pci_dev *pdev, unsigned int reg,
-         rom->addr = val & PCI_ROM_ADDRESS_MASK;
- }
- 
-+static uint32_t bar_read_dispatch(const struct pci_dev *pdev, unsigned int reg,
-+                                  void *data)
-+{
-+    struct vpci_bar *vbar, *bar = data;
-+
-+    if ( is_hardware_domain(current->domain) )
-+        return bar_read_hwdom(pdev, reg, data);
-+
-+    vbar = get_vpci_bar(current->domain, pdev, bar->index);
-+    if ( !vbar )
-+        return ~0;
-+
-+    return bar_read_guest(pdev, reg, vbar);
-+}
-+
-+static void bar_write_dispatch(const struct pci_dev *pdev, unsigned int reg,
-+                               uint32_t val, void *data)
-+{
-+    struct vpci_bar *bar = data;
-+
-+    if ( is_hardware_domain(current->domain) )
-+        bar_write_hwdom(pdev, reg, val, data);
-+    else
-+    {
-+        struct vpci_bar *vbar = get_vpci_bar(current->domain, pdev, bar->index);
-+
-+        if ( !vbar )
-+            return;
-+        bar_write_guest(pdev, reg, val, vbar);
-+    }
-+}
-+
-+/*
-+ * FIXME: This is called early while adding vPCI handlers which is done
-+ * by and for hwdom.
-+ */
- static int init_bars(struct pci_dev *pdev)
- {
-     uint16_t cmd;
-     uint64_t addr, size;
-     unsigned int i, num_bars, rom_reg;
--    struct vpci_header *header = &pdev->vpci->header;
--    struct vpci_bar *bars = header->bars;
-+    struct vpci_header *header;
-+    struct vpci_bar *bars;
-     int rc;
- 
-+    header = get_hwdom_vpci_header(pdev);
-+    if ( !header )
-+        return -ENOMEM;
-+    bars = header->bars;
-+
-     switch ( pci_conf_read8(pdev->sbdf, PCI_HEADER_TYPE) & 0x7f )
-     {
-     case PCI_HEADER_TYPE_NORMAL:
-@@ -496,11 +714,12 @@ static int init_bars(struct pci_dev *pdev)
-         uint8_t reg = PCI_BASE_ADDRESS_0 + i * 4;
-         uint32_t val;
- 
-+        bars[i].index = i;
-         if ( i && bars[i - 1].type == VPCI_BAR_MEM64_LO )
-         {
-             bars[i].type = VPCI_BAR_MEM64_HI;
--            rc = vpci_add_register(pdev->vpci, vpci_hw_read32, bar_write, reg,
--                                   4, &bars[i]);
-+            rc = vpci_add_register(pdev->vpci, bar_read_dispatch,
-+                                   bar_write_dispatch, reg, 4, &bars[i]);
-             if ( rc )
-             {
-                 pci_conf_write16(pdev->sbdf, PCI_COMMAND, cmd);
-@@ -540,8 +759,8 @@ static int init_bars(struct pci_dev *pdev)
-         bars[i].size = size;
-         bars[i].prefetchable = val & PCI_BASE_ADDRESS_MEM_PREFETCH;
- 
--        rc = vpci_add_register(pdev->vpci, vpci_hw_read32, bar_write, reg, 4,
--                               &bars[i]);
-+        rc = vpci_add_register(pdev->vpci, bar_read_dispatch,
-+                               bar_write_dispatch, reg, 4, &bars[i]);
-         if ( rc )
-         {
-             pci_conf_write16(pdev->sbdf, PCI_COMMAND, cmd);
-@@ -558,6 +777,7 @@ static int init_bars(struct pci_dev *pdev)
-         rom->type = VPCI_BAR_ROM;
-         rom->size = size;
-         rom->addr = addr;
-+        rom->index = num_bars;
-         header->rom_enabled = pci_conf_read32(pdev->sbdf, rom_reg) &
-                               PCI_ROM_ADDRESS_ENABLE;
- 
-diff --git a/xen/drivers/vpci/vpci.c b/xen/drivers/vpci/vpci.c
-index a5293521a36a..728029da3e9c 100644
---- a/xen/drivers/vpci/vpci.c
-+++ b/xen/drivers/vpci/vpci.c
-@@ -69,6 +69,7 @@ int __hwdom_init vpci_add_handlers(struct pci_dev *pdev)
-         return -ENOMEM;
- 
-     INIT_LIST_HEAD(&pdev->vpci->handlers);
-+    INIT_LIST_HEAD(&pdev->vpci->headers);
-     spin_lock_init(&pdev->vpci->lock);
- 
-     for ( i = 0; i < NUM_VPCI_INIT; i++ )
-diff --git a/xen/include/xen/vpci.h b/xen/include/xen/vpci.h
-index c3501e9ec010..54423bc6556d 100644
---- a/xen/include/xen/vpci.h
-+++ b/xen/include/xen/vpci.h
-@@ -55,16 +55,14 @@ uint32_t vpci_hw_read32(const struct pci_dev *pdev, unsigned int reg,
-  */
- bool __must_check vpci_process_pending(struct vcpu *v);
- 
--struct vpci {
--    /* List of vPCI handlers for a device. */
--    struct list_head handlers;
--    spinlock_t lock;
--
- #ifdef __XEN__
--    /* Hide the rest of the vpci struct from the user-space test harness. */
-     struct vpci_header {
-+    struct list_head node;
-+    /* Domain that owns this view of the BARs. */
-+    domid_t domain_id;
-         /* Information about the PCI BARs of this device. */
-         struct vpci_bar {
-+            int index;
-             uint64_t addr;
-             uint64_t size;
-             enum {
-@@ -88,8 +86,18 @@ struct vpci {
-          * is mapped into guest p2m) if there's a ROM BAR on the device.
-          */
-         bool rom_enabled      : 1;
--        /* FIXME: currently there's no support for SR-IOV. */
--    } header;
-+};
-+#endif
-+
-+struct vpci {
-+    /* List of vPCI handlers for a device. */
-+    struct list_head handlers;
-+    spinlock_t lock;
-+
-+#ifdef __XEN__
-+    /* Hide the rest of the vpci struct from the user-space test harness. */
-+    /* List of vPCI headers for all domains. */
-+    struct list_head headers;
- 
- #ifdef CONFIG_X86
-     /* MSI data. */
+ #else   /*!CONFIG_ARM_PCI*/
+ struct arch_pci_dev { };
+ static inline void  pci_init(void) { }
 -- 
 2.17.1
 
