@@ -8,23 +8,23 @@ X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DDA7CC2D0A3
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2020 12:51:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1CBEEC2D0A3
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2020 12:51:21 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7011E20789
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2020 12:51:10 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 9AD5320657
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2020 12:51:20 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="tcBYbtRH"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7011E20789
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Q+1kyGk5"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9AD5320657
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.22472.48830 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.22480.48854 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kc6dT-0004EK-FF; Mon, 09 Nov 2020 12:51:03 +0000
+	id 1kc6dd-0004QU-CV; Mon, 09 Nov 2020 12:51:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 22472.48830; Mon, 09 Nov 2020 12:51:03 +0000
+Received: by outflank-mailman (output) from mailman id 22480.48854; Mon, 09 Nov 2020 12:51:13 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,66 +39,66 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kc6dT-0004EC-BS; Mon, 09 Nov 2020 12:51:03 +0000
-Received: by outflank-mailman (input) for mailman id 22472;
- Mon, 09 Nov 2020 12:51:01 +0000
+	id 1kc6dd-0004QF-5l; Mon, 09 Nov 2020 12:51:13 +0000
+Received: by outflank-mailman (input) for mailman id 22480;
+ Mon, 09 Nov 2020 12:51:11 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=zl3J=EP=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
- id 1kc6dR-0003tf-Gi
- for xen-devel@lists.xenproject.org; Mon, 09 Nov 2020 12:51:01 +0000
-Received: from mail-lj1-x244.google.com (unknown [2a00:1450:4864:20::244])
+ id 1kc6db-0003tf-H3
+ for xen-devel@lists.xenproject.org; Mon, 09 Nov 2020 12:51:11 +0000
+Received: from mail-lj1-x242.google.com (unknown [2a00:1450:4864:20::242])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id c8ab388e-186e-4278-85b1-ae6cd3f5dd61;
- Mon, 09 Nov 2020 12:50:40 +0000 (UTC)
-Received: by mail-lj1-x244.google.com with SMTP id v18so10142740ljc.3
- for <xen-devel@lists.xenproject.org>; Mon, 09 Nov 2020 04:50:40 -0800 (PST)
+ id dc348a48-5985-497a-b14c-cb2c93794339;
+ Mon, 09 Nov 2020 12:50:43 +0000 (UTC)
+Received: by mail-lj1-x242.google.com with SMTP id 23so10119541ljv.7
+ for <xen-devel@lists.xenproject.org>; Mon, 09 Nov 2020 04:50:42 -0800 (PST)
 Received: from a2klaptop.localdomain ([185.199.97.5])
- by smtp.gmail.com with ESMTPSA id i1sm1736447lfr.176.2020.11.09.04.50.38
+ by smtp.gmail.com with ESMTPSA id i1sm1736447lfr.176.2020.11.09.04.50.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Nov 2020 04:50:39 -0800 (PST)
+ Mon, 09 Nov 2020 04:50:41 -0800 (PST)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=zl3J=EP=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
-	id 1kc6dR-0003tf-Gi
-	for xen-devel@lists.xenproject.org; Mon, 09 Nov 2020 12:51:01 +0000
-X-Inumbo-ID: c8ab388e-186e-4278-85b1-ae6cd3f5dd61
-Received: from mail-lj1-x244.google.com (unknown [2a00:1450:4864:20::244])
+	id 1kc6db-0003tf-H3
+	for xen-devel@lists.xenproject.org; Mon, 09 Nov 2020 12:51:11 +0000
+X-Inumbo-ID: dc348a48-5985-497a-b14c-cb2c93794339
+Received: from mail-lj1-x242.google.com (unknown [2a00:1450:4864:20::242])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id c8ab388e-186e-4278-85b1-ae6cd3f5dd61;
-	Mon, 09 Nov 2020 12:50:40 +0000 (UTC)
-Received: by mail-lj1-x244.google.com with SMTP id v18so10142740ljc.3
-        for <xen-devel@lists.xenproject.org>; Mon, 09 Nov 2020 04:50:40 -0800 (PST)
+	id dc348a48-5985-497a-b14c-cb2c93794339;
+	Mon, 09 Nov 2020 12:50:43 +0000 (UTC)
+Received: by mail-lj1-x242.google.com with SMTP id 23so10119541ljv.7
+        for <xen-devel@lists.xenproject.org>; Mon, 09 Nov 2020 04:50:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=elscKxOwLIVI2A3WOH0c4hFjfpu+AwWsnBd8zoJ5TOA=;
-        b=tcBYbtRH2U39Q1/VskmmFKup9IujI+FTY0QpLU5U/Yh07iYlW+oqc2viPjbmGpZahi
-         r4yzVmyJBqSCQ+G+mjsVmM2o/9WqseNIo20QzBFJkj8ETEKmLQSec4Eg10kgzjaocY87
-         VAMGGUMrPrqy4LUCnoKGM1v48QgSrYcgvBWeokYCMJdJ1Xz+8zZKiECPhs/pZ3yMOXml
-         AWUkDBaLJfnEHcWrFdm7+I6bMTbFfT5bkxReyUDS7yITWvsiD55px+35Z1vjh4IqlHzV
-         DiFLMCqIZ+tAtySx9n8FN3jVRl3oqVn8QU/xXFlvQKTlngXL9YOvCP8KE1lgMCyVk9jA
-         tUQA==
+        bh=eTzgC8wjlZZ5dW1kDk0Apl54Fj76f3KrpZyQEpkVwKo=;
+        b=Q+1kyGk5oARHjB8whVHpRnlcQGZvtUwLqYbMqdS2JgNepCo6HOCtrkgLU4lRbnd8Yh
+         HiwTsu7E+ujayTEFUS5+o8cbaTGs5LrUWHtG8VOtipdlzsAgSrFWEGZTqySzl6Xpr82Q
+         ILuyttgBKhz0I8XuKJgP0/RHWouG8xbM/KEMucYHrWTmTpk3XLk0oxxKJfjqSZ3MsOaP
+         w1F2b3JLfnFvA8OdZObmhzlJfBUkmeIyQciEUQaNYChFd7vCou/T1NEBFjGUNiRItvT7
+         sAjBFf/ixmlga0rH4j6IGQCEKR8S43/jU9w9FSDawd0FME2xd9VysITBFGikF6FrXXKH
+         OJfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=elscKxOwLIVI2A3WOH0c4hFjfpu+AwWsnBd8zoJ5TOA=;
-        b=g4kfgPFmAUOCQoi3Dk1Apr6uFRSLccSFgV9WyC08IRRaCKCRsLsJX0SgMJgeYvMkPu
-         xVfTFOr4DQzywa8PX4hisQZ7uy2FriZ8KMrwnqgIH+cEmbDZidukk134AZvdm/6Li7+g
-         nS6fflZbG8U/sFABCPBr86e/uFs8NLmhdVLcn/ydFpcjeJZgO4UFEPgdj04xsQIfgJsY
-         QGsEwScVLUJFLmsXTd1luNydk1SBfLW5LX9fcC118qu0e0u77Jf+r7jKmgIC7kM/mphQ
-         9FsXSRmv7RqUWowWmgQ6boAjoVhuGlKMCgOB/7sEl/ZshlHoCK1xY2gFWqQi158wKsB/
-         dotA==
-X-Gm-Message-State: AOAM532s+JcMK00HURZdCAghgQVG1rjJPFgrKGkACMRPxXWTeVuOxKsp
-	q2HxWrQnbING5VmRiVy2TOo=
-X-Google-Smtp-Source: ABdhPJx5rXKcbnC2dQR2fqaqdXLLpOHbJpRTETelBk1X2W2GGtWTbGTJqdBYK60sg1nIaSGbU2Z2TA==
-X-Received: by 2002:a2e:5d4:: with SMTP id 203mr6214273ljf.137.1604926239612;
-        Mon, 09 Nov 2020 04:50:39 -0800 (PST)
+        bh=eTzgC8wjlZZ5dW1kDk0Apl54Fj76f3KrpZyQEpkVwKo=;
+        b=FwAEvUhu6vBOIcoF8r9MpUnpLFiyM3W6u0GDQMZvU39JAPHIifQlcmkHXnUslyQu+I
+         08jCxlV8YDbxeiwtvaCmxkbOiCEjbUjkYPGVdEqHdfQJgyFlBSH8//Olj0KE3e5XcVxz
+         FTZs7ZkA5LemYgjzi+Xpn6mfyuPQb0quQHal9BcCNoRnVpeyb4g7YeXKFLR27DDAfJpR
+         ZpkE8XJYB1IirGKx+amHYdyjT/2GsSi5RCiJADuY29fp+bbzqf3c4T4mU4By/sP2fxl9
+         ZW88nxNvXI6iRvX9TPxsd6Yp+JZ7o838J5hsNKP/S8v/9tzkuZBvlACYhgJBm2NAgV6e
+         6KlQ==
+X-Gm-Message-State: AOAM533eFebnC6GcK4evJ7WnGOfagamGOQnIFc25IuJ60BsIljpJnZ5G
+	LuKljgnzfAwYBGbEYSnGMjBe1r3DpfZdD5c7
+X-Google-Smtp-Source: ABdhPJwcPThVD8W/eKCaLs5uWrQq++GkIkgz3jehLAFccyEViZGB673ffnnnOCit0z69w08y6AN6Vg==
+X-Received: by 2002:a2e:b701:: with SMTP id j1mr6333703ljo.242.1604926241939;
+        Mon, 09 Nov 2020 04:50:41 -0800 (PST)
 Received: from a2klaptop.localdomain ([185.199.97.5])
-        by smtp.gmail.com with ESMTPSA id i1sm1736447lfr.176.2020.11.09.04.50.38
+        by smtp.gmail.com with ESMTPSA id i1sm1736447lfr.176.2020.11.09.04.50.40
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 09 Nov 2020 04:50:39 -0800 (PST)
+        Mon, 09 Nov 2020 04:50:41 -0800 (PST)
 From: Oleksandr Andrushchenko <andr2000@gmail.com>
 To: Rahul.Singh@arm.com,
 	Bertrand.Marquis@arm.com,
@@ -110,49 +110,44 @@ To: Rahul.Singh@arm.com,
 Cc: iwj@xenproject.org,
 	wl@xen.org,
 	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Subject: [PATCH 05/10] xen/arm: Process pending vPCI map/unmap operations
-Date: Mon,  9 Nov 2020 14:50:26 +0200
-Message-Id: <20201109125031.26409-6-andr2000@gmail.com>
+Subject: [PATCH 07/10] xen/arm: Do not hardcode phycial PCI device addresses
+Date: Mon,  9 Nov 2020 14:50:28 +0200
+Message-Id: <20201109125031.26409-8-andr2000@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20201109125031.26409-1-andr2000@gmail.com>
 References: <20201109125031.26409-1-andr2000@gmail.com>
 
 From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 
-vPCI may map and unmap PCI device memory (BARs) being passed through which
-may take a lot of time. For this those operations may be deferred to be
-performed later, so that they can be safely preempted.
-Run the corresponding vPCI code while switching a vCPU.
+As vPCI now takes care of the proper p2m mappings for PCI devices there
+is no more need to hardcode anything.
 
 Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 ---
- xen/arch/arm/traps.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+ xen/include/public/arch-arm.h | 9 +--------
+ 1 file changed, 1 insertion(+), 8 deletions(-)
 
-diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
-index 8f40d0e0b6b1..1c54dc0cdd51 100644
---- a/xen/arch/arm/traps.c
-+++ b/xen/arch/arm/traps.c
-@@ -33,6 +33,7 @@
- #include <xen/symbols.h>
- #include <xen/version.h>
- #include <xen/virtual_region.h>
-+#include <xen/vpci.h>
+diff --git a/xen/include/public/arch-arm.h b/xen/include/public/arch-arm.h
+index 2411ac9f7b0a..59baf1014fe3 100644
+--- a/xen/include/public/arch-arm.h
++++ b/xen/include/public/arch-arm.h
+@@ -444,15 +444,8 @@ typedef uint64_t xen_callback_t;
+ #define GUEST_VPCI_MEM_CPU_ADDR           xen_mk_ullong(0x04020000)
+ #define GUEST_VPCI_IO_CPU_ADDR            xen_mk_ullong(0xC0200800)
  
- #include <public/sched.h>
- #include <public/xen.h>
-@@ -2253,6 +2254,11 @@ static void check_for_vcpu_work(void)
- {
-     struct vcpu *v = current;
+-/*
+- * This is hardcoded values for the real PCI physical addresses.
+- * This will be removed once we read the real PCI-PCIe physical
+- * addresses form the config space and map to the guest memory map
+- * when assigning the device to guest via VPCI.
+- *
+- */
+ #define GUEST_VPCI_PREFETCH_MEM_PCI_ADDR  xen_mk_ullong(0x4000000000)
+-#define GUEST_VPCI_MEM_PCI_ADDR           xen_mk_ullong(0x50000000)
++#define GUEST_VPCI_MEM_PCI_ADDR           xen_mk_ullong(0x04020000)
+ #define GUEST_VPCI_IO_PCI_ADDR            xen_mk_ullong(0x00000000)
  
-+    local_irq_enable();
-+    if ( has_vpci(v->domain) && vpci_process_pending(v) )
-+        raise_softirq(SCHEDULE_SOFTIRQ);
-+    local_irq_disable();
-+
-     if ( likely(!v->arch.need_flush_to_ram) )
-         return;
- 
+ #define GUEST_VPCI_PREFETCH_MEM_SIZE      xen_mk_ullong(0x100000000)
 -- 
 2.17.1
 
