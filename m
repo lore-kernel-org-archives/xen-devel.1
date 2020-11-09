@@ -2,28 +2,28 @@ Return-Path: <SRS0=Pc9a=EP=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DAB3FC56201
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2020 09:50:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 44DB6C2D0A3
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2020 09:50:48 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 52887206ED
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2020 09:50:46 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id BB941206ED
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2020 09:50:47 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="U584MBYl"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 52887206ED
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="LJ+u9AbR"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BB941206ED
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.22269.48547 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.22267.48523 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kc3om-00037W-S0; Mon, 09 Nov 2020 09:50:32 +0000
+	id 1kc3og-00033A-CX; Mon, 09 Nov 2020 09:50:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 22269.48547; Mon, 09 Nov 2020 09:50:32 +0000
+Received: by outflank-mailman (output) from mailman id 22267.48523; Mon, 09 Nov 2020 09:50:26 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,45 +38,43 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kc3om-00037L-P0; Mon, 09 Nov 2020 09:50:32 +0000
-Received: by outflank-mailman (input) for mailman id 22269;
- Mon, 09 Nov 2020 09:50:31 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kc3og-000333-8v; Mon, 09 Nov 2020 09:50:26 +0000
+Received: by outflank-mailman (input) for mailman id 22267;
+ Mon, 09 Nov 2020 09:50:25 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=sEkb=EP=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kc3ok-00032y-UC
- for xen-devel@lists.xenproject.org; Mon, 09 Nov 2020 09:50:30 +0000
+ id 1kc3of-00032t-7a
+ for xen-devel@lists.xenproject.org; Mon, 09 Nov 2020 09:50:25 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 73627980-4f17-4a32-8c9f-f9554f50e3a6;
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id b17111e1-d52a-4b74-9f3c-d5d1117e0620;
  Mon, 09 Nov 2020 09:50:24 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id AAA75AC23;
+ by mx2.suse.de (Postfix) with ESMTP id AA563AC1F;
  Mon,  9 Nov 2020 09:50:23 +0000 (UTC)
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=sEkb=EP=suse.com=jgross@srs-us1.protection.inumbo.net>)
-	id 1kc3ok-00032y-UC
-	for xen-devel@lists.xenproject.org; Mon, 09 Nov 2020 09:50:30 +0000
-X-Inumbo-ID: 73627980-4f17-4a32-8c9f-f9554f50e3a6
+	id 1kc3of-00032t-7a
+	for xen-devel@lists.xenproject.org; Mon, 09 Nov 2020 09:50:25 +0000
+X-Inumbo-ID: b17111e1-d52a-4b74-9f3c-d5d1117e0620
 Received: from mx2.suse.de (unknown [195.135.220.15])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 73627980-4f17-4a32-8c9f-f9554f50e3a6;
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id b17111e1-d52a-4b74-9f3c-d5d1117e0620;
 	Mon, 09 Nov 2020 09:50:24 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	t=1604915423;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=1OcADNeqtn5le1IW034CfnSXJe+7ZXbQ3qogiKRAU7Y=;
-	b=U584MBYlyKA0OmO+EmQRpJWo3L6D/lC8U9IOmHtAp+DfmcF7sHcckrOBXW5j73Dj/CNL8H
-	JxejBerXqH53Nfby8wCmFQa0d5wqFUjEdmM24QOY1UWJ4OipRn0ZbZGdMqiZFJu6tXsVWV
-	MF2SZMlAuDBx0XMRyEWC8P3zomCk7Aw=
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=FbiVz3bZ42jiEwvKXSrzs/ujY9m/oaZbmYcqH7Jl2W8=;
+	b=LJ+u9AbRSLGFjuUb5obEL4y/43RnWgWBmG3ijmXb/e8qP06iCqhDaUUPiKOjquPY49bRer
+	BjNSX6RpDozboTHDXnWP3KfBtkQjDYj3Jk8vNNnDZtRBWXUJXl924XEWBkbcV3RF5MMNas
+	KLTEMlY9VSF2F8azRD5v99Zwwsl2m/M=
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id AAA75AC23;
+	by mx2.suse.de (Postfix) with ESMTP id AA563AC1F;
 	Mon,  9 Nov 2020 09:50:23 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
@@ -85,137 +83,42 @@ Cc: Juergen Gross <jgross@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v4 1/3] xen/x86: add nmi continuation framework
-Date: Mon,  9 Nov 2020 10:50:19 +0100
-Message-Id: <20201109095021.9897-2-jgross@suse.com>
+Subject: [PATCH v4 0/3] xen/x86: implement NMI continuation
+Date: Mon,  9 Nov 2020 10:50:18 +0100
+Message-Id: <20201109095021.9897-1-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20201109095021.9897-1-jgross@suse.com>
-References: <20201109095021.9897-1-jgross@suse.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Actions in NMI context are rather limited as e.g. locking is rather
-fragile.
+Move sending of a virq event for oprofile to the local vcpu from NMI
+to normal interrupt context.
 
-Add a framework to continue processing in normal interrupt context
-after leaving NMI processing.
+This has been tested with a small test patch using the continuation
+framework of patch 1 for all NMIs and doing a print to console in
+the continuation handler.
 
-This is done by a high priority interrupt vector triggered via a
-self IPI from NMI context, which will then call the continuation
-function specified during NMI handling.
+Version 1 of this small series was sent to the security list before.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
-V4:
-- make the framework less generic
+Changes in V3:
+- switched to self-IPI instead of softirq
+- added patch 3
 
-V2:
-- add prototype for continuation function (Roger Pau Monné)
-- switch from softirq to explicit self-IPI (Jan Beulich)
+Changes in V4:
+- use less generic approach
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
- xen/arch/x86/apic.c       | 13 ++++++++++---
- xen/arch/x86/traps.c      | 19 +++++++++++++++++++
- xen/include/asm-x86/nmi.h | 11 ++++++++++-
- 3 files changed, 39 insertions(+), 4 deletions(-)
+Juergen Gross (3):
+  xen/x86: add nmi continuation framework
+  xen/oprofile: use NMI continuation for sending virq to guest
+  xen/x86: issue pci_serr error message via NMI continuation
 
-diff --git a/xen/arch/x86/apic.c b/xen/arch/x86/apic.c
-index 60627fd6e6..7497ddb5da 100644
---- a/xen/arch/x86/apic.c
-+++ b/xen/arch/x86/apic.c
-@@ -40,6 +40,7 @@
- #include <irq_vectors.h>
- #include <xen/kexec.h>
- #include <asm/guest.h>
-+#include <asm/nmi.h>
- #include <asm/time.h>
- 
- static bool __read_mostly tdt_enabled;
-@@ -1376,16 +1377,22 @@ void spurious_interrupt(struct cpu_user_regs *regs)
- {
-     /*
-      * Check if this is a vectored interrupt (most likely, as this is probably
--     * a request to dump local CPU state). Vectored interrupts are ACKed;
--     * spurious interrupts are not.
-+     * a request to dump local CPU state or to continue NMI handling).
-+     * Vectored interrupts are ACKed; spurious interrupts are not.
-      */
-     if (apic_isr_read(SPURIOUS_APIC_VECTOR)) {
-+        bool is_spurious;
-+
-         ack_APIC_irq();
-+        is_spurious = !nmi_check_continuation();
-         if (this_cpu(state_dump_pending)) {
-             this_cpu(state_dump_pending) = false;
-             dump_execstate(regs);
--            return;
-+            is_spurious = false;
-         }
-+
-+        if ( !is_spurious )
-+            return;
-     }
- 
-     /* see sw-dev-man vol 3, chapter 7.4.13.5 */
-diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
-index bc5b8f8ea3..5005ac6e6e 100644
---- a/xen/arch/x86/traps.c
-+++ b/xen/arch/x86/traps.c
-@@ -79,6 +79,7 @@
- #include <public/hvm/params.h>
- #include <asm/cpuid.h>
- #include <xsm/xsm.h>
-+#include <asm/mach-default/irq_vectors.h>
- #include <asm/pv/traps.h>
- #include <asm/pv/mm.h>
- 
-@@ -1799,6 +1800,24 @@ void unset_nmi_callback(void)
-     nmi_callback = dummy_nmi_callback;
- }
- 
-+bool nmi_check_continuation(void)
-+{
-+    bool ret = false;
-+
-+    return ret;
-+}
-+
-+void trigger_nmi_continuation(void)
-+{
-+    /*
-+     * Issue a self-IPI. Handling is done in spurious_interrupt().
-+     * NMI could have happened in IPI sequence, so wait for ICR being idle
-+     * again before leaving NMI handler.
-+     */
-+    send_IPI_self(SPURIOUS_APIC_VECTOR);
-+    apic_wait_icr_idle();
-+}
-+
- void do_device_not_available(struct cpu_user_regs *regs)
- {
- #ifdef CONFIG_PV
-diff --git a/xen/include/asm-x86/nmi.h b/xen/include/asm-x86/nmi.h
-index a288f02a50..9a5da14162 100644
---- a/xen/include/asm-x86/nmi.h
-+++ b/xen/include/asm-x86/nmi.h
-@@ -33,5 +33,14 @@ nmi_callback_t *set_nmi_callback(nmi_callback_t *callback);
- void unset_nmi_callback(void);
- 
- DECLARE_PER_CPU(unsigned int, nmi_count);
-- 
-+
-+/**
-+ * trigger_nmi_continuation
-+ *
-+ * Schedule continuation to be started in interrupt context after NMI handling.
-+ */
-+void trigger_nmi_continuation(void);
-+
-+/* Check for NMI continuation pending. */
-+bool nmi_check_continuation(void);
- #endif /* ASM_NMI_H */
+ xen/arch/x86/apic.c             | 13 +++++++---
+ xen/arch/x86/oprofile/nmi_int.c | 20 +++++++++++++--
+ xen/arch/x86/traps.c            | 44 ++++++++++++++++++++++++++++-----
+ xen/include/asm-x86/nmi.h       | 11 ++++++++-
+ xen/include/asm-x86/softirq.h   |  5 ++--
+ xen/include/asm-x86/xenoprof.h  |  7 ++++++
+ 6 files changed, 85 insertions(+), 15 deletions(-)
+
 -- 
 2.26.2
 
