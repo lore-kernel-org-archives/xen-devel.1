@@ -2,28 +2,28 @@ Return-Path: <SRS0=Pc9a=EP=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-6.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 44DB6C2D0A3
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2020 09:50:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8DE56C55ABD
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2020 10:23:03 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BB941206ED
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2020 09:50:47 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 17C5C20684
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2020 10:23:02 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="LJ+u9AbR"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BB941206ED
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="aumEm1BQ"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 17C5C20684
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.22267.48523 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.22307.48571 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kc3og-00033A-CX; Mon, 09 Nov 2020 09:50:26 +0000
+	id 1kc4Jp-0006AH-C3; Mon, 09 Nov 2020 10:22:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 22267.48523; Mon, 09 Nov 2020 09:50:26 +0000
+Received: by outflank-mailman (output) from mailman id 22307.48571; Mon, 09 Nov 2020 10:22:37 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,88 +38,132 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kc3og-000333-8v; Mon, 09 Nov 2020 09:50:26 +0000
-Received: by outflank-mailman (input) for mailman id 22267;
- Mon, 09 Nov 2020 09:50:25 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=sEkb=EP=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kc3of-00032t-7a
- for xen-devel@lists.xenproject.org; Mon, 09 Nov 2020 09:50:25 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b17111e1-d52a-4b74-9f3c-d5d1117e0620;
- Mon, 09 Nov 2020 09:50:24 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id AA563AC1F;
- Mon,  9 Nov 2020 09:50:23 +0000 (UTC)
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kc4Jp-0006AA-8n; Mon, 09 Nov 2020 10:22:37 +0000
+Received: by outflank-mailman (input) for mailman id 22307;
+ Mon, 09 Nov 2020 10:22:36 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=jc/Q=EP=redhat.com=stefanha@srs-us1.protection.inumbo.net>)
+ id 1kc4Jo-0006A5-4l
+ for xen-devel@lists.xenproject.org; Mon, 09 Nov 2020 10:22:36 +0000
+Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id 6052f51f-325e-4601-9439-fd8f5ad07eed;
+ Mon, 09 Nov 2020 10:22:34 +0000 (UTC)
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-41-I_sUUytpNla_sXK2O1mUPw-1; Mon, 09 Nov 2020 05:22:29 -0500
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+ [10.5.11.14])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id C02131084C8F;
+ Mon,  9 Nov 2020 10:22:26 +0000 (UTC)
+Received: from localhost (ovpn-114-110.ams2.redhat.com [10.36.114.110])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 4D8985D9DD;
+ Mon,  9 Nov 2020 10:22:10 +0000 (UTC)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=sEkb=EP=suse.com=jgross@srs-us1.protection.inumbo.net>)
-	id 1kc3of-00032t-7a
-	for xen-devel@lists.xenproject.org; Mon, 09 Nov 2020 09:50:25 +0000
-X-Inumbo-ID: b17111e1-d52a-4b74-9f3c-d5d1117e0620
-Received: from mx2.suse.de (unknown [195.135.220.15])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id b17111e1-d52a-4b74-9f3c-d5d1117e0620;
-	Mon, 09 Nov 2020 09:50:24 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1604915423;
+	(envelope-from <SRS0=jc/Q=EP=redhat.com=stefanha@srs-us1.protection.inumbo.net>)
+	id 1kc4Jo-0006A5-4l
+	for xen-devel@lists.xenproject.org; Mon, 09 Nov 2020 10:22:36 +0000
+X-Inumbo-ID: 6052f51f-325e-4601-9439-fd8f5ad07eed
+Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+	id 6052f51f-325e-4601-9439-fd8f5ad07eed;
+	Mon, 09 Nov 2020 10:22:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1604917353;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=FbiVz3bZ42jiEwvKXSrzs/ujY9m/oaZbmYcqH7Jl2W8=;
-	b=LJ+u9AbRSLGFjuUb5obEL4y/43RnWgWBmG3ijmXb/e8qP06iCqhDaUUPiKOjquPY49bRer
-	BjNSX6RpDozboTHDXnWP3KfBtkQjDYj3Jk8vNNnDZtRBWXUJXl924XEWBkbcV3RF5MMNas
-	KLTEMlY9VSF2F8azRD5v99Zwwsl2m/M=
-Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id AA563AC1F;
-	Mon,  9 Nov 2020 09:50:23 +0000 (UTC)
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v4 0/3] xen/x86: implement NMI continuation
-Date: Mon,  9 Nov 2020 10:50:18 +0100
-Message-Id: <20201109095021.9897-1-jgross@suse.com>
-X-Mailer: git-send-email 2.26.2
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=fvP8UJpz4riRKthWscMZ00xlDbEYu80keBJwGqqSMOE=;
+	b=aumEm1BQiWsEY/9fPJkWEcC+J3tNGAuuStz1sz061yEn2cbmbE/xFVOJ0/mGqOBUTvLMbj
+	XEvSqdnEm9L0mVzFmax2+VHoPXRso+cA4kGUdLuLVB5WgcvvkchfZl6Pv+ab1WvXk2Tb1/
+	kSgQDJadu/MUnB7XVvQEB0sbQGrp/mw=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-41-I_sUUytpNla_sXK2O1mUPw-1; Mon, 09 Nov 2020 05:22:29 -0500
+X-MC-Unique: I_sUUytpNla_sXK2O1mUPw-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com [10.5.11.14])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id C02131084C8F;
+	Mon,  9 Nov 2020 10:22:26 +0000 (UTC)
+Received: from localhost (ovpn-114-110.ams2.redhat.com [10.36.114.110])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id 4D8985D9DD;
+	Mon,  9 Nov 2020 10:22:10 +0000 (UTC)
+Date: Mon, 9 Nov 2020 10:22:09 +0000
+From: Stefan Hajnoczi <stefanha@redhat.com>
+To: Christoph Hellwig <hch@lst.de>
+Cc: Jens Axboe <axboe@kernel.dk>, Justin Sanders <justin@coraid.com>,
+	Josef Bacik <josef@toxicpanda.com>,
+	Ilya Dryomov <idryomov@gmail.com>,
+	Jack Wang <jinpu.wang@cloud.ionos.com>,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	Jason Wang <jasowang@redhat.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+	Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>,
+	Minchan Kim <minchan@kernel.org>, Mike Snitzer <snitzer@redhat.com>,
+	Song Liu <song@kernel.org>,
+	"Martin K. Petersen" <martin.petersen@oracle.com>,
+	dm-devel@redhat.com, linux-block@vger.kernel.org,
+	drbd-dev@lists.linbit.com, nbd@other.debian.org,
+	ceph-devel@vger.kernel.org, xen-devel@lists.xenproject.org,
+	linux-raid@vger.kernel.org, linux-nvme@lists.infradead.org,
+	linux-scsi@vger.kernel.org, linux-fsdevel@vger.kernel.org
+Subject: Re: [PATCH 23/24] virtio-blk: remove a spurious call to
+ revalidate_disk_size
+Message-ID: <20201109102209.GF783516@stefanha-x1.localdomain>
+References: <20201106190337.1973127-1-hch@lst.de>
+ <20201106190337.1973127-24-hch@lst.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20201106190337.1973127-24-hch@lst.de>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+Authentication-Results: relay.mimecast.com;
+	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=stefanha@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="7cm2iqirTL37Ot+N"
+Content-Disposition: inline
 
-Move sending of a virq event for oprofile to the local vcpu from NMI
-to normal interrupt context.
+--7cm2iqirTL37Ot+N
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-This has been tested with a small test patch using the continuation
-framework of patch 1 for all NMIs and doing a print to console in
-the continuation handler.
+On Fri, Nov 06, 2020 at 08:03:35PM +0100, Christoph Hellwig wrote:
+> revalidate_disk_size just updates the block device size from the disk
+> size.  Thus calling it from revalidate_disk_size doesn't actually do
+> anything.
+>=20
+> Signed-off-by: Christoph Hellwig <hch@lst.de>
+> ---
+>  drivers/block/virtio_blk.c | 1 -
+>  1 file changed, 1 deletion(-)
 
-Version 1 of this small series was sent to the security list before.
+Modulo Paolo's comment:
 
-Changes in V3:
-- switched to self-IPI instead of softirq
-- added patch 3
+Acked-by: Stefan Hajnoczi <stefanha@redhat.com>
 
-Changes in V4:
-- use less generic approach
+--7cm2iqirTL37Ot+N
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Juergen Gross (3):
-  xen/x86: add nmi continuation framework
-  xen/oprofile: use NMI continuation for sending virq to guest
-  xen/x86: issue pci_serr error message via NMI continuation
+-----BEGIN PGP SIGNATURE-----
 
- xen/arch/x86/apic.c             | 13 +++++++---
- xen/arch/x86/oprofile/nmi_int.c | 20 +++++++++++++--
- xen/arch/x86/traps.c            | 44 ++++++++++++++++++++++++++++-----
- xen/include/asm-x86/nmi.h       | 11 ++++++++-
- xen/include/asm-x86/softirq.h   |  5 ++--
- xen/include/asm-x86/xenoprof.h  |  7 ++++++
- 6 files changed, 85 insertions(+), 15 deletions(-)
+iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAl+pGFEACgkQnKSrs4Gr
+c8hPvggAiEUoB55Y2NWYKmWp20Pqz66o8MfxgXahkbbIj6hWGOJZ5M8cZD5dmb6h
+xlDynJx6PzDey/2EstgMWAWpt5QFnKiPDSY+t/UjxpkAXqacgWSnNXhedkDGlczW
+4LP5GspHB7zun1KHAcMpcXo6Uet85t5RPsKZqqkp1hRsIMjzKScj4Kan0b65BS0V
+J6vUVDQnwVqn8DI38Ebm0r6TWG3PorXZ/SanjhCB9wbuGw3dX6X9aAk2XY8Ybwa6
+34P5kZN1RxaqPNFYU0r3gcIWvi8CdCB6XE1Q4OM0ahxmoN4Y4pJcGA0XDZI1N7ei
+35TRtk3FCvvJK8X13zk4enPGeLZiYQ==
+=JdMU
+-----END PGP SIGNATURE-----
 
--- 
-2.26.2
+--7cm2iqirTL37Ot+N--
 
 
