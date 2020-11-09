@@ -2,28 +2,29 @@ Return-Path: <SRS0=Pc9a=EP=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5CB1DC2D0A3
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2020 12:04:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 33976C56201
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2020 12:51:01 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C389E20789
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2020 12:04:45 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id B34A2207BC
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2020 12:51:00 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="gPnVfG4m"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C389E20789
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="WWIUxIat"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B34A2207BC
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.22442.48748 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.22469.48806 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kc5uS-000815-5T; Mon, 09 Nov 2020 12:04:32 +0000
+	id 1kc6dI-00042q-SL; Mon, 09 Nov 2020 12:50:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 22442.48748; Mon, 09 Nov 2020 12:04:32 +0000
+Received: by outflank-mailman (output) from mailman id 22469.48806; Mon, 09 Nov 2020 12:50:52 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,96 +39,222 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kc5uS-00080y-2d; Mon, 09 Nov 2020 12:04:32 +0000
-Received: by outflank-mailman (input) for mailman id 22442;
- Mon, 09 Nov 2020 12:04:31 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=5wB/=EP=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1kc5uQ-00080t-UQ
- for xen-devel@lists.xenproject.org; Mon, 09 Nov 2020 12:04:31 +0000
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 3aa2d892-0ce4-4532-8e64-ea4ae77dfc23;
- Mon, 09 Nov 2020 12:04:30 +0000 (UTC)
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1kc5uP-0003ow-PA; Mon, 09 Nov 2020 12:04:29 +0000
-Received: from 54-240-197-230.amazon.com ([54.240.197.230]
- helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1kc5uP-0004Gd-Ha; Mon, 09 Nov 2020 12:04:29 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+	id 1kc6dI-00042f-NV; Mon, 09 Nov 2020 12:50:52 +0000
+Received: by outflank-mailman (input) for mailman id 22469;
+ Mon, 09 Nov 2020 12:50:51 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=zl3J=EP=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
+ id 1kc6dH-0003tf-GO
+ for xen-devel@lists.xenproject.org; Mon, 09 Nov 2020 12:50:51 +0000
+Received: from mail-lj1-x244.google.com (unknown [2a00:1450:4864:20::244])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id a51ad763-8346-45f2-a425-f8c9c9eb7af3;
+ Mon, 09 Nov 2020 12:50:38 +0000 (UTC)
+Received: by mail-lj1-x244.google.com with SMTP id y25so9221562lja.9
+ for <xen-devel@lists.xenproject.org>; Mon, 09 Nov 2020 04:50:38 -0800 (PST)
+Received: from a2klaptop.localdomain ([185.199.97.5])
+ by smtp.gmail.com with ESMTPSA id i1sm1736447lfr.176.2020.11.09.04.50.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 09 Nov 2020 04:50:36 -0800 (PST)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=5wB/=EP=xen.org=julien@srs-us1.protection.inumbo.net>)
-	id 1kc5uQ-00080t-UQ
-	for xen-devel@lists.xenproject.org; Mon, 09 Nov 2020 12:04:31 +0000
-X-Inumbo-ID: 3aa2d892-0ce4-4532-8e64-ea4ae77dfc23
-Received: from mail.xenproject.org (unknown [104.130.215.37])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 3aa2d892-0ce4-4532-8e64-ea4ae77dfc23;
-	Mon, 09 Nov 2020 12:04:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=UdtPmwE9gqG0N+a8baZ0Ckhctdo1DjlL50gRRn6LQIk=; b=gPnVfG4m8BamYNYvctZijbMowS
-	xHSDKehEGPzpMZHG9y/CWOczPtJbbMZP+q9z7pcvQjCTagQTYgRg3NCdkAcV0XhYvzguE9MS6TsuW
-	kQnQpewrA9NCpKyr2UNbN3JaMNl0KKlklDaIbf/sm7EGnSl8BLmcEtRwfJKa/qb/ST94=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
-	by mail.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <julien@xen.org>)
-	id 1kc5uP-0003ow-PA; Mon, 09 Nov 2020 12:04:29 +0000
-Received: from 54-240-197-230.amazon.com ([54.240.197.230] helo=a483e7b01a66.ant.amazon.com)
-	by xenbits.xenproject.org with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
-	(Exim 4.92)
-	(envelope-from <julien@xen.org>)
-	id 1kc5uP-0004Gd-Ha; Mon, 09 Nov 2020 12:04:29 +0000
-Subject: Re: [PATCH] xen/arm: Add Cortex-A73 erratum 858921 workaround
-To: Penny Zheng <penny.zheng@arm.com>, xen-devel@lists.xenproject.org,
- sstabellini@kernel.org
-Cc: Andre.Przywara@arm.com, Bertrand.Marquis@arm.com, Wei.Chen@arm.com,
- Kaly.Xin@arm.com, nd@arm.com
-References: <20201109082110.1133996-1-penny.zheng@arm.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <cfa63398-8182-b79f-1602-ed068e2319ad@xen.org>
-Date: Mon, 9 Nov 2020 12:04:27 +0000
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.4.0
-MIME-Version: 1.0
-In-Reply-To: <20201109082110.1133996-1-penny.zheng@arm.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+	(envelope-from <SRS0=zl3J=EP=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
+	id 1kc6dH-0003tf-GO
+	for xen-devel@lists.xenproject.org; Mon, 09 Nov 2020 12:50:51 +0000
+X-Inumbo-ID: a51ad763-8346-45f2-a425-f8c9c9eb7af3
+Received: from mail-lj1-x244.google.com (unknown [2a00:1450:4864:20::244])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id a51ad763-8346-45f2-a425-f8c9c9eb7af3;
+	Mon, 09 Nov 2020 12:50:38 +0000 (UTC)
+Received: by mail-lj1-x244.google.com with SMTP id y25so9221562lja.9
+        for <xen-devel@lists.xenproject.org>; Mon, 09 Nov 2020 04:50:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references;
+        bh=7Mun79oNB4+e5ttsNU806SzMPrzXSy2ZLLighcxfMfY=;
+        b=WWIUxIatMUUQ/JCfsQDdZYnmWvE8T2h2OJYWDZzrFG0esbosTsAYeB4Q+V8boBfWVh
+         +qDaIT+FtaVwJz540oMHyEzAJazvA3r80XjsSxFlmi+VVHqSc6uwgYLsT4v88nlj6K+0
+         dSs66fjRUduKWocG6OrWGyX28LuDGQcuX0uzIzb/Iq0lYHZzvuHBAK4fneo9aafA5e5q
+         elPLqZjK0gViriEOHK6HHLTzIvf5JWKlsFUM5+IJGACKSA3WGiyu7/gTmz963wusTJ+p
+         SU1D6b7iwR9IN4g6c4eLX6Cy2g6XsdcnqmzAH8rlK2CqqCYedBWywIMrVpBBP+gJ7Z6x
+         lSGA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references;
+        bh=7Mun79oNB4+e5ttsNU806SzMPrzXSy2ZLLighcxfMfY=;
+        b=D72ikbGeU1SsPiJgZF6MpbY+RmhTdxoeLVTJRRhzr/yAWpTWf3x7c1CtQH7+QKAHd4
+         0+/WMp0QD+4xeMz6/eGxD9TXoznpiTVxk6cFnexU4saJjlkqHotS2lvEpzScdKf8wB1H
+         tgjdSW2W3wjG2oGhpmmnoo5N73mhNmR6SMQgqTkT9BgHRUmF/UkzJgVAfWguoszGsbWA
+         2ZwasWvEcB2ezIsNuzxaVe285cgCHxCT43XuO2BcgT9TJUK63CbCly2vxNoL9Wt80Sjh
+         WF37nTSXT1QeaaWeCh0BeHzXoQSE/DNvNFtE2P5KAkscxHXIHX+s9+Nl9mwYqoGNoY+J
+         QV4Q==
+X-Gm-Message-State: AOAM531gVoEMnUBIX4QeZ3uFrKtwRFX8ygQ6Hpcb13smXxfs849wX5L6
+	40VKD3/Py85Wra9V59u44MY=
+X-Google-Smtp-Source: ABdhPJyQgmzrX5saLyJOhkpBy66jZinX+gIfrfFvi2zgYffNfrppcrxhlT7B3mFNp8jlF7tFrs9X4Q==
+X-Received: by 2002:a05:651c:2db:: with SMTP id f27mr5734043ljo.394.1604926237424;
+        Mon, 09 Nov 2020 04:50:37 -0800 (PST)
+Received: from a2klaptop.localdomain ([185.199.97.5])
+        by smtp.gmail.com with ESMTPSA id i1sm1736447lfr.176.2020.11.09.04.50.36
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 09 Nov 2020 04:50:36 -0800 (PST)
+From: Oleksandr Andrushchenko <andr2000@gmail.com>
+To: Rahul.Singh@arm.com,
+	Bertrand.Marquis@arm.com,
+	julien.grall@arm.com,
+	jbeulich@suse.com,
+	roger.pau@citrix.com,
+	sstabellini@kernel.org,
+	xen-devel@lists.xenproject.org
+Cc: iwj@xenproject.org,
+	wl@xen.org,
+	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+Subject: [PATCH 03/10] xen/arm: Setup MMIO range trap handlers for hardware domain
+Date: Mon,  9 Nov 2020 14:50:24 +0200
+Message-Id: <20201109125031.26409-4-andr2000@gmail.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20201109125031.26409-1-andr2000@gmail.com>
+References: <20201109125031.26409-1-andr2000@gmail.com>
 
-Hi,
+From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 
-On 09/11/2020 08:21, Penny Zheng wrote:
-> CNTVCT_EL0 or CNTPCT_EL0 counter read in Cortex-A73 (all versions)
-> might return a wrong value when the counter crosses a 32bit boundary.
-> 
-> Until now, there is no case for Xen itself to access CNTVCT_EL0,
-> and it also should be the Guest OS's responsibility to deal with
-> this part.
-> 
-> But for CNTPCT, there exists several cases in Xen involving reading
-> CNTPCT, so a possible workaround is that performing the read twice,
-> and to return one or the other depending on whether a transition has
-> taken place.
-> 
-> Signed-off-by: Penny Zheng <penny.zheng@arm.com>
+In order vPCI to work it needs all access to PCI configuration space
+access to be synchronized among all entities, e.g. hardware domain and
+guests. For that implement PCI host bridge specific callbacks to
+propelry setup those ranges depending on host bridge implementation.
 
-Acked-by: Julien Grall <jgrall@amazon.com>
+This callback is optional and may not be used by non-ECAM host bridges.
 
-On a related topic, do we need a fix similar to Linux commit 
-75a19a0202db "arm64: arch_timer: Ensure counter register reads occur 
-with seqlock held"?
+Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+---
+ xen/arch/arm/pci/pci-host-common.c  | 16 ++++++++++++++++
+ xen/arch/arm/pci/pci-host-generic.c | 15 +++++++++++++--
+ xen/arch/arm/vpci.c                 | 16 +++++++++++++++-
+ xen/include/asm-arm/pci.h           |  7 +++++++
+ 4 files changed, 51 insertions(+), 3 deletions(-)
 
-Cheers,
-
+diff --git a/xen/arch/arm/pci/pci-host-common.c b/xen/arch/arm/pci/pci-host-common.c
+index b011c7eff3c8..b81184d34980 100644
+--- a/xen/arch/arm/pci/pci-host-common.c
++++ b/xen/arch/arm/pci/pci-host-common.c
+@@ -219,6 +219,22 @@ struct device *pci_find_host_bridge_device(struct device *dev)
+     }
+     return dt_to_dev(bridge->dt_node);
+ }
++
++int pci_host_iterate_bridges(struct domain *d,
++                             int (*clb)(struct domain *d,
++                                        struct pci_host_bridge *bridge))
++{
++    struct pci_host_bridge *bridge;
++    int err;
++
++    list_for_each_entry( bridge, &pci_host_bridges, node )
++    {
++        err = clb(d, bridge);
++        if ( err )
++            return err;
++    }
++    return 0;
++}
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/pci/pci-host-generic.c b/xen/arch/arm/pci/pci-host-generic.c
+index 54dd123e95c7..469df3da0116 100644
+--- a/xen/arch/arm/pci/pci-host-generic.c
++++ b/xen/arch/arm/pci/pci-host-generic.c
+@@ -85,12 +85,23 @@ int pci_ecam_config_read(struct pci_host_bridge *bridge, uint32_t sbdf,
+     return 0;
+ }
+ 
++static int pci_ecam_register_mmio_handler(struct domain *d,
++                                          struct pci_host_bridge *bridge,
++                                          const struct mmio_handler_ops *ops)
++{
++    struct pci_config_window *cfg = bridge->sysdata;
++
++    register_mmio_handler(d, ops, cfg->phys_addr, cfg->size, NULL);
++    return 0;
++}
++
+ /* ECAM ops */
+ struct pci_ecam_ops pci_generic_ecam_ops = {
+     .bus_shift  = 20,
+     .pci_ops    = {
+-        .read       = pci_ecam_config_read,
+-        .write      = pci_ecam_config_write,
++        .read                  = pci_ecam_config_read,
++        .write                 = pci_ecam_config_write,
++        .register_mmio_handler = pci_ecam_register_mmio_handler,
+     }
+ };
+ 
+diff --git a/xen/arch/arm/vpci.c b/xen/arch/arm/vpci.c
+index 49e473ab0d10..2b9bf34c8fe6 100644
+--- a/xen/arch/arm/vpci.c
++++ b/xen/arch/arm/vpci.c
+@@ -80,11 +80,25 @@ static const struct mmio_handler_ops vpci_mmio_handler = {
+     .write = vpci_mmio_write,
+ };
+ 
++static int vpci_setup_mmio_handler(struct domain *d,
++                                   struct pci_host_bridge *bridge)
++{
++    if ( bridge->ops->register_mmio_handler )
++        return bridge->ops->register_mmio_handler(d, bridge,
++                                                  &vpci_mmio_handler);
++    return 0;
++}
++
++
+ int domain_vpci_init(struct domain *d)
+ {
+-    if ( !has_vpci(d) || is_hardware_domain(d) )
++    if ( !has_vpci(d) )
+         return 0;
+ 
++    if ( is_hardware_domain(d) )
++        return pci_host_iterate_bridges(d, vpci_setup_mmio_handler);
++
++    /* Guest domains use what is programmed in their device tree. */
+     register_mmio_handler(d, &vpci_mmio_handler,
+             GUEST_VPCI_ECAM_BASE,GUEST_VPCI_ECAM_SIZE,NULL);
+ 
+diff --git a/xen/include/asm-arm/pci.h b/xen/include/asm-arm/pci.h
+index ba23178f67ab..e3a02429b8d4 100644
+--- a/xen/include/asm-arm/pci.h
++++ b/xen/include/asm-arm/pci.h
+@@ -27,6 +27,7 @@
+ #include <xen/pci.h>
+ #include <xen/device_tree.h>
+ #include <asm/device.h>
++#include <asm/mmio.h>
+ 
+ #ifdef CONFIG_ARM_PCI
+ 
+@@ -64,6 +65,9 @@ struct pci_ops {
+                     uint32_t sbdf, int where, int size, u32 *val);
+     int (*write)(struct pci_host_bridge *bridge,
+                     uint32_t sbdf, int where, int size, u32 val);
++    int (*register_mmio_handler)(struct domain *d,
++                                 struct pci_host_bridge *bridge,
++                                 const struct mmio_handler_ops *ops);
+ };
+ 
+ /*
+@@ -101,6 +105,9 @@ void pci_init(void);
+ bool dt_pci_parse_bus_range(struct dt_device_node *dev,
+                             struct pci_config_window *cfg);
+ 
++int pci_host_iterate_bridges(struct domain *d,
++                             int (*clb)(struct domain *d,
++                                        struct pci_host_bridge *bridge));
+ #else   /*!CONFIG_ARM_PCI*/
+ struct arch_pci_dev { };
+ static inline void  pci_init(void) { }
 -- 
-Julien Grall
+2.17.1
+
 
