@@ -2,26 +2,28 @@ Return-Path: <SRS0=Pc9a=EP=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EE965C4741F
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2020 10:33:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 30B3AC2D0A3
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2020 10:45:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A0E6D2083B
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2020 10:33:07 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A0E6D2083B
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.de
+	by mail.kernel.org (Postfix) with ESMTPS id A3175206E3
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2020 10:45:39 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="XbsA+exQ"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A3175206E3
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.22325.48594 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.22345.48619 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kc4Tk-0007FU-P4; Mon, 09 Nov 2020 10:32:52 +0000
+	id 1kc4fn-0008Nn-DJ; Mon, 09 Nov 2020 10:45:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 22325.48594; Mon, 09 Nov 2020 10:32:52 +0000
+Received: by outflank-mailman (output) from mailman id 22345.48619; Mon, 09 Nov 2020 10:45:19 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,205 +38,140 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kc4Tk-0007FN-M5; Mon, 09 Nov 2020 10:32:52 +0000
-Received: by outflank-mailman (input) for mailman id 22325;
- Mon, 09 Nov 2020 10:32:52 +0000
+	id 1kc4fn-0008Ng-9j; Mon, 09 Nov 2020 10:45:19 +0000
+Received: by outflank-mailman (input) for mailman id 22345;
+ Mon, 09 Nov 2020 10:45:18 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Jo29=EP=suse.de=tzimmermann@srs-us1.protection.inumbo.net>)
- id 1kc4Tk-0007FD-5T
- for xen-devel@lists.xenproject.org; Mon, 09 Nov 2020 10:32:52 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 06e358e3-e257-4d15-ab94-04882179fdd5;
- Mon, 09 Nov 2020 10:32:50 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id D074DAC1F;
- Mon,  9 Nov 2020 10:32:49 +0000 (UTC)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=FQmy=EP=redhat.com=cohuck@srs-us1.protection.inumbo.net>)
+ id 1kc4fm-0008Nb-2Y
+ for xen-devel@lists.xenproject.org; Mon, 09 Nov 2020 10:45:18 +0000
+Received: from us-smtp-delivery-124.mimecast.com (unknown [63.128.21.124])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id 740bdb85-0db7-485f-bd18-b02b4fd1cc68;
+ Mon, 09 Nov 2020 10:45:17 +0000 (UTC)
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-58-bZouaZUZO4upuVnTmkfAdA-1; Mon, 09 Nov 2020 05:45:13 -0500
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id B25E2186840C;
+ Mon,  9 Nov 2020 10:45:11 +0000 (UTC)
+Received: from gondolin (ovpn-113-28.ams2.redhat.com [10.36.113.28])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id D14D075125;
+ Mon,  9 Nov 2020 10:44:57 +0000 (UTC)
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=Jo29=EP=suse.de=tzimmermann@srs-us1.protection.inumbo.net>)
-	id 1kc4Tk-0007FD-5T
-	for xen-devel@lists.xenproject.org; Mon, 09 Nov 2020 10:32:52 +0000
-X-Inumbo-ID: 06e358e3-e257-4d15-ab94-04882179fdd5
-Received: from mx2.suse.de (unknown [195.135.220.15])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 06e358e3-e257-4d15-ab94-04882179fdd5;
-	Mon, 09 Nov 2020 10:32:50 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id D074DAC1F;
-	Mon,  9 Nov 2020 10:32:49 +0000 (UTC)
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: daniel@ffwll.ch,
-	airlied@linux.ie,
-	chunkuang.hu@kernel.org,
-	p.zabel@pengutronix.de,
-	robdclark@gmail.com,
-	sean@poorly.run
-Cc: linux-arm-msm@vger.kernel.org,
-	freedreno@lists.freedesktop.org,
-	dri-devel@lists.freedesktop.org,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Dave Airlie <airlied@redhat.com>,
-	Lucas Stach <l.stach@pengutronix.de>,
-	Russell King <linux+etnaviv@armlinux.org.uk>,
-	Christian Gmeiner <christian.gmeiner@gmail.com>,
-	Qiang Yu <yuq825@gmail.com>,
-	Ben Skeggs <bskeggs@redhat.com>,
-	Rob Herring <robh@kernel.org>,
-	Tomeu Vizoso <tomeu.vizoso@collabora.com>,
-	Steven Price <steven.price@arm.com>,
-	Alyssa Rosenzweig <alyssa.rosenzweig@collabora.com>,
-	Gerd Hoffmann <kraxel@redhat.com>,
-	Alex Deucher <alexander.deucher@amd.com>,
-	Sandy Huang <hjc@rock-chips.com>,
-	=?UTF-8?q?Heiko=20St=C3=BCbner?= <heiko@sntech.de>,
-	Hans de Goede <hdegoede@redhat.com>,
-	Eric Anholt <eric@anholt.net>,
-	Rodrigo Siqueira <rodrigosiqueiramelo@gmail.com>,
-	Melissa Wen <melissa.srw@gmail.com>,
-	Haneen Mohammed <hamohammed.sa@gmail.com>,
-	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	Emil Velikov <emil.velikov@collabora.com>,
-	Luben Tuikov <luben.tuikov@amd.com>,
-	Marek Szyprowski <m.szyprowski@samsung.com>,
-	Arunpravin <apaneers@amd.com>,
-	Huang Rui <ray.huang@amd.com>,
-	Madhav Chauhan <madhav.chauhan@amd.com>,
-	Jason Gunthorpe <jgg@ziepe.ca>,
-	Sam Ravnborg <sam@ravnborg.org>,
-	Chris Wilson <chris@chris-wilson.co.uk>,
-	Qinglang Miao <miaoqinglang@huawei.com>,
-	etnaviv@lists.freedesktop.org,
-	lima@lists.freedesktop.org,
-	nouveau@lists.freedesktop.org,
-	virtualization@lists.linux-foundation.org,
-	spice-devel@lists.freedesktop.org,
-	amd-gfx@lists.freedesktop.org,
-	linux-arm-kernel@lists.infradead.org,
-	linux-rockchip@lists.infradead.org,
-	xen-devel@lists.xenproject.org
-Subject: [PATCH 1/2] drm/msm: Use struct dma_buf_map in GEM vmap ops
-Date: Mon,  9 Nov 2020 11:32:41 +0100
-Message-Id: <20201109103242.19544-2-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.29.2
-In-Reply-To: <20201109103242.19544-1-tzimmermann@suse.de>
-References: <20201109103242.19544-1-tzimmermann@suse.de>
+	(envelope-from <SRS0=FQmy=EP=redhat.com=cohuck@srs-us1.protection.inumbo.net>)
+	id 1kc4fm-0008Nb-2Y
+	for xen-devel@lists.xenproject.org; Mon, 09 Nov 2020 10:45:18 +0000
+X-Inumbo-ID: 740bdb85-0db7-485f-bd18-b02b4fd1cc68
+Received: from us-smtp-delivery-124.mimecast.com (unknown [63.128.21.124])
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+	id 740bdb85-0db7-485f-bd18-b02b4fd1cc68;
+	Mon, 09 Nov 2020 10:45:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1604918717;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=IvovXvGi96RLS5Xlxa3vEz79xbJKjbaUI17fwHflXc8=;
+	b=XbsA+exQ94ZZYCdC/P/uCt2BeIesqg78v3cNrf70OAAc/ogSrJ7z5HCo8lmXw35X1qtW0c
+	qZmBqKltzxrajZ5nVjfbHTN0ubdlMK7/p1W3KfIIY5qOgKtDp5SIQ32d8zmJkjbcXwSnjz
+	tTy+ZUjt4pScsVB7l48JrdJ26640gD8=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-58-bZouaZUZO4upuVnTmkfAdA-1; Mon, 09 Nov 2020 05:45:13 -0500
+X-MC-Unique: bZouaZUZO4upuVnTmkfAdA-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com [10.5.11.15])
+	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mimecast-mx01.redhat.com (Postfix) with ESMTPS id B25E2186840C;
+	Mon,  9 Nov 2020 10:45:11 +0000 (UTC)
+Received: from gondolin (ovpn-113-28.ams2.redhat.com [10.36.113.28])
+	by smtp.corp.redhat.com (Postfix) with ESMTP id D14D075125;
+	Mon,  9 Nov 2020 10:44:57 +0000 (UTC)
+Date: Mon, 9 Nov 2020 11:44:55 +0100
+From: Cornelia Huck <cohuck@redhat.com>
+To: Eduardo Habkost <ehabkost@redhat.com>
+Cc: qemu-devel@nongnu.org, Igor Mammedov <imammedo@redhat.com>, "Daniel P.
+ Berrange" <berrange@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Stefan Berger <stefanb@linux.vnet.ibm.com>, Stefano Stabellini
+ <sstabellini@kernel.org>, Anthony Perard <anthony.perard@citrix.com>, Paul
+ Durrant <paul@xen.org>, Kevin Wolf <kwolf@redhat.com>, Max Reitz
+ <mreitz@redhat.com>, Richard Henderson <rth@twiddle.net>, David Hildenbrand
+ <david@redhat.com>, Thomas Huth <thuth@redhat.com>, Halil Pasic
+ <pasic@linux.ibm.com>, Christian Borntraeger <borntraeger@de.ibm.com>,
+ Matthew Rosato <mjrosato@linux.ibm.com>, Alex Williamson
+ <alex.williamson@redhat.com>, Mark Cave-Ayland
+ <mark.cave-ayland@ilande.co.uk>, Artyom Tarasenko <atar4qemu@gmail.com>,
+ xen-devel@lists.xenproject.org, qemu-block@nongnu.org,
+ qemu-s390x@nongnu.org
+Subject: Re: [PATCH 4/7] qom: Replace void* parameter with Property* on
+ field getters/setters
+Message-ID: <20201109114455.2eb0fabd.cohuck@redhat.com>
+In-Reply-To: <20201104172512.2381656-5-ehabkost@redhat.com>
+References: <20201104172512.2381656-1-ehabkost@redhat.com>
+	<20201104172512.2381656-5-ehabkost@redhat.com>
+Organization: Red Hat GmbH
 MIME-Version: 1.0
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+Authentication-Results: relay.mimecast.com;
+	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=cohuck@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 
-Fixes a build failure with msm.
+On Wed,  4 Nov 2020 12:25:09 -0500
+Eduardo Habkost <ehabkost@redhat.com> wrote:
 
-This change was supposed to be part of commit 49a3f51dfeee ("drm/gem:
-Use struct dma_buf_map in GEM vmap ops and convert GEM backends"), but
-msm was forgotten.
+> All field property getters and setters must interpret the fourth
+> argument as Property*.  Change the function signature of field
+> property getters and setters to indicate that.
+>=20
+> Signed-off-by: Eduardo Habkost <ehabkost@redhat.com>
+> ---
+> Cc: Stefan Berger <stefanb@linux.vnet.ibm.com>
+> Cc: Stefano Stabellini <sstabellini@kernel.org>
+> Cc: Anthony Perard <anthony.perard@citrix.com>
+> Cc: Paul Durrant <paul@xen.org>
+> Cc: Kevin Wolf <kwolf@redhat.com>
+> Cc: Max Reitz <mreitz@redhat.com>
+> Cc: Paolo Bonzini <pbonzini@redhat.com>
+> Cc: "Daniel P. Berrang=C3=A9" <berrange@redhat.com>
+> Cc: Eduardo Habkost <ehabkost@redhat.com>
+> Cc: Richard Henderson <rth@twiddle.net>
+> Cc: David Hildenbrand <david@redhat.com>
+> Cc: Cornelia Huck <cohuck@redhat.com>
+> Cc: Thomas Huth <thuth@redhat.com>
+> Cc: Halil Pasic <pasic@linux.ibm.com>
+> Cc: Christian Borntraeger <borntraeger@de.ibm.com>
+> Cc: Matthew Rosato <mjrosato@linux.ibm.com>
+> Cc: Alex Williamson <alex.williamson@redhat.com>
+> Cc: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
+> Cc: Artyom Tarasenko <atar4qemu@gmail.com>
+> Cc: qemu-devel@nongnu.org
+> Cc: xen-devel@lists.xenproject.org
+> Cc: qemu-block@nongnu.org
+> Cc: qemu-s390x@nongnu.org
+> ---
+>  include/qom/field-property-internal.h |   8 +-
+>  include/qom/field-property.h          |  26 ++++---
+>  backends/tpm/tpm_util.c               |  11 ++-
+>  hw/block/xen-block.c                  |   6 +-
+>  hw/core/qdev-properties-system.c      |  86 +++++++++-------------
+>  hw/s390x/css.c                        |   6 +-
+>  hw/s390x/s390-pci-bus.c               |   6 +-
+>  hw/vfio/pci-quirks.c                  |  10 +--
+>  qom/property-types.c                  | 102 +++++++++-----------------
+>  target/sparc/cpu.c                    |   4 +-
+>  10 files changed, 105 insertions(+), 160 deletions(-)
 
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-Fixes: 49a3f51dfeee ("drm/gem: Use struct dma_buf_map in GEM vmap ops and convert GEM backends")
-Cc: Thomas Zimmermann <tzimmermann@suse.de>
-Cc: Christian König <christian.koenig@amd.com>
-Cc: David Airlie <airlied@linux.ie>
-Cc: Daniel Vetter <daniel@ffwll.ch>
-Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
-Cc: Maxime Ripard <mripard@kernel.org>
-Cc: Dave Airlie <airlied@redhat.com>
-Cc: Lucas Stach <l.stach@pengutronix.de>
-Cc: Russell King <linux+etnaviv@armlinux.org.uk>
-Cc: Christian Gmeiner <christian.gmeiner@gmail.com>
-Cc: Qiang Yu <yuq825@gmail.com>
-Cc: Ben Skeggs <bskeggs@redhat.com>
-Cc: Rob Herring <robh@kernel.org>
-Cc: Tomeu Vizoso <tomeu.vizoso@collabora.com>
-Cc: Steven Price <steven.price@arm.com>
-Cc: Alyssa Rosenzweig <alyssa.rosenzweig@collabora.com>
-Cc: Gerd Hoffmann <kraxel@redhat.com>
-Cc: Alex Deucher <alexander.deucher@amd.com>
-Cc: "Christian König" <christian.koenig@amd.com>
-Cc: Sandy Huang <hjc@rock-chips.com>
-Cc: "Heiko Stübner" <heiko@sntech.de>
-Cc: Hans de Goede <hdegoede@redhat.com>
-Cc: Sean Paul <sean@poorly.run>
-Cc: Eric Anholt <eric@anholt.net>
-Cc: Rodrigo Siqueira <rodrigosiqueiramelo@gmail.com>
-Cc: Melissa Wen <melissa.srw@gmail.com>
-Cc: Haneen Mohammed <hamohammed.sa@gmail.com>
-Cc: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Cc: Sumit Semwal <sumit.semwal@linaro.org>
-Cc: Emil Velikov <emil.velikov@collabora.com>
-Cc: Luben Tuikov <luben.tuikov@amd.com>
-Cc: Marek Szyprowski <m.szyprowski@samsung.com>
-Cc: Arunpravin <apaneers@amd.com>
-Cc: Huang Rui <ray.huang@amd.com>
-Cc: Madhav Chauhan <madhav.chauhan@amd.com>
-Cc: Jason Gunthorpe <jgg@ziepe.ca>
-Cc: Sam Ravnborg <sam@ravnborg.org>
-Cc: Chris Wilson <chris@chris-wilson.co.uk>
-Cc: Qinglang Miao <miaoqinglang@huawei.com>
-Cc: dri-devel@lists.freedesktop.org
-Cc: etnaviv@lists.freedesktop.org
-Cc: lima@lists.freedesktop.org
-Cc: nouveau@lists.freedesktop.org
-Cc: virtualization@lists.linux-foundation.org
-Cc: spice-devel@lists.freedesktop.org
-Cc: amd-gfx@lists.freedesktop.org
-Cc: linux-arm-kernel@lists.infradead.org
-Cc: linux-rockchip@lists.infradead.org
-Cc: xen-devel@lists.xenproject.org
----
- drivers/gpu/drm/msm/msm_drv.h       |  4 ++--
- drivers/gpu/drm/msm/msm_gem_prime.c | 13 ++++++++++---
- 2 files changed, 12 insertions(+), 5 deletions(-)
-
-diff --git a/drivers/gpu/drm/msm/msm_drv.h b/drivers/gpu/drm/msm/msm_drv.h
-index c45789f36e48..a6aef687bc6e 100644
---- a/drivers/gpu/drm/msm/msm_drv.h
-+++ b/drivers/gpu/drm/msm/msm_drv.h
-@@ -295,8 +295,8 @@ int msm_gem_dumb_create(struct drm_file *file, struct drm_device *dev,
- int msm_gem_dumb_map_offset(struct drm_file *file, struct drm_device *dev,
- 		uint32_t handle, uint64_t *offset);
- struct sg_table *msm_gem_prime_get_sg_table(struct drm_gem_object *obj);
--void *msm_gem_prime_vmap(struct drm_gem_object *obj);
--void msm_gem_prime_vunmap(struct drm_gem_object *obj, void *vaddr);
-+int msm_gem_prime_vmap(struct drm_gem_object *obj, struct dma_buf_map *map);
-+void msm_gem_prime_vunmap(struct drm_gem_object *obj, struct dma_buf_map *map);
- int msm_gem_prime_mmap(struct drm_gem_object *obj, struct vm_area_struct *vma);
- struct drm_gem_object *msm_gem_prime_import_sg_table(struct drm_device *dev,
- 		struct dma_buf_attachment *attach, struct sg_table *sg);
-diff --git a/drivers/gpu/drm/msm/msm_gem_prime.c b/drivers/gpu/drm/msm/msm_gem_prime.c
-index 515ef80816a0..9880348a4dc7 100644
---- a/drivers/gpu/drm/msm/msm_gem_prime.c
-+++ b/drivers/gpu/drm/msm/msm_gem_prime.c
-@@ -22,12 +22,19 @@ struct sg_table *msm_gem_prime_get_sg_table(struct drm_gem_object *obj)
- 	return drm_prime_pages_to_sg(obj->dev, msm_obj->pages, npages);
- }
- 
--void *msm_gem_prime_vmap(struct drm_gem_object *obj)
-+int msm_gem_prime_vmap(struct drm_gem_object *obj, struct dma_buf_map *map)
- {
--	return msm_gem_get_vaddr(obj);
-+	void *vaddr;
-+
-+	vaddr = msm_gem_get_vaddr(obj);
-+	if (IS_ERR(vaddr))
-+		return PTR_ERR(vaddr);
-+	dma_buf_map_set_vaddr(map, vaddr);
-+
-+	return 0;
- }
- 
--void msm_gem_prime_vunmap(struct drm_gem_object *obj, void *vaddr)
-+void msm_gem_prime_vunmap(struct drm_gem_object *obj, struct dma_buf_map *map)
- {
- 	msm_gem_put_vaddr(obj);
- }
--- 
-2.29.2
+Acked-by: Cornelia Huck <cohuck@redhat.com>
 
 
