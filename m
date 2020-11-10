@@ -2,28 +2,29 @@ Return-Path: <SRS0=BOky=EQ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.1 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 135CFC55ABD
-	for <xen-devel@archiver.kernel.org>; Tue, 10 Nov 2020 19:23:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 57015C55ABD
+	for <xen-devel@archiver.kernel.org>; Tue, 10 Nov 2020 19:45:09 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 80D422064B
-	for <xen-devel@archiver.kernel.org>; Tue, 10 Nov 2020 19:23:51 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id DBA3D20639
+	for <xen-devel@archiver.kernel.org>; Tue, 10 Nov 2020 19:45:08 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="eiSuFCpk"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 80D422064B
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linaro.org
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Ou3d8sk7"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DBA3D20639
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.23886.50851 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.23911.50886 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kcZEn-0007GH-5U; Tue, 10 Nov 2020 19:23:29 +0000
+	id 1kcZZS-0000uK-8G; Tue, 10 Nov 2020 19:44:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 23886.50851; Tue, 10 Nov 2020 19:23:29 +0000
+Received: by outflank-mailman (output) from mailman id 23911.50886; Tue, 10 Nov 2020 19:44:50 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,116 +39,141 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kcZEn-0007GA-2Z; Tue, 10 Nov 2020 19:23:29 +0000
-Received: by outflank-mailman (input) for mailman id 23886;
- Tue, 10 Nov 2020 19:23:28 +0000
+	id 1kcZZS-0000uD-4z; Tue, 10 Nov 2020 19:44:50 +0000
+Received: by outflank-mailman (input) for mailman id 23911;
+ Tue, 10 Nov 2020 19:44:48 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=bdNS=EQ=linaro.org=alex.bennee@srs-us1.protection.inumbo.net>)
- id 1kcZEm-0007Fc-6C
- for xen-devel@lists.xenproject.org; Tue, 10 Nov 2020 19:23:28 +0000
-Received: from mail-wr1-x433.google.com (unknown [2a00:1450:4864:20::433])
+ <SRS0=BlNO=EQ=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
+ id 1kcZZP-0000u8-V6
+ for xen-devel@lists.xenproject.org; Tue, 10 Nov 2020 19:44:48 +0000
+Received: from mail-lj1-x244.google.com (unknown [2a00:1450:4864:20::244])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 5c8ec26c-d7cf-4a93-beb5-ec25070f65b1;
- Tue, 10 Nov 2020 19:23:27 +0000 (UTC)
-Received: by mail-wr1-x433.google.com with SMTP id b8so13989111wrn.0
- for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2020 11:23:27 -0800 (PST)
-Received: from zen.linaroharston ([51.148.130.216])
- by smtp.gmail.com with ESMTPSA id c62sm3929964wme.22.2020.11.10.11.23.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Nov 2020 11:23:22 -0800 (PST)
-Received: from zen.lan (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id A08201FF90;
- Tue, 10 Nov 2020 19:23:16 +0000 (GMT)
+ id d402c991-56f3-4249-882a-27b27dcd0b60;
+ Tue, 10 Nov 2020 19:44:46 +0000 (UTC)
+Received: by mail-lj1-x244.google.com with SMTP id o24so9439933ljj.6
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2020 11:44:46 -0800 (PST)
+Received: from [192.168.1.7] ([212.22.223.21])
+ by smtp.gmail.com with ESMTPSA id a1sm2199762lfg.282.2020.11.10.11.44.44
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 10 Nov 2020 11:44:45 -0800 (PST)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=bdNS=EQ=linaro.org=alex.bennee@srs-us1.protection.inumbo.net>)
-	id 1kcZEm-0007Fc-6C
-	for xen-devel@lists.xenproject.org; Tue, 10 Nov 2020 19:23:28 +0000
-X-Inumbo-ID: 5c8ec26c-d7cf-4a93-beb5-ec25070f65b1
-Received: from mail-wr1-x433.google.com (unknown [2a00:1450:4864:20::433])
+	(envelope-from <SRS0=BlNO=EQ=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
+	id 1kcZZP-0000u8-V6
+	for xen-devel@lists.xenproject.org; Tue, 10 Nov 2020 19:44:48 +0000
+X-Inumbo-ID: d402c991-56f3-4249-882a-27b27dcd0b60
+Received: from mail-lj1-x244.google.com (unknown [2a00:1450:4864:20::244])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 5c8ec26c-d7cf-4a93-beb5-ec25070f65b1;
-	Tue, 10 Nov 2020 19:23:27 +0000 (UTC)
-Received: by mail-wr1-x433.google.com with SMTP id b8so13989111wrn.0
-        for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2020 11:23:27 -0800 (PST)
+	id d402c991-56f3-4249-882a-27b27dcd0b60;
+	Tue, 10 Nov 2020 19:44:46 +0000 (UTC)
+Received: by mail-lj1-x244.google.com with SMTP id o24so9439933ljj.6
+        for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2020 11:44:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=gBkEgjV7awvtEg/RUlUyLYVtc42f18uJSH1j4TZVeBA=;
-        b=eiSuFCpkFUCvuaKxPzO1vnOi1gud/W7G7GTv6WfIN6CALMklhYzvmAaHZGhY9HIZf5
-         WqKRHudZ8IL+U8FIve9wdULV/KdmA1+R64lV9664NK5ozYDA3vYtGs8eBmpJm0u6D1Zr
-         E841WUtTp0iCQNT0qvBF+bVffGVzntKBWuWdM05af4wouBq0nvSPL7rR76rYmsVQU8Rk
-         KqrZGfdDQcegSk4rz/jnXjh+dcwIYVznj0IKuKwYwDgLN1dhNVZTiTCKFNeFnByFGfec
-         ESHxG7w8B1UAdhKgGRN56Dh4C61M3dcDUFBuWsiDvOK6+AeCdnlxAVOwaBuPrGl99mvW
-         SxQg==
+        d=gmail.com; s=20161025;
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-transfer-encoding:content-language;
+        bh=Ijt0C6F19hg6tRiJ0CIaXs4iO2mhbcftXqOZOihG6X4=;
+        b=Ou3d8sk7kgCk4cWeFoZO2+Nd72Qw0VXLPPuGQ8Pg2WjRzJwaFf9yXYZiBp6xUFJHiw
+         FTDlHPmMnJ6+QVBYxv6Pf+vfFc1rm8UchkZ4WweOusXxs7En8GB1qNSl+FDMLuiBTde5
+         AZhW6+8VLKtX+ks3xF/lu5e0RLE+CNbmatGGbuHwsIzoZR5RGmH6NltDRQM710zDTP33
+         padiT1EQscePqN8Yc/bIQ81FF9WEnpESJnSp1gmlOHlM4Rg8KD+VQYCSJugbOJYY3oXP
+         3hsGPtwkUTU28Z8HJepRlwxSzjCgW4YKUrgLp7iQt9G2IZJTxdPmHa71lkGdja0j+rTz
+         rIoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=gBkEgjV7awvtEg/RUlUyLYVtc42f18uJSH1j4TZVeBA=;
-        b=qh4CveKIHfrHJfCXBQWeg+HmDsKHnxdBXBb4kw66P5WwJd1zvRtEC8cYHLXfjFDbW9
-         U2G50ixLjlx6QSDCDgWX6OJf4pBo5DDtYsUgqneUqkCgsF71Yk9H9IHpSo23U4Goyi++
-         Cvohh+QCdTCRk0jOvWL72ijLT7L0hOo7Ud+EsWD/18efCNfa6dM+aweMezB1C/QexTt1
-         vulWyqFMBt2AyBGxDk56IaR3as81gEn9dgaPFkC3oFLfyrvjlsWusSLOMu0m5mYymJw0
-         rKo7c4Y99ayv05hd2oFUcb3W9tD3qpBXy0B6ae2LqVTrSO/wQXjQJOD0ZgTcRSKxtG29
-         JKUg==
-X-Gm-Message-State: AOAM5339mDZ3a3lnIe7s7CdP5IlJzJLDjKdE04+DMO76l8BT6oDD2jr8
-	ch5+mFxFX0C2eJy/FGAskSYJRw==
-X-Google-Smtp-Source: ABdhPJxa3cy975GPrMS66E+XZOpqdG7rl0e9DLYbMS13M4jWqT5KLVU3E0q/DBVsCPGl9Li+10Sakw==
-X-Received: by 2002:a5d:474f:: with SMTP id o15mr24752225wrs.377.1605036206523;
-        Tue, 10 Nov 2020 11:23:26 -0800 (PST)
-Received: from zen.linaroharston ([51.148.130.216])
-        by smtp.gmail.com with ESMTPSA id c62sm3929964wme.22.2020.11.10.11.23.17
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 10 Nov 2020 11:23:22 -0800 (PST)
-Received: from zen.lan (localhost [127.0.0.1])
-	by zen.linaroharston (Postfix) with ESMTP id A08201FF90;
-	Tue, 10 Nov 2020 19:23:16 +0000 (GMT)
-From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: peter.maydell@linaro.org,
-	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
-	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony Perard <anthony.perard@citrix.com>,
-	Paul Durrant <paul@xen.org>,
-	xen-devel@lists.xenproject.org (open list:X86 Xen CPUs)
-Subject: [PATCH  v1 04/10] include/hw/xen.h: drop superfluous struct
-Date: Tue, 10 Nov 2020 19:23:10 +0000
-Message-Id: <20201110192316.26397-5-alex.bennee@linaro.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20201110192316.26397-1-alex.bennee@linaro.org>
-References: <20201110192316.26397-1-alex.bennee@linaro.org>
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-transfer-encoding
+         :content-language;
+        bh=Ijt0C6F19hg6tRiJ0CIaXs4iO2mhbcftXqOZOihG6X4=;
+        b=MKRcAL/Un1Twf/2e9TGdvhVISqCBdwybTqnkGeoC5SUEh5LCb1kxLxoxGk8y5cu6js
+         Se1M2UNyJgjsodVnPaS1QIFJDw1QJZfum38JkP8laNO/PgnZnjUii8tbWy2LRea46zsB
+         JwjjB3mYP621zFaAJcCcbARDNizYb+zf3+LqgvOE1Qz9O1sNjpYQU4rpRDL68r2E5chV
+         7+zLrQ1Plwm8B6FxiPuxWA/lDE0AuJDFR+6dSaGIeyjjiYN7ljXG64MXGRZ5aXN6aVNg
+         i4kGCp+JPiy79LhjODQZW3EIi6tryDZZWrvgCWmWvClSeU2VLPYNxVmc/Jj9AwFTVZb7
+         xRWQ==
+X-Gm-Message-State: AOAM530SUIVw3wBBo/KvsQ8BgI3vp0257vewprX5Ge3UAtppkXuRyY2/
+	vWjevhjRB+OXCrfLyP+4/nw=
+X-Google-Smtp-Source: ABdhPJyFb67nL+yYu4yKth8EwwTZ3tLUl4+VzTos7cV+FXWjm573Pdkd/GIQ40QKk+nXTEOzLZstEw==
+X-Received: by 2002:a2e:8e7b:: with SMTP id t27mr7352667ljk.129.1605037485820;
+        Tue, 10 Nov 2020 11:44:45 -0800 (PST)
+Received: from [192.168.1.7] ([212.22.223.21])
+        by smtp.gmail.com with ESMTPSA id a1sm2199762lfg.282.2020.11.10.11.44.44
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 10 Nov 2020 11:44:45 -0800 (PST)
+Subject: Re: [PATCH V2 04/23] xen/ioreq: Provide alias for the handle_mmio()
+To: paul@xen.org, 'Jan Beulich' <jbeulich@suse.com>
+Cc: xen-devel@lists.xenproject.org,
+ 'Oleksandr Tyshchenko' <oleksandr_tyshchenko@epam.com>,
+ 'Andrew Cooper' <andrew.cooper3@citrix.com>,
+ =?UTF-8?B?J1JvZ2VyIFBhdSBNb25uw6kn?= <roger.pau@citrix.com>,
+ 'Wei Liu' <wl@xen.org>, 'Julien Grall' <julien@xen.org>,
+ 'Stefano Stabellini' <sstabellini@kernel.org>,
+ 'Julien Grall' <julien.grall@arm.com>
+References: <1602780274-29141-1-git-send-email-olekstysh@gmail.com>
+ <1602780274-29141-5-git-send-email-olekstysh@gmail.com>
+ <004701d6a6c1$6c09f860$441de920$@xen.org>
+ <38ba45dd-f1cd-a289-3ea3-75148782e126@suse.com>
+ <004a01d6a6cd$1f4684b0$5dd38e10$@xen.org>
+From: Oleksandr <olekstysh@gmail.com>
+Message-ID: <fab8e4b0-e3b2-fb74-76d4-42753ac88367@gmail.com>
+Date: Tue, 10 Nov 2020 21:44:39 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+In-Reply-To: <004a01d6a6cd$1f4684b0$5dd38e10$@xen.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-Chardev is already a typedef'ed struct.
 
-Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
-Message-Id: <20201105175153.30489-12-alex.bennee@linaro.org>
-Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
----
- include/hw/xen/xen.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On 20.10.20 13:38, Paul Durrant wrote:
 
-diff --git a/include/hw/xen/xen.h b/include/hw/xen/xen.h
-index 1406648ca5..0f9962b1c1 100644
---- a/include/hw/xen/xen.h
-+++ b/include/hw/xen/xen.h
-@@ -28,7 +28,7 @@ int xen_is_pirq_msi(uint32_t msi_data);
- 
- qemu_irq *xen_interrupt_controller_init(void);
- 
--void xenstore_store_pv_console_info(int i, struct Chardev *chr);
-+void xenstore_store_pv_console_info(int i, Chardev *chr);
- 
- void xen_register_framebuffer(struct MemoryRegion *mr);
- 
+Hi Jan, Paul
+
+Sorry for the late response.
+
+>> -----Original Message-----
+>> From: Jan Beulich <jbeulich@suse.com>
+>> Sent: 20 October 2020 11:05
+>> To: paul@xen.org
+>> Cc: 'Oleksandr Tyshchenko' <olekstysh@gmail.com>; xen-devel@lists.xenproject.org; 'Oleksandr
+>> Tyshchenko' <oleksandr_tyshchenko@epam.com>; 'Andrew Cooper' <andrew.cooper3@citrix.com>; 'Roger Pau
+>> Monné' <roger.pau@citrix.com>; 'Wei Liu' <wl@xen.org>; 'Julien Grall' <julien@xen.org>; 'Stefano
+>> Stabellini' <sstabellini@kernel.org>; 'Julien Grall' <julien.grall@arm.com>
+>> Subject: Re: [PATCH V2 04/23] xen/ioreq: Provide alias for the handle_mmio()
+>>
+>> On 20.10.2020 11:14, Paul Durrant wrote:
+>>>> From: Xen-devel <xen-devel-bounces@lists.xenproject.org> On Behalf Of Oleksandr Tyshchenko
+>>>> Sent: 15 October 2020 17:44
+>>>>
+>>>> --- a/xen/include/asm-x86/hvm/ioreq.h
+>>>> +++ b/xen/include/asm-x86/hvm/ioreq.h
+>>>> @@ -181,6 +181,8 @@ static inline bool arch_hvm_ioreq_destroy(struct domain *d)
+>>>>   #define IOREQ_STATUS_UNHANDLED   X86EMUL_UNHANDLEABLE
+>>>>   #define IOREQ_STATUS_RETRY       X86EMUL_RETRY
+>>>>
+>>>> +#define ioreq_complete_mmio   handle_mmio
+>>>> +
+>>> A #define? Really? Can we not have a static inline?
+>> I guess this would require further shuffling: handle_mmio() is
+>> an inline function in hvm/emulate.h, and hvm/ioreq.h has no
+>> need to include the former (and imo it also shouldn't have).
+>>
+> I see. I think we need an x86 ioreq.c anyway, to deal with the legacy use of magic pages, so it could be dealt with there instead.
+I am afraid I don't entirely understand the required changes. Could you 
+please clarify where the "inline(?)" ioreq_complete_mmio() should
+live? I included hvm/emulate.h here not for the "handle_mmio()" reason 
+only, but for "struct hvm_emulate_ctxt" also (see arch_io_completion()).
+
+
+But, if we return x86 ioreq.c back I can move arch_io_completion() to it 
+as well as "non-online" ioreq_complete_mmio().
+This will avoid including hvm/emulate.h here. Or I missed something?
+
 -- 
-2.20.1
+Regards,
+
+Oleksandr Tyshchenko
 
 
