@@ -2,28 +2,28 @@ Return-Path: <SRS0=BOky=EQ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-5.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 845DEC388F7
-	for <xen-devel@archiver.kernel.org>; Tue, 10 Nov 2020 07:40:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AD8D2C388F7
+	for <xen-devel@archiver.kernel.org>; Tue, 10 Nov 2020 07:47:23 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DEBB42064B
-	for <xen-devel@archiver.kernel.org>; Tue, 10 Nov 2020 07:40:07 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 3E70720795
+	for <xen-devel@archiver.kernel.org>; Tue, 10 Nov 2020 07:47:23 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="b5MeNwLY"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DEBB42064B
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="fTNc12UH"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3E70720795
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.23051.49603 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.23059.49616 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kcOFs-0002Nz-9L; Tue, 10 Nov 2020 07:39:52 +0000
+	id 1kcOMu-0003H2-2T; Tue, 10 Nov 2020 07:47:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 23051.49603; Tue, 10 Nov 2020 07:39:52 +0000
+Received: by outflank-mailman (output) from mailman id 23059.49616; Tue, 10 Nov 2020 07:47:08 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,136 +38,89 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kcOFs-0002Ns-6J; Tue, 10 Nov 2020 07:39:52 +0000
-Received: by outflank-mailman (input) for mailman id 23051;
- Tue, 10 Nov 2020 07:39:51 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kcOMt-0003Gv-VZ; Tue, 10 Nov 2020 07:47:07 +0000
+Received: by outflank-mailman (input) for mailman id 23059;
+ Tue, 10 Nov 2020 07:47:06 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=xL7T=EQ=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kcOFr-0002Nh-DR
- for xen-devel@lists.xenproject.org; Tue, 10 Nov 2020 07:39:51 +0000
+ id 1kcOMs-0003Gq-Q3
+ for xen-devel@lists.xenproject.org; Tue, 10 Nov 2020 07:47:06 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 4baaee4d-5979-4ae7-bf05-fc1b7b705e92;
- Tue, 10 Nov 2020 07:39:50 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id ae7978aa-92ac-41df-a13f-da2be41ea121;
+ Tue, 10 Nov 2020 07:47:04 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 56DB8ABCC;
- Tue, 10 Nov 2020 07:39:49 +0000 (UTC)
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by mx2.suse.de (Postfix) with ESMTP id E47F3ABD1;
+ Tue, 10 Nov 2020 07:47:03 +0000 (UTC)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=xL7T=EQ=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
-	id 1kcOFr-0002Nh-DR
-	for xen-devel@lists.xenproject.org; Tue, 10 Nov 2020 07:39:51 +0000
-X-Inumbo-ID: 4baaee4d-5979-4ae7-bf05-fc1b7b705e92
+	id 1kcOMs-0003Gq-Q3
+	for xen-devel@lists.xenproject.org; Tue, 10 Nov 2020 07:47:06 +0000
+X-Inumbo-ID: ae7978aa-92ac-41df-a13f-da2be41ea121
 Received: from mx2.suse.de (unknown [195.135.220.15])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 4baaee4d-5979-4ae7-bf05-fc1b7b705e92;
-	Tue, 10 Nov 2020 07:39:50 +0000 (UTC)
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id ae7978aa-92ac-41df-a13f-da2be41ea121;
+	Tue, 10 Nov 2020 07:47:04 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1604993989;
+	t=1604994424;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=11Eat1GBxVk81WcVBoKQDb7ycMBDADa+6Y7+6MYaXKA=;
-	b=b5MeNwLYgCX1cSA0BQJIpWkgtPjmx9L3FTfc7IfiUgS1xF57ASNEdQq/O/ZIshRwpFsn/x
-	/WR0hzlfoSX7aPuxZjE065p1a/5UTSSN6yN9guUaPoLPnzK+F6kcqtecwfuWiDLshLjGUf
-	3icnnm5wEfOZIAKoI10WQG7d4D0ZVE8=
+	bh=4grvy2Vd+XHhnHogizLT8Lx1VH01gIHDPhnAecCkrks=;
+	b=fTNc12UHVdBYeUrKwnUK0ecM6ZU87oTpw3snqC/auXwDo5Wun5TfvO0qInzxH+htVXfK3E
+	SJKev/f6nHsGfry4yf0wMnueXTEMVAg9StOQ9gX+3oJOVM88fRxwFGQTgjzaLwZ891WyW9
+	/VhCLL6LcPKICFIAvIdStiuStPd/050=
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 56DB8ABCC;
-	Tue, 10 Nov 2020 07:39:49 +0000 (UTC)
-Subject: Re: [PATCH v6 2/3] xen/evtchn: rework per event channel lock
-To: Julien Grall <julien@xen.org>
-Cc: Wei Liu <wl@xen.org>, George Dunlap <george.dunlap@citrix.com>,
- Ian Jackson <iwj@xenproject.org>, Stefano Stabellini
- <sstabellini@kernel.org>, xen-devel@lists.xenproject.org,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Juergen Gross <jgross@suse.com>
-References: <20201109163826.13035-1-jgross@suse.com>
- <20201109163826.13035-3-jgross@suse.com>
- <f64158af-3468-053f-7cbe-d52ab01b8bfc@suse.com>
- <7858513b-2938-5bad-0c9e-167a8472656f@xen.org>
+	by mx2.suse.de (Postfix) with ESMTP id E47F3ABD1;
+	Tue, 10 Nov 2020 07:47:03 +0000 (UTC)
+Subject: Re: Tools backport request for Xen 4.14
+To: Ian Jackson <iwj@xenproject.org>
+Cc: Julien Grall <julien@xen.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>, ba1020@protonmail.ch,
+ Elliott Mitchell <ehem+xen@m5p.com>
+References: <54fcf6ea-f400-c96a-cde6-4f55f909c2d6@xen.org>
+ <20201009184930.GA65219@mattapan.m5p.com>
+ <24489.33893.98470.334969@mariner.uk.xensource.com>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <c1e02f02-dfdd-33f1-0881-8632ddcba158@suse.com>
-Date: Tue, 10 Nov 2020 08:39:49 +0100
+Message-ID: <0b675d88-9586-e590-2ea4-18dfe931d638@suse.com>
+Date: Tue, 10 Nov 2020 08:47:03 +0100
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.4.1
 MIME-Version: 1.0
-In-Reply-To: <7858513b-2938-5bad-0c9e-167a8472656f@xen.org>
+In-Reply-To: <24489.33893.98470.334969@mariner.uk.xensource.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
-On 09.11.2020 18:46, Julien Grall wrote:
-> Hi,
-> 
-> On 09/11/2020 16:48, Jan Beulich wrote:
->> On 09.11.2020 17:38, Juergen Gross wrote:
->>> Currently the lock for a single event channel needs to be taken with
->>> interrupts off, which causes deadlocks in some cases.
+On 09.11.2020 19:03, Ian Jackson wrote:
+> Elliott Mitchell writes ("Re: Tools backport request for Xen 4.14"):
+>> On Fri, Oct 09, 2020 at 06:47:22PM +0100, Julien Grall wrote:
+>>> Would it be possible to consider backporting to 4.14 the following tools 
+>>> commit:
 >>>
->>> Rework the per event channel lock to be non-blocking for the case of
->>> sending an event and removing the need for disabling interrupts for
->>> taking the lock.
+>>> d25cc3ec93eb "libxl: workaround gcc 10.2 maybe-uninitialized warning"
 >>>
->>> The lock is needed for avoiding races between event channel state
->>> changes (creation, closing, binding) against normal operations (set
->>> pending, [un]masking, priority changes).
->>>
->>> Use a rwlock, but with some restrictions:
->>>
->>> - Changing the state of an event channel (creation, closing, binding)
->>>    needs to use write_lock(), with ASSERT()ing that the lock is taken as
->>>    writer only when the state of the event channel is either before or
->>>    after the locked region appropriate (either free or unbound).
->>>
->>> - Sending an event needs to use read_trylock() mostly, in case of not
->>>    obtaining the lock the operation is omitted. This is needed as
->>>    sending an event can happen with interrupts off (at least in some
->>>    cases).
->>>
->>> - Dumping the event channel state for debug purposes is using
->>>    read_trylock(), too, in order to avoid blocking in case the lock is
->>>    taken as writer for a long time.
->>>
->>> - All other cases can use read_lock().
->>>
->>> Fixes: e045199c7c9c54 ("evtchn: address races with evtchn_reset()")
->>> Signed-off-by: Juergen Gross <jgross@suse.com>
->>> ---
->>> V4:
->>> - switch to rwlock
->>> - add ASSERT() to verify correct write_lock() usage
->>>
->>> V3:
->>> - corrected a copy-and-paste error (Jan Beulich)
->>> - corrected unlocking in two cases (Jan Beulich)
->>> - renamed evtchn_read_trylock() (Jan Beulich)
->>> - added some comments and an ASSERT() for evtchn_write_lock()
->>> - set EVENT_WRITE_LOCK_INC to INT_MIN
->>>
->>> V2:
->>> - added needed barriers
->>>
->>> Signed-off-by: Juergen Gross <jgross@suse.com>
+>>> This would help to build Xen tools on Debian Testing with GCC 10. I 
+>>> haven't build itself myself, so I can't promise this is only one :).
 >>
->> Reviewed-by: Jan Beulich <jbeulich@suse.com>
+>> >From Debian's repository:
+>> https://salsa.debian.org/xen-team/debian-xen.git
 >>
->> I'll give it overnight for others to possibly comment, but I'd
->> like to get this in tomorrow if at all possible.
+>> The master and knorrie/4.14 branches include that commit.  They will
+>> hopefully soon include all the Debian-specific bits for cross-building
+>> too.
 > 
-> IIRC, Citrix originally reported the issues. I would like to give them 
-> an opportunity to test the patches and confirm this effectively fixed 
-> there issues.
+> I have now backported all of the GCC10 fixes to all the supported Xen
+> branches (ie back to 4.12).
 
-I would consider waiting longer, but I'd like to get staging unblocked.
-Just like with 52e1fc47abc3a0123 ("evtchn/Flask: pre-allocate node on
-send path") we can always decide to revert / fix up afterwards. The
-patch here surely is an improvement, even if it was to turn out it
-doesn't fix all issues yes. I'd appreciate if you would confirm you
-don't object to the patch going in - I'll wait a few more hours,
-perhaps until around noon.
+Just to clarify: 4.12 is only security supported at this point, from
+all I can tell.
 
 Jan
 
