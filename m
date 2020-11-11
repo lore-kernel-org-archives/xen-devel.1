@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ACBA1C56201
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 08:28:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 81679C4742C
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 08:28:08 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3B455206E3
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 08:28:00 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 16C4720756
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 08:28:08 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="Ls58rLr6"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3B455206E3
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="WGdyaw45"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 16C4720756
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.24370.51607 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.24373.51619 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kclTs-0002xG-Ao; Wed, 11 Nov 2020 08:27:52 +0000
+	id 1kclTx-00033N-Mg; Wed, 11 Nov 2020 08:27:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 24370.51607; Wed, 11 Nov 2020 08:27:52 +0000
+Received: by outflank-mailman (output) from mailman id 24373.51619; Wed, 11 Nov 2020 08:27:57 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kclTs-0002x8-70; Wed, 11 Nov 2020 08:27:52 +0000
-Received: by outflank-mailman (input) for mailman id 24370;
- Wed, 11 Nov 2020 08:27:51 +0000
+	id 1kclTx-00033B-Iv; Wed, 11 Nov 2020 08:27:57 +0000
+Received: by outflank-mailman (input) for mailman id 24373;
+ Wed, 11 Nov 2020 08:27:56 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=kJD9=ER=casper.srs.infradead.org=batv+33c89f8a75624a8d62ce+6289+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1kclTr-0002dF-HG
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 08:27:51 +0000
+ id 1kclTw-0002dF-HY
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 08:27:56 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id e1d9a267-22c6-41c1-b11d-53cc22540c4e;
+ id 3d3112db-b4f2-48cc-9d40-273a2ad080a5;
  Wed, 11 Nov 2020 08:27:25 +0000 (UTC)
 Received: from [2001:4bb8:180:6600:bcde:334f:863c:27b8] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kclT6-0007Zx-Ef; Wed, 11 Nov 2020 08:27:04 +0000
+ id 1kclT3-0007Ze-1h; Wed, 11 Nov 2020 08:27:01 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=kJD9=ER=casper.srs.infradead.org=batv+33c89f8a75624a8d62ce+6289+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1kclTr-0002dF-HG
-	for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 08:27:51 +0000
-X-Inumbo-ID: e1d9a267-22c6-41c1-b11d-53cc22540c4e
+	id 1kclTw-0002dF-HY
+	for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 08:27:56 +0000
+X-Inumbo-ID: 3d3112db-b4f2-48cc-9d40-273a2ad080a5
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id e1d9a267-22c6-41c1-b11d-53cc22540c4e;
+	id 3d3112db-b4f2-48cc-9d40-273a2ad080a5;
 	Wed, 11 Nov 2020 08:27:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=5qPdl0lgCEFGJP5lmM9cIt5xVilmdrR4jnFYjPe6Rv8=; b=Ls58rLr6Jmuq6v/NWUCE8TiQve
-	QBjPwhQnxk5CSZDABDmV5Iyu5nLZjZdDmarW2RJ3+wQ5CV5i02GTCtgGza5/Yikfz5DAuG4zguCCG
-	EgI2R68wska0Fvawliu6ZPQh4vTvOEmDa4t/Qtue0sps/HKOLz+4l8CHVpEuyJgxKspc63ZIHdpKU
-	Uq3vr9AJQ5geGGAUVhvBJa5nv2zB+UeNiCzfSwqeiFVJbNutC+jduzyz0hsShH64P+ui1tcelTUh9
-	yk7kRWHvmVGXLbg/oeCZFpx13CQpxXc9aqGPjNAocrsQQUXFrFu2FbaPQL06RNU64LcD6XqJk4iCo
-	SOHcJEpw==;
+	bh=stmwFAlkeYayJwqxLAzxAb5snaHT5ewOrHfW4MD4mwk=; b=WGdyaw45qmIaK2SmatQbzEUT8g
+	sEQj1d8rAjkxLN2VkCVTmqZPll/LHGpxSV/Ir/IILaWgwYuFt2ICDMLJQCEBXEhKh5VnaPge+eYYF
+	IOkQ1MFG821grDHDC93JDllTw4BY36AXV/yFqmryZ3vHvbukA3hGqUm74A8voHvu45uxjEGSyanL7
+	IphCk+rTO/osj709X1NFm11SrN6uOCMdFEiCn4af1goiKlpL+OEwTfsYuGysBGdA57IRinYRl+Iz0
+	iyGlhXels8NLzlL13cFL+YI5aSIARz+l1EkZoUoEk2NSPyid+0DXdQDDf19mhfxK6pCa6I7Rf7UkB
+	L8AvM4RA==;
 Received: from [2001:4bb8:180:6600:bcde:334f:863c:27b8] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1kclT6-0007Zx-Ef; Wed, 11 Nov 2020 08:27:04 +0000
+	id 1kclT3-0007Ze-1h; Wed, 11 Nov 2020 08:27:01 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -102,9 +102,9 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-nvme@lists.infradead.org,
 	linux-scsi@vger.kernel.org,
 	linux-fsdevel@vger.kernel.org
-Subject: [PATCH 04/24] sd: update the bdev size in sd_revalidate_disk
-Date: Wed, 11 Nov 2020 09:26:38 +0100
-Message-Id: <20201111082658.3401686-5-hch@lst.de>
+Subject: [PATCH 01/24] block: remove the call to __invalidate_device in check_disk_size_change
+Date: Wed, 11 Nov 2020 09:26:35 +0100
+Message-Id: <20201111082658.3401686-2-hch@lst.de>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20201111082658.3401686-1-hch@lst.de>
 References: <20201111082658.3401686-1-hch@lst.de>
@@ -112,50 +112,35 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-This avoids the extra call to revalidate_disk_size in sd_rescan and
-is otherwise a no-op because the size did not change, or we are in
-the probe path.
+__invalidate_device without the kill_dirty parameter just invalidates
+various clean entries in caches, which doesn't really help us with
+anything, but can cause all kinds of horrible lock orders due to how
+it calls into the file system.  The only reason this hasn't been a
+major issue is because so many people use partitions, for which no
+invalidation was performed anyway.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
-Acked-by: Martin K. Petersen <martin.petersen@oracle.com>
 ---
- drivers/scsi/sd.c | 8 +++-----
- 1 file changed, 3 insertions(+), 5 deletions(-)
+ fs/block_dev.c | 6 ------
+ 1 file changed, 6 deletions(-)
 
-diff --git a/drivers/scsi/sd.c b/drivers/scsi/sd.c
-index 656bcf4940d6d1..4a34dd5b153196 100644
---- a/drivers/scsi/sd.c
-+++ b/drivers/scsi/sd.c
-@@ -1750,10 +1750,8 @@ static int sd_sync_cache(struct scsi_disk *sdkp, struct scsi_sense_hdr *sshdr)
- static void sd_rescan(struct device *dev)
- {
- 	struct scsi_disk *sdkp = dev_get_drvdata(dev);
--	int ret;
- 
--	ret = sd_revalidate_disk(sdkp->disk);
--	revalidate_disk_size(sdkp->disk, ret == 0);
-+	sd_revalidate_disk(sdkp->disk);
+diff --git a/fs/block_dev.c b/fs/block_dev.c
+index 9e84b1928b9401..66ebf594c97f47 100644
+--- a/fs/block_dev.c
++++ b/fs/block_dev.c
+@@ -1334,12 +1334,6 @@ static void check_disk_size_change(struct gendisk *disk,
+ 		i_size_write(bdev->bd_inode, disk_size);
+ 	}
+ 	spin_unlock(&bdev->bd_size_lock);
+-
+-	if (bdev_size > disk_size) {
+-		if (__invalidate_device(bdev, false))
+-			pr_warn("VFS: busy inodes on resized disk %s\n",
+-				disk->disk_name);
+-	}
  }
  
- static int sd_ioctl(struct block_device *bdev, fmode_t mode,
-@@ -3266,7 +3264,7 @@ static int sd_revalidate_disk(struct gendisk *disk)
- 	sdkp->first_scan = 0;
- 
- 	set_capacity_revalidate_and_notify(disk,
--		logical_to_sectors(sdp, sdkp->capacity), false);
-+		logical_to_sectors(sdp, sdkp->capacity), true);
- 	sd_config_write_same(sdkp);
- 	kfree(buffer);
- 
-@@ -3276,7 +3274,7 @@ static int sd_revalidate_disk(struct gendisk *disk)
- 	 * capacity to 0.
- 	 */
- 	if (sd_zbc_revalidate_zones(sdkp))
--		set_capacity_revalidate_and_notify(disk, 0, false);
-+		set_capacity_revalidate_and_notify(disk, 0, true);
- 
-  out:
- 	return 0;
+ /**
 -- 
 2.28.0
 
