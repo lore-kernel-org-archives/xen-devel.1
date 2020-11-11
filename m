@@ -7,21 +7,21 @@ X-Spam-Status: No, score=-8.3 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 141CBC5517A
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 13:59:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D6FEBC388F9
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 14:00:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A3D6B207BB
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 13:59:50 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A3D6B207BB
+	by mail.kernel.org (Postfix) with ESMTPS id 73D2F20829
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 14:00:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 73D2F20829
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.24830.52276 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.24837.52288 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kcqey-0005lX-Vj; Wed, 11 Nov 2020 13:59:40 +0000
+	id 1kcqfm-0006e0-8e; Wed, 11 Nov 2020 14:00:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 24830.52276; Wed, 11 Nov 2020 13:59:40 +0000
+Received: by outflank-mailman (output) from mailman id 24837.52288; Wed, 11 Nov 2020 14:00:30 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,37 +36,37 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kcqey-0005lP-Sm; Wed, 11 Nov 2020 13:59:40 +0000
-Received: by outflank-mailman (input) for mailman id 24830;
- Wed, 11 Nov 2020 13:59:39 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kcqfm-0006dt-5e; Wed, 11 Nov 2020 14:00:30 +0000
+Received: by outflank-mailman (input) for mailman id 24837;
+ Wed, 11 Nov 2020 14:00:28 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=8Mnv=ER=suse.de=hare@srs-us1.protection.inumbo.net>)
- id 1kcqex-0005hc-9F
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 13:59:39 +0000
+ id 1kcqfk-0006do-H6
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 14:00:28 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 7a728b7d-f5bb-4eda-8835-d0f1462d3ee6;
- Wed, 11 Nov 2020 13:59:38 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 60114471-f7db-4118-9909-ee19c27bd8d9;
+ Wed, 11 Nov 2020 14:00:27 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 8ABF3ABD6;
- Wed, 11 Nov 2020 13:59:37 +0000 (UTC)
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by mx2.suse.de (Postfix) with ESMTP id EB5D2ABD6;
+ Wed, 11 Nov 2020 14:00:26 +0000 (UTC)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=8Mnv=ER=suse.de=hare@srs-us1.protection.inumbo.net>)
-	id 1kcqex-0005hc-9F
-	for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 13:59:39 +0000
-X-Inumbo-ID: 7a728b7d-f5bb-4eda-8835-d0f1462d3ee6
+	id 1kcqfk-0006do-H6
+	for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 14:00:28 +0000
+X-Inumbo-ID: 60114471-f7db-4118-9909-ee19c27bd8d9
 Received: from mx2.suse.de (unknown [195.135.220.15])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 7a728b7d-f5bb-4eda-8835-d0f1462d3ee6;
-	Wed, 11 Nov 2020 13:59:38 +0000 (UTC)
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id 60114471-f7db-4118-9909-ee19c27bd8d9;
+	Wed, 11 Nov 2020 14:00:27 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 8ABF3ABD6;
-	Wed, 11 Nov 2020 13:59:37 +0000 (UTC)
-Subject: Re: [PATCH 15/24] nvme: use set_capacity_and_notify in
- nvme_set_queue_dying
+	by mx2.suse.de (Postfix) with ESMTP id EB5D2ABD6;
+	Wed, 11 Nov 2020 14:00:26 +0000 (UTC)
+Subject: Re: [PATCH 20/24] dm-raid: use set_capacity_and_notify
 To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>, Josef Bacik <josef@toxicpanda.com>,
  Ilya Dryomov <idryomov@gmail.com>, Jack Wang <jinpu.wang@cloud.ionos.com>,
@@ -83,27 +83,26 @@ Cc: Justin Sanders <justin@coraid.com>, Josef Bacik <josef@toxicpanda.com>,
  linux-nvme@lists.infradead.org, linux-scsi@vger.kernel.org,
  linux-fsdevel@vger.kernel.org
 References: <20201111082658.3401686-1-hch@lst.de>
- <20201111082658.3401686-16-hch@lst.de>
+ <20201111082658.3401686-21-hch@lst.de>
 From: Hannes Reinecke <hare@suse.de>
-Message-ID: <878d9852-4b8d-c5a7-36d4-0fda80fd74c4@suse.de>
-Date: Wed, 11 Nov 2020 14:59:36 +0100
+Message-ID: <a9b7c6bc-5496-9489-95f9-f86f63ea2b14@suse.de>
+Date: Wed, 11 Nov 2020 15:00:25 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.4.0
 MIME-Version: 1.0
-In-Reply-To: <20201111082658.3401686-16-hch@lst.de>
+In-Reply-To: <20201111082658.3401686-21-hch@lst.de>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 
 On 11/11/20 9:26 AM, Christoph Hellwig wrote:
-> Use the block layer helper to update both the disk and block device
-> sizes.  Contrary to the name no notification is sent in this case,
-> as a size 0 is special cased.
+> Use set_capacity_and_notify to set the size of both the disk and block
+> device.  This also gets the uevent notifications for the resize for free.
 > 
 > Signed-off-by: Christoph Hellwig <hch@lst.de>
 > ---
->   drivers/nvme/host/core.c | 13 +------------
->   1 file changed, 1 insertion(+), 12 deletions(-)
+>   drivers/md/dm-raid.c | 3 +--
+>   1 file changed, 1 insertion(+), 2 deletions(-)
 > 
 Reviewed-by: Hannes Reinecke <hare@suse.de>
 
