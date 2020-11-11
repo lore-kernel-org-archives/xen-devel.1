@@ -2,28 +2,26 @@ Return-Path: <SRS0=tVq8=ER=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-8.3 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=unavailable
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EC48FC5517A
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 12:45:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 551ABC56201
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 12:46:42 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5567220709
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 12:45:52 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="C7OHBe3m"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5567220709
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id E2E902068D
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 12:46:41 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E2E902068D
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.24713.52080 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.24718.52092 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kcpVG-0005sv-4H; Wed, 11 Nov 2020 12:45:34 +0000
+	id 1kcpWC-00060K-J0; Wed, 11 Nov 2020 12:46:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 24713.52080; Wed, 11 Nov 2020 12:45:34 +0000
+Received: by outflank-mailman (output) from mailman id 24718.52092; Wed, 11 Nov 2020 12:46:32 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,155 +36,87 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kcpVG-0005so-1G; Wed, 11 Nov 2020 12:45:34 +0000
-Received: by outflank-mailman (input) for mailman id 24713;
- Wed, 11 Nov 2020 12:45:32 +0000
+	id 1kcpWC-00060D-G1; Wed, 11 Nov 2020 12:46:32 +0000
+Received: by outflank-mailman (input) for mailman id 24718;
+ Wed, 11 Nov 2020 12:46:31 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ttLz=ER=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1kcpVE-0005sj-Ei
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 12:45:32 +0000
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=8Mnv=ER=suse.de=hare@srs-us1.protection.inumbo.net>)
+ id 1kcpWB-000607-7V
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 12:46:31 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 1fac7159-7aec-46a3-80ae-c5c7bb35efa8;
- Wed, 11 Nov 2020 12:45:29 +0000 (UTC)
+ id a971d993-8040-4323-9086-e4a5e5286556;
+ Wed, 11 Nov 2020 12:46:29 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 45EACABD6;
+ Wed, 11 Nov 2020 12:46:28 +0000 (UTC)
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=ttLz=ER=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
-	id 1kcpVE-0005sj-Ei
-	for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 12:45:32 +0000
-X-Inumbo-ID: 1fac7159-7aec-46a3-80ae-c5c7bb35efa8
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+	(envelope-from <SRS0=8Mnv=ER=suse.de=hare@srs-us1.protection.inumbo.net>)
+	id 1kcpWB-000607-7V
+	for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 12:46:31 +0000
+X-Inumbo-ID: a971d993-8040-4323-9086-e4a5e5286556
+Received: from mx2.suse.de (unknown [195.135.220.15])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 1fac7159-7aec-46a3-80ae-c5c7bb35efa8;
-	Wed, 11 Nov 2020 12:45:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1605098729;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=wOOaUGGr8yuGb3kdKrSs9X8NrLohjLcCYBJmLWeB+Rc=;
-  b=C7OHBe3m2xDAK4QHIoTDBEmVJrtq1ZDSG+7MwkJrXvV6iiR7luFbG0gg
-   Mv+RUp9csSqo/wXgNBTsMTyCwx3MiYXwfqAc3qZ9eNWZ683ahfhJinMdm
-   qpuZVIw26GSi7vCc1zRbyCXXA44Wd7LylLyvG8K6GI9anNDQjqAekcD50
-   8=;
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: 7hJHVumaeqUa2QZfLZhaNCM5d21SmxemD0EJmWzkQyRsAM4wxfe6x5X+IJb2AqOMwyDA1906FM
- nL67wMsPi0GEUjm/a+aCkiEV4rku92rxYSNgMp11D0LAILztepA/S8Dj74OIAMtnEnkQXWwyE6
- uYBp8WS/cKY7U4F6VZsTF9wjCANaRVq8IM3Mh5NnIEHBVdIg6d06hKEWsz8r+ndyhR8hyt6prp
- nXLlWOGtUS/EtYFG9RK0xfALhOH9kMfEZk2Ucal91VOAQR+y44U8yo1Ld321/Do4eeXdM7bGwc
- h4I=
-X-SBRS: None
-X-MesageID: 30970913
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.77,469,1596513600"; 
-   d="scan'208";a="30970913"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH] xen/x86: Work around Clang code generation bug with asm parameters
-Date: Wed, 11 Nov 2020 12:45:12 +0000
-Message-ID: <20201111124512.2268-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.11.0
+	id a971d993-8040-4323-9086-e4a5e5286556;
+	Wed, 11 Nov 2020 12:46:29 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+	by mx2.suse.de (Postfix) with ESMTP id 45EACABD6;
+	Wed, 11 Nov 2020 12:46:28 +0000 (UTC)
+Subject: Re: [PATCH 01/24] block: remove the call to __invalidate_device in
+ check_disk_size_change
+To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
+Cc: Justin Sanders <justin@coraid.com>, Josef Bacik <josef@toxicpanda.com>,
+ Ilya Dryomov <idryomov@gmail.com>, Jack Wang <jinpu.wang@cloud.ionos.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Stefan Hajnoczi <stefanha@redhat.com>,
+ Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
+ Minchan Kim <minchan@kernel.org>, Mike Snitzer <snitzer@redhat.com>,
+ Song Liu <song@kernel.org>, "Martin K. Petersen"
+ <martin.petersen@oracle.com>, dm-devel@redhat.com,
+ linux-block@vger.kernel.org, drbd-dev@lists.linbit.com,
+ nbd@other.debian.org, ceph-devel@vger.kernel.org,
+ xen-devel@lists.xenproject.org, linux-raid@vger.kernel.org,
+ linux-nvme@lists.infradead.org, linux-scsi@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org
+References: <20201111082658.3401686-1-hch@lst.de>
+ <20201111082658.3401686-2-hch@lst.de>
+From: Hannes Reinecke <hare@suse.de>
+Message-ID: <1e4539ab-199f-1d15-863d-052b0b2d3946@suse.de>
+Date: Wed, 11 Nov 2020 13:46:24 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.4.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <20201111082658.3401686-2-hch@lst.de>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 
-Clang 9 and later don't handle the clobber of %r10 correctly in
-_hypercall64_4().  See https://bugs.llvm.org/show_bug.cgi?id=48122
+On 11/11/20 9:26 AM, Christoph Hellwig wrote:
+> __invalidate_device without the kill_dirty parameter just invalidates
+> various clean entries in caches, which doesn't really help us with
+> anything, but can cause all kinds of horrible lock orders due to how
+> it calls into the file system.  The only reason this hasn't been a
+> major issue is because so many people use partitions, for which no
+> invalidation was performed anyway.
+> 
+> Signed-off-by: Christoph Hellwig <hch@lst.de>
+> ---
+>   fs/block_dev.c | 6 ------
+>   1 file changed, 6 deletions(-)
+> 
+Reviewed-by: Hannes Reinecke <hare@suse.de>
 
-Rewrite the logic to use the "+r" form, rather than using separate input and
-output specifiers, which works around the issue.  For consistency, adjust all
-operand handling.
+Cheers,
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Wei Liu <wl@xen.org>
----
- xen/include/asm-x86/guest/xen-hcall.h | 35 ++++++++++++++++-------------------
- 1 file changed, 16 insertions(+), 19 deletions(-)
-
-diff --git a/xen/include/asm-x86/guest/xen-hcall.h b/xen/include/asm-x86/guest/xen-hcall.h
-index 03d5868a9e..3240d9807b 100644
---- a/xen/include/asm-x86/guest/xen-hcall.h
-+++ b/xen/include/asm-x86/guest/xen-hcall.h
-@@ -39,53 +39,50 @@
- 
- #define _hypercall64_1(type, hcall, a1)                                 \
-     ({                                                                  \
--        long res, tmp__;                                                \
-+        long res, _a1 = (long)(a1);                                     \
-         asm volatile (                                                  \
-             "call hypercall_page + %c[offset]"                          \
--            : "=a" (res), "=D" (tmp__) ASM_CALL_CONSTRAINT              \
--            : [offset] "i" (hcall * 32),                                \
--              "1" ((long)(a1))                                          \
-+            : "=a" (res), "+D" (_a1) ASM_CALL_CONSTRAINT                \
-+            : [offset] "i" (hcall * 32)                                 \
-             : "memory" );                                               \
-         (type)res;                                                      \
-     })
- 
- #define _hypercall64_2(type, hcall, a1, a2)                             \
-     ({                                                                  \
--        long res, tmp__;                                                \
-+        long res, _a1 = (long)(a1), _a2 = (long)(a2);                   \
-         asm volatile (                                                  \
-             "call hypercall_page + %c[offset]"                          \
--            : "=a" (res), "=D" (tmp__), "=S" (tmp__)                    \
-+            : "=a" (res), "+D" (_a1), "+S" (_a2)                        \
-               ASM_CALL_CONSTRAINT                                       \
--            : [offset] "i" (hcall * 32),                                \
--              "1" ((long)(a1)), "2" ((long)(a2))                        \
-+            : [offset] "i" (hcall * 32)                                 \
-             : "memory" );                                               \
-         (type)res;                                                      \
-     })
- 
- #define _hypercall64_3(type, hcall, a1, a2, a3)                         \
-     ({                                                                  \
--        long res, tmp__;                                                \
-+        long res, _a1 = (long)(a1), _a2 = (long)(a2),                   \
-+            _a3 = (long)(a3);                                           \
-         asm volatile (                                                  \
-             "call hypercall_page + %c[offset]"                          \
--            : "=a" (res), "=D" (tmp__), "=S" (tmp__), "=d" (tmp__)      \
-+            : "=a" (res), "+D" (_a1), "+S" (_a2), "+d" (_a3)            \
-               ASM_CALL_CONSTRAINT                                       \
--            : [offset] "i" (hcall * 32),                                \
--              "1" ((long)(a1)), "2" ((long)(a2)), "3" ((long)(a3))      \
-+            : [offset] "i" (hcall * 32)                                 \
-             : "memory" );                                               \
-         (type)res;                                                      \
-     })
- 
- #define _hypercall64_4(type, hcall, a1, a2, a3, a4)                     \
-     ({                                                                  \
--        long res, tmp__;                                                \
--        register long _a4 asm ("r10") = ((long)(a4));                   \
-+        long res, _a1 = (long)(a1), _a2 = (long)(a2),                   \
-+            _a3 = (long)(a3);                                           \
-+        register long _a4 asm ("r10") = (long)(a4);                     \
-         asm volatile (                                                  \
-             "call hypercall_page + %c[offset]"                          \
--            : "=a" (res), "=D" (tmp__), "=S" (tmp__), "=d" (tmp__),     \
--              "=&r" (tmp__) ASM_CALL_CONSTRAINT                         \
--            : [offset] "i" (hcall * 32),                                \
--              "1" ((long)(a1)), "2" ((long)(a2)), "3" ((long)(a3)),     \
--              "4" (_a4)                                                 \
-+            : "=a" (res), "+D" (_a1), "+S" (_a2), "+d" (_a3)            \
-+              "+r" (_a4) ASM_CALL_CONSTRAINT                            \
-+            : [offset] "i" (hcall * 32)                                 \
-             : "memory" );                                               \
-         (type)res;                                                      \
-     })
+Hannes
 -- 
-2.11.0
-
+Dr. Hannes Reinecke                Kernel Storage Architect
+hare@suse.de                              +49 911 74053 688
+SUSE Software Solutions GmbH, Maxfeldstr. 5, 90409 Nürnberg
+HRB 36809 (AG Nürnberg), Geschäftsführer: Felix Imendörffer
 
