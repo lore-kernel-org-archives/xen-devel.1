@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 81679C4742C
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 08:28:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D10DEC388F9
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 08:28:11 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 16C4720756
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 08:28:08 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 5C382206E3
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 08:28:11 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="WGdyaw45"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 16C4720756
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="HtE3Jf5V"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5C382206E3
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.24373.51619 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.24380.51631 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kclTx-00033N-Mg; Wed, 11 Nov 2020 08:27:57 +0000
+	id 1kclU2-00039z-Vl; Wed, 11 Nov 2020 08:28:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 24373.51619; Wed, 11 Nov 2020 08:27:57 +0000
+Received: by outflank-mailman (output) from mailman id 24380.51631; Wed, 11 Nov 2020 08:28:02 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kclTx-00033B-Iv; Wed, 11 Nov 2020 08:27:57 +0000
-Received: by outflank-mailman (input) for mailman id 24373;
- Wed, 11 Nov 2020 08:27:56 +0000
+	id 1kclU2-00039q-RP; Wed, 11 Nov 2020 08:28:02 +0000
+Received: by outflank-mailman (input) for mailman id 24380;
+ Wed, 11 Nov 2020 08:28:01 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=kJD9=ER=casper.srs.infradead.org=batv+33c89f8a75624a8d62ce+6289+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1kclTw-0002dF-HY
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 08:27:56 +0000
+ id 1kclU1-0002dF-Hc
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 08:28:01 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3d3112db-b4f2-48cc-9d40-273a2ad080a5;
- Wed, 11 Nov 2020 08:27:25 +0000 (UTC)
+ id bd2c7935-bf16-4057-943c-e01baae3032f;
+ Wed, 11 Nov 2020 08:27:27 +0000 (UTC)
 Received: from [2001:4bb8:180:6600:bcde:334f:863c:27b8] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kclT3-0007Ze-1h; Wed, 11 Nov 2020 08:27:01 +0000
+ id 1kclT8-0007aM-Pa; Wed, 11 Nov 2020 08:27:06 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=kJD9=ER=casper.srs.infradead.org=batv+33c89f8a75624a8d62ce+6289+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1kclTw-0002dF-HY
-	for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 08:27:56 +0000
-X-Inumbo-ID: 3d3112db-b4f2-48cc-9d40-273a2ad080a5
+	id 1kclU1-0002dF-Hc
+	for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 08:28:01 +0000
+X-Inumbo-ID: bd2c7935-bf16-4057-943c-e01baae3032f
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 3d3112db-b4f2-48cc-9d40-273a2ad080a5;
-	Wed, 11 Nov 2020 08:27:25 +0000 (UTC)
+	id bd2c7935-bf16-4057-943c-e01baae3032f;
+	Wed, 11 Nov 2020 08:27:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=stmwFAlkeYayJwqxLAzxAb5snaHT5ewOrHfW4MD4mwk=; b=WGdyaw45qmIaK2SmatQbzEUT8g
-	sEQj1d8rAjkxLN2VkCVTmqZPll/LHGpxSV/Ir/IILaWgwYuFt2ICDMLJQCEBXEhKh5VnaPge+eYYF
-	IOkQ1MFG821grDHDC93JDllTw4BY36AXV/yFqmryZ3vHvbukA3hGqUm74A8voHvu45uxjEGSyanL7
-	IphCk+rTO/osj709X1NFm11SrN6uOCMdFEiCn4af1goiKlpL+OEwTfsYuGysBGdA57IRinYRl+Iz0
-	iyGlhXels8NLzlL13cFL+YI5aSIARz+l1EkZoUoEk2NSPyid+0DXdQDDf19mhfxK6pCa6I7Rf7UkB
-	L8AvM4RA==;
+	bh=msAxRVgou3+s48HjnTxbv/pHmvKh+OTllxGOwTa9PDs=; b=HtE3Jf5Vbg9BUyHuOP4LioCkGM
+	D5RSbkrHUpDFKIQjTw/EK4TzE+8HC7HKkeSRDQ5TzvYLeD176nt7vURqsS/VEBAOA0ZGVp2Hfk4BA
+	FS2uNGpdT5zytQL6JfJub2kZpw2LjaJ9Qgw8NxRTfmPK2IU9L78Jw1VK21pEcdjuzr8xdUwVC1AG8
+	FZzij4ATCs/rSb1EzfUVneXPwEq9nYX5eNo+i9hTfvU1x/iEwjUiJQP7bXoR4lZCu9eKsU3Nd9Bq0
+	Kq770Jj2OBzqFQPHPMIVFh4h4EqCewYZ87onZqxTquG/UH1fcZ9aZrou8dZ3Mf5neqm7MQBxdmEx8
+	6E4xnYtg==;
 Received: from [2001:4bb8:180:6600:bcde:334f:863c:27b8] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1kclT3-0007Ze-1h; Wed, 11 Nov 2020 08:27:01 +0000
+	id 1kclT8-0007aM-Pa; Wed, 11 Nov 2020 08:27:06 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -102,9 +102,9 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-nvme@lists.infradead.org,
 	linux-scsi@vger.kernel.org,
 	linux-fsdevel@vger.kernel.org
-Subject: [PATCH 01/24] block: remove the call to __invalidate_device in check_disk_size_change
-Date: Wed, 11 Nov 2020 09:26:35 +0100
-Message-Id: <20201111082658.3401686-2-hch@lst.de>
+Subject: [PATCH 06/24] block: add a return value to set_capacity_and_notify
+Date: Wed, 11 Nov 2020 09:26:40 +0100
+Message-Id: <20201111082658.3401686-7-hch@lst.de>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20201111082658.3401686-1-hch@lst.de>
 References: <20201111082658.3401686-1-hch@lst.de>
@@ -112,35 +112,54 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-__invalidate_device without the kill_dirty parameter just invalidates
-various clean entries in caches, which doesn't really help us with
-anything, but can cause all kinds of horrible lock orders due to how
-it calls into the file system.  The only reason this hasn't been a
-major issue is because so many people use partitions, for which no
-invalidation was performed anyway.
+Return if the function ended up sending an uevent or not.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- fs/block_dev.c | 6 ------
- 1 file changed, 6 deletions(-)
+ block/genhd.c         | 7 +++++--
+ include/linux/genhd.h | 2 +-
+ 2 files changed, 6 insertions(+), 3 deletions(-)
 
-diff --git a/fs/block_dev.c b/fs/block_dev.c
-index 9e84b1928b9401..66ebf594c97f47 100644
---- a/fs/block_dev.c
-+++ b/fs/block_dev.c
-@@ -1334,12 +1334,6 @@ static void check_disk_size_change(struct gendisk *disk,
- 		i_size_write(bdev->bd_inode, disk_size);
- 	}
- 	spin_unlock(&bdev->bd_size_lock);
--
--	if (bdev_size > disk_size) {
--		if (__invalidate_device(bdev, false))
--			pr_warn("VFS: busy inodes on resized disk %s\n",
--				disk->disk_name);
--	}
- }
+diff --git a/block/genhd.c b/block/genhd.c
+index d8d9d6c1c916e1..8c350fecfe8bfe 100644
+--- a/block/genhd.c
++++ b/block/genhd.c
+@@ -47,9 +47,9 @@ static void disk_release_events(struct gendisk *disk);
  
- /**
+ /*
+  * Set disk capacity and notify if the size is not currently zero and will not
+- * be set to zero.
++ * be set to zero.  Returns true if a uevent was sent, otherwise false.
+  */
+-void set_capacity_and_notify(struct gendisk *disk, sector_t size)
++bool set_capacity_and_notify(struct gendisk *disk, sector_t size)
+ {
+ 	sector_t capacity = get_capacity(disk);
+ 
+@@ -60,7 +60,10 @@ void set_capacity_and_notify(struct gendisk *disk, sector_t size)
+ 		char *envp[] = { "RESIZE=1", NULL };
+ 
+ 		kobject_uevent_env(&disk_to_dev(disk)->kobj, KOBJ_CHANGE, envp);
++		return true;
+ 	}
++
++	return false;
+ }
+ EXPORT_SYMBOL_GPL(set_capacity_and_notify);
+ 
+diff --git a/include/linux/genhd.h b/include/linux/genhd.h
+index 596f31b5a3e133..4b22bfd9336e1a 100644
+--- a/include/linux/genhd.h
++++ b/include/linux/genhd.h
+@@ -315,7 +315,7 @@ static inline int get_disk_ro(struct gendisk *disk)
+ extern void disk_block_events(struct gendisk *disk);
+ extern void disk_unblock_events(struct gendisk *disk);
+ extern void disk_flush_events(struct gendisk *disk, unsigned int mask);
+-void set_capacity_and_notify(struct gendisk *disk, sector_t size);
++bool set_capacity_and_notify(struct gendisk *disk, sector_t size);
+ 
+ /* drivers/char/random.c */
+ extern void add_disk_randomness(struct gendisk *disk) __latent_entropy;
 -- 
 2.28.0
 
