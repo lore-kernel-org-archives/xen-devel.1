@@ -8,23 +8,23 @@ X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 78A6FC56201
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 21:59:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 25A49C56202
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 21:59:59 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D69E2208B3
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 21:59:57 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 8F9A820825
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 21:59:58 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="RnBL36HD"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D69E2208B3
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="uF84L1Yg"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8F9A820825
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.25367.53062 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.25365.53057 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kcy9Y-0007f3-7j; Wed, 11 Nov 2020 21:59:44 +0000
+	id 1kcy9X-0007e7-U9; Wed, 11 Nov 2020 21:59:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 25367.53062; Wed, 11 Nov 2020 21:59:44 +0000
+Received: by outflank-mailman (output) from mailman id 25365.53057; Wed, 11 Nov 2020 21:59:43 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,65 +39,65 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kcy9Y-0007en-2Y; Wed, 11 Nov 2020 21:59:44 +0000
-Received: by outflank-mailman (input) for mailman id 25367;
+	id 1kcy9X-0007e3-Po; Wed, 11 Nov 2020 21:59:43 +0000
+Received: by outflank-mailman (input) for mailman id 25365;
  Wed, 11 Nov 2020 21:59:42 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1kcy3p-00064v-RB
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 21:53:49 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1kcy3a-00064v-Qa
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 21:53:34 +0000
 Received: from mail-wm1-x341.google.com (unknown [2a00:1450:4864:20::341])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 5a7def3d-c819-4d01-8499-8cff76a05d08;
- Wed, 11 Nov 2020 21:52:55 +0000 (UTC)
-Received: by mail-wm1-x341.google.com with SMTP id h2so3607180wmm.0
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2020 13:52:55 -0800 (PST)
+ id e8572d65-a88e-4d6d-9e12-c7b7451f14b3;
+ Wed, 11 Nov 2020 21:52:53 +0000 (UTC)
+Received: by mail-wm1-x341.google.com with SMTP id a3so3669141wmb.5
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2020 13:52:52 -0800 (PST)
 Received: from C02ZJ1BNLVDN.emea.arm.com (0547a297.skybroadband.com.
  [5.71.162.151])
- by smtp.gmail.com with ESMTPSA id u23sm4096078wmc.32.2020.11.11.13.52.53
+ by smtp.gmail.com with ESMTPSA id u23sm4096078wmc.32.2020.11.11.13.52.50
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Wed, 11 Nov 2020 13:52:53 -0800 (PST)
+ Wed, 11 Nov 2020 13:52:51 -0800 (PST)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	id 1kcy3p-00064v-RB
-	for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 21:53:49 +0000
-X-Inumbo-ID: 5a7def3d-c819-4d01-8499-8cff76a05d08
+	id 1kcy3a-00064v-Qa
+	for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 21:53:34 +0000
+X-Inumbo-ID: e8572d65-a88e-4d6d-9e12-c7b7451f14b3
 Received: from mail-wm1-x341.google.com (unknown [2a00:1450:4864:20::341])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 5a7def3d-c819-4d01-8499-8cff76a05d08;
-	Wed, 11 Nov 2020 21:52:55 +0000 (UTC)
-Received: by mail-wm1-x341.google.com with SMTP id h2so3607180wmm.0
-        for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2020 13:52:55 -0800 (PST)
+	id e8572d65-a88e-4d6d-9e12-c7b7451f14b3;
+	Wed, 11 Nov 2020 21:52:53 +0000 (UTC)
+Received: by mail-wm1-x341.google.com with SMTP id a3so3669141wmb.5
+        for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2020 13:52:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=IXFCViiQlQAZEJbjZ19ZkmNy8WD0OQFKlmdpW+wsKU8=;
-        b=RnBL36HD997IHMhccuSQNZSZDDpVAU8KLGq0R59vlQGn7wBebSGfrp0mJtXAovT4c6
-         EJyWLq3sYPTsA4cm9P6lMf1fuAHGLWzS3A+qX8gthR6F01Xm4VRPqXgXrgdGbyc7Xoa9
-         YMFMZKI9GfeWIYWyAriVKNSjXBea1Q6/vsaUfU0fqy5AgYLUMjMZiLQOkVRhg8tVwIpL
-         VA9UUlNQS4UWUDJZb5+5a/EYByAH/12OhCaBzDoP7Md6j6x0k5mLdrU/fG7Yj/mfMn3v
-         BIO6R9T3RS0RBGllNLCW0QBzTLnfQzEl2V2ie/Mws1oaVW9aLYI5apmW91PUjAzYrAis
-         qs+g==
+        bh=Df9Xh6fAL7MEGN4PPLSLvsKAz4yhwBBWrhg9iGXHQa0=;
+        b=uF84L1YgWpK/16Gee/yPHZGbKLt/KXZASJ7oPFGrzoDBMo9l5AYMJJhAJ9qsF5H2BY
+         cO3x/E//asW6nbzdufmOh9GmOJR/N/paqbsGcR+xPJfvsVfob471OJYsuA0V2l5YPyhq
+         IfBYCvgrDPHpL2bd/xm5RJF/3DvmJ4J1Ou/u+5lDEZ38bffyPIP5ceVeviSbmv/oFd2K
+         G+30yIhQ6ZrqQWbYIGRJ9vQeXelVwSZIVsvQWnVT/aHk8yZqAMGI1yBZiQ5F6BWJQ7M+
+         /HSp2vvFd5Ekd8WMtEB0FRsCndmsl8YqIwGEyrBgQvkoLMx8vJT0ozbW5ZM4VPWn4mDd
+         X8zg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=IXFCViiQlQAZEJbjZ19ZkmNy8WD0OQFKlmdpW+wsKU8=;
-        b=L4dzUbspzMXM7zQGaTVt7haalWANjKBqoXGs5cWpp4BiCNI73DfMVAPJliHY6jTXmf
-         yljL5gQ9KvL3fEBt2cf95CoT3vcSiXtuZImwFu3prLOuV9mW/OPASdOW5JNcOboMb64V
-         inaeRSADdAzz5caIHGt1GtiicXkGSndbvc1YbFvHAzJ6QaOGyz7toegDuu5NdlV58SNh
-         WhxhTVy48IWfuZt2SG5byxtQprZafcF0HT2IQVASMGS9micRVmM/nV74Qxl62p7aQrUS
-         BwGX2g0l12iqTA54xS2FgaIpFzhqGILlbczGTRS1t9pvhblPt6/Y2KIPEqFGKRkeq4i9
-         khAQ==
-X-Gm-Message-State: AOAM533K6tUSIqAMLIgb0RNSaG6syDVpgVJvL4fDHVN+pSq1Af0ghWdL
-	sbSg130APpndTpGFZJySPCvm5tOtZ24=
-X-Google-Smtp-Source: ABdhPJxQF6Pq2fJkYjLdTtlSw3AwUxsPPRK7RpLtDF2xcsJ1YDjaoI17FxqchSrlgwSxgtpfRKuXiw==
-X-Received: by 2002:a1c:dd41:: with SMTP id u62mr6067891wmg.78.1605131574031;
-        Wed, 11 Nov 2020 13:52:54 -0800 (PST)
+        bh=Df9Xh6fAL7MEGN4PPLSLvsKAz4yhwBBWrhg9iGXHQa0=;
+        b=t04dM7dcHtzBXMoWlPkbqfh55S3bwr/zk2sfSzsXCSsJqzlcP6gUJyqW6U2K4E8Hf8
+         KCgq8/aKDbgfCLu8s2VWyQpFRPILjeSe3k1K6CIs27KU0ZcjhEKaQv4MnKhAPgqAGjrX
+         UvvfYXLi3CHNEurR2ALXvUVV0m/dKLOURAWewlbkbePx8rHyHvXqjusXlwvP+gna+ypR
+         tDR5cJCJmetRFD5Qi7eMM/o3MNZK0qKgkiUZHAHVmmy1PIk3Px6hKWU06bVZBoTyiD2i
+         LXjcP+37SNXGoeQBmdRxmpwcwpQkAvFBFGG99D/FN26+A1v2b39ypfNUuIicOZJ14URW
+         RsNA==
+X-Gm-Message-State: AOAM5302I364Xht1AmHnleotcy0jeUSqmWxAKCB4BiY925lO9ICmOtMs
+	6zkJn886CMwK+MpgwX4qVS2rvHZUrpc=
+X-Google-Smtp-Source: ABdhPJz998xdMQgMVAfS5d5KafAZkwOa43oizKaiuZiuVOvTHxZwM7rWKfd7OzHDt3uJAVh9K0k1XA==
+X-Received: by 2002:a7b:c77a:: with SMTP id x26mr6304609wmk.63.1605131571835;
+        Wed, 11 Nov 2020 13:52:51 -0800 (PST)
 Received: from C02ZJ1BNLVDN.emea.arm.com (0547a297.skybroadband.com. [5.71.162.151])
-        by smtp.gmail.com with ESMTPSA id u23sm4096078wmc.32.2020.11.11.13.52.53
+        by smtp.gmail.com with ESMTPSA id u23sm4096078wmc.32.2020.11.11.13.52.50
         (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Wed, 11 Nov 2020 13:52:53 -0800 (PST)
+        Wed, 11 Nov 2020 13:52:51 -0800 (PST)
 From: Ash Wilding <ash.j.wilding@gmail.com>
 X-Google-Original-From: Ash Wilding
 To: xen-devel@lists.xenproject.org
@@ -105,9 +105,9 @@ Cc: Ash Wilding <ash.j.wilding@gmail.com>,
 	julien@xen.org,
 	bertrand.marquis@arm.com,
 	rahul.singh@arm.com
-Subject: [RFC PATCH v2 13/15] xen/arm32: port Linux's arm32 atomic.h to Xen
-Date: Wed, 11 Nov 2020 21:52:01 +0000
-Message-Id: <20201111215203.80336-14-ash.j.wilding@gmail.com>
+Subject: [RFC PATCH v2 11/15] xen/arm64: port Linux's arm64 atomic.h to Xen
+Date: Wed, 11 Nov 2020 21:51:59 +0000
+Message-Id: <20201111215203.80336-12-ash.j.wilding@gmail.com>
 X-Mailer: git-send-email 2.24.3 (Apple Git-128)
 In-Reply-To: <20201111215203.80336-1-ash.j.wilding@gmail.com>
 References: <20201111215203.80336-1-ash.j.wilding@gmail.com>
@@ -116,432 +116,305 @@ Content-Transfer-Encoding: 8bit
 
 From: Ash Wilding <ash.j.wilding@gmail.com>
 
- - Drop arch_* prefixes.
-
- - Redirect include of <xen/compiler.h> to <xen/rwonce.h>, and swap
-   usage of READ_ONCE()/WRITE_ONCE() to the __* versions accordingly.
-   As discussed earlier in the series, we can do this because we're
-   accessing an atomic_t's counter member, which is an int, so the
-   extra checks performed by READ_ONCE()/WRITE_ONCE() are redundant,
-   and this actually matches the Linux arm64 code which already uses
-   the __* variants.
-
- - Drop support for pre-Armv7 systems.
-
- - Drop atomic64_t helper definitions as we don't currently have an
+ - Drop atomic64_t helper declarations as we don't currently have an
    atomic64_t in Xen.
 
- - Add explicit strict variants of atomic_{add,sub}_return() as Linux
-   does not define these for arm32 and they're needed for Xen. These
-   strict variants are just wrappers that sandwich a call to the
-   relaxed variants between two smp_mb()'s.'
+ - Drop arch_* prefixes.
+
+ - Swap include of <linux/compiler.h> to just <xen/rwonce.h>.
 
 Signed-off-by: Ash Wilding <ash.j.wilding@gmail.com>
 ---
- xen/include/asm-arm/arm32/atomic.h | 357 +++--------------------------
- 1 file changed, 28 insertions(+), 329 deletions(-)
+ xen/include/asm-arm/arm64/atomic.h | 256 ++++++++---------------------
+ 1 file changed, 73 insertions(+), 183 deletions(-)
 
-diff --git a/xen/include/asm-arm/arm32/atomic.h b/xen/include/asm-arm/arm32/atomic.h
-index ac6338dd9b..2d8cd3c586 100644
---- a/xen/include/asm-arm/arm32/atomic.h
-+++ b/xen/include/asm-arm/arm32/atomic.h
-@@ -1,31 +1,26 @@
+diff --git a/xen/include/asm-arm/arm64/atomic.h b/xen/include/asm-arm/arm64/atomic.h
+index a2eab9f091..b695cc6e09 100644
+--- a/xen/include/asm-arm/arm64/atomic.h
++++ b/xen/include/asm-arm/arm64/atomic.h
+@@ -1,23 +1,23 @@
 -/* SPDX-License-Identifier: GPL-2.0-only */
++
  /*
-- *  arch/arm/include/asm/atomic.h
+- * Based on arch/arm/include/asm/atomic.h
 + * Taken from Linux 5.10-rc2 (last commit 3cea11cd5)
   *
-- *  Copyright (C) 1996 Russell King.
-- *  Copyright (C) 2002 Deep Blue Solutions Ltd.
-+ * Copyright (C) 1996 Russell King.
-+ * Copyright (C) 2002 Deep Blue Solutions Ltd.
+  * Copyright (C) 1996 Russell King.
+  * Copyright (C) 2002 Deep Blue Solutions Ltd.
+  * Copyright (C) 2012 ARM Ltd.
 + * SPDX-License-Identifier: GPL-2.0-only
   */
--#ifndef __ASM_ARM_ATOMIC_H
--#define __ASM_ARM_ATOMIC_H
-+#ifndef __ASM_ARM_ARM32_ATOMIC_H
-+#define __ASM_ARM_ARM32_ATOMIC_H
+-#ifndef __ASM_ATOMIC_H
+-#define __ASM_ATOMIC_H
++#ifndef __ASM_ARM_ARM64_ATOMIC_H
++#define __ASM_ARM_ARM64_ATOMIC_H
  
 -#include <linux/compiler.h>
--#include <linux/prefetch.h>
 -#include <linux/types.h>
--#include <linux/irqflags.h>
++#include <xen/rwonce.h>
++#include <xen/types.h>
+ 
 -#include <asm/barrier.h>
 -#include <asm/cmpxchg.h>
--
--#ifdef __KERNEL__
-+#include <xen/rwonce.h>
-+#include <xen/prefetch.h>
-+#include <xen/types.h>
-+#include "system.h"
+-#include <asm/lse.h>
++#include "lse.h"
 +#include "cmpxchg.h"
  
- /*
-  * On ARM, ordinary assignment (str instruction) doesn't clear the local
-  * strex/ldrex monitor on some implementations. The reason we can use it for
-  * atomic_set() is the clrex or dummy strex done on every exception return.
-  */
--#define atomic_read(v)	READ_ONCE((v)->counter)
--#define atomic_set(v,i)	WRITE_ONCE(((v)->counter), (i))
--
--#if __LINUX_ARM_ARCH__ >= 6
-+#define atomic_read(v)	__READ_ONCE((v)->counter)
-+#define atomic_set(v,i)	__WRITE_ONCE(((v)->counter), (i))
- 
- /*
-  * ARMv6 UP and SMP safe atomic ops.  We use load exclusive and
-@@ -153,68 +148,6 @@ static inline int atomic_fetch_add_unless(atomic_t *v, int a, int u)
+ #define ATOMIC_OP(op)							\
+-static inline void arch_##op(int i, atomic_t *v)			\
++static inline void op(int i, atomic_t *v)			\
+ {									\
+ 	__lse_ll_sc_body(op, i, v);					\
  }
- #define atomic_fetch_add_unless		atomic_fetch_add_unless
+@@ -32,7 +32,7 @@ ATOMIC_OP(atomic_sub)
+ #undef ATOMIC_OP
  
--#else /* ARM_ARCH_6 */
--
--#ifdef CONFIG_SMP
--#error SMP not supported on pre-ARMv6 CPUs
--#endif
--
--#define ATOMIC_OP(op, c_op, asm_op)					\
--static inline void atomic_##op(int i, atomic_t *v)			\
--{									\
--	unsigned long flags;						\
--									\
--	raw_local_irq_save(flags);					\
--	v->counter c_op i;						\
--	raw_local_irq_restore(flags);					\
--}									\
--
--#define ATOMIC_OP_RETURN(op, c_op, asm_op)				\
--static inline int atomic_##op##_return(int i, atomic_t *v)		\
--{									\
--	unsigned long flags;						\
--	int val;							\
--									\
--	raw_local_irq_save(flags);					\
--	v->counter c_op i;						\
--	val = v->counter;						\
--	raw_local_irq_restore(flags);					\
--									\
--	return val;							\
--}
--
--#define ATOMIC_FETCH_OP(op, c_op, asm_op)				\
--static inline int atomic_fetch_##op(int i, atomic_t *v)			\
--{									\
--	unsigned long flags;						\
--	int val;							\
--									\
--	raw_local_irq_save(flags);					\
--	val = v->counter;						\
--	v->counter c_op i;						\
--	raw_local_irq_restore(flags);					\
--									\
--	return val;							\
--}
--
--static inline int atomic_cmpxchg(atomic_t *v, int old, int new)
--{
--	int ret;
--	unsigned long flags;
--
--	raw_local_irq_save(flags);
--	ret = v->counter;
--	if (likely(ret == old))
--		v->counter = new;
--	raw_local_irq_restore(flags);
--
--	return ret;
--}
--
--#define atomic_fetch_andnot		atomic_fetch_andnot
--
--#endif /* __LINUX_ARM_ARCH__ */
--
- #define ATOMIC_OPS(op, c_op, asm_op)					\
- 	ATOMIC_OP(op, c_op, asm_op)					\
- 	ATOMIC_OP_RETURN(op, c_op, asm_op)				\
-@@ -242,266 +175,32 @@ ATOMIC_OPS(xor, ^=, eor)
+ #define ATOMIC_FETCH_OP(name, op)					\
+-static inline int arch_##op##name(int i, atomic_t *v)			\
++static inline int op##name(int i, atomic_t *v)			\
+ {									\
+ 	return __lse_ll_sc_body(op##name, i, v);			\
+ }
+@@ -54,175 +54,65 @@ ATOMIC_FETCH_OPS(atomic_sub_return)
  
- #define atomic_xchg(v, new) (xchg(&((v)->counter), new))
- 
--#ifndef CONFIG_GENERIC_ATOMIC64
--typedef struct {
--	s64 counter;
--} atomic64_t;
-+/*
-+ * Linux doesn't define strict atomic_add_return() or atomic_sub_return()
-+ * for /arch/arm -- Let's manually define these for Xen.
-+ */
- 
--#define ATOMIC64_INIT(i) { (i) }
+ #undef ATOMIC_FETCH_OP
+ #undef ATOMIC_FETCH_OPS
 -
--#ifdef CONFIG_ARM_LPAE
--static inline s64 atomic64_read(const atomic64_t *v)
--{
--	s64 result;
--
--	__asm__ __volatile__("@ atomic64_read\n"
--"	ldrd	%0, %H0, [%1]"
--	: "=&r" (result)
--	: "r" (&v->counter), "Qo" (v->counter)
--	);
--
--	return result;
--}
--
--static inline void atomic64_set(atomic64_t *v, s64 i)
--{
--	__asm__ __volatile__("@ atomic64_set\n"
--"	strd	%2, %H2, [%1]"
--	: "=Qo" (v->counter)
--	: "r" (&v->counter), "r" (i)
--	);
--}
--#else
--static inline s64 atomic64_read(const atomic64_t *v)
--{
--	s64 result;
--
--	__asm__ __volatile__("@ atomic64_read\n"
--"	ldrexd	%0, %H0, [%1]"
--	: "=&r" (result)
--	: "r" (&v->counter), "Qo" (v->counter)
--	);
--
--	return result;
--}
--
--static inline void atomic64_set(atomic64_t *v, s64 i)
-+static inline int atomic_add_return(int i, atomic_t *v)
- {
--	s64 tmp;
--
--	prefetchw(&v->counter);
--	__asm__ __volatile__("@ atomic64_set\n"
--"1:	ldrexd	%0, %H0, [%2]\n"
--"	strexd	%0, %3, %H3, [%2]\n"
--"	teq	%0, #0\n"
--"	bne	1b"
--	: "=&r" (tmp), "=Qo" (v->counter)
--	: "r" (&v->counter), "r" (i)
--	: "cc");
--}
--#endif
--
--#define ATOMIC64_OP(op, op1, op2)					\
--static inline void atomic64_##op(s64 i, atomic64_t *v)			\
+-#define ATOMIC64_OP(op)							\
+-static inline void arch_##op(long i, atomic64_t *v)			\
 -{									\
--	s64 result;							\
--	unsigned long tmp;						\
--									\
--	prefetchw(&v->counter);						\
--	__asm__ __volatile__("@ atomic64_" #op "\n"			\
--"1:	ldrexd	%0, %H0, [%3]\n"					\
--"	" #op1 " %Q0, %Q0, %Q4\n"					\
--"	" #op2 " %R0, %R0, %R4\n"					\
--"	strexd	%1, %0, %H0, [%3]\n"					\
--"	teq	%1, #0\n"						\
--"	bne	1b"							\
--	: "=&r" (result), "=&r" (tmp), "+Qo" (v->counter)		\
--	: "r" (&v->counter), "r" (i)					\
--	: "cc");							\
--}									\
--
--#define ATOMIC64_OP_RETURN(op, op1, op2)				\
--static inline s64							\
--atomic64_##op##_return_relaxed(s64 i, atomic64_t *v)			\
--{									\
--	s64 result;							\
--	unsigned long tmp;						\
--									\
--	prefetchw(&v->counter);						\
--									\
--	__asm__ __volatile__("@ atomic64_" #op "_return\n"		\
--"1:	ldrexd	%0, %H0, [%3]\n"					\
--"	" #op1 " %Q0, %Q0, %Q4\n"					\
--"	" #op2 " %R0, %R0, %R4\n"					\
--"	strexd	%1, %0, %H0, [%3]\n"					\
--"	teq	%1, #0\n"						\
--"	bne	1b"							\
--	: "=&r" (result), "=&r" (tmp), "+Qo" (v->counter)		\
--	: "r" (&v->counter), "r" (i)					\
--	: "cc");							\
--									\
--	return result;							\
+-	__lse_ll_sc_body(op, i, v);					\
 -}
 -
--#define ATOMIC64_FETCH_OP(op, op1, op2)					\
--static inline s64							\
--atomic64_fetch_##op##_relaxed(s64 i, atomic64_t *v)			\
--{									\
--	s64 result, val;						\
--	unsigned long tmp;						\
--									\
--	prefetchw(&v->counter);						\
--									\
--	__asm__ __volatile__("@ atomic64_fetch_" #op "\n"		\
--"1:	ldrexd	%0, %H0, [%4]\n"					\
--"	" #op1 " %Q1, %Q0, %Q5\n"					\
--"	" #op2 " %R1, %R0, %R5\n"					\
--"	strexd	%2, %1, %H1, [%4]\n"					\
--"	teq	%2, #0\n"						\
--"	bne	1b"							\
--	: "=&r" (result), "=&r" (val), "=&r" (tmp), "+Qo" (v->counter)	\
--	: "r" (&v->counter), "r" (i)					\
--	: "cc");							\
--									\
--	return result;							\
--}
+-ATOMIC64_OP(atomic64_andnot)
+-ATOMIC64_OP(atomic64_or)
+-ATOMIC64_OP(atomic64_xor)
+-ATOMIC64_OP(atomic64_add)
+-ATOMIC64_OP(atomic64_and)
+-ATOMIC64_OP(atomic64_sub)
 -
--#define ATOMIC64_OPS(op, op1, op2)					\
--	ATOMIC64_OP(op, op1, op2)					\
--	ATOMIC64_OP_RETURN(op, op1, op2)				\
--	ATOMIC64_FETCH_OP(op, op1, op2)
--
--ATOMIC64_OPS(add, adds, adc)
--ATOMIC64_OPS(sub, subs, sbc)
--
--#define atomic64_add_return_relaxed	atomic64_add_return_relaxed
--#define atomic64_sub_return_relaxed	atomic64_sub_return_relaxed
--#define atomic64_fetch_add_relaxed	atomic64_fetch_add_relaxed
--#define atomic64_fetch_sub_relaxed	atomic64_fetch_sub_relaxed
--
--#undef ATOMIC64_OPS
--#define ATOMIC64_OPS(op, op1, op2)					\
--	ATOMIC64_OP(op, op1, op2)					\
--	ATOMIC64_FETCH_OP(op, op1, op2)
--
--#define atomic64_andnot atomic64_andnot
--
--ATOMIC64_OPS(and, and, and)
--ATOMIC64_OPS(andnot, bic, bic)
--ATOMIC64_OPS(or,  orr, orr)
--ATOMIC64_OPS(xor, eor, eor)
--
--#define atomic64_fetch_and_relaxed	atomic64_fetch_and_relaxed
--#define atomic64_fetch_andnot_relaxed	atomic64_fetch_andnot_relaxed
--#define atomic64_fetch_or_relaxed	atomic64_fetch_or_relaxed
--#define atomic64_fetch_xor_relaxed	atomic64_fetch_xor_relaxed
--
--#undef ATOMIC64_OPS
--#undef ATOMIC64_FETCH_OP
--#undef ATOMIC64_OP_RETURN
 -#undef ATOMIC64_OP
 -
--static inline s64 atomic64_cmpxchg_relaxed(atomic64_t *ptr, s64 old, s64 new)
--{
--	s64 oldval;
--	unsigned long res;
--
--	prefetchw(&ptr->counter);
--
--	do {
--		__asm__ __volatile__("@ atomic64_cmpxchg\n"
--		"ldrexd		%1, %H1, [%3]\n"
--		"mov		%0, #0\n"
--		"teq		%1, %4\n"
--		"teqeq		%H1, %H4\n"
--		"strexdeq	%0, %5, %H5, [%3]"
--		: "=&r" (res), "=&r" (oldval), "+Qo" (ptr->counter)
--		: "r" (&ptr->counter), "r" (old), "r" (new)
--		: "cc");
--	} while (res);
--
--	return oldval;
+-#define ATOMIC64_FETCH_OP(name, op)					\
+-static inline long arch_##op##name(long i, atomic64_t *v)		\
+-{									\
+-	return __lse_ll_sc_body(op##name, i, v);			\
 -}
--#define atomic64_cmpxchg_relaxed	atomic64_cmpxchg_relaxed
 -
--static inline s64 atomic64_xchg_relaxed(atomic64_t *ptr, s64 new)
+-#define ATOMIC64_FETCH_OPS(op)						\
+-	ATOMIC64_FETCH_OP(_relaxed, op)					\
+-	ATOMIC64_FETCH_OP(_acquire, op)					\
+-	ATOMIC64_FETCH_OP(_release, op)					\
+-	ATOMIC64_FETCH_OP(        , op)
+-
+-ATOMIC64_FETCH_OPS(atomic64_fetch_andnot)
+-ATOMIC64_FETCH_OPS(atomic64_fetch_or)
+-ATOMIC64_FETCH_OPS(atomic64_fetch_xor)
+-ATOMIC64_FETCH_OPS(atomic64_fetch_add)
+-ATOMIC64_FETCH_OPS(atomic64_fetch_and)
+-ATOMIC64_FETCH_OPS(atomic64_fetch_sub)
+-ATOMIC64_FETCH_OPS(atomic64_add_return)
+-ATOMIC64_FETCH_OPS(atomic64_sub_return)
+-
+-#undef ATOMIC64_FETCH_OP
+-#undef ATOMIC64_FETCH_OPS
+-
+-static inline long arch_atomic64_dec_if_positive(atomic64_t *v)
 -{
--	s64 result;
--	unsigned long tmp;
--
--	prefetchw(&ptr->counter);
--
--	__asm__ __volatile__("@ atomic64_xchg\n"
--"1:	ldrexd	%0, %H0, [%3]\n"
--"	strexd	%1, %4, %H4, [%3]\n"
--"	teq	%1, #0\n"
--"	bne	1b"
--	: "=&r" (result), "=&r" (tmp), "+Qo" (ptr->counter)
--	: "r" (&ptr->counter), "r" (new)
--	: "cc");
--
--	return result;
+-	return __lse_ll_sc_body(atomic64_dec_if_positive, v);
 -}
--#define atomic64_xchg_relaxed		atomic64_xchg_relaxed
 -
--static inline s64 atomic64_dec_if_positive(atomic64_t *v)
--{
--	s64 result;
--	unsigned long tmp;
-+	int ret;
- 
- 	smp_mb();
--	prefetchw(&v->counter);
+-#define arch_atomic_read(v)			__READ_ONCE((v)->counter)
+-#define arch_atomic_set(v, i)			__WRITE_ONCE(((v)->counter), (i))
 -
--	__asm__ __volatile__("@ atomic64_dec_if_positive\n"
--"1:	ldrexd	%0, %H0, [%3]\n"
--"	subs	%Q0, %Q0, #1\n"
--"	sbc	%R0, %R0, #0\n"
--"	teq	%R0, #0\n"
--"	bmi	2f\n"
--"	strexd	%1, %0, %H0, [%3]\n"
--"	teq	%1, #0\n"
--"	bne	1b\n"
--"2:"
--	: "=&r" (result), "=&r" (tmp), "+Qo" (v->counter)
--	: "r" (&v->counter)
--	: "cc");
+-#define arch_atomic_add_return_relaxed		arch_atomic_add_return_relaxed
+-#define arch_atomic_add_return_acquire		arch_atomic_add_return_acquire
+-#define arch_atomic_add_return_release		arch_atomic_add_return_release
+-#define arch_atomic_add_return			arch_atomic_add_return
 -
-+	ret = atomic_add_return_relaxed(i, v);
- 	smp_mb();
- 
--	return result;
-+	return ret;
- }
--#define atomic64_dec_if_positive atomic64_dec_if_positive
-+#define atomic_fetch_add(i, v) atomic_add_return(i, v)
- 
--static inline s64 atomic64_fetch_add_unless(atomic64_t *v, s64 a, s64 u)
-+static inline int atomic_sub_return(int i, atomic_t *v)
- {
--	s64 oldval, newval;
--	unsigned long tmp;
-+	int ret;
- 
- 	smp_mb();
--	prefetchw(&v->counter);
+-#define arch_atomic_sub_return_relaxed		arch_atomic_sub_return_relaxed
+-#define arch_atomic_sub_return_acquire		arch_atomic_sub_return_acquire
+-#define arch_atomic_sub_return_release		arch_atomic_sub_return_release
+-#define arch_atomic_sub_return			arch_atomic_sub_return
 -
--	__asm__ __volatile__("@ atomic64_add_unless\n"
--"1:	ldrexd	%0, %H0, [%4]\n"
--"	teq	%0, %5\n"
--"	teqeq	%H0, %H5\n"
--"	beq	2f\n"
--"	adds	%Q1, %Q0, %Q6\n"
--"	adc	%R1, %R0, %R6\n"
--"	strexd	%2, %1, %H1, [%4]\n"
--"	teq	%2, #0\n"
--"	bne	1b\n"
--"2:"
--	: "=&r" (oldval), "=&r" (newval), "=&r" (tmp), "+Qo" (v->counter)
--	: "r" (&v->counter), "r" (u), "r" (a)
--	: "cc");
+-#define arch_atomic_fetch_add_relaxed		arch_atomic_fetch_add_relaxed
+-#define arch_atomic_fetch_add_acquire		arch_atomic_fetch_add_acquire
+-#define arch_atomic_fetch_add_release		arch_atomic_fetch_add_release
+-#define arch_atomic_fetch_add			arch_atomic_fetch_add
 -
--	if (oldval != u)
--		smp_mb();
-+	ret = atomic_sub_return_relaxed(i, v);
-+	smp_mb();
- 
--	return oldval;
-+	return ret;
- }
--#define atomic64_fetch_add_unless atomic64_fetch_add_unless
- 
--#endif /* !CONFIG_GENERIC_ATOMIC64 */
--#endif
--#endif
+-#define arch_atomic_fetch_sub_relaxed		arch_atomic_fetch_sub_relaxed
+-#define arch_atomic_fetch_sub_acquire		arch_atomic_fetch_sub_acquire
+-#define arch_atomic_fetch_sub_release		arch_atomic_fetch_sub_release
+-#define arch_atomic_fetch_sub			arch_atomic_fetch_sub
+-
+-#define arch_atomic_fetch_and_relaxed		arch_atomic_fetch_and_relaxed
+-#define arch_atomic_fetch_and_acquire		arch_atomic_fetch_and_acquire
+-#define arch_atomic_fetch_and_release		arch_atomic_fetch_and_release
+-#define arch_atomic_fetch_and			arch_atomic_fetch_and
+-
+-#define arch_atomic_fetch_andnot_relaxed	arch_atomic_fetch_andnot_relaxed
+-#define arch_atomic_fetch_andnot_acquire	arch_atomic_fetch_andnot_acquire
+-#define arch_atomic_fetch_andnot_release	arch_atomic_fetch_andnot_release
+-#define arch_atomic_fetch_andnot		arch_atomic_fetch_andnot
+-
+-#define arch_atomic_fetch_or_relaxed		arch_atomic_fetch_or_relaxed
+-#define arch_atomic_fetch_or_acquire		arch_atomic_fetch_or_acquire
+-#define arch_atomic_fetch_or_release		arch_atomic_fetch_or_release
+-#define arch_atomic_fetch_or			arch_atomic_fetch_or
+-
+-#define arch_atomic_fetch_xor_relaxed		arch_atomic_fetch_xor_relaxed
+-#define arch_atomic_fetch_xor_acquire		arch_atomic_fetch_xor_acquire
+-#define arch_atomic_fetch_xor_release		arch_atomic_fetch_xor_release
+-#define arch_atomic_fetch_xor			arch_atomic_fetch_xor
+-
+-#define arch_atomic_xchg_relaxed(v, new) \
+-	arch_xchg_relaxed(&((v)->counter), (new))
+-#define arch_atomic_xchg_acquire(v, new) \
+-	arch_xchg_acquire(&((v)->counter), (new))
+-#define arch_atomic_xchg_release(v, new) \
+-	arch_xchg_release(&((v)->counter), (new))
+-#define arch_atomic_xchg(v, new) \
+-	arch_xchg(&((v)->counter), (new))
+-
+-#define arch_atomic_cmpxchg_relaxed(v, old, new) \
+-	arch_cmpxchg_relaxed(&((v)->counter), (old), (new))
+-#define arch_atomic_cmpxchg_acquire(v, old, new) \
+-	arch_cmpxchg_acquire(&((v)->counter), (old), (new))
+-#define arch_atomic_cmpxchg_release(v, old, new) \
+-	arch_cmpxchg_release(&((v)->counter), (old), (new))
+-#define arch_atomic_cmpxchg(v, old, new) \
+-	arch_cmpxchg(&((v)->counter), (old), (new))
+-
+-#define arch_atomic_andnot			arch_atomic_andnot
+-
+-/*
+- * 64-bit arch_atomic operations.
+- */
+-#define ATOMIC64_INIT				ATOMIC_INIT
+-#define arch_atomic64_read			arch_atomic_read
+-#define arch_atomic64_set			arch_atomic_set
+-
+-#define arch_atomic64_add_return_relaxed	arch_atomic64_add_return_relaxed
+-#define arch_atomic64_add_return_acquire	arch_atomic64_add_return_acquire
+-#define arch_atomic64_add_return_release	arch_atomic64_add_return_release
+-#define arch_atomic64_add_return		arch_atomic64_add_return
+-
+-#define arch_atomic64_sub_return_relaxed	arch_atomic64_sub_return_relaxed
+-#define arch_atomic64_sub_return_acquire	arch_atomic64_sub_return_acquire
+-#define arch_atomic64_sub_return_release	arch_atomic64_sub_return_release
+-#define arch_atomic64_sub_return		arch_atomic64_sub_return
+-
+-#define arch_atomic64_fetch_add_relaxed		arch_atomic64_fetch_add_relaxed
+-#define arch_atomic64_fetch_add_acquire		arch_atomic64_fetch_add_acquire
+-#define arch_atomic64_fetch_add_release		arch_atomic64_fetch_add_release
+-#define arch_atomic64_fetch_add			arch_atomic64_fetch_add
+-
+-#define arch_atomic64_fetch_sub_relaxed		arch_atomic64_fetch_sub_relaxed
+-#define arch_atomic64_fetch_sub_acquire		arch_atomic64_fetch_sub_acquire
+-#define arch_atomic64_fetch_sub_release		arch_atomic64_fetch_sub_release
+-#define arch_atomic64_fetch_sub			arch_atomic64_fetch_sub
+-
+-#define arch_atomic64_fetch_and_relaxed		arch_atomic64_fetch_and_relaxed
+-#define arch_atomic64_fetch_and_acquire		arch_atomic64_fetch_and_acquire
+-#define arch_atomic64_fetch_and_release		arch_atomic64_fetch_and_release
+-#define arch_atomic64_fetch_and			arch_atomic64_fetch_and
+-
+-#define arch_atomic64_fetch_andnot_relaxed	arch_atomic64_fetch_andnot_relaxed
+-#define arch_atomic64_fetch_andnot_acquire	arch_atomic64_fetch_andnot_acquire
+-#define arch_atomic64_fetch_andnot_release	arch_atomic64_fetch_andnot_release
+-#define arch_atomic64_fetch_andnot		arch_atomic64_fetch_andnot
+-
+-#define arch_atomic64_fetch_or_relaxed		arch_atomic64_fetch_or_relaxed
+-#define arch_atomic64_fetch_or_acquire		arch_atomic64_fetch_or_acquire
+-#define arch_atomic64_fetch_or_release		arch_atomic64_fetch_or_release
+-#define arch_atomic64_fetch_or			arch_atomic64_fetch_or
+-
+-#define arch_atomic64_fetch_xor_relaxed		arch_atomic64_fetch_xor_relaxed
+-#define arch_atomic64_fetch_xor_acquire		arch_atomic64_fetch_xor_acquire
+-#define arch_atomic64_fetch_xor_release		arch_atomic64_fetch_xor_release
+-#define arch_atomic64_fetch_xor			arch_atomic64_fetch_xor
+-
+-#define arch_atomic64_xchg_relaxed		arch_atomic_xchg_relaxed
+-#define arch_atomic64_xchg_acquire		arch_atomic_xchg_acquire
+-#define arch_atomic64_xchg_release		arch_atomic_xchg_release
+-#define arch_atomic64_xchg			arch_atomic_xchg
+-
+-#define arch_atomic64_cmpxchg_relaxed		arch_atomic_cmpxchg_relaxed
+-#define arch_atomic64_cmpxchg_acquire		arch_atomic_cmpxchg_acquire
+-#define arch_atomic64_cmpxchg_release		arch_atomic_cmpxchg_release
+-#define arch_atomic64_cmpxchg			arch_atomic_cmpxchg
+-
+-#define arch_atomic64_andnot			arch_atomic64_andnot
+-
+-#define arch_atomic64_dec_if_positive		arch_atomic64_dec_if_positive
+-
+-#define ARCH_ATOMIC
+-
+-#endif /* __ASM_ATOMIC_H */
 \ No newline at end of file
-+#endif /* __ASM_ARM_ARM32_ATOMIC_H */
++#define atomic_read(v)			__READ_ONCE((v)->counter)
++#define atomic_set(v, i)			__WRITE_ONCE(((v)->counter), (i))
++
++#define atomic_add_return_relaxed		atomic_add_return_relaxed
++#define atomic_add_return_acquire		atomic_add_return_acquire
++#define atomic_add_return_release		atomic_add_return_release
++#define atomic_add_return			atomic_add_return
++
++#define atomic_sub_return_relaxed		atomic_sub_return_relaxed
++#define atomic_sub_return_acquire		atomic_sub_return_acquire
++#define atomic_sub_return_release		atomic_sub_return_release
++#define atomic_sub_return			atomic_sub_return
++
++#define atomic_fetch_add_relaxed		atomic_fetch_add_relaxed
++#define atomic_fetch_add_acquire		atomic_fetch_add_acquire
++#define atomic_fetch_add_release		atomic_fetch_add_release
++#define atomic_fetch_add			atomic_fetch_add
++
++#define atomic_fetch_sub_relaxed		atomic_fetch_sub_relaxed
++#define atomic_fetch_sub_acquire		atomic_fetch_sub_acquire
++#define atomic_fetch_sub_release		atomic_fetch_sub_release
++#define atomic_fetch_sub			atomic_fetch_sub
++
++#define atomic_fetch_and_relaxed		atomic_fetch_and_relaxed
++#define atomic_fetch_and_acquire		atomic_fetch_and_acquire
++#define atomic_fetch_and_release		atomic_fetch_and_release
++#define atomic_fetch_and			atomic_fetch_and
++
++#define atomic_fetch_andnot_relaxed	atomic_fetch_andnot_relaxed
++#define atomic_fetch_andnot_acquire	atomic_fetch_andnot_acquire
++#define atomic_fetch_andnot_release	atomic_fetch_andnot_release
++#define atomic_fetch_andnot		atomic_fetch_andnot
++
++#define atomic_fetch_or_relaxed		atomic_fetch_or_relaxed
++#define atomic_fetch_or_acquire		atomic_fetch_or_acquire
++#define atomic_fetch_or_release		atomic_fetch_or_release
++#define atomic_fetch_or			atomic_fetch_or
++
++#define atomic_fetch_xor_relaxed		atomic_fetch_xor_relaxed
++#define atomic_fetch_xor_acquire		atomic_fetch_xor_acquire
++#define atomic_fetch_xor_release		atomic_fetch_xor_release
++#define atomic_fetch_xor			atomic_fetch_xor
++
++#define atomic_xchg_relaxed(v, new) \
++	xchg_relaxed(&((v)->counter), (new))
++#define atomic_xchg_acquire(v, new) \
++	xchg_acquire(&((v)->counter), (new))
++#define atomic_xchg_release(v, new) \
++	xchg_release(&((v)->counter), (new))
++#define atomic_xchg(v, new) \
++	xchg(&((v)->counter), (new))
++
++#define atomic_cmpxchg_relaxed(v, old, new) \
++	cmpxchg_relaxed(&((v)->counter), (old), (new))
++#define atomic_cmpxchg_acquire(v, old, new) \
++	cmpxchg_acquire(&((v)->counter), (old), (new))
++#define atomic_cmpxchg_release(v, old, new) \
++	cmpxchg_release(&((v)->counter), (old), (new))
++
++#define atomic_andnot			atomic_andnot
++
++#endif /* __ASM_ARM_ARM64_ATOMIC_H */
+\ No newline at end of file
 -- 
 2.24.3 (Apple Git-128)
 
