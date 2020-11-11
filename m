@@ -5,26 +5,26 @@ X-Spam-Level:
 X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 62F18C388F9
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6BE3BC61DD8
 	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 22:00:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C4EC620825
+	by mail.kernel.org (Postfix) with ESMTPS id C78B22087D
 	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 21:59:59 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="XlzDxZVR"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C4EC620825
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Ng2wzGaR"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C78B22087D
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.25369.53086 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.25368.53073 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kcy9Z-0007hn-9k; Wed, 11 Nov 2020 21:59:45 +0000
+	id 1kcy9Y-0007gC-NY; Wed, 11 Nov 2020 21:59:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 25369.53086; Wed, 11 Nov 2020 21:59:45 +0000
+Received: by outflank-mailman (output) from mailman id 25368.53073; Wed, 11 Nov 2020 21:59:44 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,65 +39,65 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kcy9Y-0007hN-WF; Wed, 11 Nov 2020 21:59:45 +0000
-Received: by outflank-mailman (input) for mailman id 25369;
+	id 1kcy9Y-0007fs-CS; Wed, 11 Nov 2020 21:59:44 +0000
+Received: by outflank-mailman (input) for mailman id 25368;
  Wed, 11 Nov 2020 21:59:42 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1kcy3V-00064v-QI
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 21:53:29 +0000
-Received: from mail-wr1-x433.google.com (unknown [2a00:1450:4864:20::433])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1kcy3z-00064v-RZ
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 21:53:59 +0000
+Received: from mail-wr1-x435.google.com (unknown [2a00:1450:4864:20::435])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id c5224aac-a27f-435e-829f-b96da6d16fe3;
- Wed, 11 Nov 2020 21:52:52 +0000 (UTC)
-Received: by mail-wr1-x433.google.com with SMTP id p8so3986703wrx.5
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2020 13:52:52 -0800 (PST)
+ id e89902fb-7dcf-49c9-809d-f4bae8f5d314;
+ Wed, 11 Nov 2020 21:52:56 +0000 (UTC)
+Received: by mail-wr1-x435.google.com with SMTP id 23so3965030wrc.8
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2020 13:52:56 -0800 (PST)
 Received: from C02ZJ1BNLVDN.emea.arm.com (0547a297.skybroadband.com.
  [5.71.162.151])
- by smtp.gmail.com with ESMTPSA id u23sm4096078wmc.32.2020.11.11.13.52.49
+ by smtp.gmail.com with ESMTPSA id u23sm4096078wmc.32.2020.11.11.13.52.54
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Wed, 11 Nov 2020 13:52:50 -0800 (PST)
+ Wed, 11 Nov 2020 13:52:54 -0800 (PST)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	id 1kcy3V-00064v-QI
-	for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 21:53:29 +0000
-X-Inumbo-ID: c5224aac-a27f-435e-829f-b96da6d16fe3
-Received: from mail-wr1-x433.google.com (unknown [2a00:1450:4864:20::433])
+	id 1kcy3z-00064v-RZ
+	for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 21:53:59 +0000
+X-Inumbo-ID: e89902fb-7dcf-49c9-809d-f4bae8f5d314
+Received: from mail-wr1-x435.google.com (unknown [2a00:1450:4864:20::435])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id c5224aac-a27f-435e-829f-b96da6d16fe3;
-	Wed, 11 Nov 2020 21:52:52 +0000 (UTC)
-Received: by mail-wr1-x433.google.com with SMTP id p8so3986703wrx.5
-        for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2020 13:52:52 -0800 (PST)
+	id e89902fb-7dcf-49c9-809d-f4bae8f5d314;
+	Wed, 11 Nov 2020 21:52:56 +0000 (UTC)
+Received: by mail-wr1-x435.google.com with SMTP id 23so3965030wrc.8
+        for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2020 13:52:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=BBJwuz9SQvVyH51XqrVftJIZ0i+2M/l+kiSJyhKCl9k=;
-        b=XlzDxZVRka1KzvX5UJrwjhiosi0LTKxfDC1uz5BD3yOlL+I42WiaVPwKI9+aqVKXql
-         5YBd4vgOHXP4dK47MDifcU3g2YSqLpxdvo+pAaGTLsPTj9NdIaphWCTKGSnUlkHMg+4S
-         fs3zpJKk77/1AfGsFX1E6KRnBYP8uBpkPLtVasjZFSJL/6lKpmiPA/JBKEOBapTUFiKH
-         cRr9WFfgk1InFZPGSUHkKJ3hV/fV9APjaw2abeMHb8vo1ONFxu19mPPmmDBAdI3r5gR+
-         cJjpO++2/qhasb2xm057E8xKo7UjRoRC81aXvxvDmiJ8avbDfS/65UFyiKgfOPYl+Wkb
-         ZM4g==
+        bh=fD74UoudjvYdXmC0ErN+hXn9USTuY6/Q/RnD/8M+iRI=;
+        b=Ng2wzGaRjSGtlmnnkCYihoMFHpZwADCLk1XYrol1yaUdmD12gN2MY9krmJLEMObL6M
+         qeRfXzyFGXGEnelMKh4vUMrud0s6/iA/EUwfhCibNgEjEP566X9zJmiQTKX1q1ktTCLJ
+         sjpCDE3p9TQ9wjWCnQQ3DZEZFqTHUKS7+uoqw8NhBfgxNhX4AeY/83a5/TN26GG57/m8
+         BrqKON3pdQMW3y/pn0D9ZbfBJFvC4peOqNTzmfSMbnEyNsmhLAokvxy33FcYsY2rYPV4
+         ETxMzPHoSjCSaulv2OL7l/j9EEjzSZM9JTc9q3ziGcwrZVFNQsQolZadfomxkWugAKcJ
+         wqcA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=BBJwuz9SQvVyH51XqrVftJIZ0i+2M/l+kiSJyhKCl9k=;
-        b=in/N5AYoKBXnrx+nnFqfsoTaB+4rdiDjvzRM0ECjc2WxxIM3Lgu6g1u/c7u5//9pt0
-         0eYyyAsEU6HfMaiumAxxHQUA52M/3WPL7+p++cb7Es0+WrJFm7XyDgwY3LOrMJUzRmco
-         lnhewLYFqGRM6asiyE9gQ+v2KVATzZKycgXvSAWwpd0dpi0NCZ/6Kx5w+kxT1XbKv2Ub
-         E7DTFTf3f/xB2Nj2v7GD456fUBuAldalxHdV+zocH6obWb9diIutQ01XYpyY1SnYqk80
-         Gbt21wH2ZMvcKu17CHA6NowtFKUdbRLT6SKO1p0G8kNyu2oJTFUGZukkfr6As1SlRhoe
-         XvyA==
-X-Gm-Message-State: AOAM533EmdtH0NrUAYDgn15R73o0nmMsD6XysvkcvM1qb/14IWZKe6vH
-	DyMkWr5DqUJeLHJAl6nXoyLafJZ8TO0=
-X-Google-Smtp-Source: ABdhPJzCLdv2deDdC5HyuuTbfyEyMVsfKt4vC1Cap1tpREd6zqOgCLxp6yQlpIo2fvH7a8l43IhQhA==
-X-Received: by 2002:adf:f246:: with SMTP id b6mr3825186wrp.238.1605131570813;
-        Wed, 11 Nov 2020 13:52:50 -0800 (PST)
+        bh=fD74UoudjvYdXmC0ErN+hXn9USTuY6/Q/RnD/8M+iRI=;
+        b=JCsgIbj02b2RowGtJ38pbdY+pQMjqSqjzi66CKL2A+lTIiB3sBb58+g/VetooaBwe9
+         MfT5rdeTH1PLJlJx/bqI2G4vMxABM8sjMOTcnRHqkFiDGdEMXMZZqcRgb/iOR5AMqFGK
+         6EI9+a1BtXFxtKO2U2qgz6yXlBXlAol8hO/kocR3cxr06pTH+xxPvSpabr0imzTA6A1l
+         M/KaujIioWNYg/eObYvbCq5u7TCMKY5/VNwFREgRVr7bOZXBqCYL7eSb2lsBt+IcWVlC
+         sTm+z9Ak07XUTqnolSA6HSOtjg8+B8bcND9DPXJ/Ij9pOPrPtOLWf9YtJB6Yv7ucxypJ
+         RFeQ==
+X-Gm-Message-State: AOAM530yv2AmksfNyxIGpWZ2AQdJZ6nya4NeHR32DKNkEOn+fR7WM6N1
+	f4aWdU5xJgjiqUavkTa9NDt4Hid6aDw=
+X-Google-Smtp-Source: ABdhPJyolI2is12QJH+ntYHmZaUJPBkLe6jN9v0sIQCa3sPAyKR5IWMzFSm2OnjNj32FgK5Am2o3aw==
+X-Received: by 2002:a5d:69d1:: with SMTP id s17mr21879105wrw.104.1605131574983;
+        Wed, 11 Nov 2020 13:52:54 -0800 (PST)
 Received: from C02ZJ1BNLVDN.emea.arm.com (0547a297.skybroadband.com. [5.71.162.151])
-        by smtp.gmail.com with ESMTPSA id u23sm4096078wmc.32.2020.11.11.13.52.49
+        by smtp.gmail.com with ESMTPSA id u23sm4096078wmc.32.2020.11.11.13.52.54
         (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Wed, 11 Nov 2020 13:52:50 -0800 (PST)
+        Wed, 11 Nov 2020 13:52:54 -0800 (PST)
 From: Ash Wilding <ash.j.wilding@gmail.com>
 X-Google-Original-From: Ash Wilding
 To: xen-devel@lists.xenproject.org
@@ -105,9 +105,9 @@ Cc: Ash Wilding <ash.j.wilding@gmail.com>,
 	julien@xen.org,
 	bertrand.marquis@arm.com,
 	rahul.singh@arm.com
-Subject: [RFC PATCH v2 10/15] xen/arm64: port Linux's arm64 cmpxchg.h to Xen
-Date: Wed, 11 Nov 2020 21:51:58 +0000
-Message-Id: <20201111215203.80336-11-ash.j.wilding@gmail.com>
+Subject: [RFC PATCH v2 14/15] xen/arm32: port Linux's arm32 cmpxchg.h to Xen
+Date: Wed, 11 Nov 2020 21:52:02 +0000
+Message-Id: <20201111215203.80336-15-ash.j.wilding@gmail.com>
 X-Mailer: git-send-email 2.24.3 (Apple Git-128)
 In-Reply-To: <20201111215203.80336-1-ash.j.wilding@gmail.com>
 References: <20201111215203.80336-1-ash.j.wilding@gmail.com>
@@ -116,197 +116,292 @@ Content-Transfer-Encoding: 8bit
 
 From: Ash Wilding <ash.j.wilding@gmail.com>
 
- - s/arch_xchg/xchg/
+ - Drop support for pre-Armv7 systems, including the workarounds for
+   the swp instruction being broken on StrongARM.
 
- - s/arch_cmpxchg/cmpxchg/
+ - Drop local variants as no callers in Xen.
 
- - Replace calls to BUILD_BUG() with calls to __bad_cmpxchg() as we
-   don't currently have a BUILD_BUG() macro in Xen and this will
-   equivalently cause a link-time error.
+ - Keep the compiler happy by fixing __cmpxchg64()'s ptr arg to be
+   volatile, and casting ptr to be (const void *) in the call to
+   prefetchw().
 
- - Replace calls to VM_BUG_ON() with BUG_ON() as we don't currently
-   have a VM_BUG_ON() macro in Xen.
+ - Add explicit strict variants of xchg(), cmpxchg(), and cmpxchg64(),
+   as the Linux arm32 cmpxchg.h doesn't define these and they're needed
+   for Xen. These strict variants are just wrappers that sandwich calls
+   to the relaxed variants between two smp_mb()'s.
 
  - Pull in the timeout variants of cmpxchg from the original Xen
-   arm64 cmpxchg.h as these are required for guest atomics and are
-   not provided by Linux. Note these are always using LL/SC so we
-   should ideally write LSE versions at some point.
+   arm32 cmpxchg.h as these are required for guest atomics and are
+   not provided by Linux.
 
 Signed-off-by: Ash Wilding <ash.j.wilding@gmail.com>
 ---
- xen/include/asm-arm/arm64/cmpxchg.h | 165 ++++++++++++++++++++++------
- 1 file changed, 131 insertions(+), 34 deletions(-)
+ xen/include/asm-arm/arm32/cmpxchg.h | 322 ++++++++++++++++------------
+ 1 file changed, 188 insertions(+), 134 deletions(-)
 
-diff --git a/xen/include/asm-arm/arm64/cmpxchg.h b/xen/include/asm-arm/arm64/cmpxchg.h
-index c51388216e..a5282cf66e 100644
---- a/xen/include/asm-arm/arm64/cmpxchg.h
-+++ b/xen/include/asm-arm/arm64/cmpxchg.h
-@@ -1,17 +1,16 @@
--/* SPDX-License-Identifier: GPL-2.0-only */
+diff --git a/xen/include/asm-arm/arm32/cmpxchg.h b/xen/include/asm-arm/arm32/cmpxchg.h
+index 638ae84afb..d7189984d0 100644
+--- a/xen/include/asm-arm/arm32/cmpxchg.h
++++ b/xen/include/asm-arm/arm32/cmpxchg.h
+@@ -1,46 +1,24 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-#ifndef __ASM_ARM_CMPXCHG_H
+-#define __ASM_ARM_CMPXCHG_H
+-
+-#include <linux/irqflags.h>
+-#include <linux/prefetch.h>
+-#include <asm/barrier.h>
+-
+-#if defined(CONFIG_CPU_SA1100) || defined(CONFIG_CPU_SA110)
  /*
-- * Based on arch/arm/include/asm/cmpxchg.h
+- * On the StrongARM, "swp" is terminally broken since it bypasses the
+- * cache totally.  This means that the cache becomes inconsistent, and,
+- * since we use normal loads/stores as well, this is really bad.
+- * Typically, this causes oopsen in filp_close, but could have other,
+- * more disastrous effects.  There are two work-arounds:
+- *  1. Disable interrupts and emulate the atomic swap
+- *  2. Clean the cache, perform atomic swap, flush the cache
 + * Taken from Linux 5.10-rc2 (last commit 3cea11cd5)
   *
-  * Copyright (C) 2012 ARM Ltd.
-+ * SPDX-License-Identifier: GPL-2.0-only
+- * We choose (1) since its the "easiest" to achieve here and is not
+- * dependent on the processor type.
+- *
+- * NOTE that this solution won't work on an SMP system, so explcitly
+- * forbid it here.
++ * SPDX-License-Identifier: GPL-2.0
   */
--#ifndef __ASM_CMPXCHG_H
--#define __ASM_CMPXCHG_H
-+#ifndef __ASM_ARM_ARM64_CMPXCHG_H
-+#define __ASM_ARM_ARM64_CMPXCHG_H
+-#define swp_is_buggy
+-#endif
++#ifndef __ASM_ARM_ARM32_CMPXCHG_H
++#define __ASM_ARM_ARM32_CMPXCHG_H
++
++#include <xen/prefetch.h>
++#include <xen/types.h>
++
++extern void __bad_cmpxchg(volatile void *ptr, int size);
  
--#include <linux/build_bug.h>
--#include <linux/compiler.h>
-+#include <asm/bug.h>
-+#include "lse.h"
+ static inline unsigned long __xchg(unsigned long x, volatile void *ptr, int size)
+ {
+-	extern void __bad_xchg(volatile void *, int);
+ 	unsigned long ret;
+-#ifdef swp_is_buggy
+-	unsigned long flags;
+-#endif
+-#if __LINUX_ARM_ARCH__ >= 6
+ 	unsigned int tmp;
+-#endif
  
--#include <asm/barrier.h>
--#include <asm/lse.h>
-+extern unsigned long __bad_cmpxchg(volatile void *ptr, int size);
+ 	prefetchw((const void *)ptr);
  
- /*
-  * We need separate acquire parameters for ll/sc and lse, since the full
-@@ -33,7 +32,9 @@ static inline u##sz __xchg_case_##name##sz(u##sz x, volatile void *ptr)		\
- 	"	" #mb,								\
- 	/* LSE atomics */							\
- 	"	swp" #acq_lse #rel #sfx "\t%" #w "3, %" #w "0, %2\n"		\
--		__nops(3)							\
-+		"nop\n"							\
-+		"nop\n"							\
-+		"nop\n"							\
- 	"	" #nop_lse)							\
- 	: "=&r" (ret), "=&r" (tmp), "+Q" (*(u##sz *)ptr)			\
- 	: "r" (x)								\
-@@ -62,7 +63,7 @@ __XCHG_CASE( ,  ,  mb_, 64, dmb ish, nop,  , a, l, "memory")
- #undef __XCHG_CASE
+ 	switch (size) {
+-#if __LINUX_ARM_ARCH__ >= 6
+-#ifndef CONFIG_CPU_V6 /* MIN ARCH >= V6K */
+ 	case 1:
+ 		asm volatile("@	__xchg1\n"
+ 		"1:	ldrexb	%0, [%3]\n"
+@@ -61,7 +39,6 @@ static inline unsigned long __xchg(unsigned long x, volatile void *ptr, int size
+ 			: "r" (x), "r" (ptr)
+ 			: "memory", "cc");
+ 		break;
+-#endif
+ 	case 4:
+ 		asm volatile("@	__xchg4\n"
+ 		"1:	ldrex	%0, [%3]\n"
+@@ -72,42 +49,10 @@ static inline unsigned long __xchg(unsigned long x, volatile void *ptr, int size
+ 			: "r" (x), "r" (ptr)
+ 			: "memory", "cc");
+ 		break;
+-#elif defined(swp_is_buggy)
+-#ifdef CONFIG_SMP
+-#error SMP is not supported on this platform
+-#endif
+-	case 1:
+-		raw_local_irq_save(flags);
+-		ret = *(volatile unsigned char *)ptr;
+-		*(volatile unsigned char *)ptr = x;
+-		raw_local_irq_restore(flags);
+-		break;
  
- #define __XCHG_GEN(sfx)							\
--static __always_inline  unsigned long __xchg##sfx(unsigned long x,	\
-+static always_inline  unsigned long __xchg##sfx(unsigned long x,	\
- 					volatile void *ptr,		\
- 					int size)			\
- {									\
-@@ -76,7 +77,7 @@ static __always_inline  unsigned long __xchg##sfx(unsigned long x,	\
- 	case 8:								\
- 		return __xchg_case##sfx##_64(x, ptr);			\
- 	default:							\
--		BUILD_BUG();						\
-+		return __bad_cmpxchg(ptr, size);						\
- 	}								\
- 									\
- 	unreachable();							\
-@@ -98,10 +99,10 @@ __XCHG_GEN(_mb)
+-	case 4:
+-		raw_local_irq_save(flags);
+-		ret = *(volatile unsigned long *)ptr;
+-		*(volatile unsigned long *)ptr = x;
+-		raw_local_irq_restore(flags);
+-		break;
+-#else
+-	case 1:
+-		asm volatile("@	__xchg1\n"
+-		"	swpb	%0, %1, [%2]"
+-			: "=&r" (ret)
+-			: "r" (x), "r" (ptr)
+-			: "memory", "cc");
+-		break;
+-	case 4:
+-		asm volatile("@	__xchg4\n"
+-		"	swp	%0, %1, [%2]"
+-			: "=&r" (ret)
+-			: "r" (x), "r" (ptr)
+-			: "memory", "cc");
+-		break;
+-#endif
+ 	default:
+-		/* Cause a link-time error, the xchg() size is not supported */
+-		__bad_xchg(ptr, size), ret = 0;
++		/* Cause a link-time error, the size is not supported */
++		__bad_cmpxchg(ptr, size), ret = 0;
+ 		break;
+ 	}
+ 
+@@ -119,40 +64,6 @@ static inline unsigned long __xchg(unsigned long x, volatile void *ptr, int size
+ 				   sizeof(*(ptr)));			\
  })
  
- /* xchg */
--#define arch_xchg_relaxed(...)	__xchg_wrapper(    , __VA_ARGS__)
--#define arch_xchg_acquire(...)	__xchg_wrapper(_acq, __VA_ARGS__)
--#define arch_xchg_release(...)	__xchg_wrapper(_rel, __VA_ARGS__)
--#define arch_xchg(...)		__xchg_wrapper( _mb, __VA_ARGS__)
-+#define xchg_relaxed(...)	__xchg_wrapper(    , __VA_ARGS__)
-+#define xchg_acquire(...)	__xchg_wrapper(_acq, __VA_ARGS__)
-+#define xchg_release(...)	__xchg_wrapper(_rel, __VA_ARGS__)
-+#define xchg(...)		__xchg_wrapper( _mb, __VA_ARGS__)
+-#include <asm-generic/cmpxchg-local.h>
+-
+-#if __LINUX_ARM_ARCH__ < 6
+-/* min ARCH < ARMv6 */
+-
+-#ifdef CONFIG_SMP
+-#error "SMP is not supported on this platform"
+-#endif
+-
+-#define xchg xchg_relaxed
+-
+-/*
+- * cmpxchg_local and cmpxchg64_local are atomic wrt current CPU. Always make
+- * them available.
+- */
+-#define cmpxchg_local(ptr, o, n) ({					\
+-	(__typeof(*ptr))__cmpxchg_local_generic((ptr),			\
+-					        (unsigned long)(o),	\
+-					        (unsigned long)(n),	\
+-					        sizeof(*(ptr)));	\
+-})
+-
+-#define cmpxchg64_local(ptr, o, n) __cmpxchg64_local_generic((ptr), (o), (n))
+-
+-#include <asm-generic/cmpxchg.h>
+-
+-#else	/* min ARCH >= ARMv6 */
+-
+-extern void __bad_cmpxchg(volatile void *ptr, int size);
+-
+-/*
+- * cmpxchg only support 32-bits operands on ARMv6.
+- */
+-
+ static inline unsigned long __cmpxchg(volatile void *ptr, unsigned long old,
+ 				      unsigned long new, int size)
+ {
+@@ -161,7 +72,6 @@ static inline unsigned long __cmpxchg(volatile void *ptr, unsigned long old,
+ 	prefetchw((const void *)ptr);
  
- #define __CMPXCHG_CASE(name, sz)			\
- static inline u##sz __cmpxchg_case_##name##sz(volatile void *ptr,	\
-@@ -148,7 +149,7 @@ __CMPXCHG_DBL(_mb)
- #undef __CMPXCHG_DBL
- 
- #define __CMPXCHG_GEN(sfx)						\
--static __always_inline unsigned long __cmpxchg##sfx(volatile void *ptr,	\
-+static always_inline unsigned long __cmpxchg##sfx(volatile void *ptr,	\
- 					   unsigned long old,		\
- 					   unsigned long new,		\
- 					   int size)			\
-@@ -163,7 +164,7 @@ static __always_inline unsigned long __cmpxchg##sfx(volatile void *ptr,	\
- 	case 8:								\
- 		return __cmpxchg_case##sfx##_64(ptr, old, new);		\
- 	default:							\
--		BUILD_BUG();						\
-+		return __bad_cmpxchg(ptr, size);						\
- 	}								\
- 									\
- 	unreachable();							\
-@@ -186,18 +187,18 @@ __CMPXCHG_GEN(_mb)
+ 	switch (size) {
+-#ifndef CONFIG_CPU_V6	/* min ARCH >= ARMv6K */
+ 	case 1:
+ 		do {
+ 			asm volatile("@ __cmpxchg1\n"
+@@ -186,7 +96,6 @@ static inline unsigned long __cmpxchg(volatile void *ptr, unsigned long old,
+ 				: "memory", "cc");
+ 		} while (res);
+ 		break;
+-#endif
+ 	case 4:
+ 		do {
+ 			asm volatile("@ __cmpxchg4\n"
+@@ -199,6 +108,7 @@ static inline unsigned long __cmpxchg(volatile void *ptr, unsigned long old,
+ 				: "memory", "cc");
+ 		} while (res);
+ 		break;
++
+ 	default:
+ 		__bad_cmpxchg(ptr, size);
+ 		oldval = 0;
+@@ -214,41 +124,14 @@ static inline unsigned long __cmpxchg(volatile void *ptr, unsigned long old,
+ 				      sizeof(*(ptr)));			\
  })
  
- /* cmpxchg */
--#define arch_cmpxchg_relaxed(...)	__cmpxchg_wrapper(    , __VA_ARGS__)
--#define arch_cmpxchg_acquire(...)	__cmpxchg_wrapper(_acq, __VA_ARGS__)
--#define arch_cmpxchg_release(...)	__cmpxchg_wrapper(_rel, __VA_ARGS__)
--#define arch_cmpxchg(...)		__cmpxchg_wrapper( _mb, __VA_ARGS__)
--#define arch_cmpxchg_local		arch_cmpxchg_relaxed
-+#define cmpxchg_relaxed(...)	__cmpxchg_wrapper(    , __VA_ARGS__)
-+#define cmpxchg_acquire(...)	__cmpxchg_wrapper(_acq, __VA_ARGS__)
-+#define cmpxchg_release(...)	__cmpxchg_wrapper(_rel, __VA_ARGS__)
-+#define cmpxchg(...)		__cmpxchg_wrapper( _mb, __VA_ARGS__)
-+#define cmpxchg_local		cmpxchg_relaxed
+-static inline unsigned long __cmpxchg_local(volatile void *ptr,
+-					    unsigned long old,
+-					    unsigned long new, int size)
+-{
+-	unsigned long ret;
+-
+-	switch (size) {
+-#ifdef CONFIG_CPU_V6	/* min ARCH == ARMv6 */
+-	case 1:
+-	case 2:
+-		ret = __cmpxchg_local_generic(ptr, old, new, size);
+-		break;
+-#endif
+-	default:
+-		ret = __cmpxchg(ptr, old, new, size);
+-	}
+-
+-	return ret;
+-}
+-
+-#define cmpxchg_local(ptr, o, n) ({					\
+-	(__typeof(*ptr))__cmpxchg_local((ptr),				\
+-				        (unsigned long)(o),		\
+-				        (unsigned long)(n),		\
+-				        sizeof(*(ptr)));		\
+-})
+-
+-static inline unsigned long long __cmpxchg64(unsigned long long *ptr,
++static inline unsigned long long __cmpxchg64(volatile unsigned long long *ptr,
+ 					     unsigned long long old,
+ 					     unsigned long long new)
+ {
+ 	unsigned long long oldval;
+ 	unsigned long res;
  
- /* cmpxchg64 */
--#define arch_cmpxchg64_relaxed		arch_cmpxchg_relaxed
--#define arch_cmpxchg64_acquire		arch_cmpxchg_acquire
--#define arch_cmpxchg64_release		arch_cmpxchg_release
--#define arch_cmpxchg64			arch_cmpxchg
--#define arch_cmpxchg64_local		arch_cmpxchg_local
-+#define cmpxchg64_relaxed		cmpxchg_relaxed
-+#define cmpxchg64_acquire		cmpxchg_acquire
-+#define cmpxchg64_release		cmpxchg_release
-+#define cmpxchg64			cmpxchg
-+#define cmpxchg64_local		cmpxchg_local
+-	prefetchw(ptr);
++	prefetchw((const void *)ptr);
  
- /* cmpxchg_double */
- #define system_has_cmpxchg_double()     1
-@@ -205,11 +206,11 @@ __CMPXCHG_GEN(_mb)
- #define __cmpxchg_double_check(ptr1, ptr2)					\
- ({										\
- 	if (sizeof(*(ptr1)) != 8)						\
--		BUILD_BUG();							\
--	VM_BUG_ON((unsigned long *)(ptr2) - (unsigned long *)(ptr1) != 1);	\
-+		return __bad_cmpxchg(ptr, size);							\
-+	BUG_ON((unsigned long *)(ptr2) - (unsigned long *)(ptr1) != 1);	\
+ 	__asm__ __volatile__(
+ "1:	ldrexd		%1, %H1, [%3]\n"
+@@ -272,8 +155,179 @@ static inline unsigned long long __cmpxchg64(unsigned long long *ptr,
+ 					(unsigned long long)(n));	\
  })
  
--#define arch_cmpxchg_double(ptr1, ptr2, o1, o2, n1, n2)				\
-+#define cmpxchg_double(ptr1, ptr2, o1, o2, n1, n2)				\
- ({										\
- 	int __ret;								\
- 	__cmpxchg_double_check(ptr1, ptr2);					\
-@@ -219,7 +220,7 @@ __CMPXCHG_GEN(_mb)
- 	__ret;									\
- })
+-#define cmpxchg64_local(ptr, o, n) cmpxchg64_relaxed((ptr), (o), (n))
  
--#define arch_cmpxchg_double_local(ptr1, ptr2, o1, o2, n1, n2)			\
-+#define cmpxchg_double_local(ptr1, ptr2, o1, o2, n1, n2)			\
- ({										\
- 	int __ret;								\
- 	__cmpxchg_double_check(ptr1, ptr2);					\
-@@ -255,7 +256,7 @@ __CMPWAIT_CASE( ,  , 64);
- #undef __CMPWAIT_CASE
- 
- #define __CMPWAIT_GEN(sfx)						\
--static __always_inline void __cmpwait##sfx(volatile void *ptr,		\
-+static always_inline void __cmpwait##sfx(volatile void *ptr,		\
- 				  unsigned long val,			\
- 				  int size)				\
- {									\
-@@ -269,7 +270,7 @@ static __always_inline void __cmpwait##sfx(volatile void *ptr,		\
- 	case 8:								\
- 		return __cmpwait_case##sfx##_64(ptr, val);		\
- 	default:							\
--		BUILD_BUG();						\
-+		__bad_cmpxchg(ptr, size);						\
- 	}								\
- 									\
- 	unreachable();							\
-@@ -282,4 +283,100 @@ __CMPWAIT_GEN()
- #define __cmpwait_relaxed(ptr, val) \
- 	__cmpwait((ptr), (unsigned long)(val), sizeof(*(ptr)))
- 
--#endif	/* __ASM_CMPXCHG_H */
-\ No newline at end of file
+-#endif	/* __LINUX_ARM_ARCH__ >= 6 */
 +/*
-+ * This code is from the original Xen arm64 cmpxchg.h, from before the
++ * Linux doesn't provide strict versions of xchg(), cmpxchg(), and cmpxchg64(),
++ * so manually define these for Xen as smp_mb() wrappers around the relaxed
++ * variants.
++ */
+ 
+-#endif /* __ASM_ARM_CMPXCHG_H */
+\ No newline at end of file
++#define xchg(ptr, x) ({ \
++	long ret; \
++	smp_mb(); \
++	ret = xchg_relaxed(ptr, x); \
++	smp_mb(); \
++	ret; \
++})
++
++#define cmpxchg(ptr, o, n) ({ \
++	long ret; \
++	smp_mb(); \
++	ret = cmpxchg_relaxed(ptr, o, n); \
++	smp_mb(); \
++	ret; \
++})
++
++#define cmpxchg64(ptr, o, n) ({ \
++	long long ret; \
++	smp_mb(); \
++	ret = cmpxchg64_relaxed(ptr, o, n); \
++	smp_mb(); \
++	ret; \
++})
++
++/*
++ * This code is from the original Xen arm32 cmpxchg.h, from before the
 + * Linux 5.10-rc2 atomics helpers were ported over. The only changes
 + * here are renaming the macros and functions to explicitly use
 + * "timeout" in their names so that they don't clash with the above.
@@ -315,8 +410,8 @@ index c51388216e..a5282cf66e 100644
 + * variants).
 + */
 +
-+#define __CMPXCHG_TIMEOUT_CASE(w, sz, name)                             \
-+static inline bool __cmpxchg_timeout_case_##name(volatile void *ptr,    \
++#define __CMPXCHG_TIMEOUT_CASE(sz, name)                                        \
++static inline bool __cmpxchg_timeout_case_##name(volatile void *ptr,            \
 +                                         unsigned long *old,            \
 +                                         unsigned long new,             \
 +                                         bool timeout,                  \
@@ -326,17 +421,14 @@ index c51388216e..a5282cf66e 100644
 +        unsigned long res;                                              \
 +                                                                        \
 +        do {                                                            \
-+                asm volatile("// __cmpxchg_timeout_case_" #name "\n"    \
-+                "       ldxr" #sz "     %" #w "1, %2\n"                 \
-+                "       mov     %w0, #0\n"                              \
-+                "       cmp     %" #w "1, %" #w "3\n"                   \
-+                "       b.ne    1f\n"                                   \
-+                "       stxr" #sz "     %w0, %" #w "4, %2\n"            \
-+                "1:\n"                                                  \
-+                : "=&r" (res), "=&r" (oldval),                          \
-+                  "+Q" (*(unsigned long *)ptr)                          \
-+                : "Ir" (*old), "r" (new)                                \
-+                : "cc");                                                \
++                asm volatile("@ __cmpxchg_timeout_case_" #name "\n"             \
++                "       ldrex" #sz "    %1, [%2]\n"                     \
++                "       mov     %0, #0\n"                               \
++                "       teq     %1, %3\n"                               \
++                "       strex" #sz "eq %0, %4, [%2]\n"                  \
++                : "=&r" (res), "=&r" (oldval)                           \
++                : "r" (ptr), "Ir" (*old), "r" (new)                     \
++                : "memory", "cc");                                      \
 +                                                                        \
 +                if (!res)                                               \
 +                        break;                                          \
@@ -347,15 +439,47 @@ index c51388216e..a5282cf66e 100644
 +        return !res;                                                    \
 +}
 +
-+__CMPXCHG_TIMEOUT_CASE(w, b, 1)
-+__CMPXCHG_TIMEOUT_CASE(w, h, 2)
-+__CMPXCHG_TIMEOUT_CASE(w,  , 4)
-+__CMPXCHG_TIMEOUT_CASE( ,  , 8)
++__CMPXCHG_TIMEOUT_CASE(b, 1)
++__CMPXCHG_TIMEOUT_CASE(h, 2)
++__CMPXCHG_TIMEOUT_CASE( , 4)
++
++static inline bool __cmpxchg_timeout_case_8(volatile uint64_t *ptr,
++                                    uint64_t *old,
++                                    uint64_t new,
++                                    bool timeout,
++                                    unsigned int max_try)
++{
++        uint64_t oldval;
++        uint64_t res;
++
++        do {
++                asm volatile(
++                "       ldrexd          %1, %H1, [%3]\n"
++                "       teq             %1, %4\n"
++                "       teqeq           %H1, %H4\n"
++                "       movne           %0, #0\n"
++                "       movne           %H0, #0\n"
++                "       bne             2f\n"
++                "       strexd          %0, %5, %H5, [%3]\n"
++                "2:"
++                : "=&r" (res), "=&r" (oldval), "+Qo" (*ptr)
++                : "r" (ptr), "r" (*old), "r" (new)
++                : "memory", "cc");
++                if (!res)
++                        break;
++        } while (!timeout || ((--max_try) > 0));
++
++        *old = oldval;
++
++        return !res;
++}
 +
 +static always_inline bool __int_cmpxchg(volatile void *ptr, unsigned long *old,
 +                                        unsigned long new, int size,
 +                                        bool timeout, unsigned int max_try)
 +{
++        prefetchw((const void *)ptr);
++
 +        switch (size) {
 +        case 1:
 +                return __cmpxchg_timeout_case_1(ptr, old, new, timeout, max_try);
@@ -363,10 +487,9 @@ index c51388216e..a5282cf66e 100644
 +                return __cmpxchg_timeout_case_2(ptr, old, new, timeout, max_try);
 +        case 4:
 +                return __cmpxchg_timeout_case_4(ptr, old, new, timeout, max_try);
-+        case 8:
-+                return __cmpxchg_timeout_case_8(ptr, old, new, timeout, max_try);
 +        default:
-+                return __bad_cmpxchg(ptr, size);
++                __bad_cmpxchg(ptr, size);
++				return false;
 +        }
 +
 +        ASSERT_UNREACHABLE();
@@ -397,11 +520,31 @@ index c51388216e..a5282cf66e 100644
 +        return ret;
 +}
 +
-+#define __cmpxchg64_timeout(ptr, old, new, max_try)     \
-+        __cmpxchg_timeout(ptr, old, new, 8, max_try)
++/*
++ * The helper may fail to update the memory if the action takes too long.
++ *
++ * @old: On call the value pointed contains the expected old value. It will be
++ * updated to the actual old value.
++ * @max_try: Maximum number of iterations
++ *
++ * The helper will return true when the update has succeeded (i.e no
++ * timeout) and false if the update has failed.
++ */
++static always_inline bool __cmpxchg64_timeout(volatile uint64_t *ptr,
++                                              uint64_t *old,
++                                              uint64_t new,
++                                              unsigned int max_try)
++{
++        bool ret;
 +
++        smp_mb();
++        ret = __cmpxchg_timeout_case_8(ptr, old, new, true, max_try);
++        smp_mb();
 +
-+#endif	/* __ASM_ARM_ARM64_CMPXCHG_H */
++        return ret;
++}
++
++#endif /* __ASM_ARM_ARM32_CMPXCHG_H */
 -- 
 2.24.3 (Apple Git-128)
 
