@@ -2,25 +2,28 @@ Return-Path: <SRS0=tVq8=ER=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C5341C388F9
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 05:24:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 035C3C388F9
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 05:50:15 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 603FD20729
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 05:24:10 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 603FD20729
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenbits.xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 7E3342220B
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 05:50:14 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="aqXSvtmZ"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7E3342220B
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.23821.51344 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.24235.51359 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kcibh-0001Zu-JM; Wed, 11 Nov 2020 05:23:45 +0000
+	id 1kcj10-0003Va-Np; Wed, 11 Nov 2020 05:49:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 23821.51344; Wed, 11 Nov 2020 05:23:45 +0000
+Received: by outflank-mailman (output) from mailman id 24235.51359; Wed, 11 Nov 2020 05:49:54 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -35,32 +38,101 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kcibh-0001Zn-Fq; Wed, 11 Nov 2020 05:23:45 +0000
-Received: by outflank-mailman (input) for mailman id 23821;
- Tue, 10 Nov 2020 18:59:29 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
+	id 1kcj10-0003VT-Kf; Wed, 11 Nov 2020 05:49:54 +0000
+Received: by outflank-mailman (input) for mailman id 24235;
+ Wed, 11 Nov 2020 05:49:54 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenbits.xenproject.org>) id 1kcYrZ-00045J-P8
- for xen-devel@lists.xenproject.org; Tue, 10 Nov 2020 18:59:29 +0000
-Received: from iwj by xenbits.xenproject.org with local (Exim 4.92)
- (envelope-from <iwj@xenbits.xenproject.org>) id 1kcYrZ-0007Lw-OM
- for xen-devel@lists.xenproject.org; Tue, 10 Nov 2020 18:59:29 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
+ (envelope-from <SRS0=GpG1=ER=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1kcj0z-0003VO-U5
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 05:49:54 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id cdbb153a-9754-4576-bc1f-b1305e7789a5;
+ Wed, 11 Nov 2020 05:49:49 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 6101DAD66;
+ Wed, 11 Nov 2020 05:49:48 +0000 (UTC)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <iwj@xenbits.xenproject.org>)
-	id 1kcYrZ-00045J-P8
-	for xen-devel@lists.xenproject.org; Tue, 10 Nov 2020 18:59:29 +0000
-Received: from iwj by xenbits.xenproject.org with local (Exim 4.92)
-	(envelope-from <iwj@xenbits.xenproject.org>)
-	id 1kcYrZ-0007Lw-OM
-	for xen-devel@lists.xenproject.org; Tue, 10 Nov 2020 18:59:29 +0000
-Subject: test
-To: <xen-devel@lists.xenproject.org>
-X-Mailer: mail (GNU Mailutils 3.5)
-Message-Id: <E1kcYrZ-0007Lw-OM@xenbits.xenproject.org>
-From: Ian Jackson <iwj@xenbits.xenproject.org>
-Date: Tue, 10 Nov 2020 18:59:29 +0000
+	(envelope-from <SRS0=GpG1=ER=suse.com=jgross@srs-us1.protection.inumbo.net>)
+	id 1kcj0z-0003VO-U5
+	for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 05:49:54 +0000
+X-Inumbo-ID: cdbb153a-9754-4576-bc1f-b1305e7789a5
+Received: from mx2.suse.de (unknown [195.135.220.15])
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id cdbb153a-9754-4576-bc1f-b1305e7789a5;
+	Wed, 11 Nov 2020 05:49:49 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1605073788;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=8HUl3sIsB7tj41whqo0AC809SMSfM+7DMkhJUHNhwxE=;
+	b=aqXSvtmZIjbQ8QC9UXLDMOAC6MUfCxxoSwXcCFQgbEfsuVyvFeiu4aQ9OGyg/i00pFO2OK
+	QDSJJTnNAcFJvhDsPh79F6GQZi2UVvH/pOfnbMZWhHJusf6L8sbIYVHXkOi1jGSaOhQWf/
+	QBRAw2XNUV8nv1jxcXE6BniXb4t5A+g=
+Received: from relay2.suse.de (unknown [195.135.221.27])
+	by mx2.suse.de (Postfix) with ESMTP id 6101DAD66;
+	Wed, 11 Nov 2020 05:49:48 +0000 (UTC)
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Ian Jackson <iwj@xenproject.org>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH] xen/events: fix build
+Date: Wed, 11 Nov 2020 06:49:46 +0100
+Message-Id: <20201111054946.3229-1-jgross@suse.com>
+X-Mailer: git-send-email 2.26.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-Please don't reply.
-.
+Commit 5f2df45ead7c1195 ("xen/evtchn: rework per event channel lock")
+introduced a build failure for NDEBUG builds.
+
+Fixes: 5f2df45ead7c1195 ("xen/evtchn: rework per event channel lock")
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ xen/common/event_channel.c | 2 ++
+ xen/include/xen/sched.h    | 2 --
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/xen/common/event_channel.c b/xen/common/event_channel.c
+index eacd96b92f..da85d536f4 100644
+--- a/xen/common/event_channel.c
++++ b/xen/common/event_channel.c
+@@ -61,7 +61,9 @@ static inline void evtchn_write_lock(struct evtchn *evtchn)
+ {
+     write_lock(&evtchn->lock);
+ 
++#ifndef NDEBUG
+     evtchn->old_state = evtchn->state;
++#endif
+ }
+ 
+ static inline void evtchn_write_unlock(struct evtchn *evtchn)
+diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
+index 7251b3ae3e..95f96e7a33 100644
+--- a/xen/include/xen/sched.h
++++ b/xen/include/xen/sched.h
+@@ -114,9 +114,7 @@ struct evtchn
+         u16 virq;      /* state == ECS_VIRQ */
+     } u;
+     u8 priority;
+-#ifndef NDEBUG
+     u8 old_state;      /* State when taking lock in write mode. */
+-#endif
+     u8 last_priority;
+     u16 last_vcpu_id;
+ #ifdef CONFIG_XSM
+-- 
+2.26.2
+
 
