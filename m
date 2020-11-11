@@ -2,26 +2,29 @@ Return-Path: <SRS0=tVq8=ER=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,
+X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 38B22C388F9
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 20:31:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7022DC5517A
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 21:53:03 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B686C206F1
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 20:31:17 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B686C206F1
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id F097F20825
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 21:53:02 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="oQNVr3As"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F097F20825
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.25282.52920 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.25293.52957 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kcwlP-00076L-Bn; Wed, 11 Nov 2020 20:30:43 +0000
+	id 1kcy2t-00069d-VB; Wed, 11 Nov 2020 21:52:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 25282.52920; Wed, 11 Nov 2020 20:30:43 +0000
+Received: by outflank-mailman (output) from mailman id 25293.52957; Wed, 11 Nov 2020 21:52:51 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,125 +39,144 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kcwlP-00076E-8u; Wed, 11 Nov 2020 20:30:43 +0000
-Received: by outflank-mailman (input) for mailman id 25282;
- Wed, 11 Nov 2020 20:30:42 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>) id 1kcwlO-000769-Na
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 20:30:42 +0000
-Received: from host109-146-187-185.range109-146.btcentralplus.com
- ([109.146.187.185] helo=u2f063a87eabd5f.home)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
- (envelope-from <paul@xen.org>)
- id 1kcwP0-0000pY-Al; Wed, 11 Nov 2020 20:07:34 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
+	id 1kcy2t-00069U-Rv; Wed, 11 Nov 2020 21:52:51 +0000
+Received: by outflank-mailman (input) for mailman id 25293;
+ Wed, 11 Nov 2020 21:52:49 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1kcy2r-00064v-Ok
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 21:52:49 +0000
+Received: from mail-wr1-x443.google.com (unknown [2a00:1450:4864:20::443])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 2483e5c9-4c86-4ff1-9b5f-9efaf2ce6fcd;
+ Wed, 11 Nov 2020 21:52:40 +0000 (UTC)
+Received: by mail-wr1-x443.google.com with SMTP id k2so3998943wrx.2
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2020 13:52:40 -0800 (PST)
+Received: from C02ZJ1BNLVDN.emea.arm.com (0547a297.skybroadband.com.
+ [5.71.162.151])
+ by smtp.gmail.com with ESMTPSA id u23sm4096078wmc.32.2020.11.11.13.52.38
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Wed, 11 Nov 2020 13:52:38 -0800 (PST)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <paul@xen.org>)
-	id 1kcwlO-000769-Na
-	for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 20:30:42 +0000
-Received: from host109-146-187-185.range109-146.btcentralplus.com ([109.146.187.185] helo=u2f063a87eabd5f.home)
-	by xenbits.xenproject.org with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <paul@xen.org>)
-	id 1kcwP0-0000pY-Al; Wed, 11 Nov 2020 20:07:34 +0000
-From: Paul Durrant <paul@xen.org>
+	id 1kcy2r-00064v-Ok
+	for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 21:52:49 +0000
+X-Inumbo-ID: 2483e5c9-4c86-4ff1-9b5f-9efaf2ce6fcd
+Received: from mail-wr1-x443.google.com (unknown [2a00:1450:4864:20::443])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id 2483e5c9-4c86-4ff1-9b5f-9efaf2ce6fcd;
+	Wed, 11 Nov 2020 21:52:40 +0000 (UTC)
+Received: by mail-wr1-x443.google.com with SMTP id k2so3998943wrx.2
+        for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2020 13:52:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=CODXTx/qAJFmAOdmnrKmfVlPhSYEzSAm6huhIA2Mo1I=;
+        b=oQNVr3As2iNhoTTgUw08EzCuvEeUJGdh+BijVSabFb5qFpbq5mcVhXfZK8uabpWOud
+         gQpUHRAaRFa620hoH7jmrUdB1CSM3GcXaHjhv7grkduuprEhqRzK1EidJxWkjM9td51q
+         v2xaE6eozqeLg0M+qdJE3hm6fl6YCeQpO8KRtd+WTHFur/s6IaEJk8p7AoOXX40b/WNI
+         s8auOJusZejoyZdyPLc58iepBaX2ulQds/oeP/hqXdOXklyllHvoUvwG5l68mmTnkFX6
+         EHppP93AqRDWliZnx89JN0lYN7oEHseaVL4zwNHrVwZ9Sb8tKznlrHRmlMmyqRNS92hd
+         nlug==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=CODXTx/qAJFmAOdmnrKmfVlPhSYEzSAm6huhIA2Mo1I=;
+        b=r/VhnlazKEFtz3S66anfAgLolYgH9ry7G4kv3uNarUL95XTUqwI3QWE/jAnXr/2N1c
+         Lh8Clax9FeNpeRVqI8HBYau6O9dN9wBrQArz/tymcUysoIgFLe+r35VOECQvzRlonQwH
+         i0i36B38erK+iaAGMIzgbczEeMbAsyjGlOM6tmBEu2XyPDbNDQfVI8Viju37kCbl9vr8
+         jRg42m7HzDkrtB7DaSEFmax4zLikJqiDBpGDxdX/bT7+StwmjN7Yqgc124JxJnHzM5+T
+         pkkdN5k+sBiyd2oEieYKtmqtlhzRkSlNuxnLkggAibSIs26UxeiZHIIqUtqi0sQP0O4A
+         gz3w==
+X-Gm-Message-State: AOAM531+pEkYZxZQxVFdNzCAvEk/VnF78WQz3JxYhcAXk1IOFCxKzBsP
+	6JtEwRYLLP4u5JGaV439k4p/yPq6oyY=
+X-Google-Smtp-Source: ABdhPJzBDSOrdcdgHWz1ZLiR2a2Q81rePOml0YZw0Qnuq0gjXwXFCubF2rtCDjJm1Bwj3aDpBXXauA==
+X-Received: by 2002:adf:f607:: with SMTP id t7mr5085487wrp.169.1605131559247;
+        Wed, 11 Nov 2020 13:52:39 -0800 (PST)
+Received: from C02ZJ1BNLVDN.emea.arm.com (0547a297.skybroadband.com. [5.71.162.151])
+        by smtp.gmail.com with ESMTPSA id u23sm4096078wmc.32.2020.11.11.13.52.38
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Wed, 11 Nov 2020 13:52:38 -0800 (PST)
+From: Ash Wilding <ash.j.wilding@gmail.com>
+X-Google-Original-From: Ash Wilding
 To: xen-devel@lists.xenproject.org
-Cc: Paul Durrant <pdurrant@amazon.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH 10/10] xl / libxl: add 'ex_processor_mask' into 'libxl_viridian_enlightenment'
-Date: Wed, 11 Nov 2020 20:07:21 +0000
-Message-Id: <20201111200721.30551-11-paul@xen.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20201111200721.30551-1-paul@xen.org>
-References: <20201111200721.30551-1-paul@xen.org>
+Cc: Ash Wilding <ash.j.wilding@gmail.com>,
+	julien@xen.org,
+	bertrand.marquis@arm.com,
+	rahul.singh@arm.com
+Subject: [RFC PATCH v2 02/15] xen/arm: Add detection of Armv8.1-LSE atomic instructions
+Date: Wed, 11 Nov 2020 21:51:50 +0000
+Message-Id: <20201111215203.80336-3-ash.j.wilding@gmail.com>
+X-Mailer: git-send-email 2.24.3 (Apple Git-128)
+In-Reply-To: <20201111215203.80336-1-ash.j.wilding@gmail.com>
+References: <20201111215203.80336-1-ash.j.wilding@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Paul Durrant <pdurrant@amazon.com>
+From: Ash Wilding <ash.j.wilding@gmail.com>
 
-Adding the new value into the enumeration makes it immediately available
-to xl, so this patch adjusts the xl.cfg(5) documentation accordingly.
+Use the new infrastructure for detecting CPU features in other ID
+registers to detect the presence of Armv8.1-LSE atomic instructions,
+as reported by ID_AA64ISAR0_EL1.Atomic.
 
-Signed-off-by: Paul Durrant <pdurrant@amazon.com>
+While we're here, print detection of these instructions in setup.c's
+processor_id().
+
+Signed-off-by: Ash Wilding <ash.j.wilding@gmail.com>
 ---
-Cc: Ian Jackson <iwj@xenproject.org>
-Cc: Wei Liu <wl@xen.org>
-Cc: Anthony PERARD <anthony.perard@citrix.com>
----
- docs/man/xl.cfg.5.pod.in         | 8 ++++++++
- tools/include/libxl.h            | 7 +++++++
- tools/libs/light/libxl_types.idl | 1 +
- tools/libs/light/libxl_x86.c     | 3 +++
- 4 files changed, 19 insertions(+)
+ xen/arch/arm/setup.c             |  5 +++--
+ xen/include/asm-arm/cpufeature.h | 10 +++++++++-
+ 2 files changed, 12 insertions(+), 3 deletions(-)
 
-diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
-index 0532739c1fff..3f0f8de1e988 100644
---- a/docs/man/xl.cfg.5.pod.in
-+++ b/docs/man/xl.cfg.5.pod.in
-@@ -2318,6 +2318,14 @@ This set incorporates use of a hypercall for interprocessor interrupts.
- This enlightenment may improve performance of Windows guests with multiple
- virtual CPUs.
+diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
+index 5121f06fc5..138e1957c5 100644
+--- a/xen/arch/arm/setup.c
++++ b/xen/arch/arm/setup.c
+@@ -128,10 +128,11 @@ static void __init processor_id(void)
+            cpu_has_el2_32 ? "64+32" : cpu_has_el2_64 ? "64" : "No",
+            cpu_has_el1_32 ? "64+32" : cpu_has_el1_64 ? "64" : "No",
+            cpu_has_el0_32 ? "64+32" : cpu_has_el0_64 ? "64" : "No");
+-    printk("    Extensions:%s%s%s\n",
++    printk("    Extensions:%s%s%s%s\n",
+            cpu_has_fp ? " FloatingPoint" : "",
+            cpu_has_simd ? " AdvancedSIMD" : "",
+-           cpu_has_gicv3 ? " GICv3-SysReg" : "");
++           cpu_has_gicv3 ? " GICv3-SysReg" : "",
++           cpu_has_lse_atomics ? " LSE-Atomics" : "");
  
-+=item B<ex_processor_masks>
+     /* Warn user if we find unknown floating-point features */
+     if ( cpu_has_fp && (boot_cpu_feature(pfr64, fp) >= 2) )
+diff --git a/xen/include/asm-arm/cpufeature.h b/xen/include/asm-arm/cpufeature.h
+index f9281ea343..2366926e82 100644
+--- a/xen/include/asm-arm/cpufeature.h
++++ b/xen/include/asm-arm/cpufeature.h
+@@ -15,6 +15,7 @@
+ #define cpu_has_fp              (boot_cpu_feature(pfr64, fp) < 8)
+ #define cpu_has_simd            (boot_cpu_feature(pfr64, simd) < 8)
+ #define cpu_has_gicv3           (boot_cpu_feature(pfr64, gic) == 1)
++#define cpu_has_lse_atomics     (boot_cpu_feature(isa64, atomic) == 2)
+ #endif
+ 
+ #define cpu_has_arm       (boot_cpu_feature(pfr32, arm) == 1)
+@@ -187,8 +188,15 @@ struct cpuinfo_arm {
+         };
+     } mm64;
+ 
+-    struct {
++    union {
+         uint64_t bits[2];
++        struct {
++            unsigned long __res0 : 20;
++            unsigned long atomic : 4;
++            unsigned long __res1 : 40;
 +
-+This set enables new hypercall variants taking a variably-sized sparse
-+B<Virtual Processor Set> as an argument, rather than a simple 64-bit
-+mask. Hence this enlightenment must be specified for guests with more
-+than 64 vCPUs if B<hcall_remote_tlb_flush> and/or B<hcall_ipi> are also
-+specified.
-+
- =item B<defaults>
++            unsigned long __res2 : 64;
++        };
+     } isa64;
  
- This is a special value that enables the default set of groups, which
-diff --git a/tools/include/libxl.h b/tools/include/libxl.h
-index 1ea5b4f446e8..eaffccb30f37 100644
---- a/tools/include/libxl.h
-+++ b/tools/include/libxl.h
-@@ -444,6 +444,13 @@
-  */
- #define LIBXL_HAVE_DISK_SAFE_REMOVE 1
- 
-+/*
-+ * LIBXL_HAVE_VIRIDIAN_EX_PROCESSOR_MASKS indicates that the
-+ * 'ex_processor_masks' value is present in the viridian enlightenment
-+ * enumeration.
-+ */
-+#define LIBXL_HAVE_VIRIDIAN_EX_PROCESSOR_MASKS 1
-+
- /*
-  * libxl ABI compatibility
-  *
-diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
-index 9d3f05f39978..05324736b744 100644
---- a/tools/libs/light/libxl_types.idl
-+++ b/tools/libs/light/libxl_types.idl
-@@ -238,6 +238,7 @@ libxl_viridian_enlightenment = Enumeration("viridian_enlightenment", [
-     (7, "synic"),
-     (8, "stimer"),
-     (9, "hcall_ipi"),
-+    (10, "ex_processor_masks"),
-     ])
- 
- libxl_hdtype = Enumeration("hdtype", [
-diff --git a/tools/libs/light/libxl_x86.c b/tools/libs/light/libxl_x86.c
-index e18274cc10e2..86d272999d67 100644
---- a/tools/libs/light/libxl_x86.c
-+++ b/tools/libs/light/libxl_x86.c
-@@ -366,6 +366,9 @@ static int hvm_set_viridian_features(libxl__gc *gc, uint32_t domid,
-     if (libxl_bitmap_test(&enlightenments, LIBXL_VIRIDIAN_ENLIGHTENMENT_HCALL_IPI))
-         mask |= HVMPV_hcall_ipi;
- 
-+    if (libxl_bitmap_test(&enlightenments, LIBXL_VIRIDIAN_ENLIGHTENMENT_EX_PROCESSOR_MASKS))
-+        mask |= HVMPV_ex_processor_masks;
-+
-     if (mask != 0 &&
-         xc_hvm_param_set(CTX->xch,
-                          domid,
+ #endif
 -- 
-2.20.1
+2.24.3 (Apple Git-128)
 
 
