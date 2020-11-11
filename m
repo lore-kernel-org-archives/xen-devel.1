@@ -7,21 +7,24 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D910C5517A
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 14:13:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 81D67C388F9
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 14:21:43 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8EE4C2072C
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 14:13:43 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8EE4C2072C
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=epam.com
+	by mail.kernel.org (Postfix) with ESMTPS id DA66E2072C
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 14:21:42 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="Q+QzypHj";
+	dkim=pass (1024-bit key) header.d=citrix.onmicrosoft.com header.i=@citrix.onmicrosoft.com header.b="bJ+WtfAg"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DA66E2072C
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.24850.52299 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.24860.52324 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kcqsB-0007k5-FT; Wed, 11 Nov 2020 14:13:19 +0000
+	id 1kcr02-0000JO-M9; Wed, 11 Nov 2020 14:21:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 24850.52299; Wed, 11 Nov 2020 14:13:19 +0000
+Received: by outflank-mailman (output) from mailman id 24860.52324; Wed, 11 Nov 2020 14:21:26 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,194 +39,183 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kcqsB-0007jy-CD; Wed, 11 Nov 2020 14:13:19 +0000
-Received: by outflank-mailman (input) for mailman id 24850;
- Wed, 11 Nov 2020 14:13:18 +0000
+	id 1kcr02-0000J2-J5; Wed, 11 Nov 2020 14:21:26 +0000
+Received: by outflank-mailman (input) for mailman id 24860;
+ Wed, 11 Nov 2020 14:21:25 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Pxcb=ER=epam.com=prvs=9584594409=oleksandr_andrushchenko@srs-us1.protection.inumbo.net>)
- id 1kcqsA-0007jt-6e
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 14:13:18 +0000
-Received: from mx0a-0039f301.pphosted.com (unknown [148.163.133.242])
+ <SRS0=nKbA=ER=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1kcr01-0000HG-5h
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 14:21:25 +0000
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 763c3517-2d88-454c-a8c7-4bbdedde1955;
- Wed, 11 Nov 2020 14:13:16 +0000 (UTC)
-Received: from pps.filterd (m0174679.ppops.net [127.0.0.1])
- by mx0a-0039f301.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 0ABED9Rq003303; Wed, 11 Nov 2020 14:13:09 GMT
-Received: from eur04-db3-obe.outbound.protection.outlook.com
- (mail-db3eur04lp2051.outbound.protection.outlook.com [104.47.12.51])
- by mx0a-0039f301.pphosted.com with ESMTP id 34rf808h8s-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 11 Nov 2020 14:13:05 +0000
-Received: from AM0PR03MB6324.eurprd03.prod.outlook.com (2603:10a6:20b:153::17)
- by AM0PR03MB5012.eurprd03.prod.outlook.com (2603:10a6:208:106::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3541.23; Wed, 11 Nov
- 2020 14:12:56 +0000
-Received: from AM0PR03MB6324.eurprd03.prod.outlook.com
- ([fe80::501:a686:7515:465e]) by AM0PR03MB6324.eurprd03.prod.outlook.com
- ([fe80::501:a686:7515:465e%8]) with mapi id 15.20.3541.025; Wed, 11 Nov 2020
- 14:12:56 +0000
+ id 1477b381-4151-4a07-995a-22faa2ba7360;
+ Wed, 11 Nov 2020 14:21:19 +0000 (UTC)
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=Pxcb=ER=epam.com=prvs=9584594409=oleksandr_andrushchenko@srs-us1.protection.inumbo.net>)
-	id 1kcqsA-0007jt-6e
-	for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 14:13:18 +0000
-X-Inumbo-ID: 763c3517-2d88-454c-a8c7-4bbdedde1955
-Received: from mx0a-0039f301.pphosted.com (unknown [148.163.133.242])
+	(envelope-from <SRS0=nKbA=ER=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+	id 1kcr01-0000HG-5h
+	for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 14:21:25 +0000
+X-Inumbo-ID: 1477b381-4151-4a07-995a-22faa2ba7360
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 763c3517-2d88-454c-a8c7-4bbdedde1955;
-	Wed, 11 Nov 2020 14:13:16 +0000 (UTC)
-Received: from pps.filterd (m0174679.ppops.net [127.0.0.1])
-	by mx0a-0039f301.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id 0ABED9Rq003303;
-	Wed, 11 Nov 2020 14:13:09 GMT
-Received: from eur04-db3-obe.outbound.protection.outlook.com (mail-db3eur04lp2051.outbound.protection.outlook.com [104.47.12.51])
-	by mx0a-0039f301.pphosted.com with ESMTP id 34rf808h8s-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Wed, 11 Nov 2020 14:13:05 +0000
+	id 1477b381-4151-4a07-995a-22faa2ba7360;
+	Wed, 11 Nov 2020 14:21:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1605104479;
+  h=date:from:to:cc:subject:message-id:references:
+   content-transfer-encoding:in-reply-to:mime-version;
+  bh=euGk2UDOuVDTVqJAkajzJT3pF1DGqy1mjJlYnONO37w=;
+  b=Q+QzypHjGhqNcigSEbRT75/+8MCaS1K4d/RNXW2k/WzRHu2GTQ/Rr5Vo
+   c1GVNUuJn5QuXXdQMfjlwMcX0UTgfZZoEe7FjvU/VMeo0eTpzvpC1AZgY
+   BtwqysRT1wrmUGfVkpiDzfbiF3SPICvA0nP90ZMu6ghcfXx3rP7m/mw9j
+   Y=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=pass (signature verified) header.i=@citrix.onmicrosoft.com
+IronPort-SDR: 7Cb9gf1f6/YcEob2H6at6B3acm3+S9ayQdtKyXGaNv/hfpD9x62dCJ35V5xPK27RmoB6rdZ15Y
+ k++Xjr/6tBec/Jsis0+GSV8cLgHUZV8U/C802h1rii6q+Ff0PaoYJSmt3E3drCcnWFfjCDVjHM
+ W9qMqThW54WxtUWgTolKwVdWdc4E3Oqp2gKbHTAZb/hP1p0Rl6GO35UPWbz8K4ZT8wfgG5MRIl
+ WUi5DG8k61rKXFvn7XhGt0N5i9ldyiUAfWSQkXae5x1WrPXIKdzRu4p9KZrlJVjHb0A2JLKDwh
+ Ics=
+X-SBRS: None
+X-MesageID: 31186527
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.77,469,1596513600"; 
+   d="scan'208";a="31186527"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=lrUYWvfxJLUcNC9jMdpW7vHQt26MvivY+Y7kpf6VsHt1nrG440uB2kYLpwHSmChXSluZQZkVRWvDNjkkSiVe0Q8yCnnIPbaWm1AuzJAZYSNSOQSGAfQOf4Cr3EMWLB+sFgXky7m7EhHIvIlulYxYxPx14PvLdFndC8O/qzX8TwdwafEprhfj8hTLpYHWVOCVi9Viq97QF6niaUB1AKlPPuqzBO522CR8+paqX3nwv6lu1T0z0U7MVx8cXBPCKxeCooYzQ4L+Efgvh1K2jgL5bLZcyNgZqBCfhz4I7Db3JSmK8neupQs9LUPES6NS4yFQ7t+KHBd4YFWTvQxjJaTDpw==
+ b=U9o7dnobV0AO/vy6gVegeSCYWJDFlNdiq+5ScPFcIzr5rc8JVjFMXji1kusA0pn5/uifFktS9ay+1qZCWpSE6lm7l+njtk3aHSjmStTSLQu4ECY7yYUevWtCiCkba2qo8qRqAXmiFzxMpSM6MSvdlRShPY0lhI6ArnioD1Val6k2hZkx/xz4KU/baHd/mo8nLe1f4D6N74ZminRvDWdythSPMwM+YPnCFTmYfAUN6gSBx3tq+jdwqQP6SrB185HD4cUG2wxCgqC+49G295pqMfp1Z53t0khgMdMQM/y8jlsJk4msZmtDfimRMHYajAs+1HSCsmXMNEEukBqdjFtI4w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=iG75p0ZMhhX6mbehzPC/+pblUTXNaQ9WSXon7+B8TqQ=;
- b=nsNkNPoqaAIJz8s1IbHwM5Wg1b3uN6OxHHRAeO2/epd10g37pzu/7VNE2vqClMeHGayCZIqOYsZByqs9pURiQzPlcPrc1bGNXDcd8SPtbWU4D3SdCEilnnQrr0yTgOS3OSEmrCPJnA7EVBJc8B/Li3qnMCqeNah0fmzBHP3cEKPvLt2Xr3QV77IvVVw936QGr/hqbWskqR+ed7VuZQSeVH6xh3i2pd/Viyq6rrSRM3GLwz+SKBZbiUrUX0uCd7yodyqETSkZ5LwExTlxr2DkjICcV97GvfPmy/UctQQgfhrWtderBXUKavS4ixxgn1WAM3wprCGjeVFeDYK/Ulmp5w==
+ bh=uLgc+bWB+b/0Dvw3ibOvwF8NjO3fjE2arC95H/R78UM=;
+ b=njGSyA85bseLVmWIfcotqRELnVDVdlXKsAVU3e0OKjfVG36U1ZLedRbnCajh9OmDflHAE2cw73nRGs+nbJ8Xqn4zRAYzG+U+wJKbUYv0NhSgI5ks0LlcskPkVogYAlm49mcMzi3gno12hrz4baRFOJShknAytr3fZ8n+tdmccxJzcGvffpYAxXyriXmfFSockbhQ6J17ZpaMFWuKyLynJ/FI+hRAFUA9Iolh6Oadfp5i8ZfOjCuoEe4ZGxSp2ShgC8r77a2YrVrvBZtmPJCaHbQFNwj8Wy3+VXCB1WV4LHJzChlEb6EvjX6isyvPZOyR5yH2fFJRO/LmSx/YN0/qIg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=iG75p0ZMhhX6mbehzPC/+pblUTXNaQ9WSXon7+B8TqQ=;
- b=Cb1rcjcOMyna1o67l+zcyZyugAqiAlGGmaL0X9Th4J7ZOjokXkVrenoM6xzDhq+MnvhMCl7UKXC62rgC2LSvV6WlOOuMed7b5wistGUHDTggsBirMJ8YE7ClviOATkEqXM4BspjfyHGzazUYLDnUBJjbcUtuZCyotaxXv1pGsBiqOfUgk4y9XxVWJcUTrMaDgLR9xaGkAP9gsXK8wj/+z6FwjLpdlheUPRNKTT08SIB1ZOteOQiKAdo8rpGWXxda0gfP5+6uGqiNVgyYCBBU15McY8x/LsNyxhkJ5KaNNF2hfz/FsWwSSjlRGays1Rn/RBTBp80ft9+ya3l0M2Pt6g==
-Received: from AM0PR03MB6324.eurprd03.prod.outlook.com (2603:10a6:20b:153::17)
- by AM0PR03MB5012.eurprd03.prod.outlook.com (2603:10a6:208:106::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3541.23; Wed, 11 Nov
- 2020 14:12:56 +0000
-Received: from AM0PR03MB6324.eurprd03.prod.outlook.com
- ([fe80::501:a686:7515:465e]) by AM0PR03MB6324.eurprd03.prod.outlook.com
- ([fe80::501:a686:7515:465e%8]) with mapi id 15.20.3541.025; Wed, 11 Nov 2020
- 14:12:56 +0000
-From: Oleksandr Andrushchenko <Oleksandr_Andrushchenko@epam.com>
-To: =?utf-8?B?Um9nZXIgUGF1IE1vbm7DqQ==?= <roger.pau@citrix.com>
-CC: "Rahul.Singh@arm.com" <Rahul.Singh@arm.com>,
-        "Bertrand.Marquis@arm.com"
-	<Bertrand.Marquis@arm.com>,
-        "julien.grall@arm.com" <julien.grall@arm.com>,
-        "jbeulich@suse.com" <jbeulich@suse.com>,
-        "sstabellini@kernel.org"
-	<sstabellini@kernel.org>,
-        "xen-devel@lists.xenproject.org"
-	<xen-devel@lists.xenproject.org>,
-        "iwj@xenproject.org" <iwj@xenproject.org>, "wl@xen.org" <wl@xen.org>,
-        Oleksandr Andrushchenko <andr2000@gmail.com>
+ bh=uLgc+bWB+b/0Dvw3ibOvwF8NjO3fjE2arC95H/R78UM=;
+ b=bJ+WtfAgPnIpjn9+3OrIOTCNT6f7Hx7sxeTlq7GL8/ifv7zbhRITbEEFOWi77Wp29Qn+tJRRloIXjte7v4ukV50cwiUEMH4HRoxjOLSLyXpInaM/XhWeeYTkeyKzSZjiQn7UlaV00AtUa9M7Ojs3Dv54yjvMnsjvppBJc74O2h4=
+Date: Wed, 11 Nov 2020 15:21:09 +0100
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Oleksandr Andrushchenko <Oleksandr_Andrushchenko@epam.com>
+CC: "Rahul.Singh@arm.com" <Rahul.Singh@arm.com>, "Bertrand.Marquis@arm.com"
+	<Bertrand.Marquis@arm.com>, "julien.grall@arm.com" <julien.grall@arm.com>,
+	"jbeulich@suse.com" <jbeulich@suse.com>, "sstabellini@kernel.org"
+	<sstabellini@kernel.org>, "xen-devel@lists.xenproject.org"
+	<xen-devel@lists.xenproject.org>, "iwj@xenproject.org" <iwj@xenproject.org>,
+	"wl@xen.org" <wl@xen.org>, Oleksandr Andrushchenko <andr2000@gmail.com>
 Subject: Re: [SUSPECTED SPAM][PATCH 01/10] pci/pvh: Allow PCI toolstack code
  run with PVH domains on ARM
-Thread-Topic: [SUSPECTED SPAM][PATCH 01/10] pci/pvh: Allow PCI toolstack code
- run with PVH domains on ARM
-Thread-Index: AQHWtpbtW65RafIiXE60uDMyi8KYhqnC4BMAgAAKqgCAAAyigIAABPKA
-Date: Wed, 11 Nov 2020 14:12:56 +0000
-Message-ID: <fc3a73cc-824b-d941-8ec8-dfcae8ee1756@epam.com>
+Message-ID: <20201111142109.cumpeziv4xruy6t2@Air-de-Roger>
 References: <20201109125031.26409-1-andr2000@gmail.com>
  <20201109125031.26409-2-andr2000@gmail.com>
  <20201111123150.7lkabdo3wix7jkdk@Air-de-Roger>
  <57fefaee-9684-4c67-662e-f4c57313886e@epam.com>
  <20201111135513.yvqfe4xongnhtjcq@Air-de-Roger>
-In-Reply-To: <20201111135513.yvqfe4xongnhtjcq@Air-de-Roger>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: citrix.com; dkim=none (message not signed)
- header.d=none;citrix.com; dmarc=none action=none header.from=epam.com;
-x-originating-ip: [185.199.97.5]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 725eafb7-30fd-43cc-6053-08d8864be31c
-x-ms-traffictypediagnostic: AM0PR03MB5012:
-x-microsoft-antispam-prvs: 
- <AM0PR03MB50125236C00D07ABF2470183E7E80@AM0PR03MB5012.eurprd03.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:10000;
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 
- R6OXV+Tgb6nziHTGKbdh+nK7Yxa0Ho5jwdw3rWPw3Q9dOlEb5QLhyv79yvVBKmULBN/r33D1lPGlCZLIPCG+wAUJSriD5rg1AI0Dd9+iPx4VhvLeK4Db/P2HHObdwtwGcO53yjnyf+wQGulelWafYESBmzAyvv62MMzhbOOAAdrI+QbbmNeNiFD4priwkQVqHRZxTpv0ZK4Bd9OQ5d5DMNu2D3z/7/C9Av2kzbGM/0EF+nmID+NeskRP/A2itJ9+4NXC6b2cIT10yuM2r14QKWD67NJNtz5Eu52wIGgrhjGGl5K4D6shr5st8491MLJ0AUIHLVEGzPvJSGNk20K05xiB8761xusl7W32qYl640yvqE6++L845i9f5iJQ0VxKJDSLioe45XKgkG0lzMw/Bg==
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM0PR03MB6324.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(366004)(136003)(376002)(39860400002)(396003)(86362001)(26005)(6506007)(4326008)(54906003)(8676002)(316002)(186003)(2906002)(31696002)(7416002)(8936002)(6486002)(31686004)(71200400001)(966005)(36756003)(6512007)(53546011)(83380400001)(478600001)(6916009)(76116006)(91956017)(5660300002)(2616005)(66946007)(66446008)(66476007)(66556008)(64756008);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata: 
- LyHnL/5DLqX8Sel5gc5ir9piO3WEAf70KsuVPWbOkBNUn4U80s8/GV8kZtxDrTTEPDGM6x//KEON1OMEvC1FUPrcmvPaGsObvMrMqPVHtckl/tE8LVqcy8mvTVpLGwVxjruY/lV+PsNNZZGGxevC0BrKLjMe1N5E/tAcDKmvpiWbLL8SJr5MU41ORUA5Cm2t0Vgbh0RZ2wW0qQYSTyyWeJmQuMRwAkitFuB8rS1Kb7kn02LraAarMyM2bT3VBZo4i8mpg7cHtzDfuTQdQcdjM/7t03/zpmjU/QMxTOZnDJci7IGZCetcmyzEZ4iPRH1EKQWCUDoKeWqgeN8CX2NAndEi/abHwVlDePswADb1hIGhSTMr1sUvq5LHTSG+7TH35RFvc4nGqZLO3XjsehPejdxhBIkzVa53l8CPwBECF/d4Bg1yJxTvcSSuAWlJr+gPOqIh/nji9ZdmqGsqkvzlPtUjRurOyhf0VpSOdCdbpT7StyKV+zbHOOzbjHC4WyjoUn/v9PzrsBDxVEjB89XLA2NswMmqWOpSamQKaQnRXObTzrYtJBhSewA7VB7nOqmW12XJOQMtpjINfaxaZcccWb0izEAOSICWjE/tCBQTbZqLz59YBh+3T/5x2QKGv+BpvG47Nrl5t4/h3HJH9c0buw==
-x-ms-exchange-transport-forked: True
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <4A9CE19DBA30604081B156018D65F3B5@eurprd03.prod.outlook.com>
-Content-Transfer-Encoding: base64
+ <fc3a73cc-824b-d941-8ec8-dfcae8ee1756@epam.com>
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <fc3a73cc-824b-d941-8ec8-dfcae8ee1756@epam.com>
+X-ClientProxiedBy: LO2P265CA0460.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:a2::16) To DS7PR03MB5608.namprd03.prod.outlook.com
+ (2603:10b6:5:2c9::18)
 MIME-Version: 1.0
-X-OriginatorOrg: epam.com
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: b31d1ac2-015f-4820-b3e9-08d8864d0c6c
+X-MS-TrafficTypeDiagnostic: DM5PR03MB2636:
+X-Microsoft-Antispam-PRVS: <DM5PR03MB2636A6930DDCD81CA011EBDB8FE80@DM5PR03MB2636.namprd03.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:9508;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: bfHN0B9SG2hNbfxoPfXJxQghrTXej6+kxoz2UtJgHU1QilytnMpqI5lM3VLzhWfCBlHEuGmO0tH3u8d3eonMTf5cxTPHWXm919ko88RDagYmp9e1w4tLiBxM1Z/zp4qEj2QGl+rkFObARGNBn5+RcWyUAImIcLJkJ0B3LU++cLumCCoQAk1RkjvRBqam6f+Ui4dqSYg73IeYTAaYW2pkef+rTr73y/z/+hFfr10a92u/OrFjxxDzua2l1NtaazT7FiRzlqf10mz/0Npa/WyhSL7CzM14TSt7zvf2fsXcyWZiXLfrARe+r5p5s7mbnu7Hz20LW4BcmmV/2//YOEJkl5Tpo2Bvp7omlYcltSeqFJN4+Sb7IxgaE1YmZM/3Xd9EHPaScBZ9/ZT2xVaRrBIjEg==
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS7PR03MB5608.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(7916004)(4636009)(366004)(136003)(39860400002)(376002)(346002)(396003)(6486002)(66946007)(66556008)(9686003)(478600001)(66476007)(2906002)(5660300002)(83380400001)(186003)(6496006)(6666004)(16526019)(8676002)(85182001)(966005)(33716001)(6916009)(86362001)(956004)(53546011)(54906003)(316002)(4326008)(1076003)(26005)(8936002)(7416002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: xol+fdf4arqho64v1pyu2kA0PC0BrlID0MQueLGpQ7L6+zGZSrgFL5Wu2QagGTtFAhF5Vq3c5i+1ui7UZZPWiLvZ70owGzRbjspBvDv1ReuZwickCcVSW6iTkRuxr2FusmM/d+IDjqb6DyjLGttPfVOZ0utPu8msvykh+LhV2nlJdAJ5eorOIWaGMxrjQFmcJuz078uK3xvSHAybvTtQSvJBVaRIJGln5Pks2Bqva+s57A1QaTBQVzDZymhUKTtcPDpzG6rEiCLPjTxINHz0sGyAz2Nv8Ih4Y9jkFcR18swOXmeYmdr2KbiHT0HgqpTKEVfdjGhQdNqcObnWNNFbqk9RoGdqbRXarp8h5GrOyQeWQ4R0aiD0c8SCT9+iAOqfFG8Dn6Ur+DssIYyyRR3/3CYyBYoUBNHx7QMMmwRwvDBlwUrbjihgsWhpCNTGLUd3PRNqsm8lKg//BTW8DimyJdiVL19E6drwBpkd4jtbxqfL83iJpgGxefvkzUBKFHef6pWrktXJGd+X0bYIBT42PYotSLbX7wJdy97IKlICjAgkfdApB+wtyGCTCxrc/aFLoA7ObaUZzmMcxArulBh2FrhTpRz8uSvrC5a70ebhROdQ4WwHTP8nqYOFnhzL2MnbdNRnZhrafxjtDRNz4e+bm4bX8kI98r+rFZYzXX1oW8QaKl+hFgevTwbXQo+w3KGk2TJavjtLbDL/rG+022/HXqQzP168bdSWHGZ07+m+q+gumPAPQ5Vu1UVvQJ+k58N16laUWA7Lq1bus9vWYC+NC/AUUyFYPFQBYiwFFbO8RTdIbYofhQygr2Q6dNlcBh+qc/p0T+beRCk/NYPMZxKAXfmFMP7xsu+luITLK65+3gjaDT1lBJY6GiraIzakS4IVYZHsz0nZckKoA/ElNbnUcw==
+X-MS-Exchange-CrossTenant-Network-Message-Id: b31d1ac2-015f-4820-b3e9-08d8864d0c6c
+X-MS-Exchange-CrossTenant-AuthSource: DS7PR03MB5608.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AM0PR03MB6324.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 725eafb7-30fd-43cc-6053-08d8864be31c
-X-MS-Exchange-CrossTenant-originalarrivaltime: 11 Nov 2020 14:12:56.2856
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Nov 2020 14:21:15.3482
  (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 6NqABm3e2i2P7oXl/FqnHNj2gnUbrCmLPfBZxnP6oJAUxmxtR/YiHUEMQbtgXNWKV1AaFZc+Tc3vvpi9FnK7OQTwwWTIlkKC6UjZOuUEqYzT6E+MLkBKEZSWERWNt/bS
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR03MB5012
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.312,18.0.737
- definitions=2020-11-11_06:2020-11-10,2020-11-11 signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0 mlxscore=0
- phishscore=0 spamscore=0 adultscore=0 bulkscore=0 priorityscore=1501
- suspectscore=0 impostorscore=0 mlxlogscore=999 lowpriorityscore=0
- clxscore=1015 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2009150000 definitions=main-2011110083
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: X94TMd4UTRNBmqTT4xJZU+w6lOSOWi91M2eor6qinZOS7FzexZG/UuOx3vNl9LpN/MYFfgCumWBySyMnkJOllg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR03MB2636
+X-OriginatorOrg: citrix.com
 
-DQpPbiAxMS8xMS8yMCAzOjU1IFBNLCBSb2dlciBQYXUgTW9ubsOpIHdyb3RlOg0KPiBPbiBXZWQs
-IE5vdiAxMSwgMjAyMCBhdCAwMToxMDowMVBNICswMDAwLCBPbGVrc2FuZHIgQW5kcnVzaGNoZW5r
-byB3cm90ZToNCj4+IE9uIDExLzExLzIwIDI6MzEgUE0sIFJvZ2VyIFBhdSBNb25uw6kgd3JvdGU6
-DQo+Pj4gT24gTW9uLCBOb3YgMDksIDIwMjAgYXQgMDI6NTA6MjJQTSArMDIwMCwgT2xla3NhbmRy
-IEFuZHJ1c2hjaGVua28gd3JvdGU6DQo+Pj4+IEZyb206IE9sZWtzYW5kciBBbmRydXNoY2hlbmtv
-IDxvbGVrc2FuZHJfYW5kcnVzaGNoZW5rb0BlcGFtLmNvbT4NCj4+Pj4NCj4+Pj4gQWNjb3JkaW5n
-IHRvIGh0dHBzOi8vdXJsZGVmZW5zZS5jb20vdjMvX19odHRwczovL3dpa2kueGVucHJvamVjdC5v
-cmcvd2lraS9MaW51eF9QVkhfXzshIUdGXzI5ZGJjUUlVQlBBIW5FSGQ2ZWl2bXF0ZEp4dHJoTy0z
-eDJNejlGNTBKc0tVb1Y3V1RFSmRfRDFOMDFEckJPSlh6R1cxUUFxd3NoWjlBTXh5d2JVaE9BJCBb
-d2lraVsuXXhlbnByb2plY3RbLl1vcmddOg0KPj4+Pg0KPj4+PiBJdGVtcyBub3Qgc3VwcG9ydGVk
-IGJ5IFBWSA0KPj4+PiAgICAtIFBDSSBwYXNzIHRocm91Z2ggKGFzIG9mIFhlbiA0LjEwKQ0KPj4+
-Pg0KPj4+PiBBbGxvdyBydW5uaW5nIFBDSSByZW1vdmUgY29kZSBvbiBBUk0gYW5kIGRvIG5vdCBh
-c3NlcnQgZm9yIFBWSCBkb21haW5zLg0KPj4+Pg0KPj4+PiBTaWduZWQtb2ZmLWJ5OiBPbGVrc2Fu
-ZHIgQW5kcnVzaGNoZW5rbyA8b2xla3NhbmRyX2FuZHJ1c2hjaGVua29AZXBhbS5jb20+DQo+Pj4+
-IC0tLQ0KPj4+PiAgICB0b29scy9saWJ4bC9NYWtlZmlsZSAgICB8IDQgKysrKw0KPj4+PiAgICB0
-b29scy9saWJ4bC9saWJ4bF9wY2kuYyB8IDQgKysrLQ0KPj4+PiAgICAyIGZpbGVzIGNoYW5nZWQs
-IDcgaW5zZXJ0aW9ucygrKSwgMSBkZWxldGlvbigtKQ0KPj4+Pg0KPj4+PiBkaWZmIC0tZ2l0IGEv
-dG9vbHMvbGlieGwvTWFrZWZpbGUgYi90b29scy9saWJ4bC9NYWtlZmlsZQ0KPj4+PiBpbmRleCAy
-NDFkYTdmZmY2ZjQuLmYzODA2YWFmY2I0ZSAxMDA2NDQNCj4+Pj4gLS0tIGEvdG9vbHMvbGlieGwv
-TWFrZWZpbGUNCj4+Pj4gKysrIGIvdG9vbHMvbGlieGwvTWFrZWZpbGUNCj4+Pj4gQEAgLTEzMCw2
-ICsxMzAsMTAgQEAgZW5kaWYNCj4+Pj4gICAgDQo+Pj4+ICAgIExJQlhMX0xJQlMgKz0gLWx5YWps
-DQo+Pj4+ICAgIA0KPj4+PiAraWZlcSAoJChDT05GSUdfQVJNKSx5KQ0KPj4+PiArQ0ZBTEdTICs9
-IC1EQ09ORklHX0FSTQ0KPj4+PiArZW5kaWYNCj4+Pj4gKw0KPj4+PiAgICBMSUJYTF9PQkpTID0g
-ZmxleGFycmF5Lm8gbGlieGwubyBsaWJ4bF9jcmVhdGUubyBsaWJ4bF9kbS5vIGxpYnhsX3BjaS5v
-IFwNCj4+Pj4gICAgCQkJbGlieGxfZG9tLm8gbGlieGxfZXhlYy5vIGxpYnhsX3hzaGVscC5vIGxp
-YnhsX2RldmljZS5vIFwNCj4+Pj4gICAgCQkJbGlieGxfaW50ZXJuYWwubyBsaWJ4bF91dGlscy5v
-IGxpYnhsX3V1aWQubyBcDQo+Pj4+IGRpZmYgLS1naXQgYS90b29scy9saWJ4bC9saWJ4bF9wY2ku
-YyBiL3Rvb2xzL2xpYnhsL2xpYnhsX3BjaS5jDQo+Pj4+IGluZGV4IGJjNTg0M2IxMzcwMS4uYjkz
-Y2Y5NzY2NDJiIDEwMDY0NA0KPj4+PiAtLS0gYS90b29scy9saWJ4bC9saWJ4bF9wY2kuYw0KPj4+
-PiArKysgYi90b29scy9saWJ4bC9saWJ4bF9wY2kuYw0KPj4+PiBAQCAtMTkxNSw4ICsxOTE1LDEw
-IEBAIHN0YXRpYyB2b2lkIGRvX3BjaV9yZW1vdmUobGlieGxfX2VnYyAqZWdjLCB1aW50MzJfdCBk
-b21pZCwNCj4+Pj4gICAgICAgICAgICAgICAgZ290byBvdXRfZmFpbDsNCj4+Pj4gICAgICAgICAg
-ICB9DQo+Pj4+ICAgICAgICB9IGVsc2Ugew0KPj4+PiArICAgICAgICAvKiBQQ0kgcGFzc3Rocm91
-Z2ggY2FuIGFsc28gcnVuIG9uIEFSTSBQVkggKi8NCj4+Pj4gKyNpZm5kZWYgQ09ORklHX0FSTQ0K
-Pj4+PiAgICAgICAgICAgIGFzc2VydCh0eXBlID09IExJQlhMX0RPTUFJTl9UWVBFX1BWKTsNCj4+
-Pj4gLQ0KPj4+PiArI2VuZGlmDQo+Pj4gSSB3b3VsZCBqdXN0IHJlbW92ZSB0aGUgYXNzZXJ0IG5v
-dyBpZiB0aGlzIGlzIHRvIGJlIHVzZWQgYnkgQXJtIGFuZA0KPj4+IHlvdSBkb24ndCBuZWVkIHRv
-IGZvcmsgdGhlIGZpbGUgZm9yIEFybS4NCj4+IFNvdW5kcyBnb29kLCBJIHdpbGwgZHJvcCB0aGVu
-DQo+Pg0KPj4gQnV0IHdoYXQgd291bGQgYmUgdGhlIHJpZ2h0IGV4cGxhbmF0aW9uIHRoZW4/IEkg
-bWVhbiB3aHkgdGhlcmUgd2FzIGFuIEFTU0VSVA0KPj4NCj4+IGFuZCBub3cgaXQgaXMgc2FmZSAo
-Zm9yIHg4NikgdG8gcmVtb3ZlIHRoYXQ/DQo+IEFuIGFzc2VydCBpcyBqdXN0IGEgc2FmZSBiZWx0
-LCB0aGUgZXhwZWN0YXRpb24gaXMgdGhhdCBpdCdzIG5ldmVyIGhpdA0KPiBieSBhY3R1YWwgY29k
-ZS4gR2l2ZW4gdGhhdCB0aGlzIHBhdGggd2lsbCBub3cgYWxzbyBiZSB1c2VkIGJ5IFBWSA0KPiAo
-ZXZlbiBpZiBvbmx5IG9uIEFybSkgSSBkb24ndCBzZWUgdGhlIHBvaW50IGluIGtlZXBpbmcgdGhl
-IGFzc2VydCwgYW5kDQo+IG1ha2luZyBpdCBjb25kaXRpb25hbCB0byAhPSBBcm0gc2VlbXMgd29y
-c2UgdGhhbiBqdXN0IGRyb3BwaW5nIGl0Lg0KDQpPaywgc28gSSBjYW4gd3JpdGUgaW4gdGhlIHBh
-dGNoIGRlc2NyaXB0aW9uIHNvbWV0aGluZyBsaWtlOg0KDQoidGhpcyBwYXRoIGlzIG5vdyB1c2Vk
-IGJ5IFBWSCwgc28gdGhlIGFzc2VydCBpcyBubyBsb25nZXIgdmFsaWQiDQoNCkRvZXMgaXQgc291
-bmQgb2s/DQoNCj4gVGhhbmtzLCBSb2dlci4NCg0KVGhhbmsgeW91LA0KDQpPbGVrc2FuZHINCg==
+On Wed, Nov 11, 2020 at 02:12:56PM +0000, Oleksandr Andrushchenko wrote:
+> 
+> On 11/11/20 3:55 PM, Roger Pau Monné wrote:
+> > On Wed, Nov 11, 2020 at 01:10:01PM +0000, Oleksandr Andrushchenko wrote:
+> >> On 11/11/20 2:31 PM, Roger Pau Monné wrote:
+> >>> On Mon, Nov 09, 2020 at 02:50:22PM +0200, Oleksandr Andrushchenko wrote:
+> >>>> From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+> >>>>
+> >>>> According to https://urldefense.com/v3/__https://wiki.xenproject.org/wiki/Linux_PVH__;!!GF_29dbcQIUBPA!nEHd6eivmqtdJxtrhO-3x2Mz9F50JsKUoV7WTEJd_D1N01DrBOJXzGW1QAqwshZ9AMxywbUhOA$ [wiki[.]xenproject[.]org]:
+> >>>>
+> >>>> Items not supported by PVH
+> >>>>    - PCI pass through (as of Xen 4.10)
+> >>>>
+> >>>> Allow running PCI remove code on ARM and do not assert for PVH domains.
+> >>>>
+> >>>> Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+> >>>> ---
+> >>>>    tools/libxl/Makefile    | 4 ++++
+> >>>>    tools/libxl/libxl_pci.c | 4 +++-
+> >>>>    2 files changed, 7 insertions(+), 1 deletion(-)
+> >>>>
+> >>>> diff --git a/tools/libxl/Makefile b/tools/libxl/Makefile
+> >>>> index 241da7fff6f4..f3806aafcb4e 100644
+> >>>> --- a/tools/libxl/Makefile
+> >>>> +++ b/tools/libxl/Makefile
+> >>>> @@ -130,6 +130,10 @@ endif
+> >>>>    
+> >>>>    LIBXL_LIBS += -lyajl
+> >>>>    
+> >>>> +ifeq ($(CONFIG_ARM),y)
+> >>>> +CFALGS += -DCONFIG_ARM
+> >>>> +endif
+> >>>> +
+> >>>>    LIBXL_OBJS = flexarray.o libxl.o libxl_create.o libxl_dm.o libxl_pci.o \
+> >>>>    			libxl_dom.o libxl_exec.o libxl_xshelp.o libxl_device.o \
+> >>>>    			libxl_internal.o libxl_utils.o libxl_uuid.o \
+> >>>> diff --git a/tools/libxl/libxl_pci.c b/tools/libxl/libxl_pci.c
+> >>>> index bc5843b13701..b93cf976642b 100644
+> >>>> --- a/tools/libxl/libxl_pci.c
+> >>>> +++ b/tools/libxl/libxl_pci.c
+> >>>> @@ -1915,8 +1915,10 @@ static void do_pci_remove(libxl__egc *egc, uint32_t domid,
+> >>>>                goto out_fail;
+> >>>>            }
+> >>>>        } else {
+> >>>> +        /* PCI passthrough can also run on ARM PVH */
+> >>>> +#ifndef CONFIG_ARM
+> >>>>            assert(type == LIBXL_DOMAIN_TYPE_PV);
+> >>>> -
+> >>>> +#endif
+> >>> I would just remove the assert now if this is to be used by Arm and
+> >>> you don't need to fork the file for Arm.
+> >> Sounds good, I will drop then
+> >>
+> >> But what would be the right explanation then? I mean why there was an ASSERT
+> >>
+> >> and now it is safe (for x86) to remove that?
+> > An assert is just a safe belt, the expectation is that it's never hit
+> > by actual code. Given that this path will now also be used by PVH
+> > (even if only on Arm) I don't see the point in keeping the assert, and
+> > making it conditional to != Arm seems worse than just dropping it.
+> 
+> Ok, so I can write in the patch description something like:
+> 
+> "this path is now used by PVH, so the assert is no longer valid"
+> 
+> Does it sound ok?
+
+LGTM.
+
+Roger.
 
