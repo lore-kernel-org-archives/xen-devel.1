@@ -5,25 +5,25 @@ X-Spam-Level:
 X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=unavailable autolearn_force=no version=3.4.0
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8FF95C388F9
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 08:30:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 48030C4742C
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 08:30:23 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1011D206F1
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 08:30:20 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id CE38B206F1
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 08:30:22 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="RCXh8hHV"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1011D206F1
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="nQ0hySiZ"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CE38B206F1
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.24455.51823 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.24456.51827 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kclW8-0005EV-2e; Wed, 11 Nov 2020 08:30:12 +0000
+	id 1kclW8-0005GD-HG; Wed, 11 Nov 2020 08:30:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 24455.51823; Wed, 11 Nov 2020 08:30:12 +0000
+Received: by outflank-mailman (output) from mailman id 24456.51827; Wed, 11 Nov 2020 08:30:12 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kclW7-0005Dm-T6; Wed, 11 Nov 2020 08:30:11 +0000
-Received: by outflank-mailman (input) for mailman id 24455;
- Wed, 11 Nov 2020 08:30:09 +0000
+	id 1kclW8-0005FW-AH; Wed, 11 Nov 2020 08:30:12 +0000
+Received: by outflank-mailman (input) for mailman id 24456;
+ Wed, 11 Nov 2020 08:30:10 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=kJD9=ER=casper.srs.infradead.org=batv+33c89f8a75624a8d62ce+6289+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1kclUG-0002dF-IE
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 08:28:16 +0000
+ id 1kclUz-0002dF-Jm
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 08:29:01 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id ba0bac8c-b5c4-4394-97d4-91a256199013;
- Wed, 11 Nov 2020 08:27:28 +0000 (UTC)
+ id bce83519-a651-44d3-9271-d9d667d58d90;
+ Wed, 11 Nov 2020 08:27:41 +0000 (UTC)
 Received: from [2001:4bb8:180:6600:bcde:334f:863c:27b8] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kclTD-0007b7-Eu; Wed, 11 Nov 2020 08:27:11 +0000
+ id 1kclTQ-0007du-T4; Wed, 11 Nov 2020 08:27:25 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=kJD9=ER=casper.srs.infradead.org=batv+33c89f8a75624a8d62ce+6289+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1kclUG-0002dF-IE
-	for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 08:28:16 +0000
-X-Inumbo-ID: ba0bac8c-b5c4-4394-97d4-91a256199013
+	id 1kclUz-0002dF-Jm
+	for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 08:29:01 +0000
+X-Inumbo-ID: bce83519-a651-44d3-9271-d9d667d58d90
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id ba0bac8c-b5c4-4394-97d4-91a256199013;
-	Wed, 11 Nov 2020 08:27:28 +0000 (UTC)
+	id bce83519-a651-44d3-9271-d9d667d58d90;
+	Wed, 11 Nov 2020 08:27:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=7BWzzM1ONnukKsMJYvFCtkh7Po4ojUIcRAoXEXZQpls=; b=RCXh8hHVKHOdlbTgZudBE0UgxQ
-	OdZbQcCl+Yq46gbMhWR8GVkt7ot75syMIyMmRVs70SjQ1O8I3Qml7eCC8UgjmLw+eZKo3Y+wA2Jn3
-	swdtiCKDiqLib1ChlnI43270zWz+HESqHy3CFg19CGNjMaZmfyCASYpR/6tWH4C8l/mB79/1BSWgs
-	puiFVbzfVm1so5b0mSiZ9Ei1//wgG5uEkaKOW5zYLA6lZYmZLWg1vlPvHI0aYLKiQl40RWCE1w1Is
-	2SNvkcNq6XAtQw8IczEREzWr5hvM924WJzBVkrt1lqmXha4587UsPlSaCJVXmHuHTxzWvnOewG4Qb
-	h8NmpJFw==;
+	bh=4bS/eZqoJAQR/DSs9IGqi2g9LCY9L0WWDnWefDh2k5M=; b=nQ0hySiZUaY9fLZcgrMawm9KxL
+	DbgEDe1kMMO1r2VbjG/Ha8Omw2jZ9OcL4L35p38O5YLec9s6gZFqZDsBvRcEaVBQf5ShLXgduUfPD
+	87lEv7hQ4w6SMvk5725iCpwRkLYeP85Upi9ENHtST0lvS3ZK2A6pldL0+TZelBmo7KQDRUcRCGdYO
+	HuuIuddxS5+s4wDf5RBRG5NdNwdHC1R5zqSzn4cXlzM+in9/z/RQvc4S+cvVNMv8ufLGQQWHoc4+c
+	HTfKvbfu5a0af+lNakwx6fOj7Gy+7QKzkLBa496tldsKLleDl5gXZEux1D0rN8XatRpBkUJfWHfC2
+	G0ns064g==;
 Received: from [2001:4bb8:180:6600:bcde:334f:863c:27b8] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1kclTD-0007b7-Eu; Wed, 11 Nov 2020 08:27:11 +0000
+	id 1kclTQ-0007du-T4; Wed, 11 Nov 2020 08:27:25 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -102,9 +102,9 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-nvme@lists.infradead.org,
 	linux-scsi@vger.kernel.org,
 	linux-fsdevel@vger.kernel.org
-Subject: [PATCH 10/24] nbd: validate the block size in nbd_set_size
-Date: Wed, 11 Nov 2020 09:26:44 +0100
-Message-Id: <20201111082658.3401686-11-hch@lst.de>
+Subject: [PATCH 19/24] zram: use set_capacity_and_notify
+Date: Wed, 11 Nov 2020 09:26:53 +0100
+Message-Id: <20201111082658.3401686-20-hch@lst.de>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20201111082658.3401686-1-hch@lst.de>
 References: <20201111082658.3401686-1-hch@lst.de>
@@ -112,120 +112,46 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-Move the validation of the block from the callers into nbd_set_size.
+Use set_capacity_and_notify to set the size of both the disk and block
+device.  This also gets the uevent notifications for the resize for free.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
-Reviewed-by: Josef Bacik <josef@toxicpanda.com>
 ---
- drivers/block/nbd.c | 47 +++++++++++++++------------------------------
- 1 file changed, 15 insertions(+), 32 deletions(-)
+ drivers/block/zram/zram_drv.c | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-index eb8a5da48ad75a..327060e01ad58e 100644
---- a/drivers/block/nbd.c
-+++ b/drivers/block/nbd.c
-@@ -296,16 +296,21 @@ static void nbd_size_clear(struct nbd_device *nbd)
- 	}
- }
+diff --git a/drivers/block/zram/zram_drv.c b/drivers/block/zram/zram_drv.c
+index 1b697208d66157..6d15d51cee2b7e 100644
+--- a/drivers/block/zram/zram_drv.c
++++ b/drivers/block/zram/zram_drv.c
+@@ -1695,7 +1695,7 @@ static void zram_reset_device(struct zram *zram)
+ 	disksize = zram->disksize;
+ 	zram->disksize = 0;
  
--static void nbd_set_size(struct nbd_device *nbd, loff_t bytesize,
-+static int nbd_set_size(struct nbd_device *nbd, loff_t bytesize,
- 		loff_t blksize)
- {
- 	struct block_device *bdev;
+-	set_capacity(zram->disk, 0);
++	set_capacity_and_notify(zram->disk, 0);
+ 	part_stat_set_all(&zram->disk->part0, 0);
  
-+	if (!blksize)
-+		blksize = NBD_DEF_BLKSIZE;
-+	if (blksize < 512 || blksize > PAGE_SIZE || !is_power_of_2(blksize))
-+		return -EINVAL;
-+
- 	nbd->config->bytesize = bytesize;
- 	nbd->config->blksize = blksize;
+ 	up_write(&zram->init_lock);
+@@ -1741,9 +1741,7 @@ static ssize_t disksize_store(struct device *dev,
  
- 	if (!nbd->task_recv)
--		return;
-+		return 0;
- 
- 	if (nbd->config->flags & NBD_FLAG_SEND_TRIM) {
- 		nbd->disk->queue->limits.discard_granularity = blksize;
-@@ -325,6 +330,7 @@ static void nbd_set_size(struct nbd_device *nbd, loff_t bytesize,
- 		bdput(bdev);
- 	}
- 	kobject_uevent(&nbd_to_dev(nbd)->kobj, KOBJ_CHANGE);
-+	return 0;
- }
- 
- static void nbd_complete_rq(struct request *req)
-@@ -1304,8 +1310,7 @@ static int nbd_start_device(struct nbd_device *nbd)
- 		args->index = i;
- 		queue_work(nbd->recv_workq, &args->work);
- 	}
--	nbd_set_size(nbd, config->bytesize, config->blksize);
--	return error;
-+	return nbd_set_size(nbd, config->bytesize, config->blksize);
- }
- 
- static int nbd_start_device_ioctl(struct nbd_device *nbd, struct block_device *bdev)
-@@ -1347,14 +1352,6 @@ static void nbd_clear_sock_ioctl(struct nbd_device *nbd,
- 		nbd_config_put(nbd);
- }
- 
--static bool nbd_is_valid_blksize(unsigned long blksize)
--{
--	if (!blksize || !is_power_of_2(blksize) || blksize < 512 ||
--	    blksize > PAGE_SIZE)
--		return false;
--	return true;
--}
+ 	zram->comp = comp;
+ 	zram->disksize = disksize;
+-	set_capacity(zram->disk, zram->disksize >> SECTOR_SHIFT);
 -
- static void nbd_set_cmd_timeout(struct nbd_device *nbd, u64 timeout)
- {
- 	nbd->tag_set.timeout = timeout * HZ;
-@@ -1379,19 +1376,12 @@ static int __nbd_ioctl(struct block_device *bdev, struct nbd_device *nbd,
- 	case NBD_SET_SOCK:
- 		return nbd_add_socket(nbd, arg, false);
- 	case NBD_SET_BLKSIZE:
--		if (!arg)
--			arg = NBD_DEF_BLKSIZE;
--		if (!nbd_is_valid_blksize(arg))
--			return -EINVAL;
--		nbd_set_size(nbd, config->bytesize, arg);
--		return 0;
-+		return nbd_set_size(nbd, config->bytesize, arg);
- 	case NBD_SET_SIZE:
--		nbd_set_size(nbd, arg, config->blksize);
--		return 0;
-+		return nbd_set_size(nbd, arg, config->blksize);
- 	case NBD_SET_SIZE_BLOCKS:
--		nbd_set_size(nbd, arg * config->blksize,
--			     config->blksize);
--		return 0;
-+		return nbd_set_size(nbd, arg * config->blksize,
-+				    config->blksize);
- 	case NBD_SET_TIMEOUT:
- 		nbd_set_cmd_timeout(nbd, arg);
- 		return 0;
-@@ -1808,18 +1798,11 @@ static int nbd_genl_size_set(struct genl_info *info, struct nbd_device *nbd)
- 	if (info->attrs[NBD_ATTR_SIZE_BYTES])
- 		bytes = nla_get_u64(info->attrs[NBD_ATTR_SIZE_BYTES]);
+-	revalidate_disk_size(zram->disk, true);
++	set_capacity_and_notify(zram->disk, zram->disksize >> SECTOR_SHIFT);
+ 	up_write(&zram->init_lock);
  
--	if (info->attrs[NBD_ATTR_BLOCK_SIZE_BYTES]) {
-+	if (info->attrs[NBD_ATTR_BLOCK_SIZE_BYTES])
- 		bsize = nla_get_u64(info->attrs[NBD_ATTR_BLOCK_SIZE_BYTES]);
--		if (!bsize)
--			bsize = NBD_DEF_BLKSIZE;
--		if (!nbd_is_valid_blksize(bsize)) {
--			printk(KERN_ERR "Invalid block size %llu\n", bsize);
--			return -EINVAL;
--		}
--	}
+ 	return len;
+@@ -1790,7 +1788,6 @@ static ssize_t reset_store(struct device *dev,
+ 	/* Make sure all the pending I/O are finished */
+ 	fsync_bdev(bdev);
+ 	zram_reset_device(zram);
+-	revalidate_disk_size(zram->disk, true);
+ 	bdput(bdev);
  
- 	if (bytes != config->bytesize || bsize != config->blksize)
--		nbd_set_size(nbd, bytes, bsize);
-+		return nbd_set_size(nbd, bytes, bsize);
- 	return 0;
- }
- 
+ 	mutex_lock(&bdev->bd_mutex);
 -- 
 2.28.0
 
