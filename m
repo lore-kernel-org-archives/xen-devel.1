@@ -2,28 +2,28 @@ Return-Path: <SRS0=tVq8=ER=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AA735C4742C
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 08:16:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A29FDC388F9
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 08:27:52 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1911D206CA
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 08:16:36 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 33B26206F1
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 08:27:52 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="c1qX3CpM"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1911D206CA
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="WfHCfS71"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 33B26206F1
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.24350.51535 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.24362.51583 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kclIk-0001co-Jp; Wed, 11 Nov 2020 08:16:22 +0000
+	id 1kclTi-0002lm-Hw; Wed, 11 Nov 2020 08:27:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 24350.51535; Wed, 11 Nov 2020 08:16:22 +0000
+Received: by outflank-mailman (output) from mailman id 24362.51583; Wed, 11 Nov 2020 08:27:42 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,132 +38,246 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kclIk-0001ch-Fb; Wed, 11 Nov 2020 08:16:22 +0000
-Received: by outflank-mailman (input) for mailman id 24350;
- Wed, 11 Nov 2020 08:16:21 +0000
+	id 1kclTi-0002lf-Dv; Wed, 11 Nov 2020 08:27:42 +0000
+Received: by outflank-mailman (input) for mailman id 24362;
+ Wed, 11 Nov 2020 08:27:41 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=cwX6=ER=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kclIj-0001cc-HM
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 08:16:21 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=kJD9=ER=casper.srs.infradead.org=batv+33c89f8a75624a8d62ce+6289+infradead.org+hch@srs-us1.protection.inumbo.net>)
+ id 1kclTh-0002dF-GV
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 08:27:41 +0000
+Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 718587b1-4f72-4325-b1d1-ce623a635394;
- Wed, 11 Nov 2020 08:16:20 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id C45E8AC75;
- Wed, 11 Nov 2020 08:16:19 +0000 (UTC)
+ id d7266bc0-fca1-44ed-9190-ec7016c2a723;
+ Wed, 11 Nov 2020 08:27:25 +0000 (UTC)
+Received: from [2001:4bb8:180:6600:bcde:334f:863c:27b8] (helo=localhost)
+ by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+ id 1kclT7-0007a6-HW; Wed, 11 Nov 2020 08:27:05 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=cwX6=ER=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
-	id 1kclIj-0001cc-HM
-	for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 08:16:21 +0000
-X-Inumbo-ID: 718587b1-4f72-4325-b1d1-ce623a635394
-Received: from mx2.suse.de (unknown [195.135.220.15])
+	(envelope-from <SRS0=kJD9=ER=casper.srs.infradead.org=batv+33c89f8a75624a8d62ce+6289+infradead.org+hch@srs-us1.protection.inumbo.net>)
+	id 1kclTh-0002dF-GV
+	for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 08:27:41 +0000
+X-Inumbo-ID: d7266bc0-fca1-44ed-9190-ec7016c2a723
+Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 718587b1-4f72-4325-b1d1-ce623a635394;
-	Wed, 11 Nov 2020 08:16:20 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1605082579;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=F0UVQ7XfQ1QsHhWC89QH2H73gajMtQD6fWVY+G9oIhg=;
-	b=c1qX3CpMxMfJ+Kem2oOiaIpbOac7ZOl3HiFq1pF6nd1R1TFqX+AeCK5NJlxBmXIyai3gKj
-	QJGA2wvyUwgeKMWSikvW5BWoVtI83YpQKBW5bY7kp4xac++v3YYq9IYFDVnDzktFuO2vgR
-	YTOp+wslXaFu8tUGnT+C4FN/YmkWVGA=
-Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id C45E8AC75;
-	Wed, 11 Nov 2020 08:16:19 +0000 (UTC)
-Subject: Re: [PATCH V2 04/23] xen/ioreq: Provide alias for the handle_mmio()
-To: Oleksandr <olekstysh@gmail.com>
-Cc: xen-devel@lists.xenproject.org,
- 'Oleksandr Tyshchenko' <oleksandr_tyshchenko@epam.com>,
- 'Andrew Cooper' <andrew.cooper3@citrix.com>,
- =?UTF-8?B?J1JvZ2VyIFBhdSBNb25uw6kn?= <roger.pau@citrix.com>,
- 'Wei Liu' <wl@xen.org>, 'Julien Grall' <julien@xen.org>,
- 'Stefano Stabellini' <sstabellini@kernel.org>,
- 'Julien Grall' <julien.grall@arm.com>, paul@xen.org
-References: <1602780274-29141-1-git-send-email-olekstysh@gmail.com>
- <1602780274-29141-5-git-send-email-olekstysh@gmail.com>
- <004701d6a6c1$6c09f860$441de920$@xen.org>
- <38ba45dd-f1cd-a289-3ea3-75148782e126@suse.com>
- <004a01d6a6cd$1f4684b0$5dd38e10$@xen.org>
- <fab8e4b0-e3b2-fb74-76d4-42753ac88367@gmail.com>
- <f2d1cbef-09ec-86e4-bfc5-20320f78be6b@suse.com>
- <35d38051-129e-333d-ec94-aa36e68a3814@gmail.com>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <2e677d01-bf2f-e569-95a2-490dc05102d9@suse.com>
-Date: Wed, 11 Nov 2020 09:16:19 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.4.1
+	id d7266bc0-fca1-44ed-9190-ec7016c2a723;
+	Wed, 11 Nov 2020 08:27:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
+	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+	Content-Type:Content-ID:Content-Description;
+	bh=Dvn0FaNo/8PBixGEN3RzjNI2ye67KoyGrHfPj2XKGOY=; b=WfHCfS71T0TlhdvdbiXY0IUJ8U
+	bFjui3wewAtFhnUKYMrqWtx+i0W8oU/rkJ68nfC84r/sgjSLKesqYl+LT9MxjkfIhV2YTB/lNyksS
+	j/Ma+k+L39dMRnJ4DnC0BBG1vNY6MsJRcjXsUNa3IEC5qM8G5omocTWx7s3nxSQr/YVEyCYzhXbju
+	AJV3R/DCKbNdD66opVe6ukpbs82VppTy5jpH2yHVSitj5R3kIMaDir+nLwKfkxE4rWI320Dyx/PCA
+	fL//0AN3krkEY9dv/bES4MDMy4OGu4aGoO5akaYEh2hPkUKoi/NBucV8JuvZjnti7SqFRNyGBHBY8
+	vw4CPzkg==;
+Received: from [2001:4bb8:180:6600:bcde:334f:863c:27b8] (helo=localhost)
+	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+	id 1kclT7-0007a6-HW; Wed, 11 Nov 2020 08:27:05 +0000
+From: Christoph Hellwig <hch@lst.de>
+To: Jens Axboe <axboe@kernel.dk>
+Cc: Justin Sanders <justin@coraid.com>,
+	Josef Bacik <josef@toxicpanda.com>,
+	Ilya Dryomov <idryomov@gmail.com>,
+	Jack Wang <jinpu.wang@cloud.ionos.com>,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	Jason Wang <jasowang@redhat.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Stefan Hajnoczi <stefanha@redhat.com>,
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Minchan Kim <minchan@kernel.org>,
+	Mike Snitzer <snitzer@redhat.com>,
+	Song Liu <song@kernel.org>,
+	"Martin K. Petersen" <martin.petersen@oracle.com>,
+	dm-devel@redhat.com,
+	linux-block@vger.kernel.org,
+	drbd-dev@lists.linbit.com,
+	nbd@other.debian.org,
+	ceph-devel@vger.kernel.org,
+	xen-devel@lists.xenproject.org,
+	linux-raid@vger.kernel.org,
+	linux-nvme@lists.infradead.org,
+	linux-scsi@vger.kernel.org,
+	linux-fsdevel@vger.kernel.org
+Subject: [PATCH 05/24] block: remove the update_bdev parameter from set_capacity_revalidate_and_notify
+Date: Wed, 11 Nov 2020 09:26:39 +0100
+Message-Id: <20201111082658.3401686-6-hch@lst.de>
+X-Mailer: git-send-email 2.28.0
+In-Reply-To: <20201111082658.3401686-1-hch@lst.de>
+References: <20201111082658.3401686-1-hch@lst.de>
 MIME-Version: 1.0
-In-Reply-To: <35d38051-129e-333d-ec94-aa36e68a3814@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
 Content-Transfer-Encoding: 8bit
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-On 11.11.2020 09:09, Oleksandr wrote:
-> 
-> On 11.11.20 09:27, Jan Beulich wrote:
-> 
-> Hi Jan
-> 
->> On 10.11.2020 20:44, Oleksandr wrote:
->>> On 20.10.20 13:38, Paul Durrant wrote:
->>>
->>> Hi Jan, Paul
->>>
->>> Sorry for the late response.
->>>
->>>>> -----Original Message-----
->>>>> From: Jan Beulich <jbeulich@suse.com>
->>>>> Sent: 20 October 2020 11:05
->>>>> To: paul@xen.org
->>>>> Cc: 'Oleksandr Tyshchenko' <olekstysh@gmail.com>; xen-devel@lists.xenproject.org; 'Oleksandr
->>>>> Tyshchenko' <oleksandr_tyshchenko@epam.com>; 'Andrew Cooper' <andrew.cooper3@citrix.com>; 'Roger Pau
->>>>> Monné' <roger.pau@citrix.com>; 'Wei Liu' <wl@xen.org>; 'Julien Grall' <julien@xen.org>; 'Stefano
->>>>> Stabellini' <sstabellini@kernel.org>; 'Julien Grall' <julien.grall@arm.com>
->>>>> Subject: Re: [PATCH V2 04/23] xen/ioreq: Provide alias for the handle_mmio()
->>>>>
->>>>> On 20.10.2020 11:14, Paul Durrant wrote:
->>>>>>> From: Xen-devel <xen-devel-bounces@lists.xenproject.org> On Behalf Of Oleksandr Tyshchenko
->>>>>>> Sent: 15 October 2020 17:44
->>>>>>>
->>>>>>> --- a/xen/include/asm-x86/hvm/ioreq.h
->>>>>>> +++ b/xen/include/asm-x86/hvm/ioreq.h
->>>>>>> @@ -181,6 +181,8 @@ static inline bool arch_hvm_ioreq_destroy(struct domain *d)
->>>>>>>    #define IOREQ_STATUS_UNHANDLED   X86EMUL_UNHANDLEABLE
->>>>>>>    #define IOREQ_STATUS_RETRY       X86EMUL_RETRY
->>>>>>>
->>>>>>> +#define ioreq_complete_mmio   handle_mmio
->>>>>>> +
->>>>>> A #define? Really? Can we not have a static inline?
->>>>> I guess this would require further shuffling: handle_mmio() is
->>>>> an inline function in hvm/emulate.h, and hvm/ioreq.h has no
->>>>> need to include the former (and imo it also shouldn't have).
->>>>>
->>>> I see. I think we need an x86 ioreq.c anyway, to deal with the legacy use of magic pages, so it could be dealt with there instead.
->>> I am afraid I don't entirely understand the required changes. Could you
->>> please clarify where the "inline(?)" ioreq_complete_mmio() should
->>> live? I included hvm/emulate.h here not for the "handle_mmio()" reason
->>> only, but for "struct hvm_emulate_ctxt" also (see arch_io_completion()).
->> I'm sorry, but in the context of this patch there's no use of any
->> struct hvm_emulate_ctxt instance. I'm not going to wade through 23
->> patches to find what you mean.
-> 
-> Sorry for not being precise here. I meant arch_io_completion() added at [1]
+The update_bdev argument is always set to true, so remove it.  Also
+rename the function to the slighly less verbose set_capacity_and_notify,
+as propagating the disk size to the block device isn't really
+revalidation.
 
-At least some of the inlines you add there are way too large to be
-inline functions, imo. But consensus appears to be now to retain a
-per-arch ioreq.c anyway.
+Signed-off-by: Christoph Hellwig <hch@lst.de>
+---
+ block/genhd.c                | 13 +++++--------
+ drivers/block/loop.c         | 11 +++++------
+ drivers/block/virtio_blk.c   |  2 +-
+ drivers/block/xen-blkfront.c |  2 +-
+ drivers/nvme/host/core.c     |  2 +-
+ drivers/scsi/sd.c            |  5 ++---
+ include/linux/genhd.h        |  3 +--
+ 7 files changed, 16 insertions(+), 22 deletions(-)
 
-Jan
-
-> [1] 
-> https://patchwork.kernel.org/project/xen-devel/patch/1602780274-29141-2-git-send-email-olekstysh@gmail.com/
-> 
+diff --git a/block/genhd.c b/block/genhd.c
+index 0a273211fec283..d8d9d6c1c916e1 100644
+--- a/block/genhd.c
++++ b/block/genhd.c
+@@ -46,17 +46,15 @@ static void disk_del_events(struct gendisk *disk);
+ static void disk_release_events(struct gendisk *disk);
+ 
+ /*
+- * Set disk capacity and notify if the size is not currently
+- * zero and will not be set to zero
++ * Set disk capacity and notify if the size is not currently zero and will not
++ * be set to zero.
+  */
+-void set_capacity_revalidate_and_notify(struct gendisk *disk, sector_t size,
+-					bool update_bdev)
++void set_capacity_and_notify(struct gendisk *disk, sector_t size)
+ {
+ 	sector_t capacity = get_capacity(disk);
+ 
+ 	set_capacity(disk, size);
+-	if (update_bdev)
+-		revalidate_disk_size(disk, true);
++	revalidate_disk_size(disk, true);
+ 
+ 	if (capacity != size && capacity != 0 && size != 0) {
+ 		char *envp[] = { "RESIZE=1", NULL };
+@@ -64,8 +62,7 @@ void set_capacity_revalidate_and_notify(struct gendisk *disk, sector_t size,
+ 		kobject_uevent_env(&disk_to_dev(disk)->kobj, KOBJ_CHANGE, envp);
+ 	}
+ }
+-
+-EXPORT_SYMBOL_GPL(set_capacity_revalidate_and_notify);
++EXPORT_SYMBOL_GPL(set_capacity_and_notify);
+ 
+ /*
+  * Format the device name of the indicated disk into the supplied buffer and
+diff --git a/drivers/block/loop.c b/drivers/block/loop.c
+index 86eb7e0691eef5..77937b760ee0fc 100644
+--- a/drivers/block/loop.c
++++ b/drivers/block/loop.c
+@@ -1146,8 +1146,7 @@ static int loop_configure(struct loop_device *lo, fmode_t mode,
+ 	loop_update_dio(lo);
+ 	loop_sysfs_init(lo);
+ 
+-	set_capacity_revalidate_and_notify(lo->lo_disk, get_loop_size(lo, file),
+-			true);
++	set_capacity_and_notify(lo->lo_disk, get_loop_size(lo, file));
+ 	set_blocksize(bdev, S_ISBLK(inode->i_mode) ?
+ 		      block_size(inode->i_bdev) : PAGE_SIZE);
+ 
+@@ -1383,9 +1382,9 @@ loop_set_status(struct loop_device *lo, const struct loop_info64 *info)
+ 	lo->lo_flags |= prev_lo_flags & ~LOOP_SET_STATUS_CLEARABLE_FLAGS;
+ 
+ 	if (size_changed) {
+-		set_capacity_revalidate_and_notify(lo->lo_disk,
++		set_capacity_and_notify(lo->lo_disk,
+ 				get_size(lo->lo_offset, lo->lo_sizelimit,
+-					 lo->lo_backing_file), true);
++					 lo->lo_backing_file));
+ 	}
+ 
+ 	loop_config_discard(lo);
+@@ -1563,8 +1562,8 @@ static int loop_set_capacity(struct loop_device *lo)
+ {
+ 	if (unlikely(lo->lo_state != Lo_bound))
+ 		return -ENXIO;
+-	set_capacity_revalidate_and_notify(lo->lo_disk,
+-			get_loop_size(lo, lo->lo_backing_file), true);
++	set_capacity_and_notify(lo->lo_disk,
++			get_loop_size(lo, lo->lo_backing_file));
+ 	return 0;
+ }
+ 
+diff --git a/drivers/block/virtio_blk.c b/drivers/block/virtio_blk.c
+index a314b9382442b6..3e812b4c32e669 100644
+--- a/drivers/block/virtio_blk.c
++++ b/drivers/block/virtio_blk.c
+@@ -470,7 +470,7 @@ static void virtblk_update_capacity(struct virtio_blk *vblk, bool resize)
+ 		   cap_str_10,
+ 		   cap_str_2);
+ 
+-	set_capacity_revalidate_and_notify(vblk->disk, capacity, true);
++	set_capacity_and_notify(vblk->disk, capacity);
+ }
+ 
+ static void virtblk_config_changed_work(struct work_struct *work)
+diff --git a/drivers/block/xen-blkfront.c b/drivers/block/xen-blkfront.c
+index 48629d3433b4c3..79521e33d30ed5 100644
+--- a/drivers/block/xen-blkfront.c
++++ b/drivers/block/xen-blkfront.c
+@@ -2370,7 +2370,7 @@ static void blkfront_connect(struct blkfront_info *info)
+ 			return;
+ 		printk(KERN_INFO "Setting capacity to %Lu\n",
+ 		       sectors);
+-		set_capacity_revalidate_and_notify(info->gd, sectors, true);
++		set_capacity_and_notify(info->gd, sectors);
+ 
+ 		return;
+ 	case BLKIF_STATE_SUSPENDED:
+diff --git a/drivers/nvme/host/core.c b/drivers/nvme/host/core.c
+index 66129b86e97bed..445274b28518fb 100644
+--- a/drivers/nvme/host/core.c
++++ b/drivers/nvme/host/core.c
+@@ -2053,7 +2053,7 @@ static void nvme_update_disk_info(struct gendisk *disk,
+ 			capacity = 0;
+ 	}
+ 
+-	set_capacity_revalidate_and_notify(disk, capacity, true);
++	set_capacity_and_notify(disk, capacity);
+ 
+ 	nvme_config_discard(disk, ns);
+ 	nvme_config_write_zeroes(disk, ns);
+diff --git a/drivers/scsi/sd.c b/drivers/scsi/sd.c
+index 4a34dd5b153196..a2a4f385833d6c 100644
+--- a/drivers/scsi/sd.c
++++ b/drivers/scsi/sd.c
+@@ -3263,8 +3263,7 @@ static int sd_revalidate_disk(struct gendisk *disk)
+ 
+ 	sdkp->first_scan = 0;
+ 
+-	set_capacity_revalidate_and_notify(disk,
+-		logical_to_sectors(sdp, sdkp->capacity), true);
++	set_capacity_and_notify(disk, logical_to_sectors(sdp, sdkp->capacity));
+ 	sd_config_write_same(sdkp);
+ 	kfree(buffer);
+ 
+@@ -3274,7 +3273,7 @@ static int sd_revalidate_disk(struct gendisk *disk)
+ 	 * capacity to 0.
+ 	 */
+ 	if (sd_zbc_revalidate_zones(sdkp))
+-		set_capacity_revalidate_and_notify(disk, 0, true);
++		set_capacity_and_notify(disk, 0);
+ 
+  out:
+ 	return 0;
+diff --git a/include/linux/genhd.h b/include/linux/genhd.h
+index 38f23d75701379..596f31b5a3e133 100644
+--- a/include/linux/genhd.h
++++ b/include/linux/genhd.h
+@@ -315,8 +315,7 @@ static inline int get_disk_ro(struct gendisk *disk)
+ extern void disk_block_events(struct gendisk *disk);
+ extern void disk_unblock_events(struct gendisk *disk);
+ extern void disk_flush_events(struct gendisk *disk, unsigned int mask);
+-void set_capacity_revalidate_and_notify(struct gendisk *disk, sector_t size,
+-		bool update_bdev);
++void set_capacity_and_notify(struct gendisk *disk, sector_t size);
+ 
+ /* drivers/char/random.c */
+ extern void add_disk_randomness(struct gendisk *disk) __latent_entropy;
+-- 
+2.28.0
 
 
