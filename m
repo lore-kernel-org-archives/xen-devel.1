@@ -5,25 +5,25 @@ X-Spam-Level:
 X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=unavailable autolearn_force=no version=3.4.0
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4E828C4742C
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 08:28:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 81C11C63699
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 08:28:21 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9D279206E3
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 08:28:18 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 18326206E3
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 08:28:21 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="Dx9jgyUl"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9D279206E3
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="SnGVq269"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 18326206E3
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.24384.51643 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.24390.51654 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kclU7-0003Fm-Bd; Wed, 11 Nov 2020 08:28:07 +0000
+	id 1kclUC-0003NY-Mb; Wed, 11 Nov 2020 08:28:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 24384.51643; Wed, 11 Nov 2020 08:28:07 +0000
+Received: by outflank-mailman (output) from mailman id 24390.51654; Wed, 11 Nov 2020 08:28:12 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kclU7-0003Fc-6d; Wed, 11 Nov 2020 08:28:07 +0000
-Received: by outflank-mailman (input) for mailman id 24384;
- Wed, 11 Nov 2020 08:28:06 +0000
+	id 1kclUC-0003NO-I8; Wed, 11 Nov 2020 08:28:12 +0000
+Received: by outflank-mailman (input) for mailman id 24390;
+ Wed, 11 Nov 2020 08:28:11 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=kJD9=ER=casper.srs.infradead.org=batv+33c89f8a75624a8d62ce+6289+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1kclU6-0002dF-Hr
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 08:28:06 +0000
+ id 1kclUB-0002dF-I2
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 08:28:11 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b393bd16-cbd1-42b7-81a8-8567ef6fbc9d;
- Wed, 11 Nov 2020 08:27:27 +0000 (UTC)
+ id b3eb9d60-f4a1-4bfb-b144-892c9bd479f3;
+ Wed, 11 Nov 2020 08:27:28 +0000 (UTC)
 Received: from [2001:4bb8:180:6600:bcde:334f:863c:27b8] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kclTC-0007ay-Br; Wed, 11 Nov 2020 08:27:10 +0000
+ id 1kclTB-0007aj-13; Wed, 11 Nov 2020 08:27:09 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=kJD9=ER=casper.srs.infradead.org=batv+33c89f8a75624a8d62ce+6289+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1kclU6-0002dF-Hr
-	for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 08:28:06 +0000
-X-Inumbo-ID: b393bd16-cbd1-42b7-81a8-8567ef6fbc9d
+	id 1kclUB-0002dF-I2
+	for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 08:28:11 +0000
+X-Inumbo-ID: b3eb9d60-f4a1-4bfb-b144-892c9bd479f3
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id b393bd16-cbd1-42b7-81a8-8567ef6fbc9d;
-	Wed, 11 Nov 2020 08:27:27 +0000 (UTC)
+	id b3eb9d60-f4a1-4bfb-b144-892c9bd479f3;
+	Wed, 11 Nov 2020 08:27:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=cYLQe7HGubqAnJ/tUfc/v2PvIuWje8/yv3ctpiDBjdw=; b=Dx9jgyUlGTkZ3ko/6qDjgaYNEL
-	FCotyOTHxSBkohOv1KlRMKIA/vk+h6ba0YSuNKfdgKwITSY3WbFIeiaXAvhkT7vVv7+9378vhN1Ij
-	DelopFtwZbjUPDOsV1O+z/w+CEUOSMJQ/W7sjff+rwqTAw4uvMZcObE1/BARoib4CyM50iogDhaMr
-	fs91RYCyjpQx5tslTYTBBmHAMwFytBX3sgtylRwNvkoLbr0kjqr6hZmnMXYJ86f2xcMPVY92BWXcm
-	/Y26861aP/1IYIXo/3qkKNLEMc+J9Op78G/hwC8/OBs5SfP+Tbx8gL7P+DIZnEwkOoqeVtoBklWu1
-	j5w6NGdg==;
+	bh=sleWhQz8pOnJuBnS8tyNBOSxS3LFjGP3TCWYI+Y9Xwo=; b=SnGVq269/UTvePhazhsGEqe1g4
+	+Sdxfj0JE1XKc8hE5k0k3fff848q4NtXnaEE9VLg/C2I0lFuBfyREt4J81h7TQHcYmvdbPYYZExEc
+	rvsv8rKBFRclcRvxaov26S6VkAKG56QaJUn2wD/mTm4/DYl8qdkAvKZ4bO76kHjl21mZEwgM+L3W8
+	B0dk20R4wCMbx4pzaYw5R6GsJ3eFFwEWgkikMnu+2X9+jrMgSEIR2I0zoFfL2v0SAjEba5l3GfvGJ
+	VVKXne4B7f2m79dzqfoTvI53FLRJZJnCKRBE5HBGzRzPBkuT4Wg+DmexI9Xj8bzcPW8BIeky07GCR
+	w5/puTXA==;
 Received: from [2001:4bb8:180:6600:bcde:334f:863c:27b8] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1kclTC-0007ay-Br; Wed, 11 Nov 2020 08:27:10 +0000
+	id 1kclTB-0007aj-13; Wed, 11 Nov 2020 08:27:09 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -102,9 +102,9 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-nvme@lists.infradead.org,
 	linux-scsi@vger.kernel.org,
 	linux-fsdevel@vger.kernel.org
-Subject: [PATCH 09/24] nbd: refactor size updates
-Date: Wed, 11 Nov 2020 09:26:43 +0100
-Message-Id: <20201111082658.3401686-10-hch@lst.de>
+Subject: [PATCH 08/24] nbd: move the task_recv check into nbd_size_update
+Date: Wed, 11 Nov 2020 09:26:42 +0100
+Message-Id: <20201111082658.3401686-9-hch@lst.de>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20201111082658.3401686-1-hch@lst.de>
 References: <20201111082658.3401686-1-hch@lst.de>
@@ -112,116 +112,52 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-Merge nbd_size_set and nbd_size_update into a single function that also
-updates the nbd_config fields.  This new function takes the device size
-in bytes as the first argument, and the blocksize as the second argument,
-simplifying the calculations required in most callers.
+nbd_size_update is about to acquire a few more callers, so lift the check
+into the function.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 Reviewed-by: Josef Bacik <josef@toxicpanda.com>
 ---
- drivers/block/nbd.c | 44 ++++++++++++++++++--------------------------
- 1 file changed, 18 insertions(+), 26 deletions(-)
+ drivers/block/nbd.c | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
 
 diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-index 58b7090dcbd832..eb8a5da48ad75a 100644
+index f618688a196654..58b7090dcbd832 100644
 --- a/drivers/block/nbd.c
 +++ b/drivers/block/nbd.c
-@@ -296,28 +296,30 @@ static void nbd_size_clear(struct nbd_device *nbd)
- 	}
- }
- 
--static void nbd_size_update(struct nbd_device *nbd)
-+static void nbd_set_size(struct nbd_device *nbd, loff_t bytesize,
-+		loff_t blksize)
+@@ -299,8 +299,11 @@ static void nbd_size_clear(struct nbd_device *nbd)
+ static void nbd_size_update(struct nbd_device *nbd)
  {
--	struct nbd_config *config = nbd->config;
--	sector_t nr_sectors = config->bytesize >> 9;
- 	struct block_device *bdev;
- 
-+	nbd->config->bytesize = bytesize;
-+	nbd->config->blksize = blksize;
+ 	struct nbd_config *config = nbd->config;
+-	struct block_device *bdev = bdget_disk(nbd->disk, 0);
+ 	sector_t nr_sectors = config->bytesize >> 9;
++	struct block_device *bdev;
 +
- 	if (!nbd->task_recv)
- 		return;
++	if (!nbd->task_recv)
++		return;
  
--	if (config->flags & NBD_FLAG_SEND_TRIM) {
--		nbd->disk->queue->limits.discard_granularity = config->blksize;
--		nbd->disk->queue->limits.discard_alignment = config->blksize;
-+	if (nbd->config->flags & NBD_FLAG_SEND_TRIM) {
-+		nbd->disk->queue->limits.discard_granularity = blksize;
-+		nbd->disk->queue->limits.discard_alignment = blksize;
- 		blk_queue_max_discard_sectors(nbd->disk->queue, UINT_MAX);
+ 	if (config->flags & NBD_FLAG_SEND_TRIM) {
+ 		nbd->disk->queue->limits.discard_granularity = config->blksize;
+@@ -309,7 +312,9 @@ static void nbd_size_update(struct nbd_device *nbd)
  	}
--	blk_queue_logical_block_size(nbd->disk->queue, config->blksize);
--	blk_queue_physical_block_size(nbd->disk->queue, config->blksize);
-+	blk_queue_logical_block_size(nbd->disk->queue, blksize);
-+	blk_queue_physical_block_size(nbd->disk->queue, blksize);
- 
--	set_capacity(nbd->disk, nr_sectors);
-+	set_capacity(nbd->disk, bytesize >> 9);
- 	bdev = bdget_disk(nbd->disk, 0);
+ 	blk_queue_logical_block_size(nbd->disk->queue, config->blksize);
+ 	blk_queue_physical_block_size(nbd->disk->queue, config->blksize);
++
+ 	set_capacity(nbd->disk, nr_sectors);
++	bdev = bdget_disk(nbd->disk, 0);
  	if (bdev) {
  		if (bdev->bd_disk)
--			bd_set_nr_sectors(bdev, nr_sectors);
-+			bd_set_nr_sectors(bdev, bytesize >> 9);
- 		else
- 			set_bit(GD_NEED_PART_SCAN, &nbd->disk->state);
- 		bdput(bdev);
-@@ -325,15 +327,6 @@ static void nbd_size_update(struct nbd_device *nbd)
- 	kobject_uevent(&nbd_to_dev(nbd)->kobj, KOBJ_CHANGE);
+ 			bd_set_nr_sectors(bdev, nr_sectors);
+@@ -326,8 +331,7 @@ static void nbd_size_set(struct nbd_device *nbd, loff_t blocksize,
+ 	struct nbd_config *config = nbd->config;
+ 	config->blksize = blocksize;
+ 	config->bytesize = blocksize * nr_blocks;
+-	if (nbd->task_recv != NULL)
+-		nbd_size_update(nbd);
++	nbd_size_update(nbd);
  }
  
--static void nbd_size_set(struct nbd_device *nbd, loff_t blocksize,
--			 loff_t nr_blocks)
--{
--	struct nbd_config *config = nbd->config;
--	config->blksize = blocksize;
--	config->bytesize = blocksize * nr_blocks;
--	nbd_size_update(nbd);
--}
--
  static void nbd_complete_rq(struct request *req)
- {
- 	struct nbd_cmd *cmd = blk_mq_rq_to_pdu(req);
-@@ -1311,7 +1304,7 @@ static int nbd_start_device(struct nbd_device *nbd)
- 		args->index = i;
- 		queue_work(nbd->recv_workq, &args->work);
- 	}
--	nbd_size_update(nbd);
-+	nbd_set_size(nbd, config->bytesize, config->blksize);
- 	return error;
- }
- 
-@@ -1390,15 +1383,14 @@ static int __nbd_ioctl(struct block_device *bdev, struct nbd_device *nbd,
- 			arg = NBD_DEF_BLKSIZE;
- 		if (!nbd_is_valid_blksize(arg))
- 			return -EINVAL;
--		nbd_size_set(nbd, arg,
--			     div_s64(config->bytesize, arg));
-+		nbd_set_size(nbd, config->bytesize, arg);
- 		return 0;
- 	case NBD_SET_SIZE:
--		nbd_size_set(nbd, config->blksize,
--			     div_s64(arg, config->blksize));
-+		nbd_set_size(nbd, arg, config->blksize);
- 		return 0;
- 	case NBD_SET_SIZE_BLOCKS:
--		nbd_size_set(nbd, config->blksize, arg);
-+		nbd_set_size(nbd, arg * config->blksize,
-+			     config->blksize);
- 		return 0;
- 	case NBD_SET_TIMEOUT:
- 		nbd_set_cmd_timeout(nbd, arg);
-@@ -1827,7 +1819,7 @@ static int nbd_genl_size_set(struct genl_info *info, struct nbd_device *nbd)
- 	}
- 
- 	if (bytes != config->bytesize || bsize != config->blksize)
--		nbd_size_set(nbd, bsize, div64_u64(bytes, bsize));
-+		nbd_set_size(nbd, bytes, bsize);
- 	return 0;
- }
- 
 -- 
 2.28.0
 
