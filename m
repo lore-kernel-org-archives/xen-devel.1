@@ -8,23 +8,23 @@ X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2A908C388F9
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E8E04C5517A
 	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 21:59:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8ECBE20825
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 21:59:56 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 6A95320825
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2020 21:59:57 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="BDCjgexR"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8ECBE20825
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="FDG3HI4Z"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6A95320825
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.25370.53094 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.25371.53109 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kcy9Z-0007ir-OX; Wed, 11 Nov 2020 21:59:45 +0000
+	id 1kcy9a-0007kq-GE; Wed, 11 Nov 2020 21:59:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 25370.53094; Wed, 11 Nov 2020 21:59:45 +0000
+Received: by outflank-mailman (output) from mailman id 25371.53109; Wed, 11 Nov 2020 21:59:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,65 +39,65 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kcy9Z-0007iW-FQ; Wed, 11 Nov 2020 21:59:45 +0000
-Received: by outflank-mailman (input) for mailman id 25370;
+	id 1kcy9a-0007kJ-5G; Wed, 11 Nov 2020 21:59:46 +0000
+Received: by outflank-mailman (input) for mailman id 25371;
  Wed, 11 Nov 2020 21:59:43 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1kcy3f-00064v-Qk
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 21:53:39 +0000
-Received: from mail-wm1-x32e.google.com (unknown [2a00:1450:4864:20::32e])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1kcy3u-00064v-RK
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 21:53:54 +0000
+Received: from mail-wr1-x442.google.com (unknown [2a00:1450:4864:20::442])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id e5127b06-50ef-41e0-b499-a0baf39ee347;
- Wed, 11 Nov 2020 21:52:53 +0000 (UTC)
-Received: by mail-wm1-x32e.google.com with SMTP id p22so3574027wmg.3
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2020 13:52:53 -0800 (PST)
+ id faaf8b8e-c396-4fb1-8e30-4a2829c5ebe4;
+ Wed, 11 Nov 2020 21:52:57 +0000 (UTC)
+Received: by mail-wr1-x442.google.com with SMTP id k2so3999500wrx.2
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2020 13:52:57 -0800 (PST)
 Received: from C02ZJ1BNLVDN.emea.arm.com (0547a297.skybroadband.com.
  [5.71.162.151])
- by smtp.gmail.com with ESMTPSA id u23sm4096078wmc.32.2020.11.11.13.52.52
+ by smtp.gmail.com with ESMTPSA id u23sm4096078wmc.32.2020.11.11.13.52.55
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Wed, 11 Nov 2020 13:52:52 -0800 (PST)
+ Wed, 11 Nov 2020 13:52:55 -0800 (PST)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	id 1kcy3f-00064v-Qk
-	for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 21:53:39 +0000
-X-Inumbo-ID: e5127b06-50ef-41e0-b499-a0baf39ee347
-Received: from mail-wm1-x32e.google.com (unknown [2a00:1450:4864:20::32e])
+	id 1kcy3u-00064v-RK
+	for xen-devel@lists.xenproject.org; Wed, 11 Nov 2020 21:53:54 +0000
+X-Inumbo-ID: faaf8b8e-c396-4fb1-8e30-4a2829c5ebe4
+Received: from mail-wr1-x442.google.com (unknown [2a00:1450:4864:20::442])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id e5127b06-50ef-41e0-b499-a0baf39ee347;
-	Wed, 11 Nov 2020 21:52:53 +0000 (UTC)
-Received: by mail-wm1-x32e.google.com with SMTP id p22so3574027wmg.3
-        for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2020 13:52:53 -0800 (PST)
+	id faaf8b8e-c396-4fb1-8e30-4a2829c5ebe4;
+	Wed, 11 Nov 2020 21:52:57 +0000 (UTC)
+Received: by mail-wr1-x442.google.com with SMTP id k2so3999500wrx.2
+        for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2020 13:52:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=DEXuW1ye/R98bU3FkkVyzjawl7M6F4lMcGyQWz2Hrt0=;
-        b=BDCjgexRF/nkz3zayZWKWBFaJk9GsuImSgpzdNEtS12TjZz80LiOSrhUXbkNafK57w
-         h5ecFabJtWNoue+CmBqaNr98EBM69CmIS1yS6hr+UHuv/vjGglyeur3hHD9UyFGHzFJQ
-         6a3LQUiDXa6LOL76y18d3fwq8XG1BjquH5kBGiPQ1YO2RJnve8LLUrrhMusuS0tDOkgI
-         qrcCe2Ri2jMXID6Q5ZyNZdESrQXKGR8yn28pw4TfYfIeaKAjldMeYiX5IiG7DqJePoHq
-         SVPu43W2CSIxYh2KW17g5p2ATcPEOes+tAGHF4BLuzwOqI9svz4MZxTfcicYCaor4Tqi
-         QB7Q==
+        bh=rfNmZKkQ9GXWazOVDjrBrED1XtwfKtN3kTzNIukG8jo=;
+        b=FDG3HI4ZHFQ1tpEoeHroWB7sKALJuSzLT2s0Wk3a6dcimJwgnnhb2UTGDN+N9mjXQS
+         SNNcOsCdSrOPtErpo7GBQpILhO+UCkLidYqp1hCn0m3xW1ueJEFc8Gsy2cYhcXUl0a9c
+         1LHRczZ5NQ4SGLJ6F7rIYvTc/KzYutIQgWm9qjbqmd3iczlFY1pE6MZC0hiYzRwvWgcz
+         tmbTBnSWc56V5mVcyuL4BkaYuReTjl82qf+pB/HVzKCZcGtEdDO+gkYy5KSGdeZiVB2J
+         1j/lw3HPSiaV5DspnC6Q5waZ1eW6LSPjUWtbgH/GpsuN9EJGgTqXLboTaHDVV/coxTXp
+         iuOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=DEXuW1ye/R98bU3FkkVyzjawl7M6F4lMcGyQWz2Hrt0=;
-        b=MSpChR8uVD9xMruncQ0QQVp8gdvZoHvOGSXYffGy+4oA1DceTWugVO3PxUV56UtKxc
-         UzBD5EeichEUnOKxMJY9mQ5bE8M+rA0WnR3HuZ/Cl8SFzr0zWlyGuixfjU6PICwbxWR5
-         Sw9ic2/nBkvi/19fc90zswB767gQpNFHv/sT0VpHS87hDhXlZcNNGXwmpMMW6Sex6EdB
-         qV5XHDt56gH1AJByighYeBRS4OjZuZ0LfOCymcGuSTNISNAy3U6eMIiQwOTGozz+gnXD
-         LllWvZtLP7NqqZm5Fi+oeFukFbavEwm9xWxG08rgr1RGntR96SWdA/H9cVT09Ct5+1w4
-         dsyg==
-X-Gm-Message-State: AOAM533GdcgzfjTgpaA9fkwn3FyRcbB+3/zulIZFkYcmwOT1HD6b5RSU
-	9tMrObWNNiYQvWq2I6C/BFXRfKnNmJM=
-X-Google-Smtp-Source: ABdhPJykiIWBidlXLzHt7P7UzHcuzyRNwaZ4CUeVlycKkFPOa7EMnevqGj7uV7xjzomLA9nrmSItfw==
-X-Received: by 2002:a1c:5a06:: with SMTP id o6mr6406841wmb.181.1605131572888;
-        Wed, 11 Nov 2020 13:52:52 -0800 (PST)
+        bh=rfNmZKkQ9GXWazOVDjrBrED1XtwfKtN3kTzNIukG8jo=;
+        b=d7I9Btx34alxAC0eQ1b4zsl+MmGoTQvadrgsnyWrQjS0eRpSXBpSQ0CMiva8NkK8Cf
+         me36xbOaE7RsjVfPflx5eos7uUgyKJcgFRFcru+0OJYOWClJYI0brP5P9f54sh2NaUXc
+         TViDvzD2VkrP6eTAltUKu+/yFhfXZ0ChARzm9rwEjUknKITMKZ3ndHMn/vzPuh9fzYy+
+         oTNszf2vA3LKtz3ZY92nO8ZpzMxXhuVJozh9EleZq/JqxVAfZ9ZZrBnvezeorifFzoW2
+         u1qVOUHdDy6hfPzsGdNCQwahmpD0r8ZGBkK5XJhogj6zvAhwHTDchaV1QnET36VrgYH0
+         AEzQ==
+X-Gm-Message-State: AOAM531SpxrKFSp2bEXylTt4Tbjs5CjCdWw9JBBYIEf2X/K0b3PpQd9A
+	28J02lhvhiQLNLzONvMUFz8rqrBT5MQ=
+X-Google-Smtp-Source: ABdhPJxsDoo8botbsPJoNsZZSEN0xqfshqIiL0ER+EsuBlcdAQUToZNdg9NG7mwG5vyj0hFiyppkwQ==
+X-Received: by 2002:adf:9cc6:: with SMTP id h6mr32447024wre.341.1605131576028;
+        Wed, 11 Nov 2020 13:52:56 -0800 (PST)
 Received: from C02ZJ1BNLVDN.emea.arm.com (0547a297.skybroadband.com. [5.71.162.151])
-        by smtp.gmail.com with ESMTPSA id u23sm4096078wmc.32.2020.11.11.13.52.52
+        by smtp.gmail.com with ESMTPSA id u23sm4096078wmc.32.2020.11.11.13.52.55
         (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Wed, 11 Nov 2020 13:52:52 -0800 (PST)
+        Wed, 11 Nov 2020 13:52:55 -0800 (PST)
 From: Ash Wilding <ash.j.wilding@gmail.com>
 X-Google-Original-From: Ash Wilding
 To: xen-devel@lists.xenproject.org
@@ -105,9 +105,9 @@ Cc: Ash Wilding <ash.j.wilding@gmail.com>,
 	julien@xen.org,
 	bertrand.marquis@arm.com,
 	rahul.singh@arm.com
-Subject: [RFC PATCH v2 12/15] xen/arm64: port Linux's arm64 lse.h to Xen
-Date: Wed, 11 Nov 2020 21:52:00 +0000
-Message-Id: <20201111215203.80336-13-ash.j.wilding@gmail.com>
+Subject: [RFC PATCH v2 15/15] xen/arm: remove dependency on gcc built-in __sync_fetch_and_add()
+Date: Wed, 11 Nov 2020 21:52:03 +0000
+Message-Id: <20201111215203.80336-16-ash.j.wilding@gmail.com>
 X-Mailer: git-send-email 2.24.3 (Apple Git-128)
 In-Reply-To: <20201111215203.80336-1-ash.j.wilding@gmail.com>
 References: <20201111215203.80336-1-ash.j.wilding@gmail.com>
@@ -116,72 +116,49 @@ Content-Transfer-Encoding: 8bit
 
 From: Ash Wilding <ash.j.wilding@gmail.com>
 
-This just involves making system_uses_lse_atomics() call cpus_have_cap()
-instead of directly looking up in cpu_hwcap_keys.
+Now that we have explicit implementations of LL/SC and LSE atomics
+helpers after porting Linux's versions to Xen, we can drop the reference
+to gcc's built-in __sync_fetch_and_add().
 
-Not 100% sure whether this is a valid transformation until I do a run
-test.
+This requires some fudging using container_of() because the users of
+__sync_fetch_and_add(), namely xen/spinlock.c, expect the ptr to be
+directly to the u32 being modified while the atomics helpers expect the
+ptr to be to an atomic_t and then access that atomic_t's counter member.
+
+By using container_of() we can create a "fake" (atomic_t *) pointer and
+pass that to the atomic_fetch_add() that we ported from Linux.
+
+NOTE: spinlock.c is using u32 for the value being added while the atomics
+helpers use int for their counter member. This shouldn't actually matter
+because we do the addition in assembly and the compiler isn't smart enough
+to detect potential signed integer overflow in inline assembly, but I
+thought it worth calling out in the commit message.
 
 Signed-off-by: Ash Wilding <ash.j.wilding@gmail.com>
 ---
- xen/include/asm-arm/arm64/lse.h | 30 +++++++++++++++---------------
- 1 file changed, 15 insertions(+), 15 deletions(-)
+ xen/include/asm-arm/system.h | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
 
-diff --git a/xen/include/asm-arm/arm64/lse.h b/xen/include/asm-arm/arm64/lse.h
-index 704be3e4e4..847727f219 100644
---- a/xen/include/asm-arm/arm64/lse.h
-+++ b/xen/include/asm-arm/arm64/lse.h
-@@ -1,28 +1,28 @@
--/* SPDX-License-Identifier: GPL-2.0 */
--#ifndef __ASM_LSE_H
--#define __ASM_LSE_H
-+/*
-+ * Taken from Linux 5.10-rc2 (last commit 3cea11cd5)
-+ *
-+ * SPDX-License-Identifier: GPL-2.0
-+ */
-+#ifndef __ASM_ARM_ARM64_LSE_H
-+#define __ASM_ARM_ARM64_LSE_H
- 
--#include <asm/atomic_ll_sc.h>
-+#include "atomic_ll_sc.h"
- 
- #ifdef CONFIG_ARM64_LSE_ATOMICS
- 
- #define __LSE_PREAMBLE	".arch_extension lse\n"
- 
--#include <linux/compiler_types.h>
--#include <linux/export.h>
--#include <linux/jump_label.h>
--#include <linux/stringify.h>
-+#include <xen/compiler.h>
-+#include <xen/stringify.h>
-+#include <xen/types.h>
-+
- #include <asm/alternative.h>
--#include <asm/atomic_lse.h>
--#include <asm/cpucaps.h>
- 
--extern struct static_key_false cpu_hwcap_keys[ARM64_NCAPS];
--extern struct static_key_false arm64_const_caps_ready;
-+#include "atomic_lse.h"
- 
- static inline bool system_uses_lse_atomics(void)
- {
--	return (static_branch_likely(&arm64_const_caps_ready)) &&
--		static_branch_likely(&cpu_hwcap_keys[ARM64_HAS_LSE_ATOMICS]);
-+	return cpus_have_cap(ARM64_HAS_LSE_ATOMICS);
+diff --git a/xen/include/asm-arm/system.h b/xen/include/asm-arm/system.h
+index 65d5c8e423..0326e3ade4 100644
+--- a/xen/include/asm-arm/system.h
++++ b/xen/include/asm-arm/system.h
+@@ -58,7 +58,14 @@ static inline int local_abort_is_enabled(void)
+     return !(flags & PSR_ABT_MASK);
  }
  
- #define __lse_ll_sc_body(op, ...)					\
-@@ -45,4 +45,4 @@ static inline bool system_uses_lse_atomics(void) { return false; }
- #define ARM64_LSE_ATOMIC_INSN(llsc, lse)	llsc
+-#define arch_fetch_and_add(x, v) __sync_fetch_and_add(x, v)
++#define arch_fetch_and_add(ptr, x) ({                                   \
++    int ret;                                                            \
++                                                                        \
++    atomic_t * tmp = container_of((int *)(&(x)), atomic_t, counter);    \
++    ret = atomic_fetch_add(x, tmp);                                     \
++                                                                        \
++    ret;                                                                \
++})
  
- #endif	/* CONFIG_ARM64_LSE_ATOMICS */
--#endif	/* __ASM_LSE_H */
-\ No newline at end of file
-+#endif	/* __ASM_ARM_ARM64_LSE_H */
-\ No newline at end of file
+ extern struct vcpu *__context_switch(struct vcpu *prev, struct vcpu *next);
+ 
 -- 
 2.24.3 (Apple Git-128)
 
