@@ -2,28 +2,28 @@ Return-Path: <SRS0=Jwwc=ES=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-5.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AEA2BC55ABD
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2020 11:41:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 18A89C55ABD
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2020 11:45:41 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2DEA9206FB
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2020 11:41:05 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 804292074B
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2020 11:45:40 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="FAmAkevN"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2DEA9206FB
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="RY51nvZD"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 804292074B
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.25722.53672 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.25729.53684 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kdAy8-0003q0-KT; Thu, 12 Nov 2020 11:40:48 +0000
+	id 1kdB2g-00041z-6K; Thu, 12 Nov 2020 11:45:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 25722.53672; Thu, 12 Nov 2020 11:40:48 +0000
+Received: by outflank-mailman (output) from mailman id 25729.53684; Thu, 12 Nov 2020 11:45:30 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,118 +38,83 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kdAy8-0003pt-Fs; Thu, 12 Nov 2020 11:40:48 +0000
-Received: by outflank-mailman (input) for mailman id 25722;
- Thu, 12 Nov 2020 11:40:46 +0000
+	id 1kdB2g-00041s-34; Thu, 12 Nov 2020 11:45:30 +0000
+Received: by outflank-mailman (input) for mailman id 25729;
+ Thu, 12 Nov 2020 11:45:29 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=2UFB=ES=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kdAy6-0003pn-HZ
- for xen-devel@lists.xenproject.org; Thu, 12 Nov 2020 11:40:46 +0000
+ id 1kdB2f-00041n-1d
+ for xen-devel@lists.xenproject.org; Thu, 12 Nov 2020 11:45:29 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id c176a9f9-fb50-402c-b4bb-5db4a57142bd;
- Thu, 12 Nov 2020 11:40:45 +0000 (UTC)
+ id e1746a42-f8f6-4254-9aa5-f0a225258117;
+ Thu, 12 Nov 2020 11:45:28 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id AD2AEAE95;
- Thu, 12 Nov 2020 11:40:44 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 84525ACC5;
+ Thu, 12 Nov 2020 11:45:27 +0000 (UTC)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=2UFB=ES=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
-	id 1kdAy6-0003pn-HZ
-	for xen-devel@lists.xenproject.org; Thu, 12 Nov 2020 11:40:46 +0000
-X-Inumbo-ID: c176a9f9-fb50-402c-b4bb-5db4a57142bd
+	id 1kdB2f-00041n-1d
+	for xen-devel@lists.xenproject.org; Thu, 12 Nov 2020 11:45:29 +0000
+X-Inumbo-ID: e1746a42-f8f6-4254-9aa5-f0a225258117
 Received: from mx2.suse.de (unknown [195.135.220.15])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id c176a9f9-fb50-402c-b4bb-5db4a57142bd;
-	Thu, 12 Nov 2020 11:40:45 +0000 (UTC)
+	id e1746a42-f8f6-4254-9aa5-f0a225258117;
+	Thu, 12 Nov 2020 11:45:28 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1605181244;
+	t=1605181527;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=XuwcXG213xTdGdTodiKLD0mDII90UwD8c4iBHrJURdE=;
-	b=FAmAkevN9mi3x9x+eR90XYQbWeY444+lrWDaaPDdd7Ep9h4G0mcPd1lnMdy+j4Qx8A7DPL
-	dCsGGsCTzx/lZYj9OkOEsxQeQ6NxQWyAeTV70SY8rNz6AedhuxAQ6SLmHx6I4V1d3k6OFF
-	IGNdDfVzRiltD/WUz45GJ9P1dPEeSWU=
+	bh=YFJm6E5HGuad0fA181svJ/18xIJWlypV9xdVgzVR5Lc=;
+	b=RY51nvZDc2/5azrSsHSumcFNTniZw3dC1G4TwWzOXFiYJOyfiU53XdHGH3LGYeQ+3bT4BD
+	xLYI5qifGiunAJ2eroXSgiIrkKBPqvteKOz/HH/RFtOtZJKPH5rxbDzYIUQQ3cqNhJK6B9
+	eGlTYq+k7eIoTLGX7GVVrE20dY6cmfI=
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id AD2AEAE95;
-	Thu, 12 Nov 2020 11:40:44 +0000 (UTC)
-Subject: Re: [PATCH V2 10/23] xen/mm: Make x86's XENMEM_resource_ioreq_server
- handling common
-To: Oleksandr Tyshchenko <olekstysh@gmail.com>
-Cc: Julien Grall <julien.grall@arm.com>,
+	by mx2.suse.de (Postfix) with ESMTP id 84525ACC5;
+	Thu, 12 Nov 2020 11:45:27 +0000 (UTC)
+Subject: Re: [PATCH V2 12/23] xen/ioreq: Remove "hvm" prefixes from involved
+ function names
+To: Oleksandr Tyshchenko <olekstysh@gmail.com>, Paul Durrant <paul@xen.org>
+Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
  Andrew Cooper <andrew.cooper3@citrix.com>,
  =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, Wei Liu
  <wl@xen.org>, George Dunlap <george.dunlap@citrix.com>,
  Ian Jackson <iwj@xenproject.org>, Julien Grall <julien@xen.org>,
  Stefano Stabellini <sstabellini@kernel.org>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
- xen-devel@lists.xenproject.org
+ Jun Nakajima <jun.nakajima@intel.com>, Kevin Tian <kevin.tian@intel.com>,
+ Julien Grall <julien.grall@arm.com>, xen-devel@lists.xenproject.org
 References: <1602780274-29141-1-git-send-email-olekstysh@gmail.com>
- <1602780274-29141-11-git-send-email-olekstysh@gmail.com>
+ <1602780274-29141-13-git-send-email-olekstysh@gmail.com>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <1c9bc1aa-b622-fb8e-e5d5-3e27567354c0@suse.com>
-Date: Thu, 12 Nov 2020 12:40:45 +0100
+Message-ID: <e3064b77-71c3-9d8d-2324-6839895101f4@suse.com>
+Date: Thu, 12 Nov 2020 12:45:28 +0100
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.4.1
 MIME-Version: 1.0
-In-Reply-To: <1602780274-29141-11-git-send-email-olekstysh@gmail.com>
+In-Reply-To: <1602780274-29141-13-git-send-email-olekstysh@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
 On 15.10.2020 18:44, Oleksandr Tyshchenko wrote:
-> --- a/xen/common/memory.c
-> +++ b/xen/common/memory.c
-> @@ -30,6 +30,10 @@
->  #include <public/memory.h>
->  #include <xsm/xsm.h>
->  
-> +#ifdef CONFIG_IOREQ_SERVER
-> +#include <xen/ioreq.h>
-> +#endif
+> From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+> 
+> This patch removes "hvm" prefixes and infixes from IOREQ
+> related function names in the common code.
 
-Preferably #ifdef-s would not be needed here. If any, they'd better
-live in xen/ioreq.h itself then.
+AT least some of the functions touched here would be nice to be
+moved to a more consistent new naming scheme right away, to
+avoid having to touch all the same places again. I guess ioreq
+server functions would be nice to all start with ioreq_server_
+and ioreq functions to all start with ioreq_. E.g. ioreq_send()
+and ioreq_server_select().
 
-> @@ -1045,6 +1049,38 @@ static int acquire_grant_table(struct domain *d, unsigned int id,
->      return 0;
->  }
->  
-> +#ifdef CONFIG_IOREQ_SERVER
-
-To limit the number of #ifdef-s, could this be moved ...
-
-> +static int acquire_ioreq_server(struct domain *d,
-> +                                unsigned int id,
-> +                                unsigned long frame,
-> +                                unsigned int nr_frames,
-> +                                xen_pfn_t mfn_list[])
-> +{
-
-... here such that ...
-
-> @@ -1103,9 +1139,14 @@ static int acquire_resource(
->                                   mfn_list);
->          break;
->  
-> +#ifdef CONFIG_IOREQ_SERVER
-> +    case XENMEM_resource_ioreq_server:
-> +        rc = acquire_ioreq_server(d, xmar.id, xmar.frame, xmar.nr_frames,
-> +                                  mfn_list);
-> +        break;
-> +#endif
-
-... the ones here then can be dropped?
-
->      default:
-
-Also you'll want to a blank line between the new case statement and
-the "default:".
+Paul, thoughts?
 
 Jan
 
