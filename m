@@ -2,28 +2,25 @@ Return-Path: <SRS0=Jwwc=ES=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.7 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 29BC1C5519F
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2020 17:06:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A4670C5519F
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2020 17:27:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7B84322240
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2020 17:06:13 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="f2MOydM+"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7B84322240
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 16F33216FD
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2020 17:27:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 16F33216FD
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=antioche.eu.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.25978.54080 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.25987.54091 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kdG2b-0005b4-P2; Thu, 12 Nov 2020 17:05:45 +0000
+	id 1kdGNU-0007dg-JD; Thu, 12 Nov 2020 17:27:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 25978.54080; Thu, 12 Nov 2020 17:05:45 +0000
+Received: by outflank-mailman (output) from mailman id 25987.54091; Thu, 12 Nov 2020 17:27:20 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,62 +35,91 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kdG2b-0005ax-Lp; Thu, 12 Nov 2020 17:05:45 +0000
-Received: by outflank-mailman (input) for mailman id 25978;
- Thu, 12 Nov 2020 17:05:44 +0000
+	id 1kdGNU-0007dZ-GI; Thu, 12 Nov 2020 17:27:20 +0000
+Received: by outflank-mailman (input) for mailman id 25987;
+ Thu, 12 Nov 2020 17:27:19 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=2UFB=ES=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kdG2a-0005as-Fd
- for xen-devel@lists.xenproject.org; Thu, 12 Nov 2020 17:05:44 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=B7ei=ES=antioche.eu.org=bouyer@srs-us1.protection.inumbo.net>)
+ id 1kdGNT-0007dR-1o
+ for xen-devel@lists.xenproject.org; Thu, 12 Nov 2020 17:27:19 +0000
+Received: from chassiron.antioche.eu.org (unknown [2001:41d0:fe9d:1101::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 8ad11b9f-5454-4460-bf9f-c1a2d8d59da0;
- Thu, 12 Nov 2020 17:05:43 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 035E2AEA3;
- Thu, 12 Nov 2020 17:05:43 +0000 (UTC)
+ id e96cbcf8-23a9-44d6-8384-86f866a3b82c;
+ Thu, 12 Nov 2020 17:27:16 +0000 (UTC)
+Received: from sandettie.soc.lip6.fr (82-64-3-41.subs.proxad.net [82.64.3.41])
+ by chassiron.antioche.eu.org (8.15.2/8.15.2) with ESMTPS id
+ 0ACHR9M6028250
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=OK);
+ Thu, 12 Nov 2020 18:27:10 +0100 (MET)
+Received: by sandettie.soc.lip6.fr (Postfix, from userid 373)
+ id AFF4F2E9CA8; Thu, 12 Nov 2020 18:27:04 +0100 (MET)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=2UFB=ES=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
-	id 1kdG2a-0005as-Fd
-	for xen-devel@lists.xenproject.org; Thu, 12 Nov 2020 17:05:44 +0000
-X-Inumbo-ID: 8ad11b9f-5454-4460-bf9f-c1a2d8d59da0
-Received: from mx2.suse.de (unknown [195.135.220.15])
+	(envelope-from <SRS0=B7ei=ES=antioche.eu.org=bouyer@srs-us1.protection.inumbo.net>)
+	id 1kdGNT-0007dR-1o
+	for xen-devel@lists.xenproject.org; Thu, 12 Nov 2020 17:27:19 +0000
+X-Inumbo-ID: e96cbcf8-23a9-44d6-8384-86f866a3b82c
+Received: from chassiron.antioche.eu.org (unknown [2001:41d0:fe9d:1101::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 8ad11b9f-5454-4460-bf9f-c1a2d8d59da0;
-	Thu, 12 Nov 2020 17:05:43 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1605200743;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Nou+Bbhxc7Qz00xcAcdRZYTsOU2heJ17OW97NrpU6yA=;
-	b=f2MOydM+sFmDzzE6PdpnqRBsm4YjJuLBzTUM1xzhXn+ZUI/nzX7Oo4is7YoabswWHx0Ob9
-	y2I+XI4fLMHMd0GBLjynLhD8VCqtnkATZwj0qo/SHsL4KORcSiAnGhSdEvE3amwUvomCLP
-	S1mrVVyDgeg6Z4Z5OUUXt/7uWMuN6Nk=
-Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 035E2AEA3;
-	Thu, 12 Nov 2020 17:05:43 +0000 (UTC)
+	id e96cbcf8-23a9-44d6-8384-86f866a3b82c;
+	Thu, 12 Nov 2020 17:27:16 +0000 (UTC)
+Received: from sandettie.soc.lip6.fr (82-64-3-41.subs.proxad.net [82.64.3.41])
+	by chassiron.antioche.eu.org (8.15.2/8.15.2) with ESMTPS id 0ACHR9M6028250
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=OK);
+	Thu, 12 Nov 2020 18:27:10 +0100 (MET)
+Received: by sandettie.soc.lip6.fr (Postfix, from userid 373)
+	id AFF4F2E9CA8; Thu, 12 Nov 2020 18:27:04 +0100 (MET)
+Date: Thu, 12 Nov 2020 18:27:04 +0100
+From: Manuel Bouyer <bouyer@antioche.eu.org>
+To: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+Cc: xen-devel@lists.xenproject.org
 Subject: Re: dom0 PVH: 'entry->arch.pirq != INVALID_PIRQ' failed at vmsi.c:843
-To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Manuel Bouyer <bouyer@antioche.eu.org>
+Message-ID: <20201112172704.GA5899@antioche.eu.org>
 References: <20201112155715.GA5003@antioche.eu.org>
  <20201112163240.6xswol2iswikdzef@Air-de-Roger>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <49bf4029-ee5f-e90e-c7a1-e0a6c4da5f7a@suse.com>
-Date: Thu, 12 Nov 2020 18:02:31 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.4.3
 MIME-Version: 1.0
-In-Reply-To: <20201112163240.6xswol2iswikdzef@Air-de-Roger>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <20201112163240.6xswol2iswikdzef@Air-de-Roger>
+X-Greylist: Sender succeeded STARTTLS authentication, not delayed by milter-greylist-4.4.3 (chassiron.antioche.eu.org [151.127.5.145]); Thu, 12 Nov 2020 18:27:11 +0100 (MET)
 
-On 12.11.2020 17:32, Roger Pau Monné wrote:
+On Thu, Nov 12, 2020 at 05:32:40PM +0100, Roger Pau Monn� wrote:
+> On Thu, Nov 12, 2020 at 04:57:15PM +0100, Manuel Bouyer wrote:
+> > Hello,
+> > I'm trying to add dom0 PVH support to NetBSD. I'm tesing with Xen 4.13
+> > on a brand new Intel x86 server (Dell R440).
+> 
+> I would recommend using 4.14, PVH dom0 is still very much in
+> progress, and while I don't recall any specific fix going in 4.14 that
+> could be related to this there have been changes.
+
+packaging Xen on NetBSD requires quite a bit of work; so I don't package
+every releases. I still need to get NetBSD patches in shape to contribute
+back ...
+
+
+> [...]
+> > This is when it configures the broadcom network interface, which interrupts
+> > at "msix3 vec 0". It is the first MSI-X device configured; the previous
+> > ones are MSI only.
+> > 
+> > Is it a bug on the Xen side, or something missing on the NetBSD side ?
+> 
+> Looks like a bug on the Xen side, do you see any relevant messages
+> before hitting the assert?
+
+nothing from Xen
+
+> 
+> Can you give a try to the following debug patch and paste what you
+> get?
+> 
+> Thanks, Roger.
+> ---8<---
+> diff --git a/xen/drivers/vpci/msix.c b/xen/drivers/vpci/msix.c
+> index 64dd0a929c..7ff76b7f59 100644
 > --- a/xen/drivers/vpci/msix.c
 > +++ b/xen/drivers/vpci/msix.c
 > @@ -371,7 +371,12 @@ static int msix_write(struct vcpu *v, unsigned long addr, unsigned int len,
@@ -106,13 +132,19 @@ On 12.11.2020 17:32, Roger Pau Monné wrote:
 > +                   entry->updated);
 >              vpci_msix_arch_mask_entry(entry, pdev, entry->masked);
 > +        }
+>  
+>          break;
+>      }
 
-What about a write of all zero as the very first write we
-get to see, while msix->masked is true? I'm getting the
-impression we would never have come through update_entry()
-in this case, and hence vpci_msix_arch_enable_entry() - the
-only function setting entry->arch.pirq to a valid value
-afaics - would never have been called.
+I get
+(XEN) ffff83083feaf500p offset 12 len 4 new_masked 0 enabled 0 masked 0 updated 1
+(XEN) Assertion 'entry->arch.pirq != INVALID_PIRQ' failed at vmsi.c:843
 
-Jan
+You can find the full serial console log at
+http://www-soc.lip6.fr/~bouyer/xen-log.txt
+
+-- 
+Manuel Bouyer <bouyer@antioche.eu.org>
+     NetBSD: 26 ans d'experience feront toujours la difference
+--
 
