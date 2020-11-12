@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-5.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B9386C55ABD
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2020 08:31:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F2F5FC2D0A3
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2020 08:38:13 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3C5A42085B
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2020 08:31:44 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 749CA221FE
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2020 08:38:13 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="XwWmUh6g"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3C5A42085B
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="OAJie9wq"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 749CA221FE
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.25537.53351 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.25545.53362 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kd80v-0008A7-Rm; Thu, 12 Nov 2020 08:31:29 +0000
+	id 1kd87A-0008N2-HW; Thu, 12 Nov 2020 08:37:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 25537.53351; Thu, 12 Nov 2020 08:31:29 +0000
+Received: by outflank-mailman (output) from mailman id 25545.53362; Thu, 12 Nov 2020 08:37:56 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,216 +38,84 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kd80v-0008A0-Np; Thu, 12 Nov 2020 08:31:29 +0000
-Received: by outflank-mailman (input) for mailman id 25537;
- Thu, 12 Nov 2020 08:31:28 +0000
+	id 1kd87A-0008Mv-EV; Thu, 12 Nov 2020 08:37:56 +0000
+Received: by outflank-mailman (input) for mailman id 25545;
+ Thu, 12 Nov 2020 08:37:55 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=2UFB=ES=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kd80t-00089v-Tt
- for xen-devel@lists.xenproject.org; Thu, 12 Nov 2020 08:31:27 +0000
+ id 1kd879-0008Mq-BS
+ for xen-devel@lists.xenproject.org; Thu, 12 Nov 2020 08:37:55 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9da97217-b18a-4f16-99f5-fddbde9e71e4;
- Thu, 12 Nov 2020 08:31:26 +0000 (UTC)
+ id f739ebd6-2c27-44d8-9f3f-ede26ee4e126;
+ Thu, 12 Nov 2020 08:37:54 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id B6A65AB95;
- Thu, 12 Nov 2020 08:31:25 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 8ABD5AE49;
+ Thu, 12 Nov 2020 08:37:53 +0000 (UTC)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=2UFB=ES=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
-	id 1kd80t-00089v-Tt
-	for xen-devel@lists.xenproject.org; Thu, 12 Nov 2020 08:31:27 +0000
-X-Inumbo-ID: 9da97217-b18a-4f16-99f5-fddbde9e71e4
+	id 1kd879-0008Mq-BS
+	for xen-devel@lists.xenproject.org; Thu, 12 Nov 2020 08:37:55 +0000
+X-Inumbo-ID: f739ebd6-2c27-44d8-9f3f-ede26ee4e126
 Received: from mx2.suse.de (unknown [195.135.220.15])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 9da97217-b18a-4f16-99f5-fddbde9e71e4;
-	Thu, 12 Nov 2020 08:31:26 +0000 (UTC)
+	id f739ebd6-2c27-44d8-9f3f-ede26ee4e126;
+	Thu, 12 Nov 2020 08:37:54 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1605169885;
+	t=1605170273;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=O1dPkWLjtvBC5R6zavbQ4rFJdkZlkirqroDdoeHfwBo=;
-	b=XwWmUh6g146sj0GLPdIBM3OxRfxzgIGhM95VW7EVxi8NwThrCdmp29fCpE6f0ZQSR65ir1
-	L7ufwD1rjQkwj7fYfAeJXfmFz4OLmT4OQku4IAGX0E9WzSrhmX2m9adBIhFhUWUzc3If+Q
-	u52o5AjpOZbC0WNeVXSxeiuKL1RksOo=
+	bh=mKtBw0yrqCVPrbGQ5riNB4AdQHefK1Z3wzKKVyz7SEY=;
+	b=OAJie9wqKmWRzmP9One/YxJWpWmp1Y+NWz5psVvjIjXZlijrz8t/hh2s+ItJAetvKwMBnc
+	bOh0P3qAMJFOxXKj1HxftCfCvJ8dXIJhZx7NtZiVboJj8f+vcYWlbEfknOPpHZC0/jKuiv
+	NX5r9PSrBpx+FHLN8GsiHOlXE46cT7k=
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id B6A65AB95;
-	Thu, 12 Nov 2020 08:31:25 +0000 (UTC)
-Subject: Re: [RFC PATCH v2 05/15] xen/arm: pull in Linux atomics helpers and
- dependencies
-To: Ash Wilding <ash.j.wilding@gmail.com>
-Cc: julien@xen.org, bertrand.marquis@arm.com, rahul.singh@arm.com,
+	by mx2.suse.de (Postfix) with ESMTP id 8ABD5AE49;
+	Thu, 12 Nov 2020 08:37:53 +0000 (UTC)
+Subject: Re: [PATCH 02/10] viridian: move IPI hypercall implementation into
+ separate function
+To: Paul Durrant <paul@xen.org>
+Cc: Paul Durrant <pdurrant@amazon.com>, Wei Liu <wl@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
  xen-devel@lists.xenproject.org
-References: <20201111215203.80336-1-ash.j.wilding@gmail.com>
- <20201111215203.80336-6-ash.j.wilding@gmail.com>
+References: <20201111200721.30551-1-paul@xen.org>
+ <20201111200721.30551-3-paul@xen.org>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <e5603684-1f4b-83f3-8b80-6c9d045912cc@suse.com>
-Date: Thu, 12 Nov 2020 09:31:26 +0100
+Message-ID: <37655f80-2f72-5069-6de4-0b2c8dce47bf@suse.com>
+Date: Thu, 12 Nov 2020 09:37:54 +0100
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.4.1
 MIME-Version: 1.0
-In-Reply-To: <20201111215203.80336-6-ash.j.wilding@gmail.com>
+In-Reply-To: <20201111200721.30551-3-paul@xen.org>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
-On 11.11.2020 22:51, Ash Wilding wrote:
-> From: Ash Wilding <ash.j.wilding@gmail.com>
+On 11.11.2020 21:07, Paul Durrant wrote:
+> From: Paul Durrant <pdurrant@amazon.com>
 > 
-> This patch pulls in Linux's atomics helpers for arm32 and arm64, and
-> their dependencies, as-is.
+> This patch moves the implementation of HVCALL_SEND_IPI that is currently
+> inline in viridian_hypercall() into a new hvcall_ipi() function.
 > 
-> Note that Linux's arm32 atomics helpers use the READ_ONCE() and
-> WRITE_ONCE() macros defined in <asm-generic/rwonce.h>, while Linux's
-> arm64 atomics helpers use __READ_ONCE() and __WRITE_ONCE().
-
-And our ACCESS_ONCE() can't be used, or be made usable? I don't think
-we want a 3rd variant when we're already in the process of discussing
-how to fold the two ones we have right now.
-
-> The only difference is that the __* versions skip checking whether the
-> object being accessed is the same size as a native C type (e.g. char,
-> int, long, etc). Given the arm32 helpers are using the macros to access
-> an atomic_t's counter member, which is an int, we can skip this check by
-> using the __* versions like the arm64 code does.
+> The new function returns Xen errno values similarly to hvcall_flush(). Hence
+> the errno translation code in viridial_hypercall() is generalized, removing
+> the need for the local 'status' variable.
 > 
-> I mention this here because it forms the first part of my justification
-> for *not* copying Linux's <linux/compiler_types.h> to Xen; the size
-> check described above is performed by __native_word() defined in that
-> header.
-> 
-> The second part of my justification may be more contentious; as you'll
-> see in the next patch, I intend to drop the __unqual_scalar_typeof()
-> calls in __READ_ONCE() and __WRITE_ONCE(). This is because the pointer
-> to the atomic_t's counter member is always a basic (int *) so we don't
-> need this, and dropping it means we can avoid having to port Linux's
-> <linux/compiler_types.h>.
+> NOTE: The formatting of the 'out' label also corrected as per CODING_STYLE
 
-I don't think weakening the checking is a good idea when the macros
-are being made available for general use. If they'd be renamed to be
-private flavors for use just in Arm's atomics, this would be a
-different thing.
+How about correcting the adjacent switch() at the same time as well?
 
-> If people are against this approach, please bear in mind that the
-> current version of __unqual_scalar_typeof() in <linux/compiler_types.h>
-> was actually the reason for Linux upgrading the minimum GCC version
-> required to 4.9 earlier this year so that they can guarantee C11
-> _Generic support [1].
-> 
-> So if we do want to take Linux's <linux/compiler_types.h> we'll either
-> need to:
-> 
->    A) bump up the minimum required version of GCC to 4.9 to match
->       that required by Linux; in the Xen README we currently state
->       GCC 4.8 for Arm and GCC 4.1.2_20070115 for x86.
+>       and the code is adjusted to avoid a register copy-back if 'mode' is
+>       neither 8 nor 4.
 
-Discussion about bumping the baseline has started, but is progressing
-rather slowly. I'm not an Arm maintainer, but it would seem to me
-that going from 4.8 to 4.9 just for Arm at this point may be easier
-than the decision what the new baseline ought to be for x86.
-
-> --- /dev/null
-> +++ b/xen/include/xen/rwonce.h
-> @@ -0,0 +1,90 @@
-> +/* SPDX-License-Identifier: GPL-2.0 */
-> +/*
-> + * Prevent the compiler from merging or refetching reads or writes. The
-> + * compiler is also forbidden from reordering successive instances of
-> + * READ_ONCE and WRITE_ONCE, but only when the compiler is aware of some
-> + * particular ordering. One way to make the compiler aware of ordering is to
-> + * put the two invocations of READ_ONCE or WRITE_ONCE in different C
-> + * statements.
-> + *
-> + * These two macros will also work on aggregate data types like structs or
-> + * unions.
-> + *
-> + * Their two major use cases are: (1) Mediating communication between
-> + * process-level code and irq/NMI handlers, all running on the same CPU,
-> + * and (2) Ensuring that the compiler does not fold, spindle, or otherwise
-> + * mutilate accesses that either do not require ordering or that interact
-> + * with an explicit memory barrier or atomic instruction that provides the
-> + * required ordering.
-> + */
-> +#ifndef __ASM_GENERIC_RWONCE_H
-> +#define __ASM_GENERIC_RWONCE_H
-> +
-> +#ifndef __ASSEMBLY__
-> +
-> +#include <linux/compiler_types.h>
-> +#include <linux/kasan-checks.h>
-> +#include <linux/kcsan-checks.h>
-> +
-> +/*
-> + * Yes, this permits 64-bit accesses on 32-bit architectures. These will
-> + * actually be atomic in some cases (namely Armv7 + LPAE), but for others we
-> + * rely on the access being split into 2x32-bit accesses for a 32-bit quantity
-> + * (e.g. a virtual address) and a strong prevailing wind.
-> + */
-> +#define compiletime_assert_rwonce_type(t)					\
-> +	compiletime_assert(__native_word(t) || sizeof(t) == sizeof(long long),	\
-> +		"Unsupported access size for {READ,WRITE}_ONCE().")
-> +
-> +/*
-> + * Use __READ_ONCE() instead of READ_ONCE() if you do not require any
-> + * atomicity. Note that this may result in tears!
-> + */
-> +#ifndef __READ_ONCE
-> +#define __READ_ONCE(x)	(*(const volatile __unqual_scalar_typeof(x) *)&(x))
-> +#endif
-> +
-> +#define READ_ONCE(x)							\
-> +({									\
-> +	compiletime_assert_rwonce_type(x);				\
-> +	__READ_ONCE(x);							\
-> +})
-> +
-> +#define __WRITE_ONCE(x, val)						\
-> +do {									\
-> +	*(volatile typeof(x) *)&(x) = (val);				\
-> +} while (0)
-> +
-> +#define WRITE_ONCE(x, val)						\
-> +do {									\
-> +	compiletime_assert_rwonce_type(x);				\
-> +	__WRITE_ONCE(x, val);						\
-> +} while (0)
-> +
-> +static __no_sanitize_or_inline
-> +unsigned long __read_once_word_nocheck(const void *addr)
-> +{
-> +	return __READ_ONCE(*(unsigned long *)addr);
-> +}
-> +
-> +/*
-> + * Use READ_ONCE_NOCHECK() instead of READ_ONCE() if you need to load a
-> + * word from memory atomically but without telling KASAN/KCSAN. This is
-> + * usually used by unwinding code when walking the stack of a running process.
-> + */
-> +#define READ_ONCE_NOCHECK(x)						\
-> +({									\
-> +	compiletime_assert(sizeof(x) == sizeof(unsigned long),		\
-> +		"Unsupported access size for READ_ONCE_NOCHECK().");	\
-> +	(typeof(x))__read_once_word_nocheck(&(x));			\
-> +})
-> +
-> +static __no_kasan_or_inline
-> +unsigned long read_word_at_a_time(const void *addr)
-> +{
-> +	kasan_check_read(addr, 1);
-> +	return *(unsigned long *)addr;
-> +}
-> +
-> +#endif /* __ASSEMBLY__ */
-> +#endif	/* __ASM_GENERIC_RWONCE_H */
-> \ No newline at end of file
-
-This wants taking care of in any event - there are multiple instances
-in this patch (in fact it looks as if all of the new files had this
-issue), and I didn't check others.
+While you mention it here, isn't this an unrelated change wanting
+its own justification?
 
 Jan
 
