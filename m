@@ -2,28 +2,28 @@ Return-Path: <SRS0=Jwwc=ES=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-5.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 62E5AC55ABD
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2020 11:12:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 59068C2D0A3
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2020 11:22:13 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E08102222C
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2020 11:12:14 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id B381F221FE
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2020 11:22:12 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="WmgFpNHO"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E08102222C
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="Zo5FCnsU"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B381F221FE
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.25684.53606 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.25694.53621 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kdAWF-0000OW-3N; Thu, 12 Nov 2020 11:11:59 +0000
+	id 1kdAfp-0001TX-2J; Thu, 12 Nov 2020 11:21:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 25684.53606; Thu, 12 Nov 2020 11:11:59 +0000
+Received: by outflank-mailman (output) from mailman id 25694.53621; Thu, 12 Nov 2020 11:21:53 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,146 +38,95 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kdAWF-0000OP-0P; Thu, 12 Nov 2020 11:11:59 +0000
-Received: by outflank-mailman (input) for mailman id 25684;
- Thu, 12 Nov 2020 11:11:57 +0000
+	id 1kdAfo-0001TQ-VH; Thu, 12 Nov 2020 11:21:52 +0000
+Received: by outflank-mailman (input) for mailman id 25694;
+ Thu, 12 Nov 2020 11:21:51 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=2UFB=ES=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kdAWD-0000OK-7c
- for xen-devel@lists.xenproject.org; Thu, 12 Nov 2020 11:11:57 +0000
+ id 1kdAfn-0001TL-1G
+ for xen-devel@lists.xenproject.org; Thu, 12 Nov 2020 11:21:51 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 96784ba8-c6e5-4de1-b085-637cc44b1891;
- Thu, 12 Nov 2020 11:11:56 +0000 (UTC)
+ id 01339730-7f6e-4006-89dd-8786c823e55b;
+ Thu, 12 Nov 2020 11:21:50 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 3AF7AAB95;
- Thu, 12 Nov 2020 11:11:55 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 439E6AE95;
+ Thu, 12 Nov 2020 11:21:49 +0000 (UTC)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=2UFB=ES=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
-	id 1kdAWD-0000OK-7c
-	for xen-devel@lists.xenproject.org; Thu, 12 Nov 2020 11:11:57 +0000
-X-Inumbo-ID: 96784ba8-c6e5-4de1-b085-637cc44b1891
+	id 1kdAfn-0001TL-1G
+	for xen-devel@lists.xenproject.org; Thu, 12 Nov 2020 11:21:51 +0000
+X-Inumbo-ID: 01339730-7f6e-4006-89dd-8786c823e55b
 Received: from mx2.suse.de (unknown [195.135.220.15])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 96784ba8-c6e5-4de1-b085-637cc44b1891;
-	Thu, 12 Nov 2020 11:11:56 +0000 (UTC)
+	id 01339730-7f6e-4006-89dd-8786c823e55b;
+	Thu, 12 Nov 2020 11:21:50 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1605179515;
+	t=1605180109;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=RVhyz9+tgsb1IKzvh1NSweZs4qIqQYJPqSFCQwY3nqA=;
-	b=WmgFpNHOG11ilsGTXFE50a93DQ4Qvaij2VGFe3CjESUrc86m6NbaeoUUsDAJbxJ8G5H+g/
-	uG5HMxvkgbpj1u+2dw6XKioAQUbvMBNDxgY1UFZKP5RJA8P47Y405woJvCcg/hqB5lroZx
-	ZXOar975N0V23kfO1RZQOEbIWippdFA=
+	bh=0FRUkI2aKuPl0W4Z27gLbGQAPZoWkrly1NUEDWgBoYc=;
+	b=Zo5FCnsUzQDElAfW0Mn7K0cwcL8C9VnKMDF2djGFg7KMMGaNLTg1Esqc1vAJgqYO2Z8qHy
+	mTqcXuLW7ZLrKA4qOxMNmUo1ntiTugXFbJFW2Ol2+TsWDyUnR4jBjlutmLeGpVdvoNVM7A
+	5q2+A02XwhDbEpK2BDa+v+V4L36xmZo=
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 3AF7AAB95;
-	Thu, 12 Nov 2020 11:11:55 +0000 (UTC)
-Subject: Re: [PATCH V2 02/23] xen/ioreq: Make x86's IOREQ feature common
+	by mx2.suse.de (Postfix) with ESMTP id 439E6AE95;
+	Thu, 12 Nov 2020 11:21:49 +0000 (UTC)
+Subject: Re: [PATCH V2 07/23] xen/ioreq: Move x86's ioreq_gfn(server) to
+ struct domain
 To: Oleksandr Tyshchenko <olekstysh@gmail.com>
 Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
  Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
- Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
- Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
- <roger.pau@citrix.com>, Paul Durrant <paul@xen.org>, Tim Deegan
- <tim@xen.org>, Julien Grall <julien.grall@arm.com>,
- xen-devel@lists.xenproject.org
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, Wei Liu
+ <wl@xen.org>, George Dunlap <george.dunlap@citrix.com>,
+ Ian Jackson <iwj@xenproject.org>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, Paul Durrant <paul@xen.org>,
+ Julien Grall <julien.grall@arm.com>, xen-devel@lists.xenproject.org
 References: <1602780274-29141-1-git-send-email-olekstysh@gmail.com>
- <1602780274-29141-3-git-send-email-olekstysh@gmail.com>
+ <1602780274-29141-8-git-send-email-olekstysh@gmail.com>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <5aa67969-0571-ee1b-bbe1-0b936a85acd2@suse.com>
-Date: Thu, 12 Nov 2020 12:11:55 +0100
+Message-ID: <00f9046f-5c77-cee5-b201-aa01f880d4e7@suse.com>
+Date: Thu, 12 Nov 2020 12:21:49 +0100
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.4.1
 MIME-Version: 1.0
-In-Reply-To: <1602780274-29141-3-git-send-email-olekstysh@gmail.com>
+In-Reply-To: <1602780274-29141-8-git-send-email-olekstysh@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
 On 15.10.2020 18:44, Oleksandr Tyshchenko wrote:
-> From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-> 
-> As a lot of x86 code can be re-used on Arm later on, this patch
-> moves previously prepared x86/hvm/ioreq.c to the common code.
-> 
-> The common IOREQ feature is supposed to be built with IOREQ_SERVER
-> option enabled, which is selected for x86's config HVM for now.
-> 
-> In order to avoid having a gigantic patch here, the subsequent
-> patches will update remaining bits in the common code step by step:
-> - Make IOREQ related structs/materials common
-> - Drop the "hvm" prefixes and infixes
-> - Remove layering violation by moving corresponding fields
->   out of *arch.hvm* or abstracting away accesses to them
-> 
-> This support is going to be used on Arm to be able run device
-> emulator outside of Xen hypervisor.
-> 
-> Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-> CC: Julien Grall <julien.grall@arm.com>
-> 
-> ---
-> Please note, this is a split/cleanup/hardening of Julien's PoC:
-> "Add support for Guest IO forwarding to a device emulator"
-> 
-> ***
-> Please note, this patch depends on the following which is
-> on review:
-> https://patchwork.kernel.org/patch/11816689/
-> ***
-> 
-> Changes RFC -> V1:
->    - was split into three patches:
->      - x86/ioreq: Prepare IOREQ feature for making it common
->      - xen/ioreq: Make x86's IOREQ feature common
->      - xen/ioreq: Make x86's hvm_ioreq_needs_completion() common
->    - update MAINTAINERS file
->    - do not use a separate subdir for the IOREQ stuff, move it to:
->      - xen/common/ioreq.c
->      - xen/include/xen/ioreq.h
->    - update x86's files to include xen/ioreq.h
->    - remove unneeded headers in arch/x86/hvm/ioreq.c
->    - re-order the headers alphabetically in common/ioreq.c
->    - update common/ioreq.c according to the newly introduced arch functions:
->      arch_hvm_destroy_ioreq_server()/arch_handle_hvm_io_completion()
-> 
-> Changes V1 -> V2:
->    - update patch description
->    - make everything needed in the previous patch to achieve
->      a truly rename here
->    - don't include unnecessary headers from asm-x86/hvm/ioreq.h
->      and xen/ioreq.h
->    - use __XEN_IOREQ_H__ instead of __IOREQ_H__
->    - move get_ioreq_server() to common/ioreq.c
-> ---
->  MAINTAINERS                     |    8 +-
->  xen/arch/x86/Kconfig            |    1 +
->  xen/arch/x86/hvm/Makefile       |    1 -
->  xen/arch/x86/hvm/ioreq.c        | 1422 ---------------------------------------
->  xen/arch/x86/mm.c               |    2 +-
->  xen/arch/x86/mm/shadow/common.c |    2 +-
->  xen/common/Kconfig              |    3 +
->  xen/common/Makefile             |    1 +
->  xen/common/ioreq.c              | 1422 +++++++++++++++++++++++++++++++++++++++
->  xen/include/asm-x86/hvm/ioreq.h |   39 +-
->  xen/include/xen/ioreq.h         |   71 ++
->  11 files changed, 1509 insertions(+), 1463 deletions(-)
->  delete mode 100644 xen/arch/x86/hvm/ioreq.c
->  create mode 100644 xen/common/ioreq.c
->  create mode 100644 xen/include/xen/ioreq.h
+> --- a/xen/include/asm-x86/hvm/ioreq.h
+> +++ b/xen/include/asm-x86/hvm/ioreq.h
+> @@ -77,7 +77,7 @@ static inline int hvm_map_mem_type_to_ioreq_server(struct domain *d,
+>      if ( flags & ~XEN_DMOP_IOREQ_MEM_ACCESS_WRITE )
+>          return -EINVAL;
+>  
+> -    spin_lock_recursive(&d->arch.hvm.ioreq_server.lock);
+> +    spin_lock_recursive(&d->ioreq_server.lock);
+>  
+>      s = get_ioreq_server(d, id);
+>  
+> @@ -92,7 +92,7 @@ static inline int hvm_map_mem_type_to_ioreq_server(struct domain *d,
+>      rc = p2m_set_ioreq_server(d, flags, s);
+>  
+>   out:
+> -    spin_unlock_recursive(&d->arch.hvm.ioreq_server.lock);
+> +    spin_unlock_recursive(&d->ioreq_server.lock);
+>  
+>      if ( rc == 0 && flags == 0 )
+>      {
 
-Iirc I've previously asked to make sure the diff here gets created with
-git's rename detection enabled, so we wouldn't see 1422 lines deleted
-and 1422 lines added, _hoping_ they're all the same (or going through
-the extra steps needed to compare old and new code), but instead seeing
-just the diff between old and new files (which in the ideal case would
-then be empty).
+
+Does this build at this point, when !CONFIG_IOREQ_SERVER? Patch 1
+moves the code here without guards, and patch 2, when introducing
+the Kconfig symbol, doesn't add guards here. I admit I didn't
+check further intermediate patches.
 
 Jan
 
