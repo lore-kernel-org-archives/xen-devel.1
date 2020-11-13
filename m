@@ -2,28 +2,28 @@ Return-Path: <SRS0=wK0z=ET=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.4 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-5.4 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 52F52C388F7
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Nov 2020 17:13:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9B59CC55ABD
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Nov 2020 17:16:18 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B146220759
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Nov 2020 17:13:50 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 32B7B21D1A
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Nov 2020 17:16:18 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="ZZgi/HvK"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B146220759
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	dkim=pass (1024-bit key) header.d=amazon.de header.i=@amazon.de header.b="r9M8Bq3T"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 32B7B21D1A
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=amazon.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.26806.55299 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.26811.55311 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kdcdg-0002Py-FY; Fri, 13 Nov 2020 17:13:32 +0000
+	id 1kdcg5-0002YA-UP; Fri, 13 Nov 2020 17:16:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 26806.55299; Fri, 13 Nov 2020 17:13:32 +0000
+Received: by outflank-mailman (output) from mailman id 26811.55311; Fri, 13 Nov 2020 17:16:01 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -33,109 +33,102 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
-Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kdcdg-0002Pr-CU; Fri, 13 Nov 2020 17:13:32 +0000
-Received: by outflank-mailman (input) for mailman id 26806;
- Fri, 13 Nov 2020 17:13:30 +0000
+	id 1kdcg5-0002Y3-Qw; Fri, 13 Nov 2020 17:16:01 +0000
+Received: by outflank-mailman (input) for mailman id 26811;
+ Fri, 13 Nov 2020 17:16:00 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=uoW6=ET=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1kdcde-0002Pm-EM
- for xen-devel@lists.xenproject.org; Fri, 13 Nov 2020 17:13:30 +0000
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+ <SRS0=EgAG=ET=amazon.de=prvs=579e99c79=doebel@srs-us1.protection.inumbo.net>)
+ id 1kdcg4-0002Xw-FO
+ for xen-devel@lists.xenproject.org; Fri, 13 Nov 2020 17:16:00 +0000
+Received: from smtp-fw-9102.amazon.com (unknown [207.171.184.29])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 990adde9-7fda-4edf-bc23-6b11b0ad0eb8;
- Fri, 13 Nov 2020 17:13:29 +0000 (UTC)
+ id b84f65a2-de3d-42fa-b0c7-610ba2afca55;
+ Fri, 13 Nov 2020 17:15:59 +0000 (UTC)
+Received: from sea32-co-svc-lb4-vlan3.sea.corp.amazon.com (HELO
+ email-inbound-relay-1e-c7f73527.us-east-1.amazon.com) ([10.47.23.38])
+ by smtp-border-fw-out-9102.sea19.amazon.com with ESMTP;
+ 13 Nov 2020 16:51:13 +0000
+Received: from EX13D03EUC002.ant.amazon.com
+ (iad12-ws-svc-p26-lb9-vlan3.iad.amazon.com [10.40.163.38])
+ by email-inbound-relay-1e-c7f73527.us-east-1.amazon.com (Postfix) with ESMTPS
+ id F12C7B2C71; Fri, 13 Nov 2020 16:51:11 +0000 (UTC)
+Received: from [192.168.31.251] (10.43.162.50) by EX13D03EUC002.ant.amazon.com
+ (10.43.164.60) with Microsoft SMTP Server (TLS) id 15.0.1497.2;
+ Fri, 13 Nov 2020 16:51:08 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=uoW6=ET=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
-	id 1kdcde-0002Pm-EM
-	for xen-devel@lists.xenproject.org; Fri, 13 Nov 2020 17:13:30 +0000
-X-Inumbo-ID: 990adde9-7fda-4edf-bc23-6b11b0ad0eb8
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+	(envelope-from <SRS0=EgAG=ET=amazon.de=prvs=579e99c79=doebel@srs-us1.protection.inumbo.net>)
+	id 1kdcg4-0002Xw-FO
+	for xen-devel@lists.xenproject.org; Fri, 13 Nov 2020 17:16:00 +0000
+X-Inumbo-ID: b84f65a2-de3d-42fa-b0c7-610ba2afca55
+Received: from smtp-fw-9102.amazon.com (unknown [207.171.184.29])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 990adde9-7fda-4edf-bc23-6b11b0ad0eb8;
-	Fri, 13 Nov 2020 17:13:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1605287609;
+	id b84f65a2-de3d-42fa-b0c7-610ba2afca55;
+	Fri, 13 Nov 2020 17:15:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=amazon.de; i=@amazon.de; q=dns/txt; s=amazon201209;
+  t=1605287760; x=1636823760;
   h=subject:to:cc:references:from:message-id:date:
    mime-version:in-reply-to:content-transfer-encoding;
-  bh=zhNfuYvFoIkrUjwdSPYa6x5TSR2fKQYqHzLxNnXLPBA=;
-  b=ZZgi/HvKksCjgD2FGw/01chrgIIfSNtptvp8NUReP9WkRPN6UHKe191p
-   06IL0KL4YyfUQRbatihJZ63ujoHKyttxXP6HPPOwyijm7gB2YEHZUC6T4
-   KZNxruSxJ2Lc9LoMtpuIVaveQBJPCFSbWihX1IIzCC5g617ub2h0sobNJ
-   s=;
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: qxkmov4/hWhPuPJ5ymtWsEcOpYYlSdpTBfnio195YO9S2U2vuQNFS58U734F7tM5OyKrSaHE5d
- x5Tg16as+H2zjKfgPXGaFIyWy7BHsd6uirliPP4Iu1wni0RL0wHwGCFFh4ry+Kq3F6BKczjU2Q
- ZvRSgBa+oclMkTj05LTV5zfJyJPEQ1uHVRNRg62wlmLJUl1bLHfBfw5K5nPfC0IfeJK/gsE27F
- Mkggq5SkXkLaWVGMQ3zNb9rbHpI4I+833M2FFA6S85KkSA+CG8FL0V6bWNAaYNBmGiAr5ruzUf
- z/Q=
-X-SBRS: None
-X-MesageID: 31162691
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.77,476,1596513600"; 
-   d="scan'208";a="31162691"
+  bh=Z8RkLCygUZ9uffdO4CgEDopjHE/cbAn5BcNhzPPDyQA=;
+  b=r9M8Bq3Tk2z583F2Wxvclrq6kHAv2c8GPPSYYRziAH2Ei8D7hMxaDv+A
+   f1PCWF/cMa+mGYAxsR7q9MtrSvxkv3XCe0X3WAM/WXc15uaJRl2eHl5c9
+   6tJgDGv5CzkYzB6JORkH1m1k0qyKsbYGzQUmdE00NoMSkRrK5NbMY1gxL
+   g=;
+X-IronPort-AV: E=Sophos;i="5.77,476,1596499200"; 
+   d="scan'208";a="95102610"
+Received: from sea32-co-svc-lb4-vlan3.sea.corp.amazon.com (HELO email-inbound-relay-1e-c7f73527.us-east-1.amazon.com) ([10.47.23.38])
+  by smtp-border-fw-out-9102.sea19.amazon.com with ESMTP; 13 Nov 2020 16:51:13 +0000
+Received: from EX13D03EUC002.ant.amazon.com (iad12-ws-svc-p26-lb9-vlan3.iad.amazon.com [10.40.163.38])
+	by email-inbound-relay-1e-c7f73527.us-east-1.amazon.com (Postfix) with ESMTPS id F12C7B2C71;
+	Fri, 13 Nov 2020 16:51:11 +0000 (UTC)
+Received: from [192.168.31.251] (10.43.162.50) by EX13D03EUC002.ant.amazon.com
+ (10.43.164.60) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Fri, 13 Nov
+ 2020 16:51:08 +0000
 Subject: Re: [XEN PATCH] tools/xenstore: Log xenstored build ID on startup
-To: Bjoern Doebel <doebel@amazon.de>, =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?=
-	<jgross@suse.com>, <xen-devel@lists.xenproject.org>
+To: Jan Beulich <jbeulich@suse.com>
 CC: Julien Grall <jgrall@amazon.co.uk>, Eslam Elnikety <elnikety@amazon.de>,
-	Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>, Edwin Torok
-	<edvin.torok@citrix.com>, Christian Lindig <christian.lindig@citrix.com>
+	Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
+	<xen-devel@lists.xenproject.org>
 References: <20201113141823.58712-1-doebel@amazon.de>
- <5ac379ad-33fd-2973-dfdb-9e06ea539809@suse.com>
- <0e6b09fe-ffc4-195f-1b6c-67abc0cff92c@amazon.de>
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Message-ID: <c1352a2a-112a-966f-7410-b917cabe1d91@citrix.com>
-Date: Fri, 13 Nov 2020 17:13:21 +0000
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ <b61119da-b6e8-7746-9298-54bf60da88ea@suse.com>
+From: Bjoern Doebel <doebel@amazon.de>
+Message-ID: <90212fe0-4cdb-61b3-2da0-c31ab5aeb89e@amazon.de>
+Date: Fri, 13 Nov 2020 17:51:03 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:78.0)
+ Gecko/20100101 Thunderbird/78.4.3
 MIME-Version: 1.0
-In-Reply-To: <0e6b09fe-ffc4-195f-1b6c-67abc0cff92c@amazon.de>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <b61119da-b6e8-7746-9298-54bf60da88ea@suse.com>
 Content-Language: en-GB
-X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
- FTLPEX02CL04.citrite.net (10.13.108.177)
+X-Originating-IP: [10.43.162.50]
+X-ClientProxiedBy: EX13D24UWB001.ant.amazon.com (10.43.161.93) To
+ EX13D03EUC002.ant.amazon.com (10.43.164.60)
+Precedence: Bulk
+Content-Type: text/plain; charset="utf-8"; format="flowed"
+Content-Transfer-Encoding: base64
 
-On 13/11/2020 16:56, Bjoern Doebel wrote:
-> On 13.11.20 16:36, Jürgen Groß wrote:
->> On 13.11.20 15:18, Bjoern Doebel wrote:
->>> Right now we do not have a mechanism to determine the version of the
->>> currently running xenstored at runtime. As xenstored runs throughout
->>> the
->>> lifetime of a Xen host, this may lead to problems when newer user space
->>> builds are staged. Then, the running xenstored will no longer match the
->>> version of the installed xenstored.
->>>
->>> To allow users to always identify the running version of xenstored, add
->>> a linker-generated unique build ID to every xenstored build. Add
->>> functionality to log this build ID into a file upon service startup.
->>>
->>> Signed-off-by: Bjoern Doebel <doebel@amazon.de>
->>> Reviewed-by: Martin Mazein <amazein@amazon.de>
->>> Reviewed-by: Paul Durrant <pdurrant@amazon.co.uk>
->>
->> No support for oxenstored or xenstore-stubdom?
->
-> Your suggestion further down will apparently help for stubdom. I do
-> not speak ocaml at all - how do we address this?
+T24gMTMuMTEuMjAgMTU6MjcsIEphbiBCZXVsaWNoIHdyb3RlOgo+IE9uIDEzLjExLjIwMjAgMTU6
+MTgsIEJqb2VybiBEb2ViZWwgd3JvdGU6Cj4+IC0tLSBhL3Rvb2xzL3hlbnN0b3JlL01ha2VmaWxl
+Cj4+ICsrKyBiL3Rvb2xzL3hlbnN0b3JlL01ha2VmaWxlCj4+IEBAIC02Niw2ICs2NiwxMCBAQCAk
+KFhFTlNUT1JFRF9PQkpTKTogQ0ZMQUdTICs9ICQoU1lTVEVNRF9DRkxBR1MpCj4+ICAgeGVuc3Rv
+cmVkOiBMREZMQUdTICs9ICQoU1lTVEVNRF9MSUJTKQo+PiAgIGVuZGlmCj4+Cj4+ICsjIHhlbnN0
+b3JlZDogZW5mb3JjZSBjcmVhdGlvbiBvZiBhIGJ1aWxkSUQgc2VjdGlvbiBhbmQgdXNlIGEgbGlu
+a2VyCj4+ICsjIHNjcmlwdCB0byBhZGQgYWRkaXRpb25hbCBzeW1ib2xzIGFyb3VuZCB0aGF0IHNl
+Y3Rpb24KPj4gK3hlbnN0b3JlZDogTERGTEFHUyArPSAgLVdsLC0tYnVpbGQtaWQ9c2hhMSAtV2ws
+LVQsYnVpbGRpZF9zeW1ib2xzLmxkCj4gU2luY2UgaW4gdGhlIGh5cGVydmlzb3IgYnVpbGQgd2Un
+cmUgY2FyZWZ1bCB0byBub3QgdXNlIC0tYnVpbGQtaWQKPiB3aGVuIHRoZSBsaW5rZXIgZG9lc24n
+dCBzdXBwb3J0IGl0LCBJIHN1cHBvc2UgdGhlIHNhbWUgY2FyZSBuZWVkcwo+IGFwcGx5aW5nIGhl
+cmUuIFNlZSB0aGUgc2V0dGluZyBvZiBidWlsZF9pZF9saW5rZXIgaW4gLi9Db25maWcubWsuCgpP
+aywgSSB3aWxsIG1ha2UgdGhpcyBjb25kaXRpb25hbCBvbiB0aGUgc2V0dGluZyBvZiAkKGJ1aWxk
+X2lkX2xpbmtlcikuCgo+Cj4gSmFuCgpCam9lcm4KCgoKCkFtYXpvbiBEZXZlbG9wbWVudCBDZW50
+ZXIgR2VybWFueSBHbWJICktyYXVzZW5zdHIuIDM4CjEwMTE3IEJlcmxpbgpHZXNjaGFlZnRzZnVl
+aHJ1bmc6IENocmlzdGlhbiBTY2hsYWVnZXIsIEpvbmF0aGFuIFdlaXNzCkVpbmdldHJhZ2VuIGFt
+IEFtdHNnZXJpY2h0IENoYXJsb3R0ZW5idXJnIHVudGVyIEhSQiAxNDkxNzMgQgpTaXR6OiBCZXJs
+aW4KVXN0LUlEOiBERSAyODkgMjM3IDg3OQoKCg==
 
-CC'ing Edwin and Christian who have done the bulk of the oxenstored
-recently.
-
-It sounds like it might not be possible right now, but would be possible
-with a future plan to switch the Ocaml build system over to dune (the
-new/preferred Ocaml upstream toolchain).
-
-If it does end up being an XS_CONTROL sub-op, we can implement it at a
-future point when we can usefully answer the question.
-
-~Andrew
 
