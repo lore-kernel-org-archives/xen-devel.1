@@ -6,21 +6,21 @@ X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
 	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4DB39C2D0E4
-	for <xen-devel@archiver.kernel.org>; Sun, 15 Nov 2020 17:50:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7982DC2D0E4
+	for <xen-devel@archiver.kernel.org>; Sun, 15 Nov 2020 17:54:02 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EFF0922384
-	for <xen-devel@archiver.kernel.org>; Sun, 15 Nov 2020 17:50:09 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EFF0922384
+	by mail.kernel.org (Postfix) with ESMTPS id 12746217A0
+	for <xen-devel@archiver.kernel.org>; Sun, 15 Nov 2020 17:54:01 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 12746217A0
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=antioche.eu.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.27520.56172 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.27527.56184 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1keM9u-0005bU-N4; Sun, 15 Nov 2020 17:49:50 +0000
+	id 1keMDn-0006VB-79; Sun, 15 Nov 2020 17:53:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 27520.56172; Sun, 15 Nov 2020 17:49:50 +0000
+Received: by outflank-mailman (output) from mailman id 27527.56184; Sun, 15 Nov 2020 17:53:51 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -35,77 +35,66 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1keM9u-0005bN-JJ; Sun, 15 Nov 2020 17:49:50 +0000
-Received: by outflank-mailman (input) for mailman id 27520;
- Sun, 15 Nov 2020 17:49:49 +0000
+	id 1keMDn-0006V4-3q; Sun, 15 Nov 2020 17:53:51 +0000
+Received: by outflank-mailman (input) for mailman id 27527;
+ Sun, 15 Nov 2020 17:53:50 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=b2Sd=EV=antioche.eu.org=bouyer@srs-us1.protection.inumbo.net>)
- id 1keM9s-0005bI-VE
- for xen-devel@lists.xenproject.org; Sun, 15 Nov 2020 17:49:48 +0000
+ id 1keMDm-0006Uz-00
+ for xen-devel@lists.xenproject.org; Sun, 15 Nov 2020 17:53:50 +0000
 Received: from chassiron.antioche.eu.org (unknown [2001:41d0:fe9d:1101::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 40e847f8-358c-4319-9dea-551fcca8111c;
- Sun, 15 Nov 2020 17:49:45 +0000 (UTC)
+ id 4a7ab37b-bfcf-405b-8b37-1310ffdb34ec;
+ Sun, 15 Nov 2020 17:53:48 +0000 (UTC)
 Received: from sandettie.soc.lip6.fr (82-64-3-41.subs.proxad.net [82.64.3.41])
  by chassiron.antioche.eu.org (8.15.2/8.15.2) with ESMTPS id
- 0AFHnh89013401
+ 0AFHrkAL006417
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=OK)
- for <xen-devel@lists.xenproject.org>; Sun, 15 Nov 2020 18:49:44 +0100 (MET)
+ for <xen-devel@lists.xenproject.org>; Sun, 15 Nov 2020 18:53:47 +0100 (MET)
 Received: by sandettie.soc.lip6.fr (Postfix, from userid 373)
- id 70A002E9CA8; Sun, 15 Nov 2020 18:49:38 +0100 (MET)
+ id 31BD72E9CA8; Sun, 15 Nov 2020 18:53:41 +0100 (MET)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=b2Sd=EV=antioche.eu.org=bouyer@srs-us1.protection.inumbo.net>)
-	id 1keM9s-0005bI-VE
-	for xen-devel@lists.xenproject.org; Sun, 15 Nov 2020 17:49:48 +0000
-X-Inumbo-ID: 40e847f8-358c-4319-9dea-551fcca8111c
+	id 1keMDm-0006Uz-00
+	for xen-devel@lists.xenproject.org; Sun, 15 Nov 2020 17:53:50 +0000
+X-Inumbo-ID: 4a7ab37b-bfcf-405b-8b37-1310ffdb34ec
 Received: from chassiron.antioche.eu.org (unknown [2001:41d0:fe9d:1101::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 40e847f8-358c-4319-9dea-551fcca8111c;
-	Sun, 15 Nov 2020 17:49:45 +0000 (UTC)
+	id 4a7ab37b-bfcf-405b-8b37-1310ffdb34ec;
+	Sun, 15 Nov 2020 17:53:48 +0000 (UTC)
 Received: from sandettie.soc.lip6.fr (82-64-3-41.subs.proxad.net [82.64.3.41])
-	by chassiron.antioche.eu.org (8.15.2/8.15.2) with ESMTPS id 0AFHnh89013401
+	by chassiron.antioche.eu.org (8.15.2/8.15.2) with ESMTPS id 0AFHrkAL006417
 	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=OK)
-	for <xen-devel@lists.xenproject.org>; Sun, 15 Nov 2020 18:49:44 +0100 (MET)
+	for <xen-devel@lists.xenproject.org>; Sun, 15 Nov 2020 18:53:47 +0100 (MET)
 Received: by sandettie.soc.lip6.fr (Postfix, from userid 373)
-	id 70A002E9CA8; Sun, 15 Nov 2020 18:49:38 +0100 (MET)
-Date: Sun, 15 Nov 2020 18:49:38 +0100
+	id 31BD72E9CA8; Sun, 15 Nov 2020 18:53:41 +0100 (MET)
+Date: Sun, 15 Nov 2020 18:53:41 +0100
 From: Manuel Bouyer <bouyer@antioche.eu.org>
 To: xen-devel@lists.xenproject.org
-Subject: netbsd PVH dom0: xen clock event stops
-Message-ID: <20201115174938.GA3562@antioche.eu.org>
+Subject: Re: netbsd PVH dom0: xen clock event stops
+Message-ID: <20201115175341.GA4208@antioche.eu.org>
+References: <20201115174938.GA3562@antioche.eu.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-X-Greylist: Sender succeeded STARTTLS authentication, not delayed by milter-greylist-4.4.3 (chassiron.antioche.eu.org [151.127.5.145]); Sun, 15 Nov 2020 18:49:44 +0100 (MET)
+In-Reply-To: <20201115174938.GA3562@antioche.eu.org>
+X-Greylist: Sender succeeded STARTTLS authentication, not delayed by milter-greylist-4.4.3 (chassiron.antioche.eu.org [151.127.5.145]); Sun, 15 Nov 2020 18:53:47 +0100 (MET)
 
-Hello,
-I spent some more time debugging NetBSD as a PVH dom0 on Xen,
-With Roger's patch to avoid a Xen panic, the NetBSD kernel stalls
-configuring devices. At first I though it was an issue with hardware
-interrupts, but it more likely is an issue with Xen timer events.
-Specifically: virtual CPU 0 stops receiving timer events, while other
-CPUs keep receiving them. I tried to force a timer rearm but this didn't help.
-The event is not masked nor pending on Xen or NetBSD, as confirmed by 'q'.
-Others events (the Xen console, the debug event) are properly received
-by CPU0. I don't know how to debug this more at this point.
+On Sun, Nov 15, 2020 at 06:49:38PM +0100, Manuel Bouyer wrote:
+> Hello,
+> I spent some more time debugging NetBSD as a PVH dom0 on Xen,
+> With Roger's patch to avoid a Xen panic, the NetBSD kernel stalls
+> configuring devices. At first I though it was an issue with hardware
+> interrupts, but it more likely is an issue with Xen timer events.
+> Specifically: virtual CPU 0 stops receiving timer events, while other
+> CPUs keep receiving them. I tried to force a timer rearm but this didn't help.
+> The event is not masked nor pending on Xen or NetBSD, as confirmed by 'q'.
+> Others events (the Xen console, the debug event) are properly received
+> by CPU0. I don't know how to debug this more at this point.
 
-In case it helps, I put by Xen and netbsd kernels at
-http://www-soc.lip6.fr/~bouyer/netbsd-dom0-pvh/
-I boot it from the NetBSD boot loader with:
-menu=Boot Xen PVH:load /netbsd-test console=com0 root=dk0 -vx; multiboot /xen-test.gz dom0_mem=1024M console=com2 com2=57600,8n1 loglvl=all guest_loglvl=all gnttab_max_nr_frames=64 dom0=pvh iommu=debug
-
-I guess with grub this would be
-kernel /xen-test.gz dom0_mem=1024M console=com2 com2=57600,8n1 loglvl=all guest_loglvl=all gnttab_max_nr_frames=64 dom0=pvh iommu=debug
-module /netbsd-test console=com0 root=dk0 -vx
-
-(yes, com2 for xen and com0 for netbsd, that's not a bug :)
-You can enter the NetBSD debugger with
-+++++
-you can then enter commands, lile
-sh ev /i
-to see the interrupt counters
+I forgot to mention: the same NetBSD kernel boots fine as a PVH domU
 
 -- 
 Manuel Bouyer <bouyer@antioche.eu.org>
