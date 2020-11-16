@@ -2,25 +2,28 @@ Return-Path: <SRS0=LqdB=EW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.2 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 82BA5C4742C
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:05:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BDD35C5519F
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:09:53 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 38FF922450
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:05:46 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 38FF922450
+	by mail.kernel.org (Postfix) with ESMTPS id 61C9A2417E
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:09:53 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="dBQLE+OX"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 61C9A2417E
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.28065.56698 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.28079.56748 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1keg4Q-0000j1-M6; Mon, 16 Nov 2020 15:05:30 +0000
+	id 1keg8W-00010f-AQ; Mon, 16 Nov 2020 15:09:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 28065.56698; Mon, 16 Nov 2020 15:05:30 +0000
+Received: by outflank-mailman (output) from mailman id 28079.56748; Mon, 16 Nov 2020 15:09:44 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -35,66 +38,113 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1keg4Q-0000iu-Ip; Mon, 16 Nov 2020 15:05:30 +0000
-Received: by outflank-mailman (input) for mailman id 28065;
- Mon, 16 Nov 2020 15:05:28 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=kJi/=EW=lst.de=hch@srs-us1.protection.inumbo.net>)
- id 1keg4O-0000ip-LT
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:05:28 +0000
-Received: from verein.lst.de (unknown [213.95.11.211])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 91c217bb-6db1-4c32-b8c1-aeebb3a4bee0;
- Mon, 16 Nov 2020 15:05:27 +0000 (UTC)
-Received: by verein.lst.de (Postfix, from userid 2407)
- id C42D56736F; Mon, 16 Nov 2020 16:05:24 +0100 (CET)
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+	id 1keg8V-0000zf-Ow; Mon, 16 Nov 2020 15:09:43 +0000
+Received: by outflank-mailman (input) for mailman id 28079;
+ Mon, 16 Nov 2020 15:09:41 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
+ id 1kefys-0006ni-1X
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 14:59:46 +0000
+Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id a341bbf4-6be5-4fed-a83e-3846fb79d988;
+ Mon, 16 Nov 2020 14:58:44 +0000 (UTC)
+Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
+ by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+ id 1kefxe-0003nT-5J; Mon, 16 Nov 2020 14:58:30 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=kJi/=EW=lst.de=hch@srs-us1.protection.inumbo.net>)
-	id 1keg4O-0000ip-LT
-	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:05:28 +0000
-X-Inumbo-ID: 91c217bb-6db1-4c32-b8c1-aeebb3a4bee0
-Received: from verein.lst.de (unknown [213.95.11.211])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 91c217bb-6db1-4c32-b8c1-aeebb3a4bee0;
-	Mon, 16 Nov 2020 15:05:27 +0000 (UTC)
-Received: by verein.lst.de (Postfix, from userid 2407)
-	id C42D56736F; Mon, 16 Nov 2020 16:05:24 +0100 (CET)
-Date: Mon, 16 Nov 2020 16:05:24 +0100
+	(envelope-from <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
+	id 1kefys-0006ni-1X
+	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 14:59:46 +0000
+X-Inumbo-ID: a341bbf4-6be5-4fed-a83e-3846fb79d988
+Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id a341bbf4-6be5-4fed-a83e-3846fb79d988;
+	Mon, 16 Nov 2020 14:58:44 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
+	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+	Content-Type:Content-ID:Content-Description;
+	bh=/Imzh1mtRC/4MzK3hbPZY3ezfjbBAXF+4uATbyQG9tw=; b=dBQLE+OXBD+j477XeVCLVsEYMc
+	RcEmj1V7WI2hhE1ic5DNIFG4NASPB/YphyPWVi7Xq1LFghc+xDtYP8gnsZoG77DfNVesQgpmfkhvc
+	fRwObxyPEZK/z1Ciz1aZPB7p7sncrnoVPvsbR1T3r36wVT6Dggw6kq20tBT9oOGKs7N8awXlr/4dD
+	vSByTZgMJWOqjW2HVCrSuJQGs+W4TB0ER5Ppk1IPUgTtfrMT+MCFmU3g27MhXzwXsmuaY0EkY4/zY
+	y2h6fT5m4m5EipT6NUGe0exghgq3sxrlH/h+qqCes57dPolMGfQloQ8v6PU+P54LeLSCXbzWWejRV
+	yilzQCOg==;
+Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
+	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+	id 1kefxe-0003nT-5J; Mon, 16 Nov 2020 14:58:30 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
-Cc: Justin Sanders <justin@coraid.com>, Mike Snitzer <snitzer@redhat.com>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Jason Wang <jasowang@redhat.com>, linux-nvme@lists.infradead.org,
-	Song Liu <song@kernel.org>, dm-devel@redhat.com,
-	drbd-dev@lists.linbit.com, linux-scsi@vger.kernel.org,
-	xen-devel@lists.xenproject.org, Ilya Dryomov <idryomov@gmail.com>,
+Cc: Justin Sanders <justin@coraid.com>,
+	Josef Bacik <josef@toxicpanda.com>,
+	Ilya Dryomov <idryomov@gmail.com>,
 	Jack Wang <jinpu.wang@cloud.ionos.com>,
-	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
-	Josef Bacik <josef@toxicpanda.com>, nbd@other.debian.org,
-	linux-raid@vger.kernel.org, Stefan Hajnoczi <stefanha@redhat.com>,
-	ceph-devel@vger.kernel.org, linux-block@vger.kernel.org,
-	"Martin K. Petersen" <martin.petersen@oracle.com>,
-	Minchan Kim <minchan@kernel.org>, linux-fsdevel@vger.kernel.org,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	Jason Wang <jasowang@redhat.com>,
 	Paolo Bonzini <pbonzini@redhat.com>,
-	Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
-Subject: Re: cleanup updating the size of block devices v3
-Message-ID: <20201116150524.GA13367@lst.de>
+	Stefan Hajnoczi <stefanha@redhat.com>,
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Minchan Kim <minchan@kernel.org>,
+	Mike Snitzer <snitzer@redhat.com>,
+	Song Liu <song@kernel.org>,
+	"Martin K. Petersen" <martin.petersen@oracle.com>,
+	dm-devel@redhat.com,
+	linux-block@vger.kernel.org,
+	drbd-dev@lists.linbit.com,
+	nbd@other.debian.org,
+	ceph-devel@vger.kernel.org,
+	xen-devel@lists.xenproject.org,
+	linux-raid@vger.kernel.org,
+	linux-nvme@lists.infradead.org,
+	linux-scsi@vger.kernel.org,
+	linux-fsdevel@vger.kernel.org
+Subject: [PATCH 15/78] drbd: use set_capacity_and_notify
+Date: Mon, 16 Nov 2020 15:57:06 +0100
+Message-Id: <20201116145809.410558-16-hch@lst.de>
+X-Mailer: git-send-email 2.29.2
+In-Reply-To: <20201116145809.410558-1-hch@lst.de>
 References: <20201116145809.410558-1-hch@lst.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20201116145809.410558-1-hch@lst.de>
-User-Agent: Mutt/1.5.17 (2007-11-01)
+Content-Transfer-Encoding: 8bit
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-Oops,
+Use set_capacity_and_notify to set the size of both the disk and block
+device.  This also gets the uevent notifications for the resize for free.
 
-this is a bigger patch bomb than intended.  Only patches 1-23 are this
-series which should be ready to be applied once for-5.11/block pulles in
-5.10-rc4.
+Signed-off-by: Christoph Hellwig <hch@lst.de>
+---
+ drivers/block/drbd/drbd_main.c | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
 
-After that follow patches already in for-5.11/block and my current hot
-off the press development branch.
+diff --git a/drivers/block/drbd/drbd_main.c b/drivers/block/drbd/drbd_main.c
+index 65b95aef8dbc95..1c8c18b2a25f33 100644
+--- a/drivers/block/drbd/drbd_main.c
++++ b/drivers/block/drbd/drbd_main.c
+@@ -2036,8 +2036,7 @@ void drbd_set_my_capacity(struct drbd_device *device, sector_t size)
+ {
+ 	char ppb[10];
+ 
+-	set_capacity(device->vdisk, size);
+-	revalidate_disk_size(device->vdisk, false);
++	set_capacity_and_notify(device->vdisk, size);
+ 
+ 	drbd_info(device, "size = %s (%llu KB)\n",
+ 		ppsize(ppb, size>>1), (unsigned long long)size>>1);
+@@ -2068,8 +2067,7 @@ void drbd_device_cleanup(struct drbd_device *device)
+ 	}
+ 	D_ASSERT(device, first_peer_device(device)->connection->net_conf == NULL);
+ 
+-	set_capacity(device->vdisk, 0);
+-	revalidate_disk_size(device->vdisk, false);
++	set_capacity_and_notify(device->vdisk, 0);
+ 	if (device->bitmap) {
+ 		/* maybe never allocated. */
+ 		drbd_bm_resize(device, 0, 1);
+-- 
+2.29.2
+
 
