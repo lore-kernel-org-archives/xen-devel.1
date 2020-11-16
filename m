@@ -5,25 +5,25 @@ X-Spam-Level:
 X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=unavailable autolearn_force=no version=3.4.0
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C1578C61DD8
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:11:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1814BC4742C
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:11:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6C72820888
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:11:53 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id B3E00204FD
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:11:56 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="uXQm/yyI"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6C72820888
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="vJvWy+M6"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B3E00204FD
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.28271.57352 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.28274.57357 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kegAO-0006ig-JI; Mon, 16 Nov 2020 15:11:40 +0000
+	id 1kegAP-0006mc-MU; Mon, 16 Nov 2020 15:11:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 28271.57352; Mon, 16 Nov 2020 15:11:40 +0000
+Received: by outflank-mailman (output) from mailman id 28274.57357; Mon, 16 Nov 2020 15:11:41 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kegAN-0006gu-RC; Mon, 16 Nov 2020 15:11:39 +0000
-Received: by outflank-mailman (input) for mailman id 28271;
- Mon, 16 Nov 2020 15:11:35 +0000
+	id 1kegAP-0006li-9g; Mon, 16 Nov 2020 15:11:41 +0000
+Received: by outflank-mailman (input) for mailman id 28274;
+ Mon, 16 Nov 2020 15:11:37 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1keg0y-0006ni-5l
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:01:56 +0000
+ id 1kefzR-0006ni-2g
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:00:21 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id c90f4ce8-abdf-4f23-9023-68b347ea78dc;
- Mon, 16 Nov 2020 14:59:19 +0000 (UTC)
+ id 7a7bc4d3-87c4-4f72-884c-ef266ed2069c;
+ Mon, 16 Nov 2020 14:58:54 +0000 (UTC)
 Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kefyA-0003wx-DT; Mon, 16 Nov 2020 14:59:02 +0000
+ id 1kefxo-0003rX-KZ; Mon, 16 Nov 2020 14:58:41 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1keg0y-0006ni-5l
-	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:01:56 +0000
-X-Inumbo-ID: c90f4ce8-abdf-4f23-9023-68b347ea78dc
+	id 1kefzR-0006ni-2g
+	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:00:21 +0000
+X-Inumbo-ID: 7a7bc4d3-87c4-4f72-884c-ef266ed2069c
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id c90f4ce8-abdf-4f23-9023-68b347ea78dc;
-	Mon, 16 Nov 2020 14:59:19 +0000 (UTC)
+	id 7a7bc4d3-87c4-4f72-884c-ef266ed2069c;
+	Mon, 16 Nov 2020 14:58:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=9MasGm4sRMlqjIfBzvyRbCzoZ9vCizFcPgSc5rhaRew=; b=uXQm/yyIiJQnYODeCv7tLBroh6
-	arXMrp0Tk+2mkvK5mlMoVYQZhqOzsPFVFoVsNhqaXKjdbjxT6ddIFdHimSsiofqQFd042iVeyoPjf
-	kjJVvZC7dJvRJWgFk5vnXEzcfiS2wRI+9CAHzFb6PaF2pf3aK/Vv/y+iBA3+wNlveiknIb+cM4k72
-	sy6+79pc3yQnXdRLw5qP9MUrMQWCUQr94hrqb0BHYJRuZX0RRf1WPApUNdGnDYjJKsodIy93uSBGl
-	mXFAo94CwxYf32WkNugPW9wMsBEd2E2lCs3nmZ+m6b8g/Nfawh6vTjWCNJv2VNFFCFBCwJLajvHZl
-	HFZ0RH2Q==;
+	bh=Vj0GgZOGZUCqHagrDbWIgIb68CNEMN1B5n/upu75+9M=; b=vJvWy+M6q2aairpF0Q89oICkxI
+	PS5amLRUZxt3TDLOTCJKifVBAbRS3ozPh9ssbARTX05RTcowruj+r6DaYiko+IA8YM6yKnqqO9hZ0
+	YLPWVj8bReI6zNXL311McIRo6JgWss20/ic0IkcgvXqouBBov4LHHRc3LFvEHbyGhAEZ6L49Q+h8z
+	LPV18Yh1YwBXDnHfnQyxhLqXZkED99bdFyjJYXBanIYI+26WlIFdrhNuludlP3Zi5bFQ1Jai7SYT8
+	kxlPZdfsH/hR1Of6f1mV+sb6fFGWqYqS2gk4bZxnQp6B+oIaE6yoC0rkzi1aN8TgGTKSgtY0FwCjd
+	PfyxB0dA==;
 Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1kefyA-0003wx-DT; Mon, 16 Nov 2020 14:59:02 +0000
+	id 1kefxo-0003rX-KZ; Mon, 16 Nov 2020 14:58:41 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -101,11 +101,10 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-raid@vger.kernel.org,
 	linux-nvme@lists.infradead.org,
 	linux-scsi@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org,
-	Hannes Reinecke <hare@suse.de>
-Subject: [PATCH 37/78] block: split block_class_lock
-Date: Mon, 16 Nov 2020 15:57:28 +0100
-Message-Id: <20201116145809.410558-38-hch@lst.de>
+	linux-fsdevel@vger.kernel.org
+Subject: [PATCH 22/78] virtio-blk: remove a spurious call to revalidate_disk_size
+Date: Mon, 16 Nov 2020 15:57:13 +0100
+Message-Id: <20201116145809.410558-23-hch@lst.de>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20201116145809.410558-1-hch@lst.de>
 References: <20201116145809.410558-1-hch@lst.de>
@@ -113,156 +112,29 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-Split the block_class_lock mutex into one each to protect bdev_map
-and major_names.
+revalidate_disk_size just updates the block device size from the disk
+size.  Thus calling it from virtblk_update_cache_mode doesn't actually
+do anything.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
-Reviewed-by: Hannes Reinecke <hare@suse.de>
+Acked-by: Stefan Hajnoczi <stefanha@redhat.com>
+Acked-by: Michael S. Tsirkin <mst@redhat.com>
 ---
- block/genhd.c | 29 +++++++++++++++--------------
- 1 file changed, 15 insertions(+), 14 deletions(-)
+ drivers/block/virtio_blk.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/block/genhd.c b/block/genhd.c
-index 482f7b89802010..2a20372756625e 100644
---- a/block/genhd.c
-+++ b/block/genhd.c
-@@ -25,7 +25,6 @@
+diff --git a/drivers/block/virtio_blk.c b/drivers/block/virtio_blk.c
+index 3e812b4c32e669..145606dc52db1e 100644
+--- a/drivers/block/virtio_blk.c
++++ b/drivers/block/virtio_blk.c
+@@ -598,7 +598,6 @@ static void virtblk_update_cache_mode(struct virtio_device *vdev)
+ 	struct virtio_blk *vblk = vdev->priv;
  
- #include "blk.h"
- 
--static DEFINE_MUTEX(block_class_lock);
- static struct kobject *block_depr;
- 
- struct bdev_map {
-@@ -37,6 +36,7 @@ struct bdev_map {
- 	int (*lock)(dev_t, void *);
- 	void *data;
- } *bdev_map[255];
-+static DEFINE_MUTEX(bdev_map_lock);
- 
- /* for extended dynamic devt allocation, currently only one major is used */
- #define NR_EXT_DEVT		(1 << MINORBITS)
-@@ -400,6 +400,7 @@ static struct blk_major_name {
- 	int major;
- 	char name[16];
- } *major_names[BLKDEV_MAJOR_HASH_SIZE];
-+static DEFINE_MUTEX(major_names_lock);
- 
- /* index in the above - for now: assume no multimajor ranges */
- static inline int major_to_index(unsigned major)
-@@ -412,11 +413,11 @@ void blkdev_show(struct seq_file *seqf, off_t offset)
- {
- 	struct blk_major_name *dp;
- 
--	mutex_lock(&block_class_lock);
-+	mutex_lock(&major_names_lock);
- 	for (dp = major_names[major_to_index(offset)]; dp; dp = dp->next)
- 		if (dp->major == offset)
- 			seq_printf(seqf, "%3d %s\n", dp->major, dp->name);
--	mutex_unlock(&block_class_lock);
-+	mutex_unlock(&major_names_lock);
- }
- #endif /* CONFIG_PROC_FS */
- 
-@@ -445,7 +446,7 @@ int register_blkdev(unsigned int major, const char *name)
- 	struct blk_major_name **n, *p;
- 	int index, ret = 0;
- 
--	mutex_lock(&block_class_lock);
-+	mutex_lock(&major_names_lock);
- 
- 	/* temporary */
- 	if (major == 0) {
-@@ -498,7 +499,7 @@ int register_blkdev(unsigned int major, const char *name)
- 		kfree(p);
- 	}
- out:
--	mutex_unlock(&block_class_lock);
-+	mutex_unlock(&major_names_lock);
- 	return ret;
+ 	blk_queue_write_cache(vblk->disk->queue, writeback, false);
+-	revalidate_disk_size(vblk->disk, true);
  }
  
-@@ -510,7 +511,7 @@ void unregister_blkdev(unsigned int major, const char *name)
- 	struct blk_major_name *p = NULL;
- 	int index = major_to_index(major);
- 
--	mutex_lock(&block_class_lock);
-+	mutex_lock(&major_names_lock);
- 	for (n = &major_names[index]; *n; n = &(*n)->next)
- 		if ((*n)->major == major)
- 			break;
-@@ -520,7 +521,7 @@ void unregister_blkdev(unsigned int major, const char *name)
- 		p = *n;
- 		*n = p->next;
- 	}
--	mutex_unlock(&block_class_lock);
-+	mutex_unlock(&major_names_lock);
- 	kfree(p);
- }
- 
-@@ -671,7 +672,7 @@ void blk_register_region(dev_t devt, unsigned long range, struct module *module,
- 		p->data = data;
- 	}
- 
--	mutex_lock(&block_class_lock);
-+	mutex_lock(&bdev_map_lock);
- 	for (i = 0, p -= n; i < n; i++, p++, index++) {
- 		struct bdev_map **s = &bdev_map[index % 255];
- 		while (*s && (*s)->range < range)
-@@ -679,7 +680,7 @@ void blk_register_region(dev_t devt, unsigned long range, struct module *module,
- 		p->next = *s;
- 		*s = p;
- 	}
--	mutex_unlock(&block_class_lock);
-+	mutex_unlock(&bdev_map_lock);
- }
- EXPORT_SYMBOL(blk_register_region);
- 
-@@ -690,7 +691,7 @@ void blk_unregister_region(dev_t devt, unsigned long range)
- 	unsigned i;
- 	struct bdev_map *found = NULL;
- 
--	mutex_lock(&block_class_lock);
-+	mutex_lock(&bdev_map_lock);
- 	for (i = 0; i < min(n, 255u); i++, index++) {
- 		struct bdev_map **s;
- 		for (s = &bdev_map[index % 255]; *s; s = &(*s)->next) {
-@@ -703,7 +704,7 @@ void blk_unregister_region(dev_t devt, unsigned long range)
- 			}
- 		}
- 	}
--	mutex_unlock(&block_class_lock);
-+	mutex_unlock(&bdev_map_lock);
- 	kfree(found);
- }
- EXPORT_SYMBOL(blk_unregister_region);
-@@ -1034,7 +1035,7 @@ static struct gendisk *lookup_gendisk(dev_t dev, int *partno)
- 	unsigned long best = ~0UL;
- 
- retry:
--	mutex_lock(&block_class_lock);
-+	mutex_lock(&bdev_map_lock);
- 	for (p = bdev_map[MAJOR(dev) % 255]; p; p = p->next) {
- 		struct kobject *(*probe)(dev_t, int *, void *);
- 		struct module *owner;
-@@ -1055,7 +1056,7 @@ static struct gendisk *lookup_gendisk(dev_t dev, int *partno)
- 			module_put(owner);
- 			continue;
- 		}
--		mutex_unlock(&block_class_lock);
-+		mutex_unlock(&bdev_map_lock);
- 		kobj = probe(dev, partno, data);
- 		/* Currently ->owner protects _only_ ->probe() itself. */
- 		module_put(owner);
-@@ -1063,7 +1064,7 @@ static struct gendisk *lookup_gendisk(dev_t dev, int *partno)
- 			return dev_to_disk(kobj_to_dev(kobj));
- 		goto retry;
- 	}
--	mutex_unlock(&block_class_lock);
-+	mutex_unlock(&bdev_map_lock);
- 	return NULL;
- }
- 
+ static const char *const virtblk_cache_types[] = {
 -- 
 2.29.2
 
