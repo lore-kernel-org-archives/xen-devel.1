@@ -5,25 +5,25 @@ X-Spam-Level:
 X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BDD35C5519F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AE1B9C4742C
 	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:09:53 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 61C9A2417E
+	by mail.kernel.org (Postfix) with ESMTPS id 4AE5C23A32
 	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:09:53 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="dBQLE+OX"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 61C9A2417E
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="E7BcK9hA"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4AE5C23A32
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.28079.56748 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.28074.56710 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1keg8W-00010f-AQ; Mon, 16 Nov 2020 15:09:44 +0000
+	id 1keg8T-0000v9-85; Mon, 16 Nov 2020 15:09:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 28079.56748; Mon, 16 Nov 2020 15:09:44 +0000
+Received: by outflank-mailman (output) from mailman id 28074.56710; Mon, 16 Nov 2020 15:09:41 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1keg8V-0000zf-Ow; Mon, 16 Nov 2020 15:09:43 +0000
-Received: by outflank-mailman (input) for mailman id 28079;
- Mon, 16 Nov 2020 15:09:41 +0000
+	id 1keg8T-0000ux-4J; Mon, 16 Nov 2020 15:09:41 +0000
+Received: by outflank-mailman (input) for mailman id 28074;
+ Mon, 16 Nov 2020 15:09:40 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1kefys-0006ni-1X
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 14:59:46 +0000
+ id 1keg1c-0006ni-78
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:02:36 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id a341bbf4-6be5-4fed-a83e-3846fb79d988;
- Mon, 16 Nov 2020 14:58:44 +0000 (UTC)
+ id 94d3ab4a-5415-4a54-b2b8-52c432e7358b;
+ Mon, 16 Nov 2020 14:59:28 +0000 (UTC)
 Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kefxe-0003nT-5J; Mon, 16 Nov 2020 14:58:30 +0000
+ id 1kefyN-000402-5y; Mon, 16 Nov 2020 14:59:15 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1kefys-0006ni-1X
-	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 14:59:46 +0000
-X-Inumbo-ID: a341bbf4-6be5-4fed-a83e-3846fb79d988
+	id 1keg1c-0006ni-78
+	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:02:36 +0000
+X-Inumbo-ID: 94d3ab4a-5415-4a54-b2b8-52c432e7358b
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id a341bbf4-6be5-4fed-a83e-3846fb79d988;
-	Mon, 16 Nov 2020 14:58:44 +0000 (UTC)
+	id 94d3ab4a-5415-4a54-b2b8-52c432e7358b;
+	Mon, 16 Nov 2020 14:59:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=/Imzh1mtRC/4MzK3hbPZY3ezfjbBAXF+4uATbyQG9tw=; b=dBQLE+OXBD+j477XeVCLVsEYMc
-	RcEmj1V7WI2hhE1ic5DNIFG4NASPB/YphyPWVi7Xq1LFghc+xDtYP8gnsZoG77DfNVesQgpmfkhvc
-	fRwObxyPEZK/z1Ciz1aZPB7p7sncrnoVPvsbR1T3r36wVT6Dggw6kq20tBT9oOGKs7N8awXlr/4dD
-	vSByTZgMJWOqjW2HVCrSuJQGs+W4TB0ER5Ppk1IPUgTtfrMT+MCFmU3g27MhXzwXsmuaY0EkY4/zY
-	y2h6fT5m4m5EipT6NUGe0exghgq3sxrlH/h+qqCes57dPolMGfQloQ8v6PU+P54LeLSCXbzWWejRV
-	yilzQCOg==;
+	bh=O5A83Oi0Xx0wCgZ53MCDk0SimnnpHqXZpeb9/Xjg+3I=; b=E7BcK9hAyDSHxcI7VinrLs/x4+
+	GbPQzDVUV1gmtfeik/ecOJf1xAz9adMm1AlR5n+8pmOFubRvS/7JC38pGCYM9ZwlEJ4zvxSDihrYM
+	JGQCaf5k451aQcjTbxUWntTZRSfcMeTsf8Du7UrxdxqROv2m47Q52OOrWyg+7vXskLoftSze8ezz6
+	aMmgYUku1QWTkRciIOFj5T0KMfHWt98qdMt4QXSWxtgUUImsabTkg/eANqkgiZzmVtnscOj29Xw6f
+	e1x2pMJGB6+SMSCN0E1pYgQM50zCWis0+N6qx617dZwyzoH0THRVg26q4h6UoR9/dNcUrYteSODTY
+	uCKNHu/A==;
 Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1kefxe-0003nT-5J; Mon, 16 Nov 2020 14:58:30 +0000
+	id 1kefyN-000402-5y; Mon, 16 Nov 2020 14:59:15 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -101,10 +101,11 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-raid@vger.kernel.org,
 	linux-nvme@lists.infradead.org,
 	linux-scsi@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org
-Subject: [PATCH 15/78] drbd: use set_capacity_and_notify
-Date: Mon, 16 Nov 2020 15:57:06 +0100
-Message-Id: <20201116145809.410558-16-hch@lst.de>
+	linux-fsdevel@vger.kernel.org,
+	Hannes Reinecke <hare@suse.de>
+Subject: [PATCH 46/78] ide: switch to __register_blkdev for command set probing
+Date: Mon, 16 Nov 2020 15:57:37 +0100
+Message-Id: <20201116145809.410558-47-hch@lst.de>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20201116145809.410558-1-hch@lst.de>
 References: <20201116145809.410558-1-hch@lst.de>
@@ -112,38 +113,87 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-Use set_capacity_and_notify to set the size of both the disk and block
-device.  This also gets the uevent notifications for the resize for free.
+ide is the last user of the blk_register_region framework except for the
+tracking of allocated gendisk.  Switch to __register_blkdev, even if that
+doesn't allow us to trivially find out which command set to probe for.
+That means we now always request all modules when a user tries to access
+an unclaimed ide device node, but except for a few potentially loaded
+modules for a fringe use case of a deprecated and soon to be removed
+driver that doesn't make a difference.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
+Reviewed-by: Hannes Reinecke <hare@suse.de>
 ---
- drivers/block/drbd/drbd_main.c | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
+ drivers/ide/ide-probe.c | 34 ++++++----------------------------
+ 1 file changed, 6 insertions(+), 28 deletions(-)
 
-diff --git a/drivers/block/drbd/drbd_main.c b/drivers/block/drbd/drbd_main.c
-index 65b95aef8dbc95..1c8c18b2a25f33 100644
---- a/drivers/block/drbd/drbd_main.c
-+++ b/drivers/block/drbd/drbd_main.c
-@@ -2036,8 +2036,7 @@ void drbd_set_my_capacity(struct drbd_device *device, sector_t size)
+diff --git a/drivers/ide/ide-probe.c b/drivers/ide/ide-probe.c
+index 076d34b381720f..1c1567bb519429 100644
+--- a/drivers/ide/ide-probe.c
++++ b/drivers/ide/ide-probe.c
+@@ -902,31 +902,12 @@ static int init_irq (ide_hwif_t *hwif)
+ 	return 1;
+ }
+ 
+-static int ata_lock(dev_t dev, void *data)
++static void ata_probe(dev_t dev)
  {
- 	char ppb[10];
+-	/* FIXME: we want to pin hwif down */
+-	return 0;
+-}
+-
+-static struct kobject *ata_probe(dev_t dev, int *part, void *data)
+-{
+-	ide_hwif_t *hwif = data;
+-	int unit = *part >> PARTN_BITS;
+-	ide_drive_t *drive = hwif->devices[unit];
+-
+-	if ((drive->dev_flags & IDE_DFLAG_PRESENT) == 0)
+-		return NULL;
+-
+-	if (drive->media == ide_disk)
+-		request_module("ide-disk");
+-	if (drive->media == ide_cdrom || drive->media == ide_optical)
+-		request_module("ide-cd");
+-	if (drive->media == ide_tape)
+-		request_module("ide-tape");
+-	if (drive->media == ide_floppy)
+-		request_module("ide-floppy");
+-
+-	return NULL;
++	request_module("ide-disk");
++	request_module("ide-cd");
++	request_module("ide-tape");
++	request_module("ide-floppy");
+ }
  
--	set_capacity(device->vdisk, size);
--	revalidate_disk_size(device->vdisk, false);
-+	set_capacity_and_notify(device->vdisk, size);
- 
- 	drbd_info(device, "size = %s (%llu KB)\n",
- 		ppsize(ppb, size>>1), (unsigned long long)size>>1);
-@@ -2068,8 +2067,7 @@ void drbd_device_cleanup(struct drbd_device *device)
+ void ide_init_disk(struct gendisk *disk, ide_drive_t *drive)
+@@ -967,7 +948,7 @@ static int hwif_init(ide_hwif_t *hwif)
+ 		return 0;
  	}
- 	D_ASSERT(device, first_peer_device(device)->connection->net_conf == NULL);
  
--	set_capacity(device->vdisk, 0);
--	revalidate_disk_size(device->vdisk, false);
-+	set_capacity_and_notify(device->vdisk, 0);
- 	if (device->bitmap) {
- 		/* maybe never allocated. */
- 		drbd_bm_resize(device, 0, 1);
+-	if (register_blkdev(hwif->major, hwif->name))
++	if (__register_blkdev(hwif->major, hwif->name, ata_probe))
+ 		return 0;
+ 
+ 	if (!hwif->sg_max_nents)
+@@ -989,8 +970,6 @@ static int hwif_init(ide_hwif_t *hwif)
+ 		goto out;
+ 	}
+ 
+-	blk_register_region(MKDEV(hwif->major, 0), MAX_DRIVES << PARTN_BITS,
+-			    THIS_MODULE, ata_probe, ata_lock, hwif);
+ 	return 1;
+ 
+ out:
+@@ -1582,7 +1561,6 @@ static void ide_unregister(ide_hwif_t *hwif)
+ 	/*
+ 	 * Remove us from the kernel's knowledge
+ 	 */
+-	blk_unregister_region(MKDEV(hwif->major, 0), MAX_DRIVES<<PARTN_BITS);
+ 	kfree(hwif->sg_table);
+ 	unregister_blkdev(hwif->major, hwif->name);
+ 
 -- 
 2.29.2
 
