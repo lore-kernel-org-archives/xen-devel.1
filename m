@@ -5,25 +5,25 @@ X-Spam-Level:
 X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0FBB3C5519F
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:10:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C1A1C61DD8
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:10:17 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AF59822240
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:10:15 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id DA335223C7
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:10:16 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="C+aFntyX"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AF59822240
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="sXKHf4+K"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DA335223C7
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.28099.56917 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.28096.56905 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1keg8s-00022d-VF; Mon, 16 Nov 2020 15:10:06 +0000
+	id 1keg8q-0001vh-L0; Mon, 16 Nov 2020 15:10:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 28099.56917; Mon, 16 Nov 2020 15:10:06 +0000
+Received: by outflank-mailman (output) from mailman id 28096.56905; Mon, 16 Nov 2020 15:10:04 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1keg8r-00020c-Mj; Mon, 16 Nov 2020 15:10:05 +0000
-Received: by outflank-mailman (input) for mailman id 28099;
- Mon, 16 Nov 2020 15:10:01 +0000
+	id 1keg8p-0001tJ-Am; Mon, 16 Nov 2020 15:10:03 +0000
+Received: by outflank-mailman (input) for mailman id 28096;
+ Mon, 16 Nov 2020 15:09:58 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1keg2Q-0006ni-9F
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:03:26 +0000
+ id 1keg1I-0006ni-6K
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:02:16 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 4b4e9507-09b7-40e8-b25c-66f875b8d6f1;
- Mon, 16 Nov 2020 14:59:40 +0000 (UTC)
+ id 8401f5f8-b40b-4b28-86bc-cbad960be06f;
+ Mon, 16 Nov 2020 14:59:24 +0000 (UTC)
 Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kefyY-00044s-Tr; Mon, 16 Nov 2020 14:59:27 +0000
+ id 1kefyH-0003yd-CW; Mon, 16 Nov 2020 14:59:09 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1keg2Q-0006ni-9F
-	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:03:26 +0000
-X-Inumbo-ID: 4b4e9507-09b7-40e8-b25c-66f875b8d6f1
+	id 1keg1I-0006ni-6K
+	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:02:16 +0000
+X-Inumbo-ID: 8401f5f8-b40b-4b28-86bc-cbad960be06f
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 4b4e9507-09b7-40e8-b25c-66f875b8d6f1;
-	Mon, 16 Nov 2020 14:59:40 +0000 (UTC)
+	id 8401f5f8-b40b-4b28-86bc-cbad960be06f;
+	Mon, 16 Nov 2020 14:59:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=TGRxj3P5fN3QWbEKVTDt35+3igPcA4rCa+2EvBLtC8g=; b=C+aFntyXdJbXcDXW0zdEm0MZf/
-	Q8Zx0N1Bi1RkYFpnimVowbz0rcddgCEhzUASaPfj19d8nD2OoiQ7zBRz9XuVFxvMc+YbxWMyHzaTx
-	PYzv9LtI9kFkIcqvnRgzJ1QSX/8XbEjuPMJK4EkCHxJJNOZAq17DsBe6jQ87rPiGWnpudzQyM/EHf
-	XW5TF2D/8wJwMwlrqTogsg01StwU1f5L48SB2l4E2dG+cGpvb0qjX+vW1trzMnD3BduvbANSwGVcX
-	fXDT/3TaiGf3bIXETdbDeP/h5OUIqBlJlOYSObKbRBS9M21yv36cQQIio98w72OzH3KuXMzUGVMV3
-	ibdbwukw==;
+	bh=soDf5n/4IHZXpRDONsC4iRIWKhhdabm7wm1Ix3YyzkY=; b=sXKHf4+KcwIa5fuTcLVQORl6vc
+	Y03Gwu4v2aKXYxB2gC70w5AjOtoQE1Q1pXkpIHcqxu1afca2PvwHAIEb13ajBGY5qll0Bc+WJnuHt
+	TgCIRD/tv9h7SIzJyRqtqrpqxOYCL5TBFCCOpqvnrOBTaKdroJMy4aFUM6Eu1+1BjsZPfN+VBECoA
+	VBKTChEgoSg7gTk+HdF7LfwwqhGnCtekD9xT9Y736twxTwR4aWyi6Skc6DBIDj8x5uz90PEkL1KLh
+	CVLnyiuFwPdIlcsawji6tbe7dqrYAdB98VJPkjxf9YLh+GLVDgz+CUZ/XticM28L06ss6gSMN118i
+	lq40xEVw==;
 Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1kefyY-00044s-Tr; Mon, 16 Nov 2020 14:59:27 +0000
+	id 1kefyH-0003yd-CW; Mon, 16 Nov 2020 14:59:09 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -101,10 +101,11 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-raid@vger.kernel.org,
 	linux-nvme@lists.infradead.org,
 	linux-scsi@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org
-Subject: [PATCH 54/78] block: remove a duplicate __disk_get_part prototype
-Date: Mon, 16 Nov 2020 15:57:45 +0100
-Message-Id: <20201116145809.410558-55-hch@lst.de>
+	linux-fsdevel@vger.kernel.org,
+	Hannes Reinecke <hare@suse.de>
+Subject: [PATCH 42/78] sd: use __register_blkdev to avoid a modprobe for an unregistered dev_t
+Date: Mon, 16 Nov 2020 15:57:33 +0100
+Message-Id: <20201116145809.410558-43-hch@lst.de>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20201116145809.410558-1-hch@lst.de>
 References: <20201116145809.410558-1-hch@lst.de>
@@ -112,23 +113,72 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-Signed-off-by: Christoph Hellwig <hch@lst.de>
----
- include/linux/genhd.h | 1 -
- 1 file changed, 1 deletion(-)
+Switch from using blk_register_region to the probe callback passed to
+__register_blkdev to disable the request_module call for an unclaimed
+dev_t in the SD majors.
 
-diff --git a/include/linux/genhd.h b/include/linux/genhd.h
-index 46553d6d602563..22f5b9fd96f8bf 100644
---- a/include/linux/genhd.h
-+++ b/include/linux/genhd.h
-@@ -250,7 +250,6 @@ static inline dev_t part_devt(struct hd_struct *part)
- 	return part_to_dev(part)->devt;
+Signed-off-by: Christoph Hellwig <hch@lst.de>
+Reviewed-by: Hannes Reinecke <hare@suse.de>
+---
+ drivers/scsi/sd.c | 19 +++++--------------
+ 1 file changed, 5 insertions(+), 14 deletions(-)
+
+diff --git a/drivers/scsi/sd.c b/drivers/scsi/sd.c
+index a2a4f385833d6c..679c2c02504763 100644
+--- a/drivers/scsi/sd.c
++++ b/drivers/scsi/sd.c
+@@ -630,13 +630,11 @@ static struct scsi_driver sd_template = {
+ };
+ 
+ /*
+- * Dummy kobj_map->probe function.
+- * The default ->probe function will call modprobe, which is
+- * pointless as this module is already loaded.
++ * Don't request a new module, as that could deadlock in multipath
++ * environment.
+  */
+-static struct kobject *sd_default_probe(dev_t devt, int *partno, void *data)
++static void sd_default_probe(dev_t devt)
+ {
+-	return NULL;
  }
  
--extern struct hd_struct *__disk_get_part(struct gendisk *disk, int partno);
- extern struct hd_struct *disk_get_part(struct gendisk *disk, int partno);
+ /*
+@@ -3525,9 +3523,6 @@ static int sd_remove(struct device *dev)
  
- static inline void disk_put_part(struct hd_struct *part)
+ 	free_opal_dev(sdkp->opal_dev);
+ 
+-	blk_register_region(devt, SD_MINORS, NULL,
+-			    sd_default_probe, NULL, NULL);
+-
+ 	mutex_lock(&sd_ref_mutex);
+ 	dev_set_drvdata(dev, NULL);
+ 	put_device(&sdkp->dev);
+@@ -3717,11 +3712,9 @@ static int __init init_sd(void)
+ 	SCSI_LOG_HLQUEUE(3, printk("init_sd: sd driver entry point\n"));
+ 
+ 	for (i = 0; i < SD_MAJORS; i++) {
+-		if (register_blkdev(sd_major(i), "sd") != 0)
++		if (__register_blkdev(sd_major(i), "sd", sd_default_probe))
+ 			continue;
+ 		majors++;
+-		blk_register_region(sd_major(i), SD_MINORS, NULL,
+-				    sd_default_probe, NULL, NULL);
+ 	}
+ 
+ 	if (!majors)
+@@ -3794,10 +3787,8 @@ static void __exit exit_sd(void)
+ 
+ 	class_unregister(&sd_disk_class);
+ 
+-	for (i = 0; i < SD_MAJORS; i++) {
+-		blk_unregister_region(sd_major(i), SD_MINORS);
++	for (i = 0; i < SD_MAJORS; i++)
+ 		unregister_blkdev(sd_major(i), "sd");
+-	}
+ }
+ 
+ module_init(init_sd);
 -- 
 2.29.2
 
