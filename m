@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9AA84C61DD8
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B0249C5519F
 	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:11:16 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4A2A422240
+	by mail.kernel.org (Postfix) with ESMTPS id 63C8124170
 	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:11:16 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="um2QX1aP"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4A2A422240
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="NxdcCH21"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 63C8124170
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.28211.57203 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.28207.57190 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1keg9q-0004vO-Cc; Mon, 16 Nov 2020 15:11:06 +0000
+	id 1keg9o-0004ov-5P; Mon, 16 Nov 2020 15:11:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 28211.57203; Mon, 16 Nov 2020 15:11:06 +0000
+Received: by outflank-mailman (output) from mailman id 28207.57190; Mon, 16 Nov 2020 15:11:03 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1keg9o-0004tB-PO; Mon, 16 Nov 2020 15:11:04 +0000
-Received: by outflank-mailman (input) for mailman id 28211;
- Mon, 16 Nov 2020 15:11:01 +0000
+	id 1keg9m-0004mk-H1; Mon, 16 Nov 2020 15:11:02 +0000
+Received: by outflank-mailman (input) for mailman id 28207;
+ Mon, 16 Nov 2020 15:10:58 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1keg34-0006ni-Ag
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:04:06 +0000
+ id 1keg13-0006ni-5l
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:02:01 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 1d91a229-e416-462e-a685-7197268de26f;
- Mon, 16 Nov 2020 14:59:48 +0000 (UTC)
+ id 52606c08-a6b1-434b-a979-50167f68b7e9;
+ Mon, 16 Nov 2020 14:59:21 +0000 (UTC)
 Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kefyi-0004Ad-Px; Mon, 16 Nov 2020 14:59:37 +0000
+ id 1kefyE-0003y0-K9; Mon, 16 Nov 2020 14:59:06 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1keg34-0006ni-Ag
-	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:04:06 +0000
-X-Inumbo-ID: 1d91a229-e416-462e-a685-7197268de26f
+	id 1keg13-0006ni-5l
+	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:02:01 +0000
+X-Inumbo-ID: 52606c08-a6b1-434b-a979-50167f68b7e9
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 1d91a229-e416-462e-a685-7197268de26f;
-	Mon, 16 Nov 2020 14:59:48 +0000 (UTC)
+	id 52606c08-a6b1-434b-a979-50167f68b7e9;
+	Mon, 16 Nov 2020 14:59:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=MmPwn4ttbQT6DHYheoE0UJGEFNI8kA6nAc7IEYdL0K0=; b=um2QX1aPNEBrXGLXtU6YvAtfko
-	SUJQ/zrYAfsNYMAKdZ3tINvi3zqorS3Hcvwis/lRWwGYc/D4a1i+axMJb3c9L3kCaZuM/YpRBYYYl
-	XLZ6DdJ1Y/xHMe+0KQ4YHMrkyZmtkiCaiO6dicUKCBonmuuw50C1TKzUDzndp/SXSYZ/wTEjCmw8k
-	AIxOkUDjtUH52YVU8pqQr/5UXUu1+KzSvrDq39iKullr+3CXYrM5D1wNrkUadnpJVHhZ7zw3XpmrF
-	j8SHOcAIOQu8AyneX2JJ5GEkPZOzCGTSxW+MHMHVW+E/mdPaslbb69OAjiZZeO+aj/n9AezJ3u1Wq
-	K2n33VVw==;
+	bh=432B/HqYIabrrukDRcMGdzlFQ4i1D0sjcTyhKWP2cJc=; b=NxdcCH21KU0PaY1Ri6HGwnc/L0
+	Pm1N/StwGgisA5L0p+2kPsr3LyRSKmgmK71GuTbdbvT9TCfwbfRA1dvjC1q7rJtFSAtSyf3mHxeWW
+	EZ5rlOqNukX80JHmh+gFjJH5eHC5ab37sgk28CMqNBjsJHct6TH7Aec/aHSrjGlIQeH8J/fYjoVWT
+	m9S/ORPThsGxcTn9lN7RKKBuWsC/aTMeA81vfKRaWx1OhdXImDLKffH2sllTwanrVTcnLmBpn+vIK
+	rxhCqctUbf1QtVmOhyQKeyb0Bskq73OmiuHEGSYFZZUivRg1xuCXEdg0WX9hj3ohTWz5bCrIzwOJR
+	oOsbfaxQ==;
 Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1kefyi-0004Ad-Px; Mon, 16 Nov 2020 14:59:37 +0000
+	id 1kefyE-0003y0-K9; Mon, 16 Nov 2020 14:59:06 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -101,10 +101,11 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-raid@vger.kernel.org,
 	linux-nvme@lists.infradead.org,
 	linux-scsi@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org
-Subject: [PATCH 60/78] zram: remove the claim mechanism
-Date: Mon, 16 Nov 2020 15:57:51 +0100
-Message-Id: <20201116145809.410558-61-hch@lst.de>
+	linux-fsdevel@vger.kernel.org,
+	Hannes Reinecke <hare@suse.de>
+Subject: [PATCH 40/78] ide: remove ide_{,un}register_region
+Date: Mon, 16 Nov 2020 15:57:31 +0100
+Message-Id: <20201116145809.410558-41-hch@lst.de>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20201116145809.410558-1-hch@lst.de>
 References: <20201116145809.410558-1-hch@lst.de>
@@ -112,150 +113,93 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-The zram claim mechanism was added to ensure no new opens come in
-during teardown.  But the proper way to archive that is to call
-del_gendisk first, which takes care of all that.  Once del_gendisk
-is called in the right place, the reset side can also be simplified
-as no I/O can be outstanding on a block device that is not open.
+There is no need to ever register the fake gendisk used for ide-tape.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
+Reviewed-by: Hannes Reinecke <hare@suse.de>
 ---
- drivers/block/zram/zram_drv.c | 76 ++++++++++-------------------------
- 1 file changed, 21 insertions(+), 55 deletions(-)
+ drivers/ide/ide-probe.c | 32 --------------------------------
+ drivers/ide/ide-tape.c  |  2 --
+ include/linux/ide.h     |  3 ---
+ 3 files changed, 37 deletions(-)
 
-diff --git a/drivers/block/zram/zram_drv.c b/drivers/block/zram/zram_drv.c
-index 6d15d51cee2b7e..3641434a9b154d 100644
---- a/drivers/block/zram/zram_drv.c
-+++ b/drivers/block/zram/zram_drv.c
-@@ -1756,64 +1756,33 @@ static ssize_t disksize_store(struct device *dev,
- static ssize_t reset_store(struct device *dev,
- 		struct device_attribute *attr, const char *buf, size_t len)
- {
--	int ret;
--	unsigned short do_reset;
--	struct zram *zram;
-+	struct zram *zram = dev_to_zram(dev);
- 	struct block_device *bdev;
-+	unsigned short do_reset;
-+	int ret = 0;
+diff --git a/drivers/ide/ide-probe.c b/drivers/ide/ide-probe.c
+index 1ddc45a04418cd..076d34b381720f 100644
+--- a/drivers/ide/ide-probe.c
++++ b/drivers/ide/ide-probe.c
+@@ -929,38 +929,6 @@ static struct kobject *ata_probe(dev_t dev, int *part, void *data)
+ 	return NULL;
+ }
  
- 	ret = kstrtou16(buf, 10, &do_reset);
- 	if (ret)
- 		return ret;
--
- 	if (!do_reset)
- 		return -EINVAL;
- 
--	zram = dev_to_zram(dev);
- 	bdev = bdget_disk(zram->disk, 0);
- 	if (!bdev)
- 		return -ENOMEM;
- 
- 	mutex_lock(&bdev->bd_mutex);
--	/* Do not reset an active device or claimed device */
--	if (bdev->bd_openers || zram->claim) {
--		mutex_unlock(&bdev->bd_mutex);
--		bdput(bdev);
--		return -EBUSY;
--	}
--
--	/* From now on, anyone can't open /dev/zram[0-9] */
--	zram->claim = true;
-+	if (bdev->bd_openers)
-+		ret = -EBUSY;
-+	else
-+		zram_reset_device(zram);
- 	mutex_unlock(&bdev->bd_mutex);
--
--	/* Make sure all the pending I/O are finished */
--	fsync_bdev(bdev);
--	zram_reset_device(zram);
- 	bdput(bdev);
- 
--	mutex_lock(&bdev->bd_mutex);
--	zram->claim = false;
--	mutex_unlock(&bdev->bd_mutex);
--
--	return len;
+-static struct kobject *exact_match(dev_t dev, int *part, void *data)
+-{
+-	struct gendisk *p = data;
+-	*part &= (1 << PARTN_BITS) - 1;
+-	return &disk_to_dev(p)->kobj;
 -}
 -
--static int zram_open(struct block_device *bdev, fmode_t mode)
+-static int exact_lock(dev_t dev, void *data)
 -{
--	int ret = 0;
--	struct zram *zram;
+-	struct gendisk *p = data;
 -
--	WARN_ON(!mutex_is_locked(&bdev->bd_mutex));
+-	if (!get_disk_and_module(p))
+-		return -1;
+-	return 0;
+-}
 -
--	zram = bdev->bd_disk->private_data;
--	/* zram was claimed to reset so open request fails */
--	if (zram->claim)
--		ret = -EBUSY;
+-void ide_register_region(struct gendisk *disk)
+-{
+-	blk_register_region(MKDEV(disk->major, disk->first_minor),
+-			    disk->minors, NULL, exact_match, exact_lock, disk);
+-}
 -
--	return ret;
-+	return ret ? ret : len;
- }
- 
- static const struct block_device_operations zram_devops = {
--	.open = zram_open,
- 	.submit_bio = zram_submit_bio,
- 	.swap_slot_free_notify = zram_slot_free_notify,
- 	.rw_page = zram_rw_page,
-@@ -1821,7 +1790,6 @@ static const struct block_device_operations zram_devops = {
- };
- 
- static const struct block_device_operations zram_wb_devops = {
--	.open = zram_open,
- 	.submit_bio = zram_submit_bio,
- 	.swap_slot_free_notify = zram_slot_free_notify,
- 	.owner = THIS_MODULE
-@@ -1972,34 +1940,32 @@ static int zram_add(void)
- 	return ret;
- }
- 
--static int zram_remove(struct zram *zram)
-+static bool zram_busy(struct zram *zram)
+-EXPORT_SYMBOL_GPL(ide_register_region);
+-
+-void ide_unregister_region(struct gendisk *disk)
+-{
+-	blk_unregister_region(MKDEV(disk->major, disk->first_minor),
+-			      disk->minors);
+-}
+-
+-EXPORT_SYMBOL_GPL(ide_unregister_region);
+-
+ void ide_init_disk(struct gendisk *disk, ide_drive_t *drive)
  {
- 	struct block_device *bdev;
-+	bool busy = false;
+ 	ide_hwif_t *hwif = drive->hwif;
+diff --git a/drivers/ide/ide-tape.c b/drivers/ide/ide-tape.c
+index 6f26634b22bbec..88b96437b22e62 100644
+--- a/drivers/ide/ide-tape.c
++++ b/drivers/ide/ide-tape.c
+@@ -1822,7 +1822,6 @@ static void ide_tape_remove(ide_drive_t *drive)
  
- 	bdev = bdget_disk(zram->disk, 0);
--	if (!bdev)
--		return -ENOMEM;
+ 	ide_proc_unregister_driver(drive, tape->driver);
+ 	device_del(&tape->dev);
+-	ide_unregister_region(tape->disk);
+ 
+ 	mutex_lock(&idetape_ref_mutex);
+ 	put_device(&tape->dev);
+@@ -2026,7 +2025,6 @@ static int ide_tape_probe(ide_drive_t *drive)
+ 		      "n%s", tape->name);
+ 
+ 	g->fops = &idetape_block_ops;
+-	ide_register_region(g);
+ 
+ 	return 0;
+ 
+diff --git a/include/linux/ide.h b/include/linux/ide.h
+index 62653769509f89..2c300689a51a5c 100644
+--- a/include/linux/ide.h
++++ b/include/linux/ide.h
+@@ -1493,9 +1493,6 @@ static inline void ide_acpi_port_init_devices(ide_hwif_t *hwif) { ; }
+ static inline void ide_acpi_set_state(ide_hwif_t *hwif, int on) {}
+ #endif
+ 
+-void ide_register_region(struct gendisk *);
+-void ide_unregister_region(struct gendisk *);
 -
--	mutex_lock(&bdev->bd_mutex);
--	if (bdev->bd_openers || zram->claim) {
--		mutex_unlock(&bdev->bd_mutex);
-+	if (bdev) {
-+		if (bdev->bd_openers)
-+			busy = true;
- 		bdput(bdev);
--		return -EBUSY;
- 	}
+ void ide_check_nien_quirk_list(ide_drive_t *);
+ void ide_undecoded_slave(ide_drive_t *);
  
--	zram->claim = true;
--	mutex_unlock(&bdev->bd_mutex);
-+	return busy;
-+}
- 
--	zram_debugfs_unregister(zram);
-+static int zram_remove(struct zram *zram)
-+{
-+	if (zram_busy(zram))
-+		return -EBUSY;
- 
--	/* Make sure all the pending I/O are finished */
--	fsync_bdev(bdev);
-+	del_gendisk(zram->disk);
-+	zram_debugfs_unregister(zram);
- 	zram_reset_device(zram);
--	bdput(bdev);
- 
- 	pr_info("Removed device: %s\n", zram->disk->disk_name);
- 
--	del_gendisk(zram->disk);
- 	blk_cleanup_queue(zram->disk->queue);
- 	put_disk(zram->disk);
- 	kfree(zram);
 -- 
 2.29.2
 
