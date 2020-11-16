@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8494BC61DD8
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:11:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5B378C4742C
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:11:44 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2A430206B7
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:11:38 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id F2817204FD
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:11:43 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="Bes/KMf+"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2A430206B7
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="oYdX9nzK"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F2817204FD
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.28242.57279 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.28249.57299 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kegA9-0005uN-54; Mon, 16 Nov 2020 15:11:25 +0000
+	id 1kegAD-00068G-Rv; Mon, 16 Nov 2020 15:11:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 28242.57279; Mon, 16 Nov 2020 15:11:24 +0000
+Received: by outflank-mailman (output) from mailman id 28249.57299; Mon, 16 Nov 2020 15:11:29 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kegA7-0005rb-HE; Mon, 16 Nov 2020 15:11:23 +0000
-Received: by outflank-mailman (input) for mailman id 28242;
- Mon, 16 Nov 2020 15:11:19 +0000
+	id 1kegAC-00066s-2Y; Mon, 16 Nov 2020 15:11:28 +0000
+Received: by outflank-mailman (input) for mailman id 28249;
+ Mon, 16 Nov 2020 15:11:23 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1keg39-0006ni-Ay
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:04:11 +0000
+ id 1kefzq-0006ni-3r
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:00:46 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 349e8444-6b60-4045-a709-8fce86a62a37;
- Mon, 16 Nov 2020 14:59:49 +0000 (UTC)
+ id 074b718d-c101-4c17-b1f1-963d1a071900;
+ Mon, 16 Nov 2020 14:59:01 +0000 (UTC)
 Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kefyk-0004BJ-HE; Mon, 16 Nov 2020 14:59:38 +0000
+ id 1kefxu-0003sm-C6; Mon, 16 Nov 2020 14:58:46 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1keg39-0006ni-Ay
-	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:04:11 +0000
-X-Inumbo-ID: 349e8444-6b60-4045-a709-8fce86a62a37
+	id 1kefzq-0006ni-3r
+	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:00:46 +0000
+X-Inumbo-ID: 074b718d-c101-4c17-b1f1-963d1a071900
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 349e8444-6b60-4045-a709-8fce86a62a37;
-	Mon, 16 Nov 2020 14:59:49 +0000 (UTC)
+	id 074b718d-c101-4c17-b1f1-963d1a071900;
+	Mon, 16 Nov 2020 14:59:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=Y+mF6kfZyX+9LgfiO2Btb3TAVeGp89oda3czGJwGTJs=; b=Bes/KMf+bs1I4DR5G0Q9TOnUPD
-	9joDl/S6qw6ZpxOQWG6Y+yldMhWM6mFKnMzJr+i8TYoCpaeYndLIsJKL+sOlXlAuclhKSFhnR3UCp
-	WJXOKeNHtc4MABM6hp7JGjCiE6fZ5ela9kirrVONq5fnIhmy+U+4tfsuOJVOXCYA5RBzKC83RR+4b
-	qxZP1ZXarE/IKEORkzrEG4OGuYDREZTgbRj7xCtCOKoPFN8CeO4jN+bDAHNrnlIjkHnkpCPznvP9h
-	3EPL5v3wV+4q+MPr35MSCL+n6p7mkMnCAwjivusEswSTw73cM8G2TKRKASqaQHIQNMCssmGTd1M3h
-	18UxRfvA==;
+	bh=9xKkbsaYgLwhE10hNLQkbULUUrvPvOI5lAnm4OXLvPs=; b=oYdX9nzKoJif6AkXObIozxVfvj
+	7cGF/f/pUnJJHDQ6T2624151wrdwaTi3mmORA1Sk4dkNQXTLpvcPq6k6KdWEaLJxRF4lDmEXm8qw9
+	oYE1wB5V9C5rcNG0vg2/s/RZq7WpvPXksRbrz6BhFVFbp3fgW6Cu8Ei10wVmFRzzU2lZbNkryPPwp
+	UyZEBLPwZzIDOtCGDnQaZ/yC0WN3H+ttyOeryQQMS7541LF9/8zj21iM7fknwF/oyMb92PdRg+U+/
+	bjDqshSNF4XCVwta4ehBG8dKT/cx10oylnvhgVmCv3gk5lCpRUkUrEy9iufHfdIZqR7G/SymA4RHz
+	LVTtFmtA==;
 Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1kefyk-0004BJ-HE; Mon, 16 Nov 2020 14:59:38 +0000
+	id 1kefxu-0003sm-C6; Mon, 16 Nov 2020 14:58:46 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -102,9 +102,9 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-nvme@lists.infradead.org,
 	linux-scsi@vger.kernel.org,
 	linux-fsdevel@vger.kernel.org
-Subject: [PATCH 61/78] zram:  do not call set_blocksize
-Date: Mon, 16 Nov 2020 15:57:52 +0100
-Message-Id: <20201116145809.410558-62-hch@lst.de>
+Subject: [PATCH 26/78] block: add a new set_read_only method
+Date: Mon, 16 Nov 2020 15:57:17 +0100
+Message-Id: <20201116145809.410558-27-hch@lst.de>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20201116145809.410558-1-hch@lst.de>
 References: <20201116145809.410558-1-hch@lst.de>
@@ -112,69 +112,44 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-set_blocksize is used by file systems to use their preferred buffer cache
-block size.  Block drivers should not set it.
+Add a new method to allow for driver-specific processing when setting or
+clearing the block device read-only state.  This allows to replace the
+cumbersome and error-prone override of the whole ioctl implementation.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/block/zram/zram_drv.c | 11 +----------
- drivers/block/zram/zram_drv.h |  1 -
- 2 files changed, 1 insertion(+), 11 deletions(-)
+ block/ioctl.c          | 5 +++++
+ include/linux/blkdev.h | 1 +
+ 2 files changed, 6 insertions(+)
 
-diff --git a/drivers/block/zram/zram_drv.c b/drivers/block/zram/zram_drv.c
-index 3641434a9b154d..d00b5761ec0b21 100644
---- a/drivers/block/zram/zram_drv.c
-+++ b/drivers/block/zram/zram_drv.c
-@@ -403,13 +403,10 @@ static void reset_bdev(struct zram *zram)
- 		return;
- 
- 	bdev = zram->bdev;
--	if (zram->old_block_size)
--		set_blocksize(bdev, zram->old_block_size);
- 	blkdev_put(bdev, FMODE_READ|FMODE_WRITE|FMODE_EXCL);
- 	/* hope filp_close flush all of IO */
- 	filp_close(zram->backing_dev, NULL);
- 	zram->backing_dev = NULL;
--	zram->old_block_size = 0;
- 	zram->bdev = NULL;
- 	zram->disk->fops = &zram_devops;
- 	kvfree(zram->bitmap);
-@@ -454,7 +451,7 @@ static ssize_t backing_dev_store(struct device *dev,
- 	struct file *backing_dev = NULL;
- 	struct inode *inode;
- 	struct address_space *mapping;
--	unsigned int bitmap_sz, old_block_size = 0;
-+	unsigned int bitmap_sz;
- 	unsigned long nr_pages, *bitmap = NULL;
- 	struct block_device *bdev = NULL;
- 	int err;
-@@ -509,14 +506,8 @@ static ssize_t backing_dev_store(struct device *dev,
- 		goto out;
- 	}
- 
--	old_block_size = block_size(bdev);
--	err = set_blocksize(bdev, PAGE_SIZE);
--	if (err)
--		goto out;
--
- 	reset_bdev(zram);
- 
--	zram->old_block_size = old_block_size;
- 	zram->bdev = bdev;
- 	zram->backing_dev = backing_dev;
- 	zram->bitmap = bitmap;
-diff --git a/drivers/block/zram/zram_drv.h b/drivers/block/zram/zram_drv.h
-index f2fd46daa76045..712354a4207c77 100644
---- a/drivers/block/zram/zram_drv.h
-+++ b/drivers/block/zram/zram_drv.h
-@@ -118,7 +118,6 @@ struct zram {
- 	bool wb_limit_enable;
- 	u64 bd_wb_limit;
- 	struct block_device *bdev;
--	unsigned int old_block_size;
- 	unsigned long *bitmap;
- 	unsigned long nr_pages;
- #endif
+diff --git a/block/ioctl.c b/block/ioctl.c
+index c6d8863f040945..a6fa16b9770593 100644
+--- a/block/ioctl.c
++++ b/block/ioctl.c
+@@ -389,6 +389,11 @@ static int blkdev_roset(struct block_device *bdev, fmode_t mode,
+ 		return ret;
+ 	if (get_user(n, (int __user *)arg))
+ 		return -EFAULT;
++	if (bdev->bd_disk->fops->set_read_only) {
++		ret = bdev->bd_disk->fops->set_read_only(bdev, n);
++		if (ret)
++			return ret;
++	}
+ 	set_device_ro(bdev, n);
+ 	return 0;
+ }
+diff --git a/include/linux/blkdev.h b/include/linux/blkdev.h
+index 639cae2c158b59..5c1ba8a8d2bc7e 100644
+--- a/include/linux/blkdev.h
++++ b/include/linux/blkdev.h
+@@ -1850,6 +1850,7 @@ struct block_device_operations {
+ 	void (*unlock_native_capacity) (struct gendisk *);
+ 	int (*revalidate_disk) (struct gendisk *);
+ 	int (*getgeo)(struct block_device *, struct hd_geometry *);
++	int (*set_read_only)(struct block_device *bdev, bool ro);
+ 	/* this callback is with swap_lock and sometimes page table lock held */
+ 	void (*swap_slot_free_notify) (struct block_device *, unsigned long);
+ 	int (*report_zones)(struct gendisk *, sector_t sector,
 -- 
 2.29.2
 
