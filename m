@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 61399C4742C
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:10:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 32A23C5519F
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:10:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0B9A7223C7
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:09:59 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id C83AF223C7
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:10:03 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="egIiJi4m"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0B9A7223C7
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="Wa8Kr8gR"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C83AF223C7
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.28086.56826 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.28089.56846 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1keg8c-0001Hc-Bv; Mon, 16 Nov 2020 15:09:50 +0000
+	id 1keg8f-0001PU-A9; Mon, 16 Nov 2020 15:09:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 28086.56826; Mon, 16 Nov 2020 15:09:50 +0000
+Received: by outflank-mailman (output) from mailman id 28089.56846; Mon, 16 Nov 2020 15:09:53 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1keg8b-0001Fz-Jl; Mon, 16 Nov 2020 15:09:49 +0000
-Received: by outflank-mailman (input) for mailman id 28086;
- Mon, 16 Nov 2020 15:09:43 +0000
+	id 1keg8e-0001O4-96; Mon, 16 Nov 2020 15:09:52 +0000
+Received: by outflank-mailman (input) for mailman id 28089;
+ Mon, 16 Nov 2020 15:09:45 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1keg1w-0006ni-7u
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:02:56 +0000
+ id 1keg3Y-0006ni-CH
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:04:36 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id ef0b423f-4ff0-415d-834a-9121589f308d;
- Mon, 16 Nov 2020 14:59:32 +0000 (UTC)
+ id 847b40c8-3320-409a-8c7f-b3b393f00d6d;
+ Mon, 16 Nov 2020 14:59:59 +0000 (UTC)
 Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kefyR-00041m-OS; Mon, 16 Nov 2020 14:59:20 +0000
+ id 1kefyr-0004Ee-O2; Mon, 16 Nov 2020 14:59:46 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1keg1w-0006ni-7u
-	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:02:56 +0000
-X-Inumbo-ID: ef0b423f-4ff0-415d-834a-9121589f308d
+	id 1keg3Y-0006ni-CH
+	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:04:36 +0000
+X-Inumbo-ID: 847b40c8-3320-409a-8c7f-b3b393f00d6d
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id ef0b423f-4ff0-415d-834a-9121589f308d;
-	Mon, 16 Nov 2020 14:59:32 +0000 (UTC)
+	id 847b40c8-3320-409a-8c7f-b3b393f00d6d;
+	Mon, 16 Nov 2020 14:59:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=utL1e0DdHIY8Fd3lNgkU74rr4MTUuDAaqA4KW/LJ7AI=; b=egIiJi4m0U4Bm5a3xLAsrAucMd
-	3Y7Dcxn9qZ2xlM77p9BbRtBKAln3LYpke4xFjJKvrfnjmejTmX21aKv6vHUxAkbNTTH9fw7G54xZE
-	Kcbkwh5neJ/WOJ4yHL///KJ52srvgevLbhi3qd1e08YDaRuFP485wS+EsORi6U8MM67Ud6YA6Yo9K
-	bekvmhX/aEn35Ce8tzn7JUsepDG8P/sXuIMbKe85k7vlXKh+ZwG8eqa3IAX5tqQQpbDeZHpRvsm4J
-	aMOADF6lGFN9v0NVt3sH4VO4MQZpaNVbF7K5D8nyCVbFuFBLe2fOC4iaMbbC11Aoh49rz2wPPgNxC
-	Bk30XNJQ==;
+	bh=Gm+iOoQW3SjgzjWt8hYC3cPHjmK1EJUCm30vp5R/rzw=; b=Wa8Kr8gRYlOXU5s7FM3KZMbxGx
+	k+vvQ6LYafP8kEY026O5H/FQvU9OL31CSMB7WRAZSn0YfoO8GkSE7EtyFKujbR3S9taVnvCiYcS7Z
+	c869fHb6jF51swhtCPUvpafZWJvimoO1/RrjEZTpfPSpdsicpmJpX5nsBFxyhUNUF/toexTt8BFw1
+	BWItLElI+E4eRDDYKJAqRDVRp7BoyzzXlOtBai3pOt9iB3wHZxh3QpcQX5etGJeIM2EHYjMeYtAiX
+	HHK1s9guu0S32VNgB9FTzD185Ysvj6WT9kmxYVHId+6CkBi/UmoyyYLyyB468HuG06dSZoa7QjoiG
+	ED6i/tGQ==;
 Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1kefyR-00041m-OS; Mon, 16 Nov 2020 14:59:20 +0000
+	id 1kefyr-0004Ee-O2; Mon, 16 Nov 2020 14:59:46 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -102,9 +102,9 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-nvme@lists.infradead.org,
 	linux-scsi@vger.kernel.org,
 	linux-fsdevel@vger.kernel.org
-Subject: [PATCH 49/78] ataflop: use a separate gendisk for each media format
-Date: Mon, 16 Nov 2020 15:57:40 +0100
-Message-Id: <20201116145809.410558-50-hch@lst.de>
+Subject: [PATCH 66/78] block: keep a block_device reference for each hd_struct
+Date: Mon, 16 Nov 2020 15:57:57 +0100
+Message-Id: <20201116145809.410558-67-hch@lst.de>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20201116145809.410558-1-hch@lst.de>
 References: <20201116145809.410558-1-hch@lst.de>
@@ -112,287 +112,943 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-The Atari floppy driver usually autodetects the media when used with the
-ormal /dev/fd? devices, which also are the only nodes created by udev.
-But it also supports various aliases that force a given media format.
-That is currently supported using the blk_register_region framework
-which finds the floppy gendisk even for a 'mismatched' dev_t.  The
-problem with this (besides the code complexity) is that it creates
-multiple struct block_device instances for the whole device of a
-single gendisk, which can lead to interesting issues in code not
-aware of that fact.
+To simplify block device lookup and a few other upcomdin areas, make sure
+that we always have a struct block_device available for each disk and
+each partition.  The only downside of this is that each device and
+partition uses a little more memories.  The upside will be that a lot of
+code can be simplified.
 
-To fix this just create a separate gendisk for each of the aliases
-if they are accessed.
+With that all we need to look up the block device is to lookup the inode
+and do a few sanity checks on the gendisk, instead of the separate lookup
+for the gendisk.
+
+As part of the change switch bdget() to only find existing block devices,
+given that we know that the block_device structure must be allocated at
+probe / partition scan time.
+
+blk-cgroup needed a bit of a special treatment as the only place that
+wanted to lookup a gendisk outside of the normal blkdev_get path.  It is
+switched to lookup using the block device hash now that this is the
+primary lookup path.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/block/ataflop.c | 135 +++++++++++++++++++++++++---------------
- 1 file changed, 86 insertions(+), 49 deletions(-)
+ block/blk-cgroup.c         |  42 ++++-----
+ block/blk-iocost.c         |  36 +++----
+ block/blk.h                |   1 -
+ block/genhd.c              | 188 +++----------------------------------
+ block/partitions/core.c    |  28 +++---
+ fs/block_dev.c             | 133 +++++++++++++++-----------
+ include/linux/blk-cgroup.h |   4 +-
+ include/linux/blkdev.h     |   3 +
+ include/linux/genhd.h      |   4 +-
+ 9 files changed, 153 insertions(+), 286 deletions(-)
 
-diff --git a/drivers/block/ataflop.c b/drivers/block/ataflop.c
-index 3e881fdb06e0ad..104b713f4055af 100644
---- a/drivers/block/ataflop.c
-+++ b/drivers/block/ataflop.c
-@@ -297,7 +297,7 @@ static struct atari_floppy_struct {
- 	unsigned int wpstat;	/* current state of WP signal (for
- 				   disk change detection) */
- 	int flags;		/* flags */
--	struct gendisk *disk;
-+	struct gendisk *disk[NUM_DISK_MINORS];
- 	int ref;
- 	int type;
- 	struct blk_mq_tag_set tag_set;
-@@ -723,12 +723,16 @@ static void fd_error( void )
- 
- static int do_format(int drive, int type, struct atari_format_descr *desc)
- {
--	struct request_queue *q = unit[drive].disk->queue;
-+	struct request_queue *q;
- 	unsigned char	*p;
- 	int sect, nsect;
- 	unsigned long	flags;
- 	int ret;
- 
-+	if (type)
-+		type--;
-+
-+	q = unit[drive].disk[type]->queue;
- 	blk_mq_freeze_queue(q);
- 	blk_mq_quiesce_queue(q);
- 
-@@ -738,7 +742,7 @@ static int do_format(int drive, int type, struct atari_format_descr *desc)
- 	local_irq_restore(flags);
- 
- 	if (type) {
--		if (--type >= NUM_DISK_MINORS ||
-+		if (type >= NUM_DISK_MINORS ||
- 		    minor2disktype[type].drive_types > DriveType) {
- 			ret = -EINVAL;
- 			goto out;
-@@ -1154,7 +1158,7 @@ static void fd_rwsec_done1(int status)
- 			    if (SUDT[-1].blocks > ReqBlock) {
- 				/* try another disk type */
- 				SUDT--;
--				set_capacity(unit[SelectedDrive].disk,
-+				set_capacity(unit[SelectedDrive].disk[0],
- 							SUDT->blocks);
- 			    } else
- 				Probing = 0;
-@@ -1169,7 +1173,7 @@ static void fd_rwsec_done1(int status)
- /* record not found, but not probing. Maybe stretch wrong ? Restart probing */
- 			if (SUD.autoprobe) {
- 				SUDT = atari_disk_type + StartDiskType[DriveType];
--				set_capacity(unit[SelectedDrive].disk,
-+				set_capacity(unit[SelectedDrive].disk[0],
- 							SUDT->blocks);
- 				Probing = 1;
- 			}
-@@ -1515,7 +1519,7 @@ static blk_status_t ataflop_queue_rq(struct blk_mq_hw_ctx *hctx,
- 		if (!UDT) {
- 			Probing = 1;
- 			UDT = atari_disk_type + StartDiskType[DriveType];
--			set_capacity(floppy->disk, UDT->blocks);
-+			set_capacity(bd->rq->rq_disk, UDT->blocks);
- 			UD.autoprobe = 1;
- 		}
- 	} 
-@@ -1533,7 +1537,7 @@ static blk_status_t ataflop_queue_rq(struct blk_mq_hw_ctx *hctx,
- 		}
- 		type = minor2disktype[type].index;
- 		UDT = &atari_disk_type[type];
--		set_capacity(floppy->disk, UDT->blocks);
-+		set_capacity(bd->rq->rq_disk, UDT->blocks);
- 		UD.autoprobe = 0;
- 	}
- 
-@@ -1658,7 +1662,7 @@ static int fd_locked_ioctl(struct block_device *bdev, fmode_t mode,
- 				    printk (KERN_INFO "floppy%d: setting %s %p!\n",
- 				        drive, dtp->name, dtp);
- 				UDT = dtp;
--				set_capacity(floppy->disk, UDT->blocks);
-+				set_capacity(disk, UDT->blocks);
- 
- 				if (cmd == FDDEFPRM) {
- 				  /* save settings as permanent default type */
-@@ -1702,7 +1706,7 @@ static int fd_locked_ioctl(struct block_device *bdev, fmode_t mode,
- 			return -EINVAL;
- 
- 		UDT = dtp;
--		set_capacity(floppy->disk, UDT->blocks);
-+		set_capacity(disk, UDT->blocks);
- 
- 		return 0;
- 	case FDMSGON:
-@@ -1725,7 +1729,7 @@ static int fd_locked_ioctl(struct block_device *bdev, fmode_t mode,
- 		UDT = NULL;
- 		/* MSch: invalidate default_params */
- 		default_params[drive].blocks  = 0;
--		set_capacity(floppy->disk, MAX_DISK_SIZE * 2);
-+		set_capacity(disk, MAX_DISK_SIZE * 2);
- 		fallthrough;
- 	case FDFMTEND:
- 	case FDFLUSH:
-@@ -1962,14 +1966,50 @@ static const struct blk_mq_ops ataflop_mq_ops = {
- 	.commit_rqs = ataflop_commit_rqs,
- };
- 
--static struct kobject *floppy_find(dev_t dev, int *part, void *data)
-+static int ataflop_alloc_disk(unsigned int drive, unsigned int type)
- {
--	int drive = *part & 3;
--	int type  = *part >> 2;
-+	struct gendisk *disk;
-+	int ret;
-+
-+	disk = alloc_disk(1);
-+	if (!disk)
-+		return -ENOMEM;
-+
-+	disk->queue = blk_mq_init_queue(&unit[drive].tag_set);
-+	if (IS_ERR(disk->queue)) {
-+		ret = PTR_ERR(disk->queue);
-+		disk->queue = NULL;
-+		put_disk(disk);
-+		return ret;
-+	}
-+
-+	disk->major = FLOPPY_MAJOR;
-+	disk->first_minor = drive + (type << 2);
-+	sprintf(disk->disk_name, "fd%d", drive);
-+	disk->fops = &floppy_fops;
-+	disk->events = DISK_EVENT_MEDIA_CHANGE;
-+	disk->private_data = &unit[drive];
-+	set_capacity(disk, MAX_DISK_SIZE * 2);
-+
-+	unit[drive].disk[type] = disk;
-+	return 0;
-+}
-+
-+static DEFINE_MUTEX(ataflop_probe_lock);
-+
-+static void ataflop_probe(dev_t dev)
-+{
-+	int drive = MINOR(dev) & 3;
-+	int type  = MINOR(dev) >> 2;
-+
- 	if (drive >= FD_MAX_UNITS || type > NUM_DISK_MINORS)
--		return NULL;
--	*part = 0;
--	return get_disk_and_module(unit[drive].disk);
-+		return;
-+	mutex_lock(&ataflop_probe_lock);
-+	if (!unit[drive].disk[type]) {
-+		if (ataflop_alloc_disk(drive, type) == 0)
-+			add_disk(unit[drive].disk[type]);
-+	}
-+	mutex_unlock(&ataflop_probe_lock);
+diff --git a/block/blk-cgroup.c b/block/blk-cgroup.c
+index 54fbe1e80cc41a..4c0ae0f6bce02d 100644
+--- a/block/blk-cgroup.c
++++ b/block/blk-cgroup.c
+@@ -556,22 +556,22 @@ static struct blkcg_gq *blkg_lookup_check(struct blkcg *blkcg,
  }
  
- static int __init atari_floppy_init (void)
-@@ -1981,23 +2021,26 @@ static int __init atari_floppy_init (void)
- 		/* Amiga, Mac, ... don't have Atari-compatible floppy :-) */
- 		return -ENODEV;
+ /**
+- * blkg_conf_prep - parse and prepare for per-blkg config update
++ * blkcg_conf_get_bdev - parse and open bdev for per-blkg config update
+  * @inputp: input string pointer
+  *
+  * Parse the device node prefix part, MAJ:MIN, of per-blkg config update
+- * from @input and get and return the matching gendisk.  *@inputp is
++ * from @input and get and return the matching bdev.  *@inputp is
+  * updated to point past the device node prefix.  Returns an ERR_PTR()
+  * value on error.
+  *
+  * Use this function iff blkg_conf_prep() can't be used for some reason.
+  */
+-struct gendisk *blkcg_conf_get_disk(char **inputp)
++struct block_device *blkcg_conf_get_bdev(char **inputp)
+ {
+ 	char *input = *inputp;
+ 	unsigned int major, minor;
+-	struct gendisk *disk;
+-	int key_len, part;
++	struct block_device *bdev;
++	int key_len;
  
--	if (register_blkdev(FLOPPY_MAJOR,"fd"))
--		return -EBUSY;
-+	mutex_lock(&ataflop_probe_lock);
-+	ret = __register_blkdev(FLOPPY_MAJOR, "fd", ataflop_probe);
-+	if (ret)
-+		goto out_unlock;
+ 	if (sscanf(input, "%u:%u%n", &major, &minor, &key_len) != 2)
+ 		return ERR_PTR(-EINVAL);
+@@ -581,16 +581,16 @@ struct gendisk *blkcg_conf_get_disk(char **inputp)
+ 		return ERR_PTR(-EINVAL);
+ 	input = skip_spaces(input);
  
- 	for (i = 0; i < FD_MAX_UNITS; i++) {
--		unit[i].disk = alloc_disk(1);
--		if (!unit[i].disk) {
--			ret = -ENOMEM;
-+		memset(&unit[i].tag_set, 0, sizeof(unit[i].tag_set));
-+		unit[i].tag_set.ops = &ataflop_mq_ops;
-+		unit[i].tag_set.nr_hw_queues = 1;
-+		unit[i].tag_set.nr_maps = 1;
-+		unit[i].tag_set.queue_depth = 2;
-+		unit[i].tag_set.numa_node = NUMA_NO_NODE;
-+		unit[i].tag_set.flags = BLK_MQ_F_SHOULD_MERGE;
-+		ret = blk_mq_alloc_tag_set(&unit[i].tag_set);
-+		if (ret)
- 			goto err;
--		}
- 
--		unit[i].disk->queue = blk_mq_init_sq_queue(&unit[i].tag_set,
--							   &ataflop_mq_ops, 2,
--							   BLK_MQ_F_SHOULD_MERGE);
--		if (IS_ERR(unit[i].disk->queue)) {
--			put_disk(unit[i].disk);
--			ret = PTR_ERR(unit[i].disk->queue);
--			unit[i].disk->queue = NULL;
-+		ret = ataflop_alloc_disk(i, 0);
-+		if (ret) {
-+			blk_mq_free_tag_set(&unit[i].tag_set);
- 			goto err;
- 		}
- 	}
-@@ -2027,19 +2070,9 @@ static int __init atari_floppy_init (void)
- 	for (i = 0; i < FD_MAX_UNITS; i++) {
- 		unit[i].track = -1;
- 		unit[i].flags = 0;
--		unit[i].disk->major = FLOPPY_MAJOR;
--		unit[i].disk->first_minor = i;
--		sprintf(unit[i].disk->disk_name, "fd%d", i);
--		unit[i].disk->fops = &floppy_fops;
--		unit[i].disk->events = DISK_EVENT_MEDIA_CHANGE;
--		unit[i].disk->private_data = &unit[i];
--		set_capacity(unit[i].disk, MAX_DISK_SIZE * 2);
--		add_disk(unit[i].disk);
-+		add_disk(unit[i].disk[0]);
+-	disk = get_gendisk(MKDEV(major, minor), &part);
+-	if (!disk)
++	bdev = bdget(MKDEV(major, minor));
++	if (!bdev)
+ 		return ERR_PTR(-ENODEV);
+-	if (part) {
+-		put_disk_and_module(disk);
++	if (bdev_is_partition(bdev)) {
++		bdput(bdev);
+ 		return ERR_PTR(-ENODEV);
  	}
  
--	blk_register_region(MKDEV(FLOPPY_MAJOR, 0), 256, THIS_MODULE,
--				floppy_find, NULL, NULL);
--
- 	printk(KERN_INFO "Atari floppy driver: max. %cD, %strack buffering\n",
- 	       DriveType == 0 ? 'D' : DriveType == 1 ? 'H' : 'E',
- 	       UseTrackbuffer ? "" : "no ");
-@@ -2049,14 +2082,14 @@ static int __init atari_floppy_init (void)
+ 	*inputp = input;
+-	return disk;
++	return bdev;
+ }
  
+ /**
+@@ -607,18 +607,18 @@ struct gendisk *blkcg_conf_get_disk(char **inputp)
+  */
+ int blkg_conf_prep(struct blkcg *blkcg, const struct blkcg_policy *pol,
+ 		   char *input, struct blkg_conf_ctx *ctx)
+-	__acquires(rcu) __acquires(&disk->queue->queue_lock)
++	__acquires(rcu) __acquires(&bdev->bd_disk->queue->queue_lock)
+ {
+-	struct gendisk *disk;
++	struct block_device *bdev;
+ 	struct request_queue *q;
+ 	struct blkcg_gq *blkg;
+ 	int ret;
+ 
+-	disk = blkcg_conf_get_disk(&input);
+-	if (IS_ERR(disk))
+-		return PTR_ERR(disk);
++	bdev = blkcg_conf_get_bdev(&input);
++	if (IS_ERR(bdev))
++		return PTR_ERR(bdev);
+ 
+-	q = disk->queue;
++	q = bdev->bd_disk->queue;
+ 
+ 	rcu_read_lock();
+ 	spin_lock_irq(&q->queue_lock);
+@@ -689,7 +689,7 @@ int blkg_conf_prep(struct blkcg *blkcg, const struct blkcg_policy *pol,
+ 			goto success;
+ 	}
+ success:
+-	ctx->disk = disk;
++	ctx->bdev = bdev;
+ 	ctx->blkg = blkg;
+ 	ctx->body = input;
+ 	return 0;
+@@ -700,7 +700,7 @@ int blkg_conf_prep(struct blkcg *blkcg, const struct blkcg_policy *pol,
+ 	spin_unlock_irq(&q->queue_lock);
+ 	rcu_read_unlock();
+ fail:
+-	put_disk_and_module(disk);
++	bdput(bdev);
+ 	/*
+ 	 * If queue was bypassing, we should retry.  Do so after a
+ 	 * short msleep().  It isn't strictly necessary but queue
+@@ -723,11 +723,11 @@ EXPORT_SYMBOL_GPL(blkg_conf_prep);
+  * with blkg_conf_prep().
+  */
+ void blkg_conf_finish(struct blkg_conf_ctx *ctx)
+-	__releases(&ctx->disk->queue->queue_lock) __releases(rcu)
++	__releases(&ctx->bdev->bd_disk->queue->queue_lock) __releases(rcu)
+ {
+-	spin_unlock_irq(&ctx->disk->queue->queue_lock);
++	spin_unlock_irq(&ctx->bdev->bd_disk->queue->queue_lock);
+ 	rcu_read_unlock();
+-	put_disk_and_module(ctx->disk);
++	bdput(ctx->bdev);
+ }
+ EXPORT_SYMBOL_GPL(blkg_conf_finish);
+ 
+diff --git a/block/blk-iocost.c b/block/blk-iocost.c
+index bbe86d1199dc5b..bd8bfccf6b9ec3 100644
+--- a/block/blk-iocost.c
++++ b/block/blk-iocost.c
+@@ -3120,23 +3120,23 @@ static const match_table_t qos_tokens = {
+ static ssize_t ioc_qos_write(struct kernfs_open_file *of, char *input,
+ 			     size_t nbytes, loff_t off)
+ {
+-	struct gendisk *disk;
++	struct block_device *bdev;
+ 	struct ioc *ioc;
+ 	u32 qos[NR_QOS_PARAMS];
+ 	bool enable, user;
+ 	char *p;
+ 	int ret;
+ 
+-	disk = blkcg_conf_get_disk(&input);
+-	if (IS_ERR(disk))
+-		return PTR_ERR(disk);
++	bdev = blkcg_conf_get_bdev(&input);
++	if (IS_ERR(bdev))
++		return PTR_ERR(bdev);
+ 
+-	ioc = q_to_ioc(disk->queue);
++	ioc = q_to_ioc(bdev->bd_disk->queue);
+ 	if (!ioc) {
+-		ret = blk_iocost_init(disk->queue);
++		ret = blk_iocost_init(bdev->bd_disk->queue);
+ 		if (ret)
+ 			goto err;
+-		ioc = q_to_ioc(disk->queue);
++		ioc = q_to_ioc(bdev->bd_disk->queue);
+ 	}
+ 
+ 	spin_lock_irq(&ioc->lock);
+@@ -3231,12 +3231,12 @@ static ssize_t ioc_qos_write(struct kernfs_open_file *of, char *input,
+ 	ioc_refresh_params(ioc, true);
+ 	spin_unlock_irq(&ioc->lock);
+ 
+-	put_disk_and_module(disk);
++	bdput(bdev);
+ 	return nbytes;
+ einval:
+ 	ret = -EINVAL;
  err:
- 	while (--i >= 0) {
--		struct gendisk *disk = unit[i].disk;
--
--		blk_cleanup_queue(disk->queue);
-+		blk_cleanup_queue(unit[i].disk[0]->queue);
-+		put_disk(unit[i].disk[0]);
- 		blk_mq_free_tag_set(&unit[i].tag_set);
--		put_disk(unit[i].disk);
- 	}
- 
- 	unregister_blkdev(FLOPPY_MAJOR, "fd");
-+out_unlock:
-+	mutex_unlock(&ataflop_probe_lock);
+-	put_disk_and_module(disk);
++	bdput(bdev);
  	return ret;
  }
  
-@@ -2101,13 +2134,17 @@ __setup("floppy=", atari_floppy_setup);
- 
- static void __exit atari_floppy_exit(void)
+@@ -3287,23 +3287,23 @@ static const match_table_t i_lcoef_tokens = {
+ static ssize_t ioc_cost_model_write(struct kernfs_open_file *of, char *input,
+ 				    size_t nbytes, loff_t off)
  {
--	int i;
--	blk_unregister_region(MKDEV(FLOPPY_MAJOR, 0), 256);
-+	int i, type;
-+
- 	for (i = 0; i < FD_MAX_UNITS; i++) {
--		del_gendisk(unit[i].disk);
--		blk_cleanup_queue(unit[i].disk->queue);
-+		for (type = 0; type < NUM_DISK_MINORS; type++) {
-+			if (!unit[i].disk[type])
-+				continue;
-+			del_gendisk(unit[i].disk[type]);
-+			blk_cleanup_queue(unit[i].disk[type]->queue);
-+			put_disk(unit[i].disk[type]);
-+		}
- 		blk_mq_free_tag_set(&unit[i].tag_set);
--		put_disk(unit[i].disk);
- 	}
- 	unregister_blkdev(FLOPPY_MAJOR, "fd");
+-	struct gendisk *disk;
++	struct block_device *bdev;
+ 	struct ioc *ioc;
+ 	u64 u[NR_I_LCOEFS];
+ 	bool user;
+ 	char *p;
+ 	int ret;
  
+-	disk = blkcg_conf_get_disk(&input);
+-	if (IS_ERR(disk))
+-		return PTR_ERR(disk);
++	bdev = blkcg_conf_get_bdev(&input);
++	if (IS_ERR(bdev))
++		return PTR_ERR(bdev);
+ 
+-	ioc = q_to_ioc(disk->queue);
++	ioc = q_to_ioc(bdev->bd_disk->queue);
+ 	if (!ioc) {
+-		ret = blk_iocost_init(disk->queue);
++		ret = blk_iocost_init(bdev->bd_disk->queue);
+ 		if (ret)
+ 			goto err;
+-		ioc = q_to_ioc(disk->queue);
++		ioc = q_to_ioc(bdev->bd_disk->queue);
+ 	}
+ 
+ 	spin_lock_irq(&ioc->lock);
+@@ -3356,13 +3356,13 @@ static ssize_t ioc_cost_model_write(struct kernfs_open_file *of, char *input,
+ 	ioc_refresh_params(ioc, true);
+ 	spin_unlock_irq(&ioc->lock);
+ 
+-	put_disk_and_module(disk);
++	bdput(bdev);
+ 	return nbytes;
+ 
+ einval:
+ 	ret = -EINVAL;
+ err:
+-	put_disk_and_module(disk);
++	bdput(bdev);
+ 	return ret;
+ }
+ 
+diff --git a/block/blk.h b/block/blk.h
+index dfab98465db9a5..d74159bf61eb8f 100644
+--- a/block/blk.h
++++ b/block/blk.h
+@@ -352,7 +352,6 @@ struct hd_struct *disk_map_sector_rcu(struct gendisk *disk, sector_t sector);
+ 
+ int blk_alloc_devt(struct hd_struct *part, dev_t *devt);
+ void blk_free_devt(dev_t devt);
+-void blk_invalidate_devt(dev_t devt);
+ char *disk_name(struct gendisk *hd, int partno, char *buf);
+ #define ADDPART_FLAG_NONE	0
+ #define ADDPART_FLAG_RAID	1
+diff --git a/block/genhd.c b/block/genhd.c
+index 4a224a3c8e1071..40ec5473a21dd2 100644
+--- a/block/genhd.c
++++ b/block/genhd.c
+@@ -27,17 +27,9 @@
+ 
+ static struct kobject *block_depr;
+ 
+-static DEFINE_XARRAY(bdev_map);
+-static DEFINE_MUTEX(bdev_map_lock);
+-
+ /* for extended dynamic devt allocation, currently only one major is used */
+ #define NR_EXT_DEVT		(1 << MINORBITS)
+-
+-/* For extended devt allocation.  ext_devt_lock prevents look up
+- * results from going away underneath its user.
+- */
+-static DEFINE_SPINLOCK(ext_devt_lock);
+-static DEFINE_IDR(ext_devt_idr);
++static DEFINE_IDA(ext_devt_ida);
+ 
+ static void disk_check_events(struct disk_events *ev,
+ 			      unsigned int *clearing_ptr);
+@@ -578,14 +570,7 @@ int blk_alloc_devt(struct hd_struct *part, dev_t *devt)
+ 		return 0;
+ 	}
+ 
+-	/* allocate ext devt */
+-	idr_preload(GFP_KERNEL);
+-
+-	spin_lock_bh(&ext_devt_lock);
+-	idx = idr_alloc(&ext_devt_idr, part, 0, NR_EXT_DEVT, GFP_NOWAIT);
+-	spin_unlock_bh(&ext_devt_lock);
+-
+-	idr_preload_end();
++	idx = ida_alloc_range(&ext_devt_ida, 0, NR_EXT_DEVT, GFP_KERNEL);
+ 	if (idx < 0)
+ 		return idx == -ENOSPC ? -EBUSY : idx;
+ 
+@@ -604,26 +589,8 @@ int blk_alloc_devt(struct hd_struct *part, dev_t *devt)
+  */
+ void blk_free_devt(dev_t devt)
+ {
+-	if (devt == MKDEV(0, 0))
+-		return;
+-
+-	if (MAJOR(devt) == BLOCK_EXT_MAJOR) {
+-		spin_lock_bh(&ext_devt_lock);
+-		idr_remove(&ext_devt_idr, blk_mangle_minor(MINOR(devt)));
+-		spin_unlock_bh(&ext_devt_lock);
+-	}
+-}
+-
+-/*
+- * We invalidate devt by assigning NULL pointer for devt in idr.
+- */
+-void blk_invalidate_devt(dev_t devt)
+-{
+-	if (MAJOR(devt) == BLOCK_EXT_MAJOR) {
+-		spin_lock_bh(&ext_devt_lock);
+-		idr_replace(&ext_devt_idr, NULL, blk_mangle_minor(MINOR(devt)));
+-		spin_unlock_bh(&ext_devt_lock);
+-	}
++	if (MAJOR(devt) == BLOCK_EXT_MAJOR)
++		ida_free(&ext_devt_ida, blk_mangle_minor(MINOR(devt)));
+ }
+ 
+ static char *bdevt_str(dev_t devt, char *buf)
+@@ -638,28 +605,6 @@ static char *bdevt_str(dev_t devt, char *buf)
+ 	return buf;
+ }
+ 
+-static void blk_register_region(struct gendisk *disk)
+-{
+-	int i;
+-
+-	mutex_lock(&bdev_map_lock);
+-	for (i = 0; i < disk->minors; i++) {
+-		if (xa_insert(&bdev_map, disk_devt(disk) + i, disk, GFP_KERNEL))
+-			WARN_ON_ONCE(1);
+-	}
+-	mutex_unlock(&bdev_map_lock);
+-}
+-
+-static void blk_unregister_region(struct gendisk *disk)
+-{
+-	int i;
+-
+-	mutex_lock(&bdev_map_lock);
+-	for (i = 0; i < disk->minors; i++)
+-		xa_erase(&bdev_map, disk_devt(disk) + i);
+-	mutex_unlock(&bdev_map_lock);
+-}
+-
+ static void disk_scan_partitions(struct gendisk *disk)
+ {
+ 	struct block_device *bdev;
+@@ -803,7 +748,7 @@ static void __device_add_disk(struct device *parent, struct gendisk *disk,
+ 		ret = bdi_register(bdi, "%u:%u", MAJOR(devt), MINOR(devt));
+ 		WARN_ON(ret);
+ 		bdi_set_owner(bdi, dev);
+-		blk_register_region(disk);
++		bdev_add(disk->part0.bdev, devt);
+ 	}
+ 	register_disk(parent, disk, groups);
+ 	if (register_queue)
+@@ -914,16 +859,6 @@ void del_gendisk(struct gendisk *disk)
+ 	}
+ 
+ 	blk_unregister_queue(disk);
+-	
+-	if (!(disk->flags & GENHD_FL_HIDDEN))
+-		blk_unregister_region(disk);
+-	/*
+-	 * Remove gendisk pointer from idr so that it cannot be looked up
+-	 * while RCU period before freeing gendisk is running to prevent
+-	 * use-after-free issues. Note that the device number stays
+-	 * "in-use" until we really free the gendisk.
+-	 */
+-	blk_invalidate_devt(disk_devt(disk));
+ 
+ 	kobject_put(disk->part0.holder_dir);
+ 	kobject_put(disk->slave_dir);
+@@ -962,7 +897,7 @@ static ssize_t disk_badblocks_store(struct device *dev,
+ 	return badblocks_store(disk->bb, page, len, 0);
+ }
+ 
+-static void request_gendisk_module(dev_t devt)
++void blk_request_module(dev_t devt)
+ {
+ 	unsigned int major = MAJOR(devt);
+ 	struct blk_major_name **n;
+@@ -982,84 +917,6 @@ static void request_gendisk_module(dev_t devt)
+ 		request_module("block-major-%d", MAJOR(devt));
+ }
+ 
+-static bool get_disk_and_module(struct gendisk *disk)
+-{
+-	struct module *owner;
+-
+-	if (!disk->fops)
+-		return false;
+-	owner = disk->fops->owner;
+-	if (owner && !try_module_get(owner))
+-		return false;
+-	if (!kobject_get_unless_zero(&disk_to_dev(disk)->kobj)) {
+-		module_put(owner);
+-		return false;
+-	}
+-	return true;
+-
+-}
+-
+-/**
+- * get_gendisk - get partitioning information for a given device
+- * @devt: device to get partitioning information for
+- * @partno: returned partition index
+- *
+- * This function gets the structure containing partitioning
+- * information for the given device @devt.
+- *
+- * Context: can sleep
+- */
+-struct gendisk *get_gendisk(dev_t devt, int *partno)
+-{
+-	struct gendisk *disk = NULL;
+-
+-	might_sleep();
+-
+-	if (MAJOR(devt) != BLOCK_EXT_MAJOR) {
+-		mutex_lock(&bdev_map_lock);
+-		disk = xa_load(&bdev_map, devt);
+-		if (!disk) {
+-			mutex_unlock(&bdev_map_lock);
+-			request_gendisk_module(devt);
+-			mutex_lock(&bdev_map_lock);
+-			disk = xa_load(&bdev_map, devt);
+-		}
+-		if (disk && !get_disk_and_module(disk))
+-			disk = NULL;
+-		if (disk)
+-			*partno = devt - disk_devt(disk);
+-		mutex_unlock(&bdev_map_lock);
+-	} else {
+-		struct hd_struct *part;
+-
+-		spin_lock_bh(&ext_devt_lock);
+-		part = idr_find(&ext_devt_idr, blk_mangle_minor(MINOR(devt)));
+-		if (part && get_disk_and_module(part_to_disk(part))) {
+-			*partno = part->partno;
+-			disk = part_to_disk(part);
+-		}
+-		spin_unlock_bh(&ext_devt_lock);
+-	}
+-
+-	if (!disk)
+-		return NULL;
+-
+-	/*
+-	 * Synchronize with del_gendisk() to not return disk that is being
+-	 * destroyed.
+-	 */
+-	down_read(&disk->lookup_sem);
+-	if (unlikely((disk->flags & GENHD_FL_HIDDEN) ||
+-		     !(disk->flags & GENHD_FL_UP))) {
+-		up_read(&disk->lookup_sem);
+-		put_disk_and_module(disk);
+-		disk = NULL;
+-	} else {
+-		up_read(&disk->lookup_sem);
+-	}
+-	return disk;
+-}
+-
+ /**
+  * bdget_disk - do bdget() by gendisk and partition number
+  * @disk: gendisk of interest
+@@ -1557,11 +1414,6 @@ int disk_expand_part_tbl(struct gendisk *disk, int partno)
+  *
+  * This function releases all allocated resources of the gendisk.
+  *
+- * The struct gendisk refcount is incremented with get_gendisk() or
+- * get_disk_and_module(), and its refcount is decremented with
+- * put_disk_and_module() or put_disk(). Once the refcount reaches 0 this
+- * function is called.
+- *
+  * Drivers which used __device_add_disk() have a gendisk with a request_queue
+  * assigned. Since the request_queue sits on top of the gendisk for these
+  * drivers we also call blk_put_queue() for them, and we expect the
+@@ -1746,9 +1598,13 @@ struct gendisk *__alloc_disk_node(int minors, int node_id)
+ 	if (!disk)
+ 		return NULL;
+ 
++	disk->part0.bdev = bdev_alloc(disk, 0);
++	if (!disk->part0.bdev)
++		goto out_free_disk;
++
+ 	disk->part0.dkstats = alloc_percpu(struct disk_stats);
+ 	if (!disk->part0.dkstats)
+-		goto out_free_disk;
++		goto out_bdput;
+ 
+ 	init_rwsem(&disk->lookup_sem);
+ 	disk->node_id = node_id;
+@@ -1782,6 +1638,8 @@ struct gendisk *__alloc_disk_node(int minors, int node_id)
+ 
+ out_free_part0:
+ 	hd_free_part(&disk->part0);
++out_bdput:
++	bdput(disk->part0.bdev);
+ out_free_disk:
+ 	kfree(disk);
+ 	return NULL;
+@@ -1805,26 +1663,6 @@ void put_disk(struct gendisk *disk)
+ }
+ EXPORT_SYMBOL(put_disk);
+ 
+-/**
+- * put_disk_and_module - decrements the module and gendisk refcount
+- * @disk: the struct gendisk to decrement the refcount for
+- *
+- * This is a counterpart of get_disk_and_module() and thus also of
+- * get_gendisk().
+- *
+- * Context: Any context, but the last reference must not be dropped from
+- *          atomic context.
+- */
+-void put_disk_and_module(struct gendisk *disk)
+-{
+-	if (disk) {
+-		struct module *owner = disk->fops->owner;
+-
+-		put_disk(disk);
+-		module_put(owner);
+-	}
+-}
+-
+ static void set_disk_ro_uevent(struct gendisk *gd, int ro)
+ {
+ 	char event[] = "DISK_RO=1";
+diff --git a/block/partitions/core.c b/block/partitions/core.c
+index a02e224115943d..8b44f46ab1fbfc 100644
+--- a/block/partitions/core.c
++++ b/block/partitions/core.c
+@@ -340,12 +340,11 @@ void delete_partition(struct hd_struct *part)
+ 	device_del(part_to_dev(part));
+ 
+ 	/*
+-	 * Remove gendisk pointer from idr so that it cannot be looked up
+-	 * while RCU period before freeing gendisk is running to prevent
+-	 * use-after-free issues. Note that the device number stays
+-	 * "in-use" until we really free the gendisk.
++	 * Remove the block device from the inode hash, so that it cannot be
++	 * looked up while waiting for the RCU grace period.
+ 	 */
+-	blk_invalidate_devt(part_devt(part));
++	bdput(part->bdev);
++
+ 	percpu_ref_kill(&part->ref);
+ }
+ 
+@@ -402,11 +401,14 @@ static struct hd_struct *add_partition(struct gendisk *disk, int partno,
+ 	if (!p)
+ 		return ERR_PTR(-EBUSY);
+ 
++	err = -ENOMEM;
+ 	p->dkstats = alloc_percpu(struct disk_stats);
+-	if (!p->dkstats) {
+-		err = -ENOMEM;
++	if (!p->dkstats)
+ 		goto out_free;
+-	}
++
++	p->bdev = bdev_alloc(disk, partno);
++	if (!p->bdev)
++		goto out_free_stats;
+ 
+ 	hd_sects_seq_init(p);
+ 	pdev = part_to_dev(p);
+@@ -420,10 +422,8 @@ static struct hd_struct *add_partition(struct gendisk *disk, int partno,
+ 		struct partition_meta_info *pinfo;
+ 
+ 		pinfo = kzalloc_node(sizeof(*pinfo), GFP_KERNEL, disk->node_id);
+-		if (!pinfo) {
+-			err = -ENOMEM;
+-			goto out_free_stats;
+-		}
++		if (!pinfo)
++			goto out_bdput;
+ 		memcpy(pinfo, info, sizeof(*info));
+ 		p->info = pinfo;
+ 	}
+@@ -470,6 +470,7 @@ static struct hd_struct *add_partition(struct gendisk *disk, int partno,
+ 	}
+ 
+ 	/* everything is up and running, commence */
++	bdev_add(p->bdev, devt);
+ 	rcu_assign_pointer(ptbl->part[partno], p);
+ 
+ 	/* suppress uevent if the disk suppresses it */
+@@ -479,11 +480,14 @@ static struct hd_struct *add_partition(struct gendisk *disk, int partno,
+ 
+ out_free_info:
+ 	kfree(p->info);
++out_bdput:
++	bdput(p->bdev);
+ out_free_stats:
+ 	free_percpu(p->dkstats);
+ out_free:
+ 	kfree(p);
+ 	return ERR_PTR(err);
++
+ out_remove_file:
+ 	device_remove_file(pdev, &dev_attr_whole_disk);
+ out_del:
+diff --git a/fs/block_dev.c b/fs/block_dev.c
+index 29db12c3bb501c..f36788d7699302 100644
+--- a/fs/block_dev.c
++++ b/fs/block_dev.c
+@@ -795,6 +795,12 @@ static void bdev_free_inode(struct inode *inode)
+ 	kmem_cache_free(bdev_cachep, BDEV_I(inode));
+ }
+ 
++static void bdev_destroy_inode(struct inode *inode)
++{
++	if (inode->i_rdev)
++		put_device(disk_to_dev(I_BDEV(inode)->bd_disk));
++}
++
+ static void init_once(void *foo)
+ {
+ 	struct bdev_inode *ei = (struct bdev_inode *) foo;
+@@ -829,6 +835,7 @@ static const struct super_operations bdev_sops = {
+ 	.statfs = simple_statfs,
+ 	.alloc_inode = bdev_alloc_inode,
+ 	.free_inode = bdev_free_inode,
++	.destroy_inode = bdev_destroy_inode,
+ 	.drop_inode = generic_delete_inode,
+ 	.evict_inode = bdev_evict_inode,
+ };
+@@ -870,34 +877,51 @@ void __init bdev_cache_init(void)
+ 	blockdev_superblock = bd_mnt->mnt_sb;   /* For writeback */
+ }
+ 
+-static struct block_device *bdget(dev_t dev)
++struct block_device *bdev_alloc(struct gendisk *disk, u8 partno)
+ {
+ 	struct block_device *bdev;
+ 	struct inode *inode;
+ 
+-	inode = iget_locked(blockdev_superblock, dev);
++	inode = new_inode(blockdev_superblock);
+ 	if (!inode)
+ 		return NULL;
+ 
+-	bdev = &BDEV_I(inode)->bdev;
++	bdev = I_BDEV(inode);
++	spin_lock_init(&bdev->bd_size_lock);
++	bdev->bd_disk = disk;
++	bdev->bd_partno = partno;
++	bdev->bd_contains = NULL;
++	bdev->bd_super = NULL;
++	bdev->bd_inode = inode;
++	bdev->bd_part_count = 0;
++
++	inode->i_mode = S_IFBLK;
++	inode->i_rdev = 0;
++	inode->i_bdev = bdev;
++	inode->i_data.a_ops = &def_blk_aops;
+ 
+-	if (inode->i_state & I_NEW) {
+-		spin_lock_init(&bdev->bd_size_lock);
+-		bdev->bd_contains = NULL;
+-		bdev->bd_super = NULL;
+-		bdev->bd_inode = inode;
+-		bdev->bd_part_count = 0;
+-		bdev->bd_dev = dev;
+-		inode->i_mode = S_IFBLK;
+-		inode->i_rdev = dev;
+-		inode->i_bdev = bdev;
+-		inode->i_data.a_ops = &def_blk_aops;
+-		mapping_set_gfp_mask(&inode->i_data, GFP_USER);
+-		unlock_new_inode(inode);
+-	}
+ 	return bdev;
+ }
+ 
++void bdev_add(struct block_device *bdev, dev_t dev)
++{
++	bdev->bd_dev = dev;
++	get_device(disk_to_dev(bdev->bd_disk));
++	bdev->bd_inode->i_rdev = dev;
++	bdev->bd_inode->i_ino = dev;
++	insert_inode_hash(bdev->bd_inode);
++}
++
++struct block_device *bdget(dev_t dev)
++{
++	struct inode *inode;
++
++	inode = ilookup(blockdev_superblock, dev);
++	if (!inode)
++		return NULL;
++	return &BDEV_I(inode)->bdev;
++}
++
+ /**
+  * bdgrab -- Grab a reference to an already referenced block device
+  * @bdev:	Block device to grab a reference to.
+@@ -957,6 +981,10 @@ static struct block_device *bd_acquire(struct inode *inode)
+ 		bd_forget(inode);
+ 
+ 	bdev = bdget(inode->i_rdev);
++	if (!bdev) {
++		blk_request_module(inode->i_rdev);
++		bdev = bdget(inode->i_rdev);
++	}
+ 	if (bdev) {
+ 		spin_lock(&bdev_lock);
+ 		if (!inode->i_bdev) {
+@@ -1067,27 +1095,6 @@ int bd_prepare_to_claim(struct block_device *bdev, struct block_device *whole,
+ }
+ EXPORT_SYMBOL_GPL(bd_prepare_to_claim); /* only for the loop driver */
+ 
+-static struct gendisk *bdev_get_gendisk(struct block_device *bdev, int *partno)
+-{
+-	struct gendisk *disk = get_gendisk(bdev->bd_dev, partno);
+-
+-	if (!disk)
+-		return NULL;
+-	/*
+-	 * Now that we hold gendisk reference we make sure bdev we looked up is
+-	 * not stale. If it is, it means device got removed and created before
+-	 * we looked up gendisk and we fail open in such case. Associating
+-	 * unhashed bdev with newly created gendisk could lead to two bdevs
+-	 * (and thus two independent caches) being associated with one device
+-	 * which is bad.
+-	 */
+-	if (inode_unhashed(bdev->bd_inode)) {
+-		put_disk_and_module(disk);
+-		return NULL;
+-	}
+-	return disk;
+-}
+-
+ static void bd_clear_claiming(struct block_device *whole, void *holder)
+ {
+ 	lockdep_assert_held(&bdev_lock);
+@@ -1404,6 +1411,24 @@ int bdev_disk_changed(struct block_device *bdev, bool invalidate)
+  */
+ EXPORT_SYMBOL_GPL(bdev_disk_changed);
+ 
++/*
++ * Synchronize with del_gendisk() to not return a disk that is being destroyed.
++ * Callers needs to drop the reference on disk->fops->owner.
++ */
++static int bdev_get_gendisk(struct gendisk *disk)
++{
++	down_read(&disk->lookup_sem);
++	if ((disk->flags & (GENHD_FL_HIDDEN | GENHD_FL_UP)) != GENHD_FL_UP)
++		goto out_unlock;
++	if (disk->fops->owner && !try_module_get(disk->fops->owner))
++		goto out_unlock;
++	up_read(&disk->lookup_sem);
++	return 0;
++out_unlock:
++	up_read(&disk->lookup_sem);
++	return -ENXIO;
++}
++
+ /*
+  * bd_mutex locking:
+  *
+@@ -1415,19 +1440,17 @@ static int __blkdev_get(struct block_device *bdev, fmode_t mode, void *holder,
+ 		int for_part)
+ {
+ 	struct block_device *whole = NULL, *claiming = NULL;
+-	struct gendisk *disk;
++	struct gendisk *disk = bdev->bd_disk;
+ 	int ret;
+-	int partno;
+ 	bool first_open = false, unblock_events = true, need_restart;
+ 
+  restart:
+ 	need_restart = false;
+-	ret = -ENXIO;
+-	disk = bdev_get_gendisk(bdev, &partno);
+-	if (!disk)
++	ret = bdev_get_gendisk(bdev->bd_disk);
++	if (ret)
+ 		goto out;
+ 
+-	if (partno) {
++	if (bdev->bd_partno) {
+ 		whole = bdget_disk(disk, 0);
+ 		if (!whole) {
+ 			ret = -ENOMEM;
+@@ -1450,13 +1473,11 @@ static int __blkdev_get(struct block_device *bdev, fmode_t mode, void *holder,
+ 	mutex_lock_nested(&bdev->bd_mutex, for_part);
+ 	if (!bdev->bd_openers) {
+ 		first_open = true;
+-		bdev->bd_disk = disk;
+ 		bdev->bd_contains = bdev;
+-		bdev->bd_partno = partno;
+ 
+-		if (!partno) {
++		if (!bdev->bd_partno) {
+ 			ret = -ENXIO;
+-			bdev->bd_part = disk_get_part(disk, partno);
++			bdev->bd_part = disk_get_part(disk, 0);
+ 			if (!bdev->bd_part)
+ 				goto out_clear;
+ 
+@@ -1494,7 +1515,7 @@ static int __blkdev_get(struct block_device *bdev, fmode_t mode, void *holder,
+ 			if (ret)
+ 				goto out_clear;
+ 			bdev->bd_contains = bdgrab(whole);
+-			bdev->bd_part = disk_get_part(disk, partno);
++			bdev->bd_part = disk_get_part(disk, bdev->bd_partno);
+ 			if (!(disk->flags & GENHD_FL_UP) ||
+ 			    !bdev->bd_part || !bdev->bd_part->nr_sects) {
+ 				ret = -ENXIO;
+@@ -1541,16 +1562,15 @@ static int __blkdev_get(struct block_device *bdev, fmode_t mode, void *holder,
+ 	if (unblock_events)
+ 		disk_unblock_events(disk);
+ 
+-	/* only one opener holds refs to the module and disk */
++	/* only one opener holds the module reference */
+ 	if (!first_open)
+-		put_disk_and_module(disk);
++		module_put(disk->fops->owner);
+ 	if (whole)
+ 		bdput(whole);
+ 	return 0;
+ 
+  out_clear:
+ 	disk_put_part(bdev->bd_part);
+-	bdev->bd_disk = NULL;
+ 	bdev->bd_part = NULL;
+ 	if (bdev != bdev->bd_contains)
+ 		__blkdev_put(bdev->bd_contains, mode, 1);
+@@ -1564,7 +1584,7 @@ static int __blkdev_get(struct block_device *bdev, fmode_t mode, void *holder,
+  	if (whole)
+ 		bdput(whole);
+  out_put_disk:
+-	put_disk_and_module(disk);
++	module_put(disk->fops->owner);
+ 	if (need_restart)
+ 		goto restart;
+  out:
+@@ -1680,6 +1700,10 @@ struct block_device *blkdev_get_by_dev(dev_t dev, fmode_t mode, void *holder)
+ 	int err;
+ 
+ 	bdev = bdget(dev);
++	if (!bdev) {
++		blk_request_module(dev);
++		bdev = bdget(dev);
++	}
+ 	if (!bdev)
+ 		return ERR_PTR(-ENOMEM);
+ 
+@@ -1755,12 +1779,11 @@ static void __blkdev_put(struct block_device *bdev, fmode_t mode, int for_part)
+ 	if (!bdev->bd_openers) {
+ 		disk_put_part(bdev->bd_part);
+ 		bdev->bd_part = NULL;
+-		bdev->bd_disk = NULL;
+ 		if (bdev != bdev->bd_contains)
+ 			victim = bdev->bd_contains;
+ 		bdev->bd_contains = NULL;
+ 
+-		put_disk_and_module(disk);
++		module_put(disk->fops->owner);
+ 	}
+ 	mutex_unlock(&bdev->bd_mutex);
+ 	bdput(bdev);
+diff --git a/include/linux/blk-cgroup.h b/include/linux/blk-cgroup.h
+index c8fc9792ac776d..064f14daedebca 100644
+--- a/include/linux/blk-cgroup.h
++++ b/include/linux/blk-cgroup.h
+@@ -197,12 +197,12 @@ void blkcg_print_blkgs(struct seq_file *sf, struct blkcg *blkcg,
+ u64 __blkg_prfill_u64(struct seq_file *sf, struct blkg_policy_data *pd, u64 v);
+ 
+ struct blkg_conf_ctx {
+-	struct gendisk			*disk;
++	struct block_device		*bdev;
+ 	struct blkcg_gq			*blkg;
+ 	char				*body;
+ };
+ 
+-struct gendisk *blkcg_conf_get_disk(char **inputp);
++struct block_device *blkcg_conf_get_bdev(char **inputp);
+ int blkg_conf_prep(struct blkcg *blkcg, const struct blkcg_policy *pol,
+ 		   char *input, struct blkg_conf_ctx *ctx);
+ void blkg_conf_finish(struct blkg_conf_ctx *ctx);
+diff --git a/include/linux/blkdev.h b/include/linux/blkdev.h
+index 05b346a68c2eee..044d9dd159d882 100644
+--- a/include/linux/blkdev.h
++++ b/include/linux/blkdev.h
+@@ -1994,6 +1994,9 @@ void bd_abort_claiming(struct block_device *bdev, struct block_device *whole,
+ 		void *holder);
+ void blkdev_put(struct block_device *bdev, fmode_t mode);
+ 
++struct block_device *bdev_alloc(struct gendisk *disk, u8 partno);
++void bdev_add(struct block_device *bdev, dev_t dev);
++struct block_device *bdget(dev_t dev);
+ struct block_device *I_BDEV(struct inode *inode);
+ struct block_device *bdget_part(struct hd_struct *part);
+ struct block_device *bdgrab(struct block_device *bdev);
+diff --git a/include/linux/genhd.h b/include/linux/genhd.h
+index ca5e356084c353..ab5fca99764e7a 100644
+--- a/include/linux/genhd.h
++++ b/include/linux/genhd.h
+@@ -65,6 +65,7 @@ struct hd_struct {
+ 	struct disk_stats __percpu *dkstats;
+ 	struct percpu_ref ref;
+ 
++	struct block_device *bdev;
+ 	struct device __dev;
+ 	struct kobject *holder_dir;
+ 	int policy, partno;
+@@ -300,7 +301,6 @@ static inline void add_disk_no_queue_reg(struct gendisk *disk)
+ }
+ 
+ extern void del_gendisk(struct gendisk *gp);
+-extern struct gendisk *get_gendisk(dev_t dev, int *partno);
+ extern struct block_device *bdget_disk(struct gendisk *disk, int partno);
+ 
+ extern void set_disk_ro(struct gendisk *disk, int flag);
+@@ -338,7 +338,6 @@ int blk_drop_partitions(struct block_device *bdev);
+ 
+ extern struct gendisk *__alloc_disk_node(int minors, int node_id);
+ extern void put_disk(struct gendisk *disk);
+-extern void put_disk_and_module(struct gendisk *disk);
+ 
+ #define alloc_disk_node(minors, node_id)				\
+ ({									\
+@@ -389,6 +388,7 @@ static inline void bd_unlink_disk_holder(struct block_device *bdev,
+ #endif /* CONFIG_SYSFS */
+ 
+ dev_t blk_lookup_devt(const char *name, int partno);
++void blk_request_module(dev_t devt);
+ #ifdef CONFIG_BLOCK
+ void printk_all_partitions(void);
+ #else /* CONFIG_BLOCK */
 -- 
 2.29.2
 
