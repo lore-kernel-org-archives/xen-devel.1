@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3A9E9C4742C
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 14:59:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EC3D4C61DD8
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 14:59:11 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BE75422263
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 14:59:07 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 8CBEA22263
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 14:59:11 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="wN6wosc7"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BE75422263
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="XDreKiJ4"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8CBEA22263
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.28003.56590 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.28005.56602 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kefy5-00070J-54; Mon, 16 Nov 2020 14:58:57 +0000
+	id 1kefyA-00076M-Du; Mon, 16 Nov 2020 14:59:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 28003.56590; Mon, 16 Nov 2020 14:58:57 +0000
+Received: by outflank-mailman (output) from mailman id 28005.56602; Mon, 16 Nov 2020 14:59:02 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kefy5-00070C-1H; Mon, 16 Nov 2020 14:58:57 +0000
-Received: by outflank-mailman (input) for mailman id 28003;
- Mon, 16 Nov 2020 14:58:56 +0000
+	id 1kefyA-00076B-9r; Mon, 16 Nov 2020 14:59:02 +0000
+Received: by outflank-mailman (input) for mailman id 28005;
+ Mon, 16 Nov 2020 14:59:01 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1kefy4-0006ni-00
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 14:58:56 +0000
+ id 1kefy9-0006ni-06
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 14:59:01 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 108d8c18-1beb-4757-bd37-fcfe0ad76a33;
- Mon, 16 Nov 2020 14:58:34 +0000 (UTC)
+ id 60b24fc5-b321-46f8-92f3-6a93644b26a7;
+ Mon, 16 Nov 2020 14:58:36 +0000 (UTC)
 Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kefxO-0003il-5a; Mon, 16 Nov 2020 14:58:14 +0000
+ id 1kefxS-0003jh-3N; Mon, 16 Nov 2020 14:58:18 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1kefy4-0006ni-00
-	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 14:58:56 +0000
-X-Inumbo-ID: 108d8c18-1beb-4757-bd37-fcfe0ad76a33
+	id 1kefy9-0006ni-06
+	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 14:59:01 +0000
+X-Inumbo-ID: 60b24fc5-b321-46f8-92f3-6a93644b26a7
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 108d8c18-1beb-4757-bd37-fcfe0ad76a33;
-	Mon, 16 Nov 2020 14:58:34 +0000 (UTC)
+	id 60b24fc5-b321-46f8-92f3-6a93644b26a7;
+	Mon, 16 Nov 2020 14:58:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=8PaAH/NlXWyaCL2GXdksIteaFARADfMu/D/Ckol9tMo=; b=wN6wosc7g3dpVtffknH8vLUNmI
-	pMbSFF5gh+8vT4rZkoFCvA6aupRiJvV6j3DeZkEjRv3JF0SuQyb5rop7nap6P6bBHDiNXMuOKkZFU
-	2/3+raVMb7SXRLste9KvlOJ5u9ts2MBrNSLLG0BKT09RZvaTi4dWaiwejVC2gXZml0XgrjU4ZD9E9
-	bfDZpE1IwTyOS+y5OedbAXvRqtlBoMPZrfgS29FgVeIwd44vpSMEJZ21UALgOYKLjnQru2LVpggg8
-	bbqyjjy/clatNlvgFvfOP1lPu5Xy/eTtWSN37zZiTOAlIpF+vxuEFOnMYCgfFSQ+D5UWEr2zVNV4F
-	dSv9ugzw==;
+	bh=cvShK6qJnVFjmBKg14zAGdWrea8dma4DfS0jKI1wjR8=; b=XDreKiJ4x96Z/t74WwZXoiqmxZ
+	kGasNfT1bNA1fjULaCTvFR06AD4REjpimbHTwNYDO8d5l9aPJZ7sdpjiWmRfMAQTyELig3thtzFNL
+	O+hrNDW6I3pZd16LIz/SfupQtZ9eQZKF+Kx78kw1Nxpvf+UEJapN+C7c097yWoiWzUOAHRwDyPtur
+	nuWktKd22rUViISLXhzZbuaGhd3JD8rDuxrOCqSZhkDMCxP7CUB4opMwCsRN0rc9+981xvdt0QTBA
+	42RpMe8dlT1x0xQeMttdYFUFpb/llHtOALyROgc+bjJHHCFAZA7I2tyW4T5BACWMO7fR7JwZsaT7v
+	J8mEjS5g==;
 Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1kefxO-0003il-5a; Mon, 16 Nov 2020 14:58:14 +0000
+	id 1kefxS-0003jh-3N; Mon, 16 Nov 2020 14:58:18 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -101,11 +101,10 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-raid@vger.kernel.org,
 	linux-nvme@lists.infradead.org,
 	linux-scsi@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org,
-	Hannes Reinecke <hare@suse.de>
-Subject: [PATCH 03/78] nvme: let set_capacity_revalidate_and_notify update the bdev size
-Date: Mon, 16 Nov 2020 15:56:54 +0100
-Message-Id: <20201116145809.410558-4-hch@lst.de>
+	linux-fsdevel@vger.kernel.org
+Subject: [PATCH 06/78] nbd: remove the call to set_blocksize
+Date: Mon, 16 Nov 2020 15:56:57 +0100
+Message-Id: <20201116145809.410558-7-hch@lst.de>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20201116145809.410558-1-hch@lst.de>
 References: <20201116145809.410558-1-hch@lst.de>
@@ -113,44 +112,60 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-There is no good reason to call revalidate_disk_size separately.
+Block driver have no business setting the file system concept of a
+block size.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
-Reviewed-by: Hannes Reinecke <hare@suse.de>
+Reviewed-by: Josef Bacik <josef@toxicpanda.com>
 ---
- drivers/nvme/host/core.c | 5 +----
- 1 file changed, 1 insertion(+), 4 deletions(-)
+ drivers/block/nbd.c | 12 +++++-------
+ 1 file changed, 5 insertions(+), 7 deletions(-)
 
-diff --git a/drivers/nvme/host/core.c b/drivers/nvme/host/core.c
-index 9b01afcb7777b8..f6c6479da0e9ec 100644
---- a/drivers/nvme/host/core.c
-+++ b/drivers/nvme/host/core.c
-@@ -2053,7 +2053,7 @@ static void nvme_update_disk_info(struct gendisk *disk,
- 			capacity = 0;
+diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
+index aaae9220f3a008..a9a0b49ff16101 100644
+--- a/drivers/block/nbd.c
++++ b/drivers/block/nbd.c
+@@ -296,7 +296,7 @@ static void nbd_size_clear(struct nbd_device *nbd)
  	}
- 
--	set_capacity_revalidate_and_notify(disk, capacity, false);
-+	set_capacity_revalidate_and_notify(disk, capacity, true);
- 
- 	nvme_config_discard(disk, ns);
- 	nvme_config_write_zeroes(disk, ns);
-@@ -2134,7 +2134,6 @@ static int nvme_update_ns_info(struct nvme_ns *ns, struct nvme_id_ns *id)
- 		blk_stack_limits(&ns->head->disk->queue->limits,
- 				 &ns->queue->limits, 0);
- 		blk_queue_update_readahead(ns->head->disk->queue);
--		nvme_update_bdev_size(ns->head->disk);
- 		blk_mq_unfreeze_queue(ns->head->disk->queue);
- 	}
- #endif
-@@ -3963,8 +3962,6 @@ static void nvme_validate_ns(struct nvme_ns *ns, struct nvme_ns_ids *ids)
- 	 */
- 	if (ret && ret != -ENOMEM && !(ret > 0 && !(ret & NVME_SC_DNR)))
- 		nvme_ns_remove(ns);
--	else
--		revalidate_disk_size(ns->disk, true);
  }
  
- static void nvme_validate_or_alloc_ns(struct nvme_ctrl *ctrl, unsigned nsid)
+-static void nbd_size_update(struct nbd_device *nbd, bool start)
++static void nbd_size_update(struct nbd_device *nbd)
+ {
+ 	struct nbd_config *config = nbd->config;
+ 	struct block_device *bdev = bdget_disk(nbd->disk, 0);
+@@ -311,11 +311,9 @@ static void nbd_size_update(struct nbd_device *nbd, bool start)
+ 	blk_queue_physical_block_size(nbd->disk->queue, config->blksize);
+ 	set_capacity(nbd->disk, nr_sectors);
+ 	if (bdev) {
+-		if (bdev->bd_disk) {
++		if (bdev->bd_disk)
+ 			bd_set_nr_sectors(bdev, nr_sectors);
+-			if (start)
+-				set_blocksize(bdev, config->blksize);
+-		} else
++		else
+ 			set_bit(GD_NEED_PART_SCAN, &nbd->disk->state);
+ 		bdput(bdev);
+ 	}
+@@ -329,7 +327,7 @@ static void nbd_size_set(struct nbd_device *nbd, loff_t blocksize,
+ 	config->blksize = blocksize;
+ 	config->bytesize = blocksize * nr_blocks;
+ 	if (nbd->task_recv != NULL)
+-		nbd_size_update(nbd, false);
++		nbd_size_update(nbd);
+ }
+ 
+ static void nbd_complete_rq(struct request *req)
+@@ -1309,7 +1307,7 @@ static int nbd_start_device(struct nbd_device *nbd)
+ 		args->index = i;
+ 		queue_work(nbd->recv_workq, &args->work);
+ 	}
+-	nbd_size_update(nbd, true);
++	nbd_size_update(nbd);
+ 	return error;
+ }
+ 
 -- 
 2.29.2
 
