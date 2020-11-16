@@ -5,25 +5,25 @@ X-Spam-Level:
 X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EAD7BC5519F
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:12:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5F8CCC4742C
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:12:21 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A2E2422240
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:12:20 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 1966C221F9
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:12:21 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="Gei8YMmy"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A2E2422240
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="s3PyuNum"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1966C221F9
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.28311.57474 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.28307.57457 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kegAo-0007xL-Rn; Mon, 16 Nov 2020 15:12:06 +0000
+	id 1kegAl-0007mW-Pr; Mon, 16 Nov 2020 15:12:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 28311.57474; Mon, 16 Nov 2020 15:12:06 +0000
+Received: by outflank-mailman (output) from mailman id 28307.57457; Mon, 16 Nov 2020 15:12:03 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kegAn-0007v8-Ox; Mon, 16 Nov 2020 15:12:05 +0000
-Received: by outflank-mailman (input) for mailman id 28311;
- Mon, 16 Nov 2020 15:11:59 +0000
+	id 1kegAj-0007jv-KL; Mon, 16 Nov 2020 15:12:01 +0000
+Received: by outflank-mailman (input) for mailman id 28307;
+ Mon, 16 Nov 2020 15:11:56 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1keg2V-0006ni-9J
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:03:31 +0000
+ id 1keg0K-0006ni-4T
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:01:16 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 6e590672-b054-412a-8d04-48508d6d95b0;
- Mon, 16 Nov 2020 14:59:40 +0000 (UTC)
+ id 6ae54633-16ef-4579-bc5b-38c9211f7ba2;
+ Mon, 16 Nov 2020 14:59:10 +0000 (UTC)
 Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kefya-00045V-AA; Mon, 16 Nov 2020 14:59:28 +0000
+ id 1kefy4-0003vL-Dh; Mon, 16 Nov 2020 14:58:56 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1keg2V-0006ni-9J
-	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:03:31 +0000
-X-Inumbo-ID: 6e590672-b054-412a-8d04-48508d6d95b0
+	id 1keg0K-0006ni-4T
+	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:01:16 +0000
+X-Inumbo-ID: 6ae54633-16ef-4579-bc5b-38c9211f7ba2
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 6e590672-b054-412a-8d04-48508d6d95b0;
-	Mon, 16 Nov 2020 14:59:40 +0000 (UTC)
+	id 6ae54633-16ef-4579-bc5b-38c9211f7ba2;
+	Mon, 16 Nov 2020 14:59:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=AuzCwkw90Oy6IPNhoiC+qBglSTsZM+HyoDoCPgOfof0=; b=Gei8YMmy1pPuUmlC/BZRAtHClX
-	92uN480odx4m65CCc4Tfb2n7qkWXXDlvv232pz3oEAX+XbC7INmbsQu431O6VUovjCbxRXS/6+CGm
-	I03IsfR/g+MC38cctw2PBlul5o941KKyElmuVJhnyEIK9fLr9jathnAglj+AJmt+2gxYimOEFvVaN
-	M/TT6NDHo35SQ0IqAeU3wK0Jd6ZgWYZ3++nf1EvXI57cDYNw3hpvRFLXn2hKDcFrK6sI1K2XntRYw
-	SrT2g7HIUak8u4YpPV3kCsIBS/JUz8pIwPLmbN0ck/5og2vPZl4CYZ3h8OXDoTM0q+/eHv9liSw30
-	he5+yUVA==;
+	bh=hmW8AusT819Hpp1U0vQRnp8T84EK6KuhlshbO+/HZ1o=; b=s3PyuNumv2XJNuimh+ngj+d/f6
+	scNE+kFuc6xkgKNnr1zZ7z2rWNuEJjtRjoF8etdpy5umK3setslsL6lUQiK5cAVCegzHKOP2tNVRN
+	1Sa9ShGf1/F5HMkg28qrnE9RKWnptAc1NOgcS5xzLqKhJFI4gE0I6jkqsNfuoY0Yg/d/tfTnu2g27
+	+3jL897Lg+GjB+qFNGwVEtM3B26pX5XnYLr43N09shWkl6V+i4C3a3gB1Gh7uFE1MmG1EyGX2j2HD
+	PQjkAdNsC8nET4kWMgCjPetxyfW4P8cNls2hPSf7oPeT4Bi2Ng0klNLw8Pn/NUGmnPBoTRVCulBmk
+	W/SI5tEw==;
 Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1kefya-00045V-AA; Mon, 16 Nov 2020 14:59:28 +0000
+	id 1kefy4-0003vL-Dh; Mon, 16 Nov 2020 14:58:56 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -102,9 +102,9 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-nvme@lists.infradead.org,
 	linux-scsi@vger.kernel.org,
 	linux-fsdevel@vger.kernel.org
-Subject: [PATCH 55/78] block: change the hash used for looking up block devices
-Date: Mon, 16 Nov 2020 15:57:46 +0100
-Message-Id: <20201116145809.410558-56-hch@lst.de>
+Subject: [PATCH 33/78] block: remove __blkdev_driver_ioctl
+Date: Mon, 16 Nov 2020 15:57:24 +0100
+Message-Id: <20201116145809.410558-34-hch@lst.de>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20201116145809.410558-1-hch@lst.de>
 References: <20201116145809.410558-1-hch@lst.de>
@@ -112,64 +112,124 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-Adding the minor to the major creates tons of pointless conflicts. Just
-use the dev_t itself, which is 32-bits and thus is guaranteed to fit
-into ino_t.
+Just open code it in the few callers.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- fs/block_dev.c | 26 ++------------------------
- 1 file changed, 2 insertions(+), 24 deletions(-)
+ block/ioctl.c               | 25 +++++--------------------
+ drivers/block/pktcdvd.c     |  6 ++++--
+ drivers/md/bcache/request.c |  5 +++--
+ drivers/md/dm.c             |  5 ++++-
+ include/linux/blkdev.h      |  2 --
+ 5 files changed, 16 insertions(+), 27 deletions(-)
 
-diff --git a/fs/block_dev.c b/fs/block_dev.c
-index d8664f5c1ff669..29db12c3bb501c 100644
---- a/fs/block_dev.c
-+++ b/fs/block_dev.c
-@@ -870,35 +870,12 @@ void __init bdev_cache_init(void)
- 	blockdev_superblock = bd_mnt->mnt_sb;   /* For writeback */
+diff --git a/block/ioctl.c b/block/ioctl.c
+index 04255dc5f3bff3..6b785181344fe1 100644
+--- a/block/ioctl.c
++++ b/block/ioctl.c
+@@ -219,23 +219,6 @@ static int compat_put_ulong(compat_ulong_t __user *argp, compat_ulong_t val)
+ }
+ #endif
+ 
+-int __blkdev_driver_ioctl(struct block_device *bdev, fmode_t mode,
+-			unsigned cmd, unsigned long arg)
+-{
+-	struct gendisk *disk = bdev->bd_disk;
+-
+-	if (disk->fops->ioctl)
+-		return disk->fops->ioctl(bdev, mode, cmd, arg);
+-
+-	return -ENOTTY;
+-}
+-/*
+- * For the record: _GPL here is only because somebody decided to slap it
+- * on the previous export.  Sheer idiocy, since it wasn't copyrightable
+- * at all and could be open-coded without any exports by anybody who cares.
+- */
+-EXPORT_SYMBOL_GPL(__blkdev_driver_ioctl);
+-
+ #ifdef CONFIG_COMPAT
+ /*
+  * This is the equivalent of compat_ptr_ioctl(), to be used by block
+@@ -594,10 +577,12 @@ int blkdev_ioctl(struct block_device *bdev, fmode_t mode, unsigned cmd,
+ 	}
+ 
+ 	ret = blkdev_common_ioctl(bdev, mode, cmd, arg, argp);
+-	if (ret == -ENOIOCTLCMD)
+-		return __blkdev_driver_ioctl(bdev, mode, cmd, arg);
++	if (ret != -ENOIOCTLCMD)
++		return ret;
+ 
+-	return ret;
++	if (!bdev->bd_disk->fops->ioctl)
++		return -ENOTTY;
++	return bdev->bd_disk->fops->ioctl(bdev, mode, cmd, arg);
+ }
+ EXPORT_SYMBOL_GPL(blkdev_ioctl); /* for /dev/raw */
+ 
+diff --git a/drivers/block/pktcdvd.c b/drivers/block/pktcdvd.c
+index 4326401cede445..b8bb8ec7538d9b 100644
+--- a/drivers/block/pktcdvd.c
++++ b/drivers/block/pktcdvd.c
+@@ -2583,9 +2583,11 @@ static int pkt_ioctl(struct block_device *bdev, fmode_t mode, unsigned int cmd,
+ 	case CDROM_LAST_WRITTEN:
+ 	case CDROM_SEND_PACKET:
+ 	case SCSI_IOCTL_SEND_COMMAND:
+-		ret = __blkdev_driver_ioctl(pd->bdev, mode, cmd, arg);
++		if (!bdev->bd_disk->fops->ioctl)
++			ret = -ENOTTY;
++		else
++			ret = bdev->bd_disk->fops->ioctl(bdev, mode, cmd, arg);
+ 		break;
+-
+ 	default:
+ 		pkt_dbg(2, pd, "Unknown ioctl (%x)\n", cmd);
+ 		ret = -ENOTTY;
+diff --git a/drivers/md/bcache/request.c b/drivers/md/bcache/request.c
+index 21432638314562..afac8d07c1bd00 100644
+--- a/drivers/md/bcache/request.c
++++ b/drivers/md/bcache/request.c
+@@ -1230,8 +1230,9 @@ static int cached_dev_ioctl(struct bcache_device *d, fmode_t mode,
+ 
+ 	if (dc->io_disable)
+ 		return -EIO;
+-
+-	return __blkdev_driver_ioctl(dc->bdev, mode, cmd, arg);
++	if (!dc->bdev->bd_disk->fops->ioctl)
++		return -ENOTTY;
++	return dc->bdev->bd_disk->fops->ioctl(dc->bdev, mode, cmd, arg);
  }
  
--/*
-- * Most likely _very_ bad one - but then it's hardly critical for small
-- * /dev and can be fixed when somebody will need really large one.
-- * Keep in mind that it will be fed through icache hash function too.
-- */
--static inline unsigned long hash(dev_t dev)
--{
--	return MAJOR(dev)+MINOR(dev);
--}
--
--static int bdev_test(struct inode *inode, void *data)
--{
--	return BDEV_I(inode)->bdev.bd_dev == *(dev_t *)data;
--}
--
--static int bdev_set(struct inode *inode, void *data)
--{
--	BDEV_I(inode)->bdev.bd_dev = *(dev_t *)data;
--	return 0;
--}
--
- static struct block_device *bdget(dev_t dev)
- {
- 	struct block_device *bdev;
- 	struct inode *inode;
+ void bch_cached_dev_request_init(struct cached_dev *dc)
+diff --git a/drivers/md/dm.c b/drivers/md/dm.c
+index 62ad44925e73ec..54739f1b579bc8 100644
+--- a/drivers/md/dm.c
++++ b/drivers/md/dm.c
+@@ -570,7 +570,10 @@ static int dm_blk_ioctl(struct block_device *bdev, fmode_t mode,
+ 		}
+ 	}
  
--	inode = iget5_locked(blockdev_superblock, hash(dev),
--			bdev_test, bdev_set, &dev);
--
-+	inode = iget_locked(blockdev_superblock, dev);
- 	if (!inode)
- 		return NULL;
+-	r =  __blkdev_driver_ioctl(bdev, mode, cmd, arg);
++	if (!bdev->bd_disk->fops->ioctl)
++		r = -ENOTTY;
++	else
++		r = bdev->bd_disk->fops->ioctl(bdev, mode, cmd, arg);
+ out:
+ 	dm_unprepare_ioctl(md, srcu_idx);
+ 	return r;
+diff --git a/include/linux/blkdev.h b/include/linux/blkdev.h
+index 5c1ba8a8d2bc7e..05b346a68c2eee 100644
+--- a/include/linux/blkdev.h
++++ b/include/linux/blkdev.h
+@@ -1867,8 +1867,6 @@ extern int blkdev_compat_ptr_ioctl(struct block_device *, fmode_t,
+ #define blkdev_compat_ptr_ioctl NULL
+ #endif
  
-@@ -910,6 +887,7 @@ static struct block_device *bdget(dev_t dev)
- 		bdev->bd_super = NULL;
- 		bdev->bd_inode = inode;
- 		bdev->bd_part_count = 0;
-+		bdev->bd_dev = dev;
- 		inode->i_mode = S_IFBLK;
- 		inode->i_rdev = dev;
- 		inode->i_bdev = bdev;
+-extern int __blkdev_driver_ioctl(struct block_device *, fmode_t, unsigned int,
+-				 unsigned long);
+ extern int bdev_read_page(struct block_device *, sector_t, struct page *);
+ extern int bdev_write_page(struct block_device *, sector_t, struct page *,
+ 						struct writeback_control *);
 -- 
 2.29.2
 
