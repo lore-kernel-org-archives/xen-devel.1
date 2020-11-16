@@ -2,29 +2,28 @@ Return-Path: <SRS0=LqdB=EW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,UNPARSEABLE_RELAY,URIBL_BLOCKED
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CBA5FC5519F
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 13:47:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8D420C5519F
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 14:59:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 313CA2074B
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 13:47:19 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 3DAA822263
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 14:59:00 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=armh.onmicrosoft.com header.i=@armh.onmicrosoft.com header.b="DxrZ23gg";
-	dkim=pass (1024-bit key) header.d=armh.onmicrosoft.com header.i=@armh.onmicrosoft.com header.b="DxrZ23gg"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 313CA2074B
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="hPdBqu7L"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3DAA822263
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.27945.56530 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.28000.56554 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1keeqF-0000Zo-GG; Mon, 16 Nov 2020 13:46:47 +0000
+	id 1kefxq-0006ow-4d; Mon, 16 Nov 2020 14:58:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 27945.56530; Mon, 16 Nov 2020 13:46:47 +0000
+Received: by outflank-mailman (output) from mailman id 28000.56554; Mon, 16 Nov 2020 14:58:42 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,372 +38,226 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1keeqF-0000Zh-Cu; Mon, 16 Nov 2020 13:46:47 +0000
-Received: by outflank-mailman (input) for mailman id 27945;
- Mon, 16 Nov 2020 13:46:46 +0000
+	id 1kefxq-0006on-1N; Mon, 16 Nov 2020 14:58:42 +0000
+Received: by outflank-mailman (input) for mailman id 28000;
+ Mon, 16 Nov 2020 14:58:41 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=nrw9=EW=arm.com=bertrand.marquis@srs-us1.protection.inumbo.net>)
- id 1keeqD-0000Zc-TU
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 13:46:46 +0000
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com (unknown
- [40.107.22.41]) by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id beade9f6-ea71-4eeb-b1e6-b2b9a2d8a4ac;
- Mon, 16 Nov 2020 13:46:43 +0000 (UTC)
-Received: from DB8PR06CA0048.eurprd06.prod.outlook.com (2603:10a6:10:120::22)
- by AM6PR08MB5256.eurprd08.prod.outlook.com (2603:10a6:20b:e7::32)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3564.28; Mon, 16 Nov
- 2020 13:46:41 +0000
-Received: from DB5EUR03FT016.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:10:120:cafe::fb) by DB8PR06CA0048.outlook.office365.com
- (2603:10a6:10:120::22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3564.28 via Frontend
- Transport; Mon, 16 Nov 2020 13:46:41 +0000
-Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- DB5EUR03FT016.mail.protection.outlook.com (10.152.20.141) with
- Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3564.22 via Frontend Transport; Mon, 16 Nov 2020 13:46:41 +0000
-Received: ("Tessian outbound 39167997cde8:v71");
- Mon, 16 Nov 2020 13:46:41 +0000
-Received: from ee1655f6f992.2
- by 64aa7808-outbound-1.mta.getcheckrecipient.com id
- 28F89D29-DF87-469B-85D0-27F9659E5AFF.1; 
- Mon, 16 Nov 2020 13:46:33 +0000
-Received: from EUR03-VE1-obe.outbound.protection.outlook.com
- by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id ee1655f6f992.2
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
- Mon, 16 Nov 2020 13:46:33 +0000
-Received: from DB7PR08MB3689.eurprd08.prod.outlook.com (2603:10a6:10:79::16)
- by DBBPR08MB4678.eurprd08.prod.outlook.com (2603:10a6:10:dc::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3564.28; Mon, 16 Nov
- 2020 13:46:29 +0000
-Received: from DB7PR08MB3689.eurprd08.prod.outlook.com
- ([fe80::39b7:6f9f:d046:e737]) by DB7PR08MB3689.eurprd08.prod.outlook.com
- ([fe80::39b7:6f9f:d046:e737%7]) with mapi id 15.20.3564.028; Mon, 16 Nov 2020
- 13:46:29 +0000
+ <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
+ id 1kefxo-0006ni-Vi
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 14:58:41 +0000
+Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id f50b753e-efe4-457e-ab0f-2b298420c158;
+ Mon, 16 Nov 2020 14:58:33 +0000 (UTC)
+Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
+ by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+ id 1kefxQ-0003jM-O4; Mon, 16 Nov 2020 14:58:17 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=nrw9=EW=arm.com=bertrand.marquis@srs-us1.protection.inumbo.net>)
-	id 1keeqD-0000Zc-TU
-	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 13:46:46 +0000
-X-Inumbo-ID: beade9f6-ea71-4eeb-b1e6-b2b9a2d8a4ac
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com (unknown [40.107.22.41])
+	(envelope-from <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
+	id 1kefxo-0006ni-Vi
+	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 14:58:41 +0000
+X-Inumbo-ID: f50b753e-efe4-457e-ab0f-2b298420c158
+Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id beade9f6-ea71-4eeb-b1e6-b2b9a2d8a4ac;
-	Mon, 16 Nov 2020 13:46:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qAUC3bKQ8Do7oF1w8gRlc3YuQWW/wFuhcoOCQqtIVB0=;
- b=DxrZ23ggWTpxizT3CO9ppHf5+hzeq8n5wvdHsDWFNiTJQn5IxV9eyOy5TQV95gQqYm8UEAH/4aTKU+eBB8PvvSof3NUdE17jywNT3YS50onE3Smr81if2cPXfrWvfao0pa0EAVhoao0Fouv8VpV9JbXq4oUyAwYprDwRY4cNLhI=
-Received: from DB8PR06CA0048.eurprd06.prod.outlook.com (2603:10a6:10:120::22)
- by AM6PR08MB5256.eurprd08.prod.outlook.com (2603:10a6:20b:e7::32) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3564.28; Mon, 16 Nov
- 2020 13:46:41 +0000
-Received: from DB5EUR03FT016.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:10:120:cafe::fb) by DB8PR06CA0048.outlook.office365.com
- (2603:10a6:10:120::22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3564.28 via Frontend
- Transport; Mon, 16 Nov 2020 13:46:41 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
- smtp.mailfrom=arm.com; lists.xenproject.org; dkim=pass (signature was
- verified) header.d=armh.onmicrosoft.com;lists.xenproject.org; dmarc=pass
- action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
- client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
-Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- DB5EUR03FT016.mail.protection.outlook.com (10.152.20.141) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3564.22 via Frontend Transport; Mon, 16 Nov 2020 13:46:41 +0000
-Received: ("Tessian outbound 39167997cde8:v71"); Mon, 16 Nov 2020 13:46:41 +0000
-X-CheckRecipientChecked: true
-X-CR-MTA-CID: d8206f6e5aad9bea
-X-CR-MTA-TID: 64aa7808
-Received: from ee1655f6f992.2
-	by 64aa7808-outbound-1.mta.getcheckrecipient.com id 28F89D29-DF87-469B-85D0-27F9659E5AFF.1;
-	Mon, 16 Nov 2020 13:46:33 +0000
-Received: from EUR03-VE1-obe.outbound.protection.outlook.com
-    by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id ee1655f6f992.2
-    (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
-    Mon, 16 Nov 2020 13:46:33 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Quh+ivx6wL1cspWDWN7QQK8IYNlAPABweJCC2nIUvxCBKWfFK+qHPa446En2ti565t2S4D+j2JTPIdwo5BRtuYTq6ah7yb+2CL7aoVubgbzjQ0v/rIdINl/j5sSoYsH0OK52At9a66N+afeJjRpZT+deylfIOiLHpNTPGCEcoraTBJF8zsxigWY8GqGURuSodfd3oxLSMAChhJT3BJw8TOytTVzoeOxdtYXPXWX9UlJygC2rVHj+cwPn2h1Gb+kLNkzL0Md4C67k9OJ3ik163CQ8rDd1Ro66k8BHLSWdHqhT2TmnijelaokMevZmwr3ggCpNHHy+d/RheaNc2fiq0w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qAUC3bKQ8Do7oF1w8gRlc3YuQWW/wFuhcoOCQqtIVB0=;
- b=iFT54bawrOX8xw3sGNHgUEw9UkPz/aIPfVOUGeNeAxX+1ZOcFJmqK6C2PJ1XBbYod5jyWlTUgrfeAzqTFf8oSiWNmrRoKMnfNE9F1BP9EiYFi9SxlcqAqEk+nzaFgybK70iw8TeCe0OiSzNWfOzJ5pP4pz5AWPdWf832v0kvCE2/o2zCP1DTwS7dviyT6/c22ywiLqLQKl0t5UdnYAq3iQvJ/suCHufEeDYCiPiIT5NTT7m7NnvCzywQdB3uLjvYa2+Y5DGiz2Q1FIry/gPe3F4B4XeAY4o9pZ1w1rHN/FdSiGRbOshh2EIwGGhOZ7B2Rj0zgQb+v9MWzMEmBbuTsw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qAUC3bKQ8Do7oF1w8gRlc3YuQWW/wFuhcoOCQqtIVB0=;
- b=DxrZ23ggWTpxizT3CO9ppHf5+hzeq8n5wvdHsDWFNiTJQn5IxV9eyOy5TQV95gQqYm8UEAH/4aTKU+eBB8PvvSof3NUdE17jywNT3YS50onE3Smr81if2cPXfrWvfao0pa0EAVhoao0Fouv8VpV9JbXq4oUyAwYprDwRY4cNLhI=
-Received: from DB7PR08MB3689.eurprd08.prod.outlook.com (2603:10a6:10:79::16)
- by DBBPR08MB4678.eurprd08.prod.outlook.com (2603:10a6:10:dc::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3564.28; Mon, 16 Nov
- 2020 13:46:29 +0000
-Received: from DB7PR08MB3689.eurprd08.prod.outlook.com
- ([fe80::39b7:6f9f:d046:e737]) by DB7PR08MB3689.eurprd08.prod.outlook.com
- ([fe80::39b7:6f9f:d046:e737%7]) with mapi id 15.20.3564.028; Mon, 16 Nov 2020
- 13:46:29 +0000
-From: Bertrand Marquis <Bertrand.Marquis@arm.com>
-To: Michal Orzel <Michal.Orzel@arm.com>
-CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Stefano
- Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Volodymyr
- Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: Re: [PATCH v2] xen/arm: Add workaround for Cortex-A76/Neoverse-N1
- erratum #1286807
-Thread-Topic: [PATCH v2] xen/arm: Add workaround for Cortex-A76/Neoverse-N1
- erratum #1286807
-Thread-Index: AQHWvBHCDA6RH0TW50yqO37dVM6f26nKxaGA
-Date: Mon, 16 Nov 2020 13:46:29 +0000
-Message-ID: <6F0BAEC1-E48C-4266-A967-2B7492F6C682@arm.com>
-References: <20201116121140.26763-1-michal.orzel@arm.com>
-In-Reply-To: <20201116121140.26763-1-michal.orzel@arm.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-x-mailer: Apple Mail (2.3608.120.23.2.4)
-Authentication-Results-Original: arm.com; dkim=none (message not signed)
- header.d=none;arm.com; dmarc=none action=none header.from=arm.com;
-x-originating-ip: [82.9.225.195]
-x-ms-publictraffictype: Email
-X-MS-Office365-Filtering-HT: Tenant
-X-MS-Office365-Filtering-Correlation-Id: 86fa029b-8b8a-4a55-74cb-08d88a360c6f
-x-ms-traffictypediagnostic: DBBPR08MB4678:|AM6PR08MB5256:
-x-ms-exchange-transport-forked: True
-X-Microsoft-Antispam-PRVS:
-	<AM6PR08MB52560A93F74A073434C53EC49DE30@AM6PR08MB5256.eurprd08.prod.outlook.com>
-x-checkrecipientrouted: true
-nodisclaimer: true
-x-ms-oob-tlc-oobclassifiers: OLM:8882;OLM:8882;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam-Untrusted: BCL:0;
-X-Microsoft-Antispam-Message-Info-Original:
- l68d7Z4avy9GYpgMhD3h3wfEAejkzuVsuIsCJijf0h+gfsFP0ir0r7whbafJRBXaw6bH+kfWPlpjmDq/k82cbfIh3FPzL3kJfg444pA15CEipwS/NQMaltUURtBdrWmQXLt3kyOfB0rki9gz+D0OFZosvAg3iyFwbxo+eSZbwZ8bOvX13QTn6OV1bWWNWtY15S2b03JA4B2z5A3uPIPV+HG3vYsA74M5xph9G6flXxCbxEAay7VCBiG2nubnSnu05TP0GbBdRk4R+ikNF+EpoNPA/2AgPED6OiukyhWVMDL0PCPtnU1JnT/a4p1VPPS57dm6GvvB0W8Q4xLwn+dquQ==
-X-Forefront-Antispam-Report-Untrusted:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB7PR08MB3689.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(346002)(366004)(39860400002)(376002)(136003)(5660300002)(6862004)(2616005)(8676002)(4326008)(6636002)(53546011)(6506007)(86362001)(8936002)(186003)(26005)(316002)(76116006)(91956017)(19627235002)(66476007)(66946007)(6512007)(33656002)(6486002)(83380400001)(71200400001)(2906002)(36756003)(54906003)(66556008)(478600001)(37006003)(64756008)(66446008);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata:
- m46/oon/5mnGChTBT2ROMoOznG0E3rQAPW0NdlA7001oyhCBWsL9yiSus1WsgRK1Mbs0F6vrXRprFWSAQMyet8J3AlO4A5kwQjCoPRVn6L6q+iHF94QjtAGR40/VcwBmlNPmCPLoc0pIxY9WdQgAzb4Qr1pte+2fNiAQuStX6UO0JuhGvXvPc2MCyB8d60HTBKjaTpzZ9Qbsn93ueMLR5SVP6NoJ/zzNQ4eym91MWubUf9JYLVCOWjnb74Le1U4X27CKEQuDukkuJqzX/rhLY+lSuslcF5H8RhSX0omOGyZz+yQNDMwXbqHiZYzvXKGlBzqHd9NrzMo6XypoHCk3ah4LQI8M2ysOLcnvn08uVMbFGtZptbTUZ0oRIUAIddXhNqlo8ujWCZSdO6GsIygzigBrVvdyY5/R4KhdPxtEUmLGpDI1WIeccd3rwyNUDUYwmAOt8isEMa/Xrnx35DDEkL8zMYxBbSzd+z1Kg5rnLJfJmjHxqVl4PdfZ50k3Wg/ASRnB1njYbg9Yd0P5ErL396suaC+PD1UxiEoH5o2J9XaKyKoO1C7wV1DX2saqdu96bknyjAHmGE33XhcjCLv5i32TB3ZZPTsEi1O+dw9Iqk2MbCYAR0HOPiLBDjJm4grvur4jD9rPfo6FmLIE4LiBLg==
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <F8B36F934DFD734BABACB04BBBE948A6@eurprd08.prod.outlook.com>
-Content-Transfer-Encoding: quoted-printable
+	id f50b753e-efe4-457e-ab0f-2b298420c158;
+	Mon, 16 Nov 2020 14:58:33 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
+	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+	Content-Type:Content-ID:Content-Description;
+	bh=gB9wX8Sf5Fr0vBVAuUG0acKrf9nR5B+BsqLVZ7zKAPE=; b=hPdBqu7LASCimrqoWvJWekgiwM
+	e6sFN9M6496yHhIwQZ8SVDNPv85Fa5P7ZEcnY74J6Tt2EVaQ1HjE7fGy6Qo/q8v9uzp6sD/vtDi3k
+	x+AFEwLxBM9S/UHTZAELAThsMlf8jyW4aFqZBbR6MMz+Vsa4kuh+hdpwNonyepLm5hF/WY/im2Qsp
+	M27a3ymH344cKP7AJlnEbQ1ShVBTdT3pN0ujj3wBLxRxqpqeL17Wc9RHjP5WuygZtcYOLRkmU6YW7
+	qqsDvFjX11ndArIbuj3JsnUHh/P8r/XoLsW781HNKdSvw8XE1eNQ7Y5+/zRvydj78vPLvJktJkTdb
+	/FmNl3CA==;
+Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
+	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+	id 1kefxQ-0003jM-O4; Mon, 16 Nov 2020 14:58:17 +0000
+From: Christoph Hellwig <hch@lst.de>
+To: Jens Axboe <axboe@kernel.dk>
+Cc: Justin Sanders <justin@coraid.com>,
+	Josef Bacik <josef@toxicpanda.com>,
+	Ilya Dryomov <idryomov@gmail.com>,
+	Jack Wang <jinpu.wang@cloud.ionos.com>,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	Jason Wang <jasowang@redhat.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Stefan Hajnoczi <stefanha@redhat.com>,
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Minchan Kim <minchan@kernel.org>,
+	Mike Snitzer <snitzer@redhat.com>,
+	Song Liu <song@kernel.org>,
+	"Martin K. Petersen" <martin.petersen@oracle.com>,
+	dm-devel@redhat.com,
+	linux-block@vger.kernel.org,
+	drbd-dev@lists.linbit.com,
+	nbd@other.debian.org,
+	ceph-devel@vger.kernel.org,
+	xen-devel@lists.xenproject.org,
+	linux-raid@vger.kernel.org,
+	linux-nvme@lists.infradead.org,
+	linux-scsi@vger.kernel.org,
+	linux-fsdevel@vger.kernel.org,
+	Hannes Reinecke <hare@suse.de>,
+	Petr Vorel <pvorel@suse.cz>
+Subject: [PATCH 05/78] block: remove the update_bdev parameter to set_capacity_revalidate_and_notify
+Date: Mon, 16 Nov 2020 15:56:56 +0100
+Message-Id: <20201116145809.410558-6-hch@lst.de>
+X-Mailer: git-send-email 2.29.2
+In-Reply-To: <20201116145809.410558-1-hch@lst.de>
+References: <20201116145809.410558-1-hch@lst.de>
 MIME-Version: 1.0
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR08MB4678
-Original-Authentication-Results: arm.com; dkim=none (message not signed)
- header.d=none;arm.com; dmarc=none action=none header.from=arm.com;
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- DB5EUR03FT016.eop-EUR03.prod.protection.outlook.com
-X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	ea2a82db-3193-433d-6089-08d88a360588
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	k4Lj+lZEH+18liDM1/t/v+vkDnTBNJpLFUsG62qgVR0dkvNxHuQfDwcFO4P1CQyYdek6iNj7cQzWMWXb2/bYVWPw2T+2HOKj0kEjZlbVJ3aukWHbXwhvxJcV7dwiqo1RW8LaTQ47e85Kz55KISydhWLT9Y33ybNk6hAiu3j1Q9skP5anud3cbLqP91EhBUYcKCMvw5AOk1fttmc5qmW6Re+lYn3/rf+tbmdYxgWzOTeY9Q99TEDxJFrRK/1tpxsjYC1C9pmmFYEMXiguddX96YwXDgIqd/7+yPZuMtlTrtowigQalgh5wY/lfuYwuEnPIXRFbfQxqcw8oc/z8xkAKhUCalMeF18ypuHTWfl/ThQeRh86Au05XY9rJjwCj1JSvYrUxAryXymNI+HPSouq8w==
-X-Forefront-Antispam-Report:
-	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(4636009)(39860400002)(136003)(376002)(396003)(346002)(46966005)(5660300002)(19627235002)(26005)(186003)(2616005)(107886003)(86362001)(6862004)(4326008)(70586007)(70206006)(6506007)(2906002)(53546011)(336012)(36756003)(33656002)(6636002)(6512007)(6486002)(8676002)(54906003)(316002)(37006003)(478600001)(8936002)(83380400001)(356005)(81166007)(82310400003)(82740400003)(47076004);DIR:OUT;SFP:1101;
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Nov 2020 13:46:41.4353
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 86fa029b-8b8a-4a55-74cb-08d88a360c6f
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	DB5EUR03FT016.eop-EUR03.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM6PR08MB5256
+Content-Transfer-Encoding: 8bit
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-Hi,
+The update_bdev argument is always set to true, so remove it.  Also
+rename the function to the slighly less verbose set_capacity_and_notify,
+as propagating the disk size to the block device isn't really
+revalidation.
 
-> On 16 Nov 2020, at 12:11, Michal Orzel <Michal.Orzel@arm.com> wrote:
->=20
-> On the affected Cortex-A76/Neoverse-N1 cores (r0p0 to r3p0),
-> if a virtual address for a cacheable mapping of a location is being
-> accessed by a core while another core is remapping the virtual
-> address to a new physical page using the recommended break-before-make
-> sequence, then under very rare circumstances TLBI+DSB completes before
-> a read using the translation being invalidated has been observed by
-> other observers. The workaround repeats the TLBI+DSB operation
-> for all the TLB flush operations on purpose.
->=20
-> Signed-off-by: Michal Orzel <michal.orzel@arm.com>
+Signed-off-by: Christoph Hellwig <hch@lst.de>
+Reviewed-by: Hannes Reinecke <hare@suse.de>
+Reviewed-by: Petr Vorel <pvorel@suse.cz>
+---
+ block/genhd.c                | 13 +++++--------
+ drivers/block/loop.c         |  2 +-
+ drivers/block/virtio_blk.c   |  2 +-
+ drivers/block/xen-blkfront.c |  2 +-
+ drivers/nvme/host/core.c     |  2 +-
+ drivers/scsi/sd.c            |  5 ++---
+ include/linux/genhd.h        |  3 +--
+ 7 files changed, 12 insertions(+), 17 deletions(-)
 
-Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
-
-Cheers
-Bertrand
-
-> ---
-> docs/misc/arm/silicon-errata.txt     |  2 ++
-> xen/arch/arm/Kconfig                 | 23 +++++++++++++++++++++
-> xen/arch/arm/cpuerrata.c             | 14 +++++++++++++
-> xen/include/asm-arm/arm64/flushtlb.h | 30 +++++++++++++++++++---------
-> xen/include/asm-arm/cpufeature.h     |  3 ++-
-> 5 files changed, 62 insertions(+), 10 deletions(-)
->=20
-> diff --git a/docs/misc/arm/silicon-errata.txt b/docs/misc/arm/silicon-err=
-ata.txt
-> index 552c4151d3..d183ba543f 100644
-> --- a/docs/misc/arm/silicon-errata.txt
-> +++ b/docs/misc/arm/silicon-errata.txt
-> @@ -53,5 +53,7 @@ stable hypervisors.
-> | ARM            | Cortex-A72      | #853709         | N/A               =
-      |
-> | ARM            | Cortex-A73      | #858921         | ARM_ERRATUM_858921=
-      |
-> | ARM            | Cortex-A76      | #1165522        | N/A               =
-      |
-> +| ARM            | Cortex-A76      | #1286807        | ARM64_ERRATUM_128=
-6807   |
-> | ARM            | Neoverse-N1     | #1165522        | N/A
-> +| ARM            | Neoverse-N1     | #1286807        | ARM64_ERRATUM_128=
-6807   |
-> | ARM            | MMU-500         | #842869         | N/A               =
-      |
-> diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
-> index f938dd21bd..8171b8d04a 100644
-> --- a/xen/arch/arm/Kconfig
-> +++ b/xen/arch/arm/Kconfig
-> @@ -244,6 +244,29 @@ config ARM_ERRATUM_858921
->=20
-> 	  If unsure, say Y.
->=20
-> +config ARM64_WORKAROUND_REPEAT_TLBI
-> +	bool
-> +
-> +config ARM64_ERRATUM_1286807
-> +	bool "Cortex-A76/Neoverse-N1: 1286807: Modification of the translation =
-table for a virtual address might lead to read-after-read ordering violatio=
-n"
-> +	default y
-> +	select ARM64_WORKAROUND_REPEAT_TLBI
-> +	depends on ARM_64
-> +	help
-> +	  This option adds a workaround for ARM Cortex-A76/Neoverse-N1 erratum =
-1286807.
-> +
-> +	  On the affected Cortex-A76/Neoverse-N1 cores (r0p0 to r3p0), if a vir=
-tual
-> +	  address for a cacheable mapping of a location is being
-> +	  accessed by a core while another core is remapping the virtual
-> +	  address to a new physical page using the recommended
-> +	  break-before-make sequence, then under very rare circumstances
-> +	  TLBI+DSB completes before a read using the translation being
-> +	  invalidated has been observed by other observers. The
-> +	  workaround repeats the TLBI+DSB operation for all the TLB flush
-> +	  operations on purpose.
-> +
-> +	  If unsure, say Y.
-> +
-> endmenu
->=20
-> config ARM64_HARDEN_BRANCH_PREDICTOR
-> diff --git a/xen/arch/arm/cpuerrata.c b/xen/arch/arm/cpuerrata.c
-> index 567911d380..cb4795beec 100644
-> --- a/xen/arch/arm/cpuerrata.c
-> +++ b/xen/arch/arm/cpuerrata.c
-> @@ -424,6 +424,20 @@ static const struct arm_cpu_capabilities arm_errata[=
-] =3D {
->                    (1 << MIDR_VARIANT_SHIFT) | 2),
->     },
-> #endif
-> +#ifdef CONFIG_ARM64_ERRATUM_1286807
-> +    {
-> +        /* Cortex-A76 r0p0 - r3p0 */
-> +        .desc =3D "ARM erratum 1286807",
-> +        .capability =3D ARM64_WORKAROUND_REPEAT_TLBI,
-> +        MIDR_RANGE(MIDR_CORTEX_A76, 0, 3 << MIDR_VARIANT_SHIFT),
-> +    },
-> +    {
-> +        /* Neoverse-N1 r0p0 - r3p0 */
-> +        .desc =3D "ARM erratum 1286807",
-> +        .capability =3D ARM64_WORKAROUND_REPEAT_TLBI,
-> +        MIDR_RANGE(MIDR_NEOVERSE_N1, 0, 3 << MIDR_VARIANT_SHIFT),
-> +    },
-> +#endif
-> #ifdef CONFIG_ARM64_HARDEN_BRANCH_PREDICTOR
->     {
->         .capability =3D ARM_HARDEN_BRANCH_PREDICTOR,
-> diff --git a/xen/include/asm-arm/arm64/flushtlb.h b/xen/include/asm-arm/a=
-rm64/flushtlb.h
-> index ceec59542e..8f2abfaf1d 100644
-> --- a/xen/include/asm-arm/arm64/flushtlb.h
-> +++ b/xen/include/asm-arm/arm64/flushtlb.h
-> @@ -9,6 +9,12 @@
->  * DSB ISH          // Ensure the TLB invalidation has completed
->  * ISB              // See explanation below
->  *
-> + * ARM64_WORKAROUND_REPEAT_TLBI:
-> + * Modification of the translation table for a virtual address might lea=
-d to
-> + * read-after-read ordering violation.
-> + * The workaround repeats TLBI+DSB operation for all the TLB flush opera=
-tions
-> + * on purpose.
-> + *
->  * For Xen page-tables the ISB will discard any instructions fetched
->  * from the old mappings.
->  *
-> @@ -16,15 +22,21 @@
->  * (and therefore the TLB invalidation) before continuing. So we know
->  * the TLBs cannot contain an entry for a mapping we may have removed.
->  */
-> -#define TLB_HELPER(name, tlbop) \
-> -static inline void name(void)   \
-> -{                               \
-> -    asm volatile(               \
-> -        "dsb  ishst;"           \
-> -        "tlbi "  # tlbop  ";"   \
-> -        "dsb  ish;"             \
-> -        "isb;"                  \
-> -        : : : "memory");        \
-> +#define TLB_HELPER(name, tlbop)                  \
-> +static inline void name(void)                    \
-> +{                                                \
-> +    asm volatile(                                \
-> +        "dsb  ishst;"                            \
-> +        "tlbi "  # tlbop  ";"                    \
-> +        ALTERNATIVE(                             \
-> +            "nop; nop;",                         \
-> +            "dsb  ish;"                          \
-> +            "tlbi "  # tlbop  ";",               \
-> +            ARM64_WORKAROUND_REPEAT_TLBI,        \
-> +            CONFIG_ARM64_WORKAROUND_REPEAT_TLBI) \
-> +        "dsb  ish;"                              \
-> +        "isb;"                                   \
-> +        : : : "memory");                         \
-> }
->=20
-> /* Flush local TLBs, current VMID only. */
-> diff --git a/xen/include/asm-arm/cpufeature.h b/xen/include/asm-arm/cpufe=
-ature.h
-> index 016a9fe203..c7b5052992 100644
-> --- a/xen/include/asm-arm/cpufeature.h
-> +++ b/xen/include/asm-arm/cpufeature.h
-> @@ -46,8 +46,9 @@
-> #define ARM_SMCCC_1_1 8
-> #define ARM64_WORKAROUND_AT_SPECULATE 9
-> #define ARM_WORKAROUND_858921 10
-> +#define ARM64_WORKAROUND_REPEAT_TLBI 11
->=20
-> -#define ARM_NCAPS           11
-> +#define ARM_NCAPS           12
->=20
-> #ifndef __ASSEMBLY__
->=20
-> --=20
-> 2.28.0
->=20
+diff --git a/block/genhd.c b/block/genhd.c
+index 9387f050c248a7..8c350fecfe8bfe 100644
+--- a/block/genhd.c
++++ b/block/genhd.c
+@@ -46,17 +46,15 @@ static void disk_del_events(struct gendisk *disk);
+ static void disk_release_events(struct gendisk *disk);
+ 
+ /*
+- * Set disk capacity and notify if the size is not currently
+- * zero and will not be set to zero
++ * Set disk capacity and notify if the size is not currently zero and will not
++ * be set to zero.  Returns true if a uevent was sent, otherwise false.
+  */
+-bool set_capacity_revalidate_and_notify(struct gendisk *disk, sector_t size,
+-					bool update_bdev)
++bool set_capacity_and_notify(struct gendisk *disk, sector_t size)
+ {
+ 	sector_t capacity = get_capacity(disk);
+ 
+ 	set_capacity(disk, size);
+-	if (update_bdev)
+-		revalidate_disk_size(disk, true);
++	revalidate_disk_size(disk, true);
+ 
+ 	if (capacity != size && capacity != 0 && size != 0) {
+ 		char *envp[] = { "RESIZE=1", NULL };
+@@ -67,8 +65,7 @@ bool set_capacity_revalidate_and_notify(struct gendisk *disk, sector_t size,
+ 
+ 	return false;
+ }
+-
+-EXPORT_SYMBOL_GPL(set_capacity_revalidate_and_notify);
++EXPORT_SYMBOL_GPL(set_capacity_and_notify);
+ 
+ /*
+  * Format the device name of the indicated disk into the supplied buffer and
+diff --git a/drivers/block/loop.c b/drivers/block/loop.c
+index 0a0c0c3a68ec4c..84a36c242e5550 100644
+--- a/drivers/block/loop.c
++++ b/drivers/block/loop.c
+@@ -251,7 +251,7 @@ loop_validate_block_size(unsigned short bsize)
+  */
+ static void loop_set_size(struct loop_device *lo, loff_t size)
+ {
+-	if (!set_capacity_revalidate_and_notify(lo->lo_disk, size, true))
++	if (!set_capacity_and_notify(lo->lo_disk, size))
+ 		kobject_uevent(&disk_to_dev(lo->lo_disk)->kobj, KOBJ_CHANGE);
+ }
+ 
+diff --git a/drivers/block/virtio_blk.c b/drivers/block/virtio_blk.c
+index a314b9382442b6..3e812b4c32e669 100644
+--- a/drivers/block/virtio_blk.c
++++ b/drivers/block/virtio_blk.c
+@@ -470,7 +470,7 @@ static void virtblk_update_capacity(struct virtio_blk *vblk, bool resize)
+ 		   cap_str_10,
+ 		   cap_str_2);
+ 
+-	set_capacity_revalidate_and_notify(vblk->disk, capacity, true);
++	set_capacity_and_notify(vblk->disk, capacity);
+ }
+ 
+ static void virtblk_config_changed_work(struct work_struct *work)
+diff --git a/drivers/block/xen-blkfront.c b/drivers/block/xen-blkfront.c
+index 48629d3433b4c3..79521e33d30ed5 100644
+--- a/drivers/block/xen-blkfront.c
++++ b/drivers/block/xen-blkfront.c
+@@ -2370,7 +2370,7 @@ static void blkfront_connect(struct blkfront_info *info)
+ 			return;
+ 		printk(KERN_INFO "Setting capacity to %Lu\n",
+ 		       sectors);
+-		set_capacity_revalidate_and_notify(info->gd, sectors, true);
++		set_capacity_and_notify(info->gd, sectors);
+ 
+ 		return;
+ 	case BLKIF_STATE_SUSPENDED:
+diff --git a/drivers/nvme/host/core.c b/drivers/nvme/host/core.c
+index f6c6479da0e9ec..6c144e748f8cae 100644
+--- a/drivers/nvme/host/core.c
++++ b/drivers/nvme/host/core.c
+@@ -2053,7 +2053,7 @@ static void nvme_update_disk_info(struct gendisk *disk,
+ 			capacity = 0;
+ 	}
+ 
+-	set_capacity_revalidate_and_notify(disk, capacity, true);
++	set_capacity_and_notify(disk, capacity);
+ 
+ 	nvme_config_discard(disk, ns);
+ 	nvme_config_write_zeroes(disk, ns);
+diff --git a/drivers/scsi/sd.c b/drivers/scsi/sd.c
+index 4a34dd5b153196..a2a4f385833d6c 100644
+--- a/drivers/scsi/sd.c
++++ b/drivers/scsi/sd.c
+@@ -3263,8 +3263,7 @@ static int sd_revalidate_disk(struct gendisk *disk)
+ 
+ 	sdkp->first_scan = 0;
+ 
+-	set_capacity_revalidate_and_notify(disk,
+-		logical_to_sectors(sdp, sdkp->capacity), true);
++	set_capacity_and_notify(disk, logical_to_sectors(sdp, sdkp->capacity));
+ 	sd_config_write_same(sdkp);
+ 	kfree(buffer);
+ 
+@@ -3274,7 +3273,7 @@ static int sd_revalidate_disk(struct gendisk *disk)
+ 	 * capacity to 0.
+ 	 */
+ 	if (sd_zbc_revalidate_zones(sdkp))
+-		set_capacity_revalidate_and_notify(disk, 0, true);
++		set_capacity_and_notify(disk, 0);
+ 
+  out:
+ 	return 0;
+diff --git a/include/linux/genhd.h b/include/linux/genhd.h
+index 03da3f603d309c..4b22bfd9336e1a 100644
+--- a/include/linux/genhd.h
++++ b/include/linux/genhd.h
+@@ -315,8 +315,7 @@ static inline int get_disk_ro(struct gendisk *disk)
+ extern void disk_block_events(struct gendisk *disk);
+ extern void disk_unblock_events(struct gendisk *disk);
+ extern void disk_flush_events(struct gendisk *disk, unsigned int mask);
+-bool set_capacity_revalidate_and_notify(struct gendisk *disk, sector_t size,
+-		bool update_bdev);
++bool set_capacity_and_notify(struct gendisk *disk, sector_t size);
+ 
+ /* drivers/char/random.c */
+ extern void add_disk_randomness(struct gendisk *disk) __latent_entropy;
+-- 
+2.29.2
 
 
