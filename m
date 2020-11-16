@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 95CA1C4742C
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:12:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1326EC4742C
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:12:05 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3499620888
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:12:01 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 9FCF4216C4
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:12:04 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="nsafq+rG"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3499620888
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="VdELZpYq"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9FCF4216C4
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.28279.57384 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.28281.57396 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kegAU-0006z3-JA; Mon, 16 Nov 2020 15:11:46 +0000
+	id 1kegAX-00077e-Gd; Mon, 16 Nov 2020 15:11:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 28279.57384; Mon, 16 Nov 2020 15:11:46 +0000
+Received: by outflank-mailman (output) from mailman id 28281.57396; Mon, 16 Nov 2020 15:11:49 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kegAT-0006wr-25; Mon, 16 Nov 2020 15:11:45 +0000
-Received: by outflank-mailman (input) for mailman id 28279;
- Mon, 16 Nov 2020 15:11:40 +0000
+	id 1kegAV-000754-SO; Mon, 16 Nov 2020 15:11:47 +0000
+Received: by outflank-mailman (input) for mailman id 28281;
+ Mon, 16 Nov 2020 15:11:41 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1keg1S-0006ni-6r
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:02:26 +0000
+ id 1keg4M-0006ni-Dp
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:05:26 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 5e1cd4b6-f80e-4819-83f6-cebff75a7493;
- Mon, 16 Nov 2020 14:59:25 +0000 (UTC)
+ id ac949361-6422-4038-958e-2c49273c779e;
+ Mon, 16 Nov 2020 15:00:12 +0000 (UTC)
 Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kefyK-0003zL-Gc; Mon, 16 Nov 2020 14:59:12 +0000
+ id 1kefyy-0004HD-T0; Mon, 16 Nov 2020 14:59:53 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1keg1S-0006ni-6r
-	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:02:26 +0000
-X-Inumbo-ID: 5e1cd4b6-f80e-4819-83f6-cebff75a7493
+	id 1keg4M-0006ni-Dp
+	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:05:26 +0000
+X-Inumbo-ID: ac949361-6422-4038-958e-2c49273c779e
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 5e1cd4b6-f80e-4819-83f6-cebff75a7493;
-	Mon, 16 Nov 2020 14:59:25 +0000 (UTC)
+	id ac949361-6422-4038-958e-2c49273c779e;
+	Mon, 16 Nov 2020 15:00:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=PZFkyvf1145z+UDf1b5Hj+jOh1AFkHrQzn1ghiqKhDM=; b=nsafq+rGm1Rv8PLkOskpq2E1WT
-	GblaGkEbRxaXt7tMa8lsB0T/f5O44rOftO550QMTTXAsaN06O33HbZWw8qR8BuIC5LY1K1bDXw7h0
-	fXI0JFhYf8Q4CM2W+FyYMvt6rxUABlRFuwShsT5ZmrGbHYU704qrV+elTl5Y7tXYggWdyVa22D/65
-	XFEMEvNDmXdMEgGAPYiI8eQrdp7u2i1IGbuQVMZNL0XJlhyMGFQuZahfLnp3Jg/O7cmqHPhKanuYM
-	OxeKkCkWcJqNNHH4YMUIOwRSUBMRc+b1rwJCOum2gr3Iswu9BqnghgCeZoZpkFA0tR3BGhjo23NTg
-	G+sn0B+g==;
+	bh=MRrZvPHBJ7MmOJqwCwh6BOwzTdjIUug0RFrQfdUF4D0=; b=VdELZpYq+wC9PRGd7E7gW7f022
+	iWbf/yBwlwECTqIWeSXdM3vxnd7C5rUPQt4zYgr4w4y5VS7aEw4XAXZZL1+gLjTfVzbErgItFolKx
+	NoEr+DW9LtrWG9rcze2kkbyopscePeN91WRL96HJxHAuEnkYQzapbI9qst3MaFX6akHBdBUBm7/eb
+	Ud1nBnozpN0bnLBzUbAJlQGLF7WvSR9ySOqhWBvr5OEnKwbk0b1hc36z3Q1K2nfJ5d/hpkLfSI8aB
+	GuaLrCyXWDM01VUM6hy+z+KyIliSIUOnGWO2OtY/JMGDpZLn+Yks0DpKHFYl+4qlADIgIFPwiG6NQ
+	nFJMH8wg==;
 Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1kefyK-0003zL-Gc; Mon, 16 Nov 2020 14:59:12 +0000
+	id 1kefyy-0004HD-T0; Mon, 16 Nov 2020 14:59:53 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -101,11 +101,10 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-raid@vger.kernel.org,
 	linux-nvme@lists.infradead.org,
 	linux-scsi@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org,
-	Hannes Reinecke <hare@suse.de>
-Subject: [PATCH 44/78] loop: use __register_blkdev to allocate devices on demand
-Date: Mon, 16 Nov 2020 15:57:35 +0100
-Message-Id: <20201116145809.410558-45-hch@lst.de>
+	linux-fsdevel@vger.kernel.org
+Subject: [PATCH 71/78] block: add a bdev_kobj helper
+Date: Mon, 16 Nov 2020 15:58:02 +0100
+Message-Id: <20201116145809.410558-72-hch@lst.de>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20201116145809.410558-1-hch@lst.de>
 References: <20201116145809.410558-1-hch@lst.de>
@@ -113,84 +112,118 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-Use the simpler mechanism attached to major_name to allocate a brd device
-when a currently unregistered minor is accessed.
+Add a little helper to find the kobject for a struct block_device.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
-Reviewed-by: Hannes Reinecke <hare@suse.de>
 ---
- drivers/block/loop.c | 30 ++++++++----------------------
- 1 file changed, 8 insertions(+), 22 deletions(-)
+ drivers/md/bcache/super.c |  7 ++-----
+ drivers/md/md.c           |  4 +---
+ fs/btrfs/sysfs.c          | 15 +++------------
+ include/linux/blk_types.h |  3 +++
+ 4 files changed, 9 insertions(+), 20 deletions(-)
 
-diff --git a/drivers/block/loop.c b/drivers/block/loop.c
-index 41caf799df721f..9a27d4f1c08aac 100644
---- a/drivers/block/loop.c
-+++ b/drivers/block/loop.c
-@@ -2231,24 +2231,18 @@ static int loop_lookup(struct loop_device **l, int i)
- 	return ret;
- }
+diff --git a/drivers/md/bcache/super.c b/drivers/md/bcache/super.c
+index ea2b80c3e44c38..f6edacc81527c7 100644
+--- a/drivers/md/bcache/super.c
++++ b/drivers/md/bcache/super.c
+@@ -1447,8 +1447,7 @@ static int register_bdev(struct cache_sb *sb, struct cache_sb_disk *sb_disk,
+ 		goto err;
  
--static struct kobject *loop_probe(dev_t dev, int *part, void *data)
-+static void loop_probe(dev_t dev)
- {
-+	int idx = MINOR(dev) >> part_shift;
- 	struct loop_device *lo;
--	struct kobject *kobj;
--	int err;
-+
-+	if (max_loop && idx >= max_loop)
-+		return;
- 
- 	mutex_lock(&loop_ctl_mutex);
--	err = loop_lookup(&lo, MINOR(dev) >> part_shift);
--	if (err < 0)
--		err = loop_add(&lo, MINOR(dev) >> part_shift);
--	if (err < 0)
--		kobj = NULL;
--	else
--		kobj = get_disk_and_module(lo->lo_disk);
-+	if (loop_lookup(&lo, idx) < 0)
-+		loop_add(&lo, idx);
- 	mutex_unlock(&loop_ctl_mutex);
--
--	*part = 0;
--	return kobj;
- }
- 
- static long loop_control_ioctl(struct file *file, unsigned int cmd,
-@@ -2368,14 +2362,11 @@ static int __init loop_init(void)
- 		goto err_out;
- 
- 
--	if (register_blkdev(LOOP_MAJOR, "loop")) {
-+	if (__register_blkdev(LOOP_MAJOR, "loop", loop_probe)) {
- 		err = -EIO;
- 		goto misc_out;
+ 	err = "error creating kobject";
+-	if (kobject_add(&dc->disk.kobj, &part_to_dev(bdev->bd_part)->kobj,
+-			"bcache"))
++	if (kobject_add(&dc->disk.kobj, bdev_kobj(bdev), "bcache"))
+ 		goto err;
+ 	if (bch_cache_accounting_add_kobjs(&dc->accounting, &dc->disk.kobj))
+ 		goto err;
+@@ -2342,9 +2341,7 @@ static int register_cache(struct cache_sb *sb, struct cache_sb_disk *sb_disk,
+ 		goto err;
  	}
  
--	blk_register_region(MKDEV(LOOP_MAJOR, 0), range,
--				  THIS_MODULE, loop_probe, NULL, NULL);
--
- 	/* pre-create number of devices given by config or max_loop */
- 	mutex_lock(&loop_ctl_mutex);
- 	for (i = 0; i < nr; i++)
-@@ -2401,16 +2392,11 @@ static int loop_exit_cb(int id, void *ptr, void *data)
- 
- static void __exit loop_exit(void)
+-	if (kobject_add(&ca->kobj,
+-			&part_to_dev(bdev->bd_part)->kobj,
+-			"bcache")) {
++	if (kobject_add(&ca->kobj, bdev_kobj(bdev), "bcache")) {
+ 		err = "error calling kobject_add";
+ 		ret = -ENOMEM;
+ 		goto out;
+diff --git a/drivers/md/md.c b/drivers/md/md.c
+index b2edf5e0f965b5..7ce6047c856ea2 100644
+--- a/drivers/md/md.c
++++ b/drivers/md/md.c
+@@ -2414,7 +2414,6 @@ EXPORT_SYMBOL(md_integrity_add_rdev);
+ static int bind_rdev_to_array(struct md_rdev *rdev, struct mddev *mddev)
  {
--	unsigned long range;
+ 	char b[BDEVNAME_SIZE];
+-	struct kobject *ko;
+ 	int err;
+ 
+ 	/* prevent duplicates */
+@@ -2477,9 +2476,8 @@ static int bind_rdev_to_array(struct md_rdev *rdev, struct mddev *mddev)
+ 	if ((err = kobject_add(&rdev->kobj, &mddev->kobj, "dev-%s", b)))
+ 		goto fail;
+ 
+-	ko = &part_to_dev(rdev->bdev->bd_part)->kobj;
+ 	/* failure here is OK */
+-	err = sysfs_create_link(&rdev->kobj, ko, "block");
++	err = sysfs_create_link(&rdev->kobj, bdev_kobj(rdev->bdev), "block");
+ 	rdev->sysfs_state = sysfs_get_dirent_safe(rdev->kobj.sd, "state");
+ 	rdev->sysfs_unack_badblocks =
+ 		sysfs_get_dirent_safe(rdev->kobj.sd, "unacknowledged_bad_blocks");
+diff --git a/fs/btrfs/sysfs.c b/fs/btrfs/sysfs.c
+index 279d9262b676d4..24b6c6dc69000a 100644
+--- a/fs/btrfs/sysfs.c
++++ b/fs/btrfs/sysfs.c
+@@ -1232,8 +1232,6 @@ int btrfs_sysfs_add_space_info_type(struct btrfs_fs_info *fs_info,
+ 
+ void btrfs_sysfs_remove_device(struct btrfs_device *device)
+ {
+-	struct hd_struct *disk;
+-	struct kobject *disk_kobj;
+ 	struct kobject *devices_kobj;
+ 
+ 	/*
+@@ -1243,11 +1241,8 @@ void btrfs_sysfs_remove_device(struct btrfs_device *device)
+ 	devices_kobj = device->fs_info->fs_devices->devices_kobj;
+ 	ASSERT(devices_kobj);
+ 
+-	if (device->bdev) {
+-		disk = device->bdev->bd_part;
+-		disk_kobj = &part_to_dev(disk)->kobj;
+-		sysfs_remove_link(devices_kobj, disk_kobj->name);
+-	}
++	if (device->bdev)
++		sysfs_remove_link(devices_kobj, bdev_kobj(device->bdev)->name);
+ 
+ 	if (device->devid_kobj.state_initialized) {
+ 		kobject_del(&device->devid_kobj);
+@@ -1353,11 +1348,7 @@ int btrfs_sysfs_add_device(struct btrfs_device *device)
+ 	nofs_flag = memalloc_nofs_save();
+ 
+ 	if (device->bdev) {
+-		struct hd_struct *disk;
+-		struct kobject *disk_kobj;
 -
--	range = max_loop ? max_loop << part_shift : 1UL << MINORBITS;
--
- 	mutex_lock(&loop_ctl_mutex);
+-		disk = device->bdev->bd_part;
+-		disk_kobj = &part_to_dev(disk)->kobj;
++		struct kobject *disk_kobj = bdev_kobj(device->bdev);
  
- 	idr_for_each(&loop_index_idr, &loop_exit_cb, NULL);
- 	idr_destroy(&loop_index_idr);
+ 		ret = sysfs_create_link(devices_kobj, disk_kobj, disk_kobj->name);
+ 		if (ret) {
+diff --git a/include/linux/blk_types.h b/include/linux/blk_types.h
+index 0735e335ca6c0a..5a5ccacb804cdb 100644
+--- a/include/linux/blk_types.h
++++ b/include/linux/blk_types.h
+@@ -49,6 +49,9 @@ struct block_device {
+ #define bdev_whole(_bdev) \
+ 	((_bdev)->bd_disk->part0.bdev)
  
--	blk_unregister_region(MKDEV(LOOP_MAJOR, 0), range);
- 	unregister_blkdev(LOOP_MAJOR, "loop");
- 
- 	misc_deregister(&loop_misc);
++#define bdev_kobj(_bdev) \
++	(&part_to_dev((_bdev)->bd_part)->kobj)
++
+ /*
+  * Block error status values.  See block/blk-core:blk_errors for the details.
+  * Alpha cannot write a byte atomically, so we need to use 32-bit value.
 -- 
 2.29.2
 
