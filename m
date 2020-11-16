@@ -5,25 +5,25 @@ X-Spam-Level:
 X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 93600C5519F
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:11:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3726AC4742C
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:11:50 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3D0E1206B7
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:11:48 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id D5CBE204FD
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:11:49 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="tNKy0A5I"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3D0E1206B7
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="HGd154cw"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D5CBE204FD
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.28255.57309 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.28265.57332 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kegAF-0006Ed-HJ; Mon, 16 Nov 2020 15:11:31 +0000
+	id 1kegAK-0006Tt-5r; Mon, 16 Nov 2020 15:11:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 28255.57309; Mon, 16 Nov 2020 15:11:31 +0000
+Received: by outflank-mailman (output) from mailman id 28265.57332; Mon, 16 Nov 2020 15:11:35 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kegAE-0006DF-7i; Mon, 16 Nov 2020 15:11:30 +0000
-Received: by outflank-mailman (input) for mailman id 28255;
- Mon, 16 Nov 2020 15:11:27 +0000
+	id 1kegAJ-0006SU-3l; Mon, 16 Nov 2020 15:11:35 +0000
+Received: by outflank-mailman (input) for mailman id 28265;
+ Mon, 16 Nov 2020 15:11:32 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1keg0t-0006ni-5U
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:01:51 +0000
+ id 1keg2k-0006ni-A5
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:03:46 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 0f8cc8eb-c40a-4454-bd97-0c2eaf0f39fc;
- Mon, 16 Nov 2020 14:59:18 +0000 (UTC)
+ id 459d0bda-70dc-42b9-a574-2252f9222f57;
+ Mon, 16 Nov 2020 14:59:44 +0000 (UTC)
 Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kefyB-0003xB-Ni; Mon, 16 Nov 2020 14:59:04 +0000
+ id 1kefyb-00046E-Q3; Mon, 16 Nov 2020 14:59:30 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1keg0t-0006ni-5U
-	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:01:51 +0000
-X-Inumbo-ID: 0f8cc8eb-c40a-4454-bd97-0c2eaf0f39fc
+	id 1keg2k-0006ni-A5
+	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:03:46 +0000
+X-Inumbo-ID: 459d0bda-70dc-42b9-a574-2252f9222f57
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 0f8cc8eb-c40a-4454-bd97-0c2eaf0f39fc;
-	Mon, 16 Nov 2020 14:59:18 +0000 (UTC)
+	id 459d0bda-70dc-42b9-a574-2252f9222f57;
+	Mon, 16 Nov 2020 14:59:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=j9YzX4Imfj42oekp8Tth+LQoKAxJAOk+J48Ms5WWyRs=; b=tNKy0A5I0JGyRwszKo8CS5i8OD
-	+8V953YfFx3Xman6sQ8F42cjnDZ+fEMnGq+5JSKyBoWRq84B0ROGouApW++jZ44y6feigXqLuqKsR
-	cxqh2lFOkiVIegiphp90kij1qmc1NDslqQZNsGbC21VOg69MDd/n08QOAs5NDSIePC2uZIeQod82Z
-	T6wB+Z9xXg1/0NZKtWCv5t7lkIbvOb2buar5vD5Qry8bhovOugY2M7SSd4S16Dl+mklfVYWbkqbny
-	8IY3ZaEc9JVI0kFlBfL2Zv+6ubgx5Kd03xor/wsERRQOPm0Gj4ArtdUOT7w0cJYRw8cIK/bIaVXYw
-	0ktG/eKQ==;
+	bh=W6vAbrHw5UIe+hBqHSxB53buLdYkSelEr9Mgh5kMt7I=; b=HGd154cweczfVFFJ33I+2Ap0qE
+	vAINs3yHEiIwNtbvzYgE/WXzWWOHi4hc8oMlG0QlPnvuCq9d5vtI3j5c7tLlDgCpluHDQGkOMLH35
+	WhaogjDXSkuKzRYt6GHIOzX4hyBICirNPP8WpvRSgupaFYTXu4b5Xk6AUTDiPf3+ItYmACJeiM6LJ
+	YMVtATQDBg4A47fCUNe/awUmsyyfVPgKgi53SFmu9OHsk+c41UDve1Y9S8vUN34EuaJyVFEjXpH1A
+	ljV+4g8sWW0+9ykM+WSjgXqlDX0dW2sdD4zJ/CFNxKQ+EUlLDbbDS0aDOeZpxQ46Grgh3LbO4Tr17
+	vOl39Yaw==;
 Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1kefyB-0003xB-Ni; Mon, 16 Nov 2020 14:59:04 +0000
+	id 1kefyb-00046E-Q3; Mon, 16 Nov 2020 14:59:30 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -101,11 +101,10 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-raid@vger.kernel.org,
 	linux-nvme@lists.infradead.org,
 	linux-scsi@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org,
-	Hannes Reinecke <hare@suse.de>
-Subject: [PATCH 38/78] block: rework requesting modules for unclaimed devices
-Date: Mon, 16 Nov 2020 15:57:29 +0100
-Message-Id: <20201116145809.410558-39-hch@lst.de>
+	linux-fsdevel@vger.kernel.org
+Subject: [PATCH 56/78] init: refactor name_to_dev_t
+Date: Mon, 16 Nov 2020 15:57:47 +0100
+Message-Id: <20201116145809.410558-57-hch@lst.de>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20201116145809.410558-1-hch@lst.de>
 References: <20201116145809.410558-1-hch@lst.de>
@@ -113,73 +112,250 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-Instead of reusing the ranges in bdev_map, add a new helper that is
-called if no ranges was found.  This is a first step to unpeel and
-eventually remove the complex ranges structure.
+Split each case into a self-contained helper.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
-Reviewed-by: Hannes Reinecke <hare@suse.de>
 ---
- block/genhd.c | 25 +++++++++++++++----------
- 1 file changed, 15 insertions(+), 10 deletions(-)
+ include/linux/genhd.h |   7 +-
+ init/do_mounts.c      | 183 +++++++++++++++++++++---------------------
+ 2 files changed, 91 insertions(+), 99 deletions(-)
 
-diff --git a/block/genhd.c b/block/genhd.c
-index 2a20372756625e..8391e7d83a6920 100644
---- a/block/genhd.c
-+++ b/block/genhd.c
-@@ -1028,6 +1028,13 @@ static ssize_t disk_badblocks_store(struct device *dev,
- 	return badblocks_store(disk->bb, page, len, 0);
+diff --git a/include/linux/genhd.h b/include/linux/genhd.h
+index 22f5b9fd96f8bf..ca5e356084c353 100644
+--- a/include/linux/genhd.h
++++ b/include/linux/genhd.h
+@@ -388,18 +388,13 @@ static inline void bd_unlink_disk_holder(struct block_device *bdev,
+ }
+ #endif /* CONFIG_SYSFS */
+ 
++dev_t blk_lookup_devt(const char *name, int partno);
+ #ifdef CONFIG_BLOCK
+ void printk_all_partitions(void);
+-dev_t blk_lookup_devt(const char *name, int partno);
+ #else /* CONFIG_BLOCK */
+ static inline void printk_all_partitions(void)
+ {
+ }
+-static inline dev_t blk_lookup_devt(const char *name, int partno)
+-{
+-	dev_t devt = MKDEV(0, 0);
+-	return devt;
+-}
+ #endif /* CONFIG_BLOCK */
+ 
+ #endif /* _LINUX_GENHD_H */
+diff --git a/init/do_mounts.c b/init/do_mounts.c
+index b5f9604d0c98a2..aef2f24461c7f1 100644
+--- a/init/do_mounts.c
++++ b/init/do_mounts.c
+@@ -90,7 +90,6 @@ static int match_dev_by_uuid(struct device *dev, const void *data)
+ 	return 0;
  }
  
-+static void request_gendisk_module(dev_t devt)
+-
+ /**
+  * devt_from_partuuid - looks up the dev_t of a partition by its UUID
+  * @uuid_str:	char array containing ascii UUID
+@@ -186,7 +185,83 @@ static int match_dev_by_label(struct device *dev, const void *data)
+ 
+ 	return 0;
+ }
+-#endif
++
++static dev_t devt_from_partlabel(const char *label)
 +{
-+	if (request_module("block-major-%d-%d", MAJOR(devt), MINOR(devt)) > 0)
-+		/* Make old-style 2.4 aliases work */
-+		request_module("block-major-%d", MAJOR(devt));
++	struct device *dev;
++	dev_t devt = 0;
++
++	dev = class_find_device(&block_class, NULL, label, &match_dev_by_label);
++	if (dev) {
++		devt = dev->devt;
++		put_device(dev);
++	}
++
++	return devt;
 +}
 +
- static struct gendisk *lookup_gendisk(dev_t dev, int *partno)
++static dev_t devt_from_devname(const char *name)
++{
++	dev_t devt = 0;
++	int part;
++	char s[32];
++	char *p;
++
++	if (strlen(name) > 31)
++		return 0;
++	strcpy(s, name);
++	for (p = s; *p; p++) {
++		if (*p == '/')
++			*p = '!';
++	}
++
++	devt = blk_lookup_devt(s, 0);
++	if (devt)
++		return devt;
++
++	/*
++	 * Try non-existent, but valid partition, which may only exist after
++	 * opening the device, like partitioned md devices.
++	 */
++	while (p > s && isdigit(p[-1]))
++		p--;
++	if (p == s || !*p || *p == '0')
++		return 0;
++
++	/* try disk name without <part number> */
++	part = simple_strtoul(p, NULL, 10);
++	*p = '\0';
++	devt = blk_lookup_devt(s, part);
++	if (devt)
++		return devt;
++
++	/* try disk name without p<part number> */
++	if (p < s + 2 || !isdigit(p[-2]) || p[-1] != 'p')
++		return 0;
++	p[-1] = '\0';
++	return blk_lookup_devt(s, part);
++}
++#endif /* CONFIG_BLOCK */
++
++static dev_t devt_from_devnum(const char *name)
++{
++	unsigned maj, min, offset;
++	dev_t devt = 0;
++	char *p, dummy;
++
++	if (sscanf(name, "%u:%u%c", &maj, &min, &dummy) == 2 ||
++	    sscanf(name, "%u:%u:%u:%c", &maj, &min, &offset, &dummy) == 3) {
++		devt = MKDEV(maj, min);
++		if (maj != MAJOR(devt) || min != MINOR(devt))
++			return 0;
++	} else {
++		devt = new_decode_dev(simple_strtoul(name, &p, 16));
++		if (*p)
++			return 0;
++	}
++
++	return devt;
++}
+ 
+ /*
+  *	Convert a name into device number.  We accept the following variants:
+@@ -218,101 +293,23 @@ static int match_dev_by_label(struct device *dev, const void *data)
+  *	name contains slashes, the device name has them replaced with
+  *	bangs.
+  */
+-
+ dev_t name_to_dev_t(const char *name)
  {
- 	struct kobject *kobj;
-@@ -1052,6 +1059,14 @@ static struct gendisk *lookup_gendisk(dev_t dev, int *partno)
- 		probe = p->probe;
- 		best = p->range - 1;
- 		*partno = dev - p->dev;
-+
-+		if (!probe) {
-+			mutex_unlock(&bdev_map_lock);
-+			module_put(owner);
-+			request_gendisk_module(dev);
-+			goto retry;
-+		}
-+
- 		if (p->lock && p->lock(dev, data) < 0) {
- 			module_put(owner);
- 			continue;
-@@ -1290,15 +1305,6 @@ static const struct seq_operations partitions_op = {
- };
+-	char s[32];
+-	char *p;
+-	dev_t res = 0;
+-	int part;
+-
++	if (strcmp(name, "/dev/nfs") == 0)
++		return Root_NFS;
++	if (strcmp(name, "/dev/cifs") == 0)
++		return Root_CIFS;
++	if (strcmp(name, "/dev/ram") == 0)
++		return Root_RAM0;
+ #ifdef CONFIG_BLOCK
+-	if (strncmp(name, "PARTUUID=", 9) == 0) {
+-		name += 9;
+-		res = devt_from_partuuid(name);
+-		if (!res)
+-			goto fail;
+-		goto done;
+-	} else if (strncmp(name, "PARTLABEL=", 10) == 0) {
+-		struct device *dev;
+-
+-		dev = class_find_device(&block_class, NULL, name + 10,
+-					&match_dev_by_label);
+-		if (!dev)
+-			goto fail;
+-
+-		res = dev->devt;
+-		put_device(dev);
+-		goto done;
+-	}
++	if (strncmp(name, "PARTUUID=", 9) == 0)
++		return devt_from_partuuid(name + 9);
++	if (strncmp(name, "PARTLABEL=", 10) == 0)
++		return devt_from_partlabel(name + 10);
++	if (strncmp(name, "/dev/", 5) == 0)
++		return devt_from_devname(name + 5);
  #endif
- 
 -
--static struct kobject *base_probe(dev_t devt, int *partno, void *data)
--{
--	if (request_module("block-major-%d-%d", MAJOR(devt), MINOR(devt)) > 0)
--		/* Make old-style 2.4 aliases work */
--		request_module("block-major-%d", MAJOR(devt));
--	return NULL;
--}
+-	if (strncmp(name, "/dev/", 5) != 0) {
+-		unsigned maj, min, offset;
+-		char dummy;
 -
- static void bdev_map_init(void)
- {
- 	struct bdev_map *base;
-@@ -1310,7 +1316,6 @@ static void bdev_map_init(void)
- 
- 	base->dev = 1;
- 	base->range = ~0 ;
--	base->probe = base_probe;
- 	for (i = 0; i < 255; i++)
- 		bdev_map[i] = base;
+-		if ((sscanf(name, "%u:%u%c", &maj, &min, &dummy) == 2) ||
+-		    (sscanf(name, "%u:%u:%u:%c", &maj, &min, &offset, &dummy) == 3)) {
+-			res = MKDEV(maj, min);
+-			if (maj != MAJOR(res) || min != MINOR(res))
+-				goto fail;
+-		} else {
+-			res = new_decode_dev(simple_strtoul(name, &p, 16));
+-			if (*p)
+-				goto fail;
+-		}
+-		goto done;
+-	}
+-
+-	name += 5;
+-	res = Root_NFS;
+-	if (strcmp(name, "nfs") == 0)
+-		goto done;
+-	res = Root_CIFS;
+-	if (strcmp(name, "cifs") == 0)
+-		goto done;
+-	res = Root_RAM0;
+-	if (strcmp(name, "ram") == 0)
+-		goto done;
+-
+-	if (strlen(name) > 31)
+-		goto fail;
+-	strcpy(s, name);
+-	for (p = s; *p; p++)
+-		if (*p == '/')
+-			*p = '!';
+-	res = blk_lookup_devt(s, 0);
+-	if (res)
+-		goto done;
+-
+-	/*
+-	 * try non-existent, but valid partition, which may only exist
+-	 * after revalidating the disk, like partitioned md devices
+-	 */
+-	while (p > s && isdigit(p[-1]))
+-		p--;
+-	if (p == s || !*p || *p == '0')
+-		goto fail;
+-
+-	/* try disk name without <part number> */
+-	part = simple_strtoul(p, NULL, 10);
+-	*p = '\0';
+-	res = blk_lookup_devt(s, part);
+-	if (res)
+-		goto done;
+-
+-	/* try disk name without p<part number> */
+-	if (p < s + 2 || !isdigit(p[-2]) || p[-1] != 'p')
+-		goto fail;
+-	p[-1] = '\0';
+-	res = blk_lookup_devt(s, part);
+-	if (res)
+-		goto done;
+-
+-fail:
+-	return 0;
+-done:
+-	return res;
++	return devt_from_devnum(name);
  }
+ EXPORT_SYMBOL_GPL(name_to_dev_t);
+ 
 -- 
 2.29.2
 
