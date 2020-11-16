@@ -5,25 +5,25 @@ X-Spam-Level:
 X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=unavailable autolearn_force=no version=3.4.0
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5D925C4742C
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:10:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B8609C5519F
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:10:59 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EDE6022240
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:10:57 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 520E422240
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:10:59 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="k5dNhGax"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EDE6022240
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="PyHnyUh0"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 520E422240
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.28166.57074 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.28175.57108 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1keg9Q-0003iB-JL; Mon, 16 Nov 2020 15:10:40 +0000
+	id 1keg9W-0003zo-IW; Mon, 16 Nov 2020 15:10:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 28166.57074; Mon, 16 Nov 2020 15:10:40 +0000
+Received: by outflank-mailman (output) from mailman id 28175.57108; Mon, 16 Nov 2020 15:10:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1keg9P-0003fR-6J; Mon, 16 Nov 2020 15:10:39 +0000
-Received: by outflank-mailman (input) for mailman id 28166;
- Mon, 16 Nov 2020 15:10:35 +0000
+	id 1keg9V-0003xr-6c; Mon, 16 Nov 2020 15:10:45 +0000
+Received: by outflank-mailman (input) for mailman id 28175;
+ Mon, 16 Nov 2020 15:10:42 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1keg1N-0006ni-6X
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:02:21 +0000
+ id 1kefzg-0006ni-3J
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:00:36 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 0f9b8218-1088-4ae9-9c82-2f16bee03de1;
- Mon, 16 Nov 2020 14:59:24 +0000 (UTC)
+ id 227477fb-98ae-4619-a093-4bc84c4791f1;
+ Mon, 16 Nov 2020 14:58:58 +0000 (UTC)
 Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kefyL-0003zc-NO; Mon, 16 Nov 2020 14:59:14 +0000
+ id 1kefxr-0003sC-Nh; Mon, 16 Nov 2020 14:58:44 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1keg1N-0006ni-6X
-	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:02:21 +0000
-X-Inumbo-ID: 0f9b8218-1088-4ae9-9c82-2f16bee03de1
+	id 1kefzg-0006ni-3J
+	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:00:36 +0000
+X-Inumbo-ID: 227477fb-98ae-4619-a093-4bc84c4791f1
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 0f9b8218-1088-4ae9-9c82-2f16bee03de1;
-	Mon, 16 Nov 2020 14:59:24 +0000 (UTC)
+	id 227477fb-98ae-4619-a093-4bc84c4791f1;
+	Mon, 16 Nov 2020 14:58:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=K+kkAiIfWzB4syRFt+33j5OXLPH83fZlF9ACMDZkYhg=; b=k5dNhGax8VxlBfuaj9EQBdAXgt
-	4072QYhm07kKi1w+W9nEyoMSW3ELii8kjNeM1F9XviJBMC0uEQv6MPhU9nRzHBDI1yZZmWAy9Q0N2
-	fTvPwi+VC8nhfIjC7jFXt9leIcNNiMb0XmPx9eg/JoTwye7h/y7KHjVMVYweaBNLQMktbr4A8iWEt
-	dOTjTgdEq+CLoKYrid8bVvBdmQLTGWBIgPYXUmyZ/n6rnRuKWj+UuQ5XIshtknCUOMSkMwKUNjD5w
-	dJBoojTYMzEvaH9mPATlftM3BLIRcn7GZkGadLtxoUQdZeeK4Y0pHIv111cNROAtxxvV+mZxdO2Kj
-	KOai2cDA==;
+	bh=2MZ7rG2SVw4WzYTKnpU/EThu7I42ye4vtM6air7UEg8=; b=PyHnyUh0PPkH+yqLagQ19OvvC+
+	FlSpzlSdg1OQunPTCAeDu0gQH1vPQJCoApDX7VxN6c/WOIqI0ic8Iv/M87Km2qTOlzCX+eJxIcK7t
+	9gT+KgnonlrqeWO8HGhDmNKS9d2N8KcELAEcVJYOp2xLKPiY9VrDekD0EQIUvZfvsG5kAL+aHRVDf
+	MrC5YNsHcLZkbfWU7+tWXI2XVoRl2stXpjIpNroEOB5aMcrebGwmReG2yS2Hcvy4gcX3e++R2ckwp
+	3uA1SKy8JuMioxo6fxMdKZXrCHsKzlw8Gr1OG0+awbEELu9T1276RdekSFGCRODCHQGNUgKXtUJAu
+	o8MV8THA==;
 Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1kefyL-0003zc-NO; Mon, 16 Nov 2020 14:59:14 +0000
+	id 1kefxr-0003sC-Nh; Mon, 16 Nov 2020 14:58:44 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -102,10 +102,10 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-nvme@lists.infradead.org,
 	linux-scsi@vger.kernel.org,
 	linux-fsdevel@vger.kernel.org,
-	Hannes Reinecke <hare@suse.de>
-Subject: [PATCH 45/78] md: use __register_blkdev to allocate devices on demand
-Date: Mon, 16 Nov 2020 15:57:36 +0100
-Message-Id: <20201116145809.410558-46-hch@lst.de>
+	Richard Weinberger <richard@nod.at>
+Subject: [PATCH 24/78] mtd_blkdevs: don't override BLKFLSBUF
+Date: Mon, 16 Nov 2020 15:57:15 +0100
+Message-Id: <20201116145809.410558-25-hch@lst.de>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20201116145809.410558-1-hch@lst.de>
 References: <20201116145809.410558-1-hch@lst.de>
@@ -113,77 +113,59 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-Use the simpler mechanism attached to major_name to allocate a md device
-when a currently unregistered minor is accessed.
+BLKFLSBUF is not supposed to actually send a flush command to the device,
+but to tear down buffer cache structures.  Remove the mtd_blkdevs
+implementation and just use the default semantics instead.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
-Acked-by: Song Liu <song@kernel.org>
-Reviewed-by: Hannes Reinecke <hare@suse.de>
+Acked-by: Richard Weinberger <richard@nod.at>
 ---
- drivers/md/md.c | 21 ++++++++-------------
- 1 file changed, 8 insertions(+), 13 deletions(-)
+ drivers/mtd/mtd_blkdevs.c | 28 ----------------------------
+ 1 file changed, 28 deletions(-)
 
-diff --git a/drivers/md/md.c b/drivers/md/md.c
-index fa31b71a72a35d..b2edf5e0f965b5 100644
---- a/drivers/md/md.c
-+++ b/drivers/md/md.c
-@@ -5764,11 +5764,12 @@ static int md_alloc(dev_t dev, char *name)
- 	return error;
+diff --git a/drivers/mtd/mtd_blkdevs.c b/drivers/mtd/mtd_blkdevs.c
+index 0c05f77f9b216e..fb8e12d590a13a 100644
+--- a/drivers/mtd/mtd_blkdevs.c
++++ b/drivers/mtd/mtd_blkdevs.c
+@@ -298,38 +298,10 @@ static int blktrans_getgeo(struct block_device *bdev, struct hd_geometry *geo)
+ 	return ret;
  }
  
--static struct kobject *md_probe(dev_t dev, int *part, void *data)
-+static void md_probe(dev_t dev)
- {
-+	if (MAJOR(dev) == MD_MAJOR && MINOR(dev) >= 512)
-+		return;
- 	if (create_on_open)
- 		md_alloc(dev, NULL);
--	return NULL;
- }
- 
- static int add_named_array(const char *val, const struct kernel_param *kp)
-@@ -6532,7 +6533,7 @@ static void autorun_devices(int part)
- 			break;
- 		}
- 
--		md_probe(dev, NULL, NULL);
-+		md_probe(dev);
- 		mddev = mddev_find(dev);
- 		if (!mddev || !mddev->gendisk) {
- 			if (mddev)
-@@ -9563,18 +9564,15 @@ static int __init md_init(void)
- 	if (!md_rdev_misc_wq)
- 		goto err_rdev_misc_wq;
- 
--	if ((ret = register_blkdev(MD_MAJOR, "md")) < 0)
-+	ret = __register_blkdev(MD_MAJOR, "md", md_probe);
-+	if (ret < 0)
- 		goto err_md;
- 
--	if ((ret = register_blkdev(0, "mdp")) < 0)
-+	ret = __register_blkdev(0, "mdp", md_probe);
-+	if (ret < 0)
- 		goto err_mdp;
- 	mdp_major = ret;
- 
--	blk_register_region(MKDEV(MD_MAJOR, 0), 512, THIS_MODULE,
--			    md_probe, NULL, NULL);
--	blk_register_region(MKDEV(mdp_major, 0), 1UL<<MINORBITS, THIS_MODULE,
--			    md_probe, NULL, NULL);
+-static int blktrans_ioctl(struct block_device *bdev, fmode_t mode,
+-			      unsigned int cmd, unsigned long arg)
+-{
+-	struct mtd_blktrans_dev *dev = blktrans_dev_get(bdev->bd_disk);
+-	int ret = -ENXIO;
 -
- 	register_reboot_notifier(&md_notifier);
- 	raid_table_header = register_sysctl_table(raid_root_table);
- 
-@@ -9841,9 +9839,6 @@ static __exit void md_exit(void)
- 	struct list_head *tmp;
- 	int delay = 1;
- 
--	blk_unregister_region(MKDEV(MD_MAJOR,0), 512);
--	blk_unregister_region(MKDEV(mdp_major,0), 1U << MINORBITS);
+-	if (!dev)
+-		return ret;
 -
- 	unregister_blkdev(MD_MAJOR,"md");
- 	unregister_blkdev(mdp_major, "mdp");
- 	unregister_reboot_notifier(&md_notifier);
+-	mutex_lock(&dev->lock);
+-
+-	if (!dev->mtd)
+-		goto unlock;
+-
+-	switch (cmd) {
+-	case BLKFLSBUF:
+-		ret = dev->tr->flush ? dev->tr->flush(dev) : 0;
+-		break;
+-	default:
+-		ret = -ENOTTY;
+-	}
+-unlock:
+-	mutex_unlock(&dev->lock);
+-	blktrans_dev_put(dev);
+-	return ret;
+-}
+-
+ static const struct block_device_operations mtd_block_ops = {
+ 	.owner		= THIS_MODULE,
+ 	.open		= blktrans_open,
+ 	.release	= blktrans_release,
+-	.ioctl		= blktrans_ioctl,
+ 	.getgeo		= blktrans_getgeo,
+ };
+ 
 -- 
 2.29.2
 
