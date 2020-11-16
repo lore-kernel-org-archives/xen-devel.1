@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C1A1C61DD8
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:10:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E1247C4742C
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:10:22 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DA335223C7
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:10:16 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 73A2822240
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:10:22 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="sXKHf4+K"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DA335223C7
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="wYjWzLfz"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 73A2822240
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.28096.56905 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.28100.56932 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1keg8q-0001vh-L0; Mon, 16 Nov 2020 15:10:04 +0000
+	id 1keg8w-0002E5-Et; Mon, 16 Nov 2020 15:10:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 28096.56905; Mon, 16 Nov 2020 15:10:04 +0000
+Received: by outflank-mailman (output) from mailman id 28100.56932; Mon, 16 Nov 2020 15:10:10 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1keg8p-0001tJ-Am; Mon, 16 Nov 2020 15:10:03 +0000
-Received: by outflank-mailman (input) for mailman id 28096;
- Mon, 16 Nov 2020 15:09:58 +0000
+	id 1keg8u-0002B9-P1; Mon, 16 Nov 2020 15:10:08 +0000
+Received: by outflank-mailman (input) for mailman id 28100;
+ Mon, 16 Nov 2020 15:10:03 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1keg1I-0006ni-6K
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:02:16 +0000
+ id 1keg3i-0006ni-CT
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:04:46 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 8401f5f8-b40b-4b28-86bc-cbad960be06f;
- Mon, 16 Nov 2020 14:59:24 +0000 (UTC)
+ id cb8d4a81-ae8d-4979-904f-713bf13dd768;
+ Mon, 16 Nov 2020 15:00:02 +0000 (UTC)
 Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kefyH-0003yd-CW; Mon, 16 Nov 2020 14:59:09 +0000
+ id 1kefyo-0004DN-O9; Mon, 16 Nov 2020 14:59:43 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1keg1I-0006ni-6K
-	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:02:16 +0000
-X-Inumbo-ID: 8401f5f8-b40b-4b28-86bc-cbad960be06f
+	id 1keg3i-0006ni-CT
+	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:04:46 +0000
+X-Inumbo-ID: cb8d4a81-ae8d-4979-904f-713bf13dd768
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 8401f5f8-b40b-4b28-86bc-cbad960be06f;
-	Mon, 16 Nov 2020 14:59:24 +0000 (UTC)
+	id cb8d4a81-ae8d-4979-904f-713bf13dd768;
+	Mon, 16 Nov 2020 15:00:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=soDf5n/4IHZXpRDONsC4iRIWKhhdabm7wm1Ix3YyzkY=; b=sXKHf4+KcwIa5fuTcLVQORl6vc
-	Y03Gwu4v2aKXYxB2gC70w5AjOtoQE1Q1pXkpIHcqxu1afca2PvwHAIEb13ajBGY5qll0Bc+WJnuHt
-	TgCIRD/tv9h7SIzJyRqtqrpqxOYCL5TBFCCOpqvnrOBTaKdroJMy4aFUM6Eu1+1BjsZPfN+VBECoA
-	VBKTChEgoSg7gTk+HdF7LfwwqhGnCtekD9xT9Y736twxTwR4aWyi6Skc6DBIDj8x5uz90PEkL1KLh
-	CVLnyiuFwPdIlcsawji6tbe7dqrYAdB98VJPkjxf9YLh+GLVDgz+CUZ/XticM28L06ss6gSMN118i
-	lq40xEVw==;
+	bh=x6ThtvQgvwHIscZfOUELeo3Uy7svW74ISAsOiTBJTd8=; b=wYjWzLfzQlz5nMoIrs2dUqAKes
+	QFt+YLi/Ow0cGCkVgOnqteaZCNuUDwCov7PJB5hvC6nYp5cVF5aDTygDVep1VuFeVLzibRXVrb0PG
+	FwRPx4XB6Y0FbjEFe92tnC6Dld2W5KJSeAc8kJg120u3mpOcZ4tc9ydP5qFtsdEWA6KBA1phfelhv
+	ykkNgsnmusDbP9O5T8K6xNSTSx6pFYwqjKwfuv8O23V0jhAmUMdhinoTTyaCbb1UQNoqaNS8S8OhY
+	IkQHzpe8v4SVvuc9YJmie1VvzG8FrG8PonETyiwJgsN7wW5Xu/ggXJWk0IApLZbQQsH5DPzic6AvO
+	6QnJMDVw==;
 Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1kefyH-0003yd-CW; Mon, 16 Nov 2020 14:59:09 +0000
+	id 1kefyo-0004DN-O9; Mon, 16 Nov 2020 14:59:43 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -101,11 +101,10 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-raid@vger.kernel.org,
 	linux-nvme@lists.infradead.org,
 	linux-scsi@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org,
-	Hannes Reinecke <hare@suse.de>
-Subject: [PATCH 42/78] sd: use __register_blkdev to avoid a modprobe for an unregistered dev_t
-Date: Mon, 16 Nov 2020 15:57:33 +0100
-Message-Id: <20201116145809.410558-43-hch@lst.de>
+	linux-fsdevel@vger.kernel.org
+Subject: [PATCH 64/78] dm: simplify flush_bio initialization in __send_empty_flush
+Date: Mon, 16 Nov 2020 15:57:55 +0100
+Message-Id: <20201116145809.410558-65-hch@lst.de>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20201116145809.410558-1-hch@lst.de>
 References: <20201116145809.410558-1-hch@lst.de>
@@ -113,72 +112,41 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-Switch from using blk_register_region to the probe callback passed to
-__register_blkdev to disable the request_module call for an unclaimed
-dev_t in the SD majors.
+We don't really need the struct block_device to initialize a bio.  So
+switch from using bio_set_dev to manually setting up bi_disk (bi_partno
+will always be zero and has been cleared by bio_init already).
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
-Reviewed-by: Hannes Reinecke <hare@suse.de>
 ---
- drivers/scsi/sd.c | 19 +++++--------------
- 1 file changed, 5 insertions(+), 14 deletions(-)
+ drivers/md/dm.c | 12 +++---------
+ 1 file changed, 3 insertions(+), 9 deletions(-)
 
-diff --git a/drivers/scsi/sd.c b/drivers/scsi/sd.c
-index a2a4f385833d6c..679c2c02504763 100644
---- a/drivers/scsi/sd.c
-+++ b/drivers/scsi/sd.c
-@@ -630,13 +630,11 @@ static struct scsi_driver sd_template = {
- };
+diff --git a/drivers/md/dm.c b/drivers/md/dm.c
+index 54739f1b579bc8..6d7eb72d41f9ea 100644
+--- a/drivers/md/dm.c
++++ b/drivers/md/dm.c
+@@ -1422,18 +1422,12 @@ static int __send_empty_flush(struct clone_info *ci)
+ 	 */
+ 	bio_init(&flush_bio, NULL, 0);
+ 	flush_bio.bi_opf = REQ_OP_WRITE | REQ_PREFLUSH | REQ_SYNC;
++	flush_bio.bi_disk = ci->io->md->disk;
++	bio_associate_blkg(&flush_bio);
++
+ 	ci->bio = &flush_bio;
+ 	ci->sector_count = 0;
  
- /*
-- * Dummy kobj_map->probe function.
-- * The default ->probe function will call modprobe, which is
-- * pointless as this module is already loaded.
-+ * Don't request a new module, as that could deadlock in multipath
-+ * environment.
-  */
--static struct kobject *sd_default_probe(dev_t devt, int *partno, void *data)
-+static void sd_default_probe(dev_t devt)
- {
--	return NULL;
- }
- 
- /*
-@@ -3525,9 +3523,6 @@ static int sd_remove(struct device *dev)
- 
- 	free_opal_dev(sdkp->opal_dev);
- 
--	blk_register_region(devt, SD_MINORS, NULL,
--			    sd_default_probe, NULL, NULL);
+-	/*
+-	 * Empty flush uses a statically initialized bio, as the base for
+-	 * cloning.  However, blkg association requires that a bdev is
+-	 * associated with a gendisk, which doesn't happen until the bdev is
+-	 * opened.  So, blkg association is done at issue time of the flush
+-	 * rather than when the device is created in alloc_dev().
+-	 */
+-	bio_set_dev(ci->bio, ci->io->md->bdev);
 -
- 	mutex_lock(&sd_ref_mutex);
- 	dev_set_drvdata(dev, NULL);
- 	put_device(&sdkp->dev);
-@@ -3717,11 +3712,9 @@ static int __init init_sd(void)
- 	SCSI_LOG_HLQUEUE(3, printk("init_sd: sd driver entry point\n"));
- 
- 	for (i = 0; i < SD_MAJORS; i++) {
--		if (register_blkdev(sd_major(i), "sd") != 0)
-+		if (__register_blkdev(sd_major(i), "sd", sd_default_probe))
- 			continue;
- 		majors++;
--		blk_register_region(sd_major(i), SD_MINORS, NULL,
--				    sd_default_probe, NULL, NULL);
- 	}
- 
- 	if (!majors)
-@@ -3794,10 +3787,8 @@ static void __exit exit_sd(void)
- 
- 	class_unregister(&sd_disk_class);
- 
--	for (i = 0; i < SD_MAJORS; i++) {
--		blk_unregister_region(sd_major(i), SD_MINORS);
-+	for (i = 0; i < SD_MAJORS; i++)
- 		unregister_blkdev(sd_major(i), "sd");
--	}
- }
- 
- module_init(init_sd);
+ 	BUG_ON(bio_has_data(ci->bio));
+ 	while ((ti = dm_table_get_target(ci->map, target_nr++)))
+ 		__send_duplicate_bios(ci, ti, ti->num_flush_bios, NULL);
 -- 
 2.29.2
 
