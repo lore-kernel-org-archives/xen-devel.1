@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3AF27C4742C
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:10:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0FBB3C5519F
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:10:16 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E8A1C22240
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:10:11 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id AF59822240
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:10:15 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="VtALb1vl"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E8A1C22240
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="C+aFntyX"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AF59822240
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.28094.56895 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.28099.56917 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1keg8o-0001oY-IC; Mon, 16 Nov 2020 15:10:02 +0000
+	id 1keg8s-00022d-VF; Mon, 16 Nov 2020 15:10:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 28094.56895; Mon, 16 Nov 2020 15:10:01 +0000
+Received: by outflank-mailman (output) from mailman id 28099.56917; Mon, 16 Nov 2020 15:10:06 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1keg8m-0001mu-Vo; Mon, 16 Nov 2020 15:10:00 +0000
-Received: by outflank-mailman (input) for mailman id 28094;
- Mon, 16 Nov 2020 15:09:57 +0000
+	id 1keg8r-00020c-Mj; Mon, 16 Nov 2020 15:10:05 +0000
+Received: by outflank-mailman (input) for mailman id 28099;
+ Mon, 16 Nov 2020 15:10:01 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1keg26-0006ni-8W
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:03:06 +0000
+ id 1keg2Q-0006ni-9F
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:03:26 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 994eb64c-8bbc-472e-8332-3da94a57b649;
- Mon, 16 Nov 2020 14:59:34 +0000 (UTC)
+ id 4b4e9507-09b7-40e8-b25c-66f875b8d6f1;
+ Mon, 16 Nov 2020 14:59:40 +0000 (UTC)
 Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kefyG-0003yI-1n; Mon, 16 Nov 2020 14:59:08 +0000
+ id 1kefyY-00044s-Tr; Mon, 16 Nov 2020 14:59:27 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1keg26-0006ni-8W
-	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:03:06 +0000
-X-Inumbo-ID: 994eb64c-8bbc-472e-8332-3da94a57b649
+	id 1keg2Q-0006ni-9F
+	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:03:26 +0000
+X-Inumbo-ID: 4b4e9507-09b7-40e8-b25c-66f875b8d6f1
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 994eb64c-8bbc-472e-8332-3da94a57b649;
-	Mon, 16 Nov 2020 14:59:34 +0000 (UTC)
+	id 4b4e9507-09b7-40e8-b25c-66f875b8d6f1;
+	Mon, 16 Nov 2020 14:59:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=Ub9jpknBNltWl/xM1z440GPAq6lbWyOu/cfyXRrsD14=; b=VtALb1vlttJ0buxeem4ez+UVG4
-	Hu+Wqzb0QtgrS5QrZw/6aENv47GRNNh/CISIBQASNaoUt+cYAFXDVK4WXECNVL5dVc+xc/uVQOnIg
-	HTLM6KHwDsX+QnIalbhYcS8kk7anQ8yPF0pzoGt/ezmRxs/uYaG5KB5LFuw2m65+v4FLJ9BMD4Ovz
-	FfsRasFisl+b2XzsGmdUtlricIuZ6vBTkUhVjcJ0lMBS4vQc6DLTXfAo6MDzYuO1bB1gpNPStxfTg
-	5oO+avG3iudqBw1sow49CGkIHR2P/HvdJHVOxannWGYHrDjws6h+iO/erNUOkLsTjti8W+DcHNPIc
-	3Oq8t4Bg==;
+	bh=TGRxj3P5fN3QWbEKVTDt35+3igPcA4rCa+2EvBLtC8g=; b=C+aFntyXdJbXcDXW0zdEm0MZf/
+	Q8Zx0N1Bi1RkYFpnimVowbz0rcddgCEhzUASaPfj19d8nD2OoiQ7zBRz9XuVFxvMc+YbxWMyHzaTx
+	PYzv9LtI9kFkIcqvnRgzJ1QSX/8XbEjuPMJK4EkCHxJJNOZAq17DsBe6jQ87rPiGWnpudzQyM/EHf
+	XW5TF2D/8wJwMwlrqTogsg01StwU1f5L48SB2l4E2dG+cGpvb0qjX+vW1trzMnD3BduvbANSwGVcX
+	fXDT/3TaiGf3bIXETdbDeP/h5OUIqBlJlOYSObKbRBS9M21yv36cQQIio98w72OzH3KuXMzUGVMV3
+	ibdbwukw==;
 Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1kefyG-0003yI-1n; Mon, 16 Nov 2020 14:59:08 +0000
+	id 1kefyY-00044s-Tr; Mon, 16 Nov 2020 14:59:27 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -101,11 +101,10 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-raid@vger.kernel.org,
 	linux-nvme@lists.infradead.org,
 	linux-scsi@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org,
-	Hannes Reinecke <hare@suse.de>
-Subject: [PATCH 41/78] swim: don't call blk_register_region
-Date: Mon, 16 Nov 2020 15:57:32 +0100
-Message-Id: <20201116145809.410558-42-hch@lst.de>
+	linux-fsdevel@vger.kernel.org
+Subject: [PATCH 54/78] block: remove a duplicate __disk_get_part prototype
+Date: Mon, 16 Nov 2020 15:57:45 +0100
+Message-Id: <20201116145809.410558-55-hch@lst.de>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20201116145809.410558-1-hch@lst.de>
 References: <20201116145809.410558-1-hch@lst.de>
@@ -113,59 +112,23 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-The swim driver (unlike various other floppy drivers) doesn't have
-magic device nodes for certain modes, and already registers a gendisk
-for each of the floppies supported by a device.  Thus the region
-registered is a no-op and can be removed.
-
 Signed-off-by: Christoph Hellwig <hch@lst.de>
-Reviewed-by: Hannes Reinecke <hare@suse.de>
 ---
- drivers/block/swim.c | 17 -----------------
- 1 file changed, 17 deletions(-)
+ include/linux/genhd.h | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/drivers/block/swim.c b/drivers/block/swim.c
-index 52dd1efa00f9c5..cc6a0bc6c005a7 100644
---- a/drivers/block/swim.c
-+++ b/drivers/block/swim.c
-@@ -745,18 +745,6 @@ static const struct block_device_operations floppy_fops = {
- 	.check_events	 = floppy_check_events,
- };
+diff --git a/include/linux/genhd.h b/include/linux/genhd.h
+index 46553d6d602563..22f5b9fd96f8bf 100644
+--- a/include/linux/genhd.h
++++ b/include/linux/genhd.h
+@@ -250,7 +250,6 @@ static inline dev_t part_devt(struct hd_struct *part)
+ 	return part_to_dev(part)->devt;
+ }
  
--static struct kobject *floppy_find(dev_t dev, int *part, void *data)
--{
--	struct swim_priv *swd = data;
--	int drive = (*part & 3);
--
--	if (drive >= swd->floppy_count)
--		return NULL;
--
--	*part = 0;
--	return get_disk_and_module(swd->unit[drive].disk);
--}
--
- static int swim_add_floppy(struct swim_priv *swd, enum drive_location location)
- {
- 	struct floppy_state *fs = &swd->unit[swd->floppy_count];
-@@ -846,9 +834,6 @@ static int swim_floppy_init(struct swim_priv *swd)
- 		add_disk(swd->unit[drive].disk);
- 	}
+-extern struct hd_struct *__disk_get_part(struct gendisk *disk, int partno);
+ extern struct hd_struct *disk_get_part(struct gendisk *disk, int partno);
  
--	blk_register_region(MKDEV(FLOPPY_MAJOR, 0), 256, THIS_MODULE,
--			    floppy_find, NULL, swd);
--
- 	return 0;
- 
- exit_put_disks:
-@@ -932,8 +917,6 @@ static int swim_remove(struct platform_device *dev)
- 	int drive;
- 	struct resource *res;
- 
--	blk_unregister_region(MKDEV(FLOPPY_MAJOR, 0), 256);
--
- 	for (drive = 0; drive < swd->floppy_count; drive++) {
- 		del_gendisk(swd->unit[drive].disk);
- 		blk_cleanup_queue(swd->unit[drive].disk->queue);
+ static inline void disk_put_part(struct hd_struct *part)
 -- 
 2.29.2
 
