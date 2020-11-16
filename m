@@ -5,25 +5,25 @@ X-Spam-Level:
 X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 108C9C4742C
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:10:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 37239C5519F
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:10:55 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B4B5D2417E
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:10:49 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id D3142241A6
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:10:54 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="V6cl1a79"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B4B5D2417E
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="iXlgdH+J"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D3142241A6
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.28148.57041 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.28158.57066 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1keg9J-0003LS-9B; Mon, 16 Nov 2020 15:10:33 +0000
+	id 1keg9O-0003bd-J7; Mon, 16 Nov 2020 15:10:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 28148.57041; Mon, 16 Nov 2020 15:10:33 +0000
+Received: by outflank-mailman (output) from mailman id 28158.57066; Mon, 16 Nov 2020 15:10:38 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1keg9I-0003JN-4L; Mon, 16 Nov 2020 15:10:32 +0000
-Received: by outflank-mailman (input) for mailman id 28148;
- Mon, 16 Nov 2020 15:10:26 +0000
+	id 1keg9N-0003aE-D2; Mon, 16 Nov 2020 15:10:37 +0000
+Received: by outflank-mailman (input) for mailman id 28158;
+ Mon, 16 Nov 2020 15:10:32 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1keg0A-0006ni-46
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:01:06 +0000
+ id 1kefyn-0006ni-1K
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 14:59:41 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id bf865050-86db-4bce-a732-7e2d74f28cb6;
- Mon, 16 Nov 2020 14:59:07 +0000 (UTC)
+ id 45721808-a2e9-404e-b99f-3fe6bfe8b291;
+ Mon, 16 Nov 2020 14:58:44 +0000 (UTC)
 Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kefy0-0003uJ-BS; Mon, 16 Nov 2020 14:58:52 +0000
+ id 1kefxa-0003md-8r; Mon, 16 Nov 2020 14:58:26 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1keg0A-0006ni-46
-	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:01:06 +0000
-X-Inumbo-ID: bf865050-86db-4bce-a732-7e2d74f28cb6
+	id 1kefyn-0006ni-1K
+	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 14:59:41 +0000
+X-Inumbo-ID: 45721808-a2e9-404e-b99f-3fe6bfe8b291
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id bf865050-86db-4bce-a732-7e2d74f28cb6;
-	Mon, 16 Nov 2020 14:59:07 +0000 (UTC)
+	id 45721808-a2e9-404e-b99f-3fe6bfe8b291;
+	Mon, 16 Nov 2020 14:58:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=vZNllDaY98uh7PAY/yZSS9lYqgoFil9tZwzrbsUtcc0=; b=V6cl1a79XMcq1v/BBo+f92yrRu
-	liN7F038xmkCdB/Ds3o/rdOf/u8+F4XRDe5XS2+x9GlkDsXh+3U/5bj4wHU5EPMYxp0LOK6ecE1yG
-	m42ASUTh05evcjBqfM2ZWjFjoerZ1E7O62W59SM7OwmwlzPpSqsgSL7GTu8GjI32B/j1fjTcfCCgm
-	EBQXKMs49HKVw8T32KURh6LUgcjPRcK+qacoHPF/BWNvvkKs1x1+S/gsCLMI6svMoxc6IbKljvzPa
-	PrLsxr2OhCYNRnmFqAv4BBDVACpNln8toBTssxbOqENWwwW1v/dXqjAf6HU5UCW36Z4h5dw18Xmhb
-	kRDZEZZw==;
+	bh=79ABHzAqAgUDi+r50gNTM9KzgxZfWtsd0Ks61Se8Jjk=; b=iXlgdH+JkeL6roCvy9N8OmOptV
+	1Ll+Te6ItuycUsm1mpg5y8MmMvSDVgOMN0DW4BJjUzEL2YXMUw9FI/gCg+GglIDP+2ssWuLid2fb0
+	cJZnJp4fVhOgNW619uL3/Kd6hYd61L2NdpCEsJu2r2sYtsuKn5OWNCme31Wn3/FHGbzcF/v5kYRm2
+	JnXQsbwRBlyoUcHtnndvHGCnGiJjghxupsGPmu0u5FKR/+UjbjsAeA9OHsZoDrRaOzkGH06M+kWrS
+	F/Df603StVMFLWH3uWTjYYJHcHqMIvbijKLsxzszv3RzSONMJItnrjbuYjjQ6SdDQT1ZrHiZj6i2L
+	17QgIiog==;
 Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1kefy0-0003uJ-BS; Mon, 16 Nov 2020 14:58:52 +0000
+	id 1kefxa-0003md-8r; Mon, 16 Nov 2020 14:58:26 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -101,10 +101,11 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-raid@vger.kernel.org,
 	linux-nvme@lists.infradead.org,
 	linux-scsi@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org
-Subject: [PATCH 30/78] block: don't call into the driver for BLKROSET
-Date: Mon, 16 Nov 2020 15:57:21 +0100
-Message-Id: <20201116145809.410558-31-hch@lst.de>
+	linux-fsdevel@vger.kernel.org,
+	Hannes Reinecke <hare@suse.de>
+Subject: [PATCH 12/78] dm: use set_capacity_and_notify
+Date: Mon, 16 Nov 2020 15:57:03 +0100
+Message-Id: <20201116145809.410558-13-hch@lst.de>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20201116145809.410558-1-hch@lst.de>
 References: <20201116145809.410558-1-hch@lst.de>
@@ -112,55 +113,29 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-Now that all drivers that want to hook into setting or clearing the
-read-only flag use the set_read_only method, this code can be removed.
+Use set_capacity_and_notify to set the size of both the disk and block
+device.  This also gets the uevent notifications for the resize for free.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
+Reviewed-by: Hannes Reinecke <hare@suse.de>
 ---
- block/ioctl.c | 23 -----------------------
- 1 file changed, 23 deletions(-)
+ drivers/md/dm.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/block/ioctl.c b/block/ioctl.c
-index a6fa16b9770593..96cb4544736468 100644
---- a/block/ioctl.c
-+++ b/block/ioctl.c
-@@ -346,26 +346,6 @@ static int blkdev_pr_clear(struct block_device *bdev,
- 	return ops->pr_clear(bdev, c.key);
- }
+diff --git a/drivers/md/dm.c b/drivers/md/dm.c
+index c18fc25485186d..62ad44925e73ec 100644
+--- a/drivers/md/dm.c
++++ b/drivers/md/dm.c
+@@ -1971,8 +1971,7 @@ static struct dm_table *__bind(struct mapped_device *md, struct dm_table *t,
+ 	if (size != dm_get_size(md))
+ 		memset(&md->geometry, 0, sizeof(md->geometry));
  
--/*
-- * Is it an unrecognized ioctl? The correct returns are either
-- * ENOTTY (final) or ENOIOCTLCMD ("I don't know this one, try a
-- * fallback"). ENOIOCTLCMD gets turned into ENOTTY by the ioctl
-- * code before returning.
-- *
-- * Confused drivers sometimes return EINVAL, which is wrong. It
-- * means "I understood the ioctl command, but the parameters to
-- * it were wrong".
-- *
-- * We should aim to just fix the broken drivers, the EINVAL case
-- * should go away.
-- */
--static inline int is_unrecognized_ioctl(int ret)
--{
--	return	ret == -EINVAL ||
--		ret == -ENOTTY ||
--		ret == -ENOIOCTLCMD;
--}
--
- static int blkdev_flushbuf(struct block_device *bdev, fmode_t mode,
- 		unsigned cmd, unsigned long arg)
- {
-@@ -384,9 +364,6 @@ static int blkdev_roset(struct block_device *bdev, fmode_t mode,
- 	if (!capable(CAP_SYS_ADMIN))
- 		return -EACCES;
+-	set_capacity(md->disk, size);
+-	bd_set_nr_sectors(md->bdev, size);
++	set_capacity_and_notify(md->disk, size);
  
--	ret = __blkdev_driver_ioctl(bdev, mode, cmd, arg);
--	if (!is_unrecognized_ioctl(ret))
--		return ret;
- 	if (get_user(n, (int __user *)arg))
- 		return -EFAULT;
- 	if (bdev->bd_disk->fops->set_read_only) {
+ 	dm_table_event_callback(t, event_callback, md);
+ 
 -- 
 2.29.2
 
