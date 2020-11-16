@@ -5,25 +5,25 @@ X-Spam-Level:
 X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=unavailable autolearn_force=no version=3.4.0
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CF5B8C61DD8
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:12:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EAD7BC5519F
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:12:20 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6C70F204FD
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:12:14 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id A2E2422240
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:12:20 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="mMFTZRsV"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6C70F204FD
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="Gei8YMmy"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A2E2422240
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.28300.57443 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.28311.57474 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kegAi-0007cB-0h; Mon, 16 Nov 2020 15:12:00 +0000
+	id 1kegAo-0007xL-Rn; Mon, 16 Nov 2020 15:12:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 28300.57443; Mon, 16 Nov 2020 15:11:59 +0000
+Received: by outflank-mailman (output) from mailman id 28311.57474; Mon, 16 Nov 2020 15:12:06 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kegAg-0007ah-BA; Mon, 16 Nov 2020 15:11:58 +0000
-Received: by outflank-mailman (input) for mailman id 28300;
- Mon, 16 Nov 2020 15:11:52 +0000
+	id 1kegAn-0007v8-Ox; Mon, 16 Nov 2020 15:12:05 +0000
+Received: by outflank-mailman (input) for mailman id 28311;
+ Mon, 16 Nov 2020 15:11:59 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1keg2z-0006ni-Ag
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:04:01 +0000
+ id 1keg2V-0006ni-9J
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:03:31 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id c72fc1de-9677-4916-8246-087815331960;
- Mon, 16 Nov 2020 14:59:47 +0000 (UTC)
+ id 6e590672-b054-412a-8d04-48508d6d95b0;
+ Mon, 16 Nov 2020 14:59:40 +0000 (UTC)
 Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kefyh-00049g-7K; Mon, 16 Nov 2020 14:59:35 +0000
+ id 1kefya-00045V-AA; Mon, 16 Nov 2020 14:59:28 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1keg2z-0006ni-Ag
-	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:04:01 +0000
-X-Inumbo-ID: c72fc1de-9677-4916-8246-087815331960
+	id 1keg2V-0006ni-9J
+	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:03:31 +0000
+X-Inumbo-ID: 6e590672-b054-412a-8d04-48508d6d95b0
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id c72fc1de-9677-4916-8246-087815331960;
-	Mon, 16 Nov 2020 14:59:47 +0000 (UTC)
+	id 6e590672-b054-412a-8d04-48508d6d95b0;
+	Mon, 16 Nov 2020 14:59:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=0e+oH+92GlExM9i4SIPWTJvhHTDsEZRU6nAY6yeduas=; b=mMFTZRsVcAqmf+VlCpySbI4/AO
-	Lvk1YHPUUx2pLWe6CEfyYTfSvNVAKhdEDtRNYgv0KknubQs4EEfe4Ww43hMMGLiSPbCzUY8fYe5/w
-	ImRQodVw+JPRr2LxSfoDq1Ob9sBNVvCDmhGgUHYNdyodB9r7BgLKKuS1T5JHMOpydlwgeRX6CcH24
-	Xj6k8bM1XYWX3OFouuNz5g4QXxFiyroDeYHmHTh09EcbYvOCQHjjCyVR/50jwzxvRUfG7haNExoXj
-	/C/YqFeSVuEWf5BDvfiyEyGDUrvIYpPAoZpqWlPGo4+IH/9U+ubwIYwcVjNgFnqzPbQcgexYh8oWx
-	MBTM2Vjg==;
+	bh=AuzCwkw90Oy6IPNhoiC+qBglSTsZM+HyoDoCPgOfof0=; b=Gei8YMmy1pPuUmlC/BZRAtHClX
+	92uN480odx4m65CCc4Tfb2n7qkWXXDlvv232pz3oEAX+XbC7INmbsQu431O6VUovjCbxRXS/6+CGm
+	I03IsfR/g+MC38cctw2PBlul5o941KKyElmuVJhnyEIK9fLr9jathnAglj+AJmt+2gxYimOEFvVaN
+	M/TT6NDHo35SQ0IqAeU3wK0Jd6ZgWYZ3++nf1EvXI57cDYNw3hpvRFLXn2hKDcFrK6sI1K2XntRYw
+	SrT2g7HIUak8u4YpPV3kCsIBS/JUz8pIwPLmbN0ck/5og2vPZl4CYZ3h8OXDoTM0q+/eHv9liSw30
+	he5+yUVA==;
 Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1kefyh-00049g-7K; Mon, 16 Nov 2020 14:59:35 +0000
+	id 1kefya-00045V-AA; Mon, 16 Nov 2020 14:59:28 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -102,9 +102,9 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-nvme@lists.infradead.org,
 	linux-scsi@vger.kernel.org,
 	linux-fsdevel@vger.kernel.org
-Subject: [PATCH 59/78] mtip32xx: remove the call to fsync_bdev on removal
-Date: Mon, 16 Nov 2020 15:57:50 +0100
-Message-Id: <20201116145809.410558-60-hch@lst.de>
+Subject: [PATCH 55/78] block: change the hash used for looking up block devices
+Date: Mon, 16 Nov 2020 15:57:46 +0100
+Message-Id: <20201116145809.410558-56-hch@lst.de>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20201116145809.410558-1-hch@lst.de>
 References: <20201116145809.410558-1-hch@lst.de>
@@ -112,75 +112,64 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-del_gendisk already calls fsync_bdev for every partition, no need
-to do this twice.
+Adding the minor to the major creates tons of pointless conflicts. Just
+use the dev_t itself, which is 32-bits and thus is guaranteed to fit
+into ino_t.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/block/mtip32xx/mtip32xx.c | 15 ---------------
- drivers/block/mtip32xx/mtip32xx.h |  2 --
- 2 files changed, 17 deletions(-)
+ fs/block_dev.c | 26 ++------------------------
+ 1 file changed, 2 insertions(+), 24 deletions(-)
 
-diff --git a/drivers/block/mtip32xx/mtip32xx.c b/drivers/block/mtip32xx/mtip32xx.c
-index 153e2cdecb4d40..53ac59d19ae530 100644
---- a/drivers/block/mtip32xx/mtip32xx.c
-+++ b/drivers/block/mtip32xx/mtip32xx.c
-@@ -3687,7 +3687,6 @@ static int mtip_block_initialize(struct driver_data *dd)
- 	/* Enable the block device and add it to /dev */
- 	device_add_disk(&dd->pdev->dev, dd->disk, NULL);
+diff --git a/fs/block_dev.c b/fs/block_dev.c
+index d8664f5c1ff669..29db12c3bb501c 100644
+--- a/fs/block_dev.c
++++ b/fs/block_dev.c
+@@ -870,35 +870,12 @@ void __init bdev_cache_init(void)
+ 	blockdev_superblock = bd_mnt->mnt_sb;   /* For writeback */
+ }
  
--	dd->bdev = bdget_disk(dd->disk, 0);
- 	/*
- 	 * Now that the disk is active, initialize any sysfs attributes
- 	 * managed by the protocol layer.
-@@ -3721,9 +3720,6 @@ static int mtip_block_initialize(struct driver_data *dd)
- 	return rv;
- 
- kthread_run_error:
--	bdput(dd->bdev);
--	dd->bdev = NULL;
+-/*
+- * Most likely _very_ bad one - but then it's hardly critical for small
+- * /dev and can be fixed when somebody will need really large one.
+- * Keep in mind that it will be fed through icache hash function too.
+- */
+-static inline unsigned long hash(dev_t dev)
+-{
+-	return MAJOR(dev)+MINOR(dev);
+-}
 -
- 	/* Delete our gendisk. This also removes the device from /dev */
- 	del_gendisk(dd->disk);
- 
-@@ -3804,14 +3800,6 @@ static int mtip_block_remove(struct driver_data *dd)
- 	blk_mq_tagset_busy_iter(&dd->tags, mtip_no_dev_cleanup, dd);
- 	blk_mq_unquiesce_queue(dd->queue);
- 
--	/*
--	 * Delete our gendisk structure. This also removes the device
--	 * from /dev
--	 */
--	if (dd->bdev) {
--		bdput(dd->bdev);
--		dd->bdev = NULL;
--	}
- 	if (dd->disk) {
- 		if (test_bit(MTIP_DDF_INIT_DONE_BIT, &dd->dd_flag))
- 			del_gendisk(dd->disk);
-@@ -4206,9 +4194,6 @@ static void mtip_pci_remove(struct pci_dev *pdev)
- 	} while (atomic_read(&dd->irq_workers_active) != 0 &&
- 		time_before(jiffies, to));
- 
--	if (!dd->sr)
--		fsync_bdev(dd->bdev);
+-static int bdev_test(struct inode *inode, void *data)
+-{
+-	return BDEV_I(inode)->bdev.bd_dev == *(dev_t *)data;
+-}
 -
- 	if (atomic_read(&dd->irq_workers_active) != 0) {
- 		dev_warn(&dd->pdev->dev,
- 			"Completion workers still active!\n");
-diff --git a/drivers/block/mtip32xx/mtip32xx.h b/drivers/block/mtip32xx/mtip32xx.h
-index e22a7f0523bf30..88f4206310e4c8 100644
---- a/drivers/block/mtip32xx/mtip32xx.h
-+++ b/drivers/block/mtip32xx/mtip32xx.h
-@@ -463,8 +463,6 @@ struct driver_data {
- 
- 	int isr_binding;
- 
--	struct block_device *bdev;
+-static int bdev_set(struct inode *inode, void *data)
+-{
+-	BDEV_I(inode)->bdev.bd_dev = *(dev_t *)data;
+-	return 0;
+-}
 -
- 	struct list_head online_list; /* linkage for online list */
+ static struct block_device *bdget(dev_t dev)
+ {
+ 	struct block_device *bdev;
+ 	struct inode *inode;
  
- 	struct list_head remove_list; /* linkage for removing list */
+-	inode = iget5_locked(blockdev_superblock, hash(dev),
+-			bdev_test, bdev_set, &dev);
+-
++	inode = iget_locked(blockdev_superblock, dev);
+ 	if (!inode)
+ 		return NULL;
+ 
+@@ -910,6 +887,7 @@ static struct block_device *bdget(dev_t dev)
+ 		bdev->bd_super = NULL;
+ 		bdev->bd_inode = inode;
+ 		bdev->bd_part_count = 0;
++		bdev->bd_dev = dev;
+ 		inode->i_mode = S_IFBLK;
+ 		inode->i_rdev = dev;
+ 		inode->i_bdev = bdev;
 -- 
 2.29.2
 
