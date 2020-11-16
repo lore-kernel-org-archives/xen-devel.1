@@ -2,28 +2,28 @@ Return-Path: <SRS0=LqdB=EW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1395AC5519F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CDD94C4742C
 	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:23:31 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B6AA020888
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:23:30 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 6463320888
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:23:31 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="OVr7yeWC"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B6AA020888
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="P5pBiRTF"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6463320888
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.28411.57531 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.28409.57514 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kegLf-000269-7K; Mon, 16 Nov 2020 15:23:19 +0000
+	id 1kegLb-000237-Iv; Mon, 16 Nov 2020 15:23:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 28411.57531; Mon, 16 Nov 2020 15:23:19 +0000
+Received: by outflank-mailman (output) from mailman id 28409.57514; Mon, 16 Nov 2020 15:23:15 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,89 +38,128 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kegLf-00025w-1S; Mon, 16 Nov 2020 15:23:19 +0000
-Received: by outflank-mailman (input) for mailman id 28411;
- Mon, 16 Nov 2020 15:23:18 +0000
+	id 1kegLb-000230-FZ; Mon, 16 Nov 2020 15:23:15 +0000
+Received: by outflank-mailman (input) for mailman id 28409;
+ Mon, 16 Nov 2020 15:23:13 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Zhvb=EW=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kegLe-00021y-ES
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:23:18 +0000
+ id 1kegLZ-00021y-Mc
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:23:13 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id f5713986-34fd-471c-a68c-c89fdd80742b;
+ id d5969826-4006-4b7f-8455-fa814f286285;
  Mon, 16 Nov 2020 15:23:12 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 30619AF37;
+ by mx2.suse.de (Postfix) with ESMTP id 8F72BAF57;
  Mon, 16 Nov 2020 15:23:11 +0000 (UTC)
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=Zhvb=EW=suse.com=jgross@srs-us1.protection.inumbo.net>)
-	id 1kegLe-00021y-ES
-	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:23:18 +0000
-X-Inumbo-ID: f5713986-34fd-471c-a68c-c89fdd80742b
+	id 1kegLZ-00021y-Mc
+	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:23:13 +0000
+X-Inumbo-ID: d5969826-4006-4b7f-8455-fa814f286285
 Received: from mx2.suse.de (unknown [195.135.220.15])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id f5713986-34fd-471c-a68c-c89fdd80742b;
+	id d5969826-4006-4b7f-8455-fa814f286285;
 	Mon, 16 Nov 2020 15:23:12 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	t=1605540191; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=hXDPxLHhf2Wu81S1L0YOGGDmDdav6QELXVfWLp0Wriw=;
-	b=OVr7yeWC1WJ/1YNfjLfTDpzLFPM5irXSm+vTpdhhYWW0gyPttx4RWUmJDusvFHgGnUjA1f
-	6B9Q3UEWCc9Hfdns2tdN/wn130OzGduOD18wLIaCKu3fqq2TgVhL4IToyZS54mNBwyfRQD
-	XslVTZ7zthwQfSWOk5zXiuWG4F7uhpA=
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=+maGdeQPC4RH2n2V3NwwaXjQr4W+CfjYAlItEcmIDY4=;
+	b=P5pBiRTFGQ+/iPL2SQtyGj7AOxJmQA4mPncKLqxXXlqg8AORPjX4NQnYNaCuSEwjNsYGGz
+	Jmli0nChGi6X6ipmcEcuBf26PvPxmBkpFq6nsLro4ZawosD9/KTnh5Fvu527601jcVpBiW
+	EUs+Jt/cnHtIKrjXxTPsFnojse1bIe8=
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 30619AF37;
+	by mx2.suse.de (Postfix) with ESMTP id 8F72BAF57;
 	Mon, 16 Nov 2020 15:23:11 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org,
 	x86@kernel.org,
-	linux-kernel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org
+	linux-kernel@vger.kernel.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Thomas Gleixner <tglx@linutronix.de>,
 	Ingo Molnar <mingo@redhat.com>,
 	Borislav Petkov <bp@alien8.de>,
 	"H. Peter Anvin" <hpa@zytor.com>,
 	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Andy Lutomirski <luto@kernel.org>,
-	Deep Shah <sdeep@vmware.com>,
-	"VMware, Inc." <pv-drivers@vmware.com>
-Subject: [PATCH 0/4] x86/xen: do some paravirt cleanup
-Date: Mon, 16 Nov 2020 16:22:57 +0100
-Message-Id: <20201116152301.24558-1-jgross@suse.com>
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH 2/4] x86/xen: use specific Xen pv interrupt entry for DF
+Date: Mon, 16 Nov 2020 16:22:59 +0100
+Message-Id: <20201116152301.24558-3-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20201116152301.24558-1-jgross@suse.com>
+References: <20201116152301.24558-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Eliminate the usergs_sysret64 paravirt call completely and switch
-the swapgs one to use ALTERNATIVE instead. This requires to fix the
-IST based exception entries for Xen PV to use the same mechanism as
-NMI and debug exception already do.
+Xen PV guests don't use IST. For double fault interrupts switch to
+the same model as NMI.
 
-Juergen Gross (4):
-  x86/xen: use specific Xen pv interrupt entry for MCE
-  x86/xen: use specific Xen pv interrupt entry for DF
-  x86/pv: switch SWAPGS to ALTERNATIVE
-  x86/xen: drop USERGS_SYSRET64 paravirt call
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ arch/x86/include/asm/idtentry.h | 3 +++
+ arch/x86/xen/enlighten_pv.c     | 8 +++++++-
+ arch/x86/xen/xen-asm.S          | 2 +-
+ 3 files changed, 11 insertions(+), 2 deletions(-)
 
- arch/x86/entry/entry_64.S             | 32 ++++++++++++---------------
- arch/x86/include/asm/idtentry.h       |  6 +++++
- arch/x86/include/asm/irqflags.h       | 26 +++++++---------------
- arch/x86/include/asm/paravirt.h       | 25 ---------------------
- arch/x86/include/asm/paravirt_types.h | 10 ---------
- arch/x86/kernel/asm-offsets_64.c      |  3 ---
- arch/x86/kernel/paravirt.c            |  6 +----
- arch/x86/kernel/paravirt_patch.c      |  7 ------
- arch/x86/xen/enlighten_pv.c           | 28 ++++++++++++++++++-----
- arch/x86/xen/xen-asm.S                | 24 ++------------------
- arch/x86/xen/xen-ops.h                |  2 --
- 11 files changed, 53 insertions(+), 116 deletions(-)
-
+diff --git a/arch/x86/include/asm/idtentry.h b/arch/x86/include/asm/idtentry.h
+index 3505c0396fa5..b35825392547 100644
+--- a/arch/x86/include/asm/idtentry.h
++++ b/arch/x86/include/asm/idtentry.h
+@@ -611,6 +611,9 @@ DECLARE_IDTENTRY_RAW(X86_TRAP_DB,	xenpv_exc_debug);
+ 
+ /* #DF */
+ DECLARE_IDTENTRY_DF(X86_TRAP_DF,	exc_double_fault);
++#ifdef CONFIG_XEN_PV
++DECLARE_IDTENTRY_RAW_ERRORCODE(X86_TRAP_DF,	xenpv_exc_double_fault);
++#endif
+ 
+ /* #VC */
+ #ifdef CONFIG_AMD_MEM_ENCRYPT
+diff --git a/arch/x86/xen/enlighten_pv.c b/arch/x86/xen/enlighten_pv.c
+index 9f5e44c1f70a..803fbcb398c4 100644
+--- a/arch/x86/xen/enlighten_pv.c
++++ b/arch/x86/xen/enlighten_pv.c
+@@ -571,6 +571,12 @@ DEFINE_IDTENTRY_RAW(xenpv_exc_nmi)
+ 	exc_nmi(regs);
+ }
+ 
++DEFINE_IDTENTRY_RAW_ERRORCODE(xenpv_exc_double_fault)
++{
++	/* On Xen PV, DF doesn't use IST.  The C part is the sane as native. */
++	exc_double_fault(regs, error_code);
++}
++
+ DEFINE_IDTENTRY_RAW(xenpv_exc_debug)
+ {
+ 	/*
+@@ -615,7 +621,7 @@ struct trap_array_entry {
+ 
+ static struct trap_array_entry trap_array[] = {
+ 	TRAP_ENTRY_REDIR(exc_debug,			true  ),
+-	TRAP_ENTRY(exc_double_fault,			true  ),
++	TRAP_ENTRY_REDIR(exc_double_fault,		true  ),
+ #ifdef CONFIG_X86_MCE
+ 	TRAP_ENTRY_REDIR(exc_machine_check,		true  ),
+ #endif
+diff --git a/arch/x86/xen/xen-asm.S b/arch/x86/xen/xen-asm.S
+index bc2586730a5b..1d054c915046 100644
+--- a/arch/x86/xen/xen-asm.S
++++ b/arch/x86/xen/xen-asm.S
+@@ -161,7 +161,7 @@ xen_pv_trap asm_exc_overflow
+ xen_pv_trap asm_exc_bounds
+ xen_pv_trap asm_exc_invalid_op
+ xen_pv_trap asm_exc_device_not_available
+-xen_pv_trap asm_exc_double_fault
++xen_pv_trap asm_xenpv_exc_double_fault
+ xen_pv_trap asm_exc_coproc_segment_overrun
+ xen_pv_trap asm_exc_invalid_tss
+ xen_pv_trap asm_exc_segment_not_present
 -- 
 2.26.2
 
