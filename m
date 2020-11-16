@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D1473C6369E
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:09:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 310CEC5519F
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:10:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7C61D22240
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:09:54 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id CA09622240
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:09:59 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="q2Eui2HS"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7C61D22240
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="sSbJyd5Z"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CA09622240
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.28081.56773 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.28085.56810 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1keg8X-00014O-VE; Mon, 16 Nov 2020 15:09:45 +0000
+	id 1keg8a-0001CO-R8; Mon, 16 Nov 2020 15:09:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 28081.56773; Mon, 16 Nov 2020 15:09:45 +0000
+Received: by outflank-mailman (output) from mailman id 28085.56810; Mon, 16 Nov 2020 15:09:48 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1keg8X-00013i-8y; Mon, 16 Nov 2020 15:09:45 +0000
-Received: by outflank-mailman (input) for mailman id 28081;
+	id 1keg8a-0001Bd-59; Mon, 16 Nov 2020 15:09:48 +0000
+Received: by outflank-mailman (input) for mailman id 28085;
  Mon, 16 Nov 2020 15:09:42 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1keg1D-0006ni-69
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:02:11 +0000
+ id 1keg4W-0006ni-EB
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:05:36 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id bec5bb8c-775a-4edf-b6a1-f9d2b128e1dd;
- Mon, 16 Nov 2020 14:59:24 +0000 (UTC)
+ id 4c6f1ef5-7ea4-42e8-af8d-bfb879892df4;
+ Mon, 16 Nov 2020 15:00:14 +0000 (UTC)
 Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kefyI-0003z4-LX; Mon, 16 Nov 2020 14:59:11 +0000
+ id 1kefz7-0004KI-Jc; Mon, 16 Nov 2020 15:00:02 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1keg1D-0006ni-69
-	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:02:11 +0000
-X-Inumbo-ID: bec5bb8c-775a-4edf-b6a1-f9d2b128e1dd
+	id 1keg4W-0006ni-EB
+	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:05:36 +0000
+X-Inumbo-ID: 4c6f1ef5-7ea4-42e8-af8d-bfb879892df4
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id bec5bb8c-775a-4edf-b6a1-f9d2b128e1dd;
-	Mon, 16 Nov 2020 14:59:24 +0000 (UTC)
+	id 4c6f1ef5-7ea4-42e8-af8d-bfb879892df4;
+	Mon, 16 Nov 2020 15:00:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=PqvTdxKlXNZLdjBDggPe+0dpl8BdkJnU5rWC71hrHK0=; b=q2Eui2HSznBIPI9cSjfWRkLiXv
-	D7M1u2p1A7Bgss7fi8geS+IcBDfPIY7tG3iQsIcsu2pwlnpb6JkzHA9nQPyjhsgzFFr2f5V8gWY0R
-	q0oyrC2H/s5XJqKuazQLgZxzSZuDhrLGiXIEEMHlBXx+6keZzYVXDEBv//T2nzeg8fA0yrA8TgRwk
-	r0eZqTmdEAWKh5MSx2GpdmmFWrOrgA8uPwc9e459z4ahoYIjDlMtNVnWGRW3SsebzThr08Euwj40u
-	FCjdDtLrrY8SFXrtoGuiZV87z8jk53zRslZsCywZYFngjpUQ7WpAm4CkVJQjfGDPL7bghqM+ajoud
-	OS2SyUsg==;
+	bh=YfjTrndpak8c8C7A2Wr6OEv1ltyYeLktzUiwQ2pu+CA=; b=sSbJyd5Z5KD2Jm06fbaragik+M
+	U4XXVDpuxMNv4/WjvlIpVZ5hUtJVUjJwX0o6moSI38FP1aoBNjPnqu8o8kZG9K4b+WNesnRErmT0w
+	c6uY7DfOfd9C5ydCEyUMR677DxoiIxYLRbGGQfJ2J5j6waIzphSYMTKUR+nE58YtYY8s0sKyBH3Ag
+	gi1DVUl5tW1CH54AIrFJbhR7wa+qgoeCULdOKd8s1qQnapCkGCpIt0k3E1/tTPjMNE85mVQKwftyC
+	EQD17+/p3VVrTmL/7uawHNQSIdYnwo33SsrBvTjwr6J9LQP9HpQU2Rf1rToCbxKxVr+U/txNCS6he
+	amu9O3qQ==;
 Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1kefyI-0003z4-LX; Mon, 16 Nov 2020 14:59:11 +0000
+	id 1kefz7-0004KI-Jc; Mon, 16 Nov 2020 15:00:02 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -101,11 +101,10 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-raid@vger.kernel.org,
 	linux-nvme@lists.infradead.org,
 	linux-scsi@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org,
-	Hannes Reinecke <hare@suse.de>
-Subject: [PATCH 43/78] brd: use __register_blkdev to allocate devices on demand
-Date: Mon, 16 Nov 2020 15:57:34 +0100
-Message-Id: <20201116145809.410558-44-hch@lst.de>
+	linux-fsdevel@vger.kernel.org
+Subject: [PATCH 77/78] fs: simplify the get_super_thawed interface
+Date: Mon, 16 Nov 2020 15:58:08 +0100
+Message-Id: <20201116145809.410558-78-hch@lst.de>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20201116145809.410558-1-hch@lst.de>
 References: <20201116145809.410558-1-hch@lst.de>
@@ -113,116 +112,108 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-Use the simpler mechanism attached to major_name to allocate a brd device
-when a currently unregistered minor is accessed.
+Merge get_super_thawed and get_super_exclusive_thawed into a single
+function.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
-Reviewed-by: Hannes Reinecke <hare@suse.de>
 ---
- drivers/block/brd.c | 39 +++++++++++----------------------------
- 1 file changed, 11 insertions(+), 28 deletions(-)
+ fs/quota/quota.c   |  4 ++--
+ fs/super.c         | 42 +++++++++++-------------------------------
+ include/linux/fs.h |  3 +--
+ 3 files changed, 14 insertions(+), 35 deletions(-)
 
-diff --git a/drivers/block/brd.c b/drivers/block/brd.c
-index cc49a921339f77..c43a6ab4b1f39f 100644
---- a/drivers/block/brd.c
-+++ b/drivers/block/brd.c
-@@ -426,14 +426,15 @@ static void brd_free(struct brd_device *brd)
- 	kfree(brd);
+diff --git a/fs/quota/quota.c b/fs/quota/quota.c
+index 9af95c7a0bbe3c..21d43933213965 100644
+--- a/fs/quota/quota.c
++++ b/fs/quota/quota.c
+@@ -876,9 +876,9 @@ static struct super_block *quotactl_block(const char __user *special, int cmd)
+ 	if (IS_ERR(bdev))
+ 		return ERR_CAST(bdev);
+ 	if (quotactl_cmd_onoff(cmd))
+-		sb = get_super_exclusive_thawed(bdev);
++		sb = get_super_thawed(bdev, true);
+ 	else if (quotactl_cmd_write(cmd))
+-		sb = get_super_thawed(bdev);
++		sb = get_super_thawed(bdev, false);
+ 	else
+ 		sb = get_super(bdev);
+ 	bdput(bdev);
+diff --git a/fs/super.c b/fs/super.c
+index b327a82bc1946b..50995f8abd1bf1 100644
+--- a/fs/super.c
++++ b/fs/super.c
+@@ -789,8 +789,17 @@ struct super_block *get_super(struct block_device *bdev)
  }
+ EXPORT_SYMBOL(get_super);
  
--static struct brd_device *brd_init_one(int i, bool *new)
-+static void brd_probe(dev_t dev)
+-static struct super_block *__get_super_thawed(struct block_device *bdev,
+-					      bool excl)
++/**
++ * get_super_thawed - get thawed superblock of a device
++ * @bdev: device to get the superblock for
++ * @excl: lock s_umount exclusive if %true, else shared.
++ *
++ * Scans the superblock list and finds the superblock of the file system mounted
++ * on the device.  The superblock is returned with s_umount held once it is
++ * thawed (or immediately if it was not frozen), or %NULL if no superblock was
++ * found.
++ */
++struct super_block *get_super_thawed(struct block_device *bdev, bool excl)
  {
- 	struct brd_device *brd;
-+	int i = MINOR(dev) / max_part;
- 
--	*new = false;
-+	mutex_lock(&brd_devices_mutex);
- 	list_for_each_entry(brd, &brd_devices, brd_list) {
- 		if (brd->brd_number == i)
--			goto out;
-+			goto out_unlock;
+ 	while (1) {
+ 		struct super_block *s = __get_super(bdev, excl);
+@@ -805,37 +814,8 @@ static struct super_block *__get_super_thawed(struct block_device *bdev,
+ 		put_super(s);
  	}
- 
- 	brd = brd_alloc(i);
-@@ -442,9 +443,9 @@ static struct brd_device *brd_init_one(int i, bool *new)
- 		add_disk(brd->brd_disk);
- 		list_add_tail(&brd->brd_list, &brd_devices);
- 	}
--	*new = true;
--out:
--	return brd;
-+
-+out_unlock:
-+	mutex_unlock(&brd_devices_mutex);
  }
- 
- static void brd_del_one(struct brd_device *brd)
-@@ -454,23 +455,6 @@ static void brd_del_one(struct brd_device *brd)
- 	brd_free(brd);
- }
- 
--static struct kobject *brd_probe(dev_t dev, int *part, void *data)
+-
+-/**
+- *	get_super_thawed - get thawed superblock of a device
+- *	@bdev: device to get the superblock for
+- *
+- *	Scans the superblock list and finds the superblock of the file system
+- *	mounted on the device. The superblock is returned once it is thawed
+- *	(or immediately if it was not frozen). %NULL is returned if no match
+- *	is found.
+- */
+-struct super_block *get_super_thawed(struct block_device *bdev)
 -{
--	struct brd_device *brd;
--	struct kobject *kobj;
--	bool new;
--
--	mutex_lock(&brd_devices_mutex);
--	brd = brd_init_one(MINOR(dev) / max_part, &new);
--	kobj = brd ? get_disk_and_module(brd->brd_disk) : NULL;
--	mutex_unlock(&brd_devices_mutex);
--
--	if (new)
--		*part = 0;
--
--	return kobj;
+-	return __get_super_thawed(bdev, false);
 -}
+ EXPORT_SYMBOL(get_super_thawed);
+ 
+-/**
+- *	get_super_exclusive_thawed - get thawed superblock of a device
+- *	@bdev: device to get the superblock for
+- *
+- *	Scans the superblock list and finds the superblock of the file system
+- *	mounted on the device. The superblock is returned once it is thawed
+- *	(or immediately if it was not frozen) and s_umount semaphore is held
+- *	in exclusive mode. %NULL is returned if no match is found.
+- */
+-struct super_block *get_super_exclusive_thawed(struct block_device *bdev)
+-{
+-	return __get_super_thawed(bdev, true);
+-}
+-EXPORT_SYMBOL(get_super_exclusive_thawed);
 -
- static inline void brd_check_and_reset_par(void)
- {
- 	if (unlikely(!max_part))
-@@ -510,11 +494,12 @@ static int __init brd_init(void)
- 	 *	dynamically.
- 	 */
- 
--	if (register_blkdev(RAMDISK_MAJOR, "ramdisk"))
-+	if (__register_blkdev(RAMDISK_MAJOR, "ramdisk", brd_probe))
- 		return -EIO;
- 
- 	brd_check_and_reset_par();
- 
-+	mutex_lock(&brd_devices_mutex);
- 	for (i = 0; i < rd_nr; i++) {
- 		brd = brd_alloc(i);
- 		if (!brd)
-@@ -532,9 +517,7 @@ static int __init brd_init(void)
- 		brd->brd_disk->queue = brd->brd_queue;
- 		add_disk(brd->brd_disk);
- 	}
--
--	blk_register_region(MKDEV(RAMDISK_MAJOR, 0), 1UL << MINORBITS,
--				  THIS_MODULE, brd_probe, NULL, NULL);
-+	mutex_unlock(&brd_devices_mutex);
- 
- 	pr_info("brd: module loaded\n");
- 	return 0;
-@@ -544,6 +527,7 @@ static int __init brd_init(void)
- 		list_del(&brd->brd_list);
- 		brd_free(brd);
- 	}
-+	mutex_unlock(&brd_devices_mutex);
- 	unregister_blkdev(RAMDISK_MAJOR, "ramdisk");
- 
- 	pr_info("brd: module NOT loaded !!!\n");
-@@ -557,7 +541,6 @@ static void __exit brd_exit(void)
- 	list_for_each_entry_safe(brd, next, &brd_devices, brd_list)
- 		brd_del_one(brd);
- 
--	blk_unregister_region(MKDEV(RAMDISK_MAJOR, 0), 1UL << MINORBITS);
- 	unregister_blkdev(RAMDISK_MAJOR, "ramdisk");
- 
- 	pr_info("brd: module unloaded\n");
+ /**
+  * get_active_super - get an active reference to the superblock of a device
+  * @bdev: device to get the superblock for
+diff --git a/include/linux/fs.h b/include/linux/fs.h
+index 8667d0cdc71e76..d026d177a526bf 100644
+--- a/include/linux/fs.h
++++ b/include/linux/fs.h
+@@ -3132,8 +3132,7 @@ extern struct file_system_type *get_filesystem(struct file_system_type *fs);
+ extern void put_filesystem(struct file_system_type *fs);
+ extern struct file_system_type *get_fs_type(const char *name);
+ extern struct super_block *get_super(struct block_device *);
+-extern struct super_block *get_super_thawed(struct block_device *);
+-extern struct super_block *get_super_exclusive_thawed(struct block_device *bdev);
++struct super_block *get_super_thawed(struct block_device *bdev, bool excl);
+ extern struct super_block *get_active_super(struct block_device *bdev);
+ extern void drop_super(struct super_block *sb);
+ extern void drop_super_exclusive(struct super_block *sb);
 -- 
 2.29.2
 
