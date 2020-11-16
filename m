@@ -5,25 +5,25 @@ X-Spam-Level:
 X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1814BC4742C
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:11:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E7D23C6369E
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:11:58 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B3E00204FD
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:11:56 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 9458920888
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:11:58 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="vJvWy+M6"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B3E00204FD
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="hC2kUAEW"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9458920888
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.28274.57357 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.28276.57371 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kegAP-0006mc-MU; Mon, 16 Nov 2020 15:11:41 +0000
+	id 1kegAR-0006qk-Vi; Mon, 16 Nov 2020 15:11:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 28274.57357; Mon, 16 Nov 2020 15:11:41 +0000
+Received: by outflank-mailman (output) from mailman id 28276.57371; Mon, 16 Nov 2020 15:11:43 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kegAP-0006li-9g; Mon, 16 Nov 2020 15:11:41 +0000
-Received: by outflank-mailman (input) for mailman id 28274;
- Mon, 16 Nov 2020 15:11:37 +0000
+	id 1kegAQ-0006pR-Ew; Mon, 16 Nov 2020 15:11:42 +0000
+Received: by outflank-mailman (input) for mailman id 28276;
+ Mon, 16 Nov 2020 15:11:38 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1kefzR-0006ni-2g
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:00:21 +0000
+ id 1keg2p-0006ni-AA
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:03:51 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 7a7bc4d3-87c4-4f72-884c-ef266ed2069c;
- Mon, 16 Nov 2020 14:58:54 +0000 (UTC)
+ id c16919fe-ecd7-445c-ae88-7717e0a09ba5;
+ Mon, 16 Nov 2020 14:59:44 +0000 (UTC)
 Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kefxo-0003rX-KZ; Mon, 16 Nov 2020 14:58:41 +0000
+ id 1kefyd-000470-B8; Mon, 16 Nov 2020 14:59:31 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1kefzR-0006ni-2g
-	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:00:21 +0000
-X-Inumbo-ID: 7a7bc4d3-87c4-4f72-884c-ef266ed2069c
+	id 1keg2p-0006ni-AA
+	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:03:51 +0000
+X-Inumbo-ID: c16919fe-ecd7-445c-ae88-7717e0a09ba5
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 7a7bc4d3-87c4-4f72-884c-ef266ed2069c;
-	Mon, 16 Nov 2020 14:58:54 +0000 (UTC)
+	id c16919fe-ecd7-445c-ae88-7717e0a09ba5;
+	Mon, 16 Nov 2020 14:59:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=Vj0GgZOGZUCqHagrDbWIgIb68CNEMN1B5n/upu75+9M=; b=vJvWy+M6q2aairpF0Q89oICkxI
-	PS5amLRUZxt3TDLOTCJKifVBAbRS3ozPh9ssbARTX05RTcowruj+r6DaYiko+IA8YM6yKnqqO9hZ0
-	YLPWVj8bReI6zNXL311McIRo6JgWss20/ic0IkcgvXqouBBov4LHHRc3LFvEHbyGhAEZ6L49Q+h8z
-	LPV18Yh1YwBXDnHfnQyxhLqXZkED99bdFyjJYXBanIYI+26WlIFdrhNuludlP3Zi5bFQ1Jai7SYT8
-	kxlPZdfsH/hR1Of6f1mV+sb6fFGWqYqS2gk4bZxnQp6B+oIaE6yoC0rkzi1aN8TgGTKSgtY0FwCjd
-	PfyxB0dA==;
+	bh=AZC0zIud/sy36HL3UqpdhruuJxaP+dAsE+XWl7N2xio=; b=hC2kUAEWCYh9OryEptbmVZ4ebz
+	NJfypqCrjvekFThEDQHeAH+KnX3FgqoOh2oFdElpy2UOUU8OYvMVMyDtZx5PgsNNgO5KvLRJtcx2F
+	8Z2wJ6ZAecQ/tCcYHLbAlAGK62e/LPO1anzZqXyhoiZcnyM456rb6Ib/pV9REehr8DlazH4amfdur
+	a7V1kHvqoU8gZ+KDoDs23F8OiOCpjlxcgAWIv7ZpBKEh+7hc5sOGW+853KLP0z+7cruWtWsL7L99a
+	DSrjRt5uLPvZTcUNxbnqe7Ie7DIj2M7MWaG8rzW38nm4RM1CwtXe4KSgUM8q+WHYxhoTnZfd7fBBR
+	Uej9O+GQ==;
 Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1kefxo-0003rX-KZ; Mon, 16 Nov 2020 14:58:41 +0000
+	id 1kefyd-000470-B8; Mon, 16 Nov 2020 14:59:31 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -102,9 +102,9 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-nvme@lists.infradead.org,
 	linux-scsi@vger.kernel.org,
 	linux-fsdevel@vger.kernel.org
-Subject: [PATCH 22/78] virtio-blk: remove a spurious call to revalidate_disk_size
-Date: Mon, 16 Nov 2020 15:57:13 +0100
-Message-Id: <20201116145809.410558-23-hch@lst.de>
+Subject: [PATCH 57/78] init: refactor devt_from_partuuid
+Date: Mon, 16 Nov 2020 15:57:48 +0100
+Message-Id: <20201116145809.410558-58-hch@lst.de>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20201116145809.410558-1-hch@lst.de>
 References: <20201116145809.410558-1-hch@lst.de>
@@ -112,29 +112,116 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-revalidate_disk_size just updates the block device size from the disk
-size.  Thus calling it from virtblk_update_cache_mode doesn't actually
-do anything.
+The code in devt_from_partuuid is very convoluted.  Refactor a bit by
+sanitizing the goto and variable name usage.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
-Acked-by: Stefan Hajnoczi <stefanha@redhat.com>
-Acked-by: Michael S. Tsirkin <mst@redhat.com>
 ---
- drivers/block/virtio_blk.c | 1 -
- 1 file changed, 1 deletion(-)
+ init/do_mounts.c | 68 ++++++++++++++++++++++--------------------------
+ 1 file changed, 31 insertions(+), 37 deletions(-)
 
-diff --git a/drivers/block/virtio_blk.c b/drivers/block/virtio_blk.c
-index 3e812b4c32e669..145606dc52db1e 100644
---- a/drivers/block/virtio_blk.c
-+++ b/drivers/block/virtio_blk.c
-@@ -598,7 +598,6 @@ static void virtblk_update_cache_mode(struct virtio_device *vdev)
- 	struct virtio_blk *vblk = vdev->priv;
+diff --git a/init/do_mounts.c b/init/do_mounts.c
+index aef2f24461c7f1..afa26a4028d25e 100644
+--- a/init/do_mounts.c
++++ b/init/do_mounts.c
+@@ -105,13 +105,10 @@ static int match_dev_by_uuid(struct device *dev, const void *data)
+  */
+ static dev_t devt_from_partuuid(const char *uuid_str)
+ {
+-	dev_t res = 0;
+ 	struct uuidcmp cmp;
+ 	struct device *dev = NULL;
+-	struct gendisk *disk;
+-	struct hd_struct *part;
++	dev_t devt = 0;
+ 	int offset = 0;
+-	bool clear_root_wait = false;
+ 	char *slash;
  
- 	blk_queue_write_cache(vblk->disk->queue, writeback, false);
--	revalidate_disk_size(vblk->disk, true);
+ 	cmp.uuid = uuid_str;
+@@ -120,52 +117,49 @@ static dev_t devt_from_partuuid(const char *uuid_str)
+ 	/* Check for optional partition number offset attributes. */
+ 	if (slash) {
+ 		char c = 0;
++
+ 		/* Explicitly fail on poor PARTUUID syntax. */
+-		if (sscanf(slash + 1,
+-			   "PARTNROFF=%d%c", &offset, &c) != 1) {
+-			clear_root_wait = true;
+-			goto done;
+-		}
++		if (sscanf(slash + 1, "PARTNROFF=%d%c", &offset, &c) != 1)
++			goto clear_root_wait;
+ 		cmp.len = slash - uuid_str;
+ 	} else {
+ 		cmp.len = strlen(uuid_str);
+ 	}
+ 
+-	if (!cmp.len) {
+-		clear_root_wait = true;
+-		goto done;
+-	}
++	if (!cmp.len)
++		goto clear_root_wait;
+ 
+-	dev = class_find_device(&block_class, NULL, &cmp,
+-				&match_dev_by_uuid);
++	dev = class_find_device(&block_class, NULL, &cmp, &match_dev_by_uuid);
+ 	if (!dev)
+-		goto done;
+-
+-	res = dev->devt;
++		return 0;
+ 
+-	/* Attempt to find the partition by offset. */
+-	if (!offset)
+-		goto no_offset;
++	if (offset) {
++		/*
++		 * Attempt to find the requested partition by adding an offset
++		 * to the partition number found by UUID.
++		 */
++		struct hd_struct *part;
+ 
+-	res = 0;
+-	disk = part_to_disk(dev_to_part(dev));
+-	part = disk_get_part(disk, dev_to_part(dev)->partno + offset);
+-	if (part) {
+-		res = part_devt(part);
+-		put_device(part_to_dev(part));
++		part = disk_get_part(dev_to_disk(dev),
++				     dev_to_part(dev)->partno + offset);
++		if (part) {
++			devt = part_devt(part);
++			put_device(part_to_dev(part));
++		}
++	} else {
++		devt = dev->devt;
+ 	}
+ 
+-no_offset:
+ 	put_device(dev);
+-done:
+-	if (clear_root_wait) {
+-		pr_err("VFS: PARTUUID= is invalid.\n"
+-		       "Expected PARTUUID=<valid-uuid-id>[/PARTNROFF=%%d]\n");
+-		if (root_wait)
+-			pr_err("Disabling rootwait; root= is invalid.\n");
+-		root_wait = 0;
+-	}
+-	return res;
++	return devt;
++
++clear_root_wait:
++	pr_err("VFS: PARTUUID= is invalid.\n"
++	       "Expected PARTUUID=<valid-uuid-id>[/PARTNROFF=%%d]\n");
++	if (root_wait)
++		pr_err("Disabling rootwait; root= is invalid.\n");
++	root_wait = 0;
++	return 0;
  }
  
- static const char *const virtblk_cache_types[] = {
+ /**
 -- 
 2.29.2
 
