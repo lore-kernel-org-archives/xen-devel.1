@@ -2,28 +2,25 @@ Return-Path: <SRS0=LqdB=EW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.2 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F2634C82553
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:00:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 82BA5C4742C
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:05:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 977082462E
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:00:17 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="lVGpDrCY"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 977082462E
+	by mail.kernel.org (Postfix) with ESMTPS id 38FF922450
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2020 15:05:46 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 38FF922450
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.28041.56686 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.28065.56698 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kefzD-00008V-3B; Mon, 16 Nov 2020 15:00:07 +0000
+	id 1keg4Q-0000j1-M6; Mon, 16 Nov 2020 15:05:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 28041.56686; Mon, 16 Nov 2020 15:00:07 +0000
+Received: by outflank-mailman (output) from mailman id 28065.56698; Mon, 16 Nov 2020 15:05:30 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,133 +35,66 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kefzC-00008N-VE; Mon, 16 Nov 2020 15:00:06 +0000
-Received: by outflank-mailman (input) for mailman id 28041;
- Mon, 16 Nov 2020 15:00:06 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1kefyY-0006ni-0Z
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 14:59:26 +0000
-Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 1158c296-eb3c-467f-894d-8f8cdcbaf2ff;
- Mon, 16 Nov 2020 14:58:38 +0000 (UTC)
-Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
- by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kefxY-0003mO-Ss; Mon, 16 Nov 2020 14:58:25 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1keg4Q-0000iu-Ip; Mon, 16 Nov 2020 15:05:30 +0000
+Received: by outflank-mailman (input) for mailman id 28065;
+ Mon, 16 Nov 2020 15:05:28 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=kJi/=EW=lst.de=hch@srs-us1.protection.inumbo.net>)
+ id 1keg4O-0000ip-LT
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:05:28 +0000
+Received: from verein.lst.de (unknown [213.95.11.211])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 91c217bb-6db1-4c32-b8c1-aeebb3a4bee0;
+ Mon, 16 Nov 2020 15:05:27 +0000 (UTC)
+Received: by verein.lst.de (Postfix, from userid 2407)
+ id C42D56736F; Mon, 16 Nov 2020 16:05:24 +0100 (CET)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=DM7u=EW=casper.srs.infradead.org=batv+29a21e8ca386e11a5a78+6294+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1kefyY-0006ni-0Z
-	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 14:59:26 +0000
-X-Inumbo-ID: 1158c296-eb3c-467f-894d-8f8cdcbaf2ff
-Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 1158c296-eb3c-467f-894d-8f8cdcbaf2ff;
-	Mon, 16 Nov 2020 14:58:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
-	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
-	Content-Type:Content-ID:Content-Description;
-	bh=MbR6eD8Z5sCp9HMp2xRKfZrC0GyX/16idOKOYUQxwmk=; b=lVGpDrCYC4uApK0HXhMfWQu//t
-	v5TNY33739vaVgizhet7Btd0aO7HYFUr4uFDV+hjF3FjzaPwtVUz2Kb7kWA5WHMiCOvV1zLNOLH3Z
-	xYyJ9PyjAQotPS9g4g5yfkhyuQvbAwVKYue6ztUh19mPuVx8DtNsK62BOcbCwnRTuEJ3dvoDg2ldg
-	WeBaZz6b7R0R55We4FXJgz3pLCWNo1XvND1Ep24BS9hOMWi13U/CDCIc7JHWwTXem/0p/fbzf34hi
-	1r3s/4MDxah8TmWEcY0L5xxJ+d6obD1qWfKT/c/iL18LhZNRmRcA2WXg5WAUiLmevTSoEYS+1X/52
-	zWWV8w6g==;
-Received: from [2001:4bb8:180:6600:255b:7def:a93:4a09] (helo=localhost)
-	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1kefxY-0003mO-Ss; Mon, 16 Nov 2020 14:58:25 +0000
+	(envelope-from <SRS0=kJi/=EW=lst.de=hch@srs-us1.protection.inumbo.net>)
+	id 1keg4O-0000ip-LT
+	for xen-devel@lists.xenproject.org; Mon, 16 Nov 2020 15:05:28 +0000
+X-Inumbo-ID: 91c217bb-6db1-4c32-b8c1-aeebb3a4bee0
+Received: from verein.lst.de (unknown [213.95.11.211])
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id 91c217bb-6db1-4c32-b8c1-aeebb3a4bee0;
+	Mon, 16 Nov 2020 15:05:27 +0000 (UTC)
+Received: by verein.lst.de (Postfix, from userid 2407)
+	id C42D56736F; Mon, 16 Nov 2020 16:05:24 +0100 (CET)
+Date: Mon, 16 Nov 2020 16:05:24 +0100
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
-Cc: Justin Sanders <justin@coraid.com>,
-	Josef Bacik <josef@toxicpanda.com>,
-	Ilya Dryomov <idryomov@gmail.com>,
-	Jack Wang <jinpu.wang@cloud.ionos.com>,
+Cc: Justin Sanders <justin@coraid.com>, Mike Snitzer <snitzer@redhat.com>,
 	"Michael S. Tsirkin" <mst@redhat.com>,
-	Jason Wang <jasowang@redhat.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Stefan Hajnoczi <stefanha@redhat.com>,
+	Jason Wang <jasowang@redhat.com>, linux-nvme@lists.infradead.org,
+	Song Liu <song@kernel.org>, dm-devel@redhat.com,
+	drbd-dev@lists.linbit.com, linux-scsi@vger.kernel.org,
+	xen-devel@lists.xenproject.org, Ilya Dryomov <idryomov@gmail.com>,
+	Jack Wang <jinpu.wang@cloud.ionos.com>,
 	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Minchan Kim <minchan@kernel.org>,
-	Mike Snitzer <snitzer@redhat.com>,
-	Song Liu <song@kernel.org>,
+	Josef Bacik <josef@toxicpanda.com>, nbd@other.debian.org,
+	linux-raid@vger.kernel.org, Stefan Hajnoczi <stefanha@redhat.com>,
+	ceph-devel@vger.kernel.org, linux-block@vger.kernel.org,
 	"Martin K. Petersen" <martin.petersen@oracle.com>,
-	dm-devel@redhat.com,
-	linux-block@vger.kernel.org,
-	drbd-dev@lists.linbit.com,
-	nbd@other.debian.org,
-	ceph-devel@vger.kernel.org,
-	xen-devel@lists.xenproject.org,
-	linux-raid@vger.kernel.org,
-	linux-nvme@lists.infradead.org,
-	linux-scsi@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org
-Subject: [PATCH 11/78] aoe: don't call set_capacity from irq context
-Date: Mon, 16 Nov 2020 15:57:02 +0100
-Message-Id: <20201116145809.410558-12-hch@lst.de>
-X-Mailer: git-send-email 2.29.2
-In-Reply-To: <20201116145809.410558-1-hch@lst.de>
+	Minchan Kim <minchan@kernel.org>, linux-fsdevel@vger.kernel.org,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+Subject: Re: cleanup updating the size of block devices v3
+Message-ID: <20201116150524.GA13367@lst.de>
 References: <20201116145809.410558-1-hch@lst.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20201116145809.410558-1-hch@lst.de>
+User-Agent: Mutt/1.5.17 (2007-11-01)
 
-Updating the block device size from irq context can lead to torn
-writes of the 64-bit value, and prevents us from using normal
-process context locking primitives to serialize access to the 64-bit
-nr_sectors value.  Defer the set_capacity to the already existing
-workqueue handler, where it can be merged with the update of the
-block device size by using set_capacity_and_notify.  As an extra
-bonus this also adds proper uevent notifications for the resize.
+Oops,
 
-Signed-off-by: Christoph Hellwig <hch@lst.de>
----
- drivers/block/aoe/aoecmd.c | 15 ++++-----------
- 1 file changed, 4 insertions(+), 11 deletions(-)
+this is a bigger patch bomb than intended.  Only patches 1-23 are this
+series which should be ready to be applied once for-5.11/block pulles in
+5.10-rc4.
 
-diff --git a/drivers/block/aoe/aoecmd.c b/drivers/block/aoe/aoecmd.c
-index 313f0b946fe2b3..ac720bdcd983e7 100644
---- a/drivers/block/aoe/aoecmd.c
-+++ b/drivers/block/aoe/aoecmd.c
-@@ -890,19 +890,13 @@ void
- aoecmd_sleepwork(struct work_struct *work)
- {
- 	struct aoedev *d = container_of(work, struct aoedev, work);
--	struct block_device *bd;
--	u64 ssize;
- 
- 	if (d->flags & DEVFL_GDALLOC)
- 		aoeblk_gdalloc(d);
- 
- 	if (d->flags & DEVFL_NEWSIZE) {
--		ssize = get_capacity(d->gd);
--		bd = bdget_disk(d->gd, 0);
--		if (bd) {
--			bd_set_nr_sectors(bd, ssize);
--			bdput(bd);
--		}
-+		set_capacity_and_notify(d->gd, d->ssize);
-+
- 		spin_lock_irq(&d->lock);
- 		d->flags |= DEVFL_UP;
- 		d->flags &= ~DEVFL_NEWSIZE;
-@@ -971,10 +965,9 @@ ataid_complete(struct aoedev *d, struct aoetgt *t, unsigned char *id)
- 	d->geo.start = 0;
- 	if (d->flags & (DEVFL_GDALLOC|DEVFL_NEWSIZE))
- 		return;
--	if (d->gd != NULL) {
--		set_capacity(d->gd, ssize);
-+	if (d->gd != NULL)
- 		d->flags |= DEVFL_NEWSIZE;
--	} else
-+	else
- 		d->flags |= DEVFL_GDALLOC;
- 	schedule_work(&d->work);
- }
--- 
-2.29.2
-
+After that follow patches already in for-5.11/block and my current hot
+off the press development branch.
 
