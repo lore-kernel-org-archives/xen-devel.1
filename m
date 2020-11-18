@@ -2,28 +2,26 @@ Return-Path: <SRS0=TkWG=EY=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-15.2 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CCC12C5519F
-	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2020 21:01:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8E195C64E7D
+	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2020 21:34:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 480C52075B
-	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2020 21:01:20 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="eOb8/U1A"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 480C52075B
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
+	by mail.kernel.org (Postfix) with ESMTPS id 2D997246CE
+	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2020 21:34:43 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2D997246CE
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.cz
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.30251.60104 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.30258.60128 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kfUZK-0005UK-3L; Wed, 18 Nov 2020 21:00:46 +0000
+	id 1kfV60-0008W5-Vd; Wed, 18 Nov 2020 21:34:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 30251.60104; Wed, 18 Nov 2020 21:00:46 +0000
+Received: by outflank-mailman (output) from mailman id 30258.60128; Wed, 18 Nov 2020 21:34:32 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,245 +36,101 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kfUZK-0005UD-0I; Wed, 18 Nov 2020 21:00:46 +0000
-Received: by outflank-mailman (input) for mailman id 30251;
- Wed, 18 Nov 2020 21:00:44 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=hmm/=EY=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1kfUZI-0005U8-S4
- for xen-devel@lists.xenproject.org; Wed, 18 Nov 2020 21:00:44 +0000
-Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 0d645aca-18b7-44cf-be0e-f2afaa826add;
- Wed, 18 Nov 2020 21:00:44 +0000 (UTC)
-Received: from sstabellini-ThinkPad-T480s (c-24-130-65-46.hsd1.ca.comcast.net
- [24.130.65.46])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id B35FE2075B;
- Wed, 18 Nov 2020 21:00:42 +0000 (UTC)
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kfV60-0008Vx-SE; Wed, 18 Nov 2020 21:34:32 +0000
+Received: by outflank-mailman (input) for mailman id 30258;
+ Wed, 18 Nov 2020 21:34:32 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=WhnZ=EY=suse.cz=jack@srs-us1.protection.inumbo.net>)
+ id 1kfV60-0008UU-3C
+ for xen-devel@lists.xenproject.org; Wed, 18 Nov 2020 21:34:32 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id a31a01dc-0b87-49fe-ab74-8bef08abceb8;
+ Wed, 18 Nov 2020 21:34:25 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 05AD8B004;
+ Wed, 18 Nov 2020 21:34:23 +0000 (UTC)
+Received: by quack2.suse.cz (Postfix, from userid 1000)
+ id 4F52B1E1325; Wed, 18 Nov 2020 15:37:47 +0100 (CET)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=hmm/=EY=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
-	id 1kfUZI-0005U8-S4
-	for xen-devel@lists.xenproject.org; Wed, 18 Nov 2020 21:00:44 +0000
-X-Inumbo-ID: 0d645aca-18b7-44cf-be0e-f2afaa826add
-Received: from mail.kernel.org (unknown [198.145.29.99])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 0d645aca-18b7-44cf-be0e-f2afaa826add;
-	Wed, 18 Nov 2020 21:00:44 +0000 (UTC)
-Received: from sstabellini-ThinkPad-T480s (c-24-130-65-46.hsd1.ca.comcast.net [24.130.65.46])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id B35FE2075B;
-	Wed, 18 Nov 2020 21:00:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1605733243;
-	bh=egciVJeNpgcLiVvye+pnZUkuZpAFnD3PDDiETXG6wHA=;
-	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=eOb8/U1A5BGWtv8oNrTzjJsDIe+lbfwXT2idH70Xp6swVsRMUZ1dPvptGT3uxoISO
-	 SDcgWWVrT+F5Vu60BevSUUPBiozWthJT9NTkkXeeyWpAdg16X/h0iKKlICUm9v94dl
-	 Cm8irhFOUTM2H9OKOKL6977zMHSmYewtSeOFIMJA=
-Date: Wed, 18 Nov 2020 13:00:30 -0800 (PST)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
-To: Jan Beulich <jbeulich@suse.com>
-cc: Stefano Stabellini <sstabellini@kernel.org>, andrew.cooper3@citrix.com, 
-    Bertrand.Marquis@arm.com, 
-    Stefano Stabellini <stefano.stabellini@xilinx.com>, 
-    george.dunlap@citrix.com, iwj@xenproject.org, julien@xen.org, wl@xen.org, 
-    xen-devel@lists.xenproject.org
-Subject: Re: [PATCH v2] xen: EXPERT clean-up and introduce UNSUPPORTED
-In-Reply-To: <eb6b32c3-c7e2-1e36-f492-0c00cc170ce2@suse.com>
-Message-ID: <alpine.DEB.2.21.2011181241310.11739@sstabellini-ThinkPad-T480s>
-References: <20201118005051.26115-1-sstabellini@kernel.org> <eb6b32c3-c7e2-1e36-f492-0c00cc170ce2@suse.com>
-User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
+	(envelope-from <SRS0=WhnZ=EY=suse.cz=jack@srs-us1.protection.inumbo.net>)
+	id 1kfV60-0008UU-3C
+	for xen-devel@lists.xenproject.org; Wed, 18 Nov 2020 21:34:32 +0000
+X-Inumbo-ID: a31a01dc-0b87-49fe-ab74-8bef08abceb8
+Received: from mx2.suse.de (unknown [195.135.220.15])
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id a31a01dc-0b87-49fe-ab74-8bef08abceb8;
+	Wed, 18 Nov 2020 21:34:25 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+	by mx2.suse.de (Postfix) with ESMTP id 05AD8B004;
+	Wed, 18 Nov 2020 21:34:23 +0000 (UTC)
+Received: by quack2.suse.cz (Postfix, from userid 1000)
+	id 4F52B1E1325; Wed, 18 Nov 2020 15:37:47 +0100 (CET)
+Date: Wed, 18 Nov 2020 15:37:47 +0100
+From: Jan Kara <jack@suse.cz>
+To: Christoph Hellwig <hch@lst.de>
+Cc: Jens Axboe <axboe@kernel.dk>, Tejun Heo <tj@kernel.org>,
+	Josef Bacik <josef@toxicpanda.com>,
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+	Coly Li <colyli@suse.de>, Mike Snitzer <snitzer@redhat.com>,
+	dm-devel@redhat.com, Richard Weinberger <richard@nod.at>,
+	Jan Kara <jack@suse.com>, linux-block@vger.kernel.org,
+	xen-devel@lists.xenproject.org, linux-bcache@vger.kernel.org,
+	linux-mtd@lists.infradead.org, linux-fsdevel@vger.kernel.org,
+	linux-mm@kvack.org
+Subject: Re: [PATCH 07/20] init: refactor name_to_dev_t
+Message-ID: <20201118143747.GL1981@quack2.suse.cz>
+References: <20201118084800.2339180-1-hch@lst.de>
+ <20201118084800.2339180-8-hch@lst.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20201118084800.2339180-8-hch@lst.de>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 
-On Wed, 18 Nov 2020, Jan Beulich wrote:
-> On 18.11.2020 01:50, Stefano Stabellini wrote:
-> > 1) It is not obvious that "Configure standard Xen features (expert
-> > users)" is actually the famous EXPERT we keep talking about on xen-devel
+On Wed 18-11-20 09:47:47, Christoph Hellwig wrote:
+> Split each case into a self-contained helper.
 > 
-> Which can be addressed by simply changing the one prompt line.
+> Signed-off-by: Christoph Hellwig <hch@lst.de>
+> ---
+>  include/linux/genhd.h |   7 +-
+>  init/do_mounts.c      | 183 +++++++++++++++++++++---------------------
+>  2 files changed, 91 insertions(+), 99 deletions(-)
 > 
-> > 2) It is not obvious when we need to enable EXPERT to get a specific
-> > feature
-> > 
-> > In particular if you want to enable ACPI support so that you can boot
-> > Xen on an ACPI platform, you have to enable EXPERT first. But searching
-> > through the kconfig menu it is really not clear (type '/' and "ACPI"):
-> > nothing in the description tells you that you need to enable EXPERT to
-> > get the option.
-> 
-> And what causes this to be different once you switch to UNSUPPORTED?
+> diff --git a/include/linux/genhd.h b/include/linux/genhd.h
+> index 22f5b9fd96f8bf..ca5e356084c353 100644
+> --- a/include/linux/genhd.h
+> +++ b/include/linux/genhd.h
+> @@ -388,18 +388,13 @@ static inline void bd_unlink_disk_holder(struct block_device *bdev,
+>  }
+>  #endif /* CONFIG_SYSFS */
+>  
+> +dev_t blk_lookup_devt(const char *name, int partno);
+>  #ifdef CONFIG_BLOCK
+>  void printk_all_partitions(void);
+> -dev_t blk_lookup_devt(const char *name, int partno);
+>  #else /* CONFIG_BLOCK */
+>  static inline void printk_all_partitions(void)
+>  {
+>  }
+> -static inline dev_t blk_lookup_devt(const char *name, int partno)
+> -{
+> -	dev_t devt = MKDEV(0, 0);
+> -	return devt;
+> -}
+>  #endif /* CONFIG_BLOCK */
 
-Two things: firstly, it doesn't and shouldn't take an expert to enable
-ACPI support, even if ACPI support is experimental. So calling it
-UNSUPPORTED helps a lot. This is particularly relevant to the ARM Kconfig
-options changed by this patch. Secondly, this patch is adding
-"(UNSUPPORTED)" in the oneline prompt so that it becomes easy to match
-it with the option you need to enable.
+This hunk looks unrelated to the change? Also why you move the declaration
+outside the CONFIG_BLOCK ifdef? AFAICS blk_lookup_devt() still exists only
+when CONFIG_BLOCK is defined? Otherwise the patch looks good to me.
 
+								Honza
 
-> > So this patch makes things easier by doing two things:
-> > 
-> > - introduce a new kconfig option UNSUPPORTED which is clearly to enable
-> >   UNSUPPORTED features as defined by SUPPORT.md
-> > 
-> > - change EXPERT options to UNSUPPORTED where it makes sense: keep
-> >   depending on EXPERT for features made for experts
-> > 
-> > - tag unsupported features by adding (UNSUPPORTED) to the one-line
-> >   description
-> 
-> I am, btw, not fully convinced of the need for this redundancy. Wouldn't
-> it be enough to have just EXPERT as a setting, but varying (<reason>)
-> tokens in the prompt text?
-
-I don't think so, for the same reasons written above: EXPERT should not
-be gating things like ACPI. Moreover, the advantage of the tag in the
-oneline prompt is that you can search for an option and figure out that
-you need to enable UNSUPPORTED. It doesn't work if we use a different
-tag. Just to get the idea, try to do "make menuconfig" and search for
-"ARGO" with '/': you'll see "(UNSUPPORTED)". Then, if you search for
-"UNSUPPORTED" you can find what you need to enable.
-
-
-> > --- a/xen/Kconfig
-> > +++ b/xen/Kconfig
-> > @@ -34,8 +34,17 @@ config DEFCONFIG_LIST
-> >  	option defconfig_list
-> >  	default ARCH_DEFCONFIG
-> >  
-> > +config UNSUPPORTED
-> > +	bool "Configure UNSUPPORTED features"
-> > +	help
-> > +	  This option allows unsupported Xen options to be enabled, which
-> 
-> I'd recommend against "enabled" - a control may also be there to allow
-> disabling something.
-
-I can change that.
-
-
-> > +	  includes non-security-supported, experimental, and tech preview
-> > +	  features as defined by SUPPORT.md. Xen binaries built with this
-> > +	  option enabled are not security supported.
-> 
-> Overall I'm a little afraid of possible inverse implications: Anything
-> _not_ dependent upon this option (and in particular anything not
-> dependent upon any Kconfig control) may be considered supported then.
-> 
-> Also the last sentence is already present for EXPERT, 
-
-I am happy to rephrase it. What about:
-
-"This option allows certain unsupported Xen options to be changed, which
-includes non-security-supported, experimental, and tech preview features
-as defined by SUPPORT.md."
-
-
-> > +	default n
-> 
-> I realize you likely merely copied what EXPERT has, but this "default n"
-> is pretty pointless and hence would better be omitted imo.
-
-OK
-
-
-> > --- a/xen/arch/x86/Kconfig
-> > +++ b/xen/arch/x86/Kconfig
-> > @@ -102,8 +102,8 @@ config HVM
-> >  	  If unsure, say Y.
-> >  
-> >  config XEN_SHSTK
-> > -	bool "Supervisor Shadow Stacks"
-> > -	depends on HAS_AS_CET_SS && EXPERT
-> > +	bool "Supervisor Shadow Stacks (UNSUPPORTED)"
-> > +	depends on HAS_AS_CET_SS && UNSUPPORTED
-> >  	default y
-> 
-> Andrew, I think I did ask on v1 already: Do we need to continue to
-> consider this unsupported? While perhaps not a change to make right in
-> this patch, it should perhaps be a pre-patch then to avoid the need to
-> touch it here.
-
-Of course I have no opinion on this. I am happy to do as instructed.
-
-
-> > @@ -165,7 +165,7 @@ config HVM_FEP
-> 
-> Seeing just the patch context here, I think HVM_FEP may also want
-> converting.
-
-OK
-
-
-> > --- a/xen/common/Kconfig
-> > +++ b/xen/common/Kconfig
-> > @@ -151,7 +151,7 @@ config KEXEC
-> >  	  If unsure, say Y.
-> >  
-> >  config EFI_SET_VIRTUAL_ADDRESS_MAP
-> > -    bool "EFI: call SetVirtualAddressMap()" if EXPERT
-> > +    bool "EFI: call SetVirtualAddressMap() (UNSUPPORTED)" if UNSUPPORTED
-> 
-> I have to admit I'm pretty unsure about what to do with this one.
-
-Yeah, similarly to XEN_SHSTK, I don't have an opinion here either.  I am
-happy to change it or leave it as.
-
-
-> > @@ -272,7 +272,7 @@ config LATE_HWDOM
-> >  	  If unsure, say N.
-> >  
-> >  config ARGO
-> > -	bool "Argo: hypervisor-mediated interdomain communication" if EXPERT
-> > +	bool "Argo: hypervisor-mediated interdomain communication (UNSUPPORTED)" if UNSUPPORTED
-> 
-> Perhaps better (EXPERIMENTAL)?
-
-For this and also the schedulers options below, although it is true that
-(EXPERIMENTAL) is a more accurate description, then the problem is that
-it is not easy to match against UNSUPPORTED. In other words, if you
-search for "ARGO" in make menuconfig and it is marked with
-(EXPERIMENTAL), it is not obvious that you need to enable UNSUPPORTED to
-get it as an option. For this reason, I think it is better to use
-(UNSUPPORTED) both here and below for SCHED_ARINC653 and SCHED_NULL.
-
-
-> > --- a/xen/common/sched/Kconfig
-> > +++ b/xen/common/sched/Kconfig
-> > @@ -15,7 +15,7 @@ config SCHED_CREDIT2
-> >  	  optimized for lower latency and higher VM density.
-> >  
-> >  config SCHED_RTDS
-> > -	bool "RTDS scheduler support (EXPERIMENTAL)"
-> > +	bool "RTDS scheduler support (UNSUPPORTED)" if UNSUPPORTED
-> >  	default y
-> >  	---help---
-> >  	  The RTDS scheduler is a soft and firm real-time scheduler for
-> > @@ -23,14 +23,14 @@ config SCHED_RTDS
-> >  	  in the cloud, and general low-latency workloads.
-> >  
-> >  config SCHED_ARINC653
-> > -	bool "ARINC653 scheduler support (EXPERIMENTAL)"
-> > +	bool "ARINC653 scheduler support (UNSUPPORTED)" if UNSUPPORTED
-> >  	default DEBUG
-> >  	---help---
-> >  	  The ARINC653 scheduler is a hard real-time scheduler for single
-> >  	  cores, targeted for avionics, drones, and medical devices.
-> >  
-> >  config SCHED_NULL
-> > -	bool "Null scheduler support (EXPERIMENTAL)"
-> > +	bool "Null scheduler support (UNSUPPORTED)" if UNSUPPORTED
-> >  	default y
-> >  	---help---
-> >  	  The null scheduler is a static, zero overhead scheduler,
-> 
-> I'd like to see (EXPERIMENTAL) stay everywhere here.
-
+-- 
+Jan Kara <jack@suse.com>
+SUSE Labs, CR
 
