@@ -2,25 +2,28 @@ Return-Path: <SRS0=TkWG=EY=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.2 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E7B73C56202
-	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2020 08:58:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C20AAC5519F
+	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2020 08:59:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 487D52158C
-	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2020 08:58:21 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 487D52158C
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
+	by mail.kernel.org (Postfix) with ESMTPS id 3EE13221E9
+	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2020 08:59:57 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="Lplaa1xO"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3EE13221E9
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.29527.59027 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.29535.59039 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kfJI5-0001DQ-Q1; Wed, 18 Nov 2020 08:58:13 +0000
+	id 1kfJJZ-0001Qx-4x; Wed, 18 Nov 2020 08:59:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 29527.59027; Wed, 18 Nov 2020 08:58:13 +0000
+Received: by outflank-mailman (output) from mailman id 29535.59039; Wed, 18 Nov 2020 08:59:45 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -35,62 +38,89 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kfJI5-0001DI-M1; Wed, 18 Nov 2020 08:58:13 +0000
-Received: by outflank-mailman (input) for mailman id 29527;
- Wed, 18 Nov 2020 08:58:12 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kfJJZ-0001Qq-1Z; Wed, 18 Nov 2020 08:59:45 +0000
+Received: by outflank-mailman (input) for mailman id 29535;
+ Wed, 18 Nov 2020 08:59:43 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=VXpI=EY=lst.de=hch@srs-us1.protection.inumbo.net>)
- id 1kfJI4-0001Ag-CO
- for xen-devel@lists.xenproject.org; Wed, 18 Nov 2020 08:58:12 +0000
-Received: from verein.lst.de (unknown [213.95.11.211])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id a59a809c-5e52-44df-9133-83bf144e326c;
- Wed, 18 Nov 2020 08:58:07 +0000 (UTC)
-Received: by verein.lst.de (Postfix, from userid 2407)
- id E406367357; Wed, 18 Nov 2020 09:58:04 +0100 (CET)
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+ (envelope-from <SRS0=763w=EY=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1kfJAt-0006e0-6w
+ for xen-devel@lists.xenproject.org; Wed, 18 Nov 2020 08:50:47 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 8bf40fbe-c935-4e0e-a096-066fb9325f3c;
+ Wed, 18 Nov 2020 08:50:04 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 80D87AD45;
+ Wed, 18 Nov 2020 08:50:03 +0000 (UTC)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=VXpI=EY=lst.de=hch@srs-us1.protection.inumbo.net>)
-	id 1kfJI4-0001Ag-CO
-	for xen-devel@lists.xenproject.org; Wed, 18 Nov 2020 08:58:12 +0000
-X-Inumbo-ID: a59a809c-5e52-44df-9133-83bf144e326c
-Received: from verein.lst.de (unknown [213.95.11.211])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id a59a809c-5e52-44df-9133-83bf144e326c;
-	Wed, 18 Nov 2020 08:58:07 +0000 (UTC)
-Received: by verein.lst.de (Postfix, from userid 2407)
-	id E406367357; Wed, 18 Nov 2020 09:58:04 +0100 (CET)
-Date: Wed, 18 Nov 2020 09:58:04 +0100
-From: Christoph Hellwig <hch@lst.de>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Christoph Hellwig <hch@lst.de>, Tejun Heo <tj@kernel.org>,
-	Josef Bacik <josef@toxicpanda.com>,
-	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
-	Coly Li <colyli@suse.de>, Mike Snitzer <snitzer@redhat.com>,
-	dm-devel@redhat.com, Richard Weinberger <richard@nod.at>,
-	Jan Kara <jack@suse.com>, linux-block@vger.kernel.org,
-	xen-devel@lists.xenproject.org, linux-bcache@vger.kernel.org,
-	linux-mtd@lists.infradead.org, linux-fsdevel@vger.kernel.org,
-	linux-mm@kvack.org, Jens Axboe <axboe@kernel.dk>
-Subject: Re: merge struct block_device and struct hd_struct
-Message-ID: <20201118085804.GA20384@lst.de>
-References: <20201118084800.2339180-1-hch@lst.de> <22ca5396-0253-f286-9eab-d417b2e0b3ad@suse.com>
+	(envelope-from <SRS0=763w=EY=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+	id 1kfJAt-0006e0-6w
+	for xen-devel@lists.xenproject.org; Wed, 18 Nov 2020 08:50:47 +0000
+X-Inumbo-ID: 8bf40fbe-c935-4e0e-a096-066fb9325f3c
+Received: from mx2.suse.de (unknown [195.135.220.15])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id 8bf40fbe-c935-4e0e-a096-066fb9325f3c;
+	Wed, 18 Nov 2020 08:50:04 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1605689403; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=KyU5ejWfgwEnjWjOuAgNBFVH+se8h5ZxMHqQu86/6+A=;
+	b=Lplaa1xOPrE/jDH4KfJhgBZ4ybKF6cgmPiszyNju5YYcFJmyOP/6VzRKhetQ6N8kBkmzYg
+	48wK07+NjYad+HnBCd8RvKLT+6LLQPyRSks9/UDfrEoHLdn0I+JWJgTdJM8BgHTvzrc8rU
+	rjAeRtBBRqfZO8fn6sn/BcDo/gJtFaQ=
+Received: from relay2.suse.de (unknown [195.135.221.27])
+	by mx2.suse.de (Postfix) with ESMTP id 80D87AD45;
+	Wed, 18 Nov 2020 08:50:03 +0000 (UTC)
+Subject: Re: [PATCH v2] xen: EXPERT clean-up and introduce UNSUPPORTED
+To: Bertrand Marquis <Bertrand.Marquis@arm.com>
+Cc: "open list:X86" <xen-devel@lists.xenproject.org>,
+ Stefano Stabellini <stefano.stabellini@xilinx.com>,
+ "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>,
+ "george.dunlap@citrix.com" <george.dunlap@citrix.com>,
+ "iwj@xenproject.org" <iwj@xenproject.org>, "julien@xen.org"
+ <julien@xen.org>, "wl@xen.org" <wl@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>
+References: <20201118005051.26115-1-sstabellini@kernel.org>
+ <0A50C952-B9D8-44C3-9326-A0555B435693@arm.com>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <c59a1540-2dd0-2813-9fe5-d5be2335fe9b@suse.com>
+Date: Wed, 18 Nov 2020 09:50:03 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.4.3
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <22ca5396-0253-f286-9eab-d417b2e0b3ad@suse.com>
-User-Agent: Mutt/1.5.17 (2007-11-01)
+In-Reply-To: <0A50C952-B9D8-44C3-9326-A0555B435693@arm.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-On Wed, Nov 18, 2020 at 09:56:11AM +0100, Jan Beulich wrote:
-> since this isn't the first series from you recently spamming
-> xen-devel, may I ask that you don't Cc entire series to lists
-> which are involved with perhaps just one out of the many patches?
-> IMO Cc lists should be compiled on a per-patch basis; the cover
-> letter may of course be sent to the union of all of them.
+On 18.11.2020 09:45, Bertrand Marquis wrote:
+>> On 18 Nov 2020, at 00:50, Stefano Stabellini <sstabellini@kernel.org> wrote:
+>> --- a/xen/arch/x86/Kconfig
+>> +++ b/xen/arch/x86/Kconfig
+>> @@ -102,8 +102,8 @@ config HVM
+>> 	  If unsure, say Y.
+>>
+>> config XEN_SHSTK
+>> -	bool "Supervisor Shadow Stacks"
+>> -	depends on HAS_AS_CET_SS && EXPERT
+>> +	bool "Supervisor Shadow Stacks (UNSUPPORTED)"
+>> +	depends on HAS_AS_CET_SS && UNSUPPORTED
+> 
+> This one is not following the standard scheme with “if UNSUPPORTED"
 
-No way.  Individual CCs are completely broken as they don't provide
-the reviewer a context.  If you don't want xen-blkfront patches to
-go to xen-devel remove it from MAINTAINERS.
+There's no standard scheme here: There's one case where the entire
+option depends on some other setting (e.g. UNSUPPORTED) and another
+where just the prompt (i.e. giving the user a choice) does. The
+difference becomes obvious when the option has a default other than
+"no": Despite the invisible prompt, it may get turned on. In the
+case here (serving as a good example), "default y" would mean the
+feature gets turned on when "if UNSUPPORTED" would be added to the
+prompt and when UNSUPPORTED is itself off.
+
+Jan
 
