@@ -2,28 +2,28 @@ Return-Path: <SRS0=TkWG=EY=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DC730C5519F
-	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2020 18:57:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 698F4C5519F
+	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2020 19:10:23 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3FC8120870
-	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2020 18:57:13 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id C7522221EB
+	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2020 19:10:22 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="d91s9/Pc"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3FC8120870
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="PeZOptQ+"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C7522221EB
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.30228.60065 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.30237.60083 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kfSd8-0001JH-Ew; Wed, 18 Nov 2020 18:56:34 +0000
+	id 1kfSqF-0003Cu-N3; Wed, 18 Nov 2020 19:10:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 30228.60065; Wed, 18 Nov 2020 18:56:34 +0000
+Received: by outflank-mailman (output) from mailman id 30237.60083; Wed, 18 Nov 2020 19:10:07 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,119 +38,232 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kfSd8-0001J7-8O; Wed, 18 Nov 2020 18:56:34 +0000
-Received: by outflank-mailman (input) for mailman id 30228;
- Wed, 18 Nov 2020 18:56:32 +0000
+	id 1kfSqF-0003CH-HK; Wed, 18 Nov 2020 19:10:07 +0000
+Received: by outflank-mailman (input) for mailman id 30237;
+ Wed, 18 Nov 2020 19:10:06 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kfSd6-0001Ix-ND; Wed, 18 Nov 2020 18:56:32 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
+ (envelope-from <julien@xen.org>) id 1kfSqE-0003BQ-PV
+ for xen-devel@lists.xenproject.org; Wed, 18 Nov 2020 19:10:06 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kfSd6-0000HN-GH; Wed, 18 Nov 2020 18:56:32 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kfSd6-0007UQ-6l; Wed, 18 Nov 2020 18:56:32 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1kfSd6-0003Vf-4q; Wed, 18 Nov 2020 18:56:32 +0000
+ (envelope-from <julien@xen.org>)
+ id 1kfSqC-0000b2-Cb; Wed, 18 Nov 2020 19:10:04 +0000
+Received: from [54.239.6.185] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1kfSqB-0005Zx-Sk; Wed, 18 Nov 2020 19:10:04 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <osstest-admin@xenproject.org>)
-	id 1kfSd6-0001Ix-ND; Wed, 18 Nov 2020 18:56:32 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=e5VeyMW0ckLL2xnvd6nA36jSvIBVFM6WI3SxOXueqF8=; b=d91s9/PcvoKHfwyzvIYuYN7Kju
-	VIam/bYCSIaeRmWiGwiqDbyXHFBQbp1WF0cZEw4MbCBLAtbmEJEzRqNIsgfor5NU/8jYGpnqTxmO3
-	KlNb+cRC3o7jrqFWqMCCZEPb3e1Tdo7gPwsapIiJxG8DRwa2QWNJKsBIXkCxatHUQNPw=;
-Received: from host146.205.237.98.conversent.net ([205.237.98.146] helo=infra.test-lab.xenproject.org)
+	(envelope-from <julien@xen.org>)
+	id 1kfSqE-0003BQ-PV
+	for xen-devel@lists.xenproject.org; Wed, 18 Nov 2020 19:10:06 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+	bh=ZPDYQeEJMUeJ53IrIFmyaECuSyUuN6lz1LGnQKhaaOY=; b=PeZOptQ+HEnC90bBU/nDLY1FqO
+	SLrQoH42sNEM6noPRIzyEPtEbzbVgqgnACvoBZkwoyQByaupx8R24vzd5fuK8bJjxOjyNxrPogya9
+	dpEOqoaDnUx/l4sJDZFDBWGJTcTWZV6LxKh1Th917AuSGQi30xRXQ+eLQQZnB2TKJfe8=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
 	by mail.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <osstest-admin@xenproject.org>)
-	id 1kfSd6-0000HN-GH; Wed, 18 Nov 2020 18:56:32 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
-	by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <osstest-admin@xenproject.org>)
-	id 1kfSd6-0007UQ-6l; Wed, 18 Nov 2020 18:56:32 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim 4.92)
-	(envelope-from <osstest-admin@xenproject.org>)
-	id 1kfSd6-0003Vf-4q; Wed, 18 Nov 2020 18:56:32 +0000
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-156860-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+	(envelope-from <julien@xen.org>)
+	id 1kfSqC-0000b2-Cb; Wed, 18 Nov 2020 19:10:04 +0000
+Received: from [54.239.6.185] (helo=a483e7b01a66.ant.amazon.com)
+	by xenbits.xenproject.org with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
+	(Exim 4.92)
+	(envelope-from <julien@xen.org>)
+	id 1kfSqB-0005Zx-Sk; Wed, 18 Nov 2020 19:10:04 +0000
+Subject: Re: [PATCH 1/3] mm: introduce xvmalloc() et al and use for grant
+ table allocations
+To: Jan Beulich <jbeulich@suse.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+References: <e0364274-f123-82bd-ec85-bea519a34049@suse.com>
+ <d98aabe4-6c1b-0970-2e42-eb991e9075a2@suse.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <e7b72c54-e8e4-428d-9264-484fc0061ba4@xen.org>
+Date: Wed, 18 Nov 2020 19:10:01 +0000
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.4.3
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 156860: tolerable all pass - PUSHED
-X-Osstest-Failures:
-    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This:
-    xen=22e323d115d8f26d5926c20c66e11f85a46837d7
-X-Osstest-Versions-That:
-    xen=5200fba9ce534fc55ec40ab622b6058600090415
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Wed, 18 Nov 2020 18:56:32 +0000
+In-Reply-To: <d98aabe4-6c1b-0970-2e42-eb991e9075a2@suse.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
-flight 156860 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/156860/
+Hi Jan,
 
-Failures :-/ but no regressions.
+On 06/11/2020 07:11, Jan Beulich wrote:
+> All of the array allocations in grant_table_init() can exceed a page's
+> worth of memory, which xmalloc()-based interfaces aren't really suitable
+> for after boot. 
 
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
+I can see a few reasons why they are not suitable:
+   - xmalloc() will try to using an order and then throw memory. This is 
+pretty inneficient.
+   - xmalloc() will allocate physically contiguous memory
 
-version targeted for testing:
- xen                  22e323d115d8f26d5926c20c66e11f85a46837d7
-baseline version:
- xen                  5200fba9ce534fc55ec40ab622b6058600090415
+It would be good to clarify which one you refer because none of them are 
+really a problem only after boot...
 
-Last test of basis   156855  2020-11-18 12:00:35 Z    0 days
-Testing same since   156860  2020-11-18 16:00:24 Z    0 days    1 attempts
+One thing to be aware thought is xv*() are going to be more inefficient 
+because they involve touching the page-tables (at least until the work 
+to map on-demand the direct map is not merged). In addition, on Arm, 
+they will also use only 4K mappings (I have a TODO to fix that).
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Michal Orzel <michal.orzel@arm.com>
+So I think we will need to be careful when to use xmalloc() vs 
+xvalloc(). It might be worth outlining that in the documentation of xv*().
 
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-libvirt                                     pass    
+The current use in the grant-table code looks fine to me.
 
+[...]
 
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
+> --- a/xen/common/vmap.c
+> +++ b/xen/common/vmap.c
+> @@ -7,6 +7,7 @@
+>   #include <xen/spinlock.h>
+>   #include <xen/types.h>
+>   #include <xen/vmap.h>
+> +#include <xen/xvmalloc.h>
+>   #include <asm/page.h>
+>   
+>   static DEFINE_SPINLOCK(vm_lock);
+> @@ -299,11 +300,29 @@ void *vzalloc(size_t size)
+>       return p;
+>   }
+>   
+> -void vfree(void *va)
+> +static void _vfree(const void *va, unsigned int pages, enum vmap_region type)
 
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
+I don't think "unsigned int" is sufficient to cover big size. AFAICT, 
+this is not in a new problem in this code and seems to be a latent issue 
+so far.
 
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+However, I feel that it is wrong to introduce a new set of allocation 
+helpers that contained a flaw fixed in xm*alloc() recently (see  commit 
+cf38b4926e2b "xmalloc: guard against integer overflow").
 
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+> -    unsigned int i, pages;
+> +    unsigned int i;
+>       struct page_info *pg;
+>       PAGE_LIST_HEAD(pg_list);
+> +
+> +    ASSERT(pages);
+> +
+> +    for ( i = 0; i < pages; i++ )
+> +    {
+> +        pg = vmap_to_page(va + i * PAGE_SIZE);
+> +        ASSERT(pg);
+> +        page_list_add(pg, &pg_list);
+> +    }
+> +    vunmap(va);
+> +
+> +    while ( (pg = page_list_remove_head(&pg_list)) != NULL )
+> +        free_domheap_page(pg);
+> +}
+> +
+> +void vfree(void *va)
+> +{
+> +    unsigned int pages;
+>       enum vmap_region type = VMAP_DEFAULT;
+>   
+>       if ( !va )
+> @@ -315,18 +334,71 @@ void vfree(void *va)
+>           type = VMAP_XEN;
+>           pages = vm_size(va, type);
+>       }
+> -    ASSERT(pages);
+>   
+> -    for ( i = 0; i < pages; i++ )
+> +    _vfree(va, pages, type);
+> +}
+> +
 
+[...]
 
-Pushing revision :
+> --- /dev/null
+> +++ b/xen/include/xen/xvmalloc.h
+> @@ -0,0 +1,70 @@
+> +
+> +#ifndef __XVMALLOC_H__
+> +#define __XVMALLOC_H__
+> +
+> +#include <xen/cache.h>
+> +#include <xen/types.h>
+> +
+> +/*
+> + * Xen malloc/free-style interface.
 
-To xenbits.xen.org:/home/xen/git/xen.git
-   5200fba9ce..22e323d115  22e323d115d8f26d5926c20c66e11f85a46837d7 -> smoke
+It would be useful to emphase that they should only be used if the 
+caller does *not* need physically contiguous memory.
+
+> + */
+> +
+> +/* Allocate space for typed object. */
+> +#define xvmalloc(_type) ((_type *)_xvmalloc(sizeof(_type), __alignof__(_type)))
+> +#define xvzalloc(_type) ((_type *)_xvzalloc(sizeof(_type), __alignof__(_type)))
+> +
+> +/* Allocate space for array of typed objects. */
+> +#define xvmalloc_array(_type, _num) \
+> +    ((_type *)_xvmalloc_array(sizeof(_type), __alignof__(_type), _num))
+> +#define xvzalloc_array(_type, _num) \
+> +    ((_type *)_xvzalloc_array(sizeof(_type), __alignof__(_type), _num))
+> +
+> +/* Allocate space for a structure with a flexible array of typed objects. */
+> +#define xvzalloc_flex_struct(type, field, nr) \
+> +    ((type *)_xvzalloc(offsetof(type, field[nr]), __alignof__(type)))
+> +
+> +#define xvmalloc_flex_struct(type, field, nr) \
+> +    ((type *)_xvmalloc(offsetof(type, field[nr]), __alignof__(type)))
+> +
+> +/* Re-allocate space for a structure with a flexible array of typed objects. */
+> +#define xvrealloc_flex_struct(ptr, field, nr)                          \
+> +    ((typeof(ptr))_xvrealloc(ptr, offsetof(typeof(*(ptr)), field[nr]), \
+> +                             __alignof__(typeof(*(ptr)))))
+> +
+> +/* Allocate untyped storage. */
+> +#define xvmalloc_bytes(_bytes) _xvmalloc(_bytes, SMP_CACHE_BYTES)
+> +#define xvzalloc_bytes(_bytes) _xvzalloc(_bytes, SMP_CACHE_BYTES)
+> +
+> +/* Free any of the above. */
+> +extern void xvfree(void *);
+> +
+> +/* Free an allocation, and zero the pointer to it. */
+> +#define XVFREE(p) do { \
+> +    xvfree(p);         \
+> +    (p) = NULL;        \
+> +} while ( false )
+> +
+> +/* Underlying functions */
+> +extern void *_xvmalloc(size_t size, unsigned int align);
+> +extern void *_xvzalloc(size_t size, unsigned int align);
+> +extern void *_xvrealloc(void *ptr, size_t size, unsigned int align);
+> +
+> +static inline void *_xvmalloc_array(
+> +    size_t size, unsigned int align, unsigned long num)
+> +{
+> +    /* Check for overflow. */
+> +    if ( size && num > UINT_MAX / size )
+> +        return NULL;
+> +    return _xvmalloc(size * num, align);
+> +}
+> +
+> +static inline void *_xvzalloc_array(
+> +    size_t size, unsigned int align, unsigned long num)
+> +{
+> +    /* Check for overflow. */
+> +    if ( size && num > UINT_MAX / size )
+> +        return NULL;
+> +    return _xvzalloc(size * num, align);
+> +}
+> +
+> +#endif /* __XVMALLOC_H__ */
+> 
+
+-- 
+Julien Grall
 
