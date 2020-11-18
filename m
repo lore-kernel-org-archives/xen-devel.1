@@ -7,21 +7,21 @@ X-Spam-Status: No, score=-15.2 required=3.0 tests=BAYES_00,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F715C6379D
-	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2020 21:34:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E0BB5C63697
+	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2020 21:34:52 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CB07520715
-	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2020 21:34:48 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CB07520715
+	by mail.kernel.org (Postfix) with ESMTPS id 7F45820780
+	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2020 21:34:52 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7F45820780
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.cz
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.30259.60140 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.30261.60152 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kfV66-00008i-7k; Wed, 18 Nov 2020 21:34:38 +0000
+	id 1kfV6B-0000DU-IE; Wed, 18 Nov 2020 21:34:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 30259.60140; Wed, 18 Nov 2020 21:34:38 +0000
+Received: by outflank-mailman (output) from mailman id 30261.60152; Wed, 18 Nov 2020 21:34:43 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,41 +36,41 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kfV66-00008Z-4D; Wed, 18 Nov 2020 21:34:38 +0000
-Received: by outflank-mailman (input) for mailman id 30259;
- Wed, 18 Nov 2020 21:34:37 +0000
+	id 1kfV6B-0000DG-Du; Wed, 18 Nov 2020 21:34:43 +0000
+Received: by outflank-mailman (input) for mailman id 30261;
+ Wed, 18 Nov 2020 21:34:42 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=WhnZ=EY=suse.cz=jack@srs-us1.protection.inumbo.net>)
- id 1kfV65-0008UU-3K
- for xen-devel@lists.xenproject.org; Wed, 18 Nov 2020 21:34:37 +0000
+ id 1kfV6A-0008UU-3f
+ for xen-devel@lists.xenproject.org; Wed, 18 Nov 2020 21:34:42 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id a4fe5f2b-09c7-46ba-b604-116858de571d;
+ id f6f06fa4-23d5-4e9d-9231-4c3091eaed54;
  Wed, 18 Nov 2020 21:34:25 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 35A12B011;
- Wed, 18 Nov 2020 21:34:24 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 01321B000;
+ Wed, 18 Nov 2020 21:34:23 +0000 (UTC)
 Received: by quack2.suse.cz (Postfix, from userid 1000)
- id A0C1D1E130B; Wed, 18 Nov 2020 15:10:24 +0100 (CET)
+ id BCB4E1E1330; Wed, 18 Nov 2020 15:46:40 +0100 (CET)
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=WhnZ=EY=suse.cz=jack@srs-us1.protection.inumbo.net>)
-	id 1kfV65-0008UU-3K
-	for xen-devel@lists.xenproject.org; Wed, 18 Nov 2020 21:34:37 +0000
-X-Inumbo-ID: a4fe5f2b-09c7-46ba-b604-116858de571d
+	id 1kfV6A-0008UU-3f
+	for xen-devel@lists.xenproject.org; Wed, 18 Nov 2020 21:34:42 +0000
+X-Inumbo-ID: f6f06fa4-23d5-4e9d-9231-4c3091eaed54
 Received: from mx2.suse.de (unknown [195.135.220.15])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id a4fe5f2b-09c7-46ba-b604-116858de571d;
+	id f6f06fa4-23d5-4e9d-9231-4c3091eaed54;
 	Wed, 18 Nov 2020 21:34:25 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 35A12B011;
-	Wed, 18 Nov 2020 21:34:24 +0000 (UTC)
+	by mx2.suse.de (Postfix) with ESMTP id 01321B000;
+	Wed, 18 Nov 2020 21:34:23 +0000 (UTC)
 Received: by quack2.suse.cz (Postfix, from userid 1000)
-	id A0C1D1E130B; Wed, 18 Nov 2020 15:10:24 +0100 (CET)
-Date: Wed, 18 Nov 2020 15:10:24 +0100
+	id BCB4E1E1330; Wed, 18 Nov 2020 15:46:40 +0100 (CET)
+Date: Wed, 18 Nov 2020 15:46:40 +0100
 From: Jan Kara <jack@suse.cz>
 To: Christoph Hellwig <hch@lst.de>
 Cc: Jens Axboe <axboe@kernel.dk>, Tejun Heo <tj@kernel.org>,
@@ -82,17 +82,20 @@ Cc: Jens Axboe <axboe@kernel.dk>, Tejun Heo <tj@kernel.org>,
 	xen-devel@lists.xenproject.org, linux-bcache@vger.kernel.org,
 	linux-mtd@lists.infradead.org, linux-fsdevel@vger.kernel.org,
 	linux-mm@kvack.org
-Subject: Re: [PATCH 02/20] block: remove a duplicate __disk_get_part prototype
-Message-ID: <20201118141024.GG1981@quack2.suse.cz>
+Subject: Re: [PATCH 10/20] block: refactor __blkdev_put
+Message-ID: <20201118144640.GO1981@quack2.suse.cz>
 References: <20201118084800.2339180-1-hch@lst.de>
- <20201118084800.2339180-3-hch@lst.de>
+ <20201118084800.2339180-11-hch@lst.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20201118084800.2339180-3-hch@lst.de>
+In-Reply-To: <20201118084800.2339180-11-hch@lst.de>
 User-Agent: Mutt/1.10.1 (2018-07-13)
 
-On Wed 18-11-20 09:47:42, Christoph Hellwig wrote:
+On Wed 18-11-20 09:47:50, Christoph Hellwig wrote:
+> Reorder the code to have one big section for the last close, and to use
+> bdev_is_partition.
+> 
 > Signed-off-by: Christoph Hellwig <hch@lst.de>
 
 Looks good. You can add:
@@ -102,21 +105,43 @@ Reviewed-by: Jan Kara <jack@suse.cz>
 								Honza
 
 > ---
->  include/linux/genhd.h | 1 -
->  1 file changed, 1 deletion(-)
+>  fs/block_dev.c | 14 +++++++-------
+>  1 file changed, 7 insertions(+), 7 deletions(-)
 > 
-> diff --git a/include/linux/genhd.h b/include/linux/genhd.h
-> index 46553d6d602563..22f5b9fd96f8bf 100644
-> --- a/include/linux/genhd.h
-> +++ b/include/linux/genhd.h
-> @@ -250,7 +250,6 @@ static inline dev_t part_devt(struct hd_struct *part)
->  	return part_to_dev(part)->devt;
->  }
+> diff --git a/fs/block_dev.c b/fs/block_dev.c
+> index 29db12c3bb501c..4c4d6c30382c06 100644
+> --- a/fs/block_dev.c
+> +++ b/fs/block_dev.c
+> @@ -1745,22 +1745,22 @@ static void __blkdev_put(struct block_device *bdev, fmode_t mode, int for_part)
+>  		WARN_ON_ONCE(bdev->bd_holders);
+>  		sync_blockdev(bdev);
+>  		kill_bdev(bdev);
+> -
+>  		bdev_write_inode(bdev);
+> -	}
+> -	if (bdev->bd_contains == bdev) {
+> -		if (disk->fops->release)
+> +
+> +		if (!bdev_is_partition(bdev) && disk->fops->release)
+>  			disk->fops->release(disk, mode);
+> -	}
+> -	if (!bdev->bd_openers) {
+> +
+>  		disk_put_part(bdev->bd_part);
+>  		bdev->bd_part = NULL;
+>  		bdev->bd_disk = NULL;
+> -		if (bdev != bdev->bd_contains)
+> +		if (bdev_is_partition(bdev))
+>  			victim = bdev->bd_contains;
+>  		bdev->bd_contains = NULL;
 >  
-> -extern struct hd_struct *__disk_get_part(struct gendisk *disk, int partno);
->  extern struct hd_struct *disk_get_part(struct gendisk *disk, int partno);
->  
->  static inline void disk_put_part(struct hd_struct *part)
+>  		put_disk_and_module(disk);
+> +	} else {
+> +		if (!bdev_is_partition(bdev) && disk->fops->release)
+> +			disk->fops->release(disk, mode);
+>  	}
+>  	mutex_unlock(&bdev->bd_mutex);
+>  	bdput(bdev);
 > -- 
 > 2.29.2
 > 
