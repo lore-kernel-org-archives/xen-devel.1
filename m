@@ -2,28 +2,28 @@ Return-Path: <SRS0=TkWG=EY=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0806EC5519F
-	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2020 16:39:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1F757C5519F
+	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2020 16:39:56 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 679A42483D
-	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2020 16:39:49 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 870942483D
+	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2020 16:39:55 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=cardoe.com header.i=@cardoe.com header.b="ap5kweSw"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 679A42483D
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=cardoe.com
+	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="Bamf3iW/"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 870942483D
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.30096.59829 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.30097.59841 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kfQUT-0002YZ-An; Wed, 18 Nov 2020 16:39:29 +0000
+	id 1kfQUf-0002c3-J3; Wed, 18 Nov 2020 16:39:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 30096.59829; Wed, 18 Nov 2020 16:39:29 +0000
+Received: by outflank-mailman (output) from mailman id 30097.59841; Wed, 18 Nov 2020 16:39:41 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,95 +38,90 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kfQUT-0002YS-7l; Wed, 18 Nov 2020 16:39:29 +0000
-Received: by outflank-mailman (input) for mailman id 30096;
- Wed, 18 Nov 2020 16:39:28 +0000
+	id 1kfQUf-0002bu-Fx; Wed, 18 Nov 2020 16:39:41 +0000
+Received: by outflank-mailman (input) for mailman id 30097;
+ Wed, 18 Nov 2020 16:39:40 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=PiVl=EY=cardoe.com=cardoe@srs-us1.protection.inumbo.net>)
- id 1kfQUS-0002Xi-7x
- for xen-devel@lists.xenproject.org; Wed, 18 Nov 2020 16:39:28 +0000
-Received: from mail-qk1-x744.google.com (unknown [2607:f8b0:4864:20::744])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=135G=EY=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1kfQUe-0002bL-4H
+ for xen-devel@lists.xenproject.org; Wed, 18 Nov 2020 16:39:40 +0000
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 92ed5e94-fe64-4ef1-befa-107b880a24b1;
- Wed, 18 Nov 2020 16:39:27 +0000 (UTC)
-Received: by mail-qk1-x744.google.com with SMTP id l2so2434179qkf.0
- for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2020 08:39:27 -0800 (PST)
-Received: from doug-macbook.local ([2600:1700:7b90:52f0:fcda:1820:8a59:569b])
- by smtp.gmail.com with ESMTPSA id
- k188sm5134259qkd.98.2020.11.18.08.39.26
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 18 Nov 2020 08:39:26 -0800 (PST)
+ id 3cd111f8-76ea-4c9d-b93a-54e9472fe8c9;
+ Wed, 18 Nov 2020 16:39:39 +0000 (UTC)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=PiVl=EY=cardoe.com=cardoe@srs-us1.protection.inumbo.net>)
-	id 1kfQUS-0002Xi-7x
-	for xen-devel@lists.xenproject.org; Wed, 18 Nov 2020 16:39:28 +0000
-X-Inumbo-ID: 92ed5e94-fe64-4ef1-befa-107b880a24b1
-Received: from mail-qk1-x744.google.com (unknown [2607:f8b0:4864:20::744])
+	(envelope-from <SRS0=135G=EY=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+	id 1kfQUe-0002bL-4H
+	for xen-devel@lists.xenproject.org; Wed, 18 Nov 2020 16:39:40 +0000
+X-Inumbo-ID: 3cd111f8-76ea-4c9d-b93a-54e9472fe8c9
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 92ed5e94-fe64-4ef1-befa-107b880a24b1;
-	Wed, 18 Nov 2020 16:39:27 +0000 (UTC)
-Received: by mail-qk1-x744.google.com with SMTP id l2so2434179qkf.0
-        for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2020 08:39:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cardoe.com; s=google;
-        h=subject:to:references:from:message-id:date:user-agent:mime-version
-         :in-reply-to:content-language:content-transfer-encoding;
-        bh=P2PUiBIwlS7hTlFqmI9iau/Je8dDPQzg5I4bed6wHOI=;
-        b=ap5kweSwJK4gLRSeQAaLk2vvGUK+y3k0dx0EN4YlYY42l9T5pccNlfe8IVQg2//15q
-         /Kld8FNKumoPF4kj5rT2SrBlEnkXGxnDc63fGfGbjIXMFkTlJFsMYiFJEPijdw9I0L90
-         zrBNfeUdYZ6uUHBGnfDO8SExNE+h/7eyXXRh8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=P2PUiBIwlS7hTlFqmI9iau/Je8dDPQzg5I4bed6wHOI=;
-        b=O5qh3xxZ8d4Aq3rW+qUph7xj1qRurwlYvoNwH3t3X9HVu5ZPUwfnmvNmrFZwsLyBoV
-         11S0vIWoMYeuzCBfDs1vydkqiqj4Ex0f6xo1qL6kCMbwjjOticsxUSfGU5xOVYS6fkWp
-         v/EsyxujaxyXACr2Pw16KISd5BRzOuHZQ7rPYmYKdnnMac1Mes0+RGD3KhRq1BQgEA1o
-         MzzfpT2jkvGZcrA42ztcsTBY+jzs8aL7W6xqJO/YDoBY/I7q3wOog4qDuVxrsRW1BNXj
-         sTtwRgHMnPySh9wmlcZpa7lw0VAXBVU2ypeitX5sgMElTUNFM4slQV1IQrXYLFkfuNmf
-         XXSA==
-X-Gm-Message-State: AOAM531FcOqbXR4DHP1/nVs91aNWCZjgEdaVoqcqtoWYXHayqy9QX8Fo
-	9v5gpcln1vT3ZeTHTUrR7CndpoTZCtHRNA==
-X-Google-Smtp-Source: ABdhPJyFlJH0ypwvT+hnhd/rkvCkm/occccPDzW0f0TGblWdTZHyFTufZd/Udf6LisG9qeKcHQ/6Rw==
-X-Received: by 2002:a05:620a:140d:: with SMTP id d13mr5810065qkj.470.1605717567101;
-        Wed, 18 Nov 2020 08:39:27 -0800 (PST)
-Received: from doug-macbook.local ([2600:1700:7b90:52f0:fcda:1820:8a59:569b])
-        by smtp.gmail.com with ESMTPSA id k188sm5134259qkd.98.2020.11.18.08.39.26
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 18 Nov 2020 08:39:26 -0800 (PST)
-Subject: Re: [PATCH v1 1/4] automation/scripts/containerize: fix
- DOCKER_CMD=podman
-To: =?UTF-8?B?RWR3aW4gVMO2csO2aw==?= <edvin.torok@citrix.com>,
- xen-devel@lists.xenproject.org
-References: <cover.1605636799.git.edvin.torok@citrix.com>
- <28469d0fea059a51694c6fa3b5bd3971696a4f13.1605636800.git.edvin.torok@citrix.com>
-From: Doug Goldstein <cardoe@cardoe.com>
-Message-ID: <29264173-4a1d-d973-cf8d-759ee96bbf2d@cardoe.com>
-Date: Wed, 18 Nov 2020 10:39:25 -0600
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.4.0
+	id 3cd111f8-76ea-4c9d-b93a-54e9472fe8c9;
+	Wed, 18 Nov 2020 16:39:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1605717579;
+  h=subject:to:cc:references:from:message-id:date:
+   mime-version:in-reply-to:content-transfer-encoding;
+  bh=cIqBOwyWtYipTi7x6RKeIF9zCwnkxFiBwPSwymY1Pcg=;
+  b=Bamf3iW/V4ohRwTlsTh+603e2lP9qLqe3nrWp2Fp6P0gu1Sp+MiiTNfa
+   R6j3bMxniA5P50YTvZmdrQgzpkJFFWCXT21dZskpsuN/KGD32qolE1jVy
+   JSp6Ujwh+dUfPIbEmv47PQJTVACfCWNtXX13wgVpidEG78UM6r5WICNg7
+   E=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: AXxwPL8FIVb3/4eKlZAlo1psc6ltiyMwBh4OrCIzLXi+Z5NeRY1hWvo+J/NYtL7iZwk6z73bqW
+ v/rphDkXg7CWC5DpL7Fl+sGd1EDH82QwpudBl7IurZrQaCVtov5GCsyWVvL5W0hSAWeL1U6ZzD
+ DdtCsd+NmP/qYPepddAtxz/Gl25OLAXz2w2ozgI+uJvENGyGX/sR3ZYz/jGBA5EZIeyi75ix4S
+ n3HnAUvf8fnQSLRvTjUQibyhWqjtvbg2JHbE3GU/ZXZR0YM9A0KxogULlpEUPAKUfMLcacahKm
+ Xnk=
+X-SBRS: None
+X-MesageID: 32591259
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.77,488,1596513600"; 
+   d="scan'208";a="32591259"
+Subject: Re: [PATCH] ci: drop building on CentOS 6
+To: Doug Goldstein <cardoe@cardoe.com>, <xen-devel@lists.xenproject.org>
+CC: George Dunlap <george.dunlap@citrix.com>, Ian Jackson
+	<iwj@xenproject.org>, Jan Beulich <jbeulich@suse.com>, Julien Grall
+	<julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
+	<wl@xen.org>
+References: <20201118162706.66551-1-cardoe@cardoe.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Message-ID: <9d24beae-1bcf-5a05-5c1e-a0cd45dfedd7@citrix.com>
+Date: Wed, 18 Nov 2020 16:39:31 +0000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <28469d0fea059a51694c6fa3b5bd3971696a4f13.1605636800.git.edvin.torok@citrix.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+In-Reply-To: <20201118162706.66551-1-cardoe@cardoe.com>
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
+Content-Language: en-GB
+X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
+ FTLPEX02CL04.citrite.net (10.13.108.177)
 
+On 18/11/2020 16:27, Doug Goldstein wrote:
+> CentOS 6 is no longer supported by upstream so we cannot test against it
+> for future Xen releases.
+>
+> Signed-off-by: Doug Goldstein <cardoe@cardoe.com>
+> ---
+> CC: Andrew Cooper <andrew.cooper3@citrix.com>
+> CC: George Dunlap <george.dunlap@citrix.com>
+> CC: Ian Jackson <iwj@xenproject.org>
+> CC: Jan Beulich <jbeulich@suse.com>
+> CC: Julien Grall <julien@xen.org>
+> CC: Stefano Stabellini <sstabellini@kernel.org>
+> CC: Wei Liu <wl@xen.org>
 
+Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
-On 11/17/20 12:24 PM, Edwin Török wrote:
-> On CentOS 8 with SELinux containerize doesn't work at all:
-> 
-> Make sure that the source code and SSH agent directories are passed on
-> with SELinux relabeling enabled.
-> (`-security-opt label=disabled` would be another option)
-> 
-> Signed-off-by: Edwin Török <edvin.torok@citrix.com>
+Do we want to drop the dockerfiles as well?  We probably also want to
+drop one line from containerise as well.
 
-Looks reasonable.
+I can fix on commit if you're happy with this.
 
-Acked-by: Doug Goldstein <cardoe@cardoe.com>
+~Andrew
 
