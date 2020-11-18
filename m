@@ -7,21 +7,21 @@ X-Spam-Status: No, score=-15.2 required=3.0 tests=BAYES_00,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 98D32C64E69
-	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2020 21:34:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F715C6379D
+	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2020 21:34:49 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 35CA920780
-	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2020 21:34:47 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 35CA920780
+	by mail.kernel.org (Postfix) with ESMTPS id CB07520715
+	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2020 21:34:48 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CB07520715
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.cz
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.30257.60116 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.30259.60140 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kfV5w-0008Uh-O0; Wed, 18 Nov 2020 21:34:28 +0000
+	id 1kfV66-00008i-7k; Wed, 18 Nov 2020 21:34:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 30257.60116; Wed, 18 Nov 2020 21:34:28 +0000
+Received: by outflank-mailman (output) from mailman id 30259.60140; Wed, 18 Nov 2020 21:34:38 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,41 +36,41 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kfV5w-0008Ua-KA; Wed, 18 Nov 2020 21:34:28 +0000
-Received: by outflank-mailman (input) for mailman id 30257;
- Wed, 18 Nov 2020 21:34:27 +0000
+	id 1kfV66-00008Z-4D; Wed, 18 Nov 2020 21:34:38 +0000
+Received: by outflank-mailman (input) for mailman id 30259;
+ Wed, 18 Nov 2020 21:34:37 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=WhnZ=EY=suse.cz=jack@srs-us1.protection.inumbo.net>)
- id 1kfV5v-0008UU-AM
- for xen-devel@lists.xenproject.org; Wed, 18 Nov 2020 21:34:27 +0000
+ id 1kfV65-0008UU-3K
+ for xen-devel@lists.xenproject.org; Wed, 18 Nov 2020 21:34:37 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 16d212d0-6adf-4d14-becd-af49cfce304b;
- Wed, 18 Nov 2020 21:34:24 +0000 (UTC)
+ id a4fe5f2b-09c7-46ba-b604-116858de571d;
+ Wed, 18 Nov 2020 21:34:25 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id EF58DAFFD;
- Wed, 18 Nov 2020 21:34:23 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 35A12B011;
+ Wed, 18 Nov 2020 21:34:24 +0000 (UTC)
 Received: by quack2.suse.cz (Postfix, from userid 1000)
- id BC1911E1321; Wed, 18 Nov 2020 15:22:37 +0100 (CET)
+ id A0C1D1E130B; Wed, 18 Nov 2020 15:10:24 +0100 (CET)
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=WhnZ=EY=suse.cz=jack@srs-us1.protection.inumbo.net>)
-	id 1kfV5v-0008UU-AM
-	for xen-devel@lists.xenproject.org; Wed, 18 Nov 2020 21:34:27 +0000
-X-Inumbo-ID: 16d212d0-6adf-4d14-becd-af49cfce304b
+	id 1kfV65-0008UU-3K
+	for xen-devel@lists.xenproject.org; Wed, 18 Nov 2020 21:34:37 +0000
+X-Inumbo-ID: a4fe5f2b-09c7-46ba-b604-116858de571d
 Received: from mx2.suse.de (unknown [195.135.220.15])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 16d212d0-6adf-4d14-becd-af49cfce304b;
-	Wed, 18 Nov 2020 21:34:24 +0000 (UTC)
+	id a4fe5f2b-09c7-46ba-b604-116858de571d;
+	Wed, 18 Nov 2020 21:34:25 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id EF58DAFFD;
-	Wed, 18 Nov 2020 21:34:23 +0000 (UTC)
+	by mx2.suse.de (Postfix) with ESMTP id 35A12B011;
+	Wed, 18 Nov 2020 21:34:24 +0000 (UTC)
 Received: by quack2.suse.cz (Postfix, from userid 1000)
-	id BC1911E1321; Wed, 18 Nov 2020 15:22:37 +0100 (CET)
-Date: Wed, 18 Nov 2020 15:22:37 +0100
+	id A0C1D1E130B; Wed, 18 Nov 2020 15:10:24 +0100 (CET)
+Date: Wed, 18 Nov 2020 15:10:24 +0100
 From: Jan Kara <jack@suse.cz>
 To: Christoph Hellwig <hch@lst.de>
 Cc: Jens Axboe <axboe@kernel.dk>, Tejun Heo <tj@kernel.org>,
@@ -82,83 +82,41 @@ Cc: Jens Axboe <axboe@kernel.dk>, Tejun Heo <tj@kernel.org>,
 	xen-devel@lists.xenproject.org, linux-bcache@vger.kernel.org,
 	linux-mtd@lists.infradead.org, linux-fsdevel@vger.kernel.org,
 	linux-mm@kvack.org
-Subject: Re: [PATCH 06/20] block: change the hash used for looking up block
- devices
-Message-ID: <20201118142237.GK1981@quack2.suse.cz>
+Subject: Re: [PATCH 02/20] block: remove a duplicate __disk_get_part prototype
+Message-ID: <20201118141024.GG1981@quack2.suse.cz>
 References: <20201118084800.2339180-1-hch@lst.de>
- <20201118084800.2339180-7-hch@lst.de>
+ <20201118084800.2339180-3-hch@lst.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20201118084800.2339180-7-hch@lst.de>
+In-Reply-To: <20201118084800.2339180-3-hch@lst.de>
 User-Agent: Mutt/1.10.1 (2018-07-13)
 
-On Wed 18-11-20 09:47:46, Christoph Hellwig wrote:
-> Adding the minor to the major creates tons of pointless conflicts. Just
-> use the dev_t itself, which is 32-bits and thus is guaranteed to fit
-> into ino_t.
-> 
+On Wed 18-11-20 09:47:42, Christoph Hellwig wrote:
 > Signed-off-by: Christoph Hellwig <hch@lst.de>
 
-Fair enough. You can add:
+Looks good. You can add:
 
 Reviewed-by: Jan Kara <jack@suse.cz>
 
 								Honza
 
 > ---
->  fs/block_dev.c | 26 ++------------------------
->  1 file changed, 2 insertions(+), 24 deletions(-)
+>  include/linux/genhd.h | 1 -
+>  1 file changed, 1 deletion(-)
 > 
-> diff --git a/fs/block_dev.c b/fs/block_dev.c
-> index d8664f5c1ff669..29db12c3bb501c 100644
-> --- a/fs/block_dev.c
-> +++ b/fs/block_dev.c
-> @@ -870,35 +870,12 @@ void __init bdev_cache_init(void)
->  	blockdev_superblock = bd_mnt->mnt_sb;   /* For writeback */
+> diff --git a/include/linux/genhd.h b/include/linux/genhd.h
+> index 46553d6d602563..22f5b9fd96f8bf 100644
+> --- a/include/linux/genhd.h
+> +++ b/include/linux/genhd.h
+> @@ -250,7 +250,6 @@ static inline dev_t part_devt(struct hd_struct *part)
+>  	return part_to_dev(part)->devt;
 >  }
 >  
-> -/*
-> - * Most likely _very_ bad one - but then it's hardly critical for small
-> - * /dev and can be fixed when somebody will need really large one.
-> - * Keep in mind that it will be fed through icache hash function too.
-> - */
-> -static inline unsigned long hash(dev_t dev)
-> -{
-> -	return MAJOR(dev)+MINOR(dev);
-> -}
-> -
-> -static int bdev_test(struct inode *inode, void *data)
-> -{
-> -	return BDEV_I(inode)->bdev.bd_dev == *(dev_t *)data;
-> -}
-> -
-> -static int bdev_set(struct inode *inode, void *data)
-> -{
-> -	BDEV_I(inode)->bdev.bd_dev = *(dev_t *)data;
-> -	return 0;
-> -}
-> -
->  static struct block_device *bdget(dev_t dev)
->  {
->  	struct block_device *bdev;
->  	struct inode *inode;
+> -extern struct hd_struct *__disk_get_part(struct gendisk *disk, int partno);
+>  extern struct hd_struct *disk_get_part(struct gendisk *disk, int partno);
 >  
-> -	inode = iget5_locked(blockdev_superblock, hash(dev),
-> -			bdev_test, bdev_set, &dev);
-> -
-> +	inode = iget_locked(blockdev_superblock, dev);
->  	if (!inode)
->  		return NULL;
->  
-> @@ -910,6 +887,7 @@ static struct block_device *bdget(dev_t dev)
->  		bdev->bd_super = NULL;
->  		bdev->bd_inode = inode;
->  		bdev->bd_part_count = 0;
-> +		bdev->bd_dev = dev;
->  		inode->i_mode = S_IFBLK;
->  		inode->i_rdev = dev;
->  		inode->i_bdev = bdev;
+>  static inline void disk_put_part(struct hd_struct *part)
 > -- 
 > 2.29.2
 > 
