@@ -7,21 +7,21 @@ X-Spam-Status: No, score=-15.2 required=3.0 tests=BAYES_00,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CFB89C63697
-	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2020 21:35:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 47AB3C56201
+	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2020 21:35:13 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 745E020715
-	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2020 21:35:06 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 745E020715
+	by mail.kernel.org (Postfix) with ESMTPS id E345C20715
+	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2020 21:35:12 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E345C20715
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.cz
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.30270.60188 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.30273.60200 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kfV6Q-0000Uj-Ns; Wed, 18 Nov 2020 21:34:58 +0000
+	id 1kfV6W-0000b9-3B; Wed, 18 Nov 2020 21:35:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 30270.60188; Wed, 18 Nov 2020 21:34:58 +0000
+Received: by outflank-mailman (output) from mailman id 30273.60200; Wed, 18 Nov 2020 21:35:04 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,41 +36,41 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kfV6Q-0000Ua-KL; Wed, 18 Nov 2020 21:34:58 +0000
-Received: by outflank-mailman (input) for mailman id 30270;
- Wed, 18 Nov 2020 21:34:57 +0000
+	id 1kfV6V-0000ay-Vl; Wed, 18 Nov 2020 21:35:03 +0000
+Received: by outflank-mailman (input) for mailman id 30273;
+ Wed, 18 Nov 2020 21:35:02 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=WhnZ=EY=suse.cz=jack@srs-us1.protection.inumbo.net>)
- id 1kfV6P-0008UU-4N
- for xen-devel@lists.xenproject.org; Wed, 18 Nov 2020 21:34:57 +0000
+ id 1kfV6U-0008UU-4P
+ for xen-devel@lists.xenproject.org; Wed, 18 Nov 2020 21:35:02 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 463f5f42-8ca5-494c-ad34-a4fa77ff401f;
+ id 7d11608f-e805-418b-99fc-e1b0779d1a6e;
  Wed, 18 Nov 2020 21:34:27 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 53C3FB019;
+ by mx2.suse.de (Postfix) with ESMTP id 3C215B013;
  Wed, 18 Nov 2020 21:34:24 +0000 (UTC)
 Received: by quack2.suse.cz (Postfix, from userid 1000)
- id 716231E1328; Wed, 18 Nov 2020 15:41:05 +0100 (CET)
+ id 90FA11E1319; Wed, 18 Nov 2020 15:19:27 +0100 (CET)
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=WhnZ=EY=suse.cz=jack@srs-us1.protection.inumbo.net>)
-	id 1kfV6P-0008UU-4N
-	for xen-devel@lists.xenproject.org; Wed, 18 Nov 2020 21:34:57 +0000
-X-Inumbo-ID: 463f5f42-8ca5-494c-ad34-a4fa77ff401f
+	id 1kfV6U-0008UU-4P
+	for xen-devel@lists.xenproject.org; Wed, 18 Nov 2020 21:35:02 +0000
+X-Inumbo-ID: 7d11608f-e805-418b-99fc-e1b0779d1a6e
 Received: from mx2.suse.de (unknown [195.135.220.15])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 463f5f42-8ca5-494c-ad34-a4fa77ff401f;
+	id 7d11608f-e805-418b-99fc-e1b0779d1a6e;
 	Wed, 18 Nov 2020 21:34:27 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 53C3FB019;
+	by mx2.suse.de (Postfix) with ESMTP id 3C215B013;
 	Wed, 18 Nov 2020 21:34:24 +0000 (UTC)
 Received: by quack2.suse.cz (Postfix, from userid 1000)
-	id 716231E1328; Wed, 18 Nov 2020 15:41:05 +0100 (CET)
-Date: Wed, 18 Nov 2020 15:41:05 +0100
+	id 90FA11E1319; Wed, 18 Nov 2020 15:19:27 +0100 (CET)
+Date: Wed, 18 Nov 2020 15:19:27 +0100
 From: Jan Kara <jack@suse.cz>
 To: Christoph Hellwig <hch@lst.de>
 Cc: Jens Axboe <axboe@kernel.dk>, Tejun Heo <tj@kernel.org>,
@@ -82,134 +82,47 @@ Cc: Jens Axboe <axboe@kernel.dk>, Tejun Heo <tj@kernel.org>,
 	xen-devel@lists.xenproject.org, linux-bcache@vger.kernel.org,
 	linux-mtd@lists.infradead.org, linux-fsdevel@vger.kernel.org,
 	linux-mm@kvack.org
-Subject: Re: [PATCH 08/20] init: refactor devt_from_partuuid
-Message-ID: <20201118144105.GM1981@quack2.suse.cz>
+Subject: Re: [PATCH 04/20] block: use disk_part_iter_exit in
+ disk_part_iter_next
+Message-ID: <20201118141927.GI1981@quack2.suse.cz>
 References: <20201118084800.2339180-1-hch@lst.de>
- <20201118084800.2339180-9-hch@lst.de>
+ <20201118084800.2339180-5-hch@lst.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20201118084800.2339180-9-hch@lst.de>
+In-Reply-To: <20201118084800.2339180-5-hch@lst.de>
 User-Agent: Mutt/1.10.1 (2018-07-13)
 
-On Wed 18-11-20 09:47:48, Christoph Hellwig wrote:
-> The code in devt_from_partuuid is very convoluted.  Refactor a bit by
-> sanitizing the goto and variable name usage.
+On Wed 18-11-20 09:47:44, Christoph Hellwig wrote:
+> Call disk_part_iter_exit in disk_part_iter_next instead of duplicating
+> the functionality.
 > 
 > Signed-off-by: Christoph Hellwig <hch@lst.de>
 
-The patch looks good to me. You can add:
+OK. You can add:
 
 Reviewed-by: Jan Kara <jack@suse.cz>
 
 								Honza
 
 > ---
->  init/do_mounts.c | 68 ++++++++++++++++++++++--------------------------
->  1 file changed, 31 insertions(+), 37 deletions(-)
+>  block/genhd.c | 3 +--
+>  1 file changed, 1 insertion(+), 2 deletions(-)
 > 
-> diff --git a/init/do_mounts.c b/init/do_mounts.c
-> index aef2f24461c7f1..afa26a4028d25e 100644
-> --- a/init/do_mounts.c
-> +++ b/init/do_mounts.c
-> @@ -105,13 +105,10 @@ static int match_dev_by_uuid(struct device *dev, const void *data)
->   */
->  static dev_t devt_from_partuuid(const char *uuid_str)
->  {
-> -	dev_t res = 0;
->  	struct uuidcmp cmp;
->  	struct device *dev = NULL;
-> -	struct gendisk *disk;
-> -	struct hd_struct *part;
-> +	dev_t devt = 0;
->  	int offset = 0;
-> -	bool clear_root_wait = false;
->  	char *slash;
+> diff --git a/block/genhd.c b/block/genhd.c
+> index 4e039524f92b8f..0bd9c41dd4cb69 100644
+> --- a/block/genhd.c
+> +++ b/block/genhd.c
+> @@ -227,8 +227,7 @@ struct hd_struct *disk_part_iter_next(struct disk_part_iter *piter)
+>  	int inc, end;
 >  
->  	cmp.uuid = uuid_str;
-> @@ -120,52 +117,49 @@ static dev_t devt_from_partuuid(const char *uuid_str)
->  	/* Check for optional partition number offset attributes. */
->  	if (slash) {
->  		char c = 0;
-> +
->  		/* Explicitly fail on poor PARTUUID syntax. */
-> -		if (sscanf(slash + 1,
-> -			   "PARTNROFF=%d%c", &offset, &c) != 1) {
-> -			clear_root_wait = true;
-> -			goto done;
-> -		}
-> +		if (sscanf(slash + 1, "PARTNROFF=%d%c", &offset, &c) != 1)
-> +			goto clear_root_wait;
->  		cmp.len = slash - uuid_str;
->  	} else {
->  		cmp.len = strlen(uuid_str);
->  	}
+>  	/* put the last partition */
+> -	disk_put_part(piter->part);
+> -	piter->part = NULL;
+> +	disk_part_iter_exit(piter);
 >  
-> -	if (!cmp.len) {
-> -		clear_root_wait = true;
-> -		goto done;
-> -	}
-> +	if (!cmp.len)
-> +		goto clear_root_wait;
->  
-> -	dev = class_find_device(&block_class, NULL, &cmp,
-> -				&match_dev_by_uuid);
-> +	dev = class_find_device(&block_class, NULL, &cmp, &match_dev_by_uuid);
->  	if (!dev)
-> -		goto done;
-> -
-> -	res = dev->devt;
-> +		return 0;
->  
-> -	/* Attempt to find the partition by offset. */
-> -	if (!offset)
-> -		goto no_offset;
-> +	if (offset) {
-> +		/*
-> +		 * Attempt to find the requested partition by adding an offset
-> +		 * to the partition number found by UUID.
-> +		 */
-> +		struct hd_struct *part;
->  
-> -	res = 0;
-> -	disk = part_to_disk(dev_to_part(dev));
-> -	part = disk_get_part(disk, dev_to_part(dev)->partno + offset);
-> -	if (part) {
-> -		res = part_devt(part);
-> -		put_device(part_to_dev(part));
-> +		part = disk_get_part(dev_to_disk(dev),
-> +				     dev_to_part(dev)->partno + offset);
-> +		if (part) {
-> +			devt = part_devt(part);
-> +			put_device(part_to_dev(part));
-> +		}
-> +	} else {
-> +		devt = dev->devt;
->  	}
->  
-> -no_offset:
->  	put_device(dev);
-> -done:
-> -	if (clear_root_wait) {
-> -		pr_err("VFS: PARTUUID= is invalid.\n"
-> -		       "Expected PARTUUID=<valid-uuid-id>[/PARTNROFF=%%d]\n");
-> -		if (root_wait)
-> -			pr_err("Disabling rootwait; root= is invalid.\n");
-> -		root_wait = 0;
-> -	}
-> -	return res;
-> +	return devt;
-> +
-> +clear_root_wait:
-> +	pr_err("VFS: PARTUUID= is invalid.\n"
-> +	       "Expected PARTUUID=<valid-uuid-id>[/PARTNROFF=%%d]\n");
-> +	if (root_wait)
-> +		pr_err("Disabling rootwait; root= is invalid.\n");
-> +	root_wait = 0;
-> +	return 0;
->  }
->  
->  /**
+>  	/* get part_tbl */
+>  	rcu_read_lock();
 > -- 
 > 2.29.2
 > 
