@@ -2,28 +2,28 @@ Return-Path: <SRS0=hRpO=EZ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 875BEC6379D
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2020 17:08:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3FAB1C63697
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2020 17:11:15 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0F9032467A
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2020 17:08:58 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id BBC172469D
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2020 17:11:14 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="F7FE+1ym"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0F9032467A
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="d0NrOviK"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BBC172469D
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.31210.61518 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.31229.61555 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kfnQB-0007id-Q4; Thu, 19 Nov 2020 17:08:35 +0000
+	id 1kfnSX-0000ef-2e; Thu, 19 Nov 2020 17:11:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 31210.61518; Thu, 19 Nov 2020 17:08:35 +0000
+Received: by outflank-mailman (output) from mailman id 31229.61555; Thu, 19 Nov 2020 17:11:01 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,202 +38,103 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kfnQB-0007iW-Mm; Thu, 19 Nov 2020 17:08:35 +0000
-Received: by outflank-mailman (input) for mailman id 31210;
- Thu, 19 Nov 2020 17:08:34 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1kfnQA-0007hU-5l
- for xen-devel@lists.xenproject.org; Thu, 19 Nov 2020 17:08:34 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1kfnQ9-0000ur-Nh; Thu, 19 Nov 2020 17:08:33 +0000
-Received: from 54-240-197-235.amazon.com ([54.240.197.235]
- helo=ufe34d9ed68d054.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1kfnQA-0000U1-DT; Thu, 19 Nov 2020 17:08:34 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1kfnSW-0000eY-Vr; Thu, 19 Nov 2020 17:11:00 +0000
+Received: by outflank-mailman (input) for mailman id 31229;
+ Thu, 19 Nov 2020 17:10:59 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=2P/M=EZ=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1kfnSV-0000eR-Cm
+ for xen-devel@lists.xenproject.org; Thu, 19 Nov 2020 17:10:59 +0000
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 87ae63f1-c9c6-470c-a6e8-60f6d5971a18;
+ Thu, 19 Nov 2020 17:10:57 +0000 (UTC)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <julien@xen.org>)
-	id 1kfnQA-0007hU-5l
-	for xen-devel@lists.xenproject.org; Thu, 19 Nov 2020 17:08:34 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	 bh=Svrds4fjq26e/xBeepsLn7GM+LTQUjWZi4AUjhu+NNc=; b=F7FE+1ymFhHucWhrTjgG7Yq1x
-	yAm9CdYzA3GaNseWuMaPq4j72+KyEF50J6e4fqB2qB0Qf9mKUh4xPzoKbapPwQIAx2vOz9cljFUqU
-	C37+DNiGyurxwkUqtjjsJUNlPZJSwiZ6ARLBfc7K1qkUUYyhAKpfO5MqDPDliha7PMWc4=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
-	by mail.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <julien@xen.org>)
-	id 1kfnQ9-0000ur-Nh; Thu, 19 Nov 2020 17:08:33 +0000
-Received: from 54-240-197-235.amazon.com ([54.240.197.235] helo=ufe34d9ed68d054.ant.amazon.com)
-	by xenbits.xenproject.org with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <julien@xen.org>)
-	id 1kfnQA-0000U1-DT; Thu, 19 Nov 2020 17:08:34 +0000
-From: Julien Grall <julien@xen.org>
-To: xen-devel@lists.xenproject.org
-Cc: alex.bennee@linaro.org,
-	bertrand.marquis@arm.com,
-	andre.przywara@arm.com,
-	Rahul.Singh@arm.com,
-	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v4 1/3] xen/arm: gic: acpi: Guard helpers to build the MADT with CONFIG_ACPI
-Date: Thu, 19 Nov 2020 17:08:27 +0000
-Message-Id: <20201119170829.9923-2-julien@xen.org>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20201119170829.9923-1-julien@xen.org>
-References: <20201119170829.9923-1-julien@xen.org>
+	(envelope-from <SRS0=2P/M=EZ=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+	id 1kfnSV-0000eR-Cm
+	for xen-devel@lists.xenproject.org; Thu, 19 Nov 2020 17:10:59 +0000
+X-Inumbo-ID: 87ae63f1-c9c6-470c-a6e8-60f6d5971a18
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id 87ae63f1-c9c6-470c-a6e8-60f6d5971a18;
+	Thu, 19 Nov 2020 17:10:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1605805857;
+  h=subject:to:cc:references:from:message-id:date:
+   mime-version:in-reply-to:content-transfer-encoding;
+  bh=Tb+i1uRCDNjzZU+/tXj6XDZlDzICgJ7qh8vlllpSiLM=;
+  b=d0NrOviKLw+nAoDG5vCDru3WG36t90jsOmzAtCxMPa7WESlkjgxKXnz2
+   vqxdTAF/cfToLOeKzZ3Cm0R+OayFW3V7cSWWXWVrL1ctMmuTbST0GtOfD
+   U6iKqnKLS421u34gJVEnEpspnnMZ2FbGe9WQG1VDcVdQyoZDrPGlmh5Ks
+   w=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: OsXCL6on6Wydif/3NuzzzoL3b53eXiZme/5wAw1IHGYQj+ck95LmsDVTrXA8jaMTghSYc5Gr+V
+ chXvE7xpWvOoFnGsIQr725Y63wlNrhg3tcjmx5beaeUmAWXZ5KxlLw3EuY+TJ9EOa2j65tjWgF
+ S5rSzNZuq/pRAysoIIfyjx5q9Wyl3z1tPDbR6TV8G1B7uZOQ0EW6/0EV7NZJfDlIr+4ZfCmLbb
+ D+nGApZ4JQbB4DjotBEazATrgGDIaF6mmgL10k4siU+FtOPACKr72vP2aRMlHAnD+nP59ri/FX
+ iNc=
+X-SBRS: None
+X-MesageID: 31779749
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.78,353,1599537600"; 
+   d="scan'208";a="31779749"
+Subject: Re: [PATCH] x86/Intel: avoid UB with NMI watchdog on family 15 CPUs
+To: Jan Beulich <jbeulich@suse.com>
+CC: Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
+	<roger.pau@citrix.com>, "xen-devel@lists.xenproject.org"
+	<xen-devel@lists.xenproject.org>
+References: <63500eb6-b1da-ce08-52e2-00b30ffe2c26@suse.com>
+ <1c2ffdcb-577d-8bea-35e3-904777a0c2e5@citrix.com>
+ <e056d6ff-aceb-e4f9-1fe8-a41c482e34bc@suse.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Message-ID: <47a30c4a-b05b-fdc5-0d7a-549fdd15a801@citrix.com>
+Date: Thu, 19 Nov 2020 17:10:51 +0000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
+MIME-Version: 1.0
+In-Reply-To: <e056d6ff-aceb-e4f9-1fe8-a41c482e34bc@suse.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Content-Language: en-GB
+X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
+ FTLPEX02CL04.citrite.net (10.13.108.177)
 
-From: Julien Grall <jgrall@amazon.com>
+On 19/11/2020 16:37, Jan Beulich wrote:
+> On 19.11.2020 17:10, Andrew Cooper wrote:
+>> On 19/11/2020 15:57, Jan Beulich wrote:
+>>> Found by looking for patterns similar to the one Julien did spot in
+>>> pci_vtd_quirks().
+>>>
+>>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+>> Subject is wonky.  Is it P4 (Intel), or Fam15 (AMD) ?  I'd be tempted to
+>> have the prefix as x86/nmi: either way.
+> With this code:
+>
+>     case X86_VENDOR_INTEL:
+>         switch (boot_cpu_data.x86) {
+>         case 6:
+>             setup_p6_watchdog((boot_cpu_data.x86_model < 14) 
+>                               ? P6_EVENT_CPU_CLOCKS_NOT_HALTED
+>                               : CORE_EVENT_CPU_CLOCKS_NOT_HALTED);
+>             break;
+>         case 15:
+>             if (!setup_p4_watchdog())
+>
+> I think qualifying it like I did is quite reasonable. Hence ...
+>
+>> With that suitably adjusted, Acked-by: Andrew Cooper
+>> <andrew.cooper3@citrix.com>
+> ... I'd prefer to keep it as is - please clarify.
 
-gic_make_hwdom_madt() and gic_get_hwdom_madt_size() are ACPI specific.
+Oh - original Xeon's.  I'd honestly forgotten that quirk of history.
 
-While they build fine today, this will change in a follow-up patch.
-Rather than trying to fix the build on ACPI, it is best to avoid
-compiling the helpers and the associated callbacks when CONFIG_ACPI=n.
+I'd recommend "x86/nmi: Avoid UB in for P4-era watchdogs" to avoid the
+ambiguity altogether.
 
-Signed-off-by: Julien Grall <jgrall@amazon.com>
-
----
-    Changes in v4:
-        - Patch added
----
- xen/arch/arm/gic-v2.c     |  8 +++-----
- xen/arch/arm/gic-v3.c     | 11 ++---------
- xen/arch/arm/gic.c        |  2 ++
- xen/include/asm-arm/gic.h | 10 ++++++++--
- 4 files changed, 15 insertions(+), 16 deletions(-)
-
-diff --git a/xen/arch/arm/gic-v2.c b/xen/arch/arm/gic-v2.c
-index 0f747538dbcd..581ea5ba6b2c 100644
---- a/xen/arch/arm/gic-v2.c
-+++ b/xen/arch/arm/gic-v2.c
-@@ -1114,12 +1114,12 @@ static int gicv2_iomem_deny_access(const struct domain *d)
-     return iomem_deny_access(d, mfn, mfn + nr);
- }
- 
-+#ifdef CONFIG_ACPI
- static unsigned long gicv2_get_hwdom_extra_madt_size(const struct domain *d)
- {
-     return 0;
- }
- 
--#ifdef CONFIG_ACPI
- static int gicv2_make_hwdom_madt(const struct domain *d, u32 offset)
- {
-     struct acpi_subtable_header *header;
-@@ -1248,10 +1248,6 @@ static void __init gicv2_acpi_init(void)
- }
- #else
- static void __init gicv2_acpi_init(void) { }
--static int gicv2_make_hwdom_madt(const struct domain *d, u32 offset)
--{
--    return 0;
--}
- #endif
- 
- static int __init gicv2_init(void)
-@@ -1357,8 +1353,10 @@ const static struct gic_hw_operations gicv2_ops = {
-     .read_apr            = gicv2_read_apr,
-     .read_pending_state  = gicv2_read_pending_state,
-     .make_hwdom_dt_node  = gicv2_make_hwdom_dt_node,
-+#ifdef CONFIG_ACPI
-     .make_hwdom_madt     = gicv2_make_hwdom_madt,
-     .get_hwdom_extra_madt_size = gicv2_get_hwdom_extra_madt_size,
-+#endif
-     .map_hwdom_extra_mappings = gicv2_map_hwdown_extra_mappings,
-     .iomem_deny_access   = gicv2_iomem_deny_access,
-     .do_LPI              = gicv2_do_LPI,
-diff --git a/xen/arch/arm/gic-v3.c b/xen/arch/arm/gic-v3.c
-index 0f6cbf6224e9..2a344393a0e4 100644
---- a/xen/arch/arm/gic-v3.c
-+++ b/xen/arch/arm/gic-v3.c
-@@ -1735,15 +1735,6 @@ static void __init gicv3_acpi_init(void)
- }
- #else
- static void __init gicv3_acpi_init(void) { }
--static int gicv3_make_hwdom_madt(const struct domain *d, u32 offset)
--{
--    return 0;
--}
--
--static unsigned long gicv3_get_hwdom_extra_madt_size(const struct domain *d)
--{
--    return 0;
--}
- #endif
- 
- static bool gic_dist_supports_lpis(void)
-@@ -1858,8 +1849,10 @@ static const struct gic_hw_operations gicv3_ops = {
-     .read_pending_state  = gicv3_read_pending_state,
-     .secondary_init      = gicv3_secondary_cpu_init,
-     .make_hwdom_dt_node  = gicv3_make_hwdom_dt_node,
-+#ifdef CONFIG_ACPI
-     .make_hwdom_madt     = gicv3_make_hwdom_madt,
-     .get_hwdom_extra_madt_size = gicv3_get_hwdom_extra_madt_size,
-+#endif
-     .iomem_deny_access   = gicv3_iomem_deny_access,
-     .do_LPI              = gicv3_do_LPI,
- };
-diff --git a/xen/arch/arm/gic.c b/xen/arch/arm/gic.c
-index d623c57cb9fa..fe60619e99cf 100644
---- a/xen/arch/arm/gic.c
-+++ b/xen/arch/arm/gic.c
-@@ -443,6 +443,7 @@ int gic_make_hwdom_dt_node(const struct domain *d,
-     return gic_hw_ops->make_hwdom_dt_node(d, gic, fdt);
- }
- 
-+#ifdef CONFIG_ACPI
- int gic_make_hwdom_madt(const struct domain *d, u32 offset)
- {
-     return gic_hw_ops->make_hwdom_madt(d, offset);
-@@ -459,6 +460,7 @@ unsigned long gic_get_hwdom_madt_size(const struct domain *d)
- 
-     return madt_size;
- }
-+#endif
- 
- int gic_iomem_deny_access(const struct domain *d)
- {
-diff --git a/xen/include/asm-arm/gic.h b/xen/include/asm-arm/gic.h
-index ba870523bb2a..ad0f7452d005 100644
---- a/xen/include/asm-arm/gic.h
-+++ b/xen/include/asm-arm/gic.h
-@@ -378,12 +378,14 @@ struct gic_hw_operations {
-     /* Create GIC node for the hardware domain */
-     int (*make_hwdom_dt_node)(const struct domain *d,
-                               const struct dt_device_node *gic, void *fdt);
-+#ifdef CONFIG_ACPI
-     /* Create MADT table for the hardware domain */
-     int (*make_hwdom_madt)(const struct domain *d, u32 offset);
--    /* Map extra GIC MMIO, irqs and other hw stuffs to the hardware domain. */
--    int (*map_hwdom_extra_mappings)(struct domain *d);
-     /* Query the size of hardware domain madt table */
-     unsigned long (*get_hwdom_extra_madt_size)(const struct domain *d);
-+#endif
-+    /* Map extra GIC MMIO, irqs and other hw stuffs to the hardware domain. */
-+    int (*map_hwdom_extra_mappings)(struct domain *d);
-     /* Deny access to GIC regions */
-     int (*iomem_deny_access)(const struct domain *d);
-     /* Handle LPIs, which require special handling */
-@@ -435,8 +437,12 @@ void register_gic_ops(const struct gic_hw_operations *ops);
- int gic_make_hwdom_dt_node(const struct domain *d,
-                            const struct dt_device_node *gic,
-                            void *fdt);
-+
-+#ifdef CONFIG_ACPI
- int gic_make_hwdom_madt(const struct domain *d, u32 offset);
- unsigned long gic_get_hwdom_madt_size(const struct domain *d);
-+#endif
-+
- int gic_map_hwdom_extra_mappings(struct domain *d);
- int gic_iomem_deny_access(const struct domain *d);
- 
--- 
-2.17.1
-
+~Andrew
 
