@@ -2,28 +2,28 @@ Return-Path: <SRS0=hRpO=EZ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BF151C56201
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2020 16:08:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5E4FBC56201
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2020 16:08:52 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3B35722256
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2020 16:08:36 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id D5B4B22256
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2020 16:08:51 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="nzn2y6WG"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3B35722256
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="JzACV2Mh"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D5B4B22256
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.31075.61287 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.31076.61299 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kfmTq-0007cR-4N; Thu, 19 Nov 2020 16:08:18 +0000
+	id 1kfmU6-0007gA-Dt; Thu, 19 Nov 2020 16:08:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 31075.61287; Thu, 19 Nov 2020 16:08:18 +0000
+Received: by outflank-mailman (output) from mailman id 31076.61299; Thu, 19 Nov 2020 16:08:34 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,173 +38,73 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kfmTq-0007cK-1I; Thu, 19 Nov 2020 16:08:18 +0000
-Received: by outflank-mailman (input) for mailman id 31075;
- Thu, 19 Nov 2020 16:08:16 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kfmU6-0007g0-AE; Thu, 19 Nov 2020 16:08:34 +0000
+Received: by outflank-mailman (input) for mailman id 31076;
+ Thu, 19 Nov 2020 16:08:33 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=d/3C=EZ=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
- id 1kfmTo-0007cF-4f
- for xen-devel@lists.xenproject.org; Thu, 19 Nov 2020 16:08:16 +0000
-Received: from mail-wr1-x42d.google.com (unknown [2a00:1450:4864:20::42d])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3b1fe409-9fe3-4371-933d-62cf64f628c8;
- Thu, 19 Nov 2020 16:08:15 +0000 (UTC)
-Received: by mail-wr1-x42d.google.com with SMTP id o15so7015193wru.6
- for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2020 08:08:15 -0800 (PST)
-Received: from CBGR90WXYV0
- (host109-146-187-185.range109-146.btcentralplus.com. [109.146.187.185])
- by smtp.gmail.com with ESMTPSA id s2sm442348wmh.37.2020.11.19.08.08.13
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 19 Nov 2020 08:08:13 -0800 (PST)
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ <SRS0=2P/M=EZ=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1kfmU4-0007fd-VA
+ for xen-devel@lists.xenproject.org; Thu, 19 Nov 2020 16:08:33 +0000
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 766091d8-f149-448d-824c-99df06a1aea4;
+ Thu, 19 Nov 2020 16:08:32 +0000 (UTC)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=d/3C=EZ=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
-	id 1kfmTo-0007cF-4f
-	for xen-devel@lists.xenproject.org; Thu, 19 Nov 2020 16:08:16 +0000
-X-Inumbo-ID: 3b1fe409-9fe3-4371-933d-62cf64f628c8
-Received: from mail-wr1-x42d.google.com (unknown [2a00:1450:4864:20::42d])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 3b1fe409-9fe3-4371-933d-62cf64f628c8;
-	Thu, 19 Nov 2020 16:08:15 +0000 (UTC)
-Received: by mail-wr1-x42d.google.com with SMTP id o15so7015193wru.6
-        for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2020 08:08:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:reply-to:to:cc:references:in-reply-to:subject:date:message-id
-         :mime-version:content-transfer-encoding:content-language
-         :thread-index;
-        bh=vlGJvl+n48Fq+TCMCHaQE3qgoeZd8yDDxodtR8YJyuY=;
-        b=nzn2y6WGgyWKaJ4Kwk6thNR7PcK3wllxIkC4sY6d7jNyGIR0Ta9ETugwLHScvHMdPj
-         bAOM5CuSlTRq0sZcAuL0wN06wRyz75UMPR5F+m0aLhmuCp9qD5T/7fxWQuhRU+KPI8nW
-         jA2zBRYbaa+BCva+Q4ZRZoq/iD63TUEysJSYptanQLsmUN3QuMeNU8a3rcZldXW5TIgz
-         h00E9FUzjBYYgjmox4CN6EQ9ALVDoqldiNdkrohR1FHhcHc8pbdZ+++vwCyrBZ/OEamW
-         yGZUZrdckdnY34Sz4yu3S4FlfsR1HjypqQtQWez+jcYGEGXPEVCQNtAX6jsDdCo+5AKA
-         yEAw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:reply-to:to:cc:references:in-reply-to
-         :subject:date:message-id:mime-version:content-transfer-encoding
-         :content-language:thread-index;
-        bh=vlGJvl+n48Fq+TCMCHaQE3qgoeZd8yDDxodtR8YJyuY=;
-        b=uL0p2SxtLfJQAjtHa07WoGlE4a2CMMuJyNhywKCrFw2Nd0gdKRjxjHntHqgYI/7uAc
-         0cEaID1b7pkZxuF3zWaStIesFk0G71RXwJncCwwq0AOk9J3/UVFFFbtMBf8rBAafuBg4
-         EqijC8814lSwmApHq1s4O6DyH9aapTfazcT8hzAwt5nI7fhLPmDzV90ML0nG8R36whXb
-         RPjR1yIYiXuXiqJ2Wa8aSNW/UB0O90fkXFz2E9mCtzMZFBJTByoutQOl4RW+ILe/IQEM
-         xn39wJ7h+tmTKezW6eu8+8AXtmfq53LoYAnYPqTAaIlAB9hcQjSfUZ3uBxghHNUPps3C
-         0Now==
-X-Gm-Message-State: AOAM533I9tEIKUnUSgCVRBy6cgGS1NQC7KHuLPWQiXSGv23Epxew+yNX
-	BAT7zwqhJFZBeHDPdbPRAvY=
-X-Google-Smtp-Source: ABdhPJy2Z7A2iRrNoVU5XUeapMEd1B5B48MbWEw7EzoD3iprlTGrI9wZ6AGOUiFtipalcbjFF7sUFg==
-X-Received: by 2002:adf:f382:: with SMTP id m2mr11416060wro.426.1605802094401;
-        Thu, 19 Nov 2020 08:08:14 -0800 (PST)
-Received: from CBGR90WXYV0 (host109-146-187-185.range109-146.btcentralplus.com. [109.146.187.185])
-        by smtp.gmail.com with ESMTPSA id s2sm442348wmh.37.2020.11.19.08.08.13
-        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Thu, 19 Nov 2020 08:08:13 -0800 (PST)
-From: Paul Durrant <xadimgnik@gmail.com>
-X-Google-Original-From: "Paul Durrant" <paul@xen.org>
-Reply-To: <paul@xen.org>
-To: "'Jan Beulich'" <jbeulich@suse.com>
-Cc: "'Paul Durrant'" <pdurrant@amazon.com>,
-	"'Wei Liu'" <wl@xen.org>,
-	"'Andrew Cooper'" <andrew.cooper3@citrix.com>,
-	=?UTF-8?Q?'Roger_Pau_Monn=C3=A9'?= <roger.pau@citrix.com>,
+	(envelope-from <SRS0=2P/M=EZ=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+	id 1kfmU4-0007fd-VA
+	for xen-devel@lists.xenproject.org; Thu, 19 Nov 2020 16:08:33 +0000
+X-Inumbo-ID: 766091d8-f149-448d-824c-99df06a1aea4
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id 766091d8-f149-448d-824c-99df06a1aea4;
+	Thu, 19 Nov 2020 16:08:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1605802111;
+  h=subject:to:references:from:message-id:date:mime-version:
+   in-reply-to:content-transfer-encoding;
+  bh=nSs4CrsxfMMQoxP8VXBC2GGpZarGmVENVa9Rl6O8stM=;
+  b=JzACV2Mh4fB4t87i/sQUB0C/fKyuWb7HjWLpRO45W9X+l1lEYeQNQKoI
+   pX0M25oX4gmg+ElMTZyWsFIfuttem2lPb69XE+AOk1nzTUHRFtnSj8cVc
+   xsv2TRlYALwSsHDXZFZ1F8dGmlNniAY8R2X2i9ViGa6uBm1RD7TemtCuC
+   Q=;
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: CkKraE4jtMBsK8X7Xl1X8NxhY2hZJ95fAL4+kfQ+/A4q1xatLPgLVNFkjgKO1grXyV5Gd6VCa8
+ a6GSrWepx9PCys2NOCkd76h35UtW6XOuVeuAecBROzfDHZH5oT8OE8PL+S58VHShFSQ/uT3fGM
+ Q2E35O+s9vh47seOQhwrOXc0h46QCbBzRBa4J9WGn/KfDMsuapIkFix9NedPrEW6pC+eXIjgSV
+ oXAFQo2o8aDewu5clLBCoy3ZDqoS5gjqQn/fFEOk29Tof1sD6OqeK/Vd/YQ5nnDQCiYealniss
+ Qu4=
+X-SBRS: None
+X-MesageID: 31508117
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.78,353,1599537600"; 
+   d="scan'208";a="31508117"
+Subject: Re: [PATCH] SVM: avoid UB in intercept mask definitions
+To: Jan Beulich <jbeulich@suse.com>, "xen-devel@lists.xenproject.org"
 	<xen-devel@lists.xenproject.org>
-References: <20201111200721.30551-1-paul@xen.org> <20201111200721.30551-6-paul@xen.org> <701b30f9-9552-84c0-63fa-0837b7939f4d@suse.com>
-In-Reply-To: <701b30f9-9552-84c0-63fa-0837b7939f4d@suse.com>
-Subject: RE: [PATCH 05/10] viridian: use softirq batching in hvcall_ipi()
-Date: Thu, 19 Nov 2020 16:08:13 -0000
-Message-ID: <00cb01d6be8e$2f138450$8d3a8cf0$@xen.org>
+References: <eaef863f-a396-58be-cb32-7a9e2535d9e2@suse.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Message-ID: <fd257643-fd2c-edfe-ccef-fde3d03d514a@citrix.com>
+Date: Thu, 19 Nov 2020 16:08:26 +0000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Type: text/plain;
-	charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailer: Microsoft Outlook 16.0
-Content-Language: en-gb
-Thread-Index: AQIKCyTUSJ7jm2WJ2nMqsy5EhijKogKFZsbGAWFRW+OpSc9NwA==
+In-Reply-To: <eaef863f-a396-58be-cb32-7a9e2535d9e2@suse.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Content-Language: en-GB
+X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
+ FTLPEX02CL04.citrite.net (10.13.108.177)
 
-> -----Original Message-----
-> From: Jan Beulich <jbeulich@suse.com>
-> Sent: 12 November 2020 08:53
-> To: Paul Durrant <paul@xen.org>
-> Cc: Paul Durrant <pdurrant@amazon.com>; Wei Liu <wl@xen.org>; Andrew =
-Cooper
-> <andrew.cooper3@citrix.com>; Roger Pau Monn=C3=A9 =
-<roger.pau@citrix.com>; xen-devel@lists.xenproject.org
-> Subject: Re: [PATCH 05/10] viridian: use softirq batching in =
-hvcall_ipi()
->=20
-> On 11.11.2020 21:07, Paul Durrant wrote:
-> > From: Paul Durrant <pdurrant@amazon.com>
-> >
-> > vlapic_ipi() uses a softirq batching mechanism to improve the =
-efficiency of
-> > sending a IPIs to large number of processors. This patch modifies =
-send_ipi()
-> > (the worker function called by hvcall_ipi()) to also make use of the
-> > mechanism when there multiple bits set the hypercall_vpmask. Hence a =
-`nr`
-> > field is added to the structure to track the number of set bits.
->=20
-> This is kind of unusual, i.e. we don't do so elsewhere. I take it the
-> assumption is that using bitmap_weight() is too much overhead?
+On 19/11/2020 15:57, Jan Beulich wrote:
+> Found by looking for patterns similar to the one Julien did spot in
+> pci_vtd_quirks().
+>
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-It just seemed wasteful in the circumstances. If I move to bitmap copy =
-OTOH then I'll have to use bitmap_weight().
-
->=20
-> > @@ -509,6 +510,7 @@ void viridian_domain_deinit(struct domain *d)
-> >
-> >  struct hypercall_vpmask {
-> >      DECLARE_BITMAP(mask, HVM_MAX_VCPUS);
-> > +    unsigned int nr;
-> >  };
-> >
-> >  static DEFINE_PER_CPU(struct hypercall_vpmask, hypercall_vpmask);
-> > @@ -516,21 +518,24 @@ static DEFINE_PER_CPU(struct hypercall_vpmask, =
-hypercall_vpmask);
-> >  static void vpmask_empty(struct hypercall_vpmask *vpmask)
-> >  {
-> >      bitmap_zero(vpmask->mask, HVM_MAX_VCPUS);
-> > +    vpmask->nr =3D 0;
-> >  }
-> >
-> >  static void vpmask_set(struct hypercall_vpmask *vpmask, unsigned =
-int vp)
-> >  {
-> > -    __set_bit(vp, vpmask->mask);
-> > +    if ( !test_and_set_bit(vp, vpmask->mask) )
-> > +        vpmask->nr++;
->=20
-> If test_and_set_bit() is the correct thing to use here (rather
-> than __test_and_set_bit()), the counter also needs updating
-> atomically.
->=20
-
-It doesn't need to be atomic, but I'll probably drop it.
-
-> >  }
-> >
-> >  static void vpmask_fill(struct hypercall_vpmask *vpmask)
-> >  {
-> >      bitmap_fill(vpmask->mask, HVM_MAX_VCPUS);
-> > +    vpmask->nr =3D HVM_MAX_VCPUS;
-> >  }
-> >
-> >  static bool vpmask_test(struct hypercall_vpmask *vpmask, unsigned =
-int vp)
-> >  {
-> > -    return test_bit(vp, vpmask->mask);
-> > +    return vpmask->nr && test_bit(vp, vpmask->mask);
->=20
-> Is this in fact an improvement?
->=20
-
-I think so, but it's a moot point if I drop 'nr'.
-
-  Paul
-
-> Jan
-
+Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
