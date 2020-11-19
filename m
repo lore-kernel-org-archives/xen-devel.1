@@ -2,28 +2,28 @@ Return-Path: <SRS0=hRpO=EZ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5E4FBC56201
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2020 16:08:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2EEACC63697
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2020 16:12:10 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D5B4B22256
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2020 16:08:51 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 9A07D22256
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2020 16:12:09 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="JzACV2Mh"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D5B4B22256
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="puz/D8EA"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9A07D22256
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.31076.61299 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.31089.61314 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kfmU6-0007gA-Dt; Thu, 19 Nov 2020 16:08:34 +0000
+	id 1kfmXN-0000He-0t; Thu, 19 Nov 2020 16:11:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 31076.61299; Thu, 19 Nov 2020 16:08:34 +0000
+Received: by outflank-mailman (output) from mailman id 31089.61314; Thu, 19 Nov 2020 16:11:56 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,73 +38,183 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kfmU6-0007g0-AE; Thu, 19 Nov 2020 16:08:34 +0000
-Received: by outflank-mailman (input) for mailman id 31076;
- Thu, 19 Nov 2020 16:08:33 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kfmXM-0000HX-TY; Thu, 19 Nov 2020 16:11:56 +0000
+Received: by outflank-mailman (input) for mailman id 31089;
+ Thu, 19 Nov 2020 16:11:56 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=2P/M=EZ=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1kfmU4-0007fd-VA
- for xen-devel@lists.xenproject.org; Thu, 19 Nov 2020 16:08:33 +0000
-Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 766091d8-f149-448d-824c-99df06a1aea4;
- Thu, 19 Nov 2020 16:08:32 +0000 (UTC)
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+ <SRS0=d/3C=EZ=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
+ id 1kfmXM-0000HS-81
+ for xen-devel@lists.xenproject.org; Thu, 19 Nov 2020 16:11:56 +0000
+Received: from mail-wm1-x335.google.com (unknown [2a00:1450:4864:20::335])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 06528d73-8496-40c0-9407-fd32284ff86c;
+ Thu, 19 Nov 2020 16:11:55 +0000 (UTC)
+Received: by mail-wm1-x335.google.com with SMTP id a186so4922318wme.1
+ for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2020 08:11:55 -0800 (PST)
+Received: from CBGR90WXYV0
+ (host109-146-187-185.range109-146.btcentralplus.com. [109.146.187.185])
+ by smtp.gmail.com with ESMTPSA id f11sm297184wrs.70.2020.11.19.08.11.53
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Thu, 19 Nov 2020 08:11:54 -0800 (PST)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=2P/M=EZ=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
-	id 1kfmU4-0007fd-VA
-	for xen-devel@lists.xenproject.org; Thu, 19 Nov 2020 16:08:33 +0000
-X-Inumbo-ID: 766091d8-f149-448d-824c-99df06a1aea4
-Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 766091d8-f149-448d-824c-99df06a1aea4;
-	Thu, 19 Nov 2020 16:08:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1605802111;
-  h=subject:to:references:from:message-id:date:mime-version:
-   in-reply-to:content-transfer-encoding;
-  bh=nSs4CrsxfMMQoxP8VXBC2GGpZarGmVENVa9Rl6O8stM=;
-  b=JzACV2Mh4fB4t87i/sQUB0C/fKyuWb7HjWLpRO45W9X+l1lEYeQNQKoI
-   pX0M25oX4gmg+ElMTZyWsFIfuttem2lPb69XE+AOk1nzTUHRFtnSj8cVc
-   xsv2TRlYALwSsHDXZFZ1F8dGmlNniAY8R2X2i9ViGa6uBm1RD7TemtCuC
-   Q=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: CkKraE4jtMBsK8X7Xl1X8NxhY2hZJ95fAL4+kfQ+/A4q1xatLPgLVNFkjgKO1grXyV5Gd6VCa8
- a6GSrWepx9PCys2NOCkd76h35UtW6XOuVeuAecBROzfDHZH5oT8OE8PL+S58VHShFSQ/uT3fGM
- Q2E35O+s9vh47seOQhwrOXc0h46QCbBzRBa4J9WGn/KfDMsuapIkFix9NedPrEW6pC+eXIjgSV
- oXAFQo2o8aDewu5clLBCoy3ZDqoS5gjqQn/fFEOk29Tof1sD6OqeK/Vd/YQ5nnDQCiYealniss
- Qu4=
-X-SBRS: None
-X-MesageID: 31508117
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.78,353,1599537600"; 
-   d="scan'208";a="31508117"
-Subject: Re: [PATCH] SVM: avoid UB in intercept mask definitions
-To: Jan Beulich <jbeulich@suse.com>, "xen-devel@lists.xenproject.org"
+	(envelope-from <SRS0=d/3C=EZ=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
+	id 1kfmXM-0000HS-81
+	for xen-devel@lists.xenproject.org; Thu, 19 Nov 2020 16:11:56 +0000
+X-Inumbo-ID: 06528d73-8496-40c0-9407-fd32284ff86c
+Received: from mail-wm1-x335.google.com (unknown [2a00:1450:4864:20::335])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id 06528d73-8496-40c0-9407-fd32284ff86c;
+	Thu, 19 Nov 2020 16:11:55 +0000 (UTC)
+Received: by mail-wm1-x335.google.com with SMTP id a186so4922318wme.1
+        for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2020 08:11:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:reply-to:to:cc:references:in-reply-to:subject:date:message-id
+         :mime-version:content-transfer-encoding:content-language
+         :thread-index;
+        bh=U6KMN71GE0FFhBDQM3+dgQDGGr3MyR1gzDm51G1UqQM=;
+        b=puz/D8EAjXk6Az3NYeaavlZX7aaN3pQI298j4GOaJNIEi06mfNII3NS+C99+I4UOwI
+         sug5jf28rFBr0DXlJ3MG4jGd53D2xZPuRGqCSGtICNp4+ALl4lb9LKDluBJChkUIZ1fK
+         7xixl3TUgWxbJ7ncS7785AhonDZLyoUNavfPi0Qudj5xykY0K7oEY+PBdE+8VWb47nfL
+         ySNbCnWv87BCI3sGPUN+QggYOUcYiA8iqtItNFUx7GaswsMwlLyXFQ/b3ZWaBUxUJqcb
+         uylyEhHfrDWwu2mtGg0fkKL1zlodMCg3J5I+mXV+GYSP+rh/KOsEX1zbvMwg+Klbn2xF
+         C58g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:reply-to:to:cc:references:in-reply-to
+         :subject:date:message-id:mime-version:content-transfer-encoding
+         :content-language:thread-index;
+        bh=U6KMN71GE0FFhBDQM3+dgQDGGr3MyR1gzDm51G1UqQM=;
+        b=SkCdE6ucVucZ3jUfTghvgnYlFlVTBTT86IeXOhwYIATBffV56MQvj2Iv+kyoNUSMYF
+         kkeNP2wihZC+3juGAWbBIMKcgr2lufojUjcO5sy0AnMGlGhbkRHGEegSkUwYrL0UtHRB
+         E6EsvKbZZm/OcS7w4qvCXm+Y62W+Mazw6Jmp3pkPtnqFEFFqfCp4T1TvUW8dNwl9d6RG
+         LbiwtJ3IAhu0RdwdBf7Wa56421N8h0rQgpLlb7EZAnUHbNja9xYEoWTkm3wlyE0xRHi7
+         iagQdeksgkFTrtZBBT4JCYSI18+5ipTdhnUIRkxAj//UaHaALifZRcuUJ/UzhN43hWHN
+         0LxQ==
+X-Gm-Message-State: AOAM531gU6NNeCL2UiP4Z1VqE5kn/HM1z7zdHZ8IYG8KE4NxQLGmblR9
+	1C3kvl07tPW/MoqQIheuvzI=
+X-Google-Smtp-Source: ABdhPJwDNPThcVMp5xwjf6+U92YaRKfqwdPabk3c9lu/nCa7GuuP+/P5NW5rEWRgt022B3fbIAdjrw==
+X-Received: by 2002:a1c:544c:: with SMTP id p12mr5310178wmi.146.1605802314559;
+        Thu, 19 Nov 2020 08:11:54 -0800 (PST)
+Received: from CBGR90WXYV0 (host109-146-187-185.range109-146.btcentralplus.com. [109.146.187.185])
+        by smtp.gmail.com with ESMTPSA id f11sm297184wrs.70.2020.11.19.08.11.53
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Thu, 19 Nov 2020 08:11:54 -0800 (PST)
+From: Paul Durrant <xadimgnik@gmail.com>
+X-Google-Original-From: "Paul Durrant" <paul@xen.org>
+Reply-To: <paul@xen.org>
+To: "'Jan Beulich'" <jbeulich@suse.com>
+Cc: "'Paul Durrant'" <pdurrant@amazon.com>,
+	"'Wei Liu'" <wl@xen.org>,
+	"'Andrew Cooper'" <andrew.cooper3@citrix.com>,
+	=?UTF-8?Q?'Roger_Pau_Monn=C3=A9'?= <roger.pau@citrix.com>,
 	<xen-devel@lists.xenproject.org>
-References: <eaef863f-a396-58be-cb32-7a9e2535d9e2@suse.com>
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Message-ID: <fd257643-fd2c-edfe-ccef-fde3d03d514a@citrix.com>
-Date: Thu, 19 Nov 2020 16:08:26 +0000
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+References: <20201111200721.30551-1-paul@xen.org> <20201111200721.30551-7-paul@xen.org> <dd6c4a0d-f611-7b81-8c95-72786891f311@suse.com>
+In-Reply-To: <dd6c4a0d-f611-7b81-8c95-72786891f311@suse.com>
+Subject: RE: [PATCH 06/10] viridian: add ExProcessorMasks variants of the flush hypercalls
+Date: Thu, 19 Nov 2020 16:11:53 -0000
+Message-ID: <00cc01d6be8e$b24973c0$16dc5b40$@xen.org>
 MIME-Version: 1.0
-In-Reply-To: <eaef863f-a396-58be-cb32-7a9e2535d9e2@suse.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Content-Language: en-GB
-X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
- FTLPEX02CL04.citrite.net (10.13.108.177)
+Content-Type: text/plain;
+	charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailer: Microsoft Outlook 16.0
+Content-Language: en-gb
+Thread-Index: AQIKCyTUSJ7jm2WJ2nMqsy5EhijKogHMVqApAbxd85SpTMBtEA==
 
-On 19/11/2020 15:57, Jan Beulich wrote:
-> Found by looking for patterns similar to the one Julien did spot in
-> pci_vtd_quirks().
->
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> -----Original Message-----
+> From: Jan Beulich <jbeulich@suse.com>
+> Sent: 12 November 2020 09:19
+> To: Paul Durrant <paul@xen.org>
+> Cc: Paul Durrant <pdurrant@amazon.com>; Wei Liu <wl@xen.org>; Andrew =
+Cooper
+> <andrew.cooper3@citrix.com>; Roger Pau Monn=C3=A9 =
+<roger.pau@citrix.com>; xen-devel@lists.xenproject.org
+> Subject: Re: [PATCH 06/10] viridian: add ExProcessorMasks variants of =
+the flush hypercalls
+>=20
+> On 11.11.2020 21:07, Paul Durrant wrote:
+> > --- a/xen/arch/x86/hvm/viridian/viridian.c
+> > +++ b/xen/arch/x86/hvm/viridian/viridian.c
+> > @@ -553,6 +553,83 @@ static unsigned int vpmask_next(struct =
+hypercall_vpmask *vpmask, unsigned int
+> vp
+> >  	     (vp) < HVM_MAX_VCPUS; \
+> >  	     (vp) =3D vpmask_next(vpmask, vp))
+> >
+> > +struct hypercall_vpset {
+> > +        struct hv_vpset set;
+> > +        uint64_t __bank_contents[64];
+>=20
+> gcc documents this to be supported as an extension; did you check
+> clang supports this, too?
 
-Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
+By 'this', do you mean the assumption that that memory layout is =
+consecutive?
+
+> (I'd also prefer if the leading
+> underscores could be dropped, but as you know I'm not the maintainer
+> of this code.)
+>=20
+> > +static unsigned int hv_vpset_nr_banks(struct hv_vpset *vpset)
+> > +{
+> > +    uint64_t bank_mask;
+> > +    unsigned int nr =3D 0;
+> > +
+> > +    for ( bank_mask =3D vpset->valid_bank_mask; bank_mask; =
+bank_mask >>=3D 1 )
+> > +        if ( bank_mask & 1 )
+> > +            nr++;
+> > +
+> > +    return nr;
+> > +}
+>=20
+> Simply use hweight64()?
+>=20
+
+Ok.
+
+> > +static uint16_t hv_vpset_to_vpmask(struct hv_vpset *set, size_t =
+size,
+> > +                                   struct hypercall_vpmask *vpmask)
+> > +{
+> > +    switch ( set->format )
+> > +    {
+> > +    case HV_GENERIC_SET_ALL:
+> > +        vpmask_fill(vpmask);
+> > +        return 0;
+> > +
+> > +    case HV_GENERIC_SET_SPARSE_4K:
+> > +    {
+> > +        uint64_t bank_mask;
+> > +        unsigned int bank =3D 0, vp =3D 0;
+> > +
+> > +        vpmask_empty(vpmask);
+> > +        for ( bank_mask =3D set->valid_bank_mask; bank_mask; =
+bank_mask >>=3D 1 )
+> > +        {
+> > +            /* Make sure we won't dereference past the end of the =
+array */
+> > +            if ( (void *)(set->bank_contents + bank) >=3D
+> > +                 (void *)set + size )
+> > +            {
+> > +                ASSERT_UNREACHABLE();
+> > +                return -EINVAL;
+> > +            }
+>=20
+> Doesn't this come too late? I.e. don't you want to check instead
+> (or also) that you won't overrun the space when copying in from
+> the guest? And for the specific purpose here, doesn't it come too
+> early, as you won't access any memory when the low bit of bank_mask
+> isn't set?
+>=20
+
+I'll dry-run this again. It may make more sense to move the check.
+
+  Paul
+
+> Jan
+
 
