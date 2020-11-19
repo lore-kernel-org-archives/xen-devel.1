@@ -2,28 +2,28 @@ Return-Path: <SRS0=hRpO=EZ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 74D98C63697
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E5C9C56201
 	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2020 17:08:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id ED3C3241A6
+	by mail.kernel.org (Postfix) with ESMTPS id EDD602468B
 	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2020 17:08:56 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="sC2SSNZn"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org ED3C3241A6
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="aCJJJb6s"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EDD602468B
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.31209.61507 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.31211.61531 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kfnQA-0007hg-I5; Thu, 19 Nov 2020 17:08:34 +0000
+	id 1kfnQD-0007k7-3U; Thu, 19 Nov 2020 17:08:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 31209.61507; Thu, 19 Nov 2020 17:08:34 +0000
+Received: by outflank-mailman (output) from mailman id 31211.61531; Thu, 19 Nov 2020 17:08:37 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,78 +38,163 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kfnQA-0007hZ-Ec; Thu, 19 Nov 2020 17:08:34 +0000
-Received: by outflank-mailman (input) for mailman id 31209;
- Thu, 19 Nov 2020 17:08:33 +0000
+	id 1kfnQC-0007jx-Vb; Thu, 19 Nov 2020 17:08:36 +0000
+Received: by outflank-mailman (input) for mailman id 31211;
+ Thu, 19 Nov 2020 17:08:35 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1kfnQ9-0007hP-44
- for xen-devel@lists.xenproject.org; Thu, 19 Nov 2020 17:08:33 +0000
+ (envelope-from <julien@xen.org>) id 1kfnQB-0007iR-Cg
+ for xen-devel@lists.xenproject.org; Thu, 19 Nov 2020 17:08:35 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1kfnQ8-0000ul-Jv; Thu, 19 Nov 2020 17:08:32 +0000
+ id 1kfnQB-0000va-04; Thu, 19 Nov 2020 17:08:35 +0000
 Received: from 54-240-197-235.amazon.com ([54.240.197.235]
  helo=ufe34d9ed68d054.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1kfnQ9-0000U1-8M; Thu, 19 Nov 2020 17:08:33 +0000
+ id 1kfnQB-0000U1-ML; Thu, 19 Nov 2020 17:08:35 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <julien@xen.org>)
-	id 1kfnQ9-0007hP-44
-	for xen-devel@lists.xenproject.org; Thu, 19 Nov 2020 17:08:33 +0000
+	id 1kfnQB-0007iR-Cg
+	for xen-devel@lists.xenproject.org; Thu, 19 Nov 2020 17:08:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Message-Id:Date:Subject:Cc:To:From;
-	bh=c1eUtv3J3QHRIBeiCg5Q3ir6r4CZrIczVaetKRD/GdY=; b=sC2SSNZnPUJPw2Au3OaNYf3nSC
-	TWyjRmaEGydMixitAOQhunixsaw/pHUGiSTl6Q1yIMKibGB60F3PH1o8xxOfCmMi9bRA3d2knlxg9
-	R9bNKQjiAYD1e6zOwsEQzQ3ujkXlI0HlEzqLGAnbtmWda+gbkz/A06hZK6GWI3hd3kTg=;
+	s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
+	 bh=QAujMV9Xzy7Ut9dM8y6NKak187oQRubSEIiR6ad+wBs=; b=aCJJJb6sjI77v6nqN0uVYCtU1
+	50k3k2Qm1ZfPgDgkoeXxmsu/PQ4GmrTTGwy9W2yoOoeAgpU28w2huwx1+bLqexzs5wl2UV6WsY+Kp
+	VYmRA7KKUSuy61RcjC0Q6+MXJIi/nTrtOW6RydU8NuBuGVeLIGQZPnx91HG3TIOdKB4x8=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
 	by mail.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <julien@xen.org>)
-	id 1kfnQ8-0000ul-Jv; Thu, 19 Nov 2020 17:08:32 +0000
+	id 1kfnQB-0000va-04; Thu, 19 Nov 2020 17:08:35 +0000
 Received: from 54-240-197-235.amazon.com ([54.240.197.235] helo=ufe34d9ed68d054.ant.amazon.com)
 	by xenbits.xenproject.org with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
 	(Exim 4.92)
 	(envelope-from <julien@xen.org>)
-	id 1kfnQ9-0000U1-8M; Thu, 19 Nov 2020 17:08:33 +0000
+	id 1kfnQB-0000U1-ML; Thu, 19 Nov 2020 17:08:35 +0000
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: alex.bennee@linaro.org,
 	bertrand.marquis@arm.com,
 	andre.przywara@arm.com,
 	Rahul.Singh@arm.com,
+	Julien Grall <julien.grall@arm.com>,
 	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v4 0/3] xen/arm: Allow Xen to boot with ACPI 5.1
-Date: Thu, 19 Nov 2020 17:08:26 +0000
-Message-Id: <20201119170829.9923-1-julien@xen.org>
+Subject: [PATCH v4 2/3] xen/arm: gic: acpi: Use the correct length for the GICC structure
+Date: Thu, 19 Nov 2020 17:08:28 +0000
+Message-Id: <20201119170829.9923-3-julien@xen.org>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20201119170829.9923-1-julien@xen.org>
+References: <20201119170829.9923-1-julien@xen.org>
 
-From: Julien Grall <jgrall@amazon.com>
+From: Julien Grall <julien.grall@arm.com>
 
-Hi all,
+The length of the GICC structure in the MADT ACPI table differs between
+version 5.1 and 6.0, although there are no other relevant differences.
 
-This series was originally called "xen/arm: Unbreak ACPI". It was
-renamed because only the part to allow boot with ACPI 5.1 is not
-merged.
+Use the BAD_MADT_GICC_ENTRY macro, which was specifically designed to
+overcome this issue.
 
-After this series, it is possible to boot Xen on QEMU with ACPI 5.1.
+Signed-off-by: Julien Grall <julien.grall@arm.com>
+Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+Signed-off-by: Julien Grall <jgrall@amazon.com>
 
-Cheers,
+---
+    Changes in v3:
+        - Update the commit title as we also modify GICv3 code
+        - Use the correct length in more places
 
-Julien Grall (3):
-  xen/arm: gic: acpi: Guard helpers to build the MADT with CONFIG_ACPI
-  xen/arm: gic: acpi: Use the correct length for the GICC structure
-  xen/arm: acpi: Allow Xen to boot with ACPI 5.1
+    Changes in v2:
+        - Patch added
+---
+ xen/arch/arm/acpi/boot.c | 2 +-
+ xen/arch/arm/gic-v2.c    | 5 +++--
+ xen/arch/arm/gic-v3.c    | 6 +++---
+ xen/arch/arm/gic.c       | 2 +-
+ 4 files changed, 8 insertions(+), 7 deletions(-)
 
- xen/arch/arm/acpi/boot.c  |  6 +++---
- xen/arch/arm/gic-v2.c     | 13 ++++++-------
- xen/arch/arm/gic-v3.c     | 17 +++++------------
- xen/arch/arm/gic.c        |  4 +++-
- xen/include/asm-arm/gic.h | 10 ++++++++--
- 5 files changed, 25 insertions(+), 25 deletions(-)
-
+diff --git a/xen/arch/arm/acpi/boot.c b/xen/arch/arm/acpi/boot.c
+index 30e4bd1bc5a7..55c3e5cbc834 100644
+--- a/xen/arch/arm/acpi/boot.c
++++ b/xen/arch/arm/acpi/boot.c
+@@ -131,7 +131,7 @@ acpi_parse_gic_cpu_interface(struct acpi_subtable_header *header,
+     struct acpi_madt_generic_interrupt *processor =
+                container_of(header, struct acpi_madt_generic_interrupt, header);
+ 
+-    if ( BAD_MADT_ENTRY(processor, end) )
++    if ( BAD_MADT_GICC_ENTRY(processor, end) )
+         return -EINVAL;
+ 
+     acpi_table_print_madt_entry(header);
+diff --git a/xen/arch/arm/gic-v2.c b/xen/arch/arm/gic-v2.c
+index 581ea5ba6b2c..b2adc8ec9a64 100644
+--- a/xen/arch/arm/gic-v2.c
++++ b/xen/arch/arm/gic-v2.c
+@@ -1136,7 +1136,8 @@ static int gicv2_make_hwdom_madt(const struct domain *d, u32 offset)
+ 
+     host_gicc = container_of(header, struct acpi_madt_generic_interrupt,
+                              header);
+-    size = sizeof(struct acpi_madt_generic_interrupt);
++
++    size = ACPI_MADT_GICC_LENGTH;
+     /* Add Generic Interrupt */
+     for ( i = 0; i < d->max_vcpus; i++ )
+     {
+@@ -1165,7 +1166,7 @@ gic_acpi_parse_madt_cpu(struct acpi_subtable_header *header,
+     struct acpi_madt_generic_interrupt *processor =
+                container_of(header, struct acpi_madt_generic_interrupt, header);
+ 
+-    if ( BAD_MADT_ENTRY(processor, end) )
++    if ( BAD_MADT_GICC_ENTRY(processor, end) )
+         return -EINVAL;
+ 
+     /* Read from APIC table and fill up the GIC variables */
+diff --git a/xen/arch/arm/gic-v3.c b/xen/arch/arm/gic-v3.c
+index 2a344393a0e4..ac28013c1967 100644
+--- a/xen/arch/arm/gic-v3.c
++++ b/xen/arch/arm/gic-v3.c
+@@ -1499,7 +1499,7 @@ static int gicv3_make_hwdom_madt(const struct domain *d, u32 offset)
+ 
+     host_gicc = container_of(header, struct acpi_madt_generic_interrupt,
+                              header);
+-    size = sizeof(struct acpi_madt_generic_interrupt);
++    size = ACPI_MADT_GICC_LENGTH;
+     for ( i = 0; i < d->max_vcpus; i++ )
+     {
+         gicc = (struct acpi_madt_generic_interrupt *)(base_ptr + table_len);
+@@ -1558,7 +1558,7 @@ gic_acpi_parse_madt_cpu(struct acpi_subtable_header *header,
+     struct acpi_madt_generic_interrupt *processor =
+                container_of(header, struct acpi_madt_generic_interrupt, header);
+ 
+-    if ( BAD_MADT_ENTRY(processor, end) )
++    if ( BAD_MADT_GICC_ENTRY(processor, end) )
+         return -EINVAL;
+ 
+     /* Read from APIC table and fill up the GIC variables */
+@@ -1628,7 +1628,7 @@ gic_acpi_get_madt_cpu_num(struct acpi_subtable_header *header,
+     struct acpi_madt_generic_interrupt *cpuif;
+ 
+     cpuif = (struct acpi_madt_generic_interrupt *)header;
+-    if ( BAD_MADT_ENTRY(cpuif, end) || !cpuif->gicr_base_address )
++    if ( BAD_MADT_GICC_ENTRY(cpuif, end) || !cpuif->gicr_base_address )
+         return -EINVAL;
+ 
+     return 0;
+diff --git a/xen/arch/arm/gic.c b/xen/arch/arm/gic.c
+index fe60619e99cf..3b0331b53830 100644
+--- a/xen/arch/arm/gic.c
++++ b/xen/arch/arm/gic.c
+@@ -454,7 +454,7 @@ unsigned long gic_get_hwdom_madt_size(const struct domain *d)
+     unsigned long madt_size;
+ 
+     madt_size = sizeof(struct acpi_table_madt)
+-                + sizeof(struct acpi_madt_generic_interrupt) * d->max_vcpus
++                + ACPI_MADT_GICC_LENGTH * d->max_vcpus
+                 + sizeof(struct acpi_madt_generic_distributor)
+                 + gic_hw_ops->get_hwdom_extra_madt_size(d);
+ 
 -- 
 2.17.1
 
