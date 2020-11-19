@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E5ADBC63697
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2020 17:25:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EC458C6379D
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2020 17:25:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 65A012469D
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2020 17:25:03 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 803B524695
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2020 17:25:04 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="Hu3gydKX"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 65A012469D
+	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="p8CHirmc"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 803B524695
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.31247.61579 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.31249.61597 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kfnfp-000224-Gh; Thu, 19 Nov 2020 17:24:45 +0000
+	id 1kfnfs-00023f-2e; Thu, 19 Nov 2020 17:24:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 31247.61579; Thu, 19 Nov 2020 17:24:45 +0000
+Received: by outflank-mailman (output) from mailman id 31249.61597; Thu, 19 Nov 2020 17:24:48 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,90 +38,156 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kfnfp-00021x-Cn; Thu, 19 Nov 2020 17:24:45 +0000
-Received: by outflank-mailman (input) for mailman id 31247;
- Thu, 19 Nov 2020 17:24:44 +0000
+	id 1kfnfr-00023V-U7; Thu, 19 Nov 2020 17:24:47 +0000
+Received: by outflank-mailman (input) for mailman id 31249;
+ Thu, 19 Nov 2020 17:24:46 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kfnfo-00021s-5v
- for xen-devel@lists.xenproject.org; Thu, 19 Nov 2020 17:24:44 +0000
+ (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kfnfq-00022u-Id
+ for xen-devel@lists.xenproject.org; Thu, 19 Nov 2020 17:24:46 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kfnfo-0001GM-3c
- for xen-devel@lists.xenproject.org; Thu, 19 Nov 2020 17:24:44 +0000
+ (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kfnfq-0001GV-Hn
+ for xen-devel@lists.xenproject.org; Thu, 19 Nov 2020 17:24:46 +0000
 Received: from iwj (helo=mynotebook.example.org)
  by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kfnfn-0001gq-V8
- for xen-devel@lists.xenproject.org; Thu, 19 Nov 2020 17:24:44 +0000
+ (envelope-from <ijackson@chiark.greenend.org.uk>) id 1kfnfq-0001hW-FT
+ for xen-devel@lists.xenproject.org; Thu, 19 Nov 2020 17:24:46 +0000
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by mariner.uk.xensource.com with esmtp (Exim 4.89)
  (envelope-from <ijackson@chiark.greenend.org.uk>)
- id 1kfnfl-0001j9-Jv; Thu, 19 Nov 2020 17:24:41 +0000
+ id 1kfnfm-0001j9-Eg; Thu, 19 Nov 2020 17:24:42 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <ijackson@chiark.greenend.org.uk>)
-	id 1kfnfo-00021s-5v
-	for xen-devel@lists.xenproject.org; Thu, 19 Nov 2020 17:24:44 +0000
+	id 1kfnfq-00022u-Id
+	for xen-devel@lists.xenproject.org; Thu, 19 Nov 2020 17:24:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
-	Message-Id:Date:Subject:Cc:To:From;
-	bh=RSPmlMx6h7lY0hEWezC+PZdIowM8QBXv/eyi0QInOAw=; b=Hu3gydKXJioG6mxexNtWg5BOyy
-	mAO0C72Dhb8ApH6sRL7JrbWHpAp2FfhRzbTvydbOFYhTUT7/znCQkZliFqzYiGFdZ2FGzwwMpfWEP
-	C6iRUYdXpSxFa8WAWY8zg54fJycotWZEA5cEvcO45MACFa1i6pIYb7VGshWPkNnBjhz0=;
+	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
+	bh=cziSSO/qxv0dihhTZt+q8r4bupo8zCTakTFjg8vAnkk=; b=p8CHirmc3FjRi9eFop2d0cKwyI
+	kVbsG6ydDJ6lTUMDEWQOLRjJhialdceTwFC9eQT3KbpIB4vGr4W0wWL2Eycw4QuhUEmL6NFPf9Sil
+	5xN5sMolrg4Bw8m1srSkZPst2brOvUmbAq4EXiK8Q630mmsig7b61ikmGuDisg7B4VsU=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
 	by mail.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <ijackson@chiark.greenend.org.uk>)
-	id 1kfnfo-0001GM-3c
-	for xen-devel@lists.xenproject.org; Thu, 19 Nov 2020 17:24:44 +0000
+	id 1kfnfq-0001GV-Hn
+	for xen-devel@lists.xenproject.org; Thu, 19 Nov 2020 17:24:46 +0000
 Received: from iwj (helo=mynotebook.example.org)
 	by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
 	(envelope-from <ijackson@chiark.greenend.org.uk>)
-	id 1kfnfn-0001gq-V8
-	for xen-devel@lists.xenproject.org; Thu, 19 Nov 2020 17:24:44 +0000
+	id 1kfnfq-0001hW-FT
+	for xen-devel@lists.xenproject.org; Thu, 19 Nov 2020 17:24:46 +0000
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
 	by mariner.uk.xensource.com with esmtp (Exim 4.89)
 	(envelope-from <ijackson@chiark.greenend.org.uk>)
-	id 1kfnfl-0001j9-Jv; Thu, 19 Nov 2020 17:24:41 +0000
+	id 1kfnfm-0001j9-Eg; Thu, 19 Nov 2020 17:24:42 +0000
 From: Ian Jackson <iwj@xenproject.org>
 To: xen-devel@lists.xenproject.org
 Cc: Ian Jackson <iwj@xenproject.org>
-Subject: [OSSTEST PATCH 1/3] sg-report-flight: Rename "sub" to more descriptive "relevant_flights"
-Date: Thu, 19 Nov 2020 17:24:30 +0000
-Message-Id: <20201119172432.15682-1-iwj@xenproject.org>
+Subject: [OSSTEST PATCH 3/3] sg-report-flight: Actually look at retest flights (part 2)
+Date: Thu, 19 Nov 2020 17:24:32 +0000
+Message-Id: <20201119172432.15682-3-iwj@xenproject.org>
 X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20201119172432.15682-1-iwj@xenproject.org>
+References: <20201119172432.15682-1-iwj@xenproject.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-No functional change.  We're going to add another WITH...
+To avoid going down ratholes (especially for jobs which reuse outputs
+from their previous selves), the primary flight/job finder in
+sg-report-flight does not recurse indefinitely through build jobs.
+Instead, it restricts the build jobs investigated to those within the
+same flight as the job which might be of interest.
+
+As a result, retest jobs are, unfortunately, discarded at this stage
+because we insist that the build jobs we find did use the tree
+revision we are investigating.
+
+Fix this by recursing into the corresponding primary flight too.
+In the $flightsq->fetchrow loop that's $xflight.
+
+For the primary flight, ie the first half of the UNION, that's just
+the fligth itself.  So there this has no change.
+
+For the retest flights, it is the flight that all the build jobs refer
+to.  Despite the CROSS JOIN, this will be unique for any particular
+"retest flight", because the query on the runvars insists that all of
+the (at least some) buildjob runvars for f1 point to f0.  Ie, f1 has
+no build jobs and refers to f0 for build jobs; so it can't refer to
+any other f0' in the cross join.
+
+With this change, a -retest flight can now actually be used to justify
+a push.
 
 Signed-off-by: Ian Jackson <iwj@xenproject.org>
 ---
- sg-report-flight | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ sg-report-flight | 22 +++++++++++++++-------
+ 1 file changed, 15 insertions(+), 7 deletions(-)
 
 diff --git a/sg-report-flight b/sg-report-flight
-index fd266586..40a3cc92 100755
+index 70cad230..7f0543ff 100755
 --- a/sg-report-flight
 +++ b/sg-report-flight
-@@ -316,7 +316,8 @@ END
-     # best option.
- 
-     my $flightsq= <<END;
--      WITH sub AS (
-+      WITH
-+      relevant_flights AS (
-         SELECT DISTINCT flight, blessing
-              FROM flights
- $runvars_joins
-@@ -328,7 +329,7 @@ $runvars_conds
+@@ -334,9 +334,12 @@ $runvars_conds
              LIMIT 1000
+       ),
+       retest_flights AS (
+-        SELECT DISTINCT f1.flight flight, f1.blessing blessing
++        SELECT DISTINCT 
++                  f1.flight flight,
++                  f0.flight xflight,
++                  f1.blessing blessing
+              FROM flights f1
+-             JOIN jobs j USING (flight) 
++             JOIN jobs j USING (flight)
+        CROSS JOIN relevant_flights f0
+             WHERE ($cmdline_flight_cond)
+               AND (
+@@ -348,10 +351,10 @@ $runvars_conds
+                   AND r.name LIKE '%buildjob'
+                   )
        )
-       SELECT flight, jobs.status
--        FROM sub
-+        FROM relevant_flights
+-      SELECT flight, jobs.status
++      SELECT flight, xflight, jobs.status
+         FROM (
+-           SELECT * FROM relevant_flights
+-     UNION SELECT * FROM retest_flights
++ SELECT        flight, flight xflight, blessing FROM relevant_flights
++ UNION SELECT  flight,        xflight, blessing FROM retest_flights
+              ) all_relevant_flights
  $flightsq_jobs_join
         WHERE (1=1)
- $flightsq_jobcond
+@@ -392,7 +395,7 @@ END
+                 WHERE flight=?
+ END
+ 
+-    while (my ($tflight, $tjstatus) = $flightsq->fetchrow_array) {
++    while (my ($tflight, $xflight, $tjstatus) = $flightsq->fetchrow_array) {
+ 	# Recurse from the starting flight looking for relevant build
+ 	# jobs.  We start with all jobs in $tflight, and for each job
+ 	# we also process any other jobs it refers to in *buildjob runvars.
+@@ -408,6 +411,11 @@ END
+ 	# actually interested in (ii) the kind of continuous update
+ 	# thing seen with freebsdbuildjob.
+ 	#
++	# However, when we are looking at a retest flight (offered to
++	# us with --refer-to-flights, or found because it was
++	# specified on the command line) we look at its build flight;
++	# that's what $xflight is;
++	#
+ 	# (This is rather different to cs-bisection-step, which is
+ 	# less focused on changes in a particular set of trees.)
+ 	#
+@@ -435,7 +443,7 @@ END
+ 	while (@binfos_todo) {
+ 	    my ($why,$bflight,$bjob) = @{ shift @binfos_todo };
+ 	    next if $binfos{$bflight}{$bjob};
+-            next unless $bflight == $tflight;
++            next unless $bflight == $tflight || $bflight == $xflight;
+ 	    $binfos{$bflight}{$bjob} = $why;
+ 	    $buildjobsq->execute($bflight,$bjob);
+ 	    $binfos_queue->($bflight,$buildjobsq,$why);
 -- 
 2.20.1
 
