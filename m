@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 99C42C64E69
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Nov 2020 09:49:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 68D21C64E75
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Nov 2020 09:49:32 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1C1E3204EF
+	by mail.kernel.org (Postfix) with ESMTPS id E3E43223B0
 	for <xen-devel@archiver.kernel.org>; Fri, 20 Nov 2020 09:49:31 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="HTeXAkg4"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1C1E3204EF
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="JhkFK1bP"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E3E43223B0
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.31839.62620 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.31835.62575 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kg32V-0005Jr-CH; Fri, 20 Nov 2020 09:49:11 +0000
+	id 1kg32R-0005CX-18; Fri, 20 Nov 2020 09:49:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 31839.62620; Fri, 20 Nov 2020 09:49:11 +0000
+Received: by outflank-mailman (output) from mailman id 31835.62575; Fri, 20 Nov 2020 09:49:06 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,43 +38,43 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kg32V-0005JR-10; Fri, 20 Nov 2020 09:49:11 +0000
-Received: by outflank-mailman (input) for mailman id 31839;
- Fri, 20 Nov 2020 09:49:10 +0000
+	id 1kg32Q-0005CB-Q3; Fri, 20 Nov 2020 09:49:06 +0000
+Received: by outflank-mailman (input) for mailman id 31835;
+ Fri, 20 Nov 2020 09:49:06 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>) id 1kg32U-0005IB-8N
- for xen-devel@lists.xenproject.org; Fri, 20 Nov 2020 09:49:10 +0000
+ (envelope-from <paul@xen.org>) id 1kg32P-0005Ag-Vl
+ for xen-devel@lists.xenproject.org; Fri, 20 Nov 2020 09:49:05 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kg32U-0002bG-5k; Fri, 20 Nov 2020 09:49:10 +0000
+ id 1kg32P-0002ag-Lu; Fri, 20 Nov 2020 09:49:05 +0000
 Received: from host109-146-187-185.range109-146.btcentralplus.com
  ([109.146.187.185] helo=u2f063a87eabd5f.home)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kg32T-0003d1-U8; Fri, 20 Nov 2020 09:49:10 +0000
+ id 1kg32P-0003d1-Ci; Fri, 20 Nov 2020 09:49:05 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1kg32U-0005IB-8N
-	for xen-devel@lists.xenproject.org; Fri, 20 Nov 2020 09:49:10 +0000
+	id 1kg32P-0005Ag-Vl
+	for xen-devel@lists.xenproject.org; Fri, 20 Nov 2020 09:49:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=WvuwwpXtHIjcO9NlLF0rzPVaiYPqjWXaNgyK1WMlZ8U=; b=HTeXAkg4QeahXXWEcacrgWgUKq
-	7SgIVGWC5T/JtLEyEBCLKtYlFzrQcDejLNm93hzt+2X5P6rs43IgAcOVZphuVSS/GCqIyRPBQVo9F
-	0HXT2qaB8HG/j2UYW8aTEz5T7fcrrOZI83Q1o+xgF1AhmNfLI7S8Tx1KkAvubFtnsQ1o=;
+	bh=qhrQ5SA3XRDCClu4Afoub3CK4rPcgTdFaJdSe0ftLhc=; b=JhkFK1bPgMAptBhogqATsxuC/C
+	W9E2A6LrTtyW18WXyMHJOiXZEA4/ix0Su1VSaCQjIlZogx6ne/4oD2A1X9mbQ0Wpp8XH04+6TlCeO
+	UqZLL4MUY22CBNf+wx7vgKDCe1TtvpJCO3+oEpHxXmOxkwXmEBGozwTYzDE3G9t+eTcs=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
 	by mail.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1kg32U-0002bG-5k; Fri, 20 Nov 2020 09:49:10 +0000
+	id 1kg32P-0002ag-Lu; Fri, 20 Nov 2020 09:49:05 +0000
 Received: from host109-146-187-185.range109-146.btcentralplus.com ([109.146.187.185] helo=u2f063a87eabd5f.home)
 	by xenbits.xenproject.org with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
 	(Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1kg32T-0003d1-U8; Fri, 20 Nov 2020 09:49:10 +0000
+	id 1kg32P-0003d1-Ci; Fri, 20 Nov 2020 09:49:05 +0000
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: Paul Durrant <pdurrant@amazon.com>,
@@ -82,9 +82,9 @@ Cc: Paul Durrant <pdurrant@amazon.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v2 06/12] viridian: use softirq batching in hvcall_ipi()
-Date: Fri, 20 Nov 2020 09:48:54 +0000
-Message-Id: <20201120094900.1489-7-paul@xen.org>
+Subject: [PATCH v2 02/12] viridian: move flush hypercall implementation into separate function
+Date: Fri, 20 Nov 2020 09:48:50 +0000
+Message-Id: <20201120094900.1489-3-paul@xen.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20201120094900.1489-1-paul@xen.org>
 References: <20201120094900.1489-1-paul@xen.org>
@@ -94,10 +94,16 @@ Content-Transfer-Encoding: 8bit
 
 From: Paul Durrant <pdurrant@amazon.com>
 
-vlapic_ipi() uses a softirq batching mechanism to improve the efficiency of
-sending a IPIs to large number of processors. This patch modifies send_ipi()
-(the worker function called by hvcall_ipi()) to also make use of the
-mechanism when there multiple bits set the hypercall_vpmask.
+This patch moves the implementation of HVCALL_FLUSH_VIRTUAL_ADDRESS_SPACE/LIST
+that is currently inline in viridian_hypercall() into a new hvcall_flush()
+function.
+
+The new function returns Xen erro values which are then dealt with
+appropriately. A return value of -ERESTART translates to viridian_hypercall()
+returning HVM_HCALL_preempted. Other return values translate to status codes
+and viridian_hypercall() returning HVM_HCALL_completed. Currently the only
+values, other than -ERESTART, returned by hvcall_flush() are 0 (indicating
+success) or -EINVAL.
 
 Signed-off-by: Paul Durrant <pdurrant@amazon.com>
 ---
@@ -105,56 +111,171 @@ Cc: Wei Liu <wl@xen.org>
 Cc: Jan Beulich <jbeulich@suse.com>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>
 Cc: "Roger Pau Monné" <roger.pau@citrix.com>
-
-v2:
- - Don't add the 'nr' field to struct hypercall_vpmask and use
-   bitmap_weight() instead
 ---
- xen/arch/x86/hvm/viridian/viridian.c | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+ xen/arch/x86/hvm/viridian/viridian.c | 130 ++++++++++++++++-----------
+ 1 file changed, 78 insertions(+), 52 deletions(-)
 
 diff --git a/xen/arch/x86/hvm/viridian/viridian.c b/xen/arch/x86/hvm/viridian/viridian.c
-index d8d8ecc89c80..d6f47b28c1e6 100644
+index 54035f75cb1a..15b1c96fe13b 100644
 --- a/xen/arch/x86/hvm/viridian/viridian.c
 +++ b/xen/arch/x86/hvm/viridian/viridian.c
-@@ -11,6 +11,7 @@
- #include <xen/hypercall.h>
- #include <xen/domain_page.h>
- #include <xen/param.h>
-+#include <xen/softirq.h>
- #include <asm/guest/hyperv-tlfs.h>
- #include <asm/paging.h>
- #include <asm/p2m.h>
-@@ -570,6 +571,11 @@ static unsigned int vpmask_next(struct hypercall_vpmask *vpmask, unsigned int vp
- 	      (vp) < HVM_MAX_VCPUS; \
- 	      (vp) = vpmask_next(vpmask, vp) )
- 
-+static unsigned int vpmask_nr(const struct hypercall_vpmask *vpmask)
-+{
-+    return bitmap_weight(vpmask->mask, HVM_MAX_VCPUS);
-+}
-+
- /*
-  * Windows should not issue the hypercalls requiring this callback in the
-  * case where vcpu_id would exceed the size of the mask.
-@@ -653,10 +659,17 @@ static int hvcall_flush(union hypercall_input *input,
- static void send_ipi(struct hypercall_vpmask *vpmask, uint8_t vector)
- {
-     struct domain *currd = current->domain;
-+    unsigned int nr = vpmask_nr(vpmask);
-     unsigned int vp;
- 
-+    if ( nr > 1 )
-+        cpu_raise_softirq_batch_begin();
-+
-     for_each_vp ( vpmask, vp )
-         vlapic_set_irq(vcpu_vlapic(currd->vcpu[vp]), vector, 0);
-+
-+    if ( nr > 1 )
-+        cpu_raise_softirq_batch_finish();
+@@ -518,6 +518,69 @@ static bool need_flush(void *ctxt, struct vcpu *v)
+     return vcpu_mask & (1ul << v->vcpu_id);
  }
  
- static int hvcall_ipi(union hypercall_input *input,
++union hypercall_input {
++    uint64_t raw;
++    struct {
++        uint16_t call_code;
++        uint16_t fast:1;
++        uint16_t rsvd1:15;
++        uint16_t rep_count:12;
++        uint16_t rsvd2:4;
++        uint16_t rep_start:12;
++        uint16_t rsvd3:4;
++    };
++};
++
++union hypercall_output {
++    uint64_t raw;
++    struct {
++        uint16_t result;
++        uint16_t rsvd1;
++        uint32_t rep_complete:12;
++        uint32_t rsvd2:20;
++    };
++};
++
++static int hvcall_flush(union hypercall_input *input,
++                        union hypercall_output *output,
++                        unsigned long input_params_gpa,
++                        unsigned long output_params_gpa)
++{
++    struct {
++        uint64_t address_space;
++        uint64_t flags;
++        uint64_t vcpu_mask;
++    } input_params;
++
++    /* These hypercalls should never use the fast-call convention. */
++    if ( input->fast )
++        return -EINVAL;
++
++    /* Get input parameters. */
++    if ( hvm_copy_from_guest_phys(&input_params, input_params_gpa,
++                                  sizeof(input_params)) != HVMTRANS_okay )
++        return -EINVAL;
++
++    /*
++     * It is not clear from the spec. if we are supposed to
++     * include current virtual CPU in the set or not in this case,
++     * so err on the safe side.
++     */
++    if ( input_params.flags & HV_FLUSH_ALL_PROCESSORS )
++        input_params.vcpu_mask = ~0ul;
++
++    /*
++     * A false return means that another vcpu is currently trying
++     * a similar operation, so back off.
++     */
++    if ( !paging_flush_tlb(need_flush, &input_params.vcpu_mask) )
++        return -ERESTART;
++
++    output->rep_complete = input->rep_count;
++
++    return 0;
++}
++
+ int viridian_hypercall(struct cpu_user_regs *regs)
+ {
+     struct vcpu *curr = current;
+@@ -525,29 +588,8 @@ int viridian_hypercall(struct cpu_user_regs *regs)
+     int mode = hvm_guest_x86_mode(curr);
+     unsigned long input_params_gpa, output_params_gpa;
+     uint16_t status = HV_STATUS_SUCCESS;
+-
+-    union hypercall_input {
+-        uint64_t raw;
+-        struct {
+-            uint16_t call_code;
+-            uint16_t fast:1;
+-            uint16_t rsvd1:15;
+-            uint16_t rep_count:12;
+-            uint16_t rsvd2:4;
+-            uint16_t rep_start:12;
+-            uint16_t rsvd3:4;
+-        };
+-    } input;
+-
+-    union hypercall_output {
+-        uint64_t raw;
+-        struct {
+-            uint16_t result;
+-            uint16_t rsvd1;
+-            uint32_t rep_complete:12;
+-            uint32_t rsvd2:20;
+-        };
+-    } output = { 0 };
++    union hypercall_input input;
++    union hypercall_output output = {};
+ 
+     ASSERT(is_viridian_domain(currd));
+ 
+@@ -580,41 +622,25 @@ int viridian_hypercall(struct cpu_user_regs *regs)
+     case HVCALL_FLUSH_VIRTUAL_ADDRESS_SPACE:
+     case HVCALL_FLUSH_VIRTUAL_ADDRESS_LIST:
+     {
+-        struct {
+-            uint64_t address_space;
+-            uint64_t flags;
+-            uint64_t vcpu_mask;
+-        } input_params;
++        int rc = hvcall_flush(&input, &output, input_params_gpa,
++                              output_params_gpa);
+ 
+-        /* These hypercalls should never use the fast-call convention. */
+-        status = HV_STATUS_INVALID_PARAMETER;
+-        if ( input.fast )
++        switch ( rc )
++        {
++        case 0:
+             break;
+ 
+-        /* Get input parameters. */
+-        if ( hvm_copy_from_guest_phys(&input_params, input_params_gpa,
+-                                      sizeof(input_params)) !=
+-             HVMTRANS_okay )
+-            break;
+-
+-        /*
+-         * It is not clear from the spec. if we are supposed to
+-         * include current virtual CPU in the set or not in this case,
+-         * so err on the safe side.
+-         */
+-        if ( input_params.flags & HV_FLUSH_ALL_PROCESSORS )
+-            input_params.vcpu_mask = ~0ul;
+-
+-        /*
+-         * A false return means that another vcpu is currently trying
+-         * a similar operation, so back off.
+-         */
+-        if ( !paging_flush_tlb(need_flush, &input_params.vcpu_mask) )
++        case -ERESTART:
+             return HVM_HCALL_preempted;
+ 
+-        output.rep_complete = input.rep_count;
++        default:
++            ASSERT_UNREACHABLE();
++            /* Fallthrough */
++        case -EINVAL:
++            status = HV_STATUS_INVALID_PARAMETER;
++            break;
++        }
+ 
+-        status = HV_STATUS_SUCCESS;
+         break;
+     }
+ 
 -- 
 2.20.1
 
