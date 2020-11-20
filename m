@@ -7,21 +7,21 @@ X-Spam-Status: No, score=-15.3 required=3.0 tests=BAYES_00,
 	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0DDE6C63777
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Nov 2020 07:35:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B3E01C63777
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Nov 2020 07:37:33 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9117722256
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Nov 2020 07:35:48 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9117722256
+	by mail.kernel.org (Postfix) with ESMTPS id 4A90222256
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Nov 2020 07:37:33 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4A90222256
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.31634.62182 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.31640.62193 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kg0xE-0003gp-Vr; Fri, 20 Nov 2020 07:35:36 +0000
+	id 1kg0yu-0003pJ-BA; Fri, 20 Nov 2020 07:37:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 31634.62182; Fri, 20 Nov 2020 07:35:36 +0000
+Received: by outflank-mailman (output) from mailman id 31640.62193; Fri, 20 Nov 2020 07:37:20 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,36 +36,37 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kg0xE-0003gi-S1; Fri, 20 Nov 2020 07:35:36 +0000
-Received: by outflank-mailman (input) for mailman id 31634;
- Fri, 20 Nov 2020 07:35:36 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kg0yu-0003pC-8E; Fri, 20 Nov 2020 07:37:20 +0000
+Received: by outflank-mailman (input) for mailman id 31640;
+ Fri, 20 Nov 2020 07:37:18 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Ruer=E2=suse.de=hare@srs-us1.protection.inumbo.net>)
- id 1kg0xE-0003gb-4m
- for xen-devel@lists.xenproject.org; Fri, 20 Nov 2020 07:35:36 +0000
+ id 1kg0ys-0003p2-M3
+ for xen-devel@lists.xenproject.org; Fri, 20 Nov 2020 07:37:18 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 73902ba2-db38-4ab9-9522-1e2dd30dddb2;
- Fri, 20 Nov 2020 07:35:35 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 89d6f3b0-9aca-4e35-92eb-a9ab1bc8b131;
+ Fri, 20 Nov 2020 07:37:17 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 7837DAB3D;
- Fri, 20 Nov 2020 07:35:34 +0000 (UTC)
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by mx2.suse.de (Postfix) with ESMTP id DA874AC23;
+ Fri, 20 Nov 2020 07:37:16 +0000 (UTC)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=Ruer=E2=suse.de=hare@srs-us1.protection.inumbo.net>)
-	id 1kg0xE-0003gb-4m
-	for xen-devel@lists.xenproject.org; Fri, 20 Nov 2020 07:35:36 +0000
-X-Inumbo-ID: 73902ba2-db38-4ab9-9522-1e2dd30dddb2
+	id 1kg0ys-0003p2-M3
+	for xen-devel@lists.xenproject.org; Fri, 20 Nov 2020 07:37:18 +0000
+X-Inumbo-ID: 89d6f3b0-9aca-4e35-92eb-a9ab1bc8b131
 Received: from mx2.suse.de (unknown [195.135.220.15])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 73902ba2-db38-4ab9-9522-1e2dd30dddb2;
-	Fri, 20 Nov 2020 07:35:35 +0000 (UTC)
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id 89d6f3b0-9aca-4e35-92eb-a9ab1bc8b131;
+	Fri, 20 Nov 2020 07:37:17 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 7837DAB3D;
-	Fri, 20 Nov 2020 07:35:34 +0000 (UTC)
-Subject: Re: [PATCH 59/78] mtip32xx: remove the call to fsync_bdev on removal
+	by mx2.suse.de (Postfix) with ESMTP id DA874AC23;
+	Fri, 20 Nov 2020 07:37:16 +0000 (UTC)
+Subject: Re: [PATCH 60/78] zram: remove the claim mechanism
 To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>, Josef Bacik <josef@toxicpanda.com>,
  Ilya Dryomov <idryomov@gmail.com>, Jack Wang <jinpu.wang@cloud.ionos.com>,
@@ -82,27 +83,29 @@ Cc: Justin Sanders <justin@coraid.com>, Josef Bacik <josef@toxicpanda.com>,
  linux-nvme@lists.infradead.org, linux-scsi@vger.kernel.org,
  linux-fsdevel@vger.kernel.org
 References: <20201116145809.410558-1-hch@lst.de>
- <20201116145809.410558-60-hch@lst.de>
+ <20201116145809.410558-61-hch@lst.de>
 From: Hannes Reinecke <hare@suse.de>
-Message-ID: <5ee8dd18-f420-280c-84b9-78b70f528e26@suse.de>
-Date: Fri, 20 Nov 2020 08:35:33 +0100
+Message-ID: <317d324a-f4a2-7fc4-3546-0048c38c55da@suse.de>
+Date: Fri, 20 Nov 2020 08:37:15 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.4.0
 MIME-Version: 1.0
-In-Reply-To: <20201116145809.410558-60-hch@lst.de>
+In-Reply-To: <20201116145809.410558-61-hch@lst.de>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 
 On 11/16/20 3:57 PM, Christoph Hellwig wrote:
-> del_gendisk already calls fsync_bdev for every partition, no need
-> to do this twice.
+> The zram claim mechanism was added to ensure no new opens come in
+> during teardown.  But the proper way to archive that is to call
+> del_gendisk first, which takes care of all that.  Once del_gendisk
+> is called in the right place, the reset side can also be simplified
+> as no I/O can be outstanding on a block device that is not open.
 > 
 > Signed-off-by: Christoph Hellwig <hch@lst.de>
 > ---
->   drivers/block/mtip32xx/mtip32xx.c | 15 ---------------
->   drivers/block/mtip32xx/mtip32xx.h |  2 --
->   2 files changed, 17 deletions(-)
+>   drivers/block/zram/zram_drv.c | 76 ++++++++++-------------------------
+>   1 file changed, 21 insertions(+), 55 deletions(-)
 > 
 Reviewed-by: Hannes Reinecke <hare@suse.de>
 
