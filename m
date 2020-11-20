@@ -2,28 +2,28 @@ Return-Path: <SRS0=Yd2Y=E2=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E767C6379F
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Nov 2020 09:49:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 99C42C64E69
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Nov 2020 09:49:31 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id ACFFF204EF
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Nov 2020 09:49:27 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 1C1E3204EF
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Nov 2020 09:49:31 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="WWI1ucgv"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org ACFFF204EF
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="HTeXAkg4"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1C1E3204EF
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.31834.62560 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.31839.62620 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kg32Q-0005BD-E9; Fri, 20 Nov 2020 09:49:06 +0000
+	id 1kg32V-0005Jr-CH; Fri, 20 Nov 2020 09:49:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 31834.62560; Fri, 20 Nov 2020 09:49:06 +0000
+Received: by outflank-mailman (output) from mailman id 31839.62620; Fri, 20 Nov 2020 09:49:11 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,101 +38,123 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kg32Q-0005Ax-6m; Fri, 20 Nov 2020 09:49:06 +0000
-Received: by outflank-mailman (input) for mailman id 31834;
- Fri, 20 Nov 2020 09:49:05 +0000
+	id 1kg32V-0005JR-10; Fri, 20 Nov 2020 09:49:11 +0000
+Received: by outflank-mailman (input) for mailman id 31839;
+ Fri, 20 Nov 2020 09:49:10 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>) id 1kg32O-0005AQ-Se
- for xen-devel@lists.xenproject.org; Fri, 20 Nov 2020 09:49:04 +0000
+ (envelope-from <paul@xen.org>) id 1kg32U-0005IB-8N
+ for xen-devel@lists.xenproject.org; Fri, 20 Nov 2020 09:49:10 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kg32N-0002aT-F5; Fri, 20 Nov 2020 09:49:03 +0000
+ id 1kg32U-0002bG-5k; Fri, 20 Nov 2020 09:49:10 +0000
 Received: from host109-146-187-185.range109-146.btcentralplus.com
  ([109.146.187.185] helo=u2f063a87eabd5f.home)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kg32N-0003d1-3k; Fri, 20 Nov 2020 09:49:03 +0000
+ id 1kg32T-0003d1-U8; Fri, 20 Nov 2020 09:49:10 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1kg32O-0005AQ-Se
-	for xen-devel@lists.xenproject.org; Fri, 20 Nov 2020 09:49:04 +0000
+	id 1kg32U-0005IB-8N
+	for xen-devel@lists.xenproject.org; Fri, 20 Nov 2020 09:49:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:MIME-Version:
-	Message-Id:Date:Subject:Cc:To:From;
-	bh=Mj4u5ITXwce574pXi1ANbw3qWtzS9xrY/6iHBRtpIyQ=; b=WWI1ucgvZ2HYijG6O8TgKHrHVd
-	0zF5rrxTRrQ3T6HEra7Es5aEB+e6RuqgYRm3xmPMTlPxR/7g/gSsICeRFkDh48nP1guhhpsmiMK5/
-	k44MAWmusNsYgO9rVDMqYiXclaS03jaWFC7/KjV965B8uaCv6gQ89ZeXVVxhmB7j0US4=;
+	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
+	bh=WvuwwpXtHIjcO9NlLF0rzPVaiYPqjWXaNgyK1WMlZ8U=; b=HTeXAkg4QeahXXWEcacrgWgUKq
+	7SgIVGWC5T/JtLEyEBCLKtYlFzrQcDejLNm93hzt+2X5P6rs43IgAcOVZphuVSS/GCqIyRPBQVo9F
+	0HXT2qaB8HG/j2UYW8aTEz5T7fcrrOZI83Q1o+xgF1AhmNfLI7S8Tx1KkAvubFtnsQ1o=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
 	by mail.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1kg32N-0002aT-F5; Fri, 20 Nov 2020 09:49:03 +0000
+	id 1kg32U-0002bG-5k; Fri, 20 Nov 2020 09:49:10 +0000
 Received: from host109-146-187-185.range109-146.btcentralplus.com ([109.146.187.185] helo=u2f063a87eabd5f.home)
 	by xenbits.xenproject.org with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
 	(Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1kg32N-0003d1-3k; Fri, 20 Nov 2020 09:49:03 +0000
+	id 1kg32T-0003d1-U8; Fri, 20 Nov 2020 09:49:10 +0000
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: Paul Durrant <pdurrant@amazon.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Ian Jackson <iwj@xenproject.org>,
+	Wei Liu <wl@xen.org>,
 	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v2 00/12] viridian: add support for ExProcessorMasks
-Date: Fri, 20 Nov 2020 09:48:48 +0000
-Message-Id: <20201120094900.1489-1-paul@xen.org>
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v2 06/12] viridian: use softirq batching in hvcall_ipi()
+Date: Fri, 20 Nov 2020 09:48:54 +0000
+Message-Id: <20201120094900.1489-7-paul@xen.org>
 X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20201120094900.1489-1-paul@xen.org>
+References: <20201120094900.1489-1-paul@xen.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 From: Paul Durrant <pdurrant@amazon.com>
 
-Paul Durrant (12):
-  viridian: don't blindly write to 32-bit registers is 'mode' is invalid
-  viridian: move flush hypercall implementation into separate function
-  viridian: move IPI hypercall implementation into separate function
-  viridian: introduce a per-cpu hypercall_vpmask and accessor
-    functions...
-  viridian: use hypercall_vpmask in hvcall_ipi()
-  viridian: use softirq batching in hvcall_ipi()
-  xen/include: import sizeof_field() macro from Linux stddef.h
-  viridian: add ExProcessorMasks variants of the flush hypercalls
-  viridian: add ExProcessorMasks variant of the IPI hypercall
-  viridian: log initial invocation of each type of hypercall
-  viridian: add a new '_HVMPV_ex_processor_masks' bit into
-    HVM_PARAM_VIRIDIAN...
-  xl / libxl: add 'ex_processor_mask' into
-    'libxl_viridian_enlightenment'
+vlapic_ipi() uses a softirq batching mechanism to improve the efficiency of
+sending a IPIs to large number of processors. This patch modifies send_ipi()
+(the worker function called by hvcall_ipi()) to also make use of the
+mechanism when there multiple bits set the hypercall_vpmask.
 
- docs/man/xl.cfg.5.pod.in             |   8 +
- tools/include/libxl.h                |   7 +
- tools/libs/light/libxl_types.idl     |   1 +
- tools/libs/light/libxl_x86.c         |   3 +
- xen/arch/x86/hvm/viridian/viridian.c | 601 +++++++++++++++++++++------
- xen/include/asm-x86/hvm/viridian.h   |  10 +
- xen/include/public/hvm/params.h      |   7 +-
- xen/include/xen/compiler.h           |   8 +
- 8 files changed, 522 insertions(+), 123 deletions(-)
+Signed-off-by: Paul Durrant <pdurrant@amazon.com>
 ---
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Anthony PERARD <anthony.perard@citrix.com>
-Cc: George Dunlap <george.dunlap@citrix.com>
-Cc: Ian Jackson <iwj@xenproject.org>
-Cc: Jan Beulich <jbeulich@suse.com>
-Cc: Julien Grall <julien@xen.org>
-Cc: "Roger Pau Monné" <roger.pau@citrix.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>
 Cc: Wei Liu <wl@xen.org>
+Cc: Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: "Roger Pau Monné" <roger.pau@citrix.com>
+
+v2:
+ - Don't add the 'nr' field to struct hypercall_vpmask and use
+   bitmap_weight() instead
+---
+ xen/arch/x86/hvm/viridian/viridian.c | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+
+diff --git a/xen/arch/x86/hvm/viridian/viridian.c b/xen/arch/x86/hvm/viridian/viridian.c
+index d8d8ecc89c80..d6f47b28c1e6 100644
+--- a/xen/arch/x86/hvm/viridian/viridian.c
++++ b/xen/arch/x86/hvm/viridian/viridian.c
+@@ -11,6 +11,7 @@
+ #include <xen/hypercall.h>
+ #include <xen/domain_page.h>
+ #include <xen/param.h>
++#include <xen/softirq.h>
+ #include <asm/guest/hyperv-tlfs.h>
+ #include <asm/paging.h>
+ #include <asm/p2m.h>
+@@ -570,6 +571,11 @@ static unsigned int vpmask_next(struct hypercall_vpmask *vpmask, unsigned int vp
+ 	      (vp) < HVM_MAX_VCPUS; \
+ 	      (vp) = vpmask_next(vpmask, vp) )
+ 
++static unsigned int vpmask_nr(const struct hypercall_vpmask *vpmask)
++{
++    return bitmap_weight(vpmask->mask, HVM_MAX_VCPUS);
++}
++
+ /*
+  * Windows should not issue the hypercalls requiring this callback in the
+  * case where vcpu_id would exceed the size of the mask.
+@@ -653,10 +659,17 @@ static int hvcall_flush(union hypercall_input *input,
+ static void send_ipi(struct hypercall_vpmask *vpmask, uint8_t vector)
+ {
+     struct domain *currd = current->domain;
++    unsigned int nr = vpmask_nr(vpmask);
+     unsigned int vp;
+ 
++    if ( nr > 1 )
++        cpu_raise_softirq_batch_begin();
++
+     for_each_vp ( vpmask, vp )
+         vlapic_set_irq(vcpu_vlapic(currd->vcpu[vp]), vector, 0);
++
++    if ( nr > 1 )
++        cpu_raise_softirq_batch_finish();
+ }
+ 
+ static int hvcall_ipi(union hypercall_input *input,
 -- 
 2.20.1
 
