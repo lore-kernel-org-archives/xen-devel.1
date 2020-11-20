@@ -2,28 +2,28 @@ Return-Path: <SRS0=Yd2Y=E2=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E0899C5519F
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Nov 2020 11:24:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8A3B2C63777
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Nov 2020 11:46:53 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 610A622244
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Nov 2020 11:24:28 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 186D122254
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Nov 2020 11:46:52 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="k4tUevAC"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 610A622244
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="HM77VhTX"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 186D122254
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.31977.62806 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.31989.62833 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kg4WX-0001lV-E2; Fri, 20 Nov 2020 11:24:17 +0000
+	id 1kg4sA-0004AJ-K9; Fri, 20 Nov 2020 11:46:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 31977.62806; Fri, 20 Nov 2020 11:24:17 +0000
+Received: by outflank-mailman (output) from mailman id 31989.62833; Fri, 20 Nov 2020 11:46:38 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,266 +38,291 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kg4WX-0001lO-AV; Fri, 20 Nov 2020 11:24:17 +0000
-Received: by outflank-mailman (input) for mailman id 31977;
- Fri, 20 Nov 2020 11:24:15 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1kg4sA-0004AC-G7; Fri, 20 Nov 2020 11:46:38 +0000
+Received: by outflank-mailman (input) for mailman id 31989;
+ Fri, 20 Nov 2020 11:46:36 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kg4WV-0001lG-Qa; Fri, 20 Nov 2020 11:24:15 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kg4WV-0004fs-Fd; Fri, 20 Nov 2020 11:24:15 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kg4WV-0005IK-7R; Fri, 20 Nov 2020 11:24:15 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1kg4WV-0000gC-6u; Fri, 20 Nov 2020 11:24:15 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+ (envelope-from <SRS0=wRTa=E2=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1kg4s8-00049L-TX
+ for xen-devel@lists.xenproject.org; Fri, 20 Nov 2020 11:46:36 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 33050813-2761-4fe2-999e-a5c2be4caa4a;
+ Fri, 20 Nov 2020 11:46:35 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 5C92BAD5C;
+ Fri, 20 Nov 2020 11:46:34 +0000 (UTC)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <osstest-admin@xenproject.org>)
-	id 1kg4WV-0001lG-Qa; Fri, 20 Nov 2020 11:24:15 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=wSMogNAwewOurVZn/WcMbVNTDvs5vAgEj85V84pvBGI=; b=k4tUevAC8mMLv68iqAk/WIEJ4W
-	6ri/XDjCzShIKCBXvJHYxvo7RK3Iyj2xr664sEqBBduILOjLimuMDe8MXtRzpYSqSdnzULGfUPFaO
-	QWtcZz7mEZV+WjtS/owRZ41yVGMYJ+WO2R7DH91Kba5IJWDIdYRVssxk6xjsy67bgSIg=;
-Received: from host146.205.237.98.conversent.net ([205.237.98.146] helo=infra.test-lab.xenproject.org)
-	by mail.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <osstest-admin@xenproject.org>)
-	id 1kg4WV-0004fs-Fd; Fri, 20 Nov 2020 11:24:15 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
-	by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <osstest-admin@xenproject.org>)
-	id 1kg4WV-0005IK-7R; Fri, 20 Nov 2020 11:24:15 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim 4.92)
-	(envelope-from <osstest-admin@xenproject.org>)
-	id 1kg4WV-0000gC-6u; Fri, 20 Nov 2020 11:24:15 +0000
+	(envelope-from <SRS0=wRTa=E2=suse.com=jgross@srs-us1.protection.inumbo.net>)
+	id 1kg4s8-00049L-TX
+	for xen-devel@lists.xenproject.org; Fri, 20 Nov 2020 11:46:36 +0000
+X-Inumbo-ID: 33050813-2761-4fe2-999e-a5c2be4caa4a
+Received: from mx2.suse.de (unknown [195.135.220.15])
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id 33050813-2761-4fe2-999e-a5c2be4caa4a;
+	Fri, 20 Nov 2020 11:46:35 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1605872794; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=L8ja12eEdwuLab45Hv+HnSogKKR0GYpH5GZdxj1aLqU=;
+	b=HM77VhTXsHVpDUQPyE5fDruB2sTbtB5e6fzYt4oGwkUGhMnRFmm5qJ7Hh1Qqwh7tCGVSjW
+	vxclagdoWydacKDLs9MYU0Ww2fo0mZsAUbXNR1eXUFtv5z9bc4jn9amGKNQ9Oy1fQIMrEy
+	/C5Lv1AOCFYS3f6gbEVGkpBfnHQU47c=
+Received: from relay2.suse.de (unknown [195.135.221.27])
+	by mx2.suse.de (Postfix) with ESMTP id 5C92BAD5C;
+	Fri, 20 Nov 2020 11:46:34 +0000 (UTC)
+From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-156892-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+	x86@kernel.org,
+	linux-kernel@vger.kernel.org,
+	virtualization@lists.linux-foundation.org
+Cc: peterz@infradead.org,
+	luto@kernel.org,
+	Juergen Gross <jgross@suse.com>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Deep Shah <sdeep@vmware.com>,
+	"VMware, Inc." <pv-drivers@vmware.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v2 03/12] x86/pv: switch SWAPGS to ALTERNATIVE
+Date: Fri, 20 Nov 2020 12:46:21 +0100
+Message-Id: <20201120114630.13552-4-jgross@suse.com>
+X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20201120114630.13552-1-jgross@suse.com>
+References: <20201120114630.13552-1-jgross@suse.com>
 MIME-Version: 1.0
-Subject: [libvirt test] 156892: regressions - FAIL
-X-Osstest-Failures:
-    libvirt:build-armhf-libvirt:libvirt-build:fail:regression
-    libvirt:build-amd64-libvirt:libvirt-build:fail:regression
-    libvirt:build-i386-libvirt:libvirt-build:fail:regression
-    libvirt:build-arm64-libvirt:libvirt-build:fail:regression
-    libvirt:test-amd64-amd64-libvirt:build-check(1):blocked:nonblocking
-    libvirt:test-amd64-amd64-libvirt-pair:build-check(1):blocked:nonblocking
-    libvirt:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:build-check(1):blocked:nonblocking
-    libvirt:test-amd64-amd64-libvirt-vhd:build-check(1):blocked:nonblocking
-    libvirt:test-amd64-amd64-libvirt-xsm:build-check(1):blocked:nonblocking
-    libvirt:test-amd64-i386-libvirt:build-check(1):blocked:nonblocking
-    libvirt:test-amd64-i386-libvirt-pair:build-check(1):blocked:nonblocking
-    libvirt:test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm:build-check(1):blocked:nonblocking
-    libvirt:test-amd64-i386-libvirt-xsm:build-check(1):blocked:nonblocking
-    libvirt:test-arm64-arm64-libvirt:build-check(1):blocked:nonblocking
-    libvirt:test-arm64-arm64-libvirt-qcow2:build-check(1):blocked:nonblocking
-    libvirt:test-arm64-arm64-libvirt-xsm:build-check(1):blocked:nonblocking
-    libvirt:test-armhf-armhf-libvirt:build-check(1):blocked:nonblocking
-    libvirt:test-armhf-armhf-libvirt-raw:build-check(1):blocked:nonblocking
-X-Osstest-Versions-This:
-    libvirt=b67c5267253d5d9d7beaf03408369e1bd4449104
-X-Osstest-Versions-That:
-    libvirt=2c846fa6bcc11929c9fb857a22430fb9945654ad
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Fri, 20 Nov 2020 11:24:15 +0000
+Content-Transfer-Encoding: 8bit
 
-flight 156892 libvirt real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/156892/
+SWAPGS is used only for interrupts coming from user mode or for
+returning to user mode. So there is no reason to use the PARAVIRT
+framework, as it can easily be replaced by an ALTERNATIVE depending
+on X86_FEATURE_XENPV.
 
-Regressions :-(
+There are several instances using the PV-aware SWAPGS macro in paths
+which are never executed in a Xen PV guest. Replace those with the
+plain swapgs instruction. For SWAPGS_UNSAFE_STACK the same applies.
 
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- build-armhf-libvirt           6 libvirt-build            fail REGR. vs. 151777
- build-amd64-libvirt           6 libvirt-build            fail REGR. vs. 151777
- build-i386-libvirt            6 libvirt-build            fail REGR. vs. 151777
- build-arm64-libvirt           6 libvirt-build            fail REGR. vs. 151777
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Acked-by: Andy Lutomirski <luto@kernel.org>
+Acked-by: Peter Zijlstra (Intel) <peterz@infradead.org>
+---
+ arch/x86/entry/entry_64.S             | 10 +++++-----
+ arch/x86/include/asm/irqflags.h       | 20 ++++++++------------
+ arch/x86/include/asm/paravirt.h       | 20 --------------------
+ arch/x86/include/asm/paravirt_types.h |  2 --
+ arch/x86/kernel/asm-offsets_64.c      |  1 -
+ arch/x86/kernel/paravirt.c            |  1 -
+ arch/x86/kernel/paravirt_patch.c      |  3 ---
+ arch/x86/xen/enlighten_pv.c           |  3 ---
+ 8 files changed, 13 insertions(+), 47 deletions(-)
 
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt      1 build-check(1)               blocked  n/a
- test-amd64-amd64-libvirt-pair  1 build-check(1)               blocked  n/a
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 1 build-check(1) blocked n/a
- test-amd64-amd64-libvirt-vhd  1 build-check(1)               blocked  n/a
- test-amd64-amd64-libvirt-xsm  1 build-check(1)               blocked  n/a
- test-amd64-i386-libvirt       1 build-check(1)               blocked  n/a
- test-amd64-i386-libvirt-pair  1 build-check(1)               blocked  n/a
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 1 build-check(1) blocked n/a
- test-amd64-i386-libvirt-xsm   1 build-check(1)               blocked  n/a
- test-arm64-arm64-libvirt      1 build-check(1)               blocked  n/a
- test-arm64-arm64-libvirt-qcow2  1 build-check(1)               blocked  n/a
- test-arm64-arm64-libvirt-xsm  1 build-check(1)               blocked  n/a
- test-armhf-armhf-libvirt      1 build-check(1)               blocked  n/a
- test-armhf-armhf-libvirt-raw  1 build-check(1)               blocked  n/a
+diff --git a/arch/x86/entry/entry_64.S b/arch/x86/entry/entry_64.S
+index cad08703c4ad..a876204a73e0 100644
+--- a/arch/x86/entry/entry_64.S
++++ b/arch/x86/entry/entry_64.S
+@@ -669,7 +669,7 @@ native_irq_return_ldt:
+ 	 */
+ 
+ 	pushq	%rdi				/* Stash user RDI */
+-	SWAPGS					/* to kernel GS */
++	swapgs					/* to kernel GS */
+ 	SWITCH_TO_KERNEL_CR3 scratch_reg=%rdi	/* to kernel CR3 */
+ 
+ 	movq	PER_CPU_VAR(espfix_waddr), %rdi
+@@ -699,7 +699,7 @@ native_irq_return_ldt:
+ 	orq	PER_CPU_VAR(espfix_stack), %rax
+ 
+ 	SWITCH_TO_USER_CR3_STACK scratch_reg=%rdi
+-	SWAPGS					/* to user GS */
++	swapgs					/* to user GS */
+ 	popq	%rdi				/* Restore user RDI */
+ 
+ 	movq	%rax, %rsp
+@@ -943,7 +943,7 @@ SYM_CODE_START_LOCAL(paranoid_entry)
+ 	ret
+ 
+ .Lparanoid_entry_swapgs:
+-	SWAPGS
++	swapgs
+ 
+ 	/*
+ 	 * The above SAVE_AND_SWITCH_TO_KERNEL_CR3 macro doesn't do an
+@@ -1001,7 +1001,7 @@ SYM_CODE_START_LOCAL(paranoid_exit)
+ 	jnz		restore_regs_and_return_to_kernel
+ 
+ 	/* We are returning to a context with user GSBASE */
+-	SWAPGS_UNSAFE_STACK
++	swapgs
+ 	jmp		restore_regs_and_return_to_kernel
+ SYM_CODE_END(paranoid_exit)
+ 
+@@ -1426,7 +1426,7 @@ nmi_no_fsgsbase:
+ 	jnz	nmi_restore
+ 
+ nmi_swapgs:
+-	SWAPGS_UNSAFE_STACK
++	swapgs
+ 
+ nmi_restore:
+ 	POP_REGS
+diff --git a/arch/x86/include/asm/irqflags.h b/arch/x86/include/asm/irqflags.h
+index 2dfc8d380dab..8c86edefa115 100644
+--- a/arch/x86/include/asm/irqflags.h
++++ b/arch/x86/include/asm/irqflags.h
+@@ -131,18 +131,6 @@ static __always_inline unsigned long arch_local_irq_save(void)
+ #define SAVE_FLAGS(x)		pushfq; popq %rax
+ #endif
+ 
+-#define SWAPGS	swapgs
+-/*
+- * Currently paravirt can't handle swapgs nicely when we
+- * don't have a stack we can rely on (such as a user space
+- * stack).  So we either find a way around these or just fault
+- * and emulate if a guest tries to call swapgs directly.
+- *
+- * Either way, this is a good way to document that we don't
+- * have a reliable stack. x86_64 only.
+- */
+-#define SWAPGS_UNSAFE_STACK	swapgs
+-
+ #define INTERRUPT_RETURN	jmp native_iret
+ #define USERGS_SYSRET64				\
+ 	swapgs;					\
+@@ -170,6 +158,14 @@ static __always_inline int arch_irqs_disabled(void)
+ 
+ 	return arch_irqs_disabled_flags(flags);
+ }
++#else
++#ifdef CONFIG_X86_64
++#ifdef CONFIG_XEN_PV
++#define SWAPGS	ALTERNATIVE "swapgs", "", X86_FEATURE_XENPV
++#else
++#define SWAPGS	swapgs
++#endif
++#endif
+ #endif /* !__ASSEMBLY__ */
+ 
+ #endif
+diff --git a/arch/x86/include/asm/paravirt.h b/arch/x86/include/asm/paravirt.h
+index d25cc6830e89..5647bcdba776 100644
+--- a/arch/x86/include/asm/paravirt.h
++++ b/arch/x86/include/asm/paravirt.h
+@@ -776,26 +776,6 @@ extern void default_banner(void);
+ 
+ #ifdef CONFIG_X86_64
+ #ifdef CONFIG_PARAVIRT_XXL
+-/*
+- * If swapgs is used while the userspace stack is still current,
+- * there's no way to call a pvop.  The PV replacement *must* be
+- * inlined, or the swapgs instruction must be trapped and emulated.
+- */
+-#define SWAPGS_UNSAFE_STACK						\
+-	PARA_SITE(PARA_PATCH(PV_CPU_swapgs), swapgs)
+-
+-/*
+- * Note: swapgs is very special, and in practise is either going to be
+- * implemented with a single "swapgs" instruction or something very
+- * special.  Either way, we don't need to save any registers for
+- * it.
+- */
+-#define SWAPGS								\
+-	PARA_SITE(PARA_PATCH(PV_CPU_swapgs),				\
+-		  ANNOTATE_RETPOLINE_SAFE;				\
+-		  call PARA_INDIRECT(pv_ops+PV_CPU_swapgs);		\
+-		 )
+-
+ #define USERGS_SYSRET64							\
+ 	PARA_SITE(PARA_PATCH(PV_CPU_usergs_sysret64),			\
+ 		  ANNOTATE_RETPOLINE_SAFE;				\
+diff --git a/arch/x86/include/asm/paravirt_types.h b/arch/x86/include/asm/paravirt_types.h
+index 0fad9f61c76a..903d71884fa2 100644
+--- a/arch/x86/include/asm/paravirt_types.h
++++ b/arch/x86/include/asm/paravirt_types.h
+@@ -169,8 +169,6 @@ struct pv_cpu_ops {
+ 	   frame set up. */
+ 	void (*iret)(void);
+ 
+-	void (*swapgs)(void);
+-
+ 	void (*start_context_switch)(struct task_struct *prev);
+ 	void (*end_context_switch)(struct task_struct *next);
+ #endif
+diff --git a/arch/x86/kernel/asm-offsets_64.c b/arch/x86/kernel/asm-offsets_64.c
+index 828be792231e..1354bc30614d 100644
+--- a/arch/x86/kernel/asm-offsets_64.c
++++ b/arch/x86/kernel/asm-offsets_64.c
+@@ -15,7 +15,6 @@ int main(void)
+ #ifdef CONFIG_PARAVIRT_XXL
+ 	OFFSET(PV_CPU_usergs_sysret64, paravirt_patch_template,
+ 	       cpu.usergs_sysret64);
+-	OFFSET(PV_CPU_swapgs, paravirt_patch_template, cpu.swapgs);
+ #ifdef CONFIG_DEBUG_ENTRY
+ 	OFFSET(PV_IRQ_save_fl, paravirt_patch_template, irq.save_fl);
+ #endif
+diff --git a/arch/x86/kernel/paravirt.c b/arch/x86/kernel/paravirt.c
+index 6c3407ba6ee9..5e5fcf5c376d 100644
+--- a/arch/x86/kernel/paravirt.c
++++ b/arch/x86/kernel/paravirt.c
+@@ -312,7 +312,6 @@ struct paravirt_patch_template pv_ops = {
+ 
+ 	.cpu.usergs_sysret64	= native_usergs_sysret64,
+ 	.cpu.iret		= native_iret,
+-	.cpu.swapgs		= native_swapgs,
+ 
+ #ifdef CONFIG_X86_IOPL_IOPERM
+ 	.cpu.invalidate_io_bitmap	= native_tss_invalidate_io_bitmap,
+diff --git a/arch/x86/kernel/paravirt_patch.c b/arch/x86/kernel/paravirt_patch.c
+index ace6e334cb39..7c518b08aa3c 100644
+--- a/arch/x86/kernel/paravirt_patch.c
++++ b/arch/x86/kernel/paravirt_patch.c
+@@ -28,7 +28,6 @@ struct patch_xxl {
+ 	const unsigned char	irq_restore_fl[2];
+ 	const unsigned char	cpu_wbinvd[2];
+ 	const unsigned char	cpu_usergs_sysret64[6];
+-	const unsigned char	cpu_swapgs[3];
+ 	const unsigned char	mov64[3];
+ };
+ 
+@@ -43,7 +42,6 @@ static const struct patch_xxl patch_data_xxl = {
+ 	.cpu_wbinvd		= { 0x0f, 0x09 },	// wbinvd
+ 	.cpu_usergs_sysret64	= { 0x0f, 0x01, 0xf8,
+ 				    0x48, 0x0f, 0x07 },	// swapgs; sysretq
+-	.cpu_swapgs		= { 0x0f, 0x01, 0xf8 },	// swapgs
+ 	.mov64			= { 0x48, 0x89, 0xf8 },	// mov %rdi, %rax
+ };
+ 
+@@ -86,7 +84,6 @@ unsigned int native_patch(u8 type, void *insn_buff, unsigned long addr,
+ 	PATCH_CASE(mmu, write_cr3, xxl, insn_buff, len);
+ 
+ 	PATCH_CASE(cpu, usergs_sysret64, xxl, insn_buff, len);
+-	PATCH_CASE(cpu, swapgs, xxl, insn_buff, len);
+ 	PATCH_CASE(cpu, wbinvd, xxl, insn_buff, len);
+ #endif
+ 
+diff --git a/arch/x86/xen/enlighten_pv.c b/arch/x86/xen/enlighten_pv.c
+index 76616024129e..44bb18adfb51 100644
+--- a/arch/x86/xen/enlighten_pv.c
++++ b/arch/x86/xen/enlighten_pv.c
+@@ -1085,9 +1085,6 @@ static const struct pv_cpu_ops xen_cpu_ops __initconst = {
+ #endif
+ 	.io_delay = xen_io_delay,
+ 
+-	/* Xen takes care of %gs when switching to usermode for us */
+-	.swapgs = paravirt_nop,
+-
+ 	.start_context_switch = paravirt_start_context_switch,
+ 	.end_context_switch = xen_end_context_switch,
+ };
+-- 
+2.26.2
 
-version targeted for testing:
- libvirt              b67c5267253d5d9d7beaf03408369e1bd4449104
-baseline version:
- libvirt              2c846fa6bcc11929c9fb857a22430fb9945654ad
-
-Last test of basis   151777  2020-07-10 04:19:19 Z  133 days
-Failing since        151818  2020-07-11 04:18:52 Z  132 days  127 attempts
-Testing same since   156892  2020-11-20 04:19:13 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Adolfo Jayme Barrientos <fitoschido@gmail.com>
-  Aleksandr Alekseev <alexander.alekseev@virtuozzo.com>
-  Andika Triwidada <andika@gmail.com>
-  Andrea Bolognani <abologna@redhat.com>
-  Balázs Meskó <meskobalazs@mailbox.org>
-  Bastien Orivel <bastien.orivel@diateam.net>
-  Bihong Yu <yubihong@huawei.com>
-  Binfeng Wu <wubinfeng@huawei.com>
-  Boris Fiuczynski <fiuczy@linux.ibm.com>
-  Brian Turek <brian.turek@gmail.com>
-  Christian Ehrhardt <christian.ehrhardt@canonical.com>
-  Christian Schoenebeck <qemu_oss@crudebyte.com>
-  Cole Robinson <crobinso@redhat.com>
-  Collin Walling <walling@linux.ibm.com>
-  Cornelia Huck <cohuck@redhat.com>
-  Côme Borsoi <fedora@borsoi.fr>
-  Daniel Henrique Barboza <danielhb413@gmail.com>
-  Daniel Letai <dani@letai.org.il>
-  Daniel P. Berrange <berrange@redhat.com>
-  Daniel P. Berrangé <berrange@redhat.com>
-  Erik Skultety <eskultet@redhat.com>
-  Fabian Freyer <fabian.freyer@physik.tu-berlin.de>
-  Fangge Jin <fjin@redhat.com>
-  Fedora Weblate Translation <i18n@lists.fedoraproject.org>
-  Göran Uddeborg <goeran@uddeborg.se>
-  Halil Pasic <pasic@linux.ibm.com>
-  Han Han <hhan@redhat.com>
-  Hao Wang <wanghao232@huawei.com>
-  Ian Wienand <iwienand@redhat.com>
-  Jamie Strandboge <jamie@canonical.com>
-  Jamie Strandboge <jamie@ubuntu.com>
-  Jean-Baptiste Holcroft <jean-baptiste@holcroft.fr>
-  Jianan Gao <jgao@redhat.com>
-  Jim Fehlig <jfehlig@suse.com>
-  Jin Yan <jinyan12@huawei.com>
-  Jiri Denemark <jdenemar@redhat.com>
-  Jonathan Watt <jwatt@jwatt.org>
-  Jonathon Jongsma <jjongsma@redhat.com>
-  Julio Faracco <jcfaracco@gmail.com>
-  Ján Tomko <jtomko@redhat.com>
-  Kashyap Chamarthy <kchamart@redhat.com>
-  Kevin Locke <kevin@kevinlocke.name>
-  Laine Stump <laine@redhat.com>
-  Liao Pingfang <liao.pingfang@zte.com.cn>
-  Lin Ma <lma@suse.com>
-  Lin Ma <lma@suse.de>
-  Lin Ma <morecache@gmail.com>
-  Marc Hartmayer <mhartmay@linux.ibm.com>
-  Marc-André Lureau <marcandre.lureau@redhat.com>
-  Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
-  Markus Schade <markus.schade@hetzner.com>
-  Martin Kletzander <mkletzan@redhat.com>
-  Masayoshi Mizuma <m.mizuma@jp.fujitsu.com>
-  Matt Coleman <matt@datto.com>
-  Matt Coleman <mcoleman@datto.com>
-  Mauro Matteo Cascella <mcascell@redhat.com>
-  Michal Privoznik <mprivozn@redhat.com>
-  Michał Smyk <fedora@smyk.it>
-  Milo Casagrande <milo@milo.name>
-  Neal Gompa <ngompa13@gmail.com>
-  Nico Pache <npache@redhat.com>
-  Nikolay Shirokovskiy <nshirokovskiy@virtuozzo.com>
-  Olaf Hering <olaf@aepfle.de>
-  Olesya Gerasimenko <gammaray@basealt.ru>
-  Orion Poplawski <orion@nwra.com>
-  Patrick Magauran <patmagauran.j@gmail.com>
-  Paulo de Rezende Pinatti <ppinatti@linux.ibm.com>
-  Pavel Hrdina <phrdina@redhat.com>
-  Peter Krempa <pkrempa@redhat.com>
-  Pino Toscano <ptoscano@redhat.com>
-  Pino Toscano <toscano.pino@tiscali.it>
-  Piotr Drąg <piotrdrag@gmail.com>
-  Prathamesh Chavan <pc44800@gmail.com>
-  Ricky Tigg <ricky.tigg@gmail.com>
-  Roman Bogorodskiy <bogorodskiy@gmail.com>
-  Roman Bolshakov <r.bolshakov@yadro.com>
-  Ryan Schmidt <git@ryandesign.com>
-  Sam Hartman <hartmans@debian.org>
-  Scott Shambarger <scott-libvirt@shambarger.net>
-  Sebastian Mitterle <smitterl@redhat.com>
-  Shaojun Yang <yangshaojun@phytium.com.cn>
-  Simon Gaiser <simon@invisiblethingslab.com>
-  Stefan Bader <stefan.bader@canonical.com>
-  Stefan Berger <stefanb@linux.ibm.com>
-  Szymon Scholz <szymonscholz@gmail.com>
-  Thomas Huth <thuth@redhat.com>
-  Tim Wiederhake <twiederh@redhat.com>
-  Tomáš Golembiovský <tgolembi@redhat.com>
-  Wang Xin <wangxinxin.wang@huawei.com>
-  Weblate <noreply@weblate.org>
-  Yang Hang <yanghang44@huawei.com>
-  Yanqiu Zhang <yanqzhan@redhat.com>
-  Yi Li <yili@winhong.com>
-  Yi Wang <wang.yi59@zte.com.cn>
-  Yuri Chornoivan <yurchor@ukr.net>
-  Zheng Chuan <zhengchuan@huawei.com>
-  zhenwei pi <pizhenwei@bytedance.com>
-  Zhenyu Zheng <zheng.zhenyu@outlook.com>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-arm64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-arm64                                                  pass    
- build-armhf                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          fail    
- build-arm64-libvirt                                          fail    
- build-armhf-libvirt                                          fail    
- build-i386-libvirt                                           fail    
- build-amd64-pvops                                            pass    
- build-arm64-pvops                                            pass    
- build-armhf-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           blocked 
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            blocked 
- test-amd64-amd64-libvirt-xsm                                 blocked 
- test-arm64-arm64-libvirt-xsm                                 blocked 
- test-amd64-i386-libvirt-xsm                                  blocked 
- test-amd64-amd64-libvirt                                     blocked 
- test-arm64-arm64-libvirt                                     blocked 
- test-armhf-armhf-libvirt                                     blocked 
- test-amd64-i386-libvirt                                      blocked 
- test-amd64-amd64-libvirt-pair                                blocked 
- test-amd64-i386-libvirt-pair                                 blocked 
- test-arm64-arm64-libvirt-qcow2                               blocked 
- test-armhf-armhf-libvirt-raw                                 blocked 
- test-amd64-amd64-libvirt-vhd                                 blocked 
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Not pushing.
-
-(No revision log; it would be 28147 lines long.)
 
