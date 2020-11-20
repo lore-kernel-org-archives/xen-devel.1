@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5BACAC5519F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5E502C63777
 	for <xen-devel@archiver.kernel.org>; Fri, 20 Nov 2020 09:49:27 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B7F73204EF
+	by mail.kernel.org (Postfix) with ESMTPS id B9BFF2222F
 	for <xen-devel@archiver.kernel.org>; Fri, 20 Nov 2020 09:49:26 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="EbmX6KfT"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B7F73204EF
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="Z83ArtHr"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B9BFF2222F
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.31840.62638 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.31836.62589 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kg32X-0005PV-Tm; Fri, 20 Nov 2020 09:49:13 +0000
+	id 1kg32S-0005Di-8c; Fri, 20 Nov 2020 09:49:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 31840.62638; Fri, 20 Nov 2020 09:49:13 +0000
+Received: by outflank-mailman (output) from mailman id 31836.62589; Fri, 20 Nov 2020 09:49:08 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,99 +38,308 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kg32X-0005PI-OC; Fri, 20 Nov 2020 09:49:13 +0000
-Received: by outflank-mailman (input) for mailman id 31840;
- Fri, 20 Nov 2020 09:49:12 +0000
+	id 1kg32S-0005Db-5R; Fri, 20 Nov 2020 09:49:08 +0000
+Received: by outflank-mailman (input) for mailman id 31836;
+ Fri, 20 Nov 2020 09:49:07 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>) id 1kg32W-0005Mr-Dk
- for xen-devel@lists.xenproject.org; Fri, 20 Nov 2020 09:49:12 +0000
+ (envelope-from <paul@xen.org>) id 1kg32R-0005D3-6c
+ for xen-devel@lists.xenproject.org; Fri, 20 Nov 2020 09:49:07 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kg32V-0002bN-Jp; Fri, 20 Nov 2020 09:49:11 +0000
+ id 1kg32Q-0002ao-QH; Fri, 20 Nov 2020 09:49:06 +0000
 Received: from host109-146-187-185.range109-146.btcentralplus.com
  ([109.146.187.185] helo=u2f063a87eabd5f.home)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kg32V-0003d1-Bu; Fri, 20 Nov 2020 09:49:11 +0000
+ id 1kg32Q-0003d1-HA; Fri, 20 Nov 2020 09:49:06 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1kg32W-0005Mr-Dk
-	for xen-devel@lists.xenproject.org; Fri, 20 Nov 2020 09:49:12 +0000
+	id 1kg32R-0005D3-6c
+	for xen-devel@lists.xenproject.org; Fri, 20 Nov 2020 09:49:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
-	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=ur98iexNlxW3wPnCoGH5R8tJsU4anFW0cgN61u59s58=; b=EbmX6KfTkfVSVhcM7nRxkqW8q1
-	cP83sNOja9lntToF+lbfAB3WxN/n4OG8WM/rBZz55JBZvx3uqvq/S5dgGVU4ZtpzS/WERLLDgFUTM
-	F8kf/CA4Gm7mPnxLhbcE8GQQkycbRgDjWAVmPv8yuB5bKBv3k5gDPF5UFcV6VBHOZ5tg=;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:MIME-Version:
+	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
+	bh=UzZ0Uh6qAAbQd6CRJaicCW7T27qr8iutib6QtzQf3Qs=; b=Z83ArtHr/q4BzPJ+73B+N5zptD
+	mpZxigXEebDZ+spsfZ2M6t/tAQ8JJfEXdqAXVNzW0uYoNCycwGG9Th3xocX1XhBQARFOdVHw9wYY9
+	f+Kjkn9BZdl11jVjv1hAP8ZB3G8eWLyPL6+V2gNZ+4ImKqtqaFdt1MG928+3k5U6/RTE=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
 	by mail.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1kg32V-0002bN-Jp; Fri, 20 Nov 2020 09:49:11 +0000
+	id 1kg32Q-0002ao-QH; Fri, 20 Nov 2020 09:49:06 +0000
 Received: from host109-146-187-185.range109-146.btcentralplus.com ([109.146.187.185] helo=u2f063a87eabd5f.home)
 	by xenbits.xenproject.org with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
 	(Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1kg32V-0003d1-Bu; Fri, 20 Nov 2020 09:49:11 +0000
+	id 1kg32Q-0003d1-HA; Fri, 20 Nov 2020 09:49:06 +0000
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: Paul Durrant <pdurrant@amazon.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Ian Jackson <iwj@xenproject.org>,
+	Wei Liu <wl@xen.org>,
 	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v2 07/12] xen/include: import sizeof_field() macro from Linux stddef.h
-Date: Fri, 20 Nov 2020 09:48:55 +0000
-Message-Id: <20201120094900.1489-8-paul@xen.org>
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v2 03/12] viridian: move IPI hypercall implementation into separate function
+Date: Fri, 20 Nov 2020 09:48:51 +0000
+Message-Id: <20201120094900.1489-4-paul@xen.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20201120094900.1489-1-paul@xen.org>
 References: <20201120094900.1489-1-paul@xen.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 From: Paul Durrant <pdurrant@amazon.com>
 
-Co-locate it with the definition of offsetof() (since this is also in stddef.h
-in the Linux kernel source). This macro will be needed in a subsequent patch.
+This patch moves the implementation of HVCALL_SEND_IPI that is currently
+inline in viridian_hypercall() into a new hvcall_ipi() function.
+
+The new function returns Xen errno values similarly to hvcall_flush(). Hence
+the errno translation code in viridial_hypercall() is generalized, removing
+the need for the local 'status' variable.
+
+NOTE: The formatting of the switch statement at the top of
+      viridial_hypercall() is also adjusted as per CODING_STYLE.
 
 Signed-off-by: Paul Durrant <pdurrant@amazon.com>
 ---
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: George Dunlap <george.dunlap@citrix.com>
-Cc: Ian Jackson <iwj@xenproject.org>
-Cc: Jan Beulich <jbeulich@suse.com>
-Cc: Julien Grall <julien@xen.org>
-Cc: Stefano Stabellini <sstabellini@kernel.org>
 Cc: Wei Liu <wl@xen.org>
----
- xen/include/xen/compiler.h | 8 ++++++++
- 1 file changed, 8 insertions(+)
+Cc: Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: "Roger Pau Monné" <roger.pau@citrix.com>
 
-diff --git a/xen/include/xen/compiler.h b/xen/include/xen/compiler.h
-index c0e0ee9f27be..676c6ea1b0a0 100644
---- a/xen/include/xen/compiler.h
-+++ b/xen/include/xen/compiler.h
-@@ -76,6 +76,14 @@
+v2:
+ - Different formatting adjustment
+---
+ xen/arch/x86/hvm/viridian/viridian.c | 168 ++++++++++++++-------------
+ 1 file changed, 87 insertions(+), 81 deletions(-)
+
+diff --git a/xen/arch/x86/hvm/viridian/viridian.c b/xen/arch/x86/hvm/viridian/viridian.c
+index 15b1c96fe13b..d9864cdc0b7d 100644
+--- a/xen/arch/x86/hvm/viridian/viridian.c
++++ b/xen/arch/x86/hvm/viridian/viridian.c
+@@ -581,13 +581,72 @@ static int hvcall_flush(union hypercall_input *input,
+     return 0;
+ }
  
- #define offsetof(a,b) __builtin_offsetof(a,b)
- 
-+/**
-+ * sizeof_field(TYPE, MEMBER)
-+ *
-+ * @TYPE: The structure containing the field of interest
-+ * @MEMBER: The field to return the size of
-+ */
-+#define sizeof_field(TYPE, MEMBER) sizeof((((TYPE *)0)->MEMBER))
++static int hvcall_ipi(union hypercall_input *input,
++                      union hypercall_output *output,
++                      unsigned long input_params_gpa,
++                      unsigned long output_params_gpa)
++{
++    struct domain *currd = current->domain;
++    struct vcpu *v;
++    uint32_t vector;
++    uint64_t vcpu_mask;
 +
- #if !defined(__STDC_VERSION__) || __STDC_VERSION__ < 201112L
- #define alignof __alignof__
- #endif
++    /* Get input parameters. */
++    if ( input->fast )
++    {
++        if ( input_params_gpa >> 32 )
++            return -EINVAL;
++
++        vector = input_params_gpa;
++        vcpu_mask = output_params_gpa;
++    }
++    else
++    {
++        struct {
++            uint32_t vector;
++            uint8_t target_vtl;
++            uint8_t reserved_zero[3];
++            uint64_t vcpu_mask;
++        } input_params;
++
++        if ( hvm_copy_from_guest_phys(&input_params, input_params_gpa,
++                                      sizeof(input_params)) != HVMTRANS_okay )
++            return -EINVAL;
++
++        if ( input_params.target_vtl ||
++             input_params.reserved_zero[0] ||
++             input_params.reserved_zero[1] ||
++             input_params.reserved_zero[2] )
++            return -EINVAL;
++
++        vector = input_params.vector;
++        vcpu_mask = input_params.vcpu_mask;
++    }
++
++    if ( vector < 0x10 || vector > 0xff )
++        return -EINVAL;
++
++    for_each_vcpu ( currd, v )
++    {
++        if ( v->vcpu_id >= (sizeof(vcpu_mask) * 8) )
++            return -EINVAL;
++
++        if ( !(vcpu_mask & (1ul << v->vcpu_id)) )
++            continue;
++
++        vlapic_set_irq(vcpu_vlapic(v), vector, 0);
++    }
++
++    return 0;
++}
++
+ int viridian_hypercall(struct cpu_user_regs *regs)
+ {
+     struct vcpu *curr = current;
+     struct domain *currd = curr->domain;
+     int mode = hvm_guest_x86_mode(curr);
+     unsigned long input_params_gpa, output_params_gpa;
+-    uint16_t status = HV_STATUS_SUCCESS;
++    int rc = 0;
+     union hypercall_input input;
+     union hypercall_output output = {};
+ 
+@@ -600,11 +659,13 @@ int viridian_hypercall(struct cpu_user_regs *regs)
+         input_params_gpa = regs->rdx;
+         output_params_gpa = regs->r8;
+         break;
++
+     case 4:
+         input.raw = (regs->rdx << 32) | regs->eax;
+         input_params_gpa = (regs->rbx << 32) | regs->ecx;
+         output_params_gpa = (regs->rdi << 32) | regs->esi;
+         break;
++
+     default:
+         goto out;
+     }
+@@ -616,92 +677,18 @@ int viridian_hypercall(struct cpu_user_regs *regs)
+          * See section 14.5.1 of the specification.
+          */
+         do_sched_op(SCHEDOP_yield, guest_handle_from_ptr(NULL, void));
+-        status = HV_STATUS_SUCCESS;
+         break;
+ 
+     case HVCALL_FLUSH_VIRTUAL_ADDRESS_SPACE:
+     case HVCALL_FLUSH_VIRTUAL_ADDRESS_LIST:
+-    {
+-        int rc = hvcall_flush(&input, &output, input_params_gpa,
+-                              output_params_gpa);
+-
+-        switch ( rc )
+-        {
+-        case 0:
+-            break;
+-
+-        case -ERESTART:
+-            return HVM_HCALL_preempted;
+-
+-        default:
+-            ASSERT_UNREACHABLE();
+-            /* Fallthrough */
+-        case -EINVAL:
+-            status = HV_STATUS_INVALID_PARAMETER;
+-            break;
+-        }
+-
++        rc = hvcall_flush(&input, &output, input_params_gpa,
++                          output_params_gpa);
+         break;
+-    }
+ 
+     case HVCALL_SEND_IPI:
+-    {
+-        struct vcpu *v;
+-        uint32_t vector;
+-        uint64_t vcpu_mask;
+-
+-        status = HV_STATUS_INVALID_PARAMETER;
+-
+-        /* Get input parameters. */
+-        if ( input.fast )
+-        {
+-            if ( input_params_gpa >> 32 )
+-                break;
+-
+-            vector = input_params_gpa;
+-            vcpu_mask = output_params_gpa;
+-        }
+-        else
+-        {
+-            struct {
+-                uint32_t vector;
+-                uint8_t target_vtl;
+-                uint8_t reserved_zero[3];
+-                uint64_t vcpu_mask;
+-            } input_params;
+-
+-            if ( hvm_copy_from_guest_phys(&input_params, input_params_gpa,
+-                                          sizeof(input_params)) !=
+-                 HVMTRANS_okay )
+-                break;
+-
+-            if ( input_params.target_vtl ||
+-                 input_params.reserved_zero[0] ||
+-                 input_params.reserved_zero[1] ||
+-                 input_params.reserved_zero[2] )
+-                break;
+-
+-            vector = input_params.vector;
+-            vcpu_mask = input_params.vcpu_mask;
+-        }
+-
+-        if ( vector < 0x10 || vector > 0xff )
+-            break;
+-
+-        for_each_vcpu ( currd, v )
+-        {
+-            if ( v->vcpu_id >= (sizeof(vcpu_mask) * 8) )
+-                break;
+-
+-            if ( !(vcpu_mask & (1ul << v->vcpu_id)) )
+-                continue;
+-
+-            vlapic_set_irq(vcpu_vlapic(v), vector, 0);
+-        }
+-
+-        status = HV_STATUS_SUCCESS;
++        rc = hvcall_ipi(&input, &output, input_params_gpa,
++                        output_params_gpa);
+         break;
+-    }
+ 
+     default:
+         gprintk(XENLOG_WARNING, "unimplemented hypercall %04x\n",
+@@ -714,12 +701,31 @@ int viridian_hypercall(struct cpu_user_regs *regs)
+          * Given that return a status of 'invalid code' has not so far
+          * caused any problems it's not worth logging.
+          */
+-        status = HV_STATUS_INVALID_HYPERCALL_CODE;
++        rc = -EOPNOTSUPP;
+         break;
+     }
+ 
+  out:
+-    output.result = status;
++    switch ( rc )
++    {
++    case 0:
++        break;
++
++    case -ERESTART:
++        return HVM_HCALL_preempted;
++
++    case -EOPNOTSUPP:
++        output.result = HV_STATUS_INVALID_HYPERCALL_CODE;
++        break;
++
++    default:
++        ASSERT_UNREACHABLE();
++        /* Fallthrough */
++    case -EINVAL:
++        output.result = HV_STATUS_INVALID_PARAMETER;
++        break;
++    }
++
+     switch (mode) {
+     case 8:
+         regs->rax = output.raw;
 -- 
 2.20.1
 
