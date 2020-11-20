@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E5D08C6379F
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Nov 2020 13:25:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B1F73C64E69
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Nov 2020 13:25:08 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5FA4F222C3
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Nov 2020 13:25:05 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 2DD6422272
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Nov 2020 13:25:08 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="vI7wKTnK"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5FA4F222C3
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="oEp7b6dZ"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2DD6422272
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.32188.63187 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.32187.63175 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kg6PC-0001ml-Nk; Fri, 20 Nov 2020 13:24:50 +0000
+	id 1kg6PB-0001kB-5u; Fri, 20 Nov 2020 13:24:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 32188.63187; Fri, 20 Nov 2020 13:24:50 +0000
+Received: by outflank-mailman (output) from mailman id 32187.63175; Fri, 20 Nov 2020 13:24:49 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,55 +38,59 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kg6PC-0001mc-KH; Fri, 20 Nov 2020 13:24:50 +0000
-Received: by outflank-mailman (input) for mailman id 32188;
- Fri, 20 Nov 2020 13:24:49 +0000
+	id 1kg6PB-0001k0-2r; Fri, 20 Nov 2020 13:24:49 +0000
+Received: by outflank-mailman (input) for mailman id 32187;
+ Fri, 20 Nov 2020 13:24:47 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>) id 1kg6PB-0001lU-ND
- for xen-devel@lists.xenproject.org; Fri, 20 Nov 2020 13:24:49 +0000
+ (envelope-from <paul@xen.org>) id 1kg6P9-0001i7-Eq
+ for xen-devel@lists.xenproject.org; Fri, 20 Nov 2020 13:24:47 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kg6PA-0007D8-1U; Fri, 20 Nov 2020 13:24:48 +0000
+ id 1kg6P7-0007Cr-B6; Fri, 20 Nov 2020 13:24:45 +0000
 Received: from host109-146-187-185.range109-146.btcentralplus.com
  ([109.146.187.185] helo=u2f063a87eabd5f.home)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kg6P9-00028m-Os; Fri, 20 Nov 2020 13:24:47 +0000
+ id 1kg6P7-00028m-0U; Fri, 20 Nov 2020 13:24:45 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1kg6PB-0001lU-ND
-	for xen-devel@lists.xenproject.org; Fri, 20 Nov 2020 13:24:49 +0000
+	id 1kg6P9-0001i7-Eq
+	for xen-devel@lists.xenproject.org; Fri, 20 Nov 2020 13:24:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=LpiQQ6giFOx1RkU7jU2YCkYAgdsKteSyHKcM7KDqpxY=; b=vI7wKTnKhqg/K9HaZpmJKEvT5i
-	n+l2VTtyY+bwwhB4bueiz9/QUIWj/YcJTYVxZGGD5uS1z9WvQKoi3rQfGJhg1K3LOQl656Lwvggr6
-	+1d2noB5k+/ChGPvYgsRqcJB3m22NK024x1Tu2f+1xkGEQaF70jsK8DFuqnUpFBM/rD0=;
+	bh=tMs2Q+q+Bnm5wtjajtQeaabWNgddOKx30PoGNnvP4Nw=; b=oEp7b6dZ3+ZtBLX0fRNZ6H4RMH
+	iQcOY5SY+SYYo97SksNgjrgufy8ilaEDTX5SXst01KxUWSe3z4/toO18zRNL3atXp/EGfQUEJGoLn
+	xUn2mYOgm98D0DNkC0mlOa155Fjl91GoY/3JRKzsG+6T9ig1jqP1u8aiBg+gyBaDJ6Vk=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
 	by mail.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1kg6PA-0007D8-1U; Fri, 20 Nov 2020 13:24:48 +0000
+	id 1kg6P7-0007Cr-B6; Fri, 20 Nov 2020 13:24:45 +0000
 Received: from host109-146-187-185.range109-146.btcentralplus.com ([109.146.187.185] helo=u2f063a87eabd5f.home)
 	by xenbits.xenproject.org with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
 	(Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1kg6P9-00028m-Os; Fri, 20 Nov 2020 13:24:47 +0000
+	id 1kg6P7-00028m-0U; Fri, 20 Nov 2020 13:24:45 +0000
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: Paul Durrant <pdurrant@amazon.com>,
-	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <jgrall@amazon.com>,
 	Kevin Tian <kevin.tian@intel.com>,
+	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
 	Wei Liu <wl@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v10 3/7] iommu: remove the share_p2m operation
-Date: Fri, 20 Nov 2020 13:24:36 +0000
-Message-Id: <20201120132440.1141-4-paul@xen.org>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Ian Jackson <ian.jackson@eu.citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Jun Nakajima <jun.nakajima@intel.com>
+Subject: [PATCH v10 1/7] remove remaining uses of iommu_legacy_map/unmap
+Date: Fri, 20 Nov 2020 13:24:34 +0000
+Message-Id: <20201120132440.1141-2-paul@xen.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20201120132440.1141-1-paul@xen.org>
 References: <20201120132440.1141-1-paul@xen.org>
@@ -96,265 +100,420 @@ Content-Transfer-Encoding: 8bit
 
 From: Paul Durrant <pdurrant@amazon.com>
 
-Sharing of HAP tables is now VT-d specific so the operation is never defined
-for AMD IOMMU any more. There's also no need to pro-actively set vtd.pgd_maddr
-when using shared EPT as it is straightforward to simply define a helper
-function to return the appropriate value in the shared and non-shared cases.
+The 'legacy' functions do implicit flushing so amend the callers to do the
+appropriate flushing.
 
-NOTE: This patch also modifies unmap_vtd_domain_page() to take a const
-      pointer since the only thing it calls, unmap_domain_page(), also takes
-      a const pointer.
+Unfortunately, because of the structure of the P2M code, we cannot remove
+the per-CPU 'iommu_dont_flush_iotlb' global and the optimization it
+facilitates. Checking of this flag is now done only in relevant callers of
+iommu_iotlb_flush(). Also, 'iommu_dont_flush_iotlb' is now declared
+as bool (rather than bool_t) and setting/clearing it are no longer pointlessly
+gated on is_iommu_enabled() returning true. (Arguably it is also pointless to
+gate the call to iommu_iotlb_flush() on that condition - since it is a no-op
+in that case - but the if clause allows the scope of a stack variable to be
+restricted).
+
+NOTE: The code in memory_add() now sets 'ret' if iommu_map() or
+      iommu_iotlb_flush() fails.
 
 Signed-off-by: Paul Durrant <pdurrant@amazon.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
+Acked-by: Julien Grall <jgrall@amazon.com>
 Reviewed-by: Kevin Tian <kevin.tian@intel.com>
 ---
+Cc: Jan Beulich <jbeulich@suse.com>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: George Dunlap <george.dunlap@citrix.com>
 Cc: Wei Liu <wl@xen.org>
 Cc: "Roger Pau Monné" <roger.pau@citrix.com>
+Cc: George Dunlap <george.dunlap@citrix.com>
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>
+Cc: Julien Grall <jgrall@amazon.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Jun Nakajima <jun.nakajima@intel.com>
+
+v10:
+ - Re-base
+
+v9:
+ - Moved check of 'iommu_dont_flush_iotlb' out of iommu_iotlb_flush() and
+   into callers to avoid re-introducing a problem on Arm
+ - Dropped Jan's R-b due to change
 
 v6:
- - Adjust code to return P2M paddr
- - Add removed comment back in
+ - Fix formatting problem in memory_add()
 
 v5:
- - Pass 'nr_pt_levels' into domain_pgd_maddr() directly
+ - Re-base
+ - Removed failure case on overflow of unsigned int as it is no longer
+   necessary
+
+v3:
+ - Same as v2; elected to implement batch flushing in the grant table code as
+   a subsequent patch
 
 v2:
- - Put the PGD level adjust into the helper function too, since it is
-   irrelevant in the shared EPT case
+ - Shorten the diff (mainly because of a prior patch introducing automatic
+   flush-on-fail into iommu_map() and iommu_unmap())
 ---
- xen/arch/x86/mm/p2m.c                 |  3 -
- xen/drivers/passthrough/iommu.c       |  8 ---
- xen/drivers/passthrough/vtd/extern.h  |  2 +-
- xen/drivers/passthrough/vtd/iommu.c   | 90 +++++++++++++++------------
- xen/drivers/passthrough/vtd/x86/vtd.c |  2 +-
- xen/include/xen/iommu.h               |  3 -
- 6 files changed, 52 insertions(+), 56 deletions(-)
+ xen/arch/x86/mm.c               | 26 +++++++++++++++++++-------
+ xen/arch/x86/mm/p2m-ept.c       | 20 ++++++++++++--------
+ xen/arch/x86/mm/p2m-pt.c        | 16 ++++++++++++----
+ xen/arch/x86/mm/p2m.c           | 25 +++++++++++++++++--------
+ xen/arch/x86/x86_64/mm.c        | 20 +++++++-------------
+ xen/common/grant_table.c        | 29 ++++++++++++++++++++++-------
+ xen/common/memory.c             |  6 +++---
+ xen/drivers/passthrough/iommu.c | 23 -----------------------
+ xen/include/xen/iommu.h         | 21 +++++----------------
+ 9 files changed, 97 insertions(+), 89 deletions(-)
 
-diff --git a/xen/arch/x86/mm/p2m.c b/xen/arch/x86/mm/p2m.c
-index 8ee33b25ca72..34e37a9b1b5d 100644
---- a/xen/arch/x86/mm/p2m.c
-+++ b/xen/arch/x86/mm/p2m.c
-@@ -727,9 +727,6 @@ int p2m_alloc_table(struct p2m_domain *p2m)
+diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+index 5a50339284c7..bb5f504b84e2 100644
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -2489,10 +2489,16 @@ static int cleanup_page_mappings(struct page_info *page)
  
-     p2m->phys_table = pagetable_from_mfn(top_mfn);
- 
--    if ( hap_enabled(d) )
--        iommu_share_p2m_table(d);
--
-     p2m_unlock(p2m);
-     return 0;
- }
-diff --git a/xen/drivers/passthrough/iommu.c b/xen/drivers/passthrough/iommu.c
-index a9da4d2b0645..90748062e5bd 100644
---- a/xen/drivers/passthrough/iommu.c
-+++ b/xen/drivers/passthrough/iommu.c
-@@ -500,14 +500,6 @@ int iommu_do_domctl(
-     return ret;
- }
- 
--void iommu_share_p2m_table(struct domain* d)
--{
--    ASSERT(hap_enabled(d));
--
--    if ( iommu_use_hap_pt(d) )
--        iommu_get_ops()->share_p2m(d);
--}
--
- void iommu_crash_shutdown(void)
- {
-     if ( !iommu_crash_disable )
-diff --git a/xen/drivers/passthrough/vtd/extern.h b/xen/drivers/passthrough/vtd/extern.h
-index ad6c5f907b8c..19a908ab4f71 100644
---- a/xen/drivers/passthrough/vtd/extern.h
-+++ b/xen/drivers/passthrough/vtd/extern.h
-@@ -72,7 +72,7 @@ void flush_all_cache(void);
- uint64_t alloc_pgtable_maddr(unsigned long npages, nodeid_t node);
- void free_pgtable_maddr(u64 maddr);
- void *map_vtd_domain_page(u64 maddr);
--void unmap_vtd_domain_page(void *va);
-+void unmap_vtd_domain_page(const void *va);
- int domain_context_mapping_one(struct domain *domain, struct vtd_iommu *iommu,
-                                u8 bus, u8 devfn, const struct pci_dev *);
- int domain_context_unmap_one(struct domain *domain, struct vtd_iommu *iommu,
-diff --git a/xen/drivers/passthrough/vtd/iommu.c b/xen/drivers/passthrough/vtd/iommu.c
-index f6c4021fd698..a76e60c99a58 100644
---- a/xen/drivers/passthrough/vtd/iommu.c
-+++ b/xen/drivers/passthrough/vtd/iommu.c
-@@ -318,6 +318,48 @@ static u64 addr_to_dma_page_maddr(struct domain *domain, u64 addr, int alloc)
-     return pte_maddr;
- }
- 
-+static uint64_t domain_pgd_maddr(struct domain *d, unsigned int nr_pt_levels)
-+{
-+    struct domain_iommu *hd = dom_iommu(d);
-+    uint64_t pgd_maddr;
-+    unsigned int agaw;
-+
-+    ASSERT(spin_is_locked(&hd->arch.mapping_lock));
-+
-+    if ( iommu_use_hap_pt(d) )
-+    {
-+        pagetable_t pgt = p2m_get_pagetable(p2m_get_hostp2m(d));
-+
-+        return pagetable_get_paddr(pgt);
-+    }
-+
-+    if ( !hd->arch.vtd.pgd_maddr )
-+    {
-+        /* Ensure we have pagetables allocated down to leaf PTE. */
-+        addr_to_dma_page_maddr(d, 0, 1);
-+
-+        if ( !hd->arch.vtd.pgd_maddr )
-+            return 0;
-+    }
-+
-+    pgd_maddr = hd->arch.vtd.pgd_maddr;
-+
-+    /* Skip top levels of page tables for 2- and 3-level DRHDs. */
-+    for ( agaw = level_to_agaw(4);
-+          agaw != level_to_agaw(nr_pt_levels);
-+          agaw-- )
-+    {
-+        const struct dma_pte *p = map_vtd_domain_page(pgd_maddr);
-+
-+        pgd_maddr = dma_pte_addr(*p);
-+        unmap_vtd_domain_page(p);
-+        if ( !pgd_maddr )
-+            return 0;
-+    }
-+
-+    return pgd_maddr;
-+}
-+
- static void iommu_flush_write_buffer(struct vtd_iommu *iommu)
- {
-     u32 val;
-@@ -1286,7 +1328,7 @@ int domain_context_mapping_one(
-     struct context_entry *context, *context_entries;
-     u64 maddr, pgd_maddr;
-     u16 seg = iommu->drhd->segment;
--    int agaw, rc, ret;
-+    int rc, ret;
-     bool_t flush_dev_iotlb;
- 
-     ASSERT(pcidevs_locked());
-@@ -1340,37 +1382,18 @@ int domain_context_mapping_one(
-     if ( iommu_hwdom_passthrough && is_hardware_domain(domain) )
-     {
-         context_set_translation_type(*context, CONTEXT_TT_PASS_THRU);
--        agaw = level_to_agaw(iommu->nr_pt_levels);
-     }
-     else
-     {
-         spin_lock(&hd->arch.mapping_lock);
- 
--        /* Ensure we have pagetables allocated down to leaf PTE. */
--        if ( hd->arch.vtd.pgd_maddr == 0 )
-+        pgd_maddr = domain_pgd_maddr(domain, iommu->nr_pt_levels);
-+        if ( !pgd_maddr )
+         if ( d && unlikely(need_iommu_pt_sync(d)) && is_pv_domain(d) )
          {
--            addr_to_dma_page_maddr(domain, 0, 1);
--            if ( hd->arch.vtd.pgd_maddr == 0 )
--            {
--            nomem:
--                spin_unlock(&hd->arch.mapping_lock);
--                spin_unlock(&iommu->lock);
--                unmap_vtd_domain_page(context_entries);
--                return -ENOMEM;
--            }
--        }
--
--        /* Skip top levels of page tables for 2- and 3-level DRHDs. */
--        pgd_maddr = hd->arch.vtd.pgd_maddr;
--        for ( agaw = level_to_agaw(4);
--              agaw != level_to_agaw(iommu->nr_pt_levels);
--              agaw-- )
--        {
--            struct dma_pte *p = map_vtd_domain_page(pgd_maddr);
--            pgd_maddr = dma_pte_addr(*p);
--            unmap_vtd_domain_page(p);
--            if ( pgd_maddr == 0 )
--                goto nomem;
-+            spin_unlock(&hd->arch.mapping_lock);
-+            spin_unlock(&iommu->lock);
-+            unmap_vtd_domain_page(context_entries);
-+            return -ENOMEM;
+-            int rc2 = iommu_legacy_unmap(d, _dfn(mfn), 1u << PAGE_ORDER_4K);
++            unsigned int flush_flags = 0;
++            int err;
++
++            err = iommu_unmap(d, _dfn(mfn), 1ul << PAGE_ORDER_4K, &flush_flags);
++            if ( !err && !this_cpu(iommu_dont_flush_iotlb) )
++                err = iommu_iotlb_flush(d, _dfn(mfn), 1ul << PAGE_ORDER_4K,
++                                        flush_flags);
+ 
+             if ( !rc )
+-                rc = rc2;
++                rc = err;
          }
  
-         context_set_address_root(*context, pgd_maddr);
-@@ -1389,7 +1412,7 @@ int domain_context_mapping_one(
-         return -EFAULT;
+         if ( likely(!is_special_page(page)) )
+@@ -3014,14 +3020,20 @@ static int _get_page_type(struct page_info *page, unsigned long type,
+         if ( d && unlikely(need_iommu_pt_sync(d)) && is_pv_domain(d) )
+         {
+             mfn_t mfn = page_to_mfn(page);
++            dfn_t dfn = _dfn(mfn_x(mfn));
++            unsigned int flush_flags = 0;
+ 
+             if ( (x & PGT_type_mask) == PGT_writable_page )
+-                rc = iommu_legacy_unmap(d, _dfn(mfn_x(mfn)),
+-                                        1ul << PAGE_ORDER_4K);
++                rc = iommu_unmap(d, dfn, 1ul << PAGE_ORDER_4K, &flush_flags);
+             else
+-                rc = iommu_legacy_map(d, _dfn(mfn_x(mfn)), mfn,
+-                                      1ul << PAGE_ORDER_4K,
+-                                      IOMMUF_readable | IOMMUF_writable);
++            {
++                rc = iommu_map(d, dfn, mfn, 1ul << PAGE_ORDER_4K,
++                               IOMMUF_readable | IOMMUF_writable, &flush_flags);
++            }
++
++            if ( !rc && !this_cpu(iommu_dont_flush_iotlb) )
++                rc = iommu_iotlb_flush(d, dfn, 1ul << PAGE_ORDER_4K,
++                                       flush_flags);
+ 
+             if ( unlikely(rc) )
+             {
+diff --git a/xen/arch/x86/mm/p2m-ept.c b/xen/arch/x86/mm/p2m-ept.c
+index 975ab403f235..c04a30eecc65 100644
+--- a/xen/arch/x86/mm/p2m-ept.c
++++ b/xen/arch/x86/mm/p2m-ept.c
+@@ -842,15 +842,19 @@ out:
+     if ( rc == 0 && p2m_is_hostp2m(p2m) &&
+          need_modify_vtd_table )
+     {
+-        if ( iommu_use_hap_pt(d) && !this_cpu(iommu_dont_flush_iotlb) )
+-            rc = iommu_iotlb_flush(d, _dfn(gfn), 1ul << order,
+-                                   (iommu_flags ? IOMMU_FLUSHF_added : 0) |
+-                                   (vtd_pte_present ? IOMMU_FLUSHF_modified
+-                                                    : 0));
+-        else if ( need_iommu_pt_sync(d) )
++        unsigned int flush_flags = 0;
++
++        if ( need_iommu_pt_sync(d) )
+             rc = iommu_flags ?
+-                iommu_legacy_map(d, _dfn(gfn), mfn, 1ul << order, iommu_flags) :
+-                iommu_legacy_unmap(d, _dfn(gfn), 1ul << order);
++                iommu_map(d, _dfn(gfn), mfn, 1ul << order, iommu_flags,
++                          &flush_flags) :
++                iommu_unmap(d, _dfn(gfn), 1ul << order, &flush_flags);
++        else if ( iommu_use_hap_pt(d) )
++            flush_flags = (iommu_flags ? IOMMU_FLUSHF_added : 0) |
++                          (vtd_pte_present ? IOMMU_FLUSHF_modified : 0);
++
++        if ( !rc && !this_cpu(iommu_dont_flush_iotlb) )
++            rc = iommu_iotlb_flush(d, _dfn(gfn), 1ul << order, flush_flags);
      }
  
--    context_set_address_width(*context, agaw);
-+    context_set_address_width(*context, level_to_agaw(iommu->nr_pt_levels));
-     context_set_fault_enable(*context);
-     context_set_present(*context);
-     iommu_sync_cache(context, sizeof(struct context_entry));
-@@ -1848,18 +1871,6 @@ static int __init vtd_ept_page_compatible(struct vtd_iommu *iommu)
-            (ept_has_1gb(ept_cap) && opt_hap_1gb) <= cap_sps_1gb(vtd_cap);
+     unmap_domain_page(table);
+diff --git a/xen/arch/x86/mm/p2m-pt.c b/xen/arch/x86/mm/p2m-pt.c
+index 5fa0d30ce7d2..d8ffc6f7e078 100644
+--- a/xen/arch/x86/mm/p2m-pt.c
++++ b/xen/arch/x86/mm/p2m-pt.c
+@@ -741,10 +741,18 @@ p2m_pt_set_entry(struct p2m_domain *p2m, gfn_t gfn_, mfn_t mfn,
+ 
+     if ( need_iommu_pt_sync(p2m->domain) &&
+          (iommu_old_flags != iommu_pte_flags || old_mfn != mfn_x(mfn)) )
+-        rc = iommu_pte_flags
+-             ? iommu_legacy_map(d, _dfn(gfn), mfn, 1ul << page_order,
+-                                iommu_pte_flags)
+-             : iommu_legacy_unmap(d, _dfn(gfn), 1ul << page_order);
++    {
++        unsigned int flush_flags = 0;
++
++        rc = iommu_pte_flags ?
++            iommu_map(d, _dfn(gfn), mfn, 1ul << page_order, iommu_pte_flags,
++                      &flush_flags) :
++            iommu_unmap(d, _dfn(gfn), 1ul << page_order, &flush_flags);
++
++        if ( !rc && !this_cpu(iommu_dont_flush_iotlb) )
++            rc = iommu_iotlb_flush(d, _dfn(gfn), 1ul << page_order,
++                                   flush_flags);
++    }
+ 
+     /*
+      * Free old intermediate tables if necessary.  This has to be the
+diff --git a/xen/arch/x86/mm/p2m.c b/xen/arch/x86/mm/p2m.c
+index d9cc1856bb80..8ee33b25ca72 100644
+--- a/xen/arch/x86/mm/p2m.c
++++ b/xen/arch/x86/mm/p2m.c
+@@ -1351,11 +1351,15 @@ int set_identity_p2m_entry(struct domain *d, unsigned long gfn_l,
+ 
+     if ( !paging_mode_translate(p2m->domain) )
+     {
+-        if ( !is_iommu_enabled(d) )
+-            return 0;
+-        return iommu_legacy_map(d, _dfn(gfn_l), _mfn(gfn_l),
+-                                1ul << PAGE_ORDER_4K,
+-                                IOMMUF_readable | IOMMUF_writable);
++        unsigned int flush_flags = 0;
++
++        ret = iommu_map(d, _dfn(gfn_l), _mfn(gfn_l), 1ul << PAGE_ORDER_4K,
++                        IOMMUF_readable | IOMMUF_writable, &flush_flags);
++        if ( !ret )
++            ret = iommu_iotlb_flush(d, _dfn(gfn_l), 1ul << PAGE_ORDER_4K,
++                                    flush_flags);
++
++        return ret;
+     }
+ 
+     gfn_lock(p2m, gfn, 0);
+@@ -1443,9 +1447,14 @@ int clear_identity_p2m_entry(struct domain *d, unsigned long gfn_l)
+ 
+     if ( !paging_mode_translate(d) )
+     {
+-        if ( !is_iommu_enabled(d) )
+-            return 0;
+-        return iommu_legacy_unmap(d, _dfn(gfn_l), 1ul << PAGE_ORDER_4K);
++        unsigned int flush_flags = 0;
++
++        ret = iommu_unmap(d, _dfn(gfn_l), 1ul << PAGE_ORDER_4K, &flush_flags);
++        if ( !ret )
++            ret = iommu_iotlb_flush(d, _dfn(gfn_l), 1ul << PAGE_ORDER_4K,
++                                    flush_flags);
++
++        return ret;
+     }
+ 
+     gfn_lock(p2m, gfn, 0);
+diff --git a/xen/arch/x86/x86_64/mm.c b/xen/arch/x86/x86_64/mm.c
+index bce1561e1a80..7e9d16544915 100644
+--- a/xen/arch/x86/x86_64/mm.c
++++ b/xen/arch/x86/x86_64/mm.c
+@@ -1284,21 +1284,15 @@ int memory_add(unsigned long spfn, unsigned long epfn, unsigned int pxm)
+          !iommu_use_hap_pt(hardware_domain) &&
+          !need_iommu_pt_sync(hardware_domain) )
+     {
+-        for ( i = spfn; i < epfn; i++ )
+-            if ( iommu_legacy_map(hardware_domain, _dfn(i), _mfn(i),
+-                                  1ul << PAGE_ORDER_4K,
+-                                  IOMMUF_readable | IOMMUF_writable) )
+-                break;
+-        if ( i != epfn )
+-        {
+-            while (i-- > old_max)
+-                /* If statement to satisfy __must_check. */
+-                if ( iommu_legacy_unmap(hardware_domain, _dfn(i),
+-                                        1ul << PAGE_ORDER_4K) )
+-                    continue;
++        unsigned int flush_flags = 0;
++        unsigned long n = epfn - spfn;
+ 
++        ret = iommu_map(hardware_domain, _dfn(i), _mfn(i), n,
++                        IOMMUF_readable | IOMMUF_writable, &flush_flags);
++        if ( !ret )
++            ret = iommu_iotlb_flush(hardware_domain, _dfn(i), n, flush_flags);
++        if ( ret )
+             goto destroy_m2p;
+-        }
+     }
+ 
+     /* We can't revert any more */
+diff --git a/xen/common/grant_table.c b/xen/common/grant_table.c
+index a5d3ed8bdaac..beb6b2d40d68 100644
+--- a/xen/common/grant_table.c
++++ b/xen/common/grant_table.c
+@@ -1225,11 +1225,22 @@ map_grant_ref(
+             kind = IOMMUF_readable;
+         else
+             kind = 0;
+-        if ( kind && iommu_legacy_map(ld, _dfn(mfn_x(mfn)), mfn, 1, kind) )
++
++        if ( kind )
+         {
+-            double_gt_unlock(lgt, rgt);
+-            rc = GNTST_general_error;
+-            goto undo_out;
++            dfn_t dfn = _dfn(mfn_x(mfn));
++            unsigned int flush_flags = 0;
++            int err;
++
++            err = iommu_map(ld, dfn, mfn, 1, kind, &flush_flags);
++            if ( !err )
++                err = iommu_iotlb_flush(ld, dfn, 1, flush_flags);
++            if ( err )
++            {
++                double_gt_unlock(lgt, rgt);
++                rc = GNTST_general_error;
++                goto undo_out;
++            }
+         }
+     }
+ 
+@@ -1473,19 +1484,23 @@ unmap_common(
+     if ( rc == GNTST_okay && gnttab_need_iommu_mapping(ld) )
+     {
+         unsigned int kind;
++        dfn_t dfn = _dfn(mfn_x(op->mfn));
++        unsigned int flush_flags = 0;
+         int err = 0;
+ 
+         double_gt_lock(lgt, rgt);
+ 
+         kind = mapkind(lgt, rd, op->mfn);
+         if ( !kind )
+-            err = iommu_legacy_unmap(ld, _dfn(mfn_x(op->mfn)), 1);
++            err = iommu_unmap(ld, dfn, 1, &flush_flags);
+         else if ( !(kind & MAPKIND_WRITE) )
+-            err = iommu_legacy_map(ld, _dfn(mfn_x(op->mfn)), op->mfn, 1,
+-                                   IOMMUF_readable);
++            err = iommu_map(ld, dfn, op->mfn, 1, IOMMUF_readable,
++                            &flush_flags);
+ 
+         double_gt_unlock(lgt, rgt);
+ 
++        if ( !err )
++            err = iommu_iotlb_flush(ld, dfn, 1, flush_flags);
+         if ( err )
+             rc = GNTST_general_error;
+     }
+diff --git a/xen/common/memory.c b/xen/common/memory.c
+index df85b550a1b1..14137c68393c 100644
+--- a/xen/common/memory.c
++++ b/xen/common/memory.c
+@@ -836,8 +836,8 @@ int xenmem_add_to_physmap(struct domain *d, struct xen_add_to_physmap *xatp,
+ 
+     if ( is_iommu_enabled(d) )
+     {
+-       this_cpu(iommu_dont_flush_iotlb) = 1;
+-       extra.ppage = &pages[0];
++        this_cpu(iommu_dont_flush_iotlb) = true;
++        extra.ppage = &pages[0];
+     }
+ 
+     while ( xatp->size > done )
+@@ -867,7 +867,7 @@ int xenmem_add_to_physmap(struct domain *d, struct xen_add_to_physmap *xatp,
+         int ret;
+         unsigned int i;
+ 
+-        this_cpu(iommu_dont_flush_iotlb) = 0;
++        this_cpu(iommu_dont_flush_iotlb) = false;
+ 
+         ret = iommu_iotlb_flush(d, _dfn(xatp->idx - done), done,
+                                 IOMMU_FLUSHF_modified);
+diff --git a/xen/drivers/passthrough/iommu.c b/xen/drivers/passthrough/iommu.c
+index 87f9a857bbae..a9da4d2b0645 100644
+--- a/xen/drivers/passthrough/iommu.c
++++ b/xen/drivers/passthrough/iommu.c
+@@ -282,18 +282,6 @@ int iommu_map(struct domain *d, dfn_t dfn, mfn_t mfn,
+     return rc;
  }
  
--/*
-- * set VT-d page table directory to EPT table if allowed
-- */
--static void iommu_set_pgd(struct domain *d)
+-int iommu_legacy_map(struct domain *d, dfn_t dfn, mfn_t mfn,
+-                     unsigned long page_count, unsigned int flags)
 -{
--    mfn_t pgd_mfn;
+-    unsigned int flush_flags = 0;
+-    int rc = iommu_map(d, dfn, mfn, page_count, flags, &flush_flags);
 -
--    pgd_mfn = pagetable_get_mfn(p2m_get_pagetable(p2m_get_hostp2m(d)));
--    dom_iommu(d)->arch.vtd.pgd_maddr =
--        pagetable_get_paddr(pagetable_from_mfn(pgd_mfn));
+-    if ( !this_cpu(iommu_dont_flush_iotlb) && !rc )
+-        rc = iommu_iotlb_flush(d, dfn, page_count, flush_flags);
+-
+-    return rc;
 -}
 -
- static int rmrr_identity_mapping(struct domain *d, bool_t map,
-                                  const struct acpi_rmrr_unit *rmrr,
-                                  u32 flag)
-@@ -2718,7 +2729,6 @@ static struct iommu_ops __initdata vtd_ops = {
-     .adjust_irq_affinities = adjust_vtd_irq_affinities,
-     .suspend = vtd_suspend,
-     .resume = vtd_resume,
--    .share_p2m = iommu_set_pgd,
-     .crash_shutdown = vtd_crash_shutdown,
-     .iotlb_flush = iommu_flush_iotlb_pages,
-     .iotlb_flush_all = iommu_flush_iotlb_all,
-diff --git a/xen/drivers/passthrough/vtd/x86/vtd.c b/xen/drivers/passthrough/vtd/x86/vtd.c
-index bbe358dc36c7..6681dccd6970 100644
---- a/xen/drivers/passthrough/vtd/x86/vtd.c
-+++ b/xen/drivers/passthrough/vtd/x86/vtd.c
-@@ -42,7 +42,7 @@ void *map_vtd_domain_page(u64 maddr)
-     return map_domain_page(_mfn(paddr_to_pfn(maddr)));
+ int iommu_unmap(struct domain *d, dfn_t dfn, unsigned long page_count,
+                 unsigned int *flush_flags)
+ {
+@@ -338,17 +326,6 @@ int iommu_unmap(struct domain *d, dfn_t dfn, unsigned long page_count,
+     return rc;
  }
  
--void unmap_vtd_domain_page(void *va)
-+void unmap_vtd_domain_page(const void *va)
+-int iommu_legacy_unmap(struct domain *d, dfn_t dfn, unsigned long page_count)
+-{
+-    unsigned int flush_flags = 0;
+-    int rc = iommu_unmap(d, dfn, page_count, &flush_flags);
+-
+-    if ( !this_cpu(iommu_dont_flush_iotlb) && !rc )
+-        rc = iommu_iotlb_flush(d, dfn, page_count, flush_flags);
+-
+-    return rc;
+-}
+-
+ int iommu_lookup_page(struct domain *d, dfn_t dfn, mfn_t *mfn,
+                       unsigned int *flags)
  {
-     unmap_domain_page(va);
- }
 diff --git a/xen/include/xen/iommu.h b/xen/include/xen/iommu.h
-index 244a11b9b494..236c55af8921 100644
+index 191021870fed..244a11b9b494 100644
 --- a/xen/include/xen/iommu.h
 +++ b/xen/include/xen/iommu.h
-@@ -269,7 +269,6 @@ struct iommu_ops {
- 
-     int __must_check (*suspend)(void);
-     void (*resume)(void);
--    void (*share_p2m)(struct domain *d);
-     void (*crash_shutdown)(void);
-     int __must_check (*iotlb_flush)(struct domain *d, dfn_t dfn,
-                                     unsigned long page_count,
-@@ -346,8 +345,6 @@ void iommu_resume(void);
- void iommu_crash_shutdown(void);
- int iommu_get_reserved_device_memory(iommu_grdm_t *, void *);
- 
--void iommu_share_p2m_table(struct domain *d);
+@@ -151,16 +151,8 @@ int __must_check iommu_map(struct domain *d, dfn_t dfn, mfn_t mfn,
+ int __must_check iommu_unmap(struct domain *d, dfn_t dfn,
+                              unsigned long page_count,
+                              unsigned int *flush_flags);
 -
- #ifdef CONFIG_HAS_PCI
- int iommu_do_pci_domctl(struct xen_domctl *, struct domain *d,
-                         XEN_GUEST_HANDLE_PARAM(xen_domctl_t));
+-int __must_check iommu_legacy_map(struct domain *d, dfn_t dfn, mfn_t mfn,
+-                                  unsigned long page_count,
+-                                  unsigned int flags);
+-int __must_check iommu_legacy_unmap(struct domain *d, dfn_t dfn,
+-                                    unsigned long page_count);
+-
+ int __must_check iommu_lookup_page(struct domain *d, dfn_t dfn, mfn_t *mfn,
+                                    unsigned int *flags);
+-
+ int __must_check iommu_iotlb_flush(struct domain *d, dfn_t dfn,
+                                    unsigned long page_count,
+                                    unsigned int flush_flags);
+@@ -368,15 +360,12 @@ void iommu_dev_iotlb_flush_timeout(struct domain *d, struct pci_dev *pdev);
+ 
+ /*
+  * The purpose of the iommu_dont_flush_iotlb optional cpu flag is to
+- * avoid unecessary iotlb_flush in the low level IOMMU code.
+- *
+- * iommu_map_page/iommu_unmap_page must flush the iotlb but somethimes
+- * this operation can be really expensive. This flag will be set by the
+- * caller to notify the low level IOMMU code to avoid the iotlb flushes.
+- * iommu_iotlb_flush/iommu_iotlb_flush_all will be explicitly called by
+- * the caller.
++ * avoid unnecessary IOMMU flushing while updating the P2M.
++ * Setting the value to true will cause iommu_iotlb_flush() to return without
++ * actually performing a flush. A batch flush must therefore be done by the
++ * calling code after setting the value back to false.
+  */
+-DECLARE_PER_CPU(bool_t, iommu_dont_flush_iotlb);
++DECLARE_PER_CPU(bool, iommu_dont_flush_iotlb);
+ 
+ extern struct spinlock iommu_pt_cleanup_lock;
+ extern struct page_list_head iommu_pt_cleanup_list;
 -- 
 2.20.1
 
