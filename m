@@ -2,27 +2,28 @@ Return-Path: <SRS0=Yd2Y=E2=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
-	SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.1 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C5693C2D0E4
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Nov 2020 18:40:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 43F06C2D0E4
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Nov 2020 19:03:06 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5CBE7246CA
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Nov 2020 18:40:27 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id B8BCF2222A
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Nov 2020 19:03:05 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="08MvlJg8"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5CBE7246CA
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=embeddedor.com header.i=@embeddedor.com header.b="n09KqYny"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B8BCF2222A
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=embeddedor.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.32561.63613 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.32579.63626 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kgBKI-0007ap-8Y; Fri, 20 Nov 2020 18:40:06 +0000
+	id 1kgBg3-0001bm-4d; Fri, 20 Nov 2020 19:02:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 32561.63613; Fri, 20 Nov 2020 18:40:06 +0000
+Received: by outflank-mailman (output) from mailman id 32579.63626; Fri, 20 Nov 2020 19:02:35 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -37,62 +38,207 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kgBKI-0007ai-5T; Fri, 20 Nov 2020 18:40:06 +0000
-Received: by outflank-mailman (input) for mailman id 32561;
- Fri, 20 Nov 2020 18:40:04 +0000
+	id 1kgBg3-0001bf-1Q; Fri, 20 Nov 2020 19:02:35 +0000
+Received: by outflank-mailman (input) for mailman id 32579;
+ Fri, 20 Nov 2020 19:02:34 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ShNn=E2=kernel.org=pr-tracker-bot@srs-us1.protection.inumbo.net>)
- id 1kgBKG-0007O8-Oc
- for xen-devel@lists.xenproject.org; Fri, 20 Nov 2020 18:40:04 +0000
-Received: from mail.kernel.org (unknown [198.145.29.99])
+ <SRS0=5mWO=E2=embeddedor.com=gustavo@srs-us1.protection.inumbo.net>)
+ id 1kgBg1-0001ba-VK
+ for xen-devel@lists.xenproject.org; Fri, 20 Nov 2020 19:02:34 +0000
+Received: from gateway33.websitewelcome.com (unknown [192.185.145.9])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 84a21b75-b21a-47c3-b7d7-62b12c91a21b;
- Fri, 20 Nov 2020 18:40:04 +0000 (UTC)
+ id c0b041e7-4fc2-4772-96fa-54904629bbd4;
+ Fri, 20 Nov 2020 19:02:31 +0000 (UTC)
+Received: from cm17.websitewelcome.com (cm17.websitewelcome.com [100.42.49.20])
+ by gateway33.websitewelcome.com (Postfix) with ESMTP id 7C769EC185
+ for <xen-devel@lists.xenproject.org>; Fri, 20 Nov 2020 13:02:31 -0600 (CST)
+Received: from gator4166.hostgator.com ([108.167.133.22]) by cmsmtp with SMTP
+ id gBfzkUIxBAAk4gBfzkygMd; Fri, 20 Nov 2020 13:02:31 -0600
+Received: from 187-162-31-110.static.axtel.net ([187.162.31.110]:52198
+ helo=[192.168.15.4])
+ by gator4166.hostgator.com with esmtpsa (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.93)
+ (envelope-from <gustavo@embeddedor.com>)
+ id 1kgBfw-0000VH-WA; Fri, 20 Nov 2020 13:02:29 -0600
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=ShNn=E2=kernel.org=pr-tracker-bot@srs-us1.protection.inumbo.net>)
-	id 1kgBKG-0007O8-Oc
-	for xen-devel@lists.xenproject.org; Fri, 20 Nov 2020 18:40:04 +0000
-X-Inumbo-ID: 84a21b75-b21a-47c3-b7d7-62b12c91a21b
-Received: from mail.kernel.org (unknown [198.145.29.99])
+	(envelope-from <SRS0=5mWO=E2=embeddedor.com=gustavo@srs-us1.protection.inumbo.net>)
+	id 1kgBg1-0001ba-VK
+	for xen-devel@lists.xenproject.org; Fri, 20 Nov 2020 19:02:34 +0000
+X-Inumbo-ID: c0b041e7-4fc2-4772-96fa-54904629bbd4
+Received: from gateway33.websitewelcome.com (unknown [192.185.145.9])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 84a21b75-b21a-47c3-b7d7-62b12c91a21b;
-	Fri, 20 Nov 2020 18:40:04 +0000 (UTC)
-Subject: Re: [GIT PULL] xen: branch for v5.10-rc5
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1605897603;
-	bh=yrhE7j00Mtsf9/fQt335X97bxVz/PrGLW3m6roM1KR4=;
-	h=From:In-Reply-To:References:Date:To:Cc:From;
-	b=08MvlJg85Q1TZ/e5dO04m95fWliauAvm09XpRu0pSGoM4dptkUo6grfMn3qH+fRyT
-	 gjmliPDEsW56C8VhyKaN5nYjN2yw8xPf3es1h55RtC/bjRJygNg4sjlUlEpbA1+j+I
-	 BR7aCx6LdR/L1cjax4HB6sE4jTUxu7OknBrzFDfo=
-From: pr-tracker-bot@kernel.org
-In-Reply-To: <20201120055947.613-1-jgross@suse.com>
-References: <20201120055947.613-1-jgross@suse.com>
-X-PR-Tracked-List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
-X-PR-Tracked-Message-Id: <20201120055947.613-1-jgross@suse.com>
-X-PR-Tracked-Remote: git://git.kernel.org/pub/scm/linux/kernel/git/xen/tip.git for-linus-5.10b-rc5-tag
-X-PR-Tracked-Commit-Id: 65cae18882f943215d0505ddc7e70495877308e6
-X-PR-Merge-Tree: torvalds/linux.git
-X-PR-Merge-Refname: refs/heads/master
-X-PR-Merge-Commit-Id: 4ccf7a01e805f04defd423fb410f47a13af76399
-Message-Id: <160589760312.4306.8801434833258557230.pr-tracker-bot@kernel.org>
-Date: Fri, 20 Nov 2020 18:40:03 +0000
-To: Juergen Gross <jgross@suse.com>
-Cc: torvalds@linux-foundation.org, linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org, boris.ostrovsky@oracle.com
+	id c0b041e7-4fc2-4772-96fa-54904629bbd4;
+	Fri, 20 Nov 2020 19:02:31 +0000 (UTC)
+Received: from cm17.websitewelcome.com (cm17.websitewelcome.com [100.42.49.20])
+	by gateway33.websitewelcome.com (Postfix) with ESMTP id 7C769EC185
+	for <xen-devel@lists.xenproject.org>; Fri, 20 Nov 2020 13:02:31 -0600 (CST)
+Received: from gator4166.hostgator.com ([108.167.133.22])
+	by cmsmtp with SMTP
+	id gBfzkUIxBAAk4gBfzkygMd; Fri, 20 Nov 2020 13:02:31 -0600
+X-Authority-Reason: nr=8
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=embeddedor.com; s=default; h=Content-Transfer-Encoding:Content-Type:
+	In-Reply-To:MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender
+	:Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+	List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=+4VxQ3E1SMf3fqpPxA59SXnFTIYnqNYQQfNHAF4XRGw=; b=n09KqYnyKHrO7dveIUWc55mzig
+	y4HUZZbrqh9oIGiAW16mTaR8pcvnAozTxI+rYVVIt9CxAErudOIqW44giqY0jAAxUq2Az5FkJRw8D
+	DdYM3ceCwzW72Iyh3zFwKX+btf9zXkIFnOla0anfthw4DZBTFFqyoxwOvEOl2OJ26TOTLqWU9obCG
+	intkFNaJRljaeNwR96RWCduzT1c1ht64s9kRw8R+vb7ftuKF/SC10c1DXlPqmQL512w8QCfyvTWtG
+	dzgy+MeNJCgbGq47RynDwYUz9POm4OiFKWoqxvHGtR/GFZ1BW9GSDXleqWC/tOZ433VaTMSGJy7Ut
+	yE2h40Yg==;
+Received: from 187-162-31-110.static.axtel.net ([187.162.31.110]:52198 helo=[192.168.15.4])
+	by gator4166.hostgator.com with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.93)
+	(envelope-from <gustavo@embeddedor.com>)
+	id 1kgBfw-0000VH-WA; Fri, 20 Nov 2020 13:02:29 -0600
+Subject: Re: [PATCH 000/141] Fix fall-through warnings for Clang
+To: Joe Perches <joe@perches.com>, "Gustavo A. R. Silva"
+ <gustavoars@kernel.org>, linux-kernel@vger.kernel.org
+Cc: alsa-devel@alsa-project.org, amd-gfx@lists.freedesktop.org,
+ bridge@lists.linux-foundation.org, ceph-devel@vger.kernel.org,
+ cluster-devel@redhat.com, coreteam@netfilter.org,
+ devel@driverdev.osuosl.org, dm-devel@redhat.com, drbd-dev@lists.linbit.com,
+ dri-devel@lists.freedesktop.org, GR-everest-linux-l2@marvell.com,
+ GR-Linux-NIC-Dev@marvell.com, intel-gfx@lists.freedesktop.org,
+ intel-wired-lan@lists.osuosl.org, keyrings@vger.kernel.org,
+ linux1394-devel@lists.sourceforge.net, linux-acpi@vger.kernel.org,
+ linux-afs@lists.infradead.org, linux-arm-kernel@lists.infradead.org,
+ linux-arm-msm@vger.kernel.org, linux-atm-general@lists.sourceforge.net,
+ linux-block@vger.kernel.org, linux-can@vger.kernel.org,
+ linux-cifs@vger.kernel.org, linux-crypto@vger.kernel.org,
+ linux-decnet-user@lists.sourceforge.net, linux-ext4@vger.kernel.org,
+ linux-fbdev@vger.kernel.org, linux-geode@lists.infradead.org,
+ linux-gpio@vger.kernel.org, linux-hams@vger.kernel.org,
+ linux-hwmon@vger.kernel.org, linux-i3c@lists.infradead.org,
+ linux-ide@vger.kernel.org, linux-iio@vger.kernel.org,
+ linux-input@vger.kernel.org, linux-integrity@vger.kernel.org,
+ linux-mediatek@lists.infradead.org, linux-media@vger.kernel.org,
+ linux-mmc@vger.kernel.org, linux-mm@kvack.org,
+ linux-mtd@lists.infradead.org, linux-nfs@vger.kernel.org,
+ linux-rdma@vger.kernel.org, linux-renesas-soc@vger.kernel.org,
+ linux-scsi@vger.kernel.org, linux-sctp@vger.kernel.org,
+ linux-security-module@vger.kernel.org,
+ linux-stm32@st-md-mailman.stormreply.com, linux-usb@vger.kernel.org,
+ linux-watchdog@vger.kernel.org, linux-wireless@vger.kernel.org,
+ netdev@vger.kernel.org, netfilter-devel@vger.kernel.org,
+ nouveau@lists.freedesktop.org, op-tee@lists.trustedfirmware.org,
+ oss-drivers@netronome.com, patches@opensource.cirrus.com,
+ rds-devel@oss.oracle.com, reiserfs-devel@vger.kernel.org,
+ samba-technical@lists.samba.org, selinux@vger.kernel.org,
+ target-devel@vger.kernel.org, tipc-discussion@lists.sourceforge.net,
+ usb-storage@lists.one-eyed-alien.net,
+ virtualization@lists.linux-foundation.org, wcn36xx@lists.infradead.org,
+ x86@kernel.org, xen-devel@lists.xenproject.org,
+ linux-hardening@vger.kernel.org, Nick Desaulniers <ndesaulniers@google.com>,
+ Nathan Chancellor <natechancellor@gmail.com>, Miguel Ojeda
+ <ojeda@kernel.org>, Kees Cook <keescook@chromium.org>
+References: <cover.1605896059.git.gustavoars@kernel.org>
+ <3e0bbb1644fe53d79322c2feb28ccaf3e20c0e94.camel@perches.com>
+From: "Gustavo A. R. Silva" <gustavo@embeddedor.com>
+Autocrypt: addr=gustavo@embeddedor.com; keydata=
+ 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
+ AP7RWS474w==
+Message-ID: <9f986394-125a-81f7-7696-fe1a9f4eb4f5@embeddedor.com>
+Date: Fri, 20 Nov 2020 13:02:34 -0600
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
+MIME-Version: 1.0
+In-Reply-To: <3e0bbb1644fe53d79322c2feb28ccaf3e20c0e94.camel@perches.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - gator4166.hostgator.com
+X-AntiAbuse: Original Domain - lists.xenproject.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - embeddedor.com
+X-BWhitelist: no
+X-Source-IP: 187.162.31.110
+X-Source-L: No
+X-Exim-ID: 1kgBfw-0000VH-WA
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-Source-Sender: 187-162-31-110.static.axtel.net ([192.168.15.4]) [187.162.31.110]:52198
+X-Source-Auth: gustavo@embeddedor.com
+X-Email-Count: 72
+X-Source-Cap: Z3V6aWRpbmU7Z3V6aWRpbmU7Z2F0b3I0MTY2Lmhvc3RnYXRvci5jb20=
+X-Local-Domain: yes
 
-The pull request you sent on Fri, 20 Nov 2020 06:59:47 +0100:
 
-> git://git.kernel.org/pub/scm/linux/kernel/git/xen/tip.git for-linus-5.10b-rc5-tag
 
-has been merged into torvalds/linux.git:
-https://git.kernel.org/torvalds/c/4ccf7a01e805f04defd423fb410f47a13af76399
+On 11/20/20 12:28, Joe Perches wrote:
+> On Fri, 2020-11-20 at 12:21 -0600, Gustavo A. R. Silva wrote:
+>> Hi all,
+>>
+>> This series aims to fix almost all remaining fall-through warnings in
+>> order to enable -Wimplicit-fallthrough for Clang.
+>>
+>> In preparation to enable -Wimplicit-fallthrough for Clang, explicitly
+>> add multiple break/goto/return/fallthrough statements instead of just
+>> letting the code fall through to the next case.
+>>
+>> Notice that in order to enable -Wimplicit-fallthrough for Clang, this
+>> change[1] is meant to be reverted at some point. So, this patch helps
+>> to move in that direction.
+> 
+> This was a bit hard to parse for a second or three.
+> 
+> Thanks Gustavo.
+> 
+> How was this change done?
 
-Thank you!
+I audited case by case in order to determine the best fit for each
+situation. Depending on the surrounding logic, sometimes it makes
+more sense a goto or a fallthrough rather than merely a break.
 
--- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/prtracker.html
+Thanks
+--
+Gustavo
 
