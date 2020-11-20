@@ -2,25 +2,28 @@ Return-Path: <SRS0=Yd2Y=E2=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1AB8DC5519F
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Nov 2020 09:28:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5BACAC5519F
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Nov 2020 09:49:27 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1FDAB221FE
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Nov 2020 09:28:25 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1FDAB221FE
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=antioche.eu.org
+	by mail.kernel.org (Postfix) with ESMTPS id B7F73204EF
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Nov 2020 09:49:26 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="EbmX6KfT"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B7F73204EF
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.31827.62542 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.31840.62638 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kg2i8-0002qb-AS; Fri, 20 Nov 2020 09:28:08 +0000
+	id 1kg32X-0005PV-Tm; Fri, 20 Nov 2020 09:49:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 31827.62542; Fri, 20 Nov 2020 09:28:08 +0000
+Received: by outflank-mailman (output) from mailman id 31840.62638; Fri, 20 Nov 2020 09:49:13 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -35,78 +38,100 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kg2i8-0002qU-7K; Fri, 20 Nov 2020 09:28:08 +0000
-Received: by outflank-mailman (input) for mailman id 31827;
- Fri, 20 Nov 2020 09:28:07 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=GrQD=E2=antioche.eu.org=bouyer@srs-us1.protection.inumbo.net>)
- id 1kg2i7-0002qP-1q
- for xen-devel@lists.xenproject.org; Fri, 20 Nov 2020 09:28:07 +0000
-Received: from chassiron.antioche.eu.org (unknown [2001:41d0:fe9d:1101::1])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 917c5e88-468e-49d2-b1e4-16f5232f9364;
- Fri, 20 Nov 2020 09:28:05 +0000 (UTC)
-Received: from sandettie.soc.lip6.fr (82-64-3-41.subs.proxad.net [82.64.3.41])
- by chassiron.antioche.eu.org (8.15.2/8.15.2) with ESMTPS id
- 0AK9RxsO020134
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=OK);
- Fri, 20 Nov 2020 10:28:00 +0100 (MET)
-Received: by sandettie.soc.lip6.fr (Postfix, from userid 373)
- id B84052E9CA8; Fri, 20 Nov 2020 10:27:54 +0100 (MET)
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kg32X-0005PI-OC; Fri, 20 Nov 2020 09:49:13 +0000
+Received: by outflank-mailman (input) for mailman id 31840;
+ Fri, 20 Nov 2020 09:49:12 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <paul@xen.org>) id 1kg32W-0005Mr-Dk
+ for xen-devel@lists.xenproject.org; Fri, 20 Nov 2020 09:49:12 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <paul@xen.org>)
+ id 1kg32V-0002bN-Jp; Fri, 20 Nov 2020 09:49:11 +0000
+Received: from host109-146-187-185.range109-146.btcentralplus.com
+ ([109.146.187.185] helo=u2f063a87eabd5f.home)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+ (envelope-from <paul@xen.org>)
+ id 1kg32V-0003d1-Bu; Fri, 20 Nov 2020 09:49:11 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=GrQD=E2=antioche.eu.org=bouyer@srs-us1.protection.inumbo.net>)
-	id 1kg2i7-0002qP-1q
-	for xen-devel@lists.xenproject.org; Fri, 20 Nov 2020 09:28:07 +0000
-X-Inumbo-ID: 917c5e88-468e-49d2-b1e4-16f5232f9364
-Received: from chassiron.antioche.eu.org (unknown [2001:41d0:fe9d:1101::1])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 917c5e88-468e-49d2-b1e4-16f5232f9364;
-	Fri, 20 Nov 2020 09:28:05 +0000 (UTC)
-Received: from sandettie.soc.lip6.fr (82-64-3-41.subs.proxad.net [82.64.3.41])
-	by chassiron.antioche.eu.org (8.15.2/8.15.2) with ESMTPS id 0AK9RxsO020134
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=OK);
-	Fri, 20 Nov 2020 10:28:00 +0100 (MET)
-Received: by sandettie.soc.lip6.fr (Postfix, from userid 373)
-	id B84052E9CA8; Fri, 20 Nov 2020 10:27:54 +0100 (MET)
-Date: Fri, 20 Nov 2020 10:27:54 +0100
-From: Manuel Bouyer <bouyer@antioche.eu.org>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>,
-        xen-devel@lists.xenproject.org
-Subject: Re: NetBSD dom0 PVH: hardware interrupts stalls
-Message-ID: <20201120092754.GH1508@antioche.eu.org>
-References: <20201118143928.hvamuf7t7jycsrzb@Air-de-Roger>
- <bb2b6182-f3a6-61e5-ee70-90a65ae56435@suse.com>
- <20201119141915.igyb7djkw47rf2dt@Air-de-Roger>
- <20201119155718.GB4104@antioche.eu.org>
- <20201119165734.GA4903@antioche.eu.org>
- <20201119175733.GA6067@antioche.eu.org>
- <1a50e1e2-b69c-afd6-a179-316231512004@suse.com>
- <20201120082855.5z4cibcd5djlwmgp@Air-de-Roger>
- <20201120085249.GA1508@antioche.eu.org>
- <97f371a9-00fe-33fe-8923-c247f44f9af6@suse.com>
+	(envelope-from <paul@xen.org>)
+	id 1kg32W-0005Mr-Dk
+	for xen-devel@lists.xenproject.org; Fri, 20 Nov 2020 09:49:12 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
+	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
+	bh=ur98iexNlxW3wPnCoGH5R8tJsU4anFW0cgN61u59s58=; b=EbmX6KfTkfVSVhcM7nRxkqW8q1
+	cP83sNOja9lntToF+lbfAB3WxN/n4OG8WM/rBZz55JBZvx3uqvq/S5dgGVU4ZtpzS/WERLLDgFUTM
+	F8kf/CA4Gm7mPnxLhbcE8GQQkycbRgDjWAVmPv8yuB5bKBv3k5gDPF5UFcV6VBHOZ5tg=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+	by mail.xenproject.org with esmtp (Exim 4.92)
+	(envelope-from <paul@xen.org>)
+	id 1kg32V-0002bN-Jp; Fri, 20 Nov 2020 09:49:11 +0000
+Received: from host109-146-187-185.range109-146.btcentralplus.com ([109.146.187.185] helo=u2f063a87eabd5f.home)
+	by xenbits.xenproject.org with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.92)
+	(envelope-from <paul@xen.org>)
+	id 1kg32V-0003d1-Bu; Fri, 20 Nov 2020 09:49:11 +0000
+From: Paul Durrant <paul@xen.org>
+To: xen-devel@lists.xenproject.org
+Cc: Paul Durrant <pdurrant@amazon.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Ian Jackson <iwj@xenproject.org>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v2 07/12] xen/include: import sizeof_field() macro from Linux stddef.h
+Date: Fri, 20 Nov 2020 09:48:55 +0000
+Message-Id: <20201120094900.1489-8-paul@xen.org>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20201120094900.1489-1-paul@xen.org>
+References: <20201120094900.1489-1-paul@xen.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <97f371a9-00fe-33fe-8923-c247f44f9af6@suse.com>
-X-Greylist: Sender succeeded STARTTLS authentication, not delayed by milter-greylist-4.4.3 (chassiron.antioche.eu.org [151.127.5.145]); Fri, 20 Nov 2020 10:28:01 +0100 (MET)
+Content-Transfer-Encoding: 8bit
 
-On Fri, Nov 20, 2020 at 09:59:57AM +0100, Jan Beulich wrote:
-> Well, anything coming through the LAPIC needs ack-ing (except for
-> the spurious interrupt of course), or else ISR won't get updated
-> and further interrupts at this or lower priority can't be serviced
-> (delivered) anymore. This includes interrupts originally coming
-> through the IO-APIC. But the same constraint / requirement exists
-> on baremetal.
+From: Paul Durrant <pdurrant@amazon.com>
 
-OK, so even if I didn't see where this happens, it's happening.
-Is it what's Xen is using as ACK from the dom0 for a IOAPIC
-interrupt, or is it something else (at the IOAPIC level) ?
+Co-locate it with the definition of offsetof() (since this is also in stddef.h
+in the Linux kernel source). This macro will be needed in a subsequent patch.
 
+Signed-off-by: Paul Durrant <pdurrant@amazon.com>
+---
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: George Dunlap <george.dunlap@citrix.com>
+Cc: Ian Jackson <iwj@xenproject.org>
+Cc: Jan Beulich <jbeulich@suse.com>
+Cc: Julien Grall <julien@xen.org>
+Cc: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Wei Liu <wl@xen.org>
+---
+ xen/include/xen/compiler.h | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/xen/include/xen/compiler.h b/xen/include/xen/compiler.h
+index c0e0ee9f27be..676c6ea1b0a0 100644
+--- a/xen/include/xen/compiler.h
++++ b/xen/include/xen/compiler.h
+@@ -76,6 +76,14 @@
+ 
+ #define offsetof(a,b) __builtin_offsetof(a,b)
+ 
++/**
++ * sizeof_field(TYPE, MEMBER)
++ *
++ * @TYPE: The structure containing the field of interest
++ * @MEMBER: The field to return the size of
++ */
++#define sizeof_field(TYPE, MEMBER) sizeof((((TYPE *)0)->MEMBER))
++
+ #if !defined(__STDC_VERSION__) || __STDC_VERSION__ < 201112L
+ #define alignof __alignof__
+ #endif
 -- 
-Manuel Bouyer <bouyer@antioche.eu.org>
-     NetBSD: 26 ans d'experience feront toujours la difference
---
+2.20.1
+
 
