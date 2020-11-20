@@ -2,28 +2,26 @@ Return-Path: <SRS0=Yd2Y=E2=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-10.3 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 48936C63777
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Nov 2020 09:00:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B7900C5519F
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Nov 2020 09:01:55 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AB25C2224C
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Nov 2020 09:00:12 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="Wzg80ch2"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AB25C2224C
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 5155C2224C
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Nov 2020 09:01:55 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5155C2224C
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.31780.62452 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.31787.62464 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kg2Gt-0007Nu-AB; Fri, 20 Nov 2020 08:59:59 +0000
+	id 1kg2Ic-0008ER-M4; Fri, 20 Nov 2020 09:01:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 31780.62452; Fri, 20 Nov 2020 08:59:59 +0000
+Received: by outflank-mailman (output) from mailman id 31787.62464; Fri, 20 Nov 2020 09:01:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,92 +36,81 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kg2Gt-0007Nn-6e; Fri, 20 Nov 2020 08:59:59 +0000
-Received: by outflank-mailman (input) for mailman id 31780;
- Fri, 20 Nov 2020 08:59:58 +0000
+	id 1kg2Ic-0008EK-Ip; Fri, 20 Nov 2020 09:01:46 +0000
+Received: by outflank-mailman (input) for mailman id 31787;
+ Fri, 20 Nov 2020 09:01:45 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=xyTX=E2=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kg2Gs-0007Ng-48
- for xen-devel@lists.xenproject.org; Fri, 20 Nov 2020 08:59:58 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ (envelope-from <SRS0=tRH+=E2=lst.de=hch@srs-us1.protection.inumbo.net>)
+ id 1kg2Ib-0008EE-Au
+ for xen-devel@lists.xenproject.org; Fri, 20 Nov 2020 09:01:45 +0000
+Received: from verein.lst.de (unknown [213.95.11.211])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 792855b5-19c4-49eb-ae08-9956c70f5db3;
- Fri, 20 Nov 2020 08:59:57 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id A9A72AC0C;
- Fri, 20 Nov 2020 08:59:56 +0000 (UTC)
+ id e4bf5b1e-2083-4427-a416-3720c2612229;
+ Fri, 20 Nov 2020 09:01:44 +0000 (UTC)
+Received: by verein.lst.de (Postfix, from userid 2407)
+ id 4C98067373; Fri, 20 Nov 2020 10:01:42 +0100 (CET)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=xyTX=E2=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
-	id 1kg2Gs-0007Ng-48
-	for xen-devel@lists.xenproject.org; Fri, 20 Nov 2020 08:59:58 +0000
-X-Inumbo-ID: 792855b5-19c4-49eb-ae08-9956c70f5db3
-Received: from mx2.suse.de (unknown [195.135.220.15])
+	(envelope-from <SRS0=tRH+=E2=lst.de=hch@srs-us1.protection.inumbo.net>)
+	id 1kg2Ib-0008EE-Au
+	for xen-devel@lists.xenproject.org; Fri, 20 Nov 2020 09:01:45 +0000
+X-Inumbo-ID: e4bf5b1e-2083-4427-a416-3720c2612229
+Received: from verein.lst.de (unknown [213.95.11.211])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 792855b5-19c4-49eb-ae08-9956c70f5db3;
-	Fri, 20 Nov 2020 08:59:57 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1605862796; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=vtzVT+psnRyLMZqf7NPV4DyyZ+QvtPWbucYiH+zRXaQ=;
-	b=Wzg80ch2E0v/Wehh/deV82GMPaSrZptDAvMyyHCGg4qIMjmuQfg3MJLUMxFazOtBznhUYg
-	wnBUm2qK30/jdUWPr33hwkDXVQ1Hl6KnZ6sa/wZ7MDO3mXqVcgTHmls5HRgHlL4IcTx07k
-	E2SRyyReiYaZQkMr6LI4IZEkKNUxKlE=
-Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id A9A72AC0C;
-	Fri, 20 Nov 2020 08:59:56 +0000 (UTC)
-Subject: Re: NetBSD dom0 PVH: hardware interrupts stalls
-To: Manuel Bouyer <bouyer@antioche.eu.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-Cc: xen-devel@lists.xenproject.org
-References: <20201118100025.ic7r3kfsbdnr6muz@Air-de-Roger>
- <20201118121403.GC3126@antioche.eu.org>
- <20201118143928.hvamuf7t7jycsrzb@Air-de-Roger>
- <bb2b6182-f3a6-61e5-ee70-90a65ae56435@suse.com>
- <20201119141915.igyb7djkw47rf2dt@Air-de-Roger>
- <20201119155718.GB4104@antioche.eu.org>
- <20201119165734.GA4903@antioche.eu.org>
- <20201119175733.GA6067@antioche.eu.org>
- <1a50e1e2-b69c-afd6-a179-316231512004@suse.com>
- <20201120082855.5z4cibcd5djlwmgp@Air-de-Roger>
- <20201120085249.GA1508@antioche.eu.org>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <97f371a9-00fe-33fe-8923-c247f44f9af6@suse.com>
-Date: Fri, 20 Nov 2020 09:59:57 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.4.3
+	id e4bf5b1e-2083-4427-a416-3720c2612229;
+	Fri, 20 Nov 2020 09:01:44 +0000 (UTC)
+Received: by verein.lst.de (Postfix, from userid 2407)
+	id 4C98067373; Fri, 20 Nov 2020 10:01:42 +0100 (CET)
+Date: Fri, 20 Nov 2020 10:01:42 +0100
+From: Christoph Hellwig <hch@lst.de>
+To: Jan Kara <jack@suse.cz>
+Cc: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>,
+	Tejun Heo <tj@kernel.org>, Josef Bacik <josef@toxicpanda.com>,
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+	Coly Li <colyli@suse.de>, Mike Snitzer <snitzer@redhat.com>,
+	dm-devel@redhat.com, Richard Weinberger <richard@nod.at>,
+	Jan Kara <jack@suse.com>, linux-block@vger.kernel.org,
+	xen-devel@lists.xenproject.org, linux-bcache@vger.kernel.org,
+	linux-mtd@lists.infradead.org, linux-fsdevel@vger.kernel.org,
+	linux-mm@kvack.org
+Subject: Re: [PATCH 13/20] block: remove ->bd_contains
+Message-ID: <20201120090142.GC21715@lst.de>
+References: <20201118084800.2339180-1-hch@lst.de> <20201118084800.2339180-14-hch@lst.de> <20201119103253.GV1981@quack2.suse.cz>
 MIME-Version: 1.0
-In-Reply-To: <20201120085249.GA1508@antioche.eu.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20201119103253.GV1981@quack2.suse.cz>
+User-Agent: Mutt/1.5.17 (2007-11-01)
 
-On 20.11.2020 09:52, Manuel Bouyer wrote:
-> On Fri, Nov 20, 2020 at 09:28:55AM +0100, Roger Pau Monné wrote:
->>> i.e. at that point we're waiting for Dom0 to signal it's done handling
->>> the IRQ. There is, however, a timer associated with this. Yet that's
->>> actually to prevent the system getting stuck, i.e. the "in-flight"
->>> state ought to clear 1ms later (when that timer expires), and hence
->>> ought to be pretty unlikely to catch when non-zero _and_ something's
->>> actually stuck.
->>
->> I somehow assumed the interrupt was in-flight because the printing to
->> the Xen console caused one to be injected, and thus dom0 didn't had
->> time to Ack it yet.
+On Thu, Nov 19, 2020 at 11:32:53AM +0100, Jan Kara wrote:
+> > @@ -1521,7 +1510,7 @@ static int __blkdev_get(struct block_device *bdev, fmode_t mode, void *holder,
+> >  		if (bdev->bd_bdi == &noop_backing_dev_info)
+> >  			bdev->bd_bdi = bdi_get(disk->queue->backing_dev_info);
+> >  	} else {
+> > -		if (bdev->bd_contains == bdev) {
+> > +		if (!bdev->bd_partno) {
 > 
-> What does Xen consider to be an ACK from the dom0 ?
-> AFAIK we have EOI only for LAPIC interrupts.
+> This should be !bdev_is_partition(bdev) for consistency, right?
 
-Well, anything coming through the LAPIC needs ack-ing (except for
-the spurious interrupt of course), or else ISR won't get updated
-and further interrupts at this or lower priority can't be serviced
-(delivered) anymore. This includes interrupts originally coming
-through the IO-APIC. But the same constraint / requirement exists
-on baremetal.
+Yes.  Same for the same check further up for the !bdev->bd_openers
+case.
 
-Jan
+> > +#define bdev_whole(_bdev) \
+> > +	((_bdev)->bd_disk->part0.bdev)
+> > +
+> >  #define bdev_kobj(_bdev) \
+> >  	(&part_to_dev((_bdev)->bd_part)->kobj)
+> 
+> I'd somewhat prefer if these helpers could actually be inline functions and
+> not macros. I guess they are macros because hd_struct isn't in blk_types.h.
+> But if we moved helpers to blkdev.h, we'd have all definitions we need...
+> Is that a problem for some users?
+
+As you pointed out the reason these are macros is that the obvious
+placement doesn't work.  My plan was to look into cleaning up the block
+headers, which are a complete mess between blk_types.h, bio.h, blkdev.h
+and genhd.h after I'm done making sense of the data structures, so for
+now I didn't want to move too much around.  Hopefully we'll be able to
+convert these helpers to inlines once I'm done.
 
