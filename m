@@ -2,25 +2,28 @@ Return-Path: <SRS0=pPQF=E3=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED autolearn=unavailable autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 39168C388F9
-	for <xen-devel@archiver.kernel.org>; Sat, 21 Nov 2020 17:10:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 20485C8300B
+	for <xen-devel@archiver.kernel.org>; Sat, 21 Nov 2020 17:19:26 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EA95322206
-	for <xen-devel@archiver.kernel.org>; Sat, 21 Nov 2020 17:10:54 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EA95322206
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=perches.com
+	by mail.kernel.org (Postfix) with ESMTPS id C750F22202
+	for <xen-devel@archiver.kernel.org>; Sat, 21 Nov 2020 17:19:25 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=pass (1024-bit key) header.d=hansenpartnership.com header.i=@hansenpartnership.com header.b="Lvt0xf0A";
+	dkim=pass (1024-bit key) header.d=hansenpartnership.com header.i=@hansenpartnership.com header.b="qZT/78tS"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C750F22202
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=HansenPartnership.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.33021.64100 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.33027.64112 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kgWOw-0003xF-8o; Sat, 21 Nov 2020 17:10:18 +0000
+	id 1kgWXT-0004Gj-4h; Sat, 21 Nov 2020 17:19:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 33021.64100; Sat, 21 Nov 2020 17:10:18 +0000
+Received: by outflank-mailman (output) from mailman id 33027.64112; Sat, 21 Nov 2020 17:19:07 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -35,51 +38,71 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kgWOw-0003x8-5n; Sat, 21 Nov 2020 17:10:18 +0000
-Received: by outflank-mailman (input) for mailman id 33021;
- Sat, 21 Nov 2020 17:10:16 +0000
+	id 1kgWXT-0004Gc-0w; Sat, 21 Nov 2020 17:19:07 +0000
+Received: by outflank-mailman (input) for mailman id 33027;
+ Sat, 21 Nov 2020 17:19:05 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=pLDK=E3=perches.com=joe@srs-us1.protection.inumbo.net>)
- id 1kgWOu-0003x3-LL
- for xen-devel@lists.xenproject.org; Sat, 21 Nov 2020 17:10:16 +0000
-Received: from smtprelay.hostedemail.com (unknown [216.40.44.103])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=v3X3=E3=hansenpartnership.com=james.bottomley@srs-us1.protection.inumbo.net>)
+ id 1kgWXQ-0004GX-Je
+ for xen-devel@lists.xenproject.org; Sat, 21 Nov 2020 17:19:05 +0000
+Received: from bedivere.hansenpartnership.com (unknown [96.44.175.130])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id a8584925-c3f6-4189-aac3-6b588fe83b48;
- Sat, 21 Nov 2020 17:10:15 +0000 (UTC)
-Received: from filter.hostedemail.com (clb03-v110.bra.tucows.net
- [216.40.38.60])
- by smtprelay03.hostedemail.com (Postfix) with ESMTP id C09E2837F24A;
- Sat, 21 Nov 2020 17:10:14 +0000 (UTC)
-Received: from XPS-9350.home (unknown [47.151.128.180])
- (Authenticated sender: joe@perches.com)
- by omf05.hostedemail.com (Postfix) with ESMTPA;
- Sat, 21 Nov 2020 17:10:09 +0000 (UTC)
+ id 7a3042af-d186-4004-ba3f-0e15793b4fc3;
+ Sat, 21 Nov 2020 17:19:01 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by bedivere.hansenpartnership.com (Postfix) with ESMTP id 2C7E2128048D;
+ Sat, 21 Nov 2020 09:19:00 -0800 (PST)
+Received: from bedivere.hansenpartnership.com ([127.0.0.1])
+ by localhost (bedivere.hansenpartnership.com [127.0.0.1]) (amavisd-new,
+ port 10024)
+ with ESMTP id dA_Y3gfv-HlR; Sat, 21 Nov 2020 09:19:00 -0800 (PST)
+Received: from jarvis.int.hansenpartnership.com (unknown
+ [IPv6:2601:600:8280:66d1::527])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by bedivere.hansenpartnership.com (Postfix) with ESMTPSA id 584A71280481;
+ Sat, 21 Nov 2020 09:18:58 -0800 (PST)
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=pLDK=E3=perches.com=joe@srs-us1.protection.inumbo.net>)
-	id 1kgWOu-0003x3-LL
-	for xen-devel@lists.xenproject.org; Sat, 21 Nov 2020 17:10:16 +0000
-X-Inumbo-ID: a8584925-c3f6-4189-aac3-6b588fe83b48
-Received: from smtprelay.hostedemail.com (unknown [216.40.44.103])
+	(envelope-from <SRS0=v3X3=E3=hansenpartnership.com=james.bottomley@srs-us1.protection.inumbo.net>)
+	id 1kgWXQ-0004GX-Je
+	for xen-devel@lists.xenproject.org; Sat, 21 Nov 2020 17:19:05 +0000
+X-Inumbo-ID: 7a3042af-d186-4004-ba3f-0e15793b4fc3
+Received: from bedivere.hansenpartnership.com (unknown [96.44.175.130])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id a8584925-c3f6-4189-aac3-6b588fe83b48;
-	Sat, 21 Nov 2020 17:10:15 +0000 (UTC)
-Received: from filter.hostedemail.com (clb03-v110.bra.tucows.net [216.40.38.60])
-	by smtprelay03.hostedemail.com (Postfix) with ESMTP id C09E2837F24A;
-	Sat, 21 Nov 2020 17:10:14 +0000 (UTC)
-X-Session-Marker: 6A6F6540706572636865732E636F6D
-X-HE-Tag: crook72_110ffeb27355
-X-Filterd-Recvd-Size: 4090
-Received: from XPS-9350.home (unknown [47.151.128.180])
-	(Authenticated sender: joe@perches.com)
-	by omf05.hostedemail.com (Postfix) with ESMTPA;
-	Sat, 21 Nov 2020 17:10:09 +0000 (UTC)
-Message-ID: <2105f0c05e9eae8bee8e17dcc5314474b3c0bc73.camel@perches.com>
+	id 7a3042af-d186-4004-ba3f-0e15793b4fc3;
+	Sat, 21 Nov 2020 17:19:01 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by bedivere.hansenpartnership.com (Postfix) with ESMTP id 2C7E2128048D;
+	Sat, 21 Nov 2020 09:19:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+	d=hansenpartnership.com; s=20151216; t=1605979140;
+	bh=oKjwoQQYqAGHYIcGa87tH3kfRh6eNDZ11DRWs/5n6Nc=;
+	h=Message-ID:Subject:From:To:Date:In-Reply-To:References:From;
+	b=Lvt0xf0A2UjzBqGR2epCNoE7DN6YV9pUrVXD+f22BVAeiOW2KxZsGCImkMcXBrgh/
+	 zD0zBdigF+USoIPaRfSUxU4T/o3yBTwQz1ZuRUKYioWvma2ORezv7XJ+/UVZk14HDg
+	 znn3A0Y1A4QkkRvYDhfOKnhgBoH92sfIP7bAjSz4=
+Received: from bedivere.hansenpartnership.com ([127.0.0.1])
+	by localhost (bedivere.hansenpartnership.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id dA_Y3gfv-HlR; Sat, 21 Nov 2020 09:19:00 -0800 (PST)
+Received: from jarvis.int.hansenpartnership.com (unknown [IPv6:2601:600:8280:66d1::527])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by bedivere.hansenpartnership.com (Postfix) with ESMTPSA id 584A71280481;
+	Sat, 21 Nov 2020 09:18:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+	d=hansenpartnership.com; s=20151216; t=1605979139;
+	bh=oKjwoQQYqAGHYIcGa87tH3kfRh6eNDZ11DRWs/5n6Nc=;
+	h=Message-ID:Subject:From:To:Date:In-Reply-To:References:From;
+	b=qZT/78tSZnguNV1yoYzSSmvqmDGgzNIuIpg2PbOws0zqwE5yu2CoK/DoUP3fxAE7/
+	 cwr3zThASX8R91ADl4Ew6X2dNx0rQAVJjUjWHCFXFVZg8s5iaP8BFiZuwsxl12vuws
+	 rCw1QQ3k1zT/j95+Y6p1vgihiOvqC5dVUCKPWDl0=
+Message-ID: <5843ef910b0e86c00d9c0143dec20f93823b016b.camel@HansenPartnership.com>
 Subject: Re: [RFC] MAINTAINERS tag for cleanup robot
-From: Joe Perches <joe@perches.com>
-To: trix@redhat.com, clang-built-linux@googlegroups.com
+From: James Bottomley <James.Bottomley@HansenPartnership.com>
+To: trix@redhat.com, joe@perches.com, clang-built-linux@googlegroups.com
 Cc: linux-hyperv@vger.kernel.org, linux-kernel@vger.kernel.org, 
  xen-devel@lists.xenproject.org, tboot-devel@lists.sourceforge.net, 
  kvm@vger.kernel.org, linux-crypto@vger.kernel.org,
@@ -97,77 +120,44 @@ Cc: linux-hyperv@vger.kernel.org, linux-kernel@vger.kernel.org,
  alsa-devel@alsa-project.org, bpf@vger.kernel.org, 
  linux-bluetooth@vger.kernel.org, linux-nfs@vger.kernel.org, 
  patches@opensource.cirrus.com
-Date: Sat, 21 Nov 2020 09:10:08 -0800
+Date: Sat, 21 Nov 2020 09:18:57 -0800
 In-Reply-To: <20201121165058.1644182-1-trix@redhat.com>
 References: <20201121165058.1644182-1-trix@redhat.com>
-Content-Type: text/plain; charset="ISO-8859-1"
-User-Agent: Evolution 3.38.1-1 
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.34.4 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
 On Sat, 2020-11-21 at 08:50 -0800, trix@redhat.com wrote:
 > A difficult part of automating commits is composing the subsystem
-> preamble in the commit log.  For the ongoing effort of a fixer producing
-> one or two fixes a release the use of 'treewide:' does not seem appropriate.
+> preamble in the commit log.  For the ongoing effort of a fixer
+> producing
+> one or two fixes a release the use of 'treewide:' does not seem
+> appropriate.
 > 
-> It would be better if the normal prefix was used.  Unfortunately normal is
+> It would be better if the normal prefix was used.  Unfortunately
+> normal is
 > not consistent across the tree.
 > 
-> So I am looking for comments for adding a new tag to the MAINTAINERS file
 > 
 > 	D: Commit subsystem prefix
 > 
 > ex/ for FPGA DFL DRIVERS
 > 
 > 	D: fpga: dfl:
+> 
 
-I'm all for it.  Good luck with the effort.  It's not completely trivial.
+I've got to bet this is going to cause more issues than it solves. 
+SCSI uses scsi: <driver>: for drivers but not every driver has a
+MAINTAINERS entry.  We use either scsi: or scsi: core: for mid layer
+things, but we're not consistent.  Block uses blk-<something>: for all
+of it's stuff but almost no <somtehing>s have a MAINTAINERS entry.  So
+the next thing you're going to cause is an explosion of suggested
+MAINTAINERs entries.
 
-From a decade ago:
+Has anyone actually complained about treewide:?
 
-https://lore.kernel.org/lkml/1289919077.28741.50.camel@Joe-Laptop/
+James
 
-(and that thread started with extra semicolon patches too)
-
-> Continuing with cleaning up clang's -Wextra-semi-stmt
-
-> diff --git a/Makefile b/Makefile
-[]
-> @@ -1567,20 +1567,21 @@ help:
->  	 echo  ''
->  	@echo  'Static analysers:'
->  	@echo  '  checkstack      - Generate a list of stack hogs'
->  	@echo  '  versioncheck    - Sanity check on version.h usage'
->  	@echo  '  includecheck    - Check for duplicate included header files'
->  	@echo  '  export_report   - List the usages of all exported symbols'
->  	@echo  '  headerdep       - Detect inclusion cycles in headers'
->  	@echo  '  coccicheck      - Check with Coccinelle'
->  	@echo  '  clang-analyzer  - Check with clang static analyzer'
->  	@echo  '  clang-tidy      - Check with clang-tidy'
-> +	@echo  '  clang-tidy-fix  - Check and fix with clang-tidy'
-
-A pity the ordering of the code below isn't the same as the above.
-
-> -PHONY += clang-tidy clang-analyzer
-> +PHONY += clang-tidy-fix clang-tidy clang-analyzer
-[]
-> -clang-tidy clang-analyzer: $(extmod-prefix)compile_commands.json
-> +clang-tidy-fix clang-tidy clang-analyzer: $(extmod-prefix)compile_commands.json
->  	$(call cmd,clang_tools)
->  else
-> -clang-tidy clang-analyzer:
-> +clang-tidy-fix clang-tidy clang-analyzer:
-
-[]
-
-> diff --git a/scripts/clang-tools/run-clang-tools.py b/scripts/clang-tools/run-clang-tools.py
-[]
-> @@ -22,43 +22,57 @@ def parse_arguments():
-[]
->      parser.add_argument("type",
-> -                        choices=["clang-tidy", "clang-analyzer"],
-> +                        choices=["clang-tidy-fix", "clang-tidy", "clang-analyzer"],
-
-etc...
 
 
