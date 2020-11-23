@@ -2,28 +2,28 @@ Return-Path: <SRS0=yIb1=E5=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4119EC63697
-	for <xen-devel@archiver.kernel.org>; Mon, 23 Nov 2020 17:06:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 97C24C2D0E4
+	for <xen-devel@archiver.kernel.org>; Mon, 23 Nov 2020 17:08:31 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BA8DE206E3
-	for <xen-devel@archiver.kernel.org>; Mon, 23 Nov 2020 17:06:37 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 20C9D206B6
+	for <xen-devel@archiver.kernel.org>; Mon, 23 Nov 2020 17:08:31 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="BtEofZ03"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BA8DE206E3
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
+	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="o9FNcy3z"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 20C9D206B6
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.34873.66129 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.34886.66152 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khFI7-0002FA-8A; Mon, 23 Nov 2020 17:06:15 +0000
+	id 1khFK7-0002Wj-1b; Mon, 23 Nov 2020 17:08:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 34873.66129; Mon, 23 Nov 2020 17:06:15 +0000
+Received: by outflank-mailman (output) from mailman id 34886.66152; Mon, 23 Nov 2020 17:08:19 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,174 +38,80 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khFI7-0002F3-4m; Mon, 23 Nov 2020 17:06:15 +0000
-Received: by outflank-mailman (input) for mailman id 34873;
- Mon, 23 Nov 2020 17:06:14 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1khFK6-0002Wc-UZ; Mon, 23 Nov 2020 17:08:18 +0000
+Received: by outflank-mailman (input) for mailman id 34886;
+ Mon, 23 Nov 2020 17:08:17 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=2ut/=E5=redhat.com=trix@srs-us1.protection.inumbo.net>)
- id 1khFI5-0002Ey-UJ
- for xen-devel@lists.xenproject.org; Mon, 23 Nov 2020 17:06:14 +0000
-Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id 2e3560cf-3647-426e-9b95-86125a1de11e;
- Mon, 23 Nov 2020 17:06:11 +0000 (UTC)
-Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
- [209.85.219.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-177-wZephkW_NCajj8fxvey0QQ-1; Mon, 23 Nov 2020 12:06:09 -0500
-Received: by mail-qv1-f72.google.com with SMTP id t14so13427563qvc.13
- for <xen-devel@lists.xenproject.org>; Mon, 23 Nov 2020 09:06:09 -0800 (PST)
-Received: from trix.remote.csb (075-142-250-213.res.spectrum.com.
- [75.142.250.213])
- by smtp.gmail.com with ESMTPSA id o187sm10226153qkb.120.2020.11.23.09.06.04
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 23 Nov 2020 09:06:07 -0800 (PST)
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+ (envelope-from <iwj@xenproject.org>) id 1khFK5-0002WW-Sd
+ for xen-devel@lists.xenproject.org; Mon, 23 Nov 2020 17:08:17 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <iwj@xenproject.org>) id 1khFK5-0005nQ-RE
+ for xen-devel@lists.xenproject.org; Mon, 23 Nov 2020 17:08:17 +0000
+Received: from iwj (helo=mynotebook.example.org)
+ by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
+ (envelope-from <iwj@xenproject.org>) id 1khFK5-0005xo-QS
+ for xen-devel@lists.xenproject.org; Mon, 23 Nov 2020 17:08:17 +0000
+Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
+ (envelope-from <iwj@xenproject.org>)
+ id 1khFJx-0004JM-Rg; Mon, 23 Nov 2020 17:08:09 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=2ut/=E5=redhat.com=trix@srs-us1.protection.inumbo.net>)
-	id 1khFI5-0002Ey-UJ
-	for xen-devel@lists.xenproject.org; Mon, 23 Nov 2020 17:06:14 +0000
-X-Inumbo-ID: 2e3560cf-3647-426e-9b95-86125a1de11e
-Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
-	id 2e3560cf-3647-426e-9b95-86125a1de11e;
-	Mon, 23 Nov 2020 17:06:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1606151171;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=ETdBmUCF01QVQJOZ+sQu9TUGQeVKu9xOEmE1E5gBvfU=;
-	b=BtEofZ03By1sp6OyH8lSI6IT4Bb/Q48OsWV2XnBXmdgQcceGh9rKSaQV86czSHO4W4CJHn
-	vUaUaH4n0l1WmtKl1NY4JjZQEtZdHR6F0okj/kLdyZp+LnqjvTzaYPmjipu9+IS6RcbTNg
-	lanzsvwsZXvmVS2IMlU/0SstZMlkjqs=
-Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
- [209.85.219.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-177-wZephkW_NCajj8fxvey0QQ-1; Mon, 23 Nov 2020 12:06:09 -0500
-X-MC-Unique: wZephkW_NCajj8fxvey0QQ-1
-Received: by mail-qv1-f72.google.com with SMTP id t14so13427563qvc.13
-        for <xen-devel@lists.xenproject.org>; Mon, 23 Nov 2020 09:06:09 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-transfer-encoding
-         :content-language;
-        bh=ETdBmUCF01QVQJOZ+sQu9TUGQeVKu9xOEmE1E5gBvfU=;
-        b=AFnjmI7l7Q/wflePjF28tRpUmuHqwFuAEMfgQf6zReXwgPd6W0bGksYGHW8WPPF+FD
-         lseisESDouCSBLmWzJEP7KSW1IYcn7xaPgMPN2E9a8unX4WJdnkfa13Zcg8fl14lADYC
-         /ABwwjn5kqbg21sWbeLtcAZTkH2OaIyMhdCPJgH9WgI5cucL1k6EgOAHBLErjVLgfLux
-         h8mKLHjymDuLdrxp6Hd+UmzwaWeaB15VmqLriZdbNhc7EkU+6NT9FkoH01Ary5S+H7bM
-         IOI9Im857Zu5NgFYlI+0MzQlkL08VoWW3v2MBF5Ue+mEP+4n8RXOJcrEyYY0poDy4gYC
-         K5mQ==
-X-Gm-Message-State: AOAM530UWmKadx6MQovM+uFYaF4CMwhi1iIjzE1JxEaSSlnU150yDQew
-	MxxlXKUPJWRpecmbgAfN7FPpv6zPCBBPFLrnTOaR1aU5CrRXy1fnERJD+pQNrafugvx7Cr4YB2x
-	Ih3sCdhTLTwameb6xAD8xIo6z0Kg=
-X-Received: by 2002:ac8:5d53:: with SMTP id g19mr70868qtx.354.1606151168818;
-        Mon, 23 Nov 2020 09:06:08 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJwHR8oVpP3xv7xpCkK6lH4mawBfXgRI3GL2dEiLGp13/vfLrDKV7SBtsWnvpv2iFDtHltekRw==
-X-Received: by 2002:ac8:5d53:: with SMTP id g19mr70839qtx.354.1606151168572;
-        Mon, 23 Nov 2020 09:06:08 -0800 (PST)
-Received: from trix.remote.csb (075-142-250-213.res.spectrum.com. [75.142.250.213])
-        by smtp.gmail.com with ESMTPSA id o187sm10226153qkb.120.2020.11.23.09.06.04
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 23 Nov 2020 09:06:07 -0800 (PST)
-Subject: Re: [RFC] MAINTAINERS tag for cleanup robot
-To: Joe Perches <joe@perches.com>, clang-built-linux@googlegroups.com
-Cc: linux-hyperv@vger.kernel.org, linux-kernel@vger.kernel.org,
- xen-devel@lists.xenproject.org, tboot-devel@lists.sourceforge.net,
- kvm@vger.kernel.org, linux-crypto@vger.kernel.org,
- linux-acpi@vger.kernel.org, devel@acpica.org, amd-gfx@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- netdev@vger.kernel.org, linux-media@vger.kernel.org,
- MPT-FusionLinux.pdl@broadcom.com, linux-scsi@vger.kernel.org,
- linux-wireless@vger.kernel.org, ibm-acpi-devel@lists.sourceforge.net,
- platform-driver-x86@vger.kernel.org, linux-usb@vger.kernel.org,
- linux-omap@vger.kernel.org, linux-fbdev@vger.kernel.org,
- ecryptfs@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- cluster-devel@redhat.com, linux-mtd@lists.infradead.org,
- keyrings@vger.kernel.org, netfilter-devel@vger.kernel.org,
- coreteam@netfilter.org, alsa-devel@alsa-project.org, bpf@vger.kernel.org,
- linux-bluetooth@vger.kernel.org, linux-nfs@vger.kernel.org,
- patches@opensource.cirrus.com
-References: <20201121165058.1644182-1-trix@redhat.com>
- <2105f0c05e9eae8bee8e17dcc5314474b3c0bc73.camel@perches.com>
- <6e8c1926-4209-8f10-d0f9-72c875a85a88@redhat.com>
- <859bae8ddae3238116824192f6ddf1c91a381913.camel@perches.com>
-From: Tom Rix <trix@redhat.com>
-Message-ID: <88eeba27-ee36-df63-8cd9-3cccbe5e0850@redhat.com>
-Date: Mon, 23 Nov 2020 09:06:03 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.0
+	(envelope-from <iwj@xenproject.org>)
+	id 1khFK5-0002WW-Sd
+	for xen-devel@lists.xenproject.org; Mon, 23 Nov 2020 17:08:17 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:Cc:To:Date
+	:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
+	bh=s7qzcMd4ZKa+8U82fxWH/zht3/KC7larJAj01W7JFbs=; b=o9FNcy3zazJrNTUvnc9Z49IdSe
+	yY/TD+EeMmZf7VbLH2a3YFcjwV64CyWXFi0O/1+bj3WGwNnZthf81Zx5VrHueH9EfYHEjDOhrgtcd
+	L+YL+KtRVu5DeAMUQcO9BeB77F8ZWmE46VV5O09J2njl9dgNj+2nnGmkOgL/G/cjP0ks=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+	by mail.xenproject.org with esmtp (Exim 4.92)
+	(envelope-from <iwj@xenproject.org>)
+	id 1khFK5-0005nQ-RE
+	for xen-devel@lists.xenproject.org; Mon, 23 Nov 2020 17:08:17 +0000
+Received: from iwj (helo=mynotebook.example.org)
+	by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
+	(envelope-from <iwj@xenproject.org>)
+	id 1khFK5-0005xo-QS
+	for xen-devel@lists.xenproject.org; Mon, 23 Nov 2020 17:08:17 +0000
+Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
+	(envelope-from <iwj@xenproject.org>)
+	id 1khFJx-0004JM-Rg; Mon, 23 Nov 2020 17:08:09 +0000
+From: Ian Jackson <iwj@xenproject.org>
 MIME-Version: 1.0
-In-Reply-To: <859bae8ddae3238116824192f6ddf1c91a381913.camel@perches.com>
-Authentication-Results: relay.mimecast.com;
-	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=trix@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+Message-ID: <24507.60537.640007.567348@mariner.uk.xensource.com>
+Date: Mon, 23 Nov 2020 17:08:09 +0000
+To: George Dunlap <george.dunlap@citrix.com>,
+    Juergen Gross <jgross@suse.com>,
+    Wei Liu <wl@xen.org>,
+    Paul Durrant <paul@xen.org>
+Cc: <xen-devel@lists.xenproject.org>,
+    Andrew Cooper <andrew.cooper3@citrix.com>,
+    Jan Beulich <jbeulich@suse.com>,
+    Roger Pau Monne <roger.pau@citrix.com>,
+    Stefano Stabellini <sstabellini@kernel.org>,
+    "Julien  Grall" <julien@xen.org>
+Subject: Re: [PATCH] MAINTINERS: Propose Ian Jackson as new release manager
+In-Reply-To: <20201123160400.1273386-1-george.dunlap@citrix.com>
+References: <20201123160400.1273386-1-george.dunlap@citrix.com>
+X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
 
+George Dunlap writes ("[PATCH] MAINTINERS: Propose Ian Jackson as new release manager"):
+> Ian Jackson has agreed to be the release manager for 4.15.  Signify
+> this by giving him maintainership over CHANGELOG.md.
 
-On 11/22/20 10:22 AM, Joe Perches wrote:
-> On Sun, 2020-11-22 at 08:33 -0800, Tom Rix wrote:
->> On 11/21/20 9:10 AM, Joe Perches wrote:
->>> On Sat, 2020-11-21 at 08:50 -0800, trix@redhat.com wrote:
->>>> A difficult part of automating commits is composing the subsystem
->>>> preamble in the commit log.  For the ongoing effort of a fixer producing
->>>> one or two fixes a release the use of 'treewide:' does not seem appropriate.
->>>>
->>>> It would be better if the normal prefix was used.  Unfortunately normal is
->>>> not consistent across the tree.
->>>>
->>>> So I am looking for comments for adding a new tag to the MAINTAINERS file
->>>>
->>>> 	D: Commit subsystem prefix
->>>>
->>>> ex/ for FPGA DFL DRIVERS
->>>>
->>>> 	D: fpga: dfl:
->>> I'm all for it.  Good luck with the effort.  It's not completely trivial.
->>>
->>> From a decade ago:
->>>
->>> https://lore.kernel.org/lkml/1289919077.28741.50.camel@Joe-Laptop/
->>>
->>> (and that thread started with extra semicolon patches too)
->> Reading the history, how about this.
->>
->> get_maintainer.pl outputs a single prefix, if multiple files have the
->> same prefix it works, if they don't its an error.
->>
->> Another script 'commit_one_file.sh' does the call to get_mainainter.pl
->> to get the prefix and be called by run-clang-tools.py to get the fixer
->> specific message.
-> It's not whether the script used is get_maintainer or any other script,
-> the question is really if the MAINTAINERS file is the appropriate place
-> to store per-subsystem patch specific prefixes.
->
-> It is.
->
-> Then the question should be how are the forms described and what is the
-> inheritance priority.  My preference would be to have a default of
-> inherit the parent base and add basename(subsystem dirname).
->
-> Commit history seems to have standardized on using colons as the separator
-> between the commit prefix and the subject.
->
-> A good mechanism to explore how various subsystems have uses prefixes in
-> the past might be something like:
->
-> $ git log --no-merges --pretty='%s' -<commit_count> <subsystem_path> | \
->   perl -n -e 'print substr($_, 0, rindex($_, ":") + 1) . "\n";' | \
->   sort | uniq -c | sort -rn
+Acked-by: Ian Jackson <ian.jackson@eu.citrix.com>
 
-Thanks, I have shamelessly stolen this line and limited the commits to the maintainer.
+Obviously that signifies my consent but I think it needs more acks.
 
-I will post something once the generation of the prefixes is done.
+Wei, Juergen, Paul, I think I am likely to ask you some questions.
+Any tips etc would be welcome.
 
-Tom
-
+Thanks,
+Ian.
 
