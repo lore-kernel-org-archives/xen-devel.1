@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 44984C63777
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A13FBC63697
 	for <xen-devel@archiver.kernel.org>; Mon, 23 Nov 2020 17:45:26 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BA66F2076E
-	for <xen-devel@archiver.kernel.org>; Mon, 23 Nov 2020 17:45:25 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 2988820756
+	for <xen-devel@archiver.kernel.org>; Mon, 23 Nov 2020 17:45:26 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="19D3PZ71"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BA66F2076E
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="o+392nWl"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2988820756
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.34934.66302 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.34929.66247 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khFts-0006ZU-65; Mon, 23 Nov 2020 17:45:16 +0000
+	id 1khFtn-0006Nm-Uw; Mon, 23 Nov 2020 17:45:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 34934.66302; Mon, 23 Nov 2020 17:45:16 +0000
+Received: by outflank-mailman (output) from mailman id 34929.66247; Mon, 23 Nov 2020 17:45:11 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,159 +38,94 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khFtr-0006YP-I1; Mon, 23 Nov 2020 17:45:15 +0000
-Received: by outflank-mailman (input) for mailman id 34934;
- Mon, 23 Nov 2020 17:45:09 +0000
+	id 1khFtn-0006NM-JH; Mon, 23 Nov 2020 17:45:11 +0000
+Received: by outflank-mailman (input) for mailman id 34929;
+ Mon, 23 Nov 2020 17:45:08 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>) id 1khFtl-0006JQ-NJ
- for xen-devel@lists.xenproject.org; Mon, 23 Nov 2020 17:45:09 +0000
+ (envelope-from <paul@xen.org>) id 1khFtk-0006Ir-NR
+ for xen-devel@lists.xenproject.org; Mon, 23 Nov 2020 17:45:08 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1khFtk-0006Yo-6k; Mon, 23 Nov 2020 17:45:08 +0000
+ id 1khFtj-0006YV-L4; Mon, 23 Nov 2020 17:45:07 +0000
 Received: from ec2-54-145-241-208.compute-1.amazonaws.com ([54.145.241.208]
  helo=ip-10-0-29-170.ec2.internal)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1khFtk-0000at-4G; Mon, 23 Nov 2020 17:45:08 +0000
+ id 1khFtj-0000at-HN; Mon, 23 Nov 2020 17:45:07 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1khFtl-0006JQ-NJ
-	for xen-devel@lists.xenproject.org; Mon, 23 Nov 2020 17:45:09 +0000
+	id 1khFtk-0006Ir-NR
+	for xen-devel@lists.xenproject.org; Mon, 23 Nov 2020 17:45:08 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	 bh=gOoYvYBdUT6Nx0tE3SEPd8rpiDKo5xSEp4PAlyL6C2k=; b=19D3PZ71froCvMd0/cWe6upTV
-	8yrsNLXtTcsFgdxmsyayoYwCnORvsSAhizZq4SVB6Sfxsh0AvG/VYvbx8apzcJ095obQNdJPsi0/Z
-	4Cox3BzkjsppqniWq2t2Yvf8o1zOGzbjtB72FGjzxPmHiL3P9xNQdw6We9WkRJKW+vxRQ=;
+	 bh=dpUixXjI/I4QIesMLF+10yxwU7Nt8aYiH/KlAxrUXlM=; b=o+392nWlICupgPcT/zrNrfMCS
+	/ycRGM7S2GfEgkxNlTwlOMQxjZ+CA16dawSkPJRpIelIMUxYl8TxZU2eSArY0FPM0v/geuYKi22K1
+	Qw5CawOnvsIbLpkpVXCyARhNLIghJcajAOLzURbtici+MdeN+aX6io4wr9g8gxUrqxPSI=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
 	by mail.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1khFtk-0006Yo-6k; Mon, 23 Nov 2020 17:45:08 +0000
+	id 1khFtj-0006YV-L4; Mon, 23 Nov 2020 17:45:07 +0000
 Received: from ec2-54-145-241-208.compute-1.amazonaws.com ([54.145.241.208] helo=ip-10-0-29-170.ec2.internal)
 	by xenbits.xenproject.org with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
 	(Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1khFtk-0000at-4G; Mon, 23 Nov 2020 17:45:08 +0000
+	id 1khFtj-0000at-HN; Mon, 23 Nov 2020 17:45:07 +0000
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: Paul Durrant <pdurrant@amazon.com>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v3 07/23] libxl: stop using aodev->device_config in libxl__device_pci_add()...
-Date: Mon, 23 Nov 2020 17:44:47 +0000
-Message-Id: <20201123174503.6800-8-paul@xen.org>
+Subject: [PATCH v3 04/23] libxl: add/recover 'rdm_policy' to/from PCI backend in xenstore
+Date: Mon, 23 Nov 2020 17:44:44 +0000
+Message-Id: <20201123174503.6800-5-paul@xen.org>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20201123174503.6800-1-paul@xen.org>
 References: <20201123174503.6800-1-paul@xen.org>
 
 From: Paul Durrant <pdurrant@amazon.com>
 
-... to hold a pointer to the device.
-
-There is already a 'pci' field in 'pci_add_state' so simply use that from
-the start. This also allows the 'pci' (#3) argument to be dropped from
-do_pci_add().
-
-NOTE: This patch also changes the type of the 'pci_domid' field in
-      'pci_add_state' from 'int' to 'libxl_domid' which is more appropriate
-      given what the field is used for.
+Other parameters, such as 'msitranslate' and 'permissive' are dealt with
+but 'rdm_policy' appears to be have been completely missed.
 
 Signed-off-by: Paul Durrant <pdurrant@amazon.com>
 ---
 Cc: Ian Jackson <iwj@xenproject.org>
 Cc: Wei Liu <wl@xen.org>
 ---
- tools/libs/light/libxl_pci.c | 19 +++++++------------
- 1 file changed, 7 insertions(+), 12 deletions(-)
+ tools/libs/light/libxl_pci.c | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
 
 diff --git a/tools/libs/light/libxl_pci.c b/tools/libs/light/libxl_pci.c
-index 41e4b2b571..77edd27345 100644
+index da01c77ba2..50c96cbfa6 100644
 --- a/tools/libs/light/libxl_pci.c
 +++ b/tools/libs/light/libxl_pci.c
-@@ -1074,7 +1074,7 @@ typedef struct pci_add_state {
-     libxl__ev_qmp qmp;
-     libxl__ev_time timeout;
-     libxl_device_pci *pci;
--    int pci_domid;
-+    libxl_domid pci_domid;
- } pci_add_state;
+@@ -61,9 +61,9 @@ static void libxl_create_pci_backend_device(libxl__gc *gc,
+         flexarray_append_pair(back, GCSPRINTF("vdevfn-%d", num), GCSPRINTF("%x", pci->vdevfn));
+     flexarray_append(back, GCSPRINTF("opts-%d", num));
+     flexarray_append(back,
+-              GCSPRINTF("msitranslate=%d,power_mgmt=%d,permissive=%d",
+-                             pci->msitranslate, pci->power_mgmt,
+-                             pci->permissive));
++              GCSPRINTF("msitranslate=%d,power_mgmt=%d,permissive=%d,rdm_policy=%s",
++                        pci->msitranslate, pci->power_mgmt,
++                        pci->permissive, libxl_rdm_reserve_policy_to_string(pci->rdm_policy)));
+     flexarray_append_pair(back, GCSPRINTF("state-%d", num), GCSPRINTF("%d", XenbusStateInitialising));
+ }
  
- static void pci_add_qemu_trad_watch_state_cb(libxl__egc *egc,
-@@ -1091,7 +1091,6 @@ static void pci_add_dm_done(libxl__egc *,
- 
- static void do_pci_add(libxl__egc *egc,
-                        libxl_domid domid,
--                       libxl_device_pci *pci,
-                        pci_add_state *pas)
- {
-     STATE_AO_GC(pas->aodev->ao);
-@@ -1101,7 +1100,6 @@ static void do_pci_add(libxl__egc *egc,
-     /* init pci_add_state */
-     libxl__xswait_init(&pas->xswait);
-     libxl__ev_qmp_init(&pas->qmp);
--    pas->pci = pci;
-     pas->pci_domid = domid;
-     libxl__ev_time_init(&pas->timeout);
- 
-@@ -1564,13 +1562,10 @@ void libxl__device_pci_add(libxl__egc *egc, uint32_t domid,
-     int stubdomid = 0;
-     pci_add_state *pas;
- 
--    /* Store *pci to be used by callbacks */
--    aodev->device_config = pci;
--    aodev->device_type = &libxl__pci_devtype;
--
-     GCNEW(pas);
-     pas->aodev = aodev;
-     pas->domid = domid;
-+    pas->pci = pci;
-     pas->starting = starting;
-     pas->callback = device_pci_add_stubdom_done;
- 
-@@ -1624,9 +1619,10 @@ void libxl__device_pci_add(libxl__egc *egc, uint32_t domid,
-         GCNEW(pci_s);
-         libxl_device_pci_init(pci_s);
-         libxl_device_pci_copy(CTX, pci_s, pci);
-+        pas->pci = pci_s;
-         pas->callback = device_pci_add_stubdom_wait;
- 
--        do_pci_add(egc, stubdomid, pci_s, pas); /* must be last */
-+        do_pci_add(egc, stubdomid, pas); /* must be last */
-         return;
-     }
- 
-@@ -1681,9 +1677,8 @@ static void device_pci_add_stubdom_done(libxl__egc *egc,
-     int i;
- 
-     /* Convenience aliases */
--    libxl__ao_device *aodev = pas->aodev;
-     libxl_domid domid = pas->domid;
--    libxl_device_pci *pci = aodev->device_config;
-+    libxl_device_pci *pci = pas->pci;
- 
-     if (rc) goto out;
- 
-@@ -1718,7 +1713,7 @@ static void device_pci_add_stubdom_done(libxl__egc *egc,
-                 pci->vdevfn = orig_vdev;
+@@ -2374,6 +2374,9 @@ static int libxl__device_pci_from_xs_be(libxl__gc *gc,
+             } else if (!strcmp(p, "permissive")) {
+                 p = strtok_r(NULL, ",=", &saveptr);
+                 pci->permissive = atoi(p);
++            } else if (!strcmp(p, "rdm_policy")) {
++                p = strtok_r(NULL, ",=", &saveptr);
++                libxl_rdm_reserve_policy_from_string(p, &pci->rdm_policy);
              }
-             pas->callback = device_pci_add_done;
--            do_pci_add(egc, domid, pci, pas); /* must be last */
-+            do_pci_add(egc, domid, pas); /* must be last */
-             return;
-         }
+         } while ((p = strtok_r(NULL, ",=", &saveptr)) != NULL);
      }
-@@ -1734,7 +1729,7 @@ static void device_pci_add_done(libxl__egc *egc,
-     EGC_GC;
-     libxl__ao_device *aodev = pas->aodev;
-     libxl_domid domid = pas->domid;
--    libxl_device_pci *pci = aodev->device_config;
-+    libxl_device_pci *pci = pas->pci;
- 
-     if (rc) {
-         LOGD(ERROR, domid,
 -- 
 2.11.0
 
