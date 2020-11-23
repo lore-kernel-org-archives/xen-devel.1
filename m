@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-17.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 93547C56202
-	for <xen-devel@archiver.kernel.org>; Mon, 23 Nov 2020 14:31:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 66BE1C56202
+	for <xen-devel@archiver.kernel.org>; Mon, 23 Nov 2020 14:32:22 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 332332083E
-	for <xen-devel@archiver.kernel.org>; Mon, 23 Nov 2020 14:31:35 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id EE0E720781
+	for <xen-devel@archiver.kernel.org>; Mon, 23 Nov 2020 14:32:21 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="rwSZO9BP"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 332332083E
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="RYldOfDT"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EE0E720781
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.34483.65580 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.34492.65592 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khCsF-0000Ct-7a; Mon, 23 Nov 2020 14:31:23 +0000
+	id 1khCsv-0000Mr-I3; Mon, 23 Nov 2020 14:32:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 34483.65580; Mon, 23 Nov 2020 14:31:23 +0000
+Received: by outflank-mailman (output) from mailman id 34492.65592; Mon, 23 Nov 2020 14:32:05 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,54 +38,53 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khCsF-0000Cl-4V; Mon, 23 Nov 2020 14:31:23 +0000
-Received: by outflank-mailman (input) for mailman id 34483;
- Mon, 23 Nov 2020 14:31:21 +0000
+	id 1khCsv-0000Mk-Ex; Mon, 23 Nov 2020 14:32:05 +0000
+Received: by outflank-mailman (input) for mailman id 34492;
+ Mon, 23 Nov 2020 14:32:04 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=qJrE=E5=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1khCsD-0000Ce-T1
- for xen-devel@lists.xenproject.org; Mon, 23 Nov 2020 14:31:21 +0000
+ id 1khCsu-0000Ma-AR
+ for xen-devel@lists.xenproject.org; Mon, 23 Nov 2020 14:32:04 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 24754e3a-a5a6-41cf-8762-b3a6221cee56;
- Mon, 23 Nov 2020 14:31:21 +0000 (UTC)
+ id f2efc230-2365-4696-8c19-d6b22003b213;
+ Mon, 23 Nov 2020 14:32:03 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 2EACAACD5;
- Mon, 23 Nov 2020 14:31:20 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 8CE42AC23;
+ Mon, 23 Nov 2020 14:32:02 +0000 (UTC)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=qJrE=E5=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
-	id 1khCsD-0000Ce-T1
-	for xen-devel@lists.xenproject.org; Mon, 23 Nov 2020 14:31:21 +0000
-X-Inumbo-ID: 24754e3a-a5a6-41cf-8762-b3a6221cee56
+	id 1khCsu-0000Ma-AR
+	for xen-devel@lists.xenproject.org; Mon, 23 Nov 2020 14:32:04 +0000
+X-Inumbo-ID: f2efc230-2365-4696-8c19-d6b22003b213
 Received: from mx2.suse.de (unknown [195.135.220.15])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 24754e3a-a5a6-41cf-8762-b3a6221cee56;
-	Mon, 23 Nov 2020 14:31:21 +0000 (UTC)
+	id f2efc230-2365-4696-8c19-d6b22003b213;
+	Mon, 23 Nov 2020 14:32:03 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1606141880; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1606141922; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=IsGbx7nHAowOELB1I3S+0clwo01gLUbz8o/IEuZBhpE=;
-	b=rwSZO9BPFZHHcFHWKBUzLbQPaBugEUg808iZMW88IY0qavsHxBEnfIvAMiZ2+btxdPkBCF
-	RUBcemqpJHiZ3FwEEqKIC65HjJiEdnveeq+X4TLWmkZwURhovAPfdemP7HL0HKN1nfID/0
-	W6v/VmD7k9T7/MtMlXdRkCALwfeLldA=
+	bh=C/br/wr1vs+jHb0x3GkA7iy/FWtl0oeRJ/XrBSDPWX4=;
+	b=RYldOfDTrJG4kDD9DBVRUMeZ15TD7Kb42zNBgJWfT7PiW5bCU8aKw8miOwPLVPiTT+pJhk
+	gcvMOtZB6oOfEldfRSiLRmP0YivGRBCy50GMZmFhPJ0j3/zSWw99jSErv7x0p/YLJgQtzB
+	YdWuIvZzK9QquxX0tZWsCoGKx1CqXNE=
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 2EACAACD5;
-	Mon, 23 Nov 2020 14:31:20 +0000 (UTC)
-Subject: [PATCH v2 09/17] x86: use xvmalloc() for extended context buffer
- allocations
+	by mx2.suse.de (Postfix) with ESMTP id 8CE42AC23;
+	Mon, 23 Nov 2020 14:32:02 +0000 (UTC)
+Subject: [PATCH v2 10/17] x86/xstate: enable AMX components
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  George Dunlap <george.dunlap@citrix.com>, Wei Liu <wl@xen.org>,
  =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 References: <255f466c-3c95-88c5-3e55-0f04c9ae1b12@suse.com>
-Message-ID: <1e352dd9-016c-d15e-c1bb-64fb28df8b73@suse.com>
-Date: Mon, 23 Nov 2020 15:31:19 +0100
+Message-ID: <5490ecab-8fe1-aa46-95e0-4ad6c6318879@suse.com>
+Date: Mon, 23 Nov 2020 15:32:01 +0100
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.5.0
 MIME-Version: 1.0
@@ -94,140 +93,117 @@ Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
-This is in preparation for the buffer sizes exceeding a page's worth of
-space, as will happen with AMX as well as Architectural LBR.
+These being controlled by XCR0, enabling support is relatively
+straightforward. Note however that there won't be any use of them until
+their dependent ISA extension CPUID flags get exposed, not the least due
+to the way recalculate_xstate() handles the dependencies in kind of a
+reverse manner.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 ---
 v2: New.
 
---- a/xen/arch/x86/domctl.c
-+++ b/xen/arch/x86/domctl.c
-@@ -30,6 +30,7 @@
- #include <xsm/xsm.h>
- #include <xen/iommu.h>
- #include <xen/vm_event.h>
-+#include <xen/xvmalloc.h>
- #include <public/vm_event.h>
- #include <asm/mem_sharing.h>
- #include <asm/xstate.h>
-@@ -331,7 +332,7 @@ long arch_do_domctl(
-             goto sethvmcontext_out;
+--- a/tools/libs/light/libxl_cpuid.c
++++ b/tools/libs/light/libxl_cpuid.c
+@@ -219,6 +219,9 @@ int libxl_cpuid_parse_config(libxl_cpuid
+         {"md-clear",     0x00000007,  0, CPUID_REG_EDX, 10,  1},
+         {"serialize",    0x00000007,  0, CPUID_REG_EDX, 14,  1},
+         {"cet-ibt",      0x00000007,  0, CPUID_REG_EDX, 20,  1},
++        {"amx-bf16",     0x00000007,  0, CPUID_REG_EDX, 22,  1},
++        {"amx-tile",     0x00000007,  0, CPUID_REG_EDX, 24,  1},
++        {"amx-int8",     0x00000007,  0, CPUID_REG_EDX, 25,  1},
+         {"ibrsb",        0x00000007,  0, CPUID_REG_EDX, 26,  1},
+         {"stibp",        0x00000007,  0, CPUID_REG_EDX, 27,  1},
+         {"l1d-flush",    0x00000007,  0, CPUID_REG_EDX, 28,  1},
+--- a/tools/misc/xen-cpuid.c
++++ b/tools/misc/xen-cpuid.c
+@@ -167,7 +167,8 @@ static const char *const str_7d0[32] =
  
-         ret = -ENOMEM;
--        if ( (c.data = xmalloc_bytes(c.size)) == NULL )
-+        if ( (c.data = xvmalloc_bytes(c.size)) == NULL )
-             goto sethvmcontext_out;
- 
-         ret = -EFAULT;
-@@ -343,7 +344,7 @@ long arch_do_domctl(
-         domain_unpause(d);
- 
-     sethvmcontext_out:
--        xfree(c.data);
-+        xvfree(c.data);
-         break;
+     [18] = "pconfig",
+     [20] = "cet-ibt",
+-
++    [22] = "amx-bf16",
++    [24] = "amx-tile",      [25] = "amx-int8",
+     [26] = "ibrsb",         [27] = "stibp",
+     [28] = "l1d-flush",     [29] = "arch-caps",
+     [30] = "core-caps",     [31] = "ssbd",
+--- a/xen/arch/x86/cpuid.c
++++ b/xen/arch/x86/cpuid.c
+@@ -195,6 +195,14 @@ static void recalculate_xstate(struct cp
+                           xstate_size(X86_XCR0_PKRU_POS));
      }
  
-@@ -373,7 +374,7 @@ long arch_do_domctl(
++    if ( p->feat.amx_tile )
++    {
++        xstates |= X86_XCR0_TILECFG | X86_XCR0_TILEDATA;
++        xstate_size = max(xstate_size,
++                          xstate_offset(X86_XCR0_TILEDATA_POS) +
++                          xstate_size(X86_XCR0_TILEDATA_POS));
++    }
++
+     p->xstate.max_size  =  xstate_size;
+     p->xstate.xcr0_low  =  xstates & ~XSTATE_XSAVES_ONLY;
+     p->xstate.xcr0_high = (xstates & ~XSTATE_XSAVES_ONLY) >> 32;
+--- a/xen/arch/x86/xstate.c
++++ b/xen/arch/x86/xstate.c
+@@ -642,6 +642,10 @@ static bool valid_xcr0(uint64_t xcr0)
+     if ( !(xcr0 & X86_XCR0_BNDREGS) != !(xcr0 & X86_XCR0_BNDCSR) )
+         return false;
  
-         /* Allocate our own marshalling buffer */
-         ret = -ENOMEM;
--        if ( (c.data = xmalloc_bytes(c.size)) == NULL )
-+        if ( (c.data = xvmalloc_bytes(c.size)) == NULL )
-             goto gethvmcontext_out;
- 
-         domain_pause(d);
-@@ -386,7 +387,7 @@ long arch_do_domctl(
- 
-     gethvmcontext_out:
-         copyback = true;
--        xfree(c.data);
-+        xvfree(c.data);
-         break;
-     }
- 
-@@ -904,7 +905,7 @@ long arch_do_domctl(
-             if ( !ret && size > PV_XSAVE_HDR_SIZE )
-             {
-                 unsigned int xsave_size = size - PV_XSAVE_HDR_SIZE;
--                void *xsave_area = xmalloc_bytes(xsave_size);
-+                void *xsave_area = xvmalloc_bytes(xsave_size);
- 
-                 if ( !xsave_area )
-                 {
-@@ -918,7 +919,7 @@ long arch_do_domctl(
-                 if ( copy_to_guest_offset(evc->buffer, offset, xsave_area,
-                                           xsave_size) )
-                      ret = -EFAULT;
--                xfree(xsave_area);
-+                xvfree(xsave_area);
-            }
- 
-             vcpu_unpause(v);
-@@ -938,7 +939,7 @@ long arch_do_domctl(
-                  evc->size > PV_XSAVE_SIZE(xfeature_mask) )
-                 goto vcpuextstate_out;
- 
--            receive_buf = xmalloc_bytes(evc->size);
-+            receive_buf = xvmalloc_bytes(evc->size);
-             if ( !receive_buf )
-             {
-                 ret = -ENOMEM;
-@@ -948,7 +949,7 @@ long arch_do_domctl(
-                                         offset, evc->size) )
-             {
-                 ret = -EFAULT;
--                xfree(receive_buf);
-+                xvfree(receive_buf);
-                 goto vcpuextstate_out;
-             }
- 
-@@ -966,7 +967,7 @@ long arch_do_domctl(
-                 ret = 0;
-             if ( ret )
-             {
--                xfree(receive_buf);
-+                xvfree(receive_buf);
-                 goto vcpuextstate_out;
-             }
- 
-@@ -994,7 +995,7 @@ long arch_do_domctl(
-                 vcpu_unpause(v);
-             }
- 
--            xfree(receive_buf);
-+            xvfree(receive_buf);
-         }
- 
- #undef PV_XSAVE_HDR_SIZE
---- a/xen/arch/x86/hvm/save.c
-+++ b/xen/arch/x86/hvm/save.c
-@@ -23,6 +23,7 @@
- #include <xen/guest_access.h>
- #include <xen/softirq.h>
- #include <xen/version.h>
-+#include <xen/xvmalloc.h>
- 
- #include <asm/hvm/support.h>
- 
-@@ -154,7 +155,7 @@ int hvm_save_one(struct domain *d, unsig
-     else
-         v = d->vcpu[instance];
-     ctxt.size = hvm_sr_handlers[typecode].size;
--    ctxt.data = xmalloc_bytes(ctxt.size);
-+    ctxt.data = xvmalloc_bytes(ctxt.size);
-     if ( !ctxt.data )
-         return -ENOMEM;
- 
-@@ -200,7 +201,7 @@ int hvm_save_one(struct domain *d, unsig
-     else
-         domain_unpause(d);
- 
--    xfree(ctxt.data);
-+    xvfree(ctxt.data);
-     return rv;
++    /* TILECFG and TILEDATA must be the same. */
++    if ( !(xcr0 & X86_XCR0_TILECFG) != !(xcr0 & X86_XCR0_TILEDATA) )
++        return false;
++
+     return true;
  }
  
+--- a/xen/include/asm-x86/x86-defns.h
++++ b/xen/include/asm-x86/x86-defns.h
+@@ -96,6 +96,10 @@
+ #define X86_XCR0_HI_ZMM           (1ULL << X86_XCR0_HI_ZMM_POS)
+ #define X86_XCR0_PKRU_POS         9
+ #define X86_XCR0_PKRU             (1ULL << X86_XCR0_PKRU_POS)
++#define X86_XCR0_TILECFG_POS      17
++#define X86_XCR0_TILECFG          (1ULL << X86_XCR0_TILECFG_POS)
++#define X86_XCR0_TILEDATA_POS     18
++#define X86_XCR0_TILEDATA         (1ULL << X86_XCR0_TILEDATA_POS)
+ #define X86_XCR0_LWP_POS          62
+ #define X86_XCR0_LWP              (1ULL << X86_XCR0_LWP_POS)
+ 
+--- a/xen/include/public/arch-x86/cpufeatureset.h
++++ b/xen/include/public/arch-x86/cpufeatureset.h
+@@ -265,6 +265,9 @@ XEN_CPUFEATURE(MD_CLEAR,      9*32+10) /
+ XEN_CPUFEATURE(TSX_FORCE_ABORT, 9*32+13) /* MSR_TSX_FORCE_ABORT.RTM_ABORT */
+ XEN_CPUFEATURE(SERIALIZE,     9*32+14) /*a  SERIALIZE insn */
+ XEN_CPUFEATURE(CET_IBT,       9*32+20) /*   CET - Indirect Branch Tracking */
++XEN_CPUFEATURE(AMX_BF16,      9*32+22) /*   AMX BFloat16 instructions */
++XEN_CPUFEATURE(AMX_TILE,      9*32+24) /*   AMX tile architecture */
++XEN_CPUFEATURE(AMX_INT8,      9*32+25) /*   AMX 8-bit integer instructions */
+ XEN_CPUFEATURE(IBRSB,         9*32+26) /*A  IBRS and IBPB support (used by Intel) */
+ XEN_CPUFEATURE(STIBP,         9*32+27) /*A  STIBP */
+ XEN_CPUFEATURE(L1D_FLUSH,     9*32+28) /*S  MSR_FLUSH_CMD and L1D flush. */
+--- a/xen/tools/gen-cpuid.py
++++ b/xen/tools/gen-cpuid.py
+@@ -222,7 +222,7 @@ def crunch_numbers(state):
+         # instruction groups which are specified to require XSAVE for state
+         # management.
+         XSAVE: [XSAVEOPT, XSAVEC, XGETBV1, XSAVES,
+-                AVX, MPX, PKU, LWP],
++                AVX, MPX, PKU, AMX_TILE, LWP],
+ 
+         # AVX is taken to mean hardware support for 256bit registers (which in
+         # practice depends on the VEX prefix to encode), and the instructions
+@@ -288,6 +288,11 @@ def crunch_numbers(state):
+ 
+         # In principle the TSXLDTRK insns could also be considered independent.
+         RTM: [TSXLDTRK],
++
++        # AMX-TILE means hardware support for tile registers and general non-
++        # computational instructions.  All further AMX features are built on top
++        # of AMX-TILE.
++        AMX_TILE: [AMX_BF16, AMX_INT8],
+     }
+ 
+     deep_features = tuple(sorted(deps.keys()))
 
 
