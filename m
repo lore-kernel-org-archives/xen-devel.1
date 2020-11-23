@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7F462C63798
-	for <xen-devel@archiver.kernel.org>; Mon, 23 Nov 2020 18:01:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E705DC63697
+	for <xen-devel@archiver.kernel.org>; Mon, 23 Nov 2020 18:01:10 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0DA2C20758
-	for <xen-devel@archiver.kernel.org>; Mon, 23 Nov 2020 18:01:11 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 7525920758
+	for <xen-devel@archiver.kernel.org>; Mon, 23 Nov 2020 18:01:10 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="bKFYgvDL"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0DA2C20758
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="ZjNrMud0"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7525920758
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.35003.66332 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.35007.66374 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khG8s-0000nr-Un; Mon, 23 Nov 2020 18:00:46 +0000
+	id 1khG8u-0000r2-MO; Mon, 23 Nov 2020 18:00:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 35003.66332; Mon, 23 Nov 2020 18:00:46 +0000
+Received: by outflank-mailman (output) from mailman id 35007.66374; Mon, 23 Nov 2020 18:00:48 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,117 +38,293 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khG8s-0000na-NE; Mon, 23 Nov 2020 18:00:46 +0000
-Received: by outflank-mailman (input) for mailman id 35003;
+	id 1khG8u-0000qb-98; Mon, 23 Nov 2020 18:00:48 +0000
+Received: by outflank-mailman (input) for mailman id 35007;
  Mon, 23 Nov 2020 18:00:45 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>) id 1khG8r-0000m8-3s
+ (envelope-from <paul@xen.org>) id 1khG8r-0000mS-CJ
  for xen-devel@lists.xenproject.org; Mon, 23 Nov 2020 18:00:45 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1khG8q-00070l-9n; Mon, 23 Nov 2020 18:00:44 +0000
+ id 1khG8q-000717-L0; Mon, 23 Nov 2020 18:00:44 +0000
 Received: from ec2-54-145-241-208.compute-1.amazonaws.com ([54.145.241.208]
  helo=ip-10-0-29-170.ec2.internal)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1khFtn-0000at-Eg; Mon, 23 Nov 2020 17:45:11 +0000
+ id 1khFtk-0000at-NQ; Mon, 23 Nov 2020 17:45:08 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1khG8r-0000m8-3s
+	id 1khG8r-0000mS-CJ
 	for xen-devel@lists.xenproject.org; Mon, 23 Nov 2020 18:00:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	 bh=z+TBph7KfTXS8lKGFLMVlUTRo1VQXbbt6hL6Ha7NBXk=; b=bKFYgvDLuvdd90sf0SQRz7YZW
-	Gl3EccU45hARkXirfJb3fYJjKejcjZ2LAt1qj8UxFq4TL5XLSYVKhTrbkaMQj+3G5Rzi18zyTLpqA
-	1eu1mKFyY8v09JBzZiDlsm9JqB5cj5owkxMy4Him1rUH83JGowtmNq0f1ZHCwYq7uuIfU=;
+	 bh=cM4E5HSO7y4rsBvC0ulob6owEH5QJoWwuEB72xnydjQ=; b=ZjNrMud0il4tCG3UnQeRrha6J
+	UNx9VtQCsB/GoTbhyH/m7CLPhaiCk5fNeaW+TL3R66T4Vr0QGO+3KHWekt0c39Wpqovi0WicpArrG
+	4rpcan3fZ448ucPzuLZcYyo2eDy+mIBn1eZeKcMJp2LqBSRnANC8JRhfX8yXIz6d2uQqo=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
 	by mail.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1khG8q-00070l-9n; Mon, 23 Nov 2020 18:00:44 +0000
+	id 1khG8q-000717-L0; Mon, 23 Nov 2020 18:00:44 +0000
 Received: from ec2-54-145-241-208.compute-1.amazonaws.com ([54.145.241.208] helo=ip-10-0-29-170.ec2.internal)
 	by xenbits.xenproject.org with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
 	(Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1khFtn-0000at-Eg; Mon, 23 Nov 2020 17:45:11 +0000
+	id 1khFtk-0000at-NQ; Mon, 23 Nov 2020 17:45:08 +0000
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: Paul Durrant <pdurrant@amazon.com>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v3 22/23] docs/man: modify xl-pci-configuration(5) to add 'name' field to PCI_SPEC_STRING
-Date: Mon, 23 Nov 2020 17:45:02 +0000
-Message-Id: <20201123174503.6800-23-paul@xen.org>
+Subject: [PATCH v3 10/23] libxl: remove get_all_assigned_devices() from libxl_pci.c
+Date: Mon, 23 Nov 2020 17:44:50 +0000
+Message-Id: <20201123174503.6800-11-paul@xen.org>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20201123174503.6800-1-paul@xen.org>
 References: <20201123174503.6800-1-paul@xen.org>
 
 From: Paul Durrant <pdurrant@amazon.com>
 
-Since assignable devices can be named, a subsequent patch will support use
-of a PCI_SPEC_STRING containing a 'name' parameter instead of a 'bdf'. In
-this case the name will be used to look up the 'bdf' in the list of assignable
-(or assigned) devices.
+Use of this function is a very inefficient way to check whether a device
+has already been assigned.
+
+This patch adds code that saves the domain id in xenstore at the point of
+assignment, and removes it again when the device id de-assigned (or the
+domain is destroyed). It is then straightforward to check whether a device
+has been assigned by checking whether a device has a saved domain id.
+
+NOTE: To facilitate the xenstore check it is necessary to move the
+      pci_info_xs_read() earlier in libxl_pci.c. To keep related functions
+      together, the rest of the pci_info_xs_XXX() functions are moved too.
 
 Signed-off-by: Paul Durrant <pdurrant@amazon.com>
 ---
 Cc: Ian Jackson <iwj@xenproject.org>
 Cc: Wei Liu <wl@xen.org>
 ---
- docs/man/xl-pci-configuration.5.pod | 25 +++++++++++++++++++++++--
- 1 file changed, 23 insertions(+), 2 deletions(-)
+ tools/libs/light/libxl_pci.c | 149 ++++++++++++++++---------------------------
+ 1 file changed, 55 insertions(+), 94 deletions(-)
 
-diff --git a/docs/man/xl-pci-configuration.5.pod b/docs/man/xl-pci-configuration.5.pod
-index 4dd73bc498..db3360307c 100644
---- a/docs/man/xl-pci-configuration.5.pod
-+++ b/docs/man/xl-pci-configuration.5.pod
-@@ -51,7 +51,7 @@ is not specified, or if it is specified with an empty value (whether
- positionally or explicitly).
+diff --git a/tools/libs/light/libxl_pci.c b/tools/libs/light/libxl_pci.c
+index ec101f255f..d3c7a547c3 100644
+--- a/tools/libs/light/libxl_pci.c
++++ b/tools/libs/light/libxl_pci.c
+@@ -336,50 +336,6 @@ retry_transaction2:
+     return 0;
+ }
  
- B<NOTE>: In context of B<xl pci-detach> (see L<xl(1)>), parameters other than
--B<bdf> will be ignored.
-+B<bdf> or B<name> will be ignored.
+-static int get_all_assigned_devices(libxl__gc *gc, libxl_device_pci **list, int *num)
+-{
+-    char **domlist;
+-    unsigned int nd = 0, i;
+-
+-    *list = NULL;
+-    *num = 0;
+-
+-    domlist = libxl__xs_directory(gc, XBT_NULL, "/local/domain", &nd);
+-    for(i = 0; i < nd; i++) {
+-        char *path, *num_devs;
+-
+-        path = GCSPRINTF("/local/domain/0/backend/%s/%s/0/num_devs",
+-                         libxl__device_kind_to_string(LIBXL__DEVICE_KIND_PCI),
+-                         domlist[i]);
+-        num_devs = libxl__xs_read(gc, XBT_NULL, path);
+-        if ( num_devs ) {
+-            int ndev = atoi(num_devs), j;
+-            char *devpath, *bdf;
+-
+-            for(j = 0; j < ndev; j++) {
+-                devpath = GCSPRINTF("/local/domain/0/backend/%s/%s/0/dev-%u",
+-                                    libxl__device_kind_to_string(LIBXL__DEVICE_KIND_PCI),
+-                                    domlist[i], j);
+-                bdf = libxl__xs_read(gc, XBT_NULL, devpath);
+-                if ( bdf ) {
+-                    unsigned dom, bus, dev, func;
+-                    if ( sscanf(bdf, PCI_BDF, &dom, &bus, &dev, &func) != 4 )
+-                        continue;
+-
+-                    *list = realloc(*list, sizeof(libxl_device_pci) * ((*num) + 1));
+-                    if (*list == NULL)
+-                        return ERROR_NOMEM;
+-                    pci_struct_fill(*list + *num, dom, bus, dev, func, 0);
+-                    (*num)++;
+-                }
+-            }
+-        }
+-    }
+-    libxl__ptr_add(gc, *list);
+-
+-    return 0;
+-}
+-
+ static int is_pci_in_array(libxl_device_pci *assigned, int num_assigned,
+                            int dom, int bus, int dev, int func)
+ {
+@@ -427,19 +383,58 @@ static int sysfs_write_bdf(libxl__gc *gc, const char * sysfs_path,
+     return 0;
+ }
  
- =head1 Positional Parameters
- 
-@@ -70,7 +70,11 @@ B<*> to indicate all functions of a multi-function device.
- 
- =item Default Value
- 
--None. This parameter is mandatory as it identifies the device.
-+None. This parameter is mandatory in its positional form. As a non-positional
-+parameter it is also mandatory unless a B<name> parameter is present, in
-+which case B<bdf> must not be present since the B<name> will be used to find
-+the B<bdf> in the list of assignable devices. See L<xl(1)> for more information
-+on naming assignable devices.
- 
- =back
- 
-@@ -194,4 +198,21 @@ B<NOTE>: This overrides the global B<rdm> option.
- 
- =back
- 
-+=item B<name>=I<STRING>
++#define PCI_INFO_PATH "/libxl/pci"
 +
-+=over 4
++static char *pci_info_xs_path(libxl__gc *gc, libxl_device_pci *pci,
++                              const char *node)
++{
++    return node ?
++        GCSPRINTF(PCI_INFO_PATH"/"PCI_BDF_XSPATH"/%s",
++                  pci->domain, pci->bus, pci->dev, pci->func,
++                  node) :
++        GCSPRINTF(PCI_INFO_PATH"/"PCI_BDF_XSPATH,
++                  pci->domain, pci->bus, pci->dev, pci->func);
++}
 +
-+=item Description
 +
-+This is the name given when the B<BDF> was made assignable. See L<xl(1)> for
-+more information on naming assignable devices.
++static int pci_info_xs_write(libxl__gc *gc, libxl_device_pci *pci,
++                              const char *node, const char *val)
++{
++    char *path = pci_info_xs_path(gc, pci, node);
++    int rc = libxl__xs_printf(gc, XBT_NULL, path, "%s", val);
 +
-+=item Default Value
++    if (rc) LOGE(WARN, "Write of %s to node %s failed.", val, path);
 +
-+None. This parameter must not be present if a B<bdf> parameter is present.
-+If a B<bdf> parameter is not present then B<name> is mandatory as it is
-+required to look up the B<BDF> in the list of assignable devices.
++    return rc;
++}
 +
-+=back
++static char *pci_info_xs_read(libxl__gc *gc, libxl_device_pci *pci,
++                              const char *node)
++{
++    char *path = pci_info_xs_path(gc, pci, node);
 +
- =back
++    return libxl__xs_read(gc, XBT_NULL, path);
++}
++
++static void pci_info_xs_remove(libxl__gc *gc, libxl_device_pci *pci,
++                               const char *node)
++{
++    char *path = pci_info_xs_path(gc, pci, node);
++    libxl_ctx *ctx = libxl__gc_owner(gc);
++
++    /* Remove the xenstore entry */
++    xs_rm(ctx->xsh, XBT_NULL, path);
++}
++
+ libxl_device_pci *libxl_device_pci_assignable_list(libxl_ctx *ctx, int *num)
+ {
+     GC_INIT(ctx);
+-    libxl_device_pci *pcis = NULL, *new, *assigned;
++    libxl_device_pci *pcis = NULL, *new;
+     struct dirent *de;
+     DIR *dir;
+-    int r, num_assigned;
+ 
+     *num = 0;
+ 
+-    r = get_all_assigned_devices(gc, &assigned, &num_assigned);
+-    if (r) goto out;
+-
+     dir = opendir(SYSFS_PCIBACK_DRIVER);
+     if (NULL == dir) {
+         if (errno == ENOENT) {
+@@ -455,9 +450,6 @@ libxl_device_pci *libxl_device_pci_assignable_list(libxl_ctx *ctx, int *num)
+         if (sscanf(de->d_name, PCI_BDF, &dom, &bus, &dev, &func) != 4)
+             continue;
+ 
+-        if (is_pci_in_array(assigned, num_assigned, dom, bus, dev, func))
+-            continue;
+-
+         new = realloc(pcis, ((*num) + 1) * sizeof(*new));
+         if (NULL == new)
+             continue;
+@@ -467,6 +459,10 @@ libxl_device_pci *libxl_device_pci_assignable_list(libxl_ctx *ctx, int *num)
+ 
+         memset(new, 0, sizeof(*new));
+         pci_struct_fill(new, dom, bus, dev, func, 0);
++
++        if (pci_info_xs_read(gc, new, "domid")) /* already assigned */
++            continue;
++
+         (*num)++;
+     }
+ 
+@@ -737,48 +733,6 @@ static int pciback_dev_unassign(libxl__gc *gc, libxl_device_pci *pci)
+     return 0;
+ }
+ 
+-#define PCI_INFO_PATH "/libxl/pci"
+-
+-static char *pci_info_xs_path(libxl__gc *gc, libxl_device_pci *pci,
+-                              const char *node)
+-{
+-    return node ?
+-        GCSPRINTF(PCI_INFO_PATH"/"PCI_BDF_XSPATH"/%s",
+-                  pci->domain, pci->bus, pci->dev, pci->func,
+-                  node) :
+-        GCSPRINTF(PCI_INFO_PATH"/"PCI_BDF_XSPATH,
+-                  pci->domain, pci->bus, pci->dev, pci->func);
+-}
+-
+-
+-static void pci_info_xs_write(libxl__gc *gc, libxl_device_pci *pci,
+-                              const char *node, const char *val)
+-{
+-    char *path = pci_info_xs_path(gc, pci, node);
+-
+-    if ( libxl__xs_printf(gc, XBT_NULL, path, "%s", val) < 0 ) {
+-        LOGE(WARN, "Write of %s to node %s failed.", val, path);
+-    }
+-}
+-
+-static char *pci_info_xs_read(libxl__gc *gc, libxl_device_pci *pci,
+-                              const char *node)
+-{
+-    char *path = pci_info_xs_path(gc, pci, node);
+-
+-    return libxl__xs_read(gc, XBT_NULL, path);
+-}
+-
+-static void pci_info_xs_remove(libxl__gc *gc, libxl_device_pci *pci,
+-                               const char *node)
+-{
+-    char *path = pci_info_xs_path(gc, pci, node);
+-    libxl_ctx *ctx = libxl__gc_owner(gc);
+-
+-    /* Remove the xenstore entry */
+-    xs_rm(ctx->xsh, XBT_NULL, path);
+-}
+-
+ static int libxl__device_pci_assignable_add(libxl__gc *gc,
+                                             libxl_device_pci *pci,
+                                             int rebind)
+@@ -1594,6 +1548,9 @@ void libxl__device_pci_add(libxl__egc *egc, uint32_t domid,
+         goto out;
+     }
+ 
++    rc = pci_info_xs_write(gc, pci, "domid", GCSPRINTF("%u", domid));
++    if (rc) goto out;
++
+     libxl__device_pci_reset(gc, pci->domain, pci->bus, pci->dev, pci->func);
+ 
+     stubdomid = libxl_get_stubdom_id(ctx, domid);
+@@ -1721,6 +1678,7 @@ static void device_pci_add_done(libxl__egc *egc,
+              "PCI device %x:%x:%x.%x (rc %d)",
+              pci->domain, pci->bus, pci->dev, pci->func,
+              rc);
++        pci_info_xs_remove(gc, pci, "domid");
+     }
+     aodev->rc = rc;
+     aodev->callback(egc, aodev);
+@@ -2282,6 +2240,9 @@ out:
+     libxl__xswait_stop(gc, &prs->xswait);
+     libxl__ev_time_deregister(gc, &prs->timeout);
+     libxl__ev_time_deregister(gc, &prs->retry_timer);
++
++    if (!rc) pci_info_xs_remove(gc, pci, "domid");
++
+     aodev->rc = rc;
+     aodev->callback(egc, aodev);
+ }
 -- 
 2.11.0
 
