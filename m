@@ -2,28 +2,28 @@ Return-Path: <SRS0=yIb1=E5=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7D87EC64E7A
-	for <xen-devel@archiver.kernel.org>; Mon, 23 Nov 2020 18:01:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 96CC7C2D0E4
+	for <xen-devel@archiver.kernel.org>; Mon, 23 Nov 2020 18:27:41 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 053E7206B2
-	for <xen-devel@archiver.kernel.org>; Mon, 23 Nov 2020 18:01:12 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 0D5B62080A
+	for <xen-devel@archiver.kernel.org>; Mon, 23 Nov 2020 18:27:40 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="LX7dN7lq"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 053E7206B2
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="LvHzQOnP"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0D5B62080A
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.35015.66472 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.35114.66492 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khG93-0001Ez-Dy; Mon, 23 Nov 2020 18:00:57 +0000
+	id 1khGYa-0004KN-Gr; Mon, 23 Nov 2020 18:27:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 35015.66472; Mon, 23 Nov 2020 18:00:56 +0000
+Received: by outflank-mailman (output) from mailman id 35114.66492; Mon, 23 Nov 2020 18:27:20 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,489 +38,204 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khG92-0001Dp-B9; Mon, 23 Nov 2020 18:00:56 +0000
-Received: by outflank-mailman (input) for mailman id 35015;
- Mon, 23 Nov 2020 18:00:46 +0000
+	id 1khGYa-0004KG-Dn; Mon, 23 Nov 2020 18:27:20 +0000
+Received: by outflank-mailman (input) for mailman id 35114;
+ Mon, 23 Nov 2020 18:27:19 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>) id 1khG8r-0000n6-W1
- for xen-devel@lists.xenproject.org; Mon, 23 Nov 2020 18:00:45 +0000
+ (envelope-from <julien@xen.org>) id 1khGYZ-0004K8-GQ
+ for xen-devel@lists.xenproject.org; Mon, 23 Nov 2020 18:27:19 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>)
- id 1khG8q-00071L-Rf; Mon, 23 Nov 2020 18:00:44 +0000
-Received: from ec2-54-145-241-208.compute-1.amazonaws.com ([54.145.241.208]
- helo=ip-10-0-29-170.ec2.internal)
+ (envelope-from <julien@xen.org>)
+ id 1khGYX-0007a9-VS; Mon, 23 Nov 2020 18:27:17 +0000
+Received: from [54.239.6.185] (helo=a483e7b01a66.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
- (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <paul@xen.org>)
- id 1khFtn-0000at-8G; Mon, 23 Nov 2020 17:45:11 +0000
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1khGYX-0003rA-Jg; Mon, 23 Nov 2020 18:27:17 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <paul@xen.org>)
-	id 1khG8r-0000n6-W1
-	for xen-devel@lists.xenproject.org; Mon, 23 Nov 2020 18:00:45 +0000
+	(envelope-from <julien@xen.org>)
+	id 1khGYZ-0004K8-GQ
+	for xen-devel@lists.xenproject.org; Mon, 23 Nov 2020 18:27:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	 bh=g4vlrHOO7l/XQjq8yeT79RpnipWh6aBaWnJezRVSrUw=; b=LX7dN7lqiKt5xN25kuRAwlDME
-	7EwIhV9x95chJflfVcX6MxKsQ7+v5PefyuBMf6REgfCQfwOYcR6U7F0RCpALMn2J6uOmN1dYQGIUZ
-	KhCVVkE9aE27TptUeKIhYmDLjp9wIQoNC5IcrX/DVP+u3Q7KYX/OTxNc65Ya9lFyxGQ+U=;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+	bh=v8AYlSkV+k3q8JSiD8YvMwRTa5fXhluaknB6u6qK634=; b=LvHzQOnPsJEjHZwEzfec+omYV4
+	QCmj/yex+J0N13O5i7EOH7010nUidzredCawIlB+6hSsjVwzBdixgcsCkpxPb62RpfLmbCSdk9Ix9
+	i7f02EvB26axUZG9mh3Wb7OB6ap0VnBn15GRxRdVZ4VGNK3g7PKJl2UIZQ6xpRcLp7is=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
 	by mail.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <paul@xen.org>)
-	id 1khG8q-00071L-Rf; Mon, 23 Nov 2020 18:00:44 +0000
-Received: from ec2-54-145-241-208.compute-1.amazonaws.com ([54.145.241.208] helo=ip-10-0-29-170.ec2.internal)
-	by xenbits.xenproject.org with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+	(envelope-from <julien@xen.org>)
+	id 1khGYX-0007a9-VS; Mon, 23 Nov 2020 18:27:17 +0000
+Received: from [54.239.6.185] (helo=a483e7b01a66.ant.amazon.com)
+	by xenbits.xenproject.org with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
 	(Exim 4.92)
-	(envelope-from <paul@xen.org>)
-	id 1khFtn-0000at-8G; Mon, 23 Nov 2020 17:45:11 +0000
-From: Paul Durrant <paul@xen.org>
-To: xen-devel@lists.xenproject.org
-Cc: Paul Durrant <pdurrant@amazon.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>,
-	Christian Lindig <christian.lindig@citrix.com>,
-	David Scott <dave@recoil.org>,
-	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v3 21/23] xl / libxl: support naming of assignable devices
-Date: Mon, 23 Nov 2020 17:45:01 +0000
-Message-Id: <20201123174503.6800-22-paul@xen.org>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20201123174503.6800-1-paul@xen.org>
-References: <20201123174503.6800-1-paul@xen.org>
+	(envelope-from <julien@xen.org>)
+	id 1khGYX-0003rA-Jg; Mon, 23 Nov 2020 18:27:17 +0000
+Subject: Re: AW: AW: AW: AW: AW: Xen data from meta-virtualization layer
+To: Leo Krueger <leo.krueger@zal.aero>,
+ Stefano Stabellini <stefano.stabellini@xilinx.com>
+Cc: Peng Fan <peng.fan@nxp.com>, "brucea@xilinx.com" <brucea@xilinx.com>,
+ Cornelia Bruelhart <cornelia.bruelhart@zal.aero>,
+ "oleksandr_andrushchenko@epam.com" <oleksandr_andrushchenko@epam.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ "Bertrand.Marquis@arm.com" <Bertrand.Marquis@arm.com>
+References: <AM4PR0501MB2227089FDDF0209EF6E215D9E6100@AM4PR0501MB2227.eurprd05.prod.outlook.com>
+ <alpine.DEB.2.21.2011091858010.21307@sstabellini-ThinkPad-T480s>
+ <HE1PR05MB4794B5C57A54A29A48EE8EAE8BE90@HE1PR05MB4794.eurprd05.prod.outlook.com>
+ <alpine.DEB.2.21.2011101842500.21307@sstabellini-ThinkPad-T480s>
+ <DB6PR0402MB27608A03EC717053E392A92988E80@DB6PR0402MB2760.eurprd04.prod.outlook.com>
+ <HE1PR05MB47940ED4E5FDC0BADC54C8E78BE80@HE1PR05MB4794.eurprd05.prod.outlook.com>
+ <DB6PR0402MB2760CEEABA9F52CDEB27C1DB88E80@DB6PR0402MB2760.eurprd04.prod.outlook.com>
+ <HE1PR05MB47944761ED6A26D3E2CE15868BE40@HE1PR05MB4794.eurprd05.prod.outlook.com>
+ <alpine.DEB.2.21.2011161656080.20906@sstabellini-ThinkPad-T480s>
+ <HE1PR05MB4794569AC67109AF8B6517268BE20@HE1PR05MB4794.eurprd05.prod.outlook.com>
+ <alpine.DEB.2.21.2011171544380.438@sstabellini-ThinkPad-T480s>
+ <5dc63ee2-f1ce-31fc-cb6a-fe4dae929fb3@xen.org>
+ <HE1PR05MB4794EBDD1FE29BC69D0BCC898BFD0@HE1PR05MB4794.eurprd05.prod.outlook.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <b67581c6-6682-5059-55d1-a9c695a8cdc3@xen.org>
+Date: Mon, 23 Nov 2020 18:27:15 +0000
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.5.0
+MIME-Version: 1.0
+In-Reply-To: <HE1PR05MB4794EBDD1FE29BC69D0BCC898BFD0@HE1PR05MB4794.eurprd05.prod.outlook.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 8bit
 
-From: Paul Durrant <pdurrant@amazon.com>
 
-This patch modifies libxl_device_pci_assignable_add() to take an optional
-'name' argument, which (if supplied) is saved into xenstore and can hence be
-used to refer to the now-assignable BDF in subsequent operations. To
-facilitate this, a new libxl_device_pci_assignable_name2bdf() function is
-added.
 
-The xl code is modified to allow a name to be specified in the
-'pci-assignable-add' operation and also allow an option to be specified to
-'pci-assignable-list' requesting that names be displayed. The latter is
-facilitated by a new libxl_device_pci_assignable_bdf2name() function. Finally
-xl 'pci-assignable-remove' is modified to that either a name or BDF can be
-supplied. The supplied 'identifier' is first assumed to be a name, but if
-libxl_device_pci_assignable_name2bdf() fails to find a matching BDF the
-identifier itself will be parsed as a BDF. Names my only include printable
-characters and may not include whitespace.
+On 22/11/2020 22:55, Leo Krueger wrote:
+> Hi Julien,
 
-Signed-off-by: Paul Durrant <pdurrant@amazon.com>
----
-Cc: Ian Jackson <iwj@xenproject.org>
-Cc: Wei Liu <wl@xen.org>
-Cc: Christian Lindig <christian.lindig@citrix.com>
-Cc: David Scott <dave@recoil.org>
-Cc: Anthony PERARD <anthony.perard@citrix.com>
----
- tools/include/libxl.h                | 19 +++++++-
- tools/libs/light/libxl_pci.c         | 86 +++++++++++++++++++++++++++++++++---
- tools/ocaml/libs/xl/xenlight_stubs.c |  3 +-
- tools/xl/xl_cmdtable.c               | 12 +++--
- tools/xl/xl_pci.c                    | 84 ++++++++++++++++++++++++-----------
- 5 files changed, 166 insertions(+), 38 deletions(-)
+Hi Leo,
 
-diff --git a/tools/include/libxl.h b/tools/include/libxl.h
-index 5703fdf367..4025d3a3d4 100644
---- a/tools/include/libxl.h
-+++ b/tools/include/libxl.h
-@@ -477,6 +477,14 @@
- #define LIBXL_HAVE_PCI_ASSIGNABLE_BDF 1
- 
- /*
-+ * LIBXL_HAVE_PCI_ASSIGNABLE_NAME indicates that the
-+ * libxl_device_pci_assignable_add() function takes a 'name' argument
-+ * and that the libxl_device_pci_assignable_name2bdf() and
-+ * libxl_device_pci_assignable_bdf2name() functions are defined.
-+ */
-+#define LIBXL_HAVE_PCI_ASSIGNABLE_NAME 1
-+
-+/*
-  * libxl ABI compatibility
-  *
-  * The only guarantee which libxl makes regarding ABI compatibility
-@@ -2385,11 +2393,18 @@ int libxl_device_events_handler(libxl_ctx *ctx,
-  * added or is not bound, the functions will emit a warning but return
-  * SUCCESS.
-  */
--int libxl_device_pci_assignable_add(libxl_ctx *ctx, libxl_pci_bdf *pcibdf, int rebind);
--int libxl_device_pci_assignable_remove(libxl_ctx *ctx, libxl_pci_bdf *pcibdf, int rebind);
-+int libxl_device_pci_assignable_add(libxl_ctx *ctx, libxl_pci_bdf *pcibdf,
-+                                    const char *name, int rebind);
-+int libxl_device_pci_assignable_remove(libxl_ctx *ctx, libxl_pci_bdf *pcibdf,
-+                                       int rebind);
- libxl_pci_bdf *libxl_device_pci_assignable_list(libxl_ctx *ctx, int *num);
- void libxl_device_pci_assignable_list_free(libxl_pci_bdf *list, int num);
- 
-+libxl_pci_bdf *libxl_device_pci_assignable_name2bdf(libxl_ctx *ctx,
-+                                                    const char *name);
-+char *libxl_device_pci_assignable_bdf2name(libxl_ctx *ctx,
-+                                           libxl_pci_bdf *pcibdf);
-+
- /* CPUID handling */
- int libxl_cpuid_parse_config(libxl_cpuid_policy_list *cpuid, const char* str);
- int libxl_cpuid_parse_config_xend(libxl_cpuid_policy_list *cpuid,
-diff --git a/tools/libs/light/libxl_pci.c b/tools/libs/light/libxl_pci.c
-index f9ace1faec..a1c9ae0d5b 100644
---- a/tools/libs/light/libxl_pci.c
-+++ b/tools/libs/light/libxl_pci.c
-@@ -745,6 +745,7 @@ static int pciback_dev_unassign(libxl__gc *gc, libxl_pci_bdf *pcibdf)
- 
- static int libxl__device_pci_assignable_add(libxl__gc *gc,
-                                             libxl_pci_bdf *pcibdf,
-+                                            const char *name,
-                                             int rebind)
- {
-     libxl_ctx *ctx = libxl__gc_owner(gc);
-@@ -753,6 +754,23 @@ static int libxl__device_pci_assignable_add(libxl__gc *gc,
-     int rc;
-     struct stat st;
- 
-+    /* Sanitise any name that was passed */
-+    if (name) {
-+        unsigned int i, n = strlen(name);
-+
-+        if (n > 64) { /* Reasonable upper bound on name length */
-+            LOG(ERROR, "Name too long");
-+            return ERROR_FAIL;
-+        }
-+
-+        for (i = 0; i < n; i++) {
-+            if (!isgraph(name[i])) {
-+                LOG(ERROR, "Names may only include printable characters");
-+                return ERROR_FAIL;
-+            }
-+        }
-+    }
-+
-     /* Local copy for convenience */
-     dom = pcibdf->domain;
-     bus = pcibdf->bus;
-@@ -773,7 +791,7 @@ static int libxl__device_pci_assignable_add(libxl__gc *gc,
-     }
-     if ( rc ) {
-         LOG(WARN, PCI_BDF" already assigned to pciback", dom, bus, dev, func);
--        goto quarantine;
-+        goto name;
-     }
- 
-     /* Check to see if there's already a driver that we need to unbind from */
-@@ -804,7 +822,12 @@ static int libxl__device_pci_assignable_add(libxl__gc *gc,
-         return ERROR_FAIL;
-     }
- 
--quarantine:
-+name:
-+    if (name)
-+        pci_info_xs_write(gc, pcibdf, "name", name);
-+    else
-+        pci_info_xs_remove(gc, pcibdf, "name");
-+
-     /*
-      * DOMID_IO is just a sentinel domain, without any actual mappings,
-      * so always pass XEN_DOMCTL_DEV_RDM_RELAXED to avoid assignment being
-@@ -868,16 +891,18 @@ static int libxl__device_pci_assignable_remove(libxl__gc *gc,
-         }
-     }
- 
-+    pci_info_xs_remove(gc, pcibdf, "name");
-+
-     return 0;
- }
- 
- int libxl_device_pci_assignable_add(libxl_ctx *ctx, libxl_pci_bdf *pcibdf,
--                                    int rebind)
-+                                    const char *name, int rebind)
- {
-     GC_INIT(ctx);
-     int rc;
- 
--    rc = libxl__device_pci_assignable_add(gc, pcibdf, rebind);
-+    rc = libxl__device_pci_assignable_add(gc, pcibdf, name, rebind);
- 
-     GC_FREE;
-     return rc;
-@@ -896,6 +921,57 @@ int libxl_device_pci_assignable_remove(libxl_ctx *ctx, libxl_pci_bdf *pcibdf,
-     return rc;
- }
- 
-+libxl_pci_bdf *libxl_device_pci_assignable_name2bdf(libxl_ctx *ctx,
-+                                                    const char *name)
-+{
-+    GC_INIT(ctx);
-+    char **bdfs;
-+    libxl_pci_bdf *pcibdf;
-+    unsigned int i, n;
-+
-+    bdfs = libxl__xs_directory(gc, XBT_NULL, PCI_INFO_PATH, &n);
-+    if (!n)
-+        goto out;
-+
-+    pcibdf = calloc(1, sizeof(*pcibdf));
-+    if (!pcibdf)
-+        goto out;
-+
-+    for (i = 0; i < n; i++) {
-+        unsigned dom, bus, dev, func;
-+        const char *tmp;
-+
-+        if (sscanf(bdfs[i], PCI_BDF_XSPATH, &dom, &bus, &dev, &func) != 4)
-+            continue;
-+
-+        pcibdf_struct_fill(pcibdf, dom, bus, dev, func);
-+
-+        tmp = pci_info_xs_read(gc, pcibdf, "name");
-+        if (tmp && !strcmp(tmp, name))
-+            goto out;
-+    }
-+
-+    free(pcibdf);
-+    pcibdf = NULL;
-+
-+out:
-+    GC_FREE;
-+    return pcibdf;
-+}
-+
-+char *libxl_device_pci_assignable_bdf2name(libxl_ctx *ctx,
-+                                           libxl_pci_bdf *pcibdf)
-+{
-+    GC_INIT(ctx);
-+    char *name = NULL, *tmp = pci_info_xs_read(gc, pcibdf, "name");
-+
-+    if (tmp)
-+        name = strdup(tmp);
-+
-+    GC_FREE;
-+    return name;
-+}
-+
- /*
-  * This function checks that all functions of a device are bound to pciback
-  * driver. It also initialises a bit-mask of which function numbers are present
-@@ -1560,7 +1636,7 @@ void libxl__device_pci_add(libxl__egc *egc, uint32_t domid,
-     if (rc) goto out;
- 
-     if (pci->seize && !pciback_dev_is_assigned(gc, &pci->bdf)) {
--        rc = libxl__device_pci_assignable_add(gc, &pci->bdf, 1);
-+        rc = libxl__device_pci_assignable_add(gc, &pci->bdf, NULL, 1);
-         if ( rc )
-             goto out;
-     }
-diff --git a/tools/ocaml/libs/xl/xenlight_stubs.c b/tools/ocaml/libs/xl/xenlight_stubs.c
-index 2388f23869..96bb4655e0 100644
---- a/tools/ocaml/libs/xl/xenlight_stubs.c
-+++ b/tools/ocaml/libs/xl/xenlight_stubs.c
-@@ -840,7 +840,8 @@ value stub_xl_device_pci_assignable_add(value ctx, value info, value rebind)
- 	device_pci_val(CTX, &c_info, info);
- 
- 	caml_enter_blocking_section();
--	ret = libxl_device_pci_assignable_add(CTX, &c_info.bdf, c_rebind);
-+	ret = libxl_device_pci_assignable_add(CTX, &c_info.bdf, NULL,
-+					      c_rebind);
- 	caml_leave_blocking_section();
- 
- 	libxl_device_pci_dispose(&c_info);
-diff --git a/tools/xl/xl_cmdtable.c b/tools/xl/xl_cmdtable.c
-index 2ee0c49673..9e9aa448e2 100644
---- a/tools/xl/xl_cmdtable.c
-+++ b/tools/xl/xl_cmdtable.c
-@@ -105,21 +105,25 @@ struct cmd_spec cmd_table[] = {
-     { "pci-assignable-add",
-       &main_pciassignable_add, 0, 1,
-       "Make a device assignable for pci-passthru",
--      "<BDF>",
-+      "[options] <BDF>",
-+      "-n NAME, --name=NAME    Name the assignable device.\n"
-       "-h                      Print this help.\n"
-     },
-     { "pci-assignable-remove",
-       &main_pciassignable_remove, 0, 1,
-       "Remove a device from being assignable",
--      "[options] <BDF>",
-+      "[options] <BDF>|NAME",
-       "-h                      Print this help.\n"
-       "-r                      Attempt to re-assign the device to the\n"
--      "                        original driver"
-+      "                        original driver."
-     },
-     { "pci-assignable-list",
-       &main_pciassignable_list, 0, 0,
-       "List all the assignable pci devices",
--      "",
-+      "[options]",
-+      "-h                      Print this help.\n"
-+      "-n, --show-names        Display assignable device names where\n"
-+      "                        supplied.\n"
-     },
-     { "pause",
-       &main_pause, 0, 1,
-diff --git a/tools/xl/xl_pci.c b/tools/xl/xl_pci.c
-index 37708b4eb1..f1b58b3976 100644
---- a/tools/xl/xl_pci.c
-+++ b/tools/xl/xl_pci.c
-@@ -152,7 +152,7 @@ int main_pciattach(int argc, char **argv)
-     return EXIT_SUCCESS;
- }
- 
--static void pciassignable_list(void)
-+static void pciassignable_list(bool show_names)
- {
-     libxl_pci_bdf *pcibdfs;
-     int num, i;
-@@ -162,9 +162,15 @@ static void pciassignable_list(void)
-     if ( pcibdfs == NULL )
-         return;
-     for (i = 0; i < num; i++) {
--        printf("%04x:%02x:%02x.%01x\n",
--               pcibdfs[i].domain, pcibdfs[i].bus, pcibdfs[i].dev,
--               pcibdfs[i].func);
-+        libxl_pci_bdf *pcibdf = &pcibdfs[i];
-+        char *name = show_names ?
-+            libxl_device_pci_assignable_bdf2name(ctx, pcibdf) : NULL;
-+
-+        printf("%04x:%02x:%02x.%01x %s\n",
-+               pcibdf->domain, pcibdf->bus, pcibdf->dev, pcibdf->func,
-+               name ?: "");
-+
-+        free(name);
-     }
-     libxl_device_pci_assignable_list_free(pcibdfs, num);
- }
-@@ -172,16 +178,23 @@ static void pciassignable_list(void)
- int main_pciassignable_list(int argc, char **argv)
- {
-     int opt;
--
--    SWITCH_FOREACH_OPT(opt, "", NULL, "pci-assignable-list", 0) {
--        /* No options */
-+    static struct option opts[] = {
-+        {"show-names", 0, 0, 'n'},
-+        COMMON_LONG_OPTS
-+    };
-+    bool show_names = false;
-+
-+    SWITCH_FOREACH_OPT(opt, "n", opts, "pci-assignable-list", 0) {
-+    case 'n':
-+        show_names = true;
-+        break;
-     }
- 
--    pciassignable_list();
-+    pciassignable_list(show_names);
-     return 0;
- }
- 
--static int pciassignable_add(const char *bdf, int rebind)
-+static int pciassignable_add(const char *bdf, const char *name, int rebind)
- {
-     libxl_pci_bdf pcibdf;
-     XLU_Config *config;
-@@ -197,7 +210,7 @@ static int pciassignable_add(const char *bdf, int rebind)
-         exit(2);
-     }
- 
--    if (libxl_device_pci_assignable_add(ctx, &pcibdf, rebind))
-+    if (libxl_device_pci_assignable_add(ctx, &pcibdf, name, rebind))
-         r = 1;
- 
-     libxl_pci_bdf_dispose(&pcibdf);
-@@ -210,39 +223,58 @@ int main_pciassignable_add(int argc, char **argv)
- {
-     int opt;
-     const char *bdf = NULL;
--
--    SWITCH_FOREACH_OPT(opt, "", NULL, "pci-assignable-add", 1) {
--        /* No options */
-+    static struct option opts[] = {
-+        {"name", 1, 0, 'n'},
-+        COMMON_LONG_OPTS
-+    };
-+    const char *name = NULL;
-+
-+    SWITCH_FOREACH_OPT(opt, "n:", opts, "pci-assignable-add", 0) {
-+    case 'n':
-+        name = optarg;
-+        break;
-     }
- 
-     bdf = argv[optind];
- 
--    if (pciassignable_add(bdf, 1))
-+    if (pciassignable_add(bdf, name, 1))
-         return EXIT_FAILURE;
- 
-     return EXIT_SUCCESS;
- }
- 
--static int pciassignable_remove(const char *bdf, int rebind)
-+static int pciassignable_remove(const char *ident, int rebind)
- {
--    libxl_pci_bdf pcibdf;
-+    libxl_pci_bdf *pcibdf;
-     XLU_Config *config;
-     int r = 0;
- 
--    libxl_pci_bdf_init(&pcibdf);
--
-     config = xlu_cfg_init(stderr, "command line");
-     if (!config) { perror("xlu_cfg_init"); exit(-1); }
- 
--    if (xlu_pci_parse_bdf(config, &pcibdf, bdf)) {
--        fprintf(stderr, "pci-assignable-remove: malformed BDF \"%s\"\n", bdf);
--        exit(2);
-+    pcibdf = libxl_device_pci_assignable_name2bdf(ctx, ident);
-+    if (!pcibdf) {
-+        pcibdf = calloc(1, sizeof(*pcibdf));
-+
-+        if (!pcibdf) {
-+            fprintf(stderr,
-+                    "pci-assignable-remove: failed to allocate memory\n");
-+            exit(2);
-+        }
-+
-+        libxl_pci_bdf_init(pcibdf);
-+        if (xlu_pci_parse_bdf(config, pcibdf, ident)) {
-+            fprintf(stderr,
-+                    "pci-assignable-remove: malformed BDF '%s'\n", ident);
-+            exit(2);
-+        }
-     }
- 
--    if (libxl_device_pci_assignable_remove(ctx, &pcibdf, rebind))
-+    if (libxl_device_pci_assignable_remove(ctx, pcibdf, rebind))
-         r = 1;
- 
--    libxl_pci_bdf_dispose(&pcibdf);
-+    libxl_pci_bdf_dispose(pcibdf);
-+    free(pcibdf);
-     xlu_cfg_destroy(config);
- 
-     return r;
-@@ -251,7 +283,7 @@ static int pciassignable_remove(const char *bdf, int rebind)
- int main_pciassignable_remove(int argc, char **argv)
- {
-     int opt;
--    const char *bdf = NULL;
-+    const char *ident = NULL;
-     int rebind = 0;
- 
-     SWITCH_FOREACH_OPT(opt, "r", NULL, "pci-assignable-remove", 1) {
-@@ -260,9 +292,9 @@ int main_pciassignable_remove(int argc, char **argv)
-         break;
-     }
- 
--    bdf = argv[optind];
-+    ident = argv[optind];
- 
--    if (pciassignable_remove(bdf, rebind))
-+    if (pciassignable_remove(ident, rebind))
-         return EXIT_FAILURE;
- 
-     return EXIT_SUCCESS;
+> 
+> finally I could try out what you suggested, please find my answers inline.
+
+Thank you for sending the logs!
+
+> 
+>> -----Ursprüngliche Nachricht-----
+>> Von: Julien Grall <julien@xen.org>
+>> Gesendet: Mittwoch, 18. November 2020 13:24
+>> An: Stefano Stabellini <stefano.stabellini@xilinx.com>; Leo Krueger
+>> <leo.krueger@zal.aero>
+>> Cc: Peng Fan <peng.fan@nxp.com>; brucea@xilinx.com; Cornelia Bruelhart
+>> <cornelia.bruelhart@zal.aero>; oleksandr_andrushchenko@epam.com; xen-
+>> devel@lists.xenproject.org; Bertrand.Marquis@arm.com
+>> Betreff: Re: AW: AW: AW: AW: Xen data from meta-virtualization layer
+>>
+>> Hi,
+>>
+>> On 17/11/2020 23:53, Stefano Stabellini wrote:
+>>> Adding Bertrand, Oleksandr, Julien, and others -- they have a more
+>>> recent experience with GICv3 ITS than me and might be able to help.
+>>> I am attaching the device tree Leo sent a few days ago for reference.
+>>>
+>>>
+>>> Typically when you can set the ethernet link up and no packets are
+>>> exchanged it is because of a missing interrupt. In this case a missing
+>>> MSI.
+>>>
+>>> Bertrand, I believe you tried the GIC ITS driver with PCI devices
+>>> recently. It is expected to work correctly with MSIs in Dom0, right?
+>>
+>> OSSTest has some hardware (e.g. Thunder-X) where ITS is required to boot
+>> Dom0. I haven't seen any failure on recent Xen. We are testing 4.11 and
+>> onwards on Thunder-X.
+>>
+>> However, it may be possible that some more work is necessary for other
+>> hardware (e.g. workaround, missing code...). See more below.
+>>
+>>>
+>>>
+>>>
+>>> On Tue, 17 Nov 2020, Leo Krueger wrote:
+>>>> Hi,
+>>>>
+>>>> I enabled CONFIG_HAS_ITS (what a stupid mistake by me to not set it
+>>>> before...) but then had to add the following node to my device tree
+>>>>
+>>>> 	gic_lpi_base: syscon@0x80000000 {
+>>>> 		compatible = "gic-lpi-base";
+>>
+>> I couldn't find this compatible defined/used in Linux 5.10-rc4. @Leo, could
+>> you clarify which flavor/version of Linux you are using?
+> 
+> It is Linux 4.19 from Yocto (Warror release). XEN 4.13.2.
+
+Do you have a link to the Linux tree? Is there any additional patches on 
+top of vanilla?
+
+> While searching around the Internet for any solution, I came across [0] which contained the gic-lpi-base node.
+> So I just tried adding it (quite desperate I know) and voila, it at least brought me one step further (XEN exposing the ITS)...
+
+I am slightly confused to how this would help. Xen and, AFAICT, Linux 
+don't understand gic-lpi-base. Do you have modification in your Linux to 
+use it?
+
+Looking at the DT changes in [0], it looks like the node is not a child 
+of gic@. So I think Xen will map the region to Dom0.
+
+There are two things that I can notice:
+   1) This region is RAM, but I can't find any reserve node. Is there 
+any specific code in Linux to reserve it?
+   2) The implementation in U-boot seems to suggest that the firmware 
+will configure the LPIs and then enable it. If that's the case, then Xen 
+needs to re-use the table in the DT rather than allocating a new one. 
+However, I would have expected an error message in the log:
+
+    "GICv3: CPUx: Cannot initialize LPIs"
+
+At least Xen should not expose gic-lpi-base to the kernel, but I will 
+wait on more details about the Linux kernel used before commenting more.
+
+I would also be interested to know more details about the failure when 
+gic-lpi-base is not added in your DT. In particular, I am interested to 
+understand why Xen would not expose the ITS as we don't parse that node.
+
+[...]
+
+> For XEN 4.13.2 I had to adapt your patch slightly [1], see below (yes I know, quite ugly in parts).
+
+No worries, debug patches are not meant to be nice to read ;).
+
+> Find attached the boot log and an output of "xl dmesg" which is truncated due to the large amount of messages.
+> 
+> When enabling the network interface (gbe0), the following output is visible:
+> 
+> root@kontron-sal28:~# ip link set up dev gbe0
+> (XEN) vgic-v3-its.c:902:d0v0 vITS  cmd 0x0c: 000000170000000c 0000000000000001 0000000000000000 0000000000000000
+> (XEN) vgic-v3-its.c:902:d0v0 vITS  cmd 0x05: 0000000000000005 0000000000000000 0000000000000000 0000000000000000
+
+0xc is INV and 0x5 is SYNC. Most likely the driver unmask the interrupt 
+by writing in the property table (access are not trapped to Xen) and 
+then requested to invalidate the cache state.
+
+> [   34.034598] Atheros 8031 ethernet 0000:00:00.3:05: attached PHY driver [Atheros 8031 ethernet] (mii_bus:phy_addr=0000:00:00.3:05, irq=POLL)
+> [   34.041111] 8021q: adding VLAN 0 to HW filter on device gbe0
+> [   34.041209] IPv6: ADDRCONF(NETDEV_UP): gbe0: link is not ready
+> root@kontron-sal28:~# [   35.041951] fsl_enetc 0000:00:00.0 gbe0: Link is Down
+> [   38.114426] fsl_enetc 0000:00:00.0 gbe0: Link is Up - 1Gbps/Full - flow control off
+> [   38.114508] IPv6: ADDRCONF(NETDEV_CHANGE): gbe0: link becomes ready
+> 
+> Does that tell you anything?
+
+It is at least a good sign because it means Linux is able to 
+initialize/talk to the vITS.
+
+I would lean towards one (or multiple) issue with pITS and/or the 
+device-tree exposed to Linux. I am not entirely what exactly... I think 
+having more details about the Linux setup would be helpful.
+
+I will reply on Rahul's e-mail separately.
+
+Cheers,
+
 -- 
-2.11.0
-
+Julien Grall
 
