@@ -2,28 +2,27 @@ Return-Path: <SRS0=yIb1=E5=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-8.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 57C7FC388F9
-	for <xen-devel@archiver.kernel.org>; Mon, 23 Nov 2020 13:44:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C3E4DC6379F
+	for <xen-devel@archiver.kernel.org>; Mon, 23 Nov 2020 13:44:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D71BE206F1
-	for <xen-devel@archiver.kernel.org>; Mon, 23 Nov 2020 13:44:24 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 48037206F1
+	for <xen-devel@archiver.kernel.org>; Mon, 23 Nov 2020 13:44:39 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="Hk4DtJHg"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D71BE206F1
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="U9RjAS+s"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 48037206F1
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.34330.65310 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.34329.65298 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khC8e-0001kM-CA; Mon, 23 Nov 2020 13:44:16 +0000
+	id 1khC8b-0001iJ-W8; Mon, 23 Nov 2020 13:44:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 34330.65310; Mon, 23 Nov 2020 13:44:16 +0000
+Received: by outflank-mailman (output) from mailman id 34329.65298; Mon, 23 Nov 2020 13:44:13 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,190 +37,587 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khC8e-0001kF-8I; Mon, 23 Nov 2020 13:44:16 +0000
-Received: by outflank-mailman (input) for mailman id 34330;
- Mon, 23 Nov 2020 13:44:14 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=qJrE=E5=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1khC8c-0001jS-Nt
- for xen-devel@lists.xenproject.org; Mon, 23 Nov 2020 13:44:14 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 1be9698c-6ac1-4ab8-9de4-04ea58a5fcc4;
- Mon, 23 Nov 2020 13:44:13 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id E3A64AC0C;
- Mon, 23 Nov 2020 13:44:12 +0000 (UTC)
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+	id 1khC8b-0001iC-T8; Mon, 23 Nov 2020 13:44:13 +0000
+Received: by outflank-mailman (input) for mailman id 34329;
+ Mon, 23 Nov 2020 13:44:13 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=a5JY=E5=infradead.org=peterz@srs-us1.protection.inumbo.net>)
+ id 1khC8Y-0001hs-D5
+ for xen-devel@lists.xenproject.org; Mon, 23 Nov 2020 13:44:13 +0000
+Received: from merlin.infradead.org (unknown [2001:8b0:10b:1231::1])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 357b0d76-9572-4816-93df-74b42e054565;
+ Mon, 23 Nov 2020 13:44:04 +0000 (UTC)
+Received: from j217100.upc-j.chello.nl ([24.132.217.100]
+ helo=noisy.programming.kicks-ass.net)
+ by merlin.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+ id 1khC7m-0008NA-Cg; Mon, 23 Nov 2020 13:43:22 +0000
+Received: from hirez.programming.kicks-ass.net
+ (hirez.programming.kicks-ass.net [192.168.1.225])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (Client did not present a certificate)
+ by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id A2CC6307958;
+ Mon, 23 Nov 2020 14:43:17 +0100 (CET)
+Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
+ id 87D77200C8D27; Mon, 23 Nov 2020 14:43:17 +0100 (CET)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=qJrE=E5=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
-	id 1khC8c-0001jS-Nt
-	for xen-devel@lists.xenproject.org; Mon, 23 Nov 2020 13:44:14 +0000
-X-Inumbo-ID: 1be9698c-6ac1-4ab8-9de4-04ea58a5fcc4
-Received: from mx2.suse.de (unknown [195.135.220.15])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 1be9698c-6ac1-4ab8-9de4-04ea58a5fcc4;
-	Mon, 23 Nov 2020 13:44:13 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1606139053; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=WBhxnrqI/ea3YaLwkwfUd+kbHRlyoh/3QMt0/b0VBtU=;
-	b=Hk4DtJHgoyaRgau9Umhf8UEB71yZ5+l+p6PXVzfplk0gQdnErlVbuB5QUVcwkfZ+oE2iXi
-	G9/j1UwbyAPrXqQf32osNY1Co6iSS5SqVqDDNKRJ1YT1hLMtkafCdnqk1moSuLLDvt/tbG
-	T8bjzhhHyF/W5zM0USlN3rOmFdomQXc=
-Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id E3A64AC0C;
-	Mon, 23 Nov 2020 13:44:12 +0000 (UTC)
-Subject: [PATCH v3 3/7] x86: fold indirect_thunk_asm.h into asm-defns.h
-From: Jan Beulich <jbeulich@suse.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-References: <8e7d1472-dd37-8ed3-ec2f-ce954ea61dfd@suse.com>
-Message-ID: <80152a45-0737-eff4-d2ee-6630ffbf34b9@suse.com>
-Date: Mon, 23 Nov 2020 14:44:12 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.5.0
+	(envelope-from <SRS0=a5JY=E5=infradead.org=peterz@srs-us1.protection.inumbo.net>)
+	id 1khC8Y-0001hs-D5
+	for xen-devel@lists.xenproject.org; Mon, 23 Nov 2020 13:44:13 +0000
+X-Inumbo-ID: 357b0d76-9572-4816-93df-74b42e054565
+Received: from merlin.infradead.org (unknown [2001:8b0:10b:1231::1])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id 357b0d76-9572-4816-93df-74b42e054565;
+	Mon, 23 Nov 2020 13:44:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=merlin.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description;
+	bh=RydA/us2lnbAjoJ7xmSIIjKk6qIoneLQLLcDUjJYnxM=; b=U9RjAS+s/uGM6Pd4fbRXzPe1KM
+	4cjU70YB/r0s6veegEZX2/ID9UVs2g2w7Wrmga4Av7HoJvyzB8HCjxBt0lh6n1TqwfJ4H8BPNl89O
+	KIhaST/RMq5ls4KSapEf/Q6y1MdBZKQM+ClOUtBpZEeAcAx2GszgOUlSRnA9b4WaKmlsnyRCywUnh
+	vXDHsNJ6jumKfmyLNMg/Aeo8j8lSlrdZ0BpCfqzMFFUESs/Ck5qBZ6Po2Vxy3P3PKNtMfg9nJ2J5z
+	CnS28YMDzG9RwB2Zw8XvsCQJKU3GVz9fc12LIsoBs7G9XkQj9WAL8reynr3QvIcEFav40d0mVYp/L
+	oe9fweFQ==;
+Received: from j217100.upc-j.chello.nl ([24.132.217.100] helo=noisy.programming.kicks-ass.net)
+	by merlin.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+	id 1khC7m-0008NA-Cg; Mon, 23 Nov 2020 13:43:22 +0000
+Received: from hirez.programming.kicks-ass.net (hirez.programming.kicks-ass.net [192.168.1.225])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(Client did not present a certificate)
+	by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id A2CC6307958;
+	Mon, 23 Nov 2020 14:43:17 +0100 (CET)
+Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
+	id 87D77200C8D27; Mon, 23 Nov 2020 14:43:17 +0100 (CET)
+Date: Mon, 23 Nov 2020 14:43:17 +0100
+From: Peter Zijlstra <peterz@infradead.org>
+To: Juergen Gross <jgross@suse.com>
+Cc: xen-devel@lists.xenproject.org, x86@kernel.org,
+	linux-kernel@vger.kernel.org,
+	virtualization@lists.linux-foundation.org,
+	linux-hyperv@vger.kernel.org, kvm@vger.kernel.org, luto@kernel.org,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Deep Shah <sdeep@vmware.com>,
+	"VMware, Inc." <pv-drivers@vmware.com>,
+	"K. Y. Srinivasan" <kys@microsoft.com>,
+	Haiyang Zhang <haiyangz@microsoft.com>,
+	Stephen Hemminger <sthemmin@microsoft.com>,
+	Wei Liu <wei.liu@kernel.org>, Paolo Bonzini <pbonzini@redhat.com>,
+	Sean Christopherson <sean.j.christopherson@intel.com>,
+	Vitaly Kuznetsov <vkuznets@redhat.com>,
+	Wanpeng Li <wanpengli@tencent.com>,
+	Jim Mattson <jmattson@google.com>, Joerg Roedel <joro@8bytes.org>,
+	Daniel Lezcano <daniel.lezcano@linaro.org>,
+	Juri Lelli <juri.lelli@redhat.com>,
+	Vincent Guittot <vincent.guittot@linaro.org>,
+	Dietmar Eggemann <dietmar.eggemann@arm.com>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Ben Segall <bsegall@google.com>, Mel Gorman <mgorman@suse.de>,
+	Daniel Bristot de Oliveira <bristot@redhat.com>,
+	Josh Poimboeuf <jpoimboe@redhat.com>
+Subject: Re: [PATCH v2 00/12] x86: major paravirt cleanup
+Message-ID: <20201123134317.GE3092@hirez.programming.kicks-ass.net>
+References: <20201120114630.13552-1-jgross@suse.com>
+ <20201120125342.GC3040@hirez.programming.kicks-ass.net>
 MIME-Version: 1.0
-In-Reply-To: <8e7d1472-dd37-8ed3-ec2f-ce954ea61dfd@suse.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20201120125342.GC3040@hirez.programming.kicks-ass.net>
 
-There's little point in having two separate headers both getting
-included by asm_defns.h. This in particular reduces the number of
-instances of guarding asm(".include ...") suitably in such dual use
-headers.
+On Fri, Nov 20, 2020 at 01:53:42PM +0100, Peter Zijlstra wrote:
+> On Fri, Nov 20, 2020 at 12:46:18PM +0100, Juergen Gross wrote:
+> >  30 files changed, 325 insertions(+), 598 deletions(-)
+> 
+> Much awesome ! I'll try and get that objtool thing sorted.
 
-No change to generated code.
+This seems to work for me. It isn't 100% accurate, because it doesn't
+know about the direct call instruction, but I can either fudge that or
+switching to static_call() will cure that.
 
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
-Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+It's not exactly pretty, but it should be straight forward.
 
---- a/xen/Makefile
-+++ b/xen/Makefile
-@@ -139,7 +139,7 @@ ifeq ($(TARGET_ARCH),x86)
- t1 = $(call as-insn,$(CC),".L0: .L1: .skip (.L1 - .L0)",,-no-integrated-as)
+Index: linux-2.6/tools/objtool/check.c
+===================================================================
+--- linux-2.6.orig/tools/objtool/check.c
++++ linux-2.6/tools/objtool/check.c
+@@ -1090,6 +1090,32 @@ static int handle_group_alt(struct objto
+ 		return -1;
+ 	}
  
- # Check whether clang asm()-s support .include.
--t2 = $(call as-insn,$(CC) -I$(BASEDIR)/include,".include \"asm-x86/indirect_thunk_asm.h\"",,-no-integrated-as)
-+t2 = $(call as-insn,$(CC) -I$(BASEDIR)/include,".include \"asm-x86/asm-defns.h\"",,-no-integrated-as)
++	/*
++	 * Add the filler NOP, required for alternative CFI.
++	 */
++	if (special_alt->group && special_alt->new_len < special_alt->orig_len) {
++		struct instruction *nop = malloc(sizeof(*nop));
++		if (!nop) {
++			WARN("malloc failed");
++			return -1;
++		}
++		memset(nop, 0, sizeof(*nop));
++		INIT_LIST_HEAD(&nop->alts);
++		INIT_LIST_HEAD(&nop->stack_ops);
++		init_cfi_state(&nop->cfi);
++
++		nop->sec = last_new_insn->sec;
++		nop->ignore = last_new_insn->ignore;
++		nop->func = last_new_insn->func;
++		nop->alt_group = alt_group;
++		nop->offset = last_new_insn->offset + last_new_insn->len;
++		nop->type = INSN_NOP;
++		nop->len = special_alt->orig_len - special_alt->new_len;
++
++		list_add(&nop->list, &last_new_insn->list);
++		last_new_insn = nop;
++	}
++
+ 	if (fake_jump)
+ 		list_add(&fake_jump->list, &last_new_insn->list);
  
- # Check whether clang keeps .macro-s between asm()-s:
- # https://bugs.llvm.org/show_bug.cgi?id=36110
---- a/xen/include/asm-x86/asm-defns.h
-+++ b/xen/include/asm-x86/asm-defns.h
-@@ -7,3 +7,40 @@
-     .byte 0x0f, 0x01, 0xcb
- .endm
- #endif
-+
-+.macro INDIRECT_BRANCH insn:req arg:req
-+/*
-+ * Create an indirect branch.  insn is one of call/jmp, arg is a single
-+ * register.
-+ *
-+ * With no compiler support, this degrades into a plain indirect call/jmp.
-+ * With compiler support, dispatch to the correct __x86_indirect_thunk_*
-+ */
-+    .if CONFIG_INDIRECT_THUNK == 1
-+
-+        $done = 0
-+        .irp reg, ax, cx, dx, bx, bp, si, di, 8, 9, 10, 11, 12, 13, 14, 15
-+        .ifeqs "\arg", "%r\reg"
-+            \insn __x86_indirect_thunk_r\reg
-+            $done = 1
-+           .exitm
-+        .endif
-+        .endr
-+
-+        .if $done != 1
-+            .error "Bad register arg \arg"
-+        .endif
-+
-+    .else
-+        \insn *\arg
-+    .endif
-+.endm
-+
-+/* Convenience wrappers. */
-+.macro INDIRECT_CALL arg:req
-+    INDIRECT_BRANCH call \arg
-+.endm
-+
-+.macro INDIRECT_JMP arg:req
-+    INDIRECT_BRANCH jmp \arg
-+.endm
---- a/xen/include/asm-x86/asm_defns.h
-+++ b/xen/include/asm-x86/asm_defns.h
-@@ -22,7 +22,6 @@
- asm ( "\t.equ CONFIG_INDIRECT_THUNK, "
-       __stringify(IS_ENABLED(CONFIG_INDIRECT_THUNK)) );
- #endif
--#include <asm/indirect_thunk_asm.h>
+@@ -2190,18 +2216,12 @@ static int handle_insn_ops(struct instru
+ 	struct stack_op *op;
  
- #ifndef __ASSEMBLY__
- void ret_from_intr(void);
---- a/xen/include/asm-x86/indirect_thunk_asm.h
-+++ /dev/null
-@@ -1,53 +0,0 @@
--/*
-- * Trickery to allow this header to be included at the C level, to permit
-- * proper dependency tracking in .*.o.d files, while still having it contain
-- * assembler only macros.
-- */
--#ifndef __ASSEMBLY__
--# if 0
--  .if 0
--# endif
--asm ( "\t.include \"asm/indirect_thunk_asm.h\"" );
--# if 0
--  .endif
--# endif
--#else
+ 	list_for_each_entry(op, &insn->stack_ops, list) {
+-		struct cfi_state old_cfi = state->cfi;
+ 		int res;
+ 
+ 		res = update_cfi_state(insn, &state->cfi, op);
+ 		if (res)
+ 			return res;
+ 
+-		if (insn->alt_group && memcmp(&state->cfi, &old_cfi, sizeof(struct cfi_state))) {
+-			WARN_FUNC("alternative modifies stack", insn->sec, insn->offset);
+-			return -1;
+-		}
 -
--.macro INDIRECT_BRANCH insn:req arg:req
--/*
-- * Create an indirect branch.  insn is one of call/jmp, arg is a single
-- * register.
-- *
-- * With no compiler support, this degrades into a plain indirect call/jmp.
-- * With compiler support, dispatch to the correct __x86_indirect_thunk_*
-- */
--    .if CONFIG_INDIRECT_THUNK == 1
--
--        $done = 0
--        .irp reg, ax, cx, dx, bx, bp, si, di, 8, 9, 10, 11, 12, 13, 14, 15
--        .ifeqs "\arg", "%r\reg"
--            \insn __x86_indirect_thunk_r\reg
--            $done = 1
--           .exitm
--        .endif
--        .endr
--
--        .if $done != 1
--            .error "Bad register arg \arg"
--        .endif
--
--    .else
--        \insn *\arg
--    .endif
--.endm
--
--/* Convenience wrappers. */
--.macro INDIRECT_CALL arg:req
--    INDIRECT_BRANCH call \arg
--.endm
--
--.macro INDIRECT_JMP arg:req
--    INDIRECT_BRANCH jmp \arg
--.endm
--
--#endif
-
+ 		if (op->dest.type == OP_DEST_PUSHF) {
+ 			if (!state->uaccess_stack) {
+ 				state->uaccess_stack = 1;
+@@ -2399,19 +2419,137 @@ static int validate_return(struct symbol
+  * unreported (because they're NOPs), such holes would result in CFI_UNDEFINED
+  * states which then results in ORC entries, which we just said we didn't want.
+  *
+- * Avoid them by copying the CFI entry of the first instruction into the whole
+- * alternative.
++ * Avoid them by copying the CFI entry of the first instruction into the hole.
+  */
+-static void fill_alternative_cfi(struct objtool_file *file, struct instruction *insn)
++static void __fill_alt_cfi(struct objtool_file *file, struct instruction *insn)
+ {
+ 	struct instruction *first_insn = insn;
+ 	int alt_group = insn->alt_group;
+ 
+-	sec_for_each_insn_continue(file, insn) {
++	sec_for_each_insn_from(file, insn) {
+ 		if (insn->alt_group != alt_group)
+ 			break;
+-		insn->cfi = first_insn->cfi;
++
++		if (!insn->visited)
++			insn->cfi = first_insn->cfi;
++	}
++}
++
++static void fill_alt_cfi(struct objtool_file *file, struct instruction *alt_insn)
++{
++	struct alternative *alt;
++
++	__fill_alt_cfi(file, alt_insn);
++
++	list_for_each_entry(alt, &alt_insn->alts, list)
++		__fill_alt_cfi(file, alt->insn);
++}
++
++static struct instruction *
++__find_unwind(struct objtool_file *file,
++	      struct instruction *insn, unsigned long offset)
++{
++	int alt_group = insn->alt_group;
++	struct instruction *next;
++	unsigned long off = 0;
++
++	while ((off + insn->len) <= offset) {
++		next = next_insn_same_sec(file, insn);
++		if (next && next->alt_group != alt_group)
++			next = NULL;
++
++		if (!next)
++			break;
++
++		off += insn->len;
++		insn = next;
+ 	}
++
++	return insn;
++}
++
++struct instruction *
++find_alt_unwind(struct objtool_file *file,
++		struct instruction *alt_insn, unsigned long offset)
++{
++	struct instruction *fit;
++	struct alternative *alt;
++	unsigned long fit_off;
++
++	fit = __find_unwind(file, alt_insn, offset);
++	fit_off = (fit->offset - alt_insn->offset);
++
++	list_for_each_entry(alt, &alt_insn->alts, list) {
++		struct instruction *x;
++		unsigned long x_off;
++
++		x = __find_unwind(file, alt->insn, offset);
++		x_off = (x->offset - alt->insn->offset);
++
++		if (fit_off < x_off) {
++			fit = x;
++			fit_off = x_off;
++
++		} else if (fit_off == x_off &&
++			   memcmp(&fit->cfi, &x->cfi, sizeof(struct cfi_state))) {
++
++			char *_str1 = offstr(fit->sec, fit->offset);
++			char *_str2 = offstr(x->sec, x->offset);
++			WARN("%s: equal-offset incompatible alternative: %s\n", _str1, _str2);
++			free(_str1);
++			free(_str2);
++			return fit;
++		}
++	}
++
++	return fit;
++}
++
++static int __validate_unwind(struct objtool_file *file,
++			     struct instruction *alt_insn,
++			     struct instruction *insn)
++{
++	int alt_group = insn->alt_group;
++	struct instruction *unwind;
++	unsigned long offset = 0;
++
++	sec_for_each_insn_from(file, insn) {
++		if (insn->alt_group != alt_group)
++			break;
++
++		unwind = find_alt_unwind(file, alt_insn, offset);
++
++		if (memcmp(&insn->cfi, &unwind->cfi, sizeof(struct cfi_state))) {
++
++			char *_str1 = offstr(insn->sec, insn->offset);
++			char *_str2 = offstr(unwind->sec, unwind->offset);
++			WARN("%s: unwind incompatible alternative: %s (%ld)\n",
++			     _str1, _str2, offset);
++			free(_str1);
++			free(_str2);
++			return 1;
++		}
++
++		offset += insn->len;
++	}
++
++	return 0;
++}
++
++static int validate_alt_unwind(struct objtool_file *file,
++			       struct instruction *alt_insn)
++{
++	struct alternative *alt;
++
++	if (__validate_unwind(file, alt_insn, alt_insn))
++		return 1;
++
++	list_for_each_entry(alt, &alt_insn->alts, list) {
++		if (__validate_unwind(file, alt_insn, alt->insn))
++			return 1;
++	}
++
++	return 0;
+ }
+ 
+ /*
+@@ -2423,9 +2561,10 @@ static void fill_alternative_cfi(struct
+ static int validate_branch(struct objtool_file *file, struct symbol *func,
+ 			   struct instruction *insn, struct insn_state state)
+ {
++	struct instruction *next_insn, *alt_insn = NULL;
+ 	struct alternative *alt;
+-	struct instruction *next_insn;
+ 	struct section *sec;
++	int alt_group = 0;
+ 	u8 visited;
+ 	int ret;
+ 
+@@ -2480,8 +2619,10 @@ static int validate_branch(struct objtoo
+ 				}
+ 			}
+ 
+-			if (insn->alt_group)
+-				fill_alternative_cfi(file, insn);
++			if (insn->alt_group) {
++				alt_insn = insn;
++				alt_group = insn->alt_group;
++			}
+ 
+ 			if (skip_orig)
+ 				return 0;
+@@ -2613,6 +2754,17 @@ static int validate_branch(struct objtoo
+ 		}
+ 
+ 		insn = next_insn;
++
++		if (alt_insn && insn->alt_group != alt_group) {
++			alt_insn->alt_end = insn;
++
++			fill_alt_cfi(file, alt_insn);
++
++			if (validate_alt_unwind(file, alt_insn))
++				return 1;
++
++			alt_insn = NULL;
++		}
+ 	}
+ 
+ 	return 0;
+Index: linux-2.6/tools/objtool/check.h
+===================================================================
+--- linux-2.6.orig/tools/objtool/check.h
++++ linux-2.6/tools/objtool/check.h
+@@ -40,6 +40,7 @@ struct instruction {
+ 	struct instruction *first_jump_src;
+ 	struct reloc *jump_table;
+ 	struct list_head alts;
++	struct instruction *alt_end;
+ 	struct symbol *func;
+ 	struct list_head stack_ops;
+ 	struct cfi_state cfi;
+@@ -54,6 +55,10 @@ static inline bool is_static_jump(struct
+ 	       insn->type == INSN_JUMP_UNCONDITIONAL;
+ }
+ 
++struct instruction *
++find_alt_unwind(struct objtool_file *file,
++		struct instruction *alt_insn, unsigned long offset);
++
+ struct instruction *find_insn(struct objtool_file *file,
+ 			      struct section *sec, unsigned long offset);
+ 
+Index: linux-2.6/tools/objtool/orc_gen.c
+===================================================================
+--- linux-2.6.orig/tools/objtool/orc_gen.c
++++ linux-2.6/tools/objtool/orc_gen.c
+@@ -12,75 +12,86 @@
+ #include "check.h"
+ #include "warn.h"
+ 
+-int create_orc(struct objtool_file *file)
++static int create_orc_insn(struct objtool_file *file, struct instruction *insn)
+ {
+-	struct instruction *insn;
++	struct orc_entry *orc = &insn->orc;
++	struct cfi_reg *cfa = &insn->cfi.cfa;
++	struct cfi_reg *bp = &insn->cfi.regs[CFI_BP];
++
++	orc->end = insn->cfi.end;
++
++	if (cfa->base == CFI_UNDEFINED) {
++		orc->sp_reg = ORC_REG_UNDEFINED;
++		return 0;
++	}
+ 
+-	for_each_insn(file, insn) {
+-		struct orc_entry *orc = &insn->orc;
+-		struct cfi_reg *cfa = &insn->cfi.cfa;
+-		struct cfi_reg *bp = &insn->cfi.regs[CFI_BP];
++	switch (cfa->base) {
++	case CFI_SP:
++		orc->sp_reg = ORC_REG_SP;
++		break;
++	case CFI_SP_INDIRECT:
++		orc->sp_reg = ORC_REG_SP_INDIRECT;
++		break;
++	case CFI_BP:
++		orc->sp_reg = ORC_REG_BP;
++		break;
++	case CFI_BP_INDIRECT:
++		orc->sp_reg = ORC_REG_BP_INDIRECT;
++		break;
++	case CFI_R10:
++		orc->sp_reg = ORC_REG_R10;
++		break;
++	case CFI_R13:
++		orc->sp_reg = ORC_REG_R13;
++		break;
++	case CFI_DI:
++		orc->sp_reg = ORC_REG_DI;
++		break;
++	case CFI_DX:
++		orc->sp_reg = ORC_REG_DX;
++		break;
++	default:
++		WARN_FUNC("unknown CFA base reg %d",
++			  insn->sec, insn->offset, cfa->base);
++		return -1;
++	}
+ 
+-		if (!insn->sec->text)
+-			continue;
++	switch(bp->base) {
++	case CFI_UNDEFINED:
++		orc->bp_reg = ORC_REG_UNDEFINED;
++		break;
++	case CFI_CFA:
++		orc->bp_reg = ORC_REG_PREV_SP;
++		break;
++	case CFI_BP:
++		orc->bp_reg = ORC_REG_BP;
++		break;
++	default:
++		WARN_FUNC("unknown BP base reg %d",
++			  insn->sec, insn->offset, bp->base);
++		return -1;
++	}
+ 
+-		orc->end = insn->cfi.end;
++	orc->sp_offset = cfa->offset;
++	orc->bp_offset = bp->offset;
++	orc->type = insn->cfi.type;
+ 
+-		if (cfa->base == CFI_UNDEFINED) {
+-			orc->sp_reg = ORC_REG_UNDEFINED;
+-			continue;
+-		}
++	return 0;
++}
+ 
+-		switch (cfa->base) {
+-		case CFI_SP:
+-			orc->sp_reg = ORC_REG_SP;
+-			break;
+-		case CFI_SP_INDIRECT:
+-			orc->sp_reg = ORC_REG_SP_INDIRECT;
+-			break;
+-		case CFI_BP:
+-			orc->sp_reg = ORC_REG_BP;
+-			break;
+-		case CFI_BP_INDIRECT:
+-			orc->sp_reg = ORC_REG_BP_INDIRECT;
+-			break;
+-		case CFI_R10:
+-			orc->sp_reg = ORC_REG_R10;
+-			break;
+-		case CFI_R13:
+-			orc->sp_reg = ORC_REG_R13;
+-			break;
+-		case CFI_DI:
+-			orc->sp_reg = ORC_REG_DI;
+-			break;
+-		case CFI_DX:
+-			orc->sp_reg = ORC_REG_DX;
+-			break;
+-		default:
+-			WARN_FUNC("unknown CFA base reg %d",
+-				  insn->sec, insn->offset, cfa->base);
+-			return -1;
+-		}
++int create_orc(struct objtool_file *file)
++{
++	struct instruction *insn;
+ 
+-		switch(bp->base) {
+-		case CFI_UNDEFINED:
+-			orc->bp_reg = ORC_REG_UNDEFINED;
+-			break;
+-		case CFI_CFA:
+-			orc->bp_reg = ORC_REG_PREV_SP;
+-			break;
+-		case CFI_BP:
+-			orc->bp_reg = ORC_REG_BP;
+-			break;
+-		default:
+-			WARN_FUNC("unknown BP base reg %d",
+-				  insn->sec, insn->offset, bp->base);
+-			return -1;
+-		}
++	for_each_insn(file, insn) {
++		int ret;
++	       
++		if (!insn->sec->text)
++			continue;
+ 
+-		orc->sp_offset = cfa->offset;
+-		orc->bp_offset = bp->offset;
+-		orc->type = insn->cfi.type;
++		ret = create_orc_insn(file, insn);
++		if (ret)
++			return ret;
+ 	}
+ 
+ 	return 0;
+@@ -166,6 +177,28 @@ int create_orc_sections(struct objtool_f
+ 
+ 		prev_insn = NULL;
+ 		sec_for_each_insn(file, sec, insn) {
++
++			if (insn->alt_end) {
++				unsigned int offset, alt_len;
++				struct instruction *unwind;
++
++				alt_len = insn->alt_end->offset - insn->offset;
++				for (offset = 0; offset < alt_len; offset++) {
++					unwind = find_alt_unwind(file, insn, offset);
++					/* XXX: skipped earlier ! */
++					create_orc_insn(file, unwind);
++					if (!prev_insn ||
++					    memcmp(&unwind->orc, &prev_insn->orc,
++						   sizeof(struct orc_entry))) {
++						idx++;
++//						WARN_FUNC("ORC @ %d/%d", sec, insn->offset+offset, offset, alt_len);
++					}
++					prev_insn = unwind;
++				}
++
++				insn = insn->alt_end;
++			}
++
+ 			if (!prev_insn ||
+ 			    memcmp(&insn->orc, &prev_insn->orc,
+ 				   sizeof(struct orc_entry))) {
+@@ -203,6 +236,31 @@ int create_orc_sections(struct objtool_f
+ 
+ 		prev_insn = NULL;
+ 		sec_for_each_insn(file, sec, insn) {
++
++			if (insn->alt_end) {
++				unsigned int offset, alt_len;
++				struct instruction *unwind;
++
++				alt_len = insn->alt_end->offset - insn->offset;
++				for (offset = 0; offset < alt_len; offset++) {
++					unwind = find_alt_unwind(file, insn, offset);
++					if (!prev_insn ||
++					    memcmp(&unwind->orc, &prev_insn->orc,
++						   sizeof(struct orc_entry))) {
++
++						if (create_orc_entry(file->elf, u_sec, ip_relocsec, idx,
++								     insn->sec, insn->offset + offset,
++								     &unwind->orc))
++							return -1;
++
++						idx++;
++					}
++					prev_insn = unwind;
++				}
++
++				insn = insn->alt_end;
++			}
++
+ 			if (!prev_insn || memcmp(&insn->orc, &prev_insn->orc,
+ 						 sizeof(struct orc_entry))) {
+ 
 
