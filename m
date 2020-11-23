@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 94E45C63697
-	for <xen-devel@archiver.kernel.org>; Mon, 23 Nov 2020 18:01:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 53E52C63798
+	for <xen-devel@archiver.kernel.org>; Mon, 23 Nov 2020 18:01:07 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2F4D4206B2
+	by mail.kernel.org (Postfix) with ESMTPS id D52FE2076E
 	for <xen-devel@archiver.kernel.org>; Mon, 23 Nov 2020 18:01:06 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="HUbcLcri"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2F4D4206B2
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="LaCR8JlK"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D52FE2076E
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.35014.66462 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.35008.66385 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khG91-0001B3-Qt; Mon, 23 Nov 2020 18:00:55 +0000
+	id 1khG8v-0000sj-7I; Mon, 23 Nov 2020 18:00:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 35014.66462; Mon, 23 Nov 2020 18:00:55 +0000
+Received: by outflank-mailman (output) from mailman id 35008.66385; Mon, 23 Nov 2020 18:00:49 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,179 +38,139 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khG91-0001A4-1O; Mon, 23 Nov 2020 18:00:55 +0000
-Received: by outflank-mailman (input) for mailman id 35014;
+	id 1khG8u-0000rt-Qc; Mon, 23 Nov 2020 18:00:48 +0000
+Received: by outflank-mailman (input) for mailman id 35008;
  Mon, 23 Nov 2020 18:00:45 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>) id 1khG8r-0000n1-SV
+ (envelope-from <paul@xen.org>) id 1khG8r-0000mX-DF
  for xen-devel@lists.xenproject.org; Mon, 23 Nov 2020 18:00:45 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1khG8q-000719-N8; Mon, 23 Nov 2020 18:00:44 +0000
+ id 1khG8q-00070r-Dd; Mon, 23 Nov 2020 18:00:44 +0000
 Received: from ec2-54-145-241-208.compute-1.amazonaws.com ([54.145.241.208]
  helo=ip-10-0-29-170.ec2.internal)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1khFtl-0000at-7A; Mon, 23 Nov 2020 17:45:09 +0000
+ id 1khFtm-0000at-0a; Mon, 23 Nov 2020 17:45:10 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1khG8r-0000n1-SV
+	id 1khG8r-0000mX-DF
 	for xen-devel@lists.xenproject.org; Mon, 23 Nov 2020 18:00:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	 bh=Ni3v8rNOQnYX+FJEz4ZSjie9Y3E4/QZ6KFSYwE8qkX0=; b=HUbcLcri8euWWCAQek9iap8pf
-	gb9/NsWal+w/ACsywDUUFgGvNEd77afn1hL3FXYDMABhIAAUL7f6O4K+zx69kluOvWtVulr7DQ4ig
-	PtfOnRHlfWmW1kTtMMWq2RuyOTcPsk2pPIXWBbAzjDOh2Jw5SFv4HLe8LgbxIpS4VFM9g=;
+	 bh=YcXfMQGt7JCycdtTvU5ue8RUHb6lcyzpJs/F2AZGOVM=; b=LaCR8JlKTnIY8XPMT1QVGLDtH
+	EVQqVETA0EWBL+UWNfT19D7HEt6t+GGAI1TZVPxT4n/hZv5vneixIls+pso2Aq29CtafMBjbAWhnl
+	bZ3dE252zZNT2SzxHuUB8eXDgBKaAXqi/kL+kngG4TSStn4GJ/ZQzMQRhPjWKetbcarPY=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
 	by mail.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1khG8q-000719-N8; Mon, 23 Nov 2020 18:00:44 +0000
+	id 1khG8q-00070r-Dd; Mon, 23 Nov 2020 18:00:44 +0000
 Received: from ec2-54-145-241-208.compute-1.amazonaws.com ([54.145.241.208] helo=ip-10-0-29-170.ec2.internal)
 	by xenbits.xenproject.org with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
 	(Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1khFtl-0000at-7A; Mon, 23 Nov 2020 17:45:09 +0000
+	id 1khFtm-0000at-0a; Mon, 23 Nov 2020 17:45:10 +0000
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: Paul Durrant <pdurrant@amazon.com>,
 	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>,
-	Christian Lindig <christian.lindig@citrix.com>,
-	David Scott <dave@recoil.org>,
-	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v3 12/23] libxl: add libxl_device_pci_assignable_list_free()...
-Date: Mon, 23 Nov 2020 17:44:52 +0000
-Message-Id: <20201123174503.6800-13-paul@xen.org>
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v3 16/23] docs/man: fix xl(1) documentation for 'pci' operations
+Date: Mon, 23 Nov 2020 17:44:56 +0000
+Message-Id: <20201123174503.6800-17-paul@xen.org>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20201123174503.6800-1-paul@xen.org>
 References: <20201123174503.6800-1-paul@xen.org>
 
 From: Paul Durrant <pdurrant@amazon.com>
 
-... to be used by callers of libxl_device_pci_assignable_list().
-
-Currently there is no API for callers of libxl_device_pci_assignable_list()
-to free the list. The xl function pciassignable_list() calls
-libxl_device_pci_dispose() on each element of the returned list, but
-libxl_pci_assignable() in libxl_pci.c does not. Neither does the implementation
-of libxl_device_pci_assignable_list() call libxl_device_pci_init().
-
-This patch adds the new API function, makes sure it is used everywhere and
-also modifies libxl_device_pci_assignable_list() to initialize list
-entries rather than just zeroing them.
+Currently the documentation completely fails to mention the existence of
+PCI_SPEC_STRING. This patch tidies things up, specifically clarifying that
+'pci-assignable-add/remove' take <BDF> arguments where as 'pci-attach/detach'
+take <PCI_SPEC_STRING> arguments (which will be enforced in a subsequent
+patch).
 
 Signed-off-by: Paul Durrant <pdurrant@amazon.com>
 ---
 Cc: Ian Jackson <iwj@xenproject.org>
 Cc: Wei Liu <wl@xen.org>
-Cc: Christian Lindig <christian.lindig@citrix.com>
-Cc: David Scott <dave@recoil.org>
-Cc: Anthony PERARD <anthony.perard@citrix.com>
 ---
- tools/include/libxl.h                |  7 +++++++
- tools/libs/light/libxl_pci.c         | 14 ++++++++++++--
- tools/ocaml/libs/xl/xenlight_stubs.c |  3 +--
- tools/xl/xl_pci.c                    |  3 +--
- 4 files changed, 21 insertions(+), 6 deletions(-)
+ docs/man/xl.1.pod.in | 28 +++++++++++++++++-----------
+ 1 file changed, 17 insertions(+), 11 deletions(-)
 
-diff --git a/tools/include/libxl.h b/tools/include/libxl.h
-index ee52d3cf7e..8225809d94 100644
---- a/tools/include/libxl.h
-+++ b/tools/include/libxl.h
-@@ -458,6 +458,12 @@
- #define LIBXL_HAVE_DEVICE_PCI_LIST_FREE 1
+diff --git a/docs/man/xl.1.pod.in b/docs/man/xl.1.pod.in
+index f92bacfa72..c5fbce3b5c 100644
+--- a/docs/man/xl.1.pod.in
++++ b/docs/man/xl.1.pod.in
+@@ -1597,14 +1597,18 @@ List virtual network interfaces for a domain.
  
- /*
-+ * LIBXL_HAVE_DEVICE_PCI_ASSIGNABLE_LIST_FREE indicates that the
-+ * libxl_device_pci_assignable_list_free() function is defined.
-+ */
-+#define LIBXL_HAVE_DEVICE_PCI_ASSIGNABLE_LIST_FREE 1
+ =item B<pci-assignable-list>
+ 
+-List all the assignable PCI devices.
++List all the B<BDF> of assignable PCI devices. See
++L<xl-pci-configuration(5)> for more information.
 +
-+/*
-  * libxl ABI compatibility
-  *
-  * The only guarantee which libxl makes regarding ABI compatibility
-@@ -2369,6 +2375,7 @@ int libxl_device_events_handler(libxl_ctx *ctx,
- int libxl_device_pci_assignable_add(libxl_ctx *ctx, libxl_device_pci *pci, int rebind);
- int libxl_device_pci_assignable_remove(libxl_ctx *ctx, libxl_device_pci *pci, int rebind);
- libxl_device_pci *libxl_device_pci_assignable_list(libxl_ctx *ctx, int *num);
-+void libxl_device_pci_assignable_list_free(libxl_device_pci *list, int num);
+ These are devices in the system which are configured to be
+ available for passthrough and are bound to a suitable PCI
+ backend driver in domain 0 rather than a real driver.
  
- /* CPUID handling */
- int libxl_cpuid_parse_config(libxl_cpuid_policy_list *cpuid, const char* str);
-diff --git a/tools/libs/light/libxl_pci.c b/tools/libs/light/libxl_pci.c
-index 0f41939d1f..5a3352c2ec 100644
---- a/tools/libs/light/libxl_pci.c
-+++ b/tools/libs/light/libxl_pci.c
-@@ -457,7 +457,7 @@ libxl_device_pci *libxl_device_pci_assignable_list(libxl_ctx *ctx, int *num)
-         pcis = new;
-         new = pcis + *num;
+ =item B<pci-assignable-add> I<BDF>
  
--        memset(new, 0, sizeof(*new));
-+        libxl_device_pci_init(new);
-         pci_struct_fill(new, dom, bus, dev, func, 0);
- 
-         if (pci_info_xs_read(gc, new, "domid")) /* already assigned */
-@@ -472,6 +472,16 @@ out:
-     return pcis;
- }
- 
-+void libxl_device_pci_assignable_list_free(libxl_device_pci *list, int num)
-+{
-+    int i;
+-Make the device at PCI Bus/Device/Function BDF assignable to guests.
++Make the device at B<BDF> assignable to guests. See
++L<xl-pci-configuration(5)> for more information.
 +
-+    for (i = 0; i < num; i++)
-+        libxl_device_pci_dispose(&list[i]);
+ This will bind the device to the pciback driver and assign it to the
+ "quarantine domain".  If it is already bound to a driver, it will
+ first be unbound, and the original driver stored so that it can be
+@@ -1620,8 +1624,10 @@ being used.
+ 
+ =item B<pci-assignable-remove> [I<-r>] I<BDF>
+ 
+-Make the device at PCI Bus/Device/Function BDF not assignable to
+-guests.  This will at least unbind the device from pciback, and
++Make the device at B<BDF> not assignable to guests. See
++L<xl-pci-configuration(5)> for more information.
 +
-+    free(list);
-+}
-+
- /* Unbind device from its current driver, if any.  If driver_path is non-NULL,
-  * store the path to the original driver in it. */
- static int sysfs_dev_unbind(libxl__gc *gc, libxl_device_pci *pci,
-@@ -1490,7 +1500,7 @@ static int libxl_pci_assignable(libxl_ctx *ctx, libxl_device_pci *pci)
-             pcis[i].func == pci->func)
-             break;
-     }
--    free(pcis);
-+    libxl_device_pci_assignable_list_free(pcis, num);
-     return i != num;
- }
++This will at least unbind the device from pciback, and
+ re-assign it from the "quarantine domain" back to domain 0.  If the -r
+ option is specified, it will also attempt to re-bind the device to its
+ original driver, making it usable by Domain 0 again.  If the device is
+@@ -1637,15 +1643,15 @@ As always, this should only be done if you trust the guest, or are
+ confident that the particular device you're re-assigning to dom0 will
+ cancel all in-flight DMA on FLR.
  
-diff --git a/tools/ocaml/libs/xl/xenlight_stubs.c b/tools/ocaml/libs/xl/xenlight_stubs.c
-index 1181971da4..352a00134d 100644
---- a/tools/ocaml/libs/xl/xenlight_stubs.c
-+++ b/tools/ocaml/libs/xl/xenlight_stubs.c
-@@ -894,9 +894,8 @@ value stub_xl_device_pci_assignable_list(value ctx)
- 		Field(list, 1) = temp;
- 		temp = list;
- 		Store_field(list, 0, Val_device_pci(&c_list[i]));
--		libxl_device_pci_dispose(&c_list[i]);
- 	}
--	free(c_list);
-+	libxl_device_pci_assignable_list_free(c_list, nb);
+-=item B<pci-attach> I<domain-id> I<BDF>
++=item B<pci-attach> I<domain-id> I<PCI_SPEC_STRING>
  
- 	CAMLreturn(list);
- }
-diff --git a/tools/xl/xl_pci.c b/tools/xl/xl_pci.c
-index 7c0f102ac7..f71498cbb5 100644
---- a/tools/xl/xl_pci.c
-+++ b/tools/xl/xl_pci.c
-@@ -164,9 +164,8 @@ static void pciassignable_list(void)
-     for (i = 0; i < num; i++) {
-         printf("%04x:%02x:%02x.%01x\n",
-                pcis[i].domain, pcis[i].bus, pcis[i].dev, pcis[i].func);
--        libxl_device_pci_dispose(&pcis[i]);
-     }
--    free(pcis);
-+    libxl_device_pci_assignable_list_free(pcis, num);
- }
+-Hot-plug a new pass-through pci device to the specified domain.
+-B<BDF> is the PCI Bus/Device/Function of the physical device to pass-through.
++Hot-plug a new pass-through pci device to the specified domain. See
++L<xl-pci-configuration(5)> for more information.
  
- int main_pciassignable_list(int argc, char **argv)
+-=item B<pci-detach> [I<OPTIONS>] I<domain-id> I<BDF>
++=item B<pci-detach> [I<OPTIONS>] I<domain-id> I<PCI_SPEC_STRING>
+ 
+-Hot-unplug a previously assigned pci device from a domain. B<BDF> is the PCI
+-Bus/Device/Function of the physical device to be removed from the guest domain.
++Hot-unplug a pci device that was previously passed through to a domain. See
++L<xl-pci-configuration(5)> for more information.
+ 
+ B<OPTIONS>
+ 
+@@ -1660,7 +1666,7 @@ even without guest domain's collaboration.
+ 
+ =item B<pci-list> I<domain-id>
+ 
+-List pass-through pci devices for a domain.
++List the B<BDF> of pci devices passed through to a domain.
+ 
+ =back
+ 
 -- 
 2.11.0
 
