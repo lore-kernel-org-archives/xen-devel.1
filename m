@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D721BC63777
-	for <xen-devel@archiver.kernel.org>; Mon, 23 Nov 2020 18:01:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3DE05C64E75
+	for <xen-devel@archiver.kernel.org>; Mon, 23 Nov 2020 18:01:09 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 70B9320758
-	for <xen-devel@archiver.kernel.org>; Mon, 23 Nov 2020 18:01:06 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id D27F620758
+	for <xen-devel@archiver.kernel.org>; Mon, 23 Nov 2020 18:01:08 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="5h8Sdvp0"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 70B9320758
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="GQiCuT9i"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D27F620758
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.35006.66360 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.35009.66398 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khG8u-0000qC-1P; Mon, 23 Nov 2020 18:00:48 +0000
+	id 1khG8v-0000vB-V9; Mon, 23 Nov 2020 18:00:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 35006.66360; Mon, 23 Nov 2020 18:00:47 +0000
+Received: by outflank-mailman (output) from mailman id 35009.66398; Mon, 23 Nov 2020 18:00:49 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,170 +38,115 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khG8t-0000pp-RS; Mon, 23 Nov 2020 18:00:47 +0000
-Received: by outflank-mailman (input) for mailman id 35006;
+	id 1khG8v-0000ua-Gt; Mon, 23 Nov 2020 18:00:49 +0000
+Received: by outflank-mailman (input) for mailman id 35009;
  Mon, 23 Nov 2020 18:00:45 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>) id 1khG8r-0000mN-7q
+ (envelope-from <paul@xen.org>) id 1khG8r-0000mc-E2
  for xen-devel@lists.xenproject.org; Mon, 23 Nov 2020 18:00:45 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1khG8q-000713-JQ; Mon, 23 Nov 2020 18:00:44 +0000
+ id 1khG8q-00071P-TD; Mon, 23 Nov 2020 18:00:44 +0000
 Received: from ec2-54-145-241-208.compute-1.amazonaws.com ([54.145.241.208]
  helo=ip-10-0-29-170.ec2.internal)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1khFtl-0000at-DZ; Mon, 23 Nov 2020 17:45:09 +0000
+ id 1khFtm-0000at-Vj; Mon, 23 Nov 2020 17:45:11 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1khG8r-0000mN-7q
+	id 1khG8r-0000mc-E2
 	for xen-devel@lists.xenproject.org; Mon, 23 Nov 2020 18:00:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	 bh=QgHDaVAQBuzu/wVXFL4ANbr3u6TzV6QgoeQN2pH/gEg=; b=5h8Sdvp0Wa16jCGuk2sR6KlGM
-	dQHdHViUYRgn+5SPQwmPSWuNZwOLs1ueC2iW6zwHYaNDwpivdIIQArY3iaKyN9tC3qxy1pRZpjnqs
-	EcIRVAQiIVJ5HZvsfAL+uaaGDOmaiD58Y3jpppzOYy+7N8qV2OmG/Hc9nLGedXfyLWsvU=;
+	 bh=+FpU4YZrBWh/cVU+pi5ZnHT9t/65wsl1ql6zxUHKlbw=; b=GQiCuT9imAlHwhjUgSCq38fcx
+	kjNc1Bsxa3/MZoklq85E4TnDpVpMcu/9n8EFBZxQQD6T6InRpbElE49SHo4tvtXw9ROfmkRHgTyzw
+	hzWdFgACW2GVKlfblVfv5Zr/pdcaR4uX18HxTe2Lmh5Pi5g0gkdlicQcgRPAh6UI1uG30=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
 	by mail.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1khG8q-000713-JQ; Mon, 23 Nov 2020 18:00:44 +0000
+	id 1khG8q-00071P-TD; Mon, 23 Nov 2020 18:00:44 +0000
 Received: from ec2-54-145-241-208.compute-1.amazonaws.com ([54.145.241.208] helo=ip-10-0-29-170.ec2.internal)
 	by xenbits.xenproject.org with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
 	(Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1khFtl-0000at-DZ; Mon, 23 Nov 2020 17:45:09 +0000
+	id 1khFtm-0000at-Vj; Mon, 23 Nov 2020 17:45:11 +0000
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: Paul Durrant <pdurrant@amazon.com>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v3 13/23] libxl: use COMPARE_PCI() macro is_pci_in_array()...
-Date: Mon, 23 Nov 2020 17:44:53 +0000
-Message-Id: <20201123174503.6800-14-paul@xen.org>
+Subject: [PATCH v3 20/23] docs/man: modify xl(1) in preparation for naming of assignable devices
+Date: Mon, 23 Nov 2020 17:45:00 +0000
+Message-Id: <20201123174503.6800-21-paul@xen.org>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20201123174503.6800-1-paul@xen.org>
 References: <20201123174503.6800-1-paul@xen.org>
 
 From: Paul Durrant <pdurrant@amazon.com>
 
-... rather than an open-coded equivalent.
-
-This patch tidies up the is_pci_in_array() function, making it take a single
-'libxl_device_pci' argument rather than separate domain, bus, device and
-function arguments. The already-available COMPARE_PCI() macro can then be
-used and it is also modified to return 'bool' rather than 'int'.
-
-The patch also modifies libxl_pci_assignable() to use is_pci_in_array() rather
-than a separate open-coded equivalent, and also modifies it to return a
-'bool' rather than an 'int'.
-
-NOTE: The COMPARE_PCI() macro is also fixed to include the 'domain' in its
-      comparison, which should always have been the case.
+A subsequent patch will introduce code to allow a name to be specified to
+'xl pci-assignable-add' such that the assignable device may be referred to
+by than name in subsequent operations.
 
 Signed-off-by: Paul Durrant <pdurrant@amazon.com>
 ---
 Cc: Ian Jackson <iwj@xenproject.org>
 Cc: Wei Liu <wl@xen.org>
 ---
- tools/libs/light/libxl_internal.h |  7 ++++---
- tools/libs/light/libxl_pci.c      | 38 +++++++++++++-------------------------
- 2 files changed, 17 insertions(+), 28 deletions(-)
+ docs/man/xl.1.pod.in | 19 ++++++++++++-------
+ 1 file changed, 12 insertions(+), 7 deletions(-)
 
-diff --git a/tools/libs/light/libxl_internal.h b/tools/libs/light/libxl_internal.h
-index ecee61b541..02f8a3179c 100644
---- a/tools/libs/light/libxl_internal.h
-+++ b/tools/libs/light/libxl_internal.h
-@@ -4746,9 +4746,10 @@ void libxl__xcinfo2xlinfo(libxl_ctx *ctx,
-  * devices have same identifier. */
- #define COMPARE_DEVID(a, b) ((a)->devid == (b)->devid)
- #define COMPARE_DISK(a, b) (!strcmp((a)->vdev, (b)->vdev))
--#define COMPARE_PCI(a, b) ((a)->func == (b)->func &&    \
--                           (a)->bus == (b)->bus &&      \
--                           (a)->dev == (b)->dev)
-+#define COMPARE_PCI(a, b) ((a)->domain == (b)->domain && \
-+                           (a)->bus == (b)->bus &&       \
-+                           (a)->dev == (b)->dev &&       \
-+                           (a)->func == (b)->func)
- #define COMPARE_USB(a, b) ((a)->ctrl == (b)->ctrl && \
-                            (a)->port == (b)->port)
- #define COMPARE_USBCTRL(a, b) ((a)->devid == (b)->devid)
-diff --git a/tools/libs/light/libxl_pci.c b/tools/libs/light/libxl_pci.c
-index 5a3352c2ec..e0b616fe18 100644
---- a/tools/libs/light/libxl_pci.c
-+++ b/tools/libs/light/libxl_pci.c
-@@ -336,24 +336,17 @@ retry_transaction2:
-     return 0;
- }
+diff --git a/docs/man/xl.1.pod.in b/docs/man/xl.1.pod.in
+index c5fbce3b5c..0822a58428 100644
+--- a/docs/man/xl.1.pod.in
++++ b/docs/man/xl.1.pod.in
+@@ -1595,19 +1595,23 @@ List virtual network interfaces for a domain.
  
--static int is_pci_in_array(libxl_device_pci *assigned, int num_assigned,
--                           int dom, int bus, int dev, int func)
-+static bool is_pci_in_array(libxl_device_pci *pcis, int num,
-+                            libxl_device_pci *pci)
- {
-     int i;
+ =over 4
  
--    for(i = 0; i < num_assigned; i++) {
--        if ( assigned[i].domain != dom )
--            continue;
--        if ( assigned[i].bus != bus )
--            continue;
--        if ( assigned[i].dev != dev )
--            continue;
--        if ( assigned[i].func != func )
--            continue;
--        return 1;
-+    for (i = 0; i < num; i++) {
-+        if (COMPARE_PCI(pci, &pcis[i]))
-+            break;
-     }
+-=item B<pci-assignable-list>
++=item B<pci-assignable-list> [I<-n>]
  
--    return 0;
-+    return i < num;
- }
+ List all the B<BDF> of assignable PCI devices. See
+-L<xl-pci-configuration(5)> for more information.
++L<xl-pci-configuration(5)> for more information. If the -n option is
++specified then any name supplied when the device was made assignable
++will also be displayed.
  
- /* Write the standard BDF into the sysfs path given by sysfs_path. */
-@@ -1487,21 +1480,17 @@ int libxl_device_pci_add(libxl_ctx *ctx, uint32_t domid,
-     return AO_INPROGRESS;
- }
+ These are devices in the system which are configured to be
+ available for passthrough and are bound to a suitable PCI
+ backend driver in domain 0 rather than a real driver.
  
--static int libxl_pci_assignable(libxl_ctx *ctx, libxl_device_pci *pci)
-+static bool libxl_pci_assignable(libxl_ctx *ctx, libxl_device_pci *pci)
- {
-     libxl_device_pci *pcis;
--    int num, i;
-+    int num;
-+    bool assignable;
+-=item B<pci-assignable-add> I<BDF>
++=item B<pci-assignable-add> [I<-n NAME>] I<BDF>
  
-     pcis = libxl_device_pci_assignable_list(ctx, &num);
--    for (i = 0; i < num; i++) {
--        if (pcis[i].domain == pci->domain &&
--            pcis[i].bus == pci->bus &&
--            pcis[i].dev == pci->dev &&
--            pcis[i].func == pci->func)
--            break;
--    }
-+    assignable = is_pci_in_array(pcis, num, pci);
-     libxl_device_pci_assignable_list_free(pcis, num);
--    return i != num;
-+
-+    return assignable;
- }
+ Make the device at B<BDF> assignable to guests. See
+-L<xl-pci-configuration(5)> for more information.
++L<xl-pci-configuration(5)> for more information. If the -n option is
++supplied then the assignable device entry will the named with the
++given B<NAME>.
  
- static void device_pci_add_stubdom_wait(libxl__egc *egc,
-@@ -1834,8 +1823,7 @@ static void do_pci_remove(libxl__egc *egc, pci_remove_state *prs)
-         goto out_fail;
-     }
+ This will bind the device to the pciback driver and assign it to the
+ "quarantine domain".  If it is already bound to a driver, it will
+@@ -1622,10 +1626,11 @@ not to do this on a device critical to domain 0's operation, such as
+ storage controllers, network interfaces, or GPUs that are currently
+ being used.
  
--    attached = is_pci_in_array(pcis, num, pci->domain,
--                               pci->bus, pci->dev, pci->func);
-+    attached = is_pci_in_array(pcis, num, pci);
-     libxl_device_pci_list_free(pcis, num);
+-=item B<pci-assignable-remove> [I<-r>] I<BDF>
++=item B<pci-assignable-remove> [I<-r>] I<BDF>|I<NAME>
  
-     rc = ERROR_INVAL;
+-Make the device at B<BDF> not assignable to guests. See
+-L<xl-pci-configuration(5)> for more information.
++Make a device non-assignable to guests. The device may be identified
++either by its B<BDF> or the B<NAME> supplied when the device was made
++assignable. See L<xl-pci-configuration(5)> for more information.
+ 
+ This will at least unbind the device from pciback, and
+ re-assign it from the "quarantine domain" back to domain 0.  If the -r
 -- 
 2.11.0
 
