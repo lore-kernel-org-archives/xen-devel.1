@@ -2,29 +2,25 @@ Return-Path: <SRS0=fYmn=E6=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C4B1CC2D0E4
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 00:59:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B6A91C2D0E4
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 01:06:23 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5DCAB20729
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 00:59:05 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="UTVFd4MY"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5DCAB20729
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id 4F7F120721
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 01:06:23 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4F7F120721
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=perches.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.35311.66768 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.35319.66779 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khMfL-0006cO-UP; Tue, 24 Nov 2020 00:58:43 +0000
+	id 1khMmA-0003fx-PN; Tue, 24 Nov 2020 01:05:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 35311.66768; Tue, 24 Nov 2020 00:58:43 +0000
+Received: by outflank-mailman (output) from mailman id 35319.66779; Tue, 24 Nov 2020 01:05:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,87 +35,122 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khMfL-0006cH-RN; Tue, 24 Nov 2020 00:58:43 +0000
-Received: by outflank-mailman (input) for mailman id 35311;
- Tue, 24 Nov 2020 00:58:42 +0000
+	id 1khMmA-0003fq-ML; Tue, 24 Nov 2020 01:05:46 +0000
+Received: by outflank-mailman (input) for mailman id 35319;
+ Tue, 24 Nov 2020 01:05:45 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=rpYA=E6=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1khMfK-0006cC-Qb
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 00:58:42 +0000
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=s6aG=E6=perches.com=joe@srs-us1.protection.inumbo.net>)
+ id 1khMm9-0003fl-FW
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 01:05:45 +0000
+Received: from smtprelay.hostedemail.com (unknown [216.40.44.133])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id ce88a05e-d02b-4883-989b-0dccbfe11bfc;
- Tue, 24 Nov 2020 00:58:41 +0000 (UTC)
+ id 792fb3e0-d08c-41cd-bde2-922febcbc97d;
+ Tue, 24 Nov 2020 01:05:43 +0000 (UTC)
+Received: from filter.hostedemail.com (clb03-v110.bra.tucows.net
+ [216.40.38.60])
+ by smtprelay08.hostedemail.com (Postfix) with ESMTP id C6794182CED28;
+ Tue, 24 Nov 2020 01:05:42 +0000 (UTC)
+Received: from XPS-9350.home (unknown [47.151.128.180])
+ (Authenticated sender: joe@perches.com)
+ by omf04.hostedemail.com (Postfix) with ESMTPA;
+ Tue, 24 Nov 2020 01:05:31 +0000 (UTC)
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=rpYA=E6=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
-	id 1khMfK-0006cC-Qb
-	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 00:58:42 +0000
-X-Inumbo-ID: ce88a05e-d02b-4883-989b-0dccbfe11bfc
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
+	(envelope-from <SRS0=s6aG=E6=perches.com=joe@srs-us1.protection.inumbo.net>)
+	id 1khMm9-0003fl-FW
+	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 01:05:45 +0000
+X-Inumbo-ID: 792fb3e0-d08c-41cd-bde2-922febcbc97d
+Received: from smtprelay.hostedemail.com (unknown [216.40.44.133])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id ce88a05e-d02b-4883-989b-0dccbfe11bfc;
-	Tue, 24 Nov 2020 00:58:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1606179521;
-  h=subject:to:cc:references:from:message-id:date:
-   mime-version:in-reply-to:content-transfer-encoding;
-  bh=AXk/zYR173btMvz+fOH+QB2vsjO3ci4oUuKHh0S1jBc=;
-  b=UTVFd4MYtGWT32BNHsFI3B0kpNABSWgRk6rKlhavvjV/7GFzffgAGz41
-   LPQesFRI9kkVtASQsPXoKedZoCqXKjbhxvdgKJAFXG5x5UmpppFRgWKAG
-   rtF4JTicVyUyINroErDACtj5hVoQ9g9LQf94etRf7D7Ww+iT++7A267XO
-   c=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: 6K45fDnuX7TsL/uMrd1UGzoTP9lDxlozUYwdwgMcu+Vn/qruYU3plmNu/YBrw4I3/qsCYCPKqF
- 2Gk/JzBVrtI8L84wNNYpDVQD8jfg4N1zuEiMochvgyB5tPfeEVhu+S3HtJx3AMcCG39rWsnoZ7
- 16hxb/JqPDNTqOaAw2/uk8JQnsdLxtuPA0C9bX37JPs/HmZrluSHVc3yWD5ACDNA2YCKBhqsO9
- ulgrH2WNSfg0xCuyIYGcPBBN+Jv1qx8FTvKSmIzVhIMLMt26GoIICjed41ctTu1zkXRcGY0Mxy
- zm4=
-X-SBRS: None
-X-MesageID: 32135498
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.78,364,1599537600"; 
-   d="scan'208";a="32135498"
-Subject: Re: [PATCH v2 4/8] lib: move parse_size_and_unit()
-To: Jan Beulich <jbeulich@suse.com>, "xen-devel@lists.xenproject.org"
-	<xen-devel@lists.xenproject.org>
-CC: George Dunlap <George.Dunlap@eu.citrix.com>, Ian Jackson
-	<iwj@xenproject.org>, Julien Grall <julien@xen.org>, Wei Liu <wl@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-References: <aa1ca5da-3ecf-8721-63f9-b86ebbc64330@suse.com>
- <eaffac30-8bd0-6018-5186-ca53d1becfe5@suse.com>
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Message-ID: <1bd906ff-0b37-07de-75ab-84a169151c2d@citrix.com>
-Date: Tue, 24 Nov 2020 00:58:12 +0000
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+	id 792fb3e0-d08c-41cd-bde2-922febcbc97d;
+	Tue, 24 Nov 2020 01:05:43 +0000 (UTC)
+Received: from filter.hostedemail.com (clb03-v110.bra.tucows.net [216.40.38.60])
+	by smtprelay08.hostedemail.com (Postfix) with ESMTP id C6794182CED28;
+	Tue, 24 Nov 2020 01:05:42 +0000 (UTC)
+X-Session-Marker: 6A6F6540706572636865732E636F6D
+X-HE-Tag: sea70_4d178da27369
+X-Filterd-Recvd-Size: 4565
+Received: from XPS-9350.home (unknown [47.151.128.180])
+	(Authenticated sender: joe@perches.com)
+	by omf04.hostedemail.com (Postfix) with ESMTPA;
+	Tue, 24 Nov 2020 01:05:31 +0000 (UTC)
+Message-ID: <e72a1aaef8673553a3ee9dfa033d6e893e00abcd.camel@perches.com>
+Subject: Re: [PATCH 000/141] Fix fall-through warnings for Clang
+From: Joe Perches <joe@perches.com>
+To: Finn Thain <fthain@telegraphics.com.au>, Miguel Ojeda
+	 <miguel.ojeda.sandonis@gmail.com>
+Cc: James Bottomley <James.Bottomley@hansenpartnership.com>, Kees Cook
+ <keescook@chromium.org>, Jakub Kicinski <kuba@kernel.org>, "Gustavo A. R.
+ Silva" <gustavoars@kernel.org>, linux-kernel
+ <linux-kernel@vger.kernel.org>,  alsa-devel@alsa-project.org,
+ amd-gfx@lists.freedesktop.org,  bridge@lists.linux-foundation.org,
+ ceph-devel@vger.kernel.org,  cluster-devel@redhat.com,
+ coreteam@netfilter.org, devel@driverdev.osuosl.org,  dm-devel@redhat.com,
+ drbd-dev@lists.linbit.com, dri-devel@lists.freedesktop.org, 
+ GR-everest-linux-l2@marvell.com, GR-Linux-NIC-Dev@marvell.com, 
+ intel-gfx@lists.freedesktop.org, intel-wired-lan@lists.osuosl.org, 
+ keyrings@vger.kernel.org, linux1394-devel@lists.sourceforge.net, 
+ linux-acpi@vger.kernel.org, linux-afs@lists.infradead.org, Linux ARM
+ <linux-arm-kernel@lists.infradead.org>, linux-arm-msm@vger.kernel.org, 
+ linux-atm-general@lists.sourceforge.net, linux-block@vger.kernel.org, 
+ linux-can@vger.kernel.org, linux-cifs@vger.kernel.org, Linux Crypto Mailing
+ List <linux-crypto@vger.kernel.org>,
+ linux-decnet-user@lists.sourceforge.net,  Ext4 Developers List
+ <linux-ext4@vger.kernel.org>, linux-fbdev@vger.kernel.org,
+ linux-geode@lists.infradead.org,  linux-gpio@vger.kernel.org,
+ linux-hams@vger.kernel.org,  linux-hwmon@vger.kernel.org,
+ linux-i3c@lists.infradead.org,  linux-ide@vger.kernel.org,
+ linux-iio@vger.kernel.org, linux-input <linux-input@vger.kernel.org>,
+ linux-integrity@vger.kernel.org,  linux-mediatek@lists.infradead.org, Linux
+ Media Mailing List <linux-media@vger.kernel.org>,
+ linux-mmc@vger.kernel.org, Linux-MM <linux-mm@kvack.org>,
+ linux-mtd@lists.infradead.org, linux-nfs@vger.kernel.org, 
+ linux-rdma@vger.kernel.org, linux-renesas-soc@vger.kernel.org, 
+ linux-scsi@vger.kernel.org, linux-sctp@vger.kernel.org, 
+ linux-security-module@vger.kernel.org, 
+ linux-stm32@st-md-mailman.stormreply.com, linux-usb@vger.kernel.org, 
+ linux-watchdog@vger.kernel.org, linux-wireless
+ <linux-wireless@vger.kernel.org>,  Network Development
+ <netdev@vger.kernel.org>, netfilter-devel@vger.kernel.org,
+ nouveau@lists.freedesktop.org,  op-tee@lists.trustedfirmware.org,
+ oss-drivers@netronome.com,  patches@opensource.cirrus.com,
+ rds-devel@oss.oracle.com,  reiserfs-devel@vger.kernel.org,
+ samba-technical@lists.samba.org,  selinux@vger.kernel.org,
+ target-devel@vger.kernel.org,  tipc-discussion@lists.sourceforge.net,
+ usb-storage@lists.one-eyed-alien.net, 
+ virtualization@lists.linux-foundation.org, wcn36xx@lists.infradead.org, 
+ "maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT)" <x86@kernel.org>,
+ xen-devel@lists.xenproject.org,  linux-hardening@vger.kernel.org, Nick
+ Desaulniers <ndesaulniers@google.com>,  Nathan Chancellor
+ <natechancellor@gmail.com>, Miguel Ojeda <ojeda@kernel.org>
+Date: Mon, 23 Nov 2020 17:05:30 -0800
+In-Reply-To: <alpine.LNX.2.23.453.2011241036520.7@nippy.intranet>
+References: <cover.1605896059.git.gustavoars@kernel.org>
+	 <20201120105344.4345c14e@kicinski-fedora-pc1c0hjn.dhcp.thefacebook.com>
+	 <202011201129.B13FDB3C@keescook>
+	 <20201120115142.292999b2@kicinski-fedora-pc1c0hjn.dhcp.thefacebook.com>
+	 <202011220816.8B6591A@keescook>
+	 <9b57fd4914b46f38d54087d75e072d6e947cb56d.camel@HansenPartnership.com>
+	 <CANiq72nZrHWTA4_Msg6MP9snTyenC6-eGfD27CyfNSu7QoVZbw@mail.gmail.com>
+	 <alpine.LNX.2.23.453.2011230938390.7@nippy.intranet>
+	 <CANiq72=z+tmuey9wj3Kk7wX5s0hTHpsQdLhAqcOVNrHon6xn5Q@mail.gmail.com>
+	 <alpine.LNX.2.23.453.2011241036520.7@nippy.intranet>
+Content-Type: text/plain; charset="ISO-8859-1"
+User-Agent: Evolution 3.38.1-1 
 MIME-Version: 1.0
-In-Reply-To: <eaffac30-8bd0-6018-5186-ca53d1becfe5@suse.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Content-Language: en-GB
-X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
- FTLPEX02CL04.citrite.net (10.13.108.177)
+Content-Transfer-Encoding: 7bit
 
-On 23/10/2020 11:17, Jan Beulich wrote:
-> ... into its own CU, to build it into an archive.
->
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-> ---
->  xen/common/lib.c     | 39 ----------------------------------
->  xen/lib/Makefile     |  1 +
->  xen/lib/parse-size.c | 50 ++++++++++++++++++++++++++++++++++++++++++++
->  3 files changed, 51 insertions(+), 39 deletions(-)
->  create mode 100644 xen/lib/parse-size.c
+On Tue, 2020-11-24 at 11:58 +1100, Finn Thain wrote:
+> it's not for me to prove that such patches don't affect code 
+> generation. That's for the patch author and (unfortunately) for reviewers.
 
-What is the point of turning this into a library?  It isn't a leaf
-function (calls simple_strtoull()) and doesn't have any any plausible
-way of losing all its callers in various configurations (given its
-direct use by the cmdline parsing logic).
+Ideally, that proof would be provided by the compilation system itself
+and not patch authors nor reviewers nor maintainers.
 
-~Andrew
+Unfortunately gcc does not guarantee repeatability or deterministic output.
+To my knowledge, neither does clang.
+
+
 
