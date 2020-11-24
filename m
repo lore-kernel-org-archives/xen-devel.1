@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 11C42C825A7
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:29:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0B3F2C825AB
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:29:15 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9993B204EC
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:29:12 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 97B952087D
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:29:14 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="QlVuTCTh"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9993B204EC
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="pWcZmhed"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 97B952087D
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.36008.67746 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.36012.67758 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khYNQ-0000yB-5H; Tue, 24 Nov 2020 13:29:00 +0000
+	id 1khYNV-00013m-Dq; Tue, 24 Nov 2020 13:29:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 36008.67746; Tue, 24 Nov 2020 13:29:00 +0000
+Received: by outflank-mailman (output) from mailman id 36012.67758; Tue, 24 Nov 2020 13:29:05 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khYNQ-0000xy-0R; Tue, 24 Nov 2020 13:29:00 +0000
-Received: by outflank-mailman (input) for mailman id 36008;
- Tue, 24 Nov 2020 13:28:59 +0000
+	id 1khYNV-00013b-AS; Tue, 24 Nov 2020 13:29:05 +0000
+Received: by outflank-mailman (input) for mailman id 36012;
+ Tue, 24 Nov 2020 13:29:04 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=daQ6=E6=casper.srs.infradead.org=batv+cbe268a5dfa7b983a02e+6302+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1khYNP-0000Qf-1Q
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:28:59 +0000
+ id 1khYNU-0000Qf-1X
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:29:04 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 18f566b9-7e1b-41e7-9082-a35a81855c6f;
- Tue, 24 Nov 2020 13:28:26 +0000 (UTC)
+ id eef56dca-15d9-43e0-b480-0ff9c313d056;
+ Tue, 24 Nov 2020 13:28:31 +0000 (UTC)
 Received: from [2001:4bb8:180:5443:c70:4a89:bc61:3] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1khYMZ-0006VO-IX; Tue, 24 Nov 2020 13:28:08 +0000
+ id 1khYMO-0006UA-S8; Tue, 24 Nov 2020 13:27:58 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=daQ6=E6=casper.srs.infradead.org=batv+cbe268a5dfa7b983a02e+6302+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1khYNP-0000Qf-1Q
-	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:28:59 +0000
-X-Inumbo-ID: 18f566b9-7e1b-41e7-9082-a35a81855c6f
+	id 1khYNU-0000Qf-1X
+	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:29:04 +0000
+X-Inumbo-ID: eef56dca-15d9-43e0-b480-0ff9c313d056
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 18f566b9-7e1b-41e7-9082-a35a81855c6f;
-	Tue, 24 Nov 2020 13:28:26 +0000 (UTC)
+	id eef56dca-15d9-43e0-b480-0ff9c313d056;
+	Tue, 24 Nov 2020 13:28:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=qOmzpRMb4vEzGwba4P3m5gENBKcm1ZKj8N5Pylgvbms=; b=QlVuTCTh45nrCbNvdsVoIgsOr3
-	o95XamtfFlHQdWoYLWTiXelkn0D+odqN40uheOBv3z0BV6r096cNZn1W0wS1mz+vFGmKDoLfxwB6t
-	9+zKNn1qt6dRi6yiiLqPQAL91CKDp2S6xsY83LfbwnAlo50KMLRzxrcqOmqiSsIMFl8Aw9XpdKS+R
-	WZJmPOjQKJSU2brvqFKaHLDst3ASHFCm++DZPoqCslNlR8eV59MkIXKBDS0vMEWNRPVQfY4/6dJR2
-	0yR6aoz6V/xEKpsBinRf0moR7ga9qiIpxc1qZCLa7UWzw8rxoOhDnTmEEP/Ho/mppNNW42sLXt019
-	r6XhQ5Zw==;
+	bh=Q/MCT6maV/iKaSxRRRnLFBnoEWfPfC40ypgl1Ci8nRk=; b=pWcZmhed1VtM52P3q1JMqqjfxR
+	GWMfkfGGh21/NCT85snknz3WDUM0FCyAbepRt+ZELj82dad4m3br4Sawb66pKbQxSAEUaJxSeL+Ll
+	71lYUsvhjLKgY/YbGp0X++3PkxXh+KrssNfKTT0h2mCWPuefl+mBpjJwTcCV+e1SRjBbrscsDgFCm
+	lMW8Geg/e4WV3fB64E9SDr1XU5cgwgMIdLeq0nWxNCx03aqe1+hiU2wmbmGncWiO1/xxhiOEuXkHa
+	z9KSmzy5zBC51q81wbv9yHNv1xP232XeeVA1TEmOLWeYTbWgkPDrO0cmsehbzSHT+I2DtVpVX0ELT
+	qGUkh4WA==;
 Received: from [2001:4bb8:180:5443:c70:4a89:bc61:3] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1khYMZ-0006VO-IX; Tue, 24 Nov 2020 13:28:08 +0000
+	id 1khYMO-0006UA-S8; Tue, 24 Nov 2020 13:27:58 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Tejun Heo <tj@kernel.org>,
@@ -95,9 +95,9 @@ Cc: Tejun Heo <tj@kernel.org>,
 	linux-mtd@lists.infradead.org,
 	linux-fsdevel@vger.kernel.org,
 	linux-mm@kvack.org
-Subject: [PATCH 09/45] dm: simplify flush_bio initialization in __send_empty_flush
-Date: Tue, 24 Nov 2020 14:27:15 +0100
-Message-Id: <20201124132751.3747337-10-hch@lst.de>
+Subject: [PATCH 02/45] filemap: consistently use ->f_mapping over ->i_mapping
+Date: Tue, 24 Nov 2020 14:27:08 +0100
+Message-Id: <20201124132751.3747337-3-hch@lst.de>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20201124132751.3747337-1-hch@lst.de>
 References: <20201124132751.3747337-1-hch@lst.de>
@@ -105,42 +105,67 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-We don't really need the struct block_device to initialize a bio.  So
-switch from using bio_set_dev to manually setting up bi_disk (bi_partno
-will always be zero and has been cleared by bio_init already).
+Use file->f_mapping in all remaining places that have a struct file
+available to properly handle the case where inode->i_mapping !=
+file_inode(file)->i_mapping.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
-Acked-by: Mike Snitzer <snitzer@redhat.com>
 ---
- drivers/md/dm.c | 12 +++---------
- 1 file changed, 3 insertions(+), 9 deletions(-)
+ mm/filemap.c | 13 ++++++-------
+ 1 file changed, 6 insertions(+), 7 deletions(-)
 
-diff --git a/drivers/md/dm.c b/drivers/md/dm.c
-index 50541d336c719b..ab0a8335f098d9 100644
---- a/drivers/md/dm.c
-+++ b/drivers/md/dm.c
-@@ -1422,18 +1422,12 @@ static int __send_empty_flush(struct clone_info *ci)
- 	 */
- 	bio_init(&flush_bio, NULL, 0);
- 	flush_bio.bi_opf = REQ_OP_WRITE | REQ_PREFLUSH | REQ_SYNC;
-+	flush_bio.bi_disk = ci->io->md->disk;
-+	bio_associate_blkg(&flush_bio);
-+
- 	ci->bio = &flush_bio;
- 	ci->sector_count = 0;
+diff --git a/mm/filemap.c b/mm/filemap.c
+index d5e7c2029d16b4..4f583489aa3c2a 100644
+--- a/mm/filemap.c
++++ b/mm/filemap.c
+@@ -2886,14 +2886,14 @@ EXPORT_SYMBOL(filemap_map_pages);
  
--	/*
--	 * Empty flush uses a statically initialized bio, as the base for
--	 * cloning.  However, blkg association requires that a bdev is
--	 * associated with a gendisk, which doesn't happen until the bdev is
--	 * opened.  So, blkg association is done at issue time of the flush
--	 * rather than when the device is created in alloc_dev().
--	 */
--	bio_set_dev(ci->bio, ci->io->md->bdev);
--
- 	BUG_ON(bio_has_data(ci->bio));
- 	while ((ti = dm_table_get_target(ci->map, target_nr++)))
- 		__send_duplicate_bios(ci, ti, ti->num_flush_bios, NULL);
+ vm_fault_t filemap_page_mkwrite(struct vm_fault *vmf)
+ {
++	struct address_space *mapping = vmf->vma->vm_file->f_mapping;
+ 	struct page *page = vmf->page;
+-	struct inode *inode = file_inode(vmf->vma->vm_file);
+ 	vm_fault_t ret = VM_FAULT_LOCKED;
+ 
+-	sb_start_pagefault(inode->i_sb);
++	sb_start_pagefault(mapping->host->i_sb);
+ 	file_update_time(vmf->vma->vm_file);
+ 	lock_page(page);
+-	if (page->mapping != inode->i_mapping) {
++	if (page->mapping != mapping) {
+ 		unlock_page(page);
+ 		ret = VM_FAULT_NOPAGE;
+ 		goto out;
+@@ -2906,7 +2906,7 @@ vm_fault_t filemap_page_mkwrite(struct vm_fault *vmf)
+ 	set_page_dirty(page);
+ 	wait_for_stable_page(page);
+ out:
+-	sb_end_pagefault(inode->i_sb);
++	sb_end_pagefault(mapping->host->i_sb);
+ 	return ret;
+ }
+ 
+@@ -3149,10 +3149,9 @@ void dio_warn_stale_pagecache(struct file *filp)
+ {
+ 	static DEFINE_RATELIMIT_STATE(_rs, 86400 * HZ, DEFAULT_RATELIMIT_BURST);
+ 	char pathname[128];
+-	struct inode *inode = file_inode(filp);
+ 	char *path;
+ 
+-	errseq_set(&inode->i_mapping->wb_err, -EIO);
++	errseq_set(&filp->f_mapping->wb_err, -EIO);
+ 	if (__ratelimit(&_rs)) {
+ 		path = file_path(filp, pathname, sizeof(pathname));
+ 		if (IS_ERR(path))
+@@ -3179,7 +3178,7 @@ generic_file_direct_write(struct kiocb *iocb, struct iov_iter *from)
+ 
+ 	if (iocb->ki_flags & IOCB_NOWAIT) {
+ 		/* If there are pages to writeback, return */
+-		if (filemap_range_has_page(inode->i_mapping, pos,
++		if (filemap_range_has_page(file->f_mapping, pos,
+ 					   pos + write_len - 1))
+ 			return -EAGAIN;
+ 	} else {
 -- 
 2.29.2
 
