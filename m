@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5DB60C56201
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:40:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 707ECC6379D
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:40:50 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E06A020866
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:40:48 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id B0D1920872
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:40:49 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="GoMq4i3D"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E06A020866
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="YCNB4naC"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B0D1920872
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.36142.68063 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.36141.68054 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khYYd-000581-3O; Tue, 24 Nov 2020 13:40:35 +0000
+	id 1khYYa-00050w-Or; Tue, 24 Nov 2020 13:40:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 36142.68063; Tue, 24 Nov 2020 13:40:34 +0000
+Received: by outflank-mailman (output) from mailman id 36141.68054; Tue, 24 Nov 2020 13:40:32 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khYYb-00056i-AK; Tue, 24 Nov 2020 13:40:33 +0000
-Received: by outflank-mailman (input) for mailman id 36142;
- Tue, 24 Nov 2020 13:40:23 +0000
+	id 1khYYY-0004z5-P5; Tue, 24 Nov 2020 13:40:30 +0000
+Received: by outflank-mailman (input) for mailman id 36141;
+ Tue, 24 Nov 2020 13:40:22 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=daQ6=E6=casper.srs.infradead.org=batv+cbe268a5dfa7b983a02e+6302+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1khYOc-0000Qf-3y
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:30:14 +0000
+ id 1khYQd-0000Qf-7X
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:32:19 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 357d6660-927d-4846-ad24-bd638e6c3be1;
- Tue, 24 Nov 2020 13:28:46 +0000 (UTC)
+ id f880fac1-f1cc-4be6-9256-93d08272d6b8;
+ Tue, 24 Nov 2020 13:29:23 +0000 (UTC)
 Received: from [2001:4bb8:180:5443:c70:4a89:bc61:3] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1khYMv-0006aF-Ta; Tue, 24 Nov 2020 13:28:30 +0000
+ id 1khYNM-0006gV-JV; Tue, 24 Nov 2020 13:28:57 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=daQ6=E6=casper.srs.infradead.org=batv+cbe268a5dfa7b983a02e+6302+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1khYOc-0000Qf-3y
-	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:30:14 +0000
-X-Inumbo-ID: 357d6660-927d-4846-ad24-bd638e6c3be1
+	id 1khYQd-0000Qf-7X
+	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:32:19 +0000
+X-Inumbo-ID: f880fac1-f1cc-4be6-9256-93d08272d6b8
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 357d6660-927d-4846-ad24-bd638e6c3be1;
-	Tue, 24 Nov 2020 13:28:46 +0000 (UTC)
+	id f880fac1-f1cc-4be6-9256-93d08272d6b8;
+	Tue, 24 Nov 2020 13:29:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=zR55v5+OPdHMJV10YpgHDjRLnmPcRL239K9WcigGn28=; b=GoMq4i3DWTppD5+H991Mkc8eOI
-	zXC2wNKRdrsXtbL3xkHLmQBdPkGyNUj+ZaJZOCBn+g6J1pITt8IoVkiAgsYVxTpzhhmlquNScHtt7
-	/4uIFoYnWr57MB8JVA155Kb+LTXW/jlHArLqnteTFwWa0Q4GFj3A+N6seyWMw8YTNiVQUuZ/OAvJf
-	TyIgdcg8js28joqni8x6cp8aP6JQg4hNmQ7nlJus5Ndomu80A+dZQopyj+rowN5rQd+9R3OpFGp7X
-	Xr57uEfF/ebbfSsC2kZR0v9CJsRFA+MkDloI2+UlOueh2HrisbZRhS7Ey0njvx4JspTpTjpTJm6jo
-	GLwvK3FQ==;
+	bh=hd58vTxwYflslTooUzvIkiEUZh8oqfMehzvRdiTDmRg=; b=YCNB4naCKZWhAaCsg1kYokxu80
+	rDFjtrYT7lEuIA8sVbt3CobuCxtFPj2/8pE/tRoK9WUNzb1EdlB5LEPyHhE8AJLIRh3/PtVC8ov/2
+	mjdWUOy4bTyT5WfIjImo/Xyw0j7f7zyydciqCBDbZljVfC1fZErmHDGOhwC9Dzd0ePKxnsPI1bPv+
+	6cChoKXYn89Zvu9rflA5Px/7sSzxUQ2digOs8X0WWZZ+SFnJJoixr4SYXxUPnXKXDp3K+ri7V80Kr
+	UHQMztu7BO6hhSivmU18rXD88ntr13ZGE1Ci0+MS7lPzbgMA19Bp2MZIaWuGvdI9AR6vpqR8mTh6B
+	IrrZC5xw==;
 Received: from [2001:4bb8:180:5443:c70:4a89:bc61:3] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1khYMv-0006aF-Ta; Tue, 24 Nov 2020 13:28:30 +0000
+	id 1khYNM-0006gV-JV; Tue, 24 Nov 2020 13:28:57 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Tejun Heo <tj@kernel.org>,
@@ -95,9 +95,9 @@ Cc: Tejun Heo <tj@kernel.org>,
 	linux-mtd@lists.infradead.org,
 	linux-fsdevel@vger.kernel.org,
 	linux-mm@kvack.org
-Subject: [PATCH 23/45] block: remove i_bdev
-Date: Tue, 24 Nov 2020 14:27:29 +0100
-Message-Id: <20201124132751.3747337-24-hch@lst.de>
+Subject: [PATCH 37/45] block: allocate struct hd_struct as part of struct bdev_inode
+Date: Tue, 24 Nov 2020 14:27:43 +0100
+Message-Id: <20201124132751.3747337-38-hch@lst.de>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20201124132751.3747337-1-hch@lst.de>
 References: <20201124132751.3747337-1-hch@lst.de>
@@ -105,883 +105,722 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-Switch the block device lookup interfaces to directly work with a dev_t
-so that struct block_device references are only acquired by the
-blkdev_get variants (and the blk-cgroup special case).  This means that
-we not don't need an extra reference in the inode and can generally
-simplify handling of struct block_device to keep the lookups contained
-in the core block layer code.
+Allocate hd_struct together with struct block_device to pre-load
+the lifetime rule changes in preparation of merging the two structures.
+
+Note that part0 was previously embedded into struct gendisk, but is
+a separate allocation now, and already points to the block_device instead
+of the hd_struct.  The lifetime of struct gendisk is still controlled by
+the struct device embedded in the part0 hd_struct.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- block/ioctl.c                                |   3 +-
- drivers/block/loop.c                         |   8 +-
- drivers/md/bcache/super.c                    |  20 +-
- drivers/md/dm-table.c                        |   9 +-
- drivers/mtd/mtdsuper.c                       |  17 +-
- drivers/target/target_core_file.c            |   6 +-
- drivers/usb/gadget/function/storage_common.c |   8 +-
- fs/block_dev.c                               | 195 +++++--------------
- fs/btrfs/volumes.c                           |  13 +-
- fs/inode.c                                   |   3 -
- fs/internal.h                                |   7 +-
- fs/io_uring.c                                |  10 +-
- fs/pipe.c                                    |   5 +-
- fs/quota/quota.c                             |  19 +-
- fs/statfs.c                                  |   2 +-
- fs/super.c                                   |  37 ++--
- include/linux/blkdev.h                       |   2 +-
- include/linux/fs.h                           |   1 -
- 18 files changed, 114 insertions(+), 251 deletions(-)
+ block/blk-core.c                   | 16 ++++---
+ block/blk-flush.c                  |  2 +-
+ block/blk-merge.c                  |  2 -
+ block/blk.h                        | 21 ----------
+ block/genhd.c                      | 50 +++++++++-------------
+ block/partitions/core.c            | 67 +++---------------------------
+ drivers/block/drbd/drbd_receiver.c |  2 +-
+ drivers/block/drbd/drbd_worker.c   |  3 +-
+ drivers/block/zram/zram_drv.c      |  2 +-
+ drivers/md/dm.c                    |  4 +-
+ drivers/md/md.c                    |  2 +-
+ fs/block_dev.c                     | 37 +++++------------
+ include/linux/blk_types.h          |  2 +-
+ include/linux/genhd.h              | 14 +++----
+ include/linux/part_stat.h          |  4 +-
+ 15 files changed, 60 insertions(+), 168 deletions(-)
 
-diff --git a/block/ioctl.c b/block/ioctl.c
-index 0c09bb7a6ff35f..a6d8171221c7dc 100644
---- a/block/ioctl.c
-+++ b/block/ioctl.c
-@@ -590,8 +590,7 @@ long compat_blkdev_ioctl(struct file *file, unsigned cmd, unsigned long arg)
+diff --git a/block/blk-core.c b/block/blk-core.c
+index d64ffcb6f9ae5d..9ea70275fc1cfe 100644
+--- a/block/blk-core.c
++++ b/block/blk-core.c
+@@ -714,7 +714,8 @@ static inline bool bio_check_ro(struct bio *bio, struct hd_struct *part)
+ 
+ static noinline int should_fail_bio(struct bio *bio)
  {
- 	int ret;
- 	void __user *argp = compat_ptr(arg);
--	struct inode *inode = file->f_mapping->host;
--	struct block_device *bdev = inode->i_bdev;
-+	struct block_device *bdev = I_BDEV(file->f_mapping->host);
- 	struct gendisk *disk = bdev->bd_disk;
- 	fmode_t mode = file->f_mode;
- 	loff_t size;
-diff --git a/drivers/block/loop.c b/drivers/block/loop.c
-index b42c728620c9e4..26c7aafba7c5f8 100644
---- a/drivers/block/loop.c
-+++ b/drivers/block/loop.c
-@@ -675,10 +675,10 @@ static int loop_validate_file(struct file *file, struct block_device *bdev)
- 	while (is_loop_device(f)) {
- 		struct loop_device *l;
- 
--		if (f->f_mapping->host->i_bdev == bdev)
-+		if (f->f_mapping->host->i_rdev == bdev->bd_dev)
- 			return -EBADF;
- 
--		l = f->f_mapping->host->i_bdev->bd_disk->private_data;
-+		l = I_BDEV(f->f_mapping->host)->bd_disk->private_data;
- 		if (l->lo_state != Lo_bound) {
- 			return -EINVAL;
- 		}
-@@ -885,9 +885,7 @@ static void loop_config_discard(struct loop_device *lo)
- 	 * file-backed loop devices: discarded regions read back as zero.
- 	 */
- 	if (S_ISBLK(inode->i_mode) && !lo->lo_encrypt_key_size) {
--		struct request_queue *backingq;
--
--		backingq = bdev_get_queue(inode->i_bdev);
-+		struct request_queue *backingq = bdev_get_queue(I_BDEV(inode));
- 
- 		max_discard_sectors = backingq->limits.max_write_zeroes_sectors;
- 		granularity = backingq->limits.discard_granularity ?:
-diff --git a/drivers/md/bcache/super.c b/drivers/md/bcache/super.c
-index a6a5e21e4fd136..c55d3c58a7ef55 100644
---- a/drivers/md/bcache/super.c
-+++ b/drivers/md/bcache/super.c
-@@ -2380,38 +2380,38 @@ kobj_attribute_write(register,		register_bcache);
- kobj_attribute_write(register_quiet,	register_bcache);
- kobj_attribute_write(pendings_cleanup,	bch_pending_bdevs_cleanup);
- 
--static bool bch_is_open_backing(struct block_device *bdev)
-+static bool bch_is_open_backing(dev_t dev)
- {
- 	struct cache_set *c, *tc;
- 	struct cached_dev *dc, *t;
- 
- 	list_for_each_entry_safe(c, tc, &bch_cache_sets, list)
- 		list_for_each_entry_safe(dc, t, &c->cached_devs, list)
--			if (dc->bdev == bdev)
-+			if (dc->bdev->bd_dev == dev)
- 				return true;
- 	list_for_each_entry_safe(dc, t, &uncached_devices, list)
--		if (dc->bdev == bdev)
-+		if (dc->bdev->bd_dev == dev)
- 			return true;
- 	return false;
- }
- 
--static bool bch_is_open_cache(struct block_device *bdev)
-+static bool bch_is_open_cache(dev_t dev)
- {
- 	struct cache_set *c, *tc;
- 
- 	list_for_each_entry_safe(c, tc, &bch_cache_sets, list) {
- 		struct cache *ca = c->cache;
- 
--		if (ca->bdev == bdev)
-+		if (ca->bdev->bd_dev == dev)
- 			return true;
- 	}
- 
- 	return false;
- }
- 
--static bool bch_is_open(struct block_device *bdev)
-+static bool bch_is_open(dev_t dev)
- {
--	return bch_is_open_cache(bdev) || bch_is_open_backing(bdev);
-+	return bch_is_open_cache(dev) || bch_is_open_backing(dev);
- }
- 
- struct async_reg_args {
-@@ -2535,9 +2535,11 @@ static ssize_t register_bcache(struct kobject *k, struct kobj_attribute *attr,
- 				  sb);
- 	if (IS_ERR(bdev)) {
- 		if (bdev == ERR_PTR(-EBUSY)) {
--			bdev = lookup_bdev(strim(path));
-+			dev_t dev;
-+
- 			mutex_lock(&bch_register_lock);
--			if (!IS_ERR(bdev) && bch_is_open(bdev))
-+			if (lookup_bdev(strim(path), &dev) == 0 &&
-+			    bch_is_open(dev))
- 				err = "device already registered";
- 			else
- 				err = "device busy";
-diff --git a/drivers/md/dm-table.c b/drivers/md/dm-table.c
-index ce543b761be7b2..dea67772171053 100644
---- a/drivers/md/dm-table.c
-+++ b/drivers/md/dm-table.c
-@@ -348,16 +348,9 @@ static int upgrade_mode(struct dm_dev_internal *dd, fmode_t new_mode,
- dev_t dm_get_dev_t(const char *path)
- {
- 	dev_t dev;
--	struct block_device *bdev;
- 
--	bdev = lookup_bdev(path);
--	if (IS_ERR(bdev))
-+	if (lookup_bdev(path, &dev))
- 		dev = name_to_dev_t(path);
--	else {
--		dev = bdev->bd_dev;
--		bdput(bdev);
--	}
--
- 	return dev;
- }
- EXPORT_SYMBOL_GPL(dm_get_dev_t);
-diff --git a/drivers/mtd/mtdsuper.c b/drivers/mtd/mtdsuper.c
-index c3e2098372f2e5..38b6aa849c6383 100644
---- a/drivers/mtd/mtdsuper.c
-+++ b/drivers/mtd/mtdsuper.c
-@@ -120,8 +120,8 @@ int get_tree_mtd(struct fs_context *fc,
- 				struct fs_context *fc))
- {
- #ifdef CONFIG_BLOCK
--	struct block_device *bdev;
--	int ret, major;
-+	dev_t dev;
-+	int ret;
- #endif
- 	int mtdnr;
- 
-@@ -169,20 +169,15 @@ int get_tree_mtd(struct fs_context *fc,
- 	/* try the old way - the hack where we allowed users to mount
- 	 * /dev/mtdblock$(n) but didn't actually _use_ the blockdev
- 	 */
--	bdev = lookup_bdev(fc->source);
--	if (IS_ERR(bdev)) {
--		ret = PTR_ERR(bdev);
-+	ret = lookup_bdev(fc->source, &dev);
-+	if (ret) {
- 		errorf(fc, "MTD: Couldn't look up '%s': %d", fc->source, ret);
- 		return ret;
- 	}
- 	pr_debug("MTDSB: lookup_bdev() returned 0\n");
- 
--	major = MAJOR(bdev->bd_dev);
--	mtdnr = MINOR(bdev->bd_dev);
--	bdput(bdev);
--
--	if (major == MTD_BLOCK_MAJOR)
--		return mtd_get_sb_by_nr(fc, mtdnr, fill_super);
-+	if (MAJOR(dev) == MTD_BLOCK_MAJOR)
-+		return mtd_get_sb_by_nr(fc, MINOR(dev), fill_super);
- 
- #endif /* CONFIG_BLOCK */
- 
-diff --git a/drivers/target/target_core_file.c b/drivers/target/target_core_file.c
-index 7143d03f0e027e..b0cb5b95e892d3 100644
---- a/drivers/target/target_core_file.c
-+++ b/drivers/target/target_core_file.c
-@@ -133,10 +133,10 @@ static int fd_configure_device(struct se_device *dev)
- 	 */
- 	inode = file->f_mapping->host;
- 	if (S_ISBLK(inode->i_mode)) {
--		struct request_queue *q = bdev_get_queue(inode->i_bdev);
-+		struct request_queue *q = bdev_get_queue(I_BDEV(inode));
- 		unsigned long long dev_size;
- 
--		fd_dev->fd_block_size = bdev_logical_block_size(inode->i_bdev);
-+		fd_dev->fd_block_size = bdev_logical_block_size(I_BDEV(inode));
- 		/*
- 		 * Determine the number of bytes from i_size_read() minus
- 		 * one (1) logical sector from underlying struct block_device
-@@ -559,7 +559,7 @@ fd_execute_unmap(struct se_cmd *cmd, sector_t lba, sector_t nolb)
- 
- 	if (S_ISBLK(inode->i_mode)) {
- 		/* The backend is block device, use discard */
--		struct block_device *bdev = inode->i_bdev;
-+		struct block_device *bdev = I_BDEV(inode);
- 		struct se_device *dev = cmd->se_dev;
- 
- 		ret = blkdev_issue_discard(bdev,
-diff --git a/drivers/usb/gadget/function/storage_common.c b/drivers/usb/gadget/function/storage_common.c
-index f7e6c42558eb76..b859a158a4140e 100644
---- a/drivers/usb/gadget/function/storage_common.c
-+++ b/drivers/usb/gadget/function/storage_common.c
-@@ -204,7 +204,7 @@ int fsg_lun_open(struct fsg_lun *curlun, const char *filename)
- 	if (!(filp->f_mode & FMODE_WRITE))
- 		ro = 1;
- 
--	inode = file_inode(filp);
-+	inode = filp->f_mapping->host;
- 	if ((!S_ISREG(inode->i_mode) && !S_ISBLK(inode->i_mode))) {
- 		LINFO(curlun, "invalid file type: %s\n", filename);
- 		goto out;
-@@ -221,7 +221,7 @@ int fsg_lun_open(struct fsg_lun *curlun, const char *filename)
- 	if (!(filp->f_mode & FMODE_CAN_WRITE))
- 		ro = 1;
- 
--	size = i_size_read(inode->i_mapping->host);
-+	size = i_size_read(inode);
- 	if (size < 0) {
- 		LINFO(curlun, "unable to find file size: %s\n", filename);
- 		rc = (int) size;
-@@ -231,8 +231,8 @@ int fsg_lun_open(struct fsg_lun *curlun, const char *filename)
- 	if (curlun->cdrom) {
- 		blksize = 2048;
- 		blkbits = 11;
--	} else if (inode->i_bdev) {
--		blksize = bdev_logical_block_size(inode->i_bdev);
-+	} else if (S_ISBLK(inode->i_mode)) {
-+		blksize = bdev_logical_block_size(I_BDEV(inode));
- 		blkbits = blksize_bits(blksize);
- 	} else {
- 		blksize = 512;
-diff --git a/fs/block_dev.c b/fs/block_dev.c
-index 1e35faf6dad42c..c0d1e8248ffe23 100644
---- a/fs/block_dev.c
-+++ b/fs/block_dev.c
-@@ -883,7 +883,6 @@ static struct block_device *bdget(dev_t dev)
- 		bdev->bd_dev = dev;
- 		inode->i_mode = S_IFBLK;
- 		inode->i_rdev = dev;
--		inode->i_bdev = bdev;
- 		inode->i_data.a_ops = &def_blk_aops;
- 		mapping_set_gfp_mask(&inode->i_data, GFP_USER);
- 		unlock_new_inode(inode);
-@@ -924,67 +923,8 @@ void bdput(struct block_device *bdev)
- {
- 	iput(bdev->bd_inode);
- }
--
- EXPORT_SYMBOL(bdput);
-  
--static struct block_device *bd_acquire(struct inode *inode)
--{
--	struct block_device *bdev;
--
--	spin_lock(&bdev_lock);
--	bdev = inode->i_bdev;
--	if (bdev && !inode_unhashed(bdev->bd_inode)) {
--		bdgrab(bdev);
--		spin_unlock(&bdev_lock);
--		return bdev;
--	}
--	spin_unlock(&bdev_lock);
--
--	/*
--	 * i_bdev references block device inode that was already shut down
--	 * (corresponding device got removed).  Remove the reference and look
--	 * up block device inode again just in case new device got
--	 * reestablished under the same device number.
--	 */
--	if (bdev)
--		bd_forget(inode);
--
--	bdev = bdget(inode->i_rdev);
--	if (bdev) {
--		spin_lock(&bdev_lock);
--		if (!inode->i_bdev) {
--			/*
--			 * We take an additional reference to bd_inode,
--			 * and it's released in clear_inode() of inode.
--			 * So, we can access it via ->i_mapping always
--			 * without igrab().
--			 */
--			bdgrab(bdev);
--			inode->i_bdev = bdev;
--			inode->i_mapping = bdev->bd_inode->i_mapping;
--		}
--		spin_unlock(&bdev_lock);
--	}
--	return bdev;
--}
--
--/* Call when you free inode */
--
--void bd_forget(struct inode *inode)
--{
--	struct block_device *bdev = NULL;
--
--	spin_lock(&bdev_lock);
--	if (!sb_is_blkdev_sb(inode->i_sb))
--		bdev = inode->i_bdev;
--	inode->i_bdev = NULL;
--	inode->i_mapping = &inode->i_data;
--	spin_unlock(&bdev_lock);
--
--	if (bdev)
--		bdput(bdev);
--}
--
- /**
-  * bd_may_claim - test whether a block device can be claimed
-  * @bdev: block device of interest
-@@ -1492,38 +1432,45 @@ static int __blkdev_get(struct block_device *bdev, struct gendisk *disk,
- }
- 
- /**
-- * blkdev_get - open a block device
-- * @bdev: block_device to open
-+ * blkdev_get_by_dev - open a block device by device number
-+ * @dev: device number of block device to open
-  * @mode: FMODE_* mask
-  * @holder: exclusive holder identifier
-  *
-- * Open @bdev with @mode.  If @mode includes %FMODE_EXCL, @bdev is
-- * open with exclusive access.  Specifying %FMODE_EXCL with %NULL
-- * @holder is invalid.  Exclusive opens may nest for the same @holder.
-+ * Open the block device described by device number @dev.  If @mode includes
-+ * If @mode includes %FMODE_EXCL, the block device is opened with exclusive
-+ * access.  Specifying %FMODE_EXCL with a %NULL @holder is invalid.  Exclusive
-+ * opens may nest for the same @holder.
-  *
-- * On success, the reference count of @bdev is unchanged.  On failure,
-- * @bdev is put.
-+ * Use this interface ONLY if you really do not have anything better - i.e. when
-+ * you are behind a truly sucky interface and all you are given is a device
-+ * number.  Everything else should use blkdev_get_by_path().
-  *
-  * CONTEXT:
-  * Might sleep.
-  *
-  * RETURNS:
-- * 0 on success, -errno on failure.
-+ * Reference to the block_device on success, ERR_PTR(-errno) on failure.
-  */
--static int blkdev_get(struct block_device *bdev, fmode_t mode, void *holder)
-+struct block_device *blkdev_get_by_dev(dev_t dev, fmode_t mode, void *holder)
- {
- 	struct block_device *claiming;
- 	bool unblock_events = true;
-+	struct block_device *bdev;
- 	struct gendisk *disk;
- 	int partno;
- 	int ret;
- 
- 	ret = devcgroup_check_permission(DEVCG_DEV_BLOCK,
--			imajor(bdev->bd_inode), iminor(bdev->bd_inode),
-+			MAJOR(dev), MINOR(dev),
- 			((mode & FMODE_READ) ? DEVCG_ACC_READ : 0) |
- 			((mode & FMODE_WRITE) ? DEVCG_ACC_WRITE : 0));
- 	if (ret)
--		goto bdput;
-+		return ERR_PTR(ret);
-+
-+	bdev = bdget(dev);
-+	if (!bdev)
-+		return ERR_PTR(-ENOMEM);
- 
- 	/*
- 	 * If we lost a race with 'disk' being deleted, try again.  See md.c.
-@@ -1584,10 +1531,13 @@ static int blkdev_get(struct block_device *bdev, fmode_t mode, void *holder)
- 	if (ret == -ERESTARTSYS)
- 		goto retry;
- bdput:
--	if (ret)
-+	if (ret) {
- 		bdput(bdev);
--	return ret;
-+		return ERR_PTR(ret);
-+	}
-+	return bdev;
- }
-+EXPORT_SYMBOL(blkdev_get_by_dev);
- 
- /**
-  * blkdev_get_by_path - open a block device by name
-@@ -1595,32 +1545,31 @@ static int blkdev_get(struct block_device *bdev, fmode_t mode, void *holder)
-  * @mode: FMODE_* mask
-  * @holder: exclusive holder identifier
-  *
-- * Open the blockdevice described by the device file at @path.  @mode
-- * and @holder are identical to blkdev_get().
-+ * Open the block device described by the device file at &path.
-  *
-- * On success, the returned block_device has reference count of one.
-+ * If @mode includes %FMODE_EXCL, the block device is opened with exclusive
-+ * access.  Specifying %FMODE_EXCL with a %NULL @holder is invalid.  Exclusive
-+ * opens may nest for the same @holder.
-  *
-  * CONTEXT:
-  * Might sleep.
-  *
-  * RETURNS:
-- * Pointer to block_device on success, ERR_PTR(-errno) on failure.
-+ * Reference to the block_device on success, ERR_PTR(-errno) on failure.
-  */
- struct block_device *blkdev_get_by_path(const char *path, fmode_t mode,
- 					void *holder)
- {
- 	struct block_device *bdev;
--	int err;
--
--	bdev = lookup_bdev(path);
--	if (IS_ERR(bdev))
--		return bdev;
-+	dev_t dev;
-+	int error;
- 
--	err = blkdev_get(bdev, mode, holder);
--	if (err)
--		return ERR_PTR(err);
-+	error = lookup_bdev(path, &dev);
-+	if (error)
-+		return ERR_PTR(error);
- 
--	if ((mode & FMODE_WRITE) && bdev_read_only(bdev)) {
-+	bdev = blkdev_get_by_dev(dev, mode, holder);
-+	if (!IS_ERR(bdev) && (mode & FMODE_WRITE) && bdev_read_only(bdev)) {
- 		blkdev_put(bdev, mode);
- 		return ERR_PTR(-EACCES);
- 	}
-@@ -1629,45 +1578,6 @@ struct block_device *blkdev_get_by_path(const char *path, fmode_t mode,
- }
- EXPORT_SYMBOL(blkdev_get_by_path);
- 
--/**
-- * blkdev_get_by_dev - open a block device by device number
-- * @dev: device number of block device to open
-- * @mode: FMODE_* mask
-- * @holder: exclusive holder identifier
-- *
-- * Open the blockdevice described by device number @dev.  @mode and
-- * @holder are identical to blkdev_get().
-- *
-- * Use it ONLY if you really do not have anything better - i.e. when
-- * you are behind a truly sucky interface and all you are given is a
-- * device number.  _Never_ to be used for internal purposes.  If you
-- * ever need it - reconsider your API.
-- *
-- * On success, the returned block_device has reference count of one.
-- *
-- * CONTEXT:
-- * Might sleep.
-- *
-- * RETURNS:
-- * Pointer to block_device on success, ERR_PTR(-errno) on failure.
-- */
--struct block_device *blkdev_get_by_dev(dev_t dev, fmode_t mode, void *holder)
--{
--	struct block_device *bdev;
--	int err;
--
--	bdev = bdget(dev);
--	if (!bdev)
--		return ERR_PTR(-ENOMEM);
--
--	err = blkdev_get(bdev, mode, holder);
--	if (err)
--		return ERR_PTR(err);
--
--	return bdev;
--}
--EXPORT_SYMBOL(blkdev_get_by_dev);
--
- static int blkdev_open(struct inode * inode, struct file * filp)
- {
- 	struct block_device *bdev;
-@@ -1689,14 +1599,12 @@ static int blkdev_open(struct inode * inode, struct file * filp)
- 	if ((filp->f_flags & O_ACCMODE) == 3)
- 		filp->f_mode |= FMODE_WRITE_IOCTL;
- 
--	bdev = bd_acquire(inode);
--	if (bdev == NULL)
--		return -ENOMEM;
--
-+	bdev = blkdev_get_by_dev(inode->i_rdev, filp->f_mode, filp);
-+	if (IS_ERR(bdev))
-+		return PTR_ERR(bdev);
- 	filp->f_mapping = bdev->bd_inode->i_mapping;
- 	filp->f_wb_err = filemap_sample_wb_err(filp->f_mapping);
--
--	return blkdev_get(bdev, filp->f_mode, filp);
-+	return 0;
- }
- 
- static void __blkdev_put(struct block_device *bdev, fmode_t mode, int for_part)
-@@ -2003,37 +1911,32 @@ const struct file_operations def_blk_fops = {
-  * namespace if possible and return it.  Return ERR_PTR(error)
-  * otherwise.
-  */
--struct block_device *lookup_bdev(const char *pathname)
-+int lookup_bdev(const char *pathname, dev_t *dev)
- {
--	struct block_device *bdev;
- 	struct inode *inode;
- 	struct path path;
- 	int error;
- 
- 	if (!pathname || !*pathname)
--		return ERR_PTR(-EINVAL);
-+		return -EINVAL;
- 
- 	error = kern_path(pathname, LOOKUP_FOLLOW, &path);
- 	if (error)
--		return ERR_PTR(error);
-+		return error;
- 
- 	inode = d_backing_inode(path.dentry);
- 	error = -ENOTBLK;
- 	if (!S_ISBLK(inode->i_mode))
--		goto fail;
-+		goto out_path_put;
- 	error = -EACCES;
- 	if (!may_open_dev(&path))
--		goto fail;
--	error = -ENOMEM;
--	bdev = bd_acquire(inode);
--	if (!bdev)
--		goto fail;
--out:
-+		goto out_path_put;
-+
-+	*dev = inode->i_rdev;
-+	error = 0;
-+out_path_put:
- 	path_put(&path);
--	return bdev;
--fail:
--	bdev = ERR_PTR(error);
--	goto out;
-+	return error;
- }
- EXPORT_SYMBOL(lookup_bdev);
- 
-diff --git a/fs/btrfs/volumes.c b/fs/btrfs/volumes.c
-index a6406b3b8c2b4f..fbc4b58228f784 100644
---- a/fs/btrfs/volumes.c
-+++ b/fs/btrfs/volumes.c
-@@ -929,16 +929,16 @@ static noinline struct btrfs_device *device_list_add(const char *path,
- 		 * make sure it's the same device if the device is mounted
- 		 */
- 		if (device->bdev) {
--			struct block_device *path_bdev;
-+			int error;
-+			dev_t path_dev;
- 
--			path_bdev = lookup_bdev(path);
--			if (IS_ERR(path_bdev)) {
-+			error = lookup_bdev(path, &path_dev);
-+			if (error) {
- 				mutex_unlock(&fs_devices->device_list_mutex);
--				return ERR_CAST(path_bdev);
-+				return ERR_PTR(error);
- 			}
- 
--			if (device->bdev != path_bdev) {
--				bdput(path_bdev);
-+			if (device->bdev->bd_dev != path_dev) {
- 				mutex_unlock(&fs_devices->device_list_mutex);
- 				btrfs_warn_in_rcu(device->fs_info,
- 	"duplicate device %s devid %llu generation %llu scanned by %s (%d)",
-@@ -947,7 +947,6 @@ static noinline struct btrfs_device *device_list_add(const char *path,
- 						  task_pid_nr(current));
- 				return ERR_PTR(-EEXIST);
- 			}
--			bdput(path_bdev);
- 			btrfs_info_in_rcu(device->fs_info,
- 	"devid %llu device path %s changed to %s scanned by %s (%d)",
- 					  devid, rcu_str_deref(device->name),
-diff --git a/fs/inode.c b/fs/inode.c
-index 9d78c37b00b817..cb008acf0efdb8 100644
---- a/fs/inode.c
-+++ b/fs/inode.c
-@@ -155,7 +155,6 @@ int inode_init_always(struct super_block *sb, struct inode *inode)
- 	inode->i_bytes = 0;
- 	inode->i_generation = 0;
- 	inode->i_pipe = NULL;
--	inode->i_bdev = NULL;
- 	inode->i_cdev = NULL;
- 	inode->i_link = NULL;
- 	inode->i_dir_seq = 0;
-@@ -580,8 +579,6 @@ static void evict(struct inode *inode)
- 		truncate_inode_pages_final(&inode->i_data);
- 		clear_inode(inode);
- 	}
--	if (S_ISBLK(inode->i_mode) && inode->i_bdev)
--		bd_forget(inode);
- 	if (S_ISCHR(inode->i_mode) && inode->i_cdev)
- 		cd_forget(inode);
- 
-diff --git a/fs/internal.h b/fs/internal.h
-index 47be21dfeebef5..53f890446e7508 100644
---- a/fs/internal.h
-+++ b/fs/internal.h
-@@ -25,7 +25,6 @@ extern void __init bdev_cache_init(void);
- extern int __sync_blockdev(struct block_device *bdev, int wait);
- void iterate_bdevs(void (*)(struct block_device *, void *), void *);
- void emergency_thaw_bdev(struct super_block *sb);
--void bd_forget(struct inode *inode);
- #else
- static inline void bdev_cache_init(void)
- {
-@@ -43,9 +42,6 @@ static inline int emergency_thaw_bdev(struct super_block *sb)
- {
+-	if (should_fail_request(&bio->bi_disk->part0, bio->bi_iter.bi_size))
++	if (should_fail_request(bio->bi_disk->part0->bd_part,
++			bio->bi_iter.bi_size))
+ 		return -EIO;
  	return 0;
  }
--static inline void bd_forget(struct inode *inode)
--{
--}
- #endif /* CONFIG_BLOCK */
+@@ -831,7 +832,7 @@ static noinline_for_stack bool submit_bio_checks(struct bio *bio)
+ 		if (unlikely(blk_partition_remap(bio)))
+ 			goto end_io;
+ 	} else {
+-		if (unlikely(bio_check_ro(bio, &bio->bi_disk->part0)))
++		if (unlikely(bio_check_ro(bio, bio->bi_disk->part0->bd_part)))
+ 			goto end_io;
+ 		if (unlikely(bio_check_eod(bio, get_capacity(bio->bi_disk))))
+ 			goto end_io;
+@@ -1203,7 +1204,7 @@ blk_status_t blk_insert_cloned_request(struct request_queue *q, struct request *
+ 		return ret;
  
- /*
-@@ -114,8 +110,7 @@ extern struct file *alloc_empty_file_noaccount(int, const struct cred *);
-  */
- extern int reconfigure_super(struct fs_context *);
- extern bool trylock_super(struct super_block *sb);
--struct super_block *__get_super(struct block_device *bdev, bool excl);
--extern struct super_block *user_get_super(dev_t);
-+struct super_block *user_get_super(dev_t, bool excl);
- void put_super(struct super_block *sb);
- extern bool mount_capable(struct fs_context *);
+ 	if (rq->rq_disk &&
+-	    should_fail_request(&rq->rq_disk->part0, blk_rq_bytes(rq)))
++	    should_fail_request(rq->rq_disk->part0->bd_part, blk_rq_bytes(rq)))
+ 		return BLK_STS_IOERR;
  
-diff --git a/fs/io_uring.c b/fs/io_uring.c
-index 4ead291b2976f3..8f13c0417f940c 100644
---- a/fs/io_uring.c
-+++ b/fs/io_uring.c
-@@ -2716,11 +2716,7 @@ static struct file *__io_file_get(struct io_submit_state *state, int fd)
- 
- static bool io_bdev_nowait(struct block_device *bdev)
- {
--#ifdef CONFIG_BLOCK
- 	return !bdev || blk_queue_nowait(bdev_get_queue(bdev));
--#else
--	return true;
--#endif
+ 	if (blk_crypto_insert_cloned_request(rq))
+@@ -1272,7 +1273,7 @@ static void update_io_ticks(struct hd_struct *part, unsigned long now, bool end)
+ 			__part_stat_add(part, io_ticks, end ? now - stamp : 1);
+ 	}
+ 	if (part->partno) {
+-		part = &part_to_disk(part)->part0;
++		part = part_to_disk(part)->part0->bd_part;
+ 		goto again;
+ 	}
  }
- 
- /*
-@@ -2733,14 +2729,16 @@ static bool io_file_supports_async(struct file *file, int rw)
- 	umode_t mode = file_inode(file)->i_mode;
- 
- 	if (S_ISBLK(mode)) {
--		if (io_bdev_nowait(file->f_inode->i_bdev))
-+		if (IS_ENABLED(CONFIG_BLOCK) &&
-+		    io_bdev_nowait(I_BDEV(file->f_mapping->host)))
- 			return true;
- 		return false;
- 	}
- 	if (S_ISCHR(mode) || S_ISSOCK(mode))
- 		return true;
- 	if (S_ISREG(mode)) {
--		if (io_bdev_nowait(file->f_inode->i_sb->s_bdev) &&
-+		if (IS_ENABLED(CONFIG_BLOCK) &&
-+		    io_bdev_nowait(file->f_inode->i_sb->s_bdev) &&
- 		    file->f_op != &io_uring_fops)
- 			return true;
- 		return false;
-diff --git a/fs/pipe.c b/fs/pipe.c
-index 0ac197658a2d6e..c5989cfd564d45 100644
---- a/fs/pipe.c
-+++ b/fs/pipe.c
-@@ -1342,9 +1342,8 @@ static long pipe_set_size(struct pipe_inode_info *pipe, unsigned long arg)
- }
- 
- /*
-- * After the inode slimming patch, i_pipe/i_bdev/i_cdev share the same
-- * location, so checking ->i_pipe is not enough to verify that this is a
-- * pipe.
-+ * Note that i_pipe and i_cdev share the same location, so checking ->i_pipe is
-+ * not enough to verify that this is a pipe.
-  */
- struct pipe_inode_info *get_pipe_info(struct file *file, bool for_splice)
- {
-diff --git a/fs/quota/quota.c b/fs/quota/quota.c
-index f3d32b0d9008f2..6d16b2be5ac4a3 100644
---- a/fs/quota/quota.c
-+++ b/fs/quota/quota.c
-@@ -866,17 +866,18 @@ static bool quotactl_cmd_onoff(int cmd)
- static struct super_block *quotactl_block(const char __user *special, int cmd)
- {
- #ifdef CONFIG_BLOCK
--	struct block_device *bdev;
- 	struct super_block *sb;
- 	struct filename *tmp = getname(special);
- 	bool excl = false, thawed = false;
-+	int error;
-+	dev_t dev;
- 
- 	if (IS_ERR(tmp))
- 		return ERR_CAST(tmp);
--	bdev = lookup_bdev(tmp->name);
-+	error = lookup_bdev(tmp->name, &dev);
- 	putname(tmp);
--	if (IS_ERR(bdev))
--		return ERR_CAST(bdev);
-+	if (error)
-+		return ERR_PTR(error);
- 
- 	if (quotactl_cmd_onoff(cmd)) {
- 		excl = true;
-@@ -886,8 +887,10 @@ static struct super_block *quotactl_block(const char __user *special, int cmd)
- 	}
- 
- retry:
--	sb = __get_super(bdev, excl);
--	if (thawed && sb && sb->s_writers.frozen != SB_UNFROZEN) {
-+	sb = user_get_super(dev, excl);
-+	if (!sb)
-+		return ERR_PTR(-ENODEV);
-+	if (thawed && sb->s_writers.frozen != SB_UNFROZEN) {
- 		if (excl)
- 			up_write(&sb->s_umount);
- 		else
-@@ -897,10 +900,6 @@ static struct super_block *quotactl_block(const char __user *special, int cmd)
- 		put_super(sb);
- 		goto retry;
- 	}
+@@ -1309,8 +1310,6 @@ void blk_account_io_done(struct request *req, u64 now)
+ 		part_stat_inc(part, ios[sgrp]);
+ 		part_stat_add(part, nsecs[sgrp], now - req->start_time_ns);
+ 		part_stat_unlock();
 -
--	bdput(bdev);
--	if (!sb)
--		return ERR_PTR(-ENODEV);
- 	return sb;
+-		hd_struct_put(part);
+ 	}
+ }
  
- #else
-diff --git a/fs/statfs.c b/fs/statfs.c
-index 59f33752c1311f..68cb077887504f 100644
---- a/fs/statfs.c
-+++ b/fs/statfs.c
-@@ -235,7 +235,7 @@ SYSCALL_DEFINE3(fstatfs64, unsigned int, fd, size_t, sz, struct statfs64 __user
- 
- static int vfs_ustat(dev_t dev, struct kstatfs *sbuf)
+@@ -1354,7 +1353,7 @@ EXPORT_SYMBOL_GPL(part_start_io_acct);
+ unsigned long disk_start_io_acct(struct gendisk *disk, unsigned int sectors,
+ 				 unsigned int op)
  {
--	struct super_block *s = user_get_super(dev);
-+	struct super_block *s = user_get_super(dev, false);
- 	int err;
- 	if (!s)
- 		return -EINVAL;
-diff --git a/fs/super.c b/fs/super.c
-index 343e5c1e538d2a..7a1611e5d0f45d 100644
---- a/fs/super.c
-+++ b/fs/super.c
-@@ -740,7 +740,7 @@ void iterate_supers_type(struct file_system_type *type,
+-	return __part_start_io_acct(&disk->part0, sectors, op);
++	return __part_start_io_acct(disk->part0->bd_part, sectors, op);
+ }
+ EXPORT_SYMBOL(disk_start_io_acct);
  
- EXPORT_SYMBOL(iterate_supers_type);
- 
--struct super_block *__get_super(struct block_device *bdev, bool excl)
-+struct super_block *get_super(struct block_device *bdev)
+@@ -1376,14 +1375,13 @@ void part_end_io_acct(struct hd_struct *part, struct bio *bio,
+ 		      unsigned long start_time)
  {
- 	struct super_block *sb;
+ 	__part_end_io_acct(part, bio_op(bio), start_time);
+-	hd_struct_put(part);
+ }
+ EXPORT_SYMBOL_GPL(part_end_io_acct);
  
-@@ -755,17 +755,11 @@ struct super_block *__get_super(struct block_device *bdev, bool excl)
- 		if (sb->s_bdev == bdev) {
- 			sb->s_count++;
- 			spin_unlock(&sb_lock);
--			if (!excl)
--				down_read(&sb->s_umount);
--			else
--				down_write(&sb->s_umount);
-+			down_read(&sb->s_umount);
- 			/* still alive? */
- 			if (sb->s_root && (sb->s_flags & SB_BORN))
- 				return sb;
--			if (!excl)
--				up_read(&sb->s_umount);
--			else
--				up_write(&sb->s_umount);
-+			up_read(&sb->s_umount);
- 			/* nope, got unmounted */
- 			spin_lock(&sb_lock);
- 			__put_super(sb);
-@@ -776,19 +770,6 @@ struct super_block *__get_super(struct block_device *bdev, bool excl)
+ void disk_end_io_acct(struct gendisk *disk, unsigned int op,
+ 		      unsigned long start_time)
+ {
+-	__part_end_io_acct(&disk->part0, op, start_time);
++	__part_end_io_acct(disk->part0->bd_part, op, start_time);
+ }
+ EXPORT_SYMBOL(disk_end_io_acct);
+ 
+diff --git a/block/blk-flush.c b/block/blk-flush.c
+index e32958f0b68750..fcd0a60574dff8 100644
+--- a/block/blk-flush.c
++++ b/block/blk-flush.c
+@@ -139,7 +139,7 @@ static void blk_flush_queue_rq(struct request *rq, bool add_front)
+ 
+ static void blk_account_io_flush(struct request *rq)
+ {
+-	struct hd_struct *part = &rq->rq_disk->part0;
++	struct hd_struct *part = rq->rq_disk->part0->bd_part;
+ 
+ 	part_stat_lock();
+ 	part_stat_inc(part, ios[STAT_FLUSH]);
+diff --git a/block/blk-merge.c b/block/blk-merge.c
+index bcf5e458060337..cb351ab9b77dbd 100644
+--- a/block/blk-merge.c
++++ b/block/blk-merge.c
+@@ -683,8 +683,6 @@ static void blk_account_io_merge_request(struct request *req)
+ 		part_stat_lock();
+ 		part_stat_inc(req->part, merges[op_stat_group(req_op(req))]);
+ 		part_stat_unlock();
+-
+-		hd_struct_put(req->part);
+ 	}
+ }
+ 
+diff --git a/block/blk.h b/block/blk.h
+index 0bd4b58bcbaf77..32ac41f7557fcc 100644
+--- a/block/blk.h
++++ b/block/blk.h
+@@ -363,27 +363,6 @@ int bdev_del_partition(struct block_device *bdev, int partno);
+ int bdev_resize_partition(struct block_device *bdev, int partno,
+ 		sector_t start, sector_t length);
+ int disk_expand_part_tbl(struct gendisk *disk, int target);
+-int hd_ref_init(struct hd_struct *part);
+-
+-/* no need to get/put refcount of part0 */
+-static inline int hd_struct_try_get(struct hd_struct *part)
+-{
+-	if (part->partno)
+-		return percpu_ref_tryget_live(&part->ref);
+-	return 1;
+-}
+-
+-static inline void hd_struct_put(struct hd_struct *part)
+-{
+-	if (part->partno)
+-		percpu_ref_put(&part->ref);
+-}
+-
+-static inline void hd_free_part(struct hd_struct *part)
+-{
+-	bdput(part->bdev);
+-	percpu_ref_exit(&part->ref);
+-}
+ 
+ int bio_add_hw_page(struct request_queue *q, struct bio *bio,
+ 		struct page *page, unsigned int len, unsigned int offset,
+diff --git a/block/genhd.c b/block/genhd.c
+index 8aed77cc8ad169..3bbf6d3a69ec63 100644
+--- a/block/genhd.c
++++ b/block/genhd.c
+@@ -40,7 +40,7 @@ static void disk_release_events(struct gendisk *disk);
+ 
+ void set_capacity(struct gendisk *disk, sector_t sectors)
+ {
+-	struct block_device *bdev = disk->part0.bdev;
++	struct block_device *bdev = disk->part0;
+ 
+ 	spin_lock(&bdev->bd_size_lock);
+ 	i_size_write(bdev->bd_inode, (loff_t)sectors << SECTOR_SHIFT);
+@@ -308,9 +308,7 @@ static inline int sector_in_part(struct hd_struct *part, sector_t sector)
+  * primarily used for stats accounting.
+  *
+  * CONTEXT:
+- * RCU read locked.  The returned partition pointer is always valid
+- * because its refcount is grabbed except for part0, which lifetime
+- * is same with the disk.
++ * RCU read locked.
+  *
+  * RETURNS:
+  * Found partition on success, part0 is returned if no partition matches
+@@ -326,26 +324,19 @@ struct hd_struct *disk_map_sector_rcu(struct gendisk *disk, sector_t sector)
+ 	ptbl = rcu_dereference(disk->part_tbl);
+ 
+ 	part = rcu_dereference(ptbl->last_lookup);
+-	if (part && sector_in_part(part, sector) && hd_struct_try_get(part))
++	if (part && sector_in_part(part, sector))
+ 		goto out_unlock;
+ 
+ 	for (i = 1; i < ptbl->len; i++) {
+ 		part = rcu_dereference(ptbl->part[i]);
+ 
+ 		if (part && sector_in_part(part, sector)) {
+-			/*
+-			 * only live partition can be cached for lookup,
+-			 * so use-after-free on cached & deleting partition
+-			 * can be avoided
+-			 */
+-			if (!hd_struct_try_get(part))
+-				break;
+ 			rcu_assign_pointer(ptbl->last_lookup, part);
+ 			goto out_unlock;
+ 		}
+ 	}
+ 
+-	part = &disk->part0;
++	part = disk->part0->bd_part;
+ out_unlock:
+ 	rcu_read_unlock();
+ 	return part;
+@@ -671,8 +662,8 @@ static void register_disk(struct device *parent, struct gendisk *disk,
+ 	 */
+ 	pm_runtime_set_memalloc_noio(ddev, true);
+ 
+-	disk->part0.bdev->bd_holder_dir =
+-			kobject_create_and_add("holders", &ddev->kobj);
++	disk->part0->bd_holder_dir =
++		kobject_create_and_add("holders", &ddev->kobj);
+ 	disk->slave_dir = kobject_create_and_add("slaves", &ddev->kobj);
+ 
+ 	if (disk->flags & GENHD_FL_HIDDEN) {
+@@ -738,7 +729,7 @@ static void __device_add_disk(struct device *parent, struct gendisk *disk,
+ 
+ 	disk->flags |= GENHD_FL_UP;
+ 
+-	retval = blk_alloc_devt(&disk->part0, &devt);
++	retval = blk_alloc_devt(disk->part0->bd_part, &devt);
+ 	if (retval) {
+ 		WARN_ON(1);
+ 		return;
+@@ -765,7 +756,7 @@ static void __device_add_disk(struct device *parent, struct gendisk *disk,
+ 		ret = bdi_register(bdi, "%u:%u", MAJOR(devt), MINOR(devt));
+ 		WARN_ON(ret);
+ 		bdi_set_owner(bdi, dev);
+-		bdev_add(disk->part0.bdev, devt);
++		bdev_add(disk->part0, devt);
+ 	}
+ 	register_disk(parent, disk, groups);
+ 	if (register_queue)
+@@ -872,11 +863,11 @@ void del_gendisk(struct gendisk *disk)
+ 
+ 	blk_unregister_queue(disk);
+ 
+-	kobject_put(disk->part0.bdev->bd_holder_dir);
++	kobject_put(disk->part0->bd_holder_dir);
+ 	kobject_put(disk->slave_dir);
+ 
+-	part_stat_set_all(&disk->part0, 0);
+-	disk->part0.bdev->bd_stamp = 0;
++	part_stat_set_all(disk->part0->bd_part, 0);
++	disk->part0->bd_stamp = 0;
+ 	if (!sysfs_deprecated)
+ 		sysfs_remove_link(block_depr, dev_name(disk_to_dev(disk)));
+ 	pm_runtime_set_memalloc_noio(disk_to_dev(disk), false);
+@@ -989,7 +980,7 @@ void __init printk_all_partitions(void)
+ 		 */
+ 		disk_part_iter_init(&piter, disk, DISK_PITER_INCL_PART0);
+ 		while ((part = disk_part_iter_next(&piter))) {
+-			bool is_part0 = part == &disk->part0;
++			bool is_part0 = part == disk->part0->bd_part;
+ 
+ 			printk("%s%s %10llu %s %s", is_part0 ? "" : "  ",
+ 			       bdevt_str(part_devt(part), devt_buf),
+@@ -1444,7 +1435,7 @@ static void disk_release(struct device *dev)
+ 	disk_release_events(disk);
+ 	kfree(disk->random);
+ 	disk_replace_part_tbl(disk, NULL);
+-	hd_free_part(&disk->part0);
++	bdput(disk->part0);
+ 	if (disk->queue)
+ 		blk_put_queue(disk->queue);
+ 	kfree_rcu(disk, rcu);
+@@ -1610,8 +1601,8 @@ struct gendisk *__alloc_disk_node(int minors, int node_id)
+ 	if (!disk)
+ 		return NULL;
+ 
+-	disk->part0.bdev = bdev_alloc(disk, 0);
+-	if (!disk->part0.bdev)
++	disk->part0 = bdev_alloc(disk, 0);
++	if (!disk->part0)
+ 		goto out_free_disk;
+ 
+ 	disk->node_id = node_id;
+@@ -1619,10 +1610,7 @@ struct gendisk *__alloc_disk_node(int minors, int node_id)
+ 		goto out_bdput;
+ 
+ 	ptbl = rcu_dereference_protected(disk->part_tbl, 1);
+-	rcu_assign_pointer(ptbl->part[0], &disk->part0);
+-
+-	if (hd_ref_init(&disk->part0))
+-		goto out_bdput;
++	rcu_assign_pointer(ptbl->part[0], disk->part0->bd_part);
+ 
+ 	disk->minors = minors;
+ 	rand_initialize_disk(disk);
+@@ -1632,7 +1620,7 @@ struct gendisk *__alloc_disk_node(int minors, int node_id)
+ 	return disk;
+ 
+ out_bdput:
+-	bdput(disk->part0.bdev);
++	bdput(disk->part0);
+ out_free_disk:
+ 	kfree(disk);
  	return NULL;
+@@ -1671,9 +1659,9 @@ void set_disk_ro(struct gendisk *disk, int flag)
+ 	struct disk_part_iter piter;
+ 	struct hd_struct *part;
+ 
+-	if (disk->part0.bdev->bd_read_only != flag) {
++	if (disk->part0->bd_read_only != flag) {
+ 		set_disk_ro_uevent(disk, flag);
+-		disk->part0.bdev->bd_read_only = flag;
++		disk->part0->bd_read_only = flag;
+ 	}
+ 
+ 	disk_part_iter_init(&piter, disk, DISK_PITER_INCL_EMPTY);
+diff --git a/block/partitions/core.c b/block/partitions/core.c
+index fd00428e437a63..4b0352cb29e132 100644
+--- a/block/partitions/core.c
++++ b/block/partitions/core.c
+@@ -265,9 +265,9 @@ static const struct attribute_group *part_attr_groups[] = {
+ static void part_release(struct device *dev)
+ {
+ 	struct hd_struct *p = dev_to_part(dev);
++
+ 	blk_free_devt(dev->devt);
+-	hd_free_part(p);
+-	kfree(p);
++	bdput(p->bdev);
  }
  
--/**
-- *	get_super - get the superblock of a device
-- *	@bdev: device to get the superblock for
-- *
-- *	Scans the superblock list and finds the superblock of the file system
-- *	mounted on the device given. %NULL is returned if no match is found.
-- */
--struct super_block *get_super(struct block_device *bdev)
+ static int part_uevent(struct device *dev, struct kobj_uevent_env *env)
+@@ -288,46 +288,6 @@ struct device_type part_type = {
+ 	.uevent		= part_uevent,
+ };
+ 
+-static void hd_struct_free_work(struct work_struct *work)
 -{
--	return __get_super(bdev, false);
--}
--EXPORT_SYMBOL(get_super);
+-	struct hd_struct *part =
+-		container_of(to_rcu_work(work), struct hd_struct, rcu_work);
+-	struct gendisk *disk = part_to_disk(part);
 -
+-	/*
+-	 * Release the disk reference acquired in delete_partition here.
+-	 * We can't release it in hd_struct_free because the final put_device
+-	 * needs process context and thus can't be run directly from a
+-	 * percpu_ref ->release handler.
+-	 */
+-	put_device(disk_to_dev(disk));
+-
+-	part->bdev->bd_start_sect = 0;
+-	bdev_set_nr_sectors(part->bdev, 0);
+-	part_stat_set_all(part, 0);
+-	put_device(part_to_dev(part));
+-}
+-
+-static void hd_struct_free(struct percpu_ref *ref)
+-{
+-	struct hd_struct *part = container_of(ref, struct hd_struct, ref);
+-	struct gendisk *disk = part_to_disk(part);
+-	struct disk_part_tbl *ptbl =
+-		rcu_dereference_protected(disk->part_tbl, 1);
+-
+-	rcu_assign_pointer(ptbl->last_lookup, NULL);
+-
+-	INIT_RCU_WORK(&part->rcu_work, hd_struct_free_work);
+-	queue_rcu_work(system_wq, &part->rcu_work);
+-}
+-
+-int hd_ref_init(struct hd_struct *part)
+-{
+-	if (percpu_ref_init(&part->ref, hd_struct_free, 0, GFP_KERNEL))
+-		return -ENOMEM;
+-	return 0;
+-}
+-
+ /*
+  * Must be called either with bd_mutex held, before a disk can be opened or
+  * after all disk users are gone.
+@@ -342,8 +302,8 @@ void delete_partition(struct hd_struct *part)
+ 	 * ->part_tbl is referenced in this part's release handler, so
+ 	 *  we have to hold the disk device
+ 	 */
+-	get_device(disk_to_dev(disk));
+ 	rcu_assign_pointer(ptbl->part[part->partno], NULL);
++	rcu_assign_pointer(ptbl->last_lookup, NULL);
+ 	kobject_put(part->bdev->bd_holder_dir);
+ 	device_del(part_to_dev(part));
+ 
+@@ -353,7 +313,7 @@ void delete_partition(struct hd_struct *part)
+ 	 */
+ 	remove_inode_hash(part->bdev->bd_inode);
+ 
+-	percpu_ref_kill(&part->ref);
++	put_device(part_to_dev(part));
+ }
+ 
+ static ssize_t whole_disk_show(struct device *dev,
+@@ -406,15 +366,11 @@ static struct hd_struct *add_partition(struct gendisk *disk, int partno,
+ 	if (ptbl->part[partno])
+ 		return ERR_PTR(-EBUSY);
+ 
+-	p = kzalloc(sizeof(*p), GFP_KERNEL);
+-	if (!p)
+-		return ERR_PTR(-EBUSY);
+-
+ 	bdev = bdev_alloc(disk, partno);
+ 	if (!bdev)
+-		goto out_free;
+-	p->bdev = bdev;
++		return ERR_PTR(-ENOMEM);
+ 
++	p = bdev->bd_part;
+ 	pdev = part_to_dev(p);
+ 
+ 	bdev->bd_start_sect = start;
+@@ -463,13 +419,6 @@ static struct hd_struct *add_partition(struct gendisk *disk, int partno,
+ 			goto out_del;
+ 	}
+ 
+-	err = hd_ref_init(p);
+-	if (err) {
+-		if (flags & ADDPART_FLAG_WHOLEDISK)
+-			goto out_remove_file;
+-		goto out_del;
+-	}
+-
+ 	/* everything is up and running, commence */
+ 	bdev_add(bdev, devt);
+ 	rcu_assign_pointer(ptbl->part[partno], p);
+@@ -481,11 +430,7 @@ static struct hd_struct *add_partition(struct gendisk *disk, int partno,
+ 
+ out_bdput:
+ 	bdput(bdev);
+-out_free:
+-	kfree(p);
+ 	return ERR_PTR(err);
+-out_remove_file:
+-	device_remove_file(pdev, &dev_attr_whole_disk);
+ out_del:
+ 	kobject_put(bdev->bd_holder_dir);
+ 	device_del(pdev);
+diff --git a/drivers/block/drbd/drbd_receiver.c b/drivers/block/drbd/drbd_receiver.c
+index dc333dbe523281..9e5c2fdfda3629 100644
+--- a/drivers/block/drbd/drbd_receiver.c
++++ b/drivers/block/drbd/drbd_receiver.c
+@@ -2802,7 +2802,7 @@ bool drbd_rs_c_min_rate_throttle(struct drbd_device *device)
+ 	if (c_min_rate == 0)
+ 		return false;
+ 
+-	curr_events = (int)part_stat_read_accum(&disk->part0, sectors) -
++	curr_events = (int)part_stat_read_accum(disk->part0->bd_part, sectors) -
+ 			atomic_read(&device->rs_sect_ev);
+ 
+ 	if (atomic_read(&device->ap_actlog_cnt)
+diff --git a/drivers/block/drbd/drbd_worker.c b/drivers/block/drbd/drbd_worker.c
+index ba56f3f05312f0..343f56b86bb766 100644
+--- a/drivers/block/drbd/drbd_worker.c
++++ b/drivers/block/drbd/drbd_worker.c
+@@ -1678,7 +1678,8 @@ void drbd_rs_controller_reset(struct drbd_device *device)
+ 	atomic_set(&device->rs_sect_in, 0);
+ 	atomic_set(&device->rs_sect_ev, 0);
+ 	device->rs_in_flight = 0;
+-	device->rs_last_events = (int)part_stat_read_accum(&disk->part0, sectors);
++	device->rs_last_events =
++		(int)part_stat_read_accum(disk->part0->bd_part, sectors);
+ 
+ 	/* Updating the RCU protected object in place is necessary since
+ 	   this function gets called from atomic context.
+diff --git a/drivers/block/zram/zram_drv.c b/drivers/block/zram/zram_drv.c
+index 88baa6158eaee1..153858734cd47d 100644
+--- a/drivers/block/zram/zram_drv.c
++++ b/drivers/block/zram/zram_drv.c
+@@ -1687,7 +1687,7 @@ static void zram_reset_device(struct zram *zram)
+ 	zram->disksize = 0;
+ 
+ 	set_capacity_and_notify(zram->disk, 0);
+-	part_stat_set_all(&zram->disk->part0, 0);
++	part_stat_set_all(zram->disk->part0->bd_part, 0);
+ 
+ 	up_write(&zram->init_lock);
+ 	/* I/O operation under all of CPU are done so let's free */
+diff --git a/drivers/md/dm.c b/drivers/md/dm.c
+index 48051db006f30c..1b2db4d530ea71 100644
+--- a/drivers/md/dm.c
++++ b/drivers/md/dm.c
+@@ -1607,7 +1607,7 @@ static blk_qc_t __split_and_process_bio(struct mapped_device *md,
+ 				 * (by eliminating DM's splitting and just using bio_split)
+ 				 */
+ 				part_stat_lock();
+-				__dm_part_stat_sub(&dm_disk(md)->part0,
++				__dm_part_stat_sub(dm_disk(md)->part0->bd_part,
+ 						   sectors[op_stat_group(bio_op(bio))], ci.sector_count);
+ 				part_stat_unlock();
+ 
+@@ -2242,7 +2242,7 @@ EXPORT_SYMBOL_GPL(dm_put);
+ static bool md_in_flight_bios(struct mapped_device *md)
+ {
+ 	int cpu;
+-	struct hd_struct *part = &dm_disk(md)->part0;
++	struct hd_struct *part = dm_disk(md)->part0->bd_part;
+ 	long sum = 0;
+ 
+ 	for_each_possible_cpu(cpu) {
+diff --git a/drivers/md/md.c b/drivers/md/md.c
+index 7ce6047c856ea2..3696c2d77a4dd7 100644
+--- a/drivers/md/md.c
++++ b/drivers/md/md.c
+@@ -8441,7 +8441,7 @@ static int is_mddev_idle(struct mddev *mddev, int init)
+ 	rcu_read_lock();
+ 	rdev_for_each_rcu(rdev, mddev) {
+ 		struct gendisk *disk = rdev->bdev->bd_disk;
+-		curr_events = (int)part_stat_read_accum(&disk->part0, sectors) -
++		curr_events = (int)part_stat_read_accum(disk->part0->bd_part, sectors) -
+ 			      atomic_read(&disk->sync_io);
+ 		/* sync IO will cause sync_io to increase before the disk_stats
+ 		 * as sync_io is counted when a request starts, and
+diff --git a/fs/block_dev.c b/fs/block_dev.c
+index 0b8d6009486643..1538b20ca4bd43 100644
+--- a/fs/block_dev.c
++++ b/fs/block_dev.c
+@@ -39,6 +39,7 @@
+ 
+ struct bdev_inode {
+ 	struct block_device bdev;
++	struct hd_struct hd;
+ 	struct inode vfs_inode;
+ };
+ 
+@@ -885,6 +886,9 @@ struct block_device *bdev_alloc(struct gendisk *disk, u8 partno)
+ 		iput(inode);
+ 		return NULL;
+ 	}
++	bdev->bd_part = &BDEV_I(inode)->hd;
++	memset(bdev->bd_part, 0, sizeof(*bdev->bd_part));
++	bdev->bd_part->bdev = bdev;
+ 	return bdev;
+ }
+ 
+@@ -1275,15 +1279,10 @@ EXPORT_SYMBOL_GPL(bdev_disk_changed);
+ static int __blkdev_get(struct block_device *bdev, fmode_t mode)
+ {
+ 	struct gendisk *disk = bdev->bd_disk;
+-	int ret;
++	int ret = 0;
+ 
+ 	if (!bdev->bd_openers) {
+ 		if (!bdev_is_partition(bdev)) {
+-			ret = -ENXIO;
+-			bdev->bd_part = disk_get_part(disk, 0);
+-			if (!bdev->bd_part)
+-				goto out_clear;
+-
+ 			ret = 0;
+ 			if (disk->fops->open)
+ 				ret = disk->fops->open(bdev, mode);
+@@ -1302,7 +1301,7 @@ static int __blkdev_get(struct block_device *bdev, fmode_t mode)
+ 				bdev_disk_changed(bdev, ret == -ENOMEDIUM);
+ 
+ 			if (ret)
+-				goto out_clear;
++				return ret;
+ 		} else {
+ 			struct block_device *whole = bdget_disk(disk, 0);
+ 
+@@ -1311,16 +1310,14 @@ static int __blkdev_get(struct block_device *bdev, fmode_t mode)
+ 			if (ret) {
+ 				mutex_unlock(&whole->bd_mutex);
+ 				bdput(whole);
+-				goto out_clear;
++				return ret;
+ 			}
+ 			whole->bd_part_count++;
+ 			mutex_unlock(&whole->bd_mutex);
+ 
+-			bdev->bd_part = disk_get_part(disk, bdev->bd_partno);
+ 			if (!bdev_nr_sectors(bdev)) {
+ 				__blkdev_put(whole, mode, 1);
+-				ret = -ENXIO;
+-				goto out_clear;
++				return -ENXIO;
+ 			}
+ 			set_init_blocksize(bdev);
+ 		}
+@@ -1329,7 +1326,6 @@ static int __blkdev_get(struct block_device *bdev, fmode_t mode)
+ 			bdev->bd_bdi = bdi_get(disk->queue->backing_dev_info);
+ 	} else {
+ 		if (!bdev_is_partition(bdev)) {
+-			ret = 0;
+ 			if (bdev->bd_disk->fops->open)
+ 				ret = bdev->bd_disk->fops->open(bdev, mode);
+ 			/* the same as first opener case, read comment there */
+@@ -1342,11 +1338,6 @@ static int __blkdev_get(struct block_device *bdev, fmode_t mode)
+ 	}
+ 	bdev->bd_openers++;
+ 	return 0;
+-
+- out_clear:
+-	disk_put_part(bdev->bd_part);
+-	bdev->bd_part = NULL;
+-	return ret;
+ }
+ 
+ static struct block_device *get_bdev_disk_and_module(dev_t dev)
+@@ -1569,18 +1560,12 @@ static void __blkdev_put(struct block_device *bdev, fmode_t mode, int for_part)
+ 		sync_blockdev(bdev);
+ 		kill_bdev(bdev);
+ 		bdev_write_inode(bdev);
+-
+-		if (!bdev_is_partition(bdev) && disk->fops->release)
+-			disk->fops->release(disk, mode);
+-
+-		disk_put_part(bdev->bd_part);
+-		bdev->bd_part = NULL;
+ 		if (bdev_is_partition(bdev))
+ 			victim = bdev_whole(bdev);
+-	} else {
+-		if (!bdev_is_partition(bdev) && disk->fops->release)
+-			disk->fops->release(disk, mode);
+ 	}
++
++	if (!bdev_is_partition(bdev) && disk->fops->release)
++		disk->fops->release(disk, mode);
+ 	mutex_unlock(&bdev->bd_mutex);
+ 	bdput(bdev);
+ 	if (victim)
+diff --git a/include/linux/blk_types.h b/include/linux/blk_types.h
+index 758cf71c9aa2a6..6edea5c1625909 100644
+--- a/include/linux/blk_types.h
++++ b/include/linux/blk_types.h
+@@ -59,7 +59,7 @@ struct block_device {
+ } __randomize_layout;
+ 
+ #define bdev_whole(_bdev) \
+-	((_bdev)->bd_disk->part0.bdev)
++	((_bdev)->bd_disk->part0)
+ 
+ #define bdev_kobj(_bdev) \
+ 	(&part_to_dev((_bdev)->bd_part)->kobj)
+diff --git a/include/linux/genhd.h b/include/linux/genhd.h
+index 08d00b526b0a3b..6e16c264439bdb 100644
+--- a/include/linux/genhd.h
++++ b/include/linux/genhd.h
+@@ -19,11 +19,12 @@
+ #include <linux/blk_types.h>
+ #include <asm/local.h>
+ 
+-#define dev_to_disk(device)	container_of((device), struct gendisk, part0.__dev)
+ #define dev_to_part(device)	container_of((device), struct hd_struct, __dev)
+-#define disk_to_dev(disk)	(&(disk)->part0.__dev)
+ #define part_to_dev(part)	(&((part)->__dev))
+ 
++#define dev_to_disk(device)	(dev_to_part(device)->bdev->bd_disk)
++#define disk_to_dev(disk)	(part_to_dev((disk)->part0->bd_part))
++
+ extern const struct device_type disk_type;
+ extern struct device_type part_type;
+ extern struct class block_class;
+@@ -51,12 +52,9 @@ struct partition_meta_info {
+ };
+ 
+ struct hd_struct {
+-	struct percpu_ref ref;
+-
+ 	struct block_device *bdev;
+ 	struct device __dev;
+ 	int partno;
+-	struct rcu_work rcu_work;
+ };
+ 
  /**
-  * get_active_super - get an active reference to the superblock of a device
-  * @bdev: device to get the superblock for
-@@ -820,7 +801,7 @@ struct super_block *get_active_super(struct block_device *bdev)
- 	return NULL;
+@@ -168,7 +166,7 @@ struct gendisk {
+ 	 * helpers.
+ 	 */
+ 	struct disk_part_tbl __rcu *part_tbl;
+-	struct hd_struct part0;
++	struct block_device *part0;
+ 
+ 	const struct block_device_operations *fops;
+ 	struct request_queue *queue;
+@@ -279,7 +277,7 @@ extern void set_disk_ro(struct gendisk *disk, int flag);
+ 
+ static inline int get_disk_ro(struct gendisk *disk)
+ {
+-	return disk->part0.bdev->bd_read_only;
++	return disk->part0->bd_read_only;
  }
  
--struct super_block *user_get_super(dev_t dev)
-+struct super_block *user_get_super(dev_t dev, bool excl)
+ extern void disk_block_events(struct gendisk *disk);
+@@ -303,7 +301,7 @@ static inline sector_t bdev_nr_sectors(struct block_device *bdev)
+ 
+ static inline sector_t get_capacity(struct gendisk *disk)
  {
- 	struct super_block *sb;
+-	return bdev_nr_sectors(disk->part0.bdev);
++	return bdev_nr_sectors(disk->part0);
+ }
  
-@@ -832,11 +813,17 @@ struct super_block *user_get_super(dev_t dev)
- 		if (sb->s_dev ==  dev) {
- 			sb->s_count++;
- 			spin_unlock(&sb_lock);
--			down_read(&sb->s_umount);
-+			if (excl)
-+				down_write(&sb->s_umount);
-+			else
-+				down_read(&sb->s_umount);
- 			/* still alive? */
- 			if (sb->s_root && (sb->s_flags & SB_BORN))
- 				return sb;
--			up_read(&sb->s_umount);
-+			if (excl)
-+				up_write(&sb->s_umount);
-+			else
-+				up_read(&sb->s_umount);
- 			/* nope, got unmounted */
- 			spin_lock(&sb_lock);
- 			__put_super(sb);
-diff --git a/include/linux/blkdev.h b/include/linux/blkdev.h
-index 12810a19edebc4..bdd7339bcda462 100644
---- a/include/linux/blkdev.h
-+++ b/include/linux/blkdev.h
-@@ -1973,7 +1973,7 @@ int bdev_read_only(struct block_device *bdev);
- int set_blocksize(struct block_device *bdev, int size);
+ int bdev_disk_changed(struct block_device *bdev, bool invalidate);
+diff --git a/include/linux/part_stat.h b/include/linux/part_stat.h
+index 87ad60106e1db0..680de036691ef9 100644
+--- a/include/linux/part_stat.h
++++ b/include/linux/part_stat.h
+@@ -59,8 +59,8 @@ static inline void part_stat_set_all(struct hd_struct *part, int value)
+ #define part_stat_add(part, field, addnd)	do {			\
+ 	__part_stat_add((part), field, addnd);				\
+ 	if ((part)->partno)						\
+-		__part_stat_add(&part_to_disk((part))->part0,		\
+-				field, addnd);				\
++		__part_stat_add(part_to_disk((part))->part0->bd_part,	\
++			field, addnd); \
+ } while (0)
  
- const char *bdevname(struct block_device *bdev, char *buffer);
--struct block_device *lookup_bdev(const char *);
-+int lookup_bdev(const char *pathname, dev_t *dev);
- 
- void blkdev_show(struct seq_file *seqf, off_t offset);
- 
-diff --git a/include/linux/fs.h b/include/linux/fs.h
-index a61df0dd4f1989..b0b358309657ba 100644
---- a/include/linux/fs.h
-+++ b/include/linux/fs.h
-@@ -696,7 +696,6 @@ struct inode {
- 	struct list_head	i_devices;
- 	union {
- 		struct pipe_inode_info	*i_pipe;
--		struct block_device	*i_bdev;
- 		struct cdev		*i_cdev;
- 		char			*i_link;
- 		unsigned		i_dir_seq;
+ #define part_stat_dec(part, field)					\
 -- 
 2.29.2
 
