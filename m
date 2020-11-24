@@ -2,28 +2,28 @@ Return-Path: <SRS0=fYmn=E6=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 97621C56201
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 60473C2D0E4
 	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 07:01:35 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 281112083E
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 07:01:35 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id CBA532080A
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 07:01:34 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="A+D6TBR+"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 281112083E
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="DuiB6acu"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CBA532080A
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.35376.66873 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.35378.66897 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khSK9-0001l7-Ql; Tue, 24 Nov 2020 07:01:13 +0000
+	id 1khSKE-0001nR-CI; Tue, 24 Nov 2020 07:01:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 35376.66873; Tue, 24 Nov 2020 07:01:13 +0000
+Received: by outflank-mailman (output) from mailman id 35378.66897; Tue, 24 Nov 2020 07:01:18 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,42 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khSK9-0001l0-Na; Tue, 24 Nov 2020 07:01:13 +0000
-Received: by outflank-mailman (input) for mailman id 35376;
- Tue, 24 Nov 2020 07:01:12 +0000
+	id 1khSKE-0001nH-7p; Tue, 24 Nov 2020 07:01:18 +0000
+Received: by outflank-mailman (input) for mailman id 35378;
+ Tue, 24 Nov 2020 07:01:17 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=KyA6=E6=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1khSK8-0001kq-8D
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 07:01:12 +0000
+ id 1khSKD-0001kq-3z
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 07:01:17 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 168c7a9a-9299-4675-a1e2-cb9118043922;
- Tue, 24 Nov 2020 07:01:09 +0000 (UTC)
+ id 38370360-fb20-49fc-88ce-cf4fc5afc72c;
+ Tue, 24 Nov 2020 07:01:10 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 14A13ADA2;
+ by mx2.suse.de (Postfix) with ESMTP id A013DADCD;
  Tue, 24 Nov 2020 07:01:09 +0000 (UTC)
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=KyA6=E6=suse.com=jgross@srs-us1.protection.inumbo.net>)
-	id 1khSK8-0001kq-8D
-	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 07:01:12 +0000
-X-Inumbo-ID: 168c7a9a-9299-4675-a1e2-cb9118043922
+	id 1khSKD-0001kq-3z
+	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 07:01:17 +0000
+X-Inumbo-ID: 38370360-fb20-49fc-88ce-cf4fc5afc72c
 Received: from mx2.suse.de (unknown [195.135.220.15])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 168c7a9a-9299-4675-a1e2-cb9118043922;
-	Tue, 24 Nov 2020 07:01:09 +0000 (UTC)
+	id 38370360-fb20-49fc-88ce-cf4fc5afc72c;
+	Tue, 24 Nov 2020 07:01:10 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	t=1606201269; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=Y70uQzyLQKdWXjkBuRCWzDGAgoEANc5akwMpuiUm184=;
-	b=A+D6TBR+7L/YG7k2RXOaS2GvCR+ucezzfrjtryIsIW0dWE1oblb876zHEt+yUDLUHchhdn
-	m3WKDKSjmvp3qG5DzgdLUTDxl3vaXrNvwU6EhI/Btsi9k00pRpRPPi4NCl1psww50aZ2By
-	O0/wDefv0zqZ5EBp8Ywt+9IANsGAVdo=
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=uY+rObtaesBiYwhFR54/hfk+UTURWjLhSDOKmBjo9Hk=;
+	b=DuiB6acuqrH4C2absqcxEFRbDrXB2fDjBgSxIwxTz1tlybaHV+QEpsJU02wI1BLe46mAw0
+	QMHW2k4JCUWGGaNTw0+FqZKNpJPpydJ3mutCADpZN9FTGdUIzLDMcOLuaegMoB+IhE4m7h
+	YMuNtsNn46pIrv/Xlh+AWDys/+6aZfQ=
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 14A13ADA2;
+	by mx2.suse.de (Postfix) with ESMTP id A013DADCD;
 	Tue, 24 Nov 2020 07:01:09 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
@@ -85,31 +87,73 @@ Cc: Juergen Gross <jgross@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v7 0/3] xen/events: further locking adjustments
-Date: Tue, 24 Nov 2020 08:01:03 +0100
-Message-Id: <20201124070106.26854-1-jgross@suse.com>
+Subject: [PATCH v7 2/3] xen/events: modify struct evtchn layout
+Date: Tue, 24 Nov 2020 08:01:05 +0100
+Message-Id: <20201124070106.26854-3-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20201124070106.26854-1-jgross@suse.com>
+References: <20201124070106.26854-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This is an add-on of my event channel locking series.
+In order to avoid latent races when updating an event channel put
+xen_consumer and pending fields in different bytes.
 
-It is a resend of the single patch not having been applied from my
-V6 series (being the reason to name this one V7), plus two patches
-addressing issues Jan identified with the previous approach (with
-one issue being more a latent one, while the other one actually existed
-since the introduction on fifo events and just has been made more
-probable with the new locking scheme).
+At the same time move some other fields around to have less implicit
+paddings and to keep related fields more closely together.
 
-Juergen Gross (3):
-  xen/events: access last_priority and last_vcpu_id together
-  xen/events: modify struct evtchn layout
-  xen/events: rework fifo queue locking
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ xen/include/xen/sched.h | 22 ++++++++++++----------
+ 1 file changed, 12 insertions(+), 10 deletions(-)
 
- xen/common/event_fifo.c | 128 ++++++++++++++++++++++------------------
- xen/include/xen/sched.h |  23 ++++----
- 2 files changed, 83 insertions(+), 68 deletions(-)
-
+diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
+index a345cc01f8..e6d09aa055 100644
+--- a/xen/include/xen/sched.h
++++ b/xen/include/xen/sched.h
+@@ -80,8 +80,7 @@ extern domid_t hardware_domid;
+ #define EVTCHNS_PER_GROUP  (BUCKETS_PER_GROUP * EVTCHNS_PER_BUCKET)
+ #define NR_EVTCHN_GROUPS   DIV_ROUND_UP(MAX_NR_EVTCHNS, EVTCHNS_PER_GROUP)
+ 
+-#define XEN_CONSUMER_BITS 3
+-#define NR_XEN_CONSUMERS ((1 << XEN_CONSUMER_BITS) - 1)
++#define NR_XEN_CONSUMERS 8
+ 
+ struct evtchn
+ {
+@@ -94,9 +93,10 @@ struct evtchn
+ #define ECS_VIRQ         5 /* Channel is bound to a virtual IRQ line.        */
+ #define ECS_IPI          6 /* Channel is bound to a virtual IPI line.        */
+     u8  state;             /* ECS_* */
+-    u8  xen_consumer:XEN_CONSUMER_BITS; /* Consumer in Xen if nonzero */
+-    u8  pending:1;
+-    u16 notify_vcpu_id;    /* VCPU for local delivery notification */
++#ifndef NDEBUG
++    u8  old_state;     /* State when taking lock in write mode. */
++#endif
++    u8  xen_consumer;  /* Consumer in Xen if nonzero */
+     u32 port;
+     union {
+         struct {
+@@ -113,11 +113,13 @@ struct evtchn
+         } pirq;        /* state == ECS_PIRQ */
+         u16 virq;      /* state == ECS_VIRQ */
+     } u;
+-    u8 priority;
+-#ifndef NDEBUG
+-    u8 old_state;      /* State when taking lock in write mode. */
+-#endif
+-    u32 fifo_lastq;    /* Data for fifo events identifying last queue. */
++
++    /* FIFO event channels only. */
++    u8  pending;
++    u8  priority;
++    u16 notify_vcpu_id;    /* VCPU for local delivery notification */
++    u32 fifo_lastq;        /* Data for identifying last queue. */
++
+ #ifdef CONFIG_XSM
+     union {
+ #ifdef XSM_NEED_GENERIC_EVTCHN_SSID
 -- 
 2.26.2
 
