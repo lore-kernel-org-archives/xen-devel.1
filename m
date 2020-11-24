@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8E2FAC56201
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 08:31:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BC411C63777
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 08:31:03 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id F316520708
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 08:31:01 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 372BF20870
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 08:31:03 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="KvNaN7Gc"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F316520708
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="qOas+fZ5"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 372BF20870
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.35506.67073 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.35509.67120 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khTio-0003R2-Er; Tue, 24 Nov 2020 08:30:46 +0000
+	id 1khTiq-0003Ua-Aa; Tue, 24 Nov 2020 08:30:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 35506.67073; Tue, 24 Nov 2020 08:30:46 +0000
+Received: by outflank-mailman (output) from mailman id 35509.67120; Tue, 24 Nov 2020 08:30:48 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,290 +38,293 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khTio-0003Qq-AV; Tue, 24 Nov 2020 08:30:46 +0000
-Received: by outflank-mailman (input) for mailman id 35506;
+	id 1khTip-0003U3-UY; Tue, 24 Nov 2020 08:30:47 +0000
+Received: by outflank-mailman (input) for mailman id 35509;
  Tue, 24 Nov 2020 08:30:45 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>) id 1khTim-0003PL-UL
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 08:30:44 +0000
+ (envelope-from <paul@xen.org>) id 1khTin-0003Pg-1Z
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 08:30:45 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1khTim-0006ah-3v; Tue, 24 Nov 2020 08:30:44 +0000
+ id 1khTim-0006an-AW; Tue, 24 Nov 2020 08:30:44 +0000
 Received: from ec2-54-145-241-208.compute-1.amazonaws.com ([54.145.241.208]
  helo=ip-10-0-29-170.ec2.internal)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1khTH3-0001hp-Rm; Tue, 24 Nov 2020 08:02:05 +0000
+ id 1khTH2-0001hp-Oq; Tue, 24 Nov 2020 08:02:04 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1khTim-0003PL-UL
-	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 08:30:44 +0000
+	id 1khTin-0003Pg-1Z
+	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 08:30:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	 bh=z6HgaaJxE43aYUfbefthFXj4bV6TUshSIIqyN3QunIw=; b=KvNaN7Gc1rXGzOL5ZtUOdh6i4
-	UQAFI11D88dYwfC+M6zZBs5xlHyu8ud+YycOoKhQRRkYYUy7216pMZ2//YOb1YtY4woooA+5jTQTj
-	SgZcLH8Oi3bSlvFuuoEC0Z0f7/+FyoX1xsf85MLecSQ+9/ClBlgjZkLGrQifKXJqcF8Ww=;
+	 bh=cM4E5HSO7y4rsBvC0ulob6owEH5QJoWwuEB72xnydjQ=; b=qOas+fZ5XzQqOVTEoQEKEj1oH
+	jGM3ZkDwfooe3PEaIGxIjW+KeXJp5AiQs08+U/GgOVMt89cG5DtWY3PveNm+BHdrnScSXahY7NU92
+	YUNw5FAxcP06c6Fy6+7lYRc6NFmblBZ0+zG7BV/JUBcc2pe+i4BG0W4CgwBW8KqUB7sbo=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
 	by mail.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1khTim-0006ah-3v; Tue, 24 Nov 2020 08:30:44 +0000
+	id 1khTim-0006an-AW; Tue, 24 Nov 2020 08:30:44 +0000
 Received: from ec2-54-145-241-208.compute-1.amazonaws.com ([54.145.241.208] helo=ip-10-0-29-170.ec2.internal)
 	by xenbits.xenproject.org with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
 	(Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1khTH3-0001hp-Rm; Tue, 24 Nov 2020 08:02:05 +0000
+	id 1khTH2-0001hp-Oq; Tue, 24 Nov 2020 08:02:04 +0000
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: Paul Durrant <pdurrant@amazon.com>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v4 15/23] docs/man: improve documentation of PCI_SPEC_STRING...
-Date: Tue, 24 Nov 2020 08:01:51 +0000
-Message-Id: <20201124080159.11912-16-paul@xen.org>
+Subject: [PATCH v4 10/23] libxl: remove get_all_assigned_devices() from libxl_pci.c
+Date: Tue, 24 Nov 2020 08:01:46 +0000
+Message-Id: <20201124080159.11912-11-paul@xen.org>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20201124080159.11912-1-paul@xen.org>
 References: <20201124080159.11912-1-paul@xen.org>
 
 From: Paul Durrant <pdurrant@amazon.com>
 
-... and prepare for adding support for non-positional parsing of 'bdf' and
-'vslot' in a subsequent patch.
+Use of this function is a very inefficient way to check whether a device
+has already been assigned.
 
-Also document 'BDF' as a first-class parameter type and fix the documentation
-to state that the default value of 'rdm_policy' is actually 'strict', not
-'relaxed', as can be seen in libxl__device_pci_setdefault().
+This patch adds code that saves the domain id in xenstore at the point of
+assignment, and removes it again when the device id de-assigned (or the
+domain is destroyed). It is then straightforward to check whether a device
+has been assigned by checking whether a device has a saved domain id.
+
+NOTE: To facilitate the xenstore check it is necessary to move the
+      pci_info_xs_read() earlier in libxl_pci.c. To keep related functions
+      together, the rest of the pci_info_xs_XXX() functions are moved too.
 
 Signed-off-by: Paul Durrant <pdurrant@amazon.com>
 ---
 Cc: Ian Jackson <iwj@xenproject.org>
 Cc: Wei Liu <wl@xen.org>
 ---
- docs/man/xl-pci-configuration.5.pod | 177 ++++++++++++++++++++++++++++++------
- 1 file changed, 148 insertions(+), 29 deletions(-)
+ tools/libs/light/libxl_pci.c | 149 ++++++++++++++++---------------------------
+ 1 file changed, 55 insertions(+), 94 deletions(-)
 
-diff --git a/docs/man/xl-pci-configuration.5.pod b/docs/man/xl-pci-configuration.5.pod
-index 72a27bd95d..4dd73bc498 100644
---- a/docs/man/xl-pci-configuration.5.pod
-+++ b/docs/man/xl-pci-configuration.5.pod
-@@ -6,32 +6,105 @@ xl-pci-configuration - XL PCI Configuration Syntax
+diff --git a/tools/libs/light/libxl_pci.c b/tools/libs/light/libxl_pci.c
+index ec101f255f..d3c7a547c3 100644
+--- a/tools/libs/light/libxl_pci.c
++++ b/tools/libs/light/libxl_pci.c
+@@ -336,50 +336,6 @@ retry_transaction2:
+     return 0;
+ }
  
- =head1 SYNTAX
+-static int get_all_assigned_devices(libxl__gc *gc, libxl_device_pci **list, int *num)
+-{
+-    char **domlist;
+-    unsigned int nd = 0, i;
+-
+-    *list = NULL;
+-    *num = 0;
+-
+-    domlist = libxl__xs_directory(gc, XBT_NULL, "/local/domain", &nd);
+-    for(i = 0; i < nd; i++) {
+-        char *path, *num_devs;
+-
+-        path = GCSPRINTF("/local/domain/0/backend/%s/%s/0/num_devs",
+-                         libxl__device_kind_to_string(LIBXL__DEVICE_KIND_PCI),
+-                         domlist[i]);
+-        num_devs = libxl__xs_read(gc, XBT_NULL, path);
+-        if ( num_devs ) {
+-            int ndev = atoi(num_devs), j;
+-            char *devpath, *bdf;
+-
+-            for(j = 0; j < ndev; j++) {
+-                devpath = GCSPRINTF("/local/domain/0/backend/%s/%s/0/dev-%u",
+-                                    libxl__device_kind_to_string(LIBXL__DEVICE_KIND_PCI),
+-                                    domlist[i], j);
+-                bdf = libxl__xs_read(gc, XBT_NULL, devpath);
+-                if ( bdf ) {
+-                    unsigned dom, bus, dev, func;
+-                    if ( sscanf(bdf, PCI_BDF, &dom, &bus, &dev, &func) != 4 )
+-                        continue;
+-
+-                    *list = realloc(*list, sizeof(libxl_device_pci) * ((*num) + 1));
+-                    if (*list == NULL)
+-                        return ERROR_NOMEM;
+-                    pci_struct_fill(*list + *num, dom, bus, dev, func, 0);
+-                    (*num)++;
+-                }
+-            }
+-        }
+-    }
+-    libxl__ptr_add(gc, *list);
+-
+-    return 0;
+-}
+-
+ static int is_pci_in_array(libxl_device_pci *assigned, int num_assigned,
+                            int dom, int bus, int dev, int func)
+ {
+@@ -427,19 +383,58 @@ static int sysfs_write_bdf(libxl__gc *gc, const char * sysfs_path,
+     return 0;
+ }
  
--This document specifies the format for B<PCI_SPEC_STRING> which is used by
--the L<xl.cfg(5)> pci configuration option, and related L<xl(1)> commands.
-+This document specifies the format for B<BDF> and B<PCI_SPEC_STRING> which are
-+used by the L<xl.cfg(5)> pci configuration option, and related L<xl(1)>
-+commands.
++#define PCI_INFO_PATH "/libxl/pci"
++
++static char *pci_info_xs_path(libxl__gc *gc, libxl_device_pci *pci,
++                              const char *node)
++{
++    return node ?
++        GCSPRINTF(PCI_INFO_PATH"/"PCI_BDF_XSPATH"/%s",
++                  pci->domain, pci->bus, pci->dev, pci->func,
++                  node) :
++        GCSPRINTF(PCI_INFO_PATH"/"PCI_BDF_XSPATH,
++                  pci->domain, pci->bus, pci->dev, pci->func);
++}
++
++
++static int pci_info_xs_write(libxl__gc *gc, libxl_device_pci *pci,
++                              const char *node, const char *val)
++{
++    char *path = pci_info_xs_path(gc, pci, node);
++    int rc = libxl__xs_printf(gc, XBT_NULL, path, "%s", val);
++
++    if (rc) LOGE(WARN, "Write of %s to node %s failed.", val, path);
++
++    return rc;
++}
++
++static char *pci_info_xs_read(libxl__gc *gc, libxl_device_pci *pci,
++                              const char *node)
++{
++    char *path = pci_info_xs_path(gc, pci, node);
++
++    return libxl__xs_read(gc, XBT_NULL, path);
++}
++
++static void pci_info_xs_remove(libxl__gc *gc, libxl_device_pci *pci,
++                               const char *node)
++{
++    char *path = pci_info_xs_path(gc, pci, node);
++    libxl_ctx *ctx = libxl__gc_owner(gc);
++
++    /* Remove the xenstore entry */
++    xs_rm(ctx->xsh, XBT_NULL, path);
++}
++
+ libxl_device_pci *libxl_device_pci_assignable_list(libxl_ctx *ctx, int *num)
+ {
+     GC_INIT(ctx);
+-    libxl_device_pci *pcis = NULL, *new, *assigned;
++    libxl_device_pci *pcis = NULL, *new;
+     struct dirent *de;
+     DIR *dir;
+-    int r, num_assigned;
  
--Each B<PCI_SPEC_STRING> has the form of
--B<[DDDD:]BB:DD.F[@VSLOT],KEY=VALUE,KEY=VALUE,...> where:
-+A B<BDF> has the following form:
-+
-+    [DDDD:]BB:SS.F
-+
-+B<DDDD> is the domain number, B<BB> is the bus number, B<SS> is the device (or
-+slot) number, and B<F> is the function number. This is the same scheme as
-+used in the output of L<lspci(1)> for the device in question. By default
-+L<lspci(1)> will omit the domain (B<DDDD>) if it is zero and hence a zero
-+value for domain may also be omitted when specifying a B<BDF>.
-+
-+Each B<PCI_SPEC_STRING> has the one of the forms:
-+
-+=over 4
-+
-+    [<bdf>[@<vslot>,][<key>=<value>,]*
-+    [<key>=<value>,]*
-+
-+=back
-+
-+For example, these strings are equivalent:
+     *num = 0;
  
- =over 4
+-    r = get_all_assigned_devices(gc, &assigned, &num_assigned);
+-    if (r) goto out;
+-
+     dir = opendir(SYSFS_PCIBACK_DRIVER);
+     if (NULL == dir) {
+         if (errno == ENOENT) {
+@@ -455,9 +450,6 @@ libxl_device_pci *libxl_device_pci_assignable_list(libxl_ctx *ctx, int *num)
+         if (sscanf(de->d_name, PCI_BDF, &dom, &bus, &dev, &func) != 4)
+             continue;
  
--=item B<[DDDD:]BB:DD.F>
-+    36:00.0@20,seize=1
-+    36:00.0,vslot=20,seize=1
-+    bdf=36:00.0,vslot=20,seize=1
+-        if (is_pci_in_array(assigned, num_assigned, dom, bus, dev, func))
+-            continue;
+-
+         new = realloc(pcis, ((*num) + 1) * sizeof(*new));
+         if (NULL == new)
+             continue;
+@@ -467,6 +459,10 @@ libxl_device_pci *libxl_device_pci_assignable_list(libxl_ctx *ctx, int *num)
  
--Identifies the PCI device from the host perspective in the domain
--(B<DDDD>), Bus (B<BB>), Device (B<DD>) and Function (B<F>) syntax. This is
--the same scheme as used in the output of B<lspci(1)> for the device in
--question.
-+=back
+         memset(new, 0, sizeof(*new));
+         pci_struct_fill(new, dom, bus, dev, func, 0);
 +
-+More formally, the string is a series of comma-separated keyword/value
-+pairs, flags and positional parameters.  Parameters which are not bare
-+keywords and which do not contain "=" symbols are assigned to the
-+positional parameters, in the order specified below.  The positional
-+parameters may also be specified by name.
++        if (pci_info_xs_read(gc, new, "domid")) /* already assigned */
++            continue;
 +
-+Each parameter may be specified at most once, either as a positional
-+parameter or a named parameter.  Default values apply if the parameter
-+is not specified, or if it is specified with an empty value (whether
-+positionally or explicitly).
-+
-+B<NOTE>: In context of B<xl pci-detach> (see L<xl(1)>), parameters other than
-+B<bdf> will be ignored.
-+
-+=head1 Positional Parameters
-+
-+=over 4
-+
-+=item B<bdf>=I<BDF>
-+
-+=over 4
+         (*num)++;
+     }
  
--Note: by default B<lspci(1)> will omit the domain (B<DDDD>) if it
--is zero and it is optional here also. You may specify the function
--(B<F>) as B<*> to indicate all functions.
-+=item Description
+@@ -737,48 +733,6 @@ static int pciback_dev_unassign(libxl__gc *gc, libxl_device_pci *pci)
+     return 0;
+ }
  
--=item B<@VSLOT>
-+This identifies the PCI device from the host perspective.
+-#define PCI_INFO_PATH "/libxl/pci"
+-
+-static char *pci_info_xs_path(libxl__gc *gc, libxl_device_pci *pci,
+-                              const char *node)
+-{
+-    return node ?
+-        GCSPRINTF(PCI_INFO_PATH"/"PCI_BDF_XSPATH"/%s",
+-                  pci->domain, pci->bus, pci->dev, pci->func,
+-                  node) :
+-        GCSPRINTF(PCI_INFO_PATH"/"PCI_BDF_XSPATH,
+-                  pci->domain, pci->bus, pci->dev, pci->func);
+-}
+-
+-
+-static void pci_info_xs_write(libxl__gc *gc, libxl_device_pci *pci,
+-                              const char *node, const char *val)
+-{
+-    char *path = pci_info_xs_path(gc, pci, node);
+-
+-    if ( libxl__xs_printf(gc, XBT_NULL, path, "%s", val) < 0 ) {
+-        LOGE(WARN, "Write of %s to node %s failed.", val, path);
+-    }
+-}
+-
+-static char *pci_info_xs_read(libxl__gc *gc, libxl_device_pci *pci,
+-                              const char *node)
+-{
+-    char *path = pci_info_xs_path(gc, pci, node);
+-
+-    return libxl__xs_read(gc, XBT_NULL, path);
+-}
+-
+-static void pci_info_xs_remove(libxl__gc *gc, libxl_device_pci *pci,
+-                               const char *node)
+-{
+-    char *path = pci_info_xs_path(gc, pci, node);
+-    libxl_ctx *ctx = libxl__gc_owner(gc);
+-
+-    /* Remove the xenstore entry */
+-    xs_rm(ctx->xsh, XBT_NULL, path);
+-}
+-
+ static int libxl__device_pci_assignable_add(libxl__gc *gc,
+                                             libxl_device_pci *pci,
+                                             int rebind)
+@@ -1594,6 +1548,9 @@ void libxl__device_pci_add(libxl__egc *egc, uint32_t domid,
+         goto out;
+     }
  
--Specifies the virtual slot where the guest will see this
--device. This is equivalent to the B<DD> which the guest sees. In a
--guest B<DDDD> and B<BB> are C<0000:00>.
-+In the context of a B<PCI_SPEC_STRING> you may specify the function (B<F>) as
-+B<*> to indicate all functions of a multi-function device.
++    rc = pci_info_xs_write(gc, pci, "domid", GCSPRINTF("%u", domid));
++    if (rc) goto out;
++
+     libxl__device_pci_reset(gc, pci->domain, pci->bus, pci->dev, pci->func);
  
--=item B<permissive=BOOLEAN>
-+=item Default Value
+     stubdomid = libxl_get_stubdom_id(ctx, domid);
+@@ -1721,6 +1678,7 @@ static void device_pci_add_done(libxl__egc *egc,
+              "PCI device %x:%x:%x.%x (rc %d)",
+              pci->domain, pci->bus, pci->dev, pci->func,
+              rc);
++        pci_info_xs_remove(gc, pci, "domid");
+     }
+     aodev->rc = rc;
+     aodev->callback(egc, aodev);
+@@ -2282,6 +2240,9 @@ out:
+     libxl__xswait_stop(gc, &prs->xswait);
+     libxl__ev_time_deregister(gc, &prs->timeout);
+     libxl__ev_time_deregister(gc, &prs->retry_timer);
 +
-+None. This parameter is mandatory as it identifies the device.
++    if (!rc) pci_info_xs_remove(gc, pci, "domid");
 +
-+=back
-+
-+=item B<vslot>=I<NUMBER>
-+
-+=over 4
-+
-+=item Description
-+
-+Specifies the virtual slot (device) number where the guest will see this
-+device. For example, running L<lspci(1)> in a Linux guest where B<vslot>
-+was specified as C<8> would identify the device as C<00:08.0>. Virtual domain
-+and bus numbers are always 0.
-+
-+B<NOTE:> This parameter is always parsed as a hexidecimal value.
-+
-+=item Default Value
-+
-+None. This parameter is not mandatory. An available B<vslot> will be selected
-+if this parameter is not specified.
-+
-+=back
-+
-+=back
-+
-+=head1 Other Parameters and Flags
-+
-+=over 4
-+
-+=item B<permissive>=I<BOOLEAN>
-+
-+=over 4
-+
-+=item Description
- 
- By default pciback only allows PV guests to write "known safe" values
- into PCI configuration space, likewise QEMU (both qemu-xen and
-@@ -46,33 +119,79 @@ more control over the device, which may have security or stability
- implications.  It is recommended to only enable this option for
- trusted VMs under administrator's control.
- 
--=item B<msitranslate=BOOLEAN>
-+=item Default Value
-+
-+0
-+
-+=back
-+
-+=item B<msitranslate>=I<BOOLEAN>
-+
-+=over 4
-+
-+=item Description
- 
- Specifies that MSI-INTx translation should be turned on for the PCI
- device. When enabled, MSI-INTx translation will always enable MSI on
--the PCI device regardless of whether the guest uses INTx or MSI. Some
--device drivers, such as NVIDIA's, detect an inconsistency and do not
-+the PCI device regardless of whether the guest uses INTx or MSI.
-+
-+=item Default Value
-+
-+Some device drivers, such as NVIDIA's, detect an inconsistency and do not
- function when this option is enabled. Therefore the default is false (0).
- 
--=item B<seize=BOOLEAN>
-+=back
-+
-+=item B<seize>=I<BOOLEAN>
-+
-+=over 4
-+
-+=item Description
- 
--Tells B<xl> to automatically attempt to re-assign a device to
--pciback if it is not already assigned.
-+Tells L<xl(1)> to automatically attempt to make the device assignable to
-+guests if that has not already been done by the B<pci-assignable-add>
-+command.
- 
--B<WARNING:> If you set this option, B<xl> will gladly re-assign a critical
-+B<WARNING:> If you set this option, L<xl> will gladly re-assign a critical
- system device, such as a network or a disk controller being used by
- dom0 without confirmation.  Please use with care.
- 
--=item B<power_mgmt=BOOLEAN>
-+=item Default Value
-+
-+0
-+
-+=back
-+
-+=item B<power_mgmt>=I<BOOLEAN>
-+
-+=over 4
-+
-+=item Description
- 
- B<(HVM only)> Specifies that the VM should be able to program the
--D0-D3hot power management states for the PCI device. The default is false (0).
-+D0-D3hot power management states for the PCI device.
-+
-+=item Default Value
-+
-+0
- 
--=item B<rdm_policy=STRING>
-+=back
-+
-+=item B<rdm_policy>=I<STRING>
-+
-+=over 4
-+
-+=item Description
- 
- B<(HVM/x86 only)> This is the same as the policy setting inside the B<rdm>
--option but just specific to a given device. The default is "relaxed".
-+option in L<xl.cfg(5)> but just specific to a given device.
- 
--Note: this would override global B<rdm> option.
-+B<NOTE>: This overrides the global B<rdm> option.
-+
-+=item Default Value
-+
-+"strict"
-+
-+=back
- 
- =back
+     aodev->rc = rc;
+     aodev->callback(egc, aodev);
+ }
 -- 
 2.11.0
 
