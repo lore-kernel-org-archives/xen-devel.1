@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0FC12C2D0E4
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 34EACC56201
 	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:40:31 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A43E82083E
+	by mail.kernel.org (Postfix) with ESMTPS id C83C320782
 	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:40:30 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="Ea+9q0/5"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A43E82083E
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="eQn/egDr"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C83C320782
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.36131.67957 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.36132.67974 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khYYM-0004Pf-9S; Tue, 24 Nov 2020 13:40:18 +0000
+	id 1khYYP-0004Xz-33; Tue, 24 Nov 2020 13:40:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 36131.67957; Tue, 24 Nov 2020 13:40:18 +0000
+Received: by outflank-mailman (output) from mailman id 36132.67974; Tue, 24 Nov 2020 13:40:21 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khYYL-0004P4-Ph; Tue, 24 Nov 2020 13:40:17 +0000
-Received: by outflank-mailman (input) for mailman id 36131;
- Tue, 24 Nov 2020 13:40:15 +0000
+	id 1khYYO-0004Xl-SV; Tue, 24 Nov 2020 13:40:20 +0000
+Received: by outflank-mailman (input) for mailman id 36132;
+ Tue, 24 Nov 2020 13:40:19 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=daQ6=E6=casper.srs.infradead.org=batv+cbe268a5dfa7b983a02e+6302+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1khYOh-0000Qf-3x
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:30:19 +0000
+ id 1khYQn-0000Qf-7f
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:32:29 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id bb682eb6-e81b-4fab-9c78-d20579156464;
- Tue, 24 Nov 2020 13:28:48 +0000 (UTC)
+ id d0090ced-4cc8-4b0e-bb46-9565920c6421;
+ Tue, 24 Nov 2020 13:29:31 +0000 (UTC)
 Received: from [2001:4bb8:180:5443:c70:4a89:bc61:3] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1khYMx-0006bA-OT; Tue, 24 Nov 2020 13:28:32 +0000
+ id 1khYNV-0006iR-O5; Tue, 24 Nov 2020 13:29:06 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=daQ6=E6=casper.srs.infradead.org=batv+cbe268a5dfa7b983a02e+6302+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1khYOh-0000Qf-3x
-	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:30:19 +0000
-X-Inumbo-ID: bb682eb6-e81b-4fab-9c78-d20579156464
+	id 1khYQn-0000Qf-7f
+	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:32:29 +0000
+X-Inumbo-ID: d0090ced-4cc8-4b0e-bb46-9565920c6421
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id bb682eb6-e81b-4fab-9c78-d20579156464;
-	Tue, 24 Nov 2020 13:28:48 +0000 (UTC)
+	id d0090ced-4cc8-4b0e-bb46-9565920c6421;
+	Tue, 24 Nov 2020 13:29:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=Mhpy0Cb59wkbzThtZwDnrbLXD1rWczYtJDTvhh8SMU0=; b=Ea+9q0/5U1C3lxpYG+cp8W8+yq
-	HDJXNs1xkR6d5Q3Tqe8DzJMoqEQ7/6jzh7BdzDFOCgM6eJtZ/NdJBDr4wa1fg4oXr74Y5kroSq79K
-	VzT26zUATIM8C+jMZIcZTGU/6xcbiiu6NMExdkpxZExa8l29GhQ0Qte1UYrKyFBP9keFbOOHO8Do8
-	pg6wptGVpopV7o1YV4zwjSA2vi6DqZrN+W1PPJvGBKFgFYLTf6Hhc/xGBLAwEP1JaP8w6JU559eQE
-	bqw7WPqgNie7PhEXK192YC8HvtakiLkYEPYmuhZflhhpqi33qULhu7LUJVG5R4zXadf40txQOM3eh
-	EzrjvHUQ==;
+	bh=q//akcXYDaN3GPU06icBwYE5X5asU9hjziQkxopOWdc=; b=eQn/egDroO3NcQjEPaZ0Bsez0W
+	g65pWhb83qBpDStOGyaDi0qhUUfUxxawlIER9j9qVSoX6/4MnNdOfGBj1P+BWltbHEPAi5IemngJF
+	9o0MVerz1J+NxqR6kdvskLei+XNvmJDF3X7wIhlssF1rUjkK3635NDgCarRPgw4IKsEU7tjM7+Azl
+	hdA0AgJ8XHNfMMi5RX+fNtbFsJsBWTrYdbs47JB/T5JsGC+HA3MEyGyi/9uSQnp8PliomGe1LV4Rw
+	mNYH4cKfdhtoxoKiZQnVFW16/Y4ehZU/dx/bUsnH9GR+SzC/YIwg/TJfMNnd5rIhhG+jaiGOHSDYo
+	RGzzS8FQ==;
 Received: from [2001:4bb8:180:5443:c70:4a89:bc61:3] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1khYMx-0006bA-OT; Tue, 24 Nov 2020 13:28:32 +0000
+	id 1khYNV-0006iR-O5; Tue, 24 Nov 2020 13:29:06 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Tejun Heo <tj@kernel.org>,
@@ -95,9 +95,9 @@ Cc: Tejun Heo <tj@kernel.org>,
 	linux-mtd@lists.infradead.org,
 	linux-fsdevel@vger.kernel.org,
 	linux-mm@kvack.org
-Subject: [PATCH 24/45] blk-cgroup: stop abusing get_gendisk
-Date: Tue, 24 Nov 2020 14:27:30 +0100
-Message-Id: <20201124132751.3747337-25-hch@lst.de>
+Subject: [PATCH 42/45] block: switch disk_part_iter_* to use a struct block_device
+Date: Tue, 24 Nov 2020 14:27:48 +0100
+Message-Id: <20201124132751.3747337-43-hch@lst.de>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20201124132751.3747337-1-hch@lst.de>
 References: <20201124132751.3747337-1-hch@lst.de>
@@ -105,247 +105,305 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-Properly open the device instead of relying on deep internals by
-using get_gendisk.  Note that this uses FMODE_NDELAY without either
-FMODE_READ or FMODE_WRITE, which is a special open mode to allow
-for opening without media access, thus avoiding unexpexted interactions
-especially on removable media.
+Switch the partition iter infrastructure to iterate over block_device
+references instead of hd_struct ones mostly used to get at the
+block_device.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- block/blk-cgroup.c         | 42 +++++++++++++++++++-------------------
- block/blk-iocost.c         | 36 ++++++++++++++++----------------
- include/linux/blk-cgroup.h |  4 ++--
- 3 files changed, 41 insertions(+), 41 deletions(-)
+ block/genhd.c             | 57 +++++++++++++++++++--------------------
+ block/partitions/core.c   | 13 +++++----
+ drivers/s390/block/dasd.c |  8 +++---
+ include/linux/genhd.h     |  4 +--
+ 4 files changed, 40 insertions(+), 42 deletions(-)
 
-diff --git a/block/blk-cgroup.c b/block/blk-cgroup.c
-index 54fbe1e80cc41a..23437b96ea41e6 100644
---- a/block/blk-cgroup.c
-+++ b/block/blk-cgroup.c
-@@ -556,22 +556,22 @@ static struct blkcg_gq *blkg_lookup_check(struct blkcg *blkcg,
- }
- 
- /**
-- * blkg_conf_prep - parse and prepare for per-blkg config update
-+ * blkcg_conf_open_bdev - parse and open bdev for per-blkg config update
-  * @inputp: input string pointer
-  *
-  * Parse the device node prefix part, MAJ:MIN, of per-blkg config update
-- * from @input and get and return the matching gendisk.  *@inputp is
-+ * from @input and get and return the matching bdev.  *@inputp is
-  * updated to point past the device node prefix.  Returns an ERR_PTR()
-  * value on error.
-  *
-  * Use this function iff blkg_conf_prep() can't be used for some reason.
+diff --git a/block/genhd.c b/block/genhd.c
+index 2985740eab084b..f0bf10192066ac 100644
+--- a/block/genhd.c
++++ b/block/genhd.c
+@@ -231,7 +231,7 @@ EXPORT_SYMBOL_GPL(disk_part_iter_init);
+  * CONTEXT:
+  * Don't care.
   */
--struct gendisk *blkcg_conf_get_disk(char **inputp)
-+struct block_device *blkcg_conf_open_bdev(char **inputp)
+-struct hd_struct *disk_part_iter_next(struct disk_part_iter *piter)
++struct block_device *disk_part_iter_next(struct disk_part_iter *piter)
  {
- 	char *input = *inputp;
- 	unsigned int major, minor;
--	struct gendisk *disk;
--	int key_len, part;
-+	struct block_device *bdev;
-+	int key_len;
+ 	struct disk_part_tbl *ptbl;
+ 	int inc, end;
+@@ -269,8 +269,7 @@ struct hd_struct *disk_part_iter_next(struct disk_part_iter *piter)
+ 		      piter->idx == 0))
+ 			continue;
  
- 	if (sscanf(input, "%u:%u%n", &major, &minor, &key_len) != 2)
- 		return ERR_PTR(-EINVAL);
-@@ -581,16 +581,16 @@ struct gendisk *blkcg_conf_get_disk(char **inputp)
- 		return ERR_PTR(-EINVAL);
- 	input = skip_spaces(input);
- 
--	disk = get_gendisk(MKDEV(major, minor), &part);
--	if (!disk)
-+	bdev = blkdev_get_by_dev(MKDEV(major, minor), FMODE_NDELAY, NULL);
-+	if (!bdev)
- 		return ERR_PTR(-ENODEV);
--	if (part) {
--		put_disk_and_module(disk);
-+	if (bdev_is_partition(bdev)) {
-+		blkdev_put(bdev, FMODE_NDELAY);
- 		return ERR_PTR(-ENODEV);
+-		get_device(part_to_dev(part->bd_part));
+-		piter->part = part->bd_part;
++		piter->part = bdgrab(part);
+ 		piter->idx += inc;
+ 		break;
  	}
- 
- 	*inputp = input;
--	return disk;
-+	return bdev;
- }
- 
- /**
-@@ -607,18 +607,18 @@ struct gendisk *blkcg_conf_get_disk(char **inputp)
+@@ -292,7 +291,8 @@ EXPORT_SYMBOL_GPL(disk_part_iter_next);
   */
- int blkg_conf_prep(struct blkcg *blkcg, const struct blkcg_policy *pol,
- 		   char *input, struct blkg_conf_ctx *ctx)
--	__acquires(rcu) __acquires(&disk->queue->queue_lock)
-+	__acquires(rcu) __acquires(&bdev->bd_disk->queue->queue_lock)
+ void disk_part_iter_exit(struct disk_part_iter *piter)
  {
--	struct gendisk *disk;
-+	struct block_device *bdev;
- 	struct request_queue *q;
- 	struct blkcg_gq *blkg;
- 	int ret;
+-	disk_put_part(piter->part);
++	if (piter->part)
++		bdput(piter->part);
+ 	piter->part = NULL;
+ }
+ EXPORT_SYMBOL_GPL(disk_part_iter_exit);
+@@ -333,7 +333,6 @@ struct block_device *disk_map_sector_rcu(struct gendisk *disk, sector_t sector)
  
--	disk = blkcg_conf_get_disk(&input);
--	if (IS_ERR(disk))
--		return PTR_ERR(disk);
-+	bdev = blkcg_conf_open_bdev(&input);
-+	if (IS_ERR(bdev))
-+		return PTR_ERR(bdev);
+ 	for (i = 1; i < ptbl->len; i++) {
+ 		part = rcu_dereference(ptbl->part[i]);
+-
+ 		if (part && sector_in_part(part, sector)) {
+ 			rcu_assign_pointer(ptbl->last_lookup, part);
+ 			goto out_unlock;
+@@ -634,7 +633,7 @@ static void register_disk(struct device *parent, struct gendisk *disk,
+ {
+ 	struct device *ddev = disk_to_dev(disk);
+ 	struct disk_part_iter piter;
+-	struct hd_struct *part;
++	struct block_device *part;
+ 	int err;
  
--	q = disk->queue;
-+	q = bdev->bd_disk->queue;
+ 	ddev->parent = parent;
+@@ -684,7 +683,7 @@ static void register_disk(struct device *parent, struct gendisk *disk,
+ 	/* announce possible partitions */
+ 	disk_part_iter_init(&piter, disk, 0);
+ 	while ((part = disk_part_iter_next(&piter)))
+-		kobject_uevent(&part_to_dev(part)->kobj, KOBJ_ADD);
++		kobject_uevent(bdev_kobj(part), KOBJ_ADD);
+ 	disk_part_iter_exit(&piter);
  
- 	rcu_read_lock();
- 	spin_lock_irq(&q->queue_lock);
-@@ -689,7 +689,7 @@ int blkg_conf_prep(struct blkcg *blkcg, const struct blkcg_policy *pol,
- 			goto success;
+ 	if (disk->queue->backing_dev_info->dev) {
+@@ -824,7 +823,7 @@ static void invalidate_partition(struct block_device *bdev)
+ void del_gendisk(struct gendisk *disk)
+ {
+ 	struct disk_part_iter piter;
+-	struct hd_struct *part;
++	struct block_device *part;
+ 
+ 	might_sleep();
+ 
+@@ -840,8 +839,8 @@ void del_gendisk(struct gendisk *disk)
+ 	disk_part_iter_init(&piter, disk,
+ 			     DISK_PITER_INCL_EMPTY | DISK_PITER_REVERSE);
+ 	while ((part = disk_part_iter_next(&piter))) {
+-		invalidate_partition(part->bdev);
+-		delete_partition(part);
++		invalidate_partition(part);
++		delete_partition(part->bd_part);
  	}
- success:
--	ctx->disk = disk;
-+	ctx->bdev = bdev;
- 	ctx->blkg = blkg;
- 	ctx->body = input;
+ 	disk_part_iter_exit(&piter);
+ 
+@@ -958,7 +957,7 @@ void __init printk_all_partitions(void)
+ 	while ((dev = class_dev_iter_next(&iter))) {
+ 		struct gendisk *disk = dev_to_disk(dev);
+ 		struct disk_part_iter piter;
+-		struct hd_struct *part;
++		struct block_device *part;
+ 		char name_buf[BDEVNAME_SIZE];
+ 		char devt_buf[BDEVT_SIZE];
+ 
+@@ -977,14 +976,14 @@ void __init printk_all_partitions(void)
+ 		 */
+ 		disk_part_iter_init(&piter, disk, DISK_PITER_INCL_PART0);
+ 		while ((part = disk_part_iter_next(&piter))) {
+-			bool is_part0 = part == disk->part0->bd_part;
++			bool is_part0 = part == disk->part0;
+ 
+ 			printk("%s%s %10llu %s %s", is_part0 ? "" : "  ",
+-			       bdevt_str(part_devt(part), devt_buf),
+-			       bdev_nr_sectors(part->bdev) >> 1,
+-			       disk_name(disk, part->bdev->bd_partno, name_buf),
+-			       part->bdev->bd_meta_info ?
+-					part->bdev->bd_meta_info->uuid : "");
++			       bdevt_str(part->bd_dev, devt_buf),
++			       bdev_nr_sectors(part) >> 1,
++			       disk_name(disk, part->bd_partno, name_buf),
++			       part->bd_meta_info ?
++					part->bd_meta_info->uuid : "");
+ 			if (is_part0) {
+ 				if (dev->parent && dev->parent->driver)
+ 					printk(" driver: %s\n",
+@@ -1060,7 +1059,7 @@ static int show_partition(struct seq_file *seqf, void *v)
+ {
+ 	struct gendisk *sgp = v;
+ 	struct disk_part_iter piter;
+-	struct hd_struct *part;
++	struct block_device *part;
+ 	char buf[BDEVNAME_SIZE];
+ 
+ 	/* Don't show non-partitionable removeable devices or empty devices */
+@@ -1074,9 +1073,9 @@ static int show_partition(struct seq_file *seqf, void *v)
+ 	disk_part_iter_init(&piter, sgp, DISK_PITER_INCL_PART0);
+ 	while ((part = disk_part_iter_next(&piter)))
+ 		seq_printf(seqf, "%4d  %7d %10llu %s\n",
+-			   MAJOR(part_devt(part)), MINOR(part_devt(part)),
+-			   bdev_nr_sectors(part->bdev) >> 1,
+-			   disk_name(sgp, part->bdev->bd_partno, buf));
++			   MAJOR(part->bd_dev), MINOR(part->bd_dev),
++			   bdev_nr_sectors(part) >> 1,
++			   disk_name(sgp, part->bd_partno, buf));
+ 	disk_part_iter_exit(&piter);
+ 
  	return 0;
-@@ -700,7 +700,7 @@ int blkg_conf_prep(struct blkcg *blkcg, const struct blkcg_policy *pol,
- 	spin_unlock_irq(&q->queue_lock);
- 	rcu_read_unlock();
- fail:
--	put_disk_and_module(disk);
-+	blkdev_put(bdev, FMODE_NDELAY);
- 	/*
- 	 * If queue was bypassing, we should retry.  Do so after a
- 	 * short msleep().  It isn't strictly necessary but queue
-@@ -723,11 +723,11 @@ EXPORT_SYMBOL_GPL(blkg_conf_prep);
-  * with blkg_conf_prep().
-  */
- void blkg_conf_finish(struct blkg_conf_ctx *ctx)
--	__releases(&ctx->disk->queue->queue_lock) __releases(rcu)
-+	__releases(&ctx->bdev->bd_disk->queue->queue_lock) __releases(rcu)
+@@ -1470,7 +1469,7 @@ static int diskstats_show(struct seq_file *seqf, void *v)
  {
--	spin_unlock_irq(&ctx->disk->queue->queue_lock);
-+	spin_unlock_irq(&ctx->bdev->bd_disk->queue->queue_lock);
- 	rcu_read_unlock();
--	put_disk_and_module(ctx->disk);
-+	blkdev_put(ctx->bdev, FMODE_NDELAY);
+ 	struct gendisk *gp = v;
+ 	struct disk_part_iter piter;
+-	struct hd_struct *hd;
++	struct block_device *hd;
+ 	char buf[BDEVNAME_SIZE];
+ 	unsigned int inflight;
+ 	struct disk_stats stat;
+@@ -1485,11 +1484,11 @@ static int diskstats_show(struct seq_file *seqf, void *v)
+ 
+ 	disk_part_iter_init(&piter, gp, DISK_PITER_INCL_EMPTY_PART0);
+ 	while ((hd = disk_part_iter_next(&piter))) {
+-		part_stat_read_all(hd, &stat);
++		part_stat_read_all(hd->bd_part, &stat);
+ 		if (queue_is_mq(gp->queue))
+-			inflight = blk_mq_in_flight(gp->queue, hd->bdev);
++			inflight = blk_mq_in_flight(gp->queue, hd);
+ 		else
+-			inflight = part_in_flight(hd->bdev);
++			inflight = part_in_flight(hd);
+ 
+ 		seq_printf(seqf, "%4d %7d %s "
+ 			   "%lu %lu %lu %u "
+@@ -1498,8 +1497,8 @@ static int diskstats_show(struct seq_file *seqf, void *v)
+ 			   "%lu %lu %lu %u "
+ 			   "%lu %u"
+ 			   "\n",
+-			   MAJOR(part_devt(hd)), MINOR(part_devt(hd)),
+-			   disk_name(gp, hd->bdev->bd_partno, buf),
++			   MAJOR(hd->bd_dev), MINOR(hd->bd_dev),
++			   disk_name(gp, hd->bd_partno, buf),
+ 			   stat.ios[STAT_READ],
+ 			   stat.merges[STAT_READ],
+ 			   stat.sectors[STAT_READ],
+@@ -1654,7 +1653,7 @@ static void set_disk_ro_uevent(struct gendisk *gd, int ro)
+ void set_disk_ro(struct gendisk *disk, int flag)
+ {
+ 	struct disk_part_iter piter;
+-	struct hd_struct *part;
++	struct block_device *part;
+ 
+ 	if (disk->part0->bd_read_only != flag) {
+ 		set_disk_ro_uevent(disk, flag);
+@@ -1663,7 +1662,7 @@ void set_disk_ro(struct gendisk *disk, int flag)
+ 
+ 	disk_part_iter_init(&piter, disk, DISK_PITER_INCL_EMPTY);
+ 	while ((part = disk_part_iter_next(&piter)))
+-		part->bdev->bd_read_only = flag;
++		part->bd_read_only = flag;
+ 	disk_part_iter_exit(&piter);
  }
- EXPORT_SYMBOL_GPL(blkg_conf_finish);
  
-diff --git a/block/blk-iocost.c b/block/blk-iocost.c
-index bbe86d1199dc5b..9f219718e9813c 100644
---- a/block/blk-iocost.c
-+++ b/block/blk-iocost.c
-@@ -3120,23 +3120,23 @@ static const match_table_t qos_tokens = {
- static ssize_t ioc_qos_write(struct kernfs_open_file *of, char *input,
- 			     size_t nbytes, loff_t off)
+diff --git a/block/partitions/core.c b/block/partitions/core.c
+index 45fed1108d4425..c189ebd4569812 100644
+--- a/block/partitions/core.c
++++ b/block/partitions/core.c
+@@ -439,15 +439,14 @@ static bool partition_overlaps(struct gendisk *disk, sector_t start,
+ 		sector_t length, int skip_partno)
  {
--	struct gendisk *disk;
-+	struct block_device *bdev;
- 	struct ioc *ioc;
- 	u32 qos[NR_QOS_PARAMS];
- 	bool enable, user;
- 	char *p;
- 	int ret;
+ 	struct disk_part_iter piter;
+-	struct hd_struct *part;
++	struct block_device *part;
+ 	bool overlap = false;
  
--	disk = blkcg_conf_get_disk(&input);
--	if (IS_ERR(disk))
--		return PTR_ERR(disk);
-+	bdev = blkcg_conf_open_bdev(&input);
-+	if (IS_ERR(bdev))
-+		return PTR_ERR(bdev);
+ 	disk_part_iter_init(&piter, disk, DISK_PITER_INCL_EMPTY);
+ 	while ((part = disk_part_iter_next(&piter))) {
+-		if (part->bdev->bd_partno == skip_partno ||
+-		    start >= part->bdev->bd_start_sect +
+-			bdev_nr_sectors(part->bdev) ||
+-		    start + length <= part->bdev->bd_start_sect)
++		if (part->bd_partno == skip_partno ||
++		    start >= part->bd_start_sect + bdev_nr_sectors(part) ||
++		    start + length <= part->bd_start_sect)
+ 			continue;
+ 		overlap = true;
+ 		break;
+@@ -568,7 +567,7 @@ static bool disk_unlock_native_capacity(struct gendisk *disk)
+ int blk_drop_partitions(struct block_device *bdev)
+ {
+ 	struct disk_part_iter piter;
+-	struct hd_struct *part;
++	struct block_device *part;
  
--	ioc = q_to_ioc(disk->queue);
-+	ioc = q_to_ioc(bdev->bd_disk->queue);
- 	if (!ioc) {
--		ret = blk_iocost_init(disk->queue);
-+		ret = blk_iocost_init(bdev->bd_disk->queue);
- 		if (ret)
- 			goto err;
--		ioc = q_to_ioc(disk->queue);
-+		ioc = q_to_ioc(bdev->bd_disk->queue);
+ 	if (bdev->bd_part_count)
+ 		return -EBUSY;
+@@ -578,7 +577,7 @@ int blk_drop_partitions(struct block_device *bdev)
+ 
+ 	disk_part_iter_init(&piter, bdev->bd_disk, DISK_PITER_INCL_EMPTY);
+ 	while ((part = disk_part_iter_next(&piter)))
+-		delete_partition(part);
++		delete_partition(part->bd_part);
+ 	disk_part_iter_exit(&piter);
+ 
+ 	return 0;
+diff --git a/drivers/s390/block/dasd.c b/drivers/s390/block/dasd.c
+index db24e04ee9781e..1825fa8d05a780 100644
+--- a/drivers/s390/block/dasd.c
++++ b/drivers/s390/block/dasd.c
+@@ -432,7 +432,7 @@ dasd_state_ready_to_online(struct dasd_device * device)
+ {
+ 	struct gendisk *disk;
+ 	struct disk_part_iter piter;
+-	struct hd_struct *part;
++	struct block_device *part;
+ 
+ 	device->state = DASD_STATE_ONLINE;
+ 	if (device->block) {
+@@ -445,7 +445,7 @@ dasd_state_ready_to_online(struct dasd_device * device)
+ 		disk = device->block->bdev->bd_disk;
+ 		disk_part_iter_init(&piter, disk, DISK_PITER_INCL_PART0);
+ 		while ((part = disk_part_iter_next(&piter)))
+-			kobject_uevent(&part_to_dev(part)->kobj, KOBJ_CHANGE);
++			kobject_uevent(bdev_kobj(part), KOBJ_CHANGE);
+ 		disk_part_iter_exit(&piter);
  	}
+ 	return 0;
+@@ -459,7 +459,7 @@ static int dasd_state_online_to_ready(struct dasd_device *device)
+ 	int rc;
+ 	struct gendisk *disk;
+ 	struct disk_part_iter piter;
+-	struct hd_struct *part;
++	struct block_device *part;
  
- 	spin_lock_irq(&ioc->lock);
-@@ -3231,12 +3231,12 @@ static ssize_t ioc_qos_write(struct kernfs_open_file *of, char *input,
- 	ioc_refresh_params(ioc, true);
- 	spin_unlock_irq(&ioc->lock);
- 
--	put_disk_and_module(disk);
-+	blkdev_put(bdev, FMODE_NDELAY);
- 	return nbytes;
- einval:
- 	ret = -EINVAL;
- err:
--	put_disk_and_module(disk);
-+	blkdev_put(bdev, FMODE_NDELAY);
- 	return ret;
- }
- 
-@@ -3287,23 +3287,23 @@ static const match_table_t i_lcoef_tokens = {
- static ssize_t ioc_cost_model_write(struct kernfs_open_file *of, char *input,
- 				    size_t nbytes, loff_t off)
- {
--	struct gendisk *disk;
-+	struct block_device *bdev;
- 	struct ioc *ioc;
- 	u64 u[NR_I_LCOEFS];
- 	bool user;
- 	char *p;
- 	int ret;
- 
--	disk = blkcg_conf_get_disk(&input);
--	if (IS_ERR(disk))
--		return PTR_ERR(disk);
-+	bdev = blkcg_conf_open_bdev(&input);
-+	if (IS_ERR(bdev))
-+		return PTR_ERR(bdev);
- 
--	ioc = q_to_ioc(disk->queue);
-+	ioc = q_to_ioc(bdev->bd_disk->queue);
- 	if (!ioc) {
--		ret = blk_iocost_init(disk->queue);
-+		ret = blk_iocost_init(bdev->bd_disk->queue);
- 		if (ret)
- 			goto err;
--		ioc = q_to_ioc(disk->queue);
-+		ioc = q_to_ioc(bdev->bd_disk->queue);
+ 	if (device->discipline->online_to_ready) {
+ 		rc = device->discipline->online_to_ready(device);
+@@ -472,7 +472,7 @@ static int dasd_state_online_to_ready(struct dasd_device *device)
+ 		disk = device->block->bdev->bd_disk;
+ 		disk_part_iter_init(&piter, disk, DISK_PITER_INCL_PART0);
+ 		while ((part = disk_part_iter_next(&piter)))
+-			kobject_uevent(&part_to_dev(part)->kobj, KOBJ_CHANGE);
++			kobject_uevent(bdev_kobj(part), KOBJ_CHANGE);
+ 		disk_part_iter_exit(&piter);
  	}
+ 	return 0;
+diff --git a/include/linux/genhd.h b/include/linux/genhd.h
+index afe27a0b8f5dd8..de2ee5ffeefe45 100644
+--- a/include/linux/genhd.h
++++ b/include/linux/genhd.h
+@@ -245,14 +245,14 @@ static inline void disk_put_part(struct hd_struct *part)
  
- 	spin_lock_irq(&ioc->lock);
-@@ -3356,13 +3356,13 @@ static ssize_t ioc_cost_model_write(struct kernfs_open_file *of, char *input,
- 	ioc_refresh_params(ioc, true);
- 	spin_unlock_irq(&ioc->lock);
- 
--	put_disk_and_module(disk);
-+	blkdev_put(bdev, FMODE_NDELAY);
- 	return nbytes;
- 
- einval:
- 	ret = -EINVAL;
- err:
--	put_disk_and_module(disk);
-+	blkdev_put(bdev, FMODE_NDELAY);
- 	return ret;
- }
- 
-diff --git a/include/linux/blk-cgroup.h b/include/linux/blk-cgroup.h
-index c8fc9792ac776d..b9f3c246c3c908 100644
---- a/include/linux/blk-cgroup.h
-+++ b/include/linux/blk-cgroup.h
-@@ -197,12 +197,12 @@ void blkcg_print_blkgs(struct seq_file *sf, struct blkcg *blkcg,
- u64 __blkg_prfill_u64(struct seq_file *sf, struct blkg_policy_data *pd, u64 v);
- 
- struct blkg_conf_ctx {
--	struct gendisk			*disk;
-+	struct block_device		*bdev;
- 	struct blkcg_gq			*blkg;
- 	char				*body;
+ struct disk_part_iter {
+ 	struct gendisk		*disk;
+-	struct hd_struct	*part;
++	struct block_device	*part;
+ 	int			idx;
+ 	unsigned int		flags;
  };
  
--struct gendisk *blkcg_conf_get_disk(char **inputp);
-+struct block_device *blkcg_conf_open_bdev(char **inputp);
- int blkg_conf_prep(struct blkcg *blkcg, const struct blkcg_policy *pol,
- 		   char *input, struct blkg_conf_ctx *ctx);
- void blkg_conf_finish(struct blkg_conf_ctx *ctx);
+ extern void disk_part_iter_init(struct disk_part_iter *piter,
+ 				 struct gendisk *disk, unsigned int flags);
+-extern struct hd_struct *disk_part_iter_next(struct disk_part_iter *piter);
++struct block_device *disk_part_iter_next(struct disk_part_iter *piter);
+ extern void disk_part_iter_exit(struct disk_part_iter *piter);
+ extern bool disk_has_partitions(struct gendisk *disk);
+ 
 -- 
 2.29.2
 
