@@ -2,26 +2,28 @@ Return-Path: <SRS0=fYmn=E6=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-15.3 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B352CC2D0E4
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:38:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B7092C2D0E4
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:40:24 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 642DC20782
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:38:53 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 642DC20782
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.de
+	by mail.kernel.org (Postfix) with ESMTPS id 5BF5A20782
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:40:24 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="hP+HoMXS"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5BF5A20782
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.36116.67878 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.36125.67902 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khYWn-0003S6-Er; Tue, 24 Nov 2020 13:38:41 +0000
+	id 1khYYJ-0004Hp-3D; Tue, 24 Nov 2020 13:40:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 36116.67878; Tue, 24 Nov 2020 13:38:41 +0000
+Received: by outflank-mailman (output) from mailman id 36125.67902; Tue, 24 Nov 2020 13:40:15 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,163 +38,152 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khYWn-0003Rz-BH; Tue, 24 Nov 2020 13:38:41 +0000
-Received: by outflank-mailman (input) for mailman id 36116;
- Tue, 24 Nov 2020 13:38:39 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=IyBN=E6=suse.de=colyli@srs-us1.protection.inumbo.net>)
- id 1khYWl-0003Rt-Qt
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:38:39 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 2b7af852-0673-4c3c-a815-09a2a59dc2ac;
- Tue, 24 Nov 2020 13:38:38 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id E8E43AC2D;
- Tue, 24 Nov 2020 13:38:37 +0000 (UTC)
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+	id 1khYYI-0004He-Vj; Tue, 24 Nov 2020 13:40:14 +0000
+Received: by outflank-mailman (input) for mailman id 36125;
+ Tue, 24 Nov 2020 13:40:13 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=daQ6=E6=casper.srs.infradead.org=batv+cbe268a5dfa7b983a02e+6302+infradead.org+hch@srs-us1.protection.inumbo.net>)
+ id 1khYPp-0000Qf-5d
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:31:29 +0000
+Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id a0136be9-339d-49b6-8e25-045d885334de;
+ Tue, 24 Nov 2020 13:29:15 +0000 (UTC)
+Received: from [2001:4bb8:180:5443:c70:4a89:bc61:3] (helo=localhost)
+ by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+ id 1khYNS-0006hp-IQ; Tue, 24 Nov 2020 13:29:02 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=IyBN=E6=suse.de=colyli@srs-us1.protection.inumbo.net>)
-	id 1khYWl-0003Rt-Qt
-	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:38:39 +0000
-X-Inumbo-ID: 2b7af852-0673-4c3c-a815-09a2a59dc2ac
-Received: from mx2.suse.de (unknown [195.135.220.15])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 2b7af852-0673-4c3c-a815-09a2a59dc2ac;
-	Tue, 24 Nov 2020 13:38:38 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id E8E43AC2D;
-	Tue, 24 Nov 2020 13:38:37 +0000 (UTC)
-Subject: Re: [PATCH 23/45] block: remove i_bdev
-To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
-Cc: Tejun Heo <tj@kernel.org>, Josef Bacik <josef@toxicpanda.com>,
- Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
- Mike Snitzer <snitzer@redhat.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Jan Kara <jack@suse.cz>,
- Johannes Thumshirn <johannes.thumshirn@wdc.com>, dm-devel@redhat.com,
- Richard Weinberger <richard@nod.at>, Jan Kara <jack@suse.com>,
- linux-block@vger.kernel.org, xen-devel@lists.xenproject.org,
- linux-bcache@vger.kernel.org, linux-mtd@lists.infradead.org,
- linux-fsdevel@vger.kernel.org, linux-mm@kvack.org
+	(envelope-from <SRS0=daQ6=E6=casper.srs.infradead.org=batv+cbe268a5dfa7b983a02e+6302+infradead.org+hch@srs-us1.protection.inumbo.net>)
+	id 1khYPp-0000Qf-5d
+	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:31:29 +0000
+X-Inumbo-ID: a0136be9-339d-49b6-8e25-045d885334de
+Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id a0136be9-339d-49b6-8e25-045d885334de;
+	Tue, 24 Nov 2020 13:29:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
+	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+	Content-Type:Content-ID:Content-Description;
+	bh=Byl7CBCOdylPQKGIFA7NBT0G7FiaS8ROkaw/bubCmjo=; b=hP+HoMXSsqR+FJlPVNTSPcniBz
+	1aqdDxKykpBKAkRkRbBCNckP9ETrUGi7CUc6c0QdQEfaGPZF8esX16E5969KLXQn0csqLqX91PHbN
+	2FT5mRafK8f26f12dZqTcphrahqhc5JyTIMBOODUZcgk3yEsPQql0HiJdKT4GIgdOp5RcKsptXLF7
+	0a2dEii7Uz3/wk6fKxXxM0CuK95G/xwkiZOshyF6U7C3FVF+5neDdGw9ntgzVsAasqtcgiS4Qbtue
+	zIqh0VftgHq8kEMenVn6mlPCa3+4kytrRXrVQU5oi8/2yu6lQoIT61N/JBZpQdCKQ4RpagJwj6Ero
+	pFqYpyaQ==;
+Received: from [2001:4bb8:180:5443:c70:4a89:bc61:3] (helo=localhost)
+	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+	id 1khYNS-0006hp-IQ; Tue, 24 Nov 2020 13:29:02 +0000
+From: Christoph Hellwig <hch@lst.de>
+To: Jens Axboe <axboe@kernel.dk>
+Cc: Tejun Heo <tj@kernel.org>,
+	Josef Bacik <josef@toxicpanda.com>,
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+	Coly Li <colyli@suse.de>,
+	Mike Snitzer <snitzer@redhat.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Jan Kara <jack@suse.cz>,
+	Johannes Thumshirn <johannes.thumshirn@wdc.com>,
+	dm-devel@redhat.com,
+	Richard Weinberger <richard@nod.at>,
+	Jan Kara <jack@suse.com>,
+	linux-block@vger.kernel.org,
+	xen-devel@lists.xenproject.org,
+	linux-bcache@vger.kernel.org,
+	linux-mtd@lists.infradead.org,
+	linux-fsdevel@vger.kernel.org,
+	linux-mm@kvack.org
+Subject: [PATCH 40/45] block: pass a block_device to blk_alloc_devt
+Date: Tue, 24 Nov 2020 14:27:46 +0100
+Message-Id: <20201124132751.3747337-41-hch@lst.de>
+X-Mailer: git-send-email 2.29.2
+In-Reply-To: <20201124132751.3747337-1-hch@lst.de>
 References: <20201124132751.3747337-1-hch@lst.de>
- <20201124132751.3747337-24-hch@lst.de>
-From: Coly Li <colyli@suse.de>
-Message-ID: <bbb4130b-6848-f2ed-b7e0-c86b68c2663a@suse.de>
-Date: Tue, 24 Nov 2020 21:38:27 +0800
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.16; rv:78.0)
- Gecko/20100101 Thunderbird/78.4.3
 MIME-Version: 1.0
-In-Reply-To: <20201124132751.3747337-24-hch@lst.de>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-On 11/24/20 9:27 PM, Christoph Hellwig wrote:
-> Switch the block device lookup interfaces to directly work with a dev_t
-> so that struct block_device references are only acquired by the
-> blkdev_get variants (and the blk-cgroup special case).  This means that
-> we not don't need an extra reference in the inode and can generally
-> simplify handling of struct block_device to keep the lookups contained
-> in the core block layer code.
-> 
-> Signed-off-by: Christoph Hellwig <hch@lst.de>
+Pass the block_device actually needed instead of the hd_struct.
 
-For the bcache part, Acked-by: Coly Li <colyli@suse.de>
+Signed-off-by: Christoph Hellwig <hch@lst.de>
+---
+ block/blk.h             |  2 +-
+ block/genhd.c           | 14 +++++++-------
+ block/partitions/core.c |  2 +-
+ 3 files changed, 9 insertions(+), 9 deletions(-)
 
-Thanks.
+diff --git a/block/blk.h b/block/blk.h
+index d5bf8f3a078186..9657c6da7c770c 100644
+--- a/block/blk.h
++++ b/block/blk.h
+@@ -350,7 +350,7 @@ static inline void blk_queue_free_zone_bitmaps(struct request_queue *q) {}
+ 
+ struct block_device *disk_map_sector_rcu(struct gendisk *disk, sector_t sector);
+ 
+-int blk_alloc_devt(struct hd_struct *part, dev_t *devt);
++int blk_alloc_devt(struct block_device *part, dev_t *devt);
+ void blk_free_devt(dev_t devt);
+ char *disk_name(struct gendisk *hd, int partno, char *buf);
+ #define ADDPART_FLAG_NONE	0
+diff --git a/block/genhd.c b/block/genhd.c
+index 60004bc8ba5b56..498c816e90df64 100644
+--- a/block/genhd.c
++++ b/block/genhd.c
+@@ -557,8 +557,8 @@ static int blk_mangle_minor(int minor)
+ }
+ 
+ /**
+- * blk_alloc_devt - allocate a dev_t for a partition
+- * @part: partition to allocate dev_t for
++ * blk_alloc_devt - allocate a dev_t for a block device
++ * @bdev: block device to allocate dev_t for
+  * @devt: out parameter for resulting dev_t
+  *
+  * Allocate a dev_t for block device.
+@@ -570,14 +570,14 @@ static int blk_mangle_minor(int minor)
+  * CONTEXT:
+  * Might sleep.
+  */
+-int blk_alloc_devt(struct hd_struct *part, dev_t *devt)
++int blk_alloc_devt(struct block_device *bdev, dev_t *devt)
+ {
+-	struct gendisk *disk = part_to_disk(part);
++	struct gendisk *disk = bdev->bd_disk;
+ 	int idx;
+ 
+ 	/* in consecutive minor range? */
+-	if (part->bdev->bd_partno < disk->minors) {
+-		*devt = MKDEV(disk->major, disk->first_minor + part->bdev->bd_partno);
++	if (bdev->bd_partno < disk->minors) {
++		*devt = MKDEV(disk->major, disk->first_minor + bdev->bd_partno);
+ 		return 0;
+ 	}
+ 
+@@ -733,7 +733,7 @@ static void __device_add_disk(struct device *parent, struct gendisk *disk,
+ 
+ 	disk->flags |= GENHD_FL_UP;
+ 
+-	retval = blk_alloc_devt(disk->part0->bd_part, &devt);
++	retval = blk_alloc_devt(disk->part0, &devt);
+ 	if (retval) {
+ 		WARN_ON(1);
+ 		return;
+diff --git a/block/partitions/core.c b/block/partitions/core.c
+index ee4f4e3237aa2d..45fed1108d4425 100644
+--- a/block/partitions/core.c
++++ b/block/partitions/core.c
+@@ -392,7 +392,7 @@ static struct hd_struct *add_partition(struct gendisk *disk, int partno,
+ 	pdev->type = &part_type;
+ 	pdev->parent = ddev;
+ 
+-	err = blk_alloc_devt(p, &devt);
++	err = blk_alloc_devt(bdev, &devt);
+ 	if (err)
+ 		goto out_bdput;
+ 	pdev->devt = devt;
+-- 
+2.29.2
 
-Coly Li
-
-> ---
->  block/ioctl.c                                |   3 +-
->  drivers/block/loop.c                         |   8 +-
->  drivers/md/bcache/super.c                    |  20 +-
->  drivers/md/dm-table.c                        |   9 +-
->  drivers/mtd/mtdsuper.c                       |  17 +-
->  drivers/target/target_core_file.c            |   6 +-
->  drivers/usb/gadget/function/storage_common.c |   8 +-
->  fs/block_dev.c                               | 195 +++++--------------
->  fs/btrfs/volumes.c                           |  13 +-
->  fs/inode.c                                   |   3 -
->  fs/internal.h                                |   7 +-
->  fs/io_uring.c                                |  10 +-
->  fs/pipe.c                                    |   5 +-
->  fs/quota/quota.c                             |  19 +-
->  fs/statfs.c                                  |   2 +-
->  fs/super.c                                   |  37 ++--
->  include/linux/blkdev.h                       |   2 +-
->  include/linux/fs.h                           |   1 -
->  18 files changed, 114 insertions(+), 251 deletions(-)
-> 
-
-[snipped]
-
-> diff --git a/drivers/md/bcache/super.c b/drivers/md/bcache/super.c
-> index a6a5e21e4fd136..c55d3c58a7ef55 100644
-> --- a/drivers/md/bcache/super.c
-> +++ b/drivers/md/bcache/super.c
-> @@ -2380,38 +2380,38 @@ kobj_attribute_write(register,		register_bcache);
->  kobj_attribute_write(register_quiet,	register_bcache);
->  kobj_attribute_write(pendings_cleanup,	bch_pending_bdevs_cleanup);
->  
-> -static bool bch_is_open_backing(struct block_device *bdev)
-> +static bool bch_is_open_backing(dev_t dev)
->  {
->  	struct cache_set *c, *tc;
->  	struct cached_dev *dc, *t;
->  
->  	list_for_each_entry_safe(c, tc, &bch_cache_sets, list)
->  		list_for_each_entry_safe(dc, t, &c->cached_devs, list)
-> -			if (dc->bdev == bdev)
-> +			if (dc->bdev->bd_dev == dev)
->  				return true;
->  	list_for_each_entry_safe(dc, t, &uncached_devices, list)
-> -		if (dc->bdev == bdev)
-> +		if (dc->bdev->bd_dev == dev)
->  			return true;
->  	return false;
->  }
->  
-> -static bool bch_is_open_cache(struct block_device *bdev)
-> +static bool bch_is_open_cache(dev_t dev)
->  {
->  	struct cache_set *c, *tc;
->  
->  	list_for_each_entry_safe(c, tc, &bch_cache_sets, list) {
->  		struct cache *ca = c->cache;
->  
-> -		if (ca->bdev == bdev)
-> +		if (ca->bdev->bd_dev == dev)
->  			return true;
->  	}
->  
->  	return false;
->  }
->  
-> -static bool bch_is_open(struct block_device *bdev)
-> +static bool bch_is_open(dev_t dev)
->  {
-> -	return bch_is_open_cache(bdev) || bch_is_open_backing(bdev);
-> +	return bch_is_open_cache(dev) || bch_is_open_backing(dev);
->  }
->  
->  struct async_reg_args {
-> @@ -2535,9 +2535,11 @@ static ssize_t register_bcache(struct kobject *k, struct kobj_attribute *attr,
->  				  sb);
->  	if (IS_ERR(bdev)) {
->  		if (bdev == ERR_PTR(-EBUSY)) {
-> -			bdev = lookup_bdev(strim(path));
-> +			dev_t dev;
-> +
->  			mutex_lock(&bch_register_lock);
-> -			if (!IS_ERR(bdev) && bch_is_open(bdev))
-> +			if (lookup_bdev(strim(path), &dev) == 0 &&
-> +			    bch_is_open(dev))
->  				err = "device already registered";
->  			else
->  				err = "device busy";
-[snipped]
 
