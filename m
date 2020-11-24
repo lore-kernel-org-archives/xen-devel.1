@@ -2,28 +2,28 @@ Return-Path: <SRS0=fYmn=E6=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4F81EC2D0E4
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B898C6379D
 	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 19:18:14 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C096C206B5
+	by mail.kernel.org (Postfix) with ESMTPS id DF962206C0
 	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 19:18:13 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="S4WlolLY"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C096C206B5
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="XhYSWVF0"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DF962206C0
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.36877.68943 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.36879.68960 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khdp5-0003MN-4t; Tue, 24 Nov 2020 19:17:55 +0000
+	id 1khdp7-0003OX-QK; Tue, 24 Nov 2020 19:17:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 36877.68943; Tue, 24 Nov 2020 19:17:55 +0000
+Received: by outflank-mailman (output) from mailman id 36879.68960; Tue, 24 Nov 2020 19:17:57 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,77 +38,132 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khdp5-0003MG-1q; Tue, 24 Nov 2020 19:17:55 +0000
-Received: by outflank-mailman (input) for mailman id 36877;
- Tue, 24 Nov 2020 19:17:53 +0000
+	id 1khdp7-0003OE-K5; Tue, 24 Nov 2020 19:17:57 +0000
+Received: by outflank-mailman (input) for mailman id 36879;
+ Tue, 24 Nov 2020 19:17:56 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>) id 1khdp3-0003MB-5T
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 19:17:53 +0000
+ (envelope-from <paul@xen.org>) id 1khdp6-0003NJ-IB
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 19:17:56 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1khdp3-00046u-09; Tue, 24 Nov 2020 19:17:53 +0000
+ id 1khdp5-000473-MH; Tue, 24 Nov 2020 19:17:55 +0000
 Received: from host86-183-162-145.range86-183.btcentralplus.com
  ([86.183.162.145] helo=u2f063a87eabd5f.home)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1khdp2-0001af-KZ; Tue, 24 Nov 2020 19:17:52 +0000
+ id 1khdp5-0001af-EV; Tue, 24 Nov 2020 19:17:55 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1khdp3-0003MB-5T
-	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 19:17:53 +0000
+	id 1khdp6-0003NJ-IB
+	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 19:17:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:
-	Subject:Cc:To:From; bh=U1nqXdkQgZ7asiK/N8GRlF/923RFJ4xg2wwzpCkLx9s=; b=S4Wlol
-	LY5jVQhN0L6M8Lyr5VwCh7nFwqo9Z2PL11fMFzCz95tVnxrB/PSQW7+58g0lBfv8CpoPanOjzD5Tv
-	dYftnHZX/Xx5MK7V0kWDkhSDqcXxlBf/V5TR0W21wFnSTzG2KOqpNAP/TuupsAiH29YUzXBivck3U
-	2QkNnOsY/BY=;
+	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
+	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
+	bh=Ab1xFXjavoHWImv5EdYjiLsTfFXo0yohVYFMNSfSBu8=; b=XhYSWVF0+rPXX327YXZdWgIakp
+	hwNMBq11dVZDKNTIM1BiXi5SO/7j2c9rqUefBht0MR1ONR9FEJ6+ELuaXw2ZNaDKvdRND+BA4ZURu
+	9WF7A9N0zZHn8PBV0g7BcM53MGzaFZVF+N8cnaT6twdxkh0VpmoNefvIcFnw7mnxCAlI=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
 	by mail.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1khdp3-00046u-09; Tue, 24 Nov 2020 19:17:53 +0000
+	id 1khdp5-000473-MH; Tue, 24 Nov 2020 19:17:55 +0000
 Received: from host86-183-162-145.range86-183.btcentralplus.com ([86.183.162.145] helo=u2f063a87eabd5f.home)
 	by xenbits.xenproject.org with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
 	(Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1khdp2-0001af-KZ; Tue, 24 Nov 2020 19:17:52 +0000
+	id 1khdp5-0001af-EV; Tue, 24 Nov 2020 19:17:55 +0000
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
-Cc: Paul Durrant <pdurrant@amazon.com>
-Subject: [PATCH v4 0/3] evtchn: Introduce a per-guest knob to control FIFO ABI
-Date: Tue, 24 Nov 2020 19:17:48 +0000
-Message-Id: <20201124191751.11472-1-paul@xen.org>
+Cc: Paul Durrant <pdurrant@amazon.com>,
+	Eslam Elnikety <elnikety@amazon.com>,
+	Ian Jackson <iwj@xenproject.org>,
+	Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH v4 2/3] libxl: add a 'disable_fifo_evtchn' flag to libxl_domain_build_info ...
+Date: Tue, 24 Nov 2020 19:17:50 +0000
+Message-Id: <20201124191751.11472-3-paul@xen.org>
 X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20201124191751.11472-1-paul@xen.org>
+References: <20201124191751.11472-1-paul@xen.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 From: Paul Durrant <pdurrant@amazon.com>
 
-This series is the next version of what was originally a single patch sent
-by Eslam Elnikety <elnikety@amazon.com>. I have re-based and slightly expanded
-the modifications.
+...to control setting the domain create flag XEN_DOMCTL_CDF_disable_fifo.
 
-Paul Durrant (3):
-  domctl: introduce a new domain create flag,
-    XEN_DOMCTL_CDF_disable_fifo, ...
-  libxl: add a 'disable_fifo_evtchn' flag to libxl_domain_build_info ...
-  xl: add 'disable_evtchn_fifo' boolean option into xl.cfg(5) ...
+Signed-off-by: Paul Durrant <pdurrant@amazon.com>
+Signed-off-by: Eslam Elnikety <elnikety@amazon.com>
+---
+Cc: Ian Jackson <iwj@xenproject.org>
+Cc: Wei Liu <wl@xen.org>
+Cc: Anthony PERARD <anthony.perard@citrix.com>
 
- docs/man/xl.cfg.5.pod.in         |  8 ++++++++
- tools/include/libxl.h            |  8 ++++++++
- tools/libs/light/libxl_create.c  |  5 +++++
- tools/libs/light/libxl_types.idl |  1 +
- tools/ocaml/libs/xc/xenctrl.ml   |  1 +
- tools/ocaml/libs/xc/xenctrl.mli  |  1 +
- tools/xl/xl_parse.c              |  3 +++
- xen/common/domain.c              |  2 +-
- xen/common/event_channel.c       | 17 +++++++++++++++++
- xen/include/public/domctl.h      |  4 +++-
- 10 files changed, 48 insertions(+), 2 deletions(-)
+v4:
+ - New in v4
+---
+ tools/include/libxl.h            | 8 ++++++++
+ tools/libs/light/libxl_create.c  | 5 +++++
+ tools/libs/light/libxl_types.idl | 1 +
+ 3 files changed, 14 insertions(+)
 
+diff --git a/tools/include/libxl.h b/tools/include/libxl.h
+index 1ea5b4f446e8..fe0aad632c08 100644
+--- a/tools/include/libxl.h
++++ b/tools/include/libxl.h
+@@ -444,6 +444,14 @@
+  */
+ #define LIBXL_HAVE_DISK_SAFE_REMOVE 1
+ 
++/*
++ * LIBXL_HAVE_BUILDINFO_DISABLE_EVTCHN_FIFO indicates that
++ * libxl_domain_build_info has a disable_evtchn_fifo (boolean) field
++ * to determine whether the EVTCHNOPs to initialize and manipulate FIFO
++ * event channels are exposed to the guest.
++ */
++#define LIBXL_HAVE_BUILDINFO_DISABLE_EVTCHN_FIFO 1
++
+ /*
+  * libxl ABI compatibility
+  *
+diff --git a/tools/libs/light/libxl_create.c b/tools/libs/light/libxl_create.c
+index 321a13e519b5..abbbd91442c0 100644
+--- a/tools/libs/light/libxl_create.c
++++ b/tools/libs/light/libxl_create.c
+@@ -263,6 +263,8 @@ int libxl__domain_build_info_setdefault(libxl__gc *gc,
+     if (!b_info->event_channels)
+         b_info->event_channels = 1023;
+ 
++    libxl_defbool_setdefault(&b_info->disable_evtchn_fifo, false);
++
+     libxl__arch_domain_build_info_setdefault(gc, b_info);
+     libxl_defbool_setdefault(&b_info->dm_restrict, false);
+ 
+@@ -609,6 +611,9 @@ int libxl__domain_make(libxl__gc *gc, libxl_domain_config *d_config,
+             .max_maptrack_frames = b_info->max_maptrack_frames,
+         };
+ 
++        if (libxl_defbool_val(b_info->disable_evtchn_fifo))
++            create.flags |= XEN_DOMCTL_CDF_disable_fifo;
++
+         if (info->type != LIBXL_DOMAIN_TYPE_PV) {
+             create.flags |= XEN_DOMCTL_CDF_hvm;
+ 
+diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
+index 9d3f05f39978..fa3f6ec3425e 100644
+--- a/tools/libs/light/libxl_types.idl
++++ b/tools/libs/light/libxl_types.idl
+@@ -541,6 +541,7 @@ libxl_domain_build_info = Struct("domain_build_info",[
+     ("iomem",            Array(libxl_iomem_range, "num_iomem")),
+     ("claim_mode",	     libxl_defbool),
+     ("event_channels",   uint32),
++    ("disable_evtchn_fifo",libxl_defbool),
+     ("kernel",           string),
+     ("cmdline",          string),
+     ("ramdisk",          string),
 -- 
 2.20.1
 
