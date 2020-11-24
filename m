@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5CF98C6379D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BB08EC64E7A
 	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 08:31:06 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BABA42075A
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 08:31:05 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 309F320708
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 08:31:04 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="Hjiq/0DG"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BABA42075A
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="JTGrwTSp"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 309F320708
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.35510.67133 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.35513.67172 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khTir-0003WM-3B; Tue, 24 Nov 2020 08:30:49 +0000
+	id 1khTit-0003dN-UA; Tue, 24 Nov 2020 08:30:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 35510.67133; Tue, 24 Nov 2020 08:30:48 +0000
+Received: by outflank-mailman (output) from mailman id 35513.67172; Tue, 24 Nov 2020 08:30:51 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,340 +38,660 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khTiq-0003VQ-HJ; Tue, 24 Nov 2020 08:30:48 +0000
-Received: by outflank-mailman (input) for mailman id 35510;
+	id 1khTis-0003cG-No; Tue, 24 Nov 2020 08:30:50 +0000
+Received: by outflank-mailman (input) for mailman id 35513;
  Tue, 24 Nov 2020 08:30:45 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>) id 1khTin-0003Po-6H
+ (envelope-from <paul@xen.org>) id 1khTin-0003Q3-BP
  for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 08:30:45 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1khTim-0006bB-KP; Tue, 24 Nov 2020 08:30:44 +0000
+ id 1khTim-0006b7-Iv; Tue, 24 Nov 2020 08:30:44 +0000
 Received: from ec2-54-145-241-208.compute-1.amazonaws.com ([54.145.241.208]
  helo=ip-10-0-29-170.ec2.internal)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1khTH2-0001hp-W1; Tue, 24 Nov 2020 08:02:05 +0000
+ id 1khTH4-0001hp-Hr; Tue, 24 Nov 2020 08:02:06 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1khTin-0003Po-6H
+	id 1khTin-0003Q3-BP
 	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 08:30:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	 bh=gs+2F3wLageZmiAxkHoKR705R9GKQDZVMvtOetNICfQ=; b=Hjiq/0DGDcLu2vsgmQeappHZt
-	AWqP/35H/xuzYjTUsRhQNnd0zFK8gMDWBL1LJKFBZwn8BZZGh991ou8M3p7of8xZyGR6qhoqsT5X9
-	lZUqSbYPSNOqPZ+RD2kslsT6HKnSReM3iih8B0ZCJlFApZjCBbs/hDHXNl17qtQM8Ixo4=;
+	 bh=FS2lsRq/N5rr0lREQKsZJxqwgY3o2rJbmA8WgHHgsnw=; b=JTGrwTSp9VPw0YAYvGLicdEOW
+	m0wC2emBvO9vBiBu/Uq+DE8B1ulecN8F66OAQ0WJvMMolQmqfbQ30FWPsIELH6qGbL0qa+L18Io8n
+	vunRdxK2FkiAaXc23Um8PCceajJgBoPPotH+0OU4LqYB2qJ3UVw25w6Lh8iDZiiIHyhQ4=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
 	by mail.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1khTim-0006bB-KP; Tue, 24 Nov 2020 08:30:44 +0000
+	id 1khTim-0006b7-Iv; Tue, 24 Nov 2020 08:30:44 +0000
 Received: from ec2-54-145-241-208.compute-1.amazonaws.com ([54.145.241.208] helo=ip-10-0-29-170.ec2.internal)
 	by xenbits.xenproject.org with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
 	(Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1khTH2-0001hp-W1; Tue, 24 Nov 2020 08:02:05 +0000
+	id 1khTH4-0001hp-Hr; Tue, 24 Nov 2020 08:02:06 +0000
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: Paul Durrant <pdurrant@amazon.com>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v4 11/23] libxl: make sure callers of libxl_device_pci_list() free the list after use
-Date: Tue, 24 Nov 2020 08:01:47 +0000
-Message-Id: <20201124080159.11912-12-paul@xen.org>
+Subject: [PATCH v4 18/23] libxlu: introduce xlu_pci_parse_spec_string()
+Date: Tue, 24 Nov 2020 08:01:54 +0000
+Message-Id: <20201124080159.11912-19-paul@xen.org>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20201124080159.11912-1-paul@xen.org>
 References: <20201124080159.11912-1-paul@xen.org>
 
 From: Paul Durrant <pdurrant@amazon.com>
 
-A previous patch introduced libxl_device_pci_list_free() which should be used
-by callers of libxl_device_pci_list() to properly dispose of the exported
-'libxl_device_pci' types and the free the memory holding them. Whilst all
-current callers do ensure the memory is freed, only the code in xl's
-pcilist() function actually calls libxl_device_pci_dispose(). As it stands
-this laxity does not lead to any memory leaks, but the simple addition of
-.e.g. a 'string' into the idl definition of 'libxl_device_pci' would lead
-to leaks.
+This patch largely re-writes the code to parse a PCI_SPEC_STRING and enters
+it via the newly introduced function. The new parser also deals with 'bdf'
+and 'vslot' as non-positional paramaters, as per the documentation in
+xl-pci-configuration(5).
 
-This patch makes sure all callers of libxl_device_pci_list() can call
-libxl_device_pci_list_free() by keeping copies of 'libxl_device_pci'
-structures inline in 'pci_add_state' and 'pci_remove_state' (and also making
-sure these are properly disposed at the end of the operations) rather
-than keeping pointers to the structures returned by libxl_device_pci_list().
+The existing xlu_pci_parse_bdf() function remains, but now strictly parses
+BDF values. Some existing callers of xlu_pci_parse_bdf() are
+modified to call xlu_pci_parse_spec_string() as per the documentation in xl(1).
 
+NOTE: Usage text in xl_cmdtable.c and error messages are also modified
+      appropriately.
+
+Fixes: d25cc3ec93eb ("libxl: workaround gcc 10.2 maybe-uninitialized warning")
 Signed-off-by: Paul Durrant <pdurrant@amazon.com>
 ---
 Cc: Ian Jackson <iwj@xenproject.org>
 Cc: Wei Liu <wl@xen.org>
 Cc: Anthony PERARD <anthony.perard@citrix.com>
 ---
- tools/libs/light/libxl_pci.c | 68 ++++++++++++++++++++++++--------------------
- tools/xl/xl_pci.c            |  3 +-
- 2 files changed, 38 insertions(+), 33 deletions(-)
+ tools/include/libxlutil.h    |   8 +-
+ tools/libs/util/libxlu_pci.c | 354 +++++++++++++++++++++++--------------------
+ tools/xl/xl_cmdtable.c       |   4 +-
+ tools/xl/xl_parse.c          |   4 +-
+ tools/xl/xl_pci.c            |  37 +++--
+ 5 files changed, 220 insertions(+), 187 deletions(-)
 
-diff --git a/tools/libs/light/libxl_pci.c b/tools/libs/light/libxl_pci.c
-index d3c7a547c3..0f41939d1f 100644
---- a/tools/libs/light/libxl_pci.c
-+++ b/tools/libs/light/libxl_pci.c
-@@ -1025,7 +1025,7 @@ typedef struct pci_add_state {
-     libxl__xswait_state xswait;
-     libxl__ev_qmp qmp;
-     libxl__ev_time timeout;
--    libxl_device_pci *pci;
-+    libxl_device_pci pci;
-     libxl_domid pci_domid;
- } pci_add_state;
+diff --git a/tools/include/libxlutil.h b/tools/include/libxlutil.h
+index 92e35c5462..cdd6aab4f8 100644
+--- a/tools/include/libxlutil.h
++++ b/tools/include/libxlutil.h
+@@ -109,9 +109,15 @@ int xlu_disk_parse(XLU_Config *cfg, int nspecs, const char *const *specs,
+    */
  
-@@ -1097,7 +1097,7 @@ static void pci_add_qemu_trad_watch_state_cb(libxl__egc *egc,
- 
-     /* Convenience aliases */
-     libxl_domid domid = pas->domid;
--    libxl_device_pci *pci = pas->pci;
-+    libxl_device_pci *pci = &pas->pci;
- 
-     rc = check_qemu_running(gc, domid, xswa, rc, state);
-     if (rc == ERROR_NOT_READY)
-@@ -1118,7 +1118,7 @@ static void pci_add_qmp_device_add(libxl__egc *egc, pci_add_state *pas)
- 
-     /* Convenience aliases */
-     libxl_domid domid = pas->domid;
--    libxl_device_pci *pci = pas->pci;
-+    libxl_device_pci *pci = &pas->pci;
-     libxl__ev_qmp *const qmp = &pas->qmp;
- 
-     rc = libxl__ev_time_register_rel(ao, &pas->timeout,
-@@ -1199,7 +1199,7 @@ static void pci_add_qmp_query_pci_cb(libxl__egc *egc,
-     int dev_slot, dev_func;
- 
-     /* Convenience aliases */
--    libxl_device_pci *pci = pas->pci;
-+    libxl_device_pci *pci = &pas->pci;
- 
-     if (rc) goto out;
- 
-@@ -1300,7 +1300,7 @@ static void pci_add_dm_done(libxl__egc *egc,
- 
-     /* Convenience aliases */
-     bool starting = pas->starting;
--    libxl_device_pci *pci = pas->pci;
-+    libxl_device_pci *pci = &pas->pci;
-     bool hvm = libxl__domain_type(gc, domid) == LIBXL_DOMAIN_TYPE_HVM;
- 
-     libxl__ev_qmp_dispose(gc, &pas->qmp);
-@@ -1516,7 +1516,10 @@ void libxl__device_pci_add(libxl__egc *egc, uint32_t domid,
-     GCNEW(pas);
-     pas->aodev = aodev;
-     pas->domid = domid;
--    pas->pci = pci;
+ /*
++ * PCI BDF
++ */
++int xlu_pci_parse_bdf(XLU_Config *cfg, libxl_pci_bdf *bdf, const char *str);
 +
-+    libxl_device_pci_copy(CTX, &pas->pci, pci);
-+    pci = &pas->pci;
++/*
+  * PCI specification parsing
+  */
+-int xlu_pci_parse_bdf(XLU_Config *cfg, libxl_device_pci *pcidev, const char *str);
++int xlu_pci_parse_spec_string(XLU_Config *cfg, libxl_device_pci *pci,
++                              const char *str);
+ 
+ /*
+  * RDM parsing
+diff --git a/tools/libs/util/libxlu_pci.c b/tools/libs/util/libxlu_pci.c
+index 5c107f2642..a8b6ce5427 100644
+--- a/tools/libs/util/libxlu_pci.c
++++ b/tools/libs/util/libxlu_pci.c
+@@ -1,5 +1,7 @@
+ #define _GNU_SOURCE
+ 
++#include <ctype.h>
 +
-     pas->starting = starting;
-     pas->callback = device_pci_add_stubdom_done;
+ #include "libxlu_internal.h"
+ #include "libxlu_disk_l.h"
+ #include "libxlu_disk_i.h"
+@@ -9,185 +11,213 @@
+ #define XLU__PCI_ERR(_c, _x, _a...) \
+     if((_c) && (_c)->report) fprintf((_c)->report, _x, ##_a)
  
-@@ -1555,12 +1558,6 @@ void libxl__device_pci_add(libxl__egc *egc, uint32_t domid,
- 
-     stubdomid = libxl_get_stubdom_id(ctx, domid);
-     if (stubdomid != 0) {
--        libxl_device_pci *pci_s;
--
--        GCNEW(pci_s);
--        libxl_device_pci_init(pci_s);
--        libxl_device_pci_copy(CTX, pci_s, pci);
--        pas->pci = pci_s;
-         pas->callback = device_pci_add_stubdom_wait;
- 
-         do_pci_add(egc, stubdomid, pas); /* must be last */
-@@ -1619,7 +1616,7 @@ static void device_pci_add_stubdom_done(libxl__egc *egc,
- 
-     /* Convenience aliases */
-     libxl_domid domid = pas->domid;
--    libxl_device_pci *pci = pas->pci;
-+    libxl_device_pci *pci = &pas->pci;
- 
-     if (rc) goto out;
- 
-@@ -1670,7 +1667,7 @@ static void device_pci_add_done(libxl__egc *egc,
-     EGC_GC;
-     libxl__ao_device *aodev = pas->aodev;
-     libxl_domid domid = pas->domid;
--    libxl_device_pci *pci = pas->pci;
-+    libxl_device_pci *pci = &pas->pci;
- 
-     if (rc) {
-         LOGD(ERROR, domid,
-@@ -1680,6 +1677,7 @@ static void device_pci_add_done(libxl__egc *egc,
-              rc);
-         pci_info_xs_remove(gc, pci, "domid");
-     }
-+    libxl_device_pci_dispose(pci);
-     aodev->rc = rc;
-     aodev->callback(egc, aodev);
- }
-@@ -1770,7 +1768,7 @@ static int qemu_pci_remove_xenstore(libxl__gc *gc, uint32_t domid,
- typedef struct pci_remove_state {
-     libxl__ao_device *aodev;
-     libxl_domid domid;
--    libxl_device_pci *pci;
-+    libxl_device_pci pci;
-     bool force;
-     bool hvm;
-     unsigned int orig_vdev;
-@@ -1812,23 +1810,26 @@ static void do_pci_remove(libxl__egc *egc, pci_remove_state *prs)
+-static int hex_convert(const char *str, unsigned int *val, unsigned int mask)
++static int parse_bdf(libxl_pci_bdf *bdfp, uint32_t *vfunc_maskp,
++                     const char *str, const char **endp)
  {
-     STATE_AO_GC(prs->aodev->ao);
-     libxl_ctx *ctx = libxl__gc_owner(gc);
--    libxl_device_pci *assigned;
-+    libxl_device_pci *pcis;
-+    bool attached;
-     uint32_t domid = prs->domid;
-     libxl_domain_type type = libxl__domain_type(gc, domid);
--    libxl_device_pci *pci = prs->pci;
-+    libxl_device_pci *pci = &prs->pci;
-     int rc, num;
-     uint32_t domainid = domid;
- 
--    assigned = libxl_device_pci_list(ctx, domid, &num);
--    if (assigned == NULL) {
-+    pcis = libxl_device_pci_list(ctx, domid, &num);
-+    if (!pcis) {
-         rc = ERROR_FAIL;
-         goto out_fail;
-     }
--    libxl__ptr_add(gc, assigned);
+-    unsigned long ret;
+-    char *end;
+-
+-    ret = strtoul(str, &end, 16);
+-    if ( end == str || *end != '\0' )
+-        return -1;
+-    if ( ret & ~mask )
+-        return -1;
+-    *val = (unsigned int)ret & mask;
++    const char *ptr = str;
++    unsigned int colons = 0;
++    unsigned int domain, bus, dev, func;
++    int n;
 +
-+    attached = is_pci_in_array(pcis, num, pci->domain,
-+                               pci->bus, pci->dev, pci->func);
-+    libxl_device_pci_list_free(pcis, num);
- 
-     rc = ERROR_INVAL;
--    if ( !is_pci_in_array(assigned, num, pci->domain,
--                          pci->bus, pci->dev, pci->func) ) {
-+    if (!attached) {
-         LOGD(ERROR, domainid, "PCI device not attached to this domain");
-         goto out_fail;
-     }
-@@ -1928,7 +1929,7 @@ static void pci_remove_qemu_trad_watch_state_cb(libxl__egc *egc,
- 
-     /* Convenience aliases */
-     libxl_domid domid = prs->domid;
--    libxl_device_pci *const pci = prs->pci;
-+    libxl_device_pci *const pci = &prs->pci;
- 
-     rc = check_qemu_running(gc, domid, xswa, rc, state);
-     if (rc == ERROR_NOT_READY)
-@@ -1950,7 +1951,7 @@ static void pci_remove_qmp_device_del(libxl__egc *egc,
-     int rc;
- 
-     /* Convenience aliases */
--    libxl_device_pci *const pci = prs->pci;
-+    libxl_device_pci *const pci = &prs->pci;
- 
-     rc = libxl__ev_time_register_rel(ao, &prs->timeout,
-                                      pci_remove_timeout,
-@@ -2020,7 +2021,7 @@ static void pci_remove_qmp_query_cb(libxl__egc *egc,
- 
-     /* Convenience aliases */
-     libxl__ao *const ao = prs->aodev->ao;
--    libxl_device_pci *const pci = prs->pci;
-+    libxl_device_pci *const pci = &prs->pci;
- 
-     if (rc) goto out;
- 
-@@ -2075,7 +2076,7 @@ static void pci_remove_timeout(libxl__egc *egc, libxl__ev_time *ev,
-     pci_remove_state *prs = CONTAINER_OF(ev, *prs, timeout);
- 
-     /* Convenience aliases */
--    libxl_device_pci *const pci = prs->pci;
-+    libxl_device_pci *const pci = &prs->pci;
- 
-     LOGD(WARN, prs->domid, "timed out waiting for DM to remove "
-          PCI_PT_QDEV_ID, pci->bus, pci->dev, pci->func);
-@@ -2096,7 +2097,7 @@ static void pci_remove_detached(libxl__egc *egc,
-     bool isstubdom;
- 
-     /* Convenience aliases */
--    libxl_device_pci *const pci = prs->pci;
-+    libxl_device_pci *const pci = &prs->pci;
-     libxl_domid domid = prs->domid;
- 
-     /* Cleaning QMP states ASAP */
-@@ -2159,7 +2160,7 @@ static void pci_remove_done(libxl__egc *egc,
- 
-     if (rc) goto out;
- 
--    libxl__device_pci_remove_xenstore(gc, prs->domid, prs->pci);
-+    libxl__device_pci_remove_xenstore(gc, prs->domid, &prs->pci);
- out:
-     device_pci_remove_common_next(egc, prs, rc);
- }
-@@ -2177,7 +2178,10 @@ static void libxl__device_pci_remove_common(libxl__egc *egc,
-     GCNEW(prs);
-     prs->aodev = aodev;
-     prs->domid = domid;
--    prs->pci = pci;
++    /* Count occurrences of ':' to detrmine presence/absence of the 'domain' */
++    while (isxdigit(*ptr) || *ptr == ':') {
++        if (*ptr == ':')
++            colons++;
++        ptr++;
++    }
 +
-+    libxl_device_pci_copy(CTX, &prs->pci, pci);
-+    pci = &prs->pci;
++    ptr = str;
++    switch (colons) {
++    case 1:
++        domain = 0;
++        if (sscanf(ptr, "%x:%x.%n", &bus, &dev, &n) != 2)
++            return ERROR_INVAL;
++        break;
++    case 2:
++        if (sscanf(ptr, "%x:%x:%x.%n", &domain, &bus, &dev, &n) != 3)
++            return ERROR_INVAL;
++        break;
++    default:
++        return ERROR_INVAL;
++    }
 +
-     prs->force = force;
-     libxl__xswait_init(&prs->xswait);
-     libxl__ev_qmp_init(&prs->qmp);
-@@ -2212,7 +2216,7 @@ static void device_pci_remove_common_next(libxl__egc *egc,
-     EGC_GC;
- 
-     /* Convenience aliases */
--    libxl_device_pci *const pci = prs->pci;
-+    libxl_device_pci *const pci = &prs->pci;
-     libxl__ao_device *const aodev = prs->aodev;
-     const unsigned int pfunc_mask = prs->pfunc_mask;
-     const unsigned int orig_vdev = prs->orig_vdev;
-@@ -2243,6 +2247,7 @@ out:
- 
-     if (!rc) pci_info_xs_remove(gc, pci, "domid");
- 
-+    libxl_device_pci_dispose(pci);
-     aodev->rc = rc;
-     aodev->callback(egc, aodev);
- }
-@@ -2357,7 +2362,6 @@ void libxl__device_pci_destroy_all(libxl__egc *egc, uint32_t domid,
-     pcis = libxl_device_pci_list(CTX, domid, &num);
-     if ( pcis == NULL )
-         return;
--    libxl__ptr_add(gc, pcis);
- 
-     for (i = 0; i < num; i++) {
-         /* Force remove on shutdown since, on HVM, qemu will not always
-@@ -2368,6 +2372,8 @@ void libxl__device_pci_destroy_all(libxl__egc *egc, uint32_t domid,
-         libxl__device_pci_remove_common(egc, domid, pcis + i, true,
-                                         aodev);
-     }
++    if (domain > 0xffff || bus > 0xff || dev > 0x1f)
++        return ERROR_INVAL;
 +
-+    libxl_device_pci_list_free(pcis, num);
++    ptr += n;
++    if (*ptr == '*') {
++        if (!vfunc_maskp)
++            return ERROR_INVAL;
++        *vfunc_maskp = LIBXL_PCI_FUNC_ALL;
++        func = 0;
++        ptr++;
++    } else {
++        if (sscanf(ptr, "%x%n", &func, &n) != 1)
++            return ERROR_INVAL;
++        if (func > 7)
++            return ERROR_INVAL;
++        if (vfunc_maskp)
++            *vfunc_maskp = 1;
++        ptr += n;
++    }
++
++    bdfp->domain = domain;
++    bdfp->bus = bus;
++    bdfp->dev = dev;
++    bdfp->func = func;
++
++    if (endp)
++        *endp = ptr;
++
+     return 0;
  }
  
- int libxl__grant_vga_iomem_permission(libxl__gc *gc, const uint32_t domid,
+-static int pci_struct_fill(libxl_device_pci *pci, unsigned int domain,
+-                           unsigned int bus, unsigned int dev,
+-                           unsigned int func, unsigned int vdevfn)
++static int parse_vslot(uint32_t *vdevfnp, const char *str, const char **endp)
+ {
+-    pci->bdf.domain = domain;
+-    pci->bdf.bus = bus;
+-    pci->bdf.dev = dev;
+-    pci->bdf.func = func;
+-    pci->vdevfn = vdevfn;
++    const char *ptr = str;
++    unsigned int val;
++    int n;
++
++    if (sscanf(ptr, "%x%n", &val, &n) != 1)
++        return ERROR_INVAL;
++
++    if (val > 0x1f)
++        return ERROR_INVAL;
++
++    ptr += n;
++
++    *vdevfnp = val << 3;
++
++    if (endp)
++        *endp = ptr;
++
+     return 0;
+ }
+ 
+-#define STATE_DOMAIN    0
+-#define STATE_BUS       1
+-#define STATE_DEV       2
+-#define STATE_FUNC      3
+-#define STATE_VSLOT     4
+-#define STATE_OPTIONS_K 6
+-#define STATE_OPTIONS_V 7
+-#define STATE_TERMINAL  8
+-#define STATE_TYPE      9
+-#define STATE_RDM_STRATEGY      10
+-#define STATE_RESERVE_POLICY    11
+-#define INVALID         0xffffffff
+-int xlu_pci_parse_bdf(XLU_Config *cfg, libxl_device_pci *pci, const char *str)
++static int parse_key_val(char **keyp, char**valp, const char *str,
++                         const char **endp)
+ {
+-    unsigned state = STATE_DOMAIN;
+-    unsigned dom = INVALID, bus = INVALID, dev = INVALID, func = INVALID, vslot = 0;
+-    char *buf2, *tok, *ptr, *end, *optkey = NULL;
++    const char *ptr = str;
++    char *key, *val;
++
++    while (*ptr != '=' && *ptr != '\0')
++        ptr++;
+ 
+-    if ( NULL == (buf2 = ptr = strdup(str)) )
++    if (*ptr == '\0')
++        return ERROR_INVAL;
++
++    key = strndup(str, ptr - str);
++    if (!key)
+         return ERROR_NOMEM;
+ 
+-    for(tok = ptr, end = ptr + strlen(ptr) + 1; ptr < end; ptr++) {
+-        switch(state) {
+-        case STATE_DOMAIN:
+-            if ( *ptr == ':' ) {
+-                state = STATE_BUS;
+-                *ptr = '\0';
+-                if ( hex_convert(tok, &dom, 0xffff) )
+-                    goto parse_error;
+-                tok = ptr + 1;
+-            }
+-            break;
+-        case STATE_BUS:
+-            if ( *ptr == ':' ) {
+-                state = STATE_DEV;
+-                *ptr = '\0';
+-                if ( hex_convert(tok, &bus, 0xff) )
+-                    goto parse_error;
+-                tok = ptr + 1;
+-            }else if ( *ptr == '.' ) {
+-                state = STATE_FUNC;
+-                *ptr = '\0';
+-                if ( dom & ~0xff )
+-                    goto parse_error;
+-                bus = dom;
+-                dom = 0;
+-                if ( hex_convert(tok, &dev, 0xff) )
+-                    goto parse_error;
+-                tok = ptr + 1;
+-            }
+-            break;
+-        case STATE_DEV:
+-            if ( *ptr == '.' ) {
+-                state = STATE_FUNC;
+-                *ptr = '\0';
+-                if ( hex_convert(tok, &dev, 0xff) )
+-                    goto parse_error;
+-                tok = ptr + 1;
+-            }
+-            break;
+-        case STATE_FUNC:
+-            if ( *ptr == '\0' || *ptr == '@' || *ptr == ',' ) {
+-                switch( *ptr ) {
+-                case '\0':
+-                    state = STATE_TERMINAL;
+-                    break;
+-                case '@':
+-                    state = STATE_VSLOT;
+-                    break;
+-                case ',':
+-                    state = STATE_OPTIONS_K;
+-                    break;
+-                }
+-                *ptr = '\0';
+-                if ( !strcmp(tok, "*") ) {
+-                    pci->vfunc_mask = LIBXL_PCI_FUNC_ALL;
+-                }else{
+-                    if ( hex_convert(tok, &func, 0x7) )
+-                        goto parse_error;
+-                    pci->vfunc_mask = (1 << 0);
+-                }
+-                tok = ptr + 1;
+-            }
+-            break;
+-        case STATE_VSLOT:
+-            if ( *ptr == '\0' || *ptr == ',' ) {
+-                state = ( *ptr == ',' ) ? STATE_OPTIONS_K : STATE_TERMINAL;
+-                *ptr = '\0';
+-                if ( hex_convert(tok, &vslot, 0xff) )
+-                    goto parse_error;
+-                tok = ptr + 1;
+-            }
+-            break;
+-        case STATE_OPTIONS_K:
+-            if ( *ptr == '=' ) {
+-                state = STATE_OPTIONS_V;
+-                *ptr = '\0';
+-                optkey = tok;
+-                tok = ptr + 1;
+-            }
+-            break;
+-        case STATE_OPTIONS_V:
+-            if ( *ptr == ',' || *ptr == '\0' ) {
+-                state = (*ptr == ',') ? STATE_OPTIONS_K : STATE_TERMINAL;
+-                *ptr = '\0';
+-                if ( !strcmp(optkey, "msitranslate") ) {
+-                    pci->msitranslate = atoi(tok);
+-                }else if ( !strcmp(optkey, "power_mgmt") ) {
+-                    pci->power_mgmt = atoi(tok);
+-                }else if ( !strcmp(optkey, "permissive") ) {
+-                    pci->permissive = atoi(tok);
+-                }else if ( !strcmp(optkey, "seize") ) {
+-                    pci->seize = atoi(tok);
+-                } else if (!strcmp(optkey, "rdm_policy")) {
+-                    if (!strcmp(tok, "strict")) {
+-                        pci->rdm_policy = LIBXL_RDM_RESERVE_POLICY_STRICT;
+-                    } else if (!strcmp(tok, "relaxed")) {
+-                        pci->rdm_policy = LIBXL_RDM_RESERVE_POLICY_RELAXED;
+-                    } else {
+-                        XLU__PCI_ERR(cfg, "%s is not an valid PCI RDM property"
+-                                          " policy: 'strict' or 'relaxed'.",
+-                                     tok);
+-                        goto parse_error;
+-                    }
+-                } else {
+-                    XLU__PCI_ERR(cfg, "Unknown PCI BDF option: %s", optkey);
+-                }
+-                tok = ptr + 1;
+-            }
+-        default:
+-            break;
++    str = ++ptr; /* skip '=' */
++    while (*ptr != ',' && *ptr != '\0')
++        ptr++;
++
++    val = strndup(str, ptr - str);
++    if (!val) {
++        free(key);
++        return ERROR_NOMEM;
++    }
++
++    if (*ptr == ',')
++        ptr++;
++
++    *keyp = key;
++    *valp = val;
++    *endp = ptr;
++
++    return 0;
++}
++
++static int parse_rdm_policy(XLU_Config *cfg, libxl_rdm_reserve_policy *policy,
++                            const char *str)
++{
++    int ret = libxl_rdm_reserve_policy_from_string(str, policy);
++
++    if (ret)
++        XLU__PCI_ERR(cfg, "Unknown RDM policy: %s", str);
++
++    return ret;
++}
++
++int xlu_pci_parse_bdf(XLU_Config *cfg, libxl_pci_bdf *bdf, const char *str)
++{
++    return parse_bdf(bdf, NULL, str, NULL);
++}
++
++int xlu_pci_parse_spec_string(XLU_Config *cfg, libxl_device_pci *pcidev,
++                              const char *str)
++{
++    const char *ptr = str;
++    bool bdf_present = false;
++    int ret;
++
++    /* Attempt to parse 'bdf' as positional parameter */
++    ret = parse_bdf(&pcidev->bdf, &pcidev->vfunc_mask, ptr, &ptr);
++    if (!ret) {
++        bdf_present = true;
++
++        /* Check whether 'vslot' if present */
++        if (*ptr == '@') {
++            ret = parse_vslot(&pcidev->vdevfn, ++ptr, &ptr);
++            if (ret)
++                return ret;
+         }
++        if (*ptr == ',')
++            ptr++;
++        else if (*ptr != '\0')
++            return ERROR_INVAL;
+     }
+ 
+-    if ( tok != ptr || state != STATE_TERMINAL )
+-        goto parse_error;
++    /* Parse the rest as 'key=val' pairs */
++    while (*ptr != '\0') {
++        char *key, *val;
+ 
+-    assert(dom != INVALID && bus != INVALID && dev != INVALID && func != INVALID);
++        ret = parse_key_val(&key, &val, ptr, &ptr);
++        if (ret)
++            return ret;
+ 
+-    /* Just a pretty way to fill in the values */
+-    pci_struct_fill(pci, dom, bus, dev, func, vslot << 3);
++        if (!strcmp(key, "bdf")) {
++            ret = parse_bdf(&pcidev->bdf, &pcidev->vfunc_mask, val, NULL);
++            bdf_present = !ret;
++        } else if (!strcmp(key, "vslot")) {
++            ret = parse_vslot(&pcidev->vdevfn, val, NULL);
++        } else if (!strcmp(key, "permissive")) {
++            pcidev->permissive = atoi(val);
++        } else if (!strcmp(key, "msitranslate")) {
++            pcidev->msitranslate = atoi(val);
++        } else if (!strcmp(key, "seize")) {
++            pcidev->seize= atoi(val);
++        } else if (!strcmp(key, "power_mgmt")) {
++            pcidev->power_mgmt = atoi(val);
++        } else if (!strcmp(key, "rdm_policy")) {
++            ret = parse_rdm_policy(cfg, &pcidev->rdm_policy, val);
++        } else {
++            XLU__PCI_ERR(cfg, "Unknown PCI_SPEC_STRING option: %s", key);
++            ret = ERROR_INVAL;
++        }
+ 
+-    free(buf2);
++        free(key);
++        free(val);
+ 
+-    return 0;
++        if (ret)
++            return ret;
++    }
+ 
+-parse_error:
+-    free(buf2);
+-    return ERROR_INVAL;
++    if (!bdf_present)
++        return ERROR_INVAL;
++
++    return 0;
+ }
+ 
+ int xlu_rdm_parse(XLU_Config *cfg, libxl_rdm_reserve *rdm, const char *str)
+ {
++#define STATE_TYPE           0
++#define STATE_RDM_STRATEGY   1
++#define STATE_RESERVE_POLICY 2
++#define STATE_TERMINAL       3
++
+     unsigned state = STATE_TYPE;
+     char *buf2, *tok, *ptr, *end;
+ 
+@@ -227,15 +257,8 @@ int xlu_rdm_parse(XLU_Config *cfg, libxl_rdm_reserve *rdm, const char *str)
+             if (*ptr == ',' || *ptr == '\0') {
+                 state = *ptr == ',' ? STATE_TYPE : STATE_TERMINAL;
+                 *ptr = '\0';
+-                if (!strcmp(tok, "strict")) {
+-                    rdm->policy = LIBXL_RDM_RESERVE_POLICY_STRICT;
+-                } else if (!strcmp(tok, "relaxed")) {
+-                    rdm->policy = LIBXL_RDM_RESERVE_POLICY_RELAXED;
+-                } else {
+-                    XLU__PCI_ERR(cfg, "Unknown RDM property policy value: %s",
+-                                 tok);
++                if (!parse_rdm_policy(cfg, &rdm->policy, tok))
+                     goto parse_error;
+-                }
+                 tok = ptr + 1;
+             }
+         default:
+@@ -253,6 +276,11 @@ int xlu_rdm_parse(XLU_Config *cfg, libxl_rdm_reserve *rdm, const char *str)
+ parse_error:
+     free(buf2);
+     return ERROR_INVAL;
++
++#undef STATE_TYPE
++#undef STATE_RDM_STRATEGY
++#undef STATE_RESERVE_POLICY
++#undef STATE_TERMINAL
+ }
+ 
+ /*
+diff --git a/tools/xl/xl_cmdtable.c b/tools/xl/xl_cmdtable.c
+index 7da6c1b927..2ee0c49673 100644
+--- a/tools/xl/xl_cmdtable.c
++++ b/tools/xl/xl_cmdtable.c
+@@ -90,12 +90,12 @@ struct cmd_spec cmd_table[] = {
+     { "pci-attach",
+       &main_pciattach, 0, 1,
+       "Insert a new pass-through pci device",
+-      "<Domain> <BDF> [Virtual Slot]",
++      "<Domain> <PCI_SPEC_STRING>",
+     },
+     { "pci-detach",
+       &main_pcidetach, 0, 1,
+       "Remove a domain's pass-through pci device",
+-      "<Domain> <BDF>",
++      "<Domain> <PCI_SPEC_STRING>",
+     },
+     { "pci-list",
+       &main_pcilist, 0, 0,
+diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
+index 0765780d9f..6a4703e745 100644
+--- a/tools/xl/xl_parse.c
++++ b/tools/xl/xl_parse.c
+@@ -1487,10 +1487,10 @@ void parse_config_data(const char *config_source,
+              * the global policy by default.
+              */
+             pci->rdm_policy = b_info->u.hvm.rdm.policy;
+-            e = xlu_pci_parse_bdf(config, pci, buf);
++            e = xlu_pci_parse_spec_string(config, pci, buf);
+             if (e) {
+                 fprintf(stderr,
+-                        "unable to parse PCI BDF `%s' for passthrough\n",
++                        "unable to parse PCI_SPEC_STRING `%s' for passthrough\n",
+                         buf);
+                 exit(-e);
+             }
 diff --git a/tools/xl/xl_pci.c b/tools/xl/xl_pci.c
-index 34fcf5a4fa..7c0f102ac7 100644
+index b6dc7c2840..9c24496cb2 100644
 --- a/tools/xl/xl_pci.c
 +++ b/tools/xl/xl_pci.c
-@@ -35,9 +35,8 @@ static void pcilist(uint32_t domid)
-         printf("%02x.%01x %04x:%02x:%02x.%01x\n",
-                (pcis[i].vdevfn >> 3) & 0x1f, pcis[i].vdevfn & 0x7,
-                pcis[i].domain, pcis[i].bus, pcis[i].dev, pcis[i].func);
--        libxl_device_pci_dispose(&pcis[i]);
-     }
--    free(pcis);
-+    libxl_device_pci_list_free(pcis, num);
+@@ -55,7 +55,7 @@ int main_pcilist(int argc, char **argv)
+     return 0;
  }
  
- int main_pcilist(int argc, char **argv)
+-static int pcidetach(uint32_t domid, const char *bdf, int force)
++static int pcidetach(uint32_t domid, const char *spec_string, int force)
+ {
+     libxl_device_pci pci;
+     XLU_Config *config;
+@@ -66,8 +66,9 @@ static int pcidetach(uint32_t domid, const char *bdf, int force)
+     config = xlu_cfg_init(stderr, "command line");
+     if (!config) { perror("xlu_cfg_inig"); exit(-1); }
+ 
+-    if (xlu_pci_parse_bdf(config, &pci, bdf)) {
+-        fprintf(stderr, "pci-detach: malformed BDF specification \"%s\"\n", bdf);
++    if (xlu_pci_parse_spec_string(config, &pci, spec_string)) {
++        fprintf(stderr, "pci-detach: malformed PCI_SPEC_STRING \"%s\"\n",
++                spec_string);
+         exit(2);
+     }
+     if (force) {
+@@ -89,7 +90,7 @@ int main_pcidetach(int argc, char **argv)
+     uint32_t domid;
+     int opt;
+     int force = 0;
+-    const char *bdf = NULL;
++    const char *spec_string = NULL;
+ 
+     SWITCH_FOREACH_OPT(opt, "f", NULL, "pci-detach", 2) {
+     case 'f':
+@@ -98,15 +99,15 @@ int main_pcidetach(int argc, char **argv)
+     }
+ 
+     domid = find_domain(argv[optind]);
+-    bdf = argv[optind + 1];
++    spec_string = argv[optind + 1];
+ 
+-    if (pcidetach(domid, bdf, force))
++    if (pcidetach(domid, spec_string, force))
+         return EXIT_FAILURE;
+ 
+     return EXIT_SUCCESS;
+ }
+ 
+-static int pciattach(uint32_t domid, const char *bdf, const char *vs)
++static int pciattach(uint32_t domid, const char *spec_string)
+ {
+     libxl_device_pci pci;
+     XLU_Config *config;
+@@ -117,8 +118,9 @@ static int pciattach(uint32_t domid, const char *bdf, const char *vs)
+     config = xlu_cfg_init(stderr, "command line");
+     if (!config) { perror("xlu_cfg_inig"); exit(-1); }
+ 
+-    if (xlu_pci_parse_bdf(config, &pci, bdf)) {
+-        fprintf(stderr, "pci-attach: malformed BDF specification \"%s\"\n", bdf);
++    if (xlu_pci_parse_spec_string(config, &pci, spec_string)) {
++        fprintf(stderr, "pci-attach: malformed PCI_SPEC_STRING \"%s\"\n",
++                spec_string);
+         exit(2);
+     }
+ 
+@@ -135,19 +137,16 @@ int main_pciattach(int argc, char **argv)
+ {
+     uint32_t domid;
+     int opt;
+-    const char *bdf = NULL, *vs = NULL;
++    const char *spec_string = NULL;
+ 
+     SWITCH_FOREACH_OPT(opt, "", NULL, "pci-attach", 2) {
+         /* No options */
+     }
+ 
+     domid = find_domain(argv[optind]);
+-    bdf = argv[optind + 1];
+-
+-    if (optind + 1 < argc)
+-        vs = argv[optind + 2];
++    spec_string = argv[optind + 1];
+ 
+-    if (pciattach(domid, bdf, vs))
++    if (pciattach(domid, spec_string))
+         return EXIT_FAILURE;
+ 
+     return EXIT_SUCCESS;
+@@ -193,8 +192,8 @@ static int pciassignable_add(const char *bdf, int rebind)
+     config = xlu_cfg_init(stderr, "command line");
+     if (!config) { perror("xlu_cfg_init"); exit(-1); }
+ 
+-    if (xlu_pci_parse_bdf(config, &pci, bdf)) {
+-        fprintf(stderr, "pci-assignable-add: malformed BDF specification \"%s\"\n", bdf);
++    if (xlu_pci_parse_bdf(config, &pci.bdf, bdf)) {
++        fprintf(stderr, "pci-assignable-add: malformed BDF \"%s\"\n", bdf);
+         exit(2);
+     }
+ 
+@@ -235,8 +234,8 @@ static int pciassignable_remove(const char *bdf, int rebind)
+     config = xlu_cfg_init(stderr, "command line");
+     if (!config) { perror("xlu_cfg_init"); exit(-1); }
+ 
+-    if (xlu_pci_parse_bdf(config, &pci, bdf)) {
+-        fprintf(stderr, "pci-assignable-remove: malformed BDF specification \"%s\"\n", bdf);
++    if (xlu_pci_parse_bdf(config, &pci.bdf, bdf)) {
++        fprintf(stderr, "pci-assignable-remove: malformed BDF \"%s\"\n", bdf);
+         exit(2);
+     }
+ 
 -- 
 2.11.0
 
