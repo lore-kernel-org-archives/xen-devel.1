@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DD1D8C63798
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:40:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0FC12C2D0E4
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:40:31 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6E23120782
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:40:28 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id A43E82083E
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:40:30 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="iuyrZ6v9"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6E23120782
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="Ea+9q0/5"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A43E82083E
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.36126.67908 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.36131.67957 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khYYJ-0004IP-G6; Tue, 24 Nov 2020 13:40:15 +0000
+	id 1khYYM-0004Pf-9S; Tue, 24 Nov 2020 13:40:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 36126.67908; Tue, 24 Nov 2020 13:40:15 +0000
+Received: by outflank-mailman (output) from mailman id 36131.67957; Tue, 24 Nov 2020 13:40:18 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khYYJ-0004IF-7s; Tue, 24 Nov 2020 13:40:15 +0000
-Received: by outflank-mailman (input) for mailman id 36126;
- Tue, 24 Nov 2020 13:40:13 +0000
+	id 1khYYL-0004P4-Ph; Tue, 24 Nov 2020 13:40:17 +0000
+Received: by outflank-mailman (input) for mailman id 36131;
+ Tue, 24 Nov 2020 13:40:15 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=daQ6=E6=casper.srs.infradead.org=batv+cbe268a5dfa7b983a02e+6302+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1khYOI-0000Qf-3K
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:29:54 +0000
+ id 1khYOh-0000Qf-3x
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:30:19 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 162c60c4-ba10-400e-9e62-6205e806d74c;
- Tue, 24 Nov 2020 13:28:43 +0000 (UTC)
+ id bb682eb6-e81b-4fab-9c78-d20579156464;
+ Tue, 24 Nov 2020 13:28:48 +0000 (UTC)
 Received: from [2001:4bb8:180:5443:c70:4a89:bc61:3] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1khYMf-0006WP-Qt; Tue, 24 Nov 2020 13:28:14 +0000
+ id 1khYMx-0006bA-OT; Tue, 24 Nov 2020 13:28:32 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=daQ6=E6=casper.srs.infradead.org=batv+cbe268a5dfa7b983a02e+6302+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1khYOI-0000Qf-3K
-	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:29:54 +0000
-X-Inumbo-ID: 162c60c4-ba10-400e-9e62-6205e806d74c
+	id 1khYOh-0000Qf-3x
+	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:30:19 +0000
+X-Inumbo-ID: bb682eb6-e81b-4fab-9c78-d20579156464
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 162c60c4-ba10-400e-9e62-6205e806d74c;
-	Tue, 24 Nov 2020 13:28:43 +0000 (UTC)
+	id bb682eb6-e81b-4fab-9c78-d20579156464;
+	Tue, 24 Nov 2020 13:28:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=1wdTghj4fAZYDMEoMIijyWaUffoUw73Ru2rPfTzIwgc=; b=iuyrZ6v9lOV+HmLY++2sL1Tphw
-	RstNxNQbVHznNk65hqoXvXwyS2SxZeKCbg82rqAa4OoHom6hfCotYBQDqYAWw1z7h2qe5AtwL40YH
-	pBWGQVEI8t2986Trhrw4ARuUf+uIC6KWaSH3uNwAKDcQFYZw/3SW7lDafQ8OOn0HUoOncreV3btKH
-	ODAv7ImyQoKl/hMu3FGvOWhHWdbWS5MKSe/MRvcGAShE6UQB/FLHFc9L49FARzuarAUj6Qb7J9kUo
-	goEygVbNrIrONzqSmE36MDIEQOQwyxFUA0fjky85vXz+mIOI+RNIu5gA2ev77SpfiLP3LSaTl5ArA
-	qhnIJE8w==;
+	bh=Mhpy0Cb59wkbzThtZwDnrbLXD1rWczYtJDTvhh8SMU0=; b=Ea+9q0/5U1C3lxpYG+cp8W8+yq
+	HDJXNs1xkR6d5Q3Tqe8DzJMoqEQ7/6jzh7BdzDFOCgM6eJtZ/NdJBDr4wa1fg4oXr74Y5kroSq79K
+	VzT26zUATIM8C+jMZIcZTGU/6xcbiiu6NMExdkpxZExa8l29GhQ0Qte1UYrKyFBP9keFbOOHO8Do8
+	pg6wptGVpopV7o1YV4zwjSA2vi6DqZrN+W1PPJvGBKFgFYLTf6Hhc/xGBLAwEP1JaP8w6JU559eQE
+	bqw7WPqgNie7PhEXK192YC8HvtakiLkYEPYmuhZflhhpqi33qULhu7LUJVG5R4zXadf40txQOM3eh
+	EzrjvHUQ==;
 Received: from [2001:4bb8:180:5443:c70:4a89:bc61:3] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1khYMf-0006WP-Qt; Tue, 24 Nov 2020 13:28:14 +0000
+	id 1khYMx-0006bA-OT; Tue, 24 Nov 2020 13:28:32 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Tejun Heo <tj@kernel.org>,
@@ -95,9 +95,9 @@ Cc: Tejun Heo <tj@kernel.org>,
 	linux-mtd@lists.infradead.org,
 	linux-fsdevel@vger.kernel.org,
 	linux-mm@kvack.org
-Subject: [PATCH 13/45] block: add a bdev_kobj helper
-Date: Tue, 24 Nov 2020 14:27:19 +0100
-Message-Id: <20201124132751.3747337-14-hch@lst.de>
+Subject: [PATCH 24/45] blk-cgroup: stop abusing get_gendisk
+Date: Tue, 24 Nov 2020 14:27:30 +0100
+Message-Id: <20201124132751.3747337-25-hch@lst.de>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20201124132751.3747337-1-hch@lst.de>
 References: <20201124132751.3747337-1-hch@lst.de>
@@ -105,153 +105,247 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-Add a little helper to find the kobject for a struct block_device.
+Properly open the device instead of relying on deep internals by
+using get_gendisk.  Note that this uses FMODE_NDELAY without either
+FMODE_READ or FMODE_WRITE, which is a special open mode to allow
+for opening without media access, thus avoiding unexpexted interactions
+especially on removable media.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
-Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Reviewed-by: Jan Kara <jack@suse.cz>
-Reviewed-by: Johannes Thumshirn <johannes.thumshirn@wdc.com>
 ---
- drivers/md/bcache/super.c |  7 ++-----
- drivers/md/md.c           |  4 +---
- fs/block_dev.c            |  6 +++---
- fs/btrfs/sysfs.c          | 15 +++------------
- include/linux/blk_types.h |  3 +++
- 5 files changed, 12 insertions(+), 23 deletions(-)
+ block/blk-cgroup.c         | 42 +++++++++++++++++++-------------------
+ block/blk-iocost.c         | 36 ++++++++++++++++----------------
+ include/linux/blk-cgroup.h |  4 ++--
+ 3 files changed, 41 insertions(+), 41 deletions(-)
 
-diff --git a/drivers/md/bcache/super.c b/drivers/md/bcache/super.c
-index 46a00134a36ae1..a6a5e21e4fd136 100644
---- a/drivers/md/bcache/super.c
-+++ b/drivers/md/bcache/super.c
-@@ -1447,8 +1447,7 @@ static int register_bdev(struct cache_sb *sb, struct cache_sb_disk *sb_disk,
- 		goto err;
+diff --git a/block/blk-cgroup.c b/block/blk-cgroup.c
+index 54fbe1e80cc41a..23437b96ea41e6 100644
+--- a/block/blk-cgroup.c
++++ b/block/blk-cgroup.c
+@@ -556,22 +556,22 @@ static struct blkcg_gq *blkg_lookup_check(struct blkcg *blkcg,
+ }
  
- 	err = "error creating kobject";
--	if (kobject_add(&dc->disk.kobj, &part_to_dev(bdev->bd_part)->kobj,
--			"bcache"))
-+	if (kobject_add(&dc->disk.kobj, bdev_kobj(bdev), "bcache"))
- 		goto err;
- 	if (bch_cache_accounting_add_kobjs(&dc->accounting, &dc->disk.kobj))
- 		goto err;
-@@ -2342,9 +2341,7 @@ static int register_cache(struct cache_sb *sb, struct cache_sb_disk *sb_disk,
- 		goto err;
+ /**
+- * blkg_conf_prep - parse and prepare for per-blkg config update
++ * blkcg_conf_open_bdev - parse and open bdev for per-blkg config update
+  * @inputp: input string pointer
+  *
+  * Parse the device node prefix part, MAJ:MIN, of per-blkg config update
+- * from @input and get and return the matching gendisk.  *@inputp is
++ * from @input and get and return the matching bdev.  *@inputp is
+  * updated to point past the device node prefix.  Returns an ERR_PTR()
+  * value on error.
+  *
+  * Use this function iff blkg_conf_prep() can't be used for some reason.
+  */
+-struct gendisk *blkcg_conf_get_disk(char **inputp)
++struct block_device *blkcg_conf_open_bdev(char **inputp)
+ {
+ 	char *input = *inputp;
+ 	unsigned int major, minor;
+-	struct gendisk *disk;
+-	int key_len, part;
++	struct block_device *bdev;
++	int key_len;
+ 
+ 	if (sscanf(input, "%u:%u%n", &major, &minor, &key_len) != 2)
+ 		return ERR_PTR(-EINVAL);
+@@ -581,16 +581,16 @@ struct gendisk *blkcg_conf_get_disk(char **inputp)
+ 		return ERR_PTR(-EINVAL);
+ 	input = skip_spaces(input);
+ 
+-	disk = get_gendisk(MKDEV(major, minor), &part);
+-	if (!disk)
++	bdev = blkdev_get_by_dev(MKDEV(major, minor), FMODE_NDELAY, NULL);
++	if (!bdev)
+ 		return ERR_PTR(-ENODEV);
+-	if (part) {
+-		put_disk_and_module(disk);
++	if (bdev_is_partition(bdev)) {
++		blkdev_put(bdev, FMODE_NDELAY);
+ 		return ERR_PTR(-ENODEV);
  	}
  
--	if (kobject_add(&ca->kobj,
--			&part_to_dev(bdev->bd_part)->kobj,
--			"bcache")) {
-+	if (kobject_add(&ca->kobj, bdev_kobj(bdev), "bcache")) {
- 		err = "error calling kobject_add";
- 		ret = -ENOMEM;
- 		goto out;
-diff --git a/drivers/md/md.c b/drivers/md/md.c
-index b2edf5e0f965b5..7ce6047c856ea2 100644
---- a/drivers/md/md.c
-+++ b/drivers/md/md.c
-@@ -2414,7 +2414,6 @@ EXPORT_SYMBOL(md_integrity_add_rdev);
- static int bind_rdev_to_array(struct md_rdev *rdev, struct mddev *mddev)
+ 	*inputp = input;
+-	return disk;
++	return bdev;
+ }
+ 
+ /**
+@@ -607,18 +607,18 @@ struct gendisk *blkcg_conf_get_disk(char **inputp)
+  */
+ int blkg_conf_prep(struct blkcg *blkcg, const struct blkcg_policy *pol,
+ 		   char *input, struct blkg_conf_ctx *ctx)
+-	__acquires(rcu) __acquires(&disk->queue->queue_lock)
++	__acquires(rcu) __acquires(&bdev->bd_disk->queue->queue_lock)
  {
- 	char b[BDEVNAME_SIZE];
--	struct kobject *ko;
- 	int err;
+-	struct gendisk *disk;
++	struct block_device *bdev;
+ 	struct request_queue *q;
+ 	struct blkcg_gq *blkg;
+ 	int ret;
  
- 	/* prevent duplicates */
-@@ -2477,9 +2476,8 @@ static int bind_rdev_to_array(struct md_rdev *rdev, struct mddev *mddev)
- 	if ((err = kobject_add(&rdev->kobj, &mddev->kobj, "dev-%s", b)))
- 		goto fail;
+-	disk = blkcg_conf_get_disk(&input);
+-	if (IS_ERR(disk))
+-		return PTR_ERR(disk);
++	bdev = blkcg_conf_open_bdev(&input);
++	if (IS_ERR(bdev))
++		return PTR_ERR(bdev);
  
--	ko = &part_to_dev(rdev->bdev->bd_part)->kobj;
- 	/* failure here is OK */
--	err = sysfs_create_link(&rdev->kobj, ko, "block");
-+	err = sysfs_create_link(&rdev->kobj, bdev_kobj(rdev->bdev), "block");
- 	rdev->sysfs_state = sysfs_get_dirent_safe(rdev->kobj.sd, "state");
- 	rdev->sysfs_unack_badblocks =
- 		sysfs_get_dirent_safe(rdev->kobj.sd, "unacknowledged_bad_blocks");
-diff --git a/fs/block_dev.c b/fs/block_dev.c
-index 60492620d51866..f6a2a06ad262fa 100644
---- a/fs/block_dev.c
-+++ b/fs/block_dev.c
-@@ -1242,7 +1242,7 @@ int bd_link_disk_holder(struct block_device *bdev, struct gendisk *disk)
- 	holder->disk = disk;
- 	holder->refcnt = 1;
+-	q = disk->queue;
++	q = bdev->bd_disk->queue;
  
--	ret = add_symlink(disk->slave_dir, &part_to_dev(bdev->bd_part)->kobj);
-+	ret = add_symlink(disk->slave_dir, bdev_kobj(bdev));
- 	if (ret)
- 		goto out_free;
- 
-@@ -1259,7 +1259,7 @@ int bd_link_disk_holder(struct block_device *bdev, struct gendisk *disk)
- 	goto out_unlock;
- 
- out_del:
--	del_symlink(disk->slave_dir, &part_to_dev(bdev->bd_part)->kobj);
-+	del_symlink(disk->slave_dir, bdev_kobj(bdev));
- out_free:
- 	kfree(holder);
- out_unlock:
-@@ -1287,7 +1287,7 @@ void bd_unlink_disk_holder(struct block_device *bdev, struct gendisk *disk)
- 	holder = bd_find_holder_disk(bdev, disk);
- 
- 	if (!WARN_ON_ONCE(holder == NULL) && !--holder->refcnt) {
--		del_symlink(disk->slave_dir, &part_to_dev(bdev->bd_part)->kobj);
-+		del_symlink(disk->slave_dir, bdev_kobj(bdev));
- 		del_symlink(bdev->bd_part->holder_dir,
- 			    &disk_to_dev(disk)->kobj);
- 		kobject_put(bdev->bd_part->holder_dir);
-diff --git a/fs/btrfs/sysfs.c b/fs/btrfs/sysfs.c
-index 279d9262b676d4..24b6c6dc69000a 100644
---- a/fs/btrfs/sysfs.c
-+++ b/fs/btrfs/sysfs.c
-@@ -1232,8 +1232,6 @@ int btrfs_sysfs_add_space_info_type(struct btrfs_fs_info *fs_info,
- 
- void btrfs_sysfs_remove_device(struct btrfs_device *device)
- {
--	struct hd_struct *disk;
--	struct kobject *disk_kobj;
- 	struct kobject *devices_kobj;
- 
+ 	rcu_read_lock();
+ 	spin_lock_irq(&q->queue_lock);
+@@ -689,7 +689,7 @@ int blkg_conf_prep(struct blkcg *blkcg, const struct blkcg_policy *pol,
+ 			goto success;
+ 	}
+ success:
+-	ctx->disk = disk;
++	ctx->bdev = bdev;
+ 	ctx->blkg = blkg;
+ 	ctx->body = input;
+ 	return 0;
+@@ -700,7 +700,7 @@ int blkg_conf_prep(struct blkcg *blkcg, const struct blkcg_policy *pol,
+ 	spin_unlock_irq(&q->queue_lock);
+ 	rcu_read_unlock();
+ fail:
+-	put_disk_and_module(disk);
++	blkdev_put(bdev, FMODE_NDELAY);
  	/*
-@@ -1243,11 +1241,8 @@ void btrfs_sysfs_remove_device(struct btrfs_device *device)
- 	devices_kobj = device->fs_info->fs_devices->devices_kobj;
- 	ASSERT(devices_kobj);
+ 	 * If queue was bypassing, we should retry.  Do so after a
+ 	 * short msleep().  It isn't strictly necessary but queue
+@@ -723,11 +723,11 @@ EXPORT_SYMBOL_GPL(blkg_conf_prep);
+  * with blkg_conf_prep().
+  */
+ void blkg_conf_finish(struct blkg_conf_ctx *ctx)
+-	__releases(&ctx->disk->queue->queue_lock) __releases(rcu)
++	__releases(&ctx->bdev->bd_disk->queue->queue_lock) __releases(rcu)
+ {
+-	spin_unlock_irq(&ctx->disk->queue->queue_lock);
++	spin_unlock_irq(&ctx->bdev->bd_disk->queue->queue_lock);
+ 	rcu_read_unlock();
+-	put_disk_and_module(ctx->disk);
++	blkdev_put(ctx->bdev, FMODE_NDELAY);
+ }
+ EXPORT_SYMBOL_GPL(blkg_conf_finish);
  
--	if (device->bdev) {
--		disk = device->bdev->bd_part;
--		disk_kobj = &part_to_dev(disk)->kobj;
--		sysfs_remove_link(devices_kobj, disk_kobj->name);
--	}
-+	if (device->bdev)
-+		sysfs_remove_link(devices_kobj, bdev_kobj(device->bdev)->name);
+diff --git a/block/blk-iocost.c b/block/blk-iocost.c
+index bbe86d1199dc5b..9f219718e9813c 100644
+--- a/block/blk-iocost.c
++++ b/block/blk-iocost.c
+@@ -3120,23 +3120,23 @@ static const match_table_t qos_tokens = {
+ static ssize_t ioc_qos_write(struct kernfs_open_file *of, char *input,
+ 			     size_t nbytes, loff_t off)
+ {
+-	struct gendisk *disk;
++	struct block_device *bdev;
+ 	struct ioc *ioc;
+ 	u32 qos[NR_QOS_PARAMS];
+ 	bool enable, user;
+ 	char *p;
+ 	int ret;
  
- 	if (device->devid_kobj.state_initialized) {
- 		kobject_del(&device->devid_kobj);
-@@ -1353,11 +1348,7 @@ int btrfs_sysfs_add_device(struct btrfs_device *device)
- 	nofs_flag = memalloc_nofs_save();
+-	disk = blkcg_conf_get_disk(&input);
+-	if (IS_ERR(disk))
+-		return PTR_ERR(disk);
++	bdev = blkcg_conf_open_bdev(&input);
++	if (IS_ERR(bdev))
++		return PTR_ERR(bdev);
  
- 	if (device->bdev) {
--		struct hd_struct *disk;
--		struct kobject *disk_kobj;
--
--		disk = device->bdev->bd_part;
--		disk_kobj = &part_to_dev(disk)->kobj;
-+		struct kobject *disk_kobj = bdev_kobj(device->bdev);
+-	ioc = q_to_ioc(disk->queue);
++	ioc = q_to_ioc(bdev->bd_disk->queue);
+ 	if (!ioc) {
+-		ret = blk_iocost_init(disk->queue);
++		ret = blk_iocost_init(bdev->bd_disk->queue);
+ 		if (ret)
+ 			goto err;
+-		ioc = q_to_ioc(disk->queue);
++		ioc = q_to_ioc(bdev->bd_disk->queue);
+ 	}
  
- 		ret = sysfs_create_link(devices_kobj, disk_kobj, disk_kobj->name);
- 		if (ret) {
-diff --git a/include/linux/blk_types.h b/include/linux/blk_types.h
-index ebfb4e7c1fd125..9698f459cc65c9 100644
---- a/include/linux/blk_types.h
-+++ b/include/linux/blk_types.h
-@@ -49,6 +49,9 @@ struct block_device {
- 	struct super_block	*bd_fsfreeze_sb;
- } __randomize_layout;
+ 	spin_lock_irq(&ioc->lock);
+@@ -3231,12 +3231,12 @@ static ssize_t ioc_qos_write(struct kernfs_open_file *of, char *input,
+ 	ioc_refresh_params(ioc, true);
+ 	spin_unlock_irq(&ioc->lock);
  
-+#define bdev_kobj(_bdev) \
-+	(&part_to_dev((_bdev)->bd_part)->kobj)
-+
- /*
-  * Block error status values.  See block/blk-core:blk_errors for the details.
-  * Alpha cannot write a byte atomically, so we need to use 32-bit value.
+-	put_disk_and_module(disk);
++	blkdev_put(bdev, FMODE_NDELAY);
+ 	return nbytes;
+ einval:
+ 	ret = -EINVAL;
+ err:
+-	put_disk_and_module(disk);
++	blkdev_put(bdev, FMODE_NDELAY);
+ 	return ret;
+ }
+ 
+@@ -3287,23 +3287,23 @@ static const match_table_t i_lcoef_tokens = {
+ static ssize_t ioc_cost_model_write(struct kernfs_open_file *of, char *input,
+ 				    size_t nbytes, loff_t off)
+ {
+-	struct gendisk *disk;
++	struct block_device *bdev;
+ 	struct ioc *ioc;
+ 	u64 u[NR_I_LCOEFS];
+ 	bool user;
+ 	char *p;
+ 	int ret;
+ 
+-	disk = blkcg_conf_get_disk(&input);
+-	if (IS_ERR(disk))
+-		return PTR_ERR(disk);
++	bdev = blkcg_conf_open_bdev(&input);
++	if (IS_ERR(bdev))
++		return PTR_ERR(bdev);
+ 
+-	ioc = q_to_ioc(disk->queue);
++	ioc = q_to_ioc(bdev->bd_disk->queue);
+ 	if (!ioc) {
+-		ret = blk_iocost_init(disk->queue);
++		ret = blk_iocost_init(bdev->bd_disk->queue);
+ 		if (ret)
+ 			goto err;
+-		ioc = q_to_ioc(disk->queue);
++		ioc = q_to_ioc(bdev->bd_disk->queue);
+ 	}
+ 
+ 	spin_lock_irq(&ioc->lock);
+@@ -3356,13 +3356,13 @@ static ssize_t ioc_cost_model_write(struct kernfs_open_file *of, char *input,
+ 	ioc_refresh_params(ioc, true);
+ 	spin_unlock_irq(&ioc->lock);
+ 
+-	put_disk_and_module(disk);
++	blkdev_put(bdev, FMODE_NDELAY);
+ 	return nbytes;
+ 
+ einval:
+ 	ret = -EINVAL;
+ err:
+-	put_disk_and_module(disk);
++	blkdev_put(bdev, FMODE_NDELAY);
+ 	return ret;
+ }
+ 
+diff --git a/include/linux/blk-cgroup.h b/include/linux/blk-cgroup.h
+index c8fc9792ac776d..b9f3c246c3c908 100644
+--- a/include/linux/blk-cgroup.h
++++ b/include/linux/blk-cgroup.h
+@@ -197,12 +197,12 @@ void blkcg_print_blkgs(struct seq_file *sf, struct blkcg *blkcg,
+ u64 __blkg_prfill_u64(struct seq_file *sf, struct blkg_policy_data *pd, u64 v);
+ 
+ struct blkg_conf_ctx {
+-	struct gendisk			*disk;
++	struct block_device		*bdev;
+ 	struct blkcg_gq			*blkg;
+ 	char				*body;
+ };
+ 
+-struct gendisk *blkcg_conf_get_disk(char **inputp);
++struct block_device *blkcg_conf_open_bdev(char **inputp);
+ int blkg_conf_prep(struct blkcg *blkcg, const struct blkcg_policy *pol,
+ 		   char *input, struct blkg_conf_ctx *ctx);
+ void blkg_conf_finish(struct blkg_conf_ctx *ctx);
 -- 
 2.29.2
 
