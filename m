@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 945F5C825A7
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:29:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B190DC825AE
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:29:53 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2B98D204EC
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:29:52 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 4B424204EC
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:29:53 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="JPuFDbn3"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2B98D204EC
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="T0mbtous"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4B424204EC
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.36042.67781 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.36043.67791 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khYO6-0001VP-AU; Tue, 24 Nov 2020 13:29:42 +0000
+	id 1khYO6-0001W5-Ot; Tue, 24 Nov 2020 13:29:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 36042.67781; Tue, 24 Nov 2020 13:29:42 +0000
+Received: by outflank-mailman (output) from mailman id 36043.67791; Tue, 24 Nov 2020 13:29:42 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khYO6-0001VH-7L; Tue, 24 Nov 2020 13:29:42 +0000
-Received: by outflank-mailman (input) for mailman id 36042;
+	id 1khYO6-0001Vm-Ft; Tue, 24 Nov 2020 13:29:42 +0000
+Received: by outflank-mailman (input) for mailman id 36043;
  Tue, 24 Nov 2020 13:29:41 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=daQ6=E6=casper.srs.infradead.org=batv+cbe268a5dfa7b983a02e+6302+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1khYNo-0000Qf-2L
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:29:24 +0000
+ id 1khYO3-0000Qf-2g
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:29:39 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 26ea2157-cf32-448a-907d-cc80947b34ea;
- Tue, 24 Nov 2020 13:28:39 +0000 (UTC)
+ id c38a68e8-be03-497f-9f6d-02fcc4642a2d;
+ Tue, 24 Nov 2020 13:28:41 +0000 (UTC)
 Received: from [2001:4bb8:180:5443:c70:4a89:bc61:3] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1khYMN-0006U7-DO; Tue, 24 Nov 2020 13:27:55 +0000
+ id 1khYMe-0006WC-FD; Tue, 24 Nov 2020 13:28:12 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=daQ6=E6=casper.srs.infradead.org=batv+cbe268a5dfa7b983a02e+6302+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1khYNo-0000Qf-2L
-	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:29:24 +0000
-X-Inumbo-ID: 26ea2157-cf32-448a-907d-cc80947b34ea
+	id 1khYO3-0000Qf-2g
+	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:29:39 +0000
+X-Inumbo-ID: c38a68e8-be03-497f-9f6d-02fcc4642a2d
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 26ea2157-cf32-448a-907d-cc80947b34ea;
-	Tue, 24 Nov 2020 13:28:39 +0000 (UTC)
+	id c38a68e8-be03-497f-9f6d-02fcc4642a2d;
+	Tue, 24 Nov 2020 13:28:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=qbQZqUyuqbWI0k7YOCxXBM7JuauYhSOH9/mPud+JBEQ=; b=JPuFDbn3CeG05+vmoNAk65fF+e
-	E+AWjN7EiPbhuy8d43uHrVAUMryHcbvWp/sIQsb2keLu3WxSA8fNQgXpu6WDI/oPIzGdu1t9jnCoh
-	ALo16cLEzPbEOBDyyUQhXe2zb4Wg1WnXZR7b7Of0uxXZvBhKgYdSIm1GQtyXmTB80hVs2aO5jg3Wd
-	JxN4GkeL/03jRIvwuCVHER5Yi938IlSwfy+kOfinhXXDGRCH8xrqmYFJRsvf9MdJi8dfiZSzBVDNv
-	9Y5vxWaV8co6fpHvChVu6aEJa1JKBk5/o4XXJCwXXE79GGFIwkJ9LI5tm5QxCZm0GqpKScG6vBm6n
-	A4zKiNLQ==;
+	bh=/O13+dcLk1L7JyoO+1N94KNWJ8AA8wxdNDwugfkz49U=; b=T0mbtousMy3gTU4W+Hav1SXmPG
+	ntoJpVsr1rVrypAPqknRPUnpesJSMBrUc00lVI6rw9tW7L0UTd5qDYChjsDIp5I+2p9rgRfczorvW
+	myNaorvAqWHtFI8YzROhDDUSGaAL1oE03jbsWr7RUeag8w/Fra4vYKypkXrsbnoMydets0qq/jCNw
+	kAWVxaa3y0zHwqhTRdVwYBa7yrqO3jWUl7tXKnrMDreCJh9HnCSyQhcMGVcHEbB5RfozmnnymLj8T
+	T8hSeMtKcFNU6MG3WPtXCg75QSQ31Et+ZdTKD3UyLrPnveQ8KHIGAcZK2WiJCk91FG4lz+px4829j
+	pUPMLhxA==;
 Received: from [2001:4bb8:180:5443:c70:4a89:bc61:3] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1khYMN-0006U7-DO; Tue, 24 Nov 2020 13:27:55 +0000
+	id 1khYMe-0006WC-FD; Tue, 24 Nov 2020 13:28:12 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Tejun Heo <tj@kernel.org>,
@@ -95,9 +95,9 @@ Cc: Tejun Heo <tj@kernel.org>,
 	linux-mtd@lists.infradead.org,
 	linux-fsdevel@vger.kernel.org,
 	linux-mm@kvack.org
-Subject: [PATCH 01/45] blk-cgroup: fix a hd_struct leak in blkcg_fill_root_iostats
-Date: Tue, 24 Nov 2020 14:27:07 +0100
-Message-Id: <20201124132751.3747337-2-hch@lst.de>
+Subject: [PATCH 12/45] block: remove a superflous check in blkpg_do_ioctl
+Date: Tue, 24 Nov 2020 14:27:18 +0100
+Message-Id: <20201124132751.3747337-13-hch@lst.de>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20201124132751.3747337-1-hch@lst.de>
 References: <20201124132751.3747337-1-hch@lst.de>
@@ -105,30 +105,33 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-disk_get_part needs to be paired with a disk_put_part.
+sector_t is now always a u64, so this check is not needed.
 
-Fixes: ef45fe470e1 ("blk-cgroup: show global disk stats in root cgroup io.stat")
 Signed-off-by: Christoph Hellwig <hch@lst.de>
-Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Reviewed-by: Jan Kara <jack@suse.cz>
-Reviewed-by: Johannes Thumshirn <johannes.thumshirn@wdc.com>
-Acked-by: Tejun Heo <tj@kernel.org>
 ---
- block/blk-cgroup.c | 1 +
- 1 file changed, 1 insertion(+)
+ block/ioctl.c | 9 ---------
+ 1 file changed, 9 deletions(-)
 
-diff --git a/block/blk-cgroup.c b/block/blk-cgroup.c
-index c68bdf58c9a6e1..54fbe1e80cc41a 100644
---- a/block/blk-cgroup.c
-+++ b/block/blk-cgroup.c
-@@ -849,6 +849,7 @@ static void blkcg_fill_root_iostats(void)
- 			blkg_iostat_set(&blkg->iostat.cur, &tmp);
- 			u64_stats_update_end(&blkg->iostat.sync);
- 		}
-+		disk_put_part(part);
- 	}
- }
+diff --git a/block/ioctl.c b/block/ioctl.c
+index 6b785181344fe1..0c09bb7a6ff35f 100644
+--- a/block/ioctl.c
++++ b/block/ioctl.c
+@@ -35,15 +35,6 @@ static int blkpg_do_ioctl(struct block_device *bdev,
+ 	start = p.start >> SECTOR_SHIFT;
+ 	length = p.length >> SECTOR_SHIFT;
  
+-	/* check for fit in a hd_struct */
+-	if (sizeof(sector_t) < sizeof(long long)) {
+-		long pstart = start, plength = length;
+-
+-		if (pstart != start || plength != length || pstart < 0 ||
+-		    plength < 0 || p.pno > 65535)
+-			return -EINVAL;
+-	}
+-
+ 	switch (op) {
+ 	case BLKPG_ADD_PARTITION:
+ 		/* check if partition is aligned to blocksize */
 -- 
 2.29.2
 
