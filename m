@@ -2,28 +2,26 @@ Return-Path: <SRS0=fYmn=E6=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-15.3 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ECDF5C2D0E4
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:30:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AE7FBC56201
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:32:50 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 75919204EC
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:30:58 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="PBlG+SI1"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 75919204EC
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
+	by mail.kernel.org (Postfix) with ESMTPS id 51C49206F9
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:32:50 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 51C49206F9
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.36076.67842 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.36095.67854 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khYP3-0002nS-V3; Tue, 24 Nov 2020 13:30:41 +0000
+	id 1khYQs-00034C-BO; Tue, 24 Nov 2020 13:32:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 36076.67842; Tue, 24 Nov 2020 13:30:41 +0000
+Received: by outflank-mailman (output) from mailman id 36095.67854; Tue, 24 Nov 2020 13:32:34 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,134 +36,117 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khYP3-0002nL-RA; Tue, 24 Nov 2020 13:30:41 +0000
-Received: by outflank-mailman (input) for mailman id 36076;
- Tue, 24 Nov 2020 13:30:40 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=daQ6=E6=casper.srs.infradead.org=batv+cbe268a5dfa7b983a02e+6302+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1khYNe-0000Qf-23
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:29:14 +0000
-Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9f360c11-3cce-4639-9598-31dba95ee084;
- Tue, 24 Nov 2020 13:28:34 +0000 (UTC)
-Received: from [2001:4bb8:180:5443:c70:4a89:bc61:3] (helo=localhost)
- by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1khYMk-0006Xd-Im; Tue, 24 Nov 2020 13:28:19 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1khYQs-000345-8D; Tue, 24 Nov 2020 13:32:34 +0000
+Received: by outflank-mailman (input) for mailman id 36095;
+ Tue, 24 Nov 2020 13:32:32 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=IyBN=E6=suse.de=colyli@srs-us1.protection.inumbo.net>)
+ id 1khYQq-00033w-Kb
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:32:32 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id cb3e361f-6f3a-4e36-8c21-584378efb9e0;
+ Tue, 24 Nov 2020 13:32:31 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id A52D5AC66;
+ Tue, 24 Nov 2020 13:32:30 +0000 (UTC)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=daQ6=E6=casper.srs.infradead.org=batv+cbe268a5dfa7b983a02e+6302+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1khYNe-0000Qf-23
-	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:29:14 +0000
-X-Inumbo-ID: 9f360c11-3cce-4639-9598-31dba95ee084
-Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 9f360c11-3cce-4639-9598-31dba95ee084;
-	Tue, 24 Nov 2020 13:28:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
-	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
-	Content-Type:Content-ID:Content-Description;
-	bh=aYwkX4I6zMx34nzrdb7tYezzW5eC03Czg70BjD05yqI=; b=PBlG+SI1LP3b7gr/lJlKmKFFJd
-	bocVKBuspYZb9+bd6oRwQGEd0L7j3hQYuLx9nBobabPLesfL8HLab1E4KCm/5+LC3aeewsBsrF0Ec
-	hulcbyCIFfsfA8vcNobuzkqbXhMEwxxlSaiC+PbDLVpuj7Vfeb4n/Hc03FWeCTlPALu7BKMacg7VB
-	VdoUIV8XfOoQvjg+7Lpil7jQgfh2pOibzDF+EEKPx14W4pVYNFzWxgoqa5dOjKsd+dX8NOcHTR0xd
-	r+KlCQy9eeFmFLAe7pGrffUSOJRf0kI5rzxEXRSylWdG/EZ+5D3kd5agpzXpiDKm6I3+ieiU+g83C
-	6CbAnNrA==;
-Received: from [2001:4bb8:180:5443:c70:4a89:bc61:3] (helo=localhost)
-	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1khYMk-0006Xd-Im; Tue, 24 Nov 2020 13:28:19 +0000
-From: Christoph Hellwig <hch@lst.de>
-To: Jens Axboe <axboe@kernel.dk>
-Cc: Tejun Heo <tj@kernel.org>,
-	Josef Bacik <josef@toxicpanda.com>,
-	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
-	Coly Li <colyli@suse.de>,
-	Mike Snitzer <snitzer@redhat.com>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Jan Kara <jack@suse.cz>,
-	Johannes Thumshirn <johannes.thumshirn@wdc.com>,
-	dm-devel@redhat.com,
-	Richard Weinberger <richard@nod.at>,
-	Jan Kara <jack@suse.com>,
-	linux-block@vger.kernel.org,
-	xen-devel@lists.xenproject.org,
-	linux-bcache@vger.kernel.org,
-	linux-mtd@lists.infradead.org,
-	linux-fsdevel@vger.kernel.org,
-	linux-mm@kvack.org
-Subject: [PATCH 16/45] block: change the hash used for looking up block devices
-Date: Tue, 24 Nov 2020 14:27:22 +0100
-Message-Id: <20201124132751.3747337-17-hch@lst.de>
-X-Mailer: git-send-email 2.29.2
-In-Reply-To: <20201124132751.3747337-1-hch@lst.de>
+	(envelope-from <SRS0=IyBN=E6=suse.de=colyli@srs-us1.protection.inumbo.net>)
+	id 1khYQq-00033w-Kb
+	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:32:32 +0000
+X-Inumbo-ID: cb3e361f-6f3a-4e36-8c21-584378efb9e0
+Received: from mx2.suse.de (unknown [195.135.220.15])
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id cb3e361f-6f3a-4e36-8c21-584378efb9e0;
+	Tue, 24 Nov 2020 13:32:31 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+	by mx2.suse.de (Postfix) with ESMTP id A52D5AC66;
+	Tue, 24 Nov 2020 13:32:30 +0000 (UTC)
+Subject: Re: [PATCH 38/45] block: switch partition lookup to use struct
+ block_device
+To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
+Cc: Tejun Heo <tj@kernel.org>, Josef Bacik <josef@toxicpanda.com>,
+ Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+ Mike Snitzer <snitzer@redhat.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Jan Kara <jack@suse.cz>,
+ Johannes Thumshirn <johannes.thumshirn@wdc.com>, dm-devel@redhat.com,
+ Richard Weinberger <richard@nod.at>, Jan Kara <jack@suse.com>,
+ linux-block@vger.kernel.org, xen-devel@lists.xenproject.org,
+ linux-bcache@vger.kernel.org, linux-mtd@lists.infradead.org,
+ linux-fsdevel@vger.kernel.org, linux-mm@kvack.org
 References: <20201124132751.3747337-1-hch@lst.de>
+ <20201124132751.3747337-39-hch@lst.de>
+From: Coly Li <colyli@suse.de>
+Message-ID: <4cdd6877-f4fd-8022-4a4f-3eabb86af2b9@suse.de>
+Date: Tue, 24 Nov 2020 21:32:19 +0800
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.16; rv:78.0)
+ Gecko/20100101 Thunderbird/78.4.3
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+In-Reply-To: <20201124132751.3747337-39-hch@lst.de>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-Adding the minor to the major creates tons of pointless conflicts. Just
-use the dev_t itself, which is 32-bits and thus is guaranteed to fit
-into ino_t.
+On 11/24/20 9:27 PM, Christoph Hellwig wrote:
+> Use struct block_device to lookup partitions on a disk.  This removes
+> all usage of struct hd_struct from the I/O path, and this allows removing
+> the percpu refcount in struct hd_struct.
+> 
+> Signed-off-by: Christoph Hellwig <hch@lst.de>
 
-Signed-off-by: Christoph Hellwig <hch@lst.de>
-Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Reviewed-by: Jan Kara <jack@suse.cz>
----
- fs/block_dev.c | 26 ++------------------------
- 1 file changed, 2 insertions(+), 24 deletions(-)
 
-diff --git a/fs/block_dev.c b/fs/block_dev.c
-index f6a2a06ad262fa..437f67e12b2838 100644
---- a/fs/block_dev.c
-+++ b/fs/block_dev.c
-@@ -863,35 +863,12 @@ void __init bdev_cache_init(void)
- 	blockdev_superblock = bd_mnt->mnt_sb;   /* For writeback */
- }
- 
--/*
-- * Most likely _very_ bad one - but then it's hardly critical for small
-- * /dev and can be fixed when somebody will need really large one.
-- * Keep in mind that it will be fed through icache hash function too.
-- */
--static inline unsigned long hash(dev_t dev)
--{
--	return MAJOR(dev)+MINOR(dev);
--}
--
--static int bdev_test(struct inode *inode, void *data)
--{
--	return BDEV_I(inode)->bdev.bd_dev == *(dev_t *)data;
--}
--
--static int bdev_set(struct inode *inode, void *data)
--{
--	BDEV_I(inode)->bdev.bd_dev = *(dev_t *)data;
--	return 0;
--}
--
- static struct block_device *bdget(dev_t dev)
- {
- 	struct block_device *bdev;
- 	struct inode *inode;
- 
--	inode = iget5_locked(blockdev_superblock, hash(dev),
--			bdev_test, bdev_set, &dev);
--
-+	inode = iget_locked(blockdev_superblock, dev);
- 	if (!inode)
- 		return NULL;
- 
-@@ -903,6 +880,7 @@ static struct block_device *bdget(dev_t dev)
- 		bdev->bd_super = NULL;
- 		bdev->bd_inode = inode;
- 		bdev->bd_part_count = 0;
-+		bdev->bd_dev = dev;
- 		inode->i_mode = S_IFBLK;
- 		inode->i_rdev = dev;
- 		inode->i_bdev = bdev;
--- 
-2.29.2
+For the bcache part, Acked-by: Coly Li <colyli@suse.de>
+
+> ---
+>  block/bio.c                        |  4 +-
+>  block/blk-core.c                   | 66 ++++++++++++++----------------
+>  block/blk-flush.c                  |  2 +-
+>  block/blk-mq.c                     |  9 ++--
+>  block/blk-mq.h                     |  7 ++--
+>  block/blk.h                        |  4 +-
+>  block/genhd.c                      | 56 +++++++++++++------------
+>  block/partitions/core.c            |  7 +---
+>  drivers/block/drbd/drbd_receiver.c |  2 +-
+>  drivers/block/drbd/drbd_worker.c   |  2 +-
+>  drivers/block/zram/zram_drv.c      |  2 +-
+>  drivers/md/bcache/request.c        |  4 +-
+>  drivers/md/dm.c                    |  4 +-
+>  drivers/md/md.c                    |  4 +-
+>  drivers/nvme/target/admin-cmd.c    | 20 ++++-----
+>  fs/ext4/super.c                    | 18 +++-----
+>  fs/ext4/sysfs.c                    | 10 +----
+>  fs/f2fs/f2fs.h                     |  2 +-
+>  fs/f2fs/super.c                    |  6 +--
+>  include/linux/blkdev.h             |  8 ++--
+>  include/linux/genhd.h              |  4 +-
+>  include/linux/part_stat.h          | 17 ++++----
+>  22 files changed, 120 insertions(+), 138 deletions(-)
+[snipped]
+
+> diff --git a/drivers/md/bcache/request.c b/drivers/md/bcache/request.c
+> index afac8d07c1bd00..85b1f2a9b72d68 100644
+> --- a/drivers/md/bcache/request.c
+> +++ b/drivers/md/bcache/request.c
+> @@ -475,7 +475,7 @@ struct search {
+>  	unsigned int		read_dirty_data:1;
+>  	unsigned int		cache_missed:1;
+>  
+> -	struct hd_struct	*part;
+> +	struct block_device	*part;
+>  	unsigned long		start_time;
+>  
+>  	struct btree_op		op;
+> @@ -1073,7 +1073,7 @@ struct detached_dev_io_private {
+>  	unsigned long		start_time;
+>  	bio_end_io_t		*bi_end_io;
+>  	void			*bi_private;
+> -	struct hd_struct	*part;
+> +	struct block_device	*part;
+>  };
+[snipped]
 
 
