@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6198BC63777
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 559B5C56201
 	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 07:01:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E130A2083E
+	by mail.kernel.org (Postfix) with ESMTPS id DDA462080A
 	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 07:01:38 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="Ri1obx6a"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E130A2083E
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="dUiEWDaF"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DDA462080A
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.35377.66885 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.35379.66908 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khSKB-0001lz-3J; Tue, 24 Nov 2020 07:01:15 +0000
+	id 1khSKI-0001qZ-LL; Tue, 24 Nov 2020 07:01:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 35377.66885; Tue, 24 Nov 2020 07:01:15 +0000
+Received: by outflank-mailman (output) from mailman id 35379.66908; Tue, 24 Nov 2020 07:01:22 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,43 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khSKA-0001ls-Vw; Tue, 24 Nov 2020 07:01:14 +0000
-Received: by outflank-mailman (input) for mailman id 35377;
- Tue, 24 Nov 2020 07:01:13 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1khSKI-0001qS-Hj; Tue, 24 Nov 2020 07:01:22 +0000
+Received: by outflank-mailman (input) for mailman id 35379;
+ Tue, 24 Nov 2020 07:01:22 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=KyA6=E6=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1khSK9-0001kv-BO
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 07:01:13 +0000
+ id 1khSKI-0001kq-4R
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 07:01:22 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3f16b6f2-66de-4860-8df4-aa00258c40a5;
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id d691081d-7325-4f16-9a49-8c4ac1eeac55;
  Tue, 24 Nov 2020 07:01:10 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id E99DCADD5;
+ by mx2.suse.de (Postfix) with ESMTP id 60C81ADAA;
  Tue, 24 Nov 2020 07:01:09 +0000 (UTC)
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=KyA6=E6=suse.com=jgross@srs-us1.protection.inumbo.net>)
-	id 1khSK9-0001kv-BO
-	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 07:01:13 +0000
-X-Inumbo-ID: 3f16b6f2-66de-4860-8df4-aa00258c40a5
+	id 1khSKI-0001kq-4R
+	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 07:01:22 +0000
+X-Inumbo-ID: d691081d-7325-4f16-9a49-8c4ac1eeac55
 Received: from mx2.suse.de (unknown [195.135.220.15])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 3f16b6f2-66de-4860-8df4-aa00258c40a5;
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id d691081d-7325-4f16-9a49-8c4ac1eeac55;
 	Tue, 24 Nov 2020 07:01:10 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1606201270; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1606201269; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=Yz6J7wdCjuva4czegeT7IAWoCsKh1vZ7NlNUOs0HkPI=;
-	b=Ri1obx6a7eZp4WW1J7KUmJbRyO6puXP6b/7u2DmSYjNGeiGGfx3+oXKKljh8zElqbgaWp1
-	OVWRG7/iRhdGbZ9kytMy5IbkDc1fVMtpwgnSf43rYs+nmbRXvRefHBag1Ktys+AuPZFHNY
-	P+pFkpiB0GwOeK/fYwk42cme8KNBbrs=
+	bh=QEucFGeONQJdQQwxfd3osX/7AAW0Pbr2/fwfaONhMq0=;
+	b=dUiEWDaF3N/1coDsYe6Jr8SuU+TPBtmwdsNxCgNq+fnPQaBki8NY0UTBQjD2XRacgs+JPD
+	8xWQqvdH26vDPVUS0G1RaeAidD4K7C+eOOFTyyThhOuUvyTUnh94MXG5DbWPSRgL8MpFeG
+	E7Mv5c+1/No5wxDNGTAjWizgL0G1wbs=
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id E99DCADD5;
+	by mx2.suse.de (Postfix) with ESMTP id 60C81ADAA;
 	Tue, 24 Nov 2020 07:01:09 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
@@ -85,222 +86,104 @@ Cc: Juergen Gross <jgross@suse.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v7 3/3] xen/events: rework fifo queue locking
-Date: Tue, 24 Nov 2020 08:01:06 +0100
-Message-Id: <20201124070106.26854-4-jgross@suse.com>
+	Wei Liu <wl@xen.org>,
+	Julien Grall <jgrall@amazon.com>
+Subject: [PATCH v7 1/3] xen/events: access last_priority and last_vcpu_id together
+Date: Tue, 24 Nov 2020 08:01:04 +0100
+Message-Id: <20201124070106.26854-2-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20201124070106.26854-1-jgross@suse.com>
 References: <20201124070106.26854-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Two cpus entering evtchn_fifo_set_pending() for the same event channel
-can race in case the first one gets interrupted after setting
-EVTCHN_FIFO_PENDING and when the other one manages to set
-EVTCHN_FIFO_LINKED before the first one is testing that bit. This can
-lead to evtchn_check_pollers() being called before the event is put
-properly into the queue, resulting eventually in the guest not seeing
-the event pending and thus blocking forever afterwards.
+The queue for a fifo event is depending on the vcpu_id and the
+priority of the event. When sending an event it might happen the
+event needs to change queues and the old queue needs to be kept for
+keeping the links between queue elements intact. For this purpose
+the event channel contains last_priority and last_vcpu_id values
+elements for being able to identify the old queue.
 
-Note that commit 5f2df45ead7c1195 ("xen/evtchn: rework per event channel
-lock") made the race just more obvious, while the fifo event channel
-implementation had this race from the beginning when an unmask operation
-was running in parallel with an event channel send operation.
+In order to avoid races always access last_priority and last_vcpu_id
+with a single atomic operation avoiding any inconsistencies.
 
-For avoiding this race the queue locking in evtchn_fifo_set_pending()
-needs to be reworked to cover the test of EVTCHN_FIFO_PENDING,
-EVTCHN_FIFO_MASKED and EVTCHN_FIFO_LINKED, too. Additionally when an
-event channel needs to change queues both queues need to be locked
-initially.
-
-Fixes: 5f2df45ead7c1195 ("xen/evtchn: rework per event channel lock")
-Fixes: 88910061ec615b2d ("evtchn: add FIFO-based event channel hypercalls and port ops")
 Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Julien Grall <jgrall@amazon.com>
 ---
- xen/common/event_fifo.c | 115 ++++++++++++++++++++--------------------
- 1 file changed, 58 insertions(+), 57 deletions(-)
+ xen/common/event_fifo.c | 25 +++++++++++++++++++------
+ xen/include/xen/sched.h |  3 +--
+ 2 files changed, 20 insertions(+), 8 deletions(-)
 
 diff --git a/xen/common/event_fifo.c b/xen/common/event_fifo.c
-index 79090c04ca..a57d459cc2 100644
+index c6e58d2a1a..79090c04ca 100644
 --- a/xen/common/event_fifo.c
 +++ b/xen/common/event_fifo.c
-@@ -87,38 +87,6 @@ static void evtchn_fifo_init(struct domain *d, struct evtchn *evtchn)
-                  d->domain_id, evtchn->port);
- }
+@@ -42,6 +42,14 @@ struct evtchn_fifo_domain {
+     unsigned int num_evtchns;
+ };
  
--static struct evtchn_fifo_queue *lock_old_queue(const struct domain *d,
--                                                struct evtchn *evtchn,
--                                                unsigned long *flags)
--{
--    struct vcpu *v;
--    struct evtchn_fifo_queue *q, *old_q;
--    unsigned int try;
--    union evtchn_fifo_lastq lastq;
--
--    for ( try = 0; try < 3; try++ )
--    {
--        lastq.raw = read_atomic(&evtchn->fifo_lastq);
--        v = d->vcpu[lastq.last_vcpu_id];
--        old_q = &v->evtchn_fifo->queue[lastq.last_priority];
--
--        spin_lock_irqsave(&old_q->lock, *flags);
--
--        v = d->vcpu[lastq.last_vcpu_id];
--        q = &v->evtchn_fifo->queue[lastq.last_priority];
--
--        if ( old_q == q )
--            return old_q;
--
--        spin_unlock_irqrestore(&old_q->lock, *flags);
--    }
--
--    gprintk(XENLOG_WARNING,
--            "dom%d port %d lost event (too many queue changes)\n",
--            d->domain_id, evtchn->port);
--    return NULL;
--}          
--
- static int try_set_link(event_word_t *word, event_word_t *w, uint32_t link)
++union evtchn_fifo_lastq {
++    uint32_t raw;
++    struct {
++        uint8_t last_priority;
++        uint16_t last_vcpu_id;
++    };
++};
++
+ static inline event_word_t *evtchn_fifo_word_from_port(const struct domain *d,
+                                                        unsigned int port)
  {
-     event_word_t new, old;
-@@ -190,6 +158,9 @@ static void evtchn_fifo_set_pending(struct vcpu *v, struct evtchn *evtchn)
-     event_word_t *word;
-     unsigned long flags;
-     bool_t was_pending;
-+    struct evtchn_fifo_queue *q, *old_q;
-+    unsigned int try;
-+    bool linked = true;
+@@ -86,16 +94,18 @@ static struct evtchn_fifo_queue *lock_old_queue(const struct domain *d,
+     struct vcpu *v;
+     struct evtchn_fifo_queue *q, *old_q;
+     unsigned int try;
++    union evtchn_fifo_lastq lastq;
  
-     port = evtchn->port;
-     word = evtchn_fifo_word_from_port(d, port);
-@@ -204,6 +175,48 @@ static void evtchn_fifo_set_pending(struct vcpu *v, struct evtchn *evtchn)
-         return;
-     }
- 
-+    for ( try = 0; ; try++ )
-+    {
-+        union evtchn_fifo_lastq lastq;
-+        struct vcpu *old_v;
-+
-+        lastq.raw = read_atomic(&evtchn->fifo_lastq);
-+        old_v = d->vcpu[lastq.last_vcpu_id];
-+
-+        q = &v->evtchn_fifo->queue[evtchn->priority];
-+        old_q = &old_v->evtchn_fifo->queue[lastq.last_priority];
-+
-+        if ( q <= old_q )
-+        {
-+            spin_lock_irqsave(&q->lock, flags);
-+            if ( q != old_q )
-+                spin_lock(&old_q->lock);
-+        }
-+        else
-+        {
-+            spin_lock_irqsave(&old_q->lock, flags);
-+            spin_lock(&q->lock);
-+        }
-+
-+        lastq.raw = read_atomic(&evtchn->fifo_lastq);
-+        old_v = d->vcpu[lastq.last_vcpu_id];
-+        if ( q == &v->evtchn_fifo->queue[evtchn->priority] &&
-+             old_q == &old_v->evtchn_fifo->queue[lastq.last_priority] )
-+            break;
-+
-+        if ( q != old_q )
-+            spin_unlock(&old_q->lock);
-+        spin_unlock_irqrestore(&q->lock, flags);
-+
-+        if ( try == 3 )
-+        {
-+            gprintk(XENLOG_WARNING,
-+                    "dom%d port %d lost event (too many queue changes)\n",
-+                    d->domain_id, evtchn->port);
-+            return;
-+        }
-+    }
-+
-     was_pending = guest_test_and_set_bit(d, EVTCHN_FIFO_PENDING, word);
- 
-     /*
-@@ -212,9 +225,7 @@ static void evtchn_fifo_set_pending(struct vcpu *v, struct evtchn *evtchn)
-     if ( !guest_test_bit(d, EVTCHN_FIFO_MASKED, word) &&
-          !guest_test_bit(d, EVTCHN_FIFO_LINKED, word) )
+     for ( try = 0; try < 3; try++ )
      {
--        struct evtchn_fifo_queue *q, *old_q;
-         event_word_t *tail_word;
--        bool_t linked = 0;
+-        v = d->vcpu[evtchn->last_vcpu_id];
+-        old_q = &v->evtchn_fifo->queue[evtchn->last_priority];
++        lastq.raw = read_atomic(&evtchn->fifo_lastq);
++        v = d->vcpu[lastq.last_vcpu_id];
++        old_q = &v->evtchn_fifo->queue[lastq.last_priority];
  
-         /*
-          * Control block not mapped.  The guest must not unmask an
-@@ -228,22 +239,8 @@ static void evtchn_fifo_set_pending(struct vcpu *v, struct evtchn *evtchn)
-             goto done;
-         }
+         spin_lock_irqsave(&old_q->lock, *flags);
  
--        /*
--         * No locking around getting the queue. This may race with
--         * changing the priority but we are allowed to signal the
--         * event once on the old priority.
--         */
--        q = &v->evtchn_fifo->queue[evtchn->priority];
--
--        old_q = lock_old_queue(d, evtchn, &flags);
--        if ( !old_q )
--            goto done;
--
-         if ( guest_test_and_set_bit(d, EVTCHN_FIFO_LINKED, word) )
--        {
--            spin_unlock_irqrestore(&old_q->lock, flags);
-             goto done;
--        }
+-        v = d->vcpu[evtchn->last_vcpu_id];
+-        q = &v->evtchn_fifo->queue[evtchn->last_priority];
++        v = d->vcpu[lastq.last_vcpu_id];
++        q = &v->evtchn_fifo->queue[lastq.last_priority];
  
-         /*
-          * If this event was a tail, the old queue is now empty and
-@@ -262,8 +259,8 @@ static void evtchn_fifo_set_pending(struct vcpu *v, struct evtchn *evtchn)
-             lastq.last_priority = q->priority;
-             write_atomic(&evtchn->fifo_lastq, lastq.raw);
- 
--            spin_unlock_irqrestore(&old_q->lock, flags);
--            spin_lock_irqsave(&q->lock, flags);
-+            spin_unlock(&old_q->lock);
-+            old_q = q;
-         }
- 
-         /*
-@@ -276,6 +273,7 @@ static void evtchn_fifo_set_pending(struct vcpu *v, struct evtchn *evtchn)
-          * If the queue is empty (i.e., we haven't linked to the new
-          * event), head must be updated.
-          */
-+        linked = false;
-         if ( q->tail )
+         if ( old_q == q )
+             return old_q;
+@@ -246,8 +256,11 @@ static void evtchn_fifo_set_pending(struct vcpu *v, struct evtchn *evtchn)
+         /* Moved to a different queue? */
+         if ( old_q != q )
          {
-             tail_word = evtchn_fifo_word_from_port(d, q->tail);
-@@ -284,15 +282,18 @@ static void evtchn_fifo_set_pending(struct vcpu *v, struct evtchn *evtchn)
-         if ( !linked )
-             write_atomic(q->head, port);
-         q->tail = port;
--
--        spin_unlock_irqrestore(&q->lock, flags);
--
--        if ( !linked
--             && !guest_test_and_set_bit(d, q->priority,
--                                        &v->evtchn_fifo->control_block->ready) )
--            vcpu_mark_events_pending(v);
-     }
+-            evtchn->last_vcpu_id = v->vcpu_id;
+-            evtchn->last_priority = q->priority;
++            union evtchn_fifo_lastq lastq = { };
 +
-  done:
-+    if ( q != old_q )
-+        spin_unlock(&old_q->lock);
-+    spin_unlock_irqrestore(&q->lock, flags);
-+
-+    if ( !linked &&
-+         !guest_test_and_set_bit(d, q->priority,
-+                                 &v->evtchn_fifo->control_block->ready) )
-+        vcpu_mark_events_pending(v);
-+
-     if ( !was_pending )
-         evtchn_check_pollers(d, port);
- }
++            lastq.last_vcpu_id = v->vcpu_id;
++            lastq.last_priority = q->priority;
++            write_atomic(&evtchn->fifo_lastq, lastq.raw);
+ 
+             spin_unlock_irqrestore(&old_q->lock, flags);
+             spin_lock_irqsave(&q->lock, flags);
+diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
+index 7251b3ae3e..a345cc01f8 100644
+--- a/xen/include/xen/sched.h
++++ b/xen/include/xen/sched.h
+@@ -117,8 +117,7 @@ struct evtchn
+ #ifndef NDEBUG
+     u8 old_state;      /* State when taking lock in write mode. */
+ #endif
+-    u8 last_priority;
+-    u16 last_vcpu_id;
++    u32 fifo_lastq;    /* Data for fifo events identifying last queue. */
+ #ifdef CONFIG_XSM
+     union {
+ #ifdef XSM_NEED_GENERIC_EVTCHN_SSID
 -- 
 2.26.2
 
