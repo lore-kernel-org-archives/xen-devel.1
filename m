@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A2F85C82582
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:29:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 945F5C825A7
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:29:52 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 44152206F9
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:29:21 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 2B98D204EC
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:29:52 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="KW/HOfgi"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 44152206F9
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="JPuFDbn3"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2B98D204EC
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.36015.67769 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.36042.67781 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khYNa-0001A1-PK; Tue, 24 Nov 2020 13:29:10 +0000
+	id 1khYO6-0001VP-AU; Tue, 24 Nov 2020 13:29:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 36015.67769; Tue, 24 Nov 2020 13:29:10 +0000
+Received: by outflank-mailman (output) from mailman id 36042.67781; Tue, 24 Nov 2020 13:29:42 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khYNa-00019q-Lh; Tue, 24 Nov 2020 13:29:10 +0000
-Received: by outflank-mailman (input) for mailman id 36015;
- Tue, 24 Nov 2020 13:29:09 +0000
+	id 1khYO6-0001VH-7L; Tue, 24 Nov 2020 13:29:42 +0000
+Received: by outflank-mailman (input) for mailman id 36042;
+ Tue, 24 Nov 2020 13:29:41 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=daQ6=E6=casper.srs.infradead.org=batv+cbe268a5dfa7b983a02e+6302+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1khYNZ-0000Qf-1z
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:29:09 +0000
+ id 1khYNo-0000Qf-2L
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:29:24 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id e128a56a-905b-4351-8aa3-30d7fc23e5b2;
- Tue, 24 Nov 2020 13:28:32 +0000 (UTC)
+ id 26ea2157-cf32-448a-907d-cc80947b34ea;
+ Tue, 24 Nov 2020 13:28:39 +0000 (UTC)
 Received: from [2001:4bb8:180:5443:c70:4a89:bc61:3] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1khYMR-0006UP-A2; Tue, 24 Nov 2020 13:27:59 +0000
+ id 1khYMN-0006U7-DO; Tue, 24 Nov 2020 13:27:55 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=daQ6=E6=casper.srs.infradead.org=batv+cbe268a5dfa7b983a02e+6302+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1khYNZ-0000Qf-1z
-	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:29:09 +0000
-X-Inumbo-ID: e128a56a-905b-4351-8aa3-30d7fc23e5b2
+	id 1khYNo-0000Qf-2L
+	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:29:24 +0000
+X-Inumbo-ID: 26ea2157-cf32-448a-907d-cc80947b34ea
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id e128a56a-905b-4351-8aa3-30d7fc23e5b2;
-	Tue, 24 Nov 2020 13:28:32 +0000 (UTC)
+	id 26ea2157-cf32-448a-907d-cc80947b34ea;
+	Tue, 24 Nov 2020 13:28:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=hNtZTYwDbpxOWnjbdPfEN2LKFTEyc+Xwk1zoPtNIsws=; b=KW/HOfgirUKthyUKuxmIOZ3L14
-	PxmbPRzCYhFzSzd/bHlNMHDBgtk8AWQbuv2Np7A5hD54AbqwLNdvMEGQ9rvRi53KRItg4ljPIXN8j
-	laYZPmVMxu+I+Xr/eXeEt4Z7FsAA/4Gq/OuO4qxhVj8ln7jkMiD5R0gJ/14CVFp4UhgnoRadNe4ZC
-	LOLAMCrHd+WS7Uh/WVbYf7QzV5bd5/j5dX32PzOJPj7fKwxz2QApY0cW15/U90iga5Rj21c9kNtwz
-	L7GmN4Z/GX5QBrx7BRnqDM1JTLj8DfcYMuAUZfQgs4m6RFsv4cza8s4pw2rNS7l2ZS64FnStRTaCh
-	wR4T2pvw==;
+	bh=qbQZqUyuqbWI0k7YOCxXBM7JuauYhSOH9/mPud+JBEQ=; b=JPuFDbn3CeG05+vmoNAk65fF+e
+	E+AWjN7EiPbhuy8d43uHrVAUMryHcbvWp/sIQsb2keLu3WxSA8fNQgXpu6WDI/oPIzGdu1t9jnCoh
+	ALo16cLEzPbEOBDyyUQhXe2zb4Wg1WnXZR7b7Of0uxXZvBhKgYdSIm1GQtyXmTB80hVs2aO5jg3Wd
+	JxN4GkeL/03jRIvwuCVHER5Yi938IlSwfy+kOfinhXXDGRCH8xrqmYFJRsvf9MdJi8dfiZSzBVDNv
+	9Y5vxWaV8co6fpHvChVu6aEJa1JKBk5/o4XXJCwXXE79GGFIwkJ9LI5tm5QxCZm0GqpKScG6vBm6n
+	A4zKiNLQ==;
 Received: from [2001:4bb8:180:5443:c70:4a89:bc61:3] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1khYMR-0006UP-A2; Tue, 24 Nov 2020 13:27:59 +0000
+	id 1khYMN-0006U7-DO; Tue, 24 Nov 2020 13:27:55 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Tejun Heo <tj@kernel.org>,
@@ -95,9 +95,9 @@ Cc: Tejun Heo <tj@kernel.org>,
 	linux-mtd@lists.infradead.org,
 	linux-fsdevel@vger.kernel.org,
 	linux-mm@kvack.org
-Subject: [PATCH 03/45] fs: remove get_super_thawed and get_super_exclusive_thawed
-Date: Tue, 24 Nov 2020 14:27:09 +0100
-Message-Id: <20201124132751.3747337-4-hch@lst.de>
+Subject: [PATCH 01/45] blk-cgroup: fix a hd_struct leak in blkcg_fill_root_iostats
+Date: Tue, 24 Nov 2020 14:27:07 +0100
+Message-Id: <20201124132751.3747337-2-hch@lst.de>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20201124132751.3747337-1-hch@lst.de>
 References: <20201124132751.3747337-1-hch@lst.de>
@@ -105,188 +105,30 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-Just open code the wait in the only caller of both functions.
+disk_get_part needs to be paired with a disk_put_part.
 
+Fixes: ef45fe470e1 ("blk-cgroup: show global disk stats in root cgroup io.stat")
 Signed-off-by: Christoph Hellwig <hch@lst.de>
+Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Reviewed-by: Jan Kara <jack@suse.cz>
+Reviewed-by: Johannes Thumshirn <johannes.thumshirn@wdc.com>
+Acked-by: Tejun Heo <tj@kernel.org>
 ---
- fs/internal.h      |  2 ++
- fs/quota/quota.c   | 31 +++++++++++++++++++++-------
- fs/super.c         | 51 ++--------------------------------------------
- include/linux/fs.h |  4 +---
- 4 files changed, 29 insertions(+), 59 deletions(-)
+ block/blk-cgroup.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/fs/internal.h b/fs/internal.h
-index a7cd0f64faa4ab..47be21dfeebef5 100644
---- a/fs/internal.h
-+++ b/fs/internal.h
-@@ -114,7 +114,9 @@ extern struct file *alloc_empty_file_noaccount(int, const struct cred *);
-  */
- extern int reconfigure_super(struct fs_context *);
- extern bool trylock_super(struct super_block *sb);
-+struct super_block *__get_super(struct block_device *bdev, bool excl);
- extern struct super_block *user_get_super(dev_t);
-+void put_super(struct super_block *sb);
- extern bool mount_capable(struct fs_context *);
- 
- /*
-diff --git a/fs/quota/quota.c b/fs/quota/quota.c
-index 9af95c7a0bbe3c..f3d32b0d9008f2 100644
---- a/fs/quota/quota.c
-+++ b/fs/quota/quota.c
-@@ -20,6 +20,7 @@
- #include <linux/writeback.h>
- #include <linux/nospec.h>
- #include "compat.h"
-+#include "../internal.h"
- 
- static int check_quotactl_permission(struct super_block *sb, int type, int cmd,
- 				     qid_t id)
-@@ -868,6 +869,7 @@ static struct super_block *quotactl_block(const char __user *special, int cmd)
- 	struct block_device *bdev;
- 	struct super_block *sb;
- 	struct filename *tmp = getname(special);
-+	bool excl = false, thawed = false;
- 
- 	if (IS_ERR(tmp))
- 		return ERR_CAST(tmp);
-@@ -875,17 +877,32 @@ static struct super_block *quotactl_block(const char __user *special, int cmd)
- 	putname(tmp);
- 	if (IS_ERR(bdev))
- 		return ERR_CAST(bdev);
--	if (quotactl_cmd_onoff(cmd))
--		sb = get_super_exclusive_thawed(bdev);
--	else if (quotactl_cmd_write(cmd))
--		sb = get_super_thawed(bdev);
--	else
--		sb = get_super(bdev);
-+
-+	if (quotactl_cmd_onoff(cmd)) {
-+		excl = true;
-+		thawed = true;
-+	} else if (quotactl_cmd_write(cmd)) {
-+		thawed = true;
-+	}
-+
-+retry:
-+	sb = __get_super(bdev, excl);
-+	if (thawed && sb && sb->s_writers.frozen != SB_UNFROZEN) {
-+		if (excl)
-+			up_write(&sb->s_umount);
-+		else
-+			up_read(&sb->s_umount);
-+		wait_event(sb->s_writers.wait_unfrozen,
-+			   sb->s_writers.frozen == SB_UNFROZEN);
-+		put_super(sb);
-+		goto retry;
-+	}
-+
- 	bdput(bdev);
- 	if (!sb)
- 		return ERR_PTR(-ENODEV);
--
- 	return sb;
-+
- #else
- 	return ERR_PTR(-ENODEV);
- #endif
-diff --git a/fs/super.c b/fs/super.c
-index 98bb0629ee108e..343e5c1e538d2a 100644
---- a/fs/super.c
-+++ b/fs/super.c
-@@ -307,7 +307,7 @@ static void __put_super(struct super_block *s)
-  *	Drops a temporary reference, frees superblock if there's no
-  *	references left.
-  */
--static void put_super(struct super_block *sb)
-+void put_super(struct super_block *sb)
- {
- 	spin_lock(&sb_lock);
- 	__put_super(sb);
-@@ -740,7 +740,7 @@ void iterate_supers_type(struct file_system_type *type,
- 
- EXPORT_SYMBOL(iterate_supers_type);
- 
--static struct super_block *__get_super(struct block_device *bdev, bool excl)
-+struct super_block *__get_super(struct block_device *bdev, bool excl)
- {
- 	struct super_block *sb;
- 
-@@ -789,53 +789,6 @@ struct super_block *get_super(struct block_device *bdev)
+diff --git a/block/blk-cgroup.c b/block/blk-cgroup.c
+index c68bdf58c9a6e1..54fbe1e80cc41a 100644
+--- a/block/blk-cgroup.c
++++ b/block/blk-cgroup.c
+@@ -849,6 +849,7 @@ static void blkcg_fill_root_iostats(void)
+ 			blkg_iostat_set(&blkg->iostat.cur, &tmp);
+ 			u64_stats_update_end(&blkg->iostat.sync);
+ 		}
++		disk_put_part(part);
+ 	}
  }
- EXPORT_SYMBOL(get_super);
  
--static struct super_block *__get_super_thawed(struct block_device *bdev,
--					      bool excl)
--{
--	while (1) {
--		struct super_block *s = __get_super(bdev, excl);
--		if (!s || s->s_writers.frozen == SB_UNFROZEN)
--			return s;
--		if (!excl)
--			up_read(&s->s_umount);
--		else
--			up_write(&s->s_umount);
--		wait_event(s->s_writers.wait_unfrozen,
--			   s->s_writers.frozen == SB_UNFROZEN);
--		put_super(s);
--	}
--}
--
--/**
-- *	get_super_thawed - get thawed superblock of a device
-- *	@bdev: device to get the superblock for
-- *
-- *	Scans the superblock list and finds the superblock of the file system
-- *	mounted on the device. The superblock is returned once it is thawed
-- *	(or immediately if it was not frozen). %NULL is returned if no match
-- *	is found.
-- */
--struct super_block *get_super_thawed(struct block_device *bdev)
--{
--	return __get_super_thawed(bdev, false);
--}
--EXPORT_SYMBOL(get_super_thawed);
--
--/**
-- *	get_super_exclusive_thawed - get thawed superblock of a device
-- *	@bdev: device to get the superblock for
-- *
-- *	Scans the superblock list and finds the superblock of the file system
-- *	mounted on the device. The superblock is returned once it is thawed
-- *	(or immediately if it was not frozen) and s_umount semaphore is held
-- *	in exclusive mode. %NULL is returned if no match is found.
-- */
--struct super_block *get_super_exclusive_thawed(struct block_device *bdev)
--{
--	return __get_super_thawed(bdev, true);
--}
--EXPORT_SYMBOL(get_super_exclusive_thawed);
--
- /**
-  * get_active_super - get an active reference to the superblock of a device
-  * @bdev: device to get the superblock for
-diff --git a/include/linux/fs.h b/include/linux/fs.h
-index 8667d0cdc71e76..a61df0dd4f1989 100644
---- a/include/linux/fs.h
-+++ b/include/linux/fs.h
-@@ -1409,7 +1409,7 @@ enum {
- 
- struct sb_writers {
- 	int				frozen;		/* Is sb frozen? */
--	wait_queue_head_t		wait_unfrozen;	/* for get_super_thawed() */
-+	wait_queue_head_t		wait_unfrozen;	/* wait for thaw */
- 	struct percpu_rw_semaphore	rw_sem[SB_FREEZE_LEVELS];
- };
- 
-@@ -3132,8 +3132,6 @@ extern struct file_system_type *get_filesystem(struct file_system_type *fs);
- extern void put_filesystem(struct file_system_type *fs);
- extern struct file_system_type *get_fs_type(const char *name);
- extern struct super_block *get_super(struct block_device *);
--extern struct super_block *get_super_thawed(struct block_device *);
--extern struct super_block *get_super_exclusive_thawed(struct block_device *bdev);
- extern struct super_block *get_active_super(struct block_device *bdev);
- extern void drop_super(struct super_block *sb);
- extern void drop_super_exclusive(struct super_block *sb);
 -- 
 2.29.2
 
