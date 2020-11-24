@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 51DCAC63777
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E3E2DC6379D
 	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 19:30:59 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BFC8520857
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 19:30:58 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 5BC58208DB
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 19:30:59 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="Qmp21wK5"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BFC8520857
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="g+b9RfjY"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5BC58208DB
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.36924.69040 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.36923.69030 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khe1Y-0005en-0y; Tue, 24 Nov 2020 19:30:48 +0000
+	id 1khe1X-0005dr-Ca; Tue, 24 Nov 2020 19:30:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 36924.69040; Tue, 24 Nov 2020 19:30:47 +0000
+Received: by outflank-mailman (output) from mailman id 36923.69030; Tue, 24 Nov 2020 19:30:47 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,55 +38,57 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khe1X-0005eW-IS; Tue, 24 Nov 2020 19:30:47 +0000
-Received: by outflank-mailman (input) for mailman id 36924;
- Tue, 24 Nov 2020 19:30:46 +0000
+	id 1khe1X-0005dk-8n; Tue, 24 Nov 2020 19:30:47 +0000
+Received: by outflank-mailman (input) for mailman id 36923;
+ Tue, 24 Nov 2020 19:30:45 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>) id 1khe1W-0005cT-6c
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 19:30:46 +0000
+ (envelope-from <paul@xen.org>) id 1khe1V-0005bX-7u
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 19:30:45 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1khe1U-0004Ok-B6; Tue, 24 Nov 2020 19:30:44 +0000
+ id 1khe1U-0004Oe-6T; Tue, 24 Nov 2020 19:30:44 +0000
 Received: from host86-183-162-145.range86-183.btcentralplus.com
  ([86.183.162.145] helo=u2f063a87eabd5f.home)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1khdfV-0000r4-5F; Tue, 24 Nov 2020 19:08:01 +0000
+ id 1khdfS-0000r4-Q4; Tue, 24 Nov 2020 19:07:59 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1khe1W-0005cT-6c
-	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 19:30:46 +0000
+	id 1khe1V-0005bX-7u
+	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 19:30:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=5cd/xhDogl5UDMyDsWm0T9i011ok+fe44oXnYZ42O/I=; b=Qmp21wK5h1oc0ABJmUzsUyrNLh
-	BKxtVu8O1r2cZKJUdkJ33s7n+l+d+S7+GeB/Np/G6JDTVP+3O8dwmE+VYhl/7dwz9RzyWL1j0r2D6
-	42mY+Y1R4hhg3uW0tgsZqOR8CJkVfG6a+eVhJOYWGqGQh7rkVZIgHMUjBq5PCCHlDA14=;
+	bh=aEBO33IoPtgfp4ROpOAovObbOPgE7wiSsLQNJbsivrE=; b=g+b9RfjYbai05izai8aY8mU7QG
+	2ypBZdv6GtWwikgt0qJgTIxANwyidRIyRzauSJFicVbTOGDmuBrbX7+FMWQp8/0xajgItlT14hMIO
+	nfkuAFubCjyFLzPKp6GYOW9iDcjyBvLid5/H/PMYc0XY8KKyaTYQRhXlbSAhwF/6XPko=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
 	by mail.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1khe1U-0004Ok-B6; Tue, 24 Nov 2020 19:30:44 +0000
+	id 1khe1U-0004Oe-6T; Tue, 24 Nov 2020 19:30:44 +0000
 Received: from host86-183-162-145.range86-183.btcentralplus.com ([86.183.162.145] helo=u2f063a87eabd5f.home)
 	by xenbits.xenproject.org with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
 	(Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1khdfV-0000r4-5F; Tue, 24 Nov 2020 19:08:01 +0000
+	id 1khdfS-0000r4-Q4; Tue, 24 Nov 2020 19:07:59 +0000
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: Paul Durrant <pdurrant@amazon.com>,
-	Jun Nakajima <jun.nakajima@intel.com>,
-	Kevin Tian <kevin.tian@intel.com>,
+	Wei Liu <wl@xen.org>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v3 13/13] x86: replace open-coded occurrences of sizeof_field()...
-Date: Tue, 24 Nov 2020 19:07:44 +0000
-Message-Id: <20201124190744.11343-14-paul@xen.org>
+	George Dunlap <george.dunlap@citrix.com>,
+	Ian Jackson <iwj@xenproject.org>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v3 11/13] viridian: add a new '_HVMPV_ex_processor_masks' bit into HVM_PARAM_VIRIDIAN...
+Date: Tue, 24 Nov 2020 19:07:42 +0000
+Message-Id: <20201124190744.11343-12-paul@xen.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20201124190744.11343-1-paul@xen.org>
 References: <20201124190744.11343-1-paul@xen.org>
@@ -96,70 +98,70 @@ Content-Transfer-Encoding: 8bit
 
 From: Paul Durrant <pdurrant@amazon.com>
 
-... with macro evaluations, now that it is available.
+... and advertise ExProcessorMasks support if it is set.
 
-A recent patch imported the sizeof_field() macro from Linux. This patch makes
-use of it in places where the construct is currently open-coded.
+Support is advertised by setting bit 11 in CPUID:40000004:EAX.
 
 Signed-off-by: Paul Durrant <pdurrant@amazon.com>
 ---
-Cc: Jun Nakajima <jun.nakajima@intel.com>
-Cc: Kevin Tian <kevin.tian@intel.com>
+Cc: Wei Liu <wl@xen.org>
 Cc: Jan Beulich <jbeulich@suse.com>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>
 Cc: "Roger Pau Monné" <roger.pau@citrix.com>
-Cc: Wei Liu <wl@xen.org>
+Cc: George Dunlap <george.dunlap@citrix.com>
+Cc: Ian Jackson <iwj@xenproject.org>
+Cc: Julien Grall <julien@xen.org>
+Cc: Stefano Stabellini <sstabellini@kernel.org>
 ---
- xen/arch/x86/cpu/vpmu_intel.c |  4 ++--
- xen/arch/x86/setup.c          | 16 ++++++++--------
- 2 files changed, 10 insertions(+), 10 deletions(-)
+ xen/arch/x86/hvm/viridian/viridian.c | 3 +++
+ xen/include/public/hvm/params.h      | 7 ++++++-
+ 2 files changed, 9 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/x86/cpu/vpmu_intel.c b/xen/arch/x86/cpu/vpmu_intel.c
-index 75aa11c6adec..6e97ce790037 100644
---- a/xen/arch/x86/cpu/vpmu_intel.c
-+++ b/xen/arch/x86/cpu/vpmu_intel.c
-@@ -90,8 +90,8 @@ static uint64_t __read_mostly global_ovf_ctrl_mask, global_ctrl_mask;
- static unsigned int __read_mostly regs_sz;
- /* Offset into context of the beginning of PMU register block */
- static const unsigned int regs_off =
--        sizeof(((struct xen_pmu_intel_ctxt *)0)->fixed_counters) +
--        sizeof(((struct xen_pmu_intel_ctxt *)0)->arch_counters);
-+    sizeof_field(struct xen_pmu_intel_ctxt, fixed_counters) +
-+    sizeof_field(struct xen_pmu_intel_ctxt, arch_counters);
+diff --git a/xen/arch/x86/hvm/viridian/viridian.c b/xen/arch/x86/hvm/viridian/viridian.c
+index 3c18908b7b35..32bf58db3a73 100644
+--- a/xen/arch/x86/hvm/viridian/viridian.c
++++ b/xen/arch/x86/hvm/viridian/viridian.c
+@@ -84,6 +84,7 @@ typedef union _HV_CRASH_CTL_REG_CONTENTS
+ #define CPUID4A_MSR_BASED_APIC         (1 << 3)
+ #define CPUID4A_RELAX_TIMER_INT        (1 << 5)
+ #define CPUID4A_SYNTHETIC_CLUSTER_IPI  (1 << 10)
++#define CPUID4A_EX_PROCESSOR_MASKS     (1 << 11)
  
- /*
-  * QUIRK to workaround an issue on various family 6 cpus.
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index 44c04e273537..30d6f375a3af 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -1617,19 +1617,19 @@ void __init noreturn __start_xen(unsigned long mbi_p)
-     total_pages = nr_pages;
+ /* Viridian CPUID leaf 6: Implementation HW features detected and in use */
+ #define CPUID6A_APIC_OVERLAY    (1 << 0)
+@@ -197,6 +198,8 @@ void cpuid_viridian_leaves(const struct vcpu *v, uint32_t leaf,
+             res->a |= CPUID4A_MSR_BASED_APIC;
+         if ( viridian_feature_mask(d) & HVMPV_hcall_ipi )
+             res->a |= CPUID4A_SYNTHETIC_CLUSTER_IPI;
++        if ( viridian_feature_mask(d) & HVMPV_ex_processor_masks )
++            res->a |= CPUID4A_EX_PROCESSOR_MASKS;
  
-     /* Sanity check for unwanted bloat of certain hypercall structures. */
--    BUILD_BUG_ON(sizeof(((struct xen_platform_op *)0)->u) !=
--                 sizeof(((struct xen_platform_op *)0)->u.pad));
--    BUILD_BUG_ON(sizeof(((struct xen_domctl *)0)->u) !=
--                 sizeof(((struct xen_domctl *)0)->u.pad));
--    BUILD_BUG_ON(sizeof(((struct xen_sysctl *)0)->u) !=
--                 sizeof(((struct xen_sysctl *)0)->u.pad));
-+    BUILD_BUG_ON(sizeof_field(struct xen_platform_op, u) !=
-+                 sizeof_field(struct xen_platform_op, u.pad));
-+    BUILD_BUG_ON(sizeof_field(struct xen_domctl, u) !=
-+                 sizeof_field(struct xen_domctl, u.pad));
-+    BUILD_BUG_ON(sizeof_field(struct xen_sysctl, u) !=
-+                 sizeof_field(struct xen_sysctl, u.pad));
+         /*
+          * This value is the recommended number of attempts to try to
+diff --git a/xen/include/public/hvm/params.h b/xen/include/public/hvm/params.h
+index 0e3fdca09646..3b0a0f45da53 100644
+--- a/xen/include/public/hvm/params.h
++++ b/xen/include/public/hvm/params.h
+@@ -164,6 +164,10 @@
+ #define _HVMPV_hcall_ipi 9
+ #define HVMPV_hcall_ipi (1 << _HVMPV_hcall_ipi)
  
-     BUILD_BUG_ON(sizeof(start_info_t) > PAGE_SIZE);
-     BUILD_BUG_ON(sizeof(shared_info_t) > PAGE_SIZE);
-     BUILD_BUG_ON(sizeof(struct vcpu_info) != 64);
++/* Enable ExProcessorMasks */
++#define _HVMPV_ex_processor_masks 10
++#define HVMPV_ex_processor_masks (1 << _HVMPV_ex_processor_masks)
++
+ #define HVMPV_feature_mask \
+         (HVMPV_base_freq | \
+          HVMPV_no_freq | \
+@@ -174,7 +178,8 @@
+          HVMPV_crash_ctl | \
+          HVMPV_synic | \
+          HVMPV_stimer | \
+-         HVMPV_hcall_ipi)
++         HVMPV_hcall_ipi | \
++         HVMPV_ex_processor_masks)
  
--    BUILD_BUG_ON(sizeof(((struct compat_platform_op *)0)->u) !=
--                 sizeof(((struct compat_platform_op *)0)->u.pad));
-+    BUILD_BUG_ON(sizeof_field(struct compat_platform_op, u) !=
-+                 sizeof_field(struct compat_platform_op, u.pad));
-     BUILD_BUG_ON(sizeof(start_info_compat_t) > PAGE_SIZE);
-     BUILD_BUG_ON(sizeof(struct compat_vcpu_info) != 64);
+ #endif
  
 -- 
 2.20.1
