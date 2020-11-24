@@ -5,25 +5,25 @@ X-Spam-Level:
 X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=unavailable autolearn_force=no version=3.4.0
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7AA5FC82585
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:30:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5FD7BC82581
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:30:16 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 11171204EC
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:30:08 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id E13BE204EC
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:30:15 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="Bvsu7rjR"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 11171204EC
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="GrByciCm"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E13BE204EC
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.36046.67818 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.36054.67830 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khYOH-0001gA-7D; Tue, 24 Nov 2020 13:29:53 +0000
+	id 1khYOT-0002Dz-KI; Tue, 24 Nov 2020 13:30:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 36046.67818; Tue, 24 Nov 2020 13:29:53 +0000
+Received: by outflank-mailman (output) from mailman id 36054.67830; Tue, 24 Nov 2020 13:30:05 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khYOH-0001g3-38; Tue, 24 Nov 2020 13:29:53 +0000
-Received: by outflank-mailman (input) for mailman id 36046;
- Tue, 24 Nov 2020 13:29:50 +0000
+	id 1khYOT-0002DM-GH; Tue, 24 Nov 2020 13:30:05 +0000
+Received: by outflank-mailman (input) for mailman id 36054;
+ Tue, 24 Nov 2020 13:30:04 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=daQ6=E6=casper.srs.infradead.org=batv+cbe268a5dfa7b983a02e+6302+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1khYNt-0000Qf-2K
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:29:29 +0000
+ id 1khYNy-0000Qf-2P
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:29:34 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 8c44d38a-3103-4e34-b193-c5b93c192b58;
+ id 8eef9b6d-0fcd-4372-b97b-0a155c9a35bc;
  Tue, 24 Nov 2020 13:28:39 +0000 (UTC)
 Received: from [2001:4bb8:180:5443:c70:4a89:bc61:3] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1khYMn-0006Y9-FD; Tue, 24 Nov 2020 13:28:21 +0000
+ id 1khYMj-0006XN-5i; Tue, 24 Nov 2020 13:28:17 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=daQ6=E6=casper.srs.infradead.org=batv+cbe268a5dfa7b983a02e+6302+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1khYNt-0000Qf-2K
-	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:29:29 +0000
-X-Inumbo-ID: 8c44d38a-3103-4e34-b193-c5b93c192b58
+	id 1khYNy-0000Qf-2P
+	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:29:34 +0000
+X-Inumbo-ID: 8eef9b6d-0fcd-4372-b97b-0a155c9a35bc
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 8c44d38a-3103-4e34-b193-c5b93c192b58;
+	id 8eef9b6d-0fcd-4372-b97b-0a155c9a35bc;
 	Tue, 24 Nov 2020 13:28:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=/JD7P59kLLFVg7PYLNCPMZCDXAoG4vpH+WsHJpZ7foo=; b=Bvsu7rjRscfk3fEBDWdwaXTw1a
-	yBP66Yl4lQOXZQ1S0o5jVg/rBBbRLPUiXelUDNs0ZAosLOVPtEolGC+8nE1mAd6iOzHUIIuTpQhAM
-	QGAU98CffrUAdOC0jTKXiJ0GblnVmH8SXMxqR0sNHBtPeJOVwXat5gkslEyaiJN1KHtmwltwbLBBr
-	xcNJqY9CnNj5y2xB3ZTcIuTs7H5v3FpZu2pdJV/2UWpXznmvQYvTM9bx79wzAXH4NglFzV354UL/8
-	8BDoU15Guo3iZd+qKmPA8nkrs/rxZ0GZST9iabXcDgdZbFFJjp6nZrmp50w1pJT1e3IrE4W8kg91U
-	Ya1lng2Q==;
+	bh=5XlVZbSBkS7owyByi7+TU2krdZYtRQJNSLbElG7UMJM=; b=GrByciCmlypygW+ymXF+7X/jSp
+	HsgeqlURzqGzlgS5RJ/o9YvA/LFELAtg9fJnwnXHIYCDHFU5pcD4d6q944dHkxA6N7cn0bDnE7VXh
+	GGu35B6Gcg+bgzCRYC//r/GDM/4JYgkFo6e+maqC9WuOLWUBLvew8ZTAEOoLACaBDzdaiWX4kCzN1
+	mrD6nnXkiMIkyK5dE06VrsauzZZkdbBiGnIewiH224Fo/WsEG8HJfz+sdUEhX6TsJp+ZFRhjiRw2S
+	cY+TmRWWh+F6CCP9jGYgpqRwjHhvoZocC5aLnQE1p+91dxzwMcKB7t/OezvIVTW5MzvYKNFt5e/x4
+	rVcbPBpg==;
 Received: from [2001:4bb8:180:5443:c70:4a89:bc61:3] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1khYMn-0006Y9-FD; Tue, 24 Nov 2020 13:28:21 +0000
+	id 1khYMj-0006XN-5i; Tue, 24 Nov 2020 13:28:17 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Tejun Heo <tj@kernel.org>,
@@ -95,9 +95,9 @@ Cc: Tejun Heo <tj@kernel.org>,
 	linux-mtd@lists.infradead.org,
 	linux-fsdevel@vger.kernel.org,
 	linux-mm@kvack.org
-Subject: [PATCH 18/45] init: refactor devt_from_partuuid
-Date: Tue, 24 Nov 2020 14:27:24 +0100
-Message-Id: <20201124132751.3747337-19-hch@lst.de>
+Subject: [PATCH 15/45] block: use put_device in put_disk
+Date: Tue, 24 Nov 2020 14:27:21 +0100
+Message-Id: <20201124132751.3747337-16-hch@lst.de>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20201124132751.3747337-1-hch@lst.de>
 References: <20201124132751.3747337-1-hch@lst.de>
@@ -105,118 +105,30 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-The code in devt_from_partuuid is very convoluted.  Refactor a bit by
-sanitizing the goto and variable name usage.
+Use put_device to put the device instead of poking into the internals
+and using kobject_put.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 Reviewed-by: Jan Kara <jack@suse.cz>
+Reviewed-by: Johannes Thumshirn <johannes.thumshirn@wdc.com>
 ---
- init/do_mounts.c | 68 ++++++++++++++++++++++--------------------------
- 1 file changed, 31 insertions(+), 37 deletions(-)
+ block/genhd.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/init/do_mounts.c b/init/do_mounts.c
-index aef2f24461c7f1..afa26a4028d25e 100644
---- a/init/do_mounts.c
-+++ b/init/do_mounts.c
-@@ -105,13 +105,10 @@ static int match_dev_by_uuid(struct device *dev, const void *data)
-  */
- static dev_t devt_from_partuuid(const char *uuid_str)
+diff --git a/block/genhd.c b/block/genhd.c
+index 0bd9c41dd4cb69..f46e89226fdf91 100644
+--- a/block/genhd.c
++++ b/block/genhd.c
+@@ -1803,7 +1803,7 @@ EXPORT_SYMBOL(__alloc_disk_node);
+ void put_disk(struct gendisk *disk)
  {
--	dev_t res = 0;
- 	struct uuidcmp cmp;
- 	struct device *dev = NULL;
--	struct gendisk *disk;
--	struct hd_struct *part;
-+	dev_t devt = 0;
- 	int offset = 0;
--	bool clear_root_wait = false;
- 	char *slash;
- 
- 	cmp.uuid = uuid_str;
-@@ -120,52 +117,49 @@ static dev_t devt_from_partuuid(const char *uuid_str)
- 	/* Check for optional partition number offset attributes. */
- 	if (slash) {
- 		char c = 0;
-+
- 		/* Explicitly fail on poor PARTUUID syntax. */
--		if (sscanf(slash + 1,
--			   "PARTNROFF=%d%c", &offset, &c) != 1) {
--			clear_root_wait = true;
--			goto done;
--		}
-+		if (sscanf(slash + 1, "PARTNROFF=%d%c", &offset, &c) != 1)
-+			goto clear_root_wait;
- 		cmp.len = slash - uuid_str;
- 	} else {
- 		cmp.len = strlen(uuid_str);
- 	}
- 
--	if (!cmp.len) {
--		clear_root_wait = true;
--		goto done;
--	}
-+	if (!cmp.len)
-+		goto clear_root_wait;
- 
--	dev = class_find_device(&block_class, NULL, &cmp,
--				&match_dev_by_uuid);
-+	dev = class_find_device(&block_class, NULL, &cmp, &match_dev_by_uuid);
- 	if (!dev)
--		goto done;
--
--	res = dev->devt;
-+		return 0;
- 
--	/* Attempt to find the partition by offset. */
--	if (!offset)
--		goto no_offset;
-+	if (offset) {
-+		/*
-+		 * Attempt to find the requested partition by adding an offset
-+		 * to the partition number found by UUID.
-+		 */
-+		struct hd_struct *part;
- 
--	res = 0;
--	disk = part_to_disk(dev_to_part(dev));
--	part = disk_get_part(disk, dev_to_part(dev)->partno + offset);
--	if (part) {
--		res = part_devt(part);
--		put_device(part_to_dev(part));
-+		part = disk_get_part(dev_to_disk(dev),
-+				     dev_to_part(dev)->partno + offset);
-+		if (part) {
-+			devt = part_devt(part);
-+			put_device(part_to_dev(part));
-+		}
-+	} else {
-+		devt = dev->devt;
- 	}
- 
--no_offset:
- 	put_device(dev);
--done:
--	if (clear_root_wait) {
--		pr_err("VFS: PARTUUID= is invalid.\n"
--		       "Expected PARTUUID=<valid-uuid-id>[/PARTNROFF=%%d]\n");
--		if (root_wait)
--			pr_err("Disabling rootwait; root= is invalid.\n");
--		root_wait = 0;
--	}
--	return res;
-+	return devt;
-+
-+clear_root_wait:
-+	pr_err("VFS: PARTUUID= is invalid.\n"
-+	       "Expected PARTUUID=<valid-uuid-id>[/PARTNROFF=%%d]\n");
-+	if (root_wait)
-+		pr_err("Disabling rootwait; root= is invalid.\n");
-+	root_wait = 0;
-+	return 0;
+ 	if (disk)
+-		kobject_put(&disk_to_dev(disk)->kobj);
++		put_device(disk_to_dev(disk));
  }
+ EXPORT_SYMBOL(put_disk);
  
- /**
 -- 
 2.29.2
 
