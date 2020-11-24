@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1474AC2D0E4
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8E2FAC56201
 	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 08:31:02 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 85F462086A
+	by mail.kernel.org (Postfix) with ESMTPS id F316520708
 	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 08:31:01 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="rEqyyoba"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 85F462086A
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="KvNaN7Gc"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F316520708
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.35507.67095 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.35506.67073 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khTip-0003SZ-95; Tue, 24 Nov 2020 08:30:47 +0000
+	id 1khTio-0003R2-Er; Tue, 24 Nov 2020 08:30:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 35507.67095; Tue, 24 Nov 2020 08:30:47 +0000
+Received: by outflank-mailman (output) from mailman id 35506.67073; Tue, 24 Nov 2020 08:30:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,116 +38,289 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khTip-0003SG-0E; Tue, 24 Nov 2020 08:30:47 +0000
-Received: by outflank-mailman (input) for mailman id 35507;
+	id 1khTio-0003Qq-AV; Tue, 24 Nov 2020 08:30:46 +0000
+Received: by outflank-mailman (input) for mailman id 35506;
  Tue, 24 Nov 2020 08:30:45 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>) id 1khTim-0003PQ-Vk
+ (envelope-from <paul@xen.org>) id 1khTim-0003PL-UL
  for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 08:30:44 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1khTim-0006ar-Bx; Tue, 24 Nov 2020 08:30:44 +0000
+ id 1khTim-0006ah-3v; Tue, 24 Nov 2020 08:30:44 +0000
 Received: from ec2-54-145-241-208.compute-1.amazonaws.com ([54.145.241.208]
  helo=ip-10-0-29-170.ec2.internal)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1khTH5-0001hp-Fu; Tue, 24 Nov 2020 08:02:07 +0000
+ id 1khTH3-0001hp-Rm; Tue, 24 Nov 2020 08:02:05 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1khTim-0003PQ-Vk
+	id 1khTim-0003PL-UL
 	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 08:30:44 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	 bh=z+TBph7KfTXS8lKGFLMVlUTRo1VQXbbt6hL6Ha7NBXk=; b=rEqyyobaINla31ETAb8+7/Qih
-	ROtHcoDpjF5t1g5GpQuy1yk9UNht8D2JDXw/WVPD8A/4s+ekltp/DclPNiUk0Xnn+7YAogYp+Oiig
-	ifNNX0xdMkxRbDj3edeGl9GPRkr3YyL8ed6AiegbjLcTl8zZNewdP53sfqGNL8nVjK/yI=;
+	 bh=z6HgaaJxE43aYUfbefthFXj4bV6TUshSIIqyN3QunIw=; b=KvNaN7Gc1rXGzOL5ZtUOdh6i4
+	UQAFI11D88dYwfC+M6zZBs5xlHyu8ud+YycOoKhQRRkYYUy7216pMZ2//YOb1YtY4woooA+5jTQTj
+	SgZcLH8Oi3bSlvFuuoEC0Z0f7/+FyoX1xsf85MLecSQ+9/ClBlgjZkLGrQifKXJqcF8Ww=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
 	by mail.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1khTim-0006ar-Bx; Tue, 24 Nov 2020 08:30:44 +0000
+	id 1khTim-0006ah-3v; Tue, 24 Nov 2020 08:30:44 +0000
 Received: from ec2-54-145-241-208.compute-1.amazonaws.com ([54.145.241.208] helo=ip-10-0-29-170.ec2.internal)
 	by xenbits.xenproject.org with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
 	(Exim 4.92)
 	(envelope-from <paul@xen.org>)
-	id 1khTH5-0001hp-Fu; Tue, 24 Nov 2020 08:02:07 +0000
+	id 1khTH3-0001hp-Rm; Tue, 24 Nov 2020 08:02:05 +0000
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: Paul Durrant <pdurrant@amazon.com>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v4 22/23] docs/man: modify xl-pci-configuration(5) to add 'name' field to PCI_SPEC_STRING
-Date: Tue, 24 Nov 2020 08:01:58 +0000
-Message-Id: <20201124080159.11912-23-paul@xen.org>
+Subject: [PATCH v4 15/23] docs/man: improve documentation of PCI_SPEC_STRING...
+Date: Tue, 24 Nov 2020 08:01:51 +0000
+Message-Id: <20201124080159.11912-16-paul@xen.org>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20201124080159.11912-1-paul@xen.org>
 References: <20201124080159.11912-1-paul@xen.org>
 
 From: Paul Durrant <pdurrant@amazon.com>
 
-Since assignable devices can be named, a subsequent patch will support use
-of a PCI_SPEC_STRING containing a 'name' parameter instead of a 'bdf'. In
-this case the name will be used to look up the 'bdf' in the list of assignable
-(or assigned) devices.
+... and prepare for adding support for non-positional parsing of 'bdf' and
+'vslot' in a subsequent patch.
+
+Also document 'BDF' as a first-class parameter type and fix the documentation
+to state that the default value of 'rdm_policy' is actually 'strict', not
+'relaxed', as can be seen in libxl__device_pci_setdefault().
 
 Signed-off-by: Paul Durrant <pdurrant@amazon.com>
 ---
 Cc: Ian Jackson <iwj@xenproject.org>
 Cc: Wei Liu <wl@xen.org>
 ---
- docs/man/xl-pci-configuration.5.pod | 25 +++++++++++++++++++++++--
- 1 file changed, 23 insertions(+), 2 deletions(-)
+ docs/man/xl-pci-configuration.5.pod | 177 ++++++++++++++++++++++++++++++------
+ 1 file changed, 148 insertions(+), 29 deletions(-)
 
 diff --git a/docs/man/xl-pci-configuration.5.pod b/docs/man/xl-pci-configuration.5.pod
-index 4dd73bc498..db3360307c 100644
+index 72a27bd95d..4dd73bc498 100644
 --- a/docs/man/xl-pci-configuration.5.pod
 +++ b/docs/man/xl-pci-configuration.5.pod
-@@ -51,7 +51,7 @@ is not specified, or if it is specified with an empty value (whether
- positionally or explicitly).
+@@ -6,32 +6,105 @@ xl-pci-configuration - XL PCI Configuration Syntax
  
- B<NOTE>: In context of B<xl pci-detach> (see L<xl(1)>), parameters other than
--B<bdf> will be ignored.
-+B<bdf> or B<name> will be ignored.
+ =head1 SYNTAX
  
- =head1 Positional Parameters
+-This document specifies the format for B<PCI_SPEC_STRING> which is used by
+-the L<xl.cfg(5)> pci configuration option, and related L<xl(1)> commands.
++This document specifies the format for B<BDF> and B<PCI_SPEC_STRING> which are
++used by the L<xl.cfg(5)> pci configuration option, and related L<xl(1)>
++commands.
  
-@@ -70,7 +70,11 @@ B<*> to indicate all functions of a multi-function device.
+-Each B<PCI_SPEC_STRING> has the form of
+-B<[DDDD:]BB:DD.F[@VSLOT],KEY=VALUE,KEY=VALUE,...> where:
++A B<BDF> has the following form:
++
++    [DDDD:]BB:SS.F
++
++B<DDDD> is the domain number, B<BB> is the bus number, B<SS> is the device (or
++slot) number, and B<F> is the function number. This is the same scheme as
++used in the output of L<lspci(1)> for the device in question. By default
++L<lspci(1)> will omit the domain (B<DDDD>) if it is zero and hence a zero
++value for domain may also be omitted when specifying a B<BDF>.
++
++Each B<PCI_SPEC_STRING> has the one of the forms:
++
++=over 4
++
++    [<bdf>[@<vslot>,][<key>=<value>,]*
++    [<key>=<value>,]*
++
++=back
++
++For example, these strings are equivalent:
  
- =item Default Value
+ =over 4
  
--None. This parameter is mandatory as it identifies the device.
-+None. This parameter is mandatory in its positional form. As a non-positional
-+parameter it is also mandatory unless a B<name> parameter is present, in
-+which case B<bdf> must not be present since the B<name> will be used to find
-+the B<bdf> in the list of assignable devices. See L<xl(1)> for more information
-+on naming assignable devices.
+-=item B<[DDDD:]BB:DD.F>
++    36:00.0@20,seize=1
++    36:00.0,vslot=20,seize=1
++    bdf=36:00.0,vslot=20,seize=1
  
- =back
+-Identifies the PCI device from the host perspective in the domain
+-(B<DDDD>), Bus (B<BB>), Device (B<DD>) and Function (B<F>) syntax. This is
+-the same scheme as used in the output of B<lspci(1)> for the device in
+-question.
++=back
++
++More formally, the string is a series of comma-separated keyword/value
++pairs, flags and positional parameters.  Parameters which are not bare
++keywords and which do not contain "=" symbols are assigned to the
++positional parameters, in the order specified below.  The positional
++parameters may also be specified by name.
++
++Each parameter may be specified at most once, either as a positional
++parameter or a named parameter.  Default values apply if the parameter
++is not specified, or if it is specified with an empty value (whether
++positionally or explicitly).
++
++B<NOTE>: In context of B<xl pci-detach> (see L<xl(1)>), parameters other than
++B<bdf> will be ignored.
++
++=head1 Positional Parameters
++
++=over 4
++
++=item B<bdf>=I<BDF>
++
++=over 4
  
-@@ -194,4 +198,21 @@ B<NOTE>: This overrides the global B<rdm> option.
+-Note: by default B<lspci(1)> will omit the domain (B<DDDD>) if it
+-is zero and it is optional here also. You may specify the function
+-(B<F>) as B<*> to indicate all functions.
++=item Description
  
- =back
+-=item B<@VSLOT>
++This identifies the PCI device from the host perspective.
  
-+=item B<name>=I<STRING>
+-Specifies the virtual slot where the guest will see this
+-device. This is equivalent to the B<DD> which the guest sees. In a
+-guest B<DDDD> and B<BB> are C<0000:00>.
++In the context of a B<PCI_SPEC_STRING> you may specify the function (B<F>) as
++B<*> to indicate all functions of a multi-function device.
+ 
+-=item B<permissive=BOOLEAN>
++=item Default Value
++
++None. This parameter is mandatory as it identifies the device.
++
++=back
++
++=item B<vslot>=I<NUMBER>
 +
 +=over 4
 +
 +=item Description
 +
-+This is the name given when the B<BDF> was made assignable. See L<xl(1)> for
-+more information on naming assignable devices.
++Specifies the virtual slot (device) number where the guest will see this
++device. For example, running L<lspci(1)> in a Linux guest where B<vslot>
++was specified as C<8> would identify the device as C<00:08.0>. Virtual domain
++and bus numbers are always 0.
++
++B<NOTE:> This parameter is always parsed as a hexidecimal value.
 +
 +=item Default Value
 +
-+None. This parameter must not be present if a B<bdf> parameter is present.
-+If a B<bdf> parameter is not present then B<name> is mandatory as it is
-+required to look up the B<BDF> in the list of assignable devices.
++None. This parameter is not mandatory. An available B<vslot> will be selected
++if this parameter is not specified.
 +
 +=back
 +
++=back
++
++=head1 Other Parameters and Flags
++
++=over 4
++
++=item B<permissive>=I<BOOLEAN>
++
++=over 4
++
++=item Description
+ 
+ By default pciback only allows PV guests to write "known safe" values
+ into PCI configuration space, likewise QEMU (both qemu-xen and
+@@ -46,33 +119,79 @@ more control over the device, which may have security or stability
+ implications.  It is recommended to only enable this option for
+ trusted VMs under administrator's control.
+ 
+-=item B<msitranslate=BOOLEAN>
++=item Default Value
++
++0
++
++=back
++
++=item B<msitranslate>=I<BOOLEAN>
++
++=over 4
++
++=item Description
+ 
+ Specifies that MSI-INTx translation should be turned on for the PCI
+ device. When enabled, MSI-INTx translation will always enable MSI on
+-the PCI device regardless of whether the guest uses INTx or MSI. Some
+-device drivers, such as NVIDIA's, detect an inconsistency and do not
++the PCI device regardless of whether the guest uses INTx or MSI.
++
++=item Default Value
++
++Some device drivers, such as NVIDIA's, detect an inconsistency and do not
+ function when this option is enabled. Therefore the default is false (0).
+ 
+-=item B<seize=BOOLEAN>
++=back
++
++=item B<seize>=I<BOOLEAN>
++
++=over 4
++
++=item Description
+ 
+-Tells B<xl> to automatically attempt to re-assign a device to
+-pciback if it is not already assigned.
++Tells L<xl(1)> to automatically attempt to make the device assignable to
++guests if that has not already been done by the B<pci-assignable-add>
++command.
+ 
+-B<WARNING:> If you set this option, B<xl> will gladly re-assign a critical
++B<WARNING:> If you set this option, L<xl> will gladly re-assign a critical
+ system device, such as a network or a disk controller being used by
+ dom0 without confirmation.  Please use with care.
+ 
+-=item B<power_mgmt=BOOLEAN>
++=item Default Value
++
++0
++
++=back
++
++=item B<power_mgmt>=I<BOOLEAN>
++
++=over 4
++
++=item Description
+ 
+ B<(HVM only)> Specifies that the VM should be able to program the
+-D0-D3hot power management states for the PCI device. The default is false (0).
++D0-D3hot power management states for the PCI device.
++
++=item Default Value
++
++0
+ 
+-=item B<rdm_policy=STRING>
++=back
++
++=item B<rdm_policy>=I<STRING>
++
++=over 4
++
++=item Description
+ 
+ B<(HVM/x86 only)> This is the same as the policy setting inside the B<rdm>
+-option but just specific to a given device. The default is "relaxed".
++option in L<xl.cfg(5)> but just specific to a given device.
+ 
+-Note: this would override global B<rdm> option.
++B<NOTE>: This overrides the global B<rdm> option.
++
++=item Default Value
++
++"strict"
++
++=back
+ 
  =back
 -- 
 2.11.0
