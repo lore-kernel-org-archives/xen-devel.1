@@ -5,25 +5,25 @@ X-Spam-Level:
 X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=unavailable autolearn_force=no version=3.4.0
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 780D3C83013
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:28:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 42AD8C82582
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:28:54 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 09A95204EC
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:28:50 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id BD2BB206F9
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:28:53 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="REng/ovL"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 09A95204EC
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="gSBkuGb0"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BD2BB206F9
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.35989.67698 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.35990.67710 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khYN6-0000aI-CH; Tue, 24 Nov 2020 13:28:40 +0000
+	id 1khYNB-0000fY-N0; Tue, 24 Nov 2020 13:28:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 35989.67698; Tue, 24 Nov 2020 13:28:40 +0000
+Received: by outflank-mailman (output) from mailman id 35990.67710; Tue, 24 Nov 2020 13:28:45 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khYN6-0000a8-89; Tue, 24 Nov 2020 13:28:40 +0000
-Received: by outflank-mailman (input) for mailman id 35989;
- Tue, 24 Nov 2020 13:28:39 +0000
+	id 1khYNB-0000fM-J8; Tue, 24 Nov 2020 13:28:45 +0000
+Received: by outflank-mailman (input) for mailman id 35990;
+ Tue, 24 Nov 2020 13:28:44 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=daQ6=E6=casper.srs.infradead.org=batv+cbe268a5dfa7b983a02e+6302+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1khYN5-0000Qf-0t
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:28:39 +0000
+ id 1khYNA-0000Qf-0z
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:28:44 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9613395a-11bc-44b4-bd61-f1e2d26132bd;
- Tue, 24 Nov 2020 13:28:23 +0000 (UTC)
+ id 2a683895-2499-4995-accb-56c7fdf0d24e;
+ Tue, 24 Nov 2020 13:28:24 +0000 (UTC)
 Received: from [2001:4bb8:180:5443:c70:4a89:bc61:3] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1khYMU-0006Uj-4z; Tue, 24 Nov 2020 13:28:02 +0000
+ id 1khYMW-0006V1-Oc; Tue, 24 Nov 2020 13:28:05 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=daQ6=E6=casper.srs.infradead.org=batv+cbe268a5dfa7b983a02e+6302+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1khYN5-0000Qf-0t
-	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:28:39 +0000
-X-Inumbo-ID: 9613395a-11bc-44b4-bd61-f1e2d26132bd
+	id 1khYNA-0000Qf-0z
+	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:28:44 +0000
+X-Inumbo-ID: 2a683895-2499-4995-accb-56c7fdf0d24e
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 9613395a-11bc-44b4-bd61-f1e2d26132bd;
-	Tue, 24 Nov 2020 13:28:23 +0000 (UTC)
+	id 2a683895-2499-4995-accb-56c7fdf0d24e;
+	Tue, 24 Nov 2020 13:28:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=0e+oH+92GlExM9i4SIPWTJvhHTDsEZRU6nAY6yeduas=; b=REng/ovLixhm4d/5DVr1VL2uxE
-	639N3KIOFrakBFne91QmfkqFXFb98IXLDOJAJjpMFMj6wLqG5p9ivwi/IdkTiYg4UpBWe6eJ1dbQ0
-	HBBalWEc8V1HK853AyKP05+uuRQAG2MYtBlard5dwdv3pfAPnyCU606UPfuqSfkDGROj+x/Jgp80m
-	xgK0Cn++2YT5C/MR23s2fjCN+ORZdOrOQHa/0v4hpeslgE++xWymjVqNfUo2VOJ114NGbFD3umqP5
-	6luT+lKBWO6SNfhge4bMavfuGRB4GvvtxnMy6Fhr3dVO8r0ujYfdajMXqb4qBL494koWxbslNF9Up
-	gR2DYZAw==;
+	bh=q5VEN3b+/NuaC3nLa7Ob8T2zF/1/3On5f5TLNt/sEKk=; b=gSBkuGb01pZYejE/qt8U+f1Prp
+	H6UFF5H/7Q8DKAajhbcAG/TWkWqcbJP6bF/2kpoG1MhuVrgkQKne/Is825NwtMjoMkmVuk6QyOhw4
+	6d32g0XCyz8crp9IhQ8kuRwKQHuh2i/recIYUgVpmwkRUq3tDkXkobmCdXxgw2dGWnUTzWgrewmho
+	SphjpGruHOWqUH4vavWTPhddkaX2Ct2GTq94foULjN6riyh6UEzcq/lFdKB/Bgo2FSx5SzSq74gko
+	EnRhAkBQn/CQvobi3r+bM87y3KzNaOsLt6QALXtIHOxRJ1xW5O4DJquFcSCvJ8LYd4MwXPv9+3hgu
+	zAxlftXQ==;
 Received: from [2001:4bb8:180:5443:c70:4a89:bc61:3] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1khYMU-0006Uj-4z; Tue, 24 Nov 2020 13:28:02 +0000
+	id 1khYMW-0006V1-Oc; Tue, 24 Nov 2020 13:28:05 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Tejun Heo <tj@kernel.org>,
@@ -95,9 +95,9 @@ Cc: Tejun Heo <tj@kernel.org>,
 	linux-mtd@lists.infradead.org,
 	linux-fsdevel@vger.kernel.org,
 	linux-mm@kvack.org
-Subject: [PATCH 05/45] mtip32xx: remove the call to fsync_bdev on removal
-Date: Tue, 24 Nov 2020 14:27:11 +0100
-Message-Id: <20201124132751.3747337-6-hch@lst.de>
+Subject: [PATCH 07/45] zram: do not call set_blocksize
+Date: Tue, 24 Nov 2020 14:27:13 +0100
+Message-Id: <20201124132751.3747337-8-hch@lst.de>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20201124132751.3747337-1-hch@lst.de>
 References: <20201124132751.3747337-1-hch@lst.de>
@@ -105,75 +105,69 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-del_gendisk already calls fsync_bdev for every partition, no need
-to do this twice.
+set_blocksize is used by file systems to use their preferred buffer cache
+block size.  Block drivers should not set it.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/block/mtip32xx/mtip32xx.c | 15 ---------------
- drivers/block/mtip32xx/mtip32xx.h |  2 --
- 2 files changed, 17 deletions(-)
+ drivers/block/zram/zram_drv.c | 11 +----------
+ drivers/block/zram/zram_drv.h |  1 -
+ 2 files changed, 1 insertion(+), 11 deletions(-)
 
-diff --git a/drivers/block/mtip32xx/mtip32xx.c b/drivers/block/mtip32xx/mtip32xx.c
-index 153e2cdecb4d40..53ac59d19ae530 100644
---- a/drivers/block/mtip32xx/mtip32xx.c
-+++ b/drivers/block/mtip32xx/mtip32xx.c
-@@ -3687,7 +3687,6 @@ static int mtip_block_initialize(struct driver_data *dd)
- 	/* Enable the block device and add it to /dev */
- 	device_add_disk(&dd->pdev->dev, dd->disk, NULL);
+diff --git a/drivers/block/zram/zram_drv.c b/drivers/block/zram/zram_drv.c
+index 2e6d75ec1afddb..88baa6158eaee1 100644
+--- a/drivers/block/zram/zram_drv.c
++++ b/drivers/block/zram/zram_drv.c
+@@ -403,13 +403,10 @@ static void reset_bdev(struct zram *zram)
+ 		return;
  
--	dd->bdev = bdget_disk(dd->disk, 0);
- 	/*
- 	 * Now that the disk is active, initialize any sysfs attributes
- 	 * managed by the protocol layer.
-@@ -3721,9 +3720,6 @@ static int mtip_block_initialize(struct driver_data *dd)
- 	return rv;
+ 	bdev = zram->bdev;
+-	if (zram->old_block_size)
+-		set_blocksize(bdev, zram->old_block_size);
+ 	blkdev_put(bdev, FMODE_READ|FMODE_WRITE|FMODE_EXCL);
+ 	/* hope filp_close flush all of IO */
+ 	filp_close(zram->backing_dev, NULL);
+ 	zram->backing_dev = NULL;
+-	zram->old_block_size = 0;
+ 	zram->bdev = NULL;
+ 	zram->disk->fops = &zram_devops;
+ 	kvfree(zram->bitmap);
+@@ -454,7 +451,7 @@ static ssize_t backing_dev_store(struct device *dev,
+ 	struct file *backing_dev = NULL;
+ 	struct inode *inode;
+ 	struct address_space *mapping;
+-	unsigned int bitmap_sz, old_block_size = 0;
++	unsigned int bitmap_sz;
+ 	unsigned long nr_pages, *bitmap = NULL;
+ 	struct block_device *bdev = NULL;
+ 	int err;
+@@ -509,14 +506,8 @@ static ssize_t backing_dev_store(struct device *dev,
+ 		goto out;
+ 	}
  
- kthread_run_error:
--	bdput(dd->bdev);
--	dd->bdev = NULL;
+-	old_block_size = block_size(bdev);
+-	err = set_blocksize(bdev, PAGE_SIZE);
+-	if (err)
+-		goto out;
 -
- 	/* Delete our gendisk. This also removes the device from /dev */
- 	del_gendisk(dd->disk);
+ 	reset_bdev(zram);
  
-@@ -3804,14 +3800,6 @@ static int mtip_block_remove(struct driver_data *dd)
- 	blk_mq_tagset_busy_iter(&dd->tags, mtip_no_dev_cleanup, dd);
- 	blk_mq_unquiesce_queue(dd->queue);
- 
--	/*
--	 * Delete our gendisk structure. This also removes the device
--	 * from /dev
--	 */
--	if (dd->bdev) {
--		bdput(dd->bdev);
--		dd->bdev = NULL;
--	}
- 	if (dd->disk) {
- 		if (test_bit(MTIP_DDF_INIT_DONE_BIT, &dd->dd_flag))
- 			del_gendisk(dd->disk);
-@@ -4206,9 +4194,6 @@ static void mtip_pci_remove(struct pci_dev *pdev)
- 	} while (atomic_read(&dd->irq_workers_active) != 0 &&
- 		time_before(jiffies, to));
- 
--	if (!dd->sr)
--		fsync_bdev(dd->bdev);
--
- 	if (atomic_read(&dd->irq_workers_active) != 0) {
- 		dev_warn(&dd->pdev->dev,
- 			"Completion workers still active!\n");
-diff --git a/drivers/block/mtip32xx/mtip32xx.h b/drivers/block/mtip32xx/mtip32xx.h
-index e22a7f0523bf30..88f4206310e4c8 100644
---- a/drivers/block/mtip32xx/mtip32xx.h
-+++ b/drivers/block/mtip32xx/mtip32xx.h
-@@ -463,8 +463,6 @@ struct driver_data {
- 
- 	int isr_binding;
- 
--	struct block_device *bdev;
--
- 	struct list_head online_list; /* linkage for online list */
- 
- 	struct list_head remove_list; /* linkage for removing list */
+-	zram->old_block_size = old_block_size;
+ 	zram->bdev = bdev;
+ 	zram->backing_dev = backing_dev;
+ 	zram->bitmap = bitmap;
+diff --git a/drivers/block/zram/zram_drv.h b/drivers/block/zram/zram_drv.h
+index f2fd46daa76045..712354a4207c77 100644
+--- a/drivers/block/zram/zram_drv.h
++++ b/drivers/block/zram/zram_drv.h
+@@ -118,7 +118,6 @@ struct zram {
+ 	bool wb_limit_enable;
+ 	u64 bd_wb_limit;
+ 	struct block_device *bdev;
+-	unsigned int old_block_size;
+ 	unsigned long *bitmap;
+ 	unsigned long nr_pages;
+ #endif
 -- 
 2.29.2
 
