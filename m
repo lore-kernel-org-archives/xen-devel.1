@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1B718C56201
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:40:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E9B86C56201
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:41:09 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9DFD720782
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:40:53 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 6D20D20782
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:41:09 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="FlEj2XVd"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9DFD720782
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="X+rA73r6"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6D20D20782
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.36152.68080 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.36212.68118 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khYYi-0005P6-UM; Tue, 24 Nov 2020 13:40:41 +0000
+	id 1khYZ2-000641-48; Tue, 24 Nov 2020 13:41:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 36152.68080; Tue, 24 Nov 2020 13:40:40 +0000
+Received: by outflank-mailman (output) from mailman id 36212.68118; Tue, 24 Nov 2020 13:41:00 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khYYh-0005Nb-Gh; Tue, 24 Nov 2020 13:40:39 +0000
-Received: by outflank-mailman (input) for mailman id 36152;
- Tue, 24 Nov 2020 13:40:35 +0000
+	id 1khYZ1-00063r-Q3; Tue, 24 Nov 2020 13:40:59 +0000
+Received: by outflank-mailman (input) for mailman id 36212;
+ Tue, 24 Nov 2020 13:40:58 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=daQ6=E6=casper.srs.infradead.org=batv+cbe268a5dfa7b983a02e+6302+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1khYOS-0000Qf-3g
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:30:04 +0000
+ id 1khYOm-0000Qf-40
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:30:24 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 6cc9c57e-ba5a-4d85-9d25-28ec0dd73b3b;
- Tue, 24 Nov 2020 13:28:45 +0000 (UTC)
+ id 2297f7a2-f7a7-4e4d-a7b9-f9365b3163f3;
+ Tue, 24 Nov 2020 13:28:48 +0000 (UTC)
 Received: from [2001:4bb8:180:5443:c70:4a89:bc61:3] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1khYMs-0006Z8-1F; Tue, 24 Nov 2020 13:28:26 +0000
+ id 1khYMo-0006YR-Rc; Tue, 24 Nov 2020 13:28:23 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=daQ6=E6=casper.srs.infradead.org=batv+cbe268a5dfa7b983a02e+6302+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1khYOS-0000Qf-3g
-	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:30:04 +0000
-X-Inumbo-ID: 6cc9c57e-ba5a-4d85-9d25-28ec0dd73b3b
+	id 1khYOm-0000Qf-40
+	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:30:24 +0000
+X-Inumbo-ID: 2297f7a2-f7a7-4e4d-a7b9-f9365b3163f3
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 6cc9c57e-ba5a-4d85-9d25-28ec0dd73b3b;
-	Tue, 24 Nov 2020 13:28:45 +0000 (UTC)
+	id 2297f7a2-f7a7-4e4d-a7b9-f9365b3163f3;
+	Tue, 24 Nov 2020 13:28:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=72pzSMUtG54OL/Eca8JCS6Cut6vtXvByBKF+r5JkUZU=; b=FlEj2XVd4aO5E+awAOEaxrjHFP
-	nbTwD38evQvBZtbbRpaPRv4w7SQgR/X5RUlt/qA1fFWMPnWI86V5fG/R+1H2W/UZ29b7ldRWLa1dd
-	tU1fTXQkFVMRV5FKtiDc5PNo+nlp3px3fcZyUXemalSLi8QkH68sCLNjrgg/YWejEIQ4GICloHKpX
-	hcIJqz4QLGO7aEZpxnGZJ/p3S2Y6mm2yl1JeTx600EG8EhKGRAmNzZwBbGkSr/guQr9ug6dVSnUs1
-	PcWorBNAAH3r27c7yQDm7bIcF+dmd7t7AZ2DGtVVY9S3IddEspErcixUNQioTsPQbjYtA1t5lfJJL
-	UNaX/fwg==;
+	bh=X5DUE98moi230PHv1tVgCiHzV+UhCd8lztDnZO9kG5c=; b=X+rA73r6QDOVyee+DSa3rW8b35
+	OeKaTwg4NHeZa8iiOjrhEjDtW7DX4fOMB9c6aebaBDKuxk+IsDdUW0f7EuZlr2Pov3PURxlMx5rSK
+	PBcTmBTO0WyZ7LcgWQ6Xl/0zPJFv0c+ZKh43ZOCIkVopkoFOK48fZGWf8ai+Cj/OoZO3jhvVw5m5Q
+	yaSWPl46Vb8ovXNenLX8KK6YPvBJf1LP9VoLMLET0fF69TiH7hVM4rzUe6WIONjC+Mkq9y1ueE05Y
+	CfQTDXafYdPFj4peFCtKw/0RrMBMz1uLe6nNpgZh858syqReHUhfMsbGLdWOS/inGodpPctzqcSuj
+	FQUx+Tzw==;
 Received: from [2001:4bb8:180:5443:c70:4a89:bc61:3] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1khYMs-0006Z8-1F; Tue, 24 Nov 2020 13:28:26 +0000
+	id 1khYMo-0006YR-Rc; Tue, 24 Nov 2020 13:28:23 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Tejun Heo <tj@kernel.org>,
@@ -95,9 +95,9 @@ Cc: Tejun Heo <tj@kernel.org>,
 	linux-mtd@lists.infradead.org,
 	linux-fsdevel@vger.kernel.org,
 	linux-mm@kvack.org
-Subject: [PATCH 21/45] block: refactor blkdev_get
-Date: Tue, 24 Nov 2020 14:27:27 +0100
-Message-Id: <20201124132751.3747337-22-hch@lst.de>
+Subject: [PATCH 19/45] init: cleanup match_dev_by_uuid and match_dev_by_label
+Date: Tue, 24 Nov 2020 14:27:25 +0100
+Message-Id: <20201124132751.3747337-20-hch@lst.de>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20201124132751.3747337-1-hch@lst.de>
 References: <20201124132751.3747337-1-hch@lst.de>
@@ -105,304 +105,54 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-Move more code that is only run on the outer open but not the open of
-the underlying whole device when opening a partition into blkdev_get,
-which leads to a much easier to follow structure.
-
-This allows to simplify the disk and module refcounting so that one
-reference is held for each open, similar to what we do with normal
-file operations.
+Avoid a totally pointless goto label, and use the same style of
+comparism for both helpers.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
+Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Reviewed-by: Jan Kara <jack@suse.cz>
+Reviewed-by: Johannes Thumshirn <johannes.thumshirn@wdc.com>
 ---
- fs/block_dev.c | 185 +++++++++++++++++++++++--------------------------
- 1 file changed, 86 insertions(+), 99 deletions(-)
+ init/do_mounts.c | 18 ++++++------------
+ 1 file changed, 6 insertions(+), 12 deletions(-)
 
-diff --git a/fs/block_dev.c b/fs/block_dev.c
-index 88847839ef0102..2ffa11a95f10db 100644
---- a/fs/block_dev.c
-+++ b/fs/block_dev.c
-@@ -1403,46 +1403,12 @@ EXPORT_SYMBOL_GPL(bdev_disk_changed);
-  *  mutex_lock(part->bd_mutex)
-  *    mutex_lock_nested(whole->bd_mutex, 1)
-  */
--
--static int __blkdev_get(struct block_device *bdev, fmode_t mode, void *holder,
--		int for_part)
-+static int __blkdev_get(struct block_device *bdev, struct gendisk *disk,
-+		int partno, fmode_t mode)
- {
--	struct block_device *whole = NULL, *claiming = NULL;
--	struct gendisk *disk;
- 	int ret;
--	int partno;
--	bool first_open = false, unblock_events = true, need_restart;
--
-- restart:
--	need_restart = false;
--	ret = -ENXIO;
--	disk = bdev_get_gendisk(bdev, &partno);
--	if (!disk)
--		goto out;
--
--	if (partno) {
--		whole = bdget_disk(disk, 0);
--		if (!whole) {
--			ret = -ENOMEM;
--			goto out_put_disk;
--		}
--	}
+diff --git a/init/do_mounts.c b/init/do_mounts.c
+index afa26a4028d25e..5879edf083b318 100644
+--- a/init/do_mounts.c
++++ b/init/do_mounts.c
+@@ -79,15 +79,10 @@ static int match_dev_by_uuid(struct device *dev, const void *data)
+ 	const struct uuidcmp *cmp = data;
+ 	struct hd_struct *part = dev_to_part(dev);
  
--	if (!for_part && (mode & FMODE_EXCL)) {
--		WARN_ON_ONCE(!holder);
--		if (whole)
--			claiming = whole;
--		else
--			claiming = bdev;
--		ret = bd_prepare_to_claim(bdev, claiming, holder);
--		if (ret)
--			goto out_put_whole;
--	}
+-	if (!part->info)
+-		goto no_match;
 -
--	disk_block_events(disk);
--	mutex_lock_nested(&bdev->bd_mutex, for_part);
- 	if (!bdev->bd_openers) {
--		first_open = true;
- 		bdev->bd_disk = disk;
- 		bdev->bd_contains = bdev;
- 		bdev->bd_partno = partno;
-@@ -1454,15 +1420,8 @@ static int __blkdev_get(struct block_device *bdev, fmode_t mode, void *holder,
- 				goto out_clear;
- 
- 			ret = 0;
--			if (disk->fops->open) {
-+			if (disk->fops->open)
- 				ret = disk->fops->open(bdev, mode);
--				/*
--				 * If we lost a race with 'disk' being deleted,
--				 * try again.  See md.c
--				 */
--				if (ret == -ERESTARTSYS)
--					need_restart = true;
--			}
- 
- 			if (!ret) {
- 				bd_set_nr_sectors(bdev, get_capacity(disk));
-@@ -1482,14 +1441,23 @@ static int __blkdev_get(struct block_device *bdev, fmode_t mode, void *holder,
- 			if (ret)
- 				goto out_clear;
- 		} else {
--			BUG_ON(for_part);
--			ret = __blkdev_get(whole, mode, NULL, 1);
--			if (ret)
-+			struct block_device *whole = bdget_disk(disk, 0);
-+
-+			mutex_lock_nested(&whole->bd_mutex, 1);
-+			ret = __blkdev_get(whole, disk, 0, mode);
-+			if (ret) {
-+				mutex_unlock(&whole->bd_mutex);
-+				bdput(whole);
- 				goto out_clear;
--			bdev->bd_contains = bdgrab(whole);
-+			}
-+			whole->bd_part_count++;
-+			mutex_unlock(&whole->bd_mutex);
-+
-+			bdev->bd_contains = whole;
- 			bdev->bd_part = disk_get_part(disk, partno);
- 			if (!(disk->flags & GENHD_FL_UP) ||
- 			    !bdev->bd_part || !bdev->bd_part->nr_sects) {
-+				__blkdev_put(whole, mode, 1);
- 				ret = -ENXIO;
- 				goto out_clear;
- 			}
-@@ -1509,58 +1477,17 @@ static int __blkdev_get(struct block_device *bdev, fmode_t mode, void *holder,
- 			    (!ret || ret == -ENOMEDIUM))
- 				bdev_disk_changed(bdev, ret == -ENOMEDIUM);
- 			if (ret)
--				goto out_unlock_bdev;
-+				return ret;
- 		}
- 	}
- 	bdev->bd_openers++;
--	if (for_part)
--		bdev->bd_part_count++;
--	if (claiming)
--		bd_finish_claiming(bdev, claiming, holder);
+-	if (strncasecmp(cmp->uuid, part->info->uuid, cmp->len))
+-		goto no_match;
 -
--	/*
--	 * Block event polling for write claims if requested.  Any write holder
--	 * makes the write_holder state stick until all are released.  This is
--	 * good enough and tracking individual writeable reference is too
--	 * fragile given the way @mode is used in blkdev_get/put().
--	 */
--	if (claiming && (mode & FMODE_WRITE) && !bdev->bd_write_holder &&
--	    (disk->flags & GENHD_FL_BLOCK_EVENTS_ON_EXCL_WRITE)) {
--		bdev->bd_write_holder = true;
--		unblock_events = false;
--	}
--	mutex_unlock(&bdev->bd_mutex);
--
--	if (unblock_events)
--		disk_unblock_events(disk);
--
--	/* only one opener holds refs to the module and disk */
--	if (!first_open)
--		put_disk_and_module(disk);
--	if (whole)
--		bdput(whole);
- 	return 0;
- 
-  out_clear:
- 	disk_put_part(bdev->bd_part);
- 	bdev->bd_disk = NULL;
- 	bdev->bd_part = NULL;
--	if (bdev != bdev->bd_contains)
--		__blkdev_put(bdev->bd_contains, mode, 1);
- 	bdev->bd_contains = NULL;
-- out_unlock_bdev:
--	if (claiming)
--		bd_abort_claiming(bdev, claiming, holder);
--	mutex_unlock(&bdev->bd_mutex);
--	disk_unblock_events(disk);
-- out_put_whole:
-- 	if (whole)
--		bdput(whole);
-- out_put_disk:
--	put_disk_and_module(disk);
--	if (need_restart)
--		goto restart;
-- out:
- 	return ret;
- }
- 
-@@ -1585,7 +1512,12 @@ static int __blkdev_get(struct block_device *bdev, fmode_t mode, void *holder,
-  */
- static int blkdev_get(struct block_device *bdev, fmode_t mode, void *holder)
- {
--	int ret, perm = 0;
-+	struct block_device *claiming;
-+	bool unblock_events = true;
-+	struct gendisk *disk;
-+	int perm = 0;
-+	int partno;
-+	int ret;
- 
- 	if (mode & FMODE_READ)
- 		perm |= MAY_READ;
-@@ -1595,13 +1527,67 @@ static int blkdev_get(struct block_device *bdev, fmode_t mode, void *holder)
- 	if (ret)
- 		goto bdput;
- 
--	ret =__blkdev_get(bdev, mode, holder, 0);
--	if (ret)
-+	/*
-+	 * If we lost a race with 'disk' being deleted, try again.  See md.c.
-+	 */
-+retry:
-+	ret = -ENXIO;
-+	disk = bdev_get_gendisk(bdev, &partno);
-+	if (!disk)
- 		goto bdput;
++	if (!part->info ||
++	    strncasecmp(cmp->uuid, part->info->uuid, cmp->len))
++		return 0;
+ 	return 1;
+-no_match:
 -	return 0;
- 
-+	if (mode & FMODE_EXCL) {
-+		WARN_ON_ONCE(!holder);
-+	
-+		ret = -ENOMEM;
-+		claiming = bdget_disk(disk, 0);
-+		if (!claiming)
-+			goto put_disk;
-+		ret = bd_prepare_to_claim(bdev, claiming, holder);
-+		if (ret)
-+			goto put_claiming;
-+	}
-+
-+	disk_block_events(disk);
-+
-+	mutex_lock(&bdev->bd_mutex);
-+	ret =__blkdev_get(bdev, disk, partno, mode);
-+	if (!(mode & FMODE_EXCL)) {
-+		; /* nothing to do here */
-+	} else if (ret) {
-+		bd_abort_claiming(bdev, claiming, holder);
-+	} else {
-+		bd_finish_claiming(bdev, claiming, holder);
-+
-+		/*
-+		 * Block event polling for write claims if requested.  Any write
-+		 * holder makes the write_holder state stick until all are
-+		 * released.  This is good enough and tracking individual
-+		 * writeable reference is too fragile given the way @mode is
-+		 * used in blkdev_get/put().
-+		 */
-+		if ((mode & FMODE_WRITE) && !bdev->bd_write_holder &&
-+		    (disk->flags & GENHD_FL_BLOCK_EVENTS_ON_EXCL_WRITE)) {
-+			bdev->bd_write_holder = true;
-+			unblock_events = false;
-+		}
-+	}
-+	mutex_unlock(&bdev->bd_mutex);
-+
-+	if (unblock_events)
-+		disk_unblock_events(disk);
-+
-+put_claiming:
-+	if (mode & FMODE_EXCL)
-+		bdput(claiming);
-+put_disk:
-+	if (ret)
-+		put_disk_and_module(disk);
-+	if (ret == -ERESTARTSYS)
-+		goto retry;
- bdput:
--	bdput(bdev);
-+	if (ret)
-+		bdput(bdev);
- 	return ret;
  }
  
-@@ -1749,8 +1735,6 @@ static void __blkdev_put(struct block_device *bdev, fmode_t mode, int for_part)
- 		if (bdev_is_partition(bdev))
- 			victim = bdev->bd_contains;
- 		bdev->bd_contains = NULL;
+ /**
+@@ -174,10 +169,9 @@ static int match_dev_by_label(struct device *dev, const void *data)
+ 	const char *label = data;
+ 	struct hd_struct *part = dev_to_part(dev);
+ 
+-	if (part->info && !strcmp(label, part->info->volname))
+-		return 1;
 -
--		put_disk_and_module(disk);
- 	} else {
- 		if (!bdev_is_partition(bdev) && disk->fops->release)
- 			disk->fops->release(disk, mode);
-@@ -1763,6 +1747,8 @@ static void __blkdev_put(struct block_device *bdev, fmode_t mode, int for_part)
- 
- void blkdev_put(struct block_device *bdev, fmode_t mode)
- {
-+	struct gendisk *disk = bdev->bd_disk;
-+
- 	mutex_lock(&bdev->bd_mutex);
- 
- 	if (mode & FMODE_EXCL) {
-@@ -1791,7 +1777,7 @@ void blkdev_put(struct block_device *bdev, fmode_t mode)
- 		 * unblock evpoll if it was a write holder.
- 		 */
- 		if (bdev_free && bdev->bd_write_holder) {
--			disk_unblock_events(bdev->bd_disk);
-+			disk_unblock_events(disk);
- 			bdev->bd_write_holder = false;
- 		}
- 	}
-@@ -1801,11 +1787,12 @@ void blkdev_put(struct block_device *bdev, fmode_t mode)
- 	 * event.  This is to ensure detection of media removal commanded
- 	 * from userland - e.g. eject(1).
- 	 */
--	disk_flush_events(bdev->bd_disk, DISK_EVENT_MEDIA_CHANGE);
-+	disk_flush_events(disk, DISK_EVENT_MEDIA_CHANGE);
- 
- 	mutex_unlock(&bdev->bd_mutex);
- 
- 	__blkdev_put(bdev, mode, 0);
-+	put_disk_and_module(disk);
+-	return 0;
++	if (!part->info || strcmp(label, part->info->volname))
++		return 0;
++	return 1;
  }
- EXPORT_SYMBOL(blkdev_put);
  
+ static dev_t devt_from_partlabel(const char *label)
 -- 
 2.29.2
 
