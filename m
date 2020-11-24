@@ -2,28 +2,28 @@ Return-Path: <SRS0=fYmn=E6=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 66ABFC6379D
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 08:31:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F49AC2D0E4
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 09:31:25 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E8D4C20782
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 08:31:17 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 993612075A
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 09:31:23 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="oc4iWKmM"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E8D4C20782
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="vS11Y6gV"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 993612075A
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.35512.67155 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.35612.67236 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khTis-0003aD-Db; Tue, 24 Nov 2020 08:30:50 +0000
+	id 1khUf0-0001kz-QE; Tue, 24 Nov 2020 09:30:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 35512.67155; Tue, 24 Nov 2020 08:30:50 +0000
+Received: by outflank-mailman (output) from mailman id 35612.67236; Tue, 24 Nov 2020 09:30:54 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,236 +38,89 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khTis-0003ZT-14; Tue, 24 Nov 2020 08:30:50 +0000
-Received: by outflank-mailman (input) for mailman id 35512;
- Tue, 24 Nov 2020 08:30:45 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1khUf0-0001ks-MJ; Tue, 24 Nov 2020 09:30:54 +0000
+Received: by outflank-mailman (input) for mailman id 35612;
+ Tue, 24 Nov 2020 09:30:53 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>) id 1khTin-0003Py-8A
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 08:30:45 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>)
- id 1khTim-0006b5-HC; Tue, 24 Nov 2020 08:30:44 +0000
-Received: from ec2-54-145-241-208.compute-1.amazonaws.com ([54.145.241.208]
- helo=ip-10-0-29-170.ec2.internal)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <paul@xen.org>)
- id 1khTH3-0001hp-LL; Tue, 24 Nov 2020 08:02:05 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+ (envelope-from <SRS0=nkWz=E6=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1khUez-0001kn-RY
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 09:30:53 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 25413af2-ac18-4d21-8b34-ba82f67dac10;
+ Tue, 24 Nov 2020 09:30:53 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 1C181AC48;
+ Tue, 24 Nov 2020 09:30:52 +0000 (UTC)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <paul@xen.org>)
-	id 1khTin-0003Py-8A
-	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 08:30:45 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	 bh=GMhuBQvWwKt0oiSVX55rbWxIi0temtvls6NwYa6kuYM=; b=oc4iWKmMQqVome82cT7LhUB9Q
-	8uSciffzs5wauEy4tUGZSLwf93XJpQ6pBp+3McG+OuT+7T54gDbkbvbPRxN6Fqvw4SFflQcgOO+79
-	cBv81Pa8Zgux0T0ZJgbdL5OJkh8m8JdSTKqJi8WK8QEOQoeagbSS2Qq1ipf/qMg3AEQ8E=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
-	by mail.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <paul@xen.org>)
-	id 1khTim-0006b5-HC; Tue, 24 Nov 2020 08:30:44 +0000
-Received: from ec2-54-145-241-208.compute-1.amazonaws.com ([54.145.241.208] helo=ip-10-0-29-170.ec2.internal)
-	by xenbits.xenproject.org with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
-	(Exim 4.92)
-	(envelope-from <paul@xen.org>)
-	id 1khTH3-0001hp-LL; Tue, 24 Nov 2020 08:02:05 +0000
-From: Paul Durrant <paul@xen.org>
-To: xen-devel@lists.xenproject.org
-Cc: Paul Durrant <pdurrant@amazon.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v4 14/23] docs/man: extract documentation of PCI_SPEC_STRING from the xl.cfg manpage...
-Date: Tue, 24 Nov 2020 08:01:50 +0000
-Message-Id: <20201124080159.11912-15-paul@xen.org>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20201124080159.11912-1-paul@xen.org>
-References: <20201124080159.11912-1-paul@xen.org>
+	(envelope-from <SRS0=nkWz=E6=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+	id 1khUez-0001kn-RY
+	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 09:30:53 +0000
+X-Inumbo-ID: 25413af2-ac18-4d21-8b34-ba82f67dac10
+Received: from mx2.suse.de (unknown [195.135.220.15])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id 25413af2-ac18-4d21-8b34-ba82f67dac10;
+	Tue, 24 Nov 2020 09:30:53 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1606210252; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=+gDIb2S94xj9bvpj3ElBlsVJlCAUGjA4er3a6DmRAPU=;
+	b=vS11Y6gVNpEjxyAOANUO0FYkpoEeTdTA/EXbs0hGhoBSXVemsnMBnVVBD5zzSfRzzEWiPK
+	9X/VRPnE/X2JD133RGMTwotnqIfnnYcnpiFb4h0tEH3sXzn4FVI/dneoBrW8VU2eM8etpt
+	FcqKR/WzNngmmqfJMjFjB4zwZ0TELzA=
+Received: from relay2.suse.de (unknown [195.135.221.27])
+	by mx2.suse.de (Postfix) with ESMTP id 1C181AC48;
+	Tue, 24 Nov 2020 09:30:52 +0000 (UTC)
+Subject: Re: [PATCH v2 4/8] lib: move parse_size_and_unit()
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: George Dunlap <George.Dunlap@eu.citrix.com>,
+ Ian Jackson <iwj@xenproject.org>, Julien Grall <julien@xen.org>,
+ Wei Liu <wl@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <aa1ca5da-3ecf-8721-63f9-b86ebbc64330@suse.com>
+ <eaffac30-8bd0-6018-5186-ca53d1becfe5@suse.com>
+ <1bd906ff-0b37-07de-75ab-84a169151c2d@citrix.com>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <ca34b711-c6e1-2dac-30a0-47fd54e16715@suse.com>
+Date: Tue, 24 Nov 2020 10:30:48 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.5.0
+MIME-Version: 1.0
+In-Reply-To: <1bd906ff-0b37-07de-75ab-84a169151c2d@citrix.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-From: Paul Durrant <pdurrant@amazon.com>
+On 24.11.2020 01:58, Andrew Cooper wrote:
+> On 23/10/2020 11:17, Jan Beulich wrote:
+>> ... into its own CU, to build it into an archive.
+>>
+>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+>> ---
+>>  xen/common/lib.c     | 39 ----------------------------------
+>>  xen/lib/Makefile     |  1 +
+>>  xen/lib/parse-size.c | 50 ++++++++++++++++++++++++++++++++++++++++++++
+>>  3 files changed, 51 insertions(+), 39 deletions(-)
+>>  create mode 100644 xen/lib/parse-size.c
+> 
+> What is the point of turning this into a library?  It isn't a leaf
+> function (calls simple_strtoull()) and doesn't have any any plausible
+> way of losing all its callers in various configurations (given its
+> direct use by the cmdline parsing logic).
 
-... and put it into a new xl-pci-configuration(5) manpage, akin to the
-xl-network-configration(5) and xl-disk-configuration(5) manpages.
+It's still a library function. As said earlier, I think _all_
+of what's now in lib.c should move to lib/. That's how it
+should have been from the beginning, or stuff shouldn't have
+been put in lib.c.
 
-This patch moves the content of the section verbatim. A subsequent patch
-will improve the documentation, once it is in its new location.
+The one alternative I see is to move the code next to
+parse_bool() / parse_boolean(), in kernel.c, or put all
+parse_*() into a new common/parse.c.
 
-Signed-off-by: Paul Durrant <pdurrant@amazon.com>
----
-Cc: Ian Jackson <iwj@xenproject.org>
-Cc: Wei Liu <wl@xen.org>
----
- docs/man/xl-pci-configuration.5.pod | 78 +++++++++++++++++++++++++++++++++++++
- docs/man/xl.cfg.5.pod.in            | 68 +-------------------------------
- 2 files changed, 79 insertions(+), 67 deletions(-)
- create mode 100644 docs/man/xl-pci-configuration.5.pod
-
-diff --git a/docs/man/xl-pci-configuration.5.pod b/docs/man/xl-pci-configuration.5.pod
-new file mode 100644
-index 0000000000..72a27bd95d
---- /dev/null
-+++ b/docs/man/xl-pci-configuration.5.pod
-@@ -0,0 +1,78 @@
-+=encoding utf8
-+
-+=head1 NAME
-+
-+xl-pci-configuration - XL PCI Configuration Syntax
-+
-+=head1 SYNTAX
-+
-+This document specifies the format for B<PCI_SPEC_STRING> which is used by
-+the L<xl.cfg(5)> pci configuration option, and related L<xl(1)> commands.
-+
-+Each B<PCI_SPEC_STRING> has the form of
-+B<[DDDD:]BB:DD.F[@VSLOT],KEY=VALUE,KEY=VALUE,...> where:
-+
-+=over 4
-+
-+=item B<[DDDD:]BB:DD.F>
-+
-+Identifies the PCI device from the host perspective in the domain
-+(B<DDDD>), Bus (B<BB>), Device (B<DD>) and Function (B<F>) syntax. This is
-+the same scheme as used in the output of B<lspci(1)> for the device in
-+question.
-+
-+Note: by default B<lspci(1)> will omit the domain (B<DDDD>) if it
-+is zero and it is optional here also. You may specify the function
-+(B<F>) as B<*> to indicate all functions.
-+
-+=item B<@VSLOT>
-+
-+Specifies the virtual slot where the guest will see this
-+device. This is equivalent to the B<DD> which the guest sees. In a
-+guest B<DDDD> and B<BB> are C<0000:00>.
-+
-+=item B<permissive=BOOLEAN>
-+
-+By default pciback only allows PV guests to write "known safe" values
-+into PCI configuration space, likewise QEMU (both qemu-xen and
-+qemu-xen-traditional) imposes the same constraint on HVM guests.
-+However, many devices require writes to other areas of the configuration space
-+in order to operate properly.  This option tells the backend (pciback or QEMU)
-+to allow all writes to the PCI configuration space of this device by this
-+domain.
-+
-+B<This option should be enabled with caution:> it gives the guest much
-+more control over the device, which may have security or stability
-+implications.  It is recommended to only enable this option for
-+trusted VMs under administrator's control.
-+
-+=item B<msitranslate=BOOLEAN>
-+
-+Specifies that MSI-INTx translation should be turned on for the PCI
-+device. When enabled, MSI-INTx translation will always enable MSI on
-+the PCI device regardless of whether the guest uses INTx or MSI. Some
-+device drivers, such as NVIDIA's, detect an inconsistency and do not
-+function when this option is enabled. Therefore the default is false (0).
-+
-+=item B<seize=BOOLEAN>
-+
-+Tells B<xl> to automatically attempt to re-assign a device to
-+pciback if it is not already assigned.
-+
-+B<WARNING:> If you set this option, B<xl> will gladly re-assign a critical
-+system device, such as a network or a disk controller being used by
-+dom0 without confirmation.  Please use with care.
-+
-+=item B<power_mgmt=BOOLEAN>
-+
-+B<(HVM only)> Specifies that the VM should be able to program the
-+D0-D3hot power management states for the PCI device. The default is false (0).
-+
-+=item B<rdm_policy=STRING>
-+
-+B<(HVM/x86 only)> This is the same as the policy setting inside the B<rdm>
-+option but just specific to a given device. The default is "relaxed".
-+
-+Note: this would override global B<rdm> option.
-+
-+=back
-diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
-index 0532739c1f..b00644e852 100644
---- a/docs/man/xl.cfg.5.pod.in
-+++ b/docs/man/xl.cfg.5.pod.in
-@@ -1101,73 +1101,7 @@ option is valid only when the B<controller> option is specified.
- =item B<pci=[ "PCI_SPEC_STRING", "PCI_SPEC_STRING", ...]>
- 
- Specifies the host PCI devices to passthrough to this guest.
--Each B<PCI_SPEC_STRING> has the form of
--B<[DDDD:]BB:DD.F[@VSLOT],KEY=VALUE,KEY=VALUE,...> where:
--
--=over 4
--
--=item B<[DDDD:]BB:DD.F>
--
--Identifies the PCI device from the host perspective in the domain
--(B<DDDD>), Bus (B<BB>), Device (B<DD>) and Function (B<F>) syntax. This is
--the same scheme as used in the output of B<lspci(1)> for the device in
--question.
--
--Note: by default B<lspci(1)> will omit the domain (B<DDDD>) if it
--is zero and it is optional here also. You may specify the function
--(B<F>) as B<*> to indicate all functions.
--
--=item B<@VSLOT>
--
--Specifies the virtual slot where the guest will see this
--device. This is equivalent to the B<DD> which the guest sees. In a
--guest B<DDDD> and B<BB> are C<0000:00>.
--
--=item B<permissive=BOOLEAN>
--
--By default pciback only allows PV guests to write "known safe" values
--into PCI configuration space, likewise QEMU (both qemu-xen and
--qemu-xen-traditional) imposes the same constraint on HVM guests.
--However, many devices require writes to other areas of the configuration space
--in order to operate properly.  This option tells the backend (pciback or QEMU)
--to allow all writes to the PCI configuration space of this device by this
--domain.
--
--B<This option should be enabled with caution:> it gives the guest much
--more control over the device, which may have security or stability
--implications.  It is recommended to only enable this option for
--trusted VMs under administrator's control.
--
--=item B<msitranslate=BOOLEAN>
--
--Specifies that MSI-INTx translation should be turned on for the PCI
--device. When enabled, MSI-INTx translation will always enable MSI on
--the PCI device regardless of whether the guest uses INTx or MSI. Some
--device drivers, such as NVIDIA's, detect an inconsistency and do not
--function when this option is enabled. Therefore the default is false (0).
--
--=item B<seize=BOOLEAN>
--
--Tells B<xl> to automatically attempt to re-assign a device to
--pciback if it is not already assigned.
--
--B<WARNING:> If you set this option, B<xl> will gladly re-assign a critical
--system device, such as a network or a disk controller being used by
--dom0 without confirmation.  Please use with care.
--
--=item B<power_mgmt=BOOLEAN>
--
--B<(HVM only)> Specifies that the VM should be able to program the
--D0-D3hot power management states for the PCI device. The default is false (0).
--
--=item B<rdm_policy=STRING>
--
--B<(HVM/x86 only)> This is the same as the policy setting inside the B<rdm>
--option but just specific to a given device. The default is "relaxed".
--
--Note: this would override global B<rdm> option.
--
--=back
-+See L<xl-pci-configuration(5)> for more details.
- 
- =item B<pci_permissive=BOOLEAN>
- 
--- 
-2.11.0
-
+Jan
 
