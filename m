@@ -2,28 +2,28 @@ Return-Path: <SRS0=fYmn=E6=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-14.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=unavailable autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2966DC2D0E4
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 19:31:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C877AC56202
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 19:37:44 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A088420857
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 19:30:59 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 580E5208FE
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 19:37:44 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="nDbiJmy7"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A088420857
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="F5LkT6+P"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 580E5208FE
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.36921.69005 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.36953.69053 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khe1V-0005bj-QW; Tue, 24 Nov 2020 19:30:45 +0000
+	id 1khe82-0006BP-Kw; Tue, 24 Nov 2020 19:37:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 36921.69005; Tue, 24 Nov 2020 19:30:45 +0000
+Received: by outflank-mailman (output) from mailman id 36953.69053; Tue, 24 Nov 2020 19:37:30 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -34,175 +34,135 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khe1V-0005bc-NX; Tue, 24 Nov 2020 19:30:45 +0000
-Received: by outflank-mailman (input) for mailman id 36921;
- Tue, 24 Nov 2020 19:30:44 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1khe82-0006BI-Hy; Tue, 24 Nov 2020 19:37:30 +0000
+Received: by outflank-mailman (input) for mailman id 36953;
+ Tue, 24 Nov 2020 19:37:29 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>) id 1khe1U-0005bN-9w
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 19:30:44 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>)
- id 1khe1U-0004Oc-3Y; Tue, 24 Nov 2020 19:30:44 +0000
-Received: from host86-183-162-145.range86-183.btcentralplus.com
- ([86.183.162.145] helo=u2f063a87eabd5f.home)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
- (envelope-from <paul@xen.org>)
- id 1khdfR-0000r4-8n; Tue, 24 Nov 2020 19:07:57 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+ (envelope-from <SRS0=YSly=E6=gmail.com=htejun@srs-us1.protection.inumbo.net>)
+ id 1khe81-0006BD-5T
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 19:37:29 +0000
+Received: from mail-qt1-x842.google.com (unknown [2607:f8b0:4864:20::842])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 8c205fd3-08c4-4ce3-b808-880f517c869b;
+ Tue, 24 Nov 2020 19:37:28 +0000 (UTC)
+Received: by mail-qt1-x842.google.com with SMTP id 7so17013114qtp.1
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2020 11:37:28 -0800 (PST)
+Received: from localhost (dhcp-6c-ae-f6-dc-d8-61.cpe.echoes.net. [72.28.8.195])
+ by smtp.gmail.com with ESMTPSA id t126sm68819qkh.133.2020.11.24.11.37.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 24 Nov 2020 11:37:27 -0800 (PST)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <paul@xen.org>)
-	id 1khe1U-0005bN-9w
-	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 19:30:44 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:MIME-Version:
-	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=RtfTTUWPnmWV4G9WLn/ouwRay4gNP0ppXh1HWl5O3Ig=; b=nDbiJmy76A4OpVVMcm2mKFC5uB
-	Dm6qQUR8PN0JLG/05KzzqwFGTGWOZ/2EDFlJXreAQJsvq0SduUXHy9m00LbrIt7uUUypZsIhe5HIl
-	RvRG6LVfLoNQpoC3knLSZsL5XXdNLFxx/xRRTB0QIZzwy94GM9tPPf3YSRfc2V5KhIzQ=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
-	by mail.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <paul@xen.org>)
-	id 1khe1U-0004Oc-3Y; Tue, 24 Nov 2020 19:30:44 +0000
-Received: from host86-183-162-145.range86-183.btcentralplus.com ([86.183.162.145] helo=u2f063a87eabd5f.home)
-	by xenbits.xenproject.org with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <paul@xen.org>)
-	id 1khdfR-0000r4-8n; Tue, 24 Nov 2020 19:07:57 +0000
-From: Paul Durrant <paul@xen.org>
-To: xen-devel@lists.xenproject.org
-Cc: Paul Durrant <pdurrant@amazon.com>,
-	Wei Liu <wl@xen.org>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v3 10/13] viridian: log initial invocation of each type of hypercall
-Date: Tue, 24 Nov 2020 19:07:41 +0000
-Message-Id: <20201124190744.11343-11-paul@xen.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20201124190744.11343-1-paul@xen.org>
-References: <20201124190744.11343-1-paul@xen.org>
+	(envelope-from <SRS0=YSly=E6=gmail.com=htejun@srs-us1.protection.inumbo.net>)
+	id 1khe81-0006BD-5T
+	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 19:37:29 +0000
+X-Inumbo-ID: 8c205fd3-08c4-4ce3-b808-880f517c869b
+Received: from mail-qt1-x842.google.com (unknown [2607:f8b0:4864:20::842])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id 8c205fd3-08c4-4ce3-b808-880f517c869b;
+	Tue, 24 Nov 2020 19:37:28 +0000 (UTC)
+Received: by mail-qt1-x842.google.com with SMTP id 7so17013114qtp.1
+        for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2020 11:37:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=sender:date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=MOALJb5ZWPUh3aGAOfM0OVshborSGP7hJGfOxgGOGv8=;
+        b=F5LkT6+P6W0m+3hlLX1OTdLAaWDWNPd5qU0zVXgoS6irqhQG1KPClCgLDacxdrz201
+         tuSkOD3Pi7npw/jwH1Nvh11d7rq8LRNxgjQNm41OqnMYV7uCJqaXEwyai41Uj47dAbX3
+         JK7du1QUlRFM6taLlQQ447SfHtDJsH8zezvU1GOUPlebgL174F6/7EsV7OtuCUoF3f9x
+         Bkfc9gd/0KWs5FVV7usVufNl9+blVTvGwiyUy7osMlVAVbdFXgSTZohKeNl02jc4WQz4
+         A0OAp0Qtsho7RAxf4m3roj9E2ZLkZ4zwUy7kn8kRWPQltha8Qf/YzRNO/2ELqU44tB/d
+         HyAA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
+         :references:mime-version:content-disposition:in-reply-to;
+        bh=MOALJb5ZWPUh3aGAOfM0OVshborSGP7hJGfOxgGOGv8=;
+        b=JV2CP7aXQ3CVx3f0qUls4kOlKnuOiCRlowcPfKW+WWQqbl//XTURuZRr2D2rOkF/1T
+         gf1V1wvIfbTGztYXliIXi8WR+4uxkGhkDvkO0WJMOzZRTt0/9ESCTI/qB+/8AZ1Sndgl
+         Xo/+b1wFB5RMYmavO1Arkcyl1c5KZcLpmJ1cMfhuoBggp7T7cyNlv4RLvqEwucF7RcAR
+         G+gz8GBPfjJhbSvtdU/nTnmuYAv0W54b2KXvDE2In5Ty590dq3Rv2Uj5NFlGQL6JUkav
+         HOYAJsT1HQIlKC7TVYdZvXtIQEnKA/XVExjDeJhgt6aGAswGvad/z7oo2ov60toso9nj
+         VOsg==
+X-Gm-Message-State: AOAM533pdOWWBg2zXa2fpTx+nR5Im/bWVEKhn6Hz6gPgczLkXcnNGh0T
+	KDm9ZY8YyO5u1Z7k10/Ac/M=
+X-Google-Smtp-Source: ABdhPJybxY5/E0+KDq94c9P/N9IKjFDU+Ct8NW6WiHsGOrtJ7iW5aHJE2Msrh+VJOHLo1ru6UJnxSg==
+X-Received: by 2002:ac8:7192:: with SMTP id w18mr6129290qto.149.1606246647881;
+        Tue, 24 Nov 2020 11:37:27 -0800 (PST)
+Received: from localhost (dhcp-6c-ae-f6-dc-d8-61.cpe.echoes.net. [72.28.8.195])
+        by smtp.gmail.com with ESMTPSA id t126sm68819qkh.133.2020.11.24.11.37.27
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 24 Nov 2020 11:37:27 -0800 (PST)
+Sender: Tejun Heo <htejun@gmail.com>
+Date: Tue, 24 Nov 2020 14:37:05 -0500
+From: Tejun Heo <tj@kernel.org>
+To: Christoph Hellwig <hch@lst.de>
+Cc: Jens Axboe <axboe@kernel.dk>, Josef Bacik <josef@toxicpanda.com>,
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+	Coly Li <colyli@suse.de>, Mike Snitzer <snitzer@redhat.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Jan Kara <jack@suse.cz>,
+	Johannes Thumshirn <johannes.thumshirn@wdc.com>,
+	dm-devel@redhat.com, Richard Weinberger <richard@nod.at>,
+	Jan Kara <jack@suse.com>, linux-block@vger.kernel.org,
+	xen-devel@lists.xenproject.org, linux-bcache@vger.kernel.org,
+	linux-mtd@lists.infradead.org, linux-fsdevel@vger.kernel.org,
+	linux-mm@kvack.org
+Subject: Re: [PATCH 23/45] block: remove i_bdev
+Message-ID: <X71g4Tm+3RiRg4Gf@mtj.duckdns.org>
+References: <20201124132751.3747337-1-hch@lst.de>
+ <20201124132751.3747337-24-hch@lst.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20201124132751.3747337-24-hch@lst.de>
 
-From: Paul Durrant <pdurrant@amazon.com>
+On Tue, Nov 24, 2020 at 02:27:29PM +0100, Christoph Hellwig wrote:
+> Switch the block device lookup interfaces to directly work with a dev_t
+> so that struct block_device references are only acquired by the
+> blkdev_get variants (and the blk-cgroup special case).  This means that
+> we not don't need an extra reference in the inode and can generally
+     ^
+     now
+> simplify handling of struct block_device to keep the lookups contained
+> in the core block layer code.
+> 
+> Signed-off-by: Christoph Hellwig <hch@lst.de>
+...
+> @@ -1689,14 +1599,12 @@ static int blkdev_open(struct inode * inode, struct file * filp)
+>  	if ((filp->f_flags & O_ACCMODE) == 3)
+>  		filp->f_mode |= FMODE_WRITE_IOCTL;
+>  
+> -	bdev = bd_acquire(inode);
+> -	if (bdev == NULL)
+> -		return -ENOMEM;
+> -
+> +	bdev = blkdev_get_by_dev(inode->i_rdev, filp->f_mode, filp);
+> +	if (IS_ERR(bdev))
+> +		return PTR_ERR(bdev);
+>  	filp->f_mapping = bdev->bd_inode->i_mapping;
+>  	filp->f_wb_err = filemap_sample_wb_err(filp->f_mapping);
+> -
+> -	return blkdev_get(bdev, filp->f_mode, filp);
+> +	return 0;
+>  }
 
-To make is simpler to observe which viridian hypercalls are issued by a
-particular Windows guest, this patch adds a per-domain mask to track them.
-Each type of hypercall causes a different bit to be set in the mask and
-when the bit transitions from clear to set, a log line is emitted showing
-the name of the hypercall and the domain that issued it.
+I was wondering whether losing the stale bdev flushing in bd_acquire() would
+cause user-visible behavior changes but can't see how it would given that
+userland has no way of holding onto a specific instance of block inode.
+Maybe it's something worth mentioning in the commit message?
 
-Signed-off-by: Paul Durrant <pdurrant@amazon.com>
----
-Cc: Wei Liu <wl@xen.org>
-Cc: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: "Roger Pau Monné" <roger.pau@citrix.com>
+Other than that, for the block part:
 
-v2:
- - Use DECLARE_BITMAP() for 'hypercall_flags'
- - Use an enum for _HCALL_* values
----
- xen/arch/x86/hvm/viridian/viridian.c | 21 +++++++++++++++++++++
- xen/include/asm-x86/hvm/viridian.h   | 10 ++++++++++
- 2 files changed, 31 insertions(+)
+Acked-by: Tejun Heo <tj@kernel.org>
 
-diff --git a/xen/arch/x86/hvm/viridian/viridian.c b/xen/arch/x86/hvm/viridian/viridian.c
-index 93865be5797a..3c18908b7b35 100644
---- a/xen/arch/x86/hvm/viridian/viridian.c
-+++ b/xen/arch/x86/hvm/viridian/viridian.c
-@@ -933,6 +933,7 @@ int viridian_hypercall(struct cpu_user_regs *regs)
- {
-     struct vcpu *curr = current;
-     struct domain *currd = curr->domain;
-+    struct viridian_domain *vd = currd->arch.hvm.viridian;
-     int mode = hvm_guest_x86_mode(curr);
-     unsigned long input_params_gpa, output_params_gpa;
-     int rc = 0;
-@@ -962,6 +963,10 @@ int viridian_hypercall(struct cpu_user_regs *regs)
-     switch ( input.call_code )
-     {
-     case HVCALL_NOTIFY_LONG_SPIN_WAIT:
-+        if ( !test_and_set_bit(_HCALL_spin_wait, vd->hypercall_flags) )
-+            printk(XENLOG_G_INFO "d%d: VIRIDIAN HVCALL_NOTIFY_LONG_SPIN_WAIT\n",
-+                   currd->domain_id);
-+
-         /*
-          * See section 14.5.1 of the specification.
-          */
-@@ -970,22 +975,38 @@ int viridian_hypercall(struct cpu_user_regs *regs)
- 
-     case HVCALL_FLUSH_VIRTUAL_ADDRESS_SPACE:
-     case HVCALL_FLUSH_VIRTUAL_ADDRESS_LIST:
-+        if ( !test_and_set_bit(_HCALL_flush, vd->hypercall_flags) )
-+            printk(XENLOG_G_INFO "%pd: VIRIDIAN HVCALL_FLUSH_VIRTUAL_ADDRESS_SPACE/LIST\n",
-+                   currd);
-+
-         rc = hvcall_flush(&input, &output, input_params_gpa,
-                           output_params_gpa);
-         break;
- 
-     case HVCALL_FLUSH_VIRTUAL_ADDRESS_SPACE_EX:
-     case HVCALL_FLUSH_VIRTUAL_ADDRESS_LIST_EX:
-+        if ( !test_and_set_bit(_HCALL_flush_ex, vd->hypercall_flags) )
-+            printk(XENLOG_G_INFO "%pd: VIRIDIAN HVCALL_FLUSH_VIRTUAL_ADDRESS_SPACE/LIST_EX\n",
-+                   currd);
-+
-         rc = hvcall_flush_ex(&input, &output, input_params_gpa,
-                              output_params_gpa);
-         break;
- 
-     case HVCALL_SEND_IPI:
-+        if ( !test_and_set_bit(_HCALL_ipi, vd->hypercall_flags) )
-+            printk(XENLOG_G_INFO "%pd: VIRIDIAN HVCALL_SEND_IPI\n",
-+                   currd);
-+
-         rc = hvcall_ipi(&input, &output, input_params_gpa,
-                         output_params_gpa);
-         break;
- 
-     case HVCALL_SEND_IPI_EX:
-+        if ( !test_and_set_bit(_HCALL_ipi_ex, vd->hypercall_flags) )
-+            printk(XENLOG_G_INFO "%pd: VIRIDIAN HVCALL_SEND_IPI_EX\n",
-+                   currd);
-+
-         rc = hvcall_ipi_ex(&input, &output, input_params_gpa,
-                            output_params_gpa);
-         break;
-diff --git a/xen/include/asm-x86/hvm/viridian.h b/xen/include/asm-x86/hvm/viridian.h
-index cbf77d9c760b..4c8ff6e80b6f 100644
---- a/xen/include/asm-x86/hvm/viridian.h
-+++ b/xen/include/asm-x86/hvm/viridian.h
-@@ -55,10 +55,20 @@ struct viridian_time_ref_count
-     int64_t off;
- };
- 
-+enum {
-+    _HCALL_spin_wait,
-+    _HCALL_flush,
-+    _HCALL_flush_ex,
-+    _HCALL_ipi,
-+    _HCALL_ipi_ex,
-+    _HCALL_nr /* must be last */
-+};
-+
- struct viridian_domain
- {
-     union hv_guest_os_id guest_os_id;
-     union hv_vp_assist_page_msr hypercall_gpa;
-+    DECLARE_BITMAP(hypercall_flags, _HCALL_nr);
-     struct viridian_time_ref_count time_ref_count;
-     struct viridian_page reference_tsc;
- };
+Thanks.
+
 -- 
-2.20.1
-
+tejun
 
