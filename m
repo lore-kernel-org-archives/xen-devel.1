@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6A6F8C8300B
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:28:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 635CFC8301E
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:28:43 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 03C8E208FE
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:28:36 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id D9F4F208CA
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:28:42 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="voamq2gI"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 03C8E208FE
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="iay1UgkM"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D9F4F208CA
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.35986.67662 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.35987.67674 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khYMs-0000Qs-Ey; Tue, 24 Nov 2020 13:28:26 +0000
+	id 1khYMv-0000Sn-Od; Tue, 24 Nov 2020 13:28:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 35986.67662; Tue, 24 Nov 2020 13:28:26 +0000
+Received: by outflank-mailman (output) from mailman id 35987.67674; Tue, 24 Nov 2020 13:28:29 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,44 +38,44 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khYMs-0000Ql-BK; Tue, 24 Nov 2020 13:28:26 +0000
-Received: by outflank-mailman (input) for mailman id 35986;
- Tue, 24 Nov 2020 13:28:25 +0000
+	id 1khYMv-0000Se-KB; Tue, 24 Nov 2020 13:28:29 +0000
+Received: by outflank-mailman (input) for mailman id 35987;
+ Tue, 24 Nov 2020 13:28:29 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=daQ6=E6=casper.srs.infradead.org=batv+cbe268a5dfa7b983a02e+6302+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1khYMq-0000Qf-1v
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:28:25 +0000
+ id 1khYMv-0000Qf-0e
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:28:29 +0000
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 0e2b4566-a3a9-49f0-b0ef-9759e8f25a47;
- Tue, 24 Nov 2020 13:28:20 +0000 (UTC)
+ id 2c587630-2356-47af-b874-fad4b8154cd1;
+ Tue, 24 Nov 2020 13:28:23 +0000 (UTC)
 Received: from [2001:4bb8:180:5443:c70:4a89:bc61:3] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1khYMV-0006Ut-HC; Tue, 24 Nov 2020 13:28:03 +0000
+ id 1khYMc-0006W0-RY; Tue, 24 Nov 2020 13:28:11 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=daQ6=E6=casper.srs.infradead.org=batv+cbe268a5dfa7b983a02e+6302+infradead.org+hch@srs-us1.protection.inumbo.net>)
-	id 1khYMq-0000Qf-1v
-	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:28:25 +0000
-X-Inumbo-ID: 0e2b4566-a3a9-49f0-b0ef-9759e8f25a47
+	id 1khYMv-0000Qf-0e
+	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:28:29 +0000
+X-Inumbo-ID: 2c587630-2356-47af-b874-fad4b8154cd1
 Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 0e2b4566-a3a9-49f0-b0ef-9759e8f25a47;
-	Tue, 24 Nov 2020 13:28:20 +0000 (UTC)
+	id 2c587630-2356-47af-b874-fad4b8154cd1;
+	Tue, 24 Nov 2020 13:28:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
 	Content-Type:Content-ID:Content-Description;
-	bh=kUYn0sikpHZNYDnsxFrAwXSb49C5P7DMdxps0LhhPGQ=; b=voamq2gIRabU8afAKL3jTQT86w
-	3voeMXKzWRc968NV3Og6QI7vPIsFgyzT+g3y7G5VN1mzlkrcmMY4Qg7EwhHhprBp2pFWLMjK63ObP
-	R7mWTCNSKQkV5l0bX4rfRh4gKPGZnVeHwjNUcB1zJgqL93wnbxgFlTDmJRPjnCaFhMh+HPucQfU+S
-	uovUuXHghcRdZOgSkakX0fZ9XuPs/BxiQ7jD+ibvnUIkvCuGFLC0BxmxD5xKdEPhugucjYN8I4Xpv
-	WSH12/wojKPamwwzSgge7VqR4tsSr5bVtW0y1gEbh0LGN1fc0aleWXDqaFKriKv0dnauuuFj6BOkD
-	RzQOH7Hw==;
+	bh=Ya7mNl614k8cPEx//1LbBwD1mBTI6q+TUS2d4XeT6DY=; b=iay1UgkMtKfQ94ufwnWzk2T1it
+	c3R7eVYN9ml3Ywzgas/Gd9buHnKumjaigSbyg1fPjmWGpoRxU/Ek5+fXa/aVGF5IwolH6uhPeyqXg
+	DL3BpGdtWlvBlZGgRl6YFd9TchAoOKNQ3CQdeKQsVAHkF4KVJlc5U5b1Es0gwwJlxLXKhao0DIH4f
+	I6Z9XFgDf5i76KLycjVCRbd6nn4p6eFYr5DszA7JqBQnbOk9oqwKjl/u9Cj1QKjlzfSam/1Xl0WBh
+	o3Zpx2Uoye0mnaezi08x9l1pycXROgv4ksjzY0neMwRpaXspy5GWJjavFXe45MHLxT+eJ+V5whCq4
+	kvpN+7fQ==;
 Received: from [2001:4bb8:180:5443:c70:4a89:bc61:3] (helo=localhost)
 	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-	id 1khYMV-0006Ut-HC; Tue, 24 Nov 2020 13:28:03 +0000
+	id 1khYMc-0006W0-RY; Tue, 24 Nov 2020 13:28:11 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Tejun Heo <tj@kernel.org>,
@@ -95,9 +95,9 @@ Cc: Tejun Heo <tj@kernel.org>,
 	linux-mtd@lists.infradead.org,
 	linux-fsdevel@vger.kernel.org,
 	linux-mm@kvack.org
-Subject: [PATCH 06/45] zram: remove the claim mechanism
-Date: Tue, 24 Nov 2020 14:27:12 +0100
-Message-Id: <20201124132751.3747337-7-hch@lst.de>
+Subject: [PATCH 11/45] block: remove a duplicate __disk_get_part prototype
+Date: Tue, 24 Nov 2020 14:27:17 +0100
+Message-Id: <20201124132751.3747337-12-hch@lst.de>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20201124132751.3747337-1-hch@lst.de>
 References: <20201124132751.3747337-1-hch@lst.de>
@@ -105,142 +105,26 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-The zram claim mechanism was added to ensure no new opens come in
-during teardown.  But the proper way to archive that is to call
-del_gendisk first, which takes care of all that.  Once del_gendisk
-is called in the right place, the reset side can also be simplified
-as no I/O can be outstanding on a block device that is not open.
-
 Signed-off-by: Christoph Hellwig <hch@lst.de>
+Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Reviewed-by: Jan Kara <jack@suse.cz>
+Reviewed-by: Johannes Thumshirn <johannes.thumshirn@wdc.com>
 ---
- drivers/block/zram/zram_drv.c | 72 ++++++++---------------------------
- 1 file changed, 15 insertions(+), 57 deletions(-)
+ include/linux/genhd.h | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/drivers/block/zram/zram_drv.c b/drivers/block/zram/zram_drv.c
-index 6d15d51cee2b7e..2e6d75ec1afddb 100644
---- a/drivers/block/zram/zram_drv.c
-+++ b/drivers/block/zram/zram_drv.c
-@@ -1756,64 +1756,33 @@ static ssize_t disksize_store(struct device *dev,
- static ssize_t reset_store(struct device *dev,
- 		struct device_attribute *attr, const char *buf, size_t len)
- {
--	int ret;
--	unsigned short do_reset;
--	struct zram *zram;
-+	struct zram *zram = dev_to_zram(dev);
- 	struct block_device *bdev;
-+	unsigned short do_reset;
-+	int ret = 0;
- 
- 	ret = kstrtou16(buf, 10, &do_reset);
- 	if (ret)
- 		return ret;
--
- 	if (!do_reset)
- 		return -EINVAL;
- 
--	zram = dev_to_zram(dev);
- 	bdev = bdget_disk(zram->disk, 0);
- 	if (!bdev)
- 		return -ENOMEM;
- 
- 	mutex_lock(&bdev->bd_mutex);
--	/* Do not reset an active device or claimed device */
--	if (bdev->bd_openers || zram->claim) {
--		mutex_unlock(&bdev->bd_mutex);
--		bdput(bdev);
--		return -EBUSY;
--	}
--
--	/* From now on, anyone can't open /dev/zram[0-9] */
--	zram->claim = true;
-+	if (bdev->bd_openers)
-+		ret = -EBUSY;
-+	else
-+		zram_reset_device(zram);
- 	mutex_unlock(&bdev->bd_mutex);
--
--	/* Make sure all the pending I/O are finished */
--	fsync_bdev(bdev);
--	zram_reset_device(zram);
- 	bdput(bdev);
- 
--	mutex_lock(&bdev->bd_mutex);
--	zram->claim = false;
--	mutex_unlock(&bdev->bd_mutex);
--
--	return len;
--}
--
--static int zram_open(struct block_device *bdev, fmode_t mode)
--{
--	int ret = 0;
--	struct zram *zram;
--
--	WARN_ON(!mutex_is_locked(&bdev->bd_mutex));
--
--	zram = bdev->bd_disk->private_data;
--	/* zram was claimed to reset so open request fails */
--	if (zram->claim)
--		ret = -EBUSY;
--
--	return ret;
-+	return ret ? ret : len;
+diff --git a/include/linux/genhd.h b/include/linux/genhd.h
+index 46553d6d602563..22f5b9fd96f8bf 100644
+--- a/include/linux/genhd.h
++++ b/include/linux/genhd.h
+@@ -250,7 +250,6 @@ static inline dev_t part_devt(struct hd_struct *part)
+ 	return part_to_dev(part)->devt;
  }
  
- static const struct block_device_operations zram_devops = {
--	.open = zram_open,
- 	.submit_bio = zram_submit_bio,
- 	.swap_slot_free_notify = zram_slot_free_notify,
- 	.rw_page = zram_rw_page,
-@@ -1821,7 +1790,6 @@ static const struct block_device_operations zram_devops = {
- };
+-extern struct hd_struct *__disk_get_part(struct gendisk *disk, int partno);
+ extern struct hd_struct *disk_get_part(struct gendisk *disk, int partno);
  
- static const struct block_device_operations zram_wb_devops = {
--	.open = zram_open,
- 	.submit_bio = zram_submit_bio,
- 	.swap_slot_free_notify = zram_slot_free_notify,
- 	.owner = THIS_MODULE
-@@ -1974,32 +1942,22 @@ static int zram_add(void)
- 
- static int zram_remove(struct zram *zram)
- {
--	struct block_device *bdev;
--
--	bdev = bdget_disk(zram->disk, 0);
--	if (!bdev)
--		return -ENOMEM;
-+	struct block_device *bdev = bdget_disk(zram->disk, 0);
- 
--	mutex_lock(&bdev->bd_mutex);
--	if (bdev->bd_openers || zram->claim) {
--		mutex_unlock(&bdev->bd_mutex);
-+	if (bdev) {
-+		if (bdev->bd_openers) {
-+			bdput(bdev);
-+			return -EBUSY;
-+		}
- 		bdput(bdev);
--		return -EBUSY;
- 	}
- 
--	zram->claim = true;
--	mutex_unlock(&bdev->bd_mutex);
--
-+	del_gendisk(zram->disk);
- 	zram_debugfs_unregister(zram);
--
--	/* Make sure all the pending I/O are finished */
--	fsync_bdev(bdev);
- 	zram_reset_device(zram);
--	bdput(bdev);
- 
- 	pr_info("Removed device: %s\n", zram->disk->disk_name);
- 
--	del_gendisk(zram->disk);
- 	blk_cleanup_queue(zram->disk->queue);
- 	put_disk(zram->disk);
- 	kfree(zram);
+ static inline void disk_put_part(struct hd_struct *part)
 -- 
 2.29.2
 
