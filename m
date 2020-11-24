@@ -2,29 +2,28 @@ Return-Path: <SRS0=fYmn=E6=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ACBC1C2D0E4
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 07:45:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 33377C63777
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 08:02:24 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E03F020659
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 07:45:56 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id AF0C0206D9
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 08:02:23 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="lsHLrqTL"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E03F020659
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="aRsg47ui"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AF0C0206D9
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.35416.66936 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.35430.66989 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khT12-0005qj-I0; Tue, 24 Nov 2020 07:45:32 +0000
+	id 1khTH4-0008BQ-TK; Tue, 24 Nov 2020 08:02:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 35416.66936; Tue, 24 Nov 2020 07:45:32 +0000
+Received: by outflank-mailman (output) from mailman id 35430.66989; Tue, 24 Nov 2020 08:02:06 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,158 +38,95 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khT12-0005qc-ER; Tue, 24 Nov 2020 07:45:32 +0000
-Received: by outflank-mailman (input) for mailman id 35416;
- Tue, 24 Nov 2020 07:45:31 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=5Zhb=E6=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
- id 1khT10-0005qR-S5
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 07:45:30 +0000
-Received: from mail-wm1-x329.google.com (unknown [2a00:1450:4864:20::329])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id fc78b056-3f7a-4371-913d-8bec1fbed5cc;
- Tue, 24 Nov 2020 07:45:29 +0000 (UTC)
-Received: by mail-wm1-x329.google.com with SMTP id a65so1842420wme.1
- for <xen-devel@lists.xenproject.org>; Mon, 23 Nov 2020 23:45:29 -0800 (PST)
-Received: from CBGR90WXYV0 (host86-183-162-145.range86-183.btcentralplus.com.
- [86.183.162.145])
- by smtp.gmail.com with ESMTPSA id q25sm4278793wmq.37.2020.11.23.23.45.28
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 23 Nov 2020 23:45:28 -0800 (PST)
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1khTH4-0008BB-Gu; Tue, 24 Nov 2020 08:02:06 +0000
+Received: by outflank-mailman (input) for mailman id 35430;
+ Tue, 24 Nov 2020 08:02:04 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <paul@xen.org>) id 1khTH2-000885-At
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 08:02:04 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <paul@xen.org>)
+ id 1khTH1-00060H-LJ; Tue, 24 Nov 2020 08:02:03 +0000
+Received: from ec2-54-145-241-208.compute-1.amazonaws.com ([54.145.241.208]
+ helo=ip-10-0-29-170.ec2.internal)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <paul@xen.org>)
+ id 1khTH1-0001hp-IN; Tue, 24 Nov 2020 08:02:03 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=5Zhb=E6=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
-	id 1khT10-0005qR-S5
-	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 07:45:30 +0000
-X-Inumbo-ID: fc78b056-3f7a-4371-913d-8bec1fbed5cc
-Received: from mail-wm1-x329.google.com (unknown [2a00:1450:4864:20::329])
-	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id fc78b056-3f7a-4371-913d-8bec1fbed5cc;
-	Tue, 24 Nov 2020 07:45:29 +0000 (UTC)
-Received: by mail-wm1-x329.google.com with SMTP id a65so1842420wme.1
-        for <xen-devel@lists.xenproject.org>; Mon, 23 Nov 2020 23:45:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:reply-to:to:cc:references:in-reply-to:subject:date:message-id
-         :mime-version:content-transfer-encoding:thread-index
-         :content-language;
-        bh=S9s4cpok78Ha4Q/+X64sGyNmgKnYE8ebzWe66uKslek=;
-        b=lsHLrqTLpzQUm22lnr14pSoee2cbMWvu9ct1llEHdkBuvKg98RYSGxkEgjgR3IwBW1
-         FUhw7S6gdbG/V10Zs1OVOXP8n/PfW7jSbNRpMA/HXoQNxu5wHG0gHOp+ym/DQkY09s//
-         5iGBi2acVfygnQ5b3BZ9/BB2ttJBdStdvl4DXjfoSCRBUCnzGklyB1Xb9NieIg92PPIc
-         4oryVPB4vlsuA0YzTu8rIvA/oGXi4YVKDsE9gV9MqaFeHcXbOESuf3ChMnCOEqug7lbY
-         QRCztlBgjmjpbut7Rx2/ADululxI9uoPsH6yGpgfYiekPVEJc7h3y+xNc9/3W9qW10YI
-         PS7A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:reply-to:to:cc:references:in-reply-to
-         :subject:date:message-id:mime-version:content-transfer-encoding
-         :thread-index:content-language;
-        bh=S9s4cpok78Ha4Q/+X64sGyNmgKnYE8ebzWe66uKslek=;
-        b=X4P9YNOewgZ/VE+0hVSmA2cbFNtrgVquaanA6Pfsuh5ptfVTY/8iVJhi4s/qrbr4wH
-         kdLiFlDYBHJcdmM8qhr2zckgmoZTnFqjEJwdO3iIy9sv6MXDF5jUo5PjnEaQjKGmo7se
-         UBRZ3b4gLJGUGe5qkfp+i1R7oWIoVOcJRY+8ydhrpzT6f+7dulfZRrvu11+mXTKB3jCU
-         Ve2yt1N0VPDSpAOdfOxDqPvfViCV/kcASLA89ZII0i8yGhrCIS/SAgPCivZVNDKEwNi6
-         LE7cLNQoYSQeccbZrA9MRsqbfJR5y6eCebnPUff470n6agv6hl15jhy6M63g6TIG/1+Q
-         jJhg==
-X-Gm-Message-State: AOAM533nvbNl/VUifvkPNPkAZ/K9mhKBNoEW+YP4bAFmUtySo9iExIAv
-	ek9mzhZysUG0VENl3NtRBCY=
-X-Google-Smtp-Source: ABdhPJx8zhzev/pyr2YTP9QJadVGoQ9ZMhpvMn+KcUqH7WWcc93DsWPrPNEHKqukNrDS9H6kAT3GjQ==
-X-Received: by 2002:a7b:c843:: with SMTP id c3mr2918205wml.100.1606203929123;
-        Mon, 23 Nov 2020 23:45:29 -0800 (PST)
-Received: from CBGR90WXYV0 (host86-183-162-145.range86-183.btcentralplus.com. [86.183.162.145])
-        by smtp.gmail.com with ESMTPSA id q25sm4278793wmq.37.2020.11.23.23.45.28
-        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Mon, 23 Nov 2020 23:45:28 -0800 (PST)
-From: Paul Durrant <xadimgnik@gmail.com>
-X-Google-Original-From: "Paul Durrant" <paul@xen.org>
-Reply-To: <paul@xen.org>
-To: "'Andrew Cooper'" <andrew.cooper3@citrix.com>,
-	<xen-devel@lists.xenproject.org>
-Cc: "'Paul Durrant'" <pdurrant@amazon.com>,
-	"'Anthony PERARD'" <anthony.perard@citrix.com>,
-	"'Christian Lindig'" <christian.lindig@citrix.com>,
-	"'David Scott'" <dave@recoil.org>,
-	"'George Dunlap'" <george.dunlap@citrix.com>,
-	"'Ian Jackson'" <iwj@xenproject.org>,
-	"'Nick Rosbrook'" <rosbrookn@ainfosec.com>,
-	"'Wei Liu'" <wl@xen.org>
-References: <20201123174503.6800-1-paul@xen.org> <822734cf-a048-2f53-940a-9f5ccf9df40f@citrix.com>
-In-Reply-To: <822734cf-a048-2f53-940a-9f5ccf9df40f@citrix.com>
-Subject: RE: [PATCH v3 00/23] xl / libxl: named PCI pass-through devices
-Date: Tue, 24 Nov 2020 07:45:27 -0000
-Message-ID: <001601d6c235$c7396150$55ac23f0$@xen.org>
-MIME-Version: 1.0
-Content-Type: text/plain;
-	charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQG+euZNgx6mUfoFllRdYIBemuWGRgEeRX7Zqf6COOA=
-Content-Language: en-gb
+	(envelope-from <paul@xen.org>)
+	id 1khTH2-000885-At
+	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 08:02:04 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
+	 bh=dpUixXjI/I4QIesMLF+10yxwU7Nt8aYiH/KlAxrUXlM=; b=aRsg47uijfeMixUPqoO2H60Z4
+	AjK4rJN/qrsBNyvERPu0gzx3mHW1KYFmNerCWaNz80HxT9Xfvyx60ZvXPTZmvKTlrJEEfsrSMHx0d
+	l5JfJlbBx13OpbpbB7FBubuK8cb0i6LxSmq/iUzYEYSNxBWYeDvGpb7v+kN8wSAO77RMw=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+	by mail.xenproject.org with esmtp (Exim 4.92)
+	(envelope-from <paul@xen.org>)
+	id 1khTH1-00060H-LJ; Tue, 24 Nov 2020 08:02:03 +0000
+Received: from ec2-54-145-241-208.compute-1.amazonaws.com ([54.145.241.208] helo=ip-10-0-29-170.ec2.internal)
+	by xenbits.xenproject.org with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+	(Exim 4.92)
+	(envelope-from <paul@xen.org>)
+	id 1khTH1-0001hp-IN; Tue, 24 Nov 2020 08:02:03 +0000
+From: Paul Durrant <paul@xen.org>
+To: xen-devel@lists.xenproject.org
+Cc: Paul Durrant <pdurrant@amazon.com>,
+	Ian Jackson <iwj@xenproject.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v4 04/23] libxl: add/recover 'rdm_policy' to/from PCI backend in xenstore
+Date: Tue, 24 Nov 2020 08:01:40 +0000
+Message-Id: <20201124080159.11912-5-paul@xen.org>
+X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20201124080159.11912-1-paul@xen.org>
+References: <20201124080159.11912-1-paul@xen.org>
 
-> -----Original Message-----
-> From: Andrew Cooper <andrew.cooper3@citrix.com>
-> Sent: 23 November 2020 22:18
-> To: Paul Durrant <paul@xen.org>; xen-devel@lists.xenproject.org
-> Cc: Paul Durrant <pdurrant@amazon.com>; Anthony PERARD <anthony.perard@citrix.com>; Christian Lindig
-> <christian.lindig@citrix.com>; David Scott <dave@recoil.org>; George Dunlap
-> <george.dunlap@citrix.com>; Ian Jackson <iwj@xenproject.org>; Nick Rosbrook <rosbrookn@ainfosec.com>;
-> Wei Liu <wl@xen.org>
-> Subject: Re: [PATCH v3 00/23] xl / libxl: named PCI pass-through devices
-> 
-> On 23/11/2020 17:44, Paul Durrant wrote:
-> > From: Paul Durrant <pdurrant@amazon.com>
-> >
-> > Paul Durrant (23):
-> >   xl / libxl: s/pcidev/pci and remove DEFINE_DEVICE_TYPE_STRUCT_X
-> >   libxl: make libxl__device_list() work correctly for
-> >     LIBXL__DEVICE_KIND_PCI...
-> >   libxl: Make sure devices added by pci-attach are reflected in the
-> >     config
-> >   libxl: add/recover 'rdm_policy' to/from PCI backend in xenstore
-> >   libxl: s/detatched/detached in libxl_pci.c
-> >   libxl: remove extraneous arguments to do_pci_remove() in libxl_pci.c
-> >   libxl: stop using aodev->device_config in libxl__device_pci_add()...
-> >   libxl: generalise 'driver_path' xenstore access functions in
-> >     libxl_pci.c
-> >   libxl: remove unnecessary check from libxl__device_pci_add()
-> >   libxl: remove get_all_assigned_devices() from libxl_pci.c
-> >   libxl: make sure callers of libxl_device_pci_list() free the list
-> >     after use
-> >   libxl: add libxl_device_pci_assignable_list_free()...
-> >   libxl: use COMPARE_PCI() macro is_pci_in_array()...
-> >   docs/man: extract documentation of PCI_SPEC_STRING from the xl.cfg
-> >     manpage...
-> >   docs/man: improve documentation of PCI_SPEC_STRING...
-> >   docs/man: fix xl(1) documentation for 'pci' operations
-> >   libxl: introduce 'libxl_pci_bdf' in the idl...
-> >   libxlu: introduce xlu_pci_parse_spec_string()
-> >   libxl: modify
-> >     libxl_device_pci_assignable_add/remove/list/list_free()...
-> >   docs/man: modify xl(1) in preparation for naming of assignable devices
-> >   xl / libxl: support naming of assignable devices
-> >   docs/man: modify xl-pci-configuration(5) to add 'name' field to
-> >     PCI_SPEC_STRING
-> >   xl / libxl: support 'xl pci-attach/detach' by name
-> 
-> We're trying to get the CI loop up and running.  Its not emailing
-> xen-devel yet, but has found a real error somewhere in this series.
-> 
-> https://gitlab.com/xen-project/patchew/xen/-/pipelines/220153571
-> 
+From: Paul Durrant <pdurrant@amazon.com>
 
-Found it, thanks...
+Other parameters, such as 'msitranslate' and 'permissive' are dealt with
+but 'rdm_policy' appears to be have been completely missed.
 
-libxl_pci.c: In function 'libxl_device_pci_assignable_name2bdf':
-libxl_pci.c:970:5: error: 'pcibdf' may be used uninitialized in this function [-Werror=maybe-uninitialized]
-     return pcibdf;
-     ^
+Signed-off-by: Paul Durrant <pdurrant@amazon.com>
+---
+Cc: Ian Jackson <iwj@xenproject.org>
+Cc: Wei Liu <wl@xen.org>
+---
+ tools/libs/light/libxl_pci.c | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
 
-Odd that my local build (debian 9.13) didn't pick it up. Will send a v4 shortly.
-
-  Paul
-
-> ~Andrew
+diff --git a/tools/libs/light/libxl_pci.c b/tools/libs/light/libxl_pci.c
+index da01c77ba2..50c96cbfa6 100644
+--- a/tools/libs/light/libxl_pci.c
++++ b/tools/libs/light/libxl_pci.c
+@@ -61,9 +61,9 @@ static void libxl_create_pci_backend_device(libxl__gc *gc,
+         flexarray_append_pair(back, GCSPRINTF("vdevfn-%d", num), GCSPRINTF("%x", pci->vdevfn));
+     flexarray_append(back, GCSPRINTF("opts-%d", num));
+     flexarray_append(back,
+-              GCSPRINTF("msitranslate=%d,power_mgmt=%d,permissive=%d",
+-                             pci->msitranslate, pci->power_mgmt,
+-                             pci->permissive));
++              GCSPRINTF("msitranslate=%d,power_mgmt=%d,permissive=%d,rdm_policy=%s",
++                        pci->msitranslate, pci->power_mgmt,
++                        pci->permissive, libxl_rdm_reserve_policy_to_string(pci->rdm_policy)));
+     flexarray_append_pair(back, GCSPRINTF("state-%d", num), GCSPRINTF("%d", XenbusStateInitialising));
+ }
+ 
+@@ -2374,6 +2374,9 @@ static int libxl__device_pci_from_xs_be(libxl__gc *gc,
+             } else if (!strcmp(p, "permissive")) {
+                 p = strtok_r(NULL, ",=", &saveptr);
+                 pci->permissive = atoi(p);
++            } else if (!strcmp(p, "rdm_policy")) {
++                p = strtok_r(NULL, ",=", &saveptr);
++                libxl_rdm_reserve_policy_from_string(p, &pci->rdm_policy);
+             }
+         } while ((p = strtok_r(NULL, ",=", &saveptr)) != NULL);
+     }
+-- 
+2.11.0
 
 
