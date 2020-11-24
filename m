@@ -2,29 +2,28 @@ Return-Path: <SRS0=fYmn=E6=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,UNPARSEABLE_RELAY,URIBL_BLOCKED
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A3BC5C56201
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:25:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6A6F8C8300B
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:28:37 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 012D82076E
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:25:55 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 03C8E208FE
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2020 13:28:36 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=armh.onmicrosoft.com header.i=@armh.onmicrosoft.com header.b="HzYX0qo5";
-	dkim=pass (1024-bit key) header.d=armh.onmicrosoft.com header.i=@armh.onmicrosoft.com header.b="HzYX0qo5"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 012D82076E
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="voamq2gI"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 03C8E208FE
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.35972.67650 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.35986.67662 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khYKC-0000EG-Tv; Tue, 24 Nov 2020 13:25:40 +0000
+	id 1khYMs-0000Qs-Ey; Tue, 24 Nov 2020 13:28:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 35972.67650; Tue, 24 Nov 2020 13:25:40 +0000
+Received: by outflank-mailman (output) from mailman id 35986.67662; Tue, 24 Nov 2020 13:28:26 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,234 +38,210 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khYKC-0000E9-Pv; Tue, 24 Nov 2020 13:25:40 +0000
-Received: by outflank-mailman (input) for mailman id 35972;
- Tue, 24 Nov 2020 13:25:39 +0000
+	id 1khYMs-0000Ql-BK; Tue, 24 Nov 2020 13:28:26 +0000
+Received: by outflank-mailman (input) for mailman id 35986;
+ Tue, 24 Nov 2020 13:28:25 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=tuHM=E6=arm.com=bertrand.marquis@srs-us1.protection.inumbo.net>)
- id 1khYKB-0000E4-8q
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:25:39 +0000
-Received: from EUR03-VE1-obe.outbound.protection.outlook.com (unknown
- [40.107.5.55]) by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 639e6375-9945-40d2-a893-011a86837155;
- Tue, 24 Nov 2020 13:25:34 +0000 (UTC)
-Received: from AM5PR0601CA0081.eurprd06.prod.outlook.com (2603:10a6:206::46)
- by HE1PR0802MB2140.eurprd08.prod.outlook.com (2603:10a6:3:c2::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3589.20; Tue, 24 Nov
- 2020 13:25:28 +0000
-Received: from VE1EUR03FT061.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:206:0:cafe::ef) by AM5PR0601CA0081.outlook.office365.com
- (2603:10a6:206::46) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3611.20 via Frontend
- Transport; Tue, 24 Nov 2020 13:25:28 +0000
-Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- VE1EUR03FT061.mail.protection.outlook.com (10.152.19.220) with
- Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3589.20 via Frontend Transport; Tue, 24 Nov 2020 13:25:27 +0000
-Received: ("Tessian outbound e0cdfd2b0406:v71");
- Tue, 24 Nov 2020 13:25:27 +0000
-Received: from ea14c71aca94.1
- by 64aa7808-outbound-1.mta.getcheckrecipient.com id
- A60FD409-6F1B-4F55-8E04-BC6E5D2A7C65.1; 
- Tue, 24 Nov 2020 13:25:21 +0000
-Received: from EUR03-VE1-obe.outbound.protection.outlook.com
- by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id ea14c71aca94.1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
- Tue, 24 Nov 2020 13:25:21 +0000
-Received: from DB7PR08MB3689.eurprd08.prod.outlook.com (2603:10a6:10:79::16)
- by DBBPR08MB4775.eurprd08.prod.outlook.com (2603:10a6:10:da::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3589.29; Tue, 24 Nov
- 2020 13:25:18 +0000
-Received: from DB7PR08MB3689.eurprd08.prod.outlook.com
- ([fe80::8567:dffb:80c1:bc0]) by DB7PR08MB3689.eurprd08.prod.outlook.com
- ([fe80::8567:dffb:80c1:bc0%7]) with mapi id 15.20.3589.030; Tue, 24 Nov 2020
- 13:25:18 +0000
+ <SRS0=daQ6=E6=casper.srs.infradead.org=batv+cbe268a5dfa7b983a02e+6302+infradead.org+hch@srs-us1.protection.inumbo.net>)
+ id 1khYMq-0000Qf-1v
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:28:25 +0000
+Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 0e2b4566-a3a9-49f0-b0ef-9759e8f25a47;
+ Tue, 24 Nov 2020 13:28:20 +0000 (UTC)
+Received: from [2001:4bb8:180:5443:c70:4a89:bc61:3] (helo=localhost)
+ by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+ id 1khYMV-0006Ut-HC; Tue, 24 Nov 2020 13:28:03 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=tuHM=E6=arm.com=bertrand.marquis@srs-us1.protection.inumbo.net>)
-	id 1khYKB-0000E4-8q
-	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:25:39 +0000
-X-Inumbo-ID: 639e6375-9945-40d2-a893-011a86837155
-Received: from EUR03-VE1-obe.outbound.protection.outlook.com (unknown [40.107.5.55])
+	(envelope-from <SRS0=daQ6=E6=casper.srs.infradead.org=batv+cbe268a5dfa7b983a02e+6302+infradead.org+hch@srs-us1.protection.inumbo.net>)
+	id 1khYMq-0000Qf-1v
+	for xen-devel@lists.xenproject.org; Tue, 24 Nov 2020 13:28:25 +0000
+X-Inumbo-ID: 0e2b4566-a3a9-49f0-b0ef-9759e8f25a47
+Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 639e6375-9945-40d2-a893-011a86837155;
-	Tue, 24 Nov 2020 13:25:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=UVbzaMWJSPUqrJbAHs5E5esD8fonsBvUNk2PUepUqrg=;
- b=HzYX0qo5saOwFrksSm4fj99M1e3vjK8TnSE77GR5GBq1p06NZsCe0nMfaHGUmz6uYiVjVJ06CSmoxFCP9uuknaPMadMQI/FmPbwYolYc3MuIuTvKOrqa4nZwqJlf59KjIW+CL8xWIZWUQ+jgxAl5y9TsdcIXbmvgnmgMZqMEASs=
-Received: from AM5PR0601CA0081.eurprd06.prod.outlook.com (2603:10a6:206::46)
- by HE1PR0802MB2140.eurprd08.prod.outlook.com (2603:10a6:3:c2::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3589.20; Tue, 24 Nov
- 2020 13:25:28 +0000
-Received: from VE1EUR03FT061.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:206:0:cafe::ef) by AM5PR0601CA0081.outlook.office365.com
- (2603:10a6:206::46) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3611.20 via Frontend
- Transport; Tue, 24 Nov 2020 13:25:28 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
- smtp.mailfrom=arm.com; lists.xenproject.org; dkim=pass (signature was
- verified) header.d=armh.onmicrosoft.com;lists.xenproject.org; dmarc=pass
- action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
- client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
-Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- VE1EUR03FT061.mail.protection.outlook.com (10.152.19.220) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3589.20 via Frontend Transport; Tue, 24 Nov 2020 13:25:27 +0000
-Received: ("Tessian outbound e0cdfd2b0406:v71"); Tue, 24 Nov 2020 13:25:27 +0000
-X-CheckRecipientChecked: true
-X-CR-MTA-CID: 5015fdd956e2b1db
-X-CR-MTA-TID: 64aa7808
-Received: from ea14c71aca94.1
-	by 64aa7808-outbound-1.mta.getcheckrecipient.com id A60FD409-6F1B-4F55-8E04-BC6E5D2A7C65.1;
-	Tue, 24 Nov 2020 13:25:21 +0000
-Received: from EUR03-VE1-obe.outbound.protection.outlook.com
-    by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id ea14c71aca94.1
-    (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
-    Tue, 24 Nov 2020 13:25:21 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ka0P/TM/BYr+JOI9gvGLjMTtQ+hK8l3vWU/w1ttQ3YIRIhbnKosgV7eMNcpMRu2VwvblCY78DsUttkou5OGc06stpR1zQaUb/IvAx0hhUxoctBjycYLVc2TTVLsFddteO4bFCIdpphYvgkJwWagiGYCdXdKopNslYCiqLy4R3T9GvhZzqZeN3pFliXZZutp01kIuAUyuIM2+0EO2XKPSdflh0MSInUKai3AqPV3nsJh/VlWBUGq7VphVt8G2zYoG66stAIavgjNnFTqV0sjcAMXVDBp5srBbXsCzRpi1pVOoLcDfuoWkGTkZUclyORLDg3twMxNEa6HiLUHvvSr9pA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=UVbzaMWJSPUqrJbAHs5E5esD8fonsBvUNk2PUepUqrg=;
- b=RXIrkgTFk3+BcuTNeQ2l+dZK2nGmAQ8MOf8VP96oI8DG3WKo2oKbxTNlBxjh30konw1mWAqe3YoPS851oUNR7jpMQaSvYolVn2maUn1GnD2gpi5faChuUB5NtKkYIqiez/U0OPRIQUIOtzMk6F5R5WlbnbAOWVD57dgmBbb/qNA1fyjiQz6MtBXy5uy3BzM3IPgZyPRP8X0l0A+wN5w1HrDX3F3v1lP/CkCg8D22PQakkFUQJ520o8C20C15Gt268JnBOrh9lJyNwLD8Dp8B/DvwA6jkrEFdIsFA6BJtk9cB1+ob9JKKGOH7pkkJbQPjLJKeAm2YB38jW112ZRashw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=UVbzaMWJSPUqrJbAHs5E5esD8fonsBvUNk2PUepUqrg=;
- b=HzYX0qo5saOwFrksSm4fj99M1e3vjK8TnSE77GR5GBq1p06NZsCe0nMfaHGUmz6uYiVjVJ06CSmoxFCP9uuknaPMadMQI/FmPbwYolYc3MuIuTvKOrqa4nZwqJlf59KjIW+CL8xWIZWUQ+jgxAl5y9TsdcIXbmvgnmgMZqMEASs=
-Received: from DB7PR08MB3689.eurprd08.prod.outlook.com (2603:10a6:10:79::16)
- by DBBPR08MB4775.eurprd08.prod.outlook.com (2603:10a6:10:da::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3589.29; Tue, 24 Nov
- 2020 13:25:18 +0000
-Received: from DB7PR08MB3689.eurprd08.prod.outlook.com
- ([fe80::8567:dffb:80c1:bc0]) by DB7PR08MB3689.eurprd08.prod.outlook.com
- ([fe80::8567:dffb:80c1:bc0%7]) with mapi id 15.20.3589.030; Tue, 24 Nov 2020
- 13:25:18 +0000
-From: Bertrand Marquis <Bertrand.Marquis@arm.com>
-To: Julien Grall <julien@xen.org>
-CC: "open list:X86" <xen-devel@lists.xenproject.org>, Julien Grall
-	<jgrall@amazon.com>, Stefano Stabellini <sstabellini@kernel.org>, Volodymyr
- Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: Re: [PATCH RFC 3/6] xen/arm: setup: Call
- unregister_init_virtual_region() after the last init function
-Thread-Topic: [PATCH RFC 3/6] xen/arm: setup: Call
- unregister_init_virtual_region() after the last init function
-Thread-Index: AQHWvqdS2mJLaroJgEqXj0ki52YbT6nXTTEA
-Date: Tue, 24 Nov 2020 13:25:18 +0000
-Message-ID: <18463E31-62DE-4859-8453-CF0DCD755103@arm.com>
-References: <20201119190751.22345-1-julien@xen.org>
- <20201119190751.22345-4-julien@xen.org>
-In-Reply-To: <20201119190751.22345-4-julien@xen.org>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-x-mailer: Apple Mail (2.3608.120.23.2.4)
-Authentication-Results-Original: xen.org; dkim=none (message not signed)
- header.d=none;xen.org; dmarc=none action=none header.from=arm.com;
-x-originating-ip: [82.9.225.195]
-x-ms-publictraffictype: Email
-X-MS-Office365-Filtering-HT: Tenant
-X-MS-Office365-Filtering-Correlation-Id: 29e7798a-e81a-460b-8740-08d8907c687e
-x-ms-traffictypediagnostic: DBBPR08MB4775:|HE1PR0802MB2140:
-X-Microsoft-Antispam-PRVS:
-	<HE1PR0802MB2140F967DFCC6540C4DD18EF9DFB0@HE1PR0802MB2140.eurprd08.prod.outlook.com>
-x-checkrecipientrouted: true
-nodisclaimer: true
-x-ms-oob-tlc-oobclassifiers: OLM:4502;OLM:4502;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam-Untrusted: BCL:0;
-X-Microsoft-Antispam-Message-Info-Original:
- 2iONf+4mtKnrmzBwZDzpGmExyQD82UYrgJ4Byh9F/efsKBLHUrKzRnm0sHauQJRVhZvWBom7BgdV0l14sZOf26d/sCnojmn9viBqGTB8KD4LWLVRK3EZzf4QDyKD9q7z+gx1MXiPnSTXe2grojUHHsmcKAkbSMorjYWUP3S4qAEZOnP5D+hn43byC6/2fTcAqVXLFmVznfrnij9mn95Jk3w8nbelyhitppso7sUaZB5Ri0s8vIumMh5vRERVM/ZzGkxE+x7OSBiLpUijq+SgeuQZ9wRC2W3d5I5nzFVdanlLBmxEMF1MN19mly++wEUj9Ct4jnnfeeSUtDerK/J5Ng==
-X-Forefront-Antispam-Report-Untrusted:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB7PR08MB3689.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(346002)(396003)(39860400002)(136003)(376002)(6486002)(76116006)(2616005)(26005)(71200400001)(186003)(478600001)(4326008)(8936002)(91956017)(64756008)(66556008)(86362001)(66446008)(66946007)(66476007)(8676002)(5660300002)(316002)(4744005)(53546011)(6506007)(83380400001)(2906002)(36756003)(54906003)(33656002)(6916009)(6512007);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata:
- /yrVEnu5gOeDj3TvwKOTptCdlH3/nnQzWIrVqt4DkYAYpJ/eGynC4MuW0bf3fbyI+D0QYXHNlyd2T07c7GggsJGYPPIozIm5Z9AkDZvA0DxfddeE66Ffyp4rbPf9sTekrx3z5nTTttt9Nh1TamXhcLWhBhtf8T3zbiGE6B0HuIAe67KMmgaxx41XwM1sOuNhkB1Zxu//EAHO8cAYwB8cDvJXBMUjRmxjpb70+FixpmWrBmAgJj5wVJaxQt+mMbW0cUZ32sQ6eK/0PScogRZsA7xZDSQUCWUHGRrftHIhMTpFkfccQEgMPkAA2E7lOx3mJxt7gdP7eOpXYcSB4IxC4rKBL8JaQlLbV/rljNh0NvEYQKdhWuUpWlKhQmM2gE3easwyiWveE+7AcSXzEFW85asK3evNWGQhlHtmqvI2U9th1WDxnrFvMB1my700QecWIETKbNfXqqyalThVr/1MB8jO2zYHCIqrnrBe+pi4Zau25bq9GHTCEhBt3UU+/83IMB+UQq/M58mbx2HP0Bm2M9fb4b63nsVNJPOduuuDXPcZPQjgsICnzdCxqgLpwab9UWeLsB8hcIEEFaEjAYhUbx66Fcao3+SBh03IesI4YoATXKOAQioCWijSs7nmTTlxvCgNaNWPImGqI3WBVdkw8+53iri1JgOuMEFvs1Pa1Didlic8dFeLKb1N+GTQl+OsS+Yvc7IrDCjNtz5mJqm8M4NTvjxEtuJkA9N1XAfv34AuZt/ujIPmMmX8ghKV+PVoJVlHLqHDch/R5oHaScrrvFfcIxtjG3zAqAnSc1ZLFwwBKSL2Vl+CRJT9gRlwORYb9rdvKKySaVTOvHRUOP3X+wx70GuKd0faq3q9KvMd4nxiQ31Gma77XN7Y26VamaPAues0RxqBqQjLc6gGvajb2g==
-x-ms-exchange-transport-forked: True
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <9F1C948EB92A684DA2FB0189813EC9DD@eurprd08.prod.outlook.com>
-Content-Transfer-Encoding: quoted-printable
+	id 0e2b4566-a3a9-49f0-b0ef-9759e8f25a47;
+	Tue, 24 Nov 2020 13:28:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
+	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+	Content-Type:Content-ID:Content-Description;
+	bh=kUYn0sikpHZNYDnsxFrAwXSb49C5P7DMdxps0LhhPGQ=; b=voamq2gIRabU8afAKL3jTQT86w
+	3voeMXKzWRc968NV3Og6QI7vPIsFgyzT+g3y7G5VN1mzlkrcmMY4Qg7EwhHhprBp2pFWLMjK63ObP
+	R7mWTCNSKQkV5l0bX4rfRh4gKPGZnVeHwjNUcB1zJgqL93wnbxgFlTDmJRPjnCaFhMh+HPucQfU+S
+	uovUuXHghcRdZOgSkakX0fZ9XuPs/BxiQ7jD+ibvnUIkvCuGFLC0BxmxD5xKdEPhugucjYN8I4Xpv
+	WSH12/wojKPamwwzSgge7VqR4tsSr5bVtW0y1gEbh0LGN1fc0aleWXDqaFKriKv0dnauuuFj6BOkD
+	RzQOH7Hw==;
+Received: from [2001:4bb8:180:5443:c70:4a89:bc61:3] (helo=localhost)
+	by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+	id 1khYMV-0006Ut-HC; Tue, 24 Nov 2020 13:28:03 +0000
+From: Christoph Hellwig <hch@lst.de>
+To: Jens Axboe <axboe@kernel.dk>
+Cc: Tejun Heo <tj@kernel.org>,
+	Josef Bacik <josef@toxicpanda.com>,
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+	Coly Li <colyli@suse.de>,
+	Mike Snitzer <snitzer@redhat.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Jan Kara <jack@suse.cz>,
+	Johannes Thumshirn <johannes.thumshirn@wdc.com>,
+	dm-devel@redhat.com,
+	Richard Weinberger <richard@nod.at>,
+	Jan Kara <jack@suse.com>,
+	linux-block@vger.kernel.org,
+	xen-devel@lists.xenproject.org,
+	linux-bcache@vger.kernel.org,
+	linux-mtd@lists.infradead.org,
+	linux-fsdevel@vger.kernel.org,
+	linux-mm@kvack.org
+Subject: [PATCH 06/45] zram: remove the claim mechanism
+Date: Tue, 24 Nov 2020 14:27:12 +0100
+Message-Id: <20201124132751.3747337-7-hch@lst.de>
+X-Mailer: git-send-email 2.29.2
+In-Reply-To: <20201124132751.3747337-1-hch@lst.de>
+References: <20201124132751.3747337-1-hch@lst.de>
 MIME-Version: 1.0
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR08MB4775
-Original-Authentication-Results: xen.org; dkim=none (message not signed)
- header.d=none;xen.org; dmarc=none action=none header.from=arm.com;
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- VE1EUR03FT061.eop-EUR03.prod.protection.outlook.com
-X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	707d9288-e614-4e77-e34a-08d8907c633c
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	TUP3NFl94caR/VE6nW8KYA/+kwTKAu/ElVs/jLdC39gafiEKt83ckGa1Vz5nWkUTLUYW+V61JrNhVOVQZorB2+3JS0a7fJRKSL5BGW/2CBa05hzVuKJ3FkYzXDZcmo0IN189/FOZYE5pQp1oaS1BMuCiLamQW1D79PGHk/TWLRPlRg3Yc3PtQ5sIVO+sqXIpP1m3+FknO1mU3IX1tDfNM0RG9D8N2WPzRDcIw3qi8weP8+lFGnXODrJU+WF2U4incgMJXMSKsGrsZi2J0OcKaqIXG2aFQ0Qe6/qL2rf8T86DlnLHm1tJtBVS74rdTp36KptgWGiczh0S6iJj4zQIEuS/XujoUlB42f0UYippCfYH+GyAqBI3sgSw6GaEbj0gQsSP2d8wSOnrpg8yclbx5w==
-X-Forefront-Antispam-Report:
-	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(4636009)(39860400002)(396003)(136003)(346002)(376002)(46966005)(5660300002)(83380400001)(70206006)(47076004)(70586007)(356005)(81166007)(82740400003)(6512007)(4326008)(33656002)(53546011)(6506007)(8676002)(26005)(186003)(6862004)(36756003)(478600001)(86362001)(2906002)(54906003)(316002)(2616005)(107886003)(8936002)(336012)(6486002)(82310400003);DIR:OUT;SFP:1101;
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Nov 2020 13:25:27.5102
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 29e7798a-e81a-460b-8740-08d8907c687e
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	VE1EUR03FT061.eop-EUR03.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: HE1PR0802MB2140
+Content-Transfer-Encoding: 8bit
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-Hi Julien,
+The zram claim mechanism was added to ensure no new opens come in
+during teardown.  But the proper way to archive that is to call
+del_gendisk first, which takes care of all that.  Once del_gendisk
+is called in the right place, the reset side can also be simplified
+as no I/O can be outstanding on a block device that is not open.
 
-> On 19 Nov 2020, at 19:07, Julien Grall <julien@xen.org> wrote:
->=20
-> From: Julien Grall <jgrall@amazon.com>
->=20
-> discard_init_modules() is an init function, if the path contains a
-> BUG() or WARN() we still want to get the full stack trace.
->=20
-> The init virtual region is now kept after the last init function has
-> been called.
->=20
-> Signed-off-by: Julien Grall <jgrall@amazon.com>
-Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
+Signed-off-by: Christoph Hellwig <hch@lst.de>
+---
+ drivers/block/zram/zram_drv.c | 72 ++++++++---------------------------
+ 1 file changed, 15 insertions(+), 57 deletions(-)
 
-Cheers
-Bertrand
-
-> ---
-> xen/arch/arm/setup.c | 3 ++-
-> 1 file changed, 2 insertions(+), 1 deletion(-)
->=20
-> diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
-> index 7fcff9af2a7e..2532ec973913 100644
-> --- a/xen/arch/arm/setup.c
-> +++ b/xen/arch/arm/setup.c
-> @@ -72,10 +72,11 @@ domid_t __read_mostly max_init_domid;
->=20
-> static __used void init_done(void)
-> {
-> +    discard_initial_modules();
-> +
->     /* Must be done past setting system_state. */
->     unregister_init_virtual_region();
->=20
-> -    discard_initial_modules();
->     free_init_memory();
->     startup_cpu_idle_loop();
-> }
-> --=20
-> 2.17.1
->=20
+diff --git a/drivers/block/zram/zram_drv.c b/drivers/block/zram/zram_drv.c
+index 6d15d51cee2b7e..2e6d75ec1afddb 100644
+--- a/drivers/block/zram/zram_drv.c
++++ b/drivers/block/zram/zram_drv.c
+@@ -1756,64 +1756,33 @@ static ssize_t disksize_store(struct device *dev,
+ static ssize_t reset_store(struct device *dev,
+ 		struct device_attribute *attr, const char *buf, size_t len)
+ {
+-	int ret;
+-	unsigned short do_reset;
+-	struct zram *zram;
++	struct zram *zram = dev_to_zram(dev);
+ 	struct block_device *bdev;
++	unsigned short do_reset;
++	int ret = 0;
+ 
+ 	ret = kstrtou16(buf, 10, &do_reset);
+ 	if (ret)
+ 		return ret;
+-
+ 	if (!do_reset)
+ 		return -EINVAL;
+ 
+-	zram = dev_to_zram(dev);
+ 	bdev = bdget_disk(zram->disk, 0);
+ 	if (!bdev)
+ 		return -ENOMEM;
+ 
+ 	mutex_lock(&bdev->bd_mutex);
+-	/* Do not reset an active device or claimed device */
+-	if (bdev->bd_openers || zram->claim) {
+-		mutex_unlock(&bdev->bd_mutex);
+-		bdput(bdev);
+-		return -EBUSY;
+-	}
+-
+-	/* From now on, anyone can't open /dev/zram[0-9] */
+-	zram->claim = true;
++	if (bdev->bd_openers)
++		ret = -EBUSY;
++	else
++		zram_reset_device(zram);
+ 	mutex_unlock(&bdev->bd_mutex);
+-
+-	/* Make sure all the pending I/O are finished */
+-	fsync_bdev(bdev);
+-	zram_reset_device(zram);
+ 	bdput(bdev);
+ 
+-	mutex_lock(&bdev->bd_mutex);
+-	zram->claim = false;
+-	mutex_unlock(&bdev->bd_mutex);
+-
+-	return len;
+-}
+-
+-static int zram_open(struct block_device *bdev, fmode_t mode)
+-{
+-	int ret = 0;
+-	struct zram *zram;
+-
+-	WARN_ON(!mutex_is_locked(&bdev->bd_mutex));
+-
+-	zram = bdev->bd_disk->private_data;
+-	/* zram was claimed to reset so open request fails */
+-	if (zram->claim)
+-		ret = -EBUSY;
+-
+-	return ret;
++	return ret ? ret : len;
+ }
+ 
+ static const struct block_device_operations zram_devops = {
+-	.open = zram_open,
+ 	.submit_bio = zram_submit_bio,
+ 	.swap_slot_free_notify = zram_slot_free_notify,
+ 	.rw_page = zram_rw_page,
+@@ -1821,7 +1790,6 @@ static const struct block_device_operations zram_devops = {
+ };
+ 
+ static const struct block_device_operations zram_wb_devops = {
+-	.open = zram_open,
+ 	.submit_bio = zram_submit_bio,
+ 	.swap_slot_free_notify = zram_slot_free_notify,
+ 	.owner = THIS_MODULE
+@@ -1974,32 +1942,22 @@ static int zram_add(void)
+ 
+ static int zram_remove(struct zram *zram)
+ {
+-	struct block_device *bdev;
+-
+-	bdev = bdget_disk(zram->disk, 0);
+-	if (!bdev)
+-		return -ENOMEM;
++	struct block_device *bdev = bdget_disk(zram->disk, 0);
+ 
+-	mutex_lock(&bdev->bd_mutex);
+-	if (bdev->bd_openers || zram->claim) {
+-		mutex_unlock(&bdev->bd_mutex);
++	if (bdev) {
++		if (bdev->bd_openers) {
++			bdput(bdev);
++			return -EBUSY;
++		}
+ 		bdput(bdev);
+-		return -EBUSY;
+ 	}
+ 
+-	zram->claim = true;
+-	mutex_unlock(&bdev->bd_mutex);
+-
++	del_gendisk(zram->disk);
+ 	zram_debugfs_unregister(zram);
+-
+-	/* Make sure all the pending I/O are finished */
+-	fsync_bdev(bdev);
+ 	zram_reset_device(zram);
+-	bdput(bdev);
+ 
+ 	pr_info("Removed device: %s\n", zram->disk->disk_name);
+ 
+-	del_gendisk(zram->disk);
+ 	blk_cleanup_queue(zram->disk->queue);
+ 	put_disk(zram->disk);
+ 	kfree(zram);
+-- 
+2.29.2
 
 
