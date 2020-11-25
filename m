@@ -2,28 +2,28 @@ Return-Path: <SRS0=CtBx=E7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-24.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D8B9FC63798
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2020 04:27:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 49A57C63777
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2020 04:27:59 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5246320789
+	by mail.kernel.org (Postfix) with ESMTPS id BDC48208C3
 	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2020 04:27:58 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="1wZDPkPH"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5246320789
+	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="thMeD7fw"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BDC48208C3
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.37139.69364 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.37137.69343 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khmPH-0000vi-Ki; Wed, 25 Nov 2020 04:27:51 +0000
+	id 1khmPG-0000sp-Er; Wed, 25 Nov 2020 04:27:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 37139.69364; Wed, 25 Nov 2020 04:27:51 +0000
+Received: by outflank-mailman (output) from mailman id 37137.69343; Wed, 25 Nov 2020 04:27:50 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,47 +38,47 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khmPH-0000uy-BE; Wed, 25 Nov 2020 04:27:51 +0000
-Received: by outflank-mailman (input) for mailman id 37139;
- Wed, 25 Nov 2020 04:27:49 +0000
+	id 1khmPG-0000sh-BL; Wed, 25 Nov 2020 04:27:50 +0000
+Received: by outflank-mailman (input) for mailman id 37137;
+ Wed, 25 Nov 2020 04:27:48 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gEFk=E7=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1khmPF-0000sA-Gi
- for xen-devel@lists.xenproject.org; Wed, 25 Nov 2020 04:27:49 +0000
+ id 1khmPE-0000sA-JE
+ for xen-devel@lists.xenproject.org; Wed, 25 Nov 2020 04:27:48 +0000
 Received: from mail.kernel.org (unknown [198.145.29.99])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 5d84af08-07af-408b-9549-f1d41c7a8398;
- Wed, 25 Nov 2020 04:27:49 +0000 (UTC)
+ id 8af09075-fccc-4c2b-af61-14dbbae54f12;
+ Wed, 25 Nov 2020 04:27:47 +0000 (UTC)
 Received: from sstabellini-ThinkPad-T480s.hsd1.ca.comcast.net
  (c-24-130-65-46.hsd1.ca.comcast.net [24.130.65.46])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id DAA0120B80;
- Wed, 25 Nov 2020 04:27:47 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id C7C0720789;
+ Wed, 25 Nov 2020 04:27:46 +0000 (UTC)
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=gEFk=E7=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
-	id 1khmPF-0000sA-Gi
-	for xen-devel@lists.xenproject.org; Wed, 25 Nov 2020 04:27:49 +0000
-X-Inumbo-ID: 5d84af08-07af-408b-9549-f1d41c7a8398
+	id 1khmPE-0000sA-JE
+	for xen-devel@lists.xenproject.org; Wed, 25 Nov 2020 04:27:48 +0000
+X-Inumbo-ID: 8af09075-fccc-4c2b-af61-14dbbae54f12
 Received: from mail.kernel.org (unknown [198.145.29.99])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 5d84af08-07af-408b-9549-f1d41c7a8398;
-	Wed, 25 Nov 2020 04:27:49 +0000 (UTC)
+	id 8af09075-fccc-4c2b-af61-14dbbae54f12;
+	Wed, 25 Nov 2020 04:27:47 +0000 (UTC)
 Received: from sstabellini-ThinkPad-T480s.hsd1.ca.comcast.net (c-24-130-65-46.hsd1.ca.comcast.net [24.130.65.46])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id DAA0120B80;
-	Wed, 25 Nov 2020 04:27:47 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPSA id C7C0720789;
+	Wed, 25 Nov 2020 04:27:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1606278468;
-	bh=CSa1gG/RT/f6nzrrY+UMikNynTa9ntaJ3vNiNTwvCr8=;
+	s=default; t=1606278467;
+	bh=/lcIGplqn6odufkVeXSQ/3A4o3V3IGNc2rmyv6gS60M=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=1wZDPkPH+OUlmjAMm+FNgrz4aWEbP6zSYC8XHfBIRR2qqUb7tBS7kyTCCYRAHlWfL
-	 xE0iP4zVKTyOKHErM/NCtGCTRgFeSLPgKcOcKFI0X/3pamr/+wQQ+I1CDWrXx9we11
-	 wQMkDCDnwOOGe8xxvmLqRqUpWNI7hsM3MS+7hqy0=
+	b=thMeD7fw10ItmbTZlWIPLwsKzJ86JzKQYQMwg+xxRnRmiHvKRndVNGYG5ipEZJiWe
+	 l8Ek0n74OaUVlJChrmZugykQHs017rCcU48YkyoMJi/CJbdJTR/sPjE9IOpVDE2MFu
+	 GHjcyf+1+H2xy4G7Dl8oVyM9JMB9EqZVvq1Bmme8=
 From: Stefano Stabellini <sstabellini@kernel.org>
 To: andrew.cooper3@citrix.com,
 	cardoe@cardoe.com,
@@ -86,41 +86,127 @@ To: andrew.cooper3@citrix.com,
 Cc: sstabellini@kernel.org,
 	xen-devel@lists.xenproject.org,
 	Stefano Stabellini <stefano.stabellini@xilinx.com>
-Subject: [PATCH v3 03/12] automation: pass --disable-werror for QEMUU builds if libc is musl
-Date: Tue, 24 Nov 2020 20:27:36 -0800
-Message-Id: <20201125042745.31986-3-sstabellini@kernel.org>
+Subject: [PATCH v3 01/12] automation: add a QEMU aarch64 smoke test
+Date: Tue, 24 Nov 2020 20:27:34 -0800
+Message-Id: <20201125042745.31986-1-sstabellini@kernel.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <alpine.DEB.2.21.2011241722540.7979@sstabellini-ThinkPad-T480s>
 References: <alpine.DEB.2.21.2011241722540.7979@sstabellini-ThinkPad-T480s>
 
-QEMU upstream builds with warnings when libc is musl:
+Use QEMU to start Xen (just the hypervisor) up until it stops because
+there is no dom0 kernel to boot.
 
-  #warning redirecting incorrect #include <sys/signal.h> to <signal.h>
+It is based on the existing build job unstable-arm64v8.
 
-Disable -Werror by passing --disable-werror to the QEMUU config script
-if libc is musl.
+Also use make -j$(nproc) to build Xen.
 
 Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
 ---
- automation/scripts/build | 5 +++++
- 1 file changed, 5 insertions(+)
+Changes in v2:
+- fix x86_32 build
+---
+ automation/gitlab-ci/test.yaml         | 22 ++++++++++++++++++
+ automation/scripts/build               |  6 ++---
+ automation/scripts/qemu-smoke-arm64.sh | 32 ++++++++++++++++++++++++++
+ 3 files changed, 57 insertions(+), 3 deletions(-)
+ create mode 100755 automation/scripts/qemu-smoke-arm64.sh
 
+diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
+index 793feafe8b..35346e3f6e 100644
+--- a/automation/gitlab-ci/test.yaml
++++ b/automation/gitlab-ci/test.yaml
+@@ -22,6 +22,28 @@ build-each-commit-gcc:
+     - /^coverity-tested\/.*/
+     - /^stable-.*/
+ 
++qemu-smoke-arm64-gcc:
++  stage: test
++  image: registry.gitlab.com/xen-project/xen/${CONTAINER}
++  variables:
++    CONTAINER: debian:unstable-arm64v8
++  script:
++    - ./automation/scripts/qemu-smoke-arm64.sh 2>&1 | tee qemu-smoke-arm64.log
++  dependencies:
++    - debian-unstable-gcc-arm64
++  artifacts:
++    paths:
++      - smoke.serial
++      - '*.log'
++    when: always
++  tags:
++    - arm64
++  except:
++    - master
++    - smoke
++    - /^coverity-tested\/.*/
++    - /^stable-.*/
++
+ qemu-smoke-x86-64-gcc:
+   stage: test
+   image: registry.gitlab.com/xen-project/xen/${CONTAINER}
 diff --git a/automation/scripts/build b/automation/scripts/build
-index 7038e5eb50..3fb2fe134c 100755
+index 0cd0f3971d..7038e5eb50 100755
 --- a/automation/scripts/build
 +++ b/automation/scripts/build
-@@ -28,6 +28,11 @@ if [[ "${CC}" == "clang"* ]]; then
-     cfgargs+=("--disable-stubdom")
+@@ -10,9 +10,9 @@ cc-ver()
+ 
+ # random config or default config
+ if [[ "${RANDCONFIG}" == "y" ]]; then
+-    make -C xen KCONFIG_ALLCONFIG=tools/kconfig/allrandom.config randconfig
++    make -j$(nproc) -C xen KCONFIG_ALLCONFIG=tools/kconfig/allrandom.config randconfig
+ else
+-    make -C xen defconfig
++    make -j$(nproc) -C xen defconfig
  fi
  
-+# disable --disable-werror for QEMUU when building with MUSL
-+if ! test -z "$(ldd /bin/ls|grep musl|head -1)"; then
-+	cfgargs+=("--with-extra-qemuu-configure-args=\"--disable-werror\"")
-+fi
+ # build up our configure options
+@@ -45,7 +45,7 @@ make -j$(nproc) dist
+ # Extract artifacts to avoid getting rewritten by customised builds
+ cp xen/.config xen-config
+ mkdir binaries
+-if [[ "${XEN_TARGET_ARCH}" == "x86_64" ]]; then
++if [[ "${XEN_TARGET_ARCH}" != "x86_32" ]]; then
+     cp xen/xen binaries/xen
+ fi
+ 
+diff --git a/automation/scripts/qemu-smoke-arm64.sh b/automation/scripts/qemu-smoke-arm64.sh
+new file mode 100755
+index 0000000000..a7efbf8b6f
+--- /dev/null
++++ b/automation/scripts/qemu-smoke-arm64.sh
+@@ -0,0 +1,32 @@
++#!/bin/bash
 +
- # Qemu requires Python 3.5 or later
- if ! type python3 || python3 -c "import sys; res = sys.version_info < (3, 5); exit(not(res))"; then
-     cfgargs+=("--with-system-qemu=/bin/false")
++set -ex
++
++# Install QEMU
++export DEBIAN_FRONTENT=noninteractive
++apt-get -qy update
++apt-get -qy install --no-install-recommends qemu-system-aarch64 \
++                                            u-boot-qemu
++
++# XXX Silly workaround to get the following QEMU command to work
++cp /usr/share/qemu/pvh.bin /usr/share/qemu/efi-virtio.rom
++qemu-system-aarch64 \
++   -machine virtualization=true \
++   -cpu cortex-a57 -machine type=virt \
++   -m 512 -display none \
++   -machine dumpdtb=binaries/virt-gicv3.dtb
++
++rm -f smoke.serial
++set +e
++echo "  booti 0x49000000 - 0x44000000" | timeout -k 1 30 qemu-system-aarch64 \
++    -machine virtualization=true \
++    -cpu cortex-a57 -machine type=virt \
++    -m 512 -monitor none -serial stdio \
++    -no-reboot \
++    -device loader,file=binaries/virt-gicv3.dtb,force-raw=on,addr=0x44000000 \
++    -device loader,file=binaries/xen,force-raw=on,addr=0x49000000 \
++    -bios /usr/lib/u-boot/qemu_arm64/u-boot.bin |& tee smoke.serial
++
++set -e
++grep -q 'LOADING DOMAIN 0' smoke.serial || exit 1
++exit 0
 -- 
 2.17.1
 
