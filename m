@@ -2,28 +2,28 @@ Return-Path: <SRS0=CtBx=E7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6DD5CC5519F
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2020 04:27:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D8B9FC63798
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2020 04:27:58 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CE96A20789
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2020 04:27:56 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 5246320789
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2020 04:27:58 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="FRYj1Cre"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CE96A20789
+	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="1wZDPkPH"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5246320789
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.37136.69331 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.37139.69364 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khmP2-0000p7-5Z; Wed, 25 Nov 2020 04:27:36 +0000
+	id 1khmPH-0000vi-Ki; Wed, 25 Nov 2020 04:27:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 37136.69331; Wed, 25 Nov 2020 04:27:36 +0000
+Received: by outflank-mailman (output) from mailman id 37139.69364; Wed, 25 Nov 2020 04:27:51 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,102 +38,90 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khmP2-0000p0-2S; Wed, 25 Nov 2020 04:27:36 +0000
-Received: by outflank-mailman (input) for mailman id 37136;
- Wed, 25 Nov 2020 04:27:35 +0000
+	id 1khmPH-0000uy-BE; Wed, 25 Nov 2020 04:27:51 +0000
+Received: by outflank-mailman (input) for mailman id 37139;
+ Wed, 25 Nov 2020 04:27:49 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gEFk=E7=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1khmP1-0000ov-1y
- for xen-devel@lists.xenproject.org; Wed, 25 Nov 2020 04:27:35 +0000
+ id 1khmPF-0000sA-Gi
+ for xen-devel@lists.xenproject.org; Wed, 25 Nov 2020 04:27:49 +0000
 Received: from mail.kernel.org (unknown [198.145.29.99])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 0be4d2de-51ca-4a82-947b-60e109efc04f;
- Wed, 25 Nov 2020 04:27:34 +0000 (UTC)
-Received: from sstabellini-ThinkPad-T480s (c-24-130-65-46.hsd1.ca.comcast.net
- [24.130.65.46])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 5d84af08-07af-408b-9549-f1d41c7a8398;
+ Wed, 25 Nov 2020 04:27:49 +0000 (UTC)
+Received: from sstabellini-ThinkPad-T480s.hsd1.ca.comcast.net
+ (c-24-130-65-46.hsd1.ca.comcast.net [24.130.65.46])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 10C1920789;
- Wed, 25 Nov 2020 04:27:33 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id DAA0120B80;
+ Wed, 25 Nov 2020 04:27:47 +0000 (UTC)
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=gEFk=E7=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
-	id 1khmP1-0000ov-1y
-	for xen-devel@lists.xenproject.org; Wed, 25 Nov 2020 04:27:35 +0000
-X-Inumbo-ID: 0be4d2de-51ca-4a82-947b-60e109efc04f
+	id 1khmPF-0000sA-Gi
+	for xen-devel@lists.xenproject.org; Wed, 25 Nov 2020 04:27:49 +0000
+X-Inumbo-ID: 5d84af08-07af-408b-9549-f1d41c7a8398
 Received: from mail.kernel.org (unknown [198.145.29.99])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 0be4d2de-51ca-4a82-947b-60e109efc04f;
-	Wed, 25 Nov 2020 04:27:34 +0000 (UTC)
-Received: from sstabellini-ThinkPad-T480s (c-24-130-65-46.hsd1.ca.comcast.net [24.130.65.46])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	id 5d84af08-07af-408b-9549-f1d41c7a8398;
+	Wed, 25 Nov 2020 04:27:49 +0000 (UTC)
+Received: from sstabellini-ThinkPad-T480s.hsd1.ca.comcast.net (c-24-130-65-46.hsd1.ca.comcast.net [24.130.65.46])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id 10C1920789;
-	Wed, 25 Nov 2020 04:27:33 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPSA id DAA0120B80;
+	Wed, 25 Nov 2020 04:27:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1606278453;
-	bh=PCH4N6dBQbNnVLc5jc5mn5eoHUGnxd6iVPbT0sBVRFY=;
-	h=Date:From:To:cc:Subject:From;
-	b=FRYj1Cre31TaU6QNRKRYoLBpyfRrdjeXdIDRGjdO+5E22R7UVRKqakhm9h5TFQnIg
-	 79NSGv4zmureoLOwSzxLigwN0PeXGgH7h4pqzCG8kTeIMyTqOU1AD+1BLJDp4RXahn
-	 /vh7hdq1axyXCOUuT+/x44aawAK5iYvO6ubSXOzU=
-Date: Tue, 24 Nov 2020 20:27:21 -0800 (PST)
+	s=default; t=1606278468;
+	bh=CSa1gG/RT/f6nzrrY+UMikNynTa9ntaJ3vNiNTwvCr8=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=1wZDPkPH+OUlmjAMm+FNgrz4aWEbP6zSYC8XHfBIRR2qqUb7tBS7kyTCCYRAHlWfL
+	 xE0iP4zVKTyOKHErM/NCtGCTRgFeSLPgKcOcKFI0X/3pamr/+wQQ+I1CDWrXx9we11
+	 wQMkDCDnwOOGe8xxvmLqRqUpWNI7hsM3MS+7hqy0=
 From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
-To: andrew.cooper3@citrix.com, cardoe@cardoe.com, wl@xen.org
-cc: sstabellini@kernel.org, xen-devel@lists.xenproject.org
-Subject: [PATCH v3 00/12] automation: improvements (mostly) for arm64
-Message-ID: <alpine.DEB.2.21.2011241722540.7979@sstabellini-ThinkPad-T480s>
-User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
-MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+To: andrew.cooper3@citrix.com,
+	cardoe@cardoe.com,
+	wl@xen.org
+Cc: sstabellini@kernel.org,
+	xen-devel@lists.xenproject.org,
+	Stefano Stabellini <stefano.stabellini@xilinx.com>
+Subject: [PATCH v3 03/12] automation: pass --disable-werror for QEMUU builds if libc is musl
+Date: Tue, 24 Nov 2020 20:27:36 -0800
+Message-Id: <20201125042745.31986-3-sstabellini@kernel.org>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <alpine.DEB.2.21.2011241722540.7979@sstabellini-ThinkPad-T480s>
+References: <alpine.DEB.2.21.2011241722540.7979@sstabellini-ThinkPad-T480s>
 
-Hi all,
+QEMU upstream builds with warnings when libc is musl:
 
-This series does a few things:
+  #warning redirecting incorrect #include <sys/signal.h> to <signal.h>
 
-1) it introduces a simple Xen arm64 dom0less smoke test based on QEMU
-2) it introduces alpine linux builds x86 and arm64
-3) it introduces two tests artifacts containers
-4) it uses said artifacts to create a dom0/domU arm64 test based on QEMU
+Disable -Werror by passing --disable-werror to the QEMUU config script
+if libc is musl.
 
-The series is v3, but in reality only 1) above was sent out before (the
-first two patches). Everything else is new. All tests succeed currently.
+Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
+---
+ automation/scripts/build | 5 +++++
+ 1 file changed, 5 insertions(+)
 
+diff --git a/automation/scripts/build b/automation/scripts/build
+index 7038e5eb50..3fb2fe134c 100755
+--- a/automation/scripts/build
++++ b/automation/scripts/build
+@@ -28,6 +28,11 @@ if [[ "${CC}" == "clang"* ]]; then
+     cfgargs+=("--disable-stubdom")
+ fi
+ 
++# disable --disable-werror for QEMUU when building with MUSL
++if ! test -z "$(ldd /bin/ls|grep musl|head -1)"; then
++	cfgargs+=("--with-extra-qemuu-configure-args=\"--disable-werror\"")
++fi
++
+ # Qemu requires Python 3.5 or later
+ if ! type python3 || python3 -c "import sys; res = sys.version_info < (3, 5); exit(not(res))"; then
+     cfgargs+=("--with-system-qemu=/bin/false")
+-- 
+2.17.1
 
-
-Stefano Stabellini (12):
-      automation: add a QEMU aarch64 smoke test
-      automation: add dom0less to the QEMU aarch64 smoke test
-      automation: pass --disable-werror for QEMUU builds if libc is musl
-      automation: add alpine linux 3.12 arm64 build container
-      automation: add alpine linux arm64 build test
-      automation: add alpine linux 3.12 x86 build container
-      automation: add alpine linux x86 build jobs
-      automation: add tests artifacts
-      automation: make available the tests artifacts to the pipeline
-      automation: create an alpine linux arm64 test job
-      automation: use the tests-artifacts kernel for qemu-smoke-arm64-gcc
-      automation: add domU creation to dom0 alpine linux test
-
- automation/build/alpine/3.12-arm64v8.dockerfile    |  52 +++++++++
- automation/build/alpine/3.12.dockerfile            |  52 +++++++++
- automation/gitlab-ci/build.yaml                    |  60 ++++++++++
- automation/gitlab-ci/test.yaml                     |  47 ++++++++
- automation/scripts/build                           |  12 +-
- automation/scripts/qemu-alpine-arm64.sh            | 121 +++++++++++++++++++++
- automation/scripts/qemu-smoke-arm64.sh             |  93 ++++++++++++++++
- automation/tests-artifacts/Makefile                |  19 ++++
- .../tests-artifacts/alpine/3.12-arm64v8.dockerfile |  67 ++++++++++++
- .../kernel/5.9.9-arm64v8.dockerfile                |  34 ++++++
- 10 files changed, 554 insertions(+), 3 deletions(-)
- create mode 100644 automation/build/alpine/3.12-arm64v8.dockerfile
- create mode 100644 automation/build/alpine/3.12.dockerfile
- create mode 100755 automation/scripts/qemu-alpine-arm64.sh
- create mode 100755 automation/scripts/qemu-smoke-arm64.sh
- create mode 100644 automation/tests-artifacts/Makefile
- create mode 100644 automation/tests-artifacts/alpine/3.12-arm64v8.dockerfile
- create mode 100644 automation/tests-artifacts/kernel/5.9.9-arm64v8.dockerfile
 
