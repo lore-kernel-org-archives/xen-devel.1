@@ -7,21 +7,21 @@ X-Spam-Status: No, score=-15.2 required=3.0 tests=BAYES_00,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 10650C5519F
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2020 13:38:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4469BC56202
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2020 13:39:34 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6D78820637
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2020 13:38:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6D78820637
+	by mail.kernel.org (Postfix) with ESMTPS id C655A20637
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2020 13:39:33 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C655A20637
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.cz
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.37774.70278 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.37781.70290 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khuzP-0007af-U8; Wed, 25 Nov 2020 13:37:43 +0000
+	id 1khv12-0007m9-9i; Wed, 25 Nov 2020 13:39:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 37774.70278; Wed, 25 Nov 2020 13:37:43 +0000
+Received: by outflank-mailman (output) from mailman id 37781.70290; Wed, 25 Nov 2020 13:39:24 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,41 +36,40 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khuzP-0007aY-QA; Wed, 25 Nov 2020 13:37:43 +0000
-Received: by outflank-mailman (input) for mailman id 37774;
- Wed, 25 Nov 2020 13:37:43 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1khv12-0007m2-6U; Wed, 25 Nov 2020 13:39:24 +0000
+Received: by outflank-mailman (input) for mailman id 37781;
+ Wed, 25 Nov 2020 13:39:22 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=sFqU=E7=suse.cz=jack@srs-us1.protection.inumbo.net>)
- id 1khuzP-0007aT-0W
- for xen-devel@lists.xenproject.org; Wed, 25 Nov 2020 13:37:43 +0000
+ id 1khv10-0007lw-HF
+ for xen-devel@lists.xenproject.org; Wed, 25 Nov 2020 13:39:22 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id cd60aa23-ce69-40de-9f3b-6480a6c76526;
- Wed, 25 Nov 2020 13:37:40 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id af0670e9-7ae3-48f1-971f-7223551ae775;
+ Wed, 25 Nov 2020 13:39:21 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 0A70EAC22;
- Wed, 25 Nov 2020 13:37:40 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id BCF50AC23;
+ Wed, 25 Nov 2020 13:39:20 +0000 (UTC)
 Received: by quack2.suse.cz (Postfix, from userid 1000)
- id 658EF1E130F; Wed, 25 Nov 2020 14:37:39 +0100 (CET)
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+ id 8ACF21E130F; Wed, 25 Nov 2020 14:39:20 +0100 (CET)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=sFqU=E7=suse.cz=jack@srs-us1.protection.inumbo.net>)
-	id 1khuzP-0007aT-0W
-	for xen-devel@lists.xenproject.org; Wed, 25 Nov 2020 13:37:43 +0000
-X-Inumbo-ID: cd60aa23-ce69-40de-9f3b-6480a6c76526
+	id 1khv10-0007lw-HF
+	for xen-devel@lists.xenproject.org; Wed, 25 Nov 2020 13:39:22 +0000
+X-Inumbo-ID: af0670e9-7ae3-48f1-971f-7223551ae775
 Received: from mx2.suse.de (unknown [195.135.220.15])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id cd60aa23-ce69-40de-9f3b-6480a6c76526;
-	Wed, 25 Nov 2020 13:37:40 +0000 (UTC)
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id af0670e9-7ae3-48f1-971f-7223551ae775;
+	Wed, 25 Nov 2020 13:39:21 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 0A70EAC22;
-	Wed, 25 Nov 2020 13:37:40 +0000 (UTC)
+	by mx2.suse.de (Postfix) with ESMTP id BCF50AC23;
+	Wed, 25 Nov 2020 13:39:20 +0000 (UTC)
 Received: by quack2.suse.cz (Postfix, from userid 1000)
-	id 658EF1E130F; Wed, 25 Nov 2020 14:37:39 +0100 (CET)
-Date: Wed, 25 Nov 2020 14:37:39 +0100
+	id 8ACF21E130F; Wed, 25 Nov 2020 14:39:20 +0100 (CET)
+Date: Wed, 25 Nov 2020 14:39:20 +0100
 From: Jan Kara <jack@suse.cz>
 To: Christoph Hellwig <hch@lst.de>
 Cc: Jens Axboe <axboe@kernel.dk>, Tejun Heo <tj@kernel.org>,
@@ -85,46 +84,51 @@ Cc: Jens Axboe <axboe@kernel.dk>, Tejun Heo <tj@kernel.org>,
 	xen-devel@lists.xenproject.org, linux-bcache@vger.kernel.org,
 	linux-mtd@lists.infradead.org, linux-fsdevel@vger.kernel.org,
 	linux-mm@kvack.org
-Subject: Re: [PATCH 08/45] loop: do not call set_blocksize
-Message-ID: <20201125133739.GK16944@quack2.suse.cz>
+Subject: Re: [PATCH 12/45] block: remove a superflous check in blkpg_do_ioctl
+Message-ID: <20201125133920.GL16944@quack2.suse.cz>
 References: <20201124132751.3747337-1-hch@lst.de>
- <20201124132751.3747337-9-hch@lst.de>
+ <20201124132751.3747337-13-hch@lst.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20201124132751.3747337-9-hch@lst.de>
+In-Reply-To: <20201124132751.3747337-13-hch@lst.de>
 User-Agent: Mutt/1.10.1 (2018-07-13)
 
-On Tue 24-11-20 14:27:14, Christoph Hellwig wrote:
-> set_blocksize is used by file systems to use their preferred buffer cache
-> block size.  Block drivers should not set it.
+On Tue 24-11-20 14:27:18, Christoph Hellwig wrote:
+> sector_t is now always a u64, so this check is not needed.
 > 
 > Signed-off-by: Christoph Hellwig <hch@lst.de>
 
-Looks good to me. You can add:
+Looks good. You can add:
 
 Reviewed-by: Jan Kara <jack@suse.cz>
 
 								Honza
 
 > ---
->  drivers/block/loop.c | 3 ---
->  1 file changed, 3 deletions(-)
+>  block/ioctl.c | 9 ---------
+>  1 file changed, 9 deletions(-)
 > 
-> diff --git a/drivers/block/loop.c b/drivers/block/loop.c
-> index 9a27d4f1c08aac..b42c728620c9e4 100644
-> --- a/drivers/block/loop.c
-> +++ b/drivers/block/loop.c
-> @@ -1164,9 +1164,6 @@ static int loop_configure(struct loop_device *lo, fmode_t mode,
->  	size = get_loop_size(lo, file);
->  	loop_set_size(lo, size);
+> diff --git a/block/ioctl.c b/block/ioctl.c
+> index 6b785181344fe1..0c09bb7a6ff35f 100644
+> --- a/block/ioctl.c
+> +++ b/block/ioctl.c
+> @@ -35,15 +35,6 @@ static int blkpg_do_ioctl(struct block_device *bdev,
+>  	start = p.start >> SECTOR_SHIFT;
+>  	length = p.length >> SECTOR_SHIFT;
 >  
-> -	set_blocksize(bdev, S_ISBLK(inode->i_mode) ?
-> -		      block_size(inode->i_bdev) : PAGE_SIZE);
+> -	/* check for fit in a hd_struct */
+> -	if (sizeof(sector_t) < sizeof(long long)) {
+> -		long pstart = start, plength = length;
 > -
->  	lo->lo_state = Lo_bound;
->  	if (part_shift)
->  		lo->lo_flags |= LO_FLAGS_PARTSCAN;
+> -		if (pstart != start || plength != length || pstart < 0 ||
+> -		    plength < 0 || p.pno > 65535)
+> -			return -EINVAL;
+> -	}
+> -
+>  	switch (op) {
+>  	case BLKPG_ADD_PARTITION:
+>  		/* check if partition is aligned to blocksize */
 > -- 
 > 2.29.2
 > 
