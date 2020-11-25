@@ -2,28 +2,28 @@ Return-Path: <SRS0=CtBx=E7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-24.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1A296C63798
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2020 04:28:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ED03EC63777
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2020 04:28:35 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A254B20789
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2020 04:28:28 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 9368620789
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2020 04:28:35 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="vvqEJlv+"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A254B20789
+	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="j+9Cxijp"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9368620789
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.37172.69451 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.37179.69463 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khmPk-0001hT-HF; Wed, 25 Nov 2020 04:28:20 +0000
+	id 1khmPp-0001oM-UT; Wed, 25 Nov 2020 04:28:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 37172.69451; Wed, 25 Nov 2020 04:28:20 +0000
+Received: by outflank-mailman (output) from mailman id 37179.69463; Wed, 25 Nov 2020 04:28:25 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,46 +38,46 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khmPk-0001hG-Bc; Wed, 25 Nov 2020 04:28:20 +0000
-Received: by outflank-mailman (input) for mailman id 37172;
- Wed, 25 Nov 2020 04:28:19 +0000
+	id 1khmPp-0001o9-Pb; Wed, 25 Nov 2020 04:28:25 +0000
+Received: by outflank-mailman (input) for mailman id 37179;
+ Wed, 25 Nov 2020 04:28:24 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gEFk=E7=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1khmPj-0000sM-0r
- for xen-devel@lists.xenproject.org; Wed, 25 Nov 2020 04:28:19 +0000
+ id 1khmPo-0000sM-0t
+ for xen-devel@lists.xenproject.org; Wed, 25 Nov 2020 04:28:24 +0000
 Received: from mail.kernel.org (unknown [198.145.29.99])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id abf9b2c7-8f2c-4c38-9230-9998c7f079ec;
- Wed, 25 Nov 2020 04:27:52 +0000 (UTC)
+ id 3f610be8-a076-4b62-aa4f-4b94e3612db5;
+ Wed, 25 Nov 2020 04:27:53 +0000 (UTC)
 Received: from sstabellini-ThinkPad-T480s.hsd1.ca.comcast.net
  (c-24-130-65-46.hsd1.ca.comcast.net [24.130.65.46])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 92E7E21D46;
- Wed, 25 Nov 2020 04:27:51 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 1BD122173E;
+ Wed, 25 Nov 2020 04:27:52 +0000 (UTC)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=gEFk=E7=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
-	id 1khmPj-0000sM-0r
-	for xen-devel@lists.xenproject.org; Wed, 25 Nov 2020 04:28:19 +0000
-X-Inumbo-ID: abf9b2c7-8f2c-4c38-9230-9998c7f079ec
+	id 1khmPo-0000sM-0t
+	for xen-devel@lists.xenproject.org; Wed, 25 Nov 2020 04:28:24 +0000
+X-Inumbo-ID: 3f610be8-a076-4b62-aa4f-4b94e3612db5
 Received: from mail.kernel.org (unknown [198.145.29.99])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id abf9b2c7-8f2c-4c38-9230-9998c7f079ec;
-	Wed, 25 Nov 2020 04:27:52 +0000 (UTC)
+	id 3f610be8-a076-4b62-aa4f-4b94e3612db5;
+	Wed, 25 Nov 2020 04:27:53 +0000 (UTC)
 Received: from sstabellini-ThinkPad-T480s.hsd1.ca.comcast.net (c-24-130-65-46.hsd1.ca.comcast.net [24.130.65.46])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id 92E7E21D46;
-	Wed, 25 Nov 2020 04:27:51 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPSA id 1BD122173E;
+	Wed, 25 Nov 2020 04:27:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1606278471;
-	bh=78C8JPAxWzx+2hjJoT6vrfTzB1NiGDxd/5tqEyKfQ3A=;
+	s=default; t=1606278472;
+	bh=Ue92qEDF50KpJfvuNM6M4wzRTD3agPXEU66URBcepBc=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=vvqEJlv+cqSCpmW9YC0oKgxLCKH13eKDoly9WpMFUxZZXSpNlUyu3Iu2yqd50IcWn
-	 XvFbhFpLFwS50nggbNEi8L9uraCwmfqWC5jEG3EJOFin2U7gqRGnhL25lXaosH9u3M
-	 VBrbhGnzLSXh79THhEYXPu/VSerG985scjsruWEY=
+	b=j+9CxijplI5rPgATSgIdxhc7CsWdTP3/RcYTwsQnz6O9K4WwaxX4XJywdKxbPqPF+
+	 Zv7A1PzIRAiVvgUP3i25rhO2fQyiarakXi91gV6Il4gmlC6NCNWG/xz5sW//VzlOeg
+	 OjH45tXb5hjdfFbIyiVUluBpt131nKIAN+65g1e4=
 From: Stefano Stabellini <sstabellini@kernel.org>
 To: andrew.cooper3@citrix.com,
 	cardoe@cardoe.com,
@@ -85,162 +85,51 @@ To: andrew.cooper3@citrix.com,
 Cc: sstabellini@kernel.org,
 	xen-devel@lists.xenproject.org,
 	Stefano Stabellini <stefano.stabellini@xilinx.com>
-Subject: [PATCH v3 10/12] automation: create an alpine linux arm64 test job
-Date: Tue, 24 Nov 2020 20:27:43 -0800
-Message-Id: <20201125042745.31986-10-sstabellini@kernel.org>
+Subject: [PATCH v3 11/12] automation: use the tests-artifacts kernel for qemu-smoke-arm64-gcc
+Date: Tue, 24 Nov 2020 20:27:44 -0800
+Message-Id: <20201125042745.31986-11-sstabellini@kernel.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <alpine.DEB.2.21.2011241722540.7979@sstabellini-ThinkPad-T480s>
 References: <alpine.DEB.2.21.2011241722540.7979@sstabellini-ThinkPad-T480s>
 
-Create a test job that starts Xen and Dom0 on QEMU based on the alpine
-linux rootfs. Use the Linux kernel and rootfs from the tests-artifacts
-containers. Add the Xen tools binaries from the Alpine Linux build job.
+Use the tests-artifacts kernel, instead of the Debian kernel, for the
+qemu-smoke-arm64-gcc job.
 
 Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
 ---
- automation/gitlab-ci/test.yaml          | 24 +++++++
- automation/scripts/build                |  1 +
- automation/scripts/qemu-alpine-arm64.sh | 84 +++++++++++++++++++++++++
- 3 files changed, 109 insertions(+)
- create mode 100755 automation/scripts/qemu-alpine-arm64.sh
+ automation/gitlab-ci/test.yaml         | 1 +
+ automation/scripts/qemu-smoke-arm64.sh | 6 ------
+ 2 files changed, 1 insertion(+), 6 deletions(-)
 
 diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
-index 35346e3f6e..a291538d68 100644
+index a291538d68..9448651187 100644
 --- a/automation/gitlab-ci/test.yaml
 +++ b/automation/gitlab-ci/test.yaml
-@@ -22,6 +22,30 @@ build-each-commit-gcc:
-     - /^coverity-tested\/.*/
-     - /^stable-.*/
- 
-+qemu-alpine-arm64-gcc:
-+  stage: test
-+  image: registry.gitlab.com/xen-project/xen/${CONTAINER}
-+  variables:
-+    CONTAINER: debian:unstable-arm64v8
-+  script:
-+    - ./automation/scripts/qemu-alpine-arm64.sh 2>&1 | tee qemu-smoke-arm64.log
-+  dependencies:
-+    - alpine-3.12-gcc-arm64
-+    - alpine-3.12-arm64-rootfs-export
+@@ -55,6 +55,7 @@ qemu-smoke-arm64-gcc:
+     - ./automation/scripts/qemu-smoke-arm64.sh 2>&1 | tee qemu-smoke-arm64.log
+   dependencies:
+     - debian-unstable-gcc-arm64
 +    - kernel-5.9.9-arm64-export
-+  artifacts:
-+    paths:
-+      - smoke.serial
-+      - '*.log'
-+    when: always
-+  tags:
-+    - arm64
-+  except:
-+    - master
-+    - smoke
-+    - /^coverity-tested\/.*/
-+    - /^stable-.*/
-+
- qemu-smoke-arm64-gcc:
-   stage: test
-   image: registry.gitlab.com/xen-project/xen/${CONTAINER}
-diff --git a/automation/scripts/build b/automation/scripts/build
-index 3fb2fe134c..0e1ebd60f2 100755
---- a/automation/scripts/build
-+++ b/automation/scripts/build
-@@ -52,6 +52,7 @@ cp xen/.config xen-config
- mkdir binaries
- if [[ "${XEN_TARGET_ARCH}" != "x86_32" ]]; then
-     cp xen/xen binaries/xen
-+    cp -r dist binaries/
- fi
+   artifacts:
+     paths:
+       - smoke.serial
+diff --git a/automation/scripts/qemu-smoke-arm64.sh b/automation/scripts/qemu-smoke-arm64.sh
+index 9bf4488115..d614227f0a 100755
+--- a/automation/scripts/qemu-smoke-arm64.sh
++++ b/automation/scripts/qemu-smoke-arm64.sh
+@@ -12,12 +12,6 @@ apt-get -qy install --no-install-recommends qemu-system-aarch64 \
+                                             busybox-static \
+                                             cpio
  
- # Build all the configs we care about
-diff --git a/automation/scripts/qemu-alpine-arm64.sh b/automation/scripts/qemu-alpine-arm64.sh
-new file mode 100755
-index 0000000000..7d1eb7d1b6
---- /dev/null
-+++ b/automation/scripts/qemu-alpine-arm64.sh
-@@ -0,0 +1,84 @@
-+#!/bin/bash
-+
-+set -ex
-+
-+apt-get -qy update
-+apt-get -qy install --no-install-recommends qemu-system-aarch64 \
-+                                            u-boot-qemu \
-+                                            u-boot-tools \
-+                                            device-tree-compiler \
-+                                            cpio \
-+                                            curl
-+
-+mkdir -p binaries/rootfs
-+cd binaries/rootfs
-+tar xvzf ../initrd.tar.gz
-+mkdir proc
-+mkdir run
-+mkdir srv
-+mkdir sys
-+rm var/run
-+cp -ar ../dist/install/* .
-+echo "#!/bin/bash
-+
-+export LD_LIBRARY_PATH=/usr/local/lib
-+bash /etc/init.d/xencommons start
-+
-+xl list
-+
-+" > etc/local.d/xen.start
-+chmod +x etc/local.d/xen.start
-+echo "rc_verbose=yes" >> etc/rc.conf
-+find . |cpio -H newc -o|gzip > ../xen-rootfs.cpio.gz
-+cd ../..
-+
-+# XXX Silly workaround to get the following QEMU command to work
-+cp /usr/share/qemu/pvh.bin /usr/share/qemu/efi-virtio.rom
-+qemu-system-aarch64 \
-+   -machine virtualization=true \
-+   -cpu cortex-a57 -machine type=virt \
-+   -m 1024 -display none \
-+   -machine dumpdtb=binaries/virt-gicv3.dtb
-+# XXX disable pl061 to avoid Linux crash
-+dtc -I dtb -O dts binaries/virt-gicv3.dtb > binaries/virt-gicv3.dts
-+sed 's/compatible = "arm,pl061.*/status = "disabled";/g' binaries/virt-gicv3.dts > binaries/virt-gicv3-edited.dts
-+dtc -I dts -O dtb binaries/virt-gicv3-edited.dts > binaries/virt-gicv3.dtb
-+
-+# ImageBuilder
-+echo 'MEMORY_START="0x40000000"
-+MEMORY_END="0x80000000"
-+
-+DEVICE_TREE="virt-gicv3.dtb"
-+XEN="xen"
-+DOM0_KERNEL="Image"
-+DOM0_RAMDISK="xen-rootfs.cpio.gz"
-+XEN_CMD="console=dtuart dom0_mem=1024M"
-+
-+NUM_DOMUS=0
-+
-+LOAD_CMD="tftpb"
-+UBOOT_SOURCE="boot.source"
-+UBOOT_SCRIPT="boot.scr"' > binaries/config
-+rm -rf imagebuilder
-+git clone https://gitlab.com/ViryaOS/imagebuilder
-+bash imagebuilder/scripts/uboot-script-gen -t tftp -d binaries/ -c binaries/config
-+
-+
-+# Run the test
-+rm -f smoke.serial
-+set +e
-+echo "  virtio scan; dhcp; tftpb 0x40000000 boot.scr; source 0x40000000"| \
-+timeout -k 1 480 \
-+qemu-system-aarch64 \
-+    -machine virtualization=true \
-+    -cpu cortex-a57 -machine type=virt \
-+    -m 2048 -monitor none -serial stdio \
-+    -smp 2 \
-+    -no-reboot \
-+    -device virtio-net-pci,netdev=n0 \
-+    -netdev user,id=n0,tftp=binaries \
-+    -bios /usr/lib/u-boot/qemu_arm64/u-boot.bin |& tee smoke.serial
-+
-+set -e
-+grep -q "Domain-0" smoke.serial || exit 1
-+exit 0
+-cd binaries
+-apt-get download linux-image-*[0-9]-arm64
+-dpkg -i --ignore-depends=initramfs-tools ./linux-image-*arm64.deb || true
+-cp /boot/vmlinuz-*arm64 ./Image
+-cd ..
+-
+ # XXX Silly workaround to get the following QEMU command to work
+ cp /usr/share/qemu/pvh.bin /usr/share/qemu/efi-virtio.rom
+ qemu-system-aarch64 \
 -- 
 2.17.1
 
