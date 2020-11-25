@@ -7,23 +7,23 @@ X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A0E4DC6379D
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2020 15:37:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 83E81C71156
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2020 15:37:34 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2CCD0221EB
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2020 15:37:02 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 0B997221F7
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2020 15:37:33 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="c4xRBXTe"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2CCD0221EB
+	dkim=pass (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="1bz/2vYd"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0B997221F7
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.37839.70383 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.37841.70395 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khwql-0002Bm-V8; Wed, 25 Nov 2020 15:36:55 +0000
+	id 1khwrF-0002Hs-7w; Wed, 25 Nov 2020 15:37:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 37839.70383; Wed, 25 Nov 2020 15:36:55 +0000
+Received: by outflank-mailman (output) from mailman id 37841.70395; Wed, 25 Nov 2020 15:37:25 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,46 +38,46 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khwql-0002Bf-Ry; Wed, 25 Nov 2020 15:36:55 +0000
-Received: by outflank-mailman (input) for mailman id 37839;
- Wed, 25 Nov 2020 15:36:54 +0000
+	id 1khwrF-0002Hl-4r; Wed, 25 Nov 2020 15:37:25 +0000
+Received: by outflank-mailman (input) for mailman id 37841;
+ Wed, 25 Nov 2020 15:37:24 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=kPj2=E7=kernel.org=sashal@srs-us1.protection.inumbo.net>)
- id 1khwqk-0002Ba-DF
- for xen-devel@lists.xenproject.org; Wed, 25 Nov 2020 15:36:54 +0000
+ id 1khwrE-0002HW-3T
+ for xen-devel@lists.xenproject.org; Wed, 25 Nov 2020 15:37:24 +0000
 Received: from mail.kernel.org (unknown [198.145.29.99])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id d9c3857a-623f-4371-8e6c-78b97d5ab704;
- Wed, 25 Nov 2020 15:36:53 +0000 (UTC)
+ id b130983c-9756-4cd7-a20f-dc6e76756103;
+ Wed, 25 Nov 2020 15:37:23 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 3305621D40;
- Wed, 25 Nov 2020 15:36:52 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id D5EF7221EB;
+ Wed, 25 Nov 2020 15:37:21 +0000 (UTC)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=kPj2=E7=kernel.org=sashal@srs-us1.protection.inumbo.net>)
-	id 1khwqk-0002Ba-DF
-	for xen-devel@lists.xenproject.org; Wed, 25 Nov 2020 15:36:54 +0000
-X-Inumbo-ID: d9c3857a-623f-4371-8e6c-78b97d5ab704
+	id 1khwrE-0002HW-3T
+	for xen-devel@lists.xenproject.org; Wed, 25 Nov 2020 15:37:24 +0000
+X-Inumbo-ID: b130983c-9756-4cd7-a20f-dc6e76756103
 Received: from mail.kernel.org (unknown [198.145.29.99])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id d9c3857a-623f-4371-8e6c-78b97d5ab704;
-	Wed, 25 Nov 2020 15:36:53 +0000 (UTC)
+	id b130983c-9756-4cd7-a20f-dc6e76756103;
+	Wed, 25 Nov 2020 15:37:23 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net [73.47.72.35])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id 3305621D40;
-	Wed, 25 Nov 2020 15:36:52 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPSA id D5EF7221EB;
+	Wed, 25 Nov 2020 15:37:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1606318613;
-	bh=p6UGhE7Kc4+yR/tYHmb8lv+gJLMFBCybGCvMZ4pJ5Rk=;
+	s=default; t=1606318642;
+	bh=krr+BXO3ubjqEgMxgDqhjCLFm4hDcYwCqMWmI9NCuNk=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=c4xRBXTeEIREiQPetfVI3J5Rw3WNws5loFNmXBO/HVVUJHLlQTxBUfK4RtMOy0E4h
-	 meBar3EbG00p14TycPrFot5CVNkpShMJB30n6QNztyFMexEpCaLl3atNZJSByK+tNV
-	 10yuZrTnX6Fl2207v7w5osH3uMKNpIszFvgqoRr4=
+	b=1bz/2vYdK9E9XV0dqAblor/ppuvTtoScYLy9qAGGTANGIokE5UVpe1Z7pD7izcuyP
+	 5N0Xsl1TdP54sMtl+Q+NtEo8wjd3nXZtJIHNWPSmuGKc/MvxSUAw/CMfN11lsNy9u9
+	 eM4bH54OUNV7wAIPjXweLkzNLwx8AhvwNDIbN/lA=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
@@ -86,12 +86,12 @@ Cc: Brian Masney <bmasney@redhat.com>,
 	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
 	Sasha Levin <sashal@kernel.org>,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH AUTOSEL 5.4 10/23] x86/xen: don't unbind uninitialized lock_kicker_irq
-Date: Wed, 25 Nov 2020 10:36:25 -0500
-Message-Id: <20201125153638.810419-10-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 4.19 07/15] x86/xen: don't unbind uninitialized lock_kicker_irq
+Date: Wed, 25 Nov 2020 10:37:04 -0500
+Message-Id: <20201125153712.810655-7-sashal@kernel.org>
 X-Mailer: git-send-email 2.27.0
-In-Reply-To: <20201125153638.810419-1-sashal@kernel.org>
-References: <20201125153638.810419-1-sashal@kernel.org>
+In-Reply-To: <20201125153712.810655-1-sashal@kernel.org>
+References: <20201125153712.810655-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -140,10 +140,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 11 insertions(+), 1 deletion(-)
 
 diff --git a/arch/x86/xen/spinlock.c b/arch/x86/xen/spinlock.c
-index 6deb49094c605..d817b7c862a62 100644
+index 717b4847b473f..6fffb86a32add 100644
 --- a/arch/x86/xen/spinlock.c
 +++ b/arch/x86/xen/spinlock.c
-@@ -93,10 +93,20 @@ void xen_init_lock_cpu(int cpu)
+@@ -101,10 +101,20 @@ void xen_init_lock_cpu(int cpu)
  
  void xen_uninit_lock_cpu(int cpu)
  {
