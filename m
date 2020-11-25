@@ -7,21 +7,21 @@ X-Spam-Status: No, score=-15.3 required=3.0 tests=BAYES_00,
 	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7498AC63777
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2020 06:09:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0A91AC5519F
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2020 06:10:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EBA122075A
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2020 06:09:23 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EBA122075A
+	by mail.kernel.org (Postfix) with ESMTPS id 588E420B1F
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2020 06:10:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 588E420B1F
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=huawei.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.37281.69553 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.37288.69564 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khnyz-0003Vq-Hm; Wed, 25 Nov 2020 06:08:49 +0000
+	id 1kho0c-0004I0-Sv; Wed, 25 Nov 2020 06:10:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 37281.69553; Wed, 25 Nov 2020 06:08:49 +0000
+Received: by outflank-mailman (output) from mailman id 37288.69564; Wed, 25 Nov 2020 06:10:30 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,41 +36,42 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1khnyz-0003Vj-Dw; Wed, 25 Nov 2020 06:08:49 +0000
-Received: by outflank-mailman (input) for mailman id 37281;
- Wed, 25 Nov 2020 06:08:07 +0000
+	id 1kho0c-0004Ht-Px; Wed, 25 Nov 2020 06:10:30 +0000
+Received: by outflank-mailman (input) for mailman id 37288;
+ Wed, 25 Nov 2020 06:10:28 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=BRGr=E7=huawei.com=yuchao0@srs-us1.protection.inumbo.net>)
- id 1khnyJ-0003T3-DC
- for xen-devel@lists.xenproject.org; Wed, 25 Nov 2020 06:08:07 +0000
+ id 1kho0a-0004Hk-Nm
+ for xen-devel@lists.xenproject.org; Wed, 25 Nov 2020 06:10:28 +0000
 Received: from szxga06-in.huawei.com (unknown [45.249.212.32])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 4f30ffd3-5820-4535-afad-a436ca0be133;
- Wed, 25 Nov 2020 06:07:59 +0000 (UTC)
-Received: from DGGEMS412-HUB.china.huawei.com (unknown [172.30.72.60])
- by szxga06-in.huawei.com (SkyGuard) with ESMTP id 4Cgr5m3R7Vzhh8Q;
- Wed, 25 Nov 2020 14:07:40 +0800 (CST)
+ id a6a15f69-22b0-469a-8dd1-466efade4452;
+ Wed, 25 Nov 2020 06:10:26 +0000 (UTC)
+Received: from DGGEMS409-HUB.china.huawei.com (unknown [172.30.72.59])
+ by szxga06-in.huawei.com (SkyGuard) with ESMTP id 4Cgr8c4ZrLzhYVP;
+ Wed, 25 Nov 2020 14:10:08 +0800 (CST)
 Received: from [10.136.114.67] (10.136.114.67) by smtp.huawei.com
- (10.3.19.212) with Microsoft SMTP Server (TLS) id 14.3.487.0; Wed, 25 Nov
- 2020 14:07:42 +0800
+ (10.3.19.209) with Microsoft SMTP Server (TLS) id 14.3.487.0; Wed, 25 Nov
+ 2020 14:10:21 +0800
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=BRGr=E7=huawei.com=yuchao0@srs-us1.protection.inumbo.net>)
-	id 1khnyJ-0003T3-DC
-	for xen-devel@lists.xenproject.org; Wed, 25 Nov 2020 06:08:07 +0000
-X-Inumbo-ID: 4f30ffd3-5820-4535-afad-a436ca0be133
+	id 1kho0a-0004Hk-Nm
+	for xen-devel@lists.xenproject.org; Wed, 25 Nov 2020 06:10:28 +0000
+X-Inumbo-ID: a6a15f69-22b0-469a-8dd1-466efade4452
 Received: from szxga06-in.huawei.com (unknown [45.249.212.32])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 4f30ffd3-5820-4535-afad-a436ca0be133;
-	Wed, 25 Nov 2020 06:07:59 +0000 (UTC)
-Received: from DGGEMS412-HUB.china.huawei.com (unknown [172.30.72.60])
-	by szxga06-in.huawei.com (SkyGuard) with ESMTP id 4Cgr5m3R7Vzhh8Q;
-	Wed, 25 Nov 2020 14:07:40 +0800 (CST)
+	id a6a15f69-22b0-469a-8dd1-466efade4452;
+	Wed, 25 Nov 2020 06:10:26 +0000 (UTC)
+Received: from DGGEMS409-HUB.china.huawei.com (unknown [172.30.72.59])
+	by szxga06-in.huawei.com (SkyGuard) with ESMTP id 4Cgr8c4ZrLzhYVP;
+	Wed, 25 Nov 2020 14:10:08 +0800 (CST)
 Received: from [10.136.114.67] (10.136.114.67) by smtp.huawei.com
- (10.3.19.212) with Microsoft SMTP Server (TLS) id 14.3.487.0; Wed, 25 Nov
- 2020 14:07:42 +0800
-Subject: Re: [PATCH 04/45] fs: simplify freeze_bdev/thaw_bdev
+ (10.3.19.209) with Microsoft SMTP Server (TLS) id 14.3.487.0; Wed, 25 Nov
+ 2020 14:10:21 +0800
+Subject: Re: [PATCH 30/45] block: remove the nr_sects field in struct
+ hd_struct
 To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
 CC: Tejun Heo <tj@kernel.org>, Josef Bacik <josef@toxicpanda.com>, "Konrad
  Rzeszutek Wilk" <konrad.wilk@oracle.com>, Coly Li <colyli@suse.de>, "Mike
@@ -82,14 +83,14 @@ CC: Tejun Heo <tj@kernel.org>, Josef Bacik <josef@toxicpanda.com>, "Konrad
 	<linux-mtd@lists.infradead.org>, <linux-fsdevel@vger.kernel.org>,
 	<linux-mm@kvack.org>
 References: <20201124132751.3747337-1-hch@lst.de>
- <20201124132751.3747337-5-hch@lst.de>
+ <20201124132751.3747337-31-hch@lst.de>
 From: Chao Yu <yuchao0@huawei.com>
-Message-ID: <4ae2d8ca-e858-e5df-67ef-d14852978976@huawei.com>
-Date: Wed, 25 Nov 2020 14:07:41 +0800
+Message-ID: <fe5b2763-a7c7-98dd-d87e-d3fa6767eebb@huawei.com>
+Date: Wed, 25 Nov 2020 14:10:20 +0800
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
  Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <20201124132751.3747337-5-hch@lst.de>
+In-Reply-To: <20201124132751.3747337-31-hch@lst.de>
 Content-Type: text/plain; charset="windows-1252"; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -97,17 +98,29 @@ X-Originating-IP: [10.136.114.67]
 X-CFilter-Loop: Reflected
 
 On 2020/11/24 21:27, Christoph Hellwig wrote:
-> Store the frozen superblock in struct block_device to avoid the awkward
-> interface that can return a sb only used a cookie, an ERR_PTR or NULL.
+> Now that the hd_struct always has a block device attached to it, there is
+> no need for having two size field that just get out of sync.
 > 
-> Signed-off-by: Christoph Hellwig<hch@lst.de>
+> Additional the field in hd_struct did not use proper serializiation,
+> possibly allowing for torn writes.  By only using the block_device field
+> this problem also gets fixed.
+> 
+> Signed-off-by: Christoph Hellwig <hch@lst.de>
+> Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 > ---
->   drivers/md/dm-core.h      |  5 -----
->   drivers/md/dm.c           | 20 ++++++--------------
->   fs/block_dev.c            | 39 ++++++++++++++++-----------------------
->   fs/buffer.c               |  2 +-
->   fs/ext4/ioctl.c           |  2 +-
->   fs/f2fs/file.c            | 14 +++++---------
+>   block/bio.c                        |  4 +-
+>   block/blk-core.c                   |  2 +-
+>   block/blk.h                        | 53 ----------------------
+>   block/genhd.c                      | 55 +++++++++++-----------
+>   block/partitions/core.c            | 17 ++++---
+>   drivers/block/loop.c               |  1 -
+>   drivers/block/nbd.c                |  2 +-
+>   drivers/block/xen-blkback/common.h |  4 +-
+>   drivers/md/bcache/super.c          |  2 +-
+>   drivers/s390/block/dasd_ioctl.c    |  4 +-
+>   drivers/target/target_core_pscsi.c |  7 +--
+>   fs/block_dev.c                     | 73 +-----------------------------
+>   fs/f2fs/super.c                    |  2 +-
 
 For f2fs part,
 
@@ -115,8 +128,8 @@ Acked-by: Chao Yu <yuchao0@huawei.com>
 
 Thanks,
 
->   fs/xfs/xfs_fsops.c        |  7 ++-----
->   include/linux/blk_types.h |  1 +
->   include/linux/blkdev.h    |  4 ++--
->   9 files changed, 34 insertions(+), 60 deletions(-)
+>   fs/pstore/blk.c                    |  2 +-
+>   include/linux/genhd.h              | 29 +++---------
+>   kernel/trace/blktrace.c            |  2 +-
+>   16 files changed, 60 insertions(+), 199 deletions(-)
 
