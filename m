@@ -2,26 +2,26 @@ Return-Path: <SRS0=kjYx=FA=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
+X-Spam-Status: No, score=-16.7 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 88FE1C56202
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Nov 2020 17:02:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 71F81C63798
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Nov 2020 17:02:56 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 32E2F21D91
+	by mail.kernel.org (Postfix) with ESMTPS id 0FE112158C
 	for <xen-devel@archiver.kernel.org>; Thu, 26 Nov 2020 17:02:55 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 32E2F21D91
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0FE112158C
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.38862.71623 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.38864.71647 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kiKfM-0004Rz-5l; Thu, 26 Nov 2020 17:02:44 +0000
+	id 1kiKfP-0004Y4-T8; Thu, 26 Nov 2020 17:02:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 38862.71623; Thu, 26 Nov 2020 17:02:44 +0000
+Received: by outflank-mailman (output) from mailman id 38864.71647; Thu, 26 Nov 2020 17:02:47 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -36,42 +36,41 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kiKfM-0004Rr-10; Thu, 26 Nov 2020 17:02:44 +0000
-Received: by outflank-mailman (input) for mailman id 38862;
- Thu, 26 Nov 2020 17:02:42 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kiKfP-0004Xp-OL; Thu, 26 Nov 2020 17:02:47 +0000
+Received: by outflank-mailman (input) for mailman id 38864;
+ Thu, 26 Nov 2020 17:02:46 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=C6x3=FA=arm.com=rahul.singh@srs-us1.protection.inumbo.net>)
- id 1kiKfK-0004MJ-5B
- for xen-devel@lists.xenproject.org; Thu, 26 Nov 2020 17:02:42 +0000
+ id 1kiKfO-0004PR-Md
+ for xen-devel@lists.xenproject.org; Thu, 26 Nov 2020 17:02:46 +0000
 Received: from foss.arm.com (unknown [217.140.110.172])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id e1df84c5-f26b-43d9-90eb-f7db39644c69;
- Thu, 26 Nov 2020 17:02:38 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+ id 982b97c6-f0a6-4e4a-9df7-34012dd7e656;
+ Thu, 26 Nov 2020 17:02:42 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 279E9153B;
- Thu, 26 Nov 2020 09:02:38 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5DEF715A1;
+ Thu, 26 Nov 2020 09:02:42 -0800 (PST)
 Received: from scm-wfh-server-rahsin01.stack04.eu02.mi.arm.com (unknown
  [10.58.246.76])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 43A663F23F;
- Thu, 26 Nov 2020 09:02:37 -0800 (PST)
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 7AD383F23F;
+ Thu, 26 Nov 2020 09:02:41 -0800 (PST)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=C6x3=FA=arm.com=rahul.singh@srs-us1.protection.inumbo.net>)
-	id 1kiKfK-0004MJ-5B
-	for xen-devel@lists.xenproject.org; Thu, 26 Nov 2020 17:02:42 +0000
-X-Inumbo-ID: e1df84c5-f26b-43d9-90eb-f7db39644c69
+	id 1kiKfO-0004PR-Md
+	for xen-devel@lists.xenproject.org; Thu, 26 Nov 2020 17:02:46 +0000
+X-Inumbo-ID: 982b97c6-f0a6-4e4a-9df7-34012dd7e656
 Received: from foss.arm.com (unknown [217.140.110.172])
-	by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
-	id e1df84c5-f26b-43d9-90eb-f7db39644c69;
-	Thu, 26 Nov 2020 17:02:38 +0000 (UTC)
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+	id 982b97c6-f0a6-4e4a-9df7-34012dd7e656;
+	Thu, 26 Nov 2020 17:02:42 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 279E9153B;
-	Thu, 26 Nov 2020 09:02:38 -0800 (PST)
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5DEF715A1;
+	Thu, 26 Nov 2020 09:02:42 -0800 (PST)
 Received: from scm-wfh-server-rahsin01.stack04.eu02.mi.arm.com (unknown [10.58.246.76])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 43A663F23F;
-	Thu, 26 Nov 2020 09:02:37 -0800 (PST)
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 7AD383F23F;
+	Thu, 26 Nov 2020 09:02:41 -0800 (PST)
 From: Rahul Singh <rahul.singh@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: bertrand.marquis@arm.com,
@@ -79,104 +78,426 @@ Cc: bertrand.marquis@arm.com,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v2 3/8] xen/arm: revert patch related to XArray
-Date: Thu, 26 Nov 2020 17:02:02 +0000
-Message-Id: <612c1adabc1c26a539abf0dc05ea20b51e66e85f.1606406359.git.rahul.singh@arm.com>
+Subject: [PATCH v2 5/8] xen/arm: Remove support for PCI ATS on SMMUv3
+Date: Thu, 26 Nov 2020 17:02:04 +0000
+Message-Id: <78079d1d6e9d2e7e87125da131e9bdb5809b838a.1606406359.git.rahul.singh@arm.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1606406359.git.rahul.singh@arm.com>
 References: <cover.1606406359.git.rahul.singh@arm.com>
 In-Reply-To: <cover.1606406359.git.rahul.singh@arm.com>
 References: <cover.1606406359.git.rahul.singh@arm.com>
 
-XArray is not implemented in XEN revert the patch that introduce the
-XArray code in SMMUv3 driver.
-
-Once XArray is implemented in XEN this patch can be added in XEN.
-
-Reverted the commit 0299a1a81ca056e79c1a7fb751f936ec0d5c7afe
+PCI ATS functionality is not implemented and tested on ARM. Remove the
+PCI ATS support, once PCI ATS support is tested and available this
+patch can be added.
 
 Signed-off-by: Rahul Singh <rahul.singh@arm.com>
 ---
- xen/drivers/passthrough/arm/smmu-v3.c | 27 +++++++++------------------
- 1 file changed, 9 insertions(+), 18 deletions(-)
+ xen/drivers/passthrough/arm/smmu-v3.c | 273 --------------------------
+ 1 file changed, 273 deletions(-)
 
 diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthrough/arm/smmu-v3.c
-index 97eac61ea4..cec304e51a 100644
+index 401f7ae006..6a33628087 100644
 --- a/xen/drivers/passthrough/arm/smmu-v3.c
 +++ b/xen/drivers/passthrough/arm/smmu-v3.c
-@@ -638,6 +638,7 @@ struct arm_smmu_device {
+@@ -460,16 +460,6 @@ struct arm_smmu_cmdq_ent {
+ 			u64			addr;
+ 		} tlbi;
  
- #define ARM_SMMU_MAX_ASIDS		(1 << 16)
- 	unsigned int			asid_bits;
-+	DECLARE_BITMAP(asid_map, ARM_SMMU_MAX_ASIDS);
- 
- #define ARM_SMMU_MAX_VMIDS		(1 << 16)
- 	unsigned int			vmid_bits;
-@@ -703,8 +704,6 @@ struct arm_smmu_option_prop {
- 	const char *prop;
+-		#define CMDQ_OP_ATC_INV		0x40
+-		#define ATC_INV_SIZE_ALL	52
+-		struct {
+-			u32			sid;
+-			u32			ssid;
+-			u64			addr;
+-			u8			size;
+-			bool			global;
+-		} atc;
+-
+ 		#define CMDQ_OP_PRI_RESP	0x41
+ 		struct {
+ 			u32			sid;
+@@ -632,7 +622,6 @@ struct arm_smmu_master {
+ 	struct list_head		domain_head;
+ 	u32				*sids;
+ 	unsigned int			num_sids;
+-	bool				ats_enabled;
+ 	unsigned int			ssid_bits;
  };
  
--static DEFINE_XARRAY_ALLOC1(asid_xa);
--
- static struct arm_smmu_option_prop arm_smmu_options[] = {
- 	{ ARM_SMMU_OPT_SKIP_PREFETCH, "hisilicon,broken-prefetch-cmd" },
- 	{ ARM_SMMU_OPT_PAGE0_REGS_ONLY, "cavium,cn9900-broken-page1-regspace"},
-@@ -1366,14 +1365,6 @@ static void arm_smmu_free_cd_tables(struct arm_smmu_domain *smmu_domain)
- 	cdcfg->cdtab = NULL;
+@@ -650,7 +639,6 @@ struct arm_smmu_domain {
+ 
+ 	struct io_pgtable_ops		*pgtbl_ops;
+ 	bool				non_strict;
+-	atomic_t			nr_ats_masters;
+ 
+ 	enum arm_smmu_domain_stage	stage;
+ 	union {
+@@ -886,14 +874,6 @@ static int arm_smmu_cmdq_build_cmd(u64 *cmd, struct arm_smmu_cmdq_ent *ent)
+ 	case CMDQ_OP_TLBI_S12_VMALL:
+ 		cmd[0] |= FIELD_PREP(CMDQ_TLBI_0_VMID, ent->tlbi.vmid);
+ 		break;
+-	case CMDQ_OP_ATC_INV:
+-		cmd[0] |= FIELD_PREP(CMDQ_0_SSV, ent->substream_valid);
+-		cmd[0] |= FIELD_PREP(CMDQ_ATC_0_GLOBAL, ent->atc.global);
+-		cmd[0] |= FIELD_PREP(CMDQ_ATC_0_SSID, ent->atc.ssid);
+-		cmd[0] |= FIELD_PREP(CMDQ_ATC_0_SID, ent->atc.sid);
+-		cmd[1] |= FIELD_PREP(CMDQ_ATC_1_SIZE, ent->atc.size);
+-		cmd[1] |= ent->atc.addr & CMDQ_ATC_1_ADDR_MASK;
+-		break;
+ 	case CMDQ_OP_PRI_RESP:
+ 		cmd[0] |= FIELD_PREP(CMDQ_0_SSV, ent->substream_valid);
+ 		cmd[0] |= FIELD_PREP(CMDQ_PRI_0_SSID, ent->pri.ssid);
+@@ -925,7 +905,6 @@ static void arm_smmu_cmdq_skip_err(struct arm_smmu_device *smmu)
+ 		[CMDQ_ERR_CERROR_NONE_IDX]	= "No error",
+ 		[CMDQ_ERR_CERROR_ILL_IDX]	= "Illegal command",
+ 		[CMDQ_ERR_CERROR_ABT_IDX]	= "Abort on command fetch",
+-		[CMDQ_ERR_CERROR_ATC_INV_IDX]	= "ATC invalidate timeout",
+ 	};
+ 
+ 	int i;
+@@ -945,14 +924,6 @@ static void arm_smmu_cmdq_skip_err(struct arm_smmu_device *smmu)
+ 		dev_err(smmu->dev, "retrying command fetch\n");
+ 	case CMDQ_ERR_CERROR_NONE_IDX:
+ 		return;
+-	case CMDQ_ERR_CERROR_ATC_INV_IDX:
+-		/*
+-		 * ATC Invalidation Completion timeout. CONS is still pointing
+-		 * at the CMD_SYNC. Attempt to complete other pending commands
+-		 * by repeating the CMD_SYNC, though we might well end up back
+-		 * here since the ATC invalidation may still be pending.
+-		 */
+-		return;
+ 	case CMDQ_ERR_CERROR_ILL_IDX:
+ 	default:
+ 		break;
+@@ -1422,9 +1393,6 @@ static void arm_smmu_write_strtab_ent(struct arm_smmu_master *master, u32 sid,
+ 		val |= FIELD_PREP(STRTAB_STE_0_CFG, STRTAB_STE_0_CFG_S2_TRANS);
+ 	}
+ 
+-	if (master->ats_enabled)
+-		dst[1] |= cpu_to_le64(FIELD_PREP(STRTAB_STE_1_EATS,
+-						 STRTAB_STE_1_EATS_TRANS));
+ 
+ 	arm_smmu_sync_ste_for_sid(smmu, sid);
+ 	/* See comment in arm_smmu_write_ctx_desc() */
+@@ -1633,112 +1601,6 @@ static irqreturn_t arm_smmu_combined_irq_handler(int irq, void *dev)
+ 	return IRQ_WAKE_THREAD;
  }
  
--static void arm_smmu_free_asid(struct arm_smmu_ctx_desc *cd)
+-static void
+-arm_smmu_atc_inv_to_cmd(int ssid, unsigned long iova, size_t size,
+-			struct arm_smmu_cmdq_ent *cmd)
 -{
--	if (!cd->asid)
--		return;
+-	size_t log2_span;
+-	size_t span_mask;
+-	/* ATC invalidates are always on 4096-bytes pages */
+-	size_t inval_grain_shift = 12;
+-	unsigned long page_start, page_end;
 -
--	xa_erase(&asid_xa, cd->asid);
+-	*cmd = (struct arm_smmu_cmdq_ent) {
+-		.opcode			= CMDQ_OP_ATC_INV,
+-		.substream_valid	= !!ssid,
+-		.atc.ssid		= ssid,
+-	};
+-
+-	if (!size) {
+-		cmd->atc.size = ATC_INV_SIZE_ALL;
+-		return;
+-	}
+-
+-	page_start	= iova >> inval_grain_shift;
+-	page_end	= (iova + size - 1) >> inval_grain_shift;
+-
+-	/*
+-	 * In an ATS Invalidate Request, the address must be aligned on the
+-	 * range size, which must be a power of two number of page sizes. We
+-	 * thus have to choose between grossly over-invalidating the region, or
+-	 * splitting the invalidation into multiple commands. For simplicity
+-	 * we'll go with the first solution, but should refine it in the future
+-	 * if multiple commands are shown to be more efficient.
+-	 *
+-	 * Find the smallest power of two that covers the range. The most
+-	 * significant differing bit between the start and end addresses,
+-	 * fls(start ^ end), indicates the required span. For example:
+-	 *
+-	 * We want to invalidate pages [8; 11]. This is already the ideal range:
+-	 *		x = 0b1000 ^ 0b1011 = 0b11
+-	 *		span = 1 << fls(x) = 4
+-	 *
+-	 * To invalidate pages [7; 10], we need to invalidate [0; 15]:
+-	 *		x = 0b0111 ^ 0b1010 = 0b1101
+-	 *		span = 1 << fls(x) = 16
+-	 */
+-	log2_span	= fls_long(page_start ^ page_end);
+-	span_mask	= (1ULL << log2_span) - 1;
+-
+-	page_start	&= ~span_mask;
+-
+-	cmd->atc.addr	= page_start << inval_grain_shift;
+-	cmd->atc.size	= log2_span;
 -}
 -
- /* Stream table manipulation functions */
- static void
- arm_smmu_write_strtab_l1_desc(__le64 *dst, struct arm_smmu_strtab_l1_desc *desc)
-@@ -2006,9 +1997,10 @@ static void arm_smmu_domain_free(struct iommu_domain *domain)
- 	if (smmu_domain->stage == ARM_SMMU_DOMAIN_S1) {
- 		struct arm_smmu_s1_cfg *cfg = &smmu_domain->s1_cfg;
+-static int arm_smmu_atc_inv_master(struct arm_smmu_master *master,
+-				   struct arm_smmu_cmdq_ent *cmd)
+-{
+-	int i;
+-
+-	if (!master->ats_enabled)
+-		return 0;
+-
+-	for (i = 0; i < master->num_sids; i++) {
+-		cmd->atc.sid = master->sids[i];
+-		arm_smmu_cmdq_issue_cmd(master->smmu, cmd);
+-	}
+-
+-	return arm_smmu_cmdq_issue_sync(master->smmu);
+-}
+-
+-static int arm_smmu_atc_inv_domain(struct arm_smmu_domain *smmu_domain,
+-				   int ssid, unsigned long iova, size_t size)
+-{
+-	int ret = 0;
+-	unsigned long flags;
+-	struct arm_smmu_cmdq_ent cmd;
+-	struct arm_smmu_master *master;
+-
+-	if (!(smmu_domain->smmu->features & ARM_SMMU_FEAT_ATS))
+-		return 0;
+-
+-	/*
+-	 * Ensure that we've completed prior invalidation of the main TLBs
+-	 * before we read 'nr_ats_masters' in case of a concurrent call to
+-	 * arm_smmu_enable_ats():
+-	 *
+-	 *	// unmap()			// arm_smmu_enable_ats()
+-	 *	TLBI+SYNC			atomic_inc(&nr_ats_masters);
+-	 *	smp_mb();			[...]
+-	 *	atomic_read(&nr_ats_masters);	pci_enable_ats() // writel()
+-	 *
+-	 * Ensures that we always see the incremented 'nr_ats_masters' count if
+-	 * ATS was enabled at the PCI device before completion of the TLBI.
+-	 */
+-	smp_mb();
+-	if (!atomic_read(&smmu_domain->nr_ats_masters))
+-		return 0;
+-
+-	arm_smmu_atc_inv_to_cmd(ssid, iova, size, &cmd);
+-
+-	spin_lock_irqsave(&smmu_domain->devices_lock, flags);
+-	list_for_each_entry(master, &smmu_domain->devices, domain_head)
+-		ret |= arm_smmu_atc_inv_master(master, &cmd);
+-	spin_unlock_irqrestore(&smmu_domain->devices_lock, flags);
+-
+-	return ret ? -ETIMEDOUT : 0;
+-}
  
--		if (cfg->cdcfg.cdtab)
-+		if (cfg->cdcfg.cdtab) {
- 			arm_smmu_free_cd_tables(smmu_domain);
--		arm_smmu_free_asid(&cfg->cd);
-+			arm_smmu_bitmap_free(smmu->asid_map, cfg->cd.asid);
-+		}
- 	} else {
- 		struct arm_smmu_s2_cfg *cfg = &smmu_domain->s2_cfg;
- 		if (cfg->vmid)
-@@ -2023,15 +2015,14 @@ static int arm_smmu_domain_finalise_s1(struct arm_smmu_domain *smmu_domain,
- 				       struct io_pgtable_cfg *pgtbl_cfg)
- {
- 	int ret;
--	u32 asid;
-+	int asid;
- 	struct arm_smmu_device *smmu = smmu_domain->smmu;
- 	struct arm_smmu_s1_cfg *cfg = &smmu_domain->s1_cfg;
- 	typeof(&pgtbl_cfg->arm_lpae_s1_cfg.tcr) tcr = &pgtbl_cfg->arm_lpae_s1_cfg.tcr;
- 
--	ret = xa_alloc(&asid_xa, &asid, &cfg->cd,
--		       XA_LIMIT(1, (1 << smmu->asid_bits) - 1), GFP_KERNEL);
--	if (ret)
--		return ret;
-+	asid = arm_smmu_bitmap_alloc(smmu->asid_map, smmu->asid_bits);
-+	if (asid < 0)
-+		return asid;
- 
- 	cfg->s1cdmax = master->ssid_bits;
- 
-@@ -2064,7 +2055,7 @@ static int arm_smmu_domain_finalise_s1(struct arm_smmu_domain *smmu_domain,
- out_free_cd_tables:
- 	arm_smmu_free_cd_tables(smmu_domain);
- out_free_asid:
--	arm_smmu_free_asid(&cfg->cd);
-+	arm_smmu_bitmap_free(smmu->asid_map, asid);
- 	return ret;
+ /* IO_PGTABLE API */
+ static void arm_smmu_tlb_inv_context(void *cookie)
+@@ -1765,7 +1627,6 @@ static void arm_smmu_tlb_inv_context(void *cookie)
+ 	 */
+ 	arm_smmu_cmdq_issue_cmd(smmu, &cmd);
+ 	arm_smmu_cmdq_issue_sync(smmu);
+-	arm_smmu_atc_inv_domain(smmu_domain, 0, 0, 0);
  }
+ 
+ static void arm_smmu_tlb_inv_range_nosync(unsigned long iova, size_t size,
+@@ -2106,108 +1967,6 @@ static void arm_smmu_install_ste_for_dev(struct arm_smmu_master *master)
+ 	}
+ }
+ 
+-static bool arm_smmu_ats_supported(struct arm_smmu_master *master)
+-{
+-	struct device *dev = master->dev;
+-	struct arm_smmu_device *smmu = master->smmu;
+-	struct iommu_fwspec *fwspec = dev_iommu_fwspec_get(dev);
+-
+-	if (!(smmu->features & ARM_SMMU_FEAT_ATS))
+-		return false;
+-
+-	if (!(fwspec->flags & IOMMU_FWSPEC_PCI_RC_ATS))
+-		return false;
+-
+-	return dev_is_pci(dev) && pci_ats_supported(to_pci_dev(dev));
+-}
+-
+-static void arm_smmu_enable_ats(struct arm_smmu_master *master)
+-{
+-	size_t stu;
+-	struct pci_dev *pdev;
+-	struct arm_smmu_device *smmu = master->smmu;
+-	struct arm_smmu_domain *smmu_domain = master->domain;
+-
+-	/* Don't enable ATS at the endpoint if it's not enabled in the STE */
+-	if (!master->ats_enabled)
+-		return;
+-
+-	/* Smallest Translation Unit: log2 of the smallest supported granule */
+-	stu = __ffs(smmu->pgsize_bitmap);
+-	pdev = to_pci_dev(master->dev);
+-
+-	atomic_inc(&smmu_domain->nr_ats_masters);
+-	arm_smmu_atc_inv_domain(smmu_domain, 0, 0, 0);
+-	if (pci_enable_ats(pdev, stu))
+-		dev_err(master->dev, "Failed to enable ATS (STU %zu)\n", stu);
+-}
+-
+-static void arm_smmu_disable_ats(struct arm_smmu_master *master)
+-{
+-	struct arm_smmu_cmdq_ent cmd;
+-	struct arm_smmu_domain *smmu_domain = master->domain;
+-
+-	if (!master->ats_enabled)
+-		return;
+-
+-	pci_disable_ats(to_pci_dev(master->dev));
+-	/*
+-	 * Ensure ATS is disabled at the endpoint before we issue the
+-	 * ATC invalidation via the SMMU.
+-	 */
+-	wmb();
+-	arm_smmu_atc_inv_to_cmd(0, 0, 0, &cmd);
+-	arm_smmu_atc_inv_master(master, &cmd);
+-    atomic_dec(&smmu_domain->nr_ats_masters);
+-}
+-
+-static int arm_smmu_enable_pasid(struct arm_smmu_master *master)
+-{
+-	int ret;
+-	int features;
+-	int num_pasids;
+-	struct pci_dev *pdev;
+-
+-	if (!dev_is_pci(master->dev))
+-		return -ENODEV;
+-
+-	pdev = to_pci_dev(master->dev);
+-
+-	features = pci_pasid_features(pdev);
+-	if (features < 0)
+-		return features;
+-
+-	num_pasids = pci_max_pasids(pdev);
+-	if (num_pasids <= 0)
+-		return num_pasids;
+-
+-	ret = pci_enable_pasid(pdev, features);
+-	if (ret) {
+-		dev_err(&pdev->dev, "Failed to enable PASID\n");
+-		return ret;
+-	}
+-
+-	master->ssid_bits = min_t(u8, ilog2(num_pasids),
+-				  master->smmu->ssid_bits);
+-	return 0;
+-}
+-
+-static void arm_smmu_disable_pasid(struct arm_smmu_master *master)
+-{
+-	struct pci_dev *pdev;
+-
+-	if (!dev_is_pci(master->dev))
+-		return;
+-
+-	pdev = to_pci_dev(master->dev);
+-
+-	if (!pdev->pasid_enabled)
+-		return;
+-
+-	master->ssid_bits = 0;
+-	pci_disable_pasid(pdev);
+-}
+-
+ static void arm_smmu_detach_dev(struct arm_smmu_master *master)
+ {
+ 	unsigned long flags;
+@@ -2216,14 +1975,11 @@ static void arm_smmu_detach_dev(struct arm_smmu_master *master)
+ 	if (!smmu_domain)
+ 		return;
+ 
+-	arm_smmu_disable_ats(master);
+-
+ 	spin_lock_irqsave(&smmu_domain->devices_lock, flags);
+ 	list_del(&master->domain_head);
+ 	spin_unlock_irqrestore(&smmu_domain->devices_lock, flags);
+ 
+ 	master->domain = NULL;
+-	master->ats_enabled = false;
+ 	arm_smmu_install_ste_for_dev(master);
+ }
+ 
+@@ -2271,17 +2027,12 @@ static int arm_smmu_attach_dev(struct iommu_domain *domain, struct device *dev)
+ 
+ 	master->domain = smmu_domain;
+ 
+-	if (smmu_domain->stage != ARM_SMMU_DOMAIN_BYPASS)
+-		master->ats_enabled = arm_smmu_ats_supported(master);
+-
+ 	arm_smmu_install_ste_for_dev(master);
+ 
+ 	spin_lock_irqsave(&smmu_domain->devices_lock, flags);
+ 	list_add(&master->domain_head, &smmu_domain->devices);
+ 	spin_unlock_irqrestore(&smmu_domain->devices_lock, flags);
+ 
+-	arm_smmu_enable_ats(master);
+-
+ out_unlock:
+ 	mutex_unlock(&smmu_domain->init_mutex);
+ 	return ret;
+@@ -2410,16 +2161,6 @@ static struct iommu_device *arm_smmu_probe_device(struct device *dev)
+ 
+ 	master->ssid_bits = min(smmu->ssid_bits, fwspec->num_pasid_bits);
+ 
+-	/*
+-	 * Note that PASID must be enabled before, and disabled after ATS:
+-	 * PCI Express Base 4.0r1.0 - 10.5.1.3 ATS Control Register
+-	 *
+-	 *   Behavior is undefined if this bit is Set and the value of the PASID
+-	 *   Enable, Execute Requested Enable, or Privileged Mode Requested bits
+-	 *   are changed.
+-	 */
+-	arm_smmu_enable_pasid(master);
+-
+ 	if (!(smmu->features & ARM_SMMU_FEAT_2_LVL_CDTAB))
+ 		master->ssid_bits = min_t(u8, master->ssid_bits,
+ 					  CTXDESC_LINEAR_CDMAX);
+@@ -2442,7 +2183,6 @@ static void arm_smmu_release_device(struct device *dev)
+ 
+ 	master = dev_iommu_priv_get(dev);
+ 	arm_smmu_detach_dev(master);
+-	arm_smmu_disable_pasid(master);
+ 	kfree(master);
+ 	iommu_fwspec_free(dev);
+ }
+@@ -2997,15 +2737,6 @@ static int arm_smmu_device_reset(struct arm_smmu_device *smmu, bool bypass)
+ 		}
+ 	}
+ 
+-	if (smmu->features & ARM_SMMU_FEAT_ATS) {
+-		enables |= CR0_ATSCHK;
+-		ret = arm_smmu_write_reg_sync(smmu, enables, ARM_SMMU_CR0,
+-					      ARM_SMMU_CR0ACK);
+-		if (ret) {
+-			dev_err(smmu->dev, "failed to enable ATS check\n");
+-			return ret;
+-		}
+-	}
+ 
+ 	ret = arm_smmu_setup_irqs(smmu);
+ 	if (ret) {
+@@ -3076,13 +2807,9 @@ static int arm_smmu_device_hw_probe(struct arm_smmu_device *smmu)
+ 	if (IS_ENABLED(CONFIG_PCI_PRI) && reg & IDR0_PRI)
+ 		smmu->features |= ARM_SMMU_FEAT_PRI;
+ 
+-	if (IS_ENABLED(CONFIG_PCI_ATS) && reg & IDR0_ATS)
+-		smmu->features |= ARM_SMMU_FEAT_ATS;
+-
+ 	if (reg & IDR0_SEV)
+ 		smmu->features |= ARM_SMMU_FEAT_SEV;
+ 
+-
+ 	if (reg & IDR0_HYP)
+ 		smmu->features |= ARM_SMMU_FEAT_HYP;
  
 -- 
 2.17.1
