@@ -2,27 +2,28 @@ Return-Path: <SRS0=kjYx=FA=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=0.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5E6A8C56202
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Nov 2020 12:03:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AC411C63697
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Nov 2020 13:08:55 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CD9B320857
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Nov 2020 12:03:49 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 4270521D46
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Nov 2020 13:08:55 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="jII1500U"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CD9B320857
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="GRmlIL22"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4270521D46
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.38478.71219 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.38526.71255 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kiFza-00078c-Gr; Thu, 26 Nov 2020 12:03:18 +0000
+	id 1kiH0Y-0004PO-M1; Thu, 26 Nov 2020 13:08:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 38478.71219; Thu, 26 Nov 2020 12:03:18 +0000
+Received: by outflank-mailman (output) from mailman id 38526.71255; Thu, 26 Nov 2020 13:08:22 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -37,108 +38,117 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kiFza-00078V-Ds; Thu, 26 Nov 2020 12:03:18 +0000
-Received: by outflank-mailman (input) for mailman id 38478;
- Thu, 26 Nov 2020 12:03:17 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kiFzZ-00078N-64; Thu, 26 Nov 2020 12:03:17 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kiFzY-0000X9-VS; Thu, 26 Nov 2020 12:03:16 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kiFzY-0004Am-NN; Thu, 26 Nov 2020 12:03:16 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1kiFzY-0006TU-Mt; Thu, 26 Nov 2020 12:03:16 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1kiH0Y-0004PH-J0; Thu, 26 Nov 2020 13:08:22 +0000
+Received: by outflank-mailman (input) for mailman id 38526;
+ Thu, 26 Nov 2020 13:08:20 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=ZgDp=FA=gmail.com=ganime1961tire@srs-us1.protection.inumbo.net>)
+ id 1kiH0W-0004Ok-Ky
+ for xen-devel@lists.xenproject.org; Thu, 26 Nov 2020 13:08:20 +0000
+Received: from mail-wm1-x330.google.com (unknown [2a00:1450:4864:20::330])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id eeda3358-4e67-4e7f-b1ee-326ab6b43ac0;
+ Thu, 26 Nov 2020 13:08:19 +0000 (UTC)
+Received: by mail-wm1-x330.google.com with SMTP id 10so2098910wml.2
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2020 05:08:19 -0800 (PST)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <osstest-admin@xenproject.org>)
-	id 1kiFzZ-00078N-64; Thu, 26 Nov 2020 12:03:17 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=MRgobxmtF3c5mPpA0fr2uIspHi1kc4UkYYLnLfbBwlY=; b=jII1500ULCxfxeDI6zYvL+vyC7
-	/bwBEV40T+794Gcp7xqOx+fhf4BPdt9RJkEO8ARME/8SXau/sfHKKQ0t6RG7MS78lK4qAKwNk6vET
-	sp1JLobPx22IuogsCObUNVVWcOXtH5gmKMcThK6BwaJF9JomkWWjmPKZw9D/wqAfLq+o=;
-Received: from host146.205.237.98.conversent.net ([205.237.98.146] helo=infra.test-lab.xenproject.org)
-	by mail.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <osstest-admin@xenproject.org>)
-	id 1kiFzY-0000X9-VS; Thu, 26 Nov 2020 12:03:16 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
-	by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <osstest-admin@xenproject.org>)
-	id 1kiFzY-0004Am-NN; Thu, 26 Nov 2020 12:03:16 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim 4.92)
-	(envelope-from <osstest-admin@xenproject.org>)
-	id 1kiFzY-0006TU-Mt; Thu, 26 Nov 2020 12:03:16 +0000
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-157025-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+	(envelope-from <SRS0=ZgDp=FA=gmail.com=ganime1961tire@srs-us1.protection.inumbo.net>)
+	id 1kiH0W-0004Ok-Ky
+	for xen-devel@lists.xenproject.org; Thu, 26 Nov 2020 13:08:20 +0000
+X-Inumbo-ID: eeda3358-4e67-4e7f-b1ee-326ab6b43ac0
+Received: from mail-wm1-x330.google.com (unknown [2a00:1450:4864:20::330])
+	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+	id eeda3358-4e67-4e7f-b1ee-326ab6b43ac0;
+	Thu, 26 Nov 2020 13:08:19 +0000 (UTC)
+Received: by mail-wm1-x330.google.com with SMTP id 10so2098910wml.2
+        for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2020 05:08:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
+        bh=FrmZM9zwgR9nchK0ys0/eSXi1mHT4RBrjU6HUYIHqZo=;
+        b=GRmlIL22hQjM7sneI1C3hRpROU7qnHrJgSa8k2FDmbzvzZMNhwZuUfJ6v8uDpEpxr5
+         4Ku0eVlcm42QFkogUPPXpOapI06ESAA3b3gPkwkEbwfZvM6bAY9zPCt5cuapYyLW5KSp
+         A5Dk6aVxW28hB3tC3skYZqFR4czlBa9bEwAP+DM6Li80oOU4H1YzUBrPZhQnJ/1lg0Qs
+         pUPZPHQfvEtq0V0ZbCxpqMTg06zpo0JYLWNrWoFH9XtqHdP4EO0iC/WmWY8PJNUXS4sp
+         17l/35B1WtKvortaqzEh0+lQ3PxDDnVkJvwy7x0ykanOVI3yXu3kCzqRY0zUejr3JCQn
+         ayNA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to;
+        bh=FrmZM9zwgR9nchK0ys0/eSXi1mHT4RBrjU6HUYIHqZo=;
+        b=DmvfeksYHDLChzn6SL8r7QOuL0JXPWQcUO+GqJkX0B+aZrEijbeBXLlUBoKLrvz0zc
+         0+AkwTRtDJ2JYZxXrhuE73kv66bNlfW9S6QdGJkQYP9R/q1uNJtCtsWjHeZJxBonmA4d
+         wQBf+k/LFguq+E6mF+n9T4KyUvH6QbPHsq3RGUu3SonOyM6lNzMhefxvAhEP+YE/Dqt3
+         aWRXQ0GUitTBt8gM8K8nU4EVVM7609Kw6OJApOwLJ4fmihsyp2d9rXFNIkgEctP6SabJ
+         9GJb/ckNluuHbFq5Rv9ocvK+M8V7lABHVkymxneXIXhtTLiSqi9gzQLDntkUwIpXhQ/8
+         5ZZw==
+X-Gm-Message-State: AOAM5319dHzfm1kcNy/ibFU8YbJws8zcL8Ro9Pi0IMr+XTbLnsVu3vcD
+	U0JzAAxEZeJQ1gTwi+ZAu+Uyy9X1ROiGK1PWnutMPk4Xr+E=
+X-Google-Smtp-Source: ABdhPJxCw3GSSvGOhHdp3NZO7cbAp5huaXvbF59WpdGSfxe0gEZbT89f/AVgZDrQpcDAIznHIa34wrvvIn5hc9T7Gig=
+X-Received: by 2002:a1c:a786:: with SMTP id q128mr3323091wme.115.1606396097564;
+ Thu, 26 Nov 2020 05:08:17 -0800 (PST)
 MIME-Version: 1.0
-Subject: [ovmf test] 157025: all pass - PUSHED
-X-Osstest-Versions-This:
-    ovmf=21f984cedec1c613218480bc3eb5e92349a7a812
-X-Osstest-Versions-That:
-    ovmf=e9d62effa37ea13fe04fc89b21d2de7776f183a2
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Thu, 26 Nov 2020 12:03:16 +0000
+References: <CAF6SwtntQvKrmrhQaDSQwcysCOdNjsUxZO90qtQepvZ-0YLgCA@mail.gmail.com>
+In-Reply-To: <CAF6SwtntQvKrmrhQaDSQwcysCOdNjsUxZO90qtQepvZ-0YLgCA@mail.gmail.com>
+From: Ganime Yalur <ganime1961tire@gmail.com>
+Date: Thu, 26 Nov 2020 14:08:05 +0100
+Message-ID: <CAF6SwtnnTezMGJCt9PhKP+7HJogGKQVj1_4dqJ9Yduy22-JRkQ@mail.gmail.com>
+Subject: Fwd: subscribe
+To: xen-devel@lists.xenproject.org
+Content-Type: multipart/alternative; boundary="000000000000c3baec05b5023ccc"
 
-flight 157025 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/157025/
+--000000000000c3baec05b5023ccc
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- ovmf                 21f984cedec1c613218480bc3eb5e92349a7a812
-baseline version:
- ovmf                 e9d62effa37ea13fe04fc89b21d2de7776f183a2
-
-Last test of basis   157018  2020-11-26 01:39:48 Z    0 days
-Testing same since   157025  2020-11-26 07:11:04 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Kun Qin <kun.q@outlook.com>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
+---------- Forwarded message ---------
+G=C3=B6nderen: Ganime Yalur <ganime1961tire@gmail.com>
+Date: 26 Kas 2020 Per 12:57
+Subject: subscribe
+To: <xen-devel-request@lists.xenproject.org>
 
 
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
+I Need additional help to verifiy Benchmarkresults with nginx and nee
+librarys like -lwip -lpthread-embeddd
+-lnewlibc .
 
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
+Is this enough to set in configure Script of nginx latest release or i need
+to patch something INSIDE makefile or nginx sources?
 
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+I need a method, who works outside of unikraft Kernel.
 
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+I hope someone can
+help me
 
+Thanks and
 
-Pushing revision :
+Best regards
 
-To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
-   e9d62effa3..21f984cede  21f984cedec1c613218480bc3eb5e92349a7a812 -> xen-tested-master
+--000000000000c3baec05b5023ccc
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"auto"><div><br><br><div class=3D"gmail_quote"><div dir=3D"ltr" =
+class=3D"gmail_attr">---------- Forwarded message ---------<br>G=C3=B6ndere=
+n: <strong class=3D"gmail_sendername" dir=3D"auto">Ganime Yalur</strong> <s=
+pan dir=3D"auto">&lt;<a href=3D"mailto:ganime1961tire@gmail.com">ganime1961=
+tire@gmail.com</a>&gt;</span><br>Date: 26 Kas 2020 Per 12:57<br>Subject: su=
+bscribe<br>To:  &lt;<a href=3D"mailto:xen-devel-request@lists.xenproject.or=
+g">xen-devel-request@lists.xenproject.org</a>&gt;<br></div><br><br><div dir=
+=3D"auto">I Need additional help to verifiy Benchmarkresults with nginx and=
+ nee librarys like -lwip -lpthread-embeddd=C2=A0<div dir=3D"auto">-lnewlibc=
+ .</div><div dir=3D"auto"><br></div><div dir=3D"auto">Is this enough to set=
+ in configure Script of nginx latest release or i need to patch something I=
+NSIDE makefile or nginx sources?</div><div dir=3D"auto"><br></div><div dir=
+=3D"auto">I need a method, who works outside of unikraft Kernel.</div><div =
+dir=3D"auto"><br></div><div dir=3D"auto">I hope someone can=C2=A0</div><div=
+ dir=3D"auto">help me</div><div dir=3D"auto"><br></div><div dir=3D"auto">Th=
+anks and</div><div dir=3D"auto"><br></div><div dir=3D"auto">Best regards</d=
+iv></div>
+</div></div></div>
+
+--000000000000c3baec05b5023ccc--
 
