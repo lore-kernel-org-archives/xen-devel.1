@@ -2,28 +2,25 @@ Return-Path: <SRS0=GZ64=FB=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.7 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 42359C2D0E4
-	for <xen-devel@archiver.kernel.org>; Fri, 27 Nov 2020 12:42:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E064FC2D0E4
+	for <xen-devel@archiver.kernel.org>; Fri, 27 Nov 2020 13:10:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2BCCC22242
-	for <xen-devel@archiver.kernel.org>; Fri, 27 Nov 2020 12:41:48 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="Z8ZLMoFl"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2BCCC22242
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 5B2B921D7A
+	for <xen-devel@archiver.kernel.org>; Fri, 27 Nov 2020 13:10:39 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5B2B921D7A
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=antioche.eu.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.39258.72081 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.39266.72093 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kid42-0003T9-7i; Fri, 27 Nov 2020 12:41:26 +0000
+	id 1kidW0-0006Hr-He; Fri, 27 Nov 2020 13:10:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 39258.72081; Fri, 27 Nov 2020 12:41:26 +0000
+Received: by outflank-mailman (output) from mailman id 39266.72093; Fri, 27 Nov 2020 13:10:20 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,88 +35,88 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kid42-0003T2-3y; Fri, 27 Nov 2020 12:41:26 +0000
-Received: by outflank-mailman (input) for mailman id 39258;
- Fri, 27 Nov 2020 12:41:24 +0000
+	id 1kidW0-0006Hk-EZ; Fri, 27 Nov 2020 13:10:20 +0000
+Received: by outflank-mailman (input) for mailman id 39266;
+ Fri, 27 Nov 2020 13:10:18 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=rmeX=FB=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kid40-0003Sx-Kp
- for xen-devel@lists.xenproject.org; Fri, 27 Nov 2020 12:41:24 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=N/b8=FB=antioche.eu.org=bouyer@srs-us1.protection.inumbo.net>)
+ id 1kidVy-0006Hf-9j
+ for xen-devel@lists.xenproject.org; Fri, 27 Nov 2020 13:10:18 +0000
+Received: from chassiron.antioche.eu.org (unknown [2001:41d0:fe9d:1101::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 1fe60f9b-f8f4-4bfc-8ab1-f66f683997c9;
- Fri, 27 Nov 2020 12:41:22 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 11110ABD7;
- Fri, 27 Nov 2020 12:41:22 +0000 (UTC)
+ id d56ab460-164c-47e9-b0a4-d1d8c51af2d1;
+ Fri, 27 Nov 2020 13:10:17 +0000 (UTC)
+Received: from sandettie.soc.lip6.fr (82-64-3-41.subs.proxad.net [82.64.3.41])
+ by chassiron.antioche.eu.org (8.15.2/8.15.2) with ESMTPS id
+ 0ARDA9mg023757
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=OK);
+ Fri, 27 Nov 2020 14:10:10 +0100 (MET)
+Received: by sandettie.soc.lip6.fr (Postfix, from userid 373)
+ id B8DCC2E9CAC; Fri, 27 Nov 2020 14:10:04 +0100 (MET)
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <SRS0=rmeX=FB=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
-	id 1kid40-0003Sx-Kp
-	for xen-devel@lists.xenproject.org; Fri, 27 Nov 2020 12:41:24 +0000
-X-Inumbo-ID: 1fe60f9b-f8f4-4bfc-8ab1-f66f683997c9
-Received: from mx2.suse.de (unknown [195.135.220.15])
+	(envelope-from <SRS0=N/b8=FB=antioche.eu.org=bouyer@srs-us1.protection.inumbo.net>)
+	id 1kidVy-0006Hf-9j
+	for xen-devel@lists.xenproject.org; Fri, 27 Nov 2020 13:10:18 +0000
+X-Inumbo-ID: d56ab460-164c-47e9-b0a4-d1d8c51af2d1
+Received: from chassiron.antioche.eu.org (unknown [2001:41d0:fe9d:1101::1])
 	by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
-	id 1fe60f9b-f8f4-4bfc-8ab1-f66f683997c9;
-	Fri, 27 Nov 2020 12:41:22 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1606480882; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=gpTXQ5Mz0ZKtF3bYca2oj+FdcO+JKV15TV7OhmMqy5c=;
-	b=Z8ZLMoFlzKPKPbSENzXCarLqAfJyA/Y8OjwwYPHkvlu/pPgA2Xfm4Rv7I9AgC8Sv6sCtJz
-	6fNbQef5OqFfsKQevpltlM69PUD6lV22C6WroEQ8tJUd5JBKiUQ6Da5DUdQ5coOMVHHWN2
-	s0W33MAyFiGcOhAdo6Nx3gfmSsZ9EYI=
-Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 11110ABD7;
-	Fri, 27 Nov 2020 12:41:22 +0000 (UTC)
-Subject: Re: [PATCH v8 1/3] xen/events: modify struct evtchn layout
-To: Julien Grall <julien@xen.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- xen-devel@lists.xenproject.org, Juergen Gross <jgross@suse.com>
-References: <20201125105122.3650-1-jgross@suse.com>
- <20201125105122.3650-2-jgross@suse.com>
- <4c054bdb-e74a-4ca8-ede3-8df3874b39fb@suse.com>
- <2b135f7e-1222-9267-7755-6fe46f4f2fd8@xen.org>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <26b90736-61eb-8fa3-54e4-0c3ac07d234e@suse.com>
-Date: Fri, 27 Nov 2020 13:41:22 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.5.0
+	id d56ab460-164c-47e9-b0a4-d1d8c51af2d1;
+	Fri, 27 Nov 2020 13:10:17 +0000 (UTC)
+Received: from sandettie.soc.lip6.fr (82-64-3-41.subs.proxad.net [82.64.3.41])
+	by chassiron.antioche.eu.org (8.15.2/8.15.2) with ESMTPS id 0ARDA9mg023757
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=OK);
+	Fri, 27 Nov 2020 14:10:10 +0100 (MET)
+Received: by sandettie.soc.lip6.fr (Postfix, from userid 373)
+	id B8DCC2E9CAC; Fri, 27 Nov 2020 14:10:04 +0100 (MET)
+Date: Fri, 27 Nov 2020 14:10:04 +0100
+From: Manuel Bouyer <bouyer@antioche.eu.org>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>,
+        xen-devel@lists.xenproject.org
+Subject: Re: NetBSD dom0 PVH: hardware interrupts stalls
+Message-ID: <20201127131004.GH1717@antioche.eu.org>
+References: <20201124154917.l3jwa6w4ejumjuqw@Air-de-Roger>
+ <20201124160914.GQ2020@antioche.eu.org>
+ <20201126133444.r2oi24i3umh7shb3@Air-de-Roger>
+ <20201126141608.GA4123@antioche.eu.org>
+ <20201126142635.uzi643co3mxp5h42@Air-de-Roger>
+ <20201126150937.jhbfp7iefkmtedx7@Air-de-Roger>
+ <20201126172034.GA7642@antioche.eu.org>
+ <20201127105948.ji5gxv4e7axrvgpo@Air-de-Roger>
+ <20201127111904.GG1717@antioche.eu.org>
+ <89aecc1b-bfe5-26fb-9d11-bec4f0aa7b84@suse.com>
 MIME-Version: 1.0
-In-Reply-To: <2b135f7e-1222-9267-7755-6fe46f4f2fd8@xen.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <89aecc1b-bfe5-26fb-9d11-bec4f0aa7b84@suse.com>
+X-Greylist: Sender succeeded STARTTLS authentication, not delayed by milter-greylist-4.4.3 (chassiron.antioche.eu.org [151.127.5.145]); Fri, 27 Nov 2020 14:10:11 +0100 (MET)
 
-On 27.11.2020 12:57, Julien Grall wrote:
-> On 27/11/2020 11:42, Jan Beulich wrote:
->> I have to admit though that I'm not fully happy with the uses of
->> "unsigned char" and "unsigned short". Yes, I did ask for this
->> change (based on ./CODING_STYLE), but I did also hint towards the
->> use of bitfields. If bitfields aren't an option here to achieve
->> the desired dense packing, perhaps this desire should be permitted
->> as another reason to use fixed width types. (Question goes more
->> towards everyone who cares than to you specifically.)
+On Fri, Nov 27, 2020 at 12:21:23PM +0100, Jan Beulich wrote:
+> On 27.11.2020 12:19, Manuel Bouyer wrote:
+> > On Fri, Nov 27, 2020 at 11:59:48AM +0100, Roger Pau Monné wrote:
+> >>>
+> >>> I had to restart from a clean source tree to apply this patch, so to make
+> >>> sure we're in sync I attached the diff from my sources
+> >>
+> >> I'm quite confused about why your trace don't even get into
+> >> hvm_do_IRQ_dpci, so I've added some more debug info.
+> >>
+> >> Here is the new patch, sorry for so many rounds of testing.
+> > 
+> > No problem, it's expected for this kind of debug :)
+> > 
+> > http://www-soc.lip6.fr/~bouyer/xen-log11.txt
 > 
-> I think uint*_t would make sense here because they are storing 
-> information received from an hypercall (all the fields should be fixed 
-> size there).
+> Hmm, this one now has hvm_do_IRQ_dpci entries. Maybe the previous one
+> was again from a stale binary?
 
-"storing information received from a hypercall" is specifically
-not a reason to use fixed width types, imo. All of uint8_t,
-uint16_t, and uint32_t values coming from hypercalls are fine to
-be passed around and stored as unsigned int, just as an example.
-It is solely the packing aspect which might matter here.
+But I do see hvm_do_IRQ_dpci in the previous one too (xen-log10.txt)
 
-> But I am also fine the current patch as it is still readable.
-
-Good, thanks for checking.
-
-Jan
+-- 
+Manuel Bouyer <bouyer@antioche.eu.org>
+     NetBSD: 26 ans d'experience feront toujours la difference
+--
 
