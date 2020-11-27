@@ -2,28 +2,28 @@ Return-Path: <SRS0=GZ64=FB=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 14D1FC63798
-	for <xen-devel@archiver.kernel.org>; Fri, 27 Nov 2020 14:50:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 47910C63798
+	for <xen-devel@archiver.kernel.org>; Fri, 27 Nov 2020 14:52:44 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7F3F7221EB
-	for <xen-devel@archiver.kernel.org>; Fri, 27 Nov 2020 14:50:17 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id BDB2C20B1F
+	for <xen-devel@archiver.kernel.org>; Fri, 27 Nov 2020 14:52:43 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="2MiO2smz"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7F3F7221EB
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="d7kPj7Dz"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BDB2C20B1F
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.39547.72477 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.39555.72490 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kif4a-0002I8-MO; Fri, 27 Nov 2020 14:50:08 +0000
+	id 1kif6w-0002Vw-3e; Fri, 27 Nov 2020 14:52:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 39547.72477; Fri, 27 Nov 2020 14:50:08 +0000
+Received: by outflank-mailman (output) from mailman id 39555.72490; Fri, 27 Nov 2020 14:52:34 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,121 +38,78 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kif4a-0002I1-JC; Fri, 27 Nov 2020 14:50:08 +0000
-Received: by outflank-mailman (input) for mailman id 39547;
- Fri, 27 Nov 2020 14:50:06 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1kif4Y-0002Fx-Qg
- for xen-devel@lists.xenproject.org; Fri, 27 Nov 2020 14:50:06 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1kif4W-0006bk-SM; Fri, 27 Nov 2020 14:50:04 +0000
-Received: from [54.239.6.188] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1kif4W-0001yE-JB; Fri, 27 Nov 2020 14:50:04 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1kif6w-0002Vp-0Y; Fri, 27 Nov 2020 14:52:34 +0000
+Received: by outflank-mailman (input) for mailman id 39555;
+ Fri, 27 Nov 2020 14:52:32 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=0dHZ=FB=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
+ id 1kif6u-0002Vk-Oh
+ for xen-devel@lists.xenproject.org; Fri, 27 Nov 2020 14:52:32 +0000
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id f9093f5f-f704-4be1-a771-d5704ed7c4df;
+ Fri, 27 Nov 2020 14:52:31 +0000 (UTC)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <julien@xen.org>)
-	id 1kif4Y-0002Fx-Qg
-	for xen-devel@lists.xenproject.org; Fri, 27 Nov 2020 14:50:06 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=1dqHCtmdCNnKM9kTCemXbGIcMo5dsKeHoevkmqeCBGw=; b=2MiO2smzA07FyZ751/fc86Mcch
-	rjqKqT7mptY3l3kKepT7qVBj+WdSoJ3Fax92ECGHEUoyFZzPau7D2P9EtR8nbQG+f5ID19tKc8t3Z
-	0JzgRVrq6zv5ITPF0b5eEI9/ES0NSA8+9GUEFQFWOAOJkkjIyPjwAfTTDCBkwLVG/OHI=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
-	by mail.xenproject.org with esmtp (Exim 4.92)
-	(envelope-from <julien@xen.org>)
-	id 1kif4W-0006bk-SM; Fri, 27 Nov 2020 14:50:04 +0000
-Received: from [54.239.6.188] (helo=a483e7b01a66.ant.amazon.com)
-	by xenbits.xenproject.org with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
-	(Exim 4.92)
-	(envelope-from <julien@xen.org>)
-	id 1kif4W-0001yE-JB; Fri, 27 Nov 2020 14:50:04 +0000
-Subject: Re: [PATCH v8 3/3] xen/events: do some cleanups in
- evtchn_fifo_set_pending()
-To: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>,
- xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
- Jan Beulich <jbeulich@suse.com>, Stefano Stabellini
- <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
-References: <20201125105122.3650-1-jgross@suse.com>
- <20201125105122.3650-4-jgross@suse.com>
- <0ab6f8b5-1a9a-845e-3935-a660e5c7fc16@xen.org>
- <a11fb0fc-9a2e-8f9a-5fd3-356c0e0a0f60@suse.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <2fc7bb0f-c658-6890-f8e1-58cb885f19f2@xen.org>
-Date: Fri, 27 Nov 2020 14:50:02 +0000
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.5.0
+	(envelope-from <SRS0=0dHZ=FB=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
+	id 1kif6u-0002Vk-Oh
+	for xen-devel@lists.xenproject.org; Fri, 27 Nov 2020 14:52:32 +0000
+X-Inumbo-ID: f9093f5f-f704-4be1-a771-d5704ed7c4df
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+	id f9093f5f-f704-4be1-a771-d5704ed7c4df;
+	Fri, 27 Nov 2020 14:52:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1606488751;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=jJUcZXbN3G+d9ShSTyFz3C85sAOZLC2pSugnQvqiPxY=;
+  b=d7kPj7DzqNLzRrDionuwuFiLAs/bLbQS7X20Nz6WTw79PJVOdjH16PAh
+   zT3Aay16Lz52augxSzo6aNTjUpMVVtnuIORpCC9D/ez5VRPrpnLXE30dN
+   pUo8LS0prqnMytDdI7zGBRXWZQnvGaHTb0m8p07I/+Ay9+q9tiSKq7M+0
+   I=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: F81GW4oBIsFnf3DpXILoVgoHENqX4BfBxXBaBnkRhAWH2+0zZ2j/guKA7KooSvnQBEafrTkZ6M
+ /oDh/0MtzQL+Oo/kRAgHJctdgjnO7t/IAK5MClGk/Fy5K7LKR/Nl/KgNrDQQTo+g+mlRuwJG/Q
+ syHLyYIFRvxFxwKnMBuarl5+WmLWeGYUn1xa1Ucupfe+7PCki/nrGDZZY6ii6ABS+LZCuWPcXk
+ 1qKpPJ7dPIU7mEFeeOARLuQpowzPwkC6/nkvmQvalyskPkB4lGAc+D0dXvMcOeBlzu0FcYT8nb
+ K0U=
+X-SBRS: None
+X-MesageID: 33214504
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.78,374,1599537600"; 
+   d="scan'208";a="33214504"
+Date: Fri, 27 Nov 2020 14:52:27 +0000
+From: Anthony PERARD <anthony.perard@citrix.com>
+To: Eduardo Habkost <ehabkost@redhat.com>
+CC: <qemu-devel@nongnu.org>, Gerd Hoffmann <kraxel@redhat.com>, Thomas Huth
+	<thuth@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Paul Durrant <paul@xen.org>,
+	<xen-devel@lists.xenproject.org>, Richard Henderson
+	<richard.henderson@linaro.org>, Claudio Fontana <cfontana@suse.de>, Roman
+ Bolshakov <r.bolshakov@yadro.com>
+Subject: Re: [PATCH v2 4/6] xen: Delete xen_available() function
+Message-ID: <20201127145227.GD2098@perard.uk.xensource.com>
+References: <20201125205636.3305257-1-ehabkost@redhat.com>
+ <20201125205636.3305257-5-ehabkost@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <a11fb0fc-9a2e-8f9a-5fd3-356c0e0a0f60@suse.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20201125205636.3305257-5-ehabkost@redhat.com>
 
-
-
-On 27/11/2020 14:39, Jürgen Groß wrote:
-> On 27.11.20 15:23, Julien Grall wrote:
->>
->>
->> On 25/11/2020 10:51, Juergen Gross wrote:
->>> evtchn_fifo_set_pending() can be simplified a little bit.
->>
->> The commit message is quite light... For posterity, it would be good 
->> to explain why the simplication can be done. In particular, there is a 
->> chance in behavior after this patch.
->>
->>> Suggested-by: Jan Beulich <jbeulich@suse.com>
->>> Signed-off-by: Juergen Gross <jgross@suse.com>
->>> ---
->>> V8:
->>> - new patch
->>> ---
->>>   xen/common/event_fifo.c | 34 +++++++++++++++-------------------
->>>   1 file changed, 15 insertions(+), 19 deletions(-)
->>>
->>> diff --git a/xen/common/event_fifo.c b/xen/common/event_fifo.c
->>> index 443593c3b3..77609539b1 100644
->>> --- a/xen/common/event_fifo.c
->>> +++ b/xen/common/event_fifo.c
->>> @@ -175,6 +175,18 @@ static void evtchn_fifo_set_pending(struct vcpu 
->>> *v, struct evtchn *evtchn)
->>>           return;
->>>       }
->>> +    /*
->>> +     * Control block not mapped.  The guest must not unmask an
->>> +     * event until the control block is initialized, so we can
->>> +     * just drop the event.
->>> +     */
->>> +    if ( unlikely(!v->evtchn_fifo->control_block) )
->>
->> Sort of unrelated, AFAICT, v->evtchn_fifo->control_block can be set 
->> concurrently to this access.
->>
->> Thankfully, once the control block is mapped, it can't be unmapped. 
->> However, there is still a possibility that you may see half of the 
->> update.
->>
->> Shouldn't the field access with ACCESS_ONCE()?
+On Wed, Nov 25, 2020 at 03:56:34PM -0500, Eduardo Habkost wrote:
+> The function can be replaced with accel_available("xen").
 > 
-> Shouldn't this be another patch? Especially as the writing side needs
-> the same treatment.
+> Signed-off-by: Eduardo Habkost <ehabkost@redhat.com>
 
-Yes it should. Sorry I should have been clearer.
+Acked-by: Anthony PERARD <anthony.perard@citrix.com>
 
-I am happy to also wrote the patch if you feel you had enough with event 
-channel :).
-
-Cheers,
+Thanks,
 
 -- 
-Julien Grall
+Anthony PERARD
 
