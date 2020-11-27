@@ -2,28 +2,28 @@ Return-Path: <SRS0=GZ64=FB=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AD8D1C2D0E4
-	for <xen-devel@archiver.kernel.org>; Fri, 27 Nov 2020 13:34:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A56E3C2D0E4
+	for <xen-devel@archiver.kernel.org>; Fri, 27 Nov 2020 13:40:41 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 538E32224E
-	for <xen-devel@archiver.kernel.org>; Fri, 27 Nov 2020 13:34:27 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 1DA8B22253
+	for <xen-devel@archiver.kernel.org>; Fri, 27 Nov 2020 13:40:41 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="XYTi4ito"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 538E32224E
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="XzJTJbpY"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1DA8B22253
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.39347.72216 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.39357.72228 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kidt8-0000wm-6A; Fri, 27 Nov 2020 13:34:14 +0000
+	id 1kidz7-0001uI-Sa; Fri, 27 Nov 2020 13:40:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 39347.72216; Fri, 27 Nov 2020 13:34:14 +0000
+Received: by outflank-mailman (output) from mailman id 39357.72228; Fri, 27 Nov 2020 13:40:25 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,86 +38,129 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kidt8-0000wf-2b; Fri, 27 Nov 2020 13:34:14 +0000
-Received: by outflank-mailman (input) for mailman id 39347;
- Fri, 27 Nov 2020 13:34:13 +0000
+	id 1kidz7-0001uB-Oq; Fri, 27 Nov 2020 13:40:25 +0000
+Received: by outflank-mailman (input) for mailman id 39357;
+ Fri, 27 Nov 2020 13:40:24 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=rmeX=FB=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kidt7-0000wZ-6G
- for xen-devel@lists.xenproject.org; Fri, 27 Nov 2020 13:34:13 +0000
+ id 1kidz6-0001u1-CV
+ for xen-devel@lists.xenproject.org; Fri, 27 Nov 2020 13:40:24 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 57d78dd0-a197-40d1-a976-7e92f73930b3;
- Fri, 27 Nov 2020 13:34:11 +0000 (UTC)
+ id dcbd59b8-2d7c-4ec0-af9f-377ab6008309;
+ Fri, 27 Nov 2020 13:40:22 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 081C6AC23;
- Fri, 27 Nov 2020 13:34:11 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 99B61ABD7;
+ Fri, 27 Nov 2020 13:40:21 +0000 (UTC)
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57] helo=us1-amaz-eas2.inumbo.com)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <SRS0=rmeX=FB=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
-	id 1kidt7-0000wZ-6G
-	for xen-devel@lists.xenproject.org; Fri, 27 Nov 2020 13:34:13 +0000
-X-Inumbo-ID: 57d78dd0-a197-40d1-a976-7e92f73930b3
+	id 1kidz6-0001u1-CV
+	for xen-devel@lists.xenproject.org; Fri, 27 Nov 2020 13:40:24 +0000
+X-Inumbo-ID: dcbd59b8-2d7c-4ec0-af9f-377ab6008309
 Received: from mx2.suse.de (unknown [195.135.220.15])
 	by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
-	id 57d78dd0-a197-40d1-a976-7e92f73930b3;
-	Fri, 27 Nov 2020 13:34:11 +0000 (UTC)
+	id dcbd59b8-2d7c-4ec0-af9f-377ab6008309;
+	Fri, 27 Nov 2020 13:40:22 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1606484051; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1606484421; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=I+GnPMFkpmvYnH9SSx8g39Wy3zLm8uM9xXY/9+JAMpA=;
-	b=XYTi4itoSDeaJs25MP6jc9C6HWEv9TV1owHWcMi56kTge+JInmBYU0RFhFe2Fq0gmf8kvx
-	CUcQmT2bNomV1CAsIcS4qDdn/wjUGhK30V7mmYSRC3VEACiKmP1jXamdASTq+W0cvzSwP2
-	UgUlX3oqqnQ6B23v6GU6gJgF4qpoW6o=
+	bh=qVjzpZNRKVxdTe81Z9CXgTix8sdGrZXX1YQdSd/d/8Q=;
+	b=XzJTJbpYu/661koNsx6MNfpaz+8KuInI694w3KjGa4z2pcPIt6J623R8NbAGZrKN9TYoeS
+	XAa1f27aLMlCe7z0l4vhDysgSY54m0dZrYZ6xwU7Y0VDzMmsZkLqMGpWp87kQC62JOnvid
+	PrABNBadlioxg3mqReTszz6WGB0mSeg=
 Received: from relay2.suse.de (unknown [195.135.221.27])
-	by mx2.suse.de (Postfix) with ESMTP id 081C6AC23;
-	Fri, 27 Nov 2020 13:34:11 +0000 (UTC)
-Subject: Re: [PATCH v4 1/3] xen/pci: Move x86 specific code to x86 directory.
-To: Rahul Singh <rahul.singh@arm.com>
-Cc: bertrand.marquis@arm.com, Paul Durrant <paul@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
- Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
- Wei Liu <wl@xen.org>, xen-devel@lists.xenproject.org
-References: <cover.1606326929.git.rahul.singh@arm.com>
- <3500f44e3b6f8f05f9d05fa170817d5bc6f39f22.1606326929.git.rahul.singh@arm.com>
+	by mx2.suse.de (Postfix) with ESMTP id 99B61ABD7;
+	Fri, 27 Nov 2020 13:40:21 +0000 (UTC)
+Subject: Re: NetBSD dom0 PVH: hardware interrupts stalls
+To: Manuel Bouyer <bouyer@antioche.eu.org>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
+ xen-devel@lists.xenproject.org
+References: <20201124160914.GQ2020@antioche.eu.org>
+ <20201126133444.r2oi24i3umh7shb3@Air-de-Roger>
+ <20201126141608.GA4123@antioche.eu.org>
+ <20201126142635.uzi643co3mxp5h42@Air-de-Roger>
+ <20201126150937.jhbfp7iefkmtedx7@Air-de-Roger>
+ <20201126172034.GA7642@antioche.eu.org>
+ <20201127105948.ji5gxv4e7axrvgpo@Air-de-Roger>
+ <e9610278-84e5-dc32-b568-8867011de4e4@suse.com>
+ <20201127131324.GJ1717@antioche.eu.org>
+ <714e9393-d7f4-ed47-d1ed-aff79f3552a0@suse.com>
+ <20201127133121.GN1717@antioche.eu.org>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <8da65cee-2229-bb11-89f3-0a7db80e999b@suse.com>
-Date: Fri, 27 Nov 2020 14:34:12 +0100
+Message-ID: <96aa5a9b-3f4a-ce9d-0f41-4a24d409ed55@suse.com>
+Date: Fri, 27 Nov 2020 14:40:22 +0100
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.5.0
 MIME-Version: 1.0
-In-Reply-To: <3500f44e3b6f8f05f9d05fa170817d5bc6f39f22.1606326929.git.rahul.singh@arm.com>
+In-Reply-To: <20201127133121.GN1717@antioche.eu.org>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 25.11.2020 19:16, Rahul Singh wrote:
-> --- a/xen/drivers/passthrough/pci.c
-> +++ b/xen/drivers/passthrough/pci.c
-> @@ -14,9 +14,6 @@
->   * this program; If not, see <http://www.gnu.org/licenses/>.
->   */
->  
-> -#include <xen/sched.h>
-> -#include <xen/pci.h>
-> -#include <xen/pci_regs.h>
->  #include <xen/pci_ids.h>
->  #include <xen/list.h>
->  #include <xen/prefetch.h>
+On 27.11.2020 14:31, Manuel Bouyer wrote:
+> On Fri, Nov 27, 2020 at 02:18:54PM +0100, Jan Beulich wrote:
+>> On 27.11.2020 14:13, Manuel Bouyer wrote:
+>>> On Fri, Nov 27, 2020 at 12:29:35PM +0100, Jan Beulich wrote:
+>>>> On 27.11.2020 11:59, Roger Pau Monné wrote:
+>>>>> --- a/xen/arch/x86/hvm/irq.c
+>>>>> +++ b/xen/arch/x86/hvm/irq.c
+>>>>> @@ -187,6 +187,10 @@ void hvm_gsi_assert(struct domain *d, unsigned int gsi)
+>>>>>       * to know if the GSI is pending or not.
+>>>>>       */
+>>>>>      spin_lock(&d->arch.hvm.irq_lock);
+>>>>> +    if ( gsi == TRACK_IRQ )
+>>>>> +        debugtrace_printk("hvm_gsi_assert irq %u trig %u assert count %u\n",
+>>>>> +                          gsi, trig, hvm_irq->gsi_assert_count[gsi]);
+>>>>
+>>>> This produces
+>>>>
+>>>> 81961 hvm_gsi_assert irq 34 trig 1 assert count 1
+>>>>
+>>>> Since the logging occurs ahead of the call to assert_gsi(), it
+>>>> means we don't signal anything to Dom0, because according to our
+>>>> records there's still an IRQ in flight. Unfortunately we only
+>>>> see the tail of the trace, so it's not possible to tell how / when
+>>>> we got into this state.
+>>>>
+>>>> Manuel - is this the only patch you have in place? Or did you keep
+>>>> any prior ones? Iirc there once was one where Roger also suppressed
+>>>> some de-assert call.
+>>>
+>>> Yes, I have some of the previous patches (otherwise Xen panics).
+>>> Attached is the diffs I currently have 
+>>
+>> I think you want to delete the hunk dropping the call to
+>> hvm_gsi_deassert() from pt_irq_time_out(). Iirc it was that
+>> addition which changed the behavior to just a single IRQ ever
+>> making it into Dom0. And it ought to be only the change to
+>> msix_write() which is needed to avoid the panic.
+> 
+> yes, I did keep the hvm_gsi_deassert() patch because I expected it
+> to make things easier, as it allows to interract with Xen without changing
+> interrupt states.
 
-At least the latter two of the lines you remove are clearly still
-needed here, and in such a case are better to specify explicitly
-than to depend on other headers including them. Since xen/sched.h
-very likely also gets included indirectly anyway, I'm inclined to
-suggest to drop this entire hunk (which ought to be doable while
-committing). With this
-Acked-by: Jan Beulich <jbeulich@suse.com>
+Right, but then we'd need to see the beginning of the trace,
+rather than it starting at (in this case) about 95,000. Yet ...
+
+> I removed it, here's a new trace
+> 
+> http://www-soc.lip6.fr/~bouyer/xen-log12.txt
+
+... hmm, odd - no change at all:
+
+95572 hvm_gsi_assert irq 34 trig 1 assert count 1
+
+I was sort of expecting that this might be where we fail to
+set the assert count back to zero. Will need further
+thinking, if nothing else than how to turn down the verbosity
+without hiding crucial information. Or maybe Roger has got
+some idea ...
 
 Jan
 
