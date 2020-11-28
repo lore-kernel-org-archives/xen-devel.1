@@ -2,48 +2,47 @@ Return-Path: <SRS0=f3nK=FC=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7DBBDC63697
-	for <xen-devel@archiver.kernel.org>; Sat, 28 Nov 2020 11:37:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 78C59C63697
+	for <xen-devel@archiver.kernel.org>; Sat, 28 Nov 2020 11:37:27 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 13A6F22269
-	for <xen-devel@archiver.kernel.org>; Sat, 28 Nov 2020 11:37:02 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 2536422280
+	for <xen-devel@archiver.kernel.org>; Sat, 28 Nov 2020 11:37:27 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="5WPhm6Is"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 13A6F22269
+	dkim=pass (1024-bit key) header.d=xen.org header.i=@xen.org header.b="Qks2uU5f"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2536422280
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.39961.73012 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.39966.73025 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kiyX2-0001lV-8Z; Sat, 28 Nov 2020 11:36:48 +0000
+	id 1kiyXX-0001r0-If; Sat, 28 Nov 2020 11:37:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 39961.73012; Sat, 28 Nov 2020 11:36:48 +0000
+Received: by outflank-mailman (output) from mailman id 39966.73025; Sat, 28 Nov 2020 11:37:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kiyX2-0001lO-5c; Sat, 28 Nov 2020 11:36:48 +0000
-Received: by outflank-mailman (input) for mailman id 39961;
- Sat, 28 Nov 2020 11:36:46 +0000
+	id 1kiyXX-0001qt-Ex; Sat, 28 Nov 2020 11:37:19 +0000
+Received: by outflank-mailman (input) for mailman id 39966;
+ Sat, 28 Nov 2020 11:37:17 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1kiyX0-0001lJ-MH
- for xen-devel@lists.xenproject.org; Sat, 28 Nov 2020 11:36:46 +0000
+ (envelope-from <julien@xen.org>) id 1kiyXV-0001ql-R7
+ for xen-devel@lists.xenproject.org; Sat, 28 Nov 2020 11:37:17 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1kiyX0-0005C8-5M; Sat, 28 Nov 2020 11:36:46 +0000
-Received: from 54-240-197-235.amazon.com ([54.240.197.235]
- helo=ufe34d9ed68d054.ant.amazon.com)
+ id 1kiyXV-0005CU-0b; Sat, 28 Nov 2020 11:37:17 +0000
+Received: from [54.239.6.185] (helo=a483e7b01a66.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1kiyWz-0005KL-Oo; Sat, 28 Nov 2020 11:36:46 +0000
+ id 1kiyXU-0005Me-QN; Sat, 28 Nov 2020 11:37:16 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,103 +55,112 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:MIME-Version:
-	Message-Id:Date:Subject:Cc:To:From;
-	bh=x08oKDPsYhZfnq1rzPGbIzqD44Wkh09Na1i2ws0EUmg=; b=5WPhm6Iso5l4CpXiddbRQbhUo+
-	mB1bP5gIWc3UXq01x505VjQmh5pOu9/BZBW9iWUg5rbIvwAp+itBCVyJfLa0pxcVL4Rb66wdwGZT4
-	w5Wy6fP7lanWU56H55zNQ43u5nTHsbtTkwzJ5b3eKqZ6mgdzLA1VpndGhbgyudoVTBdY=;
-From: Julien Grall <julien@xen.org>
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+	bh=j4Ev1HJphgPb5eW0/uIqr2mAojAbh0QOI9ysdTCWlqs=; b=Qks2uU5fMosYcu/KNPNmIfBl9/
+	gDd6yupNdMN2WbhWxwvp8Xnt7amKSMtno3Yml54Z1GqyP5ktAQ8oATc1Z/qhFDwF8YgYOAdeD479P
+	uVVbOC15cSzB4kfHnTuUdVjVvey00QsKAoQ8pF9xBYLMGWsXIgXPpVl9rnnvXmgUpLMI=;
+Subject: Re: [PATCH v2] xen/irq: Propagate the error from init_one_desc_irq()
+ in init_*_irq_data()
 To: xen-devel@lists.xenproject.org
-Cc: julien@xen.org,
-	Julien Grall <jgrall@amazon.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v2] xen/irq: Propagate the error from init_one_desc_irq() in init_*_irq_data()
-Date: Sat, 28 Nov 2020 11:36:42 +0000
-Message-Id: <20201128113642.8265-1-julien@xen.org>
-X-Mailer: git-send-email 2.17.1
+Cc: Julien Grall <jgrall@amazon.com>, =?UTF-8?Q?Roger_Paul_Monn=c3=a9?=
+ <roger.pau@citrix.com>
+References: <20201128113102.6446-1-julien@xen.org>
+From: Julien Grall <julien@xen.org>
+Message-ID: <1682e9e6-a1b2-f0e9-2cba-f7154c5e02b7@xen.org>
+Date: Sat, 28 Nov 2020 11:37:15 +0000
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.5.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+In-Reply-To: <20201128113102.6446-1-julien@xen.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
 Content-Transfer-Encoding: 8bit
 
-From: Julien Grall <jgrall@amazon.com>
+Hi,
 
-init_one_desc_irq() can return an error if it is unable to allocate
-memory. While this is unlikely to happen during boot (called from
-init_{,local_}irq_data()), it is better to harden the code by
-propagting the return value.
+Please ignore this version as I forgot to call add_maintainers.pl.
 
-Spotted by coverity.
+Sorry for the noise.
 
-CID: 106529
+Cheers,
 
-Signed-off-by: Julien Grall <jgrall@amazon.com>
-Reviewed-by: Roger Paul Monné <roger.pau@citrix.com>
+On 28/11/2020 11:31, Julien Grall wrote:
+> From: Julien Grall <jgrall@amazon.com>
+> 
+> init_one_desc_irq() can return an error if it is unable to allocate
+> memory. While this is unlikely to happen during boot (called from
+> init_{,local_}irq_data()), it is better to harden the code by
+> propagting the return value.
+> 
+> Spotted by coverity.
+> 
+> CID: 106529
+> 
+> Signed-off-by: Julien Grall <jgrall@amazon.com>
+> Reviewed-by: Roger Paul Monné <roger.pau@citrix.com>
+> 
+> ---
+>      Changes in v2:
+>          - Add Roger's reviewed-by for x86
+>          - Handle
+> ---
+>   xen/arch/arm/irq.c | 12 ++++++++++--
+>   xen/arch/x86/irq.c |  7 ++++++-
+>   2 files changed, 16 insertions(+), 3 deletions(-)
+> 
+> diff --git a/xen/arch/arm/irq.c b/xen/arch/arm/irq.c
+> index 3877657a5277..b71b099e6fa2 100644
+> --- a/xen/arch/arm/irq.c
+> +++ b/xen/arch/arm/irq.c
+> @@ -88,7 +88,11 @@ static int __init init_irq_data(void)
+>       for ( irq = NR_LOCAL_IRQS; irq < NR_IRQS; irq++ )
+>       {
+>           struct irq_desc *desc = irq_to_desc(irq);
+> -        init_one_irq_desc(desc);
+> +        int rc = init_one_irq_desc(desc);
+> +
+> +        if ( rc )
+> +            return rc;
+> +
+>           desc->irq = irq;
+>           desc->action  = NULL;
+>       }
+> @@ -105,7 +109,11 @@ static int init_local_irq_data(void)
+>       for ( irq = 0; irq < NR_LOCAL_IRQS; irq++ )
+>       {
+>           struct irq_desc *desc = irq_to_desc(irq);
+> -        init_one_irq_desc(desc);
+> +        int rc = init_one_irq_desc(desc);
+> +
+> +        if ( rc )
+> +            return rc;
+> +
+>           desc->irq = irq;
+>           desc->action  = NULL;
+>   
+> diff --git a/xen/arch/x86/irq.c b/xen/arch/x86/irq.c
+> index 45966947919e..3ebd684415ac 100644
+> --- a/xen/arch/x86/irq.c
+> +++ b/xen/arch/x86/irq.c
+> @@ -428,9 +428,14 @@ int __init init_irq_data(void)
+>   
+>       for ( irq = 0; irq < nr_irqs_gsi; irq++ )
+>       {
+> +        int rc;
+> +
+>           desc = irq_to_desc(irq);
+>           desc->irq = irq;
+> -        init_one_irq_desc(desc);
+> +
+> +        rc = init_one_irq_desc(desc);
+> +        if ( rc )
+> +            return rc;
+>       }
+>       for ( ; irq < nr_irqs; irq++ )
+>           irq_to_desc(irq)->irq = irq;
+> 
 
----
-    Changes in v2:
-        - Add Roger's reviewed-by for x86
-        - Handle
----
- xen/arch/arm/irq.c | 12 ++++++++++--
- xen/arch/x86/irq.c |  7 ++++++-
- 2 files changed, 16 insertions(+), 3 deletions(-)
-
-diff --git a/xen/arch/arm/irq.c b/xen/arch/arm/irq.c
-index 3877657a5277..b71b099e6fa2 100644
---- a/xen/arch/arm/irq.c
-+++ b/xen/arch/arm/irq.c
-@@ -88,7 +88,11 @@ static int __init init_irq_data(void)
-     for ( irq = NR_LOCAL_IRQS; irq < NR_IRQS; irq++ )
-     {
-         struct irq_desc *desc = irq_to_desc(irq);
--        init_one_irq_desc(desc);
-+        int rc = init_one_irq_desc(desc);
-+
-+        if ( rc )
-+            return rc;
-+
-         desc->irq = irq;
-         desc->action  = NULL;
-     }
-@@ -105,7 +109,11 @@ static int init_local_irq_data(void)
-     for ( irq = 0; irq < NR_LOCAL_IRQS; irq++ )
-     {
-         struct irq_desc *desc = irq_to_desc(irq);
--        init_one_irq_desc(desc);
-+        int rc = init_one_irq_desc(desc);
-+
-+        if ( rc )
-+            return rc;
-+
-         desc->irq = irq;
-         desc->action  = NULL;
- 
-diff --git a/xen/arch/x86/irq.c b/xen/arch/x86/irq.c
-index 45966947919e..3ebd684415ac 100644
---- a/xen/arch/x86/irq.c
-+++ b/xen/arch/x86/irq.c
-@@ -428,9 +428,14 @@ int __init init_irq_data(void)
- 
-     for ( irq = 0; irq < nr_irqs_gsi; irq++ )
-     {
-+        int rc;
-+
-         desc = irq_to_desc(irq);
-         desc->irq = irq;
--        init_one_irq_desc(desc);
-+
-+        rc = init_one_irq_desc(desc);
-+        if ( rc )
-+            return rc;
-     }
-     for ( ; irq < nr_irqs; irq++ )
-         irq_to_desc(irq)->irq = irq;
 -- 
-2.17.1
-
+Julien Grall
 
