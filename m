@@ -7,44 +7,43 @@ X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D024AC64E8A
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Nov 2020 14:23:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E54CCC64E8A
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Nov 2020 14:23:22 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6884C2084C
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Nov 2020 14:23:19 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6884C2084C
+	by mail.kernel.org (Postfix) with ESMTPS id 853C02084C
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Nov 2020 14:23:22 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 853C02084C
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.41183.74364 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.41182.74357 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kjk5A-0002LX-P2; Mon, 30 Nov 2020 14:23:12 +0000
+	id 1kjk5A-0002KW-6f; Mon, 30 Nov 2020 14:23:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 41183.74364; Mon, 30 Nov 2020 14:23:12 +0000
+Received: by outflank-mailman (output) from mailman id 41182.74357; Mon, 30 Nov 2020 14:23:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kjk5A-0002L7-Ft; Mon, 30 Nov 2020 14:23:12 +0000
-Received: by outflank-mailman (input) for mailman id 41183;
- Mon, 30 Nov 2020 14:23:11 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kjk5A-0002KL-2t; Mon, 30 Nov 2020 14:23:12 +0000
+Received: by outflank-mailman (input) for mailman id 41182;
+ Mon, 30 Nov 2020 14:23:10 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DnPL=FE=arm.com=bertrand.marquis@srs-us1.protection.inumbo.net>)
- id 1kjk59-00022w-H6
- for xen-devel@lists.xenproject.org; Mon, 30 Nov 2020 14:23:11 +0000
+ id 1kjk58-00022q-Lr
+ for xen-devel@lists.xenproject.org; Mon, 30 Nov 2020 14:23:10 +0000
 Received: from foss.arm.com (unknown [217.140.110.172])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id 034b4ba2-2386-4ae3-92ee-0b5e1b1f31fc;
- Mon, 30 Nov 2020 14:23:03 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+ id b5323705-a290-4066-97f0-b64bb7f4b256;
+ Mon, 30 Nov 2020 14:23:05 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 475591042;
- Mon, 30 Nov 2020 06:23:03 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0E6E1D6E;
+ Mon, 30 Nov 2020 06:23:05 -0800 (PST)
 Received: from e109506-lin.cambridge.arm.com (e109506-lin.cambridge.arm.com
  [10.1.199.1])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 97B703F71F;
- Mon, 30 Nov 2020 06:23:02 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 5DB833F71F;
+ Mon, 30 Nov 2020 06:23:04 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,87 +55,47 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 034b4ba2-2386-4ae3-92ee-0b5e1b1f31fc
+X-Inumbo-ID: b5323705-a290-4066-97f0-b64bb7f4b256
 From: Bertrand Marquis <bertrand.marquis@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v2 5/7] xen/arm: Add handler for cp15 ID registers
-Date: Mon, 30 Nov 2020 14:21:41 +0000
-Message-Id: <86c96cd3895bf968f94010c0f4ee8dce7f0338e8.1606742184.git.bertrand.marquis@arm.com>
+Subject: [PATCH v2 7/7] xen/arm: Activate TID3 in HCR_EL2
+Date: Mon, 30 Nov 2020 14:21:43 +0000
+Message-Id: <592253f7e7f02890a6ca8bab4263ad40d8a7dafc.1606742184.git.bertrand.marquis@arm.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1606742184.git.bertrand.marquis@arm.com>
 References: <cover.1606742184.git.bertrand.marquis@arm.com>
 In-Reply-To: <cover.1606742184.git.bertrand.marquis@arm.com>
 References: <cover.1606742184.git.bertrand.marquis@arm.com>
 
-Add support for emulation of cp15 based ID registers (on arm32 or when
-running a 32bit guest on arm64).
-The handlers are returning the values stored in the guest_cpuinfo
-structure.
-In the current status the MVFR registers are no supported.
+Activate TID3 bit in HSR register when starting a guest.
+This will trap all coprecessor ID registers so that we can give to guest
+values corresponding to what they can actually use and mask some
+features to guests even though they would be supported by the underlying
+hardware (like SVE or MPAM).
 
 Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
 ---
 Changes in V2: rebase
 ---
- xen/arch/arm/vcpreg.c | 35 +++++++++++++++++++++++++++++++++++
- 1 file changed, 35 insertions(+)
+ xen/arch/arm/traps.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/xen/arch/arm/vcpreg.c b/xen/arch/arm/vcpreg.c
-index cdc91cdf5b..d0c6406f34 100644
---- a/xen/arch/arm/vcpreg.c
-+++ b/xen/arch/arm/vcpreg.c
-@@ -155,6 +155,14 @@ TVM_REG32(CONTEXTIDR, CONTEXTIDR_EL1)
-         break;                                                      \
-     }
- 
-+/* Macro to generate easily case for ID co-processor emulation */
-+#define GENERATE_TID3_INFO(reg,field,offset)                        \
-+    case HSR_CPREG32(reg):                                          \
-+    {                                                               \
-+        return handle_ro_read_val(regs, regidx, cp32.read, hsr,     \
-+                          1, guest_cpuinfo.field.bits[offset]);     \
-+    }
-+
- void do_cp15_32(struct cpu_user_regs *regs, const union hsr hsr)
+diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
+index 28d9d64558..c1a9ad6056 100644
+--- a/xen/arch/arm/traps.c
++++ b/xen/arch/arm/traps.c
+@@ -98,7 +98,7 @@ register_t get_default_hcr_flags(void)
  {
-     const struct hsr_cp32 cp32 = hsr.cp32;
-@@ -286,6 +294,33 @@ void do_cp15_32(struct cpu_user_regs *regs, const union hsr hsr)
-          */
-         return handle_raz_wi(regs, regidx, cp32.read, hsr, 1);
+     return  (HCR_PTW|HCR_BSU_INNER|HCR_AMO|HCR_IMO|HCR_FMO|HCR_VM|
+              (vwfi != NATIVE ? (HCR_TWI|HCR_TWE) : 0) |
+-             HCR_TSC|HCR_TAC|HCR_SWIO|HCR_TIDCP|HCR_FB|HCR_TSW);
++             HCR_TID3|HCR_TSC|HCR_TAC|HCR_SWIO|HCR_TIDCP|HCR_FB|HCR_TSW);
+ }
  
-+    /*
-+     * HCR_EL2.TID3
-+     *
-+     * This is trapping most Identification registers used by a guest
-+     * to identify the processor features
-+     */
-+    GENERATE_TID3_INFO(ID_PFR0, pfr32, 0)
-+    GENERATE_TID3_INFO(ID_PFR1, pfr32, 1)
-+    GENERATE_TID3_INFO(ID_PFR2, pfr32, 2)
-+    GENERATE_TID3_INFO(ID_DFR0, dbg32, 0)
-+    GENERATE_TID3_INFO(ID_DFR1, dbg32, 1)
-+    GENERATE_TID3_INFO(ID_AFR0, aux32, 0)
-+    GENERATE_TID3_INFO(ID_MMFR0, mm32, 0)
-+    GENERATE_TID3_INFO(ID_MMFR1, mm32, 1)
-+    GENERATE_TID3_INFO(ID_MMFR2, mm32, 2)
-+    GENERATE_TID3_INFO(ID_MMFR3, mm32, 3)
-+    GENERATE_TID3_INFO(ID_MMFR4, mm32, 4)
-+    GENERATE_TID3_INFO(ID_MMFR5, mm32, 5)
-+    GENERATE_TID3_INFO(ID_ISAR0, isa32, 0)
-+    GENERATE_TID3_INFO(ID_ISAR1, isa32, 1)
-+    GENERATE_TID3_INFO(ID_ISAR2, isa32, 2)
-+    GENERATE_TID3_INFO(ID_ISAR3, isa32, 3)
-+    GENERATE_TID3_INFO(ID_ISAR4, isa32, 4)
-+    GENERATE_TID3_INFO(ID_ISAR5, isa32, 5)
-+    GENERATE_TID3_INFO(ID_ISAR6, isa32, 6)
-+    /* MVFR registers are in cp10 no cp15 */
-+
-     /*
-      * HCR_EL2.TIDCP
-      *
+ static enum {
 -- 
 2.17.1
 
