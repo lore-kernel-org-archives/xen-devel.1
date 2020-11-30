@@ -2,50 +2,44 @@ Return-Path: <SRS0=tG8y=FE=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-13.7 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7572AC64E90
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Nov 2020 10:36:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9020DC64E8A
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Nov 2020 10:36:19 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E47DF2084C
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Nov 2020 10:36:11 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 19B9620708
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Nov 2020 10:36:19 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="mxvh90PP"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E47DF2084C
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="I5eYtfom"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 19B9620708
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.40863.73860 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.40865.73876 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kjgXK-0001nn-OB; Mon, 30 Nov 2020 10:36:02 +0000
+	id 1kjgXT-0001rK-1E; Mon, 30 Nov 2020 10:36:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 40863.73860; Mon, 30 Nov 2020 10:36:02 +0000
+Received: by outflank-mailman (output) from mailman id 40865.73876; Mon, 30 Nov 2020 10:36:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kjgXK-0001ng-Ks; Mon, 30 Nov 2020 10:36:02 +0000
-Received: by outflank-mailman (input) for mailman id 40863;
- Mon, 30 Nov 2020 10:36:01 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kjgXJ-0001nY-CK; Mon, 30 Nov 2020 10:36:01 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kjgXJ-0001RQ-97; Mon, 30 Nov 2020 10:36:01 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kjgXJ-0004Cm-0B; Mon, 30 Nov 2020 10:36:01 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1kjgXI-0007hu-W0; Mon, 30 Nov 2020 10:36:00 +0000
+	id 1kjgXS-0001rD-UL; Mon, 30 Nov 2020 10:36:10 +0000
+Received: by outflank-mailman (input) for mailman id 40865;
+ Mon, 30 Nov 2020 10:36:09 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=Tpvk=FE=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1kjgXR-0001qk-81
+ for xen-devel@lists.xenproject.org; Mon, 30 Nov 2020 10:36:09 +0000
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 8c33855f-a6d8-433f-8c86-0789e278baae;
+ Mon, 30 Nov 2020 10:36:08 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,75 +51,105 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=8O71Y70zQclewrxCglZZ7J8boJp0UScJw1GcYmrm/Tg=; b=mxvh90PPM7TqPQkv0q1ScJuwrK
-	XWpPepyFJgp19UWzqkwipPKPL0Zr46xiWTw4513ueI+oiWJyLeJg7MMZwECfJscTTDCjYihtyVrkc
-	8xksA/AZELQ5u4FwaRA72pvQJE8aKwMlxtnWzR+lCz9OLTlbW3dKoBnRaoONOYdgNNGg=;
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-157104-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-MIME-Version: 1.0
-Subject: [ovmf test] 157104: all pass - PUSHED
-X-Osstest-Versions-This:
-    ovmf=8501bb0c05ad9dd7ef6504803678866b1d23f6ab
-X-Osstest-Versions-That:
-    ovmf=f69a2b9a42029bcbcf88d074425ebe63495b0a08
-From: osstest service owner <osstest-admin@xenproject.org>
+X-Inumbo-ID: 8c33855f-a6d8-433f-8c86-0789e278baae
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1606732568;
+  h=subject:to:cc:references:from:message-id:date:
+   mime-version:in-reply-to:content-transfer-encoding;
+  bh=xYuuqM4xf95GM/STRHtKgAhRRJqwGwniaSpMW1mPr+c=;
+  b=I5eYtfomRssSz/S7+0cukW0nfwG8N7JPCX/87WGflksLxydKe9alJ3tG
+   wfSHxXu8p2XMz/QO9H2tUdeqim6SvSKwHuEK00P7W1UEmHlAcIfpB1J/C
+   FNWM6lIY0TPxkYTtqBUSbITK7bhMe1M390ZRaJL7LkM4ziE8uNAS8gasW
+   c=;
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: dhz8Jn0D8gv4lolQ1ZeDeZxVzM9XxeJsU54cEe7YQ+XHeH/5cAD2g1f/JAVphwAeJWNwt6ELwN
+ dFWdAmnLDK7wf+j/QMKTQWxiFx76WTYJsn9mTIYrVJ7KLfVl8EiLHpPjUR4Lu0Kj+REDydlX54
+ K1gpWF0RCcrjPFXGB2lrB4zLiWxNwxJ9MbYeh7Uy90rGIUihN/gQldgDOBkyTa4e+7FA5JfjfO
+ ksjtRlAgJ+aAKkR7Sme3UQXVHu18kjLvABlxT7pXuaTIH4WXlVbVJH713rk111+VitqN9Xn/5o
+ El8=
+X-SBRS: None
+X-MesageID: 32488046
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.78,381,1599537600"; 
+   d="scan'208";a="32488046"
+Subject: Re: [PATCH 0/7] xen/arm: Emulate ID registers
+To: Bertrand Marquis <Bertrand.Marquis@arm.com>
+CC: Xen-devel <xen-devel@lists.xenproject.org>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Volodymyr Babchuk
+	<Volodymyr_Babchuk@epam.com>
+References: <cover.1606151462.git.bertrand.marquis@arm.com>
+ <45b8aac3-75a6-670f-d6f2-b427c497ee2d@citrix.com>
+ <1BAAADF6-9E29-4BE5-857D-A8B51EB80712@arm.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Message-ID: <e119d6ff-dc61-0fd7-6da5-3e4e1b51839c@citrix.com>
 Date: Mon, 30 Nov 2020 10:36:00 +0000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
+MIME-Version: 1.0
+In-Reply-To: <1BAAADF6-9E29-4BE5-857D-A8B51EB80712@arm.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Content-Language: en-GB
+X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
+ FTLPEX02CL04.citrite.net (10.13.108.177)
 
-flight 157104 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/157104/
+On 30/11/2020 10:20, Bertrand Marquis wrote:
+> Hi Andrew,
+>
+>> On 27 Nov 2020, at 20:07, Andrew Cooper <andrew.cooper3@citrix.com> wrote:
+>>
+>> On 26/11/2020 15:51, Bertrand Marquis wrote:
+>>> The goal of this serie is to emulate coprocessor ID registers so that
+>>> Xen only publish to guest features that are supported by Xen and can
+>>> actually be used by guests.
+>>> One practical example where this is required are SVE support which is
+>>> forbidden by Xen as it is not supported, but if Linux is compiled with
+>>> it, it will crash on boot. An other one is AMU which is also forbidden
+>>> by Xen but one Linux compiled with it would crash if the platform
+>>> supports it.
+>>>
+>>> To be able to emulate the coprocessor registers defining what features
+>>> are supported by the hardware, the TID3 bit of HCR must be disabled and
+>>> Xen must emulated the values of those registers when an exception is
+>>> catched when a guest is accessing it.
+>>>
+>>> This serie is first creating a guest cpuinfo structure which will
+>>> contain the values that we want to publish to the guests and then
+>>> provides the proper emulationg for those registers when Xen is getting
+>>> an exception due to an access to any of those registers.
+>>>
+>>> This is a first simple implementation to solve the problem and the way
+>>> to define the values that we provide to guests and which features are
+>>> disabled will be in a future patchset enhance so that we could decide
+>>> per guest what can be used or not and depending on this deduce the bits
+>>> to activate in HCR and the values that we must publish on ID registers.
+>>>
+>>> Bertrand Marquis (7):
+>>>  xen/arm: Add ID registers and complete cpufinfo
+>>>  xen/arm: Add arm64 ID registers definitions
+>>>  xen/arm: create a cpuinfo structure for guest
+>>>  xen/arm: Add handler for ID registers on arm64
+>>>  xen/arm: Add handler for cp15 ID registers
+>>>  xen/arm: Add CP10 exception support to handle VMFR
+>>>  xen/arm: Activate TID3 in HCR_EL2
+>> CI found an ARM randconfig failure against this series.
+>>
+>> https://gitlab.com/xen-project/patchew/xen/-/pipelines/221798884
+>>
+>> I have admit that I can't spot an obvious connection so it might be
+>> collateral damage from elsewhere, but does need looking at irrespective.
+> This absolutely right, there is a bug in my code and i will send a V2 to fix it.
+>
+> Very nice finding, i am wondering why my tests did not point this out.
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- ovmf                 8501bb0c05ad9dd7ef6504803678866b1d23f6ab
-baseline version:
- ovmf                 f69a2b9a42029bcbcf88d074425ebe63495b0a08
+Its randconfig, so every time the test runs, it picks a new random
+Kconfig configuration.
 
-Last test of basis   157060  2020-11-27 19:10:46 Z    2 days
-Testing same since   157104  2020-11-30 03:09:46 Z    0 days    1 attempts
+Sadly, it is non-deterministic, and not necessarily the fault of change
+the test ran against.  We're probably going to have to tweak how we run
+these tests before the CI goes too much further.
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Chen, Christine <Yuwei.Chen@intel.com>
-  Yuwei Chen <yuwei.chen@intel.com>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
-   f69a2b9a42..8501bb0c05  8501bb0c05ad9dd7ef6504803678866b1d23f6ab -> xen-tested-master
+~Andrew
 
