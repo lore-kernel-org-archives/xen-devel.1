@@ -2,50 +2,50 @@ Return-Path: <SRS0=tG8y=FE=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-14.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
-	autolearn_force=no version=3.4.0
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 75987C64E90
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Nov 2020 10:51:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CDF43C64E8A
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Nov 2020 11:23:17 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 14931206B7
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Nov 2020 10:51:01 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 42F5C207BC
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Nov 2020 11:23:16 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="EWstEzre"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 14931206B7
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="neI9z+45"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 42F5C207BC
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.40998.74080 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.41021.74101 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kjgla-0005hn-TS; Mon, 30 Nov 2020 10:50:46 +0000
+	id 1kjhGk-0000PO-K6; Mon, 30 Nov 2020 11:22:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 40998.74080; Mon, 30 Nov 2020 10:50:46 +0000
+Received: by outflank-mailman (output) from mailman id 41021.74101; Mon, 30 Nov 2020 11:22:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kjgla-0005hg-Pq; Mon, 30 Nov 2020 10:50:46 +0000
-Received: by outflank-mailman (input) for mailman id 40998;
- Mon, 30 Nov 2020 10:50:46 +0000
+	id 1kjhGk-0000PH-H2; Mon, 30 Nov 2020 11:22:58 +0000
+Received: by outflank-mailman (input) for mailman id 41021;
+ Mon, 30 Nov 2020 11:22:57 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=a3VR=FE=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
- id 1kjggo-0004Aj-HG
- for xen-devel@lists.xenproject.org; Mon, 30 Nov 2020 10:45:50 +0000
-Received: from mail-wr1-x42a.google.com (unknown [2a00:1450:4864:20::42a])
+ <SRS0=avKr=FE=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
+ id 1kjhGj-0000P8-4f
+ for xen-devel@lists.xenproject.org; Mon, 30 Nov 2020 11:22:57 +0000
+Received: from mail-lf1-x141.google.com (unknown [2a00:1450:4864:20::141])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id fce6a8ae-1655-4ee9-858f-ecb60cdda627;
- Mon, 30 Nov 2020 10:45:39 +0000 (UTC)
-Received: by mail-wr1-x42a.google.com with SMTP id e7so15506949wrv.6
- for <xen-devel@lists.xenproject.org>; Mon, 30 Nov 2020 02:45:39 -0800 (PST)
-Received: from CBGR90WXYV0 ([2a00:23c5:5785:9a01:8931:214a:807a:cb80])
- by smtp.gmail.com with ESMTPSA id a65sm7213049wmc.35.2020.11.30.02.45.37
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 30 Nov 2020 02:45:38 -0800 (PST)
+ id a9f3f888-0c5b-451f-8358-ed17f7e4de6e;
+ Mon, 30 Nov 2020 11:22:55 +0000 (UTC)
+Received: by mail-lf1-x141.google.com with SMTP id r24so20875616lfm.8
+ for <xen-devel@lists.xenproject.org>; Mon, 30 Nov 2020 03:22:55 -0800 (PST)
+Received: from [192.168.1.7] ([212.22.223.21])
+ by smtp.gmail.com with ESMTPSA id x134sm2413508lff.161.2020.11.30.03.22.52
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 30 Nov 2020 03:22:53 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,179 +57,267 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fce6a8ae-1655-4ee9-858f-ecb60cdda627
+X-Inumbo-ID: a9f3f888-0c5b-451f-8358-ed17f7e4de6e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:reply-to:to:cc:references:in-reply-to:subject:date:message-id
-         :mime-version:content-transfer-encoding:thread-index
-         :content-language;
-        bh=/diZ7VyXKP6X0O8jl6ZE2tV3//7EXwwtnKHThnr1OrI=;
-        b=EWstEzre2pVp1WZ73KD7U4Lc0jp6RrfMUZLmSEQDAYXR8SwrUJDwYbDBQMb3qkG9WO
-         sRg6rnrh14Vrd7tmJh+nv0K8KO4YRrR+99SyzXSRLKlIIEgIAiYJaB5gC8pwuf3FGe6z
-         YHukkUKEJPS/CJKrg76SYWrZb4mxevjNZvZQ2V9hUj3IvRlSyjp0Vd2+vAaUxYtV0Fvn
-         thdmP22iJ3UlV+jjG1d3Q4ole60R0U8nMDlsUAMfFQqrcyvbAAVGspzkRtHWouA7yVrK
-         O7L6Ff6DszFUCT1dB7VV+nUIjc9AKi+h9miDHCkCPkgON/7Y7JcOfasfn6GZJq1SRlbU
-         lxVQ==
+        h=subject:from:to:cc:references:message-id:date:user-agent
+         :mime-version:in-reply-to:content-transfer-encoding:content-language;
+        bh=MXrDDLpAfTaxU1bNVbBRC2S3j+N1CzIycOci6TfNZ2g=;
+        b=neI9z+45JbHS5pifD7oPK6lOC8ge1SUAzfnEYFrpa9ctaC0cIsuQWaBpNMAUZcLJid
+         gKDxUKoyzEU1AGZEz4h66JCwhfddejc0TXWkuVgFFffJt2mCOI5HwqmYFhkNehe6C48A
+         RNyvUsze9eKr5yS8SIN23hdBmEExi3RC/yzH+vfEe7hrrL3Asw6dC8t36H3Io9nTtBtI
+         VxXhesTzStcvCdG1LOcF+ePffqK2ivZPybHOG5rJuqJgSvxr0eMX02HKn/9vu6Id7Yaz
+         h47CJL1/LfgGSTZEgLMC25aJCp0AgHM92y7yxro99Q+79NL4y5CSvU/sPDIRc3B8YSPj
+         4Gvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:reply-to:to:cc:references:in-reply-to
-         :subject:date:message-id:mime-version:content-transfer-encoding
-         :thread-index:content-language;
-        bh=/diZ7VyXKP6X0O8jl6ZE2tV3//7EXwwtnKHThnr1OrI=;
-        b=V7zGdsONtvq0hODOWeG1vFhK1AuFwFeI6u2+YFvM4vkjt1vH2Q0GTpJ5MQPsOTt3nn
-         RPPRsLkm5WH+9Q/Bgo2rr1KKtlXD1KeRgQn9C2zNE4IQcqiNZxYl3c4+PsYghRBCXiRV
-         EHNhoh5Zg2sx+Jhx+wu1jIPez7hAqCJQ/tPQkZVD40UBzsIJ16JE3c+3E8PC1lWZAOXu
-         JWBGMH9HzCKIrbD9csSv8bcZhUD5FEgRgK0df9JUaA8SxpHKOGrjBNb5GpTXPVtYZn4I
-         Ck8tYrCaO4GneOrs4sowKnRijkJl4x5xdEXnD3LZmp4neCort/vCw5iFintHIBJqHRr3
-         /Vww==
-X-Gm-Message-State: AOAM530kx2s+jzK27hpi049YKNkWr7AVvJlnlCcll0TrNaiQX79RwCn7
-	jUHCs5v8n6nw8YGn315brC4=
-X-Google-Smtp-Source: ABdhPJxl2R2FeAhkgx28P0MkA80KZrR1KI2bcy0PiaoXvbbgPlycFWvcCZKFlvEmHyHfAOyawsweGA==
-X-Received: by 2002:adf:82ca:: with SMTP id 68mr27203214wrc.332.1606733138482;
-        Mon, 30 Nov 2020 02:45:38 -0800 (PST)
-From: Paul Durrant <xadimgnik@gmail.com>
-X-Google-Original-From: "Paul Durrant" <paul@xen.org>
-Reply-To: <paul@xen.org>
-To: "'Jan Beulich'" <jbeulich@suse.com>,
-	<xen-devel@lists.xenproject.org>
-Cc: "'Andrew Cooper'" <andrew.cooper3@citrix.com>,
-	"'Kevin Tian'" <kevin.tian@intel.com>
-References: <c78e09fa-606c-c6c4-e9db-b57cb50ee5e2@suse.com>
-In-Reply-To: <c78e09fa-606c-c6c4-e9db-b57cb50ee5e2@suse.com>
-Subject: RE: [PATCH v4] IOMMU: make DMA containment of quarantined devices optional
-Date: Mon, 30 Nov 2020 10:45:37 -0000
-Message-ID: <013601d6c705$f09fd9a0$d1df8ce0$@xen.org>
+        h=x-gm-message-state:subject:from:to:cc:references:message-id:date
+         :user-agent:mime-version:in-reply-to:content-transfer-encoding
+         :content-language;
+        bh=MXrDDLpAfTaxU1bNVbBRC2S3j+N1CzIycOci6TfNZ2g=;
+        b=tgeUcWzC9BSwVfahNDPedV6jf0K+UQ6btaGhqXsTOO/dYIPJzuZv14Gu9joIlal4/Z
+         SCBaOeCPwNGj8M3x0HPnP/MEJySCH3w6ZNZfZxuANYBOd9ehWA3uzLALPPpYjskS8Syc
+         RIkG8K3orBbqF7oRSIuvY4dxYX/Vnp5iP6GWdI6Veo3fIu8Mvu+At2MnfLPug1MPoQ5R
+         PaKEyJOy9QH6x4Gh+ckUUTfNSGNx+MvRTTdX1dF5QuengBKhQ6KTl0Iv9tr/zSZtftbB
+         69HbgMH8jrhxE1AYukB/xqP4n5F7bkYz5ocSYGWyjvDtYueF+Z3fn3Md7L3M3DfXE6Jj
+         D4AA==
+X-Gm-Message-State: AOAM532mgpI2D8NT5tLhDP1M2n7K9DAuuCcFmSlGNuaeyP8oYrOptxhx
+	JPzGn3w/gV5bV3F+y+FpL2Y=
+X-Google-Smtp-Source: ABdhPJyh5IDuJDJNpDZ0b0zQ7MtdUUl5vXX1HHFtuvwPWeN/eq2FYFW5XbpdUzPYn7N4byNJEl2QvA==
+X-Received: by 2002:a19:cc2:: with SMTP id 185mr8964985lfm.318.1606735374534;
+        Mon, 30 Nov 2020 03:22:54 -0800 (PST)
+Subject: Re: [PATCH V3 00/23] IOREQ feature (+ virtio-mmio) on Arm
+From: Oleksandr <olekstysh@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+ Paul Durrant <paul@xen.org>, Jan Beulich <jbeulich@suse.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, Wei Liu
+ <wl@xen.org>, Julien Grall <julien.grall@arm.com>,
+ George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Tim Deegan <tim@xen.org>, Daniel De Graaf <dgdegra@tycho.nsa.gov>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Jun Nakajima <jun.nakajima@intel.com>, Kevin Tian <kevin.tian@intel.com>,
+ Anthony PERARD <anthony.perard@citrix.com>,
+ Bertrand Marquis <bertrand.marquis@arm.com>, Wei Chen <Wei.Chen@arm.com>,
+ Kaly Xin <Kaly.Xin@arm.com>, Artem Mygaiev <joculator@gmail.com>,
+ =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>
+References: <1606732298-22107-1-git-send-email-olekstysh@gmail.com>
+Message-ID: <66df4a0b-166a-81c3-9237-854649c832f9@gmail.com>
+Date: Mon, 30 Nov 2020 13:22:52 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Type: text/plain;
-	charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQI15LetYabIv76Hs54hT8VKRuHZ1akiP7Iw
-Content-Language: en-gb
+In-Reply-To: <1606732298-22107-1-git-send-email-olekstysh@gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-> -----Original Message-----
-> From: Jan Beulich <jbeulich@suse.com>
-> Sent: 27 November 2020 16:46
-> To: xen-devel@lists.xenproject.org
-> Cc: Andrew Cooper <andrew.cooper3@citrix.com>; Paul Durrant =
-<paul@xen.org>; Kevin Tian
-> <kevin.tian@intel.com>
-> Subject: [PATCH v4] IOMMU: make DMA containment of quarantined devices =
-optional
->=20
-> Containing still in flight DMA was introduced to work around certain
-> devices / systems hanging hard upon hitting a "not-present" IOMMU =
-fault.
-> Passing through (such) devices (on such systems) is inherently =
-insecure
-> (as guests could easily arrange for IOMMU faults of any kind to =
-occur).
-> Defaulting to a mode where admins may not even become aware of issues
-> with devices can be considered undesirable. Therefore convert this =
-mode
-> of operation to an optional one, not one enabled by default.
->=20
-> This involves resurrecting code commit ea38867831da ("x86 / iommu: set
-> up a scratch page in the quarantine domain") did remove, in a slightly
-> extended and abstracted fashion. Here, instead of reintroducing a =
-pretty
-> pointless use of "goto" in domain_context_unmap(), and instead of =
-making
-> the function (at least temporarily) inconsistent, take the opportunity
-> and replace the other similarly pointless "goto" as well.
->=20
-> In order to key the re-instated bypasses off of there (not) being a =
-root
-> page table this further requires moving the =
-allocate_domain_resources()
-> invocation from reassign_device() to amd_iommu_setup_domain_device() =
-(or
-> else reassign_device() would allocate a root page table anyway); this =
-is
-> benign to the second caller of the latter function.
->=20
-> Take the opportunity and also limit the control to builds supporting
-> PCI.
->=20
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-> ---
-> v4: "full" -> "scratch_page". Duplicate Kconfig help text into command
->     line doc. Re-base.
-> v3: IOMMU_quarantine_basic -> IOMMU_quarantine_fault,
->     IOMMU_quarantine_full -> IOMMU_quarantine_write_fault. Kconfig
->     option (choice) to select default. Limit to HAS_PCI.
-> v2: Don't use true/false. Introduce QUARANTINE_SKIP() (albeit I'm not
->     really convinced this is an improvement). Add comment.
->=20
-> --- a/docs/misc/xen-command-line.pandoc
-> +++ b/docs/misc/xen-command-line.pandoc
-> @@ -1278,7 +1278,7 @@ detection of systems known to misbehave
->  > Default: `new` unless directed-EOI is supported
->=20
->  ### iommu
-> -    =3D List of [ <bool>, verbose, debug, force, required, =
-quarantine,
-> +    =3D List of [ <bool>, verbose, debug, force, required, =
-quarantine[=3Dscratch-page],
->                  sharept, intremap, intpost, crash-disable,
->                  snoop, qinval, igfx, amd-iommu-perdev-intremap,
->                  dom0-{passthrough,strict} ]
-> @@ -1316,11 +1316,32 @@ boolean (e.g. `iommu=3Dno`) can override t
->      will prevent Xen from booting if IOMMUs aren't discovered and =
-enabled
->      successfully.
->=20
-> -*   The `quarantine` boolean can be used to control Xen's behavior =
-when
-> -    de-assigning devices from guests.  If enabled (the default), Xen =
-always
-> +*   The `quarantine` option can be used to control Xen's behavior =
-when
-> +    de-assigning devices from guests.
-> +
-> +    When a PCI device is assigned to an untrusted domain, it is =
-possible
-> +    for that domain to program the device to DMA to an arbitrary =
-address.
-> +    The IOMMU is used to protect the host from malicious DMA by =
-making
-> +    sure that the device addresses can only target memory assigned to =
-the
-> +    guest.  However, when the guest domain is torn down, assigning =
-the
-> +    device back to the hardware domain would allow any in-flight DMA =
-to
-> +    potentially target critical host data.  To avoid this, =
-quarantining
-> +    should be enabled.  Quarantining can be done in two ways: In its =
-basic
-> +    form, all in-flight DMA will simply be forced to encounter IOMMU
-> +    faults.  Since there are systems where doing so can cause host =
-lockup,
-> +    an alternative form is available where writes to memory will be =
-made
-> +    fault, but reads will be directed to a dummy page.  The =
-implication
-> +    here is that such reads will go unnoticed, i.e. an admin may not
-> +    become aware of the underlying problem.
-> +
-> +    Therefore, if this option is set to true (the default), Xen =
-always
->      quarantines such devices; they must be explicitly assigned back =
-to Dom0
-> -    before they can be used there again.  If disabled, Xen will only
-> -    quarantine devices the toolstack hass arranged for getting =
-quarantined.
-> +    before they can be used there again.  If set to "scratch-page", =
-still
-> +    active DMA reads will additionally be directed to a "scratch" =
-page.  If
 
-There's inconsistency of terms here. We should choose either 'dummy =
-page' or 'scratch page' (and my vote goes for the latter). Also, rather =
-than true or false, shouldn't we have 'off', 'basic', and =
-'scratch-page'?
+On 30.11.20 12:31, Oleksandr Tyshchenko wrote:
+> From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 
-  Paul
+Hello all.
+
+Added missed subject line. I am sorry for the inconvenience.
+
+
+>
+>
+> Date: Sat, 28 Nov 2020 22:33:51 +0200
+> Subject: [PATCH V3 00/23] IOREQ feature (+ virtio-mmio) on Arm
+> MIME-Version: 1.0
+> Content-Type: text/plain; charset=UTF-8
+> Content-Transfer-Encoding: 8bit
+>
+> Hello all.
+>
+> The purpose of this patch series is to add IOREQ/DM support to Xen on Arm.
+> You can find an initial discussion at [1] and RFC/V1/V2 series at [2]/[3]/[4].
+> Xen on Arm requires some implementation to forward guest MMIO access to a device
+> model in order to implement virtio-mmio backend or even mediator outside of hypervisor.
+> As Xen on x86 already contains required support this series tries to make it common
+> and introduce Arm specific bits plus some new functionality. Patch series is based on
+> Julien's PoC "xen/arm: Add support for Guest IO forwarding to a device emulator".
+> Besides splitting existing IOREQ/DM support and introducing Arm side, the series
+> also includes virtio-mmio related changes (last 2 patches for toolstack)
+> for the reviewers to be able to see how the whole picture could look like.
+>
+> According to the initial discussion there are a few open questions/concerns
+> regarding security, performance in VirtIO solution:
+> 1. virtio-mmio vs virtio-pci, SPI vs MSI, different use-cases require different
+>     transport...
+> 2. virtio backend is able to access all guest memory, some kind of protection
+>     is needed: 'virtio-iommu in Xen' vs 'pre-shared-memory & memcpys in guest'
+> 3. interface between toolstack and 'out-of-qemu' virtio backend, avoid using
+>     Xenstore in virtio backend if possible.
+> 4. a lot of 'foreing mapping' could lead to the memory exhaustion, Julien
+>     has some idea regarding that.
+>
+> Looks like all of them are valid and worth considering, but the first thing
+> which we need on Arm is a mechanism to forward guest IO to a device emulator,
+> so let's focus on it in the first place.
+>
+> ***
+>
+> There are a lot of changes since RFC series, almost all TODOs were resolved on Arm,
+> Arm code was improved and hardened, common IOREQ/DM code became really arch-agnostic
+> (without HVM-ism), the "legacy" mechanism of mapping magic pages for the IOREQ servers
+> was left x86 specific, etc. But one TODO still remains which is "PIO handling" on Arm.
+> The "PIO handling" TODO is expected to left unaddressed for the current series.
+> It is not an big issue for now while Xen doesn't have support for vPCI on Arm.
+> On Arm64 they are only used for PCI IO Bar and we would probably want to expose
+> them to emulator as PIO access to make a DM completely arch-agnostic. So "PIO handling"
+> should be implemented when we add support for vPCI.
+>
+> I left interface untouched in the following patch
+> "xen/dm: Introduce xendevicemodel_set_irq_level DM op"
+> since there is still an open discussion what interface to use/what
+> information to pass to the hypervisor.
+>
+> There is a patch on review this series depends on:
+> https://patchwork.kernel.org/patch/11816689
+>
+> Please note, that IOREQ feature is disabled by default on Arm within current series.
+>
+> ***
+>
+> Patch series [5] was rebased on recent "staging branch"
+> (181f2c2 evtchn: double per-channel locking can't hit identical channels) and tested on
+> Renesas Salvator-X board + H3 ES3.0 SoC (Arm64) with virtio-mmio disk backend [6]
+> running in driver domain and unmodified Linux Guest running on existing
+> virtio-blk driver (frontend). No issues were observed. Guest domain 'reboot/destroy'
+> use-cases work properly. Patch series was only build-tested on x86.
+>
+> Please note, build-test passed for the following modes:
+> 1. x86: CONFIG_HVM=y / CONFIG_IOREQ_SERVER=y (default)
+> 2. x86: #CONFIG_HVM is not set / #CONFIG_IOREQ_SERVER is not set
+> 3. Arm64: CONFIG_HVM=y / CONFIG_IOREQ_SERVER=y
+> 4. Arm64: CONFIG_HVM=y / #CONFIG_IOREQ_SERVER is not set  (default)
+> 5. Arm32: CONFIG_HVM=y / CONFIG_IOREQ_SERVER=y
+> 6. Arm32: CONFIG_HVM=y / #CONFIG_IOREQ_SERVER is not set  (default)
+>
+> ***
+>
+> Any feedback/help would be highly appreciated.
+>
+> [1] https://lists.xenproject.org/archives/html/xen-devel/2020-07/msg00825.html
+> [2] https://lists.xenproject.org/archives/html/xen-devel/2020-08/msg00071.html
+> [3] https://lists.xenproject.org/archives/html/xen-devel/2020-09/msg00732.html
+> [4] https://lists.xenproject.org/archives/html/xen-devel/2020-10/msg01077.html
+> [5] https://github.com/otyshchenko1/xen/commits/ioreq_4.14_ml4
+> [6] https://github.com/xen-troops/virtio-disk/commits/ioreq_ml1
+>
+> Julien Grall (5):
+>    xen/dm: Make x86's DM feature common
+>    xen/mm: Make x86's XENMEM_resource_ioreq_server handling common
+>    arm/ioreq: Introduce arch specific bits for IOREQ/DM features
+>    xen/dm: Introduce xendevicemodel_set_irq_level DM op
+>    libxl: Introduce basic virtio-mmio support on Arm
+>
+> Oleksandr Tyshchenko (18):
+>    x86/ioreq: Prepare IOREQ feature for making it common
+>    x86/ioreq: Add IOREQ_STATUS_* #define-s and update code for moving
+>    x86/ioreq: Provide out-of-line wrapper for the handle_mmio()
+>    xen/ioreq: Make x86's IOREQ feature common
+>    xen/ioreq: Make x86's hvm_ioreq_needs_completion() common
+>    xen/ioreq: Make x86's hvm_mmio_first(last)_byte() common
+>    xen/ioreq: Make x86's hvm_ioreq_(page/vcpu/server) structs common
+>    xen/ioreq: Move x86's ioreq_server to struct domain
+>    xen/ioreq: Move x86's io_completion/io_req fields to struct vcpu
+>    xen/ioreq: Remove "hvm" prefixes from involved function names
+>    xen/ioreq: Use guest_cmpxchg64() instead of cmpxchg()
+>    xen/arm: Stick around in leave_hypervisor_to_guest until I/O has
+>      completed
+>    xen/mm: Handle properly reference in set_foreign_p2m_entry() on Arm
+>    xen/ioreq: Introduce domain_has_ioreq_server()
+>    xen/arm: io: Abstract sign-extension
+>    xen/ioreq: Make x86's send_invalidate_req() common
+>    xen/arm: Add mapcache invalidation handling
+>    [RFC] libxl: Add support for virtio-disk configuration
+>
+>   MAINTAINERS                                  |    8 +-
+>   tools/include/xendevicemodel.h               |    4 +
+>   tools/libs/devicemodel/core.c                |   18 +
+>   tools/libs/devicemodel/libxendevicemodel.map |    1 +
+>   tools/libs/light/Makefile                    |    1 +
+>   tools/libs/light/libxl_arm.c                 |   94 +-
+>   tools/libs/light/libxl_create.c              |    1 +
+>   tools/libs/light/libxl_internal.h            |    1 +
+>   tools/libs/light/libxl_types.idl             |   16 +
+>   tools/libs/light/libxl_types_internal.idl    |    1 +
+>   tools/libs/light/libxl_virtio_disk.c         |  109 +++
+>   tools/xl/Makefile                            |    2 +-
+>   tools/xl/xl.h                                |    3 +
+>   tools/xl/xl_cmdtable.c                       |   15 +
+>   tools/xl/xl_parse.c                          |  116 +++
+>   tools/xl/xl_virtio_disk.c                    |   46 +
+>   xen/arch/arm/Makefile                        |    2 +
+>   xen/arch/arm/dm.c                            |   89 ++
+>   xen/arch/arm/domain.c                        |    9 +
+>   xen/arch/arm/hvm.c                           |    4 +
+>   xen/arch/arm/io.c                            |   29 +-
+>   xen/arch/arm/ioreq.c                         |  126 +++
+>   xen/arch/arm/p2m.c                           |   48 +-
+>   xen/arch/arm/traps.c                         |   58 +-
+>   xen/arch/x86/Kconfig                         |    1 +
+>   xen/arch/x86/hvm/dm.c                        |  295 +-----
+>   xen/arch/x86/hvm/emulate.c                   |   80 +-
+>   xen/arch/x86/hvm/hvm.c                       |   12 +-
+>   xen/arch/x86/hvm/hypercall.c                 |    9 +-
+>   xen/arch/x86/hvm/intercept.c                 |    5 +-
+>   xen/arch/x86/hvm/io.c                        |   26 +-
+>   xen/arch/x86/hvm/ioreq.c                     | 1357 ++------------------------
+>   xen/arch/x86/hvm/stdvga.c                    |   10 +-
+>   xen/arch/x86/hvm/svm/nestedsvm.c             |    2 +-
+>   xen/arch/x86/hvm/vmx/realmode.c              |    6 +-
+>   xen/arch/x86/hvm/vmx/vvmx.c                  |    2 +-
+>   xen/arch/x86/mm.c                            |   46 +-
+>   xen/arch/x86/mm/p2m.c                        |   13 +-
+>   xen/arch/x86/mm/shadow/common.c              |    2 +-
+>   xen/common/Kconfig                           |    3 +
+>   xen/common/Makefile                          |    2 +
+>   xen/common/dm.c                              |  292 ++++++
+>   xen/common/ioreq.c                           | 1307 +++++++++++++++++++++++++
+>   xen/common/memory.c                          |   73 +-
+>   xen/include/asm-arm/domain.h                 |    3 +
+>   xen/include/asm-arm/hvm/ioreq.h              |  139 +++
+>   xen/include/asm-arm/mm.h                     |    8 -
+>   xen/include/asm-arm/mmio.h                   |    1 +
+>   xen/include/asm-arm/p2m.h                    |   19 +-
+>   xen/include/asm-arm/traps.h                  |   24 +
+>   xen/include/asm-x86/hvm/domain.h             |   43 -
+>   xen/include/asm-x86/hvm/emulate.h            |    2 +-
+>   xen/include/asm-x86/hvm/io.h                 |   17 -
+>   xen/include/asm-x86/hvm/ioreq.h              |   58 +-
+>   xen/include/asm-x86/hvm/vcpu.h               |   18 -
+>   xen/include/asm-x86/mm.h                     |    4 -
+>   xen/include/asm-x86/p2m.h                    |   24 +-
+>   xen/include/public/arch-arm.h                |    5 +
+>   xen/include/public/hvm/dm_op.h               |   16 +
+>   xen/include/xen/dm.h                         |   44 +
+>   xen/include/xen/ioreq.h                      |  146 +++
+>   xen/include/xen/p2m-common.h                 |    4 +
+>   xen/include/xen/sched.h                      |   32 +
+>   xen/include/xsm/dummy.h                      |    4 +-
+>   xen/include/xsm/xsm.h                        |    6 +-
+>   xen/xsm/dummy.c                              |    2 +-
+>   xen/xsm/flask/hooks.c                        |    5 +-
+>   67 files changed, 3084 insertions(+), 1884 deletions(-)
+>   create mode 100644 tools/libs/light/libxl_virtio_disk.c
+>   create mode 100644 tools/xl/xl_virtio_disk.c
+>   create mode 100644 xen/arch/arm/dm.c
+>   create mode 100644 xen/arch/arm/ioreq.c
+>   create mode 100644 xen/common/dm.c
+>   create mode 100644 xen/common/ioreq.c
+>   create mode 100644 xen/include/asm-arm/hvm/ioreq.h
+>   create mode 100644 xen/include/xen/dm.h
+>   create mode 100644 xen/include/xen/ioreq.h
+>
+-- 
+Regards,
+
+Oleksandr Tyshchenko
 
 
