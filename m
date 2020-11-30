@@ -8,44 +8,44 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 97DF4C64E90
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Nov 2020 10:44:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D3AF9C71155
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Nov 2020 10:44:49 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 24D4A20825
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Nov 2020 10:44:44 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 560ED204EF
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Nov 2020 10:44:49 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ZRM3C2bw"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 24D4A20825
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="QniTpPBA"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 560ED204EF
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.40931.74002 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.40937.74054 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kjgfX-0003ph-SL; Mon, 30 Nov 2020 10:44:31 +0000
+	id 1kjgfc-00041g-5F; Mon, 30 Nov 2020 10:44:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 40931.74002; Mon, 30 Nov 2020 10:44:31 +0000
+Received: by outflank-mailman (output) from mailman id 40937.74054; Mon, 30 Nov 2020 10:44:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kjgfX-0003ou-Eq; Mon, 30 Nov 2020 10:44:31 +0000
-Received: by outflank-mailman (input) for mailman id 40931;
- Mon, 30 Nov 2020 10:44:29 +0000
+	id 1kjgfc-00041H-0M; Mon, 30 Nov 2020 10:44:36 +0000
+Received: by outflank-mailman (input) for mailman id 40937;
+ Mon, 30 Nov 2020 10:44:30 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=avKr=FE=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
- id 1kjgUT-0000Uu-Di
- for xen-devel@lists.xenproject.org; Mon, 30 Nov 2020 10:33:05 +0000
-Received: from mail-lf1-x136.google.com (unknown [2a00:1450:4864:20::136])
+ id 1kjgVH-0000Uu-F2
+ for xen-devel@lists.xenproject.org; Mon, 30 Nov 2020 10:33:55 +0000
+Received: from mail-lf1-x141.google.com (unknown [2a00:1450:4864:20::141])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 139e13ca-ea33-4293-acbf-50a16258e6e5;
- Mon, 30 Nov 2020 10:32:12 +0000 (UTC)
-Received: by mail-lf1-x136.google.com with SMTP id z21so20560124lfe.12
- for <xen-devel@lists.xenproject.org>; Mon, 30 Nov 2020 02:32:12 -0800 (PST)
+ id f507fd0b-22b9-4436-ae24-5a8c01053eb2;
+ Mon, 30 Nov 2020 10:32:27 +0000 (UTC)
+Received: by mail-lf1-x141.google.com with SMTP id s27so20591630lfp.5
+ for <xen-devel@lists.xenproject.org>; Mon, 30 Nov 2020 02:32:23 -0800 (PST)
 Received: from otyshchenko.www.tendawifi.com ([212.22.223.21])
- by smtp.gmail.com with ESMTPSA id 136sm2399393lfb.62.2020.11.30.02.32.09
+ by smtp.gmail.com with ESMTPSA id 136sm2399393lfb.62.2020.11.30.02.32.21
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 30 Nov 2020 02:32:10 -0800 (PST)
+ Mon, 30 Nov 2020 02:32:21 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,988 +57,656 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 139e13ca-ea33-4293-acbf-50a16258e6e5
+X-Inumbo-ID: f507fd0b-22b9-4436-ae24-5a8c01053eb2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=M048BVT+nCu0MjdyKQAZ2lA41UelwaMDIQ9W/KmwiOU=;
-        b=ZRM3C2bwAeHcK8L2SFy9VzjIPuMZBQi1v7iYg/lOTkIPNf5r6NGWfird1X1t27vMQH
-         0gfC1AybpAfANSPJw+5LZnpRbhOU3VWoiKJzE1TQKNhm35tEb7MWFMboj+Zu2lBNughJ
-         1nuT9yRE7xkL9nsIlxh0TtyyWvKw+dJYOQMdrWAPRJp9QC0feOf9C1bvJw6ab7qetBQL
-         A/kO0+KB1CxAt87LEjwfsK3oR7H3glLKjlj/XY/SeKyJMUiQkeodmVL8ivoFP07x0RJw
-         UxjsWALAIFliBPRLfRQ0NSduRq4pzfbUA8Gc1LUAgu3EMDdzjndCgOOFFv0D714KE/fD
-         uRYg==
+        bh=tgVthTyJdv0ZHP39YuffZGYtQrzTKTFcEEOILGJIBck=;
+        b=QniTpPBA0dahyqbjVq3caKgybDZpvMlrZej7irZa21Z38Pv04CaPMWDlG6PNoKARXn
+         UFL8SONlV7ezKqCJcAIty6MJVParEaB8Gk6sdMeHHEKrJd9HgXNQzHLTtSG8p7zyBHSX
+         ILcaqgkA0f8vsZgUHluOQRjtZXZWyE21Vm6CkS6plAd71D3SgAdcdY75lVNf3mcTQxaG
+         PlF3ZQLljAs7Yy/574aQiYZjRIPVtLjOKQYxdcfhg/poyUYOnRmaP+pI/NH5ehRjHpJA
+         XocOC8nkoIPD0JFroevd2z+gUQmxqFblJPzls6HHt9Mm2cIJPiMaLPips0f1yZqSal57
+         7cQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=M048BVT+nCu0MjdyKQAZ2lA41UelwaMDIQ9W/KmwiOU=;
-        b=ZwzUCLCbbKgm+NwNjR+GBKY1s+jpX9Vn0xonrf3QDVhlUXzUmTnnTznRcghijFdop9
-         bOcU5xxfMjaRiJHVBypZFQbY5xaeOYg2DFXUdHb8RD4V/ZMG65wXPd4DCySV7IbjcclU
-         GLGHvYxrykXwdkwqO2OAomCN6ao8xIVJQxoR9beYmfH79ZMPSzxf6Kmq49y/sxmjO7uI
-         1TunFoOuONLhemVupSWfde62pHl0iYirSvfAJsUAEksy5SfMVuGhG3w1GHO2fG/ay1Pz
-         7cNRVTsnmp0IWPv986wXWWsPSbwHsth15VB/tifykBh0TquPD2CD+cT5fTYt1wwoU5G7
-         LCrw==
-X-Gm-Message-State: AOAM532sqj0Ulrl8QGlo6HHd/BtPD1p7UVwgLTjGYdYUz5j8LDeg7etc
-	J8QzmK9JDQfHJMHPR2KdFcl2U0VC+oTAFw==
-X-Google-Smtp-Source: ABdhPJxS23rp4feIT9/kzYSLTMYBHzWOxn0CwNgpX6XLp1NId/ICuU1Bxn8Jpt1h2ggt/yBIxq9mlg==
-X-Received: by 2002:ac2:5208:: with SMTP id a8mr5249176lfl.206.1606732331125;
-        Mon, 30 Nov 2020 02:32:11 -0800 (PST)
+        bh=tgVthTyJdv0ZHP39YuffZGYtQrzTKTFcEEOILGJIBck=;
+        b=DnyizD7yU6E/CQpLvMqSLHAlCIsXiUPiiR6uZMWOGNeNDteh5yGXemn8x29Zb6foj8
+         BjvmuNnzWMVWJ710M9M7kJxCCHMi3Weyliyi6N2Ck6LeLorNZIG7td6qP3tutfhHQAuN
+         Bl7TtR+gOAt7fDi9m/2jiuuQK1Lh9SB6nAlj7Utm5jwcRg7yIsPIAsMibMslmajJAukB
+         MrigxwCYu3CPaDy8XR9Gh5dnJvYhS3d4WgQTOSJi0XAjvzW0ocbGFIKM9UVtmCpz39Fp
+         h0cIawpgnzwIqMjq0O6yTcFJjh75pYxgJsuONbnwIDBEI+GGr7czcWOmqGJxmyyVwe3C
+         1cdA==
+X-Gm-Message-State: AOAM530mDC6G16VF9WmQd6iSnmivAYgA13Sg9/17XByTV2i6mZUTduuA
+	4tb2DxJKsVMk5nqpaFsf2YimJOoBQuX9HQ==
+X-Google-Smtp-Source: ABdhPJxd57Am6JNM1anvQlenRuZFLqMrHJuNwjJl3vIVER15CFMt5qCEByazdJaBKOeAiuWnWkA/RA==
+X-Received: by 2002:a19:be4a:: with SMTP id o71mr8088918lff.494.1606732342315;
+        Mon, 30 Nov 2020 02:32:22 -0800 (PST)
 From: Oleksandr Tyshchenko <olekstysh@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>,
-	George Dunlap <george.dunlap@citrix.com>,
 	Ian Jackson <iwj@xenproject.org>,
+	Wei Liu <wl@xen.org>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Paul Durrant <paul@xen.org>,
-	Jun Nakajima <jun.nakajima@intel.com>,
-	Kevin Tian <kevin.tian@intel.com>,
-	Julien Grall <julien.grall@arm.com>
-Subject: [PATCH V3 12/23] xen/ioreq: Remove "hvm" prefixes from involved function names
-Date: Mon, 30 Nov 2020 12:31:27 +0200
-Message-Id: <1606732298-22107-13-git-send-email-olekstysh@gmail.com>
+	Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH V3 23/23] [RFC] libxl: Add support for virtio-disk configuration
+Date: Mon, 30 Nov 2020 12:31:38 +0200
+Message-Id: <1606732298-22107-24-git-send-email-olekstysh@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1606732298-22107-1-git-send-email-olekstysh@gmail.com>
 References: <1606732298-22107-1-git-send-email-olekstysh@gmail.com>
 
 From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 
-This patch removes "hvm" prefixes and infixes from IOREQ related
-function names in the common code and performs a renaming where
-appropriate according to the more consistent new naming scheme:
-- IOREQ server functions should start with "ioreq_server_"
-- IOREQ functions should start with "ioreq_"
+This patch adds basic support for configuring and assisting virtio-disk
+backend (emualator) which is intended to run out of Qemu and could be run
+in any domain.
 
-A few function names are clarified to better fit into their purposes:
-handle_hvm_io_completion -> vcpu_ioreq_handle_completion
-hvm_io_pending           -> vcpu_ioreq_pending
-hvm_ioreq_init           -> ioreq_domain_init
-hvm_alloc_ioreq_mfn      -> ioreq_server_alloc_mfn
-hvm_free_ioreq_mfn       -> ioreq_server_free_mfn
+Xenstore was chosen as a communication interface for the emulator running
+in non-toolstack domain to be able to get configuration either by reading
+Xenstore directly or by receiving command line parameters (an updated 'xl devd'
+running in the same domain would read Xenstore beforehand and call backend
+executable with the required arguments).
+
+An example of domain configuration (two disks are assigned to the guest,
+the latter is in readonly mode):
+
+vdisk = [ 'backend=DomD, disks=rw:/dev/mmcblk0p3;ro:/dev/mmcblk1p3' ]
+
+Where per-disk Xenstore entries are:
+- filename and readonly flag (configured via "vdisk" property)
+- base and irq (allocated dynamically)
+
+Besides handling 'visible' params described in configuration file,
+patch also allocates virtio-mmio specific ones for each device and
+writes them into Xenstore. virtio-mmio params (irq and base) are
+unique per guest domain, they allocated at the domain creation time
+and passed through to the emulator. Each VirtIO device has at least
+one pair of these params.
+
+TODO:
+1. An extra "virtio" property could be removed.
+2. Update documentation.
 
 Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-CC: Julien Grall <julien.grall@arm.com>
 
 ---
-Please note, this is a split/cleanup/hardening of Julien's PoC:
-"Add support for Guest IO forwarding to a device emulator"
+Changes RFC -> V1:
+   - no changes
 
 Changes V1 -> V2:
-   - new patch
+   - rebase according to the new location of libxl_virtio_disk.c
 
 Changes V2 -> V3:
-   - update patch according the "legacy interface" is x86 specific
-   - update patch description
-   - rename everything touched according to new naming scheme
----
----
- xen/arch/x86/hvm/dm.c       |   4 +-
- xen/arch/x86/hvm/emulate.c  |   6 +-
- xen/arch/x86/hvm/hvm.c      |  10 +--
- xen/arch/x86/hvm/io.c       |   6 +-
- xen/arch/x86/hvm/ioreq.c    |   2 +-
- xen/arch/x86/hvm/stdvga.c   |   4 +-
- xen/arch/x86/hvm/vmx/vvmx.c |   2 +-
- xen/common/dm.c             |  28 +++----
- xen/common/ioreq.c          | 174 ++++++++++++++++++++++----------------------
- xen/common/memory.c         |   2 +-
- xen/include/xen/ioreq.h     |  67 ++++++++---------
- 11 files changed, 153 insertions(+), 152 deletions(-)
+   - no changes
 
-diff --git a/xen/arch/x86/hvm/dm.c b/xen/arch/x86/hvm/dm.c
-index 35f860a..0b6319e 100644
---- a/xen/arch/x86/hvm/dm.c
-+++ b/xen/arch/x86/hvm/dm.c
-@@ -352,8 +352,8 @@ int arch_dm_op(struct xen_dm_op *op, struct domain *d,
-             break;
+Please note, there is a real concern about VirtIO interrupts allocation.
+Just copy here what Stefano said in RFC thread.
+
+So, if we end up allocating let's say 6 virtio interrupts for a domain,
+the chance of a clash with a physical interrupt of a passthrough device is real.
+
+I am not entirely sure how to solve it, but these are a few ideas:
+- choosing virtio interrupts that are less likely to conflict (maybe > 1000)
+- make the virtio irq (optionally) configurable so that a user could
+  override the default irq and specify one that doesn't conflict
+- implementing support for virq != pirq (even the xl interface doesn't
+  allow to specify the virq number for passthrough devices, see "irqs")
+
+Also there is one suggestion from Wei Chen regarding a parameter for domain
+config file which I haven't addressed yet.
+[Just copy here what Wei said in V2 thread]
+Can we keep use the same 'disk' parameter for virtio-disk, but add an option like
+"model=virtio-disk"?
+For example:
+disk = [ 'backend=DomD, disks=rw:/dev/mmcblk0p3,model=virtio-disk' ]
+Just like what Xen has done for x86 virtio-net.
+
+---
+---
+ tools/libs/light/Makefile                 |   1 +
+ tools/libs/light/libxl_arm.c              |  56 ++++++++++++---
+ tools/libs/light/libxl_create.c           |   1 +
+ tools/libs/light/libxl_internal.h         |   1 +
+ tools/libs/light/libxl_types.idl          |  15 ++++
+ tools/libs/light/libxl_types_internal.idl |   1 +
+ tools/libs/light/libxl_virtio_disk.c      | 109 ++++++++++++++++++++++++++++
+ tools/xl/Makefile                         |   2 +-
+ tools/xl/xl.h                             |   3 +
+ tools/xl/xl_cmdtable.c                    |  15 ++++
+ tools/xl/xl_parse.c                       | 115 ++++++++++++++++++++++++++++++
+ tools/xl/xl_virtio_disk.c                 |  46 ++++++++++++
+ 12 files changed, 354 insertions(+), 11 deletions(-)
+ create mode 100644 tools/libs/light/libxl_virtio_disk.c
+ create mode 100644 tools/xl/xl_virtio_disk.c
+
+diff --git a/tools/libs/light/Makefile b/tools/libs/light/Makefile
+index 68f6fa3..ccc91b9 100644
+--- a/tools/libs/light/Makefile
++++ b/tools/libs/light/Makefile
+@@ -115,6 +115,7 @@ SRCS-y += libxl_genid.c
+ SRCS-y += _libxl_types.c
+ SRCS-y += libxl_flask.c
+ SRCS-y += _libxl_types_internal.c
++SRCS-y += libxl_virtio_disk.c
  
-         if ( first_gfn == 0 )
--            rc = hvm_map_mem_type_to_ioreq_server(d, data->id,
--                                                  data->type, data->flags);
-+            rc = ioreq_server_map_mem_type(d, data->id,
-+                                           data->type, data->flags);
-         else
-             rc = 0;
+ ifeq ($(CONFIG_LIBNL),y)
+ CFLAGS_LIBXL += $(LIBNL3_CFLAGS)
+diff --git a/tools/libs/light/libxl_arm.c b/tools/libs/light/libxl_arm.c
+index 588ee5a..9eb3022 100644
+--- a/tools/libs/light/libxl_arm.c
++++ b/tools/libs/light/libxl_arm.c
+@@ -8,6 +8,12 @@
+ #include <assert.h>
+ #include <xen/device_tree_defs.h>
  
-diff --git a/xen/arch/x86/hvm/emulate.c b/xen/arch/x86/hvm/emulate.c
-index 04e4994..a025f89 100644
---- a/xen/arch/x86/hvm/emulate.c
-+++ b/xen/arch/x86/hvm/emulate.c
-@@ -261,7 +261,7 @@ static int hvmemul_do_io(
-          * an ioreq server that can handle it.
-          *
-          * Rules:
--         * A> PIO or MMIO accesses run through hvm_select_ioreq_server() to
-+         * A> PIO or MMIO accesses run through ioreq_server_select() to
-          * choose the ioreq server by range. If no server is found, the access
-          * is ignored.
-          *
-@@ -323,7 +323,7 @@ static int hvmemul_do_io(
++#ifndef container_of
++#define container_of(ptr, type, member) ({			\
++        typeof( ((type *)0)->member ) *__mptr = (ptr);	\
++        (type *)( (char *)__mptr - offsetof(type,member) );})
++#endif
++
+ static const char *gicv_to_string(libxl_gic_version gic_version)
+ {
+     switch (gic_version) {
+@@ -39,14 +45,32 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
+         vuart_enabled = true;
+     }
+ 
+-    /*
+-     * XXX: Handle properly virtio
+-     * A proper solution would be the toolstack to allocate the interrupts
+-     * used by each virtio backend and let the backend now which one is used
+-     */
+     if (libxl_defbool_val(d_config->b_info.arch_arm.virtio)) {
+-        nr_spis += (GUEST_VIRTIO_MMIO_SPI - 32) + 1;
++        uint64_t virtio_base;
++        libxl_device_virtio_disk *virtio_disk;
++
++        virtio_base = GUEST_VIRTIO_MMIO_BASE;
+         virtio_irq = GUEST_VIRTIO_MMIO_SPI;
++
++        if (!d_config->num_virtio_disks) {
++            LOG(ERROR, "Virtio is enabled, but no Virtio devices present\n");
++            return ERROR_FAIL;
++        }
++        virtio_disk = &d_config->virtio_disks[0];
++
++        for (i = 0; i < virtio_disk->num_disks; i++) {
++            virtio_disk->disks[i].base = virtio_base;
++            virtio_disk->disks[i].irq = virtio_irq;
++
++            LOG(DEBUG, "Allocate Virtio MMIO params: IRQ %u BASE 0x%"PRIx64,
++                virtio_irq, virtio_base);
++
++            virtio_irq ++;
++            virtio_base += GUEST_VIRTIO_MMIO_SIZE;
++        }
++        virtio_irq --;
++
++        nr_spis += (virtio_irq - 32) + 1;
+         virtio_enabled = true;
+     }
+ 
+@@ -70,8 +94,9 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
          }
  
-         if ( !s )
--            s = hvm_select_ioreq_server(currd, &p);
-+            s = ioreq_server_select(currd, &p);
- 
-         /* If there is no suitable backing DM, just ignore accesses */
-         if ( !s )
-@@ -333,7 +333,7 @@ static int hvmemul_do_io(
+         /* The same check as for vpl011 */
+-        if (virtio_enabled && irq == virtio_irq) {
+-            LOG(ERROR, "Physical IRQ %u conflicting with virtio SPI\n", irq);
++        if (virtio_enabled &&
++           (irq >= GUEST_VIRTIO_MMIO_SPI && irq <= virtio_irq)) {
++            LOG(ERROR, "Physical IRQ %u conflicting with Virtio IRQ range\n", irq);
+             return ERROR_FAIL;
          }
-         else
-         {
--            rc = hvm_send_ioreq(s, &p, 0);
-+            rc = ioreq_send(s, &p, 0);
-             if ( rc != X86EMUL_RETRY || currd->is_shutting_down )
-                 vio->req.state = STATE_IOREQ_NONE;
-             else if ( !ioreq_needs_completion(&vio->req) )
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index cc46909..8e3c2e2 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -546,7 +546,7 @@ void hvm_do_resume(struct vcpu *v)
  
-     pt_restore_timer(v);
- 
--    if ( !handle_hvm_io_completion(v) )
-+    if ( !vcpu_ioreq_handle_completion(v) )
-         return;
- 
-     if ( unlikely(v->arch.vm_event) )
-@@ -677,7 +677,7 @@ int hvm_domain_initialise(struct domain *d)
-     register_g2m_portio_handler(d);
-     register_vpci_portio_handler(d);
- 
--    hvm_ioreq_init(d);
-+    ioreq_domain_init(d);
- 
-     hvm_init_guest_time(d);
- 
-@@ -739,7 +739,7 @@ void hvm_domain_relinquish_resources(struct domain *d)
- 
-     viridian_domain_deinit(d);
- 
--    hvm_destroy_all_ioreq_servers(d);
-+    ioreq_server_destroy_all(d);
- 
-     msixtbl_pt_cleanup(d);
- 
-@@ -1582,7 +1582,7 @@ int hvm_vcpu_initialise(struct vcpu *v)
-     if ( rc )
-         goto fail5;
- 
--    rc = hvm_all_ioreq_servers_add_vcpu(d, v);
-+    rc = ioreq_server_add_vcpu_all(d, v);
-     if ( rc != 0 )
-         goto fail6;
- 
-@@ -1618,7 +1618,7 @@ void hvm_vcpu_destroy(struct vcpu *v)
- {
-     viridian_vcpu_deinit(v);
- 
--    hvm_all_ioreq_servers_remove_vcpu(v->domain, v);
-+    ioreq_server_remove_vcpu_all(v->domain, v);
- 
-     if ( hvm_altp2m_supported() )
-         altp2m_vcpu_destroy(v);
-diff --git a/xen/arch/x86/hvm/io.c b/xen/arch/x86/hvm/io.c
-index 327a6a2..a0dd8d1 100644
---- a/xen/arch/x86/hvm/io.c
-+++ b/xen/arch/x86/hvm/io.c
-@@ -60,7 +60,7 @@ void send_timeoffset_req(unsigned long timeoff)
-     if ( timeoff == 0 )
-         return;
- 
--    if ( hvm_broadcast_ioreq(&p, true) != 0 )
-+    if ( ioreq_broadcast(&p, true) != 0 )
-         gprintk(XENLOG_ERR, "Unsuccessful timeoffset update\n");
- }
- 
-@@ -74,7 +74,7 @@ void send_invalidate_req(void)
-         .data = ~0UL, /* flush all */
-     };
- 
--    if ( hvm_broadcast_ioreq(&p, false) != 0 )
-+    if ( ioreq_broadcast(&p, false) != 0 )
-         gprintk(XENLOG_ERR, "Unsuccessful map-cache invalidate\n");
- }
- 
-@@ -155,7 +155,7 @@ bool handle_pio(uint16_t port, unsigned int size, int dir)
-          * We should not advance RIP/EIP if the domain is shutting down or
-          * if X86EMUL_RETRY has been returned by an internal handler.
-          */
--        if ( curr->domain->is_shutting_down || !hvm_io_pending(curr) )
-+        if ( curr->domain->is_shutting_down || !vcpu_ioreq_pending(curr) )
-             return false;
-         break;
- 
-diff --git a/xen/arch/x86/hvm/ioreq.c b/xen/arch/x86/hvm/ioreq.c
-index 7808b75..934189e 100644
---- a/xen/arch/x86/hvm/ioreq.c
-+++ b/xen/arch/x86/hvm/ioreq.c
-@@ -154,7 +154,7 @@ static int hvm_map_ioreq_gfn(struct ioreq_server *s, bool buf)
-     {
-         /*
-          * If a page has already been allocated (which will happen on
--         * demand if hvm_get_ioreq_server_frame() is called), then
-+         * demand if ioreq_server_get_frame() is called), then
-          * mapping a guest frame is not permitted.
-          */
-         if ( gfn_eq(iorp->gfn, INVALID_GFN) )
-diff --git a/xen/arch/x86/hvm/stdvga.c b/xen/arch/x86/hvm/stdvga.c
-index bafb3f6..390ac51 100644
---- a/xen/arch/x86/hvm/stdvga.c
-+++ b/xen/arch/x86/hvm/stdvga.c
-@@ -507,11 +507,11 @@ static int stdvga_mem_write(const struct hvm_io_handler *handler,
-     }
- 
-  done:
--    srv = hvm_select_ioreq_server(current->domain, &p);
-+    srv = ioreq_server_select(current->domain, &p);
-     if ( !srv )
-         return X86EMUL_UNHANDLEABLE;
- 
--    return hvm_send_ioreq(srv, &p, 1);
-+    return ioreq_send(srv, &p, 1);
- }
- 
- static bool_t stdvga_mem_accept(const struct hvm_io_handler *handler,
-diff --git a/xen/arch/x86/hvm/vmx/vvmx.c b/xen/arch/x86/hvm/vmx/vvmx.c
-index 3a37e9e..a4813f0 100644
---- a/xen/arch/x86/hvm/vmx/vvmx.c
-+++ b/xen/arch/x86/hvm/vmx/vvmx.c
-@@ -1516,7 +1516,7 @@ void nvmx_switch_guest(void)
-      * don't want to continue as this setup is not implemented nor supported
-      * as of right now.
-      */
--    if ( hvm_io_pending(v) )
-+    if ( vcpu_ioreq_pending(v) )
-         return;
-     /*
-      * a softirq may interrupt us between a virtual vmentry is
-diff --git a/xen/common/dm.c b/xen/common/dm.c
-index 36e01a2..9d394fc 100644
---- a/xen/common/dm.c
-+++ b/xen/common/dm.c
-@@ -100,8 +100,8 @@ static int dm_op(const struct dmop_args *op_args)
-         if ( data->pad[0] || data->pad[1] || data->pad[2] )
-             break;
- 
--        rc = hvm_create_ioreq_server(d, data->handle_bufioreq,
--                                     &data->id);
-+        rc = ioreq_server_create(d, data->handle_bufioreq,
-+                                 &data->id);
-         break;
-     }
- 
-@@ -117,12 +117,12 @@ static int dm_op(const struct dmop_args *op_args)
-         if ( data->flags & ~valid_flags )
-             break;
- 
--        rc = hvm_get_ioreq_server_info(d, data->id,
--                                       (data->flags & XEN_DMOP_no_gfns) ?
--                                       NULL : (unsigned long *)&data->ioreq_gfn,
--                                       (data->flags & XEN_DMOP_no_gfns) ?
--                                       NULL : (unsigned long *)&data->bufioreq_gfn,
--                                       &data->bufioreq_port);
-+        rc = ioreq_server_get_info(d, data->id,
-+                                   (data->flags & XEN_DMOP_no_gfns) ?
-+                                   NULL : (unsigned long *)&data->ioreq_gfn,
-+                                   (data->flags & XEN_DMOP_no_gfns) ?
-+                                   NULL : (unsigned long *)&data->bufioreq_gfn,
-+                                   &data->bufioreq_port);
-         break;
-     }
- 
-@@ -135,8 +135,8 @@ static int dm_op(const struct dmop_args *op_args)
-         if ( data->pad )
-             break;
- 
--        rc = hvm_map_io_range_to_ioreq_server(d, data->id, data->type,
--                                              data->start, data->end);
-+        rc = ioreq_server_map_io_range(d, data->id, data->type,
-+                                       data->start, data->end);
-         break;
-     }
- 
-@@ -149,8 +149,8 @@ static int dm_op(const struct dmop_args *op_args)
-         if ( data->pad )
-             break;
- 
--        rc = hvm_unmap_io_range_from_ioreq_server(d, data->id, data->type,
--                                                  data->start, data->end);
-+        rc = ioreq_server_unmap_io_range(d, data->id, data->type,
-+                                         data->start, data->end);
-         break;
-     }
- 
-@@ -163,7 +163,7 @@ static int dm_op(const struct dmop_args *op_args)
-         if ( data->pad )
-             break;
- 
--        rc = hvm_set_ioreq_server_state(d, data->id, !!data->enabled);
-+        rc = ioreq_server_set_state(d, data->id, !!data->enabled);
-         break;
-     }
- 
-@@ -176,7 +176,7 @@ static int dm_op(const struct dmop_args *op_args)
-         if ( data->pad )
-             break;
- 
--        rc = hvm_destroy_ioreq_server(d, data->id);
-+        rc = ioreq_server_destroy(d, data->id);
-         break;
-     }
- 
-diff --git a/xen/common/ioreq.c b/xen/common/ioreq.c
-index caf4543..3ca5b96 100644
---- a/xen/common/ioreq.c
-+++ b/xen/common/ioreq.c
-@@ -59,7 +59,7 @@ static struct ioreq_server *get_ioreq_server(const struct domain *d,
-  * Iterate over all possible ioreq servers.
-  *
-  * NOTE: The iteration is backwards such that more recently created
-- *       ioreq servers are favoured in hvm_select_ioreq_server().
-+ *       ioreq servers are favoured in ioreq_server_select().
-  *       This is a semantic that previously existed when ioreq servers
-  *       were held in a linked list.
-  */
-@@ -106,12 +106,12 @@ static struct ioreq_vcpu *get_pending_vcpu(const struct vcpu *v,
-     return NULL;
- }
- 
--bool hvm_io_pending(struct vcpu *v)
-+bool vcpu_ioreq_pending(struct vcpu *v)
- {
-     return get_pending_vcpu(v, NULL);
- }
- 
--static bool hvm_wait_for_io(struct ioreq_vcpu *sv, ioreq_t *p)
-+static bool wait_for_io(struct ioreq_vcpu *sv, ioreq_t *p)
- {
-     unsigned int prev_state = STATE_IOREQ_NONE;
-     unsigned int state = p->state;
-@@ -168,7 +168,7 @@ static bool hvm_wait_for_io(struct ioreq_vcpu *sv, ioreq_t *p)
-     return true;
- }
- 
--bool handle_hvm_io_completion(struct vcpu *v)
-+bool vcpu_ioreq_handle_completion(struct vcpu *v)
- {
-     struct domain *d = v->domain;
-     struct vcpu_io *vio = &v->io;
-@@ -183,7 +183,7 @@ bool handle_hvm_io_completion(struct vcpu *v)
-     }
- 
-     sv = get_pending_vcpu(v, &s);
--    if ( sv && !hvm_wait_for_io(sv, get_ioreq(s, v)) )
-+    if ( sv && !wait_for_io(sv, get_ioreq(s, v)) )
-         return false;
- 
-     vio->req.state = ioreq_needs_completion(&vio->req) ?
-@@ -214,7 +214,7 @@ bool handle_hvm_io_completion(struct vcpu *v)
-     return true;
- }
- 
--static int hvm_alloc_ioreq_mfn(struct ioreq_server *s, bool buf)
-+static int ioreq_server_alloc_mfn(struct ioreq_server *s, bool buf)
- {
-     struct ioreq_page *iorp = buf ? &s->bufioreq : &s->ioreq;
-     struct page_info *page;
-@@ -223,7 +223,7 @@ static int hvm_alloc_ioreq_mfn(struct ioreq_server *s, bool buf)
-     {
-         /*
-          * If a guest frame has already been mapped (which may happen
--         * on demand if hvm_get_ioreq_server_info() is called), then
-+         * on demand if ioreq_server_get_info() is called), then
-          * allocating a page is not permitted.
-          */
-         if ( !gfn_eq(iorp->gfn, INVALID_GFN) )
-@@ -262,7 +262,7 @@ static int hvm_alloc_ioreq_mfn(struct ioreq_server *s, bool buf)
-     return -ENOMEM;
- }
- 
--static void hvm_free_ioreq_mfn(struct ioreq_server *s, bool buf)
-+static void ioreq_server_free_mfn(struct ioreq_server *s, bool buf)
- {
-     struct ioreq_page *iorp = buf ? &s->bufioreq : &s->ioreq;
-     struct page_info *page = iorp->page;
-@@ -301,8 +301,8 @@ bool is_ioreq_server_page(struct domain *d, const struct page_info *page)
-     return found;
- }
- 
--static void hvm_update_ioreq_evtchn(struct ioreq_server *s,
--                                    struct ioreq_vcpu *sv)
-+static void ioreq_update_evtchn(struct ioreq_server *s,
-+                                struct ioreq_vcpu *sv)
- {
-     ASSERT(spin_is_locked(&s->lock));
- 
-@@ -314,8 +314,8 @@ static void hvm_update_ioreq_evtchn(struct ioreq_server *s,
-     }
- }
- 
--static int hvm_ioreq_server_add_vcpu(struct ioreq_server *s,
--                                     struct vcpu *v)
-+static int ioreq_server_add_vcpu(struct ioreq_server *s,
-+                                 struct vcpu *v)
- {
-     struct ioreq_vcpu *sv;
-     int rc;
-@@ -350,7 +350,7 @@ static int hvm_ioreq_server_add_vcpu(struct ioreq_server *s,
-     list_add(&sv->list_entry, &s->ioreq_vcpu_list);
- 
-     if ( s->enabled )
--        hvm_update_ioreq_evtchn(s, sv);
-+        ioreq_update_evtchn(s, sv);
- 
-     spin_unlock(&s->lock);
-     return 0;
-@@ -366,8 +366,8 @@ static int hvm_ioreq_server_add_vcpu(struct ioreq_server *s,
-     return rc;
- }
- 
--static void hvm_ioreq_server_remove_vcpu(struct ioreq_server *s,
--                                         struct vcpu *v)
-+static void ioreq_server_remove_vcpu(struct ioreq_server *s,
-+                                     struct vcpu *v)
- {
-     struct ioreq_vcpu *sv;
- 
-@@ -394,7 +394,7 @@ static void hvm_ioreq_server_remove_vcpu(struct ioreq_server *s,
-     spin_unlock(&s->lock);
- }
- 
--static void hvm_ioreq_server_remove_all_vcpus(struct ioreq_server *s)
-+static void ioreq_server_remove_all_vcpus(struct ioreq_server *s)
- {
-     struct ioreq_vcpu *sv, *next;
- 
-@@ -420,28 +420,28 @@ static void hvm_ioreq_server_remove_all_vcpus(struct ioreq_server *s)
-     spin_unlock(&s->lock);
- }
- 
--static int hvm_ioreq_server_alloc_pages(struct ioreq_server *s)
-+static int ioreq_server_alloc_pages(struct ioreq_server *s)
- {
-     int rc;
- 
--    rc = hvm_alloc_ioreq_mfn(s, false);
-+    rc = ioreq_server_alloc_mfn(s, false);
- 
-     if ( !rc && (s->bufioreq_handling != HVM_IOREQSRV_BUFIOREQ_OFF) )
--        rc = hvm_alloc_ioreq_mfn(s, true);
-+        rc = ioreq_server_alloc_mfn(s, true);
- 
-     if ( rc )
--        hvm_free_ioreq_mfn(s, false);
-+        ioreq_server_free_mfn(s, false);
- 
-     return rc;
- }
- 
--static void hvm_ioreq_server_free_pages(struct ioreq_server *s)
-+static void ioreq_server_free_pages(struct ioreq_server *s)
- {
--    hvm_free_ioreq_mfn(s, true);
--    hvm_free_ioreq_mfn(s, false);
-+    ioreq_server_free_mfn(s, true);
-+    ioreq_server_free_mfn(s, false);
- }
- 
--static void hvm_ioreq_server_free_rangesets(struct ioreq_server *s)
-+static void ioreq_server_free_rangesets(struct ioreq_server *s)
- {
-     unsigned int i;
- 
-@@ -449,8 +449,8 @@ static void hvm_ioreq_server_free_rangesets(struct ioreq_server *s)
-         rangeset_destroy(s->range[i]);
- }
- 
--static int hvm_ioreq_server_alloc_rangesets(struct ioreq_server *s,
--                                            ioservid_t id)
-+static int ioreq_server_alloc_rangesets(struct ioreq_server *s,
-+                                        ioservid_t id)
- {
-     unsigned int i;
-     int rc;
-@@ -482,12 +482,12 @@ static int hvm_ioreq_server_alloc_rangesets(struct ioreq_server *s,
-     return 0;
- 
-  fail:
--    hvm_ioreq_server_free_rangesets(s);
-+    ioreq_server_free_rangesets(s);
- 
-     return rc;
- }
- 
--static void hvm_ioreq_server_enable(struct ioreq_server *s)
-+static void ioreq_server_enable(struct ioreq_server *s)
- {
-     struct ioreq_vcpu *sv;
- 
-@@ -503,13 +503,13 @@ static void hvm_ioreq_server_enable(struct ioreq_server *s)
-     list_for_each_entry ( sv,
-                           &s->ioreq_vcpu_list,
-                           list_entry )
--        hvm_update_ioreq_evtchn(s, sv);
-+        ioreq_update_evtchn(s, sv);
- 
-   done:
-     spin_unlock(&s->lock);
- }
- 
--static void hvm_ioreq_server_disable(struct ioreq_server *s)
-+static void ioreq_server_disable(struct ioreq_server *s)
- {
-     spin_lock(&s->lock);
- 
-@@ -524,9 +524,9 @@ static void hvm_ioreq_server_disable(struct ioreq_server *s)
-     spin_unlock(&s->lock);
- }
- 
--static int hvm_ioreq_server_init(struct ioreq_server *s,
--                                 struct domain *d, int bufioreq_handling,
--                                 ioservid_t id)
-+static int ioreq_server_init(struct ioreq_server *s,
-+                             struct domain *d, int bufioreq_handling,
-+                             ioservid_t id)
- {
-     struct domain *currd = current->domain;
-     struct vcpu *v;
-@@ -544,7 +544,7 @@ static int hvm_ioreq_server_init(struct ioreq_server *s,
-     s->ioreq.gfn = INVALID_GFN;
-     s->bufioreq.gfn = INVALID_GFN;
- 
--    rc = hvm_ioreq_server_alloc_rangesets(s, id);
-+    rc = ioreq_server_alloc_rangesets(s, id);
-     if ( rc )
-         return rc;
- 
-@@ -552,7 +552,7 @@ static int hvm_ioreq_server_init(struct ioreq_server *s,
- 
-     for_each_vcpu ( d, v )
-     {
--        rc = hvm_ioreq_server_add_vcpu(s, v);
-+        rc = ioreq_server_add_vcpu(s, v);
-         if ( rc )
-             goto fail_add;
-     }
-@@ -560,23 +560,23 @@ static int hvm_ioreq_server_init(struct ioreq_server *s,
-     return 0;
- 
-  fail_add:
--    hvm_ioreq_server_remove_all_vcpus(s);
-+    ioreq_server_remove_all_vcpus(s);
-     arch_ioreq_server_unmap_pages(s);
- 
--    hvm_ioreq_server_free_rangesets(s);
-+    ioreq_server_free_rangesets(s);
- 
-     put_domain(s->emulator);
-     return rc;
- }
- 
--static void hvm_ioreq_server_deinit(struct ioreq_server *s)
-+static void ioreq_server_deinit(struct ioreq_server *s)
- {
-     ASSERT(!s->enabled);
--    hvm_ioreq_server_remove_all_vcpus(s);
-+    ioreq_server_remove_all_vcpus(s);
- 
-     /*
-      * NOTE: It is safe to call both arch_ioreq_server_unmap_pages() and
--     *       hvm_ioreq_server_free_pages() in that order.
-+     *       ioreq_server_free_pages() in that order.
-      *       This is because the former will do nothing if the pages
-      *       are not mapped, leaving the page to be freed by the latter.
-      *       However if the pages are mapped then the former will set
-@@ -584,15 +584,15 @@ static void hvm_ioreq_server_deinit(struct ioreq_server *s)
-      *       nothing.
-      */
-     arch_ioreq_server_unmap_pages(s);
--    hvm_ioreq_server_free_pages(s);
-+    ioreq_server_free_pages(s);
- 
--    hvm_ioreq_server_free_rangesets(s);
-+    ioreq_server_free_rangesets(s);
- 
-     put_domain(s->emulator);
- }
- 
--int hvm_create_ioreq_server(struct domain *d, int bufioreq_handling,
--                            ioservid_t *id)
-+int ioreq_server_create(struct domain *d, int bufioreq_handling,
-+                        ioservid_t *id)
- {
-     struct ioreq_server *s;
-     unsigned int i;
-@@ -620,11 +620,11 @@ int hvm_create_ioreq_server(struct domain *d, int bufioreq_handling,
- 
-     /*
-      * It is safe to call set_ioreq_server() prior to
--     * hvm_ioreq_server_init() since the target domain is paused.
-+     * ioreq_server_init() since the target domain is paused.
-      */
-     set_ioreq_server(d, i, s);
- 
--    rc = hvm_ioreq_server_init(s, d, bufioreq_handling, i);
-+    rc = ioreq_server_init(s, d, bufioreq_handling, i);
-     if ( rc )
-     {
-         set_ioreq_server(d, i, NULL);
-@@ -647,7 +647,7 @@ int hvm_create_ioreq_server(struct domain *d, int bufioreq_handling,
-     return rc;
- }
- 
--int hvm_destroy_ioreq_server(struct domain *d, ioservid_t id)
-+int ioreq_server_destroy(struct domain *d, ioservid_t id)
- {
-     struct ioreq_server *s;
-     int rc;
-@@ -668,13 +668,13 @@ int hvm_destroy_ioreq_server(struct domain *d, ioservid_t id)
- 
-     arch_ioreq_server_destroy(s);
- 
--    hvm_ioreq_server_disable(s);
-+    ioreq_server_disable(s);
- 
-     /*
--     * It is safe to call hvm_ioreq_server_deinit() prior to
-+     * It is safe to call ioreq_server_deinit() prior to
-      * set_ioreq_server() since the target domain is paused.
-      */
--    hvm_ioreq_server_deinit(s);
-+    ioreq_server_deinit(s);
-     set_ioreq_server(d, id, NULL);
- 
-     domain_unpause(d);
-@@ -689,10 +689,10 @@ int hvm_destroy_ioreq_server(struct domain *d, ioservid_t id)
-     return rc;
- }
- 
--int hvm_get_ioreq_server_info(struct domain *d, ioservid_t id,
--                              unsigned long *ioreq_gfn,
--                              unsigned long *bufioreq_gfn,
--                              evtchn_port_t *bufioreq_port)
-+int ioreq_server_get_info(struct domain *d, ioservid_t id,
-+                          unsigned long *ioreq_gfn,
-+                          unsigned long *bufioreq_gfn,
-+                          evtchn_port_t *bufioreq_port)
- {
-     struct ioreq_server *s;
-     int rc;
-@@ -736,8 +736,8 @@ int hvm_get_ioreq_server_info(struct domain *d, ioservid_t id,
-     return rc;
- }
- 
--int hvm_get_ioreq_server_frame(struct domain *d, ioservid_t id,
--                               unsigned long idx, mfn_t *mfn)
-+int ioreq_server_get_frame(struct domain *d, ioservid_t id,
-+                           unsigned long idx, mfn_t *mfn)
- {
-     struct ioreq_server *s;
-     int rc;
-@@ -756,7 +756,7 @@ int hvm_get_ioreq_server_frame(struct domain *d, ioservid_t id,
-     if ( s->emulator != current->domain )
-         goto out;
- 
--    rc = hvm_ioreq_server_alloc_pages(s);
-+    rc = ioreq_server_alloc_pages(s);
-     if ( rc )
-         goto out;
- 
-@@ -787,9 +787,9 @@ int hvm_get_ioreq_server_frame(struct domain *d, ioservid_t id,
-     return rc;
- }
- 
--int hvm_map_io_range_to_ioreq_server(struct domain *d, ioservid_t id,
--                                     uint32_t type, uint64_t start,
--                                     uint64_t end)
-+int ioreq_server_map_io_range(struct domain *d, ioservid_t id,
-+                              uint32_t type, uint64_t start,
-+                              uint64_t end)
- {
-     struct ioreq_server *s;
-     struct rangeset *r;
-@@ -839,9 +839,9 @@ int hvm_map_io_range_to_ioreq_server(struct domain *d, ioservid_t id,
-     return rc;
- }
- 
--int hvm_unmap_io_range_from_ioreq_server(struct domain *d, ioservid_t id,
--                                         uint32_t type, uint64_t start,
--                                         uint64_t end)
-+int ioreq_server_unmap_io_range(struct domain *d, ioservid_t id,
-+                                uint32_t type, uint64_t start,
-+                                uint64_t end)
- {
-     struct ioreq_server *s;
-     struct rangeset *r;
-@@ -899,8 +899,8 @@ int hvm_unmap_io_range_from_ioreq_server(struct domain *d, ioservid_t id,
-  * Support for the emulation of read operations can be added when an ioreq
-  * server has such requirement in the future.
-  */
--int hvm_map_mem_type_to_ioreq_server(struct domain *d, ioservid_t id,
--                                     uint32_t type, uint32_t flags)
-+int ioreq_server_map_mem_type(struct domain *d, ioservid_t id,
-+                              uint32_t type, uint32_t flags)
- {
-     struct ioreq_server *s;
-     int rc;
-@@ -931,8 +931,8 @@ int hvm_map_mem_type_to_ioreq_server(struct domain *d, ioservid_t id,
-     return rc;
- }
- 
--int hvm_set_ioreq_server_state(struct domain *d, ioservid_t id,
--                               bool enabled)
-+int ioreq_server_set_state(struct domain *d, ioservid_t id,
-+                           bool enabled)
- {
-     struct ioreq_server *s;
-     int rc;
-@@ -952,9 +952,9 @@ int hvm_set_ioreq_server_state(struct domain *d, ioservid_t id,
-     domain_pause(d);
- 
-     if ( enabled )
--        hvm_ioreq_server_enable(s);
-+        ioreq_server_enable(s);
-     else
--        hvm_ioreq_server_disable(s);
-+        ioreq_server_disable(s);
- 
-     domain_unpause(d);
- 
-@@ -965,7 +965,7 @@ int hvm_set_ioreq_server_state(struct domain *d, ioservid_t id,
-     return rc;
- }
- 
--int hvm_all_ioreq_servers_add_vcpu(struct domain *d, struct vcpu *v)
-+int ioreq_server_add_vcpu_all(struct domain *d, struct vcpu *v)
- {
-     struct ioreq_server *s;
-     unsigned int id;
-@@ -975,7 +975,7 @@ int hvm_all_ioreq_servers_add_vcpu(struct domain *d, struct vcpu *v)
- 
-     FOR_EACH_IOREQ_SERVER(d, id, s)
-     {
--        rc = hvm_ioreq_server_add_vcpu(s, v);
-+        rc = ioreq_server_add_vcpu(s, v);
-         if ( rc )
-             goto fail;
-     }
-@@ -992,7 +992,7 @@ int hvm_all_ioreq_servers_add_vcpu(struct domain *d, struct vcpu *v)
-         if ( !s )
-             continue;
- 
--        hvm_ioreq_server_remove_vcpu(s, v);
-+        ioreq_server_remove_vcpu(s, v);
-     }
- 
-     spin_unlock_recursive(&d->ioreq_server.lock);
-@@ -1000,7 +1000,7 @@ int hvm_all_ioreq_servers_add_vcpu(struct domain *d, struct vcpu *v)
-     return rc;
- }
- 
--void hvm_all_ioreq_servers_remove_vcpu(struct domain *d, struct vcpu *v)
-+void ioreq_server_remove_vcpu_all(struct domain *d, struct vcpu *v)
- {
-     struct ioreq_server *s;
-     unsigned int id;
-@@ -1008,12 +1008,12 @@ void hvm_all_ioreq_servers_remove_vcpu(struct domain *d, struct vcpu *v)
-     spin_lock_recursive(&d->ioreq_server.lock);
- 
-     FOR_EACH_IOREQ_SERVER(d, id, s)
--        hvm_ioreq_server_remove_vcpu(s, v);
-+        ioreq_server_remove_vcpu(s, v);
- 
-     spin_unlock_recursive(&d->ioreq_server.lock);
- }
- 
--void hvm_destroy_all_ioreq_servers(struct domain *d)
-+void ioreq_server_destroy_all(struct domain *d)
- {
-     struct ioreq_server *s;
-     unsigned int id;
-@@ -1027,13 +1027,13 @@ void hvm_destroy_all_ioreq_servers(struct domain *d)
- 
-     FOR_EACH_IOREQ_SERVER(d, id, s)
-     {
--        hvm_ioreq_server_disable(s);
-+        ioreq_server_disable(s);
- 
-         /*
--         * It is safe to call hvm_ioreq_server_deinit() prior to
-+         * It is safe to call ioreq_server_deinit() prior to
-          * set_ioreq_server() since the target domain is being destroyed.
-          */
--        hvm_ioreq_server_deinit(s);
-+        ioreq_server_deinit(s);
-         set_ioreq_server(d, id, NULL);
- 
-         xfree(s);
-@@ -1042,8 +1042,8 @@ void hvm_destroy_all_ioreq_servers(struct domain *d)
-     spin_unlock_recursive(&d->ioreq_server.lock);
- }
- 
--struct ioreq_server *hvm_select_ioreq_server(struct domain *d,
--                                             ioreq_t *p)
-+struct ioreq_server *ioreq_server_select(struct domain *d,
-+                                         ioreq_t *p)
- {
-     struct ioreq_server *s;
-     uint8_t type;
-@@ -1098,7 +1098,7 @@ struct ioreq_server *hvm_select_ioreq_server(struct domain *d,
-     return NULL;
- }
- 
--static int hvm_send_buffered_ioreq(struct ioreq_server *s, ioreq_t *p)
-+static int ioreq_send_buffered(struct ioreq_server *s, ioreq_t *p)
- {
-     struct domain *d = current->domain;
-     struct ioreq_page *iorp;
-@@ -1191,8 +1191,8 @@ static int hvm_send_buffered_ioreq(struct ioreq_server *s, ioreq_t *p)
-     return IOREQ_STATUS_HANDLED;
- }
- 
--int hvm_send_ioreq(struct ioreq_server *s, ioreq_t *proto_p,
--                   bool buffered)
-+int ioreq_send(struct ioreq_server *s, ioreq_t *proto_p,
-+               bool buffered)
- {
-     struct vcpu *curr = current;
-     struct domain *d = curr->domain;
-@@ -1201,7 +1201,7 @@ int hvm_send_ioreq(struct ioreq_server *s, ioreq_t *proto_p,
-     ASSERT(s);
- 
-     if ( buffered )
--        return hvm_send_buffered_ioreq(s, proto_p);
-+        return ioreq_send_buffered(s, proto_p);
- 
-     if ( unlikely(!vcpu_start_shutdown_deferral(curr)) )
-         return IOREQ_STATUS_RETRY;
-@@ -1251,7 +1251,7 @@ int hvm_send_ioreq(struct ioreq_server *s, ioreq_t *proto_p,
-     return IOREQ_STATUS_UNHANDLED;
- }
- 
--unsigned int hvm_broadcast_ioreq(ioreq_t *p, bool buffered)
-+unsigned int ioreq_broadcast(ioreq_t *p, bool buffered)
- {
-     struct domain *d = current->domain;
-     struct ioreq_server *s;
-@@ -1262,14 +1262,14 @@ unsigned int hvm_broadcast_ioreq(ioreq_t *p, bool buffered)
-         if ( !s->enabled )
-             continue;
- 
--        if ( hvm_send_ioreq(s, p, buffered) == IOREQ_STATUS_UNHANDLED )
-+        if ( ioreq_send(s, p, buffered) == IOREQ_STATUS_UNHANDLED )
-             failed++;
-     }
- 
-     return failed;
- }
- 
--void hvm_ioreq_init(struct domain *d)
-+void ioreq_domain_init(struct domain *d)
- {
-     spin_lock_init(&d->ioreq_server.lock);
- 
-diff --git a/xen/common/memory.c b/xen/common/memory.c
-index 92cf983..3363c06 100644
---- a/xen/common/memory.c
-+++ b/xen/common/memory.c
-@@ -1108,7 +1108,7 @@ static int acquire_ioreq_server(struct domain *d,
-     {
-         mfn_t mfn;
- 
--        rc = hvm_get_ioreq_server_frame(d, id, frame + i, &mfn);
-+        rc = ioreq_server_get_frame(d, id, frame + i, &mfn);
-         if ( rc )
-             return rc;
- 
-diff --git a/xen/include/xen/ioreq.h b/xen/include/xen/ioreq.h
-index 979afa0..02ff998 100644
---- a/xen/include/xen/ioreq.h
-+++ b/xen/include/xen/ioreq.h
-@@ -81,41 +81,42 @@ static inline bool ioreq_needs_completion(const ioreq_t *ioreq)
- #define HANDLE_BUFIOREQ(s) \
-     ((s)->bufioreq_handling != HVM_IOREQSRV_BUFIOREQ_OFF)
- 
--bool hvm_io_pending(struct vcpu *v);
--bool handle_hvm_io_completion(struct vcpu *v);
-+bool vcpu_ioreq_pending(struct vcpu *v);
-+bool vcpu_ioreq_handle_completion(struct vcpu *v);
- bool is_ioreq_server_page(struct domain *d, const struct page_info *page);
- 
--int hvm_create_ioreq_server(struct domain *d, int bufioreq_handling,
--                            ioservid_t *id);
--int hvm_destroy_ioreq_server(struct domain *d, ioservid_t id);
--int hvm_get_ioreq_server_info(struct domain *d, ioservid_t id,
--                              unsigned long *ioreq_gfn,
--                              unsigned long *bufioreq_gfn,
--                              evtchn_port_t *bufioreq_port);
--int hvm_get_ioreq_server_frame(struct domain *d, ioservid_t id,
--                               unsigned long idx, mfn_t *mfn);
--int hvm_map_io_range_to_ioreq_server(struct domain *d, ioservid_t id,
--                                     uint32_t type, uint64_t start,
--                                     uint64_t end);
--int hvm_unmap_io_range_from_ioreq_server(struct domain *d, ioservid_t id,
--                                         uint32_t type, uint64_t start,
--                                         uint64_t end);
--int hvm_map_mem_type_to_ioreq_server(struct domain *d, ioservid_t id,
--                                     uint32_t type, uint32_t flags);
--int hvm_set_ioreq_server_state(struct domain *d, ioservid_t id,
--                               bool enabled);
--
--int hvm_all_ioreq_servers_add_vcpu(struct domain *d, struct vcpu *v);
--void hvm_all_ioreq_servers_remove_vcpu(struct domain *d, struct vcpu *v);
--void hvm_destroy_all_ioreq_servers(struct domain *d);
--
--struct ioreq_server *hvm_select_ioreq_server(struct domain *d,
--                                             ioreq_t *p);
--int hvm_send_ioreq(struct ioreq_server *s, ioreq_t *proto_p,
--                   bool buffered);
--unsigned int hvm_broadcast_ioreq(ioreq_t *p, bool buffered);
--
--void hvm_ioreq_init(struct domain *d);
-+int ioreq_server_create(struct domain *d, int bufioreq_handling,
-+                        ioservid_t *id);
-+int ioreq_server_destroy(struct domain *d, ioservid_t id);
-+int ioreq_server_get_info(struct domain *d, ioservid_t id,
-+                          unsigned long *ioreq_gfn,
-+                          unsigned long *bufioreq_gfn,
-+                          evtchn_port_t *bufioreq_port);
-+int ioreq_server_get_frame(struct domain *d, ioservid_t id,
-+                           unsigned long idx, mfn_t *mfn);
-+int ioreq_server_map_io_range(struct domain *d, ioservid_t id,
-+                              uint32_t type, uint64_t start,
-+                              uint64_t end);
-+int ioreq_server_unmap_io_range(struct domain *d, ioservid_t id,
-+                                uint32_t type, uint64_t start,
-+                                uint64_t end);
-+int ioreq_server_map_mem_type(struct domain *d, ioservid_t id,
-+                              uint32_t type, uint32_t flags);
+@@ -1011,8 +1036,19 @@ next_resize:
+         if (info->tee == LIBXL_TEE_TYPE_OPTEE)
+             FDT( make_optee_node(gc, fdt) );
+ 
+-        if (libxl_defbool_val(info->arch_arm.virtio))
+-            FDT( make_virtio_mmio_node(gc, fdt, GUEST_VIRTIO_MMIO_BASE, GUEST_VIRTIO_MMIO_SPI) );
++        if (libxl_defbool_val(info->arch_arm.virtio)) {
++            libxl_domain_config *d_config =
++                container_of(info, libxl_domain_config, b_info);
++            libxl_device_virtio_disk *virtio_disk = &d_config->virtio_disks[0];
++            unsigned int i;
 +
-+int ioreq_server_set_state(struct domain *d, ioservid_t id,
-+                           bool enabled);
++            for (i = 0; i < virtio_disk->num_disks; i++) {
++                uint64_t base = virtio_disk->disks[i].base;
++                uint32_t irq = virtio_disk->disks[i].irq;
 +
-+int ioreq_server_add_vcpu_all(struct domain *d, struct vcpu *v);
-+void ioreq_server_remove_vcpu_all(struct domain *d, struct vcpu *v);
-+void ioreq_server_destroy_all(struct domain *d);
-+
-+struct ioreq_server *ioreq_server_select(struct domain *d,
-+                                         ioreq_t *p);
-+int ioreq_send(struct ioreq_server *s, ioreq_t *proto_p,
-+               bool buffered);
-+unsigned int ioreq_broadcast(ioreq_t *p, bool buffered);
-+
-+void ioreq_domain_init(struct domain *d);
++                FDT( make_virtio_mmio_node(gc, fdt, base, irq) );
++            }
++        }
  
- #endif /* __XEN_IOREQ_H__ */
+         if (pfdt)
+             FDT( copy_partial_fdt(gc, fdt, pfdt) );
+diff --git a/tools/libs/light/libxl_create.c b/tools/libs/light/libxl_create.c
+index 321a13e..8da328d 100644
+--- a/tools/libs/light/libxl_create.c
++++ b/tools/libs/light/libxl_create.c
+@@ -1821,6 +1821,7 @@ const libxl__device_type *device_type_tbl[] = {
+     &libxl__dtdev_devtype,
+     &libxl__vdispl_devtype,
+     &libxl__vsnd_devtype,
++    &libxl__virtio_disk_devtype,
+     NULL
+ };
  
+diff --git a/tools/libs/light/libxl_internal.h b/tools/libs/light/libxl_internal.h
+index e26cda9..ea497bb 100644
+--- a/tools/libs/light/libxl_internal.h
++++ b/tools/libs/light/libxl_internal.h
+@@ -4000,6 +4000,7 @@ extern const libxl__device_type libxl__vdispl_devtype;
+ extern const libxl__device_type libxl__p9_devtype;
+ extern const libxl__device_type libxl__pvcallsif_devtype;
+ extern const libxl__device_type libxl__vsnd_devtype;
++extern const libxl__device_type libxl__virtio_disk_devtype;
+ 
+ extern const libxl__device_type *device_type_tbl[];
+ 
+diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
+index b054bf9..5f8a3ff 100644
+--- a/tools/libs/light/libxl_types.idl
++++ b/tools/libs/light/libxl_types.idl
+@@ -935,6 +935,20 @@ libxl_device_vsnd = Struct("device_vsnd", [
+     ("pcms", Array(libxl_vsnd_pcm, "num_vsnd_pcms"))
+     ])
+ 
++libxl_virtio_disk_param = Struct("virtio_disk_param", [
++    ("filename", string),
++    ("readonly", bool),
++    ("irq", uint32),
++    ("base", uint64),
++    ])
++
++libxl_device_virtio_disk = Struct("device_virtio_disk", [
++    ("backend_domid", libxl_domid),
++    ("backend_domname", string),
++    ("devid", libxl_devid),
++    ("disks", Array(libxl_virtio_disk_param, "num_disks")),
++    ])
++
+ libxl_domain_config = Struct("domain_config", [
+     ("c_info", libxl_domain_create_info),
+     ("b_info", libxl_domain_build_info),
+@@ -951,6 +965,7 @@ libxl_domain_config = Struct("domain_config", [
+     ("pvcallsifs", Array(libxl_device_pvcallsif, "num_pvcallsifs")),
+     ("vdispls", Array(libxl_device_vdispl, "num_vdispls")),
+     ("vsnds", Array(libxl_device_vsnd, "num_vsnds")),
++    ("virtio_disks", Array(libxl_device_virtio_disk, "num_virtio_disks")),
+     # a channel manifests as a console with a name,
+     # see docs/misc/channels.txt
+     ("channels", Array(libxl_device_channel, "num_channels")),
+diff --git a/tools/libs/light/libxl_types_internal.idl b/tools/libs/light/libxl_types_internal.idl
+index 3593e21..8f71980 100644
+--- a/tools/libs/light/libxl_types_internal.idl
++++ b/tools/libs/light/libxl_types_internal.idl
+@@ -32,6 +32,7 @@ libxl__device_kind = Enumeration("device_kind", [
+     (14, "PVCALLS"),
+     (15, "VSND"),
+     (16, "VINPUT"),
++    (17, "VIRTIO_DISK"),
+     ])
+ 
+ libxl__console_backend = Enumeration("console_backend", [
+diff --git a/tools/libs/light/libxl_virtio_disk.c b/tools/libs/light/libxl_virtio_disk.c
+new file mode 100644
+index 0000000..25e7f1a
+--- /dev/null
++++ b/tools/libs/light/libxl_virtio_disk.c
+@@ -0,0 +1,109 @@
++/*
++ * Copyright (C) 2020 EPAM Systems Inc.
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU Lesser General Public License as published
++ * by the Free Software Foundation; version 2.1 only. with the special
++ * exception on linking described in file LICENSE.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU Lesser General Public License for more details.
++ */
++
++#include "libxl_internal.h"
++
++static int libxl__device_virtio_disk_setdefault(libxl__gc *gc, uint32_t domid,
++                                                libxl_device_virtio_disk *virtio_disk,
++                                                bool hotplug)
++{
++    return libxl__resolve_domid(gc, virtio_disk->backend_domname,
++                                &virtio_disk->backend_domid);
++}
++
++static int libxl__virtio_disk_from_xenstore(libxl__gc *gc, const char *libxl_path,
++                                            libxl_devid devid,
++                                            libxl_device_virtio_disk *virtio_disk)
++{
++    const char *be_path;
++    int rc;
++
++    virtio_disk->devid = devid;
++    rc = libxl__xs_read_mandatory(gc, XBT_NULL,
++                                  GCSPRINTF("%s/backend", libxl_path),
++                                  &be_path);
++    if (rc) return rc;
++
++    rc = libxl__backendpath_parse_domid(gc, be_path, &virtio_disk->backend_domid);
++    if (rc) return rc;
++
++    return 0;
++}
++
++static void libxl__update_config_virtio_disk(libxl__gc *gc,
++                                             libxl_device_virtio_disk *dst,
++                                             libxl_device_virtio_disk *src)
++{
++    dst->devid = src->devid;
++}
++
++static int libxl_device_virtio_disk_compare(libxl_device_virtio_disk *d1,
++                                            libxl_device_virtio_disk *d2)
++{
++    return COMPARE_DEVID(d1, d2);
++}
++
++static void libxl__device_virtio_disk_add(libxl__egc *egc, uint32_t domid,
++                                          libxl_device_virtio_disk *virtio_disk,
++                                          libxl__ao_device *aodev)
++{
++    libxl__device_add_async(egc, domid, &libxl__virtio_disk_devtype, virtio_disk, aodev);
++}
++
++static int libxl__set_xenstore_virtio_disk(libxl__gc *gc, uint32_t domid,
++                                           libxl_device_virtio_disk *virtio_disk,
++                                           flexarray_t *back, flexarray_t *front,
++                                           flexarray_t *ro_front)
++{
++    int rc;
++    unsigned int i;
++
++    for (i = 0; i < virtio_disk->num_disks; i++) {
++        rc = flexarray_append_pair(ro_front, GCSPRINTF("%d/filename", i),
++                                   GCSPRINTF("%s", virtio_disk->disks[i].filename));
++        if (rc) return rc;
++
++        rc = flexarray_append_pair(ro_front, GCSPRINTF("%d/readonly", i),
++                                   GCSPRINTF("%d", virtio_disk->disks[i].readonly));
++        if (rc) return rc;
++
++        rc = flexarray_append_pair(ro_front, GCSPRINTF("%d/base", i),
++                                   GCSPRINTF("%lu", virtio_disk->disks[i].base));
++        if (rc) return rc;
++
++        rc = flexarray_append_pair(ro_front, GCSPRINTF("%d/irq", i),
++                                   GCSPRINTF("%u", virtio_disk->disks[i].irq));
++        if (rc) return rc;
++    }
++
++    return 0;
++}
++
++static LIBXL_DEFINE_UPDATE_DEVID(virtio_disk)
++static LIBXL_DEFINE_DEVICE_FROM_TYPE(virtio_disk)
++static LIBXL_DEFINE_DEVICES_ADD(virtio_disk)
++
++DEFINE_DEVICE_TYPE_STRUCT(virtio_disk, VIRTIO_DISK,
++    .update_config = (device_update_config_fn_t) libxl__update_config_virtio_disk,
++    .from_xenstore = (device_from_xenstore_fn_t) libxl__virtio_disk_from_xenstore,
++    .set_xenstore_config = (device_set_xenstore_config_fn_t) libxl__set_xenstore_virtio_disk
++);
++
++/*
++ * Local variables:
++ * mode: C
++ * c-basic-offset: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
+diff --git a/tools/xl/Makefile b/tools/xl/Makefile
+index bdf67c8..9d8f2aa 100644
+--- a/tools/xl/Makefile
++++ b/tools/xl/Makefile
+@@ -23,7 +23,7 @@ XL_OBJS += xl_vtpm.o xl_block.o xl_nic.o xl_usb.o
+ XL_OBJS += xl_sched.o xl_pci.o xl_vcpu.o xl_cdrom.o xl_mem.o
+ XL_OBJS += xl_info.o xl_console.o xl_misc.o
+ XL_OBJS += xl_vmcontrol.o xl_saverestore.o xl_migrate.o
+-XL_OBJS += xl_vdispl.o xl_vsnd.o xl_vkb.o
++XL_OBJS += xl_vdispl.o xl_vsnd.o xl_vkb.o xl_virtio_disk.o
+ 
+ $(XL_OBJS): CFLAGS += $(CFLAGS_libxentoollog)
+ $(XL_OBJS): CFLAGS += $(CFLAGS_XL)
+diff --git a/tools/xl/xl.h b/tools/xl/xl.h
+index 06569c6..3d26f19 100644
+--- a/tools/xl/xl.h
++++ b/tools/xl/xl.h
+@@ -178,6 +178,9 @@ int main_vsnddetach(int argc, char **argv);
+ int main_vkbattach(int argc, char **argv);
+ int main_vkblist(int argc, char **argv);
+ int main_vkbdetach(int argc, char **argv);
++int main_virtio_diskattach(int argc, char **argv);
++int main_virtio_disklist(int argc, char **argv);
++int main_virtio_diskdetach(int argc, char **argv);
+ int main_usbctrl_attach(int argc, char **argv);
+ int main_usbctrl_detach(int argc, char **argv);
+ int main_usbdev_attach(int argc, char **argv);
+diff --git a/tools/xl/xl_cmdtable.c b/tools/xl/xl_cmdtable.c
+index 7da6c1b..745afab 100644
+--- a/tools/xl/xl_cmdtable.c
++++ b/tools/xl/xl_cmdtable.c
+@@ -435,6 +435,21 @@ struct cmd_spec cmd_table[] = {
+       "Destroy a domain's virtual sound device",
+       "<Domain> <DevId>",
+     },
++    { "virtio-disk-attach",
++      &main_virtio_diskattach, 1, 1,
++      "Create a new virtio block device",
++      " TBD\n"
++    },
++    { "virtio-disk-list",
++      &main_virtio_disklist, 0, 0,
++      "List virtio block devices for a domain",
++      "<Domain(s)>",
++    },
++    { "virtio-disk-detach",
++      &main_virtio_diskdetach, 0, 1,
++      "Destroy a domain's virtio block device",
++      "<Domain> <DevId>",
++    },
+     { "uptime",
+       &main_uptime, 0, 0,
+       "Print uptime for all/some domains",
+diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
+index 10acf22..6cf3524 100644
+--- a/tools/xl/xl_parse.c
++++ b/tools/xl/xl_parse.c
+@@ -1204,6 +1204,120 @@ out:
+     if (rc) exit(EXIT_FAILURE);
+ }
+ 
++#define MAX_VIRTIO_DISKS 4
++
++static int parse_virtio_disk_config(libxl_device_virtio_disk *virtio_disk, char *token)
++{
++    char *oparg;
++    libxl_string_list disks = NULL;
++    int i, rc;
++
++    if (MATCH_OPTION("backend", token, oparg)) {
++        virtio_disk->backend_domname = strdup(oparg);
++    } else if (MATCH_OPTION("disks", token, oparg)) {
++        split_string_into_string_list(oparg, ";", &disks);
++
++        virtio_disk->num_disks = libxl_string_list_length(&disks);
++        if (virtio_disk->num_disks > MAX_VIRTIO_DISKS) {
++            fprintf(stderr, "vdisk: currently only %d disks are supported",
++                    MAX_VIRTIO_DISKS);
++            return 1;
++        }
++        virtio_disk->disks = xcalloc(virtio_disk->num_disks,
++                                     sizeof(*virtio_disk->disks));
++
++        for(i = 0; i < virtio_disk->num_disks; i++) {
++            char *disk_opt;
++
++            rc = split_string_into_pair(disks[i], ":", &disk_opt,
++                                        &virtio_disk->disks[i].filename);
++            if (rc) {
++                fprintf(stderr, "vdisk: failed to split \"%s\" into pair\n",
++                        disks[i]);
++                goto out;
++            }
++
++            if (!strcmp(disk_opt, "ro"))
++                virtio_disk->disks[i].readonly = 1;
++            else if (!strcmp(disk_opt, "rw"))
++                virtio_disk->disks[i].readonly = 0;
++            else {
++                fprintf(stderr, "vdisk: failed to parse \"%s\" disk option\n",
++                        disk_opt);
++                rc = 1;
++            }
++            free(disk_opt);
++
++            if (rc) goto out;
++        }
++    } else {
++        fprintf(stderr, "Unknown string \"%s\" in vdisk spec\n", token);
++        rc = 1; goto out;
++    }
++
++    rc = 0;
++
++out:
++    libxl_string_list_dispose(&disks);
++    return rc;
++}
++
++static void parse_virtio_disk_list(const XLU_Config *config,
++                            libxl_domain_config *d_config)
++{
++    XLU_ConfigList *virtio_disks;
++    const char *item;
++    char *buf = NULL;
++    int rc;
++
++    if (!xlu_cfg_get_list (config, "vdisk", &virtio_disks, 0, 0)) {
++        libxl_domain_build_info *b_info = &d_config->b_info;
++        int entry = 0;
++
++        /* XXX Remove an extra property */
++        libxl_defbool_setdefault(&b_info->arch_arm.virtio, false);
++        if (!libxl_defbool_val(b_info->arch_arm.virtio)) {
++            fprintf(stderr, "Virtio device requires Virtio property to be set\n");
++            exit(EXIT_FAILURE);
++        }
++
++        while ((item = xlu_cfg_get_listitem(virtio_disks, entry)) != NULL) {
++            libxl_device_virtio_disk *virtio_disk;
++            char *p;
++
++            virtio_disk = ARRAY_EXTEND_INIT(d_config->virtio_disks,
++                                            d_config->num_virtio_disks,
++                                            libxl_device_virtio_disk_init);
++
++            buf = strdup(item);
++
++            p = strtok (buf, ",");
++            while (p != NULL)
++            {
++                while (*p == ' ') p++;
++
++                rc = parse_virtio_disk_config(virtio_disk, p);
++                if (rc) goto out;
++
++                p = strtok (NULL, ",");
++            }
++
++            entry++;
++
++            if (virtio_disk->num_disks == 0) {
++                fprintf(stderr, "At least one virtio disk should be specified\n");
++                rc = 1; goto out;
++            }
++        }
++    }
++
++    rc = 0;
++
++out:
++    free(buf);
++    if (rc) exit(EXIT_FAILURE);
++}
++
+ void parse_config_data(const char *config_source,
+                        const char *config_data,
+                        int config_len,
+@@ -2734,6 +2848,7 @@ skip_usbdev:
+     }
+ 
+     parse_vkb_list(config, d_config);
++    parse_virtio_disk_list(config, d_config);
+ 
+     xlu_cfg_get_defbool(config, "xend_suspend_evtchn_compat",
+                         &c_info->xend_suspend_evtchn_compat, 0);
+diff --git a/tools/xl/xl_virtio_disk.c b/tools/xl/xl_virtio_disk.c
+new file mode 100644
+index 0000000..808a7da
+--- /dev/null
++++ b/tools/xl/xl_virtio_disk.c
+@@ -0,0 +1,46 @@
++/*
++ * Copyright (C) 2020 EPAM Systems Inc.
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU Lesser General Public License as published
++ * by the Free Software Foundation; version 2.1 only. with the special
++ * exception on linking described in file LICENSE.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU Lesser General Public License for more details.
++ */
++
++#include <stdlib.h>
++
++#include <libxl.h>
++#include <libxl_utils.h>
++#include <libxlutil.h>
++
++#include "xl.h"
++#include "xl_utils.h"
++#include "xl_parse.h"
++
++int main_virtio_diskattach(int argc, char **argv)
++{
++    return 0;
++}
++
++int main_virtio_disklist(int argc, char **argv)
++{
++   return 0;
++}
++
++int main_virtio_diskdetach(int argc, char **argv)
++{
++    return 0;
++}
++
++/*
++ * Local variables:
++ * mode: C
++ * c-basic-offset: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
 -- 
 2.7.4
 
