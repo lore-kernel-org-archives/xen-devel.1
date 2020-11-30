@@ -2,44 +2,57 @@ Return-Path: <SRS0=tG8y=FE=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.7 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-15.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9020DC64E8A
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Nov 2020 10:36:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A5696C64E8A
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Nov 2020 10:39:47 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 19B9620708
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Nov 2020 10:36:19 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 2557E20708
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Nov 2020 10:39:47 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="I5eYtfom"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 19B9620708
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	dkim=pass (1024-bit key) header.d=bitdefender.onmicrosoft.com header.i=@bitdefender.onmicrosoft.com header.b="WNPZ+8No"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2557E20708
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=bitdefender.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.40865.73876 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.40883.73888 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kjgXT-0001rK-1E; Mon, 30 Nov 2020 10:36:11 +0000
+	id 1kjgah-00027k-Hq; Mon, 30 Nov 2020 10:39:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 40865.73876; Mon, 30 Nov 2020 10:36:11 +0000
+Received: by outflank-mailman (output) from mailman id 40883.73888; Mon, 30 Nov 2020 10:39:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kjgXS-0001rD-UL; Mon, 30 Nov 2020 10:36:10 +0000
-Received: by outflank-mailman (input) for mailman id 40865;
- Mon, 30 Nov 2020 10:36:09 +0000
+	id 1kjgah-00027d-EW; Mon, 30 Nov 2020 10:39:31 +0000
+Received: by outflank-mailman (input) for mailman id 40883;
+ Mon, 30 Nov 2020 10:39:30 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Tpvk=FE=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1kjgXR-0001qk-81
- for xen-devel@lists.xenproject.org; Mon, 30 Nov 2020 10:36:09 +0000
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 8c33855f-a6d8-433f-8c86-0789e278baae;
- Mon, 30 Nov 2020 10:36:08 +0000 (UTC)
+ <SRS0=KbLm=FE=bitdefender.com=aisaila@srs-us1.protection.inumbo.net>)
+ id 1kjgag-00027Y-5t
+ for xen-devel@lists.xenproject.org; Mon, 30 Nov 2020 10:39:30 +0000
+Received: from EUR02-VE1-obe.outbound.protection.outlook.com (unknown
+ [40.107.2.123]) by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id d8a74955-bcb6-4a05-be71-64c76c5f235a;
+ Mon, 30 Nov 2020 10:39:28 +0000 (UTC)
+Received: from DB8PR02MB5740.eurprd02.prod.outlook.com (2603:10a6:10:eb::10)
+ by DB3PR0202MB3484.eurprd02.prod.outlook.com (2603:10a6:8:2::30) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3564.25; Mon, 30 Nov
+ 2020 10:39:25 +0000
+Received: from DB8PR02MB5740.eurprd02.prod.outlook.com
+ ([fe80::258a:bf9f:fc0f:5381]) by DB8PR02MB5740.eurprd02.prod.outlook.com
+ ([fe80::258a:bf9f:fc0f:5381%5]) with mapi id 15.20.3611.020; Mon, 30 Nov 2020
+ 10:39:25 +0000
+Received: from [192.168.1.109] (86.127.52.143) by
+ VI1PR06CA0203.eurprd06.prod.outlook.com (2603:10a6:802:2c::24) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3611.22 via Frontend Transport; Mon, 30 Nov 2020 10:39:24 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,105 +64,173 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8c33855f-a6d8-433f-8c86-0789e278baae
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1606732568;
-  h=subject:to:cc:references:from:message-id:date:
-   mime-version:in-reply-to:content-transfer-encoding;
-  bh=xYuuqM4xf95GM/STRHtKgAhRRJqwGwniaSpMW1mPr+c=;
-  b=I5eYtfomRssSz/S7+0cukW0nfwG8N7JPCX/87WGflksLxydKe9alJ3tG
-   wfSHxXu8p2XMz/QO9H2tUdeqim6SvSKwHuEK00P7W1UEmHlAcIfpB1J/C
-   FNWM6lIY0TPxkYTtqBUSbITK7bhMe1M390ZRaJL7LkM4ziE8uNAS8gasW
-   c=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: dhz8Jn0D8gv4lolQ1ZeDeZxVzM9XxeJsU54cEe7YQ+XHeH/5cAD2g1f/JAVphwAeJWNwt6ELwN
- dFWdAmnLDK7wf+j/QMKTQWxiFx76WTYJsn9mTIYrVJ7KLfVl8EiLHpPjUR4Lu0Kj+REDydlX54
- K1gpWF0RCcrjPFXGB2lrB4zLiWxNwxJ9MbYeh7Uy90rGIUihN/gQldgDOBkyTa4e+7FA5JfjfO
- ksjtRlAgJ+aAKkR7Sme3UQXVHu18kjLvABlxT7pXuaTIH4WXlVbVJH713rk111+VitqN9Xn/5o
- El8=
-X-SBRS: None
-X-MesageID: 32488046
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.78,381,1599537600"; 
-   d="scan'208";a="32488046"
-Subject: Re: [PATCH 0/7] xen/arm: Emulate ID registers
-To: Bertrand Marquis <Bertrand.Marquis@arm.com>
-CC: Xen-devel <xen-devel@lists.xenproject.org>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Volodymyr Babchuk
-	<Volodymyr_Babchuk@epam.com>
-References: <cover.1606151462.git.bertrand.marquis@arm.com>
- <45b8aac3-75a6-670f-d6f2-b427c497ee2d@citrix.com>
- <1BAAADF6-9E29-4BE5-857D-A8B51EB80712@arm.com>
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Message-ID: <e119d6ff-dc61-0fd7-6da5-3e4e1b51839c@citrix.com>
-Date: Mon, 30 Nov 2020 10:36:00 +0000
+X-Inumbo-ID: d8a74955-bcb6-4a05-be71-64c76c5f235a
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=QlCYa3XLQdrBggSb5abn3o5I0qRPYS+wDCo1Ek98/ES0dWM1ehkoauUwK2Bay/wZGMT47yk9TrUie3qDeR6ZQWMeIBI2rFL7fupV7J+Eecax+DgGtQQ/kQ7TbYJ90qAjdmpQwj2ZyKD6NriQKrf+EUvcc1XIyoxhY8sUYMNEePRPS26xCHgUFzBb7xgOfHUe9vrl73c55gp8z/RW7iRldx6V2HZltk5TWbAv2s6qpWNdHQyGh0H+yIzSXDq/GH65KwV0w8++OT46owxKRK4Fk0dneqLj9YFYky1JQ6F/AFMIVXuvRj4RVsP1ofPgJL1uoDvzL35/86XnHEPdnf4sQQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=g9DiQhYKayoFWZlhVMSSV5VnP10hD7SjHfBowlZ/e+o=;
+ b=aJf7s1+Kqg5IwyhMljj7avfk2aJJhrosPa7M6FJm31zQXUHs9natflOSiJTxiElnLpqBblqQltsJG5q/zPNuYdig0gCkhKpu1Yb4/7yzOVDBU15w7Z4Usfb8ns0efcM2VRg3s3cnKXe+pdTEsQDJTbw+EuJGHPTCgDq8DM9mmj5PasYY8DboJRjSXS/SXGh7suUwFBhwSlSvtlxkMlaL9O1CKxaaEN8wfCSUhbXQ2ko3S+HN0uAGLSLzudMaiwRWe2m6iVPXnjfzxROVluHjr4nhsfq92UWSBTw2zBGHZIzmBf5sRZPnGM6Eod5uyzaupR/OIXDskwuFhU4b6YeKfQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=bitdefender.com; dmarc=pass action=none
+ header.from=bitdefender.com; dkim=pass header.d=bitdefender.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=bitdefender.onmicrosoft.com; s=selector2-bitdefender-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=g9DiQhYKayoFWZlhVMSSV5VnP10hD7SjHfBowlZ/e+o=;
+ b=WNPZ+8NoRhbJkfk3xnQE2dggvBJrfBHNcih+E1RW9uuNrI5rRudvSJsM52+SDtlluL2N4pMFPzR1LV3Ki7iinQAel/qBQEBqjxBvVxMF1DfprABmOuISOjrWp3j3QhqE/U83a/Mj5BI9YVuEg4Uzb9UqXHhEchW0/YVm9MLzBhA=
+Authentication-Results: bitdefender.com; dkim=none (message not signed)
+ header.d=none;bitdefender.com; dmarc=none action=none
+ header.from=bitdefender.com;
+Subject: Re: [PATCH v3 5/5] evtchn: don't call Xen consumer callback with
+ per-channel lock held
+To: Jan Beulich <jbeulich@suse.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <George.Dunlap@eu.citrix.com>, Ian Jackson
+ <iwj@xenproject.org>, Julien Grall <julien@xen.org>, Wei Liu <wl@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Tamas K Lengyel <lengyelt@ainfosec.com>,
+ Petre Ovidiu PIRCALABU <ppircalabu@bitdefender.com>
+References: <9d7a052a-6222-80ff-cbf1-612d4ca50c2a@suse.com>
+ <d821c715-966a-b48b-a877-c5dac36822f0@suse.com>
+From: Isaila Alexandru <aisaila@bitdefender.com>
+Organization: BD
+Message-ID: <0c51ad57-0d40-0fa9-7992-d747fc31b441@bitdefender.com>
+Date: Mon, 30 Nov 2020 12:39:23 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ Thunderbird/68.4.1
+In-Reply-To: <d821c715-966a-b48b-a877-c5dac36822f0@suse.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [86.127.52.143]
+X-ClientProxiedBy: VI1PR06CA0203.eurprd06.prod.outlook.com
+ (2603:10a6:802:2c::24) To DB8PR02MB5740.eurprd02.prod.outlook.com
+ (2603:10a6:10:eb::10)
 MIME-Version: 1.0
-In-Reply-To: <1BAAADF6-9E29-4BE5-857D-A8B51EB80712@arm.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Content-Language: en-GB
-X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
- FTLPEX02CL04.citrite.net (10.13.108.177)
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: b821afee-ae32-4d77-4df3-08d8951c3506
+X-MS-TrafficTypeDiagnostic: DB3PR0202MB3484:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS:
+	<DB3PR0202MB3484A18BE68C04F1B048749CABF50@DB3PR0202MB3484.eurprd02.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:6430;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	LGQJfUG2V/urQkKkx+ueznn5wmdXKfh+5+gYhMttiMuVEreiBLRFwd8thkAKEJS2GNAbDx+BUldbtM1HzK098p30kxwaWyKX5zvznJSYgRRR29T+ToueBwOgGPsrDXLHAPxPl4py7nIphlMMOqxPdNK6UMwJOYYDLKhNtFFGe3VX/KstVyTCL8NCA1tTwXAVuaX9xQhnq5kNb73wVOT4ouO1m+85k19SNAH3iUfE3zwAKfF0VZMb1mFLSsg7cSFPf4mWFi3U7vbg/EG6dh7i6moA7e4IYIEV8vUKuaf5VhdvfrxG+IYq0/N1UWn1ado5zUofch5jo9kJ6nf6dQTW8SXYlvcFZMtGwAjbg9jGCIYofPX/PQLRms6y27Ja1wFR
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB8PR02MB5740.eurprd02.prod.outlook.com;PTR:;CAT:NONE;SFS:(376002)(346002)(396003)(39850400004)(136003)(366004)(66946007)(110136005)(54906003)(16576012)(2906002)(316002)(66556008)(66476007)(53546011)(36756003)(6486002)(107886003)(4326008)(478600001)(36916002)(86362001)(2616005)(956004)(8936002)(16526019)(186003)(31696002)(26005)(5660300002)(31686004)(8676002)(83380400001)(52116002)(43740500002);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData:
+	=?utf-8?B?Q1EvTTJIU3NBQ2VYMnpmZCtCVTZhbG50OC9Xd0lpNm9KM3dsSk4vMmtlVm9V?=
+ =?utf-8?B?WWpIMExxbnViT3BMREY0dU1pWm9PRGRrYUtESTFXdjlHbk52NFZTYmNKUmNE?=
+ =?utf-8?B?L1ZyK3VSU3VTNVJ2T1FFVHVzazc3TnA5c1IzOGVaVDdEMTBaaXQzNENHcCtZ?=
+ =?utf-8?B?N0drTVJnY3FiNmpJeXViQ2crYUNoZGZMK2RIVlAwUlNpd0x2amUyd3dIaTVJ?=
+ =?utf-8?B?TExVdFBNb2pGblhoNFFpMDhGYTVnY0E1MG1FZVdib1kxd290dHBQaXdwSHFx?=
+ =?utf-8?B?eHYzL2dNTEQvaURrQjdHK0RKSzM2dHFodU1iYXN4dWhxUElhU0E0K053ejFq?=
+ =?utf-8?B?TDIrSnJWbkl0NjZGaFh3aFRjbVkrYjdkc29NQ1dtbUJIb1ZhK0xpdmxveGlq?=
+ =?utf-8?B?eSt4OTI1UHUrWTNDY1dnZ1IxTWZ2MVlQUkJ6eXpZV1VMUEFXWEhtYytwd3Nt?=
+ =?utf-8?B?VzhZUmhVS1pab0FuM09jdlh6bVNFSFcxQ2dxWE13VFoyb0RES0tiNjk4NU5Z?=
+ =?utf-8?B?TlpaWUZhOE9PRDVROXcyRnRDeFp1QzN5R2R3MHRYUEE2S3BhalEzQlROU3dS?=
+ =?utf-8?B?dzMwclFFREROUmc3R3BWZzNzalNLTWdzdmhuZndqeHhVZnl0ZGhGNXN5eU9W?=
+ =?utf-8?B?TG5BY01yUG5Td3g0anBDdTNBRWsxd1MzYnNHdkgvVE8xcjBqMlhsV1FJNHhq?=
+ =?utf-8?B?VjBvdGVDaUI3b2Y1RXRlUGxXdGFOUkFGZHlEc0xmd1pQTkk4LzcweU0yajA3?=
+ =?utf-8?B?NnVNUk1rSURXSlJLVnBNbHFMNnpaVlQ0TmQ1YUpxZGxFTWVNalk2T1I0TDdl?=
+ =?utf-8?B?S05jc1NqYlNuWlZFYnlOay9SRTRIT2FHdjdhMkVMdnRVZVNxYzRnYTBEMWQy?=
+ =?utf-8?B?bXdQVGU5SkRyQm1lSWJzR1ZUWUg1L1VGMEpybFB3NXIvdW5LQzNKRlg4SGkr?=
+ =?utf-8?B?MmhtMmdTZStQZk5vR0llK2JldjRxL3FveWxtc1VDT2FiWlhRd1NRMDNLYUhy?=
+ =?utf-8?B?MHliamdEUG9WQzhNSGpsMkxMWEJ4WW92blkxcVpnSFd4c3NTYkZEdUlhR1ds?=
+ =?utf-8?B?RSsrS2RRQjErUGdqOUlOUGdodi9rdnlsYkhsR1UzN0Z2Kyt5dE5FbEJ6ejdm?=
+ =?utf-8?B?ZmpoSDBDMzZOS2VyOG44c1NNaUJ2cVZzUDRGZWlPRTR5S3B5d1lTeXRGMUQz?=
+ =?utf-8?B?V2o2WVVYTkpNQXBORDMwRTFVcUFBV2NYZ3hhQ29BN0Zyb0t6WjJ0TTZKOEtZ?=
+ =?utf-8?B?V1RRMTdISlhIWlozS3EwVi9odmRqNjZoRVVmaFhrOWZxL0FGZVFNYloxb055?=
+ =?utf-8?Q?SmhesIxotQ1ZftNdamuF/RtZKZGfnTjHRG?=
+X-OriginatorOrg: bitdefender.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b821afee-ae32-4d77-4df3-08d8951c3506
+X-MS-Exchange-CrossTenant-AuthSource: DB8PR02MB5740.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Nov 2020 10:39:25.7191
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 487baf29-f1da-469a-9221-243f830c36f3
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: L5uQRl4ORvI7KpWgo4THAMxThwgXZvgy7FGaZ+trHQumujMh5bHV/M/TSubSqUeB2HCdFxU4NW7STaO2gk6vL5z0teYobiprKVUJ5cGKdeI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB3PR0202MB3484
 
-On 30/11/2020 10:20, Bertrand Marquis wrote:
-> Hi Andrew,
->
->> On 27 Nov 2020, at 20:07, Andrew Cooper <andrew.cooper3@citrix.com> wrote:
->>
->> On 26/11/2020 15:51, Bertrand Marquis wrote:
->>> The goal of this serie is to emulate coprocessor ID registers so that
->>> Xen only publish to guest features that are supported by Xen and can
->>> actually be used by guests.
->>> One practical example where this is required are SVE support which is
->>> forbidden by Xen as it is not supported, but if Linux is compiled with
->>> it, it will crash on boot. An other one is AMU which is also forbidden
->>> by Xen but one Linux compiled with it would crash if the platform
->>> supports it.
->>>
->>> To be able to emulate the coprocessor registers defining what features
->>> are supported by the hardware, the TID3 bit of HCR must be disabled and
->>> Xen must emulated the values of those registers when an exception is
->>> catched when a guest is accessing it.
->>>
->>> This serie is first creating a guest cpuinfo structure which will
->>> contain the values that we want to publish to the guests and then
->>> provides the proper emulationg for those registers when Xen is getting
->>> an exception due to an access to any of those registers.
->>>
->>> This is a first simple implementation to solve the problem and the way
->>> to define the values that we provide to guests and which features are
->>> disabled will be in a future patchset enhance so that we could decide
->>> per guest what can be used or not and depending on this deduce the bits
->>> to activate in HCR and the values that we must publish on ID registers.
->>>
->>> Bertrand Marquis (7):
->>>  xen/arm: Add ID registers and complete cpufinfo
->>>  xen/arm: Add arm64 ID registers definitions
->>>  xen/arm: create a cpuinfo structure for guest
->>>  xen/arm: Add handler for ID registers on arm64
->>>  xen/arm: Add handler for cp15 ID registers
->>>  xen/arm: Add CP10 exception support to handle VMFR
->>>  xen/arm: Activate TID3 in HCR_EL2
->> CI found an ARM randconfig failure against this series.
->>
->> https://gitlab.com/xen-project/patchew/xen/-/pipelines/221798884
->>
->> I have admit that I can't spot an obvious connection so it might be
->> collateral damage from elsewhere, but does need looking at irrespective.
-> This absolutely right, there is a bug in my code and i will send a V2 to fix it.
->
-> Very nice finding, i am wondering why my tests did not point this out.
+On 23.11.2020 15:30, Jan Beulich wrote:
+> While there don't look to be any problems with this right now, the lock
+> order implications from holding the lock can be very difficult to follow
+> (and may be easy to violate unknowingly). The present callbacks don't
+> (and no such callback should) have any need for the lock to be held.
+> 
+> However, vm_event_disable() frees the structures used by respective
+> callbacks and isn't otherwise synchronized with invocations of these
+> callbacks, so maintain a count of in-progress calls, for evtchn_close()
+> to wait to drop to zero before freeing the port (and dropping the lock).
+> 
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-Its randconfig, so every time the test runs, it picks a new random
-Kconfig configuration.
+Reviewed-by: Alexandru Isaila <aisaila@bitdefender.com>
 
-Sadly, it is non-deterministic, and not necessarily the fault of change
-the test ran against.  We're probably going to have to tweak how we run
-these tests before the CI goes too much further.
-
-~Andrew
+> ---
+> Should we make this accounting optional, to be requested through a new
+> parameter to alloc_unbound_xen_event_channel(), or derived from other
+> than the default callback being requested?
+> ---
+> v3: Drain callbacks before proceeding with closing. Re-base.
+> 
+> --- a/xen/common/event_channel.c
+> +++ b/xen/common/event_channel.c
+> @@ -397,6 +397,7 @@ static long evtchn_bind_interdomain(evtc
+>       
+>       rchn->u.interdomain.remote_dom  = ld;
+>       rchn->u.interdomain.remote_port = lport;
+> +    atomic_set(&rchn->u.interdomain.active_calls, 0);
+>       rchn->state                     = ECS_INTERDOMAIN;
+>   
+>       /*
+> @@ -720,6 +721,10 @@ int evtchn_close(struct domain *d1, int
+>   
+>           double_evtchn_lock(chn1, chn2);
+>   
+> +        if ( consumer_is_xen(chn1) )
+> +            while ( atomic_read(&chn1->u.interdomain.active_calls) )
+> +                cpu_relax();
+> +
+>           evtchn_free(d1, chn1);
+>   
+>           chn2->state = ECS_UNBOUND;
+> @@ -781,9 +786,15 @@ int evtchn_send(struct domain *ld, unsig
+>           rport = lchn->u.interdomain.remote_port;
+>           rchn  = evtchn_from_port(rd, rport);
+>           if ( consumer_is_xen(rchn) )
+> +        {
+> +            /* Don't keep holding the lock for the call below. */
+> +            atomic_inc(&rchn->u.interdomain.active_calls);
+> +            evtchn_read_unlock(lchn);
+>               xen_notification_fn(rchn)(rd->vcpu[rchn->notify_vcpu_id], rport);
+> -        else
+> -            evtchn_port_set_pending(rd, rchn->notify_vcpu_id, rchn);
+> +            atomic_dec(&rchn->u.interdomain.active_calls);
+> +            return 0;
+> +        }
+> +        evtchn_port_set_pending(rd, rchn->notify_vcpu_id, rchn);
+>           break;
+>       case ECS_IPI:
+>           evtchn_port_set_pending(ld, lchn->notify_vcpu_id, lchn);
+> --- a/xen/include/xen/sched.h
+> +++ b/xen/include/xen/sched.h
+> @@ -104,6 +104,7 @@ struct evtchn
+>           } unbound;     /* state == ECS_UNBOUND */
+>           struct {
+>               evtchn_port_t  remote_port;
+> +            atomic_t       active_calls;
+>               struct domain *remote_dom;
+>           } interdomain; /* state == ECS_INTERDOMAIN */
+>           struct {
+> 
+> 
 
