@@ -2,47 +2,50 @@ Return-Path: <SRS0=tG8y=FE=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 709EEC64E7B
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Nov 2020 12:51:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 45694C64E8A
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Nov 2020 10:32:18 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id F1C7F20691
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Nov 2020 12:51:17 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id AF240208DB
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Nov 2020 10:32:17 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="Q26+iVJT"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F1C7F20691
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="FEPh0iyM"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AF240208DB
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.41122.74231 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.40802.73741 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kjidm-0001Wr-73; Mon, 30 Nov 2020 12:50:50 +0000
+	id 1kjgTS-0000V6-7s; Mon, 30 Nov 2020 10:32:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 41122.74231; Mon, 30 Nov 2020 12:50:50 +0000
+Received: by outflank-mailman (output) from mailman id 40802.73741; Mon, 30 Nov 2020 10:32:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kjidm-0001Wk-3o; Mon, 30 Nov 2020 12:50:50 +0000
-Received: by outflank-mailman (input) for mailman id 41122;
- Mon, 30 Nov 2020 12:50:49 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=lj5U=FE=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kjidl-0001Wf-4S
- for xen-devel@lists.xenproject.org; Mon, 30 Nov 2020 12:50:49 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 52ac2cf8-4fae-4004-bdf7-88a38b749d1b;
- Mon, 30 Nov 2020 12:50:47 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 6E508AC75;
- Mon, 30 Nov 2020 12:50:46 +0000 (UTC)
+	id 1kjgTS-0000Uz-4o; Mon, 30 Nov 2020 10:32:02 +0000
+Received: by outflank-mailman (input) for mailman id 40802;
+ Mon, 30 Nov 2020 10:32:00 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=avKr=FE=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
+ id 1kjgTQ-0000Uu-Do
+ for xen-devel@lists.xenproject.org; Mon, 30 Nov 2020 10:32:00 +0000
+Received: from mail-lf1-x132.google.com (unknown [2a00:1450:4864:20::132])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 8eb8bb7c-7248-47fe-aa3c-5ad1b0218f7e;
+ Mon, 30 Nov 2020 10:31:58 +0000 (UTC)
+Received: by mail-lf1-x132.google.com with SMTP id a9so20591042lfh.2
+ for <xen-devel@lists.xenproject.org>; Mon, 30 Nov 2020 02:31:58 -0800 (PST)
+Received: from otyshchenko.www.tendawifi.com ([212.22.223.21])
+ by smtp.gmail.com with ESMTPSA id 136sm2399393lfb.62.2020.11.30.02.31.55
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Mon, 30 Nov 2020 02:31:56 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,196 +57,255 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 52ac2cf8-4fae-4004-bdf7-88a38b749d1b
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1606740646; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=KiVciFoQ8MAzUOLsUizOihN5Ldueegxfk4UdjO8hms0=;
-	b=Q26+iVJTvAzlXRcy5VMaqN+bmsyZg+3+cxBiKs/t69n+4Y2Sym9WNIqApP99BM4gazllca
-	EWsnzjZ1VfWQhLKlxLTGBLXbTRP9z0r+kiUu4ZDi4d41VE16gdhcr3Uqw0rD8eR3LVmv6S
-	z6wdIX6Eb5b6rI+8e6iGwcTxEf/L3h0=
-Subject: Re: [PATCH v8 03/15] x86/mm: rewrite virt_to_xen_l*e
-To: Hongyan Xia <hx242@xen.org>, Julien Grall <julien@xen.org>
-Cc: xen-devel@lists.xenproject.org, jgrall@amazon.com,
- Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>
-References: <cover.1595857947.git.hongyxia@amazon.com>
- <e7963f6d8cab8e4d5d4249b12a8175405d888bba.1595857947.git.hongyxia@amazon.com>
- <41d9d8d4-d5cb-8350-c118-c9e1fe73b6d0@suse.com>
- <a4f02c292a369cfd771790b1d164f139fec6bead.camel@xen.org>
- <f25e278f-2d63-d806-4650-983df490556f@xen.org>
- <d75fd45c-3f66-63c9-90c7-90dc10fc5763@suse.com>
- <8bb9eb92-ede4-0fa4-d21f-c7976fe70acf@xen.org>
- <622a8319-a439-72f2-c045-15e7611a22e7@suse.com>
- <3db3081d-232a-cce1-cfce-c657be64a0dd@xen.org>
- <600d3ea4-f905-3aab-e110-da3bd0d4b38a@suse.com>
- <23cd67ea1b96ba3f8801a3cf13549298597cb331.camel@xen.org>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <1dab4032-6ae1-bf77-c183-c62ca06f0ad8@suse.com>
-Date: Mon, 30 Nov 2020 13:50:45 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.5.0
+X-Inumbo-ID: 8eb8bb7c-7248-47fe-aa3c-5ad1b0218f7e
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id;
+        bh=EsdzKrQa0ehB+EwQob7OH3FDoo9cYhWibeUDikgbgko=;
+        b=FEPh0iyMo1kjvjPBbU7xdrCHrvpvbO55NOVrDHlcGphNIIczLJuF2cDKwZyC1wSEmk
+         SzqSm96S5zD5CGoglTUTE7m+efpnVunuI82PgJa6PJqFnLQx0KsT+g4tq+CbxV2xxXyL
+         Va1Gqv6QLPbPhynOsWakyFjhmgnWCKsNFoDiYYJbtrwb6mexbS3xBv2Mt4nThDvpkWj9
+         omoC6Id91PlhlW/5G+4hb2Nngxi85OR8EP78WuLJXvKxealjknql4GTnWZY/Kcgc45fm
+         MHFXMtRXayGNl49GaWLIUNyrJRC2RmBDJhTL3XMRGE+iepnX25mOFeT6gfIRQ6uzgT0D
+         mM7A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=EsdzKrQa0ehB+EwQob7OH3FDoo9cYhWibeUDikgbgko=;
+        b=J1615h7ApfZTH/pxy7z8qdn3KPaNjaSzQn3kbBHD04i0+ep3xYM3NurmjwHqCEp5+M
+         VwT7h5vF/RtKkq1/4zeZsf9jItOEeQTL2ZjByRkX5AJnLAewU5AdOPg0gkzVprcpnFVJ
+         RiXwGRQT6p3K53A3RvUt0eYoQa+4crYHAZMC6beQBhDRTs5FWJl7GteLbRL0pQy6KW65
+         /P+eUiOiv8wKY2l9rnRNaM9Z2Tf2E7JzxxNnzhs8KzMhYEd6Ezzi8SjZIe6jIX2iZLAE
+         l9KJ2fKQIHQODlKr8R6At1H+E864zFebEeaEZNBLMa7nTYmNtFxksIif7Tz8W3LUPKXr
+         84Xg==
+X-Gm-Message-State: AOAM531e9i09UQKZFLxDDSeLTiDSuVD9/AV0hnLGbd73+x0L9ZcF3JWh
+	/fajwbIbNRaaPOZrHcowB37+f6qZ7AckDw==
+X-Google-Smtp-Source: ABdhPJzFhvHxnTSaxIRlYPUxVmZEOzDUffJiWLRFAOcYzEcptXl/e7gt5zTt28SDpmuMo7Z8XJPtwQ==
+X-Received: by 2002:a19:e059:: with SMTP id g25mr9327867lfj.584.1606732317136;
+        Mon, 30 Nov 2020 02:31:57 -0800 (PST)
+From: Oleksandr Tyshchenko <olekstysh@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+	Paul Durrant <paul@xen.org>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>,
+	Julien Grall <julien.grall@arm.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Ian Jackson <iwj@xenproject.org>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Tim Deegan <tim@xen.org>,
+	Daniel De Graaf <dgdegra@tycho.nsa.gov>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Jun Nakajima <jun.nakajima@intel.com>,
+	Kevin Tian <kevin.tian@intel.com>,
+	Anthony PERARD <anthony.perard@citrix.com>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Wei Chen <Wei.Chen@arm.com>,
+	Kaly Xin <Kaly.Xin@arm.com>,
+	Artem Mygaiev <joculator@gmail.com>,
+	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+Subject: 
+Date: Mon, 30 Nov 2020 12:31:15 +0200
+Message-Id: <1606732298-22107-1-git-send-email-olekstysh@gmail.com>
+X-Mailer: git-send-email 2.7.4
+
+From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+
+
+Date: Sat, 28 Nov 2020 22:33:51 +0200
+Subject: [PATCH V3 00/23] IOREQ feature (+ virtio-mmio) on Arm
 MIME-Version: 1.0
-In-Reply-To: <23cd67ea1b96ba3f8801a3cf13549298597cb331.camel@xen.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 30.11.2020 13:13, Hongyan Xia wrote:
-> On Tue, 2020-08-18 at 18:16 +0200, Jan Beulich wrote:
->> On 18.08.2020 15:08, Julien Grall wrote:
->>> On 18/08/2020 12:30, Jan Beulich wrote:
->>>> On 18.08.2020 12:13, Julien Grall wrote:
->>>>> On 18/08/2020 09:49, Jan Beulich wrote:
->>>>>> On 13.08.2020 19:22, Julien Grall wrote:
->>>>>>> On 13/08/2020 17:08, Hongyan Xia wrote:
->>>>>>>> On Fri, 2020-08-07 at 16:05 +0200, Jan Beulich wrote:
->>>>>>>>> On 27.07.2020 16:21, Hongyan Xia wrote:
->>>>>>>>>> From: Wei Liu <wei.liu2@citrix.com>
->>>>>>>>>>
->>>>>>>>>> Rewrite those functions to use the new APIs. Modify
->>>>>>>>>> its callers to
->>>>>>>>>> unmap
->>>>>>>>>> the pointer returned. Since alloc_xen_pagetable_new()
->>>>>>>>>> is almost
->>>>>>>>>> never
->>>>>>>>>> useful unless accompanied by page clearing and a
->>>>>>>>>> mapping, introduce
->>>>>>>>>> a
->>>>>>>>>> helper alloc_map_clear_xen_pt() for this sequence.
->>>>>>>>>>
->>>>>>>>>> Note that the change of virt_to_xen_l1e() also
->>>>>>>>>> requires
->>>>>>>>>> vmap_to_mfn() to
->>>>>>>>>> unmap the page, which requires domain_page.h header
->>>>>>>>>> in vmap.
->>>>>>>>>>
->>>>>>>>>> Signed-off-by: Wei Liu <wei.liu2@citrix.com>
->>>>>>>>>> Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
->>>>>>>>>> Reviewed-by: Jan Beulich <jbeulich@suse.com>
->>>>>>>>>>
->>>>>>>>>> ---
->>>>>>>>>> Changed in v8:
->>>>>>>>>> - s/virtual address/linear address/.
->>>>>>>>>> - BUG_ON() on NULL return in vmap_to_mfn().
->>>>>>>>>
->>>>>>>>> The justification for this should be recorded in the
->>>>>>>>> description. In
->>>>>>>>
->>>>>>>> Will do.
->>>>>>>>
->>>>>>>>> reply to v7 I did even suggest how to easily address
->>>>>>>>> the issue you
->>>>>>>>> did notice with large pages, as well as alternative
->>>>>>>>> behavior for
->>>>>>>>> vmap_to_mfn().
->>>>>>>>
->>>>>>>> One thing about adding SMALL_PAGES is that vmap is common
->>>>>>>> code and I am
->>>>>>>> not sure if the Arm side is happy with it.
->>>>>>>
->>>>>>> At the moment, Arm is only using small mapping but I plan
->>>>>>> to change that soon because we have regions that can be
->>>>>>> fairly big.
->>>>>>>
->>>>>>> Regardless that, the issue with vmap_to_mfn() is rather x86
->>>>>>> specific. So I don't particularly like the idea to expose
->>>>>>> such trick in common code.
->>>>>>>
->>>>>>> Even on x86, I think this is not the right approach. Such
->>>>>>> band-aid will impact the performance as, assuming
->>>>>>> superpages are used, it will take longer to map and add
->>>>>>> pressure on the TLBs.
->>>>>>>
->>>>>>> I am aware that superpages will be useful for LiveUpdate,
->>>>>>> but is there any use cases in upstream?
->>>>>>
->>>>>> Superpage use by vmalloc() is purely occasional: You'd have
->>>>>> to vmalloc()
->>>>>> 2Mb or more _and_ the page-wise allocation ought to return
->>>>>> 512
->>>>>> consecutive pages in the right order. Getting 512 consecutive
->>>>>> pages is
->>>>>> possible in practice, but with the page allocator allocating
->>>>>> top-down it
->>>>>> is very unlikely for them to be returned in increasing-sorted 
->>>>>> order.
->>>>>
->>>>> So your assumption here is vmap_to_mfn() can only be called on
->>>>> vmalloc-ed() area. While this may be the case in Xen today, the
->>>>> name clearly suggest it can be called on all vmap-ed region.
->>>>
->>>> No, I don't make this assumption, and I did spell this out in an
->>>> earlier
->>>> reply to Hongyan: Parties using vmap() on a sufficiently large
->>>> address
->>>> range with consecutive MFNs simply have to be aware that they may
->>>> not
->>>> call vmap_to_mfn().
->>>
->>> You make it sounds easy to be aware, however there are two
->>> implementations of vmap_to_mfn() (one per arch). Even looking at
->>> the x86 version, it is not obvious there is a restriction.
->>
->> I didn't mean to make it sound like this - I agree it's not an
->> obvious
->> restriction.
->>
->>> So I am a bit concerned of the "misuse" of the function. This could
->>> possibly be documented. Although, I am not entirely happy to
->>> restrict the use because of x86.
->>
->> Unless the underlying issue gets fixed, we need _some_ form of bodge.
->> I'm not really happy with the BUG_ON() as proposed by Hongyan. You're
->> not really happy with my first proposed alternative, and you didn't
->> comment on the 2nd one (still kept in context below). Not sure what
->> to do: Throw dice?
-> 
-> Actually I did not propose the BUG_ON() fix. I was just in favor of it
-> when Jan presented it as a choice in v7.
-> 
-> The reason I am in favor of it is that even without it, the existing
-> x86 code already BUG_ON() when vmap has a superpage anyway, so it's not
-> like other alternatives behave any differently for superpages. I am
-> also not sure about returning INVALID_MFN because if virt_to_xen_l1e()
-> really returns NULL, then we are calling vmap_to_mfn() on a non-vmap
-> address (not even populated) which frankly deserves at least ASSERT().
-> So, I don't think BUG_ON() is a bad idea for now before vmap_to_mfn()
-> supports superpages.
-> 
-> Of course, we could use MAP_SMALL_PAGES to avoid the whole problem, but
-> Arm may not be happy. After a quick chat with Julien, how about having
-> ARCH_VMAP_FLAGS and only small pages for x86?
+Hello all.
 
-Possibly, albeit this will then make it look less like a bodge and
-more like we would want to keep it this way. How difficult would it
-be to actually make the thing work with superpages? Is it more than
-simply
-(pseudocode, potentially needed locking omitted):
+The purpose of this patch series is to add IOREQ/DM support to Xen on Arm.
+You can find an initial discussion at [1] and RFC/V1/V2 series at [2]/[3]/[4].
+Xen on Arm requires some implementation to forward guest MMIO access to a device
+model in order to implement virtio-mmio backend or even mediator outside of hypervisor.
+As Xen on x86 already contains required support this series tries to make it common
+and introduce Arm specific bits plus some new functionality. Patch series is based on
+Julien's PoC "xen/arm: Add support for Guest IO forwarding to a device emulator".
+Besides splitting existing IOREQ/DM support and introducing Arm side, the series
+also includes virtio-mmio related changes (last 2 patches for toolstack)
+for the reviewers to be able to see how the whole picture could look like.
 
-vmap_to_mfn(va) {
-    pl1e = virt_to_xen_l1e(va);
-    if ( pl1e )
-        return l1e_get_mfn(*pl1e);
-    pl2e = virt_to_xen_l2e(va);
-    if ( pl2e )
-        return l2e_get_mfn(*pl2e) + suitable_bits(va);
-    return l3e_get_mfn(*virt_to_xen_l3e(va)) + suitable_bits(va);
-}
+According to the initial discussion there are a few open questions/concerns
+regarding security, performance in VirtIO solution:
+1. virtio-mmio vs virtio-pci, SPI vs MSI, different use-cases require different
+   transport...
+2. virtio backend is able to access all guest memory, some kind of protection
+   is needed: 'virtio-iommu in Xen' vs 'pre-shared-memory & memcpys in guest'
+3. interface between toolstack and 'out-of-qemu' virtio backend, avoid using
+   Xenstore in virtio backend if possible.
+4. a lot of 'foreing mapping' could lead to the memory exhaustion, Julien
+   has some idea regarding that.
 
-(assuming virt_to_xen_l<N>e() would be returning NULL in such a case)?
-Not very efficient, but not needed anywhere anyway - the sole user of
-the construct is domain_page_map_to_mfn(), which maps only individual
-pages. (An even better option would be to avoid the recurring walk of
-the higher levels by using only virt_to_xen_l3e() and then doing the
-remaining steps "by hand". This would at once allow to avoid the here
-unwanted / unneeded checking for whether page tables need allocating.)
+Looks like all of them are valid and worth considering, but the first thing
+which we need on Arm is a mechanism to forward guest IO to a device emulator,
+so let's focus on it in the first place.
 
-Jan
+***
+
+There are a lot of changes since RFC series, almost all TODOs were resolved on Arm,
+Arm code was improved and hardened, common IOREQ/DM code became really arch-agnostic
+(without HVM-ism), the "legacy" mechanism of mapping magic pages for the IOREQ servers
+was left x86 specific, etc. But one TODO still remains which is "PIO handling" on Arm.
+The "PIO handling" TODO is expected to left unaddressed for the current series.
+It is not an big issue for now while Xen doesn't have support for vPCI on Arm.
+On Arm64 they are only used for PCI IO Bar and we would probably want to expose
+them to emulator as PIO access to make a DM completely arch-agnostic. So "PIO handling"
+should be implemented when we add support for vPCI.
+
+I left interface untouched in the following patch
+"xen/dm: Introduce xendevicemodel_set_irq_level DM op"
+since there is still an open discussion what interface to use/what
+information to pass to the hypervisor.
+
+There is a patch on review this series depends on:
+https://patchwork.kernel.org/patch/11816689
+
+Please note, that IOREQ feature is disabled by default on Arm within current series.
+
+***
+
+Patch series [5] was rebased on recent "staging branch"
+(181f2c2 evtchn: double per-channel locking can't hit identical channels) and tested on
+Renesas Salvator-X board + H3 ES3.0 SoC (Arm64) with virtio-mmio disk backend [6]
+running in driver domain and unmodified Linux Guest running on existing
+virtio-blk driver (frontend). No issues were observed. Guest domain 'reboot/destroy'
+use-cases work properly. Patch series was only build-tested on x86.
+
+Please note, build-test passed for the following modes:
+1. x86: CONFIG_HVM=y / CONFIG_IOREQ_SERVER=y (default)
+2. x86: #CONFIG_HVM is not set / #CONFIG_IOREQ_SERVER is not set
+3. Arm64: CONFIG_HVM=y / CONFIG_IOREQ_SERVER=y
+4. Arm64: CONFIG_HVM=y / #CONFIG_IOREQ_SERVER is not set  (default)
+5. Arm32: CONFIG_HVM=y / CONFIG_IOREQ_SERVER=y
+6. Arm32: CONFIG_HVM=y / #CONFIG_IOREQ_SERVER is not set  (default)
+
+***
+
+Any feedback/help would be highly appreciated.
+
+[1] https://lists.xenproject.org/archives/html/xen-devel/2020-07/msg00825.html
+[2] https://lists.xenproject.org/archives/html/xen-devel/2020-08/msg00071.html
+[3] https://lists.xenproject.org/archives/html/xen-devel/2020-09/msg00732.html
+[4] https://lists.xenproject.org/archives/html/xen-devel/2020-10/msg01077.html
+[5] https://github.com/otyshchenko1/xen/commits/ioreq_4.14_ml4
+[6] https://github.com/xen-troops/virtio-disk/commits/ioreq_ml1
+
+Julien Grall (5):
+  xen/dm: Make x86's DM feature common
+  xen/mm: Make x86's XENMEM_resource_ioreq_server handling common
+  arm/ioreq: Introduce arch specific bits for IOREQ/DM features
+  xen/dm: Introduce xendevicemodel_set_irq_level DM op
+  libxl: Introduce basic virtio-mmio support on Arm
+
+Oleksandr Tyshchenko (18):
+  x86/ioreq: Prepare IOREQ feature for making it common
+  x86/ioreq: Add IOREQ_STATUS_* #define-s and update code for moving
+  x86/ioreq: Provide out-of-line wrapper for the handle_mmio()
+  xen/ioreq: Make x86's IOREQ feature common
+  xen/ioreq: Make x86's hvm_ioreq_needs_completion() common
+  xen/ioreq: Make x86's hvm_mmio_first(last)_byte() common
+  xen/ioreq: Make x86's hvm_ioreq_(page/vcpu/server) structs common
+  xen/ioreq: Move x86's ioreq_server to struct domain
+  xen/ioreq: Move x86's io_completion/io_req fields to struct vcpu
+  xen/ioreq: Remove "hvm" prefixes from involved function names
+  xen/ioreq: Use guest_cmpxchg64() instead of cmpxchg()
+  xen/arm: Stick around in leave_hypervisor_to_guest until I/O has
+    completed
+  xen/mm: Handle properly reference in set_foreign_p2m_entry() on Arm
+  xen/ioreq: Introduce domain_has_ioreq_server()
+  xen/arm: io: Abstract sign-extension
+  xen/ioreq: Make x86's send_invalidate_req() common
+  xen/arm: Add mapcache invalidation handling
+  [RFC] libxl: Add support for virtio-disk configuration
+
+ MAINTAINERS                                  |    8 +-
+ tools/include/xendevicemodel.h               |    4 +
+ tools/libs/devicemodel/core.c                |   18 +
+ tools/libs/devicemodel/libxendevicemodel.map |    1 +
+ tools/libs/light/Makefile                    |    1 +
+ tools/libs/light/libxl_arm.c                 |   94 +-
+ tools/libs/light/libxl_create.c              |    1 +
+ tools/libs/light/libxl_internal.h            |    1 +
+ tools/libs/light/libxl_types.idl             |   16 +
+ tools/libs/light/libxl_types_internal.idl    |    1 +
+ tools/libs/light/libxl_virtio_disk.c         |  109 +++
+ tools/xl/Makefile                            |    2 +-
+ tools/xl/xl.h                                |    3 +
+ tools/xl/xl_cmdtable.c                       |   15 +
+ tools/xl/xl_parse.c                          |  116 +++
+ tools/xl/xl_virtio_disk.c                    |   46 +
+ xen/arch/arm/Makefile                        |    2 +
+ xen/arch/arm/dm.c                            |   89 ++
+ xen/arch/arm/domain.c                        |    9 +
+ xen/arch/arm/hvm.c                           |    4 +
+ xen/arch/arm/io.c                            |   29 +-
+ xen/arch/arm/ioreq.c                         |  126 +++
+ xen/arch/arm/p2m.c                           |   48 +-
+ xen/arch/arm/traps.c                         |   58 +-
+ xen/arch/x86/Kconfig                         |    1 +
+ xen/arch/x86/hvm/dm.c                        |  295 +-----
+ xen/arch/x86/hvm/emulate.c                   |   80 +-
+ xen/arch/x86/hvm/hvm.c                       |   12 +-
+ xen/arch/x86/hvm/hypercall.c                 |    9 +-
+ xen/arch/x86/hvm/intercept.c                 |    5 +-
+ xen/arch/x86/hvm/io.c                        |   26 +-
+ xen/arch/x86/hvm/ioreq.c                     | 1357 ++------------------------
+ xen/arch/x86/hvm/stdvga.c                    |   10 +-
+ xen/arch/x86/hvm/svm/nestedsvm.c             |    2 +-
+ xen/arch/x86/hvm/vmx/realmode.c              |    6 +-
+ xen/arch/x86/hvm/vmx/vvmx.c                  |    2 +-
+ xen/arch/x86/mm.c                            |   46 +-
+ xen/arch/x86/mm/p2m.c                        |   13 +-
+ xen/arch/x86/mm/shadow/common.c              |    2 +-
+ xen/common/Kconfig                           |    3 +
+ xen/common/Makefile                          |    2 +
+ xen/common/dm.c                              |  292 ++++++
+ xen/common/ioreq.c                           | 1307 +++++++++++++++++++++++++
+ xen/common/memory.c                          |   73 +-
+ xen/include/asm-arm/domain.h                 |    3 +
+ xen/include/asm-arm/hvm/ioreq.h              |  139 +++
+ xen/include/asm-arm/mm.h                     |    8 -
+ xen/include/asm-arm/mmio.h                   |    1 +
+ xen/include/asm-arm/p2m.h                    |   19 +-
+ xen/include/asm-arm/traps.h                  |   24 +
+ xen/include/asm-x86/hvm/domain.h             |   43 -
+ xen/include/asm-x86/hvm/emulate.h            |    2 +-
+ xen/include/asm-x86/hvm/io.h                 |   17 -
+ xen/include/asm-x86/hvm/ioreq.h              |   58 +-
+ xen/include/asm-x86/hvm/vcpu.h               |   18 -
+ xen/include/asm-x86/mm.h                     |    4 -
+ xen/include/asm-x86/p2m.h                    |   24 +-
+ xen/include/public/arch-arm.h                |    5 +
+ xen/include/public/hvm/dm_op.h               |   16 +
+ xen/include/xen/dm.h                         |   44 +
+ xen/include/xen/ioreq.h                      |  146 +++
+ xen/include/xen/p2m-common.h                 |    4 +
+ xen/include/xen/sched.h                      |   32 +
+ xen/include/xsm/dummy.h                      |    4 +-
+ xen/include/xsm/xsm.h                        |    6 +-
+ xen/xsm/dummy.c                              |    2 +-
+ xen/xsm/flask/hooks.c                        |    5 +-
+ 67 files changed, 3084 insertions(+), 1884 deletions(-)
+ create mode 100644 tools/libs/light/libxl_virtio_disk.c
+ create mode 100644 tools/xl/xl_virtio_disk.c
+ create mode 100644 xen/arch/arm/dm.c
+ create mode 100644 xen/arch/arm/ioreq.c
+ create mode 100644 xen/common/dm.c
+ create mode 100644 xen/common/ioreq.c
+ create mode 100644 xen/include/asm-arm/hvm/ioreq.h
+ create mode 100644 xen/include/xen/dm.h
+ create mode 100644 xen/include/xen/ioreq.h
+
+-- 
+2.7.4
+
 
