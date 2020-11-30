@@ -2,48 +2,46 @@ Return-Path: <SRS0=tG8y=FE=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 26C1AC64E8A
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Nov 2020 11:36:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BB82FC64E8A
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Nov 2020 11:44:43 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id ADB89206C0
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Nov 2020 11:36:00 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org ADB89206C0
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=antioche.eu.org
+	by mail.kernel.org (Postfix) with ESMTPS id 327D7207BC
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Nov 2020 11:44:42 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="Bt5XWvb5"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 327D7207BC
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.41032.74113 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.41041.74126 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kjhT7-0001Ww-VS; Mon, 30 Nov 2020 11:35:45 +0000
+	id 1kjhbW-0002ZV-Rg; Mon, 30 Nov 2020 11:44:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 41032.74113; Mon, 30 Nov 2020 11:35:45 +0000
+Received: by outflank-mailman (output) from mailman id 41041.74126; Mon, 30 Nov 2020 11:44:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kjhT7-0001Wp-SK; Mon, 30 Nov 2020 11:35:45 +0000
-Received: by outflank-mailman (input) for mailman id 41032;
- Mon, 30 Nov 2020 11:35:44 +0000
+	id 1kjhbW-0002ZO-Of; Mon, 30 Nov 2020 11:44:26 +0000
+Received: by outflank-mailman (input) for mailman id 41041;
+ Mon, 30 Nov 2020 11:44:25 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=I3zd=FE=antioche.eu.org=bouyer@srs-us1.protection.inumbo.net>)
- id 1kjhT6-0001Wk-GE
- for xen-devel@lists.xenproject.org; Mon, 30 Nov 2020 11:35:44 +0000
-Received: from chassiron.antioche.eu.org (unknown [2001:41d0:fe9d:1101::1])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=lj5U=FE=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1kjhbV-0002ZJ-Cw
+ for xen-devel@lists.xenproject.org; Mon, 30 Nov 2020 11:44:25 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 5b64e9de-1139-42bf-8371-6e68610583df;
- Mon, 30 Nov 2020 11:35:41 +0000 (UTC)
-Received: from sandettie.soc.lip6.fr (82-64-3-41.subs.proxad.net [82.64.3.41])
- by chassiron.antioche.eu.org (8.15.2/8.15.2) with ESMTPS id
- 0AUBZXm3023070
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=OK);
- Mon, 30 Nov 2020 12:35:34 +0100 (MET)
-Received: by sandettie.soc.lip6.fr (Postfix, from userid 373)
- id 017D22E9CAC; Mon, 30 Nov 2020 12:35:27 +0100 (MET)
+ id 43b459a2-36ea-4eda-a6ed-6c622e60e343;
+ Mon, 30 Nov 2020 11:44:24 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id BC8FFAC91;
+ Mon, 30 Nov 2020 11:44:23 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,14 +53,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5b64e9de-1139-42bf-8371-6e68610583df
-Date: Mon, 30 Nov 2020 12:35:27 +0100
-From: Manuel Bouyer <bouyer@antioche.eu.org>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>,
-        xen-devel@lists.xenproject.org
+X-Inumbo-ID: 43b459a2-36ea-4eda-a6ed-6c622e60e343
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1606736663; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=UMdCMJiYPHVg4TmZjTwMFkZljeNUWYNdlnjTwhmYfxA=;
+	b=Bt5XWvb5KGHwEtIin/sSLFyj3A4G9CiO3SHy4aDNILDW+/JbrvLb2G4R0CU5Mrqmzo3RQR
+	0ZvkGF8HqhLhgmiXrgRflU59Hn3PcT/4MYe+yFDEKUlZlW3HJIInkexlEoJQKosbhL8vUX
+	Ltq+0lCkyf+Dr0AGMKyXJglPM2BMJ58=
 Subject: Re: NetBSD dom0 PVH: hardware interrupts stalls
-Message-ID: <20201130113527.GE1084@antioche.eu.org>
+To: Manuel Bouyer <bouyer@antioche.eu.org>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
+ xen-devel@lists.xenproject.org
 References: <20201127131324.GJ1717@antioche.eu.org>
  <714e9393-d7f4-ed47-d1ed-aff79f3552a0@suse.com>
  <20201127133121.GN1717@antioche.eu.org>
@@ -73,65 +78,45 @@ References: <20201127131324.GJ1717@antioche.eu.org>
  <20201128145311.3gmzq5lnkz6ajdtr@Air-de-Roger>
  <20201128171430.GB631@antioche.eu.org>
  <819e859e-0fd2-cdbf-6126-46c924364d12@suse.com>
+ <20201130113527.GE1084@antioche.eu.org>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <7e284ec6-a3a3-6c04-ce48-10a8290304d5@suse.com>
+Date: Mon, 30 Nov 2020 12:44:23 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.5.0
 MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="oyUTqETQ0mS9luUI"
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <819e859e-0fd2-cdbf-6126-46c924364d12@suse.com>
-X-Greylist: Sender succeeded STARTTLS authentication, not delayed by milter-greylist-4.4.3 (chassiron.antioche.eu.org [151.127.5.145]); Mon, 30 Nov 2020 12:35:34 +0100 (MET)
-
-
---oyUTqETQ0mS9luUI
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+In-Reply-To: <20201130113527.GE1084@antioche.eu.org>
+Content-Type: text/plain; charset=windows-1252
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 
-On Mon, Nov 30, 2020 at 11:00:23AM +0100, Jan Beulich wrote:
-> On 28.11.2020 18:14, Manuel Bouyer wrote:
-> > On Sat, Nov 28, 2020 at 03:53:11PM +0100, Roger Pau Monné wrote:
-> >>> the trace is at
-> >>> http://www-soc.lip6.fr/~bouyer/xen-log13.txt
-> >>
-> >> Thanks! I think I've found the issue and I'm attaching a possible fix
-> >> (fix.patch) to this email. In any case I've also attached a further
-> >> debug patch, in case the fix turns out to be wrong. Please test the
-> >> fix first, as the debug patch will end up triggering a panic when the
-> >> buffer is full.
-> > 
-> > Yes, fix.patch does make the system boot as expected !
+On 30.11.2020 12:35, Manuel Bouyer wrote:
+> On Mon, Nov 30, 2020 at 11:00:23AM +0100, Jan Beulich wrote:
+>> On 28.11.2020 18:14, Manuel Bouyer wrote:
+>>> On Sat, Nov 28, 2020 at 03:53:11PM +0100, Roger Pau Monné wrote:
+>>>>> the trace is at
+>>>>> http://www-soc.lip6.fr/~bouyer/xen-log13.txt
+>>>>
+>>>> Thanks! I think I've found the issue and I'm attaching a possible fix
+>>>> (fix.patch) to this email. In any case I've also attached a further
+>>>> debug patch, in case the fix turns out to be wrong. Please test the
+>>>> fix first, as the debug patch will end up triggering a panic when the
+>>>> buffer is full.
+>>>
+>>> Yes, fix.patch does make the system boot as expected !
+>>
+>> May I translate this to a Tested-by?
+>>
+>> Patch also
+>> Reviewed-by: Jan Beulich <jbeulich@suse.com>
+>>
+>> Thanks much to both of you for all the effort here!
 > 
-> May I translate this to a Tested-by?
-> 
-> Patch also
-> Reviewed-by: Jan Beulich <jbeulich@suse.com>
-> 
-> Thanks much to both of you for all the effort here!
+> Also, please don't forget the attached patch !
+> Without it, the hypervisor panics.
 
-Also, please don't forget the attached patch !
-Without it, the hypervisor panics.
+Well - this one still needs a proper description and S-o-b.
+The other one came in immediately consumable shape right away.
 
--- 
-Manuel Bouyer <bouyer@antioche.eu.org>
-     NetBSD: 26 ans d'experience feront toujours la difference
---
-
---oyUTqETQ0mS9luUI
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: attachment; filename=patch-pvh-panic
-
-diff --git a/xen/drivers/vpci/msix.c b/xen/drivers/vpci/msix.c
-index 64dd0a929c..3eb6102a61 100644
---- xen/drivers/vpci/msix.c.orig
-+++ xen/drivers/vpci/msix.c
-@@ -370,7 +370,7 @@ static int msix_write(struct vcpu *v, unsigned long addr, unsigned int len,
- 
-             entry->updated = false;
-         }
--        else
-+        else if ( msix->enabled )
-             vpci_msix_arch_mask_entry(entry, pdev, entry->masked);
- 
-         break;
-
---oyUTqETQ0mS9luUI--
+Jan
 
