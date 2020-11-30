@@ -8,44 +8,44 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 451B4C64E8A
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Nov 2020 10:42:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 82874C71155
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Nov 2020 10:42:34 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C43AD204EF
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Nov 2020 10:42:31 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 09914204EF
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Nov 2020 10:42:33 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="nkoAAdWq"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C43AD204EF
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="PyzX3v5Y"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 09914204EF
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.40897.73919 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.40898.73936 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kjgdS-000369-LK; Mon, 30 Nov 2020 10:42:22 +0000
+	id 1kjgdV-00039Q-1F; Mon, 30 Nov 2020 10:42:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 40897.73919; Mon, 30 Nov 2020 10:42:22 +0000
+Received: by outflank-mailman (output) from mailman id 40898.73936; Mon, 30 Nov 2020 10:42:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kjgdS-00035r-E2; Mon, 30 Nov 2020 10:42:22 +0000
-Received: by outflank-mailman (input) for mailman id 40897;
+	id 1kjgdU-00039H-Th; Mon, 30 Nov 2020 10:42:24 +0000
+Received: by outflank-mailman (input) for mailman id 40898;
  Mon, 30 Nov 2020 10:42:21 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=avKr=FE=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
- id 1kjgV2-0000Uu-EZ
- for xen-devel@lists.xenproject.org; Mon, 30 Nov 2020 10:33:40 +0000
-Received: from mail-lf1-x143.google.com (unknown [2a00:1450:4864:20::143])
+ id 1kjgUd-0000Uu-Du
+ for xen-devel@lists.xenproject.org; Mon, 30 Nov 2020 10:33:15 +0000
+Received: from mail-lj1-x241.google.com (unknown [2a00:1450:4864:20::241])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 34b8d9a9-44f7-4625-b302-f3659906a420;
- Mon, 30 Nov 2020 10:32:21 +0000 (UTC)
-Received: by mail-lf1-x143.google.com with SMTP id s30so20589388lfc.4
- for <xen-devel@lists.xenproject.org>; Mon, 30 Nov 2020 02:32:20 -0800 (PST)
+ id 96a2f0db-d730-4ce2-85d1-7141288e635d;
+ Mon, 30 Nov 2020 10:32:15 +0000 (UTC)
+Received: by mail-lj1-x241.google.com with SMTP id y16so17071337ljk.1
+ for <xen-devel@lists.xenproject.org>; Mon, 30 Nov 2020 02:32:15 -0800 (PST)
 Received: from otyshchenko.www.tendawifi.com ([212.22.223.21])
- by smtp.gmail.com with ESMTPSA id 136sm2399393lfb.62.2020.11.30.02.32.18
+ by smtp.gmail.com with ESMTPSA id 136sm2399393lfb.62.2020.11.30.02.32.13
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 30 Nov 2020 02:32:18 -0800 (PST)
+ Mon, 30 Nov 2020 02:32:13 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,63 +57,64 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 34b8d9a9-44f7-4625-b302-f3659906a420
+X-Inumbo-ID: 96a2f0db-d730-4ce2-85d1-7141288e635d
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=/NCbRJRG/y1peWdb5VV9fW9K7yzgcZXIhEHGv+DYhcI=;
-        b=nkoAAdWqP3QV7ERu4DO5sk6igvlfj4tBavrIeM93acV99mrK4SLzELno8x3hBXV1Sr
-         Suy9tD0w+m0eWVjgBvSTitriGBy7qnfofhNMRqnZZq50qFwh9LqhRUR8U88MCHSZNLEp
-         UWr/ZQq1pykUXpB6Xe3CXlCDieGVT2a1hsNV5lDKZ+U1oXD91Dk+rET7PoxnPDRGINiC
-         QNrTH8LnM2RmWMa1EQ/aX0n2FqWQc/LqolKbHjKckPg4djAI3U7XXgwxLaVL/oHYLO3e
-         TExfSmMogquumcB3JPW/kfwS76E2pNJ9DjGYXaE2IMQaNqSp4uLo3/oauHlwJ+WTtblK
-         wEFA==
+        bh=iqCz87HzldwgsC5VC8qOcBaMp2PRkja+L+B3SFRUh4I=;
+        b=PyzX3v5YY/kPVBJWz1Ll85oBRXYlOGLysDHW9CI041WcTXn6VP0t0HIrPjkGANNvj1
+         PnII00xjc+tLQksDJGkiOIeMQHut3W2ceR4ltOKYDuDyglU0htzdL6DOXMd0QFideswo
+         JiS1nuD+Wo1Y8hGft5xA+dQh0ILdZ/CX1uZ30hkIyG1HJ0W25w/SZiK+7PrP1uMCBQPV
+         X2f2+VJ8BJmUQZSfooyAXkjUF5oQ7VhwaQoVC+2F56IBASDsaK7oqoh+wCnY8CxxRtDS
+         P6jtMMT8g665RpAhToPMxKZLbaeBgyDuRGxic/5CS87iMKVlj7WRdWqF+m2YqHR5X03F
+         hF+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=/NCbRJRG/y1peWdb5VV9fW9K7yzgcZXIhEHGv+DYhcI=;
-        b=QhJzw9niQehij3h33hBwwXgXW/5Lr3ymRPyUeFsB6rBxoS79P3y/Dtt0yZ6aa48Dxz
-         T1HcpDh7d7fE3mpUF2kZGokEU1SgE6H3Qhqw/Dt2Flqp8a9BuGDU7vEK9HcwWwVcGYLq
-         sQjuY0yKN7jWa+GIvvXJAzVcVMJ6KA2hYqgsLlGIObDLlQm7SfHaHXcGgtMVVPhRQYC+
-         thuubdhTSFhn4qSrS1zwT2s6Wd9uGmpLHE79vhAh4Bb9EzY3hq1ChzyAkT6qtAg0RqHa
-         aeJIYG8xgNBo1AvvnkI75bbkn3asWb+jshES35L3LALzC5vLrQvwz89CyG1kjX7p8ygS
-         Bjeg==
-X-Gm-Message-State: AOAM530nLRXxVymzSUXuRSN/cDwUcdisbkatpA7n4HhjAo2IgpGqX1jW
-	WWQaa62Lgrqj/aGGdggRpLb+bOjWX/DrdA==
-X-Google-Smtp-Source: ABdhPJysgf1BIsSrpTJNnyHZsuIO26DFzpRK0mmqVYcYFuGaiKZTOWSYioDBKAmiE0iyDYk1oQcwag==
-X-Received: by 2002:a05:6512:3e6:: with SMTP id n6mr9015506lfq.413.1606732339424;
-        Mon, 30 Nov 2020 02:32:19 -0800 (PST)
+        bh=iqCz87HzldwgsC5VC8qOcBaMp2PRkja+L+B3SFRUh4I=;
+        b=m1fEarczBMsV+SRisVv5MxyZF27gftUVKneAwYGRbrDqr6VpNixrm93gjTOKlnXBkX
+         9ZFYFB6EjDTJuiuuzvnEAutxuqY7PNFGub3aHNJ/3vYBMuFXs1ajoOzvoy93marx1DL7
+         8yIj89esrj8xq38Mzi8XS0dRSrVtoFlxm9jd6PCz4wruKXzSXOLJvOfJwsIzBOh6rBG2
+         122MZck+H+zmyOs+5fP1GafT9oaw7tJsNq50zIzeDEp3MbzFUQXJT0N7okaF/lGO0Gdz
+         ZEbJ2pzI8SB4GOcnm+DZ35yWK5z3NV/wRiOhl9juMt28yTFuTA2OqHQKdrQlZKauFBy6
+         ttXw==
+X-Gm-Message-State: AOAM53132nRlxke+8A5SDQu+Gdd3K6DvI5qNsN7kLeJ/c8AIUGBd3AF+
+	SYKP1MFw2PljxYxHWt2sAEtk/uoou3IkNA==
+X-Google-Smtp-Source: ABdhPJw40lqiQy7GF6uLV41CLLq1UB/3gNsg5mbEHB+jHc++oxZAzF6T7J0nFBRk7Ia3Xc4GnJ12HQ==
+X-Received: by 2002:a2e:a377:: with SMTP id i23mr9900360ljn.185.1606732334020;
+        Mon, 30 Nov 2020 02:32:14 -0800 (PST)
 From: Oleksandr Tyshchenko <olekstysh@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Paul Durrant <paul@xen.org>,
+	Julien Grall <julien@xen.org>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Julien Grall <julien.grall@arm.com>
-Subject: [PATCH V3 20/23] xen/ioreq: Make x86's send_invalidate_req() common
-Date: Mon, 30 Nov 2020 12:31:35 +0200
-Message-Id: <1606732298-22107-21-git-send-email-olekstysh@gmail.com>
+Subject: [PATCH V3 15/23] xen/arm: Stick around in leave_hypervisor_to_guest until I/O has completed
+Date: Mon, 30 Nov 2020 12:31:30 +0200
+Message-Id: <1606732298-22107-16-git-send-email-olekstysh@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1606732298-22107-1-git-send-email-olekstysh@gmail.com>
 References: <1606732298-22107-1-git-send-email-olekstysh@gmail.com>
 
 From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 
-As the IOREQ is a common feature now and we also need to
-invalidate qemu/demu mapcache on Arm when the required condition
-occurs this patch moves this function to the common code
-(and remames it to ioreq_signal_mapcache_invalidate).
-This patch also moves per-domain qemu_mapcache_invalidate
-variable out of the arch sub-struct (and drops "qemu" prefix).
+This patch adds proper handling of return value of
+vcpu_ioreq_handle_completion() which involves using a loop
+in leave_hypervisor_to_guest().
 
-The subsequent patch will add mapcache invalidation handling on Arm.
+The reason to use an unbounded loop here is the fact that vCPU
+shouldn't continue until an I/O has completed. In Xen case, if an I/O
+never completes then it most likely means that something went horribly
+wrong with the Device Emulator. And it is most likely not safe to
+continue. So letting the vCPU to spin forever if I/O never completes
+is a safer action than letting it continue and leaving the guest in
+unclear state and is the best what we can do for now.
+
+This wouldn't be an issue for Xen as do_softirq() would be called at
+every loop. In case of failure, the guest will crash and the vCPU
+will be unscheduled.
 
 Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 CC: Julien Grall <julien.grall@arm.com>
@@ -122,172 +123,81 @@ CC: Julien Grall <julien.grall@arm.com>
 Please note, this is a split/cleanup/hardening of Julien's PoC:
 "Add support for Guest IO forwarding to a device emulator"
 
-Changes RFC -> V1:
-   - move send_invalidate_req() to the common code
-   - update patch subject/description
-   - move qemu_mapcache_invalidate out of the arch sub-struct,
-     update checks
-   - remove #if defined(CONFIG_ARM64) from the common code
-
 Changes V1 -> V2:
-   - was split into:
-     - xen/ioreq: Make x86's send_invalidate_req() common
-     - xen/arm: Add mapcache invalidation handling
-   - update patch description/subject
-   - move Arm bits to a separate patch
-   - don't alter the common code, the flag is set by arch code
-   - rename send_invalidate_req() to send_invalidate_ioreq()
-   - guard qemu_mapcache_invalidate with CONFIG_IOREQ_SERVER
-   - use bool instead of bool_t
-   - remove blank line blank line between head comment and #include-s
+   - new patch, changes were derived from (+ new explanation):
+     arm/ioreq: Introduce arch specific bits for IOREQ/DM features
 
 Changes V2 -> V3:
    - update patch description
-   - drop "qemu" prefix from the variable name
-   - rename send_invalidate_req() to ioreq_signal_mapcache_invalidate()
 ---
 ---
- xen/arch/x86/hvm/hypercall.c     |  9 +++++----
- xen/arch/x86/hvm/io.c            | 14 --------------
- xen/common/ioreq.c               | 14 ++++++++++++++
- xen/include/asm-x86/hvm/domain.h |  1 -
- xen/include/asm-x86/hvm/io.h     |  1 -
- xen/include/xen/ioreq.h          |  1 +
- xen/include/xen/sched.h          |  2 ++
- 7 files changed, 22 insertions(+), 20 deletions(-)
+ xen/arch/arm/traps.c | 31 ++++++++++++++++++++++++++-----
+ 1 file changed, 26 insertions(+), 5 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/hypercall.c b/xen/arch/x86/hvm/hypercall.c
-index ac573c8..6d41c56 100644
---- a/xen/arch/x86/hvm/hypercall.c
-+++ b/xen/arch/x86/hvm/hypercall.c
-@@ -20,6 +20,7 @@
+diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
+index 036b13f..4cef43e 100644
+--- a/xen/arch/arm/traps.c
++++ b/xen/arch/arm/traps.c
+@@ -2257,18 +2257,23 @@ static void check_for_pcpu_work(void)
+  * Process pending work for the vCPU. Any call should be fast or
+  * implement preemption.
   */
- #include <xen/lib.h>
- #include <xen/hypercall.h>
-+#include <xen/ioreq.h>
- #include <xen/nospec.h>
- 
- #include <asm/hvm/emulate.h>
-@@ -47,7 +48,7 @@ static long hvm_memory_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
-         rc = compat_memory_op(cmd, arg);
- 
-     if ( (cmd & MEMOP_CMD_MASK) == XENMEM_decrease_reservation )
--        curr->domain->arch.hvm.qemu_mapcache_invalidate = true;
-+        curr->domain->mapcache_invalidate = true;
- 
-     return rc;
- }
-@@ -326,9 +327,9 @@ int hvm_hypercall(struct cpu_user_regs *regs)
- 
-     HVM_DBG_LOG(DBG_LEVEL_HCALL, "hcall%lu -> %lx", eax, regs->rax);
- 
--    if ( unlikely(currd->arch.hvm.qemu_mapcache_invalidate) &&
--         test_and_clear_bool(currd->arch.hvm.qemu_mapcache_invalidate) )
--        send_invalidate_req();
-+    if ( unlikely(currd->mapcache_invalidate) &&
-+         test_and_clear_bool(currd->mapcache_invalidate) )
-+        ioreq_signal_mapcache_invalidate();
- 
-     return curr->hcall_preempted ? HVM_HCALL_preempted : HVM_HCALL_completed;
- }
-diff --git a/xen/arch/x86/hvm/io.c b/xen/arch/x86/hvm/io.c
-index a0dd8d1..ba77414 100644
---- a/xen/arch/x86/hvm/io.c
-+++ b/xen/arch/x86/hvm/io.c
-@@ -64,20 +64,6 @@ void send_timeoffset_req(unsigned long timeoff)
-         gprintk(XENLOG_ERR, "Unsuccessful timeoffset update\n");
- }
- 
--/* Ask ioemu mapcache to invalidate mappings. */
--void send_invalidate_req(void)
--{
--    ioreq_t p = {
--        .type = IOREQ_TYPE_INVALIDATE,
--        .size = 4,
--        .dir = IOREQ_WRITE,
--        .data = ~0UL, /* flush all */
--    };
--
--    if ( ioreq_broadcast(&p, false) != 0 )
--        gprintk(XENLOG_ERR, "Unsuccessful map-cache invalidate\n");
--}
--
- bool hvm_emulate_one_insn(hvm_emulate_validate_t *validate, const char *descr)
+-static void check_for_vcpu_work(void)
++static bool check_for_vcpu_work(void)
  {
-     struct hvm_emulate_ctxt ctxt;
-diff --git a/xen/common/ioreq.c b/xen/common/ioreq.c
-index f35dcf9..61ba761 100644
---- a/xen/common/ioreq.c
-+++ b/xen/common/ioreq.c
-@@ -35,6 +35,20 @@
- #include <public/hvm/ioreq.h>
- #include <public/hvm/params.h>
+     struct vcpu *v = current;
  
-+/* Ask ioemu mapcache to invalidate mappings. */
-+void ioreq_signal_mapcache_invalidate(void)
-+{
-+    ioreq_t p = {
-+        .type = IOREQ_TYPE_INVALIDATE,
-+        .size = 4,
-+        .dir = IOREQ_WRITE,
-+        .data = ~0UL, /* flush all */
-+    };
+ #ifdef CONFIG_IOREQ_SERVER
++    bool handled;
 +
-+    if ( ioreq_broadcast(&p, false) != 0 )
-+        gprintk(XENLOG_ERR, "Unsuccessful map-cache invalidate\n");
-+}
+     local_irq_enable();
+-    vcpu_ioreq_handle_completion(v);
++    handled = vcpu_ioreq_handle_completion(v);
+     local_irq_disable();
 +
- static void set_ioreq_server(struct domain *d, unsigned int id,
-                              struct ioreq_server *s)
- {
-diff --git a/xen/include/asm-x86/hvm/domain.h b/xen/include/asm-x86/hvm/domain.h
-index b8be1ad..cf959f6 100644
---- a/xen/include/asm-x86/hvm/domain.h
-+++ b/xen/include/asm-x86/hvm/domain.h
-@@ -122,7 +122,6 @@ struct hvm_domain {
++    if ( !handled )
++        return true;
+ #endif
  
-     struct viridian_domain *viridian;
- 
--    bool_t                 qemu_mapcache_invalidate;
-     bool_t                 is_s3_suspended;
+     if ( likely(!v->arch.need_flush_to_ram) )
+-        return;
++        return false;
  
      /*
-diff --git a/xen/include/asm-x86/hvm/io.h b/xen/include/asm-x86/hvm/io.h
-index fb64294..3da0136 100644
---- a/xen/include/asm-x86/hvm/io.h
-+++ b/xen/include/asm-x86/hvm/io.h
-@@ -97,7 +97,6 @@ bool relocate_portio_handler(
-     unsigned int size);
- 
- void send_timeoffset_req(unsigned long timeoff);
--void send_invalidate_req(void);
- bool handle_mmio_with_translation(unsigned long gla, unsigned long gpfn,
-                                   struct npfec);
- bool handle_pio(uint16_t port, unsigned int size, int dir);
-diff --git a/xen/include/xen/ioreq.h b/xen/include/xen/ioreq.h
-index 2289e79..482f76f 100644
---- a/xen/include/xen/ioreq.h
-+++ b/xen/include/xen/ioreq.h
-@@ -129,6 +129,7 @@ struct ioreq_server *ioreq_server_select(struct domain *d,
- int ioreq_send(struct ioreq_server *s, ioreq_t *proto_p,
-                bool buffered);
- unsigned int ioreq_broadcast(ioreq_t *p, bool buffered);
-+void ioreq_signal_mapcache_invalidate(void);
- 
- void ioreq_domain_init(struct domain *d);
- 
-diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
-index 2277995..60bf254 100644
---- a/xen/include/xen/sched.h
-+++ b/xen/include/xen/sched.h
-@@ -552,6 +552,8 @@ struct domain
-         struct ioreq_server     *server[MAX_NR_IOREQ_SERVERS];
-         unsigned int            nr_servers;
-     } ioreq_server;
+      * Give a chance for the pCPU to process work before handling the vCPU
+@@ -2279,6 +2284,8 @@ static void check_for_vcpu_work(void)
+     local_irq_enable();
+     p2m_flush_vm(v);
+     local_irq_disable();
 +
-+    bool mapcache_invalidate;
- #endif
- };
++    return false;
+ }
+ 
+ /*
+@@ -2291,8 +2298,22 @@ void leave_hypervisor_to_guest(void)
+ {
+     local_irq_disable();
+ 
+-    check_for_vcpu_work();
+-    check_for_pcpu_work();
++    /*
++     * The reason to use an unbounded loop here is the fact that vCPU
++     * shouldn't continue until an I/O has completed. In Xen case, if an I/O
++     * never completes then it most likely means that something went horribly
++     * wrong with the Device Emulator. And it is most likely not safe to
++     * continue. So letting the vCPU to spin forever if I/O never completes
++     * is a safer action than letting it continue and leaving the guest in
++     * unclear state and is the best what we can do for now.
++     *
++     * This wouldn't be an issue for Xen as do_softirq() would be called at
++     * every loop. In case of failure, the guest will crash and the vCPU
++     * will be unscheduled.
++     */
++    do {
++        check_for_pcpu_work();
++    } while ( check_for_vcpu_work() );
+ 
+     vgic_sync_to_lrs();
  
 -- 
 2.7.4
