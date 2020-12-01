@@ -2,69 +2,49 @@ Return-Path: <SRS0=rTFK=FF=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.7 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1
-	autolearn=unavailable autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AAC98C64E7A
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Dec 2020 14:08:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C0FB5C64E7A
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Dec 2020 14:10:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 32DF920705
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Dec 2020 14:08:34 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 4585E20770
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Dec 2020 14:10:00 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="vLWTsjji"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 32DF920705
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=oracle.com
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="oZlRvrP/"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4585E20770
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.42080.75638 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.42085.75649 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kk6KJ-0000f8-1C; Tue, 01 Dec 2020 14:08:19 +0000
+	id 1kk6Lh-0000ns-G0; Tue, 01 Dec 2020 14:09:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 42080.75638; Tue, 01 Dec 2020 14:08:19 +0000
+Received: by outflank-mailman (output) from mailman id 42085.75649; Tue, 01 Dec 2020 14:09:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kk6KI-0000f1-UH; Tue, 01 Dec 2020 14:08:18 +0000
-Received: by outflank-mailman (input) for mailman id 42080;
- Tue, 01 Dec 2020 14:08:17 +0000
+	id 1kk6Lh-0000nl-D7; Tue, 01 Dec 2020 14:09:45 +0000
+Received: by outflank-mailman (input) for mailman id 42085;
+ Tue, 01 Dec 2020 14:09:43 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=882D=FF=oracle.com=dan.carpenter@srs-us1.protection.inumbo.net>)
- id 1kk6KH-0000ew-Kp
- for xen-devel@lists.xenproject.org; Tue, 01 Dec 2020 14:08:17 +0000
-Received: from userp2130.oracle.com (unknown [156.151.31.86])
+ <SRS0=+Ars=FF=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
+ id 1kk6Lf-0000nf-HB
+ for xen-devel@lists.xenproject.org; Tue, 01 Dec 2020 14:09:43 +0000
+Received: from mail-wr1-x435.google.com (unknown [2a00:1450:4864:20::435])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 4ba12c40-de6e-434e-9ca4-44ed2eeb5e43;
- Tue, 01 Dec 2020 14:08:16 +0000 (UTC)
-Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
- by userp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 0B1DtHP4002730;
- Tue, 1 Dec 2020 14:07:42 GMT
-Received: from aserp3020.oracle.com (aserp3020.oracle.com [141.146.126.70])
- by userp2130.oracle.com with ESMTP id 353dyqjnq9-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 01 Dec 2020 14:07:42 +0000
-Received: from pps.filterd (aserp3020.oracle.com [127.0.0.1])
- by aserp3020.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 0B1Du5R6003844;
- Tue, 1 Dec 2020 14:05:41 GMT
-Received: from pps.reinject (localhost [127.0.0.1])
- by aserp3020.oracle.com with ESMTP id 3540ey0hqt-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 01 Dec 2020 14:05:41 +0000
-Received: from aserp3020.oracle.com (aserp3020.oracle.com [127.0.0.1])
- by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 0B1E1twO021849;
- Tue, 1 Dec 2020 14:05:41 GMT
-Received: from userv0121.oracle.com (userv0121.oracle.com [156.151.31.72])
- by aserp3020.oracle.com with ESMTP id 3540ey0hp9-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 01 Dec 2020 14:05:40 +0000
-Received: from abhmp0010.oracle.com (abhmp0010.oracle.com [141.146.116.16])
- by userv0121.oracle.com (8.14.4/8.13.8) with ESMTP id 0B1E5MSD015816;
- Tue, 1 Dec 2020 14:05:23 GMT
-Received: from kadam (/102.36.221.92) by default (Oracle Beehive Gateway v4.0)
- with ESMTP ; Tue, 01 Dec 2020 06:05:21 -0800
+ id 6fd1b97d-6e24-4419-93f8-1ae1bd6afc8a;
+ Tue, 01 Dec 2020 14:09:42 +0000 (UTC)
+Received: by mail-wr1-x435.google.com with SMTP id 23so2812252wrc.8
+ for <xen-devel@lists.xenproject.org>; Tue, 01 Dec 2020 06:09:42 -0800 (PST)
+Received: from CBGR90WXYV0 (54-240-197-239.amazon.com. [54.240.197.239])
+ by smtp.gmail.com with ESMTPSA id o74sm3610645wme.36.2020.12.01.06.09.40
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Tue, 01 Dec 2020 06:09:41 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -76,128 +56,117 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4ba12c40-de6e-434e-9ca4-44ed2eeb5e43
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=date : from : to : cc
- : subject : message-id : references : mime-version : content-type :
- in-reply-to; s=corp-2020-01-29;
- bh=pTmh0fAx41hLIvYDyOekZfZD8/4rzzXxS/TqqdPExwg=;
- b=vLWTsjjic+1p3i9uxybiHNVi42dcBKcTvA6AfpFTEr0sUNmVqp9yRxLgg7kIK5qGUN0J
- oofgNIgToJJBxsPbFd+Am4pBxk6JPpjzRqo19VpEwymshbhsnRALOcfpiO21XOp3kmxr
- lgOLJrUqyUshUH+0ojxyxXIg1LFHdnj2t2Bklh5y68LsxqqiRxoSPtOWNIoWynIJF754
- 5bVkuWqCYCEFs8tq7LyeOV+zI3/vr+tI5ZKBss7pqjTfnpXNJRaPwJeD8R6AGcywA+BA
- lerBH0PS/hUi55aURtflNdJ2juhGcYo6ht8r8gtlOn38U9XkoMGDxbASv62fD9VykISM Rg== 
-Date: Tue, 1 Dec 2020 17:04:49 +0300
-From: Dan Carpenter <dan.carpenter@oracle.com>
-To: Kees Cook <keescook@chromium.org>
-Cc: Jakub Kicinski <kuba@kernel.org>, alsa-devel@alsa-project.org,
-        linux-atm-general@lists.sourceforge.net,
-        reiserfs-devel@vger.kernel.org, linux-iio@vger.kernel.org,
-        linux-wireless@vger.kernel.org, linux-fbdev@vger.kernel.org,
-        dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
-        Nathan Chancellor <natechancellor@gmail.com>,
-        linux-ide@vger.kernel.org, dm-devel@redhat.com,
-        keyrings@vger.kernel.org, linux-mtd@lists.infradead.org,
-        GR-everest-linux-l2@marvell.com, wcn36xx@lists.infradead.org,
-        samba-technical@lists.samba.org, linux-i3c@lists.infradead.org,
-        linux1394-devel@lists.sourceforge.net, linux-afs@lists.infradead.org,
-        usb-storage@lists.one-eyed-alien.net, drbd-dev@tron.linbit.com,
-        devel@driverdev.osuosl.org, linux-cifs@vger.kernel.org,
-        rds-devel@oss.oracle.com, Nick Desaulniers <ndesaulniers@google.com>,
-        linux-scsi@vger.kernel.org, linux-rdma@vger.kernel.org,
-        oss-drivers@netronome.com, bridge@lists.linux-foundation.org,
-        linux-security-module@vger.kernel.org, amd-gfx@lists.freedesktop.org,
-        linux-stm32@st-md-mailman.stormreply.com, cluster-devel@redhat.com,
-        linux-acpi@vger.kernel.org, coreteam@netfilter.org,
-        intel-wired-lan@lists.osuosl.org, linux-input@vger.kernel.org,
-        Miguel Ojeda <ojeda@kernel.org>, tipc-discussion@lists.sourceforge.net,
-        linux-ext4@vger.kernel.org, linux-media@vger.kernel.org,
-        linux-watchdog@vger.kernel.org, selinux@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, intel-gfx@lists.freedesktop.org,
-        linux-geode@lists.infradead.org, linux-can@vger.kernel.org,
-        linux-block@vger.kernel.org, linux-gpio@vger.kernel.org,
-        op-tee@lists.trustedfirmware.org, linux-mediatek@lists.infradead.org,
-        xen-devel@lists.xenproject.org, nouveau@lists.freedesktop.org,
-        linux-hams@vger.kernel.org, ceph-devel@vger.kernel.org,
-        virtualization@lists.linux-foundation.org,
-        linux-arm-kernel@lists.infradead.org, linux-hwmon@vger.kernel.org,
-        x86@kernel.org, linux-nfs@vger.kernel.org,
-        GR-Linux-NIC-Dev@marvell.com, linux-mm@kvack.org,
-        netdev@vger.kernel.org, linux-decnet-user@lists.sourceforge.net,
-        linux-mmc@vger.kernel.org,
-        "Gustavo A. R. Silva" <gustavoars@kernel.org>,
-        linux-renesas-soc@vger.kernel.org, linux-sctp@vger.kernel.org,
-        linux-usb@vger.kernel.org, netfilter-devel@vger.kernel.org,
-        linux-crypto@vger.kernel.org, patches@opensource.cirrus.com,
-        Joe Perches <joe@perches.com>, linux-integrity@vger.kernel.org,
-        target-devel@vger.kernel.org, linux-hardening@vger.kernel.org
-Subject: Re: [PATCH 000/141] Fix fall-through warnings for Clang
-Message-ID: <20201201140449.GG2767@kadam>
-References: <cover.1605896059.git.gustavoars@kernel.org>
- <20201120105344.4345c14e@kicinski-fedora-pc1c0hjn.dhcp.thefacebook.com>
- <202011201129.B13FDB3C@keescook>
- <20201120115142.292999b2@kicinski-fedora-pc1c0hjn.dhcp.thefacebook.com>
- <202011220816.8B6591A@keescook>
+X-Inumbo-ID: 6fd1b97d-6e24-4419-93f8-1ae1bd6afc8a
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:reply-to:to:cc:references:in-reply-to:subject:date:message-id
+         :mime-version:content-transfer-encoding:content-language
+         :thread-index;
+        bh=TibSohplpJ5bFhrdsDRpd6q4R0TtXnEWtnbnXccrNtc=;
+        b=oZlRvrP/o7tYG45nojNsCLtg9EOB6w7+VFnkK88EMJ6vKLnrqED5LXQ67qlEN/EqmQ
+         qezRV5KMFDFezbhvact8gNFlm1WjZZs2x2dLa0F6QzKqYI7F00gCrrsk7ZbN1rfIQgG4
+         XznHef4WDXBmYVzXEM6NJyZIEZokTbCypIXEvjGAvucD/nHmzXCWWd47Lo+9EloE5qNn
+         0FEaNc2J47rGmaRpB0S31Ocnip8SvPlTkt5zAkP9ZSnoGQuBnq807qlfaIB1dt1sL7iO
+         YDGRvHeaMP+Ho4gyJR7LHQzSIyWq/nPXb7VISASDQPrvLz4X97cgEkqHRU2BPhvcvJ7Y
+         LURA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:reply-to:to:cc:references:in-reply-to
+         :subject:date:message-id:mime-version:content-transfer-encoding
+         :content-language:thread-index;
+        bh=TibSohplpJ5bFhrdsDRpd6q4R0TtXnEWtnbnXccrNtc=;
+        b=pQO/MUOGGRwAo/88nKXMQaW0jUAIgPnViyUa7k563Jxct1u60mhPeiPPj24HMk5olU
+         +lE4JoCHc2aWxSe48EPcvqqptaoXNBm8C2t8rySxRrhDsAH8Xw8KAM7PFuzGlZntsh/d
+         qmbYn8Kg+QTP0LUopp/q0bR8p7LbKcmLurW02ze1KxY1t4tyojDVzPlsgwwmPd7xn15G
+         kiDM6QVkYsm5csx3oPoJwYKZsueV/OlBV3i8C/3Tmr4Ilfp2cEKOqDszcxRPux7zqIcp
+         rlQ95g9DfkA7Xfb59jV0x6y2sh+d5lAQLS/edZEoQ7nInkUGMQ8zRBL5DogPFkWIHh6t
+         6jyg==
+X-Gm-Message-State: AOAM530H+uavclMPQtrpastGBWKuI/a5QDJbzsrfGXsFWHcnYyI0g7Zf
+	vqkt5BkCJRKJOhZy25KU2Ug=
+X-Google-Smtp-Source: ABdhPJw/5t85SlZjv/mL74VhJ/rX9I+zWSSRDG0/wOD9MvNKVbm9GNNM0GGGaVXPbMMHQG2AMbnl6g==
+X-Received: by 2002:a5d:4046:: with SMTP id w6mr4234417wrp.51.1606831781822;
+        Tue, 01 Dec 2020 06:09:41 -0800 (PST)
+From: Paul Durrant <xadimgnik@gmail.com>
+X-Google-Original-From: "Paul Durrant" <paul@xen.org>
+Reply-To: <paul@xen.org>
+To: "'Wei Liu'" <wl@xen.org>
+Cc: <xen-devel@lists.xenproject.org>
+References: <20201124190744.11343-1-paul@xen.org>
+In-Reply-To: <20201124190744.11343-1-paul@xen.org>
+Subject: RE: [EXTERNAL] [PATCH v3 00/13] viridian: add support for ExProcessorMasks...
+Date: Tue, 1 Dec 2020 14:09:40 -0000
+Message-ID: <001b01d6c7eb$9c6d0240$d54706c0$@xen.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <202011220816.8B6591A@keescook>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9821 signatures=668682
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 malwarescore=0 bulkscore=0
- clxscore=1011 mlxscore=0 spamscore=0 priorityscore=1501 mlxlogscore=999
- suspectscore=0 lowpriorityscore=0 phishscore=0 adultscore=0
- impostorscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2009150000 definitions=main-2012010090
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailer: Microsoft Outlook 16.0
+Content-Language: en-gb
+Thread-Index: AQIUz4Ho6g2LZ3vHphp6MrUkQEjyX6lmN4sw
 
-On Sun, Nov 22, 2020 at 08:17:03AM -0800, Kees Cook wrote:
-> On Fri, Nov 20, 2020 at 11:51:42AM -0800, Jakub Kicinski wrote:
-> > On Fri, 20 Nov 2020 11:30:40 -0800 Kees Cook wrote:
-> > > On Fri, Nov 20, 2020 at 10:53:44AM -0800, Jakub Kicinski wrote:
-> > > > On Fri, 20 Nov 2020 12:21:39 -0600 Gustavo A. R. Silva wrote:  
-> > > > > This series aims to fix almost all remaining fall-through warnings in
-> > > > > order to enable -Wimplicit-fallthrough for Clang.
-> > > > > 
-> > > > > In preparation to enable -Wimplicit-fallthrough for Clang, explicitly
-> > > > > add multiple break/goto/return/fallthrough statements instead of just
-> > > > > letting the code fall through to the next case.
-> > > > > 
-> > > > > Notice that in order to enable -Wimplicit-fallthrough for Clang, this
-> > > > > change[1] is meant to be reverted at some point. So, this patch helps
-> > > > > to move in that direction.
-> > > > > 
-> > > > > Something important to mention is that there is currently a discrepancy
-> > > > > between GCC and Clang when dealing with switch fall-through to empty case
-> > > > > statements or to cases that only contain a break/continue/return
-> > > > > statement[2][3][4].  
-> > > > 
-> > > > Are we sure we want to make this change? Was it discussed before?
-> > > > 
-> > > > Are there any bugs Clangs puritanical definition of fallthrough helped
-> > > > find?
-> > > > 
-> > > > IMVHO compiler warnings are supposed to warn about issues that could
-> > > > be bugs. Falling through to default: break; can hardly be a bug?!  
-> > > 
-> > > It's certainly a place where the intent is not always clear. I think
-> > > this makes all the cases unambiguous, and doesn't impact the machine
-> > > code, since the compiler will happily optimize away any behavioral
-> > > redundancy.
-> > 
-> > If none of the 140 patches here fix a real bug, and there is no change
-> > to machine code then it sounds to me like a W=2 kind of a warning.
-> 
-> FWIW, this series has found at least one bug so far:
-> https://lore.kernel.org/lkml/CAFCwf11izHF=g1mGry1fE5kvFFFrxzhPSM6qKAO8gxSp=Kr_CQ@mail.gmail.com/
+Wei,
 
-This is a fallthrough to a return and not to a break.  That should
-trigger a warning.  The fallthrough to a break should not generate a
-warning.
+  I'll likely send a v4 to address the style nit Jan picked up in patch =
+#1 but the rest should be stable now. Could you have a look over it?
 
-The bug we're trying to fix is "missing break statement" but if the
-result of the bug is "we hit a break statement" then now we're just
-talking about style.  GCC should limit itself to warning about
-potentially buggy code.
+  Thanks,
 
-regards,
-dan carpenter
+    Paul
+
+> -----Original Message-----
+> From: Paul Durrant <paul@xen.org>
+> Sent: 24 November 2020 19:08
+> To: xen-devel@lists.xenproject.org
+> Cc: Durrant, Paul <pdurrant@amazon.co.uk>
+> Subject: [EXTERNAL] [PATCH v3 00/13] viridian: add support for =
+ExProcessorMasks...
+>=20
+> CAUTION: This email originated from outside of the organization. Do =
+not click links or open
+> attachments unless you can confirm the sender and know the content is =
+safe.
+>=20
+>=20
+>=20
+> From: Paul Durrant <pdurrant@amazon.com>
+>=20
+> ... plus one miscellaneous cleanup patch after introducing =
+sizeof_field().
+>=20
+> Paul Durrant (13):
+>   viridian: don't blindly write to 32-bit registers is 'mode' is =
+invalid
+>   viridian: move flush hypercall implementation into separate function
+>   viridian: move IPI hypercall implementation into separate function
+>   viridian: introduce a per-cpu hypercall_vpmask and accessor
+>     functions...
+>   viridian: use hypercall_vpmask in hvcall_ipi()
+>   viridian: use softirq batching in hvcall_ipi()
+>   xen/include: import sizeof_field() macro from Linux stddef.h
+>   viridian: add ExProcessorMasks variants of the flush hypercalls
+>   viridian: add ExProcessorMasks variant of the IPI hypercall
+>   viridian: log initial invocation of each type of hypercall
+>   viridian: add a new '_HVMPV_ex_processor_masks' bit into
+>     HVM_PARAM_VIRIDIAN...
+>   xl / libxl: add 'ex_processor_mask' into
+>     'libxl_viridian_enlightenment'
+>   x86: replace open-coded occurrences of sizeof_field()...
+>=20
+>  docs/man/xl.cfg.5.pod.in             |   8 +
+>  tools/include/libxl.h                |   7 +
+>  tools/libs/light/libxl_types.idl     |   1 +
+>  tools/libs/light/libxl_x86.c         |   3 +
+>  xen/arch/x86/cpu/vpmu_intel.c        |   4 +-
+>  xen/arch/x86/hvm/viridian/viridian.c | 601 =
++++++++++++++++++++++------
+>  xen/arch/x86/setup.c                 |  16 +-
+>  xen/include/asm-x86/hvm/viridian.h   |  10 +
+>  xen/include/public/hvm/params.h      |   7 +-
+>  xen/include/xen/compiler.h           |   8 +
+>  10 files changed, 532 insertions(+), 133 deletions(-)
+>=20
+> --
+> 2.20.1
+
+
 
