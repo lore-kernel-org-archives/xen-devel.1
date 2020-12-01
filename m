@@ -7,42 +7,41 @@ X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 470ABC64E7A
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Dec 2020 08:22:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 53779C64E8A
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Dec 2020 08:22:21 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C5833206E3
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Dec 2020 08:22:17 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id D1272206E3
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Dec 2020 08:22:20 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="IkpN9Wyg"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C5833206E3
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="A0YHXj4E"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D1272206E3
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.41658.75078 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.41659.75084 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kk0vJ-0005bl-2e; Tue, 01 Dec 2020 08:22:09 +0000
+	id 1kk0vK-0005dp-2r; Tue, 01 Dec 2020 08:22:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 41658.75078; Tue, 01 Dec 2020 08:22:08 +0000
+Received: by outflank-mailman (output) from mailman id 41659.75084; Tue, 01 Dec 2020 08:22:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kk0vI-0005bY-Pd; Tue, 01 Dec 2020 08:22:08 +0000
-Received: by outflank-mailman (input) for mailman id 41658;
+	id 1kk0vJ-0005cz-Be; Tue, 01 Dec 2020 08:22:09 +0000
+Received: by outflank-mailman (input) for mailman id 41659;
  Tue, 01 Dec 2020 08:22:07 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=UECe=FF=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kk0vH-0004VK-6D
+ id 1kk0vH-0004Uj-Jh
  for xen-devel@lists.xenproject.org; Tue, 01 Dec 2020 08:22:07 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 25f21fdf-10c8-425f-b015-8b72c954f7ae;
- Tue, 01 Dec 2020 08:21:35 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 544f183e-d5f3-4c30-9d2f-26ec576f0792;
+ Tue, 01 Dec 2020 08:21:34 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id BA1F5AD8A;
- Tue,  1 Dec 2020 08:21:34 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 70019AF26;
+ Tue,  1 Dec 2020 08:21:33 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,17 +53,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 25f21fdf-10c8-425f-b015-8b72c954f7ae
+X-Inumbo-ID: 544f183e-d5f3-4c30-9d2f-26ec576f0792
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1606810894; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1606810893; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=3G0xgIlL/9kX9DtKJGfu7x/TxV+adakU1t5bKB7Shos=;
-	b=IkpN9WygXUSH6MIqzZPiyHDmb45LMWErKCm8iYpw9oM5Mo9lo6NFRIhzEfKRtrBCK30H+G
-	I9itFnpDgiqpTj4f4xPcwoimg7/sfsc/K7+kG2Vzw2hBWABakSekL3R+30plQDJappTYyh
-	pKHnK5heJzej4UKjt411+cYbvpyHkMs=
+	bh=5TUB0753mqlMUzFRfIKqWdQ4pi4TEHdAafXYRsY3+ps=;
+	b=A0YHXj4E2/lcDG8u30FMXxMKHWlPnkqX5fXhttVGTKHbTrOBq0ysiVvNfNaXhMEnxZYSWQ
+	WIDIxYZnKNEGbvmh3Q/gTg/InCxWZ3nGq39Z4NnoNGX8nmZxUssvDqtA8JiFhyF0fFQ/9G
+	4/WqEKfDD4eK6+TeEMMWkvr2lM9Lc/s=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
@@ -74,192 +73,256 @@ Cc: Juergen Gross <jgross@suse.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>,
-	Dario Faggioli <dfaggioli@suse.com>
-Subject: [PATCH v2 17/17] xen/cpupool: make per-cpupool sched-gran hypfs node writable
-Date: Tue,  1 Dec 2020 09:21:28 +0100
-Message-Id: <20201201082128.15239-18-jgross@suse.com>
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v2 12/17] xen/hypfs: add new enter() and exit() per node callbacks
+Date: Tue,  1 Dec 2020 09:21:23 +0100
+Message-Id: <20201201082128.15239-13-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20201201082128.15239-1-jgross@suse.com>
 References: <20201201082128.15239-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Make /cpupool/<id>/sched-gran in hypfs writable. This will enable per
-cpupool selectable scheduling granularity.
+In order to better support resource allocation and locking for dynamic
+hypfs nodes add enter() and exit() callbacks to struct hypfs_funcs.
 
-Writing this node is allowed only with no cpu assigned to the cpupool.
-Allowed are values "cpu", "core" and "socket".
+The enter() callback is called when entering a node during hypfs user
+actions (traversing, reading or writing it), while the exit() callback
+is called when leaving a node (accessing another node at the same or a
+higher directory level, or when returning to the user).
+
+For avoiding recursion this requires a parent pointer in each node.
+Let the enter() callback return the entry address which is stored as
+the last accessed node in order to be able to use a template entry for
+that purpose in case of dynamic entries.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
 V2:
-- test user parameters earlier (Jan Beulich)
+- new patch
 ---
- docs/misc/hypfs-paths.pandoc |  5 ++-
- xen/common/sched/cpupool.c   | 70 ++++++++++++++++++++++++++++++------
- 2 files changed, 63 insertions(+), 12 deletions(-)
+ xen/common/hypfs.c      | 79 +++++++++++++++++++++++++++++++++++++++++
+ xen/include/xen/hypfs.h |  5 +++
+ 2 files changed, 84 insertions(+)
 
-diff --git a/docs/misc/hypfs-paths.pandoc b/docs/misc/hypfs-paths.pandoc
-index f1ce24d7fe..e86f7d0dbe 100644
---- a/docs/misc/hypfs-paths.pandoc
-+++ b/docs/misc/hypfs-paths.pandoc
-@@ -184,10 +184,13 @@ A directory of all current cpupools.
- The individual cpupools. Each entry is a directory with the name being the
- cpupool-id (e.g. /cpupool/0/).
+diff --git a/xen/common/hypfs.c b/xen/common/hypfs.c
+index 83c5cacdca..e5adc9defe 100644
+--- a/xen/common/hypfs.c
++++ b/xen/common/hypfs.c
+@@ -25,30 +25,40 @@ CHECK_hypfs_dirlistentry;
+      ROUNDUP((name_len) + 1, alignof(struct xen_hypfs_direntry)))
  
--#### /cpupool/*/sched-gran = ("cpu" | "core" | "socket")
-+#### /cpupool/*/sched-gran = ("cpu" | "core" | "socket") [w]
- 
- The scheduling granularity of a cpupool.
- 
-+Writing a value is allowed only for cpupools with no cpu assigned and if the
-+architecture is supporting different scheduling granularities.
-+
- #### /params/
- 
- A directory of runtime parameters.
-diff --git a/xen/common/sched/cpupool.c b/xen/common/sched/cpupool.c
-index cfc75ccbe4..b1d9507978 100644
---- a/xen/common/sched/cpupool.c
-+++ b/xen/common/sched/cpupool.c
-@@ -77,7 +77,7 @@ static void sched_gran_print(enum sched_gran mode, unsigned int gran)
- }
- 
- #ifdef CONFIG_HAS_SCHED_GRANULARITY
--static int __init sched_select_granularity(const char *str)
-+static int sched_gran_get(const char *str, enum sched_gran *mode)
- {
-     unsigned int i;
- 
-@@ -85,36 +85,43 @@ static int __init sched_select_granularity(const char *str)
-     {
-         if ( strcmp(sg_name[i].name, str) == 0 )
-         {
--            opt_sched_granularity = sg_name[i].mode;
-+            *mode = sg_name[i].mode;
-             return 0;
-         }
-     }
- 
-     return -EINVAL;
- }
-+
-+static int __init sched_select_granularity(const char *str)
-+{
-+    return sched_gran_get(str, &opt_sched_granularity);
-+}
- custom_param("sched-gran", sched_select_granularity);
-+#else
-+static int sched_gran_get(const char *str, enum sched_gran *mode)
-+{
-+    return -EINVAL;
-+}
- #endif
- 
--static unsigned int __init cpupool_check_granularity(void)
-+static unsigned int cpupool_check_granularity(enum sched_gran mode)
- {
-     unsigned int cpu;
-     unsigned int siblings, gran = 0;
- 
--    if ( opt_sched_granularity == SCHED_GRAN_cpu )
-+    if ( mode == SCHED_GRAN_cpu )
-         return 1;
- 
-     for_each_online_cpu ( cpu )
-     {
--        siblings = cpumask_weight(sched_get_opt_cpumask(opt_sched_granularity,
--                                                        cpu));
-+        siblings = cpumask_weight(sched_get_opt_cpumask(mode, cpu));
-         if ( gran == 0 )
-             gran = siblings;
-         else if ( gran != siblings )
-             return 0;
-     }
- 
--    sched_disable_smt_switching = true;
--
-     return gran;
- }
- 
-@@ -126,7 +133,7 @@ static void __init cpupool_gran_init(void)
- 
-     while ( gran == 0 )
-     {
--        gran = cpupool_check_granularity();
-+        gran = cpupool_check_granularity(opt_sched_granularity);
- 
-         if ( gran == 0 )
-         {
-@@ -152,6 +159,9 @@ static void __init cpupool_gran_init(void)
-     if ( fallback )
-         warning_add(fallback);
- 
-+    if ( opt_sched_granularity != SCHED_GRAN_cpu )
-+        sched_disable_smt_switching = true;
-+
-     sched_granularity = gran;
-     sched_gran_print(opt_sched_granularity, sched_granularity);
- }
-@@ -1145,17 +1155,55 @@ static unsigned int hypfs_gran_getsize(const struct hypfs_entry *entry)
-     return strlen(gran) + 1;
- }
- 
-+static int cpupool_gran_write(struct hypfs_entry_leaf *leaf,
-+                              XEN_GUEST_HANDLE_PARAM(void) uaddr,
-+                              unsigned int ulen)
-+{
-+    const struct hypfs_dyndir_id *data;
-+    struct cpupool *cpupool;
-+    enum sched_gran gran;
-+    unsigned int sched_gran = 0;
-+    char name[SCHED_GRAN_NAME_LEN];
-+    int ret = 0;
-+
-+    if ( ulen > SCHED_GRAN_NAME_LEN )
-+        return -ENOSPC;
-+
-+    if ( copy_from_guest(name, uaddr, ulen) )
-+        return -EFAULT;
-+
-+    if ( memchr(name, 0, ulen) == (name + ulen - 1) )
-+        sched_gran = sched_gran_get(name, &gran) ?
-+                     0 : cpupool_check_granularity(gran);
-+    if ( sched_gran == 0 )
-+        return -EINVAL;
-+
-+    data = hypfs_get_dyndata();
-+    cpupool = __cpupool_find_by_id(data->id, true);
-+    ASSERT(cpupool);
-+
-+    if ( !cpumask_empty(cpupool->cpu_valid) )
-+        ret = -EBUSY;
-+    else
-+    {
-+        cpupool->gran = gran;
-+        cpupool->sched_gran = sched_gran;
-+    }
-+
-+    return ret;
-+}
-+
- static struct hypfs_funcs cpupool_gran_funcs = {
-     .enter = hypfs_node_enter,
-     .exit = hypfs_node_exit,
-     .read = cpupool_gran_read,
--    .write = hypfs_write_deny,
-+    .write = cpupool_gran_write,
-     .getsize = hypfs_gran_getsize,
+ const struct hypfs_funcs hypfs_dir_funcs = {
++    .enter = hypfs_node_enter,
++    .exit = hypfs_node_exit,
+     .read = hypfs_read_dir,
+     .write = hypfs_write_deny,
+     .getsize = hypfs_getsize,
+     .findentry = hypfs_dir_findentry,
+ };
+ const struct hypfs_funcs hypfs_leaf_ro_funcs = {
++    .enter = hypfs_node_enter,
++    .exit = hypfs_node_exit,
+     .read = hypfs_read_leaf,
+     .write = hypfs_write_deny,
+     .getsize = hypfs_getsize,
      .findentry = hypfs_leaf_findentry,
  };
+ const struct hypfs_funcs hypfs_leaf_wr_funcs = {
++    .enter = hypfs_node_enter,
++    .exit = hypfs_node_exit,
+     .read = hypfs_read_leaf,
+     .write = hypfs_write_leaf,
+     .getsize = hypfs_getsize,
+     .findentry = hypfs_leaf_findentry,
+ };
+ const struct hypfs_funcs hypfs_bool_wr_funcs = {
++    .enter = hypfs_node_enter,
++    .exit = hypfs_node_exit,
+     .read = hypfs_read_leaf,
+     .write = hypfs_write_bool,
+     .getsize = hypfs_getsize,
+     .findentry = hypfs_leaf_findentry,
+ };
+ const struct hypfs_funcs hypfs_custom_wr_funcs = {
++    .enter = hypfs_node_enter,
++    .exit = hypfs_node_exit,
+     .read = hypfs_read_leaf,
+     .write = hypfs_write_custom,
+     .getsize = hypfs_getsize,
+@@ -63,6 +73,8 @@ enum hypfs_lock_state {
+ };
+ static DEFINE_PER_CPU(enum hypfs_lock_state, hypfs_locked);
  
- static HYPFS_VARSIZE_INIT(cpupool_gran, XEN_HYPFS_TYPE_STRING, "sched-gran",
--                          0, &cpupool_gran_funcs);
-+                          SCHED_GRAN_NAME_LEN, &cpupool_gran_funcs);
- static char granstr[SCHED_GRAN_NAME_LEN] = {
-     [0 ... SCHED_GRAN_NAME_LEN - 2] = '?',
-     [SCHED_GRAN_NAME_LEN - 1] = 0
++static DEFINE_PER_CPU(const struct hypfs_entry *, hypfs_last_node_entered);
++
+ HYPFS_DIR_INIT(hypfs_root, "");
+ 
+ static void hypfs_read_lock(void)
+@@ -100,11 +112,58 @@ static void hypfs_unlock(void)
+     }
+ }
+ 
++const struct hypfs_entry *hypfs_node_enter(const struct hypfs_entry *entry)
++{
++    return entry;
++}
++
++void hypfs_node_exit(const struct hypfs_entry *entry)
++{
++}
++
++static int node_enter(const struct hypfs_entry *entry)
++{
++    const struct hypfs_entry **last = &this_cpu(hypfs_last_node_entered);
++
++    entry = entry->funcs->enter(entry);
++    if ( IS_ERR(entry) )
++        return PTR_ERR(entry);
++
++    ASSERT(!*last || *last == entry->parent);
++
++    *last = entry;
++
++    return 0;
++}
++
++static void node_exit(const struct hypfs_entry *entry)
++{
++    const struct hypfs_entry **last = &this_cpu(hypfs_last_node_entered);
++
++    if ( !*last )
++        return;
++
++    ASSERT(*last == entry);
++    *last = entry->parent;
++
++    entry->funcs->exit(entry);
++}
++
++static void node_exit_all(void)
++{
++    const struct hypfs_entry **last = &this_cpu(hypfs_last_node_entered);
++
++    while ( *last )
++        node_exit(*last);
++}
++
+ static int add_entry(struct hypfs_entry_dir *parent, struct hypfs_entry *new)
+ {
+     int ret = -ENOENT;
+     struct hypfs_entry *e;
+ 
++    ASSERT(new->funcs->enter);
++    ASSERT(new->funcs->exit);
+     ASSERT(new->funcs->read);
+     ASSERT(new->funcs->write);
+     ASSERT(new->funcs->getsize);
+@@ -140,6 +199,7 @@ static int add_entry(struct hypfs_entry_dir *parent, struct hypfs_entry *new)
+         unsigned int sz = strlen(new->name);
+ 
+         parent->e.size += DIRENTRY_SIZE(sz);
++        new->parent = &parent->e;
+     }
+ 
+     hypfs_unlock();
+@@ -221,6 +281,7 @@ static struct hypfs_entry *hypfs_get_entry_rel(struct hypfs_entry_dir *dir,
+     const char *end;
+     struct hypfs_entry *entry;
+     unsigned int name_len;
++    int ret;
+ 
+     for ( ; ; )
+     {
+@@ -235,6 +296,10 @@ static struct hypfs_entry *hypfs_get_entry_rel(struct hypfs_entry_dir *dir,
+             end = strchr(path, '\0');
+         name_len = end - path;
+ 
++        ret = node_enter(&dir->e);
++        if ( ret )
++            return ERR_PTR(ret);
++
+         entry = dir->e.funcs->findentry(dir, path, name_len);
+         if ( IS_ERR(entry) || !*end )
+             return entry;
+@@ -265,6 +330,7 @@ int hypfs_read_dir(const struct hypfs_entry *entry,
+     const struct hypfs_entry_dir *d;
+     const struct hypfs_entry *e;
+     unsigned int size = entry->funcs->getsize(entry);
++    int ret;
+ 
+     ASSERT(this_cpu(hypfs_locked) != hypfs_unlocked);
+ 
+@@ -276,12 +342,19 @@ int hypfs_read_dir(const struct hypfs_entry *entry,
+         unsigned int e_namelen = strlen(e->name);
+         unsigned int e_len = DIRENTRY_SIZE(e_namelen);
+ 
++        ret = node_enter(e);
++        if ( ret )
++            return ret;
++
+         direntry.e.pad = 0;
+         direntry.e.type = e->type;
+         direntry.e.encoding = e->encoding;
+         direntry.e.content_len = e->funcs->getsize(e);
+         direntry.e.max_write_len = e->max_size;
+         direntry.off_next = list_is_last(&e->list, &d->dirlist) ? 0 : e_len;
++
++        node_exit(e);
++
+         if ( copy_to_guest(uaddr, &direntry, 1) )
+             return -EFAULT;
+ 
+@@ -490,6 +563,10 @@ long do_hypfs_op(unsigned int cmd,
+         goto out;
+     }
+ 
++    ret = node_enter(entry);
++    if ( ret )
++        goto out;
++
+     switch ( cmd )
+     {
+     case XEN_HYPFS_OP_read:
+@@ -506,6 +583,8 @@ long do_hypfs_op(unsigned int cmd,
+     }
+ 
+  out:
++    node_exit_all();
++
+     hypfs_unlock();
+ 
+     return ret;
+diff --git a/xen/include/xen/hypfs.h b/xen/include/xen/hypfs.h
+index 53f50772b4..8d96abd805 100644
+--- a/xen/include/xen/hypfs.h
++++ b/xen/include/xen/hypfs.h
+@@ -35,6 +35,8 @@ struct hypfs_entry;
+  * "/a/b/c" findentry() will be called for "/", "/a", and "/a/b").
+  */
+ struct hypfs_funcs {
++    const struct hypfs_entry *(*enter)(const struct hypfs_entry *entry);
++    void (*exit)(const struct hypfs_entry *entry);
+     int (*read)(const struct hypfs_entry *entry,
+                 XEN_GUEST_HANDLE_PARAM(void) uaddr);
+     int (*write)(struct hypfs_entry_leaf *leaf,
+@@ -56,6 +58,7 @@ struct hypfs_entry {
+     unsigned int size;
+     unsigned int max_size;
+     const char *name;
++    struct hypfs_entry *parent;
+     struct list_head list;
+     const struct hypfs_funcs *funcs;
+ };
+@@ -149,6 +152,8 @@ int hypfs_add_dir(struct hypfs_entry_dir *parent,
+                   struct hypfs_entry_dir *dir, bool nofault);
+ int hypfs_add_leaf(struct hypfs_entry_dir *parent,
+                    struct hypfs_entry_leaf *leaf, bool nofault);
++const struct hypfs_entry *hypfs_node_enter(const struct hypfs_entry *entry);
++void hypfs_node_exit(const struct hypfs_entry *entry);
+ int hypfs_read_dir(const struct hypfs_entry *entry,
+                    XEN_GUEST_HANDLE_PARAM(void) uaddr);
+ int hypfs_read_leaf(const struct hypfs_entry *entry,
 -- 
 2.26.2
 
