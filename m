@@ -2,46 +2,46 @@ Return-Path: <SRS0=rTFK=FF=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EAB84C64E8A
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Dec 2020 08:00:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D7B20C64E7A
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Dec 2020 08:21:43 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6362F2087D
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Dec 2020 08:00:21 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 4C0002087C
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Dec 2020 08:21:43 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="e1Mzok4m"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6362F2087D
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="qmGLVYtT"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4C0002087C
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.41614.74886 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.41621.74909 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kk0a1-0002JW-Ao; Tue, 01 Dec 2020 08:00:09 +0000
+	id 1kk0uk-0004VQ-ER; Tue, 01 Dec 2020 08:21:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 41614.74886; Tue, 01 Dec 2020 08:00:09 +0000
+Received: by outflank-mailman (output) from mailman id 41621.74909; Tue, 01 Dec 2020 08:21:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kk0a1-0002Ip-5B; Tue, 01 Dec 2020 08:00:09 +0000
-Received: by outflank-mailman (input) for mailman id 41614;
- Tue, 01 Dec 2020 08:00:08 +0000
+	id 1kk0uk-0004VI-B8; Tue, 01 Dec 2020 08:21:34 +0000
+Received: by outflank-mailman (input) for mailman id 41621;
+ Tue, 01 Dec 2020 08:21:32 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=KrUB=FF=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kk0a0-0002Ig-5I
- for xen-devel@lists.xenproject.org; Tue, 01 Dec 2020 08:00:08 +0000
+ (envelope-from <SRS0=UECe=FF=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1kk0ui-0004Uj-NE
+ for xen-devel@lists.xenproject.org; Tue, 01 Dec 2020 08:21:32 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 0815429a-0de1-450f-9b77-1cbf0527beb4;
- Tue, 01 Dec 2020 08:00:07 +0000 (UTC)
+ id 24573929-9acf-4325-b865-1e4397cf6f40;
+ Tue, 01 Dec 2020 08:21:31 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 6516DAEF5;
- Tue,  1 Dec 2020 08:00:06 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 23AC5AC2F;
+ Tue,  1 Dec 2020 08:21:31 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,67 +53,60 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0815429a-0de1-450f-9b77-1cbf0527beb4
+X-Inumbo-ID: 24573929-9acf-4325-b865-1e4397cf6f40
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1606809606; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
+	t=1606810891; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=fCV07YhsFVUYe3rO/+xalK2NDdZq1VldAkeLRsqSiYg=;
-	b=e1Mzok4mpu6GVVqkCWuZ/+mDQf/b/LWndGVIsyahQ9VMc9FHRUslLIvS6SvX+EkBGV4kQi
-	9ctpRTP7qGQNCTkEJJrd2rc5+NEB2kZIycP1/KR0Rzs5l4UleKWzexO5uHWzgUw7UGR/XM
-	psvNbEswRsJfXKdxBHXbp2ve59pjSQE=
-Subject: Re: [PATCH] Fix spelling errors.
-To: Diederik de Haas <didi.debian@cknow.org>
-Cc: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
- Anthony PERARD <anthony.perard@citrix.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Daniel De Graaf <dgdegra@tycho.nsa.gov>, xen-devel@lists.xenproject.org
-References: <a60e2c98183d7c873f4e306954f900614fcdb582.1606757711.git.didi.debian@cknow.org>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <6a393816-c418-51c9-25c0-5622ef331099@suse.com>
-Date: Tue, 1 Dec 2020 09:00:06 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.5.0
+	bh=uevcohjDdjyaRW4J/XJl3vfCGPtDJwSk8swOs/WEatk=;
+	b=qmGLVYtTEwAPxQupeGB9PHxOUoB5b8zhWnwI/5dP1T9FMNI2wlSPT1uQZRV/2QP3WK32pu
+	sVH1k4Z6Pcc/QzeWxFtbJqPxkGy8eavtdlCiMzvMnnLjTeFlM10K+f1NlHWRk1fqPaxCm1
+	jMKKHgbP8tCbU0C547Rmfxe6cvXHB+0=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Dario Faggioli <dfaggioli@suse.com>
+Subject: [PATCH v2 01/17] xen/cpupool: add cpu to sched_res_mask when removing it from cpupool
+Date: Tue,  1 Dec 2020 09:21:12 +0100
+Message-Id: <20201201082128.15239-2-jgross@suse.com>
+X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20201201082128.15239-1-jgross@suse.com>
+References: <20201201082128.15239-1-jgross@suse.com>
 MIME-Version: 1.0
-In-Reply-To: <a60e2c98183d7c873f4e306954f900614fcdb582.1606757711.git.didi.debian@cknow.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 30.11.2020 18:39, Diederik de Haas wrote:
-> --- a/xen/arch/x86/cpu/vpmu.c
-> +++ b/xen/arch/x86/cpu/vpmu.c
-> @@ -680,7 +680,7 @@ static void pvpmu_finish(struct domain *d, xen_pmu_params_t *params)
->          vcpu_unpause(v);
->  }
->  
-> -/* Dump some vpmu informations on console. Used in keyhandler dump_domains(). */
-> +/* Dump some vpmu information on console. Used in keyhandler dump_domains(). */
+When a cpu is removed from a cpupool and added to the free cpus it
+should be added to sched_res_mask, too.
 
-Replace "on" by "to" at the same time?
+The related removal from sched_res_mask in case of core scheduling
+is already done in schedule_cpu_add().
 
-> --- a/xen/arch/x86/x86_emulate/x86_emulate.c
-> +++ b/xen/arch/x86/x86_emulate/x86_emulate.c
-> @@ -3246,7 +3246,7 @@ x86_decode(
->              case 0x23: /* mov reg,dr */
->                  /*
->                   * Mov to/from cr/dr ignore the encoding of Mod, and behave as
-> -                 * if they were encoded as reg/reg instructions.  No futher
-> +                 * if they were encoded as reg/reg instructions. No further
->                   * disp/SIB bytes are fetched.
+As long as all cpupools share the same scheduling granularity there
+is nothing going wrong with the missing addition, but this will change
+when per-cpupool granularity is fully supported.
 
-Please don't discard double blanks between comment sentences. More
-often than not they're put this way intentionally.
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Dario Faggioli <dfaggioli@suse.com>
+---
+ xen/common/sched/core.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-Both could be easily adjusted while committing. Applicable parts
-then
-Acked-by: Jan Beulich <jbeulich@suse.com>
+diff --git a/xen/common/sched/core.c b/xen/common/sched/core.c
+index ed973e90ec..f8c81592af 100644
+--- a/xen/common/sched/core.c
++++ b/xen/common/sched/core.c
+@@ -3189,6 +3189,7 @@ int schedule_cpu_rm(unsigned int cpu)
+             /* Adjust cpu masks of resources (old and new). */
+             cpumask_clear_cpu(cpu_iter, sr->cpus);
+             cpumask_set_cpu(cpu_iter, sr_new[idx]->cpus);
++            cpumask_set_cpu(cpu_iter, &sched_res_mask);
+ 
+             /* Init timer. */
+             init_timer(&sr_new[idx]->s_timer, s_timer_fn, NULL, cpu_iter);
+-- 
+2.26.2
 
-Jan
 
