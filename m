@@ -2,47 +2,45 @@ Return-Path: <SRS0=rTFK=FF=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	UNWANTED_LANGUAGE_BODY,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6734FC64E7A
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Dec 2020 08:21:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 44FCBC64E8A
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Dec 2020 08:21:48 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D084E2087C
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Dec 2020 08:21:46 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id C60442087C
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Dec 2020 08:21:47 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="hdZaX9B1"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D084E2087C
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="XMg1+Dso"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C60442087C
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.41623.74934 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.41624.74942 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kk0uo-0004Zw-16; Tue, 01 Dec 2020 08:21:38 +0000
+	id 1kk0uo-0004ax-K4; Tue, 01 Dec 2020 08:21:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 41623.74934; Tue, 01 Dec 2020 08:21:37 +0000
+Received: by outflank-mailman (output) from mailman id 41624.74942; Tue, 01 Dec 2020 08:21:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kk0un-0004Zi-TT; Tue, 01 Dec 2020 08:21:37 +0000
-Received: by outflank-mailman (input) for mailman id 41623;
+	id 1kk0uo-0004aa-9K; Tue, 01 Dec 2020 08:21:38 +0000
+Received: by outflank-mailman (input) for mailman id 41624;
  Tue, 01 Dec 2020 08:21:37 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=UECe=FF=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kk0un-0004VK-5O
+ id 1kk0un-0004Uj-Il
  for xen-devel@lists.xenproject.org; Tue, 01 Dec 2020 08:21:37 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id ee50f3c3-d2f7-44ea-9920-1b24a7ede1b2;
- Tue, 01 Dec 2020 08:21:32 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id e3a9bb8f-12bc-44f7-ab8c-f8e9dabb0d80;
+ Tue, 01 Dec 2020 08:21:31 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id B77C0AD8C;
+ by mx2.suse.de (Postfix) with ESMTP id 0963DAD71;
  Tue,  1 Dec 2020 08:21:31 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -55,17 +53,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ee50f3c3-d2f7-44ea-9920-1b24a7ede1b2
+X-Inumbo-ID: e3a9bb8f-12bc-44f7-ab8c-f8e9dabb0d80
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	t=1606810891; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=+NBEIZ/iUOPwcq2uRt/bFtNmsh/ACI+DXq98XdmLhFc=;
-	b=hdZaX9B1RgAYsdA+smYMrR7sOXU2D4lXiNtmBlqk9Mf5/VXLwUiDI6UiBOcH796x2QcFil
-	t1XytGeNcSiE5W7plZ3w9C+bxO3dHz3P3d+3YMb8fO1odqhQj5UuS7/hw5XFkLjQ1rSv0V
-	Gsjm0vREuLbyTM3rt3LfR7pYlUl2S40=
+	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
+	bh=b421o4gqnXLovgEu9WEC6gmhWCRJ1CZH3fbnZ3VWOko=;
+	b=XMg1+DsoO/GET8yTF8cQ33YvA+LOsnb6vddawc7zcfiWqsaUDz9B5rQSLDbyJOHgqgM7ve
+	3JcDOzhdpXJG0q1BCOnbQdUSUsiFDRxm/LdwYCwWzO6De+SN+OEyRWCNs9qHsR0A5PCRdp
+	mTZWRxE0VlDs+oz8gJlrMpm/PeJkLx8=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
@@ -77,303 +73,71 @@ Cc: Juergen Gross <jgross@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v2 04/17] xen/cpupool: switch cpupool id to unsigned
-Date: Tue,  1 Dec 2020 09:21:15 +0100
-Message-Id: <20201201082128.15239-5-jgross@suse.com>
+Subject: [PATCH v2 00/17] xen: support per-cpupool scheduling granularity
+Date: Tue,  1 Dec 2020 09:21:11 +0100
+Message-Id: <20201201082128.15239-1-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20201201082128.15239-1-jgross@suse.com>
-References: <20201201082128.15239-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The cpupool id is an unsigned value in the public interface header, so
-there is no reason why it is a signed value in struct cpupool.
+Support scheduling granularity per cpupool. Setting the granularity is
+done via hypfs, which needed to gain dynamical entries for that
+purpose.
 
-Switch it to unsigned int.
+Apart from the hypfs related additional functionality the main change
+for cpupools was the support for moving a domain to a new granularity,
+as this requires to modify the scheduling unit/vcpu relationship.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
-V2:
-- new patch
----
- xen/common/sched/core.c    |  2 +-
- xen/common/sched/cpupool.c | 48 +++++++++++++++++++-------------------
- xen/common/sched/private.h |  8 +++----
- xen/include/xen/sched.h    |  4 ++--
- 4 files changed, 31 insertions(+), 31 deletions(-)
+I have tried to do the hypfs modifications in a rather generic way in
+order to be able to use the same infrastructure in other cases, too
+(e.g. for per-domain entries).
 
-diff --git a/xen/common/sched/core.c b/xen/common/sched/core.c
-index f8c81592af..6063f6d9ea 100644
---- a/xen/common/sched/core.c
-+++ b/xen/common/sched/core.c
-@@ -757,7 +757,7 @@ void sched_destroy_vcpu(struct vcpu *v)
-     }
- }
- 
--int sched_init_domain(struct domain *d, int poolid)
-+int sched_init_domain(struct domain *d, unsigned int poolid)
- {
-     void *sdom;
-     int ret;
-diff --git a/xen/common/sched/cpupool.c b/xen/common/sched/cpupool.c
-index 84f326ea63..01fa71dd00 100644
---- a/xen/common/sched/cpupool.c
-+++ b/xen/common/sched/cpupool.c
-@@ -187,7 +187,7 @@ static struct cpupool *alloc_cpupool_struct(void)
-  * the searched id is returned
-  * returns NULL if not found.
-  */
--static struct cpupool *__cpupool_find_by_id(int id, bool exact)
-+static struct cpupool *__cpupool_find_by_id(unsigned int id, bool exact)
- {
-     struct cpupool **q;
- 
-@@ -200,12 +200,12 @@ static struct cpupool *__cpupool_find_by_id(int id, bool exact)
-     return (!exact || (*q == NULL) || ((*q)->cpupool_id == id)) ? *q : NULL;
- }
- 
--static struct cpupool *cpupool_find_by_id(int poolid)
-+static struct cpupool *cpupool_find_by_id(unsigned int poolid)
- {
-     return __cpupool_find_by_id(poolid, true);
- }
- 
--static struct cpupool *__cpupool_get_by_id(int poolid, bool exact)
-+static struct cpupool *__cpupool_get_by_id(unsigned int poolid, bool exact)
- {
-     struct cpupool *c;
-     spin_lock(&cpupool_lock);
-@@ -216,12 +216,12 @@ static struct cpupool *__cpupool_get_by_id(int poolid, bool exact)
-     return c;
- }
- 
--struct cpupool *cpupool_get_by_id(int poolid)
-+struct cpupool *cpupool_get_by_id(unsigned int poolid)
- {
-     return __cpupool_get_by_id(poolid, true);
- }
- 
--static struct cpupool *cpupool_get_next_by_id(int poolid)
-+static struct cpupool *cpupool_get_next_by_id(unsigned int poolid)
- {
-     return __cpupool_get_by_id(poolid, false);
- }
-@@ -243,11 +243,11 @@ void cpupool_put(struct cpupool *pool)
-  * - unknown scheduler
-  */
- static struct cpupool *cpupool_create(
--    int poolid, unsigned int sched_id, int *perr)
-+    unsigned int poolid, unsigned int sched_id, int *perr)
- {
-     struct cpupool *c;
-     struct cpupool **q;
--    int last = 0;
-+    unsigned int last = 0;
- 
-     *perr = -ENOMEM;
-     if ( (c = alloc_cpupool_struct()) == NULL )
-@@ -256,7 +256,7 @@ static struct cpupool *cpupool_create(
-     /* One reference for caller, one reference for cpupool_destroy(). */
-     atomic_set(&c->refcnt, 2);
- 
--    debugtrace_printk("cpupool_create(pool=%d,sched=%u)\n", poolid, sched_id);
-+    debugtrace_printk("cpupool_create(pool=%u,sched=%u)\n", poolid, sched_id);
- 
-     spin_lock(&cpupool_lock);
- 
-@@ -295,7 +295,7 @@ static struct cpupool *cpupool_create(
- 
-     spin_unlock(&cpupool_lock);
- 
--    debugtrace_printk("Created cpupool %d with scheduler %s (%s)\n",
-+    debugtrace_printk("Created cpupool %u with scheduler %s (%s)\n",
-                       c->cpupool_id, c->sched->name, c->sched->opt_name);
- 
-     *perr = 0;
-@@ -337,7 +337,7 @@ static int cpupool_destroy(struct cpupool *c)
- 
-     cpupool_put(c);
- 
--    debugtrace_printk("cpupool_destroy(pool=%d)\n", c->cpupool_id);
-+    debugtrace_printk("cpupool_destroy(pool=%u)\n", c->cpupool_id);
-     return 0;
- }
- 
-@@ -521,7 +521,7 @@ static long cpupool_unassign_cpu_helper(void *info)
-     struct cpupool *c = info;
-     long ret;
- 
--    debugtrace_printk("cpupool_unassign_cpu(pool=%d,cpu=%d)\n",
-+    debugtrace_printk("cpupool_unassign_cpu(pool=%u,cpu=%d)\n",
-                       cpupool_cpu_moving->cpupool_id, cpupool_moving_cpu);
-     spin_lock(&cpupool_lock);
- 
-@@ -551,7 +551,7 @@ static int cpupool_unassign_cpu(struct cpupool *c, unsigned int cpu)
-     int ret;
-     unsigned int master_cpu;
- 
--    debugtrace_printk("cpupool_unassign_cpu(pool=%d,cpu=%d)\n",
-+    debugtrace_printk("cpupool_unassign_cpu(pool=%u,cpu=%d)\n",
-                       c->cpupool_id, cpu);
- 
-     if ( !cpu_online(cpu) )
-@@ -561,7 +561,7 @@ static int cpupool_unassign_cpu(struct cpupool *c, unsigned int cpu)
-     ret = cpupool_unassign_cpu_start(c, master_cpu);
-     if ( ret )
-     {
--        debugtrace_printk("cpupool_unassign_cpu(pool=%d,cpu=%d) ret %d\n",
-+        debugtrace_printk("cpupool_unassign_cpu(pool=%u,cpu=%d) ret %d\n",
-                           c->cpupool_id, cpu, ret);
-         return ret;
-     }
-@@ -582,7 +582,7 @@ static int cpupool_unassign_cpu(struct cpupool *c, unsigned int cpu)
-  * - pool does not exist
-  * - no cpu assigned to pool
-  */
--int cpupool_add_domain(struct domain *d, int poolid)
-+int cpupool_add_domain(struct domain *d, unsigned int poolid)
- {
-     struct cpupool *c;
-     int rc;
-@@ -604,7 +604,7 @@ int cpupool_add_domain(struct domain *d, int poolid)
-         rc = 0;
-     }
-     spin_unlock(&cpupool_lock);
--    debugtrace_printk("cpupool_add_domain(dom=%d,pool=%d) n_dom %d rc %d\n",
-+    debugtrace_printk("cpupool_add_domain(dom=%d,pool=%u) n_dom %d rc %d\n",
-                       d->domain_id, poolid, n_dom, rc);
-     return rc;
- }
-@@ -614,7 +614,7 @@ int cpupool_add_domain(struct domain *d, int poolid)
-  */
- void cpupool_rm_domain(struct domain *d)
- {
--    int cpupool_id;
-+    unsigned int cpupool_id;
-     int n_dom;
- 
-     if ( d->cpupool == NULL )
-@@ -625,7 +625,7 @@ void cpupool_rm_domain(struct domain *d)
-     n_dom = d->cpupool->n_dom;
-     d->cpupool = NULL;
-     spin_unlock(&cpupool_lock);
--    debugtrace_printk("cpupool_rm_domain(dom=%d,pool=%d) n_dom %d\n",
-+    debugtrace_printk("cpupool_rm_domain(dom=%d,pool=%u) n_dom %d\n",
-                       d->domain_id, cpupool_id, n_dom);
-     return;
- }
-@@ -767,7 +767,7 @@ int cpupool_do_sysctl(struct xen_sysctl_cpupool_op *op)
- 
-     case XEN_SYSCTL_CPUPOOL_OP_CREATE:
-     {
--        int poolid;
-+        unsigned int poolid;
- 
-         poolid = (op->cpupool_id == XEN_SYSCTL_CPUPOOL_PAR_ANY) ?
-             CPUPOOLID_NONE: op->cpupool_id;
-@@ -811,7 +811,7 @@ int cpupool_do_sysctl(struct xen_sysctl_cpupool_op *op)
-         const cpumask_t *cpus;
- 
-         cpu = op->cpu;
--        debugtrace_printk("cpupool_assign_cpu(pool=%d,cpu=%d)\n",
-+        debugtrace_printk("cpupool_assign_cpu(pool=%u,cpu=%u)\n",
-                           op->cpupool_id, cpu);
- 
-         spin_lock(&cpupool_lock);
-@@ -844,7 +844,7 @@ int cpupool_do_sysctl(struct xen_sysctl_cpupool_op *op)
- 
-     addcpu_out:
-         spin_unlock(&cpupool_lock);
--        debugtrace_printk("cpupool_assign_cpu(pool=%d,cpu=%d) ret %d\n",
-+        debugtrace_printk("cpupool_assign_cpu(pool=%u,cpu=%u) ret %d\n",
-                           op->cpupool_id, cpu, ret);
- 
-     }
-@@ -885,7 +885,7 @@ int cpupool_do_sysctl(struct xen_sysctl_cpupool_op *op)
-             rcu_unlock_domain(d);
-             break;
-         }
--        debugtrace_printk("cpupool move_domain(dom=%d)->pool=%d\n",
-+        debugtrace_printk("cpupool move_domain(dom=%d)->pool=%u\n",
-                           d->domain_id, op->cpupool_id);
-         ret = -ENOENT;
-         spin_lock(&cpupool_lock);
-@@ -895,7 +895,7 @@ int cpupool_do_sysctl(struct xen_sysctl_cpupool_op *op)
-             ret = cpupool_move_domain_locked(d, c);
- 
-         spin_unlock(&cpupool_lock);
--        debugtrace_printk("cpupool move_domain(dom=%d)->pool=%d ret %d\n",
-+        debugtrace_printk("cpupool move_domain(dom=%d)->pool=%u ret %d\n",
-                           d->domain_id, op->cpupool_id, ret);
-         rcu_unlock_domain(d);
-     }
-@@ -916,7 +916,7 @@ int cpupool_do_sysctl(struct xen_sysctl_cpupool_op *op)
-     return ret;
- }
- 
--int cpupool_get_id(const struct domain *d)
-+unsigned int cpupool_get_id(const struct domain *d)
- {
-     return d->cpupool ? d->cpupool->cpupool_id : CPUPOOLID_NONE;
- }
-@@ -946,7 +946,7 @@ void dump_runq(unsigned char key)
- 
-     for_each_cpupool(c)
-     {
--        printk("Cpupool %d:\n", (*c)->cpupool_id);
-+        printk("Cpupool %u:\n", (*c)->cpupool_id);
-         printk("Cpus: %*pbl\n", CPUMASK_PR((*c)->cpu_valid));
-         sched_gran_print((*c)->gran, cpupool_get_granularity(*c));
-         schedule_dump(*c);
-diff --git a/xen/common/sched/private.h b/xen/common/sched/private.h
-index 685992cab9..e69d9be1e8 100644
---- a/xen/common/sched/private.h
-+++ b/xen/common/sched/private.h
-@@ -505,8 +505,8 @@ static inline void sched_unit_unpause(const struct sched_unit *unit)
- 
- struct cpupool
- {
--    int              cpupool_id;
--#define CPUPOOLID_NONE    (-1)
-+    unsigned int     cpupool_id;
-+#define CPUPOOLID_NONE    (~0U)
-     unsigned int     n_dom;
-     cpumask_var_t    cpu_valid;      /* all cpus assigned to pool */
-     cpumask_var_t    res_valid;      /* all scheduling resources of pool */
-@@ -601,9 +601,9 @@ int cpu_disable_scheduler(unsigned int cpu);
- int schedule_cpu_add(unsigned int cpu, struct cpupool *c);
- int schedule_cpu_rm(unsigned int cpu);
- int sched_move_domain(struct domain *d, struct cpupool *c);
--struct cpupool *cpupool_get_by_id(int poolid);
-+struct cpupool *cpupool_get_by_id(unsigned int poolid);
- void cpupool_put(struct cpupool *pool);
--int cpupool_add_domain(struct domain *d, int poolid);
-+int cpupool_add_domain(struct domain *d, unsigned int poolid);
- void cpupool_rm_domain(struct domain *d);
- 
- #endif /* __XEN_SCHED_IF_H__ */
-diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
-index a345cc01f8..b2878e7b2a 100644
---- a/xen/include/xen/sched.h
-+++ b/xen/include/xen/sched.h
-@@ -691,7 +691,7 @@ void noreturn asm_domain_crash_synchronous(unsigned long addr);
- void scheduler_init(void);
- int  sched_init_vcpu(struct vcpu *v);
- void sched_destroy_vcpu(struct vcpu *v);
--int  sched_init_domain(struct domain *d, int poolid);
-+int  sched_init_domain(struct domain *d, unsigned int poolid);
- void sched_destroy_domain(struct domain *d);
- long sched_adjust(struct domain *, struct xen_domctl_scheduler_op *);
- long sched_adjust_global(struct xen_sysctl_scheduler_op *);
-@@ -1089,7 +1089,7 @@ static always_inline bool is_cpufreq_controller(const struct domain *d)
- 
- int cpupool_move_domain(struct domain *d, struct cpupool *c);
- int cpupool_do_sysctl(struct xen_sysctl_cpupool_op *op);
--int cpupool_get_id(const struct domain *d);
-+unsigned int cpupool_get_id(const struct domain *d);
- const cpumask_t *cpupool_valid_cpus(const struct cpupool *pool);
- extern void dump_runq(unsigned char key);
- 
+The complete series has been tested by creating cpupools with different
+granularities and moving busy and idle domains between those.
+
+Changes in V2:
+- Added several new patches, especially for some further cleanups in
+  cpupool.c.
+- Completely reworked the locking scheme with dynamical directories:
+  locking of resources (cpupools in this series) is now done via new
+  callbacks which are called when traversing the hypfs tree. This
+  removes the need to add locking to each hypfs related cpupool
+  function and it ensures data integrity across multiple callbacks.
+- Reordered the first few patches in order to have already acked
+  patches in pure cleanup patches first.
+- Addressed several comments.
+
+Juergen Gross (17):
+  xen/cpupool: add cpu to sched_res_mask when removing it from cpupool
+  xen/cpupool: add missing bits for per-cpupool scheduling granularity
+  xen/cpupool: sort included headers in cpupool.c
+  xen/cpupool: switch cpupool id to unsigned
+  xen/cpupool: switch cpupool list to normal list interface
+  xen/cpupool: use ERR_PTR() for returning error cause from
+    cpupool_create()
+  xen/cpupool: support moving domain between cpupools with different
+    granularity
+  docs: fix hypfs path documentation
+  xen/hypfs: move per-node function pointers into a dedicated struct
+  xen/hypfs: pass real failure reason up from hypfs_get_entry()
+  xen/hypfs: add getsize() and findentry() callbacks to hypfs_funcs
+  xen/hypfs: add new enter() and exit() per node callbacks
+  xen/hypfs: support dynamic hypfs nodes
+  xen/hypfs: add support for id-based dynamic directories
+  xen/cpupool: add cpupool directories
+  xen/cpupool: add scheduling granularity entry to cpupool entries
+  xen/cpupool: make per-cpupool sched-gran hypfs node writable
+
+ docs/misc/hypfs-paths.pandoc |  18 +-
+ xen/common/hypfs.c           | 336 ++++++++++++++++++++++----
+ xen/common/sched/core.c      | 137 ++++++++---
+ xen/common/sched/cpupool.c   | 446 +++++++++++++++++++++++++++--------
+ xen/common/sched/private.h   |  15 +-
+ xen/include/xen/hypfs.h      | 140 ++++++++---
+ xen/include/xen/param.h      |  15 +-
+ xen/include/xen/sched.h      |   4 +-
+ 8 files changed, 875 insertions(+), 236 deletions(-)
+
 -- 
 2.26.2
 
