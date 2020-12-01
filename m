@@ -7,42 +7,41 @@ X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A482EC64E8A
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Dec 2020 08:22:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 72286C83011
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Dec 2020 08:22:09 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2A56F206E3
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Dec 2020 08:22:07 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id EF808206E3
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Dec 2020 08:22:08 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="VpXkgRai"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2A56F206E3
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="CP9Vx9M9"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EF808206E3
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.41643.75030 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.41645.75035 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kk0v8-0005Em-V8; Tue, 01 Dec 2020 08:21:58 +0000
+	id 1kk0v9-0005GU-KK; Tue, 01 Dec 2020 08:21:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 41643.75030; Tue, 01 Dec 2020 08:21:58 +0000
+Received: by outflank-mailman (output) from mailman id 41645.75035; Tue, 01 Dec 2020 08:21:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kk0v8-0005EW-PL; Tue, 01 Dec 2020 08:21:58 +0000
-Received: by outflank-mailman (input) for mailman id 41643;
+	id 1kk0v9-0005Fn-8i; Tue, 01 Dec 2020 08:21:59 +0000
+Received: by outflank-mailman (input) for mailman id 41645;
  Tue, 01 Dec 2020 08:21:57 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=UECe=FF=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kk0v7-0004VK-5p
+ id 1kk0v7-0004Uj-JN
  for xen-devel@lists.xenproject.org; Tue, 01 Dec 2020 08:21:57 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id dc310c53-1e04-4611-b723-ff45b9e4ba3b;
- Tue, 01 Dec 2020 08:21:35 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id f2ebf806-5cc1-4f39-8b25-a2bca9abd9d3;
+ Tue, 01 Dec 2020 08:21:33 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 76E9EAD75;
- Tue,  1 Dec 2020 08:21:34 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id E5E62AF10;
+ Tue,  1 Dec 2020 08:21:32 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,17 +53,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dc310c53-1e04-4611-b723-ff45b9e4ba3b
+X-Inumbo-ID: f2ebf806-5cc1-4f39-8b25-a2bca9abd9d3
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1606810894; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1606810893; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=se4zYxbxCXhFPxdQtqG6gW//2iyLAiNTMs1y0ZSZMwA=;
-	b=VpXkgRaiPqc/ptp+PDZ3uGEMAf5rWeWN3Kp2eX7Wj8zOmp8Tb9AC9suqBG46hI5y3pKFTS
-	8BPfOUFHdpKdUFulJm1s1QTnAGPzECVzPiOLnB2PaBz9mrJf2Y8p8fUyfTtbCUA6AzXt3+
-	2N0W0pdw4AVqEidIu+euFXhq40JrPzg=
+	bh=P8wgYZkUcmfVZFhet14HurBZ05V1wN1xeSm132mMJYo=;
+	b=CP9Vx9M9inEdF2kGeks3UZVfFpSP8Y7VsG8c1gvih5SH9oigsXhd+CRbtMtozh+4eTh3fA
+	C+y1UgnGOuIYp0DyctDWe4YfIFfiR1lJr4zA6q81m4iNO47eQTKvDUjVpAz/M1e40+EIBy
+	XOukMaKP1VcaHdDN0TXpkMbnEEYVnM4=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
@@ -74,167 +73,74 @@ Cc: Juergen Gross <jgross@suse.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>,
-	Dario Faggioli <dfaggioli@suse.com>
-Subject: [PATCH v2 16/17] xen/cpupool: add scheduling granularity entry to cpupool entries
-Date: Tue,  1 Dec 2020 09:21:27 +0100
-Message-Id: <20201201082128.15239-17-jgross@suse.com>
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v2 10/17] xen/hypfs: pass real failure reason up from hypfs_get_entry()
+Date: Tue,  1 Dec 2020 09:21:21 +0100
+Message-Id: <20201201082128.15239-11-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20201201082128.15239-1-jgross@suse.com>
 References: <20201201082128.15239-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add a "sched-gran" entry to the per-cpupool hypfs directories.
-
-For now make this entry read-only and let it contain one of the
-strings "cpu", "core" or "socket".
+Instead of handling all errors from hypfs_get_entry() as ENOENT pass
+up the real error value via ERR_PTR().
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
-V2:
-- added const (Jan Beulich)
-- modify test in cpupool_gran_read() (Jan Beulich)
----
- docs/misc/hypfs-paths.pandoc |  4 +++
- xen/common/sched/cpupool.c   | 69 ++++++++++++++++++++++++++++++++++--
- 2 files changed, 70 insertions(+), 3 deletions(-)
+ xen/common/hypfs.c | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/docs/misc/hypfs-paths.pandoc b/docs/misc/hypfs-paths.pandoc
-index aaca1cdf92..f1ce24d7fe 100644
---- a/docs/misc/hypfs-paths.pandoc
-+++ b/docs/misc/hypfs-paths.pandoc
-@@ -184,6 +184,10 @@ A directory of all current cpupools.
- The individual cpupools. Each entry is a directory with the name being the
- cpupool-id (e.g. /cpupool/0/).
+diff --git a/xen/common/hypfs.c b/xen/common/hypfs.c
+index 7befd144ba..fdfd0f764a 100644
+--- a/xen/common/hypfs.c
++++ b/xen/common/hypfs.c
+@@ -187,7 +187,7 @@ static struct hypfs_entry *hypfs_get_entry_rel(struct hypfs_entry_dir *dir,
+     while ( again )
+     {
+         if ( dir->e.type != XEN_HYPFS_TYPE_DIR )
+-            return NULL;
++            return ERR_PTR(-ENOENT);
  
-+#### /cpupool/*/sched-gran = ("cpu" | "core" | "socket")
-+
-+The scheduling granularity of a cpupool.
-+
- #### /params/
+         if ( !*path )
+             return &dir->e;
+@@ -206,7 +206,7 @@ static struct hypfs_entry *hypfs_get_entry_rel(struct hypfs_entry_dir *dir,
+                                                      struct hypfs_entry_dir, e);
  
- A directory of runtime parameters.
-diff --git a/xen/common/sched/cpupool.c b/xen/common/sched/cpupool.c
-index 3e17fdf95b..cfc75ccbe4 100644
---- a/xen/common/sched/cpupool.c
-+++ b/xen/common/sched/cpupool.c
-@@ -41,9 +41,10 @@ static DEFINE_SPINLOCK(cpupool_lock);
- static enum sched_gran __read_mostly opt_sched_granularity = SCHED_GRAN_cpu;
- static unsigned int __read_mostly sched_granularity = 1;
- 
-+#define SCHED_GRAN_NAME_LEN  8
- struct sched_gran_name {
-     enum sched_gran mode;
--    char name[8];
-+    char name[SCHED_GRAN_NAME_LEN];
- };
- 
- static const struct sched_gran_name sg_name[] = {
-@@ -52,7 +53,7 @@ static const struct sched_gran_name sg_name[] = {
-     {SCHED_GRAN_socket, "socket"},
- };
- 
--static void sched_gran_print(enum sched_gran mode, unsigned int gran)
-+static const char *sched_gran_get_name(enum sched_gran mode)
- {
-     const char *name = "";
-     unsigned int i;
-@@ -66,8 +67,13 @@ static void sched_gran_print(enum sched_gran mode, unsigned int gran)
+             if ( cmp < 0 )
+-                return NULL;
++                return ERR_PTR(-ENOENT);
+             if ( !cmp && strlen(entry->name) == name_len )
+             {
+                 if ( !*end )
+@@ -221,13 +221,13 @@ static struct hypfs_entry *hypfs_get_entry_rel(struct hypfs_entry_dir *dir,
          }
      }
  
-+    return name;
-+}
-+
-+static void sched_gran_print(enum sched_gran mode, unsigned int gran)
-+{
-     printk("Scheduling granularity: %s, %u CPU%s per sched-resource\n",
--           name, gran, gran == 1 ? "" : "s");
-+           sched_gran_get_name(mode), gran, gran == 1 ? "" : "s");
+-    return NULL;
++    return ERR_PTR(-ENOENT);
  }
  
- #ifdef CONFIG_HAS_SCHED_GRANULARITY
-@@ -1033,9 +1039,14 @@ static int cpupool_dir_read(const struct hypfs_entry *entry,
-     int ret = 0;
-     const struct cpupool *c;
-     unsigned int size = 0;
-+    struct hypfs_dyndir_id *data;
-+
-+    data = hypfs_get_dyndata();
- 
-     list_for_each_entry(c, &cpupool_list, list)
-     {
-+        data->id = c->cpupool_id;
-+
-         size += hypfs_dynid_entry_size(entry, c->cpupool_id);
- 
-         ret = hypfs_read_dyndir_id_entry(&cpupool_pooldir, c->cpupool_id,
-@@ -1100,6 +1111,56 @@ static struct hypfs_entry *cpupool_dir_findentry(
-     return hypfs_gen_dyndir_entry_id(&cpupool_pooldir, id);
- }
- 
-+static int cpupool_gran_read(const struct hypfs_entry *entry,
-+                             XEN_GUEST_HANDLE_PARAM(void) uaddr)
-+{
-+    const struct hypfs_dyndir_id *data;
-+    const struct cpupool *cpupool;
-+    const char *gran;
-+
-+    data = hypfs_get_dyndata();
-+    cpupool = __cpupool_find_by_id(data->id, true);
-+    ASSERT(cpupool);
-+
-+    gran = sched_gran_get_name(cpupool->gran);
-+
-+    if ( !*gran )
-+        return -ENOENT;
-+
-+    return copy_to_guest(uaddr, gran, strlen(gran) + 1) ? -EFAULT : 0;
-+}
-+
-+static unsigned int hypfs_gran_getsize(const struct hypfs_entry *entry)
-+{
-+    const struct hypfs_dyndir_id *data;
-+    const struct cpupool *cpupool;
-+    const char *gran;
-+
-+    data = hypfs_get_dyndata();
-+    cpupool = __cpupool_find_by_id(data->id, true);
-+    ASSERT(cpupool);
-+
-+    gran = sched_gran_get_name(cpupool->gran);
-+
-+    return strlen(gran) + 1;
-+}
-+
-+static struct hypfs_funcs cpupool_gran_funcs = {
-+    .enter = hypfs_node_enter,
-+    .exit = hypfs_node_exit,
-+    .read = cpupool_gran_read,
-+    .write = hypfs_write_deny,
-+    .getsize = hypfs_gran_getsize,
-+    .findentry = hypfs_leaf_findentry,
-+};
-+
-+static HYPFS_VARSIZE_INIT(cpupool_gran, XEN_HYPFS_TYPE_STRING, "sched-gran",
-+                          0, &cpupool_gran_funcs);
-+static char granstr[SCHED_GRAN_NAME_LEN] = {
-+    [0 ... SCHED_GRAN_NAME_LEN - 2] = '?',
-+    [SCHED_GRAN_NAME_LEN - 1] = 0
-+};
-+
- static struct hypfs_funcs cpupool_dir_funcs = {
-     .enter = cpupool_dir_enter,
-     .exit = cpupool_dir_exit,
-@@ -1115,6 +1176,8 @@ static void cpupool_hypfs_init(void)
+ static struct hypfs_entry *hypfs_get_entry(const char *path)
  {
-     hypfs_add_dir(&hypfs_root, &cpupool_dir, true);
-     hypfs_add_dyndir(&cpupool_dir, &cpupool_pooldir);
-+    hypfs_string_set_reference(&cpupool_gran, granstr);
-+    hypfs_add_leaf(&cpupool_pooldir, &cpupool_gran, true);
+     if ( path[0] != '/' )
+-        return NULL;
++        return ERR_PTR(-EINVAL);
+ 
+     return hypfs_get_entry_rel(&hypfs_root, path + 1);
  }
- #else
+@@ -454,9 +454,9 @@ long do_hypfs_op(unsigned int cmd,
+         goto out;
+ 
+     entry = hypfs_get_entry(path);
+-    if ( !entry )
++    if ( IS_ERR(entry) )
+     {
+-        ret = -ENOENT;
++        ret = PTR_ERR(entry);
+         goto out;
+     }
  
 -- 
 2.26.2
