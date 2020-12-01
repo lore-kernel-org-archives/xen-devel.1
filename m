@@ -7,40 +7,40 @@ X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 53779C64E8A
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Dec 2020 08:22:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A53E1C64E7A
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Dec 2020 08:22:22 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D1272206E3
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Dec 2020 08:22:20 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 48BB520659
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Dec 2020 08:22:22 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="A0YHXj4E"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D1272206E3
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="q7fVue6+"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 48BB520659
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.41659.75084 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.41669.75101 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kk0vK-0005dp-2r; Tue, 01 Dec 2020 08:22:10 +0000
+	id 1kk0vO-0005of-FO; Tue, 01 Dec 2020 08:22:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 41659.75084; Tue, 01 Dec 2020 08:22:09 +0000
+Received: by outflank-mailman (output) from mailman id 41669.75101; Tue, 01 Dec 2020 08:22:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kk0vJ-0005cz-Be; Tue, 01 Dec 2020 08:22:09 +0000
-Received: by outflank-mailman (input) for mailman id 41659;
- Tue, 01 Dec 2020 08:22:07 +0000
+	id 1kk0vO-0005oT-A2; Tue, 01 Dec 2020 08:22:14 +0000
+Received: by outflank-mailman (input) for mailman id 41669;
+ Tue, 01 Dec 2020 08:22:12 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=UECe=FF=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kk0vH-0004Uj-Jh
- for xen-devel@lists.xenproject.org; Tue, 01 Dec 2020 08:22:07 +0000
+ id 1kk0vM-0004Uj-Jt
+ for xen-devel@lists.xenproject.org; Tue, 01 Dec 2020 08:22:12 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 544f183e-d5f3-4c30-9d2f-26ec576f0792;
- Tue, 01 Dec 2020 08:21:34 +0000 (UTC)
+ id c3e75dc9-6b8c-4948-9e33-bfc041c331ed;
+ Tue, 01 Dec 2020 08:21:35 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 70019AF26;
+ by mx2.suse.de (Postfix) with ESMTP id E7BA2AC2F;
  Tue,  1 Dec 2020 08:21:33 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -53,17 +53,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 544f183e-d5f3-4c30-9d2f-26ec576f0792
+X-Inumbo-ID: c3e75dc9-6b8c-4948-9e33-bfc041c331ed
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1606810893; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1606810894; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=5TUB0753mqlMUzFRfIKqWdQ4pi4TEHdAafXYRsY3+ps=;
-	b=A0YHXj4E2/lcDG8u30FMXxMKHWlPnkqX5fXhttVGTKHbTrOBq0ysiVvNfNaXhMEnxZYSWQ
-	WIDIxYZnKNEGbvmh3Q/gTg/InCxWZ3nGq39Z4NnoNGX8nmZxUssvDqtA8JiFhyF0fFQ/9G
-	4/WqEKfDD4eK6+TeEMMWkvr2lM9Lc/s=
+	bh=7nEfxMc4Y111J56Pbtn4xCo86ZYNHh7NsCYZakRnxAw=;
+	b=q7fVue6+a3LnDyFS4uwGeOnENuWlrCODSQKGhqEjyhoQOU0imZti8xKGiJxIgP4ZPH0XGq
+	NcJcyyWri44MTb8Bd6uW73F0Exdla3Y1bf3Kz69CES6KlvO/AeUxcAaeshGW8aFjl48Syi
+	NJNsGCjs8OelOTH3cwKbfq2LzCG5/UE=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
@@ -74,255 +74,156 @@ Cc: Juergen Gross <jgross@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v2 12/17] xen/hypfs: add new enter() and exit() per node callbacks
-Date: Tue,  1 Dec 2020 09:21:23 +0100
-Message-Id: <20201201082128.15239-13-jgross@suse.com>
+Subject: [PATCH v2 14/17] xen/hypfs: add support for id-based dynamic directories
+Date: Tue,  1 Dec 2020 09:21:25 +0100
+Message-Id: <20201201082128.15239-15-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20201201082128.15239-1-jgross@suse.com>
 References: <20201201082128.15239-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-In order to better support resource allocation and locking for dynamic
-hypfs nodes add enter() and exit() callbacks to struct hypfs_funcs.
+Add some helpers to hypfs.c to support dynamic directories with a
+numerical id as name.
 
-The enter() callback is called when entering a node during hypfs user
-actions (traversing, reading or writing it), while the exit() callback
-is called when leaving a node (accessing another node at the same or a
-higher directory level, or when returning to the user).
-
-For avoiding recursion this requires a parent pointer in each node.
-Let the enter() callback return the entry address which is stored as
-the last accessed node in order to be able to use a template entry for
-that purpose in case of dynamic entries.
+The dynamic directory is based on a template specified by the user
+allowing to use specific access functions and having a predefined
+set of entries in the directory.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
 V2:
-- new patch
+- use macro for length of entry name (Jan Beulich)
+- const attributes (Jan Beulich)
+- use template name as format string (Jan Beulich)
+- add hypfs_dynid_entry_size() helper (Jan Beulich)
+- expect dyndir data having been allocated by enter() callback
 ---
- xen/common/hypfs.c      | 79 +++++++++++++++++++++++++++++++++++++++++
- xen/include/xen/hypfs.h |  5 +++
- 2 files changed, 84 insertions(+)
+ xen/common/hypfs.c      | 75 +++++++++++++++++++++++++++++++++++++++++
+ xen/include/xen/hypfs.h | 17 ++++++++++
+ 2 files changed, 92 insertions(+)
 
 diff --git a/xen/common/hypfs.c b/xen/common/hypfs.c
-index 83c5cacdca..e5adc9defe 100644
+index 39448c5409..1819b26925 100644
 --- a/xen/common/hypfs.c
 +++ b/xen/common/hypfs.c
-@@ -25,30 +25,40 @@ CHECK_hypfs_dirlistentry;
-      ROUNDUP((name_len) + 1, alignof(struct xen_hypfs_direntry)))
- 
- const struct hypfs_funcs hypfs_dir_funcs = {
-+    .enter = hypfs_node_enter,
-+    .exit = hypfs_node_exit,
-     .read = hypfs_read_dir,
-     .write = hypfs_write_deny,
-     .getsize = hypfs_getsize,
-     .findentry = hypfs_dir_findentry,
- };
- const struct hypfs_funcs hypfs_leaf_ro_funcs = {
-+    .enter = hypfs_node_enter,
-+    .exit = hypfs_node_exit,
-     .read = hypfs_read_leaf,
-     .write = hypfs_write_deny,
-     .getsize = hypfs_getsize,
-     .findentry = hypfs_leaf_findentry,
- };
- const struct hypfs_funcs hypfs_leaf_wr_funcs = {
-+    .enter = hypfs_node_enter,
-+    .exit = hypfs_node_exit,
-     .read = hypfs_read_leaf,
-     .write = hypfs_write_leaf,
-     .getsize = hypfs_getsize,
-     .findentry = hypfs_leaf_findentry,
- };
- const struct hypfs_funcs hypfs_bool_wr_funcs = {
-+    .enter = hypfs_node_enter,
-+    .exit = hypfs_node_exit,
-     .read = hypfs_read_leaf,
-     .write = hypfs_write_bool,
-     .getsize = hypfs_getsize,
-     .findentry = hypfs_leaf_findentry,
- };
- const struct hypfs_funcs hypfs_custom_wr_funcs = {
-+    .enter = hypfs_node_enter,
-+    .exit = hypfs_node_exit,
-     .read = hypfs_read_leaf,
-     .write = hypfs_write_custom,
-     .getsize = hypfs_getsize,
-@@ -63,6 +73,8 @@ enum hypfs_lock_state {
- };
- static DEFINE_PER_CPU(enum hypfs_lock_state, hypfs_locked);
- 
-+static DEFINE_PER_CPU(const struct hypfs_entry *, hypfs_last_node_entered);
-+
- HYPFS_DIR_INIT(hypfs_root, "");
- 
- static void hypfs_read_lock(void)
-@@ -100,11 +112,58 @@ static void hypfs_unlock(void)
-     }
+@@ -355,6 +355,81 @@ unsigned int hypfs_getsize(const struct hypfs_entry *entry)
+     return entry->size;
  }
  
-+const struct hypfs_entry *hypfs_node_enter(const struct hypfs_entry *entry)
++int hypfs_read_dyndir_id_entry(const struct hypfs_entry_dir *template,
++                               unsigned int id, bool is_last,
++                               XEN_GUEST_HANDLE_PARAM(void) *uaddr)
 +{
-+    return entry;
-+}
++    struct xen_hypfs_dirlistentry direntry;
++    char name[HYPFS_DYNDIR_ID_NAMELEN];
++    unsigned int e_namelen, e_len;
 +
-+void hypfs_node_exit(const struct hypfs_entry *entry)
-+{
-+}
++    e_namelen = snprintf(name, sizeof(name), template->e.name, id);
++    e_len = DIRENTRY_SIZE(e_namelen);
++    direntry.e.pad = 0;
++    direntry.e.type = template->e.type;
++    direntry.e.encoding = template->e.encoding;
++    direntry.e.content_len = template->e.funcs->getsize(&template->e);
++    direntry.e.max_write_len = template->e.max_size;
++    direntry.off_next = is_last ? 0 : e_len;
++    if ( copy_to_guest(*uaddr, &direntry, 1) )
++        return -EFAULT;
++    if ( copy_to_guest_offset(*uaddr, DIRENTRY_NAME_OFF, name,
++                              e_namelen + 1) )
++        return -EFAULT;
 +
-+static int node_enter(const struct hypfs_entry *entry)
-+{
-+    const struct hypfs_entry **last = &this_cpu(hypfs_last_node_entered);
-+
-+    entry = entry->funcs->enter(entry);
-+    if ( IS_ERR(entry) )
-+        return PTR_ERR(entry);
-+
-+    ASSERT(!*last || *last == entry->parent);
-+
-+    *last = entry;
++    guest_handle_add_offset(*uaddr, e_len);
 +
 +    return 0;
 +}
 +
-+static void node_exit(const struct hypfs_entry *entry)
++static struct hypfs_entry *hypfs_dyndir_findentry(
++    const struct hypfs_entry_dir *dir, const char *name, unsigned int name_len)
 +{
-+    const struct hypfs_entry **last = &this_cpu(hypfs_last_node_entered);
++    const struct hypfs_dyndir_id *data;
 +
-+    if ( !*last )
-+        return;
++    data = hypfs_get_dyndata();
 +
-+    ASSERT(*last == entry);
-+    *last = entry->parent;
-+
-+    entry->funcs->exit(entry);
++    /* Use template with original findentry function. */
++    return data->template->e.funcs->findentry(data->template, name, name_len);
 +}
 +
-+static void node_exit_all(void)
++static int hypfs_read_dyndir(const struct hypfs_entry *entry,
++                             XEN_GUEST_HANDLE_PARAM(void) uaddr)
 +{
-+    const struct hypfs_entry **last = &this_cpu(hypfs_last_node_entered);
++    const struct hypfs_dyndir_id *data;
 +
-+    while ( *last )
-+        node_exit(*last);
++    data = hypfs_get_dyndata();
++
++    /* Use template with original read function. */
++    return data->template->e.funcs->read(&data->template->e, uaddr);
 +}
 +
- static int add_entry(struct hypfs_entry_dir *parent, struct hypfs_entry *new)
++struct hypfs_entry *hypfs_gen_dyndir_entry_id(
++    const struct hypfs_entry_dir *template, unsigned int id)
++{
++    struct hypfs_dyndir_id *data;
++
++    data = hypfs_get_dyndata();
++
++    data->template = template;
++    data->id = id;
++    snprintf(data->name, sizeof(data->name), template->e.name, id);
++    data->dir = *template;
++    data->dir.e.name = data->name;
++    data->dir.e.funcs = &data->funcs;
++    data->funcs = *template->e.funcs;
++    data->funcs.findentry = hypfs_dyndir_findentry;
++    data->funcs.read = hypfs_read_dyndir;
++
++    return &data->dir.e;
++}
++
++unsigned int hypfs_dynid_entry_size(const struct hypfs_entry *template,
++                                    unsigned int id)
++{
++    return DIRENTRY_SIZE(snprintf(NULL, 0, template->name, id));
++}
++
+ int hypfs_read_dir(const struct hypfs_entry *entry,
+                    XEN_GUEST_HANDLE_PARAM(void) uaddr)
  {
-     int ret = -ENOENT;
-     struct hypfs_entry *e;
- 
-+    ASSERT(new->funcs->enter);
-+    ASSERT(new->funcs->exit);
-     ASSERT(new->funcs->read);
-     ASSERT(new->funcs->write);
-     ASSERT(new->funcs->getsize);
-@@ -140,6 +199,7 @@ static int add_entry(struct hypfs_entry_dir *parent, struct hypfs_entry *new)
-         unsigned int sz = strlen(new->name);
- 
-         parent->e.size += DIRENTRY_SIZE(sz);
-+        new->parent = &parent->e;
-     }
- 
-     hypfs_unlock();
-@@ -221,6 +281,7 @@ static struct hypfs_entry *hypfs_get_entry_rel(struct hypfs_entry_dir *dir,
-     const char *end;
-     struct hypfs_entry *entry;
-     unsigned int name_len;
-+    int ret;
- 
-     for ( ; ; )
-     {
-@@ -235,6 +296,10 @@ static struct hypfs_entry *hypfs_get_entry_rel(struct hypfs_entry_dir *dir,
-             end = strchr(path, '\0');
-         name_len = end - path;
- 
-+        ret = node_enter(&dir->e);
-+        if ( ret )
-+            return ERR_PTR(ret);
-+
-         entry = dir->e.funcs->findentry(dir, path, name_len);
-         if ( IS_ERR(entry) || !*end )
-             return entry;
-@@ -265,6 +330,7 @@ int hypfs_read_dir(const struct hypfs_entry *entry,
-     const struct hypfs_entry_dir *d;
-     const struct hypfs_entry *e;
-     unsigned int size = entry->funcs->getsize(entry);
-+    int ret;
- 
-     ASSERT(this_cpu(hypfs_locked) != hypfs_unlocked);
- 
-@@ -276,12 +342,19 @@ int hypfs_read_dir(const struct hypfs_entry *entry,
-         unsigned int e_namelen = strlen(e->name);
-         unsigned int e_len = DIRENTRY_SIZE(e_namelen);
- 
-+        ret = node_enter(e);
-+        if ( ret )
-+            return ret;
-+
-         direntry.e.pad = 0;
-         direntry.e.type = e->type;
-         direntry.e.encoding = e->encoding;
-         direntry.e.content_len = e->funcs->getsize(e);
-         direntry.e.max_write_len = e->max_size;
-         direntry.off_next = list_is_last(&e->list, &d->dirlist) ? 0 : e_len;
-+
-+        node_exit(e);
-+
-         if ( copy_to_guest(uaddr, &direntry, 1) )
-             return -EFAULT;
- 
-@@ -490,6 +563,10 @@ long do_hypfs_op(unsigned int cmd,
-         goto out;
-     }
- 
-+    ret = node_enter(entry);
-+    if ( ret )
-+        goto out;
-+
-     switch ( cmd )
-     {
-     case XEN_HYPFS_OP_read:
-@@ -506,6 +583,8 @@ long do_hypfs_op(unsigned int cmd,
-     }
- 
-  out:
-+    node_exit_all();
-+
-     hypfs_unlock();
- 
-     return ret;
 diff --git a/xen/include/xen/hypfs.h b/xen/include/xen/hypfs.h
-index 53f50772b4..8d96abd805 100644
+index be8d6c508a..1782c50b30 100644
 --- a/xen/include/xen/hypfs.h
 +++ b/xen/include/xen/hypfs.h
-@@ -35,6 +35,8 @@ struct hypfs_entry;
-  * "/a/b/c" findentry() will be called for "/", "/a", and "/a/b").
-  */
- struct hypfs_funcs {
-+    const struct hypfs_entry *(*enter)(const struct hypfs_entry *entry);
-+    void (*exit)(const struct hypfs_entry *entry);
-     int (*read)(const struct hypfs_entry *entry,
-                 XEN_GUEST_HANDLE_PARAM(void) uaddr);
-     int (*write)(struct hypfs_entry_leaf *leaf,
-@@ -56,6 +58,7 @@ struct hypfs_entry {
-     unsigned int size;
-     unsigned int max_size;
-     const char *name;
-+    struct hypfs_entry *parent;
-     struct list_head list;
-     const struct hypfs_funcs *funcs;
+@@ -76,6 +76,16 @@ struct hypfs_entry_dir {
+     struct list_head dirlist;
  };
-@@ -149,6 +152,8 @@ int hypfs_add_dir(struct hypfs_entry_dir *parent,
-                   struct hypfs_entry_dir *dir, bool nofault);
- int hypfs_add_leaf(struct hypfs_entry_dir *parent,
-                    struct hypfs_entry_leaf *leaf, bool nofault);
-+const struct hypfs_entry *hypfs_node_enter(const struct hypfs_entry *entry);
-+void hypfs_node_exit(const struct hypfs_entry *entry);
- int hypfs_read_dir(const struct hypfs_entry *entry,
-                    XEN_GUEST_HANDLE_PARAM(void) uaddr);
- int hypfs_read_leaf(const struct hypfs_entry *entry,
+ 
++struct hypfs_dyndir_id {
++    struct hypfs_entry_dir dir;             /* Modified copy of template. */
++    struct hypfs_funcs funcs;               /* Dynamic functions. */
++    const struct hypfs_entry_dir *template; /* Template used. */
++#define HYPFS_DYNDIR_ID_NAMELEN 12
++    char name[HYPFS_DYNDIR_ID_NAMELEN];     /* Name of hypfs entry. */
++
++    unsigned int id;                        /* Numerical id. */
++};
++
+ #define HYPFS_VARDIR_INIT(var, nam, fn)           \
+     struct hypfs_entry_dir __read_mostly var = {  \
+         .e.type = XEN_HYPFS_TYPE_DIR,             \
+@@ -181,6 +191,13 @@ struct hypfs_entry *hypfs_dir_findentry(const struct hypfs_entry_dir *dir,
+ void *hypfs_alloc_dyndata(unsigned long size);
+ void *hypfs_get_dyndata(void);
+ void hypfs_free_dyndata(void);
++int hypfs_read_dyndir_id_entry(const struct hypfs_entry_dir *template,
++                               unsigned int id, bool is_last,
++                               XEN_GUEST_HANDLE_PARAM(void) *uaddr);
++struct hypfs_entry *hypfs_gen_dyndir_entry_id(
++    const struct hypfs_entry_dir *template, unsigned int id);
++unsigned int hypfs_dynid_entry_size(const struct hypfs_entry *template,
++                                    unsigned int id);
+ #endif
+ 
+ #endif /* __XEN_HYPFS_H__ */
 -- 
 2.26.2
 
