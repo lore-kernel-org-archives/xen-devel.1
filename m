@@ -2,46 +2,50 @@ Return-Path: <SRS0=rTFK=FF=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B779FC64E7A
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Dec 2020 08:22:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 43FB3C83012
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Dec 2020 08:24:28 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4450820659
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Dec 2020 08:22:29 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id C948D2087D
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Dec 2020 08:24:27 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="si2eglK8"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4450820659
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="GH/VPYlI"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C948D2087D
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.41677.75114 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.41701.75125 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kk0vT-0005yk-9Q; Tue, 01 Dec 2020 08:22:19 +0000
+	id 1kk0xL-0006fJ-Kd; Tue, 01 Dec 2020 08:24:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 41677.75114; Tue, 01 Dec 2020 08:22:19 +0000
+Received: by outflank-mailman (output) from mailman id 41701.75125; Tue, 01 Dec 2020 08:24:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kk0vT-0005yV-38; Tue, 01 Dec 2020 08:22:19 +0000
-Received: by outflank-mailman (input) for mailman id 41677;
- Tue, 01 Dec 2020 08:22:17 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kk0xL-0006fC-Hg; Tue, 01 Dec 2020 08:24:15 +0000
+Received: by outflank-mailman (input) for mailman id 41701;
+ Tue, 01 Dec 2020 08:24:14 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=UECe=FF=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kk0vR-0004Uj-KF
- for xen-devel@lists.xenproject.org; Tue, 01 Dec 2020 08:22:17 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 8c0bbf43-36d4-4383-b29a-fee1a0eed84c;
- Tue, 01 Dec 2020 08:21:35 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 37707AD71;
- Tue,  1 Dec 2020 08:21:34 +0000 (UTC)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kk0xK-0006f1-Hp; Tue, 01 Dec 2020 08:24:14 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kk0xK-0006W1-DL; Tue, 01 Dec 2020 08:24:14 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kk0xK-0006yH-5n; Tue, 01 Dec 2020 08:24:14 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1kk0xK-0000ym-5L; Tue, 01 Dec 2020 08:24:14 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,225 +57,234 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8c0bbf43-36d4-4383-b29a-fee1a0eed84c
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1606810894; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=HM46dWJ+2EckZVs46afJ02xSZlPII/ZflhbtJ/soVzY=;
-	b=si2eglK8gFZfvlwn7DwLnIfjPwj443YIA2y0+2TssmsqgTD1VpUZvitNvDWOvPhJZbQS6V
-	H6lMLFAHhyc3EJFWNXxzU9nCuJnsn3hnRCrUF1EVh1mxqA/k9p3Ppo39CylLKOsK5gOPwX
-	ZRK+gWBGuZMp8brKkizNXEPDGrUqBxI=
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>,
-	Dario Faggioli <dfaggioli@suse.com>
-Subject: [PATCH v2 15/17] xen/cpupool: add cpupool directories
-Date: Tue,  1 Dec 2020 09:21:26 +0100
-Message-Id: <20201201082128.15239-16-jgross@suse.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20201201082128.15239-1-jgross@suse.com>
-References: <20201201082128.15239-1-jgross@suse.com>
-MIME-Version: 1.0
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=Y5VkM0Y3FhZC60uDY7Y1xgDiVDit1xrKETxH2jCZGBo=; b=GH/VPYlIKl1NpTnOT5WiAUV7bG
+	KqdJM2QuHpqVWbPBnTOEO/kXxM60GLEj7HF4rthUsJYpGMQ9hNpDQxi2tjbyl1BH10TgpK13Nev1A
+	LTuZOOwJScQt4FF+42XDvkQLdjgQsz7XtsmK1JquUo6yn3dbTzPc9vl9V3p0f2lt08Yg=;
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-157125-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [libvirt test] 157125: regressions - FAIL
+X-Osstest-Failures:
+    libvirt:build-armhf-libvirt:libvirt-build:fail:regression
+    libvirt:build-amd64-libvirt:libvirt-build:fail:regression
+    libvirt:build-i386-libvirt:libvirt-build:fail:regression
+    libvirt:build-arm64-libvirt:libvirt-build:fail:regression
+    libvirt:test-amd64-amd64-libvirt:build-check(1):blocked:nonblocking
+    libvirt:test-amd64-amd64-libvirt-pair:build-check(1):blocked:nonblocking
+    libvirt:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:build-check(1):blocked:nonblocking
+    libvirt:test-amd64-amd64-libvirt-vhd:build-check(1):blocked:nonblocking
+    libvirt:test-amd64-amd64-libvirt-xsm:build-check(1):blocked:nonblocking
+    libvirt:test-amd64-i386-libvirt:build-check(1):blocked:nonblocking
+    libvirt:test-amd64-i386-libvirt-pair:build-check(1):blocked:nonblocking
+    libvirt:test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm:build-check(1):blocked:nonblocking
+    libvirt:test-amd64-i386-libvirt-xsm:build-check(1):blocked:nonblocking
+    libvirt:test-arm64-arm64-libvirt:build-check(1):blocked:nonblocking
+    libvirt:test-arm64-arm64-libvirt-qcow2:build-check(1):blocked:nonblocking
+    libvirt:test-arm64-arm64-libvirt-xsm:build-check(1):blocked:nonblocking
+    libvirt:test-armhf-armhf-libvirt:build-check(1):blocked:nonblocking
+    libvirt:test-armhf-armhf-libvirt-raw:build-check(1):blocked:nonblocking
+X-Osstest-Versions-This:
+    libvirt=08ae9e5f40f8bae0c3cf48f84181884ddd310fa0
+X-Osstest-Versions-That:
+    libvirt=2c846fa6bcc11929c9fb857a22430fb9945654ad
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Tue, 01 Dec 2020 08:24:14 +0000
 
-Add /cpupool/<cpupool-id> directories to hypfs. Those are completely
-dynamic, so the related hypfs access functions need to be implemented.
+flight 157125 libvirt real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/157125/
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
-V2:
-- added const (Jan Beulich)
-- call hypfs_add_dir() in helper (Dario Faggioli)
-- switch locking to enter/exit callbacks
----
- docs/misc/hypfs-paths.pandoc |   9 +++
- xen/common/sched/cpupool.c   | 122 +++++++++++++++++++++++++++++++++++
- 2 files changed, 131 insertions(+)
+Regressions :-(
 
-diff --git a/docs/misc/hypfs-paths.pandoc b/docs/misc/hypfs-paths.pandoc
-index 6c7b2f7ee3..aaca1cdf92 100644
---- a/docs/misc/hypfs-paths.pandoc
-+++ b/docs/misc/hypfs-paths.pandoc
-@@ -175,6 +175,15 @@ The major version of Xen.
- 
- The minor version of Xen.
- 
-+#### /cpupool/
-+
-+A directory of all current cpupools.
-+
-+#### /cpupool/*/
-+
-+The individual cpupools. Each entry is a directory with the name being the
-+cpupool-id (e.g. /cpupool/0/).
-+
- #### /params/
- 
- A directory of runtime parameters.
-diff --git a/xen/common/sched/cpupool.c b/xen/common/sched/cpupool.c
-index 0db7d77219..3e17fdf95b 100644
---- a/xen/common/sched/cpupool.c
-+++ b/xen/common/sched/cpupool.c
-@@ -13,6 +13,8 @@
- 
- #include <xen/cpu.h>
- #include <xen/cpumask.h>
-+#include <xen/guest_access.h>
-+#include <xen/hypfs.h>
- #include <xen/init.h>
- #include <xen/keyhandler.h>
- #include <xen/lib.h>
-@@ -33,6 +35,7 @@ static int cpupool_moving_cpu = -1;
- static struct cpupool *cpupool_cpu_moving = NULL;
- static cpumask_t cpupool_locked_cpus;
- 
-+/* This lock nests inside sysctl or hypfs lock. */
- static DEFINE_SPINLOCK(cpupool_lock);
- 
- static enum sched_gran __read_mostly opt_sched_granularity = SCHED_GRAN_cpu;
-@@ -1003,12 +1006,131 @@ static struct notifier_block cpu_nfb = {
-     .notifier_call = cpu_callback
- };
- 
-+#ifdef CONFIG_HYPFS
-+static const struct hypfs_entry *cpupool_pooldir_enter(
-+    const struct hypfs_entry *entry);
-+
-+static struct hypfs_funcs cpupool_pooldir_funcs = {
-+    .enter = cpupool_pooldir_enter,
-+    .exit = hypfs_node_exit,
-+    .read = hypfs_read_dir,
-+    .write = hypfs_write_deny,
-+    .getsize = hypfs_getsize,
-+    .findentry = hypfs_dir_findentry,
-+};
-+
-+static HYPFS_VARDIR_INIT(cpupool_pooldir, "%u", &cpupool_pooldir_funcs);
-+
-+static const struct hypfs_entry *cpupool_pooldir_enter(
-+    const struct hypfs_entry *entry)
-+{
-+    return &cpupool_pooldir.e;
-+}
-+
-+static int cpupool_dir_read(const struct hypfs_entry *entry,
-+                            XEN_GUEST_HANDLE_PARAM(void) uaddr)
-+{
-+    int ret = 0;
-+    const struct cpupool *c;
-+    unsigned int size = 0;
-+
-+    list_for_each_entry(c, &cpupool_list, list)
-+    {
-+        size += hypfs_dynid_entry_size(entry, c->cpupool_id);
-+
-+        ret = hypfs_read_dyndir_id_entry(&cpupool_pooldir, c->cpupool_id,
-+                                         list_is_last(&c->list, &cpupool_list),
-+                                         &uaddr);
-+        if ( ret )
-+            break;
-+    }
-+
-+    return ret;
-+}
-+
-+static unsigned int cpupool_dir_getsize(const struct hypfs_entry *entry)
-+{
-+    const struct cpupool *c;
-+    unsigned int size = 0;
-+
-+    list_for_each_entry(c, &cpupool_list, list)
-+        size += hypfs_dynid_entry_size(entry, c->cpupool_id);
-+
-+    return size;
-+}
-+
-+static const struct hypfs_entry *cpupool_dir_enter(
-+    const struct hypfs_entry *entry)
-+{
-+    struct hypfs_dyndir_id *data;
-+
-+    data = hypfs_alloc_dyndata(sizeof(*data));
-+    if ( !data )
-+        return ERR_PTR(-ENOMEM);
-+    data->id = CPUPOOLID_NONE;
-+
-+    spin_lock(&cpupool_lock);
-+
-+    return entry;
-+}
-+
-+static void cpupool_dir_exit(const struct hypfs_entry *entry)
-+{
-+    spin_unlock(&cpupool_lock);
-+
-+    hypfs_free_dyndata();
-+}
-+
-+static struct hypfs_entry *cpupool_dir_findentry(
-+    const struct hypfs_entry_dir *dir, const char *name, unsigned int name_len)
-+{
-+    unsigned long id;
-+    const char *end;
-+    const struct cpupool *cpupool;
-+
-+    id = simple_strtoul(name, &end, 10);
-+    if ( end != name + name_len )
-+        return ERR_PTR(-ENOENT);
-+
-+    cpupool = __cpupool_find_by_id(id, true);
-+
-+    if ( !cpupool )
-+        return ERR_PTR(-ENOENT);
-+
-+    return hypfs_gen_dyndir_entry_id(&cpupool_pooldir, id);
-+}
-+
-+static struct hypfs_funcs cpupool_dir_funcs = {
-+    .enter = cpupool_dir_enter,
-+    .exit = cpupool_dir_exit,
-+    .read = cpupool_dir_read,
-+    .write = hypfs_write_deny,
-+    .getsize = cpupool_dir_getsize,
-+    .findentry = cpupool_dir_findentry,
-+};
-+
-+static HYPFS_VARDIR_INIT(cpupool_dir, "cpupool", &cpupool_dir_funcs);
-+
-+static void cpupool_hypfs_init(void)
-+{
-+    hypfs_add_dir(&hypfs_root, &cpupool_dir, true);
-+    hypfs_add_dyndir(&cpupool_dir, &cpupool_pooldir);
-+}
-+#else
-+
-+static void cpupool_hypfs_init(void)
-+{
-+}
-+#endif
-+
- static int __init cpupool_init(void)
- {
-     unsigned int cpu;
- 
-     cpupool_gran_init();
- 
-+    cpupool_hypfs_init();
-+
-     cpupool0 = cpupool_create(0, 0);
-     BUG_ON(IS_ERR(cpupool0));
-     cpupool_put(cpupool0);
--- 
-2.26.2
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-armhf-libvirt           6 libvirt-build            fail REGR. vs. 151777
+ build-amd64-libvirt           6 libvirt-build            fail REGR. vs. 151777
+ build-i386-libvirt            6 libvirt-build            fail REGR. vs. 151777
+ build-arm64-libvirt           6 libvirt-build            fail REGR. vs. 151777
 
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt      1 build-check(1)               blocked  n/a
+ test-amd64-amd64-libvirt-pair  1 build-check(1)               blocked  n/a
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 1 build-check(1) blocked n/a
+ test-amd64-amd64-libvirt-vhd  1 build-check(1)               blocked  n/a
+ test-amd64-amd64-libvirt-xsm  1 build-check(1)               blocked  n/a
+ test-amd64-i386-libvirt       1 build-check(1)               blocked  n/a
+ test-amd64-i386-libvirt-pair  1 build-check(1)               blocked  n/a
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 1 build-check(1) blocked n/a
+ test-amd64-i386-libvirt-xsm   1 build-check(1)               blocked  n/a
+ test-arm64-arm64-libvirt      1 build-check(1)               blocked  n/a
+ test-arm64-arm64-libvirt-qcow2  1 build-check(1)               blocked  n/a
+ test-arm64-arm64-libvirt-xsm  1 build-check(1)               blocked  n/a
+ test-armhf-armhf-libvirt      1 build-check(1)               blocked  n/a
+ test-armhf-armhf-libvirt-raw  1 build-check(1)               blocked  n/a
+
+version targeted for testing:
+ libvirt              08ae9e5f40f8bae0c3cf48f84181884ddd310fa0
+baseline version:
+ libvirt              2c846fa6bcc11929c9fb857a22430fb9945654ad
+
+Last test of basis   151777  2020-07-10 04:19:19 Z  144 days
+Failing since        151818  2020-07-11 04:18:52 Z  143 days  138 attempts
+Testing same since   157125  2020-12-01 04:19:15 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Adolfo Jayme Barrientos <fitoschido@gmail.com>
+  Aleksandr Alekseev <alexander.alekseev@virtuozzo.com>
+  Andika Triwidada <andika@gmail.com>
+  Andrea Bolognani <abologna@redhat.com>
+  Balázs Meskó <meskobalazs@mailbox.org>
+  Barrett Schonefeld <bschoney@utexas.edu>
+  Bastien Orivel <bastien.orivel@diateam.net>
+  Bihong Yu <yubihong@huawei.com>
+  Binfeng Wu <wubinfeng@huawei.com>
+  Boris Fiuczynski <fiuczy@linux.ibm.com>
+  Brian Turek <brian.turek@gmail.com>
+  Christian Ehrhardt <christian.ehrhardt@canonical.com>
+  Christian Schoenebeck <qemu_oss@crudebyte.com>
+  Cole Robinson <crobinso@redhat.com>
+  Collin Walling <walling@linux.ibm.com>
+  Cornelia Huck <cohuck@redhat.com>
+  Côme Borsoi <fedora@borsoi.fr>
+  Daniel Henrique Barboza <danielhb413@gmail.com>
+  Daniel Letai <dani@letai.org.il>
+  Daniel P. Berrange <berrange@redhat.com>
+  Daniel P. Berrangé <berrange@redhat.com>
+  Erik Skultety <eskultet@redhat.com>
+  Fabian Freyer <fabian.freyer@physik.tu-berlin.de>
+  Fangge Jin <fjin@redhat.com>
+  Fedora Weblate Translation <i18n@lists.fedoraproject.org>
+  Göran Uddeborg <goeran@uddeborg.se>
+  Halil Pasic <pasic@linux.ibm.com>
+  Han Han <hhan@redhat.com>
+  Hao Wang <wanghao232@huawei.com>
+  Ian Wienand <iwienand@redhat.com>
+  Jamie Strandboge <jamie@canonical.com>
+  Jamie Strandboge <jamie@ubuntu.com>
+  Jean-Baptiste Holcroft <jean-baptiste@holcroft.fr>
+  Jianan Gao <jgao@redhat.com>
+  Jim Fehlig <jfehlig@suse.com>
+  Jin Yan <jinyan12@huawei.com>
+  Jiri Denemark <jdenemar@redhat.com>
+  Jonathan Watt <jwatt@jwatt.org>
+  Jonathon Jongsma <jjongsma@redhat.com>
+  Julio Faracco <jcfaracco@gmail.com>
+  Ján Tomko <jtomko@redhat.com>
+  Kashyap Chamarthy <kchamart@redhat.com>
+  Kevin Locke <kevin@kevinlocke.name>
+  Laine Stump <laine@redhat.com>
+  Liao Pingfang <liao.pingfang@zte.com.cn>
+  Lin Ma <lma@suse.com>
+  Lin Ma <lma@suse.de>
+  Lin Ma <morecache@gmail.com>
+  Marc Hartmayer <mhartmay@linux.ibm.com>
+  Marc-André Lureau <marcandre.lureau@redhat.com>
+  Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+  Markus Schade <markus.schade@hetzner.com>
+  Martin Kletzander <mkletzan@redhat.com>
+  Masayoshi Mizuma <m.mizuma@jp.fujitsu.com>
+  Matt Coleman <matt@datto.com>
+  Matt Coleman <mcoleman@datto.com>
+  Mauro Matteo Cascella <mcascell@redhat.com>
+  Michal Privoznik <mprivozn@redhat.com>
+  Michał Smyk <fedora@smyk.it>
+  Milo Casagrande <milo@milo.name>
+  Neal Gompa <ngompa13@gmail.com>
+  Nico Pache <npache@redhat.com>
+  Nikolay Shirokovskiy <nshirokovskiy@virtuozzo.com>
+  Olaf Hering <olaf@aepfle.de>
+  Olesya Gerasimenko <gammaray@basealt.ru>
+  Orion Poplawski <orion@nwra.com>
+  Patrick Magauran <patmagauran.j@gmail.com>
+  Paulo de Rezende Pinatti <ppinatti@linux.ibm.com>
+  Pavel Hrdina <phrdina@redhat.com>
+  Peter Krempa <pkrempa@redhat.com>
+  Pino Toscano <ptoscano@redhat.com>
+  Pino Toscano <toscano.pino@tiscali.it>
+  Piotr Drąg <piotrdrag@gmail.com>
+  Prathamesh Chavan <pc44800@gmail.com>
+  Ricky Tigg <ricky.tigg@gmail.com>
+  Roman Bogorodskiy <bogorodskiy@gmail.com>
+  Roman Bolshakov <r.bolshakov@yadro.com>
+  Ryan Gahagan <rgahagan@cs.utexas.edu>
+  Ryan Schmidt <git@ryandesign.com>
+  Sam Hartman <hartmans@debian.org>
+  Scott Shambarger <scott-libvirt@shambarger.net>
+  Sebastian Mitterle <smitterl@redhat.com>
+  Shaojun Yang <yangshaojun@phytium.com.cn>
+  Simon Gaiser <simon@invisiblethingslab.com>
+  Stefan Bader <stefan.bader@canonical.com>
+  Stefan Berger <stefanb@linux.ibm.com>
+  Szymon Scholz <szymonscholz@gmail.com>
+  Thomas Huth <thuth@redhat.com>
+  Tim Wiederhake <twiederh@redhat.com>
+  Tomáš Golembiovský <tgolembi@redhat.com>
+  Wang Xin <wangxinxin.wang@huawei.com>
+  Weblate <noreply@weblate.org>
+  Yang Hang <yanghang44@huawei.com>
+  Yanqiu Zhang <yanqzhan@redhat.com>
+  Yi Li <yili@winhong.com>
+  Yi Wang <wang.yi59@zte.com.cn>
+  Yuri Chornoivan <yurchor@ukr.net>
+  Zheng Chuan <zhengchuan@huawei.com>
+  zhenwei pi <pizhenwei@bytedance.com>
+  Zhenyu Zheng <zheng.zhenyu@outlook.com>
+
+jobs:
+ build-amd64-xsm                                              pass    
+ build-arm64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-arm64                                                  pass    
+ build-armhf                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          fail    
+ build-arm64-libvirt                                          fail    
+ build-armhf-libvirt                                          fail    
+ build-i386-libvirt                                           fail    
+ build-amd64-pvops                                            pass    
+ build-arm64-pvops                                            pass    
+ build-armhf-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           blocked 
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            blocked 
+ test-amd64-amd64-libvirt-xsm                                 blocked 
+ test-arm64-arm64-libvirt-xsm                                 blocked 
+ test-amd64-i386-libvirt-xsm                                  blocked 
+ test-amd64-amd64-libvirt                                     blocked 
+ test-arm64-arm64-libvirt                                     blocked 
+ test-armhf-armhf-libvirt                                     blocked 
+ test-amd64-i386-libvirt                                      blocked 
+ test-amd64-amd64-libvirt-pair                                blocked 
+ test-amd64-i386-libvirt-pair                                 blocked 
+ test-arm64-arm64-libvirt-qcow2                               blocked 
+ test-armhf-armhf-libvirt-raw                                 blocked 
+ test-amd64-amd64-libvirt-vhd                                 blocked 
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+(No revision log; it would be 29770 lines long.)
 
