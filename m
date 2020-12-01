@@ -7,41 +7,40 @@ X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 854C6C71156
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Dec 2020 08:22:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0BE8FC64E7A
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Dec 2020 08:22:06 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 105CA2087D
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Dec 2020 08:22:03 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 8ADE72085B
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Dec 2020 08:22:05 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="aLg6Utsd"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 105CA2087D
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="EEKGCdba"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8ADE72085B
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.41639.75006 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.41640.75012 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kk0v4-00054R-9L; Tue, 01 Dec 2020 08:21:54 +0000
+	id 1kk0v4-00055m-Vp; Tue, 01 Dec 2020 08:21:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 41639.75006; Tue, 01 Dec 2020 08:21:54 +0000
+Received: by outflank-mailman (output) from mailman id 41640.75012; Tue, 01 Dec 2020 08:21:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kk0v4-00054E-4b; Tue, 01 Dec 2020 08:21:54 +0000
-Received: by outflank-mailman (input) for mailman id 41639;
+	id 1kk0v4-00055R-Ka; Tue, 01 Dec 2020 08:21:54 +0000
+Received: by outflank-mailman (input) for mailman id 41640;
  Tue, 01 Dec 2020 08:21:52 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=UECe=FF=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kk0v2-0004VK-5i
+ id 1kk0v2-0004Uj-JJ
  for xen-devel@lists.xenproject.org; Tue, 01 Dec 2020 08:21:52 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 1c2e290f-45b7-4f0b-88e8-d03f1bef03bd;
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id d5433781-6557-465d-9090-c775c13054ae;
  Tue, 01 Dec 2020 08:21:33 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id AB4D9AF0C;
+ by mx2.suse.de (Postfix) with ESMTP id 2DC4CAEFF;
  Tue,  1 Dec 2020 08:21:32 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -54,338 +53,229 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1c2e290f-45b7-4f0b-88e8-d03f1bef03bd
+X-Inumbo-ID: d5433781-6557-465d-9090-c775c13054ae
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	t=1606810892; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=kUqinpHgs7lQk4VZmE9ndgJqbAEUMbPxpoEKorm7mzA=;
-	b=aLg6UtsdqCn5u7PfntKCiyCpCF7kvj0R65v/6un82KaisYDyo2w/IllrDI1vPDMZ7C6asF
-	fZ6A/M0p8FXu0LnT+JFWn3Lf5nqHF47aEk9dVs8F9qe2PTnaAHulrmq3lsNiTSHUIO2yno
-	L8DmQOD0hJeA4od635U9bI5hsdEPp+w=
+	bh=708vSf4hdDLmhqVFIbpBu/E6M/WDwL53lyQ6wvfCs8c=;
+	b=EEKGCdbaUJZM5ne+c6o2Igd6i7OnsH1A4VTVrMWIIJ8haSEigJ728u0IGOeBVBvrGYgD0G
+	sZf9D/plSzZkk4iAqQKZVxKeKecfF4J/jpq2Tz6BeS2ijXbTAaGnfnE2i4avbbshJxq0pS
+	iekW+Jec6R8Lugat7JGWYuvemBryrL8=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
 	George Dunlap <george.dunlap@citrix.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v2 09/17] xen/hypfs: move per-node function pointers into a dedicated struct
-Date: Tue,  1 Dec 2020 09:21:20 +0100
-Message-Id: <20201201082128.15239-10-jgross@suse.com>
+	Dario Faggioli <dfaggioli@suse.com>
+Subject: [PATCH v2 07/17] xen/cpupool: support moving domain between cpupools with different granularity
+Date: Tue,  1 Dec 2020 09:21:18 +0100
+Message-Id: <20201201082128.15239-8-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20201201082128.15239-1-jgross@suse.com>
 References: <20201201082128.15239-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Move the function pointers currently stored in each hypfs node into a
-dedicated structure in order to save some space for each node. This
-will save even more space with additional callbacks added in future.
+When moving a domain between cpupools with different scheduling
+granularity the sched_units of the domain need to be adjusted.
 
-Provide some standard function vectors.
-
-Instead of testing the write pointer to be not NULL provide a dummy
-function just returning -EACCESS. ASSERT() all vector entries being
-populated when adding a node. This avoids any potential problem (e.g.
-pv domain privilege escalations) in case of calling a non populated
-vector entry.
+Do that by allocating new sched_units and throwing away the old ones
+in sched_move_domain().
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
-V2:
-- make function vector const (Jan Beulich)
-- don't allow any NULL entry (Jan Beulich)
-- add callback comment
----
- xen/common/hypfs.c      | 41 ++++++++++++++++++++----
- xen/include/xen/hypfs.h | 71 ++++++++++++++++++++++++++++-------------
- xen/include/xen/param.h | 15 +++------
- 3 files changed, 88 insertions(+), 39 deletions(-)
+ xen/common/sched/core.c | 121 ++++++++++++++++++++++++++++++----------
+ 1 file changed, 90 insertions(+), 31 deletions(-)
 
-diff --git a/xen/common/hypfs.c b/xen/common/hypfs.c
-index 8e932b5cf9..7befd144ba 100644
---- a/xen/common/hypfs.c
-+++ b/xen/common/hypfs.c
-@@ -24,6 +24,27 @@ CHECK_hypfs_dirlistentry;
-     (DIRENTRY_NAME_OFF +        \
-      ROUNDUP((name_len) + 1, alignof(struct xen_hypfs_direntry)))
- 
-+const struct hypfs_funcs hypfs_dir_funcs = {
-+    .read = hypfs_read_dir,
-+    .write = hypfs_write_deny,
-+};
-+const struct hypfs_funcs hypfs_leaf_ro_funcs = {
-+    .read = hypfs_read_leaf,
-+    .write = hypfs_write_deny,
-+};
-+const struct hypfs_funcs hypfs_leaf_wr_funcs = {
-+    .read = hypfs_read_leaf,
-+    .write = hypfs_write_leaf,
-+};
-+const struct hypfs_funcs hypfs_bool_wr_funcs = {
-+    .read = hypfs_read_leaf,
-+    .write = hypfs_write_bool,
-+};
-+const struct hypfs_funcs hypfs_custom_wr_funcs = {
-+    .read = hypfs_read_leaf,
-+    .write = hypfs_write_custom,
-+};
-+
- static DEFINE_RWLOCK(hypfs_lock);
- enum hypfs_lock_state {
-     hypfs_unlocked,
-@@ -74,6 +95,9 @@ static int add_entry(struct hypfs_entry_dir *parent, struct hypfs_entry *new)
-     int ret = -ENOENT;
-     struct hypfs_entry *e;
- 
-+    ASSERT(new->funcs->read);
-+    ASSERT(new->funcs->write);
-+
-     hypfs_write_lock();
- 
-     list_for_each_entry ( e, &parent->dirlist, list )
-@@ -284,7 +308,7 @@ static int hypfs_read(const struct hypfs_entry *entry,
- 
-     guest_handle_add_offset(uaddr, sizeof(e));
- 
--    ret = entry->read(entry, uaddr);
-+    ret = entry->funcs->read(entry, uaddr);
- 
-  out:
-     return ret;
-@@ -297,6 +321,7 @@ int hypfs_write_leaf(struct hypfs_entry_leaf *leaf,
-     int ret;
- 
-     ASSERT(this_cpu(hypfs_locked) == hypfs_write_locked);
-+    ASSERT(leaf->e.max_size);
- 
-     if ( ulen > leaf->e.max_size )
-         return -ENOSPC;
-@@ -357,6 +382,7 @@ int hypfs_write_custom(struct hypfs_entry_leaf *leaf,
-     int ret;
- 
-     ASSERT(this_cpu(hypfs_locked) == hypfs_write_locked);
-+    ASSERT(leaf->e.max_size);
- 
-     /* Avoid oversized buffer allocation. */
-     if ( ulen > MAX_PARAM_SIZE )
-@@ -382,19 +408,20 @@ int hypfs_write_custom(struct hypfs_entry_leaf *leaf,
-     return ret;
+diff --git a/xen/common/sched/core.c b/xen/common/sched/core.c
+index a429fc7640..2a61c879b3 100644
+--- a/xen/common/sched/core.c
++++ b/xen/common/sched/core.c
+@@ -613,17 +613,45 @@ static void sched_move_irqs(const struct sched_unit *unit)
+         vcpu_move_irqs(v);
  }
  
-+int hypfs_write_deny(struct hypfs_entry_leaf *leaf,
-+                     XEN_GUEST_HANDLE_PARAM(void) uaddr, unsigned int ulen)
-+{
-+    return -EACCES;
-+}
-+
- static int hypfs_write(struct hypfs_entry *entry,
-                        XEN_GUEST_HANDLE_PARAM(void) uaddr, unsigned long ulen)
- {
-     struct hypfs_entry_leaf *l;
- 
--    if ( !entry->write )
--        return -EACCES;
--
--    ASSERT(entry->max_size);
--
-     l = container_of(entry, struct hypfs_entry_leaf, e);
- 
--    return entry->write(l, uaddr, ulen);
-+    return entry->funcs->write(l, uaddr, ulen);
- }
- 
- long do_hypfs_op(unsigned int cmd,
-diff --git a/xen/include/xen/hypfs.h b/xen/include/xen/hypfs.h
-index 5ad99cb558..25fdf3ead7 100644
---- a/xen/include/xen/hypfs.h
-+++ b/xen/include/xen/hypfs.h
-@@ -7,6 +7,32 @@
- #include <public/hypfs.h>
- 
- struct hypfs_entry_leaf;
-+struct hypfs_entry;
-+
 +/*
-+ * Per-node callbacks:
++ * Move a domain from one cpupool to another.
 + *
-+ * The callbacks are always called with the hypfs lock held.
++ * A domain with any vcpu having temporary affinity settings will be denied
++ * to move. Hard and soft affinities will be reset.
 + *
-+ * The read() callback is used to return the contents of a node (either
-+ * directory or leaf). It is NOT used to get directory entries during traversal
-+ * of the tree.
++ * In order to support cpupools with different scheduling granularities all
++ * scheduling units are replaced by new ones.
 + *
-+ * The write() callback is used to modify the contents of a node. Writing
-+ * directories is not supported (this means all nodes are added at boot time).
++ * The complete move is done in the following steps:
++ * - check prerequisites (no vcpu with temporary affinities)
++ * - allocate all new data structures (scheduler specific domain data, unit
++ *   memory, scheduler specific unit data)
++ * - pause domain
++ * - temporarily move all (old) units to the same scheduling resource (this
++ *   makes the final resource assignment easier in case the new cpupool has
++ *   a larger granularity than the old one, as the scheduling locks for all
++ *   vcpus must be held for that operation)
++ * - remove old units from scheduling
++ * - set new cpupool and scheduler domain data pointers in struct domain
++ * - switch all vcpus to new units, still assigned to the old scheduling
++ *   resource
++ * - migrate all new units to scheduling resources of the new cpupool
++ * - unpause the domain
++ * - free the old memory (scheduler specific domain data, unit memory,
++ *   scheduler specific unit data)
 + */
-+struct hypfs_funcs {
-+    int (*read)(const struct hypfs_entry *entry,
-+                XEN_GUEST_HANDLE_PARAM(void) uaddr);
-+    int (*write)(struct hypfs_entry_leaf *leaf,
-+                 XEN_GUEST_HANDLE_PARAM(void) uaddr, unsigned int ulen);
-+};
+ int sched_move_domain(struct domain *d, struct cpupool *c)
+ {
+     struct vcpu *v;
+-    struct sched_unit *unit;
++    struct sched_unit *unit, *old_unit;
++    struct sched_unit *new_units = NULL, *old_units;
++    struct sched_unit **unit_ptr = &new_units;
+     unsigned int new_p, unit_idx;
+-    void **unit_priv;
+     void *domdata;
+-    void *unitdata;
+-    struct scheduler *old_ops;
++    struct scheduler *old_ops = dom_scheduler(d);
+     void *old_domdata;
+     unsigned int gran = cpupool_get_granularity(c);
++    unsigned int n_units = DIV_ROUND_UP(d->max_vcpus, gran);
+     int ret = 0;
+ 
+     for_each_vcpu ( d, v )
+@@ -641,53 +669,78 @@ int sched_move_domain(struct domain *d, struct cpupool *c)
+         goto out;
+     }
+ 
+-    unit_priv = xzalloc_array(void *, DIV_ROUND_UP(d->max_vcpus, gran));
+-    if ( unit_priv == NULL )
++    for ( unit_idx = 0; unit_idx < n_units; unit_idx++ )
+     {
+-        sched_free_domdata(c->sched, domdata);
+-        ret = -ENOMEM;
+-        goto out;
+-    }
++        unit = sched_alloc_unit_mem();
++        if ( unit )
++        {
++            /* Initialize unit for sched_alloc_udata() to work. */
++            unit->domain = d;
++            unit->unit_id = unit_idx * gran;
++            unit->vcpu_list = d->vcpu[unit->unit_id];
++            unit->priv = sched_alloc_udata(c->sched, unit, domdata);
++            *unit_ptr = unit;
++        }
+ 
+-    unit_idx = 0;
+-    for_each_sched_unit ( d, unit )
+-    {
+-        unit_priv[unit_idx] = sched_alloc_udata(c->sched, unit, domdata);
+-        if ( unit_priv[unit_idx] == NULL )
++        if ( !unit || !unit->priv )
+         {
+-            for ( unit_idx = 0; unit_priv[unit_idx]; unit_idx++ )
+-                sched_free_udata(c->sched, unit_priv[unit_idx]);
+-            xfree(unit_priv);
+-            sched_free_domdata(c->sched, domdata);
++            old_units = new_units;
++            old_domdata = domdata;
+             ret = -ENOMEM;
+-            goto out;
++            goto out_free;
+         }
+-        unit_idx++;
 +
-+extern const struct hypfs_funcs hypfs_dir_funcs;
-+extern const struct hypfs_funcs hypfs_leaf_ro_funcs;
-+extern const struct hypfs_funcs hypfs_leaf_wr_funcs;
-+extern const struct hypfs_funcs hypfs_bool_wr_funcs;
-+extern const struct hypfs_funcs hypfs_custom_wr_funcs;
- 
- struct hypfs_entry {
-     unsigned short type;
-@@ -15,10 +41,7 @@ struct hypfs_entry {
-     unsigned int max_size;
-     const char *name;
-     struct list_head list;
--    int (*read)(const struct hypfs_entry *entry,
--                XEN_GUEST_HANDLE_PARAM(void) uaddr);
--    int (*write)(struct hypfs_entry_leaf *leaf,
--                 XEN_GUEST_HANDLE_PARAM(void) uaddr, unsigned int ulen);
-+    const struct hypfs_funcs *funcs;
- };
- 
- struct hypfs_entry_leaf {
-@@ -42,7 +65,7 @@ struct hypfs_entry_dir {
-         .e.size = 0,                              \
-         .e.max_size = 0,                          \
-         .e.list = LIST_HEAD_INIT(var.e.list),     \
--        .e.read = hypfs_read_dir,                 \
-+        .e.funcs = &hypfs_dir_funcs,              \
-         .dirlist = LIST_HEAD_INIT(var.dirlist),   \
++        unit_ptr = &unit->next_in_list;
      }
  
-@@ -52,7 +75,7 @@ struct hypfs_entry_dir {
-         .e.encoding = XEN_HYPFS_ENC_PLAIN,        \
-         .e.name = (nam),                          \
-         .e.max_size = (msz),                      \
--        .e.read = hypfs_read_leaf,                \
-+        .e.funcs = &hypfs_leaf_ro_funcs,          \
+     domain_pause(d);
+ 
+-    old_ops = dom_scheduler(d);
+     old_domdata = d->sched_priv;
+ 
++    new_p = cpumask_first(d->cpupool->cpu_valid);
+     for_each_sched_unit ( d, unit )
+     {
++        spinlock_t *lock;
++
++        /*
++         * Temporarily move all units to same processor to make locking
++         * easier when moving the new units to the new processors.
++         */
++        lock = unit_schedule_lock_irq(unit);
++        sched_set_res(unit, get_sched_res(new_p));
++        spin_unlock_irq(lock);
++
+         sched_remove_unit(old_ops, unit);
      }
  
- /* Content and size need to be set via hypfs_string_set_reference(). */
-@@ -72,35 +95,37 @@ static inline void hypfs_string_set_reference(struct hypfs_entry_leaf *leaf,
-     leaf->e.size = strlen(str) + 1;
- }
++    old_units = d->sched_unit_list;
++
+     d->cpupool = c;
+     d->sched_priv = domdata;
  
--#define HYPFS_FIXEDSIZE_INIT(var, typ, nam, contvar, wr) \
--    struct hypfs_entry_leaf __read_mostly var = {        \
--        .e.type = (typ),                                 \
--        .e.encoding = XEN_HYPFS_ENC_PLAIN,               \
--        .e.name = (nam),                                 \
--        .e.size = sizeof(contvar),                       \
--        .e.max_size = (wr) ? sizeof(contvar) : 0,        \
--        .e.read = hypfs_read_leaf,                       \
--        .e.write = (wr),                                 \
--        .u.content = &(contvar),                         \
-+#define HYPFS_FIXEDSIZE_INIT(var, typ, nam, contvar, fn, wr) \
-+    struct hypfs_entry_leaf __read_mostly var = {            \
-+        .e.type = (typ),                                     \
-+        .e.encoding = XEN_HYPFS_ENC_PLAIN,                   \
-+        .e.name = (nam),                                     \
-+        .e.size = sizeof(contvar),                           \
-+        .e.max_size = (wr) ? sizeof(contvar) : 0,            \
-+        .e.funcs = (fn),                                     \
-+        .u.content = &(contvar),                             \
++    unit = new_units;
++    for_each_vcpu ( d, v )
++    {
++        old_unit = v->sched_unit;
++        if ( unit->unit_id + gran == v->vcpu_id )
++            unit = unit->next_in_list;
++
++        unit->state_entry_time = old_unit->state_entry_time;
++        unit->runstate_cnt[v->runstate.state]++;
++        /* Temporarily use old resource assignment */
++        unit->res = get_sched_res(new_p);
++
++        v->sched_unit = unit;
++    }
++
++    d->sched_unit_list = new_units;
++
+     new_p = cpumask_first(c->cpu_valid);
+-    unit_idx = 0;
+     for_each_sched_unit ( d, unit )
+     {
+         spinlock_t *lock;
+         unsigned int unit_p = new_p;
+ 
+-        unitdata = unit->priv;
+-        unit->priv = unit_priv[unit_idx];
+-
+         for_each_sched_unit_vcpu ( unit, v )
+         {
+             migrate_timer(&v->periodic_timer, new_p);
+@@ -713,8 +766,6 @@ int sched_move_domain(struct domain *d, struct cpupool *c)
+ 
+         sched_insert_unit(c->sched, unit);
+ 
+-        sched_free_udata(old_ops, unitdata);
+-
+         unit_idx++;
      }
  
- #define HYPFS_UINT_INIT(var, nam, contvar)                       \
--    HYPFS_FIXEDSIZE_INIT(var, XEN_HYPFS_TYPE_UINT, nam, contvar, NULL)
-+    HYPFS_FIXEDSIZE_INIT(var, XEN_HYPFS_TYPE_UINT, nam, contvar, \
-+                         &hypfs_leaf_ro_funcs, 0)
- #define HYPFS_UINT_INIT_WRITABLE(var, nam, contvar)              \
-     HYPFS_FIXEDSIZE_INIT(var, XEN_HYPFS_TYPE_UINT, nam, contvar, \
--                         hypfs_write_leaf)
-+                         &hypfs_leaf_wr_funcs, 1)
+@@ -722,11 +773,19 @@ int sched_move_domain(struct domain *d, struct cpupool *c)
  
- #define HYPFS_INT_INIT(var, nam, contvar)                        \
--    HYPFS_FIXEDSIZE_INIT(var, XEN_HYPFS_TYPE_INT, nam, contvar, NULL)
-+    HYPFS_FIXEDSIZE_INIT(var, XEN_HYPFS_TYPE_INT, nam, contvar,  \
-+                         &hypfs_leaf_ro_funcs, 0)
- #define HYPFS_INT_INIT_WRITABLE(var, nam, contvar)               \
-     HYPFS_FIXEDSIZE_INIT(var, XEN_HYPFS_TYPE_INT, nam, contvar, \
--                         hypfs_write_leaf)
-+                         &hypfs_leaf_wr_funcs, 1)
+     domain_unpause(d);
  
- #define HYPFS_BOOL_INIT(var, nam, contvar)                       \
--    HYPFS_FIXEDSIZE_INIT(var, XEN_HYPFS_TYPE_BOOL, nam, contvar, NULL)
-+    HYPFS_FIXEDSIZE_INIT(var, XEN_HYPFS_TYPE_BOOL, nam, contvar, \
-+                         &hypfs_leaf_ro_funcs, 0)
- #define HYPFS_BOOL_INIT_WRITABLE(var, nam, contvar)              \
-     HYPFS_FIXEDSIZE_INIT(var, XEN_HYPFS_TYPE_BOOL, nam, contvar, \
--                         hypfs_write_bool)
-+                         &hypfs_bool_wr_funcs, 1)
+-    sched_free_domdata(old_ops, old_domdata);
++ out_free:
++    for ( unit = old_units; unit; )
++    {
++        if ( unit->priv )
++            sched_free_udata(c->sched, unit->priv);
++        old_unit = unit;
++        unit = unit->next_in_list;
++        xfree(old_unit);
++    }
  
- extern struct hypfs_entry_dir hypfs_root;
+-    xfree(unit_priv);
++    sched_free_domdata(old_ops, old_domdata);
  
-@@ -112,6 +137,8 @@ int hypfs_read_dir(const struct hypfs_entry *entry,
-                    XEN_GUEST_HANDLE_PARAM(void) uaddr);
- int hypfs_read_leaf(const struct hypfs_entry *entry,
-                     XEN_GUEST_HANDLE_PARAM(void) uaddr);
-+int hypfs_write_deny(struct hypfs_entry_leaf *leaf,
-+                     XEN_GUEST_HANDLE_PARAM(void) uaddr, unsigned int ulen);
- int hypfs_write_leaf(struct hypfs_entry_leaf *leaf,
-                      XEN_GUEST_HANDLE_PARAM(void) uaddr, unsigned int ulen);
- int hypfs_write_bool(struct hypfs_entry_leaf *leaf,
-diff --git a/xen/include/xen/param.h b/xen/include/xen/param.h
-index d0409d3a0e..1b2c7db954 100644
---- a/xen/include/xen/param.h
-+++ b/xen/include/xen/param.h
-@@ -116,8 +116,7 @@ extern struct param_hypfs __paramhypfs_start[], __paramhypfs_end[];
-         { .hypfs.e.type = XEN_HYPFS_TYPE_STRING, \
-           .hypfs.e.encoding = XEN_HYPFS_ENC_PLAIN, \
-           .hypfs.e.name = (nam), \
--          .hypfs.e.read = hypfs_read_leaf, \
--          .hypfs.e.write = hypfs_write_custom, \
-+          .hypfs.e.funcs = &hypfs_custom_wr_funcs, \
-           .init_leaf = (initfunc), \
-           .func = (variable) }
- #define boolean_runtime_only_param(nam, variable) \
-@@ -127,8 +126,7 @@ extern struct param_hypfs __paramhypfs_start[], __paramhypfs_end[];
-           .hypfs.e.name = (nam), \
-           .hypfs.e.size = sizeof(variable), \
-           .hypfs.e.max_size = sizeof(variable), \
--          .hypfs.e.read = hypfs_read_leaf, \
--          .hypfs.e.write = hypfs_write_bool, \
-+          .hypfs.e.funcs = &hypfs_bool_wr_funcs, \
-           .hypfs.u.content = &(variable) }
- #define integer_runtime_only_param(nam, variable) \
-     __paramfs __parfs_##variable = \
-@@ -137,8 +135,7 @@ extern struct param_hypfs __paramhypfs_start[], __paramhypfs_end[];
-           .hypfs.e.name = (nam), \
-           .hypfs.e.size = sizeof(variable), \
-           .hypfs.e.max_size = sizeof(variable), \
--          .hypfs.e.read = hypfs_read_leaf, \
--          .hypfs.e.write = hypfs_write_leaf, \
-+          .hypfs.e.funcs = &hypfs_leaf_wr_funcs, \
-           .hypfs.u.content = &(variable) }
- #define size_runtime_only_param(nam, variable) \
-     __paramfs __parfs_##variable = \
-@@ -147,8 +144,7 @@ extern struct param_hypfs __paramhypfs_start[], __paramhypfs_end[];
-           .hypfs.e.name = (nam), \
-           .hypfs.e.size = sizeof(variable), \
-           .hypfs.e.max_size = sizeof(variable), \
--          .hypfs.e.read = hypfs_read_leaf, \
--          .hypfs.e.write = hypfs_write_leaf, \
-+          .hypfs.e.funcs = &hypfs_leaf_wr_funcs, \
-           .hypfs.u.content = &(variable) }
- #define string_runtime_only_param(nam, variable) \
-     __paramfs __parfs_##variable = \
-@@ -157,8 +153,7 @@ extern struct param_hypfs __paramhypfs_start[], __paramhypfs_end[];
-           .hypfs.e.name = (nam), \
-           .hypfs.e.size = 0, \
-           .hypfs.e.max_size = sizeof(variable), \
--          .hypfs.e.read = hypfs_read_leaf, \
--          .hypfs.e.write = hypfs_write_leaf, \
-+          .hypfs.e.funcs = &hypfs_leaf_wr_funcs, \
-           .hypfs.u.content = &(variable) }
+-out:
++ out:
+     rcu_read_unlock(&sched_res_rculock);
  
- #else
+     return ret;
 -- 
 2.26.2
 
