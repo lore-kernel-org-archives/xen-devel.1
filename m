@@ -2,46 +2,45 @@ Return-Path: <SRS0=2fhb=FG=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3B167C83013
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Dec 2020 09:22:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 794A0C64E7C
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Dec 2020 09:25:24 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CAE4F20C56
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Dec 2020 09:22:30 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CAE4F20C56
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id EF4BC20872
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Dec 2020 09:25:23 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EF4BC20872
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.42511.76532 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.42554.76573 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kkOL4-0003Eb-Tb; Wed, 02 Dec 2020 09:22:18 +0000
+	id 1kkONt-00049D-F8; Wed, 02 Dec 2020 09:25:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 42511.76532; Wed, 02 Dec 2020 09:22:18 +0000
+Received: by outflank-mailman (output) from mailman id 42554.76573; Wed, 02 Dec 2020 09:25:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kkOL4-0003Dc-40; Wed, 02 Dec 2020 09:22:18 +0000
-Received: by outflank-mailman (input) for mailman id 42511;
- Wed, 02 Dec 2020 09:22:16 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1kkONt-000496-C8; Wed, 02 Dec 2020 09:25:13 +0000
+Received: by outflank-mailman (input) for mailman id 42554;
+ Wed, 02 Dec 2020 09:25:12 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>) id 1kkOL2-0003AT-Js
- for xen-devel@lists.xenproject.org; Wed, 02 Dec 2020 09:22:16 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>)
- id 1kkOL2-0004qv-Cc; Wed, 02 Dec 2020 09:22:16 +0000
-Received: from host86-183-162-145.range86-183.btcentralplus.com
- ([86.183.162.145] helo=u2f063a87eabd5f.home)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
- (envelope-from <paul@xen.org>)
- id 1kkOL2-0006CD-4h; Wed, 02 Dec 2020 09:22:16 +0000
+ (envelope-from <SRS0=UQyH=FG=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1kkONs-000491-4m
+ for xen-devel@lists.xenproject.org; Wed, 02 Dec 2020 09:25:12 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 3a9b3c6e-0669-4457-9192-3736b16c5fca;
+ Wed, 02 Dec 2020 09:25:10 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 7A262ADCA;
+ Wed,  2 Dec 2020 09:25:09 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,149 +52,58 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:MIME-Version:
-	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=Gt2Gm0WXXUEpvKgVkyBf36jhM5Cv2I4ub9rwEjAgTo0=; b=25jlMVPl80HFOvfhQj59s90ZWD
-	s0F2bzsjBcDmkAAxhiL5Rn1/OGKLpVNbhwwM+k/ULKIvHVdybUeeiQOStJt0KpuHZPN+gdACpYQ6l
-	l8w7fqvAGwLjGJe6GRxksplffffO7vrkihWOxXQZFWNddfiZgcRR4OQbjWZ7l5IgymMk=;
-From: Paul Durrant <paul@xen.org>
-To: xen-devel@lists.xenproject.org
-Cc: Paul Durrant <pdurrant@amazon.com>,
-	Wei Liu <wl@xen.org>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v4 08/11] viridian: add ExProcessorMasks variant of the IPI hypercall
-Date: Wed,  2 Dec 2020 09:22:04 +0000
-Message-Id: <20201202092205.906-9-paul@xen.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20201202092205.906-1-paul@xen.org>
-References: <20201202092205.906-1-paul@xen.org>
+X-Inumbo-ID: 3a9b3c6e-0669-4457-9192-3736b16c5fca
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1606901109; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=efiM/dz3vSPkG+X5au0xOu1pZEnQd/QJBfpCmrN6BzY=;
+	b=VaxlxOrVAC0IaoB+0wHID+d9tcWM6GnkB6ZnhEW8XKBcVOE0o7v5elU4YAj79pBegu8nyA
+	d3YGavOQnKuOf9aQ6ukV1omZcjENX5EwusBfTqprxR8hu1mtPae7E6fRTea9BwjsXHHcb4
+	0Ay/NO3QyxaukSmJtqOfkmyhMbCJMMw=
+Subject: Re: [PATCH] x86/IRQ: bump max number of guests for a shared IRQ to 31
+To: Igor Druzhinin <igor.druzhinin@citrix.com>
+Cc: andrew.cooper3@citrix.com, roger.pau@citrix.com, wl@xen.org,
+ xen-devel@lists.xenproject.org
+References: <1606780777-30718-1-git-send-email-igor.druzhinin@citrix.com>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <b98d3517-6c9d-6f40-6e28-cde142978143@suse.com>
+Date: Wed, 2 Dec 2020 10:25:09 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.5.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <1606780777-30718-1-git-send-email-igor.druzhinin@citrix.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-From: Paul Durrant <pdurrant@amazon.com>
+On 01.12.2020 00:59, Igor Druzhinin wrote:
+> Current limit of 7 is too restrictive for modern systems where one GSI
+> could be shared by potentially many PCI INTx sources where each of them
+> corresponds to a device passed through to its own guest. Some systems do not
+> apply due dilligence in swizzling INTx links in case e.g. INTA is declared as
+> interrupt pin for the majority of PCI devices behind a single router,
+> resulting in overuse of a GSI.
+> 
+> Signed-off-by: Igor Druzhinin <igor.druzhinin@citrix.com>
+> ---
+> 
+> If people think that would make sense - I can rework the array to a list of
+> domain pointers to avoid the limit.
 
-A previous patch introduced variants of the flush hypercalls that take a
-'Virtual Processor Set' as an argument rather than a simple 64-bit mask.
-This patch introduces a similar variant of the HVCALL_SEND_IPI hypercall
-(HVCALL_SEND_IPI_EX).
+Not sure about this. What is the biggest number you've found on any
+system? (I assume the chosen value of 31 has some headroom.)
 
-NOTE: As with HVCALL_FLUSH_VIRTUAL_ADDRESS_SPACE/LIST_EX, a guest should
-      not yet issue the HVCALL_SEND_IPI_EX hypercall as support for
-      'ExProcessorMasks' is not yet advertised via CPUID.
+Instead I'm wondering whether this wouldn't better be a Kconfig
+setting (or even command line controllable). There don't look to be
+any restrictions on the precise value chosen (i.e. 2**n-1 like is
+the case for old and new values here, for whatever reason), so a
+simple permitted range of like 4...64 would seem fine to specify.
+Whether the default then would want to be 8 (close to the current
+7) or higher (around the actually observed maximum) is a different
+question.
 
-Signed-off-by: Paul Durrant <pdurrant@amazon.com>
----
-Cc: Wei Liu <wl@xen.org>
-Cc: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: "Roger Pau Monné" <roger.pau@citrix.com>
-
-v3:
- - Adjust prototype of new function
-
-v2:
- - Sanity check size before hvm_copy_from_guest_phys()
----
- xen/arch/x86/hvm/viridian/viridian.c | 74 ++++++++++++++++++++++++++++
- 1 file changed, 74 insertions(+)
-
-diff --git a/xen/arch/x86/hvm/viridian/viridian.c b/xen/arch/x86/hvm/viridian/viridian.c
-index fceca760b41d..9aa8e6c2572c 100644
---- a/xen/arch/x86/hvm/viridian/viridian.c
-+++ b/xen/arch/x86/hvm/viridian/viridian.c
-@@ -860,6 +860,75 @@ static int hvcall_ipi(const union hypercall_input *input,
-     return 0;
- }
- 
-+static int hvcall_ipi_ex(const union hypercall_input *input,
-+                         union hypercall_output *output,
-+                         paddr_t input_params_gpa,
-+                         paddr_t output_params_gpa)
-+{
-+    struct hypercall_vpmask *vpmask = &this_cpu(hypercall_vpmask);
-+    struct {
-+        uint32_t vector;
-+        uint8_t target_vtl;
-+        uint8_t reserved_zero[3];
-+        struct hv_vpset set;
-+    } input_params;
-+    union hypercall_vpset *vpset = &this_cpu(hypercall_vpset);
-+    struct hv_vpset *set = &vpset->set;
-+    size_t size;
-+    int rc;
-+
-+    /* These hypercalls should never use the fast-call convention. */
-+    if ( input->fast )
-+        return -EINVAL;
-+
-+    /* Get input parameters. */
-+    if ( hvm_copy_from_guest_phys(&input_params, input_params_gpa,
-+                                  sizeof(input_params)) != HVMTRANS_okay )
-+        return -EINVAL;
-+
-+    if ( input_params.target_vtl ||
-+         input_params.reserved_zero[0] ||
-+         input_params.reserved_zero[1] ||
-+         input_params.reserved_zero[2] )
-+        return HV_STATUS_INVALID_PARAMETER;
-+
-+    if ( input_params.vector < 0x10 || input_params.vector > 0xff )
-+        return HV_STATUS_INVALID_PARAMETER;
-+
-+    *set = input_params.set;
-+    if ( set->format == HV_GENERIC_SET_SPARSE_4K )
-+    {
-+        unsigned long offset = offsetof(typeof(input_params),
-+                                        set.bank_contents);
-+
-+        size = sizeof(*set->bank_contents) * hv_vpset_nr_banks(set);
-+
-+        if ( offsetof(typeof(*vpset), set.bank_contents[0]) + size >
-+             sizeof(*vpset) )
-+        {
-+            ASSERT_UNREACHABLE();
-+            return -EINVAL;
-+        }
-+
-+        if ( hvm_copy_from_guest_phys(&set->bank_contents,
-+                                      input_params_gpa + offset,
-+                                      size) != HVMTRANS_okay)
-+            return -EINVAL;
-+
-+        size += sizeof(*set);
-+    }
-+    else
-+        size = sizeof(*set);
-+
-+    rc = hv_vpset_to_vpmask(set, vpmask);
-+    if ( rc )
-+        return rc;
-+
-+    send_ipi(vpmask, input_params.vector);
-+
-+    return 0;
-+}
-+
- int viridian_hypercall(struct cpu_user_regs *regs)
- {
-     struct vcpu *curr = current;
-@@ -916,6 +985,11 @@ int viridian_hypercall(struct cpu_user_regs *regs)
-                         output_params_gpa);
-         break;
- 
-+    case HVCALL_SEND_IPI_EX:
-+        rc = hvcall_ipi_ex(&input, &output, input_params_gpa,
-+                           output_params_gpa);
-+        break;
-+
-     default:
-         gprintk(XENLOG_WARNING, "unimplemented hypercall %04x\n",
-                 input.call_code);
--- 
-2.20.1
-
+Jan
 
