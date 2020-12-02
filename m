@@ -7,40 +7,40 @@ X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3E33AC71155
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Dec 2020 18:31:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9F652C71155
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Dec 2020 19:03:55 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A788222248
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Dec 2020 18:31:53 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A788222248
+	by mail.kernel.org (Postfix) with ESMTPS id 1C4BA2224C
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Dec 2020 19:03:54 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1C4BA2224C
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.42965.77316 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.42977.77329 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kkWug-0002p5-A3; Wed, 02 Dec 2020 18:31:38 +0000
+	id 1kkXPY-0005jT-S5; Wed, 02 Dec 2020 19:03:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 42965.77316; Wed, 02 Dec 2020 18:31:38 +0000
+Received: by outflank-mailman (output) from mailman id 42977.77329; Wed, 02 Dec 2020 19:03:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kkWug-0002oy-71; Wed, 02 Dec 2020 18:31:38 +0000
-Received: by outflank-mailman (input) for mailman id 42965;
- Wed, 02 Dec 2020 18:31:36 +0000
+	id 1kkXPY-0005jM-OX; Wed, 02 Dec 2020 19:03:32 +0000
+Received: by outflank-mailman (input) for mailman id 42977;
+ Wed, 02 Dec 2020 19:03:31 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1kkWue-0002ot-Cm
- for xen-devel@lists.xenproject.org; Wed, 02 Dec 2020 18:31:36 +0000
+ (envelope-from <julien@xen.org>) id 1kkXPX-0005jH-E2
+ for xen-devel@lists.xenproject.org; Wed, 02 Dec 2020 19:03:31 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1kkWub-0000Fq-R9; Wed, 02 Dec 2020 18:31:33 +0000
-Received: from [54.239.6.186] (helo=a483e7b01a66.ant.amazon.com)
+ id 1kkXPU-0000zm-DC; Wed, 02 Dec 2020 19:03:28 +0000
+Received: from [54.239.6.185] (helo=a483e7b01a66.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1kkWub-0008CU-8Y; Wed, 02 Dec 2020 18:31:33 +0000
+ id 1kkXPU-0002Mw-3W; Wed, 02 Dec 2020 19:03:28 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,36 +55,43 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
 	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=QWNtZF+8sKsnsiW8NH+OMTwZIn6A98UV+A8Bdjuh28U=; b=HsWiNJVpjjeV45bWsoVRj+l5GB
-	gHuHisQEdUVwxQ30CAa49+YOO3H8YEL19iZXJWCTKw2mA/XbRZQl1/TQdfSWdjSzGlDucRMLF+/dN
-	Kg3QjKhENLaKebKg6Ufhr6oA2P0Ib4ArZA+mtdwQQGAGfnSWZDajo2Un6ym3F5Fde9PU=;
-Subject: Re: [PATCH] gnttab: don't allocate status frame tracking array when
- "gnttab=max_ver:1"
+	bh=T432UGitHsRICyXBtYhUNS3QUhL8d5TafwM77KhXsGQ=; b=Z7GrOVkr3clPfUxXianyTNk/R/
+	wUuVDDZ2ZcEYWxpGhFcYUOsJdLBY0XN+vRRyrdEu4nmDwn5cFKh30oiARuc7+cYagFxGPfI7NLZlD
+	Pq/5WTbjitNbfMQo/i+pCYQDIhu4rRywhvbo9iLQ+iiZGWGfgiAMT3l+rW3xuHvow/J8=;
+Subject: Re: [PATCH v3 1/5] evtchn: drop acquiring of per-channel lock from
+ send_guest_{global,vcpu}_virq()
 To: Jan Beulich <jbeulich@suse.com>,
  "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
-References: <a484cc88-f41d-5d38-d098-4eda297569a1@suse.com>
+ George Dunlap <George.Dunlap@eu.citrix.com>, Ian Jackson
+ <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>
+References: <9d7a052a-6222-80ff-cbf1-612d4ca50c2a@suse.com>
+ <d709a9c3-dbe2-65c6-2c2f-6a12f486335d@suse.com>
 From: Julien Grall <julien@xen.org>
-Message-ID: <bf921997-fc9a-b1b9-78d9-7a7f85fe4608@xen.org>
-Date: Wed, 2 Dec 2020 18:31:31 +0000
+Message-ID: <70170293-a9a7-282a-dde6-7ed73fc2da48@xen.org>
+Date: Wed, 2 Dec 2020 19:03:26 +0000
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
  Gecko/20100101 Thunderbird/78.5.1
 MIME-Version: 1.0
-In-Reply-To: <a484cc88-f41d-5d38-d098-4eda297569a1@suse.com>
+In-Reply-To: <d709a9c3-dbe2-65c6-2c2f-6a12f486335d@suse.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-GB
 Content-Transfer-Encoding: 7bit
 
 Hi Jan,
 
-On 05/11/2020 15:55, Jan Beulich wrote:
-> This array can be large when many grant frames are permitted; avoid
-> allocating it when it's not going to be used anyway. 
+On 23/11/2020 13:28, Jan Beulich wrote:
+> The per-vCPU virq_lock, which is being held anyway, together with there
+> not being any call to evtchn_port_set_pending() when v->virq_to_evtchn[]
+> is zero, provide sufficient guarantees. 
 
-Given there are not many users of grant-table v2, would it make sense to 
-avoid allocating the array until the guest start using grant-table v2?
+I agree that the per-vCPU virq_lock is going to be sufficient, however 
+dropping the lock also means the event channel locking is more complex 
+to understand (the long comment that was added proves it).
+
+In fact, the locking in the event channel code was already proven to be 
+quite fragile, therefore I think this patch is not worth the risk.
 
 Cheers,
 
