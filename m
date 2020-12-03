@@ -7,41 +7,41 @@ X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E914CC4361B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E3F2AC433FE
 	for <xen-devel@archiver.kernel.org>; Thu,  3 Dec 2020 14:56:31 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 157F120822
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Dec 2020 14:30:57 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 157F120822
+	by mail.kernel.org (Postfix) with ESMTPS id 168A220842
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Dec 2020 14:31:05 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 168A220842
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.43590.78324 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.43600.78446 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kkpd9-0002PC-0l; Thu, 03 Dec 2020 14:30:47 +0000
+	id 1kkpdI-0002oZ-EH; Thu, 03 Dec 2020 14:30:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 43590.78324; Thu, 03 Dec 2020 14:30:46 +0000
+Received: by outflank-mailman (output) from mailman id 43600.78446; Thu, 03 Dec 2020 14:30:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kkpd8-0002P1-Rh; Thu, 03 Dec 2020 14:30:46 +0000
-Received: by outflank-mailman (input) for mailman id 43590;
- Thu, 03 Dec 2020 14:30:45 +0000
+	id 1kkpdH-0002nI-GO; Thu, 03 Dec 2020 14:30:55 +0000
+Received: by outflank-mailman (input) for mailman id 43600;
+ Thu, 03 Dec 2020 14:30:46 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>) id 1kkpd7-0002NR-JX
- for xen-devel@lists.xenproject.org; Thu, 03 Dec 2020 14:30:45 +0000
+ (envelope-from <paul@xen.org>) id 1kkpd8-0002OQ-2L
+ for xen-devel@lists.xenproject.org; Thu, 03 Dec 2020 14:30:46 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kkpd6-0006Tx-QY; Thu, 03 Dec 2020 14:30:44 +0000
+ id 1kkpd7-0006UP-Al; Thu, 03 Dec 2020 14:30:45 +0000
 Received: from host86-183-162-145.range86-183.btcentralplus.com
  ([86.183.162.145] helo=u2f063a87eabd5f.home)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kkpYL-00015c-E8; Thu, 03 Dec 2020 14:25:49 +0000
+ id 1kkpYN-00015c-Av; Thu, 03 Dec 2020 14:25:51 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,18 +56,17 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
 	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=EMfCtlWlj+oMHa2Vf4m6cYy+TLLLFhjiF/PO4Sb4syk=; b=t3/M/JAYEx+h9b/w9pWt9ns2f6
-	Se6y7trFmulmjUo6/7mpGgIUdPzIFfpZXHGPZNvzJnaKRExXNEEvCU4iqjg8ktZ/hIrPIZHzLyiRM
-	Qtp67+pI7x+eBhpBs2eKVoB20e1Mow+6N75kiWVfFQL8Pr/JXfXFGFrdMx4dGEVmwpv0=;
+	bh=9oBaH3TvR/OzX4i2SsbbWQZTQ5vUhqb0tdWkNXX9QLM=; b=wVGoqrqLKUGWEZucvgQbCCcZmL
+	H1iG+g4oUvDLS0VJRFdbfjOLBBieQ18DmSDyNGFWsDVms6xpEqwtlD+MjJ4AF+Gp86Li0z1AwZyY9
+	f0dTaozTgpMp9M3hMeCe5DPpJa0dg26ahmPsUdU6oTBk24cGLOe9W6ZKKwBWtVASIrfg=;
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: Paul Durrant <pdurrant@amazon.com>,
-	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v5 13/23] libxl: use COMPARE_PCI() macro is_pci_in_array()...
-Date: Thu,  3 Dec 2020 14:25:24 +0000
-Message-Id: <20201203142534.4017-14-paul@xen.org>
+Subject: [PATCH v5 15/23] docs/man: improve documentation of PCI_SPEC_STRING...
+Date: Thu,  3 Dec 2020 14:25:26 +0000
+Message-Id: <20201203142534.4017-16-paul@xen.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20201203142534.4017-1-paul@xen.org>
 References: <20201203142534.4017-1-paul@xen.org>
@@ -76,121 +75,245 @@ Content-Transfer-Encoding: 8bit
 
 From: Paul Durrant <pdurrant@amazon.com>
 
-... rather than an open-coded equivalent.
+... and prepare for adding support for non-positional parsing of 'bdf' and
+'vslot' in a subsequent patch.
 
-This patch tidies up the is_pci_in_array() function, making it take a single
-'libxl_device_pci' argument rather than separate domain, bus, device and
-function arguments. The already-available COMPARE_PCI() macro can then be
-used and it is also modified to return 'bool' rather than 'int'.
-
-The patch also modifies libxl_pci_assignable() to use is_pci_in_array() rather
-than a separate open-coded equivalent, and also modifies it to return a
-'bool' rather than an 'int'.
-
-NOTE: The COMPARE_PCI() macro is also fixed to include the 'domain' in its
-      comparison, which should always have been the case.
+Also document 'BDF' as a first-class parameter type and fix the documentation
+to state that the default value of 'rdm_policy' is actually 'strict', not
+'relaxed', as can be seen in libxl__device_pci_setdefault().
 
 Signed-off-by: Paul Durrant <pdurrant@amazon.com>
-Reviewed-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 ---
 Cc: Ian Jackson <iwj@xenproject.org>
 Cc: Wei Liu <wl@xen.org>
 ---
- tools/libs/light/libxl_internal.h |  7 +++---
- tools/libs/light/libxl_pci.c      | 38 +++++++++++--------------------
- 2 files changed, 17 insertions(+), 28 deletions(-)
+ docs/man/xl-pci-configuration.5.pod | 187 +++++++++++++++++++++++-----
+ 1 file changed, 153 insertions(+), 34 deletions(-)
 
-diff --git a/tools/libs/light/libxl_internal.h b/tools/libs/light/libxl_internal.h
-index ecee61b5419c..02f8a3179c44 100644
---- a/tools/libs/light/libxl_internal.h
-+++ b/tools/libs/light/libxl_internal.h
-@@ -4746,9 +4746,10 @@ void libxl__xcinfo2xlinfo(libxl_ctx *ctx,
-  * devices have same identifier. */
- #define COMPARE_DEVID(a, b) ((a)->devid == (b)->devid)
- #define COMPARE_DISK(a, b) (!strcmp((a)->vdev, (b)->vdev))
--#define COMPARE_PCI(a, b) ((a)->func == (b)->func &&    \
--                           (a)->bus == (b)->bus &&      \
--                           (a)->dev == (b)->dev)
-+#define COMPARE_PCI(a, b) ((a)->domain == (b)->domain && \
-+                           (a)->bus == (b)->bus &&       \
-+                           (a)->dev == (b)->dev &&       \
-+                           (a)->func == (b)->func)
- #define COMPARE_USB(a, b) ((a)->ctrl == (b)->ctrl && \
-                            (a)->port == (b)->port)
- #define COMPARE_USBCTRL(a, b) ((a)->devid == (b)->devid)
-diff --git a/tools/libs/light/libxl_pci.c b/tools/libs/light/libxl_pci.c
-index e42c2ba56b73..4bf4a168e032 100644
---- a/tools/libs/light/libxl_pci.c
-+++ b/tools/libs/light/libxl_pci.c
-@@ -336,24 +336,17 @@ retry_transaction2:
-     return 0;
- }
+diff --git a/docs/man/xl-pci-configuration.5.pod b/docs/man/xl-pci-configuration.5.pod
+index 72a27bd95dec..4dd73bc498d6 100644
+--- a/docs/man/xl-pci-configuration.5.pod
++++ b/docs/man/xl-pci-configuration.5.pod
+@@ -6,32 +6,105 @@ xl-pci-configuration - XL PCI Configuration Syntax
  
--static int is_pci_in_array(libxl_device_pci *assigned, int num_assigned,
--                           int dom, int bus, int dev, int func)
-+static bool is_pci_in_array(libxl_device_pci *pcis, int num,
-+                            libxl_device_pci *pci)
- {
-     int i;
+ =head1 SYNTAX
  
--    for(i = 0; i < num_assigned; i++) {
--        if ( assigned[i].domain != dom )
--            continue;
--        if ( assigned[i].bus != bus )
--            continue;
--        if ( assigned[i].dev != dev )
--            continue;
--        if ( assigned[i].func != func )
--            continue;
--        return 1;
-+    for (i = 0; i < num; i++) {
-+        if (COMPARE_PCI(pci, &pcis[i]))
-+            break;
-     }
+-This document specifies the format for B<PCI_SPEC_STRING> which is used by
+-the L<xl.cfg(5)> pci configuration option, and related L<xl(1)> commands.
++This document specifies the format for B<BDF> and B<PCI_SPEC_STRING> which are
++used by the L<xl.cfg(5)> pci configuration option, and related L<xl(1)>
++commands.
  
--    return 0;
-+    return i < num;
- }
- 
- /* Write the standard BDF into the sysfs path given by sysfs_path. */
-@@ -1487,21 +1480,17 @@ int libxl_device_pci_add(libxl_ctx *ctx, uint32_t domid,
-     return AO_INPROGRESS;
- }
- 
--static int libxl_pci_assignable(libxl_ctx *ctx, libxl_device_pci *pci)
-+static bool libxl_pci_assignable(libxl_ctx *ctx, libxl_device_pci *pci)
- {
-     libxl_device_pci *pcis;
--    int num, i;
-+    int num;
-+    bool assignable;
- 
-     pcis = libxl_device_pci_assignable_list(ctx, &num);
--    for (i = 0; i < num; i++) {
--        if (pcis[i].domain == pci->domain &&
--            pcis[i].bus == pci->bus &&
--            pcis[i].dev == pci->dev &&
--            pcis[i].func == pci->func)
--            break;
--    }
-+    assignable = is_pci_in_array(pcis, num, pci);
-     libxl_device_pci_assignable_list_free(pcis, num);
--    return i != num;
+-Each B<PCI_SPEC_STRING> has the form of
+-B<[DDDD:]BB:DD.F[@VSLOT],KEY=VALUE,KEY=VALUE,...> where:
++A B<BDF> has the following form:
 +
-+    return assignable;
- }
++    [DDDD:]BB:SS.F
++
++B<DDDD> is the domain number, B<BB> is the bus number, B<SS> is the device (or
++slot) number, and B<F> is the function number. This is the same scheme as
++used in the output of L<lspci(1)> for the device in question. By default
++L<lspci(1)> will omit the domain (B<DDDD>) if it is zero and hence a zero
++value for domain may also be omitted when specifying a B<BDF>.
++
++Each B<PCI_SPEC_STRING> has the one of the forms:
  
- static void device_pci_add_stubdom_wait(libxl__egc *egc,
-@@ -1834,8 +1823,7 @@ static void do_pci_remove(libxl__egc *egc, pci_remove_state *prs)
-         goto out_fail;
-     }
+ =over 4
  
--    attached = is_pci_in_array(pcis, num, pci->domain,
--                               pci->bus, pci->dev, pci->func);
-+    attached = is_pci_in_array(pcis, num, pci);
-     libxl_device_pci_list_free(pcis, num);
+-=item B<[DDDD:]BB:DD.F>
++    [<bdf>[@<vslot>,][<key>=<value>,]*
++    [<key>=<value>,]*
  
-     rc = ERROR_INVAL;
+-Identifies the PCI device from the host perspective in the domain
+-(B<DDDD>), Bus (B<BB>), Device (B<DD>) and Function (B<F>) syntax. This is
+-the same scheme as used in the output of B<lspci(1)> for the device in
+-question.
++=back
+ 
+-Note: by default B<lspci(1)> will omit the domain (B<DDDD>) if it
+-is zero and it is optional here also. You may specify the function
+-(B<F>) as B<*> to indicate all functions.
++For example, these strings are equivalent:
+ 
+-=item B<@VSLOT>
++=over 4
+ 
+-Specifies the virtual slot where the guest will see this
+-device. This is equivalent to the B<DD> which the guest sees. In a
+-guest B<DDDD> and B<BB> are C<0000:00>.
++    36:00.0@20,seize=1
++    36:00.0,vslot=20,seize=1
++    bdf=36:00.0,vslot=20,seize=1
+ 
+-=item B<permissive=BOOLEAN>
++=back
++
++More formally, the string is a series of comma-separated keyword/value
++pairs, flags and positional parameters.  Parameters which are not bare
++keywords and which do not contain "=" symbols are assigned to the
++positional parameters, in the order specified below.  The positional
++parameters may also be specified by name.
++
++Each parameter may be specified at most once, either as a positional
++parameter or a named parameter.  Default values apply if the parameter
++is not specified, or if it is specified with an empty value (whether
++positionally or explicitly).
++
++B<NOTE>: In context of B<xl pci-detach> (see L<xl(1)>), parameters other than
++B<bdf> will be ignored.
++
++=head1 Positional Parameters
++
++=over 4
++
++=item B<bdf>=I<BDF>
++
++=over 4
++
++=item Description
++
++This identifies the PCI device from the host perspective.
++
++In the context of a B<PCI_SPEC_STRING> you may specify the function (B<F>) as
++B<*> to indicate all functions of a multi-function device.
++
++=item Default Value
++
++None. This parameter is mandatory as it identifies the device.
++
++=back
++
++=item B<vslot>=I<NUMBER>
++
++=over 4
++
++=item Description
++
++Specifies the virtual slot (device) number where the guest will see this
++device. For example, running L<lspci(1)> in a Linux guest where B<vslot>
++was specified as C<8> would identify the device as C<00:08.0>. Virtual domain
++and bus numbers are always 0.
++
++B<NOTE:> This parameter is always parsed as a hexidecimal value.
++
++=item Default Value
++
++None. This parameter is not mandatory. An available B<vslot> will be selected
++if this parameter is not specified.
++
++=back
++
++=back
++
++=head1 Other Parameters and Flags
++
++=over 4
++
++=item B<permissive>=I<BOOLEAN>
++
++=over 4
++
++=item Description
+ 
+ By default pciback only allows PV guests to write "known safe" values
+ into PCI configuration space, likewise QEMU (both qemu-xen and
+@@ -46,33 +119,79 @@ more control over the device, which may have security or stability
+ implications.  It is recommended to only enable this option for
+ trusted VMs under administrator's control.
+ 
+-=item B<msitranslate=BOOLEAN>
++=item Default Value
++
++0
++
++=back
++
++=item B<msitranslate>=I<BOOLEAN>
++
++=over 4
++
++=item Description
+ 
+ Specifies that MSI-INTx translation should be turned on for the PCI
+ device. When enabled, MSI-INTx translation will always enable MSI on
+-the PCI device regardless of whether the guest uses INTx or MSI. Some
+-device drivers, such as NVIDIA's, detect an inconsistency and do not
++the PCI device regardless of whether the guest uses INTx or MSI.
++
++=item Default Value
++
++Some device drivers, such as NVIDIA's, detect an inconsistency and do not
+ function when this option is enabled. Therefore the default is false (0).
+ 
+-=item B<seize=BOOLEAN>
++=back
+ 
+-Tells B<xl> to automatically attempt to re-assign a device to
+-pciback if it is not already assigned.
++=item B<seize>=I<BOOLEAN>
+ 
+-B<WARNING:> If you set this option, B<xl> will gladly re-assign a critical
++=over 4
++
++=item Description
++
++Tells L<xl(1)> to automatically attempt to make the device assignable to
++guests if that has not already been done by the B<pci-assignable-add>
++command.
++
++B<WARNING:> If you set this option, L<xl> will gladly re-assign a critical
+ system device, such as a network or a disk controller being used by
+ dom0 without confirmation.  Please use with care.
+ 
+-=item B<power_mgmt=BOOLEAN>
++=item Default Value
+ 
+-B<(HVM only)> Specifies that the VM should be able to program the
+-D0-D3hot power management states for the PCI device. The default is false (0).
+-
+-=item B<rdm_policy=STRING>
+-
+-B<(HVM/x86 only)> This is the same as the policy setting inside the B<rdm>
+-option but just specific to a given device. The default is "relaxed".
+-
+-Note: this would override global B<rdm> option.
++0
++
++=back
++
++=item B<power_mgmt>=I<BOOLEAN>
++
++=over 4
++
++=item Description
++
++B<(HVM only)> Specifies that the VM should be able to program the
++D0-D3hot power management states for the PCI device.
++
++=item Default Value
++
++0
++
++=back
++
++=item B<rdm_policy>=I<STRING>
++
++=over 4
++
++=item Description
++
++B<(HVM/x86 only)> This is the same as the policy setting inside the B<rdm>
++option in L<xl.cfg(5)> but just specific to a given device.
++
++B<NOTE>: This overrides the global B<rdm> option.
++
++=item Default Value
++
++"strict"
++
++=back
+ 
+ =back
 -- 
 2.20.1
 
